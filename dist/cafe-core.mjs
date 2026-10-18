@@ -125,6 +125,12 @@ export function adjustBite(state,id,delta){
  const next=x.recipe[id]+delta;if(next<0||next>12||delta>0&&cafeSummary(state).count>=orderFor(c).bites)return false;
  x.recipe[id]=next;if(x.repair)x.repair.open=false;return true;
 }
+export function reviseCafePlate(state){
+ const c=ensureCafe(state),x=c.current;
+ if(!x||x.stage!=='total'||x.served)return false;
+ x.stage='plate';if(x.repair)x.repair.open=false;
+ return true;
+}
 export function checkPlate(state){
  const c=ensureCafe(state),x=c.current;if(!x||x.stage!=='plate')return false;
  const p=plate(c,x.recipe,x.orderIndex);x.plateAttempts.push({recipe:{...x.recipe},...p});x.plateAttempts=x.plateAttempts.slice(-50);

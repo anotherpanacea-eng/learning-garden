@@ -36,6 +36,7 @@ node test/paris-checks.mjs
 node test/paris-exploration-checks.mjs
 node test/story-pack-checks.mjs
 node test/order-story-checks.mjs
+node test/french-and-revision-checks.mjs
 node scripts/check-story-packs.mjs
 ```
 
@@ -77,11 +78,17 @@ The first visit is implemented. Its build scope and evidence boundaries are docu
 
 **The Almost-Right Café** adds a fourth entrance: find silly substitutes that fit two wishes, prepare equal portions, and work out a cupboard shortfall. Multiple suitable dishes are accepted. Its paper-menu project is optional and unscored.
 
-The café also has an ongoing **Open the café** game: twelve imaginary regulars, including Clover the bunny, Ember the pocket dragon, and Purl and Biscuit the kittens, changing wishes, and eight starter jars of silly ingredients, plus orchard discoveries. Build a plate with the requested number of bites and qualities, count enough for the table, explore for each jar's shortage, and serve. Different mixtures can satisfy the same order. Guests keep arriving when invited; there are no timers, money, scores, or failure penalties. Orders and cupboard stock pause locally. Pictures, arithmetic support, and skipped questions are recorded as practice, never fresh assessment evidence. The notebook keeps the latest 24 orders; the current order is separate. See [docs/replayable-cafe.md](docs/replayable-cafe.md).
+The café also has an ongoing **Open the café** game: twelve imaginary regulars, including Clover the bunny, Ember the pocket dragon, and Purl and Biscuit the kittens, changing wishes, and eight starter jars of silly ingredients, plus orchard discoveries. Build a plate with the requested number of bites and qualities, count enough for the table, explore for each jar's shortage, and serve. Different mixtures can satisfy the same order. Guests keep arriving when invited; there are no timers, money, scores, or failure penalties. Orders and cupboard stock pause locally. From the multiplication question, Change my plate reopens the same plate while preserving the guest, order quantities, number input, attempts, and support. Recheck the revised plate to return to multiplication. Pictures, arithmetic support, and skipped questions are recorded as practice, never fresh assessment evidence. The notebook keeps the latest 24 orders; the current order is separate. See [docs/replayable-cafe.md](docs/replayable-cafe.md).
 
 Every scored story task now offers a smaller parallel example with a tap-controlled text spotlight, counters, ruler, comparison, or menu. The original question and answer stay waiting. Help is recorded separately and remains support after returning; example success never advances the original task. See [docs/responsive-help.md](docs/responsive-help.md).
 
 Future increments can add follow-up adventures, reviewable content packs, and private cross-device continuity. [Jane](https://github.com/kentlangley/Jane) remains a useful reference for lesson packs, spaced review, and continuity. The story-pack compiler adapts a small MIT-licensed validation helper from Jane; its ordered-items convention informs the tap-to-order activity. No Jane lesson prose or learner data is included. [Concrete Jane and Marble opportunities](docs/upstream-opportunities.md) identify reusable formats, publishing checks, vocabulary support, review invitations, and reading/science map extensions, with pinned sources and license boundaries.
+
+## Paris en français
+
+Open `#french`, or choose Explore Paris en français from the English Paris page. Three original short-sentence errands visit the bookstall, river, and rooftop garden; each has two French comprehension questions and an optional postcard. Full passages, sentence focus, English meaning/vocabulary help, and six skill-matched smaller examples are available. French narration uses only browser-reported local French voices and never falls back to English.
+
+French records have separate task/passage IDs and explicit language labels. Opening the English meaning records support for both questions sharing that passage, including after reload; it does not claim unsupported comprehension. English Paris suggestions remain separate. The notebook is shared within a browser, without learner profiles or proficiency estimates. These three stories can be revisited; new French stories and automatic French difficulty adaptation are future work. See [spec 13](docs/specs/13-french-paris-and-plate-return.md).
 
 ## Privacy and contributions
 

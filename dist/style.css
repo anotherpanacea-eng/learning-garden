@@ -27,3 +27,5 @@
 @media(max-width:650px){.paris-pack-invitation{grid-template-columns:90px minmax(0,1fr);padding:20px;gap:12px}.paris-pack-invitation>svg{align-self:start;margin-top:15px}.paris-pack-invitation h2{font-size:25px}.paris-pack-invitation>div{display:contents}.paris-pack-invitation .place-name,.paris-pack-invitation h2{grid-column:2}.paris-pack-invitation p:not(.place-name),.paris-pack-invitation label,.paris-pack-invitation select,.paris-pack-invitation button{grid-column:1/-1}.paris-pack-invitation svg{grid-column:1;grid-row:1/span 2}.paris-pack-invitation select{width:100%;margin:0}.paris-pack-invitation .primary{margin:0}.order-card{font-size:18px;padding:13px 15px}.order-slots li{font-size:18px}.order-actions{gap:8px}.order-actions .primary{width:100%}}
 
 @media(max-width:900px){.story-layout.ordering-layout{grid-template-columns:1fr}.story-layout.ordering-layout .story-sheet{grid-column:1;grid-row:1}.story-layout.ordering-layout .guide-rail{grid-column:1;grid-row:2}.story-layout.ordering-layout .story-wonder{grid-column:1;grid-row:3}}
+
+.french-place-symbol{display:block;font-size:54px;margin-bottom:18px}.paris-parent-note p{max-width:75ch}

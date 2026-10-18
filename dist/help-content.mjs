@@ -1,3 +1,4 @@
+import {frenchHelpers} from './french-content.mjs';
 import {parisLibraryHelpers} from './paris-library.mjs';
 import {parisHelpers} from './paris-content.mjs';
 // Smaller, authored examples. These support the waiting task; they never score it.
@@ -26,3 +27,5 @@ export function cleanHelper(d,nodeId){
 }
 
 Object.assign(helpers,parisLibraryHelpers);
+
+Object.assign(helpers,frenchHelpers);

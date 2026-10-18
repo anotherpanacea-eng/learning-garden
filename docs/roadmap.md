@@ -52,3 +52,5 @@ Implemented: [The Paris Postcard](specs/10-paris-reading-visit.md) adds six Engl
 Implemented: [Paris exploration](specs/11-paris-exploration.md) adds three destinations, six original story errands at three passage lengths, local practice suggestions, open manual choices, and persistent short-errand routes. All content is authored; familiar stories are offered as rereading.
 
 Implemented: [Reviewed story packs](specs/12-reviewed-story-packs.md) adds a rooftop puppet-show pack, tap-to-place ordering, validation before publication, scoped Marble sequencing connections, and retained Jane MIT attribution. [Authoring guide](story-packs.md).
+
+Implemented: [French Paris and plate return](specs/13-french-paris-and-plate-return.md) adds three short French errands with English meaning help and local French narration, separate practice records, and a return to the café plate from multiplication without restarting. French automatic adaptation and a larger French library remain future increments.

@@ -23,12 +23,13 @@ function cleanReadingTools(raw,length){
  return tools;
 }
 function cleanReadingRecord(record,node,observation=false,seen=[]){
+ if(observation&&node?.language)record.language=node.language;
  if(!readingNode(node))return;
  record.readingTools=cleanReadingTools(record.readingTools,node.readingText.length);
  record.priorPassageSeen=typeof record.priorPassageSeen==='boolean'?record.priorPassageSeen:seen.some(id=>storyNodes[id]?.passageId===node.passageId);
  if(observation){
   record.readingSkill=node.readingSkill;record.passageId=node.passageId;record.practiceOnly=node.practiceOnly===true;
-  if(toolSupport(record.readingTools)||record.reading==='listened'){record.supported=true;record.independent=false;record.freshEvidence=false;}
+  if(toolSupport(record.readingTools)||['listened','together'].includes(record.reading)||record.hinted===true||record.revealed===true||record.meaningUsed===true||record.method==='together'){record.supported=true;record.independent=false;record.freshEvidence=false;}
   if(record.practiceOnly||record.priorPassageSeen)record.freshEvidence=false;
  }
 }
@@ -87,6 +88,7 @@ export function storyDraft(state){
   }
   if(d.priorPassageSeen===undefined)d.priorPassageSeen=state.garden.seen.some(id=>storyNodes[id].passageId===n.passageId);
   d.readingTools=cleanReadingTools(d.readingTools,n.readingText.length);
+  if(n.language==='fr')d.meaningUsed=d.meaningUsed===true||Object.entries(v.drafts).some(([id,other])=>storyNodes[id]?.passageId===n.passageId&&(other.hinted===true||other.meaningUsed===true));
  }
  return v.drafts[n.id];
 }
@@ -150,9 +152,9 @@ export function finishStoryNode(state,skip=false){
  if(!project&&!skip&&(!correct||!['knew','worked','counted','together'].includes(d.method)))return false;
  const firstCorrect=correct&&d.attempts.length===1;
  const tools=readingNode(n)?cleanReadingTools(d.readingTools,n.readingText.length):null;
- const supported=!!d.helpUsed||!!d.hinted||!!d.revealed||d.method==='together'||(n.subject==='Reading'&&d.reading!=='independent')||!!tools&&toolSupport(tools);
+ const supported=!!d.helpUsed||!!d.hinted||!!d.revealed||d.meaningUsed===true||d.method==='together'||(n.subject==='Reading'&&d.reading!=='independent')||!!tools&&toolSupport(tools);
  const independent=correct&&firstCorrect&&!supported;
- const o={visitId:v.id,nodeId:n.id,entrance:v.entrance,title:n.title,subject:n.subject,prompt:n.prompt,answer:project?null:n.answer,acceptedAnswers:project?null:n.answers||[n.answer],choices:n.choices||null,attempts:[...d.attempts],
+ const o={...(n.language?{language:n.language,meaningUsed:d.meaningUsed===true}:{}),visitId:v.id,nodeId:n.id,entrance:v.entrance,title:n.title,subject:n.subject,prompt:n.prompt,answer:project?null:n.answer,acceptedAnswers:project?null:n.answers||[n.answer],choices:n.choices||null,attempts:[...d.attempts],
   status:project?'invitation':skip?(d.attempts.length?'explored':'skipped'):'answered',correct:project?null:correct,firstCorrect:!!firstCorrect,supported,independent:!!independent,
   freshEvidence:!!independent&&!d.familiar&&!d.knownFact&&!d.priorExposureUnknown&&!n.practiceOnly&&!d.priorPassageSeen,
   familiar:!!d.familiar,knownFact:!!d.knownFact,priorExposureUnknown:!!d.priorExposureUnknown,hinted:!!d.hinted,revealed:!!d.revealed,
@@ -169,7 +171,7 @@ export function storyDescribe(o){
  if(!o.correct)return 'An idea to return to';
  if(o.supported){
   if(o.readingTools?.supportUncertain)return 'Found an answer; reading support details are uncertain';
-  return o.subject==='Reading'&&!o.helpUsed&&!o.hinted&&!o.revealed&&o.method!=='together'&&!toolSupport(o.readingTools||{})?'Found an answer; independent reading was not observed':'Found an answer with support';
+  return o.subject==='Reading'&&!o.helpUsed&&!o.hinted&&!o.revealed&&!o.meaningUsed&&o.method!=='together'&&!toolSupport(o.readingTools||{})?'Found an answer; independent reading was not observed':'Found an answer with support';
  }
  if(!o.firstCorrect)return 'Found an answer after another try';
  if(o.familiar||o.knownFact||o.priorPassageSeen)return 'Answered after an earlier encounter';

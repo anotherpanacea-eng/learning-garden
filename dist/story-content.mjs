@@ -1,3 +1,4 @@
+import {frenchEntrances,frenchNodes} from './french-content.mjs';
 import {parisLibraryNodes} from './paris-library.mjs';
 import {parisEntrance,parisNodes} from './paris-content.mjs';
 import {cafeEntrance,cafeNodes} from './restaurant-story.mjs';
@@ -157,3 +158,6 @@ entrances.push(parisEntrance);
 Object.assign(storyNodes,parisNodes);
 
 Object.assign(storyNodes,parisLibraryNodes);
+
+entrances.push(...frenchEntrances);
+Object.assign(storyNodes,frenchNodes);

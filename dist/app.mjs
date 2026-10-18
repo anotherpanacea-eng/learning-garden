@@ -14,7 +14,7 @@ import {helpPage} from './help-ui.mjs';
 import {guides,avatars} from './companions.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
 import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool,editStoryOrder,submitStoryOrder} from './garden-core.mjs';
-import {gardenHome,parisLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding,gardenNotes} from './garden-ui.mjs';
+import {gardenHome,parisLanding,frenchLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding,gardenNotes} from './garden-ui.mjs';
 import {areas} from './broad-content.mjs';
 import {ensureBroad,areaById,itemById,beginTrail,trailQuestion,familiarity,noteBroadExposure,noteLegacyExposure,makeBroadObservation,recordTrail} from './broad-core.mjs';
 import {broadHome,checkinHub,activityLibrary,trailSummary,broadNotes,learningMap,renderModel,adjustModel} from './broad-ui.mjs';
@@ -122,11 +122,12 @@ function render(){
   stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);
-  const navRoot=root==='paris'?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
+  const navRoot=['paris','french'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
   $('#companion-link').innerHTML=companionLink(state);
   document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===`#${navRoot}`?'page':'false'));
   let html;
-  if(root==='paris')html=parisLanding(state);
+  if(root==='french')html=frenchLanding(state);
+  else if(root==='paris')html=parisLanding(state);
   else if(root==='facts')html=factsPage(state,slug);
   else if(root==='orchard'){
     if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
