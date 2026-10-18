@@ -1,8 +1,12 @@
-# The Learning Garden
+# After the Storm
 
-A public project for playful, parent-guided learning through connected investigations, stories, and making things.
+A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 
-The current runnable app is **Number Garden**, a math prototype. This repository starts with that working app; broader exploration and selectable guides are planned next. [Try the current app](https://number-garden-together.tastypeach3.chatgpt.site/).
+[Try After the Storm](https://number-garden-together.tastypeach3.chatgpt.site/).
+
+The opening visit, **First Morning**, has three independent entrances: follow a creature's trail, investigate a mysterious note, or imagine a shelter. Each path offers two reading, science, or mathematics tasks, an unscored design choice, its own ending, and an optional paper project. Mira, Rowan, and Ari are original fictional guides; guide and explorer-avatar choices are independent.
+
+Visits can be paused, resumed, replayed, or left waiting while another path is explored. Existing Number Garden activities and records remain available at the same browser origin. All preferences, drafts, observations, and exports stay browser-local; saving off and clearing apply to everything. No identity fields, uploads, analytics, live AI, or server-side learner records are used.
 
 ## Run locally
 
@@ -21,23 +25,79 @@ With Node.js installed:
 ```sh
 node test/core-checks.mjs
 node test/broad-checks.mjs
+node test/story-checks.mjs
+node test/help-checks.mjs
+node test/cafe-checks.mjs
+node test/science-checks.mjs
+node test/cafe-expedition-checks.mjs
+node test/facts-checks.mjs
+node test/forage-checks.mjs
+node test/paris-checks.mjs
+node test/paris-exploration-checks.mjs
+node test/story-pack-checks.mjs
+node test/order-story-checks.mjs
+node test/french-and-revision-checks.mjs
+node test/french-exploration-checks.mjs
+node scripts/check-story-packs.mjs
 ```
 
 These checks use synthetic observations. They check the application logic; they do not validate the assessment as an educational instrument.
 
-## Next increment
+## Roadmap and science expeditions
 
-One short investigation with multiple entrances, connecting reading, science, making, and mathematics. A selectable guide accompanies the learner. The first fully developed guide can be an older girl or young woman; guide and child-avatar choices should be independent, with other genders supported through the same learning experience.
+The [six-step roadmap](docs/roadmap.md) links reviewed specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Only step 1 is implemented in this increment; the other five remain planned.
 
-Keep observations specific: independent reasoning, counting, support, retries, skips, and uncertainty. A curriculum connection can suggest what to explore next without declaring unobserved prerequisites mastered. Follow-up adventures can revisit an idea in a new context.
+Science offers three guided water visits with optional predictions, a focused external Marble Water Lab link, self-reported observations, original controllable explanation pictures, and a discussion/project invitation. Each mission is independently available and can finish without an external visit or an answer. Link selection is not treated as visiting, experiment completion, or understanding. Explanation use and reported reading mode stay distinct. The latest 24 visits stay browser-local under the existing privacy controls; there is no tracking or data exchange with Marble. External application source/assets are not copied or embedded.
 
-[Jane](https://github.com/kentlangley/Jane) is a useful reference for lesson packs, spaced review, and continuity. No Jane code has been incorporated into this initial import.
+## Café discoveries and all multiplication facts
+
+The [current café and fact-garden specification](docs/specs/07-cafe-expeditions-and-facts.md) adds the Cloud Orchard, three discoverable imaginary foods, and repair questions tied to the current dish. Food shapes and redundant quality symbols appear in the cupboard, on the plate and in repair choices. Discovery visits preserve waiting orders. Repeated collection cannot refill a jar. All eight original ingredients remain available so discoveries never lock a child out of a valid recipe.
+
+New café orders can use every ordered guest/bite pair from 1×1 through 12×12; a small-order range stays openly available. Range changes affect the next guest. Existing saved orders and history keep frozen original parameters. The separate multiplication garden exposes all144 ordered facts, six-question mixed practice, arrays/equal groups, split strategies and optional reported methods. Reversed facts keep separate observations. Records distinguish reported recall, working out, counting, support, retries, prior encounters and unknown method; no speed or mastery label is inferred. Parent notes retain up to576 fact observations and disclose that bound. Progress stays device-local and follows the existing save/export/reset controls.
+
+Read-aloud is optional and uses only English voices the browser identifies as local. Voice & speed controls let you audition available voices and adjust the pace; enhanced/natural voices are preferred when identified by name, otherwise the local device default is preferred. Voice choices last until refresh and reset with progress. No microphone, external speech API or automatic audio is used. A visible read-together fallback works when local speech is unavailable. Speech stops on navigation or reset. All activities work without sound.
+
+## Gathering supplies
+
+New gathering trips use a covered 4×4 orchard map. Small addition/subtraction clues identify a row and column; inspecting plots reveals their foods. Counter explanations can highlight the two clue lines, and finding their crossing opens the pictured equal-basket harvest. Map help is recorded separately from harvest help. Earlier matching-search trips keep their original rules when resumed. See [the orchard map hunt spec](docs/specs/09-orchard-map-hunts.md).
+
+The [gathering specification](docs/specs/08-gather-the-cupboard.md) replaces instant restock controls and automatic top-ups. Every known ingredient has an orchard trail: explicitly start a trip, find the pictured food, count or get help with equal baskets, and pack the harvest into that one jar. Repeat trips are available; each trip supplies its harvest once. Gathering history retains 24 trips, and jars hold up to 180 bites. All gathering is guided practice, separate from reported fact recall. New guests are invited explicitly.
+
+A shortage answer never creates inventory. Serving requires enough actual supplies and consumes them once. Waiting guests, recipes and inputs survive trips and reloads. The cupboard question keeps its original per-jar snapshot while showing current stock separately, so a gathering trip cannot reinterpret an earlier answer. Original saved orders/history and all privacy controls are preserved.
+
+## Learning design and next increments
+
+**The Paris Postcard** is a guided English-reading visit to an imaginary bookstall in real Paris. Six connected-text stops practice finding details, word parts, vocabulary in context, inference, textual evidence, and sequence, followed by an optional oral/drawn/dictated postcard. The source passage stays visible; sentence focus, smaller examples, and local read-aloud are optional. Read-aloud requests and sentence support remain recorded even after a later independent-reading report. All Paris tasks are practice-only and never fresh assessment evidence; no oral decoding accuracy, fluency, or reading level is inferred. See [the Paris reading spec](docs/specs/10-paris-reading-visit.md).
+
+Paris also offers three freely chosen destinations: Lucie’s bookstall, the river walk, and the rooftop garden. Seven original errands each have two questions and three passage lengths (14 question prompts, 42 task versions). The next errand favors less encountered stories and suggests a passage length from recent work at that destination, while all lengths remain open. Help/retries can suggest shorter text; two independent first tries on different previously unseen stories can suggest longer text. Repeated stories, shared passages, supported reading, skips, and unknown reports remain distinct. Suggestions are approximate and finite, not reading levels. Frozen routes preserve paused errands across reloads; the original postcard path remains available. See [Paris exploration](docs/specs/11-paris-exploration.md).
+
+The rooftop puppet show is the first [reviewed story pack](docs/story-packs.md). A plain-data module adds its passage variants, evidence question, tap-to-order cards, and helpers to the existing catalog. The validation command rejects malformed packs and conflicting IDs before publication. Partial card arrangements pause with the story, and exported attempts retain readable orders. New packs using these supported formats can be added without changing the engine. Its Marble connection covers sequence only, leaving central message and full retelling unobserved.
+
+The opening introduces the shared story: neighbors are safe after the storm, and players can gather supplies, feed visitors, investigate water, follow messages, or imagine shelters. The café has a replayable, optional “Why we’re here & how to play” introduction, open at a fresh counter, with read-aloud and three short steps. The story introduction adds no completion gates or learner records.
+
+The first visit is implemented. Its build scope and evidence boundaries are documented in [docs/first-visit.md](docs/first-visit.md). Story answer methods describe performance within a guided activity; independent reading is recorded separately and never inferred from a mathematical answer. Unscored project records mean an invitation was acknowledged, not that off-screen work was completed. Prior encounters, support, retries, and skips remain visible in the grown-up notes.
+
+**The Almost-Right Café** adds a fourth entrance: find silly substitutes that fit two wishes, prepare equal portions, and work out a cupboard shortfall. Multiple suitable dishes are accepted. Its paper-menu project is optional and unscored.
+
+The café also has an ongoing **Open the café** game: twelve imaginary regulars, including Clover the bunny, Ember the pocket dragon, and Purl and Biscuit the kittens, changing wishes, and eight starter jars of silly ingredients, plus orchard discoveries. Build a plate with the requested number of bites and qualities, count enough for the table, explore for each jar's shortage, and serve. Different mixtures can satisfy the same order. Guests keep arriving when invited; there are no timers, money, scores, or failure penalties. Orders and cupboard stock pause locally. From the multiplication question, Change my plate reopens the same plate while preserving the guest, order quantities, number input, attempts, and support. Recheck the revised plate to return to multiplication. Pictures, arithmetic support, and skipped questions are recorded as practice, never fresh assessment evidence. The notebook keeps the latest 24 orders; the current order is separate. See [docs/replayable-cafe.md](docs/replayable-cafe.md).
+
+Every scored story task now offers a smaller parallel example with a tap-controlled text spotlight, counters, ruler, comparison, or menu. The original question and answer stay waiting. Help is recorded separately and remains support after returning; example success never advances the original task. See [docs/responsive-help.md](docs/responsive-help.md).
+
+Future increments can add follow-up adventures, reviewable content packs, and private cross-device continuity. [Jane](https://github.com/kentlangley/Jane) remains a useful reference for lesson packs, spaced review, and continuity. The story-pack compiler adapts a small MIT-licensed validation helper from Jane; its ordered-items convention informs the tap-to-order activity. No Jane lesson prose or learner data is included. [Concrete Jane and Marble opportunities](docs/upstream-opportunities.md) identify reusable formats, publishing checks, vocabulary support, review invitations, and reading/science map extensions, with pinned sources and license boundaries.
+
+## Paris en français
+
+Open `#french`, or choose Explore Paris en français from the English Paris page. Nine new original errands visit the bookstall, river, and rooftops, with mysteries, practical decisions, music, photography, and art. Each has three authored text choices (short sentences, more connected text, a short paragraph) and two comprehension challenges: 27 passages and 54 task versions. Three stories include tap-to-order actions. The original three short French errands and their IDs remain available.
+
+The next story at a place favors fewer displayed encounters. French practice across the three places suggests an amount of text: begin with short sentences; help or retries can suggest less; two first-try first questions on different new stories, reported independently read without support, can suggest more. Manual story/text choices stay open. Skips and unobserved reading do not lower suggestions; second questions, repeated stories, and different variants of a familiar story cannot manufacture new-story evidence. The two questions retain the same comprehension targets across the three versions; the language/context load changes. This is not a French level or age/grade estimate.
+
+Full passages, sentence focus, English meaning/vocabulary help, and skill-matched smaller examples remain available. Translation support follows both questions on a passage, including after reload. Local French narration never falls back to English. Frozen routes preserve partially arranged cards and paused stories. French records and suggestions stay separate from English Paris and legacy French work. This is a finite, reviewed library, not generated stories or a full language curriculum. The browser notebook remains shared, without learner profiles. See [spec 14](docs/specs/14-french-exploration.md) and the [initial French increment](docs/specs/13-french-paris-and-plate-return.md).
 
 ## Privacy and contributions
 
 This repository contains generic source and curriculum content. Do not commit real learner profiles, names, ages or grades tied to a child, school or location details, family anecdotes, responses, progress, personalized packs, recordings, screenshots, exports, or credentials. Use clearly synthetic examples in tests and review commit metadata and attachments as well as files. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Deployment credentials and the existing Site's hosting configuration are excluded. The published app remains in its existing deployment checkout while this repository becomes the development home.
+Deployment credentials and the existing Site's hosting configuration are excluded. This repository is the development home. Reviewed static assets are copied to the existing deployment checkout for publication; its hosting identity and credentials stay out of this public repository.
 
 ## Current Number Garden prototype
 

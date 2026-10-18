@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-labelledby="title desc">
+<title id="title">An imagined Paris storybook scene</title><desc id="desc">The Eiffel Tower, rooftops, a bridge over the Seine, and a book-shaped postcard. An illustration of the setting, with no answers to the reading tasks.</desc>
+<rect x="5" y="5" width="790" height="440" rx="42" fill="#eaf2f1"/>
+<circle cx="647" cy="79" r="37" fill="#e9b84a"/>
+<g fill="#fffef9"><ellipse cx="156" cy="78" rx="82" ry="20"/><ellipse cx="230" cy="97" rx="55" ry="16"/><ellipse cx="539" cy="115" rx="55" ry="15"/></g>
+<path d="M5 312Q210 285 403 319t392-4v95H5Z" fill="#abc4da"/>
+<g fill="none" stroke="#fffef9" stroke-width="4" stroke-linecap="round"><path d="M33 360h75m40 24h88m315-22h79m34 26h88M305 400h94"/></g>
+<g stroke="#183f39" stroke-width="2" stroke-linejoin="round">
+<path d="M58 309V191h67v118M138 309V167h73v142M226 309V195h60v114" fill="#e2cf9f"/>
+<path d="m49 191 42-38 42 38m-5-24 47-42 46 42m-3 28 38-35 39 35" fill="#90b9ae"/>
+<g fill="#fffef9"><path d="M74 210h14v23H74zm27 0h14v23h-14zM74 249h14v23H74zm27 0h14v23h-14zM153 188h15v24h-15zm27 0h15v24h-15zM153 230h15v24h-15zm27 0h15v24h-15zM238 214h14v22h-14zm24 0h14v22h-14zM238 253h14v22h-14zm24 0h14v22h-14z"/></g>
+<path d="M347 306q42-87 50-214h14q8 127 51 214h-27q-30-67-62 0Z" fill="#b99b74"/>
+<path d="M404 92V58m-32 125h64m-76 58h88m-91 45h104M384 199l40 33m-39 0 38-33M371 249l61 33m-61 0 62-33" fill="none"/>
+<path d="M468 310V219h68v91m10 0V184h72v126m14 0V209h68v101" fill="#f3ead9"/>
+<path d="m458 219 44-38 43 38m-9-35 46-39 45 39m-5 25 44-36 43 36" fill="#b4a6c8"/>
+<g fill="#abc4da"><path d="M482 237h15v21h-15zm25 0h15v21h-15zM559 204h15v23h-15zm26 0h15v23h-15zM559 245h15v23h-15zm26 0h15v23h-15zM646 229h15v22h-15zm25 0h15v22h-15z"/></g>
+<path d="M174 323q131-86 262 0v23h-32q-12-39-41-39t-40 39h-34q-10-39-39-39t-44 39h-32Z" fill="#e2cf9f"/>
+<path d="M172 321h267m-239-16v18m30-31v31m30-43v43m31-49v49m31-47v47m31-36v36m30-21v21m29-6v6" fill="none"/>
+</g>
+<path d="M9 408q175-31 360-2t425-4v43H5Z" fill="#b8d4c3"/>
+<g transform="translate(548 310) rotate(-7)"><path d="M0 0q56-17 101 5q46-22 101-5v105q-52-17-101 5q-49-22-101-5Z" fill="#fffef9" stroke="#183f39" stroke-width="3"/><path d="M101 7v99" stroke="#90b9ae" stroke-width="3"/><path d="M21 30h56M21 48h53M21 66h43m49-36h57m-57 18h53m-53 18h44" stroke="#b4a6c8" stroke-width="4" stroke-linecap="round"/></g>
+</svg>
