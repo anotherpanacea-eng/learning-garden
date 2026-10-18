@@ -5,7 +5,7 @@ import {ensureFacts} from './facts-core.mjs';
 import {factsPage,factsNotes,bindFacts} from './facts-ui.mjs';
 import {orchardPage,bindOrchard} from './orchard-ui.mjs';
 import {bindSpeech,stopSpeech,resetSpeechPreferences,setSpeechPreferences,hearButton} from './play-media.mjs';
-import {ExplorerStore} from './explorer-storage.mjs';
+import {ExplorerStore,EXPLORER_COLORS,EXPLORER_SYMBOLS} from './explorer-storage.mjs';
 import {explorerChip,explorerPicker,explorerNotes} from './explorer-ui.mjs';
 import {ensurePlantings,earnPlanting,seedOffer,plantingPage,openTasks,openNumberTaskPage,bindPlantings} from './plantings.mjs';
 import {pip,dot} from './broad-art.mjs';
@@ -201,7 +201,7 @@ function useExplorer(next){
  if(!next)return;stopSpeech();state=next;ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensurePlantings(state);setSpeechPreferences(state.garden.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate('#home');
 }
-function freshExplorerChoice(){const avatars=['sky','fern','reed'],colors=['gold','rose','blue','green','lavender','coral'],symbols=['leaf','acorn','shell','feather','pebble','flower'];for(const avatar of avatars)for(const color of colors)for(const symbol of symbols)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
+function freshExplorerChoice(){for(const avatar of ['sky','fern','reed'])for(const color of EXPLORER_COLORS)for(const symbol of EXPLORER_SYMBOLS)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
 function chooseExplorer(create=false){if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
 function bindExplorers(){
  $('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());

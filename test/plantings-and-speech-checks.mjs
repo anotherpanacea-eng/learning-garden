@@ -25,7 +25,7 @@ for(const area of areas){
  check(!plantSeed(s,s.plantings.pending[0].event,0,0),'occupied plot rejects packet');
  check(!plantSeed(s,s.plantings.pending[0].event,2,0),'cannot jump over the next bed');
  check(plantSeed(s,s.plantings.pending[0].event,1,0),'filled first bed opens another');
- check(plantingPage(s,1).includes('Earlier patch'),'previous beds remain reachable');
+ check(plantingPage(s,1).includes('Earlier bed'),'previous beds remain reachable');
 }
 for(const task of openTasks()){
  const s=fresh(),before=JSON.stringify(s.broad);startOpenTask(s,task.id);const event=s.plantings.openDraft.event;
@@ -43,7 +43,7 @@ for(const [id,bad] of [['many-rectangles',{type:'array'}],['estimate-seeds',{typ
  const html=openNumberTaskPage(s,'many-rectangles');check(html.includes('2 rows')&&html.includes('Try 1 row of 24')&&html.includes('Try 4 rows of 6'),'wide rectangles provide more than two geometric shapes');
  const q=areas.find(a=>a.id==='geometry').checkin[0];const html2=renderModel(q,{},false,{mode:'checkin'});check(!html2.includes('aria-label="triangle'),'shape identification accessible description does not name its answer');
 }
-for(const [input,expected] of [['7 × 8 = __','7 times 8 equals blank'],['12 ÷ 3 − 1','12 divided by 3 minus 1'],['A 3-by-4 bed is 12 cm by 2 m.','A 3 by 4 bed is 12 centimeters by 2 meters.'],['Come explore with Pip.','Come explore with Pip.']])check(spoken(input)===expected,'English math speech '+input);
+for(const [input,expected] of [['7 × 8 = __','7 times 8 equals blank'],['12 ÷ 3 − 1','12 divided by 3 minus 1'],['A 3-by-4 bed is 12 cm by 2 m.','A 3 by 4 bed is 12 centimeters by 2 meters.'],['Come explore with Pip.','Come explore with Pip.'],['Find 2/3 of the collection.','Find 2 thirds of the collection.'],['1/4 of the same whole','1 quarter of the same whole']])check(spoken(input)===expected,'English math speech '+input);
 check(spoken('Le ruban mesure 3 cm. 4 × 2 = 8','fr')==='Le ruban mesure 3 cm. 4 × 2 = 8','French text stays French');
 check(chooseLocalVoice([{name:'Remote',lang:'en-US',localService:false}])===null,'no remote voice fallback');
 console.log(`${checks} planting, open invitation, recovery and speech checks passed.`);
