@@ -35,3 +35,7 @@ For each template, 1,000 seeds: the answer is a non-negative integer or valid ch
 ## Build clarification
 
 Generated fields include every operand-dependent field: fact(s), hint, talk, steps, misconception responses and speech overrides as well as prompt, answer, choices, solution and params. Persist a validated full question snapshot in the existing draft with variant metadata, not only a seed. Paused exposure and helper logic read that frozen question. Render/reload never increments an encounter; a newly opened draft reserves its encounter once and preserves it. Existing paused drafts without variants retain their authored question. A new variant of an already seen template is sameKind and never fresh evidence, even if its exact multiplication pair was unseen. Adventure examples stay separate authored examples, but their named shape/structure must remain compatible with the question. Numeric coincidence inside an instructional helper is permitted; helper prose must not solve the waiting question.
+
+## Paused work after content updates
+
+A frozen question that no longer matches the current authored/generated template stays closed in `broad.closedDrafts` with its exact original draft, including attempts, input and support. A dismissible notice links to Grown-up notes, which show that earlier work; the active explorer's normal download includes it. It is never scored against a replacement question or fed to suggestions. Strict question validation still applies to resumed work. Repeated normalization and reload do not duplicate the kept record.

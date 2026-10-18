@@ -21,7 +21,7 @@ let activeSpeech=null, selectedVoice='', speakingRate=1, removeVoiceListener=()=
 const fractionWords={2:['half','halves'],3:['third','thirds'],4:['quarter','quarters'],5:['fifth','fifths'],6:['sixth','sixths'],8:['eighth','eighths'],10:['tenth','tenths'],12:['twelfth','twelfths']};
 export function spoken(text,language='en'){
  if(language==='fr')return String(text);
- return String(text).replace(/__/g,' blank ').replace(/×/g,' times ').replace(/÷/g,' divided by ').replace(/−/g,' minus ').replace(/=/g,' equals ').replace(/(\d+)\s*cm\b/g,'$1 centimeters').replace(/(\d+)\s*m\b/g,'$1 meters').replace(/(\d+)-by-(\d+)/g,'$1 by $2').replace(/\b(\d+)\/(\d+)\b/g,(x,top,bottom)=>{const name=fractionWords[bottom];return name?`${top} ${name[top==='1'?0:1]}`:`${top} over ${bottom}`;}).replace(/ {2,}/g,' ').trim();
+ return String(text).replace(/__/g,' blank ').replace(/×/g,' times ').replace(/÷/g,' divided by ').replace(/−/g,' minus ').replace(/=/g,' equals ').replace(/(\d+(?:\.\d+)?)\s*cm\b/g,(_,n)=>`${n} centimeter${Number(n)===1?'':'s'}`).replace(/(\d+(?:\.\d+)?)\s*m\b/g,(_,n)=>`${n} meter${Number(n)===1?'':'s'}`).replace(/(\d+)-by-(\d+)/g,'$1 by $2').replace(/\b(\d+)\/(\d+)\b/g,(x,top,bottom)=>{const name=fractionWords[bottom];return name?`${top} ${name[top==='1'?0:1]}`:`${top} over ${bottom}`;}).replace(/ {2,}/g,' ').trim();
 }
 export const speechPreferences=()=>({voice:selectedVoice,rate:speakingRate});
 export function setSpeechPreferences(p){stopSpeech();selectedVoice=typeof p?.voice==='string'?p.voice:'';speakingRate=[0.8,1,1.15].includes(p?.rate)?p.rate:1;}

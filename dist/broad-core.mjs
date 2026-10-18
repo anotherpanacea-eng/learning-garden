@@ -25,9 +25,16 @@ export function ensureBroad(state) {
   if(!b.encounters||typeof b.encounters!=='object'||Array.isArray(b.encounters))b.encounters={};
   if(!Array.isArray(b.seenVariants))b.seenVariants=[];
   b.seenVariants=b.seenVariants.filter(x=>typeof x==='string'&&x.length<=300);
+  if(!Array.isArray(b.closedDrafts))b.closedDrafts=[];
+  b.closedDrafts=b.closedDrafts.filter(x=>x&&typeof x.key==='string'&&x.draft&&typeof x.draft==='object'&&!Array.isArray(x.draft));
   for (const [key,draft] of Object.entries(b.drafts)) {
     if (!draft || !Array.isArray(draft.attempts) || !draft.attempts.every(Number.isFinite)){delete b.drafts[key];continue;}
-    if(draft.question&&!validSnapshot(draft.question,key.split(':').slice(1).join(':'))){delete b.drafts[key];continue;}
+    if(draft.question&&!validSnapshot(draft.question,key.split(':').slice(1).join(':'))){
+      // A wording/content update can invalidate a frozen question. Keep all earlier work,
+      // but never score it against the replacement question or feed it to suggestions.
+      b.closedDrafts.push({key,draft:structuredClone(draft)});b.draftNotice=true;
+      delete b.drafts[key];continue;
+    }
     if(draft.model&&!validDraftModel(draft.model))delete draft.model;
     if(draft.helper){const q=draft.question||itemById(key.split(':').slice(1).join(':'));if(q)cleanBroadHelp(q,draft);else delete draft.helper;}
     if(draft.helpUsed||draft.helper)draft.helpUsed=true;

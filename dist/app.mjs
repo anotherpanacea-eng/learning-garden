@@ -96,7 +96,7 @@ function markExposure(){
   const pairs=[];
   if(q.facts?.length)pairs.push(...q.facts);
   if(q.fact&&!pairs.some(p=>p[0]===q.fact[0]&&p[1]===q.fact[1]))pairs.push(q.fact);
-  else if(Number.isFinite(q.a)&&Number.isFinite(q.b))pairs.push([q.a,q.b]);
+  if(!q.fact&&!q.facts?.length&&Number.isFinite(q.a)&&Number.isFinite(q.b))pairs.push([q.a,q.b]);
   const model=active?.model||q.model;
   if(model?.type==='array'&&(activity.mode==='broad-activity'||active?.modelUsed||active?.showArray))pairs.push([model.rows,model.cols]);
   for(const pair of pairs){
@@ -189,7 +189,7 @@ function render(){
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
   else html=home();
-  main.innerHTML=(explorerStore.warning?`<p class="storage-warning" role="status">${esc(explorerStore.warning)}</p>`:!storageOK?'<p class="storage-warning" role="status">This browser cannot save progress right now. You can still explore; download notes before leaving.</p>':'')+html;bind();
+  main.innerHTML=(explorerStore.warning?`<p class="storage-warning" role="status">${esc(explorerStore.warning)}</p>`:!storageOK?'<p class="storage-warning" role="status">This browser cannot save progress right now. You can still explore; download notes before leaving.</p>':'')+(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;bind();
 }
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
 function focusElement(selector){const element=$(selector);if(element){element.tabIndex=-1;element.focus();}}
@@ -232,6 +232,7 @@ function bindBroadExtras(){
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
 function bind(){
+ $('#dismiss-draft-notice')?.addEventListener('click',()=>{state.broad.draftNotice=false;save();render();main.focus();});
  bindExplorers();bindBroadExtras();bindPlantings(state,{save,render,navigate,focus:focusElement});
  bindStory();
  bindFacts(state,{save,render,focus:focusElement,exposeFacts:pairs=>exposeStoryFacts({facts:pairs})});

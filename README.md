@@ -26,6 +26,7 @@ With Node.js installed:
 node test/core-checks.mjs
 node test/broad-checks.mjs
 node test/broad-variants-checks.mjs
+node test/paused-draft-checks.mjs
 node test/broad-help-checks.mjs
 node test/broad-model-checks.mjs
 node test/explorer-storage-checks.mjs
