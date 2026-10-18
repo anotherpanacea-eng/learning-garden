@@ -1,3 +1,4 @@
+import {parisLibraryHelpers} from './paris-library.mjs';
 import {parisHelpers} from './paris-content.mjs';
 // Smaller, authored examples. These support the waiting task; they never score it.
 export const helpers={
@@ -23,3 +24,5 @@ export function cleanHelper(d,nodeId){
  x.modelUsed=x.modelUsed===true||x.steps>0||x.spotlight!==null&&x.spotlight!==undefined;x.revealed=x.revealed===true;x.steps=Number.isInteger(x.steps)?Math.max(0,Math.min(helperLimit(h),x.steps)):0;
  x.spotlight=Number.isInteger(x.spotlight)&&x.spotlight>=0&&x.spotlight<helperLimit(h)?x.spotlight:null;
 }
+
+Object.assign(helpers,parisLibraryHelpers);

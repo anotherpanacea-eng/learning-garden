@@ -2,14 +2,15 @@ import assert from 'node:assert/strict';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {ensureBroad,noteLegacyExposure} from '../dist/broad-core.mjs';
 import {helpers,acceptsAnswer,helperLimit} from '../dist/help-content.mjs';
+import {parisStories} from '../dist/paris-library.mjs';
 import {storyNodes} from '../dist/story-content.mjs';
 import {ensureGarden,currentVisit,startVisit,resumeVisit,storyDraft,openStoryHelp,submitStoryHelp,submitStory,finishStoryNode,noteGardenFactExposure} from '../dist/garden-core.mjs';
 import {helpPage} from '../dist/help-ui.mjs';
 import {storyPage,gardenNotes} from '../dist/garden-ui.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const fresh=()=>{const s=freshState();ensureBroad(s);ensureGarden(s);return s;};
-function reach(s,id){const n=storyNodes[id];startVisit(s,n.entrance);while(currentVisit(s).node!==id){storyDraft(s);finishStoryNode(s,true);}}
-check(Object.keys(helpers).length===15,'all fifteen scored tasks have help');
+function reach(s,id){const n=storyNodes[id];if(n.parisStory){s.garden.seen=parisStories.filter(x=>x.destination===n.parisDestination&&x.id!==n.parisStory).map(x=>x.variants[1][0]);startVisit(s,'paris',{destination:n.parisDestination,variant:n.parisVariant});}else startVisit(s,n.entrance);let steps=0;while(currentVisit(s)?.node!==id&&steps++<10){storyDraft(s);finishStoryNode(s,true);}assert.equal(currentVisit(s)?.node,id,'helper fixture reaches requested task');}
+check(Object.values(storyNodes).filter(n=>n.type==='task').every(n=>helpers[n.id]),'every scored story task has help');
 for(const [id,h] of Object.entries(helpers)){
  const s=fresh();reach(s,id);const d=storyDraft(s);d.input='Synthetic waiting input';d.choice=1;d.method='worked';d.reading='together';
  const n=storyNodes[id],wrong=n.kind==='number'?999:n.choices.findIndex((_,i)=>!acceptsAnswer(n,i));submitStory(s,wrong);

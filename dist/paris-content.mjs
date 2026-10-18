@@ -8,7 +8,7 @@ export const parisEntrance = {
     title:'A postcard beside the parcel',
     body:'Lucie has a story parcel for the Learning Garden and a blank postcard beside it. Pip and Dot pause to imagine the journey home. There is room on a postcard for a small idea.',
     projectTitle:'A postcard in your own way',
-    project:'If you like, tell a postcard message aloud, draw one on paper, or dictate your words to a helper. You might tell the Learning Garden about one moment at Lucie’s bookstall. Or keep the idea for another day.'
+    project:'If you like, tell a postcard message aloud, draw one on paper, or dictate your words to a helper. You might tell the Learning Garden about one moment from your Paris errand. Or keep the idea for another day.'
   }
 };
 
@@ -131,9 +131,9 @@ export const parisNodes = {
   },
   'paris-postcard':{
     id:'paris-postcard',entrance:'paris',type:'project',subject:'Writing',practiceOnly:true,
-    title:'A little message home',body:'A blank postcard rests on Lucie’s counter.',
+    title:'A little message home',body:'A blank postcard is waiting for an idea.',
     guide:'{guide} says, “Your message can be told aloud, drawn, or written down by a helper.”',
-    prompt:'Optional idea: tell the Learning Garden about one moment at Lucie’s bookstall. You can retell it aloud, draw a postcard on paper, or dictate your words to a helper. You can also keep the idea for later.',
+    prompt:'Optional idea: tell the Learning Garden about one moment from your Paris errand. You can retell it aloud, draw a postcard on paper, or dictate your words to a helper. You can also keep the idea for later.',
     projectOptions:['Tell a postcard message aloud','Draw a postcard','Dictate a postcard to a helper'],
     talk:'Which moment would you choose for your message, and what would you like the listener or reader to know?',
     next:null

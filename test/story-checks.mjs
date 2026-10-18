@@ -6,7 +6,7 @@ import {guides,avatars} from '../dist/companions.mjs';
 import {ensureGarden,currentVisit,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode} from '../dist/garden-core.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const state=()=>{const s=freshState();ensureBroad(s);ensureGarden(s);return s;};
-check(entrances.length===5&&Object.keys(storyNodes).length===20,'bounded story');
+check(entrances.length===5&&Object.values(storyNodes).filter(n=>!n.parisStory).length===20,'bounded story');
 check(JSON.stringify(Object.values(storyNodes).filter(n=>n.type==='task'&&!['cafe','paris'].includes(n.entrance)).map(n=>n.answer))==='[0,1,2,12,2,7]','reviewed answer keys');
 for(const e of entrances){
  let id=e.start;const seen=new Set();let tasks=0,projects=0;

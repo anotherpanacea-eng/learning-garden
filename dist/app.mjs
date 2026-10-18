@@ -141,7 +141,7 @@ function render(){
   else if(root==='companions')html=companionPicker(state);
   else if(root==='storm'){
     const visit=currentVisit(state);
-    if(slug==='choose')html=storyHub(state,detail);
+    if(slug==='choose'){const parts=hash.slice(1).split('/');const place=parts[3],variant=parts[4];html=storyHub(state,detail,detail==='paris'&&place?{destination:place,variant:variant==='auto'?'auto':Number(variant)}:null);}
     else if((slug==='play'||slug==='end')&&visit){
       if(visit.finished)html=storyEnding(state);
       else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
@@ -209,10 +209,15 @@ function exposeStoryFacts(node,except){
   if(fact&&fact.every(Number.isFinite)&&((fact[0]===pair[0]&&fact[1]===pair[1])||(fact[0]===pair[1]&&fact[1]===pair[0])))draft.exposed=true;
  }
 }
+function requestParis(destination,variant='auto'){
+ const options={destination,variant},v=currentVisit(state);
+ if(v&&!v.finished){navigate(`#storm/choose/paris/${destination}/${variant}`);return;}
+ if(startVisit(state,'paris',options)){save();navigate('#storm/play');}
+}
 function requestPath(id){
  if(!entranceById(id))return;
  const v=currentVisit(state);
- if(v&&!v.finished){navigate(v.entrance===id?'#storm/play':`#storm/choose/${id}`);return;}
+ if(v&&!v.finished){navigate(v.entrance===id&&!(id==='paris'&&v.paris)?'#storm/play':`#storm/choose/${id}`);return;}
  startVisit(state,id);save();navigate('#storm/play');
 }
 function finishStory(skip=false){
@@ -221,7 +226,8 @@ function finishStory(skip=false){
 }
 function bindStory(){
  document.querySelectorAll('[data-start-path]').forEach(b=>b.onclick=()=>requestPath(b.dataset.startPath));
- document.querySelectorAll('[data-new-visit]').forEach(b=>b.onclick=()=>{startVisit(state,b.dataset.newVisit);save();navigate('#storm/play');});
+ document.querySelectorAll('[data-paris-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.parisDestination,value=$(`#paris-length-${place}`).value;requestParis(place,value==='auto'?'auto':Number(value));});
+ document.querySelectorAll('[data-new-visit]').forEach(b=>b.onclick=()=>{const options=b.dataset.parisPlace?{destination:b.dataset.parisPlace,variant:b.dataset.parisVariant==='auto'?'auto':Number(b.dataset.parisVariant)}:undefined;if(startVisit(state,b.dataset.newVisit,options)){save();navigate('#storm/play');}});
  document.querySelectorAll('[data-resume-visit]').forEach(b=>b.onclick=()=>{if(resumeVisit(state,b.dataset.resumeVisit)){save();navigate(currentVisit(state).finished?'#storm/end':'#storm/play');}});
  document.querySelectorAll('[data-guide]').forEach(b=>b.onclick=()=>{if(guides.some(g=>g.id===b.dataset.guide)){state.garden.guide=b.dataset.guide;save();render();$(`[data-guide="${state.garden.guide}"]`).focus();}});
  document.querySelectorAll('[data-avatar]').forEach(b=>b.onclick=()=>{if(avatars.some(a=>a.id===b.dataset.avatar)){state.garden.avatar=b.dataset.avatar;save();render();$(`[data-avatar="${state.garden.avatar}"]`).focus();}});

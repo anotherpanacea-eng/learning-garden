@@ -1,6 +1,7 @@
 import {entrances,storyNodes} from './story-content.mjs';
 import {helpers,acceptsAnswer,cleanHelper} from './help-content.mjs';
 import {guides,avatars} from './companions.mjs';
+import {parisPlan,isParisExploration,validateParisRoute,priorParisStorySeen} from './paris-core.mjs';
 export const entranceById=id=>entrances.find(e=>e.id===id);
 const pairKey=p=>[...p].sort((a,b)=>a-b).join('x');
 const ownNode=(id,entrance)=>storyNodes[id]?.entrance===entrance;
@@ -41,22 +42,35 @@ export function ensureGarden(state){
  for(const o of g.observations){cleanHelper(o,o.nodeId);cleanReadingRecord(o,storyNodes[o.nodeId],true,g.seen);if(o.helpUsed){o.supported=true;o.independent=false;o.freshEvidence=false;}}
  if(!Array.isArray(g.visits))g.visits=[];
  const ids=new Set();g.visits=g.visits.filter(v=>{
-  if(!v||typeof v.id!=='string'||ids.has(v.id)||!entranceById(v.entrance))return false;ids.add(v.id);
-  v.recorded=Array.isArray(v.recorded)?v.recorded.filter(id=>ownNode(id,v.entrance)):[];
+  if(!v||typeof v.id!=='string'||ids.has(v.id)||!entranceById(v.entrance)||isParisExploration(v)&&!validateParisRoute(v))return false;ids.add(v.id);
+  const route=isParisExploration(v)?v.route:null,allowed=id=>route?route.includes(id):ownNode(id,v.entrance)&&!id.startsWith('paris-explore-');
+  v.recorded=Array.isArray(v.recorded)?v.recorded.filter(allowed):[];
   if(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts))v.drafts={};
-  for(const [id,d] of Object.entries(v.drafts)){if(!ownNode(id,v.entrance)||!cleanDraft(d))delete v.drafts[id];else{cleanHelper(d,id);cleanReadingRecord(d,storyNodes[id],false,g.seen);}}
-  let id=entranceById(v.entrance).start;const seen=new Set();
-  while(id&&v.recorded.includes(id)&&!seen.has(id)){seen.add(id);id=storyNodes[id].next;}
+  for(const [id,d] of Object.entries(v.drafts)){if(!allowed(id)||!cleanDraft(d))delete v.drafts[id];else{cleanHelper(d,id);cleanReadingRecord(d,storyNodes[id],false,g.seen);}}
+  let id=route?route[0]:entranceById(v.entrance).start;const seen=new Set();
+  while(id&&v.recorded.includes(id)&&!seen.has(id)){seen.add(id);id=route?route[route.indexOf(id)+1]:storyNodes[id].next;}
   v.node=id;v.finished=!id;return true;
+ });
+ g.observations=g.observations.filter(o=>{
+  const v=g.visits.find(v=>v.id===o.visitId),n=storyNodes[o.nodeId],explore=o.nodeId.startsWith('paris-explore-')||o.parisDestination!==undefined||o.parisStory!==undefined||o.parisVariant!==undefined;
+  if(!explore)return !v||!isParisExploration(v)||v.route.includes(o.nodeId);
+  if(!v||!validateParisRoute(v)||!v.route.includes(o.nodeId)||!v.recorded.includes(o.nodeId))return false;
+  if(o.parisDestination!==v.paris.destination||o.parisStory!==v.paris.storyId||o.parisVariant!==v.paris.variant||o.parisSelectionReason!==v.paris.reason)return false;
+  if(n.type==='task'&&(n.parisDestination!==o.parisDestination||n.parisStory!==o.parisStory||n.parisVariant!==o.parisVariant))return false;
+  if(typeof o.priorStorySeen!=='boolean')o.priorStorySeen=true;
+  return true;
  });
  if(!g.visits.some(v=>v.id===g.current))g.current=null;
  return g;
 }
 export const currentVisit=s=>ensureGarden(s).visits.find(v=>v.id===s.garden.current)||null;
-export function startVisit(state,entrance){
+export function startVisit(state,entrance,options){
  const g=ensureGarden(state),e=entranceById(entrance);if(!e)return null;
+ const plan=options===undefined?null:entrance==='paris'&&options&&typeof options==='object'?parisPlan(state,options.destination,options.variant??'auto'):null;
+ if(options!==undefined&&!plan)return null;
  let n=1;while(g.visits.some(v=>v.id===`visit-${n}`))n++;
  const v={id:`visit-${n}`,entrance,node:e.start,recorded:[],drafts:{},finished:false,createdAt:new Date().toISOString()};
+ if(plan){v.paris={destination:plan.destination,storyId:plan.storyId,variant:plan.variant,reason:plan.reason};v.route=[...plan.route];v.node=v.route[0];}
  g.visits.push(v);g.current=v.id;return v;
 }
 export function resumeVisit(state,id){const g=ensureGarden(state);if(!g.visits.some(v=>v.id===id))return false;g.current=id;return true;}
@@ -65,6 +79,10 @@ export function storyDraft(state){
  if(!v.drafts[n.id])v.drafts[n.id]={attempts:[],input:'',choice:null,hinted:false,revealed:false,method:null,reading:'unobserved',familiar:state.garden.seen.includes(n.id),knownFact:(n.facts||[]).some(p=>state.broad?.seenFacts?.includes(pairKey(p))),priorExposureUnknown:!!state.broad?.legacyExposureUnknown};
  if(readingNode(n)){
   const d=v.drafts[n.id];
+  if(v.paris){
+   if(v.paris.priorStorySeen===undefined)v.paris.priorStorySeen=priorParisStorySeen(state,v.paris.storyId);
+   if(typeof d.priorStorySeen!=='boolean')d.priorStorySeen=d.priorStorySeen===undefined?v.paris.priorStorySeen:true;
+  }
   if(d.priorPassageSeen===undefined)d.priorPassageSeen=state.garden.seen.some(id=>storyNodes[id].passageId===n.passageId);
   d.readingTools=cleanReadingTools(d.readingTools,n.readingText.length);
  }
@@ -81,6 +99,10 @@ export function useStoryReadingTool(state,action){
 }
 export function noteStorySeen(state){
  const v=currentVisit(state);if(!v?.node)return;
+ if(v.paris){
+  storyDraft(state);v.paris.displayed=true;
+  for(const other of state.garden.visits)if(other.id!==v.id&&other.paris?.storyId===v.paris.storyId)for(const d of Object.values(other.drafts))d.familiar=true;
+ }
  if(!state.garden.seen.includes(v.node))state.garden.seen.push(v.node);
  for(const other of state.garden.visits)if(other.id!==v.id&&other.drafts[v.node])other.drafts[v.node].familiar=true;
  const passageId=storyNodes[v.node].passageId;
@@ -113,8 +135,9 @@ export function finishStoryNode(state,skip=false){
   familiar:!!d.familiar,knownFact:!!d.knownFact,priorExposureUnknown:!!d.priorExposureUnknown,hinted:!!d.hinted,revealed:!!d.revealed,
   helpUsed:!!d.helpUsed,helper:d.helper?JSON.parse(JSON.stringify(d.helper)):null,
   ...(tools?{readingSkill:n.readingSkill,passageId:n.passageId,priorPassageSeen:!!d.priorPassageSeen,readingTools:tools,practiceOnly:!!n.practiceOnly}:{}),
+  ...(v.paris?{parisDestination:v.paris.destination,parisStory:v.paris.storyId,parisVariant:v.paris.variant,parisSelectionReason:v.paris.reason,priorStorySeen:typeof d.priorStorySeen==='boolean'?d.priorStorySeen:!!v.paris.priorStorySeen}:{}),
   designChoice:project?d.designChoice||null:null,context:'guided-story',method:project||skip?null:d.method,reading:['independent','together','unobserved','listened'].includes(d.reading)?d.reading:'unobserved',source:'story',at:new Date().toISOString()};
- state.garden.observations.push(o);v.recorded.push(n.id);v.node=n.next;v.finished=!n.next;
+ state.garden.observations.push(o);v.recorded.push(n.id);v.node=v.route?v.route[v.route.indexOf(n.id)+1]:n.next;v.finished=!v.node;
  if(v.finished)v.finishedAt=new Date().toISOString();return o;
 }
 export function storyDescribe(o){

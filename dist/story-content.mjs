@@ -1,3 +1,4 @@
+import {parisLibraryNodes} from './paris-library.mjs';
 import {parisEntrance,parisNodes} from './paris-content.mjs';
 import {cafeEntrance,cafeNodes} from './restaurant-story.mjs';
 // Original, generic story data. Projects are invitations, never scored achievements.
@@ -154,3 +155,5 @@ Object.assign(storyNodes,cafeNodes);
 
 entrances.push(parisEntrance);
 Object.assign(storyNodes,parisNodes);
+
+Object.assign(storyNodes,parisLibraryNodes);

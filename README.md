@@ -33,6 +33,7 @@ node test/cafe-expedition-checks.mjs
 node test/facts-checks.mjs
 node test/forage-checks.mjs
 node test/paris-checks.mjs
+node test/paris-exploration-checks.mjs
 ```
 
 These checks use synthetic observations. They check the application logic; they do not validate the assessment as an educational instrument.
@@ -62,6 +63,8 @@ A shortage answer never creates inventory. Serving requires enough actual suppli
 ## Learning design and next increments
 
 **The Paris Postcard** is a guided English-reading visit to an imaginary bookstall in real Paris. Six connected-text stops practice finding details, word parts, vocabulary in context, inference, textual evidence, and sequence, followed by an optional oral/drawn/dictated postcard. The source passage stays visible; sentence focus, smaller examples, and local read-aloud are optional. Read-aloud requests and sentence support remain recorded even after a later independent-reading report. All Paris tasks are practice-only and never fresh assessment evidence; no oral decoding accuracy, fluency, or reading level is inferred. See [the Paris reading spec](docs/specs/10-paris-reading-visit.md).
+
+Paris also offers three freely chosen destinations: Lucie’s bookstall, the river walk, and the rooftop garden. Six original errands each have two questions and three passage lengths (12 question prompts, 36 task versions). The next errand favors less encountered stories and suggests a passage length from recent work at that destination, while all lengths remain open. Help/retries can suggest shorter text; two independent first tries on different previously unseen stories can suggest longer text. Repeated stories, shared passages, supported reading, skips, and unknown reports remain distinct. Suggestions are approximate and finite, not reading levels. Frozen routes preserve paused errands across reloads; the original postcard path remains available. See [Paris exploration](docs/specs/11-paris-exploration.md).
 
 The opening introduces the shared story: neighbors are safe after the storm, and players can gather supplies, feed visitors, investigate water, follow messages, or imagine shelters. The café has a replayable, optional “Why we’re here & how to play” introduction, open at a fresh counter, with read-aloud and three short steps. The story introduction adds no completion gates or learner records.
 

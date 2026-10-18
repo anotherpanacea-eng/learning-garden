@@ -46,3 +46,5 @@ Each spec is independently reviewed; resolve concrete findings before building t
 Implemented: [Orchard map hunts](specs/09-orchard-map-hunts.md) give new gathering trips arithmetic location clues, persistent covered-plot inspections, counter help, and the existing equal-basket harvest. Older trips keep their original search.
 
 Implemented: [The Paris Postcard](specs/10-paris-reading-visit.md) adds six English connected-text reading targets, sentence focus and optional local narration, smaller text examples, rereading/evidence practice, and an unscored postcard/retelling invitation. This is guided practice, not a reading-level assessment.
+
+Implemented: [Paris exploration](specs/11-paris-exploration.md) adds three destinations, six original story errands at three passage lengths, local practice suggestions, open manual choices, and persistent short-errand routes. All content is authored; familiar stories are offered as rereading.
