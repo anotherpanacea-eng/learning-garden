@@ -39,9 +39,9 @@ export function ensureGarden(state){
  state.garden=g;
  if(!guides.some(x=>x.id===g.guide))g.guide='mira';
  if(!avatars.some(x=>x.id===g.avatar))g.avatar='fern';
- if(!Array.isArray(g.seen))g.seen=[];g.seen=g.seen.filter(id=>storyNodes[id]);
+ if(!Array.isArray(g.seen))g.seen=[];g.seen=g.seen.filter(id=>Object.hasOwn(storyNodes,id));
  if(!Array.isArray(g.observations))g.observations=[];
- g.observations=g.observations.filter(o=>o&&storyNodes[o.nodeId]&&typeof o.visitId==='string'&&Array.isArray(o.attempts)&&o.attempts.every(Number.isFinite));
+ g.observations=g.observations.filter(o=>o&&Object.hasOwn(storyNodes,o.nodeId)&&typeof o.visitId==='string'&&Array.isArray(o.attempts)&&o.attempts.every(Number.isFinite));
  for(const o of g.observations){cleanHelper(o,o.nodeId);cleanReadingRecord(o,storyNodes[o.nodeId],true,g.seen);if(o.helpUsed){o.supported=true;o.independent=false;o.freshEvidence=false;}}
  if(!Array.isArray(g.visits))g.visits=[];
  const ids=new Set();g.visits=g.visits.filter(v=>{

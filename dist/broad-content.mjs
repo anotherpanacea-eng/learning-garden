@@ -283,8 +283,8 @@ export const areas = [
     checkin:[
       q('measurement-foundation','measurement','Foundation','Ribbon from zero',
         'The ribbon runs from 0 cm to 6 cm on this ruler. How long is it, in cm?',6,'mt_cqSf213hSa',ruler(0,6,10),
-        'Count the equal one-centimetre spaces covered by the ribbon.',
-        'The ribbon covers 6 one-centimetre spaces, so its length is 6 cm.',
+        'Count the equal one-centimeter spaces covered by the ribbon.',
+        'The ribbon covers 6 one-centimeter spaces, so its length is 6 cm.',
         'Why do we count the spaces instead of both end marks?',{showModel:true}),
       q('measurement-anchor','measurement','Garden check','A shifted ribbon',
         'The ribbon starts at 3 cm and ends at 14 cm. What is its length, in cm?',11,'mt_e4x3l2JeLI',ruler(3,14),
@@ -324,7 +324,7 @@ export const areas = [
         'Find two rectangles with the same perimeter but different areas.',
         q('measurement-stretch-activity','measurement','Look further','The missing fence side',
           'Fresh bed: a rectangle has perimeter 22 m and length 7 m. What is its width, in meters?',4,'mt_WtcFrxGOgw',array(2,5),
-          'Subtract both seven-metre lengths. The distance left belongs to two equal widths.',
+          'Subtract both seven-meter lengths. The distance left belongs to two equal widths.',
           '22 − 7 − 7 = 8 meters for both widths. 8 ÷ 2 = 4 meters for each width.',
           'Check your width by adding all four sides.'))
     ]

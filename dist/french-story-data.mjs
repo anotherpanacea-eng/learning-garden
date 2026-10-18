@@ -44,18 +44,18 @@ export const frenchStoryData = [
     id: 'fr-bookstall-map', destination: 'bookstall', title: 'Un autre chemin',
     invitation: 'A closed gate changes a delivery route. Read the map and choose another way.',
     passages: {
-      1: ['Nora apporte un livre au jardin.', 'La porte du jardin est fermée.', 'Elle prend le chemin près de la rivière.', 'Ce chemin mène à une autre porte, ouverte.'],
+      1: ['Nora apporte un livre au jardin.', 'La première porte du jardin est fermée.', 'Elle prend le chemin près de la rivière.', 'Ce chemin mène à une autre porte, ouverte.'],
       2: ['Nora apporte un livre au jardin.', 'Mais la première porte du jardin est fermée.', 'Elle regarde sa carte pour trouver un autre chemin.', 'Elle prend le chemin près de la rivière.', 'Ce chemin mène à une autre porte, qui est ouverte.'],
       3: ['Nora apporte un livre au jardin pour le club de lecture.', 'La première porte est fermée, alors elle ne peut pas entrer ici.', 'Elle regarde sa carte et cherche une autre entrée.', 'Elle choisit le chemin près de la rivière.', 'Ce chemin mène à une autre porte, qui est ouverte.', 'Grâce à ce détour, Nora peut apporter le livre au club.']
     },
     meanings: {
-      1: 'Nora brings a book to the garden. The garden gate is closed. She takes the path near the river. This path leads to another gate, which is open.',
+      1: 'Nora brings a book to the garden. The first garden gate is closed. She takes the path near the river. This path leads to another gate, which is open.',
       2: 'Nora brings a book to the garden. But the first garden gate is closed. She looks at her map to find another path. She takes the path near the river. This path leads to another gate, which is open.',
       3: 'Nora brings a book to the garden for the reading club. The first gate is closed, so she cannot enter here. She looks at her map and searches for another entrance. She chooses the path near the river. This path leads to another gate, which is open. Thanks to this detour, Nora can bring the book to the club.'
     },
     words: 'apporte = brings; fermée = closed; ouverte = open; un chemin = a path; près de = near; une entrée = an entrance; un détour = a detour.',
     questions: [
-      { type: 'mc', title: 'Why change the route?', skill: 'Find a simple reason in a French passage', prompt: 'Pourquoi Nora prend-elle un autre chemin ?', choices: ['Le livre est trop lourd.', 'La première porte est fermée.', 'Elle cherche son bateau.'], answer: 1, hint: 'Read what stops Nora at the first gate.', explanation: '« La porte est fermée » means the gate is closed. This gives Nora a reason to use another path.', helper: 'inference' },
+      { type: 'mc', title: 'Why change the route?', skill: 'Find a simple reason in a French passage', prompt: 'Pourquoi Nora prend-elle un autre chemin ?', choices: ['Le livre est trop lourd.', 'La première porte est fermée.', 'Elle cherche son bateau.'], answer: 1, hint: 'Read what stops Nora at the first gate.', explanation: '« La première porte … est fermée » means the first gate is closed. This gives Nora a reason to use another path.', helper: 'inference' },
       { type: 'mc', title: 'An open way in', skill: 'Understand a French word through a contrast', prompt: 'Une porte « ouverte » permet à Nora de…', choices: ['Entrer dans le jardin.', 'Fermer le livre.', 'Dessiner la rivière.'], answer: 0, hint: 'Compare « fermée » with « ouverte ». Which gate lets her through?', explanation: '« Ouverte » means open. Unlike the closed gate, the open gate lets Nora enter: « entrer ».', helper: 'context' }
     ],
     postcard: 'Draw two routes or give directions with « Le chemin mène à… »'
@@ -76,7 +76,7 @@ export const frenchStoryData = [
     words: 'une écharpe = a scarf; une étiquette = a label; un banc = a bench; un pont = a bridge; rend = gives back; appartient à = belongs to.',
     questions: [
       { type: 'mc', title: 'A written clue', skill: 'Identify evidence in a French passage', prompt: 'Quel nom est sur l’étiquette ?', choices: ['Mila.', 'Nora.', 'Léa.'], answer: 2, hint: 'Look beside « étiquette » or « nom » for the name in quotation marks.', explanation: 'The label says « Léa ». The written name helps Mila find the owner.', helper: 'detail' },
-      { type: 'mc', title: 'What does she give back?', skill: 'Understand a French action in context', prompt: 'Mila « rend l’écharpe » : que fait-elle ?', choices: ['Elle donne l’écharpe à Léa.', 'Elle cache l’écharpe sous le banc.', 'Elle achète une autre écharpe.'], answer: 0, hint: 'Follow the scarf from the bench to the person whose name is on it.', explanation: '« Rend » means gives back here. Mila returns the scarf to Léa: « Elle donne l’écharpe à Léa. »', helper: 'context' }
+      { type: 'mc', title: 'What does she give back?', skill: 'Understand a French action in context', prompt: 'Mila lui « rend » l’écharpe : que fait-elle ?', choices: ['Elle donne l’écharpe à Léa.', 'Elle cache l’écharpe sous le banc.', 'Elle achète une autre écharpe.'], answer: 0, hint: 'Follow the scarf from the bench to the person whose name is on it.', explanation: '« Rend » means gives back here. Mila returns the scarf to Léa: « Elle donne l’écharpe à Léa. »', helper: 'context' }
     ],
     postcard: 'Create a lost-object notice with « Je cherche… » and a color or place clue.'
   },

@@ -1,5 +1,5 @@
 import {frenchStoryData} from './french-story-data.mjs';
-import {ORDER_PERMUTATIONS} from './paris-pack-core.mjs';
+import {ORDER_PERMUTATIONS,displayOrderFor} from './paris-pack-core.mjs';
 
 export const frenchPlaces=[
  {id:'bookstall',title:'Books & hidden messages',symbol:'📚',description:'Investigate parcels, missing pages, and notes among the books.'},
@@ -19,7 +19,7 @@ for(const story of frenchStoryData)for(const variant of [1,2,3]){
  const ids=frenchStories.find(s=>s.id===story.id).variants[variant];
  story.questions.forEach((q,i)=>{
   const id=ids[i],h=examples[q.helper];
-  const answer=q.type==='order'?{kind:'order',orderItems:q.items,displayOrder:[2,0,1],choices:ORDER_PERMUTATIONS.map(p=>p.map(n=>q.items[n]).join(' → ')),answer:0}:{kind:'choice',choices:q.choices,answer:q.answer};
+  const answer=q.type==='order'?{kind:'order',orderItems:q.items,displayOrder:displayOrderFor(`french:${story.id}:${i}`),choices:ORDER_PERMUTATIONS.map(p=>p.map(n=>q.items[n]).join(' → ')),answer:0}:{kind:'choice',choices:q.choices,answer:q.answer};
   frenchLibraryNodes[id]={id,entrance:'french',language:'fr',type:'task',subject:'Reading',practiceOnly:true,
    frenchDestination:story.destination,frenchStory:story.id,frenchVariant:variant,
    passageId:`french-explore-${story.id}-passage-${variant}`,readingText:story.passages[variant],readingSkill:q.skill,

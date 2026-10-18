@@ -136,7 +136,7 @@ export const storyNodes = {
     prompt: 'How long is the ribbon, in centimeters?',
     kind: 'number', answer: 7,
     hint: 'Find the difference between the end mark and the start mark.',
-    explanation: '9 − 2 = 7. The ribbon covers seven one-centimetre spaces, so it is 7 cm long.',
+    explanation: '9 − 2 = 7. The ribbon covers seven one-centimeter spaces, so it is 7 cm long.',
     talk: 'If the same ribbon started at zero, which mark would its other end reach?',
     visual: 'ruler', diagram: {start: 2, end: 9, max: 10},
     next: 'shelter-project'

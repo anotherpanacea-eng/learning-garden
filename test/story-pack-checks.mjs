@@ -42,7 +42,7 @@ for(const variant of [1,2,3]){
   const count=first.readingText.join(' ').split(/\s+/).length;
   check(count>=[0,30,45,70][variant]&&count<=[0,40,65,95][variant],'authored passage meets its length band');
   check(first.readingText.includes(first.choices[first.answer]),'correct evidence sentence occurs verbatim in all variants');
-  check(last.kind==='order'&&last.orderItems.length===3&&JSON.stringify(last.displayOrder)==='[2,0,1]'&&last.answer===0,'order node starts from non-answer display order');
+  check(last.kind==='order'&&last.orderItems.length===3&&last.displayOrder.length===3&&new Set(last.displayOrder).size===3&&JSON.stringify(last.displayOrder)!=='[0,1,2]'&&last.answer===0,'order node starts from non-answer display order');
   check(last.choices.length===6&&new Set(last.choices).size===6,'all possible arrangements have readable observation choices');
   for(let i=0;i<6;i++)check(last.choices[i]===ORDER_PERMUTATIONS[i].map(n=>last.orderItems[n]).join(' → '),'observation choice matches canonical permutation index');
   check(compiled.helpers[firstId].id!==compiled.helpers[lastId].id&&compiled.helpers[firstId].passage!==first.readingText.join(' '),'helpers are separate examples, not original answers');
