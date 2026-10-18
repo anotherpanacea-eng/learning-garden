@@ -24,3 +24,18 @@ export const deliveries=freeze([
  {id:'wren-flags',title:'Flags for the safe landing',request:'Wren the bird is at Lantern Hill. Please bring 6 blue flags and 4 yellow flags to mark the safe landing.',start:'post',recipient:'wren',destination:'hill',math:{kind:'add',a:6,b:4,answer:10,unit:'flags',prompt:'How many flags go in the parcel?',explanation:'Six blue flags and 4 yellow flags make 10 flags: 6 + 4 = 10.',pictures:{kind:'add',groups:[{label:'Blue flags',count:6},{label:'Yellow flags',count:4}]}},helper:helper('cafe','clover')},
  {id:'dot-stars',title:'Paper stars for the café',request:'Dot the ladybug is at Almost-Right Café. There are 12 paper stars at the sorting counter. Reserve 5 for the Post Office sign and deliver the remaining stars to Dot.',start:'post',recipient:'dot',destination:'cafe',math:{kind:'subtract',a:12,b:5,answer:7,unit:'paper stars',prompt:'How many paper stars are left to deliver?',explanation:'Reserve 5 of the 12 stars for the sign. The remaining 7 go to Dot: 12 − 5 = 7.',pictures:{kind:'subtract',groups:[{label:'Stars at the counter',count:12,reserved:5}]}},helper:helper('orchard','purl')},
 ]);
+
+// Original fictional courier presets; these do not describe the player.
+export const courierPresets=freeze([
+ {id:'witch',label:'Girl witch',title:'Flying witch',avatar:'fern',pronouns:'she/her',color:'#655276'},
+ {id:'wizard',label:'Boy wizard',title:'Flying wizard',avatar:'reed',pronouns:'he/him',color:'#456b99'},
+ {id:'sorcerer',label:'Nonbinary sorcerer',title:'Flying sorcerer',avatar:'sky',pronouns:'they/them',color:'#367c79'},
+ {id:'rider',label:'Sky rider',title:'Sky rider',avatar:null,pronouns:null,color:'#8c674c'}
+]);
+export const courierPronouns=freeze(['she/her','he/him','they/them']);
+export function postCourierIdentity(state){
+ const p=state.postOffice||{},preset=courierPresets.find(x=>x.id===p.courier)||courierPresets[0];
+ const avatar=['fern','reed','sky'].includes(p.courierAvatar)?p.courierAvatar:['fern','reed','sky'].includes(state.garden?.avatar)?state.garden.avatar:'fern';
+ const pronouns=courierPronouns.includes(p.courierPronouns)?p.courierPronouns:({fern:'she/her',reed:'he/him',sky:'they/them'}[avatar]);
+ return {...preset,avatar,pronouns};
+}

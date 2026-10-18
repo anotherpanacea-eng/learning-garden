@@ -1,4 +1,5 @@
-import {POST_REVISION,places,recipients,deliveries} from './post-office-content.mjs';
+import {validPostRival,rivalBlocks} from './post-rival.mjs';
+import {POST_REVISION,places,recipients,deliveries,courierPresets,courierPronouns} from './post-office-content.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const integer=(x,min=0)=>Number.isSafeInteger(x)&&x>=min;
 const clone=x=>JSON.parse(JSON.stringify(x));
@@ -23,6 +24,7 @@ function validOrder(o){
  return ['add','subtract','multiply'].includes(m.kind)&&integer(m.a,1)&&m.a<=12&&integer(m.b,1)&&m.b<=12&&integer(m.answer)&&m.answer<=144&&m.answer===(m.kind==='add'?m.a+m.b:m.kind==='subtract'?m.a-m.b:m.a*m.b)&&typeof m.unit==='string'&&typeof m.prompt==='string'&&typeof m.explanation==='string'&&object(m.pictures)&&validPictures(m)&&place(h.destination)&&h.destination!==o.destination&&recipient(h.recipient)&&h.recipient!==o.recipient&&Array.isArray(h.clauses)&&h.clauses.length===2&&h.clauses[0]===`go:${h.destination}`&&h.clauses[1]===`give:${h.recipient}`;
 }
 function validVisit(v){
+ if('rival'in v&&!validPostRival(v.rival))return false;
  if(v.revision!==POST_REVISION||!validOrder(v.order)||!object(v.recipientLocations)||!recipients.every(r=>place(v.recipientLocations[r.id]))||v.recipientLocations[v.order.recipient]!==v.order.destination)return false;
  if(!object(v.composer)||!place(v.composer.place)||!recipient(v.composer.recipient))return false;
  if(!Array.isArray(v.clauses)||v.clauses.length>6||!v.clauses.every(validClause)||!object(v.packing)||!object(v.playback)||!object(v.support))return false;
@@ -30,12 +32,12 @@ function validVisit(v){
  if(r.cursor>0&&!p.packed||r.status==='delivered'&&!v.completed||r.status==='ready'&&(r.cursor!==0||r.active!==null||r.location!==v.order.start||r.referent!==null))return false;
  return typeof p.input==='string'&&Array.isArray(p.attempts)&&p.attempts.length<=24&&p.attempts.every(a=>object(a)&&typeof a.input==='string'&&(a.value===null||typeof a.value==='number'&&Number.isFinite(a.value))&&typeof a.correct==='boolean')&&typeof p.packed==='boolean'&&typeof p.supported==='boolean'&&typeof p.error==='string'&&typeof p.feedback==='string'&&integer(r.cursor)&&r.cursor<=v.clauses.length&&place(r.location)&&(r.referent===null||place(r.referent))&&statuses.has(r.status)&&typeof r.feedback==='string'&&(r.active===null||integer(r.active)&&r.active<v.clauses.length)&&Array.isArray(r.log)&&r.log.length<=6&&r.log.every(x=>typeof x==='string')&&(v.prediction===null||place(v.prediction))&&typeof v.predictionAfterSupport==='boolean'&&typeof v.support.helper==='boolean'&&typeof v.support.audioRequested==='boolean'&&readings.has(v.reading)&&integer(v.revisions)&&Array.isArray(v.checks)&&v.checks.length<=24&&v.checks.every(object)&&typeof v.completed==='boolean'&&integer(v.helperStep)&&v.helperStep<=2;
 }
-function fresh(){return {version:1,current:null,nextVisit:1,courier:'witch',visits:[]};}
+function fresh(){return {version:1,current:null,nextVisit:1,courier:'witch',courierAvatar:'fern',courierPronouns:'she/her',visits:[]};}
 function trim(p){if(p.visits.length>24){const current=p.visits.find(v=>v.id===p.current),latest=p.visits.slice(-24);if(current&&!latest.includes(current))latest[0]=current;p.visits=latest;}}
 export function ensurePostOffice(state){
  if(!('postOffice'in state)){state.postOffice=fresh();return state.postOffice;}
  let p=state.postOffice;
- if(!object(p)||p.version!==1||!Array.isArray(p.visits)||!(p.current===null||typeof p.current==='string')||!['witch','rider'].includes(p.courier)){
+ if(!object(p)||p.version!==1||!Array.isArray(p.visits)||!(p.current===null||typeof p.current==='string')||!courierPresets.some(c=>c.id===p.courier)||'courierAvatar'in p&&!['fern','reed','sky'].includes(p.courierAvatar)||'courierPronouns'in p&&!courierPronouns.includes(p.courierPronouns)){
   const payload=clone(p);p=fresh();p.kept={reason:'This saved Post Office uses an unavailable or unreadable format. Its complete original payload is kept here.',payload};state.postOffice=p;return p;
  }
  let next=Math.max(integer(p.nextVisit,1)?p.nextVisit:1,1,...p.visits.filter(object).map(v=>idNumber(v.id)+1));
@@ -56,7 +58,9 @@ export function startPostOffice(state,deliveryId){
  v.playback=playback(v);p.visits.push(v);p.current=v.id;trim(p);return v;
 }
 export function resumePostOffice(state,id){const p=ensurePostOffice(state);if(!p.visits.some(v=>v.id===id))return false;p.current=id;return true;}
-export function setPostCourier(state,style){if(!['witch','rider'].includes(style))return false;ensurePostOffice(state).courier=style;return true;}
+export function setPostCourier(state,style){const preset=courierPresets.find(c=>c.id===style);if(!preset)return false;const p=ensurePostOffice(state);p.courier=style;if(preset.avatar){p.courierAvatar=preset.avatar;p.courierPronouns=preset.pronouns;}return true;}
+export function setPostCourierPortrait(state,id){if(!['fern','reed','sky'].includes(id))return false;ensurePostOffice(state).courierAvatar=id;return true;}
+export function setPostCourierPronouns(state,value){if(!courierPronouns.includes(value))return false;ensurePostOffice(state).courierPronouns=value;return true;}
 export function setPostComposer(state,key,value){const v=active(state);if(!v||!(key==='place'&&place(value)||key==='recipient'&&recipient(value)))return false;v.composer[key]=value;return true;}
 export function clauseText(id){if(!validClause(id))return 'Unknown instruction';if(id==='there')return 'Go there';if(id.startsWith('give:'))return `Give the parcel to ${recipients.find(r=>r.id===id.slice(5)).name}`;return `${id.startsWith('then:')?'Then go':'Go'} to ${places.find(p=>p.id===id.split(':')[1]).name}`;}
 function edited(v){v.revisions++;v.playback=playback(v);}
@@ -80,7 +84,7 @@ export function packPostTogether(state){const v=active(state);if(!v||v.packing.p
 export function restartPostRoute(state){const v=active(state);if(!v)return false;v.playback=playback(v);return true;}
 function recordCheck(v){const r=v.playback;v.checks.push({clauses:[...v.clauses],status:r.status,cursor:r.cursor,location:r.location,referent:r.referent,feedback:r.feedback,support:clone(v.support),reading:v.reading});v.checks=v.checks.slice(-24);}
 export function stepPostRoute(state){
- const v=active(state);if(!v)return false;const r=v.playback;
+ const v=active(state);if(!v||rivalBlocks(v))return false;const r=v.playback;
  if(!v.packing.packed){r.feedback='Pack the parcel at the sorting counter first. You can count it or choose Pack together.';return true;}
  if(['clarify','ended','delivered'].includes(r.status))return false;
  if(r.cursor>=v.clauses.length){r.status='ended';r.feedback=v.clauses.length?'Your message has ended. Add an instruction to give the parcel to the requested recipient, or revise the route.':'Add an instruction to tell the courier where to go.';recordCheck(v);return true;}

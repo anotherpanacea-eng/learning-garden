@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {deliveries,recipients,places} from '../dist/post-office-content.mjs';
-import {ensurePostOffice,startPostOffice,appendPostClause,packPostTogether,stepPostRoute,setPostComposer,setPostPackingInput,submitPostPacking,setPostReading,setPostSupport} from '../dist/post-office-core.mjs';
+import {ensurePostOffice,startPostOffice,appendPostClause,packPostTogether,stepPostRoute,setPostComposer,setPostCourierPortrait,setPostPackingInput,submitPostPacking,setPostReading,setPostSupport} from '../dist/post-office-core.mjs';
 import {postOfficePage,postOfficeNotes,postMap} from '../dist/post-office-ui.mjs';
 import {ensureGarden} from '../dist/garden-core.mjs';
 import {freshState,STORAGE_KEY,recommendations} from '../dist/core.mjs';
@@ -17,7 +17,7 @@ for(const order of deliveries){
  if(m.kind==='subtract'){check(html.includes('Not sent'),'reserved objects labelled separately');check(html.includes('Ready for the parcel'),'remaining objects distinct');}
  check(html.includes(order.request),'original request remains beside working game');
  for(const r of recipients)check(html.includes(`${r.emoji} ${r.name}`),'each recipient location has text and a picture');
- for(const avatar of ['fern','reed','sky']){s.garden.avatar=avatar;check(postMap(s,v).includes(`data-courier-avatar="${avatar}"`),'courier uses chosen explorer portrait');}
+ for(const avatar of ['fern','reed','sky']){setPostCourierPortrait(s,avatar);check(postMap(s,v).includes(`data-courier-avatar="${avatar}"`),'courier uses independently chosen portrait');}
  setPostPackingInput(s,'3');submitPostPacking(s);let notes=postOfficeNotes(s);
  check(notes.includes('3 (another look)'),'notes retain readable raw answer and outcome');check(!notes.includes('[object Object]'),'notes never stringify attempts as objects');
  packPostTogether(s);appendPostClause(s,`go:${order.destination}`);appendPostClause(s,`give:${order.recipient}`);stepPostRoute(s);
