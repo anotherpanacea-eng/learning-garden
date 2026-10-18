@@ -2,6 +2,7 @@ import {entrances,storyNodes} from './story-content.mjs';
 import {helpers,acceptsAnswer,cleanHelper} from './help-content.mjs';
 import {guides,avatars} from './companions.mjs';
 import {parisPlan,isParisExploration,validateParisRoute,priorParisStorySeen} from './paris-core.mjs';
+import {cleanOrder,orderValue} from './paris-pack-core.mjs';
 export const entranceById=id=>entrances.find(e=>e.id===id);
 const pairKey=p=>[...p].sort((a,b)=>a-b).join('x');
 const ownNode=(id,entrance)=>storyNodes[id]?.entrance===entrance;
@@ -46,7 +47,7 @@ export function ensureGarden(state){
   const route=isParisExploration(v)?v.route:null,allowed=id=>route?route.includes(id):ownNode(id,v.entrance)&&!id.startsWith('paris-explore-');
   v.recorded=Array.isArray(v.recorded)?v.recorded.filter(allowed):[];
   if(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts))v.drafts={};
-  for(const [id,d] of Object.entries(v.drafts)){if(!allowed(id)||!cleanDraft(d))delete v.drafts[id];else{cleanHelper(d,id);cleanReadingRecord(d,storyNodes[id],false,g.seen);}}
+  for(const [id,d] of Object.entries(v.drafts)){if(!allowed(id)||!cleanDraft(d))delete v.drafts[id];else{cleanHelper(d,id);cleanReadingRecord(d,storyNodes[id],false,g.seen);if(storyNodes[id].kind==='order')d.order=cleanOrder(d.order);}}
   let id=route?route[0]:entranceById(v.entrance).start;const seen=new Set();
   while(id&&v.recorded.includes(id)&&!seen.has(id)){seen.add(id);id=route?route[route.indexOf(id)+1]:storyNodes[id].next;}
   v.node=id;v.finished=!id;return true;
@@ -66,7 +67,7 @@ export function ensureGarden(state){
 export const currentVisit=s=>ensureGarden(s).visits.find(v=>v.id===s.garden.current)||null;
 export function startVisit(state,entrance,options){
  const g=ensureGarden(state),e=entranceById(entrance);if(!e)return null;
- const plan=options===undefined?null:entrance==='paris'&&options&&typeof options==='object'?parisPlan(state,options.destination,options.variant??'auto'):null;
+ const plan=options===undefined?null:entrance==='paris'&&options&&typeof options==='object'?parisPlan(state,options.destination,options.variant??'auto',options.storyId??null):null;
  if(options!==undefined&&!plan)return null;
  let n=1;while(g.visits.some(v=>v.id===`visit-${n}`))n++;
  const v={id:`visit-${n}`,entrance,node:e.start,recorded:[],drafts:{},finished:false,createdAt:new Date().toISOString()};
@@ -77,6 +78,7 @@ export function resumeVisit(state,id){const g=ensureGarden(state);if(!g.visits.s
 export function storyDraft(state){
  const v=currentVisit(state);if(!v||v.finished)return null;const n=storyNodes[v.node];
  if(!v.drafts[n.id])v.drafts[n.id]={attempts:[],input:'',choice:null,hinted:false,revealed:false,method:null,reading:'unobserved',familiar:state.garden.seen.includes(n.id),knownFact:(n.facts||[]).some(p=>state.broad?.seenFacts?.includes(pairKey(p))),priorExposureUnknown:!!state.broad?.legacyExposureUnknown};
+ if(n.kind==='order')v.drafts[n.id].order=cleanOrder(v.drafts[n.id].order);
  if(readingNode(n)){
   const d=v.drafts[n.id];
   if(v.paris){
@@ -113,12 +115,33 @@ export function noteGardenFactExposure(state,pair,except=null){
   if(`${v.id}:${id}`!==except&&(storyNodes[id].facts||[]).some(p=>pairKey(p)===key))d.knownFact=true;
  }
 }
+function recordStoryAttempt(n,d,value){
+ d.attempts.push(value);d.error='';return acceptsAnswer(n,value);
+}
 export function submitStory(state,value){
  const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);
- if(!n||d.helper?.open||n.type!=='task'||!Number.isFinite(value))return false;
+ if(!n||!d||d.helper?.open||n.type!=='task'||n.kind==='order'||!Number.isFinite(value))return false;
  if(n.kind==='choice'&&(!Number.isInteger(value)||value<0||value>=n.choices.length))return false;
  if(n.kind==='number'&&(!Number.isInteger(value)||value<0))return false;
- d.attempts.push(value);d.error='';return acceptsAnswer(n,value);
+ return recordStoryAttempt(n,d,value);
+}
+export function editStoryOrder(state,action,index){
+ const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);
+ if(!n||!d||v.finished||n.type!=='task'||n.kind!=='order'||d.helper?.open||d.attempts.some(a=>acceptsAnswer(n,a)))return false;
+ if(action==='clear'){d.order=[];return true;}
+ if(!Number.isInteger(index)||index<0||index>2)return false;
+ if(action==='add'){
+  if(d.order.length>=3||d.order.includes(index))return false;
+  d.order.push(index);return true;
+ }
+ if(action==='remove'&&index<d.order.length){d.order.splice(index,1);return true;}
+ return false;
+}
+export function submitStoryOrder(state){
+ const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);
+ if(!n||!d||v.finished||n.type!=='task'||n.kind!=='order'||d.helper?.open||d.attempts.some(a=>acceptsAnswer(n,a)))return false;
+ const value=orderValue(d.order);if(value===null)return false;
+ return recordStoryAttempt(n,d,value);
 }
 export function finishStoryNode(state,skip=false){
  const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);if(!n||!d||v.recorded.includes(n.id))return false;

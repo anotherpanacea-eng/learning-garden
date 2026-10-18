@@ -1,4 +1,4 @@
-Third-party curriculum data
+Third-party material
 
 Marble Skill Taxonomy v1
 Copyright Generative Spark, Inc. (Marble)
@@ -19,3 +19,20 @@ age suffixes from topic names are described in the data and README.md.
 No curriculum standards text is included. The application MIT license does
 not supersede these licenses. The original stories and activities are authored
 for this project.
+
+The Paris puppet-post pack references Marble topic mt_VEwM7ClYYE for a
+partial connection to arranging story events. Its central-message and full
+retelling evidence are not assessed by this activity. The pack's story text
+and its connection description are original.
+
+Jane application code
+Copyright (c) 2026 Kent Langley and Landon
+https://github.com/kentlangley/Jane
+Pinned source: 0d40eb8ee86f88a63a17391e361bdd8d9c9014e4
+
+The nonempty, unique string-list validation in dist/paris-pack-core.mjs is
+adapted from the strs helper in Jane's publish-lessons.mjs under the MIT
+license. The full copyright and permission notice is distributed in
+dist/jane-license.txt and linked from About & privacy. Jane's lesson-pack
+interface and ordering convention were also studied. No Jane lesson prose,
+glossary, learner records, placement, or mastery implementation is included.

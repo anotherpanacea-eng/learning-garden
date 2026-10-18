@@ -1,16 +1,17 @@
+import {ORDER_PERMUTATIONS} from '../dist/paris-pack-core.mjs';
 import assert from 'node:assert/strict';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {parisDestinations,parisStories,parisLibraryNodes} from '../dist/paris-library.mjs';
 import {parisPlan,validateParisRoute} from '../dist/paris-core.mjs';
 import {storyNodes} from '../dist/story-content.mjs';
-import {ensureGarden,startVisit,currentVisit,storyDraft,noteStorySeen,submitStory,finishStoryNode,useStoryReadingTool,resumeVisit} from '../dist/garden-core.mjs';
+import {ensureGarden,startVisit,currentVisit,storyDraft,noteStorySeen,submitStory,finishStoryNode,useStoryReadingTool,resumeVisit,editStoryOrder,submitStoryOrder} from '../dist/garden-core.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const fresh=()=>{const s=freshState();ensureGarden(s);return s;};
 const json=x=>JSON.stringify(x);
 function begin(s,d='bookstall',v='auto'){const visit=startVisit(s,'paris',{destination:d,variant:v});storyDraft(s);noteStorySeen(s);return visit;}
-function answer(s,{reading='independent',retry=false,help=false}={}){const n=storyNodes[currentVisit(s).node],d=storyDraft(s);noteStorySeen(s);if(help)useStoryReadingTool(s,'audio');if(retry)submitStory(s,(n.answer+1)%n.choices.length);submitStory(s,n.answer);d.method='worked';d.reading=reading;return finishStoryNode(s);}
+function answer(s,{reading='independent',retry=false,help=false}={}){const n=storyNodes[currentVisit(s).node],d=storyDraft(s);noteStorySeen(s);if(help)useStoryReadingTool(s,'audio');const attempt=value=>{if(n.kind==='order'){editStoryOrder(s,'clear');for(const card of ORDER_PERMUTATIONS[value])editStoryOrder(s,'add',card);return submitStoryOrder(s);}return submitStory(s,value);};if(retry)attempt((n.answer+1)%n.choices.length);attempt(n.answer);d.method='worked';d.reading=reading;return finishStoryNode(s);}
 function complete(s,opts={}){const first=answer(s,opts);answer(s);finishStoryNode(s);return first;}
-check(parisDestinations.length===3&&parisStories.length===6&&Object.keys(parisLibraryNodes).length===36,'three destinations, six authored stories, three variants and two questions');
+check(parisDestinations.length===3&&parisStories.length===7&&Object.keys(parisLibraryNodes).length===42,'three destinations, seven authored stories, three variants and two questions');
 for(const destination of parisDestinations){
  const s=fresh(),p=parisPlan(s,destination.id);check(p.variant===2&&p.destination===destination.id&&p.route.length===3&&Object.isFrozen(p)&&Object.isFrozen(p.route),'middle variant and immutable plan');
  for(const variant of [1,2,3]){const v=begin(s,destination.id,variant);check(validateParisRoute(v)&&v.paris.variant===variant,'every manual passage length is available');const route=[...v.route];complete(s);check(v.finished&&json(v.recorded)===json(route),'frozen route completes two tasks and postcard');}

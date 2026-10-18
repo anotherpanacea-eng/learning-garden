@@ -1,3 +1,5 @@
+import {compileParisPacks} from './paris-pack-core.mjs';
+import {parisPacks} from './packs/index.mjs';
 // Original English story errands in an imaginary Paris. No travel knowledge is needed.
 export const parisDestinations = [
   {id:'bookstall',title:'Lucie’s bookstall',description:'Unpack unusual books and follow little notes.',symbol:'📚'},
@@ -89,9 +91,9 @@ const helperTemplates = {
   sequence:{id:'paris-library-help-sequence',title:'Follow the order words',lesson:'First, next and last can guide us through the order of actions.',passage:'First, Ren washed an apple. Next, Ren cut it. Last, Ren put the pieces in a bowl.',model:{type:'text',segments:['First, Ren washed an apple.','Next, Ren cut it.','Last, Ren put the pieces in a bowl.'],focus:0,clue:'Follow each action from First to Next to Last.'},kind:'choice',prompt:'Which order matches this passage?',choices:['Wash → cut → put in a bowl','Cut → put in a bowl → wash'],answer:0,explanation:'The order words show washing first, cutting next, and putting the pieces in a bowl last.'}
 };
 
-export const parisStories = stories.map(s=>({id:s.id,destination:s.destination,title:s.title,variants:Object.fromEntries([1,2,3].map(v=>[v,[1,2].map(q=>`paris-explore-${s.id}-${v}-${q}`)]))}));
-export const parisLibraryNodes = {};
-export const parisLibraryHelpers = {};
+const baseStories = stories.map(s=>({id:s.id,destination:s.destination,title:s.title,variants:Object.fromEntries([1,2,3].map(v=>[v,[1,2].map(q=>`paris-explore-${s.id}-${v}-${q}`)]))}));
+const baseNodes = {};
+const baseHelpers = {};
 for(const story of stories){
   for(const variant of [1,2,3]){
     const passageId=`paris-explore-${story.id}-passage-${variant}`;
@@ -99,7 +101,7 @@ for(const story of stories){
     story.tasks.forEach((task,index)=>{
       const {helper,...fields}=task;
       const id=ids[index];
-      parisLibraryNodes[id]={
+      baseNodes[id]={
         id,entrance:'paris',type:'task',subject:'Reading',practiceOnly:true,
         parisDestination:story.destination,parisStory:story.id,parisVariant:variant,
         passageId,readingText:story.passages[variant],
@@ -107,7 +109,11 @@ for(const story of stories){
         guide:'{guide} says, “We can take our time and return to the words whenever we like.”',
         kind:'choice',...fields,next:index===0?ids[1]:'paris-postcard'
       };
-      parisLibraryHelpers[id]=helperTemplates[helper];
+      baseHelpers[id]=helperTemplates[helper];
     });
   }
 }
+const compiled=compileParisPacks(parisPacks,{stories:baseStories,nodes:baseNodes,helpers:baseHelpers});
+export const parisStories=compiled.stories;
+export const parisLibraryNodes=compiled.nodes;
+export const parisLibraryHelpers=compiled.helpers;

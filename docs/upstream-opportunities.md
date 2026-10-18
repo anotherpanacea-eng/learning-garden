@@ -4,9 +4,9 @@ Checked 2026-10-18. These are implementation opportunities, not completed integr
 
 ## Current reuse
 
-The app already bundles a pinned Marble math-map subset and its prerequisite relationships, with attribution in the app, README, and NOTICE. Water Lab missions link to Marble's external application. The Ecosystem expedition remains planned. The Paris stories, route selector, and reading-support controls are original; they do not yet import Jane code or connect their reading targets to Marble topic IDs.
+The app already bundles a pinned Marble math-map subset and its prerequisite relationships, with attribution in the app, README, and NOTICE. Water Lab missions link to Marble's external application. The Ecosystem expedition remains planned. The Paris stories, route selector, and reading-support controls are original. The new puppet-post pack has a partial connection to Marble’s story-sequence topic, with central message and full retelling left unobserved.
 
-Jane is currently a design reference. No Jane source, lesson text, or glossary has been incorporated. The following opportunities make that reference actionable.
+Jane now contributes a small MIT-licensed string-list validation adaptation to the story-pack compiler, with its full notice distributed in `dist/jane-license.txt`. Its reviewed-pack and ordered-items authoring conventions informed the first pack. No Jane lesson text or glossary has been incorporated. See [story packs](story-packs.md) and [spec 12](specs/12-reviewed-story-packs.md). Other opportunities below remain proposals.
 
 ## Useful overlaps
 
@@ -22,10 +22,10 @@ Candidate English topics found in the pinned Marble data include `mt_HrgDjxcWvf`
 
 ## A practical next increment
 
-The strongest next candidate is the story-pack extension: inspect Jane's example/publisher, add one reviewed Paris errand with a different response format, and verify that it appears without resetting existing visits. This directly addresses the finite six-story library. A later authoring workflow could use a parent-selected private summary, but today's app has no automated export to an assistant, scheduled authoring, or learner-data upload. The user has not requested such a schedule or transfer.
+The first story-pack extension is implemented: Jane's example/publisher informed one reviewed rooftop errand with ordering cards, added without resetting existing visits. This directly addresses the finite six-story library. A later authoring workflow could use a parent-selected private summary, but today's app has no automated export to an assistant, scheduled authoring, or learner-data upload. The user has not requested such a schedule or transfer.
 
 ## Source and license boundaries
 
-Jane reviewed revision: `0d40eb8ee86f88a63a17391e361bdd8d9c9014e4`. Its [license map](https://github.com/kentlangley/Jane/blob/0d40eb8ee86f88a63a17391e361bdd8d9c9014e4/LICENSING.md) identifies application code as MIT, docs/lesson packs as CC BY-SA 4.0, and taxonomy-derived data/text under their respective ODbL/CC BY-SA licenses. Use the actual path's license and preserve notices when incorporating material. These notes link to upstream work and propose adaptations; no upstream files are copied here.
+Jane reviewed revision: `0d40eb8ee86f88a63a17391e361bdd8d9c9014e4`. Its [license map](https://github.com/kentlangley/Jane/blob/0d40eb8ee86f88a63a17391e361bdd8d9c9014e4/LICENSING.md) identifies application code as MIT, docs/lesson packs as CC BY-SA 4.0, and taxonomy-derived data/text under their respective ODbL/CC BY-SA licenses. Use the actual path's license and preserve notices when incorporating material. The adapted publisher helper retains its MIT notice in the source and deployed assets; other upstream documents remain references.
 
 Marble reviewed revision: `96a7933754af672e1bfdbf7ecb05c325860c6e0d`, the same revision already used by this app. Marble Skill Taxonomy (v1) · © Generative Spark, Inc. (Marble) · https://withmarble.com · licensed under ODbL 1.0 (database) and CC BY-SA 4.0 (content). See [NOTICE](../NOTICE). The open taxonomy does not establish a source-reuse license for separate hosted experiments; retain explicit links to Water Lab/Ecosystem unless their code and license are independently available.

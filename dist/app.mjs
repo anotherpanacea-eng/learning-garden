@@ -1,3 +1,4 @@
+import {orderValue} from './paris-pack-core.mjs';
 import {ensureForage} from './forage-core.mjs';
 import {foragePage,forageNotes,bindForage,foragePairsShown} from './forage-ui.mjs';
 import {ensureFacts} from './facts-core.mjs';
@@ -12,7 +13,7 @@ import {helpers,helperLimit} from './help-content.mjs';
 import {helpPage} from './help-ui.mjs';
 import {guides,avatars} from './companions.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
-import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool} from './garden-core.mjs';
+import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool,editStoryOrder,submitStoryOrder} from './garden-core.mjs';
 import {gardenHome,parisLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding,gardenNotes} from './garden-ui.mjs';
 import {areas} from './broad-content.mjs';
 import {ensureBroad,areaById,itemById,beginTrail,trailQuestion,familiarity,noteBroadExposure,noteLegacyExposure,makeBroadObservation,recordTrail} from './broad-core.mjs';
@@ -141,7 +142,7 @@ function render(){
   else if(root==='companions')html=companionPicker(state);
   else if(root==='storm'){
     const visit=currentVisit(state);
-    if(slug==='choose'){const parts=hash.slice(1).split('/');const place=parts[3],variant=parts[4];html=storyHub(state,detail,detail==='paris'&&place?{destination:place,variant:variant==='auto'?'auto':Number(variant)}:null);}
+    if(slug==='choose'){const parts=hash.slice(1).split('/');const place=parts[3],variant=parts[4];html=storyHub(state,detail,detail==='paris'&&place?{destination:place,variant:variant==='auto'?'auto':Number(variant),storyId:parts[5]||null}:null);}
     else if((slug==='play'||slug==='end')&&visit){
       if(visit.finished)html=storyEnding(state);
       else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
@@ -209,9 +210,9 @@ function exposeStoryFacts(node,except){
   if(fact&&fact.every(Number.isFinite)&&((fact[0]===pair[0]&&fact[1]===pair[1])||(fact[0]===pair[1]&&fact[1]===pair[0])))draft.exposed=true;
  }
 }
-function requestParis(destination,variant='auto'){
- const options={destination,variant},v=currentVisit(state);
- if(v&&!v.finished){navigate(`#storm/choose/paris/${destination}/${variant}`);return;}
+function requestParis(destination,variant='auto',storyId=null){
+ const options={destination,variant,storyId},v=currentVisit(state);
+ if(v&&!v.finished){navigate(`#storm/choose/paris/${destination}/${variant}${storyId?`/${storyId}`:''}`);return;}
  if(startVisit(state,'paris',options)){save();navigate('#storm/play');}
 }
 function requestPath(id){
@@ -226,8 +227,9 @@ function finishStory(skip=false){
 }
 function bindStory(){
  document.querySelectorAll('[data-start-path]').forEach(b=>b.onclick=()=>requestPath(b.dataset.startPath));
+ document.querySelectorAll('[data-paris-pack-story]').forEach(b=>b.onclick=()=>{const story=b.dataset.parisPackStory,value=$(`#paris-pack-length-${story}`).value;requestParis(b.dataset.parisPackPlace,value==='auto'?'auto':Number(value),story);});
  document.querySelectorAll('[data-paris-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.parisDestination,value=$(`#paris-length-${place}`).value;requestParis(place,value==='auto'?'auto':Number(value));});
- document.querySelectorAll('[data-new-visit]').forEach(b=>b.onclick=()=>{const options=b.dataset.parisPlace?{destination:b.dataset.parisPlace,variant:b.dataset.parisVariant==='auto'?'auto':Number(b.dataset.parisVariant)}:undefined;if(startVisit(state,b.dataset.newVisit,options)){save();navigate('#storm/play');}});
+ document.querySelectorAll('[data-new-visit]').forEach(b=>b.onclick=()=>{const options=b.dataset.parisPlace?{destination:b.dataset.parisPlace,variant:b.dataset.parisVariant==='auto'?'auto':Number(b.dataset.parisVariant),storyId:b.dataset.parisStory||null}:undefined;if(startVisit(state,b.dataset.newVisit,options)){save();navigate('#storm/play');}});
  document.querySelectorAll('[data-resume-visit]').forEach(b=>b.onclick=()=>{if(resumeVisit(state,b.dataset.resumeVisit)){save();navigate(currentVisit(state).finished?'#storm/end':'#storm/play');}});
  document.querySelectorAll('[data-guide]').forEach(b=>b.onclick=()=>{if(guides.some(g=>g.id===b.dataset.guide)){state.garden.guide=b.dataset.guide;save();render();$(`[data-guide="${state.garden.guide}"]`).focus();}});
  document.querySelectorAll('[data-avatar]').forEach(b=>b.onclick=()=>{if(avatars.some(a=>a.id===b.dataset.avatar)){state.garden.avatar=b.dataset.avatar;save();render();$(`[data-avatar="${state.garden.avatar}"]`).focus();}});
@@ -246,9 +248,18 @@ function bindStory(){
  $('#help-explain')?.addEventListener('click',()=>{hx.revealed=true;helpRender('.solution');});
  $('#help-return')?.addEventListener('click',()=>{hx.open=false;helpRender('#story-help');});
  $('#help-skip')?.addEventListener('click',()=>{hx.open=false;finishStory(true);});
+ const changeOrder=(action,index)=>{
+  const node=storyNodes[currentVisit(state)?.node],old=storyDraft(state)?.order||[],removed=action==='remove'?old[index]:null;
+  if(!editStoryOrder(state,action,index))return;save();render();
+  const order=storyDraft(state).order;
+  focusElement(order.length===3?'#order-submit':`[data-order-add="${removed??node.displayOrder.find(i=>!order.includes(i))}"]`);
+ };
+ document.querySelectorAll('[data-order-add]').forEach(b=>b.onclick=()=>changeOrder('add',Number(b.dataset.orderAdd)));
+ document.querySelectorAll('[data-order-remove]').forEach(b=>b.onclick=()=>changeOrder('remove',Number(b.dataset.orderRemove)));
+ $('#order-clear')?.addEventListener('click',()=>changeOrder('clear'));
  $('#story-answer')?.addEventListener('input',e=>{d.input=e.target.value;d.error='';save();});
  document.querySelectorAll('[data-story-choice]').forEach(b=>b.onclick=()=>{d.choice=Number(b.dataset.storyChoice);d.error='';save();render();$(`[data-story-choice="${d.choice}"]`).focus();});
- $('#story-answer-form')?.addEventListener('submit',e=>{e.preventDefault();const n=storyNodes[currentVisit(state).node],value=n.kind==='choice'?d.choice:numericAnswer($('#story-answer').value);if(value===null){d.error=n.kind==='choice'?'Choose an idea to try, or leave this question for now.':'Write a whole number, or leave this question for now.';save();render();($('#story-answer')||$('[data-story-choice]')).focus();return;}submitStory(state,value);save();render();focusElement('#story-feedback');});
+ $('#story-answer-form')?.addEventListener('submit',e=>{e.preventDefault();const n=storyNodes[currentVisit(state).node];if(n.kind==='order'){if(orderValue(d.order)===null){d.error='Place all three cards before trying this order.';save();render();focusElement('#story-error');return;}submitStoryOrder(state);save();render();focusElement('#story-feedback');return;}const value=n.kind==='choice'?d.choice:numericAnswer($('#story-answer').value);if(value===null){d.error=n.kind==='choice'?'Choose an idea to try, or leave this question for now.':'Write a whole number, or leave this question for now.';save();render();($('#story-answer')||$('[data-story-choice]')).focus();return;}submitStory(state,value);save();render();focusElement('#story-feedback');});
  $('#story-hint')?.addEventListener('click',()=>{d.hinted=true;save();render();focusElement('.hint');});
  $('#story-explain')?.addEventListener('click',()=>{d.revealed=true;save();render();focusElement('.solution');});
  document.querySelectorAll('[data-story-method]').forEach(b=>b.onclick=()=>{d.method=b.dataset.storyMethod;save();render();$('#story-next')?.focus();});

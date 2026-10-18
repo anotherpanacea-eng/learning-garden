@@ -35,15 +35,15 @@ function suggestion(state,destination){
  if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Keep the longer passages for now, or choose another length whenever you like.':'Two different new stories were answered on a first try without recorded help. A little more text is available to try; you can choose any length.'};
  return {variant:base,reason:'Keep exploring with this amount of text. Choose a different length whenever you like.'};
 }
-export function parisPlan(state,destination,variant='auto'){
- if(!parisDestinations.some(d=>d.id===destination)||variant!=='auto'&&![1,2,3].includes(variant))return null;
+export function parisPlan(state,destination,variant='auto',storyId=null){
+ if(!parisDestinations.some(d=>d.id===destination)||variant!=='auto'&&![1,2,3].includes(variant)||storyId!==null&&(typeof storyId!=='string'||!parisStories.some(s=>s.id===storyId&&s.destination===destination)))return null;
  const g=state?.garden||{},seen=Array.isArray(g.seen)?g.seen:[],visits=Array.isArray(g.visits)?g.visits:[];
  const stories=parisStories.filter(s=>s.destination===destination);
  const count=s=>{
   const displayed=visits.filter(v=>validateParisRoute(v)&&v.paris.storyId===s.id&&(v.paris.displayed===true||v.recorded?.includes(v.route[0]))).length;
   return Math.max(displayed,seen.some(id=>Object.values(s.variants).flat().includes(id))?1:0);
  };
- const story=stories.map((s,i)=>({s,i,n:count(s)})).sort((a,b)=>a.n-b.n||a.i-b.i)[0]?.s;if(!story)return null;
+ const story=storyId===null?stories.map((s,i)=>({s,i,n:count(s)})).sort((a,b)=>a.n-b.n||a.i-b.i)[0]?.s:stories.find(s=>s.id===storyId);if(!story)return null;
  const automatic=suggestion(state,destination),chosen=variant==='auto'?automatic.variant:variant;
  const reason=variant==='auto'?automatic.reason:'You chose this passage length. Every length stays available.';
  return Object.freeze({destination,storyId:story.id,variant:chosen,reason,route:Object.freeze([...story.variants[chosen],'paris-postcard'])});

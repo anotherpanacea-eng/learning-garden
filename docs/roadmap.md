@@ -4,7 +4,7 @@ This is the delivery roadmap for the next six increments. It is a plan for this 
 
 ## Teaching direction
 
-Check [Jane and Marble opportunities](upstream-opportunities.md) before building each learning capability. The strongest next candidate after Paris exploration is a reviewed story pack and another response format, using Jane's pack/publisher work where it fits. The document distinguishes current reuse from proposed extensions and records upstream revisions.
+Check [Jane and Marble opportunities](upstream-opportunities.md) before building each learning capability. The first reviewed story pack and tap-to-order response format are implemented, using Jane's pack/publisher conventions and a small validation adaptation. The document distinguishes current reuse from proposed extensions and records upstream revisions.
 
 Begin with a purpose worth exploring, build an idea through a controllable visual explanation, invite a change or prediction, and offer a new situation with less support. Children can pause, replay, skip familiar steps, choose another representation, or explore with a grown-up. No timer, grades, streaks, placement claim, or compulsory sequence. Animations explain a change and stay under the learner's control; reduced-motion and keyboard/touch alternatives work throughout.
 
@@ -50,3 +50,5 @@ Implemented: [Orchard map hunts](specs/09-orchard-map-hunts.md) give new gatheri
 Implemented: [The Paris Postcard](specs/10-paris-reading-visit.md) adds six English connected-text reading targets, sentence focus and optional local narration, smaller text examples, rereading/evidence practice, and an unscored postcard/retelling invitation. This is guided practice, not a reading-level assessment.
 
 Implemented: [Paris exploration](specs/11-paris-exploration.md) adds three destinations, six original story errands at three passage lengths, local practice suggestions, open manual choices, and persistent short-errand routes. All content is authored; familiar stories are offered as rereading.
+
+Implemented: [Reviewed story packs](specs/12-reviewed-story-packs.md) adds a rooftop puppet-show pack, tap-to-place ordering, validation before publication, scoped Marble sequencing connections, and retained Jane MIT attribution. [Authoring guide](story-packs.md).
