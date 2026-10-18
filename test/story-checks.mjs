@@ -6,8 +6,8 @@ import {guides,avatars} from '../dist/companions.mjs';
 import {ensureGarden,currentVisit,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode} from '../dist/garden-core.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const state=()=>{const s=freshState();ensureBroad(s);ensureGarden(s);return s;};
-check(entrances.length===3&&Object.keys(storyNodes).length===9,'bounded story');
-check(JSON.stringify(Object.values(storyNodes).filter(n=>n.type==='task').map(n=>n.answer))==='[0,1,2,12,2,7]','reviewed answer keys');
+check(entrances.length===4&&Object.keys(storyNodes).length===13,'bounded story');
+check(JSON.stringify(Object.values(storyNodes).filter(n=>n.type==='task'&&n.entrance!=='cafe').map(n=>n.answer))==='[0,1,2,12,2,7]','reviewed answer keys');
 for(const e of entrances){
  let id=e.start;const seen=new Set();let tasks=0,projects=0;
  while(id){const n=storyNodes[id];check(n&&!seen.has(id)&&n.entrance===e.id,'own noncyclic branch');seen.add(id);
@@ -15,12 +15,12 @@ for(const e of entrances){
   else{projects++;check(n.answer===undefined,'project has no answer key');}
   id=n.next;
  }
- check(tasks===2&&projects===1&&e.ending.project,'independent ending with offscreen project');
+ check(tasks===(e.id==='cafe'?3:2)&&projects===1&&e.ending.project,'independent ending with offscreen project');
  const s=state();startVisit(s,e.id);
  while(!currentVisit(s).finished){const n=storyNodes[currentVisit(s).node];const d=storyDraft(s);noteStorySeen(s);if(n.type==='task'){submitStory(s,n.answer);d.method='worked';d.reading='independent';}else d.designChoice='Synthetic design';check(!!finishStoryNode(s),'node completes');}
- check(s.garden.observations.length===3&&currentVisit(s).finished,'whole own path finishes');
+ check(s.garden.observations.length===(e.id==='cafe'?4:3)&&currentVisit(s).finished,'whole own path finishes');
  const project=s.garden.observations.at(-1);check(project.status==='invitation'&&project.correct===null&&!project.independent&&!project.freshEvidence,'project not evidence of performance');
- check(!finishStoryNode(s)&&s.garden.observations.length===3,'finished node not duplicated');
+ check(!finishStoryNode(s)&&s.garden.observations.length===(e.id==='cafe'?4:3),'finished node not duplicated');
  const first=currentVisit(s).id;startVisit(s,e.id);check(storyDraft(s).familiar,'revisit remembers encounter');
  check(resumeVisit(s,first)&&currentVisit(s).finished,'ending resumes');
 }

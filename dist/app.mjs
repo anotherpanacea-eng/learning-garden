@@ -1,6 +1,8 @@
+import {helpers,helperLimit} from './help-content.mjs';
+import {helpPage} from './help-ui.mjs';
 import {guides,avatars} from './companions.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
-import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode} from './garden-core.mjs';
+import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp} from './garden-core.mjs';
 import {gardenHome,companionLink,companionPicker,storyHub,storyPage,storyEnding,gardenNotes} from './garden-ui.mjs';
 import {areas} from './broad-content.mjs';
 import {ensureBroad,areaById,itemById,beginTrail,trailQuestion,familiarity,noteBroadExposure,noteLegacyExposure,makeBroadObservation,recordTrail} from './broad-core.mjs';
@@ -116,7 +118,7 @@ function render(){
     if(slug==='choose')html=storyHub(state,detail);
     else if((slug==='play'||slug==='end')&&visit){
       if(visit.finished)html=storyEnding(state);
-      else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=storyPage(state,draft);}
+      else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
     }else html=storyHub(state);
   }
   else if(root==='numbers')html=broadHome(state,graph,gardenArt);
@@ -192,6 +194,18 @@ function bindStory(){
  document.querySelectorAll('[data-guide]').forEach(b=>b.onclick=()=>{if(guides.some(g=>g.id===b.dataset.guide)){state.garden.guide=b.dataset.guide;save();render();$(`[data-guide="${state.garden.guide}"]`).focus();}});
  document.querySelectorAll('[data-avatar]').forEach(b=>b.onclick=()=>{if(avatars.some(a=>a.id===b.dataset.avatar)){state.garden.avatar=b.dataset.avatar;save();render();$(`[data-avatar="${state.garden.avatar}"]`).focus();}});
  const d=currentVisit(state)?.finished?null:storyDraft(state);
+ $('#story-help')?.addEventListener('click',()=>{const h=openStoryHelp(state);if(h)exposeStoryFacts(h);save();render();main.focus();window.scrollTo(0,0);});
+ const hx=d?.helper,h=helpers[currentVisit(state)?.node];
+ const helpRender=selector=>{save();render();if(selector)focusElement(selector);};
+ $('#help-answer')?.addEventListener('input',e=>{hx.input=e.target.value;hx.error='';save();});
+ document.querySelectorAll('[data-help-choice]').forEach(b=>b.onclick=()=>{hx.choice=Number(b.dataset.helpChoice);hx.error='';helpRender(`[data-help-choice="${hx.choice}"]`);});
+ document.querySelectorAll('[data-help-spot]').forEach(b=>b.onclick=()=>{hx.modelUsed=true;hx.spotlight=Number(b.dataset.helpSpot);helpRender(`[data-help-spot="${hx.spotlight}"]`);});
+ $('#help-step')?.addEventListener('click',()=>{hx.modelUsed=true;hx.steps=Math.min(helperLimit(h),hx.steps+1);helpRender('.model-readout');});
+ $('#help-recount')?.addEventListener('click',()=>{hx.steps=0;helpRender('.model-readout');});
+ $('#help-answer-form')?.addEventListener('submit',e=>{e.preventDefault();const value=h.kind==='choice'?hx.choice:numericAnswer($('#help-answer').value);if(value===null){hx.error='Choose an idea or write a whole number. You can also return without answering.';helpRender('#help-error');return;}submitStoryHelp(state,value);helpRender('#help-feedback');});
+ $('#help-explain')?.addEventListener('click',()=>{hx.revealed=true;helpRender('.solution');});
+ $('#help-return')?.addEventListener('click',()=>{hx.open=false;helpRender('#story-help');});
+ $('#help-skip')?.addEventListener('click',()=>{hx.open=false;finishStory(true);});
  $('#story-answer')?.addEventListener('input',e=>{d.input=e.target.value;d.error='';save();});
  document.querySelectorAll('[data-story-choice]').forEach(b=>b.onclick=()=>{d.choice=Number(b.dataset.storyChoice);d.error='';save();render();$(`[data-story-choice="${d.choice}"]`).focus();});
  $('#story-answer-form')?.addEventListener('submit',e=>{e.preventDefault();const n=storyNodes[currentVisit(state).node],value=n.kind==='choice'?d.choice:numericAnswer($('#story-answer').value);if(value===null){d.error=n.kind==='choice'?'Choose an idea to try, or leave this question for now.':'Write a whole number, or leave this question for now.';save();render();($('#story-answer')||$('[data-story-choice]')).focus();return;}submitStory(state,value);save();render();focusElement('#story-feedback');});

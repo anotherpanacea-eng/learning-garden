@@ -1,4 +1,5 @@
 import {entrances,storyNodes} from './story-content.mjs';
+import {helpers,acceptsAnswer,cleanHelper} from './help-content.mjs';
 import {guides,avatars} from './companions.mjs';
 export const entranceById=id=>entrances.find(e=>e.id===id);
 const pairKey=p=>[...p].sort((a,b)=>a-b).join('x');
@@ -12,12 +13,13 @@ export function ensureGarden(state){
  if(!Array.isArray(g.seen))g.seen=[];g.seen=g.seen.filter(id=>storyNodes[id]);
  if(!Array.isArray(g.observations))g.observations=[];
  g.observations=g.observations.filter(o=>o&&storyNodes[o.nodeId]&&typeof o.visitId==='string'&&Array.isArray(o.attempts)&&o.attempts.every(Number.isFinite));
+ for(const o of g.observations){cleanHelper(o,o.nodeId);if(o.helpUsed){o.supported=true;o.independent=false;o.freshEvidence=false;}}
  if(!Array.isArray(g.visits))g.visits=[];
  const ids=new Set();g.visits=g.visits.filter(v=>{
   if(!v||typeof v.id!=='string'||ids.has(v.id)||!entranceById(v.entrance))return false;ids.add(v.id);
   v.recorded=Array.isArray(v.recorded)?v.recorded.filter(id=>ownNode(id,v.entrance)):[];
   if(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts))v.drafts={};
-  for(const [id,d] of Object.entries(v.drafts))if(!ownNode(id,v.entrance)||!cleanDraft(d))delete v.drafts[id];
+  for(const [id,d] of Object.entries(v.drafts)){if(!ownNode(id,v.entrance)||!cleanDraft(d))delete v.drafts[id];else cleanHelper(d,id);}
   let id=entranceById(v.entrance).start;const seen=new Set();
   while(id&&v.recorded.includes(id)&&!seen.has(id)){seen.add(id);id=storyNodes[id].next;}
   v.node=id;v.finished=!id;return true;
@@ -50,22 +52,24 @@ export function noteGardenFactExposure(state,pair,except=null){
 }
 export function submitStory(state,value){
  const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);
- if(!n||n.type!=='task'||!Number.isFinite(value))return false;
+ if(!n||d.helper?.open||n.type!=='task'||!Number.isFinite(value))return false;
  if(n.kind==='choice'&&(!Number.isInteger(value)||value<0||value>=n.choices.length))return false;
  if(n.kind==='number'&&(!Number.isInteger(value)||value<0))return false;
- d.attempts.push(value);d.error='';return value===n.answer;
+ d.attempts.push(value);d.error='';return acceptsAnswer(n,value);
 }
 export function finishStoryNode(state,skip=false){
  const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);if(!n||!d||v.recorded.includes(n.id))return false;
- const project=n.type==='project',correct=!project&&!skip&&d.attempts.at(-1)===n.answer;
+ if(d.helper?.open)return false;
+ const project=n.type==='project',correct=!project&&!skip&&acceptsAnswer(n,d.attempts.at(-1));
  if(!project&&!skip&&(!correct||!['knew','worked','counted','together'].includes(d.method)))return false;
  const firstCorrect=correct&&d.attempts.length===1;
- const supported=!!d.hinted||!!d.revealed||d.method==='together'||(n.subject==='Reading'&&d.reading!=='independent');
+ const supported=!!d.helpUsed||!!d.hinted||!!d.revealed||d.method==='together'||(n.subject==='Reading'&&d.reading!=='independent');
  const independent=correct&&firstCorrect&&!supported;
- const o={visitId:v.id,nodeId:n.id,entrance:v.entrance,title:n.title,subject:n.subject,prompt:n.prompt,answer:project?null:n.answer,choices:n.choices||null,attempts:[...d.attempts],
+ const o={visitId:v.id,nodeId:n.id,entrance:v.entrance,title:n.title,subject:n.subject,prompt:n.prompt,answer:project?null:n.answer,acceptedAnswers:project?null:n.answers||[n.answer],choices:n.choices||null,attempts:[...d.attempts],
   status:project?'invitation':skip?(d.attempts.length?'explored':'skipped'):'answered',correct:project?null:correct,firstCorrect:!!firstCorrect,supported,independent:!!independent,
   freshEvidence:!!independent&&!d.familiar&&!d.knownFact&&!d.priorExposureUnknown,
   familiar:!!d.familiar,knownFact:!!d.knownFact,priorExposureUnknown:!!d.priorExposureUnknown,hinted:!!d.hinted,revealed:!!d.revealed,
+  helpUsed:!!d.helpUsed,helper:d.helper?JSON.parse(JSON.stringify(d.helper)):null,
   designChoice:project?d.designChoice||null:null,context:'guided-story',method:project||skip?null:d.method,reading:['independent','together','unobserved'].includes(d.reading)?d.reading:'unobserved',source:'story',at:new Date().toISOString()};
  state.garden.observations.push(o);v.recorded.push(n.id);v.node=n.next;v.finished=!n.next;
  if(v.finished)v.finishedAt=new Date().toISOString();return o;
@@ -74,8 +78,18 @@ export function storyDescribe(o){
  if(o.status==='invitation')return 'An unscored project invitation; completion was not checked';
  if(o.status==='skipped')return 'Left unexplored';
  if(!o.correct)return 'An idea to return to';
- if(o.supported)return o.subject==='Reading'&&!o.hinted&&!o.revealed&&o.method!=='together'?'Found an answer; independent reading was not observed':'Found an answer with support';
+ if(o.supported)return o.subject==='Reading'&&!o.helpUsed&&!o.hinted&&!o.revealed&&o.method!=='together'?'Found an answer; independent reading was not observed':'Found an answer with support';
  if(!o.firstCorrect)return 'Found an answer after another try';
  if(o.familiar||o.knownFact)return 'Answered after an earlier encounter';
  return o.method==='counted'?'Counted to an answer':o.method==='worked'?'Worked out an answer independently':'Reported knowing the answer';
+}
+
+export function openStoryHelp(state){
+ const v=currentVisit(state),h=v&&helpers[v.node],d=storyDraft(state);if(!h||!d)return null;
+ d.helpUsed=true;d.helper??={exampleId:h.id,attempts:[],input:'',choice:null,revealed:false,steps:0,spotlight:null};d.helper.open=true;return h;
+}
+export function submitStoryHelp(state,value){
+ const v=currentVisit(state),h=v&&helpers[v.node],d=storyDraft(state)?.helper;
+ if(!h||!d?.open||!Number.isInteger(value)||value<0||(h.kind==='choice'&&value>=h.choices.length))return false;
+ d.attempts.push(value);d.error='';return acceptsAnswer(h,value);
 }

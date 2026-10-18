@@ -1,3 +1,4 @@
+import {cafeEntrance,cafeNodes} from './restaurant-story.mjs';
 // Original, generic story data. Projects are invitations, never scored achievements.
 // {guide} is replaced with the chosen companion's name by the interface.
 export const entrances = [
@@ -146,3 +147,6 @@ export const storyNodes = {
     next: null
   }
 };
+
+entrances.push(cafeEntrance);
+Object.assign(storyNodes,cafeNodes);
