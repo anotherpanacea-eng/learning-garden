@@ -45,6 +45,8 @@ export function ensureGarden(state){
  for(const o of g.observations){cleanHelper(o,o.nodeId);cleanReadingRecord(o,storyNodes[o.nodeId],true,g.seen);if(o.helpUsed){o.supported=true;o.independent=false;o.freshEvidence=false;}}
  if(!Array.isArray(g.visits))g.visits=[];
  const ids=new Set();g.visits=g.visits.filter(v=>{
+  // A malformed optional field should not cost the whole saved visit.
+  if(v&&typeof v==='object'){if(v.recorded!==undefined&&!Array.isArray(v.recorded))delete v.recorded;if(v.drafts!==undefined&&(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts)))delete v.drafts;}
   if(!v||typeof v.id!=='string'||ids.has(v.id)||!entranceById(v.entrance)||(isFrenchExploration(v)?!validateFrenchRoute(v):isParisExploration(v)&&!validateParisRoute(v)))return false;ids.add(v.id);
   const route=isFrenchExploration(v)||isParisExploration(v)?v.route:null,allowed=id=>route?route.includes(id):ownNode(id,v.entrance)&&!id.startsWith('paris-explore-');
   v.recorded=Array.isArray(v.recorded)?v.recorded.filter(allowed):[];
