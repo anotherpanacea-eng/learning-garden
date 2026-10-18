@@ -1,0 +1,19 @@
+# 25 — Sky Post
+
+**Status: Initial roadmap scope; not build-ready or implemented.**
+
+## Purpose
+
+An original young flying courier helps neighbors reconnect after the storm. Choose an explorer and guide independently. Fly between a garden landing, the café and a hilltop learning/play center, delivering peculiar parcels. Use original characters, places, prose and art. Flight, helpful deliveries and a theatrical rival witch provide the adventure's appeal.
+
+## Three small releases
+
+1. **First deliveries.** Three pictured routes with touch buttons and keyboard equivalents; no mouse precision, reflex timer or collision penalty. Read or hear an order, use parcel groups to solve an addition, division or multiplication problem, and deliver. Choose a number range openly. A smaller worked example and practice landing remain available. Freeze parcels, route, attempts and hints across pause/reload. Study Jane's procedural generators and visual formats before implementing; reuse suitable paths with attribution rather than rebuilding their entire engine.
+2. **Learning Center and Play Center.** Completing a delivery's math with or without help earns one credit exactly once. Spend credits on a clearly described amount of bonus play, with balance and cost visible before spending. The initial free-flight practice remains open. If minutes are used, a grown-up chooses the duration, elapsed time counts only during active foreground play, and help, navigation, hidden tabs and breaks never consume time. No negative balance, surprise expiry, payment, ads or loss of already earned credits. Specify the first actual play activity before building; credits alone are not a game.
+3. **The rival witch.** An optional challenge route offers a theatrical boss encounter. Choose a recently tricky, specifically observed task type, or a neutral mixed challenge when evidence is sparse. After a miss, the courier lands at a short illustrated practice scene, then retries or takes another route. Preserve parcel, credits, attempts and support; no public weak-spot labels, forced repetition, or inference that one miss proves a topic deficit. A supported solution can complete the delivery. The same topic appears in a different example, not just the identical question with its answer revealed.
+
+## Decisions required during detailed specification
+
+Define the actual Learning Center activity (choose a topic, see an illustrated explanation, practice, and return to an interrupted delivery), the flight/play activity, exact credit costs, optional time mechanics, boss scope, math generators, selection rules, accepted answers, support/evidence distinctions, which new deliveries can earn a fresh reward (replays and reloads cannot), and state transitions. Existing learning destinations remain open; the credit mechanism applies only to the new bonus-play loop. No fact/reading level is inferred from flight or credits. Keep rewards separate from learning records. Independent spec and implementation review must resolve any conflict between optional challenge, earned play and accessible practice before release.
+
+Use only fictional/synthetic examples in the public repository. No child identity, uploads, online multiplayer, analytics, microphone, live AI, payment or server-side learner data. Every mechanic must work on a tablet without drag, hover or precise timing. New release specifications must include save-off/export/reset and reward-once checks.

@@ -1,0 +1,29 @@
+// Original thematic bridges. Topic matches describe only the stated activity scope.
+export const learningPlaces=[
+ {id:'workshop',href:'#workshop',mark:'▱',title:'Fix the parcel ramp',body:'Roll a cart. Change one thing. Compare where it stops.',topics:[{id:'mt_qgb76wHN2X',scope:'Choose a single changed setting in an authored model; not evidence of independently designing or carrying out a physical fair test.'},{id:'mt_ZFwPZaDJ0_',scope:'Read a supplied trial table; the app records the values, so independent data collection is unobserved.'},{id:'mt_-p_xp4hMvh',scope:'Compare the model cart on two landing surfaces; outcomes are authored illustrations, not physical measurements.'},{id:'mt_VhBH8wrFC6',scope:'Read zero-based bars of model distances; drawing graphs and interpreting a full categorical data set remain unobserved.'}]},
+ {id:'water',href:'#science',mark:'◌',title:'Wonder about water',body:'Explore ice, warmer water, and a disappearing puddle.',topics:[{id:'mt_Qkewo5M3_c',scope:'Optional explanation pictures address evaporation; condensation and the full water cycle are outside these visits.'}]},
+ {id:'cafe',href:'#cafe',mark:'♧',title:'Feed a hungry neighbor',body:'Find a silly substitute and make enough for the whole table.',topics:[]},
+ {id:'orchard',href:'#orchard',mark:'❧',title:'Find a missing ingredient',body:'Follow row-and-column clues, then count equal baskets.',topics:[]},
+ {id:'measurement',href:'#activities/measurement',mark:'↔',title:'Measure the garden',body:'Explore lengths, a garden border, and an area to cover.',topics:[]},
+ {id:'fractions',href:'#activities/fractions',mark:'◒',title:'Share something fairly',body:'Explore halves, equal parts, and sharing-pond adventures.',topics:[]},
+ {id:'paris',href:'#paris',mark:'✉',title:'Follow a Paris story',body:'Find a clue, explain a word, or put an errand in order.',topics:[{id:'mt_lp3qyEujIv',scope:'Some English Paris tasks ask for a reason inferred from passage details; no independent decoding or reading level is inferred.'},{id:'mt_S3XMQOYt_D',scope:'Some English Paris tasks select a sentence supporting a supplied idea; independent composition is unobserved.'},{id:'mt_HrgDjxcWvf',scope:'Some English Paris tasks explore re- in context; the wider range of prefixes and suffixes is not assessed.'}]}
+];
+const bridges={
+ workshop:[['measurement','The cart has a distance to travel. What else could you measure?'],['water','You changed a ramp setting. What might change a puddle?'],['paris','A parcel needs a route. Follow a story about an errand.']],
+ water:[['workshop','Try another investigation: change one ramp setting.'],['orchard','The garden has puddles and scattered supplies. Find something to gather.']],
+ cafe:[['orchard','Need supplies? Follow a clue to the right ingredient.'],['fractions','Sharing food gives us a reason to explore equal parts.'],['workshop','Help the next parcel roll into the garden.']],
+ orchard:[['workshop','You counted a harvest. Investigate how a parcel could travel.'],['cafe','Take your gathered ingredients back to the waiting café.']],
+ measurement:[['workshop','Use a ruler to compare a cart’s stopping points.'],['fractions','Lengths can be split into equal parts, too.']],
+ fractions:[['cafe','Try making enough food for a whole table.'],['measurement','Find another way to compare and divide a length.']],
+ paris:[['workshop','A story’s parcel needs a ramp. Help the garden test one.'],['cafe','A guest has wishes to understand. Read an order together.']]
+};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function learningInvitations(context){
+ const links=bridges[context]||[];
+ return `<section class="learning-invitations" aria-label="More places to explore"><h2>Where could this take us?</h2><div class="invitation-links">${links.map(([id,reason])=>{const p=learningPlaces.find(p=>p.id===id);return `<a href="${p.href}"><span aria-hidden="true">${p.mark}</span><strong>${p.title}</strong><small>${esc(reason)}</small></a>`;}).join('')}</div><a class="text-button" href="#explore">See all the connected adventures</a></section>`;
+}
+export function placeMatches(topicId){return learningPlaces.flatMap(p=>p.topics.filter(t=>t.id===topicId).map(t=>({...p,scope:t.scope})));}
+export function learningExplore(graph){
+ const nodes=new Map((graph?.topics||[]).map(t=>[t.id,t]));
+ return `<div class="page-heading"><a class="back" href="#home">← Back to the garden</a><h1>Follow a curiosity.</h1><p>A parcel, a puddle, a hungry visitor. Start wherever something catches your eye.</p></div><div class="explore-places">${learningPlaces.map(p=>`<article><span class="explore-mark" aria-hidden="true">${p.mark}</span><div><h2>${p.title}</h2><p>${p.body}</p><a class="primary" href="${p.href}">Explore this place</a>${p.topics.length?`<details><summary>Grown-ups: ideas practiced here</summary>${p.topics.map(t=>`<p><a href="#map/${t.id}">${esc(nodes.get(t.id)?.name||'Learning connection')}</a>: ${esc(t.scope)}</p>`).join('')}</details>`:''}</div></article>`).join('')}</div><details class="panel"><summary>How these places connect</summary><p>The invitations are original story connections, not prerequisite rules. Marble’s learning map separately shows its actual foundation and helpful links. A matching topic can describe only part of an activity; a context-only node has no activity attached. Visiting a place does not demonstrate understanding.</p><p>Help, pauses, and different starting places are welcome. Your unfinished activities stay waiting when you follow a link.</p><a href="#map">Explore the learning map</a></details>`;
+}
