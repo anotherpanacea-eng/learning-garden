@@ -8,6 +8,6 @@ Use a GitHub no-reply email for public commits. Keep secrets, access tokens, dep
 
 Preserve the distinctions between independent reasoning, counting, support, retries, skips, and unobserved skills. Describe evidence from individual tasks and keep interesting activities accessible. No timer or score is needed to make an activity worthwhile.
 
-Run the two commands under "Check the existing learning logic" in README.md when changing the relevant logic. Test the changed interaction in a browser when changing the UI.
+Run the three commands under "Check the existing learning logic" in README.md when changing the relevant logic. Test the changed interaction in a browser when changing the UI.
 
 Preserve attribution and the separate licenses for Marble-derived curriculum data. When incorporating external code, record its source and license. The initial app has no runtime dependency on Jane.

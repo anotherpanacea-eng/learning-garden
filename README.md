@@ -1,8 +1,12 @@
-# The Learning Garden
+# After the Storm
 
-A public project for playful, parent-guided learning through connected investigations, stories, and making things.
+A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 
-The current runnable app is **Number Garden**, a math prototype. This repository starts with that working app; broader exploration and selectable guides are planned next. [Try the current app](https://number-garden-together.tastypeach3.chatgpt.site/).
+[Try After the Storm](https://number-garden-together.tastypeach3.chatgpt.site/).
+
+The opening visit, **First Morning**, has three independent entrances: follow a creature's trail, investigate a mysterious note, or imagine a shelter. Each path offers two reading, science, or mathematics tasks, an unscored design choice, its own ending, and an optional paper project. Mira, Rowan, and Ari are original fictional guides; guide and explorer-avatar choices are independent.
+
+Visits can be paused, resumed, replayed, or left waiting while another path is explored. Existing Number Garden activities and records remain available at the same browser origin. All preferences, drafts, observations, and exports stay browser-local; saving off and clearing apply to everything. No identity fields, uploads, analytics, live AI, or server-side learner records are used.
 
 ## Run locally
 
@@ -21,23 +25,22 @@ With Node.js installed:
 ```sh
 node test/core-checks.mjs
 node test/broad-checks.mjs
+node test/story-checks.mjs
 ```
 
 These checks use synthetic observations. They check the application logic; they do not validate the assessment as an educational instrument.
 
-## Next increment
+## Learning design and next increments
 
-One short investigation with multiple entrances, connecting reading, science, making, and mathematics. A selectable guide accompanies the learner. The first fully developed guide can be an older girl or young woman; guide and child-avatar choices should be independent, with other genders supported through the same learning experience.
+The first visit is implemented. Its build scope and evidence boundaries are documented in [docs/first-visit.md](docs/first-visit.md). Story answer methods describe performance within a guided activity; independent reading is recorded separately and never inferred from a mathematical answer. Unscored project records mean an invitation was acknowledged, not that off-screen work was completed. Prior encounters, support, retries, and skips remain visible in the grown-up notes.
 
-Keep observations specific: independent reasoning, counting, support, retries, skips, and uncertainty. A curriculum connection can suggest what to explore next without declaring unobserved prerequisites mastered. Follow-up adventures can revisit an idea in a new context.
-
-[Jane](https://github.com/kentlangley/Jane) is a useful reference for lesson packs, spaced review, and continuity. No Jane code has been incorporated into this initial import.
+Future increments can add more responsive help, follow-up adventures, reviewable content packs, and private cross-device continuity. These are not implemented in this first visit. [Jane](https://github.com/kentlangley/Jane) remains a useful reference for lesson packs, spaced review, and continuity. No Jane code has been incorporated.
 
 ## Privacy and contributions
 
 This repository contains generic source and curriculum content. Do not commit real learner profiles, names, ages or grades tied to a child, school or location details, family anecdotes, responses, progress, personalized packs, recordings, screenshots, exports, or credentials. Use clearly synthetic examples in tests and review commit metadata and attachments as well as files. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Deployment credentials and the existing Site's hosting configuration are excluded. The published app remains in its existing deployment checkout while this repository becomes the development home.
+Deployment credentials and the existing Site's hosting configuration are excluded. This repository is the development home. Reviewed static assets are copied to the existing deployment checkout for publication; its hosting identity and credentials stay out of this public repository.
 
 ## Current Number Garden prototype
 
