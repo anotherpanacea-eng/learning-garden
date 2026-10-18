@@ -24,7 +24,7 @@ function prepare(s){
   const stock=json(s.cafe.stock);check(!serveCafe(s)&&json(s.cafe.stock)===stock&&cafeSupper(s.cafe).progress===n,'duplicate serving cannot spend stock or count twice');
   check(cafeSupper(s.cafe).complete===(n===6),'only sixth served table completes supper');
  }
- check(renderCafe(s).includes('You did it!')&&renderCafe(s).includes('New Game Plus — another supper')&&renderCafe(s).includes('Keep serving'),'win, New Game Plus and endless continuation are visible');
+ check(renderCafe(s).includes('You did it!')&&renderCafe(s).includes('New Game Plus: another gathering')&&renderCafe(s).includes('Keep serving'),'win, New Game Plus and endless continuation are visible');
  check(s.cafe.history.filter(r=>r.status==='served').every(r=>r.total.supported&&r.total.skipped&&r.shortfall.supported&&r.shortfall.skipped),'supported service records retain support');
  const r=restoreState(json(s));ensureCafe(r);check(cafeSupper(r.cafe).complete&&r.cafe.served===6,'win survives export/restore');
  const stock=json(r.cafe.stock),history=json(r.cafe.history),discoveries=json(r.cafe.discoveries),seed=r.cafe.seed,index=r.cafe.nextOrder;

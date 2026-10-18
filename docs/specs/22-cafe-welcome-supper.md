@@ -18,7 +18,7 @@ The existing browser saving toggle, export, confirmed reset, shared notebook and
 
 ## Related work
 
-Read PR #2, **Spec the Number Garden refresh**, at `5a76b581b30bbfae73b964640fe8d575a4a5eed6`. Its proposed world regrowth through participation informs visible café restoration and equal credit for supported service. Its picture corrections and progress-safety/profile work remain proposed and deserve their own independent review. Use spec 21 to avoid numbering collisions with PR #2's 14–20 proposals and the already implemented French spec 14. No PR #2 source is merged or copied.
+Read PR #2, **Spec the Number Garden refresh**, at `5a76b581b30bbfae73b964640fe8d575a4a5eed6`. Its proposed world regrowth through participation informs visible café restoration and equal credit for supported service. Its picture corrections and progress-safety/profile work remain proposed and deserve their own independent review. Numbered 22 to follow PR #2's specs 15 to 21. No PR #2 source is merged or copied.
 
 Refreshed Jane `LESSONS.md` on 2026-10-18: its finite quest/finale structure is a design reference for a clear ending with continued play. Reuse our current café serving, gathering, repair, local speech and original SVG patterns. No new upstream code/prose or Marble curriculum mapping is needed for this story goal. Existing licenses and public-repository privacy rules remain.
 

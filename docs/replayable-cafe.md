@@ -41,4 +41,4 @@ From the multiplication question, Change my plate reopens the current plate. The
 
 ## A dinner and another beginning
 
-[Spec 21](specs/21-cafe-welcome-supper.md) adds a six-table welcome-back dinner after the storm. Actual serving lights the café; help counts equally. The ending offers Keep serving and New Game Plus, which starts another six-table gathering with a different decoration while preserving inventory, discoveries, range, learning records and waiting orders. The initial dinner credits saved earlier service. Supper progress is a play goal, separate from mathematical observations.
+[Spec 22](specs/22-cafe-welcome-supper.md) adds a six-table welcome-back dinner after the storm. Actual serving lights the café; help counts equally. The ending offers Keep serving and New Game Plus, which starts another six-table gathering with a different decoration while preserving inventory, discoveries, range, learning records and waiting orders. The initial dinner credits saved earlier service. Supper progress is a play goal, separate from mathematical observations.
