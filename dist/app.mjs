@@ -137,7 +137,7 @@ function render(){
     html=slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);
   }
   else if(root==='cafe'){
-    if(state.cafe.current){const o=orderFor(state.cafe);exposeStoryFacts({facts:[[o.guests,o.bites],...currentRecipe(state.cafe).map(item=>[o.guests,item.count])]});}
+    if(state.cafe.current){const o=orderFor(state.cafe);exposeStoryFacts({facts:[[o.guests,o.bites],...(state.cafe.current.stage==='stock'?currentRecipe(state.cafe).map(item=>[o.guests,item.count]):[])]});}
     save();html=renderCafe(state);
   }
   else if(root==='companions')html=companionPicker(state);
