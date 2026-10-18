@@ -6,7 +6,7 @@ import {guides,avatars} from '../dist/companions.mjs';
 import {ensureGarden,currentVisit,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode} from '../dist/garden-core.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const state=()=>{const s=freshState();ensureBroad(s);ensureGarden(s);return s;};
-check(entrances.length===8&&Object.values(storyNodes).filter(n=>!n.parisStory).length===29,'bounded story');
+check(entrances.length===9&&Object.values(storyNodes).filter(n=>!n.parisStory).length===84,'bounded story');
 check(JSON.stringify(Object.values(storyNodes).filter(n=>n.type==='task'&&['creature','message','shelter'].includes(n.entrance)).map(n=>n.answer))==='[0,1,2,12,2,7]','reviewed answer keys');
 for(const e of entrances){
  let id=e.start;const seen=new Set();let tasks=0,projects=0;
@@ -21,7 +21,7 @@ for(const e of entrances){
  check(s.garden.observations.length===(e.id==='paris'?7:e.id==='cafe'?4:3)&&currentVisit(s).finished,'whole own path finishes');
  const project=s.garden.observations.at(-1);check(project.status==='invitation'&&project.correct===null&&!project.independent&&!project.freshEvidence,'project not evidence of performance');
  check(!finishStoryNode(s)&&s.garden.observations.length===(e.id==='paris'?7:e.id==='cafe'?4:3),'finished node not duplicated');
- const first=currentVisit(s).id;startVisit(s,e.id);check(storyDraft(s).familiar,'revisit remembers encounter');
+ const first=currentVisit(s).id,fr=currentVisit(s).french;startVisit(s,e.id,fr?{destination:fr.destination,variant:fr.variant,storyId:fr.storyId}:undefined);check(storyDraft(s).familiar,'revisit remembers encounter');
  check(resumeVisit(s,first)&&currentVisit(s).finished,'ending resumes');
 }
 {

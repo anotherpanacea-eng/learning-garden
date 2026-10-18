@@ -35,7 +35,7 @@ export const guests = [
   {id:'biscuit', name:'Biscuit', kind:'kitten', greeting:'A ginger kitten settles on a cushion and starts kneading. “I am helping with the pretend dough.”', wantedDish:'tumbleweed dumplings', thanks:'“Mrrp! That was delicious. I shall leave a very tiny paw-print review.”'}
 ];
 
-// All twelve pairs from two different axes: temperature, texture, and flavour.
+// All twelve pairs from two different axes: temperature, texture, and flavor.
 export const wishes = [
   ['warm','crunchy'], ['warm','soft'], ['cold','crunchy'], ['cold','soft'],
   ['warm','sweet'], ['warm','tangy'], ['cold','sweet'], ['cold','tangy'],

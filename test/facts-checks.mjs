@@ -12,7 +12,7 @@ check(allFacts.length===144&&new Set(allFacts.map(p=>orderedKey(...p))).size===1
  const s=fresh(),before=JSON.stringify(s);ensureFacts(s);check(!s.facts.current&&s.facts.nextVisit===0,'initialization never starts');
  check(JSON.stringify(s)===before,'repeat ensure stable');
  const html=stable(s,()=>factsPage(s));check((html.match(/data-facts-pair=/g)||[]).length===156,'matrix144 plus twelve row alternatives');
- check(html.includes('horizontally scrollable table')&&html.includes('scope="col"')&&html.includes('scope="row"'),'contained labelled matrix with headers');
+ check(html.includes('horizontally scrollable table')&&html.includes('scope="col"')&&html.includes('scope="row"'),'contained labeled matrix with headers');
  check(!html.includes('1 × 1 = 1'),'matrix shows operands without answer keys');
  stable(s,()=>factsPage(s,'play'));stable(s,()=>factsNotes(s));
  check(!startFact(s,0,1)&&!startFact(s,13,1)&&!startFact(s,1,1.5),'factor boundaries');

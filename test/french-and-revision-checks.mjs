@@ -58,7 +58,7 @@ for(const lesson of frenchLessons){
   s=restoreState(json(s));ensureGarden(s);const restored=storyDraft(s);
   if(i===0)check(restored.hinted&&restored.readingTools.sentenceUsed&&restored.readingTools.audioRequested,'meaning and reading support survive reload');
   submitStory(s,n.answer);restored.method='worked';restored.reading='independent';const result=finishStoryNode(s);
-  check(result.language==='fr'&&!result.freshEvidence&&result.practiceOnly,'French record explicitly labelled and practice only');
+  check(result.language==='fr'&&!result.freshEvidence&&result.practiceOnly,'French record explicitly labeled and practice only');
   if(i===0)check(result.supported&&!result.independent,'meaning help cannot become unsupported reading');
   else check(result.priorPassageSeen&&result.supported&&!result.independent&&result.meaningUsed&&storyDescribe(result)==='Found an answer with support','second question retains earlier passage translation support');
  }

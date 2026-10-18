@@ -69,4 +69,6 @@ Implemented: [Paris exploration](specs/11-paris-exploration.md) adds three desti
 
 Implemented: [Reviewed story packs](specs/12-reviewed-story-packs.md) adds a rooftop puppet-show pack, tap-to-place ordering, validation before publication, scoped Marble sequencing connections, and retained Jane MIT attribution. [Authoring guide](story-packs.md).
 
-Implemented: [French Paris and plate return](specs/13-french-paris-and-plate-return.md) adds three short French errands with English meaning help and local French narration, separate practice records, and a return to the café plate from multiplication without restarting. French automatic adaptation and a larger French library remain future increments.
+Implemented: [French Paris and plate return](specs/13-french-paris-and-plate-return.md) adds three short French errands with English meaning help and local French narration, separate practice records, and a return to the café plate from multiplication without restarting. That initial release is extended by French exploration below.
+
+Implemented: [French exploration](specs/14-french-exploration.md) adds nine original stories with three authored text choices, conservative French-only practice suggestions, manual story selection, and persistent routes. The initial three French errands remain available. More language content can extend the reviewed library; there is no live story generator or French proficiency assessment.

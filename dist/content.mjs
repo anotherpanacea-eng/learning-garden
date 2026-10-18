@@ -45,9 +45,9 @@ export const puzzles=[
   prompt:'There are 24 carrots in equal rows. Each row has 4 carrots. How many rows are there?',answer:6,
   hint:'Think: 4 times what makes 24? You can make rows of four.',solution:'There are 6 rows because 6 × 4 = 24. You can also write 24 ÷ 4 = 6.',talk:'Can you arrange 24 carrots in a different rectangle?'},
  {id:'fence',level:'stretch',title:'A fence around the flowers',tag:'Two kinds of measuring',kind:'number',skill:'puzzle',a:4,b:6,
-  prompt:'A rectangular flower bed is 6 metres long and 4 metres wide. A fence goes all the way around it. How many metres of fence are needed?',answer:20,
+  prompt:'A rectangular flower bed is 6 meters long and 4 meters wide. A fence goes all the way around it. How many meters of fence are needed?',answer:20,
   hint:'Draw the rectangle and label all four sides. Are we finding the space inside or the distance around?',
-  solution:'The four sides are 6, 4, 6, and 4 metres. Add them: 6 + 4 + 6 + 4 = 20 metres. Multiplying 6 × 4 would measure the area inside, not the fence.',talk:'Can you find a different rectangle that needs the same length of fence?'},
+  solution:'The four sides are 6, 4, 6, and 4 meters. Add them: 6 + 4 + 6 + 4 = 20 meters. Multiplying 6 × 4 would measure the area inside, not the fence.',talk:'Can you find a different rectangle that needs the same length of fence?'},
  {id:'patchwork',level:'stretch',title:'The patchwork garden',tag:'Break a big idea into pieces',kind:'number',skill:'puzzle',a:7,b:6,
   prompt:'A garden has 7 rows of 6 flowers. The first 5 rows have yellow flowers; the other 2 rows have pink flowers. How many flowers are there altogether?',answer:42,
   hint:'Find 5 × 6 and 2 × 6 separately. How could you combine them?',solution:'5 × 6 = 30 yellow flowers and 2 × 6 = 12 pink flowers. There are 30 + 12 = 42 flowers.',talk:'If you changed one yellow row to pink, would the total number of flowers change?'}

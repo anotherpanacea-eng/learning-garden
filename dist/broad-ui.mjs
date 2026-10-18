@@ -67,8 +67,8 @@ export function renderModel(q,active,editable=false) {
     controls=button('turn','Make a quarter turn')+button('change-shape','Try another shape');
   } else if(m.type==='ruler'){
     const x=n=>20+n/m.max*300;
-    visual=`<svg class="ruler-model" viewBox="0 0 340 105" role="img" aria-label="Diagram of a ruler, with a strip from ${m.start} to ${m.end} centimetres"><path d="M20 64H320" stroke="#183f39" stroke-width="2"/><rect x="${x(m.start)}" y="22" width="${x(m.end)-x(m.start)}" height="23" fill="#e9b84a"/>${Array.from({length:m.max+1},(_,n)=>`<path d="M${x(n)} 58v${n%5?10:16}" stroke="#183f39"/>${n%5===0||n===m.start||n===m.end?`<text x="${x(n)}" y="94" text-anchor="middle" font-size="12">${n}</text>`:''}`).join('')}</svg>`;
-    readout=`From ${m.start} to ${m.end}: ${m.end-m.start} centimetres long`;
+    visual=`<svg class="ruler-model" viewBox="0 0 340 105" role="img" aria-label="Diagram of a ruler, with a strip from ${m.start} to ${m.end} centimeters"><path d="M20 64H320" stroke="#183f39" stroke-width="2"/><rect x="${x(m.start)}" y="22" width="${x(m.end)-x(m.start)}" height="23" fill="#e9b84a"/>${Array.from({length:m.max+1},(_,n)=>`<path d="M${x(n)} 58v${n%5?10:16}" stroke="#183f39"/>${n%5===0||n===m.start||n===m.end?`<text x="${x(n)}" y="94" text-anchor="middle" font-size="12">${n}</text>`:''}`).join('')}</svg>`;
+    readout=`From ${m.start} to ${m.end}: ${m.end-m.start} centimeters long`;
     controls=button('start-left','Move start left',m.start<=0)+button('start-right','Move start right',m.start>=m.end)+button('end-left','Move end left',m.end<=m.start)+button('end-right','Move end right',m.end>=m.max);
   } else {
     visual=`<div class="counter-model" role="img" aria-label="${m.count||0} counters">${'<span></span>'.repeat(Math.min(40,m.count||0))}</div>`;

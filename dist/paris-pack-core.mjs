@@ -2,6 +2,11 @@
 export const ORDER_PERMUTATIONS = Object.freeze([
   [0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]
 ].map(x=>Object.freeze(x)));
+// A stable starting layout per task that is never already in story order, so the tap pattern differs between stories.
+export function displayOrderFor(key){
+  let h=0;for(const c of String(key))h=(h*31+c.charCodeAt(0))>>>0;
+  return [...ORDER_PERMUTATIONS[1+h%5]];
+}
 
 export function cleanOrder(value){
   return Array.isArray(value)&&value.length<=3&&Array.from(value).every(x=>Number.isInteger(x)&&x>=0&&x<3)&&new Set(value).size===value.length?[...value]:[];
@@ -79,7 +84,7 @@ export function compileParisPacks(packs,{stories=[],nodes={},helpers={}}={}){
         const selected={title:q.title,readingSkill:q.readingSkill,prompt:q.prompt,hint:q.hint,explanation:q.explanation,talk:q.talk};
         if(q.type==='order'){
           strings(q.items,`${path}.items`,3,3);
-          Object.assign(selected,{kind:'order',orderItems:[...q.items],displayOrder:[2,0,1],choices:ORDER_PERMUTATIONS.map(order=>order.map(i=>q.items[i]).join(' → ')),answer:0});
+          Object.assign(selected,{kind:'order',orderItems:[...q.items],displayOrder:displayOrderFor(`${pack.id}:${path}`),choices:ORDER_PERMUTATIONS.map(order=>order.map(i=>q.items[i]).join(' → ')),answer:0});
         }else if(q.type==='mc'){
           strings(q.choices,`${path}.choices`,2,4);
           if(!Number.isInteger(q.answer)||q.answer<0||q.answer>=q.choices.length)fail(`${path}.answer`,'expected an in-range integer');

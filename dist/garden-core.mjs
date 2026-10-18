@@ -1,3 +1,4 @@
+import {frenchPlan,isFrenchExploration,validateFrenchRoute,validFrenchObservation,priorFrenchStorySeen} from './french-core.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
 import {helpers,acceptsAnswer,cleanHelper} from './help-content.mjs';
 import {guides,avatars} from './companions.mjs';
@@ -38,14 +39,16 @@ export function ensureGarden(state){
  state.garden=g;
  if(!guides.some(x=>x.id===g.guide))g.guide='mira';
  if(!avatars.some(x=>x.id===g.avatar))g.avatar='fern';
- if(!Array.isArray(g.seen))g.seen=[];g.seen=g.seen.filter(id=>storyNodes[id]);
+ if(!Array.isArray(g.seen))g.seen=[];g.seen=g.seen.filter(id=>Object.hasOwn(storyNodes,id));
  if(!Array.isArray(g.observations))g.observations=[];
- g.observations=g.observations.filter(o=>o&&storyNodes[o.nodeId]&&typeof o.visitId==='string'&&Array.isArray(o.attempts)&&o.attempts.every(Number.isFinite));
+ g.observations=g.observations.filter(o=>o&&Object.hasOwn(storyNodes,o.nodeId)&&typeof o.visitId==='string'&&Array.isArray(o.attempts)&&o.attempts.every(Number.isFinite));
  for(const o of g.observations){cleanHelper(o,o.nodeId);cleanReadingRecord(o,storyNodes[o.nodeId],true,g.seen);if(o.helpUsed){o.supported=true;o.independent=false;o.freshEvidence=false;}}
  if(!Array.isArray(g.visits))g.visits=[];
  const ids=new Set();g.visits=g.visits.filter(v=>{
-  if(!v||typeof v.id!=='string'||ids.has(v.id)||!entranceById(v.entrance)||isParisExploration(v)&&!validateParisRoute(v))return false;ids.add(v.id);
-  const route=isParisExploration(v)?v.route:null,allowed=id=>route?route.includes(id):ownNode(id,v.entrance)&&!id.startsWith('paris-explore-');
+  // A malformed optional field should not cost the whole saved visit.
+  if(v&&typeof v==='object'){if(v.recorded!==undefined&&!Array.isArray(v.recorded))delete v.recorded;if(v.drafts!==undefined&&(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts)))delete v.drafts;}
+  if(!v||typeof v.id!=='string'||ids.has(v.id)||!entranceById(v.entrance)||(isFrenchExploration(v)?!validateFrenchRoute(v):isParisExploration(v)&&!validateParisRoute(v)))return false;ids.add(v.id);
+  const route=isFrenchExploration(v)||isParisExploration(v)?v.route:null,allowed=id=>route?route.includes(id):ownNode(id,v.entrance)&&!id.startsWith('paris-explore-');
   v.recorded=Array.isArray(v.recorded)?v.recorded.filter(allowed):[];
   if(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts))v.drafts={};
   for(const [id,d] of Object.entries(v.drafts)){if(!allowed(id)||!cleanDraft(d))delete v.drafts[id];else{cleanHelper(d,id);cleanReadingRecord(d,storyNodes[id],false,g.seen);if(storyNodes[id].kind==='order')d.order=cleanOrder(d.order);}}
@@ -54,7 +57,13 @@ export function ensureGarden(state){
   v.node=id;v.finished=!id;return true;
  });
  g.observations=g.observations.filter(o=>{
-  const v=g.visits.find(v=>v.id===o.visitId),n=storyNodes[o.nodeId],explore=o.nodeId.startsWith('paris-explore-')||o.parisDestination!==undefined||o.parisStory!==undefined||o.parisVariant!==undefined;
+  const v=g.visits.find(v=>v.id===o.visitId),n=storyNodes[o.nodeId];
+  if(isFrenchExploration(v)||o.nodeId.startsWith('french-explore-')||o.nodeId==='french-postcard'||o.frenchStory!==undefined){
+   if(!validFrenchObservation(o,v))return false;
+   if(typeof o.priorStorySeen!=='boolean')o.priorStorySeen=true;
+   return true;
+  }
+  const explore=o.nodeId.startsWith('paris-explore-')||o.parisDestination!==undefined||o.parisStory!==undefined||o.parisVariant!==undefined;
   if(!explore)return !v||!isParisExploration(v)||v.route.includes(o.nodeId);
   if(!v||!validateParisRoute(v)||!v.route.includes(o.nodeId)||!v.recorded.includes(o.nodeId))return false;
   if(o.parisDestination!==v.paris.destination||o.parisStory!==v.paris.storyId||o.parisVariant!==v.paris.variant||o.parisSelectionReason!==v.paris.reason)return false;
@@ -68,11 +77,13 @@ export function ensureGarden(state){
 export const currentVisit=s=>ensureGarden(s).visits.find(v=>v.id===s.garden.current)||null;
 export function startVisit(state,entrance,options){
  const g=ensureGarden(state),e=entranceById(entrance);if(!e)return null;
- const plan=options===undefined?null:entrance==='paris'&&options&&typeof options==='object'?parisPlan(state,options.destination,options.variant??'auto',options.storyId??null):null;
- if(options!==undefined&&!plan)return null;
+ const french=entrance==='french';
+ if(french&&options!==undefined&&(!options||typeof options!=='object'||Array.isArray(options)))return null;
+ const plan=french?frenchPlan(state,options?.destination??'bookstall',options?.variant??'auto',options?.storyId??null):options===undefined?null:entrance==='paris'&&options&&typeof options==='object'?parisPlan(state,options.destination,options.variant??'auto',options.storyId??null):null;
+ if((french||options!==undefined)&&!plan)return null;
  let n=1;while(g.visits.some(v=>v.id===`visit-${n}`))n++;
  const v={id:`visit-${n}`,entrance,node:e.start,recorded:[],drafts:{},finished:false,createdAt:new Date().toISOString()};
- if(plan){v.paris={destination:plan.destination,storyId:plan.storyId,variant:plan.variant,reason:plan.reason};v.route=[...plan.route];v.node=v.route[0];}
+ if(plan){v[french?'french':'paris']={destination:plan.destination,storyId:plan.storyId,variant:plan.variant,reason:plan.reason};v.route=[...plan.route];v.node=v.route[0];}
  g.visits.push(v);g.current=v.id;return v;
 }
 export function resumeVisit(state,id){const g=ensureGarden(state);if(!g.visits.some(v=>v.id===id))return false;g.current=id;return true;}
@@ -82,6 +93,10 @@ export function storyDraft(state){
  if(n.kind==='order')v.drafts[n.id].order=cleanOrder(v.drafts[n.id].order);
  if(readingNode(n)){
   const d=v.drafts[n.id];
+  if(v.french){
+   if(v.french.priorStorySeen===undefined)v.french.priorStorySeen=priorFrenchStorySeen(state,v.french.storyId);
+   if(typeof d.priorStorySeen!=='boolean')d.priorStorySeen=d.priorStorySeen===undefined?v.french.priorStorySeen:true;
+  }
   if(v.paris){
    if(v.paris.priorStorySeen===undefined)v.paris.priorStorySeen=priorParisStorySeen(state,v.paris.storyId);
    if(typeof d.priorStorySeen!=='boolean')d.priorStorySeen=d.priorStorySeen===undefined?v.paris.priorStorySeen:true;
@@ -103,6 +118,10 @@ export function useStoryReadingTool(state,action){
 }
 export function noteStorySeen(state){
  const v=currentVisit(state);if(!v?.node)return;
+ if(v.french){
+  storyDraft(state);v.french.displayed=true;
+  for(const other of state.garden.visits)if(other.id!==v.id&&other.french?.storyId===v.french.storyId)for(const d of Object.values(other.drafts))d.familiar=true;
+ }
  if(v.paris){
   storyDraft(state);v.paris.displayed=true;
   for(const other of state.garden.visits)if(other.id!==v.id&&other.paris?.storyId===v.paris.storyId)for(const d of Object.values(other.drafts))d.familiar=true;
@@ -160,6 +179,7 @@ export function finishStoryNode(state,skip=false){
   familiar:!!d.familiar,knownFact:!!d.knownFact,priorExposureUnknown:!!d.priorExposureUnknown,hinted:!!d.hinted,revealed:!!d.revealed,
   helpUsed:!!d.helpUsed,helper:d.helper?JSON.parse(JSON.stringify(d.helper)):null,
   ...(tools?{readingSkill:n.readingSkill,passageId:n.passageId,priorPassageSeen:!!d.priorPassageSeen,readingTools:tools,practiceOnly:!!n.practiceOnly}:{}),
+  ...(v.french?{frenchDestination:v.french.destination,frenchStory:v.french.storyId,frenchVariant:v.french.variant,frenchSelectionReason:v.french.reason,priorStorySeen:typeof d.priorStorySeen==='boolean'?d.priorStorySeen:!!v.french.priorStorySeen}:{}),
   ...(v.paris?{parisDestination:v.paris.destination,parisStory:v.paris.storyId,parisVariant:v.paris.variant,parisSelectionReason:v.paris.reason,priorStorySeen:typeof d.priorStorySeen==='boolean'?d.priorStorySeen:!!v.paris.priorStorySeen}:{}),
   designChoice:project?d.designChoice||null:null,context:'guided-story',method:project||skip?null:d.method,reading:['independent','together','unobserved','listened'].includes(d.reading)?d.reading:'unobserved',source:'story',at:new Date().toISOString()};
  state.garden.observations.push(o);v.recorded.push(n.id);v.node=v.route?v.route[v.route.indexOf(n.id)+1]:n.next;v.finished=!v.node;
