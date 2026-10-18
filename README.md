@@ -8,6 +8,8 @@ The opening visit, **First Morning**, has three independent entrances: follow a 
 
 Visits can be paused, resumed, replayed, or left waiting while another path is explored. Existing Number Garden activities and records remain available at the same browser origin. All preferences, drafts, observations, and exports stay browser-local; saving off applies device-wide, while clearing can target one explorer or all explorers. No identity fields, uploads, analytics, live AI, or server-side learner records are used.
 
+Number Garden now has a storm-recovery purpose: count saved seeds, plan 24 planting spaces, and compare lengths and borders. Its illustrated planning table connects existing open math activities to water, gathering, and the café. This is a mathematical prelude to the planned Living Garden habitat investigations.
+
 ## Run locally
 
 No installation or build step is needed. From this repository:
@@ -31,6 +33,7 @@ node test/broad-help-checks.mjs
 node test/broad-model-checks.mjs
 node test/explorer-storage-checks.mjs
 node test/plantings-and-speech-checks.mjs
+node test/number-garden-story-checks.mjs
 node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs

@@ -1,6 +1,8 @@
 # 23 — Living Garden
 
-**Status: Initial roadmap scope; not build-ready or implemented.**
+**Status: Scientific habitat investigations remain initial roadmap scope; not build-ready or implemented. The mathematical planning prelude is implemented in [spec 27](27-number-garden-recovery-story.md).**
+
+Number Garden now invites children to count saved seeds, arrange 24 pretend planting spaces, and compare lengths and borders. These open math activities supply a storm-recovery purpose and connected entrances; they do not simulate growth, establish crop spacing, locate organisms, or produce café stock. The science slice below remains a separate next build.
 
 ## Purpose and first playable slice
 
