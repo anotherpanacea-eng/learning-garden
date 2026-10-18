@@ -4,6 +4,8 @@ This is the delivery roadmap for the next six increments. It is a plan for this 
 
 ## Teaching direction
 
+Check [Jane and Marble opportunities](upstream-opportunities.md) before building each learning capability. The strongest next candidate after Paris exploration is a reviewed story pack and another response format, using Jane's pack/publisher work where it fits. The document distinguishes current reuse from proposed extensions and records upstream revisions.
+
 Begin with a purpose worth exploring, build an idea through a controllable visual explanation, invite a change or prediction, and offer a new situation with less support. Children can pause, replay, skip familiar steps, choose another representation, or explore with a grown-up. No timer, grades, streaks, placement claim, or compulsory sequence. Animations explain a change and stay under the learner's control; reduced-motion and keyboard/touch alternatives work throughout.
 
 Keep reading, comprehension, composition, investigation, support, familiarity, and unobserved skills distinct. A prediction is an idea to test, not a scored fact. Clicking an external link does not establish that an experiment was used. Selecting an observation reports what someone noticed; it is not proof of scientific understanding. Word chunks and response choices can support expression without demonstrating independent free writing. Off-screen projects remain invitations.
