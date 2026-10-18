@@ -1,5 +1,6 @@
 // Original thematic bridges. Topic matches describe only the stated activity scope.
 export const learningPlaces=[
+ {id:'post',href:'#post',mark:'✉',title:'Fly a garden delivery',body:'Pack a parcel, write a flight plan, and help a witch courier find a neighbor.',topics:[{id:'mt__p5n8z5soJ',scope:'Compose and revise a finite sequence of literal instructions. This is guided practice, not general programming proficiency.'},{id:'mt_U_8iVFZuHH',scope:'Watch whether a tap-composed message achieves its intended delivery and revise it. Independent free writing and the wider evidence criteria remain unobserved.'}]},
  {id:'workshop',href:'#workshop',mark:'▱',title:'Fix the parcel ramp',body:'Roll a cart. Change one thing. Compare where it stops.',topics:[{id:'mt_qgb76wHN2X',scope:'Choose a single changed setting in an authored model; not evidence of independently designing or carrying out a physical fair test.'},{id:'mt_ZFwPZaDJ0_',scope:'Read a supplied trial table; the app records the values, so independent data collection is unobserved.'},{id:'mt_-p_xp4hMvh',scope:'Compare the model cart on two landing surfaces; outcomes are authored illustrations, not physical measurements.'},{id:'mt_VhBH8wrFC6',scope:'Read zero-based bars of model distances; drawing graphs and interpreting a full categorical data set remain unobserved.'}]},
  {id:'water',href:'#science',mark:'◌',title:'Wonder about water',body:'Explore ice, warmer water, and a disappearing puddle.',topics:[{id:'mt_Qkewo5M3_c',scope:'Optional explanation pictures address evaporation; condensation and the full water cycle are outside these visits.'}]},
  {id:'cafe',href:'#cafe',mark:'♧',title:'Feed a hungry neighbor',body:'Find a silly substitute and make enough for the whole table.',topics:[]},
@@ -9,13 +10,14 @@ export const learningPlaces=[
  {id:'paris',href:'#paris',mark:'✉',title:'Follow a Paris story',body:'Find a clue, explain a word, or put an errand in order.',topics:[{id:'mt_lp3qyEujIv',scope:'Some English Paris tasks ask for a reason inferred from passage details; no independent decoding or reading level is inferred.'},{id:'mt_S3XMQOYt_D',scope:'Some English Paris tasks select a sentence supporting a supplied idea; independent composition is unobserved.'},{id:'mt_HrgDjxcWvf',scope:'Some English Paris tasks explore re- in context; the wider range of prefixes and suffixes is not assessed.'}]}
 ];
 const bridges={
- workshop:[['measurement','The cart has a distance to travel. What else could you measure?'],['water','You changed a ramp setting. What might change a puddle?'],['paris','A parcel needs a route. Follow a story about an errand.']],
+ post:[['workshop','Parcels need ramps as well as brooms. Test the garden’s delivery ramp.'],['cafe','A neighbor’s delivery is done. Help prepare a welcome-back meal.'],['paris','A delivery starts with words. Follow a Paris message next.']],
+ workshop:[['measurement','The cart has a distance to travel. What else could you measure?'],['water','You changed a ramp setting. What might change a puddle?'],['post','The ramp is one way to send a parcel. Try planning a flying delivery.']],
  water:[['workshop','Try another investigation: change one ramp setting.'],['orchard','The garden has puddles and scattered supplies. Find something to gather.']],
- cafe:[['orchard','Need supplies? Follow a clue to the right ingredient.'],['fractions','Sharing food gives us a reason to explore equal parts.'],['workshop','Help the next parcel roll into the garden.']],
+ cafe:[['orchard','Need supplies? Follow a clue to the right ingredient.'],['fractions','Sharing food gives us a reason to explore equal parts.'],['post','Help a parcel fly to a neighbor who is waiting.']],
  orchard:[['workshop','You counted a harvest. Investigate how a parcel could travel.'],['cafe','Take your gathered ingredients back to the waiting café.']],
  measurement:[['workshop','Use a ruler to compare a cart’s stopping points.'],['fractions','Lengths can be split into equal parts, too.']],
  fractions:[['cafe','Try making enough food for a whole table.'],['measurement','Find another way to compare and divide a length.']],
- paris:[['workshop','A story’s parcel needs a ramp. Help the garden test one.'],['cafe','A guest has wishes to understand. Read an order together.']]
+ paris:[['post','Write directions so a garden parcel reaches its neighbor.'],['cafe','A guest has wishes to understand. Read an order together.']]
 };
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function learningInvitations(context){

@@ -8,9 +8,9 @@ The graph currently emphasizes mathematics. Expand playable experiences and thei
 
 | Order | Increment | Smallest useful release | State |
 | --- | --- | --- | --- |
-| Now | [Storm Workshop and connected invitations](specs/03-storm-workshop.md) | Fix the parcel ramp: six configurations, repeatable trials, manual visual steps, ruler/table/graph, notebook. Contextual invitations connect water, gathering, café, Paris and math; extend the attributed graph slice with accurate, limited topic matches. | Implemented |
-| Next | [Willow Post Office, including Sky Post](specs/02-willow-post-office.md) | Six original deliveries with an illustrated flying courier: read an order, compose a route, watch its literal consequences, and revise. Connect writing, directions, parcel math and computational thinking. | Combine the courier direction into the build spec, then refresh and review |
-| Then | [Living Garden](specs/23-living-garden.md) | Search three habitats for signs of life, compare needs, and assemble simple food chains. Investigation helps locate ingredients; fantasy ingredients stay distinct from real ecology. | Initial scope; not built |
+| Delivered | [Storm Workshop and connected invitations](specs/03-storm-workshop.md) | Fix the parcel ramp: six configurations, repeatable trials, manual visual steps, ruler/table/graph, notebook. Contextual invitations connect water, gathering, café, Paris and math; extend the attributed graph slice with accurate, limited topic matches. | Implemented |
+| Delivered | [Willow Post Office, including Sky Post](specs/02-willow-post-office.md) | Six original deliveries with an illustrated flying courier: read an order, compose a route, watch its literal consequences, and revise. Connect writing, directions, parcel math and computational thinking. | First flying-courier release implemented; later credits/play/boss expansions remain planned |
+| Next | [Living Garden](specs/23-living-garden.md) | Search three habitats for signs of life, compare needs, and assemble simple food chains. Investigation helps locate ingredients; fantasy ingredients stay distinct from real ecology. | Initial scope; not built |
 | Then | [Travelers' Archive](specs/24-travelers-archive.md) | Follow a parcel into one historical setting; use a map, a timeline, and two short accounts to investigate its story. | Initial scope; not built |
 | Post Office follow-ups | [Sky Post expansions](specs/25-sky-post.md) | Extend the same Post Office game with delivery math, Learning/Play Centers, earned play credits, and a rival witch's optional challenge route. Reuse its map, delivery runner and saved state. | Initial scope; not a separate game; not built |
 | As the world expands | A fuller knowledge map | Bundle the complete Marble graph as background reference; filter by subject and playable destination, distinguish planned/context-only/practiced scope, and show only a few useful invitations to children. Add geography, art and music beyond Marble's subject list. | Later; no claim of full curriculum coverage |
@@ -27,7 +27,7 @@ Keep reading, comprehension, composition, investigation, support, familiarity, a
 
 ## Current addition
 
-[Café expeditions and the multiplication garden](specs/07-cafe-expeditions-and-facts.md) is implemented, inserted before the Post Office in response to play feedback. It adds one Cloud Orchard, three new foods, contextual repair questions, original visual food and order representations, optional local speech, and full ordered multiplication coverage through12×12. The six-step science/language roadmap below remains planned as stated.
+[Café expeditions and the multiplication garden](specs/07-cafe-expeditions-and-facts.md) is implemented, inserted before the Post Office in response to play feedback. It adds one Cloud Orchard, three new foods, contextual repair questions, original visual food and order representations, optional local speech, and full ordered multiplication coverage through12×12. The delivery table below records the implemented and planned destinations.
 
 [Gather the cupboard](specs/08-gather-the-cupboard.md) replaces instant refills with repeatable pictured searches and harvests for every known ingredient. Actual supplies are required before serving.
 
@@ -36,7 +36,7 @@ Keep reading, comprehension, composition, investigation, support, familiarity, a
 | Step | Place and purpose | Smallest useful release | Status |
 | --- | --- | --- | --- |
 | 1 | [Water Lab expeditions](specs/01-water-expeditions.md): predict, explore, return and explain | Three short missions; an external Marble destination; original controllable explanation pictures; private notebook | Implemented |
-| 2 | [Willow Post Office](specs/02-willow-post-office.md): read and write for a recipient | Six flying-courier deliveries and a word-chunk instruction builder with visible consequences and several valid messages; Sky Post extends this same game | Next after Workshop |
+| 2 | [Willow Post Office](specs/02-willow-post-office.md): read and write for a recipient | Six flying-courier deliveries and a word-chunk instruction builder with visible consequences and several valid messages; Sky Post extends this same game | First flying-courier increment implemented |
 | 3 | [Storm Workshop](specs/03-storm-workshop.md): choose a fair comparison and investigate | One original cart/ramp experiment family; repeatable trials and a comparison notebook | Implemented; moved ahead of Post Office |
 | 4 | [Word Workshop](specs/04-word-workshop.md): sound, spelling and meaning work together | A small reviewed sequence of word families, pronunciation support, and meaningful messages | Planned |
 | 5 | [Ecosystem expeditions](specs/05-ecosystem-expeditions.md): explore interacting causes | Three guided visits to Marble's simulator, with predictions, repeat comparisons, and careful model conclusions | Planned |

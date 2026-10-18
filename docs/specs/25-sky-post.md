@@ -1,10 +1,12 @@
 # 25 — Sky Post: Willow Post Office expansions
 
-**Status: Initial roadmap scope; not build-ready or implemented.**
+**Status: First bounded delivery loop implemented in spec 02. Learning/Play Centers, credits, rival witch and broader math generation remain initial roadmap scope, not implemented.**
 
 ## Purpose
 
 Sky Post is the flying-courier adventure within [Willow Post Office](02-willow-post-office.md), not a separate game or destination. An original young flying witch or another chosen courier helps neighbors reconnect after the storm. Choose an explorer and guide independently. Fly delivery routes from the post office to garden neighbors; later add a learning/play center and a theatrical rival witch. Use original characters, places, prose and art. Reuse the Post Office map, delivery catalog, instruction runner and `postOffice` save extension. The site needs one coherent delivery loop, not two competing courier systems.
+
+The first slice uses six fixed, reviewed packing examples; it has no number-range selector or procedural/adaptive math. The broader generator/range direction below needs its own reviewed follow-up spec.
 
 ## Three small releases
 

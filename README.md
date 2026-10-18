@@ -36,6 +36,8 @@ node test/help-checks.mjs
 node test/cafe-checks.mjs
 node test/science-checks.mjs
 node test/workshop-checks.mjs
+node test/post-office-checks.mjs
+node test/post-office-ui-checks.mjs
 node test/learning-invitation-checks.mjs
 node test/cafe-expedition-checks.mjs
 node test/cafe-supper-checks.mjs
@@ -54,7 +56,7 @@ These checks use synthetic observations. They check the application logic; they 
 
 ## Roadmap and science expeditions
 
-The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab and Storm Workshop are implemented; the other destinations remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with later learning/play-center and rival-witch expansions, not a separate game.
+The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab, Storm Workshop and the first Willow Post Office flying-courier increment are implemented; the other destinations remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with later learning/play-center and rival-witch expansions, not a separate game.
 
 Science offers three guided water visits with optional predictions, a focused external Marble Water Lab link, self-reported observations, original controllable explanation pictures, and a discussion/project invitation. Each mission is independently available and can finish without an external visit or an answer. Link selection is not treated as visiting, experiment completion, or understanding. Explanation use and reported reading mode stay distinct. The latest 24 visits stay browser-local under the existing privacy controls; there is no tracking or data exchange with Marble. External application source/assets are not copied or embedded.
 
@@ -122,7 +124,7 @@ The parent-facing learning map uses a focused subset of Marble's actual prerequi
 
 This is not a validated assessment, a comprehensive skills inventory, a grade-level estimate, or a class-placement recommendation. The adult and child select the observed method together; the app does not judge spoken explanations. Try different examples and representations on later days. Pip and Dot, stories, lessons, questions, and activities are original.
 
-Curriculum: Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://github.com/withmarbleapp/os-taxonomy, pinned commit `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. `dist/marble-map.json` contains 82 topics and 87 relationships: the original 25 math focus topics and their direct prerequisites, plus eight limited science, data-display and English activity connections and their direct prerequisites. Topic matches describe only the stated practice; context-only nodes have no attached activity. Selected age suffixes have been removed from names; descriptions and link reasons are retained. Database/subset: ODbL 1.0; Marble descriptive content: CC BY-SA 4.0. The map view links its downloadable data, pinned source, and both licenses. Further relationships outside the slice are disclosed.
+Curriculum: Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://github.com/withmarbleapp/os-taxonomy, pinned commit `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. `dist/marble-map.json` contains 87 topics and 92 relationships: the original 25 math focus topics and their direct prerequisites, plus ten limited science, data-display, English and computing activity connections and their direct prerequisites. Topic matches describe only the stated practice; context-only nodes have no attached activity. Selected age suffixes have been removed from names; descriptions and link reasons are retained. Database/subset: ODbL 1.0; Marble descriptive content: CC BY-SA 4.0. The map view links its downloadable data, pinned source, and both licenses. Further relationships outside the slice are disclosed.
 
 Teaching reference: IES, Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades, https://ies.ed.gov/ncee/wwc/PracticeGuide/26. The prototype combines visual explanations, brief practice, flexible strategies, and interesting problems without timers or placement gates.
 
@@ -144,4 +146,12 @@ Open `#workshop` to investigate the storm-damaged parcel ramp. Choose ramp heigh
 
 Predictions and explanations are optional and unscored. Support and separately reported reading stay distinct. Paused trials retain exact settings, phase, result and model revision. Older unsupported models remain closed, readable work. The latest 24 comparisons and 24 completed trial rows per comparison stay local; counters continue after older rows are trimmed. Explorer switching, saving off, notes/export and reset apply as elsewhere.
 
-Open `#explore` for the original connected-adventure directory. Workshop, Water Lab, café, orchard, English Paris and measurement/fractions activities offer contextual links. These are thematic invitations, distinct from Marble’s actual prerequisite links. Navigation preserves waiting activities. [Spec 03](docs/specs/03-storm-workshop.md) records model details, scoped connections and upstream study. [The roadmap](docs/roadmap.md) includes the original Sky Post courier, learning/play centers, earned play credits and a rival-witch practice loop as future work, not current features.
+Open `#explore` for the original connected-adventure directory. Workshop, Water Lab, café, orchard, English Paris and measurement/fractions activities offer contextual links. These are thematic invitations, distinct from Marble’s actual prerequisite links. Navigation preserves waiting activities. [Spec 03](docs/specs/03-storm-workshop.md) records model details, scoped connections and upstream study. [The roadmap](docs/roadmap.md) includes the first Sky Post courier loop at Willow Post Office; learning/play centers, earned play credits and a rival-witch practice loop remain future work.
+
+## Willow Post Office and Sky Post
+
+Open `#post` to borrow a broom and take one of six original orders. Pack buns, ribbons, blankets, seed packets, flags or paper stars with pictured addition, subtraction or equal groups. Count the contents or choose Pack together; both keep the adventure open. These are six authored examples, not an adaptive fact library. Write a route by adding Go/Then/There/Give clauses, move or remove lines, and fly one instruction at a time across the four-landmark map. Extra stops are welcome. The courier asks for clarification when a place is missing or a parcel is offered to the wrong person, and stops after a valid handoff. Changing words resets only the route playback, keeping the order, parcel and attempts.
+
+The flying witch and sky rider share the chosen explorer portrait; the guide stays independent. An isolated smaller example, optional prediction and local narration support the delivery. Narration requests never establish listening or independent decoding. Reading reports and support flags remain separate, as do packing attempts and structured-composition checks. No writing, reading level, programming proficiency or multiplication mastery is inferred.
+
+Pending input, bank selection, clauses, helper step, courier position and the frozen request survive pause/reload and explorer switching. Unsupported saves remain exact kept work. Latest 24 visits, 24 packing attempts and 24 route-check snapshots per visit are retained; replays do not add a second completion. Existing save-off, notes/export and reset controls apply. [Spec 02](docs/specs/02-willow-post-office.md) records the reviewed behavior and upstream study. The Learning Center, earned Play Center credits and rival witch remain future expansions of this same Post Office game in [spec 25](docs/specs/25-sky-post.md).
