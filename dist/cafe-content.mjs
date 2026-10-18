@@ -1,0 +1,29 @@
+// Authored make-believe guests and bites. Properties, rather than names, determine a plate's fit.
+export const ingredients = [
+  {id:'moon-crunch', name:'Moon crunch', properties:['warm','crunchy','sweet'], color:'#e9b84a'},
+  {id:'comet-crisp', name:'Comet crisps', properties:['warm','crunchy','tangy'], color:'#da8d8d'},
+  {id:'cloud-puff', name:'Cloud puffs', properties:['warm','soft','sweet'], color:'#e2cf9f'},
+  {id:'sun-swirl', name:'Sun swirls', properties:['warm','soft','tangy'], color:'#e5a36f'},
+  {id:'frost-snap', name:'Frost snaps', properties:['cold','crunchy','sweet'], color:'#abc4da'},
+  {id:'rain-chip', name:'Rain chips', properties:['cold','crunchy','tangy'], color:'#b4a6c8'},
+  {id:'mist-mallow', name:'Mist mallows', properties:['cold','soft','sweet'], color:'#b8d4c3'},
+  {id:'dew-drop', name:'Dew drops', properties:['cold','soft','tangy'], color:'#90b9ae'}
+];
+
+export const guests = [
+  {id:'puff', name:'Puff', kind:'cloud-dragon', greeting:'A little cloud-dragon curls around the counter. “My umbrella is mostly decorative.”', wantedDish:'thunder toast', thanks:'“Thank you! A fine plate for a cloud-sized afternoon.”'},
+  {id:'brolly', name:'Brolly', kind:'umbrella-sprite', greeting:'An umbrella-sprite folds up politely. One small raindrop refuses to get off.', wantedDish:'rainbow ribbons', thanks:'“Lovely! I shall pretend the raindrop is my dinner bell.”'},
+  {id:'tangle', name:'Tangle', kind:'ribbon-giant', greeting:'A ribbon-giant ties a bow to remember the order. Then forgets which bow.', wantedDish:'knot noodles', thanks:'“Thank you! One less knot to think about.”'},
+  {id:'pebble', name:'Pebble', kind:'pebble-troll', greeting:'A pebble-troll takes a seat. The seat looks mildly surprised.', wantedDish:'mountain muffins', thanks:'“A splendid pretend picnic. I brought my own mountain.”'},
+  {id:'wisp', name:'Wisp', kind:'lantern-sprite', greeting:'A lantern-sprite floats in. “A table by the window, please. I enjoy looking out.”', wantedDish:'glimmer gumdrops', thanks:'“Thank you! The view and the plate are both quite delightful.”'},
+  {id:'bobble', name:'Bobble', kind:'little-comet', greeting:'A little comet parks its tail outside. It takes up two imaginary bicycle spaces.', wantedDish:'orbit oatcakes', thanks:'“Lovely! I have time for a very small orbit before tea.”'},
+  {id:'fern', name:'Fern', kind:'teacup-sprite', greeting:'A teacup-sprite arrives wearing a saucer as a hat. “It keeps the thoughts in.”', wantedDish:'whisper waffles', thanks:'“Thank you! I shall tell my hat all about it.”'},
+  {id:'nib', name:'Nib', kind:'star-sprite', greeting:'A star-sprite peers over the counter. “I usually order by constellation.”', wantedDish:'starlight spirals', thanks:'“A lovely plate. A small imaginary constellation, all to myself.”'}
+];
+
+// All twelve pairs from two different axes: temperature, texture, and flavour.
+export const wishes = [
+  ['warm','crunchy'], ['warm','soft'], ['cold','crunchy'], ['cold','soft'],
+  ['warm','sweet'], ['warm','tangy'], ['cold','sweet'], ['cold','tangy'],
+  ['crunchy','sweet'], ['crunchy','tangy'], ['soft','sweet'], ['soft','tangy']
+];
