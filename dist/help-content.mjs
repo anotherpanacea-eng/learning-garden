@@ -1,3 +1,4 @@
+import {parisHelpers} from './paris-content.mjs';
 // Smaller, authored examples. These support the waiting task; they never score it.
 export const helpers={
  'creature-trail':{id:'pond-sign',title:'Where does “there” point?',lesson:'A place word can point back to a place already named. Read the two parts together.',passage:'Walk to the pond. Wait there.',model:{type:'text',segments:['Walk to the pond.','Wait there.'],focus:0,clue:'“There” points back to the pond.'},kind:'choice',prompt:'Where does this sign ask us to wait?',choices:['At the pond','At the gate'],answer:0,explanation:'The pond is the place named before “there”. Now look for the place in your original sign.'},
@@ -10,6 +11,7 @@ export const helpers={
  'cafe-portions':{id:'two-guests',title:'A little order first',lesson:'Give each guest an equal group. Then count all the groups together.',model:{type:'array',rows:2,cols:2},kind:'number',prompt:'2 pretend guests want 2 star puffs each. How many puffs?',answer:4,explanation:'2 + 2 = 4. Two groups of two make four. Return to your order and check how many guests and portions it has.',facts:[[2,2]]},
  'cafe-shortfall':{id:'five-three',title:'What is missing?',lesson:'Compare how many we need with how many we have. Count the gap.',model:{type:'compare',labels:['Puffs needed','Puffs in the cupboard'],counts:[5,3]},kind:'number',prompt:'We need 5 pretend puffs and have 3. How many more?',answer:2,explanation:'3 and 2 more make 5, so 5 − 3 = 2. Use the same idea with the numbers in the waiting order.'}
 };
+Object.assign(helpers,parisHelpers);
 export const acceptsAnswer=(q,value)=>(q.answers||[q.answer]).includes(value);
 export function helperLimit(h){const m=h.model;return m.type==='array'?m.rows:m.type==='ruler'?m.end-m.start:m.type==='text'?m.segments.length:m.type==='menu'?m.items.length:m.labels.length;}
 export function cleanHelper(d,nodeId){

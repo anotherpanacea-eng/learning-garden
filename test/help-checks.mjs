@@ -9,7 +9,7 @@ import {storyPage,gardenNotes} from '../dist/garden-ui.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const fresh=()=>{const s=freshState();ensureBroad(s);ensureGarden(s);return s;};
 function reach(s,id){const n=storyNodes[id];startVisit(s,n.entrance);while(currentVisit(s).node!==id){storyDraft(s);finishStoryNode(s,true);}}
-check(Object.keys(helpers).length===9,'all nine scored tasks have help');
+check(Object.keys(helpers).length===15,'all fifteen scored tasks have help');
 for(const [id,h] of Object.entries(helpers)){
  const s=fresh();reach(s,id);const d=storyDraft(s);d.input='Synthetic waiting input';d.choice=1;d.method='worked';d.reading='together';
  const n=storyNodes[id],wrong=n.kind==='number'?999:n.choices.findIndex((_,i)=>!acceptsAnswer(n,i));submitStory(s,wrong);

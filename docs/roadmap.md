@@ -44,3 +44,5 @@ Each spec is independently reviewed; resolve concrete findings before building t
 - [NGSS elementary engineering investigations](https://www.nextgenscience.org/pe/3-5-ets1-3-engineering-design): fair comparisons, repeated trials, evidence, and design revision.
 
 Implemented: [Orchard map hunts](specs/09-orchard-map-hunts.md) give new gathering trips arithmetic location clues, persistent covered-plot inspections, counter help, and the existing equal-basket harvest. Older trips keep their original search.
+
+Implemented: [The Paris Postcard](specs/10-paris-reading-visit.md) adds six English connected-text reading targets, sentence focus and optional local narration, smaller text examples, rereading/evidence practice, and an unscored postcard/retelling invitation. This is guided practice, not a reading-level assessment.

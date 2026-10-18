@@ -12,8 +12,8 @@ import {helpers,helperLimit} from './help-content.mjs';
 import {helpPage} from './help-ui.mjs';
 import {guides,avatars} from './companions.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
-import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp} from './garden-core.mjs';
-import {gardenHome,companionLink,companionPicker,storyHub,storyPage,storyEnding,gardenNotes} from './garden-ui.mjs';
+import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool} from './garden-core.mjs';
+import {gardenHome,parisLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding,gardenNotes} from './garden-ui.mjs';
 import {areas} from './broad-content.mjs';
 import {ensureBroad,areaById,itemById,beginTrail,trailQuestion,familiarity,noteBroadExposure,noteLegacyExposure,makeBroadObservation,recordTrail} from './broad-core.mjs';
 import {broadHome,checkinHub,activityLibrary,trailSummary,broadNotes,learningMap,renderModel,adjustModel} from './broad-ui.mjs';
@@ -121,11 +121,12 @@ function render(){
   stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);
-  const navRoot=['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
+  const navRoot=root==='paris'?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
   $('#companion-link').innerHTML=companionLink(state);
   document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===`#${navRoot}`?'page':'false'));
   let html;
-  if(root==='facts')html=factsPage(state,slug);
+  if(root==='paris')html=parisLanding(state);
+  else if(root==='facts')html=factsPage(state,slug);
   else if(root==='orchard'){
     if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
     else html=orchardPage(state,slug);
@@ -225,6 +226,8 @@ function bindStory(){
  document.querySelectorAll('[data-guide]').forEach(b=>b.onclick=()=>{if(guides.some(g=>g.id===b.dataset.guide)){state.garden.guide=b.dataset.guide;save();render();$(`[data-guide="${state.garden.guide}"]`).focus();}});
  document.querySelectorAll('[data-avatar]').forEach(b=>b.onclick=()=>{if(avatars.some(a=>a.id===b.dataset.avatar)){state.garden.avatar=b.dataset.avatar;save();render();$(`[data-avatar="${state.garden.avatar}"]`).focus();}});
  const d=currentVisit(state)?.finished?null:storyDraft(state);
+ document.querySelectorAll('[data-story-audio]').forEach(b=>b.addEventListener('click',()=>{if(useStoryReadingTool(state,'audio')){save();const note=$('#reading-support-note');if(note)note.textContent='You can listen, pause, and read the passage again.';}}));
+ document.querySelectorAll('[data-story-reading-tool]').forEach(b=>b.onclick=()=>{const action=b.dataset.storyReadingTool;if(!useStoryReadingTool(state,action))return;save();render();const index=storyDraft(state).readingTools.focus;focusElement(index===null?'#reading-passage-title':`#reading-line-${index}`);});
  $('#story-help')?.addEventListener('click',()=>{const h=openStoryHelp(state);if(h)exposeStoryFacts(h);save();render();main.focus();window.scrollTo(0,0);});
  const hx=d?.helper,h=helpers[currentVisit(state)?.node];
  const helpRender=selector=>{save();render();if(selector)focusElement(selector);};
