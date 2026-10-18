@@ -1,14 +1,14 @@
 # 23 — Living Garden
 
-**Status: Scientific habitat investigations remain initial roadmap scope; not build-ready or implemented. The mathematical planning prelude is implemented in [spec 27](27-number-garden-recovery-story.md).**
+**Status: First habitat investigation implemented in [spec 28](28-first-living-garden-investigation.md). The mathematical planning entrance is implemented in [spec 27](27-number-garden-recovery-story.md). Further investigations and food chains remain initial scope.**
 
-Number Garden now invites children to count saved seeds, arrange 24 pretend planting spaces, and compare lengths and borders. These open math activities supply a storm-recovery purpose and connected entrances; they do not simulate growth, establish crop spacing, locate organisms, or produce café stock. The science slice below remains a separate next build.
+Number Garden now invites children to count saved seeds, arrange 24 pretend planting spaces, and compare lengths and borders. These open math activities supply a storm-recovery purpose and connected entrances; they do not simulate growth, establish crop spacing, locate organisms, or produce café stock. The first science visit now compares supplied clues across three pictured places to reason about damp shelter for a land snail. Finding a nearby sealed parcel supplies 12 Moon crunch bites once per explorer. This is an investigation of pictured conditions, not real field observations or an ecosystem model.
 
-## Purpose and first playable slice
+## Larger direction and later playable slices
 
 The storm scattered the café's ingredient crates among three garden habitats. Find them by looking for real organisms' needs and signs of life, rather than answering an unrelated toll question. Explore a sunny patch, shady log and pond edge with tap-to-inspect pictures, optional narration and labelled observations. Compare where a plant or minibeast could meet its needs. The fictional food reward comes from a labelled parcel nearby; do not teach that fantasy ingredients are real animal diets.
 
-Offer three reviewed investigations, a small original observation notebook, and one simple food-chain construction with arrows explicitly showing energy transfer from food to eater. Connect to scientific observation, habitats/basic needs, classification and simple food chains using refreshed Marble descriptions. Separate what a child sees from a proposed explanation. Tap matching and a selected observation do not certify field identification or ecological understanding.
+The first of the proposed three investigations is available; add two further reviewed investigations, a small original observation notebook, and one simple food-chain construction with arrows explicitly showing energy transfer from food to eater. Connect to scientific observation, habitats/basic needs, classification and simple food chains using refreshed Marble descriptions. Separate what a child sees from a proposed explanation. Tap matching and a selected observation do not certify field identification or ecological understanding.
 
 ## Later extensions and build gate
 

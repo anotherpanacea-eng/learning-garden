@@ -16,7 +16,7 @@ for(const href of ['#wonder/estimate-seeds','#wonder/many-rectangles','#activiti
 for(const a of areas)check(html.includes(`data-trail="${a.id}"`)&&html.includes(`href="#activities/${a.id}"`),'both entrances remain for '+a.id);
 check((html.match(/data-garden-flower=/g)||[]).length===12,'interactive counting flowers remain');
 const board=html.split('<section class="garden-requests"')[1].split('<section class="resume-strip"')[0];
-check(!/\b19\b|#living/.test(board),'request board reveals no hidden count or future route');
+check(!/\b19\b/.test(board),'request board reveals no hidden jar count');
 check(html.includes('data-speak=')&&!html.includes('data-story-audio'),'purpose narration has no task support record');
 const kept=structuredClone(s.plantings.openDraft),broad=JSON.stringify(s.broad),other=JSON.stringify([s.cafe,s.science,s.postOffice]);
 openNumberTaskPage(s,'many-rectangles');assert.deepEqual(s.plantings.openDraft,kept);checks++;
