@@ -10,7 +10,7 @@ import {helpPage} from '../dist/help-ui.mjs';
 import {storyPage,gardenNotes} from '../dist/garden-ui.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const fresh=()=>{const s=freshState();ensureBroad(s);ensureGarden(s);return s;};
-function reach(s,id){const n=storyNodes[id];if(n.parisStory){s.garden.seen=parisStories.filter(x=>x.destination===n.parisDestination&&x.id!==n.parisStory).map(x=>x.variants[1][0]);startVisit(s,'paris',{destination:n.parisDestination,variant:n.parisVariant});}else startVisit(s,n.entrance);let steps=0;while(currentVisit(s)?.node!==id&&steps++<10){storyDraft(s);finishStoryNode(s,true);}assert.equal(currentVisit(s)?.node,id,'helper fixture reaches requested task');}
+function reach(s,id){const n=storyNodes[id];if(n.frenchStory){startVisit(s,'french',{destination:n.frenchDestination,variant:n.frenchVariant,storyId:n.frenchStory});}else if(n.parisStory){s.garden.seen=parisStories.filter(x=>x.destination===n.parisDestination&&x.id!==n.parisStory).map(x=>x.variants[1][0]);startVisit(s,'paris',{destination:n.parisDestination,variant:n.parisVariant});}else startVisit(s,n.entrance);let steps=0;while(currentVisit(s)?.node!==id&&steps++<10){storyDraft(s);finishStoryNode(s,true);}assert.equal(currentVisit(s)?.node,id,'helper fixture reaches requested task');}
 function submitOriginal(s,n,value){if(n.kind!=='order')return submitStory(s,value);if(!editStoryOrder(s,'clear'))return false;for(const card of ORDER_PERMUTATIONS[value])editStoryOrder(s,'add',card);return submitStoryOrder(s);}
 check(Object.values(storyNodes).filter(n=>n.type==='task').every(n=>helpers[n.id]),'every scored story task has help');
 for(const [id,h] of Object.entries(helpers)){

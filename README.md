@@ -37,6 +37,7 @@ node test/paris-exploration-checks.mjs
 node test/story-pack-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
+node test/french-exploration-checks.mjs
 node scripts/check-story-packs.mjs
 ```
 
@@ -86,9 +87,11 @@ Future increments can add follow-up adventures, reviewable content packs, and pr
 
 ## Paris en français
 
-Open `#french`, or choose Explore Paris en français from the English Paris page. Three original short-sentence errands visit the bookstall, river, and rooftop garden; each has two French comprehension questions and an optional postcard. Full passages, sentence focus, English meaning/vocabulary help, and six skill-matched smaller examples are available. French narration uses only browser-reported local French voices and never falls back to English.
+Open `#french`, or choose Explore Paris en français from the English Paris page. Nine new original errands visit the bookstall, river, and rooftops, with mysteries, practical decisions, music, photography, and art. Each has three authored text choices (short sentences, more connected text, a short paragraph) and two comprehension challenges: 27 passages and 54 task versions. Three stories include tap-to-order actions. The original three short French errands and their IDs remain available.
 
-French records have separate task/passage IDs and explicit language labels. Opening the English meaning records support for both questions sharing that passage, including after reload; it does not claim unsupported comprehension. English Paris suggestions remain separate. The notebook is shared within a browser, without learner profiles or proficiency estimates. These three stories can be revisited; new French stories and automatic French difficulty adaptation are future work. See [spec 13](docs/specs/13-french-paris-and-plate-return.md).
+The next story at a place favors fewer displayed encounters. French practice across the three places suggests an amount of text: begin with short sentences; help or retries can suggest less; two first-try first questions on different new stories, reported independently read without support, can suggest more. Manual story/text choices stay open. Skips and unobserved reading do not lower suggestions; second questions, repeated stories, and different variants of a familiar story cannot manufacture new-story evidence. The two questions retain the same comprehension targets across the three versions; the language/context load changes. This is not a French level or age/grade estimate.
+
+Full passages, sentence focus, English meaning/vocabulary help, and skill-matched smaller examples remain available. Translation support follows both questions on a passage, including after reload. Local French narration never falls back to English. Frozen routes preserve partially arranged cards and paused stories. French records and suggestions stay separate from English Paris and legacy French work. This is a finite, reviewed library, not generated stories or a full language curriculum. The browser notebook remains shared, without learner profiles. See [spec 14](docs/specs/14-french-exploration.md) and the [initial French increment](docs/specs/13-french-paris-and-plate-return.md).
 
 ## Privacy and contributions
 

@@ -1,3 +1,4 @@
+import {frenchLibraryHelpers} from './french-library.mjs';
 import {frenchHelpers} from './french-content.mjs';
 import {parisLibraryHelpers} from './paris-library.mjs';
 import {parisHelpers} from './paris-content.mjs';
@@ -29,3 +30,5 @@ export function cleanHelper(d,nodeId){
 Object.assign(helpers,parisLibraryHelpers);
 
 Object.assign(helpers,frenchHelpers);
+
+Object.assign(helpers,frenchLibraryHelpers);

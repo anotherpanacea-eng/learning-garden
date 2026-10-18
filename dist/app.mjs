@@ -143,7 +143,7 @@ function render(){
   else if(root==='companions')html=companionPicker(state);
   else if(root==='storm'){
     const visit=currentVisit(state);
-    if(slug==='choose'){const parts=hash.slice(1).split('/');const place=parts[3],variant=parts[4];html=storyHub(state,detail,detail==='paris'&&place?{destination:place,variant:variant==='auto'?'auto':Number(variant),storyId:parts[5]||null}:null);}
+    if(slug==='choose'){const parts=hash.slice(1).split('/');const place=parts[3],variant=parts[4];html=storyHub(state,detail,['paris','french'].includes(detail)&&place?{destination:place,variant:variant==='auto'?'auto':Number(variant),storyId:parts[5]||null}:null);}
     else if((slug==='play'||slug==='end')&&visit){
       if(visit.finished)html=storyEnding(state);
       else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
@@ -216,7 +216,13 @@ function requestParis(destination,variant='auto',storyId=null){
  if(v&&!v.finished){navigate(`#storm/choose/paris/${destination}/${variant}${storyId?`/${storyId}`:''}`);return;}
  if(startVisit(state,'paris',options)){save();navigate('#storm/play');}
 }
+function requestFrench(destination,variant='auto',storyId=null){
+ const v=currentVisit(state);
+ if(v&&!v.finished){navigate(`#storm/choose/french/${destination}/${variant}${storyId?`/${storyId}`:''}`);return;}
+ if(startVisit(state,'french',{destination,variant,storyId})){save();navigate('#storm/play');}
+}
 function requestPath(id){
+ if(id==='french'){const active=currentVisit(state);navigate(active?.entrance==='french'&&!active.finished?'#storm/play':'#french');return;}
  if(!entranceById(id))return;
  const v=currentVisit(state);
  if(v&&!v.finished){navigate(v.entrance===id&&!(id==='paris'&&v.paris)?'#storm/play':`#storm/choose/${id}`);return;}
@@ -228,6 +234,7 @@ function finishStory(skip=false){
 }
 function bindStory(){
  document.querySelectorAll('[data-start-path]').forEach(b=>b.onclick=()=>requestPath(b.dataset.startPath));
+ document.querySelectorAll('[data-french-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.frenchDestination,value=$(`#french-length-${place}`).value,story=$(`#french-story-${place}`).value;requestFrench(place,value==='auto'?'auto':Number(value),story==='auto'?null:story);});
  document.querySelectorAll('[data-paris-pack-story]').forEach(b=>b.onclick=()=>{const story=b.dataset.parisPackStory,value=$(`#paris-pack-length-${story}`).value;requestParis(b.dataset.parisPackPlace,value==='auto'?'auto':Number(value),story);});
  document.querySelectorAll('[data-paris-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.parisDestination,value=$(`#paris-length-${place}`).value;requestParis(place,value==='auto'?'auto':Number(value));});
  document.querySelectorAll('[data-new-visit]').forEach(b=>b.onclick=()=>{const options=b.dataset.parisPlace?{destination:b.dataset.parisPlace,variant:b.dataset.parisVariant==='auto'?'auto':Number(b.dataset.parisVariant),storyId:b.dataset.parisStory||null}:undefined;if(startVisit(state,b.dataset.newVisit,options)){save();navigate('#storm/play');}});
