@@ -49,3 +49,6 @@
 @media(max-width:620px){.cafe-plate-editor{padding:15px}.cafe-chosen-bites li{flex-wrap:wrap;gap:9px}.cafe-chosen-bites li>.food-art{width:36px}.cafe-chosen-bites li>div{flex-basis:calc(100% - 50px)}.cafe-chosen-bites .secondary{margin-left:45px}.cafe-plate-editor>.secondary{width:100%}}
 
 .cafe-shelf-check{flex-wrap:wrap;gap:10px}
+
+/* Six tables give the café a story ending; every supper can lead to another. */
+.cafe-supper{display:grid;grid-template-columns:minmax(200px,.9fr) minmax(0,1.2fr);gap:28px;align-items:center;background:#edf3e8;border:1px solid #b8d4c3;border-radius:16px;padding:25px;margin:25px 0 32px}.cafe-supper-art{display:block;width:100%;max-width:520px}.cafe-supper h2{font-size:27px;line-height:1.25;margin:8px 0 14px}.cafe-supper p{font-size:15px}.cafe-supper .tiny{font-size:12px;line-height:1.6}.cafe-supper-progress{font-weight:bold;letter-spacing:.02em}.cafe-supper-complete{background:#fbf3dd;border:2px solid #bd984d}.cafe-supper .cafe-controls{flex-wrap:wrap}.cafe-supper .cafe-controls button{min-height:48px;white-space:normal}.cafe-supper .hear-button{margin-top:10px}@media(max-width:700px){.cafe-supper{grid-template-columns:1fr;gap:12px;padding:19px}.cafe-supper-art{max-width:380px;margin:auto}.cafe-supper h2{font-size:25px}.cafe-supper .cafe-controls{display:grid;grid-template-columns:1fr}}
