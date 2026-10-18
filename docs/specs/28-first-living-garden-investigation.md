@@ -1,6 +1,6 @@
 # 28 — A small shelter, a missing parcel
 
-**Status: Implemented after independent spec/science and implementation review.**
+**Status: Implemented after independent spec/science and implementation review. Preserved at `#living/first`; [spec 29](29-living-garden-spiral.md) adds a separate renewable exploration without changing this save.**
 
 ## Purpose and bounded scope
 
