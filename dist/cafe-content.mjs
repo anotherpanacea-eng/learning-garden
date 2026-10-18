@@ -1,5 +1,5 @@
 // Authored make-believe guests and bites. Properties, rather than names, determine a plate's fit.
-export const ingredients = [
+export const starterIngredients = [
   {id:'moon-crunch', name:'Moon crunch', properties:['warm','crunchy','sweet'], color:'#e9b84a'},
   {id:'comet-crisp', name:'Comet crisps', properties:['warm','crunchy','tangy'], color:'#da8d8d'},
   {id:'cloud-puff', name:'Cloud puffs', properties:['warm','soft','sweet'], color:'#e2cf9f'},
@@ -9,6 +9,16 @@ export const ingredients = [
   {id:'mist-mallow', name:'Mist mallows', properties:['cold','soft','sweet'], color:'#b8d4c3'},
   {id:'dew-drop', name:'Dew drops', properties:['cold','soft','tangy'], color:'#90b9ae'}
 ];
+
+export const orchardFoods = [
+  {id:'star-berry',name:'Star berries',properties:['cold','soft','sweet'],color:'#b7c7e3',orchard:true,
+    location:'The star-berry bower',clues:['A pretend berry hangs like a little star.','Imagine its soft, squishy shape. No real tasting is needed.','This imaginary berry is cold, soft, and sweet.']},
+  {id:'spiral-pod',name:'Spiral pods',properties:['warm','crunchy','tangy'],color:'#e5a36f',orchard:true,
+    location:'The spiral-pod branches',clues:['A pretend pod curls into a spiral.','Imagine its crunchy shell. This is make-believe investigating.','This imaginary pod is warm, crunchy, and tangy.']},
+  {id:'wobble-fruit',name:'Wobble fruit',properties:['cold','soft','tangy'],color:'#b8d4c3',orchard:true,
+    location:'The wobble-fruit nook',clues:['A pretend fruit wobbles on its branch.','Imagine its soft shape giving a little wobble. No real food is needed.','This imaginary fruit is cold, soft, and tangy.']}
+];
+export const ingredients = [...starterIngredients,...orchardFoods];
 
 export const guests = [
   {id:'puff', name:'Puff', kind:'cloud-dragon', greeting:'A little cloud-dragon curls around the counter. “My umbrella is mostly decorative.”', wantedDish:'thunder toast', thanks:'“Thank you! A fine plate for a cloud-sized afternoon.”'},

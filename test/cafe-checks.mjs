@@ -1,15 +1,15 @@
 import assert from 'node:assert/strict';
 import {renderCafe,cafeNotes} from '../dist/cafe-ui.mjs';
 import {freshState,restoreState} from '../dist/core.mjs';
-import {ingredients,guests,wishes} from '../dist/cafe-content.mjs';
-import {ensureCafe,orderFor,currentRecipe,cafeSummary,nextGuest,adjustBite,checkPlate,submitCafeNumber,supportCafe,skipCafeStage,serveCafe,skipGuest,restockCafe} from '../dist/cafe-core.mjs';
+import {ingredients,starterIngredients,orchardFoods,guests,wishes} from '../dist/cafe-content.mjs';
+import {ensureCafe,orderFor,currentRecipe,cafeSummary,nextGuest,adjustBite,checkPlate,submitCafeNumber,supportCafe,skipCafeStage,serveCafe,skipGuest,restockCafe,availableIngredients} from '../dist/cafe-core.mjs';
 import {ensureBroad,noteLegacyExposure} from '../dist/broad-core.mjs';
 import {ensureGarden,startVisit,storyDraft,finishStoryNode,noteGardenFactExposure} from '../dist/garden-core.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
-const fresh=(seed=192)=>{const s=freshState();s.cafe={version:1,seed};ensureCafe(s);nextGuest(s);return s;};
+const fresh=(seed=192)=>{const s=freshState();s.cafe={version:1,seed,range:'small'};ensureCafe(s);nextGuest(s);return s;};
 function fill(s){const c=s.cafe,o=orderFor(c);const one=ingredients.find(i=>o.wanted.every(p=>i.properties.includes(p)));for(let i=0;i<o.bites;i++)adjustBite(s,one.id,1);return one;}
 const snapshot=x=>JSON.stringify(x);
-check(guests.length===8&&ingredients.length===8&&wishes.length>=8,'bounded authored variety');
+check(guests.length===8&&starterIngredients.length===8&&orchardFoods.length===3&&ingredients.length===11&&wishes.length>=8,'bounded authored variety');
 for(const w of wishes){check(w.length===2&&ingredients.filter(a=>w.every(p=>a.properties.includes(p))).length>=2,'each wish pair has multiple fitting ingredients');}
 for(let seed=1;seed<=12;seed++){
  const s=fresh(seed);let previous;const guestIds=new Set(),requests=new Set(),totals=new Set();
@@ -46,7 +46,7 @@ for(let seed=1;seed<=12;seed++){
  const s=fresh(),c=s.cafe;const before=snapshot(c.stock),index=c.current.orderIndex;
  adjustBite(s,ingredients[0].id,1);check(!restockCafe(s),'cannot change stock mid-order');check(skipGuest(s)&&snapshot(c.stock)===before&&c.current.orderIndex===index+1,'guest skip changes no stock');
  check(c.history.at(-1).status==='skipped','whole order skip recorded');
- fill(s);checkPlate(s);skipCafeStage(s);skipCafeStage(s);serveCafe(s);check(restockCafe(s)&&Object.values(c.stock).every(n=>n===12),'restock only between orders');
+ fill(s);checkPlate(s);skipCafeStage(s);skipCafeStage(s);serveCafe(s);check(restockCafe(s)&&availableIngredients(c).every(a=>c.stock[a.id]===12),'restock only between orders');
  const seed=c.seed;for(let i=0;i<40;i++){nextGuest(s);skipGuest(s);}check(c.history.length===24&&c.seed===seed,'history bounded during continued play');
 }
 {

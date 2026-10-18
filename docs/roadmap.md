@@ -8,6 +8,10 @@ Begin with a purpose worth exploring, build an idea through a controllable visua
 
 Keep reading, comprehension, composition, investigation, support, familiarity, and unobserved skills distinct. A prediction is an idea to test, not a scored fact. Clicking an external link does not establish that an experiment was used. Selecting an observation reports what someone noticed; it is not proof of scientific understanding. Word chunks and response choices can support expression without demonstrating independent free writing. Off-screen projects remain invitations.
 
+## Current addition
+
+[Café expeditions and the multiplication garden](specs/07-cafe-expeditions-and-facts.md) is implemented, inserted before the Post Office in response to play feedback. It adds one Cloud Orchard, three new foods, contextual repair questions, original visual food and order representations, optional local speech, and full ordered multiplication coverage through12×12. The six-step science/language roadmap below remains planned as stated.
+
 ## Delivery sequence
 
 | Step | Place and purpose | Smallest useful release | Status |
