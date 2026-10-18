@@ -1,10 +1,16 @@
 # 02 — Willow Post Office
 
-**Status: Planned; not implemented.**
+**Status: Planned; not implemented. Includes the Sky Post flying-courier direction; refresh and independently review the combined build spec before implementation.**
 
 ## Goal and play loop
 
-Make instructions useful to a reader. Pip or Dot must deliver a fictional parcel in an illustrated garden. The child reads or hears the request, predicts where a draft message will lead, builds instructions by tapping word chunks, runs one instruction at a time, observes the literal result, and revises. Prediction, discussion, and transfer are optional and unscored; every delivery can be left for later.
+Make instructions useful to a reader. The explorer becomes a courier for Willow Post Office, with an original flying-witch option and independent guide/avatar choices. Pip and Dot help at the sorting counter. The child reads or hears the request, predicts where a draft message will lead, builds instructions by tapping word chunks, runs one instruction at a time, observes the literal result, and revises. Prediction, discussion, and transfer are optional and unscored; every delivery can be left for later.
+
+## One game, developed in stages
+
+**Sky Post is the flying-delivery part of Willow Post Office, not a separate destination or game.** The first slice uses an illustrated courier flying between the same four landmarks, one instruction at a time. No flight physics or reflex controls are required. Reading the order, packing parcels, planning the route and revising instructions form one delivery loop; math can enter through how many parcels or supplies the recipient needs.
+
+Later slices add the Learning Center, earned bonus play at its Play Center, and the rival witch's challenge route. A miss leads to short illustrated practice and a retry or another route, preserving the same parcel and earned credits. [Spec 25](25-sky-post.md) holds those later mechanics and unresolved decisions. Use the same delivery catalog, map and `postOffice` save extension; do not build a second courier engine, balance or parallel set of progress records. Keep math attempts and structured-composition observations distinct within that shared state.
 
 ## Content minimum and behavior
 

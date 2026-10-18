@@ -54,7 +54,7 @@ These checks use synthetic observations. They check the application logic; they 
 
 ## Roadmap and science expeditions
 
-The [six-step roadmap](docs/roadmap.md) links reviewed specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab and Storm Workshop are implemented; the other destinations remain planned. The revised sequence also scopes Living Garden, Travelers’ Archive and the original Sky Post flying-delivery adventure.
+The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab and Storm Workshop are implemented; the other destinations remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with later learning/play-center and rival-witch expansions, not a separate game.
 
 Science offers three guided water visits with optional predictions, a focused external Marble Water Lab link, self-reported observations, original controllable explanation pictures, and a discussion/project invitation. Each mission is independently available and can finish without an external visit or an answer. Link selection is not treated as visiting, experiment completion, or understanding. Explanation use and reported reading mode stay distinct. The latest 24 visits stay browser-local under the existing privacy controls; there is no tracking or data exchange with Marble. External application source/assets are not copied or embedded.
 
