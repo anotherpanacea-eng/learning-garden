@@ -1,4 +1,10 @@
 // Authored make-believe guests and bites. Properties, rather than names, determine a plate's fit.
+export const cafeSuppers=[
+ {title:'The welcome-back dinner',invitation:'Our neighbors are back from mending the garden after the storm. Serve six tables for their welcome-back dinner.',ending:'The welcome-back dinner is ready! The lanterns are lit, the café is open, and our neighbors can rest and eat together.',color:'#e9b84a',decoration:'lanterns'},
+ {title:'A moonlight picnic',invitation:'Prepare six tables for a picnic under the moon.',ending:'The moonlight picnic is ready. Plates are waiting beneath a sky full of stars.',color:'#abc4da',decoration:'stars'},
+ {title:'The rooftop potluck',invitation:'Bring six tables together for a feast above the garden.',ending:'The rooftop potluck is ready. The garden has a table for every neighbor.',color:'#b8d4c3',decoration:'leaves'},
+ {title:'The ribbon festival supper',invitation:'Serve six tables for a supper among bright ribbons.',ending:'The ribbon supper is ready. The café is dressed for another gathering of friends.',color:'#da8d8d',decoration:'ribbons'}
+];
 export const starterIngredients = [
   {id:'moon-crunch', name:'Moon crunch', properties:['warm','crunchy','sweet'], color:'#e9b84a'},
   {id:'comet-crisp', name:'Comet crisps', properties:['warm','crunchy','tangy'], color:'#da8d8d'},

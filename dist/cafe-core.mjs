@@ -1,4 +1,4 @@
-import {ingredients,orchardFoods,guests,wishes} from './cafe-content.mjs';
+import {ingredients,orchardFoods,guests,wishes,cafeSuppers} from './cafe-content.mjs';
 const object=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const integer=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max;
 const count=(x,max=30)=>integer(x,0,max)?x:0;
@@ -78,6 +78,10 @@ export function ensureCafe(state){
  c.nextOrder=Math.max(integer(c.nextOrder,0,1000000000)?c.nextOrder:0,...savedIndices.map(i=>i+1));
  const initial=stockFor(seed);c.stock=Object.fromEntries(ingredients.map(a=>[a.id,object(c.stock)&&integer(c.stock[a.id],0,180)?c.stock[a.id]:established?0:initial[a.id]]));
  c.served=count(c.served,1000000000);
+ const supper=c.supper,maxRound=Math.floor(1000000000/6)+1;
+ c.supper=object(supper)&&integer(supper.round,1,maxRound)&&integer(supper.startedAtServed,0,c.served)&&
+  (supper.round===1?supper.startedAtServed===0:supper.startedAtServed>=6*(supper.round-1))?
+  {round:supper.round,startedAtServed:supper.startedAtServed}:{round:1,startedAtServed:0};
  // Freeze pre-expansion records using the original small-order formula first.
  for(const r of [c.current,...(Array.isArray(c.history)?c.history:[])])if(object(r)&&integer(r.orderIndex,0,999999999))r.params=cleanParams(r.params)||legacyParams(c,r.orderIndex);
  const seen=new Set();c.history=Array.isArray(c.history)?c.history.filter(r=>object(r)&&integer(r.orderIndex,0,999999999)&&r.orderIndex<c.nextOrder&&['served','skipped'].includes(r.status)&&!seen.has(r.orderIndex)&&seen.add(r.orderIndex)).slice(-24).map(r=>({...r,params:cleanParams(r.params),recipe:cleanRecipe(r.recipe,c),plateAttempts:cleanPlateAttempts(r.plateAttempts,c,r.orderIndex),total:cleanNumber(r.total),shortfall:cleanNumber(r.shortfall),repair:cleanRepair(r.repair,c,r.orderIndex),repairHistory:Array.isArray(r.repairHistory)?r.repairHistory.map(q=>cleanRepair(q,c,r.orderIndex)).filter(Boolean).slice(-24):[],cupboardPlan:cleanPlan(r.cupboardPlan,c,r.orderIndex,cleanRecipe(r.recipe,c)),stockBefore:cleanStock(r.stockBefore),...(object(r.stockAtServe)?{stockAtServe:cleanStock(r.stockAtServe)}:{})})):[];
@@ -182,4 +186,14 @@ export function serveCafe(state){
 export function skipGuest(state){
  const c=ensureCafe(state);if(!c.current||c.current.stage==='served')return false;
  record(c,'skipped');c.current=null;return nextGuest(state);
+}
+export function cafeSupper(c){
+ const round=c.supper.round,progress=Math.min(6,Math.max(0,c.served-c.supper.startedAtServed));
+ return {round,progress,target:6,complete:progress===6,theme:cafeSuppers[(round-1)%cafeSuppers.length]};
+}
+export function beginCafePlus(state){
+ const c=ensureCafe(state);if(!cafeSupper(c).complete)return false;
+ c.supper={round:c.supper.round+1,startedAtServed:c.served};
+ if(!c.current||c.current.stage==='served')nextGuest(state);
+ return true;
 }
