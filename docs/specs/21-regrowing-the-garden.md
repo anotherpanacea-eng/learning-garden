@@ -1,6 +1,6 @@
 # Regrowing the garden and open number tasks
 
-Status: proposed; awaiting independent spec review. Depends on [spec 16](16-explorer-profiles-and-progress-safety.md) (per-explorer state) and [spec 20](20-number-garden-voice-and-art.md) (art).
+Status: implemented; independent spec and implementation reviews cleared. Depends on [spec 16](16-explorer-profiles-and-progress-safety.md) (per-explorer state) and [spec 20](20-number-garden-voice-and-art.md) (art).
 
 ## Problem
 
@@ -18,7 +18,7 @@ The opening garden scene shows storm damage. Taking part replants it:
 
 Plants depend on the area, never on correctness: sunflowers for Bundle Burrow, strawberries for Picnic Clearing, water lilies for Sharing Pond, moss stones for the Stepping-stone Path, tulips in shaped pots for the Shape Pavilion, climbing beans for the Ribbon Workshop, mushrooms for Puzzle Hollow. The end screen offers a seed packet with **Plant it**, and the child taps an empty plot in the garden scene to choose where it grows. Beds of 4 × 3 plots extend as they fill. Plants never wilt, nothing is lost for time away, and there are no counts, levels, streaks or comparisons between explorers. Plantings never appear as evidence or influence suggestions.
 
-State lives per explorer in a new `plantings:{plots:[{bed,slot,kind,area,at}],pending:[{kind,area,at}]}` field, separate from the story `garden` field, with a version bump and backup under spec 16.
+State lives per explorer in a new `plantings:{plots:[{bed,slot,kind,area,at}],pending:[{kind,area,at}]}` field, separate from the story `garden` field, with additive normalization and a once-only pre-addition raw backup under spec 16; the established state version stays compatible.
 
 ## Open number tasks
 
@@ -36,3 +36,7 @@ Existing `wonder` prompts become open tasks reachable from each area's adventure
 ## Verification
 
 Each earning event adds exactly one pending seed and planting moves it into a plot; a skipped walk earns the same as an answered one; the planting code reads no correctness, independence or support field; open tasks record no correctness and never feed independent or fresh evidence; save-off, export and reset include plantings. Browser: earn and plant on a phone and a tablet, reload, and switch explorers.
+
+## Build clarification
+
+Persist a unique participation event key with each pending/placed seed so rerender, reload and repeated clicks cannot mint duplicates. Walk keys include the area and visit number; adventure/open-task keys identify a new explicit visit. Hint/model/helper decorations each earn once per explorer. An open task explicitly acknowledged with either We tried it or Not today counts as participation; it records only that invitation response, never correctness. Each area exposes its existing wonder invitation as an open task; the four illustrated formats add further options. Planting does not read learning results. The dedicated garden route renders one 4-by-3 bed at a time with open navigation to earlier beds as more beds are added, avoiding unbounded rendered grids.

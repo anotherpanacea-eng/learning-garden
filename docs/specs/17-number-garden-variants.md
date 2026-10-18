@@ -1,6 +1,6 @@
 # Number Garden question variants
 
-Status: proposed; awaiting independent spec review. Depends on [spec 15](15-number-garden-corrections.md). Multiplication facts are already covered by the [multiplication garden](07-cafe-expeditions-and-facts.md) and are out of scope.
+Status: implemented; independent spec and implementation reviews cleared. Depends on [spec 15](15-number-garden-corrections.md). Multiplication facts are already covered by the [multiplication garden](07-cafe-expeditions-and-facts.md) and are out of scope.
 
 ## Problem
 
@@ -31,3 +31,7 @@ Observations add `variant` (null for authored numbers); stored `prompt` and `ans
 ## Verification
 
 For each template, 1,000 seeds: the answer is a non-negative integer or valid choice index, the solution contains it, every number is in range, and constraints hold. The same seed inputs reproduce identical output; the first encounter equals the authored item; a new seed of a seen template yields `sameKind` without fresh evidence. Existing branching and exposure checks pass with generated second questions.
+
+## Build clarification
+
+Generated fields include every operand-dependent field: fact(s), hint, talk, steps, misconception responses and speech overrides as well as prompt, answer, choices, solution and params. Persist a validated full question snapshot in the existing draft with variant metadata, not only a seed. Paused exposure and helper logic read that frozen question. Render/reload never increments an encounter; a newly opened draft reserves its encounter once and preserves it. Existing paused drafts without variants retain their authored question. A new variant of an already seen template is sameKind and never fresh evidence, even if its exact multiplication pair was unseen. Adventure examples stay separate authored examples, but their named shape/structure must remain compatible with the question. Numeric coincidence inside an instructional helper is permitted; helper prose must not solve the waiting question.

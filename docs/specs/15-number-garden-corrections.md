@@ -1,6 +1,6 @@
 # Number Garden picture and text corrections
 
-Status: proposed; awaiting independent spec review. Number Garden content and copy only. All examples are the existing authored items.
+Status: implemented; independent spec and implementation reviews cleared. Number Garden content and copy only. All examples are the existing authored items.
 
 ## Problem
 
@@ -43,3 +43,7 @@ Spelling: the owner chose American spelling for child-facing text. The first-vis
 ## Verification
 
 Checks: every adventure `shape` model matches a shape its question names; `pattern` model steps equal the question's step; no check-in readout contains its item's answer before Show the total; no learner-facing copy in `app.mjs` or `broad-ui.mjs` uses a gendered pronoun for the child. Existing broad checks keep passing. Browser: one adventure and one check-in per area at 375 px and 768 px.
+
+## Review resolution
+
+Disclosure checks mean computed totals/results, not incidental digits or numeric choice indices. Inspect accessible labels as well as visible readouts. Show the total sets sticky revealed before saving/rendering.

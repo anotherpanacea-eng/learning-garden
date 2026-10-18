@@ -35,19 +35,19 @@ A review of the Number Garden destination on 2026-10-18 found pictures that cont
 
 | Step | Purpose | Smallest useful release | Status |
 | --- | --- | --- | --- |
-| A | [Picture and text corrections](specs/15-number-garden-corrections.md) | Matched examples, labeled "Pip's example", no answer in check-in readouts, copy fixes | Planned |
-| B | [Explorer profiles and progress safety](specs/16-explorer-profiles-and-progress-safety.md) | Separate records per child without names; failed restores keep the saved value | Planned |
-| C | [Question variants](specs/17-number-garden-variants.md) | Seeded templates for all 49 items; first encounter unchanged | Planned |
-| D | [Helpers and targeted feedback](specs/18-number-garden-help-and-feedback.md) | Responsive-help helpers, partial steps, and misconception responses for every item | Planned |
-| E | [Interaction and wording](specs/19-number-garden-interaction-and-wording.md) | Visible help, question-first phone layout, tap-on-model, fold and compass, child wording | Planned |
-| F | [Read-aloud and art](specs/20-number-garden-voice-and-art.md) | Local speech with math-aware text, illustrated Pip and Dot, area scenes, story objects | Planned |
-| G | [Regrowing the garden](specs/21-regrowing-the-garden.md) | Participation replants the storm garden; unscored open number tasks | Planned |
+| A | [Picture and text corrections](specs/15-number-garden-corrections.md) | Matched examples, labeled "Pip's example", no answer in check-in readouts, copy fixes | Implemented |
+| B | [Explorer profiles and progress safety](specs/16-explorer-profiles-and-progress-safety.md) | Separate records per child without names; failed restores keep the saved value | Implemented |
+| C | [Question variants](specs/17-number-garden-variants.md) | Seeded templates for all 49 items; first encounter unchanged | Implemented |
+| D | [Helpers and targeted feedback](specs/18-number-garden-help-and-feedback.md) | Responsive-help helpers, partial steps, and misconception responses for every item | Implemented |
+| E | [Interaction and wording](specs/19-number-garden-interaction-and-wording.md) | Visible help, question-first phone layout, tap-on-model, fold and compass, child wording | Implemented |
+| F | [Read-aloud and art](specs/20-number-garden-voice-and-art.md) | Local speech with math-aware text, illustrated Pip and Dot, area scenes, story objects | Implemented |
+| G | [Regrowing the garden](specs/21-regrowing-the-garden.md) | Participation replants the storm garden; unscored open number tasks | Implemented |
 
-Suggested order: A and B first (A fixes content that teaches the wrong thing; B protects progress already saved on family devices), then C and D, then E to G. B applies to every destination because all records share one saved value. G depends on B and F.
+Delivered together after independent spec review and implementation review. Original suggested order: A and B first (A fixes content that teaches the wrong thing; B protects progress already saved on family devices), then C and D, then E to G. B applies to every destination because all records share one saved value. G depends on B and F.
 
 ## Scope shared by all steps
 
-Use the existing static app and public origin. Preserve storage keys and all prior records. Browser-local drafts, optional persistence, export, reset, and the chosen guide/explorer apply to every addition. New records stay distinct from original math assessment records. No child-specific source, family stories, identifying fields, uploads, analytics, server learner records, live AI, or background generation. Public examples and tests are fictional or synthetic. Authored content is reviewed before release. Use Marble topic IDs for selected learning connections when a genuine content match is established; do not copy its age labels into a placement system.
+Use the existing static app and public origin. Preserve prior records and the original shared storage value during explorer migration. Browser-local drafts, optional persistence, export, reset, and the chosen guide/explorer apply to every addition. New records stay distinct from original math assessment records. No child-specific source, family stories, identifying fields, uploads, analytics, server learner records, live AI, or background generation. Public examples and tests are fictional or synthetic. Authored content is reviewed before release. Use Marble topic IDs for selected learning connections when a genuine content match is established; do not copy its age labels into a placement system.
 
 Marble's taxonomy is openly licensed data with attribution obligations. Its Water Lab and Ecosystem Simulator are separate external applications; no source-reuse license was found during the current review. Link out explicitly, do not embed or copy their code/assets, and do not transmit garden records. External sites have their own availability and data handling. Local explanation pictures remain original, labeled illustrations, never claimed as observations from another site.
 

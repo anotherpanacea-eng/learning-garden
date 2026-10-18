@@ -1,6 +1,6 @@
 # Explorer profiles and progress safety
 
-Status: proposed; awaiting independent spec review. Applies to every destination because all records share one saved state.
+Status: implemented; independent spec and implementation reviews cleared. Applies to every destination because all records share one saved state.
 
 ## Problem
 
@@ -21,7 +21,7 @@ Migration on first load: copy the raw `number-garden-v1` to `number-garden-backu
 
 ## Keep data when a restore fails
 
-`restoreState` reports a failure reason with its fresh state. Before anything saves over a value that failed to restore, the raw value is copied to `number-garden-kept-<id>-<time>`. Notes show "Some saved progress could not be read. It has been kept." with **Download the kept copy** and **Remove it**. Validation stays strict; only the overwrite changes. Future schema changes bump the explorer state version and write a backup before migrating, keeping the two most recent backups per explorer.
+`restoreState` reports a failure reason with its fresh state. Before anything saves over a value that failed to restore, the raw value is copied to `number-garden-kept-<id>-<time>`. Notes show "Some saved progress could not be read. It has been kept." with **Download the kept copy** and **Remove it**. Validation stays strict; only the overwrite changes. Future incompatible schema changes require an explicit migration and backup; keep the two most recent migration backups per explorer.
 
 ## Export
 
@@ -30,3 +30,9 @@ Download covers the active explorer and adds `explorer:{avatar,color,symbol}`. T
 ## Verification
 
 Checks with a fake `localStorage` and synthetic explorers: migration preserves the original state exactly and writes a byte-identical backup; a corrupt value is kept verbatim after the next save; records under one explorer never reach another explorer's recommendations, story rotation, fact suggestions, café history or familiarity; save-off, reset and export work per explorer. Browser: create two explorers, play one Number Garden trail and one café order as each, reload, switch, and confirm notes stay separate.
+
+## Build clarification
+
+Storage failures fail closed: legacy and unreadable raw values are never overwritten until a byte-identical backup has been written successfully. Migration writes the copied state before committing the explorer-list pointer; failed writes keep the original untouched and show a persistent save warning. In-memory exploration stays available. Switching explorers discards transient screen/session handles and loads only that explorer's state. Corrupt explorer lists are kept under a recovery key before replacement; invalid profile identifiers are never used as storage paths. Save-off is device-wide: it removes all app-managed saved explorer, legacy, backup and recovery copies while retaining current explorer sessions in memory. Notes explain that scope before the toggle. Each destructive clear/remove action uses confirmation.
+
+Keep the established state.version=1 restore contract; version the explorer envelope separately. Additive plantings are normalized independently, with a once-only raw backup before their first saved addition. Future incompatible changes require an explicit version migration and backup; do not introduce an unused migration framework. Voice and speed preferences are copied into each explorer state.

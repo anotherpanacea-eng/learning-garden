@@ -1,0 +1,3 @@
+// Deterministic browser-local variation. No identifiers leave this device.
+export function seedNumber(value){let h=2166136261;for(const c of String(value)){h^=c.charCodeAt(0);h=Math.imul(h,16777619);}return h>>>0;}
+export function seededRandom(seed){let n=seedNumber(seed);const next=()=>{n+=0x6D2B79F5;let t=n;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;};return {int:(a,b)=>a+Math.floor(next()*(b-a+1)),pick:a=>a[Math.floor(next()*a.length)],shuffle:a=>{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(next()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;}};}

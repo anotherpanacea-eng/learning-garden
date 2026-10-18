@@ -1,4 +1,6 @@
 import {areas} from './broad-content.mjs';
+import {generatedBroad} from './broad-variants.mjs';
+import {cleanBroadHelp} from './broad-help.mjs';
 
 export const areaById = id => areas.find(a => a.id === id);
 export const broadItems = () => areas.flatMap(a => [...a.checkin, ...a.activities]);
@@ -20,8 +22,15 @@ export function ensureBroad(state) {
   }
   for (const k of ['seenItems','seenFacts']) if (!Array.isArray(b[k])) b[k] = [];
   for (const k of ['trails','drafts']) if (!b[k] || typeof b[k] !== 'object' || Array.isArray(b[k])) b[k] = {};
+  if(!b.encounters||typeof b.encounters!=='object'||Array.isArray(b.encounters))b.encounters={};
+  if(!Array.isArray(b.seenVariants))b.seenVariants=[];
+  b.seenVariants=b.seenVariants.filter(x=>typeof x==='string'&&x.length<=300);
   for (const [key,draft] of Object.entries(b.drafts)) {
-    if (!draft || !Array.isArray(draft.attempts) || !draft.attempts.every(Number.isFinite)) delete b.drafts[key];
+    if (!draft || !Array.isArray(draft.attempts) || !draft.attempts.every(Number.isFinite)){delete b.drafts[key];continue;}
+    if(draft.question&&!validSnapshot(draft.question,key.split(':').slice(1).join(':'))){delete b.drafts[key];continue;}
+    if(draft.model&&!validDraftModel(draft.model))delete draft.model;
+    if(draft.helper){const q=draft.question||itemById(key.split(':').slice(1).join(':'));if(q)cleanBroadHelp(q,draft);else delete draft.helper;}
+    if(draft.helpUsed||draft.helper)draft.helpUsed=true;
   }
   for (const [id,t] of Object.entries(b.trails)) {
     if (!areaById(id) || !t || !Array.isArray(t.questions) || t.questions.length > 2
@@ -47,7 +56,7 @@ export function beginTrail(state, id, revisit=false) {
   let t = b.trails[id];
   if (!t || (t.complete && revisit)) {
     const visits = (t?.visits || 0) + 1;
-    t = {questions:[a.checkin[visits % 2 === 1 ? 1 : 2].id], index:0, complete:false, visits, observationStart:b.observations.length};
+    t = {questions:[a.checkin[1].id], index:0, complete:false, visits, observationStart:b.observations.length};
     b.trails[id] = t;
   }
   const journey=b.journey;
@@ -60,25 +69,55 @@ export function trailQuestion(state, id) {
   return t && !t.complete ? itemById(t.questions[t.index]) : null;
 }
 
-export function familiarity(state, q) {
-  const b = ensureBroad(state);
-  return {familiar:b.seenItems.includes(q.id), knownFact:!!q.fact && b.seenFacts.includes(pairKey(q.fact)),
-    priorExposureUnknown:!!b.legacyExposureUnknown};
+const variantKey=q=>`${q.id}:${q.variant?.seed??'authored'}`;
+function validDraftModel(m){
+ if(!m||typeof m!=='object'||Array.isArray(m))return false;
+ const n=(v,a,b)=>Number.isInteger(v)&&v>=a&&v<=b;
+ const list=(x,limit,max)=>Array.isArray(x)&&x.length<=limit&&x.every(v=>n(v,0,max));
+ switch(m.type){
+ case 'place':return n(m.hundreds,0,9)&&n(m.tens,0,12)&&n(m.ones,0,20);
+ case 'array':return n(m.rows,1,9)&&n(m.cols,1,9)&&(m.counted===undefined||list(m.counted,81,m.rows*m.cols-1));
+ case 'fraction':return n(m.parts,2,12)&&n(m.shaded,0,m.parts)&&(m.shadedPieces===undefined||list(m.shadedPieces,12,m.parts-1));
+ case 'pattern':return list(m.values,10,200)&&m.values.length>=2&&n(m.step,1,9);
+ case 'shape':return ['triangle','rectangle','square','hexagon'].includes(m.shape)&&n(m.turns??0,0,3)&&(m.foldAngle===undefined||Number.isFinite(m.foldAngle)&&Math.abs(m.foldAngle)<=360);
+ case 'compass':return n(m.turns??0,0,3);
+ case 'ruler':return n(m.max,1,20)&&n(m.start,0,m.max)&&n(m.end,m.start,m.max);
+ case 'counters':return n(m.count,0,40);
+ default:return false;
+ }
 }
-
-export function noteBroadExposure(state, q, mode) {
-  const b = ensureBroad(state);
-  if (!b.seenItems.includes(q.id)) b.seenItems.push(q.id);
-  if (q.fact) {
-    const key = pairKey(q.fact);
-    if (!b.seenFacts.includes(key)) b.seenFacts.push(key);
-    // Preserve what happened while a check-in was paused in a different activity.
-    for (const [draftKey,d] of Object.entries(b.drafts)) {
-      const other = itemById(draftKey.replace(/^(checkin|activity):/,''));
-      if (other?.fact && pairKey(other.fact) === key && draftKey !== `${mode}:${q.id}`) d.knownFact = true;
-    }
+function validSnapshot(q,id){
+ const template=itemById(id);if(!template||!q||q.id!==id)return false;
+ if(q.variant!==null&&(typeof q.variant?.seed!=='string'||q.variant.seed.length>200))return false;
+ const expected=q.variant?generatedBroad(template,q.variant.seed):{...structuredClone(template),variant:null};
+ return JSON.stringify(q)===JSON.stringify(expected);
+}
+export function instantiateBroad(state,q,mode='checkin',explorerSeed='garden'){
+ const b=ensureBroad(state),kind=mode.includes('activity')?'activity':'checkin',draft=b.drafts[`${kind}:${q.id}`];
+ if(validSnapshot(draft?.question,q.id))return structuredClone(draft.question);
+ // Old drafts predate variants. Their authored question must stay waiting.
+ if(draft){b.encounters[q.id]=Math.max(1,b.encounters[q.id]||0);return {...structuredClone(q),variant:null};}
+ const n=Number.isSafeInteger(b.encounters[q.id])&&b.encounters[q.id]>=0?b.encounters[q.id]:0;
+ b.encounters[q.id]=n+1;
+ return n===0?{...structuredClone(q),variant:null}:generatedBroad(q,`${explorerSeed}:${q.id}:${n}`);
+}
+export function familiarity(state,q){
+ const b=ensureBroad(state),key=variantKey(q),hasTemplate=b.seenItems.includes(q.id);
+ const familiar=b.seenVariants.includes(key)||(hasTemplate&&!q.variant&&!b.seenVariants.some(x=>x.startsWith(`${q.id}:`)));
+ return {familiar,sameKind:hasTemplate&&!familiar,knownFact:(q.facts||[q.fact]).filter(Boolean).some(f=>b.seenFacts.includes(pairKey(f))),priorExposureUnknown:!!b.legacyExposureUnknown};
+}
+export function noteBroadExposure(state,q,mode){
+ const b=ensureBroad(state);if(!b.seenItems.includes(q.id))b.seenItems.push(q.id);
+ const vkey=variantKey(q);if(!b.seenVariants.includes(vkey))b.seenVariants.push(vkey);
+ for(const fact of (q.facts||[q.fact]).filter(Boolean)){
+  const key=pairKey(fact);if(!b.seenFacts.includes(key))b.seenFacts.push(key);
+  for(const [draftKey,d]of Object.entries(b.drafts)){
+   const other=d.question||itemById(draftKey.replace(/^(checkin|activity):/,''));
+   if((other?.facts||[other?.fact]).filter(Boolean).some(f=>pairKey(f)===key)&&draftKey!==`${mode}:${q.id}`)d.knownFact=true;
   }
+ }
 }
+export function broadSupportLevel(active){return active.revealed?3:active.stepsSeen||active.helpUsed||active.modelUsed?2:active.hinted?1:0;}
 
 export function noteLegacyExposure(state, fact) {
   if (!fact) return;
@@ -88,13 +127,16 @@ export function noteLegacyExposure(state, fact) {
 export function makeBroadObservation(q, active, mode, skip=false) {
   const firstCorrect = active.attempts.length === 1 && active.attempts[0] === q.answer;
   const correct = !skip && active.attempts.at(-1) === q.answer;
-  const supported = !!active.hinted || !!active.revealed || !!active.modelUsed || !!active.lessonSeen || active.method === 'together';
+  const supported = !!active.hinted || !!active.revealed || !!active.modelUsed || !!active.lessonSeen || !!active.helpUsed || !!active.stepsSeen || broadSupportLevel(active)>0 || active.method === 'together';
   const independent = correct && firstCorrect && !supported;
   return {questionId:q.id, area:q.area, skill:q.skill, topicId:q.topicId, label:q.label,
     prompt:q.prompt, answer:q.answer, choices:q.choices || null, fact:q.fact || null,
     attempts:[...active.attempts], correct, firstCorrect:!skip && firstCorrect, supported,
-    independent, freshEvidence:independent && !active.familiar && !active.knownFact && !active.priorExposureUnknown,
+    independent, freshEvidence:independent && !active.familiar && !active.sameKind && !active.knownFact && !active.priorExposureUnknown,
     hinted:!!active.hinted, revealed:!!active.revealed, modelUsed:!!active.modelUsed, lessonSeen:!!active.lessonSeen,
+    variant:q.variant?structuredClone(q.variant):null,sameKind:!!active.sameKind,
+    helpUsed:!!active.helpUsed,helper:active.helper?structuredClone(active.helper):null,stepsSeen:!!active.stepsSeen,supportLevel:broadSupportLevel(active),
+    misconceptions:Array.isArray(active.misconceptions)?structuredClone(active.misconceptions):[],
     familiar:!!active.familiar, knownFact:!!active.knownFact, priorExposureUnknown:!!active.priorExposureUnknown,
     method:skip?null:active.method, source:mode,
     status:skip?(active.attempts.length?'explored':'skipped'):(correct?'answered':'explored'), at:new Date().toISOString()};
@@ -121,6 +163,7 @@ export function broadDescribe(o) {
   if (!o.correct) return 'Worth another look together';
   if (o.supported) return 'Found an answer with support';
   if (!o.firstCorrect) return 'Found an answer after another try';
+  if(o.sameKind&&!o.familiar&&!o.knownFact)return 'Answered independently, a new example of a familiar kind of question';
   if (o.familiar || o.knownFact) return 'Answered independently after an earlier encounter';
   if (o.method === 'worked') return 'Worked it out independently';
   if (o.method === 'counted') return 'Counted independently';

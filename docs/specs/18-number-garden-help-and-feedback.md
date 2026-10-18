@@ -1,6 +1,6 @@
 # Number Garden helpers and targeted feedback
 
-Status: proposed; awaiting independent spec review. Extends the [responsive help](../responsive-help.md) pattern, already used by story and café tasks, to Number Garden. Works with authored items now and generated items after [spec 17](17-number-garden-variants.md).
+Status: implemented; independent spec and implementation reviews cleared. Extends the [responsive help](../responsive-help.md) pattern, already used by story and café tasks, to Number Garden. Works with authored items now and generated items after [spec 17](17-number-garden-variants.md).
 
 ## Problem
 
@@ -32,3 +32,9 @@ Items may also add `steps`, a list of partial worked steps ending before the ans
 ## Verification
 
 Every misconception key differs from the answer and no response, step or helper text contains the original answer. Matching and non-matching wrong attempts produce the right response and record. Every Number Garden item has a valid helper whose numbers differ from the original. `supportLevel` agrees with `hinted`, `revealed` and `helpUsed` on every path, and helper use never yields independent or fresh evidence.
+
+## Build clarification
+
+Use the established helper data/attempts contract in a Number Garden helper module; do not couple a broad task to a story visit. The waiting draft retains its answer input and all support when opening/closing a helper. A helper result never advances the waiting question. Support level is derived monotonically from flags, not a separately mutable score. No helper or step may solve the waiting question; literal number coincidences in unrelated text are not an answer leak. Record targeted feedback per attempt, without treating a proposed misconception as a diagnosis of the learner.
+
+The explicit support scale is 0 none, 1 hint, 2 partial steps, model/playground use or a smaller helper, 3 full original solution/total reveal. Lesson exposure and together-method still mark supported even when this explicit scale is zero. Helper arithmetic exposure updates all waiting drafts through existing app-level exposure functions.

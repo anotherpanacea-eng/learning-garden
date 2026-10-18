@@ -1,6 +1,6 @@
 # Number Garden read-aloud and art
 
-Status: proposed; awaiting independent spec review. Reuses the existing local speech controls in `play-media.mjs` and the original SVG approach in `companions.mjs`.
+Status: implemented; independent spec and implementation reviews cleared. Reuses the existing local speech controls in `play-media.mjs` and the original SVG approach in `companions.mjs`.
 
 ## Read-aloud
 
@@ -21,3 +21,7 @@ Array and counter models accept `item` (`seed` by default, plus `berry`, `cup`, 
 ## Verification
 
 Every `spoken` mapping is covered and plain sentences pass through unchanged; with a stub speech object, Hear it speaks the transformed text once and Stop cancels; without local voices the read-together fallback shows. Every pose renders valid SVG with a label or `aria-hidden`; every model `item` resolves to a symbol; no Number Garden view still shows the Pip or Dot emoji. Browser: hear one item per area with a local voice and with none available, at 375 px and 768 px.
+
+## Build clarification
+
+Speech normalization is language-aware: English math-symbol and unit replacements run for English speech only; French passages remain unchanged. Explicit say overrides may handle language-specific mathematical wording. Voice preferences belong to the active explorer, and switching cancels speech. No downloaded assets or external speech calls are required; original SVG is sufficient.

@@ -70,12 +70,14 @@ export function describe(o) {
   if(o.method==='counted')return 'Counted independently';
   return 'Answered independently';
 }
-export function restoreState(raw) {
-  try {const s=JSON.parse(raw);if(s?.version!==1||!s.baseline||!Array.isArray(s.baseline.observations)||!Array.isArray(s.practice)||!Array.isArray(s.puzzles)||!Number.isInteger(s.baseline.index)||s.baseline.index<0||s.baseline.index>6||typeof s.baseline.complete!=='boolean'||!Number.isInteger(s.sessions)||s.sessions<0)return freshState();
+export function restoreStateResult(raw) {
+  const failed=reason=>({state:freshState(),reason});
+  try {const s=JSON.parse(raw);if(s?.version!==1||!s.baseline||!Array.isArray(s.baseline.observations)||!Array.isArray(s.practice)||!Array.isArray(s.puzzles)||!Number.isInteger(s.baseline.index)||s.baseline.index<0||s.baseline.index>6||typeof s.baseline.complete!=='boolean'||!Number.isInteger(s.sessions)||s.sessions<0)return failed('The saved state has an unsupported or invalid structure.');
     const valid=o=>o&&typeof o.questionId==='string'&&typeof o.skill==='string'&&Array.isArray(o.attempts)&&o.attempts.every(Number.isFinite)&&['skipped','explored','answered'].includes(o.status)&&(!o.fact||(Array.isArray(o.fact)&&o.fact.length===2&&o.fact.every(Number.isFinite)));
-    if(![...s.baseline.observations,...s.practice,...s.puzzles].every(valid)) return freshState();
+    if(![...s.baseline.observations,...s.practice,...s.puzzles].every(valid)) return failed('Some original task records could not be read.');
     if(s.baseline.draft&&(!Array.isArray(s.baseline.draft.attempts)||!s.baseline.draft.attempts.every(Number.isFinite)||typeof s.baseline.draft.questionId!=='string'))delete s.baseline.draft;
     if(s.exposures&&(!Array.isArray(s.exposures)||!s.exposures.every(v=>typeof v==='string')))delete s.exposures;
-    return s;
-  } catch {return freshState();}
+    return {state:s,reason:null};
+  } catch {return failed('The saved value is not readable JSON.');}
 }
+export function restoreState(raw) {return restoreStateResult(raw).state;}

@@ -1,6 +1,6 @@
 # Number Garden interaction and wording
 
-Status: proposed; awaiting independent spec review. Each section can ship separately. Follows the established rules: tap and keyboard controls, no interaction that requires dragging or hover, animation under the learner's control.
+Status: implemented; independent spec and implementation reviews cleared. Each section can ship separately. Follows the established rules: tap and keyboard controls, no interaction that requires dragging or hover, animation under the learner's control.
 
 ## Visible help
 
@@ -38,3 +38,7 @@ The child-facing nav and cards use assessment words. Child views say **Garden wa
 ## Verification
 
 Each tap action produces the same model as its button; four clockwise compass turns return to the start; no fold reveals an answer before it is chosen; at 375 px the question begins on the first screen once the lesson is collapsed; child views contain no "observation," "check-in" or "assessment"; original multiplication records render unchanged in notes. Browser and keyboard pass at 375 px and 768 px.
+
+## Build clarification
+
+Direct fraction taps toggle an individual piece and compute shaded count from the selected pieces; existing shade-more/fewer controls remain. Fold reflection uses the actual polygon and its geometric center. Equilateral triangle and regular hexagon include their three and six symmetry axes respectively; rectangle diagonal folds visibly mismatch. No axis is labeled correct before the child tries it. Compass directions remain geometric, independent of illustration pose. On phones, collapse Pip's example initially into a labeled expandable thumbnail so the question is reachable immediately; opening/editing retains the model and records support.

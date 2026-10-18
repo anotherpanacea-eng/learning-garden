@@ -6,7 +6,7 @@ A playful, parent-guided world of connected investigations, stories, and making 
 
 The opening visit, **First Morning**, has three independent entrances: follow a creature's trail, investigate a mysterious note, or imagine a shelter. Each path offers two reading, science, or mathematics tasks, an unscored design choice, its own ending, and an optional paper project. Mira, Rowan, and Ari are original fictional guides; guide and explorer-avatar choices are independent.
 
-Visits can be paused, resumed, replayed, or left waiting while another path is explored. Existing Number Garden activities and records remain available at the same browser origin. All preferences, drafts, observations, and exports stay browser-local; saving off and clearing apply to everything. No identity fields, uploads, analytics, live AI, or server-side learner records are used.
+Visits can be paused, resumed, replayed, or left waiting while another path is explored. Existing Number Garden activities and records remain available at the same browser origin. All preferences, drafts, observations, and exports stay browser-local; saving off applies device-wide, while clearing can target one explorer or all explorers. No identity fields, uploads, analytics, live AI, or server-side learner records are used.
 
 ## Run locally
 
@@ -25,6 +25,11 @@ With Node.js installed:
 ```sh
 node test/core-checks.mjs
 node test/broad-checks.mjs
+node test/broad-variants-checks.mjs
+node test/broad-help-checks.mjs
+node test/broad-model-checks.mjs
+node test/explorer-storage-checks.mjs
+node test/plantings-and-speech-checks.mjs
 node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs
@@ -55,7 +60,7 @@ The [current café and fact-garden specification](docs/specs/07-cafe-expeditions
 
 New café orders can use every ordered guest/bite pair from 1×1 through 12×12; a small-order range stays openly available. Range changes affect the next guest. Existing saved orders and history keep frozen original parameters. The separate multiplication garden exposes all144 ordered facts, six-question mixed practice, arrays/equal groups, split strategies and optional reported methods. Reversed facts keep separate observations. Records distinguish reported recall, working out, counting, support, retries, prior encounters and unknown method; no speed or mastery label is inferred. Parent notes retain up to576 fact observations and disclose that bound. Progress stays device-local and follows the existing save/export/reset controls.
 
-Read-aloud is optional and uses only English voices the browser identifies as local. Voice & speed controls let you audition available voices and adjust the pace; enhanced/natural voices are preferred when identified by name, otherwise the local device default is preferred. Voice choices last until refresh and reset with progress. No microphone, external speech API or automatic audio is used. A visible read-together fallback works when local speech is unavailable. Speech stops on navigation or reset. All activities work without sound.
+Read-aloud is optional and uses only voices for the passage language that the browser identifies as local. Voice & speed controls let you audition available voices and adjust the pace; enhanced/natural voices are preferred when identified by name, otherwise the local device default is preferred. Voice and speed choices belong to the active explorer and reset with that explorer’s progress. No microphone, external speech API or automatic audio is used. A visible read-together fallback works when local speech is unavailable. Speech stops on navigation or reset. All activities work without sound.
 
 ## Gathering supplies
 
@@ -91,7 +96,7 @@ Open `#french`, or choose Explore Paris en français from the English Paris page
 
 The next story at a place favors fewer displayed encounters. French practice across the three places suggests an amount of text: begin with short sentences; help or retries can suggest less; two first-try first questions on different new stories, reported independently read without support, can suggest more. Manual story/text choices stay open. Skips and unobserved reading do not lower suggestions; second questions, repeated stories, and different variants of a familiar story cannot manufacture new-story evidence. The two questions retain the same comprehension targets across the three versions; the language/context load changes. This is not a French level or age/grade estimate.
 
-Full passages, sentence focus, English meaning/vocabulary help, and skill-matched smaller examples remain available. Translation support follows both questions on a passage, including after reload. Local French narration never falls back to English. Frozen routes preserve partially arranged cards and paused stories. French records and suggestions stay separate from English Paris and legacy French work. This is a finite, reviewed library, not generated stories or a full language curriculum. The browser notebook remains shared, without learner profiles. See [spec 14](docs/specs/14-french-exploration.md) and the [initial French increment](docs/specs/13-french-paris-and-plate-return.md).
+Full passages, sentence focus, English meaning/vocabulary help, and skill-matched smaller examples remain available. Translation support follows both questions on a passage, including after reload. Local French narration never falls back to English. Frozen routes preserve partially arranged cards and paused stories. French records and suggestions stay separate from English Paris and legacy French work. This is a finite, reviewed library, not generated stories or a full language curriculum. Anonymous explorer slots now keep each notebook separate; earlier shared play remains together in its original slot. See [spec 14](docs/specs/14-french-exploration.md) and the [initial French increment](docs/specs/13-french-paris-and-plate-return.md).
 
 ## Privacy and contributions
 
@@ -105,7 +110,7 @@ A small, parent-guided math prototype for exploring number sense, operations, fr
 
 Serve `dist/` with any static HTTP server. There is no install/build step, external asset dependency, AI call, analytics, or application backend. The app fetches its bundled curriculum JSON from the same origin. This repository is hosting-neutral; the existing Site's configuration stays in its deployment checkout.
 
-Progress is saved only in the browser's local storage. Grown-up notes provide a persistence switch, JSON download, and confirmed clearing. Saving off applies to every area. New devices and browsers start fresh. Broad trails retain drafts, hints, attempts, and models across reloads. Original multiplication records and the existing storage key are preserved; original practice sets do not resume their uncompleted plan after reload, but recorded answers remain.
+Progress is saved only in the browser's local storage. Grown-up notes provide a persistence switch, JSON download, and confirmed clearing for one explorer or all explorers. Saving off removes all app-managed saved copies across every area. New devices and browsers start fresh. Broad trails retain drafts, hints, attempts, and models across reloads. Original multiplication records and the existing storage key are preserved; original practice sets do not resume their uncompleted plan after reload, but recorded answers remain.
 
 The first question in a trail leads to a further question after a first independent answer, a smaller question after support or another try, or an alternate question after a skip. Notes describe individual tasks rather than assigning a level. Activities are recorded separately as attempts after teaching. Prior encounters with questions and known multiplication pairs are retained across the old and new experiences; missing historical familiarity is marked unknown. Two skipped questions give a neutral activity suggestion. Small samples and fixed examples limit what can be inferred.
 
@@ -120,3 +125,11 @@ Teaching reference: IES, Assisting Students Struggling with Mathematics: Interve
 ## License
 
 Original application code and original activity content are available under the [MIT license](LICENSE). The bundled Marble curriculum subset and its descriptive content retain their separate ODbL 1.0 and CC BY-SA 4.0 licenses. See [NOTICE](NOTICE) and the attribution in the app's Learning map. The MIT license does not replace the licenses of that third-party data.
+
+## Number Garden refresh
+
+Specs 15–21 are implemented: matched and labeled teaching pictures; authored first encounters followed by seeded variants for all 49 math items; partial steps, targeted feedback and smaller parallel examples; direct tap/keyboard models with geometric folds and a compass; original illustrated Pip and Dot; and optional device-local, math-aware read-aloud. On phones, Pip's idea and model expand when wanted so the question appears first. Support, repeated examples and independent attempts remain distinct.
+
+Anonymous explorer slots use a picture, color and symbol, with separate full-app progress and voice preferences. No names or other identifying fields are added. Legacy shared progress is copied without changing the original; unreadable saves are kept before replacement, and failed preservation writes leave the original untouched. Notes can download or remove kept copies. Saving off removes all app-managed explorer, legacy and kept copies on this device while retaining current sessions in memory. Clearing one explorer leaves the others intact.
+
+Participation grows an original storm-recovery garden: finishing a walk or adventure, using a new kind of help, or acknowledging an open invitation can bring a plant or decoration. A skipped walk counts equally. Plantings never influence skill suggestions or become learning evidence. Open invitations include the seven areas' wondering prompts, estimates, defendable choices, different rectangles and counterexamples. All paths remain open.
