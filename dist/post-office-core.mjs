@@ -1,4 +1,4 @@
-import {validPostRival,rivalBlocks} from './post-rival.mjs';
+import {validPostRival,validBrambleNotebook,rivalBlocks} from './post-rival.mjs';
 import {POST_REVISION,places,recipients,deliveries,courierPresets,courierPronouns} from './post-office-content.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const integer=(x,min=0)=>Number.isSafeInteger(x)&&x>=min;
@@ -25,6 +25,7 @@ function validOrder(o){
 }
 function validVisit(v){
  if('rival'in v&&!validPostRival(v.rival))return false;
+ if('rivalLegacy'in v&&(v.rivalLegacy?.revision!=='bramble-1'||!validPostRival(v.rivalLegacy)||!['resolved','continued','bypassed'].includes(v.rivalLegacy.phase)))return false;
  if(v.revision!==POST_REVISION||!validOrder(v.order)||!object(v.recipientLocations)||!recipients.every(r=>place(v.recipientLocations[r.id]))||v.recipientLocations[v.order.recipient]!==v.order.destination)return false;
  if(!object(v.composer)||!place(v.composer.place)||!recipient(v.composer.recipient))return false;
  if(!Array.isArray(v.clauses)||v.clauses.length>6||!v.clauses.every(validClause)||!object(v.packing)||!object(v.playback)||!object(v.support))return false;
@@ -37,7 +38,7 @@ function trim(p){if(p.visits.length>24){const current=p.visits.find(v=>v.id===p.
 export function ensurePostOffice(state){
  if(!('postOffice'in state)){state.postOffice=fresh();return state.postOffice;}
  let p=state.postOffice;
- if(!object(p)||p.version!==1||!Array.isArray(p.visits)||!(p.current===null||typeof p.current==='string')||!courierPresets.some(c=>c.id===p.courier)||'courierAvatar'in p&&!['fern','reed','sky'].includes(p.courierAvatar)||'courierPronouns'in p&&!courierPronouns.includes(p.courierPronouns)){
+ if(!object(p)||p.version!==1||!Array.isArray(p.visits)||!(p.current===null||typeof p.current==='string')||!courierPresets.some(c=>c.id===p.courier)||'courierAvatar'in p&&!['fern','reed','sky'].includes(p.courierAvatar)||'courierPronouns'in p&&!courierPronouns.includes(p.courierPronouns)||!validBrambleNotebook(p)){
   const payload=clone(p);p=fresh();p.kept={reason:'This saved Post Office uses an unavailable or unreadable format. Its complete original payload is kept here.',payload};state.postOffice=p;return p;
  }
  let next=Math.max(integer(p.nextVisit,1)?p.nextVisit:1,1,...p.visits.filter(object).map(v=>idNumber(v.id)+1));

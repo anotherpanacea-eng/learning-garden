@@ -1,6 +1,6 @@
 # 25 — Sky Post: Willow Post Office expansions
 
-**Status: First delivery loop (spec 02), courier identity choices and Bramble’s first rival encounter are implemented. Broader math generation remains planned. The Play Center and play-credit proposal has been removed.**
+**Status: First delivery loop (spec 02), courier identity choices and Bramble’s first rival encounter are implemented. Generated adaptive challenges are now implemented in [spec 26](26-bramble-changing-challenges.md). The Play Center and play-credit proposal has been removed.**
 
 ## Purpose
 
@@ -22,7 +22,7 @@ Use only fictional/synthetic examples in the public repository. No child identit
 
 ## First rival encounter and courier choices — implementation contract
 
-This section records the implemented bounded release; broader procedural math remains future work.
+This section records the implemented bounded release; spec 26 extends this preserved release with generated adaptive rounds.
 
 ### Courier choices
 
@@ -53,3 +53,5 @@ On 2026-10-18, refreshed Jane `LESSONS.md` at `0a2acf3efbf81f00027afd6bdd108c0f8
 Independent spec review cleared the bounded contract after making the resolved/continued blocking semantics explicit. The neutral six-order mix and read-only terminal encounters are specified above.
 
 Independent implementation review cleared the encounter and identity changes after requiring meaningful addition/group-count picture steps, gate-specific ribbon labels and cumulative-count text equivalents. Focused integration checks cover legacy choices, phase recovery and untouched delivery state. Browser QA covers customization, a miss/example/retry, paused reload, a Paris detour, handoff, quiet-route bypass and solve-together, plus tablet/phone layouts. No physical iPad Safari or hosted CI run is claimed.
+
+Spec 26 supersedes the one-encounter-per-visit restriction for new play. Authored bramble-1 snapshots retain their original behavior and exact work; explicit Another challenge starts a generated round after preserving the authored snapshot. Packing orders remain the six authored examples.
