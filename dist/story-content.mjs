@@ -13,7 +13,7 @@ export const entrances = [
     start: 'creature-trail',
     ending: {
       title: 'A quiet place by the flower',
-      body: 'Pip and Dot pause by the blue flower. Luma, their imaginary winged neighbour, settles under a leaf. There is room here for another small adventure.',
+      body: 'Pip and Dot pause by the blue flower. Luma, their imaginary winged neighbor, settles under a leaf. There is room here for another small adventure.',
       projectTitle: 'Make a paper trail',
       project: 'If you like, draw a garden on paper. Add a starting spot, a resting place for Luma, and a trail of dots or arrows between them. Invite someone to follow your trail with a finger.'
     }
@@ -131,9 +131,9 @@ export const storyNodes = {
   'shelter-ribbon': {
     id: 'shelter-ribbon', entrance: 'shelter', type: 'task', subject: 'Mathematics',
     title: 'A ribbon for the drawing',
-    body: 'Dot lays a ribbon beside a centimetre ruler. Its ends line up with 2 cm and 9 cm. Pip plans to use that length on a shelter drawing. No beetle-sized saw required.',
+    body: 'Dot lays a ribbon beside a centimeter ruler. Its ends line up with 2 cm and 9 cm. Pip plans to use that length on a shelter drawing. No beetle-sized saw required.',
     guide: '{guide} says, “The ribbon starts after zero, so let’s measure the space between its ends.”',
-    prompt: 'How long is the ribbon, in centimetres?',
+    prompt: 'How long is the ribbon, in centimeters?',
     kind: 'number', answer: 7,
     hint: 'Find the difference between the end mark and the start mark.',
     explanation: '9 − 2 = 7. The ribbon covers seven one-centimetre spaces, so it is 7 cm long.',

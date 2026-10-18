@@ -14,14 +14,14 @@ export const missions = [
       'Tap Your room (21°C). Compare the arrangement and movement with the ice view. You can switch between the two presets as often as you like.',
       'Try Glass again to connect the tiny view to the whole sample. Return to this garden tab whenever you are ready.'
     ],
-    observations:['I noticed a more regular arrangement in the ice model.','I noticed molecules moving past neighbours in the liquid model.','I noticed motion in both views.','I’m not sure / I did not look closely.'],
+    observations:['I noticed a more regular arrangement in the ice model.','I noticed molecules moving past neighbors in the liquid model.','I noticed motion in both views.','I’m not sure / I did not look closely.'],
     frames:[
       {title:'Ice has an open pattern',body:'In ordinary ice, water molecules sit around positions in an ordered, open structure. They are not motionless: the little arrows show vibration around those positions.',model:'ice',phase:0},
       {title:'Still ice, still moving',body:'This next picture shifts the molecules a little around the same positions. Ice is solid, but its molecules keep moving. The gaps in its open structure do not make it a gas.',model:'ice',phase:1},
       {title:'Liquid can flow',body:'When ice melts, its molecules can move past one another. The open ice arrangement is lost. They are still water molecules; ordinary liquid water is more closely packed than ordinary ice.',model:'water',phase:2}
     ],
-    talk:'How could you show the difference between vibrating around a place and moving past a neighbour, using your hands?',
-    project:'Optional: draw an ice patch and a puddle on paper. Add a tiny-view window to each. Use short arrows around places for ice and arrows past neighbours for liquid. Or explain your idea to someone. No real ice is needed.',
+    talk:'How could you show the difference between vibrating around a place and moving past a neighbor, using your hands?',
+    project:'Optional: draw an ice patch and a puddle on paper. Add a tiny-view window to each. Use short arrows around places for ice and arrows past neighbors for liquid. Or explain your idea to someone. No real ice is needed.',
     sourceLinks:[lab,motion,{title:'USGS: Water Density',url:'https://www.usgs.gov/water-science-school/science/water-density'}]
   },
   {
@@ -37,7 +37,7 @@ export const missions = [
     ],
     observations:['Motion looked more vigorous at the warmer setting.','Molecule sizes looked the same to me.','I could not tell a difference between the two settings.','I did not look / I’m not sure.'],
     frames:[
-      {title:'Cooler liquid is moving too',body:'Even in cooler liquid water, molecules keep moving. The short arrows in this picture represent motion; the molecules can move past their neighbours.',model:'heat',phase:0},
+      {title:'Cooler liquid is moving too',body:'Even in cooler liquid water, molecules keep moving. The short arrows in this picture represent motion; the molecules can move past their neighbors.',model:'heat',phase:0},
       {title:'Warmer liquid, more vigorous motion',body:'In warmer liquid water, molecular motion is generally more vigorous. Longer arrows represent that difference here. They are a drawing choice, not measurements of individual speeds.',model:'heat',phase:1},
       {title:'The molecules did not grow',body:'Our dots stay the same size. Warming these liquid samples changes their motion, not the identity or size of each water molecule. Bigger arrows do not mean bigger molecules.',model:'heat',phase:2}
     ],
