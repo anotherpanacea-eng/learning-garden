@@ -42,3 +42,5 @@ Each spec is independently reviewed; resolve concrete findings before building t
 - [Marble Skill Taxonomy](https://github.com/withmarbleapp/os-taxonomy): learning connections and topic scope; not an assessment instrument.
 - [IES foundational reading](https://ies.ed.gov/ncee/wwc/PracticeGuide/21), [reading comprehension](https://ies.ed.gov/ncee/wwc/PracticeGuide/14), and [elementary writing](https://ies.ed.gov/ncee/wwc/PracticeGuide/17): explicit teaching targets and the distinction between word reading, meaning, and composition.
 - [NGSS elementary engineering investigations](https://www.nextgenscience.org/pe/3-5-ets1-3-engineering-design): fair comparisons, repeated trials, evidence, and design revision.
+
+Implemented: [Orchard map hunts](specs/09-orchard-map-hunts.md) give new gathering trips arithmetic location clues, persistent covered-plot inspections, counter help, and the existing equal-basket harvest. Older trips keep their original search.

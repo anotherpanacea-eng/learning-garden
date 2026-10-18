@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {ingredients,starterIngredients,orchardFoods} from '../dist/cafe-content.mjs';
-import {startForage,chooseForage,currentForage,submitHarvest,packHarvest} from '../dist/forage-core.mjs';
+import {startForage,chooseForage,plotId,currentForage,submitHarvest,packHarvest} from '../dist/forage-core.mjs';
 import {ensureCafe,currentRecipe,nextGuest,orderFor,setCafeRange,skipGuest,adjustBite,checkPlate,cafeSummary,submitCafeNumber,serveCafe,availableIngredients,investigateFood,collectFood,repairQuestion,answerRepair,helpRepair,leaveRepair} from '../dist/cafe-core.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const fresh=(seed=192)=>{const s=freshState();ensureCafe(s);s.cafe.seed=seed;nextGuest(s);return s;};
 const snapshot=x=>JSON.stringify(x);
-function gather(s){for(const item of currentRecipe(s.cafe))while(s.cafe.stock[item.ingredient.id]<item.required){assert.ok(startForage(s,item.ingredient.id));assert.ok(chooseForage(s,item.ingredient.id));assert.ok(submitHarvest(s,currentForage(s).total));assert.ok(packHarvest(s));}}
+function gather(s){for(const item of currentRecipe(s.cafe))while(s.cafe.stock[item.ingredient.id]<item.required){assert.ok(startForage(s,item.ingredient.id));assert.ok(chooseForage(s,plotId(currentForage(s).hunt.row,currentForage(s).hunt.column)));assert.ok(submitHarvest(s,currentForage(s).total));assert.ok(packHarvest(s));}}
 const fitting=s=>availableIngredients(s.cafe).find(a=>orderFor(s.cafe).wanted.every(p=>a.properties.includes(p)));
 {
  const s=fresh(),pairs=new Set();check(s.cafe.range==='all','new orders default to all facts');

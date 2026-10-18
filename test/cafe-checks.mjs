@@ -3,14 +3,14 @@ import {renderCafe,cafeNotes} from '../dist/cafe-ui.mjs';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {ingredients,starterIngredients,orchardFoods,guests,wishes} from '../dist/cafe-content.mjs';
 import {ensureCafe,orderFor,currentRecipe,cafeSummary,nextGuest,adjustBite,checkPlate,submitCafeNumber,supportCafe,skipCafeStage,serveCafe,skipGuest,availableIngredients} from '../dist/cafe-core.mjs';
-import {startForage,chooseForage,currentForage,submitHarvest,packHarvest} from '../dist/forage-core.mjs';
+import {startForage,chooseForage,plotId,currentForage,submitHarvest,packHarvest} from '../dist/forage-core.mjs';
 import {ensureBroad,noteLegacyExposure} from '../dist/broad-core.mjs';
 import {ensureGarden,startVisit,storyDraft,finishStoryNode,noteGardenFactExposure} from '../dist/garden-core.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
 const fresh=(seed=192)=>{const s=freshState();ensureCafe(s);s.cafe.seed=seed;s.cafe.range='small';nextGuest(s);return s;};
 function fill(s){const c=s.cafe,o=orderFor(c);const one=ingredients.find(i=>o.wanted.every(p=>i.properties.includes(p)));for(let i=0;i<o.bites;i++)adjustBite(s,one.id,1);return one;}
 const snapshot=x=>JSON.stringify(x);
-function gather(s){for(const item of currentRecipe(s.cafe))while(s.cafe.stock[item.ingredient.id]<item.required){assert.ok(startForage(s,item.ingredient.id));assert.ok(chooseForage(s,item.ingredient.id));const t=currentForage(s);assert.ok(submitHarvest(s,t.total));assert.ok(packHarvest(s));}}
+function gather(s){for(const item of currentRecipe(s.cafe))while(s.cafe.stock[item.ingredient.id]<item.required){assert.ok(startForage(s,item.ingredient.id));assert.ok(chooseForage(s,plotId(currentForage(s).hunt.row,currentForage(s).hunt.column)));const t=currentForage(s);assert.ok(submitHarvest(s,t.total));assert.ok(packHarvest(s));}}
 function serveWithSupplies(s){gather(s);return serveCafe(s);}
 check(guests.length===12&&starterIngredients.length===8&&orchardFoods.length===3&&ingredients.length===11&&wishes.length>=8,'bounded authored variety');
 for(const w of wishes){check(w.length===2&&ingredients.filter(a=>w.every(p=>a.properties.includes(p))).length>=2,'each wish pair has multiple fitting ingredients');}
