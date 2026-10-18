@@ -18,7 +18,7 @@ The opening garden scene shows storm damage. Taking part replants it:
 
 Plants depend on the area, never on correctness: sunflowers for Bundle Burrow, strawberries for Picnic Clearing, water lilies for Sharing Pond, moss stones for the Stepping-stone Path, tulips in shaped pots for the Shape Pavilion, climbing beans for the Ribbon Workshop, mushrooms for Puzzle Hollow. The end screen offers a seed packet with **Plant it**, and the child taps an empty plot in the garden scene to choose where it grows. Beds of 4 × 3 plots extend as they fill. Plants never wilt, nothing is lost for time away, and there are no counts, levels, streaks or comparisons between explorers. Plantings never appear as evidence or influence suggestions.
 
-State lives per explorer in a new `plantings:{plots:[{bed,slot,kind,area,at}],pending:[{kind,area,at}]}` field, separate from the story `garden` field, with additive normalization and a once-only pre-addition raw backup under spec 16; the established state version stays compatible.
+State lives per explorer in a new `plantings:{plots:[{bed,slot,kind,area,at}],pending:[{kind,area,at}]}` field, separate from the story `garden` field, with additive normalization (earlier shared saves are already backed up by the spec 16 migration); the established state version stays compatible.
 
 ## Open number tasks
 

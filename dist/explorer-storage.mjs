@@ -71,7 +71,7 @@ export class ExplorerStore{
   }catch{this._writeBlocked=true;this._warn();if(!this.registry){const p={id:'explorer-1',avatar:'sky',color:'gold',symbol:'leaf',createdAt:this.now().toISOString()};this.registry={version:1,activeId:p.id,explorers:[p]};this.memory.set(p.id,this._fresh(p));}return this.memory.get(this.registry.activeId)||this._fresh(this.active);}
  }
  _writeState(profile,state){
-  const key=stateKey(profile.id);try{const raw=this._get(key);if(raw!==null){const restored=restoreStateResult(raw);if(restored.reason&&!this._copy(raw,'kept',profile.id))return false;if(!restored.reason&&state.plantings!==undefined&&restored.state.plantings===undefined&&!this._copy(raw,'backup',profile.id))return false;}
+  const key=stateKey(profile.id);try{const raw=this._get(key);if(raw!==null){const restored=restoreStateResult(raw);if(restored.reason&&!this._copy(raw,'kept',profile.id))return false;}
    if(!this._write(key,JSON.stringify(state)))return false;if(avatarIds.includes(state.garden?.avatar))profile.avatar=state.garden.avatar;return true;
   }catch{this._warn();return false;}
  }

@@ -53,7 +53,7 @@ for(const failKeep of [false,true]){
  const cleared=m.clearActive();equal(cleared.practice,[],'clear active new notebook');equal(m.select(b).sessions,8,'clear active keeps other explorer');m.select(a);m.clearAll();equal(m.explorers.length,1,'clear all removes explorer list');equal(m.load().practice,[],'clear all fresh');equal(disk.data.get(SAVE_KEY),'on','clear all preserves preference');
 }
 {
- const disk=new Storage(),m=store(disk),s=m.load();s.plantings={plots:[],pending:[]};const initial=disk.data.get(key(m.active.id));disk.fail=(op,k)=>op==='set'&&k.startsWith('number-garden-backup-');check(!m.save(s),'additive backup failure stops save');equal(disk.data.get(key(m.active.id)),initial,'additive backup failure preserves old version');disk.fail=()=>false;check(m.save(s),'additive backup retry');check(copies(disk).some(k=>disk.data.get(k)===initial),'pre-addition raw preserved');
+ const disk=new Storage(),m=store(disk),s=m.load();s.plantings={plots:[],pending:[]};check(m.save(s),'new explorer saves plantings');m.add({},s);check(m.save(m.load()),'added explorer saves');equal(copies(disk),[],'new explorers create no backup or kept copies');
 }
 {
  const disk=new Storage({[REGISTRY_KEY]:'broken'});disk.fail=(op,k)=>op==='set'&&k.startsWith('number-garden-kept-');const m=store(disk),s=m.load();check(!m.setPersistence(true,s),'enable cannot bypass invalid registry preservation');equal(disk.data.get(REGISTRY_KEY),'broken','enable leaves invalid registry untouched');
