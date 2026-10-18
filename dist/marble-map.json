@@ -1,0 +1,969 @@
+{
+  "dataset": "Number Garden focused subset of Marble Skill Taxonomy v1",
+  "commit": "96a7933754af672e1bfdbf7ecb05c325860c6e0d",
+  "totalTopics": 1590,
+  "attribution": "Marble Skill Taxonomy (v1) © Generative Spark, Inc. (Marble), https://withmarble.com",
+  "databaseLicense": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "contentLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "modifications": "Focused subset. Display names omit parenthetical age suffixes. No curriculum standard text or child/user data included.",
+  "topics": [
+    {
+      "id": "mt_THl9GLxwoL",
+      "name": "The two digits of a two-digit number",
+      "description": "Understand that the two digits of a two-digit number represent amounts of tens and ones",
+      "domain": "Number Representation & Place Value",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_aPBzD28_mT",
+      "name": "The three digits of a three-digit number",
+      "description": "Understand that the three digits of a three-digit number represent amounts of hundreds, tens, and ones",
+      "domain": "Number Representation & Place Value",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_98c2qwEF7Q",
+      "name": "Place Value to 1000",
+      "description": "Solve number problems and practical problems involving place value of numbers up to 1000",
+      "domain": "Number Representation & Place Value",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_m1W6nTQJ2b",
+      "name": "Addition and subtraction within 20",
+      "description": "Add and subtract within 20 using strategies such as making ten, decomposing a number leading to ten, and using known facts",
+      "domain": "Addition & Subtraction",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_Zdv-b-iW5K",
+      "name": "Multiplication and Division Word Problems",
+      "description": "Use multiplication and division within 100 to solve word problems involving equal groups, arrays, and measurement quantities",
+      "domain": "Multiplication & Division",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_AR-K72OIIO",
+      "name": "Multiply & Add Problems",
+      "description": "Solve problems involving multiplying and adding, including using the distributive law, integer scaling problems, and harder correspondence problems",
+      "domain": "Multiplication & Division",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_anAe11HAEH",
+      "name": "Two-Step Equations",
+      "description": "Solve two-step word problems using the four operations; represent problems using equations with a letter standing for the unknown quantity",
+      "domain": "Addition & Subtraction",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_-hTTat0mBR",
+      "name": "What Is a Half?",
+      "description": "Recognise, find, and name a half as one of two equal parts of an object, shape, or quantity",
+      "domain": "Fractions",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_k2WE0-22-4",
+      "name": "Unit fractions",
+      "description": "Recognise, find, and write fractions of a discrete set of objects: unit fractions and non-unit fractions with small denominators",
+      "domain": "Fractions",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_3y7xKP9MjU",
+      "name": "Fractions of amounts (harder)",
+      "description": "Solve problems involving increasingly harder fractions to calculate quantities, including non-unit fractions where the answer is a whole number",
+      "domain": "Fractions",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_g3W0mdADVu",
+      "name": "Finding halves and quarters",
+      "description": "Recognise, find, and name a quarter as one of four equal parts of an object, shape, or quantity",
+      "domain": "Fractions",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_nvdpxAJTBG",
+      "name": "Counting in 2s",
+      "description": "Count in multiples of 2, 5, and 10 (skip counting)",
+      "domain": "Counting & Cardinality",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_IzQvs7k_sE",
+      "name": "Skip Counting (4s, 8s, 50s, 100s)",
+      "description": "Count from 0 in multiples of 4, 8, 50, and 100",
+      "domain": "Counting & Cardinality",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_A-FyLLLLzy",
+      "name": "Shape patterns",
+      "description": "Generate a number or shape pattern that follows a given rule; identify apparent features of the pattern not explicit in the rule and explain informally why they occur",
+      "domain": "Multiplication & Division",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_KJeEeTutJI",
+      "name": "2-D shapes",
+      "description": "Recognise and name common 2-D shapes (circles, triangles, rectangles including squares)",
+      "domain": "Geometry",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_hRZyKvz1KN",
+      "name": "2-D shapes",
+      "description": "Identify lines of symmetry in 2-D shapes presented in different orientations; recognise line-symmetric figures and draw lines of symmetry",
+      "domain": "Geometry",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_sBcRdUfAzV",
+      "name": "2-D shapes",
+      "description": "Identify and describe properties of 2-D shapes including the number of sides and line symmetry in a vertical line",
+      "domain": "Geometry",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_MFfYcnv6Tv",
+      "name": "Right Angles & Turns",
+      "description": "Identify right angles; recognise that two right angles make a half-turn, three make three-quarters, and four make a complete turn",
+      "domain": "Geometry",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_cqSf213hSa",
+      "name": "Measuring length",
+      "description": "Measure the length of an object using same-size length units laid end to end with no gaps or overlaps",
+      "domain": "Measurement",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_e4x3l2JeLI",
+      "name": "Measuring length",
+      "description": "Measure the length of an object by selecting and using appropriate tools such as rulers, yardsticks, metre sticks, and measuring tapes",
+      "domain": "Measurement",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_WtcFrxGOgw",
+      "name": "Perimeters of polygons",
+      "description": "Solve problems involving perimeters of polygons: find perimeter from side lengths, find an unknown side length, and explore rectangles with same perimeter but different areas (or vice versa)",
+      "domain": "Measurement",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_y1n0Zwhoca",
+      "name": "Area",
+      "description": "Measure areas by counting unit squares (square cm, square m, square in, square ft)",
+      "domain": "Measurement",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_3JgrHY221M",
+      "name": "Unknown in Addition & Subtraction",
+      "description": "Determine the unknown whole number in an addition or subtraction equation relating three whole numbers",
+      "domain": "Addition & Subtraction",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_yTWxkzzoOZ",
+      "name": "Two-Step Word Problems",
+      "description": "Solve one- and two-step word problems within 100 using addition and subtraction, with unknowns in all positions",
+      "domain": "Addition & Subtraction",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_pyMD_SIiYO",
+      "name": "Justifying mathematical reasoning",
+      "description": "Construct and follow multi-step mathematical arguments; identify errors in reasoning and explain why a method works or does not work",
+      "domain": "Mathematical Thinking",
+      "focus": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_ehGS_uVSJv",
+      "name": "Inverse: addition undoes subtraction",
+      "description": "Recognise and use the inverse relationship between addition and subtraction to check calculations and solve missing-number problems",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_oIzycTBeE4",
+      "name": "What the equals sign means",
+      "description": "Understand the meaning of the equal sign as 'is the same as' and determine if equations are true or false",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_CBHwluE6Lp",
+      "name": "Adding Fractions (Same Denominator)",
+      "description": "Add and subtract fractions with the same denominator, including results greater than one whole (e.g. 5/8 + 6/8 = 11/8)",
+      "domain": "Fractions",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_izien3ZX51",
+      "name": "10 or 100 More or Less",
+      "description": "Find 10 or 100 more or less than a given number up to 1000",
+      "domain": "Number Representation & Place Value",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_w6MxaaoMXZ",
+      "name": "Patterns in Times Tables",
+      "description": "Identify arithmetic patterns (including patterns in the addition table or multiplication table) and explain them using properties of operations",
+      "domain": "Multiplication & Division",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_HFRYjTb-Z5",
+      "name": "Fluent adding and subtracting within 1000",
+      "description": "Fluently add and subtract within 1000 using strategies and algorithms based on place value, properties of operations, and the relationship between addition and subtraction",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_NLSfvB9vUl",
+      "name": "Rounding to 10, 100, 1000",
+      "description": "Round any number to the nearest 10, 100, or 1000",
+      "domain": "Number Representation & Place Value",
+      "focus": false,
+      "outsidePrerequisites": 3
+    },
+    {
+      "id": "mt_8gy7uxRlF6",
+      "name": "A Hundred Is Ten Tens",
+      "description": "Understand that 100 can be thought of as a bundle of ten tens — called a 'hundred'",
+      "domain": "Number Representation & Place Value",
+      "focus": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_18fK9sQdIz",
+      "name": "Written Multiplication",
+      "description": "Multiply two-digit and three-digit numbers by a one-digit number using formal written layout",
+      "domain": "Multiplication & Division",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_EmR5n58jZt",
+      "name": "Multi-Step Multiply & Divide",
+      "description": "Solve problems involving multiplication and division, including scaling problems and correspondence problems where n objects are connected to m objects",
+      "domain": "Multiplication & Division",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_Lb2ZnMdkYR",
+      "name": "Properties of Operations",
+      "description": "Apply properties of operations (commutative, associative, distributive) as strategies to multiply and divide",
+      "domain": "Multiplication & Division",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_KaF0SQvaiu",
+      "name": "Measuring length and height",
+      "description": "Measure and begin to record lengths and heights using non-standard and standard units",
+      "domain": "Measurement",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_skYly2Qm01",
+      "name": "Measuring length",
+      "description": "Order three objects by length and compare the lengths of two objects indirectly using a third object",
+      "domain": "Measurement",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_DOe893F6gN",
+      "name": "Choosing measurement units",
+      "description": "Choose and use appropriate standard units to measure length (m/cm), mass (kg/g), temperature (°C), and capacity (litres/ml) to the nearest appropriate unit",
+      "domain": "Measurement",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_SH7QgFl8-v",
+      "name": "Transformations on a grid",
+      "description": "Represent and carry out geometric transformations on squared paper or a coordinate grid: reflections (in horizontal, vertical, and diagonal mirror lines, including the axes), translations (described as a vector or as left/right/up/down moves), and rotations (90° or 180° about a stated centre point); describe each transformation precisely using the correct language; identify which transformation maps one shape onto its image by comparing position, orientation, and size",
+      "domain": "Geometry",
+      "focus": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_LpSuPgL31x",
+      "name": "Division as equal sharing",
+      "description": "Understand division as sharing equally into groups or as grouping (how many groups of a given size can be made)",
+      "domain": "Multiplication & Division",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_cFltwUQi-d",
+      "name": "Fractions of amounts",
+      "description": "Recognise, find, name, and write fractions 1/3, 1/4, 2/4, and 3/4 of a length, shape, set of objects, or quantity",
+      "domain": "Fractions",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_e8CZ7E5qW7",
+      "name": "Number bonds to 9",
+      "description": "Find the number that makes 10 when added to a given number from 1 to 9 (number bonds to 10)",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt__we2TDqnJx",
+      "name": "Fluent adding and subtracting within 10",
+      "description": "Fluently add and subtract within 10",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_8OAGVdeTJ_",
+      "name": "Understanding angles",
+      "description": "Recognise angles as a property of shape or a description of a turn",
+      "domain": "Geometry",
+      "focus": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_e4V6hvcuEJ",
+      "name": "Types of angles",
+      "description": "Use and interpret standard geometric diagram conventions: mark right angles with a small square, equal lengths with single or double tick marks, and equal angles with arc marks; label angles in three-letter notation (∠ABC) and individual angles with a single letter or number; draw diagrams showing angles at a point, angles on a straight line, and angles inside polygons with these conventions; read diagrams with these marks to identify given information and find unknown values",
+      "domain": "Geometry",
+      "focus": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_TdV9YGJEoY",
+      "name": "Position, direction, and movement",
+      "description": "Use mathematical vocabulary to describe position, direction, and movement, including straight lines and distinguishing rotation as a turn in terms of right angles (quarter, half, three-quarter turns, clockwise and anti-clockwise)",
+      "domain": "Geometry",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_M5PPDJStGm",
+      "name": "Rote counting to 100",
+      "description": "Rote count forwards and backwards from 0 to 100, beginning from 0, 1, or any given number, by ones",
+      "domain": "Counting & Cardinality",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_4A7FYmvVhA",
+      "name": "Describing Aloud",
+      "description": "Describe familiar people, places, things, and events with detail; speak audibly and express thoughts, feelings, and ideas clearly; give well-structured descriptions and explanations",
+      "domain": "Speaking & Listening",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_6eTZUwKQZr",
+      "name": "Teaching It Back",
+      "description": "After learning something new, explain it in your own words — to yourself, a family member, or even a toy",
+      "domain": "Learning to Learn",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_kJ5wYzO8qC",
+      "name": "Explaining Mathematical Reasoning",
+      "description": "With teacher prompting, explain and justify mathematical reasoning using drawings, number sentences, or words",
+      "domain": "Mathematical Thinking",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_SrrsLiJkr3",
+      "name": "Adding and subtracting",
+      "description": "Add and subtract numbers with up to three digits using formal written methods of columnar addition and subtraction",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_zxST3MarI9",
+      "name": "Addition and subtraction strategies",
+      "description": "Explain why addition and subtraction strategies work, using place value and the properties of operations",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_bfhng6mOuy",
+      "name": "Angles in triangles",
+      "description": "Distinguish defining attributes of shapes (e.g. triangles are closed and three-sided) from non-defining attributes (e.g. colour, orientation, overall size)",
+      "domain": "Geometry",
+      "focus": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_yGv8doDAmp",
+      "name": "3-D shapes",
+      "description": "Analyse and compare 2-D and 3-D shapes using informal language to describe sides, vertices, and other attributes",
+      "domain": "Geometry",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_r0VXbfAmsH",
+      "name": "A Ten Is Ten Ones",
+      "description": "Understand that 10 can be thought of as a bundle of ten ones — called a 'ten'",
+      "domain": "Number Representation & Place Value",
+      "focus": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_xmmgAzxe5j",
+      "name": "The teen numbers",
+      "description": "Understand that the teen numbers (11–19) are composed of ten ones and some further ones (early place value)",
+      "domain": "Number Representation & Place Value",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_GzcJEVkNRn",
+      "name": "Understanding angles",
+      "description": "Multiply side lengths to find areas of rectangles and represent whole-number products as rectangular areas",
+      "domain": "Measurement",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_wE7-Gs9ENL",
+      "name": "Measuring Perimeters",
+      "description": "Measure the perimeter of simple 2-D shapes",
+      "domain": "Measurement",
+      "focus": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_6xNmQLzuqm",
+      "name": "Understanding Area",
+      "description": "Understand that a unit square has one square unit of area and that the area of a plane figure is the number of unit squares that cover it without gaps or overlaps",
+      "domain": "Measurement",
+      "focus": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_cChv2j_-Da",
+      "name": "Fluent adding and subtracting within 100",
+      "description": "Fluently add and subtract within 100 using strategies based on place value, properties of operations, and the relationship between addition and subtraction",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_VAWV_l7J0D",
+      "name": "Early Word Problems",
+      "description": "Solve one-step word problems involving addition and subtraction to 20, including missing-number problems",
+      "domain": "Addition & Subtraction",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_gtTl3R5buH",
+      "name": "What Multiplication Means",
+      "description": "Interpret products of whole numbers (e.g. 5 × 7 as the total number of objects in 5 groups of 7)",
+      "domain": "Multiplication & Division",
+      "focus": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_iNdrM2-oJf",
+      "name": "What Division Means",
+      "description": "Interpret whole-number quotients (e.g. 56 ÷ 8 as the number of objects in each share or the number of equal groups)",
+      "domain": "Multiplication & Division",
+      "focus": false,
+      "outsidePrerequisites": 0
+    }
+  ],
+  "dependencies": [
+    {
+      "topicId": "mt_3JgrHY221M",
+      "prerequisiteId": "mt_ehGS_uVSJv",
+      "strength": "soft",
+      "reason": "Solving missing-number problems benefits from knowing the inverse relationship"
+    },
+    {
+      "topicId": "mt_3JgrHY221M",
+      "prerequisiteId": "mt_oIzycTBeE4",
+      "strength": "hard",
+      "reason": "Finding unknowns in equations requires understanding what = means"
+    },
+    {
+      "topicId": "mt_3y7xKP9MjU",
+      "prerequisiteId": "mt_CBHwluE6Lp",
+      "strength": "soft",
+      "reason": "Fraction addition supports solving fraction problems"
+    },
+    {
+      "topicId": "mt_3y7xKP9MjU",
+      "prerequisiteId": "mt_k2WE0-22-4",
+      "strength": "hard",
+      "reason": "Finding fractions of discrete sets is prerequisite to harder fraction-of-quantity problems"
+    },
+    {
+      "topicId": "mt_6eTZUwKQZr",
+      "prerequisiteId": "mt_kJ5wYzO8qC",
+      "strength": "soft",
+      "reason": "The universal self-explanation habit (LtL 7-8) builds on the maths-specific practice of explaining reasoning when prompted (MT 6-7)"
+    },
+    {
+      "topicId": "mt_6xNmQLzuqm",
+      "prerequisiteId": "mt_e4x3l2JeLI",
+      "strength": "soft",
+      "reason": "Length measurement experience supports understanding area as a 2D measurement"
+    },
+    {
+      "topicId": "mt_8gy7uxRlF6",
+      "prerequisiteId": "mt_r0VXbfAmsH",
+      "strength": "hard",
+      "reason": "100 as ten tens extends understanding of 10 as ten ones"
+    },
+    {
+      "topicId": "mt_8gy7uxRlF6",
+      "prerequisiteId": "mt_THl9GLxwoL",
+      "strength": "hard",
+      "reason": "Must understand two-digit place value before extending to hundreds"
+    },
+    {
+      "topicId": "mt_8OAGVdeTJ_",
+      "prerequisiteId": "mt_sBcRdUfAzV",
+      "strength": "soft",
+      "reason": "Understanding angles as shape properties requires knowing basic shape properties"
+    },
+    {
+      "topicId": "mt_8OAGVdeTJ_",
+      "prerequisiteId": "mt_TdV9YGJEoY",
+      "strength": "hard",
+      "reason": "Recognising angles as turns extends Y2 work on quarter/half/three-quarter turns"
+    },
+    {
+      "topicId": "mt_98c2qwEF7Q",
+      "prerequisiteId": "mt_aPBzD28_mT",
+      "strength": "hard",
+      "reason": "Solving PV problems requires three-digit place-value understanding"
+    },
+    {
+      "topicId": "mt_98c2qwEF7Q",
+      "prerequisiteId": "mt_izien3ZX51",
+      "strength": "soft",
+      "reason": "Many PV problems involve finding 10/100 more or less"
+    },
+    {
+      "topicId": "mt_A-FyLLLLzy",
+      "prerequisiteId": "mt_w6MxaaoMXZ",
+      "strength": "hard",
+      "reason": "Identifying arithmetic patterns feeds into generating and analysing patterns from rules"
+    },
+    {
+      "topicId": "mt_anAe11HAEH",
+      "prerequisiteId": "mt_HFRYjTb-Z5",
+      "strength": "soft",
+      "reason": "Fluent within-1000 computation supports solving mixed-operation problems"
+    },
+    {
+      "topicId": "mt_anAe11HAEH",
+      "prerequisiteId": "mt_NLSfvB9vUl",
+      "strength": "soft",
+      "reason": "Estimation with rounding supports assessing reasonableness"
+    },
+    {
+      "topicId": "mt_anAe11HAEH",
+      "prerequisiteId": "mt_yTWxkzzoOZ",
+      "strength": "hard",
+      "reason": "Two-step four-ops problems extend one/two-step add/sub problems"
+    },
+    {
+      "topicId": "mt_aPBzD28_mT",
+      "prerequisiteId": "mt_8gy7uxRlF6",
+      "strength": "hard",
+      "reason": "Three-digit place value requires understanding 100 as a unit"
+    },
+    {
+      "topicId": "mt_aPBzD28_mT",
+      "prerequisiteId": "mt_THl9GLxwoL",
+      "strength": "hard",
+      "reason": "Three-digit PV extends two-digit PV (tens and ones)"
+    },
+    {
+      "topicId": "mt_AR-K72OIIO",
+      "prerequisiteId": "mt_18fK9sQdIz",
+      "strength": "hard",
+      "reason": "Problems require formal written multiplication skills"
+    },
+    {
+      "topicId": "mt_AR-K72OIIO",
+      "prerequisiteId": "mt_EmR5n58jZt",
+      "strength": "hard",
+      "reason": "Harder problems extend Y3 scaling/correspondence problems"
+    },
+    {
+      "topicId": "mt_AR-K72OIIO",
+      "prerequisiteId": "mt_Lb2ZnMdkYR",
+      "strength": "soft",
+      "reason": "Distributive law is explicitly used in problem-solving"
+    },
+    {
+      "topicId": "mt_bfhng6mOuy",
+      "prerequisiteId": "mt_KJeEeTutJI",
+      "strength": "hard",
+      "reason": "Distinguishing defining vs non-defining attributes requires knowing common 2-D shape names first"
+    },
+    {
+      "topicId": "mt_bfhng6mOuy",
+      "prerequisiteId": "mt_yGv8doDAmp",
+      "strength": "hard",
+      "reason": "Identifying defining attributes builds on informal analysis and comparison of shapes"
+    },
+    {
+      "topicId": "mt_cFltwUQi-d",
+      "prerequisiteId": "mt_g3W0mdADVu",
+      "strength": "hard",
+      "reason": "Working with 1/4, 2/4, 3/4 extends from Y1 understanding of quarters"
+    },
+    {
+      "topicId": "mt_cFltwUQi-d",
+      "prerequisiteId": "mt_-hTTat0mBR",
+      "strength": "hard",
+      "reason": "Working with fractions extends from Y1 understanding of halves"
+    },
+    {
+      "topicId": "mt_cFltwUQi-d",
+      "prerequisiteId": "mt_LpSuPgL31x",
+      "strength": "soft",
+      "reason": "Finding fractions of quantities uses equal sharing (division)"
+    },
+    {
+      "topicId": "mt_cqSf213hSa",
+      "prerequisiteId": "mt_KaF0SQvaiu",
+      "strength": "hard",
+      "reason": "Measuring with iterated units extends Y1 beginning to measure length"
+    },
+    {
+      "topicId": "mt_cqSf213hSa",
+      "prerequisiteId": "mt_skYly2Qm01",
+      "strength": "soft",
+      "reason": "Measuring with units benefits from ability to order and compare lengths"
+    },
+    {
+      "topicId": "mt_DOe893F6gN",
+      "prerequisiteId": "mt_KaF0SQvaiu",
+      "strength": "hard",
+      "reason": "Using standard units for length extends from beginning to measure length"
+    },
+    {
+      "topicId": "mt_e4x3l2JeLI",
+      "prerequisiteId": "mt_cqSf213hSa",
+      "strength": "hard",
+      "reason": "Using standard measurement tools extends measuring with non-standard units"
+    },
+    {
+      "topicId": "mt_e4x3l2JeLI",
+      "prerequisiteId": "mt_DOe893F6gN",
+      "strength": "soft",
+      "reason": "Choosing appropriate tools builds on choosing appropriate units"
+    },
+    {
+      "topicId": "mt_g3W0mdADVu",
+      "prerequisiteId": "mt_-hTTat0mBR",
+      "strength": "hard",
+      "reason": "Understanding quarters extends from understanding halves — both are equal parts but quarters requires dividing into 4"
+    },
+    {
+      "topicId": "mt_HFRYjTb-Z5",
+      "prerequisiteId": "mt_SrrsLiJkr3",
+      "strength": "hard",
+      "reason": "Fluency requires prior experience with columnar methods for three digits"
+    },
+    {
+      "topicId": "mt_hRZyKvz1KN",
+      "prerequisiteId": "mt_sBcRdUfAzV",
+      "strength": "hard",
+      "reason": "Vertical line symmetry in Y2 is prerequisite to finding symmetry lines in multiple orientations"
+    },
+    {
+      "topicId": "mt_hRZyKvz1KN",
+      "prerequisiteId": "mt_SH7QgFl8-v",
+      "strength": "hard",
+      "reason": "Identifying lines of symmetry requires the ability to draw and interpret reflection on a grid"
+    },
+    {
+      "topicId": "mt_-hTTat0mBR",
+      "prerequisiteId": "mt_LpSuPgL31x",
+      "strength": "hard",
+      "reason": "Finding a half requires equal sharing into 2 groups — a division concept"
+    },
+    {
+      "topicId": "mt_iNdrM2-oJf",
+      "prerequisiteId": "mt_LpSuPgL31x",
+      "strength": "hard",
+      "reason": "Interpreting quotients formalises equal sharing/grouping from Y1"
+    },
+    {
+      "topicId": "mt_izien3ZX51",
+      "prerequisiteId": "mt_aPBzD28_mT",
+      "strength": "hard",
+      "reason": "Requires three-digit place value to understand which digit changes"
+    },
+    {
+      "topicId": "mt_IzQvs7k_sE",
+      "prerequisiteId": "mt_nvdpxAJTBG",
+      "strength": "hard",
+      "reason": "Counting in 4s and 8s extends prior skip counting in 2s, 5s, 10s"
+    },
+    {
+      "topicId": "mt_k2WE0-22-4",
+      "prerequisiteId": "mt_cFltwUQi-d",
+      "strength": "hard",
+      "reason": "Finding fractions of discrete sets extends finding fractions of shapes/quantities"
+    },
+    {
+      "topicId": "mt_k2WE0-22-4",
+      "prerequisiteId": "mt_LpSuPgL31x",
+      "strength": "soft",
+      "reason": "Finding 1/4 of 12 objects connects to division as sharing equally"
+    },
+    {
+      "topicId": "mt_kJ5wYzO8qC",
+      "prerequisiteId": "mt_oIzycTBeE4",
+      "strength": "soft",
+      "reason": "Determining whether equations are true/false exercises evaluating and justifying"
+    },
+    {
+      "topicId": "mt_Lb2ZnMdkYR",
+      "prerequisiteId": "mt_gtTl3R5buH",
+      "strength": "hard",
+      "reason": "Using properties requires understanding what multiplication means"
+    },
+    {
+      "topicId": "mt_m1W6nTQJ2b",
+      "prerequisiteId": "mt_e8CZ7E5qW7",
+      "strength": "hard",
+      "reason": "Making-ten strategy requires knowing bonds to 10"
+    },
+    {
+      "topicId": "mt_m1W6nTQJ2b",
+      "prerequisiteId": "mt__we2TDqnJx",
+      "strength": "hard",
+      "reason": "Strategies for within-20 calculation build on fluent within-10 knowledge"
+    },
+    {
+      "topicId": "mt_MFfYcnv6Tv",
+      "prerequisiteId": "mt_8OAGVdeTJ_",
+      "strength": "hard",
+      "reason": "Identifying right angles requires understanding what an angle is"
+    },
+    {
+      "topicId": "mt_MFfYcnv6Tv",
+      "prerequisiteId": "mt_e4V6hvcuEJ",
+      "strength": "soft",
+      "reason": "Identifying right angles and turns is supported by the convention of marking right angles with a small square"
+    },
+    {
+      "topicId": "mt_MFfYcnv6Tv",
+      "prerequisiteId": "mt_TdV9YGJEoY",
+      "strength": "hard",
+      "reason": "Right angles as quarter turns extends Y2 turn vocabulary"
+    },
+    {
+      "topicId": "mt_nvdpxAJTBG",
+      "prerequisiteId": "mt_M5PPDJStGm",
+      "strength": "hard",
+      "reason": "Skip counting in 2s, 5s, 10s requires fluent rote counting by ones first"
+    },
+    {
+      "topicId": "mt_pyMD_SIiYO",
+      "prerequisiteId": "mt_4A7FYmvVhA",
+      "strength": "soft",
+      "reason": "Cross-subject: constructing and following multi-step mathematical arguments requires the ability to express thoughts and give well-structured explanations orally"
+    },
+    {
+      "topicId": "mt_pyMD_SIiYO",
+      "prerequisiteId": "mt_6eTZUwKQZr",
+      "strength": "soft",
+      "reason": "Constructing multi-step mathematical arguments and identifying errors in reasoning is the maths form of the universal self-explanation habit"
+    },
+    {
+      "topicId": "mt_pyMD_SIiYO",
+      "prerequisiteId": "mt_kJ5wYzO8qC",
+      "strength": "hard",
+      "reason": "Age 7-8 arguing/justifying builds on age 6-7"
+    },
+    {
+      "topicId": "mt_pyMD_SIiYO",
+      "prerequisiteId": "mt_SrrsLiJkr3",
+      "strength": "soft",
+      "reason": "Explaining columnar methods exercises identifying and justifying steps"
+    },
+    {
+      "topicId": "mt_pyMD_SIiYO",
+      "prerequisiteId": "mt_zxST3MarI9",
+      "strength": "soft",
+      "reason": "Explaining why strategies work exercises constructing arguments"
+    },
+    {
+      "topicId": "mt_r0VXbfAmsH",
+      "prerequisiteId": "mt_xmmgAzxe5j",
+      "strength": "hard",
+      "reason": "Understanding 10 as a bundle builds on understanding teen numbers as 'a ten and some ones'"
+    },
+    {
+      "topicId": "mt_sBcRdUfAzV",
+      "prerequisiteId": "mt_bfhng6mOuy",
+      "strength": "soft",
+      "reason": "Understanding defining attributes supports describing shape properties formally"
+    },
+    {
+      "topicId": "mt_sBcRdUfAzV",
+      "prerequisiteId": "mt_KJeEeTutJI",
+      "strength": "hard",
+      "reason": "Describing properties of 2-D shapes (sides, symmetry) requires knowing the shapes first"
+    },
+    {
+      "topicId": "mt_sBcRdUfAzV",
+      "prerequisiteId": "mt_yGv8doDAmp",
+      "strength": "hard",
+      "reason": "Formal property description extends informal analysis of sides and vertices"
+    },
+    {
+      "topicId": "mt_SrrsLiJkr3",
+      "prerequisiteId": "mt_cChv2j_-Da",
+      "strength": "hard",
+      "reason": "Columnar methods require fluent within-100 addition/subtraction"
+    },
+    {
+      "topicId": "mt_THl9GLxwoL",
+      "prerequisiteId": "mt_r0VXbfAmsH",
+      "strength": "hard",
+      "reason": "Understanding tens and ones place value requires the concept of 10 as a bundle"
+    },
+    {
+      "topicId": "mt_THl9GLxwoL",
+      "prerequisiteId": "mt_xmmgAzxe5j",
+      "strength": "hard",
+      "reason": "General two-digit place value extends from understanding teen number composition"
+    },
+    {
+      "topicId": "mt_w6MxaaoMXZ",
+      "prerequisiteId": "mt_Lb2ZnMdkYR",
+      "strength": "hard",
+      "reason": "Explaining patterns uses properties of operations"
+    },
+    {
+      "topicId": "mt__we2TDqnJx",
+      "prerequisiteId": "mt_e8CZ7E5qW7",
+      "strength": "hard",
+      "reason": "Fluency within 10 requires knowing number bonds to 10"
+    },
+    {
+      "topicId": "mt_wE7-Gs9ENL",
+      "prerequisiteId": "mt_sBcRdUfAzV",
+      "strength": "soft",
+      "reason": "Perimeter of 2-D shapes requires knowing shape properties (number of sides)"
+    },
+    {
+      "topicId": "mt_WtcFrxGOgw",
+      "prerequisiteId": "mt_GzcJEVkNRn",
+      "strength": "soft",
+      "reason": "Area of rectangles supports exploring same-perimeter-different-area relationships"
+    },
+    {
+      "topicId": "mt_WtcFrxGOgw",
+      "prerequisiteId": "mt_wE7-Gs9ENL",
+      "strength": "hard",
+      "reason": "Measuring perimeter of simple shapes is prerequisite to perimeter problem solving"
+    },
+    {
+      "topicId": "mt_y1n0Zwhoca",
+      "prerequisiteId": "mt_6xNmQLzuqm",
+      "strength": "hard",
+      "reason": "Must understand unit squares and area concept before measuring by counting"
+    },
+    {
+      "topicId": "mt_yGv8doDAmp",
+      "prerequisiteId": "mt_KJeEeTutJI",
+      "strength": "hard",
+      "reason": "Analysing and comparing shapes requires being able to name them first"
+    },
+    {
+      "topicId": "mt_yTWxkzzoOZ",
+      "prerequisiteId": "mt_cChv2j_-Da",
+      "strength": "hard",
+      "reason": "Solving word problems within 100 requires fluent computation within 100"
+    },
+    {
+      "topicId": "mt_yTWxkzzoOZ",
+      "prerequisiteId": "mt_VAWV_l7J0D",
+      "strength": "hard",
+      "reason": "Word problems within 100 extend word problems within 20"
+    },
+    {
+      "topicId": "mt_Zdv-b-iW5K",
+      "prerequisiteId": "mt_gtTl3R5buH",
+      "strength": "hard",
+      "reason": "Word problems require understanding what products mean"
+    },
+    {
+      "topicId": "mt_Zdv-b-iW5K",
+      "prerequisiteId": "mt_iNdrM2-oJf",
+      "strength": "hard",
+      "reason": "Word problems require understanding what quotients mean"
+    },
+    {
+      "topicId": "mt_zxST3MarI9",
+      "prerequisiteId": "mt_aPBzD28_mT",
+      "strength": "hard",
+      "reason": "Explanations require place-value language and understanding"
+    },
+    {
+      "topicId": "mt_zxST3MarI9",
+      "prerequisiteId": "mt_cChv2j_-Da",
+      "strength": "hard",
+      "reason": "Must be able to use strategies before explaining why they work"
+    }
+  ]
+}
