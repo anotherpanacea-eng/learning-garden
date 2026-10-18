@@ -1,5 +1,7 @@
 # A café to keep playing
 
+This is the original café specification. Its cast and number range were extended by [increment07](specs/07-cafe-expeditions-and-facts.md). Its restock, automatic top-up and live-shortfall behavior are superseded by [Gather the cupboard](specs/08-gather-the-cupboard.md): supplies now come from exploration, serving requires actual stock, and the original planning question stays frozen.
+
 ## Experience
 
 Add a replayable Almost-Right Café alongside the existing introductory café story. The home café button opens the game at #cafe; the original café story remains available in the adventure hub and through an invitation in the game. Preserve all existing stories, math records, routes, guides, explorer choices, and browser origin. All guests, food, and examples are imaginary; no identity, free-text fields, accounts, analytics, network calls, or learner-specific fixtures.

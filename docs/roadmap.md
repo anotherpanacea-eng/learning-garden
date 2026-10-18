@@ -12,6 +12,8 @@ Keep reading, comprehension, composition, investigation, support, familiarity, a
 
 [Café expeditions and the multiplication garden](specs/07-cafe-expeditions-and-facts.md) is implemented, inserted before the Post Office in response to play feedback. It adds one Cloud Orchard, three new foods, contextual repair questions, original visual food and order representations, optional local speech, and full ordered multiplication coverage through12×12. The six-step science/language roadmap below remains planned as stated.
 
+[Gather the cupboard](specs/08-gather-the-cupboard.md) replaces instant refills with repeatable pictured searches and harvests for every known ingredient. Actual supplies are required before serving.
+
 ## Delivery sequence
 
 | Step | Place and purpose | Smallest useful release | Status |

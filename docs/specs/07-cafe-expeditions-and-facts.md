@@ -6,6 +6,8 @@ Status: implemented; independently reviewed before build and release. Inserted a
 
 Extend the existing café with one illustrated Cloud Orchard, three discoverable foods, contextual repair questions, pictured ingredient qualities/orders, optional device-local speech, and an independently accessible multiplication garden covering every ordered fact 1×1 through 12×12. Preserve all prior science, story, café and math records, the public origin and browser-local privacy controls. No timers, grades, placement claims, accounts, uploads, live AI or server learner records.
 
+Gathering and cupboard inventory are now extended by [increment08](08-gather-the-cupboard.md), which replaces instant restocking and automatic top-ups with exploration.
+
 ## Café contract
 
 Keep eight starter ingredients always available. Add three authored orchard foods with names, fixed warm/cold, crunchy/soft, sweet/tangy qualities and original distinct vector drawings. The orchard has three tappable locations. Tapping a location opens a close-up; explicit investigation steps reveal qualities with visible text and simple pictures; an explicit collect action adds that food to discoveries and cupboard exactly once. Replay remains available; discovering/collecting is not assessment evidence. No real tasting/food experiment. Undiscovered foods never become a prerequisite for satisfying orders: eight starters span all quality combinations. Discovery persists across pause/reload/export/reset/save-off. Orchard trips never replace or advance a waiting order or silently restock jars.

@@ -47,8 +47,27 @@ function cleanRepair(raw,c,index){
  return r;
 }
 const sameRecipe=(a,b)=>ingredients.every(i=>a[i.id]===b[i.id]);
+const cleanStock=raw=>Object.fromEntries(ingredients.map(a=>[a.id,object(raw)?count(raw[a.id],180):0]));
+function makePlan(c){
+ const items=currentRecipe(c).map(i=>({ingredientId:i.ingredient.id,count:i.count,required:i.required,stock:i.stock,missing:i.missing}));
+ return {items,missing:items.reduce((n,i)=>n+i.missing,0),stock:cleanStock(c.stock)};
+}
+function cleanPlan(raw,c,index,recipe){
+ if(!object(raw)||!Array.isArray(raw.items))return null;
+ const order=orderFor(c,index),selected=availableIngredients(c).filter(a=>recipe?.[a.id]>0);
+ if(raw.items.length!==selected.length)return null;
+ const items=[];
+ for(const food of selected){
+  const item=raw.items.find(i=>object(i)&&i.ingredientId===food.id),n=recipe[food.id],required=n*order.guests;
+  if(!item||item.count!==n||item.required!==required||!integer(item.stock,0,180))return null;
+  items.push({ingredientId:food.id,count:n,required,stock:item.stock,missing:Math.max(0,required-item.stock)});
+ }
+ const stock=cleanStock(raw.stock);for(const item of items)stock[item.ingredientId]=item.stock;
+ return {items,missing:items.reduce((n,i)=>n+i.missing,0),stock};
+}
 export function ensureCafe(state){
- const old=object(state.cafe)&&state.cafe.version===1?state.cafe:{};
+ const established=object(state.cafe)&&state.cafe.version===1;
+ const old=established?state.cafe:{};
  const seed=integer(old.seed,1,2147483646)?old.seed:1+Math.floor(Math.random()*2147483645);
  const c=old;c.version=1;c.seed=seed;
  c.range=['all','small'].includes(c.range)?c.range:'all';c.allIndex=count(c.allIndex,1000000000);
@@ -57,11 +76,11 @@ export function ensureCafe(state){
  c.orchard={selected:orchardFoods.some(a=>a.id===orchard.selected)?orchard.selected:null,steps:Object.fromEntries(orchardFoods.map(a=>[a.id,object(orchard.steps)?count(orchard.steps[a.id],2):0]))};
  const savedIndices=[object(c.current)?c.current.orderIndex:null,...(Array.isArray(c.history)?c.history.filter(object).map(r=>r.orderIndex):[])].filter(v=>integer(v,0,999999999));
  c.nextOrder=Math.max(integer(c.nextOrder,0,1000000000)?c.nextOrder:0,...savedIndices.map(i=>i+1));
- const initial=stockFor(seed);c.stock=Object.fromEntries(ingredients.map(a=>[a.id,object(c.stock)&&integer(c.stock[a.id],0,30)?c.stock[a.id]:initial[a.id]]));
+ const initial=stockFor(seed);c.stock=Object.fromEntries(ingredients.map(a=>[a.id,object(c.stock)&&integer(c.stock[a.id],0,180)?c.stock[a.id]:established?0:initial[a.id]]));
  c.served=count(c.served,1000000000);
  // Freeze pre-expansion records using the original small-order formula first.
  for(const r of [c.current,...(Array.isArray(c.history)?c.history:[])])if(object(r)&&integer(r.orderIndex,0,999999999))r.params=cleanParams(r.params)||legacyParams(c,r.orderIndex);
- const seen=new Set();c.history=Array.isArray(c.history)?c.history.filter(r=>object(r)&&integer(r.orderIndex,0,999999999)&&r.orderIndex<c.nextOrder&&['served','skipped'].includes(r.status)&&!seen.has(r.orderIndex)&&seen.add(r.orderIndex)).slice(-24).map(r=>({...r,params:cleanParams(r.params),recipe:cleanRecipe(r.recipe,c),plateAttempts:cleanPlateAttempts(r.plateAttempts,c,r.orderIndex),total:cleanNumber(r.total),shortfall:cleanNumber(r.shortfall),repair:cleanRepair(r.repair,c,r.orderIndex),repairHistory:Array.isArray(r.repairHistory)?r.repairHistory.map(q=>cleanRepair(q,c,r.orderIndex)).filter(Boolean).slice(-24):[],stockBefore:Object.fromEntries(ingredients.map(a=>[a.id,object(r.stockBefore)?count(r.stockBefore[a.id]):0]))})):[];
+ const seen=new Set();c.history=Array.isArray(c.history)?c.history.filter(r=>object(r)&&integer(r.orderIndex,0,999999999)&&r.orderIndex<c.nextOrder&&['served','skipped'].includes(r.status)&&!seen.has(r.orderIndex)&&seen.add(r.orderIndex)).slice(-24).map(r=>({...r,params:cleanParams(r.params),recipe:cleanRecipe(r.recipe,c),plateAttempts:cleanPlateAttempts(r.plateAttempts,c,r.orderIndex),total:cleanNumber(r.total),shortfall:cleanNumber(r.shortfall),repair:cleanRepair(r.repair,c,r.orderIndex),repairHistory:Array.isArray(r.repairHistory)?r.repairHistory.map(q=>cleanRepair(q,c,r.orderIndex)).filter(Boolean).slice(-24):[],cupboardPlan:cleanPlan(r.cupboardPlan,c,r.orderIndex,cleanRecipe(r.recipe,c)),stockBefore:cleanStock(r.stockBefore),...(object(r.stockAtServe)?{stockAtServe:cleanStock(r.stockAtServe)}:{})})):[];
  const x=c.current;
  if(object(x)&&(x.served===true||x.stage==='served')&&!integer(x.orderIndex,0,999999999)){c.nextOrder=Math.max(1,c.nextOrder);x.orderIndex=c.nextOrder-1;x.params=legacyParams(c,x.orderIndex);x.recovered=true;}
  if(!object(x)||!integer(x.orderIndex,0,999999999)||x.orderIndex>=c.nextOrder)c.current=null;
@@ -78,6 +97,8 @@ export function ensureCafe(state){
    else if(x.stage==='stock'&&!(x.total.attempts.at(-1)===o.total||x.total.skipped)){x.stage='total';x.shortfall=blankNumber();x.recovered=true;}
   }
   if(x.stage!=='plate'&&x.repair)x.repair.open=false;
+  x.cupboardPlan=cleanPlan(x.cupboardPlan,c,x.orderIndex,x.recipe);
+  if(x.stage==='stock'&&!x.cupboardPlan)x.cupboardPlan=makePlan(c);
  }
  state.cafe=c;return c;
 }
@@ -88,7 +109,7 @@ export function currentRecipe(c){
 }
 export function cafeSummary(state){
  const c=state.cafe;if(!c?.current)return null;
- const order=orderFor(c),items=currentRecipe(c);return {order,items,missing:items.reduce((sum,a)=>sum+a.missing,0),...plate(c,c.current.recipe,order.index)};
+ const order=orderFor(c),items=currentRecipe(c);return {order,items,missing:items.reduce((sum,a)=>sum+a.missing,0),plan:c.current.cupboardPlan||null,ready:items.every(i=>i.missing===0),...plate(c,c.current.recipe,order.index)};
 }
 export function setCafeRange(state,range){if(!['all','small'].includes(range))return false;ensureCafe(state).range=range;return true;}
 export function nextGuest(state){
@@ -97,7 +118,7 @@ export function nextGuest(state){
  const params=legacyParams(c,c.nextOrder);
  params.guestId=guests[(c.seed%guests.length+c.nextOrder)%guests.length].id;
  if(c.range==='all'){const cell=(c.seed%144+(c.allIndex%144)*37)%144;params.guests=1+Math.floor(cell/12);params.bites=1+cell%12;c.allIndex++;}
- c.current={orderIndex:c.nextOrder++,params,stage:'plate',recipe:cleanRecipe({},c),plateAttempts:[],total:blankNumber(),shortfall:blankNumber(),repair:null,repairHistory:[],served:false,recovered:false};return true;
+ c.current={orderIndex:c.nextOrder++,params,stage:'plate',recipe:cleanRecipe({},c),plateAttempts:[],total:blankNumber(),shortfall:blankNumber(),repair:null,repairHistory:[],cupboardPlan:null,served:false,recovered:false};return true;
 }
 export function adjustBite(state,id,delta){
  const c=ensureCafe(state),x=c.current;if(!x||x.stage!=='plate'||![1,-1].includes(delta)||!availableIngredients(c).some(a=>a.id===id))return false;
@@ -132,8 +153,8 @@ export function collectFood(state,id){
 }
 export function submitCafeNumber(state,value){
  const c=ensureCafe(state),x=c.current;if(!x||!['total','stock'].includes(x.stage)||!integer(value,0,999))return false;
- const total=x.stage==='total',d=total?x.total:x.shortfall,answer=total?orderFor(c).total:cafeSummary(state).missing;
- d.error='';d.attempts.push(value);d.attempts=d.attempts.slice(-50);if(value===answer&&total)x.stage='stock';return value===answer;
+ const total=x.stage==='total',d=total?x.total:x.shortfall,answer=total?orderFor(c).total:x.cupboardPlan.missing;
+ d.error='';d.attempts.push(value);d.attempts=d.attempts.slice(-50);if(value===answer&&total){x.stage='stock';x.cupboardPlan=makePlan(c);}return value===answer;
 }
 export function supportCafe(state){
  const c=ensureCafe(state),x=c.current;if(!x||!['total','stock'].includes(x.stage))return false;
@@ -141,22 +162,18 @@ export function supportCafe(state){
 }
 export function skipCafeStage(state){
  const c=ensureCafe(state),x=c.current;if(!x||!['total','stock'].includes(x.stage))return false;
- const total=x.stage==='total',d=total?x.total:x.shortfall;d.supported=true;d.skipped=true;if(total)x.stage='stock';return true;
+ const total=x.stage==='total',d=total?x.total:x.shortfall;d.supported=true;d.skipped=true;if(total){x.stage='stock';x.cupboardPlan=makePlan(c);}return true;
 }
 function record(c,status){
- const x=c.current;c.history.push({orderIndex:x.orderIndex,params:copy(x.params),status,recipe:{...x.recipe},plateAttempts:copy(x.plateAttempts),total:{...x.total,attempts:[...x.total.attempts]},shortfall:{...x.shortfall,attempts:[...x.shortfall.attempts]},repair:x.repair?copy(x.repair):null,repairHistory:copy(x.repairHistory),stockBefore:{...c.stock}});c.history=c.history.slice(-24);
+ const x=c.current;c.history.push({orderIndex:x.orderIndex,params:copy(x.params),status,recipe:{...x.recipe},plateAttempts:copy(x.plateAttempts),total:{...x.total,attempts:[...x.total.attempts]},shortfall:{...x.shortfall,attempts:[...x.shortfall.attempts]},repair:x.repair?copy(x.repair):null,repairHistory:copy(x.repairHistory),cupboardPlan:x.cupboardPlan?copy(x.cupboardPlan):null,stockBefore:x.cupboardPlan?{...x.cupboardPlan.stock}:{...c.stock},...(status==='served'?{stockAtServe:{...c.stock}}:{})});c.history=c.history.slice(-24);
 }
 export function serveCafe(state){
  const c=ensureCafe(state),x=c.current;if(!x||x.stage!=='stock'||x.served)return false;
- const summary=cafeSummary(state);if(!x.shortfall.skipped&&x.shortfall.attempts.at(-1)!==summary.missing)return false;
- record(c,'served');for(const item of summary.items)c.stock[item.ingredient.id]=item.stock+item.missing-item.required;
+ const summary=cafeSummary(state);if(!summary.ready||!x.shortfall.skipped&&x.shortfall.attempts.at(-1)!==x.cupboardPlan.missing)return false;
+ record(c,'served');for(const item of summary.items)c.stock[item.ingredient.id]=item.stock-item.required;
  x.served=true;x.stage='served';c.served++;return true;
 }
 export function skipGuest(state){
  const c=ensureCafe(state);if(!c.current||c.current.stage==='served')return false;
  record(c,'skipped');c.current=null;return nextGuest(state);
-}
-export function restockCafe(state){
- const c=ensureCafe(state);if(c.current&&c.current.stage!=='served')return false;
- const available=new Set(availableIngredients(c).map(a=>a.id));c.stock=Object.fromEntries(ingredients.map(a=>[a.id,available.has(a.id)?12:c.stock[a.id]]));return true;
 }

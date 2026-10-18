@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {ingredients,starterIngredients,orchardFoods} from '../dist/cafe-content.mjs';
-import {ensureCafe,nextGuest,orderFor,setCafeRange,skipGuest,adjustBite,checkPlate,cafeSummary,submitCafeNumber,serveCafe,availableIngredients,investigateFood,collectFood,repairQuestion,answerRepair,helpRepair,leaveRepair} from '../dist/cafe-core.mjs';
+import {startForage,chooseForage,currentForage,submitHarvest,packHarvest} from '../dist/forage-core.mjs';
+import {ensureCafe,currentRecipe,nextGuest,orderFor,setCafeRange,skipGuest,adjustBite,checkPlate,cafeSummary,submitCafeNumber,serveCafe,availableIngredients,investigateFood,collectFood,repairQuestion,answerRepair,helpRepair,leaveRepair} from '../dist/cafe-core.mjs';
 let checks=0;const check=(v,m)=>{assert.ok(v,m);checks++;};
-const fresh=(seed=192)=>{const s=freshState();s.cafe={version:1,seed};ensureCafe(s);nextGuest(s);return s;};
+const fresh=(seed=192)=>{const s=freshState();ensureCafe(s);s.cafe.seed=seed;nextGuest(s);return s;};
 const snapshot=x=>JSON.stringify(x);
+function gather(s){for(const item of currentRecipe(s.cafe))while(s.cafe.stock[item.ingredient.id]<item.required){assert.ok(startForage(s,item.ingredient.id));assert.ok(chooseForage(s,item.ingredient.id));assert.ok(submitHarvest(s,currentForage(s).total));assert.ok(packHarvest(s));}}
 const fitting=s=>availableIngredients(s.cafe).find(a=>orderFor(s.cafe).wanted.every(p=>a.properties.includes(p)));
 {
  const s=fresh(),pairs=new Set();check(s.cafe.range==='all','new orders default to all facts');
@@ -36,7 +38,7 @@ const fitting=s=>availableIngredients(s.cafe).find(a=>orderFor(s.cafe).wanted.ev
  for(let n=0;n<12;n++)check(adjustBite(s,food.id,1),'twelve repeated bites permitted');
  check(!adjustBite(s,food.id,1)&&checkPlate(s),'plate bound stays twelve');
  s.cafe.stock[food.id]=0;check(!submitCafeNumber(s,143)&&submitCafeNumber(s,144),'144 total checked exactly');
- check(cafeSummary(s).missing===144&&submitCafeNumber(s,144)&&serveCafe(s),'per-jar 144 shortfall and serving supported');
+ check(cafeSummary(s).missing===144&&submitCafeNumber(s,144)&&!serveCafe(s),'144 plan does not fabricate stock');gather(s);check(serveCafe(s),'largest order serves after four real harvests');
  check(s.cafe.stock[food.id]===0&&!serveCafe(s),'large order stock stays nonnegative and idempotent');
 }
 {
@@ -68,7 +70,7 @@ const fitting=s=>availableIngredients(s.cafe).find(a=>orderFor(s.cafe).wanted.ev
  check(q.kind==='count'&&q.needed===11&&q.direction==='add','count question uses actual eleven-slot gap');
  check(!answerRepair(s,0)&&answerRepair(s,11)&&snapshot(s.cafe.current.recipe)===before,'count answer never fills the plate automatically');
  helpRepair(s);leaveRepair(s);for(let i=0;i<11;i++)adjustBite(s,food.id,1);check(checkPlate(s),'child can revise and recheck original plate');
- submitCafeNumber(s,orderFor(s.cafe).total);submitCafeNumber(s,cafeSummary(s).missing);serveCafe(s);
+ submitCafeNumber(s,orderFor(s.cafe).total);submitCafeNumber(s,cafeSummary(s).plan.missing);gather(s);serveCafe(s);
  const record=s.cafe.history.at(-1);check(record.repair.supported&&record.repair.attempts.at(-1).correct&&record.repair.attempts[0].value===0,'served history keeps repair support and attempts separate');
 }
 {
