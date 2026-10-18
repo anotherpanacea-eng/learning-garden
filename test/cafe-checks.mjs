@@ -12,7 +12,7 @@ function fill(s){const c=s.cafe,o=orderFor(c);const one=ingredients.find(i=>o.wa
 const snapshot=x=>JSON.stringify(x);
 function gather(s){for(const item of currentRecipe(s.cafe))while(s.cafe.stock[item.ingredient.id]<item.required){assert.ok(startForage(s,item.ingredient.id));assert.ok(chooseForage(s,item.ingredient.id));const t=currentForage(s);assert.ok(submitHarvest(s,t.total));assert.ok(packHarvest(s));}}
 function serveWithSupplies(s){gather(s);return serveCafe(s);}
-check(guests.length===10&&starterIngredients.length===8&&orchardFoods.length===3&&ingredients.length===11&&wishes.length>=8,'bounded authored variety');
+check(guests.length===12&&starterIngredients.length===8&&orchardFoods.length===3&&ingredients.length===11&&wishes.length>=8,'bounded authored variety');
 for(const w of wishes){check(w.length===2&&ingredients.filter(a=>w.every(p=>a.properties.includes(p))).length>=2,'each wish pair has multiple fitting ingredients');}
 for(let seed=1;seed<=12;seed++){
  const s=fresh(seed);let previous;const guestIds=new Set(),requests=new Set(),totals=new Set();
@@ -29,7 +29,7 @@ for(let seed=1;seed<=12;seed++){
   const r=restoreState(JSON.stringify(s));ensureCafe(r);check(r.cafe.current.stage==='served'&&!serveCafe(r)&&snapshot(r.cafe.stock)===after,'served reload never spends again');
   nextGuest(s);
  }
- check(guestIds.size===10&&requests.size===wishes.length&&totals.size>=4,'sequence varies cast, wishes and quantities');
+ check(guestIds.size===guests.length&&requests.size===wishes.length&&totals.size>=4,'sequence varies cast, wishes and quantities');
  check(s.cafe.history.length===24&&s.cafe.served===24,'bounded history and total count');
 }
 {

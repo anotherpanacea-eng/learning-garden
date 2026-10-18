@@ -30,7 +30,9 @@ export const guests = [
   {id:'fern', name:'Fern', kind:'teacup-sprite', greeting:'A teacup-sprite arrives wearing a saucer as a hat. “It keeps the thoughts in.”', wantedDish:'whisper waffles', thanks:'“Thank you! I shall tell my hat all about it.”'},
   {id:'nib', name:'Nib', kind:'star-sprite', greeting:'A star-sprite peers over the counter. “I usually order by constellation.”', wantedDish:'starlight spirals', thanks:'“A lovely plate. A small imaginary constellation, all to myself.”'},
   {id:'clover', name:'Clover', kind:'bunny', greeting:'A bunny hops onto a cushion. “A table for me and my ears, please.”', wantedDish:'carrot-cloud pancakes', thanks:'“Hop, hop, hooray! That was a very good pretend picnic.”'},
-  {id:'ember', name:'Ember', kind:'pocket-dragon', greeting:'A little dragon folds her wings beside the counter. “Only the waffles should be crispy.”', wantedDish:'volcano waffles', thanks:'“Delicious! That deserves a very small victory puff.”'}
+  {id:'ember', name:'Ember', kind:'pocket-dragon', greeting:'A little dragon folds her wings beside the counter. “Only the waffles should be crispy.”', wantedDish:'volcano waffles', thanks:'“Delicious! That deserves a very small victory puff.”'},
+  {id:'purl', name:'Purl', kind:'kitten', greeting:'A gray kitten peeks over the counter. “A table for me and my invisible ball of yarn, please.”', wantedDish:'moonbeam macaroni', thanks:'“Purr-fect! My invisible yarn would like the recipe.”'},
+  {id:'biscuit', name:'Biscuit', kind:'kitten', greeting:'A ginger kitten settles on a cushion and starts kneading. “I am helping with the pretend dough.”', wantedDish:'tumbleweed dumplings', thanks:'“Mrrp! That was delicious. I shall leave a very tiny paw-print review.”'}
 ];
 
 // All twelve pairs from two different axes: temperature, texture, and flavour.
