@@ -1,0 +1,21 @@
+Third-party curriculum data
+
+Marble Skill Taxonomy v1
+Copyright Generative Spark, Inc. (Marble)
+https://github.com/withmarbleapp/os-taxonomy
+Pinned source: 96a7933754af672e1bfdbf7ecb05c325860c6e0d
+
+The database and the subset in dist/marble-map.json are licensed under the
+Open Database License (ODbL) 1.0:
+https://opendatacommons.org/licenses/odbl/1-0/
+
+Marble-authored descriptive content, including topic descriptions and
+prerequisite reasons, is licensed under Creative Commons Attribution-ShareAlike
+4.0 International:
+https://creativecommons.org/licenses/by-sa/4.0/
+
+The subset includes 64 topics and 74 relationships. Selection and removal of
+age suffixes from topic names are described in the data and README.md.
+No curriculum standards text is included. The application MIT license does
+not supersede these licenses. The original stories and activities are authored
+for this project.

@@ -1,0 +1,30 @@
+# Local credentials and deployment identity
+.env
+.env.*
+!.env.example
+.openai/
+wrangler.toml
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+
+# Learner records and personalized material
+private/
+local-data/
+exports/
+backups/
+screenshots/
+recordings/
+packs/private/
+**/number-garden-notes*.json
+**/progress*.json
+**/learner*.json
+**/observations*.json
+**/answers*.json
+**/answers*.jsonl
+
+# Local tooling
+node_modules/
+.DS_Store
+*.log
