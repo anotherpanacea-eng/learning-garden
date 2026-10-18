@@ -24,6 +24,7 @@ const fitting=s=>availableIngredients(s.cafe).find(a=>orderFor(s.cafe).wanted.ev
 {
  const s=freshState();s.cafe={version:1,seed:192,nextOrder:2,stock:Object.fromEntries(starterIngredients.map(a=>[a.id,9])),current:{orderIndex:1,stage:'stock',recipe:{'comet-crisp':2},total:{attempts:[4]},shortfall:{attempts:[0]}},history:[{orderIndex:0,status:'served',recipe:{'moon-crunch':2},total:{attempts:[8]},shortfall:{attempts:[0]},stockBefore:{'moon-crunch':9}}]};
  ensureCafe(s);const current=orderFor(s.cafe),old=orderFor(s.cafe,0);
+ check(current.guest.id==='brolly'&&old.guest.id==='puff','legacy guest identities survive expansion from the original eight regulars');
  check(current.guests===2&&current.bites===2&&current.total===4&&old.guests===4&&old.bites===2&&old.total===8,'legacy current and history freeze original small quantities');
  check(s.cafe.current.recipe['comet-crisp']===2&&s.cafe.stock['comet-crisp']===9&&s.cafe.history[0].total.attempts[0]===8,'legacy recipes, stock and attempts preserved');
  s.cafe.seed=777;setCafeRange(s,'all');check(snapshot(orderFor(s.cafe))===snapshot(current)&&snapshot(orderFor(s.cafe,0))===snapshot(old),'frozen counts, wishes and guest survive sequence/range changes');

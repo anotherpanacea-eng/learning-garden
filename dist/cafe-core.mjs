@@ -16,7 +16,8 @@ function cleanRecipe(x,c){
 const stockFor=seed=>Object.fromEntries(ingredients.map((a,i)=>[a.id,a.orchard?0:2+(seed+i*3)%8]));
 function legacyParams(c,index){
  const seed=c.seed;
- return {guestId:guests[(seed%guests.length+index)%guests.length].id,wanted:[...wishes[(Math.floor(seed/8)%wishes.length+index*5)%wishes.length]],guests:2+(Math.floor(seed/96)+index)%3,bites:2+(Math.floor(seed/288)+Math.floor(index/3))%2};
+ // Saves without frozen parameters came from the original eight-guest cast.
+ return {guestId:guests[(seed%8+index)%8].id,wanted:[...wishes[(Math.floor(seed/8)%wishes.length+index*5)%wishes.length]],guests:2+(Math.floor(seed/96)+index)%3,bites:2+(Math.floor(seed/288)+Math.floor(index/3))%2};
 }
 function cleanParams(p){
  if(!object(p)||!guests.some(g=>g.id===p.guestId)||!integer(p.guests,1,12)||!integer(p.bites,1,12)||!Array.isArray(p.wanted)||p.wanted.length!==2||!wishes.some(w=>w.every(v=>p.wanted.includes(v))))return null;
@@ -94,6 +95,7 @@ export function nextGuest(state){
  const c=ensureCafe(state);if(c.current&&c.current.stage!=='served')return false;
  if(c.nextOrder>=1000000000)return false;
  const params=legacyParams(c,c.nextOrder);
+ params.guestId=guests[(c.seed%guests.length+c.nextOrder)%guests.length].id;
  if(c.range==='all'){const cell=(c.seed%144+(c.allIndex%144)*37)%144;params.guests=1+Math.floor(cell/12);params.bites=1+cell%12;c.allIndex++;}
  c.current={orderIndex:c.nextOrder++,params,stage:'plate',recipe:cleanRecipe({},c),plateAttempts:[],total:blankNumber(),shortfall:blankNumber(),repair:null,repairHistory:[],served:false,recovered:false};return true;
 }
