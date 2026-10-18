@@ -18,6 +18,14 @@ const symbols={warm:'☀',cold:'❄',crunchy:'ϟ',soft:'☁',sweet:'✿',tangy:'
 export function qualityIcons(properties){return properties.map(p=>`<span class="quality-symbol"><span aria-hidden="true">${symbols[p]||'•'}</span> ${esc(p)}</span>`).join('');}
 export function hearButton(text,label='Hear it',language='en'){return `<button type="button" class="hear-button secondary" data-speak-lang="${language==='fr'?'fr':'en'}" data-speak="${esc(text)}"><span aria-hidden="true">◖))</span> <span${language==='fr'?' lang="fr"':''}>${esc(label)}</span></button>`;}
 let activeSpeech=null, selectedVoice='', speakingRate=1, removeVoiceListener=()=>{};
+const fractionWords={2:['half','halves'],3:['third','thirds'],4:['quarter','quarters'],5:['fifth','fifths'],6:['sixth','sixths'],8:['eighth','eighths'],10:['tenth','tenths'],12:['twelfth','twelfths']};
+export function spoken(text,language='en'){
+ if(language==='fr')return String(text);
+ return String(text).replace(/__/g,' blank ').replace(/×/g,' times ').replace(/÷/g,' divided by ').replace(/−/g,' minus ').replace(/=/g,' equals ').replace(/(\d+(?:\.\d+)?)\s*cm\b/g,(_,n)=>`${n} centimeter${Number(n)===1?'':'s'}`).replace(/(\d+(?:\.\d+)?)\s*m\b/g,(_,n)=>`${n} meter${Number(n)===1?'':'s'}`).replace(/(\d+)-by-(\d+)/g,'$1 by $2').replace(/\b(\d+)\/(\d+)\b/g,(x,top,bottom)=>{const name=fractionWords[bottom];return name?`${top} ${name[top==='1'?0:1]}`:`${top} over ${bottom}`;}).replace(/ {2,}/g,' ').trim();
+}
+export const speechPreferences=()=>({voice:selectedVoice,rate:speakingRate});
+export function setSpeechPreferences(p){stopSpeech();selectedVoice=typeof p?.voice==='string'?p.voice:'';speakingRate=[0.8,1,1.15].includes(p?.rate)?p.rate:1;}
+function changedPreference(){document.dispatchEvent(new CustomEvent('garden-speech-preference',{detail:speechPreferences()}));}
 export const localVoices=(voices,language='en')=>voices.filter(v=>v.localService===true&&(language==='fr'?/^fr(?:[-_]|$)/i:/^en(?:[-_]|$)/i).test(v.lang));
 export const localEnglishVoices=voices=>localVoices(voices,'en');
 const voiceKey=v=>v.voiceURI||`${v.name}|${v.lang}`;
@@ -33,7 +41,7 @@ export function bindSpeech(){
  const buttons=[...document.querySelectorAll('[data-speak]')];if(!buttons.length)return;
  let controls=document.querySelector('.speech-controls');if(!controls){
   controls=document.createElement('div');controls.className='speech-controls';controls.hidden=true;
-  controls.innerHTML=`<button type="button" class="text-button" data-stop-speech>Stop voice</button><span role="status" data-speech-status></span><details class="voice-settings"><summary>Voice &amp; speed</summary><label>Reading voice<select data-reading-voice></select></label><label>Reading speed<select data-reading-speed><option value="0.8">Slower</option><option value="1">Natural pace</option><option value="1.15">A little faster</option></select></label><button type="button" class="secondary" data-preview-voice>Try this voice</button><p class="tiny">Choose a voice you enjoy. Choices last until this page is refreshed. Only local voices for the passage’s language offered by this browser appear here.</p><details><summary>Better voices on iPad</summary><p class="tiny">In iPad Settings, open Accessibility, then Spoken Content (or Read &amp; Speak), then Voices → English or French. Download an enhanced or premium voice if offered, then reopen this page. Safari may offer a different selection from Siri or Speak Screen.</p></details></details>`;
+  controls.innerHTML=`<button type="button" class="text-button" data-stop-speech>Stop voice</button><span role="status" data-speech-status></span><details class="voice-settings"><summary>Voice &amp; speed</summary><label>Reading voice<select data-reading-voice></select></label><label>Reading speed<select data-reading-speed><option value="0.8">Slower</option><option value="1">Natural pace</option><option value="1.15">A little faster</option></select></label><button type="button" class="secondary" data-preview-voice>Try this voice</button><p class="tiny">Choose a voice you enjoy. Preferences belong to this explorer. Only local voices for the passage’s language offered by this browser appear here.</p><details><summary>Better voices on iPad</summary><p class="tiny">In iPad Settings, open Accessibility, then Spoken Content (or Read &amp; Speak), then Voices → English or French. Download an enhanced or premium voice if offered, then reopen this page. Safari may offer a different selection from Siri or Speak Screen.</p></details></details>`;
   document.querySelector('main').append(controls);
  }
  let activeLanguage='en';
@@ -50,13 +58,13 @@ export function bindSpeech(){
  }
  function stopped(message){stopSpeech();controls.classList.remove('speech-playing');status.textContent=message;}
  controls.querySelector('[data-stop-speech]').onclick=()=>stopped('Voice stopped.');
- voiceSelect.onchange=()=>{selectedVoice=voiceSelect.value;stopped('Voice selected. Tap Try this voice to listen.');};
- speedSelect.value=String(speakingRate);speedSelect.onchange=()=>{speakingRate=Number(speedSelect.value);stopped('Speed selected. Tap Try this voice to listen.');};
+ voiceSelect.onchange=()=>{selectedVoice=voiceSelect.value;changedPreference();stopped('Voice selected. Tap Try this voice to listen.');};
+ speedSelect.value=String(speakingRate);speedSelect.onchange=()=>{speakingRate=Number(speedSelect.value);changedPreference();stopped('Speed selected. Tap Try this voice to listen.');};
  function speak(text,language=activeLanguage){
   activeLanguage=language==='fr'?'fr':'en';
   stopped('');refreshVoices();const voice=chooseLocalVoice(voices(),selectedVoice,activeLanguage);
   if(!voice||!window.SpeechSynthesisUtterance){status.textContent=`A local ${languageName()} voice is not available yet. Try Hear again after voices load, or read together.`;return;}
-  const utterance=new window.SpeechSynthesisUtterance(text);utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
+  const utterance=new window.SpeechSynthesisUtterance(spoken(text,activeLanguage));utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
   utterance.onend=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='Finished reading.';};
   utterance.onerror=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='This local voice could not play. Try another voice, or read together.';};
   activeSpeech=utterance;controls.classList.add('speech-playing');status.textContent=`Reading with ${voice.name}. You can stop whenever you like.`;

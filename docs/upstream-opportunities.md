@@ -24,6 +24,8 @@ Candidate English topics found in the pinned Marble data include `mt_HrgDjxcWvf`
 
 The first story-pack extension is implemented: Jane's example/publisher informed one reviewed rooftop errand with ordering cards, added without resetting existing visits. This directly addresses the finite six-story library. A later authoring workflow could use a parent-selected private summary, but today's app has no automated export to an assistant, scheduled authoring, or learner-data upload. The user has not requested such a schedule or transfer.
 
+Number Garden refresh (specs 15–21) reuses the existing pinned Marble topic links and browser-local responsive-help patterns. Jane `LESSONS.md` was refreshed on 2026-10-18: its procedural math, teach/guided-example distinction and visual response formats informed this implementation. Its mastery, graded bosses, penalties, remote storage and scheduling are not adopted. The pinned Marble topics were also refreshed; no age-based placement or new mastery inference is introduced. All new variants, helpers, SVG art, open invitations and planting prose are original; no additional upstream code or lesson prose is copied.
+
 ## Source and license boundaries
 
 Jane reviewed revision: `0d40eb8ee86f88a63a17391e361bdd8d9c9014e4`. Its [license map](https://github.com/kentlangley/Jane/blob/0d40eb8ee86f88a63a17391e361bdd8d9c9014e4/LICENSING.md) identifies application code as MIT, docs/lesson packs as CC BY-SA 4.0, and taxonomy-derived data/text under their respective ODbL/CC BY-SA licenses. Use the actual path's license and preserve notices when incorporating material. The adapted publisher helper retains its MIT notice in the source and deployed assets; other upstream documents remain references.

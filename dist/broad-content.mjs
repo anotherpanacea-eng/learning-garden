@@ -1,3 +1,4 @@
+import {decorateBroad} from './broad-variants.mjs';
 // Original Number Garden stories and questions. Marble IDs refer to the pinned v1 taxonomy.
 // Models in activities are editable teaching examples; the fresh question uses its own numbers.
 const place = (hundreds, tens, ones) => ({type:'place', hundreds, tens, ones});
@@ -51,7 +52,7 @@ export const areas = [
           '2 tens are 20. 20 + 7 = 27.',
           'Explain what each digit in your answer is counting.')),
       activity('explore',
-        'Dot appoints each digit a shelf: hundreds, tens, or ones. The model shows how a digit’s place gives its value. A tiny beetle can manage a very large warehouse.',
+        'Dot gives each digit a shelf: hundreds, tens, or ones. The model shows how a digit’s place gives its value. A tiny beetle can manage a very large warehouse.',
         'What happens to a number if you add one ten bundle?',
         q('number-explore','number','Try a new box','Shelf detective',
           'Fresh label: in 583, what is the value of the digit 8?',80,'mt_aPBzD28_mT',place(2,4,6),
@@ -150,7 +151,7 @@ export const areas = [
         'Dot cuts a pretend pond mat into equal parts. The bottom number in a fraction counts all the equal parts; the top number counts the parts we choose. Unequal scraps do not make fair fraction parts.',
         'Can the same whole be split into equal parts with different shapes?',
         q('fractions-support','fractions','Build together','Quarter patches',
-          'Fresh mat: a whole is split into 4 equal parts. What do we call one of those parts?',1,'mt_g3W0mdADVu',fraction(2,1),
+          'Fresh mat: a whole is split into 4 equal parts. What do we call one of those parts?',1,'mt_g3W0mdADVu',fraction(4,1),
           'The name tells you there are four equal parts in the whole.',
           'One of four equal parts is one quarter.',
           'How many quarters would cover the whole mat?',{kind:'choice',choices:['One half','One quarter','One third']})),
@@ -182,12 +183,12 @@ export const areas = [
         '6 + 2 = 8, so the next number is 8.',
         'Would starting at one give the same numbers?'),
       q('patterns-anchor','patterns','Garden check','Fox-length hops',
-        'Use the same rule, add 4 each time: 4, 8, 12, 16, __. What number comes next?',20,'mt_IzQvs7k_sE',pattern([4,8,12,16],4),
+        'New rule: add 4 each time: 4, 8, 12, 16, __. What number comes next?',20,'mt_IzQvs7k_sE',pattern([4,8,12,16],4),
         'Make one more jump of four from the last number.',
         '16 + 4 = 20.',
         'What would the next two stones say?'),
       q('patterns-anchor-alt','patterns','Another garden check','Bigger stepping stones',
-        'Use the same rule, add 8 each time: 8, 16, 24, __. What number comes next?',32,'mt_IzQvs7k_sE',pattern([8,16,24],8),
+        'New rule: add 8 each time: 8, 16, 24, __. What number comes next?',32,'mt_IzQvs7k_sE',pattern([8,16,24],8),
         'Add eight to twenty-four.',
         '24 + 8 = 32.',
         'How could doubling a sequence of fours help?'),
@@ -218,7 +219,7 @@ export const areas = [
         'Dot numbers the stones as well as the values. The first stone is already there before any jumps. To find a later term, keep track of both your landing number and how many jumps you made.',
         'Choose a rule and ask someone for the tenth term. Compare ways of finding it.',
         q('patterns-stretch-activity','patterns','Look further','Count the landings',
-          'Fresh path: start at 2 and add 6 each time. Counting 2 as the first term, what is the fifth term?',26,'mt_A-FyLLLLzy',pattern([1,6,11],5),
+          'Fresh path: start at 2 and add 6 each time. Counting 2 as the first term, what is the fifth term?',26,'mt_A-FyLLLLzy',pattern([1,7,13],6),
           'Write down five terms, beginning with two.',
           'The terms are 2, 8, 14, 20, 26. The fifth term is 26.',
           'How many six-sized jumps did you use?'))
@@ -254,7 +255,7 @@ export const areas = [
         'Pip turns the pavilion badge. Its name depends on its properties, not which way it points. Count straight sides and corners while you turn the model. No shape gets dizzy here.',
         'Draw two very different triangles. What must they share?',
         q('geometry-support','geometry','Build together','Corners count',
-          'Fresh badge: how many corners does any triangle have?',3,'mt_sBcRdUfAzV',shape('square'),
+          'Fresh badge: how many corners does any triangle have?',3,'mt_sBcRdUfAzV',shape('triangle'),
           'A triangle has three straight sides that meet at corners.',
           'Every triangle has 3 corners, also called vertices.',
           'What properties make a square a kind of rectangle?')),
@@ -262,7 +263,7 @@ export const areas = [
         'Dot imagines folding paper along a mirror line. Every point on one half must land on a matching point on the other half. A square has mirror lines through opposite corners as well as opposite side midpoints.',
         'Try drawing a shape with exactly one mirror line.',
         q('geometry-explore','geometry','Try a paper fold','A long paper sign',
-          'Fresh sign: a rectangle is 8 cm long and 3 cm wide. How many lines of symmetry does it have?',2,'mt_hRZyKvz1KN',shape('square'),
+          'Fresh sign: a rectangle is 8 cm long and 3 cm wide. How many lines of symmetry does it have?',2,'mt_hRZyKvz1KN',shape('rectangle'),
           'Try a fold through each pair of opposite side midpoints. Check the diagonals too.',
           'The two midpoint folds match the halves. Diagonal folds do not: it has 2 lines of symmetry.',
           'Why do the different side lengths matter?')),
@@ -270,7 +271,7 @@ export const areas = [
         'Pip measures turning in quarter-turns. One quarter-turn is one right angle. Keep turning in the same direction to build half-turns and full turns; count the turns even when a shape looks unchanged.',
         'Find a shape that looks unchanged after a quarter-turn and one that does not.',
         q('geometry-stretch-activity','geometry','Look further','Facing the gate',
-          'Pip starts facing north and makes 3 quarter-turns clockwise. Which direction does Pip face?',3,'mt_MFfYcnv6Tv',shape('triangle',1),
+          'Pip starts facing north and makes 3 quarter-turns clockwise. Which direction does Pip face?',3,'mt_MFfYcnv6Tv',{type:'compass',turns:0},
           'Follow the directions clockwise: north, east, south, west.',
           'After one turn Pip faces east, after two south, and after three west.',
           'How many counterclockwise quarter-turns would reach the same direction?',
@@ -384,3 +385,5 @@ export const areas = [
     ]
   }
 ];
+
+for(const a of areas)for(const items of [a.checkin,a.activities])for(let i=0;i<items.length;i++)items[i]=decorateBroad(items[i]);
