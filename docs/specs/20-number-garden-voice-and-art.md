@@ -10,7 +10,7 @@ Speech engines read math symbols poorly. A shared `spoken(text)` prepares text b
 
 ## Pip and Dot
 
-Number Garden shows Pip and Dot only as the 🦊 and 🐞 emoji, while the rest of the app has original illustrated guides. Draw both in the house style (flat palette shapes, 2 px ink outlines, no gradients): Pip, a small fox with a satchel; Dot, a ladybug with round glasses. Each has five poses (`wave`, `think`, `point`, `cheer`, `puzzled`) from `pip(pose)` and `dot(pose)`, labelled when meaningful and hidden from assistive technology when decorative, each under 2 KB. Dot's side note follows the state: thinking before an answer, cheering after a correct one, puzzled beside targeted feedback from [spec 17](17-number-garden-help-and-feedback.md). The story modules' existing Pip and Dot references can use the same art.
+Number Garden shows Pip and Dot only as the 🦊 and 🐞 emoji, while the rest of the app has original illustrated guides. Draw both in the house style (flat palette shapes, 2 px ink outlines, no gradients): Pip, a small fox with a satchel; Dot, a ladybug with round glasses. Each has five poses (`wave`, `think`, `point`, `cheer`, `puzzled`) from `pip(pose)` and `dot(pose)`, labeled when meaningful and hidden from assistive technology when decorative, each under 2 KB. Dot's side note follows the state: thinking before an answer, cheering after a correct one, puzzled beside targeted feedback from [spec 18](18-number-garden-help-and-feedback.md). The story modules' existing Pip and Dot references can use the same art.
 
 ## Garden scenes and story objects
 

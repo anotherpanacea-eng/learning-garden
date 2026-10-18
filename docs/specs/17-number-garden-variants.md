@@ -1,6 +1,6 @@
 # Number Garden question variants
 
-Status: proposed; awaiting independent spec review. Depends on [spec 14](14-number-garden-corrections.md). Multiplication facts are already covered by the [multiplication garden](07-cafe-expeditions-and-facts.md) and are out of scope.
+Status: proposed; awaiting independent spec review. Depends on [spec 15](15-number-garden-corrections.md). Multiplication facts are already covered by the [multiplication garden](07-cafe-expeditions-and-facts.md) and are out of scope.
 
 ## Problem
 
@@ -22,7 +22,7 @@ The first encounter with an item uses its authored numbers, so in-progress trail
 | Measurement | Ruler start 0 to 8, length 3 to 12, end at most 20; rectangle sides 2 to 9 for perimeter, area and a missing side |
 | Reasoning | Missing addends within 20; three-event stories under 50 with no negative intermediate value |
 
-Choice items generate their choices, place the correct one at a random index, and draw distractors from [spec 17](17-number-garden-help-and-feedback.md) where one applies.
+Choice items generate their choices, place the correct one at a random index, and draw distractors from [spec 18](18-number-garden-help-and-feedback.md) where one applies.
 
 ## Evidence
 

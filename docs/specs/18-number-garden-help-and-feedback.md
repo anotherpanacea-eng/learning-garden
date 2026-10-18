@@ -1,6 +1,6 @@
 # Number Garden helpers and targeted feedback
 
-Status: proposed; awaiting independent spec review. Extends the [responsive help](../responsive-help.md) pattern, already used by story and café tasks, to Number Garden. Works with authored items now and generated items after [spec 16](16-number-garden-variants.md).
+Status: proposed; awaiting independent spec review. Extends the [responsive help](../responsive-help.md) pattern, already used by story and café tasks, to Number Garden. Works with authored items now and generated items after [spec 17](17-number-garden-variants.md).
 
 ## Problem
 

@@ -18,7 +18,7 @@ An example may use different numbers but must show the same kind of object and s
 | `geometry-explore` | Symmetry of an 8 × 3 rectangle | square | `shape('rectangle')` |
 | `fractions-support` | One of 4 equal parts | 2 parts | `fraction(4,1)` |
 | `patterns-stretch-activity` | Start 2, add 6 | 1, 6, 11 (step 5) | `pattern([1,7,13],6)` |
-| `geometry-stretch-activity` | Facing after 3 quarter-turns | rotated triangle | `shape('triangle',0)` until the compass model in [spec 18](18-number-garden-interaction-and-wording.md) |
+| `geometry-stretch-activity` | Facing after 3 quarter-turns | rotated triangle | `shape('triangle',0)` until the compass model in [spec 19](19-number-garden-interaction-and-wording.md) |
 
 Place-value, array, counter and ruler examples that already share their question's concept keep their numbers and rely on the label.
 
@@ -38,7 +38,7 @@ Opening the check-in playground is recorded as support, and its readout currentl
 
 A trail can begin on `patterns-anchor`, so "the same rule" is the first patterns text some children read. The Number Garden home gains one line introducing its creatures, "Pip is a fox who loves a plan. Dot is a ladybug who loves a question," so titles such as "Fox-length hops" make sense; ladybugs are beetles, so existing beetle references stay accurate.
 
-Open question for the owner: the app mixes British spellings (practise, metre, centimetre, labelled, across Number Garden, café, science and story modules) with American ones (counterclockwise). Choose one form for child-facing text; this spec makes no spelling change until that choice is recorded.
+Spelling: the owner chose American spelling for child-facing text. The first-visit branch already converted the existing modules (meters, centimeters, labeled, practice, neighbor and similar); new text in these specs follows the same form.
 
 ## Verification
 

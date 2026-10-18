@@ -1,6 +1,6 @@
 # Regrowing the garden and open number tasks
 
-Status: proposed; awaiting independent spec review. Depends on [spec 15](15-explorer-profiles-and-progress-safety.md) (per-explorer state) and [spec 19](19-number-garden-voice-and-art.md) (art).
+Status: proposed; awaiting independent spec review. Depends on [spec 16](16-explorer-profiles-and-progress-safety.md) (per-explorer state) and [spec 20](20-number-garden-voice-and-art.md) (art).
 
 ## Problem
 
@@ -18,7 +18,7 @@ The opening garden scene shows storm damage. Taking part replants it:
 
 Plants depend on the area, never on correctness: sunflowers for Bundle Burrow, strawberries for Picnic Clearing, water lilies for Sharing Pond, moss stones for the Stepping-stone Path, tulips in shaped pots for the Shape Pavilion, climbing beans for the Ribbon Workshop, mushrooms for Puzzle Hollow. The end screen offers a seed packet with **Plant it**, and the child taps an empty plot in the garden scene to choose where it grows. Beds of 4 × 3 plots extend as they fill. Plants never wilt, nothing is lost for time away, and there are no counts, levels, streaks or comparisons between explorers. Plantings never appear as evidence or influence suggestions.
 
-State lives per explorer in a new `plantings:{plots:[{bed,slot,kind,area,at}],pending:[{kind,area,at}]}` field, separate from the story `garden` field, with a version bump and backup under spec 15.
+State lives per explorer in a new `plantings:{plots:[{bed,slot,kind,area,at}],pending:[{kind,area,at}]}` field, separate from the story `garden` field, with a version bump and backup under spec 16.
 
 ## Open number tasks
 
