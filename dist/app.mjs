@@ -1,5 +1,6 @@
-import {spiralPage,spiralNotes,bindSpiral} from './living-spiral-ui.mjs';
-import {spiralPairsShown} from './living-spiral-core.mjs';
+import {bindSpiral} from './living-spiral-ui.mjs';
+import {adaptivePage as spiralPage,adaptiveNotes as spiralNotes,bindAdaptive} from './living-adaptive-ui.mjs';
+import {adaptivePairsShown as spiralPairsShown,startAdaptiveSpiral} from './living-adaptive-core.mjs';
 import {livingPage,livingNotes,bindLiving} from './living-ui.mjs';
 import {ensurePostOffice} from './post-office-core.mjs';
 import {postOfficePage,postOfficeNotes,bindPostOffice} from './post-office-ui.mjs';
@@ -254,7 +255,7 @@ function bind(){
  bindSpeech();
  bindScience(state,{save,render,focus:focusElement});
  bindLiving(state,{save,render,focus:focusElement});
- bindSpiral(state,{save,render,navigate,focus:focusElement});
+ bindSpiral(state,{save,render,navigate,focus:focusElement,startVisit:startAdaptiveSpiral});bindAdaptive(state,{save,render,navigate,focus:focusElement});
  bindWorkshop(state,{save,render,navigate,focus:focusElement});
  bindPostOffice(state,{save,render,navigate,focus:focusElement});
  bindCafe(state,{save,render,exposeFacts:pairs=>exposeStoryFacts({facts:pairs}),focus:focusElement});

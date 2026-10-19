@@ -8,7 +8,7 @@ The opening visit, **First Morning**, has three independent entrances: follow a 
 
 Visits can be paused, resumed, replayed, or left waiting while another path is explored. Existing Number Garden activities and records remain available at the same browser origin. All preferences, drafts, observations, and exports stay browser-local; saving off applies device-wide, while clearing can target one explorer or all explorers. No identity fields, uploads, analytics, live AI, or server-side learner records are used.
 
-Number Garden now has a storm-recovery purpose: count saved seeds, plan 24 planting spaces, and compare lengths and borders. Its illustrated planning table connects existing open math activities to water, gathering, and the café. [Living Garden](https://number-garden-together.tastypeach3.chatgpt.site/#living) now offers renewable searches across nine authored settings: meet land snails, woodlice and adult butterflies, compare changing conditions, follow a delivery note, and count equal packs of café supplies. Small parcels and all ordered facts through 12×12 are open choices. The [original snail visit](https://number-garden-together.tastypeach3.chatgpt.site/#living/first) and its one-time parcel remain intact. This is guided picture investigation, not a field study or ecosystem simulator.
+Number Garden now has a storm-recovery purpose: count saved seeds, plan 24 planting spaces, and compare lengths and borders. Its illustrated planning table connects existing open math activities to water, gathering, and the café. [Living Garden](https://number-garden-together.tastypeach3.chatgpt.site/#living) now offers renewable searches across nine authored settings: meet land snails, woodlice and adult butterflies, compare changing conditions, follow a delivery note, and count equal packs of café supplies. Small parcels and all ordered facts through 12×12 are open choices. The [original snail visit](https://number-garden-together.tastypeach3.chatgpt.site/#living/first) and its one-time parcel remain intact. This is guided picture investigation, not a field study or ecosystem simulator. New searches independently suggest deeper nature clues, note comprehension and parcel math from a few distinct finished tasks. Every depth stays open: use habitat evidence and before/after changes, follow sequences or infer a parcel from its contents, and find pack counts or plan tomorrow’s delivery. Help and narration remain separate from first-response matching, retries and familiarity. Paused older visits keep their original questions. [Spec 30](docs/specs/30-adaptive-living-garden.md) describes the conservative suggestion rules and limits.
 
 ## Run locally
 
@@ -36,6 +36,7 @@ node test/plantings-and-speech-checks.mjs
 node test/number-garden-story-checks.mjs
 node test/living-garden-checks.mjs
 node test/living-spiral-checks.mjs
+node test/living-adaptive-checks.mjs
 node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs

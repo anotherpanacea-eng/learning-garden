@@ -73,12 +73,12 @@ export function spiralPage(state,slug){
 export function spiralNotes(state){
  if(!hasSpiral(state))return '';const s=spiralState(state);
  if(!s)return `<details class="panel"><summary>Kept Living Garden exploration</summary><p>Unsupported record; retained without a replacement.</p><pre>${esc(JSON.stringify(state.livingExploration,null,2))}</pre></details>`;
- const rounds=[...s.history,...(s.current?[s.current]:[])];
+ const rounds=[...s.history,...(s.current?[s.current]:[])].filter(r=>r.revision==='habitat-round-1');
  return `<details class="panel"><summary>Living Garden changing visits (${rounds.length} retained)</summary><p>Latest 24 closed visits plus the current one. Supplied pictures and familiar settings; no independent habitat, reading or recall certification.</p>${rounds.map(r=>{const c=spiralCase(r.task.caseId),ps=spiralPlaces(r.task);return `<section><h3>Visit ${r.id+1}: ${c.title} · ${spiralAnimal(c.animal).name}</h3><p>${r.task.familiar?'Setting previously offered':'First offer of setting'}. Picture clues viewed: ${r.inspected.map(i=>esc(ps[i].name)).join(', ')||'none'}.</p><p>Place/reason attempts: ${r.attempts.map(a=>`${esc(ps[a.place].name)} + ${esc(spiralReasons.find(x=>x.id===a.reason).label)}${a.afterHelp?' (after explanation)':''}${a.afterVocabulary?' (after vocabulary)':''}`).join('; ')||'none'}.</p><p>Explanation: ${r.explained?'yes':'no'}. Vocabulary: ${r.vocabulary?'yes':'no'}. Audio requested: ${r.audioRequested?'yes':'no'}; playback unobserved.</p><p>Parcel: ${r.task.packs} × ${r.task.bites} ${food(r.task.ingredientId).name} bites. Input: ${esc(r.input)}. Counts tried: ${r.mathAttempts.map(a=>`${a.value}${a.afterHelp?' (with help)':''}`).join(', ')||'none'}. Count explanation: ${r.mathHelp?'yes':'no'}.</p><p>${r.carried?`Carried ${total(r)} bites once`:r.left?'Left without supplies':r.found?'Found, still waiting':'Still searching'}.</p></section>`;}).join('')}</details>`;
 }
-export function bindSpiral(state,{save,render,navigate,focus}){
+export function bindSpiral(state,{save,render,navigate,focus,startVisit=startSpiral}){
  const bind=(selector,act,target)=>document.querySelectorAll(selector).forEach(b=>b.addEventListener('click',()=>{if(act(b)){save();render();if(target)focus?.(typeof target==='function'?target(b):target);}}));
- const start=()=>{if(startSpiral(state)){save();navigate('#living/visit');}};
+ const start=()=>{if(startVisit(state)){save();navigate('#living/visit');}};
  document.querySelectorAll('[data-spiral-start]').forEach(b=>b.addEventListener('click',start));
  document.querySelectorAll('[data-spiral-animal-start]').forEach(b=>b.addEventListener('click',()=>{if(setSpiralOption(state,'animal',b.dataset.spiralAnimalStart))start();}));
  document.querySelectorAll('[data-spiral-option]').forEach(el=>el.addEventListener('change',()=>{if(setSpiralOption(state,el.dataset.spiralOption,el.value))save();}));

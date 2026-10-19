@@ -1,3 +1,4 @@
+import {validAdaptiveRound,validAdaptiveProfile} from './living-adaptive-content.mjs';
 import {starterIngredients} from './cafe-content.mjs';
 import {currentRecipe} from './cafe-core.mjs';
 import {spiralAnimals,spiralCases,spiralCase,spiralReasons,spiralTarget,spiralMatch} from './living-spiral-content.mjs';
@@ -11,6 +12,7 @@ export const spiralClosed=r=>r.carried||r.left;
 export const hasSpiral=state=>Object.hasOwn(state,'livingExploration');
 export const spiralReady=r=>r.inspected.includes(spiralTarget(r.task))&&r.inspected.length>=2&&(r.matched||r.explained);
 export function validSpiralRound(r){
+ if(r?.revision==='habitat-round-2')return validAdaptiveRound(r);
  if(!object(r)||r.revision!=='habitat-round-1'||!int(r.id,0,999999999)||!object(r.task)||!spiralCase(r.task.caseId)||
   !int(r.task.rotation,0,2)||!ranges.includes(r.task.range)||!food(r.task.ingredientId)||typeof r.task.familiar!=='boolean'||
   !int(r.task.packs,r.task.range==='small'?2:1,r.task.range==='small'?5:12)||!int(r.task.bites,r.task.range==='small'?2:1,r.task.range==='small'?5:12)||
@@ -30,6 +32,7 @@ export function spiralState(state){
   !Array.isArray(s.offered)||s.offered.length>spiralCases.length||new Set(s.offered).size!==s.offered.length||!s.offered.every(spiralCase)||
   !Array.isArray(s.history)||s.history.length>24||!s.history.every(r=>validSpiralRound(r)&&spiralClosed(r))||
   !(s.current===null&&s.nextRound===0||validSpiralRound(s.current)&&s.current.id===s.nextRound-1))return null;
+ if(Object.hasOwn(s,'adaptive')&&!validAdaptiveProfile(s.adaptive,s.nextRound)||[...s.history,s.current].some(r=>r?.revision==='habitat-round-2')&&!s.adaptive)return null;
  const ids=s.history.map(r=>r.id);if(new Set(ids).size!==ids.length||ids.some((id,i)=>id>=s.nextRound-1||i>0&&id<=ids[i-1]))return null;
  return s;
 }
@@ -38,7 +41,7 @@ function ensure(state){
  if(!hasSpiral(state))state.livingExploration={version:1,nextRound:0,options:{animal:'mix',range:'small',ingredient:'needed'},cursors:{mix:0,snail:0,woodlouse:0,butterfly:0,small:0,all:0},offered:[],current:null,history:[]};
  return spiralState(state);
 }
-const open=state=>{const r=currentSpiral(state);return r&&!spiralClosed(r)?r:null;};
+const open=state=>{const r=currentSpiral(state);return r?.revision==='habitat-round-1'&&!spiralClosed(r)?r:null;};
 export function setSpiralOption(state,key,value){
  if(!(['animal','range','ingredient'].includes(key))||(key==='animal'?!animal(value):key==='range'?!ranges.includes(value):value!=='needed'&&!food(value)))return false;
  const s=ensure(state);if(!s)return false;s.options[key]=value;return true;
