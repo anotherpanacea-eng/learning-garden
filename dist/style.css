@@ -29,3 +29,5 @@
 @media(max-width:900px){.story-layout.ordering-layout{grid-template-columns:1fr}.story-layout.ordering-layout .story-sheet{grid-column:1;grid-row:1}.story-layout.ordering-layout .guide-rail{grid-column:1;grid-row:2}.story-layout.ordering-layout .story-wonder{grid-column:1;grid-row:3}}
 
 .french-place-symbol{display:block;font-size:54px;margin-bottom:18px}.paris-parent-note p{max-width:75ch}
+
+.progress-transfer{margin-block:24px}.progress-transfer li{margin-block:10px}.import-file-label{display:block;font-weight:700;margin-bottom:8px}.progress-transfer input[type=file]{max-width:100%;min-height:44px;font:inherit}.progress-transfer input::file-selector-button{min-height:44px;padding:8px 14px;font:inherit;border:1px solid #397958;border-radius:8px;background:#edf4ef;color:#183f39;cursor:pointer}.import-preview{border-top:1px solid #c7d6ce;padding-top:16px}.progress-transfer [role=status]:empty{display:none}
