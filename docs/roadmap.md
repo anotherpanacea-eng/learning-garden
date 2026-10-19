@@ -2,7 +2,7 @@
 
 This is a plan for this small, parent-guided app, not a complete curriculum or a promise of measured learning gains. Each selected increment receives a bounded specification and independent review before implementation. Delivery order does not lock a child's access: every existing destination remains open. Existing math, stories, companions, and the replayable café remain available.
 
-## Next releases, revised 2026-10-18
+## Next releases, revised 2026-10-19
 
 The graph currently emphasizes mathematics. Expand playable experiences and their connections together; do not confuse a topic appearing on a map with a reviewed activity that teaches it. Keep the storm-recovery world as the common purpose, with several independent ways in.
 
@@ -15,12 +15,13 @@ The graph currently emphasizes mathematics. Expand playable experiences and thei
 | Delivered | [Living Garden spiral](specs/29-living-garden-spiral.md) | Nine authored changing-condition settings for three animals, short delivery notes, and renewable parcels with equal-group counting through 12×12. Preserve the original visit. | Renewable searches implemented |
 | Delivered | [Adaptive Living Garden](specs/30-adaptive-living-garden.md) | Independently suggest deeper habitat evidence/change reasoning, sequence/inference notes and inverse/two-step parcel math. All trails/help remain open; preserve legacy work. | Three authored depths per strand, reviewed local suggestion policy |
 | Delivered | [Ideas between games](specs/31-learning-between-games.md) | Optional source-aware fact-family invitations start real café orders, Bramble puzzles and garden parcels, with source/help/familiarity kept distinct. Café nature/text conversations are unscored. | Cross-game numerical practice implemented; wider assessed science/reading transfer remains later |
+| Delivered | [Story Loft puppet theatre](specs/36-story-loft-puppet-theatre.md) | Compose three illustrated scenes, perform manually, consider an open audience question, revise and keep shows. Five puppets and repeatable starters welcome unexpected combinations. | First create–perform–revise loop implemented; paired-perspective reading remains later |
 | Next science extensions | [More Living Garden](specs/23-living-garden.md) | Simple food chains with explicit energy arrows. Controlled plant growth and ecosystem models need their own reviewed assumptions. | Further scope; not built |
 | Then | [Travelers' Archive](specs/24-travelers-archive.md) | Follow a parcel into one historical setting; use a map, a timeline, and two short accounts to investigate its story. | Initial scope; not built |
 | Post Office follow-ups | [Sky Post expansions](specs/25-sky-post.md) | The same Post Office game offers courier presets and Bramble’s renewable adaptive challenges through 12×12, with explicit mode/table choices and worked examples ([spec 26](specs/26-bramble-changing-challenges.md)). Real packing orders remain authored examples. Reuse its map, delivery runner and saved state. Deliveries are the play; no play-credit gate. | Courier choices and adaptive rival rounds implemented; procedural packing orders remain future work |
 | Delivered authoring atlas | [Full reference graph and play patterns](learning-atlas.md), [spec 32](specs/32-full-learning-atlas.md) | Complete pinned 1,590-topic/3,221-edge graph, all-topic mapping index, seven reusable patterns, explicit references/limits, all 54 domains and prioritized game extensions. Additional subject plans include geography, art, music and languages. | Repository planning/data delivered; child-facing filters and broader authored coverage remain future work |
 
-Word Workshop, Ecosystem expeditions and Story Loft below remain useful independent increments. Word work needs reviewed pronunciations; the ecology link-out is separate from the new local Living Garden. Neither replaces a complete literacy or science curriculum.
+Word Workshop phonics, Ecosystem expeditions and the paired-perspective Story Loft reading expansion below remain useful later increments. Word work needs reviewed pronunciations; the ecology link-out is separate from the new local Living Garden. Neither replaces a complete literacy or science curriculum.
 
 ## Teaching direction
 
@@ -47,7 +48,7 @@ Keep reading, comprehension, composition, investigation, support, familiarity, a
 | 3 | [Storm Workshop](specs/03-storm-workshop.md): choose a fair comparison and investigate | One original cart/ramp experiment family; repeatable trials and a comparison notebook | Implemented; moved ahead of Post Office |
 | 4 | [Word Workshop](specs/04-word-workshop.md): sound, spelling and meaning work together | A small reviewed sequence of word families, pronunciation support, and meaningful messages | Planned |
 | 5 | [Ecosystem expeditions](specs/05-ecosystem-expeditions.md): explore interacting causes | Three guided visits to Marble's simulator, with predictions, repeat comparisons, and careful model conclusions | Planned |
-| 6 | [Story Loft](specs/06-story-loft.md): stories, viewpoints and expression | Six original short stories, linked perspectives, evidence-based interpretations, retelling and composition | Planned |
+| 6 | [Story Loft](specs/06-story-loft.md): stories, viewpoints and expression | [First puppet theatre](specs/36-story-loft-puppet-theatre.md) implements repeatable picture composition and revision. Six paired-perspective reading stories remain later. | Creative theatre implemented; reading expansion planned |
 
 Step 2 can be built independently of step 1. Step 3 introduces tools useful for step 5; these are implementation dependencies, not learner prerequisites. Step 4 needs reviewed pronunciation/content before release. Step 6 can reuse Post Office composition controls where useful, without turning open interpretation into one-answer grading.
 
@@ -75,7 +76,7 @@ Marble's taxonomy is openly licensed data with attribution obligations. Its Wate
 
 ## Release procedure
 
-Each spec is independently reviewed; resolve concrete findings before building that step. Implement only the selected increment. Check its learning content, state transitions, migration, save-off/export/reset, touch/keyboard interaction, and responsive layout. Independent implementation review and root browser QA precede publishing the reviewed static files through the existing Sites workflow. Keep the GitHub PR draft and unmerged until exact-candidate Claude clearance and a separately authorized merge. Future content details, external controls, and scientific models must be refreshed before those steps are built.
+Each spec is independently reviewed; resolve concrete findings before building that step. Implement only the selected increment. Check its learning content, state transitions, migration, save-off/export/reset, touch/keyboard interaction, and responsive layout. Independent implementation review and root browser QA precede publishing the reviewed static files to the current personal Cloudflare game. Earlier Sites and Cloudflare addresses keep their previous releases. Keep the GitHub PR draft and unmerged until exact-candidate Claude clearance and a separately authorized merge. Future content details, external controls, and scientific models must be refreshed before those steps are built.
 
 ## Sources informing the direction
 

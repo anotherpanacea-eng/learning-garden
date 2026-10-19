@@ -10,14 +10,14 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 70 explicit current references across 41 unique source topics: authored question references, scoped practice or supplied explanations. The other 1549 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 72 explicit current references across 42 unique source topics: authored question references, scoped practice or supplied explanations. The other 1548 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
 | Source subject | Topics | Topics with any declared link | Not yet mapped |
 | --- | --- | --- | --- |
 | Computing | 21 | 1 | 20 |
-| English | 286 | 4 | 282 |
+| English | 286 | 5 | 281 |
 | History | 90 | 0 | 90 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
@@ -37,7 +37,7 @@ Mathematics currently has the broadest authored task collection. Science and Eng
 | Read · infer · support | Read or hear a meaningful message; find the clue, infer a purpose, identify supporting words. | English Paris, French Paris, Living Garden notes | Explicit note → sequence → inference → compare accounts → evaluate conflicting sources. |
 | Compose · execute · revise | Make a message or sequence, let a reader/runner respond literally, revise for the intended effect. | Willow Post Office | Word-card directions → branching instructions → short messages → longer authored explanations. |
 | Build · transform · relate | Make an object/model, transform it, connect its representation to a relation or explanation. | Number Garden models, Multiplication Garden, Bramble decomposition, Word Garden | Counters/bundles → arrays/inverse relations → fractions/area → algebraic structures. |
-| Create · perform · reflect | Make something expressive, try or share it, notice its effect, choose a revision. | New interaction needed | Rhythm/shape/voice experiment → a composition → explain or perform a revision. |
+| Create · perform · reflect | Make something expressive, try or share it, notice its effect, choose a revision. | Story Loft puppet theatre | Rhythm/shape/voice experiment → a composition → explain or perform a revision. |
 
 Each reuse needs a real purpose, reviewed content, suitable representations, meaningful response modes and a new-context question. It is not enough to replace nouns in a text quiz. Support-at-response, counting/deriving, retries, familiarity and unobserved abilities stay distinct. A choice question, spoken discussion, manipulation, composition, physical experiment and creative performance offer different evidence.
 
@@ -65,6 +65,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | [English Paris](https://after-the-storm-learning.anotherpanacea.workers.dev/#paris) | read, compose | Authored repeatable stories, vocabulary, sequence, inference and evidence selections, with local support and familiarity distinctions. |
 | [French Paris](https://after-the-storm-learning.anotherpanacea.workers.dev/#french) | read, compose | Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization. |
 | [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#words) | build, read | Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Published with the complete game on Cloudflare. |
+| [Story Loft puppet theatre](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft) | create, compose | Compose three picture/phrase scenes, perform manually and revisit them for an audience. Supplied captions and open discussion are not independent writing, reading or retelling evidence. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -88,7 +89,7 @@ These are optional authoring paths, not prerequisite edges or a compulsory child
 | 4 | [Willow messages and map-making](specs/02-willow-post-office.md) | Extend compose/execute/revise | Write a useful short message, test it with a reader; add a map legend, direction and scale as separately reviewed content. Current word cards do not demonstrate free composition; geography has no dedicated Marble subject heading. |
 | 5 | [Travelers’ Archive](specs/24-travelers-archive.md) | New historical evidence game; reuse read/infer/support and search | Compare two short accounts or artifacts, place an event on a timeline/map, explain what each source can and cannot tell us. History currently has no declared learning activity references; a story setting alone does not teach historical inquiry. |
 | 6 | Sound and Light Studio | New create/perform/reflect mode, with experiment | Change a sound or shadow, measure a pattern, make a short rhythm or light composition and revise it. Waves/sound/light and creative music/art need auditory/spatial creation, not only text questions. Recording would need its own privacy decision. |
-| 7 | [Story Loft and community circle](specs/06-story-loft.md) | New collaborative story/creation home; reuse read/compose/create | Tell or compose a short story, consider two perspectives, rehearse a conversation and choose a revision together. Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices. |
+| 7 | [Story Loft and community circle](specs/06-story-loft.md) | New collaborative story/creation home; reuse read/compose/create | First picture/phrase puppet theatre is implemented in spec 36. Paired-perspective reading, richer expression and community-circle conversations remain later scope. Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices. |
 
 These priorities are design recommendations, not a required learning sequence. Existing planned specs still need their own review before build. Sound review, real-world investigation and human conversation cannot be replaced by more procedural text variants.
 
@@ -116,7 +117,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | English / Speaking & Listening | 21 | 0 | Read · infer · support; Create · perform · reflect |
 | English / Spelling & Word Study | 24 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Vocabulary | 21 | 0 | Read · infer · support; Search · inspect · compare |
-| English / Writing Composition | 38 | 0 | Compose · execute · revise; Read · infer · support |
+| English / Writing Composition | 38 | 1 | Compose · execute · revise; Read · infer · support |
 | History / Ancient Egypt | 29 | 0 | Read · infer · support; Search · inspect · compare |
 | History / Ancient Greece & Rome | 29 | 0 | Read · infer · support; Search · inspect · compare |
 | History / Historical Thinking | 7 | 0 | Read · infer · support; Search · inspect · compare |
@@ -217,6 +218,7 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Unknown in Addition & Subtraction](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_3JgrHY221M) | authored-task / Number Garden and open math models / [source](../dist/broad-content.mjs) | The hidden pile: an authored reasoning task with variants/help. Task-specific answers do not establish full-topic coverage, independent recall or placement. |
 | [Two-Step Word Problems](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_yTWxkzzoOZ) | authored-task / Number Garden and open math models / [source](../dist/broad-content.mjs) | The seed exchange: an authored reasoning task with variants/help. Task-specific answers do not establish full-topic coverage, independent recall or placement. |
 | [Justifying mathematical reasoning](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_pyMD_SIiYO) | authored-task / Number Garden and open math models / [source](../dist/broad-content.mjs) | The doubled-row claim: an authored reasoning task with variants/help. Task-specific answers do not establish full-topic coverage, independent recall or placement. |
+| [Reviewing Own Writing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_U_8iVFZuHH) | scoped-practice / Story Loft puppet theatre / [source](../dist/learning-invitations.mjs) | Revisit a finite picture-and-phrase sequence for an audience. Discussion quality, independent narrative writing and the wider topic remain unobserved. |
 | [Prefixes and suffixes](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_HrgDjxcWvf) | scoped-practice / Word Garden / [source](../dist/learning-invitations.mjs) | Explore a finite authored set of prefix/suffix meanings and unscored new-word discussion. No independent decoding, spelling or full-topic assessment is inferred. |
 | [Step-by-Step Instructions](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt__p5n8z5soJ) | scoped-practice / Willow Post Office / [source](../dist/learning-invitations.mjs) | Compose and revise a finite sequence of literal instructions. This is guided practice, not general programming proficiency. |
 | [Reviewing Own Writing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_U_8iVFZuHH) | scoped-practice / Willow Post Office / [source](../dist/learning-invitations.mjs) | Watch whether a tap-composed message achieves its intended delivery and revise it. Independent free writing and the wider evidence criteria remain unobserved. |
@@ -238,6 +240,7 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Multiplication as repeated addition](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_PZ909yPrEC) | scoped-practice / Almost-Right Café / [source](../dist/cafe-core.mjs) | Count total bites for equal plates and separately handle cupboard gaps; arithmetic help and skipped tasks remain distinct. |
 | [Arrays for multiplication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_GRWwTDZ3wD) | scoped-practice / Bramble’s ribbon gate / [source](../dist/post-office-ui.mjs) | Literal equal-bundle arrays and requested decomposition through 12×12; no general division or independent-recall certification. |
 | [Multiplication as repeated addition](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_PZ909yPrEC) | scoped-practice / Bramble’s ribbon gate / [source](../dist/post-rival-generator.mjs) | Generated multiplication examples use equal bundles; addition/subtraction remain their own tasks, not evidence of this topic. |
+| [Narrative Writing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_vauULTecMH) | scoped-practice / Story Loft puppet theatre / [source](../dist/loft-content.mjs) | Arrange supplied character, setting and action phrases into a three-scene sequence. Developed narrative, dialogue, spelling and independent composition are not assessed. |
 
 ## Sources, licensing and maintenance
 

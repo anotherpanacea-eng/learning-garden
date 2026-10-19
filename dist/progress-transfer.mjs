@@ -13,7 +13,7 @@ import {EXPLORER_COLORS,EXPLORER_SYMBOLS} from './explorer-storage.mjs';
 
 export const MAX_IMPORT_BYTES=5*1024*1024;
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
-const destinations={broad:'Number Garden',garden:'Stories and Paris',cafe:'Café',science:'Water Lab',facts:'Multiplication Garden',workshop:'Storm Workshop',postOffice:'Post Office',plantings:'Planting beds',livingGarden:'Living Garden',livingExploration:'Living Garden trails',words:'Word Garden'};
+const destinations={broad:'Number Garden',garden:'Stories and Paris',cafe:'Café',science:'Water Lab',facts:'Multiplication Garden',workshop:'Storm Workshop',postOffice:'Post Office',plantings:'Planting beds',livingGarden:'Living Garden',livingExploration:'Living Garden trails',words:'Word Garden',loft:'Story Loft'};
 export function initializeExplorerState(state){
  ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);return state;
 }
@@ -32,7 +32,7 @@ export function prepareProgressImport(raw){
  }
  if(!object(source)||!bounded(source))return fail('This file has an unsupported or overly complex structure. No progress was changed.');
  if(source.version!==1)return fail('This notebook version is not supported here. Keep the original file; no progress was changed.');
- for(const key of Object.keys(destinations))if(Object.hasOwn(source,key)&&!object(source[key]))return fail('A saved destination has an unreadable structure. Keep the original file; no progress was changed.');
+ for(const key of Object.keys(destinations))if(key!=='loft'&&Object.hasOwn(source,key)&&!object(source[key]))return fail('A saved destination has an unreadable structure. Keep the original file; no progress was changed.');
  if(!Number.isSafeInteger(source.sessions)||source.sessions<0)return fail('The original task counts are unreadable. No progress was changed.');
  const restored=restoreStateResult(JSON.stringify(source));
  if(restored.reason)return fail('This is not a supported complete notebook. Choose “Download our notes” on the old site. No progress was changed.');

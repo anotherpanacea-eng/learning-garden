@@ -1,3 +1,4 @@
+import {loftPage,bindLoft} from './loft-ui.mjs';
 import {destinationNotes} from './notebook-sections.mjs';
 import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from './progress-transfer.mjs';
 import {progressTransferPanel} from './progress-transfer-ui.mjs';
@@ -205,6 +206,7 @@ function render(){
   else if(root==='puzzles')html=puzzlePage();
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
+  else if(root==='loft')html=loftPage(state);
   else html=home();
   if(!choosingExplorer){const context={numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
   if(!choosingExplorer&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
@@ -279,6 +281,7 @@ function bind(){
  bindOrchard(state,{save,render,focus:focusElement});
  bindForage(state,{save,render,focus:focusElement,exposeFacts:pairs=>exposeStoryFacts({facts:pairs})});
  bindWordGarden(state,{save,render,focus:focusElement});
+ bindLoft(state,{save,render,focus:focusElement});
  bindSpeech();bindConnections(state,{save,render,navigate,focus:focusElement});
  bindScience(state,{save,render,focus:focusElement});
  bindLiving(state,{save,render,focus:focusElement});
