@@ -24,7 +24,7 @@ for(const actor of puppets)for(const place of settings)for(const action of actio
 }
 equal(combinations,600,'complete finite scene domain');check(!sceneCaption({actor:'unknown'}),'unknown scene never fabricates a caption');
 for(const idea of invitations){
- const s=freshState();check(startShow(s,idea.id),'each starter open');const d=loftState(s).draft;check(validShow(d)&&validLoft(s.loft),'valid starter');equal(d.frames,idea.frames,'starter exact');check(d.frames!==idea.frames&&d.frames[0]!==idea.frames[0],'starter detached');
+ const s=freshState();check(startShow(s,idea.id),'each starter open');const d=loftState(s).draft;check(validShow(d)&&validLoft(s.loft),'valid starter');equal(d.frames,idea.frames.map(f=>({...f,dialogue:''})),'starter pictures exact with empty dialogue');check(d.frames!==idea.frames&&d.frames[0]!==idea.frames[0],'starter detached');
  const before=snapshot(s);loftPage(s);loftNotes(s);equal(snapshot(s),before,'render pure on starter');finish(s);check(s.loft.draft.shared&&s.loft.shelf.length===1,'finished arrangement saved');check(loftPage(s).includes('A question from the front row'),'audience loop');
  for(let i=0;i<3;i++){check(spotlightScene(s,i),'every scene welcome');check(loftPage(s).includes(`You chose scene ${i+1}`),'reflection identifies selected scene, not correctness');}
  for(let i=0;i<audienceQuestions.length;i++){check(chooseAudienceQuestion(s,i),'every question available');check(loftPage(s).includes(audienceQuestions[i].text),'authored audience question');check(nextAudienceQuestion(s),'questions cycle');}

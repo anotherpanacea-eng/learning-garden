@@ -55,8 +55,27 @@ const playback=v=>({cursor:0,location:v.order.start,referent:null,status:'ready'
 export function startPostOffice(state,deliveryId){
  const order=deliveries.find(d=>d.id===deliveryId);if(!order)return null;
  const p=ensurePostOffice(state);if(p.nextVisit>=Number.MAX_SAFE_INTEGER)return null;
- const v={id:`post-${p.nextVisit++}`,revision:POST_REVISION,order:clone(order),recipientLocations:Object.fromEntries(recipients.map(r=>[r.id,r.place])),composer:{place:'post',recipient:'clover'},clauses:[],packing:{input:'',attempts:[],packed:false,supported:false,error:'',feedback:''},prediction:null,predictionAfterSupport:false,support:{helper:false,audioRequested:false},reading:'unobserved',revisions:0,checks:[],completed:false,helperStep:0};
+ const v={id:`post-${p.nextVisit++}`,revision:POST_REVISION,order:clone(order),recipientLocations:Object.fromEntries(recipients.map(r=>[r.id,r.place])),composer:{place:'post',recipient:'clover'},clauses:[],packing:{input:'',attempts:[],packed:false,supported:false,error:'',feedback:''},prediction:null,predictionAfterSupport:false,support:{helper:false,audioRequested:false},reading:'unobserved',revisions:0,checks:[],completed:false,helperStep:0,postPage:'pack'};
  v.playback=playback(v);p.visits.push(v);p.current=v.id;trim(p);return v;
+}
+// Presentation state is optional so old deliveries resume without rewriting their work.
+const postPages=new Set(['pack','plan','fly','bramble','help']);
+export function postOfficeView(visit){
+ if(postPages.has(visit?.postPage))return visit.postPage;
+ if(visit?.rival&&rivalBlocks(visit))return 'bramble';
+ if(visit?.packing?.packed)return visit.clauses?.length?'fly':'plan';
+ return 'pack';
+}
+export function setPostPage(state,page){
+ if(!postPages.has(page))return false;
+ const v=active(state);if(!v)return false;
+ const previous=postOfficeView(v);
+ if(page==='help'&&previous!=='help')v.postHelpReturn=previous;
+ v.postPage=page;return true;
+}
+export function returnFromPostHelp(state){
+ const v=active(state);if(!v)return false;
+ return setPostPage(state,postPages.has(v.postHelpReturn)&&v.postHelpReturn!=='help'?v.postHelpReturn:'plan');
 }
 export function resumePostOffice(state,id){const p=ensurePostOffice(state);if(!p.visits.some(v=>v.id===id))return false;p.current=id;return true;}
 export function setPostCourier(state,style){const preset=courierPresets.find(c=>c.id===style);if(!preset)return false;const p=ensurePostOffice(state);p.courier=style;if(preset.avatar){p.courierAvatar=preset.avatar;p.courierPronouns=preset.pronouns;}return true;}

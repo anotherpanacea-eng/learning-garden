@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {deliveries,recipients,places} from '../dist/post-office-content.mjs';
-import {ensurePostOffice,startPostOffice,appendPostClause,packPostTogether,stepPostRoute,setPostComposer,setPostCourierPortrait,setPostPackingInput,submitPostPacking,setPostReading,setPostSupport} from '../dist/post-office-core.mjs';
+import {ensurePostOffice,startPostOffice,appendPostClause,packPostTogether,stepPostRoute,setPostComposer,setPostCourierPortrait,setPostPackingInput,submitPostPacking,setPostReading,setPostSupport,setPostPage} from '../dist/post-office-core.mjs';
 import {postOfficePage,postOfficeNotes,postMap} from '../dist/post-office-ui.mjs';
 import {ensureGarden} from '../dist/garden-core.mjs';
 import {freshState,STORAGE_KEY,recommendations} from '../dist/core.mjs';
@@ -23,7 +23,7 @@ for(const order of deliveries){
  packPostTogether(s);appendPostClause(s,`go:${order.destination}`);appendPostClause(s,`give:${order.recipient}`);stepPostRoute(s);
  check(postMap(s,v).includes(`at ${places.find(p=>p.id===order.destination).name}`),'map text follows current location');
  const rec=recommendations(s),paused=JSON.stringify(s);postOfficePage(s);postOfficeNotes(s);equal(JSON.stringify(s),paused,'paused rendering advances no instruction or completion');equal(recommendations(s),rec,'no multiplication recommendation effect');
- stepPostRoute(s);check(postOfficePage(s).includes('A neighbor’s parcel has arrived.'),'real handoff shows ending');check(postMap(s,v).includes('post-handoff'),'delivered parcel pictured at recipient rather than carried');
+ stepPostRoute(s);setPostPage(s,'fly');check(postOfficePage(s).includes('A neighbor’s parcel has arrived.'),'real handoff shows ending');check(postMap(s,v).includes('post-handoff'),'delivered parcel pictured at recipient rather than carried');
  setPostReading(s,'independent');setPostSupport(s,'audioRequested');equal(v.reading,'independent','audio request preserves actual reading report');
  notes=postOfficeNotes(s);check(notes.includes('Narration requested: yes'),'narration request remains explicit');check(notes.includes('Reading: independent'),'report stays visible alongside support');
 }

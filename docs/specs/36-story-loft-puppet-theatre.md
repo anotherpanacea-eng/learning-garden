@@ -1,3 +1,5 @@
+> Extended by [spec 37](37-growing-stories-and-clear-turns.md): optional authored dialogue, one to twelve scenes, version-aware save adaptation and focused task pages. The original three-scene/no-text scope below records the first release.
+
 # 36 · Story Loft: a little puppet theatre
 
 Status: implemented; independent content/spec and implementation reviews cleared. First creative Story Loft increment; the six paired-perspective reading stories in spec 06 remain later scope.
