@@ -1,6 +1,6 @@
 # Rebuilding the town, seasons and the almanac
 
-Status: proposed; awaiting independent spec review. Builds on [spec 21](21-regrowing-the-garden.md) (participation rewards, never correctness) and [spec 16](16-explorer-profiles-and-progress-safety.md) (per-explorer state). Single device and offline throughout: no accounts, sharing, network weather or location.
+Status: proposed; awaiting independent spec review. Builds on [spec 21](21-regrowing-the-garden.md) (participation rewards, never correctness) and [spec 16](16-explorer-profiles-and-progress-safety.md) (per-explorer state). Single device and offline throughout: no accounts, sharing, network weather or location. Child-facing text and number moments: [33-town-content.md](33-town-content.md).
 
 ## Problem
 

@@ -1,6 +1,6 @@
 # Word Garden: growing words from parts
 
-Status: proposed; awaiting independent spec review. Refines the first release of [Word Workshop (spec 04)](04-word-workshop.md) and keeps all of its content, audio, evidence and privacy rules. Feeds the library's sign job and the almanac's word page in [spec 33](33-rebuilding-the-town.md).
+Status: proposed; awaiting independent spec review. Refines the first release of [Word Workshop (spec 04)](04-word-workshop.md) and keeps all of its content, audio, evidence and privacy rules. Feeds the library's sign job and the almanac's word page in [spec 33](33-rebuilding-the-town.md). Scene sentences, refusals and questions: [34-word-garden-content.md](34-word-garden-content.md).
 
 ## Why start with word parts
 
