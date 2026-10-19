@@ -1,3 +1,4 @@
+import {validConnection} from './learning-connection-data.mjs';
 import {spiralState,currentSpiral,hasSpiral,startSpiral,setSpiralOption,spiralClosed} from './living-spiral-core.mjs';
 import {strands,depths,methods,integer,freshAdaptive,taskKey,scienceQuestion,noteQuestion,correctResponse,scienceReady,readingReady} from './living-adaptive-content.mjs';
 const profile=state=>spiralState(state)?.adaptive||freshAdaptive();
@@ -26,13 +27,15 @@ export function setAdaptiveChoice(state,k,value){
 function priorFact(state,a,b){const keys=[`${a}x${b}`,`${b}x${a}`];return (Array.isArray(state.exposures)&&state.exposures.some(x=>keys.includes(x)))||(Array.isArray(state.broad?.seenFacts)&&state.broad.seenFacts.some(x=>keys.includes(x)));}
 const blank=()=>({count:0,first:null,attempts:[],matched:false,help:false,audio:false});
 function offer(state,k){const s=spiralState(state),key=s.current.task.teaching.keys[k];if(!s.adaptive.offered[k].includes(key))s.adaptive.offered[k].push(key);}
-export function startAdaptiveSpiral(state){
+export function startAdaptiveSpiral(state,connection=null){
+ if(connection!==null&&!validConnection(connection))return false;
  if(hasSpiral(state)&&!spiralState(state))return false;
- const old=profile(state),plans=Object.fromEntries(strands.map(k=>[k,adaptiveSuggestion(state,k)]));
+ const old=profile(state),previousCursors=spiralState(state)?.cursors||{small:0,all:0},savedCounts={small:previousCursors.small,all:previousCursors.all},plans=Object.fromEntries(strands.map(k=>[k,adaptiveSuggestion(state,k)]));
  // The legacy starter alone owns case, stock, history and quantity selection.
  if(!startSpiral(state))return false;
- const s=spiralState(state),r=s.current,t=r.task,p=structuredClone(old),h={version:1,depths:{},keys:{},familiar:{},reasons:{},noteVariant:r.id%3,priorFactSeen:priorFact(state,t.packs,t.bites)};
- for(const k of strands){if(p.levels[k]!==plans[k].level){p.levels[k]=plans[k].level;p.epochs[k]=r.id;}h.depths[k]=p.choices[k]==='auto'?p.levels[k]:p.choices[k];h.reasons[k]=p.choices[k]==='auto'?plans[k].reason:`Chosen trail: ${depths[k][h.depths[k]-1]}. Automatic suggestion stays separate.`;}
+ const s=spiralState(state),r=s.current,t=r.task,p=structuredClone(old),h={version:1,depths:{},keys:{},familiar:{},reasons:{},noteVariant:r.id%3,priorFactSeen:connection!==null||priorFact(state,t.packs,t.bites)};
+ if(connection){t.packs=connection.a;t.bites=connection.b;t.range=t.packs>=2&&t.packs<=5&&t.bites>=2&&t.bites<=5?'small':'all';t.connection=structuredClone(connection);s.cursors.small=savedCounts.small;s.cursors.all=savedCounts.all;}
+ for(const k of strands){if(!(connection&&k==='math')&&p.levels[k]!==plans[k].level){p.levels[k]=plans[k].level;p.epochs[k]=r.id;}h.depths[k]=p.choices[k]==='auto'?p.levels[k]:p.choices[k];h.reasons[k]=p.choices[k]==='auto'?plans[k].reason:`Chosen trail: ${depths[k][h.depths[k]-1]}. Automatic suggestion stays separate.`;if(connection&&k==='math'){h.depths.math=1;h.reasons.math='Chosen connection: count equal packs in a new setting. Automatic depth and preferences stay separate.';}}
  t.teaching=h;for(const k of strands){h.keys[k]=taskKey(t,k);h.familiar[k]=p.offered[k].includes(h.keys[k])||(k==='math'&&h.depths.math===1&&h.priorFactSeen);}
  s.adaptive=p;s.current={revision:'habitat-round-2',id:r.id,task:t,place:0,inspected:[],science:{...blank(),place:null,detail:null,changedShown:false,vocabulary:false},reading:{...blank(),tag:null,evidence:null},math:{...blank(),input:'',method:'unreported'},found:false,carried:false,left:false};
  offer(state,'science');return true;

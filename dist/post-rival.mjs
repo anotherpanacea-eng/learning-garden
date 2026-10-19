@@ -1,3 +1,4 @@
+import {validConnection} from './learning-connection-data.mjs';
 import {generateRivalTask,rivalParameters} from './post-rival-generator.mjs';
 export {generateRivalTask} from './post-rival-generator.mjs';
 // Original Bramble ribbon puzzles. This module does not change packing or flight.
@@ -56,14 +57,15 @@ export function continueRival(state){const r=current(state,['resolved']);if(!r||
 export function noteRivalAudio(state){const r=current(state);if(!r)return false;r.audioRequested=true;r.supported=true;return true;}
 
 const methods=['recalled','worked','counting','together'];
-const reasons=['new example','revisit','related example','familiar example','starting mix'];
+const reasons=['new example','revisit','related example','familiar example','starting mix','connected example'];
 const integer=(x,a,b)=>Number.isSafeInteger(x)&&x>=a&&x<=b;
 const MAX_ROUND=Number.MAX_SAFE_INTEGER;
 const poolSizes={add:400,subtract:190,multiply:144};
 const terminal=r=>['continued','bypassed'].includes(r.phase);
 const roundKey=r=>`${r.task.kind}:${r.task.a}:${r.task.b}`;
 function validGeneratedRival(r){
- if(!keys(r,['revision','id','task','reason','phase','input','feedback','practiceStep','supported','audioRequested','attempts','resolution','method','decompositionStep'])||r.revision!=='bramble-2'||!integer(r.id,1,MAX_ROUND-1)||!object(r.task)||!rivalParameters(r.task.kind,r.task.a,r.task.b)||!integer(r.task.scene,0,2)||!same(r.task,generateRivalTask(r.task.kind,r.task.a,r.task.b,r.task.scene))||!reasons.includes(r.reason)||!phases.includes(r.phase)||typeof r.input!=='string'||typeof r.feedback!=='string'||!integer(r.practiceStep,0,2)||typeof r.supported!=='boolean'||typeof r.audioRequested!=='boolean'||!Array.isArray(r.attempts)||r.attempts.length>24||![null,'answered','together'].includes(r.resolution)||r.method!==null&&!methods.includes(r.method)||r.decompositionStep!==null&&!integer(r.decompositionStep,0,2))return false;
+ if(!object(r)||!keys(r,['revision','id','task','reason','phase','input','feedback','practiceStep','supported','audioRequested','attempts','resolution','method','decompositionStep',...(Object.hasOwn(r,'connection')?['connection']:[])])||r.revision!=='bramble-2'||!integer(r.id,1,MAX_ROUND-1)||!object(r.task)||!rivalParameters(r.task.kind,r.task.a,r.task.b)||!integer(r.task.scene,0,2)||!same(r.task,generateRivalTask(r.task.kind,r.task.a,r.task.b,r.task.scene))||!reasons.includes(r.reason)||!phases.includes(r.phase)||typeof r.input!=='string'||typeof r.feedback!=='string'||!integer(r.practiceStep,0,2)||typeof r.supported!=='boolean'||typeof r.audioRequested!=='boolean'||!Array.isArray(r.attempts)||r.attempts.length>24||![null,'answered','together'].includes(r.resolution)||r.method!==null&&!methods.includes(r.method)||r.decompositionStep!==null&&!integer(r.decompositionStep,0,2))return false;
+ if(Object.hasOwn(r,'connection')&&(!validConnection(r.connection,r.task.a,r.task.b)||r.task.kind!=='multiply'||r.reason!=='connected example')||r.reason==='connected example'&&!Object.hasOwn(r,'connection'))return false;
  if((r.audioRequested||r.phase==='practice'||r.practiceStep>0||r.decompositionStep!==null||r.method==='together')&&!r.supported)return false;
  let priorSupport=false;
  for(let i=0;i<r.attempts.length;i++){
@@ -82,7 +84,8 @@ export function validBrambleNotebook(p){
  const rounds=p.visits.filter(object).map(v=>v.rival).filter(r=>validGeneratedRival(r));
  if(!Object.hasOwn(p,'bramble'))return rounds.length===0;
  const b=p.bramble;
- if(!keys(b,['version','nextRound','mode','table','cursors','history'])||b.version!==1||!integer(b.nextRound,1,MAX_ROUND)||!['mixed','multiply','add','subtract'].includes(b.mode)||!integer(b.table,0,12)||!keys(b.cursors,['add','subtract','multiply'])||!Object.entries(poolSizes).every(([kind,size])=>integer(b.cursors[kind],0,size-1))||!Array.isArray(b.history)||b.history.length>96||!b.history.every(r=>validGeneratedRival(r)&&terminal(r)))return false;
+ if(!keys(b,['version','nextRound','mode','table','cursors','history',...(object(b)&&Object.hasOwn(b,'connectedRounds')?['connectedRounds']:[])])||b.version!==1||!integer(b.nextRound,1,MAX_ROUND)||!['mixed','multiply','add','subtract'].includes(b.mode)||!integer(b.table,0,12)||!keys(b.cursors,['add','subtract','multiply'])||!Object.entries(poolSizes).every(([kind,size])=>integer(b.cursors[kind],0,size-1))||!Array.isArray(b.history)||b.history.length>96||!b.history.every(r=>validGeneratedRival(r)&&terminal(r)))return false;
+ if(Object.hasOwn(b,'connectedRounds')&&!integer(b.connectedRounds,0,b.nextRound-1))return false;
  const ids=new Set();
  for(const r of b.history){if(ids.has(r.id)||r.id>=b.nextRound)return false;ids.add(r.id);}
  const visitIds=new Set();
@@ -117,7 +120,7 @@ function pool(kind,table){
 }
 const pairKey=(kind,p)=>`${kind}:${p[0]}:${p[1]}`;
 function selected(b){
- const id=b.nextRound,kind=b.mode==='mixed'?['multiply','add','multiply','subtract'][(id-1)%4]:b.mode;
+ const id=b.nextRound-(b.connectedRounds||0),kind=b.mode==='mixed'?['multiply','add','multiply','subtract'][(id-1)%4]:b.mode;
  const pairs=pool(kind,kind==='multiply'?b.table:0),eligible=new Set(pairs.map(p=>pairKey(kind,p))),recent=b.history.slice(-3).map(roundKey),latest=new Map();
  for(const r of b.history){if(r.task.kind===kind&&r.phase!=='bypassed'&&eligible.has(roundKey(r))){latest.delete(roundKey(r));latest.set(roundKey(r),r);}}
  const evidence=[...latest.values()];
@@ -150,7 +153,8 @@ function selected(b){
  }
  return {kind,...fresh()};
 }
-export function startAdaptiveRival(state,practice=false){
+export function startAdaptiveRival(state,practice=false,connection=null){
+ if(connection!==null&&!validConnection(connection))return false;
  const v=visit(state),p=state?.postOffice;
  if(!v||typeof practice!=='boolean'||Object.hasOwn(v,'rival')&&(!validPostRival(v.rival)||!['resolved','continued','bypassed'].includes(v.rival.phase))||!validBrambleNotebook(p)||p.bramble?.nextRound>=MAX_ROUND)return false;
  if(Object.hasOwn(v,'rivalLegacy')&&!validLegacyRival(v.rivalLegacy))return false;
@@ -159,8 +163,8 @@ export function startAdaptiveRival(state,practice=false){
   if(v.rival.revision==='bramble-1'){if(!Object.hasOwn(v,'rivalLegacy'))v.rivalLegacy=clone(v.rival);}
   else if(v.rival.phase==='resolved'){v.rival.phase='continued';archive(state,v.rival);}
  }
- const choice=selected(b),id=b.nextRound++;
- v.rival={revision:'bramble-2',id,task:generateRivalTask(choice.kind,...choice.pair,(id-1)%3),reason:choice.reason,phase:practice?'practice':'question',input:'',feedback:'',practiceStep:0,supported:practice,audioRequested:false,attempts:[],resolution:null,method:null,decompositionStep:null};
+ const choice=connection?{kind:'multiply',pair:[connection.a,connection.b],reason:'connected example'}:selected(b),id=b.nextRound++;if(connection)b.connectedRounds=(b.connectedRounds||0)+1;
+ v.rival={revision:'bramble-2',id,task:generateRivalTask(choice.kind,...choice.pair,(id-1)%3),reason:choice.reason,phase:practice?'practice':'question',input:'',feedback:'',practiceStep:0,supported:practice,audioRequested:false,attempts:[],resolution:null,method:null,decompositionStep:null,...(connection?{connection:clone(connection)}:{})};
  return true;
 }
 export function nextRivalChallenge(state){const r=current(state,['resolved','continued','bypassed']);return !!r&&startAdaptiveRival(state);}

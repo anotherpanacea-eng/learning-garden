@@ -109,3 +109,6 @@ export function setPostPrediction(state,value){const v=active(state);if(!v||valu
 export function setPostReading(state,mode){const v=active(state);if(!v||!readings.has(mode))return false;v.reading=mode;return true;}
 export function setPostSupport(state,key){const v=active(state);if(!v||!['helper','audioRequested'].includes(key))return false;v.support[key]=true;return true;}
 export function stepPostHelp(state,action){const v=active(state);if(!v||![1,-1,'reset'].includes(action))return false;v.support.helper=true;v.helperStep=action==='reset'?0:Math.max(0,Math.min(2,v.helperStep+action));return true;}
+
+// Read-only eligibility checks for explicit cross-game practice invitations.
+export {validVisit as validPostVisit};

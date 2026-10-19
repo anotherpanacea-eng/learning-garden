@@ -49,6 +49,7 @@ node test/post-rival-adaptive-checks.mjs
 node test/post-rival-adaptive-ui-checks.mjs
 node test/courier-rival-ui-checks.mjs
 node test/learning-invitation-checks.mjs
+node test/learning-connections-checks.mjs
 node test/cafe-expedition-checks.mjs
 node test/cafe-supper-checks.mjs
 node test/facts-checks.mjs
@@ -149,6 +150,8 @@ Specs 15–21 are implemented: matched and labeled teaching pictures; authored f
 Anonymous explorer slots use a picture, color and symbol, with separate full-app progress and voice preferences. No names or other identifying fields are added. Legacy shared progress is copied without changing the original; unreadable saves are kept before replacement, and failed preservation writes leave the original untouched. Notes can download or remove kept copies. Saving off removes all app-managed explorer, legacy and kept copies on this device while retaining current sessions in memory. Clearing one explorer leaves the others intact.
 
 Participation grows an original storm-recovery garden: finishing a walk or adventure, using a new kind of help, or acknowledging an open invitation can bring a plant or decoration. A skipped walk counts equally. Plantings never influence skill suggestions or become learning evidence. Open invitations include the seven areas' wondering prompts, estimates, defendable choices, different rectangles and counterexamples. All paths remain open.
+
+Living Garden, the café and Bramble now offer **Carry an idea here** cards. A finished math task can suggest the same equal-group relationship with different objects, or a neighboring fact. Choosing a card starts a real guest, ribbon puzzle or equal-packs search; waiting work is protected, usual preferences stay unchanged, and each destination records its own actual responses. Source context, help/retries and unknown familiarity remain visible in grown-up notes. The café also offers unscored nature-comparison and reading-evidence conversations. See [spec 31](docs/specs/31-learning-between-games.md).
 
 ## Storm Workshop and connected adventures
 

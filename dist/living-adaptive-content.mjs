@@ -1,3 +1,4 @@
+import {validConnection} from './learning-connection-data.mjs';
 // Authored question forms; legacy visits keep their original questions and records.
 import {starterIngredients} from './cafe-content.mjs';
 import {spiralCases,spiralCase,spiralAnimal,spiralPlaces,spiralTarget,spiralReasons} from './living-spiral-content.mjs';
@@ -47,6 +48,7 @@ export function validAdaptiveRound(r){
   if(s.count<=24&&s.count>0&&JSON.stringify(s.first)!==JSON.stringify(s.attempts[0]))return false;
   if(s.attempts.slice(0,-1).some(a=>a.correct))return false;
  }
+ if(Object.hasOwn(t,'connection')&&(!validConnection(t.connection,t.packs,t.bites)||h.depths.math!==1||!h.priorFactSeen||!h.familiar.math))return false;
  const s=r.science,n=r.reading,m=r.math,sq=scienceQuestion(t),nq=noteQuestion(t);
  if(!(s.place===null||integer(s.place,0,2))||!(s.detail===null||sq.options.some(x=>x.id===s.detail))||typeof s.vocabulary!=='boolean'||typeof s.changedShown!=='boolean'||s.count&&t.teaching.depths.science===3&&!s.changedShown||!(n.tag===null||tags.includes(n.tag))||!(n.evidence===null||nq.depth===3&&integer(n.evidence,0,2))||typeof m.input!=='string'||m.input.length>20||!methods.includes(m.method))return false;
  if(!scienceReady(r)&&(n.count||n.help||n.audio||r.found)||r.found&&!readingReady(r)||!r.found&&(m.count||m.help||m.audio)||r.carried&&(!r.found||!(m.matched||m.help)||r.left))return false;
