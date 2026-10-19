@@ -1,5 +1,6 @@
 // Original thematic bridges. Topic matches describe only the stated activity scope.
 export const learningPlaces=[
+ {id:'words',href:'#words',mark:'❀',title:'Grow a word and a new idea',body:'Try word plants and meaning-changing cuttings. Discover familiar words and combinations to wonder about.',topics:[{id:'mt_HrgDjxcWvf',scope:'Explore a finite authored set of prefix/suffix meanings and unscored new-word discussion. No independent decoding, spelling or full-topic assessment is inferred.'}]},
  {id:'living',href:'#living',mark:'❦',title:'Follow a Living Garden trail',body:'Meet different animals, compare changing clues, and find café parcels.',topics:[]},
  {id:'numbers',href:'#numbers',mark:'✿',title:'Plan the garden’s return',body:'Count saved seeds, arrange planting spaces, and compare a border.',topics:[]},
  {id:'post',href:'#post',mark:'✉',title:'Fly a garden delivery',body:'Pack a parcel, write a flight plan, and help a witch courier find a neighbor.',topics:[{id:'mt__p5n8z5soJ',scope:'Compose and revise a finite sequence of literal instructions. This is guided practice, not general programming proficiency.'},{id:'mt_U_8iVFZuHH',scope:'Watch whether a tap-composed message achieves its intended delivery and revise it. Independent free writing and the wider evidence criteria remain unobserved.'}]},

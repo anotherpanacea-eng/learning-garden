@@ -73,7 +73,8 @@
       "existing": [
         "Number Garden models",
         "Multiplication Garden",
-        "Bramble decomposition"
+        "Bramble decomposition",
+        "Word Garden"
       ],
       "spiral": "Counters/bundles → arrays/inverse relations → fractions/area → algebraic structures.",
       "limits": "A successful answer does not establish recall, fluent calculation or use of an unreported strategy."
@@ -425,6 +426,17 @@
       ],
       "route": "#french",
       "scope": "Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization."
+    },
+    {
+      "id": "words",
+      "name": "Word Garden",
+      "status": "built-local",
+      "route": "#words",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "scope": "Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Included in the local/repository release; hosted publication remains pending."
     }
   ],
   "manualReferences": [
@@ -505,7 +517,7 @@
       "name": "Word Workshop",
       "move": "New home; reuse build/read, add carefully reviewed speech/sound representations",
       "spec": "docs/specs/04-word-workshop.md",
-      "first": "Build and change words, hear reviewed sounds, connect morphology/meaning, then use the word in a purposeful note.",
+      "first": "First word-part release built in the local/repository release; reviewed phonics audio and sound/letter activities remain future work.",
       "gap": "Current story comprehension does not teach or assess the missing phonics/decoding/transcription sequence."
     },
     {

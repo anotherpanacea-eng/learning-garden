@@ -16,6 +16,12 @@ The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marbl
 
 [Data provenance and licenses](curriculum/README.md) · [Roadmap](docs/roadmap.md). Rebuild or check the offline atlas with `node scripts/build-learning-atlas.mjs` or `node scripts/build-learning-atlas.mjs --check`. The larger reference graph does not change the live app's smaller map or learner saves.
 
+## Word Garden (local release)
+
+Open `#words` in the local preview: combine ten word plants and six cuttings, grow 23 authored words, and keep other combinations as discoveries. Seven extra real words explain meanings and spelling changes; unauthored pairs remain separated letter experiments, with no invented pronunciation or false rejection. Eight open discussion cards include new words and a make-your-own invitation. This is word-part exploration with any amount of reading help, not a decoding or spelling assessment. Notebook and current choices stay with the active explorer. [Spec 34](docs/specs/34-word-garden.md).
+
+This increment is repository/local-only: the existing hosted release has not changed. Current ChatGPT Sites documentation prohibits targeting children under 13; choose suitable static hosting before publishing this child-directed addition.
+
 ## Run locally
 
 No installation or build step is needed. From this repository:
@@ -31,6 +37,7 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/word-garden-checks.mjs
 node test/core-checks.mjs
 node test/broad-checks.mjs
 node test/broad-variants-checks.mjs
