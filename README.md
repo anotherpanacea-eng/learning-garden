@@ -2,7 +2,7 @@
 
 A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 
-[Try After the Storm](https://number-garden-together.tastypeach3.chatgpt.site/).
+[Try After the Storm](https://after-the-storm-learning.joshua-ad8.workers.dev/).
 
 The opening visit, **First Morning**, has three independent entrances: follow a creature's trail, investigate a mysterious note, or imagine a shelter. Each path offers two reading, science, or mathematics tasks, an unscored design choice, its own ending, and an optional paper project. Mira, Rowan, and Ari are original fictional guides; guide and explorer-avatar choices are independent.
 
@@ -16,11 +16,11 @@ The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marbl
 
 [Data provenance and licenses](curriculum/README.md) · [Roadmap](docs/roadmap.md). Rebuild or check the offline atlas with `node scripts/build-learning-atlas.mjs` or `node scripts/build-learning-atlas.mjs --check`. The larger reference graph does not change the live app's smaller map or learner saves.
 
-## Word Garden (local release)
+## Word Garden
 
-Open `#words` in the local preview: combine ten word plants and six cuttings, grow 23 authored words, and keep other combinations as discoveries. Seven extra real words explain meanings and spelling changes; unauthored pairs remain separated letter experiments, with no invented pronunciation or false rejection. Eight open discussion cards include new words and a make-your-own invitation. This is word-part exploration with any amount of reading help, not a decoding or spelling assessment. Notebook and current choices stay with the active explorer. [Spec 34](docs/specs/34-word-garden.md).
+Open [Word Garden](https://after-the-storm-learning.joshua-ad8.workers.dev/#words): combine ten word plants and six cuttings, grow 23 authored words, and keep other combinations as discoveries. Seven extra real words explain meanings and spelling changes; unauthored pairs remain separated letter experiments, with no invented pronunciation or false rejection. Eight open discussion cards include new words and a make-your-own invitation. This is word-part exploration with any amount of reading help, not a decoding or spelling assessment. Notebook and current choices stay with the active explorer. [Spec 34](docs/specs/34-word-garden.md).
 
-This increment is repository/local-only: the existing hosted release has not changed. Current ChatGPT Sites documentation prohibits targeting children under 13; choose suitable static hosting before publishing this child-directed addition.
+The complete game, including Word Garden, is published on Cloudflare Static Assets. The earlier Sites address retains its earlier release. Browser-local notebooks belong to their address: existing progress stays at the old address; it is not automatically copied to Cloudflare. Keep the old notebook/export until a local transfer is available.
 
 ## Run locally
 
@@ -132,7 +132,7 @@ Full passages, sentence focus, English meaning/vocabulary help, and skill-matche
 
 This repository contains generic source and curriculum content. Do not commit real learner profiles, names, ages or grades tied to a child, school or location details, family anecdotes, responses, progress, personalized packs, recordings, screenshots, exports, or credentials. Use clearly synthetic examples in tests and review commit metadata and attachments as well as files. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Deployment credentials and the existing Site's hosting configuration are excluded. This repository is the development home. Reviewed static assets are copied to the existing deployment checkout for publication; its hosting identity and credentials stay out of this public repository.
+Deployment credentials, Cloudflare CLI caches and the earlier Site's hosting configuration are excluded. This repository is the development home. Reviewed static assets from `dist/` are published on Cloudflare; account configuration and credentials stay out of this public repository.
 
 ## Current Number Garden prototype
 
@@ -188,3 +188,8 @@ Meet **Bramble**, an original girl witch fixing a storm-tangled ribbon gate. Any
 Each encounter freezes its task and keeps raw attempts, support, narration requests and resolution separately from real packing, route checks and reading reports. No independent-recall or mastery inference is added. All phases survive pause/reload, explorer switching and the existing local export/save-off/reset controls. Choose Another challenge without starting a new delivery, including after a parcel has arrived. The previous round is archived once; the latest 96 finished generated rounds are kept in finish order. Next-question preferences never rewrite a pending puzzle. Large arrays stay compact, and multiplication can be built in parts on request. Optional method reports remain separate from support. Existing authored encounters stay valid and are preserved when replaced. See [spec 26](docs/specs/26-bramble-changing-challenges.md).
 
 The Water Lab’s three existing visits now begin with the storm-flooded garden path. They distinguish water flowing downhill, soaking into the ground and evaporating, with a paper recovery-map invitation. The existing close-up molecule pictures explain melting, warming and evaporation; a controllable runoff/drainage investigation remains a roadmap follow-up. No science mission IDs or saved observations change.
+
+
+## Cloudflare hosting
+
+The reviewed static assets are served at https://after-the-storm-learning.joshua-ad8.workers.dev/. Deploy only `dist/`, never the repository root or CLI-generated setup folders. From an authenticated Cloudflare account, future reviewed releases can use `npx wrangler deploy --assets ./dist --name after-the-storm-learning`. The current deployment has no application backend or paid compute requirement. Static asset requests are [free and unlimited](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/). Keep credentials and account configuration outside this public repository.

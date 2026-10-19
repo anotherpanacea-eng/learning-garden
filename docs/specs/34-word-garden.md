@@ -1,6 +1,6 @@
 # 34 — Word Garden: words, meanings and discoveries
 
-Status: implemented locally; independent spec/content and implementation reviews cleared. Develops the word-part door of spec 04 and the idea in PR #6; town/seasons/almanac are separate future work. This release runs at `#words` in the existing static app. Prepare a local preview and draft PR; do not deploy this child-directed experience on ChatGPT Sites under its current under-13 restriction.
+Status: implemented and published on Cloudflare; independent spec/content and implementation reviews cleared. Develops the word-part door of spec 04 and the idea in PR #6; town/seasons/almanac are separate future work. This release runs at `#words` in the existing static app. Keep the PR draft; do not deploy this child-directed experience on ChatGPT Sites under its current under-13 restriction.
 
 ## Purpose and play
 
@@ -39,4 +39,9 @@ Check all 66 pairs, all 23 blooms/parts/meanings, two-stage helpful→unhelpful,
 
 ## Delivery verification
 
-Independent review checked all 23 bloom meanings, the additional real-word explanations and all eight discussion cards. Its spelling finding was folded into authored carer/tier results and separated unknown constructions. Independent implementation review cleared after adding the new route to the existing invitation test allowlist. All 36 logic suites and story-pack/atlas checks pass, including 1,679 Word Garden checks. Root browser QA covers real combinations, two-stage helpful/unhelpful, discovery replay, unexpected discussion choice and reload, actual downloaded notes, keyboard focus and 768px/390px layouts. A local preview cache failure was isolated to conditional cached module responses; no-cache preview responses restored and verified reload without an app bootstrap change. No hosted release or physical iPad Safari test is claimed.
+Independent review checked all 23 bloom meanings, the additional real-word explanations and all eight discussion cards. Its spelling finding was folded into authored carer/tier results and separated unknown constructions. Independent implementation review cleared after adding the new route to the existing invitation test allowlist. All 36 logic suites and story-pack/atlas checks pass, including 1,679 Word Garden checks. Root browser QA covers real combinations, two-stage helpful/unhelpful, discovery replay, unexpected discussion choice and reload, actual downloaded notes, keyboard focus and 768px/390px layouts. A local preview cache failure was isolated to conditional cached module responses; no-cache preview responses restored and verified reload without an app bootstrap change. Cloudflare publication is verified below; no physical iPad Safari test is claimed.
+
+
+## Cloudflare publication follow-up
+
+Published the reviewed runtime candidate `7d361d6` at https://after-the-storm-learning.joshua-ad8.workers.dev/#words. New Cloudflare deployment verifies exact reviewed HTML/modules/CSS/data and blocks setup-only paths. A real hosted word bloom and saved notebook survived reload. The new origin starts a separate notebook; old-origin records remain there and no transfer/reset was performed. Root-only CLI setup files were excluded by an explicit assets directory; no account metadata or deployment credentials were added to the public repository. Word Garden remains draft/unmerged on GitHub pending its normal exact-head clearance.

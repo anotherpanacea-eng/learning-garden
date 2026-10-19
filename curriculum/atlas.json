@@ -430,13 +430,13 @@
     {
       "id": "words",
       "name": "Word Garden",
-      "status": "built-local",
+      "status": "live",
       "route": "#words",
       "patterns": [
         "build",
         "read"
       ],
-      "scope": "Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Included in the local/repository release; hosted publication remains pending."
+      "scope": "Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Published with the complete game on Cloudflare."
     }
   ],
   "manualReferences": [
@@ -517,7 +517,7 @@
       "name": "Word Workshop",
       "move": "New home; reuse build/read, add carefully reviewed speech/sound representations",
       "spec": "docs/specs/04-word-workshop.md",
-      "first": "First word-part release built in the local/repository release; reviewed phonics audio and sound/letter activities remain future work.",
+      "first": "First word-part release published on Cloudflare; reviewed phonics audio and sound/letter activities remain future work.",
       "gap": "Current story comprehension does not teach or assess the missing phonics/decoding/transcription sequence."
     },
     {
@@ -575,5 +575,6 @@
     "Music and creative performance",
     "French and other additional languages"
   ],
-  "extensionLimit": "Additional subject plans outside the Marble v1 organization; related concepts may already occur within science, history or other source topics. No new nodes or prerequisite edges have been asserted."
+  "extensionLimit": "Additional subject plans outside the Marble v1 organization; related concepts may already occur within science, history or other source topics. No new nodes or prerequisite edges have been asserted.",
+  "siteUrl": "https://after-the-storm-learning.joshua-ad8.workers.dev"
 }
