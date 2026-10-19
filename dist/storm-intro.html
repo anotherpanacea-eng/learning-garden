@@ -469,8 +469,8 @@ void main(){
  col+=flash*vec3(.5,.56,.72)*(.45+.55*col);
  // morning sun and rays
  vec2 d=uv-sunPos;float a=atan(d.y,d.x);
- float ray=pow(n(vec2(a*9.,T*.15)),3.)*smoothstep(1.1,.0,length(d));
- col+=sun*vec3(1.,.86,.55)*(ray*.22+.08*smoothstep(.7,0.,length(d)));
+ float ray=pow(n(vec2(a*9.,T*.15)),3.)*(1.-smoothstep(0.,1.1,length(d)));
+ col+=sun*vec3(1.,.86,.55)*(ray*.22+.08*(1.-smoothstep(0.,.7,length(d))));
  col*=mix(vec3(1),vec3(1.04,1.,.93),sun);
  float v=length(uv-.5);col*=1.-(.16+.22*storm)*smoothstep(.3,.85,v);
  o=vec4(col,1);
