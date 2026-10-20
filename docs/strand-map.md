@@ -8,7 +8,7 @@ This is the planning layer between the [topic atlas](learning-atlas.md) and play
 
 | Status | Meaning here |
 | --- | --- |
-| **Built** | A specific runnable task, model or clearly labelled discussion opportunity exists. The evidence links below each strand delimit that foothold. It does not mean the whole concept/topic is taught, practised comprehensively or mastered. |
+| **Built** | A specific runnable task, model or clearly labeled discussion opportunity exists. The evidence links below each strand delimit that foothold. It does not mean the whole concept/topic is taught, practiced comprehensively or mastered. |
 | **Planned** | An existing written proposal specifies a named home and intended experience; the linked scope may still be an outline or require content review. It is not implemented or automatically build-ready. |
 | **Missing** | No runnable or bounded planned sequence was found for this step. Its candidate home and revisit are proposals in this map, awaiting a lesson/content specification. |
 
@@ -25,7 +25,7 @@ Each revisit below is **proposed**, except the existing numerical *Carry an idea
 | [3. Multiplication and division](#3-multiplication-division-and-equal-groups) | Café, Bramble, Living Garden | Same total; unknown groups versus unknown group size |
 | [4. Fractions](#4-fractions-and-wholes) | Number Garden → bakery | Same fraction, different whole |
 | [5. Measurement and geometry](#5-measurement-geometry-and-space) | Number Garden, Workshop → map room | Length versus endpoint; boundary versus interior |
-| [6. Patterns and generalisation](#6-patterns-equivalence-and-generalisation) | Number Garden → Bramble | An example versus a rule that survives a counterexample |
+| [6. Patterns and generalization](#6-patterns-equivalence-and-generalization) | Number Garden → Bramble | An example versus a rule that survives a counterexample |
 | [7. Data and uncertainty](#7-data-representation-and-uncertainty) | Workshop → Field Notebook | Displayed data versus choosing/constructing a useful record |
 | [8. Sound–letter and transcription](#8-soundletter-reading-spelling-and-transcription) | Proposed Word Workshop | Blend to read versus segment to spell |
 | [9. Meaning and vocabulary](#9-word-meaning-morphology-and-vocabulary) | Word Garden, Paris → Loft | Sound unit versus meaning unit; familiar versus invented word |
@@ -101,16 +101,16 @@ Evidence: [number tasks](../dist/broad-content.mjs), `fractions-*`; [editable st
 
 Evidence: [tasks](../dist/broad-content.mjs), `measurement-*`, `geometry-*`; [open beds](../dist/plantings.mjs), `many-rectangles`; [Workshop](../dist/workshop-ui.mjs). Anchors: `mt_cqSf213hSa`, `mt_e4x3l2JeLI`, `mt_y1n0Zwhoca`, `mt_WtcFrxGOgw`, `mt_KJeEeTutJI`, `mt_MFfYcnv6Tv`. A screen ruler is not evidence of choosing or using a physical measuring tool.
 
-## 6. Patterns, equivalence and generalisation
+## 6. Patterns, equivalence and generalization
 
 | Concept | Status | Contrast to explore | Home | Revisit with a changed demand |
 | --- | --- | --- | --- | --- |
 | Stated sequence rule, start and step | **Built** selected tasks | Term number versus number of jumps; same step/different start | Number Garden / Stepping-stone Path | Keep the step fixed, then vary the start and explain which terms change |
 | Unknown addend, array change and counterexample invitations | **Built** narrow tasks/open discussion | Same value versus same-looking expression; one example versus general claim | Number Garden / Puzzle Hollow | Challenge a claim with another array or shape, preserving the original claim |
-| Function tables, expressions and explicit generalisation | **Missing** sequence | A rule that fits a few examples versus one tested against new cases | Candidate Bramble / pattern workbench | Compare two possible rules before representing one with an expression |
+| Function tables, expressions and explicit generalization | **Missing** sequence | A rule that fits a few examples versus one tested against new cases | Candidate Bramble / pattern workbench | Compare two possible rules before representing one with an expression |
 | Structured mathematical explanation | **Missing** progression; unscored talk prompts exist | Answer versus reason; example versus justification | Candidate planting/parcel explanation | Explain the same relation using an object, diagram and sentence |
 
-Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open counterexamples](../dist/plantings.mjs). Anchors: `mt_A-FyLLLLzy`, `mt_pyMD_SIiYO`. A correct term or acknowledgement of discussion does not establish generalisation or proof.
+Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open counterexamples](../dist/plantings.mjs). Anchors: `mt_A-FyLLLLzy`, `mt_pyMD_SIiYO`. A correct term or acknowledgement of discussion does not establish generalization or proof.
 
 ## 7. Data, representation and uncertainty
 
@@ -118,7 +118,7 @@ Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open
 | --- | --- | --- | --- | --- |
 | Read a supplied table and matching zero-based bars | **Built** discussion/display foothold | One trial versus repeated outcomes; height of a bar versus measured distance | Workshop | Revisit the same results with a different comparison question |
 | Select/record dated model observations for a decision | **Planned** bounded slice | A supplied record versus choosing relevant observations | [Plant investigation, increment 3](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Carry an observation snapshot into a planting note; inspect a claim against it |
-| Organise categories, tally and construct/interpret a labelled graph | **Missing** authored construction progression | Category counts versus measurements over time; useful versus misleading scale | Candidate Field Notebook mode | Represent the same small dataset two ways and ask which answers the question |
+| Organize categories, tally and construct/interpret a labeled graph | **Missing** authored construction progression | Category counts versus measurements over time; useful versus misleading scale | Candidate Field Notebook mode | Represent the same small dataset two ways and ask which answers the question |
 | Statistical question, sampling variation, chance/probability | **Missing** | A whole population versus one sample; variable outcomes versus certainty | Candidate habitat survey / chance experiment | Compare two small samples or repeated chance trials without calling a simulation field evidence |
 
 Evidence: [Workshop results](../dist/workshop-ui.mjs), `results`; [finite trials](../dist/workshop-core.mjs). Pinned candidates: `mt_c29FaCTNsx`, `mt_VhBH8wrFC6`, `mt_H6LlpWgEYS`, `mt_ZFwPZaDJ0_`. New upstream sampling nodes are noted under sources; they are not in the bundled pin. Displaying data is not a graph-construction lesson.
@@ -129,10 +129,10 @@ Evidence: [Workshop results](../dist/workshop-ui.mjs), `results`; [finite trials
 | --- | --- | --- | --- | --- |
 | Reviewed sound–letter correspondences; hear and blend a small real-word family | **Planned** first slice | Letter name versus sound; blend versus guess from a picture | [Word Workshop, spec 04](specs/04-word-workshop.md) | Meet a taught correspondence in a new real word, then tiny connected text |
 | Segment a spoken word and select/write its sounds | **Missing** explicit learner-task sequence; optional paper transfer is planned | Reading a word versus encoding it; sound units versus meaning units | Candidate Word Workshop task, with optional paper work | Specify a spoken-word-to-sounds activity, then change one sound and explain the spelling; reviewed segmentation audio alone does not supply this lesson |
-| Broader correspondence sequence, fluency and irregular spellings | **Missing** reviewed progression | Decode a new word versus recognise a practised one | Candidate Word Workshop packs | Revisit the same correspondence across different words/passages, preserving support history |
+| Broader correspondence sequence, fluency and irregular spellings | **Missing** reviewed progression | Decode a new word versus recognize a practiced one | Candidate Word Workshop packs | Revisit the same correspondence across different words/passages, preserving support history |
 | Handwriting and fluent transcription | **Missing** sequence | Choosing cards, typing and forming letters are different actions | Candidate optional paper/making station | Write a new message, with human observation; no app inference from a textbox |
 
-Evidence for the gap: [Word Garden](../dist/word-garden-content.mjs) teaches meaning-bearing parts, not systematic phonics. Candidates: `mt__KHQttMde3`, `mt_BhYJZUsErp`. Spec 04 requires rights-cleared, human-reviewed sounds/blends in a declared pronunciation variety. Three CVC families are not a complete phonics programme. Narration never substitutes for decoding evidence; pronunciation differences are not errors to score automatically.
+Evidence for the gap: [Word Garden](../dist/word-garden-content.mjs) teaches meaning-bearing parts, not systematic phonics. Candidates: `mt__KHQttMde3`, `mt_BhYJZUsErp`. Spec 04 requires rights-cleared, human-reviewed sounds/blends in a declared pronunciation variety. Three CVC families are not a complete phonics program. Narration never substitutes for decoding evidence; pronunciation differences are not errors to score automatically.
 
 ## 9. Word meaning, morphology and vocabulary
 
@@ -175,9 +175,9 @@ Evidence: [Post runner](../dist/post-office-core.mjs), `stepPostRoute`/`editPost
 | Details and context in optional amounts of French text | **Built** reviewed finite story variants | Language complexity versus the reader’s age/interests | French Paris | A new story using a familiar language function; keep English meaning support visible as support |
 | Sequence/inference with separate French observations | **Built** selected questions/helpers | Connected clues versus a single translated word | French Paris | Offer more connected French optionally, then a different context without assuming proficiency |
 | Write a purposeful short French message/dialogue | **Missing** authored sequence; an off-screen postcard invitation exists | Understanding a supplied sentence versus composing one | Candidate French Post / Loft adaptation | Keep the communicative purpose, vary the recipient, use separately reviewed French language/support |
-| Systematic grammar, sound–spelling and oral interaction | **Missing** sequences | Recognising a form versus producing it; written versus spoken comprehension | Candidate French language packs/conversation with a person | Revisit the same language function through another mode, without recording child speech |
+| Systematic grammar, sound–spelling and oral interaction | **Missing** sequences | Recognizing a form versus producing it; written versus spoken comprehension | Candidate French language packs/conversation with a person | Revisit the same language function through another mode, without recording child speech |
 
-Evidence: [French stories](../dist/french-story-data.mjs), [library](../dist/french-library.mjs), [separate suggestions](../dist/french-core.mjs). French is an explicit extension outside Marble’s English organisation; English topic IDs are not French proficiency mappings.
+Evidence: [French stories](../dist/french-story-data.mjs), [library](../dist/french-library.mjs), [separate suggestions](../dist/french-core.mjs). French is an explicit extension outside Marble’s English organization; English topic IDs are not French proficiency mappings.
 
 ## 13. Living systems and interdependence
 
@@ -186,7 +186,7 @@ Evidence: [French stories](../dist/french-story-data.mjs), [library](../dist/fre
 | Match organism needs to pictured conditions | **Built** three animals/nine changing settings | A log’s name versus its actual moisture/cover; food versus shelter | Living Garden | Same animal/new conditions, then another animal in a familiar place |
 | Choose support and recheck after a condition changes | **Built** science depths | Previously suitable versus still suitable; observation versus explanation | Living Garden | Revisit a changed condition and name what needs checking again |
 | Plant requirements through dated comparisons | **Planned** bounded model, pending content/source review | Same plant/different light; taller versus healthier | [Plant increment 3](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Use observations to justify a planting location; later compare a different requirement |
-| Life cycles, classification and body functions | **Missing** authored sequences | Adult butterfly versus caterpillar; shared feature versus shared habitat | Candidate Field Notebook | Follow one organism across stages; classify using evidence, not its name or colour alone |
+| Life cycles, classification and body functions | **Missing** authored sequences | Adult butterfly versus caterpillar; shared feature versus shared habitat | Candidate Field Notebook | Follow one organism across stages; classify using evidence, not its name or color alone |
 | Food chains, webs and ecosystem change | **Planned** outline; authored pathway still missing | Organisms living nearby versus depending on each other; energy arrow direction | [Living/Ecosystem scopes](specs/23-living-garden.md), [spec 05](specs/05-ecosystem-expeditions.md) | Change one relationship and reason about consequences within a reviewed model |
 
 Evidence: [habitat cases](../dist/living-spiral-content.mjs), [three science depths](../dist/living-adaptive-content.mjs). Anchors: `mt_e6PP4ip39V`, `mt_cM8YS6NXqi`, `mt_3v0VNkwquK`, `mt_lutxvMlkwS`, `mt_EygMHKs8Ed`, `mt_URTJbS3hhs`. Café parcels are sealed pretend food, not resources removed from a habitat or instant biological growth.
@@ -197,7 +197,7 @@ Evidence: [habitat cases](../dist/living-spiral-content.mjs), [three science dep
 | --- | --- | --- | --- | --- |
 | Melting, warming and evaporation with explanatory pictures | **Built** three guided missions | Whole-sample state versus molecular representation; faster motion versus larger particles | Water Lab | Follow the same water at whole-sample and tiny-model scales |
 | Flow, infiltration, runoff and drainage | **Missing** scoped investigation | Water leaving by evaporation versus soaking in or flowing elsewhere | Candidate storm-drainage mode | Follow where water goes while keeping surfaces/conditions visible |
-| Condensation, water cycle and weather observations | **Missing** sequence | Water vapour versus visible droplets; short-term weather versus climate | Candidate Water Lab / Field Notebook | Compare dated observations, then connect processes without claiming a flood-safety model |
+| Condensation, water cycle and weather observations | **Missing** sequence | Water vapor versus visible droplets; short-term weather versus climate | Candidate Water Lab / Field Notebook | Compare dated observations, then connect processes without claiming a flood-safety model |
 | Material properties, mixtures and reversible/irreversible changes | **Missing** | Sorting by appearance versus a tested property; mixing versus changing substance | Candidate Workshop materials bench | Choose a material for a purpose and compare the evidence after a different test |
 
 Evidence: [Water missions](../dist/science-content.mjs), `melt`/`warm`/`evaporate`. Anchors: `mt_1JFUNQDwAJ`, `mt_Qkewo5M3_c`. Evaporation is a foothold within the latter, not the entire water cycle. Existing external Marble links do not mean its simulator code or a new local drainage model is incorporated.
@@ -218,7 +218,7 @@ Evidence: [Workshop configurations](../dist/workshop-core.mjs), [chosen-variable
 | Concept | Status | Contrast to explore | Home | Revisit with a changed demand |
 | --- | --- | --- | --- | --- |
 | Select a pictured clue; predict and compare model outcomes | **Built** scaffolded opportunities | Observation versus inference; prediction before versus after seeing a result | Living Garden, Water Lab, Workshop | Preserve the original prediction and compare a different observation |
-| Recognise a controlled comparison; distinguish observation/interpretation | **Planned** bounded contrast | One change versus a confounded pair; supplied data versus physical evidence | [Plant increment 3](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Choose which comparison would answer a new plant question, with controls visible |
+| Recognize a controlled comparison; distinguish observation/interpretation | **Planned** bounded contrast | One change versus a confounded pair; supplied data versus physical evidence | [Plant increment 3](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Choose which comparison would answer a new plant question, with controls visible |
 | Pose, design, carry out and measure a useful investigation | **Missing** sequence | Selecting a supplied setup versus making/test-driving a plan | Candidate Field Notebook / optional adult-supported practical work | Carry a plan to a real experiment and keep its evidence separate from model results |
 | Uncertainty, repeatability and revising explanations | **Missing** systematic progression; repeated model distances invite discussion | Disagreement between measurements versus proof that anything goes | Candidate investigation notebook | Revisit a claim with additional evidence and explain what remains uncertain |
 
@@ -230,10 +230,10 @@ Evidence: [Workshop trial records](../dist/workshop-core.mjs), [Living responses
 | --- | --- | --- | --- | --- |
 | Literal step sequence, test and revision | **Built** finite word-card runner | What was intended versus what was actually specified | Post Office | Keep a failed plan and change one instruction, then explain the consequence |
 | Repetition, conditionals, decomposition and debugging | **Missing** authored progression | Repeating an instruction versus repeating a group; fixed route versus if/then choice | Candidate courier programming mode | Use the same destination with a changed obstacle and test a reusable route |
-| Data, classification and rule-based versus learned behaviour | **Missing** explicit sequence | A hand-written rule versus a pattern inferred from examples | Candidate sorting/delivery bench | Give the rule a counterexample; keep explanation distinct from anthropomorphic claims |
+| Data, classification and rule-based versus learned behavior | **Missing** explicit sequence | A hand-written rule versus a pattern inferred from examples | Candidate sorting/delivery bench | Give the rule a counterexample; keep explanation distinct from anthropomorphic claims |
 | Computing/media limits, privacy and source evaluation | **Missing** reviewed sequence | A fluent answer/image versus reliable evidence; personal information versus necessary input | Candidate message/source investigation | Check a new fictional claim without asking for private information |
 
-Evidence: [Post interpreter](../dist/post-office-core.mjs). Anchor `mt__p5n8z5soJ` is a current scoped foothold. Marble’s Computing domain is organised around AI and is not a complete algorithms curriculum; proposed repetition/conditionals need an explicit original scope rather than a forced topic match.
+Evidence: [Post interpreter](../dist/post-office-core.mjs). Anchor `mt__p5n8z5soJ` is a current scoped foothold. Marble’s Computing domain is organized around AI and is not a complete algorithms curriculum; proposed repetition/conditionals need an explicit original scope rather than a forced topic match.
 
 ## 18. Maps, geography and navigation
 
@@ -262,7 +262,7 @@ No history learning activity is currently declared in the atlas. Source anchors:
 | Concept | Status | Contrast to explore | Home | Revisit with a changed demand |
 | --- | --- | --- | --- | --- |
 | Choose, perform, discuss and revise a puppet scene | **Built** expressive opportunity | A surprising combination versus a mistake; length versus intended effect | Story Loft | Perform a revised scene for a different audience and discuss its effect |
-| Shape, colour, materials and visual composition | **Missing** authored progression | Recognising a geometric shape versus using it to create a visual effect | Candidate Loft making studio / paper project | Keep subject fixed while changing one visual choice; discuss rather than score taste |
+| Shape, color, materials and visual composition | **Missing** authored progression | Recognizing a geometric shape versus using it to create a visual effect | Candidate Loft making studio / paper project | Keep subject fixed while changing one visual choice; discuss rather than score taste |
 | Beat/rhythm, pitch patterns, listening and composing | **Missing** reviewed experiences | Steady beat versus rhythm; pitch versus loudness; imitation versus invention | Candidate Sound & Light Studio / musical Loft mode | Recreate a short pattern, transform it, then compose a response |
 | Drama/voice/listening and collaborative making | **Missing** sequence; unscored discussion is already invited | Supplied dialogue versus interpretation/performance with a person | Candidate Loft / community circle | Perform different readings of the same line without declaring one emotion correct |
 
@@ -329,7 +329,7 @@ For an authored revisit, hold at least one thing fixed (quantity, text, organism
 
 ## What remains outside this first map
 
-The atlas still contains unsequenced objectives throughout its 54 domains: broader body/life processes, oceans and other ecosystems, geology/palaeontology, Earth/space, climate, advanced mathematics, wider historical periods, financial and personal/social topics. A possible theme is not a lesson pathway. These remain **Missing** at the relevant lesson/sequence level unless the narrow Built or Planned rows above say otherwise. Prioritise a bounded purpose/content pack instead of trying to build one game per source node or claim all objectives from a familiar activity shell.
+The atlas still contains unsequenced objectives throughout its 54 domains: broader body/life processes, oceans and other ecosystems, geology/palaeontology, Earth/space, climate, advanced mathematics, wider historical periods, financial and personal/social topics. A possible theme is not a lesson pathway. These remain **Missing** at the relevant lesson/sequence level unless the narrow Built or Planned rows above say otherwise. Prioritize a bounded purpose/content pack instead of trying to build one game per source node or claim all objectives from a familiar activity shell.
 
 For a future build, select one row and specify the example/contrast, learner action, representation, response, help, source material and revisit. Independently review that small specification and its content before implementation. Add atlas references only for actual delivered scope; this map itself changes no runtime mappings, assessment, saved progress or recommendations.
 
