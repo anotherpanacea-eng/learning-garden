@@ -8,7 +8,7 @@ This is the planning layer between the [topic atlas](learning-atlas.md) and play
 
 | Status | Meaning here |
 | --- | --- |
-| **Built** | A specific runnable task, model or clearly labelled discussion opportunity exists. The evidence links below each strand delimit that foothold. It does not mean the whole concept/topic is taught, practised comprehensively or mastered. |
+| **Built** | A specific runnable task, model or clearly labeled discussion opportunity exists. The evidence links below each strand delimit that foothold. It does not mean the whole concept/topic is taught, practiced comprehensively or mastered. |
 | **Planned** | An existing written proposal specifies a named home and intended experience; the linked scope may still be an outline or require content review. It is not implemented or automatically build-ready. |
 | **Missing** | No runnable or bounded planned sequence was found for this step. Its candidate home and revisit are proposals in this map, awaiting a lesson/content specification. |
 
@@ -16,7 +16,7 @@ A missing step describes the **product**, not the learner. A Built task can stil
 
 Claude’s [PR #16](https://github.com/anotherpanacea-eng/learning-garden/pull/16) adds concrete candidate experiences. The [integrated game proposals](curriculum-gaps.md) retain those ideas, distinguish outlines from lesson-ready plans, and name content/model conditions. Their inclusion changes no runtime coverage. In particular, the town weather log/almanac is only proposed in [PR #6](https://github.com/anotherpanacea-eng/learning-garden/pull/6); the Field Notebook can begin with current model/example data instead.
 
-Each revisit below is **proposed**, except the existing numerical *Carry an idea here* invitations among Living Garden, Café and Bramble. A route printed here does not mean work already travels between those games. Future connections must preserve the relevant quantity/model, source text or observation, plus its support/familiarity history; the receiving activity asks its own question. They must not copy a success label or a global level.
+Each revisit below is **proposed**, except the existing numerical *Carry an idea here* invitations among Living Garden, Café and Bramble. Future connections must preserve the relevant quantity/model, source text or observation, plus its support/familiarity history; the receiving activity asks its own question. They must not copy a success label or a global level.
 
 ## Where the strands live
 
@@ -27,7 +27,7 @@ Each revisit below is **proposed**, except the existing numerical *Carry an idea
 | [3. Multiplication and division](#3-multiplication-division-and-equal-groups) | Café, Bramble, Living Garden | Same total; unknown groups versus unknown group size |
 | [4. Fractions](#4-fractions-and-wholes) | Number Garden → bakery | Same fraction, different whole |
 | [5. Measurement and geometry](#5-measurement-geometry-and-space) | Number Garden, Workshop → map room | Length versus endpoint; boundary versus interior |
-| [6. Patterns and generalisation](#6-patterns-equivalence-and-generalisation) | Number Garden → Bramble | An example versus a rule that survives a counterexample |
+| [6. Patterns and generalization](#6-patterns-equivalence-and-generalization) | Number Garden → Bramble | An example versus a rule that survives a counterexample |
 | [7. Data and uncertainty](#7-data-representation-and-uncertainty) | Workshop → Field Notebook | Displayed data versus choosing/constructing a useful record |
 | [8. Sound–letter and transcription](#8-soundletter-reading-spelling-and-transcription) | Proposed Word Workshop | Blend to read versus segment to spell |
 | [9. Meaning and vocabulary](#9-word-meaning-morphology-and-vocabulary) | Word Garden, Paris → Loft | Sound unit versus meaning unit; familiar versus invented word |
@@ -55,7 +55,7 @@ Each revisit below is **proposed**, except the existing numerical *Carry an idea
 | Regrouping and adding tens across a hundred | **Built** selected tasks and trade controls | Trading preserves quantity; adding a bundle changes quantity | Bundle Burrow | Return from a supplies delivery and show how to undo the change |
 | Number-line magnitude, estimation and wider place-value progression | **Missing** authored sequence; isolated estimation invitation exists | Nearer/farther versus left/right; estimate versus exact count | Candidate seed store / number line | Place a familiar quantity on a differently scaled line and justify a sensible estimate |
 
-Evidence: [Number Garden content](../dist/broad-content.mjs), `number-*`; [models](../dist/broad-ui.mjs), `renderModel`/`adjustModel`; [open planting tasks](../dist/plantings.mjs), `estimate-seeds`. Marble anchors: `mt_THl9GLxwoL`, `mt_aPBzD28_mT`, `mt_98c2qwEF7Q`; foundational candidates `mt_WcfaSfVT33`, `mt__h7hvT4tEb`. A tappable collection and one estimate are not a systematic counting/magnitude pathway.
+Evidence: [Number Garden content](../dist/broad-content.mjs), `number-*`; [models](../dist/broad-ui.mjs), `renderModel`/`adjustModel`; [open planting tasks](../dist/plantings.mjs), `estimate-seeds`. Marble anchors: `mt_THl9GLxwoL`, `mt_aPBzD28_mT`, `mt_98c2qwEF7Q`; foundational candidates `mt_WcfaSfVT33`, `mt__h7hvT4tEb`.
 
 ## 2. Addition, subtraction and change
 
@@ -97,22 +97,22 @@ Evidence: [number tasks](../dist/broad-content.mjs), `fractions-*`; [editable st
 | --- | --- | --- | --- | --- |
 | Ruler intervals, including a nonzero start | **Built** selected tasks | Endpoint label versus distance; slide versus stretch | Number Garden / Ribbon Workshop | Wrap a parcel with a ruler that begins at a different mark |
 | Area, perimeter and rectangle arrangements | **Built** selected tasks/open models | Boundary versus interior; equal area need not mean equal boundary | Number Garden / planting plans | Compare two bed arrangements before explaining a fence request |
-| Shape properties, turns and mirror-fold trials | **Built** selected tasks | Rotation preserves a shape; an attempted fold need not match | Number Garden / Shape Grove | Give a courier a turn instruction, then check the resulting orientation |
+| Shape properties, turns and mirror-fold trials | **Built** selected tasks | Rotation preserves a shape; an attempted fold need not match | Number Garden / Shape Pavilion | Give a courier a turn instruction, then check the resulting orientation |
 | Actual recipe/plant measurement with stated units | **Planned** outlines and plant slice | Length versus capacity/mass; model units versus physical units | [Bakery direction](learning-atlas.md#a-small-set-of-game-building-priorities); [plant plan](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Match a measurement to a useful tool; keep physical/off-screen observations separate |
 | Tool selection, unit conversion, clocks/duration, 3-D/volume and coordinate/angle sequences | **Missing** | Same object/different units; elapsed time versus clock reading; area versus volume | Candidate parcel-measuring / map modes | Change the tool or unit while preserving the physical quantity |
 
-Evidence: [tasks](../dist/broad-content.mjs), `measurement-*`, `geometry-*`; [open beds](../dist/plantings.mjs), `many-rectangles`; [Workshop](../dist/workshop-ui.mjs). Anchors: `mt_cqSf213hSa`, `mt_e4x3l2JeLI`, `mt_y1n0Zwhoca`, `mt_WtcFrxGOgw`, `mt_KJeEeTutJI`, `mt_MFfYcnv6Tv`. A screen ruler is not evidence of choosing or using a physical measuring tool.
+Evidence: [tasks](../dist/broad-content.mjs), `measurement-*`, `geometry-*`; [open beds](../dist/plantings.mjs), `many-rectangles`; [Workshop](../dist/workshop-ui.mjs). Anchors: `mt_cqSf213hSa`, `mt_e4x3l2JeLI`, `mt_y1n0Zwhoca`, `mt_WtcFrxGOgw`, `mt_KJeEeTutJI`, `mt_MFfYcnv6Tv`.
 
-## 6. Patterns, equivalence and generalisation
+## 6. Patterns, equivalence and generalization
 
 | Concept | Status | Contrast to explore | Home | Revisit with a changed demand |
 | --- | --- | --- | --- | --- |
 | Stated sequence rule, start and step | **Built** selected tasks | Term number versus number of jumps; same step/different start | Number Garden / Stepping-stone Path | Keep the step fixed, then vary the start and explain which terms change |
-| Unknown addend, array change and counterexample invitations | **Built** narrow tasks/open discussion | Same value versus same-looking expression; one example versus general claim | Number Garden / Reasoning Roost | Challenge a claim with another array or shape, preserving the original claim |
-| Function tables, expressions and explicit generalisation | **Missing** sequence | A rule that fits a few examples versus one tested against new cases | Candidate Bramble / pattern workbench | Compare two possible rules before representing one with an expression |
+| Unknown addend, array change and counterexample invitations | **Built** narrow tasks/open discussion | Same value versus same-looking expression; one example versus general claim | Number Garden / Puzzle Hollow | Challenge a claim with another array or shape, preserving the original claim |
+| Function tables, expressions and explicit generalization | **Missing** sequence | A rule that fits a few examples versus one tested against new cases | Candidate Bramble / pattern workbench | Compare two possible rules before representing one with an expression |
 | Structured mathematical explanation | **Missing** progression; unscored talk prompts exist | Answer versus reason; example versus justification | Candidate planting/parcel explanation | Explain the same relation using an object, diagram and sentence |
 
-Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open counterexamples](../dist/plantings.mjs). Anchors: `mt_A-FyLLLLzy`, `mt_pyMD_SIiYO`. A correct term or acknowledgement of discussion does not establish generalisation or proof.
+Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open counterexamples](../dist/plantings.mjs). Anchors: `mt_A-FyLLLLzy`, `mt_pyMD_SIiYO`.
 
 ## 7. Data, representation and uncertainty
 
@@ -120,11 +120,11 @@ Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open
 | --- | --- | --- | --- | --- |
 | Read a supplied table and matching zero-based bars | **Built** discussion/display foothold | One trial versus repeated outcomes; height of a bar versus measured distance | Workshop | Revisit the same results with a different comparison question |
 | Select/record dated model observations for a decision | **Planned** bounded slice | A supplied record versus choosing relevant observations | [Plant investigation, increment 3](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Carry an observation snapshot into a planting note; inspect a claim against it |
-| Organise categories, tally and construct/interpret a labelled graph | **Planned** data-desk outline; authored construction sequence still missing | Category counts versus measurements over time; useful versus misleading scale | [Field Notebook data desk](curriculum-gaps.md#shifts-new-questions-for-existing-or-planned-places), using Workshop/model or authored example data first | Keep the dataset, build a tally and two representations, then ask which answers a changed question; later use a separately specified weather log |
+| Organize categories, tally and construct/interpret a labeled graph | **Planned** data-desk outline; authored construction sequence still missing | Category counts versus measurements over time; useful versus misleading scale | [Field Notebook data desk](curriculum-gaps.md#shifts-new-questions-for-existing-or-planned-places), using Workshop/model or authored example data first | Keep the dataset, build a tally and two representations, then ask which answers a changed question; later use a separately specified weather log |
 | Statistical question and sampling variation | **Missing** authored sequence | A whole population versus one sample; variable outcomes versus certainty | Candidate habitat survey / Field Notebook | Compare two small samples without calling a simulation field evidence |
 | Chance and repeated draws | **Planned** seed-stall outline; probability lesson still missing | Fixed bag with replacement versus a changing bag without replacement; prediction versus small-sample result | [Chance at the seed stall](curriculum-gaps.md#new-games-and-later-content-packs) → data desk | First replace/mix every simulated draw; compare repeated runs before deliberately changing the bag or replacement rule |
 
-Evidence: [Workshop results](../dist/workshop-ui.mjs), `results`; [finite trials](../dist/workshop-core.mjs). Pinned candidates: `mt_c29FaCTNsx`, `mt_VhBH8wrFC6`, `mt_H6LlpWgEYS`, `mt_ZFwPZaDJ0_`. New upstream sampling nodes are noted under sources; they are not in the bundled pin. Displaying data is not a graph-construction lesson.
+Evidence: [Workshop results](../dist/workshop-ui.mjs), `results`; [finite trials](../dist/workshop-core.mjs). Pinned candidates: `mt_c29FaCTNsx`, `mt_VhBH8wrFC6`, `mt_H6LlpWgEYS`, `mt_ZFwPZaDJ0_`. New upstream sampling nodes are noted under sources; they are not in the bundled pin.
 
 ## 8. Sound–letter reading, spelling and transcription
 
@@ -132,10 +132,10 @@ Evidence: [Workshop results](../dist/workshop-ui.mjs), `results`; [finite trials
 | --- | --- | --- | --- | --- |
 | Reviewed sound–letter correspondences; hear and blend a small real-word family | **Planned** first slice | Letter name versus sound; blend versus guess from a picture | [Word Workshop, spec 04](specs/04-word-workshop.md) | Meet a taught correspondence in a new real word, then tiny connected text |
 | Segment a spoken word and select/write its sounds | **Missing** explicit learner-task sequence; optional paper transfer is planned | Reading a word versus encoding it; sound units versus meaning units | Candidate Word Workshop task, with optional paper work | Specify a spoken-word-to-sounds activity, then change one sound and explain the spelling; reviewed segmentation audio alone does not supply this lesson |
-| Broader correspondence sequence, fluency and irregular spellings | **Missing** reviewed progression | Decode a new word versus recognise a practised one | Candidate Word Workshop packs | Revisit the same correspondence across different words/passages, preserving support history |
+| Broader correspondence sequence, fluency and irregular spellings | **Missing** reviewed progression | Decode a new word versus recognize a practiced one | Candidate Word Workshop packs | Revisit the same correspondence across different words/passages, preserving support history |
 | Handwriting and fluent transcription | **Missing** sequence | Choosing cards, typing and forming letters are different actions | Candidate optional paper/making station | Write a new message, with human observation; no app inference from a textbox |
 
-Evidence for the gap: [Word Garden](../dist/word-garden-content.mjs) teaches meaning-bearing parts, not systematic phonics. Candidates: `mt__KHQttMde3`, `mt_BhYJZUsErp`. Spec 04 requires rights-cleared, human-reviewed sounds/blends in a declared pronunciation variety. Three CVC families are not a complete phonics programme. Narration never substitutes for decoding evidence; pronunciation differences are not errors to score automatically.
+Evidence for the gap: [Word Garden](../dist/word-garden-content.mjs) teaches meaning-bearing parts, not systematic phonics. Candidates: `mt__KHQttMde3`, `mt_BhYJZUsErp`. Spec 04 requires rights-cleared, human-reviewed sounds/blends in a declared pronunciation variety. Narration never substitutes for decoding evidence; pronunciation differences are not errors to score automatically.
 
 ## 9. Word meaning, morphology and vocabulary
 
@@ -155,7 +155,7 @@ Evidence: [Word Garden](../dist/word-garden-content.mjs), `roots`/`parts`/`bloom
 | Locate details, follow sequence, infer and choose supporting words | **Built** authored questions | What a text states versus what an inference adds; sequence versus cause | English Paris, Living delivery notes | Use a fresh passage with the same question; keep the full source visible |
 | Match a claim to relevant textual/pictured support | **Built** bounded choices | A nearby detail versus evidence for this particular claim | Paris, Living Garden | Hold the passage fixed, change the claim and discuss which support still fits |
 | Read then revise a message for a reader | **Planned** bounded bridge | An answer the writer knows versus information the reader can recover | [Message plan, increment 2](curriculum-spirals.md#2-a-message-that-helps-someone-act) | Try a fresh message, then a Story Loft character’s reason/response |
-| Compare accounts, narrators and perspectives | **Planned** outline | Different emphasis versus factual disagreement; opinion versus evidence | [Paired-perspective Loft, spec 06](specs/06-story-loft.md) | Return to the same event with a second narrator and support both readings |
+| Compare accounts, narrators and perspectives | **Planned** written spec | Different emphasis versus factual disagreement; opinion versus evidence | [Paired-perspective Loft, spec 06](specs/06-story-loft.md) | Return to the same event with a second narrator and support both readings |
 | Broader genres, argument/source credibility and research reading | **Missing** sequence; Archive outline offers a future home | Persuasion versus evidence; source reliability versus agreement | Candidate Travelers’ Archive / Paris | Corroborate across sources and state what remains uncertain |
 
 Evidence: [Paris](../dist/paris-content.mjs), `paris-note`/`paris-infer`/`paris-evidence`/`paris-sequence`; [packs](../dist/packs/puppet-post.mjs); [adaptive notes](../dist/living-adaptive-content.mjs). Anchors: `mt_lp3qyEujIv`, `mt_ukLvUD8DFA`. These source descriptions/evidence can exceed a narrated choice task; no automatic independent-reading or general reading-level claim follows.
@@ -178,9 +178,9 @@ Evidence: [Post runner](../dist/post-office-core.mjs), `stepPostRoute`/`editPost
 | Details and context in optional amounts of French text | **Built** reviewed finite story variants | Language complexity versus the reader’s age/interests | French Paris | A new story using a familiar language function; keep English meaning support visible as support |
 | Sequence/inference with separate French observations | **Built** selected questions/helpers | Connected clues versus a single translated word | French Paris | Offer more connected French optionally, then a different context without assuming proficiency |
 | Write a purposeful short French message/dialogue | **Missing** authored sequence; an off-screen postcard invitation exists | Understanding a supplied sentence versus composing one | Candidate French Post / Loft adaptation | Keep the communicative purpose, vary the recipient, use separately reviewed French language/support |
-| Systematic grammar, sound–spelling and oral interaction | **Missing** sequences | Recognising a form versus producing it; written versus spoken comprehension | Candidate French language packs/conversation with a person | Revisit the same language function through another mode, without recording child speech |
+| Systematic grammar, sound–spelling and oral interaction | **Missing** sequences | Recognizing a form versus producing it; written versus spoken comprehension | Candidate French language packs/conversation with a person | Revisit the same language function through another mode, without recording child speech |
 
-Evidence: [French stories](../dist/french-story-data.mjs), [library](../dist/french-library.mjs), [separate suggestions](../dist/french-core.mjs). French is an explicit extension outside Marble’s English organisation; English topic IDs are not French proficiency mappings.
+Evidence: [French stories](../dist/french-story-data.mjs), [library](../dist/french-library.mjs), [separate suggestions](../dist/french-core.mjs). French is an explicit extension outside Marble’s English organization; English topic IDs are not French proficiency mappings.
 
 ## 13. Living systems and interdependence
 
@@ -201,7 +201,7 @@ Evidence: [habitat cases](../dist/living-spiral-content.mjs), [three science dep
 | --- | --- | --- | --- | --- |
 | Melting, warming and evaporation with explanatory pictures | **Built** three guided missions | Whole-sample state versus molecular representation; faster motion versus larger particles | Water Lab | Follow the same water at whole-sample and tiny-model scales |
 | Flow, infiltration, runoff and drainage | **Missing** scoped investigation | Water leaving by evaporation versus soaking in or flowing elsewhere | Candidate storm-drainage mode | Follow where water goes while keeping surfaces/conditions visible |
-| Condensation and wider water cycle | **Missing** sequence | Water vapour versus visible droplets; evaporation versus condensation | Candidate Water Lab | Compare processes without claiming a flood-safety model |
+| Condensation and wider water cycle | **Missing** sequence | Water vapor versus visible droplets; evaporation versus condensation | Candidate Water Lab | Compare processes without claiming a flood-safety model |
 | Weather observations and records | **Planned** outline only in [PR #6](https://github.com/anotherpanacea-eng/learning-garden/pull/6); lesson sequence still missing | Short-term weather versus climate; observed conditions versus model/example data | Proposed town log → [Field Notebook data desk](curriculum-gaps.md#shifts-new-questions-for-existing-or-planned-places) | Keep dated observations and units, choose a relevant comparison, then represent it differently; no weather logger is built |
 | Material properties, mixtures and reversible/irreversible changes | **Missing** | Sorting by appearance versus a tested property; mixing versus changing substance | Candidate Workshop materials bench | Choose a material for a purpose and compare the evidence after a different test |
 
@@ -216,14 +216,14 @@ Evidence: [Water missions](../dist/science-content.mjs), `melt`/`warm`/`evaporat
 | Sound/vibration, pitch/loudness and light/shadows | **Missing** explicit experiences | Faster repetition versus louder sound; blocked light versus a dark object | Candidate Sound & Light Studio | Change one controllable property, then explain a new sound/shadow effect |
 | Energy transfers and electricity | **Missing** | A visible change versus a model of how energy is transferred | Candidate later Workshop benches | Trace a bounded system and explain what the model leaves out |
 
-Evidence: [Workshop configurations](../dist/workshop-core.mjs), [chosen-variable interface](../dist/workshop-ui.mjs). Anchor `mt_-p_xp4hMvh` includes broader surface evidence than our two-surface model. The intro film’s soundtrack and animations do not constitute sound/light instruction.
+Evidence: [Workshop configurations](../dist/workshop-core.mjs), [chosen-variable interface](../dist/workshop-ui.mjs). Anchor `mt_-p_xp4hMvh` includes broader surface evidence than our two-surface model.
 
 ## 16. Scientific inquiry and explanation
 
 | Concept | Status | Contrast to explore | Home | Revisit with a changed demand |
 | --- | --- | --- | --- | --- |
 | Select a pictured clue; predict and compare model outcomes | **Built** scaffolded opportunities | Observation versus inference; prediction before versus after seeing a result | Living Garden, Water Lab, Workshop | Preserve the original prediction and compare a different observation |
-| Recognise a controlled comparison; distinguish observation/interpretation | **Planned** bounded contrast | One change versus a confounded pair; supplied data versus physical evidence | [Plant increment 3](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Choose which comparison would answer a new plant question, with controls visible |
+| Recognize a controlled comparison; distinguish observation/interpretation | **Planned** bounded contrast | One change versus a confounded pair; supplied data versus physical evidence | [Plant increment 3](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Choose which comparison would answer a new plant question, with controls visible |
 | Pose, design, carry out and measure a useful investigation | **Missing** sequence | Selecting a supplied setup versus making/test-driving a plan | Candidate Field Notebook / optional adult-supported practical work | Carry a plan to a real experiment and keep its evidence separate from model results |
 | Uncertainty, repeatability and revising explanations | **Missing** systematic progression; repeated model distances invite discussion | Disagreement between measurements versus proof that anything goes | Candidate investigation notebook | Revisit a claim with additional evidence and explain what remains uncertain |
 
@@ -235,10 +235,10 @@ Evidence: [Workshop trial records](../dist/workshop-core.mjs), [Living responses
 | --- | --- | --- | --- | --- |
 | Literal step sequence, test and revision | **Built** finite word-card runner | What was intended versus what was actually specified | Post Office | Keep a failed plan and change one instruction, then explain the consequence |
 | Repetition, conditionals, decomposition and debugging | **Missing** authored progression | Repeating an instruction versus repeating a group; fixed route versus if/then choice | Candidate courier programming mode | Use the same destination with a changed obstacle and test a reusable route |
-| Data, classification and rule-based versus learned behaviour | **Planned** sorting-robot outline; explicit model/sequence still missing | A visible hand-written rule versus an inference from labelled examples | [Sorting robot at the mill](curriculum-gaps.md#new-games-and-later-content-packs) / delivery bench | State features, classifier rule and unknown/tie behaviour; test a counterexample, revise rule or examples, then try a fresh item |
+| Data, classification and rule-based versus learned behavior | **Planned** sorting-robot outline; explicit model/sequence still missing | A visible hand-written rule versus an inference from labeled examples | [Sorting robot at the mill](curriculum-gaps.md#new-games-and-later-content-packs) / delivery bench | State features, classifier rule and unknown/tie behavior; test a counterexample, revise rule or examples, then try a fresh item |
 | Computing/media limits, privacy and source evaluation | **Missing** reviewed sequence | A fluent answer/image versus reliable evidence; personal information versus necessary input | Candidate message/source investigation | Check a new fictional claim without asking for private information |
 
-Evidence: [Post interpreter](../dist/post-office-core.mjs). Anchor `mt__p5n8z5soJ` is a current scoped foothold. Marble’s Computing domain is organised around AI and is not a complete algorithms curriculum; proposed repetition/conditionals need an explicit original scope rather than a forced topic match.
+Evidence: [Post interpreter](../dist/post-office-core.mjs). Anchor `mt__p5n8z5soJ` is a current scoped foothold. Marble’s Computing domain is organized around AI and is not a complete algorithms curriculum; proposed repetition/conditionals need an explicit original scope rather than a forced topic match.
 
 ## 18. Maps, geography and navigation
 
@@ -260,18 +260,18 @@ Evidence: [Post map/places](../dist/post-office-ui.mjs), [gathering clues](../di
 | Broader historical periods and contextual explanations | **Planned** optional artifact-exhibit outline; authored source sequences still missing | Modern assumptions versus evidence about people in their own context | [Travelers’ Archive exhibits](curriculum-gaps.md#new-games-and-later-content-packs) | Compare another attributed object/account, naming its time/place and limits; one object does not cover a whole period |
 | Evaluate interpretations and uncertainty | **Missing** systematic progression | A source’s statement versus a historian’s argument from it | Candidate Archive investigation board | Support two possible interpretations and identify evidence that could distinguish them |
 
-No history learning activity is currently declared in the atlas. Source anchors: `mt_9REmUc8r4D`, `mt_2GDBmKCJxs`, `mt_TTzJTF-OkG`, `mt_wWlZoLQBR6`, `mt_Lu4H4mbsqO`. All require reviewed sources and honest labels for fiction/reconstruction. A Paris setting or fictional courier does not itself teach history.
+No history learning activity is currently declared in the atlas. Source anchors: `mt_9REmUc8r4D`, `mt_2GDBmKCJxs`, `mt_TTzJTF-OkG`, `mt_wWlZoLQBR6`, `mt_Lu4H4mbsqO`. All require reviewed sources and honest labels for fiction/reconstruction.
 
 ## 20. Visual art, drama and music
 
 | Concept | Status | Contrast to explore | Home | Revisit with a changed demand |
 | --- | --- | --- | --- | --- |
 | Choose, perform, discuss and revise a puppet scene | **Built** expressive opportunity | A surprising combination versus a mistake; length versus intended effect | Story Loft | Perform a revised scene for a different audience and discuss its effect |
-| Shape, colour, materials and visual composition | **Missing** authored progression | Recognising a geometric shape versus using it to create a visual effect | Candidate Loft making studio / paper project | Keep subject fixed while changing one visual choice; discuss rather than score taste |
+| Shape, color, materials and visual composition | **Missing** authored progression | Recognizing a geometric shape versus using it to create a visual effect | Candidate Loft making studio / paper project | Keep subject fixed while changing one visual choice; discuss rather than score taste |
 | Beat/rhythm, pitch patterns, listening and composing | **Missing** reviewed experiences | Steady beat versus rhythm; pitch versus loudness; imitation versus invention | Candidate Sound & Light Studio / musical Loft mode | Recreate a short pattern, transform it, then compose a response |
 | Drama/voice/listening and collaborative making | **Missing** sequence; unscored discussion is already invited | Supplied dialogue versus interpretation/performance with a person | Candidate Loft / community circle | Perform different readings of the same line without declaring one emotion correct |
 
-Evidence: [Loft content](../dist/loft-content.mjs), [stage controls](../dist/loft-ui.mjs). These are explicit subject extensions outside Marble’s subject inventory; no new source nodes are asserted. Reviewed music/audio and accessible response modes need separate authoring. A soundtrack is not a music curriculum.
+Evidence: [Loft content](../dist/loft-content.mjs), [stage controls](../dist/loft-ui.mjs). These are explicit subject extensions outside Marble’s subject inventory; no new source nodes are asserted. Reviewed music/audio and accessible response modes need separate authoring.
 
 ## 21. Money, exchange and practical decisions
 
@@ -294,7 +294,7 @@ Café has real-in-game inventory constraints but no monetary exchange. Anchors: 
 | Choose/evaluate strategies and notice uncertainty | **Missing** sequence | Feeling familiar versus being able to use an idea; help use versus inability | Candidate companion notebook | Return in a new context and describe what changed in the approach |
 | Set/review personal learning goals | **Missing** reviewed experience | A chosen purpose versus a compulsory target/reward | Candidate optional grown-up-guided reflection | Revisit a privately chosen goal; no streak, grade, placement or mandatory schedule |
 
-Evidence: existing method/support controls in [Café](../dist/cafe-ui.mjs), [Bramble](../dist/post-office-ui.mjs), [Living Garden](../dist/living-adaptive-ui.mjs). Source anchors: `mt_8dstvf-KKb`, `mt_6eTZUwKQZr`, `mt_95zxYqpP7m`, `mt_jIszRCO2ij`. Their presence here proposes future scope; no learning-to-learn activity references or abilities are added by this document.
+Evidence: method-report controls in [Facts](../dist/facts-ui.mjs), [Bramble](../dist/post-office-ui.mjs) and [Living Garden](../dist/living-adaptive-ui.mjs); [Café](../dist/cafe-ui.mjs) offers optional repair help but no method report. Source anchors: `mt_8dstvf-KKb`, `mt_6eTZUwKQZr`, `mt_95zxYqpP7m`, `mt_jIszRCO2ij`.
 
 ## 23. Cooperation, perspectives and community
 
@@ -322,24 +322,24 @@ Candidates: `mt_9NQEiYLQA3`, `mt_mDp-1vlL3R`, `mt_OJVkWvIaM_`. Feeding a fiction
 | Travelers’ Archive | **Distinct game/door** | Examine a bounded place/time, artifact and two accounts; put events on a timeline and support a reply | **Later, source-dependent**: spec 24 outline; needs an actual reviewed setting/source pack |
 | Sound & Light Studio | **Candidate new experimental/making mode** | One controllable property at a time: vibration/pitch/loudness or light/shadow; later a rhythm/composition response | **Missing scoped first release**: physics and music are distinct strands and need their own representations/content review |
 | Fossil bank / migration postcards | **Later evidence-focused scene or content pack** | Record a find’s context and compare interpretations; place a reviewed migration observation on a map | **Later, content-dependent**: layer assumptions, species/routes and sources must be specified; a collection shell supplies no geology/history/ecology coverage |
-| Sorting robot | **Later computing mode**, probably Workshop/Post Office | Compare a visible rule with a defined small classifier; revise examples and test a fresh case | **Outline only**: model/features/unknown behaviour must be explicit; no live AI or learner upload required |
+| Sorting robot | **Later computing mode**, probably Workshop/Post Office | Compare a visible rule with a defined small classifier; revise examples and test a fresh case | **Outline only**: model/features/unknown behavior must be explicit; no live AI or learner upload required |
 | Community circle / cooperative garden project | **Candidate human-partner experience**, probably attached to Loft | Make a decision or story with differing fictional perspectives, take turns, revise together | **Later**: outline only; no automated social-skill score, private disclosures or requirement to play with others |
 
-Keep the three already bounded increments next. PR #16 adds useful follow-on modes—data desk, minibeast classification and Market Day—rather than a reason to replace those increments or proliferate worlds. Word Workshop remains a distinct content-dependent literacy door. The Archive and Studio become useful when their new ways of acting are ready. New coats of paint, bigger numbers and longer passages do not replace missing representations or a purposeful question.
+Keep the three already bounded increments next. PR #16 adds useful follow-on modes—data desk, minibeast classification and Market Day—rather than a reason to replace those increments or proliferate worlds. Word Workshop remains a distinct content-dependent literacy door. The Archive and Studio become useful when their new ways of acting are ready.
 
 ## Three concrete routes to author first
 
 1. **Prepare a community dinner:** Number Garden array (**Built**) → Café plates (**Built**) → switch among the same triple’s unknowns (**Planned**, increment 1) → Bramble fresh delivery question (**Planned connection**) → fraction of a differently sized batch (**Planned outline**, then Missing equivalence/measurement lessons). Start with known quantities and change one demand at a time.
-2. **Make a message work:** Paris inference/evidence (**Built**) → Post Office literal route/clarification (**Built**) → reader asks a specific question (**Planned**, increment 2) → revise a Loft line (**Built opportunity**, connection Planned) → a second narrator’s account (**Planned outline**). Longer writing is optional; compare the intended and observed effects.
+2. **Make a message work:** Paris inference/evidence (**Built**) → Post Office literal route/clarification (**Built**) → reader asks a specific question (**Planned**, increment 2) → revise a Loft line (**Built opportunity**, connection Planned) → a second narrator’s account (**Planned**, spec 06). Longer writing is optional; compare the intended and observed effects.
 3. **Choose where to plant:** Living Garden need/condition/change (**Built**) → dated plant comparison (**Planned**, increment 3) → useful learner-made table (**Planned first slice**) → construct a graph from selected observations (**Planned outline**, authored construction still missing) → explain the planting choice to a gardener (**Planned connection**). Keep model and physical evidence separate.
 
 A follow-on **collect · classify · connect** route could run: Living Garden pictured clue (**Built**) → minibeast specimen/key (**Planned outline**) → life-cycle connection (**Planned outline**) → a comparison chart (**Planned outline**) → a reviewed migration postcard (**Planned outline**). Another route is coin value → equivalent payment → purchase/change → constrained stall plan, each a separately authored Market Day step. The [proposal details](curriculum-gaps.md) state what is still missing; no whole strand is delivered by one reusable shell.
 
-For an authored revisit, hold at least one thing fixed (quantity, text, organism, claim) and deliberately change one demand (unknown, representation, condition, audience). Help may offer a smaller step or a different example; it does not lower a global level. Offer a fresh instance after familiarity and retain each task’s own support. No compulsory review date or mastery inference is specified here. Any eventual recommendation policy needs its own bounded review.
+For an authored revisit, hold at least one thing fixed (quantity, text, organism, claim) and deliberately change one demand (unknown, representation, condition, audience). Help may offer a smaller step or a different example; it does not lower a global level. Offer a fresh instance after familiarity and retain each task’s own support.
 
 ## What remains outside this first map
 
-Beyond the named outlines, the atlas still contains unsequenced objectives throughout its 54 domains: broader body/life processes, oceans and other ecosystems, geology/palaeontology, Earth/space, climate, advanced mathematics, wider historical periods, financial and personal/social topics. A possible theme is not a lesson pathway. These remain **Missing** at the relevant lesson/sequence level unless the narrow Built or Planned rows above say otherwise. Fossil-bank and night-sky-log sketches now provide candidate homes for some geology/Earth-space work, but no reviewed sequence yet; the night-sky idea must separate observed phase, cloud-obscured and not-observed records. Prioritise a bounded purpose/content pack instead of trying to build one game per source node or claim all objectives from a familiar activity shell.
+Beyond the named outlines, the atlas still contains unsequenced objectives throughout its 54 domains: broader body/life processes, oceans and other ecosystems, geology/palaeontology, Earth/space, climate, advanced mathematics, wider historical periods, financial and personal/social topics. These remain **Missing** at the relevant lesson/sequence level unless the narrow Built or Planned rows above say otherwise. Fossil-bank and night-sky-log sketches now provide candidate homes for some geology/Earth-space work, but no reviewed sequence yet; the night-sky idea must separate observed phase, cloud-obscured and not-observed records. Prioritize a bounded purpose/content pack instead of trying to build one game per source node or claim all objectives from a familiar activity shell.
 
 For a future build, select one row and specify the example/contrast, learner action, representation, response, help, source material and revisit. Independently review that small specification and its content before implementation. Add atlas references only for actual delivered scope; this map itself changes no runtime mappings, assessment, saved progress or recommendations.
 
