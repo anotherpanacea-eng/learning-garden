@@ -34,21 +34,21 @@ export function workshopPage(state,slug){
 }
 export function workshopNotes(state){
  const xs=state.workshop?.experiments||[];if(!xs.length)return '';
- return `<details class="panel"><summary>Storm Workshop (${xs.length} comparisons kept)</summary><p>Practice with illustrative authored model results. No physical measurements, independent experimental competence, reading level, or topic mastery is inferred. Latest 24 comparisons and 24 trial rows per comparison are retained; per-configuration counts continue after older rows are removed. The full saved state is in the notes download.</p>${xs.map(e=>`<section><h3>${esc(e.id)}${e.closed?' — closed earlier model':''}</h3><p>Model: ${esc(e.revision)}. Change: ${esc(e.variable)}. Keep: ${esc(e.fixed)}. Prediction: ${esc(e.prediction||'none')}${e.predictionAfterResults?' (after results)':''}. Reading: ${esc(e.reading||'unobserved')}. Explanation opened: ${e.support?.explanation?'yes':'no'}. Audio requested: ${e.support?.audioRequested?'yes':'no'}.</p>${e.closed?`<p>${esc(e.closedReason)}. Exact kept work: <code>${esc(JSON.stringify(e))}</code></p>`:results(e)}${e.pending?`<p>Pending/replay: ${esc(phaseLabel(e.pending))}; ${esc(name(e.pending))}; frozen result ${esc(e.pending.distance)} model cm.</p>`:''}</section>`).join('')}</details>`;
+ return `<details class="panel"><summary>Storm Workshop (${xs.length} comparisons kept)</summary><p>Practice with illustrative authored model results. No physical measurements, independent experimental competence, reading level, or topic mastery is inferred. Latest 24 comparisons and 24 trial rows per comparison are retained; per-configuration counts continue after older rows are removed. The full saved state is in the notes download.</p>${xs.map(e=>`<section><h3>${esc(e.id)}${e.closed?' — closed earlier model':''}</h3><p>Model: ${esc(e.revision)}. Change: ${esc(e.variable)}. Keep: ${esc(e.fixed)}. Prediction: ${esc(e.prediction||'none')}${e.predictionAfterResults?' (after results)':''}. Reading: ${esc(e.reading||'unobserved')}. Explanation opened: ${e.support?.explanation?'yes':'no'}. Audio requested: ${e.support?.audioRequested?'yes':'no'}.</p>${e.closed?`<p>${esc(e.closedReason)} Exact kept work: <code>${esc(JSON.stringify(e))}</code></p>`:results(e)}${e.pending?`<p>Pending/replay: ${esc(phaseLabel(e.pending))}; ${esc(name(e.pending))}; frozen result ${esc(e.pending.distance)} model cm.</p>`:''}</section>`).join('')}</details>`;
 }
 export function bindWorkshop(state,{save,render,navigate,focus}){
  const redraw=()=>{const open=[...document.querySelectorAll('.workshop-page details[id][open]')].map(d=>d.id);save();render();for(const id of open){const d=document.getElementById(id);if(d)d.open=true;}};
  document.querySelector('#workshop-start')?.addEventListener('submit',event=>{event.preventDefault();const f=new FormData(event.currentTarget),variable=f.get('variable'),fixed=f.get(variable==='height'?'fixedSurface':'fixedHeight');startWorkshop(state,variable,fixed);save();navigate('#workshop');});
  document.querySelectorAll('[data-workshop-resume]').forEach(b=>b.addEventListener('click',()=>{resumeWorkshop(state,b.dataset.workshopResume);save();navigate('#workshop');}));
- const bind=(selector,fn,target)=>document.querySelectorAll(selector).forEach(b=>b.addEventListener('click',()=>{fn(b);redraw();focus(target||selector);}));
+ const bind=(selector,fn,target)=>document.querySelectorAll(selector).forEach(b=>b.addEventListener('click',()=>{fn(b);redraw();focus(typeof target==='function'?target():target||selector);}));
  bind('[data-workshop-setting]',b=>setWorkshopSetting(state,b.dataset.workshopSetting),'[data-workshop-release]');
  bind('[data-workshop-prediction]',b=>setWorkshopPrediction(state,b.dataset.workshopPrediction==='clear'?null:b.dataset.workshopPrediction),'.workshop-prediction');
  bind('[data-workshop-release]',()=>releaseWorkshop(state),'[data-workshop-step]');
- bind('[data-workshop-step]',()=>stepWorkshop(state),'.workshop-position');
+ bind('[data-workshop-step]',()=>stepWorkshop(state),()=>document.querySelector('[data-workshop-step]')?'[data-workshop-step]':'.workshop-position');
  bind('[data-workshop-replay]',()=>replayWorkshop(state),'[data-workshop-step]');
  bind('[data-workshop-help]',()=>setWorkshopSupport(state,'explanation'),'.hint');
  bind('[data-workshop-reading]',b=>setWorkshopReading(state,b.dataset.workshopReading),'[data-workshop-reading]');
  bind('[data-workshop-finish]',()=>finishWorkshop(state),'.workshop-finish');
- // Set support on the existing speech button without replacing its playback handler.
- document.querySelectorAll('.workshop-page [data-speak]').forEach(b=>b.addEventListener('click',()=>{setWorkshopSupport(state,'audioRequested');save();}));
+ // Record audio support only for the explanation, not the welcome narration.
+ document.querySelectorAll('.workshop-page .hint [data-speak]').forEach(b=>b.addEventListener('click',()=>{setWorkshopSupport(state,'audioRequested');save();}));
 }
