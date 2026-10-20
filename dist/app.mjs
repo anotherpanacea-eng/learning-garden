@@ -392,3 +392,19 @@ function renderPuzzleEnd(q,o){main.innerHTML=`${heading('An idea to keep.','You 
  window.addEventListener('hashchange',()=>{cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;render();main.focus();window.scrollTo(0,0);});
  $('#privacy-button').onclick=()=>$('#about-dialog').showModal();
  render();
+
+// A first visit begins with the existing film; opening it is not learning evidence.
+function welcomeFilm(){
+ if(state.garden.welcomeFilmSeen===true)return;
+ const dialog=document.createElement('dialog');dialog.className='welcome-film';dialog.setAttribute('aria-labelledby','welcome-film-title');
+ dialog.innerHTML=`<div class="welcome-film-heading"><h2 id="welcome-film-title">Before we begin…</h2><button type="button" class="secondary" data-film-skip autofocus>Skip to the garden</button></div><iframe title="After the Storm introductory film" src="./storm-intro.html?autoplay=1&amp;embedded=1"></iframe><p class="tiny">A little story about how our garden begins. Sound is optional. You can replay it from the home page.</p>`;
+ document.body.append(dialog);
+ const frame=dialog.querySelector('iframe');
+ const finished=e=>{if(e.origin===location.origin&&e.source===frame.contentWindow&&e.data==='garden-film-finished')dialog.close();};
+ dialog.querySelector('[data-film-skip]').onclick=()=>dialog.close();
+ dialog.addEventListener('close',()=>{window.removeEventListener('message',finished);frame.remove();dialog.remove();main.focus();},{once:true});
+ window.addEventListener('message',finished);
+ dialog.showModal();
+ state.garden.welcomeFilmSeen=true;save();
+}
+welcomeFilm();
