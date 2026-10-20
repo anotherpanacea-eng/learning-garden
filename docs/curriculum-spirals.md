@@ -8,7 +8,7 @@ A useful spiral revisits an idea while changing what the learner has to notice, 
 
 ## What Jane and Marble contribute
 
-Refreshed the public source files at exact revisions, rather than assuming the earlier pins were current:
+Public source files checked at exact revisions:
 
 | Reference | What was inspected | Useful here; important contrast |
 | --- | --- | --- |
