@@ -1,6 +1,6 @@
 # Curriculum spirals: turn a familiar game into a new kind of thinking
 
-**Planning proposal, checked 2026-10-19.** No activities, curriculum mappings, learner records or suggestions change in this document. It builds on the [full atlas](learning-atlas.md), not a replacement 1,590-topic curriculum. The three increments below are candidates for independently reviewed builds, in priority order; all destinations stay open.
+**Plan checked 2026-10-20.** Increment 1 now has a bounded local implementation in [spec 38](specs/38-equal-group-spiral.md); increments 2–3 remain proposals. It builds on the [full atlas](learning-atlas.md), not a replacement 1,590-topic curriculum. The first increment is built; the remaining two are candidates for independently reviewed builds, in priority order. All destinations stay open.
 
 A useful spiral revisits an idea while changing what the learner has to notice, represent or explain. More numbers, longer passages and new scenery can provide practice, but do not by themselves supply the missing conceptual step. We should sometimes keep the numbers or passage fixed and change the question, representation or audience.
 
@@ -55,9 +55,11 @@ Name-only mapping fails in this graph: pinned `mt_HY8Yycu_rz` is titled “Under
 
 ## First three playable increments
 
-These are proposed bounded specifications, not implemented promises. Each uses the existing pagination approach: one immediate instruction/question, a persistent relevant model or message, optional stepwise help, Back and a recoverable draft. Preserve inventory, unfinished orders/deliveries, local exports, supported attempts and unfamiliar-task observations. A child may pick any entry, depth or next place.
+Increment 1 is implemented as an optional bench beside the existing games; the next two remain proposed bounded specifications. Each uses the existing pagination approach: one immediate instruction/question, a persistent relevant model or message, optional stepwise help, Back and a recoverable draft. Preserve inventory, unfinished orders/deliveries, local exports, supported attempts and unfamiliar-task observations. A child may pick any entry, depth or next place.
 
 ### 1. Same delivery, three different questions
+
+**Built slice: [same supplies, different questions](specs/38-equal-group-spiral.md).** Café and Bramble now have paired editable benches with six positive quantity families through 12×12, three unknown roles, separate attempts and cloned arrangements on crossing. The original order/rival and inventory remain untouched. This is visual practice, not certified transfer. Broader recipes, fractions and remainders remain later work.
 
 **Extend Café, with a Bramble invitation; no new world.** The small aim is to distinguish the roles of total, group count and group size, using the familiar serving loop.
 

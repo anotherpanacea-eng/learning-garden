@@ -43,11 +43,11 @@ for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall'
 }
 {
  const f=fixture();startVisit(f.state,'paris');f.context.location.hash='#storm/play';eq(f.read('endingFilm()'),null,'unfinished visit');
- f.context.location.hash='#cafe';f.state.cafe={served:6,supper:{round:1,startedAtServed:0}};eq(f.read('endingFilm()'),'cafe','first supper');
+ f.context.location.hash='#cafe';f.state.cafe={served:6,supper:{round:1,startedAtServed:0}};eq(f.read('endingFilm()'),'cafe','first supper');f.context.location.hash='#cafe/groups';eq(f.read('endingFilm()'),null,'serving bench is not a supper ending');f.context.location.hash='#cafe';
  f.state.cafe.served=5;eq(f.read('endingFilm()'),null,'incomplete supper');f.state.cafe.served=12;f.state.cafe.supper={round:2,startedAtServed:6};eq(f.read('endingFilm()'),null,'new game plus');
  f.context.location.hash='#post';const v=startPostOffice(f.state,deliveries[0].id);startAdaptiveRival(f.state);v.postPage='bramble';
  eq(f.read('endingFilm()'),null,'unfinished challenge');setRivalInput(f.state,String(v.rival.task.answer));submitRival(f.state);
- eq(f.read('endingFilm()'),'bramble','resolved gate ending');f.context.location.hash='#post/choose';eq(f.read('endingFilm()'),null,'sorting hub is not a gate ending');f.context.location.hash='#post';continueRival(f.state);v.postPage='bramble';eq(f.read('endingFilm()'),'bramble','continued gate ending');
+ eq(f.read('endingFilm()'),'bramble','resolved gate ending');f.context.location.hash='#post/groups';eq(f.read('endingFilm()'),null,'ribbon bench is not a gate ending');f.context.location.hash='#post';f.context.location.hash='#post/choose';eq(f.read('endingFilm()'),null,'sorting hub is not a gate ending');f.context.location.hash='#post';continueRival(f.state);v.postPage='bramble';eq(f.read('endingFilm()'),'bramble','continued gate ending');
  v.postPage='plan';eq(f.read('endingFilm()'),null,'route planning is not gate ending');v.postPage='bramble';v.closed=true;eq(f.read('endingFilm()'),null,'closed work is not a playable gate ending');
 }
 {

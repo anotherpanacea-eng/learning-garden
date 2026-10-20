@@ -529,6 +529,76 @@
       "kind": "scoped-practice",
       "source": "dist/loft-content.mjs",
       "scope": "Arrange pictured scenes and supplied captions into a one-to-twelve-scene sequence, optionally add puppet dialogue, and revise for an audience. Writing may be supported; spelling, independence, story quality and full narrative proficiency are not assessed."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_LpSuPgL31x",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Six authored quantity families: distribute a fixed total among a given plate/bundle count, or make groups of a given size; editable visual model and explicit support. No remainders, non-integer or full-topic claim."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_iNdrM2-oJf",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Contrast finding objects per group with finding number of groups while keeping the same quantities and naming their units. Numerical answers and arrangement checks stay separate; interpretation is not certified by a correct entry."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_GDG9_SZmsO",
+      "kind": "explanation",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Optional help relates the selected division question to groups × amount per group = total, with the factor sought marked ?. Revealed related facts are support, not independent inverse-relation evidence."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_xZvDCYA5Ae",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Choose an unknown total, group size or group count in six positive integer families through 12×12. Cross-game quantities and arrangements are familiar visual practice; no baseline, general division or mastery claim."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "explanation",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Requested unit-labeled repeated-addition and multiplication explanation for the actual equal groups. The supplied explanation does not create an answer or recall observation."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_LpSuPgL31x",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Six authored quantity families: distribute a fixed total among a given plate/bundle count, or make groups of a given size; editable visual model and explicit support. No remainders, non-integer or full-topic claim."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_iNdrM2-oJf",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Contrast finding objects per group with finding number of groups while keeping the same quantities and naming their units. Numerical answers and arrangement checks stay separate; interpretation is not certified by a correct entry."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_GDG9_SZmsO",
+      "kind": "explanation",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Optional help relates the selected division question to groups × amount per group = total, with the factor sought marked ?. Revealed related facts are support, not independent inverse-relation evidence."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_xZvDCYA5Ae",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Choose an unknown total, group size or group count in six positive integer families through 12×12. Cross-game quantities and arrangements are familiar visual practice; no baseline, general division or mastery claim."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "explanation",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Requested unit-labeled repeated-addition and multiplication explanation for the actual equal groups. The supplied explanation does not create an answer or recall observation."
     }
   ],
   "increments": [

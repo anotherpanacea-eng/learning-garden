@@ -107,3 +107,9 @@ Water Lab follow-up: connect the existing storm-recovery molecule visits to a sm
 
 
 Word Garden first release: [spec 34](specs/34-word-garden.md) implements the word-part door on Cloudflare with authored blooms, welcome discoveries, finite spelling exceptions and open transfer-word discussion. Town repair, seasons and almanac from PR #6 remain ideas for later. The sound/letter door in spec 04 still needs reviewed audio. The complete reviewed game is now published on Cloudflare Static Assets; the earlier Sites release and its origin-local notebooks remain intact.
+
+## First curriculum spiral: same supplies, different questions
+
+[Spec 38](specs/38-equal-group-spiral.md) implements the first scoped increment in the Café and Bramble: six freely chosen quantity families, editable plates/ribbon bundles, and total/per-group/group-count questions. Crossing carries a cloned model and support/familiarity context, while the destination records its own attempts. Both division meanings are represented; neither game’s original pending work, stock, supper progress or rival rounds is changed by the bench. Optional equations and a stepwise smaller example are support. This is a narrow visual-practice foothold, not a complete division progression or independent-transfer assessment.
+
+The next bounded increments remain a message revised for a reader and plant conditions with dated observations. Field Notebook charts, minibeast classification and Market Day remain follow-on proposals in the strand-map PR; this build does not silently include those activities.
