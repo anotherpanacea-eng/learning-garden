@@ -9,7 +9,7 @@ import {bindSpiral} from './living-spiral-ui.mjs';
 import {adaptivePage as spiralPage,bindAdaptive} from './living-adaptive-ui.mjs';
 import {adaptivePairsShown as spiralPairsShown,startAdaptiveSpiral} from './living-adaptive-core.mjs';
 import {livingPage,bindLiving} from './living-ui.mjs';
-import {ensurePostOffice} from './post-office-core.mjs';
+import {ensurePostOffice,currentPostOffice,postOfficeView} from './post-office-core.mjs';
 import {postOfficePage,bindPostOffice} from './post-office-ui.mjs';
 import {ensureWorkshop} from './workshop-core.mjs';
 import {workshopPage,bindWorkshop} from './workshop-ui.mjs';
@@ -29,7 +29,7 @@ import {broadFeedback} from './broad-variants.mjs';
 import {broadHelper,openBroadHelp,submitBroadHelp,broadHelpModelAction,renderBroadHelp} from './broad-help.mjs';
 import {ensureScience,currentScience} from './science-core.mjs';
 import {scienceHome,sciencePage,bindScience} from './science-ui.mjs';
-import {ensureCafe,nextGuest,orderFor,currentRecipe} from './cafe-core.mjs';
+import {ensureCafe,nextGuest,orderFor,currentRecipe,cafeSupper} from './cafe-core.mjs';
 import {renderCafe,bindCafe} from './cafe-ui.mjs';
 import {helpers,helperLimit} from './help-content.mjs';
 import {helpPage} from './help-ui.mjs';
@@ -211,6 +211,7 @@ function render(){
   if(!choosingExplorer){const context={numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
   if(!choosingExplorer&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
   main.innerHTML=(explorerStore.warning?`<p class="storage-warning" role="status">${esc(explorerStore.warning)}</p>`:!storageOK?'<p class="storage-warning" role="status">This browser cannot save progress right now. You can still explore; download notes before leaving.</p>':'')+(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;bind();
+  const film=endingFilm();if(film)queueMicrotask(()=>playFilm(film));
 }
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
 function focusElement(selector){const element=$(selector);if(element){element.tabIndex=-1;element.focus();}}
@@ -393,11 +394,20 @@ function renderPuzzleEnd(q,o){main.innerHTML=`${heading('An idea to keep.','You 
  $('#privacy-button').onclick=()=>$('#about-dialog').showModal();
  render();
 
-// A first visit begins with the existing film; opening it is not learning evidence.
-function welcomeFilm(){
- if(state.garden.welcomeFilmSeen===true)return;
+// Films play once per explorer: the storm film on a first visit, and a short film at three story endings.
+// Watching one is not learning evidence.
+const FILMS={
+ welcome:{src:'./storm-intro.html',title:'After the Storm introductory film',heading:'Before we begin…',skip:'Skip to the garden',note:'A little story about how our garden begins. Sound is optional. You can replay it from the home page.'},
+ paris:{src:'./paris-film.html',title:'A Postcard Home: the Paris postcard film',heading:'A postcard home',skip:'Skip the film',note:'Pip and Dot fly the Paris postcard home. Sound is optional. You can watch it again from the story ending.'},
+ cafe:{src:'./cafe-film.html',title:'Welcome Back, Neighbors: the café supper film',heading:'The welcome-back dinner',skip:'Skip the film',note:'Six tables, six lanterns. Sound is optional. You can watch it again from the café goal.'},
+ bramble:{src:'./bramble-film.html',title:'Through the Ribbon Gate: Bramble’s film',heading:'Through the ribbon gate',skip:'Skip the film',note:'Bramble’s gate is untangled. Sound is optional. You can watch it again from the ribbon gate.'}
+};
+function filmSeen(id){return id==='welcome'?state.garden.welcomeFilmSeen===true:state.garden.filmsSeen?.[id]===true;}
+function markFilmSeen(id){if(id==='welcome')state.garden.welcomeFilmSeen=true;else{if(!state.garden.filmsSeen||typeof state.garden.filmsSeen!=='object'||Array.isArray(state.garden.filmsSeen))state.garden.filmsSeen={};state.garden.filmsSeen[id]=true;}save();}
+function playFilm(id){
+ const f=FILMS[id];if(!f||filmSeen(id)||document.querySelector('dialog[open]'))return;
  const dialog=document.createElement('dialog');dialog.className='welcome-film';dialog.setAttribute('aria-labelledby','welcome-film-title');
- dialog.innerHTML=`<div class="welcome-film-heading"><h2 id="welcome-film-title">Before we begin…</h2><button type="button" class="secondary" data-film-skip autofocus>Skip to the garden</button></div><iframe title="After the Storm introductory film" src="./storm-intro.html?autoplay=1&amp;embedded=1"></iframe><p class="tiny">A little story about how our garden begins. Sound is optional. You can replay it from the home page.</p>`;
+ dialog.innerHTML=`<div class="welcome-film-heading"><h2 id="welcome-film-title">${esc(f.heading)}</h2><button type="button" class="secondary" data-film-skip autofocus>${esc(f.skip)}</button></div><iframe title="${esc(f.title)}" src="${f.src}?autoplay=1&amp;embedded=1"></iframe><p class="tiny">${esc(f.note)}</p>`;
  document.body.append(dialog);
  const frame=dialog.querySelector('iframe');
  const finished=e=>{if(e.origin===location.origin&&e.source===frame.contentWindow&&e.data==='garden-film-finished')dialog.close();};
@@ -405,6 +415,15 @@ function welcomeFilm(){
  dialog.addEventListener('close',()=>{window.removeEventListener('message',finished);frame.remove();dialog.remove();main.focus();},{once:true});
  window.addEventListener('message',finished);
  dialog.showModal();
- state.garden.welcomeFilmSeen=true;save();
+ markFilmSeen(id);
 }
-welcomeFilm();
+// The story endings that earn a film: the Paris errand, the first café supper, and Bramble's gate.
+function endingFilm(){
+ if(choosingExplorer)return null;
+ const [root]=(location.hash||'#home').slice(1).split('/');
+ if(root==='storm'){const v=currentVisit(state);if(v?.finished&&v.paris)return 'paris';}
+ if(root==='cafe'){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
+ if(root==='post'){const v=currentPostOffice(state);if(v&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
+ return null;
+}
+playFilm('welcome');
