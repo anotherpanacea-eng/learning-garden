@@ -1,4 +1,4 @@
-import {MESSAGE_CASES,messageCase,messageCard,messageClue} from './message-content.mjs';
+import {MESSAGE_CATALOG,messageCase,messageCard,messageClue} from './message-content.mjs';
 const PLACES=['post','loft'],PAGES=['inspect','revise','play','human','story'],READING=['unknown','self','together'],SUPPORT=['help','audio','example'];
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const keys=(x,required,optional=[])=>object(x)&&required.every(k=>Object.hasOwn(x,k))&&Object.keys(x).every(k=>required.includes(k)||optional.includes(k));
@@ -14,7 +14,7 @@ function workValid(c,w){return keys(w,['page','clueId','cardId','original','reas
 const fresh=()=>({version:1,selected:{post:null,loft:null},cases:{}});
 export function messageState(state){
  const r=state.messages;
- if(!keys(r,['version','selected','cases'],['recovered'])||r.version!==1||!keys(r.selected,PLACES)||!object(r.cases)||Object.keys(r.cases).length>MESSAGE_CASES.length)return null;
+ if(!keys(r,['version','selected','cases'],['recovered'])||r.version!==1||!keys(r.selected,PLACES)||!object(r.cases)||Object.keys(r.cases).length>MESSAGE_CATALOG.length)return null;
  for(const [id,places] of Object.entries(r.cases)){const c=messageCase(id);if(!c||!object(places)||Object.keys(places).some(p=>!PLACES.includes(p)||!workValid(c,places[p])))return null;}
  if(PLACES.some(p=>r.selected[p]!==null&&(!messageCase(r.selected[p])||!r.cases[r.selected[p]]?.[p])))return null;
  return r;

@@ -51,6 +51,8 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/letter-trail-checks.mjs
+node test/letter-trail-integration-checks.mjs
 node test/message-checks.mjs
 node test/message-integration-checks.mjs
 node test/loft-checks.mjs
@@ -234,3 +236,9 @@ The first equal-group spiral is available at the Café serving bench and Bramble
 [The letter-mending desk](https://after-the-storm-learning.anotherpanacea.workers.dev/#post/messages) offers three original storm-recovery notes: which basket, which destination and which action. Choose a scene clue, try several useful supplied revisions, and compare the reader’s before/after response. Alternate clear messages can serve a different purpose; there is no penalty or required success. Optional original wording is read with a person and never automatically evaluated.
 
 [The reader’s stage](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft/messages) gives the sender a reason and the reader a reply, with optional original dialogue and manual replay. The first crossing copies familiar words and support context; later crossings reopen the destination’s existing draft. Ordinary deliveries, rival challenges, puppet shows and shelves are untouched. Exact authored words stay local under save settings and appear in notes downloads. This is bounded practice, not a reading or writing level. [Spec 39](docs/specs/39-message-reader-spiral.md).
+
+### Changing letters
+
+[Find a changing letter](https://after-the-storm-learning.anotherpanacea.workers.dev/#post/letters/round) or [open the round in Story Loft](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft/letters/round). Twelve original notes revisit one detail, two details together and what a particular reader needs to know. Readers include Kitten, Dragon, Rabbit, Pip and Dot. Two already-actionable notes ask for a reason rather than pretending the directions are wrong. The library rotates; it is finite authored content, not live AI generation.
+
+Trying cards is exploration. Only explicitly keeping a supplied version contributes once to a gentle next-kind suggestion; original wording stays human-read and ungraded. Recent requests, known help, narration, together-reading, repeated encounters and legacy-desk familiarity remain separate. Choose any kind immediately. The current letter, card/clue order, both desk drafts and other games stay intact across pages and reload. The round retains its latest 24 letters plus selected drafts at either desk; notes downloads contain that retained writing. The original three-note desk and its saved work remain available. [Spec 40](docs/specs/40-changing-letters.md).

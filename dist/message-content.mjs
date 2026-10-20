@@ -1,3 +1,4 @@
+import {CHANGING_LETTERS} from './letter-content.mjs';
 // Original finite message rehearsals. These cases do not interpret authored writing.
 const cases = [
  {id:'basket',title:'Which basket?',focus:'Name the object',actor:'rabbit',scenePlace:'cafe',
@@ -30,7 +31,8 @@ const cases = [
 ];
 function freeze(value){if(value&&typeof value==='object'){for(const child of Object.values(value))freeze(child);Object.freeze(value);}return value;}
 export const MESSAGE_CASES=freeze(cases);
-export const messageCase=id=>MESSAGE_CASES.find(c=>c.id===id)||null;
+export const MESSAGE_CATALOG=freeze([...MESSAGE_CASES,...CHANGING_LETTERS]);
+export const messageCase=id=>MESSAGE_CATALOG.find(c=>c.id===id)||null;
 export const messageCard=(c,id)=>c?.cards.find(card=>card.id===id)||null;
 export const messageClue=(c,id)=>c?.clues.find(clue=>clue.id===id)||null;
 export const messageCardOutcome=messageCard;
