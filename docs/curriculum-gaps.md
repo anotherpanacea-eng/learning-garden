@@ -1,78 +1,79 @@
 # Game ideas for the missing strands
 
-**Planning proposal, 2026-10-20.** A companion to the [strand map](strand-map.md). That map labels each concept Built, Planned or Missing, and names a *candidate* home for the missing ones. This document proposes what those homes could actually be: themed game shifts and new games set in Willowbank, the village from [spec 33](specs/33-rebuilding-the-town.md) (proposed in #6). Nothing here changes activities, mappings, saves or suggestions. Each idea needs its own bounded spec and content review before build. Everything stays single-player, offline and on one device.
+**Planning proposal, 2026-10-20; developed from Claude’s [PR #16](https://github.com/anotherpanacea-eng/learning-garden/pull/16).** A companion to the [strand map](strand-map.md). The original proposal’s strongest ideas are retained below and folded into that map, with scope, dependencies and content conditions made explicit. These are outlines, not build-ready specifications or implemented lessons. Each selected slice needs a bounded spec and independent content review. Everything remains single-player, with optional human participation, local saves and no learner-data upload.
+
+The village name Willowbank, town weather log, seasons and almanac come from the **separate, unimplemented [town-rebuilding proposal, PR #6](https://github.com/anotherpanacea-eng/learning-garden/pull/6)**. They are possible thematic dependencies, not features already available on this branch. The ideas below can start in the current garden without adopting that whole proposal.
 
 ## Why a second pass
 
-Counted against the pinned Marble taxonomy, roughly 1,350 topics have an age range starting at 9 or below. The games declare links to about 40 of them, nearly all in mathematics. The strand map's own "What remains outside this first map" section lists the largest unsequenced areas: oceans and other ecosystems, palaeontology and geology, Earth and space, wider history, money and personal and social topics. In young topics, those areas plus grammar and computing come to roughly 600 with no game at all:
+The pinned Marble inventory contains **1,170 topics whose `ageRangeStart` is at most 9**, out of 1,590 topics. That is a metadata filter, not a recommended curriculum for a particular child. The current atlas declares 72 activity references across 42 topics in the complete inventory; those references are partial footholds, not comprehensive lesson coverage. An unlinked topic ID also does not prove no related learning takes place.
 
-| Area | Young topics | Linked now |
-| --- | --- | --- |
-| Topic-rich science (animals, minibeasts, ocean, polar, rainforest, dinosaurs, space, volcanoes, human body, weather) | about 240 | 0 |
-| English grammar, punctuation, spelling, vocabulary, speaking and listening | about 125 | 0 |
-| Personal and social development | 72 | 0 |
-| History | 79 | 0 |
-| Money and entrepreneurship | 37 | 0 |
-| Computing / AI | 21 | 1 |
+PR #16’s approximate area totals and prospective coverage numbers have been removed: overlapping domains, partial matches and new content requirements make them unsuitable for estimating what these sketches would teach. The useful finding is qualitative: our [map’s remaining gaps](strand-map.md#what-remains-outside-this-first-map) include broader living systems, Earth/space, history, money, language and computing. Some need new authored content in existing loops; others need genuinely different learner actions. None is filled merely by adding a theme or collecting cards.
 
-Most of these can't be reached by spiraling an existing loop, because the action they need isn't in any current game.
+## Two additions to the strand map’s framing
 
-## Two additions to the strand map's framing
+**A proposed eighth play pattern: collect · classify · connect.** Find an authored specimen, artifact or fact card; inspect its evidence; use a key or a stated rule; then connect it to a food web, life cycle, timeline or map. On a later visit, keep the specimen or claim but change the evidence or relationship. Classification is not the right action for every history question: an account may need comparison and corroboration instead. The Field Notebook is a candidate home; a future almanac could display the collection. Neither has a built classification engine. This is a proposal alongside the atlas’s seven existing patterns, not a new runtime declaration.
 
-**An eighth play pattern: collect · classify · connect.** The atlas patterns are all skills (search, allocate, experiment, read, compose, build, create). Much of Marble's science and all of its history is knowledge about something: what penguins eat, how a caterpillar changes, what a Roman coin tells us. Those topics need a loop to find a specimen, artifact or fact card, sort it with a key or rule, then place it in a bigger picture (food web, life cycle, timeline, map). The strand map's candidate Field Notebook is the natural engine. The almanac in spec 33 is the natural shelf for what a child collects.
-
-**Currency and history choices.** Strand 21 says to "first specify the currency". Proposed default: US dollars and cents, mapped to Marble's money topics by concept, since Marble's notation topics are in pounds and pence. Marble's history domains are UK-shaped (1066, Boudicca, Anglo-Saxon Britain), so offer them as optional exhibits inside the Travelers' Archive (strand 19). Historical-thinking skills stay the core.
+**Currency and history choices.** A first Market Day pack could use US dollars and cents, but must teach the chosen coin values explicitly and review its representations. Map concepts to Marble’s money topics without presenting dollars as pounds/pence. Historical exhibits should use specific reviewed places and times; UK-shaped source examples can be optional exhibits, not a universal history sequence. Historical thinking remains the core of the Archive.
 
 ## Shifts: new questions for existing or planned places
 
-| Shift | Strand-map rows it fills | Where | The new kind of thinking |
+| Shift | Concept and useful contrast | Home and first revisit | Scope / dependencies |
 | --- | --- | --- | --- |
-| **Weather log becomes a data desk** | 7: organise categories, tally and construct a graph; 14: weather observations | Town weather log (spec 33) | Spec 33 only *shows* a graph. Let the child build a tally, then a pictogram, then a bar graph from their own log. The same small dataset in two forms asks which answers the question. An optional outdoor thermometer adds measurement. |
-| **Market Day at the café** | 21: coin values, affordability, goods and costs | Café | Pretend coins and a stall after the welcome supper. First, build one amount two ways and make change. Later, decide what to bake and whether the stall covered its costs. Money never touches the real inventory. |
-| **The bell tower keeps time** | 5: measurement (time), with calendar from spec 33 seasons | Town bell tower | The repaired clock runs a gentle timetable (bakery opens, post leaves, ferry crosses). Set it, read it, work out how long until the post. Marble has 14 young time topics and nothing reaches them. |
-| **Bell rhythm studio** | 4: fractions; 15 and 20: pitch and rhythm | Bell tower, then Story Loft | Bells ring whole, half and quarter notes; fill a bar so it adds to one whole. A big bell rings low and a small one high. Compose a short peal when something is mended. This is a first slice of the Sound & Light Studio. |
-| **Minibeast meadow with Dot** | 13: life cycles and classification | Living Garden / Field Notebook | Dot is a ladybug, so this is the best character fit in the game. Use a yes/no key ("Six legs? Then it's an insect"), follow a caterpillar through dated cards, and see which flowers bees visit. Insects and Minibeasts alone has 22 young topics. |
-| **The mill's gears** | 15: richer forces | Workshop bench at the Mill | Gear trains (turn this one 3 times; how often does that one turn?) and a pulley for lifting sacks. Gives the Workshop a second machine beyond the ramp. |
-| **Lanterns and circuits** | 15: energy and electricity | Winter footbridge lanterns (spec 33) | "Will the lantern light?" Swap a wooden link for a copper one, add a switch. Small, visual, and an exact fit for several young Energy topics. |
-| **Erosion at the footbridge** | 14: flow, infiltration and runoff | Water Lab (the candidate storm-drainage mode) | The storm washed the bank away. Compare bare soil, grass and stones under running water. Gives the planned runoff model its purpose. |
-| **Notice board repair** | 11: punctuation and editing; English grammar has no row of its own | Town library and post office | Rain smudged the town notices. Restore capitals, full stops, question marks, commas in lists and apostrophes, then hear why each mattered: "Lets eat Pip" or "Let's eat, Pip." Each fix changes meaning, so it isn't a worksheet. Grammar & Punctuation has 52 young topics. |
-| **Story Loft feelings** | 23: emotional vocabulary | Story Loft | A puppet shows a feeling. The child picks words for it ("frustrated", "proud", "a bit of both"), changes the scene, and sees the feeling change. Fictional characters only, unscored, and nothing about the child's own feelings is stored. |
+| **Field Notebook: a data desk** | Strands 7/16: choose categories, tally, construct a labeled graph; a displayed chart versus a learner-made representation | Begin with a small clearly labeled Workshop/model dataset or authored example. Represent it two ways, then ask which answers a different question | **Planned outline.** Graph construction remains unbuilt. A weather log is an optional later source, dependent on PR #6 or its own spec; a real observation stays distinct from model/example data |
+| **Market Day at the café** | Strand 21: number of coins versus value; equivalent payments; price versus amount tendered | Make one amount two ways, buy a pretend item, then find change; later compare affordability or a stall’s stated costs and receipts | **Planned outline.** Separate economy from café stock until explicitly designed; no real money or personal financial records. Foundations, change and budgeting need separate reviewed slices |
+| **Minibeast meadow with Dot** | Strand 13: shared habitat versus shared body feature; one organism at different life stages | Inspect authored specimens with a small key, connect dated caterpillar/butterfly cards, then test a new specimen against the same key | **Planned outline.** Scope an initial insect key to reviewed, visibly complete **adult** specimens. Six visible legs is not a universal key for all life stages or obscured/damaged pictures. Body functions remain a separate missing sequence |
+| **The bell tower keeps time** | Strand 5: a time of day versus elapsed duration | Set/read a pretend clock, work out when the post leaves, then change the departure time | **Optional sketch.** No real-time deadline. Clock conventions, units and duration need a first spec; PR #6’s calendar/seasons are not built dependencies |
+| **Bell rhythm studio** | Strands 4/15/20: beat versus rhythm; pitch versus loudness; duration fractions of an explicitly chosen whole | Reproduce a short pattern, transform it, then compose a response for the Loft | **Optional sketch.** Specify time signature/unit and the sound model; bell size alone does not define every instrument’s pitch. Physics, notation and creative work need distinct teaching aims |
+| **The mill’s gears** | Strand 15: rotations of one gear versus another; motion versus force explanation | Compare two pictured gear pairs, then predict a new pair | **Optional Workshop sketch.** A reviewed model must state gear size/tooth count, direction and idealisations; pulleys are a later slice |
+| **Lanterns and circuits** | Strand 15: material appearance versus conductivity; open versus closed circuit | Complete one low-voltage model circuit, predict a swap, then compare the result | **Optional Workshop sketch.** Define the model and adult-supported practical limits. Winter lanterns from PR #6 are thematic, not prerequisite functionality |
+| **Erosion at the footbridge** | Strands 14/16: water soaking in versus running off; observation versus explanation | Compare specified surfaces under the same model rain, then explain what changed | **Optional storm-drainage sketch.** No local runoff model exists yet. State rainfall, slope, soil/cover and limits before claiming a controlled comparison or flood-safety relevance |
+| **Notice board repair** | Strand 11: intended meaning versus what punctuation lets a reader recover | Revise an original fictional notice for a reader, compare readings, then write a new notice | **Optional Post Office/Loft sketch.** Review capitals, sentence boundaries and later punctuation in meaningful small slices; multiple phrasings may work. Not a complete grammar sequence |
+| **Story Loft feelings** | Strand 23: a pictured clue versus certainty about someone’s feelings | Offer several interpretations of a fictional puppet, change a scene, then ask the human audience | **Optional outline.** Unscored, fictional characters only; no stored real-child mood check-in or automated inference |
 
-## New games
+## New games and later content packs
 
-Ordered by how much they open up for what they cost.
+These retain PR #16’s proposed settings. Their order is a discussion aid, not a validated estimate of development cost or curriculum coverage.
 
-**1. Fossil bank after the storm** (strand 13 and 16; palaeontology and geology from "outside this first map").
-The flood cut into the riverbank below Willowbank, and something is showing in the rock. Brush away layers, record where each find sits, and reconstruct what you can. Reading a trackway is a good inference task: walking or running? Alone or in a group? The game says plainly when the evidence can't decide. Mary Anning is a real figure for a reviewed source card. Deeper layers are older, which is a first timeline rung and a bridge to the Archive.
+**1. Fossil bank after the storm** (strands 13/16/19; geology and palaeontology).
+The storm reveals an **authored safe scene** of a riverbank outcrop, not an invitation to enter unstable flood banks. Brush a pictured find, record its layer and observable features, then compare two reconstructions. A trackway may support some interpretations without deciding speed or social grouping. “Lower is older” applies only to the specified undeformed, unreversed sequence of deposited layers; later cases can challenge the simple model. Mary Anning could appear in an attributed, reviewed historical source card. No fossil lesson exists yet; first bound one evidence question and its model assumptions.
 
-**2. Postcards from the Arctic tern** (13 and 18; oceans, polar, rainforest, animals of the world).
-Arctic terns really do migrate from pole to pole, so a tern pen pal is a true premise that can go almost anywhere. Each postcard is a short authored read with a picture to search. The child replies by making a field-guide card: classify the animal, place it on the map, link it into a food chain. The postcard reuses the Paris and Sky Post machinery, so no network is needed, and the tern returns each spring. Around 90 young topics are in reach.
+**2. Postcards from a migrating bird** (strands 13/18/10).
+Keep the Arctic tern pen-pal idea as a candidate, with actual routes, dates, species and season reviewed before authoring. Migration is a reason to encounter particular coasts and oceans, not a licence to put the same species in every habitat. Read an offline authored postcard, inspect a picture, then reply with a field-guide card or map annotation grounded in that evidence. Reuse Paris/Post Office interaction patterns; each location needs new reviewed content. No fixed “returns each spring” promise without specifying hemisphere and population. No prospective topic-coverage count is claimed.
 
-**3. Teach the sorting robot** (strand 17: rule-based versus learned behaviour).
-The mill gets a clockwork sorter. The child teaches it with examples ("apple", "pear") and it guesses a rule. Show it only red apples and it decides green ones are pears. That's a kind, honest first look at how learning machines go wrong, at the level of Marble's young AI topics. It pairs with the Post Office's literal word-card routes.
+**3. Teach the sorting robot** (strand 17).
+A clockwork sorter first follows a **visible hand-written rule**; later an explicitly defined small classifier learns from labeled examples. Specify its features, inference rule, tie/unknown behaviour and output before scripting its mistakes. A red-apples/green-pears example only works if the selected model actually uses colour and the training set supports that inference; the robot must not appear to infer an arbitrary rule by magic. Compare a counterexample, revise the data or rule, and test a fresh item. No live AI or learner-data upload is needed. This is an outline, not an implemented classifier.
 
-**4. Willowbank town meeting** (strand 23 and speaking and listening; the strand map's candidate community circle).
-Neighbors disagree about what to repair first. The baker wants the bridge and the librarian wants the roof. Hear each puppet's reason, notice who hasn't spoken, propose a plan and say why. It's unscored, with several defensible answers, and is meant for talking through with a grown-up. It gives the town loop a heart.
+**4. Willowbank town meeting** (strand 23 and speaking/listening).
+Neighbors disagree about bridge and roof repairs. Hear reasons, notice a missing perspective, propose a plan and explain a trade-off. Several answers can be defensible. This is a fictional human-partner conversation attached to the Loft/community circle, not a scored empathy test or a demand for personal disclosures.
 
-**5. Travelers' Archive exhibits** (strand 19).
-Keep spec 24's storm-history core: two neighbors remember the flood differently, so why? Then a traveling museum brings one crate at a time to the library: a scribe's palette, a Roman coin, a castle key. Each artifact asks what it can and can't tell us. The ancient worlds become optional exhibits to wander through, in any order, each with a reviewed source pack.
+**5. Travelers’ Archive exhibits** (strand 19).
+Keep [spec 24](specs/24-travelers-archive.md)’s planned historical-source focus, with its actual place/time still to be selected and reviewed. Two fictional storm accounts could introduce perspective, but must be labeled fiction rather than historical evidence. Later a museum crate (a scribe’s palette, coin or key) asks what an attributed artifact can and cannot tell us. Each exhibit needs its own source pack; no broad period is covered by one object.
 
-**6. Night-sky log** (Earth and space from "outside this first map").
-The weather log's twin. Once a night, with a grown-up's yes, tap the moon shape you saw. Over a month the almanac's sky page draws the phases. It costs little once the weather log exists, and it's honest because the child observes the real sky.
+**6. Night-sky log** (Earth/space).
+With an adult, optionally record a moon shape actually observed and the date/time context. Distinguish **not observed**, **obscured by cloud**, and an observed phase; do not substitute a predicted phase for an observation or treat no sighting as a new moon. Compare observations with a clearly labeled authored/predicted model. Optional outdoor observations need no location collection or nightly streak. This could reuse a future notebook, but the weather log is not built and “cheap once it exists” is not established.
 
-**7. Chance at the seed stall** (strand 7: chance and probability).
-A bag holds 5 sunflower seeds and 1 poppy seed. Before drawing, is a poppy likely, unlikely or impossible? Draw ten times, tally (connecting to the data desk), change the bag and compare. Seeds keep it well away from anything that looks like gambling.
+**7. Chance at the seed stall** (strand 7).
+A pictured bag contains five sunflower tokens and one poppy token. State the sampling model: a fair draw, **replace the token and mix before every repeat**. Predict, draw, tally and compare repeated small samples before changing the bag; a short run need not match the theoretical fraction. A later without-replacement case deliberately changes the conditions and updates the bag. These are simulated tokens and example data, not biological sampling or gambling; the first probability lesson is still missing.
 
 ## Off-screen or left out
 
-- **Handwriting and dictation** (strand 8): a grown-up can print a tracing or dictation sheet built locally on the device. The game points to it and records nothing.
-- **Human body:** the weakest fit with the setting. The gentlest doors are the builders' lunch at the café (food groups) and the mill's levers (muscles pulling bones). Skip a clinic.
-- **Mood check-ins or feelings logs:** none. They would be sensitive data about a child.
+- **Handwriting and dictation** (strand 8): optional adult-supported paper work, with no inference about transcription from a screen choice or narrated answer. A future local printable can support it; that tool is not built.
+- **Human body:** still needs reviewed content. A fictional builders’ lunch or model lever is a possible opening, not evidence that nutrition or body systems are covered.
+- **Mood check-ins or feelings logs:** not proposed. Keep fictional emotional vocabulary separate from sensitive records about a child.
 
-## Suggested next three
+## What to build first, and what stays next
 
-1. **Weather log data desk.** Spec 33 already builds the log, and graph construction is a Missing row the strand map names.
-2. **Minibeast meadow with Dot.** It's the strongest character fit, it extends Living Garden, and it starts the collect · classify · connect pattern that every knowledge domain can reuse.
-3. **Market Day at the café.** It fills most of strand 21 using a shell that already exists.
+The [three bounded spiral increments](curriculum-spirals.md#first-three-playable-increments) remain the scoped next work: **equal-group unknowns**, **a message for a reader**, and **plant conditions with dated observations**. This integration does not replace them with three new games or treat their review as complete.
 
-After those, the fossil bank and the tern are the largest new rooms.
+PR #16 supplies strong follow-on candidates:
+
+1. **Field Notebook data desk:** extend the plant/table slice to learner-made charts, or specify a standalone example-data slice if that is the chosen priority. It does not need the whole town/weather system.
+2. **Minibeast meadow:** the first bounded collect · classify · connect pack, contingent on reviewed specimens/key/life-cycle content.
+3. **Market Day:** begin with coin values and equivalent payments, then separately specify change and budgeting. This opens a genuinely new mathematical action in the café; it does not fill the whole money strand at once.
+
+The fossil bank, migration postcards and sorting robot are later candidates whose distinct evidence models/content justify further design. Select one based on a named missing step, available reviewed material and implementation effort. Hypothetical topic totals are no basis for choosing. None of these sketches adds a runtime graph edge, recommendation or learner record.
+
+## References and reuse
+
+This fold studies Claude’s PR #16 and the same sources checked for the strand map on 2026-10-20: pinned Marble `96a7933754af672e1bfdbf7ecb05c325860c6e0d`, refreshed Marble `be584a1f89a187b6e1dcbde98576c326e635ff27`, and Jane `LESSONS.md` at `385f644d6ffcd5f80f809888591d871a074b7855`. Topic descriptions/evidence inform gaps; Jane’s purposeful quests, small worked examples, matching/ordering and support formats inform proposed interactions. Its mastery, points, locks and learner-data system are not adopted. This is design-only reuse: no new upstream code, lesson prose, experiment assets or taxonomy data is incorporated. Preserve the [existing attribution and path-specific licences](upstream-opportunities.md#source-and-license-boundaries) when a later build adopts actual material. Science, history, currency and audio sources must be checked for each selected content pack before implementation.
