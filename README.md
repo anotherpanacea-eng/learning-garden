@@ -20,6 +20,8 @@ The home page also offers **Watch the storm pass**, the optional 46-second film 
 
 The introductory storm film opens automatically the first time each saved explorer visits this version. It starts silently, lets sound join at the current picture, and can be skipped at any time. Reduced-motion settings leave playback manual. The home-page “Watch the storm pass” link always remains available. With saving off or unavailable, the reminder lasts only for the current page session.
 
+The [strand-by-strand curriculum map](docs/strand-map.md) marks concepts, contrasts, game homes and revisits as Built, Planned or Missing, and identifies which additional game modes are needed.
+
 The [curriculum spiral plan](docs/curriculum-spirals.md) proposes the next conceptual connections across familiar games, with checked Jane/Marble references and explicit gaps. It is a plan, not additional live coverage.
 
 ## Story Loft

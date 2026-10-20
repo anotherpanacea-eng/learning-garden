@@ -2,6 +2,8 @@
 
 **Planning proposal, checked 2026-10-19.** No activities, curriculum mappings, learner records or suggestions change in this document. It builds on the [full atlas](learning-atlas.md), not a replacement 1,590-topic curriculum. The three increments below are candidates for independently reviewed builds, in priority order; all destinations stay open.
 
+The [strand-by-strand map](strand-map.md) expands this proposal into concepts, contrasts, homes and revisits, with Built/Planned/Missing labels and a game-needs assessment.
+
 A useful spiral revisits an idea while changing what the learner has to notice, represent or explain. More numbers, longer passages and new scenery can provide practice, but do not by themselves supply the missing conceptual step. We should sometimes keep the numbers or passage fixed and change the question, representation or audience.
 
 ## What Jane and Marble contribute

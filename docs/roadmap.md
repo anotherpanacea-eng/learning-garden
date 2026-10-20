@@ -23,6 +23,10 @@ The graph currently emphasizes mathematics. Expand playable experiences and thei
 
 Word Workshop phonics, Ecosystem expeditions and the paired-perspective Story Loft reading expansion below remain useful later increments. Word work needs reviewed pronunciations; the ecology link-out is separate from the new local Living Garden. Neither replaces a complete literacy or science curriculum.
 
+## Strand map and curriculum planning
+
+The [strand-by-strand map](strand-map.md) is the authoring index for concepts, useful contrasts, game homes and revisits. It labels exact built footholds, written plans (including outlines) and missing sequences across 23 strands. Its game-needs section distinguishes extending existing games, adding modes and opening new destinations. The linked atlas retains all source topics; this plan adds no runtime coverage or recommendations.
+
 ## Next curriculum planning pass
 
 [Curriculum spirals](curriculum-spirals.md) compares the current games with refreshed Jane/Marble sources, separates source prerequisites from our teaching bridges, and specifies three proposed slices: the same quantities with different unknowns (Café/Bramble), a message revised for a reader (Post Office/Loft), and plant conditions compared through dated observations (Living Garden/Workshop). These are planning proposals; no activities or learner suggestions change yet. Reviewed phonics, fractions/measurement and broader source comparison remain explicit follow-ups. The app’s pinned graph remains unchanged while an upstream pin refresh is considered separately.
