@@ -1,6 +1,6 @@
 # 35 · Bring a notebook to another address
 
-Status: implemented; independent specification and implementation reviews cleared after transaction, stale-registry and renderability findings were resolved.
+Status: implemented.
 
 The earlier Sites and Cloudflare addresses have browser-local progress. Their existing Grown-up notes → Download our notes exports the complete active explorer state, with optional report metadata (`title`, `exportedAt`, `note`, `explorer`, `recommendation`). Add a local file importer to the current Cloudflare game. The old addresses need no update or cross-origin access.
 
@@ -23,7 +23,3 @@ This is storage portability, not a new learning capability. It reuses existing r
 ## Verification and delivery
 
 Synthetic tests: historical report and raw state, representative café paused plate, English/French story, Bramble, Living Garden, words, support and unseen fields round-trip; corrupt/oversized/future/prototype/deep/invalid-root files; preview/cancel no writes; same source id/marker and repeated import isolation; state/recovery/registry read/write failures and retry; save-off/re-enable/reload; exact raw recovery; source and destination explorers unchanged. Browser: download synthetic old-compatible notes, choose file, preview, cancel and confirm, verify new explorer/notes/reload and recovery download; invalid file gives useful status. No real learner exports in tests, prompts, repository, PR or screenshots. Run full existing checks because initialization/storage are shared. Independent implementation review before public deployment. Publish only current Gmail-account Cloudflare game; leave Sites/earlier Cloudflare intact. Draft stacked PR; no merge implied.
-
-## Verification receipt
-
-86 synthetic transfer checks pass, covering exact recovery, representative paused destinations and support, invalid/unrenderable files, save-off, registry/write failures, stale tabs, uncertain commits and reload protection. Root browser verification covers local file selection, damaged-file rejection, preview/cancel/confirm, a distinct explorer marker, Word Garden state after reload, and a byte-identical downloaded original recovery file. No real learner exports were inspected. Physical iPad Safari is not claimed. All 37 shared-logic suites, story-pack validation and the atlas check pass. The integrated release also includes the independently reviewed PR #8 storm film at its exact `b969e53` content; root playback/pause/resume/ending/replay/back-link checks pass. No hosted CI or physical-device claim is made.

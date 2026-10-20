@@ -24,13 +24,13 @@ The [curriculum spiral plan](docs/curriculum-spirals.md) proposes the next conce
 
 ## Story Loft
 
-Make a pictured puppet show, optionally give each puppet original dialogue, perform one scene at a time and revisit an audience question. Shows begin with three scenes and can grow from one to twelve scenes. Pictures, Puppet words and Story order have separate task pages; longer shows remain optional. Dialogue stays local under the existing save settings and is included in notes downloads. There is no automatic grading or writing-level inference.
+[Make a little puppet show](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft): make a pictured puppet show, optionally give each puppet original dialogue, perform one scene at a time and revisit an audience question. Shows begin with three scenes and can grow from one to twelve scenes. Pictures, Puppet words and Story order have separate task pages; longer shows remain optional. Dialogue stays local under the existing save settings and is included in notes downloads. There is no automatic grading or writing-level inference.
 
-The show shelf keeps the latest twelve shows plus the draft. Strictly valid earlier three-scene saves adapt without changing their pictures, performance position or shelf; unsupported formats remain kept and exportable. See [growing stories and clear turns](docs/specs/37-growing-stories-and-clear-turns.md).
+The show shelf keeps the latest twelve shows plus the draft. Strictly valid earlier three-scene saves adapt without changing their pictures, performance position or shelf; unsupported formats remain kept and exportable. See [spec 36](docs/specs/36-story-loft-puppet-theatre.md) and [growing stories and clear turns](docs/specs/37-growing-stories-and-clear-turns.md).
 
 ## Word Garden
 
-Open [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#words): combine ten word plants and six cuttings, grow 23 authored words, and keep other combinations as discoveries. Seven extra real words explain meanings and spelling changes; unauthored pairs remain separated letter experiments, with no invented pronunciation or false rejection. Eight open discussion cards include new words and a make-your-own invitation. This is word-part exploration with any amount of reading help, not a decoding or spelling assessment. Notebook and current choices stay with the active explorer. [Spec 34](docs/specs/34-word-garden.md).
+Open [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#words): combine ten word plants and six cuttings, grow 23 authored words, and keep other combinations as discoveries. Eight extra real words explain meanings and spelling changes; unauthored pairs remain separated letter experiments, with no invented pronunciation or false rejection. Eight open discussion cards include new words and a make-your-own invitation. This is word-part exploration with any amount of reading help, not a decoding or spelling assessment. Notebook and current choices stay with the active explorer. [Spec 34](docs/specs/34-word-garden.md).
 
 The complete game, including Word Garden, is published on Cloudflare Static Assets. The earlier Sites address retains its earlier release. Browser-local notebooks belong to their address: existing progress stays at the old address; it is not automatically copied to Cloudflare. Use Grown-up notes → Bring progress from another site to import the old notes JSON file locally as a separate explorer; existing explorers are preserved. Move one explorer at a time and keep the original file until you have checked the import.
 
@@ -50,6 +50,7 @@ With Node.js installed:
 
 ```sh
 node test/loft-checks.mjs
+node test/loft-growing-checks.mjs
 node test/progress-transfer-checks.mjs
 node test/word-garden-checks.mjs
 node test/core-checks.mjs
@@ -64,6 +65,7 @@ node test/number-garden-story-checks.mjs
 node test/living-garden-checks.mjs
 node test/living-spiral-checks.mjs
 node test/living-adaptive-checks.mjs
+node test/garden-turn-checks.mjs
 node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs
@@ -71,6 +73,7 @@ node test/science-checks.mjs
 node test/workshop-checks.mjs
 node test/post-office-checks.mjs
 node test/post-office-ui-checks.mjs
+node test/post-pagination-checks.mjs
 node test/post-rival-checks.mjs
 node test/post-rival-adaptive-checks.mjs
 node test/post-rival-adaptive-ui-checks.mjs
