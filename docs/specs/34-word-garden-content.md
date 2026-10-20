@@ -15,7 +15,7 @@ Companion to [spec 34](34-word-garden.md). Child-facing text for the build to us
 | --- | --- |
 | *un-* | Goes at the front. Means **undo** or **not**. |
 | *re-* | Goes at the front. Means **again**. |
-| *-er* | Goes at the end. Means **a person who** does it. |
+| *-er* | Goes at the end of an action word. Means **a person who** does it. Some words have a different *-er*. |
 | *-ful* | Goes at the end. Means **full of**. |
 | *-less* | Goes at the end. Means **without**. |
 | *-ness* | Goes at the end. Turns a describing word into a **thing you can have**. |
@@ -52,36 +52,36 @@ Each grown word blooms with its scene sentence and a one-line meaning. Scenes ar
 
 *unhelpful* grows in two steps: graft *-ful* onto **help**, then *un-* onto the new **helpful** bloom. The bloom card says: "Two cuttings! *un-* + *help* + *-ful*."
 
-## Cuttings that don't take
+## Other combinations: real words and words to wonder about
 
-When a graft makes no word in the table, the cutting wilts gently and goes back to the basket. Dot explains, using the part's meaning. Use the specific line when there is one, otherwise the general line for that part.
+The bloom table is a small authored collection. It is not a list of every real word, so a combination outside it is never called wrong or "not a word". It gets one of two treatments, matching the built Word Garden in #7.
 
-**General lines by part:**
+**Another real word.** For these pairs, show the separated parts, the real spelling, a meaning and a scene, under the label **Another real word**. They go in the notebook as discoveries, just as welcome as blooms.
 
-| Cutting | Line |
-| --- | --- |
-| *un-* | "*un-* means undo or not. Can you un-___? Dot can't picture it." |
-| *re-* | "*re-* means again. It doesn't make a word we know here. Try another plant." |
-| *-er* | "*-er* means a person who does it. That one doesn't make a word we know." |
-| *-ful* | "*-ful* means full of. Can something be full of ___? Not in this garden." |
-| *-less* | "*-less* means without. That doesn't make a word we know here." |
-| *-ness* | "*-ness* goes on describing words, like kind. ___ isn't a describing word." |
+| Try | Word | Dot's note | Scene |
+| --- | --- | --- | --- |
+| un + read | unread | "This one describes something. An unread letter is one nobody has read yet. Here *un-* means not, instead of undo." | An unread letter waits on the library desk. |
+| un + build | unbuild | "A less common real word. Most people say *take apart*." | The crew unbuilds the crooked frame and saves the good planks. |
+| un + paint | unpaint | "A real word, though you won't hear it often. It means taking paint off, which is very different from painting again." | Pip wishes he could unpaint POST OFICE. The painter shows him how, with a scraper. |
+| kind + er | kinder | "You found a different *-er*! This one compares: kinder means more kind. It doesn't mean a person." | A kinder word helps the worried miller feel better. |
+| care + er | carer | "Drop the *e* in *care* before adding *-er*. A carer looks after someone who needs support." | A carer brings the old ferryman a warm blanket. |
+| tie + er | tier | "Drop the *e* in *tie* before adding *-er*. It's a less common word for someone who ties, and the same spelling also means a layer, like on a cake." | The rope tier makes neat knots for the bridge. |
+| help + less | helpless | "It means not able to manage without help. Everybody feels that way sometimes, and it only describes a moment." | Pip feels helpless with the heavy box until Dot takes the other end. |
 
-**Specific lines (funnier, for likely tries):**
+Spell the joined words as shown (*carer*, *tier*), never as the raw join (*care-er*, *tieer*), and say why the *e* drops. The build has no general spelling rules beyond these.
 
-| Try | Line |
-| --- | --- |
-| un + read | "You can't un-read something. Dot has tried. She still remembers the sign." |
-| un + build | "Unbuilding is just knocking down. We've had enough of that this year." |
-| un + paint | "Un-painting would be lovely for the post office sign, but it isn't a word." |
-| un + play | "*Unplay* isn't a word. Pip says it means 'tidying up,' and Dot says nice try." |
-| re + kind | "*Rekind* isn't a word, but being kind again is a great idea." |
-| pack + ful | "A *packful*? Dot likes it, but it isn't a word in our garden." |
-| care + er | "*Carer* is a real word in some places! It isn't one of our garden words yet." |
-| kind + er | "*Kinder* is a real word, but it means 'more kind,' not 'a person who is kind.' That's a different *-er*, so it grows in another garden." |
-| help + less | "*Helpless* is a real word, but it's a heavy one, so we're saving it for later." |
+**A word to wonder about.** Every other pair is a **Letter experiment**: show the parts side by side with their labels, without a joined spelling, and offer:
 
-The *kinder* and *helpless* lines are deliberate: real words that the garden leaves out, explained honestly instead of called wrong.
+> What could these parts mean together? You might discover an unusual word, or invent one for a story. Try a meaning in a sentence together.
+
+Optional extra lines from Dot or Pip, chosen at random, which make no claim about whether the word exists:
+
+- Pip: "I'm going to use this one in a story about a very confused duck."
+- Dot: "Say it out loud. Does it sound like something you could do, or something you could be?"
+- Pip: "If it's not in a dictionary yet, it's mine."
+- Dot: "Try it in a sentence. Sentences are good at telling us what a word wants to mean."
+
+Read aloud only the invitation and these lines, never the experimental join.
 
 ## Wondering with Dot
 
@@ -94,7 +94,7 @@ After three new words, and again after every three more, Dot asks one question. 
 5. **(two cuttings)** "**Unhelpful** has two cuttings. What does it mean?" · Not helpful. · Very helpful. · Helping again.
 6. **(new word)** "Here's a word that isn't in our garden: **unhappy**. Using what you know about *un-*, what might it mean?" · Not happy. · Happy again. · Full of happy.
 7. **(new word)** "Another outsider: **thankful**. Which cutting is in it, and what do you think it means?" · *-ful*: full of thanks. · *re-*: thanking again. · *-er*: a person who thanks.
-8. **(make your own)** "Pick a cutting and a plant that we *haven't* tried together. Do you think it makes a word? Say it out loud and see how it sounds." *(Open task: **We tried it** / **Not today**. No answer is checked.)*
+8. **(make your own)** "Pick a cutting and a plant that we *haven't* tried together. What could they mean? Say it in a sentence and see how it sounds." *(Open task: **We tried it** / **Not today**. No answer is checked.)*
 
 Questions 6 and 7 are the transfer questions: the child applies a part's meaning to a word they have not grown.
 
