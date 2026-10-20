@@ -222,6 +222,7 @@ function cancelProgressImport(){importRead++;progressImport={candidate:null,mess
 function useExplorer(next,destination='#home'){
  if(!next)return;cancelProgressImport();stopSpeech();state=next;initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
+ if(destination!=='#notes')welcomeFilm();
 }
 function freshExplorerChoice(){for(const avatar of ['sky','fern','reed'])for(const color of EXPLORER_COLORS)for(const symbol of EXPLORER_SYMBOLS)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
 function chooseExplorer(create=false){cancelProgressImport();if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
@@ -407,4 +408,4 @@ function welcomeFilm(){
  dialog.showModal();
  state.garden.welcomeFilmSeen=true;save();
 }
-welcomeFilm();
+if(!choosingExplorer)welcomeFilm();
