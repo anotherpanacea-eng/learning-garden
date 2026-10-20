@@ -26,7 +26,8 @@ export function noteQuestion(task){
 }
 export function mathQuestion(task){
  const {packs:p,bites:b}=task,d=task.teaching.depths.math,total=p*b;
- return {depth:d,answer:d===1?total:d===2?p:(p-1)*b,prompt:d===1?`Today’s delivery has ${p} equal packs, with ${b} bites in each. How many bites altogether?`:d===2?`Today’s delivery has ${total} bites. Each sealed pack holds ${b} bites. How many equal packs are there?`:`Today’s delivery has ${p} packs of ${b} bites. Tomorrow we plan one fewer pack. How many bites would tomorrow’s delivery have?`,explanation:d===1?`${p} × ${b} = ${total} bites.`:d===2?`${total} ÷ ${b} = ${p} packs. ${p} × ${b} = ${total} bites.`:`Tomorrow: ${p} − 1 = ${p-1} packs. ${p-1} × ${b} = ${(p-1)*b} bites. Today we still carry all ${total} bites.`};
+ const n=(k,word)=>`${k} ${word}${k===1?'':'s'}`;
+ return {depth:d,answer:d===1?total:d===2?p:(p-1)*b,prompt:d===1?`Today’s delivery has ${n(p,'equal pack')}, with ${n(b,'bite')} in each. How many bites altogether?`:d===2?`Today’s delivery has ${n(total,'bite')}. Each sealed pack holds ${n(b,'bite')}. How many equal packs are there?`:`Today’s delivery has ${n(p,'pack')} of ${n(b,'bite')}. Tomorrow we plan one fewer pack. How many bites would tomorrow’s delivery have?`,explanation:d===1?`${p} × ${b} = ${n(total,'bite')}.`:d===2?`${total} ÷ ${b} = ${n(p,'pack')}. ${p} × ${b} = ${n(total,'bite')}.`:`Tomorrow: ${p} − 1 = ${n(p-1,'pack')}. ${p-1} × ${b} = ${n((p-1)*b,'bite')}. Today we still carry all ${n(total,'bite')}.`};
 }
 export const scienceReady=r=>r.inspected.includes(spiralTarget(r.task))&&r.inspected.length>=2&&(r.science.matched||r.science.help)&&(r.task.teaching.depths.science!==3||r.science.changedShown);
 export const readingReady=r=>scienceReady(r)&&(r.reading.matched||r.reading.help);
