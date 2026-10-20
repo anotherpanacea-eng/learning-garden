@@ -12,11 +12,11 @@ import {frenchLessons} from '../dist/french-content.mjs';
 let checks=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');
 const controller=app.slice(app.indexOf('// Films play once per explorer:'));
-function fixture(state=freshState()){
- ensureGarden(state);state.garden.welcomeFilmSeen=true;
+function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
+ ensureGarden(state);state.garden.welcomeFilmSeen=welcomeSeen;
  const listeners=new Set(),dialogs=[],exposures=[];let focused=0,saves=0,stopped=0;
  const focus={isConnected:true,focus(){focused++;}},main={focus(){focused++;}};
- const context={state,choosingExplorer:false,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
+ const context={state,choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
  currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,
  save(){saves++;},stopSpeech(){stopped++;},esc:x=>String(x),exposeStoryFacts:x=>exposures.push(x),
  document:{activeElement:focus,querySelector:()=>dialogs.find(d=>d.open)||null,body:{append:d=>dialogs.push(d)},createElement(){
@@ -26,6 +26,11 @@ function fixture(state=freshState()){
  }},window:{addEventListener:(k,f)=>listeners.add(f),removeEventListener:(k,f)=>listeners.delete(f)}};
  vm.createContext(context);vm.runInContext(controller,context);
  return {state,context,dialogs,listeners,exposures,read:code=>vm.runInContext(code,context),get saves(){return saves;},get focused(){return focused;},get stopped(){return stopped;},message(data,origin=context.location.origin,source=dialogs.at(-1).frame.contentWindow){for(const f of [...listeners])f({data,origin,source});}};
+}
+{
+ const picker=fixture(freshState(),{choosing:true,welcomeSeen:false});eq(picker.dialogs.length,0,'chooser does not consume another explorer’s welcome');eq(picker.state.garden.welcomeFilmSeen,false,'welcome remains available');
+ const active=fixture(freshState(),{welcomeSeen:false});eq(active.dialogs.length,1,'active explorer gets first-visit film');active.dialogs[0].skip.onclick();
+ eq(app.includes("if(destination!=='#notes')playFilm('welcome');"),true,'switching to an explorer offers their own welcome without interrupting notes imports');
 }
 // Completed real routes, including legacy English/French, are eligible only at their ending.
 for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall',variant:1}],['french',{destination:'bookstall',variant:1}],...frenchLessons.map(l=>[l.id,undefined])]){

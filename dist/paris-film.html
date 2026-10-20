@@ -34,7 +34,7 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
  <button id="start" type="button"><span class="circle"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#183f39"/></svg></span><span class="label">Play with sound</span></button>
 </div>
 <div class="bar"><button id="toggle" type="button" disabled>Pause</button><div class="track" aria-hidden="true"><i id="prog"></i></div><span class="time" id="time">0:00 / 0:32</span></div>
-<button id="sound" type="button" hidden aria-pressed="false">Turn sound on</button>
+<button id="sound" type="button" hidden>Turn sound on</button>
 <a class="back" href="./#home">Back to the garden</a>
 <script>
 // After the Storm: the Paris postcard film. Every shape and sound below is made in code.
@@ -521,7 +521,7 @@ const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 // Picture time never depends on creating, rendering or resuming an audio context.
 const now=()=>playing?(performance.now()-clock0)/1000:heldAt;
 function stopAudio(){audioRequest++;if(audioSource){try{audioSource.stop();audioSource.disconnect();}catch{}audioSource=null;}}
-function updateSound(){soundButton.textContent=soundEnabled?'Turn sound off':'Turn sound on';soundButton.setAttribute('aria-pressed',String(soundEnabled));}
+function updateSound(){soundButton.textContent=soundEnabled?'Turn sound off':'Turn sound on';}
 function scoreBuffer(){
  if(!scorePromise){
   const Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
