@@ -5,7 +5,9 @@ import {freshState} from '../dist/core.mjs';
 import {ensureGarden,startVisit,currentVisit,entranceById,finishStoryNode} from '../dist/garden-core.mjs';
 import {storyEnding,gardenHome} from '../dist/garden-ui.mjs';
 import {cafeSupper} from '../dist/cafe-core.mjs';
-import {postOfficeView} from '../dist/post-office-core.mjs';
+import {postOfficeView,currentPostOffice,startPostOffice} from '../dist/post-office-core.mjs';
+import {deliveries} from '../dist/post-office-content.mjs';
+import {startAdaptiveRival,setRivalInput,submitRival,continueRival} from '../dist/post-rival.mjs';
 import {frenchLessons} from '../dist/french-content.mjs';
 let checks=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');
@@ -15,7 +17,7 @@ function fixture(state=freshState()){
  const listeners=new Set(),dialogs=[],exposures=[];let focused=0,saves=0,stopped=0;
  const focus={isConnected:true,focus(){focused++;}},main={focus(){focused++;}};
  const context={state,choosingExplorer:false,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
- currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice:s=>s.syntheticPost||null,
+ currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,
  save(){saves++;},stopSpeech(){stopped++;},esc:x=>String(x),exposeStoryFacts:x=>exposures.push(x),
  document:{activeElement:focus,querySelector:()=>dialogs.find(d=>d.open)||null,body:{append:d=>dialogs.push(d)},createElement(){
   const frame={contentWindow:{},remove(){this.removed=true;}},skip={},events={};
@@ -38,8 +40,10 @@ for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall'
  const f=fixture();startVisit(f.state,'paris');f.context.location.hash='#storm/play';eq(f.read('endingFilm()'),null,'unfinished visit');
  f.context.location.hash='#cafe';f.state.cafe={served:6,supper:{round:1,startedAtServed:0}};eq(f.read('endingFilm()'),'cafe','first supper');
  f.state.cafe.served=5;eq(f.read('endingFilm()'),null,'incomplete supper');f.state.cafe.served=12;f.state.cafe.supper={round:2,startedAtServed:6};eq(f.read('endingFilm()'),null,'new game plus');
- f.context.location.hash='#post';for(const phase of ['resolved','continued']){f.state.syntheticPost={postPage:'bramble',rival:{phase}};eq(f.read('endingFilm()'),'bramble','gate ending');}
- f.state.syntheticPost.postPage='plan';eq(f.read('endingFilm()'),null,'route planning is not gate ending');f.state.syntheticPost.postPage='bramble';f.state.syntheticPost.rival.phase='challenge';eq(f.read('endingFilm()'),null,'unfinished challenge');
+ f.context.location.hash='#post';const v=startPostOffice(f.state,deliveries[0].id);startAdaptiveRival(f.state);v.postPage='bramble';
+ eq(f.read('endingFilm()'),null,'unfinished challenge');setRivalInput(f.state,String(v.rival.task.answer));submitRival(f.state);
+ eq(f.read('endingFilm()'),'bramble','resolved gate ending');f.context.location.hash='#post/choose';eq(f.read('endingFilm()'),null,'sorting hub is not a gate ending');f.context.location.hash='#post';continueRival(f.state);v.postPage='bramble';eq(f.read('endingFilm()'),'bramble','continued gate ending');
+ v.postPage='plan';eq(f.read('endingFilm()'),null,'route planning is not gate ending');v.postPage='bramble';v.closed=true;eq(f.read('endingFilm()'),null,'closed work is not a playable gate ending');
 }
 {
  const f=fixture();f.state.garden.filmsSeen=[];f.state.syntheticDraft={plate:['pretend'],dialogue:'Synthetic puppet line'};
