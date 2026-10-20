@@ -6,7 +6,7 @@ import {freshState} from '../dist/core.mjs';
 import {ExplorerStore,SAVE_KEY} from '../dist/explorer-storage.mjs';
 let n=0;const check=(v,m)=>{assert.ok(v,m);n++;},equal=(a,b,m)=>{assert.deepEqual(a,b,m);n++;};
 const grow=(s,b,p)=>{check(chooseBase(s,b));check(choosePart(s,p));check(tryWord(s));};
-equal(blooms.length,23);equal(extras.length,7);equal(questions.length,8);
+equal(blooms.length,23);equal(extras.length,8);equal(questions.length,8);
 equal(new Set(blooms.map(b=>b.id)).size,23);
 for(const base of [...roots,'helpful'])for(const p of parts){
  const s=freshState(),before=JSON.stringify(s);const html=wordGardenPage(s);check(html.includes('Word Garden'));equal(JSON.stringify(s),before,'render does not create state');
@@ -22,7 +22,7 @@ for(const base of [...roots,'helpful'])for(const p of parts){
 }
 {
  const s=freshState();check(!addAnotherPart(s));grow(s,'help','ful');check(addAnotherPart(s));equal(s.words.draft.base,'helpful');equal(s.words.draft.result,'help:ful');check(tryWord(s));equal(s.words.grown,['helpful','unhelpful']);check(wordGardenPage(s).includes('un- + helpful → unhelpful'));
- equal(resultFor('care:er').word,'carer');equal(resultFor('tie:er').word,'tier');check(resultFor('tie:er').note.includes('final e'));
+ equal(resultFor('care:er').word,'carer');equal(resultFor('tie:er').kind,'wonder','tier is spoken as teer, so tie+er stays a letter experiment');equal(resultFor('lock:er').word,'locker');equal(resultFor('helpful:ness').word,'helpfulness');
  equal(resultFor('paint:un').kind,'real');equal(resultFor('paint:un').word,'unpaint');equal(resultFor('read:un').word,'unread');
 }
 {
