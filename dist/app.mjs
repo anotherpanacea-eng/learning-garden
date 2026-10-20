@@ -211,7 +211,7 @@ function render(){
   if(!choosingExplorer){const context={numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
   if(!choosingExplorer&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
   main.innerHTML=(explorerStore.warning?`<p class="storage-warning" role="status">${esc(explorerStore.warning)}</p>`:!storageOK?'<p class="storage-warning" role="status">This browser cannot save progress right now. You can still explore; download notes before leaving.</p>':'')+(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;bind();
-  const film=endingFilm();if(film)queueMicrotask(()=>playFilm(film));
+  const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
 }
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
 function focusElement(selector){const element=$(selector);if(element){element.tabIndex=-1;element.focus();}}
@@ -275,6 +275,7 @@ function bindBroadExtras(){
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
 function bind(){
+ document.querySelectorAll('[data-film-replay]').forEach(button=>button.addEventListener('click',()=>playFilm(button.dataset.filmReplay,{replay:true})));
  $('#dismiss-draft-notice')?.addEventListener('click',()=>{state.broad.draftNotice=false;save();render();main.focus();});
  bindExplorers();bindBroadExtras();bindPlantings(state,{save,render,navigate,focus:focusElement});
  bindStory();
@@ -400,28 +401,34 @@ const FILMS={
  welcome:{src:'./storm-intro.html',title:'After the Storm introductory film',heading:'Before we begin…',skip:'Skip to the garden',note:'A little story about how our garden begins. Sound is optional. You can replay it from the home page.'},
  paris:{src:'./paris-film.html',title:'A Postcard Home: the Paris postcard film',heading:'A postcard home',skip:'Skip the film',note:'Pip and Dot fly the Paris postcard home. Sound is optional. You can watch it again from the story ending.'},
  cafe:{src:'./cafe-film.html',title:'Welcome Back, Neighbors: the café supper film',heading:'The welcome-back dinner',skip:'Skip the film',note:'Six tables, six lanterns. Sound is optional. You can watch it again from the café goal.'},
- bramble:{src:'./bramble-film.html',title:'Through the Ribbon Gate: Bramble’s film',heading:'Through the ribbon gate',skip:'Skip the film',note:'Bramble’s gate is untangled. Sound is optional. You can watch it again from the ribbon gate.'}
+ bramble:{src:'./bramble-film.html',title:'Through the Ribbon Gate: Bramble’s film',heading:'Through the ribbon gate',skip:'Skip the film',note:'A story example: Bramble ties three bundles of four ribbons. This is a different puzzle from yours. Your own work stays in your notebook. Sound is optional.'}
 };
 function filmSeen(id){return id==='welcome'?state.garden.welcomeFilmSeen===true:state.garden.filmsSeen?.[id]===true;}
 function markFilmSeen(id){if(id==='welcome')state.garden.welcomeFilmSeen=true;else{if(!state.garden.filmsSeen||typeof state.garden.filmsSeen!=='object'||Array.isArray(state.garden.filmsSeen))state.garden.filmsSeen={};state.garden.filmsSeen[id]=true;}save();}
-function playFilm(id){
- const f=FILMS[id];if(!f||filmSeen(id)||document.querySelector('dialog[open]'))return;
+function playFilm(id,{replay=false}={}){
+ if(!Object.hasOwn(FILMS,id)||(!replay&&filmSeen(id))||document.querySelector('dialog[open]'))return false;
+ const f=FILMS[id],returnFocus=document.activeElement;stopSpeech();
  const dialog=document.createElement('dialog');dialog.className='welcome-film';dialog.setAttribute('aria-labelledby','welcome-film-title');
  dialog.innerHTML=`<div class="welcome-film-heading"><h2 id="welcome-film-title">${esc(f.heading)}</h2><button type="button" class="secondary" data-film-skip autofocus>${esc(f.skip)}</button></div><iframe title="${esc(f.title)}" src="${f.src}?autoplay=1&amp;embedded=1"></iframe><p class="tiny">${esc(f.note)}</p>`;
  document.body.append(dialog);
  const frame=dialog.querySelector('iframe');
- const finished=e=>{if(e.origin===location.origin&&e.source===frame.contentWindow&&e.data==='garden-film-finished')dialog.close();};
+ let exampleOffered=false;
+ const finished=e=>{
+  if(e.origin!==location.origin||e.source!==frame.contentWindow)return;
+  if(e.data==='garden-film-finished')dialog.close();
+  else if(id==='bramble'&&e.data==='garden-film-example'&&!exampleOffered){exampleOffered=true;exposeStoryFacts({facts:[[3,4]]});save();}
+ };
  dialog.querySelector('[data-film-skip]').onclick=()=>dialog.close();
- dialog.addEventListener('close',()=>{window.removeEventListener('message',finished);frame.remove();dialog.remove();main.focus();},{once:true});
+ dialog.addEventListener('close',()=>{window.removeEventListener('message',finished);frame.remove();dialog.remove();if(returnFocus?.isConnected&&typeof returnFocus.focus==='function')returnFocus.focus();else main.focus();},{once:true});
  window.addEventListener('message',finished);
  dialog.showModal();
- markFilmSeen(id);
+ markFilmSeen(id);return true;
 }
 // The story endings that earn a film: the Paris errand, the first café supper, and Bramble's gate.
 function endingFilm(){
  if(choosingExplorer)return null;
- const [root]=(location.hash||'#home').slice(1).split('/');
- if(root==='storm'){const v=currentVisit(state);if(v?.finished&&v.paris)return 'paris';}
+ const [root,slug]=(location.hash||'#home').slice(1).split('/');
+ if(root==='storm'&&['end','play'].includes(slug)){const v=currentVisit(state);if(v?.finished&&(v.entrance==='paris'||entranceById(v.entrance)?.language==='fr'))return 'paris';}
  if(root==='cafe'){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
  if(root==='post'){const v=currentPostOffice(state);if(v&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
  return null;

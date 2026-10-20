@@ -20,6 +20,12 @@ for(const [file,D,POSTER] of FILMS){
   return {elements,frames,sources,messages,drawn,contexts,events,back,resolve:()=>renderResolve(score),frame(ms){time=ms;const batch=[...frames.values()];frames.clear();batch.forEach(f=>f());},read:code=>vm.runInContext(code,context)};
  }
  const settle=async()=>{for(let i=0;i<5;i++)await Promise.resolve();};
+ if(file==='bramble-film.html'){
+  const shown=fixture();shown.frame(10500);eq(shown.messages.filter(m=>m[0]==='garden-film-example').length,1,'fully visible 3×4 example records exposure');shown.frame(11000);eq(shown.messages.length,1,'example reported once');
+  const late=fixture();late.frame(12700);eq(late.messages.length,0,'late first frame cannot report faded groups');
+  const skipped=fixture();skipped.frame(14000);eq(skipped.messages.length,0,'jump past example stays neutral');
+ }
+
  {
   const f=fixture();eq(f.frames.size,1);eq(f.elements.start.hidden,true);f.frame(10000);eq(f.drawn.at(-1),10);
   f.elements.sound.click();eq(f.read('now()'),10,'turning on sound does not reset picture');eq(f.frames.size,1,'sound adds no animation chain');

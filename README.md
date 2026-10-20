@@ -90,6 +90,7 @@ node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
 node test/french-exploration-checks.mjs
 node test/storm-film-checks.mjs
+node test/ending-film-checks.mjs
 node scripts/check-story-packs.mjs
 ```
 

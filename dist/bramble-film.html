@@ -482,7 +482,7 @@ function wav(buf){const ch=buf.numberOfChannels,len=buf.length*ch*2+44,ab=new Ar
 // ---------- playback ----------
 const startBtn=document.getElementById('start'),toggle=document.getElementById('toggle'),prog=document.getElementById('prog'),timeEl=document.getElementById('time'),soundButton=document.getElementById('sound');
 let ac=null,playing=false,clock0=0,heldAt=0,frameRequest=null;
-let soundEnabled=false,audioSource=null,audioRequest=0,scorePromise=null;
+let soundEnabled=false,audioSource=null,audioRequest=0,scorePromise=null,exampleOffered=false;
 const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 // Picture time never depends on creating, rendering or resuming an audio context.
 const now=()=>playing?(performance.now()-clock0)/1000:heldAt;
@@ -520,12 +520,13 @@ function audioUnavailable(request){
 function tick(){
  frameRequest=null;if(!playing)return;let t=now();
  if(t>=D){t=D;heldAt=D;playing=false;stopAudio();toggle.textContent='Replay';if(embedded)parent.postMessage('garden-film-finished',location.origin);}
- draw(Math.max(0,t));prog.style.width=(clamp(t/D)*100)+'%';timeEl.textContent=`${fmt(Math.max(0,t))} / ${fmt(D)}`;
+ draw(Math.max(0,t));if(embedded&&!exampleOffered&&t>=10.1&&t<=11.4){exampleOffered=true;parent.postMessage('garden-film-example',location.origin);}
+ prog.style.width=(clamp(t/D)*100)+'%';timeEl.textContent=`${fmt(Math.max(0,t))} / ${fmt(D)}`;
  if(playing)frameRequest=requestAnimationFrame(tick);
 }
 function start(sound=true){
  if(frameRequest!==null)cancelAnimationFrame(frameRequest);stopAudio();
- heldAt=0;clock0=performance.now();playing=true;soundEnabled=sound;updateSound();
+ heldAt=0;exampleOffered=false;clock0=performance.now();playing=true;soundEnabled=sound;updateSound();
  startBtn.hidden=true;soundButton.hidden=false;toggle.disabled=false;toggle.textContent='Pause';
  if(soundEnabled)joinAudio();frameRequest=requestAnimationFrame(tick);
 }
