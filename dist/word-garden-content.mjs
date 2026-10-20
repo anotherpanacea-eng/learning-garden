@@ -9,7 +9,7 @@ export const parts=[
  {id:'ness',label:'-ness',position:'end',meaning:'At the end of a describing word: the quality or state it describes.'}
 ];
 export const blooms=[
- ['pack','un','unpack','take things out of a pack','Pip unpacks the basket. The tools are dry, and so is his sandwich.','basket'],
+ ['pack','un','unpack','take things out of a bag, box or basket','Pip unpacks the basket. The tools are dry, and so is his sandwich.','basket'],
  ['pack','re','repack','pack again','Dot repacks the basket with the hammer beside the sandwich.','basket'],
  ['pack','er','packer','a person who packs','The careful packer puts the cups in a snug box for the café.','basket'],
  ['tie','un','untie','undo a knot','Pip unties the rope so the bridge plank can be moved.','bridge'],
@@ -36,10 +36,11 @@ export const blooms=[
 export const extras=[
  {base:'read',part:'un',word:'unread',meaning:'not yet read',note:'This real word describes something: an unread letter is a letter nobody has read yet. Here un- means not, rather than undo.',scene:'An unread letter waits on the library desk.',art:'library'},
  {base:'build',part:'un',word:'unbuild',meaning:'take apart something that was built',note:'This is a less common real word. We might usually say take apart.',scene:'The crew can unbuild the crooked frame and use its pieces again.',art:'bridge'},
- {base:'paint',part:'un',word:'unpaint',meaning:'remove paint from something',note:'A less common real word! Removing paint is different from painting again.',scene:'The crew unpaint the old board before making a fresh sign.',art:'sign'},
+ {base:'paint',part:'un',word:'unpaint',meaning:'remove paint from something',note:'A less common real word! Removing paint is different from painting again.',scene:'The crew unpaints the old board before making a fresh sign.',art:'sign'},
  {base:'kind',part:'er',word:'kinder',meaning:'more kind',note:'You found another job for -er: comparing. This -er does not mean a person who does something.',scene:'A kinder reply helps the worried neighbor feel welcome.',art:'tea'},
  {base:'care',part:'er',word:'carer',meaning:'a person who cares for someone who needs support',note:'Drop the final e of care before adding -er. This real word is especially common in British English. Caregiver is another word you may know.',scene:'A carer brings a warm blanket to a neighbor.',art:'tea'},
- {base:'tie',part:'er',word:'tier',meaning:'a person or thing that ties',note:'Drop the final e of tie before adding -er. This less common word names someone who ties. The same spelling also has another meaning: a layer or level.',scene:'The rope tier ties neat knots for the bridge.',art:'bridge'},
+ {base:'lock',part:'er',word:'locker',meaning:'a small cupboard or box that can be locked',note:'This -er names a thing, rather than a person who does the action.',scene:'The builder keeps her tools in a locker beside the bridge.',art:'bridge'},
+ {base:'helpful',part:'ness',word:'helpfulness',meaning:'the quality of being helpful',note:'Three parts grew this word: help + -ful makes helpful, then -ness makes helpfulness.',scene:'Everyone thanks the duck for her helpfulness at the bridge.',art:'bridge'},
  {base:'help',part:'less',word:'helpless',meaning:'unable to do something without help',note:'Needing help is ordinary. A word can describe one situation, rather than everything about a person.',scene:'Pip feels helpless with the heavy box until Dot offers to carry one end.',art:'basket'}
 ];
 export const discoveryInvitation="What could these parts mean together? You might discover an unusual word, or invent one for a story. Try a meaning in a sentence together.";

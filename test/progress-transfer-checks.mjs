@@ -11,6 +11,7 @@ import {nextGuest,adjustBite} from '../dist/cafe-core.mjs';
 import {chooseBase,choosePart,tryWord} from '../dist/word-garden-core.mjs';
 import {ingredients} from '../dist/cafe-content.mjs';
 import {progressTransferPanel} from '../dist/progress-transfer-ui.mjs';
+import {storyHub} from '../dist/garden-ui.mjs';
 let checks=0;const check=(x,m)=>{assert.ok(x,m);checks++;},equal=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 class Storage{
  constructor(){this.data=new Map();this.fail=()=>false;this.writes=[];}
@@ -92,4 +93,8 @@ for(const phase of ['recovery','state','registry']){
  equal(disk.data.get(key('explorer-1')),before.get(key('explorer-1')),'existing progress file never changed');
 }
 for(const label of [{toString:null},{unexpected:'object'}])check(!prepareProgressImport(JSON.stringify({...freshState(),practice:[{questionId:'synthetic',skill:'facts',attempts:[1],status:'answered',label}]})).ok,'invalid original task text rejected before commit');
+{
+ const hostile=structuredClone(original);hostile.garden.visits[0].id='<img src=x onerror=alert(1)>"';
+ const r=prepareProgressImport(JSON.stringify(hostile));check(r.ok,'hostile visit id still imports');check(!storyHub(r.state).includes('<img'),'imported visit id is escaped in the story hub');
+}
 console.log(`${checks} progress transfer checks passed.`);
