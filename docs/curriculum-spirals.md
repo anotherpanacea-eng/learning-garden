@@ -72,7 +72,9 @@ Increment 1 is implemented as an optional bench beside the existing games; the n
 
 **Candidate scoped references:** `mt_LpSuPgL31x`, `mt_iNdrM2-oJf`, `mt_GDG9_SZmsO`, `mt_xZvDCYA5Ae`; reuse existing array/repeated-addition references only where those representations are actually used. Do not add full coverage declarations. Bakery fractions are a later contrast once the whole/unit model is authored.
 
-### 2. A message that helps someone act
+### 2. A message that helps someone act — built slice
+
+[Spec 39](specs/39-message-reader-spiral.md) implements three original storm-recovery notes at `#post/messages` and `#loft/messages`: which basket, which destination and which action. Two useful clear phrasings and a plausible different-purpose alternative accompany each original. Manual before/after playback, exact optional original wording for a human reader, and a separate puppet reason/reply rehearsal preserve ordinary deliveries and shows. Crossings clone the first draft and reopen existing work without replacement. This bounded slice is built; broader composition and paired-perspective reading remain planned.
 
 **Extend Post Office and Story Loft; reuse Paris reading patterns.** Turn comprehension into purposeful composition and revision without turning creative choices into errors.
 
@@ -114,3 +116,5 @@ Cross-game invitations should carry the **chosen task and relevant work** (quant
 The highest missing modality is reviewed sound–letter/blending/segmenting work: [spec 04](specs/04-word-workshop.md) remains the appropriate bounded starting point. Don't expand Word Garden's morphology claims into phonics. Additional future loops include bakery fractions/measurement, food webs, historical-source comparison, mapping, sound/light creation and reflective community conversation, as already sketched in the atlas. Some fit the familiar shells; historical uncertainty, auditory discrimination and making a composition need their own representations and responses.
 
 Before choosing a fourth build, use what the first three reveal about the **activities**: can a child tell what the question is, retain needed materials, choose useful support, and explore the intended contrast? Parent observations can guide private choices. Game participation and a larger taxonomy mapping count are not evidence of learning gains. For each delivered slice, update only the actual task-scoped atlas references and its limits, keep a few synthetic transfer examples for review, and stop short of claiming a complete developmental sequence.
+
+Source refresh for increment 2 (2026-10-20): Jane `385f644d6ffcd5f80f809888591d871a074b7855`, Marble `05af6444ded9c033b0a29ee6a9e842db9c2ba594`. Candidate English descriptions match the bundled pin; the feedback/self-review soft prerequisite has reversed upstream (current self-review depends on responding to feedback). The pinned graph stays unchanged. The Post–Loft connection is an original teaching bridge, not a taxonomy edge. See spec 39 for studied paths and license boundaries.

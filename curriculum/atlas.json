@@ -394,7 +394,7 @@
         "allocate"
       ],
       "route": "#post",
-      "scope": "Six authored packing orders, editable literal word-card routes, manual flight, revisions, optional reading reports."
+      "scope": "Six authored packing orders, editable literal word-card routes, manual flight, revisions, optional reading reports. Optional three-note reader-revision desk connects to a separate Story Loft rehearsal; exact original wording is human-read, not automatically evaluated."
     },
     {
       "id": "bramble",
@@ -449,7 +449,7 @@
         "create",
         "compose"
       ],
-      "scope": "Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency."
+      "scope": "Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency. A separate two-turn reader rehearsal carries a delivery note, with optional authored motive/reply and literal supplied-card comparison; existing shows are preserved."
     }
   ],
   "manualReferences": [
@@ -528,7 +528,7 @@
       "topicId": "mt_vauULTecMH",
       "kind": "scoped-practice",
       "source": "dist/loft-content.mjs",
-      "scope": "Arrange pictured scenes and supplied captions into a one-to-twelve-scene sequence, optionally add puppet dialogue, and revise for an audience. Writing may be supported; spelling, independence, story quality and full narrative proficiency are not assessed."
+      "scope": "Arrange pictured scenes and supplied captions into a one-to-twelve-scene sequence, optionally add puppet dialogue, and revise for an audience. Writing may be supported; spelling, independence, story quality and full narrative proficiency are not assessed. The optional message-reader stage adds a character reason and reply as a narrow original-dialogue opportunity; no minimum story length."
     },
     {
       "game": "cafe",
@@ -599,6 +599,48 @@
       "kind": "explanation",
       "source": "dist/equal-groups-ui.mjs",
       "scope": "Requested unit-labeled repeated-addition and multiplication explanation for the actual equal groups. The supplied explanation does not create an answer or recall observation."
+    },
+    {
+      "game": "post",
+      "topicId": "mt_lp3qyEujIv",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Three authored notes contrast the literal wording with a pictured explicit request; identify the missing object, destination or action. Scene clues are a separate source, not argument-evidence analysis or general inference assessment."
+    },
+    {
+      "game": "post",
+      "topicId": "mt_OyOYHlZ2_T",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Respond to a specific reader question by choosing a clearer supplied sentence or writing exact optional words for a human reader. Several useful phrasings fit; finite card execution does not grade original writing."
+    },
+    {
+      "game": "post",
+      "topicId": "mt_U_8iVFZuHH",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_lp3qyEujIv",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Three authored notes contrast the literal wording with a pictured explicit request; identify the missing object, destination or action. Scene clues are a separate source, not argument-evidence analysis or general inference assessment."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_OyOYHlZ2_T",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Respond to a specific reader question by choosing a clearer supplied sentence or writing exact optional words for a human reader. Several useful phrasings fit; finite card execution does not grade original writing."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_U_8iVFZuHH",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim."
     }
   ],
   "increments": [
@@ -630,9 +672,9 @@
       "priority": 4,
       "name": "Willow messages and map-making",
       "move": "Extend compose/execute/revise",
-      "spec": "docs/specs/02-willow-post-office.md",
-      "first": "Write a useful short message, test it with a reader; add a map legend, direction and scale as separately reviewed content.",
-      "gap": "Current word cards do not demonstrate free composition; geography has no dedicated Marble subject heading."
+      "spec": "docs/specs/39-message-reader-spiral.md",
+      "first": "Implemented: three freely selected notes clarify object, destination and action, with a literal supplied-card reader and separate original-wording/human discussion. Post↔Loft carries familiar work without replacing existing drafts.",
+      "gap": "Map legend, direction and scale, broader composition and independent writing observation remain future work."
     },
     {
       "priority": 5,
