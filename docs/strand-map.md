@@ -14,7 +14,7 @@ This is the planning layer between the [topic atlas](learning-atlas.md) and play
 
 A missing step describes the **product**, not the learner. A Built task can still need a better progression. A Planned idea may fit a child now; no score or prerequisite locks its door. Rows show useful authoring directions, not compulsory levels or a promise that one row must precede another for everyone.
 
-Each revisit below is **proposed**, except the existing numerical *Carry an idea here* invitations among Living Garden, Café and Bramble. A route printed here does not mean work already travels between those games. Future connections must preserve the relevant quantity/model, source text or observation, plus its support/familiarity history; the receiving activity asks its own question. They must not copy a success label or a global level.
+Each revisit below is **proposed**, except the existing numerical *Carry an idea here* invitations among Living Garden, Café and Bramble. Future connections must preserve the relevant quantity/model, source text or observation, plus its support/familiarity history; the receiving activity asks its own question. They must not copy a success label or a global level.
 
 ## Where the strands live
 
@@ -53,7 +53,7 @@ Each revisit below is **proposed**, except the existing numerical *Carry an idea
 | Regrouping and adding tens across a hundred | **Built** selected tasks and trade controls | Trading preserves quantity; adding a bundle changes quantity | Bundle Burrow | Return from a supplies delivery and show how to undo the change |
 | Number-line magnitude, estimation and wider place-value progression | **Missing** authored sequence; isolated estimation invitation exists | Nearer/farther versus left/right; estimate versus exact count | Candidate seed store / number line | Place a familiar quantity on a differently scaled line and justify a sensible estimate |
 
-Evidence: [Number Garden content](../dist/broad-content.mjs), `number-*`; [models](../dist/broad-ui.mjs), `renderModel`/`adjustModel`; [open planting tasks](../dist/plantings.mjs), `estimate-seeds`. Marble anchors: `mt_THl9GLxwoL`, `mt_aPBzD28_mT`, `mt_98c2qwEF7Q`; foundational candidates `mt_WcfaSfVT33`, `mt__h7hvT4tEb`. A tappable collection and one estimate are not a systematic counting/magnitude pathway.
+Evidence: [Number Garden content](../dist/broad-content.mjs), `number-*`; [models](../dist/broad-ui.mjs), `renderModel`/`adjustModel`; [open planting tasks](../dist/plantings.mjs), `estimate-seeds`. Marble anchors: `mt_THl9GLxwoL`, `mt_aPBzD28_mT`, `mt_98c2qwEF7Q`; foundational candidates `mt_WcfaSfVT33`, `mt__h7hvT4tEb`.
 
 ## 2. Addition, subtraction and change
 
@@ -99,7 +99,7 @@ Evidence: [number tasks](../dist/broad-content.mjs), `fractions-*`; [editable st
 | Actual recipe/plant measurement with stated units | **Planned** outlines and plant slice | Length versus capacity/mass; model units versus physical units | [Bakery direction](learning-atlas.md#a-small-set-of-game-building-priorities); [plant plan](curriculum-spirals.md#3-what-would-help-this-garden-grow) | Match a measurement to a useful tool; keep physical/off-screen observations separate |
 | Tool selection, unit conversion, clocks/duration, 3-D/volume and coordinate/angle sequences | **Missing** | Same object/different units; elapsed time versus clock reading; area versus volume | Candidate parcel-measuring / map modes | Change the tool or unit while preserving the physical quantity |
 
-Evidence: [tasks](../dist/broad-content.mjs), `measurement-*`, `geometry-*`; [open beds](../dist/plantings.mjs), `many-rectangles`; [Workshop](../dist/workshop-ui.mjs). Anchors: `mt_cqSf213hSa`, `mt_e4x3l2JeLI`, `mt_y1n0Zwhoca`, `mt_WtcFrxGOgw`, `mt_KJeEeTutJI`, `mt_MFfYcnv6Tv`. A screen ruler is not evidence of choosing or using a physical measuring tool.
+Evidence: [tasks](../dist/broad-content.mjs), `measurement-*`, `geometry-*`; [open beds](../dist/plantings.mjs), `many-rectangles`; [Workshop](../dist/workshop-ui.mjs). Anchors: `mt_cqSf213hSa`, `mt_e4x3l2JeLI`, `mt_y1n0Zwhoca`, `mt_WtcFrxGOgw`, `mt_KJeEeTutJI`, `mt_MFfYcnv6Tv`.
 
 ## 6. Patterns, equivalence and generalization
 
@@ -110,7 +110,7 @@ Evidence: [tasks](../dist/broad-content.mjs), `measurement-*`, `geometry-*`; [op
 | Function tables, expressions and explicit generalization | **Missing** sequence | A rule that fits a few examples versus one tested against new cases | Candidate Bramble / pattern workbench | Compare two possible rules before representing one with an expression |
 | Structured mathematical explanation | **Missing** progression; unscored talk prompts exist | Answer versus reason; example versus justification | Candidate planting/parcel explanation | Explain the same relation using an object, diagram and sentence |
 
-Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open counterexamples](../dist/plantings.mjs). Anchors: `mt_A-FyLLLLzy`, `mt_pyMD_SIiYO`. A correct term or acknowledgement of discussion does not establish generalization or proof.
+Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open counterexamples](../dist/plantings.mjs). Anchors: `mt_A-FyLLLLzy`, `mt_pyMD_SIiYO`.
 
 ## 7. Data, representation and uncertainty
 
@@ -121,7 +121,7 @@ Evidence: [tasks](../dist/broad-content.mjs), `patterns-*`, `reasoning-*`; [open
 | Organize categories, tally and construct/interpret a labeled graph | **Missing** authored construction progression | Category counts versus measurements over time; useful versus misleading scale | Candidate Field Notebook mode | Represent the same small dataset two ways and ask which answers the question |
 | Statistical question, sampling variation, chance/probability | **Missing** | A whole population versus one sample; variable outcomes versus certainty | Candidate habitat survey / chance experiment | Compare two small samples or repeated chance trials without calling a simulation field evidence |
 
-Evidence: [Workshop results](../dist/workshop-ui.mjs), `results`; [finite trials](../dist/workshop-core.mjs). Pinned candidates: `mt_c29FaCTNsx`, `mt_VhBH8wrFC6`, `mt_H6LlpWgEYS`, `mt_ZFwPZaDJ0_`. New upstream sampling nodes are noted under sources; they are not in the bundled pin. Displaying data is not a graph-construction lesson.
+Evidence: [Workshop results](../dist/workshop-ui.mjs), `results`; [finite trials](../dist/workshop-core.mjs). Pinned candidates: `mt_c29FaCTNsx`, `mt_VhBH8wrFC6`, `mt_H6LlpWgEYS`, `mt_ZFwPZaDJ0_`. New upstream sampling nodes are noted under sources; they are not in the bundled pin.
 
 ## 8. Sound–letter reading, spelling and transcription
 
@@ -132,7 +132,7 @@ Evidence: [Workshop results](../dist/workshop-ui.mjs), `results`; [finite trials
 | Broader correspondence sequence, fluency and irregular spellings | **Missing** reviewed progression | Decode a new word versus recognize a practiced one | Candidate Word Workshop packs | Revisit the same correspondence across different words/passages, preserving support history |
 | Handwriting and fluent transcription | **Missing** sequence | Choosing cards, typing and forming letters are different actions | Candidate optional paper/making station | Write a new message, with human observation; no app inference from a textbox |
 
-Evidence for the gap: [Word Garden](../dist/word-garden-content.mjs) teaches meaning-bearing parts, not systematic phonics. Candidates: `mt__KHQttMde3`, `mt_BhYJZUsErp`. Spec 04 requires rights-cleared, human-reviewed sounds/blends in a declared pronunciation variety. Three CVC families are not a complete phonics program. Narration never substitutes for decoding evidence; pronunciation differences are not errors to score automatically.
+Evidence for the gap: [Word Garden](../dist/word-garden-content.mjs) teaches meaning-bearing parts, not systematic phonics. Candidates: `mt__KHQttMde3`, `mt_BhYJZUsErp`. Spec 04 requires rights-cleared, human-reviewed sounds/blends in a declared pronunciation variety. Narration never substitutes for decoding evidence; pronunciation differences are not errors to score automatically.
 
 ## 9. Word meaning, morphology and vocabulary
 
@@ -211,7 +211,7 @@ Evidence: [Water missions](../dist/science-content.mjs), `melt`/`warm`/`evaporat
 | Sound/vibration, pitch/loudness and light/shadows | **Missing** explicit experiences | Faster repetition versus louder sound; blocked light versus a dark object | Candidate Sound & Light Studio | Change one controllable property, then explain a new sound/shadow effect |
 | Energy transfers and electricity | **Missing** | A visible change versus a model of how energy is transferred | Candidate later Workshop benches | Trace a bounded system and explain what the model leaves out |
 
-Evidence: [Workshop configurations](../dist/workshop-core.mjs), [chosen-variable interface](../dist/workshop-ui.mjs). Anchor `mt_-p_xp4hMvh` includes broader surface evidence than our two-surface model. The intro film’s soundtrack and animations do not constitute sound/light instruction.
+Evidence: [Workshop configurations](../dist/workshop-core.mjs), [chosen-variable interface](../dist/workshop-ui.mjs). Anchor `mt_-p_xp4hMvh` includes broader surface evidence than our two-surface model.
 
 ## 16. Scientific inquiry and explanation
 
@@ -255,7 +255,7 @@ Evidence: [Post map/places](../dist/post-office-ui.mjs), [gathering clues](../di
 | Broader historical periods and contextual explanations | **Missing** authored sequences | Modern assumptions versus evidence about people in their own context | Candidate Archive collections | Compare a new case while naming what is specific to its time/place |
 | Evaluate interpretations and uncertainty | **Missing** systematic progression | A source’s statement versus a historian’s argument from it | Candidate Archive investigation board | Support two possible interpretations and identify evidence that could distinguish them |
 
-No history learning activity is currently declared in the atlas. Source anchors: `mt_9REmUc8r4D`, `mt_2GDBmKCJxs`, `mt_TTzJTF-OkG`, `mt_wWlZoLQBR6`, `mt_Lu4H4mbsqO`. All require reviewed sources and honest labels for fiction/reconstruction. A Paris setting or fictional courier does not itself teach history.
+No history learning activity is currently declared in the atlas. Source anchors: `mt_9REmUc8r4D`, `mt_2GDBmKCJxs`, `mt_TTzJTF-OkG`, `mt_wWlZoLQBR6`, `mt_Lu4H4mbsqO`. All require reviewed sources and honest labels for fiction/reconstruction.
 
 ## 20. Visual art, drama and music
 
@@ -266,7 +266,7 @@ No history learning activity is currently declared in the atlas. Source anchors:
 | Beat/rhythm, pitch patterns, listening and composing | **Missing** reviewed experiences | Steady beat versus rhythm; pitch versus loudness; imitation versus invention | Candidate Sound & Light Studio / musical Loft mode | Recreate a short pattern, transform it, then compose a response |
 | Drama/voice/listening and collaborative making | **Missing** sequence; unscored discussion is already invited | Supplied dialogue versus interpretation/performance with a person | Candidate Loft / community circle | Perform different readings of the same line without declaring one emotion correct |
 
-Evidence: [Loft content](../dist/loft-content.mjs), [stage controls](../dist/loft-ui.mjs). These are explicit subject extensions outside Marble’s subject inventory; no new source nodes are asserted. Reviewed music/audio and accessible response modes need separate authoring. A soundtrack is not a music curriculum.
+Evidence: [Loft content](../dist/loft-content.mjs), [stage controls](../dist/loft-ui.mjs). These are explicit subject extensions outside Marble’s subject inventory; no new source nodes are asserted. Reviewed music/audio and accessible response modes need separate authoring.
 
 ## 21. Money, exchange and practical decisions
 
@@ -289,7 +289,7 @@ Café has real-in-game inventory constraints but no monetary exchange. Anchors: 
 | Choose/evaluate strategies and notice uncertainty | **Missing** sequence | Feeling familiar versus being able to use an idea; help use versus inability | Candidate companion notebook | Return in a new context and describe what changed in the approach |
 | Set/review personal learning goals | **Missing** reviewed experience | A chosen purpose versus a compulsory target/reward | Candidate optional grown-up-guided reflection | Revisit a privately chosen goal; no streak, grade, placement or mandatory schedule |
 
-Evidence: method-report controls in [Facts](../dist/facts-ui.mjs), [Bramble](../dist/post-office-ui.mjs) and [Living Garden](../dist/living-adaptive-ui.mjs); [Café](../dist/cafe-ui.mjs) offers optional repair help but no method report. Source anchors: `mt_8dstvf-KKb`, `mt_6eTZUwKQZr`, `mt_95zxYqpP7m`, `mt_jIszRCO2ij`. Their presence here proposes future scope; no learning-to-learn activity references or abilities are added by this document.
+Evidence: method-report controls in [Facts](../dist/facts-ui.mjs), [Bramble](../dist/post-office-ui.mjs) and [Living Garden](../dist/living-adaptive-ui.mjs); [Café](../dist/cafe-ui.mjs) offers optional repair help but no method report. Source anchors: `mt_8dstvf-KKb`, `mt_6eTZUwKQZr`, `mt_95zxYqpP7m`, `mt_jIszRCO2ij`.
 
 ## 23. Cooperation, perspectives and community
 
@@ -317,7 +317,7 @@ Candidates: `mt_9NQEiYLQA3`, `mt_mDp-1vlL3R`, `mt_OJVkWvIaM_`. Feeding a fiction
 | Sound & Light Studio | **Candidate new experimental/making mode** | One controllable property at a time: vibration/pitch/loudness or light/shadow; later a rhythm/composition response | **Missing scoped first release**: physics and music are distinct strands and need their own representations/content review |
 | Community circle / cooperative garden project | **Candidate human-partner experience**, probably attached to Loft | Make a decision or story with differing fictional perspectives, take turns, revise together | **Later**: outline only; no automated social-skill score, private disclosures or requirement to play with others |
 
-This gives us two strong near-term additions to familiar games, one notebook mode, and a distinct literacy door before proliferating worlds. The Archive and Studio become useful when their new ways of acting are ready. New coats of paint, bigger numbers and longer passages do not replace missing representations or a purposeful question.
+This gives us two strong near-term additions to familiar games, one notebook mode, and a distinct literacy door before proliferating worlds. The Archive and Studio become useful when their new ways of acting are ready.
 
 ## Three concrete routes to author first
 
@@ -325,11 +325,11 @@ This gives us two strong near-term additions to familiar games, one notebook mod
 2. **Make a message work:** Paris inference/evidence (**Built**) → Post Office literal route/clarification (**Built**) → reader asks a specific question (**Planned**, increment 2) → revise a Loft line (**Built opportunity**, connection Planned) → a second narrator’s account (**Planned**, spec 06). Longer writing is optional; compare the intended and observed effects.
 3. **Choose where to plant:** Living Garden need/condition/change (**Built**) → dated plant comparison (**Planned**, increment 3) → useful learner-made table (**Planned first slice**) → construct a graph from selected observations (**Missing**) → explain the planting choice to a gardener (**Planned connection**). Keep model and physical evidence separate.
 
-For an authored revisit, hold at least one thing fixed (quantity, text, organism, claim) and deliberately change one demand (unknown, representation, condition, audience). Help may offer a smaller step or a different example; it does not lower a global level. Offer a fresh instance after familiarity and retain each task’s own support. No compulsory review date or mastery inference is specified here. Any eventual recommendation policy needs its own bounded review.
+For an authored revisit, hold at least one thing fixed (quantity, text, organism, claim) and deliberately change one demand (unknown, representation, condition, audience). Help may offer a smaller step or a different example; it does not lower a global level. Offer a fresh instance after familiarity and retain each task’s own support.
 
 ## What remains outside this first map
 
-The atlas still contains unsequenced objectives throughout its 54 domains: broader body/life processes, oceans and other ecosystems, geology/palaeontology, Earth/space, climate, advanced mathematics, wider historical periods, financial and personal/social topics. A possible theme is not a lesson pathway. These remain **Missing** at the relevant lesson/sequence level unless the narrow Built or Planned rows above say otherwise. Prioritize a bounded purpose/content pack instead of trying to build one game per source node or claim all objectives from a familiar activity shell.
+The atlas still contains unsequenced objectives throughout its 54 domains: broader body/life processes, oceans and other ecosystems, geology/palaeontology, Earth/space, climate, advanced mathematics, wider historical periods, financial and personal/social topics. These remain **Missing** at the relevant lesson/sequence level unless the narrow Built or Planned rows above say otherwise. Prioritize a bounded purpose/content pack instead of trying to build one game per source node or claim all objectives from a familiar activity shell.
 
 For a future build, select one row and specify the example/contrast, learner action, representation, response, help, source material and revisit. Independently review that small specification and its content before implementation. Add atlas references only for actual delivered scope; this map itself changes no runtime mappings, assessment, saved progress or recommendations.
 
