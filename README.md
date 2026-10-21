@@ -51,6 +51,8 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/message-checks.mjs
+node test/message-integration-checks.mjs
 node test/loft-checks.mjs
 node test/loft-growing-checks.mjs
 node test/progress-transfer-checks.mjs
@@ -226,3 +228,9 @@ The file is read on your device, never uploaded. Existing explorers are not repl
 The reviewed static assets are served at https://after-the-storm-learning.anotherpanacea.workers.dev/. Deploy only `dist/`, never the repository root or CLI-generated setup folders. From an authenticated Cloudflare account, future reviewed releases can use `npx wrangler deploy --assets ./dist --name after-the-storm-learning`. The current deployment has no application backend or paid compute requirement. Static asset requests are [free and unlimited](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/). Keep credentials and account configuration outside this public repository.
 
 The first equal-group spiral is available at the Café serving bench and Bramble’s ribbon bench. Six quantity families support total, amount-per-group and group-count questions, with editable pictured supplies and preserved work across both places. See [spec 38](docs/specs/38-equal-group-spiral.md). Normal orders, inventory and rival rounds stay separate.
+
+### A message for a reader
+
+[The letter-mending desk](https://after-the-storm-learning.anotherpanacea.workers.dev/#post/messages) offers three original storm-recovery notes: which basket, which destination and which action. Choose a scene clue, try several useful supplied revisions, and compare the reader’s before/after response. Alternate clear messages can serve a different purpose; there is no penalty or required success. Optional original wording is read with a person and never automatically evaluated.
+
+[The reader’s stage](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft/messages) gives the sender a reason and the reader a reply, with optional original dialogue and manual replay. The first crossing copies familiar words and support context; later crossings reopen the destination’s existing draft. Ordinary deliveries, rival challenges, puppet shows and shelves are untouched. Exact authored words stay local under save settings and appear in notes downloads. This is bounded practice, not a reading or writing level. [Spec 39](docs/specs/39-message-reader-spiral.md).
