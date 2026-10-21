@@ -562,6 +562,17 @@
       ],
       "route": "#post/instructions",
       "scope": "Two original short instruction cases shared with #loft/instructions. Separate picture plan, supplied A/B sentence strip and exact human-read words; finite manual scene consequences, optional reader questions/reports and bounded kept versions. Supplied assembly and guided revision opportunity only; no arbitrary-language parsing, independent composition/decoding/handwriting, listening or programming proficiency claim."
+    },
+    {
+      "id": "fair-test",
+      "name": "Fair Test Bench",
+      "status": "built-local",
+      "patterns": [
+        "experiment",
+        "read"
+      ],
+      "route": "#workshop/fair",
+      "scope": "Choose both setups in the original finite ramp model; distinguish question-relevant, wrong-factor, identical and confounded pairs; reveal up to three examples per side, inspect repeats and keep an ungraded claim or exact note. Authored model comparison practice only; no physical investigation, causal-proof, independent measurement or mastery claim."
     }
   ],
   "manualReferences": [
@@ -1047,6 +1058,27 @@
       "kind": "explanation",
       "source": "dist/instruction-ui.mjs",
       "scope": "Name the reader’s knowledge and this note’s purpose; optionally compare a supplied preparation instruction with an invitation to watch, plus a newcomer/familiar-reader discussion. Supplied form/purpose contrast only; full tone/register/genre choice remains outside this slice."
+    },
+    {
+      "game": "fair-test",
+      "topicId": "mt_qgb76wHN2X",
+      "kind": "scoped-practice",
+      "source": "dist/fair-test-ui.mjs",
+      "scope": "Independently choose A/B height and surface settings for one of two supplied questions; explain whether neither, one relevant, one other or both factors change. Narrow finite-model design practice; no general physical experimental competence."
+    },
+    {
+      "game": "fair-test",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/fair-test-ui.mjs",
+      "scope": "Choose which finite model trials to reveal, inspect a labelled A/B table and shared ruler, and notice unequal repetitions or observed variation. Automatic recording is supported data reading, not independent measurement or table construction."
+    },
+    {
+      "game": "fair-test",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "scoped-practice",
+      "source": "dist/fair-test-ui.mjs",
+      "scope": "Keep frozen stopping distances separate from a provisional claim and exact optional words, with a supplied explanation of what a confounded comparison cannot establish. Prose and physical causal reasoning remain ungraded."
     }
   ],
   "increments": [
