@@ -465,13 +465,24 @@
     {
       "id": "field-notebook",
       "name": "Field Notebook: choose and chart",
-      "status": "built-local",
+      "status": "live",
       "patterns": [
         "experiment",
         "build"
       ],
       "route": "#living/notebook",
       "scope": "Eight same-day model comparisons: choose useful rows, build editable fixed-zero-baseline bars, distinguish draft reading from source fidelity and question relevance, keep unfinished/revised charts. Invented stem-mm source, supplied scale, visible-source practice; no independent measurement, chart-scale choice or real growth conclusion."
+    },
+    {
+      "id": "sharing-counter",
+      "name": "The Sharing Counter",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "build"
+      ],
+      "route": "#cafe/sharing",
+      "scope": "Six open pictured picnic requests: repair equal rectangular halves/quarters, compare same-whole half/two-quarter portions, share twelve identical buns into four equal groups and pack one/three groups. Exact accumulated strip/line is supplied explanation; all checks visual practice, no physical measurement or independent fraction proficiency claim."
     }
   ],
   "manualReferences": [
@@ -726,6 +737,62 @@
       "kind": "scoped-practice",
       "source": "dist/field-notebook-ui.mjs",
       "scope": "Construct exact numerical bars on a supplied shared 0–70 scale with 10-unit ticks, choose quantity/unit labels and compare two categories. Distinguish reading an inaccurate draft from source agreement and question relevance. No independent scale choice, pictogram, time-series graph or full-topic claim."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_-hTTat0mBR",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Repair a rectangular two-piece cut into equal halves; unequal widths remain editable and are not called halves."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_g3W0mdADVu",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Repair rectangular cuts into four equal-width quarters, distinguish equality from merely counting four pieces."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_xACS3rWWDp",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Partition only uniform rectangles into equal halves/quarters; circles and other shapes remain missing."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_MyGblah2yY",
+      "kind": "explanation",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Manually step through supplied identical wholes showing one half and two quarters; compare learner-selected portions without independent equivalence assessment."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_cFltwUQi-d",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "One or three quarters of a twelve-bun whole, using four supplied group mats. No general fraction-of-amount strategy or unlike whole comparison."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_k2WE0-22-4",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Make four equal groups of three from twelve identical tokens; pack one/three complete groups while retaining the original whole."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_LpSuPgL31x",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Reversible one-at-a-time/one-each bun sharing into four supplied mats. Grouping remains visible; full twelve-bun scope only."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_Kr3IyA6m-O",
+      "kind": "explanation",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "A fixed 0–1 line and accumulation strip derive the amount of selected equal loaf pieces, including separated quarters. No independent marker placement or scale selection."
     }
   ],
   "increments": [
