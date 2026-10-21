@@ -37,10 +37,15 @@ export function startAdaptiveSpiral(state,connection=null){
  if(connection){t.packs=connection.a;t.bites=connection.b;t.range=t.packs>=2&&t.packs<=5&&t.bites>=2&&t.bites<=5?'small':'all';t.connection=structuredClone(connection);s.cursors.small=savedCounts.small;s.cursors.all=savedCounts.all;}
  for(const k of strands){if(!(connection&&k==='math')&&p.levels[k]!==plans[k].level){p.levels[k]=plans[k].level;p.epochs[k]=r.id;}h.depths[k]=p.choices[k]==='auto'?p.levels[k]:p.choices[k];h.reasons[k]=p.choices[k]==='auto'?plans[k].reason:`Chosen trail: ${depths[k][h.depths[k]-1]}. Automatic suggestion stays separate.`;if(connection&&k==='math'){h.depths.math=1;h.reasons.math='Chosen connection: count equal packs in a new setting. Automatic depth and preferences stay separate.';}}
  t.teaching=h;for(const k of strands){h.keys[k]=taskKey(t,k);h.familiar[k]=p.offered[k].includes(h.keys[k])||(k==='math'&&h.depths.math===1&&h.priorFactSeen);}
- s.adaptive=p;s.current={revision:'habitat-round-2',id:r.id,task:t,place:0,inspected:[],science:{...blank(),place:null,detail:null,changedShown:false,vocabulary:false},reading:{...blank(),tag:null,evidence:null},math:{...blank(),input:'',method:'unreported'},found:false,carried:false,left:false};
+ s.adaptive=p;s.current={revision:'habitat-round-2',id:r.id,task:t,place:0,view:{page:'notice',habitat:0},inspected:[],science:{...blank(),place:null,detail:null,changedShown:false,vocabulary:false},reading:{...blank(),tag:null,evidence:null},math:{...blank(),input:'',method:'unreported'},found:false,carried:false,left:false};
  offer(state,'science');return true;
 }
 const open=state=>{const r=currentSpiral(state);return r?.revision==='habitat-round-2'&&!spiralClosed(r)?r:null;};
+// Presentation is separate from inspection, support and response evidence.
+export function adaptiveView(r){return r.view||{page:r.found?'pack':scienceReady(r)?'read':'notice',habitat:r.place};}
+export function setAdaptivePage(state,page){const r=open(state);if(!r||!['notice','compare','read','pack'].includes(page))return false;r.view={...adaptiveView(r),page};return true;}
+export function selectAdaptiveHabitat(state,habitat){const r=open(state);if(!r||!integer(habitat,0,2))return false;r.view={...adaptiveView(r),habitat};return true;}
+export function setAdaptiveCluesOpen(state,cluesOpen){const r=open(state);if(!r||typeof cluesOpen!=='boolean')return false;r.view={...adaptiveView(r),cluesOpen};return true;}
 function visible(r,k){return k==='science'||k==='reading'&&scienceReady(r)||k==='math'&&r.found;}
 function advance(state){const r=open(state);if(scienceReady(r))offer(state,'reading');if(r.found)offer(state,'math');}
 export function inspectAdaptive(state,n){const r=open(state);if(!r||!integer(n,0,2))return false;r.place=n;if(!r.inspected.includes(n))r.inspected.push(n);advance(state);return true;}

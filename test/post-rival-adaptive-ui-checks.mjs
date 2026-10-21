@@ -2,14 +2,14 @@ import assert from 'node:assert/strict';
 import {freshState,STORAGE_KEY} from '../dist/core.mjs';
 import {ensureGarden} from '../dist/garden-core.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
-import {ensurePostOffice,startPostOffice,currentPostOffice,appendPostClause,packPostTogether,stepPostRoute,setPostCourier} from '../dist/post-office-core.mjs';
+import {ensurePostOffice,startPostOffice,currentPostOffice,appendPostClause,packPostTogether,stepPostRoute,setPostCourier,setPostPage} from '../dist/post-office-core.mjs';
 import {postOfficePage,postOfficeNotes} from '../dist/post-office-ui.mjs';
 import {startPostRival,startAdaptiveRival,nextRivalChallenge,setBrambleMode,setBrambleTable,setRivalInput,submitRival,solveRivalTogether,continueRival,bypassRival,stepRivalDecomposition,setRivalMethod,validPostRival} from '../dist/post-rival.mjs';
 import {generateRivalTask} from '../dist/post-rival-generator.mjs';
 import {scienceHome,sciencePage} from '../dist/science-ui.mjs';
 import {ensureScience,startScience} from '../dist/science-core.mjs';
 let n=0;const check=(v,label)=>{assert.ok(v,label);n++;},eq=(a,b,label)=>{assert.deepEqual(a,b,label);n++;},copy=structuredClone;
-function fresh(){const s=freshState();ensureGarden(s);ensurePostOffice(s);startPostOffice(s,'purl-blankets');return s;}
+function fresh(){const s=freshState();ensureGarden(s);ensurePostOffice(s);startPostOffice(s,'purl-blankets');setPostPage(s,'bramble');return s;}
 const untouched=fresh(),before=copy(untouched);postOfficePage(untouched);postOfficeNotes(untouched);eq(untouched,before,'render creates no generated notebook or round');
 for(let a=1;a<=12;a++)for(let b=1;b<=12;b++){
  const s=fresh();setBrambleMode(s,'multiply');startAdaptiveRival(s);const r=currentPostOffice(s).rival;r.task=generateRivalTask('multiply',a,b,0);check(validPostRival(r),'bounded synthetic generated round valid');

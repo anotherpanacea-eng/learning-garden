@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {courierPresets,postCourierIdentity,deliveries} from '../dist/post-office-content.mjs';
-import {ensurePostOffice,currentPostOffice,startPostOffice,setPostCourier,setPostCourierPortrait,setPostCourierPronouns,appendPostClause,editPostClause,packPostTogether,stepPostRoute,restartPostRoute,setPostReading} from '../dist/post-office-core.mjs';
+import {ensurePostOffice,currentPostOffice,startPostOffice,setPostCourier,setPostCourierPortrait,setPostCourierPronouns,appendPostClause,editPostClause,packPostTogether,stepPostRoute,restartPostRoute,setPostReading,setPostPage} from '../dist/post-office-core.mjs';
 import {postOfficePage,postOfficeNotes,postMap} from '../dist/post-office-ui.mjs';
 import {startPostRival,setRivalInput,submitRival,stepRivalPractice,returnRivalQuestion,solveRivalTogether,bypassRival,continueRival,noteRivalAudio,rivalBlocks} from '../dist/post-rival.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
@@ -21,7 +21,7 @@ eq(postCourierIdentity(s).avatar,'fern','portrait can differ from preset');eq(po
 check(!setPostCourierPortrait(s,'unknown')&&!setPostCourierPronouns(s,'unknown'),'invalid character values refused');
 const legacy=copy(s);delete legacy.postOffice.courierAvatar;delete legacy.postOffice.courierPronouns;legacy.garden.avatar='reed';const beforeLegacy=copy(legacy);ensurePostOffice(legacy);eq(legacy,beforeLegacy,'legacy paused notebook is not migrated');eq(postCourierIdentity(legacy).avatar,'reed','legacy courier retains explorer portrait');
 for(const [key,value] of [['courierAvatar','unknown'],['courierPronouns','unknown']]){const bad=copy(s);bad.postOffice[key]=value;const raw=copy(bad.postOffice);ensurePostOffice(bad);eq(bad.postOffice.kept.payload,raw,'unknown courier fields kept exactly');}
-check(startPostRival(s),'can meet rival during a paused delivery');eq(v.rival.reason,'same-operation','packing support offers another example of that operation');
+check(startPostRival(s),'can meet rival during a paused delivery');setPostPage(s,'bramble');eq(v.rival.reason,'same-operation','packing support offers another example of that operation');
 const parcel=copy(v.packing),flight=copy(v.playback),clauses=copy(v.clauses);setPostReading(s,'independent');
 check(rivalBlocks(v)&&!stepPostRoute(s),'question blocks flight without advancing');eq(v.playback,flight,'question preserves pending handoff');
 setRivalInput(s,'5');submitRival(s);check(v.rival.phase==='practice'&&v.rival.attempts.length===1,'miss opens practice');eq(v.rival.attempts[0].afterSupport,false,'miss retained before help');

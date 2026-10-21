@@ -41,6 +41,7 @@ function validResponse(r,k,a){
 }
 export function validAdaptiveRound(r){
  if(!object(r)||r.revision!=='habitat-round-2'||!integer(r.id,0,999999999)||!object(r.task))return false;
+ if(Object.hasOwn(r,'view')&&(!object(r.view)||!['notice','compare','read','pack'].includes(r.view.page)||!integer(r.view.habitat,0,2)||Object.hasOwn(r.view,'cluesOpen')&&typeof r.view.cluesOpen!=='boolean'))return false;
  const t=r.task,h=t.teaching;
  if(!spiralCase(t.caseId)||!integer(t.rotation,0,2)||!['small','all'].includes(t.range)||!starterIngredients.some(x=>x.id===t.ingredientId)||typeof t.familiar!=='boolean'||!integer(t.packs,t.range==='small'?2:1,t.range==='small'?5:12)||!integer(t.bites,t.range==='small'?2:1,t.range==='small'?5:12)||!object(h)||h.version!==1||!integer(h.noteVariant,0,2)||typeof h.priorFactSeen!=='boolean'||!['depths','keys','familiar','reasons'].every(k=>object(h[k]))||!strands.every(k=>integer(h.depths[k],1,3)&&h.keys[k]===taskKey(t,k)&&typeof h.familiar[k]==='boolean'&&typeof h.reasons[k]==='string'&&h.reasons[k].length>0&&h.reasons[k].length<=400))return false;
  if(!integer(r.place,0,2)||!Array.isArray(r.inspected)||r.inspected.length>3||new Set(r.inspected).size!==r.inspected.length||!r.inspected.every(n=>integer(n,0,2))||!['found','carried','left'].every(k=>typeof r[k]==='boolean'))return false;

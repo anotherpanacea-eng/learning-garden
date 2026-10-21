@@ -7,7 +7,7 @@ import {startSpiral,leaveSpiral,currentSpiral,spiralState,validSpiralRound,setSp
 import {ensurePlantings,startOpenTask} from '../dist/plantings.mjs';
 import {startLiving} from '../dist/living-core.mjs';
 import {scienceQuestion,noteQuestion,mathQuestion,strands,scienceReady,readingReady} from '../dist/living-adaptive-content.mjs';
-import {startAdaptiveSpiral,adaptiveSuggestion,setAdaptiveChoice,inspectAdaptive,chooseAdaptive,revealAdaptiveChange,supportAdaptive,submitAdaptive,findAdaptive,carryAdaptive,leaveAdaptive,adaptivePairsShown} from '../dist/living-adaptive-core.mjs';
+import {startAdaptiveSpiral,adaptiveSuggestion,setAdaptiveChoice,inspectAdaptive,chooseAdaptive,revealAdaptiveChange,supportAdaptive,submitAdaptive,findAdaptive,carryAdaptive,leaveAdaptive,adaptivePairsShown,setAdaptivePage} from '../dist/living-adaptive-core.mjs';
 import {adaptivePage,adaptiveNotes} from '../dist/living-adaptive-ui.mjs';
 let checks=0;const check=(x,m)=>{assert.ok(x,m);checks++;},equal=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const fresh=()=>{const s=freshState();ensureCafe(s);return s;};
@@ -31,16 +31,16 @@ function finish(s,help=false){openMath(s,help);if(help)check(supportAdaptive(s,'
 // Every authored setting, position, and science depth has one defensible answer.
 for(const c of spiralCases)for(let rotation=0;rotation<3;rotation++)for(let d=1;d<=3;d++){
  const s=fresh();setAdaptiveChoice(s,'science',d);startAdaptiveSpiral(s);const r=currentSpiral(s);r.task.caseId=c.id;r.task.rotation=rotation;r.task.teaching.keys.science=`${c.id}:${d}`;
- const q=scienceQuestion(r.task);check(q.options.filter(x=>x.id===q.answer).length===1,'unique science detail');openNote(s);check(r.science.matched,'case matched');const html=adaptivePage(s,'visit');check(html.includes('data-adapt-tag'),'note visible');if(d===3){check(html.includes('Before:')&&html.includes('After:'),'two supplied conditions');check(q.changed.damp===false&&q.changed.nectar===false,'changed need resource explicitly absent');}
+ const q=scienceQuestion(r.task);check(q.options.filter(x=>x.id===q.answer).length===1,'unique science detail');openNote(s);check(r.science.matched,'case matched');setAdaptivePage(s,'read');const html=adaptivePage(s,'visit');check(html.includes('data-adapt-tag'),'note visible');if(d===3){setAdaptivePage(s,'compare');const scienceHtml=adaptivePage(s,'visit');check(scienceHtml.includes('Before:')&&scienceHtml.includes('After:'),'two supplied conditions');check(q.changed.damp===false&&q.changed.nectar===false,'changed need resource explicitly absent');}
 }
 for(let d=1;d<=3;d++)for(let v=0;v<3;v++){
- const s=fresh();setAdaptiveChoice(s,'reading',d);startAdaptiveSpiral(s);const r=currentSpiral(s);r.task.teaching.noteVariant=v;r.task.teaching.keys.reading=`${d}:${v}`;openNote(s);const q=noteQuestion(r.task),html=adaptivePage(s,'visit');check(html.includes(q.sentences[0]),'note text rendered');check(!html.includes('data-adapt-find'),'tag not exposed in find before response');answer(s,'reading');check(findAdaptive(s),'tag finds parcel');if(d===3)check(q.sentences[q.evidence].includes('sealed'),'sentence supports inference');
+ const s=fresh();setAdaptiveChoice(s,'reading',d);startAdaptiveSpiral(s);const r=currentSpiral(s);r.task.teaching.noteVariant=v;r.task.teaching.keys.reading=`${d}:${v}`;openNote(s);setAdaptivePage(s,'read');const q=noteQuestion(r.task),html=adaptivePage(s,'visit');check(html.includes(q.sentences[0]),'note text rendered');check(!html.includes('data-adapt-find'),'tag not exposed in find before response');answer(s,'reading');check(findAdaptive(s),'tag finds parcel');if(d===3)check(q.sentences[q.evidence].includes('sealed'),'sentence supports inference');
 }
 equal([0,1,2].map(v=>noteQuestion({ingredientId:'moon-crunch',teaching:{depths:{reading:3},noteVariant:v}}).evidence),[0,1,2],'inference evidence spans all sentence positions');
 // Every fact through 12x12, every math form, including tomorrow's zero plan.
 for(let d=1;d<=3;d++)for(let p=1;p<=12;p++)for(let b=1;b<=12;b++){
  const s=fresh();setSpiralOption(s,'range','all');setAdaptiveChoice(s,'math',d);startAdaptiveSpiral(s);const r=currentSpiral(s);r.task.packs=p;r.task.bites=b;r.task.teaching.keys.math=`${d}:${p}x${b}`;openMath(s,true);
- const q=mathQuestion(r.task),html=adaptivePage(s,'visit');check(!html.includes(`Carry today’s ${p*b} bites`),'carry hides answer before solving');
+ setAdaptivePage(s,'pack');const q=mathQuestion(r.task),html=adaptivePage(s,'visit');check(!html.includes(`Carry today’s ${p*b} bites`),'carry hides answer before solving');
  if(d===2){check(html.includes('pack count is hidden'),'inverse hides groups');check(!html.includes(`aria-label="${p} packs, ${b} bites per pack"`)||p===1,'no grouped answer in inverse image');equal(adaptivePairsShown(s),[[1,b]],'unit only before inverse solution');}
  answer(s,'math');equal(q.answer,d===1?p*b:d===2?p:(p-1)*b,'question form answer');s.cafe.stock[r.task.ingredientId]=0;check(carryAdaptive(s),'carry all quantities');equal(s.cafe.stock[r.task.ingredientId],p*b,'full original stock even inverse/tomorrow');const closed=structuredClone(s);check(!carryAdaptive(s),'carry once');equal(s,closed,'second carry atomic');
 }
