@@ -1,8 +1,8 @@
 # Roadmap candidates52–55 — independent review packet
 
-**Status: author-prepared review request, not a review result. All four candidates and their source dispositions remain pending independent review.** No reviewer is assigned or contacted by this document. No runtime build, media production, merge or release is cleared.
+**Updated checkpoint: six independent specification lenses completed and findings resolved; see the [review receipt](52-55-independent-spec-review.md).52–54are build-ready at their bounded scope;55is commissioning-only with linguistic/audio/rights/player gates pending.** The sections below retain the earlier author-prepared request and dated GitHub observations as provenance. No runtime implementation, media production, merge or release is cleared by this document.
 
-The content anchor is commit[`061cf4e1e6ccd51b1dbc0bf7d7ddb96309efef06`](https://github.com/anotherpanacea-eng/learning-garden/tree/061cf4e1e6ccd51b1dbc0bf7d7ddb96309efef06) on `docs/next-roadmap-units`. This reconciliation adds an index, queue corrections and a handoff; it does not change those four candidates' specification/source/content files. Any later content change must be identified in the review receipt. Review the actual files, not just the summaries below.
+The content anchor is commit[`061cf4e1e6ccd51b1dbc0bf7d7ddb96309efef06`](https://github.com/anotherpanacea-eng/learning-garden/tree/061cf4e1e6ccd51b1dbc0bf7d7ddb96309efef06) on `docs/next-roadmap-units`. The original reconciliation added an index, queue corrections and handoff. The new independent-review fold changes52–54teaching/matching/recovery wording and candidate/source status, recorded in the linked receipt; the old anchor is now a historical baseline, not a claim of unchanged current bytes. Phonics asset/word approval fields remain pending. Review the actual files, not just the summaries below.
 
 ## Candidate reading order and decisions
 
@@ -58,7 +58,7 @@ A future authorized integration must preserve the separate review histories, run
 
 ## Completion and resume boundary
 
-The requested authoring sequence is complete as a **pending-review packet**: fraction, exchange, multi-sentence instructions, phonics commissioning and queue reconciliation. The next implementation step is blocked on independent specification review; packing remains blocked on Claude implementation review. No suitable review has arrived during this pass, and no substitute review is manufactured.
+The requested authoring sequence is complete as a **pending-review packet**: fraction, exchange, multi-sentence instructions, phonics commissioning and queue reconciliation. At that authoring checkpoint the next implementation step was blocked on independent specification review. The linked updated receipt now clears bounded52–54builds; packing remains blocked on Claude implementation review. No suitable review has arrived during this pass, and no substitute review is manufactured.
 
 For a future reviewer, record candidate commit, reviewed files/asset hashes, role/scope, findings, accepted/rejected exceptions, verification actually performed, and a clear disposition. Separate specification, content, audio/rights and implementation decisions. Do not mark pending rows approved based on mechanical checks. No review requests/messages are sent by the author.
 

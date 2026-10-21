@@ -1,5 +1,7 @@
 # Instructions for a Reader source audit — 2026-10-21
 
+> Independent specification checkpoint: [review receipt](../reviews/52-55-independent-spec-review.md) accepts the bounded curriculum/access dispositions; earlier pending labels below preserve the authoring baseline. This does not approve runtime behavior or, for55, phonetic recordings/rights.
+
 **Author research, pending independent review.** Supports [spec54](../specs/54-instructions-for-a-reader.md), not an implemented activity or a source-topic completion claim. Every disposition below is proposed.
 
 ## Refreshed sources and existing capabilities

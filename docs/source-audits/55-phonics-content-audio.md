@@ -1,5 +1,7 @@
 # Phonics content/audio source audit — 2026-10-21
 
+> Independent specification checkpoint: [review receipt](../reviews/52-55-independent-spec-review.md) accepts the bounded curriculum/access dispositions; earlier pending labels below preserve the authoring baseline. This does not approve runtime behavior or, for55, phonetic recordings/rights.
+
 **Author research and proposed dispositions, pending independent review.** Supports [brief55](../specs/55-phonics-content-audio-brief.md) and its12-word content audit. This is not linguistic clearance, audio listening, runtime coverage or a complete phonics sequence.
 
 ## Actual sources and boundaries

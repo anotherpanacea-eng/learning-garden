@@ -1,6 +1,6 @@
 # 55 — Word Workshop: phonics content and audio commissioning brief
 
-**Status: proposed content/commissioning packet, pending independent specification, linguistic, audio and rights review. No approved assets, recording order, runtime player or publication authorization.** This makes the sound door in [spec04](04-word-workshop.md) concrete. The implemented [Word Garden](34-word-garden.md) remains a separate meaning/morpheme activity; its whole-word browser narration is not reviewed phonics audio.
+**Status: independent specification review complete for commissioning scope; [receipt](../reviews/52-55-independent-spec-review.md). Linguistic, audio and rights decisions remain pending. No approved assets, recording order, runtime player or publication authorization.** This makes the sound door in [spec04](04-word-workshop.md) concrete. The implemented [Word Garden](34-word-garden.md) remains a separate meaning/morpheme activity; its whole-word browser narration is not reviewed phonics audio.
 
 ## Bounded purpose and pronunciation proposal
 

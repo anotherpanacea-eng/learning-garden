@@ -1,5 +1,7 @@
 # Fraction Trail source audit — 2026-10-21
 
+> Independent specification checkpoint: [review receipt](../reviews/52-55-independent-spec-review.md) accepts the bounded curriculum/access dispositions; earlier pending labels below preserve the authoring baseline. This does not approve runtime behavior or, for55, phonetic recordings/rights.
+
 **Author research, pending independent review.** This supports [spec 52](../specs/52-fraction-trail.md), not a runtime mapping or permission to build. The [17-row crosswalk](52-fraction-trail.csv) records proposed teaching dispositions; every row remains `pending-independent-review`.
 
 ## Sources actually inspected
@@ -47,3 +49,6 @@ Marble-derived identifiers, names and dependency listings in the CSV retain the 
 The author checked ID uniqueness, exact hard-predecessor closure, the selected/ancestor overlap, refreshed semantic-field/incoming-edge equality and that every CSV row points to numbered steps 1–9. The integer model can also enumerate all 2,048 internal-cut subsets and all their marker boundaries without approximation. These checks establish the finite model and accounting, not the educational suitability of the proposed exceptions, the quality of eventual teaching, or any runtime behavior.
 
 The next reviewer should read the source descriptions and reasons, challenge the shape/set-to-length exceptions, inspect both the unequal-thirds and changed-whole contrasts, and confirm that supplied partitions and correct actual readings cannot become independent placement evidence. No independent reviewer has yet done that work for this candidate.
+
+
+Implementation refresh: on2026-10-21root checked current Marble84357e29b6c4bed1d6b0e4c0e6d512ab6fbfbbd8 and Jane’s unchangedd4903954d7c4d8118cbd1d2f7ed770544fd4ac81. All17union-node names, descriptions, evidence and incoming dependency triples still match the bundled pin. The historical snapshot above remains dated provenance; no vendored update or broader coverage follows.
