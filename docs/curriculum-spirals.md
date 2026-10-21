@@ -57,7 +57,7 @@ Name-only mapping fails in this graph: pinned `mt_HY8Yycu_rz` is titled “Under
 
 ## First three playable increments
 
-Increment 1 is implemented as an optional bench beside the existing games; the next two remain proposed bounded specifications. Each uses the existing pagination approach: one immediate instruction/question, a persistent relevant model or message, optional stepwise help, Back and a recoverable draft. Preserve inventory, unfinished orders/deliveries, local exports, supported attempts and unfamiliar-task observations. A child may pick any entry, depth or next place.
+All three now have bounded implemented slices: equal groups (spec 38), reader-revised messages (specs 39–40), and the plant investigation (spec 41). The [PR #16 planning integration](curriculum-gaps.md) adds data-desk, minibeast and Market Day follow-on outlines, not replacement build commitments. Each uses the existing pagination approach: one immediate instruction/question, a persistent relevant model or message, optional stepwise help, Back and a recoverable draft. Preserve inventory, unfinished orders/deliveries, local exports, supported attempts and unfamiliar-task observations. A child may pick any entry, depth or next place.
 
 ### 1. Same delivery, three different questions
 
@@ -118,6 +118,8 @@ Cross-game invitations should carry the **chosen task and relevant work** (quant
 ## What this leaves for later
 
 The highest missing modality is reviewed sound–letter/blending/segmenting work: [spec 04](specs/04-word-workshop.md) remains the appropriate bounded starting point. Don't expand Word Garden's morphology claims into phonics. Additional future loops include bakery fractions/measurement, food webs, historical-source comparison, mapping, sound/light creation and reflective community conversation, as already sketched in the atlas. Some fit the familiar shells; historical uncertainty, auditory discrimination and making a composition need their own representations and responses.
+
+Claude’s [PR #16](https://github.com/anotherpanacea-eng/learning-garden/pull/16) supplies concrete follow-ons, integrated in the [strand map](strand-map.md) and [game proposals](curriculum-gaps.md): **Field Notebook/data desk** grows records into learner-built tallies/charts; **minibeast meadow** grows clue search into collect · classify · connect; **Market Day** introduces coin value, equivalent payments and later change/budgeting. Each changes the learner’s action, rather than only the topic skin. A data desk can start from labelled example/model data or the plant slice; the town weather log and almanac are unbuilt proposals in [PR #6](https://github.com/anotherpanacea-eng/learning-garden/pull/6), not a dependency already satisfied. Fossil-bank evidence, migration postcards and an explicitly defined sorting classifier remain later design candidates. No broad count of source topics estimates their future coverage.
 
 Before choosing a fourth build, use what the first three reveal about the **activities**: can a child tell what the question is, retain needed materials, choose useful support, and explore the intended contrast? Parent observations can guide private choices. Game participation and a larger taxonomy mapping count are not evidence of learning gains. For each delivered slice, update only the actual task-scoped atlas references and its limits, keep a few synthetic transfer examples for review, and stop short of claiming a complete developmental sequence.
 
