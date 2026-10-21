@@ -46,6 +46,22 @@ for(const pair of BELL_PAIRS){
  for(const n of ['low','middle','high']){const p=b.bellPlaybackPlan([n]);eq(p.slots[0].frequency,BELL_NOTES.find(x=>x.id===n).frequency);eq(p.duration,.5);}
  const seq=['low','rest','high','middle','low','rest','middle','high'],p=b.bellPlaybackPlan(seq);eq(p.duration,4);eq(p.slots.at(-1).start,3.5);eq(p.slots[1].frequency,null);eq(p.slots[1].toneSeconds,0);seq[0]='high';eq(p.sequence[0],'low','plan isolated from later edits');eq(b.bellPlaybackPlan([]).hasSound,false);eq(b.bellPlaybackPlan(['rest']).hasSound,false);for(const v of [null,{},['440'],Array(9).fill('low'),[undefined],Array(2),Object.assign(['low'],{extra:'high'})])eq(b.bellPlaybackPlan(v),null);
 }
+{
+ const s=fresh();b.chooseBellCard(s,'cafe-gather');eq(current(s).familiar,false,'reselecting the current invitation is not a revisit');
+ eq(b.checkBellArrangement(s).familiar,false,'first arrangement stays new');eq(b.checkBellArrangement(s).familiar,true,'repeating an arrangement is familiar');
+ b.setBellComparisonResponse(s,'higher');eq(b.checkBellComparison(s).familiar,false,'arrangement repetition does not mark a first comparison familiar');eq(b.checkBellComparison(s).familiar,true,'repeating the same comparison is familiar');
+ b.chooseBellPair(s,'fall');b.setBellComparisonResponse(s,'lower');eq(b.checkBellComparison(s).familiar,false,'a new pair has its own first comparison');
+ b.chooseBellPair(s,'rise');b.setBellComparisonResponse(s,'higher');eq(b.checkBellComparison(s).familiar,true,'returning to a checked pair is familiar');
+ const t=fresh();b.setBellComparisonResponse(t,'higher');b.checkBellComparison(t);b.checkBellComparison(t);eq(b.checkBellArrangement(t).familiar,false,'comparison repetition does not mark a first arrangement familiar');
+ b.chooseBellCard(t,'own-call');b.chooseBellCard(t,'cafe-gather');ok(b.checkBellArrangement(t).familiar,'returning from a different invitation is familiar');
+}
+{
+ const s=fresh('post-arrival');put(s,['low','middle','high']);b.saveBellBefore(s);b.checkBellArrangement(s);b.setBellComparisonResponse(s,'higher');b.checkBellComparison(s);b.keepBellCall(s);
+ function earlierWording(x){if(!x||typeof x!=='object')return;for(const [k,v] of Object.entries(x)){if(['title','purpose','request','notice','volumeCue','idea','diagramNotice','label'].includes(k)&&typeof v==='string')x[k]='Earlier display wording';else earlierWording(v);}}
+ earlierWording(s.bellStudio);const frozen=copy(s);ok(b.bellState(s),'saved invitation, pair and assessment wording remain readable');eq(s,frozen,'reading retains earlier wording exactly');
+ ok(b.appendBellSlot(s,'rest'),'earlier wording does not prevent editing');eq(current(s).kept,frozen.bellStudio.cards['post-arrival'].kept,'editing retains the exact earlier kept call');
+ for(const mutate of [r=>r.cards['post-arrival'].source.rule='own',r=>r.cards['post-arrival'].before.source.model.waveform='square',r=>r.cards['post-arrival'].checks[0].assessment.items[0].match=false,r=>r.cards['post-arrival'].checks[1].pair.modelId='future']){const changed=copy(frozen);mutate(changed.bellStudio);eq(b.bellState(changed),null,'wording tolerance still rejects changed semantics');}
+}
 const invalid=[null,[],{}, {version:99,private:'<fictional>'}];
 {
  const s=fresh('post-arrival');put(s,['low','middle','high']);b.checkBellArrangement(s);b.saveBellBefore(s);b.chooseBellPair(s,'same');b.setBellComparisonResponse(s,'same');b.checkBellComparison(s);b.keepBellCall(s);

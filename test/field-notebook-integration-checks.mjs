@@ -31,4 +31,10 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
  globalThis.document={querySelectorAll(sel){return sel==='[data-fn-adjust]'?[adjust]:[];},querySelector(sel){return sel==='#fn-value-error-day-6-light-A'?error:null;}};
  try{bindFieldNotebook(s,{save(){saved++;},render(){},focus(){}});adjust.onclick();eq(currentFieldCase(s).work.values['day-6-light-A'],21,'adjust uses visible pending20 rather than blank committed value');setFieldBarInput(s,'day-6-light-A','30');adjust.onclick();eq(currentFieldCase(s).work.values['day-6-light-A'],31,'adjust follows newly typed30 rather than last applied21');setFieldBarInput(s,'day-6-light-A','3-');const before=JSON.stringify(s);adjust.onclick();eq(JSON.stringify(s),before,'invalid adjustment retains exact draft');ok(error.textContent.includes('Your text is still here'),'invalid adjustment explains next move');eq(saved,2,'invalid pending adjustment creates no save/attempt');}finally{globalThis.document=previous;}
 }
+{
+ const s=fresh();chooseFieldCase(s,'light-day-6-A');toggleFieldRow(s,'day-6-light-A');setFieldPage(s,'chart');
+ const adjust={dataset:{fnAdjust:'day-6-light-A:-1'}},previous=globalThis.document;
+ globalThis.document={querySelectorAll(sel){return sel==='[data-fn-adjust]'?[adjust]:[];},querySelector(){return null;}};
+ try{bindFieldNotebook(s,{save(){},render(){},focus(){}});adjust.onclick();eq(currentFieldCase(s).work.values['day-6-light-A'],null,'subtracting from a blank bar keeps it blank, not zero');}finally{globalThis.document=previous;}
+}
 console.log(`Field Notebook UI/storage integration: ${checks} passed.`);

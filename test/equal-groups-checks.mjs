@@ -106,6 +106,7 @@ for(const c of GROUP_CASES)for(const place of ['cafe','bramble'])for(const unkno
   const t={equalGroups:bad,other:{kept:true}},before=copy(t);check(groupState(t)===null&&ensureEqualGroups(t)===null,'malformed/future root unavailable');equal(t,before,'validation read-only');check(!chooseGroupCase(t,'cafe','picnic'),'cannot overwrite invalid data');
   check(recoverGroupState(t),'explicit recovery succeeds');equal(t.equalGroups.recovered,bad,'raw old root retained');check(groupState(t)===t.equalGroups,'fresh root validates');equal(t.other,{kept:true},'unrelated data kept');
  }
+ chooseGroupCase(s,'cafe','picnic');chooseGroupUnknown(s,'cafe','each');chooseGroupCase(s,'cafe','little-table');equal(currentGroupWork(s,'cafe').unknown,'each','reopened case asks the question chosen on the chooser');
  const malformed=copy(s);malformed.equalGroups.cases['little-table'].cafe.model.groups=[13];const saved=copy(malformed);check(!groupState(malformed),'invalid model rejected');equal(malformed,saved,'invalid model untouched');
  const tooMany=fresh();tooMany.equalGroups.cases['little-table'].cafe.drafts.total.attempts=Array(25).fill({});check(!groupState(tooMany),'oversized attempts rejected');
 }
