@@ -21,5 +21,6 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
 {
  const s=fresh(),keep={},summary={};let target='',saved=0;const previous=globalThis.document;globalThis.document={querySelectorAll(){return [];},querySelector(sel){return sel==='[data-ps-keep]'?keep:null;}};try{keep.addEventListener=(_,fn)=>keep.click=fn;bindPlantStudy(s,{save(){saved++;},render(){},focus(s){target=s;}});keep.click();eq(target,'#ps-notebook-title','keep focuses usable summary rather than newly disabled button');ok(saved===1&&s.plantStudy.observations.length===1,'keep action saves once');}finally{globalThis.document=previous;}
 }
+{const s=fresh();setPlantDay(s,6);setPlantSpecimen(s,'dim','A');recordPlantObservation(s);choosePlantLocation(s,'light');carryPlantPlan(s,'day-6-dim-A');s.plantStudy.plan.observation.conditionLabel='<img src=x onerror="fictional()">';const html=plantPlanPanel(s);ok(html&&!html.includes('<img src=x')&&html.includes('&lt;img'),'carried plan fields are escaped');}
 ok(plantStudyEntry().includes('#living/plants'),'Living Garden entry points to new experience');
 console.log(`Plant study UI/storage integration: ${checks} passed.`);

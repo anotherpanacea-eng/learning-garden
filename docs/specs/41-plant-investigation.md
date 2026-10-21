@@ -47,7 +47,7 @@ Primary biological/design references, to verify during independent content revie
 - [RHS: How plants use light to grow](https://www.rhs.org.uk/advice/understanding-plants/how-plants-use-light-to-grow): light and sugars; pale/weak growth under inadequate light.
 - [SAPS: Do plants need light to grow?](https://www.saps.org.uk/teaching-resources/resources/6206/do-plants-need-light-to-grow-activity-2/): germination versus later development.
 - [University of Minnesota Extension: Starting seeds indoors](https://extension.umn.edu/garden-and-home/yard-and-garden/gardening-in-minnesota/starting-seeds-indoors): initial seed reserves, species-dependent germination, moisture and elongated low-light seedlings.
-- [ESA AstroFarmer teacher guide](https://www.esa.int/Education/Teachers_Corner/Astrofarmer_-_Learning_about_conditions_for_plant_growth_Teach_with_space_PR42), activity 2: normal light versus total darkness, a stronger contrast than our dim-light illustration. Our invented measurements do not come from this classroom activity.
+- [ESA AstroFarmer teacher guide](https://climatedetectives.esa.int/wp-content/uploads/2023/09/PR42_AstroFarmer-1.pdf), activity 2: normal light versus total darkness, a stronger contrast than our dim-light illustration. Our invented measurements do not come from this classroom activity.
 
 ## Visual direction and delivery
 

@@ -87,4 +87,10 @@ for(const c of MESSAGE_CATALOG){
  for(const mutate of [r=>r.extra=true,r=>r.nextId=Infinity,r=>r.nextId=1,r=>r.selected.post=900,r=>r.seen.unknown=1,r=>r.seen[r.episodes[0].caseId]=0,r=>r.suggested.kind='locked',r=>r.suggested.reason=3,r=>r.episodes[0].cardOrder[0]=r.episodes[0].cardOrder[1],r=>r.episodes[0].clueOrder.reverse().pop(),r=>r.episodes[0].caseId='unknown',r=>r.episodes[0].priorExposure='mastered',r=>r.episodes[0].notebook.cases.unknown={},r=>r.episodes[0].firstKept.qualifies=false,r=>r.recent[0].support.help=true,r=>r.recent.push(copy(r.recent[0])),r=>r.episodes.push(copy(r.episodes[0]))]){const x=copy(good);mutate(x);malformed.push(x);}
  for(const root of malformed){const s={letterTrail:copy(root),other:{keep:'exact'}},before=copy(s);equal(letterState(s),null,'unsupported root rejected');equal(ensureLetters(s),null,'initializer retains malformed/future root');check(!drawLetter(s,'post')&&!selectLetter(s,'post',1)&&!carryLetter(s,'post')&&!keepLetter(s,'post'),'ordinary actions do not replace unsupported work');equal(s,before,'unsupported payload unchanged');check(recoverLetters(s),'explicit recovery');equal(s.letterTrail.recovered,root,'recovery retains exact old payload');check(letterState(s),'fresh recovered root valid');check(!recoverLetters(s),'valid root not reset');equal(s.other,before.other,'recovery does not affect unrelated state');}
 }
+{
+ // Help seen on an earlier round of the same case keeps the later letter non-qualifying, but it did not use help.
+ const s={};let x=findCase(s,'shelter-parcel');useMessageSupport(x.adapter,'post','help');serve(s);keepLetter(s,'post');equal(letterSuggestion(s).kind,'detail','helped pair offers fewer details');
+ s.letterTrail.suggested={kind:'pair',reason:'Fictional earlier suggestion.'};x=findCase(s,'shelter-parcel');serve(s);const r=keepLetter(s,'post');
+ equal([r.snapshot.qualifies,r.snapshot.support.help],[false,true],'earlier help still blocks fresh evidence');equal(r.suggestion.kind,'pair','help on an earlier round does not lower a later unhelped letter');
+}
 console.log(`Changing-letter trail checks: ${checks} passed.`);

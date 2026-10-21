@@ -9,11 +9,13 @@ const supportValid=x=>object(x)&&Object.entries(x).every(([k,v])=>SUPPORT.includ
 const supportsValid=x=>object(x)&&Object.entries(x).every(([k,v])=>FIELD_TASKS.includes(k)&&supportValid(v));
 const validDays=x=>Array.isArray(x)&&x.length<=4&&new Set(x).size===x.length&&x.every(d=>PLANT_DAYS.includes(d));
 function equivalent(a,b){if(a===b)return true;if(Array.isArray(a)||Array.isArray(b))return Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>equivalent(v,b[i]));return object(a)&&object(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>Object.hasOwn(b,k)&&equivalent(a[k],b[k]));}
-function rowsValid(rows){return Array.isArray(rows)&&rows.length<=2&&new Set(rows.map(r=>r?.observation?.id)).size===rows.length&&rows.every(r=>keys(r,['observation','origin'])&&ORIGINS.includes(r.origin)&&object(r.observation)&&plantObservationById(r.observation.id)!==null&&equivalent(r.observation,plantObservationById(r.observation.id)));}
+// Saved snapshots keep their own wording; only the measured facts must still match, so a copy edit cannot lock saved work.
+const sameMeasure=(a,b)=>['id','day','condition','specimen','stemMm'].every(k=>a[k]===b[k]),facts=x=>JSON.parse(JSON.stringify(x,(k,v)=>k==='feedback'?undefined:v));
+function rowsValid(rows){return Array.isArray(rows)&&rows.length<=2&&new Set(rows.map(r=>r?.observation?.id)).size===rows.length&&rows.every(r=>keys(r,['observation','origin'])&&ORIGINS.includes(r.origin)&&object(r.observation)&&plantObservationById(r.observation.id)!==null&&sameMeasure(r.observation,plantObservationById(r.observation.id)));}
 const rawValid=x=>typeof x==='string'&&x.length<=16;
 function pendingValid(p,rows){return keys(p,['bars','modelChoice','difference'])&&object(p.bars)&&Object.keys(p.bars).length===rows.length&&rows.every(r=>Object.hasOwn(p.bars,r.observation.id)&&rawValid(p.bars[r.observation.id]))&&(p.modelChoice===null||['light','dim','same','unsure'].includes(p.modelChoice))&&rawValid(p.difference);}
 function fieldsValid(s){return rowsValid(s.rows)&&pendingValid(s.pending,s.rows)&&object(s.values)&&Object.keys(s.values).length===s.rows.length&&s.rows.every(r=>Object.hasOwn(s.values,r.observation.id)&&validValue(s.values[r.observation.id]))&&(s.quantity===null||FIELD_QUANTITIES.some(q=>q.id===s.quantity))&&(s.unit===null||FIELD_UNITS.some(u=>u.id===s.unit));}
-function snapshotValid(s,id){const c=fieldCaseById(id);return c&&keys(s,['caseId','question','rows','values','pending','quantity','unit','sourceModel','support','familiar'])&&s.caseId===id&&s.question===c.question&&fieldsValid(s)&&equivalent(s.sourceModel,FIELD_SOURCE_MODEL)&&supportsValid(s.support)&&typeof s.familiar==='boolean';}
+function snapshotValid(s,id){const c=fieldCaseById(id);return c&&keys(s,['caseId','question','rows','values','pending','quantity','unit','sourceModel','support','familiar'])&&s.caseId===id&&typeof s.question==='string'&&fieldsValid(s)&&object(s.sourceModel)&&s.sourceModel.id===FIELD_SOURCE_MODEL.id&&supportsValid(s.support)&&typeof s.familiar==='boolean';}
 export function fieldDataResult(snapshot){
  const c=fieldCaseById(snapshot.caseId),rows=snapshot.rows.map(r=>r.observation),issues=[];
  if(rows.length<2)issues.push('missing');
@@ -47,7 +49,7 @@ function resultFor(task,snapshot,response){
  }
  return null;
 }
-function checkValid(check,id){return keys(check,['task','snapshot','response','result','support','practice','familiar'])&&READ.concat(['data','chart']).includes(check.task)&&snapshotValid(check.snapshot,id)&&supportValid(check.support)&&equivalent(check.support,check.snapshot.support[check.task]??{})&&check.practice===true&&typeof check.familiar==='boolean'&&resultFor(check.task,check.snapshot,check.response)!==null&&equivalent(check.result,resultFor(check.task,check.snapshot,check.response));}
+function checkValid(check,id){return keys(check,['task','snapshot','response','result','support','practice','familiar'])&&READ.concat(['data','chart']).includes(check.task)&&snapshotValid(check.snapshot,id)&&supportValid(check.support)&&equivalent(check.support,check.snapshot.support[check.task]??{})&&check.practice===true&&typeof check.familiar==='boolean'&&resultFor(check.task,check.snapshot,check.response)!==null&&equivalent(facts(check.result),facts(resultFor(check.task,check.snapshot,check.response)));}
 function keptValid(k,id){return k===null||keys(k,['draft','checks','revised'])&&snapshotValid(k.draft,id)&&object(k.checks)&&Object.entries(k.checks).every(([task,c])=>['data','chart',...READ].includes(task)&&object(c)&&c.task===task&&checkValid(c,id))&&typeof k.revised==='boolean';}
 function workValid(w,id){return keys(w,['rows','values','pending','quantity','unit','support','familiar','checks','kept'])&&fieldsValid(w)&&supportsValid(w.support)&&typeof w.familiar==='boolean'&&Array.isArray(w.checks)&&w.checks.length<=24&&w.checks.every(c=>checkValid(c,id))&&keptValid(w.kept,id);}
 const newWork=()=>({rows:[],values:{},pending:{bars:{},modelChoice:null,difference:''},quantity:null,unit:null,support:{},familiar:false,checks:[],kept:null});
@@ -59,7 +61,7 @@ export function recoverFieldNotebook(state){if(state.fieldNotebook===undefined||
 export function currentFieldCase(state){const r=fieldNotebook(state);return r?{definition:fieldCaseById(r.currentCase),work:r.cases[r.currentCase]??newWork()}:null;}
 function change(state,fn){const r=fieldNotebook(state);if(!r)return false;const next=clone(r);const result=fn(next);if(result===false||!valid(next))return false;state.fieldNotebook=next;return result??true;}
 function work(r){return r.cases[r.currentCase]??=(newWork());}
-export function chooseFieldCase(state,id){if(!fieldCaseById(id))return false;return change(state,r=>{if(r.cases[id])r.cases[id].familiar=true;else r.cases[id]=newWork();r.currentCase=id;});}
+export function chooseFieldCase(state,id){if(!fieldCaseById(id))return false;return change(state,r=>{if(!r.cases[id])r.cases[id]=newWork();else if(id!==r.currentCase)r.cases[id].familiar=true;r.currentCase=id;});}
 export function nextFieldCase(state){const r=fieldNotebook(state);return r?chooseFieldCase(state,FIELD_CASES[(FIELD_CASES.findIndex(c=>c.id===r.currentCase)+1)%FIELD_CASES.length].id):false;}
 export function setFieldPage(state,page){if(!PAGES.includes(page))return false;return change(state,r=>{r.page=page;});}
 export function setFieldReadPrompt(state,prompt){if(!READ.includes(prompt))return false;return change(state,r=>{r.readPrompt=prompt;});}
