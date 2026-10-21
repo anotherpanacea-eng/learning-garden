@@ -53,6 +53,8 @@ With Node.js installed:
 ```sh
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
+node test/sharing-counter-checks.mjs
+node test/sharing-counter-integration-checks.mjs
 node test/plant-study-checks.mjs
 node test/plant-study-integration-checks.mjs
 node test/letter-trail-checks.mjs
@@ -254,3 +256,7 @@ Trying cards is exploration. Only explicitly keeping a supplied version contribu
 ## Field Notebook
 
 [Open the Field Notebook](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook) to choose useful model observations, make two labelled bars, read the chart and compare it with its source. Eight open comparisons revisit model days 0/2/4/6 and specimens A/B. A correct reading of an inaccurate chart stays distinct from matching the source or choosing relevant data. Keep unfinished charts, revise later, and bring a frozen chart to the planting corner. Typed-but-unapplied entries and support stay with the explorer. Source values remain explicitly invented; no real plant measurement or learning-level inference is made. [Spec 42](docs/specs/42-field-notebook.md).
+
+## The Sharing Counter
+
+[Pack a picnic](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/sharing) by repairing unequal loaf cuts, comparing half with two quarters, and sharing twelve buns into four equal groups. Six requests stay open, with reversible controls, optional stepped examples and frozen unfinished drafts. The same whole stays pictured; feedback separates share count, equality and packed amount. This is supported visual fraction practice, with no ingredient-stock or supper effects. [Spec 43](docs/specs/43-sharing-counter.md).

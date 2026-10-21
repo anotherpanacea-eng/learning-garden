@@ -80,3 +80,7 @@ Primary science references are listed in [spec 41](specs/41-plant-investigation.
 ## Field Notebook — 2026-10-21
 
 [Spec 42](specs/42-field-notebook.md) studies the same freshly inspected Jane and Marble revisions as spec41, with additional recording/presentation/scaled-bar descriptions and source edges checked. It keeps the bundled graph pin and licenses unchanged. Pinned topic titles `mt_7IFpDVNsmt` and `mt_r8XnXwRA6g` are misleading; the reviewed descriptions, not a title match, justify the narrow table/bar references. Jane supplies design study of current-item stability and separate help only; no new upstream code, prose or assets are incorporated. The exact invented seedling source is reused; no new biological dataset is claimed.
+
+## The Sharing Counter — 2026-10-21
+
+[Spec 43](specs/43-sharing-counter.md) studies Jane `7802588313e6c6edc57432df398d9f3ddb9ff938` and Marble `95e6dddef0a6a0af9ed973a3e3fd5f35da00a733`. Relevant fraction descriptions and prerequisite edges were checked, including set fractions, equal sharing and same-whole equivalence. Jane informs stable current work, small actions and separate support; no new upstream code, lesson prose or assets are copied. The licensed bundled graph remains pinned. IES fraction guidance and official Common Core geometry/fraction standards inform original rectangular art and wording, without validating the game. Atlas references are scoped to actual equal partitions, twelve-object set practice and supplied number-line/equivalence explanations.

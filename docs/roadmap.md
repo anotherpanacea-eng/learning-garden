@@ -123,3 +123,7 @@ The continuing letter round is implemented in [spec 40](specs/40-changing-letter
 ### Field Notebook: choose and chart
 
 [Spec 42](specs/42-field-notebook.md) adds active data selection and chart construction after the growing shelf. Eight open model comparisons separate source relevance, copying labels/values, reading an entered chart and answering a model question. Kept drafts travel to the planting corner. Further real measurements, Workshop datasets, line plots and independent scale choices remain future slices. Next: the café Sharing Counter's equal-whole fraction models.
+
+### The Sharing Counter: cut, compare, pack, revise
+
+[Spec 43](specs/43-sharing-counter.md) adds six open picnic requests: equal rectangular halves/quarters, same-whole half/two-quarter comparison, and one/three quarters of a twelve-bun basket. Model edits stay reversible; keeping a draft does not serve a café guest or spend stock. Number-line amount is derived explanation, distinct from independent placement. Next: a manually stepped water-path machine, then measured recipe preparation. Thirds/eighths, different-shaped equal shares and real food measurements remain future slices.
