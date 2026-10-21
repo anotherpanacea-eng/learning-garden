@@ -26,6 +26,24 @@ The bounded authoring packet is complete: [independent-review index for52–55 a
 
 Once a selected specification is independently cleared, its build can proceed alongside separately authorized asset production. Neither asset queue blocks unrelated existing play. Each selected activity still needs independent implementation review, preservation of existing drafts and source boundaries, and touch/keyboard/browser checks. No asset production or runtime implementation was performed in the authoring packet. This queue adds no learner levels, locks, uploaded data or runtime act-completion flags.
 
+## Future feature: choose where to begin
+
+Requested 2026-10-21. **Proposed; not implemented or independently reviewed.** As reviewed curricula become available across ages and grade levels, offer several useful entry points instead of requiring everyone to begin with the earliest mathematics. Start with mathematics, then extend the approach to other strands as their content supports it.
+
+| Starting interest | Illustrative entry |
+| --- | --- |
+| Explore numbers | Counting, comparing quantities and understanding simple numbers. |
+| Add and subtract | Begin with addition/subtraction ideas and strategies, with number foundations available when useful. |
+| Explore further mathematics | Choose an available topic such as fractions, proportional reasoning or algebra once its lessons are built and reviewed. |
+
+These are choices about **where to start**, not permanent learner levels. A learner, with optional grown-up help, can choose or change an entry point, browse other topics and revisit foundations at any time. Someone may explore advanced geometry while wanting foundational number practice; mathematical depth, reading load and response mode remain independent. No mandatory placement test or age/grade restriction is introduced by this request. If grade labels are later offered as optional navigation, they must name the curriculum convention and remain editable filters, not inferred ability or access rules.
+
+Each entry needs a clear description of the ideas involved, a short sample of the actual activity and optional links to useful prerequisites. Those links offer help; they do not force completion of earlier units. Choosing an advanced entry neither marks skipped lessons complete nor establishes mastery, and choosing foundations never erases prior work. Switching entry points preserves every paused activity and existing support/familiarity record; preferences stay separate from observations. Unbuilt or unreviewed lessons cannot appear as playable entry choices.
+
+Provide enough story context to join an activity without replaying every earlier act. Starting later in the curriculum must not fabricate completed story milestones or remove access to the opening and earlier adventures. The future specification should cover first-time entry, returning to saved work, mixed starting points across strands, accessible topic samples and switching without losing drafts. Begin implementation only after enough reviewed content exists to make the choices real and an independent navigation/state specification review is complete.
+
+This extends [spec49's](specs/49-six-act-curriculum.md) existing open-destination and separate-learning-dimension principles. [Jane/Marble opportunities](upstream-opportunities.md) remain design references: taxonomy prerequisite edges and source ages inform lesson authoring, not automatic placement or compulsory routes. No upstream content, graph changes, learner schema, assessment engine or runtime implementation is added here.
+
 ## Earlier delivery sequence — bounded implementations
 
 
