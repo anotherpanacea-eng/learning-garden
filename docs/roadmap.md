@@ -1,12 +1,27 @@
-# After the Storm: science and language roadmap
+# After the Storm: connected adventures roadmap
 
-This is the delivery roadmap for the next six increments. It is a plan for this small, parent-guided app, not a complete curriculum or a promise of measured learning gains. Each step has a bounded specification and will receive independent review before implementation. Delivery order does not lock a child's access: every built destination remains open. Existing math, stories, companions, and the replayable café remain available.
+This is a plan for this small, parent-guided app, not a complete curriculum or a promise of measured learning gains. Each selected increment receives a bounded specification and independent review before implementation. Delivery order does not lock a child's access: every existing destination remains open. Existing math, stories, companions, and the replayable café remain available.
+
+## Next releases, revised 2026-10-18
+
+The graph currently emphasizes mathematics. Expand playable experiences and their connections together; do not confuse a topic appearing on a map with a reviewed activity that teaches it. Keep the storm-recovery world as the common purpose, with several independent ways in.
+
+| Order | Increment | Smallest useful release | State |
+| --- | --- | --- | --- |
+| Now | [Storm Workshop and connected invitations](specs/03-storm-workshop.md) | Fix the parcel ramp: six configurations, repeatable trials, manual visual steps, ruler/table/graph, notebook. Contextual invitations connect water, gathering, café, Paris and math; extend the attributed graph slice with accurate, limited topic matches. | Implemented |
+| Next | [Willow Post Office, including Sky Post](specs/02-willow-post-office.md) | Six original deliveries with an illustrated flying courier: read an order, compose a route, watch its literal consequences, and revise. Connect writing, directions, parcel math and computational thinking. | Combine the courier direction into the build spec, then refresh and review |
+| Then | [Living Garden](specs/23-living-garden.md) | Search three habitats for signs of life, compare needs, and assemble simple food chains. Investigation helps locate ingredients; fantasy ingredients stay distinct from real ecology. | Initial scope; not built |
+| Then | [Travelers' Archive](specs/24-travelers-archive.md) | Follow a parcel into one historical setting; use a map, a timeline, and two short accounts to investigate its story. | Initial scope; not built |
+| Post Office follow-ups | [Sky Post expansions](specs/25-sky-post.md) | Extend the same Post Office game with delivery math, Learning/Play Centers, earned play credits, and a rival witch's optional challenge route. Reuse its map, delivery runner and saved state. | Initial scope; not a separate game; not built |
+| As the world expands | A fuller knowledge map | Bundle the complete Marble graph as background reference; filter by subject and playable destination, distinguish planned/context-only/practiced scope, and show only a few useful invitations to children. Add geography, art and music beyond Marble's subject list. | Later; no claim of full curriculum coverage |
+
+Word Workshop, Ecosystem expeditions and Story Loft below remain useful independent increments. Word work needs reviewed pronunciations; the ecology link-out is separate from the new local Living Garden. Neither replaces a complete literacy or science curriculum.
 
 ## Teaching direction
 
 Check [Jane and Marble opportunities](upstream-opportunities.md) before building each learning capability. The first reviewed story pack and tap-to-order response format are implemented, using Jane's pack/publisher conventions and a small validation adaptation. The document distinguishes current reuse from proposed extensions and records upstream revisions.
 
-Begin with a purpose worth exploring, build an idea through a controllable visual explanation, invite a change or prediction, and offer a new situation with less support. Children can pause, replay, skip familiar steps, choose another representation, or explore with a grown-up. No timer, grades, streaks, placement claim, or compulsory sequence. Animations explain a change and stay under the learner's control; reduced-motion and keyboard/touch alternatives work throughout.
+Begin with a purpose worth exploring, build an idea through a controllable visual explanation, invite a change or prediction, and offer a new situation with less support. Children can pause, replay, skip familiar steps, choose another representation, or explore with a grown-up. Learning tasks stay untimed, without grades, streaks, placement claims or a compulsory sequence. Sky Post may later offer optional foreground-only bonus-play minutes under its separate pause rules. Animations explain a change and stay under the learner's control; reduced-motion and keyboard/touch alternatives work throughout.
 
 Keep reading, comprehension, composition, investigation, support, familiarity, and unobserved skills distinct. A prediction is an idea to test, not a scored fact. Clicking an external link does not establish that an experiment was used. Selecting an observation reports what someone noticed; it is not proof of scientific understanding. Word chunks and response choices can support expression without demonstrating independent free writing. Off-screen projects remain invitations.
 
@@ -20,9 +35,9 @@ Keep reading, comprehension, composition, investigation, support, familiarity, a
 
 | Step | Place and purpose | Smallest useful release | Status |
 | --- | --- | --- | --- |
-| 1 | [Water Lab expeditions](specs/01-water-expeditions.md): predict, explore, return and explain | Three short missions; an external Marble destination; original controllable explanation pictures; private notebook | Implemented in this increment |
-| 2 | [Willow Post Office](specs/02-willow-post-office.md): read and write for a recipient | Six deliveries and a word-chunk instruction builder with visible consequences and several valid messages | Planned |
-| 3 | [Storm Workshop](specs/03-storm-workshop.md): choose a fair comparison and investigate | One original cart/ramp experiment family; repeatable trials and a comparison notebook | Planned |
+| 1 | [Water Lab expeditions](specs/01-water-expeditions.md): predict, explore, return and explain | Three short missions; an external Marble destination; original controllable explanation pictures; private notebook | Implemented |
+| 2 | [Willow Post Office](specs/02-willow-post-office.md): read and write for a recipient | Six flying-courier deliveries and a word-chunk instruction builder with visible consequences and several valid messages; Sky Post extends this same game | Next after Workshop |
+| 3 | [Storm Workshop](specs/03-storm-workshop.md): choose a fair comparison and investigate | One original cart/ramp experiment family; repeatable trials and a comparison notebook | Implemented; moved ahead of Post Office |
 | 4 | [Word Workshop](specs/04-word-workshop.md): sound, spelling and meaning work together | A small reviewed sequence of word families, pronunciation support, and meaningful messages | Planned |
 | 5 | [Ecosystem expeditions](specs/05-ecosystem-expeditions.md): explore interacting causes | Three guided visits to Marble's simulator, with predictions, repeat comparisons, and careful model conclusions | Planned |
 | 6 | [Story Loft](specs/06-story-loft.md): stories, viewpoints and expression | Six original short stories, linked perspectives, evidence-based interpretations, retelling and composition | Planned |
@@ -73,4 +88,4 @@ Implemented: [French Paris and plate return](specs/13-french-paris-and-plate-ret
 
 Implemented: [French exploration](specs/14-french-exploration.md) adds nine original stories with three authored text choices, conservative French-only practice suggestions, manual story selection, and persistent routes. The initial three French errands remain available. More language content can extend the reviewed library; there is no live story generator or French proficiency assessment.
 
-Implemented: [Café welcome-back dinner and New Game Plus](specs/22-cafe-welcome-supper.md). Six served tables light the café for neighbors returning after the storm; a visible ending offers ongoing service or another six-table gathering without resetting the game. This draws on the participation/world-regrowth direction proposed in [PR #2](https://github.com/anotherpanacea-eng/learning-garden/pull/2). Its Number Garden refresh specs remain proposed; picture/question corrections and saved-progress protection are the first priorities for their own review.
+Implemented: [Café welcome-back dinner and New Game Plus](specs/22-cafe-welcome-supper.md). Six served tables light the café for neighbors returning after the storm; a visible ending offers ongoing service or another six-table gathering without resetting the game. This draws on the participation/world-regrowth direction proposed in [PR #2](https://github.com/anotherpanacea-eng/learning-garden/pull/2). The Number Garden refresh is now implemented, as listed above.

@@ -35,6 +35,8 @@ node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs
 node test/science-checks.mjs
+node test/workshop-checks.mjs
+node test/learning-invitation-checks.mjs
 node test/cafe-expedition-checks.mjs
 node test/cafe-supper-checks.mjs
 node test/facts-checks.mjs
@@ -52,7 +54,7 @@ These checks use synthetic observations. They check the application logic; they 
 
 ## Roadmap and science expeditions
 
-The [six-step roadmap](docs/roadmap.md) links reviewed specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Only step 1 is implemented in this increment; the other five remain planned.
+The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab and Storm Workshop are implemented; the other destinations remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with later learning/play-center and rival-witch expansions, not a separate game.
 
 Science offers three guided water visits with optional predictions, a focused external Marble Water Lab link, self-reported observations, original controllable explanation pictures, and a discussion/project invitation. Each mission is independently available and can finish without an external visit or an answer. Link selection is not treated as visiting, experiment completion, or understanding. Explanation use and reported reading mode stay distinct. The latest 24 visits stay browser-local under the existing privacy controls; there is no tracking or data exchange with Marble. External application source/assets are not copied or embedded.
 
@@ -120,7 +122,7 @@ The parent-facing learning map uses a focused subset of Marble's actual prerequi
 
 This is not a validated assessment, a comprehensive skills inventory, a grade-level estimate, or a class-placement recommendation. The adult and child select the observed method together; the app does not judge spoken explanations. Try different examples and representations on later days. Pip and Dot, stories, lessons, questions, and activities are original.
 
-Curriculum: Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://github.com/withmarbleapp/os-taxonomy, pinned commit `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. `dist/marble-map.json` contains 64 topics and 74 relationships: the 25 task-linked topics plus their direct prerequisites. Selected age suffixes have been removed from names; descriptions and link reasons are retained. Database/subset: ODbL 1.0; Marble descriptive content: CC BY-SA 4.0. The map view links its downloadable data, pinned source, and both licenses. Further relationships outside the slice are disclosed.
+Curriculum: Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://github.com/withmarbleapp/os-taxonomy, pinned commit `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. `dist/marble-map.json` contains 82 topics and 87 relationships: the original 25 math focus topics and their direct prerequisites, plus eight limited science, data-display and English activity connections and their direct prerequisites. Topic matches describe only the stated practice; context-only nodes have no attached activity. Selected age suffixes have been removed from names; descriptions and link reasons are retained. Database/subset: ODbL 1.0; Marble descriptive content: CC BY-SA 4.0. The map view links its downloadable data, pinned source, and both licenses. Further relationships outside the slice are disclosed.
 
 Teaching reference: IES, Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades, https://ies.ed.gov/ncee/wwc/PracticeGuide/26. The prototype combines visual explanations, brief practice, flexible strategies, and interesting problems without timers or placement gates.
 
@@ -135,3 +137,11 @@ Specs 15–21 are implemented: matched and labeled teaching pictures; authored f
 Anonymous explorer slots use a picture, color and symbol, with separate full-app progress and voice preferences. No names or other identifying fields are added. Legacy shared progress is copied without changing the original; unreadable saves are kept before replacement, and failed preservation writes leave the original untouched. Notes can download or remove kept copies. Saving off removes all app-managed explorer, legacy and kept copies on this device while retaining current sessions in memory. Clearing one explorer leaves the others intact.
 
 Participation grows an original storm-recovery garden: finishing a walk or adventure, using a new kind of help, or acknowledging an open invitation can bring a plant or decoration. A skipped walk counts equally. Plantings never influence skill suggestions or become learning evidence. Open invitations include the seven areas' wondering prompts, estimates, defendable choices, different rectangles and counterexamples. All paths remain open.
+
+## Storm Workshop and connected adventures
+
+Open `#workshop` to investigate the storm-damaged parcel ramp. Choose ramp height or landing surface as the changed variable, hold the other fixed, release the same cart without a push, and step it to the ramp’s foot and stopping point. Six authored configurations each cycle through three illustrative distances. These are model results, not measured physical data or a calibrated physics simulator. The ruler begins at the ramp’s foot; a table and a zero-based 0–30 bar graph show the same distances. Replaying changes no results or run counts.
+
+Predictions and explanations are optional and unscored. Support and separately reported reading stay distinct. Paused trials retain exact settings, phase, result and model revision. Older unsupported models remain closed, readable work. The latest 24 comparisons and 24 completed trial rows per comparison stay local; counters continue after older rows are trimmed. Explorer switching, saving off, notes/export and reset apply as elsewhere.
+
+Open `#explore` for the original connected-adventure directory. Workshop, Water Lab, café, orchard, English Paris and measurement/fractions activities offer contextual links. These are thematic invitations, distinct from Marble’s actual prerequisite links. Navigation preserves waiting activities. [Spec 03](docs/specs/03-storm-workshop.md) records model details, scoped connections and upstream study. [The roadmap](docs/roadmap.md) includes the original Sky Post courier, learning/play centers, earned play credits and a rival-witch practice loop as future work, not current features.

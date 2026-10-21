@@ -1,11 +1,11 @@
 {
-  "dataset": "Number Garden focused subset of Marble Skill Taxonomy v1",
+  "dataset": "After the Storm focused subset of Marble Skill Taxonomy v1",
   "commit": "96a7933754af672e1bfdbf7ecb05c325860c6e0d",
   "totalTopics": 1590,
   "attribution": "Marble Skill Taxonomy (v1) © Generative Spark, Inc. (Marble), https://withmarble.com",
   "databaseLicense": "https://opendatacommons.org/licenses/odbl/1-0/",
   "contentLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "modifications": "Focused subset. Display names omit parenthetical age suffixes. No curriculum standard text or child/user data included.",
+  "modifications": "Original math focus nodes and direct prerequisites retained. Added limited science, data-display and English activity connections plus direct prerequisites; original thematic bridges are stored separately. Selected age suffixes removed from display names; no age-based placement.",
   "topics": [
     {
       "id": "mt_THl9GLxwoL",
@@ -13,7 +13,8 @@
       "description": "Understand that the two digits of a two-digit number represent amounts of tens and ones",
       "domain": "Number Representation & Place Value",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_aPBzD28_mT",
@@ -21,7 +22,8 @@
       "description": "Understand that the three digits of a three-digit number represent amounts of hundreds, tens, and ones",
       "domain": "Number Representation & Place Value",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_98c2qwEF7Q",
@@ -29,7 +31,8 @@
       "description": "Solve number problems and practical problems involving place value of numbers up to 1000",
       "domain": "Number Representation & Place Value",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_m1W6nTQJ2b",
@@ -37,7 +40,8 @@
       "description": "Add and subtract within 20 using strategies such as making ten, decomposing a number leading to ten, and using known facts",
       "domain": "Addition & Subtraction",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_Zdv-b-iW5K",
@@ -45,7 +49,8 @@
       "description": "Use multiplication and division within 100 to solve word problems involving equal groups, arrays, and measurement quantities",
       "domain": "Multiplication & Division",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_AR-K72OIIO",
@@ -53,7 +58,8 @@
       "description": "Solve problems involving multiplying and adding, including using the distributive law, integer scaling problems, and harder correspondence problems",
       "domain": "Multiplication & Division",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_anAe11HAEH",
@@ -61,7 +67,8 @@
       "description": "Solve two-step word problems using the four operations; represent problems using equations with a letter standing for the unknown quantity",
       "domain": "Addition & Subtraction",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_-hTTat0mBR",
@@ -69,7 +76,8 @@
       "description": "Recognise, find, and name a half as one of two equal parts of an object, shape, or quantity",
       "domain": "Fractions",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_k2WE0-22-4",
@@ -77,7 +85,8 @@
       "description": "Recognise, find, and write fractions of a discrete set of objects: unit fractions and non-unit fractions with small denominators",
       "domain": "Fractions",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_3y7xKP9MjU",
@@ -85,7 +94,8 @@
       "description": "Solve problems involving increasingly harder fractions to calculate quantities, including non-unit fractions where the answer is a whole number",
       "domain": "Fractions",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_g3W0mdADVu",
@@ -93,7 +103,8 @@
       "description": "Recognise, find, and name a quarter as one of four equal parts of an object, shape, or quantity",
       "domain": "Fractions",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_nvdpxAJTBG",
@@ -101,7 +112,8 @@
       "description": "Count in multiples of 2, 5, and 10 (skip counting)",
       "domain": "Counting & Cardinality",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_IzQvs7k_sE",
@@ -109,7 +121,8 @@
       "description": "Count from 0 in multiples of 4, 8, 50, and 100",
       "domain": "Counting & Cardinality",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_A-FyLLLLzy",
@@ -117,7 +130,8 @@
       "description": "Generate a number or shape pattern that follows a given rule; identify apparent features of the pattern not explicit in the rule and explain informally why they occur",
       "domain": "Multiplication & Division",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_KJeEeTutJI",
@@ -125,7 +139,8 @@
       "description": "Recognise and name common 2-D shapes (circles, triangles, rectangles including squares)",
       "domain": "Geometry",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_hRZyKvz1KN",
@@ -133,7 +148,8 @@
       "description": "Identify lines of symmetry in 2-D shapes presented in different orientations; recognise line-symmetric figures and draw lines of symmetry",
       "domain": "Geometry",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_sBcRdUfAzV",
@@ -141,7 +157,8 @@
       "description": "Identify and describe properties of 2-D shapes including the number of sides and line symmetry in a vertical line",
       "domain": "Geometry",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_MFfYcnv6Tv",
@@ -149,7 +166,8 @@
       "description": "Identify right angles; recognise that two right angles make a half-turn, three make three-quarters, and four make a complete turn",
       "domain": "Geometry",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_cqSf213hSa",
@@ -157,7 +175,8 @@
       "description": "Measure the length of an object using same-size length units laid end to end with no gaps or overlaps",
       "domain": "Measurement",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_e4x3l2JeLI",
@@ -165,7 +184,8 @@
       "description": "Measure the length of an object by selecting and using appropriate tools such as rulers, yardsticks, metre sticks, and measuring tapes",
       "domain": "Measurement",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_WtcFrxGOgw",
@@ -173,7 +193,8 @@
       "description": "Solve problems involving perimeters of polygons: find perimeter from side lengths, find an unknown side length, and explore rectangles with same perimeter but different areas (or vice versa)",
       "domain": "Measurement",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_y1n0Zwhoca",
@@ -181,7 +202,8 @@
       "description": "Measure areas by counting unit squares (square cm, square m, square in, square ft)",
       "domain": "Measurement",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_3JgrHY221M",
@@ -189,7 +211,8 @@
       "description": "Determine the unknown whole number in an addition or subtraction equation relating three whole numbers",
       "domain": "Addition & Subtraction",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_yTWxkzzoOZ",
@@ -197,7 +220,8 @@
       "description": "Solve one- and two-step word problems within 100 using addition and subtraction, with unknowns in all positions",
       "domain": "Addition & Subtraction",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_pyMD_SIiYO",
@@ -205,7 +229,8 @@
       "description": "Construct and follow multi-step mathematical arguments; identify errors in reasoning and explain why a method works or does not work",
       "domain": "Mathematical Thinking",
       "focus": true,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_ehGS_uVSJv",
@@ -213,7 +238,8 @@
       "description": "Recognise and use the inverse relationship between addition and subtraction to check calculations and solve missing-number problems",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_oIzycTBeE4",
@@ -221,7 +247,8 @@
       "description": "Understand the meaning of the equal sign as 'is the same as' and determine if equations are true or false",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_CBHwluE6Lp",
@@ -229,7 +256,8 @@
       "description": "Add and subtract fractions with the same denominator, including results greater than one whole (e.g. 5/8 + 6/8 = 11/8)",
       "domain": "Fractions",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_izien3ZX51",
@@ -237,7 +265,8 @@
       "description": "Find 10 or 100 more or less than a given number up to 1000",
       "domain": "Number Representation & Place Value",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_w6MxaaoMXZ",
@@ -245,7 +274,8 @@
       "description": "Identify arithmetic patterns (including patterns in the addition table or multiplication table) and explain them using properties of operations",
       "domain": "Multiplication & Division",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_HFRYjTb-Z5",
@@ -253,7 +283,8 @@
       "description": "Fluently add and subtract within 1000 using strategies and algorithms based on place value, properties of operations, and the relationship between addition and subtraction",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_NLSfvB9vUl",
@@ -261,7 +292,8 @@
       "description": "Round any number to the nearest 10, 100, or 1000",
       "domain": "Number Representation & Place Value",
       "focus": false,
-      "outsidePrerequisites": 3
+      "outsidePrerequisites": 3,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_8gy7uxRlF6",
@@ -269,7 +301,8 @@
       "description": "Understand that 100 can be thought of as a bundle of ten tens — called a 'hundred'",
       "domain": "Number Representation & Place Value",
       "focus": false,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_18fK9sQdIz",
@@ -277,7 +310,8 @@
       "description": "Multiply two-digit and three-digit numbers by a one-digit number using formal written layout",
       "domain": "Multiplication & Division",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_EmR5n58jZt",
@@ -285,7 +319,8 @@
       "description": "Solve problems involving multiplication and division, including scaling problems and correspondence problems where n objects are connected to m objects",
       "domain": "Multiplication & Division",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_Lb2ZnMdkYR",
@@ -293,7 +328,8 @@
       "description": "Apply properties of operations (commutative, associative, distributive) as strategies to multiply and divide",
       "domain": "Multiplication & Division",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_KaF0SQvaiu",
@@ -301,7 +337,8 @@
       "description": "Measure and begin to record lengths and heights using non-standard and standard units",
       "domain": "Measurement",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_skYly2Qm01",
@@ -309,7 +346,8 @@
       "description": "Order three objects by length and compare the lengths of two objects indirectly using a third object",
       "domain": "Measurement",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_DOe893F6gN",
@@ -317,7 +355,8 @@
       "description": "Choose and use appropriate standard units to measure length (m/cm), mass (kg/g), temperature (°C), and capacity (litres/ml) to the nearest appropriate unit",
       "domain": "Measurement",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_SH7QgFl8-v",
@@ -325,7 +364,8 @@
       "description": "Represent and carry out geometric transformations on squared paper or a coordinate grid: reflections (in horizontal, vertical, and diagonal mirror lines, including the axes), translations (described as a vector or as left/right/up/down moves), and rotations (90° or 180° about a stated centre point); describe each transformation precisely using the correct language; identify which transformation maps one shape onto its image by comparing position, orientation, and size",
       "domain": "Geometry",
       "focus": false,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_LpSuPgL31x",
@@ -333,7 +373,8 @@
       "description": "Understand division as sharing equally into groups or as grouping (how many groups of a given size can be made)",
       "domain": "Multiplication & Division",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_cFltwUQi-d",
@@ -341,7 +382,8 @@
       "description": "Recognise, find, name, and write fractions 1/3, 1/4, 2/4, and 3/4 of a length, shape, set of objects, or quantity",
       "domain": "Fractions",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_e8CZ7E5qW7",
@@ -349,7 +391,8 @@
       "description": "Find the number that makes 10 when added to a given number from 1 to 9 (number bonds to 10)",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt__we2TDqnJx",
@@ -357,7 +400,8 @@
       "description": "Fluently add and subtract within 10",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_8OAGVdeTJ_",
@@ -365,7 +409,8 @@
       "description": "Recognise angles as a property of shape or a description of a turn",
       "domain": "Geometry",
       "focus": false,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_e4V6hvcuEJ",
@@ -373,7 +418,8 @@
       "description": "Use and interpret standard geometric diagram conventions: mark right angles with a small square, equal lengths with single or double tick marks, and equal angles with arc marks; label angles in three-letter notation (∠ABC) and individual angles with a single letter or number; draw diagrams showing angles at a point, angles on a straight line, and angles inside polygons with these conventions; read diagrams with these marks to identify given information and find unknown values",
       "domain": "Geometry",
       "focus": false,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_TdV9YGJEoY",
@@ -381,7 +427,8 @@
       "description": "Use mathematical vocabulary to describe position, direction, and movement, including straight lines and distinguishing rotation as a turn in terms of right angles (quarter, half, three-quarter turns, clockwise and anti-clockwise)",
       "domain": "Geometry",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_M5PPDJStGm",
@@ -389,7 +436,8 @@
       "description": "Rote count forwards and backwards from 0 to 100, beginning from 0, 1, or any given number, by ones",
       "domain": "Counting & Cardinality",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_4A7FYmvVhA",
@@ -397,7 +445,8 @@
       "description": "Describe familiar people, places, things, and events with detail; speak audibly and express thoughts, feelings, and ideas clearly; give well-structured descriptions and explanations",
       "domain": "Speaking & Listening",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "English"
     },
     {
       "id": "mt_6eTZUwKQZr",
@@ -405,7 +454,8 @@
       "description": "After learning something new, explain it in your own words — to yourself, a family member, or even a toy",
       "domain": "Learning to Learn",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Learning to Learn"
     },
     {
       "id": "mt_kJ5wYzO8qC",
@@ -413,7 +463,8 @@
       "description": "With teacher prompting, explain and justify mathematical reasoning using drawings, number sentences, or words",
       "domain": "Mathematical Thinking",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_SrrsLiJkr3",
@@ -421,7 +472,8 @@
       "description": "Add and subtract numbers with up to three digits using formal written methods of columnar addition and subtraction",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_zxST3MarI9",
@@ -429,7 +481,8 @@
       "description": "Explain why addition and subtraction strategies work, using place value and the properties of operations",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_bfhng6mOuy",
@@ -437,7 +490,8 @@
       "description": "Distinguish defining attributes of shapes (e.g. triangles are closed and three-sided) from non-defining attributes (e.g. colour, orientation, overall size)",
       "domain": "Geometry",
       "focus": false,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_yGv8doDAmp",
@@ -445,7 +499,8 @@
       "description": "Analyse and compare 2-D and 3-D shapes using informal language to describe sides, vertices, and other attributes",
       "domain": "Geometry",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_r0VXbfAmsH",
@@ -453,7 +508,8 @@
       "description": "Understand that 10 can be thought of as a bundle of ten ones — called a 'ten'",
       "domain": "Number Representation & Place Value",
       "focus": false,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_xmmgAzxe5j",
@@ -461,7 +517,8 @@
       "description": "Understand that the teen numbers (11–19) are composed of ten ones and some further ones (early place value)",
       "domain": "Number Representation & Place Value",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_GzcJEVkNRn",
@@ -469,7 +526,8 @@
       "description": "Multiply side lengths to find areas of rectangles and represent whole-number products as rectangular areas",
       "domain": "Measurement",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_wE7-Gs9ENL",
@@ -477,7 +535,8 @@
       "description": "Measure the perimeter of simple 2-D shapes",
       "domain": "Measurement",
       "focus": false,
-      "outsidePrerequisites": 1
+      "outsidePrerequisites": 1,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_6xNmQLzuqm",
@@ -485,7 +544,8 @@
       "description": "Understand that a unit square has one square unit of area and that the area of a plane figure is the number of unit squares that cover it without gaps or overlaps",
       "domain": "Measurement",
       "focus": false,
-      "outsidePrerequisites": 0
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_cChv2j_-Da",
@@ -493,7 +553,8 @@
       "description": "Fluently add and subtract within 100 using strategies based on place value, properties of operations, and the relationship between addition and subtraction",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_VAWV_l7J0D",
@@ -501,7 +562,8 @@
       "description": "Solve one-step word problems involving addition and subtraction to 20, including missing-number problems",
       "domain": "Addition & Subtraction",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_gtTl3R5buH",
@@ -509,7 +571,8 @@
       "description": "Interpret products of whole numbers (e.g. 5 × 7 as the total number of objects in 5 groups of 7)",
       "domain": "Multiplication & Division",
       "focus": false,
-      "outsidePrerequisites": 2
+      "outsidePrerequisites": 2,
+      "subject": "Mathematics"
     },
     {
       "id": "mt_iNdrM2-oJf",
@@ -517,7 +580,188 @@
       "description": "Interpret whole-number quotients (e.g. 56 ÷ 8 as the number of objects in each share or the number of equal groups)",
       "domain": "Multiplication & Division",
       "focus": false,
+      "outsidePrerequisites": 0,
+      "subject": "Mathematics"
+    },
+    {
+      "id": "mt_-p_xp4hMvh",
+      "name": "Friction & Surfaces",
+      "description": "Compare how things move on different surfaces, noticing that some surfaces create more friction than others",
+      "domain": "Forces & Motion",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": true,
       "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_B3W5EfimJw",
+      "name": "Pushes & Pulls",
+      "description": "Understand that pushes and pulls are forces that can change the speed or direction of an object's motion, and compare the effects of different strengths and directions",
+      "domain": "Forces & Motion",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_GBY8enpzO0",
+      "name": "Forces Vocabulary",
+      "description": "Name and describe forces using precise vocabulary — force, push, pull, twist, stretch, squash, contact force, non-contact force, gravity, weight, friction, air resistance, upthrust — and distinguish between forces that require physical contact and forces that act at a distance",
+      "domain": "Forces & Motion",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_GugVunb2lI",
+      "name": "Monitoring Comprehension",
+      "description": "Notice the difference between decoding words and actually understanding them — recognise when you've read the words but not grasped the meaning, and do something about it",
+      "domain": "English Thinking",
+      "subject": "English",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_HrgDjxcWvf",
+      "name": "Prefixes and suffixes",
+      "description": "Read words containing common prefixes and suffixes from the Y3-4 programme, applying knowledge of root words, prefixes and suffixes (morphology and etymology) to read aloud and understand new words",
+      "domain": "Phonics & Word Reading",
+      "subject": "English",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_Pl-nsjYGZ3",
+      "name": "Heating & Cooling Changes",
+      "description": "Observe and describe that some materials change state when heated or cooled, and measure the temperature at which changes occur in degrees Celsius",
+      "domain": "Matter & Materials",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 2
+    },
+    {
+      "id": "mt_Qkewo5M3_c",
+      "name": "Evaporation & the Water Cycle",
+      "description": "Identify the role of evaporation and condensation in the water cycle, and associate the rate of evaporation with temperature",
+      "domain": "Matter & Materials",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_S3XMQOYt_D",
+      "name": "Supporting ideas with evidence",
+      "description": "Explain how an author uses reasons and evidence to support particular points in a text, identifying which reasons and evidence support which specific points",
+      "domain": "Reading Comprehension",
+      "subject": "English",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_VhBH8wrFC6",
+      "name": "Picture & Bar Graphs",
+      "description": "Draw a picture graph and a bar graph (with single-unit scale) to represent a data set with up to four categories; solve put-together, take-apart, and compare problems using information presented in a bar graph",
+      "domain": "Data & Statistics",
+      "subject": "Mathematics",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_Wa44s-f8Ws",
+      "name": "Simple tests and experiments",
+      "description": "Perform simple tests and use observations and ideas to suggest answers to questions",
+      "domain": "Scientific Inquiry",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_ZFwPZaDJ0_",
+      "name": "Recording Data",
+      "description": "Gather and record data using simple methods such as tables, tally charts, and drawings to help answer questions",
+      "domain": "Scientific Inquiry",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt__CMXZiPfTV",
+      "name": "Reading Inflectional Endings",
+      "description": "Read words containing taught GPCs with common inflectional endings (-s, -es, -ing, -ed, -er, -est) and the prefix un-; read multi-syllable words with taught patterns",
+      "domain": "Phonics & Word Reading",
+      "subject": "English",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_ahSqW_kK1b",
+      "name": "Changes & Separation Vocabulary",
+      "description": "Use process vocabulary for changes of state and material separation — dissolve, solution, soluble, insoluble, evaporate, condense, melt, freeze, filter, sieve, mixture, separate — and understand precisely what each term describes, including the important distinction between dissolving and melting",
+      "domain": "Matter & Materials",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_fhqVdj4BYr",
+      "name": "The Water Cycle",
+      "description": "Understand the water cycle: the Sun heats water in oceans and lakes causing it to evaporate into water vapour, the vapour rises and cools to form clouds (condensation), and water falls back to Earth as rain, snow, or hail (precipitation) — then the cycle repeats",
+      "domain": "Weather & Climate",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 4
+    },
+    {
+      "id": "mt_k-V37x3zsF",
+      "name": "How authors support their points",
+      "description": "Explain how an author of an informational text uses reasons and evidence to support particular points, evaluating whether the reasoning is sound and the evidence is relevant and sufficient",
+      "domain": "Reading Comprehension",
+      "subject": "English",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_lp3qyEujIv",
+      "name": "Inference vs Explicit Meaning",
+      "description": "Distinguish between what a text explicitly says and what you have inferred, assumed, or read in — knowing which is which is fundamental to honest comprehension",
+      "domain": "English Thinking",
+      "subject": "English",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_qgb76wHN2X",
+      "name": "Fair testing",
+      "description": "Set up simple practical enquiries, comparative tests, and fair tests, understanding the importance of changing only one variable at a time",
+      "domain": "Scientific Inquiry",
+      "subject": "Science",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_ylXdiVRAYv",
+      "name": "Sorting Data into Categories",
+      "description": "Organise and represent data with up to three categories by counting objects in each category and sorting categories by quantity",
+      "domain": "Data & Statistics",
+      "subject": "Mathematics",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 3
     }
   ],
   "dependencies": [
@@ -708,6 +952,12 @@
       "reason": "Choosing appropriate tools builds on choosing appropriate units"
     },
     {
+      "topicId": "mt_fhqVdj4BYr",
+      "prerequisiteId": "mt_Pl-nsjYGZ3",
+      "strength": "soft",
+      "reason": "Water cycle benefits from curriculum states of matter (heating/cooling changes state)"
+    },
+    {
       "topicId": "mt_g3W0mdADVu",
       "prerequisiteId": "mt_-hTTat0mBR",
       "strength": "hard",
@@ -718,6 +968,12 @@
       "prerequisiteId": "mt_SrrsLiJkr3",
       "strength": "hard",
       "reason": "Fluency requires prior experience with columnar methods for three digits"
+    },
+    {
+      "topicId": "mt_HrgDjxcWvf",
+      "prerequisiteId": "mt__CMXZiPfTV",
+      "strength": "hard",
+      "reason": "Morphological reading (root+prefix+suffix analysis) builds on basic inflectional endings reading"
     },
     {
       "topicId": "mt_hRZyKvz1KN",
@@ -780,6 +1036,18 @@
       "reason": "Using properties requires understanding what multiplication means"
     },
     {
+      "topicId": "mt_lp3qyEujIv",
+      "prerequisiteId": "mt_6eTZUwKQZr",
+      "strength": "soft",
+      "reason": "Distinguishing literal from inferred requires being able to articulate your own understanding clearly enough to examine its source"
+    },
+    {
+      "topicId": "mt_lp3qyEujIv",
+      "prerequisiteId": "mt_GugVunb2lI",
+      "strength": "hard",
+      "reason": "Distinguishing literal from inferred requires first being able to monitor whether you have actually understood — you must notice comprehension before you can interrogate its source"
+    },
+    {
       "topicId": "mt_m1W6nTQJ2b",
       "prerequisiteId": "mt_e8CZ7E5qW7",
       "strength": "hard",
@@ -816,6 +1084,18 @@
       "reason": "Skip counting in 2s, 5s, 10s requires fluent rote counting by ones first"
     },
     {
+      "topicId": "mt_-p_xp4hMvh",
+      "prerequisiteId": "mt_B3W5EfimJw",
+      "strength": "hard",
+      "reason": "Must understand forces change motion before comparing movement on different surfaces"
+    },
+    {
+      "topicId": "mt_-p_xp4hMvh",
+      "prerequisiteId": "mt_GBY8enpzO0",
+      "strength": "hard",
+      "reason": "Comparing how things move on different surfaces requires friction vocabulary"
+    },
+    {
       "topicId": "mt_pyMD_SIiYO",
       "prerequisiteId": "mt_4A7FYmvVhA",
       "strength": "soft",
@@ -846,10 +1126,40 @@
       "reason": "Explaining why strategies work exercises constructing arguments"
     },
     {
+      "topicId": "mt_qgb76wHN2X",
+      "prerequisiteId": "mt_Wa44s-f8Ws",
+      "strength": "hard",
+      "reason": "Must do simple tests before setting up formal fair tests with controlled variables"
+    },
+    {
+      "topicId": "mt_Qkewo5M3_c",
+      "prerequisiteId": "mt_ahSqW_kK1b",
+      "strength": "hard",
+      "reason": "Identifying the role of evaporation and condensation requires knowing these process terms precisely"
+    },
+    {
+      "topicId": "mt_Qkewo5M3_c",
+      "prerequisiteId": "mt_fhqVdj4BYr",
+      "strength": "soft",
+      "reason": "Water cycle connects to curriculum evaporation/condensation topic"
+    },
+    {
+      "topicId": "mt_Qkewo5M3_c",
+      "prerequisiteId": "mt_Pl-nsjYGZ3",
+      "strength": "hard",
+      "reason": "Must understand state changes before learning about evaporation/condensation in water cycle"
+    },
+    {
       "topicId": "mt_r0VXbfAmsH",
       "prerequisiteId": "mt_xmmgAzxe5j",
       "strength": "hard",
       "reason": "Understanding 10 as a bundle builds on understanding teen numbers as 'a ten and some ones'"
+    },
+    {
+      "topicId": "mt_S3XMQOYt_D",
+      "prerequisiteId": "mt_k-V37x3zsF",
+      "strength": "hard",
+      "reason": "Evaluating author evidence builds on explaining author's evidence"
     },
     {
       "topicId": "mt_sBcRdUfAzV",
@@ -886,6 +1196,12 @@
       "prerequisiteId": "mt_xmmgAzxe5j",
       "strength": "hard",
       "reason": "General two-digit place value extends from understanding teen number composition"
+    },
+    {
+      "topicId": "mt_VhBH8wrFC6",
+      "prerequisiteId": "mt_ylXdiVRAYv",
+      "strength": "hard",
+      "reason": "Drawing picture/bar graphs extends organising and representing data"
     },
     {
       "topicId": "mt_w6MxaaoMXZ",
@@ -952,6 +1268,12 @@
       "prerequisiteId": "mt_iNdrM2-oJf",
       "strength": "hard",
       "reason": "Word problems require understanding what quotients mean"
+    },
+    {
+      "topicId": "mt_ZFwPZaDJ0_",
+      "prerequisiteId": "mt_Wa44s-f8Ws",
+      "strength": "hard",
+      "reason": "Must perform tests before learning to gather and record data"
     },
     {
       "topicId": "mt_zxST3MarI9",
