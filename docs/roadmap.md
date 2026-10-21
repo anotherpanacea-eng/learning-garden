@@ -111,3 +111,43 @@ Water Lab follow-up: connect the existing storm-recovery molecule visits to a sm
 
 
 Word Garden first release: [spec 34](specs/34-word-garden.md) implements the word-part door on Cloudflare with authored blooms, welcome discoveries, finite spelling exceptions and open transfer-word discussion. Town repair, seasons and almanac from PR #6 remain ideas for later. The sound/letter door in spec 04 still needs reviewed audio. The complete reviewed game is now published on Cloudflare Static Assets; the earlier Sites release and its origin-local notebooks remain intact.
+
+## First curriculum spiral: same supplies, different questions
+
+[Spec 38](specs/38-equal-group-spiral.md) implements the first scoped increment in the Café and Bramble: six freely chosen quantity families, editable plates/ribbon bundles, and total/per-group/group-count questions. Crossing carries a cloned model and support/familiarity context, while the destination records its own attempts. Both division meanings are represented; neither game’s original pending work, stock, supper progress or rival rounds is changed by the bench. Optional equations and a stepwise smaller example are support. This is a narrow visual-practice foothold, not a complete division progression or independent-transfer assessment.
+
+The message-revision increment is implemented in [spec 39](specs/39-message-reader-spiral.md): three storm-recovery notes connect Post Office clarification to a separate Story Loft reader rehearsal, preserving existing drafts. The next bounded increment remains plant conditions with dated observations. Field Notebook charts, minibeast classification and Market Day remain follow-on proposals in the strand-map PR; this build does not silently include those activities.
+
+The continuing letter round is implemented in [spec 40](specs/40-changing-letters.md): twelve authored notes vary readers, combined details and reasons to revise. Explicit first keeps guide open suggestions; exploratory alternatives and exact original words remain ungraded. The current letter never regenerates mid-turn. The old desk, deliveries and shows remain separate; a bounded local notebook keeps recent rounds and selected drafts.
+
+### Growing shelf: first plant investigation
+
+[Spec 41](specs/41-plant-investigation.md) is implemented: four manually inspected invented model days, labelled seedling/ruler illustrations, unscored timed-in-context predictions, copied observation rows, same-day observation/explanation and taller-is-not-enough questions, a supplied proposed water comparison and a frozen observation carried to the planting corner. The pretend beds and café stock remain separate. Field Notebook data selection/chart construction is the next increment; independent measurement, real plant trials and food webs remain planned.
+
+### Field Notebook: choose and chart
+
+[Spec 42](specs/42-field-notebook.md) adds active data selection and chart construction after the growing shelf. Eight open model comparisons separate source relevance, copying labels/values, reading an entered chart and answering a model question. Kept drafts travel to the planting corner. Further real measurements, Workshop datasets, line plots and independent scale choices remain future slices. Next: the café Sharing Counter's equal-whole fraction models.
+
+### The Sharing Counter: cut, compare, pack, revise
+
+[Spec 43](specs/43-sharing-counter.md) adds six open picnic requests: equal rectangular halves/quarters, same-whole half/two-quarter comparison, and one/three quarters of a twelve-bun basket. Model edits stay reversible; keeping a draft does not serve a café guest or spend stock. Number-line amount is derived explanation, distinct from independent placement. Next: a manually stepped water-path machine, then measured recipe preparation. Thirds/eighths, different-shaped equal shares and real food measurements remain future slices.
+
+### Rain Paths: follow, compare and plan
+
+[Spec 44](specs/44-rain-paths.md) adds a new manual experiment loop: matched open/sealed or differently prefilled storage machines, exact separate old/new token ledgers, relevant-column selection and copied runoff routing through a finite holding cup. Source/results, current question, tray view and pending plan survive breaks. No real-ground prediction or full water-cycle mapping follows. Next: measured recipe portions use actual standard-unit conventions in a separate picture model; rain tokens never become mL.
+
+### The Measuring Kitchen: fill, read, pour, revise
+
+[Spec 45](specs/45-measuring-recipes.md) adds six fictional community-dinner cards, exact graduated jug/jar pictures and reversible 50 mL transfers. Numeric scale reading, unit naming, ingredient fit and readiness are separate. Exact pending entries and frozen keeps remain local. Future contrasts include measured half/double batches, litre equivalents and different container widths; mass, actual cooking and practical physical measuring are not built.
+
+### Travelers’ Archive: a picture, dates and a careful reply
+
+[Spec 46](specs/46-travelers-archive-first-visit.md) implements the first bounded archive visit from spec 24: one CC0 historical photograph, original modern chronology summaries, a non-metric place schematic, ordinal ordering and source-scope questions. Original replies are optional and ungraded. Known object production dates do not become precise scene dates. Further settings, broader chronology and a French-authored pack remain future work.
+
+### A completed machine result becomes a chart
+
+[Spec 47](specs/47-rain-notebook-spiral.md) adds a narrow Rain Paths → Field Notebook spiral. A real completed game result is frozen explicitly, then revisited through data relevance, chart construction, draft reading, source fidelity and an original runoff question. Water and cress charts retain separate drafts and views. Further datasets, physical observations, independent scales and general chart choice remain future work.
+
+### Bell Studio: next experience loop, draft only
+
+[Spec 48](specs/48-bell-studio.md) has independently reviewed local content, state transitions, silent composition pictures and a bounded explicit-play tone adapter. Four invitations connect a café gathering, delivery arrival, garden return and an original call. This branch is **not live**. App route, raw progress transfer/notes, entry links and audio stop boundaries are now integrated and independently reviewed. Root browser checks cover composition, versions, keeping, explicit scheduled Play/Stop and narrow controls. Human listening and the remaining browser/device checks are still pending; scheduling does not establish audibility or iPad compatibility.

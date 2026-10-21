@@ -1,6 +1,6 @@
 # 24 — Travelers' Archive
 
-**Status: Initial roadmap scope; not build-ready or implemented.**
+**Status: Original roadmap scope. The first bounded Paris 1910 visit is implemented in [spec 46](46-travelers-archive-first-visit.md); broader settings remain planned.**
 
 ## Purpose and first playable slice
 

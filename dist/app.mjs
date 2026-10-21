@@ -1,3 +1,25 @@
+import {bellStudioPage,bellStudioEntry,bindBellStudio} from './bell-studio-ui.mjs';
+import {createBellPlayer} from './bell-studio-audio.mjs';
+import {travelersArchivePage,travelersArchiveEntry,bindTravelersArchive} from './travelers-archive-ui.mjs';
+import {travelersArchive,noteArchiveSources} from './travelers-archive-core.mjs';
+import {measuringRecipesPage,measuringRecipesEntry,bindMeasuringRecipes} from './measuring-recipes-ui.mjs';
+import {rainPathsPage,rainPathsEntry,bindRainPaths} from './rain-paths-ui.mjs';
+import {rainDisplayExposure,noteRainDisplayExposure} from './rain-paths-core.mjs';
+import {rainNotebookPage,rainNotebookEntry,bindRainNotebook} from './rain-notebook-ui.mjs';
+import {noteRainNotebookExposure} from './rain-notebook-core.mjs';
+import {bindRainNotebookInvitations,syncRainNotebookExposure} from './rain-notebook-bridge.mjs';
+import {sharingCounterPage,sharingCounterEntry,bindSharingCounter} from './sharing-counter-ui.mjs';
+import {sharingDisplayedFactPairs} from './sharing-counter-core.mjs';
+import {fieldNotebookPage,fieldNotebookEntry,fieldNotebookPlanPanel,bindFieldNotebook} from './field-notebook-ui.mjs';
+import {fieldNotebook,noteFieldExposure,fieldDisplayedDays} from './field-notebook-core.mjs';
+import {plantStudyPage,plantStudyEntry,plantPlanPanel,bindPlantStudy} from './plant-study-ui.mjs';
+import {plantStudy,setPlantDay,notePlantExposure,notePlantExposureUnknown} from './plant-study-core.mjs';
+import {letterPage,letterEntry,bindLetterTrail} from './letter-trail-ui.mjs';
+import {ensureLetters} from './letter-trail-core.mjs';
+import {messagePage,bindMessages} from './message-ui.mjs';
+import {ensureMessages} from './message-core.mjs';
+import {ensureEqualGroups,noteGroupView} from './equal-groups-core.mjs';
+import {equalGroupsPage,equalGroupEntry,equalGroupPairsShown,bindEqualGroups} from './equal-groups-ui.mjs';
 import {loftPage,bindLoft} from './loft-ui.mjs';
 import {destinationNotes} from './notebook-sections.mjs';
 import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from './progress-transfer.mjs';
@@ -9,7 +31,7 @@ import {bindSpiral} from './living-spiral-ui.mjs';
 import {adaptivePage as spiralPage,bindAdaptive} from './living-adaptive-ui.mjs';
 import {adaptivePairsShown as spiralPairsShown,startAdaptiveSpiral} from './living-adaptive-core.mjs';
 import {livingPage,bindLiving} from './living-ui.mjs';
-import {ensurePostOffice} from './post-office-core.mjs';
+import {ensurePostOffice,currentPostOffice,postOfficeView} from './post-office-core.mjs';
 import {postOfficePage,bindPostOffice} from './post-office-ui.mjs';
 import {ensureWorkshop} from './workshop-core.mjs';
 import {workshopPage,bindWorkshop} from './workshop-ui.mjs';
@@ -29,7 +51,7 @@ import {broadFeedback} from './broad-variants.mjs';
 import {broadHelper,openBroadHelp,submitBroadHelp,broadHelpModelAction,renderBroadHelp} from './broad-help.mjs';
 import {ensureScience,currentScience} from './science-core.mjs';
 import {scienceHome,sciencePage,bindScience} from './science-ui.mjs';
-import {ensureCafe,nextGuest,orderFor,currentRecipe} from './cafe-core.mjs';
+import {ensureCafe,nextGuest,orderFor,currentRecipe,cafeSupper} from './cafe-core.mjs';
 import {renderCafe,bindCafe} from './cafe-ui.mjs';
 import {helpers,helperLimit} from './help-content.mjs';
 import {helpPage} from './help-ui.mjs';
@@ -43,6 +65,12 @@ import {broadHome,checkinHub,activityLibrary,trailSummary,learningMap,renderMode
 import {observation,recommendations,makePractice,methodLabel,describe,numericAnswer} from './core.mjs';
 import {checkin,puzzles,skills} from './content.mjs';
 const $=s=>document.querySelector(s), main=$('#main');
+let bellPlayer=null;
+const stopBell=(reason='page-change')=>bellPlayer?.stop(reason);
+const bellPlayback={play:(sequence,callbacks)=>(bellPlayer??=createBellPlayer()).play(sequence,callbacks),stop:stopBell};
+document.addEventListener('click',e=>{if(e.target.closest('[data-speak],[data-preview-voice],a[href^="#"]'))stopBell('speech-or-navigation');},true);
+window.addEventListener('pagehide',()=>stopBell('pagehide'));
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopBell('hidden');});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let browserStorage;try{browserStorage=localStorage;}catch{}
 const explorerStore=new ExplorerStore(browserStorage);
@@ -66,7 +94,7 @@ function picture(q){if(q.id==='fence')return `<svg viewBox="0 0 300 190" class="
 function flower(x,y,c,n=6){let petals='';for(let k=0;k<n;k++){const t=k*2*Math.PI/n;petals+=`<circle cx="${x+Math.cos(t)*11}" cy="${y+Math.sin(t)*11}" r="8" fill="${c}"/>`;}return `<path d="M${x} ${y+6}V270" stroke="#397958" stroke-width="3"/><path d="M${x} ${y+55}q-26 -29 -28 -7q8 19 28 7M${x} ${y+35}q23 -29 27 -9q-5 19 -27 9" fill="#5b8d68"/>${petals}<circle cx="${x}" cy="${y}" r="6" fill="#183f39"/>`;}
 function gardenArt(){let flowers='';for(let r=0;r<3;r++)for(let c=0;c<4;c++)flowers+=flower(98+c*69,74+r*65,['#e9b84a','#da8d8d','#abc4da'][r]);return `<div class="hero-art"><svg viewBox="0 0 440 310" aria-label="A garden of flowers arranged in three rows of four" role="img"><path d="M45 274Q220 251 395 274" fill="none" stroke="#a3bcaa" stroke-width="2"/>${flowers}<path d="M51 276h340" stroke="#183f39" stroke-width="2"/><circle cx="357" cy="41" r="19" fill="#fff" opacity=".8"/><path d="M43 169q-9 -9 -14 2q12 11 14 -2q9 -15 15 -3q-6 13 -15 3" fill="#e9b84a"/></svg><span class="art-note">What do you notice in the garden?</span></div>`;}
 function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back">← Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
-function navigate(hash){if(location.hash===hash)render();else location.hash=hash;}
+function navigate(hash){stopBell('navigation');if(location.hash===hash)render();else location.hash=hash;}
 function home(){return gardenHome(state,persist)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>';}
 function startCheckin(){if(state.baseline.complete){navigate('#summary');return;}const q=checkin[state.baseline.index];activity={mode:'checkin',q};const draft=state.baseline.draft;active=draft?.questionId===q.id?{...blank(),...draft}:blank();
   if(draft?.questionId!==q.id&&(state.exposures?.includes(`${q.a}x${q.b}`)||state.exposures?.includes(`${q.b}x${q.a}`)))active.exposed=true;
@@ -149,36 +177,60 @@ function broadActivityPage(){
  ${correct?`<fieldset><legend>How did you find it? Choose together.</legend><div class="method-grid">${[['knew','I knew it'],['worked','I worked it out'],['counted','I counted'],['together','We did it together']].map(([id,label])=>`<button class="method ${active.method===id?'selected':''}" data-method="${id}" aria-pressed="${active.method===id}">${label}</button>`).join('')}</div></fieldset><div class="next-row"><a href="#numbers" class="text-button">Take a break</a><button id="next" class="primary" ${!active.method?'disabled':''}>${learning?'Keep this idea':trail.index===1?'See what we noticed':'Try the next question'}</button></div>`:`<div class="next-row"><button id="skip" class="text-button">${active.attempts.length?'Leave this one for now':'Skip for now'}</button><a href="#numbers" class="text-button">Take a break</a></div>`}</section><aside class="side-note">${dot(correct?'cheer':'think')}<h3>Dot wonders…</h3><p>${esc(correct||active.revealed?q.talk:'What do you notice? Can you show Pip where you might start?')}</p>${hear(correct||active.revealed?q.talk:'What do you notice? Can you show Pip where you might start?','Hear Dot’s question')}<hr><p class="tiny">Grown-up: notice the method as well as the answer. Every kind of trying is welcome.</p><a href="#map/${q.topicId}">See the learning connection</a></aside></div>`;
 }
 function adventureEnd(){return `${heading('An idea to take with you.','You made time for some mathematical wondering.')}<section class="summary-callout"><h2>${esc(lastAdventure.title)}</h2><p>${esc(lastAdventure.wonder)}</p><p class="tiny">Talk, draw, build, or try it another way. This question is for exploring together; the app does not score your explanation.</p><div class="summary-links"><a class="primary" href="#activities/${lastAdventure.area}">More in this garden</a><a class="secondary" href="#checkin">Choose a garden walk</a><a href="#home" class="text-button">Finish for now</a></div></section>${seedOffer(state)}`;}
+function syncFieldPlantExposure(view=null){
+ const displayed=view?fieldDisplayedDays(state,view):null;
+ if(displayed&&(displayed.days.length||displayed.unknown))noteFieldExposure(state,displayed.days,displayed.unknown);
+ const notebook=fieldNotebook(state);
+ if(!notebook||notebook.exposureUnknown||displayed?.unknown)notePlantExposureUnknown(state);
+ for(const day of new Set([...(notebook?.exposedDays||[]),...(displayed?.days||[])]))notePlantExposure(state,day);
+}
+function exposeRain(exposure){noteRainDisplayExposure(state,exposure);exposeStoryFacts({facts:exposure.facts});save();}
 function render(){
-  stopSpeech();
+  stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
+  const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
+  const messageBench=['post','loft'].includes(root)&&slug==='messages';
+  const letterBench=['post','loft'].includes(root)&&slug==='letters';
+  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-  const navRoot=['paris','french'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
+  const navRoot=['paris','french','archive'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
   $('#companion-link').innerHTML=companionLink(state);
   document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===`#${navRoot}`?'page':'false'));
+  ensureEqualGroups(state);ensureMessages(state);ensureLetters(state);
   let html;
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
-  else if(root==='regrow')html=plantingPage(state,Number(slug||0));
+  else if(bellBench)html=bellStudioPage(state);
+  else if(archiveBench)html=travelersArchivePage(state);
+  else if(recipeBench)html=measuringRecipesPage(state);
+  else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state);}
+  else if(sharingBench){exposeStoryFacts({facts:sharingDisplayedFactPairs(state)});save();html=sharingCounterPage(state);}
+  else if(rainNotebookBench)html=rainNotebookPage(state);
+  else if(fieldBench){syncFieldPlantExposure('notebook');save();html=fieldNotebookPage(state);}
+  else if(plantBench){syncFieldPlantExposure();const ps=plantStudy(state);if(ps){setPlantDay(state,ps.day);save();}html=plantStudyPage(state);}
+  else if(letterBench)html=letterPage(state,root,detail);
+  else if(messageBench)html=messagePage(state,root,detail);
+  else if(groupBench){if(detail!=='choose'){noteGroupView(state,groupPlace);exposeStoryFacts({facts:equalGroupPairsShown(state,groupPlace)});save();}html=equalGroupsPage(state,groupPlace,detail);}
+  else if(root==='regrow'){syncFieldPlantExposure('planting');save();html=plantingPage(state,Number(slug||0))+plantPlanPanel(state)+fieldNotebookPlanPanel(state);}
   else if(root==='wonder'){html=openNumberTaskPage(state,slug);save();}
   else if(root==='french')html=frenchLanding(state);
-  else if(root==='paris')html=parisLanding(state);
+  else if(root==='paris')html=parisLanding(state)+travelersArchiveEntry();
   else if(root==='words')html=wordGardenPage(state);
   else if(root==='facts')html=factsPage(state,slug);
   else if(root==='orchard'){
     if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
     else html=orchardPage(state,slug);
   }
-  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}}
-  else if(root==='post')html=postOfficePage(state,slug);
+  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}html+=plantStudyEntry()+fieldNotebookEntry()+rainNotebookEntry();}
+  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+bellStudioEntry();
   else if(root==='workshop')html=workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph);
   else if(root==='science'){
-    html=slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);
+    html=slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);html+=rainPathsEntry();
   }
   else if(root==='cafe'){
     if(state.cafe.current){const o=orderFor(state.cafe);exposeStoryFacts({facts:[[o.guests,o.bites],...(state.cafe.current.stage==='stock'?currentRecipe(state.cafe).map(item=>[o.guests,item.count]):[])]});}
-    save();html=renderCafe(state);
+    save();html=equalGroupEntry('cafe')+renderCafe(state)+sharingCounterEntry()+measuringRecipesEntry()+bellStudioEntry();
   }
   else if(root==='companions')html=companionPicker(state);
   else if(root==='storm'){
@@ -206,30 +258,31 @@ function render(){
   else if(root==='puzzles')html=puzzlePage();
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
-  else if(root==='loft')html=loftPage(state);
-  else html=home();
-  if(!choosingExplorer){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  else if(root==='loft')html=loftPage(state)+letterEntry('loft');
+  else html=home()+travelersArchiveEntry()+bellStudioEntry();
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!archiveBench&&!bellBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
   main.innerHTML=(explorerStore.warning?`<p class="storage-warning" role="status">${esc(explorerStore.warning)}</p>`:!storageOK?'<p class="storage-warning" role="status">This browser cannot save progress right now. You can still explore; download notes before leaving.</p>':'')+(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;bind();
+  const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
 }
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
-function focusElement(selector){const element=$(selector);if(element){element.tabIndex=-1;element.focus();}}
+function focusElement(selector){const element=$(selector);if(element){if(!element.matches('a[href],button,input,select,textarea,summary,[tabindex]'))element.tabIndex=-1;element.focus();}}
 function rerenderActivity(){const input=$('#answer');if(input)active.input=input.value;syncDraft();render();}
 function openTaskLibrary(selected){return `<section class="panel broad-open-invites"><h2>Questions with room for your ideas</h2><p>Wonder, estimate, invent, and explain together. These invitations have no scored answer.</p><div class="open-task-links">${openTasks().filter(t=>!areaById(selected)||t.area===selected).map(t=>`<a class="secondary" href="#wonder/${t.id}">${esc(t.title)}</a>`).join('')}</div></section>`;}
 function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{action();d.close();render();};d.addEventListener('close',()=>d.remove());}
+function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
 function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
 function useExplorer(next,destination='#home'){
- if(!next)return;cancelProgressImport();stopSpeech();state=next;initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
+ if(!next)return;stopBell('explorer-or-import');cancelProgressImport();stopSpeech();state=next;initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
- if(destination!=='#notes')welcomeFilm();
+ if(destination!=='#notes')playFilm('welcome');
 }
 function freshExplorerChoice(){for(const avatar of ['sky','fern','reed'])for(const color of EXPLORER_COLORS)for(const symbol of EXPLORER_SYMBOLS)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
 function chooseExplorer(create=false){cancelProgressImport();if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
 function bindProgressTransfer(){
  if(explorerStore.importUncertain)document.querySelectorAll('#remember,#reset,#clear-all-explorers,[data-remove-copy]').forEach(el=>el.disabled=true);
  $('#progress-file')?.addEventListener('change',async e=>{
-  const file=e.target.files?.[0];if(!file)return;
+  const file=e.target.files?.[0];if(!file)return;stopBell('import');
   const token=++importRead,explorer=explorerStore.active.id;
   progressImport={candidate:null,message:'',reading:true};render();
   let candidate;
@@ -275,6 +328,26 @@ function bindBroadExtras(){
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
 function bind(){
+ bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
+ bindTravelersArchive(state,{save,render,navigate,focus:focusElement});
+ document.querySelector('[data-ta-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const a=travelersArchive(state);if(a){const ids=[...new Set([...a.checks.flatMap(c=>c.sourceIds),...(a.kept?['photo','chronology']:[])])];if(ids.length){noteArchiveSources(state,ids);save();}}}});
+ bindMeasuringRecipes(state,{save,render,navigate,focus:focusElement});
+ bindRainPaths(state,{save,render,navigate,focus:focusElement,expose:exposeRain});
+ bindRainNotebookInvitations(state,{save,navigate,focus:focusElement});
+ bindRainNotebook(state,{save,render,navigate,focus:focusElement,expose:exposure=>{noteRainNotebookExposure(state,exposure);exposeRain(exposure);}});
+ document.querySelector('[data-rp-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const exposure=rainDisplayExposure(state,{view:'notes'});noteRainDisplayExposure(state,exposure);exposeStoryFacts({facts:exposure.facts});save();}});
+ bindSharingCounter(state,{save,render,navigate,focus:focusElement});
+ document.querySelector('[data-sc-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){exposeStoryFacts({facts:sharingDisplayedFactPairs(state,'notes')});save();}});
+ bindFieldNotebook(state,{save,render,navigate,focus:focusElement});
+ document.querySelector('[data-fn-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){syncFieldPlantExposure('notes');syncRainNotebookExposure(state,{view:'notes',rootExposer:exposeRain});save();}});
+ document.querySelector('[data-rn-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open)syncRainNotebookExposure(state,{view:'notes',rootExposer:exposeRain});});
+ document.querySelector('[data-ps-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const ps=plantStudy(state);if(!ps||Object.hasOwn(ps,'recovered'))notePlantExposureUnknown(state);if(ps?.plan)notePlantExposure(state,ps.plan.observation.day);save();}});
+ bindPlantStudy(state,{save,render,navigate,focus:focusElement});
+ const [egRoot,egSlug]=(location.hash||'#home').slice(1).split('/');
+ if(egSlug==='letters'&&['post','loft'].includes(egRoot))bindLetterTrail(state,egRoot,{save,render,navigate,focus:focusElement});
+ if(egSlug==='messages'&&['post','loft'].includes(egRoot))bindMessages(state,egRoot,{save,render,navigate,focus:focusElement});
+ if(egSlug==='groups'&&['cafe','post'].includes(egRoot))bindEqualGroups(state,egRoot==='cafe'?'cafe':'bramble',{save,render,navigate,focus:focusElement});
+ document.querySelectorAll('[data-film-replay]').forEach(button=>button.addEventListener('click',()=>playFilm(button.dataset.filmReplay,{replay:true})));
  $('#dismiss-draft-notice')?.addEventListener('click',()=>{state.broad.draftNotice=false;save();render();main.focus();});
  bindExplorers();bindBroadExtras();bindPlantings(state,{save,render,navigate,focus:focusElement});
  bindStory();
@@ -388,24 +461,48 @@ function bindStory(){
  $('#story-project-next')?.addEventListener('click',()=>finishStory());
 }
 function renderPuzzleEnd(q,o){main.innerHTML=`${heading('An idea to keep.','You made room for a little wondering.')}<section class="summary-callout"><h2>${esc(q.title)}</h2><p>${esc(describe(o))}. ${o.status==='skipped'?'You can return to this puzzle whenever you like.':esc(q.talk)}</p><div class="summary-links"><a href="#puzzles" class="primary">Choose another puzzle</a><a href="#home" class="secondary">Back to the garden</a></div></section>`;main.focus();}
- function showReset(){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>Start with a fresh page?</h2><p>This clears this explorer’s garden, café, stories, practice, companion choices and notes. Other explorers stay in place. Earlier shared copies can be removed separately from notes. Download your notes first if you want to keep them.</p><div class="dialog-actions"><button class="secondary" id="cancel-reset">Keep our progress</button><button class="primary danger" id="confirm-reset">Clear progress</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('#cancel-reset').onclick=()=>d.close();d.querySelector('#confirm-reset').onclick=()=>{resetSpeechPreferences();state=explorerStore.clearActive();ensurePlantings(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);practiceSession=null;activity=null;active=null;screen='';save();d.close();navigate('#home');};d.addEventListener('close',()=>d.remove());}
+ function showReset(){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>Start with a fresh page?</h2><p>This clears this explorer’s garden, café, stories, practice, companion choices and notes. Other explorers stay in place. Earlier shared copies can be removed separately from notes. Download your notes first if you want to keep them.</p><div class="dialog-actions"><button class="secondary" id="cancel-reset">Keep our progress</button><button class="primary danger" id="confirm-reset">Clear progress</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('#cancel-reset').onclick=()=>d.close();d.querySelector('#confirm-reset').onclick=()=>{stopBell('reset');resetSpeechPreferences();state=explorerStore.clearActive();ensurePlantings(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);practiceSession=null;activity=null;active=null;screen='';save();d.close();navigate('#home');};d.addEventListener('close',()=>d.remove());}
  document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(a?.getAttribute('href')==='#main'){event.preventDefault();main.focus();return;}if(a&&a.getAttribute('href')===location.hash){event.preventDefault();if(activity)syncDraft();screen='';activity=null;active=null;render();main.focus();window.scrollTo(0,0);}});
  window.addEventListener('hashchange',()=>{cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;render();main.focus();window.scrollTo(0,0);});
  $('#privacy-button').onclick=()=>$('#about-dialog').showModal();
  render();
 
-// A first visit begins with the existing film; opening it is not learning evidence.
-function welcomeFilm(){
- if(state.garden.welcomeFilmSeen===true)return;
+// Films play once per explorer: the storm film on a first visit, and a short film at three story endings.
+// Watching one is not learning evidence.
+const FILMS={
+ welcome:{src:'./storm-intro.html',title:'After the Storm introductory film',heading:'Before we begin…',skip:'Skip to the garden',note:'A little story about how our garden begins. Sound is optional. You can replay it from the home page.'},
+ paris:{src:'./paris-film.html',title:'A Postcard Home: the Paris postcard film',heading:'A postcard home',skip:'Skip the film',note:'Pip and Dot fly the Paris postcard home. Sound is optional. You can watch it again from the story ending.'},
+ cafe:{src:'./cafe-film.html',title:'Welcome Back, Neighbors: the café supper film',heading:'The welcome-back dinner',skip:'Skip the film',note:'Six tables, six lanterns. Sound is optional. You can watch it again from the café goal.'},
+ bramble:{src:'./bramble-film.html',title:'Through the Ribbon Gate: Bramble’s film',heading:'Through the ribbon gate',skip:'Skip the film',note:'A story example: Bramble ties three bundles of four ribbons. Your own work stays in your notebook. Sound is optional.'}
+};
+function filmSeen(id){return id==='welcome'?state.garden.welcomeFilmSeen===true:state.garden.filmsSeen?.[id]===true;}
+function markFilmSeen(id){if(id==='welcome')state.garden.welcomeFilmSeen=true;else{if(!state.garden.filmsSeen||typeof state.garden.filmsSeen!=='object'||Array.isArray(state.garden.filmsSeen))state.garden.filmsSeen={};state.garden.filmsSeen[id]=true;}save();}
+function playFilm(id,{replay=false}={}){
+ if(!Object.hasOwn(FILMS,id)||(!replay&&filmSeen(id))||document.querySelector('dialog[open]'))return false;
+ const f=FILMS[id],returnFocus=document.activeElement;stopBell('film');stopSpeech();
  const dialog=document.createElement('dialog');dialog.className='welcome-film';dialog.setAttribute('aria-labelledby','welcome-film-title');
- dialog.innerHTML=`<div class="welcome-film-heading"><h2 id="welcome-film-title">Before we begin…</h2><button type="button" class="secondary" data-film-skip autofocus>Skip to the garden</button></div><iframe title="After the Storm introductory film" src="./storm-intro.html?autoplay=1&amp;embedded=1"></iframe><p class="tiny">A little story about how our garden begins. Sound is optional. You can replay it from the home page.</p>`;
+ dialog.innerHTML=`<div class="welcome-film-heading"><h2 id="welcome-film-title">${esc(f.heading)}</h2><button type="button" class="secondary" data-film-skip autofocus>${esc(f.skip)}</button></div><iframe title="${esc(f.title)}" src="${f.src}?autoplay=1&amp;embedded=1"></iframe><p class="tiny">${esc(f.note)}</p>`;
  document.body.append(dialog);
  const frame=dialog.querySelector('iframe');
- const finished=e=>{if(e.origin===location.origin&&e.source===frame.contentWindow&&e.data==='garden-film-finished')dialog.close();};
+ let exampleOffered=false;
+ const finished=e=>{
+  if(e.origin!==location.origin||e.source!==frame.contentWindow)return;
+  if(e.data==='garden-film-finished')dialog.close();
+  else if(id==='bramble'&&e.data==='garden-film-example'&&!exampleOffered){exampleOffered=true;exposeStoryFacts({facts:[[3,4]]});save();}
+ };
  dialog.querySelector('[data-film-skip]').onclick=()=>dialog.close();
- dialog.addEventListener('close',()=>{window.removeEventListener('message',finished);frame.remove();dialog.remove();main.focus();},{once:true});
+ dialog.addEventListener('close',()=>{window.removeEventListener('message',finished);frame.remove();dialog.remove();if(returnFocus?.isConnected&&typeof returnFocus.focus==='function')returnFocus.focus();else main.focus();},{once:true});
  window.addEventListener('message',finished);
  dialog.showModal();
- state.garden.welcomeFilmSeen=true;save();
+ markFilmSeen(id);return true;
 }
-if(!choosingExplorer)welcomeFilm();
+// The story endings that earn a film: the Paris errand, the first café supper, and Bramble's gate.
+function endingFilm(){
+ if(choosingExplorer)return null;
+ const [root,slug]=(location.hash||'#home').slice(1).split('/');
+ if(root==='storm'&&['end','play'].includes(slug)){const v=currentVisit(state);if(v?.finished&&(v.entrance==='paris'||entranceById(v.entrance)?.language==='fr'))return 'paris';}
+ if(root==='cafe'&&!['groups','sharing','recipes'].includes(slug)){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
+ if(root==='post'&&!['choose','groups','messages','letters'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
+ return null;
+}
+if(!choosingExplorer)playFilm('welcome');
