@@ -7,7 +7,7 @@ import {storyEnding,gardenHome} from '../dist/garden-ui.mjs';
 import {cafeSupper} from '../dist/cafe-core.mjs';
 import {postOfficeView,currentPostOffice,startPostOffice} from '../dist/post-office-core.mjs';
 import {deliveries} from '../dist/post-office-content.mjs';
-import {startAdaptiveRival,setRivalInput,submitRival,continueRival} from '../dist/post-rival.mjs';
+import {startAdaptiveRival,setRivalInput,submitRival,continueRival,rivalTasks} from '../dist/post-rival.mjs';
 import {frenchLessons} from '../dist/french-content.mjs';
 let checks=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');
@@ -68,6 +68,7 @@ for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall'
  f.message('garden-film-example');f.message('garden-film-example');eq(JSON.stringify(f.exposures),JSON.stringify([{facts:[[3,4]]}]),'one fixed example exposure, never a solved task');
  f.dialogs.at(-1).close();eq(f.listeners.size,0,'native close/Escape cleanup');
  f.read('playFilm("paris",{replay:true})');f.message('garden-film-example');eq(f.exposures.length,1,'other films cannot add fact exposure');
+ eq(rivalTasks.some(t=>t.kind==='multiply'&&t.a===3&&t.b===4)&&/different puzzle/.test(f.read('FILMS.bramble.note')),false,'the film note cannot call a 3×4 Bramble puzzle different');
 }
 eq(app.includes('if(endingFilm()===film)playFilm(film)'),true,'queued auto-play rechecks current ending');
 for(const file of ['garden-ui.mjs','cafe-ui.mjs','post-office-ui.mjs']){
