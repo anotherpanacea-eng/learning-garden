@@ -79,7 +79,7 @@ Proposed on 2026-10-19 to connect the destinations into one world that play rebu
 | Step | Purpose | Smallest useful release | Status |
 | --- | --- | --- | --- |
 | H | [Rebuilding the town, seasons and the almanac](specs/33-rebuilding-the-town.md) | A village home screen whose six places are repaired by finishing sessions anywhere; a real-calendar season and weather log; one almanac built from existing records | Proposed |
-| I | [Word Garden](specs/34-word-garden.md) | Word Workshop's word-part door first: graft *un-*, *re-*, *-er*, *-ful*, *-less*, *-ness* onto ten roots to grow reviewed real words | Proposed |
+| I | [Word Garden](specs/34-word-garden.md) | Word Workshop's word-part door first: graft *un-*, *re-*, *-er*, *-ful*, *-less*, *-ness* onto ten roots to grow reviewed real words | Implemented; town/almanac connections remain proposed |
 
 ## Scope shared by all steps
 
