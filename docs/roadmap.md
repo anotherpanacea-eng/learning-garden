@@ -76,6 +76,15 @@ A review of the Number Garden destination on 2026-10-18 found pictures that cont
 
 Delivered together after independent spec review and implementation review. Original suggested order: A and B first (A fixes content that teaches the wrong thing; B protects progress already saved on family devices), then C and D, then E to G. B applies to every destination because all records share one saved value. G depends on B and F.
 
+## Town, seasons and words
+
+Proposed on 2026-10-19 to connect the destinations into one world that play rebuilds. Single device and offline; each step needs independent spec review before build. Numbered after the specs proposed in PR #5 (23 to 32).
+
+| Step | Purpose | Smallest useful release | Status |
+| --- | --- | --- | --- |
+| H | [Rebuilding the town, seasons and the almanac](specs/33-rebuilding-the-town.md) | A village home screen whose six places are repaired by finishing sessions anywhere; a real-calendar season and weather log; one almanac built from existing records | Proposed |
+| I | [Word Garden](specs/34-word-garden.md) | Word Workshop's word-part door first: graft *un-*, *re-*, *-er*, *-ful*, *-less*, *-ness* onto ten roots to grow reviewed real words | Implemented; town/almanac connections remain proposed |
+
 ## Scope shared by all steps
 
 Use the existing static app and public origin. Preserve prior records and the original shared storage value during explorer migration. Browser-local drafts, optional persistence, export, reset, and the chosen guide/explorer apply to every addition. New records stay distinct from original math assessment records. No child-specific source, family stories, identifying fields, uploads, analytics, server learner records, live AI, or background generation. Public examples and tests are fictional or synthetic. Authored content is reviewed before release. Use Marble topic IDs for selected learning connections when a genuine content match is established; do not copy its age labels into a placement system.
