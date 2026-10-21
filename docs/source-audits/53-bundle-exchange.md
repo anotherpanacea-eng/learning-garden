@@ -52,3 +52,7 @@ Review the distinction between a wrapped shelf bundle and an unwrapped full fram
 Review exact shown-example familiarity when this table and an existing Number Garden task share a fully displayed problem. Do not create blanket proficiency, rewrite prior responses, or call an already supplied exact answer fresh evidence.
 
 Marble-derived IDs/meanings/relations retain the project's existing ODbL1.0 database and CC BY-SA4.0 text attribution to Generative Spark, Inc. (Marble). Original dispositions are author decisions. Jane's application MIT and lesson/docs CC BY-SA layers remain separate; no new incorporation occurs. Numerical enumeration and author research are not independent clearance.
+
+## Implementation source refresh — 2026-10-21
+
+Current Marble `89fbffa3883c5ed9b6714f415f5f9292da682120` was fetched for this build. All seven listed nodes’ names, descriptions, evidence and incoming `(prerequisiteId,strength,reason)` triples still match the bundled pin. Jane remains `d4903954d7c4d8118cbd1d2f7ed770544fd4ac81`; its lesson formats, engine, separate-example help and license layers were reread. This refresh supports source consistency, not learner outcome or curriculum-completion claims. The implementation uses original conserved counter geometry and reuses the app’s authoritative bundle operands/familiarity contracts; no new upstream code or lesson text is incorporated.

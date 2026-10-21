@@ -59,6 +59,9 @@ node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
 node test/fraction-trail-checks.mjs
 node test/fraction-trail-integration-checks.mjs
+node test/bundle-exchange-checks.mjs
+node test/bundle-exposure-checks.mjs
+node test/bundle-exchange-integration-checks.mjs
 node test/rain-paths-checks.mjs
 node test/rain-paths-integration-checks.mjs
 node test/measuring-recipes-checks.mjs
@@ -299,3 +302,9 @@ Nine original SVG icons in `dist/icons/` accompany the existing visible navigati
 The optional `#cafe/fractions` bench adds six open ribbon requests: construct equal spaces, move a flag along actual boundaries, read its actual position and keep a frozen route card. Build, Place, Read and Keep pages retain the request and same-scale 0–2 line. Space equality, requested position and raw reading are checked separately. Half/quarter/sixth comparison and one five-quarter route revisit the same whole; a separate comparison explains why half of a longer whole is longer.
 
 All checks are model-visible practice. There is no independent fraction mastery, whole-number fact exposure, café stock/supper change or film milestone. Draft/raw text, optional help, frozen checks/cards and recovery uncertainty remain local and transfer with explorer notes. [Spec 52](docs/specs/52-fraction-trail.md) defines the bounded scope. This branch is stacked on the PR35 authoring branch; release still needs composed-branch checks.
+
+## Bundle Exchange — local build
+
+The optional `#numbers/exchange` table extends Bundle Burrow with seven fixed collections. Move individual seed counters into a two-row ten-place frame, wrap exactly ten and unwrap them again. Every constituent counter stays countable; regrouping preserves the quantity, including arrangements with more than nine loose ones. Read and Digits distinguish the actual wrapped-bundle count, total counters, supplied numeral’s tens digit and its value. Zero/seven have no written tens digit. Unfinished arrangements and exact raw responses can be kept and revisited.
+
+A separate manually stepped sixteen-counter example supplies optional help. Only a visibly complete conventional bundle/ones example and its total marks an exact existing bundle task familiar; paused/future/submitted tasks retain that context without rewriting completed answers. Unsupported/recovered history keeps earlier familiarity unknown. No general mastery, handwriting, written arithmetic, inventory rewards or film milestone is inferred. [Spec 53](docs/specs/53-bundle-exchange.md) defines the bounded scope; this branch is stacked on Fraction Trail and requires composed-release checks before publication.

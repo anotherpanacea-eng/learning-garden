@@ -1,3 +1,5 @@
+import {renderBundleExchange,bundleExchangeEntry,bindBundleExchange} from './bundle-exchange-ui.mjs';
+import {noteBundleDisplay,syncBundleQuestionExposure} from './bundle-broad-exposure.mjs';
 import {renderFractionTrail,fractionTrailEntry,bindFractionTrail} from './fraction-trail-ui.mjs';
 import {bellStudioPage,bellStudioEntry,bindBellStudio} from './bell-studio-ui.mjs';
 import {createBellPlayer} from './bell-studio-audio.mjs';
@@ -114,7 +116,7 @@ function activityPage(){const {q,mode}=activity;const correct=active.attempts.at
 function record(skip=false){
  if(activity.mode.startsWith('broad-')){
    const q=activity.q,kind=activity.mode==='broad-checkin'?'checkin':'activity';
-   const o=makeBroadObservation(q,active,kind,skip);
+   const o=makeBroadObservation(q,active,kind,skip,state);
    if(active.attempts.length||active.hinted||active.revealed||active.lessonSeen)markExposure();
    if(kind==='checkin'){recordTrail(state,o);const trail=state.broad.trails[q.area];if(trail.complete)earnPlanting(state,`walk:${q.area}:${trail.visits}`,q.area);}
    else {state.broad.activityObservations.push(o);delete state.broad.drafts[`activity:${q.id}`];lastAdventure=q;earnPlanting(state,active.participationEvent,q.area);screen='adventure-end';}
@@ -150,11 +152,12 @@ function markExposure(){
   }
 }
 function openBroad(q,mode){
-  if(activity?.q.id===q.id&&activity.mode===mode){const saved=state.broad.drafts[`${mode==='broad-checkin'?'checkin':'activity'}:${q.id}`];if(saved?.knownFact)active.knownFact=true;return;}
+  if(activity?.q.id===q.id&&activity.mode===mode){const saved=state.broad.drafts[`${mode==='broad-checkin'?'checkin':'activity'}:${q.id}`];if(saved?.knownFact)active.knownFact=true;syncBundleQuestionExposure(state,activity.q,active);return;}
   q=instantiateBroad(state,q,mode,explorerStore.active.id);
   activity={q,mode};const key=`${mode==='broad-checkin'?'checkin':'activity'}:${q.id}`;
   const draft=state.broad.drafts[key];
   active=draft?{...blank(),...draft}:{...blank(),...familiarity(state,q)};
+  syncBundleQuestionExposure(state,q,active);
   active.question=q;active.variant=q.variant||null;
   if(!active.participationEvent){state.plantings.nextVisit++;active.participationEvent=`adventure:${q.id}:${state.plantings.nextVisit}`;}
   if(mode==='broad-activity'){active.lessonSeen=true;markExposure();}
@@ -192,7 +195,7 @@ function render(){
   const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters';
-  const fractionBench=root==='cafe'&&slug==='fractions';
+  const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange';
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
@@ -204,6 +207,7 @@ function render(){
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
   else if(bellBench)html=bellStudioPage(state);
   else if(archiveBench)html=travelersArchivePage(state);
+  else if(bundleBench){const view=renderBundleExchange(state);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;const changed=noteBundleDisplay(state,view.examples,live);exposeStoryFacts({facts:view.facts});if(changed||view.facts.length)save();}
   else if(fractionBench)html=renderFractionTrail(state).html;
   else if(recipeBench)html=measuringRecipesPage(state);
   else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state);}
@@ -244,7 +248,7 @@ function render(){
       else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
     }else html=storyHub(state);
   }
-  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+'<section class="resume-strip garden-progress-link"><span>Every kind of trying helps our garden recover.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
+  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+'<section class="resume-strip garden-progress-link"><span>Every kind of trying helps our garden recover.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
   else if(screen==='adventure-end')html=adventureEnd();
   else if(root==='checkin'&&areaById(slug)){
     const t=beginTrail(state,slug);save();
@@ -263,8 +267,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft');
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!fractionBench&&!archiveBench&&!bellBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!fractionBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!fractionBench&&!bundleBench&&!archiveBench&&!bellBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!fractionBench&&!bundleBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
   main.innerHTML=(explorerStore.warning?`<p class="storage-warning" role="status">${esc(explorerStore.warning)}</p>`:!storageOK?'<p class="storage-warning" role="status">This browser cannot save progress right now. You can still explore; download notes before leaving.</p>':'')+(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;bind();
   const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
 }
@@ -334,6 +338,7 @@ function bind(){
  bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
  bindTravelersArchive(state,{save,render,navigate,focus:focusElement});
  document.querySelector('[data-ta-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const a=travelersArchive(state);if(a){const ids=[...new Set([...a.checks.flatMap(c=>c.sourceIds),...(a.kept?['photo','chronology']:[])])];if(ids.length){noteArchiveSources(state,ids);save();}}}});
+ bindBundleExchange(state,{save,render,navigate,focus:focusElement});
  bindFractionTrail(state,{save,render,navigate,focus:focusElement});
  bindMeasuringRecipes(state,{save,render,navigate,focus:focusElement});
  bindRainPaths(state,{save,render,navigate,focus:focusElement,expose:exposeRain});

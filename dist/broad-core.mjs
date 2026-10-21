@@ -1,3 +1,4 @@
+import {bundleQuestionExposure,syncBundleQuestionExposure} from './bundle-broad-exposure.mjs';
 import {areas} from './broad-content.mjs';
 import {generatedBroad} from './broad-variants.mjs';
 import {cleanBroadHelp} from './broad-help.mjs';
@@ -38,6 +39,7 @@ export function ensureBroad(state) {
     if(draft.model&&!validDraftModel(draft.model))delete draft.model;
     if(draft.helper){const q=draft.question||itemById(key.split(':').slice(1).join(':'));if(q)cleanBroadHelp(q,draft);else delete draft.helper;}
     if(draft.helpUsed||draft.helper)draft.helpUsed=true;
+    syncBundleQuestionExposure(state,draft.question||itemById(key.replace(/^(checkin|activity):/,'')),draft);
   }
   for (const [id,t] of Object.entries(b.trails)) {
     if (!areaById(id) || !t || !Array.isArray(t.questions) || t.questions.length > 2
@@ -110,8 +112,9 @@ export function instantiateBroad(state,q,mode='checkin',explorerSeed='garden'){
 }
 export function familiarity(state,q){
  const b=ensureBroad(state),key=variantKey(q),hasTemplate=b.seenItems.includes(q.id);
- const familiar=b.seenVariants.includes(key)||(hasTemplate&&!q.variant&&!b.seenVariants.some(x=>x.startsWith(`${q.id}:`)));
- return {familiar,sameKind:hasTemplate&&!familiar,knownFact:(q.facts||[q.fact]).filter(Boolean).some(f=>b.seenFacts.includes(pairKey(f))),priorExposureUnknown:!!b.legacyExposureUnknown};
+ const bundle=bundleQuestionExposure(state,q);
+ const familiar=bundle.familiar||b.seenVariants.includes(key)||(hasTemplate&&!q.variant&&!b.seenVariants.some(x=>x.startsWith(`${q.id}:`)));
+ return {familiar,sameKind:hasTemplate&&!familiar,knownFact:(q.facts||[q.fact]).filter(Boolean).some(f=>b.seenFacts.includes(pairKey(f))),priorExposureUnknown:!!b.legacyExposureUnknown||bundle.priorExposureUnknown};
 }
 export function noteBroadExposure(state,q,mode){
  const b=ensureBroad(state);if(!b.seenItems.includes(q.id))b.seenItems.push(q.id);
@@ -131,7 +134,9 @@ export function noteLegacyExposure(state, fact) {
   noteBroadExposure(state, {id:`legacy-${pairKey(fact)}`,fact}, 'legacy');
 }
 
-export function makeBroadObservation(q, active, mode, skip=false) {
+export function makeBroadObservation(q, active, mode, skip=false, state=null) {
+  const bundle=state?bundleQuestionExposure(state,q):{familiar:false,priorExposureUnknown:false};
+  const familiar=!!active.familiar||bundle.familiar,priorExposureUnknown=!!active.priorExposureUnknown||bundle.priorExposureUnknown;
   const firstCorrect = active.attempts.length === 1 && active.attempts[0] === q.answer;
   const correct = !skip && active.attempts.at(-1) === q.answer;
   const supported = !!active.hinted || !!active.revealed || !!active.modelUsed || !!active.lessonSeen || !!active.helpUsed || !!active.stepsSeen || broadSupportLevel(active)>0 || active.method === 'together';
@@ -139,12 +144,12 @@ export function makeBroadObservation(q, active, mode, skip=false) {
   return {questionId:q.id, area:q.area, skill:q.skill, topicId:q.topicId, label:q.label,
     prompt:q.prompt, answer:q.answer, choices:q.choices || null, fact:q.fact || null,
     attempts:[...active.attempts], correct, firstCorrect:!skip && firstCorrect, supported,
-    independent, freshEvidence:independent && !active.familiar && !active.sameKind && !active.knownFact && !active.priorExposureUnknown,
+    independent, freshEvidence:independent && !familiar && !active.sameKind && !active.knownFact && !priorExposureUnknown,
     hinted:!!active.hinted, revealed:!!active.revealed, modelUsed:!!active.modelUsed, lessonSeen:!!active.lessonSeen,
     variant:q.variant?structuredClone(q.variant):null,sameKind:!!active.sameKind,
     helpUsed:!!active.helpUsed,helper:active.helper?structuredClone(active.helper):null,stepsSeen:!!active.stepsSeen,supportLevel:broadSupportLevel(active),
     misconceptions:Array.isArray(active.misconceptions)?structuredClone(active.misconceptions):[],
-    familiar:!!active.familiar, knownFact:!!active.knownFact, priorExposureUnknown:!!active.priorExposureUnknown,
+    familiar, knownFact:!!active.knownFact, priorExposureUnknown,
     method:skip?null:active.method, source:mode,
     status:skip?(active.attempts.length?'explored':'skipped'):(correct?'answered':'explored'), at:new Date().toISOString()};
 }

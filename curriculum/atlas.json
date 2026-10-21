@@ -539,6 +539,17 @@
       ],
       "route": "#cafe/fractions",
       "scope": "Six open length-number-line requests on a fixed 0–2 ribbon: edit partitions, step a flag along actual boundaries, separately check spaces, requested stop and raw reading; keep frozen unfinished route cards. Half/quarter/sixth comparison and one five-quarter encounter only; all model-visible practice, no independent mastery or area/set/decimal coverage."
+    },
+    {
+      "id": "bundle-exchange",
+      "name": "Bundle Burrow: Exchange Table",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "allocate"
+      ],
+      "route": "#numbers/exchange",
+      "scope": "Seven fixed collections from 0 to 42, with countable wrapped tens, loose ones and a ten-place frame. Exact reversible conserved exchanges; distinct wrapped-count, total, tens-digit and tens-value forms; frozen unfinished keeps and separate 16 example. Supplied numeral/model practice, no handwriting, arbitrary-range counting, arithmetic algorithm or general place-value proficiency claim."
     }
   ],
   "manualReferences": [
@@ -975,6 +986,27 @@
       "kind": "scoped-practice",
       "source": "dist/fraction-trail-ui.mjs",
       "scope": "Read/write bounded whole or numerator/denominator notation for an actual visible flag; equivalents accepted. No general symbolic fluency or independent reading proficiency inference."
+    },
+    {
+      "game": "bundle-exchange",
+      "topicId": "mt_xmmgAzxe5j",
+      "kind": "scoped-practice",
+      "source": "dist/bundle-exchange-ui.mjs",
+      "scope": "Count thirteen pictured counters, move ten to a frame and wrap/unwrap the same ten with three outside; a separate supplied sixteen example revisits the action. Only these two teens, not all teen numerals or handwriting."
+    },
+    {
+      "game": "bundle-exchange",
+      "topicId": "mt_r0VXbfAmsH",
+      "kind": "scoped-practice",
+      "source": "dist/bundle-exchange-ui.mjs",
+      "scope": "Wrap exactly ten frame counters into one visibly ten-marked bundle and unwrap into an empty ten-place frame. Fixed totals conserved with reversible one-counter moves; containers add no counters. No arbitrary packing capacity or physical exchange inference."
+    },
+    {
+      "game": "bundle-exchange",
+      "topicId": "mt_THl9GLxwoL",
+      "kind": "scoped-practice",
+      "source": "dist/bundle-exchange-ui.mjs",
+      "scope": "Distinguish actual wrapped bundles from a supplied numeral’s tens digit and tens-place value for selected quantities 0,7,13,20,27,30,42, including noncanonical grouping. Zero/seven have no written tens digit; empty tens place is supplied. No full two-digit range, independent decoding or written arithmetic claim."
     }
   ],
   "increments": [

@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 123 explicit current references across 66 unique source topics: authored question references, scoped practice or supplied explanations. The other 1524 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 126 explicit current references across 68 unique source topics: authored question references, scoped practice or supplied explanations. The other 1522 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -21,7 +21,7 @@ There are 123 explicit current references across 66 unique source topics: author
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 44 | 459 |
+| Mathematics | 503 | 46 | 457 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 10 | 537 |
 
@@ -74,6 +74,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | [Travelers’ Archive: Paris,1910](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive) | read, search, compose | One reviewed Paris1910 visit: real credited CC0 photograph, modern original chronology summaries, schematic place matching, ordinal date ordering, finite source-scope/interpretation choices and ungraded local reply. Production date is distinct from exact scene date; no citywide recovery, independent research/decoding or French-proficiency claim. |
 | [Rain Paths charts: a carried result](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain) | experiment, build | Freeze one actual completed current or kept machine result, choose useful counts and construct editable two-bar charts on a fixed 0–24 model-token scale. Draft reading, source fidelity and original runoff questions remain separate. Four finite sources; no measured hydrology, independent scale choice or learning-level inference. |
 | Fraction Trail (`#cafe/fractions`, local build) | build, allocate | Six open length-number-line requests on a fixed 0–2 ribbon: edit partitions, step a flag along actual boundaries, separately check spaces, requested stop and raw reading; keep frozen unfinished route cards. Half/quarter/sixth comparison and one five-quarter encounter only; all model-visible practice, no independent mastery or area/set/decimal coverage. |
+| Bundle Burrow: Exchange Table (`#numbers/exchange`, local build) | build, allocate | Seven fixed collections from 0 to 42, with countable wrapped tens, loose ones and a ten-place frame. Exact reversible conserved exchanges; distinct wrapped-count, total, tens-digit and tens-value forms; frozen unfinished keeps and separate 16 example. Supplied numeral/model practice, no handwriting, arbitrary-range counting, arithmetic algorithm or general place-value proficiency claim. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -142,7 +143,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Mathematical Thinking | 48 | 1 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Measurement | 68 | 7 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Multiplication & Division | 57 | 9 | Assemble · allocate · check; Build · transform · relate |
-| Mathematics / Number Representation & Place Value | 52 | 3 | Build · transform · relate; Search · inspect · compare |
+| Mathematics / Number Representation & Place Value | 52 | 5 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
 | Mathematics / Ratio & Proportion | 18 | 0 | Assemble · allocate · check; Build · transform · relate |
 | Personal & Social Development / Emotional Literacy | 15 | 0 | Read · infer · support; Create · perform · reflect |
@@ -300,6 +301,9 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Fractions of a whole](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_ndGqFPWyen) | scoped-practice / Fraction Trail (local build) / [source](../dist/fraction-trail-ui.mjs) | Name an actual flag with whole or fraction notation, separating a correct location reading from the requested stop/partition. One five-quarter encounter; no general mixed-number or area/set work. |
 | [Equivalent fractions on a number line](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Ep7TDFuYUa) | scoped-practice / Fraction Trail (local build) / [source](../dist/fraction-trail-ui.mjs) | Keep a half-length route and compare a current two-quarter/three-sixth route at the same physical scale. Half family only, no general equivalence/simplification strategy. |
 | [Fraction Notation](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_vKcxX6iNOA) | scoped-practice / Fraction Trail (local build) / [source](../dist/fraction-trail-ui.mjs) | Read/write bounded whole or numerator/denominator notation for an actual visible flag; equivalents accepted. No general symbolic fluency or independent reading proficiency inference. |
+| [The teen numbers](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_xmmgAzxe5j) | scoped-practice / Bundle Burrow: Exchange Table (local build) / [source](../dist/bundle-exchange-ui.mjs) | Count thirteen pictured counters, move ten to a frame and wrap/unwrap the same ten with three outside; a separate supplied sixteen example revisits the action. Only these two teens, not all teen numerals or handwriting. |
+| [A Ten Is Ten Ones](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_r0VXbfAmsH) | scoped-practice / Bundle Burrow: Exchange Table (local build) / [source](../dist/bundle-exchange-ui.mjs) | Wrap exactly ten frame counters into one visibly ten-marked bundle and unwrap into an empty ten-place frame. Fixed totals conserved with reversible one-counter moves; containers add no counters. No arbitrary packing capacity or physical exchange inference. |
+| [The two digits of a two-digit number](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_THl9GLxwoL) | scoped-practice / Bundle Burrow: Exchange Table (local build) / [source](../dist/bundle-exchange-ui.mjs) | Distinguish actual wrapped bundles from a supplied numeral’s tens digit and tens-place value for selected quantities 0,7,13,20,27,30,42, including noncanonical grouping. Zero/seven have no written tens digit; empty tens place is supplied. No full two-digit range, independent decoding or written arithmetic claim. |
 
 ## Sources, licensing and maintenance
 

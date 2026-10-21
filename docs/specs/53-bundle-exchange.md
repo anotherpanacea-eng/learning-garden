@@ -1,6 +1,6 @@
 # 53 — Bundle Burrow: exchange without changing the amount
 
-**Status: build-ready after independent specification review and resolved findings; [receipt](../reviews/52-55-independent-spec-review.md). Not implemented or release-cleared.** This is the missing base-ten conservation bridge in M1-number 1–2. It does not complete written addition/subtraction, multi-digit multiplication/division, or the place-value strand.
+**Status: build-ready after independent specification review and resolved findings; [receipt](../reviews/52-55-independent-spec-review.md). A local implementation now exists on `build/bundle-exchange`; [Independent implementation review](../reviews/53-bundle-exchange-implementation-review.md) and local/browser checks passed. Composed-release verification remains separate; not release-cleared.** This is the missing base-ten conservation bridge in M1-number 1–2. It does not complete written addition/subtraction, multi-digit multiplication/division, or the place-value strand.
 
 ## Existing overlap and the specific gap
 
