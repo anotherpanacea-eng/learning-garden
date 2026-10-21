@@ -7,6 +7,8 @@ const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const keys=(x,required,optional=[])=>object(x)&&required.every(k=>Object.hasOwn(x,k))&&Object.keys(x).every(k=>required.includes(k)||optional.includes(k));
 const whole=(n,max)=>Number.isInteger(n)&&n>=0&&n<=max;
 const clone=x=>JSON.parse(JSON.stringify(x));
+// Saved snapshots are matched on ids and counts, not display wording, so a copy edit cannot strand a save.
+const wordless=x=>JSON.parse(JSON.stringify(x,(k,v)=>k==='label'||k==='notice'?undefined:v));
 function same(a,b){if(a===b)return true;if(Array.isArray(a)||Array.isArray(b))return Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>same(v,b[i]));return object(a)&&object(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>Object.hasOwn(b,k)&&same(a[k],b[k]));}
 const supportValid=s=>object(s)&&Object.entries(s).every(([k,v])=>RAIN_SUPPORT.includes(k)&&v===true);
 const taskSupportValid=s=>keys(s,TASKS)&&TASKS.every(k=>supportValid(s[k]));
@@ -25,10 +27,10 @@ function ledgers(c,progress){
  });
 }
 const shown=(c,progress)=>({config:clone(c),progress,rows:ledgers(c,progress)});
-const shownValid=(c,s)=>keys(s,['config','progress','rows'])&&same(s.config,c)&&whole(s.progress,3*c.newRainTotal/4)&&same(s.rows,ledgers(c,s.progress));
+const shownValid=(c,s)=>keys(s,['config','progress','rows'])&&same(wordless(s.config),wordless(c))&&whole(s.progress,3*c.newRainTotal/4)&&same(s.rows,ledgers(c,s.progress));
 function sourceValid(s){
  const c=object(s)&&rainCaseById(s.caseId);
- return !!c&&keys(s,['caseId','model','config','rows','support','familiar'])&&same(s.model,modelSource())&&same(s.config,c)&&same(s.rows,ledgers(c,3*c.newRainTotal/4))&&taskSupportValid(s.support)&&typeof s.familiar==='boolean';
+ return !!c&&keys(s,['caseId','model','config','rows','support','familiar'])&&same(wordless(s.model),wordless(modelSource()))&&same(wordless(s.config),wordless(c))&&same(s.rows,ledgers(c,3*c.newRainTotal/4))&&taskSupportValid(s.support)&&typeof s.familiar==='boolean';
 }
 function predictionValid(p){return p===null||keys(p,['choice','timing','resultsExposed','exposureUnknown','support','familiar'])&&CHOICES.includes(p.choice)&&typeof p.resultsExposed==='boolean'&&typeof p.exposureUnknown==='boolean'&&p.timing===(p.resultsExposed?'after-results':p.exposureUnknown?'unknown':'before-results')&&supportValid(p.support)&&typeof p.familiar==='boolean';}
 function responseValid(task,value){
@@ -43,7 +45,7 @@ function checkValid(c,a){
 }
 function planValid(p,trayId,c){return p===null||keys(p,['source','trayId','route','sent','support','familiar'])&&sourceValid(p.source)&&p.source.caseId===c.id&&p.trayId===trayId&&RAIN_ROUTES.includes(p.route)&&whole(p.sent,p.source.rows.find(r=>r.id===trayId).runoffNew)&&p.sent%4===0&&supportValid(p.support)&&typeof p.familiar==='boolean';}
 function workValid(c,w){
- return keys(w,['config','progress','prediction','support','familiar','restarted','pending','checks','keptResult','plans','keptPlans'],['views'])&&(!Object.hasOwn(w,'views')||viewsValid(w.views))&&same(w.config,c)&&whole(w.progress,3*c.newRainTotal/4)&&keys(w.prediction,['first','latest'])&&predictionValid(w.prediction.first)&&predictionValid(w.prediction.latest)&&((w.prediction.first===null)===(w.prediction.latest===null))&&taskSupportValid(w.support)&&typeof w.familiar==='boolean'&&typeof w.restarted==='boolean'&&keys(w.pending,['factor','runoff','columns','difference'])&&(w.pending.factor===null||responseValid('factor',w.pending.factor))&&(w.pending.runoff===null||responseValid('runoff',w.pending.runoff))&&responseValid('columns',w.pending.columns)&&responseValid('difference',w.pending.difference)&&Array.isArray(w.checks)&&w.checks.length<=24&&w.checks.every(a=>checkValid(c,a))&&(w.keptResult===null||sourceValid(w.keptResult)&&w.keptResult.caseId===c.id)&&keys(w.plans,TRAYS)&&keys(w.keptPlans,TRAYS)&&TRAYS.every(t=>planValid(w.plans[t],t,c)&&planValid(w.keptPlans[t],t,c)&&(w.keptPlans[t]===null||w.keptPlans[t].sent===w.keptPlans[t].source.rows.find(r=>r.id===t).runoffNew));
+ return keys(w,['config','progress','prediction','support','familiar','restarted','pending','checks','keptResult','plans','keptPlans'],['views'])&&(!Object.hasOwn(w,'views')||viewsValid(w.views))&&same(wordless(w.config),wordless(c))&&whole(w.progress,3*c.newRainTotal/4)&&keys(w.prediction,['first','latest'])&&predictionValid(w.prediction.first)&&predictionValid(w.prediction.latest)&&((w.prediction.first===null)===(w.prediction.latest===null))&&taskSupportValid(w.support)&&typeof w.familiar==='boolean'&&typeof w.restarted==='boolean'&&keys(w.pending,['factor','runoff','columns','difference'])&&(w.pending.factor===null||responseValid('factor',w.pending.factor))&&(w.pending.runoff===null||responseValid('runoff',w.pending.runoff))&&responseValid('columns',w.pending.columns)&&responseValid('difference',w.pending.difference)&&Array.isArray(w.checks)&&w.checks.length<=24&&w.checks.every(a=>checkValid(c,a))&&(w.keptResult===null||sourceValid(w.keptResult)&&w.keptResult.caseId===c.id)&&keys(w.plans,TRAYS)&&keys(w.keptPlans,TRAYS)&&TRAYS.every(t=>planValid(w.plans[t],t,c)&&planValid(w.keptPlans[t],t,c)&&(w.keptPlans[t]===null||w.keptPlans[t].sent===w.keptPlans[t].source.rows.find(r=>r.id===t).runoffNew));
 }
 function valid(r){return keys(r,['version','page','currentCase','resultsExposed','exposureUnknown','cases'],['recovered'])&&r.version===1&&RAIN_PAGES.includes(r.page)&&rainCaseById(r.currentCase)&&typeof r.resultsExposed==='boolean'&&typeof r.exposureUnknown==='boolean'&&object(r.cases)&&Object.keys(r.cases).length<=4&&Object.entries(r.cases).every(([id,w])=>rainCaseById(id)&&workValid(rainCaseById(id),w));}
 const fresh=()=>({version:1,page:'predict',currentCase:'cover-12',resultsExposed:false,exposureUnknown:false,cases:{}});
