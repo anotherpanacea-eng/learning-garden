@@ -1,0 +1,52 @@
+id,kind,target_id,proposed_text_or_phonemes,status,review_note
+sound-a,sound,a,/æ/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-b,sound,b,/b/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-c,sound,c,/k/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-f,sound,f,/f/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-h,sound,h,/h/,pending-independent-review,conditional: approve isolated /h/ or withhold and specify contextual alternative
+sound-i,sound,i,/ɪ/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-m,sound,m,/m/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-n,sound,n,/n/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-o,sound,o,/ɑ/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-p,sound,p,/p/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-s,sound,s,/s/,pending-independent-review,"sound, not letter name; human take and rights review required"
+sound-t,sound,t,/t/,pending-independent-review,"sound, not letter name; human take and rights review required"
+word-cat,word,cat,cat,pending-independent-review,natural whole take
+segmented-cat,segmented,cat,/k/ | /æ/ | /t/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-cat,blend,cat,/k/ | /æ/ | /t/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-mat,word,mat,mat,pending-independent-review,natural whole take
+segmented-mat,segmented,mat,/m/ | /æ/ | /t/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-mat,blend,mat,/m/ | /æ/ | /t/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-sat,word,sat,sat,pending-independent-review,natural whole take
+segmented-sat,segmented,sat,/s/ | /æ/ | /t/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-sat,blend,sat,/s/ | /æ/ | /t/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-bat,word,bat,bat,pending-independent-review,natural whole take
+segmented-bat,segmented,bat,/b/ | /æ/ | /t/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-bat,blend,bat,/b/ | /æ/ | /t/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-pin,word,pin,pin,pending-independent-review,natural whole take
+segmented-pin,segmented,pin,/p/ | /ɪ/ | /n/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-pin,blend,pin,/p/ | /ɪ/ | /n/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-tin,word,tin,tin,pending-independent-review,natural whole take
+segmented-tin,segmented,tin,/t/ | /ɪ/ | /n/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-tin,blend,tin,/t/ | /ɪ/ | /n/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-fin,word,fin,fin,pending-independent-review,natural whole take
+segmented-fin,segmented,fin,/f/ | /ɪ/ | /n/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-fin,blend,fin,/f/ | /ɪ/ | /n/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-bin,word,bin,bin,pending-independent-review,natural whole take
+segmented-bin,segmented,bin,/b/ | /ɪ/ | /n/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-bin,blend,bin,/b/ | /ɪ/ | /n/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-hop,word,hop,hop,pending-independent-review,natural whole take
+segmented-hop,segmented,hop,/h/ | /ɑ/ | /p/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-hop,blend,hop,/h/ | /ɑ/ | /p/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-mop,word,mop,mop,pending-independent-review,natural whole take
+segmented-mop,segmented,mop,/m/ | /ɑ/ | /p/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-mop,blend,mop,/m/ | /ɑ/ | /p/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-top,word,top,top,pending-independent-review,natural whole take
+segmented-top,segmented,top,/t/ | /ɑ/ | /p/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-top,blend,top,/t/ | /ɑ/ | /p/,pending-independent-review,one human demonstration; not concatenated isolated samples
+word-pop,word,pop,pop,pending-independent-review,natural whole take
+segmented-pop,segmented,pop,/p/ | /ɑ/ | /p/,pending-independent-review,one human demonstration; not concatenated isolated samples
+blend-pop,blend,pop,/p/ | /ɑ/ | /p/,pending-independent-review,one human demonstration; not concatenated isolated samples
+shared-text-props,shared-text,props,The cat sat on a mat. A bat is by the mat.,pending-independent-review,narration supplies all target pronunciations; record as support
+shared-text-box,shared-text,box,A pin is in a tin. A toy fish has a fin. The tin and the fish are by the bin.,pending-independent-review,narration supplies all target pronunciations; record as support
+shared-text-puppet,shared-text,puppet,A puppet can hop. A mop and a top wait by the stage. A bubble goes pop.,pending-independent-review,narration supplies all target pronunciations; record as support
