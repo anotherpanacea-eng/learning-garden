@@ -1,6 +1,6 @@
 # Curriculum spirals: turn a familiar game into a new kind of thinking
 
-**Planning proposal, checked 2026-10-19.** No activities, curriculum mappings, learner records or suggestions change in this document. It builds on the [full atlas](learning-atlas.md), not a replacement 1,590-topic curriculum. The three increments below are candidates for independently reviewed builds, in priority order; all destinations stay open.
+**Plan checked 2026-10-20.** Increment 1 now has a bounded local implementation in [spec 38](specs/38-equal-group-spiral.md); increments 2–3 remain proposals. It builds on the [full atlas](learning-atlas.md), not a replacement 1,590-topic curriculum. The first increment is built; the remaining two are candidates for independently reviewed builds, in priority order. All destinations stay open.
 
 The [strand-by-strand map](strand-map.md) expands this proposal into concepts, contrasts, homes and revisits, with Built/Planned/Missing labels and a game-needs assessment.
 
@@ -14,7 +14,7 @@ Public source files checked at exact revisions:
 | --- | --- | --- |
 | [Jane `385f644d6ffcd5f80f809888591d871a074b7855`](https://github.com/kentlangley/Jane/tree/385f644d6ffcd5f80f809888591d871a074b7855) | [`LESSONS.md`](https://github.com/kentlangley/Jane/blob/385f644d6ffcd5f80f809888591d871a074b7855/LESSONS.md), [`src/engine.js`](https://github.com/kentlangley/Jane/blob/385f644d6ffcd5f80f809888591d871a074b7855/src/engine.js), [`packs/examples/example-quest.json`](https://github.com/kentlangley/Jane/blob/385f644d6ffcd5f80f809888591d871a074b7855/packs/examples/example-quest.json), `LICENSE`, `LICENSING.md` | Small purposeful quests; examples revealed one step at a time; guided attempts; different response formats; help that progresses from a clue to an example; returning to an idea. Its engine also couples selection to topic states, review boxes, points and access rules. Study the support mechanisms separately; don't import that learner model or its locks and penalties. |
 | [Marble `ff9853306ba0c36a3e0045f43054f6039f62b0e5`](https://github.com/withmarbleapp/os-taxonomy/tree/ff9853306ba0c36a3e0045f43054f6039f62b0e5) | `data/topics.json`, `data/dependencies.json`, `README.md`, `LICENSE` | Stable topic identities, descriptions, evidence fields and explicit prerequisite relationships help us find omitted ideas. These are curriculum references, not validated placement or mastery instruments. A named topic can be much broader than a particular activity. |
-| [Our pinned Marble `96a7933754af672e1bfdbf7ecb05c325860c6e0d`](https://github.com/withmarbleapp/os-taxonomy/tree/96a7933754af672e1bfdbf7ecb05c325860c6e0d) | Complete vendored topics and dependencies; current atlas; runtime content and connections | The mappings and source-edge examples below use this existing pin so they can be checked against the repository. Current upstream is 1,591 topics / 3,225 edges; our pin is 1,590 / 3,221. Updating the reference data is a separate small maintenance change, not an automatic curriculum expansion. |
+| [Our pinned Marble `96a7933754af672e1bfdbf7ecb05c325860c6e0d`](https://github.com/withmarbleapp/os-taxonomy/tree/96a7933754af672e1bfdbf7ecb05c325860c6e0d) | Complete vendored topics and dependencies; current atlas; runtime content and connections | The mappings and source-edge examples below use this existing pin so they can be checked against the repository. The latest inspected upstream is 1,616 topics / 3,317 edges; our pin is 1,590 / 3,221. Updating the reference data is a separate small maintenance change, not an automatic curriculum expansion. |
 
 Upstream changes include a new **Line graphs** node (`mt_HlNSurPVDp`) and corrected relationships around writing feedback, representations and forces. For example, current upstream makes **Responding to Writing Feedback** a soft prerequisite of **Reviewing Own Writing**; our pin has that soft edge in the opposite direction. Preserve each source honestly until a reviewed pin refresh updates the derived atlas. Don't silently reverse edges in the current files.
 
@@ -57,9 +57,11 @@ Name-only mapping fails in this graph: pinned `mt_HY8Yycu_rz` is titled “Under
 
 ## First three playable increments
 
-These are proposed bounded specifications, not implemented promises. Each uses the existing pagination approach: one immediate instruction/question, a persistent relevant model or message, optional stepwise help, Back and a recoverable draft. Preserve inventory, unfinished orders/deliveries, local exports, supported attempts and unfamiliar-task observations. A child may pick any entry, depth or next place.
+Increment 1 is implemented as an optional bench beside the existing games; the next two remain proposed bounded specifications. Each uses the existing pagination approach: one immediate instruction/question, a persistent relevant model or message, optional stepwise help, Back and a recoverable draft. Preserve inventory, unfinished orders/deliveries, local exports, supported attempts and unfamiliar-task observations. A child may pick any entry, depth or next place.
 
 ### 1. Same delivery, three different questions
+
+**Built slice: [same supplies, different questions](specs/38-equal-group-spiral.md).** Café and Bramble now have paired editable benches with six positive quantity families through 12×12, three unknown roles, separate attempts and cloned arrangements on crossing. The original order/rival and inventory remain untouched. This is visual practice, not certified transfer. Broader recipes, fractions and remainders remain later work.
 
 **Extend Café, with a Bramble invitation; no new world.** The small aim is to distinguish the roles of total, group count and group size, using the familiar serving loop.
 
@@ -72,7 +74,9 @@ These are proposed bounded specifications, not implemented promises. Each uses t
 
 **Candidate scoped references:** `mt_LpSuPgL31x`, `mt_iNdrM2-oJf`, `mt_GDG9_SZmsO`, `mt_xZvDCYA5Ae`; reuse existing array/repeated-addition references only where those representations are actually used. Do not add full coverage declarations. Bakery fractions are a later contrast once the whole/unit model is authored.
 
-### 2. A message that helps someone act
+### 2. A message that helps someone act — built slice
+
+[Spec 39](specs/39-message-reader-spiral.md) implements three original storm-recovery notes at `#post/messages` and `#loft/messages`: which basket, which destination and which action. Two useful clear phrasings and a plausible different-purpose alternative accompany each original. Manual before/after playback, exact optional original wording for a human reader, and a separate puppet reason/reply rehearsal preserve ordinary deliveries and shows. Crossings clone the first draft and reopen existing work without replacement. This bounded slice is built; broader composition and paired-perspective reading remain planned.
 
 **Extend Post Office and Story Loft; reuse Paris reading patterns.** Turn comprehension into purposeful composition and revision without turning creative choices into errors.
 
@@ -84,6 +88,8 @@ These are proposed bounded specifications, not implemented promises. Each uses t
 **Acceptance:** Content review checks explicit detail versus inference and plausible alternative readings for all three cases. A selected clue must actually support its stated claim. Test the literal structured runner separately from free text; the UI plainly describes when a human is the reader. Preserve exact optional authored text, scene, draft revision and delivery while changing pages/reloading; escape text in preview/notes/export. Provide meaningful keyboard/touch alternatives and optional narration. Narrated, together-read and independent-read observations remain separate; an author's new sentence is not an independent-writing claim unless support is explicitly observed.
 
 **Candidate scoped references:** `mt_lp3qyEujIv`, `mt_OyOYHlZ2_T` (Responding to Writing Feedback), `mt_U_8iVFZuHH` (Reviewing Own Writing); `mt_vauULTecMH` only for the separate story opportunity. A local clue-selection task remains narrower than `mt_S3XMQOYt_D`. The new post-to-loft link is our teaching bridge, not a source dependency. This slice does not implement paired-perspective reading in spec 06.
+
+[Spec 40](specs/40-changing-letters.md) extends this built slice into a continuing twelve-letter round: six one-detail notes, three paired-detail notes and three reader-knowledge/reason notes. First-kept supplied versions inform open structural suggestions; card experiments, original wording and familiar rereading are distinct. Current letters and their shuffled option order remain frozen, with retained drafts at both desks. This adds narrow audience-aware wording opportunities, not a general writing or reading assessment.
 
 ### 3. What would help this garden grow?
 
@@ -114,3 +120,51 @@ Cross-game invitations should carry the **chosen task and relevant work** (quant
 The highest missing modality is reviewed sound–letter/blending/segmenting work: [spec 04](specs/04-word-workshop.md) remains the appropriate bounded starting point. Don't expand Word Garden's morphology claims into phonics. Additional future loops include bakery fractions/measurement, food webs, historical-source comparison, mapping, sound/light creation and reflective community conversation, as already sketched in the atlas. Some fit the familiar shells; historical uncertainty, auditory discrimination and making a composition need their own representations and responses.
 
 Before choosing a fourth build, use what the first three reveal about the **activities**: can a child tell what the question is, retain needed materials, choose useful support, and explore the intended contrast? Parent observations can guide private choices. Game participation and a larger taxonomy mapping count are not evidence of learning gains. For each delivered slice, update only the actual task-scoped atlas references and its limits, keep a few synthetic transfer examples for review, and stop short of claiming a complete developmental sequence.
+
+Source refresh for increment 2 (2026-10-20): Jane `385f644d6ffcd5f80f809888591d871a074b7855`, Marble `05af6444ded9c033b0a29ee6a9e842db9c2ba594`. Candidate English descriptions match the bundled pin; the feedback/self-review soft prerequisite has reversed upstream (current self-review depends on responding to feedback). The pinned graph stays unchanged. The Post–Loft connection is an original teaching bridge, not a taxonomy edge. See spec 39 for studied paths and license boundaries.
+
+## Increment 41: the growing shelf
+
+Built: `#living/plants` gives a four-page light investigation. Predictions, inspected days, copied table rows, supplied-question practice and support stay distinct. An exact frozen observation travels to the planting corner without changing the pretend beds or café inventory. Four explicitly invented observation days show why a longer stem alone does not establish a healthier plant; the fair-comparison task is a supplied proposed water test, with no simulated water results.
+
+Next: Field Notebook should ask which observations answer a question, build a labelled chart and interpret it. Copying supplied rows in this release is not that chart/data-selection curriculum. Real plants, independent measurement, ecological interactions and broader growth requirements remain missing. See [spec 41](specs/41-plant-investigation.md).
+
+## Increment 42: an observation becomes a chart
+
+Built: `#living/notebook` revisits eight finite same-day/specimen comparisons. Select useful supplied rows, construct labelled fixed-scale bars, read the actual draft, check it against its source and answer the original question. These outcomes remain separate: a faithful chart can use irrelevant data, and an inaccurate chart can be read correctly. Blank and zero are distinct; unfinished entries, checks, help and kept drafts survive revisiting.
+
+A chart can sit beside the planting plan without awarding ingredients or changing the beds. Model viewing carries across the notebook, growing shelf and expanded notes so a later prediction is never falsely labelled before-looking; unknown recovered viewing stays uncertain. Missing: real measurement, independently chosen scales, time-series graphs, repeated survey data, classification keys and causal growth investigation. The notebook is visible-source practice, not a claim that a whole graph topic has been learned.
+
+## Picnic fractions: same whole, different pieces
+
+The Sharing Counter extends the café equal-group bench through six original visual requests. Equal share count and equal size are separate: an unequal two-piece loaf is not two halves. Changing cuts preserves the whole; one half and two quarters cover the same amount. The number line collects selected amount, including separated pieces, rather than reading the spatial endpoint of the original selection. A basket then changes the whole from one loaf to twelve objects: one quarter is one complete group of three, not one bun. All checks remain pictured practice.
+
+**Built:** repair halves/quarters, select half/three quarters, stepped same-whole equivalence, derive a 0–1 marker, reversibly distribute twelve buns, keep/revise drafts. **Planned:** measured portions in a graduated jug. **Missing:** thirds/eighths, unlike-whole comparison, independent number-line placement, physical measuring and fraction operations. These are original teaching bridges; source prerequisite edges are unchanged. [Spec 43](specs/43-sharing-counter.md).
+
+## Rain Paths: one change, many representations
+
+The Water Lab now invites manually tracing new rain through an invented tabletop machine. A matched comparison changes only the entrance cover or already-stored water. The learner follows one physical phase at a time, compares exact completed counts, selects useful destination columns, optionally finds a difference, then tests a frozen runoff copy through a channel or holding cup. The same quantities become a planning problem: reserve + cup + onward collector stays equal to the source. A cup can overflow.
+
+**Built:** four finite apparatus cases, unscored predictions with recorded prior-result exposure, manual token moves, source-ledger reading, supplied changed-factor practice, relevant columns and editable copied route. **Planned:** real-world observations and broader datasets in Field Notebook. **Missing:** measured rainfall, soil infiltration rates, drainage/evaporation/plant paths, independent experimental design and real flood planning. The water-cycle node remains unmapped. Any pictured 3×4 storage or 2×4 earlier-water arrangement contributes arithmetic familiarity, not a multiplication answer. [Spec 44](specs/44-rain-paths.md).
+
+## Measured portions: read this amount, meet that request
+
+The Measuring Kitchen gives the café a standard-unit counterpart to the Sharing Counter. A share asks how much of a whole; a graduated jug asks how many mL are contained. Six recipe cards keep those targets visible while the child fills, reads, pours and returns. Reading 300 mL correctly remains a correct reading when the recipe requested 250 mL. A wrong unit is separate from the read number. Two matching preparation jars can still leave extra liquid in the jug; readiness is another condition.
+
+**Built:** straight-sided 500 mL jug, ten equal 50 mL intervals, two patterned ingredient identities, reversible transfers, separate volume/unit/target checks and frozen unfinished trays. **Planned:** quantity contrasts across measured recipes and reader-revised instructions. **Missing:** physical measuring, mass, litre conversion, irregular-vessel comparison, mixing, half/double batches and usable cooking recipes. Rain tokens remain arbitrary model quantities; they are never silently relabelled mL. [Spec 45](specs/45-measuring-recipes.md).
+
+## A source for this question, a limit for this reply
+
+Travelers’ Archive revisits Paris through historical evidence. A photograph gives one local view; a modern chronology selects events. The same packet supports place-label matching, date ordering, visible-detail questions, source selection and a prepared reply. The reply uses dates for timing and leaves exact street depth or everyone’s feelings uncertain. A photograph’s production date is not automatically its capture moment.
+
+**Built:** one Paris 1910 pack, full credited CC0 photo, original schematic, three ordinal events, eight finite source questions, prepared evidence/limit choices and exact local human-read writing. **Planned:** more reviewed places/periods and a separately authored French pack. **Missing:** independent archive research, a broad history sequence, geographic distances, source corroboration by independent eyewitnesses and evaluated original writing. [Spec 46](specs/46-travelers-archive-first-visit.md).
+
+## Same results, new representations
+
+The water-chart branch carries an actual completed Rain Paths result into the Field Notebook. A faithful chart of stored tokens can be irrelevant to a runoff question; a wrong runoff chart can still be read correctly. These contrasts give the familiar chart loop a new scientific purpose without treating arbitrary tokens as calibrated water measurements.
+
+**Built in this increment:** four finite completed-source invitations, frozen provenance, reversible data selection and two-bar construction, distinct draft/source/model checks, exact pending text and unfinished keeps. **Missing:** independent scale design, real data collection, causal explanation assessment and water-cycle modelling. Prior viewing remains familiar practice across both games. [Spec 47](specs/47-rain-notebook-spiral.md).
+
+## Draft next: a call made for a listener
+
+Bell Studio would revisit message revision through a different medium: arrange low/middle/high computer tones and rests, save a before-version, compare and revise for a gathering or delivery. Literal arrangement constraints, artistic meaning and physical hearing stay distinct. Its local components and app integration are built and independently reviewed; initial browser interactions pass, while human listening and remaining browser/audio checks are pending. It has no live atlas reference yet and supplies no phonics evidence. [Spec 48](specs/48-bell-studio.md).

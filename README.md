@@ -20,6 +20,8 @@ The home page also offers **Watch the storm pass**, the optional 46-second film 
 
 The introductory storm film opens automatically the first time each saved explorer visits this version. It starts silently, lets sound join at the current picture, and can be skipped at any time. Reduced-motion settings leave playback manual. The home-page “Watch the storm pass” link always remains available. With saving off or unavailable, the reminder lasts only for the current page session.
 
+Three more short films celebrate story endings in the same way: *A Postcard Home* (32 seconds) when a Paris errand ends, *Welcome Back, Neighbors* (34 seconds) when the first café supper lights all six lanterns, and *Through the Ribbon Gate* (31 seconds) when Bramble’s gate is untangled. Each opens once per explorer, can be skipped, and stays available from a “Watch … film” link on that ending. Watching a film is not recorded as learning evidence. The Bramble film shows 3 × 4 as a story example, so it notes that fact as seen, which keeps a later 3 × 4 answer from counting as unseen.
+
 The [strand-by-strand curriculum map](docs/strand-map.md) marks concepts, contrasts, game homes and revisits as Built, Planned or Missing, and identifies which additional game modes are needed.
 
 The [curriculum spiral plan](docs/curriculum-spirals.md) proposes the next conceptual connections across familiar games, with checked Jane/Marble references and explicit gaps. It is a plan, not additional live coverage.
@@ -51,6 +53,23 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/field-notebook-checks.mjs
+node test/field-notebook-integration-checks.mjs
+node test/sharing-counter-checks.mjs
+node test/sharing-counter-integration-checks.mjs
+node test/rain-paths-checks.mjs
+node test/rain-paths-integration-checks.mjs
+node test/measuring-recipes-checks.mjs
+node test/measuring-recipes-integration-checks.mjs
+node test/travelers-archive-checks.mjs
+node test/travelers-archive-ui-checks.mjs
+node test/travelers-archive-integration-checks.mjs
+node test/plant-study-checks.mjs
+node test/plant-study-integration-checks.mjs
+node test/letter-trail-checks.mjs
+node test/letter-trail-integration-checks.mjs
+node test/message-checks.mjs
+node test/message-integration-checks.mjs
 node test/loft-checks.mjs
 node test/loft-growing-checks.mjs
 node test/progress-transfer-checks.mjs
@@ -93,6 +112,9 @@ node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
 node test/french-exploration-checks.mjs
 node test/storm-film-checks.mjs
+node test/ending-film-checks.mjs
+node test/equal-groups-checks.mjs
+node test/equal-groups-integration-checks.mjs
 node scripts/check-story-packs.mjs
 ```
 
@@ -221,3 +243,51 @@ The file is read on your device, never uploaded. Existing explorers are not repl
 ## Cloudflare hosting
 
 The reviewed static assets are served at https://after-the-storm-learning.anotherpanacea.workers.dev/. Deploy only `dist/`, never the repository root or CLI-generated setup folders. From an authenticated Cloudflare account, future reviewed releases can use `npx wrangler deploy --assets ./dist --name after-the-storm-learning`. The current deployment has no application backend or paid compute requirement. Static asset requests are [free and unlimited](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/). Keep credentials and account configuration outside this public repository.
+
+The first equal-group spiral is available at the Café serving bench and Bramble’s ribbon bench. Six quantity families support total, amount-per-group and group-count questions, with editable pictured supplies and preserved work across both places. See [spec 38](docs/specs/38-equal-group-spiral.md). Normal orders, inventory and rival rounds stay separate.
+
+### A message for a reader
+
+[The letter-mending desk](https://after-the-storm-learning.anotherpanacea.workers.dev/#post/messages) offers three original storm-recovery notes: which basket, which destination and which action. Choose a scene clue, try several useful supplied revisions, and compare the reader’s before/after response. Alternate clear messages can serve a different purpose; there is no penalty or required success. Optional original wording is read with a person and never automatically evaluated.
+
+[The reader’s stage](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft/messages) gives the sender a reason and the reader a reply, with optional original dialogue and manual replay. The first crossing copies familiar words and support context; later crossings reopen the destination’s existing draft. Ordinary deliveries, rival challenges, puppet shows and shelves are untouched. Exact authored words stay local under save settings and appear in notes downloads. This is bounded practice, not a reading or writing level. [Spec 39](docs/specs/39-message-reader-spiral.md).
+
+### Changing letters
+
+[Find a changing letter](https://after-the-storm-learning.anotherpanacea.workers.dev/#post/letters/round) or [open the round in Story Loft](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft/letters/round). Twelve original notes revisit one detail, two details together and what a particular reader needs to know. Readers include Kitten, Dragon, Rabbit, Pip and Dot. Two already-actionable notes ask for a reason rather than pretending the directions are wrong. The library rotates; it is finite authored content, not live AI generation.
+
+Trying cards is exploration. Only explicitly keeping a supplied version contributes once to a gentle next-kind suggestion; original wording stays human-read and ungraded. Recent requests, known help, narration, together-reading, repeated encounters and legacy-desk familiarity remain separate. Choose any kind immediately. The current letter, card/clue order, both desk drafts and other games stay intact across pages and reload. The round retains its latest 24 letters plus selected drafts at either desk; notes downloads contain that retained writing. The original three-note desk and its saved work remain available. [Spec 40](docs/specs/40-changing-letters.md).
+
+## The growing shelf
+
+[Seedlings after the storm](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/plants) adds an optional Living Garden investigation: wonder, inspect four invented model days, compare stems and leaves, then carry a kept observation to a planting plan. Adequate-light and dim-light examples use the same millimetre scale. Pictures and numbers are labelled illustrations, not measured cress results. Prediction timing, copied rows, practice and help remain separate; existing habitat trails, beds and café stock are preserved. [Spec 41](docs/specs/41-plant-investigation.md).
+
+## Field Notebook
+
+[Open the Field Notebook](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook) to choose useful model observations, make two labelled bars, read the chart and compare it with its source. Eight open comparisons revisit model days 0/2/4/6 and specimens A/B. A correct reading of an inaccurate chart stays distinct from matching the source or choosing relevant data. Keep unfinished charts, revise later, and bring a frozen chart to the planting corner. Typed-but-unapplied entries and support stay with the explorer. Source values remain explicitly invented; no real plant measurement or learning-level inference is made. [Spec 42](docs/specs/42-field-notebook.md).
+
+## The Sharing Counter
+
+[Pack a picnic](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/sharing) by repairing unequal loaf cuts, comparing half with two quarters, and sharing twelve buns into four equal groups. Six requests stay open, with reversible controls, optional stepped examples and frozen unfinished drafts. The same whole stays pictured; feedback separates share count, equality and packed amount. This is supported visual fraction practice, with no ingredient-stock or supper effects. [Spec 43](docs/specs/43-sharing-counter.md).
+
+## Rain Paths
+
+[Follow the rain](https://after-the-storm-learning.anotherpanacea.workers.dev/#science/rain) through two matched tabletop machines. Manually bring down tokens, follow an opening or sealed lid, inspect storage and outlets, and try a copy through a straight channel or a holding cup that can overflow. Four open cases keep predictions, partial ledgers, exact pending questions, source views and paused plans. These arbitrary tokens are an invented closed machine, not measured rain, soil or a flood forecast. [Spec 44](docs/specs/44-rain-paths.md).
+
+## The Measuring Kitchen
+
+[Prepare a measured dinner tray](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/recipes) with a graduated 500 mL jug,50 mL fills and two separate fictional ingredients. Six cards invite filling, reading, pouring and correcting. An accurate reading of an overfilled portion stays accurate; units, recipe fit and an empty jug are checked separately. Every portion can be returned, and unfinished trays can be kept without changing café orders or stock. [Spec 45](docs/specs/45-measuring-recipes.md).
+
+## Travelers’ Archive
+
+[Open a Paris archive parcel](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive): inspect a real, credited CC0 photograph from the 1910 Seine flood, place evidence on an original schematic, order three dated events, and compare a picture with modern chronology summaries. Prepared replies distinguish evidence from missing information; optional original writing is local, exact and ungraded. One bounded visit, open to revisit; no independent history/reading-level or French-proficiency claim. [Spec 46](docs/specs/46-travelers-archive-first-visit.md).
+
+## Rain Paths charts
+
+Carry an actual completed current or kept Rain Paths result to [a water page in the Field Notebook](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain). Choose useful data, build two bars, read the draft and compare it with its frozen source. Wrong bars can still be read correctly; source fidelity and the runoff question stay separate. Pending entries and unfinished kept charts survive revisiting. These are arbitrary model tokens, never mL or measured rain. [Spec 47](docs/specs/47-rain-notebook-spiral.md).
+
+## Sharing and navigation artwork
+
+The main page and standalone films include static Open Graph and large-image card metadata. The shared1200×630 PNG is `dist/assets/after-the-storm-social-v1.png`; its editable original vector artwork is `design/social-preview.svg`. Hash destinations share the main page preview because the fragment is not sent in an HTTP request. Metadata contains no explorer or saved-progress information. Bump the image filename when replacing it; sharing services may cache earlier cards.
+
+Nine original SVG icons in `dist/icons/` accompany the existing visible navigation names. They are decorative to assistive technology; the text remains the accessible link name. The mobile menu uses four columns with large tap targets. The existing garden mark also supplies the32px PNG favicon and180px Apple touch icon. Raster assets were rendered from the local vector originals with Sharp; no remote fonts, icon library, image service or additional browser dependency is required.
