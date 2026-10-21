@@ -20,7 +20,7 @@ The home page also offers **Watch the storm pass**, the optional 46-second film 
 
 The introductory storm film opens automatically the first time each saved explorer visits this version. It starts silently, lets sound join at the current picture, and can be skipped at any time. Reduced-motion settings leave playback manual. The home-page “Watch the storm pass” link always remains available. With saving off or unavailable, the reminder lasts only for the current page session.
 
-Three more short films celebrate story endings in the same way: *A Postcard Home* (32 seconds) when a Paris errand ends, *Welcome Back, Neighbors* (34 seconds) when the first café supper lights all six lanterns, and *Through the Ribbon Gate* (31 seconds) when Bramble’s gate is untangled. Each opens once per explorer, can be skipped, and stays available from a “Watch … film” link on that ending. Watching a film is not recorded as learning evidence.
+Three more short films celebrate story endings in the same way: *A Postcard Home* (32 seconds) when a Paris errand ends, *Welcome Back, Neighbors* (34 seconds) when the first café supper lights all six lanterns, and *Through the Ribbon Gate* (31 seconds) when Bramble’s gate is untangled. Each opens once per explorer, can be skipped, and stays available from a “Watch … film” link on that ending. Watching a film is not recorded as learning evidence. The Bramble film shows 3 × 4 as a story example, so it notes that fact as seen, which keeps a later 3 × 4 answer from counting as unseen.
 
 The [curriculum spiral plan](docs/curriculum-spirals.md) proposes the next conceptual connections across familiar games, with checked Jane/Marble references and explicit gaps. It is a plan, not additional live coverage.
 

@@ -57,4 +57,5 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
  try{bindLetterTrail(s,'post',{save(){saved++;},render(){renders++;},navigate(){},focus(selector){focused=selector;}});keep.onclick();ok(x.episode.firstKept&&renders===1&&saved===1,'keep is explicit saved action');eq(focused,'.letter-keep','keep focuses its result');const recent=structuredClone(s.letterTrail.recent);keep.onclick();eq(s.letterTrail.recent,recent,'repeated keep through binder never counts twice');}finally{globalThis.document=previous;}
 }
 ok(letterEntry('post').includes('#post/letters/round')&&letterEntry('loft').includes('#loft/messages'),'both entries expose loop plus old drafts');
+{const s=fresh();drawLetter(s,'post');const html=letterPage(s,'post','choose');ok(html.includes('Who needs a letter today?')&&!html.includes('data-msg-case='),'letter route never offers the legacy chooser on an episode notebook');}
 console.log(`Changing-letter UI/storage integration: ${checks} passed.`);

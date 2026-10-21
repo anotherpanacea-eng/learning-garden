@@ -73,5 +73,8 @@ for(const raw of [null,[],42,'<unknown & exact>',{version:99,private:'synthetic 
  for(const mutation of mutations){const forged=copy(raw);mutation(forged.rainPaths);const exact=copy(forged);equal(rainPaths(forged),null,'strict malformed/semantic state rejects');equal(ensureRainPaths(forged),null,'unsupported retained');equal(forged,exact,'validation never drops a bad part');}
  const reordered=copy(raw),w=reordered.rainPaths.cases['space-24'];w.config=Object.fromEntries(Object.entries(w.config).reverse());w.keptResult.config=Object.fromEntries(Object.entries(w.keptResult.config).reverse());check(rainPaths(reordered),'source comparison semantic, not key-order equality');
 }
+{
+ const s={};chooseRainCase(s,'cover-12');finish(s);keepRainResult(s);const saved=copy(s),w=saved.rainPaths.cases['cover-12'];w.config.label+=' (older wording)';w.config.trays[0].label+=' (older wording)';w.keptResult.model.notice+=' (older wording)';check(rainPaths(saved),'a later copy edit to labels or the notice keeps saves openable');
+}
 check(!recoverRainPaths({}),'missing root needs no recovery');equal(rainCaseById('unknown'),null,'no unknown content');equal(rainQuestions('unknown'),[],'no unknown tasks');equal(RAIN_COLUMNS.map(c=>c.id),['cover','priorStored','newRainTotal','storedNew','runoffNew'],'new destinations separate from starting tokens');
 console.log(`Rain Paths checks passed: ${checks}`);
