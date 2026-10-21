@@ -150,3 +150,19 @@ The Water Lab now invites manually tracing new rain through an invented tabletop
 The Measuring Kitchen gives the café a standard-unit counterpart to the Sharing Counter. A share asks how much of a whole; a graduated jug asks how many mL are contained. Six recipe cards keep those targets visible while the child fills, reads, pours and returns. Reading 300 mL correctly remains a correct reading when the recipe requested 250 mL. A wrong unit is separate from the read number. Two matching preparation jars can still leave extra liquid in the jug; readiness is another condition.
 
 **Built:** straight-sided 500 mL jug, ten equal 50 mL intervals, two patterned ingredient identities, reversible transfers, separate volume/unit/target checks and frozen unfinished trays. **Planned:** quantity contrasts across measured recipes and reader-revised instructions. **Missing:** physical measuring, mass, litre conversion, irregular-vessel comparison, mixing, half/double batches and usable cooking recipes. Rain tokens remain arbitrary model quantities; they are never silently relabelled mL. [Spec 45](specs/45-measuring-recipes.md).
+
+## A source for this question, a limit for this reply
+
+Travelers’ Archive revisits Paris through historical evidence. A photograph gives one local view; a modern chronology selects events. The same packet supports place-label matching, date ordering, visible-detail questions, source selection and a prepared reply. The reply uses dates for timing and leaves exact street depth or everyone’s feelings uncertain. A photograph’s production date is not automatically its capture moment.
+
+**Built:** one Paris 1910 pack, full credited CC0 photo, original schematic, three ordinal events, eight finite source questions, prepared evidence/limit choices and exact local human-read writing. **Planned:** more reviewed places/periods and a separately authored French pack. **Missing:** independent archive research, a broad history sequence, geographic distances, source corroboration by independent eyewitnesses and evaluated original writing. [Spec 46](specs/46-travelers-archive-first-visit.md).
+
+## Same results, new representations
+
+The water-chart branch carries an actual completed Rain Paths result into the Field Notebook. A faithful chart of stored tokens can be irrelevant to a runoff question; a wrong runoff chart can still be read correctly. These contrasts give the familiar chart loop a new scientific purpose without treating arbitrary tokens as calibrated water measurements.
+
+**Built in this increment:** four finite completed-source invitations, frozen provenance, reversible data selection and two-bar construction, distinct draft/source/model checks, exact pending text and unfinished keeps. **Missing:** independent scale design, real data collection, causal explanation assessment and water-cycle modelling. Prior viewing remains familiar practice across both games. [Spec 47](specs/47-rain-notebook-spiral.md).
+
+## Draft next: a call made for a listener
+
+Bell Studio would revisit message revision through a different medium: arrange low/middle/high computer tones and rests, save a before-version, compare and revise for a gathering or delivery. Literal arrangement constraints, artistic meaning and physical hearing stay distinct. Its local components and app integration are built and independently reviewed; initial browser interactions pass, while human listening and remaining browser/audio checks are pending. It has no live atlas reference yet and supplies no phonics evidence. [Spec 48](specs/48-bell-studio.md).

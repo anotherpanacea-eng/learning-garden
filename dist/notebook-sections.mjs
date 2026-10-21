@@ -1,6 +1,9 @@
+import {bellStudioNotes} from './bell-studio-ui.mjs';
+import {travelersArchiveNotes} from './travelers-archive-ui.mjs';
 import {measuringRecipesNotes} from './measuring-recipes-ui.mjs';
 import {rainPathsNotes} from './rain-paths-ui.mjs';
 import {sharingCounterNotes} from './sharing-counter-ui.mjs';
+import {rainNotebookNotes} from './rain-notebook-ui.mjs';
 import {fieldNotebookNotes} from './field-notebook-ui.mjs';
 import {plantStudyNotes} from './plant-study-ui.mjs';
 import {letterNotes} from './letter-trail-ui.mjs';
@@ -21,4 +24,4 @@ import {forageNotes} from './forage-ui.mjs';
 import {broadNotes} from './broad-ui.mjs';
 
 // Also used on a detached import before it can become the active explorer.
-export function destinationNotes(state,graph=null){return measuringRecipesNotes(state)+rainPathsNotes(state)+sharingCounterNotes(state)+fieldNotebookNotes(state)+plantStudyNotes(state)+letterNotes(state)+messageNotes(state)+equalGroupsNotes(state)+loftNotes(state)+wordGardenNotes(state)+gardenNotes(state)+scienceNotes(state)+livingNotes(state)+adaptiveNotes(state)+connectionNotes(state)+workshopNotes(state)+postOfficeNotes(state)+factsNotes(state)+cafeNotes(state)+forageNotes(state)+broadNotes(state,graph);}
+export function destinationNotes(state,graph=null){return bellStudioNotes(state)+travelersArchiveNotes(state)+measuringRecipesNotes(state)+rainPathsNotes(state)+sharingCounterNotes(state)+fieldNotebookNotes(state)+rainNotebookNotes(state)+plantStudyNotes(state)+letterNotes(state)+messageNotes(state)+equalGroupsNotes(state)+loftNotes(state)+wordGardenNotes(state)+gardenNotes(state)+scienceNotes(state)+livingNotes(state)+adaptiveNotes(state)+connectionNotes(state)+workshopNotes(state)+postOfficeNotes(state)+factsNotes(state)+cafeNotes(state)+forageNotes(state)+broadNotes(state,graph);}

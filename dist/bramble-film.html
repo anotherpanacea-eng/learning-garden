@@ -4,6 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Through the Ribbon Gate</title>
+  <link rel="canonical" href="https://after-the-storm-learning.anotherpanacea.workers.dev/bramble-film">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="After the Storm">
+  <meta property="og:title" content="Through the Ribbon Gate · After the Storm">
+  <meta property="og:description" content="A small celebration with Bramble at the garden’s ribbon gate.">
+  <meta property="og:url" content="https://after-the-storm-learning.anotherpanacea.workers.dev/bramble-film">
+  <meta property="og:image" content="https://after-the-storm-learning.anotherpanacea.workers.dev/assets/after-the-storm-social-v1.png">
+  <meta property="og:image:secure_url" content="https://after-the-storm-learning.anotherpanacea.workers.dev/assets/after-the-storm-social-v1.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="After the Storm: Pip the fox and Dot the ladybug beside a sunflower and the neighborhood café.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Through the Ribbon Gate · After the Storm">
+  <meta name="twitter:description" content="A small celebration with Bramble at the garden’s ribbon gate.">
+  <meta name="twitter:image" content="https://after-the-storm-learning.anotherpanacea.workers.dev/assets/after-the-storm-social-v1.png">
+  <meta name="twitter:image:alt" content="After the Storm: a fox, a ladybug and a growing neighborhood after the rain.">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <meta name="apple-mobile-web-app-title" content="After the Storm">
+
 <style>
 :root{--bg:#e9efe9;--fg:#183f39;--quiet:#52675e;--track:#cbdcd3;--accent:#397958;--btn:#183f39;--btn-fg:#fafbf8}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a18;--fg:#eaf4ef;--quiet:#9fb5ab;--track:#2b3d38;--accent:#e9b84a;--btn:#eaf4ef;--btn-fg:#183f39}}
@@ -500,6 +521,8 @@ function scoreBuffer(){
 }
 function joinAudio(){
  const request=++audioRequest;
+ // Request media playback on supported WebKit before starting sound. Silent film autoplay never calls this.
+ try{if(window.navigator?.audioSession)window.navigator.audioSession.type='playback';}catch{}
  try{
   const AC=window.AudioContext||window.webkitAudioContext;
   ac||=new AC();const context=ac;

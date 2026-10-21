@@ -59,6 +59,9 @@ node test/rain-paths-checks.mjs
 node test/rain-paths-integration-checks.mjs
 node test/measuring-recipes-checks.mjs
 node test/measuring-recipes-integration-checks.mjs
+node test/travelers-archive-checks.mjs
+node test/travelers-archive-ui-checks.mjs
+node test/travelers-archive-integration-checks.mjs
 node test/plant-study-checks.mjs
 node test/plant-study-integration-checks.mjs
 node test/letter-trail-checks.mjs
@@ -272,3 +275,17 @@ Trying cards is exploration. Only explicitly keeping a supplied version contribu
 ## The Measuring Kitchen
 
 [Prepare a measured dinner tray](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/recipes) with a graduated 500 mL jug,50 mL fills and two separate fictional ingredients. Six cards invite filling, reading, pouring and correcting. An accurate reading of an overfilled portion stays accurate; units, recipe fit and an empty jug are checked separately. Every portion can be returned, and unfinished trays can be kept without changing café orders or stock. [Spec 45](docs/specs/45-measuring-recipes.md).
+
+## Travelers’ Archive
+
+[Open a Paris archive parcel](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive): inspect a real, credited CC0 photograph from the 1910 Seine flood, place evidence on an original schematic, order three dated events, and compare a picture with modern chronology summaries. Prepared replies distinguish evidence from missing information; optional original writing is local, exact and ungraded. One bounded visit, open to revisit; no independent history/reading-level or French-proficiency claim. [Spec 46](docs/specs/46-travelers-archive-first-visit.md).
+
+## Rain Paths charts
+
+Carry an actual completed current or kept Rain Paths result to [a water page in the Field Notebook](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain). Choose useful data, build two bars, read the draft and compare it with its frozen source. Wrong bars can still be read correctly; source fidelity and the runoff question stay separate. Pending entries and unfinished kept charts survive revisiting. These are arbitrary model tokens, never mL or measured rain. [Spec 47](docs/specs/47-rain-notebook-spiral.md).
+
+## Sharing and navigation artwork
+
+The main page and standalone films include static Open Graph and large-image card metadata. The shared1200×630 PNG is `dist/assets/after-the-storm-social-v1.png`; its editable original vector artwork is `design/social-preview.svg`. Hash destinations share the main page preview because the fragment is not sent in an HTTP request. Metadata contains no explorer or saved-progress information. Bump the image filename when replacing it; sharing services may cache earlier cards.
+
+Nine original SVG icons in `dist/icons/` accompany the existing visible navigation names. They are decorative to assistive technology; the text remains the accessible link name. The mobile menu uses four columns with large tap targets. The existing garden mark also supplies the32px PNG favicon and180px Apple touch icon. Raster assets were rendered from the local vector originals with Sharp; no remote fonts, icon library, image service or additional browser dependency is required.
