@@ -394,7 +394,7 @@
         "allocate"
       ],
       "route": "#post",
-      "scope": "Six authored packing orders, editable literal word-card routes, manual flight, revisions, optional reading reports. Optional three-note reader-revision desk connects to a separate Story Loft rehearsal; exact original wording is human-read, not automatically evaluated."
+      "scope": "Six authored packing orders, editable literal word-card routes, manual flight, revisions, optional reading reports. Optional three-note reader-revision desk connects to a separate Story Loft rehearsal; exact original wording is human-read, not automatically evaluated. A continuing twelve-letter round varies readers and purposes with open message-structure suggestions; old notes and authored drafts remain separate."
     },
     {
       "id": "bramble",
@@ -449,7 +449,7 @@
         "create",
         "compose"
       ],
-      "scope": "Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency. A separate two-turn reader rehearsal carries a delivery note, with optional authored motive/reply and literal supplied-card comparison; existing shows are preserved."
+      "scope": "Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency. A separate two-turn reader rehearsal carries a delivery note, with optional authored motive/reply and literal supplied-card comparison; existing shows are preserved. A continuing twelve-letter round varies readers and purposes with open message-structure suggestions; old notes and authored drafts remain separate."
     }
   ],
   "manualReferences": [
@@ -605,42 +605,56 @@
       "topicId": "mt_lp3qyEujIv",
       "kind": "scoped-practice",
       "source": "dist/message-ui.mjs",
-      "scope": "Three authored notes contrast the literal wording with a pictured explicit request; identify the missing object, destination or action. Scene clues are a separate source, not argument-evidence analysis or general inference assessment."
+      "scope": "Three authored notes contrast the literal wording with a pictured explicit request; identify the missing object, destination or action. Scene clues are a separate source, not argument-evidence analysis or general inference assessment. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
     },
     {
       "game": "post",
       "topicId": "mt_OyOYHlZ2_T",
       "kind": "scoped-practice",
       "source": "dist/message-ui.mjs",
-      "scope": "Respond to a specific reader question by choosing a clearer supplied sentence or writing exact optional words for a human reader. Several useful phrasings fit; finite card execution does not grade original writing."
+      "scope": "Respond to a specific reader question by choosing a clearer supplied sentence or writing exact optional words for a human reader. Several useful phrasings fit; finite card execution does not grade original writing. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
     },
     {
       "game": "post",
       "topicId": "mt_U_8iVFZuHH",
       "kind": "scoped-practice",
       "source": "dist/message-ui.mjs",
-      "scope": "Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim."
+      "scope": "Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
     },
     {
       "game": "loft",
       "topicId": "mt_lp3qyEujIv",
       "kind": "scoped-practice",
       "source": "dist/message-ui.mjs",
-      "scope": "Three authored notes contrast the literal wording with a pictured explicit request; identify the missing object, destination or action. Scene clues are a separate source, not argument-evidence analysis or general inference assessment."
+      "scope": "Three authored notes contrast the literal wording with a pictured explicit request; identify the missing object, destination or action. Scene clues are a separate source, not argument-evidence analysis or general inference assessment. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
     },
     {
       "game": "loft",
       "topicId": "mt_OyOYHlZ2_T",
       "kind": "scoped-practice",
       "source": "dist/message-ui.mjs",
-      "scope": "Respond to a specific reader question by choosing a clearer supplied sentence or writing exact optional words for a human reader. Several useful phrasings fit; finite card execution does not grade original writing."
+      "scope": "Respond to a specific reader question by choosing a clearer supplied sentence or writing exact optional words for a human reader. Several useful phrasings fit; finite card execution does not grade original writing. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
     },
     {
       "game": "loft",
       "topicId": "mt_U_8iVFZuHH",
       "kind": "scoped-practice",
       "source": "dist/message-ui.mjs",
-      "scope": "Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim."
+      "scope": "Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
+    },
+    {
+      "game": "post",
+      "topicId": "mt_v5DyOEpbbr",
+      "kind": "scoped-practice",
+      "source": "dist/letter-trail-ui.mjs",
+      "scope": "Twelve authored letters revisit useful details, combined instructions and a reader’s knowledge/purpose. Three narrow audience cases add a landmark for a newcomer or an explanation for a changed plan/order. Open suggestions use first-kept supplied-card/clue choices and explicit support/familiarity; original wording is human-read and ungraded. No independent writing, full tone/register, reading-level or full-topic claim."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_v5DyOEpbbr",
+      "kind": "scoped-practice",
+      "source": "dist/letter-trail-ui.mjs",
+      "scope": "Twelve authored letters revisit useful details, combined instructions and a reader’s knowledge/purpose. Three narrow audience cases add a landmark for a newcomer or an explanation for a changed plan/order. Open suggestions use first-kept supplied-card/clue choices and explicit support/familiarity; original wording is human-read and ungraded. No independent writing, full tone/register, reading-level or full-topic claim."
     }
   ],
   "increments": [
@@ -672,8 +686,8 @@
       "priority": 4,
       "name": "Willow messages and map-making",
       "move": "Extend compose/execute/revise",
-      "spec": "docs/specs/39-message-reader-spiral.md",
-      "first": "Implemented: three freely selected notes clarify object, destination and action, with a literal supplied-card reader and separate original-wording/human discussion. Post↔Loft carries familiar work without replacing existing drafts.",
+      "spec": "docs/specs/40-changing-letters.md",
+      "first": "Implemented: a continuing twelve-letter library with different readers, paired details, purpose-aware revisions and voluntary suggestions; frozen drafts, first-kept evidence and familiar rereading remain separate.",
       "gap": "Map legend, direction and scale, broader composition and independent writing observation remain future work."
     },
     {

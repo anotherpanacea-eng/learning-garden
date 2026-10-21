@@ -1,3 +1,4 @@
+import {ensureLetters} from './letter-trail-core.mjs';
 import {ensureMessages} from './message-core.mjs';
 import {ensureEqualGroups} from './equal-groups-core.mjs';
 import {restoreStateResult} from './core.mjs';
@@ -15,9 +16,9 @@ import {EXPLORER_COLORS,EXPLORER_SYMBOLS} from './explorer-storage.mjs';
 
 export const MAX_IMPORT_BYTES=5*1024*1024;
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
-const destinations={broad:'Number Garden',garden:'Stories and Paris',cafe:'Café',science:'Water Lab',facts:'Multiplication Garden',workshop:'Storm Workshop',postOffice:'Post Office',plantings:'Planting beds',livingGarden:'Living Garden',livingExploration:'Living Garden trails',words:'Word Garden',loft:'Story Loft',equalGroups:'Equal-group benches',messages:'Messages for a reader'};
+const destinations={broad:'Number Garden',garden:'Stories and Paris',cafe:'Café',science:'Water Lab',facts:'Multiplication Garden',workshop:'Storm Workshop',postOffice:'Post Office',plantings:'Planting beds',livingGarden:'Living Garden',livingExploration:'Living Garden trails',words:'Word Garden',loft:'Story Loft',equalGroups:'Equal-group benches',messages:'Messages for a reader',letterTrail:'Changing letter rounds'};
 export function initializeExplorerState(state){
- ensureMessages(state);ensureEqualGroups(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);return state;
+ ensureLetters(state);ensureMessages(state);ensureEqualGroups(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);return state;
 }
 // File contents remain local. These limits also bound work before destination restore.
 export function prepareProgressImport(raw){
@@ -34,7 +35,7 @@ export function prepareProgressImport(raw){
  }
  if(!object(source)||!bounded(source))return fail('This file has an unsupported or overly complex structure. No progress was changed.');
  if(source.version!==1)return fail('This notebook version is not supported here. Keep the original file; no progress was changed.');
- for(const key of Object.keys(destinations))if(!['loft','equalGroups','messages'].includes(key)&&Object.hasOwn(source,key)&&!object(source[key]))return fail('A saved destination has an unreadable structure. Keep the original file; no progress was changed.');
+ for(const key of Object.keys(destinations))if(!['loft','equalGroups','messages','letterTrail'].includes(key)&&Object.hasOwn(source,key)&&!object(source[key]))return fail('A saved destination has an unreadable structure. Keep the original file; no progress was changed.');
  if(!Number.isSafeInteger(source.sessions)||source.sessions<0)return fail('The original task counts are unreadable. No progress was changed.');
  const restored=restoreStateResult(JSON.stringify(source));
  if(restored.reason)return fail('This is not a supported complete notebook. Choose “Download our notes” on the old site. No progress was changed.');

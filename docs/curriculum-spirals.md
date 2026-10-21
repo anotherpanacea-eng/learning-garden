@@ -87,6 +87,8 @@ Increment 1 is implemented as an optional bench beside the existing games; the n
 
 **Candidate scoped references:** `mt_lp3qyEujIv`, `mt_OyOYHlZ2_T` (Responding to Writing Feedback), `mt_U_8iVFZuHH` (Reviewing Own Writing); `mt_vauULTecMH` only for the separate story opportunity. A local clue-selection task remains narrower than `mt_S3XMQOYt_D`. The new post-to-loft link is our teaching bridge, not a source dependency. This slice does not implement paired-perspective reading in spec 06.
 
+[Spec 40](specs/40-changing-letters.md) extends this built slice into a continuing twelve-letter round: six one-detail notes, three paired-detail notes and three reader-knowledge/reason notes. First-kept supplied versions inform open structural suggestions; card experiments, original wording and familiar rereading are distinct. Current letters and their shuffled option order remain frozen, with retained drafts at both desks. This adds narrow audience-aware wording opportunities, not a general writing or reading assessment.
+
 ### 3. What would help this garden grow?
 
 **Extend Living Garden with a small plant investigation; reuse Workshop comparison/table controls.** Connect planting plans to evidence instead of making a correct multiplication answer cause a plant to grow.
