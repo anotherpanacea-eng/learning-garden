@@ -83,7 +83,9 @@
       "id": "create",
       "name": "Create · perform · reflect",
       "loop": "Make something expressive, try or share it, notice its effect, choose a revision.",
-      "existing": [],
+      "existing": [
+        "Story Loft puppet theatre"
+      ],
       "spiral": "Rhythm/shape/voice experiment → a composition → explain or perform a revision.",
       "limits": "A dedicated creative-performance loop and reviewed sound/phoneme material are not built. Artistic preference and personal reflection are not numeric attainment scores."
     }
@@ -437,6 +439,17 @@
         "read"
       ],
       "scope": "Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Published with the complete game on Cloudflare."
+    },
+    {
+      "id": "loft",
+      "name": "Story Loft puppet theatre",
+      "status": "live",
+      "route": "#loft",
+      "patterns": [
+        "create",
+        "compose"
+      ],
+      "scope": "Compose three picture/phrase scenes, perform manually and revisit them for an audience. Supplied captions and open discussion are not independent writing, reading or retelling evidence."
     }
   ],
   "manualReferences": [
@@ -509,6 +522,13 @@
       "kind": "scoped-practice",
       "source": "dist/post-rival-generator.mjs",
       "scope": "Generated multiplication examples use equal bundles; addition/subtraction remain their own tasks, not evidence of this topic."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_vauULTecMH",
+      "kind": "scoped-practice",
+      "source": "dist/loft-content.mjs",
+      "scope": "Arrange supplied character, setting and action phrases into a three-scene sequence. Developed narrative, dialogue, spelling and independent composition are not assessed."
     }
   ],
   "increments": [
@@ -565,7 +585,7 @@
       "name": "Story Loft and community circle",
       "move": "New collaborative story/creation home; reuse read/compose/create",
       "spec": "docs/specs/06-story-loft.md",
-      "first": "Tell or compose a short story, consider two perspectives, rehearse a conversation and choose a revision together.",
+      "first": "First picture/phrase puppet theatre is implemented in spec 36. Paired-perspective reading, richer expression and community-circle conversations remain later scope.",
       "gap": "Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices."
     }
   ],

@@ -18,6 +18,10 @@ The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marbl
 
 The home page also offers **Watch the storm pass**, the optional 46-second film from [PR #8](https://github.com/anotherpanacea-eng/learning-garden/pull/8). Pip and Dot shelter their neighbors before the garden’s first morning. It starts on request and has pause/replay controls.
 
+## Story Loft
+
+[Make a little puppet show](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft): choose a starting idea, arrange three pictured scenes, perform them at your own pace, hear an open audience question, and revise or begin another show. Pip, Dot, Rabbit, Kitten and Dragon can play in four settings with six props. Every unexpected combination is welcome. The latest 12 saved shows and the working story stay with the explorer and travel with notes export/import. Supplied captions and open discussion are guided composition, not independent-writing or reading assessment. [Spec 36](docs/specs/36-story-loft-puppet-theatre.md).
+
 ## Word Garden
 
 Open [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#words): combine ten word plants and six cuttings, grow 23 authored words, and keep other combinations as discoveries. Eight extra real words explain meanings and spelling changes; unauthored pairs remain separated letter experiments, with no invented pronunciation or false rejection. Eight open discussion cards include new words and a make-your-own invitation. This is word-part exploration with any amount of reading help, not a decoding or spelling assessment. Notebook and current choices stay with the active explorer. [Spec 34](docs/specs/34-word-garden.md).
@@ -39,6 +43,7 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/loft-checks.mjs
 node test/progress-transfer-checks.mjs
 node test/word-garden-checks.mjs
 node test/core-checks.mjs
@@ -83,7 +88,7 @@ These checks use synthetic observations. They check the application logic; they 
 
 ## Roadmap and science expeditions
 
-The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab, Storm Workshop and the first Willow Post Office flying-courier increment are implemented; the other destinations remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with pictured courier choices, freely available practice and the first optional rival-witch encounter.
+The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab, Storm Workshop, the first Willow Post Office flying-courier increment, Word Garden meaning work and the first Story Loft puppet theatre are implemented. Phonics, ecosystem models and the paired-perspective reading expansion remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with pictured courier choices, freely available practice and the first optional rival-witch encounter.
 
 Science offers three guided water visits with optional predictions, a focused external Marble Water Lab link, self-reported observations, original controllable explanation pictures, and a discussion/project invitation. Each mission is independently available and can finish without an external visit or an answer. Link selection is not treated as visiting, experiment completion, or understanding. Explanation use and reported reading mode stay distinct. The latest 24 visits stay browser-local under the existing privacy controls; there is no tracking or data exchange with Marble. External application source/assets are not copied or embedded.
 
