@@ -28,7 +28,7 @@ Once a selected specification is independently cleared, its build can proceed al
 
 ## Future feature: choose where to begin
 
-Requested 2026-10-21. **Proposed; not implemented or independently reviewed.** As reviewed curricula become available across ages and grade levels, offer several useful entry points instead of requiring everyone to begin with the earliest mathematics. Start with mathematics, then extend the approach to other strands as their content supports it.
+Requested 2026-10-21 and expanded to all learning strands. **Proposed; not implemented or independently reviewed.** As reviewed curricula become available across ages and grade levels, offer several useful entry points in every strand instead of requiring everyone to begin with its earliest material. Apply this consistently across the [26 strand pathways and extension strands](six-act-strands.md); each strand can offer its choices when enough reviewed content exists, without waiting for every other strand to be finished.
 
 | Starting interest | Illustrative entry |
 | --- | --- |
@@ -36,7 +36,29 @@ Requested 2026-10-21. **Proposed; not implemented or independently reviewed.** A
 | Add and subtract | Begin with addition/subtraction ideas and strategies, with number foundations available when useful. |
 | Explore further mathematics | Choose an available topic such as fractions, proportional reasoning or algebra once its lessons are built and reviewed. |
 
+Other strands use the same approach, with choices describing actual interests and activities. The examples below are future navigation ideas, not a fixed progression or a claim that these lessons are already available.
+
+| Strand or related group | Illustrative starting choices |
+| --- | --- |
+| Word reading, spelling and transcription | Sound–letter connections; blending words; spelling patterns; handwriting or keyboarding practice. |
+| Vocabulary and grammar | Explore word meanings; build sentences; examine how grammar and punctuation change meaning. |
+| Reading and interpretation | Share a short illustrated text; investigate characters and inference; compare longer texts and sources. |
+| Writing and composition | Tell or dictate an idea; write a useful message; plan and revise a story, explanation or argument. |
+| Speaking, listening and performance | Take conversational turns; tell a story or perform; discuss evidence or present a reasoned proposal. |
+| Scientific inquiry and engineering | Observe and compare; plan a fair investigation; evaluate evidence or improve a design. |
+| Science knowledge | Choose organisms/body, ecology, biomes/oceans, materials, forces/energy, Earth/weather, or fossils/space; offer foundations and deeper explanations within each area. |
+| Historical inquiry and historical worlds | Explore an object or timeline; choose a historical setting; compare accounts and reason about change. |
+| Geography and cartography | Explore places and simple maps; investigate scale and journeys; compare regions and environmental connections. |
+| Computing and AI literacy | Give step-by-step instructions; construct programs; investigate data, algorithms and AI limitations. |
+| Money and enterprise | Explore money and value; compare payments and budgets; investigate trade-offs or plan a small fictional enterprise. |
+| Learning practices | Plan a small task; try a useful practice strategy; reflect on and adapt a longer project. |
+| Personal, social and community learning | Explore feelings and perspectives through fictional stories; rehearse cooperation; discuss a community decision. These choices do not rank emotional maturity or require personal disclosures. |
+| Additional languages, including French | Explore sounds and useful expressions; exchange short messages; interpret or create longer material. Choose a starting point separately for each language. |
+| Visual art and music | Explore materials, images, sound or rhythm; compose or perform; develop and revise an expressive project for an audience. |
+
 These are choices about **where to start**, not permanent learner levels. A learner, with optional grown-up help, can choose or change an entry point, browse other topics and revisit foundations at any time. Someone may explore advanced geometry while wanting foundational number practice; mathematical depth, reading load and response mode remain independent. No mandatory placement test or age/grade restriction is introduced by this request. If grade labels are later offered as optional navigation, they must name the curriculum convention and remain editable filters, not inferred ability or access rules.
+
+Keep the choices independent both across and within strands. A learner may want complex science with read-aloud support, advanced reading alongside beginning French, or rich oral storytelling while practicing early transcription. Do not turn one choice into a global level, automatically change another strand, or infer reading, writing or motor ability from subject knowledge. Offer listening, pictures, manipulation, speech/AAC, dictation and writing where the actual activity supports them, while keeping the kinds of participation distinct. A shared project can connect strands without forcing them to use matching starting points. First-time setup may choose just one interest; configuring every strand must not become a prerequisite to play.
 
 Each entry needs a clear description of the ideas involved, a short sample of the actual activity and optional links to useful prerequisites. Those links offer help; they do not force completion of earlier units. Choosing an advanced entry neither marks skipped lessons complete nor establishes mastery, and choosing foundations never erases prior work. Switching entry points preserves every paused activity and existing support/familiarity record; preferences stay separate from observations. Unbuilt or unreviewed lessons cannot appear as playable entry choices.
 
