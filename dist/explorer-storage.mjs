@@ -19,12 +19,13 @@ function cleanRegistry(raw){
 
 // All learner data remains in this browser. A failed preservation write blocks replacement.
 export class ExplorerStore{
- constructor(storage,options={}){this.storage=storage;this.now=options.now||(()=>new Date());this.memory=new Map();this.registry=null;this._persist=true;this._warning='';this._writeBlocked=false;this._needsChooser=false;}
+ constructor(storage,options={}){this.storage=storage;this.now=options.now||(()=>new Date());this.memory=new Map();this.importCopies=new Map();this.registry=null;this._persist=true;this._warning='';this._writeBlocked=false;this._needsChooser=false;}
  get active(){return this.registry?.explorers.find(p=>p.id===this.registry.activeId)||null;}
  get explorers(){return this.registry?.explorers||[];}
  get persist(){return this._persist;}
  get warning(){return this._warning;}
  get needsChooser(){return this._needsChooser;}
+ get importUncertain(){return this._importUncertain===true;}
  _warn(text='Progress could not be saved. This session is still available; download notes before leaving.'){this._warning=text;}
  _get(key){return this.storage.getItem(key);}
  _keys(){return Array.from({length:this.storage.length},(_,i)=>this.storage.key(i)).filter(k=>typeof k==='string');}
@@ -80,21 +81,50 @@ export class ExplorerStore{
   if(!this.registry)this.load();if(currentState)this.save(currentState);const p=this._newProfile(choice);if(!p)return null;const s=this._fresh(p);this.registry.explorers.push(p);this.registry.activeId=p.id;this.memory.set(p.id,s);this._needsChooser=false;
   if(this._persist&&!this._writeBlocked){if(!this._write(stateKey(p.id),JSON.stringify(s))||!this._commitRegistry())this._writeBlocked=true;}return s;
  }
+ importState(prepared){
+  const fail=message=>({ok:false,message});
+  const halt=message=>{this._writeBlocked=true;this._importUncertain=true;this._warn(message);return fail(message);};
+  if(!this.registry)this.load();
+  if(!prepared?.ok||typeof prepared.raw!=='string'||restoreStateResult(JSON.stringify(prepared.state)).reason)return fail('Choose and preview a supported notebook first.');
+  if(this._persist&&this._writeBlocked)return fail('Saving is unavailable. Download your current notes and keep the import file, then reload before trying again.');
+  const profile=this._newProfile(prepared.choice);if(!profile)return fail('No explorer slot is available.');
+  const state=structuredClone(prepared.state);this._avatar(state,profile);state.garden.avatar=profile.avatar;
+  const next={version:1,activeId:profile.id,explorers:[...this.explorers,profile]},rawNext=JSON.stringify(next),key=stateKey(profile.id),recovery=`number-garden-kept-${profile.id}-${this._stamp()}`;
+  if(this._persist){
+   let before;
+   try{before=this._get(REGISTRY_KEY);if(JSON.stringify(cleanRegistry(before))!==JSON.stringify(this.registry))return halt('The explorer list changed in another tab. Saving is paused here; reload before importing.');if(this._get(key)!==null||this._get(recovery)!==null)return halt('This explorer slot is already saved. Saving is paused here; reload before importing.');}catch{return halt('Saved progress could not be checked. Saving is paused here; keep your file and reload before importing.');}
+   const rawState=JSON.stringify(state);
+   const cleanup=()=>{try{if(this._get(REGISTRY_KEY)!==before)return false;for(const [k,value] of [[key,rawState],[recovery,prepared.raw]])if(this._get(k)===value)this.storage.removeItem(k);return true;}catch{return false;/* Uncertain new keys remain recoverable; existing keys are never removed. */}};
+   if(!this._write(recovery,prepared.raw)||!this._write(key,rawState)){if(!cleanup())return halt('The import could not be checked safely. Its new copies have been kept and saving is paused here. Keep your file and reload.');return fail('The notebook could not be saved, possibly because this browser is full. Existing explorer files were not replaced. Keep your file and reload before trying again.');}
+   try{if(this._get(REGISTRY_KEY)!==before)return halt('The explorer list changed in another tab. The new file copies have been kept. Saving is paused here; reload before importing.');}catch{return halt('The saved explorer list could not be checked. The new file copies have been kept. Saving is paused here; keep your file and reload.');}
+   if(!this._write(REGISTRY_KEY,rawNext)){
+    let rolledBack=false;
+    try{const actual=this._get(REGISTRY_KEY);rolledBack=actual===before;if(actual===rawNext)rolledBack=this._write(REGISTRY_KEY,before);}catch{}
+    if(rolledBack){if(!cleanup())return halt('The prior explorer list was restored, but cleanup could not be checked safely. Saving is paused here; keep your file and reload.');return fail('The import could not be completed. Existing explorers are unchanged. Keep your file and try again.');}
+    this._writeBlocked=true;this._importUncertain=true;this._warn('The import may have been saved, but could not be verified. Its progress and original file copy have been kept. Download your current notes, then reload and check the explorer list before importing again.');return fail(this.warning);
+   }
+  }else this.importCopies.set(recovery,prepared.raw);
+  this.registry=next;this.memory.set(profile.id,state);this._needsChooser=false;this._warning='';
+  return {ok:true,state,temporary:!this._persist};
+ }
  select(id,currentState){
   if(!this.registry)this.load();if(!this.explorers.some(p=>p.id===id))return null;if(currentState)this.save(currentState);this.registry.activeId=id;this._needsChooser=false;const s=this._readState(this.active);if(this._persist&&!this._writeBlocked)this._commitRegistry();return s;
  }
  setPersistence(enabled,currentState){
+  if(this.importUncertain)return false;
   if(!this.registry)this.load();if(currentState)this.memory.set(this.active.id,currentState);
   if(!enabled){for(const p of this.explorers)this._readState(p);this._persist=false;let ok=this._write(SAVE_KEY,'off');try{for(const k of this._keys().filter(managed)){try{this.storage.removeItem(k);if(this._get(k)!==null)ok=false;}catch{ok=false;}}}catch{ok=false;}if(!ok)this._warn('Some saved copies could not be removed. Saving is off for this session; check browser storage before sharing this device.');return ok;}
-  this._persist=true;this._writeBlocked=false;if(!this._write(SAVE_KEY,'on'))return false;for(const p of this.explorers){const s=this.memory.get(p.id)||this._readState(p);if(!this._writeState(p,s)){this._writeBlocked=true;return false;}}return this._commitRegistry();
+  this._persist=true;this._writeBlocked=false;if(!this._write(SAVE_KEY,'on'))return false;for(const [key,raw] of this.importCopies)if(!this._write(key,raw)){this._writeBlocked=true;return false;}for(const p of this.explorers){const s=this.memory.get(p.id)||this._readState(p);if(!this._writeState(p,s)){this._writeBlocked=true;return false;}}return this._commitRegistry();
  }
  clearActive(){
-  if(!this.registry)this.load();const id=this.active.id,s=this._fresh(this.active);this.memory.set(id,s);try{if(this._persist){for(const k of this._keys())if(k===stateKey(id)||k.startsWith(`number-garden-backup-${id}-`)||k.startsWith(`number-garden-kept-${id}-`))this.storage.removeItem(k);this.save(s);}}catch{this._warn();}return s;
+  if(this.importUncertain)return this.load();
+  if(!this.registry)this.load();const id=this.active.id,s=this._fresh(this.active);this.memory.set(id,s);for(const k of this.importCopies.keys())if(k.startsWith(`number-garden-kept-${id}-`))this.importCopies.delete(k);try{if(this._persist){for(const k of this._keys())if(k===stateKey(id)||k.startsWith(`number-garden-backup-${id}-`)||k.startsWith(`number-garden-kept-${id}-`))this.storage.removeItem(k);this.save(s);}}catch{this._warn();}return s;
  }
  clearAll(){
+  if(this.importUncertain)return this.load();
   try{for(const k of this._keys().filter(managed))this.storage.removeItem(k);}catch{this._warn();this._writeBlocked=true;}
-  this.memory.clear();this.registry={version:1,activeId:null,explorers:[]};const p=this._newProfile();this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._fresh(p);this.memory.set(p.id,s);this._needsChooser=false;if(this._persist&&!this._writeBlocked)this.save(s);return s;
+  this.memory.clear();this.importCopies.clear();this.registry={version:1,activeId:null,explorers:[]};const p=this._newProfile();this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._fresh(p);this.memory.set(p.id,s);this._needsChooser=false;if(this._persist&&!this._writeBlocked)this.save(s);return s;
  }
- keptCopies(){try{return this._keys().filter(k=>copyKey(k)||k===STORAGE_KEY).map(key=>({key,raw:this._get(key),label:key===STORAGE_KEY?'Earlier shared progress':key.startsWith('number-garden-kept-')?'Kept unreadable progress':'Progress backup'}));}catch{this._warn();return [];}}
- removeCopy(key){if(!(key===STORAGE_KEY||copyKey(key)))return false;try{this.storage.removeItem(key);return this._get(key)===null;}catch{this._warn();return false;}}
+ keptCopies(){let copies=new Map(this.importCopies);try{for(const key of this._keys().filter(k=>copyKey(k)||k===STORAGE_KEY))copies.set(key,this._get(key));}catch{this._warn();}return [...copies].map(([key,raw])=>({key,raw,label:key===STORAGE_KEY?'Earlier shared progress':key.startsWith('number-garden-kept-')?'Kept original progress':'Progress backup'}));}
+ removeCopy(key){if(this.importUncertain||!(key===STORAGE_KEY||copyKey(key)))return false;this.importCopies.delete(key);try{this.storage.removeItem(key);return this._get(key)===null;}catch{this._warn();return false;}}
 }

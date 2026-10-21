@@ -16,11 +16,13 @@ The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marbl
 
 [Data provenance and licenses](curriculum/README.md) · [Roadmap](docs/roadmap.md). Rebuild or check the offline atlas with `node scripts/build-learning-atlas.mjs` or `node scripts/build-learning-atlas.mjs --check`. The larger reference graph does not change the live app's smaller map or learner saves.
 
+The home page also offers **Watch the storm pass**, the optional 46-second film from [PR #8](https://github.com/anotherpanacea-eng/learning-garden/pull/8). Pip and Dot shelter their neighbors before the garden’s first morning. It starts on request and has pause/replay controls.
+
 ## Word Garden
 
 Open [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#words): combine ten word plants and six cuttings, grow 23 authored words, and keep other combinations as discoveries. Eight extra real words explain meanings and spelling changes; unauthored pairs remain separated letter experiments, with no invented pronunciation or false rejection. Eight open discussion cards include new words and a make-your-own invitation. This is word-part exploration with any amount of reading help, not a decoding or spelling assessment. Notebook and current choices stay with the active explorer. [Spec 34](docs/specs/34-word-garden.md).
 
-The complete game, including Word Garden, is published on Cloudflare Static Assets. The earlier Sites address retains its earlier release. Browser-local notebooks belong to their address: existing progress stays at the old address; it is not automatically copied to Cloudflare. Keep the old notebook/export until a local transfer is available.
+The complete game, including Word Garden, is published on Cloudflare Static Assets. The earlier Sites address retains its earlier release. Browser-local notebooks belong to their address: existing progress stays at the old address; it is not automatically copied to Cloudflare. Use Grown-up notes → Bring progress from another site to import the old notes JSON file locally as a separate explorer; existing explorers are preserved. Move one explorer at a time and keep the original file until you have checked the import.
 
 ## Run locally
 
@@ -37,6 +39,7 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/progress-transfer-checks.mjs
 node test/word-garden-checks.mjs
 node test/core-checks.mjs
 node test/broad-checks.mjs
@@ -189,6 +192,14 @@ Each encounter freezes its task and keeps raw attempts, support, narration reque
 
 The Water Lab’s three existing visits now begin with the storm-flooded garden path. They distinguish water flowing downhill, soaking into the ground and evaporating, with a paper recovery-map invitation. The existing close-up molecule pictures explain melting, warming and evaporation; a controllable runoff/drainage investigation remains a roadmap follow-up. No science mission IDs or saved observations change.
 
+
+## Moving saved progress
+
+1. On the old site, use the browser/device where you played. In Grown-up notes, select the explorer and choose **Download our notes**.
+2. On the [current site](https://after-the-storm-learning.anotherpanacea.workers.dev/#notes), choose that JSON file under **Bring progress from another site**.
+3. Check the preview and choose **Add as a separate explorer**. Repeat for other explorers.
+
+The file is read on your device, never uploaded. Existing explorers are not replaced or merged. An exact original copy remains downloadable from Earlier and kept saved copies. If saving is off, imports remain session-only; keep the file or turn saving on. Unavailable questions may close under the normal restore rules, with the source retained. [Specification 35](docs/specs/35-local-progress-transfer.md).
 
 ## Cloudflare hosting
 

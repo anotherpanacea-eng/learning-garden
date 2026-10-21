@@ -1,20 +1,23 @@
-import {wordGardenPage,wordGardenNotes,bindWordGarden} from './word-garden-ui.mjs';
+import {destinationNotes} from './notebook-sections.mjs';
+import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from './progress-transfer.mjs';
+import {progressTransferPanel} from './progress-transfer-ui.mjs';
+import {wordGardenPage,bindWordGarden} from './word-garden-ui.mjs';
 import {connectionPairsShown} from './learning-connections.mjs';
-import {connectionPanel,connectionNotes,bindConnections} from './learning-connections-ui.mjs';
+import {connectionPanel,bindConnections} from './learning-connections-ui.mjs';
 import {bindSpiral} from './living-spiral-ui.mjs';
-import {adaptivePage as spiralPage,adaptiveNotes as spiralNotes,bindAdaptive} from './living-adaptive-ui.mjs';
+import {adaptivePage as spiralPage,bindAdaptive} from './living-adaptive-ui.mjs';
 import {adaptivePairsShown as spiralPairsShown,startAdaptiveSpiral} from './living-adaptive-core.mjs';
-import {livingPage,livingNotes,bindLiving} from './living-ui.mjs';
+import {livingPage,bindLiving} from './living-ui.mjs';
 import {ensurePostOffice} from './post-office-core.mjs';
-import {postOfficePage,postOfficeNotes,bindPostOffice} from './post-office-ui.mjs';
+import {postOfficePage,bindPostOffice} from './post-office-ui.mjs';
 import {ensureWorkshop} from './workshop-core.mjs';
-import {workshopPage,workshopNotes,bindWorkshop} from './workshop-ui.mjs';
+import {workshopPage,bindWorkshop} from './workshop-ui.mjs';
 import {learningInvitations,learningExplore} from './learning-invitations.mjs';
 import {orderValue} from './paris-pack-core.mjs';
 import {ensureForage} from './forage-core.mjs';
-import {foragePage,forageNotes,bindForage,foragePairsShown} from './forage-ui.mjs';
+import {foragePage,bindForage,foragePairsShown} from './forage-ui.mjs';
 import {ensureFacts} from './facts-core.mjs';
-import {factsPage,factsNotes,bindFacts} from './facts-ui.mjs';
+import {factsPage,bindFacts} from './facts-ui.mjs';
 import {orchardPage,bindOrchard} from './orchard-ui.mjs';
 import {bindSpeech,stopSpeech,resetSpeechPreferences,setSpeechPreferences,hearButton} from './play-media.mjs';
 import {ExplorerStore,EXPLORER_COLORS,EXPLORER_SYMBOLS} from './explorer-storage.mjs';
@@ -24,18 +27,18 @@ import {pip,dot} from './broad-art.mjs';
 import {broadFeedback} from './broad-variants.mjs';
 import {broadHelper,openBroadHelp,submitBroadHelp,broadHelpModelAction,renderBroadHelp} from './broad-help.mjs';
 import {ensureScience,currentScience} from './science-core.mjs';
-import {scienceHome,sciencePage,scienceNotes,bindScience} from './science-ui.mjs';
+import {scienceHome,sciencePage,bindScience} from './science-ui.mjs';
 import {ensureCafe,nextGuest,orderFor,currentRecipe} from './cafe-core.mjs';
-import {renderCafe,cafeNotes,bindCafe} from './cafe-ui.mjs';
+import {renderCafe,bindCafe} from './cafe-ui.mjs';
 import {helpers,helperLimit} from './help-content.mjs';
 import {helpPage} from './help-ui.mjs';
 import {guides,avatars} from './companions.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
 import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool,editStoryOrder,submitStoryOrder} from './garden-core.mjs';
-import {gardenHome,parisLanding,frenchLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding,gardenNotes} from './garden-ui.mjs';
+import {gardenHome,parisLanding,frenchLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding} from './garden-ui.mjs';
 import {areas} from './broad-content.mjs';
 import {ensureBroad,areaById,itemById,beginTrail,trailQuestion,familiarity,noteBroadExposure,noteLegacyExposure,makeBroadObservation,recordTrail,instantiateBroad} from './broad-core.mjs';
-import {broadHome,checkinHub,activityLibrary,trailSummary,broadNotes,learningMap,renderModel,adjustModel} from './broad-ui.mjs';
+import {broadHome,checkinHub,activityLibrary,trailSummary,learningMap,renderModel,adjustModel} from './broad-ui.mjs';
 import {observation,recommendations,makePractice,methodLabel,describe,numericAnswer} from './core.mjs';
 import {checkin,puzzles,skills} from './content.mjs';
 const $=s=>document.querySelector(s), main=$('#main');
@@ -44,11 +47,8 @@ let browserStorage;try{browserStorage=localStorage;}catch{}
 const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
-ensureBroad(state);
-ensureGarden(state);
-ensureCafe(state);
-ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);
-ensurePlantings(state);setSpeechPreferences(state.garden.speech);
+initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
+let progressImport={candidate:null,message:'',reading:false},importRead=0;
 let graph=null;
 try {const response=await fetch('./marble-map.json');if(response.ok)graph=await response.json();}catch{}
 let screen='',activity=null,active=null,practiceSession=null,routeChoice='auto',puzzleLevel=null,lastAdventure=null;
@@ -100,7 +100,7 @@ function summary(){const r=recommendations(state);return `${heading('Here’s wh
 function practiceEnd(){const obs=practiceSession?.observations||[];return `${heading('A little practice, planted.','You tried six problems. That is a good place to pause.')}<div class="summary-callout"><h2>What did you notice?</h2><p>Was there a fact you could connect to something you already knew? Talk about one idea you want to keep.</p><div class="summary-links"><a href="#puzzles" class="primary">Find something to wonder</a><a href="#practice" class="secondary">Choose another practice set</a><a href="#home" class="text-button">Finish for now</a></div></div><details class="panel"><summary>See this practice session together</summary>${obs.map(o=>`<div class="evidence-item"><strong>${esc(o.label)}</strong><p>${esc(describe(o))}</p></div>`).join('')}</details>`;}
 function puzzlePage(){const rec=recommendations(state);const level=puzzleLevel||rec.suggestion;const opts=[['gentle','Small wonders'],['curious','Curious connections'],['stretch','A bigger stretch']];const icons={picnic:'✦ ✦ ✦',paths:'● ● ●',outfits:'♧ ◇ ♧',mystery:'▦ ?',fence:'▱',patchwork:'▦ ▦'};return `${heading('Something to wonder.','Interesting problems belong here from the start. Choose whichever catches your eye.')}<p class="tiny">${puzzleLevel?'Your chosen path':`Suggested starting path: ${opts.find(([id])=>id===level)[1]}`}. Every path is open.</p><div class="level-options" role="group" aria-label="Choose puzzles">${opts.map(([id,label])=>`<button class="level-choice ${id===level?'selected':''}" data-level="${id}" aria-pressed="${id===level}">${label}</button>`).join('')}</div><div class="puzzle-grid">${puzzles.filter(q=>q.level===level).map(q=>`<article class="puzzle-card"><div class="puzzle-art" aria-hidden="true">${icons[q.id]}</div><span class="tag">${q.tag}</span><h2>${q.title}</h2><p>${q.prompt}</p><button class="secondary" data-puzzle="${q.id}">Explore this one</button></article>`).join('')}</div>`;}
 function evidence(o){return `<div class="evidence-item"><strong>${esc(o.label||o.questionId)} — ${esc(describe(o))}</strong><p>${esc(o.prompt)}</p><p>${o.status==='skipped'?'Skipped without an answer.':`Answers tried: ${o.attempts.map(a=>esc(o.questionId==='strategy'?checkin[1].choices[a]??a:a)).join(', ')||'None'}.`}${o.method?` Method: ${esc(methodLabel[o.method]||o.method)}.`:''}${o.hinted?' Hint or picture used.':''}${o.revealed?' Worked example opened.':''}${o.exposed?' Related example seen earlier.':''}</p></div>`;}
-function notes(){const rec=recommendations(state);return `${heading('Grown-up notes','A record of individual tasks across the garden. All observations stay in this browser.')}${explorerNotes(explorerStore)}${wordGardenNotes(state)}${gardenNotes(state)}${scienceNotes(state)}${livingNotes(state)}${spiralNotes(state)}${connectionNotes(state)}${workshopNotes(state)}${postOfficeNotes(state)}${factsNotes(state)}${cafeNotes(state)}${forageNotes(state)}${broadNotes(state,graph)}<div class="warning">${state.baseline.complete?'The original multiplication check-in is complete.':state.baseline.index?`The check-in is partly complete (${state.baseline.index} of 6 recorded).`:'The original multiplication check-in has not started.'} This small, untimed sample cannot establish a grade level or class readiness. “Worked it out” is positive evidence of reasoning; it is different from recalling a fact.</div><div class="notes-grid"><section class="panel"><h2>Original multiplication snapshot</h2>${noteRows()}${!state.baseline.complete?'<p class="status-note"><a href="#multiplication">Start or continue the check-in</a></p>':''}</section><section class="panel"><h2>What to try next</h2><p>${esc(rec.reason)}</p><p>Use a small practice set and keep an interesting problem alongside it. Ask which part felt comfortable and which part you would like to understand better.</p><p>For another session, use different examples. A single independent answer is an observation, not a mastery label.</p><div class="summary-links"><a href="#practice" class="secondary">Choose practice</a><a href="#puzzles" class="secondary">Choose a puzzle</a></div></section></div><details class="panel"><summary>Check-in details (${state.baseline.observations.length} recorded)</summary>${state.baseline.observations.length?state.baseline.observations.map(evidence).join(''):'<p>No answers have been recorded. Begin with a few questions together.</p>'}</details><details class="panel"><summary>Practice details (${state.practice.length} recorded)</summary><p class="tiny">These are learning attempts, kept separate from the check-in.</p>${state.practice.length?state.practice.map(evidence).join(''):'<p>No practice yet. A fresh mix is available even without a check-in.</p>'}</details><details class="panel"><summary>Puzzle details (${state.puzzles.length} recorded)</summary>${state.puzzles.length?state.puzzles.map(evidence).join(''):'<p>No puzzles recorded yet. Every puzzle path is open.</p>'}</details><section class="panel" style="margin-top:24px"><h2>Keep our place?</h2><label class="remember-label"><input type="checkbox" id="remember" ${persist?'checked':''}> Remember progress in this browser</label><p class="tiny status-note">${persist?'Progress is saved on this device.':'Progress lasts only while this page stays open. Download notes before leaving.'} Switching this off removes all explorer saves, earlier shared saves, and kept copies from this device. Current sessions stay open in memory; download anything you want to keep first.</p></section><div class="notes-actions"><button class="secondary" id="download">Download our notes</button><button class="text-button" id="reset">Clear this explorer’s progress</button></div><p class="status-note">A download contains these observations, not a child’s name. Clearing this explorer leaves the other explorers in place. It cannot remove a file you already downloaded.</p>`;}
+function notes(){const rec=recommendations(state);return `${heading('Grown-up notes','A record of individual tasks across the garden. All observations stay in this browser.')}${explorerNotes(explorerStore)}${progressTransferPanel(progressImport,persist)}${destinationNotes(state,graph)}<div class="warning">${state.baseline.complete?'The original multiplication check-in is complete.':state.baseline.index?`The check-in is partly complete (${state.baseline.index} of 6 recorded).`:'The original multiplication check-in has not started.'} This small, untimed sample cannot establish a grade level or class readiness. “Worked it out” is positive evidence of reasoning; it is different from recalling a fact.</div><div class="notes-grid"><section class="panel"><h2>Original multiplication snapshot</h2>${noteRows()}${!state.baseline.complete?'<p class="status-note"><a href="#multiplication">Start or continue the check-in</a></p>':''}</section><section class="panel"><h2>What to try next</h2><p>${esc(rec.reason)}</p><p>Use a small practice set and keep an interesting problem alongside it. Ask which part felt comfortable and which part you would like to understand better.</p><p>For another session, use different examples. A single independent answer is an observation, not a mastery label.</p><div class="summary-links"><a href="#practice" class="secondary">Choose practice</a><a href="#puzzles" class="secondary">Choose a puzzle</a></div></section></div><details class="panel"><summary>Check-in details (${state.baseline.observations.length} recorded)</summary>${state.baseline.observations.length?state.baseline.observations.map(evidence).join(''):'<p>No answers have been recorded. Begin with a few questions together.</p>'}</details><details class="panel"><summary>Practice details (${state.practice.length} recorded)</summary><p class="tiny">These are learning attempts, kept separate from the check-in.</p>${state.practice.length?state.practice.map(evidence).join(''):'<p>No practice yet. A fresh mix is available even without a check-in.</p>'}</details><details class="panel"><summary>Puzzle details (${state.puzzles.length} recorded)</summary>${state.puzzles.length?state.puzzles.map(evidence).join(''):'<p>No puzzles recorded yet. Every puzzle path is open.</p>'}</details><section class="panel" style="margin-top:24px"><h2>Keep our place?</h2><label class="remember-label"><input type="checkbox" id="remember" ${persist?'checked':''}> Remember progress in this browser</label><p class="tiny status-note">${persist?'Progress is saved on this device.':'Progress lasts only while this page stays open. Download notes before leaving.'} Switching this off removes all explorer saves, earlier shared saves, and kept copies from this device. Current sessions stay open in memory; download anything you want to keep first.</p></section><div class="notes-actions"><button class="secondary" id="download">Download our notes</button><button class="text-button" id="reset">Clear this explorer’s progress</button></div><p class="status-note">A download contains these observations, not a child’s name. Clearing this explorer leaves the other explorers in place. It cannot remove a file you already downloaded.</p>`;}
 function markExposure(){
   if(!activity?.q)return;
   const q=activity.q;
@@ -216,13 +216,34 @@ function rerenderActivity(){const input=$('#answer');if(input)active.input=input
 function openTaskLibrary(selected){return `<section class="panel broad-open-invites"><h2>Questions with room for your ideas</h2><p>Wonder, estimate, invent, and explain together. These invitations have no scored answer.</p><div class="open-task-links">${openTasks().filter(t=>!areaById(selected)||t.area===selected).map(t=>`<a class="secondary" href="#wonder/${t.id}">${esc(t.title)}</a>`).join('')}</div></section>`;}
 function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{action();d.close();render();};d.addEventListener('close',()=>d.remove());}
-function useExplorer(next){
- if(!next)return;stopSpeech();state=next;ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);setSpeechPreferences(state.garden.speech);
- activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate('#home');
+function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
+function useExplorer(next,destination='#home'){
+ if(!next)return;cancelProgressImport();stopSpeech();state=next;initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
+ activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
 }
 function freshExplorerChoice(){for(const avatar of ['sky','fern','reed'])for(const color of EXPLORER_COLORS)for(const symbol of EXPLORER_SYMBOLS)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
-function chooseExplorer(create=false){if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
+function chooseExplorer(create=false){cancelProgressImport();if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
+function bindProgressTransfer(){
+ if(explorerStore.importUncertain)document.querySelectorAll('#remember,#reset,#clear-all-explorers,[data-remove-copy]').forEach(el=>el.disabled=true);
+ $('#progress-file')?.addEventListener('change',async e=>{
+  const file=e.target.files?.[0];if(!file)return;
+  const token=++importRead,explorer=explorerStore.active.id;
+  progressImport={candidate:null,message:'',reading:true};render();
+  let candidate;
+  try{candidate=file.size>MAX_IMPORT_BYTES?{ok:false,message:'Choose a notes JSON file up to 5 MiB. The original file is unchanged.'}:prepareProgressImport(await file.text());}
+  catch{candidate={ok:false,message:'This file could not be read. Choose the downloaded JSON notes file again.'};}
+  if(token!==importRead||location.hash!=='#notes'||choosingExplorer||explorer!==explorerStore.active.id)return;
+  progressImport={candidate:candidate.ok?candidate:null,message:candidate.ok?'File checked. Nothing has been imported yet.':candidate.message,reading:false};render();focusElement(candidate.ok?'#progress-import-preview':'#progress-import-status');
+ });
+ $('#progress-import-cancel')?.addEventListener('click',()=>{cancelProgressImport();progressImport.message='Import canceled. Existing progress is unchanged.';render();focusElement('#progress-file');});
+ $('#progress-import-confirm')?.addEventListener('click',()=>{
+  const result=explorerStore.importState(progressImport.candidate);
+  if(!result.ok){progressImport.message=result.message;render();focusElement('#progress-import-status');return;}
+  useExplorer(result.state,'#notes');progressImport.message=result.temporary?'Notebook brought into a separate explorer for this session. Saving is off; keep your file.':'Notebook brought into a separate explorer. Existing explorers are still available using Switch explorer.';render();focusElement('#progress-import-status');
+ });
+}
 function bindExplorers(){
+ bindProgressTransfer();
  $('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());
  $('#notes-switch-explorer')?.addEventListener('click',()=>chooseExplorer());$('#notes-add-explorer')?.addEventListener('click',()=>chooseExplorer(true));
  $('#explorer-new')?.addEventListener('click',()=>{explorerDraft=freshExplorerChoice();creatingExplorer=true;render();});
@@ -365,6 +386,6 @@ function bindStory(){
 function renderPuzzleEnd(q,o){main.innerHTML=`${heading('An idea to keep.','You made room for a little wondering.')}<section class="summary-callout"><h2>${esc(q.title)}</h2><p>${esc(describe(o))}. ${o.status==='skipped'?'You can return to this puzzle whenever you like.':esc(q.talk)}</p><div class="summary-links"><a href="#puzzles" class="primary">Choose another puzzle</a><a href="#home" class="secondary">Back to the garden</a></div></section>`;main.focus();}
  function showReset(){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>Start with a fresh page?</h2><p>This clears this explorer’s garden, café, stories, practice, companion choices and notes. Other explorers stay in place. Earlier shared copies can be removed separately from notes. Download your notes first if you want to keep them.</p><div class="dialog-actions"><button class="secondary" id="cancel-reset">Keep our progress</button><button class="primary danger" id="confirm-reset">Clear progress</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('#cancel-reset').onclick=()=>d.close();d.querySelector('#confirm-reset').onclick=()=>{resetSpeechPreferences();state=explorerStore.clearActive();ensurePlantings(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);practiceSession=null;activity=null;active=null;screen='';save();d.close();navigate('#home');};d.addEventListener('close',()=>d.remove());}
  document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(a?.getAttribute('href')==='#main'){event.preventDefault();main.focus();return;}if(a&&a.getAttribute('href')===location.hash){event.preventDefault();if(activity)syncDraft();screen='';activity=null;active=null;render();main.focus();window.scrollTo(0,0);}});
- window.addEventListener('hashchange',()=>{if(activity)syncDraft();screen='';activity=null;active=null;render();main.focus();window.scrollTo(0,0);});
+ window.addEventListener('hashchange',()=>{cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;render();main.focus();window.scrollTo(0,0);});
  $('#privacy-button').onclick=()=>$('#about-dialog').showModal();
  render();
