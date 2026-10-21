@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {PLANT_DAYS,PLANT_CONDITIONS,PLANT_SPECIMENS,PLANT_MODEL,PLANT_OBSERVATIONS,plantObservation,plantObservationById,plantQuestions,waterComparisonQuestion} from '../dist/plant-study-content.mjs';
-import {plantStudy,ensurePlantStudy,recoverPlantStudy,currentPlantObservation,setPlantPage,setPlantDay,setPlantSpecimen,recordPlantObservation,setPlantPrediction,usePlantSupport,answerPlantQuestion,choosePlantLocation,carryPlantPlan} from '../dist/plant-study-core.mjs';
+import {plantStudy,ensurePlantStudy,recoverPlantStudy,currentPlantObservation,setPlantPage,setPlantDay,setPlantSpecimen,recordPlantObservation,setPlantPrediction,usePlantSupport,answerPlantQuestion,choosePlantLocation,carryPlantPlan,notePlantExposure,notePlantExposureUnknown} from '../dist/plant-study-core.mjs';
 let checks=0;
 const check=(value,message)=>{assert.ok(value,message);checks++;};
 const equal=(a,b,message)=>{assert.deepEqual(a,b,message);checks++;};
@@ -83,5 +83,12 @@ for(const day of PLANT_DAYS){
 for(const raw of [null,[],{version:99,work:'keep'},{version:1,day:6},'<future payload>']){
  const s={plantStudy:copy(raw),cafe:{keep:true}};const before=copy(s);equal(plantStudy(s),null,'unknown state unavailable');equal(ensurePlantStudy(s),null,'ensure preserves unknown state');check(!setPlantDay(s,6)&&!setPlantPrediction(s,'dim')&&!recoverPlantStudy({}),'no overwrite absent or unknown work');equal(s,before,'unknown raw root unchanged before recovery');
  check(recoverPlantStudy(s),'explicit fresh start available');equal(s.plantStudy.recovered,raw,'exact original retained for recovery');check(plantStudy(s),'fresh recovered root valid');equal(s.cafe,before.cafe,'recovery preserves other work');check(!recoverPlantStudy(s),'recovery cannot repeatedly replace valid draft');
+}
+{
+ const s={};ensurePlantStudy(s);setPlantPage(s,'plan');setPlantSpecimen(s,'dim','B');setPlantPrediction(s,'light');const first=copy(s.plantStudy.prediction.first),selection=[s.plantStudy.page,s.plantStudy.day,s.plantStudy.condition,s.plantStudy.specimen];
+ notePlantExposure(s,6);equal([s.plantStudy.page,s.plantStudy.day,s.plantStudy.condition,s.plantStudy.specimen],selection,'cross-loop exposure preserves exact investigation selection');setPlantPrediction(s,'dim');equal(s.plantStudy.prediction.first,first,'later source exposure preserves first prediction');equal(s.plantStudy.prediction.latest.timing,'after-later-days','revision after other-loop source is after-looking');
+ const uncertain={};notePlantExposureUnknown(uncertain);setPlantPrediction(uncertain,'unsure');equal(uncertain.plantStudy.prediction.latest.timing,'unknown','unknown earlier exposure cannot manufacture before-looking');notePlantExposure(uncertain,2);setPlantPrediction(uncertain,'light');equal(uncertain.plantStudy.prediction.latest.timing,'after-later-days','known later source wins over uncertain earlier exposure');
+ const invalid={plantStudy:{version:99,earlier:'exact'}};const raw=copy(invalid);check(!notePlantExposure(invalid,6)&&!notePlantExposureUnknown(invalid),'cross-loop hooks leave unsupported roots unavailable');equal(invalid,raw,'unknown earlier work exact');recoverPlantStudy(invalid);setPlantPrediction(invalid,'unsure');equal(invalid.plantStudy.prediction.latest.timing,'unknown','explicit recovery does not assert before-looking');
+ const old={};ensurePlantStudy(old);setPlantPrediction(old,'dim');check(!Object.hasOwn(old.plantStudy,'exposureUnknown')&&!Object.hasOwn(old.plantStudy.prediction.first,'exposureUnknown'),'old valid format stays compatible without a migration');check(plantStudy(JSON.parse(JSON.stringify(old))),'old and extended snapshots validate');
 }
 console.log(`Plant study checks passed: ${checks}`);

@@ -454,13 +454,24 @@
     {
       "id": "plants",
       "name": "Growing shelf: seedling investigation",
-      "status": "built-local",
+      "status": "live",
       "patterns": [
         "experiment",
         "search"
       ],
       "route": "#living/plants",
       "scope": "Invented adequate/dim-light cress illustrations across four days; unscored predictions, copied observation rows, observation/explanation and height-only contrasts, supplied water-test choice, frozen evidence beside planting plans. Not measured biology, independent measurement, experimental design or full plant-growth coverage."
+    },
+    {
+      "id": "field-notebook",
+      "name": "Field Notebook: choose and chart",
+      "status": "built-local",
+      "patterns": [
+        "experiment",
+        "build"
+      ],
+      "route": "#living/notebook",
+      "scope": "Eight same-day model comparisons: choose useful rows, build editable fixed-zero-baseline bars, distinguish draft reading from source fidelity and question relevance, keep unfinished/revised charts. Invented stem-mm source, supplied scale, visible-source practice; no independent measurement, chart-scale choice or real growth conclusion."
     }
   ],
   "manualReferences": [
@@ -694,6 +705,27 @@
       "kind": "scoped-practice",
       "source": "dist/plant-study-ui.mjs",
       "scope": "Choose between two supplied proposed water comparisons: hold light and other conditions alike, or confound light and water. No water results or independent experimental-design claim."
+    },
+    {
+      "game": "field-notebook",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/field-notebook-ui.mjs",
+      "scope": "Choose up to two supplied observations relevant to a day/specimen question, retain source labels and exact units, and revise a selection. This extends copied-row collecting; no physical data gathering or measurement claim."
+    },
+    {
+      "game": "field-notebook",
+      "topicId": "mt_7IFpDVNsmt",
+      "kind": "scoped-practice",
+      "source": "dist/field-notebook-ui.mjs",
+      "scope": "Table-to-labelled-two-bar presentation of invented source observations. The pinned title is misleading; its description supports a narrow recording/presentation slice. No living-things classification key or independent field survey claim."
+    },
+    {
+      "game": "field-notebook",
+      "topicId": "mt_r8XnXwRA6g",
+      "kind": "scoped-practice",
+      "source": "dist/field-notebook-ui.mjs",
+      "scope": "Construct exact numerical bars on a supplied shared 0–70 scale with 10-unit ticks, choose quantity/unit labels and compare two categories. Distinguish reading an inaccurate draft from source agreement and question relevance. No independent scale choice, pictogram, time-series graph or full-topic claim."
     }
   ],
   "increments": [

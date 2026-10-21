@@ -1,5 +1,7 @@
+import {fieldNotebookPage,fieldNotebookEntry,fieldNotebookPlanPanel,bindFieldNotebook} from './field-notebook-ui.mjs';
+import {fieldNotebook,noteFieldExposure,fieldDisplayedDays} from './field-notebook-core.mjs';
 import {plantStudyPage,plantStudyEntry,plantPlanPanel,bindPlantStudy} from './plant-study-ui.mjs';
-import {plantStudy,setPlantDay} from './plant-study-core.mjs';
+import {plantStudy,setPlantDay,notePlantExposure,notePlantExposureUnknown} from './plant-study-core.mjs';
 import {letterPage,letterEntry,bindLetterTrail} from './letter-trail-ui.mjs';
 import {ensureLetters} from './letter-trail-core.mjs';
 import {messagePage,bindMessages} from './message-ui.mjs';
@@ -157,13 +159,20 @@ function broadActivityPage(){
  ${correct?`<fieldset><legend>How did you find it? Choose together.</legend><div class="method-grid">${[['knew','I knew it'],['worked','I worked it out'],['counted','I counted'],['together','We did it together']].map(([id,label])=>`<button class="method ${active.method===id?'selected':''}" data-method="${id}" aria-pressed="${active.method===id}">${label}</button>`).join('')}</div></fieldset><div class="next-row"><a href="#numbers" class="text-button">Take a break</a><button id="next" class="primary" ${!active.method?'disabled':''}>${learning?'Keep this idea':trail.index===1?'See what we noticed':'Try the next question'}</button></div>`:`<div class="next-row"><button id="skip" class="text-button">${active.attempts.length?'Leave this one for now':'Skip for now'}</button><a href="#numbers" class="text-button">Take a break</a></div>`}</section><aside class="side-note">${dot(correct?'cheer':'think')}<h3>Dot wonders…</h3><p>${esc(correct||active.revealed?q.talk:'What do you notice? Can you show Pip where you might start?')}</p>${hear(correct||active.revealed?q.talk:'What do you notice? Can you show Pip where you might start?','Hear Dot’s question')}<hr><p class="tiny">Grown-up: notice the method as well as the answer. Every kind of trying is welcome.</p><a href="#map/${q.topicId}">See the learning connection</a></aside></div>`;
 }
 function adventureEnd(){return `${heading('An idea to take with you.','You made time for some mathematical wondering.')}<section class="summary-callout"><h2>${esc(lastAdventure.title)}</h2><p>${esc(lastAdventure.wonder)}</p><p class="tiny">Talk, draw, build, or try it another way. This question is for exploring together; the app does not score your explanation.</p><div class="summary-links"><a class="primary" href="#activities/${lastAdventure.area}">More in this garden</a><a class="secondary" href="#checkin">Choose a garden walk</a><a href="#home" class="text-button">Finish for now</a></div></section>${seedOffer(state)}`;}
+function syncFieldPlantExposure(view=null){
+ const displayed=view?fieldDisplayedDays(state,view):null;
+ if(displayed&&(displayed.days.length||displayed.unknown))noteFieldExposure(state,displayed.days,displayed.unknown);
+ const notebook=fieldNotebook(state);
+ if(!notebook||notebook.exposureUnknown||displayed?.unknown)notePlantExposureUnknown(state);
+ for(const day of new Set([...(notebook?.exposedDays||[]),...(displayed?.days||[])]))notePlantExposure(state,day);
+}
 function render(){
   stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters';
-  const plantBench=root==='living'&&slug==='plants';
+  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
   const navRoot=['paris','french'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
@@ -172,11 +181,12 @@ function render(){
   ensureEqualGroups(state);ensureMessages(state);ensureLetters(state);
   let html;
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
-  else if(plantBench){const ps=plantStudy(state);if(ps){setPlantDay(state,ps.day);save();}html=plantStudyPage(state);}
+  else if(fieldBench){syncFieldPlantExposure('notebook');save();html=fieldNotebookPage(state);}
+  else if(plantBench){syncFieldPlantExposure();const ps=plantStudy(state);if(ps){setPlantDay(state,ps.day);save();}html=plantStudyPage(state);}
   else if(letterBench)html=letterPage(state,root,detail);
   else if(messageBench)html=messagePage(state,root,detail);
   else if(groupBench){if(detail!=='choose'){noteGroupView(state,groupPlace);exposeStoryFacts({facts:equalGroupPairsShown(state,groupPlace)});save();}html=equalGroupsPage(state,groupPlace,detail);}
-  else if(root==='regrow')html=plantingPage(state,Number(slug||0))+plantPlanPanel(state);
+  else if(root==='regrow'){syncFieldPlantExposure('planting');save();html=plantingPage(state,Number(slug||0))+plantPlanPanel(state)+fieldNotebookPlanPanel(state);}
   else if(root==='wonder'){html=openNumberTaskPage(state,slug);save();}
   else if(root==='french')html=frenchLanding(state);
   else if(root==='paris')html=parisLanding(state);
@@ -186,7 +196,7 @@ function render(){
     if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
     else html=orchardPage(state,slug);
   }
-  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}html+=plantStudyEntry();}
+  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}html+=plantStudyEntry()+fieldNotebookEntry();}
   else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post');
   else if(root==='workshop')html=workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph);
@@ -225,8 +235,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft');
   else html=home();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
   main.innerHTML=(explorerStore.warning?`<p class="storage-warning" role="status">${esc(explorerStore.warning)}</p>`:!storageOK?'<p class="storage-warning" role="status">This browser cannot save progress right now. You can still explore; download notes before leaving.</p>':'')+(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;bind();
   const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
 }
@@ -293,6 +303,9 @@ function bindBroadExtras(){
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
 function bind(){
+ bindFieldNotebook(state,{save,render,navigate,focus:focusElement});
+ document.querySelector('[data-fn-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){syncFieldPlantExposure('notes');save();}});
+ document.querySelector('[data-ps-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const ps=plantStudy(state);if(!ps||Object.hasOwn(ps,'recovered'))notePlantExposureUnknown(state);if(ps?.plan)notePlantExposure(state,ps.plan.observation.day);save();}});
  bindPlantStudy(state,{save,render,navigate,focus:focusElement});
  const [egRoot,egSlug]=(location.hash||'#home').slice(1).split('/');
  if(egSlug==='letters'&&['post','loft'].includes(egRoot))bindLetterTrail(state,egRoot,{save,render,navigate,focus:focusElement});
