@@ -32,3 +32,7 @@ node scripts/build-learning-atlas.mjs --check
 ```
 
 Run from the repository root with Node.js; no installation, network access or learner save is used. The builder verifies node/edge identities and counts, all eight subject counts, valid acyclic dependencies, all domain candidate keys and declared activity references, and deterministic derived output. CSV text is quoted. Review the actual activity against the full source topic description/evidence before adding a reference; a matching theme is insufficient. Domain candidates need per-topic review before implementation. Keep real learner information out of this directory and the public repository.
+
+## Six-act programme planning
+
+[Spec 49](../docs/specs/49-six-act-curriculum.md), the [26 teaching pathways](../docs/six-act-strands.md), [detailed intermediate maths/literacy sequences](../docs/six-act-math-literacy.md) and [source audit](../docs/six-act-source-audit.md) separate inventory, sequence design and authored lesson completeness. The [six-act topic ledger](six-act-topic-plan.csv) includes every pinned topic, current scoped references, owning pathway, predecessor IDs and explicit outstanding design. It assigns no learner or topic to an act automatically. All programme topic-level teaching/contrast/application/revisit designs remain required; metadata queues are not curriculum coverage or age placement. Original pinned data and current coverage declarations are unchanged. The source-derived ledger retains the same ODbL/CC-BY-SA attribution above.
