@@ -83,7 +83,7 @@ try {const response=await fetch('./marble-map.json');if(response.ok)graph=await 
 let screen='',activity=null,active=null,practiceSession=null,routeChoice='auto',puzzleLevel=null,lastAdventure=null;
 const blank=()=>({attempts:[],hinted:false,revealed:false,method:null,choice:null,input:'',error:'',exposed:false});
 function storageWarning(){return explorerStore.warning||(!storageOK?'This browser cannot save progress right now. You can still explore; download notes before leaving.':'');}
-function savingStatus(){return !persist?'Progress lasts only while this page stays open. Download notes before leaving.':storageWarning()?'Progress could not be saved reliably. This session is still available; download notes before leaving.':'Progress is saved on this device.';}
+function savingStatus(){return !persist?'Progress lasts only while this page stays open. Download notes before leaving.':!storageOK?'Progress could not be saved reliably. This session is still available; download notes before leaving.':'Progress is saved on this device.';}
 function updateStorageNotice(){
  const message=storageWarning();let notice=main.querySelector('[data-save-warning]');
  if(message&&!notice){notice=document.createElement('p');notice.className='storage-warning';notice.dataset.saveWarning='';notice.setAttribute('role','status');main.prepend(notice);}

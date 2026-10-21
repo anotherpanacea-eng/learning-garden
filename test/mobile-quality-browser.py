@@ -14,7 +14,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--chromium', default='/usr/lib/chromium/chromium')
+parser.add_argument('--chromium', help='Chromium or Chrome executable; default is Playwright\'s own')
 parser.add_argument('--evidence', type=Path)
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
@@ -23,6 +23,7 @@ class QuietHandler(SimpleHTTPRequestHandler):
     def log_message(self, *_args):
         pass
 
+ThreadingHTTPServer.request_queue_size = 128  # macOS resets connections past the default backlog of 5
 server = ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(QuietHandler, directory=str(root / 'dist')))
 threading.Thread(target=server.serve_forever, daemon=True).start()
 origin = f'http://127.0.0.1:{server.server_port}/'
@@ -158,6 +159,10 @@ try:
             page.locator('[data-speak-lang="fr"]').first.click()
             check(page.evaluate('testUtterances.at(-1).voice.voiceURI') == 'local-fr', 'French passage uses a matching local voice')
             check('other language' in page.locator('[data-speech-status]').inner_text(), 'cross-language automatic fallback is explained visibly')
+            voices(voice_list[:2])
+            page.locator('[data-speak-lang="fr"]').first.click()
+            check('unavailable' not in page.locator('[data-speech-status]').inner_text() and page.locator('[data-reading-voice]').input_value() == '', 'a kept English choice is not reported unavailable when no French voice exists')
+            voices(voice_list)
             route('home')
             page.locator('[data-speak]').first.click()
             check(page.evaluate('testUtterances.at(-1).voice.voiceURI') == 'enhanced-en', 'English preference survives French automatic playback')
@@ -221,7 +226,14 @@ try:
             check(any(d.get('input') == '17' for d in recovery['garden']['visits'][-1]['drafts'].values()), 'failed-save draft remains exportable from memory')
             page.reload()
             return_to_explorer()
+            page.evaluate("Object.keys(localStorage).filter(k=>/^number-garden-v1:explorer-/.test(k)).forEach(k=>localStorage.removeItem(k))")
+            page.reload()
+            return_to_explorer()
+            if page.locator('[data-film-skip]').count():
+                page.locator('[data-film-skip]').click()
+            route('home')
             route('notes')
+            check(page.locator('[data-save-warning]').is_visible() and page.locator('[data-saving-status]').inner_text() == 'Progress is saved on this device.', 'a load notice that is not a save failure leaves Notes reporting saved progress')
             page.locator('#remember').uncheck()
             check(page.evaluate("Object.keys(localStorage).filter(k=>k==='learning-garden-explorers'||k.startsWith('number-garden-v1')||/^number-garden-(kept|backup)-/.test(k)).length") == 0, 'saving off removes all managed copies')
             context.set_offline(True)
