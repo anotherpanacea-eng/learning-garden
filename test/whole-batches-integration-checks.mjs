@@ -31,4 +31,9 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
 {
  const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8'),ending=app.slice(app.indexOf('function endingFilm(){'),app.indexOf("if(!choosingExplorer)playFilm('welcome');"));let calls=0;const ctx=vm.createContext({state:fresh(),choosingExplorer:false,location:{hash:'#cafe/batches'},cafeSupper(){calls++;return {complete:true,round:1};}});vm.runInContext(ending,ctx);eq(vm.runInContext('endingFilm()',ctx),null,'gathering cannot trigger cafe supper film');eq(calls,0,'gathering does not inspect supper goal');ok(app.includes('batchDisplayedFactPairs(state)'),'only displayed guest relationships wired to exposure');ok(wholeBatchesEntry().includes('#cafe/batches'),'entry has route');
 }
+{
+ const s=fresh(),text=h=>h.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');B.chooseBatchCase(s,'quiet-picnic');B.setBatchCopies(s,1);B.checkBatchPlan(s);ok(text(wholeBatchesPage(s)).includes('The 1 complete copy makes 2 guest places and fits the request.'),'one-copy plan feedback is singular');
+ B.setBatchPage(s,'message');ok(text(wholeBatchesPage(s)).includes('2 guest places need 1 complete base copy.'),'one-copy request is singular');
+ B.setBatchMessage(s,'destination','quiet-picnic');B.keepBatch(s);B.setBatchPage(s,'keep');const html=wholeBatchesPage(s);ok(text(html).includes('1 complete copy · 2 requested guests.')&&text(html).includes('Message: Quiet picnic ·'),'kept snapshot reads as words');ok(!html.includes('&quot;modelVisible&quot;')&&!html.includes('<pre'),'no raw record on the child keep page');
+}
 console.log(`Whole-batch UI/storage integration: ${checks} passed.`);
