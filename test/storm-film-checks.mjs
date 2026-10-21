@@ -9,17 +9,22 @@ for(const [file,D,POSTER] of FILMS){
  const playback=html.split('// ---------- playback ----------')[1].split('// For recording:')[0];
  eq(new RegExp(`const D=${D}[,;]`).test(html),true,`${file} lasts ${D} seconds`);
 
- function fixture({query='?autoplay=1&embedded=1',reduced=false,unavailable=false,renderFails=false,resumeFails=false}={}){
+ function fixture({query='?autoplay=1&embedded=1',reduced=false,unavailable=false,renderFails=false,resumeFails=false,sessionThrows=false}={}){
   let time=0,id=0,renderResolve,renderReject;const frames=new Map(),sources=[],messages=[],drawn=[],events={},contexts=[];
+  let sessionType='ambient';const audioSession={get type(){return sessionType;},set type(value){if(sessionThrows)throw Error('synthetic unsupported routing');sessionType=value;}};
   const score={duration:D};const rendered=new Promise((resolve,reject)=>{renderResolve=resolve;renderReject=reject;});
   const elements=Object.fromEntries(['start','toggle','prog','time','sound'].map(k=>[k,{hidden:k==='sound',disabled:k==='toggle',textContent:k==='toggle'?'Pause':'',style:{},attrs:{},listeners:{},setAttribute(k,v){this.attrs[k]=v;},addEventListener(k,f){this.listeners[k]=f;},click(){this.onclick?.();this.listeners.click?.();}}]));
-  class Audio{constructor(){this.currentTime=100;this.destination={};this.resumes=0;this.closed=false;contexts.push(this);}resume(){this.resumes++;return resumeFails?Promise.reject(new Error('Synthetic blocked audio')):Promise.resolve();}close(){this.closed=true;return Promise.resolve();}createBufferSource(){const s={connect(){},disconnect(){this.disconnected=true;},start(when,offset){this.when=when;this.offset=offset;},stop(){this.stopped=true;}};sources.push(s);return s;}}
+  class Audio{constructor(){this.typeAtCreation=audioSession.type;this.currentTime=100;this.destination={};this.resumes=0;this.closed=false;contexts.push(this);}resume(){this.resumes++;return resumeFails?Promise.reject(new Error('Synthetic blocked audio')):Promise.resolve();}close(){this.closed=true;return Promise.resolve();}createBufferSource(){const s={connect(){},disconnect(){this.disconnected=true;},start(when,offset){this.when=when;this.offset=offset;},stop(){this.stopped=true;}};sources.push(s);return s;}}
   class Offline{constructor(){this.destination={};}startRendering(){if(renderFails)renderReject(new Error('Synthetic render failure'));return rendered;}}
-  const back={},context={document:{getElementById:k=>elements[k],querySelector:()=>back,documentElement:{classList:{add(){}}},body:{}},performance:{now:()=>time},requestAnimationFrame:f=>{frames.set(++id,f);return id;},cancelAnimationFrame:i=>frames.delete(i),draw:t=>drawn.push(t),clamp:x=>Math.max(0,Math.min(1,x)),D,POSTER,window:unavailable?{}:{AudioContext:Audio,OfflineAudioContext:Offline},cv:{addEventListener(){}},addEventListener:(k,f)=>{events[k]=f;},buildAudio(){},URLSearchParams,location:{search:query,origin:'https://synthetic.invalid'},parent:{postMessage:(...args)=>messages.push(args)},matchMedia:()=>({matches:reduced})};
+  const back={},context={document:{getElementById:k=>elements[k],querySelector:()=>back,documentElement:{classList:{add(){}}},body:{}},performance:{now:()=>time},requestAnimationFrame:f=>{frames.set(++id,f);return id;},cancelAnimationFrame:i=>frames.delete(i),draw:t=>drawn.push(t),clamp:x=>Math.max(0,Math.min(1,x)),D,POSTER,window:unavailable?{navigator:{audioSession}}:{AudioContext:Audio,OfflineAudioContext:Offline,navigator:{audioSession}},cv:{addEventListener(){}},addEventListener:(k,f)=>{events[k]=f;},buildAudio(){},URLSearchParams,location:{search:query,origin:'https://synthetic.invalid'},parent:{postMessage:(...args)=>messages.push(args)},matchMedia:()=>({matches:reduced})};
   vm.createContext(context);vm.runInContext(playback,context);
-  return {elements,frames,sources,messages,drawn,contexts,events,back,resolve:()=>renderResolve(score),frame(ms){time=ms;const batch=[...frames.values()];frames.clear();batch.forEach(f=>f());},read:code=>vm.runInContext(code,context)};
+  return {elements,frames,sources,messages,drawn,contexts,events,back,get sessionType(){return sessionType;},resolve:()=>renderResolve(score),frame(ms){time=ms;const batch=[...frames.values()];frames.clear();batch.forEach(f=>f());},read:code=>vm.runInContext(code,context)};
  }
  const settle=async()=>{for(let i=0;i<5;i++)await Promise.resolve();};
+ {
+  const f=fixture();eq(f.sessionType,'ambient','silent autoplay does not change the audio session');f.elements.sound.click();f.resolve();await settle();eq(f.contexts[0].typeAtCreation,'playback','sound tap requests media mode before AudioContext construction');eq(f.sources.length,1,'media routing preserves synchronized playback');
+  const unavailableHint=fixture({sessionThrows:true});unavailableHint.elements.sound.click();unavailableHint.resolve();await settle();eq(unavailableHint.sources.length,1,'unsupported routing hint does not break the film');
+ }
  if(file==='bramble-film.html'){
   const shown=fixture();shown.frame(10500);eq(shown.messages.filter(m=>m[0]==='garden-film-example').length,1,'fully visible 3×4 example records exposure');shown.frame(11000);eq(shown.messages.length,1,'example reported once');
   const late=fixture();late.frame(12700);eq(late.messages.length,0,'late first frame cannot report faded groups');

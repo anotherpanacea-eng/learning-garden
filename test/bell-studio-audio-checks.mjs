@@ -61,4 +61,15 @@ for(const config of [{constructorFail:true},{resume:'reject'},{resume:'suspended
 for(const boundary of ['route-change','page-change','card-change','edit','explorer-chooser','explorer-switch','import','reset','film','speech','pagehide','hidden']){
  const e=environment();await e.player.play(['low','middle','high']);e.player.stop(boundary);eq(e.timers.size,0,`${boundary} cancels timers`);ok(e.nodes.every(n=>n.stops.at(-1)<n.starts[0]),`${boundary} cancels future tones`);eq(e.contexts[0].state,'suspended');
 }
+{
+ const nav=globalThis.navigator,previous=Object.getOwnPropertyDescriptor(nav,'audioSession');let type='ambient',writes=0;
+ const session={get type(){return type;},set type(value){writes++;type=value;}};
+ Object.defineProperty(nav,'audioSession',{configurable:true,value:session});
+ try{
+  const e=environment();eq(writes,0,'creating the player does not claim media audio');await e.player.play(['rest']);eq(writes,0,'rest-only playback does not change audio routing');e.player.stop();
+  await e.player.play(['low']);eq(type,'playback','explicit sounding playback requests media routing');e.player.stop();
+  Object.defineProperty(nav,'audioSession',{configurable:true,value:{set type(value){throw Error('synthetic unsupported setting');}}});
+  eq((await e.player.play(['high'])).status,'started','a rejected routing hint does not break supported audio');e.player.stop();
+ }finally{if(previous)Object.defineProperty(nav,'audioSession',previous);else delete nav.audioSession;}
+}
 console.log(`bell studio audio: ${count} checks passed`);

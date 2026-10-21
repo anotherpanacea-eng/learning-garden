@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import {BELL_CARDS} from '../dist/bell-studio-content.mjs';
 import {chooseBellCard,appendBellSlot,setBellPage,keepBellCall,bellView,checkBellArrangement,replaceBellSlot} from '../dist/bell-studio-core.mjs';
-import {bellStudioPage,bellStudioNotes} from '../dist/bell-studio-ui.mjs';
+import * as b from '../dist/bell-studio-core.mjs';
+import {bellStudioPage,bellStudioNotes,bindBellStudio} from '../dist/bell-studio-ui.mjs';
 let checks=0;const ok=(v,m)=>{assert.ok(v,m);checks++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const matching={
  'cafe-gather':['low','low','rest','high','high'],
@@ -27,5 +28,26 @@ for(const c of BELL_CARDS){
 }
 {
  const s={bellStudio:{version:99,raw:'<img onerror="fictional">'}};ok(bellStudioPage(s).includes('An earlier Bell Studio draft is kept'));ok(bellStudioNotes(s).includes('&lt;img'));ok(!bellStudioNotes(s).includes('<img'));
+}
+// Exercise the actual bound handlers: focus and support labels must follow the action.
+{
+ const s={};chooseBellCard(s,'own-call');appendBellSlot(s,'low');appendBellSlot(s,'middle');b.selectBellSlot(s,0);
+ const focuses=[],node=dataset=>({dataset,listeners:{},addEventListener(k,fn){(this.listeners[k]??=[]).push(fn);},fire(){for(const fn of this.listeners.click||[])fn();},classList:{toggle(){}}});
+ const move=node({bsMove:'1'}),remove=node({}),clear=node({}),narrate=node({}),play=node({bsPlay:'current'}),pair=node({bsPlay:'pair'}),add=node({bsAdd:'low'}),status={textContent:''};
+ const groups={'[data-bs-move]':[move],'[data-bs-remove]':[remove],'[data-bs-clear]':[clear],'[data-bs-play]':[play,pair],'[data-bs-audio] [data-speak]':[narrate]};
+ const prior=globalThis.document;
+ globalThis.document={querySelector(selector){if(selector==='[data-bs-root]'||selector==='#bs-title')return {};if(selector==='#bs-play-status')return status;if(selector==='[data-bs-add="low"]')return add;const match=selector.match(/^\[data-bs-slot="(\d+)"\]$/);return match&&Number(match[1])<bellView(s).sequence.length?{}:null;},querySelectorAll:selector=>groups[selector]||[]};
+ try{
+  bindBellStudio(s,{save(){},render(){},focus:selector=>focuses.push(selector),player:{stop(){},play:async()=>({status:'started'})},stopSpeech(){}});
+  move.fire();eq(focuses.at(-1),'[data-bs-slot="1"]','moving to the last slot keeps focus on that slot');
+  remove.fire();eq(focuses.at(-1),'[data-bs-slot="0"]','removing the last slot focuses the remaining slot');
+  remove.fire();eq(focuses.at(-1),'[data-bs-add="low"]','removing the only slot focuses Add Low');
+  narrate.fire();ok(bellView(s).work.support.narration,'spoken invitation records narration');ok(!bellView(s).work.support.audioRequested,'narration does not claim a tone request');
+  appendBellSlot(s,'rest');play.fire();ok(!bellView(s).work.support.audioRequested,'rest-only picture playback does not claim an audio request');
+  clear.fire();eq(focuses.at(-1),'[data-bs-add="low"]','clearing returns focus to composing controls');
+  appendBellSlot(s,'low');play.fire();ok(bellView(s).work.support.audioRequested,'sounding composition records the tone request');ok(!bellView(s).work.support.pairAudioRequested,'a composition request is not a pair request');
+  b.setBellComparisonResponse(s,'higher');ok(!b.checkBellComparison(s).support.pairAudioRequested,'picture-only pair response has no pair-audio flag');
+  pair.fire();ok(b.checkBellComparison(s).support.pairAudioRequested,'explicit pair playback records a pair request');
+ }finally{globalThis.document=prior;}
 }
 console.log(`bell studio UI: ${checks} checks passed`);

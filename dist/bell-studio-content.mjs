@@ -16,7 +16,7 @@ export const BELL_CARDS=freeze([
 export const BELL_PAIRS=freeze([{id:'rise',title:'Low, then High',sequence:['low','high']},{id:'fall',title:'High, then Low',sequence:['high','low']},{id:'same',title:'Middle, then Middle',sequence:['middle','middle']}].map(p=>({...p,modelId:BELL_MODEL.id})));
 export const BELL_PAGES=freeze(['choose','make','compare','keep']);
 export const BELL_RESPONSES=freeze(['higher','lower','same','not-sure']);
-export const BELL_SUPPORT=freeze(['visual','editing','audioRequested','ladder','signalDiagram','together','visualInspection','arrangementFeedback','comparisonFeedback']);
+export const BELL_SUPPORT=freeze(['visual','editing','audioRequested','pairAudioRequested','narration','ladder','signalDiagram','together','visualInspection','arrangementFeedback','comparisonFeedback']);
 export const BELL_REFLECTION='What changed? What stayed the same? Does this call help its listener?';
 export const bellNoteById=id=>BELL_NOTES.find(n=>n.id===id)||null;
 export const bellCardById=id=>BELL_CARDS.find(c=>c.id===id)||null;

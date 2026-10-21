@@ -7,7 +7,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 export function rainNotebookInvitationPanel(state,{origin,caseId}={}){
  const source=rainNotebookInvitation(state,caseId,origin);if(!source)return '';
  const notebook=rainNotebook(state),existing=!!notebook?.cases[caseId];
- return `<section class="rp-notebook-invitation" data-rnb-invitation data-rnb-case="${esc(caseId)}" data-rnb-origin="${esc(origin)}"><h3>Carry these counts to the Field Notebook</h3><p>${origin==='kept-completed'?'Use this kept completed result.':'Use this completed run.'} Choose useful rows, build two bars and compare what they show.</p>${notebook?`<button type="button" class="secondary" data-rnb-open>${existing?'Return to this case’s chart draft':'Make a chart from this result'}</button>${existing?'<p>Returning keeps your chart, entries and place. To start a new chart from this shown result, replace the current draft explicitly; earlier checks and the kept chart stay.</p><button type="button" class="text-button" data-rnb-replace>Replace current chart with this source</button>':''}`:'<p>The earlier notebook format needs an explicit recovery before a chart can be opened. Its original record is still kept.</p><a href="#living/notebook/rain">Open the water-chart record</a>'}<p data-rnb-status role="status" tabindex="-1"></p></section>`;
+ return `<section class="rp-notebook-invitation" data-rnb-invitation data-rnb-case="${esc(caseId)}" data-rnb-origin="${esc(origin)}"><h3>Carry these counts to the Field Notebook</h3><p>${origin==='kept-completed'?'Use this kept completed result.':'Use this completed run.'} Choose useful rows, build two bars and compare what they show.</p>${notebook?`<button type="button" class="secondary" data-rnb-open>${existing?'Return to this case’s chart draft':'Make a chart of this completed result'}</button>${existing?'<p>Returning keeps your chart, entries and place. To start a new chart from this shown result, replace the current draft explicitly. This clears this case’s selected rows, bar values and unfinished answers; earlier checks and the kept chart stay.</p><button type="button" class="text-button" data-rnb-replace>Replace current chart with this source</button>':''}`:'<p>The earlier notebook format needs an explicit recovery before a chart can be opened. Its original record is still kept.</p><a href="#living/notebook/rain">Open the water-chart record</a>'}<p data-rnb-status role="status" tabindex="-1"></p></section>`;
 }
 function visible(el){return !!el.getClientRects().length;}
 export function bindRainNotebookInvitations(state,ctx){
@@ -18,6 +18,9 @@ export function bindRainNotebookInvitations(state,ctx){
   // Rain Paths' earlier toggle listener emits exposure first. An unopened kept
   // table is not captured, and its original shown wrapper is never refreshed by a click.
   for(let p=panel.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS')p.addEventListener('toggle',capture);
+  // Narration records support without rendering, which would cut off speech.
+  // Capture the still-visible table after Rain Paths has recorded that support.
+  document.querySelectorAll('[data-rp-audio] [data-speak]').forEach(b=>b.addEventListener('click',capture));
   capture();
   const open=replace=>{
    const result=shown&&inviteRainNotebook(state,shown,{replace});
