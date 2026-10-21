@@ -6,7 +6,7 @@ const same=(a,b)=>a===b||(Array.isArray(a)&&Array.isArray(b)?a.length===b.length
 const integer=(n,min,max)=>Number.isSafeInteger(n)&&n>=min&&n<=max;
 const numericDraft=x=>typeof x==='string'&&x.length<=24;
 export function parsePackingNumber(text){if(!numericDraft(text)||!/^\d+$/.test(text.trim()))return null;const n=Number(text.trim());return integer(n,0,100)?n:null;}
-function sourceValid(s,c){return keys(s,['id','title','purpose','total','capacity','modelRevision','objectUnit'])&&typeof s.title==='string'&&typeof s.purpose==='string'&&['id','total','capacity','modelRevision','objectUnit'].every(k=>same(s[k],c[k]));}
+function sourceValid(s,c){return keys(s,['id','title','purpose','total','capacity','modelRevision','objectUnit'])&&typeof s.title==='string'&&typeof s.purpose==='string'&&typeof s.objectUnit==='string'&&['id','total','capacity','modelRevision'].every(k=>same(s[k],c[k]));}
 const supportValid=s=>object(s)&&s.visual===true&&Object.entries(s).every(([k,v])=>PACKING_SUPPORT.includes(k)&&v===true);
 const contextSupport=(d,s)=>(d.exampleStep===null||s.workedExample===true)&&(d.helpTopic===null||(d.helpTopic==='example'?s.workedExample===true&&d.exampleStep!==null:s[d.helpTopic]===true));
 const containsSupport=(current,earlier)=>Object.keys(earlier).every(k=>current[k]===true);

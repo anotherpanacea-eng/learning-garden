@@ -32,4 +32,8 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
 {
  const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8'),ending=app.slice(app.indexOf('function endingFilm(){'),app.indexOf("if(!choosingExplorer)playFilm('welcome');"));let calls=0;const ctx=vm.createContext({state:waiting(),choosingExplorer:false,location:{hash:'#post/packing'},currentPostOffice(){calls++;return {closed:false,rival:{phase:'resolved'}};},postOfficeView(){return 'bramble';}});vm.runInContext(ending,ctx);eq(vm.runInContext('endingFilm()',ctx),null,'packing cannot play paused Bramble film');eq(calls,0,'packing does not inspect that rival for a film');ok(app.includes('facts:view.facts'),'app consumes actual rendered fact metadata');ok(parcelPackingEntry().includes('#post/packing'),'optional entry targets independent route');
 }
+{
+ const s=fresh();P.choosePackingCase(s,'lantern-seeds');for(const b of [0,1,2]){P.selectPackingBag(s,b);P.fillPackingBagTogether(s);}P.setPackingPurpose(s,'all');P.setPackingAnswer(s,'all','4');P.setPackingAnswerUnit(s,'all','loaded trips');P.checkPacking(s,'all');P.setPackingPage(s,'purpose');const html=renderParcelPacking(s).html;ok(html.includes('Some envelopes are still loose and need a bag'),'three full bags with spares are told the spares still need a bag');ok(!html.includes('not the fewest'),'too few loaded bags are never called more than the fewest');
+ P.selectPackingBag(s,3);P.movePackingEnvelope(s,1);P.selectPackingBag(s,4);P.movePackingEnvelope(s,1);P.checkPacking(s,'all');ok(renderParcelPacking(s).html.includes('Fewer loaded trips could carry them all'),'five loaded bags carrying all are not minimal');
+}
 console.log(`Parcel packing UI/storage integration: ${checks} passed.`);
