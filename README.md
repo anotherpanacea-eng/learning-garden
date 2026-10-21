@@ -8,6 +8,14 @@ The opening visit, **First Morning**, has three independent entrances: follow a 
 
 Visits can be paused, resumed, replayed, or left waiting while another path is explored. Existing Number Garden activities and records remain available at the same browser origin. All preferences, drafts, observations, and exports stay browser-local; saving off applies device-wide, while clearing can target one explorer or all explorers. No identity fields, uploads, analytics, live AI, or server-side learner records are used.
 
+Number Garden now has a storm-recovery purpose: count saved seeds, plan 24 planting spaces, and compare lengths and borders. Its illustrated planning table connects existing open math activities to water, gathering, and the café. [Living Garden](https://number-garden-together.tastypeach3.chatgpt.site/#living) now offers renewable searches across nine authored settings: meet land snails, woodlice and adult butterflies, compare changing conditions, follow a delivery note, and count equal packs of café supplies. Small parcels and all ordered facts through 12×12 are open choices. The [original snail visit](https://number-garden-together.tastypeach3.chatgpt.site/#living/first) and its one-time parcel remain intact. This is guided picture investigation, not a field study or ecosystem simulator. New searches independently suggest deeper nature clues, note comprehension and parcel math from a few distinct finished tasks. Every depth stays open: use habitat evidence and before/after changes, follow sequences or infer a parcel from its contents, and find pack counts or plan tomorrow’s delivery. Help and narration remain separate from first-response matching, retries and familiarity. Paused older visits keep their original questions. [Spec 30](docs/specs/30-adaptive-living-garden.md) describes the conservative suggestion rules and limits.
+
+## Full learning graph and next games
+
+The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marble reference graph: 1,590 topics, 3,221 prerequisite edges, eight subjects and 54 domains. The [all-topic index](curriculum/topic-coverage.csv) distinguishes current scoped activity references, supplied explanations and topics not yet mapped. Seven reusable play patterns guide extensions and new games; proposed priorities include Word Workshop, field notebooks/food webs, café fractions and money, messages/map-making, historical evidence, sound/light creation and collaborative stories. These are authoring plans, not a required child sequence or claims of full-topic assessment. Geography, art, music and additional languages also need explicitly authored extensions beyond Marble's subject organization.
+
+[Data provenance and licenses](curriculum/README.md) · [Roadmap](docs/roadmap.md). Rebuild or check the offline atlas with `node scripts/build-learning-atlas.mjs` or `node scripts/build-learning-atlas.mjs --check`. The larger reference graph does not change the live app's smaller map or learner saves.
+
 ## Run locally
 
 No installation or build step is needed. From this repository:
@@ -31,12 +39,23 @@ node test/broad-help-checks.mjs
 node test/broad-model-checks.mjs
 node test/explorer-storage-checks.mjs
 node test/plantings-and-speech-checks.mjs
+node test/number-garden-story-checks.mjs
+node test/living-garden-checks.mjs
+node test/living-spiral-checks.mjs
+node test/living-adaptive-checks.mjs
 node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs
 node test/science-checks.mjs
 node test/workshop-checks.mjs
+node test/post-office-checks.mjs
+node test/post-office-ui-checks.mjs
+node test/post-rival-checks.mjs
+node test/post-rival-adaptive-checks.mjs
+node test/post-rival-adaptive-ui-checks.mjs
+node test/courier-rival-ui-checks.mjs
 node test/learning-invitation-checks.mjs
+node test/learning-connections-checks.mjs
 node test/cafe-expedition-checks.mjs
 node test/cafe-supper-checks.mjs
 node test/facts-checks.mjs
@@ -54,7 +73,7 @@ These checks use synthetic observations. They check the application logic; they 
 
 ## Roadmap and science expeditions
 
-The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab and Storm Workshop are implemented; the other destinations remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with later learning/play-center and rival-witch expansions, not a separate game.
+The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab, Storm Workshop and the first Willow Post Office flying-courier increment are implemented; the other destinations remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with pictured courier choices, freely available practice and the first optional rival-witch encounter.
 
 Science offers three guided water visits with optional predictions, a focused external Marble Water Lab link, self-reported observations, original controllable explanation pictures, and a discussion/project invitation. Each mission is independently available and can finish without an external visit or an answer. Link selection is not treated as visiting, experiment completion, or understanding. Explanation use and reported reading mode stay distinct. The latest 24 visits stay browser-local under the existing privacy controls; there is no tracking or data exchange with Marble. External application source/assets are not copied or embedded.
 
@@ -122,7 +141,7 @@ The parent-facing learning map uses a focused subset of Marble's actual prerequi
 
 This is not a validated assessment, a comprehensive skills inventory, a grade-level estimate, or a class-placement recommendation. The adult and child select the observed method together; the app does not judge spoken explanations. Try different examples and representations on later days. Pip and Dot, stories, lessons, questions, and activities are original.
 
-Curriculum: Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://github.com/withmarbleapp/os-taxonomy, pinned commit `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. `dist/marble-map.json` contains 82 topics and 87 relationships: the original 25 math focus topics and their direct prerequisites, plus eight limited science, data-display and English activity connections and their direct prerequisites. Topic matches describe only the stated practice; context-only nodes have no attached activity. Selected age suffixes have been removed from names; descriptions and link reasons are retained. Database/subset: ODbL 1.0; Marble descriptive content: CC BY-SA 4.0. The map view links its downloadable data, pinned source, and both licenses. Further relationships outside the slice are disclosed.
+Curriculum: Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://github.com/withmarbleapp/os-taxonomy, pinned commit `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. `dist/marble-map.json` contains 87 topics and 92 relationships: the original 25 math focus topics and their direct prerequisites, plus ten limited science, data-display, English and computing activity connections and their direct prerequisites. Topic matches describe only the stated practice; context-only nodes have no attached activity. Selected age suffixes have been removed from names; descriptions and link reasons are retained. Database/subset: ODbL 1.0; Marble descriptive content: CC BY-SA 4.0. The map view links its downloadable data, pinned source, and both licenses. Further relationships outside the slice are disclosed.
 
 Teaching reference: IES, Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades, https://ies.ed.gov/ncee/wwc/PracticeGuide/26. The prototype combines visual explanations, brief practice, flexible strategies, and interesting problems without timers or placement gates.
 
@@ -138,10 +157,27 @@ Anonymous explorer slots use a picture, color and symbol, with separate full-app
 
 Participation grows an original storm-recovery garden: finishing a walk or adventure, using a new kind of help, or acknowledging an open invitation can bring a plant or decoration. A skipped walk counts equally. Plantings never influence skill suggestions or become learning evidence. Open invitations include the seven areas' wondering prompts, estimates, defendable choices, different rectangles and counterexamples. All paths remain open.
 
+Living Garden, the café and Bramble now offer **Carry an idea here** cards. A finished math task can suggest the same equal-group relationship with different objects, or a neighboring fact. Choosing a card starts a real guest, ribbon puzzle or equal-packs search; waiting work is protected, usual preferences stay unchanged, and each destination records its own actual responses. Source context, help/retries and unknown familiarity remain visible in grown-up notes. The café also offers unscored nature-comparison and reading-evidence conversations. See [spec 31](docs/specs/31-learning-between-games.md).
+
 ## Storm Workshop and connected adventures
 
 Open `#workshop` to investigate the storm-damaged parcel ramp. Choose ramp height or landing surface as the changed variable, hold the other fixed, release the same cart without a push, and step it to the ramp’s foot and stopping point. Six authored configurations each cycle through three illustrative distances. These are model results, not measured physical data or a calibrated physics simulator. The ruler begins at the ramp’s foot; a table and a zero-based 0–30 bar graph show the same distances. Replaying changes no results or run counts.
 
 Predictions and explanations are optional and unscored. Support and separately reported reading stay distinct. Paused trials retain exact settings, phase, result and model revision. Older unsupported models remain closed, readable work. The latest 24 comparisons and 24 completed trial rows per comparison stay local; counters continue after older rows are trimmed. Explorer switching, saving off, notes/export and reset apply as elsewhere.
 
-Open `#explore` for the original connected-adventure directory. Workshop, Water Lab, café, orchard, English Paris and measurement/fractions activities offer contextual links. These are thematic invitations, distinct from Marble’s actual prerequisite links. Navigation preserves waiting activities. [Spec 03](docs/specs/03-storm-workshop.md) records model details, scoped connections and upstream study. [The roadmap](docs/roadmap.md) includes the original Sky Post courier, learning/play centers, earned play credits and a rival-witch practice loop as future work, not current features.
+Open `#explore` for the original connected-adventure directory. Workshop, Water Lab, café, orchard, English Paris and measurement/fractions activities offer contextual links. These are thematic invitations, distinct from Marble’s actual prerequisite links. Navigation preserves waiting activities. [Spec 03](docs/specs/03-storm-workshop.md) records model details, scoped connections and upstream study. [The roadmap](docs/roadmap.md) includes the first Sky Post courier loop at Willow Post Office; girl witch, boy wizard and nonbinary sorcerer presets, a freely available ribbon example and Bramble’s optional rival challenge are implemented. Bramble’s generated challenges are implemented; the six real packing orders remain authored examples. Deliveries are the play; no play-credit gate is planned.
+
+## Willow Post Office and Sky Post
+
+Open `#post` to borrow a broom and take one of six original orders. Pack buns, ribbons, blankets, seed packets, flags or paper stars with pictured addition, subtraction or equal groups. Count the contents or choose Pack together; both keep the adventure open. These are six authored examples, not an adaptive fact library. Write a route by adding Go/Then/There/Give clauses, move or remove lines, and fly one instruction at a time across the four-landmark map. Extra stops are welcome. The courier asks for clarification when a place is missing or a parcel is offered to the wrong person, and stops after a valid handoff. Changing words resets only the route playback, keeping the order, parcel and attempts.
+
+Choose a pictured girl witch (she/her), boy wizard (he/him), nonbinary sorcerer (they/them), or sky rider. Change the portrait or pronouns independently afterward. Courier choices stay local to Post Office; the garden explorer and guide stay independent. Legacy saves without an override retain their explorer portrait. An isolated smaller example, optional prediction and local narration support the delivery. Narration requests never establish listening or independent decoding. Reading reports and support flags remain separate, as do packing attempts and structured-composition checks. No writing, reading level, programming proficiency or multiplication mastery is inferred.
+
+Pending input, bank selection, clauses, helper step, courier position and the frozen request survive pause/reload and explorer switching. Unsupported saves remain exact kept work. Latest 24 visits, 24 packing attempts and 24 route-check snapshots per visit are retained; replays do not add a second completion. Existing save-off, notes/export and reset controls apply. [Spec 02](docs/specs/02-willow-post-office.md) records the reviewed behavior and upstream study. Courier choices and Bramble’s first rival encounter are implemented in [spec 25](docs/specs/25-sky-post.md).
+
+
+Meet **Bramble**, an original girl witch fixing a storm-tangled ribbon gate. Any delivery offers a generated supplies puzzle or a separate pictured example first. Choose mixed parcels, multiplication, addition or subtraction, with all tables 1–12 or a particular multiplication table. All 144 ordered multiplication facts, including 12×12, are available. Bramble mixes useful revisits, familiar patterns and new examples using recent finished rounds; support-heavy play still gets fresh facts. A miss opens the separate stepped example; try again, solve together, or take the quiet route. Your parcel and pending flight instruction stay exactly where you left them. Continuing is manual, and there are no play credits, hearts or timers.
+
+Each encounter freezes its task and keeps raw attempts, support, narration requests and resolution separately from real packing, route checks and reading reports. No independent-recall or mastery inference is added. All phases survive pause/reload, explorer switching and the existing local export/save-off/reset controls. Choose Another challenge without starting a new delivery, including after a parcel has arrived. The previous round is archived once; the latest 96 finished generated rounds are kept in finish order. Next-question preferences never rewrite a pending puzzle. Large arrays stay compact, and multiplication can be built in parts on request. Optional method reports remain separate from support. Existing authored encounters stay valid and are preserved when replaced. See [spec 26](docs/specs/26-bramble-changing-challenges.md).
+
+The Water Lab’s three existing visits now begin with the storm-flooded garden path. They distinguish water flowing downhill, soaking into the ground and evaporating, with a paper recovery-map invitation. The existing close-up molecule pictures explain melting, warming and evaporation; a controllable runoff/drainage investigation remains a roadmap follow-up. No science mission IDs or saved observations change.

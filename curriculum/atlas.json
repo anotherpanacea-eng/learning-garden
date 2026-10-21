@@ -1,0 +1,567 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "https://github.com/withmarbleapp/os-taxonomy",
+    "commit": "96a7933754af672e1bfdbf7ecb05c325860c6e0d",
+    "topics": 1590,
+    "dependencies": 3221,
+    "subjects": 8,
+    "attribution": "Marble Skill Taxonomy (v1) © Generative Spark, Inc. (Marble), https://withmarble.com",
+    "databaseLicense": "ODbL-1.0",
+    "contentLicense": "CC-BY-SA-4.0"
+  },
+  "patterns": [
+    {
+      "id": "search",
+      "name": "Search · inspect · compare",
+      "loop": "Choose where to look, reveal a clue, compare conditions, explain a useful next move.",
+      "existing": [
+        "Living Garden",
+        "Cloud Orchard"
+      ],
+      "spiral": "Habitat need → changed condition → survey/classification → supporting field note.",
+      "limits": "Supplied pictures are not field identification or independent scientific observation."
+    },
+    {
+      "id": "allocate",
+      "name": "Assemble · allocate · check",
+      "loop": "Meet a request with limited materials; count, share, substitute and revise.",
+      "existing": [
+        "Almost-Right Café",
+        "Bramble"
+      ],
+      "spiral": "Equal plates → fractions of a recipe → measured ingredients → prices/change/budgets.",
+      "limits": "Matching pretend food preferences does not assess empathy, nutrition or financial judgment."
+    },
+    {
+      "id": "experiment",
+      "name": "Change · measure · explain",
+      "loop": "Predict, change one thing, run or observe, compare records, explain the limits.",
+      "existing": [
+        "Storm Workshop",
+        "Water Lab explanations"
+      ],
+      "spiral": "Model distance → repeated trials/graphs → water/soil study → energy/sound/light.",
+      "limits": "Water Lab is currently authored explanation/illustration; a controlled runoff experiment is not built. Authored models are not physical measurements."
+    },
+    {
+      "id": "read",
+      "name": "Read · infer · support",
+      "loop": "Read or hear a meaningful message; find the clue, infer a purpose, identify supporting words.",
+      "existing": [
+        "English Paris",
+        "French Paris",
+        "Living Garden notes"
+      ],
+      "spiral": "Explicit note → sequence → inference → compare accounts → evaluate conflicting sources.",
+      "limits": "Comprehension selections, narration and additional-language reading do not establish independent decoding or first-language reading level."
+    },
+    {
+      "id": "compose",
+      "name": "Compose · execute · revise",
+      "loop": "Make a message or sequence, let a reader/runner respond literally, revise for the intended effect.",
+      "existing": [
+        "Willow Post Office"
+      ],
+      "spiral": "Word-card directions → branching instructions → short messages → longer authored explanations.",
+      "limits": "Finite tap-to-compose clauses are distinct from free writing, handwriting and general programming."
+    },
+    {
+      "id": "build",
+      "name": "Build · transform · relate",
+      "loop": "Make an object/model, transform it, connect its representation to a relation or explanation.",
+      "existing": [
+        "Number Garden models",
+        "Multiplication Garden",
+        "Bramble decomposition"
+      ],
+      "spiral": "Counters/bundles → arrays/inverse relations → fractions/area → algebraic structures.",
+      "limits": "A successful answer does not establish recall, fluent calculation or use of an unreported strategy."
+    },
+    {
+      "id": "create",
+      "name": "Create · perform · reflect",
+      "loop": "Make something expressive, try or share it, notice its effect, choose a revision.",
+      "existing": [],
+      "spiral": "Rhythm/shape/voice experiment → a composition → explain or perform a revision.",
+      "limits": "A dedicated creative-performance loop and reviewed sound/phoneme material are not built. Artistic preference and personal reflection are not numeric attainment scores."
+    }
+  ],
+  "domainCandidates": {
+    "Computing / Artificial Intelligence": [
+      "compose",
+      "search",
+      "read"
+    ],
+    "English / English Thinking": [
+      "read",
+      "search"
+    ],
+    "English / Grammar & Punctuation": [
+      "compose",
+      "read"
+    ],
+    "English / Handwriting & Transcription": [
+      "build",
+      "create"
+    ],
+    "English / Phonics & Word Reading": [
+      "build",
+      "create"
+    ],
+    "English / Reading Comprehension": [
+      "read",
+      "search"
+    ],
+    "English / Speaking & Listening": [
+      "read",
+      "create"
+    ],
+    "English / Spelling & Word Study": [
+      "build",
+      "create"
+    ],
+    "English / Vocabulary": [
+      "read",
+      "search"
+    ],
+    "English / Writing Composition": [
+      "compose",
+      "read"
+    ],
+    "History / Ancient Egypt": [
+      "read",
+      "search"
+    ],
+    "History / Ancient Greece & Rome": [
+      "read",
+      "search"
+    ],
+    "History / Historical Thinking": [
+      "read",
+      "search"
+    ],
+    "History / Medieval Times": [
+      "read",
+      "search"
+    ],
+    "Learning to Learn / Learning to Learn": [
+      "experiment",
+      "create"
+    ],
+    "Life Skills / Entrepreneurship": [
+      "allocate",
+      "compose"
+    ],
+    "Life Skills / Money & Finance": [
+      "allocate",
+      "compose"
+    ],
+    "Mathematics / Addition & Subtraction": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Algebra": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Counting & Cardinality": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Data & Statistics": [
+      "experiment",
+      "read"
+    ],
+    "Mathematics / Fractions": [
+      "allocate",
+      "build"
+    ],
+    "Mathematics / Geometry": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Mathematical Thinking": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Measurement": [
+      "allocate",
+      "build"
+    ],
+    "Mathematics / Multiplication & Division": [
+      "allocate",
+      "build"
+    ],
+    "Mathematics / Number Representation & Place Value": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Probability": [
+      "experiment",
+      "read"
+    ],
+    "Mathematics / Ratio & Proportion": [
+      "allocate",
+      "build"
+    ],
+    "Personal & Social Development / Emotional Literacy": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Empathy & Social Awareness": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Friendship & Cooperation": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Responsible Decision-Making": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Self-Awareness": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Self-Regulation & Resilience": [
+      "read",
+      "create"
+    ],
+    "Science / Animals of the World": [
+      "search",
+      "read"
+    ],
+    "Science / Dinosaurs & Paleontology": [
+      "search",
+      "read"
+    ],
+    "Science / Earth's Systems": [
+      "experiment",
+      "build"
+    ],
+    "Science / Ecosystems & Habitats": [
+      "search",
+      "read"
+    ],
+    "Science / Energy": [
+      "experiment",
+      "build"
+    ],
+    "Science / Forces & Motion": [
+      "experiment",
+      "build"
+    ],
+    "Science / Insects & Minibeasts": [
+      "search",
+      "read"
+    ],
+    "Science / Matter & Materials": [
+      "experiment",
+      "build"
+    ],
+    "Science / Ocean Life": [
+      "search",
+      "read"
+    ],
+    "Science / Organisms & Life Processes": [
+      "search",
+      "read"
+    ],
+    "Science / Polar Regions": [
+      "search",
+      "read"
+    ],
+    "Science / Rainforests": [
+      "search",
+      "read"
+    ],
+    "Science / Scientific Inquiry": [
+      "experiment",
+      "build"
+    ],
+    "Science / Space Exploration": [
+      "search",
+      "read"
+    ],
+    "Science / Space Systems & Earth's History": [
+      "search",
+      "read"
+    ],
+    "Science / The Human Body": [
+      "search",
+      "read"
+    ],
+    "Science / Volcanoes & Earthquakes": [
+      "search",
+      "read"
+    ],
+    "Science / Waves, Light & Sound": [
+      "experiment",
+      "build"
+    ],
+    "Science / Weather & Climate": [
+      "experiment",
+      "build"
+    ]
+  },
+  "games": [
+    {
+      "id": "numbers",
+      "name": "Number Garden and open math models",
+      "status": "live",
+      "patterns": [
+        "build",
+        "allocate"
+      ],
+      "route": "#numbers",
+      "scope": "Seven authored math areas with variants, editable models and optional explanations; sparse task evidence stays separate from placement."
+    },
+    {
+      "id": "facts",
+      "name": "Multiplication Garden",
+      "status": "live",
+      "patterns": [
+        "build"
+      ],
+      "route": "#facts",
+      "scope": "Ordered facts through 12×12 with counting, derivation, help and method distinctions; no timing-based recall certification."
+    },
+    {
+      "id": "living",
+      "name": "Living Garden",
+      "status": "live",
+      "patterns": [
+        "search",
+        "read",
+        "build"
+      ],
+      "route": "#living",
+      "scope": "Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained."
+    },
+    {
+      "id": "cafe",
+      "name": "Almost-Right Café",
+      "status": "live",
+      "patterns": [
+        "allocate"
+      ],
+      "route": "#cafe",
+      "scope": "Silly ingredient constraints, equal plates, stock shortfall and real inventory; welcome-back dinner/New Game Plus. No assessed money or empathy curriculum."
+    },
+    {
+      "id": "orchard",
+      "name": "Cloud Orchard and gathering hunts",
+      "status": "live",
+      "patterns": [
+        "search",
+        "allocate"
+      ],
+      "route": "#orchard",
+      "scope": "Find pretend foods using authored clues/row-column hunts and harvest quantities. Not botanical identification."
+    },
+    {
+      "id": "workshop",
+      "name": "Storm Workshop",
+      "status": "live",
+      "patterns": [
+        "experiment"
+      ],
+      "route": "#workshop",
+      "scope": "Controlled ramp/surface model, repeatable authored distances, table and zero-based bars. Not calibrated physics or independent experimental design."
+    },
+    {
+      "id": "water",
+      "name": "Water Lab",
+      "status": "live",
+      "patterns": [
+        "experiment",
+        "read"
+      ],
+      "route": "#science",
+      "scope": "Three authored melting/warming/evaporation missions and molecule pictures tied to the flooded path. Controlled runoff remains planned."
+    },
+    {
+      "id": "post",
+      "name": "Willow Post Office",
+      "status": "live",
+      "patterns": [
+        "compose",
+        "allocate"
+      ],
+      "route": "#post",
+      "scope": "Six authored packing orders, editable literal word-card routes, manual flight, revisions, optional reading reports."
+    },
+    {
+      "id": "bramble",
+      "name": "Bramble’s ribbon gate",
+      "status": "live",
+      "patterns": [
+        "allocate",
+        "build"
+      ],
+      "route": "#post",
+      "scope": "Renewable adaptive +/−/× ribbon tasks, full ordered 12×12 pool, separate examples/decomposition. A component of Post Office, not a separate world."
+    },
+    {
+      "id": "paris",
+      "name": "English Paris",
+      "status": "live",
+      "patterns": [
+        "read",
+        "compose"
+      ],
+      "route": "#paris",
+      "scope": "Authored repeatable stories, vocabulary, sequence, inference and evidence selections, with local support and familiarity distinctions."
+    },
+    {
+      "id": "french",
+      "name": "French Paris",
+      "status": "live",
+      "patterns": [
+        "read",
+        "compose"
+      ],
+      "route": "#french",
+      "scope": "Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization."
+    }
+  ],
+  "manualReferences": [
+    {
+      "game": "living",
+      "topicId": "mt_cM8YS6NXqi",
+      "kind": "scoped-practice",
+      "source": "dist/living-spiral-content.mjs",
+      "scope": "Match a pictured animal need to damp cover or adult-butterfly nectar and reason about an explicit change. Interdependence, full basic-needs coverage and field investigation are not observed."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_Fw0bbM1e_g",
+      "kind": "explanation",
+      "source": "dist/living-spiral-ui.mjs",
+      "scope": "Supplied damp/shelter/nectar definitions and microhabitat conditions; broader biome/habitat vocabulary and independent use are unobserved."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_ppENoD8vf1",
+      "kind": "explanation",
+      "source": "dist/living-spiral-ui.mjs",
+      "scope": "Named original portraits and supplied local microhabitat clues; no independent species identification or plant inventory."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_lp3qyEujIv",
+      "kind": "scoped-practice",
+      "source": "dist/living-adaptive-content.mjs",
+      "scope": "Infer which parcel serves hungry neighbors from its described contents; no independent decoding or general inference assessment."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_S3XMQOYt_D",
+      "kind": "scoped-practice",
+      "source": "dist/living-adaptive-content.mjs",
+      "scope": "Choose a supplied sentence supporting the parcel choice; does not cover author-argument evaluation or the full source topic."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "scoped-practice",
+      "source": "dist/living-adaptive-content.mjs",
+      "scope": "Count equal packs, with pack count and bites per pack each from 1 through 12, using optional help/method report; no full-topic or recall claim."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_xZvDCYA5Ae",
+      "kind": "scoped-practice",
+      "source": "dist/living-adaptive-content.mjs",
+      "scope": "Inverse equal-packs task: given total and unit size, find pack count. Does not cover every unknown position or general division."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "scoped-practice",
+      "source": "dist/cafe-core.mjs",
+      "scope": "Count total bites for equal plates and separately handle cupboard gaps; arithmetic help and skipped tasks remain distinct."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_GRWwTDZ3wD",
+      "kind": "scoped-practice",
+      "source": "dist/post-office-ui.mjs",
+      "scope": "Literal equal-bundle arrays and requested decomposition through 12×12; no general division or independent-recall certification."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "scoped-practice",
+      "source": "dist/post-rival-generator.mjs",
+      "scope": "Generated multiplication examples use equal bundles; addition/subtraction remain their own tasks, not evidence of this topic."
+    }
+  ],
+  "increments": [
+    {
+      "priority": 1,
+      "name": "Word Workshop",
+      "move": "New home; reuse build/read, add carefully reviewed speech/sound representations",
+      "spec": "docs/specs/04-word-workshop.md",
+      "first": "Build and change words, hear reviewed sounds, connect morphology/meaning, then use the word in a purposeful note.",
+      "gap": "Current story comprehension does not teach or assess the missing phonics/decoding/transcription sequence."
+    },
+    {
+      "priority": 2,
+      "name": "Living Garden field notebook and food webs",
+      "move": "Extend search/inspect/compare",
+      "spec": "docs/specs/23-living-garden.md",
+      "first": "Compare organisms and conditions, make a simple food-energy chain, return under changed conditions, keep a table and explanatory note.",
+      "gap": "Current habitat matching omits interdependence, plant needs/growth and extended data collection; later simulations need reviewed assumptions."
+    },
+    {
+      "priority": 3,
+      "name": "Café bakery and market",
+      "move": "Extend assemble/allocate/check",
+      "spec": "atlas proposal",
+      "first": "Split a recipe into equal parts, measure ingredients, then use pretend prices and change.",
+      "gap": "Fractions, units and money need new representations and questions; stock counting alone is not those lessons."
+    },
+    {
+      "priority": 4,
+      "name": "Willow messages and map-making",
+      "move": "Extend compose/execute/revise",
+      "spec": "docs/specs/02-willow-post-office.md",
+      "first": "Write a useful short message, test it with a reader; add a map legend, direction and scale as separately reviewed content.",
+      "gap": "Current word cards do not demonstrate free composition; geography has no dedicated Marble subject heading."
+    },
+    {
+      "priority": 5,
+      "name": "Travelers’ Archive",
+      "move": "New historical evidence game; reuse read/infer/support and search",
+      "spec": "docs/specs/24-travelers-archive.md",
+      "first": "Compare two short accounts or artifacts, place an event on a timeline/map, explain what each source can and cannot tell us.",
+      "gap": "History currently has no declared learning activity references; a story setting alone does not teach historical inquiry."
+    },
+    {
+      "priority": 6,
+      "name": "Sound and Light Studio",
+      "move": "New create/perform/reflect mode, with experiment",
+      "spec": "atlas proposal",
+      "first": "Change a sound or shadow, measure a pattern, make a short rhythm or light composition and revise it.",
+      "gap": "Waves/sound/light and creative music/art need auditory/spatial creation, not only text questions. Recording would need its own privacy decision."
+    },
+    {
+      "priority": 7,
+      "name": "Story Loft and community circle",
+      "move": "New collaborative story/creation home; reuse read/compose/create",
+      "spec": "docs/specs/06-story-loft.md",
+      "first": "Tell or compose a short story, consider two perspectives, rehearse a conversation and choose a revision together.",
+      "gap": "Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices."
+    }
+  ],
+  "extensions": [
+    "Geography and cartography",
+    "Visual art and design",
+    "Music and creative performance",
+    "French and other additional languages"
+  ],
+  "extensionLimit": "Additional subject plans outside the Marble v1 organization; related concepts may already occur within science, history or other source topics. No new nodes or prerequisite edges have been asserted."
+}

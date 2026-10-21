@@ -5,7 +5,7 @@
   "attribution": "Marble Skill Taxonomy (v1) © Generative Spark, Inc. (Marble), https://withmarble.com",
   "databaseLicense": "https://opendatacommons.org/licenses/odbl/1-0/",
   "contentLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "modifications": "Original math focus nodes and direct prerequisites retained. Added limited science, data-display and English activity connections plus direct prerequisites; original thematic bridges are stored separately. Selected age suffixes removed from display names; no age-based placement.",
+  "modifications": "Original 25 math focus nodes and existing science/data/English connections retained. Added two limited Willow Post Office computing/writing connections and their direct prerequisites. Original thematic bridges are stored separately. Selected age suffixes removed from display names; no age-based placement.",
   "topics": [
     {
       "id": "mt_THl9GLxwoL",
@@ -762,6 +762,56 @@
       "focus": false,
       "activityLinked": false,
       "outsidePrerequisites": 3
+    },
+    {
+      "id": "mt_QB4qIGJIIj",
+      "name": "Author's word choices",
+      "description": "Recognise how an author's deliberate choices — of words, structure, tone, and perspective — create particular effects on you as a reader",
+      "domain": "English Thinking",
+      "subject": "English",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 1
+    },
+    {
+      "id": "mt_U_8iVFZuHH",
+      "name": "Reviewing Own Writing",
+      "description": "Evaluate whether your own writing achieves the effect you intended on a reader — go beyond checking for correctness to asking whether it actually works",
+      "domain": "English Thinking",
+      "subject": "English",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_XbGfVhfiUz",
+      "name": "Computers in Everyday Life",
+      "description": "Identifying computers in everyday life — not just laptops but phones, tablets, smart speakers, traffic lights, washing machines; what makes something a computer",
+      "domain": "Artificial Intelligence",
+      "subject": "Computing",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt_Y6P9y1Rz-u",
+      "name": "Understanding Why",
+      "description": "Go beyond knowing *that* something is true — ask *why* it is true and *how* it works",
+      "domain": "Learning to Learn",
+      "subject": "Learning to Learn",
+      "focus": false,
+      "activityLinked": false,
+      "outsidePrerequisites": 0
+    },
+    {
+      "id": "mt__p5n8z5soJ",
+      "name": "Step-by-Step Instructions",
+      "description": "Step-by-step instructions for everyday tasks (making a sandwich, brushing teeth); that if instructions are wrong or missing, things go wrong; computers follow instructions exactly",
+      "domain": "Artificial Intelligence",
+      "subject": "Computing",
+      "focus": false,
+      "activityLinked": true,
+      "outsidePrerequisites": 0
     }
   ],
   "dependencies": [
@@ -1084,6 +1134,12 @@
       "reason": "Skip counting in 2s, 5s, 10s requires fluent rote counting by ones first"
     },
     {
+      "topicId": "mt__p5n8z5soJ",
+      "prerequisiteId": "mt_XbGfVhfiUz",
+      "strength": "hard",
+      "reason": "Must know computers exist before understanding they follow exact instructions"
+    },
+    {
       "topicId": "mt_-p_xp4hMvh",
       "prerequisiteId": "mt_B3W5EfimJw",
       "strength": "hard",
@@ -1124,6 +1180,12 @@
       "prerequisiteId": "mt_zxST3MarI9",
       "strength": "soft",
       "reason": "Explaining why strategies work exercises constructing arguments"
+    },
+    {
+      "topicId": "mt_QB4qIGJIIj",
+      "prerequisiteId": "mt_GugVunb2lI",
+      "strength": "hard",
+      "reason": "Recognising authorial effects requires reading for meaning rather than just decoding — you can only notice the effect of a word choice if you are genuinely engaging with meaning"
     },
     {
       "topicId": "mt_qgb76wHN2X",
@@ -1198,6 +1260,18 @@
       "reason": "General two-digit place value extends from understanding teen number composition"
     },
     {
+      "topicId": "mt_U_8iVFZuHH",
+      "prerequisiteId": "mt_QB4qIGJIIj",
+      "strength": "hard",
+      "reason": "Evaluating whether your own writing creates an intended effect requires first understanding how authors' choices create effects on readers — reading like a writer before writing like a reader"
+    },
+    {
+      "topicId": "mt_U_8iVFZuHH",
+      "prerequisiteId": "mt_Y6P9y1Rz-u",
+      "strength": "soft",
+      "reason": "Evaluating whether your writing works requires asking 'why does this passage succeed or fail?' — the elaborative-interrogation habit applied to your own text"
+    },
+    {
       "topicId": "mt_VhBH8wrFC6",
       "prerequisiteId": "mt_ylXdiVRAYv",
       "strength": "hard",
@@ -1238,6 +1312,12 @@
       "prerequisiteId": "mt_6xNmQLzuqm",
       "strength": "hard",
       "reason": "Must understand unit squares and area concept before measuring by counting"
+    },
+    {
+      "topicId": "mt_Y6P9y1Rz-u",
+      "prerequisiteId": "mt_6eTZUwKQZr",
+      "strength": "hard",
+      "reason": "Asking 'why does this work?' requires first being able to explain what you know — interrogation builds on explanation"
     },
     {
       "topicId": "mt_yGv8doDAmp",

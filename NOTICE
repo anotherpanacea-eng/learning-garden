@@ -5,17 +5,28 @@ Copyright Generative Spark, Inc. (Marble)
 https://github.com/withmarbleapp/os-taxonomy
 Pinned source: 96a7933754af672e1bfdbf7ecb05c325860c6e0d
 
-The database and the subset in dist/marble-map.json are licensed under the
+The database, the subset in dist/marble-map.json, the complete original files
+in curriculum/marble/, and the source-derived mapping database in
+curriculum/atlas.json and curriculum/topic-coverage.csv are licensed under the
 Open Database License (ODbL) 1.0:
 https://opendatacommons.org/licenses/odbl/1-0/
 
-Marble-authored descriptive content, including topic descriptions and
-prerequisite reasons, is licensed under Creative Commons Attribution-ShareAlike
+Marble-authored content, including topic names, descriptions, evidence and
+prerequisite reasons, and source-derived text/tables in curriculum/atlas.json,
+curriculum/topic-coverage.csv and docs/learning-atlas.md are licensed under
+Creative Commons Attribution-ShareAlike
 4.0 International:
 https://creativecommons.org/licenses/by-sa/4.0/
 
-The subset includes 82 topics and 87 relationships. It retains the original
-math slice and adds limited science, data-display and English activity matches
+The complete files preserve 1,590 topics and 3,221 directed prerequisite edges
+unchanged from the pinned source. The source-derived index adds explicit,
+limited activity references and candidate pattern routing; it does not change
+the source graph or assert full-topic teaching/assessment. The original pattern
+descriptions and priority recommendations are project planning. See
+curriculum/README.md for provenance, file boundaries and rebuilding.
+
+The runtime subset includes 87 topics and 92 relationships. It retains the original
+math slice and adds limited science, data-display, English and computing activity matches
 with direct prerequisites. Selection and removal of
 age suffixes from topic names are described in the data and README.md.
 No curriculum standards text is included. The application MIT license does
