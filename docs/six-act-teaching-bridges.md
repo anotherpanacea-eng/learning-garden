@@ -1,0 +1,33 @@
+# Original teaching bridges and topic-to-step authoring checklist
+
+Companion to [spec49](specs/49-six-act-curriculum.md). These are **candidate lesson links**, not authored activities, additions to the Marble graph, proof of learning, or resolved placements for all1,590topics. They seed the crosswalk each selected activity spec must complete. The canonical pathway codes are in [the strand map](six-act-strands.md); numbered steps below refer to named sub-sequences in [the intermediate audit](six-act-math-literacy.md).
+
+A target may need both a content strand and M7 mathematical practices. Selecting rows by owning domain alone misses that. Check actual descriptions and all direct hard prerequisites, plus useful soft links and pedagogical steps absent from the source graph. Record an earlier/same-unit lesson, explicit support or a justified design exception for each required prerequisite. Exceptions never manufacture attainment or waive an indispensable meaning/safety condition.
+
+| Target or case | Candidate teaching steps / additional bridge | Relation and review boundary |
+| --- | --- | --- |
+| `mt_doX1BhmFgk`, `mt_TqDq6jyOmL`: hundredths then decimal equivalents | M3-fractions9 with M1-number10: partition a tenth into ten hundredths, match fraction/grid/line/decimal and contrast unequal decimal lengths | Source descriptions and existing predecessor links; titles alone are misleading. Exact lesson/source coverage still requires review. |
+| `mt_VUQNveSYjQ`: operation inverses | M2-groups4,7,12 and M1-number6: distinguish sharing/grouping, use multiply-back and contextual checking | A prerequisite for later algebra does not mean current café arithmetic already teaches all inverse reasoning. |
+| `mt_i9rJbuFO3p`, `mt_vHzVa3SURC`, `mt_QhFEDyIwSO` | M4-algebra3–7: expression/equation distinction, substitution, equivalent transformations and verification | Source algebra chain. Resolve fractional/signed arithmetic supports before those coefficients are used. |
+| `mt_mqgu72aCMz` simultaneous equations | M4-algebra8–10,13: possible pairs, axes/scales, linear graph meaning, two constraints and substitution check | Optional near-horizon project route. Never a finale gate. Requires source linear-graph and equation predecessors, not just this summary. |
+| `mt_1VmTUxBrNd`, `mt_KB_Czd7RQH` | M5-space12–13 plus M3-ratio7 and M4-algebra11: right-angle/square-area condition, similarity, ratios, formula rearrangement | Pythagoras/trigonometry specialist route. Source ages extend beyond13; actual concepts reviewed before optional use. |
+| `mt_H3ZDK0EYNV` Ohm’s law | S6-IV plus M4-algebra5,7 and unit/ratio teaching: substitute into V=IR; distinguish quantities and solve the requested unknown | **Original instructional bridge**; these maths steps are not all recorded as science source prerequisites. This is not an added Marble edge. |
+| `mt_loEMaQ8kFA` quantitative series/parallel circuits | S6-IV teaches the Ohm/formula bridge before S6-V quantitative rules. Earlier layouts are explicitly qualitative, without claiming this full topic | Source hard dependency on Ohm retained; the former IV-before-V ordering contradiction is corrected. |
+| `mt_DI1cyAyGyN` heating equation | S6-VI specialist work, after M4-algebra5,11, units and meaningful temperature change | **Original instructional bridge** for Q=mcΔT: model quantities/assumptions and units before manipulation. Not a requirement for a supported finale. |
+| ActIII route tools | M3-III introduces ratio/difference/unit rate; M5-III teaches map scale, coordinates and unit relationships; M3-ratio1–4 and M5-space2–3,8–9 | Teach before relying on it in a journey, or supply explicit accessible support. Noninteger similarity and general proportional models remain later developments. |
+| ActII whole batches | M2-groups1,3,5; M3-fractions1–2: one supplied whole batch versus two/three copies; distinguish additive guest change from number of equivalent batches | Bounded teaching proposal; no fractional batches, arbitrary4→6scaling, unit-rate or full Ratio & Proportion claim. |
+| M7 content-specific META targets | `mt_3VmBdlAeOZ`, `mt_CUmjcE7W6c`, `mt_dXq9VWm31W`, `mt_hlGKg5M7qJ`, `mt_9KmVWCuh5_` need selected M3/M4 representations as well as M7-practices2–6 | Recurrent representation/structure goals, not duplicate basic fraction lessons. `mt_HY8Yycu_rz` actually concerns precise mathematical communication; read the description instead of treating its title as fraction magnitude. |
+| `mt_dRLP8g0SAg`, `mt_curkA82CmO`, `mt_Qcsl1Z1x0l` | E3-reading5,11–12 with E4-writing9: relevant notes, summary/précis, paraphrase/quotation, synthesis and source list | Source research chain plus the original cross-strand reading/composition bridge. Source-selection choices alone do not teach the process. |
+| Original handwriting/keyboarding and oral work | E1-transcription1–4 and E5-speaking1–7, plus separately reviewed keyboarding extension | Human/offscreen observation may remain unrecorded. A screen click, adult report or dictated passage never becomes a different kind of independent evidence. |
+
+## Extension inventory to author
+
+The programme names French, cartography/geography, music, visual art, keyboarding/older transcription and broader programming as original extensions. Their complete topic inventories do not exist yet. Each selected extension pack must author its concepts, prerequisites, modes, sources and limits before claiming coverage. Related Marble references remain scoped; no new IDs or source edges are invented.
+
+## Specialist knowledge packs to author
+
+The map includes83civilisation-history topics (Egypt29, Greece/Rome29, Medieval25),77biome/ocean topics (Ocean27, Polar25, Rainforests25), and71deep-time/space topics (Dinosaurs29, Space Exploration26, Space Systems/Earth History16). These are explicit knowledge-pack workloads, not completed packs or merely decorative story settings. Each must be split into reviewed coherent units and source-topic lesson links; a broad family heading is insufficient. Other science domains retain the same requirement.
+
+This checklist is intentionally incomplete at topic-level: all1,590reviewed topic-to-specific-step placements remain to be made in selected-unit specs. It records concrete cross-strand omissions now instead of hiding them. The unchanged original dependencies remain authoritative for source relations, while these original teaching suggestions stay separate.
+
+Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://withmarble.com. Source-derived names and relationships retain ODbL1.0 / CC-BY-SA4.0 under [NOTICE](../NOTICE). Original teaching bridges do not modify the licensed source graph.

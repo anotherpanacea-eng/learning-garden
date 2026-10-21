@@ -14,9 +14,13 @@ Every numbered item below is a small instructional transition, generally requiri
 
 Act shorthand: I Recovery; II A Town of Our Own; III Beyond Willow Bridge; IV The Town Has Two Stories; V A Question of Your Own; VI Opening of the Ways. Timing is proposed, not mandated.
 
+## Canonical strand codes
+
+The [26-pathway map](six-act-strands.md) owns the canonical codes used in the topic ledger. Named sub-sequences here inherit that code: M1-number/M1-signed→M1; M2-groups→M2; M3-fractions/M3-ratio→M3; M4-algebra→M4; M5-space→M5; M6-data→M6; M7-practices→M7; E1-code/E1-transcription→E1; E2-vocabulary/E2-grammar→E2; E3-reading→E3; E4-writing→E4; E5-speaking→E5. A numbered item is a teaching transition within that named sub-sequence, not a source-topic placement or child level.
+
 ## Mathematics
 
-### M1. Number, place value and calculation choices — mostly I–III, continued IV–V
+### M1-number. Number, place value and calculation choices — mostly I–III, continued IV–V
 
 Current foothold: bundles/three-digit tasks and within20 add/subtract; not a full sequence or full place-value/column-method coverage.
 
@@ -36,7 +40,7 @@ Current foothold: bundles/three-digit tasks and within20 add/subtract; not a ful
 
 Homes: storehouse bundling bench, café till, recipe bench, courier time/length records. Roman numerals can be a history-linked notation contrast, not a required gateway to decimal calculation.
 
-### M2. Multiplication, division and arithmetic structure — I–III, then revisited
+### M2-groups. Multiplication, division and arithmetic structure — I–III, then revisited
 
 Current foothold: full ordered12×12 practice, arrays/decomposition, same-quantities/different-unknown benches. This supplies neither written algorithms nor all multiplication/division meanings.
 
@@ -55,7 +59,7 @@ Current foothold: full ordered12×12 practice, arrays/decomposition, same-quanti
 
 Homes: café packing station, delivery manifest, Bramble rule challenge, modular workshop. Need explicit zero, one and division-by-zero exclusions; fact selection limited to1–12 does not teach them.
 
-### M3. Fractions, decimals and percentages — II–IV, revisited V–VI
+### M3-fractions. Fractions, decimals and percentages — II–IV, revisited V–VI
 
 Current foothold: Sharing Counter halves/quarters/same whole and set-of12, early Number Garden fractions, measuring in50mL units. A substantial bridge remains.
 
@@ -77,7 +81,7 @@ Current foothold: Sharing Counter halves/quarters/same whole and set-of12, early
 
 Homes: café portions→recipes→supply comparisons, Garden area/seed rates, post baggage proportions. Need models with thirds/fifths/eighths/etc., not only halves/quarters and money.
 
-### M4. Ratio, rate and proportional reasoning — III–V
+### M3-ratio. Ratio, rate and proportional reasoning — III–V
 
 1. Distinguish part:part from part:whole; keep the referent and order visible.
 2. Equivalent ratios by scaling both quantities; additive versus multiplicative continuation contrasted.
@@ -92,7 +96,7 @@ Homes: café portions→recipes→supply comparisons, Garden area/seed rates, po
 
 Homes: supplier counter, Cartographer's Table and journey planner. Not built by merely scaling number of café guests.
 
-### M5. Early algebra to symbolic relationships — II–V, optional VI stretch
+### M4-algebra. Early algebra to symbolic relationships — II–V, optional VI stretch
 
 1. Equality as same value, including8=5+3 and balanced unknowns; not an instruction to write an answer on the right.
 2. Describe a pattern; term-to-term rule versus position-to-term rule; several continuations can fit a finite beginning without a supplied generating rule.
@@ -111,7 +115,7 @@ Homes: supplier counter, Cartographer's Table and journey planner. Not built by 
 
 Homes: Bramble becomes a rule tester; café pricing and package constraints, delivery schedules, garden designs. Each symbolic transition needs its own teachable representation; a game that lets the child guess a rule is not full algebra instruction.
 
-### M6. Signed numbers, powers and numerical generalisation — III–V
+### M1-signed. Signed numbers, powers and numerical generalisation — III–V
 
 1. Negative positions/quantities relative to a chosen zero; order them on a number line.
 2. Distance between signed positions versus signed change; crossing zero; absolute magnitude versus numerical order.
@@ -121,7 +125,7 @@ Homes: Bramble becomes a rule tester; café pricing and package constraints, del
 
 Source gap to audit: sign-rule node has hard prerequisite positive/negative-number node whose description is contextual quantities, not complete signed addition/subtraction. Graph reachability does not prove pedagogical sufficiency.
 
-### M7. Geometry, measurement, space and time — I–V, optional VI stretch
+### M5-space. Geometry, measurement, space and time — I–V, optional VI stretch
 
 1. Attribute and unit: length versus area versus capacity/volume versus mass; direct comparison, repeated nonstandard then standard units; no gaps/overlaps.
 2. Align ruler zero and read intervals, including shifted/nonzero starts; estimate then measure, choose tool/unit, state limits of supplied digital model versus actual measurement.
@@ -139,7 +143,7 @@ Source gap to audit: sign-rule node has hard prerequisite positive/negative-numb
 
 Homes: Cartographer's Table, Workshop, garden layout, stage design. Current small shape/measurement checks should remain narrow footholds.
 
-### M8. Data, statistics and probability — II–V
+### M6-data. Data, statistics and probability — II–V
 
 1. Form a question; choose what to observe/count, define category/unit, and distinguish sample from population and missing from zero.
 2. Tally/table/pictogram/bar chart with one unit then chosen scales; frequency and individual measurement are different quantities.
@@ -155,9 +159,20 @@ Homes: Cartographer's Table, Workshop, garden layout, stage design. Current smal
 
 Homes: Field Notebook becomes genuine investigation notebook, chance stall at market, courier reliability models. Current fixed-scale chart source matching is only a subset of steps2–3.
 
+### M7-practices. Reasoning across content — I–VI
+
+1. Say what quantities, units and representations refer to; distinguish an answer from a reason.
+2. Move between objects, diagrams, words and equations while preserving their meaning.
+3. Choose a strategy, estimate, check and explain a revision.
+4. Use repeated reasoning to propose a generalisation and test a counterexample.
+5. Compare arguments, assumptions and representation limits; justify a claim.
+6. Select useful models in a new situation and explain what the result means.
+
+These recurrent META targets also need content-specific lessons. A fraction-related M7 record must be considered alongside M3, not lost when filtering domains. See the [original bridge checklist](six-act-teaching-bridges.md).
+
 ## English / literacy
 
-### E1. Decoding, spelling and word structure — independent foundation door I–III; complex vocabulary later
+### E1-code. Decoding, spelling and word structure — independent foundation door I–III; complex vocabulary later
 
 Current Word Garden morphology/novel word play is valuable; it is not systematic phonics, encoding or conventional-spelling instruction. All source English phonics nodes start beforeage8, so age-only filtering would erase an entire potentially needed strand.
 
@@ -173,7 +188,7 @@ Current Word Garden morphology/novel word play is valuable; it is not systematic
 
 Homes: Word Workshop separate short lessons, library with matched tiny stories, Post Office words needed in an actual letter. Needs reviewed human-quality phoneme audio; ordinary full-text TTS is insufficient for clean isolated sound instruction. No speech-recognition reading-level claims.
 
-### E2. Vocabulary, semantics and register — I–V
+### E2-vocabulary. Vocabulary, semantics and register — I–V
 
 1. Word meaning in concrete context, categories/attributes, precise definitions and multiple meanings.
 2. Contrast related words and intensity; select for intended meaning rather than simply longer words.
@@ -183,7 +198,7 @@ Homes: Word Workshop separate short lessons, library with matched tiny stories, 
 6. Register/dialect/audience choices; everyday language varieties are not mistakes. Teach formal English as an additional contextual resource.
 7. Thesaurus/dictionary choices verified against sentence meaning; discuss uncertain/partial knowledge and refine it.
 
-### E3. Grammar, sentence construction and punctuation — II–V
+### E2-grammar. Grammar, sentence construction and punctuation — II–V
 
 1. Complete thought/main clause, subject/verb, sentence boundaries; intentional fragment in art versus accidental unclear fragment.
 2. Word classes in actual sentences and how changing noun/verb/adjective/adverb affects meaning; determiners and prepositions.
@@ -198,7 +213,7 @@ Homes: Word Workshop separate short lessons, library with matched tiny stories, 
 
 Home: a sentence laboratory inside Post Office/Story Loft, reader-specific revision, Archive reporting. Current supplied-card reader challenges are a start at reference/audience, not full sentence construction.
 
-### E4. Reading comprehension and literature — I–V
+### E3-reading. Reading comprehension and literature — I–V
 
 1. Maintain separate pathways for listening comprehension and independent word reading; provide rich read-aloud material while decoding develops.
 2. Retrieve explicit details and track who/what/where/time; sequence events and causal versus merely temporal connections.
@@ -215,7 +230,7 @@ Home: a sentence laboratory inside Post Office/Story Loft, reader-specific revis
 
 Homes: English Paris, town library, Archive, Story Loft plays. Need substantial commissioned/licensed/original texts and optional external reading guides; narrative length, vocabulary load, background knowledge and inferential demand vary independently.
 
-### E5. Composition and revision — I–V
+### E4-writing. Composition and revision — I–V
 
 1. Oral rehearsal, drawing/dictating/writing routes; sentence-level idea to purposeful brief text. Input method is distinct from quality of ideas.
 2. Audience/purpose and reader knowledge; compose instructions/recount/message/opinion/explanation, preserving author's intention.
@@ -231,7 +246,7 @@ Homes: English Paris, town library, Archive, Story Loft plays. Need substantial 
 
 Homes: Post Office to Story Loft to newspaper/Archive; town debates and learner-owned project publication. Automatic feedback can test explicit constraints and supplied alternatives; it cannot certify open argument/artistic success.
 
-### E6. Transcription, handwriting and keyboard fluency — independent pathway II–V
+### E1-transcription. Transcription, handwriting and keyboard fluency — independent pathway II–V
 
 1. Optional comfortable tool use/legible letter and digit formation/spacing; paper or stylus requires adult observation, not pretend measurement from mouse taps.
 2. Sustained fluent transcription, useful letter joining only where appropriate; dictated known material isolates spelling/transcription load from composition.
@@ -240,7 +255,7 @@ Homes: Post Office to Story Loft to newspaper/Archive; town debates and learner-
 
 The pinned taxonomy has only five handwriting/transcription nodes, largely early formation/joining; keyboarding and older-child transcription stamina need explicit original extensions or reviewed external pathways.
 
-### E7. Speaking, listening, discussion and performance — I–VI
+### E5-speaking. Speaking, listening, discussion and performance — I–VI
 
 1. Ask/clarify, listen/take turns and retell what another said; practice with a real partner where possible.
 2. Give organized descriptions/instructions/explanations and monitor listener understanding; reader-response puppet is a narrow simulation, not evidence of interpersonal listening.

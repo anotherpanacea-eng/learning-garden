@@ -81,7 +81,7 @@ Owns 118 source topics; descriptions and exact lesson placements require review.
 Owns 57 source topics; descriptions and exact lesson placements require review. Each `M2-<act>` below is an authoring family, not an activity ID.
 
 - **M2-I:** Equal groups and both division meanings; factor roles.
-- **M2-II:** Full12x12 practice; remainders with context; arrays to distributivity.
+- **M2-II:** Full12x12 practice; remainders with context; arrays to distributivity; additive versus multiplicative comparison with complete batch copies.
 - **M2-III:** Factors, multiples, primes; written multi-digit operations.
 - **M2-IV:** Decimal multiplication/division; signs; order of operations.
 - **M2-V:** Choose efficient methods; inverse reasoning in constraints.
@@ -93,8 +93,8 @@ Owns 85 source topics; descriptions and exact lesson placements require review. 
 
 - **M3-I:** Equal shares, same whole, unit fractions of shape/set.
 - **M3-II:** Number-line fractions; equivalence; compare; tenths/hundredths.
-- **M3-III:** Mixed/improper; unlike-denominator add/subtract; decimal percent links.
-- **M3-IV:** Fraction multiplication/division and scaling; ratio vs difference; unit rate.
+- **M3-III:** Mixed/improper; unlike-denominator add/subtract; decimal percent links; introduce ratio versus difference and unit rate before journey tools rely on them.
+- **M3-IV:** Fraction multiplication/division and scaling; revisit ratio versus difference, unit rate and noninteger scale factors.
 - **M3-V:** Direct/inverse proportion; similarity; percentage change; compound units.
 - **M3-VI:** Defend scaling and allocation models; retain unit and whole.
 
@@ -115,7 +115,7 @@ Owns 137 source topics; descriptions and exact lesson placements require review.
 
 - **M5-I:** Position/turns; compare and measure lengths/capacity; shapes.
 - **M5-II:** Time/money; units; perimeter/area; symmetry and properties.
-- **M5-III:** Coordinates, transformations, angles; conversion; compound area.
+- **M5-III:** Coordinates, transformations, angles; conversion; compound area; teach simple map scale with whole-number unit relationships before route planning.
 - **M5-IV:** Nets and volume; constructions; similarity and scale maps.
 - **M5-V:** Circle measures; Pythagoras where supported; surveying.
 - **M5-VI:** Navigation/engineering plans; trigonometry optional specialist extension.
@@ -259,8 +259,8 @@ Owns 80 source topics; descriptions and exact lesson placements require review. 
 - **S6-I:** Push/pull; ramps; shadows; sound comparisons and simple circuits.
 - **S6-II:** Friction/magnets; light/reflection; pitch vs loudness; circuit behaviour.
 - **S6-III:** Forces diagrams; speed-time; mechanisms; stores/transfers and sound propagation.
-- **S6-IV:** Balanced/resultant forces; series/parallel; current/voltage; ray diagrams.
-- **S6-V:** Quantitative forces/work/efficiency, Ohm/power; wave properties and refraction.
+- **S6-IV:** Balanced/resultant forces; qualitative circuit layouts and current/voltage pictures; introduce Ohm’s law with substitution/equation support before quantitative circuit rules; ray diagrams with their own prerequisite lessons.
+- **S6-V:** Quantitative forces/work/efficiency and power; quantitative series/parallel rules after the Ohm/formula bridge; wave properties and refraction.
 - **S6-VI:** Defend an engineered system; advanced motors/thermal equations optional specialists.
 
 ### S7: Earth, water, weather and hazards
@@ -358,6 +358,8 @@ Owns 88 source topics; descriptions and exact lesson placements require review. 
 | French | Familiar words/phrases → purposeful short sentences → linked accounts/instructions → tense/reference and paragraph links → perspectives and explanations → supported research, correspondence or performance | Paris/post/library. Language load chosen separately from interest and mathematical/scientific depth; review French content and pronunciation independently. No English-to-French proficiency inference. |
 | Cartography / geography | Position/landmarks/legend → plans and compass directions → coordinates/distance/scale → land use and different map purposes → regional connections/environmental evidence → justified route/exchange plan | Cartographer’s Table. Related maths/history nodes are scoped separately; not a claim of a complete geography curriculum. |
 | Music / sound creation | Sound/rest and ordered patterns → repeat/contrast and pulse → duration/rhythm and phrase → texture/dynamics/timbre in reviewed models → composition/performance/revision → purposeful community performance | Bell Studio is an unpublished foothold, not reviewed phonics, real-bell timbre or musical proficiency. New sound modes need their own content/audio QA. |
+| Keyboarding and older transcription | Cursor/selection and accessible input → fluent accurate editing → notes and paragraph tools → drafting/revision stamina → appropriate tool choice → sustained project production | Original extension supporting E1; physical handwriting and composition remain separate observations, never a story gate. |
+| Programming beyond AI literacy | Explicit sequence → input/output/state → selection/repetition → decomposition/debugging → functions and tests → a purposeful small program | Original extension beyond the pinned AI domain; source C1 topics do not constitute a complete computing curriculum. |
 | Visual art / design | Observe/mark/shape → color/material/texture → composition and spatial representation → compare artists/intentions → develop/test/revise a design → exhibit and explain choices | Original or licensed art and human response; artistic quality is not a literal-match score. |
 
 ## Explicit small lessons and difficult bridges
@@ -387,3 +389,7 @@ Every implemented unit must list its source-topic targets and exact teaching, co
 ## Attribution
 
 Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://withmarble.com. Pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. Source-derived names/mappings remain ODbL1.0 database / CC-BY-SA4.0 content under [NOTICE](../NOTICE); original story and teaching proposals are project planning. No new Jane code or prose is copied.
+
+## Cross-strand authoring
+
+Use [the bridge checklist](six-act-teaching-bridges.md) as well as source edges. Domain ownership is not a complete content classification: M7 practice records may need M3 fraction representations, and science formulas may require M4 substitution/rearrangement. Search actual source descriptions across strands when selecting a unit. No act’s main tool may rely on a conceptual operation before that operation is taught inline or supplied as explicit support.
