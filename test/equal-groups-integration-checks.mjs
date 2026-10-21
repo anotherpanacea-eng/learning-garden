@@ -27,6 +27,7 @@ for(const place of ['cafe','bramble'])for(const c of GROUP_CASES)for(const unkno
  for(const given of q.givens)ok(html.includes(`<dd>${given.value}</dd>`),'only given ticket values rendered');
  ok(!html.includes(`<dd>${q.answer}</dd>`)||q.givens.some(g=>g.value===q.answer),'unknown value is not a ticket answer');
  eq(json(equalGroupPairsShown(s,place)),json([[c.groups,c.each]]),'current model exposes its real ordered pair');
+ {const t=fresh();chooseGroupCase(t,place,c.id);useGroupSupport(t,place,'together');ok(equalGroupsPage(t,place).includes('class="eg-help" open'),'together help keeps its panel open');}
  useGroupSupport(s,place,'example');ok(equalGroupsPage(s,place).includes('class="eg-help" open'),'worked example opens visibly');eq(json(equalGroupPairsShown(s,place)),json([[c.groups,c.each],[2,3]]),'worked example has its own exposure');
  setGroupInput(s,place,String(q.answer));submitGroupAnswer(s,place);ok(equalGroupsPage(s,place).includes('number fits'),'number match is distinct from an unfinished arrangement');
  const copied=restoreState(json(s));initializeExplorerState(copied);eq(json(copied.equalGroups),json(s.equalGroups),'save/restore keeps actual selection and model');
