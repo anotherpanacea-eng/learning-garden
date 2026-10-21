@@ -160,3 +160,7 @@ The continuing letter round is implemented in [spec 40](specs/40-changing-letter
 ### Bell Studio: next experience loop, draft only
 
 [Spec 48](specs/48-bell-studio.md) has independently reviewed local content, state transitions, silent composition pictures and a bounded explicit-play tone adapter. Four invitations connect a café gathering, delivery arrival, garden return and an original call. This branch is **not live**. App route, raw progress transfer/notes, entry links and audio stop boundaries are now integrated and independently reviewed. Root browser checks cover composition, versions, keeping, explicit scheduled Play/Stop and narrow controls. Human listening and the remaining browser/device checks are still pending; scheduling does not establish audibility or iPad compatibility.
+
+## Six-act programme: narrative and intermediate instruction
+
+[Spec 49](specs/49-six-act-curriculum.md) proposes recovery → town-making → wider connections → evidence/disagreement → learner-originated projects → Opening of the Ways. A full topic inventory and 26 longitudinal teaching pathways expose the missing middle, including explicit foundations and specialist/offscreen work. This is programme planning, not a complete authored curriculum or permission to implement all acts. Every activity still needs a bounded reviewed spec; story destinations remain open. See the spec’s independent Claude review receipt for current clearance.
