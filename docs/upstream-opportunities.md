@@ -92,3 +92,7 @@ Primary science references are listed in [spec 41](specs/41-plant-investigation.
 ## The Measuring Kitchen — 2026-10-21
 
 [Spec 45](specs/45-measuring-recipes.md) studies Jane `7802588313e6c6edc57432df398d9f3ddb9ff938` and Marble `95e6dddef0a6a0af9ed973a3e3fd5f35da00a733`. Reviewed capacity/volume/measure-calculation descriptions support three narrow picture-practice references; the bundled graph stays pinned. Jane small purposeful tasks and separate examples are design references only. Official Common Core and Oak millilitre/capacity lessons inform equal-interval and maximum-versus-current distinctions; no lesson text, diagrams or code are copied. No physical measuring competence, mass/conversion scope or unrelated multiplication exposure follows.
+
+## Travelers’ Archive — 2026-10-21
+
+[Spec 46](specs/46-travelers-archive-first-visit.md) studies Jane `7802588313e6c6edc57432df398d9f3ddb9ff938` and Marble `95e6dddef0a6a0af9ed973a3e3fd5f35da00a733`. Finite ordering/source items and stable tasks are design references; no Jane code or lesson prose is copied. Four reviewed historical-source descriptions support narrow activity references, with the bundled graph unchanged. The exact PH8646 hero image is reused under its catalogue’s CC0 label, credited beside the image. Archives de Paris facts are expressed in original summaries; its PDF layout/prose/assets are not copied. Full source/rights/date distinctions are in spec 46 and content metadata.

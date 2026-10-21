@@ -135,3 +135,7 @@ The continuing letter round is implemented in [spec 40](specs/40-changing-letter
 ### The Measuring Kitchen: fill, read, pour, revise
 
 [Spec 45](specs/45-measuring-recipes.md) adds six fictional community-dinner cards, exact graduated jug/jar pictures and reversible 50 mL transfers. Numeric scale reading, unit naming, ingredient fit and readiness are separate. Exact pending entries and frozen keeps remain local. Future contrasts include measured half/double batches, litre equivalents and different container widths; mass, actual cooking and practical physical measuring are not built.
+
+### Travelers’ Archive: a picture, dates and a careful reply
+
+[Spec 46](specs/46-travelers-archive-first-visit.md) implements the first bounded archive visit from spec 24: one CC0 historical photograph, original modern chronology summaries, a non-metric place schematic, ordinal ordering and source-scope questions. Original replies are optional and ungraded. Known object production dates do not become precise scene dates. Further settings, broader chronology and a French-authored pack remain future work.

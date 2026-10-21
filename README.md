@@ -59,6 +59,9 @@ node test/rain-paths-checks.mjs
 node test/rain-paths-integration-checks.mjs
 node test/measuring-recipes-checks.mjs
 node test/measuring-recipes-integration-checks.mjs
+node test/travelers-archive-checks.mjs
+node test/travelers-archive-ui-checks.mjs
+node test/travelers-archive-integration-checks.mjs
 node test/plant-study-checks.mjs
 node test/plant-study-integration-checks.mjs
 node test/letter-trail-checks.mjs
@@ -272,3 +275,7 @@ Trying cards is exploration. Only explicitly keeping a supplied version contribu
 ## The Measuring Kitchen
 
 [Prepare a measured dinner tray](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/recipes) with a graduated 500 mL jug,50 mL fills and two separate fictional ingredients. Six cards invite filling, reading, pouring and correcting. An accurate reading of an overfilled portion stays accurate; units, recipe fit and an empty jug are checked separately. Every portion can be returned, and unfinished trays can be kept without changing café orders or stock. [Spec 45](docs/specs/45-measuring-recipes.md).
+
+## Travelers’ Archive
+
+[Open a Paris archive parcel](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive): inspect a real, credited CC0 photograph from the 1910 Seine flood, place evidence on an original schematic, order three dated events, and compare a picture with modern chronology summaries. Prepared replies distinguish evidence from missing information; optional original writing is local, exact and ungraded. One bounded visit, open to revisit; no independent history/reading-level or French-proficiency claim. [Spec 46](docs/specs/46-travelers-archive-first-visit.md).
