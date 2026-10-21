@@ -102,10 +102,18 @@ Concrete acceptance:
 
 Deliver a reviewed draft stacked on the current build branch, publish only reviewed committed static assets to the existing personal Cloudflare game, and retain the current unmerged stack. No merge, recordings, remote media service or new publication channel is implied.
 
-## Current delivery status
+## Implementation and release verification
 
-The specification, content/core, finite audio adapter, UI/art/CSS and application integration received independent review. The app now includes the studio route, purposeful entries, raw progress transfer/recovery, escaped notes and a lazy shared player. Stop hooks cover edits, pages/routes, explorers/import/reset, films, narration and hidden-page lifecycle. The film regression fixture additionally verifies Bell stops before narration and frame construction.
+The specification, content/core, finite audio adapter, UI/art/CSS and application integration received independent review. The app includes the studio route, purposeful entries, raw progress transfer/recovery, escaped notes and a lazy shared player. Stop hooks cover edits, pages/routes, explorers/import/reset, films, narration and hidden-page lifecycle. The film regression fixture verifies Bell stops before narration and frame construction.
 
-Core512, audio218 and UI157 checks pass. Across the final candidate, all 67 scripts pass after updating the isolated film fixture for the new stop hook. Root synthetic browser checks cover five-slot composition, saved before-version versus revision, model pitch response, draft keeping, explicit scheduled Play/Stop and page-change behavior, plus a narrow layout with 44px controls and no page-wide overflow. Playback scheduling is observed; actual audibility is not established by that status.
+The review follow-up separates narration, sounding-tone requests and explicit pair-audio requests; rest-only playback does not claim a tone request. Earlier generic audio-request flags are retained rather than retroactively reclassified. Moving/removing slots keeps keyboard focus near the edited composition. Core529, audio222 and UI168 targeted checks pass; the complete candidate still requires the final full-suite run and exact-head Claude follow-up before merge/publication.
 
-**Bell Studio remains a draft, not a live game.** Additional browser checks now confirm narration stops the tone player, keeps survive reload, and separate explorers retain separate calls. Before publishing, finish a human low-volume listening check and browser unavailable-audio fallback check. Physical iPad Safari, individual hearing/perception and learning gains remain unverified. The current live release ends with Rain Paths charts; no Bell assets are deployed.
+Root synthetic browser checks cover composition, before-version versus revision, model pitch response, keeping and reload, explorer separation, explicit scheduled Play/Stop, narration exclusion and narrow targets. A separate temporary browser fixture deliberately rejects audio construction and verifies the unavailable-sound message, continued editing and keeping. That fixture is outside committed assets and is excluded from deployment.
+
+### Apple media routing
+
+A supported `navigator.audioSession.type = 'playback'` hint is requested only when sound is explicitly started, before constructing an AudioContext. The four story films use the same hint when sound joins; silent autoplay never requests it, and turning sound on still joins at the current picture. Unsupported or throwing implementations fall back to the existing browser behavior. This does not request a microphone or alter device settings.
+
+[WebKit issue237322](https://bugs.webkit.org/show_bug.cgi?id=237322), resolved by a WebKit engineer, documents Web Audio's ambient default following Silent Mode and the playback setting available since iOS17. This is a platform-based repair, not an observed iPhone/iPad result. Actual audibility, hardware volume routing, physical iPad Safari, hearing/perception and learning gains remain unverified. Playback media can pause other media on the device; the existing explicit-play and stop-on-hide boundaries remain in effect.
+
+The user explicitly authorized merging PR26/27 into their existing stack and deploying their cleared combined static assets. Other PRs are not thereby authorized for merge. Release completion and the deployed version belong in the PR receipt after final verification.

@@ -40,6 +40,8 @@ export function createBellPlayer(options={}){
   if(active!==run)return {status:'cancelled'};
   let offset=0;
   if(plan.hasSound){
+   // WebKit otherwise treats Web Audio as ambient sound tied to Silent Mode.
+   try{if(globalThis.navigator?.audioSession)globalThis.navigator.audioSession.type='playback';}catch{}
    try{
     if(typeof Audio!=='function')throw new Error('audio-unavailable');
     if(!context||context.state==='closed')context=new Audio();
