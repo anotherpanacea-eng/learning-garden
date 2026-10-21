@@ -20,7 +20,9 @@ export function sharingAssessment(c,m){
 }
 // Saved copies keep their own wording; only the request's arithmetic must still match, so a copy edit cannot lock saved work.
 const SEMANTIC=['id','modelId','kind','family','shares','packed','target','whole','initialModel'],sourceValid=(c,s)=>object(s)&&SEMANTIC.every(k=>same(s[k],c[k]));
-function snapshotValid(c,s){return keys(s,['source','model','assessment','support','familiar','practice','visual'])&&sourceValid(c,s.source)&&modelValid(c,s.model)&&same(s.assessment,sharingAssessment(c,s.model))&&supportValid(s.support)&&typeof s.familiar==='boolean'&&s.practice===true&&s.visual===true;}
+// Saved results are checked for their counts and outcomes, not re-graded, so changing how results are computed or shaped cannot lock saved work.
+const assessmentValid=a=>object(a)&&integer(a.shareCount,12)&&integer(a.selectedCount,12)&&['shareCountFit','equalSizes','allAccounted','portionFit','fit'].every(k=>typeof a[k]==='boolean');
+function snapshotValid(c,s){return keys(s,['source','model','assessment','support','familiar','practice','visual'])&&sourceValid(c,s.source)&&modelValid(c,s.model)&&assessmentValid(s.assessment)&&supportValid(s.support)&&typeof s.familiar==='boolean'&&s.practice===true&&s.visual===true;}
 function keptValid(c,s){return keys(s,['source','model','assessment','support','familiar','practice','visual'],['latestCheck'])&&snapshotValid(c,Object.fromEntries(Object.entries(s).filter(([k])=>k!=='latestCheck')))&&(!Object.hasOwn(s,'latestCheck')||snapshotValid(c,s.latestCheck));}
 const MESSAGES=['','cuts-returned','partition-returned','groups-returned','checked'];
 function workValid(c,w){return keys(w,['source','model','support','seen','familiar','exampleStep','checks','kept','message'])&&sourceValid(c,w.source)&&modelValid(c,w.model)&&supportValid(w.support)&&w.seen===true&&typeof w.familiar==='boolean'&&(w.exampleStep===null||integer(w.exampleStep,2))&&(w.exampleStep===null||w.support.workedExample===true||w.support.equivalence===true)&&Array.isArray(w.checks)&&w.checks.length<=24&&w.checks.every(s=>snapshotValid(c,s))&&(w.kept===null||keptValid(c,w.kept))&&MESSAGES.includes(w.message)&&(w.message!=='checked'||w.checks.length>0&&same(w.checks.at(-1).source,w.source)&&same(w.checks.at(-1).model,w.model));}
@@ -29,7 +31,7 @@ const fresh=()=>({version:1,currentCase:null,page:'choose',cases:{}});
 // Validation and views do not attach a root, record an answer or register exposure.
 export function sharingState(state){return state.sharingCounter===undefined?fresh():valid(state.sharingCounter)?state.sharingCounter:null;}
 export function ensureSharing(state){if(state.sharingCounter===undefined)state.sharingCounter=fresh();return sharingState(state);}
-export function recoverSharing(state){if(state.sharingCounter===undefined||sharingState(state))return false;const original=state.sharingCounter;state.sharingCounter={...fresh(),recovered:original};return true;}
+export function recoverSharing(state){if(state.sharingCounter===undefined||sharingState(state))return false;const original=state.sharingCounter,cases=Object.entries(object(original?.cases)?original.cases:{}).filter(([id,w])=>sharingCaseById(id)&&workValid(sharingCaseById(id),w));state.sharingCounter={...fresh(),cases:clone(Object.fromEntries(cases)),recovered:original};return true;}
 function change(state,fn){const r=sharingState(state);if(!r)return false;const next=clone(r),result=fn(next);if(result===false||!valid(next))return false;state.sharingCounter=next;return result??true;}
 const work=r=>r.currentCase?r.cases[r.currentCase]:null;
 const current=(r)=>({c:sharingCaseById(r.currentCase),w:work(r)});
