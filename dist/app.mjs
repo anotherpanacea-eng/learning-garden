@@ -402,7 +402,7 @@ const FILMS={
  welcome:{src:'./storm-intro.html',title:'After the Storm introductory film',heading:'Before we begin…',skip:'Skip to the garden',note:'A little story about how our garden begins. Sound is optional. You can replay it from the home page.'},
  paris:{src:'./paris-film.html',title:'A Postcard Home: the Paris postcard film',heading:'A postcard home',skip:'Skip the film',note:'Pip and Dot fly the Paris postcard home. Sound is optional. You can watch it again from the story ending.'},
  cafe:{src:'./cafe-film.html',title:'Welcome Back, Neighbors: the café supper film',heading:'The welcome-back dinner',skip:'Skip the film',note:'Six tables, six lanterns. Sound is optional. You can watch it again from the café goal.'},
- bramble:{src:'./bramble-film.html',title:'Through the Ribbon Gate: Bramble’s film',heading:'Through the ribbon gate',skip:'Skip the film',note:'A story example: Bramble ties three bundles of four ribbons. This is a different puzzle from yours. Your own work stays in your notebook. Sound is optional.'}
+ bramble:{src:'./bramble-film.html',title:'Through the Ribbon Gate: Bramble’s film',heading:'Through the ribbon gate',skip:'Skip the film',note:'A story example: Bramble ties three bundles of four ribbons. Your own work stays in your notebook. Sound is optional.'}
 };
 function filmSeen(id){return id==='welcome'?state.garden.welcomeFilmSeen===true:state.garden.filmsSeen?.[id]===true;}
 function markFilmSeen(id){if(id==='welcome')state.garden.welcomeFilmSeen=true;else{if(!state.garden.filmsSeen||typeof state.garden.filmsSeen!=='object'||Array.isArray(state.garden.filmsSeen))state.garden.filmsSeen={};state.garden.filmsSeen[id]=true;}save();}
