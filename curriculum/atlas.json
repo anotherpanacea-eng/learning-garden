@@ -42,7 +42,7 @@
         "Water Lab explanations"
       ],
       "spiral": "Model distance → repeated trials/graphs → water/soil study → energy/sound/light.",
-      "limits": "Water Lab is currently authored explanation/illustration; a controlled runoff experiment is not built. Authored models are not physical measurements."
+      "limits": "Water Lab includes authored explanations and a manually stepped invented closed water-path machine. Models are not physical measurements; real soil, rainfall rates and runoff measurements remain absent."
     },
     {
       "id": "read",
@@ -476,13 +476,24 @@
     {
       "id": "sharing-counter",
       "name": "The Sharing Counter",
-      "status": "built-local",
+      "status": "live",
       "patterns": [
         "allocate",
         "build"
       ],
       "route": "#cafe/sharing",
       "scope": "Six open pictured picnic requests: repair equal rectangular halves/quarters, compare same-whole half/two-quarter portions, share twelve identical buns into four equal groups and pack one/three groups. Exact accumulated strip/line is supplied explanation; all checks visual practice, no physical measurement or independent fraction proficiency claim."
+    },
+    {
+      "id": "rain-paths",
+      "name": "Rain Paths: follow a tabletop machine",
+      "status": "built-local",
+      "patterns": [
+        "experiment",
+        "allocate"
+      ],
+      "route": "#science/rain",
+      "scope": "Four matched invented closed-machine comparisons, manually stepped arbitrary water tokens, changed-factor and relevant-column questions, optional differences and a copied runoff route with a finite holding cup and overflow. Not measured hydrology, physical experimental design, water-cycle coverage or a flood-safety result."
     }
   ],
   "manualReferences": [
@@ -793,6 +804,27 @@
       "kind": "explanation",
       "source": "dist/sharing-counter-ui.mjs",
       "scope": "A fixed 0–1 line and accumulation strip derive the amount of selected equal loaf pieces, including separated quarters. No independent marker placement or scale selection."
+    },
+    {
+      "game": "rain-paths",
+      "topicId": "mt_qgb76wHN2X",
+      "kind": "scoped-practice",
+      "source": "dist/rain-paths-ui.mjs",
+      "scope": "Identify the one supplied difference between matched tabletop machines: open versus sealed entrance, or starting stored tokens. Controls remain visible; no independent physical test planning/carrying-out."
+    },
+    {
+      "game": "rain-paths",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/rain-paths-ui.mjs",
+      "scope": "Choose newly-stored/new-runoff columns relevant to where the new tokens went; keep exact supplied counts and copied route results. No real measurement, free data collection or graph construction."
+    },
+    {
+      "game": "rain-paths",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "explanation",
+      "source": "dist/rain-paths-ui.mjs",
+      "scope": "Supplied prompts distinguish visible token counts from authored machine rules, with optional unrecorded conversation. No automatically checked causal explanation or real hydrologic evidence."
     }
   ],
   "increments": [

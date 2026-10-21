@@ -127,3 +127,7 @@ The continuing letter round is implemented in [spec 40](specs/40-changing-letter
 ### The Sharing Counter: cut, compare, pack, revise
 
 [Spec 43](specs/43-sharing-counter.md) adds six open picnic requests: equal rectangular halves/quarters, same-whole half/two-quarter comparison, and one/three quarters of a twelve-bun basket. Model edits stay reversible; keeping a draft does not serve a café guest or spend stock. Number-line amount is derived explanation, distinct from independent placement. Next: a manually stepped water-path machine, then measured recipe preparation. Thirds/eighths, different-shaped equal shares and real food measurements remain future slices.
+
+### Rain Paths: follow, compare and plan
+
+[Spec 44](specs/44-rain-paths.md) adds a new manual experiment loop: matched open/sealed or differently prefilled storage machines, exact separate old/new token ledgers, relevant-column selection and copied runoff routing through a finite holding cup. Source/results, current question, tray view and pending plan survive breaks. No real-ground prediction or full water-cycle mapping follows. Next: measured recipe portions use actual standard-unit conventions in a separate picture model; rain tokens never become mL.
