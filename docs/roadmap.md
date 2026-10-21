@@ -23,6 +23,10 @@ The graph currently emphasizes mathematics. Expand playable experiences and thei
 
 Word Workshop phonics, Ecosystem expeditions and the paired-perspective Story Loft reading expansion below remain useful later increments. Word work needs reviewed pronunciations; the ecology link-out is separate from the new local Living Garden. Neither replaces a complete literacy or science curriculum.
 
+## Next curriculum planning pass
+
+[Curriculum spirals](curriculum-spirals.md) compares the current games with refreshed Jane/Marble sources, separates source prerequisites from our teaching bridges, and specifies three proposed slices: the same quantities with different unknowns (Café/Bramble), a message revised for a reader (Post Office/Loft), and plant conditions compared through dated observations (Living Garden/Workshop). These are planning proposals; no activities or learner suggestions change yet. Reviewed phonics, fractions/measurement and broader source comparison remain explicit follow-ups. The app’s pinned graph remains unchanged while an upstream pin refresh is considered separately.
+
 ## Teaching direction
 
 Check [Jane and Marble opportunities](upstream-opportunities.md) before building each learning capability. The first reviewed story pack and tap-to-order response format are implemented, using Jane's pack/publisher conventions and a small validation adaptation. The document distinguishes current reuse from proposed extensions and records upstream revisions.

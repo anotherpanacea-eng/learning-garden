@@ -34,7 +34,7 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
  <button id="start" type="button"><span class="circle"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#183f39"/></svg></span><span class="label">Play with sound</span></button>
 </div>
 <div class="bar"><button id="toggle" type="button" disabled>Pause</button><div class="track" aria-hidden="true"><i id="prog"></i></div><span class="time" id="time">0:00 / 0:46</span></div>
-<button id="sound" type="button" hidden>Replay with sound</button>
+<button id="sound" type="button" hidden>Turn sound on</button>
 <a class="back" href="./#home">Back to the garden</a>
 <script>
 // After the Storm: intro film. Every shape and sound below is made in code.
@@ -553,31 +553,67 @@ function wav(buf){const ch=buf.numberOfChannels,len=buf.length*ch*2+44,ab=new Ar
  return new Blob([ab],{type:'audio/wav'})}
 
 // ---------- playback ----------
-const startBtn=document.getElementById('start'),toggle=document.getElementById('toggle'),prog=document.getElementById('prog'),timeEl=document.getElementById('time');
-let ac=null,t0=0,playing=false,clock0=0,heldAt=0,frameRequest=null;
+const startBtn=document.getElementById('start'),toggle=document.getElementById('toggle'),prog=document.getElementById('prog'),timeEl=document.getElementById('time'),soundButton=document.getElementById('sound');
+let ac=null,playing=false,clock0=0,heldAt=0,frameRequest=null;
+let soundEnabled=false,audioSource=null,audioRequest=0,scorePromise=null;
 const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-const now=()=>ac?ac.currentTime-t0:(performance.now()-clock0)/1000;
-function tick(){if(!playing)return;let t=now();if(t>=D){t=D;playing=false;toggle.textContent='Replay';if(embedded)parent.postMessage('garden-film-finished',location.origin)}
- draw(Math.max(0,t));prog.style.width=(clamp(t/D)*100)+'%';timeEl.textContent=`${fmt(Math.max(0,t))} / ${fmt(D)}`;if(playing)frameRequest=requestAnimationFrame(tick)}
+// Picture time never depends on creating, rendering or resuming an audio context.
+const now=()=>playing?(performance.now()-clock0)/1000:heldAt;
+function stopAudio(){audioRequest++;if(audioSource){try{audioSource.stop();audioSource.disconnect();}catch{}audioSource=null;}}
+function updateSound(){soundButton.textContent=soundEnabled?'Turn sound off':'Turn sound on';}
+function scoreBuffer(){
+ if(!scorePromise){
+  const Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+  if(!Offline)throw new Error('Offline audio unavailable');
+  const offline=new Offline(2,Math.ceil(48000*D),48000);
+  buildAudio(offline,offline.destination,0);
+  scorePromise=offline.startRendering();
+ }
+ return scorePromise;
+}
+function joinAudio(){
+ const request=++audioRequest;
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  ac||=new AC();const context=ac;
+  // Resume within the tap, then seek the rendered score when it is ready.
+  const resumed=context.resume(),buffer=scoreBuffer();
+  Promise.all([resumed,buffer]).then(([,score])=>{
+   if(request!==audioRequest||!soundEnabled||!playing||context!==ac)return;
+   const offset=Math.max(0,now());if(offset>=D)return;
+   const source=context.createBufferSource();source.buffer=score;source.connect(context.destination);
+   source.start(context.currentTime,offset);audioSource=source;
+  }).catch(()=>audioUnavailable(request));
+ }catch{audioUnavailable(request);}
+}
+function audioUnavailable(request){
+ if(request!==audioRequest)return;
+ stopAudio();soundEnabled=false;updateSound();soundButton.textContent='Sound unavailable';soundButton.disabled=true;
+}
+function tick(){
+ frameRequest=null;if(!playing)return;let t=now();
+ if(t>=D){t=D;heldAt=D;playing=false;stopAudio();toggle.textContent='Replay';if(embedded)parent.postMessage('garden-film-finished',location.origin);}
+ draw(Math.max(0,t));prog.style.width=(clamp(t/D)*100)+'%';timeEl.textContent=`${fmt(Math.max(0,t))} / ${fmt(D)}`;
+ if(playing)frameRequest=requestAnimationFrame(tick);
+}
 function start(sound=true){
- if(frameRequest!==null)cancelAnimationFrame(frameRequest);
- if(ac){ac.close();ac=null}
- try{if(!sound)throw new Error('Silent playback');const AC=window.AudioContext||window.webkitAudioContext;ac=new AC();t0=ac.currentTime+0.15;buildAudio(ac,ac.destination,t0)}catch(e){ac=null;clock0=performance.now()}
- if(!ac)clock0=performance.now();
- playing=true;startBtn.hidden=true;toggle.disabled=false;toggle.textContent='Pause';frameRequest=requestAnimationFrame(tick);
+ if(frameRequest!==null)cancelAnimationFrame(frameRequest);stopAudio();
+ heldAt=0;clock0=performance.now();playing=true;soundEnabled=sound;updateSound();
+ startBtn.hidden=true;soundButton.hidden=false;toggle.disabled=false;toggle.textContent='Pause';
+ if(soundEnabled)joinAudio();frameRequest=requestAnimationFrame(tick);
 }
 startBtn.addEventListener('click',()=>start(true));
 toggle.addEventListener('click',()=>{
- if(toggle.textContent==='Replay')return start();
- if(playing){playing=false;if(frameRequest!==null)cancelAnimationFrame(frameRequest);toggle.textContent='Play';if(ac)ac.suspend();else heldAt=now()}
- else{playing=true;toggle.textContent='Pause';if(ac)ac.resume();else clock0=performance.now()-heldAt*1000;frameRequest=requestAnimationFrame(tick)}
+ if(toggle.textContent==='Replay')return start(soundEnabled);
+ if(playing){heldAt=now();playing=false;if(frameRequest!==null)cancelAnimationFrame(frameRequest);stopAudio();toggle.textContent='Play';}
+ else{clock0=performance.now()-heldAt*1000;playing=true;toggle.textContent='Pause';if(soundEnabled)joinAudio();frameRequest=requestAnimationFrame(tick);}
 });
-cv.addEventListener('click',()=>{if(!toggle.disabled)toggle.click()});
-addEventListener('keydown',e=>{if(e.code==='Space'&&e.target===document.body){e.preventDefault();startBtn.hidden?toggle.click():start()}});
+cv.addEventListener('click',()=>{if(!toggle.disabled)toggle.click();});
+addEventListener('keydown',e=>{if(e.code==='Space'&&e.target===document.body){e.preventDefault();startBtn.hidden?toggle.click():start();}});
+addEventListener('pagehide',()=>{heldAt=Math.min(D,now());playing=false;stopAudio();if(frameRequest!==null)cancelAnimationFrame(frameRequest);frameRequest=null;toggle.textContent=heldAt>=D?'Replay':'Play';const context=ac;ac=null;if(context)context.close().catch(()=>{});});
 const params=new URLSearchParams(location.search),embedded=params.get('embedded')==='1';
 if(embedded){document.documentElement.classList.add('embedded-film');document.querySelector('.back').hidden=true;}
-const soundButton=document.getElementById('sound');
-soundButton.onclick=()=>start(true);
+soundButton.onclick=()=>{stopAudio();soundEnabled=!soundEnabled;updateSound();if(soundEnabled&&playing)joinAudio();};
 if(params.get('autoplay')==='1'){
  soundButton.hidden=false;
  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)start(false);

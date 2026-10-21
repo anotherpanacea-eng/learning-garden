@@ -87,7 +87,7 @@
         "Story Loft puppet theatre"
       ],
       "spiral": "Rhythm/shape/voice experiment → a composition → explain or perform a revision.",
-      "limits": "A dedicated creative-performance loop and reviewed sound/phoneme material are not built. Artistic preference and personal reflection are not numeric attainment scores."
+      "limits": "Story Loft supports open puppet composition, performance and revision. Reviewed sound/phoneme instruction is not built. Artistic preference, authored words and personal reflection are not numeric attainment scores."
     }
   ],
   "domainCandidates": {
@@ -449,7 +449,7 @@
         "create",
         "compose"
       ],
-      "scope": "Compose three picture/phrase scenes, perform manually and revisit them for an audience. Supplied captions and open discussion are not independent writing, reading or retelling evidence."
+      "scope": "Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency."
     }
   ],
   "manualReferences": [
@@ -585,7 +585,7 @@
       "name": "Story Loft and community circle",
       "move": "New collaborative story/creation home; reuse read/compose/create",
       "spec": "docs/specs/06-story-loft.md",
-      "first": "First picture/phrase puppet theatre is implemented in spec 36. Paired-perspective reading, richer expression and community-circle conversations remain later scope.",
+      "first": "Puppet theatre (specs 36–37) supports optional dialogue and one to twelve scenes. Paired-perspective reading and community-circle conversations remain later scope.",
       "gap": "Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices."
     }
   ],

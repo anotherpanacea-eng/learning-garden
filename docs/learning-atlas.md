@@ -47,7 +47,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 - **Read · infer · support:** Comprehension selections, narration and additional-language reading do not establish independent decoding or first-language reading level.
 - **Compose · execute · revise:** Finite tap-to-compose clauses are distinct from free writing, handwriting and general programming.
 - **Build · transform · relate:** A successful answer does not establish recall, fluent calculation or use of an unreported strategy.
-- **Create · perform · reflect:** A dedicated creative-performance loop and reviewed sound/phoneme material are not built. Artistic preference and personal reflection are not numeric attainment scores.
+- **Create · perform · reflect:** Story Loft supports open puppet composition, performance and revision. Reviewed sound/phoneme instruction is not built. Artistic preference, authored words and personal reflection are not numeric attainment scores.
 
 ## Current worlds and components
 
@@ -65,7 +65,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | [English Paris](https://after-the-storm-learning.anotherpanacea.workers.dev/#paris) | read, compose | Authored repeatable stories, vocabulary, sequence, inference and evidence selections, with local support and familiarity distinctions. |
 | [French Paris](https://after-the-storm-learning.anotherpanacea.workers.dev/#french) | read, compose | Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization. |
 | [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#words) | build, read | Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Published with the complete game on Cloudflare. |
-| [Story Loft puppet theatre](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft) | create, compose | Compose three picture/phrase scenes, perform manually and revisit them for an audience. Supplied captions and open discussion are not independent writing, reading or retelling evidence. |
+| [Story Loft puppet theatre](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft) | create, compose | Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -89,7 +89,7 @@ These are optional authoring paths, not prerequisite edges or a compulsory child
 | 4 | [Willow messages and map-making](specs/02-willow-post-office.md) | Extend compose/execute/revise | Write a useful short message, test it with a reader; add a map legend, direction and scale as separately reviewed content. Current word cards do not demonstrate free composition; geography has no dedicated Marble subject heading. |
 | 5 | [Travelers’ Archive](specs/24-travelers-archive.md) | New historical evidence game; reuse read/infer/support and search | Compare two short accounts or artifacts, place an event on a timeline/map, explain what each source can and cannot tell us. History currently has no declared learning activity references; a story setting alone does not teach historical inquiry. |
 | 6 | Sound and Light Studio | New create/perform/reflect mode, with experiment | Change a sound or shadow, measure a pattern, make a short rhythm or light composition and revise it. Waves/sound/light and creative music/art need auditory/spatial creation, not only text questions. Recording would need its own privacy decision. |
-| 7 | [Story Loft and community circle](specs/06-story-loft.md) | New collaborative story/creation home; reuse read/compose/create | First picture/phrase puppet theatre is implemented in spec 36. Paired-perspective reading, richer expression and community-circle conversations remain later scope. Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices. |
+| 7 | [Story Loft and community circle](specs/06-story-loft.md) | New collaborative story/creation home; reuse read/compose/create | Puppet theatre (specs 36–37) supports optional dialogue and one to twelve scenes. Paired-perspective reading and community-circle conversations remain later scope. Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices. |
 
 These priorities are design recommendations, not a required learning sequence. Existing planned specs still need their own review before build. Sound review, real-world investigation and human conversation cannot be replaced by more procedural text variants.
 
