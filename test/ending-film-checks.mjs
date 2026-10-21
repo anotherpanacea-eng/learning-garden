@@ -14,18 +14,19 @@ const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');
 const controller=app.slice(app.indexOf('// Films play once per explorer:'));
 function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
  ensureGarden(state);state.garden.welcomeFilmSeen=welcomeSeen;
- const listeners=new Set(),dialogs=[],exposures=[];let focused=0,saves=0,stopped=0;
+ const listeners=new Set(),dialogs=[],exposures=[],lifecycle=[];let focused=0,saves=0,stopped=0;
  const focus={isConnected:true,focus(){focused++;}},main={focus(){focused++;}};
  const context={state,choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
  currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,
- save(){saves++;},stopSpeech(){stopped++;},esc:x=>String(x),exposeStoryFacts:x=>exposures.push(x),
+ save(){saves++;},stopBell(reason){lifecycle.push(['bell-stop',reason]);},stopSpeech(){stopped++;lifecycle.push(['speech-stop']);},esc:x=>String(x),exposeStoryFacts:x=>exposures.push(x),
  document:{activeElement:focus,querySelector:()=>dialogs.find(d=>d.open)||null,body:{append:d=>dialogs.push(d)},createElement(){
+  lifecycle.push(['film-dialog-created']);
   const frame={contentWindow:{},remove(){this.removed=true;}},skip={},events={};
   return {open:false,frame,skip,setAttribute(){},querySelector:q=>q==='iframe'?frame:skip,addEventListener:(k,f)=>events[k]=f,
    showModal(){this.open=true;},close(){this.open=false;events.close();},remove(){this.removed=true;}};
  }},window:{addEventListener:(k,f)=>listeners.add(f),removeEventListener:(k,f)=>listeners.delete(f)}};
  vm.createContext(context);vm.runInContext(controller,context);
- return {state,context,dialogs,listeners,exposures,read:code=>vm.runInContext(code,context),get saves(){return saves;},get focused(){return focused;},get stopped(){return stopped;},message(data,origin=context.location.origin,source=dialogs.at(-1).frame.contentWindow){for(const f of [...listeners])f({data,origin,source});}};
+ return {state,context,dialogs,listeners,exposures,lifecycle,read:code=>vm.runInContext(code,context),get saves(){return saves;},get focused(){return focused;},get stopped(){return stopped;},message(data,origin=context.location.origin,source=dialogs.at(-1).frame.contentWindow){for(const f of [...listeners])f({data,origin,source});}};
 }
 {
  const picker=fixture(freshState(),{choosing:true,welcomeSeen:false});eq(picker.dialogs.length,0,'chooser does not consume another explorer’s welcome');eq(picker.state.garden.welcomeFilmSeen,false,'welcome remains available');
@@ -53,8 +54,8 @@ for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall'
 {
  const f=fixture();f.state.garden.filmsSeen=[];f.state.syntheticDraft={plate:['pretend'],dialogue:'Synthetic puppet line'};
  const before=JSON.stringify(f.state.syntheticDraft),hash=f.context.location.hash;
- eq(f.read('playFilm("paris")'),true,'opens');const d=f.dialogs.at(-1);eq(f.state.garden.filmsSeen.paris,true,'once flag repairs malformed optional map');eq(f.stopped,1,'stops narration');
- eq(f.read('playFilm("cafe")'),false,'does not stack dialogs');
+ eq(f.read('playFilm("paris")'),true,'opens');const d=f.dialogs.at(-1);eq(f.state.garden.filmsSeen.paris,true,'once flag repairs malformed optional map');eq(f.stopped,1,'stops narration');eq(f.lifecycle,[['bell-stop','film'],['speech-stop'],['film-dialog-created']],'stops Bell playback before narration and film-frame construction');
+ eq(f.read('playFilm("cafe")'),false,'does not stack dialogs');eq(f.lifecycle.length,3,'rejected stacked film does not disturb playback lifecycle');
  f.message('garden-film-finished','https://other.invalid');f.message('garden-film-finished',undefined,{});eq(d.open,true,'untrusted messages ignored');
  d.skip.onclick();eq(d.removed&&d.frame.removed,true,'skip removes iframe and dialog');eq(f.listeners.size,0,'skip removes listener');eq(f.focused,1,'focus restored');
  eq(f.read('playFilm("paris")'),false,'automatic once');eq(f.read('playFilm("paris",{replay:true})'),true,'replay always offered');f.message('garden-film-finished');eq(f.listeners.size,0,'completion cleans up');

@@ -534,6 +534,8 @@ function scoreBuffer(){
 }
 function joinAudio(){
  const request=++audioRequest;
+ // Request media playback on supported WebKit before starting sound. Silent film autoplay never calls this.
+ try{if(window.navigator?.audioSession)window.navigator.audioSession.type='playback';}catch{}
  try{
   const AC=window.AudioContext||window.webkitAudioContext;
   ac||=new AC();const context=ac;
