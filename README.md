@@ -51,6 +51,8 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/plant-study-checks.mjs
+node test/plant-study-integration-checks.mjs
 node test/letter-trail-checks.mjs
 node test/letter-trail-integration-checks.mjs
 node test/message-checks.mjs
@@ -242,3 +244,7 @@ The first equal-group spiral is available at the Café serving bench and Bramble
 [Find a changing letter](https://after-the-storm-learning.anotherpanacea.workers.dev/#post/letters/round) or [open the round in Story Loft](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft/letters/round). Twelve original notes revisit one detail, two details together and what a particular reader needs to know. Readers include Kitten, Dragon, Rabbit, Pip and Dot. Two already-actionable notes ask for a reason rather than pretending the directions are wrong. The library rotates; it is finite authored content, not live AI generation.
 
 Trying cards is exploration. Only explicitly keeping a supplied version contributes once to a gentle next-kind suggestion; original wording stays human-read and ungraded. Recent requests, known help, narration, together-reading, repeated encounters and legacy-desk familiarity remain separate. Choose any kind immediately. The current letter, card/clue order, both desk drafts and other games stay intact across pages and reload. The round retains its latest 24 letters plus selected drafts at either desk; notes downloads contain that retained writing. The original three-note desk and its saved work remain available. [Spec 40](docs/specs/40-changing-letters.md).
+
+## The growing shelf
+
+[Seedlings after the storm](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/plants) adds an optional Living Garden investigation: wonder, inspect four invented model days, compare stems and leaves, then carry a kept observation to a planting plan. Adequate-light and dim-light examples use the same millimetre scale. Pictures and numbers are labelled illustrations, not measured cress results. Prediction timing, copied rows, practice and help remain separate; existing habitat trails, beds and café stock are preserved. [Spec 41](docs/specs/41-plant-investigation.md).

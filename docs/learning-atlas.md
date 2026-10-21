@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 90 explicit current references across 47 unique source topics: authored question references, scoped practice or supplied explanations. The other 1543 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 94 explicit current references across 49 unique source topics: authored question references, scoped practice or supplied explanations. The other 1541 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -23,7 +23,7 @@ There are 90 explicit current references across 47 unique source topics: authore
 | Life Skills | 37 | 0 | 37 |
 | Mathematics | 503 | 32 | 471 |
 | Personal & Social Development | 88 | 0 | 88 |
-| Science | 547 | 7 | 540 |
+| Science | 547 | 9 | 538 |
 
 Mathematics currently has the broadest authored task collection. Science and English have narrow guided investigations/comprehension references. History, life skills, personal/social development and learning-to-learn require explicit content/evidence design; fictional settings, friendly characters, help use and game completion do not establish those abilities. The source’s Computing topics are grouped under “Artificial Intelligence,” including step-by-step instructions; preserve that source organization without mistaking it for a complete computing curriculum.
 
@@ -66,6 +66,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | [French Paris](https://after-the-storm-learning.anotherpanacea.workers.dev/#french) | read, compose | Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization. |
 | [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#words) | build, read | Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Published with the complete game on Cloudflare. |
 | [Story Loft puppet theatre](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft) | create, compose | Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency. A separate two-turn reader rehearsal carries a delivery note, with optional authored motive/reply and literal supplied-card comparison; existing shows are preserved. A continuing twelve-letter round varies readers and purposes with open message-structure suggestions; old notes and authored drafts remain separate. |
+| Growing shelf: seedling investigation (`#living/plants`, local build) | experiment, search | Invented adequate/dim-light cress illustrations across four days; unscored predictions, copied observation rows, observation/explanation and height-only contrasts, supplied water-test choice, frozen evidence beside planting plans. Not measured biology, independent measurement, experimental design or full plant-growth coverage. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -152,10 +153,10 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Science / Insects & Minibeasts | 22 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Matter & Materials | 40 | 1 | Change · measure · explain; Build · transform · relate |
 | Science / Ocean Life | 27 | 0 | Search · inspect · compare; Read · infer · support |
-| Science / Organisms & Life Processes | 63 | 0 | Search · inspect · compare; Read · infer · support |
+| Science / Organisms & Life Processes | 63 | 1 | Search · inspect · compare; Read · infer · support |
 | Science / Polar Regions | 25 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Rainforests | 25 | 0 | Search · inspect · compare; Read · infer · support |
-| Science / Scientific Inquiry | 30 | 2 | Change · measure · explain; Build · transform · relate |
+| Science / Scientific Inquiry | 30 | 3 | Change · measure · explain; Build · transform · relate |
 | Science / Space Exploration | 26 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Space Systems & Earth's History | 16 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / The Human Body | 25 | 0 | Search · inspect · compare; Read · infer · support |
@@ -259,6 +260,10 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Reviewing Own Writing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_U_8iVFZuHH) | scoped-practice / Story Loft puppet theatre / [source](../dist/message-ui.mjs) | Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion. |
 | [Choosing Form and Tone for Your Audience](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_v5DyOEpbbr) | scoped-practice / Willow Post Office / [source](../dist/letter-trail-ui.mjs) | Twelve authored letters revisit useful details, combined instructions and a reader’s knowledge/purpose. Three narrow audience cases add a landmark for a newcomer or an explanation for a changed plan/order. Open suggestions use first-kept supplied-card/clue choices and explicit support/familiarity; original wording is human-read and ungraded. No independent writing, full tone/register, reading-level or full-topic claim. |
 | [Choosing Form and Tone for Your Audience](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_v5DyOEpbbr) | scoped-practice / Story Loft puppet theatre / [source](../dist/letter-trail-ui.mjs) | Twelve authored letters revisit useful details, combined instructions and a reader’s knowledge/purpose. Three narrow audience cases add a landmark for a newcomer or an explanation for a changed plan/order. Open suggestions use first-kept supplied-card/clue choices and explicit support/familiarity; original wording is human-read and ungraded. No independent writing, full tone/register, reading-level or full-topic claim. |
+| [What Plants Need to Grow](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_3v0VNkwquK) | scoped-practice / Growing shelf: seedling investigation (local build) / [source](../dist/plant-study-ui.mjs) | Light slice only: inspect explicitly invented already-emerged cress seedlings under adequate versus too-little light, with supplied controls. No measured growth dataset, species-wide light rule or full plant-requirements coverage. |
+| [Recording Data](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_ZFwPZaDJ0_) | scoped-practice / Growing shelf: seedling investigation (local build) / [source](../dist/plant-study-ui.mjs) | Copy selected finite model observations into a labelled table, preserving day, condition, specimen and millimetres. This is supplied-row collecting; independently choosing useful data, measuring and constructing charts remain planned. |
+| [Observation vs Interpretation](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Hw70LI5xza) | scoped-practice / Growing shelf: seedling investigation (local build) / [source](../dist/plant-study-ui.mjs) | Two finite model questions distinguish a pictured length from a proposed cause and compare stem length with leaf/stem features. Model observation versus interpretation practice, not a real-world causal experiment. |
+| [Fair testing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_qgb76wHN2X) | scoped-practice / Growing shelf: seedling investigation (local build) / [source](../dist/plant-study-ui.mjs) | Choose between two supplied proposed water comparisons: hold light and other conditions alike, or confound light and water. No water results or independent experimental-design claim. |
 
 ## Sources, licensing and maintenance
 
