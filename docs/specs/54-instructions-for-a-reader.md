@@ -1,0 +1,95 @@
+# 54 — A little plan for a puppet reader
+
+**Status: authored candidate, pending independent specification/content review. Not build-ready or implemented.** A small E4-writing / E5-speaking bridge from message revision to planning and revising several connected sentences. It does not complete sustained composition, independent decoding, transcription, narrative writing or a computing strand.
+
+## Existing work and the missing step
+
+Read [spec39](39-message-reader-spiral.md), [spec40](40-changing-letters.md), [spec36](36-story-loft-puppet-theatre.md) and the actual `dist/message-core.mjs`, `message-ui.mjs` and `letter-content.mjs`. The existing letter library already includes ordered actions and a reason for an order. Its runner selects an authored card's fixed outcome/reply; it is not a parser of the child's words. The ordinary Loft already permits scene ordering and optional dialogue.
+
+Extend that practice with a **separate small instruction notebook**: plan three actions, arrange individual supplied sentences, inspect each action's consequence, ask what the reader needs, and revise. New behavior is explicit sequencing of a bounded action model, not general language interpretation. Reuse the existing source-board, manual playback, human-read text and preservation conventions; the old single-card validator cannot simply certify this new sequence model.
+
+Optional entries `#post/instructions` and `#loft/instructions` open two views of the **same new notebook**. Say “Your instruction notebook is shared between these two desks.” Neither route copies into nor replaces `messages`, `letterTrail`, a delivery, a rival round, a show or the Loft shelf. An ordinary Loft link reopens its own show; no automatic insertion of scenes or ending film.
+
+## Teaching encounters
+
+1. **Name a purpose and reader.** A pictured source board says who will use the note, what they already know, and what is wanted. “Audience” means the person receiving these instructions; “purpose” means what the note is meant to help them do. A short practical note is the supplied form. Compare it with a supplied invitation to watch: both are useful, but they do different jobs. This is not a register or genre survey.
+2. **Plan before choosing words.** Inspect three action pictures. Point, talk, draw off-screen or arrange their picture tickets in a planning strip. A plan holds the intended actions; a draft is a version of the words. The plan and sentence strip remain separate: copying the plan's order to the supplied strip requires an explicit action and is recorded as supplied assembly, never original prose. Neither starts pre-solved.
+3. **Say, then draft.** Invite “Say one complete instruction before writing it.” Model an imperative as a complete instruction (“Fold the note.”), with the reader understood as the actor. Offer two supplied phrasings per action or a separate exact-text page for the learner's own words. Oral rehearsal is optional and unobserved unless someone chooses a report. Typing is not required to explore the idea.
+4. **Read the consequences.** Run only the visibly named supplied strip, one action at a time, from the frozen starting scene. Ask which words specify an action, what must already be true, and whether two steps could exchange places. A missing step or blocked action gets a concrete scene description, not a prose-quality score. A device follows its programmed action rules; it does not infer what the writer intended. Identify this device as one example of a computer, without requiring a computer-identification quiz.
+5. **Connect order and reason.** Discuss “before” as order and “because” as a reason. Show the authored causal contrast below; a learner may tell a reason in their own words. Neither a keyword nor selecting a supplied reason establishes understanding. A plausible different story can be kept without satisfying the stated request.
+6. **Ask and revise.** A human reader may ask “Which thing?”, “Where?”, “What happens first?” or “Why?” Give time to respond by speaking, pointing, signing, AAC, dictating or writing. Read the exact draft back together; change an unclear part and compare versions. “Revise” means change the meaning or organization to help the reader. “Edit/proofread” means check how the words are written; offer a human discussion of sentence starts/end marks, without automatic spelling/grammar correction or evidence of those skills.
+7. **Perform and keep.** At the Loft view, a puppet can receive the note and a human can voice its response. Compare the original request, the actual modeled result and the human reader's interpretation separately. Keep an unfinished or unexpected version, return to any step, or leave. No passed task, required sentence count, timer, progression suggestion, mastery or reward.
+
+All encounters remain open. The pictured plan, request, reader knowledge and starting scene remain available on every page. Explanatory vocabulary is optional support, not a gate to composition. None of the terms is assessed by recall.
+
+## Two original cases and exact supplied language
+
+Catalog/model revision1. The following is proposed content for independent review, including its physical assumptions. Every illustration must agree with the explicit scene; color alone cannot identify an object.
+
+### `pocket-note`: an invitation that fits
+
+Rabbit asks Dot to put a written invitation inside a small envelope and seal it for the puppet show. Dot knows which note and envelope Rabbit means. The single unfolded note is on the table beside a single open envelope. **The source states and pictures that the unfolded note is too wide for this envelope; folding it once makes it fit.** The model is about this pictured note and envelope, not a rule that all letters need folding.
+
+| Action ID | Supplied sentence A | Supplied sentence B | Exact model effect |
+| --- | --- | --- | --- |
+|`fold`|Fold the note.|Fold the invitation once.|Requires note on table; changes unfolded to folded.|
+|`insert`|Put the folded note in the envelope.|Slide the folded invitation into the open envelope.|Requires folded note on table and open envelope; puts note inside.|
+|`seal`|Seal the envelope.|Close and seal the envelope.|Requires open envelope; seals it even when empty.|
+
+The goal is a sealed envelope **containing** the note. Sealing an empty envelope is a possible action, not an ambiguous sentence or a completed request. Inserting an unfolded note pauses with “This note is too wide for this envelope. It is still on the table.” Trying to insert after sealing pauses with “The envelope is sealed. The note is still outside.” Fold → insert → seal serves the request; an empty or shorter strip can be kept as unfinished. No unstated automatic fold, reopening or insertion repairs the run.
+
+Causal discussion: “Fold the note before you put it in the envelope, because the unfolded note is too wide.” Contrast “The note is too wide because you folded it.” The scene establishes the width problem before folding; the latter reverses that explanation. A human discusses alternative explanations; the app does not grade original wording or require the word “because.”
+
+### `welcome-table`: two preparations, then an invitation
+
+Pip asks Kitten to prepare a puppet-show welcome table, then invite Rabbit. The source shows a fork in the path, a table beyond it, an arrow sign beside the fork and a welcome card beside the table. Kitten knows the way; **Rabbit is visiting for the first time and cannot see the table from the fork**. Rabbit needs an arrow at the fork and a card on the table to recognize the welcome place. Both preparations should be ready before Rabbit is invited; the request does not prescribe which preparation comes first.
+
+| Action ID | Supplied sentence A | Supplied sentence B | Exact model effect |
+| --- | --- | --- | --- |
+|`arrow`|Put the arrow sign at the fork.|Place the arrow at the path fork.|Sets arrow ready; independent of card.|
+|`card`|Put the welcome card on the table.|Place the welcome card on the table.|Sets card ready; independent of arrow.|
+|`invite`|Invite Rabbit to the welcome table.|Ask Rabbit to come to the welcome table.|Rabbit sets out immediately. Without arrow, stops at fork; with arrow but without card, reaches table but cannot identify it as the welcome table; with both, recognizes the welcome table.|
+
+Arrow → card → invite and card → arrow → invite both serve the request. Inviting first is executable: show Rabbit waiting at the fork, rather than rejecting the sentence. Later preparations do not silently repeat the invitation or move Rabbit. The terminal model state retains where Rabbit stopped and what Rabbit recognized on the invitation; a new run resets the scene. Even a fully prepared table at the end cannot erase that earlier consequence or satisfy “ready before inviting.” Explain both facts if the child places the missing sign later.
+
+The scene deliberately defines Rabbit's knowledge. Compare the human-discussion variation “What if Rabbit had visited before?” without changing the finite runner or marking any answer right. The same short message can be useful to a familiar reader and insufficient for a newcomer. This is a reader-knowledge contrast, not a claim about formal/informal tone.
+
+Causal discussion: “Put the arrow at the fork before inviting Rabbit, because Rabbit does not know the way.” Contrast “Rabbit does not know the way because you put out the arrow.” The given scene says Rabbit was unfamiliar already. These are supplied models for discussion, not evidence of independently composed causal sentences.
+
+## Bounded runner and revision contract
+
+Each case has three unique action IDs. The planning strip and supplied sentence strip each hold an ordered subset, including empty, with no duplicates. Sentence selections also hold variant A/B. Add/remove and earlier/later buttons permit every arrangement without dragging. Reordering a picture does not silently rewrite sentences; editing sentences does not silently rewrite the plan. A mismatch is an invitation to discuss a changed intention, not an error. Show the full exact supplied sentences before playback; never label them “your original writing.”
+
+There are16 ordered subsets per case and79 sentence presentations per case when each selected action can use either wording. The variants have identical action semantics. The model never extracts action IDs from text. A run resets to the initial scene, executes in strip order and halts only on an unmet action precondition (`fold`/`insert`/`seal`). An `invite` with missing preparations records its stated consequence and execution can continue. After the last action, describe actual state and request fulfillment separately. A blank strip has no action and no success. No artificial failure is assigned to a missing optional explanation.
+
+**Try this supplied strip** creates one frozen run containing case/model revision, selected sentence IDs/wordings, starting scene, manual cursor, terminal/block result and contemporaneous support/context. Previous/next playback only reveals that run's already determined transitions; it never applies an action twice. Repeated tests are experiments, not learner-level evidence. Editing a strip invalidates its current feedback/cursor; earlier run snapshots remain readable and clearly dated by local sequence, not presented as feedback for the new draft. Runs and kept drafts are independent of whether the request was fulfilled.
+
+Offer a separate worked example: “Put the toy in the box. Close the box.” Manually show why closing first leaves the toy outside. Do not insert that example into either live strip. Exposing any worked example/help or either causal model records support when actually displayed. All supplied sentences are already supplied material; absence of help does not turn their assembly into independent composition.
+
+## Original words, oral work and evidence boundaries
+
+The original-text page has one optional1200-character draft and one optional400-character reader comment. Preserve exact spaces, line breaks, spelling and Unicode; no trim, autocomplete, keyword matcher, minimum length, fuzzy acceptance or generative grader. Limits bound storage only. Reject oversize programmatic/imported text without truncation. Character counters must never imply writing quality. Render text escaped and preserve typing/caret while saving. A blank draft can accompany oral work and can be kept.
+
+An optional current report says **not stated / typed my words / dictated to a person / copied supplied words / mixed or other**. These are reports about production, not verified independence. Human speech, signing, AAC and off-screen drawings need no transcript or proof. A separate optional reading report says unknown / read myself / read together; narration, example exposure and adult help stay distinct. Browser/OS dictation can supply text like any other input, but the app does not record audio, invoke a speech-recognition service or infer who composed it. No names or identity fields are requested.
+
+Switching mode preserves both drafts. Original wording is never converted into runnable cards; changing it cannot change the supplied run. **Read our words together** displays the exact draft and a human question, not an animated claim of understanding. **Try this supplied strip** names the complete supplied strip even if original words also exist. When the original draft changes, mark any old human comment as referring to its earlier snapshot, rather than treating it as current evaluation.
+
+The app can record only arrangements, exact text, explicit versions/runs, displayed support and optional reports. It cannot observe the oral rehearsal, listening, actual reader comprehension, handwriting, spelling competence, independent prose quality or learning gain. Prior exposure is not mastery: a persistent per-case seen/support summary survives bounded history pruning; returning to this finite case is familiar. Related old letters are related practice, not proof of exposure to these exact new texts; an imported unsupported instruction history makes prior exposure unknown. No qualifying-success counters or automatic recommendations are introduced.
+
+## State, navigation and visual direction
+
+Add only optional `instructionNotes`, version1: selected case per Post/Loft view; two fixed case records with shared current plan, supplied strip, original draft/comment and reports; sticky support/exposure; up to24 frozen runs and16 explicitly kept draft snapshots per case; monotonic bounded local sequence IDs. Preserve a current draft independently of history pruning. These limits appear in notebook/export text; the shelf is not a permanent exhaustive archive. Keeping repeatedly may replace the chosen snapshot only through an explicit update action; otherwise it creates a new bounded local version, never another learner or independent success. References to pruned runs must either retain their embedded snapshot or be unavailable, never silently resolve to a different run.
+
+Missing root is fresh. Malformed/future data stays exact and unavailable; read-only validation/render/import cannot normalize or discard it. An explicit fresh start retains the original payload under recovery and remains exportable. Save-off, separate explorers, reload, local import/export/reset and escaped notes follow the existing application contract. Neither desk edits unrelated state. No network learner service, analytics or identity inference.
+
+Use the established paper notes, forest ink, sky and plum puppet stage. The distinctive view is three short sentence tickets beside a source scene and an optional picture plan, not a score panel. At narrow widths show the current task with a compact accessible source summary and expandable full source, without burying controls below unrelated shelves. Keyboard/touch controls have44px targets, named current selections, useful focus and a live description after an explicit step. No drag, timed response or automatic motion/speech. Optional local narration reads the exact selected source/text; reduced motion retains every consequence in a still and text. The ordinary show and Post Office entries stay accessible.
+
+## Sources, review and implementation gate
+
+The [source audit](../source-audits/54-instructions-for-a-reader.md) records five targets, nine hard predecessors and their13-node union against refreshed actual descriptions and edge reasons. One spoken-instruction topic is upstream-only; it is not silently added to the pinned runtime graph. All prerequisite exceptions and scoped opportunities are **pending independent review**. The source's suggested eye-contact/classroom behavior is not an access criterion; accessible listening/response can take different forms.
+
+Jane's stable authored stages and separate help informed the design. Its actual creative grader uses normalization, fuzzy matching, lexical restrictions and length limits; none is suitable for evaluating these original messages and none is incorporated. No new upstream code, lesson wording or media is copied. Preserve existing notices and Marble ODbL / CC BY-SA text attribution in the audit. The Common Core writing reference supports guided revision; this miniature instruction task does not meet full narrative or explanatory-writing standards.
+
+Before implementation, an independent reviewer must assess all supplied phrasings, reader knowledge, physical premises, causal contrasts, both valid welcome orders, accessible alternatives, source dispositions and whether the sequence model actually teaches more than the current letter cards. The author cannot clear this gate. No runtime changes or atlas/ledger completion claims belong in this packet.
+
+After reviewed specification/content, implementation checks must enumerate all158 sentence presentations and their exact transitions, empty/partial strips, all valid orders, missing prerequisites, early invitation, variant equivalence, independent plan/text editing, frozen before/after versions, history pruning, support/report separation, pure rendering, malformed/future recovery and preservation of real synthetic existing-game fixtures. Browser checks must cover both desks, original-text versus supplied-run clarity, oral/dictated reports, exact saves/reload, keyboard focus, narrow touch layout, local narration and reduced motion. Run the repository's relevant full-suite and atlas checks then obtain independent implementation review. No review, merge, deployment, media production or learning outcome is implied by author checks below.
