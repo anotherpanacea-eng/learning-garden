@@ -99,3 +99,6 @@ Implemented: [Café welcome-back dinner and New Game Plus](specs/22-cafe-welcome
 
 
 Water Lab follow-up: connect the existing storm-recovery molecule visits to a small controllable runoff investigation. Compare the same rain on soil and a hard surface, or an open and blocked route, then observe water collecting downhill. Specify the simplified model and what it can and cannot establish before building. Current visits and the optional paper sketch do not implement flooding, infiltration rates, drainage or a flood barrier.
+
+
+Word Garden first release: [spec 34](specs/34-word-garden.md) implements the word-part door on Cloudflare with authored blooms, welcome discoveries, finite spelling exceptions and open transfer-word discussion. Town repair, seasons and almanac from PR #6 remain ideas for later. The sound/letter door in spec 04 still needs reviewed audio. The complete reviewed game is now published on Cloudflare Static Assets; the earlier Sites release and its origin-local notebooks remain intact.

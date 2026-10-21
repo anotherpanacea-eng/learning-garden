@@ -4,6 +4,9 @@
 !.env.example
 .openai/
 wrangler.toml
+wrangler.json
+wrangler.jsonc
+.wrangler/
 .dev.vars
 .dev.vars.*
 *.pem
