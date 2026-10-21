@@ -96,3 +96,7 @@ Primary science references are listed in [spec 41](specs/41-plant-investigation.
 ## Travelers’ Archive — 2026-10-21
 
 [Spec 46](specs/46-travelers-archive-first-visit.md) studies Jane `7802588313e6c6edc57432df398d9f3ddb9ff938` and Marble `95e6dddef0a6a0af9ed973a3e3fd5f35da00a733`. Finite ordering/source items and stable tasks are design references; no Jane code or lesson prose is copied. Four reviewed historical-source descriptions support narrow activity references, with the bundled graph unchanged. The exact PH8646 hero image is reused under its catalogue’s CC0 label, credited beside the image. Archives de Paris facts are expressed in original summaries; its PDF layout/prose/assets are not copied. Full source/rights/date distinctions are in spec 46 and content metadata.
+
+## Rain Paths → Field Notebook — 2026-10-21
+
+Spec 47 adapts the existing original cress chart interaction to frozen completed machine results. Jane’s purposeful return to a concept and requested support informed the task sequence; no new Jane code or lesson prose is copied. Three narrowly scoped Marble references use the pinned full descriptions/evidence, including the two misleading pinned titles documented in the spec. Original teaching invitations do not alter prerequisite edges. No physical hydrology or broad topic completion is claimed.
