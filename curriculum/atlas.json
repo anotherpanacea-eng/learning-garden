@@ -487,13 +487,24 @@
     {
       "id": "rain-paths",
       "name": "Rain Paths: follow a tabletop machine",
-      "status": "built-local",
+      "status": "live",
       "patterns": [
         "experiment",
         "allocate"
       ],
       "route": "#science/rain",
       "scope": "Four matched invented closed-machine comparisons, manually stepped arbitrary water tokens, changed-factor and relevant-column questions, optional differences and a copied runoff route with a finite holding cup and overflow. Not measured hydrology, physical experimental design, water-cycle coverage or a flood-safety result."
+    },
+    {
+      "id": "measuring-kitchen",
+      "name": "The Measuring Kitchen",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "experiment"
+      ],
+      "route": "#cafe/recipes",
+      "scope": "Six fictional two-ingredient trays: fill/read a straight-sided 500 mL jug in 50 mL steps, choose a volume unit, pour into separate labelled preparation jars and return portions. Numeric reading, unit naming, recipe fit and empty-jug readiness stay separate. Supported picture measurement only; no physical-tool competence, mass, litre conversion, mixing or recipe scaling."
     }
   ],
   "manualReferences": [
@@ -825,6 +836,27 @@
       "kind": "explanation",
       "source": "dist/rain-paths-ui.mjs",
       "scope": "Supplied prompts distinguish visible token counts from authored machine rules, with optional unrecorded conversation. No automatically checked causal explanation or real hydrologic evidence."
+    },
+    {
+      "game": "measuring-kitchen",
+      "topicId": "mt_4lp_b5Pzik",
+      "kind": "scoped-practice",
+      "source": "dist/measuring-recipes-ui.mjs",
+      "scope": "Use a supplied standard-unit mL scale, retain a numeric reading and compare exact fictional volumes. No capacity estimation, physical tools or other unit choice instruction beyond a finite mL/g/items contrast."
+    },
+    {
+      "game": "measuring-kitchen",
+      "topicId": "mt_DOe893F6gN",
+      "kind": "scoped-practice",
+      "source": "dist/measuring-recipes-ui.mjs",
+      "scope": "Read a straight-sided graduated 500 mL picture jug with ten 50 mL intervals, fill and reversibly transfer liquid portions. Other measures and independent practical measuring remain absent."
+    },
+    {
+      "game": "measuring-kitchen",
+      "topicId": "mt_6oxQPNLHNv",
+      "kind": "scoped-practice",
+      "source": "dist/measuring-recipes-ui.mjs",
+      "scope": "Compare each same-unit preparation amount with its recipe target and optionally inspect needed additions/returns. No conversions, mass or general multistep measure problems."
     }
   ],
   "increments": [
