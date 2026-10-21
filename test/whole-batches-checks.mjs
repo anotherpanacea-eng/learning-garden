@@ -26,4 +26,14 @@ B.setBatchHelp(s,'reference');assert.deepEqual(B.batchDisplayedFactPairs(s),[[1,
 B.setBatchHelp(s,'example');assert.deepEqual(B.batchDisplayedFactPairs(s),[[1,2],[3,2]]);
 B.setBatchPage(s,'plan');assert.deepEqual(B.batchDisplayedFactPairs(s),[[1,2],[3,2],[2,2]]);
 B.setBatchPage(s,'choose');assert.deepEqual(B.batchDisplayedFactPairs(s),[]);assert.equal(BATCH_CASES.length,3);
+// Actual text on the message/keep request and optional copy explanation is exposure,
+// including earlier kept/offered copy counts after the current plan changes.
+{
+ const state=fresh('story-supper');B.setBatchPage(state,'message');assert.deepEqual(B.batchDisplayedFactPairs(state),[[1,2],[3,2]]);
+ B.setBatchPage(state,'measure');B.setBatchHelp(state,'copies');assert.deepEqual(B.batchDisplayedFactPairs(state),[[1,2],[2,2]]);
+ B.setBatchHelp(state,null);B.setBatchCopies(state,2);B.keepBatch(state);B.makeBatchTogether(state);B.offerBatch(state);B.setBatchCopies(state,1);B.setBatchPage(state,'keep');assert.deepEqual(B.batchDisplayedFactPairs(state),[[1,2],[3,2],[2,2]]);
+ B.setBatchPage(state,'choose');assert.deepEqual(B.batchDisplayedFactPairs(state),[]);
+ B.chooseBatchCase(state,'story-supper');B.setBatchHelp(state,'reference');B.setBatchReference(state,'cloud','');B.setBatchReference(state,'star','');B.checkBatchReference(state);assert.equal(current(state).inputError,'reference-invalid');const raw=copy(current(state).reference);B.setBatchHelp(state,null);assert.equal(current(state).inputError,'');assert.deepEqual(current(state).reference,raw);
+ B.setBatchPage(state,'measure');B.setBatchReading(state,'2-');B.checkBatchReading(state);assert.equal(current(state).inputError,'reading-invalid');B.setBatchPage(state,'plan');assert.equal(current(state).inputError,'');assert.equal(current(state).reading.text,'2-');
+}
 console.log(`Whole-batch core: passed (including ${transfers} finite apparatus moves).`);

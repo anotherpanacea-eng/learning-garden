@@ -49,7 +49,7 @@ const newWork=c=>({source:clone(c),copies:0,selectedIngredient:IDS[0],model:empt
 function edit(w){w.feedback=flags();w.inputError='';}
 function editWork(state,fn){return change(state,r=>{const w=work(r);if(!w)return false;const result=fn(w,batchById(r.currentCase));if(result===false)return false;edit(w);return result;});}
 export function chooseBatchCase(state,id){const c=batchById(id);if(!c)return false;return change(state,r=>{if(!Object.hasOwn(r.cases,id))r.cases[id]=newWork(c);r.currentCase=id;r.page='plan';});}
-export function setBatchPage(state,page){if(!BATCH_PAGES.includes(page))return false;return change(state,r=>{if(page!=='choose'&&!work(r))return false;r.page=page;});}
+export function setBatchPage(state,page){if(!BATCH_PAGES.includes(page))return false;return change(state,r=>{if(page!=='choose'&&!work(r))return false;r.page=page;if(work(r))work(r).inputError='';});}
 export function setBatchCopies(state,n){if(!integer(n,0,3))return false;return editWork(state,w=>{w.copies=n;});}
 export function chooseBatchIngredient(state,id){if(!IDS.includes(id))return false;return editWork(state,w=>{if(w.model.jug.amount||w.selectedIngredient===id)return false;w.selectedIngredient=id;});}
 export function fillBatchJug(state){return editWork(state,w=>{if(w.model.jug.amount===500||batchSources(w.model)[w.selectedIngredient]<50)return false;w.model.jug={ingredient:w.selectedIngredient,amount:w.model.jug.amount+50};w.support.handling=true;});}
@@ -63,7 +63,7 @@ export function setBatchMessage(state,field,value){if(!MESSAGE.includes(field)||
 export function setBatchReference(state,id,value){const k=short(id);if(!k||!text(value))return false;return editWork(state,w=>{w.reference[k]=value;});}
 export function adjustBatchContrast(state,id,delta){const k=short(id);if(!k||![-50,50].includes(delta))return false;return editWork(state,w=>{const n=w.contrast[k]+delta;if(!amount(n,200))return false;w.contrast[k]=n;});}
 export function useBatchSupport(state,kind){if(!BATCH_SUPPORT.includes(kind)||kind==='visual'||kind==='handling'||kind.endsWith('Feedback'))return false;return change(state,r=>{const w=work(r);if(!w)return false;w.support[kind]=true;if(kind==='workedExample'&&w.exampleStep===null)w.exampleStep=0;});}
-export function setBatchHelp(state,topic){if(topic!==null&&!BATCH_HELP.includes(topic))return false;return change(state,r=>{const w=work(r);if(!w)return false;w.helpTopic=topic;if(topic)w.support[topic]=true;if(topic==='example'){w.support.workedExample=true;if(w.exampleStep===null)w.exampleStep=0;}});}
+export function setBatchHelp(state,topic){if(topic!==null&&!BATCH_HELP.includes(topic))return false;return change(state,r=>{const w=work(r);if(!w)return false;w.helpTopic=topic;w.inputError='';if(topic)w.support[topic]=true;if(topic==='example'){w.support.workedExample=true;if(w.exampleStep===null)w.exampleStep=0;}});}
 export function stepBatchExample(state,delta){if(![-1,1].includes(delta))return false;return change(state,r=>{const w=work(r);if(!w)return false;w.support.workedExample=true;w.exampleStep=Math.max(0,Math.min(3,(w.exampleStep??0)+delta));});}
 function check(state,kind){return change(state,r=>{const w=work(r),c=batchById(r.currentCase);if(!w)return false;const assessment=assess(c,w,kind);if(assessment===null){w.inputError=kind+'-invalid';w.feedback[kind]=false;return {valid:false,error:'Use a whole number from 0 to 500. Blank or malformed entries remain drafts.'};}const s={kind,source:clone(w.source),input:draft(w),target:{guests:c.guests,copies:c.copies,amounts:clone(c.targets)},assessment,support:clone(w.support),previouslyChecked:w.checkedKinds[kind],practice:true,modelVisible:true};w.checks.push(s);if(w.checks.length>24){const redundant=w.checks.findIndex((s,i)=>w.checks.slice(i+1).some(t=>t.kind===s.kind));w.checks.splice(redundant,1);}w.checkedKinds[kind]=true;w.feedback[kind]=true;w.inputError='';w.support[kind+'Feedback']=true;if(kind==='reading')w.support.readingReveal=true;return clone(s);});}
 export const checkBatchReading=state=>check(state,'reading');
@@ -84,6 +84,9 @@ export function batchDisplayedFactPairs(state,options=null){
  const r=batchState(state),v=batchView(state);if(!r||!v?.work||r.page==='choose')return [];
  const {copies,base,example,reference}=options??{copies:true,base:true,example:v.work.helpTopic==='example',reference:v.work.helpTopic==='reference'};
  const counts=[];if(base)counts.push(1);if(copies&&v.work.copies)counts.push(v.work.copies);
+ if(options===null&&['message','keep'].includes(r.page))counts.push(v.case.copies);
+ if(options===null&&v.work.helpTopic==='copies')counts.push(2);
+ if(options===null&&r.page==='keep')for(const record of [v.work.kept,v.work.offered])if(record?.input.copies)counts.push(record.input.copies);
  if(options===null&&r.page==='plan'&&v.latestChecks.plan?.input.copies)counts.push(v.latestChecks.plan.input.copies);
  if(example&&v.example)counts.push(v.example.copies);if(reference)counts.push(2);
  return [...new Set(counts)].map(n=>[n,2]);
