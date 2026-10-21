@@ -450,6 +450,17 @@
         "compose"
       ],
       "scope": "Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency. A separate two-turn reader rehearsal carries a delivery note, with optional authored motive/reply and literal supplied-card comparison; existing shows are preserved. A continuing twelve-letter round varies readers and purposes with open message-structure suggestions; old notes and authored drafts remain separate."
+    },
+    {
+      "id": "plants",
+      "name": "Growing shelf: seedling investigation",
+      "status": "built-local",
+      "patterns": [
+        "experiment",
+        "search"
+      ],
+      "route": "#living/plants",
+      "scope": "Invented adequate/dim-light cress illustrations across four days; unscored predictions, copied observation rows, observation/explanation and height-only contrasts, supplied water-test choice, frozen evidence beside planting plans. Not measured biology, independent measurement, experimental design or full plant-growth coverage."
     }
   ],
   "manualReferences": [
@@ -655,6 +666,34 @@
       "kind": "scoped-practice",
       "source": "dist/letter-trail-ui.mjs",
       "scope": "Twelve authored letters revisit useful details, combined instructions and a reader’s knowledge/purpose. Three narrow audience cases add a landmark for a newcomer or an explanation for a changed plan/order. Open suggestions use first-kept supplied-card/clue choices and explicit support/familiarity; original wording is human-read and ungraded. No independent writing, full tone/register, reading-level or full-topic claim."
+    },
+    {
+      "game": "plants",
+      "topicId": "mt_3v0VNkwquK",
+      "kind": "scoped-practice",
+      "source": "dist/plant-study-ui.mjs",
+      "scope": "Light slice only: inspect explicitly invented already-emerged cress seedlings under adequate versus too-little light, with supplied controls. No measured growth dataset, species-wide light rule or full plant-requirements coverage."
+    },
+    {
+      "game": "plants",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/plant-study-ui.mjs",
+      "scope": "Copy selected finite model observations into a labelled table, preserving day, condition, specimen and millimetres. This is supplied-row collecting; independently choosing useful data, measuring and constructing charts remain planned."
+    },
+    {
+      "game": "plants",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "scoped-practice",
+      "source": "dist/plant-study-ui.mjs",
+      "scope": "Two finite model questions distinguish a pictured length from a proposed cause and compare stem length with leaf/stem features. Model observation versus interpretation practice, not a real-world causal experiment."
+    },
+    {
+      "game": "plants",
+      "topicId": "mt_qgb76wHN2X",
+      "kind": "scoped-practice",
+      "source": "dist/plant-study-ui.mjs",
+      "scope": "Choose between two supplied proposed water comparisons: hold light and other conditions alike, or confound light and water. No water results or independent experimental-design claim."
     }
   ],
   "increments": [
