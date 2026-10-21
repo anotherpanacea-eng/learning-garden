@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import {RAIN_CASES} from '../dist/rain-paths-content.mjs';
 import {chooseRainCase,currentRainView,nextRainPhase,rainPaths,keepRainResult,restartRainCase,useRainSupport,setRainView,setRainPage,setRainPrediction,noteRainDisplayExposure,recoverRainPaths} from '../dist/rain-paths-core.mjs';
 import {bindRainPaths,rainPathsPage} from '../dist/rain-paths-ui.mjs';
-import {rainNotebook,rainNotebookInvitation,inviteRainNotebook,rainNotebookView,toggleRainNotebookRow,setRainNotebookBarInput,setRainNotebookPage,setRainNotebookReadPrompt,keepRainNotebookDraft,recoverRainNotebook} from '../dist/rain-notebook-core.mjs';
+import {rainNotebook,rainNotebookInvitation,inviteRainNotebook,rainNotebookView,toggleRainNotebookRow,setRainNotebookBarInput,setRainNotebookPage,setRainNotebookReadPrompt,keepRainNotebookDraft,recoverRainNotebook,noteRainNotebookExposure} from '../dist/rain-notebook-core.mjs';
 import {rainNotebookInvitationPanel,bindRainNotebookInvitations,syncRainNotebookExposure} from '../dist/rain-notebook-bridge.mjs';
 import {ensureFieldNotebook,chooseFieldCase,setFieldPage,toggleFieldRow,setFieldValue,keepFieldDraft} from '../dist/field-notebook-core.mjs';
-import {rainNotebookPage} from '../dist/rain-notebook-ui.mjs';
+import {rainNotebookPage,bindRainNotebook} from '../dist/rain-notebook-ui.mjs';
 import {freshState} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
@@ -18,14 +18,15 @@ class El{
  fire(event){for(const fn of this.listeners[event]||[])fn({currentTarget:this,target:this});}
  getClientRects(){for(let p=this.parentElement;p;p=p.parentElement)if(p.tagName==='DETAILS'&&!p.open)return [];return [{}];}
  querySelector(s){return this.children[s]||null;}
+ querySelectorAll(){return [];}
  focus(){this.focused=true;}
 }
 function dom({caseId='cover-12',origin='current-completed',hidden=false,replace=false}={}){
  const details=new El();details.tagName='DETAILS';details.open=!hidden;
  const panel=new El({rnbCase:caseId,rnbOrigin:origin},hidden?details:null),open=new El(),status=new El(),replacement=new El();panel.children={'[data-rnb-open]':open,'[data-rnb-status]':status,...(replace?{'[data-rnb-replace]':replacement}:{})};
- const exposure=new El({rpResults:'true',rpFacts:''},hidden?details:null);
- globalThis.document={querySelector:s=>s==='.rp-workspace'?{}:null,querySelectorAll:s=>s==='[data-rnb-invitation]'?[panel]:s==='[data-rp-expose]'?[exposure]:s==='.rp-workspace details'&&hidden?[details]:[]};
- return {panel,open,status,replacement,details};
+ const exposure=new El({rpResults:'true',rpFacts:''},hidden?details:null),audio=new El();
+ globalThis.document={querySelector:s=>s==='.rp-workspace'?{}:null,querySelectorAll:s=>s==='[data-rp-audio] [data-speak]'?[audio]:s==='[data-rnb-invitation]'?[panel]:s==='[data-rp-expose]'?[exposure]:s==='.rp-workspace details'&&hidden?[details]:[]};
+ return {panel,open,status,replacement,details,audio};
 }
 function context(s){const record={saves:0,nav:[]};return {record,save:()=>record.saves++,render:()=>{},navigate:p=>record.nav.push(p),expose:e=>noteRainDisplayExposure(s,e)};}
 for(const c of RAIN_CASES){
@@ -47,6 +48,19 @@ for(const c of RAIN_CASES){
 }
 {
  const s={};finish(s,'cover-12');const ui=dom(),ctx=context(s);bindRainPaths(s,ctx);bindRainNotebookInvitations(s,ctx);useRainSupport(s,'help');ui.open.fire('click');ok(ui.status.textContent.includes('changed'),'support change invalidates shown current packet');ok(!s.fieldNotebook,'stale packet creates no chart root');
+}
+{
+ const s={},root=new El();let exposed=0,saved=0;
+ globalThis.document={querySelector:selector=>selector==='.rn-workspace'?root:null};
+ bindRainNotebook(s,{save:()=>saved++,expose:e=>{exposed++;noteRainNotebookExposure(s,e);noteRainDisplayExposure(s,e);saved++;}});
+ eq(exposed,0,'an empty chart entrance forwards no exposure');eq(saved,0,'empty navigation performs no save');eq(s,{},'empty bound page creates neither notebook nor Rain Paths');
+ eq(noteRainNotebookExposure(s,{results:false,unknown:false,facts:[]}),false,'empty exposure is a no-op');eq(s,{},'empty core exposure creates no roots');
+}
+for(const origin of ['current-completed','kept-completed']){
+ const s={};finish(s,'cover-12');if(origin==='kept-completed')keepRainResult(s);
+ const ui=dom({origin}),ctx=context(s);bindRainPaths(s,ctx);bindRainNotebookInvitations(s,ctx);ui.audio.fire('click');ui.open.fire('click');
+ eq(ctx.record.nav,['#living/notebook/rain'],'narration leaves a visible invitation usable');
+ eq(rainNotebookView(s).source.result.support.global.audio,origin==='current-completed'?true:undefined,'current narration support freezes, kept source support remains exact');
 }
 class Storage{constructor(){this.map=new Map();}get length(){return this.map.size;}key(i){return [...this.map.keys()][i]??null;}getItem(k){return this.map.get(k)??null;}setItem(k,v){this.map.set(k,String(v));}removeItem(k){this.map.delete(k);}}
 {
