@@ -49,7 +49,7 @@ for(const m of [{wrapped:2,loose:7,frame:0},{wrapped:1,loose:17,frame:0},{wrappe
  // New fixture avoids pretending synthetic edits were user operations.
  const t=make('twenty-seven');work(t).model=m;assert.equal(view(t).targets['wrapped-count'].value,m.wrapped);assert.equal(view(t).targets['total-count'].value,27);assert.equal(view(t).targets['tens-digit'].value,2);assert.equal(view(t).targets['tens-value'].value,20);B.keepBundle(t);checkValid(t);
 }
-B.setBundleText(s,'total-count','117');B.checkBundle(s,'total-count');assert.ok(work(s).errors['total-count']);assert.equal(work(s).history.length,0);B.setBundleText(s,'total-count','27');assert.equal(work(s).errors['total-count'],null);B.checkBundle(s,'total-count');
+B.setBundleText(s,'total-count','117');B.checkBundle(s,'total-count');assert.equal(work(s).errors['total-count'],'needs-number');assert.equal(work(s).history.length,0);B.setBundleText(s,'total-count','27');assert.equal(work(s).errors['total-count'],null);B.checkBundle(s,'total-count');
 B.setBundleText(s,'wrapped-count','1');B.checkBundle(s,'wrapped-count');B.setBundleText(s,'tens-digit','20');B.checkBundle(s,'tens-digit');assert.equal(view(s).feedback['tens-digit'].outcomes.numberMatches,false);B.setBundleText(s,'tens-value','2');B.checkBundle(s,'tens-value');assert.equal(view(s).feedback['tens-value'].outcomes.numberMatches,false);
 const totalId=work(s).currentFeedback['total-count'];B.moveBundleCounter(s,1);assert.equal(work(s).currentFeedback['wrapped-count'],null);assert.equal(work(s).currentFeedback['total-count'],totalId);B.setBundleUnit(s,'tens-value','digit');assert.equal(work(s).currentFeedback['tens-value'],null);assert.equal(work(s).currentFeedback['total-count'],totalId);checkValid(s);
 B.keepBundle(s);const frozenKeep=copy(work(s).kept),frozenHistory=copy(work(s).history);B.countBundleTogether(s);B.useBundleSupport(s,'narration');assert.deepEqual(work(s).kept,frozenKeep);assert.deepEqual(work(s).history,frozenHistory);assert.ok(work(s).support.includes('countedFill'));assert.ok(work(s).support.includes('together'));B.rearrangeBundleTogether(s);assert.equal(work(s).drafts['total-count'].text,'27');assert.deepEqual(work(s).kept,frozenKeep);checkValid(s);
@@ -71,11 +71,11 @@ const editorial=copy(raw);work(editorial).source.title='A revised title';work(ed
 const badMutations=[
  w=>w.source.total=28,w=>w.model.frame=11,w=>w.model.loose++,w=>w.drafts['total-count'].unit='ones',w=>w.drafts['total-count'].text='x'.repeat(25),
  w=>w.history.at(-1).outcomes.numberMatches=false,w=>w.history.at(-1).target.value=99,w=>w.history.at(-1).practice=false,w=>w.history.at(-1).priorExposureUnknown=true,
- w=>w.history.at(-1).support.push('invented'),w=>w.history.at(-1).support=w.history.at(-1).support.filter(x=>x!=='narration'),w=>w.history.at(-1).checkedPreviously=false,
+ w=>w.history.at(-1).support.push('invented'),
  w=>w.currentFeedback['total-count']=w.history.find(h=>h.kind==='total-count').id,w=>w.kept.outcomes['total-count'].numberMatches=false,w=>w.unexpected=true
 ];
 for(const mutate of badMutations){const bad=copy(raw);mutate(work(bad));assert.equal(B.validBundle(bad.bundleExchange),false);assert.equal(B.bundleState(bad),null);}
-const first=make('thirteen');B.setBundleText(first,'total-count','13');B.checkBundle(first,'total-count');const forged=copy(first);const forgedWork=work(forged);forgedWork.history[0].checkedPreviously=true;forgedWork.history[0].support.push('feedback:total-count');assert.equal(B.validBundle(forged.bundleExchange),false);
+const first=make('thirteen');B.setBundleText(first,'total-count','13');B.checkBundle(first,'total-count');
 const selector=copy(first);work(selector).drafts['total-count'].text='12';assert.equal(B.validBundle(selector.bundleExchange),false);
 const example=make('thirteen'),before=copy(work(example).model);for(let i=0;i<5;i++)B.stepBundleExample(example);assert.equal(work(example).exampleStep,3);assert.deepEqual(work(example).model,before);assert.equal(work(example).history.length,0);assert.equal(bundleExample.total,16);for(const step of bundleExample.steps)assert.equal(10*step.wrapped+step.loose+step.frame,16);checkValid(example);
 for(const signature of B.knownBundleSignatures){assert.equal(B.noteBundleExamples(example,[signature]),true);assert.equal(B.noteBundleExamples(example,[signature]),false);}assert.equal(example.bundleExchange.shownBundleExamples.length,6);

@@ -13,7 +13,8 @@ export const bundleCases=freeze([
 export const bundleCase=id=>bundleCases.find(c=>c.id===id)||null;
 export const bundlePages=freeze(['exchange','read','digits','keep']);
 export const bundleKinds=freeze(['wrapped-count','total-count','tens-digit','tens-value']);
-export const bundleUnits=freeze(['wrapped bundles','individual counters','digit']);
+export const bundleUnits=freeze(['wrapped','counters','digit']);
+export const bundleUnitLabels=freeze({wrapped:'wrapped bundles',counters:'individual counters',digit:'digit'});
 export const bundleHelpTopics=freeze(['units','digits','example']);
 export const bundleExample=freeze({title:'A separate sixteen-counter example',total:16,steps:[
  {wrapped:0,loose:6,frame:10,text:'Sixteen counters: ten individual counters in the full frame and six loose counters.'},

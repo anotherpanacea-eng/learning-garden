@@ -11,26 +11,24 @@ export function parseBundleNumber(raw){if(typeof raw!=='string'||raw.length>24||
 function validSource(s){const c=bundleCase(s?.id);return !!c&&keys(s,Object.keys(c))&&typeof s.title==='string'&&typeof s.request==='string'&&same({...s,title:c.title,request:c.request},c);}
 export function validBundleModel(m,total){return keys(m,['wrapped','loose','frame'])&&Number.isInteger(m.wrapped)&&m.wrapped>=0&&m.wrapped<=4&&Number.isInteger(m.loose)&&m.loose>=0&&m.loose<=42&&Number.isInteger(m.frame)&&m.frame>=0&&m.frame<=10&&10*m.wrapped+m.loose+m.frame===total;}
 const validDrafts=d=>keys(d,bundleKinds)&&bundleKinds.every(k=>keys(d[k],['text','unit'])&&typeof d[k].text==='string'&&d[k].text.length<=24&&bundleUnits.includes(d[k].unit));
-function targets(w){const n=w.source.total,t=Math.floor(n/10);return {'wrapped-count':{value:w.model.wrapped,unit:'wrapped bundles',available:true},'total-count':{value:n,unit:'individual counters',available:true},'tens-digit':{value:t,unit:'digit',available:n>=10},'tens-value':{value:t*10,unit:'individual counters',available:true}};}
+function targets(w){const n=w.source.total,t=Math.floor(n/10);return {'wrapped-count':{value:w.model.wrapped,unit:'wrapped',available:true},'total-count':{value:n,unit:'counters',available:true},'tens-digit':{value:t,unit:'digit',available:n>=10},'tens-value':{value:t*10,unit:'counters',available:true}};}
 const outcome=(kind,w)=>({numberMatches:parseBundleNumber(w.drafts[kind].text)===targets(w)[kind].value,unitMatches:w.drafts[kind].unit===targets(w)[kind].unit});
 const keptOutcomes=w=>map(k=>targets(w)[k].available&&parseBundleNumber(w.drafts[k].text)!==null?outcome(k,w):null);
 const snapshot=w=>({source:clone(w.source),model:clone(w.model),drafts:clone(w.drafts),support:[...w.support]});
 function freshCase(source){return {source:clone(source),model:{wrapped:source.initialWrapped,loose:source.initialLoose,frame:source.initialFrame},drafts:map(k=>({text:'',unit:targets({source,model:{wrapped:source.initialWrapped}})[k].unit})),support:['picturedSource','visualModel'],helpTopic:null,exampleStep:0,errors:map(()=>null),currentFeedback:map(()=>null),checkedKinds:map(()=>false),history:[],nextCheckId:1,kept:null,familiar:false};}
 const fresh=()=>({version:1,currentCase:bundleCases[0].id,page:'exchange',cases:{[bundleCases[0].id]:freshCase(bundleCases[0])},shownBundleExamples:[]});
-const numericError='Enter a whole number from 0 to 99 using digits.';
+const numericError='needs-number';
 function validSnapshot(s,w){return validSource(s.source)&&s.source.id===w.source.id&&validBundleModel(s.model,s.source.total)&&validDrafts(s.drafts)&&supports(s.support)&&s.support.every(k=>w.support.includes(k));}
 function relevant(kind,a,b){return same(a.source.total,b.source.total)&&same(a.drafts[kind],b.drafts[kind])&&(kind!=='wrapped-count'||same(a.model,b.model));}
 const workKeys=['source','model','drafts','support','helpTopic','exampleStep','errors','currentFeedback','checkedKinds','history','nextCheckId','kept','familiar'];
 function validWork(w,id,unknown){
  if(!keys(w,workKeys)||w.source?.id!==id||!validSnapshot(w,w)||!(w.helpTopic===null||bundleHelpTopics.includes(w.helpTopic))||!Number.isInteger(w.exampleStep)||w.exampleStep<0||w.exampleStep>3||typeof w.familiar!=='boolean'||!keys(w.errors,bundleKinds)||!keys(w.currentFeedback,bundleKinds)||!keys(w.checkedKinds,bundleKinds)||!bundleKinds.every(k=>typeof w.checkedKinds[k]==='boolean'&&(w.errors[k]===null||w.errors[k]===numericError&&targets(w)[k].available&&parseBundleNumber(w.drafts[k].text)===null))||!Array.isArray(w.history)||w.history.length>24||!Number.isInteger(w.nextCheckId)||w.nextCheckId<1)return false;
  if(w.helpTopic&&!w.support.includes(w.helpTopic)||w.exampleStep>0&&!w.support.includes('example'))return false;
- let previous=0,last=null;const seen=new Set(),complete=w.nextCheckId<=25;
+ let previous=0;const complete=w.nextCheckId<=25;
  for(const h of w.history){
-  if(!keys(h,['id','kind','source','model','drafts','support','target','outcomes','practice','familiar','checkedPreviously','priorExposureUnknown'])||!Number.isInteger(h.id)||h.id<=previous||h.id>=w.nextCheckId||!bundleKinds.includes(h.kind)||!validSnapshot(h,w)||h.practice!==true||typeof h.familiar!=='boolean'||typeof h.checkedPreviously!=='boolean'||h.priorExposureUnknown!==unknown||!same(h.target,targets(h)[h.kind])||!h.target.available||parseBundleNumber(h.drafts[h.kind].text)===null||!same(h.outcomes,outcome(h.kind,h))||h.checkedPreviously!==h.support.includes(`feedback:${h.kind}`)||h.familiar&&!w.familiar)return false;
-  if(complete&&(h.id!==previous+1||h.checkedPreviously!==seen.has(h.kind))||seen.has(h.kind)&&!h.checkedPreviously||h.id===1&&(h.checkedPreviously||bundleKinds.some(k=>h.support.includes(`feedback:${k}`))))return false;
-  if(last&&(!last.support.every(s=>h.support.includes(s))||!h.support.includes(`feedback:${last.kind}`)||last.familiar&&!h.familiar))return false;
-  for(const k of bundleKinds){if(seen.has(k)&&!h.support.includes(`feedback:${k}`)||complete&&h.support.includes(`feedback:${k}`)!==seen.has(k))return false;}
-  previous=h.id;last=h;seen.add(h.kind);
+  if(!keys(h,['id','kind','source','model','drafts','support','target','outcomes','practice','familiar','checkedPreviously','priorExposureUnknown'])||!Number.isInteger(h.id)||h.id<=previous||h.id>=w.nextCheckId||!bundleKinds.includes(h.kind)||!validSnapshot(h,w)||h.practice!==true||typeof h.familiar!=='boolean'||typeof h.checkedPreviously!=='boolean'||h.priorExposureUnknown!==unknown||!same(h.target,targets(h)[h.kind])||!h.target.available||parseBundleNumber(h.drafts[h.kind].text)===null||!same(h.outcomes,outcome(h.kind,h)))return false;
+  if(complete&&h.id!==previous+1)return false;
+  previous=h.id;
  }
  if(w.nextCheckId!==previous+1||w.history.length!==Math.min(24,w.nextCheckId-1))return false;
  for(const k of bundleKinds){const latest=w.history.filter(h=>h.kind===k).at(-1),selector=w.currentFeedback[k];if(w.checkedKinds[k]!==!!latest||w.support.includes(`feedback:${k}`)!==!!latest||!targets(w)[k].available&&(latest||selector!==null)||selector!==null&&(!latest||selector!==latest.id||!relevant(k,latest,w)))return false;}

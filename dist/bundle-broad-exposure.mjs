@@ -17,7 +17,7 @@ export function bundleQuestionExposure(state,question){
  if(!p)return {familiar:false,priorExposureUnknown:false};
  const signature=`bundle:0:${p.tens}:${p.ones}`;
  const root=Object.hasOwn(state,'bundleExchange')?bundleState(state):null;
- return {familiar:!!root&&knownBundleSignatures.includes(signature)&&root.shownBundleExamples.includes(signature),priorExposureUnknown:bundleHistoryUnknown(state)};
+ return {familiar:!!root&&knownBundleSignatures.includes(signature)&&root.shownBundleExamples.includes(signature),priorExposureUnknown:knownBundleSignatures.includes(signature)&&bundleHistoryUnknown(state)};
 }
 export function syncBundleQuestionExposure(state,question,draft){
  if(!draft||typeof draft!=='object')return false;
