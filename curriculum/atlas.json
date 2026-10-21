@@ -509,7 +509,7 @@
     {
       "id": "travelers-archive",
       "name": "Travelers’ Archive: Paris,1910",
-      "status": "built-local",
+      "status": "live",
       "patterns": [
         "read",
         "search",
@@ -517,6 +517,17 @@
       ],
       "route": "#archive",
       "scope": "One reviewed Paris1910 visit: real credited CC0 photograph, modern original chronology summaries, schematic place matching, ordinal date ordering, finite source-scope/interpretation choices and ungraded local reply. Production date is distinct from exact scene date; no citywide recovery, independent research/decoding or French-proficiency claim."
+    },
+    {
+      "id": "rain-notebook",
+      "name": "Rain Paths charts: a carried result",
+      "status": "live",
+      "patterns": [
+        "experiment",
+        "build"
+      ],
+      "route": "#living/notebook/rain",
+      "scope": "Freeze one actual completed current or kept machine result, choose useful counts and construct editable two-bar charts on a fixed 0–24 model-token scale. Draft reading, source fidelity and original runoff questions remain separate. Four finite sources; no measured hydrology, independent scale choice or learning-level inference."
     }
   ],
   "manualReferences": [
@@ -897,6 +908,27 @@
       "kind": "scoped-practice",
       "source": "dist/travelers-archive-ui.mjs",
       "scope": "Select the supplied photo, chronology or neither for a specific question, then choose evidence/limits for a prepared reply. No broad research proficiency or automatically evaluated original writing."
+    },
+    {
+      "game": "rain-notebook",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/rain-notebook-ui.mjs",
+      "scope": "Select and organise completed model counts relevant to a supplied runoff question. No new real measurement or independent data collection."
+    },
+    {
+      "game": "rain-notebook",
+      "topicId": "mt_7IFpDVNsmt",
+      "kind": "scoped-practice",
+      "source": "dist/rain-notebook-ui.mjs",
+      "scope": "Present carried machine counts as two labelled bars and compare the draft with its frozen source. No living-thing classification or full scientific presentation claim."
+    },
+    {
+      "game": "rain-notebook",
+      "topicId": "mt_r8XnXwRA6g",
+      "kind": "scoped-practice",
+      "source": "dist/rain-notebook-ui.mjs",
+      "scope": "Construct bars against a supplied four-token tick scale; distinguish reading the entered chart from source fidelity and compare two runoff counts. No independent scale choice, pictograms or broad graph proficiency."
     }
   ],
   "increments": [

@@ -32,6 +32,8 @@ function sourceValid(s){
  const c=object(s)&&rainCaseById(s.caseId);
  return !!c&&keys(s,['caseId','model','config','rows','support','familiar'])&&same(wordless(s.model),wordless(modelSource()))&&same(wordless(s.config),wordless(c))&&same(s.rows,ledgers(c,3*c.newRainTotal/4))&&taskSupportValid(s.support)&&typeof s.familiar==='boolean';
 }
+// A carried completed result is valid independently of the live optional root.
+export const rainResultSourceValid=sourceValid;
 function predictionValid(p){return p===null||keys(p,['choice','timing','resultsExposed','exposureUnknown','support','familiar'])&&CHOICES.includes(p.choice)&&typeof p.resultsExposed==='boolean'&&typeof p.exposureUnknown==='boolean'&&p.timing===(p.resultsExposed?'after-results':p.exposureUnknown?'unknown':'before-results')&&supportValid(p.support)&&typeof p.familiar==='boolean';}
 function responseValid(task,value){
  if(task==='factor')return rainQuestions('cover-12')[0].choices.some(c=>c.id===value);

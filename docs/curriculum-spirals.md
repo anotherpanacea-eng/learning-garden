@@ -156,3 +156,9 @@ The Measuring Kitchen gives the café a standard-unit counterpart to the Sharing
 Travelers’ Archive revisits Paris through historical evidence. A photograph gives one local view; a modern chronology selects events. The same packet supports place-label matching, date ordering, visible-detail questions, source selection and a prepared reply. The reply uses dates for timing and leaves exact street depth or everyone’s feelings uncertain. A photograph’s production date is not automatically its capture moment.
 
 **Built:** one Paris 1910 pack, full credited CC0 photo, original schematic, three ordinal events, eight finite source questions, prepared evidence/limit choices and exact local human-read writing. **Planned:** more reviewed places/periods and a separately authored French pack. **Missing:** independent archive research, a broad history sequence, geographic distances, source corroboration by independent eyewitnesses and evaluated original writing. [Spec 46](specs/46-travelers-archive-first-visit.md).
+
+## Same results, new representations
+
+The water-chart branch carries an actual completed Rain Paths result into the Field Notebook. A faithful chart of stored tokens can be irrelevant to a runoff question; a wrong runoff chart can still be read correctly. These contrasts give the familiar chart loop a new scientific purpose without treating arbitrary tokens as calibrated water measurements.
+
+**Built in this increment:** four finite completed-source invitations, frozen provenance, reversible data selection and two-bar construction, distinct draft/source/model checks, exact pending text and unfinished keeps. **Missing:** independent scale design, real data collection, causal explanation assessment and water-cycle modelling. Prior viewing remains familiar practice across both games. [Spec 47](specs/47-rain-notebook-spiral.md).

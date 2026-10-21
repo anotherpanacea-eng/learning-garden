@@ -279,3 +279,7 @@ Trying cards is exploration. Only explicitly keeping a supplied version contribu
 ## Travelers’ Archive
 
 [Open a Paris archive parcel](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive): inspect a real, credited CC0 photograph from the 1910 Seine flood, place evidence on an original schematic, order three dated events, and compare a picture with modern chronology summaries. Prepared replies distinguish evidence from missing information; optional original writing is local, exact and ungraded. One bounded visit, open to revisit; no independent history/reading-level or French-proficiency claim. [Spec 46](docs/specs/46-travelers-archive-first-visit.md).
+
+## Rain Paths charts
+
+Carry an actual completed current or kept Rain Paths result to [a water page in the Field Notebook](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain). Choose useful data, build two bars, read the draft and compare it with its frozen source. Wrong bars can still be read correctly; source fidelity and the runoff question stay separate. Pending entries and unfinished kept charts survive revisiting. These are arbitrary model tokens, never mL or measured rain. [Spec 47](docs/specs/47-rain-notebook-spiral.md).

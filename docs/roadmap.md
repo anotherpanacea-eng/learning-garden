@@ -139,3 +139,7 @@ The continuing letter round is implemented in [spec 40](specs/40-changing-letter
 ### Travelers’ Archive: a picture, dates and a careful reply
 
 [Spec 46](specs/46-travelers-archive-first-visit.md) implements the first bounded archive visit from spec 24: one CC0 historical photograph, original modern chronology summaries, a non-metric place schematic, ordinal ordering and source-scope questions. Original replies are optional and ungraded. Known object production dates do not become precise scene dates. Further settings, broader chronology and a French-authored pack remain future work.
+
+### A completed machine result becomes a chart
+
+[Spec 47](specs/47-rain-notebook-spiral.md) adds a narrow Rain Paths → Field Notebook spiral. A real completed game result is frozen explicitly, then revisited through data relevance, chart construction, draft reading, source fidelity and an original runoff question. Water and cress charts retain separate drafts and views. Further datasets, physical observations, independent scales and general chart choice remain future work.
