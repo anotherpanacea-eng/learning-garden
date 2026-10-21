@@ -103,7 +103,7 @@ export function keepLetter(state,place,mode='supplied'){
  const snapshot={episodeId:e.id,caseId:e.caseId,kind:kindOf(x.case),mode,cardId:card?.id||null,clueId:clue?.id||null,fits:card?card.fits:null,clueRelevant:clue?clue.relevant:null,...observed,qualifies:mode==='supplied'&&observed.priorExposure==='fresh'&&card?.fits===true&&clue?.relevant===true&&!observed.support.help&&!observed.support.example};
  e.firstKept=clone(snapshot);r.recent.push(snapshot);r.recent=r.recent.slice(-6);
  if(mode==='supplied'&&snapshot.fits===true&&snapshot.clueRelevant===true){
-  const index=LETTER_KINDS.indexOf(snapshot.kind),helped=observed.support.help||observed.support.example;
+  const index=LETTER_KINDS.indexOf(snapshot.kind),own=mergeSupport(...Object.values(e.notebook.cases[e.caseId]).map(w=>w.support)),helped=own.help||own.example;
   if(helped)r.suggested={kind:LETTER_KINDS[Math.max(0,index-1)],reason:'You explored a hint or a different example. A letter with fewer details is available next; every kind stays open.'};
   else {const successes=new Set(r.recent.filter(a=>a.kind===snapshot.kind&&a.qualifies).map(a=>a.caseId));
    if(snapshot.qualifies&&successes.size>=2&&index<2)r.suggested={kind:LETTER_KINDS[index+1],reason:'Two new letters used a detail and a clue that served the reader’s request. You could explore a new reason to revise.'};

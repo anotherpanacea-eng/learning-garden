@@ -78,7 +78,7 @@ for(const day of PLANT_DAYS){
  plan.observation.stemMm=999;equal(s.plantStudy.plan,frozen,'returned copy cannot mutate frozen carried work');
  const serialized=JSON.stringify(s);const restored=JSON.parse(serialized);equal(plantStudy(restored),s.plantStudy,'exact JSON transfer');equal(JSON.stringify(restored),serialized,'restoring does not regenerate days');
  const reordered=JSON.parse(serialized);reordered.plantStudy.plan.observation=Object.fromEntries(Object.entries(reordered.plantStudy.plan.observation).reverse());check(plantStudy(reordered),'semantic source validation permits JSON key reordering');
- const forged=copy(s);forged.plantStudy.plan.observation.stemMm++;equal(plantStudy(forged),null,'invented snapshot cannot silently change authored source');
+ const older=copy(s);older.plantStudy.plan.observation.sources[3].url='https://example.invalid/earlier-link';check(plantStudy(older),'a frozen plan stays readable after authored content is corrected');equal(plantStudy(older).plan.observation.sources[3].url,'https://example.invalid/earlier-link','frozen copy kept exact');
 }
 for(const raw of [null,[],{version:99,work:'keep'},{version:1,day:6},'<future payload>']){
  const s={plantStudy:copy(raw),cafe:{keep:true}};const before=copy(s);equal(plantStudy(s),null,'unknown state unavailable');equal(ensurePlantStudy(s),null,'ensure preserves unknown state');check(!setPlantDay(s,6)&&!setPlantPrediction(s,'dim')&&!recoverPlantStudy({}),'no overwrite absent or unknown work');equal(s,before,'unknown raw root unchanged before recovery');
@@ -91,4 +91,5 @@ for(const raw of [null,[],{version:99,work:'keep'},{version:1,day:6},'<future pa
  const invalid={plantStudy:{version:99,earlier:'exact'}};const raw=copy(invalid);check(!notePlantExposure(invalid,6)&&!notePlantExposureUnknown(invalid),'cross-loop hooks leave unsupported roots unavailable');equal(invalid,raw,'unknown earlier work exact');recoverPlantStudy(invalid);setPlantPrediction(invalid,'unsure');equal(invalid.plantStudy.prediction.latest.timing,'unknown','explicit recovery does not assert before-looking');
  const old={};ensurePlantStudy(old);setPlantPrediction(old,'dim');check(!Object.hasOwn(old.plantStudy,'exposureUnknown')&&!Object.hasOwn(old.plantStudy.prediction.first,'exposureUnknown'),'old valid format stays compatible without a migration');check(plantStudy(JSON.parse(JSON.stringify(old))),'old and extended snapshots validate');
 }
+{const q=plantQuestions(0)[0];check(q.feedback.cause.includes('still match')&&!q.feedback.cause.includes('illustrates a source-informed pattern'),'day-0 cause feedback does not imply stretching the pictures do not show');}
 console.log(`Plant study checks passed: ${checks}`);

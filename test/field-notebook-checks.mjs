@@ -115,4 +115,13 @@ for(const c of FIELD_CASES){
  chooseFieldCase(s,FIELD_CASES[3].id);chooseFieldCase(s,c.id);equal(currentFieldCase(s).work.pending.modelChoice,'unsure','case revisits preserve pending model choice');equal(currentFieldCase(s).work.pending.difference,'later','case revisits preserve unfinished difference');
  const corrupt=copy(s);corrupt.fieldNotebook.cases[c.id].pending.bars[id]=42;equal(fieldNotebook(corrupt),null,'nonstring raw value makes root unavailable without normalization');
 }
+{
+ const s={},c=FIELD_CASES[2];build(s,c);checkFieldChart(s);answerFieldModel(s,c.longer,c.difference);keepFieldDraft(s);
+ const drift=copy(s),w=drift.fieldNotebook.cases[c.id];
+ for(const snap of [w.kept.draft,...w.checks.map(x=>x.snapshot)]){snap.question='An earlier wording of this question';snap.sourceModel.notice='An earlier notice';}
+ w.rows[0].observation.description='An earlier description';w.checks.at(-1).result.feedback='Earlier feedback wording';
+ check(fieldNotebook(drift),'a later wording edit to questions, notices, rows or feedback leaves saved work openable');
+ const t={};chooseFieldCase(t,FIELD_CASES[0].id);chooseFieldCase(t,FIELD_CASES[0].id);check(!currentFieldCase(t).work.familiar,'pressing the current case again does not mark it familiar');
+ chooseFieldCase(t,FIELD_CASES[1].id);chooseFieldCase(t,FIELD_CASES[0].id);check(currentFieldCase(t).work.familiar,'returning from another case marks it familiar');
+}
 console.log(`Field Notebook checks passed: ${checks}`);
