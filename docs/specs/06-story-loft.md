@@ -1,6 +1,6 @@
 # 06 — Story Loft
 
-**Status: Planned; not implemented.**
+**Status: Paired-perspective reading expansion planned. The first creative puppet-theatre loop is implemented in [spec 36](36-story-loft-puppet-theatre.md).**
 
 ## Goal and play loop
 
@@ -14,7 +14,7 @@ Every story offers three unscored options: retell to someone using scenes; compo
 
 ## State and evidence
 
-A versioned `loft` extension stores story/perspective, scene order, evidence choices, revision history, support, and creative chunk IDs. Preserve the latest 24 visit summaries. Keep reported independent/together/not-observed reading separate from answer correctness and help. Predictions remain unscored; acknowledging a project does not prove retelling or writing occurred. Preserve legacy storage keys and records, pause/reload, saving-off, export/reset, and conservative recovery.
+The initial `loft` version 1 extension is now owned by spec 36. The following is a future reading-state proposal, not a schema to overwrite it: use a separately named extension or an explicitly reviewed version migration that preserves puppet shows. A future reading extension stores story/perspective, scene order, evidence choices, revision history, support, and creative chunk IDs. Preserve the latest 24 visit summaries. Keep reported independent/together/not-observed reading separate from answer correctness and help. Predictions remain unscored; acknowledging a project does not prove retelling or writing occurred. Preserve legacy storage keys and records, pause/reload, saving-off, export/reset, and conservative recovery.
 
 ## Accessibility, privacy, and non-goals
 

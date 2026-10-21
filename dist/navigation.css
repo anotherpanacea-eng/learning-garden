@@ -1,0 +1,18 @@
+/* Illustrated wayfinding: the picture and its visible name travel together. */
+.header.garden-header nav{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;width:100%;order:3;padding-top:12px;border-top:1px solid var(--line)}
+.header.garden-header nav a.nav-destination{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:78px;padding:9px 5px;border-radius:12px;font-size:13px;line-height:1.2;text-align:center;text-decoration:none;box-shadow:none}
+.nav-destination img{display:block;flex:none;width:32px;height:32px;pointer-events:none}
+.nav-destination span{max-width:100%;overflow-wrap:normal}
+.header.garden-header nav a.nav-destination:hover{background:#eaf4ef}
+.header.garden-header nav a.nav-destination[aria-current=page]{background:#eaf4ef;box-shadow:inset 0 -3px #397958;font-weight:700}
+.header.garden-header .notes-link{display:inline-flex;align-items:center;gap:6px;min-height:44px}
+.notes-link img{flex:none}
+.header.garden-header .notes-link span{margin-left:0}
+@media(max-width:700px){
+ .header.garden-header nav{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding-top:10px}
+ .header.garden-header nav a.nav-destination{min-height:78px;padding:7px 3px;font-size:12px}
+ .nav-destination img{width:30px;height:30px}
+}
+@media(forced-colors:active){
+ .header.garden-header nav a.nav-destination[aria-current=page]{outline:2px solid Highlight;outline-offset:-3px}
+}

@@ -2,11 +2,39 @@
 
 A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 
-[Try After the Storm](https://number-garden-together.tastypeach3.chatgpt.site/).
+[Try After the Storm](https://after-the-storm-learning.anotherpanacea.workers.dev/).
 
 The opening visit, **First Morning**, has three independent entrances: follow a creature's trail, investigate a mysterious note, or imagine a shelter. Each path offers two reading, science, or mathematics tasks, an unscored design choice, its own ending, and an optional paper project. Mira, Rowan, and Ari are original fictional guides; guide and explorer-avatar choices are independent.
 
 Visits can be paused, resumed, replayed, or left waiting while another path is explored. Existing Number Garden activities and records remain available at the same browser origin. All preferences, drafts, observations, and exports stay browser-local; saving off applies device-wide, while clearing can target one explorer or all explorers. No identity fields, uploads, analytics, live AI, or server-side learner records are used.
+
+Number Garden now has a storm-recovery purpose: count saved seeds, plan 24 planting spaces, and compare lengths and borders. Its illustrated planning table connects existing open math activities to water, gathering, and the café. [Living Garden](https://number-garden-together.tastypeach3.chatgpt.site/#living) now offers renewable searches across nine authored settings: meet land snails, woodlice and adult butterflies, compare changing conditions, follow a delivery note, and count equal packs of café supplies. Small parcels and all ordered facts through 12×12 are open choices. The [original snail visit](https://number-garden-together.tastypeach3.chatgpt.site/#living/first) and its one-time parcel remain intact. This is guided picture investigation, not a field study or ecosystem simulator. New searches independently suggest deeper nature clues, note comprehension and parcel math from a few distinct finished tasks. Every depth stays open: use habitat evidence and before/after changes, follow sequences or infer a parcel from its contents, and find pack counts or plan tomorrow’s delivery. Help and narration remain separate from first-response matching, retries and familiarity. Paused older visits keep their original questions. [Spec 30](docs/specs/30-adaptive-living-garden.md) describes the conservative suggestion rules and limits.
+
+## Full learning graph and next games
+
+The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marble reference graph: 1,590 topics, 3,221 prerequisite edges, eight subjects and 54 domains. The [all-topic index](curriculum/topic-coverage.csv) distinguishes current scoped activity references, supplied explanations and topics not yet mapped. Seven reusable play patterns guide extensions and new games; proposed priorities include Word Workshop, field notebooks/food webs, café fractions and money, messages/map-making, historical evidence, sound/light creation and collaborative stories. These are authoring plans, not a required child sequence or claims of full-topic assessment. Geography, art, music and additional languages also need explicitly authored extensions beyond Marble's subject organization.
+
+[Data provenance and licenses](curriculum/README.md) · [Roadmap](docs/roadmap.md). Rebuild or check the offline atlas with `node scripts/build-learning-atlas.mjs` or `node scripts/build-learning-atlas.mjs --check`. The larger reference graph does not change the live app's smaller map or learner saves.
+
+The home page also offers **Watch the storm pass**, the optional 46-second film from [PR #8](https://github.com/anotherpanacea-eng/learning-garden/pull/8). Pip and Dot shelter their neighbors before the garden’s first morning. It starts on request and has pause/replay controls.
+
+The introductory storm film opens automatically the first time each saved explorer visits this version. It starts silently, lets sound join at the current picture, and can be skipped at any time. Reduced-motion settings leave playback manual. The home-page “Watch the storm pass” link always remains available. With saving off or unavailable, the reminder lasts only for the current page session.
+
+Three more short films celebrate story endings in the same way: *A Postcard Home* (32 seconds) when a Paris errand ends, *Welcome Back, Neighbors* (34 seconds) when the first café supper lights all six lanterns, and *Through the Ribbon Gate* (31 seconds) when Bramble’s gate is untangled. Each opens once per explorer, can be skipped, and stays available from a “Watch … film” link on that ending. Watching a film is not recorded as learning evidence. The Bramble film shows 3 × 4 as a story example, so it notes that fact as seen, which keeps a later 3 × 4 answer from counting as unseen.
+
+The [curriculum spiral plan](docs/curriculum-spirals.md) proposes the next conceptual connections across familiar games, with checked Jane/Marble references and explicit gaps. It is a plan, not additional live coverage.
+
+## Story Loft
+
+[Make a little puppet show](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft): make a pictured puppet show, optionally give each puppet original dialogue, perform one scene at a time and revisit an audience question. Shows begin with three scenes and can grow from one to twelve scenes. Pictures, Puppet words and Story order have separate task pages; longer shows remain optional. Dialogue stays local under the existing save settings and is included in notes downloads. There is no automatic grading or writing-level inference.
+
+The show shelf keeps the latest twelve shows plus the draft. Strictly valid earlier three-scene saves adapt without changing their pictures, performance position or shelf; unsupported formats remain kept and exportable. See [spec 36](docs/specs/36-story-loft-puppet-theatre.md) and [growing stories and clear turns](docs/specs/37-growing-stories-and-clear-turns.md).
+
+## Word Garden
+
+Open [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#words): combine ten word plants and six cuttings, grow 23 authored words, and keep other combinations as discoveries. Eight extra real words explain meanings and spelling changes; unauthored pairs remain separated letter experiments, with no invented pronunciation or false rejection. Eight open discussion cards include new words and a make-your-own invitation. This is word-part exploration with any amount of reading help, not a decoding or spelling assessment. Notebook and current choices stay with the active explorer. [Spec 34](docs/specs/34-word-garden.md).
+
+The complete game, including Word Garden, is published on Cloudflare Static Assets. The earlier Sites address retains its earlier release. Browser-local notebooks belong to their address: existing progress stays at the old address; it is not automatically copied to Cloudflare. Use Grown-up notes → Bring progress from another site to import the old notes JSON file locally as a separate explorer; existing explorers are preserved. Move one explorer at a time and keep the original file until you have checked the import.
 
 ## Run locally
 
@@ -23,6 +51,27 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/field-notebook-checks.mjs
+node test/field-notebook-integration-checks.mjs
+node test/sharing-counter-checks.mjs
+node test/sharing-counter-integration-checks.mjs
+node test/rain-paths-checks.mjs
+node test/rain-paths-integration-checks.mjs
+node test/measuring-recipes-checks.mjs
+node test/measuring-recipes-integration-checks.mjs
+node test/travelers-archive-checks.mjs
+node test/travelers-archive-ui-checks.mjs
+node test/travelers-archive-integration-checks.mjs
+node test/plant-study-checks.mjs
+node test/plant-study-integration-checks.mjs
+node test/letter-trail-checks.mjs
+node test/letter-trail-integration-checks.mjs
+node test/message-checks.mjs
+node test/message-integration-checks.mjs
+node test/loft-checks.mjs
+node test/loft-growing-checks.mjs
+node test/progress-transfer-checks.mjs
+node test/word-garden-checks.mjs
 node test/core-checks.mjs
 node test/broad-checks.mjs
 node test/broad-variants-checks.mjs
@@ -31,10 +80,25 @@ node test/broad-help-checks.mjs
 node test/broad-model-checks.mjs
 node test/explorer-storage-checks.mjs
 node test/plantings-and-speech-checks.mjs
+node test/number-garden-story-checks.mjs
+node test/living-garden-checks.mjs
+node test/living-spiral-checks.mjs
+node test/living-adaptive-checks.mjs
+node test/garden-turn-checks.mjs
 node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs
 node test/science-checks.mjs
+node test/workshop-checks.mjs
+node test/post-office-checks.mjs
+node test/post-office-ui-checks.mjs
+node test/post-pagination-checks.mjs
+node test/post-rival-checks.mjs
+node test/post-rival-adaptive-checks.mjs
+node test/post-rival-adaptive-ui-checks.mjs
+node test/courier-rival-ui-checks.mjs
+node test/learning-invitation-checks.mjs
+node test/learning-connections-checks.mjs
 node test/cafe-expedition-checks.mjs
 node test/cafe-supper-checks.mjs
 node test/facts-checks.mjs
@@ -45,6 +109,10 @@ node test/story-pack-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
 node test/french-exploration-checks.mjs
+node test/storm-film-checks.mjs
+node test/ending-film-checks.mjs
+node test/equal-groups-checks.mjs
+node test/equal-groups-integration-checks.mjs
 node scripts/check-story-packs.mjs
 ```
 
@@ -52,7 +120,7 @@ These checks use synthetic observations. They check the application logic; they 
 
 ## Roadmap and science expeditions
 
-The [six-step roadmap](docs/roadmap.md) links reviewed specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Only step 1 is implemented in this increment; the other five remain planned.
+The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab, Storm Workshop, the first Willow Post Office flying-courier increment, Word Garden meaning work and the first Story Loft puppet theatre are implemented. Phonics, ecosystem models and the paired-perspective reading expansion remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with pictured courier choices, freely available practice and the first optional rival-witch encounter.
 
 Science offers three guided water visits with optional predictions, a focused external Marble Water Lab link, self-reported observations, original controllable explanation pictures, and a discussion/project invitation. Each mission is independently available and can finish without an external visit or an answer. Link selection is not treated as visiting, experiment completion, or understanding. Explanation use and reported reading mode stay distinct. The latest 24 visits stay browser-local under the existing privacy controls; there is no tracking or data exchange with Marble. External application source/assets are not copied or embedded.
 
@@ -104,7 +172,7 @@ Full passages, sentence focus, English meaning/vocabulary help, and skill-matche
 
 This repository contains generic source and curriculum content. Do not commit real learner profiles, names, ages or grades tied to a child, school or location details, family anecdotes, responses, progress, personalized packs, recordings, screenshots, exports, or credentials. Use clearly synthetic examples in tests and review commit metadata and attachments as well as files. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Deployment credentials and the existing Site's hosting configuration are excluded. This repository is the development home. Reviewed static assets are copied to the existing deployment checkout for publication; its hosting identity and credentials stay out of this public repository.
+Deployment credentials, Cloudflare CLI caches and the earlier Site's hosting configuration are excluded. This repository is the development home. Reviewed static assets from `dist/` are published on Cloudflare; account configuration and credentials stay out of this public repository.
 
 ## Current Number Garden prototype
 
@@ -120,7 +188,7 @@ The parent-facing learning map uses a focused subset of Marble's actual prerequi
 
 This is not a validated assessment, a comprehensive skills inventory, a grade-level estimate, or a class-placement recommendation. The adult and child select the observed method together; the app does not judge spoken explanations. Try different examples and representations on later days. Pip and Dot, stories, lessons, questions, and activities are original.
 
-Curriculum: Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://github.com/withmarbleapp/os-taxonomy, pinned commit `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. `dist/marble-map.json` contains 64 topics and 74 relationships: the 25 task-linked topics plus their direct prerequisites. Selected age suffixes have been removed from names; descriptions and link reasons are retained. Database/subset: ODbL 1.0; Marble descriptive content: CC BY-SA 4.0. The map view links its downloadable data, pinned source, and both licenses. Further relationships outside the slice are disclosed.
+Curriculum: Marble Skill Taxonomy v1, © Generative Spark, Inc. (Marble), https://github.com/withmarbleapp/os-taxonomy, pinned commit `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. `dist/marble-map.json` contains 87 topics and 92 relationships: the original 25 math focus topics and their direct prerequisites, plus ten limited science, data-display, English and computing activity connections and their direct prerequisites. Topic matches describe only the stated practice; context-only nodes have no attached activity. Selected age suffixes have been removed from names; descriptions and link reasons are retained. Database/subset: ODbL 1.0; Marble descriptive content: CC BY-SA 4.0. The map view links its downloadable data, pinned source, and both licenses. Further relationships outside the slice are disclosed.
 
 Teaching reference: IES, Assisting Students Struggling with Mathematics: Intervention in the Elementary Grades, https://ies.ed.gov/ncee/wwc/PracticeGuide/26. The prototype combines visual explanations, brief practice, flexible strategies, and interesting problems without timers or placement gates.
 
@@ -135,3 +203,89 @@ Specs 15–21 are implemented: matched and labeled teaching pictures; authored f
 Anonymous explorer slots use a picture, color and symbol, with separate full-app progress and voice preferences. No names or other identifying fields are added. Legacy shared progress is copied without changing the original; unreadable saves are kept before replacement, and failed preservation writes leave the original untouched. Notes can download or remove kept copies. Saving off removes all app-managed explorer, legacy and kept copies on this device while retaining current sessions in memory. Clearing one explorer leaves the others intact.
 
 Participation grows an original storm-recovery garden: finishing a walk or adventure, using a new kind of help, or acknowledging an open invitation can bring a plant or decoration. A skipped walk counts equally. Plantings never influence skill suggestions or become learning evidence. Open invitations include the seven areas' wondering prompts, estimates, defendable choices, different rectangles and counterexamples. All paths remain open.
+
+Living Garden, the café and Bramble now offer **Carry an idea here** cards. A finished math task can suggest the same equal-group relationship with different objects, or a neighboring fact. Choosing a card starts a real guest, ribbon puzzle or equal-packs search; waiting work is protected, usual preferences stay unchanged, and each destination records its own actual responses. Source context, help/retries and unknown familiarity remain visible in grown-up notes. The café also offers unscored nature-comparison and reading-evidence conversations. See [spec 31](docs/specs/31-learning-between-games.md).
+
+## Storm Workshop and connected adventures
+
+Open `#workshop` to investigate the storm-damaged parcel ramp. Choose ramp height or landing surface as the changed variable, hold the other fixed, release the same cart without a push, and step it to the ramp’s foot and stopping point. Six authored configurations each cycle through three illustrative distances. These are model results, not measured physical data or a calibrated physics simulator. The ruler begins at the ramp’s foot; a table and a zero-based 0–30 bar graph show the same distances. Replaying changes no results or run counts.
+
+Predictions and explanations are optional and unscored. Support and separately reported reading stay distinct. Paused trials retain exact settings, phase, result and model revision. Older unsupported models remain closed, readable work. The latest 24 comparisons and 24 completed trial rows per comparison stay local; counters continue after older rows are trimmed. Explorer switching, saving off, notes/export and reset apply as elsewhere.
+
+Open `#explore` for the original connected-adventure directory. Workshop, Water Lab, café, orchard, English Paris and measurement/fractions activities offer contextual links. These are thematic invitations, distinct from Marble’s actual prerequisite links. Navigation preserves waiting activities. [Spec 03](docs/specs/03-storm-workshop.md) records model details, scoped connections and upstream study. [The roadmap](docs/roadmap.md) includes the first Sky Post courier loop at Willow Post Office; girl witch, boy wizard and nonbinary sorcerer presets, a freely available ribbon example and Bramble’s optional rival challenge are implemented. Bramble’s generated challenges are implemented; the six real packing orders remain authored examples. Deliveries are the play; no play-credit gate is planned.
+
+## Willow Post Office and Sky Post
+
+Open `#post` to borrow a broom and take one of six original orders. Pack buns, ribbons, blankets, seed packets, flags or paper stars with pictured addition, subtraction or equal groups. Count the contents or choose Pack together; both keep the adventure open. These are six authored examples, not an adaptive fact library. Write a route by adding Go/Then/There/Give clauses, move or remove lines, and fly one instruction at a time across the four-landmark map. Extra stops are welcome. The courier asks for clarification when a place is missing or a parcel is offered to the wrong person, and stops after a valid handoff. Changing words resets only the route playback, keeping the order, parcel and attempts.
+
+Choose a pictured girl witch (she/her), boy wizard (he/him), nonbinary sorcerer (they/them), or sky rider. Change the portrait or pronouns independently afterward. Courier choices stay local to Post Office; the garden explorer and guide stay independent. Legacy saves without an override retain their explorer portrait. An isolated smaller example, optional prediction and local narration support the delivery. Narration requests never establish listening or independent decoding. Reading reports and support flags remain separate, as do packing attempts and structured-composition checks. No writing, reading level, programming proficiency or multiplication mastery is inferred.
+
+Pending input, bank selection, clauses, helper step, courier position and the frozen request survive pause/reload and explorer switching. Unsupported saves remain exact kept work. Latest 24 visits, 24 packing attempts and 24 route-check snapshots per visit are retained; replays do not add a second completion. Existing save-off, notes/export and reset controls apply. [Spec 02](docs/specs/02-willow-post-office.md) records the reviewed behavior and upstream study. Courier choices and Bramble’s first rival encounter are implemented in [spec 25](docs/specs/25-sky-post.md).
+
+
+Meet **Bramble**, an original girl witch fixing a storm-tangled ribbon gate. Any delivery offers a generated supplies puzzle or a separate pictured example first. Choose mixed parcels, multiplication, addition or subtraction, with all tables 1–12 or a particular multiplication table. All 144 ordered multiplication facts, including 12×12, are available. Bramble mixes useful revisits, familiar patterns and new examples using recent finished rounds; support-heavy play still gets fresh facts. A miss opens the separate stepped example; try again, solve together, or take the quiet route. Your parcel and pending flight instruction stay exactly where you left them. Continuing is manual, and there are no play credits, hearts or timers.
+
+Each encounter freezes its task and keeps raw attempts, support, narration requests and resolution separately from real packing, route checks and reading reports. No independent-recall or mastery inference is added. All phases survive pause/reload, explorer switching and the existing local export/save-off/reset controls. Choose Another challenge without starting a new delivery, including after a parcel has arrived. The previous round is archived once; the latest 96 finished generated rounds are kept in finish order. Next-question preferences never rewrite a pending puzzle. Large arrays stay compact, and multiplication can be built in parts on request. Optional method reports remain separate from support. Existing authored encounters stay valid and are preserved when replaced. See [spec 26](docs/specs/26-bramble-changing-challenges.md).
+
+The Water Lab’s three existing visits now begin with the storm-flooded garden path. They distinguish water flowing downhill, soaking into the ground and evaporating, with a paper recovery-map invitation. The existing close-up molecule pictures explain melting, warming and evaporation; a controllable runoff/drainage investigation remains a roadmap follow-up. No science mission IDs or saved observations change.
+
+
+## Moving saved progress
+
+1. On the old site, use the browser/device where you played. In Grown-up notes, select the explorer and choose **Download our notes**.
+2. On the [current site](https://after-the-storm-learning.anotherpanacea.workers.dev/#notes), choose that JSON file under **Bring progress from another site**.
+3. Check the preview and choose **Add as a separate explorer**. Repeat for other explorers.
+
+The file is read on your device, never uploaded. Existing explorers are not replaced or merged. An exact original copy remains downloadable from Earlier and kept saved copies. If saving is off, imports remain session-only; keep the file or turn saving on. Unavailable questions may close under the normal restore rules, with the source retained. [Specification 35](docs/specs/35-local-progress-transfer.md).
+
+## Cloudflare hosting
+
+The reviewed static assets are served at https://after-the-storm-learning.anotherpanacea.workers.dev/. Deploy only `dist/`, never the repository root or CLI-generated setup folders. From an authenticated Cloudflare account, future reviewed releases can use `npx wrangler deploy --assets ./dist --name after-the-storm-learning`. The current deployment has no application backend or paid compute requirement. Static asset requests are [free and unlimited](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/). Keep credentials and account configuration outside this public repository.
+
+The first equal-group spiral is available at the Café serving bench and Bramble’s ribbon bench. Six quantity families support total, amount-per-group and group-count questions, with editable pictured supplies and preserved work across both places. See [spec 38](docs/specs/38-equal-group-spiral.md). Normal orders, inventory and rival rounds stay separate.
+
+### A message for a reader
+
+[The letter-mending desk](https://after-the-storm-learning.anotherpanacea.workers.dev/#post/messages) offers three original storm-recovery notes: which basket, which destination and which action. Choose a scene clue, try several useful supplied revisions, and compare the reader’s before/after response. Alternate clear messages can serve a different purpose; there is no penalty or required success. Optional original wording is read with a person and never automatically evaluated.
+
+[The reader’s stage](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft/messages) gives the sender a reason and the reader a reply, with optional original dialogue and manual replay. The first crossing copies familiar words and support context; later crossings reopen the destination’s existing draft. Ordinary deliveries, rival challenges, puppet shows and shelves are untouched. Exact authored words stay local under save settings and appear in notes downloads. This is bounded practice, not a reading or writing level. [Spec 39](docs/specs/39-message-reader-spiral.md).
+
+### Changing letters
+
+[Find a changing letter](https://after-the-storm-learning.anotherpanacea.workers.dev/#post/letters/round) or [open the round in Story Loft](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft/letters/round). Twelve original notes revisit one detail, two details together and what a particular reader needs to know. Readers include Kitten, Dragon, Rabbit, Pip and Dot. Two already-actionable notes ask for a reason rather than pretending the directions are wrong. The library rotates; it is finite authored content, not live AI generation.
+
+Trying cards is exploration. Only explicitly keeping a supplied version contributes once to a gentle next-kind suggestion; original wording stays human-read and ungraded. Recent requests, known help, narration, together-reading, repeated encounters and legacy-desk familiarity remain separate. Choose any kind immediately. The current letter, card/clue order, both desk drafts and other games stay intact across pages and reload. The round retains its latest 24 letters plus selected drafts at either desk; notes downloads contain that retained writing. The original three-note desk and its saved work remain available. [Spec 40](docs/specs/40-changing-letters.md).
+
+## The growing shelf
+
+[Seedlings after the storm](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/plants) adds an optional Living Garden investigation: wonder, inspect four invented model days, compare stems and leaves, then carry a kept observation to a planting plan. Adequate-light and dim-light examples use the same millimetre scale. Pictures and numbers are labelled illustrations, not measured cress results. Prediction timing, copied rows, practice and help remain separate; existing habitat trails, beds and café stock are preserved. [Spec 41](docs/specs/41-plant-investigation.md).
+
+## Field Notebook
+
+[Open the Field Notebook](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook) to choose useful model observations, make two labelled bars, read the chart and compare it with its source. Eight open comparisons revisit model days 0/2/4/6 and specimens A/B. A correct reading of an inaccurate chart stays distinct from matching the source or choosing relevant data. Keep unfinished charts, revise later, and bring a frozen chart to the planting corner. Typed-but-unapplied entries and support stay with the explorer. Source values remain explicitly invented; no real plant measurement or learning-level inference is made. [Spec 42](docs/specs/42-field-notebook.md).
+
+## The Sharing Counter
+
+[Pack a picnic](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/sharing) by repairing unequal loaf cuts, comparing half with two quarters, and sharing twelve buns into four equal groups. Six requests stay open, with reversible controls, optional stepped examples and frozen unfinished drafts. The same whole stays pictured; feedback separates share count, equality and packed amount. This is supported visual fraction practice, with no ingredient-stock or supper effects. [Spec 43](docs/specs/43-sharing-counter.md).
+
+## Rain Paths
+
+[Follow the rain](https://after-the-storm-learning.anotherpanacea.workers.dev/#science/rain) through two matched tabletop machines. Manually bring down tokens, follow an opening or sealed lid, inspect storage and outlets, and try a copy through a straight channel or a holding cup that can overflow. Four open cases keep predictions, partial ledgers, exact pending questions, source views and paused plans. These arbitrary tokens are an invented closed machine, not measured rain, soil or a flood forecast. [Spec 44](docs/specs/44-rain-paths.md).
+
+## The Measuring Kitchen
+
+[Prepare a measured dinner tray](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/recipes) with a graduated 500 mL jug,50 mL fills and two separate fictional ingredients. Six cards invite filling, reading, pouring and correcting. An accurate reading of an overfilled portion stays accurate; units, recipe fit and an empty jug are checked separately. Every portion can be returned, and unfinished trays can be kept without changing café orders or stock. [Spec 45](docs/specs/45-measuring-recipes.md).
+
+## Travelers’ Archive
+
+[Open a Paris archive parcel](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive): inspect a real, credited CC0 photograph from the 1910 Seine flood, place evidence on an original schematic, order three dated events, and compare a picture with modern chronology summaries. Prepared replies distinguish evidence from missing information; optional original writing is local, exact and ungraded. One bounded visit, open to revisit; no independent history/reading-level or French-proficiency claim. [Spec 46](docs/specs/46-travelers-archive-first-visit.md).
+
+## Rain Paths charts
+
+Carry an actual completed current or kept Rain Paths result to [a water page in the Field Notebook](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain). Choose useful data, build two bars, read the draft and compare it with its frozen source. Wrong bars can still be read correctly; source fidelity and the runoff question stay separate. Pending entries and unfinished kept charts survive revisiting. These are arbitrary model tokens, never mL or measured rain. [Spec 47](docs/specs/47-rain-notebook-spiral.md).
+
+## Sharing and navigation artwork
+
+The main page and standalone films include static Open Graph and large-image card metadata. The shared1200×630 PNG is `dist/assets/after-the-storm-social-v1.png`; its editable original vector artwork is `design/social-preview.svg`. Hash destinations share the main page preview because the fragment is not sent in an HTTP request. Metadata contains no explorer or saved-progress information. Bump the image filename when replacing it; sharing services may cache earlier cards.
+
+Nine original SVG icons in `dist/icons/` accompany the existing visible navigation names. They are decorative to assistive technology; the text remains the accessible link name. The mobile menu uses four columns with large tap targets. The existing garden mark also supplies the32px PNG favicon and180px Apple touch icon. Raster assets were rendered from the local vector originals with Sharp; no remote fonts, icon library, image service or additional browser dependency is required.

@@ -6,7 +6,7 @@ export const missions = [
   {
     id:'melt', title:'From a frosty patch to a puddle',
     invitation:'What changes when ice becomes liquid water?',
-    story:'Pip finds a frosty patch beside the garden path. Later there is a puddle. Dot wonders what water is doing on a scale too small for beetle binoculars.',
+    story:'The storm left water across the low garden path. A cold night froze the edge of one puddle. Now it is melting again. Pip and Dot investigate what changes inside the water as they plan the garden’s recovery.',
     predictionPrompt:'What might be different inside ice and liquid water?',
     predictions:['In liquid, molecules may move past one another.','In liquid, molecules may stay around fixed places, just as in ice.','I’m not sure yet.'],
     instructions:[
@@ -27,7 +27,7 @@ export const missions = [
   {
     id:'warm', title:'A little warmer, a little livelier',
     invitation:'Compare the motion in cooler and warmer liquid water.',
-    story:'Pip wonders whether warmer water has bigger molecules. Dot suggests looking closely before ordering larger beetle binoculars. Both of these samples will stay liquid.',
+    story:'After the storm, sunlight reaches one puddle while another stays in the shade. Before wondering how the path will dry, Pip asks what warming changes inside liquid water. Dot suggests comparing motion and molecule size. Both model samples stay liquid.',
     predictionPrompt:'What might change when liquid water gets warmer?',
     predictions:['Its molecules may move more vigorously.','Its molecules may grow larger.','I’m not sure yet.'],
     instructions:[
@@ -48,7 +48,7 @@ export const missions = [
   {
     id:'evaporate', title:'Where did the puddle water go?',
     invitation:'Look for a molecule leaving a liquid surface before boiling.',
-    story:'The puddle beside the garden path is getting smaller. Pip suspects a very thirsty invisible visitor. Dot wonders whether some water has joined the air instead.',
+    story:'The storm flooded the low garden path. Now one puddle is getting smaller. Did water flow away, soak into the ground, or join the air? Pip and Dot investigate the air part of the mystery: evaporation.',
     predictionPrompt:'Can a water molecule leave the liquid surface without the water boiling?',
     predictions:['Some molecules may leave the surface before boiling.','Water may have to boil before any molecules can leave.','I’m not sure yet.'],
     instructions:[
@@ -62,7 +62,7 @@ export const missions = [
       {title:'One molecule moves out',body:'Some molecules can escape from the surface into the air. This is evaporation, and it can happen below boiling. We are following just one molecule in this drawing.',model:'evaporate',phase:1},
       {title:'Water in the air is still water',body:'The marked molecule is now water vapor in the air. It has not vanished or become a different substance. Liquid remains below; this picture does not show boiling.',model:'evaporate',phase:2}
     ],
-    talk:'If a puddle gets smaller without boiling, what could a tiny-view drawing show above its surface?',
+    talk:'If a storm puddle gets smaller, some water might flow away or soak into the ground as well as evaporate. What could a tiny-view drawing show about the part that joins the air?',
     project:'Optional: draw a puddle on paper and a tiny-view window at its surface. Trace one molecule from the liquid into the air and label it “still water.” Or tell the story of its journey. No real water experiment is needed.',
     sourceLinks:[lab,{title:'USGS: Evaporation and the Water Cycle',url:'https://www.usgs.gov/water-science-school/science/evaporation-and-water-cycle'}]
   }

@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import {freshState,STORAGE_KEY} from '../dist/core.mjs';
+import {ensureGarden} from '../dist/garden-core.mjs';
+import {ExplorerStore} from '../dist/explorer-storage.mjs';
+import {ensurePostOffice,startPostOffice,currentPostOffice,appendPostClause,packPostTogether,stepPostRoute,setPostCourier,setPostPage} from '../dist/post-office-core.mjs';
+import {postOfficePage,postOfficeNotes} from '../dist/post-office-ui.mjs';
+import {startPostRival,startAdaptiveRival,nextRivalChallenge,setBrambleMode,setBrambleTable,setRivalInput,submitRival,solveRivalTogether,continueRival,bypassRival,stepRivalDecomposition,setRivalMethod,validPostRival} from '../dist/post-rival.mjs';
+import {generateRivalTask} from '../dist/post-rival-generator.mjs';
+import {scienceHome,sciencePage} from '../dist/science-ui.mjs';
+import {ensureScience,startScience} from '../dist/science-core.mjs';
+let n=0;const check=(v,label)=>{assert.ok(v,label);n++;},eq=(a,b,label)=>{assert.deepEqual(a,b,label);n++;},copy=structuredClone;
+function fresh(){const s=freshState();ensureGarden(s);ensurePostOffice(s);startPostOffice(s,'purl-blankets');setPostPage(s,'bramble');return s;}
+const untouched=fresh(),before=copy(untouched);postOfficePage(untouched);postOfficeNotes(untouched);eq(untouched,before,'render creates no generated notebook or round');
+for(let a=1;a<=12;a++)for(let b=1;b<=12;b++){
+ const s=fresh();setBrambleMode(s,'multiply');startAdaptiveRival(s);const r=currentPostOffice(s).rival;r.task=generateRivalTask('multiply',a,b,0);check(validPostRival(r),'bounded synthetic generated round valid');
+ const html=postOfficePage(s);eq((html.match(/class="rival-array-cell /g)||[]).length,a*b,'every ordered fact has the exact number of array cells');eq((html.match(/class="rival-array-row"/g)||[]).length,a,'every factor has exact labelled rows');check(html.includes(`${a} equal ${a===1?'bundle':'bundles'} with ${b} ${b===1?'ribbon':'ribbons'} in each`),'array has text equivalent');
+ const saved=copy(s);postOfficePage(s);postOfficeNotes(s);eq(s,saved,'large picture rendering is pure');
+}
+const s=fresh(),v=currentPostOffice(s);packPostTogether(s);appendPostClause(s,'go:orchard');appendPostClause(s,'give:purl');stepPostRoute(s);const pending={packing:copy(v.packing),playback:copy(v.playback),clauses:copy(v.clauses)};
+setBrambleMode(s,'multiply');setBrambleTable(s,12);startAdaptiveRival(s);const open=copy(v.rival);setBrambleMode(s,'subtract');setBrambleTable(s,3);eq(v.rival,open,'next-question controls never rewrite current task');
+stepRivalDecomposition(s,'reset');stepRivalDecomposition(s,1);stepRivalDecomposition(s,1);check(v.rival.supported,'actual decomposition is support');
+setRivalInput(s,String(v.rival.task.answer));submitRival(s);setRivalMethod(s,'recalled');check(v.rival.supported&&v.rival.method==='recalled','reported recall cannot erase decomposition support');
+let html=postOfficePage(s);check(html.includes('How did you find it? Optional.')&&html.includes('Another challenge'),'method report is optional with next puzzle beside continue');
+const first=copy(v.rival);nextRivalChallenge(s);eq(s.postOffice.bramble.history.length,1,'next from resolved archives one round');eq(s.postOffice.bramble.history[0].id,first.id,'archive belongs to exact resolved round');eq(v.rival.task.kind,'subtract','new question applies selected mode');
+for(const key of Object.keys(pending))eq(v[key],pending[key],'renewal preserves '+key);
+solveRivalTogether(s);continueRival(s);stepPostRoute(s);check(v.completed,'rival loop returns to pending handoff');nextRivalChallenge(s);check(v.rival.phase==='question'&&v.completed,'new challenges remain open after actual delivery completion');check(!stepPostRoute(s),'active optional question still blocks replay step');
+const two=copy(s);ensurePostOffice(two);eq(two,s,'completed delivery with new waiting challenge reloads exactly');
+const large=fresh();startAdaptiveRival(large);const lr=currentPostOffice(large).rival;lr.task=generateRivalTask('multiply',12,12,0);stepRivalDecomposition(large,'reset');stepRivalDecomposition(large,1);stepRivalDecomposition(large,1);html=postOfficePage(large);check(html.includes('12 × 12 = 10 × 12 + 2 × 12 = 120 + 24 = 144'),'large actual fact has exact decomposition');check(html.includes('--rival-columns:12'),'large array limits columns to twelve');
+const legacy=fresh();startPostRival(legacy);solveRivalTogether(legacy);const classic=copy(currentPostOffice(legacy).rival);nextRivalChallenge(legacy);eq(currentPostOffice(legacy).rivalLegacy,classic,'legacy authored work kept exactly');check(postOfficeNotes(legacy).includes('Earlier authored Bramble encounter'),'legacy snapshot remains readable');ensurePostOffice(legacy);check(!currentPostOffice(legacy).closed,'legacy replacement stays valid');
+const malformed=copy(s),raw=copy(malformed.postOffice);malformed.postOffice.bramble.version=99;const bad=copy(malformed.postOffice);ensurePostOffice(malformed);eq(malformed.postOffice.kept.payload,bad,'unknown generated notebook preserved exactly');
+const broken=copy(s);broken.postOffice.visits.at(-1).rival.task.pictures.groups[0].count=999;const kept=copy(broken.postOffice.visits.at(-1).rival);ensurePostOffice(broken);check(currentPostOffice(broken).closed,'malformed current pictures close visit');eq(currentPostOffice(broken).rival,kept,'malformed current values retained');
+class Storage{constructor(){this.data=new Map();}get length(){return this.data.size;}key(i){return [...this.data.keys()][i]??null;}getItem(k){return this.data.get(k)??null;}setItem(k,v){this.data.set(k,v);}removeItem(k){this.data.delete(k);}}
+const disk=new Storage(),store=new ExplorerStore(disk),one=store.load();ensureGarden(one);ensurePostOffice(one);startPostOffice(one,'clover-buns');setBrambleMode(one,'multiply');setBrambleTable(one,12);startAdaptiveRival(one);stepRivalDecomposition(one,'reset');setRivalInput(one,'unsubmitted');const id=store.active.id;store.save(one);
+eq(new ExplorerStore(disk).load().postOffice,one.postOffice,'real storage keeps task, preferences, cursor, current input and help');
+const other=store.add({avatar:'reed',color:'blue',symbol:'shell'},one);check(!other.postOffice,'second explorer starts independently');eq(store.select(id,other).postOffice,one.postOffice,'explorer switch returns exact generated state');
+const report=postOfficeNotes(one);check(report.includes('Latest 96 finished rounds')&&report.includes('Decomposition opened: yes'),'notes disclose bounded retention and support');eq(JSON.parse(JSON.stringify(one)).postOffice,one.postOffice,'export includes frozen generated work');store.setPersistence(false,one);check(![...disk.data.keys()].some(k=>k.startsWith(STORAGE_KEY)),'save-off removes generated rounds and preferences');check(!store.clearActive().postOffice,'reset clears generated notebook');
+const water=freshState();ensureGarden(water);ensureScience(water);const waterBefore=copy(water),home=scienceHome(water);check(home.includes('After the storm: follow the water')&&home.includes('The low garden path flooded'),'science hub gives storm-recovery purpose');check(home.includes('flow downhill, soak into the ground, or join the air'),'science separates possible water routes');check(home.includes('do not test a drain, a flood barrier'),'molecule model limits stay visible');eq(water,waterBefore,'storm framing render preserves saved observations');startScience(water,'evaporate');check(sciencePage(water).includes('Did water flow away, soak into the ground, or join the air?'),'existing evaporation visit starts from flood mystery');
+console.log(`${n} adaptive Bramble rendering, storage and storm-framing checks passed.`);

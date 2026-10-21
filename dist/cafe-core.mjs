@@ -175,7 +175,7 @@ export function skipCafeStage(state){
  const total=x.stage==='total',d=total?x.total:x.shortfall;d.supported=true;d.skipped=true;if(total){x.stage='stock';x.cupboardPlan=makePlan(c);}return true;
 }
 function record(c,status){
- const x=c.current;c.history.push({orderIndex:x.orderIndex,params:copy(x.params),status,recipe:{...x.recipe},plateAttempts:copy(x.plateAttempts),total:{...x.total,attempts:[...x.total.attempts]},shortfall:{...x.shortfall,attempts:[...x.shortfall.attempts]},repair:x.repair?copy(x.repair):null,repairHistory:copy(x.repairHistory),cupboardPlan:x.cupboardPlan?copy(x.cupboardPlan):null,stockBefore:x.cupboardPlan?{...x.cupboardPlan.stock}:{...c.stock},...(status==='served'?{stockAtServe:{...c.stock}}:{})});c.history=c.history.slice(-24);
+ const x=c.current;c.history.push({orderIndex:x.orderIndex,params:copy(x.params),status,...(Object.hasOwn(x,'connection')?{connection:copy(x.connection)}:{}),recipe:{...x.recipe},plateAttempts:copy(x.plateAttempts),total:{...x.total,attempts:[...x.total.attempts]},shortfall:{...x.shortfall,attempts:[...x.shortfall.attempts]},repair:x.repair?copy(x.repair):null,repairHistory:copy(x.repairHistory),cupboardPlan:x.cupboardPlan?copy(x.cupboardPlan):null,stockBefore:x.cupboardPlan?{...x.cupboardPlan.stock}:{...c.stock},...(status==='served'?{stockAtServe:{...c.stock}}:{})});c.history=c.history.slice(-24);
 }
 export function serveCafe(state){
  const c=ensureCafe(state),x=c.current;if(!x||x.stage!=='stock'||x.served)return false;

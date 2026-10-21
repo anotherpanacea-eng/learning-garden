@@ -1,0 +1,1000 @@
+{
+  "version": 1,
+  "source": {
+    "repository": "https://github.com/withmarbleapp/os-taxonomy",
+    "commit": "96a7933754af672e1bfdbf7ecb05c325860c6e0d",
+    "topics": 1590,
+    "dependencies": 3221,
+    "subjects": 8,
+    "attribution": "Marble Skill Taxonomy (v1) © Generative Spark, Inc. (Marble), https://withmarble.com",
+    "databaseLicense": "ODbL-1.0",
+    "contentLicense": "CC-BY-SA-4.0"
+  },
+  "patterns": [
+    {
+      "id": "search",
+      "name": "Search · inspect · compare",
+      "loop": "Choose where to look, reveal a clue, compare conditions, explain a useful next move.",
+      "existing": [
+        "Living Garden",
+        "Cloud Orchard"
+      ],
+      "spiral": "Habitat need → changed condition → survey/classification → supporting field note.",
+      "limits": "Supplied pictures are not field identification or independent scientific observation."
+    },
+    {
+      "id": "allocate",
+      "name": "Assemble · allocate · check",
+      "loop": "Meet a request with limited materials; count, share, substitute and revise.",
+      "existing": [
+        "Almost-Right Café",
+        "Bramble"
+      ],
+      "spiral": "Equal plates → fractions of a recipe → measured ingredients → prices/change/budgets.",
+      "limits": "Matching pretend food preferences does not assess empathy, nutrition or financial judgment."
+    },
+    {
+      "id": "experiment",
+      "name": "Change · measure · explain",
+      "loop": "Predict, change one thing, run or observe, compare records, explain the limits.",
+      "existing": [
+        "Storm Workshop",
+        "Water Lab explanations"
+      ],
+      "spiral": "Model distance → repeated trials/graphs → water/soil study → energy/sound/light.",
+      "limits": "Water Lab includes authored explanations and a manually stepped invented closed water-path machine. Models are not physical measurements; real soil, rainfall rates and runoff measurements remain absent."
+    },
+    {
+      "id": "read",
+      "name": "Read · infer · support",
+      "loop": "Read or hear a meaningful message; find the clue, infer a purpose, identify supporting words.",
+      "existing": [
+        "English Paris",
+        "French Paris",
+        "Living Garden notes"
+      ],
+      "spiral": "Explicit note → sequence → inference → compare accounts → evaluate conflicting sources.",
+      "limits": "Comprehension selections, narration and additional-language reading do not establish independent decoding or first-language reading level."
+    },
+    {
+      "id": "compose",
+      "name": "Compose · execute · revise",
+      "loop": "Make a message or sequence, let a reader/runner respond literally, revise for the intended effect.",
+      "existing": [
+        "Willow Post Office"
+      ],
+      "spiral": "Word-card directions → branching instructions → short messages → longer authored explanations.",
+      "limits": "Finite tap-to-compose clauses are distinct from free writing, handwriting and general programming."
+    },
+    {
+      "id": "build",
+      "name": "Build · transform · relate",
+      "loop": "Make an object/model, transform it, connect its representation to a relation or explanation.",
+      "existing": [
+        "Number Garden models",
+        "Multiplication Garden",
+        "Bramble decomposition",
+        "Word Garden"
+      ],
+      "spiral": "Counters/bundles → arrays/inverse relations → fractions/area → algebraic structures.",
+      "limits": "A successful answer does not establish recall, fluent calculation or use of an unreported strategy."
+    },
+    {
+      "id": "create",
+      "name": "Create · perform · reflect",
+      "loop": "Make something expressive, try or share it, notice its effect, choose a revision.",
+      "existing": [
+        "Story Loft puppet theatre"
+      ],
+      "spiral": "Rhythm/shape/voice experiment → a composition → explain or perform a revision.",
+      "limits": "Story Loft supports open puppet composition, performance and revision. Reviewed sound/phoneme instruction is not built. Artistic preference, authored words and personal reflection are not numeric attainment scores."
+    }
+  ],
+  "domainCandidates": {
+    "Computing / Artificial Intelligence": [
+      "compose",
+      "search",
+      "read"
+    ],
+    "English / English Thinking": [
+      "read",
+      "search"
+    ],
+    "English / Grammar & Punctuation": [
+      "compose",
+      "read"
+    ],
+    "English / Handwriting & Transcription": [
+      "build",
+      "create"
+    ],
+    "English / Phonics & Word Reading": [
+      "build",
+      "create"
+    ],
+    "English / Reading Comprehension": [
+      "read",
+      "search"
+    ],
+    "English / Speaking & Listening": [
+      "read",
+      "create"
+    ],
+    "English / Spelling & Word Study": [
+      "build",
+      "create"
+    ],
+    "English / Vocabulary": [
+      "read",
+      "search"
+    ],
+    "English / Writing Composition": [
+      "compose",
+      "read"
+    ],
+    "History / Ancient Egypt": [
+      "read",
+      "search"
+    ],
+    "History / Ancient Greece & Rome": [
+      "read",
+      "search"
+    ],
+    "History / Historical Thinking": [
+      "read",
+      "search"
+    ],
+    "History / Medieval Times": [
+      "read",
+      "search"
+    ],
+    "Learning to Learn / Learning to Learn": [
+      "experiment",
+      "create"
+    ],
+    "Life Skills / Entrepreneurship": [
+      "allocate",
+      "compose"
+    ],
+    "Life Skills / Money & Finance": [
+      "allocate",
+      "compose"
+    ],
+    "Mathematics / Addition & Subtraction": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Algebra": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Counting & Cardinality": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Data & Statistics": [
+      "experiment",
+      "read"
+    ],
+    "Mathematics / Fractions": [
+      "allocate",
+      "build"
+    ],
+    "Mathematics / Geometry": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Mathematical Thinking": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Measurement": [
+      "allocate",
+      "build"
+    ],
+    "Mathematics / Multiplication & Division": [
+      "allocate",
+      "build"
+    ],
+    "Mathematics / Number Representation & Place Value": [
+      "build",
+      "search"
+    ],
+    "Mathematics / Probability": [
+      "experiment",
+      "read"
+    ],
+    "Mathematics / Ratio & Proportion": [
+      "allocate",
+      "build"
+    ],
+    "Personal & Social Development / Emotional Literacy": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Empathy & Social Awareness": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Friendship & Cooperation": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Responsible Decision-Making": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Self-Awareness": [
+      "read",
+      "create"
+    ],
+    "Personal & Social Development / Self-Regulation & Resilience": [
+      "read",
+      "create"
+    ],
+    "Science / Animals of the World": [
+      "search",
+      "read"
+    ],
+    "Science / Dinosaurs & Paleontology": [
+      "search",
+      "read"
+    ],
+    "Science / Earth's Systems": [
+      "experiment",
+      "build"
+    ],
+    "Science / Ecosystems & Habitats": [
+      "search",
+      "read"
+    ],
+    "Science / Energy": [
+      "experiment",
+      "build"
+    ],
+    "Science / Forces & Motion": [
+      "experiment",
+      "build"
+    ],
+    "Science / Insects & Minibeasts": [
+      "search",
+      "read"
+    ],
+    "Science / Matter & Materials": [
+      "experiment",
+      "build"
+    ],
+    "Science / Ocean Life": [
+      "search",
+      "read"
+    ],
+    "Science / Organisms & Life Processes": [
+      "search",
+      "read"
+    ],
+    "Science / Polar Regions": [
+      "search",
+      "read"
+    ],
+    "Science / Rainforests": [
+      "search",
+      "read"
+    ],
+    "Science / Scientific Inquiry": [
+      "experiment",
+      "build"
+    ],
+    "Science / Space Exploration": [
+      "search",
+      "read"
+    ],
+    "Science / Space Systems & Earth's History": [
+      "search",
+      "read"
+    ],
+    "Science / The Human Body": [
+      "search",
+      "read"
+    ],
+    "Science / Volcanoes & Earthquakes": [
+      "search",
+      "read"
+    ],
+    "Science / Waves, Light & Sound": [
+      "experiment",
+      "build"
+    ],
+    "Science / Weather & Climate": [
+      "experiment",
+      "build"
+    ]
+  },
+  "games": [
+    {
+      "id": "numbers",
+      "name": "Number Garden and open math models",
+      "status": "live",
+      "patterns": [
+        "build",
+        "allocate"
+      ],
+      "route": "#numbers",
+      "scope": "Seven authored math areas with variants, editable models and optional explanations; sparse task evidence stays separate from placement."
+    },
+    {
+      "id": "facts",
+      "name": "Multiplication Garden",
+      "status": "live",
+      "patterns": [
+        "build"
+      ],
+      "route": "#facts",
+      "scope": "Ordered facts through 12×12 with counting, derivation, help and method distinctions; no timing-based recall certification."
+    },
+    {
+      "id": "living",
+      "name": "Living Garden",
+      "status": "live",
+      "patterns": [
+        "search",
+        "read",
+        "build"
+      ],
+      "route": "#living",
+      "scope": "Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained."
+    },
+    {
+      "id": "cafe",
+      "name": "Almost-Right Café",
+      "status": "live",
+      "patterns": [
+        "allocate"
+      ],
+      "route": "#cafe",
+      "scope": "Silly ingredient constraints, equal plates, stock shortfall and real inventory; welcome-back dinner/New Game Plus. No assessed money or empathy curriculum."
+    },
+    {
+      "id": "orchard",
+      "name": "Cloud Orchard and gathering hunts",
+      "status": "live",
+      "patterns": [
+        "search",
+        "allocate"
+      ],
+      "route": "#orchard",
+      "scope": "Find pretend foods using authored clues/row-column hunts and harvest quantities. Not botanical identification."
+    },
+    {
+      "id": "workshop",
+      "name": "Storm Workshop",
+      "status": "live",
+      "patterns": [
+        "experiment"
+      ],
+      "route": "#workshop",
+      "scope": "Controlled ramp/surface model, repeatable authored distances, table and zero-based bars. Not calibrated physics or independent experimental design."
+    },
+    {
+      "id": "water",
+      "name": "Water Lab",
+      "status": "live",
+      "patterns": [
+        "experiment",
+        "read"
+      ],
+      "route": "#science",
+      "scope": "Three authored melting/warming/evaporation missions and molecule pictures tied to the flooded path. Controlled runoff remains planned."
+    },
+    {
+      "id": "post",
+      "name": "Willow Post Office",
+      "status": "live",
+      "patterns": [
+        "compose",
+        "allocate"
+      ],
+      "route": "#post",
+      "scope": "Six authored packing orders, editable literal word-card routes, manual flight, revisions, optional reading reports. Optional three-note reader-revision desk connects to a separate Story Loft rehearsal; exact original wording is human-read, not automatically evaluated. A continuing twelve-letter round varies readers and purposes with open message-structure suggestions; old notes and authored drafts remain separate."
+    },
+    {
+      "id": "bramble",
+      "name": "Bramble’s ribbon gate",
+      "status": "live",
+      "patterns": [
+        "allocate",
+        "build"
+      ],
+      "route": "#post",
+      "scope": "Renewable adaptive +/−/× ribbon tasks, full ordered 12×12 pool, separate examples/decomposition. A component of Post Office, not a separate world."
+    },
+    {
+      "id": "paris",
+      "name": "English Paris",
+      "status": "live",
+      "patterns": [
+        "read",
+        "compose"
+      ],
+      "route": "#paris",
+      "scope": "Authored repeatable stories, vocabulary, sequence, inference and evidence selections, with local support and familiarity distinctions."
+    },
+    {
+      "id": "french",
+      "name": "French Paris",
+      "status": "live",
+      "patterns": [
+        "read",
+        "compose"
+      ],
+      "route": "#french",
+      "scope": "Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization."
+    },
+    {
+      "id": "words",
+      "name": "Word Garden",
+      "status": "live",
+      "route": "#words",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "scope": "Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Published with the complete game on Cloudflare."
+    },
+    {
+      "id": "loft",
+      "name": "Story Loft puppet theatre",
+      "status": "live",
+      "route": "#loft",
+      "patterns": [
+        "create",
+        "compose"
+      ],
+      "scope": "Compose one to twelve pictured scenes with optional puppet dialogue, perform manually and revise for an audience. Supplied captions, authored words and open discussion do not establish independent writing, reading or retelling proficiency. A separate two-turn reader rehearsal carries a delivery note, with optional authored motive/reply and literal supplied-card comparison; existing shows are preserved. A continuing twelve-letter round varies readers and purposes with open message-structure suggestions; old notes and authored drafts remain separate."
+    },
+    {
+      "id": "plants",
+      "name": "Growing shelf: seedling investigation",
+      "status": "live",
+      "patterns": [
+        "experiment",
+        "search"
+      ],
+      "route": "#living/plants",
+      "scope": "Invented adequate/dim-light cress illustrations across four days; unscored predictions, copied observation rows, observation/explanation and height-only contrasts, supplied water-test choice, frozen evidence beside planting plans. Not measured biology, independent measurement, experimental design or full plant-growth coverage."
+    },
+    {
+      "id": "field-notebook",
+      "name": "Field Notebook: choose and chart",
+      "status": "live",
+      "patterns": [
+        "experiment",
+        "build"
+      ],
+      "route": "#living/notebook",
+      "scope": "Eight same-day model comparisons: choose useful rows, build editable fixed-zero-baseline bars, distinguish draft reading from source fidelity and question relevance, keep unfinished/revised charts. Invented stem-mm source, supplied scale, visible-source practice; no independent measurement, chart-scale choice or real growth conclusion."
+    },
+    {
+      "id": "sharing-counter",
+      "name": "The Sharing Counter",
+      "status": "live",
+      "patterns": [
+        "allocate",
+        "build"
+      ],
+      "route": "#cafe/sharing",
+      "scope": "Six open pictured picnic requests: repair equal rectangular halves/quarters, compare same-whole half/two-quarter portions, share twelve identical buns into four equal groups and pack one/three groups. Exact accumulated strip/line is supplied explanation; all checks visual practice, no physical measurement or independent fraction proficiency claim."
+    },
+    {
+      "id": "rain-paths",
+      "name": "Rain Paths: follow a tabletop machine",
+      "status": "live",
+      "patterns": [
+        "experiment",
+        "allocate"
+      ],
+      "route": "#science/rain",
+      "scope": "Four matched invented closed-machine comparisons, manually stepped arbitrary water tokens, changed-factor and relevant-column questions, optional differences and a copied runoff route with a finite holding cup and overflow. Not measured hydrology, physical experimental design, water-cycle coverage or a flood-safety result."
+    },
+    {
+      "id": "measuring-kitchen",
+      "name": "The Measuring Kitchen",
+      "status": "live",
+      "patterns": [
+        "allocate",
+        "experiment"
+      ],
+      "route": "#cafe/recipes",
+      "scope": "Six fictional two-ingredient trays: fill/read a straight-sided 500 mL jug in 50 mL steps, choose a volume unit, pour into separate labelled preparation jars and return portions. Numeric reading, unit naming, recipe fit and empty-jug readiness stay separate. Supported picture measurement only; no physical-tool competence, mass, litre conversion, mixing or recipe scaling."
+    },
+    {
+      "id": "travelers-archive",
+      "name": "Travelers’ Archive: Paris,1910",
+      "status": "live",
+      "patterns": [
+        "read",
+        "search",
+        "compose"
+      ],
+      "route": "#archive",
+      "scope": "One reviewed Paris1910 visit: real credited CC0 photograph, modern original chronology summaries, schematic place matching, ordinal date ordering, finite source-scope/interpretation choices and ungraded local reply. Production date is distinct from exact scene date; no citywide recovery, independent research/decoding or French-proficiency claim."
+    },
+    {
+      "id": "rain-notebook",
+      "name": "Rain Paths charts: a carried result",
+      "status": "live",
+      "patterns": [
+        "experiment",
+        "build"
+      ],
+      "route": "#living/notebook/rain",
+      "scope": "Freeze one actual completed current or kept machine result, choose useful counts and construct editable two-bar charts on a fixed 0–24 model-token scale. Draft reading, source fidelity and original runoff questions remain separate. Four finite sources; no measured hydrology, independent scale choice or learning-level inference."
+    }
+  ],
+  "manualReferences": [
+    {
+      "game": "living",
+      "topicId": "mt_cM8YS6NXqi",
+      "kind": "scoped-practice",
+      "source": "dist/living-spiral-content.mjs",
+      "scope": "Match a pictured animal need to damp cover or adult-butterfly nectar and reason about an explicit change. Interdependence, full basic-needs coverage and field investigation are not observed."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_Fw0bbM1e_g",
+      "kind": "explanation",
+      "source": "dist/living-spiral-ui.mjs",
+      "scope": "Supplied damp/shelter/nectar definitions and microhabitat conditions; broader biome/habitat vocabulary and independent use are unobserved."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_ppENoD8vf1",
+      "kind": "explanation",
+      "source": "dist/living-spiral-ui.mjs",
+      "scope": "Named original portraits and supplied local microhabitat clues; no independent species identification or plant inventory."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_lp3qyEujIv",
+      "kind": "scoped-practice",
+      "source": "dist/living-adaptive-content.mjs",
+      "scope": "Infer which parcel serves hungry neighbors from its described contents; no independent decoding or general inference assessment."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_S3XMQOYt_D",
+      "kind": "scoped-practice",
+      "source": "dist/living-adaptive-content.mjs",
+      "scope": "Choose a supplied sentence supporting the parcel choice; does not cover author-argument evaluation or the full source topic."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "scoped-practice",
+      "source": "dist/living-adaptive-content.mjs",
+      "scope": "Count equal packs, with pack count and bites per pack each from 1 through 12, using optional help/method report; no full-topic or recall claim."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_xZvDCYA5Ae",
+      "kind": "scoped-practice",
+      "source": "dist/living-adaptive-content.mjs",
+      "scope": "Inverse equal-packs task: given total and unit size, find pack count. Does not cover every unknown position or general division."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "scoped-practice",
+      "source": "dist/cafe-core.mjs",
+      "scope": "Count total bites for equal plates and separately handle cupboard gaps; arithmetic help and skipped tasks remain distinct."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_GRWwTDZ3wD",
+      "kind": "scoped-practice",
+      "source": "dist/post-office-ui.mjs",
+      "scope": "Literal equal-bundle arrays and requested decomposition through 12×12; no general division or independent-recall certification."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "scoped-practice",
+      "source": "dist/post-rival-generator.mjs",
+      "scope": "Generated multiplication examples use equal bundles; addition/subtraction remain their own tasks, not evidence of this topic."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_vauULTecMH",
+      "kind": "scoped-practice",
+      "source": "dist/loft-content.mjs",
+      "scope": "Arrange pictured scenes and supplied captions into a one-to-twelve-scene sequence, optionally add puppet dialogue, and revise for an audience. Writing may be supported; spelling, independence, story quality and full narrative proficiency are not assessed. The optional message-reader stage adds a character reason and reply as a narrow original-dialogue opportunity; no minimum story length."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_LpSuPgL31x",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Six authored quantity families: distribute a fixed total among a given plate/bundle count, or make groups of a given size; editable visual model and explicit support. No remainders, non-integer or full-topic claim."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_iNdrM2-oJf",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Contrast finding objects per group with finding number of groups while keeping the same quantities and naming their units. Numerical answers and arrangement checks stay separate; interpretation is not certified by a correct entry."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_GDG9_SZmsO",
+      "kind": "explanation",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Optional help relates the selected division question to groups × amount per group = total, with the factor sought marked ?. Revealed related facts are support, not independent inverse-relation evidence."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_xZvDCYA5Ae",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Choose an unknown total, group size or group count in six positive integer families through 12×12. Cross-game quantities and arrangements are familiar visual practice; no baseline, general division or mastery claim."
+    },
+    {
+      "game": "cafe",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "explanation",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Requested unit-labeled repeated-addition and multiplication explanation for the actual equal groups. The supplied explanation does not create an answer or recall observation."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_LpSuPgL31x",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Six authored quantity families: distribute a fixed total among a given plate/bundle count, or make groups of a given size; editable visual model and explicit support. No remainders, non-integer or full-topic claim."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_iNdrM2-oJf",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Contrast finding objects per group with finding number of groups while keeping the same quantities and naming their units. Numerical answers and arrangement checks stay separate; interpretation is not certified by a correct entry."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_GDG9_SZmsO",
+      "kind": "explanation",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Optional help relates the selected division question to groups × amount per group = total, with the factor sought marked ?. Revealed related facts are support, not independent inverse-relation evidence."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_xZvDCYA5Ae",
+      "kind": "scoped-practice",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Choose an unknown total, group size or group count in six positive integer families through 12×12. Cross-game quantities and arrangements are familiar visual practice; no baseline, general division or mastery claim."
+    },
+    {
+      "game": "bramble",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "explanation",
+      "source": "dist/equal-groups-ui.mjs",
+      "scope": "Requested unit-labeled repeated-addition and multiplication explanation for the actual equal groups. The supplied explanation does not create an answer or recall observation."
+    },
+    {
+      "game": "post",
+      "topicId": "mt_lp3qyEujIv",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Three authored notes contrast the literal wording with a pictured explicit request; identify the missing object, destination or action. Scene clues are a separate source, not argument-evidence analysis or general inference assessment. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
+    },
+    {
+      "game": "post",
+      "topicId": "mt_OyOYHlZ2_T",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Respond to a specific reader question by choosing a clearer supplied sentence or writing exact optional words for a human reader. Several useful phrasings fit; finite card execution does not grade original writing. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
+    },
+    {
+      "game": "post",
+      "topicId": "mt_U_8iVFZuHH",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_lp3qyEujIv",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Three authored notes contrast the literal wording with a pictured explicit request; identify the missing object, destination or action. Scene clues are a separate source, not argument-evidence analysis or general inference assessment. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_OyOYHlZ2_T",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Respond to a specific reader question by choosing a clearer supplied sentence or writing exact optional words for a human reader. Several useful phrasings fit; finite card execution does not grade original writing. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_U_8iVFZuHH",
+      "kind": "scoped-practice",
+      "source": "dist/message-ui.mjs",
+      "scope": "Compare original and revised supplied messages and discuss their intended effect on a reader. Optional puppet reason/reply supports reflection; no independent self-review or full-topic attainment claim. Spec 40 revisits this narrow target in a rotating twelve-letter round, including combined details and audience needs; only an explicit first keep informs an open suggestion."
+    },
+    {
+      "game": "post",
+      "topicId": "mt_v5DyOEpbbr",
+      "kind": "scoped-practice",
+      "source": "dist/letter-trail-ui.mjs",
+      "scope": "Twelve authored letters revisit useful details, combined instructions and a reader’s knowledge/purpose. Three narrow audience cases add a landmark for a newcomer or an explanation for a changed plan/order. Open suggestions use first-kept supplied-card/clue choices and explicit support/familiarity; original wording is human-read and ungraded. No independent writing, full tone/register, reading-level or full-topic claim."
+    },
+    {
+      "game": "loft",
+      "topicId": "mt_v5DyOEpbbr",
+      "kind": "scoped-practice",
+      "source": "dist/letter-trail-ui.mjs",
+      "scope": "Twelve authored letters revisit useful details, combined instructions and a reader’s knowledge/purpose. Three narrow audience cases add a landmark for a newcomer or an explanation for a changed plan/order. Open suggestions use first-kept supplied-card/clue choices and explicit support/familiarity; original wording is human-read and ungraded. No independent writing, full tone/register, reading-level or full-topic claim."
+    },
+    {
+      "game": "plants",
+      "topicId": "mt_3v0VNkwquK",
+      "kind": "scoped-practice",
+      "source": "dist/plant-study-ui.mjs",
+      "scope": "Light slice only: inspect explicitly invented already-emerged cress seedlings under adequate versus too-little light, with supplied controls. No measured growth dataset, species-wide light rule or full plant-requirements coverage."
+    },
+    {
+      "game": "plants",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/plant-study-ui.mjs",
+      "scope": "Copy selected finite model observations into a labelled table, preserving day, condition, specimen and millimetres. This is supplied-row collecting; independently choosing useful data, measuring and constructing charts remain planned."
+    },
+    {
+      "game": "plants",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "scoped-practice",
+      "source": "dist/plant-study-ui.mjs",
+      "scope": "Two finite model questions distinguish a pictured length from a proposed cause and compare stem length with leaf/stem features. Model observation versus interpretation practice, not a real-world causal experiment."
+    },
+    {
+      "game": "plants",
+      "topicId": "mt_qgb76wHN2X",
+      "kind": "scoped-practice",
+      "source": "dist/plant-study-ui.mjs",
+      "scope": "Choose between two supplied proposed water comparisons: hold light and other conditions alike, or confound light and water. No water results or independent experimental-design claim."
+    },
+    {
+      "game": "field-notebook",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/field-notebook-ui.mjs",
+      "scope": "Choose up to two supplied observations relevant to a day/specimen question, retain source labels and exact units, and revise a selection. This extends copied-row collecting; no physical data gathering or measurement claim."
+    },
+    {
+      "game": "field-notebook",
+      "topicId": "mt_7IFpDVNsmt",
+      "kind": "scoped-practice",
+      "source": "dist/field-notebook-ui.mjs",
+      "scope": "Table-to-labelled-two-bar presentation of invented source observations. The pinned title is misleading; its description supports a narrow recording/presentation slice. No living-things classification key or independent field survey claim."
+    },
+    {
+      "game": "field-notebook",
+      "topicId": "mt_r8XnXwRA6g",
+      "kind": "scoped-practice",
+      "source": "dist/field-notebook-ui.mjs",
+      "scope": "Construct exact numerical bars on a supplied shared 0–70 scale with 10-unit ticks, choose quantity/unit labels and compare two categories. Distinguish reading an inaccurate draft from source agreement and question relevance. No independent scale choice, pictogram, time-series graph or full-topic claim."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_-hTTat0mBR",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Repair a rectangular two-piece cut into equal halves; unequal widths remain editable and are not called halves."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_g3W0mdADVu",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Repair rectangular cuts into four equal-width quarters, distinguish equality from merely counting four pieces."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_xACS3rWWDp",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Partition only uniform rectangles into equal halves/quarters; circles and other shapes remain missing."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_MyGblah2yY",
+      "kind": "explanation",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Manually step through supplied identical wholes showing one half and two quarters; compare learner-selected portions without independent equivalence assessment."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_cFltwUQi-d",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "One or three quarters of a twelve-bun whole, using four supplied group mats. No general fraction-of-amount strategy or unlike whole comparison."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_k2WE0-22-4",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Make four equal groups of three from twelve identical tokens; pack one/three complete groups while retaining the original whole."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_LpSuPgL31x",
+      "kind": "scoped-practice",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "Reversible one-at-a-time/one-each bun sharing into four supplied mats. Grouping remains visible; full twelve-bun scope only."
+    },
+    {
+      "game": "sharing-counter",
+      "topicId": "mt_Kr3IyA6m-O",
+      "kind": "explanation",
+      "source": "dist/sharing-counter-ui.mjs",
+      "scope": "A fixed 0–1 line and accumulation strip derive the amount of selected equal loaf pieces, including separated quarters. No independent marker placement or scale selection."
+    },
+    {
+      "game": "rain-paths",
+      "topicId": "mt_qgb76wHN2X",
+      "kind": "scoped-practice",
+      "source": "dist/rain-paths-ui.mjs",
+      "scope": "Identify the one supplied difference between matched tabletop machines: open versus sealed entrance, or starting stored tokens. Controls remain visible; no independent physical test planning/carrying-out."
+    },
+    {
+      "game": "rain-paths",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/rain-paths-ui.mjs",
+      "scope": "Choose newly-stored/new-runoff columns relevant to where the new tokens went; keep exact supplied counts and copied route results. No real measurement, free data collection or graph construction."
+    },
+    {
+      "game": "rain-paths",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "explanation",
+      "source": "dist/rain-paths-ui.mjs",
+      "scope": "Supplied prompts distinguish visible token counts from authored machine rules, with optional unrecorded conversation. No automatically checked causal explanation or real hydrologic evidence."
+    },
+    {
+      "game": "measuring-kitchen",
+      "topicId": "mt_4lp_b5Pzik",
+      "kind": "scoped-practice",
+      "source": "dist/measuring-recipes-ui.mjs",
+      "scope": "Use a supplied standard-unit mL scale, retain a numeric reading and compare exact fictional volumes. No capacity estimation, physical tools or other unit choice instruction beyond a finite mL/g/items contrast."
+    },
+    {
+      "game": "measuring-kitchen",
+      "topicId": "mt_DOe893F6gN",
+      "kind": "scoped-practice",
+      "source": "dist/measuring-recipes-ui.mjs",
+      "scope": "Read a straight-sided graduated 500 mL picture jug with ten 50 mL intervals, fill and reversibly transfer liquid portions. Other measures and independent practical measuring remain absent."
+    },
+    {
+      "game": "measuring-kitchen",
+      "topicId": "mt_6oxQPNLHNv",
+      "kind": "scoped-practice",
+      "source": "dist/measuring-recipes-ui.mjs",
+      "scope": "Compare each same-unit preparation amount with its recipe target and optionally inspect needed additions/returns. No conversions, mass or general multistep measure problems."
+    },
+    {
+      "game": "travelers-archive",
+      "topicId": "mt_TTzJTF-OkG",
+      "kind": "scoped-practice",
+      "source": "dist/travelers-archive-ui.mjs",
+      "scope": "Read supplied creator/date/source-kind labels and distinguish object production date from an unestablished exact scene time. No independent archival sourcing or inferred creator motive."
+    },
+    {
+      "game": "travelers-archive",
+      "topicId": "mt_wWlZoLQBR6",
+      "kind": "scoped-practice",
+      "source": "dist/travelers-archive-ui.mjs",
+      "scope": "Compare the scope of one period photo and a modern chronology, including what they cannot corroborate. These are not two independent eyewitness confirmations."
+    },
+    {
+      "game": "travelers-archive",
+      "topicId": "mt_Lu4H4mbsqO",
+      "kind": "scoped-practice",
+      "source": "dist/travelers-archive-ui.mjs",
+      "scope": "Finite contrasts separate visible local detail, catalogue date, modern summary and a limited peak-before-return inference. No full historical-argument or citywide conclusion."
+    },
+    {
+      "game": "travelers-archive",
+      "topicId": "mt_JVVKT-_AD9",
+      "kind": "scoped-practice",
+      "source": "dist/travelers-archive-ui.mjs",
+      "scope": "Select the supplied photo, chronology or neither for a specific question, then choose evidence/limits for a prepared reply. No broad research proficiency or automatically evaluated original writing."
+    },
+    {
+      "game": "rain-notebook",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/rain-notebook-ui.mjs",
+      "scope": "Select and organise completed model counts relevant to a supplied runoff question. No new real measurement or independent data collection."
+    },
+    {
+      "game": "rain-notebook",
+      "topicId": "mt_7IFpDVNsmt",
+      "kind": "scoped-practice",
+      "source": "dist/rain-notebook-ui.mjs",
+      "scope": "Present carried machine counts as two labelled bars and compare the draft with its frozen source. No living-thing classification or full scientific presentation claim."
+    },
+    {
+      "game": "rain-notebook",
+      "topicId": "mt_r8XnXwRA6g",
+      "kind": "scoped-practice",
+      "source": "dist/rain-notebook-ui.mjs",
+      "scope": "Construct bars against a supplied four-token tick scale; distinguish reading the entered chart from source fidelity and compare two runoff counts. No independent scale choice, pictograms or broad graph proficiency."
+    }
+  ],
+  "increments": [
+    {
+      "priority": 1,
+      "name": "Word Workshop",
+      "move": "New home; reuse build/read, add carefully reviewed speech/sound representations",
+      "spec": "docs/specs/04-word-workshop.md",
+      "first": "First word-part release published on Cloudflare; reviewed phonics audio and sound/letter activities remain future work.",
+      "gap": "Current story comprehension does not teach or assess the missing phonics/decoding/transcription sequence."
+    },
+    {
+      "priority": 2,
+      "name": "Living Garden field notebook and food webs",
+      "move": "Extend search/inspect/compare",
+      "spec": "docs/specs/23-living-garden.md",
+      "first": "Compare organisms and conditions, make a simple food-energy chain, return under changed conditions, keep a table and explanatory note.",
+      "gap": "Current habitat matching omits interdependence, plant needs/growth and extended data collection; later simulations need reviewed assumptions."
+    },
+    {
+      "priority": 3,
+      "name": "Café bakery and market",
+      "move": "Extend assemble/allocate/check",
+      "spec": "atlas proposal",
+      "first": "Split a recipe into equal parts, measure ingredients, then use pretend prices and change.",
+      "gap": "Fractions, units and money need new representations and questions; stock counting alone is not those lessons."
+    },
+    {
+      "priority": 4,
+      "name": "Willow messages and map-making",
+      "move": "Extend compose/execute/revise",
+      "spec": "docs/specs/40-changing-letters.md",
+      "first": "Implemented: a continuing twelve-letter library with different readers, paired details, purpose-aware revisions and voluntary suggestions; frozen drafts, first-kept evidence and familiar rereading remain separate.",
+      "gap": "Map legend, direction and scale, broader composition and independent writing observation remain future work."
+    },
+    {
+      "priority": 5,
+      "name": "Travelers’ Archive",
+      "move": "New historical evidence game; reuse read/infer/support and search",
+      "spec": "docs/specs/24-travelers-archive.md",
+      "first": "Compare two short accounts or artifacts, place an event on a timeline/map, explain what each source can and cannot tell us.",
+      "gap": "History currently has no declared learning activity references; a story setting alone does not teach historical inquiry."
+    },
+    {
+      "priority": 6,
+      "name": "Sound and Light Studio",
+      "move": "New create/perform/reflect mode, with experiment",
+      "spec": "atlas proposal",
+      "first": "Change a sound or shadow, measure a pattern, make a short rhythm or light composition and revise it.",
+      "gap": "Waves/sound/light and creative music/art need auditory/spatial creation, not only text questions. Recording would need its own privacy decision."
+    },
+    {
+      "priority": 7,
+      "name": "Story Loft and community circle",
+      "move": "New collaborative story/creation home; reuse read/compose/create",
+      "spec": "docs/specs/06-story-loft.md",
+      "first": "Puppet theatre (specs 36–37) supports optional dialogue and one to twelve scenes. Paired-perspective reading and community-circle conversations remain later scope.",
+      "gap": "Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices."
+    }
+  ],
+  "extensions": [
+    "Geography and cartography",
+    "Visual art and design",
+    "Music and creative performance",
+    "French and other additional languages"
+  ],
+  "extensionLimit": "Additional subject plans outside the Marble v1 organization; related concepts may already occur within science, history or other source topics. No new nodes or prerequisite edges have been asserted.",
+  "siteUrl": "https://after-the-storm-learning.anotherpanacea.workers.dev"
+}
