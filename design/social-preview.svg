@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#eaf4ef"/>
+<path d="M600 630V272C600 130 704 45 855 45s290 97 290 238v347Z" fill="#d8e8ed"/>
+<circle cx="1003" cy="141" r="57" fill="#e9b84a"/>
+<g fill="#fbfcfa"><path d="M649 143c-25-17-13-48 12-45 4-34 56-37 64-4 31-6 40 31 19 47Z"/><path d="M1000 237c-17-20-3-41 20-36 13-29 45-25 55-4 33-6 44 23 27 40Z"/></g>
+<path d="M578 440q130-93 291-26 132-55 331 10v206H578Z" fill="#86b4a4"/>
+<path d="M516 630q143-211 326-114 143-78 358-18v132Z" fill="#397958"/>
+<!-- The neighborhood café, its open window, and a letter waiting to fly. -->
+<g stroke="#183f39" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M848 353V238h206v137" fill="#fffdf4"/>
+<path d="m832 238 40-58h163l38 58Z" fill="#ce777d"/>
+<path d="M855 238v21q16 23 35 0 17 23 35 0 18 23 35 0 18 23 35 0 18 23 36 0v-21" fill="#e9b84a"/>
+<rect x="883" y="284" width="64" height="58" rx="6" fill="#abc4da"/><path d="M915 285v56m-30-28h60"/>
+<path d="M976 374v-88h49v88" fill="#397958"/><circle cx="1012" cy="327" r="3" fill="#e9b84a" stroke="none"/>
+<path d="M939 200a13 13 0 1 0 10 21 14 14 0 0 1-10-21Z" fill="#fffdf4" stroke="none"/>
+<path d="M699 392v-93m-22 28h50"/><rect x="670" y="267" width="61" height="47" rx="6" fill="#e9b84a"/><path d="m674 274 26 20 26-20"/>
+<path d="M756 436v-91m0 45c-27 3-42-15-38-31 29-2 39 15 38 31m0-19c28 1 41-16 37-31-26-1-38 16-37 31" fill="#397958"/>
+<circle cx="755" cy="331" r="24" fill="#e9b84a"/><circle cx="755" cy="331" r="8" fill="#183f39" stroke="none"/>
+</g>
+<!-- Pip, a fictional fox, and Dot, the ladybug guide. -->
+<g stroke="#183f39" stroke-width="4" stroke-linejoin="round">
+<path d="M833 570c88 18 138-40 96-96-10 54-48 42-71 46Z" fill="#c77c47"/><path d="M926 473c-5 24-17 38-31 39 8 15 12 20 23 22 22-15 25-42 8-61Z" fill="#fffdf4"/>
+<path d="M779 559c-9-61 3-114 40-114 39 0 57 56 42 116Z" fill="#c77c47"/>
+<path d="m772 437 2-71 42 36 42-36 2 71-44 43Z" fill="#c77c47"/>
+<path d="m778 397 2 39 34 34-5-42Z m77 0-2 39-37 34 10-42Z" fill="#fffdf4" stroke="none"/>
+<ellipse cx="814" cy="454" rx="8" ry="6" fill="#183f39" stroke="none"/>
+<circle cx="794" cy="429" r="4" fill="#183f39" stroke="none"/><circle cx="835" cy="429" r="4" fill="#183f39" stroke="none"/>
+<path d="M803 476q11 7 23-2m-45 82h21m33 0h25" fill="none"/>
+<ellipse cx="1050" cy="436" rx="29" ry="21" fill="#ce777d"/><circle cx="1022" cy="430" r="13" fill="#183f39"/>
+<path d="m1014 418-6-14m20 12 4-15M1043 416l4 39" fill="none"/>
+<circle cx="1036" cy="437" r="4" fill="#183f39" stroke="none"/><circle cx="1056" cy="425" r="4" fill="#183f39" stroke="none"/><circle cx="1065" cy="441" r="4" fill="#183f39" stroke="none"/>
+</g>
+<path d="M968 481q53-22 97 9" fill="none" stroke="#e9b84a" stroke-width="5" stroke-dasharray="4 12" stroke-linecap="round"/>
+<!-- Titles stay inside the left-side safe area for cropped previews. -->
+<text x="72" y="171" font-family="Georgia,serif" font-weight="700" font-size="80" letter-spacing="-3" fill="#183f39">After</text>
+<text x="72" y="264" font-family="Georgia,serif" font-weight="700" font-size="80" letter-spacing="-3" fill="#183f39">the Storm</text>
+<path d="M77 304h83" stroke="#e9b84a" stroke-width="8" stroke-linecap="round"/>
+<text x="76" y="362" font-family="Trebuchet MS,sans-serif" font-size="27" fill="#183f39">A little space for big thinking.</text>
+<text x="76" y="415" font-family="Trebuchet MS,sans-serif" font-size="23" fill="#52675e">Stories, science, making</text>
+<text x="76" y="448" font-family="Trebuchet MS,sans-serif" font-size="23" fill="#52675e">and mathematics, explored together.</text>
+</svg>
