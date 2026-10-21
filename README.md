@@ -122,6 +122,14 @@ node scripts/check-story-packs.mjs
 
 These checks use synthetic observations. They check the application logic; they do not validate the assessment as an educational instrument.
 
+For the Willow packing table's real browser journeys, install Python Playwright and Chromium, then run:
+
+```sh
+python test/parcel-packing-browser.py
+```
+
+This starts and stops its own loopback preview and uses isolated browser profiles with fictional waiting games. It checks desktop, tablet and phone viewports, keyboard/touch interaction, focus, both packing purposes and reload. Screenshots go to a temporary directory; use `--artifacts /tmp/packing-browser` to choose one. Set `CHROMIUM_PATH` if Chromium is not on `PATH`. This is Chromium emulation, not a physical-device or audio check.
+
 ## Roadmap and science expeditions
 
 The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab, Storm Workshop, the first Willow Post Office flying-courier increment, Word Garden meaning work and the first Story Loft puppet theatre are implemented. Phonics, ecosystem models and the paired-perspective reading expansion remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with pictured courier choices, freely available practice and the first optional rival-witch encounter.
