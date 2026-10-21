@@ -1,5 +1,7 @@
 # Curriculum build session — 21 October 2026
 
+Publication update, 2026-10-21: this session record describes the earlier build window. [PR 27](https://github.com/anotherpanacea-eng/learning-garden/pull/27) subsequently cleared and published Bell Studio, and the stack is now merged into main. A public Bell core asset matches main. The earlier “not published” and draft/unmerged statements below are historical; physical-device and audibility limits still apply.
+
 The authorized window was 01:47–09:47 UTC. A browser file-picker verification unexpectedly blocked for about five hours and thirty-seven minutes; the session was not eight uninterrupted hours of active building. No real learner exports were used in checks. The fixture was fictional.
 
 ## Published, independently reviewed increments
