@@ -1,4 +1,4 @@
-# 53 — Bundle Burrow: exchange without changing the amount
+# 53 — Bundle Exchange: exchange without changing the amount
 
 **Status: build-ready after independent specification review and resolved findings; [receipt](../reviews/52-55-independent-spec-review.md). Not implemented or release-cleared.** This is the missing base-ten conservation bridge in M1-number 1–2. It does not complete written addition/subtraction, multi-digit multiplication/division, or the place-value strand.
 
