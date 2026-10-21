@@ -28,6 +28,7 @@ for(const place of ['post','loft'])for(const c of MESSAGE_CASES){
   const imported=prepareProgressImport(before);ok(imported.ok,'complete notes import');eq(imported.state.messages,s.messages,'all page/draft state survives exact transfer');
  }
  for(const card of c.cards){setMessagePage(s,place,'revise');setMessageCard(s,place,card.id);setMessageClue(s,place,c.clues[0].id);testMessageCard(s,place);const html=messagePage(s,place);ok(html.includes(card.text)&&html.includes(card.outcome)&&html.includes(card.reply),'exact supplied sentence/outcome/response displayed');}
+ useMessageSupport(s,place,'example');ok(messagePage(s,place).includes(c.example),'help shows this note’s own different example');
  setMessagePage(s,place,'revise');if(place==='loft')ok(messagePage(s,place).includes('data-msg-action="story"'),'direct Loft entry reaches reader stage without authoring text');
  ok(messagePage(s,place,'choose').includes('Choose a note to mend'),'explicit chooser leaves selected work intact');
  ok(messageEntry(place).includes(`#${place}/messages`),'entry into correct place');
@@ -63,6 +64,11 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
  const input={dataset:{msgText:'reason'},value:'A fictional reason.',addEventListener(event,fn){this[event]=fn;}},bubble={textContent:'',hidden:true},supplied={hidden:false},feedback={removed:false,remove(){this.removed=true;}};let saved=0;
  const previous=globalThis.document;globalThis.document={querySelectorAll(selector){return selector==='[data-msg-text]'?[input]:[];},querySelector(selector){return {'#msg-feedback':feedback,'[data-msg-story-bubble]':bubble,'.msg-supplied-dialogue':supplied}[selector]||null;}};
  try{bindMessages(s,'loft',{save(){saved++;},render(){throw Error('Typing must not rerender or lose caret');}});input.input();eq(currentMessage(s,'loft').work.reason,input.value,'typing saves exact reason');eq(bubble.textContent,input.value,'stage preview uses textContent');ok(saved===1&&feedback.removed&&!bubble.hidden&&supplied.hidden,'typing clears stale feedback and keeps authored preview');}finally{globalThis.document=previous;}
+}
+{
+ const s=fresh();chooseMessageCase(s,'post','basket');const details={open:false},button={dataset:{msgReading:'together'}};let focused=null;
+ const previous=globalThis.document;globalThis.document={querySelectorAll:selector=>selector==='[data-msg-reading]'?[button]:[],querySelector:selector=>selector==='.msg-reading'?details:null};
+ try{bindMessages(s,'post',{save(){},render(){details.open=false;},focus:selector=>{focused=selector;}});button.onclick();ok(details.open&&focused==='[data-msg-reading="together"]','reading report keeps its panel open and focus on the chosen report');}finally{globalThis.document=previous;}
 }
 const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.includes("['post','loft'].includes(root)&&slug==='messages'"),'both message routes before normal game');ok(app.includes("!['choose','groups','messages','letters'].includes(slug)"),'message route does not trigger Bramble ending');ok(app.includes('!groupBench&&!messageBench'),'unrelated invitations suppressed on focused task');
 console.log(`Message-reader UI/storage integration: ${checks} passed.`);
