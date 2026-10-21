@@ -6,7 +6,7 @@ const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),clone=x=>JSON.p
 const keys=(x,required,optional=[])=>object(x)&&required.every(k=>Object.hasOwn(x,k))&&Object.keys(x).every(k=>required.includes(k)||optional.includes(k));
 function same(a,b){if(a===b)return true;if(Array.isArray(a)||Array.isArray(b))return Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>same(v,b[i]));return object(a)&&object(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>Object.hasOwn(b,k)&&same(a[k],b[k]));}
 // Keep saved display wording while checking the source quantities and recorded outcomes.
-const outcomes=x=>JSON.parse(JSON.stringify(x,(k,v)=>k==='feedback'&&typeof v==='string'?undefined:v));
+const outcomes=x=>JSON.parse(JSON.stringify(x,(k,v)=>k==='feedback'&&typeof v==='string'?'':v));
 const questionValid=(q,source)=>keys(q,['caseId','prompt','targetIds','answer','difference'])&&typeof q.prompt==='string'&&same({...q,prompt:''},{...rainNotebookQuestion(source),prompt:''});
 const whole=n=>Number.isInteger(n)&&n>=0&&n<=24,raw=t=>typeof t==='string'&&t.length<=16;
 const supportValid=s=>object(s)&&Object.entries(s).every(([k,v])=>SUPPORT.includes(k)&&v===true);
