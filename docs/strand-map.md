@@ -1,5 +1,7 @@
 # The learning spiral, strand by strand
 
+**Snapshot update · 2026-10-21.** The planned rows below retain the 2026-10-20 authoring snapshot. Later bounded implementations now cover equal-group unknowns (spec 38; M2/M3), reader-revised messages and changing letters (specs 39–40; E3/E4), plant-condition investigation and supplied-data charts (specs 41–42; S1/S2/M6), and the Paris 1910 Travelers’ Archive (spec 46). The affected Planned labels and the summary’s “Proposed Travelers’ Archive” describe the earlier plan; these slices are now Built within their specifications’ limits, not whole-topic coverage. Sharing Counter, Measuring Kitchen and Rain Paths also have bounded built slices (specs 43–45 and 47); Bell Studio is built in spec 48. Their exact current scope is recorded in the implementation specs and the curriculum spirals, while broader phonics, ecology, money and source work remain future authoring.
+
 **Authoring map · 2026-10-20 · proposed teaching routes, open entry.**
 
 This is the planning layer between the [topic atlas](learning-atlas.md) and playable lessons. It says what idea to develop, what contrast makes the next encounter useful, where it belongs, and how to revisit it. It covers priority foundations and nearby extensions across the source subjects, plus geography, arts and French. It is not an assignment of every source topic, a complete school curriculum, or a developmental placement sequence. The [all-topic index](../curriculum/topic-coverage.csv) retains the larger inventory and its unassigned topics.
