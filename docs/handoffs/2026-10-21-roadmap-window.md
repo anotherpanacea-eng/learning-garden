@@ -37,3 +37,11 @@ Append a short factual entry per completed continuation: time, files/commit, che
 ## Checkpoint 1 — initial authoring pass
 
 Spec52 and its17-row source crosswalk are authored and **await independent review**. The roadmap now distinguishes reviewed PR32/33 drafts, pending-review PR34, the missing base-ten bridge, and the new fraction candidate. All2,048 cut patterns and28,672 marker positions were checked as design arithmetic; source closure/status checks and67 relative file links passed. The unchanged atlas on this documentation base verifies118 references across62 topics; it does not include the separate gathering/packing branches. No runtime tests were claimed for this documentation-only pass. Next: base-ten exchange candidate, then multi-sentence instructions and phonics commissioning.
+
+## Checkpoint 2 — 12:24 p.m. New York /16:24 UTC
+
+Spec53 **Bundle Exchange** and its seven-node source crosswalk are authored and await independent review. Existing Number Garden exchange controls were inspected before scoping the fixed-quantity, bidirectional extension. The selected targets have six hard predecessors, including handwriting/numeral formation; the motor/transcription exception is explicit. Current upstream descriptions/evidence and incoming edges match the bundled pin across all seven nodes. Official Common Core1.NBT was read.
+
+Design arithmetic checked all158 valid states and580 enabled action edges, conservation and reachability between all valid arrangements for each collection. Source closure,70 relative file links, unchanged atlas and whitespace checks passed. These are author/design checks, not runtime or independent-review clearance. Source53 also requires exact shown-example familiarity for matching original Number Garden tasks, without rewriting responses or inferring broad mastery.
+
+Five hourly continuation passes were scheduled from1:03 p.m. through5:03 p.m. New York; the final pass is for checkpoint/reporting only. This schedule is a bounded work window, not a claim of uninterrupted execution. The remaining priority is **multi-sentence instructions**, then the **phonics content/audio brief**, followed by review-packet and queue reconciliation. PR35 remains draft, stacked on PR31. No runtime build, merge or deployment occurred.
