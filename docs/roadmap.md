@@ -119,3 +119,7 @@ The continuing letter round is implemented in [spec 40](specs/40-changing-letter
 ### Growing shelf: first plant investigation
 
 [Spec 41](specs/41-plant-investigation.md) is implemented: four manually inspected invented model days, labelled seedling/ruler illustrations, unscored timed-in-context predictions, copied observation rows, same-day observation/explanation and taller-is-not-enough questions, a supplied proposed water comparison and a frozen observation carried to the planting corner. The pretend beds and café stock remain separate. Field Notebook data selection/chart construction is the next increment; independent measurement, real plant trials and food webs remain planned.
+
+### Field Notebook: choose and chart
+
+[Spec 42](specs/42-field-notebook.md) adds active data selection and chart construction after the growing shelf. Eight open model comparisons separate source relevance, copying labels/values, reading an entered chart and answering a model question. Kept drafts travel to the planting corner. Further real measurements, Workshop datasets, line plots and independent scale choices remain future slices. Next: the café Sharing Counter's equal-whole fraction models.

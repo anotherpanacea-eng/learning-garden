@@ -51,6 +51,8 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/field-notebook-checks.mjs
+node test/field-notebook-integration-checks.mjs
 node test/plant-study-checks.mjs
 node test/plant-study-integration-checks.mjs
 node test/letter-trail-checks.mjs
@@ -248,3 +250,7 @@ Trying cards is exploration. Only explicitly keeping a supplied version contribu
 ## The growing shelf
 
 [Seedlings after the storm](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/plants) adds an optional Living Garden investigation: wonder, inspect four invented model days, compare stems and leaves, then carry a kept observation to a planting plan. Adequate-light and dim-light examples use the same millimetre scale. Pictures and numbers are labelled illustrations, not measured cress results. Prediction timing, copied rows, practice and help remain separate; existing habitat trails, beds and café stock are preserved. [Spec 41](docs/specs/41-plant-investigation.md).
+
+## Field Notebook
+
+[Open the Field Notebook](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook) to choose useful model observations, make two labelled bars, read the chart and compare it with its source. Eight open comparisons revisit model days 0/2/4/6 and specimens A/B. A correct reading of an inaccurate chart stays distinct from matching the source or choosing relevant data. Keep unfinished charts, revise later, and bring a frozen chart to the planting corner. Typed-but-unapplied entries and support stay with the explorer. Source values remain explicitly invented; no real plant measurement or learning-level inference is made. [Spec 42](docs/specs/42-field-notebook.md).

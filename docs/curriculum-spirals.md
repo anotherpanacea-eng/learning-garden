@@ -126,3 +126,9 @@ Source refresh for increment 2 (2026-10-20): Jane `385f644d6ffcd5f80f809888591d8
 Built: `#living/plants` gives a four-page light investigation. Predictions, inspected days, copied table rows, supplied-question practice and support stay distinct. An exact frozen observation travels to the planting corner without changing the pretend beds or café inventory. Four explicitly invented observation days show why a longer stem alone does not establish a healthier plant; the fair-comparison task is a supplied proposed water test, with no simulated water results.
 
 Next: Field Notebook should ask which observations answer a question, build a labelled chart and interpret it. Copying supplied rows in this release is not that chart/data-selection curriculum. Real plants, independent measurement, ecological interactions and broader growth requirements remain missing. See [spec 41](specs/41-plant-investigation.md).
+
+## Increment 42: an observation becomes a chart
+
+Built: `#living/notebook` revisits eight finite same-day/specimen comparisons. Select useful supplied rows, construct labelled fixed-scale bars, read the actual draft, check it against its source and answer the original question. These outcomes remain separate: a faithful chart can use irrelevant data, and an inaccurate chart can be read correctly. Blank and zero are distinct; unfinished entries, checks, help and kept drafts survive revisiting.
+
+A chart can sit beside the planting plan without awarding ingredients or changing the beds. Model viewing carries across the notebook, growing shelf and expanded notes so a later prediction is never falsely labelled before-looking; unknown recovered viewing stays uncertain. Missing: real measurement, independently chosen scales, time-series graphs, repeated survey data, classification keys and causal growth investigation. The notebook is visible-source practice, not a claim that a whole graph topic has been learned.
