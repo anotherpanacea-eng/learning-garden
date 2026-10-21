@@ -4,6 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>After the Storm Intro</title>
+  <link rel="canonical" href="https://after-the-storm-learning.anotherpanacea.workers.dev/storm-intro">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="After the Storm">
+  <meta property="og:title" content="After the Storm: the story begins">
+  <meta property="og:description" content="Pip and Dot shelter from the rain, then discover a world to explore together.">
+  <meta property="og:url" content="https://after-the-storm-learning.anotherpanacea.workers.dev/storm-intro">
+  <meta property="og:image" content="https://after-the-storm-learning.anotherpanacea.workers.dev/assets/after-the-storm-social-v1.png">
+  <meta property="og:image:secure_url" content="https://after-the-storm-learning.anotherpanacea.workers.dev/assets/after-the-storm-social-v1.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="After the Storm: Pip the fox and Dot the ladybug beside a sunflower and the neighborhood café.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="After the Storm: the story begins">
+  <meta name="twitter:description" content="Pip and Dot shelter from the rain, then discover a world to explore together.">
+  <meta name="twitter:image" content="https://after-the-storm-learning.anotherpanacea.workers.dev/assets/after-the-storm-social-v1.png">
+  <meta name="twitter:image:alt" content="After the Storm: a fox, a ladybug and a growing neighborhood after the rain.">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <meta name="apple-mobile-web-app-title" content="After the Storm">
+
 <style>
 :root{--bg:#e9efe9;--fg:#183f39;--quiet:#52675e;--track:#cbdcd3;--accent:#397958;--btn:#183f39;--btn-fg:#fafbf8}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a18;--fg:#eaf4ef;--quiet:#9fb5ab;--track:#2b3d38;--accent:#e9b84a;--btn:#eaf4ef;--btn-fg:#183f39}}
@@ -18,13 +39,14 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 #start span.label{font-weight:600;font-size:18px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
 #start[hidden]{display:none}
 .bar{display:flex;align-items:center;gap:12px;width:min(100%,calc(100vh - 110px),900px)}
-.bar button{border:0;border-radius:999px;background:var(--btn);color:var(--btn-fg);font:600 14px system-ui,sans-serif;padding:8px 16px;cursor:pointer;min-width:84px}
-.bar button:focus-visible,#start:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.bar button,#sound{min-height:44px;border:0;border-radius:999px;background:var(--btn);color:var(--btn-fg);font:600 14px system-ui,sans-serif;padding:8px 16px;cursor:pointer;min-width:84px}
+.bar button:focus-visible,#sound:focus-visible,#start:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .track{flex:1;height:6px;border-radius:3px;background:var(--track);overflow:hidden}
 .track i{display:block;height:100%;width:0;background:var(--accent)}
 .back{color:var(--fg);font-weight:600}
 .back:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .time{font-variant-numeric:tabular-nums;color:var(--quiet);font-size:14px;min-width:84px;text-align:right}
+.embedded-film body{padding:8px;gap:8px;min-height:100dvh}.embedded-film #stage,.embedded-film .bar{width:min(100%,calc(100dvh - 140px),900px)}
 </style>
 </head>
 <body>
@@ -33,6 +55,7 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
  <button id="start" type="button"><span class="circle"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#183f39"/></svg></span><span class="label">Play with sound</span></button>
 </div>
 <div class="bar"><button id="toggle" type="button" disabled>Pause</button><div class="track" aria-hidden="true"><i id="prog"></i></div><span class="time" id="time">0:00 / 0:46</span></div>
+<button id="sound" type="button" hidden>Turn sound on</button>
 <a class="back" href="./#home">Back to the garden</a>
 <script>
 // After the Storm: intro film. Every shape and sound below is made in code.
@@ -551,27 +574,74 @@ function wav(buf){const ch=buf.numberOfChannels,len=buf.length*ch*2+44,ab=new Ar
  return new Blob([ab],{type:'audio/wav'})}
 
 // ---------- playback ----------
-const startBtn=document.getElementById('start'),toggle=document.getElementById('toggle'),prog=document.getElementById('prog'),timeEl=document.getElementById('time');
-let ac=null,t0=0,playing=false,clock0=0,heldAt=0;
+const startBtn=document.getElementById('start'),toggle=document.getElementById('toggle'),prog=document.getElementById('prog'),timeEl=document.getElementById('time'),soundButton=document.getElementById('sound');
+let ac=null,playing=false,clock0=0,heldAt=0,frameRequest=null;
+let soundEnabled=false,audioSource=null,audioRequest=0,scorePromise=null;
 const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-const now=()=>ac?ac.currentTime-t0:(performance.now()-clock0)/1000;
-function tick(){if(!playing)return;let t=now();if(t>=D){t=D;playing=false;toggle.textContent='Replay'}
- draw(Math.max(0,t));prog.style.width=(clamp(t/D)*100)+'%';timeEl.textContent=`${fmt(Math.max(0,t))} / ${fmt(D)}`;if(playing)requestAnimationFrame(tick)}
-function start(){
- if(ac){ac.close();ac=null}
- try{const AC=window.AudioContext||window.webkitAudioContext;ac=new AC();t0=ac.currentTime+0.15;buildAudio(ac,ac.destination,t0)}catch(e){ac=null;clock0=performance.now()}
- if(!ac)clock0=performance.now();
- playing=true;startBtn.hidden=true;toggle.disabled=false;toggle.textContent='Pause';requestAnimationFrame(tick);
+// Picture time never depends on creating, rendering or resuming an audio context.
+const now=()=>playing?(performance.now()-clock0)/1000:heldAt;
+function stopAudio(){audioRequest++;if(audioSource){try{audioSource.stop();audioSource.disconnect();}catch{}audioSource=null;}}
+function updateSound(){soundButton.textContent=soundEnabled?'Turn sound off':'Turn sound on';}
+function scoreBuffer(){
+ if(!scorePromise){
+  const Offline=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+  if(!Offline)throw new Error('Offline audio unavailable');
+  const offline=new Offline(2,Math.ceil(48000*D),48000);
+  buildAudio(offline,offline.destination,0);
+  scorePromise=offline.startRendering();
+ }
+ return scorePromise;
 }
-startBtn.addEventListener('click',start);
+function joinAudio(){
+ const request=++audioRequest;
+ // Request media playback on supported WebKit before starting sound. Silent film autoplay never calls this.
+ try{if(window.navigator?.audioSession)window.navigator.audioSession.type='playback';}catch{}
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  ac||=new AC();const context=ac;
+  // Resume within the tap, then seek the rendered score when it is ready.
+  const resumed=context.resume(),buffer=scoreBuffer();
+  Promise.all([resumed,buffer]).then(([,score])=>{
+   if(request!==audioRequest||!soundEnabled||!playing||context!==ac)return;
+   const offset=Math.max(0,now());if(offset>=D)return;
+   const source=context.createBufferSource();source.buffer=score;source.connect(context.destination);
+   source.start(context.currentTime,offset);audioSource=source;
+  }).catch(()=>audioUnavailable(request));
+ }catch{audioUnavailable(request);}
+}
+function audioUnavailable(request){
+ if(request!==audioRequest)return;
+ stopAudio();soundEnabled=false;updateSound();soundButton.textContent='Sound unavailable';soundButton.disabled=true;
+}
+function tick(){
+ frameRequest=null;if(!playing)return;let t=now();
+ if(t>=D){t=D;heldAt=D;playing=false;stopAudio();toggle.textContent='Replay';if(embedded)parent.postMessage('garden-film-finished',location.origin);}
+ draw(Math.max(0,t));prog.style.width=(clamp(t/D)*100)+'%';timeEl.textContent=`${fmt(Math.max(0,t))} / ${fmt(D)}`;
+ if(playing)frameRequest=requestAnimationFrame(tick);
+}
+function start(sound=true){
+ if(frameRequest!==null)cancelAnimationFrame(frameRequest);stopAudio();
+ heldAt=0;clock0=performance.now();playing=true;soundEnabled=sound;updateSound();
+ startBtn.hidden=true;soundButton.hidden=false;toggle.disabled=false;toggle.textContent='Pause';
+ if(soundEnabled)joinAudio();frameRequest=requestAnimationFrame(tick);
+}
+startBtn.addEventListener('click',()=>start(true));
 toggle.addEventListener('click',()=>{
- if(toggle.textContent==='Replay')return start();
- if(playing){playing=false;toggle.textContent='Play';if(ac)ac.suspend();else heldAt=now()}
- else{playing=true;toggle.textContent='Pause';if(ac)ac.resume();else clock0=performance.now()-heldAt*1000;requestAnimationFrame(tick)}
+ if(toggle.textContent==='Replay')return start(soundEnabled);
+ if(playing){heldAt=now();playing=false;if(frameRequest!==null)cancelAnimationFrame(frameRequest);stopAudio();toggle.textContent='Play';}
+ else{clock0=performance.now()-heldAt*1000;playing=true;toggle.textContent='Pause';if(soundEnabled)joinAudio();frameRequest=requestAnimationFrame(tick);}
 });
-cv.addEventListener('click',()=>{if(!toggle.disabled)toggle.click()});
-addEventListener('keydown',e=>{if(e.code==='Space'&&e.target===document.body){e.preventDefault();startBtn.hidden?toggle.click():start()}});
-draw(15.2);
+cv.addEventListener('click',()=>{if(!toggle.disabled)toggle.click();});
+addEventListener('keydown',e=>{if(e.code==='Space'&&e.target===document.body){e.preventDefault();startBtn.hidden?toggle.click():start();}});
+addEventListener('pagehide',()=>{heldAt=Math.min(D,now());playing=false;stopAudio();if(frameRequest!==null)cancelAnimationFrame(frameRequest);frameRequest=null;toggle.textContent=heldAt>=D?'Replay':'Play';const context=ac;ac=null;if(context)context.close().catch(()=>{});});
+const params=new URLSearchParams(location.search),embedded=params.get('embedded')==='1';
+if(embedded){document.documentElement.classList.add('embedded-film');document.querySelector('.back').hidden=true;}
+soundButton.onclick=()=>{stopAudio();soundEnabled=!soundEnabled;updateSound();if(soundEnabled&&playing)joinAudio();};
+if(params.get('autoplay')==='1'){
+ soundButton.hidden=false;
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)start(false);
+ else draw(15.2);
+}else draw(15.2);
 
 // For recording: step the clock yourself, one frame at a time.
 window.film={duration:D,draw,canvas:cv,async audioWav(rate=48000){const oac=new OfflineAudioContext(2,Math.ceil(rate*D),rate);buildAudio(oac,oac.destination,0);return wav(await oac.startRendering())}};
