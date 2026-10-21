@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 118 explicit current references across 62 unique source topics: authored question references, scoped practice or supplied explanations. The other 1528 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 123 explicit current references across 66 unique source topics: authored question references, scoped practice or supplied explanations. The other 1524 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -21,7 +21,7 @@ There are 118 explicit current references across 62 unique source topics: author
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 40 | 463 |
+| Mathematics | 503 | 44 | 459 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 10 | 537 |
 
@@ -73,6 +73,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | [The Measuring Kitchen](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/recipes) | allocate, experiment | Six fictional two-ingredient trays: fill/read a straight-sided 500 mL jug in 50 mL steps, choose a volume unit, pour into separate labelled preparation jars and return portions. Numeric reading, unit naming, recipe fit and empty-jug readiness stay separate. Supported picture measurement only; no physical-tool competence, mass, litre conversion, mixing or recipe scaling. |
 | [Travelers’ Archive: Paris,1910](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive) | read, search, compose | One reviewed Paris1910 visit: real credited CC0 photograph, modern original chronology summaries, schematic place matching, ordinal date ordering, finite source-scope/interpretation choices and ungraded local reply. Production date is distinct from exact scene date; no citywide recovery, independent research/decoding or French-proficiency claim. |
 | [Rain Paths charts: a carried result](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain) | experiment, build | Freeze one actual completed current or kept machine result, choose useful counts and construct editable two-bar charts on a fixed 0–24 model-token scale. Draft reading, source fidelity and original runoff questions remain separate. Four finite sources; no measured hydrology, independent scale choice or learning-level inference. |
+| Fraction Trail (`#cafe/fractions`, local build) | build, allocate | Six open length-number-line requests on a fixed 0–2 ribbon: edit partitions, step a flag along actual boundaries, separately check spaces, requested stop and raw reading; keep frozen unfinished route cards. Half/quarter/sixth comparison and one five-quarter encounter only; all model-visible practice, no independent mastery or area/set/decimal coverage. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -136,7 +137,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Algebra | 25 | 0 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Counting & Cardinality | 14 | 2 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Data & Statistics | 18 | 2 | Change · measure · explain; Read · infer · support |
-| Mathematics / Fractions | 67 | 8 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Fractions | 67 | 12 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Geometry | 69 | 4 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Mathematical Thinking | 48 | 1 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Measurement | 68 | 7 | Assemble · allocate · check; Build · transform · relate |
@@ -294,6 +295,11 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Recording Data](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_ZFwPZaDJ0_) | scoped-practice / Rain Paths charts: a carried result / [source](../dist/rain-notebook-ui.mjs) | Select and organise completed model counts relevant to a supplied runoff question. No new real measurement or independent data collection. |
 | [Classifying living things](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_7IFpDVNsmt) | scoped-practice / Rain Paths charts: a carried result / [source](../dist/rain-notebook-ui.mjs) | Present carried machine counts as two labelled bars and compare the draft with its frozen source. No living-thing classification or full scientific presentation claim. |
 | [Representing numbers with objects (age 8+)](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_r8XnXwRA6g) | scoped-practice / Rain Paths charts: a carried result / [source](../dist/rain-notebook-ui.mjs) | Construct bars against a supplied four-token tick scale; distinguish reading the entered chart from source fidelity and compare two runoff counts. No independent scale choice, pictograms or broad graph proficiency. |
+| [Fractions on a number line](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Kr3IyA6m-O) | scoped-practice / Fraction Trail (local build) / [source](../dist/fraction-trail-ui.mjs) | Build and read a flag location on a fixed 0–2 length line. Supplied whole/scale and visible model; no independent scale selection or full fraction-number topic coverage. |
+| [Fractions on a number line (age 8+)](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_NoB20kVa4w) | scoped-practice / Fraction Trail (local build) / [source](../dist/fraction-trail-ui.mjs) | Edit equal/unequal first-whole partitions, repeat those same spaces in the second whole and step only along actual boundaries. Fixed12-tick coordinate model, six authored cases. |
+| [Fractions of a whole](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_ndGqFPWyen) | scoped-practice / Fraction Trail (local build) / [source](../dist/fraction-trail-ui.mjs) | Name an actual flag with whole or fraction notation, separating a correct location reading from the requested stop/partition. One five-quarter encounter; no general mixed-number or area/set work. |
+| [Equivalent fractions on a number line](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Ep7TDFuYUa) | scoped-practice / Fraction Trail (local build) / [source](../dist/fraction-trail-ui.mjs) | Keep a half-length route and compare a current two-quarter/three-sixth route at the same physical scale. Half family only, no general equivalence/simplification strategy. |
+| [Fraction Notation](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_vKcxX6iNOA) | scoped-practice / Fraction Trail (local build) / [source](../dist/fraction-trail-ui.mjs) | Read/write bounded whole or numerator/denominator notation for an actual visible flag; equivalents accepted. No general symbolic fluency or independent reading proficiency inference. |
 
 ## Sources, licensing and maintenance
 

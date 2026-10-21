@@ -189,3 +189,7 @@ The continuing letter round is implemented in [spec 40](specs/40-changing-letter
 ## Six-act programme: narrative and intermediate instruction
 
 [Spec 49](specs/49-six-act-curriculum.md) proposes recovery → town-making → wider connections → evidence/disagreement → learner-originated projects → Opening of the Ways. A full topic inventory and 26 longitudinal teaching pathways expose the missing middle, including explicit foundations and specialist/offscreen work. This is programme planning, not a complete authored curriculum or permission to implement all acts. Every activity still needs a bounded reviewed spec; story destinations remain open. See the spec’s independent Claude review receipt for current clearance.
+
+### Fraction Trail: intervals and actual stops
+
+[Spec 52](specs/52-fraction-trail.md) is now a local build after independent specification and implementation reviews. Six open ribbon requests extend the Sharing Counter into constructing equal intervals, placing a flag, reading its actual location and comparing frozen half/quarter/sixth routes. The fixed whole continues past one for a first five-quarter encounter. Checks distinguish equal spaces, requested point and actual reading; supplied pictures/help remain practice. The [implementation receipt](reviews/52-fraction-trail-implementation-review.md) records tests and limitations. Release and composed-branch verification remain pending. Next build-ready candidate: [Bundle Exchange](specs/53-bundle-exchange.md), then [Instructions for a Reader](specs/54-instructions-for-a-reader.md).

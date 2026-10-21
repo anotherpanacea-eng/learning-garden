@@ -57,6 +57,8 @@ node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
 node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
+node test/fraction-trail-checks.mjs
+node test/fraction-trail-integration-checks.mjs
 node test/rain-paths-checks.mjs
 node test/rain-paths-integration-checks.mjs
 node test/measuring-recipes-checks.mjs
@@ -291,3 +293,9 @@ Carry an actual completed current or kept Rain Paths result to [a water page in 
 The main page and standalone films include static Open Graph and large-image card metadata. The shared1200×630 PNG is `dist/assets/after-the-storm-social-v1.png`; its editable original vector artwork is `design/social-preview.svg`. Hash destinations share the main page preview because the fragment is not sent in an HTTP request. Metadata contains no explorer or saved-progress information. Bump the image filename when replacing it; sharing services may cache earlier cards.
 
 Nine original SVG icons in `dist/icons/` accompany the existing visible navigation names. They are decorative to assistive technology; the text remains the accessible link name. The mobile menu uses four columns with large tap targets. The existing garden mark also supplies the32px PNG favicon and180px Apple touch icon. Raster assets were rendered from the local vector originals with Sharp; no remote fonts, icon library, image service or additional browser dependency is required.
+
+## Fraction Trail — local build
+
+The optional `#cafe/fractions` bench adds six open ribbon requests: construct equal spaces, move a flag along actual boundaries, read its actual position and keep a frozen route card. Build, Place, Read and Keep pages retain the request and same-scale 0–2 line. Space equality, requested position and raw reading are checked separately. Half/quarter/sixth comparison and one five-quarter route revisit the same whole; a separate comparison explains why half of a longer whole is longer.
+
+All checks are model-visible practice. There is no independent fraction mastery, whole-number fact exposure, café stock/supper change or film milestone. Draft/raw text, optional help, frozen checks/cards and recovery uncertainty remain local and transfer with explorer notes. [Spec 52](docs/specs/52-fraction-trail.md) defines the bounded scope. This branch is stacked on the PR35 authoring branch; release still needs composed-branch checks.
