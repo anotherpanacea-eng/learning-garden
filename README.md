@@ -18,6 +18,8 @@ The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marbl
 
 The home page also offers **Watch the storm pass**, the optional 46-second film from [PR #8](https://github.com/anotherpanacea-eng/learning-garden/pull/8). Pip and Dot shelter their neighbors before the garden’s first morning. It starts on request and has pause/replay controls.
 
+The introductory storm film opens automatically the first time each saved explorer visits this version. It starts silently, offers replay with sound, and can be skipped at any time. Reduced-motion settings leave playback manual. The home-page “Watch the storm pass” link always remains available. With saving off or unavailable, the reminder lasts only for the current page session.
+
 ## Story Loft
 
 [Make a little puppet show](https://after-the-storm-learning.anotherpanacea.workers.dev/#loft): make a pictured puppet show, optionally give each puppet original dialogue, perform one scene at a time and revisit an audience question. Shows begin with three scenes and can grow from one to twelve scenes. Pictures, Puppet words and Story order have separate task pages; longer shows remain optional. Dialogue stays local under the existing save settings and is included in notes downloads. There is no automatic grading or writing-level inference.

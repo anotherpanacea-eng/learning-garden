@@ -18,13 +18,14 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 #start span.label{font-weight:600;font-size:18px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
 #start[hidden]{display:none}
 .bar{display:flex;align-items:center;gap:12px;width:min(100%,calc(100vh - 110px),900px)}
-.bar button{border:0;border-radius:999px;background:var(--btn);color:var(--btn-fg);font:600 14px system-ui,sans-serif;padding:8px 16px;cursor:pointer;min-width:84px}
-.bar button:focus-visible,#start:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.bar button,#sound{min-height:44px;border:0;border-radius:999px;background:var(--btn);color:var(--btn-fg);font:600 14px system-ui,sans-serif;padding:8px 16px;cursor:pointer;min-width:84px}
+.bar button:focus-visible,#sound:focus-visible,#start:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .track{flex:1;height:6px;border-radius:3px;background:var(--track);overflow:hidden}
 .track i{display:block;height:100%;width:0;background:var(--accent)}
 .back{color:var(--fg);font-weight:600}
 .back:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .time{font-variant-numeric:tabular-nums;color:var(--quiet);font-size:14px;min-width:84px;text-align:right}
+.embedded-film body{padding:8px;gap:8px;min-height:100dvh}.embedded-film #stage,.embedded-film .bar{width:min(100%,calc(100dvh - 140px),900px)}
 </style>
 </head>
 <body>
@@ -33,6 +34,7 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
  <button id="start" type="button"><span class="circle"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#183f39"/></svg></span><span class="label">Play with sound</span></button>
 </div>
 <div class="bar"><button id="toggle" type="button" disabled>Pause</button><div class="track" aria-hidden="true"><i id="prog"></i></div><span class="time" id="time">0:00 / 0:46</span></div>
+<button id="sound" type="button" hidden>Replay with sound</button>
 <a class="back" href="./#home">Back to the garden</a>
 <script>
 // After the Storm: intro film. Every shape and sound below is made in code.
@@ -552,26 +554,35 @@ function wav(buf){const ch=buf.numberOfChannels,len=buf.length*ch*2+44,ab=new Ar
 
 // ---------- playback ----------
 const startBtn=document.getElementById('start'),toggle=document.getElementById('toggle'),prog=document.getElementById('prog'),timeEl=document.getElementById('time');
-let ac=null,t0=0,playing=false,clock0=0,heldAt=0;
+let ac=null,t0=0,playing=false,clock0=0,heldAt=0,frameRequest=null;
 const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 const now=()=>ac?ac.currentTime-t0:(performance.now()-clock0)/1000;
-function tick(){if(!playing)return;let t=now();if(t>=D){t=D;playing=false;toggle.textContent='Replay'}
- draw(Math.max(0,t));prog.style.width=(clamp(t/D)*100)+'%';timeEl.textContent=`${fmt(Math.max(0,t))} / ${fmt(D)}`;if(playing)requestAnimationFrame(tick)}
-function start(){
+function tick(){if(!playing)return;let t=now();if(t>=D){t=D;playing=false;toggle.textContent='Replay';if(embedded)parent.postMessage('garden-film-finished',location.origin)}
+ draw(Math.max(0,t));prog.style.width=(clamp(t/D)*100)+'%';timeEl.textContent=`${fmt(Math.max(0,t))} / ${fmt(D)}`;if(playing)frameRequest=requestAnimationFrame(tick)}
+function start(sound=true){
+ if(frameRequest!==null)cancelAnimationFrame(frameRequest);
  if(ac){ac.close();ac=null}
- try{const AC=window.AudioContext||window.webkitAudioContext;ac=new AC();t0=ac.currentTime+0.15;buildAudio(ac,ac.destination,t0)}catch(e){ac=null;clock0=performance.now()}
+ try{if(!sound)throw new Error('Silent playback');const AC=window.AudioContext||window.webkitAudioContext;ac=new AC();t0=ac.currentTime+0.15;buildAudio(ac,ac.destination,t0)}catch(e){ac=null;clock0=performance.now()}
  if(!ac)clock0=performance.now();
- playing=true;startBtn.hidden=true;toggle.disabled=false;toggle.textContent='Pause';requestAnimationFrame(tick);
+ playing=true;startBtn.hidden=true;toggle.disabled=false;toggle.textContent='Pause';frameRequest=requestAnimationFrame(tick);
 }
-startBtn.addEventListener('click',start);
+startBtn.addEventListener('click',()=>start(true));
 toggle.addEventListener('click',()=>{
  if(toggle.textContent==='Replay')return start();
- if(playing){playing=false;toggle.textContent='Play';if(ac)ac.suspend();else heldAt=now()}
- else{playing=true;toggle.textContent='Pause';if(ac)ac.resume();else clock0=performance.now()-heldAt*1000;requestAnimationFrame(tick)}
+ if(playing){playing=false;if(frameRequest!==null)cancelAnimationFrame(frameRequest);toggle.textContent='Play';if(ac)ac.suspend();else heldAt=now()}
+ else{playing=true;toggle.textContent='Pause';if(ac)ac.resume();else clock0=performance.now()-heldAt*1000;frameRequest=requestAnimationFrame(tick)}
 });
 cv.addEventListener('click',()=>{if(!toggle.disabled)toggle.click()});
 addEventListener('keydown',e=>{if(e.code==='Space'&&e.target===document.body){e.preventDefault();startBtn.hidden?toggle.click():start()}});
-draw(15.2);
+const params=new URLSearchParams(location.search),embedded=params.get('embedded')==='1';
+if(embedded){document.documentElement.classList.add('embedded-film');document.querySelector('.back').hidden=true;}
+const soundButton=document.getElementById('sound');
+soundButton.onclick=()=>start(true);
+if(params.get('autoplay')==='1'){
+ soundButton.hidden=false;
+ if(!matchMedia('(prefers-reduced-motion: reduce)').matches)start(false);
+ else draw(15.2);
+}else draw(15.2);
 
 // For recording: step the clock yourself, one frame at a time.
 window.film={duration:D,draw,canvas:cv,async audioWav(rate=48000){const oac=new OfflineAudioContext(2,Math.ceil(rate*D),rate);buildAudio(oac,oac.destination,0);return wav(await oac.startRendering())}};
