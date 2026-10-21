@@ -11,7 +11,7 @@ Six original cases, all freely selectable:
 | Case | Groups | In each | Total |
 | --- | --- | --- | --- |
 | Little table | 3 | 4 | 12 |
-| Same twelve, new grouping | 4 | 3 | 12 |
+| Another way to share | 4 | 3 | 12 |
 | Picnic plates | 2 | 5 | 10 |
 | Welcome-back supper | 5 | 6 | 30 |
 | Long tables | 7 | 8 | 56 |
