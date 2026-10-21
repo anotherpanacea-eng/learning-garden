@@ -17,6 +17,28 @@ for(const kind of ['multiply','add','subtract'])for(let a=kind==='subtract'?2:1;
 }
 for(const args of [['multiply',13,1],['multiply',0,1],['add',21,1],['subtract',2,2],['subtract',1,0],['future',1,1],['multiply',1,1,3],['add',NaN,2]])check(generateRivalTask(...args)===null,'invalid generator parameters rejected');
 {
+ const {s,v}=fresh();startAdaptiveRival(s);const template=copy(v.rival);
+ for(const kind of ['add','subtract','multiply'])for(let scene=0;scene<3;scene++){
+  const r=copy(template);r.task=generateRivalTask(kind,8,3,scene);
+  for(const m of [r.task,r.task.practice]){m.prompt='Earlier saved question wording.';m.explanation='Earlier saved explanation.';for(const group of m.pictures.groups)group.label='Earlier saved picture label.';}
+  check(validPostRival(r),'frozen wording can differ in every generated operation and scene');
+  const changes=[
+   r=>r.task.answer++,r=>r.task.a++,r=>r.task.scene=3,r=>r.task.unit='stones',r=>r.task.kind='future',
+   r=>r.task.pictures.kind='add',r=>r.task.pictures.groups[0].count++,r=>r.task.pictures.groups.push(copy(r.task.pictures.groups[0])),
+   r=>r.task.practice.answer++,r=>r.task.practice.a++,r=>r.task.practice.scene=(r.task.practice.scene+1)%3,r=>r.task.practice.unit='stones',
+   r=>r.task.practice.pictures.groups[0].count++,r=>r.task.practice=copy(r.task),
+   r=>r.task.prompt=null,r=>r.task.explanation=[],r=>r.task.pictures.groups[0].label={},r=>r.task.practice.prompt=42,
+   r=>r.task.extra=true,r=>r.task.pictures.extra=true,r=>r.task.pictures.groups[0].extra=true,r=>r.task.practice.extra=true,
+   r=>r.task.practice.pictures.extra=true,r=>r.task.practice.pictures.groups[0].extra=true,r=>r.task.practice.practice={},r=>r.revision='bramble-3',
+  ];
+  // Pick an actually different picture kind for addition as well.
+  changes[5]=r=>r.task.pictures.kind=kind==='add'?'multiply':'add';
+  if(kind==='subtract')changes.push(r=>r.task.pictures.groups[0].reserved++,r=>r.task.practice.pictures.groups[0].reserved++);
+  else changes.push(r=>r.task.pictures.groups[0].reserved=0,r=>r.task.practice.pictures.groups[0].reserved=0);
+  for(const change of changes){const bad=copy(r);change(bad);check(!validPostRival(bad),'copy continuity never permits numeric, practice, type or future-shape changes');}
+ }
+}
+{
  const {s,v}=fresh();const initial=json(s);check(validBrambleNotebook(s.postOffice)&&json(s)===initial&&!('bramble'in s.postOffice),'validation leaves legacy root exact');
  s.facts={marker:'untouched'};s.cafe={marker:'untouched'};const other=json({...v});
  check(setBrambleMode(s,'multiply')&&setBrambleTable(s,12)&&startAdaptiveRival(s),'explicit choices start adaptive challenge');

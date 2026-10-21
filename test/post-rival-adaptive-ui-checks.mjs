@@ -4,13 +4,34 @@ import {ensureGarden} from '../dist/garden-core.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
 import {ensurePostOffice,startPostOffice,currentPostOffice,appendPostClause,packPostTogether,stepPostRoute,setPostCourier,setPostPage} from '../dist/post-office-core.mjs';
 import {postOfficePage,postOfficeNotes} from '../dist/post-office-ui.mjs';
-import {startPostRival,startAdaptiveRival,nextRivalChallenge,setBrambleMode,setBrambleTable,setRivalInput,submitRival,solveRivalTogether,continueRival,bypassRival,stepRivalDecomposition,setRivalMethod,validPostRival} from '../dist/post-rival.mjs';
+import {startPostRival,startAdaptiveRival,nextRivalChallenge,setBrambleMode,setBrambleTable,setRivalInput,submitRival,solveRivalTogether,continueRival,bypassRival,openRivalPractice,stepRivalPractice,returnRivalQuestion,stepRivalDecomposition,setRivalMethod,validPostRival,validBrambleNotebook} from '../dist/post-rival.mjs';
 import {generateRivalTask} from '../dist/post-rival-generator.mjs';
 import {scienceHome,sciencePage} from '../dist/science-ui.mjs';
 import {ensureScience,startScience} from '../dist/science-core.mjs';
 let n=0;const check=(v,label)=>{assert.ok(v,label);n++;},eq=(a,b,label)=>{assert.deepEqual(a,b,label);n++;},copy=structuredClone;
 function fresh(){const s=freshState();ensureGarden(s);ensurePostOffice(s);startPostOffice(s,'purl-blankets');setPostPage(s,'bramble');return s;}
 const untouched=fresh(),before=copy(untouched);postOfficePage(untouched);postOfficeNotes(untouched);eq(untouched,before,'render creates no generated notebook or round');
+{
+ const s=fresh(),v=currentPostOffice(s);packPostTogether(s);appendPostClause(s,'go:orchard');appendPostClause(s,'give:purl');stepPostRoute(s);startAdaptiveRival(s);
+ const frozen=v.rival.task,question='Earlier question: <b>saved bundles</b> & ribbons.',explanation='Earlier explanation: <i>saved total</i>.',practice='Earlier example: <em>different bundles</em>.';
+ frozen.prompt=question;frozen.explanation=explanation;frozen.practice.prompt=practice;frozen.practice.explanation='Earlier practice explanation: <strong>saved method</strong>.';
+ frozen.pictures.groups[0].label='Earlier picture <label>.';frozen.practice.pictures.groups[0].label='Earlier example <label>.';
+ setRivalInput(s,'waiting input');const saved=copy(s),delivery=copy(v);
+ ensurePostOffice(s);eq(s,saved,'reload preserves the whole waiting delivery and all frozen copy verbatim');
+ let html=postOfficePage(s);check(html.includes('Earlier question: &lt;b&gt;saved bundles&lt;/b&gt; &amp; ribbons.')&&!html.includes(question),'old question remains visible as escaped text');
+ check(openRivalPractice(s)&&stepRivalPractice(s,1)&&stepRivalPractice(s,1),'old frozen round still opens and steps through its practice');
+ html=postOfficePage(s);check(html.includes('Earlier example: &lt;em&gt;different bundles&lt;/em&gt;.')&&html.includes('Earlier practice explanation: &lt;strong&gt;saved method&lt;/strong&gt;.'),'old practice wording remains visible and escaped');
+ returnRivalQuestion(s);setRivalInput(s,String(frozen.answer));check(submitRival(s)&&v.rival.resolution==='answered'&&v.rival.attempts[0].afterSupport,'saved round remains answerable with support chronology retained');
+ html=postOfficePage(s);check(html.includes('Earlier explanation: &lt;i&gt;saved total&lt;/i&gt;.'),'resolved old explanation is escaped');
+ check(continueRival(s)&&validBrambleNotebook(s.postOffice),'old copy archives as a valid finished round');
+ const archived=copy(s);ensurePostOffice(s);eq(s,archived,'both retained round and history survive reload without regenerating wording');
+ for(const key of ['order','recipientLocations','packing','playback','clauses','composer','checks'])eq(v[key],delivery[key],'copy continuity keeps exact delivery material: '+key);
+ const mismatch=copy(s);mismatch.postOffice.bramble.history[0].task.prompt+=' changed archive';check(!validBrambleNotebook(mismatch.postOffice),'different frozen text between archive and retained round still rejected');
+ for(const corrupt of [r=>r.task.practice.future=true,r=>r.revision='bramble-3']){const bad=copy(s);corrupt(bad.postOffice.bramble.history[0]);const exact=copy(bad.postOffice);ensurePostOffice(bad);eq(bad.postOffice.kept.payload,exact,'unknown or future archive keeps the complete original Post Office for recovery');}
+ const corruptions=[r=>r.task.answer++,r=>r.task.practice.answer++,r=>r.task.pictures.groups[0].count++,r=>r.task.practice.pictures.groups[0].extra=true,r=>r.task.future=true,r=>r.revision='bramble-3'];
+ for(const corrupt of corruptions){const bad=copy(saved);corrupt(bad.postOffice.visits[0].rival);const exact=copy(bad.postOffice.visits[0].rival);ensurePostOffice(bad);check(currentPostOffice(bad).closed,'unsafe or future current round stays closed');eq(currentPostOffice(bad).rival,exact,'unsafe or future round retained exactly for recovery');}
+ const unsupported=copy(saved);unsupported.postOffice.visits[0].rival.decompositionStep=0;check(!validPostRival(unsupported.postOffice.visits[0].rival),'copy continuity does not relax support chronology');
+}
 for(let a=1;a<=12;a++)for(let b=1;b<=12;b++){
  const s=fresh();setBrambleMode(s,'multiply');startAdaptiveRival(s);const r=currentPostOffice(s).rival;r.task=generateRivalTask('multiply',a,b,0);check(validPostRival(r),'bounded synthetic generated round valid');
  const html=postOfficePage(s);eq((html.match(/class="rival-array-cell /g)||[]).length,a*b,'every ordered fact has the exact number of array cells');eq((html.match(/class="rival-array-row"/g)||[]).length,a,'every factor has exact labelled rows');check(html.includes(`${a} equal ${a===1?'bundle':'bundles'} with ${b} ${b===1?'ribbon':'ribbons'} in each`),'array has text equivalent');
