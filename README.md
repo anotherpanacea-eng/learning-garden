@@ -98,6 +98,8 @@ node test/post-pagination-checks.mjs
 node test/post-rival-checks.mjs
 node test/post-rival-adaptive-checks.mjs
 node test/post-rival-adaptive-ui-checks.mjs
+node test/parcel-packing-checks.mjs
+node test/parcel-packing-integration-checks.mjs
 node test/courier-rival-ui-checks.mjs
 node test/learning-invitation-checks.mjs
 node test/learning-connections-checks.mjs
@@ -291,3 +293,6 @@ Carry an actual completed current or kept Rain Paths result to [a water page in 
 The main page and standalone films include static Open Graph and large-image card metadata. The shared1200×630 PNG is `dist/assets/after-the-storm-social-v1.png`; its editable original vector artwork is `design/social-preview.svg`. Hash destinations share the main page preview because the fragment is not sent in an HTTP request. Metadata contains no explorer or saved-progress information. Bump the image filename when replacing it; sharing services may cache earlier cards.
 
 Nine original SVG icons in `dist/icons/` accompany the existing visible navigation names. They are decorative to assistive technology; the text remains the accessible link name. The mobile menu uses four columns with large tap targets. The existing garden mark also supplies the32px PNG favicon and180px Apple touch icon. Raster assets were rendered from the local vector originals with Sharp; no remote fonts, icon library, image service or additional browser dependency is required.
+
+
+The locally built **Willow packing table** (`#post/packing`) gives the same seed envelopes two purposes: make the most full welcome kits, or carry every envelope in the fewest loaded trips. Four requests include an exact fit; partial bags, loose envelopes and spare capacity stay distinct. Pack/unpack countable objects, read the actual table, revise the purpose-specific answer and keep or seal a plan. Supplied pictures and requested examples support practice without claiming written division or independent mastery. [Spec 51](docs/specs/51-parcel-packing-and-remainders.md).

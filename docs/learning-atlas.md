@@ -10,18 +10,18 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 118 explicit current references across 62 unique source topics: authored question references, scoped practice or supplied explanations. The other 1528 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 124 explicit current references across 65 unique source topics: authored question references, scoped practice or supplied explanations. The other 1525 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
 | Source subject | Topics | Topics with any declared link | Not yet mapped |
 | --- | --- | --- | --- |
 | Computing | 21 | 1 | 20 |
-| English | 286 | 8 | 278 |
+| English | 286 | 9 | 277 |
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 40 | 463 |
+| Mathematics | 503 | 42 | 461 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 10 | 537 |
 
@@ -73,6 +73,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | [The Measuring Kitchen](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/recipes) | allocate, experiment | Six fictional two-ingredient trays: fill/read a straight-sided 500 mL jug in 50 mL steps, choose a volume unit, pour into separate labelled preparation jars and return portions. Numeric reading, unit naming, recipe fit and empty-jug readiness stay separate. Supported picture measurement only; no physical-tool competence, mass, litre conversion, mixing or recipe scaling. |
 | [Travelers’ Archive: Paris,1910](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive) | read, search, compose | One reviewed Paris1910 visit: real credited CC0 photograph, modern original chronology summaries, schematic place matching, ordinal date ordering, finite source-scope/interpretation choices and ungraded local reply. Production date is distinct from exact scene date; no citywide recovery, independent research/decoding or French-proficiency claim. |
 | [Rain Paths charts: a carried result](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain) | experiment, build | Freeze one actual completed current or kept machine result, choose useful counts and construct editable two-bar charts on a fixed 0–24 model-token scale. Draft reading, source fidelity and original runoff questions remain separate. Four finite sources; no measured hydrology, independent scale choice or learning-level inference. |
+| Willow packing table (`#post/packing`, local build) | allocate, build, read | Four invented seed-envelope requests with whole-bag capacity, full kits, loose envelopes and minimal loaded trips. Countable reversible grouping, actual-model readings and purpose-specific answers remain supplied practice. No written algorithm, decimal quotient, general multistep problem solving, formal place value or independent reading claim. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -120,7 +121,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | English / Grammar & Punctuation | 75 | 0 | Compose · execute · revise; Read · infer · support |
 | English / Handwriting & Transcription | 5 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Phonics & Word Reading | 23 | 1 | Build · transform · relate; Create · perform · reflect |
-| English / Reading Comprehension | 72 | 2 | Read · infer · support; Search · inspect · compare |
+| English / Reading Comprehension | 72 | 3 | Read · infer · support; Search · inspect · compare |
 | English / Speaking & Listening | 21 | 0 | Read · infer · support; Create · perform · reflect |
 | English / Spelling & Word Study | 24 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Vocabulary | 21 | 0 | Read · infer · support; Search · inspect · compare |
@@ -138,9 +139,9 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Data & Statistics | 18 | 2 | Change · measure · explain; Read · infer · support |
 | Mathematics / Fractions | 67 | 8 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Geometry | 69 | 4 | Build · transform · relate; Search · inspect · compare |
-| Mathematics / Mathematical Thinking | 48 | 1 | Build · transform · relate; Search · inspect · compare |
+| Mathematics / Mathematical Thinking | 48 | 2 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Measurement | 68 | 7 | Assemble · allocate · check; Build · transform · relate |
-| Mathematics / Multiplication & Division | 57 | 9 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Multiplication & Division | 57 | 10 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Number Representation & Place Value | 52 | 3 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
 | Mathematics / Ratio & Proportion | 18 | 0 | Assemble · allocate · check; Build · transform · relate |
@@ -294,6 +295,12 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Recording Data](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_ZFwPZaDJ0_) | scoped-practice / Rain Paths charts: a carried result / [source](../dist/rain-notebook-ui.mjs) | Select and organise completed model counts relevant to a supplied runoff question. No new real measurement or independent data collection. |
 | [Classifying living things](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_7IFpDVNsmt) | scoped-practice / Rain Paths charts: a carried result / [source](../dist/rain-notebook-ui.mjs) | Present carried machine counts as two labelled bars and compare the draft with its frozen source. No living-thing classification or full scientific presentation claim. |
 | [Representing numbers with objects (age 8+)](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_r8XnXwRA6g) | scoped-practice / Rain Paths charts: a carried result / [source](../dist/rain-notebook-ui.mjs) | Construct bars against a supplied four-token tick scale; distinguish reading the entered chart from source fidelity and compare two runoff counts. No independent scale choice, pictograms or broad graph proficiency. |
+| [Division as equal sharing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_LpSuPgL31x) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Group by a specified bag size and count complete groups, distinct from sharing among a given number of recipients. Pictures and counting help stay available; no whole division topic claim. |
+| [What Division Means](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_iNdrM2-oJf) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Interpret the count of full equal-capacity bags as a quotient, retaining spare envelopes separately. Match a supplied repeated-group expression; no independent symbolic calculation or division fluency claim. |
+| [Multiplication and Division Word Problems](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Zdv-b-iW5K) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Interpret four fixed within-100 equal-group packing requests according to the kit or all-envelope transport purpose. Narrow pictured contexts, not all word-problem types or independent decoding. |
+| [Division with remainders](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_p-nbe0w_lf) | explanation / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Explain why full groups, spare objects and minimum loaded trips differ; contrast a positive remainder with an exact fit. The broader source requires formal operations, multistep problems, equations and estimation, none taught or inferred here. |
+| [Precise Maths Communication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TMoHjMhRS2) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Attach supplied full-bag, loose-envelope or loaded-trip labels to separate numerical readings/predictions. No independent mathematical prose or transcription claim. |
+| [Pictures and Text Working Together](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OlhMP7ShFT) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Relate the literal packing request, capacity and purpose to countable pictured objects and groups. No independent decoding, inference or broad reading level claim. |
 
 ## Sources, licensing and maintenance
 

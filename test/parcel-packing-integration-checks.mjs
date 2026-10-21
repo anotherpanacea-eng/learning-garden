@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import {freshState} from '../dist/core.mjs';
+import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
+import {ExplorerStore} from '../dist/explorer-storage.mjs';
+import {nextGuest,adjustBite,checkPlate,submitCafeNumber,skipCafeStage,serveCafe} from '../dist/cafe-core.mjs';
+import {startPostOffice,setPostPage,currentPostOffice} from '../dist/post-office-core.mjs';
+import {startAdaptiveRival,solveRivalTogether} from '../dist/post-rival.mjs';
+import {connectionOffers} from '../dist/learning-connections.mjs';
+import {startShow,setSceneDialogue} from '../dist/loft-core.mjs';
+import {drawLetter} from '../dist/letter-trail-core.mjs';
+import {destinationNotes} from '../dist/notebook-sections.mjs';
+import * as P from '../dist/parcel-packing-core.mjs';
+import {PACKING_CASES} from '../dist/parcel-packing-content.mjs';
+import {renderParcelPacking,parcelPackingNotes,parcelPackingEntry} from '../dist/parcel-packing-ui.mjs';
+let checks=0;const ok=(x,m)=>{assert.ok(x,m);checks++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
+const fresh=()=>initializeExplorerState(freshState());
+{
+ const s=fresh(),raw=JSON.stringify(s),view=renderParcelPacking(s);eq(view.facts,[],'unopened chooser has no mathematical example');parcelPackingNotes(s);destinationNotes(s);eq(JSON.stringify(s),raw,'opening/notes leave absent root absent');ok(!Object.hasOwn(prepareProgressImport(raw).state,'parcelPacking'),'ordinary import leaves root absent');
+}
+for(const c of PACKING_CASES){const s=fresh();P.choosePackingCase(s,c.id);P.movePackingEnvelope(s,1);P.setPackingReading(s,'full','2-');P.setPackingAnswer(s,'all',' 04 ');for(const page of ['pack','read','purpose','keep']){P.setPackingPage(s,page);const raw=JSON.stringify(s),view=renderParcelPacking(s);ok(view.html.includes(c.title),'request retained on every page');eq(JSON.stringify(s),raw,'renderer and exposure list are pure');ok(view.facts.every(([a,b])=>Number.isInteger(a)&&a>=1&&a<=12&&b===c.capacity),'only concrete whole groups expose facts');const imported=prepareProgressImport(raw);ok(imported.ok,'case/page imports');eq(imported.state.parcelPacking,s.parcelPacking,'exact source/model/drafts/page transfers');}P.keepPacking(s);P.preparePackingTogether(s);P.sealPacking(s);eq(prepareProgressImport(JSON.stringify(s)).state.parcelPacking,s.parcelPacking,'kept and supported sealed work transfer exactly');}
+function waiting(){const s=fresh();nextGuest(s);const order=s.cafe.current;order.params.guests=3;order.params.bites=4;order.params.wanted=['warm','crunchy'];for(let i=0;i<4;i++)adjustBite(s,'moon-crunch',1);assert.ok(checkPlate(s));assert.ok(submitCafeNumber(s,12));skipCafeStage(s);s.cafe.stock['moon-crunch']=180;assert.ok(serveCafe(s));nextGuest(s);adjustBite(s,'moon-crunch',1);startPostOffice(s,'purl-blankets');setPostPage(s,'bramble');startAdaptiveRival(s);solveRivalTogether(s);startShow(s,'welcome');setSceneDialogue(s,'A fictional parcel show.');drawLetter(s,'post');return s;}
+{
+ const s=waiting();ok(connectionOffers(s,'bramble').length>0,'fixture has a genuine incoming cafe connection');eq(currentPostOffice(s).rival.phase,'resolved','fixture has real resolved waiting rival');const before=structuredClone(s);for(const c of PACKING_CASES){P.choosePackingCase(s,c.id);P.fillPackingBagTogether(s);P.checkPacking(s,'read-full');P.keepPacking(s);P.preparePackingTogether(s);P.sealPacking(s);renderParcelPacking(s);}const after=structuredClone(s);delete after.parcelPacking;eq(after,before,'packing operations leave actual waiting games and histories intact');const restored=prepareProgressImport(JSON.stringify(s)).state;delete restored.parcelPacking;eq(restored,before,'import also preserves waiting work');
+}
+for(const raw of [null,[],3,{version:99,old:'<img src=x onerror="fictional()">'}]){const s=fresh();s.parcelPacking=raw;const serialized=JSON.stringify(s);ok(!P.packingState(s),'unknown format unavailable');eq(renderParcelPacking(s).facts,[],'unknown view exposes nothing');ok(!parcelPackingNotes(s).includes('<img src=x')&&!destinationNotes(s).includes('<img src=x'),'raw notes escaped');eq(JSON.stringify(s),serialized,'unavailable views are read-only');const imported=prepareProgressImport(serialized);ok(imported.ok,'future root passes through importer');eq(imported.state.parcelPacking,raw,'future payload survives exactly');P.recoverPacking(s);eq(s.parcelPacking.recovered,raw,'explicit recovery keeps raw record');}
+class Storage{constructor(){this.map=new Map();}get length(){return this.map.size;}key(i){return [...this.map.keys()][i]??null;}getItem(k){return this.map.get(k)??null;}setItem(k,v){this.map.set(k,v);}removeItem(k){this.map.delete(k);}}
+{
+ const disk=new Storage(),store=new ExplorerStore(disk);let s=initializeExplorerState(store.load());const id=store.active.id;P.choosePackingCase(s,'lantern-seeds');P.movePackingEnvelope(s,1);P.setPackingReading(s,'full','2-');store.save(s);eq(new ExplorerStore(disk).load().parcelPacking,s.parcelPacking,'model/raw input reload');const other=store.add({},s);ok(!other.parcelPacking,'second explorer independent');s=store.select(id,other);eq(P.packingView(s).model.packed,1,'first model resumes');store.setPersistence(false,s);store.save(s);eq(store.load().parcelPacking,s.parcelPacking,'save-off session playable');ok(!new ExplorerStore(disk).load().parcelPacking,'save-off does not persist');ok(!store.clearActive().parcelPacking,'reset clears packing');
+}
+{
+ const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8'),ending=app.slice(app.indexOf('function endingFilm(){'),app.indexOf("if(!choosingExplorer)playFilm('welcome');"));let calls=0;const ctx=vm.createContext({state:waiting(),choosingExplorer:false,location:{hash:'#post/packing'},currentPostOffice(){calls++;return {closed:false,rival:{phase:'resolved'}};},postOfficeView(){return 'bramble';}});vm.runInContext(ending,ctx);eq(vm.runInContext('endingFilm()',ctx),null,'packing cannot play paused Bramble film');eq(calls,0,'packing does not inspect that rival for a film');ok(app.includes('facts:view.facts'),'app consumes actual rendered fact metadata');ok(parcelPackingEntry().includes('#post/packing'),'optional entry targets independent route');
+}
+console.log(`Parcel packing UI/storage integration: ${checks} passed.`);
