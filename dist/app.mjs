@@ -1,3 +1,5 @@
+import {ensureEqualGroups,noteGroupView} from './equal-groups-core.mjs';
+import {equalGroupsPage,equalGroupEntry,equalGroupPairsShown,bindEqualGroups} from './equal-groups-ui.mjs';
 import {loftPage,bindLoft} from './loft-ui.mjs';
 import {destinationNotes} from './notebook-sections.mjs';
 import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from './progress-transfer.mjs';
@@ -152,13 +154,16 @@ function adventureEnd(){return `${heading('An idea to take with you.','You made 
 function render(){
   stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
+  const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
   const navRoot=['paris','french'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
   $('#companion-link').innerHTML=companionLink(state);
   document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===`#${navRoot}`?'page':'false'));
+  ensureEqualGroups(state);
   let html;
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
+  else if(groupBench){if(detail!=='choose'){noteGroupView(state,groupPlace);exposeStoryFacts({facts:equalGroupPairsShown(state,groupPlace)});save();}html=equalGroupsPage(state,groupPlace,detail);}
   else if(root==='regrow')html=plantingPage(state,Number(slug||0));
   else if(root==='wonder'){html=openNumberTaskPage(state,slug);save();}
   else if(root==='french')html=frenchLanding(state);
@@ -170,7 +175,7 @@ function render(){
     else html=orchardPage(state,slug);
   }
   else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}}
-  else if(root==='post')html=postOfficePage(state,slug);
+  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug);
   else if(root==='workshop')html=workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph);
   else if(root==='science'){
@@ -178,7 +183,7 @@ function render(){
   }
   else if(root==='cafe'){
     if(state.cafe.current){const o=orderFor(state.cafe);exposeStoryFacts({facts:[[o.guests,o.bites],...(state.cafe.current.stage==='stock'?currentRecipe(state.cafe).map(item=>[o.guests,item.count]):[])]});}
-    save();html=renderCafe(state);
+    save();html=equalGroupEntry('cafe')+renderCafe(state);
   }
   else if(root==='companions')html=companionPicker(state);
   else if(root==='storm'){
@@ -208,8 +213,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state);
   else html=home();
-  if(!choosingExplorer){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
   main.innerHTML=(explorerStore.warning?`<p class="storage-warning" role="status">${esc(explorerStore.warning)}</p>`:!storageOK?'<p class="storage-warning" role="status">This browser cannot save progress right now. You can still explore; download notes before leaving.</p>':'')+(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;bind();
   const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
 }
@@ -276,6 +281,8 @@ function bindBroadExtras(){
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
 function bind(){
+ const [egRoot,egSlug]=(location.hash||'#home').slice(1).split('/');
+ if(egSlug==='groups'&&['cafe','post'].includes(egRoot))bindEqualGroups(state,egRoot==='cafe'?'cafe':'bramble',{save,render,navigate,focus:focusElement});
  document.querySelectorAll('[data-film-replay]').forEach(button=>button.addEventListener('click',()=>playFilm(button.dataset.filmReplay,{replay:true})));
  $('#dismiss-draft-notice')?.addEventListener('click',()=>{state.broad.draftNotice=false;save();render();main.focus();});
  bindExplorers();bindBroadExtras();bindPlantings(state,{save,render,navigate,focus:focusElement});
@@ -430,8 +437,8 @@ function endingFilm(){
  if(choosingExplorer)return null;
  const [root,slug]=(location.hash||'#home').slice(1).split('/');
  if(root==='storm'&&['end','play'].includes(slug)){const v=currentVisit(state);if(v?.finished&&(v.entrance==='paris'||entranceById(v.entrance)?.language==='fr'))return 'paris';}
- if(root==='cafe'){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
- if(root==='post'&&slug!=='choose'){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
+ if(root==='cafe'&&slug!=='groups'){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
+ if(root==='post'&&!['choose','groups'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
  return null;
 }
 if(!choosingExplorer)playFilm('welcome');

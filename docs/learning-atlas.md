@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 72 explicit current references across 42 unique source topics: authored question references, scoped practice or supplied explanations. The other 1548 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 82 explicit current references across 45 unique source topics: authored question references, scoped practice or supplied explanations. The other 1545 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -21,7 +21,7 @@ There are 72 explicit current references across 42 unique source topics: authore
 | History | 90 | 0 | 90 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 29 | 474 |
+| Mathematics | 503 | 32 | 471 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 7 | 540 |
 
@@ -133,7 +133,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Geometry | 69 | 4 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Mathematical Thinking | 48 | 1 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Measurement | 68 | 4 | Assemble · allocate · check; Build · transform · relate |
-| Mathematics / Multiplication & Division | 57 | 6 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Multiplication & Division | 57 | 9 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Number Representation & Place Value | 52 | 3 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
 | Mathematics / Ratio & Proportion | 18 | 0 | Assemble · allocate · check; Build · transform · relate |
@@ -241,6 +241,16 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Arrays for multiplication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_GRWwTDZ3wD) | scoped-practice / Bramble’s ribbon gate / [source](../dist/post-office-ui.mjs) | Literal equal-bundle arrays and requested decomposition through 12×12; no general division or independent-recall certification. |
 | [Multiplication as repeated addition](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_PZ909yPrEC) | scoped-practice / Bramble’s ribbon gate / [source](../dist/post-rival-generator.mjs) | Generated multiplication examples use equal bundles; addition/subtraction remain their own tasks, not evidence of this topic. |
 | [Narrative Writing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_vauULTecMH) | scoped-practice / Story Loft puppet theatre / [source](../dist/loft-content.mjs) | Arrange pictured scenes and supplied captions into a one-to-twelve-scene sequence, optionally add puppet dialogue, and revise for an audience. Writing may be supported; spelling, independence, story quality and full narrative proficiency are not assessed. |
+| [Division as equal sharing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_LpSuPgL31x) | scoped-practice / Almost-Right Café / [source](../dist/equal-groups-ui.mjs) | Six authored quantity families: distribute a fixed total among a given plate/bundle count, or make groups of a given size; editable visual model and explicit support. No remainders, non-integer or full-topic claim. |
+| [What Division Means](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_iNdrM2-oJf) | scoped-practice / Almost-Right Café / [source](../dist/equal-groups-ui.mjs) | Contrast finding objects per group with finding number of groups while keeping the same quantities and naming their units. Numerical answers and arrangement checks stay separate; interpretation is not certified by a correct entry. |
+| [Division as Unknown Factor](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_GDG9_SZmsO) | explanation / Almost-Right Café / [source](../dist/equal-groups-ui.mjs) | Optional help relates the selected division question to groups × amount per group = total, with the factor sought marked ?. Revealed related facts are support, not independent inverse-relation evidence. |
+| [Unknown in Multiplication & Division](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_xZvDCYA5Ae) | scoped-practice / Almost-Right Café / [source](../dist/equal-groups-ui.mjs) | Choose an unknown total, group size or group count in six positive integer families through 12×12. Cross-game quantities and arrangements are familiar visual practice; no baseline, general division or mastery claim. |
+| [Multiplication as repeated addition](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_PZ909yPrEC) | explanation / Almost-Right Café / [source](../dist/equal-groups-ui.mjs) | Requested unit-labeled repeated-addition and multiplication explanation for the actual equal groups. The supplied explanation does not create an answer or recall observation. |
+| [Division as equal sharing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_LpSuPgL31x) | scoped-practice / Bramble’s ribbon gate / [source](../dist/equal-groups-ui.mjs) | Six authored quantity families: distribute a fixed total among a given plate/bundle count, or make groups of a given size; editable visual model and explicit support. No remainders, non-integer or full-topic claim. |
+| [What Division Means](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_iNdrM2-oJf) | scoped-practice / Bramble’s ribbon gate / [source](../dist/equal-groups-ui.mjs) | Contrast finding objects per group with finding number of groups while keeping the same quantities and naming their units. Numerical answers and arrangement checks stay separate; interpretation is not certified by a correct entry. |
+| [Division as Unknown Factor](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_GDG9_SZmsO) | explanation / Bramble’s ribbon gate / [source](../dist/equal-groups-ui.mjs) | Optional help relates the selected division question to groups × amount per group = total, with the factor sought marked ?. Revealed related facts are support, not independent inverse-relation evidence. |
+| [Unknown in Multiplication & Division](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_xZvDCYA5Ae) | scoped-practice / Bramble’s ribbon gate / [source](../dist/equal-groups-ui.mjs) | Choose an unknown total, group size or group count in six positive integer families through 12×12. Cross-game quantities and arrangements are familiar visual practice; no baseline, general division or mastery claim. |
+| [Multiplication as repeated addition](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_PZ909yPrEC) | explanation / Bramble’s ribbon gate / [source](../dist/equal-groups-ui.mjs) | Requested unit-labeled repeated-addition and multiplication explanation for the actual equal groups. The supplied explanation does not create an answer or recall observation. |
 
 ## Sources, licensing and maintenance
 

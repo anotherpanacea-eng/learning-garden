@@ -94,6 +94,8 @@ node test/french-and-revision-checks.mjs
 node test/french-exploration-checks.mjs
 node test/storm-film-checks.mjs
 node test/ending-film-checks.mjs
+node test/equal-groups-checks.mjs
+node test/equal-groups-integration-checks.mjs
 node scripts/check-story-packs.mjs
 ```
 
@@ -222,3 +224,5 @@ The file is read on your device, never uploaded. Existing explorers are not repl
 ## Cloudflare hosting
 
 The reviewed static assets are served at https://after-the-storm-learning.anotherpanacea.workers.dev/. Deploy only `dist/`, never the repository root or CLI-generated setup folders. From an authenticated Cloudflare account, future reviewed releases can use `npx wrangler deploy --assets ./dist --name after-the-storm-learning`. The current deployment has no application backend or paid compute requirement. Static asset requests are [free and unlimited](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/). Keep credentials and account configuration outside this public repository.
+
+The first equal-group spiral is available at the Café serving bench and Bramble’s ribbon bench. Six quantity families support total, amount-per-group and group-count questions, with editable pictured supplies and preserved work across both places. See [spec 38](docs/specs/38-equal-group-spiral.md). Normal orders, inventory and rival rounds stay separate.
