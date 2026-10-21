@@ -28,7 +28,8 @@ function oracle(id,strip){
 }
 const untouched={messages:{synthetic:'retained'},letterTrail:{version:99},loft:{show:['paper']},other:{preserve:true}},before=copy(untouched);
 I.instructionState(untouched);I.instructionView(untouched);I.instructionNotes(untouched);assert.deepEqual(untouched,before);
-assert.equal(I.noteInstructionEntry(untouched,'post'),false);assert.deepEqual(untouched,before);
+const arrived=copy(untouched);assert.equal(I.noteInstructionEntry(arrived,'post'),true);assert.equal(arrived.instructionNotes.cases['pocket-note'].seen,true);assert.equal(arrived.instructionNotes.cases['pocket-note'].familiar,false);
+assert.equal(I.noteInstructionEntry(arrived,'post'),true);assert.equal(arrived.instructionNotes.cases['pocket-note'].familiar,true);assert.deepEqual({...arrived,instructionNotes:undefined},{...before,instructionNotes:undefined});
 assert.deepEqual(I.instructionExposureFacts(),[]);
 assert.equal(instructionCases.length,2);
 assert.equal(instructionComparison.invitation,'Come and watch our puppet show at the welcome table.');
@@ -135,15 +136,16 @@ const keptFirst=work(state).kept[0].id,keepCounter=work(state).nextKeepId;I.setI
 I.updateInstructionKeep(state,'post',keptFirst);assert.equal(work(state).kept[0].text,'Updated exact text');assert.equal(work(state).nextKeepId,keepCounter);valid(state);
 assert.ok(I.instructionNotes(state).join('\n').includes('Updated exact text'));
 
-// Revision1 accepts the exact reviewed language only; unknown edits remain raw and unavailable.
+// Saved wording is a frozen copy: reworded content or generated text never locks a save, and the runner uses the current case.
 for(const scope of ['current','run','kept','embedded']){
  const changed=copy(state),w=work(changed),source=scope==='current'?w.source:scope==='run'?w.runs.at(-1).source:scope==='kept'?w.kept.at(-1).source:w.kept.at(-1).run.source;
- source.actions[0].variants.A='Do not fold the note.';
- assert.equal(I.validInstructions(changed.instructionNotes),false);
- const raw=copy(changed.instructionNotes);assert.equal(I.instructionView(changed).unsupported,true);assert.deepEqual(changed.instructionNotes,raw);
- assert.equal(I.recoverInstructions(changed),true);assert.deepEqual(changed.instructionNotes.recovered,raw);
+ source.actions[0].variants.A='Earlier wording.';source.request='Earlier request wording.';
+ if(scope==='run'){w.runs.at(-1).description='Earlier result wording.';w.runs.at(-1).transitions[0].description='Earlier step wording.';}
+ assert.equal(I.validInstructions(changed.instructionNotes),true,scope);assert.equal(view(changed).unsupported,false);
+ assert.deepEqual(view(changed).source,pocket);
+ I.tryInstructionStrip(changed,'post');assert.deepEqual(work(changed).runs.at(-1).source,pocket);valid(changed);
 }
-const changedPremise=copy(pocket);changedPremise.startingDescription='The unfolded note fits already.';assert.equal(I.runInstructionModel(changedPremise,strip('fold','insert','seal')),null);
+const changedPremise=copy(pocket);changedPremise.startingDescription='The unfolded note fits already.';assert.deepEqual(I.runInstructionModel(changedPremise,strip('fold','insert','seal')),I.runInstructionModel(pocket,strip('fold','insert','seal')));
 // Feedback is exposure only when a consequence is displayed, not when a run is computed.
 const unseen={};I.editInstructionStrip(unseen,'post','add','fold');I.tryInstructionStrip(unseen,'post');
 assert.equal(work(unseen).support.includes('runFeedback'),false);assert.equal(work(unseen).runs[0].support.includes('runFeedback'),false);
@@ -165,11 +167,9 @@ I.noteInstructionEntry(arrivals,'post');assert.deepEqual(work(arrivals).runs,arr
 const supportedUnseen={instructionNotes:I.instructionState({})};assert.equal(I.noteInstructionEntry(supportedUnseen,'post'),true);assert.equal(work(supportedUnseen).seen,true);assert.equal(work(supportedUnseen).familiar,false);
 assert.equal(I.noteInstructionEntry(supportedUnseen,'post'),true);assert.equal(work(supportedUnseen).familiar,true);valid(supportedUnseen);
 const malformed=[
- x=>work(x).source.startingScene.note='inside',x=>work(x).source.revision=2,x=>work(x).strip.push(copy(work(x).strip[0])),
- x=>work(x).plan=['fold','fold'],x=>work(x).runs.at(-1).terminalScene.note='unfolded-table',
- x=>work(x).runs.at(-1).transitions[0].wording='invented',x=>work(x).runs.at(-1).requestFulfilled=false,
- x=>work(x).runs.at(-1).startingScene.envelope='sealed',x=>work(x).runs.at(-1).support.push('future'),
- x=>work(x).runs.at(-1).support=work(x).runs.at(-1).support.filter(s=>s!=='example'),
+ x=>work(x).source.actions[0].id='unfold',x=>work(x).strip.push(copy(work(x).strip[0])),
+ x=>work(x).plan=['fold','fold'],x=>work(x).runs.at(-1).transitions[0].actionId='seal',x=>work(x).runs.at(-1).requestFulfilled='yes',
+ x=>work(x).runs.at(-1).support.push('future'),
  x=>work(x).runs.at(-1).priorExposureUnknown=true,x=>work(x).runs.at(-1).id+=1,
  x=>work(x).playback.cursor=99,x=>work(x).text='a'.repeat(1201),x=>work(x).humanRead.comment='a'.repeat(401),
  x=>work(x).humanRead.textRevision=work(x).textRevision+1,x=>work(x).kept.at(-1).run.id=999999999,

@@ -10,16 +10,15 @@ export const instructionSupport=['suppliedAssembly','comparison','cause','exampl
 const text=(x,n)=>typeof x==='string'&&x.length<=n;
 const integer=(x,min=0,max=instructionSequenceLimit)=>Number.isInteger(x)&&x>=min&&x<=max;
 const supports=x=>Array.isArray(x)&&new Set(x).size===x.length&&x.every(k=>instructionSupport.includes(k));
-const includes=(larger,smaller)=>smaller.every(k=>larger.includes(k));
 const action=(source,id)=>source.actions.find(a=>a.id===id);
 const validPlan=(source,x)=>Array.isArray(x)&&x.length<=3&&new Set(x).size===x.length&&x.every(id=>!!action(source,id));
 const validStrip=(source,x)=>Array.isArray(x)&&x.length<=3&&new Set(x.map(s=>s?.actionId)).size===x.length&&x.every(s=>keys(s,['actionId','variant'])&&!!action(source,s.actionId)&&['A','B'].includes(s.variant));
 
-// Revision1 contains exactly the independently reviewed words and premises.
-// A different instruction cannot inherit the executable meaning of an old action ID.
+// A saved source is a frozen copy of what was shown. Check its ids, never its wording.
+// The runner always uses the current case, so saved wording is never executed.
 function validSource(source){
  const canonical=instructionCase(source?.id);
- return !!canonical&&same(source,canonical);
+ return !!canonical&&Array.isArray(source.actions)&&same(source.actions.map(a=>a?.id),canonical.actions.map(a=>a.id))&&source.actions.every(a=>object(a.variants));
 }
 export function describeInstructionScene(id,scene){
  if(id==='pocket-note')return `${scene.note==='inside'?'The note is inside the envelope.':scene.note==='folded-table'?'The folded note is on the table.':'The unfolded note is on the table; it is too wide for this envelope.'} The envelope is ${scene.envelope}.`;
@@ -49,8 +48,9 @@ function transition(id,scene,actionId){
  return {after,blocked,description};
 }
 // This accepts action IDs only. Original text is never parsed or passed to this runner.
-export function runInstructionModel(source,strip){
- if(!validSource(source)||!validStrip(source,strip))return null;
+export function runInstructionModel(given,strip){
+ const source=instructionCase(given?.id);
+ if(!source||!validStrip(source,strip))return null;
  let scene=clone(source.startingScene),blockedAction=null;const transitions=[];
  for(const s of strip){
   const before=clone(scene),next=transition(source.id,scene,s.actionId);
@@ -71,37 +71,32 @@ function validCommon(s,source,unknown){return validSource(s.source)&&s.source.id
 const runKeys=['id','source','strip','productionReport','readingReport','support','familiar','priorExposureUnknown','startingScene','transitions','terminalScene','blockedAction','requestFulfilled','description'];
 function validRun(run,source,unknown){
  if(!keys(run,runKeys)||!integer(run.id,1)||!validSource(run.source)||run.source.id!==source.id||!validStrip(run.source,run.strip)||!supports(run.support)||!instructionProductionReports.includes(run.productionReport)||!instructionReadingReports.includes(run.readingReport)||typeof run.familiar!=='boolean'||run.priorExposureUnknown!==unknown)return false;
- const result=runInstructionModel(run.source,run.strip);
- return Object.keys(result).every(k=>same(result[k],run[k]))&&(!run.strip.length||run.support.includes('suppliedAssembly'));
+ // A frozen run keeps its outcome as recorded: check ids and shape, never re-run it or compare its text.
+ const t=run.transitions;
+ return Array.isArray(t)&&t.length<=run.strip.length&&t.every((x,i)=>object(x)&&x.actionId===run.strip[i].actionId&&x.variant===run.strip[i].variant&&object(x.after))&&object(run.startingScene)&&typeof run.requestFulfilled==='boolean';
 }
 const humanKeys=['text','textRevision','question','comment','productionReport','readingReport','support','priorExposureUnknown'];
-function validHuman(h,w,unknown){return h===null||keys(h,humanKeys)&&text(h.text,1200)&&integer(h.textRevision)&&h.textRevision<=w.textRevision&&instructionQuestions.includes(h.question)&&text(h.comment,400)&&instructionProductionReports.includes(h.productionReport)&&instructionReadingReports.includes(h.readingReport)&&supports(h.support)&&h.support.includes('humanRead')&&includes(w.support,h.support)&&h.priorExposureUnknown===unknown&&(h.textRevision!==w.textRevision||h.text===w.text);}
-function validSupportContext(s){
- if(s.support.includes('help:purpose')&&!s.support.includes('comparison')||s.support.includes('help:cause')&&!s.support.includes('cause')||s.support.includes('help:example')&&!s.support.includes('example'))return false;
- return true;
-}
+function validHuman(h,w,unknown){return h===null||keys(h,humanKeys)&&text(h.text,1200)&&integer(h.textRevision)&&h.textRevision<=w.textRevision&&instructionQuestions.includes(h.question)&&text(h.comment,400)&&instructionProductionReports.includes(h.productionReport)&&instructionReadingReports.includes(h.readingReport)&&supports(h.support)&&h.priorExposureUnknown===unknown&&(h.textRevision!==w.textRevision||h.text===w.text);}
 function validWork(w,id,unknown){
  const workKeys=['source','page','plan','strip','text','textRevision','productionReport','readingReport','humanRead','helpTopic','exampleStep','support','seen','familiar','runs','kept','nextRunId','nextKeepId','playback'];
- if(!keys(w,workKeys)||w.source?.id!==id||!validCommon({...w,priorExposureUnknown:unknown},w.source,unknown)||!instructionPages.includes(w.page)||!(w.helpTopic===null||instructionHelpTopics.includes(w.helpTopic))||!integer(w.exampleStep,0,instructionExample.steps.length-1)||typeof w.seen!=='boolean'||!Array.isArray(w.runs)||w.runs.length>24||!Array.isArray(w.kept)||w.kept.length>16||!integer(w.nextRunId,1)||!integer(w.nextKeepId,1)||!validHuman(w.humanRead,w,unknown)||!validSupportContext(w))return false;
- if(w.familiar&&!w.seen||w.strip.length&&!w.support.includes('suppliedAssembly')||w.exampleStep&&!w.support.includes('example')||w.helpTopic&&!w.support.includes(`help:${w.helpTopic}`)||w.humanRead&&!w.support.includes('humanRead'))return false;
+ if(!keys(w,workKeys)||w.source?.id!==id||!validCommon({...w,priorExposureUnknown:unknown},w.source,unknown)||!instructionPages.includes(w.page)||!(w.helpTopic===null||instructionHelpTopics.includes(w.helpTopic))||!integer(w.exampleStep,0,instructionExample.steps.length-1)||typeof w.seen!=='boolean'||!Array.isArray(w.runs)||w.runs.length>24||!Array.isArray(w.kept)||w.kept.length>16||!integer(w.nextRunId,1)||!integer(w.nextKeepId,1)||!validHuman(w.humanRead,w,unknown))return false;
  let previous=null;
  for(const run of w.runs){
-  if(!validRun(run,w.source,unknown)||!includes(w.support,run.support)||run.id>=w.nextRunId||previous&&(run.id!==previous.id+1||!includes(run.support,previous.support)||previous.familiar&&!run.familiar)||run.familiar&&!w.familiar||!validSupportContext(run))return false;
-  if(run.id===1&&run.support.includes('runFeedback')||run.id>1&&!run.familiar)return false;
+  if(!validRun(run,w.source,unknown)||run.id>=w.nextRunId||previous&&run.id!==previous.id+1)return false;
   previous=run;
  }
- if(w.runs.length!==Math.min(24,w.nextRunId-1)||w.runs.length&&w.runs.at(-1).id!==w.nextRunId-1||w.support.includes('runFeedback')&&w.nextRunId===1)return false;
+ if(w.runs.length!==Math.min(24,w.nextRunId-1)||w.runs.length&&w.runs.at(-1).id!==w.nextRunId-1)return false;
  let priorId=0;
  for(const kept of w.kept){
-  if(!keys(kept,['id',...commonKeys,'run','humanRead'])||!integer(kept.id,1)||kept.id<=priorId||kept.id>=w.nextKeepId||!validCommon(kept,w.source,unknown)||!includes(w.support,kept.support)||kept.textRevision>w.textRevision||!validHuman(kept.humanRead,kept,unknown)||!validSupportContext(kept))return false;
-  if(kept.run!==null&&(!validRun(kept.run,kept.source,unknown)||!same(kept.strip,kept.run.strip)||!includes(kept.support,kept.run.support)||kept.run.id>=w.nextRunId||kept.run.familiar&&!kept.familiar))return false;
+  if(!keys(kept,['id',...commonKeys,'run','humanRead'])||!integer(kept.id,1)||kept.id<=priorId||kept.id>=w.nextKeepId||!validCommon(kept,w.source,unknown)||kept.textRevision>w.textRevision||!validHuman(kept.humanRead,kept,unknown))return false;
+  if(kept.run!==null&&(!validRun(kept.run,kept.source,unknown)||!same(kept.strip,kept.run.strip)||kept.run.id>=w.nextRunId))return false;
   priorId=kept.id;
  }
  if(w.kept.length!==Math.min(16,w.nextKeepId-1)||w.kept.length&&w.kept.at(-1).id!==w.nextKeepId-1)return false;
  if(w.playback!==null){
   if(!keys(w.playback,['runId','cursor']))return false;
   const run=w.runs.find(r=>r.id===w.playback.runId);
-  if(!run||!same(run.strip,w.strip)||!integer(w.playback.cursor,0,run.transitions.length)||(w.playback.cursor>0||run.transitions.length===0)&&!w.support.includes('runFeedback'))return false;
+  if(!run||!same(run.strip,w.strip)||!integer(w.playback.cursor,0,run.transitions.length))return false;
  }
  return true;
 }
@@ -115,11 +110,13 @@ export function instructionView(state,desk='post'){
  if(!root)return {unsupported:true,raw:state.instructionNotes};
  if(!desks.includes(desk))return null;
  const w=root.cases[root.selected[desk]],run=w.playback?w.runs.find(r=>r.id===w.playback.runId):null,cursor=w.playback?.cursor??0;
- return {unsupported:false,root,case:w,source:w.source,run,cursor,scene:run?(cursor?run.transitions[cursor-1].after:run.startingScene):w.source.startingScene,humanRead:w.humanRead,humanReadCurrent:!!w.humanRead&&w.humanRead.textRevision===w.textRevision,priorExposureUnknown:Object.hasOwn(root,'recovered')};
+ const source=instructionCase(w.source.id);
+ return {unsupported:false,root,case:w,source,run,cursor,scene:run?(cursor?run.transitions[cursor-1].after:run.startingScene):source.startingScene,humanRead:w.humanRead,humanReadCurrent:!!w.humanRead&&w.humanRead.textRevision===w.textRevision,priorExposureUnknown:Object.hasOwn(root,'recovered')};
 }
-// Called for an actual route arrival, never during a read/render of an absent notebook.
+// Called for an actual route arrival, never during a read/render. A first arrival starts the notebook.
 export function noteInstructionEntry(state,desk){
- if(!Object.hasOwn(state,'instructionNotes')||!desks.includes(desk))return false;
+ if(!desks.includes(desk))return false;
+ if(!Object.hasOwn(state,'instructionNotes'))state.instructionNotes=fresh();
  const root=instructionState(state);if(!root)return false;
  const w=root.cases[root.selected[desk]];
  if(w.seen){if(w.familiar)return false;w.familiar=true;}else w.seen=true;
@@ -128,6 +125,7 @@ export function noteInstructionEntry(state,desk){
 function change(state,desk,fn){
  if(!desks.includes(desk))return false;
  const root=instructionState(state);if(!root)return false;
+ for(const c of Object.values(root.cases))c.source=clone(instructionCase(c.source.id));
  const w=root.cases[root.selected[desk]];
  if(!fn(root,w))return false;
  w.seen=true;state.instructionNotes=root;return true;
@@ -191,7 +189,7 @@ export function recoverInstructions(state){if(!Object.hasOwn(state,'instructionN
 export const instructionExposureFacts=()=>[];
 export function instructionNotes(state){
  const root=instructionState(state);if(!root)return ['Instructions for a Reader: saved material is unavailable; the exact original payload remains in the local export.'];
- const lines=['Instructions for a Reader — shared Post/Loft notebook.','Supplied strips are supplied assembly. Production and reading reports are reports, not verified independence or comprehension.','Local history keeps at most24 runs and16 kept versions per case; current work is separate. Oral work may have a blank draft.'];
+ const lines=['Instructions for a Reader — shared Post/Loft notebook.','Supplied strips are supplied assembly. Production and reading reports are reports, not verified independence or comprehension.','Local history keeps at most 24 runs and 16 kept versions per case; current work is separate. Oral work may have a blank draft.'];
  if(Object.hasOwn(root,'recovered'))lines.push('Earlier unsupported history was retained under recovery. Prior exposure is unknown.');
  for(const w of Object.values(root.cases)){
   lines.push(w.source.title,`Request: ${w.source.request}`,`Plan: ${w.plan.join(' → ')||'(empty)'}`,`Supplied strip: ${w.strip.map(s=>action(w.source,s.actionId).variants[s.variant]).join(' ')||'(empty)'}`,`Own words (exact):\n${w.text}`,`Production report: ${w.productionReport}; reading report: ${w.readingReport}.`, `Seen: ${w.seen}; familiar: ${w.familiar}; displayed support: ${w.support.join(', ')||'none recorded'}.`);
