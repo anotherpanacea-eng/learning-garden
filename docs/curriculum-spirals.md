@@ -2,6 +2,8 @@
 
 **Plan checked 2026-10-20.** Increment 1 now has a bounded local implementation in [spec 38](specs/38-equal-group-spiral.md); increments 2–3 remain proposals. It builds on the [full atlas](learning-atlas.md), not a replacement 1,590-topic curriculum. The first increment is built; the remaining two are candidates for independently reviewed builds, in priority order. All destinations stay open.
 
+The [strand-by-strand map](strand-map.md) expands this proposal into concepts, contrasts, homes and revisits, with Built/Planned/Missing labels and a game-needs assessment.
+
 A useful spiral revisits an idea while changing what the learner has to notice, represent or explain. More numbers, longer passages and new scenery can provide practice, but do not by themselves supply the missing conceptual step. We should sometimes keep the numbers or passage fixed and change the question, representation or audience.
 
 ## What Jane and Marble contribute

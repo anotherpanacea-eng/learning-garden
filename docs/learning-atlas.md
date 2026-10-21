@@ -4,7 +4,7 @@
 
 1,590 source topics, 3,221 prerequisite edges, 8 subjects and 54 subject/domain groups. The current child-facing map remains its separate 87-node slice. This atlas is for planning and authoring; it does not change a child’s suggestions or saves.
 
-[All-topic coverage index](../curriculum/topic-coverage.csv) · [Original nodes](../curriculum/marble/topics.json) · [Original edges](../curriculum/marble/dependencies.json) · [Pattern and game declarations](../curriculum/atlas.json) · [Specification](specs/32-full-learning-atlas.md)
+[Strand map: concepts, contrasts and revisits](strand-map.md) · [All-topic coverage index](../curriculum/topic-coverage.csv) · [Original nodes](../curriculum/marble/topics.json) · [Original edges](../curriculum/marble/dependencies.json) · [Pattern and game declarations](../curriculum/atlas.json) · [Specification](specs/32-full-learning-atlas.md)
 
 ## What the graph means
 

@@ -22,6 +22,8 @@ The introductory storm film opens automatically the first time each saved explor
 
 Three more short films celebrate story endings in the same way: *A Postcard Home* (32 seconds) when a Paris errand ends, *Welcome Back, Neighbors* (34 seconds) when the first café supper lights all six lanterns, and *Through the Ribbon Gate* (31 seconds) when Bramble’s gate is untangled. Each opens once per explorer, can be skipped, and stays available from a “Watch … film” link on that ending. Watching a film is not recorded as learning evidence. The Bramble film shows 3 × 4 as a story example, so it notes that fact as seen, which keeps a later 3 × 4 answer from counting as unseen.
 
+The [strand-by-strand curriculum map](docs/strand-map.md) marks concepts, contrasts, game homes and revisits as Built, Planned or Missing, and identifies which additional game modes are needed.
+
 The [curriculum spiral plan](docs/curriculum-spirals.md) proposes the next conceptual connections across familiar games, with checked Jane/Marble references and explicit gaps. It is a plan, not additional live coverage.
 
 ## Story Loft
