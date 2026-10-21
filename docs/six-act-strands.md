@@ -94,7 +94,7 @@ Owns 85 source topics; descriptions and exact lesson placements require review. 
 - **M3-I:** Equal shares, same whole, unit fractions of shape/set.
 - **M3-II:** Number-line fractions; equivalence; compare; tenths/hundredths.
 - **M3-III:** Mixed/improper; unlike-denominator add/subtract; decimal percent links; introduce ratio versus difference and unit rate before journey tools rely on them.
-- **M3-IV:** Fraction multiplication/division and scaling; revisit ratio versus difference, unit rate and noninteger scale factors.
+- **M3-IV:** Fraction multiplication/division and scaling; revisit ratio versus difference and unit rate; introduce noninteger scale factors with fraction-as-scaling lessons.
 - **M3-V:** Direct/inverse proportion; similarity; percentage change; compound units.
 - **M3-VI:** Defend scaling and allocation models; retain unit and whole.
 

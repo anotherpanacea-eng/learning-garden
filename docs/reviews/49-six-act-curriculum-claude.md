@@ -39,7 +39,11 @@ All six returned the label BUILD-READY-WITH-FIXES. The scope/overlap report neve
 
 ## Follow-up status
 
-The folded candidate is being sent to Claude for a bounded verification of these corrections. No final clearance is claimed until its response is recorded. The programme remains a plan; full lesson authorship is an explicit outstanding deliverable regardless of review outcome.
+Claude’s independent targeted follow-up reviewed candidate `09b76585ed7e2d605f992a77d85c9b0b5bc9df5c` and returned **BUILD-READY for programme-planning/accounting only**, with no remaining P1/P2. This does not clear any individual lesson, future activity spec, implementation, deployment or educational-efficacy claim. All1,590topic-level lesson designs and reviewed topic-to-step placements remain unfinished.
+
+The follow-up’s five P3 clarifications were folded by root: distinguish copying the2-guest base from noninteger rescaling; limit ActIII scale tables to the whole-number part and introduce fractional factors in IV; flag the precise-communication topic’s misleading title; explicitly check protected source/coverage files unchanged; update review-status and bridge pointers. These small clarifications did not trigger another full six-lens panel. Root reran the structural checks.
+
+The final commit after the reviewed candidate records these P3 clarifications and the receipt; it is not represented as a separately Claude-reviewed runtime candidate. No runtime changed.
 
 ## Root verification and limits
 
@@ -232,5 +236,72 @@ for p in [root/'docs/specs/49-six-act-curriculum.md',*root.glob('docs/six-act-*.
  for link in re.findall(r'\]\(([^)]+)\)',p.read_text()):
   if '://' not in link and not link.startswith('#'):assert (p.parent/link.split('#')[0]).exists(),(p,link)
 changed=subprocess.check_output(['git','diff','86eece8','--name-only'],cwd=root,text=True).splitlines();assert all(p.startswith('docs/') or p.startswith('curriculum/') for p in changed),changed
+assert not any(p.startswith('curriculum/marble/') or p in {'curriculum/topic-coverage.csv','curriculum/atlas.json'} for p in changed),changed
 print(json.dumps({'topics':1590,'domains':54,'strands':26,'edges':3221,'empty_evidence':35,'metrics':metrics,'roots':100,'sinks':327,'longest_path':28,'canonical_namespace':'pass','links':'pass','runtime_unchanged':True}))
+```
+
+## Claude targeted follow-up response
+
+```json
+{
+  "verdict": "BUILD-READY",
+  "scope_of_verdict": "This covers only the programme-planning and accounting deliverable at candidate 09b7658: spec 49, its four companion docs, the 1,590-row ledger and the review receipt. I checked the seven requested corrections, plus any load-bearing problems the fixes introduced. I did not rerun the six full lenses. The verdict does not clear any authored lesson, the Act II activity spec, runtime behaviour, publication, educational efficacy, or any of the 1,590 topic-to-step placements, none of which have been reviewed. The remaining items are P3 clarity fixes and none blocks the planning deliverable.",
+  "resolved": [
+    "1 Namespace. docs/six-act-strands.md has exactly 26 canonical `### Xn:` headings, and they match the ledger's owning_strand values. docs/six-act-math-literacy.md:19 adds a crosswalk, and every sub-sequence heading now carries its canonical prefix (M3-ratio, M4-algebra, M1-signed, E4-writing, E1-transcription and so on). The old wrong joins are gone: algebra rows such as mt_i2F1nWxJjv (M4) now land on M4-algebra, and persuasive writing (E4) lands on E4-writing item 8. The spec's references ('M2-groups item5', 'M3-fractions items1–2') resolve to real items.",
+    "2 Snapshot. The ledger header has 14 columns and none of them copies current_reference_*, hard/soft prerequisite IDs or review queues. A Grep for the removed column names finds them only in the receipt's quotes of the original findings. A strict full-row regex matched all 1,590 rows: candidate_first_unit is unassigned-pending-semantic-review, the source pin is 96a7933…, and the design and criteria statuses are the literal values. Spec §6 and curriculum/README.md:38 name topic-coverage.csv and marble/dependencies.json as the sole authorities, joined by topic_id. No age-named buckets remain.",
+    "3 Flags and modes. Spec §6 now uses the literal status names. candidate_delivery_mode has four values: 1,446 rows pending-per-lesson-review; 114 offscreen-human-observation-candidate or human-discussion-performance-candidate (handwriting 5, E5 21, L3 88); and 30 S1 rows mixed-supplied-model-real-observation-separate. known_source_issues covers: 35 empty-evidence rows; 16 endpoint rows for the 8 hard edges with inverted source ages; the inheritance edge whose reason contradicts its direction (rows 1308/1322); and the misleading-title cases, including mt_Yw27nweoTj, mt_doX1BhmFgk, mt_tAJH5BrpOx, mt_y-BuQAfw4B and mt_1VmTUxBrNd. Every other row reads 'not-systematically-reviewed-see-source-description', and the source audit at lines 67–69 says the list is not exhaustive.",
+    "4 Existing plans. Spec §8:127 places the programme above spec 32, the atlas, the spiral plan and the roadmap. It keeps Word Workshop as the atlas.json first priority and names specs 43 and 45 as separately owned. The recipe slice is limited to 1, 2 or 3 whole copies of a base batch for 2 guests (100 and 150 mL). The additive-versus-multiplicative contrast is taught inline (M2-groups 5, also listed in M2-II), along with the unit/whole distinction (M3-fractions 1–2). Non-integer scaling, unit rates and any Ratio & Proportion claims are deferred. I checked the fit against dist/measuring-recipes-core.mjs: portions are capped at 500 mL in 50 mL steps, each source holds 1,000, so 450 mL fits.",
+    "5 Ordering. M3-III and M5-III now introduce ratio versus difference, unit rate and whole-number map scale before the journey tools rely on them. S6-IV teaches Ohm's law with substitution support, and S6-V holds the quantitative series/parallel rules. The source hard edge mt_loEMaQ8kFA←mt_H3ZDK0EYNV (dependencies.json:10471) is now consistent. docs/six-act-teaching-bridges.md records the extra formula, research and M7 bridges and labels them as non-source. Keyboarding and broader programming have their own extension rows (strands.md:361–362). Spec §8:131 and §9 require every hard prerequisite to be settled per unit as a lesson, explicit support or documented exception. §3 says edges are not access locks, and timing alone cannot waive a meaning or safety prerequisite.",
+    "6 Privacy and evidence. Spec §5 item 7 sets programme-wide rules: fictional prompts, no requests for disclosures, a list of every stored field and how save-off, export, recovery and deletion treat it, a co-present or local audience only, and no upload or model transmission. The existing optional local JSON export is kept. Source kind (supplied/model, learner measurement, adult-reported) is kept separate from response context (supported, independent, familiar, unobserved), and offscreen work may go unrecorded. In Act V, community trust appears only as authored story events, with no counter, score or gate.",
+    "7 Acceptance. §9 now separates mechanical inventory, source/diff checks, semantic curriculum review, semantic story review, the future per-unit gate and inspection-only properties. It says the constant statuses prove only that the inventory exists. The receipt includes a reproducible one-off stdlib audit and adds no permanent framework. I inspected the script's logic and it matches the claims. I did not run it."
+  ],
+  "remaining": [
+    {
+      "severity": "P3",
+      "issue": "The '4→6' deferral is ambiguous, because the slice's own example serves both 4 and 6 guests.",
+      "evidence": "Spec §8:129: 'two copies serve4…three serve6' and then 'A4→6 change…deferred'. The original hazard was a recipe written for 4 being changed to serve 6 (factor 1.5). Moving between the slice's own 2-copy and 3-copy plans is the same 4→6 step, and it invites the additive error (200/300 + 100 → 300/400).",
+      "recommendation": "Reword as 'rescaling a non-base recipe by a non-integer factor (e.g. a 4-guest recipe to 6) is deferred; every guest change is re-derived as a count of copies of the 2-guest base'. Require the Act II spec to include the 2→3-copy additive error as a contrast case."
+    },
+    {
+      "severity": "P3",
+      "issue": "The docs disagree on when non-integer scale factors appear.",
+      "evidence": "The bridges doc's Act III row cites M3-ratio 1–4, which includes M3-ratio 3 ('noninteger scale factors deliberately included'). The same row also says non-integer work is later. strands.md M3-III introduces only ratio versus difference and unit rate, while M3-IV says it 'revisit[s]…noninteger scale factors'. Fraction-as-scaling (M3-fractions 12) sits in M3-IV.",
+      "recommendation": "Say that Act III uses whole-number ratio tables and scales (the whole-number part of M3-ratio 3), and that non-integer factors are introduced in M3-IV. Or name the support Act III would supply instead."
+    },
+    {
+      "severity": "P3",
+      "issue": "One misleading title found in the bridges doc is not flagged in the ledger.",
+      "evidence": "The bridges doc says mt_HY8Yycu_rz 'Understanding fractions (age 7+)' is really about precise mathematical communication, which topics.json:14546 confirms. Its ledger row (721) still reads not-systematically-reviewed. The source audit's claim covers only cases from itself and the math/literacy audit, so the claim is not false, but the two docs are inconsistent.",
+      "recommendation": "Add a flag such as 'fraction-title-actual-precise-communication', or extend the audit's flag claim to cover cases found in the bridges doc."
+    },
+    {
+      "severity": "P3",
+      "issue": "The one-off audit does not mechanically prove that the source and coverage files are unchanged.",
+      "evidence": "The receipt script only requires changed paths to start with 'docs/' or 'curriculum/'. That would still pass if curriculum/marble/*.json, topic-coverage.csv or atlas.json had changed. Its metadata checks compare the ledger with topics.json, not topics.json with the pin. §9 claims 'source JSON stay unchanged'.",
+      "recommendation": "Assert that no changed path is under curriculum/marble/ or equals topic-coverage.csv or atlas.json. Or record the `git diff --stat` output for those paths in the receipt."
+    },
+    {
+      "severity": "P3",
+      "issue": "Status and pointer text is now stale.",
+      "evidence": "Spec 49 line 3 still says 'awaiting independent Claude review'. The receipt's 'Follow-up status' says it is pending. curriculum/README.md:38 lists the spec, strands, math/literacy and audit docs but not six-act-teaching-bridges.md.",
+      "recommendation": "When recording this follow-up, update both status lines and add the bridges link to the README. Do not change the boundary that lessons remain unauthored."
+    }
+  ],
+  "publication_or_implementation_limits": "No runtime, deployment, publication or child-use clearance. No activity build is authorised: the Act II whole-batch slice still needs its own reviewed spec, with a topic↔step crosswalk, settled hard prerequisites, state ownership, data and audience boundary, and acceptance cases. 0 of 1,590 topic-to-step placements and 0 of 1,590 topic-level lesson designs exist. Pedagogical adequacy, subject-expert accuracy, story quality and efficacy are not established. Knowledge packs, extension inventories and the bridge checklist are explicitly incomplete future work.",
+  "inspected_files": [
+    "docs/reviews/49-six-act-curriculum-claude.md",
+    "docs/specs/49-six-act-curriculum.md",
+    "docs/six-act-strands.md",
+    "docs/six-act-math-literacy.md",
+    "docs/six-act-teaching-bridges.md",
+    "docs/six-act-source-audit.md",
+    "curriculum/six-act-topic-plan.csv (header, a full-file regex over all 1,590 rows, mode and flag counts, about 30 targeted rows)",
+    "curriculum/README.md:25-39",
+    "docs/roadmap.md:145-154",
+    "curriculum/marble/topics.json (mt_HY8Yycu_rz, mt_3VmBdlAeOZ and nearby records)",
+    "curriculum/marble/dependencies.json (edges into mt_H3ZDK0EYNV and mt_loEMaQ8kFA)",
+    "dist/measuring-recipes-core.mjs:1-12,40-55"
+  ],
+  "limits": "Read/Grep/Glob only. I executed nothing: not the one-off audit, not `build-learning-atlas.mjs --check`, and not git diff. The root's reports that those passed are unverified by me. Also unverified: the 755/161/56/8 metrics, the 100 roots, 327 sinks and longest path of 28, the cross-strand edge table, ID uniqueness beyond the row-shape regex, the per-domain topic counts, and that the source and coverage files and runtime paths are unchanged since 86eece8. I sampled flags and modes rather than reading every description, so other misleading titles may exist; the ledger itself says it was not reviewed systematically. I did not re-examine the hostile, story, or broader privacy axes beyond the listed corrections, and I did not read AGENTS.md or CONTRIBUTING.md."
+}
 ```
