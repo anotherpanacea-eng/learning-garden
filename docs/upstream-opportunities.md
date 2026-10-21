@@ -88,3 +88,7 @@ Primary science references are listed in [spec 41](specs/41-plant-investigation.
 ## Rain Paths — 2026-10-21
 
 [Spec 44](specs/44-rain-paths.md) refreshes Jane `7802588313e6c6edc57432df398d9f3ddb9ff938` and Marble `95e6dddef0a6a0af9ed973a3e3fd5f35da00a733`. Stable small actions, optional help and narrow fair-testing/data descriptions informed original code/art/content. The bundled graph stays pinned; no external Water Lab or Ecosystem Simulator code/asset licence is inferred from the taxonomy. Primary USGS/EPA material informs qualitative limitations, not the authored token capacities or routes. Atlas references cover only supplied factor/column practice and observation-versus-rule explanation, leaving the full water cycle and physical investigation unclaimed.
+
+## The Measuring Kitchen — 2026-10-21
+
+[Spec 45](specs/45-measuring-recipes.md) studies Jane `7802588313e6c6edc57432df398d9f3ddb9ff938` and Marble `95e6dddef0a6a0af9ed973a3e3fd5f35da00a733`. Reviewed capacity/volume/measure-calculation descriptions support three narrow picture-practice references; the bundled graph stays pinned. Jane small purposeful tasks and separate examples are design references only. Official Common Core and Oak millilitre/capacity lessons inform equal-interval and maximum-versus-current distinctions; no lesson text, diagrams or code are copied. No physical measuring competence, mass/conversion scope or unrelated multiplication exposure follows.
