@@ -55,6 +55,8 @@ node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
 node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
+node test/rain-paths-checks.mjs
+node test/rain-paths-integration-checks.mjs
 node test/plant-study-checks.mjs
 node test/plant-study-integration-checks.mjs
 node test/letter-trail-checks.mjs
@@ -260,3 +262,7 @@ Trying cards is exploration. Only explicitly keeping a supplied version contribu
 ## The Sharing Counter
 
 [Pack a picnic](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe/sharing) by repairing unequal loaf cuts, comparing half with two quarters, and sharing twelve buns into four equal groups. Six requests stay open, with reversible controls, optional stepped examples and frozen unfinished drafts. The same whole stays pictured; feedback separates share count, equality and packed amount. This is supported visual fraction practice, with no ingredient-stock or supper effects. [Spec 43](docs/specs/43-sharing-counter.md).
+
+## Rain Paths
+
+[Follow the rain](https://after-the-storm-learning.anotherpanacea.workers.dev/#science/rain) through two matched tabletop machines. Manually bring down tokens, follow an opening or sealed lid, inspect storage and outlets, and try a copy through a straight channel or a holding cup that can overflow. Four open cases keep predictions, partial ledgers, exact pending questions, source views and paused plans. These arbitrary tokens are an invented closed machine, not measured rain, soil or a flood forecast. [Spec 44](docs/specs/44-rain-paths.md).

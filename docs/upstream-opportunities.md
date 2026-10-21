@@ -84,3 +84,7 @@ Primary science references are listed in [spec 41](specs/41-plant-investigation.
 ## The Sharing Counter — 2026-10-21
 
 [Spec 43](specs/43-sharing-counter.md) studies Jane `7802588313e6c6edc57432df398d9f3ddb9ff938` and Marble `95e6dddef0a6a0af9ed973a3e3fd5f35da00a733`. Relevant fraction descriptions and prerequisite edges were checked, including set fractions, equal sharing and same-whole equivalence. Jane informs stable current work, small actions and separate support; no new upstream code, lesson prose or assets are copied. The licensed bundled graph remains pinned. IES fraction guidance and official Common Core geometry/fraction standards inform original rectangular art and wording, without validating the game. Atlas references are scoped to actual equal partitions, twelve-object set practice and supplied number-line/equivalence explanations.
+
+## Rain Paths — 2026-10-21
+
+[Spec 44](specs/44-rain-paths.md) refreshes Jane `7802588313e6c6edc57432df398d9f3ddb9ff938` and Marble `95e6dddef0a6a0af9ed973a3e3fd5f35da00a733`. Stable small actions, optional help and narrow fair-testing/data descriptions informed original code/art/content. The bundled graph stays pinned; no external Water Lab or Ecosystem Simulator code/asset licence is inferred from the taxonomy. Primary USGS/EPA material informs qualitative limitations, not the authored token capacities or routes. Atlas references cover only supplied factor/column practice and observation-versus-rule explanation, leaving the full water cycle and physical investigation unclaimed.
