@@ -550,6 +550,18 @@
       ],
       "route": "#numbers/exchange",
       "scope": "Seven fixed collections from 0 to 42, with countable wrapped tens, loose ones and a ten-place frame. Exact reversible conserved exchanges; distinct wrapped-count, total, tens-digit and tens-value forms; frozen unfinished keeps and separate 16 example. Supplied numeral/model practice, no handwriting, arbitrary-range counting, arithmetic algorithm or general place-value proficiency claim."
+    },
+    {
+      "id": "reader-instructions",
+      "name": "Instructions for a Reader",
+      "status": "built-local",
+      "patterns": [
+        "compose",
+        "read",
+        "build"
+      ],
+      "route": "#post/instructions",
+      "scope": "Two original short instruction cases shared with #loft/instructions. Separate picture plan, supplied A/B sentence strip and exact human-read words; finite manual scene consequences, optional reader questions/reports and bounded kept versions. Supplied assembly and guided revision opportunity only; no arbitrary-language parsing, independent composition/decoding/handwriting, listening or programming proficiency claim."
     }
   ],
   "manualReferences": [
@@ -1007,6 +1019,34 @@
       "kind": "scoped-practice",
       "source": "dist/bundle-exchange-ui.mjs",
       "scope": "Distinguish actual wrapped bundles from a supplied numeral’s tens digit and tens-place value for selected quantities 0,7,13,20,27,30,42, including noncanonical grouping. Zero/seven have no written tens digit; empty tens place is supplied. No full two-digit range, independent decoding or written arithmetic claim."
+    },
+    {
+      "game": "reader-instructions",
+      "topicId": "mt__p5n8z5soJ",
+      "kind": "scoped-practice",
+      "source": "dist/instruction-ui.mjs",
+      "scope": "Arrange up to three supplied actions in two fixed scenes, inspect missing/out-of-order consequences and manually reveal a computer’s finite rules. One note/envelope premise and one newcomer/preparation case; not general programming or arbitrary natural-language execution."
+    },
+    {
+      "game": "reader-instructions",
+      "topicId": "mt_9P9o6d0Qm3",
+      "kind": "scoped-practice",
+      "source": "dist/instruction-ui.mjs",
+      "scope": "Make an independent picture plan, optionally rehearse off-screen, then explicitly assemble supplied sentences or write exact ungraded words. Plan and both drafts stay separate; no observed oral sentence production, independent prose or narrative beginning/middle/end claim."
+    },
+    {
+      "game": "reader-instructions",
+      "topicId": "mt_OyOYHlZ2_T",
+      "kind": "scoped-practice",
+      "source": "dist/instruction-ui.mjs",
+      "scope": "Read an exact draft with a person, invite clarification, preserve a comment tied to that text and compare explicit versions. A guided opportunity; no automatic reader-comprehension, prose-quality, proofreading or learning judgment."
+    },
+    {
+      "game": "reader-instructions",
+      "topicId": "mt_v5DyOEpbbr",
+      "kind": "explanation",
+      "source": "dist/instruction-ui.mjs",
+      "scope": "Name the reader’s knowledge and this note’s purpose; optionally compare a supplied preparation instruction with an invitation to watch, plus a newcomer/familiar-reader discussion. Supplied form/purpose contrast only; full tone/register/genre choice remains outside this slice."
     }
   ],
   "increments": [

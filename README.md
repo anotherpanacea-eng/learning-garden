@@ -62,6 +62,8 @@ node test/fraction-trail-integration-checks.mjs
 node test/bundle-exchange-checks.mjs
 node test/bundle-exposure-checks.mjs
 node test/bundle-exchange-integration-checks.mjs
+node test/instruction-checks.mjs
+node test/instruction-integration-checks.mjs
 node test/rain-paths-checks.mjs
 node test/rain-paths-integration-checks.mjs
 node test/measuring-recipes-checks.mjs
@@ -308,3 +310,9 @@ All checks are model-visible practice. There is no independent fraction mastery,
 The optional `#numbers/exchange` table extends Bundle Burrow with seven fixed collections. Move individual seed counters into a two-row ten-place frame, wrap exactly ten and unwrap them again. Every constituent counter stays countable; regrouping preserves the quantity, including arrangements with more than nine loose ones. Read and Digits distinguish the actual wrapped-bundle count, total counters, supplied numeral’s tens digit and its value. Zero/seven have no written tens digit. Unfinished arrangements and exact raw responses can be kept and revisited.
 
 A separate manually stepped sixteen-counter example supplies optional help. Only a visibly complete conventional bundle/ones example and its total marks an exact existing bundle task familiar; paused/future/submitted tasks retain that context without rewriting completed answers. Unsupported/recovered history keeps earlier familiarity unknown. No general mastery, handwriting, written arithmetic, inventory rewards or film milestone is inferred. [Spec 53](docs/specs/53-bundle-exchange.md) defines the bounded scope; this branch is stacked on Fraction Trail and requires composed-release checks before publication.
+
+## Instructions for a Reader — local build
+
+The optional `#post/instructions` and `#loft/instructions` desks share one instruction notebook. Two original requests invite planning with picture tickets, arranging separate supplied sentences, manually trying their effects and revising for a reader. Folding matters because this pictured note is too wide for its envelope; a first-time visitor needs preparations before an invitation. Both valid preparation orders work. Later repairs keep the earlier invitation’s consequence rather than silently sending the visitor again.
+
+Original words remain separate, exact and ungraded. A person can read them, ask a question, and leave a comment tied to that version; a changed draft identifies earlier feedback as earlier. Optional typing/dictation/copying and reading reports describe participation, not verified independence. Unfinished work and bounded local versions are welcome. The device follows only supplied action IDs; no parser or prose-quality grader is added. Existing deliveries, letters and puppet shows remain separate. [Spec 54](docs/specs/54-instructions-for-a-reader.md) defines the supported instruction-writing slice; it does not establish general writing, decoding or programming competence. This build is stacked on Bundle Exchange and still requires composed-release verification.

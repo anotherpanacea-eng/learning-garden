@@ -10,14 +10,14 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 126 explicit current references across 68 unique source topics: authored question references, scoped practice or supplied explanations. The other 1522 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 130 explicit current references across 69 unique source topics: authored question references, scoped practice or supplied explanations. The other 1521 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
 | Source subject | Topics | Topics with any declared link | Not yet mapped |
 | --- | --- | --- | --- |
 | Computing | 21 | 1 | 20 |
-| English | 286 | 8 | 278 |
+| English | 286 | 9 | 277 |
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
@@ -75,6 +75,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | [Rain Paths charts: a carried result](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain) | experiment, build | Freeze one actual completed current or kept machine result, choose useful counts and construct editable two-bar charts on a fixed 0–24 model-token scale. Draft reading, source fidelity and original runoff questions remain separate. Four finite sources; no measured hydrology, independent scale choice or learning-level inference. |
 | Fraction Trail (`#cafe/fractions`, local build) | build, allocate | Six open length-number-line requests on a fixed 0–2 ribbon: edit partitions, step a flag along actual boundaries, separately check spaces, requested stop and raw reading; keep frozen unfinished route cards. Half/quarter/sixth comparison and one five-quarter encounter only; all model-visible practice, no independent mastery or area/set/decimal coverage. |
 | Bundle Burrow: Exchange Table (`#numbers/exchange`, local build) | build, allocate | Seven fixed collections from 0 to 42, with countable wrapped tens, loose ones and a ten-place frame. Exact reversible conserved exchanges; distinct wrapped-count, total, tens-digit and tens-value forms; frozen unfinished keeps and separate 16 example. Supplied numeral/model practice, no handwriting, arbitrary-range counting, arithmetic algorithm or general place-value proficiency claim. |
+| Instructions for a Reader (`#post/instructions`, local build) | compose, read, build | Two original short instruction cases shared with #loft/instructions. Separate picture plan, supplied A/B sentence strip and exact human-read words; finite manual scene consequences, optional reader questions/reports and bounded kept versions. Supplied assembly and guided revision opportunity only; no arbitrary-language parsing, independent composition/decoding/handwriting, listening or programming proficiency claim. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -126,7 +127,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | English / Speaking & Listening | 21 | 0 | Read · infer · support; Create · perform · reflect |
 | English / Spelling & Word Study | 24 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Vocabulary | 21 | 0 | Read · infer · support; Search · inspect · compare |
-| English / Writing Composition | 38 | 3 | Compose · execute · revise; Read · infer · support |
+| English / Writing Composition | 38 | 4 | Compose · execute · revise; Read · infer · support |
 | History / Ancient Egypt | 29 | 0 | Read · infer · support; Search · inspect · compare |
 | History / Ancient Greece & Rome | 29 | 0 | Read · infer · support; Search · inspect · compare |
 | History / Historical Thinking | 7 | 3 | Read · infer · support; Search · inspect · compare |
@@ -304,6 +305,10 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [The teen numbers](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_xmmgAzxe5j) | scoped-practice / Bundle Burrow: Exchange Table (local build) / [source](../dist/bundle-exchange-ui.mjs) | Count thirteen pictured counters, move ten to a frame and wrap/unwrap the same ten with three outside; a separate supplied sixteen example revisits the action. Only these two teens, not all teen numerals or handwriting. |
 | [A Ten Is Ten Ones](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_r0VXbfAmsH) | scoped-practice / Bundle Burrow: Exchange Table (local build) / [source](../dist/bundle-exchange-ui.mjs) | Wrap exactly ten frame counters into one visibly ten-marked bundle and unwrap into an empty ten-place frame. Fixed totals conserved with reversible one-counter moves; containers add no counters. No arbitrary packing capacity or physical exchange inference. |
 | [The two digits of a two-digit number](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_THl9GLxwoL) | scoped-practice / Bundle Burrow: Exchange Table (local build) / [source](../dist/bundle-exchange-ui.mjs) | Distinguish actual wrapped bundles from a supplied numeral’s tens digit and tens-place value for selected quantities 0,7,13,20,27,30,42, including noncanonical grouping. Zero/seven have no written tens digit; empty tens place is supplied. No full two-digit range, independent decoding or written arithmetic claim. |
+| [Step-by-Step Instructions](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt__p5n8z5soJ) | scoped-practice / Instructions for a Reader (local build) / [source](../dist/instruction-ui.mjs) | Arrange up to three supplied actions in two fixed scenes, inspect missing/out-of-order consequences and manually reveal a computer’s finite rules. One note/envelope premise and one newcomer/preparation case; not general programming or arbitrary natural-language execution. |
+| [Planning Ideas Before Writing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_9P9o6d0Qm3) | scoped-practice / Instructions for a Reader (local build) / [source](../dist/instruction-ui.mjs) | Make an independent picture plan, optionally rehearse off-screen, then explicitly assemble supplied sentences or write exact ungraded words. Plan and both drafts stay separate; no observed oral sentence production, independent prose or narrative beginning/middle/end claim. |
+| [Responding to Writing Feedback](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OyOYHlZ2_T) | scoped-practice / Instructions for a Reader (local build) / [source](../dist/instruction-ui.mjs) | Read an exact draft with a person, invite clarification, preserve a comment tied to that text and compare explicit versions. A guided opportunity; no automatic reader-comprehension, prose-quality, proofreading or learning judgment. |
+| [Choosing Form and Tone for Your Audience](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_v5DyOEpbbr) | explanation / Instructions for a Reader (local build) / [source](../dist/instruction-ui.mjs) | Name the reader’s knowledge and this note’s purpose; optionally compare a supplied preparation instruction with an invitation to watch, plus a newcomer/familiar-reader discussion. Supplied form/purpose contrast only; full tone/register/genre choice remains outside this slice. |
 
 ## Sources, licensing and maintenance
 

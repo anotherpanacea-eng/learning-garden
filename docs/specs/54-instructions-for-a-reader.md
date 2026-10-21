@@ -1,6 +1,6 @@
 # 54 — A little plan for a puppet reader
 
-**Status: bounded specification/content design reviewed with findings resolved; [receipt](../reviews/52-55-independent-spec-review.md). Build-ready for these two cases, not implemented or release-cleared.** A small E4-writing / E5-speaking bridge from message revision to planning and revising several connected sentences. It does not complete sustained composition, independent decoding, transcription, narrative writing or a computing strand.
+**Status: bounded specification/content design reviewed with findings resolved; [receipt](../reviews/52-55-independent-spec-review.md). A local two-case implementation now exists on `build/reader-instructions`; [Independent implementation review](../reviews/54-reader-instructions-implementation-review.md) and local/browser checks passed. Composed-release verification remains separate; not release-cleared.** A small E4-writing / E5-speaking bridge from message revision to planning and revising several connected sentences. It does not complete sustained composition, independent decoding, transcription, narrative writing or a computing strand.
 
 ## Existing work and the missing step
 
