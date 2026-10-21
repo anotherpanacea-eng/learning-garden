@@ -47,3 +47,7 @@ Independent review checked all 23 bloom meanings, the additional real-word expla
 Published the reviewed runtime candidate `7d361d6` at https://after-the-storm-learning.anotherpanacea.workers.dev/#words. New Cloudflare deployment verifies exact reviewed HTML/modules/CSS/data and blocks setup-only paths. A real hosted word bloom and saved notebook survived reload. The new origin starts a separate notebook; old-origin records remain there and no transfer/reset was performed. Root-only CLI setup files were excluded by an explicit assets directory; no account metadata or deployment credentials were added to the public repository. Word Garden remains draft/unmerged on GitHub pending its normal exact-head clearance.
 
 Republished the same reviewed runtime to the requested personal Cloudflare account. The current canonical address is the link above; the earlier Cloudflare deployment remains intact. Verified all 81 hosted static assets byte-for-byte and confirmed deployment configuration/cache paths return 404. Each origin retains its own notebook.
+
+## Earlier proposal and future town connections
+
+The earlier [Word Garden content proposal](34-word-garden-content.md) and [town/seasons/almanac proposal](33-rebuilding-the-town.md) remain design material. This implemented specification owns the current Word Garden behavior and save format. The proposed town jobs, almanac connections and alternative content do not describe shipped features.
