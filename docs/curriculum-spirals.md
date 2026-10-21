@@ -162,3 +162,7 @@ Travelers’ Archive revisits Paris through historical evidence. A photograph gi
 The water-chart branch carries an actual completed Rain Paths result into the Field Notebook. A faithful chart of stored tokens can be irrelevant to a runoff question; a wrong runoff chart can still be read correctly. These contrasts give the familiar chart loop a new scientific purpose without treating arbitrary tokens as calibrated water measurements.
 
 **Built in this increment:** four finite completed-source invitations, frozen provenance, reversible data selection and two-bar construction, distinct draft/source/model checks, exact pending text and unfinished keeps. **Missing:** independent scale design, real data collection, causal explanation assessment and water-cycle modelling. Prior viewing remains familiar practice across both games. [Spec 47](specs/47-rain-notebook-spiral.md).
+
+## Draft next: a call made for a listener
+
+Bell Studio would revisit message revision through a different medium: arrange low/middle/high computer tones and rests, save a before-version, compare and revise for a gathering or delivery. Literal arrangement constraints, artistic meaning and physical hearing stay distinct. Its local components are built and reviewed; the app integration and browser/audio gate remain unfinished. It has no live atlas reference yet and supplies no phonics evidence. [Spec 48](specs/48-bell-studio.md).

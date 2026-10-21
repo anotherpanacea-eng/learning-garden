@@ -1,0 +1,29 @@
+# Curriculum build session — 21 October 2026
+
+The authorized window was 01:47–09:47 UTC. A browser file-picker verification unexpectedly blocked for about five hours and thirty-seven minutes; the session was not eight uninterrupted hours of active building. No real learner exports were used in checks. The fixture was fictional.
+
+## Published, independently reviewed increments
+
+| Pull request | Experience | Main contrast |
+| --- | --- | --- |
+| [20](https://github.com/anotherpanacea-eng/learning-garden/pull/20) | Growing shelf | Stem height, leaves and a proposed test tell different things |
+| [21](https://github.com/anotherpanacea-eng/learning-garden/pull/21) | Field Notebook | Useful data, faithful charts and reading an entered chart differ |
+| [22](https://github.com/anotherpanacea-eng/learning-garden/pull/22) | Sharing Counter | Equal pieces, same-whole equivalence and a fraction of a set |
+| [23](https://github.com/anotherpanacea-eng/learning-garden/pull/23) | Rain Paths | Follow a closed machine, compare one change, reuse its runoff |
+| [24](https://github.com/anotherpanacea-eng/learning-garden/pull/24) | Measuring Kitchen | Read an amount, name a unit and meet a recipe request separately |
+| [25](https://github.com/anotherpanacea-eng/learning-garden/pull/25) | Travelers’ Archive | Photo evidence, chronology and the limits of a reply |
+| [26](https://github.com/anotherpanacea-eng/learning-garden/pull/26) | Rain Paths charts | A frozen machine result becomes an editable representation |
+
+Canonical site: https://after-the-storm-learning.anotherpanacea.workers.dev/
+
+The PRs are stacked, draft and unmerged. Each base is the preceding feature branch; PR20 begins above the pre-existing changing-letter branch. Independent implementation review here does not replace exact-head Claude clearance and separate merge authorization. Deployments use only committed dist assets. No account configuration, credentials, identifying learner details or genuine saved progress belongs in this public repository.
+
+The final published candidate passed all 64 test scripts. Root synthetic browser checks covered the new flows, saved drafts, reversible controls and narrow layouts. This does not establish educational effectiveness, independent mastery or actual iPad Safari behavior. The curriculum atlas retains all 1,590 pinned topics and 3,221 edges, with 118 explicitly scoped references across 62 topics; references are not full topic coverage. Jane and refreshed Marble informed design, with original prerequisite/licensing boundaries preserved.
+
+## Next bounded increment: Bell Studio
+
+Spec 48 and the local composition/core/audio/UI components are preserved as a draft. Core512, audio218 and UI157 checks pass. Independent source review cleared those components after removing an automatic kept-draft verdict and enlarging disclosure targets. It is not in the published site.
+
+Finish the narrow integration described in spec48: add the studio route and purposeful café/Post Office entries; preserve the bellStudio raw root through progress transfer and notes; instantiate one lazy player; stop all active and future tones on edits, navigation, explorer/import/reset, hidden pages, films and narration. Playback status updates must not rerender the whole app. Then independently review those hooks and verify explicit Play/Stop, cancellation races, visual-only fallback, saved versions, narrow layout and actual browser audio before publication. No microphone, runtime model or paid voice service is required.
+
+Further map-driven work remains: reviewed sound–letter learning (not supplied by musical pitch), real observations, classification keys, food-web relationships, measured half/double recipes, independent chart scales and more historically sourced visits. Prefer revisiting a useful representation with a new question over adding arbitrary rewards or evidence claims.

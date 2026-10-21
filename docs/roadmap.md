@@ -143,3 +143,7 @@ The continuing letter round is implemented in [spec 40](specs/40-changing-letter
 ### A completed machine result becomes a chart
 
 [Spec 47](specs/47-rain-notebook-spiral.md) adds a narrow Rain Paths → Field Notebook spiral. A real completed game result is frozen explicitly, then revisited through data relevance, chart construction, draft reading, source fidelity and an original runoff question. Water and cress charts retain separate drafts and views. Further datasets, physical observations, independent scales and general chart choice remain future work.
+
+### Bell Studio: next experience loop, draft only
+
+[Spec 48](specs/48-bell-studio.md) has independently reviewed local content, state transitions, silent composition pictures and a bounded explicit-play tone adapter. Four invitations connect a café gathering, delivery arrival, garden return and an original call. This branch is **not live**: app route, progress transfer, entry links and audio stop boundaries still need integration, independent review and real browser checks. Synthetic component checks do not establish audible playback or iPad compatibility.
