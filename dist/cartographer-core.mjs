@@ -1,4 +1,5 @@
 import {mapJobSource,validMapJob,validMapJobCheck,mapJobFacts} from './cartographer-jobs.mjs';
+import {mapAuthorView,mapProblemPlan} from './cartographer-author.mjs';
 import {marks,directions,pages} from './cartographer-content.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const positive=x=>Number.isSafeInteger(x)&&x>0;
@@ -36,6 +37,21 @@ function newMap(state,source=null){
 }
 export const startMap=state=>newMap(state);
 export function startMapJob(state,id){const source=mapJobSource(id);return source?newMap(state,source):null;}
+// Optional author drafts do not change base map/source/result validation.
+export function setMapAuthorOpen(state,open){
+ const r=mapView(state).current;if(!r||typeof open!=='boolean')return false;
+ const view=mapAuthorView(r);if(!['missing','ready'].includes(view.status)||open&&mapProblemPlan(r).status==='missing-map')return false;
+ if(view.status==='missing')r.authorDraft=structuredClone(view.draft);r.authorDraft.open=open;return true;
+}
+export function chooseMapAuthor(state,field,value){
+ const r=mapView(state).current;if(!r||!['from','via','to'].includes(field)||!known(value))return false;
+ const view=mapAuthorView(r);if(!['missing','ready'].includes(view.status)||mapProblemPlan(r).status==='missing-map')return false;
+ if(view.status==='missing')r.authorDraft=structuredClone(view.draft);r.authorDraft[field]=value;return true;
+}
+export function startAuthoredMapJob(state){
+ const r=mapView(state).current;if(!r)return null;const plan=mapProblemPlan(r);
+ return plan.status==='ready'&&plan.source?newMap(state,plan.source):null;
+}
 export function setMapJobView(state,view){const r=mapView(state).current;if(!r?.job||!['map','dispatch','both'].includes(view))return false;r.job.view=view;return true;}
 const active=state=>{const v=mapView(state);return v.status==='unavailable'?null:v.current||startMap(state);};
 export function setMapPage(state,page){if(!pages.includes(page)||!active(state))return false;state.cartographer.page=page;return true;}
