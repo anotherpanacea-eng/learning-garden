@@ -42,6 +42,7 @@ const {pathToFileURL}=require('node:url');
    const seed=fixture(form,kind,value),source=copy(sourceRoots(seed)),page=await pageFor(seed,width,height);
    await page.locator('.town-invitation a').waitFor();eq((await saved(page)).townRemembers,seed.townRemembers,'home render allocates no errand');
    await tap(page,'.town-invitation a');await page.locator('[data-town-start]').waitFor();await tap(page,'[data-town-start]');await page.locator('input[name="town-choice"]').first().waitFor();
+   ok(await page.getByRole('region',{name:'A neighbor remembers',exact:true}).count()===1,'errand region retains accessible heading');
    let e=(await saved(page)).townRemembers.errands.at(-1);eq(e.form,form,'home invitation opens expected changed form');eq(e.expected,answer,'finite example fits independently calculated answer');
    ok(await page.locator('[data-town-check]').isDisabled(),'no check without selection');ok(await page.locator('[data-town-keep]').isDisabled(),'no keep without selection');
    await fit(page);
