@@ -1,0 +1,88 @@
+# Market Change: price, handed over, returned
+
+Status: **implemented locally after independent specification/content clearance; independently approved for draft and root-verified**. See the [independent review](../reviews/67-market-change-spec-review.md). See the [implementation receipt](../reviews/67-market-change-implementation-review.md). See [fresh source audit67](../source-audits/67-market-change.md). Parent is draft PR55, Food Links, at its saved reviewed head. No merge/deployment.
+
+## Why this is another turn of the money spiral
+
+The fictional weekly market needs a stallkeeper's change guide. Coin Counter already asks for two alternative payments equal to one price. This next mode fixes the **price** and **money handed over**, then asks whether it covers the price and what should go **back to the customer**. These are three different quantities. It is a concrete part–whole/inverse situation, not a second payment, a real transaction, budget or economy. Café meals, ingredients, supplies, guests and play remain outside the practice money.
+
+Use existing labelled US-cent props: penny1¢, nickel5¢, dime10¢, quarter25¢. Names/values and optional support stay available; no physical-coin recognition, mental fluency, country assumption or independent reading claim. No bills, dollar decimals, tax, till inventory, scarcity, current coin-production/availability, real rounding, fewest-coins goal or reward. Fictional prices are not actual market prices. Any permitted equivalent returned combination works.
+
+At **#workshop/change**, extend the Coin Counter with a sibling change mode and explicit back links. Keep its original A/B meaning, state, checks and all other games intact. Reuse local pure `emptyCoins`, `coinCount`, `coinTotal`, `validCoins`, `exchangeResult`; old A/B mutations cannot edit returned coins. For concrete presentation reuse, export existing pure coin art/picture/value-dot helpers from `coin-counter-ui.mjs` with an optional denomination list defaulting to its current list; existing calls/output stay identical. No generic economy/coin-editor engine or upstream code is needed. The new mode has its own small content/core/UI/CSS modules and optional `marketChange` root. Workshop routing/notes/binding and an invitation in Coin Counter are nonheld seams; index adds only local CSS. No held app/media/global-style/README/mobile edit.
+
+Jane's stable purposeful stages, PR47's role/purpose shift and the local Coin Counter are design references; no new Jane prose/code/assets or learner-handling model. Source/license distinctions remain in audit67.
+
+## Six complete fixed cases
+
+Tender is read-only within a case. Changing the case starts a new visit; it is not solving the same question. All six cases stay open through a native chooser. One request appears with two different tenders and two prices share the same tender, making the changed condition visible.
+
+| Case ID / request | Price | Customer hands over | Expected tender relation | Expected returned response / worked support |
+| --- | --- | --- | --- | --- |
+| ribbon-exact / Ribbon for a market sign |5¢|One nickel,5¢|exact|Return0¢:5+0=5. Explicitly propose the empty mat; an untouched empty mat is not a response. |
+| leaf-short / A folded leaf card |6¢|One nickel,5¢|below|Payment is short by1¢; no payable change amount. Giving back0¢ cannot make5¢ pay6¢. Do not silently add a coin or produce−1¢. |
+| ribbon-dime / Ribbon for a market sign |5¢|One dime,10¢|above|Return5¢:5+5=10; one nickel or five pennies both fit. |
+| leaf-dime / A folded leaf card |6¢|One dime,10¢|above|Return4¢:6+4=10; four pennies fit. Compare the same10¢ tender with a different price. |
+| label-quarter / A label for a soup jar |12¢|One quarter,25¢|above|Return13¢:12+13=25; one dime plus three pennies fits. Counting on12→22 adds10, then22→25 adds3. |
+| string-quarter / String for a puppet |18¢|One quarter,25¢|above|Return7¢:18+7=25; one nickel plus two pennies fits. Counting on18→20 adds2, then20→25 adds5. |
+
+These support examples are supplied, never required methods/compositions. Complete original per-case wording states the request/price and given coin, then asks: **“Does the money handed over cover the price?”** and **“What should go back to the customer?”** The adequate-tender relation is **price + returned value = handed-over value**. This represents a proposed division of value, not necessarily the physical returned coins coming from the one tendered coin. Practice coins are freely available props, not limited till stock.
+
+Always label Price / Handed over / Our return idea distinctly with cents/¢, and distinguish coin count from value. The price does not change while editing a return. A dime is one coin worth10¢, not10 coins. The picture/number of actual returned coins must agree with the vector. Show no fictitious negative coin and no diagram saying a seller already keeps6¢ from a5¢ tender. For adequate payment, a count-on or part–whole illustration is supplied support. While editing, an equation is explicitly a proposal, or shows the actual comparison symbol; never assert an untrue equals. For insufficient tender, state the shortage separately rather than allocating more value than was handed over.
+
+## Two independent responses, including explicit zero
+
+Tender-relation choice `relation:null|'below'|'exact'|'above'|'unsure'` uses child labels **Less than the price / Exactly the price / More than the price / Not sure yet**. Blank/unsure is unobserved; every definite choice is judged against fixed tender and price only. It does not lock the return page.
+
+Returned idea uses `returnChoice:null|'amount'|'short'|'unsure'` and an always retained coin vector `coins:{penny,nickel,dime,quarter}`, initially all zero. `null` means no response, even though the empty mat has mathematical value0. `amount` means an explicitly proposed return amount, `short` means **“The payment is short; we cannot give change yet”**, and `unsure` stays unobserved. These finite responses avoid interpreting a blank mat as a correct zero or an insufficient payment as zero change.
+
+- Adding/removing a coin successfully changes the vector and sets `returnChoice:'amount'`. A refused removal/cap move changes nothing and does not create a response. The vector uses existing bounds: total count≤25, total value≤50¢, nonnegative integer counts for all four denominations.
+- **Use these coins as our return** sets amount explicitly, including an empty mat. **Return no coins (0¢)** explicitly sets the vector to empty and amount; its label makes that deliberate change visible. No implicit zero merely from navigating/checking.
+- **Payment is short** and **Not sure yet** set only that response choice, retaining the coin idea for revision. Clearly state that retained coins are not being proposed as a return when short/uncertain; the child can switch back with Use these coins. Do not silently lose that work or present it as an active amount while another choice is selected.
+- Optional reversible exchanges reuse `exchangeResult` and its exact conservation/bounds. A successful trade sets amount and separately records exchange support; it never changes tender/price/old A/B mats. Invalid/missing-input/cap trades are atomic and have visible reasons. Count can change while cents stay fixed.
+
+`relationMatch:null|boolean` is judged independently of `changeMatch:null|boolean`. The actual price/tender is the same for both prompts, so a mistaken relation choice must not erase a meaningful returned response. Required truth table:
+
+| Actual situation | Returned response | changeMatch |
+| --- | --- | --- |
+| Any | null or unsure | null |
+| Tender below price | short | true |
+| Tender below price | amount, including explicit0 | false |
+| Tender equal/above price | short | false |
+| Tender equal/above price | amount with price+coinTotal(coins)=tender | true |
+| Tender equal/above price | any other definite amount | false |
+
+Correct relation with uncertain return is true/null; wrong relation with fitting return can be false/true. `fulfilled` can label an unscored thank-you only when both are true; it locks nothing and does not certify a method. A check always snapshots both actual responses, support and coin counts/value, including a retained but inactive vector. Check/keep is always available with blank work. Full feedback preserves which result is unobserved/mismatched/fitting, explicitly distinguishes shortage from zero change, and uses the saved price/tender. A short payment's exact missing amount can be supplied in feedback/help, not inferred as independent subtraction evidence. No prose grader.
+
+## Four small open pages
+
+A bounded independently reviewed UX follow-up splits the reproduced1240px question-to-Check phone turn into **Read / Coins / Return / Kept trail** (`read / coins / return / kept`). This changes only the display-page enum, with no new answer, substep, history or assessment. Tabs wrap2×2 on narrow phones; none appear before explicit Start.
+
+Read keeps the price, full fixed tender coin pictures/value and relation question together. **Next: choose coins** is pure navigation to Coins, freely available with blank/uncertain relation. Coins keeps a compact price/tender ticket, current relation, native four-denomination editor, separate count/value and visible coin idea. A successful edit/exchange still immediately activates amount, while short/uncertain retains an explicitly inactive idea until edited/used. Guide/dots/exchanges remain native folds after the active turn. **Next: decide the return** freely navigates with any current draft and never alters a choice, coin, support or check.
+
+Return repeats compact price/tender/current relation, visible selected coin pictures/count/value and active/inactive status, then the explicit Use coins / Return0¢clear mat / Payment short / Not sure responses and Check/keep. It has an open **Edit coins** return to Coins. Both responses, vector and all earlier checks survive every page change. Do not duplicate the four-row coin editor on Return. Coins and Return must both be measured with empty, ordinary and maximum permitted coin pictures, so the split actually shortens the current turn rather than hiding the problem in another page.
+
+Compact tickets retain exact price and handed-over value plus supplied denomination/count context; they need not repeat the full Read-page illustration. Keep this compact context above the active work on phones; wide screens can keep it above a two-column editor/picture or decision layout. Keep current question and money-going-back meaning clear, with history/chooser/help after it. All native controls, contrast/back links and global voice controls need44px targets, local focus, keyboard/tap operation and no horizontal overflow, including admitted long saved words. No dragging/hover, autoplay, timer or progress gate. Reuse original labelled schematic coins; no new Mint image asset or voice generation. Future picture version falls back to exact denomination labels/counts/cents while preserving playable answers. A child need not know the coin names unaided.
+
+Explanation, narration request, together, dots and exchange remain separate support codes. Only an explicit request adds support; no support/answer/round allocation on render or page navigation. Bind every listener and queued native help/audio event to its still-connected originating visit. Help fold is transient per visit, closing stays closed after support is recorded. Dots and source facts are supplied support, not observed independent counting/reading. Existing Workshop has no numerical connection panel: test a real synthetic incoming offer on Living Garden first, then verify this route adds no exposures/seen facts and preserves other roots.
+
+## Frozen optional local work and mathematical invariants
+
+Optional `marketChange:{version:1,page,current,nextId,seen,rounds}`. Four known pages; positive safe current/nextId; `seen` distinct finite case IDs, storing actual started-case familiarity, not mastery. A source ID can be an understood historical finite ID without requiring current catalog membership. Round: positive safe `id`, full frozen `source`, `relation`, `returnChoice`, valid `coins`, familiar boolean, support and at most8 checks. First explicit Start alone allocates; other actions on missing/future/unavailable roots refuse rather than auto-start. No migration or automatic suggestion changes.
+
+Source version1: stable `id`, requestID/title, prompt, price integer1–25, tender valid four-coin vector with total≤50, declared unit US cents, original full explanation/help, `drawingVersion` positive safe integer, and all four denomination records `{id,name,plural,value,diameter,color}`. Freeze labels/prose/art descriptors. Values are version1 mathematical identities fixed by ID to1/5/10/25, not arbitrary imported rates; these invariants allow safe reuse of pure arithmetic helpers. Names/plurals bounded strings, diameter finite positive≤40, color a bounded hex colour; all four IDs unique. Current sources clone existing coin definitions and prices, never requiring saved words to equal current catalog words. A future drawingVersion keeps understood text/coins/answers playable without dispatching a different diagram. The current version1 schematic meaning remains stable.
+
+Fresh checks compute solely from their own understood frozen source: `source`, `input:{relation,returnChoice,coins,support}`, `tender:{coins,count,value}`, `returned:{coins,count,value}`, `actualRelation:below|exact|above`, `shortage:null|integer1..25`, `relationMatch`, `changeMatch`, `fulfilled:boolean`, complete feedback. `shortage` is positive only for actual insufficient tender, otherwise null; expected nonnegative change can be supplied in feedback for adequate tender, never a negative return. Snapshot count0–25/value0–50; live helpers use fixed denomination identities. Admission of historical recorded outcome/count/value fields is bounded shape/enum/nullability, not recalculation. Contradictory recorded results remain recorded and readable. Source itself still satisfies the version1 mathematical field invariants; do not accept changed denomination values merely as old wording.
+
+Retain understood old case/title/price/tender/help/labels, outcomes and raw/future/malformed/duplicate siblings exactly through generic transfer/reload/explorer/save-off. A fresh check evaluates the saved question, not a current case lookup. Display/relevance compares exact source/actual answers/coins/support, not page. Rendering/resuming never trim. Keep12 readable rounds and8 checks each; disclose exact oldest-readable removals before explicit Start, including oversized imports, and a ninth-check disclosure. Safe-ID allocation exceeds retained numeric IDs without mutating/evicting on unsafe failure. Unknown roots remain exact/read-only; readable siblings stay open and raw work is escaped. No permanent registry or upload.
+
+## Honest taxonomy mapping and licenses
+
+Add only a scoped partial direct reference to `mt_3tz3Otap5j`, whose actual US-money description/evidence fit making change. Its bundled title is wrongly **Halves and quarters (age7+)**; refreshed upstream calls it **Money word problems**, while description/evidence match. Preserve the pinned original title/ID in generated authoring tables and explicitly annotate this mismatch in the new reference scope, strand map and audit link. Do not silently change vendor data, add an alias system, infer fractional-quarter coverage or expand the runtime pin. This narrow annotation is enough for an authoring-only atlas until a separately reviewed taxonomy repin. Do not add every ancestor, a second UK-currency target, dollars, handwriting or whole-topic attainment.
+
+Preserve Jane path-specific and Marble ODbL/CC BY-SA attribution. Existing local coin diagrams/pure helpers are project code; CFPB/Mint facts inform original labelled props, with no official asset/worksheet/prose imported. No actual financial guidance or cash handling is assessed.
+
+## Acceptance and independent gates
+
+Independent substantive specification/content review before build; separate implementation review and root actual browser verification before draft. Review all six quantities/worked examples and the full response table, especially untouched0 versus explicit0, short versus zero change, and wrong relation with fitting return. Use an independent expected list0/null/5/4/13/7; test all permitted equivalent coin compositions for each source rather than one canonical set, plus independent relation/return-choice combinations. Test conservation/atomic refusals and no old A/B mutation, no auto-allocation, frozen changed prices/tenders/labels/outcomes, future drawings/roots, raw/duplicates/IDs/caps/pure renders and real generic save/transfer/explorer/save-off.
+
+Actual browser covers six cases, wrong/uncertain/blank/correct revisions, explicit0 and shortage, enough/insufficient contrasts, price+tender unchanged by returns/exchange, page preservation, current question/focus, actual reload, narration/help/together/dots, queued old events, real host-offer boundary and all control-bearing opened folds including global voice controls. Phone/tablet/desktop: native taps, all44px targets, clear money direction, visible actual counts/value and no sideways overflow. Compare original Coin Counter figures before/after helper exports to verify default rendering unchanged. No physical iPad/Safari, human screen-reader, audible quality, independent strategy/reading/fluency, learning-effect, real shop/currency availability, hosted CI or release claim. No held path, merge or deployment.

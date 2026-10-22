@@ -114,3 +114,13 @@ Saved as draft PR54, https://github.com/anotherpanacea-eng/learning-garden/pull/
 ## Food Links implementation checkpoint
 
 Spec66 is implemented with independent specification/content and actual original-art review. Actual Claude required a frozen-label contrast in correct-pair feedback, repaired and independently confirmed. Bounded sap-note/voice-control suggestions were folded; root reproduced/fixed long retained-word phone overflow with one local wrapping property. Root96scripts,779core/72integration and538browser assertions pass. Atlas148refs/80topics, unchanged runtime pin. See docs/reviews/66-living-food-links-implementation-review.md for evidence and limits. Draft publication is next. No held files, merge or deployment. Next candidate: fixed price/tender with an independently editable returned-change mat; exact payment, overpayment and insufficient tender must remain distinct.
+
+
+## Food Links published / Market Change next
+
+Saved as draft PR55, https://github.com/anotherpanacea-eng/learning-garden/pull/55, headedc7968a9f967be39b24c7d988b73eabfe1fcd32, base build/living-life-stages. Worktree clean after the next audit was moved, and owned preview8782 stopped. New worktree learning-garden-market-change / build/market-change starts from that exact head. Audit67 freshly checks the direct US change reference and18-node hard closure, flagging a misleading bundled topic title corrected upstream. A separately reviewed specification will decide explicit insufficient payment and deliberate zero-change answers before runtime. No merge/deploy.
+
+
+## Market Change implementation checkpoint
+
+Spec67 is implemented after independent specification/content review. Actual Claude initial/final implementation reviews found no P1/P2. Root reproduced1241px empty phone question-to-Check scrolling; a bounded independent UX specification follow-up preceded four open Read/Coins/Return/Kept pages. Final phone empty turns630/702px, ordinary615/806, maximum25coins744/935; both answers/source/vector/prior checks survive actual Edit coins→Next. Root98scripts,39,001core/55integration and575browser assertions pass;96 old Coin Counter page renderings remain exact after excluding the new invitation. Notes disclose supplied live comparisons and previous feedback. Atlas149refs/81topics; a misleading old US-money target title is annotated, without vendor/runtime repin. See docs/reviews/67-market-change-implementation-review.md. Draft publication next; no held paths, merge or deployment. Next candidate is clock-hour/half-hour representation, with source drift, coupled-hand evidence limits and broader elapsed-duration work explicitly separated in audit68.

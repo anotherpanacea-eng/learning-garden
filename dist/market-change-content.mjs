@@ -1,0 +1,14 @@
+import {coinTypes} from './coin-counter-content.mjs';
+import {emptyCoins} from './coin-counter-core.mjs';
+export const changePages=['read','coins','return','kept'];
+const rows=[
+ ['ribbon-exact','ribbon','Ribbon with a nickel','Ribbon for a market sign',5,'nickel','5 cents pays a 5-cent price exactly. Return 0 cents: 5 + 0 = 5. Use the empty mat deliberately; merely leaving it untouched does not tell us an answer.'],
+ ['leaf-short','leaf-card','Leaf card with a nickel','A folded leaf card',6,'nickel','A nickel is 5 cents, less than the 6-cent price. One more cent is needed before the price is covered. There is no payable change yet. Returning 0 cents does not make 5 cents pay a 6-cent price.'],
+ ['ribbon-dime','ribbon','Ribbon with a dime','Ribbon for a market sign',5,'dime','Count on from 5 to 10: 5 more cents. The price plus 5 cents returned is 10 cents. One nickel or five pennies can be the return; neither uses fewer cents than the other.'],
+ ['leaf-dime','leaf-card','Leaf card with a dime','A folded leaf card',6,'dime','Count on from 6 to 10: 4 more cents. The price plus 4 cents returned is 10 cents. Four pennies can be the return. The same dime pays a different price from our ribbon example.'],
+ ['label-quarter','soup-label','Jar label with a quarter','A label for a soup jar',12,'quarter','Count on from 12 to 22 by 10, then from 22 to 25 by 3: 13 more cents. The price plus 13 cents returned is 25 cents. One dime plus three pennies is one possible return, not the only one.'],
+ ['string-quarter','puppet-string','Puppet string with a quarter','String for a puppet',18,'quarter','Count on from 18 to 20 by 2, then from 20 to 25 by 5: 7 more cents. The price plus 7 cents returned is 25 cents. One nickel plus two pennies is one possible return, not the only one.'],
+];
+const introduction='The price, money handed over and money returned are different quantities. Returned money goes back to the customer; it is not a second payment. If enough was handed over, price plus returned value equals handed-over value. If payment is short, returning zero does not pay the missing amount. Coins here are freely borrowed practice props, not a limited till or real transaction. Coin count and cent value are different.';
+export const changeCases=rows.map(([id,requestId,title,item,price,type,worked])=>{const tender={...emptyCoins(),[type]:1},c=coinTypes.find(x=>x.id===type);return {version:1,id,requestId,title,item,price,tender,unit:'US cents',drawingVersion:1,denominations:structuredClone(coinTypes),prompt:item+' costs '+price+' cents. The customer hands over one '+c.name.toLowerCase()+', worth '+c.value+' cents. Does the money handed over cover the price? What should go back to the customer?',help:introduction+' '+worked};});
+export const changeSource=id=>{const s=changeCases.find(x=>x.id===id);return s?structuredClone(s):null;};

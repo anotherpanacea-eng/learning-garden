@@ -583,7 +583,7 @@
         "build"
       ],
       "route": "#workshop/coins",
-      "scope": "Four supplied US-cent denominations, count versus value, conserved exchanges and two alternative exact payments across eight pretend stall requests. Live mats and historical recorded checks stay separate. A supported US-cent adaptation; no unlabelled real-coin recognition, UK notation, dollars, change, budgeting, scarcity or monetary Café economy."
+      "scope": "Payment mode: four supplied US-cent denominations, count versus value, conserved exchanges and two alternative exact payments across eight pretend stall requests. Optional Market Change (spec67, #workshop/change): six fixed price/tender cases, independent coverage and returned-response choices, explicit zero versus shortage, and any fitting coin composition. Frozen historical checks stay separate. No unlabelled real-coin recognition, UK notation, dollars, budgets, scarcity or monetary Café economy."
     },
     {
       "id": "cartographer",
@@ -1227,6 +1227,13 @@
       "kind": "scoped-practice",
       "source": "dist/food-links-content.mjs",
       "scope": "Food Links (#living/food, local build): four supplied endpoint questions over broad bean sap → black bean aphid → seven-spot ladybird larva; neighbour and food-arrow energy meaning assessed separately. Guided partial minibeast feeding practice, not independent chain construction/explanation, field identification, full diets or whole-topic attainment."
+    },
+    {
+      "game": "coin-counter",
+      "topicId": "mt_3tz3Otap5j",
+      "kind": "scoped-practice",
+      "source": "dist/market-change-content.mjs",
+      "scope": "Source-title mismatch: pinned Halves and quarters (age 7+) actually has US-money description/evidence; refreshed upstream names it Money word problems (audit67). Market Change: six supplied whole-cent price/tender cases; choose coverage and build any fitting return, keeping shortage distinct from zero change. No fractions, bills/dollar notation, independent fluency, real cash handling or whole-topic attainment."
     }
   ],
   "increments": [
