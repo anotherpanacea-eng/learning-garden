@@ -2,6 +2,8 @@
 
 Status: **built locally**, with separate [implementation review and verification](../reviews/60-fair-test-apprentice-implementation-review.md). Specification was **build-ready** after [independent specification/content review](../reviews/60-fair-test-apprentice-spec-review.md). Composed release gates remain separate.
 
+**Choice-pack revision (2026-10-22):** the original choice lists below document the first pack and remain relevant to saved visits. New visits use the exact reviewed orders, labels and feedback in [spec72](72-supplied-choice-cues.md). Existing visits retain their own content and recorded outcomes.
+
 ## A new relationship in an existing loop
 
 [PR47](https://github.com/anotherpanacea-eng/learning-garden/pull/47) proposes teaching an authored apprentice before building more shells. Extend the existing Fair Test Bench, not a new destination or a general tutoring engine. Its Plan/Try/Tell already explains focused/confounded comparisons, displays repetitions and keeps ungraded claims. A second “which is fair?” quiz adds little. The new action is to **preserve a valid observation, diagnose an explanation, demonstrate a repair and select words that help a novice**. The apprentice sometimes has a careful explanation, so the role is not a character who is always wrong.

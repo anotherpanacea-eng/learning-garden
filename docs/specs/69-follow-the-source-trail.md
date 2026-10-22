@@ -2,6 +2,8 @@
 
 Status: **built locally; independent specification/content and implementation reviews cleared for draft**. See [review69](../reviews/69-follow-the-source-trail-spec-review.md) and [implementation verification](../reviews/69-follow-the-source-trail-implementation-review.md). [Source audit69](../source-audits/69-follow-the-source-trail.md) refreshes the six Jane/Marble files and the asset-specific official museum manifest. Parent is reviewed draft PR57 at8053828dfce71a741255eafc6a9f6de9d88e18a0; no merge/deployment.
 
+**Choice-pack revision (2026-10-22):** the original choice lists below document the first pack and remain relevant to saved visits. New visits use the exact reviewed orders, labels and feedback in [spec72](72-supplied-choice-cues.md). Existing visits retain their own content and recorded outcomes.
+
 ## A new action in a familiar investigation
 
 A fictional neighbor is preparing a small flood-history display for the town's market. Two cards say that water and boats appear beside buildings. Do they supply two independently obtained observations? Follow the declared source trail before preparing the display label.
