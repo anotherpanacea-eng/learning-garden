@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import {changeCases,changeSource,changePages} from '../dist/market-change-content.mjs';
+import {coinTypes} from '../dist/coin-counter-content.mjs';
+import {marketChangePage} from '../dist/market-change-ui.mjs';
 import {emptyCoins} from '../dist/coin-counter-core.mjs';
 import {validChangeSource,validChangeCheck,validChangeRound,changeView,startChange,resumeChange,setChangePage,chooseTenderRelation,chooseReturn,zeroReturn,adjustReturnCoin,exchangeReturnCoins,addChangeSupport,evaluateChange,checkChange,changeCheckMatches} from '../dist/market-change-core.mjs';
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;},copy=structuredClone;
@@ -32,7 +34,8 @@ const missing={};eq(changeView(missing).status,'missing');for(const fn of [s=>se
 }
 {
  const state={},r=startChange(state,'ribbon-exact');r.source.price=7;r.source.tender={penny:0,nickel:0,dime:1,quarter:0};r.source.title='Earlier question';r.source.help='Earlier worked words';r.source.denominations[0].name='Earlier penny label';r.source.drawingVersion=77;chooseTenderRelation(state,'above');r.coins={penny:3,nickel:0,dime:0,quarter:0};chooseReturn(state,'amount');const c=checkChange(state);eq(c.changeMatch,true,'own old price/tender, not current case');eq(c.source.denominations[0].name,'Earlier penny label');c.actualRelation='below';c.shortage=5;c.returned.value=42;c.changeMatch=false;c.feedback='Earlier contradictory recorded result';ok(validChangeRound(r),'recorded counts/outcomes are not regraded');const before=copy(c);addChangeSupport(state,'help');eq(c,before);ok(!changeCheckMatches(r));for(let i=0;i<10;i++)checkChange(state);eq(r.checks.length,8);
- const wrong=copy(r.source);wrong.denominations[0].value=2;ok(!validChangeSource(wrong),'denomination value is a mathematical identity, not old prose');eq(evaluateChange(wrong,{relation:'above',returnChoice:'amount',coins:r.coins,support:[]}),null);
+ const frozenValue=copy(r.source);frozenValue.denominations.find(x=>x.id==='dime').value=6;ok(validChangeSource(frozenValue),'saved numeric denomination value does not depend on the current catalog');eq(evaluateChange(frozenValue,{relation:'above',returnChoice:'amount',coins:r.coins,support:[]}).tender.value,6,'saved value drives arithmetic');
+ const wrong=copy(r.source);wrong.denominations[0].value=0;ok(!validChangeSource(wrong),'frozen denomination still needs a positive bounded value');eq(evaluateChange(wrong,{relation:'above',returnChoice:'amount',coins:r.coins,support:[]}),null);
 }
 {
  const state={},r=startChange(state,'ribbon-dime');r.coins={penny:24,nickel:1,dime:0,quarter:0};r.returnChoice='short';const before=copy(state);eq(exchangeReturnCoins(state,'nickel-pennies'),{ok:false,reason:'limit'});eq(state,before,'count-cap exchange is atomic and does not activate a response');
@@ -40,6 +43,17 @@ const missing={};eq(changeView(missing).status,'missing');for(const fn of [s=>se
  const source=changeSource('ribbon-exact');source.price=1;source.tender={penny:2,nickel:0,dime:0,quarter:0};const c=evaluateChange(source,{relation:'above',returnChoice:'amount',coins:{penny:1,nickel:0,dime:0,quarter:0},support:[]});ok(c.feedback.includes('1 cent should go back'));ok(!c.feedback.includes('1 cents'));
 }
 for(const change of [{version:2},{price:0},{price:26},{unit:'dollars'},{drawingVersion:0},{denominations:[]},{tender:{penny:-1,nickel:0,dime:0,quarter:0}}])ok(!validChangeSource({...changeSource('ribbon-exact'),...change}));
+{
+ const source=changeSource('ribbon-dime');source.denominations=source.denominations.filter(c=>c.id!=='quarter');ok(validChangeSource(source),'frozen source can have fewer than current catalog denominations');
+ const absentTender=changeSource('ribbon-dime');absentTender.denominations=absentTender.denominations.filter(c=>c.id!=='dime');ok(!validChangeSource(absentTender),'a tender coin must belong to its frozen denominations');
+ const duplicate=changeSource('ribbon-dime');duplicate.denominations.push(copy(duplicate.denominations[0]));ok(!validChangeSource(duplicate),'frozen denomination ids remain unique');
+ const state={},round=startChange(state,'ribbon-dime');adjustReturnCoin(state,'nickel',1);chooseTenderRelation(state,'above');const check=checkChange(state),before=copy(state);
+ coinTypes.push({id:'half-dollar',name:'Half dollar',plural:'half dollars',value:50,diameter:30,color:'#dddddd'});
+ try{
+  eq(changeView(state).current,round,'old visit and check load after catalog extension');ok(validChangeRound(round));eq(round.source.denominations.length,4,'old frozen source stays four denominations');
+  eq(evaluateChange(round.source,check.input).returned.value,5,'old return still evaluates from frozen values');ok(marketChangePage(state).includes('Our kept change trail'),'old visit still renders');eq(state,before,'reading an old visit does not rewrite it');
+ }finally{coinTypes.pop();}
+}
 for(const root of [null,'<b>earlier</b>',{version:9,raw:'kept'}]){const state={marketChange:copy(root)},before=copy(state);eq(changeView(state).status,'unavailable');eq(startChange(state,'ribbon-exact'),null);eq(state,before);}
 {
  const state={};for(let i=0;i<16;i++)startChange(state,changeCases[i%6].id);eq(changeView(state).rounds.length,12);eq(state.marketChange.rounds[0].id,5);state.marketChange.rounds.push({id:90,raw:'<kept>'});const raw=copy(state.marketChange.rounds.at(-1));state.marketChange.current=90;eq(changeView(state).current.id,16);startChange(state,'leaf-short');eq(state.marketChange.current,91);eq(changeView(state).earlier,[raw]);const duplicate=copy(changeView(state).rounds[0]);state.marketChange.rounds.push(duplicate);eq(changeView(state).earlier,[raw,duplicate]);const before=copy(state);changeView(state);eq(state,before,'readers pure');
