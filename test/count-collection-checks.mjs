@@ -25,8 +25,10 @@ for(let a=0;a<=12;a++)for(let b=0;b<=12;b++){
  editCollection(s,'count','round',1);ok(!collectionView(s).feedback,'source edit removes live verdict');eq(s.countCollection.checks[0],old,'source edits leave historical result unchanged');
  for(let i=0;i<6;i++)checkCollection(s,'representation',fits);eq(collectionView(s).readable.length,4,'visible recent window rolls');eq(json(s.countCollection.kept),kept,'kept work does not roll');ok(!keepCollection(s,false,fits)&&keepCollection(s,true,fits),'replacement is explicit');
  const before=json(s.countCollection);editCollection(s,'scale',null,2);editCollection(s,'page',null,'chart');const drawn=collectionPage(s);ok(drawn.includes('data-value="3"')&&drawn.includes('width="60"'),'odd bar is not snapped on twos axis');
+ const sourceWork=collectionView(s).work;sourceWork.page='table';const tableSpeech=collectionPage(s).match(/data-speak="([^"]*)"/)[1];ok(tableSpeech.includes('table entry: 3')&&!tableSpeech.includes('bar:'),'table narration names table draft rather than hidden bars');sourceWork.page='chart';
  const restored=prepareProgressImport(report(s));ok(restored.ok&&json(restored.state.countCollection)===json(s.countCollection),'actual import preserves whole current and kept model');
  s.countCollection.feedbackId=old.id;s.countCollection.checks.push(old);ok(!collectionView(s).feedback,'stale feedback never appears current beside edited source');
+ s.countCollection.kept.check.snapshot.table=Object.fromEntries(Object.entries(s.countCollection.kept.check.snapshot.table).reverse());ok(!collectionView(s).keptUnreadable,'harmless saved key order does not disable kept work');ok(keepCollection(s,true,fits),'reordered own snapshot can be replaced explicitly');
  const currentLabels=collectionSource.categories.map(c=>c.label);try{collectionSource.categories[0].label='Changed current words';const r=prepareProgressImport(report(s));ok(r.ok&&collectionPage(r.state).includes('Round buttons'),'saved source is not current catalog');}finally{collectionSource.categories.forEach((c,i)=>c.label=currentLabels[i]);}
 }
 {
@@ -37,7 +39,7 @@ for(let a=0;a<=12;a++)for(let b=0;b<=12;b++){
 {
  const s=fresh();startCollection(s);checkCollection(s,'representation');s.countCollection.checks.push({id:99,unknown:'kept raw'});s.countCollection.kept={future:true};const raw=clone(s.countCollection.checks.at(-1)),before=json(s);
  ok(collectionView(s).unreadable.length===1&&collectionView(s).keptUnreadable,'bad siblings isolated');collectionPage(s);collectionNotes(s);eq(json(s),before,'render preserves unknown siblings');ok(!keepCollection(s,true,fits),'unreadable kept copy cannot be overwritten');
- checkCollection(s,'representation',fits);eq(s.countCollection.checks[0],raw,'new checks retain unknown raw slots');ok(prepareProgressImport(report(s)).ok,'actual importer retains bad siblings');
+ checkCollection(s,'representation',fits);eq(s.countCollection.checks.find(c=>c.unknown),raw,'new checks retain unknown raw slots');eq(s.countCollection.checks[1],raw,'raw sibling stays beside surviving earlier check');ok(prepareProgressImport(report(s)).ok,'actual importer retains bad siblings');
  ok(recoverCollection(s,fits)&&s.countCollection.retainedRaw.kept.future,'explicit recovery retains full earlier root');
 }
 for(const raw of [false,{version:99,retained:'raw'},null]){const s=fresh();s.countCollection=raw;const before=json(s);ok(prepareProgressImport(report(s)).ok&&collectionView(s).status==='recovery','raw optional root imports');collectionPage(s);eq(json(s),before,'unreadable root unchanged on display');ok(recoverCollection(s,fits)&&json(s.countCollection.retainedRaw)===json(raw),'whole raw root remains after explicit recovery');}

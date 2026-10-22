@@ -23,7 +23,7 @@ function resultValid(c){
  const r=collectionResult(c.snapshot,c.kind);if(!r)return false;
  return ['tableMatches','barsMatch','answer','difference','choiceCorrect','differenceCorrect'].every(k=>c.result[k]===r[k])&&Array.isArray(c.result.rows)&&c.result.rows.length===r.rows.length&&r.rows.every((row,i)=>['id','source','table','bar'].every(k=>c.result.rows[i]?.[k]===row[k]));
 }
-const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const same=(a,b)=>a===b||Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>same(v,b[i]))||object(a)&&object(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>own(b,k)&&same(a[k],b[k]));
 export function collectionView(state){
  if(!own(state,'countCollection'))return {status:'missing'};
  const w=state.countCollection;
@@ -61,7 +61,7 @@ export function checkCollection(state,kind,canExport=()=>true){
  const view=collectionView(state);if(view.status!=='ready'||view.work.nextCheckId>=Number.MAX_SAFE_INTEGER)return false;
  const w=copy(view.work),s=snapshot(w),result=collectionResult(s,kind);if(!result)return false;
  const c={id:w.nextCheckId,snapshot:s,kind,result,feedback:feedbackFor(s,result,kind)};if(!resultValid(c))return false;
- w.nextCheckId++;const recent=[...view.readable,c].slice(-4);w.checks=[...view.unreadable,...recent];w.feedbackId=c.id;if(!w.support.includes('feedback'))w.support.push('feedback');if(!fits(state,w,canExport))return false;state.countCollection=w;return true;
+ w.nextCheckId++;const retained=view.readable.slice(-3);w.checks=copy(view.work.checks.filter(old=>view.unreadable.includes(old)||retained.includes(old)));w.checks.push(c);w.feedbackId=c.id;if(!w.support.includes('feedback'))w.support.push('feedback');if(!fits(state,w,canExport))return false;state.countCollection=w;return true;
 }
 export function keepCollection(state,replace=false,canExport=()=>true){
  const v=collectionView(state);if(v.status!=='ready'||v.keptUnreadable||v.work.kept!==null&&!replace)return false;
