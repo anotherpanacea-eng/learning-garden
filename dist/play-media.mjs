@@ -41,7 +41,7 @@ export function chooseLocalVoice(voices,preferred='',language='en'){
  return local.reduce((best,v)=>!best||score(v)>score(best)?v:best,null);
 }
 export function stopSpeech(){
- if(activeSpeech){activeSpeech.onend=null;activeSpeech.onerror=null;activeSpeech=null;
+ if(activeSpeech){activeSpeech.onstart=null;activeSpeech.onend=null;activeSpeech.onerror=null;activeSpeech=null;
   document.querySelectorAll('.speech-playing').forEach(controls=>{controls.classList.remove('speech-playing');controls.querySelector('[data-speech-status]').textContent='Voice stopped. Tap Hear to listen again.';});
  }
  try{window.speechSynthesis?.cancel();}catch{}
@@ -75,11 +75,12 @@ export function bindSpeech(){
  voiceSelect.onchange=()=>{selectedVoice=voiceSelect.value;changedPreference();stopped('Voice selected. Tap Try this voice to listen.');refreshVoices();};
  speedSelect.value=String(speakingRate);speedSelect.onchange=()=>{speakingRate=Number(speedSelect.value);changedPreference();stopped('Speed selected. Tap Try this voice to listen.');};
  controls.querySelector('[data-refresh-voices]').onclick=()=>{stopped('Voice list refreshed. Tap Try this voice to listen.');refreshVoices();};
- function speak(text,language=activeLanguage){
+ function speak(text,language=activeLanguage,origin=null){
   activeLanguage=language==='fr'?'fr':'en';
   stopped('');const voice=refreshVoices();
   if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return;}
   const utterance=new window.SpeechSynthesisUtterance(spoken(text,activeLanguage));utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
+  utterance.onstart=()=>{if(activeSpeech===utterance&&origin?.isConnected)origin.dispatchEvent(new CustomEvent('garden-speech-start',{bubbles:true}));};
   utterance.onend=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='Finished reading.';};
   utterance.onerror=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='This local voice could not play. Try another voice, or read together.';};
   activeSpeech=utterance;controls.classList.add('speech-playing');status.textContent=`${selectedVoice&&voiceKey(voice)!==selectedVoice?'Your saved choice is for the other language. ':''}Requested local voice: ${voice.name}. You can stop whenever you like.`;
@@ -90,6 +91,6 @@ export function bindSpeech(){
  const voicesChanged=()=>{const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap Hear or Try this voice to listen.':availability.textContent;};
  if(speech?.addEventListener){speech.addEventListener('voiceschanged',voicesChanged);removeVoiceListener=()=>speech.removeEventListener('voiceschanged',voicesChanged);}
  for(const button of buttons)button.addEventListener('click',()=>{
-  controls.hidden=false;button.insertAdjacentElement('afterend',controls);speak(button.dataset.speak,button.dataset.speakLang||'en');
+  controls.hidden=false;button.insertAdjacentElement('afterend',controls);speak(button.dataset.speak,button.dataset.speakLang||'en',button);
  });
 }
