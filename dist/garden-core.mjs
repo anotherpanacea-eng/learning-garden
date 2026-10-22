@@ -2,7 +2,7 @@ import {frenchPlan,isFrenchExploration,validateFrenchRoute,validFrenchObservatio
 import {entrances,storyNodes} from './story-content.mjs';
 import {helpers,acceptsAnswer,cleanHelper} from './help-content.mjs';
 import {guides,avatars} from './companions.mjs';
-import {parisPlan,isParisExploration,validateParisRoute,priorParisStorySeen} from './paris-core.mjs';
+import {parisPlan,isParisExploration,validateParisRoute,priorParisStorySeen,parisSupportUncertain} from './paris-core.mjs';
 import {cleanOrder,orderValue} from './paris-pack-core.mjs';
 import {captureParisSource,isEnglishParis,parisHelper,parisNode,parisRoute,parisVisitSource,parisVisitStatus} from './paris-visit-source.mjs';
 export const entranceById=id=>entrances.find(e=>e.id===id);
@@ -56,7 +56,7 @@ export function ensureGarden(state){
   const route=isEnglishParis(v)?parisRoute(v):isFrenchExploration(v)||isParisExploration(v)?v.route:null,allowed=id=>route?route.includes(id):ownNode(id,v.entrance)&&!id.startsWith('paris-explore-');
   v.recorded=Array.isArray(v.recorded)?v.recorded.filter(allowed):[];
   if(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts))v.drafts={};
-  for(const [id,d] of Object.entries(v.drafts)){const node=isEnglishParis(v)?parisNode(v,id):storyNodes[id];if(!allowed(id)||!cleanDraft(d))delete v.drafts[id];else{cleanHelper(d,id,isEnglishParis(v)?parisHelper(v,id):helpers[id]);cleanReadingRecord(d,node,false,g.seen);if(node.kind==='order')d.order=cleanOrder(d.order);}}
+  for(const [id,d] of Object.entries(v.drafts)){const node=isEnglishParis(v)?parisNode(v,id):storyNodes[id];if(!allowed(id)||!cleanDraft(d))delete v.drafts[id];else{cleanHelper(d,id,isEnglishParis(v)?parisHelper(v,id)??null:helpers[id]);cleanReadingRecord(d,node,false,g.seen);if(node.kind==='order')d.order=cleanOrder(d.order);}}
   let id=route?route[0]:entranceById(v.entrance).start;const seen=new Set();
   while(id&&v.recorded.includes(id)&&!seen.has(id)){seen.add(id);id=route?route[route.indexOf(id)+1]:storyNodes[id].next;}
   v.node=id;v.finished=!id;return true;
@@ -209,8 +209,9 @@ export function storyDescribe(o){
  if(o.status==='invitation')return 'An unscored project invitation; completion was not checked';
  if(o.status==='skipped')return 'Left unexplored';
  if(!o.correct)return 'An idea to return to';
- if(o.supported){
-  if(o.readingTools?.supportUncertain)return 'Found an answer; reading support details are uncertain';
+ const uncertain=parisSupportUncertain(o),parisSupport=o.entrance==='paris'&&o.subject==='Reading'&&(uncertain||o.reading!=='independent'||o.helpUsed||o.hinted||o.revealed||o.method==='together'||toolSupport(o.readingTools||{})||Number.isInteger(o.readingTools?.focus)&&o.readingTools.focus>=0);
+ if(o.supported||parisSupport){
+  if(uncertain||o.readingTools?.supportUncertain)return 'Found an answer; reading support details are uncertain';
   return o.subject==='Reading'&&!o.helpUsed&&!o.hinted&&!o.revealed&&!o.meaningUsed&&o.method!=='together'&&!toolSupport(o.readingTools||{})?'Found an answer; independent reading was not observed':'Found an answer with support';
  }
  if(!o.firstCorrect)return 'Found an answer after another try';

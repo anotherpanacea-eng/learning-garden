@@ -76,4 +76,11 @@ for(const destination of parisDestinations){
  resumeVisit(s,firstId);check(storyDraft(s).priorStorySeen===false&&storyDraft(s).familiar===true,'later variant display preserves frozen history but marks paused task as familiar');
  complete(s);check(parisPlan(s,'bookstall').variant===2,'paused cross-variant reread cannot manufacture second unseen success');
 }
+{
+ const s=fresh();begin(s);complete(s);begin(s);complete(s);
+ check(parisPlan(s,'bookstall').variant===3,'fixture has two independent new stories');
+ const first=s.garden.observations.find(o=>o.status==='answered');first.readingTools=null;const raw=json(s.garden.observations);
+ check(parisPlan(s,'bookstall').variant!==3,'unreadable support cannot justify longer text');
+ check(json(s.garden.observations)===raw,'suggestion never rewrites historical support or outcomes');
+}
 console.log(checks+' Paris exploration, adaptation, route and restore checks passed.');

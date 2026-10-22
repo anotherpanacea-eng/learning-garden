@@ -76,7 +76,9 @@ check(storyNodes['paris-infer'].passageId===storyNodes['paris-evidence'].passage
 {
  const s=fresh();reach(s,ids[0]);const o=answer(s);o.readingTools=null;o.supported=false;o.independent=true;o.freshEvidence=true;ensureGarden(s);
  check(o.readingTools===null&&!o.supported&&o.independent&&o.freshEvidence,'captured Paris observation keeps malformed historical support fields raw');
+ check(storyDescribe(o).includes('uncertain'),'notes interpret missing support cautiously without changing stored flags');
  o.readingTools={...tools(),audioRequested:true};o.supported=false;o.independent=true;ensureGarden(s);check(o.readingTools.audioRequested&&!o.supported&&o.independent&&o.freshEvidence,'captured Paris audio history is not regraded on load');
+ check(storyDescribe(o)==='Found an answer with support','notes acknowledge recorded audio even if old support flag disagrees');
  o.readingTools=tools();o.reading='listened';o.supported=false;o.independent=true;ensureGarden(s);check(o.reading==='listened'&&!o.supported&&o.independent,'captured Paris reading report is not regraded on load');
 }
 {

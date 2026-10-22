@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {freshState,restoreStateResult,STORAGE_KEY} from '../dist/core.mjs';
+import {freshState,restoreStateResult,recommendations,STORAGE_KEY} from '../dist/core.mjs';
 import {ensureGarden,startVisit,currentVisit,storyDraft,noteStorySeen,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,editStoryOrder,submitStoryOrder} from '../dist/garden-core.mjs';
 import {parisVisitSource,parisVisitStatus,parisNode,parisHelper,PARIS_SOURCE_LIMIT} from '../dist/paris-visit-source.mjs';
 import {storyNodes} from '../dist/story-content.mjs';
@@ -8,10 +8,11 @@ import {parisStories} from '../dist/paris-library.mjs';
 import {storyPage,parisRecoveryPage,gardenNotes} from '../dist/garden-ui.mjs';
 import {helpPage} from '../dist/help-ui.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
-import {prepareProgressImport,initializeExplorerState} from '../dist/progress-transfer.mjs';
+import {prepareProgressImport,initializeExplorerState,MAX_IMPORT_BYTES} from '../dist/progress-transfer.mjs';
 
 const clone=x=>JSON.parse(JSON.stringify(x));
 const bytes=x=>new TextEncoder().encode(JSON.stringify(x)).length;
+const report=(state,profile)=>JSON.stringify({title:'After the Storm — observations',exportedAt:'2026-10-22T12:00:00.000Z',note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:profile.avatar,color:profile.color,symbol:profile.symbol},recommendation:recommendations(state),...state},null,2);
 const fresh=()=>initializeExplorerState(freshState());
 class Storage{
  constructor(){this.data=new Map();this.fail=false;}
@@ -92,6 +93,35 @@ let checks=0;const check=(ok,label)=>{assert.ok(ok,label);checks++;};
  }finally{storyNodes[id]=original;}
 }
 
+// Exploration visits and observations also survive a re-paired story and removed node.
+{
+ const s=fresh(),v=startVisit(s,'paris',{destination:'rooftops',variant:2,storyId:'puppet-post'}),id=v.node;
+ storyDraft(s);submitStory(s,parisNode(v,id).answer);storyDraft(s).method='worked';storyDraft(s).reading='independent';finishStoryNode(s);
+ const rawVisit=JSON.stringify(v),rawObservations=JSON.stringify(s.garden.observations);
+ const story=parisStories.find(x=>x.id===v.paris.storyId),oldPair=story.variants[2],oldNode=storyNodes[id];
+ try{story.variants[2]=['republished-first','republished-second'];delete storyNodes[id];
+  const restored=restoreStateResult(JSON.stringify(s));ensureGarden(restored.state);
+  check(!restored.reason&&JSON.stringify(restored.state.garden.visits[0])===rawVisit,'captured exploration survives changed route pairing and removed catalogue node');
+  check(JSON.stringify(restored.state.garden.observations)===rawObservations,'captured exploration outcome remains unchanged after catalogue removal');
+  check(parisVisitStatus(currentVisit(restored.state))==='current'&&!!storyDraft(restored.state),'remaining captured page stays interactive');
+  const storyIndex=parisStories.indexOf(story);parisStories.splice(storyIndex,1);
+  try{const missing=restoreStateResult(JSON.stringify(s));ensureGarden(missing.state);
+   check(!missing.reason&&JSON.stringify(missing.state.garden.visits[0])===rawVisit&&JSON.stringify(missing.state.garden.observations)===rawObservations,'captured exploration and outcome survive removed story');
+  }finally{parisStories.splice(storyIndex,0,story);}
+ }finally{story.variants[2]=oldPair;storyNodes[id]=oldNode;}
+}
+
+// A newly authored postcard helper must not rewrite an older postcard draft.
+{
+ const s=fresh(),v=startVisit(s,'paris',{destination:'rooftops',variant:2,storyId:'puppet-post'});
+ for(let i=0;i<2;i++){storyDraft(s);finishStoryNode(s,true);}
+ const id=v.node,d=storyDraft(s),raw={exampleId:'earlier-postcard-helper',attempts:[2],steps:11};d.helper=clone(raw);
+ const had=Object.hasOwn(helpers,id),old=helpers[id];
+ try{helpers[id]=clone(helpers[v.route[0]]);ensureGarden(s);
+  check(JSON.stringify(d.helper)===JSON.stringify(raw),'captured postcard draft does not borrow newly authored current helper');
+ }finally{if(had)helpers[id]=old;else delete helpers[id];}
+}
+
 // Old and invalid-source records must stay raw, including helper and observation data.
 {
  const s=fresh(),legacy=startVisit(s,'paris',{destination:'river',variant:1});
@@ -112,12 +142,24 @@ let checks=0;const check=(ok,label)=>{assert.ok(ok,label);checks++;};
  check(note.includes('Smaller-example positions tried: position 3')&&!note.includes('Replacement helper'),'notes use helper positions without current labels');
  check(note.includes('&lt;img src=x onerror=alert(1)&gt;')&&!note.includes('<img src=x'),'raw helper steps cannot insert notes markup');
  check(recovery.includes('data-paris-recovery')&&recovery.includes('data-paris-fresh-start'),'recovery offers fresh start');
+ const storyIndex=parisStories.indexOf(story),oldCurrent=s.garden.current;
+ try{parisStories.splice(storyIndex,1);s.garden.current=legacy.id;const unavailable=parisRecoveryPage(s);
+  check(unavailable.includes('href="#paris"')&&unavailable.includes('href="#notes"')&&!unavailable.includes('data-paris-fresh-start'),'removed legacy story offers map and notes without a substitute fresh start');
+ }finally{parisStories.splice(storyIndex,0,story);s.garden.current=oldCurrent;}
  const count=s.garden.visits.length;check(!!startVisit(s,'paris')&&s.garden.visits.length===count+1&&JSON.stringify(legacy)===JSON.stringify(rawBefore),'fresh visit retains legacy record');
  storyDraft(s);noteStorySeen(s);check(JSON.stringify(legacy)===JSON.stringify(rawBefore)&&JSON.stringify(bad)===JSON.stringify(badBefore),'displaying a new visit leaves raw drafts unchanged');
  const prepared=prepareProgressImport(JSON.stringify(s)),disk=new Storage(),m=store(disk);m.load();
  check(prepared.ok&&m.importState(prepared).ok,'actual import accepts raw historical records');
  const imported=m.load();check(JSON.stringify(imported.garden.visits.find(v=>v.id===legacy.id))===JSON.stringify(rawBefore)&&JSON.stringify(imported.garden.visits.find(v=>v.id===bad.id))===JSON.stringify(badBefore),'import leaves legacy and malformed source records raw');
- check(m.setPersistence(false,imported)&&JSON.stringify(m.load().garden.visits.find(v=>v.id===legacy.id))===JSON.stringify(rawBefore),'save-off memory retains raw legacy record');
+ const legacyExplorer=m.active.id,sibling=m.add({},imported),siblingId=m.active.id,siblingVisit=startVisit(sibling,'paris');
+ check(!!siblingVisit&&m.save(sibling),'another explorer keeps a captured Paris visit');
+ const selected=m.select(legacyExplorer,sibling);
+ check(JSON.stringify(selected.garden.visits.find(v=>v.id===legacy.id))===JSON.stringify(rawBefore)&&JSON.stringify(selected.garden.visits.find(v=>v.id===bad.id))===JSON.stringify(badBefore),'switching explorers retains both legacy and malformed raw records');
+ check(m.setPersistence(false,selected)&&JSON.stringify(m.load().garden.visits.find(v=>v.id===legacy.id))===JSON.stringify(rawBefore),'save-off memory retains raw legacy record');
+ const cleared=m.clearActive();ensureGarden(cleared);
+ check(cleared.garden.visits.length===0&&!cleared.garden.observations?.length,'explicit reset clears this explorer’s legacy and recovery visits');
+ const unaffected=m.select(siblingId,cleared);ensureGarden(unaffected);
+ check(unaffected.garden.visits.length===1&&!!parisVisitSource(unaffected.garden.visits[0]),'reset leaves another explorer’s captured visit intact');
 }
 
 // PR65's question-only snapshot has no future pages or helper source; retain it as raw recovery.
@@ -170,11 +212,18 @@ let checks=0;const check=(ok,label)=>{assert.ok(ok,label);checks++;};
  const total=states.reduce((n,x)=>n+bytes(x),0);
  check(total<3*1024*1024,`200 complete visit states stay under 3 MiB (${total})`);
  const reopened=store(disk);reopened.load();for(const profile of reopened.explorers){const loaded=reopened.select(profile.id);check(loaded.garden.visits.length===100&&loaded.garden.visits.every(v=>!!parisVisitSource(v)),'real store reload preserves captured pages');}
- const raw=JSON.stringify(states[0]),prepared=prepareProgressImport(raw);
- check(prepared.ok,'actual import preparation accepts 100-visit notebook');
- const result=m.importState(prepared);check(result.ok&&result.state.garden.visits.length===100,'actual import creates intact explorer');
+ const originalProfiles=[...m.explorers];
+ for(let i=0;i<states.length;i++){
+  const raw=report(states[i],originalProfiles[i]),size=new TextEncoder().encode(raw).length,prepared=prepareProgressImport(raw);
+  check(size<MAX_IMPORT_BYTES&&prepared.ok,`pretty 100-visit report fits the actual import limit (${size} bytes)`);
+  const result=m.importState(prepared);
+  check(result.ok&&result.state.garden.visits.length===100&&result.state.garden.visits.every(v=>!!parisVisitSource(v)),'actual report-wrapper import creates intact captured explorer');
+ }
  const active=m.load();check(m.setPersistence(false,active)&&m.load().garden.visits.length===100,'save off keeps captured visits in memory');
  check(m.setPersistence(true,active)&&store(disk).load().garden.visits.length===100,'saving on restores captured visits');
  disk.fail=true;const activeBefore=JSON.stringify(active);active.garden.guide='rowan';check(!m.save(active)&&!!m.warning&&m.load()===active,'quota failure retains session and warning');check(JSON.stringify(m.load()).includes('parisSource')&&JSON.stringify(active).length>=activeBefore.length,'downloadable in-memory progress remains complete');
+ disk.fail=false;const cleared=m.clearActive();ensureGarden(cleared);
+ check(cleared.garden.visits.length===0,'explicit reset clears a captured 100-visit explorer');
+ const survivor=m.select(originalProfiles[0].id,cleared);check(survivor.garden.visits.length===100&&survivor.garden.visits.every(v=>!!parisVisitSource(v)),'reset leaves another explorer’s captured visits intact');
 }
 console.log(`${checks} Paris saved-source checks passed.`);

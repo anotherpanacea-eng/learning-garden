@@ -13,7 +13,11 @@ export function validateParisRoute(v){
  if(v.drafts!==undefined&&(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts)||Object.keys(v.drafts).some(id=>!v.route.includes(id))))return false;
  return true;
 }
-const explicitSupport=o=>!!o.helpUsed||!!o.hinted||!!o.revealed||o.method==='together'||['together','listened'].includes(o.reading)||!!o.readingTools?.audioRequested||!!o.readingTools?.sentenceUsed||!!o.readingTools?.supportUncertain;
+export function parisSupportUncertain(o){
+ if(o?.entrance!=='paris'||o.subject!=='Reading')return false;
+ const t=o.readingTools;return !t||typeof t!=='object'||Array.isArray(t)||['audioRequested','sentenceUsed','supportUncertain'].some(k=>typeof t[k]!=='boolean')||t.supportUncertain||!(t.focus===null||Number.isInteger(t.focus)&&t.focus>=0);
+}
+const explicitSupport=o=>parisSupportUncertain(o)||Number.isInteger(o.readingTools?.focus)&&o.readingTools.focus>=0||!!o.helpUsed||!!o.hinted||!!o.revealed||o.method==='together'||['together','listened'].includes(o.reading)||!!o.readingTools?.audioRequested||!!o.readingTools?.sentenceUsed||!!o.readingTools?.supportUncertain;
 const retry=o=>Array.isArray(o.attempts)&&(o.attempts.length>1||o.attempts.some(a=>a!==o.answer));
 function signals(state,destination){
  const g=state?.garden||{},visits=Array.isArray(g.visits)?g.visits:[],observations=Array.isArray(g.observations)?g.observations:[];
