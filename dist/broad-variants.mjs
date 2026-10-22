@@ -13,7 +13,7 @@ const authored={
  'measurement-foundation':ribbon(0,6),'measurement-anchor':ribbon(3,11),'measurement-anchor-alt':ribbon(5,12),'measurement-stretch':perimeter(5,3),'measurement-support':ribbon(2,7),'measurement-explore':area(4,5),'measurement-stretch-activity':missingSide(7,4),
  'reasoning-foundation':missing(6,10),'reasoning-anchor':story(18,7,4,-1),'reasoning-anchor-alt':story(16,6,9,1),'reasoning-stretch':claim(3,4),'reasoning-support':missing(7,12),'reasoning-explore':story(23,8,6,-1),'reasoning-stretch-activity':double(2,4)
 };
-const shapeNames={triangle:'triangle',square:'square',rectangle:'long rectangle',hexagon:'hexagon'};
+const shapeNames={triangle:'equilateral triangle',square:'square',rectangle:'long rectangle',hexagon:'regular hexagon'};
 const shapeSides={triangle:3,square:4,rectangle:4,hexagon:6},symmetries={triangle:3,square:4,rectangle:2,hexagon:6};
 const fractionNames={2:'half',3:'third',4:'quarter',5:'fifth'};
 const numberWords=['zero','one','two','three','four','five','six','seven','eight','nine','ten'];

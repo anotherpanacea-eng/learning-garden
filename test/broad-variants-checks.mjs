@@ -21,7 +21,7 @@ case 'missingSide':return (2*(p.length+p.width)-2*p.length)/2;
 case 'missing':return p.total-p.known;
 case 'story':return p.sign===1?p.start+p.first-p.second:p.start-p.first+p.second;
 case 'fractionName':return q.choices.indexOf(`One ${{2:'half',3:'third',4:'quarter',5:'fifth'}[p.parts]}`);
-case 'shapeName':return q.choices.indexOf({triangle:'triangle',rectangle:'long rectangle',square:'square',hexagon:'hexagon'}[p.shape]);
+case 'shapeName':return q.choices.indexOf({triangle:'equilateral triangle',rectangle:'long rectangle',square:'square',hexagon:'regular hexagon'}[p.shape]);
 case 'turn':{let i=0;for(let t=0;t<p.turns;t++)i=(i+p.direction+4)%4;return q.choices.indexOf(['North','East','South','West'][i]);}
 case 'claim':return q.choices.indexOf(`An extra dot in each row adds ${p.rows}, making ${p.rows*p.cols+p.rows}.`);
 case 'double':return q.choices.indexOf(`Each original row gains a matching row: ${p.rows*p.cols} more dots, making ${2*p.rows*p.cols}.`);
@@ -45,6 +45,8 @@ for(const q of broadItems()){
  const variants=new Set();
  for(let seed=0;seed<1000;seed++){
   const x=generatedBroad(q,seed);check(Number.isInteger(x.answer)&&x.answer>=0&&x.answer===expected(x),'independent answer '+q.id+' '+seed);constraints(x);if(q.params.type==='part'&&q.params.shaded>1)check(x.params.shaded>1,'non-unit fraction remains non-unit');
+  if(x.params.type==='symmetry'&&x.params.shape==='triangle')check(x.prompt.includes('equilateral triangle'),'three mirror lines name the equal-sided triangle');
+  if(x.params.type==='symmetry'&&x.params.shape==='hexagon')check(x.prompt.includes('regular hexagon'),'six mirror lines name the regular hexagon');
   check(x.solution.includes(x.kind==='choice'?x.choices[x.answer].split(' ')[0]:String(x.answer))||['shapeName','turn','fractionName','claim','double'].includes(x.params.type),'solution '+q.id);
   check(JSON.stringify(x)===JSON.stringify(generatedBroad(q,seed)),'repeatable '+q.id);variants.add(JSON.stringify(x.variant.params)+JSON.stringify(x.choices));
   if(q.lesson&&!['shapeName','symmetry','corners','turn'].includes(x.params.type))check(JSON.stringify(x.model)===JSON.stringify(q.model),'authored Pip example');
