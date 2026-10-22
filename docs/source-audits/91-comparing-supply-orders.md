@@ -1,6 +1,6 @@
 # Comparing Supply Orders: bounded source audit
 
-**Author research, 2026-10-22. Proposed spec only; no built lesson or result.** Supports [spec 91](../specs/91-comparing-supply-orders.md). The local review base is `acf01b034cbbf14571372b487008e9a5d73782d6`. No taxonomy pin, atlas reference, coverage count or prerequisite edge changes.
+**Author research, 2026-10-22. Locally implemented draft; no released lesson or measured result.** Supports [spec 91](../specs/91-comparing-supply-orders.md). The local review base is `acf01b034cbbf14571372b487008e9a5d73782d6`. No taxonomy pin, atlas reference, coverage count or prerequisite edge changes.
 
 ## Actual overlap and chosen limit
 

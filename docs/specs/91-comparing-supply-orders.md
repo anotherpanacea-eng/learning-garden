@@ -1,6 +1,6 @@
 # 91 — Comparing Supply Orders: the same numbers ask two different questions
 
-**Status: proposed specification only. No implementation, browser result, curriculum-map change, or release claim.** This optional M1 turn belongs beside [Joining Supply Orders](77-joining-supply-orders.md) and [Returning Supply Orders](78-returning-supply-orders.md) in Bundle Burrow. The [source audit](../source-audits/91-comparing-supply-orders.md) records the checked references and limits. Independent specification review is required before building.
+**Status: locally implemented and internally reviewed; not merged or released.** This optional M1 turn belongs beside [Joining Supply Orders](77-joining-supply-orders.md) and [Returning Supply Orders](78-returning-supply-orders.md) in Bundle Burrow. The [source audit](../source-audits/91-comparing-supply-orders.md) records the checked references and limits. The [review receipt](../reviews/91-comparing-supply-orders-review.md) records independent spec and implementation findings. No curriculum-map change or learning-result claim is made.
 
 ## One new learner action
 
