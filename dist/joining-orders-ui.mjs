@@ -42,7 +42,7 @@ const coreModelEqual=(a,b)=>Object.keys(a).every(k=>a[k]===b[k]);
 function chooser(active){const cards=`<p>Either pair may be opened.</p><div class="join-case-list">${core.joiningCases.map(c=>`<section class="join-case"><h3>${c.pip} + ${c.dot}</h3>${active===c.id?'<p>This order is open below.</p>':button('Start this order',`data-join-start="${c.id}"`)}</section>`).join('')}</div>`;return active?`<details class="join-chooser"><summary>Choose another pair of orders</summary>${cards}</details>`:`<section class="join-chooser"><h2>Choose a pair of orders</h2>${cards}</section>`;}
 export function joiningOrdersEntry(){return `<section class="bundle-exchange-entry"><h2>Bundle Burrow: Joining Supply Orders</h2><p>Bring two pictured orders together. Sometimes ten ones can become one new ten.</p><a class="secondary" href="#numbers/join">Join supply orders</a></section>`;}
 function visibleBundleExamples(v){
- const w=v.work,m=w.model,s=v.source,examples=['bundle:0:2:4',`bundle:0:1:${s.dot%10}`];
+ const w=v.work,m=w.model,s=v.source,examples=m.joined?[]:['bundle:0:2:4',`bundle:0:1:${s.dot%10}`];
  if(w.exampleOpen)examples.push('bundle:0:3:0');
  if(v.feedback&&m.joined&&m.framePip+m.frameDot===0){
   if(s.id==='steady-orders'&&m.newTenPip+m.newTenDot===0)examples.push('bundle:0:3:7');
