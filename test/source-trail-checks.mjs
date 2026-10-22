@@ -1,13 +1,35 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {sourceTrailCases,sourceTrailPages,sourceTrailSource} from '../dist/source-trail-content.mjs';
 import {validTrailSource,validTrailRound,validTrailCheck,trailView,startTrail,resumeTrail,setTrailPage,setTrailCard,chooseTrailAnswer,addTrailSupport,evaluateTrail,checkTrail,trailCheckMatches} from '../dist/source-trail-core.mjs';
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;},copy=structuredClone;
 const expected={origin:'photo',observation:'photo',independence:'shared',reply:'qualified'};eq(sourceTrailCases.length,4);eq(sourceTrailPages,['cards','try','kept']);let proposals=0;
+const reviewed={
+ origin:{choices:[['dates','Card C · Archive date summary'],['photo','Card A · Photograph'],['new-witness','A separate historical witness'],['unsure','Not sure yet']],feedback:'B explicitly names photograph PH8646, Card A, as its source. The date summary and a separate witness are not its declared origin.'},
+ observation:{choices:[['note-only','B’s note supplies a new historical observation; A illustrates the scene that the note recorded.'],['needs-confirmation','Neither card can support this detail until another photograph confirms that boats and water were there.'],['photo','A’s photograph supplies this local detail; B restates what is visible in that same picture.'],['unsure','Not sure yet']],feedback:'The photograph supports the pictured detail, and B draws on it. B adds no separate historical observation. Another photograph could add evidence, but is not required to describe what this supplied photograph shows.'},
+ independence:{choices:[['shared','A and B are two cards using one photograph; B adds no separate historical observation.'],['independent','A and B were made at different times, so their matching detail comes from two independent observations.'],['unresolved','We cannot tell whether B uses A until another historical record confirms the account in B.'],['unsure','Not sure yet']],feedback:'B’s declared origin establishes its dependence on A for this detail. A second historical record is not needed to trace that supplied origin. This does not make B false or useless.'},
+ reply:{choices:[['witnesses','A and B agree, and C comes from another publisher. The cards therefore independently confirm the pictured local view.'],['qualified','A shows one local view. B draws on A. C summarises dates; this packet leaves C’s independence unresolved.'],['withhold','A and B share one photograph. Leave their local view out of the display until another record independently confirms it.'],['unsure','Not sure yet']],feedback:'We can identify the local photograph and B’s declared dependence without claiming independent confirmation. C supplies dates, not another view of these boats. Its independence is unestablished here; that is not proof of dependence.'},
+};
 for(const original of sourceTrailCases){ok(validTrailSource(original));const s=sourceTrailSource(original.id),before=copy(s);eq(s.answerId,expected[s.id]);eq(s.cards.find(c=>c.id==='note').provenance.includes('Card A'),true);eq(s.photo.inventory,'PH8646');eq(s.photo.filename,'lpdp_30184-10.jpg');s.title='temporary';eq(original.title,before.title);s.title=before.title;
+ eq(s.choices.map(c=>[c.id,c.label]),reviewed[s.id].choices,'complete reviewed order and labels');eq(s.feedback,reviewed[s.id].feedback,'complete reviewed feedback');eq(s.choices.at(-1).id,'unsure');eq(s.choices.filter(c=>c.id===s.answerId).length,1);
  for(const answer of [null,...s.choices.map(c=>c.id)]){const input={answer,support:[]},exact=copy(input),c=evaluateTrail(s,input);proposals++;ok(c);eq(c.outcome,answer===null||answer==='unsure'?null:answer===expected[s.id]);eq(c.selectedLabel,answer===null?null:s.choices.find(x=>x.id===answer).label);eq(c.input,input);eq(input,exact);eq(c.source,before);ok(validTrailCheck(c));ok(c.feedback.endsWith(s.feedback));}
  eq(s,before);
 }
 eq(proposals,20);
+const prechange=JSON.parse(readFileSync(new URL('./fixtures/source-trail-prechange.json',import.meta.url),'utf8'));
+for(const {id,first,round:oldRound} of prechange){
+ const state={};startTrail(state,id);state.sourceTrail.rounds[0]=copy(oldRound);
+ const live=state.sourceTrail.rounds[0],saved=copy(live);ok(validTrailRound(live));ok(trailView(state).current===live,'pre-change visit remains active');
+ eq(first,expected[id],'historical first-position fit captured before content change');eq(live.checks[0].input.answer,first);
+ if(id==='independence')eq(live.source.choices.at(-1).id,'shared','historical reversed own order admitted');
+ const oldChoice=live.source.choices.find(c=>c.id===live.answer);const fresh=checkTrail(state);
+ eq(fresh.selectedLabel,oldChoice.label,'fresh old-visit check uses original own label');eq(fresh.outcome,live.answer===live.source.answerId);ok(fresh.feedback.endsWith(live.source.feedback));
+ eq(live.checks.length,saved.checks.length+1,'fresh old-source check appended');eq(live.checks.at(-1),fresh);
+ eq(live.checks.slice(0,saved.checks.length),saved.checks,'historical recorded outcome and feedback remain exact');
+ const before=copy(live),newRound=startTrail(state,id);
+ eq(newRound.source.choices,reviewed[id].choices.map(([choiceId,label])=>({id:choiceId,label})));
+ eq(newRound.source.feedback,reviewed[id].feedback);eq(state.sourceTrail.rounds[0],before,'new Start does not modify old own source/checks');ok(newRound.familiar);
+}
 const missing={};for(const fn of [s=>setTrailPage(s,'try'),s=>setTrailCard(s,'photo'),s=>chooseTrailAnswer(s,'photo'),s=>addTrailSupport(s,'help'),s=>resumeTrail(s,1)]){eq(fn(missing),false);eq(missing,{});}eq(checkTrail(missing),null);eq(startTrail(missing,'unknown'),null);eq(missing,{});
 {
  const state={other:{untouched:true}},r=startTrail(state,'origin');ok(validTrailRound(r));eq(r.answer,null);eq(r.card,'note');const blank=checkTrail(state);eq(blank.outcome,null);chooseTrailAnswer(state,'unsure');eq(checkTrail(state).outcome,null);chooseTrailAnswer(state,'dates');eq(checkTrail(state).outcome,false);chooseTrailAnswer(state,'photo');const c=checkTrail(state);eq(c.outcome,true);ok(trailCheckMatches(r));const old=copy(c);for(const page of sourceTrailPages){ok(setTrailPage(state,page));ok(trailCheckMatches(r));}for(const card of ['photo','note','dates']){ok(setTrailCard(state,card));ok(trailCheckMatches(r),'viewed card not a judged input');}eq(c,old);addTrailSupport(state,'help');ok(!trailCheckMatches(r));eq(c,old);addTrailSupport(state,'help');eq(r.support,['help']);eq(chooseTrailAnswer(state,'unknown'),false);eq(setTrailCard(state,'unknown'),false);eq(state.other,{untouched:true});for(let i=0;i<12;i++)checkTrail(state);eq(r.checks.length,8);ok(startTrail(state,'origin').familiar);ok(resumeTrail(state,r.id));eq(trailView(state).current,r);
