@@ -74,4 +74,6 @@ console.log(`${checks} Number Garden variant checks passed.`);
   check(r.broad.drafts[`checkin:${item.id}`],'adding or dropping an optional wording field keeps the paused question open');}
  {const {s}=fresh();s.broad.drafts[`checkin:${item.id}`].question.prompt={toString:null};const r=reload(s);
   check(!r.broad.drafts[`checkin:${item.id}`],'non-text wording is not resumed');}
+ {const choiceItem=broadItems().find(q=>Array.isArray(q.choices)&&q.choices.length>1);const s=freshState();const b=ensureBroad(s);const q=instantiateBroad(s,choiceItem,'checkin');q.choices[0]='  ';b.drafts[`checkin:${choiceItem.id}`]={attempts:[],question:q};const r=reload(s);
+  check(!r.broad.drafts[`checkin:${choiceItem.id}`],'a saved question with a blank answer choice is not resumed');}
 }
