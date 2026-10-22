@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {coinTypes,requests,exchanges} from '../dist/coin-counter-content.mjs';
+import {coinCounterPage} from '../dist/coin-counter-ui.mjs';
 import {coinView,startCoinRound,nextCoinRequest,setCoinPage,selectCoinMat,addCoinSupport,resumeCoinRound,adjustCoin,exchangeResult,exchangeCoins,checkCoinPayments,checkMatchesCoins,coinTotal,coinCount,emptyCoins,validCoins,validCoinRound} from '../dist/coin-counter-core.mjs';
 let checks=0;
 const eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;},ok=(x,m)=>{assert.ok(x,m);checks++;},copy=x=>structuredClone(x),roundtrip=x=>JSON.parse(JSON.stringify(x));
@@ -21,7 +22,17 @@ for(const coins of vectors){
 }
 eq(coinCount({penny:0,nickel:0,dime:0,quarter:1}),1,'quarter is one coin');eq(coinTotal({penny:0,nickel:0,dime:0,quarter:1}),25,'quarter is twenty-five cents');
 eq(exchangeResult({penny:24,nickel:0,dime:0,quarter:1},'quarter-dimes'),{ok:false,reason:'limit'},'conserved value still respects maximum physical coin count');
-for(const coins of [{...emptyCoins(),penny:-1},{...emptyCoins(),dime:6},{...emptyCoins(),penny:26},{...emptyCoins(),nickel:1.5},{penny:0,nickel:0,dime:0}])ok(!validCoins(coins),'invalid count/quantity/vector shape rejected');
+for(const coins of [{...emptyCoins(),penny:-1},{...emptyCoins(),dime:6},{...emptyCoins(),penny:26},{...emptyCoins(),nickel:1.5}])ok(!validCoins(coins),'invalid count or quantity rejected');
+{
+ const state={},round=startCoinRound(state,'ribbon');round.a={penny:0,nickel:1,dime:0,quarter:0};round.b={penny:5,nickel:0,dime:0,quarter:0};checkCoinPayments(state);const frozen=copy(state);
+ const extra={id:'half-dollar',name:'Half dollar',plural:'half dollars',value:50,diameter:30,color:'#dddddd'};coinTypes.push(extra);
+ try{
+  eq(coinView(state).current,round,'old round and check load after catalog extension');eq(coinCount(round.a),1);eq(coinTotal(round.a),5);ok(validCoins(round.a));
+  ok(coinCounterPage(state).includes('Half dollar: 0'),'new catalog coin renders as zero in an old round');
+  round.a={penny:0,nickel:0,dime:0,quarter:0};eq(adjustCoin(state,extra.id,1),'changed','missing coin can be added to an old mat');eq(round.a[extra.id],1);
+  eq(adjustCoin(state,extra.id,-1),'changed');eq(coinView(state).current,round);eq(round.checks,frozen.coinCounter.rounds[0].checks,'recorded check remains intact');
+ }finally{coinTypes.pop();}
+}
 
 eq(requests.map(r=>vectors.filter(v=>coinTotal(v)===r.price).length),[2,2,4,4,6,6,9,13],'every request has multiple exact ways');
 for(const request of requests){
