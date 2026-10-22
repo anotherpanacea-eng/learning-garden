@@ -6,6 +6,7 @@
 .return-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .return-actions button:last-child{grid-column:1/-1}
 .returning-orders button,.returning-orders .secondary{min-height:44px}
+.returning-orders a{display:inline-flex;align-items:center;min-height:44px}
 .return-choices button[aria-pressed="true"]{outline:3px solid #d3822b;outline-offset:2px}
 .return-preview,.return-model,.return-response,.return-help,.return-history{margin:1rem 0;padding:1rem;border:1px solid #a8b9a4;border-radius:14px;background:#f8fbf4}
 .return-trays{display:grid;grid-template-columns:2fr 1fr;gap:.8rem}
