@@ -684,6 +684,94 @@
       ],
       "route": "#post/packing",
       "scope": "Four invented seed-envelope requests with whole-bag capacity, full kits, loose envelopes and minimal loaded trips. Countable reversible grouping, actual-model readings and purpose-specific answers remain supplied practice. No written algorithm, decimal quotient, general multistep problem solving, formal place value or independent reading claim."
+    },
+    {
+      "id": "seed-stall",
+      "name": "Seed Stall",
+      "status": "built-local",
+      "patterns": [
+        "experiment",
+        "read"
+      ],
+      "route": "#numbers/seeds",
+      "scope": "Configure a six-position virtual bag, predict optionally, draw with replacement and compare up to three six-draw records. Screen-model chance practice only; no physical sampling, theoretical-frequency calculation, fairness proof, or attainment claim."
+    },
+    {
+      "id": "count-collection",
+      "name": "My Count Collection",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "route": "#living/collection",
+      "scope": "Make three fictional button category counts, enter a table, construct bars and compare actual pictured counts. No real survey, physical observation, tally/pictogram construction, full data vocabulary or statistics attainment."
+    },
+    {
+      "id": "joining-orders",
+      "name": "Joining Supply Orders",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "build"
+      ],
+      "route": "#numbers/join",
+      "scope": "Join two supplied two-digit collections and regroup one ten when useful, then enter a total. Two fixed pictured sums; no general algorithm, spoken explanation, independent strategy or fluency claim."
+    },
+    {
+      "id": "returning-orders",
+      "name": "Returning Supply Orders",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "build"
+      ],
+      "route": "#numbers/return",
+      "scope": "Move 12 or 17 of 42 supplied counters to a separate store tray, opening a ten when useful, then name the remainder. Two fixed take-away pictures; no comparison-subtraction, chosen strategy or fluency claim."
+    },
+    {
+      "id": "lantern-line",
+      "name": "Lantern Line",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "route": "#numbers/lanterns",
+      "scope": "Place two supplied fractions on one shared 0–1 whole and choose the relation of the actual markers. Finite two-marker comparison; no systematic ordering, independent denominator explanation or broad fraction attainment."
+    },
+    {
+      "id": "hundredths-bridge",
+      "name": "Hundredths Bridge",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "route": "#numbers/hundredths",
+      "scope": "Make 30/100 and 35/100 on one pictured whole and compare supplied 0.3, 0.30 and 0.35 cases. A fixed visual equivalence bridge; no arbitrary decimal writing, percent, number-line placement or conversion fluency."
+    },
+    {
+      "id": "puppet-notice",
+      "name": "Puppet Notice Printer",
+      "status": "built-local",
+      "patterns": [
+        "compose",
+        "read"
+      ],
+      "route": "#loft/printer",
+      "scope": "Reorder five supplied tickets, choose an initial capital and ending mark, try a small authored statement/question response and revise. Controlled-word punctuation practice; no original sentence writing, general grammar, spelling or independent convention use."
+    },
+    {
+      "id": "water-evidence",
+      "name": "Water Evidence Shelf",
+      "status": "built-local",
+      "patterns": [
+        "search",
+        "read"
+      ],
+      "route": "#science/evidence",
+      "scope": "Choose clue-plus-possible-explanation notes over three supplied before/after water illustrations. Transient fictional-picture practice; no real observation, physical investigation, measured amount, unique-cause proof or water-cycle attainment."
     }
   ],
   "manualReferences": [
@@ -1414,6 +1502,62 @@
       "kind": "scoped-practice",
       "source": "dist/parcel-packing-ui.mjs",
       "scope": "Relate the literal packing request, capacity and purpose to countable pictured objects and groups. No independent decoding, inference or broad reading level claim."
+    },
+    {
+      "game": "seed-stall",
+      "topicId": "mt_J4j7d3iAfg",
+      "kind": "scoped-practice",
+      "source": "dist/seed-stall-ui.mjs",
+      "scope": "Configure a pictured six-position virtual bag, predict optionally, record six draws with replacement and compare up to three short runs. Not a physical trial, 20/30-draw experiment, formal theoretical probability or fairness proof; likelihood language is supplied, not independently established."
+    },
+    {
+      "game": "count-collection",
+      "topicId": "mt_c29FaCTNsx",
+      "kind": "scoped-practice",
+      "source": "dist/count-collection-ui.mjs",
+      "scope": "Make three fictional category counts, enter a simple table and construct/read bars on a shared scale. No survey, tally/pictogram construction, full chart vocabulary or observed real-world data."
+    },
+    {
+      "game": "joining-orders",
+      "topicId": "mt_OvyoRo47K-",
+      "kind": "scoped-practice",
+      "source": "dist/joining-orders-ui.mjs",
+      "scope": "Join two fixed pictured two-digit collections, regroup when useful and enter a total. Does not record a spoken altogether explanation, independent method or general within-100 addition."
+    },
+    {
+      "game": "returning-orders",
+      "topicId": "mt_zuKAX6lcYR",
+      "kind": "scoped-practice",
+      "source": "dist/returning-orders-ui.mjs",
+      "scope": "Move 12 or 17 of 42 pictured counters into a store tray and enter what remains. This is a fixed take-away model, not comparison subtraction, independent explanation or fluent calculation."
+    },
+    {
+      "game": "lantern-line",
+      "topicId": "mt_IfEgu0X449",
+      "kind": "scoped-practice",
+      "source": "dist/lantern-line-ui.mjs",
+      "scope": "Place two supplied markers on the same unit interval and choose the relation of the actual positions. No ordering a larger set or independently explaining a general denominator rule."
+    },
+    {
+      "game": "hundredths-bridge",
+      "topicId": "mt_TqDq6jyOmL",
+      "kind": "scoped-practice",
+      "source": "dist/hundredths-ui.mjs",
+      "scope": "Build or compare a few supplied same-whole 0.3, 0.30 and 0.35 pictures with a separate check. No arbitrary written tenths/hundredths conversion, number-line placement, percent notation or fluency."
+    },
+    {
+      "game": "puppet-notice",
+      "topicId": "mt_QEr24lqzvH",
+      "kind": "scoped-practice",
+      "source": "dist/puppet-notice-ui.mjs",
+      "scope": "Choose initial capitalization and ending marks for supplied five-word tickets, then hear/try a few authored meanings. Exclamation response remains unmodeled; no free sentence composition or reminder-free conventions."
+    },
+    {
+      "game": "water-evidence",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "scoped-practice",
+      "source": "dist/water-evidence-ui.mjs",
+      "scope": "Distinguish a visible clue from a possible cause in three illustrated before/after cards. Choices are transient and supplied; no real observation, learner-written explanation or single-route proof. This topic already has other scoped references."
     }
   ],
   "increments": [
