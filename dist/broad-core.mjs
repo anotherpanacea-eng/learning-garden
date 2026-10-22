@@ -101,13 +101,13 @@ function validSnapshot(q,id){
  const expected=q.variant?generatedBroad(template,q.variant.seed):{...structuredClone(template),variant:null};
  return JSON.stringify(semanticBroad(q))===JSON.stringify(semanticBroad(expected))&&broadWordingValid(q);
 }
-// A frozen question keeps its own wording; only its numbers, answer and structure must still match,
+// A frozen question keeps its own wording; its numbers, answer and structure (including which wording fields exist) must still match,
 // so a copy edit cannot close a paused question.
 const BROAD_TEXT=new Set(['label','title','prompt','hint','solution','talk','steps','childLesson','lesson','wonder','message']);
 function semanticBroad(x){
  if(Array.isArray(x))return x.map(semanticBroad);
  if(!x||typeof x!=='object')return x;
- const out={};for(const [k,v] of Object.entries(x)){if(BROAD_TEXT.has(k))continue;out[k]=k==='choices'&&Array.isArray(v)?v.length:semanticBroad(v);}
+ const out={};for(const [k,v] of Object.entries(x)){if(BROAD_TEXT.has(k)){out[k]='#text';continue;}out[k]=k==='choices'&&Array.isArray(v)?v.length:semanticBroad(v);}
  return out;
 }
 function broadWordingValid(q){

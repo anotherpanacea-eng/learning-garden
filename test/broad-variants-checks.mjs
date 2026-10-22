@@ -66,6 +66,8 @@ console.log(`${checks} Number Garden variant checks passed.`);
   check(r.broad.drafts[`checkin:${item.id}`],'earlier wording keeps the paused question open');check(instantiateBroad(r,item,'checkin').prompt==='Earlier prompt wording','resumed question keeps its own wording');check(!r.broad.draftNotice,'no closed-question notice for a copy edit');}
  {const {s}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];d.question.answer=typeof d.question.answer==='number'?d.question.answer+1:'changed';const r=reload(s);
   check(!r.broad.drafts[`checkin:${item.id}`]&&r.broad.closedDrafts.length===1,'a changed answer still closes the paused question and keeps it');}
+ {const {s}=fresh();delete s.broad.drafts[`checkin:${item.id}`].question.prompt;const r=reload(s);
+  check(!r.broad.drafts[`checkin:${item.id}`],'a saved question missing its prompt is not resumed');}
  {const {s}=fresh();s.broad.drafts[`checkin:${item.id}`].question.prompt={toString:null};const r=reload(s);
   check(!r.broad.drafts[`checkin:${item.id}`],'non-text wording is not resumed');}
 }
