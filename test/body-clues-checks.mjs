@@ -19,6 +19,26 @@ for(const [picture,[count,feature,label]] of Object.entries(oracle)){
  }
 }
 {
+ const state={};const old=startBody(state,'snail');chooseBodyLegs(state,'0');chooseBodyFeature(state,'shell');const oldCheck=checkBody(state);
+ const saved=JSON.parse(JSON.stringify(state));const fifth=bodySource('ladybird');
+ fifth.id='synthetic-fifth';fifth.title='Synthetic picture';fifth.expected.body='new_clue';
+ fifth.key.push({id:'synthetic-fifth',legs:'6',body:'new_clue',label:'Synthetic fifth leaf',clue:'Synthetic fifth clue'});
+ ok(validBodySource(fifth),'new clue vocabulary is valid without changing the current source catalog');
+ bodyCatalog.push(fifth);
+ try{
+  eq(bodyView(saved).current.source.key.length,4,'saved four-entry visit stays readable after catalog extension');
+  eq(bodyView(saved).current.checks[0],oldCheck,'old recorded outcome stays exact');
+  const newer=startBody(saved,'synthetic-fifth');ok(validBodyRound(newer));eq(newer.source.key.length,5);
+  chooseBodyLegs(saved,'6');ok(chooseBodyFeature(saved,'new_clue'));const checked=checkBody(saved);
+  eq(checked.named,{id:'synthetic-fifth',label:'Synthetic fifth leaf'});eq(checked.features,{legs:true,body:true});
+  const reloaded=JSON.parse(JSON.stringify(saved));eq(bodyView(reloaded).rounds.length,2);eq(bodyView(reloaded).rounds[0].source.key.length,4);eq(bodyView(reloaded).current.source.key.length,5);
+ }finally{bodyCatalog.pop();}
+ const short=bodySource('snail');short.key=short.key.slice(0,2);ok(validBodySource(short),'two-entry saved key is readable');
+ const repeated=structuredClone(fifth);repeated.key.push({...repeated.key[0],id:'different-id'});ok(!validBodySource(repeated),'duplicate leg and body leaf is rejected');
+ const unsupported=structuredClone(fifth);unsupported.drawing.kind='unrendered';ok(!validBodySource(unsupported),'saved drawing still needs a supported renderer');
+ eq(old.source.key.length,4,'catalog extension does not mutate the original visit');
+}
+{
  const s={unrelated:{kept:true}},before=structuredClone(s);eq(bodyView(s).status,'missing');eq(startBody(s,'unknown'),null);eq(s,before);eq(setBodyPage(s,'keep'),false);eq(s,before);
  const r=startBody(s,'snail');ok(validBodyRound(r));eq(s.unrelated,before.unrelated);eq(checkBody(s),null,'no implicit empty check');
  chooseBodyLegs(s,'0');eq(checkBody(s),null,'zero legs alone cannot separate the two pictured animals');chooseBodyFeature(s,'rings');const wrong=checkBody(s);eq(wrong.named.id,'worm');eq(wrong.features,{legs:true,body:false});ok(wrong.feedback.includes('coiled shell'));ok(bodyCheckMatches(r));

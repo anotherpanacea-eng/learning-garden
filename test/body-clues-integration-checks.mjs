@@ -24,6 +24,20 @@ const frozen=structuredClone(s.bodyClues),raw=JSON.stringify(s);eq(restoreStateR
 {
  const sample=structuredClone(s),round=bodyView(sample).current,c=round.checks[0];c.source.inspection='Earlier exact picture description.';c.source.label='Earlier adult label';c.named={id:'earlier',label:'Earlier recorded leaf'};c.features={legs:false,body:true};c.feedback='Earlier exact feedback.';delete c.support;const before=structuredClone(sample.bodyClues),html=bodyCluesPage(sample)+bodyCluesNotes(sample);ok(html.includes(c.source.inspection)&&html.includes(c.feedback)&&html.includes(c.named.label),'historical check displays its own source/label/feedback');eq(sample.bodyClues,before,'contradictory saved outputs are not regraded');eq(prepareProgressImport(JSON.stringify(sample)).state.bodyClues,before);
 }
+{
+ const sample=structuredClone(s),round=bodyView(sample).current;
+ round.source.key.push({id:'synthetic-fifth',legs:'6',body:'new_clue',label:'Synthetic fifth leaf',clue:'Synthetic fifth clue'});
+ setBodyPage(sample,'key');const page=bodyCluesPage(sample),notes=bodyCluesNotes(sample);
+ ok(page.includes('Our 5-picture key'),'current visit describes its frozen expanded key');
+ ok(notes.includes('Synthetic fifth clue'),'notes show the expanded saved source');
+ eq(round.checks[0].source.key.length,4,'older check retains its original four-entry source');
+ chooseBodyLegs(sample,'other');const outsidePage=bodyCluesPage(sample);
+ ok(outsidePage.includes('This is outside our 5-picture key.'),'outside leg branch renders the saved key size');
+ ok(!outsidePage.includes('${r.source.key.length}'),'outside leg branch has no raw interpolation');
+ checkBody(sample);const outsideRecord=bodyCluesPage(sample);
+ ok(outsideRecord.includes('This trail stops outside our 5-picture key.'),'recorded outside trail renders the saved key size');
+ ok(!outsideRecord.includes('${c.source.key.length}'),'outside record has no raw interpolation');
+}
 for(const raw of [null,'<script>opaque earlier body work</script>',{version:99,original:'<img src=x onerror="bad()">'}]){
  const sample=structuredClone(s);sample.bodyClues=structuredClone(raw);const before=structuredClone(sample.bodyClues),html=bodyCluesPage(sample)+bodyCluesNotes(sample)+adaptivePage(sample,'bodies');eq(sample.bodyClues,before);ok(!html.includes('<script>opaque')&&!html.includes('<img src=x'),'unreadable/future payload remains escaped');ok(prepareProgressImport(JSON.stringify(sample)).ok,'unreadable optional pack does not block generic import');
 }
