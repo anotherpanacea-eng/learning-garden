@@ -15,7 +15,7 @@ function jug(a,ingredient='cloud-water',id='welcome-broth'){const s=fresh();choo
 function secondForm(s,previousKind){const first=startTown(s,later);ok(first,'first errand starts');ok(asideTown(s),'first errand aside');s.townRemembers.used=[];s.townRemembers.rotation=previousKind;const second=startTown(s,later);ok(second,'second form starts after old used key trimmed');return second;}
 const choices=e=>e.choices.map(c=>c.value);
 {
- const s=fresh(),raw=JSON.stringify(s);eq(nextTownCard(s,later),null,'no initial card');eq(townInvitation(s),'','no initial invitation');eq(townPage(s).includes('No neighbour is waiting just now'),true,'empty page');eq(JSON.stringify(s),raw,'render does not allocate root');
+ const s=fresh(),raw=JSON.stringify(s);eq(nextTownCard(s,later),null,'no initial card');eq(townInvitation(s),'','no initial invitation');eq(townPage(s).includes('No neighbor is waiting just now'),true,'empty page');eq(JSON.stringify(s),raw,'render does not allocate root');
 }
 for(const c of [1,2,3]){
  const s=tray(c),before=copy(s);eq(sourceArtifacts(s,day).length,0,'same day waits');eq(sourceArtifacts(s,later).length,1,'later day eligible');eq(s,before,'candidate selection pure');
@@ -30,7 +30,7 @@ for(const [i,n] of [2,3,4,6].entries()){
  const a=loaf(n),alt=secondForm(a,'trays');eq(alt.form,'share-buns','basket alternate');eq(alt.expected,12/n,'fraction of set');eq(new Set(choices(alt)).size,3,'bun choices distinct');eq(alt.choices.findIndex(x=>x.value===alt.expected),(2-i+6)%3,'buns rotated');ok(townPage(a).includes('Twelve unselected buns'),'source set pictured');ok(alt.example.n!==n,'buns help distinct');
 }
 for(const [i,a] of [50,100,150,200,250,300,350,400,450].entries()){
- const s=jug(a),e=startTown(s,later),lo=(Math.ceil(a/100)-1)*100,hi=(Math.floor(a/100)+1)*100;eq(e.form,'jug-coarser','scale first');eq(e.expected,a,'scale exact');eq(new Set(choices(e)),new Set([lo,a,hi]),'scale neighbours');eq(e.choices.findIndex(x=>x.value===a),(1-i%3+3)%3,'scale rotated');ok(e.example.amount!==a,'scale help different');const html=townPage(s);ok(html.includes('town-jug-drawing')&&html.includes('unnumbered'),'new scale visible');if(a%100)ok(!html.includes(`Saved amount: ${a} mL`),'exact amount withheld before check');
+ const s=jug(a),e=startTown(s,later),lo=(Math.ceil(a/100)-1)*100,hi=(Math.floor(a/100)+1)*100;eq(e.form,'jug-coarser','scale first');eq(e.expected,a,'scale exact');eq(new Set(choices(e)),new Set([lo,a,hi]),'scale neighbors');eq(e.choices.findIndex(x=>x.value===a),(1-i%3+3)%3,'scale rotated');ok(e.example.amount!==a,'scale help different');const html=townPage(s);ok(html.includes('town-jug-drawing')&&html.includes('unnumbered'),'new scale visible');if(a%100)ok(!html.includes(`Saved amount: ${a} mL`),'exact amount withheld before check');
  const altState=jug(a),alt=secondForm(altState,'shares'),t=Math.ceil((a+1)/100)*100,more=t-a,extra=more+50===t?more+100:more+50;eq(alt.form,'jug-more','more alternate');eq(alt.expected,more,'needed pour');eq(new Set(choices(alt)),new Set([more,t,extra]),'more choices distinct');eq(alt.choices.findIndex(x=>x.value===more),(0-i%3+3)%3,'more rotated');eq(alt.artifact.values.t,t,'target frozen');ok(alt.feedback.includes(`${extra} mL would pass`),'extra distractor explained');ok(alt.example.extra!==more,'help has different pour');
 }
 {

@@ -91,7 +91,7 @@ function formContent(a,form){
   picture=`Two separate kept jars: ${v.cloud} mL cloud-water and ${v.star} mL star-water. Reference card: 2 guests need 100 mL cloud-water and 150 mL star-water.`;
   question='Purl has these two jars. Each whole batch serves 2 guests. How many guests can these jars serve?';
   feedback=`These jars hold ${word(c,'whole batch')}. Each batch serves 2 guests, so they can serve ${word(2*c,'guest')}. ${c} counts batches, not guests; ${2*c+1} would need more ingredients.`;
-  help=`In this separate example, ${word(h,'batch')} ${h===1?'uses':'use'} ${100*h} mL cloud-water and ${150*h} mL star-water in two labelled jars. Two guests per batch means ${word(2*h,'guest')}.`;
+  help=`In this separate example, ${word(h,'batch')} ${h===1?'uses':'use'} ${100*h} mL cloud-water and ${150*h} mL star-water in two labeled jars. Two guests per batch means ${word(2*h,'guest')}.`;
   example={kind:'trays',cloud:100*h,star:150*h,guests:2*h};
  }else if(form==='trays-shortcut'){
   const c=v.c,h=c===1?2:1;
@@ -121,8 +121,8 @@ function formContent(a,form){
   choices=[lower,a,upper].map(x=>({value:x,label:`${x} mL`}));expected=a;
   const position=a%100===0?`at the numbered ${a} mL mark`:`at the unnumbered mark halfway between ${lower} and ${upper} mL`;
   picture=`Remembered ${v.ingredient} jar, without an amount label. A separate straight-sided spare jug has the same amount. Its level is ${position}; the scale shows numbered 0, 100, 200, 300, 400, 500 mL marks and unnumbered midpoints.`;
-  question="Wisp's spare jug holds the same amount. Read its scale. How many millilitres are inside?";
-  feedback=a%100===0?`The liquid meets the numbered ${a} mL line; the neighbouring numbered marks are ${lower} mL and ${upper} mL.`:`Each numbered interval is 100 mL. The unnumbered midpoint is 50 mL past the lower numbered mark. The liquid reaches ${a} mL. The marks just below and above are ${lower} mL and ${upper} mL.`;
+  question="Wisp's spare jug holds the same amount. Read its scale. How many milliliters are inside?";
+  feedback=a%100===0?`The liquid meets the numbered ${a} mL line; the neighboring numbered marks are ${lower} mL and ${upper} mL.`:`Each numbered interval is 100 mL. The unnumbered midpoint is 50 mL past the lower numbered mark. The liquid reaches ${a} mL. The marks just below and above are ${lower} mL and ${upper} mL.`;
   help=`In a separate jug, ${h} mL reaches ${h%100===0?`the numbered ${h} mL mark`:`the halfway tick between ${h-50} and ${h+50} mL`}. Its scale runs from 0 to 500 mL in 100 mL numbered steps.`;
   example={kind:'jug',amount:h};
  }else{
