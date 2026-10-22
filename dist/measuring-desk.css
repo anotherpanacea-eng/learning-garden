@@ -17,4 +17,4 @@
 .measure-history nav span{padding:.5rem}.measuring-desk .speech-controls{position:static;max-width:100%;width:100%;margin:.5rem 0}
 .measuring-desk :focus-visible{outline:3px solid #cf802b;outline-offset:3px}
 @media(max-width:600px){.measure-reading-grid,.measure-readings{grid-template-columns:1fr}.measure-reading-card:nth-child(3){grid-column:auto}.measure-tabs{gap:.25rem}.measure-tabs button{padding:.4rem;font-size:.9rem}.measure-actions button{width:100%}}
-@media print{.measuring-desk nav,.measuring-desk button,.measuring-desk>a,.measuring-desk .measure-history,.measuring-desk .measure-support,.measuring-desk [data-measure-help]{display:none!important}.measuring-desk{border:0;max-width:100%}.measure-method-fold{display:block}}
+@media print{.measuring-desk nav,.measuring-desk button,.measuring-desk>a,.measuring-desk .measure-turn,.measuring-desk .measure-history,.measuring-desk .measure-support,.measuring-desk .speech-controls,.measuring-desk [data-measure-help],.measuring-desk #measure-status{display:none!important}.measuring-desk{border:0;max-width:100%}.measure-method-fold{display:block}}
