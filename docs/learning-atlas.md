@@ -10,14 +10,14 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 139 explicit current references across 74 unique source topics: authored question references, scoped practice or supplied explanations. The other 1516 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 142 explicit current references across 75 unique source topics: authored question references, scoped practice or supplied explanations. The other 1515 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
 | Source subject | Topics | Topics with any declared link | Not yet mapped |
 | --- | --- | --- | --- |
 | Computing | 21 | 1 | 20 |
-| English | 286 | 9 | 277 |
+| English | 286 | 10 | 276 |
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
@@ -79,6 +79,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Fair Test Bench (`#workshop/fair`, local build) | experiment, read | Choose both setups in the original finite ramp model; distinguish question-relevant, wrong-factor, identical and confounded pairs; reveal up to three examples per side, inspect repeats and keep an ungraded claim or exact note. Authored model comparison practice only; no physical investigation, causal-proof, independent measurement or mastery claim. |
 | Market Day Coin Counter (`#workshop/coins`, local build) | allocate, build | Four supplied US-cent denominations, count versus value, conserved exchanges and two alternative exact payments across eight pretend stall requests. Live mats and historical recorded checks stay separate. A supported US-cent adaptation; no unlabelled real-coin recognition, UK notation, dollars, change, budgeting, scarcity or monetary Café economy. |
 | Cartographer’s Table (`#workshop/maps`, local build) | compose, build | Freely place four keyed landmarks on a supplied0–5 intersection grid; read horizontal-first coordinates and compose two adjacent orthogonal routes. Count travelled intervals in fictional model metres, including retraced segments; compare frozen checks separately from revised maps. Supported schematic practice only; no real geography, surveying, physical scale, rates, independent axis construction or full coordinate/geometry attainment. |
+| Two Windows (`#workshop/windows`, local build) | read, compose | Three original fictional events with two tellers and freely chosen short/long passages. Distinguish explicit, inferred, contradicted and missing details across both accounts, select supporting lines, and choose a supplied revision for a particular reader. Optional exact own words remain ungraded; no decoding, independent writing, general narrator reliability or historical corroboration claim. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -102,7 +103,7 @@ These are optional authoring paths, not prerequisite edges or a compulsory child
 | 4 | [Willow messages and map-making](specs/40-changing-letters.md) | Extend compose/execute/revise | Implemented: a continuing twelve-letter library with different readers, paired details, purpose-aware revisions and voluntary suggestions; frozen drafts, first-kept evidence and familiar rereading remain separate. Map legend, direction and scale, broader composition and independent writing observation remain future work. |
 | 5 | [Travelers’ Archive](specs/24-travelers-archive.md) | New historical evidence game; reuse read/infer/support and search | Compare two short accounts or artifacts, place an event on a timeline/map, explain what each source can and cannot tell us. History currently has no declared learning activity references; a story setting alone does not teach historical inquiry. |
 | 6 | Sound and Light Studio | New create/perform/reflect mode, with experiment | Change a sound or shadow, measure a pattern, make a short rhythm or light composition and revise it. Waves/sound/light and creative music/art need auditory/spatial creation, not only text questions. Recording would need its own privacy decision. |
-| 7 | [Story Loft and community circle](specs/06-story-loft.md) | New collaborative story/creation home; reuse read/compose/create | Puppet theatre (specs 36–37) supports optional dialogue and one to twelve scenes. Paired-perspective reading and community-circle conversations remain later scope. Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices. |
+| 7 | [Story Loft and community circle](specs/06-story-loft.md) | New collaborative story/creation home; reuse read/compose/create | Puppet theatre (specs36–37) supports optional dialogue and one to twelve scenes. Two Windows (spec59) adds three original paired-fiction events and supplied evidence/message work. Broader retelling, poetry and community-circle conversations remain later scope. Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices. |
 
 These priorities are design recommendations, not a required learning sequence. Existing planned specs still need their own review before build. Sound review, real-world investigation and human conversation cannot be replaced by more procedural text variants.
 
@@ -126,7 +127,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | English / Grammar & Punctuation | 75 | 0 | Compose · execute · revise; Read · infer · support |
 | English / Handwriting & Transcription | 5 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Phonics & Word Reading | 23 | 1 | Build · transform · relate; Create · perform · reflect |
-| English / Reading Comprehension | 72 | 2 | Read · infer · support; Search · inspect · compare |
+| English / Reading Comprehension | 72 | 3 | Read · infer · support; Search · inspect · compare |
 | English / Speaking & Listening | 21 | 0 | Read · infer · support; Create · perform · reflect |
 | English / Spelling & Word Study | 24 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Vocabulary | 21 | 0 | Read · infer · support; Search · inspect · compare |
@@ -321,6 +322,9 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Numbers on a number line](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_oDlduFnemk) | scoped-practice / Cartographer’s Table (local build) / [source](../dist/cartographer-ui.mjs) | Supplied perpendicular axes with origin(0,0), across-first/up-second coordinate labels and a(4,2) versus(2,4) talking invitation. The bundled generic title describes a coordinate system; no independent axis construction or wider attainment. |
 | [Plotting points in the first quadrant](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_snlqRCiA1R) | scoped-practice / Cartographer’s Table (local build) / [source](../dist/cartographer-ui.mjs) | Author fictional landmark positions and interpret two route endpoints on a bounded first-quadrant point grid. No time/distance data graph, negative coordinates or physical map survey. |
 | [Measuring length (age 6+)](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_cqSf213hSa) | scoped-practice / Cartographer’s Table (local build) / [source](../dist/cartographer-ui.mjs) | Count every travelled unit segment, including retracing, with1 fictional model metre per interval; distinguish six point markers from five intervals. No physical ruler or real-object measurement claim. |
+| [Narrator's Point of View](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_E_OryWIYkn) | scoped-practice / Two Windows (local build) / [source](../dist/two-windows-ui.mjs) | Compare two original fictional tellers with different access to one event. Noticing, time and visibility change available details; no first/third-person classification, authorial intent or general reliability attainment. |
+| [Inference vs Explicit Meaning](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_lp3qyEujIv) | scoped-practice / Two Windows (local build) / [source](../dist/two-windows-ui.mjs) | Classify supplied statements across both fictional accounts, combining authored supporting line sets. Distinguish inference, explicit contradiction and missing information; supplied selections do not establish independent reading or general evidence evaluation. |
+| [Responding to Writing Feedback](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OyOYHlZ2_T) | scoped-practice / Two Windows (local build) / [source](../dist/two-windows-ui.mjs) | Choose between supplied revisions in response to a fictional reader’s specific question. Exact own words can be kept for a human reader but are ungraded; no claim of independent revision or broad writing-feedback proficiency. |
 
 ## Sources, licensing and maintenance
 

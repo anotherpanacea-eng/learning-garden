@@ -595,6 +595,17 @@
       ],
       "route": "#workshop/maps",
       "scope": "Freely place four keyed landmarks on a supplied0–5 intersection grid; read horizontal-first coordinates and compose two adjacent orthogonal routes. Count travelled intervals in fictional model metres, including retraced segments; compare frozen checks separately from revised maps. Supported schematic practice only; no real geography, surveying, physical scale, rates, independent axis construction or full coordinate/geometry attainment."
+    },
+    {
+      "id": "two-windows",
+      "name": "Two Windows",
+      "status": "built-local",
+      "patterns": [
+        "read",
+        "compose"
+      ],
+      "route": "#workshop/windows",
+      "scope": "Three original fictional events with two tellers and freely chosen short/long passages. Distinguish explicit, inferred, contradicted and missing details across both accounts, select supporting lines, and choose a supplied revision for a particular reader. Optional exact own words remain ungraded; no decoding, independent writing, general narrator reliability or historical corroboration claim."
     }
   ],
   "manualReferences": [
@@ -1143,6 +1154,27 @@
       "kind": "scoped-practice",
       "source": "dist/cartographer-ui.mjs",
       "scope": "Count every travelled unit segment, including retracing, with1 fictional model metre per interval; distinguish six point markers from five intervals. No physical ruler or real-object measurement claim."
+    },
+    {
+      "game": "two-windows",
+      "topicId": "mt_E_OryWIYkn",
+      "kind": "scoped-practice",
+      "source": "dist/two-windows-ui.mjs",
+      "scope": "Compare two original fictional tellers with different access to one event. Noticing, time and visibility change available details; no first/third-person classification, authorial intent or general reliability attainment."
+    },
+    {
+      "game": "two-windows",
+      "topicId": "mt_lp3qyEujIv",
+      "kind": "scoped-practice",
+      "source": "dist/two-windows-ui.mjs",
+      "scope": "Classify supplied statements across both fictional accounts, combining authored supporting line sets. Distinguish inference, explicit contradiction and missing information; supplied selections do not establish independent reading or general evidence evaluation."
+    },
+    {
+      "game": "two-windows",
+      "topicId": "mt_OyOYHlZ2_T",
+      "kind": "scoped-practice",
+      "source": "dist/two-windows-ui.mjs",
+      "scope": "Choose between supplied revisions in response to a fictional reader’s specific question. Exact own words can be kept for a human reader but are ungraded; no claim of independent revision or broad writing-feedback proficiency."
     }
   ],
   "increments": [
@@ -1199,7 +1231,7 @@
       "name": "Story Loft and community circle",
       "move": "New collaborative story/creation home; reuse read/compose/create",
       "spec": "docs/specs/06-story-loft.md",
-      "first": "Puppet theatre (specs 36–37) supports optional dialogue and one to twelve scenes. Paired-perspective reading and community-circle conversations remain later scope.",
+      "first": "Puppet theatre (specs36–37) supports optional dialogue and one to twelve scenes. Two Windows (spec59) adds three original paired-fiction events and supplied evidence/message work. Broader retelling, poetry and community-circle conversations remain later scope.",
       "gap": "Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices."
     }
   ],
