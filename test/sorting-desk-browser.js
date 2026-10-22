@@ -1,0 +1,30 @@
+// Local synthetic browser probe; no external service or learner data.
+const assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs/promises');
+(async()=>{
+ const load=f=>import(require('node:url').pathToFileURL(path.resolve(__dirname,'../dist',f)).href),{freshState}=await load('core.mjs'),{initializeExplorerState,prepareProgressImport}=await load('progress-transfer.mjs');
+ const pw=await import(process.env.PLAYWRIGHT_MODULE||'playwright'),{chromium}=pw.default||pw,browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
+ const base=process.env.SORTING_TEST_URL||'http://127.0.0.1:8064/',stored=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('number-garden-v1:explorer-1'))),errors=[];let assertions=0;
+ const eq=(a,b,m)=>{assert.deepEqual(a,b,m);assertions++;},ok=(v,m)=>{assert.ok(v,m);assertions++;};
+ for(const width of [320,820]){
+  const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;
+  const ctx=await browser.newContext({viewport:{width,height:950},hasTouch:true,acceptDownloads:true}),p=await ctx.newPage();p.on('pageerror',e=>errors.push(String(e)));
+  await p.addInitScript(s=>{if(!localStorage.getItem('sorting-seeded')){localStorage.setItem('number-garden-v1',JSON.stringify(s));localStorage.setItem('sorting-seeded','yes');}},s);
+  await p.goto(new URL('#post/sorting',base).href);await p.locator('[data-sorting-root]').waitFor();eq((await stored(p)).sortingDesk,undefined,'view allocates nothing');
+  await p.locator('[data-sorting-start]').click();eq(await p.evaluate(()=>document.activeElement.id),'sorting-card-title');eq((await stored(p)).postOffice,s.postOffice,'Post Office stays unchanged on start');
+  await p.locator('[data-sorting-program="condition"]').selectOption('wrap-blue');eq((await stored(p)).sortingDesk.program,{condition:'wrap-blue',then:null,else:null});ok(await p.locator('[data-sorting-step]').isDisabled(),'partial rule cannot step');
+  await p.reload();await p.locator('[data-sorting-root]').waitFor();eq((await stored(p)).sortingDesk.program,{condition:'wrap-blue',then:null,else:null},'partial choice persists after reload');
+  await p.locator('[data-sorting-program="then"]').selectOption('lantern');await p.locator('[data-sorting-program="else"]').selectOption('leaf');
+  await p.locator('[data-sorting-predict="lantern"]').click();await p.locator('[data-sorting-step]').click();eq((await stored(p)).sortingDesk.phase,'condition');eq(await p.evaluate(()=>document.activeElement.id),'sorting-trace');ok(await p.locator('#sorting-trace').innerText().then(x=>x.includes('Yes')));
+  eq(await p.locator('[data-sorting-predict]').count(),0,'prediction cannot be edited after condition disclosure');await p.locator('[data-sorting-step]').click();eq((await stored(p)).sortingDesk.checks[0].actual,'lantern');
+  await p.locator('[data-sorting-keep]').click();eq((await stored(p)).sortingDesk.kept.check.id,1);ok(await p.locator('.sorting-history').evaluate(x=>x.open),'kept run made visible');
+  await p.locator('[data-sorting-parcel="star-yellow"]').click();await p.locator('[data-sorting-step]').click();await p.locator('[data-sorting-step]').click();eq((await stored(p)).sortingDesk.checks[1].matches,false,'contrasting card reveals color-rule mismatch');eq(await p.evaluate(()=>document.activeElement.id),'sorting-trace','result focus follows explicit step');ok(await p.locator('.skip-link').evaluate(x=>getComputedStyle(x).top==='-100px'),'skip link stays offscreen when result has focus');eq((await stored(p)).sortingDesk.kept.check.id,1,'kept run unchanged');if(process.env.SORTING_ARTIFACTS)await p.screenshot({path:path.join(process.env.SORTING_ARTIFACTS,`sorting-result-${width}.png`),fullPage:true});
+  await p.locator('[data-sorting-program="condition"]').selectOption('stamp-star');eq((await stored(p)).sortingDesk.phase,'ready');eq((await stored(p)).sortingDesk.prediction,null);await p.locator('[data-sorting-step]').focus();await p.keyboard.press('Space');eq((await stored(p)).sortingDesk.phase,'condition','native keyboard step');
+  await p.locator('[data-sorting-restart]').click();eq((await stored(p)).sortingDesk.phase,'ready');await p.locator('.sorting-help summary').click();await p.locator('[data-sorting-help]').click();ok(await p.locator('#sorting-help-text').isVisible());await p.locator('[data-sorting-together]').click();eq((await stored(p)).sortingDesk.support.together,true);
+  const layout=await p.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth+1,targets:[...document.querySelectorAll('[data-sorting-root] button,[data-sorting-root] select,[data-sorting-root] summary')].filter(x=>x.getClientRects().length).map(x=>({label:x.textContent.trim().slice(0,25),width:x.getBoundingClientRect().width,height:x.getBoundingClientRect().height}))}));ok(!layout.overflow,'no horizontal overflow');ok(layout.targets.every(x=>x.height>=44&&x.width>=44),`44px visible controls at ${width}`);
+  await p.goto(new URL('#post/choose',base).href);ok(await p.locator('a[href="#post/sorting"]').count());eq((await stored(p)).postOffice,s.postOffice,'Post Office still untouched after sorting runs');
+  await p.goto(new URL('#notes',base).href);await p.locator('#download').waitFor();const pending=p.waitForEvent('download');await p.locator('#download').click();const file=await pending,report=JSON.parse(await fs.readFile(await file.path(),'utf8'));ok(prepareProgressImport(JSON.stringify(report)).ok,'actual downloaded report reimports');eq(report.sortingDesk,(await stored(p)).sortingDesk);eq(report.title,'After the Storm: observations');
+  if(process.env.SORTING_ARTIFACTS){await p.goto(new URL('#post/sorting',base).href);await p.screenshot({path:path.join(process.env.SORTING_ARTIFACTS,`sorting-${width}.png`),fullPage:true});}
+  await ctx.close();
+ }
+ eq(errors,[],'no page errors');await browser.close();console.log(`${assertions} Willow Sorting Desk Chrome assertions passed.`);
+})().catch(e=>{console.error(e);process.exit(1);});

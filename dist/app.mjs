@@ -1,4 +1,5 @@
 import {tenthsPage,tenthsEntry,bindTenths} from './tenths-ui.mjs';
+import {sortingPage,bindSorting} from './sorting-desk-ui.mjs';
 import {cafeStartPanel,bindCafeStart} from './cafe-start-ui.mjs';
 import {noteInstructionEntry} from './instruction-core.mjs';
 import {willowPathPage,willowPathEntry,bindWillowPath,resetWillowVoice} from './willow-path-ui.mjs';
@@ -224,7 +225,7 @@ function render(){
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters',instructionBench=['post','loft'].includes(root)&&slug==='instructions';
   const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return',joiningBench=root==='numbers'&&slug==='join',tenthsBench=root==='numbers'&&slug==='tenths';
-  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',batchBench=root==='cafe'&&slug==='batches',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
+  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',batchBench=root==='cafe'&&slug==='batches',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
   const navRoot=['paris','french','archive'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
@@ -241,6 +242,7 @@ function render(){
   else if(returnBench){const view=renderReturning(state,detail);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteReturningDisplay(state,view.examples,live))save();}
   else if(root==='numbers'&&slug==='path')html=willowPathPage(state);
   else if(tenthsBench)html=tenthsPage(state);
+  else if(sortingBench)html=sortingPage(state);
   else if(joiningBench){const view=renderJoiningOrders(state);html=view.html;joiningExamples=view.examples;exposeStoryFacts({facts:view.facts});}
   else if(fractionBench)html=renderFractionTrail(state).html+tenthsEntry();
   else if(recipeBench)html=measuringRecipesPage(state)+fieldKitEntry('jug');
@@ -306,8 +308,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft');
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
@@ -379,6 +381,7 @@ function bindBroadExtras(){
 }
 function bind(){
  bindTenths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
+ bindSorting(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindCafeStart(state,{save,render,focus:focusElement});
  bindWillowPath(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
