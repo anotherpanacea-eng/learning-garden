@@ -11,3 +11,5 @@ A subsequent root status refresh records PR73’s separately approved exposure r
 Final root follow-up confirmed the Town supplied-fact gap raised during composition review; the roadmap now records that release hold. It also records the exact locally tested composition and excludes Joining Orders/text branches from that claim.
 
 At the final checkpoint, Town’s spec fold is approved at `cb178b3` but its runtime remains unrepaired. The PR66 choice/index fix is independently approved at `5ddf222`; this does not clear the whole text branch. Integration draft PR76 preserves the tested composition with its hold.
+
+The resumed checkpoint now records merged integration PR76 and Café PR78, reviewed Library/Returning runtime drafts, and the next two authoring slices. An independent internal review of this status rewrite is required before the updated roadmap merges. Earlier conditional approval does not certify these newer status statements.
