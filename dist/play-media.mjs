@@ -42,7 +42,7 @@ export function chooseLocalVoice(voices,preferred='',language='en'){
 }
 export function stopSpeech(){
  if(activeSpeech){activeSpeech.onend=null;activeSpeech.onerror=null;activeSpeech=null;
-  document.querySelectorAll('.speech-playing').forEach(controls=>{controls.classList.remove('speech-playing');controls.querySelector('[data-speech-status]').textContent='Voice stopped. Tap Hear to listen again.';});
+  document.querySelectorAll('.speech-playing').forEach(controls=>{controls.classList.remove('speech-playing');controls.querySelector('[data-speech-status]').textContent='Voice stopped. Tap a Hear button to listen again.';});
  }
  try{window.speechSynthesis?.cancel();}catch{}
 }
@@ -66,7 +66,7 @@ export function bindSpeech(){
   if(missing){const option=document.createElement('option');option.value=selectedVoice;option.textContent='Saved voice (unavailable in this browser)';voiceSelect.append(option);}
   for(const voice of available){const option=document.createElement('option');option.value=voiceKey(voice);option.textContent=`${voice.name} (${voice.lang})${voice.default?' (device default)':''}`;voiceSelect.append(option);}
   voiceSelect.value=exact||missing?selectedVoice:'';
-  availability.textContent=missing?`Your saved voice is unavailable for ${languageName()} in this browser. Refresh after voices load, or choose another local voice or Automatic. No replacement will play silently.`:chosen?`${selectedVoice&&!exact?'Your saved choice is for the other language. This passage uses automatic local speech. ':''}${languageName()} voice to preview: ${chosen.name}.`:`${otherLanguage?'Your saved choice is for the other language and is kept. ':''}No local ${languageName()} voices are available yet. Refresh after voices load, or read together.`;
+  availability.textContent=missing?`Your saved voice is unavailable for ${languageName()} in this browser. Refresh after voices load, or choose another local voice or Automatic. We won’t switch to another voice without telling you.`:chosen?`${selectedVoice&&!exact?'Your saved choice is for the other language. This passage uses automatic local speech. ':''}${languageName()} voice to preview: ${chosen.name}.`:`${otherLanguage?'Your saved choice is for the other language and is kept. ':''}No local ${languageName()} voices are available yet. Refresh after voices load, or read together.`;
   voiceSelect.disabled=!available.length&&!selectedVoice;controls.querySelector('[data-preview-voice]').disabled=!chosen;
   return chosen;
  }
@@ -87,7 +87,7 @@ export function bindSpeech(){
  }
  controls.querySelector('[data-preview-voice]').onclick=()=>speak(activeLanguage==='fr'?'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?':'Welcome to the garden. What shall we discover together today?');
  refreshVoices();
- const voicesChanged=()=>{const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap Hear or Try this voice to listen.':availability.textContent;};
+ const voicesChanged=()=>{const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap a Hear button or Try this voice to listen.':availability.textContent;};
  if(speech?.addEventListener){speech.addEventListener('voiceschanged',voicesChanged);removeVoiceListener=()=>speech.removeEventListener('voiceschanged',voicesChanged);}
  for(const button of buttons)button.addEventListener('click',()=>{
   controls.hidden=false;button.insertAdjacentElement('afterend',controls);speak(button.dataset.speak,button.dataset.speakLang||'en');

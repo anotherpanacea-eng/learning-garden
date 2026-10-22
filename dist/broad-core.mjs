@@ -207,18 +207,18 @@ export function suggestActivity(state, id, graph) {
   const a = areaById(id), start=state.broad.trails[id]?.observationStart||0;
   const obs = state.broad.observations.slice(start).filter(o => o.area===id && o.status !== 'skipped');
   const last = obs.at(-1);
-  if (!last) return {item:a.activities[1], reason:'A new place to explore. No check-in is needed.'};
+  if (!last) return {item:a.activities[1], reason:'A new place to explore. No garden walk is needed first.',childReason:'A new place to explore. Try this one.'};
   const items = areas.flatMap(x => x.activities);
   const edges = graph?.dependencies || [], names = new Map((graph?.topics || []).map(t => [t.id,t.name]));
   const needsSupport = !last.correct || last.supported || !last.firstCorrect;
   if (needsSupport) {
     const edge = edges.find(e => e.topicId === last.topicId && items.some(q => q.topicId === e.prerequisiteId));
     if (edge) return {item:items.find(q => q.topicId === edge.prerequisiteId), edge,
-      reason:`Marble connects ${names.get(edge.prerequisiteId)} as a foundation for ${names.get(last.topicId)}. Try a smaller related idea together.`};
-    return {item:a.activities[0],reason:'That example needed another look. A smaller, visual activity is one possible next step.'};
+      reason:`Marble connects ${names.get(edge.prerequisiteId)} as a foundation for ${names.get(last.topicId)}. Try a smaller related idea together.`,childReason:'Next, try a smaller idea with Pip.'};
+    return {item:a.activities[0],reason:'That example needed another look. A smaller, visual activity is one possible next step.',childReason:'Next, try a smaller idea with Pip.'};
   }
   const edge = edges.find(e => e.prerequisiteId === last.topicId && items.some(q => q.topicId === e.topicId));
   if (edge) return {item:items.find(q => q.topicId === edge.topicId),edge,
-    reason:`Marble links ${names.get(last.topicId)} to ${names.get(edge.topicId)}. This could be an interesting next connection.`};
-  return {item:a.activities[2],reason:'That example was answered independently. A different challenge could be interesting; it is a suggestion, not a level judgment.'};
+    reason:`Marble links ${names.get(last.topicId)} to ${names.get(edge.topicId)}. This could be an interesting next connection.`,childReason:'Ready for something new? Try this one.'};
+  return {item:a.activities[2],reason:'That example was answered independently. A different challenge could be interesting; it is a suggestion, not a level judgment.',childReason:'Ready for something new? Try this one.'};
 }

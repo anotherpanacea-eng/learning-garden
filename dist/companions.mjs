@@ -2,12 +2,12 @@
 export const guides=[
  {id:'mira',name:'Mira',pronouns:'she/her',description:'A young woman with a sketchbook full of questions.',hello:'I brought my sketchbook. The storm seems to have brought us a mystery.',color:'#da8d8d'},
  {id:'rowan',name:'Rowan',pronouns:'he/him',description:'A young man who likes making things and changing his mind.',hello:'I have a pencil, three ideas, and absolutely no idea where my other sock went.',color:'#abc4da'},
- {id:'ari',name:'Ari',pronouns:'they/them',description:'A young explorer who collects stories and surprising ideas.',hello:'Every good discovery starts with noticing something. What caught your eye?',color:'#bdb3d6'}
+ {id:'ari',name:'Ari',pronouns:'they/them',description:'Keeps a pocket full of odd pebbles and odder questions.',hello:'Every good discovery starts with noticing something. What caught your eye?',color:'#bdb3d6'}
 ];
 export const avatars=[
- {id:'fern',name:'Fern explorer',description:'Girl explorer',kind:'girl',skin:'#d69d78',hair:'#392c28',coat:'#e9b84a'},
- {id:'reed',name:'Reed explorer',description:'Boy explorer',kind:'boy',skin:'#a96f4c',hair:'#262e2a',coat:'#abc4da'},
- {id:'sky',name:'Sky explorer',description:'Gender-neutral explorer',kind:'neutral',skin:'#efc4a3',hair:'#724938',coat:'#bdb3d6'}
+ {id:'fern',name:'Fern',description:'A girl in a gold coat',kind:'girl',skin:'#d69d78',hair:'#392c28',coat:'#e9b84a'},
+ {id:'reed',name:'Reed',description:'A boy in a blue coat',kind:'boy',skin:'#a96f4c',hair:'#262e2a',coat:'#abc4da'},
+ {id:'sky',name:'Sky',description:'A child in a lilac coat',kind:'neutral',skin:'#efc4a3',hair:'#724938',coat:'#bdb3d6'}
 ];
 const hair=(kind,color)=>kind==='mira'||kind==='girl'?`<path d="M33 63Q19 28 49 18Q83 8 89 46L91 93H75L70 49L39 48L39 94H24Z" fill="${color}"/><path d="M30 65l-4 33m53-33l7 33" stroke="${color}" stroke-width="12" stroke-linecap="round"/>`:kind==='rowan'||kind==='boy'?`<path d="M30 56Q14 23 44 21Q60 7 77 25Q99 25 86 58L74 37L38 44Z" fill="${color}"/><g fill="${color}"><circle cx="35" cy="29" r="12"/><circle cx="52" cy="23" r="12"/><circle cx="70" cy="27" r="12"/><circle cx="81" cy="36" r="10"/></g>`:`<path d="M27 58Q13 31 39 25Q58 6 78 28Q100 37 83 65L75 40L59 48L42 40L34 65Z" fill="${color}"/>`;
 export function portrait(id,small=false){

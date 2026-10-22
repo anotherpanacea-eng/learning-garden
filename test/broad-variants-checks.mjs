@@ -21,7 +21,7 @@ case 'missingSide':return (2*(p.length+p.width)-2*p.length)/2;
 case 'missing':return p.total-p.known;
 case 'story':return p.sign===1?p.start+p.first-p.second:p.start-p.first+p.second;
 case 'fractionName':return q.choices.indexOf(`One ${{2:'half',3:'third',4:'quarter',5:'fifth'}[p.parts]}`);
-case 'shapeName':return q.choices.indexOf({triangle:'equilateral triangle',rectangle:'rectangle that is not a square',square:'square',hexagon:'regular hexagon'}[p.shape]);
+case 'shapeName':return q.choices.indexOf({triangle:'triangle',rectangle:'long rectangle',square:'square',hexagon:'hexagon'}[p.shape]);
 case 'turn':{let i=0;for(let t=0;t<p.turns;t++)i=(i+p.direction+4)%4;return q.choices.indexOf(['North','East','South','West'][i]);}
 case 'claim':return q.choices.indexOf(`An extra dot in each row adds ${p.rows}, making ${p.rows*p.cols+p.rows}.`);
 case 'double':return q.choices.indexOf(`Each original row gains a matching row: ${p.rows*p.cols} more dots, making ${2*p.rows*p.cols}.`);
