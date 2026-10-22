@@ -17,3 +17,9 @@ The resumed checkpoint now records merged integration PR76 and Café PR78, revie
 ## Resumed checkpoint review
 
 A separate internal reviewer inspected roadmap `07dbdd325b293d698419517b3f1f15a49bbc2849` against main `68777ed`. One P2 finding required the queue to name the final independent Claude release gate for internal-only PR79 and PR80. The root folded that wording and updated Returning integration status after its separate seam clearance. No other P1/P2 was found. The reviewer verified main ancestry, atlas counts and all relative roadmap links. This is an internal status review, not Claude clearance for the new runtime candidates. Production remains unverified and deployment deferred.
+
+## Later draft-queue checkpoint
+
+The root independently reviewed roadmap `fc6178e217b57f098f5e59344b3beecc5168b9a5` and found no P1/P2 status or link issue. That draft records reviewed PR89 Seed Stall, PR90 Lantern Line and PR91 Food-link Fork Board, while keeping Puppet Notice Printer spec90 and subtraction-comparison spec91 in authoring. It preserves main `68777ed`, the 165/88/1,590 atlas counts, the final Claude release gate and the deployment hold.
+
+A separate focused check then compared the final PR92 link/count fold against public draft PR92 at `affddab477169ed895413f0d3d0830e76fb74036`, its PR body and `docs/reviews/2026-10-22-spiral-integration-review.md`. They agree on reviewed runtime `acf01b0`, 132 source suites, 435 activity Chrome assertions and 40 combined-notebook Chrome assertions. PR92 remains a draft; this link/status check is not a new runtime review or final Claude clearance.
