@@ -10,7 +10,7 @@ const samePoint=(a,b)=>!!a&&!!b&&a.x===b.x&&a.y===b.y;
 export const validMapPoint=p=>object(p)&&bounded(p.x,5)&&bounded(p.y,5);
 export const emptyMapPlaces=()=>Object.fromEntries(marks.map(m=>[m.id,null]));
 const validCommands=x=>Array.isArray(x)&&x.length<=12&&x.every(id=>directions.some(d=>d.id===id));
-const validPlaces=x=>object(x)&&marks.every(m=>x[m.id]===null||validMapPoint(x[m.id]))&&new Set(marks.filter(m=>x[m.id]).map(m=>`${x[m.id].x},${x[m.id].y}`)).size===marks.filter(m=>x[m.id]).length;
+const validPlaces=x=>object(x)&&Object.entries(x).every(([id,p])=>known(id)&&(p===null||validMapPoint(p)))&&new Set(Object.values(x).filter(Boolean).map(p=>`${p.x},${p.y}`)).size===Object.values(x).filter(Boolean).length;
 // Stored result fields are checked for readable shapes/ranges, never regraded on load.
 const validResult=x=>object(x)&&validCommands(x.commands)&&Array.isArray(x.points)&&x.points.length>=1&&x.points.length<=13&&x.points.every(validMapPoint)&&bounded(x.steps,12)&&bounded(x.distance,12)&&(x.blocked===null||Number.isInteger(x.blocked)&&x.blocked>=1&&x.blocked<=12)&&typeof x.arrived==='boolean';
 const validCheck=x=>object(x)&&validPlaces(x.places)&&known(x.from)&&known(x.to)&&x.from!==x.to&&validResult(x.a)&&validResult(x.b)&&['shorter','equal','longer'].includes(x.relation)&&typeof x.bothArrived==='boolean'&&typeof x.different==='boolean'&&(x.job===undefined||validMapJobCheck(x.job));
@@ -89,4 +89,4 @@ export function checkMapRoutes(state){
  if(r.job)check.job={source:structuredClone(r.job.source),a:mapJobFacts(r.job.source,a),b:mapJobFacts(r.job.source,b)};
  r.checks.push(check);r.checks=r.checks.slice(-8);return check;
 }
-export function mapCheckMatches(r){const c=r.checks.at(-1);return !!c&&((r.job===undefined&&c.job===undefined)||(!!r.job&&!!c.job&&JSON.stringify(r.job.source)===JSON.stringify(c.job.source)))&&r.from===c.from&&r.to===c.to&&marks.every(m=>r.places[m.id]===null&&c.places[m.id]===null||samePoint(r.places[m.id],c.places[m.id]))&&r.a.join(',')===c.a.commands.join(',')&&r.b.join(',')===c.b.commands.join(',');}
+export function mapCheckMatches(r){const c=r.checks.at(-1);return !!c&&((r.job===undefined&&c.job===undefined)||(!!r.job&&!!c.job&&JSON.stringify(r.job.source)===JSON.stringify(c.job.source)))&&r.from===c.from&&r.to===c.to&&marks.every(m=>r.places[m.id]==null&&c.places[m.id]==null||samePoint(r.places[m.id],c.places[m.id]))&&r.a.join(',')===c.a.commands.join(',')&&r.b.join(',')===c.b.commands.join(',');}

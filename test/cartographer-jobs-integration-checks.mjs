@@ -1,3 +1,4 @@
+import {marks} from '../dist/cartographer-content.mjs';
 import assert from 'node:assert/strict';
 import {freshState,restoreStateResult,STORAGE_KEY} from '../dist/core.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
@@ -36,5 +37,13 @@ for(const job of [null,{version:99,original:'<img src=x onerror="bad()">'},{vers
 }
 {
  const sample=structuredClone(s),round=structuredClone(r);sample.cartographer.rounds=Array.from({length:13},(_,i)=>({...structuredClone(round),id:i+1}));sample.cartographer.current=13;sample.cartographer.nextId=14;const before=structuredClone(sample.cartographer),html=cartographerPage(sample);ok(html.includes('removes the oldest 2 readable maps'),'job start exact oversized-import eviction disclosure');eq(sample.cartographer,before);startMapJob(sample,'flowers');eq(mapView(sample).rounds.map(r=>r.id),Array.from({length:12},(_,i)=>i+3));
+}
+{
+ const sample=structuredClone(s),before=structuredClone(sample.cartographer);marks.push({id:'library',name:'Library',symbol:'L'});
+ try{
+  eq(mapView(sample).rounds.length,before.rounds.length,'free and supplied job sheets survive catalogue growth');
+  for(const page of ['map','route','compare']){setMapPage(sample,page);const saved=structuredClone(sample.cartographer),html=cartographerPage(sample),notes=cartographerNotes(sample);ok(html.includes('Cartographer'));ok(notes.includes('Library')&&notes.includes('unplaced'));ok(!html.includes('undefined')&&!html.includes('NaN'),'job page safely reads missing point');eq(sample.cartographer,saved,'job page/notes retain original clues and outcomes');}
+  const imported=prepareProgressImport(JSON.stringify(sample));ok(imported.ok);eq(imported.state.cartographer,sample.cartographer,'actual job import remains exact with new catalogue entry');
+ }finally{marks.pop();}
 }
 console.log(`Cartographer jobs integration: ${n} assertions passed.`);
