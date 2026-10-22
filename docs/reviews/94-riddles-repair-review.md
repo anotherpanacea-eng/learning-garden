@@ -1,0 +1,9 @@
+# Riddles in the Hedge repair review
+
+The original PR95 draft at `fae53b95bc14b150e5f4696c9d75cb0804581bb9` had four substantive saved-work and interaction findings: a write could exceed the actual notes-report import limit, a saved card could be reinterpreted through today's answer key, detached controls could act later, and one malformed saved item could close readable siblings. The map and butterfly clues also needed narrower wording. These findings were repaired within the existing Riddles activity; no new persistence framework was added.
+
+The specification amendment at `ecb538cd348bd55ef194e72d186a5eb99be53bfe` received independent internal review with no remaining P1 or P2 before implementation. The independent implementation reviewer cleared exact runtime and test commit `495644ed6956ae3c778c37db8b2684819dd4252d` with no P1 or P2. The reviewer inspected the source, browser assertions and phone screenshot, and independently reran Riddles source, progress-transfer and Word Garden checks. This was an internal Codex review, not an external Claude or hosted-CI result.
+
+Builder checks on that candidate passed Riddles source checks, 88 progress-transfer checks, 1,676 Word Garden checks, syntax and diff checks, and 68 synthetic local Chrome assertions at phone and tablet widths. Browser coverage included actual notes file export/import, a save-off near-limit refusal, frozen card and raw-sibling retention, a canceled and used raw-card confirmation, stale route/explorer controls, focus and touch targets. Phone and tablet screenshots were inspected. The source tests exercise frozen wording and answer after a catalog change, the completed-current-to-log transition, and report-size refusal without mutation.
+
+Riddle picks remain informal play, not a reading assessment. Local Chrome checks do not establish physical-device or learning outcomes. Final PR publication, integration, hosted checks and deployment remain separate root-owned decisions.
