@@ -1,4 +1,4 @@
-// Proposed, unregistered authoring data for spec 95. All child-facing prose is original.
+// Reviewed local English reading pack for spec 95. All child-facing prose is original.
 // The passages are modern summaries of The Met's records, not ancient quotations.
 export const egyptWritingBookPack = {
   id:'egypt-writing-book',version:1,title:'A writing book at Lucie’s stall',

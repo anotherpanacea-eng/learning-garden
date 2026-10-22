@@ -3,6 +3,7 @@ import {frenchPlan} from './french-core.mjs';
 import {frenchLessons} from './french-content.mjs';
 import {orderEditor,orderResult} from './story-order-ui.mjs';
 import {parisDestinations,parisStories} from './paris-library.mjs';
+import {egyptWritingPhotos} from './egypt-writing-photos.mjs';
 import {parisPlan} from './paris-core.mjs';
 import {ORDER_PERMUTATIONS} from './paris-pack-core.mjs';
 import {hearButton} from './play-media.mjs';
@@ -33,11 +34,16 @@ function parisSketch(id){
  };
  return `<svg class="paris-destination-art" viewBox="0 0 200 150" aria-hidden="true" fill="none" stroke="#274e48" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">${art[id]||''}</svg>`;
 }
+const packSketch='<svg viewBox="0 0 180 160" aria-hidden="true"><rect x="18" y="24" width="144" height="116" rx="6" fill="#abc4da"/><path d="M18 24H162V61Q144 71 130 50V132H50V50Q36 72 18 61Z" fill="#ce777d"/><path d="M70 65Q84 81 97 65Q82 101 70 65Z" fill="#e9b84a"/><path d="M82 124L87 103L99 109L104 100L112 120L106 132H88Z" fill="#b97d51"/><path d="M88 129L66 121Q67 138 89 137" fill="#b97d51"/><circle cx="104" cy="118" r="2" fill="#183f39"/><path d="M14 142H166" stroke="#183f39" stroke-width="4"/></svg>';
 function packInvitations(state){
  return parisStories.filter(story=>story.packId).map(story=>{
-  const plan=parisPlan(state,story.destination,'auto',story.id);
-  return `<section class="paris-pack-invitation"><svg viewBox="0 0 180 160" aria-hidden="true"><rect x="18" y="24" width="144" height="116" rx="6" fill="#abc4da"/><path d="M18 24H162V61Q144 71 130 50V132H50V50Q36 72 18 61Z" fill="#ce777d"/><path d="M70 65Q84 81 97 65Q82 101 70 65Z" fill="#e9b84a"/><path d="M82 124L87 103L99 109L104 100L112 120L106 132H88Z" fill="#b97d51"/><path d="M88 129L66 121Q67 138 89 137" fill="#b97d51"/><circle cx="104" cy="118" r="2" fill="#183f39"/><path d="M14 142H166" stroke="#183f39" stroke-width="4"/></svg><div><p class="place-name">Another Paris story</p><h2>${esc(story.title)}</h2><p>${esc(story.invitation||'A new little errand is waiting. Read a story and find your way together.')}</p><label for="paris-pack-length-${story.id}">How much text for this story?</label><select id="paris-pack-length-${story.id}"><option value="auto">Suggested: ${{1:'short',2:'medium',3:'longer'}[plan.variant]}</option>${[1,2,3].map(n=>`<option value="${n}">${parisLengths[n]}</option>`).join('')}</select><button class="primary" data-paris-pack-story="${story.id}" data-paris-pack-place="${story.destination}">Visit this story</button></div></section>`;
+  const plan=parisPlan(state,story.destination,'auto',story.id),photo=egyptWritingPhotos[story.id];
+  const art=photo?`<figure class="egypt-photo"><img data-egypt-photo src="${esc(photo.src)}" alt="${esc(photo.alt)}" width="${photo.width}" height="${photo.height}"><div data-photo-fallback hidden>${packSketch}<p>${esc(photo.alt)} The museum photograph is unavailable. The passage remains here.</p></div><figcaption>${esc(photo.caption)} <a href="${esc(photo.href)}" target="_blank" rel="noopener">Museum record</a></figcaption></figure>`:packSketch;
+  return `<section class="paris-pack-invitation ${photo?'egypt-pack':''}">${art}<div><p class="place-name">${photo?'A real object in Lucie’s book':'Another Paris story'}</p><h2>${esc(story.title)}</h2><p>${esc(story.invitation||'A new little errand is waiting. Read a story and find your way together.')}</p><label for="paris-pack-length-${story.id}">How much text for this story?</label><select id="paris-pack-length-${story.id}"><option value="auto">Suggested: ${{1:'short',2:'medium',3:'longer'}[plan.variant]}</option>${[1,2,3].map(n=>`<option value="${n}">${parisLengths[n]}</option>`).join('')}</select><button class="primary" data-paris-pack-story="${story.id}" data-paris-pack-place="${story.destination}">Visit this story</button></div></section>`;
  }).join('');
+}
+export function bindEgyptPhotoFallback(root){
+ root.querySelectorAll('[data-egypt-photo]').forEach(img=>{const fallback=img.parentElement.querySelector('[data-photo-fallback]');const show=()=>{img.hidden=true;fallback.hidden=false;};img.addEventListener('error',show,{once:true});if(img.complete&&img.naturalWidth===0)show();});
 }
 function storyConnections(visit){
  const connections=isParisReadingVisit(visit)?parisVisitSource(visit)?.connections:visit.paris&&parisStories.find(s=>s.id===visit.paris.storyId)?.connections;

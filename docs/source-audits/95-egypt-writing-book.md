@@ -1,6 +1,6 @@
 # 95. Writing equipment from ancient Egypt: source and overlap audit
 
-Read-only authoring pass,2026-10-22. Supports [spec95](../specs/95-egypt-writing-book.md) and its [exact unregistered content](../specs/content/95-egypt-writing-book.mjs). Original prose, questions and fictional smaller examples; two public-domain museum photographs. No runtime installed or curriculum coverage asserted.
+Read-only authoring pass,2026-10-22. Supports [spec95](../specs/95-egypt-writing-book.md) and its [exact reviewed content](../../dist/packs/egypt-writing-book.mjs), moved unchanged into the implementation draft. Original prose, questions and fictional smaller examples; two public-domain museum photographs. No curriculum coverage asserted.
 
 ## Existing overlap and reuse
 

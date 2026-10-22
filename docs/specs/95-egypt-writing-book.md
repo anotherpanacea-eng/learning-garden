@@ -1,6 +1,6 @@
 # 95. A writing board in Lucie's Library
 
-Status: **content/specification draft, not installed, reviewed, merged or deployed.** This is one bounded ancient-world reading pack, not an Ancient Egypt course or a new assessment.
+Status: **content independently reviewed and installed in a local implementation draft; implementation review, merge and deployment remain open.** This is one bounded ancient-world reading pack, not an Ancient Egypt course or a new assessment.
 
 ## Purpose and existing home
 
@@ -10,7 +10,7 @@ Use the existing trusted local English Paris pack compiler, bookstall chooser, t
 
 ## Reviewed-content candidate
 
-The [complete proposed pack](content/95-egypt-writing-book.mjs) is unregistered authoring data. It holds all child-facing passage variants, four exact questions with choices and support, and four complete fictional smaller examples in the existing compiler format. Review and copy that exact finite data into `dist/packs` only after the content gate; this spec describes its constraints. Two stories, `egypt-reusable-board` and `egypt-writing-palette`, use destination `bookstall` in original `egypt-writing-book` pack version1. Each has two multiple-choice questions at each of three text lengths. All lengths contain every sentence needed by both questions. Short lengths are not decoding/age claims. The following core sentences and meanings must survive any shortening; longer variants can add the explanatory sentences specified here, not unreviewed historical facts.
+The [complete reviewed pack](../../dist/packs/egypt-writing-book.mjs) holds all child-facing passage variants, four exact questions with choices and support, and four complete fictional smaller examples in the existing compiler format. The identical content moved from the independently cleared authoring file into `dist/packs` before registration; this spec describes its constraints. Two stories, `egypt-reusable-board` and `egypt-writing-palette`, use destination `bookstall` in original `egypt-writing-book` pack version1. Each has two multiple-choice questions at each of three text lengths. All lengths contain every sentence needed by both questions. Short lengths are not decoding/age claims. The following core sentences and meanings must survive any shortening; longer variants can add the explanatory sentences specified here, not unreviewed historical facts.
 
 ### The board that could be used again
 
@@ -46,7 +46,7 @@ Question1: **According to the passage, what two things did scribes use palettes 
 
 Question2: **Which sentence keeps both parts of The Met's ink description?** Choices: **Red ink remains, while black ink is almost gone.**; **The record says nothing about red ink.**; **Black ink remains, while red ink is almost gone.** (fits). The alternatives reverse the two traces or leave out the stated red trace. Hint/explanation distinguish remaining traces from an unsupported claim about the past. Talk: **What can remaining ink tell us, and what can it not show?**
 
-The four complete fictional smaller examples in the linked authoring file use a reusable chalk label, a margin note stating a first try, pouch contents versus nearby objects, and two paint pots with different amounts left. They demonstrate locating the relevant sentence, reusing a surface, attributing a stated clue and preserving both details. They do not supply a live Egyptian answer or add historical facts. Use the existing `mc` pack format; `connections:[]`, with no atlas/count change.
+The four complete fictional smaller examples in the linked pack use a reusable chalk label, a margin note stating a first try, pouch contents versus nearby objects, and two paint pots with different amounts left. They demonstrate locating the relevant sentence, reusing a surface, attributing a stated clue and preserving both details. They do not supply a live Egyptian answer or add historical facts. Use the existing `mc` pack format; `connections:[]`, with no atlas/count change.
 
 ## Photographs and navigation
 

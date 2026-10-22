@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {compileParisPacks,cleanOrder,orderValue,ORDER_PERMUTATIONS} from '../dist/paris-pack-core.mjs';
 import {puppetPostPack} from '../dist/packs/puppet-post.mjs';
+import {egyptWritingBookPack} from '../dist/packs/egypt-writing-book.mjs';
 import {parisPacks} from '../dist/packs/index.mjs';
 import {parisStories,parisLibraryNodes,parisLibraryHelpers} from '../dist/paris-library.mjs';
 
@@ -107,7 +108,23 @@ rejects(p=>p.stories[0].connections.push(clone(p.stories[0].connections[0])),/du
     check(compileParisPacks([pack]).stories[0].connections[0].topicId===topicId,'Marble ID syntax preserves hyphens and underscores');
   }
 }
-check(parisPacks.length===2&&parisStories.length===8&&Object.keys(parisLibraryNodes).length===48,'two registered packs append to six original stories');
-check(parisStories.slice(0,6).every(s=>!s.packId)&&parisStories[6].id==='puppet-post'&&parisStories[7].id==='flood-almanac','legacy and reviewed pack story order stays stable');
-check(Object.keys(parisLibraryHelpers).length===48,'all generated and legacy tasks have helpers');
+const egyptBefore=JSON.stringify(egyptWritingBookPack),egyptCompiled=compileParisPacks([egyptWritingBookPack]);
+check(JSON.stringify(egyptWritingBookPack)===egyptBefore,'Egypt content compiles without changing its reviewed source');
+check(egyptWritingBookPack.stories.length===2&&Object.keys(egyptWritingBookPack.helpers).length===4,'two object stories and four distinct smaller examples');
+for(const story of egyptWritingBookPack.stories){
+ check(story.connections.length===0&&story.destination==='bookstall','historical object stays in the Library without new topic claim');
+ for(const variant of [1,2,3]){
+  const passage=story.passages[variant].join(' ');
+  check(passage.includes('The Met')&&passage.includes(story.id==='egypt-reusable-board'?'object 28.9.5':'object 10.176.62'),'every variant credits the exact object record');
+  check(passage.includes(story.id==='egypt-reusable-board'?'about 2030 BCE':'about 2030–1550 BCE'),'every variant preserves approximate date');
+  const first=egyptCompiled.nodes[`paris-explore-${story.id}-${variant}-1`],second=egyptCompiled.nodes[`paris-explore-${story.id}-${variant}-2`];
+  check(first.readingText.join(' ')===passage&&second.readingText.join(' ')===passage,'both questions use the same exact reviewed passage');
+  check(first.kind==='choice'&&second.kind==='choice'&&first.answer===story.questions[0].answer&&second.answer===story.questions[1].answer,'both fitting choices retain reviewed positions');
+  check(egyptCompiled.helpers[first.id].id===egyptWritingBookPack.helpers[story.questions[0].helper].id&&egyptCompiled.helpers[second.id].id===egyptWritingBookPack.helpers[story.questions[1].helper].id,'both complete smaller examples are attached');
+ }
+}
+check(new Set(egyptWritingBookPack.stories.flatMap(s=>s.questions.map(q=>q.answer))).size===3,'fitting positions vary across all three slots');
+check(parisPacks.length===3&&parisStories.length===10&&Object.keys(parisLibraryNodes).length===60,'three registered packs append to six original stories');
+check(parisStories.slice(0,6).every(s=>!s.packId)&&parisStories.slice(6).map(s=>s.id).join(',')==='puppet-post,flood-almanac,egypt-reusable-board,egypt-writing-palette','legacy and reviewed pack story order stays stable');
+check(Object.keys(parisLibraryHelpers).length===60,'all generated and legacy tasks have helpers');
 console.log(`${checks} story-pack validation, content and permutation checks passed.`);
