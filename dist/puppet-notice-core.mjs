@@ -22,7 +22,7 @@ export function noticeResult(s){
 }
 function validResponse(r){
  if(!object(r)||!safe(r.id)||!validSnapshot(r.snapshot)||!text(r.rendered,150)||!text(r.reply,1600)||!text(r.feedback,16*1024))return false;
- const expected=noticeResult(r.snapshot);return ['rendered','scriptId','purposeFit','firstCapital','endingCode'].every(k=>r[k]===expected[k]);
+ const expected=noticeResult(r.snapshot);return ['rendered','scriptId','purposeFit','firstCapital','endingCode','reply','feedback'].every(k=>r[k]===expected[k]);
 }
 function workView(w,key){
  if(!object(w)||!validSnapshot(w)||w.source.id!==key||!['arrange','read','kept'].includes(w.page)||!Array.isArray(w.responses)||!safe(w.nextResponseId)||!(w.feedbackId===null||safe(w.feedbackId)))return null;

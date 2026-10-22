@@ -38,6 +38,13 @@ eq(n,1920,'complete independent finite coverage');
  const c=noticeView(s).feedback;noticeView(s).work.responses.push({...clone(c),id:100,purposeFit:true});ok(noticeView(s).raw.some(r=>r.id===100),'contradictory recorded result raw');
 }
 {
+ const s=fresh();startNotice(s,'ask-rabbit');let w=noticeView(s).work;w.order=['can','rabbit','carry','the','lantern'];w.capitalFirst=true;w.mark='?';tryNotice(s);const original=clone(noticeView(s).feedback);w=noticeView(s).work;
+ w.responses.push({...clone(original),id:2,reply:'The opposite: Rabbit cannot carry it.'},{...clone(original),id:3,feedback:'The printed line begins with lowercase.'});w.feedbackId=2;w.kept={snapshot:clone(original.snapshot),response:clone(w.responses[2])};
+ const raw=clone(w.responses.slice(1)),imported=prepareProgressImport(report(s));ok(imported.ok,'contradictory prose slots do not block the whole import');const state=imported.state,v=noticeView(state);eq(v.readable.map(r=>r.id),[1],'valid sibling stays readable');eq(v.raw,raw,'reply and feedback contradictions stay raw');ok(!v.feedback,'contradictory reply cannot become current');ok(v.keptUnreadable,'contradictory kept feedback stays raw');ok(!noticePage(state).includes(raw[0].reply)&&!noticePage(state).includes(raw[1].feedback),'contradictory prose is not presented as the frozen script');
+ ok(tryNotice(state,fits),'valid own-source work remains usable');eq(noticeView(state).raw,raw,'later Try preserves exact contradictory slots');eq(noticeView(state).feedback.id,4);eq(prepareProgressImport(report(state)).state.puppetNotices,state.puppetNotices,'raw and valid siblings round trip together');
+ const c=clone(original);c.snapshot.source.scripts.find(x=>x.id===c.scriptId).reply='An earlier authored reply.';Object.assign(c,noticeResult(c.snapshot));noticeView(state).work.responses.push({...c,id:5});ok(noticeView(state).readable.some(r=>r.id===5),'validation uses the record own frozen source, not current catalog');
+}
+{
  const s=fresh();startNotice(s,'announce-fox');const w=noticeView(s).work;for(const key of ['capitalNo','nameCapitalNote','endingPrefix','fallback','unfinished'])w.source.copy[key]='x'.repeat(1600);w.source.copy.markLabels.none='z'.repeat(1600);ok(validNoticeSource(w.source),'long own-copy source admitted');ok(tryNotice(s,fits),'long unmodeled lowercase no-ending Try fits');const r=noticeView(s).feedback;ok(r.feedback.length>3200&&r.feedback.length<=16*1024);eq(r.reply,w.source.copy.fallback);ok(prepareProgressImport(report(s)).ok);eq(prepareProgressImport(report(s)).state.puppetNotices,s.puppetNotices);
 }
 {
