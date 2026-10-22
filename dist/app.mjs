@@ -71,7 +71,7 @@ import {ensureCafe,nextGuest,orderFor,currentRecipe,cafeSupper} from './cafe-cor
 import {renderCafe,bindCafe} from './cafe-ui.mjs';
 import {helpers,helperLimit} from './help-content.mjs';
 import {helpPage} from './help-ui.mjs';
-import {isEnglishParis,parisHelper,parisNode,parisVisitStatus} from './paris-visit-source.mjs';
+import {isFrenchParis,isParisReadingVisit,parisHelper,parisNode,parisVisitStatus} from './paris-visit-source.mjs';
 import {guides,avatars} from './companions.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
 import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool,editStoryOrder,submitStoryOrder} from './garden-core.mjs';
@@ -277,9 +277,9 @@ function render(){
     const visit=currentVisit(state);
     if(slug==='choose'){const parts=hash.slice(1).split('/');const place=parts[3],variant=parts[4];html=storyHub(state,detail,['paris','french'].includes(detail)&&place?{destination:place,variant:variant==='auto'?'auto':Number(variant),storyId:parts[5]||null}:null);}
     else if((slug==='play'||slug==='end')&&visit){
-      if(isEnglishParis(visit)&&parisVisitStatus(visit)!=='current')html=parisRecoveryPage(state);
+      if(isParisReadingVisit(visit)&&parisVisitStatus(visit)!=='current')html=parisRecoveryPage(state);
       else if(visit.finished)html=storyEnding(state);
-      else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(isEnglishParis(visit)?parisNode(visit,visit.node):storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
+      else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(isParisReadingVisit(visit)?parisNode(visit,visit.node):storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
     }else html=storyHub(state);
   }
   else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+returningOrdersEntry()+joiningOrdersEntry()+willowPathEntry()+'<section class="resume-strip garden-progress-link"><span>Every seed you plant is a small hello to the garden.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
@@ -458,14 +458,14 @@ function requestParis(destination,variant='auto',storyId=null){
 function requestFrench(destination,variant='auto',storyId=null){
  const v=currentVisit(state);
  if(v&&!v.finished){navigate(`#storm/choose/french/${destination}/${variant}${storyId?`/${storyId}`:''}`);return;}
- if(startVisit(state,'french',{destination,variant,storyId})){save();navigate('#storm/play');}
+ if(startVisit(state,'french',{destination,variant,storyId})){save();navigate('#storm/play');}else {save();navigate('#french');}
 }
 function requestPath(id){
  if(id==='french'){const active=currentVisit(state);navigate(active?.entrance==='french'&&!active.finished?'#storm/play':'#french');return;}
  if(!entranceById(id))return;
  const v=currentVisit(state);
  if(v&&!v.finished){navigate(v.entrance===id&&!(id==='paris'&&v.paris)?'#storm/play':`#storm/choose/${id}`);return;}
- if(startVisit(state,id)){save();navigate('#storm/play');}else {save();navigate(id==='paris'?'#paris':'#storm');}
+ if(startVisit(state,id)){save();navigate('#storm/play');}else {save();navigate(isFrenchParis({entrance:id})?'#french':id==='paris'?'#paris':'#storm');}
 }
 function finishStory(skip=false){
  if(!finishStoryNode(state,skip))return;
@@ -476,8 +476,8 @@ function bindStory(){
  document.querySelectorAll('[data-french-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.frenchDestination,value=$(`#french-length-${place}`).value,story=$(`#french-story-${place}`).value;requestFrench(place,value==='auto'?'auto':Number(value),story==='auto'?null:story);});
  document.querySelectorAll('[data-paris-pack-story]').forEach(b=>b.onclick=()=>{const story=b.dataset.parisPackStory,value=$(`#paris-pack-length-${story}`).value;requestParis(b.dataset.parisPackPlace,value==='auto'?'auto':Number(value),story);});
  document.querySelectorAll('[data-paris-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.parisDestination,value=$(`#paris-length-${place}`).value;requestParis(place,value==='auto'?'auto':Number(value));});
- document.querySelectorAll('[data-new-visit]').forEach(b=>b.onclick=()=>{const options=b.dataset.parisPlace?{destination:b.dataset.parisPlace,variant:b.dataset.parisVariant==='auto'?'auto':Number(b.dataset.parisVariant),storyId:b.dataset.parisStory||null}:undefined;if(startVisit(state,b.dataset.newVisit,options)){save();navigate('#storm/play');}else if(b.dataset.newVisit==='paris'){save();navigate('#paris');}});
- document.querySelectorAll('[data-paris-fresh-start]').forEach(b=>b.onclick=()=>{const old=currentVisit(state),p=old?.paris,options=p?.destination?{destination:p.destination,variant:[1,2,3].includes(p.variant)?p.variant:'auto',storyId:p.storyId||null}:undefined;if(startVisit(state,'paris',options)){save();navigate('#storm/play');}else {save();navigate('#paris');}});
+ document.querySelectorAll('[data-new-visit]').forEach(b=>b.onclick=()=>{const options=b.dataset.parisPlace?{destination:b.dataset.parisPlace,variant:b.dataset.parisVariant==='auto'?'auto':Number(b.dataset.parisVariant),storyId:b.dataset.parisStory||null}:undefined;if(startVisit(state,b.dataset.newVisit,options)){save();navigate('#storm/play');}else if(isParisReadingVisit({entrance:b.dataset.newVisit})){save();navigate(isFrenchParis({entrance:b.dataset.newVisit})?'#french':'#paris');}});
+ document.querySelectorAll('[data-paris-fresh-start]').forEach(b=>b.onclick=()=>{const old=currentVisit(state),french=isFrenchParis(old),p=french?old?.french:old?.paris,options=p?.destination?{destination:p.destination,variant:[1,2,3].includes(p.variant)?p.variant:'auto',storyId:p.storyId||null}:undefined;if(startVisit(state,old.entrance,options)){save();navigate('#storm/play');}else {save();navigate(french?'#french':'#paris');}});
  document.querySelectorAll('[data-resume-visit]').forEach(b=>b.onclick=()=>{if(resumeVisit(state,b.dataset.resumeVisit)){save();navigate(currentVisit(state).finished?'#storm/end':'#storm/play');}});
  document.querySelectorAll('[data-guide]').forEach(b=>b.onclick=()=>{if(guides.some(g=>g.id===b.dataset.guide)){state.garden.guide=b.dataset.guide;save();render();$(`[data-guide="${state.garden.guide}"]`).focus();}});
  document.querySelectorAll('[data-avatar]').forEach(b=>b.onclick=()=>{if(avatars.some(a=>a.id===b.dataset.avatar)){state.garden.avatar=b.dataset.avatar;save();render();$(`[data-avatar="${state.garden.avatar}"]`).focus();}});
@@ -485,7 +485,7 @@ function bindStory(){
  document.querySelectorAll('[data-story-audio]').forEach(b=>b.addEventListener('click',()=>{if(useStoryReadingTool(state,'audio')){save();const note=$('#reading-support-note');if(note)note.textContent='You can listen, pause, and read the passage again.';}}));
  document.querySelectorAll('[data-story-reading-tool]').forEach(b=>b.onclick=()=>{const action=b.dataset.storyReadingTool;if(!useStoryReadingTool(state,action))return;save();render();const index=storyDraft(state).readingTools.focus;focusElement(index===null?'#reading-passage-title':`#reading-line-${index}`);});
  $('#story-help')?.addEventListener('click',()=>{const h=openStoryHelp(state);if(h)exposeStoryFacts(h);save();render();main.focus();window.scrollTo(0,0);});
- const visit=currentVisit(state),hx=d?.helper,h=visit&&(isEnglishParis(visit)?parisHelper(visit,visit.node):helpers[visit.node]);
+ const visit=currentVisit(state),hx=d?.helper,h=visit&&(isParisReadingVisit(visit)?parisHelper(visit,visit.node):helpers[visit.node]);
  const helpRender=selector=>{save();render();if(selector)focusElement(selector);};
  $('#help-answer')?.addEventListener('input',e=>{hx.input=e.target.value;hx.error='';save();});
  document.querySelectorAll('[data-help-choice]').forEach(b=>b.onclick=()=>{hx.choice=Number(b.dataset.helpChoice);hx.error='';helpRender(`[data-help-choice="${hx.choice}"]`);});
@@ -497,7 +497,7 @@ function bindStory(){
  $('#help-return')?.addEventListener('click',()=>{hx.open=false;helpRender('#story-help');});
  $('#help-skip')?.addEventListener('click',()=>{hx.open=false;finishStory(true);});
  const changeOrder=(action,index)=>{
-  const visit=currentVisit(state),node=visit&&(isEnglishParis(visit)?parisNode(visit,visit.node):storyNodes[visit.node]),old=storyDraft(state)?.order||[],removed=action==='remove'?old[index]:null;
+  const visit=currentVisit(state),node=visit&&(isParisReadingVisit(visit)?parisNode(visit,visit.node):storyNodes[visit.node]),old=storyDraft(state)?.order||[],removed=action==='remove'?old[index]:null;
   if(!editStoryOrder(state,action,index))return;save();render();
   const order=storyDraft(state).order;
   focusElement(order.length===3?'#order-submit':`[data-order-add="${removed??node.displayOrder.find(i=>!order.includes(i))}"]`);
@@ -507,7 +507,7 @@ function bindStory(){
  $('#order-clear')?.addEventListener('click',()=>changeOrder('clear'));
  $('#story-answer')?.addEventListener('input',e=>{d.input=e.target.value;d.error='';save();});
  document.querySelectorAll('[data-story-choice]').forEach(b=>b.onclick=()=>{d.choice=Number(b.dataset.storyChoice);d.error='';save();render();$(`[data-story-choice="${d.choice}"]`).focus();});
- $('#story-answer-form')?.addEventListener('submit',e=>{e.preventDefault();const visit=currentVisit(state),n=isEnglishParis(visit)?parisNode(visit,visit.node):storyNodes[visit.node];if(n.kind==='order'){if(orderValue(d.order)===null){d.error='Place all three cards before trying this order.';save();render();focusElement('#story-error');return;}submitStoryOrder(state);save();render();focusElement('#story-feedback');return;}const value=n.kind==='choice'?d.choice:numericAnswer($('#story-answer').value);if(value===null){d.error=n.kind==='choice'?'Choose an idea to try, or use “Skip for now.”':'Write a whole number, or use “Skip for now.”';save();render();($('#story-answer')||$('[data-story-choice]')).focus();return;}submitStory(state,value);save();render();focusElement('#story-feedback');});
+ $('#story-answer-form')?.addEventListener('submit',e=>{e.preventDefault();const visit=currentVisit(state),n=isParisReadingVisit(visit)?parisNode(visit,visit.node):storyNodes[visit.node];if(n.kind==='order'){if(orderValue(d.order)===null){d.error='Place all three cards before trying this order.';save();render();focusElement('#story-error');return;}submitStoryOrder(state);save();render();focusElement('#story-feedback');return;}const value=n.kind==='choice'?d.choice:numericAnswer($('#story-answer').value);if(value===null){d.error=n.kind==='choice'?'Choose an idea to try, or use “Skip for now.”':'Write a whole number, or use “Skip for now.”';save();render();($('#story-answer')||$('[data-story-choice]')).focus();return;}submitStory(state,value);save();render();focusElement('#story-feedback');});
  $('#story-hint')?.addEventListener('click',()=>{d.hinted=true;save();render();focusElement('.hint');});
  $('#story-explain')?.addEventListener('click',()=>{d.revealed=true;save();render();focusElement('.solution');});
  document.querySelectorAll('[data-story-method]').forEach(b=>b.onclick=()=>{d.method=b.dataset.storyMethod;save();render();$('#story-next')?.focus();});

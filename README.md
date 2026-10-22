@@ -132,6 +132,7 @@ node test/library-flood-almanac-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
 node test/french-exploration-checks.mjs
+node test/french-saved-source-checks.mjs
 node test/storm-film-checks.mjs
 node test/ending-film-checks.mjs
 node test/equal-groups-checks.mjs
