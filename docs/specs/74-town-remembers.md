@@ -1,6 +1,6 @@
 # The Town Remembers: an earlier idea, returned in a new form
 
-Status: numbered implementation candidate, 2026-10-22. The architecture was independently reviewed in [PR62](https://github.com/anotherpanacea-eng/learning-garden/pull/62). The final content and source appendix below now awaits independent review before build. No implementation, merge or deployment is claimed. Strategy 3.1 of [the proposal](../other-routes-through-the-acts.md).
+Status: numbered implementation candidate, 2026-10-22. The architecture was independently reviewed in [PR62](https://github.com/anotherpanacea-eng/learning-garden/pull/62). Claude independently approved the final content and source appendix at `244cbb4` after the three P2 findings were resolved; see [the review receipt](../reviews/74-town-remembers-spec-review.md). Implementation review and browser verification remain required. No merge or deployment is claimed. Strategy 3.1 of [the proposal](../other-routes-through-the-acts.md).
 
 ## Purpose and story
 
@@ -127,6 +127,7 @@ Check that each form's fitting answer, distractors and feedback are correct and 
 Tests:
 - **Gap rule:** same day versus a later local day, absent `keptDay`, and a malformed `keptDay` (that record is ineligible; the source game's own validator decides whether the record itself loads).
 - **Eligibility:** skip a tray with any changed frozen base constant, empty, partial and mismatched trays, unequal or wrongly selected loaves, and 0 or 500 mL portions, without writing to them. Check jug distractors numerically for every eligible *a*.
+- **Choice rotation:** exercise every eligible c, n and a; verify fitting positions vary, choice order does not depend on the answer selected, and the frozen order survives reload.
 - **Identity:** a replaced snapshot with new values becomes a new artefact; a re-keep of identical values does not. Legacy snapshots get keys too. Check fixed tuple boundaries so distinct values cannot collide.
 - **Selection:** rotation and skipping, oldest-first with saved case-id tie-break, one card at a time, used-once, `used` trimming, and purity (no state change on render).
 - **Exact-once:** Start, Set aside and Keep. At the cap, disclose and remove only the oldest finished errand on Start; preserve an open errand and never trim on view.
@@ -161,7 +162,7 @@ Remembered picture: the two saved jars. Changed proposal: separate outlined jars
 
 Question: “Wisp adds 100 mL to each jar. Is that one more whole batch?”
 
-Choices: “Yes. Adding the same amount to both makes one more batch.” / “No. The jars would overflow.” / “No. One more batch needs 100 mL cloud-water and 150 mL star-water.” (fitting)
+Base choices before the specified rotation: “Yes. Adding the same amount to both makes one more batch.” / “No. The jars would overflow.” / “No. One more batch needs 100 mL cloud-water and 150 mL star-water.” (fitting)
 
 Feedback: “One more batch adds 100 mL cloud-water and 150 mL star-water. Wisp's star-water is 50 mL short. The proposed jars hold {100c+100} mL and {150c+100} mL, both below their 500 mL capacity.” Help uses the other c in {1,2}, with the same separate before/addition/result picture and the worked conclusion. Label it “A different tray.” No correctness inference transfers to the waiting case.
 
@@ -181,7 +182,7 @@ Show the actual kept loaf with its one selected equal piece and the label “One
 
 Question: “Ember wants the same fraction of this 12-bun basket. How many buns are 1/{n} of 12?”
 
-Choices: `{n} buns`, `1 bun`, `{12/n} buns` (fitting).
+Base choices before the specified rotation: `{n} buns`, `1 bun`, `{12/n} buns` (fitting).
 
 Feedback: “Split 12 buns into {n} equal groups. Each group has {12/n} buns. One whole group is 1/{n} of the basket. One share does not always mean one bun.” Help uses n=4 if the kept n=2, otherwise n=2, and shows a separate twelve-bun basket with equal groups and one group outlined. Do not silently highlight the waiting answer when opening help.
 
@@ -201,7 +202,7 @@ Show the kept amount a, a separate jug model containing a, a dashed target line 
 
 Question: “Purl has {a} mL and needs {t} mL. How much more should Purl pour?”
 
-Choices: `{t-a} mL` (fitting), `{t} mL`, `{extra} mL`, with extra defined in the finite-form table above.
+Base choices before the specified rotation: `{t-a} mL` (fitting), `{t} mL`, `{extra} mL`, with extra defined in the finite-form table above.
 
 Feedback: “Count on from {a} mL to {t} mL: add {t-a} mL. {t} mL is the final amount, not the extra pour. Adding {extra} mL would pass the target.” Help deliberately uses the other extra amount: when the waiting answer is 50 mL, show a separate 200→300 mL example adding 100 mL; when it is 100 mL, show 150→200 mL adding 50 mL. Its separate picture labels the starting liquid, extra pour and final amount; never print the waiting numerical answer as its worked answer.
 
