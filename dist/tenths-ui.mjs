@@ -29,7 +29,7 @@ export function bindTenths(state,{save,render,focus,canExport}={}){
  root.querySelectorAll('[data-tenths-part]').forEach(b=>b.addEventListener('click',()=>{if(toggleTenthsPart(state,Number(b.dataset.tenthsPart)))refresh(`[data-tenths-part="${b.dataset.tenthsPart}"]`);}));
  for(const [selector,fn,target] of [['[data-tenths-clear]',clearTenths,'[data-tenths-clear]'],['[data-tenths-check]',checkTenths,'#tenths-feedback'],['[data-tenths-keep]',keepTenths,'#tenths-kept-status']])root.querySelector(selector)?.addEventListener('click',()=>{if(fn(state))refresh(target);});
  root.querySelector('[data-tenths-help]')?.addEventListener('click',()=>{if(supportTenths(state,'help'))refresh('#tenths-help-text');});
- root.querySelector('[data-tenths-together]')?.addEventListener('click',()=>{if(supportTenths(state,'together')){refresh('[data-tenths-together]');const help=document.querySelector('.tenths-help');if(help)help.open=true;}});
+ root.querySelector('[data-tenths-together]')?.addEventListener('click',()=>{if(supportTenths(state,'together')){save?.();render?.();const help=document.querySelector('.tenths-help');if(help)help.open=true;focus?.('[data-tenths-together]');}});
  root.querySelector('[data-tenths-recover]')?.addEventListener('click',()=>{if(recoverTenths(state,canExport))refresh('#tenths-request');else status(refusal);});
  root.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',()=>{if(supportTenths(state,'narrationRequested'))save?.();},{capture:true}));
 }

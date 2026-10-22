@@ -50,5 +50,15 @@ for(const source of tenthsCases){
  class Storage{constructor(){this.data=new Map();}get length(){return this.data.size;}key(i){return [...this.data.keys()][i]??null;}getItem(k){return this.data.get(k)??null;}setItem(k,v){this.data.set(k,v);}removeItem(k){this.data.delete(k);}}
  const storage=new Storage(),store=new ExplorerStore(storage),a=initializeExplorerState(store.load()),aId=store.active.id;T.startTenths(a,'zero-decimal');T.checkTenths(a);T.keepTenths(a);ok(store.save(a));const b=initializeExplorerState(store.add({},a));eq(b.tenthsTable,undefined);const selected=store.select(aId,b);eq(selected.tenthsTable,a.tenthsTable);const reloaded=new ExplorerStore(storage).load();eq(reloaded.tenthsTable,a.tenthsTable);const prepared=prepareProgressImport(JSON.stringify(a));ok(prepared.ok);const imported=store.importState(prepared);ok(imported.ok);eq(imported.state.tenthsTable,a.tenthsTable);eq(store.explorers.length,3);const unrelated=structuredClone(a);delete unrelated.tenthsTable;T.startTenths(a,'whole-fraction');const after=structuredClone(a);delete after.tenthsTable;eq(after,unrelated,'no other-game changes');ok(store.setPersistence(false,imported.state));T.toggleTenthsPart(imported.state,0);ok(store.save(imported.state));eq(storage.getItem('number-garden-v1:'+store.active.id),null,'save off keeps no explorer copy');eq(store.clearActive().tenthsTable,undefined,'confirmed explorer reset removes optional root');
 }
+{
+ const s=seed();T.startTenths(s,'four-decimal');T.toggleTenthsPart(s,0);T.checkTenths(s);T.startTenths(s,'zero-fraction');
+ const help=structuredClone(s.tenthsTable.cases['zero-fraction']);help.helpOpen=true;
+ s.tenthsTable.cases['zero-fraction']=help;s.tenthsTable.cases['four-decimal'].selected=[0,1];
+ const raw=structuredClone(s),prepared=prepareProgressImport(JSON.stringify(s));ok(prepared.ok,'inconsistent own cases import as raw');
+ const v=T.tenthsView(prepared.state);eq(v.readable.length,0);eq(v.unreadable.map(x=>x.id),['four-decimal','zero-fraction']);eq(prepared.state,raw,'import/view preserves raw cases');
+ ok(T.startTenths(prepared.state,'one-fraction'));eq(T.tenthsView(prepared.state).readable.length,1);eq(prepared.state.tenthsTable.cases['zero-fraction'],help);eq(prepared.state.tenthsTable.cases['four-decimal'],raw.tenthsTable.cases['four-decimal']);
+ const valid=seed();T.startTenths(valid,'four-decimal');T.toggleTenthsPart(valid,0);T.toggleTenthsPart(valid,1);T.checkTenths(valid);valid.tenthsTable.cases['four-decimal'].selected.reverse();eq(T.tenthsView(valid).readable.length,1,'current feedback compares sets, not incidental order');
+}
+
 for(const [field,value] of [['id','A'],['wholeId','-bad'],['title','é'.repeat(81)],['request','🌱'.repeat(101)],['wholeLabel','x'.repeat(161)]]){const source={...tenthsCases[0],[field]:value};ok(!T.validTenthsSource(source));}
 console.log(`${count} tenths fixed-whole, subset, notation, frozen work and transfer checks passed.`);

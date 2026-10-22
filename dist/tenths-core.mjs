@@ -12,7 +12,9 @@ function validCheck(c,s){return object(c)&&safe(c.id)&&selected(c.selected)&&sup
 function validWork(w,key){
  if(!object(w)||!validTenthsSource(w.source)||w.source.id!==key||!selected(w.selected)||!support(w.support)||typeof w.helpOpen!=='boolean'||typeof w.familiar!=='boolean'||!safe(w.nextCheckId)||!Array.isArray(w.checks)||w.checks.length>4||!w.checks.every(c=>validCheck(c,w.source)))return false;
  let previous=0;for(const c of w.checks){if(c.id<=previous||c.id>=w.nextCheckId)return false;previous=c.id;}
- if(!(w.feedbackId===null||w.checks.some(c=>c.id===w.feedbackId)))return false;
+ // A visible explanation must carry its support, and current feedback must name this board.
+ if(w.helpOpen&&!w.support.includes('help'))return false;
+ if(!(w.feedbackId===null||w.checks.some(c=>c.id===w.feedbackId&&c.selected.length===w.selected.length&&c.selected.every(n=>w.selected.includes(n)))))return false;
  const k=w.kept;if(k!==null&&(!object(k)||!selected(k.selected)||!support(k.support)||typeof k.familiar!=='boolean'||typeof k.priorExposureUnknown!=='boolean'||!(k.latestCheck===null||validCheck(k.latestCheck,w.source))))return false;
  return true;
 }
