@@ -49,4 +49,27 @@ for(const payload of [null,[],5,{version:99,html:'<img src=x onerror="fictional(
 }
 const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8'),html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');assert.match(app,/joiningBench=root==='numbers'&&slug==='join'/);assert.match(app,/bindJoiningOrders\(state/);assert.match(html,/joining-orders\.css/);assert.match(joiningOrdersEntry(),/#numbers\/join/);
 assert.match(renderBundleExchange(fresh()).html,/#numbers\/join/,'Exchange Table links back to Joining Supply Orders');
+// A recovery must not make an accepted notebook impossible to import again.
+{
+ const cap=5*1024*1024,template=fresh();template.joiningOrders={version:99,padding:''};
+ const recovered=copy(template);assert.equal(J.recoverJoiningOrders(recovered),true);
+ const overhead=new TextEncoder().encode(JSON.stringify(recovered,null,2)).length;
+ for(const delta of [-1,1]){
+  const s=copy(template);s.joiningOrders.padding='x'.repeat(cap+delta-overhead);
+  assert.equal(prepareProgressImport(JSON.stringify(s,null,2)).ok,true,'original pretty notebook imports at both wrapper boundaries');
+  const before=JSON.stringify(s);assert.equal(J.recoverJoiningOrders(s),delta<0,'recovery accepts just below and refuses just above exact pretty byte cap');
+  if(delta>0)assert.equal(JSON.stringify(s),before,'size refusal is atomic');
+  else assert.equal(new TextEncoder().encode(JSON.stringify(s,null,2)).length,cap-1);
+ }
+}
+{
+ const s=fresh();let raw={version:99};s.joiningOrders=raw;
+ while(true){const next={version:99,earlier:raw},candidate={...s,joiningOrders:next};if(!prepareProgressImport(JSON.stringify(candidate)).ok)break;raw=next;s.joiningOrders=raw;}
+ const before=JSON.stringify(s);assert.equal(prepareProgressImport(before).ok,true,'depth-boundary original imports');assert.equal(J.recoverJoiningOrders(s),false,'extra recovery depth is refused');assert.equal(JSON.stringify(s),before,'depth refusal preserves whole prior root');
+}
+{
+ const s=fresh();s.joiningOrders={version:99,earlier:'kept'};const before=JSON.stringify(s);
+ assert.equal(J.recoverJoiningOrders(s,()=>false),false,'actual report preflight may refuse metadata overhead');assert.equal(JSON.stringify(s),before);
+ assert.equal(J.recoverJoiningOrders(s),true);assert.equal(prepareProgressImport(JSON.stringify(s,null,2)).ok,true,'ordinary recovered notebook round-trips');
+}
 console.log('Joining Supply Orders integration: lazy views, exact marks, transfer, recovery and host wiring passed.');
