@@ -10,7 +10,7 @@ export const BELL_NOTES=freeze([{id:'low',name:'Low',frequency:220,cycles:2,shap
 export const BELL_CARDS=freeze([
  {id:'cafe-gather',title:'Gather for dinner',purpose:'Purl wants a repeatable call to gather neighbors for dinner. Choose the pitches.',request:'Two matching tones, a rest, then two matching tones. You choose the pitch of each pair.',rule:'two-pairs'},
  {id:'post-arrival',title:'A courier arrives',purpose:'A courier wants a short arrival call that finishes higher than it begins.',request:'Make three sounding notes. Finish higher than you begin; choose any middle note.',rule:'finish-higher'},
- {id:'garden-return',title:'A phrase returns',purpose:'Garden helpers want a three-note phrase they can recognise when it comes again.',request:'Invent three sounding notes, then repeat those same three in order.',rule:'repeat-three'},
+ {id:'garden-return',title:'A phrase returns',purpose:'Garden helpers want a three-note phrase they can recognize when it comes again.',request:'Invent three sounding notes, then repeat those same three in order.',rule:'repeat-three'},
  {id:'own-call',title:'A call of your own',purpose:'Choose a call for any imaginary garden gathering, then tell someone its purpose.',request:'Try one to eight slots, with at least one sounding note. You decide what the call means.',rule:'own'}
 ].map(c=>({...c,model:BELL_MODEL})));
 export const BELL_PAIRS=freeze([{id:'rise',title:'Low, then High',sequence:['low','high']},{id:'fall',title:'High, then Low',sequence:['high','low']},{id:'same',title:'Middle, then Middle',sequence:['middle','middle']}].map(p=>({...p,modelId:BELL_MODEL.id})));

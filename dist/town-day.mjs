@@ -1,0 +1,2 @@
+export const localDay=(date=new Date())=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+export const validDay=x=>typeof x==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x)&&!Number.isNaN(Date.parse(`${x}T12:00:00`))&&new Date(`${x}T12:00:00`).getFullYear()===Number(x.slice(0,4))&&new Date(`${x}T12:00:00`).getMonth()+1===Number(x.slice(5,7))&&new Date(`${x}T12:00:00`).getDate()===Number(x.slice(8,10));

@@ -42,7 +42,7 @@ for(const place of ['post','loft'])for(const c of MESSAGE_CASES){
  const notes=destinationNotes(s);ok(!notes.includes('<img src=x')&&notes.includes('&lt;img'),'notebook escapes all authored strings');
  eq(prepareProgressImport(JSON.stringify(s)).state.messages,s.messages,'authored Unicode/newlines/whitespace preserve exact export/import');
  eq(s.messages.cases.basket.post,before.messages.cases.basket.post,'Loft revision leaves Post draft exact');
- ok(messagePage(s,'loft','kept').includes('did not replace it'),'non-overwrite crossing clearly explained');
+ ok(messagePage(s,'loft','kept').includes('waiting, just as you left it'),'non-overwrite crossing clearly explained');
 }
 for(const payload of [null,[],7,{version:99,draft:'<script>fictional</script>'},{version:1,cases:{}}]){
  const s=fresh();s.messages=structuredClone(payload);const before=JSON.stringify(s);

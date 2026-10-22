@@ -63,7 +63,7 @@ check(!mainNav.emit('click').defaultPrevented,'main navigation allowed before ar
   f.input.value='🐈'.repeat(2000);f.input.emit('input');check(!f.keep.disabled&&!f.checkReply.disabled,'2000 actual Unicode codepoints can be kept');eq(s.travelersArchive.reply.text.length,4000,'no UTF16 truncation');f.keep.emit('click');eq(s.travelersArchive.kept.reply.text,'🐈'.repeat(2000),'valid edited words kept');
  }finally{f.close();}
 }
-for(const label of ['Back to Paris','Return to Paris','Visit the Post Office','Tell a new fictional story','Take a break in the garden','Grown-up notes']){
+for(const label of ['Back to Paris','Return to Paris','Visit the Post Office','Tell a new fictional story','Take a break','Grown-up notes']){
  const s={};setArchivePage(s,'reply');setArchiveReplyText(s,'Fictional earlier words');const f=fixture(s);try{
   const link=f.links.find(a=>a.label===label);check(link?.href.startsWith('#'),`${label} is an in-app hash link`);
   const before=copy(s),saves=f.saves;f.input.value='🐈'.repeat(2001);f.input.emit('input');f.error.textContent='';

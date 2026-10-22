@@ -26,7 +26,7 @@ export function recommendations(state) {
   const counted=[...latest.values()].filter(o=>o.correct&&!o.supported&&o.firstCorrect&&o.method==='counted');
   let route='mixed', reason='A gentle mix is a good place to explore. There is no need to finish the check-in first.';
   if(groups&&!groups.independent) { route='visual';reason='The equal-groups task is worth another look together. Start with pictures, or choose a different path.'; }
-  else if(unsure.length) {route='facts';reason='Give a few facts that needed another look some room to grow, with a useful strategy alongside.';}
+  else if(unsure.length) {route='facts';reason='Some facts need another look. Let’s practice them with a helpful trick.';}
   else if(counted.length) {route='strategy';reason='Counting found an answer. Try connecting groups to a known fact and see whether that feels useful.';}
   else if(derived.length) {route='facts';reason='Working it out is good mathematical thinking. A little practice can make those facts more familiar.';}
   else if(assessed.length) reason='The sampled tasks offer a starting point. Explore more facts and keep trying interesting problems.';

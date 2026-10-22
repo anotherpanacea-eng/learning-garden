@@ -1,0 +1,19 @@
+# Draft composition review — 2026-10-22
+
+**Release hold: Town Remembers supplied-fact exposure remains unresolved.** This candidate combines PR67–71 on main `4b137177548ce82f199d8572efc9e6e2c7c7d21e`. It deliberately excludes Joining Orders PR73, both text branches PR66/72, the competing Paris repair PR65, and later authoring/roadmap drafts. The exact runtime composition is `f3032cb0937b69fa6d69c0e7b2774bb2b53ba660`.
+
+Independent Claude performed a read-only composition review and approved that runtime with no P1/P2 introduced by the combination. It inspected routing, speech listener/callback lifecycle, reset/explorer boundaries, optional roots, import/export, preserved Paris sources and source-game kept records. Root then ran all117 source-check suites, atlas and story-pack validation, diff checks, and1021 synthetic Chrome assertions: Paris60, Town242, Field398, Willow321. No physical iPad/Safari, audible-voice, hosted-CI or learning-effect claim follows.
+
+The reviewer also raised a design follow-up: Town displays explicit multiplication relations without recording their prior exposure. Root reproduced this as a release-blocking evidence defect: after the three-share loaf's share-buns feedback supplies three groups of four, a generated 3×4 Number Garden question can still produce `freshEvidence=true`. The specification currently forbids exposure changes, so a reviewed spec fold and implementation are required before this candidate is cleared. Opened share-buns and trays-reverse worked examples need the same bounded treatment. A passing implementation review of the earlier specification does not resolve that gap.
+
+Other review follow-ups are non-blocking or preexisting: measure Paris performance on large notebooks before adding a cache; clarify unavailable Town and failed Paris recovery notices; consider the Willow suggestions/empty-notes presentation. French paused-source preservation and non-Paris deleted-node handling remain separate preexisting issues. No speculative performance machinery was added.
+
+This final commit records the review and hold only. It changes no runtime. The individual PR branches and their receipts remain intact. Nothing in this composition has been merged or deployed.
+
+## Resumed integration and resolved findings
+
+The later composition `2e7582b3eca068a95b07d189d4871f515997c8cc` carries the latest independently reviewed Town and Joining repairs plus the independently reviewed PR66/72 text and saved-question fixes. Independent internal review confirmed that the conflict resolutions preserve English Paris source/helper/ending/evidence snapshots, speech lifecycle, source-game keep dates, optional roots and exact displayed-fact bridges. Root ran119 source suites, atlas/story validation and1303 local Chrome assertions at that candidate.
+
+That review found one P2: unsupported Willow and Field Kit raw roots could become non-importable after recovery added a wrapper. Repair `443b2e8a7fdf896873a8b0a28672a5045b40a464` reuses the existing whole-candidate limits and actual Download report preflight before mutation, with focused refusal guidance. A separate internal reviewer approved that fix with no P1/P2 and independently ran53 boundary checks and28 actual Chrome assertions. Root also checked the diff and focused suites. Composed runtime `a919ab4f7382a8a0c7806cc54fbba96cc3ef1c3a` has exactly the reviewed443 runtime and test tree; no extra runtime changes followed. The original Town and recovery holds are resolved.
+
+Final root verification includes120 source-check suites, the new53 boundary assertions, relevant Willow/Field checks, and clean syntax/diff checks. Every latest reviewed component head from PR66–73 is an ancestor of this candidate. The following receipt commit changes documentation only. No hosted CI, physical-device, audible-voice or learning-effect claim follows; deployment remains deferred.

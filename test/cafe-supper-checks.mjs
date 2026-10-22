@@ -24,7 +24,7 @@ function prepare(s){
   const stock=json(s.cafe.stock);check(!serveCafe(s)&&json(s.cafe.stock)===stock&&cafeSupper(s.cafe).progress===n,'duplicate serving cannot spend stock or count twice');
   check(cafeSupper(s.cafe).complete===(n===6),'only sixth served table completes supper');
  }
- check(renderCafe(s).includes('You did it!')&&renderCafe(s).includes('New Game Plus: another gathering')&&renderCafe(s).includes('Keep serving'),'win, New Game Plus and endless continuation are visible');
+ check(renderCafe(s).includes('You did it!')&&renderCafe(s).includes('Plan another gathering')&&renderCafe(s).includes('Keep serving'),'win, New Game Plus and endless continuation are visible');
  check(s.cafe.history.filter(r=>r.status==='served').every(r=>r.total.supported&&r.total.skipped&&r.shortfall.supported&&r.shortfall.skipped),'supported service records retain support');
  const r=restoreState(json(s));ensureCafe(r);check(cafeSupper(r.cafe).complete&&r.cafe.served===6,'win survives export/restore');
  const stock=json(r.cafe.stock),history=json(r.cafe.history),discoveries=json(r.cafe.discoveries),seed=r.cafe.seed,index=r.cafe.nextOrder;
@@ -32,7 +32,7 @@ function prepare(s){
  check(r.cafe.current.stage==='plate'&&r.cafe.nextOrder===index+1,'explicit New Game Plus invites a next guest from served screen');
  const after=json(r);check(!beginCafePlus(r)&&json(r)===after,'repeated New Game Plus cannot advance twice');
  check(json(r.cafe.stock)===stock&&json(r.cafe.history)===history&&json(r.cafe.discoveries)===discoveries&&r.cafe.seed===seed,'New Game Plus retains supplies, records, discoveries and seed');
- check(cafeNotes(r).includes('New Game Plus 1')&&renderCafe(r).includes('A moonlight picnic'),'new round visible in play and notes');
+ check(cafeNotes(r).includes('Gathering 2')&&renderCafe(r).includes('A moonlight picnic'),'new round visible in play and notes');
 }
 for(const stage of ['plate','total','stock']){
  const s=fresh();s.cafe.served=42;nextGuest(s);

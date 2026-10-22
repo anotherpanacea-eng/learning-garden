@@ -31,7 +31,7 @@ export function ensureBroad(state) {
   for (const [key,draft] of Object.entries(b.drafts)) {
     if (!draft || !Array.isArray(draft.attempts) || !draft.attempts.every(Number.isFinite)){delete b.drafts[key];continue;}
     if(draft.question&&!validSnapshot(draft.question,key.split(':').slice(1).join(':'))){
-      // A wording/content update can invalidate a frozen question. Keep all earlier work,
+      // A content update (numbers, answer, structure) can invalidate a frozen question. Keep all earlier work,
       // but never score it against the replacement question or feed it to suggestions.
       b.closedDrafts.push({key,draft:structuredClone(draft)});b.draftNotice=true;
       delete b.drafts[key];continue;
@@ -99,7 +99,25 @@ function validSnapshot(q,id){
  const template=itemById(id);if(!template||!q||q.id!==id)return false;
  if(q.variant!==null&&(typeof q.variant?.seed!=='string'||q.variant.seed.length>200))return false;
  const expected=q.variant?generatedBroad(template,q.variant.seed):{...structuredClone(template),variant:null};
- return JSON.stringify(q)===JSON.stringify(expected);
+ return JSON.stringify(semanticBroad(q))===JSON.stringify(semanticBroad(expected))&&broadWordingValid(q);
+}
+// A frozen question keeps its own wording; only its numbers, answer and structure must still match today's,
+// so a copy edit cannot close a paused question.
+const BROAD_TEXT=new Set(['label','title','prompt','say','hint','solution','talk','steps','childLesson','lesson','wonder','message']);
+function semanticBroad(x){
+ if(Array.isArray(x))return x.map(semanticBroad);
+ if(!x||typeof x!=='object')return x;
+ // Choice text and order give the numeric answer index its meaning.
+ const out={};for(const [k,v] of Object.entries(x)){if(BROAD_TEXT.has(k))continue;out[k]=semanticBroad(v);}
+ return out;
+}
+function broadWordingValid(q){
+ const text=v=>typeof v==='string'&&v.length<=2000;
+ const walk=x=>Array.isArray(x)?x.every(walk):!x||typeof x!=='object'||Object.entries(x).every(([k,v])=>BROAD_TEXT.has(k)?(k==='steps'?Array.isArray(v)&&v.every(text):text(v)):walk(v));
+ // Checked on the saved question alone: it must still have a visible title and prompt to show.
+ if(!walk(q)||![q.title,q.prompt].every(v=>typeof v==='string'&&v.trim()))return false;
+ if(q.choices!==undefined&&!(Array.isArray(q.choices)&&q.choices.every(v=>text(v)&&v.trim())))return false;
+ return !Array.isArray(q.choices)||typeof q.answer!=='string'||q.choices.includes(q.answer);
 }
 export function instantiateBroad(state,q,mode='checkin',explorerSeed='garden'){
  const b=ensureBroad(state),kind=mode.includes('activity')?'activity':'checkin',draft=b.drafts[`${kind}:${q.id}`];
@@ -190,18 +208,18 @@ export function suggestActivity(state, id, graph) {
   const a = areaById(id), start=state.broad.trails[id]?.observationStart||0;
   const obs = state.broad.observations.slice(start).filter(o => o.area===id && o.status !== 'skipped');
   const last = obs.at(-1);
-  if (!last) return {item:a.activities[1], reason:'A new place to explore. No check-in is needed.'};
+  if (!last) return {item:a.activities[1], reason:'A new place to explore. No garden walk is needed first.',childReason:'A new place to explore. Try this one.'};
   const items = areas.flatMap(x => x.activities);
   const edges = graph?.dependencies || [], names = new Map((graph?.topics || []).map(t => [t.id,t.name]));
   const needsSupport = !last.correct || last.supported || !last.firstCorrect;
   if (needsSupport) {
     const edge = edges.find(e => e.topicId === last.topicId && items.some(q => q.topicId === e.prerequisiteId));
     if (edge) return {item:items.find(q => q.topicId === edge.prerequisiteId), edge,
-      reason:`Marble connects ${names.get(edge.prerequisiteId)} as a foundation for ${names.get(last.topicId)}. Try a smaller related idea together.`};
-    return {item:a.activities[0],reason:'That example needed another look. A smaller, visual activity is one possible next step.'};
+      reason:`Marble connects ${names.get(edge.prerequisiteId)} as a foundation for ${names.get(last.topicId)}. Try a smaller related idea together.`,childReason:'Next, try a smaller idea with Pip.'};
+    return {item:a.activities[0],reason:'That example needed another look. A smaller, visual activity is one possible next step.',childReason:'Next, try a smaller idea with Pip.'};
   }
   const edge = edges.find(e => e.prerequisiteId === last.topicId && items.some(q => q.topicId === e.topicId));
   if (edge) return {item:items.find(q => q.topicId === edge.topicId),edge,
-    reason:`Marble links ${names.get(last.topicId)} to ${names.get(edge.topicId)}. This could be an interesting next connection.`};
-  return {item:a.activities[2],reason:'That example was answered independently. A different challenge could be interesting; it is a suggestion, not a level judgment.'};
+    reason:`Marble links ${names.get(last.topicId)} to ${names.get(edge.topicId)}. This could be an interesting next connection.`,childReason:'Ready for something new? Try this one.'};
+  return {item:a.activities[2],reason:'That example was answered independently. A different challenge could be interesting; it is a suggestion, not a level judgment.',childReason:'Ready for something new? Try this one.'};
 }

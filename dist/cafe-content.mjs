@@ -1,9 +1,9 @@
 // Authored make-believe guests and bites. Properties, rather than names, determine a plate's fit.
 export const cafeSuppers=[
  {title:'The welcome-back dinner',invitation:'Our neighbors are back from mending the garden after the storm. Serve six tables for their welcome-back dinner.',ending:'The welcome-back dinner is ready! The lanterns are lit, the café is open, and our neighbors can rest and eat together.',color:'#e9b84a',decoration:'lanterns'},
- {title:'A moonlight picnic',invitation:'Prepare six tables for a picnic under the moon.',ending:'The moonlight picnic is ready. Plates are waiting beneath a sky full of stars.',color:'#abc4da',decoration:'stars'},
+ {title:'A moonlight picnic',invitation:'The moon has come out to eat with us. Set six tables under it.',ending:'The moonlight picnic is ready. Plates are waiting beneath a sky full of stars.',color:'#abc4da',decoration:'stars'},
  {title:'The rooftop potluck',invitation:'Bring six tables together for a feast above the garden.',ending:'The rooftop potluck is ready. The garden has a table for every neighbor.',color:'#b8d4c3',decoration:'leaves'},
- {title:'The ribbon festival supper',invitation:'Serve six tables for a supper among bright ribbons.',ending:'The ribbon supper is ready. The café is dressed for another gathering of friends.',color:'#da8d8d',decoration:'ribbons'}
+ {title:'The ribbon festival supper',invitation:'Serve six tables for a supper among bright ribbons.',ending:'Ribbons snap like happy flags. Six tables are dressed and waiting.',color:'#da8d8d',decoration:'ribbons'}
 ];
 export const starterIngredients = [
   {id:'moon-crunch', name:'Moon crunch', properties:['warm','crunchy','sweet'], color:'#e9b84a'},
@@ -18,11 +18,11 @@ export const starterIngredients = [
 
 export const orchardFoods = [
   {id:'star-berry',name:'Star berries',properties:['cold','soft','sweet'],color:'#b7c7e3',orchard:true,
-    location:'The star-berry bower',clues:['A pretend berry hangs like a little star.','Imagine its soft, squishy shape. No real tasting is needed.','This imaginary berry is cold, soft, and sweet.']},
+    location:'The star-berry bower',clues:['A pretend berry hangs like a little star.','Imagine its soft, squishy shape.','This imaginary berry is cold, soft, and sweet.']},
   {id:'spiral-pod',name:'Spiral pods',properties:['warm','crunchy','tangy'],color:'#e5a36f',orchard:true,
-    location:'The spiral-pod branches',clues:['A pretend pod curls into a spiral.','Imagine its crunchy shell. This is make-believe investigating.','This imaginary pod is warm, crunchy, and tangy.']},
+    location:'The spiral-pod branches',clues:['A pretend pod curls into a spiral.','Imagine its crunchy shell. It crackles like dry leaves.','This imaginary pod is warm, crunchy, and tangy.']},
   {id:'wobble-fruit',name:'Wobble fruit',properties:['cold','soft','tangy'],color:'#b8d4c3',orchard:true,
-    location:'The wobble-fruit nook',clues:['A pretend fruit wobbles on its branch.','Imagine its soft shape giving a little wobble. No real food is needed.','This imaginary fruit is cold, soft, and tangy.']}
+    location:'The wobble-fruit nook',clues:['A pretend fruit wobbles on its branch.','Imagine its soft shape giving a little wobble.','This imaginary fruit is cold, soft, and tangy.']}
 ];
 export const ingredients = [...starterIngredients,...orchardFoods];
 
