@@ -106,6 +106,7 @@ node test/help-checks.mjs
 node test/cafe-checks.mjs
 node test/cafe-start-checks.mjs
 node test/tenths-checks.mjs
+node test/hundredths-checks.mjs
 node test/science-checks.mjs
 node test/water-evidence-checks.mjs
 node test/workshop-checks.mjs
@@ -395,6 +396,8 @@ The optional `#numbers/join` table extends Bundle Burrow with two pictured addit
 Each case keeps its supplied source, grouping, raw total, support and earlier checks. Speech requests are labeled as requests, not proof of playback. Optional help and a separate example remain open. See [spec 77](docs/specs/77-joining-supply-orders.md) and its [source audit](docs/source-audits/77-joining-supply-orders.md).
 
 Run `node test/joining-orders-checks.mjs` and `node test/joining-orders-integration-checks.mjs` for source checks. With the static app served locally and Playwright installed, run `JOIN_TEST_URL=http://127.0.0.1:4173/ node test/joining-orders-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `JOIN_ARTIFACTS` optionally select a local module, browser and screenshot directory. These synthetic checks do not establish physical iPad behavior or learning gains.
+
+Hundredths Bridge at `#numbers/hundredths` redraws the same conceptual whole as a 10×10 square. Six open requests let learners make tenths and hundredths or compare fixed pictures, with reversible controls and frozen practice records in a separate optional save root. Chooser notation is supplied but untracked, so no case record proves a learner has not seen it. See [spec85](docs/specs/85-hundredths-bridge.md) and its [source audit](docs/source-audits/85-hundredths-bridge.md). Run `node test/hundredths-checks.mjs` for the source and recovery checks; with the static app served locally and Playwright installed, run `HUNDREDTHS_TEST_URL=http://127.0.0.1:4173/ node test/hundredths-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
 
 Tenths Table at `#numbers/tenths` uses one fixed whole with ten reversible parts and eight openly chosen requests. It keeps supplied-picture practice separate from assessment evidence. Its optional save root starts only on an explicit request, and retained sources/checks stay tied to their own wording. See [spec81](docs/specs/81-tenths-table.md) and its [source audit](docs/source-audits/81-tenths-table.md).
 

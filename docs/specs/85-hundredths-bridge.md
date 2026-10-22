@@ -1,6 +1,6 @@
 # 85. Hundredths Bridge
 
-**Status:** proposed for independent specification and content review. This authorizes no runtime build, PR, merge, or atlas expansion. [Audit 85](../source-audits/85-hundredths-bridge.md) records the source limits.
+**Status:** independently reviewed for implementation at `318cecbedca66718e8eb9c58d8f50893a6396e8f`. This specification does not authorize a PR, merge, deployment, or atlas expansion. [Audit 85](../source-audits/85-hundredths-bridge.md) records the source limits.
 
 ## The small addition
 
