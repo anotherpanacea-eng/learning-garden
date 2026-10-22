@@ -4,7 +4,7 @@ import {initializeExplorerState,prepareProgressImport} from '../dist/progress-tr
 import {chooseBatchCase,keepBatch,batchState,offerBatch} from '../dist/whole-batches-core.mjs';
 import {chooseSharingCase,keepSharing,sharingState} from '../dist/sharing-counter-core.mjs';
 import {chooseRecipe,keepRecipe,recipeState} from '../dist/measuring-recipes-core.mjs';
-import {sourceArtifacts,nextTownCard,startTown,chooseTown,checkTown,keepTown,asideTown,supportTown,townState,townHistory,errandValid} from '../dist/town-remembers-core.mjs';
+import {sourceArtifacts,nextTownCard,startTown,chooseTown,checkTown,keepTown,asideTown,supportTown,townState,townHistory,errandValid,townDisplayedFactPairs} from '../dist/town-remembers-core.mjs';
 import {townPage,townInvitation,townNotes} from '../dist/town-remembers-ui.mjs';
 const copy=x=>structuredClone(x), day='2026-10-21',later='2026-10-22';
 let checks=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;},ok=(x,m)=>{assert.ok(x,m);checks++;};
@@ -28,6 +28,28 @@ for(const [i,n] of [2,3,4,6].entries()){
  const s=loaf(n),e=startTown(s,later),m=[3,4,6,2][i];eq(e.form,'share-compare','compare first');eq(e.artifact.values.m,m,'next count frozen');eq(e.expected,m<n?'Bigger':'Smaller','same whole relation');eq(e.choices.findIndex(x=>x.value===e.expected),(['Smaller','Bigger','We cannot compare these pieces.'].indexOf(e.expected)-i+6)%3,'compare rotated');ok(e.example.n!==n,'comparison help different');
  const before=copy(s.townRemembers.errands[0]);delete s.sharingCounter;eq(townPage(s).includes(`Clover cuts the same`),true,'frozen errand survives deleted source');eq(s.townRemembers.errands[0],before,'render does not recompute frozen m');
  const a=loaf(n),alt=secondForm(a,'trays');eq(alt.form,'share-buns','basket alternate');eq(alt.expected,12/n,'fraction of set');eq(new Set(choices(alt)).size,3,'bun choices distinct');eq(alt.choices.findIndex(x=>x.value===alt.expected),(2-i+6)%3,'buns rotated');ok(townPage(a).includes('Twelve unselected buns'),'source set pictured');ok(alt.example.n!==n,'buns help distinct');
+}
+for(const n of [2,3,4,6]){
+ const s=loaf(n),e=secondForm(s,'trays'),h=e.example.n,source=copy(s.sharingCounter);
+ eq(townDisplayedFactPairs(s),[],'unselected buns and choices do not expose an equal-group fact');
+ chooseTown(s,e.choices.find(c=>c.value!==e.expected).value);eq(townDisplayedFactPairs(s),[],'choice before Check does not expose');
+ checkTown(s);eq(townDisplayedFactPairs(s),[[n,12/n]],'fitting or non-fitting Check shows frozen bun groups');
+ eq(townDisplayedFactPairs(s,null,'notes'),[[n,12/n]],'expanded readable notes show checked bun groups');
+ supportTown(s,'example');eq(townDisplayedFactPairs(s),[[n,12/n],[h,12/h]].filter((p,i,a)=>a.findIndex(x=>x.join('x')===p.join('x'))===i),'Help shows its separate bun groups');
+ eq(townDisplayedFactPairs(prepareProgressImport(JSON.stringify(s)).state),townDisplayedFactPairs(s),'open feedback and Help restore on import');
+ asideTown(s);eq(townDisplayedFactPairs(s,String(e.id)),[[n,12/n]],'closed detail shows Check but not hidden Help');
+ eq(s.sharingCounter,source,'fact selection leaves source loaf unchanged');
+ const changed=copy(s),old=changed.townRemembers.errands.at(-1);old.checks[0].feedback=`Split 12 buns into ${n} equal groups. Each group has 99 buns.`;
+ ok(errandValid(old),'older frozen wording remains readable');eq(townDisplayedFactPairs(changed,String(e.id)),[],'mismatched checked text does not assert fact');
+ old.checks[0].feedback=e.feedback;old.example={kind:'jug',amount:200};old.status='open';
+ ok(errandValid(old),'alternate saved helper shape remains readable');eq(townDisplayedFactPairs(changed),[[n,12/n]],'wrong helper kind cannot assert example fact');
+}
+for(const c of [1,2,3]){
+ const s=tray(c),e=startTown(s,later),h=e.example.guests/2;
+ eq(townDisplayedFactPairs(s),[],'tray before Check exposes no Town relation');
+ supportTown(s,'example');eq(townDisplayedFactPairs(s),[[h,2]],'visible tray Help supplies guests per batch');
+ chooseTown(s,e.expected);checkTown(s);eq(townDisplayedFactPairs(s),[[c,2],[h,2]].filter((p,i,a)=>a.findIndex(x=>x.join('x')===p.join('x'))===i),'tray Check supplies its relation');
+ keepTown(s);eq(townDisplayedFactPairs(s,String(e.id)),[[c,2]],'closed tray detail hides its separate Help');
 }
 for(const [i,a] of [50,100,150,200,250,300,350,400,450].entries()){
  const s=jug(a),e=startTown(s,later),lo=(Math.ceil(a/100)-1)*100,hi=(Math.floor(a/100)+1)*100;eq(e.form,'jug-coarser','scale first');eq(e.expected,a,'scale exact');eq(new Set(choices(e)),new Set([lo,a,hi]),'scale neighbors');eq(e.choices.findIndex(x=>x.value===a),(1-i%3+3)%3,'scale rotated');ok(e.example.amount!==a,'scale help different');const html=townPage(s);ok(html.includes('town-jug-drawing')&&html.includes('unnumbered'),'new scale visible');if(a%100)ok(!html.includes(`Saved amount: ${a} mL`),'exact amount withheld before check');

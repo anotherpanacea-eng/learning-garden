@@ -160,3 +160,41 @@ export function keepTown(state){return change(state,r=>{const e=openErrand(r);if
 export function asideTown(state){return change(state,r=>{const e=openErrand(r);if(!obj(e)||e.status!=='open')return false;e.status='aside';});}
 export function supportTown(state,kind){if(!['example','together','narration'].includes(kind))return false;return change(state,r=>{const e=openErrand(r);if(!errandValid(e))return false;e.support[kind]=true;});}
 export function townHistory(state){const r=townState(state);if(!r)return {readable:[],raw:[state.townRemembers],unavailable:true};const good=readable(r);return {readable:good,raw:r.errands.filter(e=>!good.includes(e)),unavailable:false};}
+
+// Only complete relations in text actually shown on this page count as prior facts.
+// These guards do not decide whether an older frozen errand remains readable.
+function checkedFact(e,feedback){
+ const v=e.artifact.values;
+ if(e.form==='share-buns'){
+  const n=v.n,each=12/n;
+  return feedback.includes(`Split 12 buns into ${n} equal groups`)&&feedback.includes(`Each group has ${each} buns`)?[n,each]:null;
+ }
+ if(e.form==='trays-reverse'){
+  const c=v.c;
+  return feedback.includes(`These jars hold ${word(c,'whole batch')}`)&&feedback.includes(`Each batch serves 2 guests, so they can serve ${word(2*c,'guest')}`)?[c,2]:null;
+ }
+ return null;
+}
+function helpFact(e){
+ const x=e.example,text=e.help;
+ if(e.form==='share-buns'&&x.kind==='buns'&&counts.includes(x.n)){
+  const h=x.n;
+  return text.includes(`split the buns into ${h} equal groups`)&&text.includes(`One outlined group has ${12/h} buns`)?[h,12/h]:null;
+ }
+ if(e.form==='trays-reverse'&&x.kind==='trays'){
+  const h=x.guests/2;
+  return Number.isSafeInteger(h)&&h>0&&x.cloud===100*h&&x.star===150*h&&text.includes(`In this separate example, ${word(h,'batch')}`)&&text.includes(`Two guests per batch means ${word(2*h,'guest')}`)?[h,2]:null;
+ }
+ return null;
+}
+export function townDisplayedFactPairs(state,detail=null,context='page'){
+ const history=townHistory(state),pairs=[];
+ if(context==='notes'){
+  for(const e of history.readable)for(const check of e.checks){const pair=checkedFact(e,check.feedback);if(pair)pairs.push(pair);}
+ }else if(context==='page'){
+  const selected=typeof detail==='string'&&/^\d+$/.test(detail)?history.readable.find(e=>e.id===Number(detail)):null;
+  const card=selected?null:nextTownCard(state),e=selected||((card?.type==='open')?card.errand:null);
+  if(e){const last=e.checks.at(-1),check=last&&checkedFact(e,last.feedback);if(check)pairs.push(check);if(e.status==='open'&&e.support.example){const help=helpFact(e);if(help)pairs.push(help);}}
+ }
+ const seen=new Set();return pairs.filter(pair=>{const key=pair.join('x');if(seen.has(key))return false;seen.add(key);return true;});
+}
