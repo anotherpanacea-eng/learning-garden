@@ -1,0 +1,28 @@
+.body-movement-page{max-width:880px;margin:auto;color:#183f39;overflow-wrap:anywhere}
+.body-movement-page .back,.body-movement-page button,.body-movement-page summary,.body-movement-page a{min-height:44px}
+.body-movement-page .back,.body-movement-page a{display:inline-flex;align-items:center}
+.body-movement-page button{white-space:normal}
+.body-movement-page :is(button,a,summary):focus-visible{outline:3px solid #956323;outline-offset:3px}
+.movement-prompt{padding:14px 18px;background:#edf3e8;border-left:4px solid #397958;border-radius:8px}
+.movement-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start;margin:18px 0}
+.movement-card{min-width:0;padding:clamp(12px,2vw,20px);border:2px solid #adbdac;border-radius:18px;background:#fffdf5}
+.movement-card h2{margin:0 0 4px}
+.movement-count{margin:0 0 8px;font-weight:700}
+.movement-figure{margin:0}
+.movement-figure svg{display:block;width:100%;height:auto;max-height:180px}
+.movement-figure svg text{font:12px Arial,Helvetica,sans-serif;fill:#173b35}
+.movement-figure figcaption{min-height:3.5em;margin:6px 0 12px;font-size:.9rem;line-height:1.4}
+.movement-caption{min-height:4.5em;font-weight:700}
+.movement-actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.movement-actions button{flex:1 1 130px}
+.movement-actions button[hidden]{display:none}
+.movement-card .hear-button{margin:4px 0}
+.movement-announcement{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.movement-fold{margin:16px 0;padding:10px 14px;border:1px solid #adbdac;border-radius:10px;background:#fffdf5}
+.movement-fold summary{display:list-item;padding:10px 0;cursor:pointer;font-weight:700}
+.body-movement-entry a{padding:10px 12px;line-height:1.4}
+.body-movement-other{max-width:880px;margin:16px auto;padding:10px 14px;border:1px solid #adbdac;border-radius:10px;background:#fffdf5}
+.body-movement-other>summary{display:list-item;min-height:44px;padding:10px 0;cursor:pointer;font-weight:700}
+.body-movement-other a{display:inline-flex;min-height:44px;align-items:center}
+.body-movement-other :is(summary,a):focus-visible{outline:3px solid #956323;outline-offset:3px}
+@media(max-width:680px){.movement-cards{grid-template-columns:1fr}.movement-caption,.movement-figure figcaption{min-height:0}.movement-card{padding:12px}.movement-figure svg{max-height:155px}}
