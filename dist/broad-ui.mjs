@@ -79,7 +79,7 @@ export function modelCaption(m){
  if(m.type==='array')return `Pip arranged ${m.rows} rows of ${m.cols} ${itemNames[m.item]||'seeds'}.`;
  if(m.type==='fraction')return `Pip shaded ${m.shaded} of ${m.parts} equal pieces.`;
  if(m.type==='pattern')return `Pip starts at ${m.values[0]} and ${m.step<0?'subtracts':'adds'} ${Math.abs(m.step)} each time.`;
- if(m.type==='shape')return `Pip is exploring ${m.shape==='hexagon'?'a hexagon with equal sides':m.shape==='triangle'?'a triangle with equal sides':`a ${m.shape}`}.`;
+ if(m.type==='shape')return `Pip is exploring ${m.shape==='hexagon'?'a regular hexagon':m.shape==='triangle'?'a triangle with equal sides':`a ${m.shape}`}.`;
  if(m.type==='compass')return `Pip starts facing north. Try a quarter turn.`;
  if(m.type==='ruler')return `Pip put a ribbon between marks ${m.start} and ${m.end}.`;
  return `Pip set out ${m.count||0} ${itemNames[m.item]||'seeds'}.`;
