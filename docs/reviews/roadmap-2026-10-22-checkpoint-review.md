@@ -1,5 +1,7 @@
 # Current roadmap checkpoint review
 
+The sections below preserve successive historical review checkpoints. Their old draft/hold statements are not the present release status; [the current roadmap](../roadmap.md) owns that queue. Later edits require their own independent review and do not inherit earlier clearance.
+
 Independent Claude reviewed documentation candidate `afab58ac5e0c06aa203177348fef7491a49f2f45` against main `4b13717`. It found one P2: a reference to an unspecified local composition could imply the drafts were already integrated. The clause was removed, as the reviewer requested. The review explicitly approved the documentation conditional on that wording fix.
 
 Optional wording corrections link PR64, clarify the isolated review receipts, consistently identify synthetic browser checks, and limit the original-copy statement to independently reviewed drafts. PR74 was subsequently added as reviewed specification only, with implementation still absent. The existing French paused-source issue remains outside the English repair; no French fix is claimed.
@@ -30,3 +32,10 @@ A separate focused check then compared the final PR92 link/count fold against pu
 This documentation update replaces the earlier spec90/spec91 authoring status with the reviewed Puppet Notice PR93 and Comparing Supply Orders PR94 drafts, and adds Measuring Desk PR96 and Courier Clock Walk PR97. PR98 composes these four on reviewed PR92 at `8c7cd230d3c42d540f522a047ce3d4704b71c5c8`; runtime `41a2b45` has independent internal seam clearance. Root verification reports 136 source suites, 523 activity Chrome assertions and 102 combined-notebook Chrome assertions. All fifteen curriculum increments remain drafts pending final independent Claude release clearance; none is described as merged or deployed.
 
 The current queue records the Egyptian writing-object pack as independently spec/content/source/art reviewed at `93ad1b4`, with Library installation underway and no runtime clearance or PR yet. Riddles PR95, which also carries Spanish cards, remains under final review pending the root's result; it is not assumed merged. The studied Jane reference is now `60d864fb9004d7090c7ea2f595f679b35bc566ad`, while Marble, the source pin and atlas counts remain unchanged. Dated strand-map and six-act snapshots were not edited. This status-only diff still needs a fresh independent root review; the older reviews above do not certify its new statements.
+
+
+## Merged-release and teaching-map checkpoint
+
+The new roadmap authoring fold records PR95 merged at ff0dcd8, sixteen curriculum additions merged through exact Claude-cleared PR98 candidate ea9de4e at f70a59e, and eight scoped atlas links independently reviewed and merged through PR100 at d0535c3. The generated declaration counts are now173 references across95 of1590 pinned topics, with1495 not yet mapped. None is a completed-topic or deployed-site claim. Component drafts were reconciled only after current-head ancestry checks; the intended Cloudflare publication remains deferred.
+
+The queue now names Paving96 implementation, Movement97 specification and Circuit98 specification, with their distinct current gates; it preserves the human/media dependency for phonics. The strand/pathway snapshots and source pin are unchanged. A focused fresh independent documentation review must clear this exact wording before the roadmap PR merges.
