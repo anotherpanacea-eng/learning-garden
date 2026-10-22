@@ -96,7 +96,7 @@ for(const source of hundredthsCases){
  const r=v.rival;r.task=generateRivalTask('multiply',10,10,r.task.scene);eq([r.task.a,r.task.b],[10,10]);ok(!notePendingBrambleFactExposure(s,[3,10]));ok(notePendingBrambleFactExposure(s,[10,10]));ok(!notePendingBrambleFactExposure(s,[10,10]));
  ok(r.priorFactShown&&validPostRival(r)&&!r.supported,'related fact is separate from requested help');
  setRivalInput(s,'100');submitRival(s);ok(r.attempts[0].correct&&!r.attempts[0].afterSupport,'attempt chronology remains exact');continueRival(s);
- eq(learningSource(s,'bramble'),null,'exposed round cannot become a positive connection source');
+ const source=learningSource(s,'bramble');eq(source.outcome,'explored','supplied fact downgrades only an otherwise first match');eq(source.familiarity,'familiar','exact visible fact makes this pair familiar');eq([source.a,source.b],[10,10],'explored invitation keeps the same pair');
 }
 for(const [field,value] of [['id','A'],['wholeId','-bad'],['title','é'.repeat(81)],['request','🌱'.repeat(101)],['wholeLabel','x'.repeat(161)],['help','x'.repeat(801)]])ok(!H.validHundredthsSource({...hundredthsCases[0],[field]:value}));
 console.log(`${count} hundredths source, picture, frozen-work and transfer assertions passed.`);

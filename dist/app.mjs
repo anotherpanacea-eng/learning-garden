@@ -51,6 +51,7 @@ import {destinationNotes} from './notebook-sections.mjs';
 import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from './progress-transfer.mjs';
 import {progressTransferPanel} from './progress-transfer-ui.mjs';
 import {wordGardenPage,bindWordGarden} from './word-garden-ui.mjs';
+import {riddlesPage,riddlesEntry,bindRiddles} from './riddles-ui.mjs';
 import {connectionPairsShown} from './learning-connections.mjs';
 import {connectionPanel,bindConnections} from './learning-connections-ui.mjs';
 import {bindSpiral} from './living-spiral-ui.mjs';
@@ -87,7 +88,7 @@ import {isFrenchParis,isParisReadingVisit,parisHelper,parisNode,parisVisitStatus
 import {guides,avatars} from './companions.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
 import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool,editStoryOrder,submitStoryOrder} from './garden-core.mjs';
-import {gardenHome,parisLanding,frenchLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding,parisRecoveryPage} from './garden-ui.mjs';
+import {gardenHome,parisLanding,frenchLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding,parisRecoveryPage,bindEgyptPhotoFallback} from './garden-ui.mjs';
 import {areas} from './broad-content.mjs';
 import {ensureBroad,areaById,itemById,beginTrail,trailQuestion,familiarity,noteBroadExposure,noteLegacyExposure,makeBroadObservation,recordTrail,instantiateBroad} from './broad-core.mjs';
 import {broadHome,checkinHub,activityLibrary,trailSummary,learningMap,renderModel,adjustModel} from './broad-ui.mjs';
@@ -133,7 +134,7 @@ function gardenArt(){let flowers='';for(let r=0;r<3;r++)for(let c=0;c<4;c++)flow
 function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back">← Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
 function noteInstructionArrival(){if(choosingExplorer)return;const [desk,page]=(location.hash||'').slice(1).split('/');if(page==='instructions'&&['post','loft'].includes(desk)&&noteInstructionEntry(state,desk))save();}
 function navigate(hash){stopBell('navigation');if(location.hash===hash){noteInstructionArrival();render();}else location.hash=hash;}
-function home(){return gardenHome(state,persist)+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>';}
+function home(){return gardenHome(state,persist)+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
 function startCheckin(){if(state.baseline.complete){navigate('#summary');return;}const q=checkin[state.baseline.index];activity={mode:'checkin',q};const draft=state.baseline.draft;active=draft?.questionId===q.id?{...blank(),...draft}:blank();
   if(draft?.questionId!==q.id&&(state.exposures?.includes(`${q.a}x${q.b}`)||state.exposures?.includes(`${q.b}x${q.a}`)))active.exposed=true;
   screen='activity';render();focusActivity();}
@@ -282,6 +283,7 @@ function render(){
   else if(root==='french')html=frenchLanding(state);
   else if(root==='paris')html=parisLanding(state)+travelersArchiveEntry();
   else if(root==='words')html=wordGardenPage(state);
+  else if(root==='riddles')html=riddlesPage(state);
   else if(root==='facts')html=factsPage(state,slug);
   else if(root==='orchard'){
     if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
@@ -332,6 +334,7 @@ function render(){
   if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;
+  bindEgyptPhotoFallback(main);
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
   updateStorageNotice();bind();
   const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
@@ -405,7 +408,7 @@ function bind(){
  bindSeed(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,downloadNotes:()=>downloadText(JSON.stringify(notesReport(state),null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`)});
  bindLantern(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindCollection(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
- bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target)});
+ bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target,true)});
  bindTenths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindSorting(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindCafeStart(state,{save,render,focus:focusElement});
@@ -449,6 +452,7 @@ function bind(){
  bindOrchard(state,{save,render,focus:focusElement});
  bindForage(state,{save,render,focus:focusElement,exposeFacts:pairs=>exposeStoryFacts({facts:pairs})});
  bindWordGarden(state,{save,render,focus:focusElement});
+ bindRiddles(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindLoft(state,{save,render,focus:focusElement});
  bindSpeech();bindConnections(state,{save,render,navigate,focus:focusElement});
  bindScience(state,{save,render,focus:focusElement});
@@ -481,10 +485,10 @@ function bind(){
  $('#download')?.addEventListener('click',()=>{const report=notesReport(state);downloadText(JSON.stringify(report,null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`);});
  $('#reset')?.addEventListener('click',showReset);
 }
-function exposeStoryFacts(node,except,target=state){
+function exposeStoryFacts(node,except,target=state,qualifyPendingBramble=false){
  for(const pair of node.facts||[]){
   noteLegacyExposure(target,pair);noteGardenFactExposure(target,pair,except);
-  notePendingBrambleFactExposure(target,pair);
+  if(qualifyPendingBramble)notePendingBrambleFactExposure(target,pair);
   target.exposures??=[];const key=`${pair[0]}x${pair[1]}`;if(!target.exposures.includes(key))target.exposures.push(key);
   const draft=target.baseline.draft,q=draft&&checkin.find(x=>x.id===draft.questionId),fact=q?.fact||(q&&[q.a,q.b]);
   if(fact&&fact.every(Number.isFinite)&&((fact[0]===pair[0]&&fact[1]===pair[1])||(fact[0]===pair[1]&&fact[1]===pair[0])))draft.exposed=true;

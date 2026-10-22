@@ -23,6 +23,12 @@ for(const source of lanternCases){
 }
 eq(combinations,792,'all bounded and absent positions/choices enumerated');eq(fitting.filter(x=>x==='first').length,2,'two first-fitting requests');eq(fitting.filter(x=>x==='same').length,2,'two equal requests');eq(fitting.filter(x=>x==='second').length,2,'two second-fitting requests');
 {
+ const s=fresh();ok(startLantern(s,'smaller-parts',fits));const old='Three equal parts are smaller than two equal parts of this same whole.';
+ ok(lanternCases[0].copy.help.includes('When the same whole is split into three equal parts'),'current explanation names the fixed whole');
+ lanternView(s).work.source.copy.help=old;ok(lanternPage(s).includes(old),'earlier frozen wording remains visible');
+ eq(prepareProgressImport(report(s)).state.lanternLine,s.lanternLine,'earlier frozen wording round trips');
+}
+{
  const s=fresh(),before=json(s);lanternPage(s);lanternNotes(s);eq(json(s),before,'chooser render allocates nothing');ok(startLantern(s,'smaller-parts',fits),'explicit start');
  ok(checkLantern(s,fits),'blank work can be checked');eq(lanternView(s).feedback.result,{placement:[null,null],relation:null,orderMatches:null},'absent points are unobserved');
  set(s,'amber',1);set(s,'blue',0);editLantern(s,'choice',null,'first');ok(checkLantern(s,fits),'actual comparison check');eq(lanternView(s).feedback.result,{placement:[true,false],relation:'first',orderMatches:true},'wrong placement with correct actual order is distinct');

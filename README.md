@@ -54,6 +54,7 @@ With Node.js installed:
 
 ```sh
 node test/field-kit-checks.mjs
+node test/riddles-checks.mjs
 node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
@@ -372,6 +373,8 @@ Optional Café starting amounts are configured in Grown-up notes. Existing explo
 New visits retain their supplied passages, questions, ordering cards, smaller examples and ending together. Catalogue edits cannot change a paused answer or the next question's passage. Earlier visits without those pages stay in the notebook as records; a fresh visit is offered without guessing the missing wording. French preservation is a separate follow-up.
 
 For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_STORY_ID=flood-almanac` and `PARIS_SOURCE_VARIANT=1`, `2`, or `3` to exercise each Library length; the default remains puppet-post. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
+
+For the Egyptian object stories, run `node test/egypt-writing-book-browser.js` against the same local server with `EGYPT_TEST_URL` set to its URL. The optional `EGYPT_TEST_ARTIFACTS` directory receives phone/tablet screenshots. This covers both stories at all three passage lengths, the local photographs and credits, waiting visits, helper and listening requests, frozen source, save-off, and actual notes download/import. It does not establish physical-device or audible-speech behavior.
 
 ### The Town Remembers
 
