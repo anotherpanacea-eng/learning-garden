@@ -7,6 +7,9 @@ import {MAX_IMPORT_BYTES} from '../dist/progress-limits.mjs';
 import {hundredthsCases,relation,hundredthsName} from '../dist/hundredths-content.mjs';
 import * as H from '../dist/hundredths-core.mjs';
 import {hundredthsPage,hundredthsNotes} from '../dist/hundredths-ui.mjs';
+import {startPostOffice} from '../dist/post-office-core.mjs';
+import {setBrambleMode,setBrambleTable,startAdaptiveRival,generateRivalTask,notePendingBrambleFactExposure,validPostRival,setRivalInput,submitRival,continueRival} from '../dist/post-rival.mjs';
+import {learningSource} from '../dist/learning-connections.mjs';
 let count=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);count++;},ok=(x,m)=>{assert.ok(x,m);count++;};
 const seed=()=>initializeExplorerState(freshState());
 const report=s=>JSON.stringify({title:'Synthetic report',exportedAt:'2026-10-22T00:00:00.000Z',note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:'sky',color:'gold',symbol:'leaf'},recommendation:recommendations(s),...s},null,2);
@@ -23,7 +26,7 @@ for(const source of hundredthsCases){
  const frozen=structuredClone(H.hundredthsView(initial).work.source);
  if(source.kind==='build')for(let n=0;n<=100;n++){
   const s=structuredClone(initial),w=H.hundredthsView(s).work;w.response.amount=n;
-  ok(H.checkHundredths(s));const c=w.checks[0];eq(c.outcome,n===source.target?'matches':'different');ok(c.feedbackText.includes(hundredthsName(n)));eq(c.source,frozen);ok(c.practiceOnly);ok(c.priorExposureUnknown);eq(c.feedbackShown,false);ok(H.markHundredthsDisplayed(s));ok(c.feedbackShown);eq(H.hundredthsView(s).status,'ready');
+  ok(H.checkHundredths(s));const c=w.checks[0];eq(c.outcome,n===source.target?'matches':'different');ok(c.feedbackText.includes(hundredthsName(n)));eq(c.source,frozen);ok(c.practiceOnly);ok(c.priorExposureUnknown);eq(c.feedbackShown,false);ok(H.markHundredthsDisplayed(s));ok(H.hundredthsView(s).work.checks[0].feedbackShown);eq(H.hundredthsView(s).status,'ready');
  } else for(const candidate of ['less','same','greater']){
   const s=structuredClone(initial);ok(H.chooseHundredths(s,candidate));ok(H.checkHundredths(s));const c=H.hundredthsView(s).work.checks[0];eq(c.outcome,candidate===relation(source.left,source.right)?'matches':'different');eq(c.response.choice,candidate);eq(c.source,frozen);ok(c.feedbackText.includes(`${source.left}/100`));ok(c.feedbackText.includes(`${source.right}/100`));
  }
@@ -68,6 +71,32 @@ for(const source of hundredthsCases){
 {
  class Storage{constructor(){this.data=new Map();}get length(){return this.data.size;}key(i){return [...this.data.keys()][i]??null;}getItem(k){return this.data.get(k)??null;}setItem(k,v){this.data.set(k,v);}removeItem(k){this.data.delete(k);}}
  const storage=new Storage(),store=new ExplorerStore(storage),a=initializeExplorerState(store.load()),aId=store.active.id;H.startHundredths(a,'same-names');H.chooseHundredths(a,'same');H.checkHundredths(a);H.keepHundredths(a);ok(store.save(a));const b=initializeExplorerState(store.add({},a));eq(b.hundredthsBridge,undefined);const selected=store.select(aId,b);eq(selected.hundredthsBridge,a.hundredthsBridge);const reloaded=new ExplorerStore(storage).load();eq(reloaded.hundredthsBridge,a.hundredthsBridge);const prepared=prepareProgressImport(report(a));ok(prepared.ok);const imported=store.importState(prepared);ok(imported.ok);eq(imported.state.hundredthsBridge,a.hundredthsBridge);ok(store.setPersistence(false,imported.state));H.chooseHundredths(imported.state,'less');ok(store.save(imported.state));eq(storage.getItem('number-garden-v1:'+store.active.id),null);eq(store.clearActive().hundredthsBridge,undefined);
+}
+{
+ const s=seed();H.startHundredths(s,'same-names');H.chooseHundredths(s,'less');H.checkHundredths(s);
+ const c=s.hundredthsBridge.cases['same-names'].checks[0];c.response.choice=null;c.outcome='different';
+ ok(prepareProgressImport(JSON.stringify(s)).ok,'synthetic malformed comparison remains importable');
+ eq(H.hundredthsView(s).unreadable.map(x=>x.id),['same-names'],'checked null choice is unreadable, not phantom wrong answer');
+ ok(H.startHundredths(s,'three-tenths'),'valid sibling remains open');eq(s.hundredthsBridge.cases['same-names'].checks[0],c,'invalid sibling bytes stay raw');
+}
+{
+ const s=seed();H.startHundredths(s,'three-tenths');s.fixturePadding='';
+ const room=MAX_IMPORT_BYTES-bytes(JSON.parse(report(s)))-120;s.fixturePadding='x'.repeat(room);
+ ok(preflight(s),'source report fits before new check');const before=structuredClone(s);
+ ok(!H.checkHundredths(s,preflight),'new check refused before report overflow');eq(s,before,'check refusal atomic');
+ ok(!H.keepHundredths(s,preflight),'new kept copy refused before report overflow');eq(s,before,'Keep refusal atomic');
+ const shown=seed();H.startHundredths(shown,'three-tenths');shown.fixturePadding='';
+ shown.fixturePadding='x'.repeat(MAX_IMPORT_BYTES-bytes(JSON.parse(report(shown)))-24);
+ const withVisibleFact=c=>{const preview=structuredClone(c);H.markHundredthsDisplayed(preview);preview.exposures=['10x10'];return preflight(preview);};
+ ok(preflight(shown),'report fits before full-panel display');const prior=structuredClone(shown);
+ ok(!H.markHundredthsDisplayed(shown,withVisibleFact),'display flag and imminent fact require room together');eq(shown,prior,'failed display recording leaves save unchanged');
+}
+{
+ const s=seed(),v=startPostOffice(s,'clover-buns');ok(!!v);ok(setBrambleMode(s,'multiply'));ok(setBrambleTable(s,10));ok(startAdaptiveRival(s));
+ const r=v.rival;r.task=generateRivalTask('multiply',10,10,r.task.scene);eq([r.task.a,r.task.b],[10,10]);ok(!notePendingBrambleFactExposure(s,[3,10]));ok(notePendingBrambleFactExposure(s,[10,10]));ok(!notePendingBrambleFactExposure(s,[10,10]));
+ ok(r.priorFactShown&&validPostRival(r)&&!r.supported,'related fact is separate from requested help');
+ setRivalInput(s,'100');submitRival(s);ok(r.attempts[0].correct&&!r.attempts[0].afterSupport,'attempt chronology remains exact');continueRival(s);
+ eq(learningSource(s,'bramble'),null,'exposed round cannot become a positive connection source');
 }
 for(const [field,value] of [['id','A'],['wholeId','-bad'],['title','é'.repeat(81)],['request','🌱'.repeat(101)],['wholeLabel','x'.repeat(161)],['help','x'.repeat(801)]])ok(!H.validHundredthsSource({...hundredthsCases[0],[field]:value}));
 console.log(`${count} hundredths source, picture, frozen-work and transfer assertions passed.`);

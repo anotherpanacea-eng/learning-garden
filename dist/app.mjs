@@ -51,6 +51,7 @@ import {adaptivePairsShown as spiralPairsShown,startAdaptiveSpiral} from './livi
 import {livingPage,bindLiving} from './living-ui.mjs';
 import {ensurePostOffice,currentPostOffice,postOfficeView} from './post-office-core.mjs';
 import {postOfficePage,bindPostOffice} from './post-office-ui.mjs';
+import {notePendingBrambleFactExposure} from './post-rival.mjs';
 import {ensureWorkshop} from './workshop-core.mjs';
 import {workshopPage,bindWorkshop} from './workshop-ui.mjs';
 import {learningInvitations,learningExplore} from './learning-invitations.mjs';
@@ -381,7 +382,7 @@ function bindBroadExtras(){
 }
 function bind(){
  bindTenths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
- bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:pairs=>exposeStoryFacts({facts:pairs})});
+ bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target)});
  bindCafeStart(state,{save,render,focus:focusElement});
  bindWillowPath(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
@@ -453,11 +454,12 @@ function bind(){
  $('#download')?.addEventListener('click',()=>{const report=notesReport(state);downloadText(JSON.stringify(report,null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`);});
  $('#reset')?.addEventListener('click',showReset);
 }
-function exposeStoryFacts(node,except){
+function exposeStoryFacts(node,except,target=state){
  for(const pair of node.facts||[]){
-  noteLegacyExposure(state,pair);noteGardenFactExposure(state,pair,except);
-  state.exposures??=[];const key=`${pair[0]}x${pair[1]}`;if(!state.exposures.includes(key))state.exposures.push(key);
-  const draft=state.baseline.draft,q=draft&&checkin.find(x=>x.id===draft.questionId),fact=q?.fact||(q&&[q.a,q.b]);
+  noteLegacyExposure(target,pair);noteGardenFactExposure(target,pair,except);
+  notePendingBrambleFactExposure(target,pair);
+  target.exposures??=[];const key=`${pair[0]}x${pair[1]}`;if(!target.exposures.includes(key))target.exposures.push(key);
+  const draft=target.baseline.draft,q=draft&&checkin.find(x=>x.id===draft.questionId),fact=q?.fact||(q&&[q.a,q.b]);
   if(fact&&fact.every(Number.isFinite)&&((fact[0]===pair[0]&&fact[1]===pair[1])||(fact[0]===pair[1]&&fact[1]===pair[0])))draft.exposed=true;
  }
 }

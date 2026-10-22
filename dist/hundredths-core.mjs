@@ -11,7 +11,7 @@ const response=(x,s)=>object(x)&&(s.kind==='build'?amount(x.amount)&&!own(x,'cho
 const equal=(a,b,s)=>s.kind==='build'?a.amount===b.amount:a.choice===b.choice;
 export function validHundredthsSource(s){return object(s)&&s.version===1&&id(s.id)&&id(s.wholeId)&&text(s.title,160)&&text(s.request,400)&&text(s.wholeLabel,160)&&text(s.help,800)&&s.partCount===100&&((s.kind==='build'&&amount(s.target)&&!own(s,'left')&&!own(s,'right'))||(s.kind==='compare'&&amount(s.left)&&amount(s.right)&&!own(s,'target')));}
 function sameSource(a,b){return ['version','id','wholeId','title','request','wholeLabel','help','partCount','kind',...(b.kind==='build'?['target']:['left','right'])].every(k=>a[k]===b[k]);}
-function validCheck(c,s){return object(c)&&safe(c.id)&&validHundredthsSource(c.source)&&sameSource(c.source,s)&&response(c.response,s)&&support(c.support)&&typeof c.familiar==='boolean'&&c.priorExposureUnknown===true&&c.practiceOnly===true&&typeof c.feedbackShown==='boolean'&&text(c.feedbackText,800)&&['matches','different'].includes(c.outcome)&&c.outcome===outcome(c.response,s);}
+function validCheck(c,s){return object(c)&&safe(c.id)&&validHundredthsSource(c.source)&&sameSource(c.source,s)&&response(c.response,s)&&!(s.kind==='compare'&&c.response.choice===null)&&support(c.support)&&typeof c.familiar==='boolean'&&c.priorExposureUnknown===true&&c.practiceOnly===true&&typeof c.feedbackShown==='boolean'&&text(c.feedbackText,800)&&['matches','different'].includes(c.outcome)&&c.outcome===outcome(c.response,s);}
 function validKeep(k,s){return k===null||object(k)&&response(k.response,s)&&support(k.support)&&typeof k.familiar==='boolean'&&k.priorExposureUnknown===true&&(k.latestCheck===null||validCheck(k.latestCheck,s));}
 function validWork(w,key){
  if(!object(w)||!validHundredthsSource(w.source)||w.source.id!==key||!response(w.response,w.source)||!support(w.support)||typeof w.helpOpen!=='boolean'||w.helpOpen&&!w.support.includes('help')||typeof w.sourceShown!=='boolean'||typeof w.familiar!=='boolean'||!safe(w.nextCheckId)||!Array.isArray(w.checks)||w.checks.length>4||!w.checks.every(c=>validCheck(c,w.source))||!validKeep(w.kept,w.source))return false;
@@ -28,9 +28,16 @@ export function hundredthsView(state){
 const freshWork=(source,familiar=false)=>({source:copy(source),response:source.kind==='build'?{amount:0}:{choice:null},support:[],helpOpen:false,sourceShown:false,familiar,checks:[],nextCheckId:1,feedbackId:null,kept:null});
 const mark=(w,key)=>{if(!w.support.includes(key))w.support.push(key);};
 const fits=(state,root,canExport)=>{const candidate={...state,hundredthsBridge:root};return recoveryFitsProgressLimits(candidate)&&canExport(candidate);};
+function change(state,update,canExport=()=>true){
+ const v=active(state);if(!v)return false;
+ const work=copy(v.work);if(!update(work))return false;
+ const root=copy(v.root);root.cases[v.root.currentCase]=work;
+ if(!fits(state,root,canExport))return false;
+ Object.assign(v.work,work);return true;
+}
 export function startHundredths(state,caseId,canExport=()=>true){
  const v=hundredthsView(state);if(v.status==='recovery')return false;
- if(v.status==='ready'&&own(v.root.cases,caseId)){const previous=v.readable.find(x=>x.id===caseId);if(!previous)return false;v.root.currentCase=caseId;previous.work.familiar=true;return true;}
+ if(v.status==='ready'&&own(v.root.cases,caseId)){const previous=v.readable.find(x=>x.id===caseId);if(!previous)return false;const root=copy(v.root);root.currentCase=caseId;root.cases[caseId].familiar=true;if(!fits(state,root,canExport))return false;v.root.currentCase=caseId;previous.work.familiar=true;return true;}
  const source=hundredthsCases.find(x=>x.id===caseId);if(!source||!validHundredthsSource(source))return false;
  const root=v.status==='missing'?{version:1,currentCase:caseId,cases:{}}:copy(v.root);
  root.currentCase=caseId;root.cases[caseId]=freshWork(source,own(root,'recovered'));
@@ -38,11 +45,11 @@ export function startHundredths(state,caseId,canExport=()=>true){
  if(!fits(state,root,canExport)||!fits(state,candidate,canExport))return false;state.hundredthsBridge=root;return true;
 }
 function active(state){const v=hundredthsView(state);return v.status==='ready'&&v.work?v:null;}
-export function moveHundredths(state,step){const v=active(state);if(!v||v.work.source.kind!=='build'||![-10,-1,1,10].includes(step))return false;const n=v.work.response.amount+step;if(!amount(n))return false;v.work.response.amount=n;v.work.feedbackId=null;return true;}
-export function clearHundredths(state){const v=active(state);if(!v||v.work.source.kind!=='build')return false;v.work.response.amount=0;v.work.feedbackId=null;return true;}
-export function chooseHundredths(state,value){const v=active(state);if(!v||v.work.source.kind!=='compare'||!['less','same','greater'].includes(value))return false;v.work.response.choice=value;v.work.feedbackId=null;return true;}
-export function supportHundredths(state,kind){const v=active(state);if(!v||!['help','narrationRequested','together'].includes(kind))return false;mark(v.work,kind);if(kind==='help')v.work.helpOpen=true;return true;}
-export function markHundredthsDisplayed(state){const v=active(state);if(!v)return false;let changed=false;if(!v.work.sourceShown){v.work.sourceShown=true;changed=true;}const c=v.work.checks.find(x=>x.id===v.work.feedbackId);if(c&&!c.feedbackShown){c.feedbackShown=true;changed=true;}return changed;}
+export function moveHundredths(state,step,canExport){return change(state,w=>{if(w.source.kind!=='build'||![-10,-1,1,10].includes(step))return false;const n=w.response.amount+step;if(!amount(n))return false;w.response.amount=n;w.feedbackId=null;return true;},canExport);}
+export function clearHundredths(state,canExport){return change(state,w=>{if(w.source.kind!=='build')return false;w.response.amount=0;w.feedbackId=null;return true;},canExport);}
+export function chooseHundredths(state,value,canExport){return change(state,w=>{if(w.source.kind!=='compare'||!['less','same','greater'].includes(value))return false;w.response.choice=value;w.feedbackId=null;return true;},canExport);}
+export function supportHundredths(state,kind,canExport){return change(state,w=>{if(!['help','narrationRequested','together'].includes(kind))return false;mark(w,kind);if(kind==='help')w.helpOpen=true;return true;},canExport);}
+export function markHundredthsDisplayed(state,canExport){return change(state,w=>{let changed=false;if(!w.sourceShown){w.sourceShown=true;changed=true;}const c=w.checks.find(x=>x.id===w.feedbackId);if(c&&!c.feedbackShown){c.feedbackShown=true;changed=true;}return changed;},canExport);}
 export function outcome(r,s){return (s.kind==='build'?r.amount===s.target:r.choice!==null&&r.choice===relation(s.left,s.right))?'matches':'different';}
 function feedback(r,s){
  if(s.kind==='build'){
@@ -56,12 +63,12 @@ function feedback(r,s){
  let detail=a===30&&b===30?'0.3 and 0.30 name the same amount on the same whole.':a===35&&b===30?'0.35 is five hundredths more than 0.30.':a===35&&b===40?'0.35 is five hundredths less than 0.40.':'';
  return `${r.choice===rn?'Your chosen relation fits these pictures.':'Your chosen relation differs from these pictures. You can revise or keep it.'} First: ${a}/100. Second: ${b}/100. The first is ${phrase} the second. ${detail}`.trim();
 }
-export function checkHundredths(state){
+export function checkHundredths(state,canExport){
  const v=active(state);if(!v||v.work.nextCheckId>=Number.MAX_SAFE_INTEGER||v.work.source.kind==='compare'&&v.work.response.choice===null)return false;
- const w=v.work,s=w.source,c={id:w.nextCheckId,source:copy(s),response:copy(w.response),support:[...w.support],familiar:w.familiar||w.checks.length>0,priorExposureUnknown:true,practiceOnly:true,outcome:outcome(w.response,s),feedbackText:feedback(w.response,s),feedbackShown:false};
- if(!validCheck(c,s))return false;w.nextCheckId++;w.checks.push(c);if(w.checks.length>4)w.checks.shift();w.feedbackId=c.id;mark(w,'feedback');return true;
+ return change(state,w=>{const s=w.source,c={id:w.nextCheckId,source:copy(s),response:copy(w.response),support:[...w.support],familiar:w.familiar||w.checks.length>0,priorExposureUnknown:true,practiceOnly:true,outcome:outcome(w.response,s),feedbackText:feedback(w.response,s),feedbackShown:false};
+  if(!validCheck(c,s))return false;w.nextCheckId++;w.checks.push(c);if(w.checks.length>4)w.checks.shift();w.feedbackId=c.id;mark(w,'feedback');return true;},canExport);
 }
-export function keepHundredths(state){const v=active(state);if(!v)return false;const w=v.work;w.kept={response:copy(w.response),support:[...w.support],familiar:w.familiar||w.checks.length>0,priorExposureUnknown:true,latestCheck:w.checks.length?copy(w.checks.at(-1)):null};return true;}
+export function keepHundredths(state,canExport){return change(state,w=>{w.kept={response:copy(w.response),support:[...w.support],familiar:w.familiar||w.checks.length>0,priorExposureUnknown:true,latestCheck:w.checks.length?copy(w.checks.at(-1)):null};return true;},canExport);}
 export function recoverHundredths(state,canExport=()=>true){
  const v=hundredthsView(state);if(v.status==='missing'||v.status==='ready'&&!v.unreadable.length)return false;
  const source=hundredthsCases[0];if(!validHundredthsSource(source))return false;

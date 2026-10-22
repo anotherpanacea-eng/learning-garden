@@ -4,7 +4,7 @@ import {hearButton} from './play-media.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const button=(label,attrs,primary=false)=>`<button type="button" class="${primary?'primary':'secondary'}" ${attrs}>${label}</button>`;
 const notice='<p id="hundredths-status" role="status" tabindex="-1"></p>';
-function grid(n,label,active=false){return `<div class="hundredths-picture" role="img" aria-label="${esc(label)}: ${n} of 100 equal small parts shaded in one whole square"><div class="hundredths-grid" aria-hidden="true">${Array.from({length:100},(_,i)=>`<i class="${i<n?'shaded':''}"></i>`).join('')}</div></div><p class="hundredths-count">${n} of 100 small parts shaded.</p>${active&&n>=30&&n<40?'<p class="hundredths-row-fact">3 complete rows of 10 make 30 small parts. Any remaining shaded parts are extra.</p>':''}`;}
+function grid(n,label,active=false){return `<div class="hundredths-diagram"><div class="hundredths-picture" role="img" aria-label="${esc(label)}: ${n} of 100 equal small parts shaded in one whole square"><div class="hundredths-grid" aria-hidden="true">${Array.from({length:100},(_,i)=>`<i class="${i<n?'shaded':''}"></i>`).join('')}</div></div><p class="hundredths-count">${n} of 100 small parts shaded.</p>${active&&n>=30&&n<40?'<p class="hundredths-row-fact">3 complete rows of 10 make 30 small parts. Any remaining shaded parts are extra.</p>':''}</div>`;}
 function chooser(v){return `<details class="hundredths-chooser" ${v.work?'':'open'}><summary>Choose any request</summary><div class="hundredths-requests">${hundredthsCases.map((s,i)=>`<article><h3>Request ${i+1}: ${esc(s.title)}</h3><p>${esc(s.request)}</p>${v.unreadable.some(x=>x.id===s.id)?'<p>This saved request cannot be opened here. It stays in notes; the other requests remain open.</p>':button(v.readable.some(x=>x.id===s.id)?'Return to this request':'Start this request',`data-hundredths-start="${s.id}"`)}</article>`).join('')}</div></details>`;}
 function older(v){return v.status==='recovery'?`<details><summary>Earlier bridge record</summary><pre>${esc(JSON.stringify(v.root,null,2))}</pre></details>`:v.unreadable.length?`<details><summary>Earlier unreadable requests (${v.unreadable.length})</summary><pre>${esc(JSON.stringify(v.unreadable,null,2))}</pre></details>`:'';}
 function responsePicture(r,s){return s.kind==='build'?grid(r.amount,'Saved selected amount'):`<p>Chosen relation: ${esc(r.choice||'none yet')}.</p><div class="hundredths-pair">${grid(s.left,'First saved fixed picture')}${grid(s.right,'Second saved fixed picture')}</div>`;}
@@ -22,18 +22,23 @@ export function hundredthsEntry(){return '<section class="hundredths-entry"><h2>
 export function hundredthsNotes(state){if(!Object.hasOwn(state,'hundredthsBridge'))return '';const v=hundredthsView(state);return `<details class="panel"><summary>Hundredths Bridge: supplied pictured practice</summary><p>Each request retains its original source. Chooser notation exposure is unknown. Checks and support are practice records, not independent decimal knowledge.</p>${v.status==='recovery'?older(v):history(v)+older(v)}<pre>${esc(JSON.stringify(state.hundredthsBridge,null,2))}</pre></details>`;}
 export function bindHundredths(state,{save,render,focus,canExport,exposeFacts}={}){
  const root=document.querySelector('[data-hundredths-root]');if(!root)return;
- if(markHundredthsDisplayed(state))save?.();const pairs=hundredthsFacts(state);if(pairs.length){exposeFacts?.(pairs);save?.();}
+ const preview=candidate=>{const shown=structuredClone(candidate);markHundredthsDisplayed(shown);const pairs=hundredthsFacts(shown);if(pairs.length)exposeFacts?.(pairs,shown);return canExport?.(shown)??true;};
+ const displayed=markHundredthsDisplayed(state,preview);if(displayed)save?.();
+ const pairs=hundredthsFacts(state),factsFit=!pairs.length||preview(state);
+ if(pairs.length&&factsFit){exposeFacts?.(pairs);save?.();}
+ const work=hundredthsView(state).work,feedback=work?.checks.find(c=>c.id===work.feedbackId);
+ if(work&&(!work.sourceShown||feedback&&!feedback.feedbackShown||!factsFit))root.querySelector('#hundredths-status').textContent='This newly shown picture could not be recorded safely. Earlier work is unchanged. Download notes and start a separate explorer before more work.';
  const status=message=>{const n=document.querySelector('#hundredths-status');if(n){n.textContent=message;focus?.('#hundredths-status');}};
  const refresh=target=>{save?.();render?.();focus?.(target);};
- const refusal='This bridge could not be added safely. Earlier work is unchanged. Download it from Grown-up notes, then start a separate explorer if needed.';
- root.querySelectorAll('[data-hundredths-start]').forEach(b=>b.addEventListener('click',()=>{if(startHundredths(state,b.dataset.hundredthsStart,canExport))refresh('#hundredths-request');else status(refusal);}));
- root.querySelectorAll('[data-hundredths-move]').forEach(b=>b.addEventListener('click',()=>{if(moveHundredths(state,Number(b.dataset.hundredthsMove)))refresh(`[data-hundredths-move="${b.dataset.hundredthsMove}"]`);}));
- root.querySelector('[data-hundredths-clear]')?.addEventListener('click',()=>{if(clearHundredths(state))refresh('[data-hundredths-clear]');});
- root.querySelectorAll('[data-hundredths-choice]').forEach(b=>b.addEventListener('click',()=>{if(chooseHundredths(state,b.dataset.hundredthsChoice))refresh(`[data-hundredths-choice="${b.dataset.hundredthsChoice}"]`);}));
- root.querySelector('[data-hundredths-check]')?.addEventListener('click',()=>{if(checkHundredths(state))refresh('#hundredths-feedback');});
- root.querySelector('[data-hundredths-keep]')?.addEventListener('click',()=>{if(keepHundredths(state))refresh('#hundredths-kept-status');});
- root.querySelector('[data-hundredths-help]')?.addEventListener('click',()=>{if(supportHundredths(state,'help'))refresh('#hundredths-help-text');});
- root.querySelector('[data-hundredths-together]')?.addEventListener('click',()=>{if(supportHundredths(state,'together'))refresh('[data-hundredths-together]');});
- root.querySelector('[data-hundredths-recover]')?.addEventListener('click',()=>{if(recoverHundredths(state,canExport))refresh('#hundredths-request');else status(refusal);});
- root.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',()=>{if(supportHundredths(state,'narrationRequested'))save?.();},{capture:true}));
+ const refusal='This change could not be saved safely. Earlier work is unchanged. Download it from Grown-up notes, then start a separate explorer if needed.';
+ root.querySelectorAll('[data-hundredths-start]').forEach(b=>b.addEventListener('click',()=>{if(startHundredths(state,b.dataset.hundredthsStart,preview))refresh('#hundredths-request');else status(refusal);}));
+ root.querySelectorAll('[data-hundredths-move]').forEach(b=>b.addEventListener('click',()=>{if(moveHundredths(state,Number(b.dataset.hundredthsMove),preview))refresh(`[data-hundredths-move="${b.dataset.hundredthsMove}"]`);else status(refusal);}));
+ root.querySelector('[data-hundredths-clear]')?.addEventListener('click',()=>{if(clearHundredths(state,preview))refresh('[data-hundredths-clear]');else status(refusal);});
+ root.querySelectorAll('[data-hundredths-choice]').forEach(b=>b.addEventListener('click',()=>{if(chooseHundredths(state,b.dataset.hundredthsChoice,preview))refresh(`[data-hundredths-choice="${b.dataset.hundredthsChoice}"]`);else status(refusal);}));
+ root.querySelector('[data-hundredths-check]')?.addEventListener('click',()=>{if(checkHundredths(state,preview))refresh('#hundredths-feedback');else status(refusal);});
+ root.querySelector('[data-hundredths-keep]')?.addEventListener('click',()=>{if(keepHundredths(state,preview))refresh('#hundredths-kept-status');else status(refusal);});
+ root.querySelector('[data-hundredths-help]')?.addEventListener('click',()=>{if(supportHundredths(state,'help',preview))refresh('#hundredths-help-text');else status(refusal);});
+ root.querySelector('[data-hundredths-together]')?.addEventListener('click',()=>{if(supportHundredths(state,'together',preview))refresh('[data-hundredths-together]');else status(refusal);});
+ root.querySelector('[data-hundredths-recover]')?.addEventListener('click',()=>{if(recoverHundredths(state,preview))refresh('#hundredths-request');else status(refusal);});
+ root.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',()=>{if(supportHundredths(state,'narrationRequested',preview))save?.();},{capture:true}));
 }
