@@ -370,3 +370,11 @@ The optional `#numbers/path` walk links from Number Garden. Move two shaped toke
 A waiting walk keeps its own words, events, mode, positions and remaining step. Unknown saved boards remain available in a notes download; starting a separate walk requires confirmation and retains the earlier record. The design studies linear number-board research, but this cooperative digital adaptation has not been evaluated for learning effects. See [spec 76](docs/specs/76-willow-path.md) and its [source audit](docs/source-audits/76-willow-path.md).
 
 Run `node test/willow-path-checks.mjs` for source checks. With the static app served locally and Playwright installed, run `WILLOW_TEST_URL=http://127.0.0.1:4173/ node test/willow-path-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `WILLOW_ARTIFACTS` optionally select a local module, browser and screenshot directory. These are synthetic Chrome checks, not physical iPad or audio verification.
+
+## Joining Supply Orders
+
+The optional `#numbers/join` table extends Bundle Burrow with two pictured additions: 24 + 13 and 24 + 17. Join the orders, move individual counters into a ten-frame, and wrap the same ten when the frame is full. Pip’s and Dot’s counters retain separate shapes and origin labels. A proposed total and a kept draft can be unfinished or revised; a matching number does not claim that a child used regrouping or an independent written method.
+
+Each case keeps its supplied source, grouping, raw total, support and earlier checks. Speech requests are labeled as requests, not proof of playback. Optional help and a separate example remain open. See [spec 77](docs/specs/77-joining-supply-orders.md) and its [source audit](docs/source-audits/77-joining-supply-orders.md).
+
+Run `node test/joining-orders-checks.mjs` and `node test/joining-orders-integration-checks.mjs` for source checks. With the static app served locally and Playwright installed, run `JOIN_TEST_URL=http://127.0.0.1:4173/ node test/joining-orders-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `JOIN_ARTIFACTS` optionally select a local module, browser and screenshot directory. These synthetic checks do not establish physical iPad behavior or learning gains.
