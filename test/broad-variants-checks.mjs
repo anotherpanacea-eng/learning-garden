@@ -56,7 +56,6 @@ for(const q of broadItems()){
 }
 const s=freshState();ensureBroad(s);const paused=generatedBroad(broadItems().find(q=>q.id==='operations-anchor'),'paused');s.broad.drafts['checkin:operations-anchor']={question:paused,attempts:[]};noteBroadExposure(s,{id:'other',fact:[...paused.fact].reverse()},'activity');check(s.broad.drafts['checkin:operations-anchor'].knownFact,'paused exact generated factors');
 for(const id of ['number','operations','fractions','patterns','geometry','measurement','reasoning']){const s=freshState();ensureBroad(s);beginTrail(s,id);for(let i=0;i<2;i++){const q=trailQuestion(s,id);recordTrail(s,makeBroadObservation(q,{attempts:[q.answer],method:'worked'},'checkin'));}beginTrail(s,id,true);check(trailQuestion(s,id).id===`${id}-anchor`,'revisit uses fresh anchor');}
-console.log(`${checks} Number Garden variant checks passed.`);
 {
  // A copy edit must not close a paused question; a changed answer or number still does.
  const item=broadItems().find(q=>q.kind==='number')||broadItems()[0];
@@ -76,4 +75,18 @@ console.log(`${checks} Number Garden variant checks passed.`);
   check(!r.broad.drafts[`checkin:${item.id}`],'non-text wording is not resumed');}
  {const choiceItem=broadItems().find(q=>Array.isArray(q.choices)&&q.choices.length>1);const s=freshState();const b=ensureBroad(s);const q=instantiateBroad(s,choiceItem,'checkin');q.choices[0]='  ';b.drafts[`checkin:${choiceItem.id}`]={attempts:[],question:q};const r=reload(s);
   check(!r.broad.drafts[`checkin:${choiceItem.id}`],'a saved question with a blank answer choice is not resumed');}
+ {const choiceItem=broadItems().find(q=>q.id==='fractions-foundation'),key=`checkin:${choiceItem.id}`;
+  const freshChoice=()=>{const s=freshState();ensureBroad(s);const q=instantiateBroad(s,choiceItem,'checkin');s.broad.drafts[key]={question:q,attempts:[q.answer],input:'kept choice'};return {s,q};};
+  {const {s,q}=freshChoice(),r=reload(s);check(r.broad.drafts[key]?.question.choices[q.answer]===q.choices[q.answer]&&!r.broad.draftNotice,'unchanged choice mapping resumes');}
+  {const {s,q}=freshChoice();q.prompt='Earlier question wording';const r=reload(s);
+   check(r.broad.drafts[key]?.question.prompt==='Earlier question wording'&&!r.broad.draftNotice,'valid choice mapping survives a prompt edit');}
+  for(const change of ['swap','duplicate']){const {s,q}=freshChoice(),other=q.choices.findIndex((_,i)=>i!==q.answer);
+   if(change==='swap')[q.choices[q.answer],q.choices[other]]=[q.choices[other],q.choices[q.answer]];
+   else q.choices[other]=q.choices[q.answer];
+   const original=structuredClone(s.broad.drafts[key]),r=reload(s);
+   check(!r.broad.drafts[key]&&r.broad.closedDrafts.length===1&&r.broad.draftNotice,`${change} choices close the unsafe draft`);
+   assert.deepEqual(r.broad.closedDrafts[0],{key,draft:original});checks++;
+  }
+ }
 }
+console.log(`${checks} Number Garden variant checks passed.`);
