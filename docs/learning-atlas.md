@@ -10,18 +10,18 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 154 explicit current references across 84 unique source topics: authored question references, scoped practice or supplied explanations. The other 1506 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 159 explicit current references across 87 unique source topics: authored question references, scoped practice or supplied explanations. The other 1503 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
 | Source subject | Topics | Topics with any declared link | Not yet mapped |
 | --- | --- | --- | --- |
 | Computing | 21 | 1 | 20 |
-| English | 286 | 10 | 276 |
+| English | 286 | 11 | 275 |
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 56 | 447 |
+| Mathematics | 503 | 58 | 445 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 14 | 533 |
 
@@ -85,6 +85,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Follow the Source Trail (`#workshop/sources`, local build) | read, build | Four open supplied-choice questions over the reviewed Paris1910 photograph, an explicitly derivative modern picture note and a modern date summary. Trace a proposed note-to-source link, distinguish card count from independent observation, and choose a limited display label. No positive independent-witness example, independent decoding/explanation/research, source trust ranking or whole-history coverage. |
 | Same Amount, New Cuts (`#workshop/fractions`, local build) | build, read | Six supplied-reference equal-whole constructions with a required different partition: halves/quarters and thirds/sixths in both directions. Move a proposed working flag, then choose the numerator of its actual position. Matching and naming outcomes remain separate. Existing Fraction Trail already accepts equivalent labels and compares kept/current ribbons; no new parser, free partition construction, independent notation writing/explanation or general fraction algorithm. |
 | Repeat a Delivery Block (`#workshop/repeats`, local build) | compose, build | Four original direct courier jobs on a labelled equal-interval grid. Compose two absolute arrows, repeat the whole pair two or three times, manually step each expanded command and revise. Proposed moves, attempted commands and travelled intervals remain distinct. Fixed expansion/counts are supplied model information, not independent programming or multiplication attainment. |
+| Whole batches for a gathering (`#cafe/batches`, local build) | allocate, build, compose | Three pictured requests for 2/4/6 guests: repeat a complete 100/150 mL two-guest recipe, prepare separate jars, read a supplied scale and compose a finite message. Optional additive contrast and familiar inverse reference; no fractional scaling, general ratio, independent calculation, free writing or physical measuring claim. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -132,7 +133,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | English / Grammar & Punctuation | 75 | 0 | Compose · execute · revise; Read · infer · support |
 | English / Handwriting & Transcription | 5 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Phonics & Word Reading | 23 | 1 | Build · transform · relate; Create · perform · reflect |
-| English / Reading Comprehension | 72 | 3 | Read · infer · support; Search · inspect · compare |
+| English / Reading Comprehension | 72 | 4 | Read · infer · support; Search · inspect · compare |
 | English / Speaking & Listening | 21 | 0 | Read · infer · support; Create · perform · reflect |
 | English / Spelling & Word Study | 24 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Vocabulary | 21 | 0 | Read · infer · support; Search · inspect · compare |
@@ -150,9 +151,9 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Data & Statistics | 18 | 2 | Change · measure · explain; Read · infer · support |
 | Mathematics / Fractions | 67 | 13 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Geometry | 69 | 7 | Build · transform · relate; Search · inspect · compare |
-| Mathematics / Mathematical Thinking | 48 | 1 | Build · transform · relate; Search · inspect · compare |
+| Mathematics / Mathematical Thinking | 48 | 2 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Measurement | 68 | 12 | Assemble · allocate · check; Build · transform · relate |
-| Mathematics / Multiplication & Division | 57 | 9 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Multiplication & Division | 57 | 10 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Number Representation & Place Value | 52 | 5 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
 | Mathematics / Ratio & Proportion | 18 | 0 | Assemble · allocate · check; Build · transform · relate |
@@ -342,6 +343,11 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Questioning Historical Sources](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TTzJTF-OkG) | scoped-practice / Follow the Source Trail (local build) / [source](../dist/source-trail-content.mjs) | Trace the openly declared origin of a modern note from photographPH8646 and limit its independent evidential weight. Four supplied questions, own frozen choices and revised display label. C’s independence is not established; no positive independent corroboration, historical author-purpose inference, independent reading/research or whole-topic attainment. |
 | [Equivalent fractions](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_FbDKeLfBCo) | scoped-practice / Same Amount, New Cuts (local build) / [source](../dist/ribbon-matches-content.mjs) | Six directed same-whole ribbon matches with different supplied partitions, especially1/3↔2/6 and2/3↔4/6. Actual endpoint matching and actual-flag numerator choices are separate. Guided partial diagram practice, not independent drawing, verbal explanation, arbitrary equivalence generation or whole-topic attainment. |
 | [Step-by-Step Instructions](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt__p5n8z5soJ) | scoped-practice / Repeat a Delivery Block (local build) / [source](../dist/repeat-deliveries-content.mjs) | Partial existing pinned Step-by-Step Instructions anchor: compose a finite two-arrow group repeated2/3 times, trace one command at a time and revise. Fresh upstream loop/repeat topics are documented in audit71 but absent from the vendor/runtime; no unresolved IDs or full loop/branching/forever curriculum claim. |
+| [Multiplication as repeated addition](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_PZ909yPrEC) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Repeat 1–3 complete two-guest cards and retain ingredient-labeled 100/150 mL sums. Supplied model practice only, not independent fact recall. |
+| [Multiplicative Comparison](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_U4cIBXVug4) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Compare whole-number copies of the same complete two-guest recipe; distinguish one more whole batch from adding 100 mL to each unequal ingredient. Narrow conceptual illustration, not general ratio/scaling proficiency. |
+| [Precise Maths Communication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TMoHjMhRS2) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Use mL next to each named ingredient in a supplied label; compare mL, g and items. No broad mathematical-vocabulary or free-writing claim. |
+| [Pictures and Text Working Together](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OlhMP7ShFT) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Match pictured complete cards, the retained request and supplied message phrases. No independent decoding or unseen reading assessment. |
+| [Capacity and volume](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_4lp_b5Pzik) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Revisit exact 50 mL pictured transfers in a supplied 500 mL jug, separate from requested jar amounts. No physical-tool skill or capacity estimation. |
 
 ## Sources, licensing and maintenance
 

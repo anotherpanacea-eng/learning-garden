@@ -63,8 +63,14 @@ const MAX_ROUND=Number.MAX_SAFE_INTEGER;
 const poolSizes={add:400,subtract:190,multiply:144};
 const terminal=r=>['continued','bypassed'].includes(r.phase);
 const roundKey=r=>`${r.task.kind}:${r.task.a}:${r.task.b}`;
+// Saved wording and pictures belong to the frozen round; the page draws from a, b and answer.
+// Check only those numbers, not today's generator output.
+function validFrozenExample(m,withPractice=false){
+ return keys(m,['kind','a','b','scene','answer','unit','prompt','explanation','pictures',...(withPractice?['practice']:[])])&&rivalParameters(m.kind,m.a,m.b)&&integer(m.scene,0,2)&&m.answer===(m.kind==='add'?m.a+m.b:m.kind==='subtract'?m.a-m.b:m.a*m.b)&&typeof m.unit==='string'&&typeof m.prompt==='string'&&typeof m.explanation==='string'&&object(m.pictures)&&(!withPractice||validFrozenExample(m.practice));
+}
+const validGeneratedTask=task=>validFrozenExample(task,true);
 function validGeneratedRival(r){
- if(!object(r)||!keys(r,['revision','id','task','reason','phase','input','feedback','practiceStep','supported','audioRequested','attempts','resolution','method','decompositionStep',...(Object.hasOwn(r,'connection')?['connection']:[])])||r.revision!=='bramble-2'||!integer(r.id,1,MAX_ROUND-1)||!object(r.task)||!rivalParameters(r.task.kind,r.task.a,r.task.b)||!integer(r.task.scene,0,2)||!same(r.task,generateRivalTask(r.task.kind,r.task.a,r.task.b,r.task.scene))||!reasons.includes(r.reason)||!phases.includes(r.phase)||typeof r.input!=='string'||typeof r.feedback!=='string'||!integer(r.practiceStep,0,2)||typeof r.supported!=='boolean'||typeof r.audioRequested!=='boolean'||!Array.isArray(r.attempts)||r.attempts.length>24||![null,'answered','together'].includes(r.resolution)||r.method!==null&&!methods.includes(r.method)||r.decompositionStep!==null&&!integer(r.decompositionStep,0,2))return false;
+ if(!object(r)||!keys(r,['revision','id','task','reason','phase','input','feedback','practiceStep','supported','audioRequested','attempts','resolution','method','decompositionStep',...(Object.hasOwn(r,'connection')?['connection']:[])])||r.revision!=='bramble-2'||!integer(r.id,1,MAX_ROUND-1)||!validGeneratedTask(r.task)||!reasons.includes(r.reason)||!phases.includes(r.phase)||typeof r.input!=='string'||typeof r.feedback!=='string'||!integer(r.practiceStep,0,2)||typeof r.supported!=='boolean'||typeof r.audioRequested!=='boolean'||!Array.isArray(r.attempts)||r.attempts.length>24||![null,'answered','together'].includes(r.resolution)||r.method!==null&&!methods.includes(r.method)||r.decompositionStep!==null&&!integer(r.decompositionStep,0,2))return false;
  if(Object.hasOwn(r,'connection')&&(!validConnection(r.connection,r.task.a,r.task.b)||r.task.kind!=='multiply'||r.reason!=='connected example')||r.reason==='connected example'&&!Object.hasOwn(r,'connection'))return false;
  if((r.audioRequested||r.phase==='practice'||r.practiceStep>0||r.decompositionStep!==null||r.method==='together')&&!r.supported)return false;
  let priorSupport=false;

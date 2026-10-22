@@ -68,6 +68,8 @@ node test/rain-paths-checks.mjs
 node test/rain-paths-integration-checks.mjs
 node test/measuring-recipes-checks.mjs
 node test/measuring-recipes-integration-checks.mjs
+node test/whole-batches-checks.mjs
+node test/whole-batches-integration-checks.mjs
 node test/travelers-archive-checks.mjs
 node test/travelers-archive-ui-checks.mjs
 node test/travelers-archive-integration-checks.mjs
@@ -89,6 +91,7 @@ node test/broad-help-checks.mjs
 node test/broad-model-checks.mjs
 node test/explorer-storage-checks.mjs
 node test/plantings-and-speech-checks.mjs
+node test/mobile-quality-checks.mjs
 node test/number-garden-story-checks.mjs
 node test/living-garden-checks.mjs
 node test/living-spiral-checks.mjs
@@ -139,7 +142,11 @@ The [current café and fact-garden specification](docs/specs/07-cafe-expeditions
 
 New café orders can use every ordered guest/bite pair from 1×1 through 12×12; a small-order range stays openly available. Range changes affect the next guest. Existing saved orders and history keep frozen original parameters. The separate multiplication garden exposes all144 ordered facts, six-question mixed practice, arrays/equal groups, split strategies and optional reported methods. Reversed facts keep separate observations. Records distinguish reported recall, working out, counting, support, retries, prior encounters and unknown method; no speed or mastery label is inferred. Parent notes retain up to576 fact observations and disclose that bound. Progress stays device-local and follows the existing save/export/reset controls.
 
-Read-aloud is optional and uses only voices for the passage language that the browser identifies as local. Voice & speed controls let you audition available voices and adjust the pace; enhanced/natural voices are preferred when identified by name, otherwise the local device default is preferred. Voice and speed choices belong to the active explorer and reset with that explorer’s progress. No microphone, external speech API or automatic audio is used. A visible read-together fallback works when local speech is unavailable. Speech stops on navigation or reset. All activities work without sound.
+Read-aloud is optional and uses only voices for the passage language that the browser identifies as local. Voice & speed lets you choose and preview an available voice and adjust the pace. Automatic selection names the local voice it requests; its existing enhanced/natural name heuristic and device-default preference do not guarantee voice quality. An explicitly saved voice takes priority. If it disappears or has not loaded yet, the choice remains visible as unavailable and no replacement speaks silently. Choose another available local voice or Automatic, or refresh after voices load. A known choice for the other passage language leaves the current language on automatic local speech, with an explanation; it does not overwrite the saved choice. Preferences belong to the active explorer and reset with that explorer’s progress. Speech stops on navigation, reset, page hiding and page exit; returning requires another Hear or preview action. No microphone, external speech API or automatic narration is used. All activities work without sound.
+
+Grown-ups: system speech settings and browser narration can expose different voices. On Mac, use System Settings → Accessibility → Read & Speak (Spoken Content on older versions) → System voice. On iPhone or iPad, use Settings → Accessibility → Read & Speak (or Spoken Content) → Voices, then the language. Preview installed voices there; if a free enhanced or premium download is offered, let it finish online. Return to the app, refresh its voice list, select a listed local voice and use Try this voice. If needed, save or download notes before reopening the browser or reloading. A voice available to Siri or Speak Screen, including a downloaded system voice, is not guaranteed to be browser-accessible. The app can name the voice requested through the browser API but cannot verify the sound the OS actually produces. If a preview sounds wrong, stop, try another available local voice or read together. [Apple Mac voice settings](https://support.apple.com/guide/mac-help/change-the-voice-your-mac-uses-to-speak-text-mchlp2290/mac) · [Apple iPhone spoken text](https://support.apple.com/guide/iphone/hear-whats-on-the-screen-or-typed-iph96b214f0/ios).
+
+[Mobile-quality evidence and pending real-device checks](docs/mobile-quality-evidence.md) distinguish cloud emulation from iPhone/iPad and Mac testing. With Python Playwright and sandbox-capable Chromium already installed, run `python3 test/mobile-quality-browser.py --evidence /tmp/garden-mobile-results.json` (use `--chromium PATH` for another installed executable). The test starts its own loopback server and uses synthetic progress and speech fixtures; it does not install a browser or call an external service. The static app's loaded routes can continue offline, but hosted offline reload or first visit is not guaranteed. A downloaded static copy served locally needs no internet.
 
 ## Gathering supplies
 
@@ -316,3 +323,5 @@ A separate manually stepped sixteen-counter example supplies optional help. Only
 The optional `#post/instructions` and `#loft/instructions` desks share one instruction notebook. Two original requests invite planning with picture tickets, arranging separate supplied sentences, manually trying their effects and revising for a reader. Folding matters because this pictured note is too wide for its envelope; a first-time visitor needs preparations before an invitation. Both valid preparation orders work. Later repairs keep the earlier invitation’s consequence rather than silently sending the visitor again.
 
 Original words remain separate, exact and ungraded. A person can read them, ask a question, and leave a comment tied to that version; a changed draft identifies earlier feedback as earlier. Optional typing/dictation/copying and reading reports describe participation, not verified independence. Unfinished work and bounded local versions are welcome. The device follows only supplied action IDs; no parser or prose-quality grader is added. Existing deliveries, letters and puppet shows remain separate. [Spec 54](docs/specs/54-instructions-for-a-reader.md) defines the supported instruction-writing slice; it does not establish general writing, decoding or programming competence. This build is stacked on Bundle Exchange and still requires composed-release verification.
+
+The locally built **Whole batches for a gathering** activity (`#cafe/batches`) invites children to repeat a two-guest recipe, measure separate portions, and compose a literal delivery label. Three pictured requests retain their own plans and unfinished drafts. Optional models compare repeating the complete recipe with adding the same amount to both ingredients; offering a tray gives a local gathering ending. All checks are supplied picture practice, with support retained, and do not serve a café guest or establish independent mastery. [Spec 50](docs/specs/50-whole-batch-gathering.md).

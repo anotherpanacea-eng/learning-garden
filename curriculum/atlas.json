@@ -660,6 +660,18 @@
       ],
       "route": "#workshop/repeats",
       "scope": "Four original direct courier jobs on a labelled equal-interval grid. Compose two absolute arrows, repeat the whole pair two or three times, manually step each expanded command and revise. Proposed moves, attempted commands and travelled intervals remain distinct. Fixed expansion/counts are supplied model information, not independent programming or multiplication attainment."
+    },
+    {
+      "id": "whole-batches",
+      "name": "Whole batches for a gathering",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "build",
+        "compose"
+      ],
+      "route": "#cafe/batches",
+      "scope": "Three pictured requests for 2/4/6 guests: repeat a complete 100/150 mL two-guest recipe, prepare separate jars, read a supplied scale and compose a finite message. Optional additive contrast and familiar inverse reference; no fractional scaling, general ratio, independent calculation, free writing or physical measuring claim."
     }
   ],
   "manualReferences": [
@@ -1313,6 +1325,41 @@
       "kind": "scoped-practice",
       "source": "dist/repeat-deliveries-content.mjs",
       "scope": "Partial existing pinned Step-by-Step Instructions anchor: compose a finite two-arrow group repeated2/3 times, trace one command at a time and revise. Fresh upstream loop/repeat topics are documented in audit71 but absent from the vendor/runtime; no unresolved IDs or full loop/branching/forever curriculum claim."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Repeat 1–3 complete two-guest cards and retain ingredient-labeled 100/150 mL sums. Supplied model practice only, not independent fact recall."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_U4cIBXVug4",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Compare whole-number copies of the same complete two-guest recipe; distinguish one more whole batch from adding 100 mL to each unequal ingredient. Narrow conceptual illustration, not general ratio/scaling proficiency."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_TMoHjMhRS2",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Use mL next to each named ingredient in a supplied label; compare mL, g and items. No broad mathematical-vocabulary or free-writing claim."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_OlhMP7ShFT",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Match pictured complete cards, the retained request and supplied message phrases. No independent decoding or unseen reading assessment."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_4lp_b5Pzik",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Revisit exact 50 mL pictured transfers in a supplied 500 mL jug, separate from requested jar amounts. No physical-tool skill or capacity estimation."
     }
   ],
   "increments": [
