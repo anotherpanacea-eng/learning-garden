@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 124 explicit current references across 65 unique source topics: authored question references, scoped practice or supplied explanations. The other 1525 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 129 explicit current references across 66 unique source topics: authored question references, scoped practice or supplied explanations. The other 1524 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -21,7 +21,7 @@ There are 124 explicit current references across 65 unique source topics: author
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 42 | 461 |
+| Mathematics | 503 | 43 | 460 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 10 | 537 |
 
@@ -74,6 +74,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | [Travelers’ Archive: Paris,1910](https://after-the-storm-learning.anotherpanacea.workers.dev/#archive) | read, search, compose | One reviewed Paris1910 visit: real credited CC0 photograph, modern original chronology summaries, schematic place matching, ordinal date ordering, finite source-scope/interpretation choices and ungraded local reply. Production date is distinct from exact scene date; no citywide recovery, independent research/decoding or French-proficiency claim. |
 | [Rain Paths charts: a carried result](https://after-the-storm-learning.anotherpanacea.workers.dev/#living/notebook/rain) | experiment, build | Freeze one actual completed current or kept machine result, choose useful counts and construct editable two-bar charts on a fixed 0–24 model-token scale. Draft reading, source fidelity and original runoff questions remain separate. Four finite sources; no measured hydrology, independent scale choice or learning-level inference. |
 | Willow packing table (`#post/packing`, local build) | allocate, build, read | Four invented seed-envelope requests with whole-bag capacity, full kits, loose envelopes and minimal loaded trips. Countable reversible grouping, actual-model readings and purpose-specific answers remain supplied practice. No written algorithm, decimal quotient, general multistep problem solving, formal place value or independent reading claim. |
+| Whole batches for a gathering (`#cafe/batches`, local build) | allocate, build, compose | Three pictured requests for 2/4/6 guests: repeat a complete 100/150 mL two-guest recipe, prepare separate jars, read a supplied scale and compose a finite message. Optional additive contrast and familiar inverse reference; no fractional scaling, general ratio, independent calculation, free writing or physical measuring claim. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -141,7 +142,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Geometry | 69 | 4 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Mathematical Thinking | 48 | 2 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Measurement | 68 | 7 | Assemble · allocate · check; Build · transform · relate |
-| Mathematics / Multiplication & Division | 57 | 10 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Multiplication & Division | 57 | 11 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Number Representation & Place Value | 52 | 3 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
 | Mathematics / Ratio & Proportion | 18 | 0 | Assemble · allocate · check; Build · transform · relate |
@@ -301,6 +302,11 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Division with remainders](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_p-nbe0w_lf) | explanation / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Explain why full groups, spare objects and minimum loaded trips differ; contrast a positive remainder with an exact fit. The broader source requires formal operations, multistep problems, equations and estimation, none taught or inferred here. |
 | [Precise Maths Communication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TMoHjMhRS2) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Attach supplied full-bag, loose-envelope or loaded-trip labels to separate numerical readings/predictions. No independent mathematical prose or transcription claim. |
 | [Pictures and Text Working Together](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OlhMP7ShFT) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Relate the literal packing request, capacity and purpose to countable pictured objects and groups. No independent decoding, inference or broad reading level claim. |
+| [Multiplication as repeated addition](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_PZ909yPrEC) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Repeat 1–3 complete two-guest cards and retain ingredient-labeled 100/150 mL sums. Supplied model practice only, not independent fact recall. |
+| [Multiplicative Comparison](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_U4cIBXVug4) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Compare whole-number copies of the same complete two-guest recipe; distinguish one more whole batch from adding 100 mL to each unequal ingredient. Narrow conceptual illustration, not general ratio/scaling proficiency. |
+| [Precise Maths Communication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TMoHjMhRS2) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Use mL next to each named ingredient in a supplied label; compare mL, g and items. No broad mathematical-vocabulary or free-writing claim. |
+| [Pictures and Text Working Together](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OlhMP7ShFT) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Match pictured complete cards, the retained request and supplied message phrases. No independent decoding or unseen reading assessment. |
+| [Capacity and volume](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_4lp_b5Pzik) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Revisit exact 50 mL pictured transfers in a supplied 500 mL jug, separate from requested jar amounts. No physical-tool skill or capacity estimation. |
 
 ## Sources, licensing and maintenance
 

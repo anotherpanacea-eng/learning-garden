@@ -10,6 +10,17 @@ const matching={
  'garden-return':['low','middle','high','low','middle','high'],
  'own-call':['middle']
 };
+{
+ const s={};chooseBellCard(s,'own-call');appendBellSlot(s,'low');keepBellCall(s);chooseBellCard(s,'post-arrival');checkBellArrangement(s);keepBellCall(s);setBellPage(s,'keep');
+ const targets=w=>[w.kept.source,w.checks[0].assessment.items[0],w.kept.assessment.items[0],w.kept.latestArrangement.assessment.items[0]];
+ for(const [index,field] of [[0,'purpose'],[1,'label'],[1,'id'],[2,'label'],[3,'label']])for(const value of [undefined,null,17,[],{toString:null}]){
+  const payload=JSON.parse(JSON.stringify(s));targets(payload.bellStudio.cards['post-arrival'])[index][field]=value;const loaded=JSON.parse(JSON.stringify(payload)),raw=JSON.stringify(loaded);
+  eq(b.bellState(loaded),null,'non-string saved invitation/criterion cannot render');ok(bellStudioPage(loaded).includes('An earlier Bell Studio draft is kept'),'malformed JSON text renders recovery');eq(JSON.stringify(loaded),raw,'recovery view preserves raw text');
+  ok(b.recoverBellStudio(loaded));eq(loaded.bellStudio.cards,{'own-call':s.bellStudio.cards['own-call']},'recovery drops only unreadable card');eq(loaded.bellStudio.recovered,JSON.parse(raw).bellStudio,'unreadable card retained');chooseBellCard(loaded,'own-call');ok(bellStudioPage(loaded).includes('Bell Studio'),'other card remains open');
+ }
+ s.bellStudio.cards['post-arrival'].kept.source.purpose='Earlier invitation <wording>';s.bellStudio.cards['post-arrival'].checks[0].assessment.items[0].label='Earlier criterion <wording>';
+ const historical=JSON.parse(JSON.stringify(s));ok(b.bellState(historical),'historical criterion and invitation text validates');ok(bellStudioPage(historical).includes('Earlier invitation &lt;wording&gt;'),'kept historical invitation renders');setBellPage(historical,'make');ok(bellStudioPage(historical).includes('Earlier criterion &lt;wording&gt;'),'historical criterion renders');
+}
 for(const c of BELL_CARDS){
  for(const fits of [false,true]){
   const s={};chooseBellCard(s,c.id);if(fits)for(const id of matching[c.id])appendBellSlot(s,id);

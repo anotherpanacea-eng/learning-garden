@@ -5,6 +5,15 @@ let checks=0;
 const check=(x,m)=>{assert.ok(x,m);checks++;},equal=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;},copy=x=>JSON.parse(JSON.stringify(x));
 const finish=s=>{while(!currentRainView(s).complete)check(nextRainPhase(s),'manual physical phase');};
 const expected={'cover-12':[[12,0],[0,12]],'cover-24':[[12,12],[0,24]],'space-12':[[12,0],[4,8]],'space-24':[[12,12],[4,20]]};
+{
+ const s={};chooseRainCase(s,'cover-12');setRainPending(s,'factor','cover');submitRainComparison(s,'factor');
+ // Recorded under an earlier key where this response was incorrect.
+ s.rainPaths.cases['cover-12'].checks[0].correct=false;
+ const serialized=JSON.stringify(s),loaded=JSON.parse(serialized);
+ check(rainPaths(loaded),'an unchanged save under an earlier answer key still loads');
+ equal(currentRainView(loaded).work.checks[0].correct,false,'recorded incorrect outcome retained despite today\'s key');
+ equal(JSON.stringify(loaded),serialized,'loading never regrades or rewrites saved work');
+}
 equal(RAIN_CASES.map(c=>c.id),Object.keys(expected),'four finite cases');equal(RAIN_MODEL.capacity,12,'authored storage capacity');equal(RAIN_MODEL.batchSize,4,'authored manual group');check(Object.isFrozen(RAIN_CASES)&&RAIN_CASES.every(c=>Object.isFrozen(c.trays)&&c.trays.every(Object.isFrozen)),'content recursively frozen');
 check(RAIN_MODEL.notice.includes('arbitrary')&&RAIN_MODEL.notice.includes('not measured'),'arbitrary units and provenance');check(RAIN_MODEL.limitation.includes('Real ground has more paths'),'immediate analogy boundary');check(RAIN_MODEL.details.some(x=>x.includes('Very dry ground does not always absorb')),'bounded earlier wetness analogy');check(RAIN_MODEL.sources.length===6&&RAIN_MODEL.sources.every(s=>s.url.startsWith('https:')),'primary sources and design reference');
 {
@@ -69,7 +78,7 @@ for(const raw of [null,[],42,'<unknown & exact>',{version:99,private:'synthetic 
 }
 {
  const s={};chooseRainCase(s,'space-24');finish(s);keepRainResult(s);chooseRainPlan(s,'B','holding12');nextRainPlan(s,'B');setRainPending(s,'columns',['storedNew','runoffNew']);submitRainComparison(s,'columns');const raw=copy(s);
- const mutations=[r=>r.extra=true,r=>r.version=2,r=>r.page='unknown',r=>r.cases['space-24'].progress=19,r=>r.cases['space-24'].config.modelId='future-model',r=>r.cases['space-24'].config.newRainTotal='24',r=>r.cases['space-24'].config.trays[0].priorStored=8,r=>r.cases['space-24'].keptResult.rows[1].runoffNew=8,r=>r.cases['space-24'].keptResult.model.capacity=13,r=>r.cases['space-24'].plans.B.sent=3,r=>r.cases['space-24'].plans.B.source.rows[1].runoffNew=24,r=>r.cases['space-24'].pending.columns.push('cover'),r=>r.cases['space-24'].checks[0].correct=false,r=>r.cases['space-24'].checks[0].shown.rows[0].storedNew=0,r=>r.cases['space-24'].support.global.help=false];
+ const mutations=[r=>r.extra=true,r=>r.version=2,r=>r.page='unknown',r=>r.cases['space-24'].progress=19,r=>r.cases['space-24'].config.modelId='future-model',r=>r.cases['space-24'].config.newRainTotal='24',r=>r.cases['space-24'].config.trays[0].priorStored=8,r=>r.cases['space-24'].keptResult.rows[1].runoffNew=8,r=>r.cases['space-24'].keptResult.model.capacity=13,r=>r.cases['space-24'].plans.B.sent=3,r=>r.cases['space-24'].plans.B.source.rows[1].runoffNew=24,r=>r.cases['space-24'].pending.columns.push('cover'),r=>r.cases['space-24'].checks[0].correct='false',r=>r.cases['space-24'].checks[0].shown.rows[0].storedNew=0,r=>r.cases['space-24'].support.global.help=false];
  for(const mutation of mutations){const forged=copy(raw);mutation(forged.rainPaths);const exact=copy(forged);equal(rainPaths(forged),null,'strict malformed/semantic state rejects');equal(ensureRainPaths(forged),null,'unsupported retained');equal(forged,exact,'validation never drops a bad part');}
  const reordered=copy(raw),w=reordered.rainPaths.cases['space-24'];w.config=Object.fromEntries(Object.entries(w.config).reverse());w.keptResult.config=Object.fromEntries(Object.entries(w.keptResult.config).reverse());check(rainPaths(reordered),'source comparison semantic, not key-order equality');
 }
