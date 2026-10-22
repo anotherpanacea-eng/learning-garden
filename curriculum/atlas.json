@@ -638,6 +638,17 @@
       ],
       "route": "#workshop/sources",
       "scope": "Four open supplied-choice questions over the reviewed Paris1910 photograph, an explicitly derivative modern picture note and a modern date summary. Trace a proposed note-to-source link, distinguish card count from independent observation, and choose a limited display label. No positive independent-witness example, independent decoding/explanation/research, source trust ranking or whole-history coverage."
+    },
+    {
+      "id": "ribbon-matches",
+      "name": "Same Amount, New Cuts",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "route": "#workshop/fractions",
+      "scope": "Six supplied-reference equal-whole constructions with a required different partition: halves/quarters and thirds/sixths in both directions. Move a proposed working flag, then choose the numerator of its actual position. Matching and naming outcomes remain separate. Existing Fraction Trail already accepts equivalent labels and compares kept/current ribbons; no new parser, free partition construction, independent notation writing/explanation or general fraction algorithm."
     }
   ],
   "manualReferences": [
@@ -1277,6 +1288,13 @@
       "kind": "scoped-practice",
       "source": "dist/source-trail-content.mjs",
       "scope": "Trace the openly declared origin of a modern note from photographPH8646 and limit its independent evidential weight. Four supplied questions, own frozen choices and revised display label. C’s independence is not established; no positive independent corroboration, historical author-purpose inference, independent reading/research or whole-topic attainment."
+    },
+    {
+      "game": "ribbon-matches",
+      "topicId": "mt_FbDKeLfBCo",
+      "kind": "scoped-practice",
+      "source": "dist/ribbon-matches-content.mjs",
+      "scope": "Six directed same-whole ribbon matches with different supplied partitions, especially1/3↔2/6 and2/3↔4/6. Actual endpoint matching and actual-flag numerator choices are separate. Guided partial diagram practice, not independent drawing, verbal explanation, arbitrary equivalence generation or whole-topic attainment."
     }
   ],
   "increments": [
