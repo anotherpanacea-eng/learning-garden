@@ -19,6 +19,10 @@
 .movement-card .hear-button{margin:4px 0}
 .movement-announcement{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .movement-fold{margin:16px 0;padding:10px 14px;border:1px solid #adbdac;border-radius:10px;background:#fffdf5}
-.movement-fold summary{display:flex;align-items:center;cursor:pointer;font-weight:700}
+.movement-fold summary{display:list-item;padding:10px 0;cursor:pointer;font-weight:700}
 .body-movement-entry a{padding:10px 12px;line-height:1.4}
+.body-movement-other{max-width:880px;margin:16px auto;padding:10px 14px;border:1px solid #adbdac;border-radius:10px;background:#fffdf5}
+.body-movement-other>summary{display:list-item;min-height:44px;padding:10px 0;cursor:pointer;font-weight:700}
+.body-movement-other a{display:inline-flex;min-height:44px;align-items:center}
+.body-movement-other :is(summary,a):focus-visible{outline:3px solid #956323;outline-offset:3px}
 @media(max-width:680px){.movement-cards{grid-template-columns:1fr}.movement-caption,.movement-figure figcaption{min-height:0}.movement-card{padding:12px}.movement-figure svg{max-height:155px}}
