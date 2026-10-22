@@ -5,6 +5,7 @@ const {pathToFileURL}=require('node:url');
  const root=path.resolve(__dirname,'..'),load=f=>import(pathToFileURL(path.join(root,'dist',f)).href);
  const {freshState}=await load('core.mjs'),{initializeExplorerState,prepareProgressImport}=await load('progress-transfer.mjs');
  const batch=await load('whole-batches-core.mjs'),share=await load('sharing-counter-core.mjs'),recipe=await load('measuring-recipes-core.mjs'),town=await load('town-remembers-core.mjs');
+ const broad=await load('broad-core.mjs'),variants=await load('broad-variants.mjs');
  const {localDay}=await load('town-day.mjs');
  const base=()=>{const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;return s;};
  const copy=x=>JSON.parse(JSON.stringify(x));
@@ -59,6 +60,44 @@ const {pathToFileURL}=require('node:url');
    if(width===390){const imported=await exported(page);eq(imported.townRemembers,(await saved(page)).townRemembers,'export/import retains exact errand history');}
    await page.close();
   }
+  // A visible equal-group explanation qualifies later multiplication, including a waiting broad draft.
+  const exposed=fixture('share-buns','shares',3),question=variants.generatedBroad(broad.broadItems().find(q=>q.id==='operations-anchor'),'probe-183');
+  eq(question.fact,[3,4],'synthetic generated question is 3 by 4');
+  broad.ensureBroad(exposed).drafts['checkin:operations-anchor']={attempts:[],question};
+  const crossing=await pageFor(exposed,390,844,'#town/remembers');
+  await crossing.locator('[data-town-start]').waitFor();
+  ok(!(await saved(crossing)).broad.seenFacts.includes('3x4'),'chooser has not exposed waiting broad fact');
+  await tap(crossing,'[data-town-start]');
+  let visit=(await saved(crossing)).townRemembers.errands.at(-1);
+  ok(!(await saved(crossing)).broad.seenFacts.includes('3x4'),'unselected bun basket has not exposed grouping');
+  const wrong=visit.choices.findIndex(c=>c.value!==visit.expected);await crossing.locator('.town-choice').nth(wrong).tap();
+  ok(!(await saved(crossing)).broad.seenFacts.includes('3x4'),'selection alone has not exposed grouping');
+  await tap(crossing,'[data-town-check]');
+  let afterCheck=await saved(crossing);ok(afterCheck.broad.seenFacts.includes('3x4'),'visible non-fitting Check exposes 3 by 4');
+  eq(afterCheck.broad.drafts['checkin:operations-anchor'].knownFact,true,'waiting generated broad draft is marked known');
+  const prior=broad.familiarity(afterCheck,question),observation=broad.makeBroadObservation(question,{attempts:[question.answer],knownFact:prior.knownFact,priorExposureUnknown:prior.priorExposureUnknown},'checkin',false,afterCheck);
+  eq(observation.freshEvidence,false,'later independent broad answer is not called fresh after Town explanation');
+  eq(afterCheck.townRemembers.errands.at(-1).checks[0].fit,false,'Town Check remains non-fitting');
+  await tap(crossing,'[data-town-support="example"]');
+  ok((await saved(crossing)).broad.seenFacts.includes('2x6'),'visible separate Help exposes 2 by 6');
+  await crossing.reload();await crossing.locator('.town-example').waitFor();
+  ok((await saved(crossing)).broad.seenFacts.includes('3x4'),'checked feedback survives reload');
+  await crossing.close();
+  // Imported checked work has no inferred exposure until its text is opened again.
+  const hidden=fixture('share-buns','shares',3);town.startTown(hidden);let recorded=hidden.townRemembers.errands.at(-1);
+  town.chooseTown(hidden,recorded.choices.find(c=>c.value!==recorded.expected).value);town.checkTown(hidden);town.asideTown(hidden);
+  const notesPage=await pageFor(hidden,390,844,'#notes');await notesPage.locator('.town-notes').waitFor();
+  ok(!(await saved(notesPage)).broad.seenFacts.includes('3x4'),'collapsed history does not expose checked feedback');
+  await notesPage.locator('.town-notes > summary').click();
+  await notesPage.waitForFunction(()=>{const r=JSON.parse(localStorage.getItem('learning-garden-explorers'));return JSON.parse(localStorage.getItem(`number-garden-v1:${r.activeId}`)).broad.seenFacts.includes('3x4');});
+  ok((await saved(notesPage)).broad.seenFacts.includes('3x4'),'opening readable checked notes exposes 3 by 4');
+  ok(!(await saved(notesPage)).broad.seenFacts.includes('2x6'),'hidden Help is not inferred from history');
+  await notesPage.close();
+  const rawOnly=copy(hidden);rawOnly.townRemembers.errands.at(-1).form='future-form';
+  const rawPage=await pageFor(rawOnly,390,844,'#notes');await rawPage.locator('.town-notes').waitFor();
+  await rawPage.locator('.town-notes > summary').click();
+  ok(!(await saved(rawPage)).broad.seenFacts.includes('3x4'),'unreadable raw history never exposes a fact');
+  await rawPage.close();
   // Actual source-game Keep controls stamp today; the home invitation waits.
   for(const [kind,route,pageButton,keepButton,rootName,caseId] of [
    ['trays','#cafe/batches','[data-wb-page="keep"]','[data-wb-keep]','wholeBatches','rehearsal-table'],

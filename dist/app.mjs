@@ -6,6 +6,7 @@ import {renderFractionTrail,fractionTrailEntry,bindFractionTrail} from './fracti
 import {renderParcelPacking,parcelPackingEntry,bindParcelPacking} from './parcel-packing-ui.mjs';
 import {wholeBatchesPage,wholeBatchesEntry,bindWholeBatches} from './whole-batches-ui.mjs';
 import {townPage,townInvitation,bindTown} from './town-remembers-ui.mjs';
+import {townDisplayedFactPairs} from './town-remembers-core.mjs';
 import {batchDisplayedFactPairs} from './whole-batches-core.mjs';
 import {bellStudioPage,bellStudioEntry,bindBellStudio} from './bell-studio-ui.mjs';
 import {createBellPlayer} from './bell-studio-audio.mjs';
@@ -222,7 +223,7 @@ function render(){
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
   else if(bellBench)html=bellStudioPage(state);
   else if(archiveBench)html=travelersArchivePage(state);
-  else if(root==='town'&&slug==='remembers')html=townPage(state,detail);
+  else if(root==='town'&&slug==='remembers'){const pairs=townDisplayedFactPairs(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=townPage(state,detail);}
   else if(bundleBench){const view=renderBundleExchange(state);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;const changed=noteBundleDisplay(state,view.examples,live);exposeStoryFacts({facts:view.facts});if(changed||view.facts.length)save();}
   else if(fractionBench)html=renderFractionTrail(state).html;
   else if(recipeBench)html=measuringRecipesPage(state);
@@ -370,6 +371,7 @@ function bind(){
  document.querySelector('[data-rp-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const exposure=rainDisplayExposure(state,{view:'notes'});noteRainDisplayExposure(state,exposure);exposeStoryFacts({facts:exposure.facts});save();}});
  bindSharingCounter(state,{save,render,navigate,focus:focusElement});
  document.querySelector('[data-sc-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){exposeStoryFacts({facts:sharingDisplayedFactPairs(state,'notes')});save();}});
+ document.querySelector('.town-notes')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const pairs=townDisplayedFactPairs(state,null,'notes');if(pairs.length){exposeStoryFacts({facts:pairs});save();}}});
  bindFieldNotebook(state,{save,render,navigate,focus:focusElement});
  document.querySelector('[data-fn-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){syncFieldPlantExposure('notes');syncRainNotebookExposure(state,{view:'notes',rootExposer:exposeRain});save();}});
  document.querySelector('[data-rn-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open)syncRainNotebookExposure(state,{view:'notes',rootExposer:exposeRain});});
