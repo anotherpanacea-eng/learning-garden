@@ -36,8 +36,25 @@ function validWork(w,id,unknown){
  return true;
 }
 export function validBundle(root){return keys(root,['version','currentCase','page','cases','shownBundleExamples',...(Object.hasOwn(root||{},'recovered')?['recovered']:[])])&&root.version===1&&!!bundleCase(root.currentCase)&&bundlePages.includes(root.page)&&obj(root.cases)&&Object.hasOwn(root.cases,root.currentCase)&&(root.page!=='digits'||Array.isArray(root.cases[root.currentCase]?.support)&&root.cases[root.currentCase].support.includes('digits'))&&list(root.shownBundleExamples,s=>knownBundleSignatures.includes(s))&&Object.entries(root.cases).every(([id,w])=>!!bundleCase(id)&&validWork(w,id,Object.hasOwn(root,'recovered')));}
-export function bundleState(state){return !Object.hasOwn(state,'bundleExchange')?fresh():validBundle(state.bundleExchange)?state.bundleExchange:null;}
-export function bundleHistoryUnknown(state){return Object.hasOwn(state,'bundleExchange')&&(!validBundle(state.bundleExchange)||Object.hasOwn(state.bundleExchange,'recovered'));}
+// Version 1 originally saved these unit labels and the numeric error as display text.
+const restoredUnit=x=>x==='wrapped bundles'?'wrapped':x==='individual counters'?'counters':x;
+export function bundleState(state){
+ if(!Object.hasOwn(state,'bundleExchange'))return fresh();const root=state.bundleExchange;
+ if(validBundle(root))return root;
+ if(!obj(root)||root.version!==1||!obj(root.cases))return null;
+ const restored=clone(root);
+ for(const w of Object.values(restored.cases)){
+  if(!obj(w))continue;
+  for(const s of [w,...(Array.isArray(w.history)?w.history:[]),w.kept]){
+   if(!obj(s))continue;
+   if(obj(s.drafts))for(const d of Object.values(s.drafts))if(obj(d))d.unit=restoredUnit(d.unit);
+   if(obj(s.target))s.target.unit=restoredUnit(s.target.unit);
+  }
+  if(obj(w.errors))for(const k of bundleKinds)if(w.errors[k]==='Enter a whole number from 0 to 99 using digits.')w.errors[k]=numericError;
+ }
+ return validBundle(restored)?restored:null;
+}
+export function bundleHistoryUnknown(state){return Object.hasOwn(state,'bundleExchange')&&(!bundleState(state)||Object.hasOwn(state.bundleExchange,'recovered'));}
 export function bundleView(state){const root=bundleState(state);if(!root)return {unsupported:true,raw:state.bundleExchange,priorExposureUnknown:true};const w=root.cases[root.currentCase];return {unsupported:false,root,work:w,case:w,source:w.source,model:w.model,targets:targets(w),feedback:map(k=>w.history.find(h=>h.id===w.currentFeedback[k])||null),kept:w.kept,errors:w.errors,priorExposureUnknown:Object.hasOwn(root,'recovered')};}
 function change(state,fn){const r=bundleState(state);if(!r||!fn(r,r.cases[r.currentCase]))return false;state.bundleExchange=r;return true;}
 const support=(w,k)=>{if(!w.support.includes(k))w.support.push(k);};
@@ -58,5 +75,5 @@ export function useBundleSupport(state,kind){return change(state,(r,w)=>{if(!bun
 export function setBundleHelp(state,topic){return change(state,(r,w)=>{if(topic!==null&&!bundleHelpTopics.includes(topic))return false;w.helpTopic=topic;clearErrors(w);if(topic)support(w,topic);return true;});}
 export function stepBundleExample(state){return change(state,(r,w)=>{support(w,'example');w.helpTopic='example';w.exampleStep=Math.min(bundleExample.steps.length,w.exampleStep+1);clearErrors(w);return true;});}
 export function keepBundle(state){return change(state,(r,w)=>{w.kept={...snapshot(w),outcomes:keptOutcomes(w),priorExposureUnknown:Object.hasOwn(r,'recovered')};clearErrors(w);return true;});}
-export function recoverBundle(state){if(!Object.hasOwn(state,'bundleExchange')||validBundle(state.bundleExchange))return false;const r=fresh();r.recovered=clone(state.bundleExchange);state.bundleExchange=r;return true;}
-export function noteBundleExamples(state,signatures){if(!Object.hasOwn(state,'bundleExchange')||!validBundle(state.bundleExchange)||!list(signatures,s=>knownBundleSignatures.includes(s)))return false;const r=state.bundleExchange;let changed=false;for(const s of signatures)if(!r.shownBundleExamples.includes(s)){r.shownBundleExamples.push(s);changed=true;}return changed;}
+export function recoverBundle(state){if(!Object.hasOwn(state,'bundleExchange')||bundleState(state))return false;const r=fresh();r.recovered=clone(state.bundleExchange);state.bundleExchange=r;return true;}
+export function noteBundleExamples(state,signatures){if(!Object.hasOwn(state,'bundleExchange')||!list(signatures,s=>knownBundleSignatures.includes(s)))return false;const r=bundleState(state);if(!r)return false;let changed=false;for(const s of signatures)if(!r.shownBundleExamples.includes(s)){r.shownBundleExamples.push(s);changed=true;}if(changed)state.bundleExchange=r;return changed;}

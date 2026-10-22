@@ -27,6 +27,29 @@ for(const c of trailCases){const s=fresh();T.chooseTrailCase(s,c.id);T.setTrailR
 }
 for(const payload of [null,[],4,{version:99,raw:'<img src=x onerror="fictional()">'}]){const s=fresh();s.fractionTrail=payload;const before=JSON.stringify(s);ok(renderFractionTrail(s).html.includes('cannot play'),'unsupported root unavailable');ok(!destinationNotes(s).includes('<img src=x'),'unsupported note escaped');eq(JSON.stringify(s),before,'unsupported reads unchanged');eq(prepareProgressImport(before).state.fractionTrail,payload,'unsupported import exact');T.recoverTrail(s);T.prepareTrailTogether(s);T.checkTrail(s,'stop');T.keepTrail(s);eq(T.trailView(s).kept.priorExposureUnknown,true,'recovery keeps unknown');ok(fractionTrailNotes(s).includes('Earlier encounters are unknown'),'recovery notes qualified');eq(prepareProgressImport(JSON.stringify(s)).state.fractionTrail,s.fractionTrail,'recovered root exact');}
 class Storage{constructor(){this.map=new Map();}get length(){return this.map.size;}key(i){return [...this.map.keys()][i]??null;}getItem(k){return this.map.get(k)??null;}setItem(k,v){this.map.set(k,v);}removeItem(k){this.map.delete(k);}}
+// Generated with 3eac809^:dist/fraction-trail-core.mjs; both error sentences were valid version-1 saves.
+const legacyTrail=JSON.parse(fs.readFileSync(new URL('./fixtures/fraction-trail-v1-errors.json',import.meta.url),'utf8'));
+for(const [id,code] of [['repair-thirds','needs-flag'],['sixth-stop','needs-reading']]){
+ const s=fresh();s.fractionTrail=structuredClone(legacyTrail);s.fractionTrail.currentCase=id;
+ // Test each legacy error independently, including when its case is no longer current.
+ for(const [other,w] of Object.entries(s.fractionTrail.cases))if(other!==id)w.inputError=null;
+ const before=structuredClone(s.fractionTrail),disk=new Storage(),store=new ExplorerStore(disk);store.load();ok(store.save(s),'legacy save written');
+ const reloaded=initializeExplorerState(new ExplorerStore(disk).load());
+ eq(T.trailView(reloaded).unsupported,false,`${code}: legacy save loads`);
+ eq(T.trailView(reloaded).case.inputError,code,`${code}: legacy sentence restored as code`);
+ const expected=structuredClone(before);expected.cases[id].inputError=code;
+ eq(T.trailState(reloaded),expected,`${code}: drafts, checks and keeps unchanged`);
+ eq(reloaded.fractionTrail,before,`${code}: reading leaves original save unchanged`);
+ ok(renderFractionTrail(reloaded).html.includes(before.cases[id].inputError),`${code}: error renders`);
+ ok(T.chooseTrailCase(reloaded,'quarter-stop'),`${code}: other kept case remains playable`);
+ eq(T.trailView(reloaded).kept,before.cases['quarter-stop'].kept,`${code}: other kept work intact`);
+ ok(T.checkTrail(reloaded,'reading'),`${code}: other case can still check its reading`);
+ eq(T.trailView(reloaded).feedback.reading.outcomes.readingMatches,true,`${code}: other case reading outcome`);
+ ok(T.chooseTrailCase(reloaded,id),`${code}: errored draft remains playable`);
+ eq(T.trailView(reloaded).case.readingText,' 2- ',`${code}: raw invalid reading intact`);
+ eq(T.trailView(reloaded).case.history,before.cases[id].history,`${code}: invalid reading adds no check`);
+ eq(T.trailView(reloaded).kept,before.cases[id].kept,`${code}: unfinished keep intact`);
+}
 {
  const disk=new Storage(),store=new ExplorerStore(disk);let s=initializeExplorerState(store.load());const id=store.active.id;T.chooseTrailCase(s,'past-one');T.prepareTrailTogether(s);T.setTrailReading(s,'2-');store.save(s);eq(new ExplorerStore(disk).load().fractionTrail,s.fractionTrail,'reload exact');const other=store.add({},s);ok(!other.fractionTrail,'new explorer separate');s=store.select(id,other);eq(T.trailView(s).flagTicks,15,'selected explorer resumes');store.setPersistence(false,s);store.save(s);eq(store.load().fractionTrail,s.fractionTrail,'save-off current session preserved');ok(!new ExplorerStore(disk).load().fractionTrail,'save-off disk removed');ok(!store.clearActive().fractionTrail,'reset removes active trail');
 }

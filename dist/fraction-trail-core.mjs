@@ -25,9 +25,12 @@ const snapshot=w=>({source:clone(w.source),cuts:[...w.cuts],markerIndex:w.marker
 function validSnapshot(s,w){return validSource(s.source)&&s.source.id===w.source.id&&same(s.source,w.source)&&validModel(s)&&supports(s.support)&&s.support.every(k=>w.support.includes(k))&&s.support.includes('visualModel')&&(!s.source.initialCuts.length||s.support.includes('suppliedInitialPartition'));}
 function relevant(kind,a,b){return same(a.cuts,b.cuts)&&(kind==='spaces'||a.markerIndex===b.markerIndex)&&(kind!=='reading'||a.readingText===b.readingText);}
 const workKeys=['source','cuts','markerIndex','readingText','helpTopic','exampleStep','support','checkedKinds','currentFeedback','inputError','history','nextCheckId','kept','familiar'];
+// Version 1 originally saved these screen-only errors as sentences.
+const restoredInputError=x=>x==='Start the flag before checking its reading.'?'needs-flag':x==='Enter a whole number or a fraction such as 1/2.'?'needs-reading':x;
 function validWork(w,id,unknown){
- if(!keys(w,workKeys)||w.source?.id!==id||!validSnapshot(w,w)||!(w.helpTopic===null||trailHelpTopics.includes(w.helpTopic))||!Number.isInteger(w.exampleStep)||w.exampleStep<0||w.exampleStep>4||typeof w.familiar!=='boolean'||!keys(w.checkedKinds,trailKinds)||!keys(w.currentFeedback,trailKinds)||!trailKinds.every(k=>typeof w.checkedKinds[k]==='boolean')||!(w.inputError===null||['needs-flag','needs-reading'].includes(w.inputError))||!Array.isArray(w.history)||w.history.length>24||!Number.isInteger(w.nextCheckId)||w.nextCheckId<1)return false;
- if(w.exampleStep>0&&!w.support.includes('example')||w.helpTopic&&!w.support.includes(w.helpTopic==='changed-whole'?'changedWhole':w.helpTopic)||w.inputError==='needs-flag'&&w.markerIndex!==null||w.inputError==='needs-reading'&&(w.markerIndex===null||parseTrailReading(w.readingText)))return false;
+ const inputError=restoredInputError(w?.inputError);
+ if(!keys(w,workKeys)||w.source?.id!==id||!validSnapshot(w,w)||!(w.helpTopic===null||trailHelpTopics.includes(w.helpTopic))||!Number.isInteger(w.exampleStep)||w.exampleStep<0||w.exampleStep>4||typeof w.familiar!=='boolean'||!keys(w.checkedKinds,trailKinds)||!keys(w.currentFeedback,trailKinds)||!trailKinds.every(k=>typeof w.checkedKinds[k]==='boolean')||!(inputError===null||['needs-flag','needs-reading'].includes(inputError))||!Array.isArray(w.history)||w.history.length>24||!Number.isInteger(w.nextCheckId)||w.nextCheckId<1)return false;
+ if(w.exampleStep>0&&!w.support.includes('example')||w.helpTopic&&!w.support.includes(w.helpTopic==='changed-whole'?'changedWhole':w.helpTopic)||inputError==='needs-flag'&&w.markerIndex!==null||inputError==='needs-reading'&&(w.markerIndex===null||parseTrailReading(w.readingText)))return false;
  let previous=0;
  for(const h of w.history){
   if(!keys(h,['id','kind','source','cuts','markerIndex','readingText','support','outcomes','familiar','checkedPreviously','priorExposureUnknown'])||!Number.isInteger(h.id)||h.id<=previous||h.id>=w.nextCheckId||!trailKinds.includes(h.kind)||!validSnapshot(h,w)||typeof h.familiar!=='boolean'||typeof h.checkedPreviously!=='boolean'||h.priorExposureUnknown!==unknown||!same(h.outcomes,outcome(h.kind,h))||h.kind==='reading'&&(h.markerIndex===null||!parseTrailReading(h.readingText)))return false;
@@ -43,7 +46,12 @@ export function validTrail(root){
  if(!obj(root)||!keys(root,['version','currentCase','page','cases',...(Object.hasOwn(root,'recovered')?['recovered']:[])])||root.version!==1||!trailCase(root.currentCase)||!trailPages.includes(root.page)||!obj(root.cases)||!Object.hasOwn(root.cases,root.currentCase))return false;
  return Object.entries(root.cases).every(([id,w])=>!!trailCase(id)&&validWork(w,id,Object.hasOwn(root,'recovered')));
 }
-export function trailState(state){return !Object.hasOwn(state,'fractionTrail')?fresh():validTrail(state.fractionTrail)?state.fractionTrail:null;}
+export function trailState(state){
+ if(!Object.hasOwn(state,'fractionTrail'))return fresh();const root=state.fractionTrail;
+ if(!validTrail(root))return null;
+ if(!Object.values(root.cases).some(w=>restoredInputError(w.inputError)!==w.inputError))return root;
+ return {...root,cases:Object.fromEntries(Object.entries(root.cases).map(([id,w])=>[id,{...w,inputError:restoredInputError(w.inputError)}]))};
+}
 export function trailView(state){const root=trailState(state);if(!root)return {unsupported:true,raw:state.fractionTrail};const w=root.cases[root.currentCase],m=model(w.source,w.cuts,w.markerIndex,w.readingText);return {unsupported:false,root,case:w,source:w.source,...m,feedback:Object.fromEntries(trailKinds.map(k=>[k,w.history.find(h=>h.id===w.currentFeedback[k])||null])),kept:w.kept,priorExposureUnknown:Object.hasOwn(root,'recovered')};}
 function change(state,fn){const root=trailState(state);if(!root||!fn(root,root.cases[root.currentCase]))return false;state.fractionTrail=root;return true;}
 const support=(w,s)=>{if(!w.support.includes(s))w.support.push(s);};

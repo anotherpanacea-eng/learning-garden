@@ -12,6 +12,7 @@ import {deliveries} from '../dist/post-office-content.mjs';
 import {startShow,setSceneDialogue} from '../dist/loft-core.mjs';
 import {drawLetter} from '../dist/letter-trail-core.mjs';
 import {chooseMessageCase,setMessageText} from '../dist/message-core.mjs';
+import {messagePage} from '../dist/message-ui.mjs';
 import {chooseTrailCase,setTrailReading,keepTrail} from '../dist/fraction-trail-core.mjs';
 import {chooseBundleCase,setBundleText} from '../dist/bundle-exchange-core.mjs';
 import {itemById} from '../dist/broad-core.mjs';
@@ -35,6 +36,21 @@ for(const c of instructionCases)for(const desk of ['post','loft']){const s=fresh
 }
 for(const payload of [null,[],9,{version:99,raw:'<img src=x onerror="fictional()">'}]){const s=fresh();s.instructionNotes=payload;const before=JSON.stringify(s);for(const desk of ['post','loft'])ok(renderInstructions(s,desk).html.length>0,'unsupported has recovery view');ok(!destinationNotes(s).includes('<img src=x'),'unsupported notes escaped');eq(JSON.stringify(s),before,'unsupported root reads unchanged');eq(prepareProgressImport(before).state.instructionNotes,payload,'unsupported root transfers exact');I.recoverInstructions(s);I.tryInstructionStrip(s,'post');I.keepInstructionDraft(s,'post');eq(I.instructionView(s,'post').run.priorExposureUnknown,true,'recovered run retains uncertainty');eq(I.instructionView(s,'post').case.kept[0].priorExposureUnknown,true,'recovered keep retains uncertainty');eq(prepareProgressImport(JSON.stringify(s)).state.instructionNotes,s.instructionNotes,'recovered payload exact');}
 for(const [raw,visible,expected] of [['A\rB\r\nC','A\n\nB\nC','A\r\n\nB\r\nC'],['A\rX\nB','A\n\nB','A\r\n\nB'],['\nFirst line','\nFirst line!','\nFirst line!'],['\r\nFirst\r\nSecond\rThird','\nFirst!\nSecond\nThird','\r\nFirst!\r\nSecond\rThird'],['A\r\nB','A\nB','A\r\nB'],['🐇\r\nFold','🐇\nFold twice','🐇\r\nFold twice']])eq(preserveInstructionBreaks(raw,visible),expected,'untouched imported linebreaks survive native textarea normalization');
+for(const target of ['outcome','step','embedded','termination']){
+ const s=fresh();chooseMessageCase(s,'post','basket');setMessageText(s,'post','original','A fictional waiting note.');
+ I.editInstructionStrip(s,'post','add','fold');I.tryInstructionStrip(s,'post');I.keepInstructionDraft(s,'post');
+ const w=s.instructionNotes.cases['pocket-note'];
+ if(target==='termination'){w.runs[0].transitions=[];w.runs[0].terminalScene=null;w.runs[0].blockedAction='nonexistent';w.runs[0].requestFulfilled=true;}
+ else if(target==='step')w.runs[0].transitions[0].description={toString:'malformed'};
+ else (target==='embedded'?w.kept[0].run:w.runs[0]).description={toString:'malformed'};
+ const before=JSON.stringify(s),messages=structuredClone(s.messages);
+ ok(destinationNotes(s).includes('saved material is unavailable'),'shared notes survive malformed frozen descriptions');
+ for(const desk of ['post','loft'])ok(renderInstructions(s,desk).html.includes('An earlier notebook is retained'),'malformed run uses unavailable path');
+ ok(destinationNotes(s).includes('A fictional waiting note.'),'shared notes keep other writing available');
+ ok(messagePage(s,'post').includes('msg-workspace'),'other game still opens');eq(s.messages,messages,'other saved work untouched');
+ eq(JSON.stringify(s),before,'unreadable outcome retained exact during rendering');if(target==='termination')eq(prepareProgressImport(before).state.instructionNotes,s.instructionNotes,'unreadable outcome still transfers');
+ ok(setMessageText(s,'post','original','A fictional revised note.'),'other game remains editable');
+}
 class Storage{constructor(){this.map=new Map();}get length(){return this.map.size;}key(i){return [...this.map.keys()][i]??null;}getItem(k){return this.map.get(k)??null;}setItem(k,v){this.map.set(k,v);}removeItem(k){this.map.delete(k);}}
 {
  const disk=new Storage(),store=new ExplorerStore(disk);let s=initializeExplorerState(store.load());const id=store.active.id;I.chooseInstructionCase(s,'post','welcome-table');I.editInstructionStrip(s,'post','add','invite');I.tryInstructionStrip(s,'post');I.stepInstructionRun(s,'post',1);I.setInstructionText(s,'post',raw);I.readInstructionWords(s,'post','Where?');I.setInstructionComment(s,'post','\n A fictional reply. ');I.keepInstructionDraft(s,'post');store.save(s);eq(new ExplorerStore(disk).load().instructionNotes,s.instructionNotes,'exact raw/run/cursor reload');const other=store.add({},s);ok(!other.instructionNotes,'new explorer separate');s=store.select(id,other);eq(I.instructionView(s,'post').case.text,raw,'selected explorer resumes');store.setPersistence(false,s);store.save(s);eq(store.load().instructionNotes,s.instructionNotes,'save-off memory playable');ok(!new ExplorerStore(disk).load().instructionNotes,'save-off removes disk');ok(!store.clearActive().instructionNotes,'reset removes active notebook');

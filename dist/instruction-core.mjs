@@ -69,11 +69,15 @@ const commonKeys=['source','plan','strip','text','textRevision','productionRepor
 const common=(w,unknown)=>({source:clone(w.source),plan:[...w.plan],strip:clone(w.strip),text:w.text,textRevision:w.textRevision,productionReport:w.productionReport,readingReport:w.readingReport,support:[...w.support],familiar:w.familiar,priorExposureUnknown:unknown});
 function validCommon(s,source,unknown){return validSource(s.source)&&s.source.id===source.id&&validPlan(s.source,s.plan)&&validStrip(s.source,s.strip)&&text(s.text,1200)&&integer(s.textRevision)&&instructionProductionReports.includes(s.productionReport)&&instructionReadingReports.includes(s.readingReport)&&supports(s.support)&&typeof s.familiar==='boolean'&&s.priorExposureUnknown===unknown;}
 const runKeys=['id','source','strip','productionReport','readingReport','support','familiar','priorExposureUnknown','startingScene','transitions','terminalScene','blockedAction','requestFulfilled','description'];
+function validScene(id,s){
+ return id==='pocket-note'?keys(s,['note','envelope'])&&typeof s.note==='string'&&typeof s.envelope==='string':keys(s,['arrowReady','cardReady','rabbit','recognized'])&&typeof s.arrowReady==='boolean'&&typeof s.cardReady==='boolean'&&typeof s.rabbit==='string'&&typeof s.recognized==='boolean';
+}
 function validRun(run,source,unknown){
  if(!keys(run,runKeys)||!integer(run.id,1)||!validSource(run.source)||run.source.id!==source.id||!validStrip(run.source,run.strip)||!supports(run.support)||!instructionProductionReports.includes(run.productionReport)||!instructionReadingReports.includes(run.readingReport)||typeof run.familiar!=='boolean'||run.priorExposureUnknown!==unknown)return false;
  // A frozen run keeps its outcome as recorded: check ids and shape, never re-run it or compare its text.
- const t=run.transitions;
- return Array.isArray(t)&&t.length<=run.strip.length&&t.every((x,i)=>object(x)&&x.actionId===run.strip[i].actionId&&x.variant===run.strip[i].variant&&object(x.after))&&object(run.startingScene)&&typeof run.requestFulfilled==='boolean';
+ const t=run.transitions,blocked=run.blockedAction!==null,id=run.source.id;
+ return Array.isArray(t)&&t.length<=run.strip.length&&(blocked?t.length>0&&!!action(run.source,run.blockedAction)&&t.at(-1)?.actionId===run.blockedAction:t.length===run.strip.length)&&validScene(id,run.startingScene)&&validScene(id,run.terminalScene)&&typeof run.requestFulfilled==='boolean'&&typeof run.description==='string'&&
+ t.every((x,i)=>keys(x,['actionId','variant','wording','before','after','blocked','description'])&&x.actionId===run.strip[i].actionId&&x.variant===run.strip[i].variant&&typeof x.wording==='string'&&typeof x.description==='string'&&x.blocked===(blocked&&i===t.length-1)&&validScene(id,x.before)&&validScene(id,x.after)&&same(x.before,i?t[i-1].after:run.startingScene))&&same(run.terminalScene,t.length?t.at(-1).after:run.startingScene);
 }
 const humanKeys=['text','textRevision','question','comment','productionReport','readingReport','support','priorExposureUnknown'];
 function validHuman(h,w,unknown){return h===null||keys(h,humanKeys)&&text(h.text,1200)&&integer(h.textRevision)&&h.textRevision<=w.textRevision&&instructionQuestions.includes(h.question)&&text(h.comment,400)&&instructionProductionReports.includes(h.productionReport)&&instructionReadingReports.includes(h.readingReport)&&supports(h.support)&&h.priorExposureUnknown===unknown&&(h.textRevision!==w.textRevision||h.text===w.text);}
@@ -125,7 +129,6 @@ export function noteInstructionEntry(state,desk){
 function change(state,desk,fn){
  if(!desks.includes(desk))return false;
  const root=instructionState(state);if(!root)return false;
- for(const c of Object.values(root.cases))c.source=clone(instructionCase(c.source.id));
  const w=root.cases[root.selected[desk]];
  if(!fn(root,w))return false;
  w.seen=true;state.instructionNotes=root;return true;
@@ -153,7 +156,8 @@ export function editInstructionStrip(state,desk,operation,id,variant='A'){return
 export function copyInstructionPlan(state,desk){return change(state,desk,(r,w)=>{w.strip=w.plan.map(actionId=>({actionId,variant:'A'}));support(w,'suppliedAssembly');w.playback=null;return true;});}
 export function tryInstructionStrip(state,desk){return change(state,desk,(r,w)=>{
  if(w.nextRunId>=instructionSequenceLimit)return false;
- const run={id:w.nextRunId++,source:clone(w.source),strip:clone(w.strip),productionReport:w.productionReport,readingReport:w.readingReport,support:[...w.support],familiar:w.familiar,priorExposureUnknown:Object.hasOwn(r,'recovered'),...runInstructionModel(w.source,w.strip)};
+ const source=instructionCase(w.source.id);
+ const run={id:w.nextRunId++,source:clone(source),strip:clone(w.strip),productionReport:w.productionReport,readingReport:w.readingReport,support:[...w.support],familiar:w.familiar,priorExposureUnknown:Object.hasOwn(r,'recovered'),...runInstructionModel(source,w.strip)};
  w.runs.push(run);w.runs=w.runs.slice(-24);w.playback={runId:run.id,cursor:0};if(!run.transitions.length)support(w,'runFeedback');w.familiar=true;return true;
 });}
 export function stepInstructionRun(state,desk,direction){return change(state,desk,(r,w)=>{
