@@ -46,6 +46,18 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
    await visit(p,'#riddles');await p.locator('[data-riddle-root]').waitFor();await geometry(p,`${width} imported card`);await p.close();
   }
 
+  // Concurrent Spanish cards rotate and round-trip their own null destination.
+  const spanish=await setup(fresh(),390);await tap(spanish,'[data-riddle-size="spanish"]');await tap(spanish,'[data-riddle-next]');const spanishIds=[];
+  for(let i=0;i<6;i++){
+   const card=(await state(spanish)).riddles.current;spanishIds.push(card.id);eq(card.source.place,null,'Spanish card owns no fabricated destination');
+   ok(riddles.find(x=>x.id===card.id).strand==='spanish','Spanish choice keeps the Spanish strand');
+   if(i===3){await spanish.reload();eq((await state(spanish)).riddles.current,card,'Spanish reload keeps exact frozen source/order');}
+   await tap(spanish,`[data-riddle-choice="${card.source.answer}"]`);eq(await spanish.locator('.riddle-after a').count(),0,'finished Spanish card adds no invented destination');
+   eq((await state(spanish)).riddles.current.outcome,'solved','Spanish card can finish');if(i<5)await tap(spanish,'[data-riddle-next]');
+  }
+  eq(new Set(spanishIds).size,6,'all six Spanish cards appear before rotation');await geometry(spanish,'Spanish result');await shot(spanish,'riddles-spanish-390.png');
+  const spanishRaw=await downloaded(spanish);await spanish.locator('#progress-file').setInputFiles({name:'synthetic-spanish-notes.json',mimeType:'application/json',buffer:Buffer.from(spanishRaw)});await spanish.locator('#progress-import-confirm').waitFor();await tap(spanish,'#progress-import-confirm');eq((await state(spanish)).riddles,prepareProgressImport(spanishRaw).state.riddles,'actual Spanish file import preserves null destinations and sources');await visit(spanish,'#riddles');eq(await spanish.locator('.riddle-after a').count(),0,'resumed Spanish source retains no destination link');await spanish.close();
+
   // An earlier codes-only current is unavailable, and a canceled or used confirmation cannot replace it.
   const old=fresh();old.riddles={version:1,size:'any',met:[{future:'met'}],current:{id:'rain',order:['rain','sand','leaf'],picks:[],clue:false,outcome:null},log:[{id:'rain',tries:1,clue:false,outcome:'solved'},{future:'log'}]};
   const recovery=await setup(old);ok((await recovery.locator('[data-riddle-root]').innerText()).includes('earlier riddle card is unavailable'),'legacy current does not borrow current catalog');

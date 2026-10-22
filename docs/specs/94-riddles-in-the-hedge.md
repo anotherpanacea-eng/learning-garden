@@ -14,7 +14,7 @@ Status: **reviewed repair amendment, implemented in an unmerged, undeployed draf
 
 ## Cards and challenge bands
 
-24 original cards in `dist/riddles-content.mjs`, six per authoring band, spread over the math, reading, science, world and French strands. Every card has exactly three choices, one fitting.
+24 original cards in `dist/riddles-content.mjs`, eight per authoring band, spread over the math, reading, science, world, French and Spanish strands. Every card has exactly three choices, one fitting.
 
 | Band (authoring label) | Child-facing card choice | Shape |
 |---|---|---|
