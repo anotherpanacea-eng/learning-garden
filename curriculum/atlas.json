@@ -672,6 +672,18 @@
       ],
       "route": "#cafe/batches",
       "scope": "Three pictured requests for 2/4/6 guests: repeat a complete 100/150 mL two-guest recipe, prepare separate jars, read a supplied scale and compose a finite message. Optional additive contrast and familiar inverse reference; no fractional scaling, general ratio, independent calculation, free writing or physical measuring claim."
+    },
+    {
+      "id": "parcel-packing",
+      "name": "Willow packing table",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "build",
+        "read"
+      ],
+      "route": "#post/packing",
+      "scope": "Four invented seed-envelope requests with whole-bag capacity, full kits, loose envelopes and minimal loaded trips. Countable reversible grouping, actual-model readings and purpose-specific answers remain supplied practice. No written algorithm, decimal quotient, general multistep problem solving, formal place value or independent reading claim."
     }
   ],
   "manualReferences": [
@@ -1360,6 +1372,48 @@
       "kind": "scoped-practice",
       "source": "dist/whole-batches-ui.mjs",
       "scope": "Revisit exact 50 mL pictured transfers in a supplied 500 mL jug, separate from requested jar amounts. No physical-tool skill or capacity estimation."
+    },
+    {
+      "game": "parcel-packing",
+      "topicId": "mt_LpSuPgL31x",
+      "kind": "scoped-practice",
+      "source": "dist/parcel-packing-ui.mjs",
+      "scope": "Group by a specified bag size and count complete groups, distinct from sharing among a given number of recipients. Pictures and counting help stay available; no whole division topic claim."
+    },
+    {
+      "game": "parcel-packing",
+      "topicId": "mt_iNdrM2-oJf",
+      "kind": "scoped-practice",
+      "source": "dist/parcel-packing-ui.mjs",
+      "scope": "Interpret the count of full equal-capacity bags as a quotient, retaining spare envelopes separately. Match a supplied repeated-group expression; no independent symbolic calculation or division fluency claim."
+    },
+    {
+      "game": "parcel-packing",
+      "topicId": "mt_Zdv-b-iW5K",
+      "kind": "scoped-practice",
+      "source": "dist/parcel-packing-ui.mjs",
+      "scope": "Interpret four fixed within-100 equal-group packing requests according to the kit or all-envelope transport purpose. Narrow pictured contexts, not all word-problem types or independent decoding."
+    },
+    {
+      "game": "parcel-packing",
+      "topicId": "mt_p-nbe0w_lf",
+      "kind": "explanation",
+      "source": "dist/parcel-packing-ui.mjs",
+      "scope": "Explain why full groups, spare objects and minimum loaded trips differ; contrast a positive remainder with an exact fit. The broader source requires formal operations, multistep problems, equations and estimation, none taught or inferred here."
+    },
+    {
+      "game": "parcel-packing",
+      "topicId": "mt_TMoHjMhRS2",
+      "kind": "scoped-practice",
+      "source": "dist/parcel-packing-ui.mjs",
+      "scope": "Attach supplied full-bag, loose-envelope or loaded-trip labels to separate numerical readings/predictions. No independent mathematical prose or transcription claim."
+    },
+    {
+      "game": "parcel-packing",
+      "topicId": "mt_OlhMP7ShFT",
+      "kind": "scoped-practice",
+      "source": "dist/parcel-packing-ui.mjs",
+      "scope": "Relate the literal packing request, capacity and purpose to countable pictured objects and groups. No independent decoding, inference or broad reading level claim."
     }
   ],
   "increments": [

@@ -108,6 +108,8 @@ node test/post-pagination-checks.mjs
 node test/post-rival-checks.mjs
 node test/post-rival-adaptive-checks.mjs
 node test/post-rival-adaptive-ui-checks.mjs
+node test/parcel-packing-checks.mjs
+node test/parcel-packing-integration-checks.mjs
 node test/courier-rival-ui-checks.mjs
 node test/learning-invitation-checks.mjs
 node test/learning-connections-checks.mjs
@@ -129,6 +131,14 @@ node scripts/check-story-packs.mjs
 ```
 
 These checks use synthetic observations. They check the application logic; they do not validate the assessment as an educational instrument.
+
+For the Willow packing table's real browser journeys, install Python Playwright and Chromium, then run:
+
+```sh
+python test/parcel-packing-browser.py
+```
+
+This starts and stops its own loopback preview and uses isolated browser profiles with fictional waiting games. It checks desktop, tablet and phone viewports, keyboard/touch interaction, focus, both packing purposes and reload. Screenshots go to a temporary directory; use `--artifacts /tmp/packing-browser` to choose one. Set `CHROMIUM_PATH` if Chromium is not on `PATH`. This is Chromium emulation, not a physical-device or audio check.
 
 ## Roadmap and science expeditions
 
@@ -323,5 +333,7 @@ A separate manually stepped sixteen-counter example supplies optional help. Only
 The optional `#post/instructions` and `#loft/instructions` desks share one instruction notebook. Two original requests invite planning with picture tickets, arranging separate supplied sentences, manually trying their effects and revising for a reader. Folding matters because this pictured note is too wide for its envelope; a first-time visitor needs preparations before an invitation. Both valid preparation orders work. Later repairs keep the earlier invitation’s consequence rather than silently sending the visitor again.
 
 Original words remain separate, exact and ungraded. A person can read them, ask a question, and leave a comment tied to that version; a changed draft identifies earlier feedback as earlier. Optional typing/dictation/copying and reading reports describe participation, not verified independence. Unfinished work and bounded local versions are welcome. The device follows only supplied action IDs; no parser or prose-quality grader is added. Existing deliveries, letters and puppet shows remain separate. [Spec 54](docs/specs/54-instructions-for-a-reader.md) defines the supported instruction-writing slice; it does not establish general writing, decoding or programming competence. This build is stacked on Bundle Exchange and still requires composed-release verification.
+
+The locally built **Willow packing table** (`#post/packing`) gives the same seed envelopes two purposes: make the most full welcome kits, or carry every envelope in the fewest loaded trips. Four requests include an exact fit; partial bags, loose envelopes and spare capacity stay distinct. Pack/unpack countable objects, read the actual table, revise the purpose-specific answer and keep or seal a plan. Supplied pictures and requested examples support practice without claiming written division or independent mastery. [Spec 51](docs/specs/51-parcel-packing-and-remainders.md).
 
 The locally built **Whole batches for a gathering** activity (`#cafe/batches`) invites children to repeat a two-guest recipe, measure separate portions, and compose a literal delivery label. Three pictured requests retain their own plans and unfinished drafts. Optional models compare repeating the complete recipe with adding the same amount to both ingredients; offering a tray gives a local gathering ending. All checks are supplied picture practice, with support retained, and do not serve a café guest or establish independent mastery. [Spec 50](docs/specs/50-whole-batch-gathering.md).

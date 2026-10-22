@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 159 explicit current references across 87 unique source topics: authored question references, scoped practice or supplied explanations. The other 1503 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 165 explicit current references across 88 unique source topics: authored question references, scoped practice or supplied explanations. The other 1502 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -21,7 +21,7 @@ There are 159 explicit current references across 87 unique source topics: author
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 58 | 445 |
+| Mathematics | 503 | 59 | 444 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 14 | 533 |
 
@@ -86,6 +86,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Same Amount, New Cuts (`#workshop/fractions`, local build) | build, read | Six supplied-reference equal-whole constructions with a required different partition: halves/quarters and thirds/sixths in both directions. Move a proposed working flag, then choose the numerator of its actual position. Matching and naming outcomes remain separate. Existing Fraction Trail already accepts equivalent labels and compares kept/current ribbons; no new parser, free partition construction, independent notation writing/explanation or general fraction algorithm. |
 | Repeat a Delivery Block (`#workshop/repeats`, local build) | compose, build | Four original direct courier jobs on a labelled equal-interval grid. Compose two absolute arrows, repeat the whole pair two or three times, manually step each expanded command and revise. Proposed moves, attempted commands and travelled intervals remain distinct. Fixed expansion/counts are supplied model information, not independent programming or multiplication attainment. |
 | Whole batches for a gathering (`#cafe/batches`, local build) | allocate, build, compose | Three pictured requests for 2/4/6 guests: repeat a complete 100/150 mL two-guest recipe, prepare separate jars, read a supplied scale and compose a finite message. Optional additive contrast and familiar inverse reference; no fractional scaling, general ratio, independent calculation, free writing or physical measuring claim. |
+| Willow packing table (`#post/packing`, local build) | allocate, build, read | Four invented seed-envelope requests with whole-bag capacity, full kits, loose envelopes and minimal loaded trips. Countable reversible grouping, actual-model readings and purpose-specific answers remain supplied practice. No written algorithm, decimal quotient, general multistep problem solving, formal place value or independent reading claim. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -153,7 +154,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Geometry | 69 | 7 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Mathematical Thinking | 48 | 2 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Measurement | 68 | 12 | Assemble · allocate · check; Build · transform · relate |
-| Mathematics / Multiplication & Division | 57 | 10 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Multiplication & Division | 57 | 11 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Number Representation & Place Value | 52 | 5 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
 | Mathematics / Ratio & Proportion | 18 | 0 | Assemble · allocate · check; Build · transform · relate |
@@ -348,6 +349,12 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Precise Maths Communication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TMoHjMhRS2) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Use mL next to each named ingredient in a supplied label; compare mL, g and items. No broad mathematical-vocabulary or free-writing claim. |
 | [Pictures and Text Working Together](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OlhMP7ShFT) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Match pictured complete cards, the retained request and supplied message phrases. No independent decoding or unseen reading assessment. |
 | [Capacity and volume](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_4lp_b5Pzik) | scoped-practice / Whole batches for a gathering (local build) / [source](../dist/whole-batches-ui.mjs) | Revisit exact 50 mL pictured transfers in a supplied 500 mL jug, separate from requested jar amounts. No physical-tool skill or capacity estimation. |
+| [Division as equal sharing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_LpSuPgL31x) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Group by a specified bag size and count complete groups, distinct from sharing among a given number of recipients. Pictures and counting help stay available; no whole division topic claim. |
+| [What Division Means](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_iNdrM2-oJf) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Interpret the count of full equal-capacity bags as a quotient, retaining spare envelopes separately. Match a supplied repeated-group expression; no independent symbolic calculation or division fluency claim. |
+| [Multiplication and Division Word Problems](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Zdv-b-iW5K) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Interpret four fixed within-100 equal-group packing requests according to the kit or all-envelope transport purpose. Narrow pictured contexts, not all word-problem types or independent decoding. |
+| [Division with remainders](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_p-nbe0w_lf) | explanation / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Explain why full groups, spare objects and minimum loaded trips differ; contrast a positive remainder with an exact fit. The broader source requires formal operations, multistep problems, equations and estimation, none taught or inferred here. |
+| [Precise Maths Communication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TMoHjMhRS2) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Attach supplied full-bag, loose-envelope or loaded-trip labels to separate numerical readings/predictions. No independent mathematical prose or transcription claim. |
+| [Pictures and Text Working Together](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OlhMP7ShFT) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Relate the literal packing request, capacity and purpose to countable pictured objects and groups. No independent decoding, inference or broad reading level claim. |
 
 ## Sources, licensing and maintenance
 
