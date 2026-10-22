@@ -1,6 +1,6 @@
 # Source and route audit · 105 Explore questions
 
-**Scope:** an original navigation doorway over existing merged activities. This change adds no scientific or mathematical teaching model, curriculum mapping, external art, Jane code, Marble content, or learner-data interpretation. Reviewed against public `origin/main` `23df8d390ba62888408bc3d3b7aefc9f42635c29` on 2026-10-22. The [spec](../specs/105-explore-questions-doorway.md) supplies every new child-facing sentence.
+**Scope:** an original navigation doorway over existing merged activities. This change adds no scientific or mathematical teaching model, curriculum mapping, external art, Jane code, Marble content, or learner-data interpretation. The initial route inventory was reviewed against public `origin/main` `23df8d390ba62888408bc3d3b7aefc9f42635c29` on 2026-10-22; the implementation branch then merged `7a7d542028cd3eb8e536192316cc3644cba548e2`, whose Willow Double addition does not alter these twelve destinations. The [spec](../specs/105-explore-questions-doorway.md) supplies every new child-facing sentence.
 
 ## Actual local overlap
 
@@ -23,4 +23,4 @@ No new factual source was necessary for a navigation copy pass. The statements l
 
 ## Verification boundary
 
-This audit establishes source and route fit at `23df8d3`, not that the new UI has been built, reviewed, merged or used with learners. Render the mock at 320/820 and review with the spec; during implementation, use actual-browser navigation and notebook comparisons to check route and save boundaries. The 4-question display itself should remain deterministic and progress-independent.
+This audit establishes source and route fit, not independent clearance, merge, deployment or use with learners. The candidate was checked locally with 222 existing invitation checks, 88 transfer checks and 133 actual-Chrome assertions at 320/820. Those checks included every question link, browser Back/focus, unknown slug, the closed and open twelve-place directory, paused Water Lab work, temporary Movement/Recut reset, and an actual notes download/import. The 4-question display remains deterministic and progress-independent; independent implementation review is still pending.
