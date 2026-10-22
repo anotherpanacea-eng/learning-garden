@@ -53,6 +53,8 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/field-kit-checks.mjs
+node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
 node test/sharing-counter-checks.mjs
@@ -352,3 +354,11 @@ For synthetic browser regressions, serve `dist` locally and run `node test/paris
 An optional home invitation returns to a kept tray, loaf or kitchen jar on a later local day. Six finite forms ask for a different unknown or representation: guest counts, a whole-batch shortcut, same-loaf comparisons, a fraction of twelve buns, a coarser jug scale, and an extra pour. Earlier undated keeps are eligible too. Each errand freezes its own source and choices; checking, support and keeping an answer remain separate. Nothing changes the original game or café stock.
 
 To run synthetic browser journeys, serve `dist` locally and run `node test/town-remembers-browser.js` with `TOWN_TEST_URL` pointing to the server. Installed Node Playwright and Chromium are required; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. `TOWN_ARTIFACTS` selects a temporary screenshot directory. Tests cover all six forms at phone/tablet sizes, actual source-game Keep buttons, later-day invitations, revisions, support, recovery and notebook download/import. This is Chromium emulation, not a physical iPad or audible-speech check.
+
+## Field Kit: local build
+
+Open `#field` on the locally served build for five optional adult-guided cards: a real measuring jug, growing cress, a handwritten café notice, weather watching and an observation walk or window view. Each card connects to its existing model game, has Before/After pages and can be printed locally. An adult can choose “We did it,” “It surprised us” or “Not today.” These are offscreen reports, not measurements or evidence of attainment. No physical result, photograph, handwriting or location is collected.
+
+The notebook keeps the selected supplied reply and support separately. Earlier cards remain readable even when the current card catalog changes. Ordinary explorer switching, reset, save-off and local export/import also apply. See [spec 75](docs/specs/75-field-kit.md) and its [source audit](docs/source-audits/75-field-kit.md). This branch is draft work; it has not been deployed to the live site.
+
+For synthetic browser verification, serve `dist/` locally and run `node test/field-kit-browser.js` with `FIELD_TEST_URL` set to that server's URL. Set `PLAYWRIGHT_MODULE` to an installed Playwright module and, if needed, `CHROME_PATH` to an installed Chromium browser. Optional `FIELD_ARTIFACTS` saves synthetic screenshots. The test inspects print media, simulates local voice callbacks, and exercises phone/tablet layouts and actual notebook download/import; it does not establish physical-device audio behavior or what happened offscreen.

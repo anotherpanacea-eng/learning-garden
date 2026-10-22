@@ -12,6 +12,7 @@ import {createBellPlayer} from './bell-studio-audio.mjs';
 import {travelersArchivePage,travelersArchiveEntry,bindTravelersArchive} from './travelers-archive-ui.mjs';
 import {travelersArchive,noteArchiveSources} from './travelers-archive-core.mjs';
 import {measuringRecipesPage,measuringRecipesEntry,bindMeasuringRecipes} from './measuring-recipes-ui.mjs';
+import {fieldKitPage,fieldKitEntry,bindFieldKit,resetFieldKitTurn} from './field-kit-ui.mjs';
 import {rainPathsPage,rainPathsEntry,bindRainPaths} from './rain-paths-ui.mjs';
 import {rainDisplayExposure,noteRainDisplayExposure} from './rain-paths-core.mjs';
 import {rainNotebookPage,rainNotebookEntry,bindRainNotebook} from './rain-notebook-ui.mjs';
@@ -208,6 +209,7 @@ function exposeRain(exposure){noteRainDisplayExposure(state,exposure);exposeStor
 function render(){
   stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
+  if(root!=='field'||choosingExplorer)resetFieldKitTurn();
   const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters',instructionBench=['post','loft'].includes(root)&&slug==='instructions';
@@ -221,21 +223,22 @@ function render(){
   ensureEqualGroups(state);ensureMessages(state);ensureLetters(state);
   let html;
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
+  else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id);
   else if(bellBench)html=bellStudioPage(state);
   else if(archiveBench)html=travelersArchivePage(state);
   else if(root==='town'&&slug==='remembers')html=townPage(state,detail);
   else if(bundleBench){const view=renderBundleExchange(state);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;const changed=noteBundleDisplay(state,view.examples,live);exposeStoryFacts({facts:view.facts});if(changed||view.facts.length)save();}
   else if(fractionBench)html=renderFractionTrail(state).html;
-  else if(recipeBench)html=measuringRecipesPage(state);
+  else if(recipeBench)html=measuringRecipesPage(state)+fieldKitEntry('jug');
   else if(packingBench){const view=renderParcelPacking(state);if(view.facts.length){exposeStoryFacts({facts:view.facts});save();}html=view.html;}
   else if(batchBench){exposeStoryFacts({facts:batchDisplayedFactPairs(state)});save();html=wholeBatchesPage(state);}
-  else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state);}
+  else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state)+fieldKitEntry('weather');}
   else if(sharingBench){exposeStoryFacts({facts:sharingDisplayedFactPairs(state)});save();html=sharingCounterPage(state);}
   else if(rainNotebookBench)html=rainNotebookPage(state);
   else if(fieldBench){syncFieldPlantExposure('notebook');save();html=fieldNotebookPage(state);}
-  else if(plantBench){syncFieldPlantExposure();const ps=plantStudy(state);if(ps){setPlantDay(state,ps.day);save();}html=plantStudyPage(state);}
+  else if(plantBench){syncFieldPlantExposure();const ps=plantStudy(state);if(ps){setPlantDay(state,ps.day);save();}html=plantStudyPage(state)+fieldKitEntry('cress');}
   else if(instructionBench)html=renderInstructions(state,root).html;
-  else if(letterBench)html=letterPage(state,root,detail);
+  else if(letterBench)html=letterPage(state,root,detail)+(root==='post'?fieldKitEntry('notice'):'');
   else if(messageBench)html=messagePage(state,root,detail);
   else if(groupBench){if(detail!=='choose'){noteGroupView(state,groupPlace);exposeStoryFacts({facts:equalGroupPairsShown(state,groupPlace)});save();}html=equalGroupsPage(state,groupPlace,detail);}
   else if(root==='regrow'){syncFieldPlantExposure('planting');save();html=plantingPage(state,Number(slug||0))+plantPlanPanel(state)+fieldNotebookPlanPanel(state);}
@@ -248,7 +251,7 @@ function render(){
     if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
     else html=orchardPage(state,slug);
   }
-  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}html+=plantStudyEntry()+fieldNotebookEntry()+rainNotebookEntry();}
+  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}html+=plantStudyEntry()+fieldNotebookEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk'):'');}
   else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry();
   else if(root==='workshop')html=workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph);
@@ -357,6 +360,7 @@ function bindBroadExtras(){
 }
 function bind(){
  bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
+ bindFieldKit(state,{save,render,navigate,focus:focusElement,explorerId:()=>explorerStore.active.id});
  bindTravelersArchive(state,{save,render,navigate,focus:focusElement});
  document.querySelector('[data-ta-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const a=travelersArchive(state);if(a){const ids=[...new Set([...a.checks.flatMap(c=>c.sourceIds),...(a.kept?['photo','chronology']:[])])];if(ids.length){noteArchiveSources(state,ids);save();}}}});
  bindInstructions(state,(location.hash||'').startsWith('#loft')?'loft':'post',{save,render,navigate,focus:focusElement});
