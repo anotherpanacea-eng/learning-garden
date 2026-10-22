@@ -7,3 +7,5 @@ Optional wording corrections link PR64, clarify the isolated review receipts, co
 The reviewer checked local documents and bundled topic counts, not GitHub PR bodies or live deployment. Root separately verified PR status and the upstream inventory. This review certifies the roadmap wording only, not runtime composition, learning outcomes, merge clearance or publication. Deployment remains deferred pending owner access to the intended Cloudflare account.
 
 A subsequent root status refresh records PR73’s separately approved exposure repair and PR66’s newly advanced runtime head. These are verified status updates, not a new review of PR66 or the multi-branch runtime.
+
+Final root follow-up confirmed the Town supplied-fact gap raised during composition review; the roadmap now records that release hold. It also records the exact locally tested composition and excludes Joining Orders/text branches from that claim.
