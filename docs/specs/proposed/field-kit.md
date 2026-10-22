@@ -1,6 +1,6 @@
 # Field kit: real-world missions beside the model games
 
-Status: **proposed draft for independent specification review** (Claude, Code-Mac, 2026-10-22). Unnumbered: the builder assigns a spec number. Not built, not reviewed. Strategy 3.4 of [the proposal](../../other-routes-through-the-acts.md).
+Status: **revised proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; practical content/safety and source checks and separate Claude follow-up review remain pending. Strategy 3.4 of [the proposal](../../other-routes-through-the-acts.md).
 
 ## Purpose and story
 
@@ -12,7 +12,7 @@ Jane is not a source here; it has no offscreen route. No upstream code, prose or
 
 ## Complete finite first pack
 
-Five cards. Every material is optional, and each card lists a no-materials alternative. Wording below is a design outline for independent content review, not final copy.
+Five cards. All can be opened, read and discussed without supplies, with **Not today** as a complete choice. Weather watching from an available window and observation from an available walk or window need no special equipment; jug measuring, sowing cress and making a handwritten notice need their listed materials. Reading or talking about a card is an optional preparation, not a claim that its physical mission happened. Wording below is a design outline for independent content review, not final copy.
 
 | Mission id / title | Host game (on main) | Materials (plausible household) | Steps (adult-supported) | Contrast it adds | Never recorded |
 | --- | --- | --- | --- | --- | --- |
@@ -41,6 +41,8 @@ Each card has three short parts.
    - **Not today** (`not-today`).
 
 A neighbour then answers in story, from a short authored response per mission per code. For example, after `notice` + `done`, the café cook "pins your notice beside the soup pot." `not-today` gets an equally warm response ("The box will keep it"), so skipping is never a failure.
+
+If materials or an available view are missing, the adult can read or talk through the card and choose **Not today**. The card must not imply that pretend planting, measuring, handwriting or observing counts as a completed off-screen action. **We did it** and **It surprised us** refer to an activity actually attempted, as reported by the adult; the app does not verify what happened. This changes no saved fields or outcome codes.
 
 Each card states the contrast in one sentence beside the host game's model, for example: "The picture jug is our drawing. Your jug's marks may be spaced differently, and both can be read carefully." The surprise response invites talk, not a record: "Surprises are worth telling someone about. What did you expect?"
 
@@ -86,7 +88,7 @@ Data boundary (spec 49 §5 item 7):
 ## Acceptance and gates
 
 **Before build:**
-- Independent specification and content review of all five cards: wording, materials, alternatives, contrast sentences and every safety note. A reviewer with practical home-science judgement checks the cress and walk cards in particular.
+- Independent specification and content review of all five cards: wording, materials, available-window/walk alternatives, optional read/talk preparation, contrast sentences and every safety note. Confirm missing materials lead to **Not today** without claiming an unattempted mission was done. A reviewer with practical home-science judgement checks the cress and walk cards in particular.
 - Then implementation review, actual browser verification and a draft PR; no merge or deployment.
 
 **Candidate Marble references** (partial references, to be confirmed by the source audit):
@@ -105,6 +107,7 @@ The source audit must decide whether an adult-reported offscreen opportunity jus
 
 **Tests** (synthetic fixtures only):
 - every card renders and prints locally;
+- missing-material and unavailable-view copy offers read/talk and **Not today** without recording a pretend physical result;
 - outcome entries are created only by explicit buttons, and each code's story response appears;
 - no entry is created on view, print or reload;
 - the 24-entry cap is disclosed;

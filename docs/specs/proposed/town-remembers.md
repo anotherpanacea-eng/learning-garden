@@ -1,6 +1,6 @@
 # The Town Remembers: an earlier idea, returned in a new form
 
-Status: **proposed draft for independent specification review** (Claude, Code-Mac, 2026-10-22). Unnumbered: the builder assigns a spec number. Not built, not reviewed. Strategy 3.1 of [the proposal](../../other-routes-through-the-acts.md).
+Status: **revised proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; content/source checks and separate Claude follow-up review remain pending. Strategy 3.1 of [the proposal](../../other-routes-through-the-acts.md).
 
 ## Purpose and story
 
@@ -25,11 +25,11 @@ Each of the three games adds one **optional** field to *newly* kept records: `ke
 **Gap rule:** an artefact is eligible once today's local day is later than its `keptDay`, or when `keptDay` is absent. There is no expiry and no "overdue". Changing the device clock can make an errand appear early or late; that is harmless.
 
 **Form eligibility comes only from the snapshot's own frozen values,** never from the case's targets or today's catalogue. A snapshot that fits no form is simply skipped: nothing is written to it, it isn't marked used, and the learner sees no message about it.
-- **Tray forms** need frozen portions that are exactly *c* complete batches of the snapshot's own frozen base (*c*×100 mL cloud-water and *c*×150 mL star-water for the version-1 base), with *c* from 1 to 3. *c* comes from the portions, not from the case's planned copies. Empty, partial or mismatched jars are skipped.
+- **Tray forms** require the snapshot's frozen source to say `unit: 'mL'`, `baseGuests: 2`, `base['cloud-water']: 100` and `base['star-water']: 150`. Their hardcoded version-1 questions and feedback apply only to that base. The frozen portions must then be exactly *c*×100 mL cloud-water and *c*×150 mL star-water, with *c* from 1 to 3. *c* comes from the portions, not the case's planned copies. A different frozen base or unit, empty, partial or mismatched jars are skipped.
 - **Share forms** need frozen cuts that divide the snapshot's frozen whole into *n* pieces of equal width, with *n* in {2, 3, 4, 6}. `share-buns` also needs exactly one selected piece. Unequal cuts, or a different number of selected pieces, are skipped.
 - **Jug forms** use one frozen portion *a* (cloud-water first, then star-water) with 50 ≤ *a* ≤ 450. Empty (0 mL) and full (500 mL) readings are skipped, so every scale distractor below stays in range.
 
-**Artefact identity** needs no record id, which none of the three schemas has. An artefact's key is its kind, its case id and a fingerprint of the frozen values the forms read (tray portions; loaf whole, cuts and selection; kitchen portions), as canonical JSON with sorted keys.
+**Artefact identity** needs no record id, which none of the three schemas has. Use the kind, case id and a fixed-order tuple of saved primitive values: tray `[cloud-water portion, star-water portion]`; loaf `[whole id, whole width, cuts in order, selected piece indices in order]`; kitchen `[cloud-water portion, star-water portion]`. Keep tuple boundaries and lengths distinct when comparing keys. No generic JSON canonicalizer or new persisted fingerprint is needed.
 - Replacing a case's snapshot with **different** values creates a new artefact.
 - Re-keeping **identical** values, the same day or later, is the same artefact.
 - Legacy snapshots without `keptDay` get keys the same way.
@@ -61,7 +61,7 @@ At most **one** errand card is offered at a time, among the existing [learning i
 
 Selection is a pure function of current saved state and today's date:
 1. Take sources in a fixed rotation (trays, shares, jugs). Start after the source kind of the most recently *started* errand, and skip kinds with no eligible, unused artefact.
-2. Within the chosen kind, take the **oldest** eligible artefact not yet used by an errand. Legacy undated records count as oldest.
+2. Within the chosen kind, take the **oldest** eligible artefact not yet used by an errand. Legacy undated records count as oldest; if dates tie or are both absent, use the saved case id in ascending order so selection is stable.
 3. Each kind alternates its two forms: use the form the previous errand of that kind did not use, if this artefact meets its condition; otherwise the other form. If neither applies (for example `trays-shortcut` for *c* = 3 is not offered), use the one that does. An artefact seeds one errand and is not offered again after its errand starts.
 
 Rendering computes the card; it allocates and records nothing. Only an explicit **Start** creates an errand. A started, unfinished errand is the card until it is kept or set aside. Setting it aside is allowed and leaves the artefact used; the next card moves on.
@@ -124,9 +124,9 @@ Check that each form's fitting answer, distractors and feedback are correct and 
 
 Tests:
 - **Gap rule:** same day versus a later local day, absent `keptDay`, and a malformed `keptDay` (that record is ineligible; the source game's own validator decides whether the record itself loads).
-- **Eligibility:** skip empty, partial and mismatched trays, unequal or wrongly selected loaves, and 0 or 500 mL portions, without writing to them. Check jug distractors numerically for every eligible *a*.
-- **Identity:** a replaced snapshot with new values becomes a new artefact; a re-keep of identical values does not. Legacy snapshots get keys too.
-- **Selection:** rotation and skipping, oldest-first, one card at a time, used-once, `used` trimming, and purity (no state change on render).
+- **Eligibility:** skip a tray with any changed frozen base constant, empty, partial and mismatched trays, unequal or wrongly selected loaves, and 0 or 500 mL portions, without writing to them. Check jug distractors numerically for every eligible *a*.
+- **Identity:** a replaced snapshot with new values becomes a new artefact; a re-keep of identical values does not. Legacy snapshots get keys too. Check fixed tuple boundaries so distinct values cannot collide.
+- **Selection:** rotation and skipping, oldest-first with saved case-id tie-break, one card at a time, used-once, `used` trimming, and purity (no state change on render).
 - **Exact-once:** Start, Set aside and Keep.
 - **Frozen values:** frozen artefact values survive changes to source-game content and to the source record itself (deleted or replaced kept work).
 - **Recovery:** unknown form ids and raw siblings, plus per-errand recovery.
