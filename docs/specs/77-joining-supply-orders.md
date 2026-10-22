@@ -1,6 +1,6 @@
 # 77 — Joining Supply Orders
 
-**Status: exposure fold independently reviewed; runtime repair and combined review remain pending. Draft, unmerged and undeployed.** See the [implementation receipt](../reviews/77-joining-supply-orders-implementation-review.md). This is one optional M1 addition-with-regrouping turn in Bundle Burrow, not a written-algorithm course or a claim of calculation fluency. The [source audit](../source-audits/77-joining-supply-orders.md) identifies the precise overlap and limits; the [earlier review](../reviews/77-joining-supply-orders-spec-review.md) and [exposure-fold review](../reviews/77-joining-supply-orders-exposure-spec-review.md) record their separate clearance scopes.
+**Status: exposure fold and scoped runtime repair independently reviewed; combined release review remains pending. Draft, unmerged and undeployed.** See the [original implementation receipt](../reviews/77-joining-supply-orders-implementation-review.md) and [exposure repair receipt](../reviews/77-joining-supply-orders-exposure-implementation-review.md). This is one optional M1 addition-with-regrouping turn in Bundle Burrow, not a written-algorithm course or a claim of calculation fluency. The [source audit](../source-audits/77-joining-supply-orders.md) identifies the precise overlap and limits; the [earlier review](../reviews/77-joining-supply-orders-spec-review.md) and [exposure-fold review](../reviews/77-joining-supply-orders-exposure-spec-review.md) record their separate clearance scopes.
 
 ## The missing action
 

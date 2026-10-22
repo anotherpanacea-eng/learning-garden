@@ -3,6 +3,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
 (async()=>{
  const root=path.resolve(__dirname,'..'),load=f=>import(pathToFileURL(path.join(root,'dist',f)).href);
  const {freshState}=await load('core.mjs'),{initializeExplorerState,prepareProgressImport}=await load('progress-transfer.mjs');
+ const {generatedBroad}=await load('broad-variants.mjs'),{itemById}=await load('broad-core.mjs'),{bundleQuestionExposure}=await load('bundle-broad-exposure.mjs');
  const fresh=()=>{const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;return s;};
  const pw=await import(process.env.PLAYWRIGHT_MODULE||'playwright'),{chromium}=pw.default||pw;
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
@@ -59,6 +60,20 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
    if(artifacts)await p.screenshot({path:path.join(artifacts,`${id}-${width}.png`),fullPage:true});
    if(id==='full-frame-orders'&&width===390)carrySeed=await state(p);await p.close();
   }
+  // Real host display qualifies a waiting exact bundle question, without answering it.
+  const exposedSeed=fresh(),exposedQuestion=generatedBroad(itemById('number-foundation'),'probe:35');
+  exposedSeed.broad.drafts['checkin:number-foundation']={question:exposedQuestion,attempts:[],familiar:false};
+  const exposurePage=await setup(exposedSeed);const waitingBefore=(await state(exposurePage)).broad.drafts['checkin:number-foundation'];
+  eq(waitingBefore.familiar,false,'numeric-only chooser does not expose bundle components');
+  eq((await state(exposurePage)).joiningOrders,undefined,'chooser still creates no exposure root');
+  await tap(exposurePage,'[data-join-start="steady-orders"]');const exposedState=await state(exposurePage),waitingAfter=exposedState.broad.drafts['checkin:number-foundation'];
+  eq(exposedState.joiningOrders.shownBundleExamples,['bundle:0:2:4','bundle:0:1:3'],'actual source cards persist exact shown examples');
+  eq(waitingAfter.familiar,true,'waiting matching generated question becomes familiar');
+  eq(waitingAfter.question,waitingBefore.question,'exposure preserves frozen waiting question');eq(waitingAfter.attempts,[],'exposure fabricates no attempt');
+  eq(exposedState.broad.observations,exposedSeed.broad.observations,'exposure fabricates no completed observation');
+  eq(bundleQuestionExposure(exposedState,exposedQuestion).familiar,true,'a later exact generated question sees prior display');
+  eq(bundleQuestionExposure(exposedState,{params:{type:'bundle',hundreds:0,tens:2,ones:5}}).familiar,false,'nearby unshown quantity remains unexposed');
+  await exposurePage.reload();await exposurePage.locator('[data-join-total]').waitFor();eq((await state(exposurePage)).broad.drafts['checkin:number-foundation'].familiar,true,'display history survives reload');await exposurePage.close();
   // Both possible mixed-origin wrapped tens, with their exact countable artwork.
   const p=await setup();await tap(p,'[data-join-start="full-frame-orders"]');await action(p,'join');await fillFrame(p,3,7);await action(p,'wrap');await art(p,17);eq([(await current(p)).model.newTenPip,(await current(p)).model.newTenDot],[3,7],'alternative full-ten mixture accepted');
   if(await p.locator('details.join-help:not([open]) > summary').count())await p.locator('details.join-help > summary').click();await tap(p,'[data-join-help]');eq(await p.evaluate(()=>document.activeElement.id),'join-help-content','help focuses revealed paragraph');await tap(p,'[data-join-example]');eq(await p.evaluate(()=>document.activeElement.id),'join-example-content','example focuses revealed paragraph');await tap(p,'[data-join-together]');ok(await p.locator('[data-join-together]').evaluate(x=>x===document.activeElement),'together retains local button focus');const supported=(await current(p)).support;ok(['help','example','together'].every(x=>supported.includes(x)),'help example and together remain separate support facts');
