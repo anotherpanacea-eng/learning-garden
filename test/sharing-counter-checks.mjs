@@ -5,6 +5,15 @@ import {sharingState,ensureSharing,recoverSharing,chooseSharingCase,nextSharingC
 let checks=0;const ok=(v,m)=>{assert.ok(v,m);checks++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const copy=x=>JSON.parse(JSON.stringify(x)),fresh=(id='repair-halves')=>{const s={};chooseSharingCase(s,id);return s;};
 const active=s=>s.sharingCounter.cases[s.sharingCounter.currentCase];
+{
+ const s=fresh('quarter-basket');shareSharingRound(s);keepSharing(s);chooseSharingCase(s,'half-parcel');checkSharing(s);keepSharing(s);active(s).message='';
+ const sourceAt=w=>[w.source,w.checks[0].source,w.kept.source,w.kept.latestCheck.source];
+ for(let index=0;index<4;index++)for(const field of ['title','reader','reason','request'])for(const value of [undefined,null,17,[],{toString:null}]){
+  const payload=copy(s);sourceAt(active(payload))[index][field]=value;const loaded=copy(payload),raw=copy(loaded);
+  eq(sharingState(loaded),null,`source ${index} ${field} must be a string`);eq(loaded,raw,'validation preserves malformed save');ok(recoverSharing(loaded),'malformed text can be recovered');
+  eq(loaded.sharingCounter.cases,{'quarter-basket':s.sharingCounter.cases['quarter-basket']},'text recovery preserves other case exactly');eq(loaded.sharingCounter.recovered,raw.sharingCounter,'recovery preserves unreadable text');
+ }
+}
 eq(SHARING_CASES.map(c=>c.id),['repair-halves','repair-quarters','half-parcel','three-quarter-parcel','quarter-basket','three-quarter-basket'],'six finite original requests');
 ok(SHARING_CASES.every(c=>c.modelId===SHARING_MODEL_ID&&Object.isFrozen(c)&&Object.isFrozen(c.initialModel)),'versioned immutable authored sources');
 eq(SHARING_CASES.filter(c=>c.kind==='loaf').map(c=>c.whole),Array(4).fill(SHARING_CASES[0].whole),'identical original loaf scale');

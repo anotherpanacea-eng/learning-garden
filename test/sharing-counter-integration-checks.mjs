@@ -19,6 +19,20 @@ import {noteGardenFactExposure} from '../dist/garden-core.mjs';
 import {checkin} from '../dist/content.mjs';
 let checks=0;const ok=(v,m)=>{assert.ok(v,m);checks++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const fresh=()=>initializeExplorerState(freshState());
+{
+ const s=fresh();chooseSharingCase(s,'quarter-basket');shareSharingRound(s);keepSharing(s);chooseSharingCase(s,'half-parcel');checkSharing(s);keepSharing(s);s.sharingCounter.cases['half-parcel'].message='';setSharingPage(s,'keep');
+ const sourceAt=w=>[w.source,w.checks[0].source,w.kept.source,w.kept.latestCheck.source];
+ // Mutate the persisted JSON shape, including the kept request actually rendered on this page.
+ for(const index of [2,0,1,3])for(const field of ['request','title','reader','reason']){
+  const payload=JSON.parse(JSON.stringify(s));sourceAt(payload.sharingCounter.cases['half-parcel'])[index][field]={toString:null};const loaded=JSON.parse(JSON.stringify(payload)),raw=JSON.stringify(loaded);
+  assert.doesNotThrow(()=>sharingCounterPage(loaded),`malformed ${field} in source ${index} must render recovery`);checks++;
+  eq(sharingState(loaded),null,'non-string source text is unavailable');ok(sharingCounterPage(loaded).includes('earlier picnic draft'),'malformed text reaches recovery screen');eq(JSON.stringify(loaded),raw,'render leaves malformed JSON intact');
+  ok(recoverSharing(loaded),'explicit text recovery succeeds');eq(loaded.sharingCounter.cases,{'quarter-basket':s.sharingCounter.cases['quarter-basket']},'only unreadable case is removed');eq(loaded.sharingCounter.recovered,JSON.parse(raw).sharingCounter,'original malformed text retained');
+  ok(sharingCounterPage(loaded).includes('Who shall we pack for?'),'recovered chooser opens');chooseSharingCase(loaded,'quarter-basket');ok(sharingCounterPage(loaded).includes('1, 1, 1, 1'),'other saved arrangement still renders');
+ }
+ for(const source of sourceAt(s.sharingCounter.cases['half-parcel']))for(const field of ['title','reader','reason','request'])source[field]=`Earlier ${field} <wording>`;
+ const historical=JSON.parse(JSON.stringify(s)),raw=JSON.stringify(historical);ok(sharingState(historical),'historical source strings remain valid');ok(sharingCounterPage(historical).includes('Earlier request &lt;wording&gt;'),'kept request renders its own escaped historical wording');eq(JSON.stringify(historical),raw,'historical rendering preserves the save');
+}
 for(const c of SHARING_CASES){const s=fresh();chooseSharingCase(s,c.id);for(const page of ['make','compare','keep']){setSharingPage(s,page);const raw=JSON.stringify(s),html=sharingCounterPage(s);ok(html.includes(c.request)&&html.includes('whole'),'request and whole stay available');eq(JSON.stringify(s),raw,'rendering creates no answers/support');const imported=prepareProgressImport(raw);ok(imported.ok,'all case/page drafts import');eq(imported.state.sharingCounter,s.sharingCounter,'source, arrangement and page exact');}keepSharing(s);const raw=JSON.stringify(s);ok(sharingCounterPage(s).includes('Your kept draft'),'unfinished draft is keepable');eq(prepareProgressImport(raw).state.sharingCounter,s.sharingCounter,'kept unfinished arrangement transfers');}
 {
  const s=fresh();nextGuest(s);adjustBite(s,ingredients[0].id,1);startPostOffice(s,deliveries[0].id);startShow(s,'welcome');setSceneDialogue(s,'A fictional picnic show.');drawLetter(s,'post');const before=structuredClone(s);delete before.sharingCounter;

@@ -19,7 +19,7 @@ export function sharingAssessment(c,m){
  return {shareCount,selectedCount,shareCountFit,equalSizes,allAccounted,portionFit,fit:shareCountFit&&equalSizes&&allAccounted&&portionFit};
 }
 // Saved copies keep their own wording; only the request's arithmetic must still match, so a copy edit cannot lock saved work.
-const SEMANTIC=['id','modelId','kind','family','shares','packed','target','whole','initialModel'],sourceValid=(c,s)=>object(s)&&SEMANTIC.every(k=>same(s[k],c[k]));
+const SEMANTIC=['id','modelId','kind','family','shares','packed','target','whole','initialModel'],sourceValid=(c,s)=>object(s)&&['title','reader','reason','request'].every(k=>typeof s[k]==='string')&&SEMANTIC.every(k=>same(s[k],c[k]));
 // Saved results are checked for their counts and outcomes, not re-graded, so changing how results are computed or shaped cannot lock saved work.
 const assessmentValid=a=>object(a)&&integer(a.shareCount,12)&&integer(a.selectedCount,12)&&['shareCountFit','equalSizes','allAccounted','portionFit','fit'].every(k=>typeof a[k]==='boolean');
 function snapshotValid(c,s){return keys(s,['source','model','assessment','support','familiar','practice','visual'])&&sourceValid(c,s.source)&&modelValid(c,s.model)&&assessmentValid(s.assessment)&&supportValid(s.support)&&typeof s.familiar==='boolean'&&s.practice===true&&s.visual===true;}
