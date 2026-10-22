@@ -57,6 +57,7 @@ node test/field-kit-checks.mjs
 node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
+node test/count-collection-checks.mjs
 node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
 node test/fraction-trail-checks.mjs
@@ -399,3 +400,5 @@ Run `node test/joining-orders-checks.mjs` and `node test/joining-orders-integrat
 Tenths Table at `#numbers/tenths` uses one fixed whole with ten reversible parts and eight openly chosen requests. It keeps supplied-picture practice separate from assessment evidence. Its optional save root starts only on an explicit request, and retained sources/checks stay tied to their own wording. See [spec81](docs/specs/81-tenths-table.md) and its [source audit](docs/source-audits/81-tenths-table.md).
 
 Run `node test/tenths-checks.mjs` for the finite picture, notation, saving and recovery checks. With the static app served locally and Playwright installed, run `TENTHS_TEST_URL=http://127.0.0.1:4173/ node test/tenths-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `TENTHS_ARTIFACTS` optionally select a local module, browser and screenshot directory. These synthetic Chrome checks do not establish physical iPad behavior, audible narration quality or learning gains.
+
+My Count Collection at `#living/collection` lets a learner make a pretend button collection, record a table, draw bars and read the chart across four short turns. It distinguishes a faithful representation from an accurate reading of a different chart. Sources, earlier checks and an optional kept version stay tied to their own saved values. This is pictured practice, not a survey or a mastery judgment. See [spec86](docs/specs/86-count-collection.md) and its [source audit](docs/source-audits/86-count-collection.md). Run `node test/count-collection-checks.mjs`; with the static app served locally, run `COLLECTION_TEST_URL=http://127.0.0.1:4173/ node test/count-collection-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
