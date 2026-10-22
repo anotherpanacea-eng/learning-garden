@@ -8,7 +8,7 @@ const models={
  ]},
  worm:{name:'Earthworm',frames:[
   {caption:'The earthworm has a long body with ring-like segments. Tiny bristles are enlarged in this model.',change:'Ringed body on a surface; a callout enlarges several tiny bristles. No legs or foot drawn.'},
-  {caption:'Part of its body lengthens and narrows. Some tiny bristles help it grip the surface.',change:'The labelled front extends right while a rear region stays wider; the same illustrated ring boundaries remain present, and bristles touch the surface.'},
+  {caption:'Part of its body lengthens and narrows. Some tiny bristles help it grip the surface.',change:'The labeled front extends right while a rear region stays wider; the same illustrated ring boundaries remain present, and bristles touch the surface.'},
   {caption:'Part of its body shortens and widens, pulling the body forward. Bristles help it hold on.',change:'The front stays forward while the rear catches up and a region widens; the same ring boundaries remain present, and bristles still touch the surface.'}
  ]}
 };
@@ -16,7 +16,7 @@ const frame=(animal,index)=>models[animal].frames[index];
 const label=(animal,index)=>`${models[animal].name}, picture ${index+1} of 3. ${frame(animal,index).caption}`;
 
 function snailArt(index){
- const shift=[0,5,13][index],foot=48+shift,shell=145+shift,wave=index===0?'':`<path d="M${foot+([0,72,119][index])} 96q5 -10 10 0m2 0q5 -10 10 0m2 0q5 -10 10 0" fill="none" stroke="#9b5a35" stroke-width="4" stroke-linecap="round"/><path d="M${foot+[0,72,119][index]+38} 96h17" stroke="#9b5a35" stroke-width="3"/>`;
+ const shift=[0,5,13][index],foot=48+shift,shell=145+shift,wave=index===0?'':`<path d="M${foot+([0,72,119][index])} 96q5 -10 10 0m2 0q5 -10 10 0m2 0q5 -10 10 0" fill="none" stroke="#9b5a35" stroke-width="4" stroke-linecap="round"/><path d="M${foot+[0,72,119][index]+38} 96h17" stroke="#9b5a35" stroke-width="3"/><path d="M${foot+[0,72,119][index]+55} 96l-5-3v6Z" fill="#9b5a35"/>`;
  return `<path d="M34 108H320" stroke="#557868" stroke-width="3"/><path d="M${foot} 82Q${foot+33} 65 ${foot+77} 75L${foot+178} 69Q${foot+193} 59 ${foot+198} 38Q${foot+213} 56 ${foot+215} 80L${foot+232} 91Q${foot+208} 99 ${foot+177} 98H${foot+29}Z" fill="#b4cda3" stroke="#245447" stroke-width="2.5"/><path d="M${foot} 92Q${foot+105} 104 ${foot+231} 91L${foot+220} 105H${foot+16}Z" fill="#d7c58b" stroke="#245447" stroke-width="2"/>${wave}<circle cx="${shell}" cy="62" r="40" fill="#e7c78b" stroke="#715b3e" stroke-width="3"/><path d="M${shell+25} 77C${shell+45} 43 ${shell+8} 24 ${shell-13} 50C${shell-31} 76 ${shell-3} 88 ${shell+7} 71C${shell+19} 57 ${shell+4} 49 ${shell-4} 59" fill="none" stroke="#715b3e" stroke-width="3"/><path d="M${foot+199} 43Q${foot+194} 21 ${foot+183} 15M${foot+211} 50Q${foot+220} 27 ${foot+231} 20" fill="none" stroke="#9b6e37" stroke-width="2"/><text x="256" y="35">front →</text>`;
 }
 function wormArt(index){
