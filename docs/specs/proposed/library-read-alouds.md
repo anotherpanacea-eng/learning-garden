@@ -6,7 +6,7 @@ Status: **proposed draft for independent specification review** (Claude, Code-Ma
 
 The proposal names a knowledge route: short illustrated nonfiction books that an adult reads aloud. Each book carries talk prompts, and later play asks about what it taught. Background knowledge strongly affects comprehension (Recht & Leslie, 1988), and the prompts follow the shape of dialogic reading (Whitehurst et al., 1988). Both are design references only; this spec makes no efficacy claim for the app.
 
-This first slice adds **no engine and no runtime change**. It uses the existing reviewed story-pack format ([spec 12](../12-reviewed-story-packs.md), [story packs](../../story-packs.md)): one new plain-data module, `dist/packs/flood-almanac.mjs`, registered in `parisPacks`. That format supports exactly one shape today: a Paris story at a known destination, with three passage lengths, one `mc` question, one `order` question with three items, optional `connections` and two helpers. The book lives at the existing **bookstall** destination (“Lucie’s bookstall”): Lucie lends a small almanac about the river.
+The pack itself is **content-only: no new engine, field or state**. But it is not build-ready against main until one bounded prerequisite repair to saved Paris visits lands (see the saved-state section). It uses the existing reviewed story-pack format ([spec 12](../12-reviewed-story-packs.md), [story packs](../../story-packs.md)): one new plain-data module, `dist/packs/flood-almanac.mjs`, registered in `parisPacks`. That format supports exactly one shape today: a Paris story at a known destination, with three passage lengths, one `mc` question, one `order` question with three items, optional `connections` and two helpers. The book lives at the existing **bookstall** destination (“Lucie’s bookstall”): Lucie lends a small almanac about the river.
 
 **Topic and why.**
 - **The Seine flood of January–March 1910.**
@@ -29,11 +29,13 @@ One pack, one story, stable new IDs. Pack id `flood-almanac`, story id `flood-al
 
 **Passages.** The compiler allows 1–20 sentences per variant, and there are no pages in the format, so length limits are set in sentences and words. Every sentence is at most 18 words.
 
+The compiler shares the same two questions across all three variants. So **every variant carries all three dated events** the ordering question needs (the 28 January highest mark, the 9 February commission, the 15 March return) and the sentence that answers question 1. Variants differ only in the explanation around that evidence.
+
 | Variant | Sentences | Content it must carry |
 | --- | --- | --- |
-| 1 (short) | 4–5 | Rain swelled the Seine in January 1910. Its highest mark came on 28 January. A photograph shows water and boats beside buildings at one quay. The river returned to its bed on 15 March. |
-| 2 (middle) | 6–8 | Variant 1 plus the commission formed on 9 February to study the flood, and one sentence on what a photograph can and cannot show. |
-| 3 (long) | 9–12 | Variant 2, opening with a sentence that mentions the March return **before** the January peak (for example, “By the middle of March the river was back in its bed. But in January…”). The ordering question then needs the dates, not the sentence order. Variants 1 and 2 stay chronological. |
+| 1 (short) | 4–5 | Rain swelled the Seine in January 1910, and its highest mark came on 28 January. A commission was formed on 9 February to study the flood. The river returned to its bed on 15 March. A photograph shows water and boats beside buildings at one quay. |
+| 2 (middle) | 6–8 | The same three dated events and photograph sentence, plus one sentence on what a photograph can and cannot show and one on why a commission might study a flood (only as the source states it). |
+| 3 (long) | 9–12 | The same evidence and explanations, opening with a sentence that mentions the March return **before** the January peak (for example, “By the middle of March the river was back in its bed. But in January…”). The ordering question then needs the dates, not the sentence order. Variants 1 and 2 stay chronological. |
 
 **Permitted facts.** All are already sourced in spec 46's audit:
 - the Austerlitz highest mark on 28 January 1910;
@@ -97,19 +99,24 @@ There is no timer, score, reward, mastery label, lock or streak. The book is one
 
 ## Small optional saved state and boundaries
 
-**Saved state.** No new state, schema or root. Visits use the existing Paris story storage and the existing explorer, transfer and save-off behaviour. Stable ids keep paused visits valid.
+**Saved state.** The pack adds no new state, schema or root. Visits use the existing Paris story storage and the existing explorer, transfer and save-off behaviour.
 
-**What review must confirm.** The existing Paris visit validation must follow AGENTS.md:
-- a saved visit is checked against its own recorded answers and ids, not today's wording;
-- adding this pack must not change how earlier Paris visits load;
-- a later wording edit to this pack must not lock a paused visit.
+**Prerequisite repair (confirmed defect on main).** `garden-core.mjs` stores a paused visit's choice and order answers as indices and resumes them against the *current* `storyNodes` content. A Codex probe saved choice 1, changed that choice's authored text, and resumed: the replacement sentence showed as selected. A content-only pack can't be released on top of that, because any later wording fix to this book would silently change what a paused child appears to have chosen. This breaks the AGENTS.md rule that saves are checked against themselves, not today's wording. The repair is a separate, bounded change landed **before** this pack:
 
-If the existing engine fails any of these, fix that first and say so; don't add a workaround in the pack.
+- **Freeze on start.** When a Paris visit starts a question, copy that question's supplied content into the visit draft: prompt, choices, fitting index, order items and the compiler's display permutation. Resume renders from that frozen copy, never from the current catalogue.
+- **Legacy drafts.** Existing index-only drafts have no frozen copy. On load, freeze them once from the current content only if the question's id still exists and its choice and item counts still fit the stored indices. Otherwise keep the draft readable as recorded answers in Grown-up notes, offer a fresh start for that story only, and leave every other visit open.
+- **Tests.**
+  - Save a choice and an order, change the authored text and the order of choices, then reload: the frozen sentences and arrangement show unchanged.
+  - Repeat with a legacy index-only draft, for both the fit and no-fit paths.
+  - Confirm other stories' visits still load untouched.
+
+That repair gets its own small spec or increment, independent review and tests. The pack spec's scope does not grow to include it. This pack stays content-only and waits on it.
 
 **Data boundary.** No free-text field, no learner data in the pack, no network content, upload, scheduler or automatic author. The pack is a reviewed repository source file.
 
 ## Acceptance and gates
 
+0. **The prerequisite saved-visit repair has landed** (see the saved-state section), with its own review and its reload-after-content-change tests passing. Until then this pack is not build-ready against main.
 1. **Independent specification review of this document**, including:
    - the topic choice;
    - the permitted-fact boundary;

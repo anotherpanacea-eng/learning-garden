@@ -20,7 +20,7 @@ One board, version 1, defined in content as a frozen source: `{version:1, id:'wi
 - **Track.** One horizontal row of ten equal-width squares, numbered 1–10 left to right in large numerals on every square. A token starts on an unnumbered gate space (position 0) to the left of square 1. Square 10 is Willow Bridge. On phones the row stays one row and scales down; it never wraps, curves or stacks. Numerals stay legible at 320 px wide, and the track scrolls with the page, not horizontally.
 - **Spinner.** Two equal halves labelled **1** and **2** (as studied; the source audit must confirm). A spin picks uniformly between them. The result shows as a numeral, a word and a matching number of dots, never by colour alone.
 - **Tokens.** Two original tokens, **Leaf** and **Lantern**, with distinct shapes and labels. The player picks who is who; nothing about the child is asked.
-- **Arrival.** A step that would pass square 10 stops on 10. Both tokens always reach the bridge.
+- **Arrival.** A token that reaches square 10 has arrived. Its turn ends at once and any unused steps are discarded, so a token on 9 that spins 2 arrives after one tap. The screen says "Leaf is at Willow Bridge" and passes the turn. Both tokens always reach the bridge.
 - **End.** When both tokens stand on 10, an authored line ends the walk: "Both walkers are at Willow Bridge." No winner is named, no first-arrival order is shown and nothing is counted.
 - **Squares 3, 6 and 8: town events.** Each has one short optional event, all original:
   - a robin on the fence post;
@@ -35,7 +35,7 @@ A **turn** is one spin, then stepping the active token one square per tap:
 
 1. **Spin.** A native button shows the result.
 2. **Step.** A native button labelled "Step to 4" names the next square number and advances one square per tap until the spun amount is used. The track highlights the current square and its numeral. The number is spoken only if narration is on.
-3. **Turn passes.** It passes automatically when the steps are used, with a visible line ("Lantern's turn"). In solo mode the same player then moves the other token.
+3. **Turn passes.** It passes automatically when the steps are used or the token arrives at 10, whichever comes first, with a visible line ("Lantern's turn"). Turns alternate only among tokens that haven't arrived. Once one token is at the bridge, every remaining turn goes to the other until it arrives too. Its line says so ("Leaf is at Willow Bridge. Lantern keeps walking."). Solo mode follows the same rule; the one player moves whichever token is still walking.
 
 The token never jumps; it always travels one numbered square at a time. This is the counting-on action from the studied design, so the step button must show the number of the square it moves *to*, not a running count of steps taken. That keeps the child saying "four, five" rather than "one, two".
 
@@ -50,7 +50,7 @@ The contrast is spatial and built in: larger numbers lie farther right, and equa
 - **Layout.** One page: the track at the top, then the spinner, the step button and a turn line beside each other on wide screens and stacked on phones. Help, the adult tip, the events and "Start a new walk" live in native folds below.
 - **Controls.** 44 px targets, native keyboard access, focus kept on the step button during a turn, reduced-motion support (the token moves without animation), and no dragging or hover.
 - **Modes.**
-  - **Two walkers** alternates Leaf and Lantern.
+  - **Two walkers** alternates Leaf and Lantern while both are walking.
   - **One walker, two tokens** lets a child play alone.
 
   The mode can change between walks, never mid-walk.
@@ -66,7 +66,8 @@ Use the optional root `willowPath:{version:1, walk}`, where `walk` is null or:
 - **The board travels with the walk.** `source` is the walk's frozen board. Validation checks the walk against **its own** source:
   - positions are integers from 0 to `source.squares`;
   - `spin.value` is one of `source.spinner`;
-  - `stepsLeft` is between 0 and `spin.value`;
+  - `stepsLeft` is between 0 and `spin.value`, and is 0 or `spin` is null whenever the token whose turn it is stands on `source.squares`;
+  - `turn` never names an arrived token while the other is still walking;
   - `done` is true exactly when both positions equal `source.squares`.
 
   It is never checked against today's board, square count or event list. A later 20-square board leaves a saved 10-square walk readable.
@@ -110,12 +111,14 @@ Then a source audit for the candidate references, an independent implementation 
 
 **Tests:**
 - Every spin value from every position, with arrival capped at 10.
+- A token on 9 that spins 2: one tap arrives, the turn ends, the unused step is discarded, the arrival line shows and the turn passes.
 - Step-by-step movement, with no jump path.
 - The step label names the destination square.
 - Turn alternation in two-walker mode, and both tokens moving in solo mode.
+- After one token arrives, every later turn goes to the other in both modes; the arrived token is never offered a spin.
 - The end line appears only when both tokens are on 10, with no winner text anywhere.
 - Events never change positions or turns.
-- Resume after reload and transfer.
+- Resume after reload and transfer, including reload right after an arrival with steps discarded, and reload while one token is finished and the other is mid-turn.
 - Walk validation against its own source, including a synthetic walk on a frozen 20-square source.
 - Raw recovery of malformed walks.
 - No allocation on render.
