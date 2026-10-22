@@ -3,6 +3,8 @@ import {seedSource,validSeedSource,validSeedRun,validSeedInvestigation,seedView,
 import {seedPage} from '../dist/seed-stall-ui.mjs';
 import {freshState,recommendations} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from '../dist/progress-transfer.mjs';
+import {startVisit} from '../dist/garden-core.mjs';
+import {destinationNotes} from '../dist/notebook-sections.mjs';
 
 let checks=0;
 const yes=(value,message)=>{assert.ok(value,message);checks++;};
@@ -74,4 +76,7 @@ const refusal=snap(history);no(startSeed(history,2,2,()=>false));same(snap(histo
 const unknown={seedStall:{version:77,record:{older:'untouched'}}};same(seedView(unknown).status,'recovery');
 const raw=snap(unknown.seedStall);no(recoverSeed(unknown,()=>false));same(snap(unknown.seedStall),raw);
 yes(recoverSeed(unknown));same(snap(unknown.seedStall.recovered),raw);same(seedView(unknown).status,'ready');
+const sharedNotes=initializeExplorerState(freshState());yes(startVisit(sharedNotes,'message'));yes(startSeed(sharedNotes,3));
+const notes=destinationNotes(sharedNotes);yes(notes.includes('<h2>Garden visits</h2>')&&notes.includes('1 visit · 0 at an ending'),'Seed notes preserve the existing Garden visit summary');
+yes(notes.includes('Seed Stall'),'same notebook includes the new Seed investigation');
 console.log(`Seed Stall source and saved-work checks: ${checks} assertions passed`);
