@@ -21,7 +21,7 @@ case 'missingSide':return (2*(p.length+p.width)-2*p.length)/2;
 case 'missing':return p.total-p.known;
 case 'story':return p.sign===1?p.start+p.first-p.second:p.start-p.first+p.second;
 case 'fractionName':return q.choices.indexOf(`One ${{2:'half',3:'third',4:'quarter',5:'fifth'}[p.parts]}`);
-case 'shapeName':return q.choices.indexOf({triangle:'equilateral triangle',rectangle:'rectangle that is not a square',square:'square',hexagon:'regular hexagon'}[p.shape]);
+case 'shapeName':return q.choices.indexOf({triangle:'equilateral triangle',rectangle:'long rectangle',square:'square',hexagon:'regular hexagon'}[p.shape]);
 case 'turn':{let i=0;for(let t=0;t<p.turns;t++)i=(i+p.direction+4)%4;return q.choices.indexOf(['North','East','South','West'][i]);}
 case 'claim':return q.choices.indexOf(`An extra dot in each row adds ${p.rows}, making ${p.rows*p.cols+p.rows}.`);
 case 'double':return q.choices.indexOf(`Each original row gains a matching row: ${p.rows*p.cols} more dots, making ${2*p.rows*p.cols}.`);
@@ -45,6 +45,8 @@ for(const q of broadItems()){
  const variants=new Set();
  for(let seed=0;seed<1000;seed++){
   const x=generatedBroad(q,seed);check(Number.isInteger(x.answer)&&x.answer>=0&&x.answer===expected(x),'independent answer '+q.id+' '+seed);constraints(x);if(q.params.type==='part'&&q.params.shaded>1)check(x.params.shaded>1,'non-unit fraction remains non-unit');
+  if(x.params.type==='symmetry'&&x.params.shape==='triangle')check(x.prompt.includes('equilateral triangle'),'three mirror lines name the equal-sided triangle');
+  if(x.params.type==='symmetry'&&x.params.shape==='hexagon')check(x.prompt.includes('regular hexagon'),'six mirror lines name the regular hexagon');
   check(x.solution.includes(x.kind==='choice'?x.choices[x.answer].split(' ')[0]:String(x.answer))||['shapeName','turn','fractionName','claim','double'].includes(x.params.type),'solution '+q.id);
   check(JSON.stringify(x)===JSON.stringify(generatedBroad(q,seed)),'repeatable '+q.id);variants.add(JSON.stringify(x.variant.params)+JSON.stringify(x.choices));
   if(q.lesson&&!['shapeName','symmetry','corners','turn'].includes(x.params.type))check(JSON.stringify(x.model)===JSON.stringify(q.model),'authored Pip example');
@@ -56,4 +58,44 @@ for(const q of broadItems()){
 }
 const s=freshState();ensureBroad(s);const paused=generatedBroad(broadItems().find(q=>q.id==='operations-anchor'),'paused');s.broad.drafts['checkin:operations-anchor']={question:paused,attempts:[]};noteBroadExposure(s,{id:'other',fact:[...paused.fact].reverse()},'activity');check(s.broad.drafts['checkin:operations-anchor'].knownFact,'paused exact generated factors');
 for(const id of ['number','operations','fractions','patterns','geometry','measurement','reasoning']){const s=freshState();ensureBroad(s);beginTrail(s,id);for(let i=0;i<2;i++){const q=trailQuestion(s,id);recordTrail(s,makeBroadObservation(q,{attempts:[q.answer],method:'worked'},'checkin'));}beginTrail(s,id,true);check(trailQuestion(s,id).id===`${id}-anchor`,'revisit uses fresh anchor');}
+{
+ // A copy edit must not close a paused question; a changed answer or number still does.
+ const item=broadItems().find(q=>q.kind==='number')||broadItems()[0];
+ const fresh=()=>{const s=freshState();const b=ensureBroad(s);const q=instantiateBroad(s,item,'checkin');b.drafts[`checkin:${item.id}`]={attempts:[],question:q};return {s,q};};
+ const reload=s=>{const r=restoreState(JSON.stringify(s));ensureBroad(r);return r;};
+ {const {s,q}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];d.question.prompt='Earlier prompt wording';d.question.hint='Earlier hint';const r=reload(s);
+  check(r.broad.drafts[`checkin:${item.id}`],'earlier wording keeps the paused question open');check(instantiateBroad(r,item,'checkin').prompt==='Earlier prompt wording','resumed question keeps its own wording');check(!r.broad.draftNotice,'no closed-question notice for a copy edit');}
+ {const {s}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];d.question.answer=typeof d.question.answer==='number'?d.question.answer+1:'changed';const r=reload(s);
+  check(!r.broad.drafts[`checkin:${item.id}`]&&r.broad.closedDrafts.length===1,'a changed answer still closes the paused question and keeps it');}
+ {const {s}=fresh();delete s.broad.drafts[`checkin:${item.id}`].question.prompt;const r=reload(s);
+  check(!r.broad.drafts[`checkin:${item.id}`],'a saved question missing its prompt is not resumed');}
+ {const {s}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];d.question.title='  ';const r=reload(s);
+  check(!r.broad.drafts[`checkin:${item.id}`],'a saved question with a blank title is not resumed');}
+ {const {s}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];delete d.question.talk;d.question.wonder='An extra earlier wording field';const r=reload(s);
+  check(r.broad.drafts[`checkin:${item.id}`],'adding or dropping an optional wording field keeps the paused question open');}
+ {const narrated=broadItems().find(q=>q.id==='reasoning-foundation');
+  for(const seed of [null,'earlier']){const s=freshState();ensureBroad(s);const q=seed===null?instantiateBroad(s,narrated,'checkin'):generatedBroad(narrated,seed);delete q.say;
+   s.broad.drafts['checkin:reasoning-foundation']={question:q,attempts:[]};const r=reload(s);
+   check(r.broad.drafts['checkin:reasoning-foundation']?.question.say===undefined,'earlier question without narration resumes unchanged');
+   check(instantiateBroad(r,narrated,'checkin').prompt===q.prompt,'earlier authored or generated prompt remains available');
+  }
+ }
+ {const {s}=fresh();s.broad.drafts[`checkin:${item.id}`].question.prompt={toString:null};const r=reload(s);
+  check(!r.broad.drafts[`checkin:${item.id}`],'non-text wording is not resumed');}
+ {const choiceItem=broadItems().find(q=>Array.isArray(q.choices)&&q.choices.length>1);const s=freshState();const b=ensureBroad(s);const q=instantiateBroad(s,choiceItem,'checkin');q.choices[0]='  ';b.drafts[`checkin:${choiceItem.id}`]={attempts:[],question:q};const r=reload(s);
+  check(!r.broad.drafts[`checkin:${choiceItem.id}`],'a saved question with a blank answer choice is not resumed');}
+ {const choiceItem=broadItems().find(q=>q.id==='fractions-foundation'),key=`checkin:${choiceItem.id}`;
+  const freshChoice=()=>{const s=freshState();ensureBroad(s);const q=instantiateBroad(s,choiceItem,'checkin');s.broad.drafts[key]={question:q,attempts:[q.answer],input:'kept choice'};return {s,q};};
+  {const {s,q}=freshChoice(),r=reload(s);check(r.broad.drafts[key]?.question.choices[q.answer]===q.choices[q.answer]&&!r.broad.draftNotice,'unchanged choice mapping resumes');}
+  {const {s,q}=freshChoice();q.prompt='Earlier question wording';const r=reload(s);
+   check(r.broad.drafts[key]?.question.prompt==='Earlier question wording'&&!r.broad.draftNotice,'valid choice mapping survives a prompt edit');}
+  for(const change of ['swap','duplicate']){const {s,q}=freshChoice(),other=q.choices.findIndex((_,i)=>i!==q.answer);
+   if(change==='swap')[q.choices[q.answer],q.choices[other]]=[q.choices[other],q.choices[q.answer]];
+   else q.choices[other]=q.choices[q.answer];
+   const original=structuredClone(s.broad.drafts[key]),r=reload(s);
+   check(!r.broad.drafts[key]&&r.broad.closedDrafts.length===1&&r.broad.draftNotice,`${change} choices close the unsafe draft`);
+   assert.deepEqual(r.broad.closedDrafts[0],{key,draft:original});checks++;
+  }
+ }
+}
 console.log(`${checks} Number Garden variant checks passed.`);

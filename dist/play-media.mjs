@@ -18,6 +18,7 @@ const symbols={warm:'☀',cold:'❄',crunchy:'ϟ',soft:'☁',sweet:'✿',tangy:'
 export function qualityIcons(properties){return properties.map(p=>`<span class="quality-symbol"><span aria-hidden="true">${symbols[p]||'•'}</span> ${esc(p)}</span>`).join('');}
 export function hearButton(text,label='Hear it',language='en'){return `<button type="button" class="hear-button secondary" data-speak-lang="${language==='fr'?'fr':'en'}" data-speak="${esc(text)}"><span aria-hidden="true">◖))</span> <span${language==='fr'?' lang="fr"':''}>${esc(label)}</span></button>`;}
 let activeSpeech=null, selectedVoice='', speakingRate=1, removeVoiceListener=()=>{};
+let removeSpeechRequestListener=()=>{};
 const fractionWords={2:['half','halves'],3:['third','thirds'],4:['quarter','quarters'],5:['fifth','fifths'],6:['sixth','sixths'],8:['eighth','eighths'],10:['tenth','tenths'],12:['twelfth','twelfths']};
 export function spoken(text,language='en'){
  if(language==='fr')return String(text);
@@ -41,14 +42,15 @@ export function chooseLocalVoice(voices,preferred='',language='en'){
  return local.reduce((best,v)=>!best||score(v)>score(best)?v:best,null);
 }
 export function stopSpeech(){
- if(activeSpeech){activeSpeech.onend=null;activeSpeech.onerror=null;activeSpeech=null;
-  document.querySelectorAll('.speech-playing').forEach(controls=>{controls.classList.remove('speech-playing');controls.querySelector('[data-speech-status]').textContent='Voice stopped. Tap Hear to listen again.';});
+ if(activeSpeech){activeSpeech.onstart=null;activeSpeech.onend=null;activeSpeech.onerror=null;activeSpeech=null;
+  document.querySelectorAll('.speech-playing').forEach(controls=>{controls.classList.remove('speech-playing');controls.querySelector('[data-speech-status]').textContent='Voice stopped. Tap a Hear button to listen again.';});
  }
  try{window.speechSynthesis?.cancel();}catch{}
 }
 export function resetSpeechPreferences(){stopSpeech();selectedVoice='';speakingRate=1;}
 export function bindSpeech(){
  removeVoiceListener();removeVoiceListener=()=>{};
+ removeSpeechRequestListener();removeSpeechRequestListener=()=>{};
  const buttons=[...document.querySelectorAll('[data-speak]')];if(!buttons.length)return;
  let controls=document.querySelector('.speech-controls');if(!controls){
   controls=document.createElement('div');controls.className='speech-controls';controls.hidden=true;
@@ -62,11 +64,11 @@ export function bindSpeech(){
  function refreshVoices(){
   const all=voices(),available=localVoices(all,activeLanguage),chosen=chooseLocalVoice(all,selectedVoice,activeLanguage),automaticVoice=chooseLocalVoice(all,'',activeLanguage),exact=available.some(v=>voiceKey(v)===selectedVoice),otherLanguage=!exact&&localVoices(all,activeLanguage==='fr'?'en':'fr').some(v=>voiceKey(v)===selectedVoice),missing=!!selectedVoice&&!exact&&!otherLanguage;
   voiceSelect.replaceChildren();
-  const automatic=document.createElement('option');automatic.value='';automatic.textContent=`Automatic local ${languageName()}${automaticVoice?` — ${automaticVoice.name}`:''}`;voiceSelect.append(automatic);
-  if(missing){const option=document.createElement('option');option.value=selectedVoice;option.textContent='Saved voice — unavailable in this browser';voiceSelect.append(option);}
-  for(const voice of available){const option=document.createElement('option');option.value=voiceKey(voice);option.textContent=`${voice.name} (${voice.lang})${voice.default?' — device default':''}`;voiceSelect.append(option);}
+  const automatic=document.createElement('option');automatic.value='';automatic.textContent=`Automatic local ${languageName()}${automaticVoice?`: ${automaticVoice.name}`:''}`;voiceSelect.append(automatic);
+  if(missing){const option=document.createElement('option');option.value=selectedVoice;option.textContent='Saved voice (unavailable in this browser)';voiceSelect.append(option);}
+  for(const voice of available){const option=document.createElement('option');option.value=voiceKey(voice);option.textContent=`${voice.name} (${voice.lang})${voice.default?' (device default)':''}`;voiceSelect.append(option);}
   voiceSelect.value=exact||missing?selectedVoice:'';
-  availability.textContent=missing?`Your saved voice is unavailable for ${languageName()} in this browser. Refresh after voices load, or choose another local voice or Automatic. No replacement will play silently.`:chosen?`${selectedVoice&&!exact?'Your saved choice is for the other language. This passage uses automatic local speech. ':''}${languageName()} voice to preview: ${chosen.name}.`:`${otherLanguage?'Your saved choice is for the other language and is kept. ':''}No local ${languageName()} voices are available yet. Refresh after voices load, or read together.`;
+  availability.textContent=missing?`Your saved voice is unavailable for ${languageName()} in this browser. Refresh after voices load, or choose another local voice or Automatic. We won’t switch to another voice without telling you.`:chosen?`${selectedVoice&&!exact?'Your saved choice is for the other language. This passage uses automatic local speech. ':''}${languageName()} voice to preview: ${chosen.name}.`:`${otherLanguage?'Your saved choice is for the other language and is kept. ':''}No local ${languageName()} voices are available yet. Refresh after voices load, or read together.`;
   voiceSelect.disabled=!available.length&&!selectedVoice;controls.querySelector('[data-preview-voice]').disabled=!chosen;
   return chosen;
  }
@@ -75,21 +77,25 @@ export function bindSpeech(){
  voiceSelect.onchange=()=>{selectedVoice=voiceSelect.value;changedPreference();stopped('Voice selected. Tap Try this voice to listen.');refreshVoices();};
  speedSelect.value=String(speakingRate);speedSelect.onchange=()=>{speakingRate=Number(speedSelect.value);changedPreference();stopped('Speed selected. Tap Try this voice to listen.');};
  controls.querySelector('[data-refresh-voices]').onclick=()=>{stopped('Voice list refreshed. Tap Try this voice to listen.');refreshVoices();};
- function speak(text,language=activeLanguage){
+ function speak(text,language=activeLanguage,origin=null){
   activeLanguage=language==='fr'?'fr':'en';
   stopped('');const voice=refreshVoices();
-  if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return;}
+  if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return false;}
   const utterance=new window.SpeechSynthesisUtterance(spoken(text,activeLanguage));utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
+  utterance.onstart=()=>{if(activeSpeech===utterance&&origin?.isConnected)origin.dispatchEvent(new CustomEvent('garden-speech-start',{bubbles:true}));};
   utterance.onend=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='Finished reading.';};
   utterance.onerror=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='This local voice could not play. Try another voice, or read together.';};
   activeSpeech=utterance;controls.classList.add('speech-playing');status.textContent=`${selectedVoice&&voiceKey(voice)!==selectedVoice?'Your saved choice is for the other language. ':''}Requested local voice: ${voice.name}. You can stop whenever you like.`;
-  try{speech.speak(utterance);}catch{utterance.onerror();}
+  try{speech.speak(utterance);return true;}catch{utterance.onerror();return false;}
  }
+ const requested=e=>{e.detail.accepted=speak(e.detail?.text||'',e.detail?.language||'en');};
+ document.addEventListener('garden-speak-request',requested);
+ removeSpeechRequestListener=()=>document.removeEventListener('garden-speak-request',requested);
  controls.querySelector('[data-preview-voice]').onclick=()=>speak(activeLanguage==='fr'?'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?':'Welcome to the garden. What shall we discover together today?');
  refreshVoices();
- const voicesChanged=()=>{const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap Hear or Try this voice to listen.':availability.textContent;};
+ const voicesChanged=()=>{const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap a Hear button or Try this voice to listen.':availability.textContent;};
  if(speech?.addEventListener){speech.addEventListener('voiceschanged',voicesChanged);removeVoiceListener=()=>speech.removeEventListener('voiceschanged',voicesChanged);}
  for(const button of buttons)button.addEventListener('click',()=>{
-  controls.hidden=false;button.insertAdjacentElement('afterend',controls);speak(button.dataset.speak,button.dataset.speakLang||'en');
+  controls.hidden=false;button.insertAdjacentElement('afterend',controls);speak(button.dataset.speak,button.dataset.speakLang||'en',button);
  });
 }

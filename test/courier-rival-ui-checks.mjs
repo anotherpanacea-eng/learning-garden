@@ -17,7 +17,7 @@ for(const preset of courierPresets){
  check(postOfficePage(s).includes(preset.label),'preset label visible');eq(v,waiting,'costume never alters paused work');eq(s.garden,garden,'guide and garden explorer unchanged');
 }
 setPostCourier(s,'wizard');setPostCourierPortrait(s,'fern');setPostCourierPronouns(s,'they/them');
-eq(postCourierIdentity(s).avatar,'fern','portrait can differ from preset');eq(postCourierIdentity(s).pronouns,'they/them','pronouns can differ from preset');check(postMap(s,v).includes('Flying wizard (they/them)'),'accessible map uses selected title and pronouns');
+eq(postCourierIdentity(s).avatar,'fern','portrait can differ from preset');eq(postCourierIdentity(s).pronouns,'they/them','pronouns can differ from preset');check(postMap(s,v).includes('flying wizard, they/them,'),'accessible map uses selected title and pronouns');
 check(!setPostCourierPortrait(s,'unknown')&&!setPostCourierPronouns(s,'unknown'),'invalid character values refused');
 const legacy=copy(s);delete legacy.postOffice.courierAvatar;delete legacy.postOffice.courierPronouns;legacy.garden.avatar='reed';const beforeLegacy=copy(legacy);ensurePostOffice(legacy);eq(legacy,beforeLegacy,'legacy paused notebook is not migrated');eq(postCourierIdentity(legacy).avatar,'reed','legacy courier retains explorer portrait');
 for(const [key,value] of [['courierAvatar','unknown'],['courierPronouns','unknown']]){const bad=copy(s);bad.postOffice[key]=value;const raw=copy(bad.postOffice);ensurePostOffice(bad);eq(bad.postOffice.kept.payload,raw,'unknown courier fields kept exactly');}

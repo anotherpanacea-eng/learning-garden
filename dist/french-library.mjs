@@ -24,7 +24,7 @@ for(const story of frenchStoryData)for(const variant of [1,2,3]){
    frenchDestination:story.destination,frenchStory:story.id,frenchVariant:variant,
    passageId:`french-explore-${story.id}-passage-${variant}`,readingText:story.passages[variant],readingSkill:q.skill,
    title:q.title,body:story.title,prompt:q.prompt,...answer,
-   hint:`${q.hint} English meaning: ${story.meanings[variant]} Words to borrow: ${story.words}`,
+   hint:`${q.hint} English meaning: ${story.meanings[variant]} Word help: ${story.words}`,
    explanation:q.explanation,talk:'Which French words support your idea? Can you imagine a different ending?',
    guide:'{guide} says, “We can follow a clue, reread a sentence, or borrow an English meaning. Take the time you need.”',next:i===0?ids[1]:'french-postcard'};
   frenchLibraryHelpers[id]={id:`${id}-help`,title:'A smaller French clue',lesson:h.lesson,passage:h.segments.join(' '),model:{type:'text',language:'fr',segments:h.segments,focus:h.focus,clue:h.clue},kind:'choice',prompt:h.prompt,choices:h.choices,answer:h.answer,explanation:`${h.clue} Return to your story and look for its own clue.`};
