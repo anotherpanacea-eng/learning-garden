@@ -18,6 +18,7 @@ const symbols={warm:'☀',cold:'❄',crunchy:'ϟ',soft:'☁',sweet:'✿',tangy:'
 export function qualityIcons(properties){return properties.map(p=>`<span class="quality-symbol"><span aria-hidden="true">${symbols[p]||'•'}</span> ${esc(p)}</span>`).join('');}
 export function hearButton(text,label='Hear it',language='en'){return `<button type="button" class="hear-button secondary" data-speak-lang="${language==='fr'?'fr':'en'}" data-speak="${esc(text)}"><span aria-hidden="true">◖))</span> <span${language==='fr'?' lang="fr"':''}>${esc(label)}</span></button>`;}
 let activeSpeech=null, selectedVoice='', speakingRate=1, removeVoiceListener=()=>{};
+let removeSpeechRequestListener=()=>{};
 const fractionWords={2:['half','halves'],3:['third','thirds'],4:['quarter','quarters'],5:['fifth','fifths'],6:['sixth','sixths'],8:['eighth','eighths'],10:['tenth','tenths'],12:['twelfth','twelfths']};
 export function spoken(text,language='en'){
  if(language==='fr')return String(text);
@@ -49,6 +50,7 @@ export function stopSpeech(){
 export function resetSpeechPreferences(){stopSpeech();selectedVoice='';speakingRate=1;}
 export function bindSpeech(){
  removeVoiceListener();removeVoiceListener=()=>{};
+ removeSpeechRequestListener();removeSpeechRequestListener=()=>{};
  const buttons=[...document.querySelectorAll('[data-speak]')];if(!buttons.length)return;
  let controls=document.querySelector('.speech-controls');if(!controls){
   controls=document.createElement('div');controls.className='speech-controls';controls.hidden=true;
@@ -78,13 +80,16 @@ export function bindSpeech(){
  function speak(text,language=activeLanguage){
   activeLanguage=language==='fr'?'fr':'en';
   stopped('');const voice=refreshVoices();
-  if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return;}
+  if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return false;}
   const utterance=new window.SpeechSynthesisUtterance(spoken(text,activeLanguage));utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
   utterance.onend=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='Finished reading.';};
   utterance.onerror=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='This local voice could not play. Try another voice, or read together.';};
   activeSpeech=utterance;controls.classList.add('speech-playing');status.textContent=`${selectedVoice&&voiceKey(voice)!==selectedVoice?'Your saved choice is for the other language. ':''}Requested local voice: ${voice.name}. You can stop whenever you like.`;
-  try{speech.speak(utterance);}catch{utterance.onerror();}
+  try{speech.speak(utterance);return true;}catch{utterance.onerror();return false;}
  }
+ const requested=e=>{e.detail.accepted=speak(e.detail?.text||'',e.detail?.language||'en');};
+ document.addEventListener('garden-speak-request',requested);
+ removeSpeechRequestListener=()=>document.removeEventListener('garden-speak-request',requested);
  controls.querySelector('[data-preview-voice]').onclick=()=>speak(activeLanguage==='fr'?'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?':'Welcome to the garden. What shall we discover together today?');
  refreshVoices();
  const voicesChanged=()=>{const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap Hear or Try this voice to listen.':availability.textContent;};
