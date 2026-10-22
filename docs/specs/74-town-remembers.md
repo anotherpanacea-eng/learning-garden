@@ -81,9 +81,13 @@ An errand page shows:
 - "Each whole batch is 100 mL cloud-water *and* 150 mL star-water. Adding 100 mL to both would leave star-water 50 mL short of another batch."
 - "Same loaf, more shares: each share is smaller."
 
-A wrong choice gets the explanation, not a penalty. A skipped errand gets a friendly neighbor line ("Another time, then"). Nothing in any source game, café stock, parcels, suggestions, depth or exposure changes.
+A wrong choice gets the explanation, not a penalty. A skipped errand gets a friendly neighbor line ("Another time, then"). Nothing in any source game, café stock, parcels, suggestions or depth changes. The visible equal-group explanations below do affect *prior fact exposure*, never Town correctness or independent evidence.
 
 Help offers one worked example built on a *different* artifact value than the learner's, plus optional local narration. Support is recorded only when actually used. "We worked it out together" is a separate support record. Familiarity is recorded when the same form was already seen on an earlier errand; it is not independent success.
+
+**Visible fact exposure:** The existing `exposeStoryFacts` bridge records a complete multiplication relation when Town actually shows it. For `share-buns`, Check feedback states that 12 buns form frozen `n` equal groups of `12/n`: expose `[n, 12/n]` when that frozen checked feedback is visible. The separate worked Help states frozen `example.n` equal groups of `12/example.n`: expose `[example.n, 12/example.n]` only when Help is visibly open. For `trays-reverse`, Check feedback states frozen `c` whole batches of 2 guests giving `2c`: expose `[c, 2]` when that checked feedback is visible. Its separate worked Help states frozen `h` batches of 2 guests giving `2h`: expose `[h, 2]` only when Help is visibly open. A one-batch relation may be recorded, but never promoted to success. Use the frozen errand values and the explanation actually shown; do not re-read the current source game, infer a relation from choices or co-occurring numbers, or require frozen wording to match today's catalog. An earlier frozen text that does not clearly state the complete relation does not justify an exact fact exposure.
+
+This exposure is idempotent across re-render and reload. A checked open errand, or a readable finished errand opened at its detail route, restores the checked-feedback exposure when that feedback is shown. Help is exposed on its actual reveal and on reload only if the Help remains visible there; a support flag in closed or hidden history is insufficient. A chooser card, collapsed grown-up notes, another errand's hidden history, an unreadable/raw errand and a set-aside errand without displayed Check feedback expose nothing. The existing bridge updates broad, story and baseline prior-exposure qualifiers for open drafts and future tasks; it does not change the Town answer, source artifacts or recorded earlier outcomes. No new global exposure schema or evidence category is needed.
 
 ## Small optional saved state and boundaries
 
@@ -135,6 +139,7 @@ Tests:
 - **Frozen values:** frozen artifact values survive changes to source-game content and to the source record itself (deleted or replaced kept work).
 - **Recovery:** unknown form ids and raw siblings, plus per-errand recovery.
 - **Source games:** each game's kept records still load with and without `keptDay`, and their own outcomes, stock and suggestions are untouched.
+- **Visible exposure:** for each `share-buns` n in {2,3,4,6} and each `trays-reverse` c in {1,2,3}, assert no Town fact on the chooser or before Check; exact current fact after visible Check; exact separate fact only after visible Help; restoration on open/detail reload; no fact from hidden history or raw errands. Exercise a synthetic future broad 3×4 after a checked three-share bun errand: it is known, not fresh. A matching already-open broad or story draft becomes known; no earlier observation is rewritten. Repeat a previously exposed route to verify idempotence and preserve source-game state.
 - **Notes and devices:** notes text, explorer reload, switch, export and save-off, phone and tablet fit, 44px targets, keyboard and native controls.
 
 Synthetic fixtures only. Passing tests establish neither retrieval benefit nor mastery.
