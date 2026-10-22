@@ -6,7 +6,7 @@ export const frenchLessons=[
   meaning:'Lucie is preparing a parcel for the garden. She puts a blue book in the bag. The bag is under the table. A little cat is sleeping on the chair.',
   words:'un colis = a parcel; un livre = a book; un sac = a bag; sous = under; sur = on.',
   questions:[
-   {title:'Find the parcel',prompt:'Où est le sac ?',choices:['Sur la chaise.','Sous la table.','Dans le jardin.'],answer:1,skill:'Locate a place in a short French passage',hint:'Find the sentence beginning « Le sac ».',explanation:'« Le sac est sous la table. » The bag is under the table.'},
+   {title:'Find the bag',prompt:'Où est le sac ?',choices:['Sur la chaise.','Sous la table.','Dans le jardin.'],answer:1,skill:'Locate a place in a short French passage',hint:'Find the sentence beginning « Le sac ».',explanation:'« Le sac est sous la table. » The bag is under the table.'},
    {title:'Choose the book',prompt:'De quelle couleur est le livre ?',choices:['Il est rouge.','Il est vert.','Il est bleu.'],answer:2,skill:'Locate a color in a short French passage',hint:'Look beside « un livre » for its color.',explanation:'« un livre bleu » means a blue book.'}
   ],postcard:'Try saying or writing one short French message: « Le livre est bleu. » You can change the color, draw it, or leave the idea for later.'},
  {id:'french-river',title:'Le bateau en papier',place:'Beside the river',symbol:'⛵',
@@ -50,7 +50,7 @@ for(const lesson of frenchLessons){
   frenchNodes[id]={id,entrance:lesson.id,language:'fr',type:'task',subject:'Reading',practiceOnly:true,
    title:q.title,body:lesson.title,guide:'{guide} says, “Read a sentence, find a clue, or ask for its English meaning. We can explore at our own pace.”',
    readingText:lesson.text,passageId:`${lesson.id}-passage-v1`,readingSkill:q.skill,kind:'choice',...q,
-   hint:`${q.hint} English meaning: ${lesson.meaning} Words to borrow: ${lesson.words}`,
+   hint:`${q.hint} English meaning: ${lesson.meaning} Word help: ${lesson.words}`,
    talk:'Can you point to the French words that helped? Try saying a sentence together if you like.',next:i===0?`${lesson.id}-2`:`${lesson.id}-postcard`};
   const h=smallerExamples[lesson.id][i];
   frenchHelpers[id]={id:`${id}-help`,title:'A smaller French clue',lesson:h.lesson,

@@ -21,7 +21,7 @@ function signals(state,destination){
  }).slice(-6);
 }
 function suggestion(state,destination){
- const recent=signals(state,destination);if(!recent.length)return {variant:2,reason:'Begin with a little more text. You can choose any passage length.'};
+ const recent=signals(state,destination);if(!recent.length)return {variant:2,reason:'Start with a medium-length passage. You can choose any passage length.'};
  const base=recent.at(-1).parisVariant,lastSupport=recent.findLastIndex(o=>explicitSupport(o)||retry(o));
  // A later answer on the same passage cannot erase its earlier request for support.
  const latest=recent.at(-1),latestVisit=latest.visitId;
@@ -32,7 +32,7 @@ function suggestion(state,destination){
   if(o.nodeId!==v.route[0]||o.correct!==true||o.firstCorrect!==true||o.reading!=='independent'||o.method==='together'||o.priorStorySeen!==false||o.priorPassageSeen!==false||o.familiar||explicitSupport(o)||retry(o)||o.attempts?.length!==1||o.attempts[0]!==o.answer)continue;
   distinct.add(o.parisStory);
  }
- if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Keep the longer passages for now, or choose another length whenever you like.':'Two different new stories were answered on a first try without recorded help. A little more text is available to try; you can choose any length.'};
+ if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Keep the longer passages for now, or choose another length whenever you like.':'Two different new stories were answered on the first try, with no help recorded. A longer passage is ready to try. You can choose any length.'};
  return {variant:base,reason:'Keep exploring with this amount of text. Choose a different length whenever you like.'};
 }
 export function parisPlan(state,destination,variant='auto',storyId=null){
