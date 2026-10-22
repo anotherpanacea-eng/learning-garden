@@ -45,4 +45,17 @@ B.setBatchPage(s,'choose');assert.deepEqual(B.batchDisplayedFactPairs(s),[]);ass
  B.chooseBatchCase(state,'story-supper');B.setBatchHelp(state,'reference');B.setBatchReference(state,'cloud','');B.setBatchReference(state,'star','');B.checkBatchReference(state);assert.equal(current(state).inputError,'reference-invalid');const raw=copy(current(state).reference);B.setBatchHelp(state,null);assert.equal(current(state).inputError,'');assert.deepEqual(current(state).reference,raw);
  B.setBatchPage(state,'measure');B.setBatchReading(state,'2-');B.checkBatchReading(state);assert.equal(current(state).inputError,'reading-invalid');B.setBatchPage(state,'plan');assert.equal(current(state).inputError,'');assert.equal(current(state).reading.text,'2-');
 }
+// A readable historical source must still allow new checks against the active case.
+{
+ const state=fresh('quiet-picnic'),w=current(state);
+ w.source.guests=6;w.source.copies=3;w.source.targets={'cloud-water':300,'star-water':450};
+ const earlier=copy(w.source);
+ for(const check of [B.checkBatchPlan,B.checkBatchMessage,B.checkBatchTray,B.checkBatchContrast]){
+  assert.ok(check(state));assert.ok(B.batchState(state));
+ }
+ B.setBatchReading(state,'0');assert.ok(B.checkBatchReading(state));
+ B.setBatchReference(state,'cloud','100');B.setBatchReference(state,'star','150');assert.ok(B.checkBatchReference(state));
+ assert.ok(B.batchState(state));assert.deepEqual(current(state).source,earlier);
+ assert.equal(current(state).checks.length,6);
+}
 console.log(`Whole-batch core: passed (including ${transfers} finite apparatus moves).`);
