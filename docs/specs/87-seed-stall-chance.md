@@ -1,6 +1,6 @@
 # 87 · Seed Stall chance experiment
 
-**Status:** Two focused findings from independent specification review folded; focused follow-up cleared at `dbf5b60` with no remaining P1/P2. Runtime is under separate implementation review. This document authorizes no atlas row or release by itself.
+**Status:** Two focused findings from independent specification review folded; focused follow-up cleared at `dbf5b60` with no remaining P1/P2. The [implementation review](../reviews/87-seed-stall-review.md) cleared the repaired runtime at `9eec5d6` with no remaining P1/P2. This document authorizes no atlas row or release by itself.
 
 ## Problem and smallest useful experiment
 
