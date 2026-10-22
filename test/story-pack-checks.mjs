@@ -107,7 +107,7 @@ rejects(p=>p.stories[0].connections.push(clone(p.stories[0].connections[0])),/du
     check(compileParisPacks([pack]).stories[0].connections[0].topicId===topicId,'Marble ID syntax preserves hyphens and underscores');
   }
 }
-check(parisPacks.length===1&&parisStories.length===7&&Object.keys(parisLibraryNodes).length===42,'registered pack appends to six original stories');
-check(parisStories.slice(0,6).every(s=>!s.packId)&&parisStories.at(-1).id==='puppet-post','legacy story order and metadata are preserved');
-check(Object.keys(parisLibraryHelpers).length===42,'all generated and legacy tasks have helpers');
+check(parisPacks.length===2&&parisStories.length===8&&Object.keys(parisLibraryNodes).length===48,'two registered packs append to six original stories');
+check(parisStories.slice(0,6).every(s=>!s.packId)&&parisStories[6].id==='puppet-post'&&parisStories[7].id==='flood-almanac','legacy and reviewed pack story order stays stable');
+check(Object.keys(parisLibraryHelpers).length===48,'all generated and legacy tasks have helpers');
 console.log(`${checks} story-pack validation, content and permutation checks passed.`);
