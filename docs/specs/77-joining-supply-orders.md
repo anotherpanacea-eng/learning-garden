@@ -1,6 +1,6 @@
 # 77 — Joining Supply Orders
 
-**Status: author proposal; independent specification and content review required before implementation.** This is one optional M1 addition-with-regrouping turn in Bundle Burrow, not a written-algorithm course or a claim of calculation fluency. The [source audit](../source-audits/77-joining-supply-orders.md) identifies the precise overlap and limits.
+**Status: independently reviewed for implementation at `af007f22e15a110fadc9b7dbdae5c48e56d74cfc`.** This is one optional M1 addition-with-regrouping turn in Bundle Burrow, not a written-algorithm course or a claim of calculation fluency. The [source audit](../source-audits/77-joining-supply-orders.md) identifies the precise overlap and limits; the [review receipt](../reviews/77-joining-supply-orders-spec-review.md) records the clearance and its limits.
 
 ## The missing action
 

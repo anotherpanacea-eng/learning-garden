@@ -1,6 +1,6 @@
 # Joining Supply Orders: bounded source audit
 
-**Author research, 2026-10-22; independent content/specification review pending.** Supports [spec 77](../specs/77-joining-supply-orders.md). No lesson, code, taxonomy bundle, atlas row or completed-topic status is changed by this packet.
+**Author research, 2026-10-22; independent content/specification review completed at `af007f22e15a110fadc9b7dbdae5c48e56d74cfc`.** Supports [spec 77](../specs/77-joining-supply-orders.md). No lesson, code, taxonomy bundle, atlas row or completed-topic status is changed by this packet.
 
 ## Existing work and refreshed sources
 
