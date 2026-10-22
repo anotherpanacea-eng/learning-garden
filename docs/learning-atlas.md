@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 149 explicit current references across 81 unique source topics: authored question references, scoped practice or supplied explanations. The other 1509 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 151 explicit current references across 83 unique source topics: authored question references, scoped practice or supplied explanations. The other 1507 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -21,7 +21,7 @@ There are 149 explicit current references across 81 unique source topics: author
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 53 | 450 |
+| Mathematics | 503 | 55 | 448 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 14 | 533 |
 
@@ -81,6 +81,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Cartographer’s Table (`#workshop/maps`, local build) | compose, build | Freely place four keyed landmarks on a supplied0–5 intersection grid; read horizontal-first coordinates and compose two adjacent orthogonal routes. Count travelled intervals in fictional model metres, including retraced segments; compare frozen checks separately from revised maps. Supported schematic practice only; no real geography, surveying, physical scale, rates, independent axis construction or full coordinate/geometry attainment. Optional three supplied delivery jobs add freely revealable Map-reader/Dispatcher/Both clue views and child-authored routes through an intermediate stop. Recorded arrival, actual stop visit and serving the request remain separate; no secure separation, partner participation or communication attainment is inferred. Optional structured authoring (spec63) chooses start, collection and final delivery on a complete free map, then creates a separate frozen solving job after a supplied 12-move feasibility check. Generated wording and displayed calculations do not establish independent writing, shortest-path reasoning or general problem-posing attainment. |
 | Two Windows (`#workshop/windows`, local build) | read, compose | Three original fictional events with two tellers and freely chosen short/long passages. Distinguish explicit, inferred, contradicted and missing details across both accounts, select supporting lines, and choose a supplied revision for a particular reader. Optional exact own words remain ungraded; no decoding, independent writing, general narrator reliability or historical corroboration claim. |
 | Balance Stall (`#workshop/balance`, local build) | build | An ideal equal-arm model with identical one-unit masses: compare two different visible arrangements, make reversible paired/one-sided changes and explore one whole sealed parcel of fixed model mass. Proposed value, isolation, performed actions, support and frozen outcomes stay separate. No physical measurement, two-step/general equation solving or independently demonstrated method claim. |
+| Preparation Clock (`#workshop/clock`, local build) | build, read | Four fictional morning preparation cards: read a fixed hour/half-hour face, then set a separate coupled model to a supplied digital departure. Independent recorded responses, optional supplied digital label/help, frozen sources and open revision. No independent drawing/hand positioning, elapsed-duration calculation, AM/PM, 24-hour day, physical measurement or real schedule. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -147,7 +148,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Fractions | 67 | 12 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Geometry | 69 | 7 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Mathematical Thinking | 48 | 1 | Build · transform · relate; Search · inspect · compare |
-| Mathematics / Measurement | 68 | 10 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Measurement | 68 | 12 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Multiplication & Division | 57 | 9 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Number Representation & Place Value | 52 | 5 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
@@ -333,6 +334,8 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Caterpillar to butterfly](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Wr6DDgr_kH) | scoped-practice / Living Garden / [source](../dist/life-stages-content.mjs) | Life Stages (#living/stages, local build): four supplied Small White stages, eight directed chart-neighbour questions and same-individual versus offspring choices. Guided partial ordering/continuity practice, not independent explanation, retelling/drawing, field observation or full-topic attainment. |
 | [Minibeasts in the food chain](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_QH-Fs97twT) | scoped-practice / Living Garden / [source](../dist/food-links-content.mjs) | Food Links (#living/food, local build): four supplied endpoint questions over broad bean sap → black bean aphid → seven-spot ladybird larva; neighbour and food-arrow energy meaning assessed separately. Guided partial minibeast feeding practice, not independent chain construction/explanation, field identification, full diets or whole-topic attainment. |
 | [Halves and quarters (age 7+)](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_3tz3Otap5j) | scoped-practice / Market Day Coin Counter (local build) / [source](../dist/market-change-content.mjs) | Source-title mismatch: pinned Halves and quarters (age 7+) actually has US-money description/evidence; refreshed upstream names it Money word problems (audit67). Market Change: six supplied whole-cent price/tender cases; choose coverage and build any fitting return, keeping shortage distinct from zero change. No fractions, bills/dollar notation, independent fluency, real cash handling or whole-topic attainment. |
+| [Telling Time: Hours and Half Hours](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_0XxyaQLRhn) | scoped-practice / Preparation Clock (local build) / [source](../dist/preparation-clock-content.mjs) | Guided hour/half-hour analogue-to-digital choices and digital-to-coupled-model setting across four supplied cards. Software coordinates both hands; no independent drawing, arbitrary minutes, unassisted reading or whole-topic attainment. |
+| [Number of minutes in an hour](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_2XDGT5tei1) | scoped-practice / Preparation Clock (local build) / [source](../dist/preparation-clock-content.mjs) | Supplied 30-minute half-hour steps and two steps making 60 minutes / one hour. The 24-position model is a 12-hour face, not a day. No 24-hours/day conversion, independent elapsed-duration calculation or physical measurement. |
 
 ## Sources, licensing and maintenance
 

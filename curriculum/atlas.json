@@ -616,6 +616,17 @@
       ],
       "route": "#workshop/balance",
       "scope": "An ideal equal-arm model with identical one-unit masses: compare two different visible arrangements, make reversible paired/one-sided changes and explore one whole sealed parcel of fixed model mass. Proposed value, isolation, performed actions, support and frozen outcomes stay separate. No physical measurement, two-step/general equation solving or independently demonstrated method claim."
+    },
+    {
+      "id": "preparation-clock",
+      "name": "Preparation Clock",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "route": "#workshop/clock",
+      "scope": "Four fictional morning preparation cards: read a fixed hour/half-hour face, then set a separate coupled model to a supplied digital departure. Independent recorded responses, optional supplied digital label/help, frozen sources and open revision. No independent drawing/hand positioning, elapsed-duration calculation, AM/PM, 24-hour day, physical measurement or real schedule."
     }
   ],
   "manualReferences": [
@@ -1234,6 +1245,20 @@
       "kind": "scoped-practice",
       "source": "dist/market-change-content.mjs",
       "scope": "Source-title mismatch: pinned Halves and quarters (age 7+) actually has US-money description/evidence; refreshed upstream names it Money word problems (audit67). Market Change: six supplied whole-cent price/tender cases; choose coverage and build any fitting return, keeping shortage distinct from zero change. No fractions, bills/dollar notation, independent fluency, real cash handling or whole-topic attainment."
+    },
+    {
+      "game": "preparation-clock",
+      "topicId": "mt_0XxyaQLRhn",
+      "kind": "scoped-practice",
+      "source": "dist/preparation-clock-content.mjs",
+      "scope": "Guided hour/half-hour analogue-to-digital choices and digital-to-coupled-model setting across four supplied cards. Software coordinates both hands; no independent drawing, arbitrary minutes, unassisted reading or whole-topic attainment."
+    },
+    {
+      "game": "preparation-clock",
+      "topicId": "mt_2XDGT5tei1",
+      "kind": "scoped-practice",
+      "source": "dist/preparation-clock-content.mjs",
+      "scope": "Supplied 30-minute half-hour steps and two steps making 60 minutes / one hour. The 24-position model is a 12-hour face, not a day. No 24-hours/day conversion, independent elapsed-duration calculation or physical measurement."
     }
   ],
   "increments": [
