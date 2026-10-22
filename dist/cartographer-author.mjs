@@ -26,9 +26,11 @@ export function mapAuthorView(round){
 export function mapProblemPlan(round){
  const view=mapAuthorView(round),base={status:view.status,draft:view.draft,request:'',minimum:null,legs:[],limit:12,source:null};
  if(view.status==='not-free'||view.status==='unavailable')return base;
- if(!positive(round.id)||!object(round.places)||!marks.every(mark=>point(round.places[mark.id]))
-  ||new Set(marks.map(mark=>`${round.places[mark.id].x},${round.places[mark.id].y}`)).size!==4)return {...base,status:'missing-map'};
+ if(!positive(round.id)||!object(round.places)||!Object.entries(round.places).every(([id,p])=>known(id)&&(p===null||point(p))))return {...base,status:'missing-map'};
+ const placed=Object.fromEntries(Object.entries(round.places).filter(([,p])=>p!==null));
+ if(new Set(Object.values(placed).map(p=>`${p.x},${p.y}`)).size!==Object.keys(placed).length)return {...base,status:'missing-map'};
  const draft=view.draft;
+ if(![draft.from,draft.via,draft.to].every(id=>point(round.places[id])))return {...base,status:'missing-map'};
  if(new Set([draft.from,draft.via,draft.to]).size!==3)return {...base,status:'distinct'};
  const request=`Start at ${name(draft.from)}. Collect a sealed parcel at ${name(draft.via)}, then deliver it to ${name(draft.to)}.`;
  const legs=[[draft.from,draft.via],[draft.via,draft.to]].map(([from,to])=>{
@@ -38,7 +40,7 @@ export function mapProblemPlan(round){
  const minimum=legs.reduce((sum,leg)=>sum+leg.steps,0);
  const plan={...base,status:minimum<=12?'ready':'too-long',request,legs,minimum};
  if(plan.status!=='ready')return plan;
- const positions=marks.map(mark=>`${mark.name} is at (${round.places[mark.id].x}, ${round.places[mark.id].y}).`).join(' ');
+ const positions=marks.filter(mark=>round.places[mark.id]).map(mark=>`${mark.name} is at (${round.places[mark.id].x}, ${round.places[mark.id].y}).`).join(' ');
  const source={version:1,id:'map-maker-job',title:'A delivery problem from our map',request,
   mapReaderText:`I have our map. ${positions} Read across first, then up. North is up and east is right. Each move travels one interval.`,
   places:structuredClone(round.places),from:draft.from,via:draft.via,to:draft.to,authored:{version:1,mapId:round.id}};

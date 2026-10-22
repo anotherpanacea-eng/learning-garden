@@ -40,12 +40,12 @@ export function startMapJob(state,id){const source=mapJobSource(id);return sourc
 // Optional author drafts do not change base map/source/result validation.
 export function setMapAuthorOpen(state,open){
  const r=mapView(state).current;if(!r||typeof open!=='boolean')return false;
- const view=mapAuthorView(r);if(!['missing','ready'].includes(view.status)||open&&mapProblemPlan(r).status==='missing-map')return false;
+ const view=mapAuthorView(r);if(!['missing','ready'].includes(view.status)||open&&Object.values(r.places).filter(Boolean).length<3)return false;
  if(view.status==='missing')r.authorDraft=structuredClone(view.draft);r.authorDraft.open=open;return true;
 }
 export function chooseMapAuthor(state,field,value){
  const r=mapView(state).current;if(!r||!['from','via','to'].includes(field)||!known(value))return false;
- const view=mapAuthorView(r);if(!['missing','ready'].includes(view.status)||mapProblemPlan(r).status==='missing-map')return false;
+ const view=mapAuthorView(r);if(!['missing','ready'].includes(view.status)||!validMapPoint(r.places[value]))return false;
  if(view.status==='missing')r.authorDraft=structuredClone(view.draft);r.authorDraft[field]=value;return true;
 }
 export function startAuthoredMapJob(state){
