@@ -58,7 +58,7 @@ Connect holds one live cutaway picture, four native reversible controls, selecte
 
 - `open` title **“Open path: model bulb off”**; text **“Our connections do not make a complete path through the filament from one cell end to the other. Add or remove a connection and compare.”**
 - `glow` title **“Complete path: model bulb glows”**; text **“These connections include both bulb contacts and the filament in a path between the two cell ends. This filament bulb also works with the cell ends reversed.”**
-- `bypass` title **“Glow model paused: a wire path bypasses the filament”**; text **“These wires join the cell ends without going through the filament. Our simple model does not calculate this arrangement. Try changing the links so each cell end reaches a different bulb contact.”**
+- `bypass` title **“Glow model paused: a wire path bypasses the filament”**; text **“These wires join the cell ends without going through the filament. Our simple model does not calculate this arrangement. Leave exactly two links: cell + to one bulb contact and cell − to the other.”**
 
 An always-visible model limit says **“A pretend screen circuit, not a physical result. The drawing shows connections, not measured current, brightness or heat.”** Glow uses a soft static fill and text. No flashing, automatic movement, current arrows, moving electrons or sound is required. Both valid glow masks have the same brightness; it is not a quantitative display. The model shows no glow while paused and labels this as paused rather than an open physical circuit.
 
