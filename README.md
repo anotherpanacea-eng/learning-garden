@@ -58,6 +58,7 @@ node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
 node test/count-collection-checks.mjs
+node test/lantern-line-checks.mjs
 node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
 node test/fraction-trail-checks.mjs
@@ -411,3 +412,17 @@ Run `node test/tenths-checks.mjs` for the finite picture, notation, saving and r
 My Count Collection at `#living/collection` lets a learner make a pretend button collection, record a table, draw bars and read the chart across four short turns. It distinguishes a faithful representation from an accurate reading of a different chart. Sources, earlier checks and an optional kept version stay tied to their own saved values. This is pictured practice, not a survey or a mastery judgment. See [spec86](docs/specs/86-count-collection.md) and its [source audit](docs/source-audits/86-count-collection.md). Run `node test/count-collection-checks.mjs`; with the static app served locally, run `COLLECTION_TEST_URL=http://127.0.0.1:4173/ node test/count-collection-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
 
 The [Count Collection review](docs/reviews/86-count-collection-review.md) records the exact internally cleared implementation and local checks; release clearance remains separate.
+
+## Seed Stall
+
+The optional `#numbers/seeds` experiment lets a learner choose six pictured sun and moon seed counters, make an optional prediction, and record up to three short runs of screen draws with replacement. The browser chooses among the six pictured positions on each draw. The bag, its rule, the prediction, and each outcome remain distinct in an optional local save. Results from these small virtual runs cannot prove that a real bag is fair or establish learning gains. See [spec 87](docs/specs/87-seed-stall-chance.md) and its [source audit](docs/source-audits/87-seed-stall-chance.md).
+
+Run `node test/seed-stall-checks.mjs` for source, saved-work and recovery checks. With `dist` served locally and Playwright installed, run `SEED_TEST_URL=http://127.0.0.1:4173/ node test/seed-stall-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations; `SEED_ARTIFACTS` saves temporary screenshots. The synthetic Chrome run checks phone/tablet layouts, all seven bags, actual draws, notebook download/import, imported history and near-limit refusal. It does not establish physical iPad behavior or learning outcomes.
+
+The [independent implementation review](docs/reviews/87-seed-stall-review.md) records the repaired exact head and local verification; composition and release clearance remain separate.
+
+Lantern Line at `#numbers/lanterns` places two fraction stops along the same whole walk. Six open requests contrast unit fractions, same-sized parts, different partitions, equal points, zero and whole endpoints. Reading the actual order is separate from matching the requested stops; optional part guides and a worked example remain supplied support. Partial work, earlier checks and one explicitly kept version stay with their frozen sources. See [spec89](docs/specs/89-lantern-line.md) and its [source audit](docs/source-audits/89-lantern-line.md). Run `node test/lantern-line-checks.mjs`; with the static app served locally, run `LANTERN_TEST_URL=http://127.0.0.1:4173/ node test/lantern-line-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
+
+The [Lantern Line review](docs/reviews/89-lantern-line-review.md) records the internally cleared implementation and local verification.
+
+Food-link Fork Board at `#living/fork` lets a learner draw food-to-eater arrows among four named organisms, then check each proposal against the evidence slip displayed in its row. A closer hoverfly study changes what that slip supports without rewriting earlier checks. The shared board distinguishes proposed, supported and undecided links; it does not predict a garden population. It saves its own source, checks and raw recovery separately from Food Links and Life Stages. See [spec88](docs/specs/88-food-link-fork-board.md), its [source audit](docs/source-audits/88-food-link-fork-board.md) and the [review receipt](docs/reviews/88-food-link-fork-board-review.md). Run `node test/food-fork-checks.mjs`; with `dist` served locally and Playwright installed, run `FORK_TEST_URL=http://127.0.0.1:4173/ node test/food-fork-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations. Synthetic Chrome checks do not establish physical iPad/Safari behavior or learning gains.

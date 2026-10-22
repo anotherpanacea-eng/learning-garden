@@ -1,0 +1,48 @@
+.seed-sheet{max-width:880px;margin:0 auto;padding:1.2rem 1rem 3rem}
+.seed-sheet h1{margin:.55rem 0}
+.seed-sheet p{line-height:1.5}
+.seed-sheet .back,.seed-sheet summary{display:inline-flex;align-items:center;min-height:44px}
+.seed-panel{margin:1.2rem 0;padding:1.15rem;border:2px solid #cbded1;border-radius:18px;background:#fffdf6}
+.seed-panel h2{margin-top:0}
+.seed-rule,.seed-finish,.seed-confirm{padding:.75rem 1rem;border-radius:12px;background:#eef5e9}
+.seed-status:empty{display:none}
+.seed-status:not(:empty){padding:.7rem 1rem;border:2px solid #856a38;border-radius:12px;background:#fff2d9}
+.seed-bag{display:flex;justify-content:center;max-width:420px;margin:.8rem auto;border:3px solid #365e4d;border-radius:1rem 1rem 3rem 3rem;background:#f6ebd0;padding:1.2rem}
+.seed-bag-marks{display:grid;grid-template-columns:repeat(3,minmax(48px,1fr));gap:.65rem;width:100%;max-width:270px}
+.seed-counter{display:grid;place-items:center;width:48px;height:48px;border:2px solid #2d5145;border-radius:50%;font-size:1.8rem;font-weight:bold;line-height:1}
+.seed-counter.seed-sun{background:#f2c55c;color:#253e35}
+.seed-counter.seed-moon{background:#b9a7d7;color:#253e35}
+.seed-counts{text-align:center}
+.seed-adjust,.seed-choices,.seed-links{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+.seed-adjust{justify-content:center}
+.seed-sheet button,.seed-sheet a.secondary{min-height:44px;min-width:44px}
+.seed-choices button{flex:1 1 140px}
+.seed-prediction{border:1px solid #cbded1;border-radius:12px;padding:.8rem;margin:1rem 0}
+.seed-prediction legend{font-weight:700}
+.seed-choices [aria-pressed="true"]{outline:3px solid #2b6650;outline-offset:1px}
+.seed-returned{padding:.65rem .9rem;border-left:4px solid #397958;background:#eef5e9}
+.seed-results{margin:1rem 0}
+.seed-draw-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem;padding-left:1.2rem}
+.seed-draw-list li{min-height:44px;padding:.35rem .5rem;border:1px solid #cbded1;border-radius:8px}
+.seed-chart{max-width:510px;margin:1rem 0}
+.seed-chart-row{display:grid;grid-template-columns:70px minmax(0,1fr) 2rem;align-items:center;gap:.45rem;margin:.4rem 0}
+.seed-track{height:32px;border-left:2px solid #244d3d;background:repeating-linear-gradient(90deg,#eef2e9 0,#eef2e9 calc(16.666% - 1px),#aac2b3 calc(16.666% - 1px),#aac2b3 16.666%)}
+.seed-bar{display:block;height:100%;min-width:0}
+.seed-bar.seed-sun{background:#d8a53d}
+.seed-bar.seed-moon{background:#8d75b6}
+.seed-ticks{position:relative;height:1.2rem;margin-left:2px;font-size:.8rem}
+.seed-ticks span{position:absolute;top:0;transform:translateX(-50%)}
+.seed-run-table,.seed-history table{width:100%;border-collapse:collapse;margin:.8rem 0}
+.seed-run-table th,.seed-run-table td,.seed-history th,.seed-history td{padding:.35rem;border-bottom:1px solid #cbded1;text-align:left}
+.seed-history,.seed-talk{margin:1rem 0;padding:.5rem .8rem;border:1px solid #cbded1;border-radius:10px}
+.seed-history article{margin:.8rem 0;padding:.65rem;border-top:1px solid #cbded1}
+.seed-confirm{margin-top:1rem}
+.seed-confirm button{margin:.25rem}
+.seed-links{margin-top:1.2rem}
+@media(max-width:460px){.seed-sheet{padding:.8rem .65rem 2rem}
+.seed-panel{padding:.8rem}
+.seed-adjust button{flex:1 1 100%}
+.seed-adjust strong{order:-1;width:100%;text-align:center}
+.seed-draw-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+.seed-history{overflow-x:auto}
+}
