@@ -23,7 +23,7 @@ These are reference counts, not measures of learning, and spec 49 already says s
 Neither signal is a placement or readiness claim. Both are authoring-order hints only.
 
 - **A ready frontier.** 56 unreferenced topics have every hard prerequisite among the 74 already referenced. They cluster in foundations the current games almost reach: place value (7), measurement (10), fractions (8), multiplication and division (5), counting (4), geometry (4) and addition and subtraction (4). Examples include "A Hundred Is Ten Tens", "Comparing fractions", "Area by Tiling", "Missing number problems", "Linear number sequences" and "Changing Your Mind with Evidence". These are the cheapest next lessons, and several fit existing games as new content rather than new shells.
-- **Open doors.** 208 unreferenced topics have no hard prerequisite at all: Science 91, English 42, Personal & Social Development 19, History 14 and Mathematics 33. A knowledge route can start any of them without waiting for the maths sequence.
+- **Open doors.** 208 unreferenced topics have no hard prerequisite at all: Science 91, English 42, Mathematics 33, Personal & Social Development 19, History 14, Learning to Learn 4, Life Skills 4 and Computing 1. A knowledge route can start any of them without waiting for the maths sequence.
 
 ## 3. Strategies: distinct ways to reach the same acts
 
@@ -76,15 +76,13 @@ Short illustrated nonfiction "almanac" books, one series per knowledge pack (Anc
 
 ### 3.6 Packs, not shells (throughput)
 
-The app already has a few task grammars that work, each currently written as a one-off:
-- ordering cards;
-- sort-by-key;
-- compare two sources;
-- a literal runner;
-- A/B comparison;
-- build/transform.
+Add new content to interactions that already exist before building new games. Their current state:
 
-Make four or five of them data-driven, as story packs already are ([spec 12](specs/12-reviewed-story-packs.md)), so that a grammar lesson, a biome pack or an Egypt crate is reviewed *content* in an existing grammar rather than a new game. This is Jane's quest-pack idea with its mastery engine removed. Each pack still gets source and content review, but no new runtime, state model or spec per distinction.
+- **Ordering cards are already content-driven.** Reviewed story packs ([spec 12](specs/12-reviewed-story-packs.md)) add ordering tasks without editing the story engine. The first throughput step needs no new infrastructure: author more packs in that format, for example a nonfiction ordering pack to go with a Library book (3.5).
+- **Comparing sources, the literal runner and A/B comparison exist as one-offs** (the Travelers' Archive, Post Office/Instructions for a Reader, Fair Test Bench). Generalise one of them only after a concrete second content pack shows what has to vary. Don't generalise all of them in advance.
+- **Sort-by-key classification does not exist.** [Curriculum gaps](curriculum-gaps.md) records that there is no classification engine. It is a new capability needing its own spec, not a content-only extension.
+
+The aim is that, over time, a grammar lesson, a biome pack or an Egypt crate becomes reviewed *content* in a proven interaction rather than a new game. This is Jane's quest-pack idea with its mastery engine removed. Each pack still gets source and content review.
 
 - *Boundary:* spec 49 forbids a universal simulation engine and a learner model. This proposal adds neither. It generalises the content format of a few existing interactions, each with its own validation, frozen-source and recovery patterns.
 
@@ -100,11 +98,11 @@ Each game below adds a *new kind of action* and targets a strand with no referen
 
 ### 4.1 Willow Path, a linear number board game (Acts I–II; M1, M7, L3, E5)
 
-A two-player board in the town (1–100, numbered left to right in rows), played with a spinner and two tokens, child and adult. Landing squares carry small town events. Variants extend it: a fraction trail board (0 to 3 in eighths, Act II), a river board crossing zero (Act IV signed quantities) and a hundreds board (Act II place value).
+A two-player board in the town, played with a spinner and two tokens, child and adult. Landing squares carry small town events. The first slice follows the studied design: **one horizontal row of ten equally spaced, numbered squares**, moving by counting on. A 1–100 board, a fraction trail (0 to 3 in eighths), a river board crossing zero and a hundreds board are later variants. Those are **unvalidated adaptations**, worth trying but not covered by the evidence below.
 
 - *New action:* moving along a linear number track by counting on.
-- *Why:* playing linear (not circular) number board games improved young children's numerical magnitude estimation in controlled studies (Siegler & Ramani, 2008, 2009). It covers several frontier topics (counting forwards and backwards, 10 more or 10 less, comparing and ordering numbers) and gives two-seat play a home.
-- *First slice:* 1–100, one spinner, counting-on support, no winner required (both reach the bridge).
+- *Why:* playing a linear 1–10 number board game (a single row, not a circle) improved young children's numerical magnitude estimation in controlled studies (Siegler & Ramani, 2008, 2009). The single-row spatial layout was central to that design. It touches frontier counting and comparing topics and gives two-seat play a home.
+- *First slice:* the single-row 1–10 track, one spinner, counting-on support, and no winner required (both reach the bridge).
 
 ### 4.2 The Balance Stall (Acts II–III; M4 Algebra, 0 references)
 
@@ -170,10 +168,10 @@ A structured disagreement: a proposal for shared land, with authored evidence ca
 Cheapest, most distinct and best supported first:
 
 1. **Teach the apprentice (3.2), as a layer over two existing games** (gathering trays and Fair Test Bench), reusing their named contrasts. It needs no new shell, and it tests the strategy before spreading it.
-2. **Willow Path (4.1) with two-seat play (3.3).** One small board, strong evidence, several frontier topics and the first designed speaking and cooperation route.
+2. **Willow Path (4.1) with two-seat play (3.3), as the studied single-row 1–10 track.** One small board, good evidence for that exact design, and the first designed speaking and cooperation route. Larger boards follow only as labelled adaptations.
 3. **The Balance Stall (4.2).** It opens algebra in an existing market.
 4. **The town remembers (3.1)** across games that already exist, once there are enough frozen artefacts to revisit.
-5. **Packs, not shells (3.6), proved on one grammar** (sort-by-key or compare-two-sources) with one Library book plus a crate (3.5, 4.5). This is the throughput test for the 781 empty-domain topics.
+5. **Packs, not shells (3.6), using the existing ordering-pack format.** Pair one Library book with a nonfiction ordering pack (3.5), then try one crate (4.5) as a concrete second content pack in the Archive's source comparison. This is the throughput test for the 781 empty-domain topics. Classification waits for its own spec.
 
 The Print Shop, Sound-it-out with a human voice, Seasons Garden, the Seed Stall, the Town Council and the field kit follow as their content is reviewed.
 
