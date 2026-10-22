@@ -24,20 +24,20 @@ export const floodAlmanacPack = {
         'A museum photograph shows floodwater, a boat, and buildings at one Paris quay.',
         'The photograph shows one place, not every street or anyone’s thoughts.',
         'On 9 February 1910, the government formed a commission to study the flood.',
-        'The commission studied causes and suggested ways to lessen future floods.',
+        'The commission was asked to study causes and ways to lessen future floods.',
         'On 15 March 1910, the Seine returned to its riverbed.',
         'This original summary uses an Archives de Paris chronology and a Musée Carnavalet photograph.',
         'The flood happened in real Paris; our Learning Garden town and skyline are imagined.'
       ],
       3:[
         'On 15 March 1910, the Seine returned to its riverbed.',
-        'To see what came before, turn back to January.',
+        'Now we go back to earlier dates in the flood.',
         'The Seine reached its highest mark at the Austerlitz gauge on 28 January 1910.',
         'A highest mark is one point in a longer event.',
         'A museum photograph shows floodwater, a boat, and buildings at one Paris quay.',
         'The photograph shows one place, not every street or anyone’s thoughts.',
         'On 9 February 1910, the government formed a commission to study the flood.',
-        'The commission studied causes and suggested ways to lessen future floods.',
+        'The commission was asked to study causes and ways to lessen future floods.',
         'The photograph and chronology tell different parts of the same flood.',
         'This original summary uses an Archives de Paris chronology and a Musée Carnavalet photograph.',
         'The flood happened in real Paris; our Learning Garden town and skyline are imagined.'
@@ -53,16 +53,16 @@ export const floodAlmanacPack = {
         ],answer:1,
         hint:'Look for the words about a highest mark; the whole passage stays open.',
         explanation:'The Austerlitz sentence gives the highest mark and its date. The other sentences describe later events.',
-        talk:'Why might people have used boats beside the buildings? What remains a guess from this one photograph?',
+        talk:'Why might a boat be beside the buildings? What can one photograph not tell us?',
         helper:'flood-almanac-evidence'},
       {type:'order',title:'Dates, not sentence places',readingSkill:'Relate three events by their dates',
         prompt:'Put these three events in date order, even if the passage mentions them in another order.',
         items:[
-          '28 January 1910: the Seine reached its highest mark',
-          '9 February 1910: the government formed a flood commission',
-          '15 March 1910: the Seine returned to its riverbed'
+          'The Seine reached its highest mark',
+          'The government formed a flood commission',
+          'The Seine returned to its riverbed'
         ],
-        hint:'Find the date beside each event. The first sentence in a passage need not be the first event.',
+        hint:'Find each event’s date in the passage. The first sentence in a passage need not be the first event.',
         explanation:'The highest mark came on 28 January. The commission followed on 9 February. The river returned to its bed on 15 March. Dates set the order.',
         talk:'If this almanac had another page, what would you want to learn next?',
         helper:'flood-almanac-sequence'}

@@ -11,7 +11,7 @@ Author preparation, 2026-10-22, for the proposed [content draft](../library-floo
 | Draft wording or implication | Basis and limit |
 | --- | --- |
 | The three fixed dated sentences and chronological order | Archives chronology, dates and events above. “Highest mark” is specifically the Austerlitz measurement, not a depth everywhere. |
-| “The commission studied causes and suggested ways to lessen future floods” | Official after-flood page. This describes the commission's remit, not a claim that future floods were prevented. |
+| “The commission was asked to study causes and ways to lessen future floods” | Official after-flood page. This describes the commission's remit, not a claim that future floods were prevented. |
 | One photograph showing floodwater, a boat and buildings at a Paris quay | Museum record plus visual inspection of the exact credited PH8646 reproduction. The photograph is described in text only in this pack. |
 | One photograph cannot show every street or anyone's thoughts | Limit of one image, not a new claim about unseen streets or people. The talk prompt's “might” is conjecture, and no answer is scored. |
 | “A highest mark is one point in a longer event”; photograph and chronology tell different parts | Inference from the dated chronology and the single-scene photograph, labelled as explanation rather than a new historical fact. |
