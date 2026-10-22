@@ -145,7 +145,7 @@ function selected(b){
  for(const r of b.history){if(r.task.kind===kind&&r.phase!=='bypassed'&&eligible.has(roundKey(r))){latest.delete(roundKey(r));latest.set(roundKey(r),r);}}
  const evidence=[...latest.values()];
  const needs=r=>r.supported||r.attempts.some(a=>!a.correct)||['counting','together'].includes(r.method)||r.resolution==='together';
- const clean=r=>r.resolution==='answered'&&r.attempts.length===1&&r.attempts[0].correct&&!r.attempts[0].afterSupport&&!r.priorFactShown&&!needs(r);
+ const clean=r=>r.resolution==='answered'&&r.attempts.length===1&&r.attempts[0].correct&&!r.attempts[0].afterSupport&&!needs(r);
  const fresh=()=>{
   let p;for(let i=0;i<pairs.length;i++){
    p=pairs[(b.cursors[kind]*37)%pairs.length];b.cursors[kind]=(b.cursors[kind]+1)%poolSizes[kind];

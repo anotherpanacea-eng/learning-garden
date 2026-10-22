@@ -408,7 +408,7 @@ function bind(){
  bindSeed(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,downloadNotes:()=>downloadText(JSON.stringify(notesReport(state),null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`)});
  bindLantern(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindCollection(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
- bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target)});
+ bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target,true)});
  bindTenths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindSorting(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindCafeStart(state,{save,render,focus:focusElement});
@@ -485,10 +485,10 @@ function bind(){
  $('#download')?.addEventListener('click',()=>{const report=notesReport(state);downloadText(JSON.stringify(report,null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`);});
  $('#reset')?.addEventListener('click',showReset);
 }
-function exposeStoryFacts(node,except,target=state){
+function exposeStoryFacts(node,except,target=state,qualifyPendingBramble=false){
  for(const pair of node.facts||[]){
   noteLegacyExposure(target,pair);noteGardenFactExposure(target,pair,except);
-  notePendingBrambleFactExposure(target,pair);
+  if(qualifyPendingBramble)notePendingBrambleFactExposure(target,pair);
   target.exposures??=[];const key=`${pair[0]}x${pair[1]}`;if(!target.exposures.includes(key))target.exposures.push(key);
   const draft=target.baseline.draft,q=draft&&checkin.find(x=>x.id===draft.questionId),fact=q?.fact||(q&&[q.a,q.b]);
   if(fact&&fact.every(Number.isFinite)&&((fact[0]===pair[0]&&fact[1]===pair[1])||(fact[0]===pair[1]&&fact[1]===pair[0])))draft.exposed=true;

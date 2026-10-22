@@ -1,7 +1,7 @@
 const copy={
  intro:'The lantern walk runs from Gate 0 to Arch 1. Both lanterns use this same whole walk. Put each lantern at its requested fraction.',
  comparison:'In the line you made, which lantern is farther from Gate 0?',
- help:'A denominator names how many equal parts make one whole. Three equal parts are smaller than two equal parts of this same whole. One third is closer to 0 than one half. A fraction with more parts is not always farther: compare the size of each part and how many are taken.',
+ help:'A denominator names how many equal parts make one whole. When the same whole is split into three equal parts, each part is smaller than when it is split into two equal parts. One third is closer to 0 than one half. A fraction with more parts is not always farther: compare the size of each part and how many are taken.',
  exampleSteps:['Keep the whole fixed: both example lanterns use Gate 0 to Arch 1.','Split the whole into equal halves for the first marker and equal thirds for the second.','One half is farther from 0 than one third. Compare horizontal distance, not the height of a label.']
 };
 export const lanternCases=[
