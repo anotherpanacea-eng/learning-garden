@@ -107,7 +107,8 @@ const BROAD_TEXT=new Set(['label','title','prompt','hint','solution','talk','ste
 function semanticBroad(x){
  if(Array.isArray(x))return x.map(semanticBroad);
  if(!x||typeof x!=='object')return x;
- const out={};for(const [k,v] of Object.entries(x)){if(BROAD_TEXT.has(k))continue;out[k]=k==='choices'&&Array.isArray(v)?v.length:semanticBroad(v);}
+ // Choice text and order give the numeric answer index its meaning.
+ const out={};for(const [k,v] of Object.entries(x)){if(BROAD_TEXT.has(k))continue;out[k]=semanticBroad(v);}
  return out;
 }
 function broadWordingValid(q){
