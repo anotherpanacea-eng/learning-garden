@@ -35,6 +35,49 @@ for(const c of bundleCases){const s=fresh();B.chooseBundleCase(s,c.id);for(const
 for(const payload of [null,[],5,{version:99,raw:'<img src=x onerror="fictional()">'}]){const s=fresh();s.bundleExchange=payload;const before=JSON.stringify(s);ok(renderBundleExchange(s).html.includes('cannot play'),'unsupported unavailable');ok(!destinationNotes(s).includes('<img src=x'),'unknown raw notes escaped');eq(JSON.stringify(s),before,'unsupported reads preserve exact root');eq(prepareProgressImport(before).state.bundleExchange,payload,'unsupported transfer exact');B.recoverBundle(s);B.setBundleText(s,'total-count','13');B.checkBundle(s,'total-count');B.keepBundle(s);eq(B.bundleView(s).kept.priorExposureUnknown,true,'recovery keeps unknown');ok(bundleExchangeNotes(s).includes('Earlier encounters or checks are unknown'),'notes qualify history');eq(prepareProgressImport(JSON.stringify(s)).state.bundleExchange,s.bundleExchange,'recovered root exact');}
 for(const support of [{},42,null]){const s=fresh();B.setBundlePage(s,'digits');s.bundleExchange.cases[s.bundleExchange.currentCase].support=support;const before=structuredClone(s.bundleExchange);eq(B.bundleState(s),null,'malformed digits support is unavailable without throwing');ok(renderBundleExchange(s).html.includes('cannot play'),'malformed known root renders recovery');eq(prepareProgressImport(JSON.stringify(s)).state.bundleExchange,before,'malformed support imports unchanged');}
 class Storage{constructor(){this.map=new Map();}get length(){return this.map.size;}key(i){return [...this.map.keys()][i]??null;}getItem(k){return this.map.get(k)??null;}setItem(k,v){this.map.set(k,v);}removeItem(k){this.map.delete(k);}}
+// Generated through 5bfac02^'s API and accepted by its validator: two collections,
+// five checks (including number/unit mismatches), two keeps and two input errors.
+const legacyBundle=JSON.parse(fs.readFileSync(new URL('./fixtures/bundle-exchange-v1-labels.json',import.meta.url),'utf8'));
+const restoredBundle=JSON.parse(JSON.stringify(legacyBundle).replaceAll('"wrapped bundles"','"wrapped"').replaceAll('"individual counters"','"counters"').replaceAll('"Enter a whole number from 0 to 99 using digits."','"needs-number"'));
+for(const mode of ['units and errors','units','errors']){
+ const source=structuredClone(mode==='errors'?restoredBundle:legacyBundle);
+ if(mode!=='units and errors')for(const [id,w] of Object.entries(source.cases))w.errors=structuredClone((mode==='units'?restoredBundle:legacyBundle).cases[id].errors);
+ const s=fresh();s.bundleExchange=source;
+ const before=structuredClone(source),disk=new Storage(),store=new ExplorerStore(disk);store.load();ok(store.save(s),`${mode}: parent-format save written`);
+ const reloaded=initializeExplorerState(new ExplorerStore(disk).load());
+ eq(B.bundleView(reloaded).unsupported,false,`${mode}: parent-format save loads`);
+ eq(B.bundleState(reloaded),restoredBundle,`${mode}: only known unit/error strings change; counts, targets, outcomes, checks and keeps survive`);
+ ok(B.validBundle(B.bundleState(reloaded)),`${mode}: restored ids validate`);
+ eq(reloaded.bundleExchange,before,`${mode}: reading preserves the original save`);
+ eq(B.bundleHistoryUnknown(reloaded),false,`${mode}: known history stays known`);
+ eq(B.recoverBundle(reloaded),false,`${mode}: readable save needs no recovery`);
+ ok(renderBundleExchange(reloaded).html.includes('Enter a whole number from 0 to 99 using digits.'),`${mode}: input error still renders`);
+ const imported=prepareProgressImport(JSON.stringify(reloaded));ok(imported.ok,`${mode}: notebook import succeeds`);
+ eq(B.bundleState(imported.state),restoredBundle,`${mode}: imported save restores the same records`);
+ const display=structuredClone(reloaded);ok(B.noteBundleExamples(display,['bundle:0:2:7']),`${mode}: display hook accepts restored save`);
+ ok(B.validBundle(display.bundleExchange),`${mode}: display hook saves ids`);
+ ok(B.chooseBundleCase(reloaded,'twenty-seven'),`${mode}: switch to other saved collection`);
+ eq(B.bundleView(reloaded).kept,restoredBundle.cases['twenty-seven'].kept,`${mode}: other kept draft and mismatched outcomes intact`);
+ eq(B.bundleView(reloaded).work.history,restoredBundle.cases['twenty-seven'].history,`${mode}: other historical drafts and targets intact`);
+ B.setBundleText(reloaded,'total-count','27');ok(B.checkBundle(reloaded,'total-count'),`${mode}: restored collection can check`);
+ eq(B.bundleView(reloaded).feedback['total-count'].outcomes,{numberMatches:true,unitMatches:true},`${mode}: new check uses ids`);
+ eq(B.bundleView(reloaded).work.nextCheckId,restoredBundle.cases['twenty-seven'].nextCheckId+1,`${mode}: exactly one check added`);
+ ok(B.keepBundle(reloaded),`${mode}: restored collection can keep`);
+ ok(B.chooseBundleCase(reloaded,'empty'),`${mode}: unvisited collection remains open`);
+ ok(B.chooseBundleCase(reloaded,'thirteen'),`${mode}: return to original collection`);
+ eq(B.bundleView(reloaded).kept,restoredBundle.cases.thirteen.kept,`${mode}: original keep unchanged by navigation`);
+ eq(B.bundleView(reloaded).work.drafts,restoredBundle.cases.thirteen.drafts,`${mode}: original raw input retained`);
+ ok(B.validBundle(reloaded.bundleExchange),`${mode}: actions persist valid ids`);
+ ok(store.save(reloaded),`${mode}: adapted save persists`);
+ eq(new ExplorerStore(disk).load().bundleExchange,reloaded.bundleExchange,`${mode}: adapted save reloads exactly`);
+}
+for(const mutate of [w=>w.drafts['total-count'].unit='unknown unit',w=>w.errors['wrapped-count']='Unknown error sentence.']){
+ const s=fresh();s.bundleExchange=structuredClone(legacyBundle);mutate(s.bundleExchange.cases.thirteen);const before=structuredClone(s);
+ eq(B.bundleState(s),null,'unknown unit/error is not guessed');
+ eq(s,before,'failed adaptation preserves the original save');
+ const imported=prepareProgressImport(JSON.stringify(s));ok(imported.ok,'unreadable table leaves the rest of the notebook open');
+ eq(imported.state.bundleExchange,s.bundleExchange,'unreadable table remains available for export');
+}
 {
  const disk=new Storage(),store=new ExplorerStore(disk);let s=initializeExplorerState(store.load());const id=store.active.id;B.chooseBundleCase(s,'forty-two');B.countBundleTogether(s);B.setBundleText(s,'total-count','2-');store.save(s);eq(new ExplorerStore(disk).load().bundleExchange,s.bundleExchange,'model/raw reload');const other=store.add({},s);ok(!other.bundleExchange,'explorer isolation');s=store.select(id,other);eq(B.bundleView(s).model,{wrapped:3,loose:2,frame:10},'same explorer resumes');store.setPersistence(false,s);store.save(s);eq(store.load().bundleExchange,s.bundleExchange,'save-off session retained');ok(!new ExplorerStore(disk).load().bundleExchange,'save-off disk removed');ok(!store.clearActive().bundleExchange,'reset clears active table');
 }
