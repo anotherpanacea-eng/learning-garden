@@ -1,0 +1,7 @@
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function fairRamp(c,side,selected=null,label=null){
+ const top={low:95,middle:68,high:40}[c.height];
+ const x=selected?130+selected.distance*5:62,y=selected?124:top-10;
+ const text=`Setup ${side}: ${label||`${c.height} ramp, ${c.surface} landing surface`}.${selected?` Trial ${selected.index}: ${selected.distance} model cm.`:' Cart waits at the top.'}`;
+ return `<figure class="fair-ramp"><svg viewBox="0 0 300 160" role="img" aria-label="${esc(text)}"><path d="M22 136H288" stroke="#183f39" stroke-width="2"/><path d="M35 136V${top}H62L130 136Z" fill="#d6b77d" stroke="#75593c" stroke-width="2"/><path d="M62 ${top}L130 136" stroke="#183f39" stroke-width="3"/><rect x="130" y="136" width="150" height="9" fill="${c.surface==='rough'?'#d6b77d':'#abc4da'}"/>${c.surface==='rough'?Array.from({length:15},(_,n)=>`<path d="M${132+n*10} 142l3-4 3 4" stroke="#75593c" fill="none"/>`).join(''):''}<path d="M130 125v28" stroke="#183f39"/><g transform="translate(${x},${y})"><rect x="-13" y="-12" width="26" height="15" rx="2" fill="${side==='A'?'#397958':'#9a6526'}"/><rect x="-8" y="-24" width="16" height="12" fill="#e9b84a" stroke="#183f39"/><circle cx="-8" cy="5" r="4" fill="#183f39"/><circle cx="8" cy="5" r="4" fill="#183f39"/></g><text x="15" y="24" font-size="20" font-weight="bold" fill="#183f39">${side}</text><text x="133" y="157" font-size="10" fill="#183f39">0 · ramp foot</text></svg><figcaption>${esc(text)}</figcaption></figure>`;
+}

@@ -572,7 +572,7 @@
         "read"
       ],
       "route": "#workshop/fair",
-      "scope": "Choose both setups in the original finite ramp model; distinguish question-relevant, wrong-factor, identical and confounded pairs; reveal up to three examples per side, inspect repeats and keep an ungraded claim or exact note. Authored model comparison practice only; no physical investigation, causal-proof, independent measurement or mastery claim."
+      "scope": "Choose both setups in the original finite ramp model; distinguish question-relevant, wrong-factor, identical and confounded pairs; reveal up to three examples per side, inspect repeats and keep an ungraded claim or exact note. Authored model comparison practice only; no physical investigation, causal-proof, independent measurement or mastery claim. Optional Moss encounters (spec60) preserve a valid observation while repairing a causal overclaim or recognising a careful statement; demonstration, supplied explanation and exact ungraded prose stay separate. This adds no independently observed teaching-back attainment."
     },
     {
       "id": "coin-counter",
