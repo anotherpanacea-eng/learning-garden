@@ -1,6 +1,6 @@
 # The Town Remembers: an earlier idea, returned in a new form
 
-Status: **revised proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; content/source checks and separate Claude follow-up review remain pending. Strategy 3.1 of [the proposal](../../other-routes-through-the-acts.md).
+Status: **revised proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; content/source checks remain pending. Independent Claude specification review cleared the revised candidates recorded in the receipt. Strategy 3.1 of [the proposal](../../other-routes-through-the-acts.md).
 
 ## Purpose and story
 
@@ -25,7 +25,7 @@ Each of the three games adds one **optional** field to *newly* kept records: `ke
 **Gap rule:** an artefact is eligible once today's local day is later than its `keptDay`, or when `keptDay` is absent. There is no expiry and no "overdue". Changing the device clock can make an errand appear early or late; that is harmless.
 
 **Form eligibility comes only from the snapshot's own frozen values,** never from the case's targets or today's catalogue. A snapshot that fits no form is simply skipped: nothing is written to it, it isn't marked used, and the learner sees no message about it.
-- **Tray forms** require the snapshot's frozen source to say `modelId: 'whole-batches-v1'`, `revision: 1`, `unit: 'mL'`, `baseGuests: 2`, `base['cloud-water']: 100` and `base['star-water']: 150`. That model revision pins the 500 mL jar capacity. The hardcoded version-1 questions and feedback apply only to that model and base. The frozen portions must then be exactly *c*×100 mL cloud-water and *c*×150 mL star-water, with *c* from 1 to 3. *c* comes from the portions, not the case's planned copies. A different frozen base or unit, empty, partial or mismatched jars are skipped.
+- **Tray forms** require the snapshot's frozen source to say `modelId: 'whole-batches-v1'`, `revision: 1`, `unit: 'mL'`, `baseGuests: 2`, `base['cloud-water']: 100` and `base['star-water']: 150`. That model revision pins the 500 mL jar capacity; a capacity change must also change the source case revision. The hardcoded version-1 questions and feedback apply only to that model and base. The frozen portions must then be exactly *c*×100 mL cloud-water and *c*×150 mL star-water, with *c* from 1 to 3. *c* comes from the portions, not the case's planned copies. A different frozen base or unit, empty, partial or mismatched jars are skipped.
 - **Share forms** need frozen cuts that divide the snapshot's frozen whole into *n* pieces of equal width, with *n* in {2, 3, 4, 6}. `share-buns` also needs exactly one selected piece. Unequal cuts, or a different number of selected pieces, are skipped.
 - **Jug forms** require the frozen kitchen source's apparatus to say `unit: 'mL'`, `jarCapacity: 500`, `jugCapacity: 500` and `transfer: 50`. They use one frozen portion *a* (cloud-water first, then star-water) that is a multiple of 50 with 50 ≤ *a* ≤ 450. Empty (0 mL) and full (500 mL) readings are skipped, so every scale distractor below stays in range.
 
@@ -102,7 +102,7 @@ Optional root `townRemembers: {version: 1, rotation, used, errands}`:
 
 Validation follows AGENTS.md:
 - Each errand is checked against itself: ids, counts, choice membership within its own frozen choices, and fit flags matching its own frozen expected value.
-- Nothing is checked against today's case catalogues, today's wording or today's lists of sources and forms. A form id this version doesn't know makes that one errand unavailable and leaves the rest readable.
+- Nothing is checked against today's case catalogues, today's wording or today's lists of sources and forms. A form id this version does not know makes that one errand unavailable and leaves the rest readable. An unavailable open errand can still be set aside without interpreting its answer, so it never blocks another Start.
 - An unreadable errand is kept as a raw sibling, escaped in notes and export.
 
 There is no new identity, network, upload or analytics. Existing explorer switching, export, reset and save-off apply. Grown-up notes list each errand's source, gap ("kept on 2026-10-20; returned on 2026-10-22", or "earlier, date unknown"), form, choices, support and checks. They state plainly that this records exploration after a gap, not mastery.
@@ -119,8 +119,8 @@ No runtime graph change.
 
 Independent specification and content review must check all six forms across every artefact value they can receive:
 - *c* from 1 to 3;
-- *n* in {2, 3, 4, 6} with every *m* ≠ *n*;
-- every kitchen amount the source can keep, plus unsupported apparatus revisions and non-50-mL values that must remain ineligible.
+- *n* in {2, 3, 4, 6} with its next distinct cyclic *m*;
+- every kitchen amount the source can keep, plus changed apparatus values and non-50-mL values that must remain ineligible.
 
 Check that each form's fitting answer, distractors and feedback are correct and that no distractor is cautious without an evidence-specific reason. Resolve findings before build; then independent implementation review, root browser verification and a draft PR. No merge or deployment.
 

@@ -1,6 +1,6 @@
 # Library read-alouds: a flood almanac at Lucie’s bookstall
 
-Status: **revised proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; saved-visit repair, final content/source checks and separate Claude follow-up review remain pending. Source: strategy 3.5 and the corrected 3.6 plan in [the proposal](../../other-routes-through-the-acts.md).
+Status: **revised proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; saved-visit repair, final content/source checks remain pending. Independent Claude specification review cleared the revised candidates recorded in the receipt. Source: strategy 3.5 and the corrected 3.6 plan in [the proposal](../../other-routes-through-the-acts.md).
 
 ## Purpose and story
 

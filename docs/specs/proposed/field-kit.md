@@ -1,6 +1,6 @@
 # Field kit: real-world missions beside the model games
 
-Status: **revised proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; practical content/safety and source checks and separate Claude follow-up review remain pending. Strategy 3.4 of [the proposal](../../other-routes-through-the-acts.md).
+Status: **revised proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; practical content/safety and source checks remain pending. Independent Claude specification review cleared the revised candidates recorded in the receipt. Strategy 3.4 of [the proposal](../../other-routes-through-the-acts.md).
 
 ## Purpose and story
 
