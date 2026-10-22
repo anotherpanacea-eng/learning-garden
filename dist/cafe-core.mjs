@@ -1,3 +1,4 @@
+import {effectiveCafeRange,chooseCafeLocal} from './cafe-start-core.mjs';
 import {ingredients,orchardFoods,guests,wishes,cafeSuppers} from './cafe-content.mjs';
 const object=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const integer=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max;
@@ -115,13 +116,13 @@ export function cafeSummary(state){
  const c=state.cafe;if(!c?.current)return null;
  const order=orderFor(c),items=currentRecipe(c);return {order,items,missing:items.reduce((sum,a)=>sum+a.missing,0),plan:c.current.cupboardPlan||null,ready:items.every(i=>i.missing===0),...plate(c,c.current.recipe,order.index)};
 }
-export function setCafeRange(state,range){if(!['all','small'].includes(range))return false;ensureCafe(state).range=range;return true;}
+export function setCafeRange(state,range){if(!['all','small'].includes(range))return false;ensureCafe(state).range=range;chooseCafeLocal(state);return true;}
 export function nextGuest(state){
  const c=ensureCafe(state);if(c.current&&c.current.stage!=='served')return false;
  if(c.nextOrder>=1000000000)return false;
  const params=legacyParams(c,c.nextOrder);
  params.guestId=guests[(c.seed%guests.length+c.nextOrder)%guests.length].id;
- if(c.range==='all'){const cell=(c.seed%144+(c.allIndex%144)*37)%144;params.guests=1+Math.floor(cell/12);params.bites=1+cell%12;c.allIndex++;}
+ if(effectiveCafeRange(state)==='all'){const cell=(c.seed%144+(c.allIndex%144)*37)%144;params.guests=1+Math.floor(cell/12);params.bites=1+cell%12;c.allIndex++;}
  c.current={orderIndex:c.nextOrder++,params,stage:'plate',recipe:cleanRecipe({},c),plateAttempts:[],total:blankNumber(),shortfall:blankNumber(),repair:null,repairHistory:[],cupboardPlan:null,served:false,recovered:false};return true;
 }
 export function adjustBite(state,id,delta){
