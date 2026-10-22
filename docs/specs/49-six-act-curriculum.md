@@ -1,5 +1,7 @@
 # Six acts, continuous learning: curriculum programme specification
 
+Publication update, 2026-10-21: [PR 27](https://github.com/anotherpanacea-eng/learning-garden/pull/27) subsequently cleared and published Bell Studio, and the reviewed stack is now on main. The planning baseline below records its earlier unpublished state; source counts and all lesson-readiness limits remain unchanged.
+
 Status: programme-planning/accounting specification independently reviewed by Claude; see the review receipt. Topic-level lesson designs remain unfinished. No runtime change or release is authorised by this document. Individual activity builds require their own bounded specifications and reviews.
 
 ## 1. Problem, outcome and honesty about completeness

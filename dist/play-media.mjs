@@ -31,48 +31,64 @@ export const localEnglishVoices=voices=>localVoices(voices,'en');
 const voiceKey=v=>v.voiceURI||`${v.name}|${v.lang}`;
 export function chooseLocalVoice(voices,preferred='',language='en'){
  const local=localVoices(voices,language);
+ if(preferred){
+  const chosen=local.find(v=>voiceKey(v)===preferred);if(chosen)return chosen;
+  // A known choice for the other passage language does not replace its voice.
+  // An absent or nonlocal choice must never silently become a different voice.
+  if(!localVoices(voices,language==='fr'?'en':'fr').some(v=>voiceKey(v)===preferred))return null;
+ }
  const score=v=>(/premium|enhanced|natural|neural/i.test(v.name)?4:0)+(v.default?2:0);
- return local.find(v=>voiceKey(v)===preferred)||local.reduce((best,v)=>!best||score(v)>score(best)?v:best,null);
+ return local.reduce((best,v)=>!best||score(v)>score(best)?v:best,null);
 }
-export function stopSpeech(){if(activeSpeech){activeSpeech.onend=null;activeSpeech.onerror=null;activeSpeech=null;}try{window.speechSynthesis?.cancel();}catch{}}
+export function stopSpeech(){
+ if(activeSpeech){activeSpeech.onend=null;activeSpeech.onerror=null;activeSpeech=null;
+  document.querySelectorAll('.speech-playing').forEach(controls=>{controls.classList.remove('speech-playing');controls.querySelector('[data-speech-status]').textContent='Voice stopped. Tap Hear to listen again.';});
+ }
+ try{window.speechSynthesis?.cancel();}catch{}
+}
 export function resetSpeechPreferences(){stopSpeech();selectedVoice='';speakingRate=1;}
 export function bindSpeech(){
  removeVoiceListener();removeVoiceListener=()=>{};
  const buttons=[...document.querySelectorAll('[data-speak]')];if(!buttons.length)return;
  let controls=document.querySelector('.speech-controls');if(!controls){
   controls=document.createElement('div');controls.className='speech-controls';controls.hidden=true;
-  controls.innerHTML=`<button type="button" class="text-button" data-stop-speech>Stop voice</button><span role="status" data-speech-status></span><details class="voice-settings"><summary>Voice &amp; speed</summary><label>Reading voice<select data-reading-voice></select></label><label>Reading speed<select data-reading-speed><option value="0.8">Slower</option><option value="1">Natural pace</option><option value="1.15">A little faster</option></select></label><button type="button" class="secondary" data-preview-voice>Try this voice</button><p class="tiny">Choose a voice you enjoy. Preferences belong to this explorer. Only local voices for the passage’s language offered by this browser appear here.</p><details><summary>Better voices on iPad</summary><p class="tiny">In iPad Settings, open Accessibility, then Spoken Content (or Read &amp; Speak), then Voices → English or French. Download an enhanced or premium voice if offered, then reopen this page. Safari may offer a different selection from Siri or Speak Screen.</p></details></details>`;
+  controls.innerHTML=`<button type="button" class="text-button" data-stop-speech>Stop voice</button><span role="status" data-speech-status></span><details class="voice-settings"><summary>Voice &amp; speed</summary><label>Reading voice<select data-reading-voice aria-describedby="voice-availability"></select></label><p id="voice-availability" class="tiny" role="status" data-voice-availability></p><label>Reading speed<select data-reading-speed><option value="0.8">Slower</option><option value="1">Natural pace</option><option value="1.15">A little faster</option></select></label><button type="button" class="secondary" data-preview-voice>Try this voice</button><button type="button" class="text-button" data-refresh-voices>Refresh voice list</button><p class="tiny">Only voices this browser identifies as local for this passage’s language appear. Voice and speed belong to this explorer. Changing a system voice does not choose it here. If the browser plays a different sound from the named voice, stop and try another preview, or read together.</p><details><summary>Grown-ups: find and preview device voices</summary><ol class="tiny"><li>On Mac, open System Settings → Accessibility → Read &amp; Speak (Spoken Content on older versions) → System voice. On iPhone or iPad, open Settings → Accessibility → Read &amp; Speak (or Spoken Content) → Voices, then English or French.</li><li>Preview voices in those settings. If a free enhanced or premium download is offered, let it finish while online. You can also keep an installed voice; no purchase is needed.</li><li>Return here and choose Refresh voice list. If needed, reopen the browser or reload after saving or downloading your notes. Choose an available local voice above and tap Try this voice before reading.</li></ol><p class="tiny">Siri, Speak Screen and each browser may offer different voices. A downloaded system voice is not guaranteed to appear here. An unavailable saved choice stays selected until you choose another local voice or Automatic. Automatic names the local voice it will use; voice quality labels are not a guarantee. Without a local voice, read together. All activities work without audio.</p></details></details>`;
   document.querySelector('main').append(controls);
  }
  let activeLanguage='en';
  const languageName=()=>activeLanguage==='fr'?'French':'English';
- const speech=window.speechSynthesis,status=controls.querySelector('[data-speech-status]'),voiceSelect=controls.querySelector('[data-reading-voice]'),speedSelect=controls.querySelector('[data-reading-speed]');
+ const speech=window.speechSynthesis,status=controls.querySelector('[data-speech-status]'),availability=controls.querySelector('[data-voice-availability]'),voiceSelect=controls.querySelector('[data-reading-voice]'),speedSelect=controls.querySelector('[data-reading-speed]');
  const voices=()=>{try{return speech?.getVoices?.()||[];}catch{return [];}};
  function refreshVoices(){
-  const available=localVoices(voices(),activeLanguage),chosen=chooseLocalVoice(available,selectedVoice,activeLanguage);
+  const all=voices(),available=localVoices(all,activeLanguage),chosen=chooseLocalVoice(all,selectedVoice,activeLanguage),automaticVoice=chooseLocalVoice(all,'',activeLanguage),exact=available.some(v=>voiceKey(v)===selectedVoice),otherLanguage=!exact&&localVoices(all,activeLanguage==='fr'?'en':'fr').some(v=>voiceKey(v)===selectedVoice),missing=!!selectedVoice&&!exact&&!otherLanguage;
   voiceSelect.replaceChildren();
+  const automatic=document.createElement('option');automatic.value='';automatic.textContent=`Automatic local ${languageName()}${automaticVoice?` — ${automaticVoice.name}`:''}`;voiceSelect.append(automatic);
+  if(missing){const option=document.createElement('option');option.value=selectedVoice;option.textContent='Saved voice — unavailable in this browser';voiceSelect.append(option);}
   for(const voice of available){const option=document.createElement('option');option.value=voiceKey(voice);option.textContent=`${voice.name} (${voice.lang})${voice.default?' — device default':''}`;voiceSelect.append(option);}
-  if(chosen)voiceSelect.value=voiceKey(chosen);
-  else{const option=document.createElement('option');option.textContent=`No local ${languageName()} voices available`;voiceSelect.append(option);}
-  voiceSelect.disabled=!chosen;controls.querySelector('[data-preview-voice]').disabled=!chosen;
+  voiceSelect.value=exact||missing?selectedVoice:'';
+  availability.textContent=missing?`Your saved voice is unavailable for ${languageName()} in this browser. Refresh after voices load, or choose another local voice or Automatic. No replacement will play silently.`:chosen?`${selectedVoice&&!exact?'Your saved choice is for the other language. This passage uses automatic local speech. ':''}${languageName()} voice to preview: ${chosen.name}.`:`${otherLanguage?'Your saved choice is for the other language and is kept. ':''}No local ${languageName()} voices are available yet. Refresh after voices load, or read together.`;
+  voiceSelect.disabled=!available.length&&!selectedVoice;controls.querySelector('[data-preview-voice]').disabled=!chosen;
+  return chosen;
  }
  function stopped(message){stopSpeech();controls.classList.remove('speech-playing');status.textContent=message;}
  controls.querySelector('[data-stop-speech]').onclick=()=>stopped('Voice stopped.');
- voiceSelect.onchange=()=>{selectedVoice=voiceSelect.value;changedPreference();stopped('Voice selected. Tap Try this voice to listen.');};
+ voiceSelect.onchange=()=>{selectedVoice=voiceSelect.value;changedPreference();stopped('Voice selected. Tap Try this voice to listen.');refreshVoices();};
  speedSelect.value=String(speakingRate);speedSelect.onchange=()=>{speakingRate=Number(speedSelect.value);changedPreference();stopped('Speed selected. Tap Try this voice to listen.');};
+ controls.querySelector('[data-refresh-voices]').onclick=()=>{stopped('Voice list refreshed. Tap Try this voice to listen.');refreshVoices();};
  function speak(text,language=activeLanguage){
   activeLanguage=language==='fr'?'fr':'en';
-  stopped('');refreshVoices();const voice=chooseLocalVoice(voices(),selectedVoice,activeLanguage);
-  if(!voice||!window.SpeechSynthesisUtterance){status.textContent=`A local ${languageName()} voice is not available yet. Try Hear again after voices load, or read together.`;return;}
+  stopped('');const voice=refreshVoices();
+  if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return;}
   const utterance=new window.SpeechSynthesisUtterance(spoken(text,activeLanguage));utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
   utterance.onend=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='Finished reading.';};
   utterance.onerror=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='This local voice could not play. Try another voice, or read together.';};
-  activeSpeech=utterance;controls.classList.add('speech-playing');status.textContent=`Reading with ${voice.name}. You can stop whenever you like.`;
+  activeSpeech=utterance;controls.classList.add('speech-playing');status.textContent=`${selectedVoice&&voiceKey(voice)!==selectedVoice?'Your saved choice is for the other language. ':''}Requested local voice: ${voice.name}. You can stop whenever you like.`;
   try{speech.speak(utterance);}catch{utterance.onerror();}
  }
  controls.querySelector('[data-preview-voice]').onclick=()=>speak(activeLanguage==='fr'?'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?':'Welcome to the garden. What shall we discover together today?');
  refreshVoices();
- if(speech?.addEventListener){speech.addEventListener('voiceschanged',refreshVoices);removeVoiceListener=()=>speech.removeEventListener('voiceschanged',refreshVoices);}
+ const voicesChanged=()=>{const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap Hear or Try this voice to listen.':availability.textContent;};
+ if(speech?.addEventListener){speech.addEventListener('voiceschanged',voicesChanged);removeVoiceListener=()=>speech.removeEventListener('voiceschanged',voicesChanged);}
  for(const button of buttons)button.addEventListener('click',()=>{
   controls.hidden=false;button.insertAdjacentElement('afterend',controls);speak(button.dataset.speak,button.dataset.speakLang||'en');
  });
