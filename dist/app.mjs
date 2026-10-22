@@ -1,4 +1,5 @@
 import {noteInstructionEntry} from './instruction-core.mjs';
+import {willowPathPage,willowPathEntry,bindWillowPath,resetWillowVoice} from './willow-path-ui.mjs';
 import {renderInstructions,instructionEntry,bindInstructions} from './instruction-ui.mjs';
 import {renderBundleExchange,bundleExchangeEntry,bindBundleExchange} from './bundle-exchange-ui.mjs';
 import {noteBundleDisplay,syncBundleQuestionExposure} from './bundle-broad-exposure.mjs';
@@ -210,6 +211,7 @@ function render(){
   stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   if(root!=='field'||choosingExplorer)resetFieldKitTurn();
+  if(root!=='numbers'||slug!=='path')resetWillowVoice();
   const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters',instructionBench=['post','loft'].includes(root)&&slug==='instructions';
@@ -228,6 +230,7 @@ function render(){
   else if(archiveBench)html=travelersArchivePage(state);
   else if(root==='town'&&slug==='remembers')html=townPage(state,detail);
   else if(bundleBench){const view=renderBundleExchange(state);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;const changed=noteBundleDisplay(state,view.examples,live);exposeStoryFacts({facts:view.facts});if(changed||view.facts.length)save();}
+  else if(root==='numbers'&&slug==='path')html=willowPathPage(state);
   else if(fractionBench)html=renderFractionTrail(state).html;
   else if(recipeBench)html=measuringRecipesPage(state)+fieldKitEntry('jug');
   else if(packingBench){const view=renderParcelPacking(state);if(view.facts.length){exposeStoryFacts({facts:view.facts});save();}html=view.html;}
@@ -272,7 +275,7 @@ function render(){
       else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(isEnglishParis(visit)?parisNode(visit,visit.node):storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
     }else html=storyHub(state);
   }
-  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+'<section class="resume-strip garden-progress-link"><span>Every kind of trying helps our garden recover.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
+  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+willowPathEntry()+'<section class="resume-strip garden-progress-link"><span>Every kind of trying helps our garden recover.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
   else if(screen==='adventure-end')html=adventureEnd();
   else if(root==='checkin'&&areaById(slug)){
     const t=beginTrail(state,slug);save();
@@ -304,7 +307,7 @@ function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
 function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
 function useExplorer(next,destination='#home'){
- if(!next)return;stopBell('explorer-or-import');cancelProgressImport();stopSpeech();state=next;initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
+ if(!next)return;stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();state=next;initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
  if(destination!=='#notes')playFilm('welcome');
 }
@@ -359,6 +362,7 @@ function bindBroadExtras(){
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
 function bind(){
+ bindWillowPath(state,{save,render,focus:focusElement});
  bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
  bindFieldKit(state,{save,render,navigate,focus:focusElement,explorerId:()=>explorerStore.active.id});
  bindTravelersArchive(state,{save,render,navigate,focus:focusElement});

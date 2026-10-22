@@ -362,3 +362,11 @@ Open `#field` on the locally served build for five optional adult-guided cards: 
 The notebook keeps the selected supplied reply and support separately. Earlier cards remain readable even when the current card catalog changes. Ordinary explorer switching, reset, save-off and local export/import also apply. See [spec 75](docs/specs/75-field-kit.md) and its [source audit](docs/source-audits/75-field-kit.md). This branch is draft work; it has not been deployed to the live site.
 
 For synthetic browser verification, serve `dist/` locally and run `node test/field-kit-browser.js` with `FIELD_TEST_URL` set to that server's URL. Set `PLAYWRIGHT_MODULE` to an installed Playwright module and, if needed, `CHROME_PATH` to an installed Chromium browser. Optional `FIELD_ARTIFACTS` saves synthetic screenshots. The test inspects print media, simulates local voice callbacks, and exercises phone/tablet layouts and actual notebook download/import; it does not establish physical-device audio behavior or what happened offscreen.
+
+## Willow Path
+
+The optional `#numbers/path` walk links from Number Garden. Move two shaped tokens along ten equal numbered stones, spinning one or two and naming each destination. Two people can share the tokens, or one person can move both. They finish together at Willow Bridge; there is no winner, score, or learning assessment. Small stories appear at occupied stones. Optional step narration uses the existing local voice settings and resets when you leave.
+
+A waiting walk keeps its own words, events, mode, positions and remaining step. Unknown saved boards remain available in a notes download; starting a separate walk requires confirmation and retains the earlier record. The design studies linear number-board research, but this cooperative digital adaptation has not been evaluated for learning effects. See [spec 76](docs/specs/76-willow-path.md) and its [source audit](docs/source-audits/76-willow-path.md).
+
+Run `node test/willow-path-checks.mjs` for source checks. With the static app served locally and Playwright installed, run `WILLOW_TEST_URL=http://127.0.0.1:4173/ node test/willow-path-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `WILLOW_ARTIFACTS` optionally select a local module, browser and screenshot directory. These are synthetic Chrome checks, not physical iPad or audio verification.
