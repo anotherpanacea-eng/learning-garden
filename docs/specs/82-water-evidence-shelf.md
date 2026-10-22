@@ -1,6 +1,6 @@
 # 82 · Water Evidence Shelf
 
-**Status:** Proposed for independent specification review. This document authorizes no runtime build, source-map expansion, merge, or publication.
+**Status:** Specification and internal implementation reviews complete; draft release candidate. Source-map expansion, merge and publication remain separate gates.
 
 ## Problem and smallest addition
 
