@@ -58,6 +58,7 @@ node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
 node test/count-collection-checks.mjs
+node test/lantern-line-checks.mjs
 node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
 node test/fraction-trail-checks.mjs
@@ -419,3 +420,7 @@ The optional `#numbers/seeds` experiment lets a learner choose six pictured sun 
 Run `node test/seed-stall-checks.mjs` for source, saved-work and recovery checks. With `dist` served locally and Playwright installed, run `SEED_TEST_URL=http://127.0.0.1:4173/ node test/seed-stall-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations; `SEED_ARTIFACTS` saves temporary screenshots. The synthetic Chrome run checks phone/tablet layouts, all seven bags, actual draws, notebook download/import, imported history and near-limit refusal. It does not establish physical iPad behavior or learning outcomes.
 
 The [independent implementation review](docs/reviews/87-seed-stall-review.md) records the repaired exact head and local verification; composition and release clearance remain separate.
+
+Lantern Line at `#numbers/lanterns` places two fraction stops along the same whole walk. Six open requests contrast unit fractions, same-sized parts, different partitions, equal points, zero and whole endpoints. Reading the actual order is separate from matching the requested stops; optional part guides and a worked example remain supplied support. Partial work, earlier checks and one explicitly kept version stay with their frozen sources. See [spec89](docs/specs/89-lantern-line.md) and its [source audit](docs/source-audits/89-lantern-line.md). Run `node test/lantern-line-checks.mjs`; with the static app served locally, run `LANTERN_TEST_URL=http://127.0.0.1:4173/ node test/lantern-line-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
+
+The [Lantern Line review](docs/reviews/89-lantern-line-review.md) records the internally cleared implementation and local verification.
