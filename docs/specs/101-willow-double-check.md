@@ -1,6 +1,6 @@
 # 101 · Willow Double Check: two clues, one branch
 
-**Status:** Proposed original first pack for independent specification review. This is not installed, a curriculum completion claim, or a saved-work migration. The [source audit](../source-audits/101-willow-double-check.md) and [responsive review mock](assets/101-willow-double-check.html) are part of this proposal.
+**Status:** Specification/content/art independently cleared at `d7ad3047`; implementation and the radio-refusal repair independently cleared at `7ae3f5f`. The [review receipt](../reviews/101-willow-double-check-review.md) distinguishes author and root checks. Exact release review and merged-versus-live status are tracked in the pull request and current roadmap; this is not a curriculum completion claim or saved-work migration. The [source audit](../source-audits/101-willow-double-check.md) and [responsive review mock](assets/101-willow-double-check.html) are part of this proposal.
 
 ## The new learner action
 
