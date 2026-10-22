@@ -51,7 +51,7 @@ function visibleBundleExamples(v){
  return examples;
 }
 export function renderJoiningOrders(state){const v=core.joiningView(state);if(v.unsupported)return {facts:[],examples:[],html:`<section class="joining-orders" data-join-root><h1>Joining Supply Orders</h1><p>This saved order uses an unfamiliar format, so it cannot be played here. The original is kept for export.</p>${button('Keep the original and start fresh','data-join-recover',true)}<p data-join-recovery-notice role="status"></p><a href="#numbers/exchange">Exchange Table</a></section>`};
- const head=`<section class="joining-orders" data-join-root><header class="join-head"><div><p>Bundle Burrow</p><h1>Joining Supply Orders</h1></div><a class="secondary" href="#numbers/exchange">Exchange Table</a></header><p>Join two imaginary seed-counter orders. You can keep any attempt and try both pairs.</p>`;
+ const head=`<section class="joining-orders" data-join-root><header class="join-head"><div><p>Bundle Burrow</p><h1>Joining Supply Orders</h1></div><a class="secondary" href="#numbers/exchange">Exchange Table</a></header><p>Join two imaginary seed-counter orders. You can keep any attempt and try both pairs.</p><p><a class="secondary" href="#numbers/compare">Compare the same two numbers</a></p>`;
  if(v.absent)return {facts:[],examples:[],html:head+chooser(null)+'</section>'};
  const w=v.work,s=v.source,help=w.helpOpen,example=w.exampleOpen,compare=w.history.length||w.kept;
  const capNotice=w.history.length===8?'<p class="join-cap-notice" role="note">The next check removes the oldest of eight saved checks from this order\'s local history. Download notes first if you want to keep it.</p>':'';
