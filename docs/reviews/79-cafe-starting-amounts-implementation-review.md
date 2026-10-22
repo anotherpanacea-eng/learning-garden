@@ -18,3 +18,7 @@ The review checked missing-preference behavior, malformed optional fields, local
 Browser checks used installed Chrome and synthetic local saves. They do not establish native iPad Safari behavior, screen-reader announcement quality, audible speech quality or pedagogical suitability. The implementation adds no assessment evidence or learner-level inference.
 
 No merge or deployment is represented by this receipt.
+
+## Integration with reviewed main
+
+Root composed the increment with main857d9eb at `aaeca700ca85990f16fecb1dca89a17ce0a1e0f0`. A separate internal reviewer checked the resolved app notes/binding, toolbar and README conflicts and found no P1/P2. Effective-range selection, local override and focus remain aligned with the new-order boundary; the current main copy and other games' recovery callbacks remain intact. The reviewer reran300 focused checks. Root separately reran38 Chrome assertions against the composed build. This following receipt commit changes no runtime.
