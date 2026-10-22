@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 144 explicit current references across 77 unique source topics: authored question references, scoped practice or supplied explanations. The other 1513 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 146 explicit current references across 78 unique source topics: authored question references, scoped practice or supplied explanations. The other 1512 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -21,7 +21,7 @@ There are 144 explicit current references across 77 unique source topics: author
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 51 | 452 |
+| Mathematics | 503 | 52 | 451 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 12 | 535 |
 
@@ -80,6 +80,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Market Day Coin Counter (`#workshop/coins`, local build) | allocate, build | Four supplied US-cent denominations, count versus value, conserved exchanges and two alternative exact payments across eight pretend stall requests. Live mats and historical recorded checks stay separate. A supported US-cent adaptation; no unlabelled real-coin recognition, UK notation, dollars, change, budgeting, scarcity or monetary Café economy. |
 | Cartographer’s Table (`#workshop/maps`, local build) | compose, build | Freely place four keyed landmarks on a supplied0–5 intersection grid; read horizontal-first coordinates and compose two adjacent orthogonal routes. Count travelled intervals in fictional model metres, including retraced segments; compare frozen checks separately from revised maps. Supported schematic practice only; no real geography, surveying, physical scale, rates, independent axis construction or full coordinate/geometry attainment. Optional three supplied delivery jobs add freely revealable Map-reader/Dispatcher/Both clue views and child-authored routes through an intermediate stop. Recorded arrival, actual stop visit and serving the request remain separate; no secure separation, partner participation or communication attainment is inferred. Optional structured authoring (spec63) chooses start, collection and final delivery on a complete free map, then creates a separate frozen solving job after a supplied 12-move feasibility check. Generated wording and displayed calculations do not establish independent writing, shortest-path reasoning or general problem-posing attainment. |
 | Two Windows (`#workshop/windows`, local build) | read, compose | Three original fictional events with two tellers and freely chosen short/long passages. Distinguish explicit, inferred, contradicted and missing details across both accounts, select supporting lines, and choose a supplied revision for a particular reader. Optional exact own words remain ungraded; no decoding, independent writing, general narrator reliability or historical corroboration claim. |
+| Balance Stall (`#workshop/balance`, local build) | build | An ideal equal-arm model with identical one-unit masses: compare two different visible arrangements, make reversible paired/one-sided changes and explore one whole sealed parcel of fixed model mass. Proposed value, isolation, performed actions, support and frozen outcomes stay separate. No physical measurement, two-step/general equation solving or independently demonstrated method claim. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -139,7 +140,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Learning to Learn / Learning to Learn | 18 | 0 | Change · measure · explain; Create · perform · reflect |
 | Life Skills / Entrepreneurship | 17 | 0 | Assemble · allocate · check; Compose · execute · revise |
 | Life Skills / Money & Finance | 20 | 0 | Assemble · allocate · check; Compose · execute · revise |
-| Mathematics / Addition & Subtraction | 52 | 4 | Build · transform · relate; Search · inspect · compare |
+| Mathematics / Addition & Subtraction | 52 | 5 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Algebra | 25 | 0 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Counting & Cardinality | 14 | 2 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Data & Statistics | 18 | 2 | Change · measure · explain; Read · infer · support |
@@ -327,6 +328,8 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Responding to Writing Feedback](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OyOYHlZ2_T) | scoped-practice / Two Windows (local build) / [source](../dist/two-windows-ui.mjs) | Choose between supplied revisions in response to a fictional reader’s specific question. Exact own words can be kept for a human reader but are ungraded; no claim of independent revision or broad writing-feedback proficiency. |
 | [Not all minibeasts are insects](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_4vHa3I5bNj) | scoped-practice / Living Garden / [source](../dist/body-clues-content.mjs) | Body clues (#living/bodies, local build): compare jointed walking legs plus a second feature on four supplied adult diagrams. Ladybird is a beetle; no universal six-leg converse, life-stage rule, spider practice, real field identification or whole-topic attainment. |
 | [Sorting and Identifying Minibeasts](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt__bhJX2SuFJ) | scoped-practice / Living Garden / [source](../dist/body-clues-content.mjs) | Body clues (#living/bodies, local build): follow a supplied four-picture two-feature key, retain uncertainty and revise a trail. Not creating keys, identifying unfamiliar organisms outdoors, independent decoding or full evidence coverage. |
+| [What the equals sign means](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_oIzycTBeE4) | scoped-practice / Balance Stall (local build) / [source](../dist/balance-stall-ui.mjs) | Relational equals through two supplied noncanonical grouped arrangements and reversible one-sided/paired unit-mass changes. Actual unequal relations stay visible; no independently composed explanation or general symbolic proof. |
+| [Unknown in Addition & Subtraction](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_3JgrHY221M) | scoped-practice / Balance Stall (local build) / [source](../dist/balance-stall-ui.mjs) | One fixed whole-parcel model mass plus loose unit masses equals a known total, including a right-side parcel. Proposed value stays separate from performed paired changes and an isolated level balance. No all-form unknown equation, two-step or general algebra attainment. |
 
 ## Sources, licensing and maintenance
 

@@ -606,6 +606,16 @@
       ],
       "route": "#workshop/windows",
       "scope": "Three original fictional events with two tellers and freely chosen short/long passages. Distinguish explicit, inferred, contradicted and missing details across both accounts, select supporting lines, and choose a supplied revision for a particular reader. Optional exact own words remain ungraded; no decoding, independent writing, general narrator reliability or historical corroboration claim."
+    },
+    {
+      "id": "balance-stall",
+      "name": "Balance Stall",
+      "status": "built-local",
+      "patterns": [
+        "build"
+      ],
+      "route": "#workshop/balance",
+      "scope": "An ideal equal-arm model with identical one-unit masses: compare two different visible arrangements, make reversible paired/one-sided changes and explore one whole sealed parcel of fixed model mass. Proposed value, isolation, performed actions, support and frozen outcomes stay separate. No physical measurement, two-step/general equation solving or independently demonstrated method claim."
     }
   ],
   "manualReferences": [
@@ -1189,6 +1199,20 @@
       "kind": "scoped-practice",
       "source": "dist/body-clues-content.mjs",
       "scope": "Body clues (#living/bodies, local build): follow a supplied four-picture two-feature key, retain uncertainty and revise a trail. Not creating keys, identifying unfamiliar organisms outdoors, independent decoding or full evidence coverage."
+    },
+    {
+      "game": "balance-stall",
+      "topicId": "mt_oIzycTBeE4",
+      "kind": "scoped-practice",
+      "source": "dist/balance-stall-ui.mjs",
+      "scope": "Relational equals through two supplied noncanonical grouped arrangements and reversible one-sided/paired unit-mass changes. Actual unequal relations stay visible; no independently composed explanation or general symbolic proof."
+    },
+    {
+      "game": "balance-stall",
+      "topicId": "mt_3JgrHY221M",
+      "kind": "scoped-practice",
+      "source": "dist/balance-stall-ui.mjs",
+      "scope": "One fixed whole-parcel model mass plus loose unit masses equals a known total, including a right-side parcel. Proposed value stays separate from performed paired changes and an isolated level balance. No all-form unknown equation, two-step or general algebra attainment."
     }
   ],
   "increments": [

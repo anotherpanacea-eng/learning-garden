@@ -84,3 +84,13 @@ Saved as draft PR51, https://github.com/anotherpanacea-eng/learning-garden/pull/
 ## Author delivery problem implementation checkpoint
 
 Spec63 is implemented after independent specification/content clearance. Actual local Claude initial and follow-up reviews approved for draft, with focus/status/origin/compact-map suggestions folded. Root90scripts,168,474core/78integration,182newbrowser plus66extra browser assertions pass; parent browser suites also pass. Original ordinary map figures remain identical across12 cases. Atlas remains144refs/77topics. See docs/reviews/63-author-delivery-problems-implementation-review.md for limits. No held path, merge or deployment. Draft publication is next; the next proposed foundation is concrete equality and one unknown at a Balance Stall, not two-step algebra.
+
+
+## Author delivery problem publication / next foundation
+
+Saved as draft PR52, https://github.com/anotherpanacea-eng/learning-garden/pull/52, heada345b6c653465479b90d150149d0cb43ef541085, base build/living-body-clues. Worktree clean, owned preview8779 stopped. No merge/deploy. New worktree learning-garden-balance-stall / build/balance-stall starts from that exact head. Spec64 proposes concrete equality, paired/one-sided unit changes and one whole mystery parcel before two-step algebra. Source audit and independent specification/content review precede any runtime.
+
+
+## Balance Stall implementation checkpoint
+
+Spec64 is implemented after independent specification/content clearance. Actual local Claude found one P2 expression-copy issue; fixed and independently rechecked with approval for draft. Root also reproduced/fixed crowded raised-pan overflow near701px and added visible available-object explanations. All92scripts,339,363core/45integration and530browser assertions pass, including actual host-offer and narrow touch checks. Atlas146refs/78topics; no runtime pin or held path change. See docs/reviews/64-balance-stall-implementation-review.md. Draft publication is next. Read-only primary sourcing supports a following same-creature/different-stage Small White butterfly investigation; no spec/runtime for it yet. No merge/deploy.
