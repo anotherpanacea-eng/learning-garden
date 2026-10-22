@@ -5,10 +5,10 @@ const bounded=(x,max)=>Number.isInteger(x)&&x>=0&&x<=max;
 const request=id=>requests.find(r=>r.id===id);
 const sides=['A','B'],codes=['help','audio','together','dots','exchange'];
 export const emptyCoins=()=>Object.fromEntries(coinTypes.map(c=>[c.id,0]));
-export const coinCount=coins=>coinTypes.reduce((sum,c)=>sum+coins[c.id],0);
-export const coinTotal=coins=>coinTypes.reduce((sum,c)=>sum+c.value*coins[c.id],0);
-export const validCoins=coins=>object(coins)&&coinTypes.every(c=>bounded(coins[c.id],25))&&coinCount(coins)<=25&&coinTotal(coins)<=50;
-const sameCoins=(a,b)=>coinTypes.every(c=>a[c.id]===b[c.id]);
+export const coinCount=coins=>coinTypes.reduce((sum,c)=>sum+(coins[c.id]??0),0);
+export const coinTotal=coins=>coinTypes.reduce((sum,c)=>sum+c.value*(coins[c.id]??0),0);
+export const validCoins=coins=>object(coins)&&coinTypes.every(c=>bounded(coins[c.id]??0,25))&&coinCount(coins)<=25&&coinTotal(coins)<=50;
+const sameCoins=(a,b)=>coinTypes.every(c=>(a[c.id]??0)===(b[c.id]??0));
 // Recorded outcomes are validated for display, not recomputed under current rules.
 const snapshot=x=>object(x)&&validCoins(x.coins)&&bounded(x.count,25)&&bounded(x.value,50);
 const check=x=>object(x)&&snapshot(x.a)&&snapshot(x.b)&&['below','exact','above'].includes(x.aRelation)&&['below','exact','above'].includes(x.bRelation)&&typeof x.different==='boolean'&&typeof x.fulfilled==='boolean';
@@ -39,14 +39,14 @@ export function selectCoinMat(state,side){if(!sides.includes(side)||!active(stat
 export function addCoinSupport(state,code){if(!codes.includes(code))return false;const r=active(state);if(!r)return false;if(!r.support.includes(code))r.support.push(code);return true;}
 export function resumeCoinRound(state,id){const v=coinView(state);if(!v.rounds.some(r=>r.id===id))return false;v.root.current=id;return true;}
 export function adjustCoin(state,type,delta){
- if(!coinTypes.some(c=>c.id===type)||![1,-1].includes(delta))return 'invalid';const r=active(state);if(!r)return 'invalid';const mat=coinView(state).mat.toLowerCase(),coins={...r[mat],[type]:r[mat][type]+delta};
+ if(!coinTypes.some(c=>c.id===type)||![1,-1].includes(delta))return 'invalid';const r=active(state);if(!r)return 'invalid';const mat=coinView(state).mat.toLowerCase(),coins={...r[mat],[type]:(r[mat][type]??0)+delta};
  if(!validCoins(coins))return 'limit';r[mat]=coins;return 'changed';
 }
 // Counts in this result describe the whole mat, including coins outside the trade.
 export function exchangeResult(coins,id){
  const rule=exchanges.find(x=>x.id===id);if(!rule||!validCoins(coins))return {ok:false,reason:'invalid'};
- if(Object.entries(rule.from).some(([coin,n])=>coins[coin]<n))return {ok:false,reason:'missing'};
- const next={...coins};for(const [coin,n]of Object.entries(rule.from))next[coin]-=n;for(const [coin,n]of Object.entries(rule.to))next[coin]+=n;
+ if(Object.entries(rule.from).some(([coin,n])=>(coins[coin]??0)<n))return {ok:false,reason:'missing'};
+ const next={...coins};for(const [coin,n]of Object.entries(rule.from))next[coin]=(next[coin]??0)-n;for(const [coin,n]of Object.entries(rule.to))next[coin]=(next[coin]??0)+n;
  if(!validCoins(next))return {ok:false,reason:'limit'};
  return {ok:true,coins:next,beforeCount:coinCount(coins),afterCount:coinCount(next),value:coinTotal(next)};
 }
