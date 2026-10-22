@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 133 explicit current references across 69 unique source topics: authored question references, scoped practice or supplied explanations. The other 1521 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 135 explicit current references across 71 unique source topics: authored question references, scoped practice or supplied explanations. The other 1519 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -21,7 +21,7 @@ There are 133 explicit current references across 69 unique source topics: author
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 46 | 457 |
+| Mathematics | 503 | 48 | 455 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 10 | 537 |
 
@@ -77,6 +77,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Bundle Burrow: Exchange Table (`#numbers/exchange`, local build) | build, allocate | Seven fixed collections from 0 to 42, with countable wrapped tens, loose ones and a ten-place frame. Exact reversible conserved exchanges; distinct wrapped-count, total, tens-digit and tens-value forms; frozen unfinished keeps and separate 16 example. Supplied numeral/model practice, no handwriting, arbitrary-range counting, arithmetic algorithm or general place-value proficiency claim. |
 | Instructions for a Reader (`#post/instructions`, local build) | compose, read, build | Two original short instruction cases shared with #loft/instructions. Separate picture plan, supplied A/B sentence strip and exact human-read words; finite manual scene consequences, optional reader questions/reports and bounded kept versions. Supplied assembly and guided revision opportunity only; no arbitrary-language parsing, independent composition/decoding/handwriting, listening or programming proficiency claim. |
 | Fair Test Bench (`#workshop/fair`, local build) | experiment, read | Choose both setups in the original finite ramp model; distinguish question-relevant, wrong-factor, identical and confounded pairs; reveal up to three examples per side, inspect repeats and keep an ungraded claim or exact note. Authored model comparison practice only; no physical investigation, causal-proof, independent measurement or mastery claim. |
+| Market Day Coin Counter (`#workshop/coins`, local build) | allocate, build | Four supplied US-cent denominations, count versus value, conserved exchanges and two alternative exact payments across eight pretend stall requests. Live mats and historical recorded checks stay separate. A supported US-cent adaptation; no unlabelled real-coin recognition, UK notation, dollars, change, budgeting, scarcity or monetary Café economy. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -143,7 +144,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Mathematics / Fractions | 67 | 12 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Geometry | 69 | 4 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Mathematical Thinking | 48 | 1 | Build · transform · relate; Search · inspect · compare |
-| Mathematics / Measurement | 68 | 7 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Measurement | 68 | 9 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Multiplication & Division | 57 | 9 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Number Representation & Place Value | 52 | 5 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
@@ -313,6 +314,8 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Fair testing](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_qgb76wHN2X) | scoped-practice / Fair Test Bench (local build) / [source](../dist/fair-test-ui.mjs) | Independently choose A/B height and surface settings for one of two supplied questions; explain whether neither, one relevant, one other or both factors change. Narrow finite-model design practice; no general physical experimental competence. |
 | [Recording Data](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_ZFwPZaDJ0_) | scoped-practice / Fair Test Bench (local build) / [source](../dist/fair-test-ui.mjs) | Choose which finite model trials to reveal, inspect a labelled A/B table and shared ruler, and notice unequal repetitions or observed variation. Automatic recording is supported data reading, not independent measurement or table construction. |
 | [Observation vs Interpretation](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Hw70LI5xza) | scoped-practice / Fair Test Bench (local build) / [source](../dist/fair-test-ui.mjs) | Keep frozen stopping distances separate from a provisional claim and exact optional words, with a supplied explanation of what a confounded comparison cannot establish. Prose and physical causal reasoning remain ungraded. |
+| [Coin Values](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_cPZwlUk8Nd) | explanation / Market Day Coin Counter (local build) / [source](../dist/coin-counter-ui.mjs) | Four labelled schematic US coins with supplied names/cent values and a size-versus-value contrast. US-cent adaptation only; source UK coins/notes and independent real-coin recognition are not met. |
+| [Adding money and giving change](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_AF2BeFQwfX) | scoped-practice / Market Day Coin Counter (local build) / [source](../dist/coin-counter-ui.mjs) | Construct two different US-cent coin vectors for one marked amount and exchange denominations while conserving value. Separate physical coin count from cents. The source description concerns combinations; giving change and UK-specific evidence remain outside this slice. |
 
 ## Sources, licensing and maintenance
 

@@ -573,6 +573,17 @@
       ],
       "route": "#workshop/fair",
       "scope": "Choose both setups in the original finite ramp model; distinguish question-relevant, wrong-factor, identical and confounded pairs; reveal up to three examples per side, inspect repeats and keep an ungraded claim or exact note. Authored model comparison practice only; no physical investigation, causal-proof, independent measurement or mastery claim."
+    },
+    {
+      "id": "coin-counter",
+      "name": "Market Day Coin Counter",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "build"
+      ],
+      "route": "#workshop/coins",
+      "scope": "Four supplied US-cent denominations, count versus value, conserved exchanges and two alternative exact payments across eight pretend stall requests. Live mats and historical recorded checks stay separate. A supported US-cent adaptation; no unlabelled real-coin recognition, UK notation, dollars, change, budgeting, scarcity or monetary Café economy."
     }
   ],
   "manualReferences": [
@@ -1079,6 +1090,20 @@
       "kind": "scoped-practice",
       "source": "dist/fair-test-ui.mjs",
       "scope": "Keep frozen stopping distances separate from a provisional claim and exact optional words, with a supplied explanation of what a confounded comparison cannot establish. Prose and physical causal reasoning remain ungraded."
+    },
+    {
+      "game": "coin-counter",
+      "topicId": "mt_cPZwlUk8Nd",
+      "kind": "explanation",
+      "source": "dist/coin-counter-ui.mjs",
+      "scope": "Four labelled schematic US coins with supplied names/cent values and a size-versus-value contrast. US-cent adaptation only; source UK coins/notes and independent real-coin recognition are not met."
+    },
+    {
+      "game": "coin-counter",
+      "topicId": "mt_AF2BeFQwfX",
+      "kind": "scoped-practice",
+      "source": "dist/coin-counter-ui.mjs",
+      "scope": "Construct two different US-cent coin vectors for one marked amount and exchange denominations while conserving value. Separate physical coin count from cents. The source description concerns combinations; giving change and UK-specific evidence remain outside this slice."
     }
   ],
   "increments": [
