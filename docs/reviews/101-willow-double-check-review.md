@@ -1,0 +1,9 @@
+# Willow Double Check: review and local verification
+
+The root task independently reviewed [spec 101](../specs/101-willow-double-check.md), its [source audit](../source-audits/101-willow-double-check.md), the finite two-connector truth table and rendered phone mock. Its focused follow-up cleared spec head `d7ad3047e27656f59d444affece3c742d31069b6` with no remaining P1/P2 before implementation. The reviewed scope is a separate supplied-rule desk. It does not reinterpret Willow Sorting Desk v1 or a waiting Post Office delivery.
+
+The author built the first implementation at `1997cf191ebf8f5bbf64d7d01b1471289643044f`, then normally merged current `origin/main` `5432678b47f091adbd5df72a8f202545709c8415` at `8174900`. The additive merge retained Ribbon Recut's reset/dispatch and stylesheet alongside Double Check's route, binder, notes and import allowlist. No Double Check runtime logic changed in that merge.
+
+Author-run checks after the merge passed 375 Double Check source assertions, 1,125 Sorting Desk, 229 Post Office core, 146 Post Office UI, 88 progress transfer and 116 Ribbon Recut assertions. The local synthetic Chrome journey passed 116 assertions at 320 and 820 CSS pixels, with a 390px recovery/near-limit probe. It covers both open turns, all finite source outcomes in the source suite, keyboard/focus and touch target geometry, history eviction confirmation, raw sibling and future-root recovery, same-turn stale controls and Hear, actual notes download/import into a separate explorer, a waiting delivery and old Sorting Desk retained, and an actual formatted-report refusal with saving off. Syntax and diff checks passed.
+
+**Independent implementation review is pending.** These author-run checks do not establish physical-device behavior, audible narration quality, child understanding, hosted CI or publication readiness. The root task owns final verification and any external review, PR, merge or deployment decision.
