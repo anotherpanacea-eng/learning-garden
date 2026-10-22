@@ -341,7 +341,7 @@
         "build"
       ],
       "route": "#living",
-      "scope": "Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained."
+      "scope": "Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained. Optional Life Stages (spec65, #living/stages) uses four original Small White butterfly diagrams and eight next/before chart-neighbour tasks, separating stage position from same-individual/offspring meaning. A supplied named-species chart, not field observation, independent retelling or general insect-life-cycle attainment."
     },
     {
       "id": "cafe",
@@ -1213,6 +1213,13 @@
       "kind": "scoped-practice",
       "source": "dist/balance-stall-ui.mjs",
       "scope": "One fixed whole-parcel model mass plus loose unit masses equals a known total, including a right-side parcel. Proposed value stays separate from performed paired changes and an isolated level balance. No all-form unknown equation, two-step or general algebra attainment."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_Wr6DDgr_kH",
+      "kind": "scoped-practice",
+      "source": "dist/life-stages-content.mjs",
+      "scope": "Life Stages (#living/stages, local build): four supplied Small White stages, eight directed chart-neighbour questions and same-individual versus offspring choices. Guided partial ordering/continuity practice, not independent explanation, retelling/drawing, field observation or full-topic attainment."
     }
   ],
   "increments": [

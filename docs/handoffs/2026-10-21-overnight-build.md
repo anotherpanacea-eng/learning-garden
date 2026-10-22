@@ -94,3 +94,13 @@ Saved as draft PR52, https://github.com/anotherpanacea-eng/learning-garden/pull/
 ## Balance Stall implementation checkpoint
 
 Spec64 is implemented after independent specification/content clearance. Actual local Claude found one P2 expression-copy issue; fixed and independently rechecked with approval for draft. Root also reproduced/fixed crowded raised-pan overflow near701px and added visible available-object explanations. All92scripts,339,363core/45integration and530browser assertions pass, including actual host-offer and narrow touch checks. Atlas146refs/78topics; no runtime pin or held path change. See docs/reviews/64-balance-stall-implementation-review.md. Draft publication is next. Read-only primary sourcing supports a following same-creature/different-stage Small White butterfly investigation; no spec/runtime for it yet. No merge/deploy.
+
+
+## Balance Stall publication / next living-systems relationship
+
+Saved as draft PR53, https://github.com/anotherpanacea-eng/learning-garden/pull/53, heade5058db323cd0cf650227248462ff4cd521fe953, base build/author-delivery-problems. Worktree clean; owned preview8780 stopped. No merge/deploy. New worktree learning-garden-life-stages / build/living-life-stages starts from that exact head. Spec65 proposes one named Small White butterfly, four original teaching-stage diagrams and eight forward/backward chart-neighbour questions, with same-individual versus offspring meanings separate. Source/content/art and independent specification gates precede runtime; all-backward arrows must remain chart navigation, never reverse biological development.
+
+
+## Life Stages implementation checkpoint
+
+Spec65 is implemented with independent specification/content and actual original-art review. Root reproduced a long phone turn; a bounded independent UX specification follow-up preceded splitting Stage and Meaning while preserving both answers. Actual Claude initial/follow-up/final reviews required readable arrow direction and genuinely measured controls inside open folds; both are repaired and final local draft approval is explicit. Root94 source scripts,1,219core/80integration and848browser assertions pass. Atlas147refs/79topics, unchanged runtime pin. See docs/reviews/65-living-life-stages-implementation-review.md for precise evidence and limits. Draft publication is next. No held paths, merge or deployment. The next candidate is a separately reviewed food→eater relationship pack, not automatic reuse of life-stage chronology.
