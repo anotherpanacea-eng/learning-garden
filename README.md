@@ -470,3 +470,9 @@ Run `node test/lantern-circuit-checks.mjs`; with `dist` served locally and Playw
 At `#workshop/recut`, add and remove dividing marks while one whole ribbon, its colored length and its flag stay fixed. Five open cases connect halves, thirds and quarters with smaller equal units. This is a transient supplied teaching model: it creates no saved response or attainment record, and existing Fraction Trail, Same Amount, New Cuts and Lantern work stays separate. See [spec100](docs/specs/100-ribbon-recut-table.md), the [source audit](docs/source-audits/100-ribbon-recut-table.md) and [review receipt](docs/reviews/100-ribbon-recut-review.md). The [current roadmap](docs/roadmap.md) tracks publication separately.
 
 Run `node test/ribbon-recut-checks.mjs`; the optional `node test/ribbon-recut-browser.js` uses `RECUT_TEST_URL` for a local `dist` server and installed Playwright/Chrome through the existing browser-test environment variables. Local checks do not establish physical-device behavior or learning gains.
+
+## Gathering Budget
+
+At `#workshop/budget`, choose packets for one of two pretend gathering requests. The pictured basket shows supplied units and cost; checking a plan separately reports whether it meets the request, fits the limit, and matches an optional cost idea. Several baskets work. This is a transient table, with no saved budget, rewards, or judgment about real family choices. See [spec 104](docs/specs/104-gathering-budget.md) and its [source audit](docs/source-audits/104-gathering-budget.md).
+
+Run `node test/gathering-budget-checks.mjs`. With `dist` served locally and Playwright/Chrome installed, `GATHERING_TEST_URL=http://127.0.0.1:4198/ node test/gathering-budget-browser.js` checks the two requests, four fit combinations, touch controls, local notes isolation and import. `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `GATHERING_ARTIFACTS` select local browser dependencies and temporary screenshots.
