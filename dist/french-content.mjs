@@ -6,7 +6,7 @@ export const frenchLessons=[
   meaning:'Lucie is preparing a parcel for the garden. She puts a blue book in the bag. The bag is under the table. A little cat is sleeping on the chair.',
   words:'un colis = a parcel; un livre = a book; un sac = a bag; sous = under; sur = on.',
   questions:[
-   {title:'Find the parcel',prompt:'Où est le sac ?',choices:['Sur la chaise.','Sous la table.','Dans le jardin.'],answer:1,skill:'Locate a place in a short French passage',hint:'Find the sentence beginning « Le sac ».',explanation:'« Le sac est sous la table. » The bag is under the table.'},
+   {title:'Find the bag',prompt:'Où est le sac ?',choices:['Sur la chaise.','Sous la table.','Dans le jardin.'],answer:1,skill:'Locate a place in a short French passage',hint:'Find the sentence beginning « Le sac ».',explanation:'« Le sac est sous la table. » The bag is under the table.'},
    {title:'Choose the book',prompt:'De quelle couleur est le livre ?',choices:['Il est rouge.','Il est vert.','Il est bleu.'],answer:2,skill:'Locate a color in a short French passage',hint:'Look beside « un livre » for its color.',explanation:'« un livre bleu » means a blue book.'}
   ],postcard:'Try saying or writing one short French message: « Le livre est bleu. » You can change the color, draw it, or leave the idea for later.'},
  {id:'french-river',title:'Le bateau en papier',place:'Beside the river',symbol:'⛵',
@@ -16,7 +16,7 @@ export const frenchLessons=[
   words:'un bateau = a boat; en papier = made of paper; un bassin = a pool; une feuille = a leaf; sourit = smiles.',
   questions:[
    {title:'A tiny passenger',prompt:'Qu’est-ce qui tombe dans le bateau ?',choices:['Une feuille.','Un livre.','Un chat.'],answer:0,skill:'Find an action and its subject in French',hint:'Find the sentence with « tombe » (falls).',explanation:'« Une feuille tombe dans le bateau. » A leaf falls into the boat.'},
-   {title:'Where does it float?',prompt:'Où Pip met-il le bateau ?',choices:['Sur la table.','Dans un petit bassin.','Sous une chaise.'],answer:1,skill:'Understand a French place phrase',hint:'Look at the sentence beginning « Il met » (He puts).',explanation:'Pip puts the boat « dans un petit bassin » — in a small pool.'}
+   {title:'Where does it float?',prompt:'Où Pip met-il le bateau ?',choices:['Sur la table.','Dans un petit bassin.','Sous une chaise.'],answer:1,skill:'Understand a French place phrase',hint:'Look at the sentence beginning « Il met » (He puts).',explanation:'Pip puts the boat « dans un petit bassin », in a small pool.'}
   ],postcard:'Imagine a new passenger. Try « Une feuille est dans le bateau. » Draw or describe a different passenger together; there is no marked answer.'},
  {id:'french-rooftops',title:'Le jardin sur le toit',place:'In the rooftop garden',symbol:'🌱',
   invitation:'Help with the rooftop garden and follow what happens first and next.',
@@ -50,7 +50,7 @@ for(const lesson of frenchLessons){
   frenchNodes[id]={id,entrance:lesson.id,language:'fr',type:'task',subject:'Reading',practiceOnly:true,
    title:q.title,body:lesson.title,guide:'{guide} says, “Read a sentence, find a clue, or ask for its English meaning. We can explore at our own pace.”',
    readingText:lesson.text,passageId:`${lesson.id}-passage-v1`,readingSkill:q.skill,kind:'choice',...q,
-   hint:`${q.hint} English meaning: ${lesson.meaning} Words to borrow: ${lesson.words}`,
+   hint:`${q.hint} English meaning: ${lesson.meaning} Word help: ${lesson.words}`,
    talk:'Can you point to the French words that helped? Try saying a sentence together if you like.',next:i===0?`${lesson.id}-2`:`${lesson.id}-postcard`};
   const h=smallerExamples[lesson.id][i];
   frenchHelpers[id]={id:`${id}-help`,title:'A smaller French clue',lesson:h.lesson,

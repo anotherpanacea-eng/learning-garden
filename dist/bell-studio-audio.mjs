@@ -20,7 +20,7 @@ export function createBellPlayer(options={}){
  function finish(run,value,reason=''){
   if(active!==run)return;
   active=null;clean(run);suspend();
-  const message=value==='completed'?(run.plan.hasSound?'The scheduled call finished. Playback does not tell us what someone heard.':'The picture call finished; its slots were rests.'):value==='unavailable'?unavailable:'Sound stopped.';
+  const message=value==='completed'?(run.plan.hasSound?'Your call finished.':'The picture call finished; its slots were rests.'):value==='unavailable'?unavailable:'Sound stopped.';
   status(run,value,message);call(run.callbacks.onEnd,{status:value,reason,mode:run.plan.hasSound?'audio-request':'visual'});
  }
  function stop(reason='stopped'){

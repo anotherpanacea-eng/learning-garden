@@ -2,6 +2,7 @@
 import {areas} from './broad-content.mjs';
 import {authoredBroadParams} from './broad-variants.mjs';
 import {bundleState,bundleHistoryUnknown,knownBundleSignatures,noteBundleExamples} from './bundle-exchange-core.mjs';
+import {joiningState,joiningHistoryUnknown,joiningBundleSignatures} from './joining-orders-core.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const authored=id=>areas.flatMap(a=>[...a.checkin,...a.activities]).find(q=>q.id===id);
 export function bundleQuestionParams(question){
@@ -17,7 +18,8 @@ export function bundleQuestionExposure(state,question){
  if(!p)return {familiar:false,priorExposureUnknown:false};
  const signature=`bundle:0:${p.tens}:${p.ones}`;
  const root=Object.hasOwn(state,'bundleExchange')?bundleState(state):null;
- return {familiar:!!root&&knownBundleSignatures.includes(signature)&&root.shownBundleExamples.includes(signature),priorExposureUnknown:knownBundleSignatures.includes(signature)&&bundleHistoryUnknown(state)};
+ const joining=Object.hasOwn(state,'joiningOrders')?joiningState(state):null;
+ return {familiar:!!root&&knownBundleSignatures.includes(signature)&&root.shownBundleExamples.includes(signature)||!!joining&&joiningBundleSignatures.includes(signature)&&joining.shownBundleExamples.includes(signature),priorExposureUnknown:knownBundleSignatures.includes(signature)&&bundleHistoryUnknown(state)||joiningBundleSignatures.includes(signature)&&joiningHistoryUnknown(state)};
 }
 export function syncBundleQuestionExposure(state,question,draft){
  if(!draft||typeof draft!=='object')return false;

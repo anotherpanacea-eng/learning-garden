@@ -2,12 +2,24 @@ import assert from 'node:assert/strict';
 import {deliveries} from '../dist/post-office-content.mjs';
 import {startPostOffice,ensurePostOffice,setPostPackingInput,submitPostPacking,packPostTogether,appendPostClause,editPostClause,restartPostRoute,stepPostRoute} from '../dist/post-office-core.mjs';
 import {rivalTasks,validPostRival,rivalBlocks,startPostRival,setRivalInput,submitRival,openRivalPractice,stepRivalPractice,returnRivalQuestion,solveRivalTogether,bypassRival,continueRival,noteRivalAudio} from '../dist/post-rival.mjs';
+import {freshState,restoreState} from '../dist/core.mjs';
 let checks=0;
 const check=(x,message)=>{assert.ok(x,message);checks++;},json=JSON.stringify,copy=x=>JSON.parse(json(x));
 const fresh=(id=deliveries[0].id)=>{const s={},v=startPostOffice(s,id);return {s,v};};
 const reload=s=>{const restored=copy(s);ensurePostOffice(restored);check(!restored.postOffice.visits[0].closed,'valid rival reload remains open');check(validPostRival(restored.postOffice.visits[0].rival),'reloaded rival validates');check(json(restored)===json(s),'reload retains exact encounter');};
 const otherWork=v=>json(Object.fromEntries(Object.entries(v).filter(([k])=>k!=='rival')));
 check(Object.isFrozen(rivalTasks)&&rivalTasks.every(t=>Object.isFrozen(t.practice.pictures.groups)),'task and practice catalogs deeply frozen');
+{
+ const {s,v}=fresh();startPostRival(s);v.rival.task.prompt='Earlier ribbon question';v.rival.task.practice.prompt='Earlier smaller ribbon question';
+ v.rival.task.pictures.groups[0].label='Earlier picture label';
+ const saved=json(v.rival);check(validPostRival(v.rival),'legacy task accepts its own saved copy');
+ ensurePostOffice(s);check(!v.closed&&json(v.rival)===saved,'earlier Bramble wording and picture label survive reload unchanged');
+ const loaded=restoreState(json({...freshState(),postOffice:s.postOffice}));check(!loaded.postOffice.visits[0].closed&&json(loaded.postOffice.visits[0].rival)===saved,'actual progress loader keeps the earlier Bramble task');
+ const malformed=copy(v.rival);malformed.task.practice.prompt=' ';check(!validPostRival(malformed),'blank saved practice copy remains invalid');
+ const changed=copy(v.rival);changed.task.practice.answer++;check(!validPostRival(changed),'changed practice answer remains invalid');
+ solveRivalTogether(s);continueRival(s);v.rivalLegacy=copy(v.rival);delete v.rival;
+ const terminal=json(v.rivalLegacy);ensurePostOffice(s);check(!v.closed&&json(v.rivalLegacy)===terminal,'earlier terminal Bramble record survives as rivalLegacy');
+}
 for(const t of rivalTasks){
  for(const m of [t,t.practice]){
   check(m.answer===(m.kind==='add'?m.a+m.b:m.kind==='subtract'?m.a-m.b:m.a*m.b),'task/helper arithmetic exact');

@@ -466,7 +466,7 @@ const stories=[
       "sign-B2"
      ]
     ],
-    "explanation": "Dot directly describes the arrow's colour, direction and position."
+    "explanation": "Dot directly describes the arrow's color, direction and position."
    },
    {
     "id": "sign-inferred",
@@ -492,7 +492,7 @@ const stories=[
    },
    {
     "id": "sign-unknown",
-    "text": "The market sign was exactly ten metres from the Garden path.",
+    "text": "The market sign was exactly ten meters from the Garden path.",
     "kind": "unknown",
     "groups": [],
     "explanation": "Neither account gives a distance. Seeing some of the sign does not establish exactly how far away it was."

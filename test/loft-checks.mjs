@@ -29,7 +29,7 @@ for(const idea of invitations){
  for(let i=0;i<3;i++){check(spotlightScene(s,i),'every scene welcome');check(loftPage(s).includes(`You chose scene ${i+1}`),'reflection identifies selected scene, not correctness');}
  for(let i=0;i<audienceQuestions.length;i++){check(chooseAudienceQuestion(s,i),'every question available');check(loftPage(s).includes(audienceQuestions[i].text),'authored audience question');check(nextAudienceQuestion(s),'questions cycle');}
  check(reviseShow(s,1),'revise exact scene');equal(s.loft.draft.selected,1,'correct editor scene');const old=copy(s.loft.shelf[0]);
- const another=puppets.find(p=>p.id!==s.loft.draft.frames[1].actor).id;check(setScenePart(s,'actor',another),'edit after show');check(!s.loft.draft.shared,'edited arrangement no longer labelled performed');equal(s.loft.shelf[0],old,'shelf snapshot is detached');equal(s.loft.draft.changes,1,'one actual edit');check(!setScenePart(s,'actor',another),'identical value not an edit');
+ const another=puppets.find(p=>p.id!==s.loft.draft.frames[1].actor).id;check(setScenePart(s,'actor',another),'edit after show');check(!s.loft.draft.shared,'edited arrangement no longer labeled performed');equal(s.loft.shelf[0],old,'shelf snapshot is detached');equal(s.loft.draft.changes,1,'one actual edit');check(!setScenePart(s,'actor',another),'identical value not an edit');
  const a=copy(s.loft.draft.frames[1]);check(moveScene(s,-1),'move earlier');equal(s.loft.draft.frames[0],a,'scene moved with all choices');equal(s.loft.draft.selected,0,'selection follows scene');check(!moveScene(s,-1),'earlier bound');check(moveScene(s,1)&&moveScene(s,1)&&!moveScene(s,1),'later bound');
  check(noteLoftAudio(s),'audio request recorded');check(loftNotes(s).includes('Narration requested: yes'),'request explicitly named');
  const beforeInvalid=snapshot(s);for(const [k,v] of [['actor','invented'],['__proto__','x'],['place',{}],['prop','missing']])check(!setScenePart(s,k,v),'invalid editor input');check(!moveScene(s,2)&&!chooseScene(s,-1)&&!spotlightScene(s,1)&&!meetAudience(s),'mode and index gates');equal(snapshot(s),beforeInvalid,'rejected operations leave state exact');
@@ -45,17 +45,17 @@ for(const idea of invitations){
  const s=initializeExplorerState(freshState());nextGuest(s);startVisit(s,'french',{destination:'bookstall',variant:1});startAdaptiveSpiral(s);const before=copy(s),rec=recommendations(s);
  startShow(s,'picnic');chooseScene(s,1);setScenePart(s,'actor','dragon');finish(s);spotlightScene(s,0);nextAudienceQuestion(s);noteLoftAudio(s);reviseShow(s,0);moveScene(s,1);
  const {loft,...other}=s;equal(other,before,'all other destinations and support remain untouched');equal(recommendations(s),rec,'multiplication suggestions unchanged');
- const restored=prepareProgressImport(snapshot(s));check(restored.ok&&restored.summary.destinations.includes('Story Loft'),'import preview includes theatre');equal(restored.state.loft,s.loft,'import round trip exact');check(destinationNotes(s).includes('picture stories and revision'),'shared notes include theatre');
+ const restored=prepareProgressImport(snapshot(s));check(restored.ok&&restored.summary.destinations.includes('Story Loft'),'import preview includes theater');equal(restored.state.loft,s.loft,'import round trip exact');check(destinationNotes(s).includes('picture stories and revision'),'shared notes include theater');
 }
 for(const raw of [null,[],7,'<synthetic>',{version:9,unavailable:{draft:'kept'}},{version:1,nextId:2,draft:{id:1},shelf:[]}] ){
- const s={...freshState(),loft:copy(raw)},before=snapshot(s);check(loftState(s)===null,'unknown/invalid extension blocked');check(loftPage(s).includes('earlier theatre notebook is kept'),'visible recovery');loftNotes(s);
+ const s={...freshState(),loft:copy(raw)},before=snapshot(s);check(loftState(s)===null,'unknown/invalid extension blocked');check(loftPage(s).includes('earlier theater notebook is kept'),'visible recovery');loftNotes(s);
  for(const fn of [()=>startShow(s,'welcome'),()=>performShow(s),()=>reopenShow(s,1),()=>noteLoftAudio(s)])check(!fn(),'unsupported edits refused');equal(snapshot(s),before,'invalid payload exact');
- const imported=prepareProgressImport(before);check(imported.ok,'invalid/future theatre remains importable for recovery');equal(imported.state.loft,raw,'unsupported original imported verbatim');
+ const imported=prepareProgressImport(before);check(imported.ok,'invalid/future theater remains importable for recovery');equal(imported.state.loft,raw,'unsupported original imported verbatim');
 }
 class Storage{constructor(){this.data=new Map();}get length(){return this.data.size;}key(i){return [...this.data.keys()][i]??null;}getItem(k){return this.data.get(k)??null;}setItem(k,v){this.data.set(k,v);}removeItem(k){this.data.delete(k);}}
 {
  const disk=new Storage(),m=new ExplorerStore(disk),s=m.load(),id=m.active.id;startShow(s,'delivery');chooseScene(s,2);setScenePart(s,'actor','kitten');performShow(s);stepShow(s,1);m.save(s);
  const reload=new ExplorerStore(disk);equal(reload.load().loft,s.loft,'paused performance and draft save exactly');const other=m.add({},s);check(!other.loft,'new explorer separate');equal(m.select(id,other).loft,s.loft,'switch returns to exact show');
- m.setPersistence(false,s);check(![...disk.data.keys()].some(k=>k.startsWith(STORAGE_KEY)),'save-off removes theatre storage');equal(m.select(id).loft,s.loft,'working theatre remains in memory');check(!m.clearActive().loft,'active reset clears theatre');
+ m.setPersistence(false,s);check(![...disk.data.keys()].some(k=>k.startsWith(STORAGE_KEY)),'save-off removes theater storage');equal(m.select(id).loft,s.loft,'working theater remains in memory');check(!m.clearActive().loft,'active reset clears theater');
 }
 console.log(`${checks} Story Loft checks passed across ${combinations} scene combinations.`);

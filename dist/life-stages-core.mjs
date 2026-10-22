@@ -10,7 +10,7 @@ export function validLifeSource(s){
   Array.isArray(s.options)&&s.options.length===4&&s.options.every(stage)&&new Set(s.options).size===4&&
   Array.isArray(s.links)&&s.links.length===4&&s.links.every(x=>object(x)&&stage(x.from)&&stage(x.to)&&meaning(x.meaning)&&text(x.text,1000))&&object(s.expected)&&stage(s.expected.neighbor)&&meaning(s.expected.meaning);
 }
-// A historical judgement is a readable record, not a current re-evaluation of its science/answer.
+// A historical judgment is a readable record, not a current re-evaluation of its science/answer.
 export function validLifeCheck(c){return object(c)&&validLifeSource(c.source)&&object(c.input)&&neighbor(c.input.neighbor)&&maybeMeaning(c.input.meaning)&&support(c.input.support)&&maybeBool(c.neighborMatch)&&maybeBool(c.meaningMatch)&&text(c.feedback,2500);}
 export function validLifeRound(r){return object(r)&&positive(r.id)&&validLifeSource(r.source)&&stage(r.view)&&neighbor(r.neighbor)&&maybeMeaning(r.meaning)&&typeof r.familiar==='boolean'&&support(r.support)&&Array.isArray(r.checks)&&r.checks.length<=8&&r.checks.every(validLifeCheck);}
 export function lifeView(state){
@@ -40,10 +40,10 @@ export function evaluateLife(source,input){
  const neighborMatch=input.neighbor===null||input.neighbor==='unsure'?null:input.neighbor===source.expected.neighbor;
  const meaningMatch=neighborMatch===true&&meaning(input.meaning)?input.meaning===source.expected.meaning:null;
  let feedback;
- if(neighborMatch===null)feedback='This blank or uncertain neighbour stays unobserved. Our stage pictures and supplied words are open for another look. '+(input.meaning===null?'No meaning has been chosen yet.':'The meaning choice is kept but not assessed yet.');
- else if(!neighborMatch)feedback='This proposed pair is not the chart neighbour requested by this question. The meaning response is kept but is not assessed for a different pair. Look again, or revise either choice.';
+ if(neighborMatch===null)feedback='This blank or uncertain neighbor stays unobserved. Our stage pictures and supplied words are open for another look. '+(input.meaning===null?'No meaning has been chosen yet.':'The meaning choice is kept but not assessed yet.');
+ else if(!neighborMatch)feedback='This proposed pair is not the chart neighbor requested by this question. The meaning response is kept but is not assessed for a different pair. Look again, or revise either choice.';
  else{
-  feedback='That neighbour fits this supplied chart question. ';
+  feedback='That neighbor fits this supplied chart question. ';
   if(source.expected.meaning==='offspring')feedback+='This forward link crosses generations: adult females can lay eggs that begin offspring. The adult does not turn back into an egg. ';
   else feedback+='The correct forward link can show the same individual growing or changing stage. ';
   feedback+=meaningMatch===null?'No definite meaning response is recorded yet.':meaningMatch?'The selected meaning fits this supplied link.':'The selected meaning differs from this supplied link; it can be revised.';

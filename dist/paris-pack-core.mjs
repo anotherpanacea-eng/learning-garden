@@ -113,7 +113,7 @@ export function compileParisPacks(packs,{stories=[],nodes={},helpers={}}={}){
           result.nodes[nodeId]={id:nodeId,entrance:'paris',type:'task',subject:'Reading',practiceOnly:true,packId:pack.id,
             parisDestination:story.destination,parisStory:story.id,parisVariant:variant,
             passageId,readingText:[...story.passages[variant]],
-            body:qi===0?story.title:'The same passage stays open for another question.',
+            body:qi===0?story.title:'The story is still here. Let’s look again.',
             guide:'{guide} says, “We can take our time and return to the words whenever we like.”',
             ...q.fields,next:qi===0?ids[1]:'paris-postcard'};
           result.helpers[nodeId]=q.helper;
