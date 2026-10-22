@@ -1175,6 +1175,20 @@
       "kind": "scoped-practice",
       "source": "dist/two-windows-ui.mjs",
       "scope": "Choose between supplied revisions in response to a fictional reader’s specific question. Exact own words can be kept for a human reader but are ungraded; no claim of independent revision or broad writing-feedback proficiency."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_4vHa3I5bNj",
+      "kind": "scoped-practice",
+      "source": "dist/body-clues-content.mjs",
+      "scope": "Body clues (#living/bodies, local build): compare jointed walking legs plus a second feature on four supplied adult diagrams. Ladybird is a beetle; no universal six-leg converse, life-stage rule, spider practice, real field identification or whole-topic attainment."
+    },
+    {
+      "game": "living",
+      "topicId": "mt__bhJX2SuFJ",
+      "kind": "scoped-practice",
+      "source": "dist/body-clues-content.mjs",
+      "scope": "Body clues (#living/bodies, local build): follow a supplied four-picture two-feature key, retain uncertainty and revise a trail. Not creating keys, identifying unfamiliar organisms outdoors, independent decoding or full evidence coverage."
     }
   ],
   "increments": [

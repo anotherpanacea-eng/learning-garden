@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 142 explicit current references across 75 unique source topics: authored question references, scoped practice or supplied explanations. The other 1515 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 144 explicit current references across 77 unique source topics: authored question references, scoped practice or supplied explanations. The other 1513 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -23,7 +23,7 @@ There are 142 explicit current references across 75 unique source topics: author
 | Life Skills | 37 | 0 | 37 |
 | Mathematics | 503 | 51 | 452 |
 | Personal & Social Development | 88 | 0 | 88 |
-| Science | 547 | 10 | 537 |
+| Science | 547 | 12 | 535 |
 
 Mathematics currently has the broadest authored task collection. Science and English have narrow guided investigations/comprehension references. History, life skills, personal/social development and learning-to-learn require explicit content/evidence design; fictional settings, friendly characters, help use and game completion do not establish those abilities. The source’s Computing topics are grouped under “Artificial Intelligence,” including step-by-step instructions; preserve that source organization without mistaking it for a complete computing curriculum.
 
@@ -163,7 +163,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Science / Ecosystems & Habitats | 36 | 3 | Search · inspect · compare; Read · infer · support |
 | Science / Energy | 28 | 0 | Change · measure · explain; Build · transform · relate |
 | Science / Forces & Motion | 27 | 1 | Change · measure · explain; Build · transform · relate |
-| Science / Insects & Minibeasts | 22 | 0 | Search · inspect · compare; Read · infer · support |
+| Science / Insects & Minibeasts | 22 | 2 | Search · inspect · compare; Read · infer · support |
 | Science / Matter & Materials | 40 | 1 | Change · measure · explain; Build · transform · relate |
 | Science / Ocean Life | 27 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Organisms & Life Processes | 63 | 1 | Search · inspect · compare; Read · infer · support |
@@ -325,6 +325,8 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Narrator's Point of View](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_E_OryWIYkn) | scoped-practice / Two Windows (local build) / [source](../dist/two-windows-ui.mjs) | Compare two original fictional tellers with different access to one event. Noticing, time and visibility change available details; no first/third-person classification, authorial intent or general reliability attainment. |
 | [Inference vs Explicit Meaning](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_lp3qyEujIv) | scoped-practice / Two Windows (local build) / [source](../dist/two-windows-ui.mjs) | Classify supplied statements across both fictional accounts, combining authored supporting line sets. Distinguish inference, explicit contradiction and missing information; supplied selections do not establish independent reading or general evidence evaluation. |
 | [Responding to Writing Feedback](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OyOYHlZ2_T) | scoped-practice / Two Windows (local build) / [source](../dist/two-windows-ui.mjs) | Choose between supplied revisions in response to a fictional reader’s specific question. Exact own words can be kept for a human reader but are ungraded; no claim of independent revision or broad writing-feedback proficiency. |
+| [Not all minibeasts are insects](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_4vHa3I5bNj) | scoped-practice / Living Garden / [source](../dist/body-clues-content.mjs) | Body clues (#living/bodies, local build): compare jointed walking legs plus a second feature on four supplied adult diagrams. Ladybird is a beetle; no universal six-leg converse, life-stage rule, spider practice, real field identification or whole-topic attainment. |
+| [Sorting and Identifying Minibeasts](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt__bhJX2SuFJ) | scoped-practice / Living Garden / [source](../dist/body-clues-content.mjs) | Body clues (#living/bodies, local build): follow a supplied four-picture two-feature key, retain uncertainty and revise a trail. Not creating keys, identifying unfamiliar organisms outdoors, independent decoding or full evidence coverage. |
 
 ## Sources, licensing and maintenance
 

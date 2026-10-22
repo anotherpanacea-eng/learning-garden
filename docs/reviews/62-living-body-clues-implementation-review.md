@@ -1,0 +1,29 @@
+# Body clues: implementation review and verification
+
+Status: **APPROVED FOR DRAFT by actual local Claude follow-up; root verification complete**. No merge, deployment or exact-head GitHub clearance.
+
+## Independent reviews and findings
+
+Specification/content review cleared the four-picture key before build, after resolving the existing host connection-panel exception. A separate reviewer actually viewed the original four-animal contact sheet and enlarged ladybird, woodlouse and earthworm details, and cleared countable0/0/6/14 walking legs, joints, appendage distinctions and visible second clues. That reviewer also independently checked48 trails and support snapshots. See the [specification review](62-living-body-clues-spec-review.md) and [art/content review](62-living-body-clues-art-review.md).
+
+Actual local Claude performed a restricted read-only implementation review. It read the new content/core/UI/art/CSS, allowed host seams, tests, spec and audit; it did not run tests or view rendered images. It found one P2 evidence gap: the required actual-host saved-offer comparison was absent from the permanent browser suite. The added case now starts independent fresh contexts directly on #living and #living/bodies, displays the same actual Café offer, compares shown fact exposures, checks the panel follows the active body sheet and verifies body actions add no further numerical exposures. This follows the held app's visible existing behavior rather than hiding its panel or editing held paths.
+
+Root browser work also reproduced and fixed two native-help issues: an old detached queued toggle could mark a new visit, and a closed help fold reopened from historical support on redraw. Help now has a visit identity, connected/current guards and transient same-visit open state. Its history records requests, not whether a fold should open. Permanent browser checks cover the event boundary, closed/open persistence and no support carryover. Audio has the same current-visit guard.
+
+Claude's bounded P3 folds also removed inaccurate enlargement captions and made SVG accessible descriptions use their own frozen source text. Diagram geometry is unchanged. Body/detail choices are explicitly checked to add no support; old support snapshots are kept separately. The generic8-check disclosure already states that a ninth removes the oldest, so no personalised-limit mechanism was added. The finite notes SVG rendering and catalog-only page selection remain ordinary bounded behavior; no lazy-render registry or broader refactor was introduced.
+
+A fresh restricted Claude follow-up read the final code/tests and CONTRIBUTING, confirmed the P2 actual-host test and native-event repairs, and returned APPROVE FOR DRAFT with no remaining P1/P2. It did not run a browser or view images, and its restricted tools could not open the prior review JSON outside the worktree; the earlier finding was supplied in the follow-up prompt. Root inspected both complete returned reviews. Remaining optional test breadth suggestions (additional seen-fact/order assertions after redraw and a programmatic stale audio event) are not design or release gates; the concrete native-help event regression is included. This is local draft-readiness review, not exact-head GitHub approval.
+
+## Root verification
+
+- All88 `test/*.mjs` scripts passed after the final code changes; story-pack and deterministic atlas checks also passed.
+- New core:623 assertions, including an independent four-row oracle across all offered and invalid branches, null/mismatch distinctions, saved contradictions, unsafe allocation and retained raw siblings.
+- New integration:47 assertions, including pure all-page/view/notes rendering, original habitat/suggestions/parcel/stock/exposure preservation, actual generic transfer/reload/explorer isolation/save-off, future formats and frozen accessible text.
+- Actual optional browser suite:312 assertions across desktop1440×1100, touch tablet820×1180 and touch phone390×844. All four specimens, both diagrams, reversible outside/matched/uncertain trails, local focus, actual reload, historical output, native help boundaries, narration request scope,44px controls, notes and no horizontal overflow passed. The actual-host saved-offer exception is part of this permanent suite.
+- Additional root browser probe:21 assertions for visible saved offers on the two routes, exact oversized-history removal disclosure, raw sibling retention, unsafe-id refusal and help boundaries.
+- Original diagram contact sheet and phone/desktop Key screenshots were actually viewed. The initial picture-below-question scroll problem was corrected to desktop side-by-side and compact picture-first phone layout before final verification.
+- Atlas:144 scoped references across77 source topics. The two new partial references do not alter the runtime87-node graph or its pin; all5 full-source hard-closure nodes remain absent there. These are authoring declarations, not learner coverage or attainment.
+
+Reproduce core/integration with `node test/body-clues-checks.mjs` and `node test/body-clues-integration-checks.mjs`; the optional `test/body-clues-browser.js` accepts BODY_CLUES_TEST_URL, PLAYWRIGHT_MODULE and CHROME_PATH for an installed local test browser. No browser package is added to the website. Preview/test evidence uses synthetic state and original diagrams only; no child records, private exports or source images enter the repository.
+
+Local narration routing used a synthetic local voice stub; it is not an audible quality check. Desktop browser touch emulation is not physical Safari/iPad testing. No field-identification accuracy, independent reading, learning effect, partner participation, mastery, source-graph completeness, hosted CI, composed release or production verification follows from these checks. Shared app/play-media/style/README/mobile custody paths remain unchanged. No merge/deploy is authorised.

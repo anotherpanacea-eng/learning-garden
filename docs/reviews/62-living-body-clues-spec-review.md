@@ -1,0 +1,29 @@
+# Living Body Clues: independent specification and content review
+
+**Verdict: BUILD-READY after the single P2 fold below. No unresolved P1/P2 or P3 findings.**
+
+A separate reviewer context read AGENTS/CONTRIBUTING, spec62, source audit62, actual Living Garden first/spiral/adaptive rendering and binding, app composition, connection-panel behavior, notes and generic transfer seams. This is specification/content review; no runtime62 implementation or original diagram was reviewed.
+
+## Resolved P2: host multiplication exposure and the preservation gate
+
+Spec62's purpose section says exposed multiplication facts remain unchanged, and its acceptance section requires preservation of math exposures. The proposed #living/bodies branch can avoid adaptive habitat logic, but held dist/app.mjs:275 still calls connectionPairsShown(state,'living'), registers those pairs through exposeStoryFacts and save, and appends connectionPanel on every Living Garden subroute. dist/learning-connections.mjs:50 returns incoming source offers' numerical pairs. Thus an explorer with an existing Café/Post offer can encounter/register those facts on a direct body-clues visit even when the new body module is entirely pure. The host also appends this numerical panel beyond the three investigation entries acknowledged by the spec.
+
+Smallest practical fold: explicitly retain the existing host connection panel and its ordinary exposure registration as a scoped exception. Require the body module itself to add no numerical exposure, habitat attempt, stock or suggestion change, and test host behavior with a synthetic existing offer as well as without one. Keep the active body turn above the host panels. If zero new numerical exposure during body play is instead required, the root must choose a different composition/route or separately authorize the held composition change; a renderer cannot achieve both promises by itself. Do not hide the panel while continuing to register unseen facts or add global-hash/state workarounds.
+
+The root chose that smallest fold. A targeted independent reread confirms the purpose paragraph now scopes preservation to the body module; the route paragraph names the existing visible connection panel, its incoming-pair registration on #living/* and the explicit exception; and acceptance distinguishes module preservation from actual-host tests using the same saved offer on another existing Living route. The active turn remains above the unchanged panels. This resolves the contradictory promise without changing held composition or attributing host math exposure to body-key learning.
+
+## Complete content and key review
+
+The four nonfiction entries have suitable closed-set scope. The selected adult land-snail diagram has a muscular foot/tentacles and a coiled shell, not jointed walking legs. Earthworm rings supply the necessary alternative zero-leg clue. Ladybird is correctly treated as a beetle, with three walking-leg pairs, antennae distinct from legs, and paired wing cases; spots/colour do not supply the rule. Adult woodlouse has seven walking-leg pairs and overlapping plates, with other appendages explicitly excluded from the walking-leg count. No unrestricted six-legs-to-insect converse, all-life-stage inference, universal shell/rolling rule or species-identification guarantee is introduced.
+
+The finite branching key is internally consistent: 0/shell names the selected land snail; 0/rings earthworm; 6/cases ladybird beetle; 14/plates woodlouse. Numeric branches require their second clue; different-count and cannot-tell branches stop without inventing another question or species. Other/unclear second clues also stop. The key resolves a selected trail separately from feature agreement with the displayed specimen: a valid earthworm leaf selected on the snail picture is still a mismatching identification trail. Unknown observations remain null/unobserved rather than false; an outside-key trail does not establish a fifth pictured animal. Changing a leg choice clears only its dependent draft.
+
+This is a distinct useful action beyond habitat matching: inspect body features and follow a two-feature key. The freely available descriptions/reference/help appropriately make it supported practice. No field-identification, unsupported visual-acuity, reading-independence, real-observation, partner or whole-topic claim follows. The source audit's partial references and exclusions preserve those limits.
+
+## Art, preservation and remaining gates
+
+The art contract requires the content the task actually uses: clearly attached bilateral walking legs, exact three/seven pairs, distinct feelers, visible second features, equivalent accessible descriptions, and labelled teaching details. Keeping version1 diagram rendering stable and making unsupported versions read-only protects historical source identity without executing imported artwork. Actual leg count, leg/appendage separation, feature visibility and visual accessibility still require independent inspection of the built SVGs; they are not cleared by this document.
+
+The isolated optional state, frozen complete source/key, separate feature outputs, exact feedback, input-only current labels, shape/range validation of old outputs and retention of contradictory records are sufficiently specified. Catalog changes must not rewrite old results or diagrams. Explicit starts/checks, caps and prior eviction disclosure, nonmutating failure, raw/future preservation, pure views, save-off and explorer transfer are suitable for the bounded loop.
+
+An early adaptivePage branch before habitat/future guards is a real unheld seam; own control attributes and a narrow binder delegate can avoid marking existing habitat support. With the explicit host connection-panel exception, that integration is build-ready. Independent implementation review and actual app/browser/storage/narration checks remain required afterward.
