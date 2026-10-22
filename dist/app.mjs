@@ -463,12 +463,12 @@ function bind(){
  bindWordGarden(state,{save,render,focus:focusElement});
  bindRiddles(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindLoft(state,{save,render,focus:focusElement});
+ bindWorkshop(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindSpeech();bindConnections(state,{save,render,navigate,focus:focusElement});
  bindScience(state,{save,render,focus:focusElement});
  bindEvidenceShelf({render,focus:focusElement,explorerId:()=>explorerStore.active.id});
  bindLiving(state,{save,render,focus:focusElement});
  bindSpiral(state,{save,render,navigate,focus:focusElement,startVisit:startAdaptiveSpiral});bindAdaptive(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
- bindWorkshop(state,{save,render,navigate,focus:focusElement});
  bindPostOffice(state,{save,render,navigate,focus:focusElement});
  bindCafe(state,{save,render,exposeFacts:pairs=>exposeStoryFacts({facts:pairs}),focus:focusElement});
  document.querySelectorAll('[data-trail]').forEach(b=>b.onclick=()=>navigate(`#checkin/${b.dataset.trail}`));
