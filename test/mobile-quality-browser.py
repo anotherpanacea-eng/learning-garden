@@ -182,7 +182,7 @@ try:
             page.locator('[data-story-choice="1"]').click()
             page.locator('#story-hint').click()
             saved = page.evaluate("JSON.parse(localStorage.getItem('number-garden-v1:explorer-1')).garden")
-            page.get_by_role('link', name='Pause in the garden', exact=True).tap()
+            page.get_by_role('link', name='Take a break', exact=True).tap()
             page.reload()
             return_to_explorer()
             route('storm')
