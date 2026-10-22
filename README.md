@@ -106,6 +106,7 @@ node test/help-checks.mjs
 node test/cafe-checks.mjs
 node test/cafe-start-checks.mjs
 node test/science-checks.mjs
+node test/water-evidence-checks.mjs
 node test/workshop-checks.mjs
 node test/post-office-checks.mjs
 node test/post-office-ui-checks.mjs
