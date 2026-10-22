@@ -1,6 +1,6 @@
 # 99 · Exhibit Label Maker: source, rights and overlap audit
 
-Authoring pass, 2026-10-22. Supports the [draft spec and exact finite copy](../specs/99-exhibit-label-maker.md). This is a **one-record-at-a-time sentence-composition lesson**, not evidence that a learner has completed a Marble topic or researched ancient Egypt. No external lesson text, code or new art is incorporated.
+Authoring pass, 2026-10-22; independently reviewed with the [spec and exact finite copy](../specs/99-exhibit-label-maker.md) at `ecaa99074f8c616a9b42906964afe1c60a3f58cb`. This is a **one-record-at-a-time sentence-composition lesson**, not evidence that a learner has completed a Marble topic or researched ancient Egypt. No external lesson text, code or new art is incorporated.
 
 ## Existing local overlap
 
