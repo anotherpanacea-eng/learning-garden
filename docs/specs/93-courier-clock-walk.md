@@ -1,6 +1,6 @@
 # 93 · Courier Clock Walk: how long between two times?
 
-**Status: independent root specification/content review cleared `26429185` with no P1/P2. Parser wording and a shorter source-owned Walk reminder/action prompt are bounded implementation clarifications. Local runtime is awaiting separate independent implementation/art review. No publication or release clearance.** Base is reviewed PR92 integration `affddab477169ed895413f0d3d0830e76fb74036`. See [source audit93](../source-audits/93-courier-clock-walk.md).
+**Status: independent root specification/content review cleared `26429185` with no P1/P2. Parser wording and a shorter source-owned Walk reminder/action prompt are bounded implementation clarifications. Separate internal implementation/art review and the refusal-focus follow-up cleared runtime `f48842b` with no remaining P1/P2; see the [review receipt](../reviews/93-courier-clock-walk-review.md). Final root/Claude release gates remain. No publication or release clearance.** Base is reviewed PR92 integration `affddab477169ed895413f0d3d0830e76fb74036`. See [source audit93](../source-audits/93-courier-clock-walk.md).
 
 ## One new action, after clock setting
 
