@@ -410,7 +410,7 @@ function bind(){
  bindOrchard(state,{save,render,focus:focusElement});
  bindForage(state,{save,render,focus:focusElement,exposeFacts:pairs=>exposeStoryFacts({facts:pairs})});
  bindWordGarden(state,{save,render,focus:focusElement});
- bindRiddles(state,{save,render,focus:focusElement});
+ bindRiddles(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindLoft(state,{save,render,focus:focusElement});
  bindSpeech();bindConnections(state,{save,render,navigate,focus:focusElement});
  bindScience(state,{save,render,focus:focusElement});

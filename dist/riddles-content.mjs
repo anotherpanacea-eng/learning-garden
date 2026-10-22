@@ -25,7 +25,7 @@ export const riddles=[
   ['rain','Rain',null],
   ['sand','Sand','Sand can fill a bucket, but it does not fall from the clouds.'],
   ['leaf','A leaf','Leaves fall from trees, not clouds. Plants do not drink them either.']
- ],'Look up on a grey day. Splash!','Rain is water falling from clouds. It soaks into the soil, and roots drink it up.','science'),
+ ],'Look up on a gray day. Splash!','Rain is water falling from clouds. It soaks into the soil, and roots drink it up.','science'),
  card('four','sprout','math','I am one more than three. I am how many legs a cat stands on. What number am I?','four',[
   ['three','3','Three is where we started. Count on one more.'],
   ['four','4',null],
@@ -36,18 +36,18 @@ export const riddles=[
   ['bat','A bat','Bat rhymes with hat! But a bat does not say meow.'],
   ['cat','A cat',null]
  ],'Say hat slowly. Now change the first sound.','Cat and hat end with the same sound, at. Words that end with the same sound rhyme.','words'),
- card('caterpillar','sprout','science','I munch on leaves. Then I wrap up and rest. I wake up with wings. What am I?','caterpillar',[
-  ['grasshopper','A grasshopper','A grasshopper munches leaves and grows wings, but it never wraps up to rest.'],
+ card('caterpillar','sprout','science','I munch leaves. I become a chrysalis. Later, a butterfly emerges. What was I first?','caterpillar',[
+  ['grasshopper','A grasshopper','A grasshopper grows wings, but it does not become a butterfly chrysalis.'],
   ['caterpillar','A caterpillar',null],
-  ['bird','A bird','A bird has wings, but it hatches from an egg. It never wraps up to rest.']
- ],'Think of a butterfly when it was very small.','A caterpillar makes a chrysalis. Inside, it changes into a butterfly. That change is part of its life cycle.','living'),
+  ['bird','A bird','A bird hatches from an egg. It does not become a butterfly chrysalis.']
+ ],'Think of a butterfly before it formed a chrysalis.','A butterfly caterpillar sheds its skin at its final molt and becomes a chrysalis. An adult butterfly later emerges.','living'),
  card('triangle','sprout','math','I have three sides and three corners. What shape am I?','triangle',[
   ['triangle','A triangle',null],
   ['square','A square','A square has four sides. Count the sides in the riddle.'],
   ['circle','A circle','A circle has no corners at all.']
  ],'Tri means three, like a tricycle with three wheels.','A triangle has three straight sides that meet at three corners.','numbers'),
- card('map','sprout','world','Streets and rivers are drawn on me, but I fold into your pocket. What am I?','map',[
-  ['book','A book','A book folds shut, but it holds stories, not streets.'],
+ card('map','sprout','world','Streets and rivers are drawn on me. I am one folded sheet with no pages to turn. What am I?','map',[
+  ['book','A storybook','A storybook has pages to turn. This riddle says one folded sheet.'],
   ['kite','A kite','A kite flies above the streets. Nobody draws them on it.'],
   ['map','A map',null]
  ],'Travelers use me to find their way.','A map is a flat picture of a place, as if you saw it from above.','orchard'),
