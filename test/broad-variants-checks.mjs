@@ -73,6 +73,13 @@ for(const id of ['number','operations','fractions','patterns','geometry','measur
   check(!r.broad.drafts[`checkin:${item.id}`],'a saved question with a blank title is not resumed');}
  {const {s}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];delete d.question.talk;d.question.wonder='An extra earlier wording field';const r=reload(s);
   check(r.broad.drafts[`checkin:${item.id}`],'adding or dropping an optional wording field keeps the paused question open');}
+ {const narrated=broadItems().find(q=>q.id==='reasoning-foundation');
+  for(const seed of [null,'earlier']){const s=freshState();ensureBroad(s);const q=seed===null?instantiateBroad(s,narrated,'checkin'):generatedBroad(narrated,seed);delete q.say;
+   s.broad.drafts['checkin:reasoning-foundation']={question:q,attempts:[]};const r=reload(s);
+   check(r.broad.drafts['checkin:reasoning-foundation']?.question.say===undefined,'earlier question without narration resumes unchanged');
+   check(instantiateBroad(r,narrated,'checkin').prompt===q.prompt,'earlier authored or generated prompt remains available');
+  }
+ }
  {const {s}=fresh();s.broad.drafts[`checkin:${item.id}`].question.prompt={toString:null};const r=reload(s);
   check(!r.broad.drafts[`checkin:${item.id}`],'non-text wording is not resumed');}
  {const choiceItem=broadItems().find(q=>Array.isArray(q.choices)&&q.choices.length>1);const s=freshState();const b=ensureBroad(s);const q=instantiateBroad(s,choiceItem,'checkin');q.choices[0]='  ';b.drafts[`checkin:${choiceItem.id}`]={attempts:[],question:q};const r=reload(s);

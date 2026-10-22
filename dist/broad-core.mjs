@@ -103,7 +103,7 @@ function validSnapshot(q,id){
 }
 // A frozen question keeps its own wording; only its numbers, answer and structure must still match today's,
 // so a copy edit cannot close a paused question.
-const BROAD_TEXT=new Set(['label','title','prompt','hint','solution','talk','steps','childLesson','lesson','wonder','message']);
+const BROAD_TEXT=new Set(['label','title','prompt','say','hint','solution','talk','steps','childLesson','lesson','wonder','message']);
 function semanticBroad(x){
  if(Array.isArray(x))return x.map(semanticBroad);
  if(!x||typeof x!=='object')return x;

@@ -7,6 +7,13 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const same=(a,b)=>a===b||object(a)&&object(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(b).every(k=>Object.hasOwn(a,k)&&same(a[k],b[k]))||Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>same(v,b[i]));
 const keys=(x,names)=>object(x)&&Object.keys(x).length===names.length&&names.every(k=>Object.hasOwn(x,k));
+// Bramble-1 stores its task and practice copy. Keep their original wording on reload
+// while still checking every saved number, unit and picture against the finite task.
+function legacyTaskForCompare(x){
+ if(Array.isArray(x))return x.map(legacyTaskForCompare);
+ if(!object(x))return x;
+ return Object.fromEntries(Object.entries(x).map(([k,v])=>[k,['prompt','explanation','label'].includes(k)&&typeof v==='string'&&v.trim()&&v.length<=2000?'#saved-text':legacyTaskForCompare(v)]));
+}
 function example(kind,a,b,prompt,explanation){return {kind,a,b,answer:kind==='add'?a+b:kind==='subtract'?a-b:a*b,unit:'ribbons',prompt,explanation,pictures:{kind,groups:kind==='add'?[{label:'Blue ribbons',count:a},{label:'Gold ribbons',count:b}]:kind==='subtract'?[{label:'Ready ribbons',count:a,reserved:b}]:Array.from({length:a},(_,i)=>({label:`Bundle ${i+1}`,count:b}))}};}
 export const rivalTasks=freeze([
  {...example('add',6,5,'Bramble has 6 blue ribbons and 5 gold ribbons. How many ribbons are there altogether?','Put 6 blue ribbons beside 5 gold ribbons: 6 + 5 = 11 ribbons.'),practice:example('add',4,2,'Try a smaller ribbon puzzle: 4 blue ribbons and 2 gold ribbons.','Bring the two colors together. Count 4, then 5 and 6: 4 + 2 = 6 ribbons.')},
@@ -16,7 +23,7 @@ export const rivalTasks=freeze([
 const parse=input=>{const s=input.trim(),n=s!==''&&/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(s)?Number(s):NaN;return Number.isFinite(n)?n:null;};
 const phases=['question','practice','resolved','continued','bypassed'];
 function validLegacyRival(r){
- if(!keys(r,['revision','task','reason','phase','input','feedback','practiceStep','supported','audioRequested','attempts','resolution'])||r.revision!=='bramble-1'||!rivalTasks.some(t=>same(t,r.task))||!['same-operation','neutral-mix'].includes(r.reason)||!phases.includes(r.phase)||typeof r.input!=='string'||typeof r.feedback!=='string'||!Number.isInteger(r.practiceStep)||r.practiceStep<0||r.practiceStep>2||typeof r.supported!=='boolean'||typeof r.audioRequested!=='boolean'||!Array.isArray(r.attempts)||r.attempts.length>24||![null,'answered','together'].includes(r.resolution))return false;
+ if(!keys(r,['revision','task','reason','phase','input','feedback','practiceStep','supported','audioRequested','attempts','resolution'])||r.revision!=='bramble-1'||!rivalTasks.some(t=>same(legacyTaskForCompare(t),legacyTaskForCompare(r.task)))||!['same-operation','neutral-mix'].includes(r.reason)||!phases.includes(r.phase)||typeof r.input!=='string'||typeof r.feedback!=='string'||!Number.isInteger(r.practiceStep)||r.practiceStep<0||r.practiceStep>2||typeof r.supported!=='boolean'||typeof r.audioRequested!=='boolean'||!Array.isArray(r.attempts)||r.attempts.length>24||![null,'answered','together'].includes(r.resolution))return false;
  if((r.audioRequested||r.phase==='practice'||r.practiceStep>0)&&!r.supported)return false;
  let priorSupport=false;
  for(let i=0;i<r.attempts.length;i++){
