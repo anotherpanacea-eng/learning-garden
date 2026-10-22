@@ -1,6 +1,6 @@
 # 81. Tenths Table
 
-Status: **bounded specification independently cleared; implementation underway**. The [review receipt](../reviews/81-tenths-table-spec-review.md) records the separate review and focused repairs. The [source audit](../source-audits/81-tenths-table.md) records current upstream and primary curriculum references. This is one M3-II / M3-fractions9 foothold connecting tenths with decimal notation, with M1-number10 as a secondary connection. It is not full decimal, division, ratio or curriculum coverage.
+Status: **specification and bounded implementation independently cleared; awaiting root integration and release**. The [specification receipt](../reviews/81-tenths-table-spec-review.md) and [implementation receipt](../reviews/81-tenths-table-implementation-review.md) record the separate reviews and focused repairs. The [source audit](../source-audits/81-tenths-table.md) records current upstream and primary curriculum references. This is one M3-II / M3-fractions9 foothold connecting tenths with decimal notation, with M1-number10 as a secondary connection. It is not full decimal, division, ratio or curriculum coverage.
 
 ## One whole, two names
 
