@@ -103,6 +103,7 @@ node test/garden-turn-checks.mjs
 node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs
+node test/cafe-start-checks.mjs
 node test/science-checks.mjs
 node test/workshop-checks.mjs
 node test/post-office-checks.mjs
@@ -343,6 +344,8 @@ Original words remain separate, exact and ungraded. A person can read them, ask 
 The locally built **Willow packing table** (`#post/packing`) gives the same seed envelopes two purposes: make the most full welcome kits, or carry every envelope in the fewest loaded trips. Four requests include an exact fit; partial bags, loose envelopes and spare capacity stay distinct. Pack/unpack countable objects, read the actual table, revise the purpose-specific answer and keep or seal a plan. Supplied pictures and requested examples support practice without claiming written division or independent mastery. [Spec 51](docs/specs/51-parcel-packing-and-remainders.md).
 
 The locally built **Whole batches for a gathering** activity (`#cafe/batches`) invites children to repeat a two-guest recipe, measure separate portions, and compose a literal delivery label. Three pictured requests retain their own plans and unfinished drafts. Optional models compare repeating the complete recipe with adding the same amount to both ingredients; offering a tray gives a local gathering ending. All checks are supplied picture practice, with support retained, and do not serve a café guest or establish independent mastery. [Spec 50](docs/specs/50-whole-batch-gathering.md).
+
+Optional Café starting amounts are configured in Grown-up notes. Existing explorers keep their current amount choices until explicitly opted in; Café range buttons override the starting choice. Current guests and connected orders keep their original quantities. See the [bounded specification](docs/specs/proposed/challenge-bands.md) and [source audit](docs/source-audits/cafe-starting-amounts.md).
 
 ### Paused English Paris visits
 
