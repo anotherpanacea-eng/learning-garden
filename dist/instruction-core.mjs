@@ -18,7 +18,8 @@ const validStrip=(source,x)=>Array.isArray(x)&&x.length<=3&&new Set(x.map(s=>s?.
 // The runner always uses the current case, so saved wording is never executed.
 function validSource(source){
  const canonical=instructionCase(source?.id);
- return !!canonical&&Array.isArray(source.actions)&&same(source.actions.map(a=>a?.id),canonical.actions.map(a=>a.id))&&source.actions.every(a=>object(a.variants));
+ const prose=['title','reader','request','readerKnowledge','startingDescription','cause','reversedCause','causeExplanation','readerVariation'];
+ return !!canonical&&prose.every(k=>typeof source[k]==='string')&&Array.isArray(source.actions)&&same(source.actions.map(a=>a?.id),canonical.actions.map(a=>a.id))&&source.actions.every(a=>object(a)&&typeof a.label==='string'&&object(a.variants)&&typeof a.variants.A==='string'&&typeof a.variants.B==='string'&&Object.values(a.variants).every(v=>typeof v==='string'));
 }
 export function describeInstructionScene(id,scene){
  if(id==='pocket-note')return `${scene.note==='inside'?'The note is inside the envelope.':scene.note==='folded-table'?'The folded note is on the table.':'The unfolded note is on the table; it is too wide for this envelope.'} The envelope is ${scene.envelope}.`;
@@ -186,7 +187,7 @@ export function setInstructionHelp(state,desk,topic){return change(state,desk,(r
  if(topic){support(w,`help:${topic}`);if(topic==='purpose')support(w,'comparison');if(topic==='cause')support(w,'cause');if(topic==='example')support(w,'example');}return true;
 });}
 export function stepInstructionExample(state,desk,direction=1){return change(state,desk,(r,w)=>{const next=w.exampleStep+direction;if(![-1,1].includes(direction)||next<0||next>=instructionExample.steps.length)return false;w.helpTopic='example';support(w,'help:example');support(w,'example');w.exampleStep=next;return true;});}
-function keptSnapshot(r,w,id){return {id,...common(w,Object.hasOwn(r,'recovered')),run:w.playback?clone(w.runs.find(run=>run.id===w.playback.runId)):null,humanRead:clone(w.humanRead)};}
+function keptSnapshot(r,w,id){return {id,...common(w,Object.hasOwn(r,'recovered')),source:clone(instructionCase(w.source.id)),run:w.playback?clone(w.runs.find(run=>run.id===w.playback.runId)):null,humanRead:clone(w.humanRead)};}
 export function keepInstructionDraft(state,desk){return change(state,desk,(r,w)=>{if(w.nextKeepId>=instructionSequenceLimit)return false;w.kept.push(keptSnapshot(r,w,w.nextKeepId++));w.kept=w.kept.slice(-16);return true;});}
 export function updateInstructionKeep(state,desk,id){return change(state,desk,(r,w)=>{const i=w.kept.findIndex(k=>k.id===id);if(i===-1)return false;w.kept[i]=keptSnapshot(r,w,id);return true;});}
 export function recoverInstructions(state){if(!Object.hasOwn(state,'instructionNotes')||validInstructions(state.instructionNotes))return false;const root=fresh();root.recovered=clone(state.instructionNotes);root.cases[root.selected.post].seen=true;state.instructionNotes=root;return true;}
@@ -196,7 +197,8 @@ export function instructionNotes(state){
  const lines=['Instructions for a Reader — shared Post/Loft notebook.','Supplied strips are supplied assembly. Production and reading reports are reports, not verified independence or comprehension.','Local history keeps at most 24 runs and 16 kept versions per case; current work is separate. Oral work may have a blank draft.'];
  if(Object.hasOwn(root,'recovered'))lines.push('Earlier unsupported history was retained under recovery. Prior exposure is unknown.');
  for(const w of Object.values(root.cases)){
-  lines.push(w.source.title,`Request: ${w.source.request}`,`Plan: ${w.plan.join(' → ')||'(empty)'}`,`Supplied strip: ${w.strip.map(s=>action(w.source,s.actionId).variants[s.variant]).join(' ')||'(empty)'}`,`Own words (exact):\n${w.text}`,`Production report: ${w.productionReport}; reading report: ${w.readingReport}.`, `Seen: ${w.seen}; familiar: ${w.familiar}; displayed support: ${w.support.join(', ')||'none recorded'}.`);
+  const displayedSource=instructionCase(w.source.id);
+  lines.push(displayedSource.title,`Current displayed request: ${displayedSource.request}`,`Plan: ${w.plan.join(' → ')||'(empty)'}`,`Current supplied strip: ${w.strip.map(s=>action(displayedSource,s.actionId).variants[s.variant]).join(' ')||'(empty)'}`,`Own words (exact):\n${w.text}`,`Production report: ${w.productionReport}; reading report: ${w.readingReport}.`, `Seen: ${w.seen}; familiar: ${w.familiar}; displayed support: ${w.support.join(', ')||'none recorded'}.`);
   if(w.humanRead)lines.push(`Human-read snapshot${w.humanRead.textRevision===w.textRevision?' (current)':' (earlier draft)'}:\n${w.humanRead.text}`,`Human question: ${w.humanRead.question}`,`Human comment (exact):\n${w.humanRead.comment}`);
   for(const run of w.runs)lines.push(`Run ${run.id} (local sequence): ${run.strip.map(s=>action(run.source,s.actionId).variants[s.variant]).join(' ')||'(empty)'}`,run.description,`Contemporaneous support: ${run.support.join(', ')||'none recorded'}; production ${run.productionReport}; reading ${run.readingReport}; familiar ${run.familiar}; prior exposure unknown ${run.priorExposureUnknown}.`);
   for(const k of w.kept)lines.push(`Kept version ${k.id} (local sequence):\n${k.text}`,`Plan: ${k.plan.join(' → ')||'(empty)'}`,`Supplied strip: ${k.strip.map(s=>action(k.source,s.actionId).variants[s.variant]).join(' ')||'(empty)'}`,`Production ${k.productionReport}; reading ${k.readingReport}; support ${k.support.join(', ')||'none recorded'}; prior exposure unknown ${k.priorExposureUnknown}.`,...(k.run?[`Embedded run ${k.run.id}: ${k.run.description}`]:[]),...(k.humanRead?[`Embedded human-read snapshot:\n${k.humanRead.text}`,`Question: ${k.humanRead.question}`,`Comment (exact):\n${k.humanRead.comment}`]:[]));

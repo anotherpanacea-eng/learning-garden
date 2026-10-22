@@ -51,6 +51,17 @@ for(const target of ['outcome','step','embedded','termination']){
  eq(JSON.stringify(s),before,'unreadable outcome retained exact during rendering');if(target==='termination')eq(prepareProgressImport(before).state.instructionNotes,s.instructionNotes,'unreadable outcome still transfers');
  ok(setMessageText(s,'post','original','A fictional revised note.'),'other game remains editable');
 }
+for(const target of ['current','run','kept','embedded']){
+ const s=fresh();I.editInstructionStrip(s,'post','add','fold');I.tryInstructionStrip(s,'post');I.keepInstructionDraft(s,'post');
+ const w=s.instructionNotes.cases['pocket-note'];
+ const source=target==='current'?w.source:target==='run'?w.runs[0].source:target==='kept'?w.kept[0].source:w.kept[0].run.source;
+ source.actions[0].variants.A={toString:'malformed'};
+ const before=JSON.stringify(s);
+ ok(destinationNotes(s).includes('saved material is unavailable'),`${target} malformed source leaves notes readable`);
+ for(const desk of ['post','loft'])ok(renderInstructions(s,desk).html.includes('An earlier notebook is retained'),`${target} malformed source uses recovery view`);
+ eq(JSON.stringify(s),before,`${target} malformed source stays exact on reads`);
+ ok(!prepareProgressImport(before).ok,`${target} hostile source is rejected at the import boundary`);
+}
 class Storage{constructor(){this.map=new Map();}get length(){return this.map.size;}key(i){return [...this.map.keys()][i]??null;}getItem(k){return this.map.get(k)??null;}setItem(k,v){this.map.set(k,v);}removeItem(k){this.map.delete(k);}}
 {
  const disk=new Storage(),store=new ExplorerStore(disk);let s=initializeExplorerState(store.load());const id=store.active.id;I.chooseInstructionCase(s,'post','welcome-table');I.editInstructionStrip(s,'post','add','invite');I.tryInstructionStrip(s,'post');I.stepInstructionRun(s,'post',1);I.setInstructionText(s,'post',raw);I.readInstructionWords(s,'post','Where?');I.setInstructionComment(s,'post','\n A fictional reply. ');I.keepInstructionDraft(s,'post');store.save(s);eq(new ExplorerStore(disk).load().instructionNotes,s.instructionNotes,'exact raw/run/cursor reload');const other=store.add({},s);ok(!other.instructionNotes,'new explorer separate');s=store.select(id,other);eq(I.instructionView(s,'post').case.text,raw,'selected explorer resumes');store.setPersistence(false,s);store.save(s);eq(store.load().instructionNotes,s.instructionNotes,'save-off memory playable');ok(!new ExplorerStore(disk).load().instructionNotes,'save-off removes disk');ok(!store.clearActive().instructionNotes,'reset removes active notebook');

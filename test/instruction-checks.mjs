@@ -136,7 +136,7 @@ const keptFirst=work(state).kept[0].id,keepCounter=work(state).nextKeepId;I.setI
 I.updateInstructionKeep(state,'post',keptFirst);assert.equal(work(state).kept[0].text,'Updated exact text');assert.equal(work(state).nextKeepId,keepCounter);valid(state);
 assert.ok(I.instructionNotes(state).join('\n').includes('Updated exact text'));
 
-// Edits and rejected operations preserve both cases' saved sources; only a new run gets today's source.
+// Edits and rejected operations preserve both cases' saved sources; new runs and keeps get today's displayed source.
 const earlier={};I.chooseInstructionCase(earlier,'loft','welcome-table');
 for(const c of instructionCases){const w=earlier.instructionNotes.cases[c.id];w.source.request=`Earlier ${c.id} request.`;w.source.actions[0].variants.A=`Earlier ${c.id} sentence.`;}
 const earlierSources=Object.fromEntries(Object.entries(earlier.instructionNotes.cases).map(([id,w])=>[id,copy(w.source)]));
@@ -145,12 +145,28 @@ for(const desk of ['post','loft']){
   const changed=copy(earlier);assert.equal(edit(changed),true);
   assert.deepEqual(Object.fromEntries(Object.entries(changed.instructionNotes.cases).map(([id,w])=>[id,w.source])),earlierSources,'editing either case preserves both saved sources');
   const w=I.instructionView(changed,desk).case;if(w.runs.length)assert.deepEqual(w.runs[0].source,instructionCases.find(c=>c.id===w.source.id));valid(changed);
+  if(w.kept.length)assert.deepEqual(w.kept.at(-1).source,instructionCases.find(c=>c.id===w.source.id),'new keep freezes the current visible wording');
  }
  for(const reject of [s=>I.setInstructionText(s,desk,'x'.repeat(1201)),s=>I.setInstructionPage(s,desk,'missing'),s=>I.chooseInstructionCase(s,desk,'missing'),s=>I.editInstructionStrip(s,desk,'remove','missing'),s=>I.stepInstructionRun(s,desk,1),s=>I.updateInstructionKeep(s,desk,999)]){
   const changed=copy(earlier);assert.equal(reject(changed),false);assert.deepEqual(changed,earlier,'rejected operation leaves both cases exact');
  }
 }
+const rekept=copy(earlier);I.chooseInstructionCase(rekept,'post','pocket-note');I.keepInstructionDraft(rekept,'post');
+const firstKeep=copy(work(rekept).kept[0]);work(rekept).source.request='Even older case wording.';
+assert.equal(I.updateInstructionKeep(rekept,'post',firstKeep.id),true);
+assert.deepEqual(work(rekept).kept[0].source,pocket,'explicit update freezes current visible wording');
+assert.equal(work(rekept).source.request,'Even older case wording.','historical case source stays exact');valid(rekept);
 
+// Current notes use the same wording as the visible strip; earlier keeps retain theirs.
+{
+ const s=copy(earlier);I.editInstructionStrip(s,'post','add','fold');I.keepInstructionDraft(s,'post');
+ work(s).kept[0].source.actions[0].variants.A='An earlier kept fold sentence.';
+ const before=copy(s),notes=I.instructionNotes(s).join('\n');
+ assert.ok(notes.includes('Current displayed request: '+pocket.request));
+ assert.ok(notes.includes('Current supplied strip: '+pocket.actions[0].variants.A));
+ assert.ok(notes.includes('Supplied strip: An earlier kept fold sentence.'));
+ assert.deepEqual(s,before,'notes do not rewrite any saved source');
+}
 // Saved wording is a frozen copy: reworded content or generated text never locks a save, and the runner uses the current case.
 for(const scope of ['current','run','kept','embedded']){
  const changed=copy(state),w=work(changed),source=scope==='current'?w.source:scope==='run'?w.runs.at(-1).source:scope==='kept'?w.kept.at(-1).source:w.kept.at(-1).run.source;
@@ -203,6 +219,10 @@ I.noteInstructionEntry(arrivals,'post');assert.deepEqual(work(arrivals).runs,arr
 const supportedUnseen={instructionNotes:I.instructionState({})};assert.equal(I.noteInstructionEntry(supportedUnseen,'post'),true);assert.equal(work(supportedUnseen).seen,true);assert.equal(work(supportedUnseen).familiar,false);
 assert.equal(I.noteInstructionEntry(supportedUnseen,'post'),true);assert.equal(work(supportedUnseen).familiar,true);valid(supportedUnseen);
 const malformed=[
+ x=>work(x).source.title={toString:'malformed'},x=>work(x).source.startingDescription={toString:'malformed'},
+ x=>work(x).source.actions[0].label={toString:'malformed'},x=>work(x).source.actions[0].variants.A={toString:'malformed'},
+ x=>work(x).runs.at(-1).source.request={toString:'malformed'},x=>work(x).kept.at(-1).source.actions[0].variants.B={toString:'malformed'},
+ x=>work(x).kept.at(-1).run.source.startingDescription={toString:'malformed'},
  x=>work(x).source.actions[0].id='unfold',x=>work(x).strip.push(copy(work(x).strip[0])),
  x=>work(x).plan=['fold','fold'],x=>work(x).runs.at(-1).transitions[0].actionId='seal',x=>work(x).runs.at(-1).requestFulfilled='yes',
  x=>work(x).runs.at(-1).support.push('future'),
