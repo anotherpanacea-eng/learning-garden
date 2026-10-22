@@ -1,6 +1,6 @@
 # Willow Path: a ten-square walk to the bridge
 
-Status: **proposal after bounded independent Codex specification review** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; primary-source, content and separate Claude follow-up reviews remain pending. Source: game 4.1 and two-seat play (3.3) in [the proposal](../../other-routes-through-the-acts.md).
+Status: **bounded proposal independently reviewed by Codex and Claude** (2026-10-22; [receipt](../../reviews/proposed-specs-2026-10-22.md)). Unnumbered: the builder assigns a spec number. Not built or build-ready; primary-paper/source audit and final content review remain pending. Source: game 4.1 and two-seat play (3.3) in [the proposal](../../other-routes-through-the-acts.md).
 
 ## Purpose and story
 
