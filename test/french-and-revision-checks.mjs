@@ -65,10 +65,10 @@ for(const lesson of frenchLessons){
  check(finishStoryNode(s).status==='invitation'&&currentVisit(s).finished,'French route reaches own unscored ending');
  check(json(parisPlan(s,'bookstall'))===english,'French work cannot change English suggestions or story selection');
  s.garden.observations.at(-1).language='en';
- s=restoreState(json(s));ensureGarden(s);check(currentVisit(s).finished&&s.garden.observations.every(o=>o.language==='fr'),'completed French routes and language survive export/restore');
+ s=restoreState(json(s));ensureGarden(s);check(currentVisit(s).finished&&s.garden.observations.at(-1).language==='en','completed French routes preserve stored observation fields without current-catalog rewriting');
  check(gardenNotes(s).includes('English meaning and word help opened.')&&gardenNotes(s).includes('English meaning was opened earlier'),'grown-up notes name translation support');
  const obs=s.garden.observations[0];obs.language='en';obs.supported=false;obs.independent=true;obs.readingTools={audioRequested:false,sentenceUsed:false,focus:null,supportUncertain:false};
- ensureGarden(s);check(obs.language==='fr'&&obs.supported&&!obs.independent,'authored language and explicit support repaired on restore');
+ const raw=json(obs);ensureGarden(s);check(json(obs)===raw,'captured observation outcomes and support are not rewritten on restore');
  startVisit(s,lesson.id);check(storyDraft(s).familiar&&storyDraft(s).priorPassageSeen,'returning to French lesson records familiarity');
  const d=storyDraft(s);openStoryHelp(s);check(d.helpUsed&&d.helper.open,'existing smaller-example support works');
 }

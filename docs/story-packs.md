@@ -2,6 +2,8 @@
 
 The first pack is [puppet-post.mjs](../dist/packs/puppet-post.mjs). It supplies an original rooftop errand with three passage lengths, a sentence-evidence question, an ordering question, two smaller examples, and a partial Marble sequence connection. It joins the regular Paris rotation and has a direct invitation on the map.
 
+The second pack is the text-only [flood almanac](../dist/packs/flood-almanac.mjs) at Lucie’s bookstall. Its [reviewed prose](library-flood-almanac-content.md) and [historical-source audit](source-audits/library-flood-almanac.md) support one detail question and a reread-for-dates ordering question in three optional lengths. It uses the [English Paris whole-visit source](specs/73-paris-saved-visit-source.md) so a paused passage and its helpers keep their original words after a later catalog edit. The source line in each passage distinguishes real Paris records from the imagined town.
+
 To add another pack using the supported formats:
 
 1. Add a generic plain-data module under `dist/packs/`, following the first pack's shape. Export the pack object; do not add learner data or executable behavior. Give it new stable pack, story, and helper IDs. Keep released IDs and their meaning stable so paused visits remain valid.

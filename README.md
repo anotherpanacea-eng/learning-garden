@@ -54,9 +54,12 @@ With Node.js installed:
 
 ```sh
 node test/field-kit-checks.mjs
+node test/riddles-checks.mjs
 node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
+node test/count-collection-checks.mjs
+node test/lantern-line-checks.mjs
 node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
 node test/fraction-trail-checks.mjs
@@ -64,6 +67,7 @@ node test/fraction-trail-integration-checks.mjs
 node test/bundle-exchange-checks.mjs
 node test/bundle-exposure-checks.mjs
 node test/bundle-exchange-integration-checks.mjs
+node test/returning-orders-checks.mjs
 node test/instruction-checks.mjs
 node test/instruction-integration-checks.mjs
 node test/rain-paths-checks.mjs
@@ -104,7 +108,10 @@ node test/story-checks.mjs
 node test/help-checks.mjs
 node test/cafe-checks.mjs
 node test/cafe-start-checks.mjs
+node test/tenths-checks.mjs
+node test/hundredths-checks.mjs
 node test/science-checks.mjs
+node test/water-evidence-checks.mjs
 node test/workshop-checks.mjs
 node test/post-office-checks.mjs
 node test/post-office-ui-checks.mjs
@@ -127,9 +134,11 @@ node test/paris-saved-source-checks.mjs
 node test/town-remembers-checks.mjs
 node test/town-remembers-integration-checks.mjs
 node test/story-pack-checks.mjs
+node test/library-flood-almanac-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
 node test/french-exploration-checks.mjs
+node test/french-saved-source-checks.mjs
 node test/storm-film-checks.mjs
 node test/ending-film-checks.mjs
 node test/equal-groups-checks.mjs
@@ -180,6 +189,8 @@ A shortage answer never creates inventory. Serving requires enough actual suppli
 Paris also offers three freely chosen destinations: Lucie’s bookstall, the river walk, and the rooftop garden. Seven original errands each have two questions and three passage lengths (14 question prompts, 42 task versions). The next errand favors less encountered stories and suggests a passage length from recent work at that destination, while all lengths remain open. Help/retries can suggest shorter text; two independent first tries on different previously unseen stories can suggest longer text. Repeated stories, shared passages, supported reading, skips, and unknown reports remain distinct. Suggestions are approximate and finite, not reading levels. Frozen routes preserve paused errands across reloads; the original postcard path remains available. See [Paris exploration](docs/specs/11-paris-exploration.md).
 
 The rooftop puppet show is the first [reviewed story pack](docs/story-packs.md). A plain-data module adds its passage variants, evidence question, tap-to-order cards, and helpers to the existing catalog. The validation command rejects malformed packs and conflicting IDs before publication. Partial card arrangements pause with the story, and exported attempts retain readable orders. New packs using these supported formats can be added without changing the engine. Its Marble connection covers sequence only, leaving central message and full retelling unobserved.
+
+The second pack adds a [reviewed text-only flood almanac](docs/specs/80-library-first-flood-almanac.md) at Lucie’s bookstall. All three optional passage lengths name the historical sources and separate the real 1910 flood from the imagined town; one question finds a dated sentence, and another orders three undated event cards by rereading. English Paris saves retain each visit’s original passage, choices, helper and order when published wording changes. Adult read-aloud and optional local narration are support choices, not evidence of independent reading.
 
 The opening introduces the shared story: neighbors are safe after the storm, and players can gather supplies, feed visitors, investigate water, follow messages, or imagine shelters. The café has a replayable, optional “Why we’re here & how to play” introduction, open at a fresh counter, with read-aloud and three short steps. The story introduction adds no completion gates or learner records.
 
@@ -254,6 +265,10 @@ Open `#post` to borrow a broom and take one of six original orders. Pack buns, r
 Choose a pictured girl witch (she/her), boy wizard (he/him), nonbinary sorcerer (they/them), or sky rider. Change the portrait or pronouns independently afterward. Courier choices stay local to Post Office; the garden explorer and guide stay independent. Legacy saves without an override retain their explorer portrait. An isolated smaller example, optional prediction and local narration support the delivery. Narration requests never establish listening or independent decoding. Reading reports and support flags remain separate, as do packing attempts and structured-composition checks. No writing, reading level, programming proficiency or multiplication mastery is inferred.
 
 Pending input, bank selection, clauses, helper step, courier position and the frozen request survive pause/reload and explorer switching. Unsupported saves remain exact kept work. Latest 24 visits, 24 packing attempts and 24 route-check snapshots per visit are retained; replays do not add a second completion. Existing save-off, notes/export and reset controls apply. [Spec 02](docs/specs/02-willow-post-office.md) records the reviewed behavior and upstream study. Courier choices and Bramble’s first rival encounter are implemented in [spec 25](docs/specs/25-sky-post.md).
+
+The optional `#post/sorting` Willow Sorting Desk lets a child set one if/otherwise rule, predict a basket, and step through a fictional parcel's stamp or wrap before comparing the machine's result with Pip's request. Four original cards expose both branches and a contrasting color case. The desk keeps its own source, latest twelve readable checks and one explicitly kept run; it does not deliver parcels, score coding ability, or change an unfinished Post Office visit. See [spec 84](docs/specs/84-willow-sorting-desk.md), its [source audit](docs/source-audits/84-willow-sorting-desk.md), and the [internal review receipt](docs/reviews/84-willow-sorting-desk-review.md). This is a local reviewed candidate, not a claim of production publication.
+
+Run `node test/sorting-desk-checks.mjs` for source checks. With `dist` served locally as above and Playwright installed, run `SORTING_TEST_URL=http://127.0.0.1:4173/ node test/sorting-desk-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `SORTING_ARTIFACTS` optionally select an installed module, browser and temporary screenshots. The synthetic Chrome run covers phone/tablet layouts, keyboard and focus, reload, an unchanged Post Office save and actual notes download/import. It does not establish physical iPad/Safari or learning outcomes.
 
 
 Meet **Bramble**, an original girl witch fixing a storm-tangled ribbon gate. Any delivery offers a generated supplies puzzle or a separate pictured example first. Choose mixed parcels, multiplication, addition or subtraction, with all tables 1–12 or a particular multiplication table. All 144 ordered multiplication facts, including 12×12, are available. Bramble mixes useful revisits, familiar patterns and new examples using recent finished rounds; support-heavy play still gets fresh facts. A miss opens the separate stepped example; try again, solve together, or take the quiet route. Your parcel and pending flight instruction stay exactly where you left them. Continuing is manual, and there are no play credits, hearts or timers.
@@ -335,6 +350,12 @@ The optional `#numbers/exchange` table extends Bundle Burrow with seven fixed co
 
 A separate manually stepped sixteen-counter example supplies optional help. Only a visibly complete conventional bundle/ones example and its total marks an exact existing bundle task familiar; paused/future/submitted tasks retain that context without rewriting completed answers. Unsupported/recovered history keeps earlier familiarity unknown. No general mastery, handwriting, written arithmetic, inventory rewards or film milestone is inferred. [Spec 53](docs/specs/53-bundle-exchange.md) defines the bounded scope; this branch is stacked on Fraction Trail and requires composed-release checks before publication.
 
+## Returning Supply Orders — local build
+
+The optional `#numbers/return` activity starts with 42 pretend counters and one of two supplied return requests: 12 or 17. A child can open one wrapped ten, move the requested wrapped ten and loose counters into a visible store tray, reverse those moves, and enter a separate proposed remainder. The two trays always conserve 42; returning changes the table amount while opening a ten does not. Exact source text, unfinished pictures, typed numbers, checks and one kept draft per case remain in the optional local notebook. An unreadable saved root stays available for notes download and explicit recovery.
+
+Only complete conventional tens/ones/total readouts actually shown after Start mark matching original bundle questions familiar. This does not create a broad answer, prove an independent method or score mastery. [Spec 78](docs/specs/78-returning-supply-orders.md) defines the two-case scope and its review gate. Browser checks use `test/returning-orders-browser.js` with a local Chrome and Playwright installation; this candidate still requires independent implementation review and composed-release verification.
+
 ## Instructions for a Reader — local build
 
 The optional `#post/instructions` and `#loft/instructions` desks share one instruction notebook. Two original requests invite planning with picture tickets, arranging separate supplied sentences, manually trying their effects and revising for a reader. Folding matters because this pictured note is too wide for its envelope; a first-time visitor needs preparations before an invitation. Both valid preparation orders work. Later repairs keep the earlier invitation’s consequence rather than silently sending the visitor again.
@@ -351,7 +372,9 @@ Optional Café starting amounts are configured in Grown-up notes. Existing explo
 
 New visits retain their supplied passages, questions, ordering cards, smaller examples and ending together. Catalogue edits cannot change a paused answer or the next question's passage. Earlier visits without those pages stay in the notebook as records; a fresh visit is offered without guessing the missing wording. French preservation is a separate follow-up.
 
-For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
+For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_STORY_ID=flood-almanac` and `PARIS_SOURCE_VARIANT=1`, `2`, or `3` to exercise each Library length; the default remains puppet-post. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
+
+For the Egyptian object stories, run `node test/egypt-writing-book-browser.js` against the same local server with `EGYPT_TEST_URL` set to its URL. The optional `EGYPT_TEST_ARTIFACTS` directory receives phone/tablet screenshots. This covers both stories at all three passage lengths, the local photographs and credits, waiting visits, helper and listening requests, frozen source, save-off, and actual notes download/import. It does not establish physical-device or audible-speech behavior.
 
 ### The Town Remembers
 
@@ -366,6 +389,12 @@ Open `#field` on the locally served build for five optional adult-guided cards: 
 The notebook keeps the selected supplied reply and support separately. Earlier cards remain readable even when the current card catalog changes. Ordinary explorer switching, reset, save-off and local export/import also apply. See [spec 75](docs/specs/75-field-kit.md) and its [source audit](docs/source-audits/75-field-kit.md). This branch is draft work; it has not been deployed to the live site.
 
 For synthetic browser verification, serve `dist/` locally and run `node test/field-kit-browser.js` with `FIELD_TEST_URL` set to that server's URL. Set `PLAYWRIGHT_MODULE` to an installed Playwright module and, if needed, `CHROME_PATH` to an installed Chromium browser. Optional `FIELD_ARTIFACTS` saves synthetic screenshots. The test inspects print media, simulates local voice callbacks, and exercises phone/tablet layouts and actual notebook download/import; it does not establish physical-device audio behavior or what happened offscreen.
+
+## Measuring Desk
+
+The optional `#science/measure` desk asks an adult and child to read the same unchanged cold-water fill twice in one real jug, enter the two readings they report, and compare only those entered numbers. A neighboring-mark gap is optional context, not a calculated uncertainty. Keeping a version freezes its source, raw entries and comparison without certifying the jug, reading method or physical amount. The pre-Start method can be heard or printed without creating a notebook; a started notebook prints the method without entered readings. Field Kit outcome records and Measuring Kitchen picture practice stay separate. See [spec92](docs/specs/92-measuring-desk.md), its [source audit](docs/source-audits/92-measuring-desk.md) and [implementation review](docs/reviews/92-measuring-desk-review.md).
+
+Run `node test/measuring-desk-checks.mjs` for source, arithmetic, saved-work and recovery checks. With `dist` served locally and Playwright installed, run `MEASURE_TEST_URL=http://127.0.0.1:4173/ node test/measuring-desk-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `MEASURE_SCREENSHOT_DIR` can select local installations and temporary screenshots. The synthetic browser run covers phone/tablet layout, actual notes import/download, root-free narration, method-only print media and near-limit refusal. It does not establish physical iPad/Safari or jug accuracy.
 
 ## Willow Path
 
@@ -382,3 +411,37 @@ The optional `#numbers/join` table extends Bundle Burrow with two pictured addit
 Each case keeps its supplied source, grouping, raw total, support and earlier checks. Speech requests are labeled as requests, not proof of playback. Optional help and a separate example remain open. See [spec 77](docs/specs/77-joining-supply-orders.md) and its [source audit](docs/source-audits/77-joining-supply-orders.md).
 
 Run `node test/joining-orders-checks.mjs` and `node test/joining-orders-integration-checks.mjs` for source checks. With the static app served locally and Playwright installed, run `JOIN_TEST_URL=http://127.0.0.1:4173/ node test/joining-orders-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `JOIN_ARTIFACTS` optionally select a local module, browser and screenshot directory. These synthetic checks do not establish physical iPad behavior or learning gains.
+
+Hundredths Bridge at `#numbers/hundredths` redraws the same conceptual whole as a 10×10 square. Six open requests let learners make tenths and hundredths or compare fixed pictures, with reversible controls and frozen practice records in a separate optional save root. Chooser notation is supplied but untracked, so no case record proves a learner has not seen it. See [spec85](docs/specs/85-hundredths-bridge.md) and its [source audit](docs/source-audits/85-hundredths-bridge.md). Run `node test/hundredths-checks.mjs`, `node test/post-rival-adaptive-checks.mjs`, and `node test/learning-connections-checks.mjs` for the source, saved-work and matching-fact boundaries. With the static app served locally and Playwright installed, run `HUNDREDTHS_TEST_URL=http://127.0.0.1:4173/ node test/hundredths-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations. The [implementation review](docs/reviews/85-hundredths-bridge-implementation-review.md) records the exact cleared heads and local verification.
+
+Tenths Table at `#numbers/tenths` uses one fixed whole with ten reversible parts and eight openly chosen requests. It keeps supplied-picture practice separate from assessment evidence. Its optional save root starts only on an explicit request, and retained sources/checks stay tied to their own wording. See [spec81](docs/specs/81-tenths-table.md) and its [source audit](docs/source-audits/81-tenths-table.md).
+
+Run `node test/tenths-checks.mjs` for the finite picture, notation, saving and recovery checks. With the static app served locally and Playwright installed, run `TENTHS_TEST_URL=http://127.0.0.1:4173/ node test/tenths-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `TENTHS_ARTIFACTS` optionally select a local module, browser and screenshot directory. These synthetic Chrome checks do not establish physical iPad behavior, audible narration quality or learning gains.
+
+My Count Collection at `#living/collection` lets a learner make a pretend button collection, record a table, draw bars and read the chart across four short turns. It distinguishes a faithful representation from an accurate reading of a different chart. Sources, earlier checks and an optional kept version stay tied to their own saved values. This is pictured practice, not a survey or a mastery judgment. See [spec86](docs/specs/86-count-collection.md) and its [source audit](docs/source-audits/86-count-collection.md). Run `node test/count-collection-checks.mjs`; with the static app served locally, run `COLLECTION_TEST_URL=http://127.0.0.1:4173/ node test/count-collection-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
+
+The [Count Collection review](docs/reviews/86-count-collection-review.md) records the exact internally cleared implementation and local checks; release clearance remains separate.
+
+## Seed Stall
+
+The optional `#numbers/seeds` experiment lets a learner choose six pictured sun and moon seed counters, make an optional prediction, and record up to three short runs of screen draws with replacement. The browser chooses among the six pictured positions on each draw. The bag, its rule, the prediction, and each outcome remain distinct in an optional local save. Results from these small virtual runs cannot prove that a real bag is fair or establish learning gains. See [spec 87](docs/specs/87-seed-stall-chance.md) and its [source audit](docs/source-audits/87-seed-stall-chance.md).
+
+Run `node test/seed-stall-checks.mjs` for source, saved-work and recovery checks. With `dist` served locally and Playwright installed, run `SEED_TEST_URL=http://127.0.0.1:4173/ node test/seed-stall-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations; `SEED_ARTIFACTS` saves temporary screenshots. The synthetic Chrome run checks phone/tablet layouts, all seven bags, actual draws, notebook download/import, imported history and near-limit refusal. It does not establish physical iPad behavior or learning outcomes.
+
+The [independent implementation review](docs/reviews/87-seed-stall-review.md) records the repaired exact head and local verification; composition and release clearance remain separate.
+
+Lantern Line at `#numbers/lanterns` places two fraction stops along the same whole walk. Six open requests contrast unit fractions, same-sized parts, different partitions, equal points, zero and whole endpoints. Reading the actual order is separate from matching the requested stops; optional part guides and a worked example remain supplied support. Partial work, earlier checks and one explicitly kept version stay with their frozen sources. See [spec89](docs/specs/89-lantern-line.md) and its [source audit](docs/source-audits/89-lantern-line.md). Run `node test/lantern-line-checks.mjs`; with the static app served locally, run `LANTERN_TEST_URL=http://127.0.0.1:4173/ node test/lantern-line-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
+
+The [Lantern Line review](docs/reviews/89-lantern-line-review.md) records the internally cleared implementation and local verification.
+
+Food-link Fork Board at `#living/fork` lets a learner draw food-to-eater arrows among four named organisms, then check each proposal against the evidence slip displayed in its row. A closer hoverfly study changes what that slip supports without rewriting earlier checks. The shared board distinguishes proposed, supported and undecided links; it does not predict a garden population. It saves its own source, checks and raw recovery separately from Food Links and Life Stages. See [spec88](docs/specs/88-food-link-fork-board.md), its [source audit](docs/source-audits/88-food-link-fork-board.md) and the [review receipt](docs/reviews/88-food-link-fork-board-review.md). Run `node test/food-fork-checks.mjs`; with `dist` served locally and Playwright installed, run `FORK_TEST_URL=http://127.0.0.1:4173/ node test/food-fork-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations. Synthetic Chrome checks do not establish physical iPad/Safari behavior or learning gains.
+
+
+The optional **Puppet Notice Printer** (`#loft/printer`) rearranges five supplied word tickets, initial capitals and ending marks for two fictional purposes. Six exact authored replies distinguish a question, a telling line and a playful role reversal; every other arrangement stays unmodeled and can be kept as a discovery. It never grades original prose. Existing person-read Story Loft dialogue stays separate. See [spec90](docs/specs/90-puppet-notice-printer.md), [source audit90](docs/source-audits/90-puppet-notice-printer.md) and the [internal review receipt](docs/reviews/90-puppet-notice-review.md).
+
+Run `node test/puppet-notice-checks.mjs` for finite word-order, frozen source and notebook-boundary checks. With `dist` served locally, run `NOTICE_TEST_URL=http://127.0.0.1:4173/ node test/puppet-notice-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and optional `NOTICE_ARTIFACTS` select local browser dependencies/artifacts. These synthetic local checks do not establish physical-device behavior, audible quality or learning gains.
+
+Comparing Supply Orders at `#numbers/compare` uses the same 23 and11 counters for two questions: match two unchanged crates, or return11 from one crate. Picture and Number/meaning are separate open turns; typed numbers, selected meanings and picture completion remain distinct. See [spec91](docs/specs/91-comparing-supply-orders.md) and its [review receipt](docs/reviews/91-comparing-supply-orders-review.md). Run `node test/comparing-orders-checks.mjs`; with the static app served locally, run `COMPARISON_TEST_URL=http://127.0.0.1:4173/ node test/comparing-orders-browser.js`. The browser test accepts `PLAYWRIGHT_MODULE` and `CHROME_PATH` for local installations.
+The optional **Courier Clock Walk** (`#post/clock-walk`) keeps departure fixed while a coupled clock moves along a 0–60 elapsed-minute line. Six supplied five-minute cards distinguish reaching the requested arrival from reporting the duration between the two supplied times. Learn, Walk and Kept remain open; labelled models are practice, not an independent clock-reading assessment. See [spec93](docs/specs/93-courier-clock-walk.md), [source audit93](docs/source-audits/93-courier-clock-walk.md) and the [internal review receipt](docs/reviews/93-courier-clock-walk-review.md).
+
+Run the focused Courier Clock source checks with `node test/courier-clock-checks.mjs`. The optional installed-browser journey is `node test/courier-clock-browser.js`, with `CLOCK_WALK_TEST_URL` pointing to this local `dist/` server and the same Playwright/Chrome setup as the other browser checks.

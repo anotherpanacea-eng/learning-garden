@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 265" role="img" aria-labelledby="title desc">
+  <title id="title">Original schematic marmalade hoverfly larva card</title>
+  <desc id="desc">A tapered, softly segmented legless larva, seen from above. It has no wings or walking legs. The shape, color and size are not an identification guide.</desc>
+  <rect x="1" y="1" width="318" height="263" rx="18" fill="#f0f4e9" stroke="#b8cdb2" stroke-width="2"/>
+  <text x="160" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#183f39">Marmalade hoverfly larva</text>
+  <text x="160" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-style="italic" fill="#385b50">Episyrphus balteatus · schematic</text>
+  <path d="M55 138 C70 127 82 124 98 119 C130 108 170 105 207 111 C245 116 265 128 267 141 C269 156 249 170 213 173 C172 178 129 169 98 158 C78 151 66 149 55 138 Z" fill="#9bb9a0" stroke="#3b6251" stroke-width="3"/>
+  <path d="M62 138 C99 117 147 112 201 116 C226 118 247 127 256 138" fill="none" stroke="#dce7d0" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+  <g fill="none" stroke="#638a70" stroke-width="2" stroke-linecap="round">
+    <path d="M95 119 Q86 139 97 157"/>
+    <path d="M118 113 Q108 139 119 164"/>
+    <path d="M143 109 Q131 140 145 169"/>
+    <path d="M169 108 Q157 142 172 174"/>
+    <path d="M195 110 Q187 142 199 174"/>
+    <path d="M220 114 Q215 143 224 171"/>
+    <path d="M244 121 Q239 143 244 161"/>
+  </g>
+  <circle cx="70" cy="139" r="2.5" fill="#355c4b"/>
+  <path d="M54 138 L46 135 M54 138 L46 141" fill="none" stroke="#355c4b" stroke-width="2" stroke-linecap="round"/>
+  <text x="160" y="213" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#183f39">Larva: no wings or walking legs</text>
+  <text x="160" y="235" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#52675e">Shape and color are not identification clues</text>
+</svg>

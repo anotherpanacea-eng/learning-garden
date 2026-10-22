@@ -77,7 +77,7 @@ function validFrozenExample(m,withPractice=false){
 }
 const validGeneratedTask=task=>validFrozenExample(task,true);
 function validGeneratedRival(r){
- if(!object(r)||!keys(r,['revision','id','task','reason','phase','input','feedback','practiceStep','supported','audioRequested','attempts','resolution','method','decompositionStep',...(Object.hasOwn(r,'connection')?['connection']:[])])||r.revision!=='bramble-2'||!integer(r.id,1,MAX_ROUND-1)||!validGeneratedTask(r.task)||!reasons.includes(r.reason)||!phases.includes(r.phase)||typeof r.input!=='string'||typeof r.feedback!=='string'||!integer(r.practiceStep,0,2)||typeof r.supported!=='boolean'||typeof r.audioRequested!=='boolean'||!Array.isArray(r.attempts)||r.attempts.length>24||![null,'answered','together'].includes(r.resolution)||r.method!==null&&!methods.includes(r.method)||r.decompositionStep!==null&&!integer(r.decompositionStep,0,2))return false;
+ if(!object(r)||!keys(r,['revision','id','task','reason','phase','input','feedback','practiceStep','supported','audioRequested','attempts','resolution','method','decompositionStep',...(Object.hasOwn(r,'connection')?['connection']:[]),...(Object.hasOwn(r,'priorFactShown')?['priorFactShown']:[])])||r.revision!=='bramble-2'||!integer(r.id,1,MAX_ROUND-1)||!validGeneratedTask(r.task)||!reasons.includes(r.reason)||!phases.includes(r.phase)||typeof r.input!=='string'||typeof r.feedback!=='string'||!integer(r.practiceStep,0,2)||typeof r.supported!=='boolean'||typeof r.audioRequested!=='boolean'||!Array.isArray(r.attempts)||r.attempts.length>24||![null,'answered','together'].includes(r.resolution)||r.method!==null&&!methods.includes(r.method)||r.decompositionStep!==null&&!integer(r.decompositionStep,0,2)||(Object.hasOwn(r,'priorFactShown')&&r.priorFactShown!==true))return false;
  if(Object.hasOwn(r,'connection')&&(!validConnection(r.connection,r.task.a,r.task.b)||r.task.kind!=='multiply'||r.reason!=='connected example')||r.reason==='connected example'&&!Object.hasOwn(r,'connection'))return false;
  if((r.audioRequested||r.phase==='practice'||r.practiceStep>0||r.decompositionStep!==null||r.method==='together')&&!r.supported)return false;
  let priorSupport=false;
@@ -91,6 +91,13 @@ function validGeneratedRival(r){
  return true;
 }
 export function validPostRival(r){return validLegacyRival(r)||validGeneratedRival(r);}
+// Qualify only the current, unfinished generated puzzle when this exact fact is shown elsewhere.
+export function notePendingBrambleFactExposure(state,pair){
+ const v=visit(state),r=v?.rival;
+ if(!Array.isArray(pair)||pair.length!==2||!validBrambleNotebook(state?.postOffice)||!validGeneratedRival(r)||r.task.kind!=='multiply'||!['question','practice'].includes(r.phase)||r.resolution!==null||r.priorFactShown===true)return false;
+ if(!(r.task.a===pair[0]&&r.task.b===pair[1]||r.task.a===pair[1]&&r.task.b===pair[0]))return false;
+ r.priorFactShown=true;return true;
+}
 // Pure validation. A malformed individual rival is left for visit-level recovery.
 export function validBrambleNotebook(p){
  if(!object(p)||!Array.isArray(p.visits))return false;

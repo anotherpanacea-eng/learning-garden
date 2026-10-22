@@ -3,14 +3,14 @@ import {freshState,restoreState} from '../dist/core.mjs';
 import {ensureCafe,nextGuest,adjustBite,checkPlate,submitCafeNumber,skipCafeStage,serveCafe,supportCafe,orderFor} from '../dist/cafe-core.mjs';
 import {startPostOffice,resumePostOffice} from '../dist/post-office-core.mjs';
 import {deliveries} from '../dist/post-office-content.mjs';
-import {startAdaptiveRival,setRivalInput,submitRival,solveRivalTogether,continueRival,bypassRival,validPostRival,validBrambleNotebook,setBrambleMode,setBrambleTable} from '../dist/post-rival.mjs';
+import {startAdaptiveRival,setRivalInput,submitRival,openRivalPractice,returnRivalQuestion,solveRivalTogether,continueRival,bypassRival,notePendingBrambleFactExposure,validPostRival,validBrambleNotebook,setBrambleMode,setBrambleTable} from '../dist/post-rival.mjs';
 import {startAdaptiveSpiral,inspectAdaptive,supportAdaptive,findAdaptive,chooseAdaptive,submitAdaptive,leaveAdaptive,setAdaptiveChoice,adaptiveSuggestion} from '../dist/living-adaptive-core.mjs';
 import {mathQuestion} from '../dist/living-adaptive-content.mjs';
 import {currentSpiral,spiralState,setSpiralOption} from '../dist/living-spiral-core.mjs';
 import {spiralTarget} from '../dist/living-spiral-content.mjs';
 import {connectionFrom,validConnection,proposedPair} from '../dist/learning-connection-data.mjs';
 import {connectionPairsShown,learningSource,connectionOffers,connectionAvailability,startConnection,activeConnection,connectionRecords} from '../dist/learning-connections.mjs';
-import {connectionPanel,connectionNotes} from '../dist/learning-connections-ui.mjs';
+import {connectionPanel,connectionNotes,connectionReason} from '../dist/learning-connections-ui.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
 let checks=0;const check=(x,m)=>{assert.ok(x,m);checks++;},equal=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const fresh=()=>{const s=freshState();ensureCafe(s);startPostOffice(s,deliveries[0].id);return s;};
@@ -32,6 +32,33 @@ for(const [a,b,outcome,expected] of [[3,4,'first-match',[4,4]],[12,4,'first-matc
 for(const [help,wrong,outcome] of [[false,false,'first-match'],[true,false,'supported'],[false,true,'retry']]){const s=cafeSource(3,4,help,wrong);equal(learningSource(s,'cafe').outcome,outcome,'coarse café classification');}
 {
  const s=cafeSource();check(startConnection(s,'bramble','cafe'),'cross to Bramble');const r=answerBramble(s);equal(learningSource(s,'bramble').sourceId,r.id,'latest Bramble source');equal(learningSource(s,'bramble').familiarity,'familiar','connected family explicitly known');check(startConnection(s,'living','bramble'),'Bramble to garden');equal(currentSpiral(s).task.connection.source,'bramble','frozen cross source');equal(currentSpiral(s).math.count,0,'still no imported assessment');
+}
+// A verified supplied result changes only a fresh positive connection. Actual attempts and help stay as recorded.
+for(const [mode,outcome] of [['first','explored'],['retry','retry'],['help','supported'],['together','explored']]){
+ const s=cafeSource();check(startConnection(s,'bramble','cafe'),'connected Bramble starts');
+ const r=s.postOffice.visits.find(v=>v.id===s.postOffice.current).rival;
+ check(notePendingBrambleFactExposure(s,[r.task.a,r.task.b]),'exact completed fact qualifies unfinished rival');
+ if(mode==='retry'){setRivalInput(s,String(r.task.answer+1));check(submitRival(s),'wrong attempt retained');check(returnRivalQuestion(s),'return from offered practice');}
+ if(mode==='help'){check(openRivalPractice(s),'real help opened');check(returnRivalQuestion(s),'return from help');}
+ if(mode==='together')check(solveRivalTogether(s),'no-attempt exploration remains supported in raw record');
+ else{setRivalInput(s,String(r.task.answer));check(submitRival(s),'actual fitting response retained');}
+ check(continueRival(s),'completed flagged round archived');
+ const source=learningSource(s,'bramble');check(source,'flagged round remains a connection source');equal(source.outcome,outcome,`${mode} outcome priority`);
+ equal(source.familiarity,'familiar','supplied fact is known without changing help chronology');
+ equal([source.a,source.b],[r.task.a,r.task.b],'flagged source invites same pair rather than positive neighbor');
+ if(outcome==='explored')check(!connectionReason(source).includes('with support'),'explored invitation does not invent requested help');
+ if(mode==='first')check(!r.supported&&!r.attempts[0].afterSupport,'prior fact does not rewrite help fields');
+}
+// The prior-fact qualifier is not an adaptive selector input. Mirror every other archived field.
+{
+ const s=cafeSource();check(startConnection(s,'bramble','cafe'),'connected selector fixture starts');const first=s.postOffice.visits[0].rival;
+ check(notePendingBrambleFactExposure(s,[first.task.a,first.task.b]));answerBramble(s);
+ for(let i=0;i<4;i++){check(startAdaptiveRival(s),'ordinary selector fixture starts');check(solveRivalTogether(s),'no-attempt later round');check(continueRival(s),'later round archives');}
+ const unflagged=structuredClone(s),archived=unflagged.postOffice.bramble.history.find(x=>x.id===first.id);delete archived.priorFactShown;
+ check(startAdaptiveRival(s)&&startAdaptiveRival(unflagged),'mirrored next turn starts');
+ const flaggedTask=s.postOffice.visits[0].rival,unflaggedTask=unflagged.postOffice.visits[0].rival;
+ equal([flaggedTask.task.kind,flaggedTask.task.a,flaggedTask.task.b,flaggedTask.reason],[unflaggedTask.task.kind,unflaggedTask.task.a,unflaggedTask.task.b,unflaggedTask.reason],'flag alone cannot change ordinary selection');
+ equal(flaggedTask.reason,'familiar example','fixture exercises clean familiar-example branch');
 }
 // Manual math preferences and automatic epoch survive an explicit equal-packs search.
 {
