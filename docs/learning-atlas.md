@@ -10,18 +10,18 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 165 explicit current references across 88 unique source topics: authored question references, scoped practice or supplied explanations. The other 1502 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 173 explicit current references across 95 unique source topics: authored question references, scoped practice or supplied explanations. The other 1495 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
 | Source subject | Topics | Topics with any declared link | Not yet mapped |
 | --- | --- | --- | --- |
 | Computing | 21 | 1 | 20 |
-| English | 286 | 11 | 275 |
+| English | 286 | 12 | 274 |
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 0 | 37 |
-| Mathematics | 503 | 59 | 444 |
+| Mathematics | 503 | 65 | 438 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 14 | 533 |
 
@@ -87,6 +87,14 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Repeat a Delivery Block (`#workshop/repeats`, local build) | compose, build | Four original direct courier jobs on a labelled equal-interval grid. Compose two absolute arrows, repeat the whole pair two or three times, manually step each expanded command and revise. Proposed moves, attempted commands and travelled intervals remain distinct. Fixed expansion/counts are supplied model information, not independent programming or multiplication attainment. |
 | Whole batches for a gathering (`#cafe/batches`, local build) | allocate, build, compose | Three pictured requests for 2/4/6 guests: repeat a complete 100/150 mL two-guest recipe, prepare separate jars, read a supplied scale and compose a finite message. Optional additive contrast and familiar inverse reference; no fractional scaling, general ratio, independent calculation, free writing or physical measuring claim. |
 | Willow packing table (`#post/packing`, local build) | allocate, build, read | Four invented seed-envelope requests with whole-bag capacity, full kits, loose envelopes and minimal loaded trips. Countable reversible grouping, actual-model readings and purpose-specific answers remain supplied practice. No written algorithm, decimal quotient, general multistep problem solving, formal place value or independent reading claim. |
+| Seed Stall (`#numbers/seeds`, local build) | experiment, read | Configure a six-position virtual bag, predict optionally, draw with replacement and compare up to three six-draw records. Screen-model chance practice only; no physical sampling, theoretical-frequency calculation, fairness proof, or attainment claim. |
+| My Count Collection (`#living/collection`, local build) | build, read | Make three fictional button category counts, enter a table, construct bars and compare actual pictured counts. No real survey, physical observation, tally/pictogram construction, full data vocabulary or statistics attainment. |
+| Joining Supply Orders (`#numbers/join`, local build) | allocate, build | Join two supplied two-digit collections and regroup one ten when useful, then enter a total. Two fixed pictured sums; no general algorithm, spoken explanation, independent strategy or fluency claim. |
+| Returning Supply Orders (`#numbers/return`, local build) | allocate, build | Move 12 or 17 of 42 supplied counters to a separate store tray, opening a ten when useful, then name the remainder. Two fixed take-away pictures; no comparison-subtraction, chosen strategy or fluency claim. |
+| Lantern Line (`#numbers/lanterns`, local build) | build, read | Place two supplied fractions on one shared 0–1 whole and choose the relation of the actual markers. Finite two-marker comparison; no systematic ordering, independent denominator explanation or broad fraction attainment. |
+| Hundredths Bridge (`#numbers/hundredths`, local build) | build, read | Make 30/100 and 35/100 on one pictured whole and compare supplied 0.3, 0.30 and 0.35 cases. A fixed visual equivalence bridge; no arbitrary decimal writing, percent, number-line placement or conversion fluency. |
+| Puppet Notice Printer (`#loft/printer`, local build) | compose, read | Reorder five supplied tickets, choose an initial capital and ending mark, try a small authored statement/question response and revise. Controlled-word punctuation practice; no original sentence writing, general grammar, spelling or independent convention use. |
+| Water Evidence Shelf (`#science/evidence`, local build) | search, read | Choose clue-plus-possible-explanation notes over three supplied before/after water illustrations. Transient fictional-picture practice; no real observation, physical investigation, measured amount, unique-cause proof or water-cycle attainment. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -131,7 +139,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | --- | --- | --- | --- |
 | Computing / Artificial Intelligence | 21 | 1 | Compose · execute · revise; Search · inspect · compare; Read · infer · support |
 | English / English Thinking | 7 | 2 | Read · infer · support; Search · inspect · compare |
-| English / Grammar & Punctuation | 75 | 0 | Compose · execute · revise; Read · infer · support |
+| English / Grammar & Punctuation | 75 | 1 | Compose · execute · revise; Read · infer · support |
 | English / Handwriting & Transcription | 5 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Phonics & Word Reading | 23 | 1 | Build · transform · relate; Create · perform · reflect |
 | English / Reading Comprehension | 72 | 4 | Read · infer · support; Search · inspect · compare |
@@ -146,17 +154,17 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Learning to Learn / Learning to Learn | 18 | 0 | Change · measure · explain; Create · perform · reflect |
 | Life Skills / Entrepreneurship | 17 | 0 | Assemble · allocate · check; Compose · execute · revise |
 | Life Skills / Money & Finance | 20 | 0 | Assemble · allocate · check; Compose · execute · revise |
-| Mathematics / Addition & Subtraction | 52 | 5 | Build · transform · relate; Search · inspect · compare |
+| Mathematics / Addition & Subtraction | 52 | 7 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Algebra | 25 | 0 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Counting & Cardinality | 14 | 2 | Build · transform · relate; Search · inspect · compare |
-| Mathematics / Data & Statistics | 18 | 2 | Change · measure · explain; Read · infer · support |
-| Mathematics / Fractions | 67 | 13 | Assemble · allocate · check; Build · transform · relate |
+| Mathematics / Data & Statistics | 18 | 3 | Change · measure · explain; Read · infer · support |
+| Mathematics / Fractions | 67 | 15 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Geometry | 69 | 7 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Mathematical Thinking | 48 | 2 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Measurement | 68 | 12 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Multiplication & Division | 57 | 11 | Assemble · allocate · check; Build · transform · relate |
 | Mathematics / Number Representation & Place Value | 52 | 5 | Build · transform · relate; Search · inspect · compare |
-| Mathematics / Probability | 15 | 0 | Change · measure · explain; Read · infer · support |
+| Mathematics / Probability | 15 | 1 | Change · measure · explain; Read · infer · support |
 | Mathematics / Ratio & Proportion | 18 | 0 | Assemble · allocate · check; Build · transform · relate |
 | Personal & Social Development / Emotional Literacy | 15 | 0 | Read · infer · support; Create · perform · reflect |
 | Personal & Social Development / Empathy & Social Awareness | 15 | 0 | Read · infer · support; Create · perform · reflect |
@@ -355,6 +363,14 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Division with remainders](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_p-nbe0w_lf) | explanation / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Explain why full groups, spare objects and minimum loaded trips differ; contrast a positive remainder with an exact fit. The broader source requires formal operations, multistep problems, equations and estimation, none taught or inferred here. |
 | [Precise Maths Communication](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TMoHjMhRS2) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Attach supplied full-bag, loose-envelope or loaded-trip labels to separate numerical readings/predictions. No independent mathematical prose or transcription claim. |
 | [Pictures and Text Working Together](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OlhMP7ShFT) | scoped-practice / Willow packing table (local build) / [source](../dist/parcel-packing-ui.mjs) | Relate the literal packing request, capacity and purpose to countable pictured objects and groups. No independent decoding, inference or broad reading level claim. |
+| [Simple Chance Experiments](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_J4j7d3iAfg) | scoped-practice / Seed Stall (local build) / [source](../dist/seed-stall-ui.mjs) | Configure a pictured six-position virtual bag, predict optionally, record six draws with replacement and compare up to three short runs. Not a physical trial, 20/30-draw experiment, formal theoretical probability or fairness proof; likelihood language is supplied, not independently established. |
+| [Pictograms and tally charts](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_c29FaCTNsx) | scoped-practice / My Count Collection (local build) / [source](../dist/count-collection-ui.mjs) | Make three fictional category counts, enter a simple table and construct/read bars on a shared scale. No survey, tally/pictogram construction, full chart vocabulary or observed real-world data. |
+| [Addition as combining or putting together two](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_OvyoRo47K-) | scoped-practice / Joining Supply Orders (local build) / [source](../dist/joining-orders-ui.mjs) | Join two fixed pictured two-digit collections, regroup when useful and enter a total. Does not record a spoken altogether explanation, independent method or general within-100 addition. |
+| [Subtraction as taking away or separating](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_zuKAX6lcYR) | scoped-practice / Returning Supply Orders (local build) / [source](../dist/returning-orders-ui.mjs) | Move 12 or 17 of 42 pictured counters into a store tray and enter what remains. This is a fixed take-away model, not comparison subtraction, independent explanation or fluent calculation. |
+| [Comparing fractions](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_IfEgu0X449) | scoped-practice / Lantern Line (local build) / [source](../dist/lantern-line-ui.mjs) | Place two supplied markers on the same unit interval and choose the relation of the actual positions. No ordering a larger set or independently explaining a general denominator rule. |
+| [Decimal equivalents of tenths and hundredths](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TqDq6jyOmL) | scoped-practice / Hundredths Bridge (local build) / [source](../dist/hundredths-ui.mjs) | Build or compare a few supplied same-whole 0.3, 0.30 and 0.35 pictures with a separate check. No arbitrary written tenths/hundredths conversion, number-line placement, percent notation or fluency. |
+| [Starting and Ending Sentences](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_QEr24lqzvH) | scoped-practice / Puppet Notice Printer (local build) / [source](../dist/puppet-notice-ui.mjs) | Choose initial capitalization and ending marks for supplied five-word tickets, then hear/try a few authored meanings. Exclamation response remains unmodeled; no free sentence composition or reminder-free conventions. |
+| [Observation vs Interpretation](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Hw70LI5xza) | scoped-practice / Water Evidence Shelf (local build) / [source](../dist/water-evidence-ui.mjs) | Distinguish a visible clue from a possible cause in three illustrated before/after cards. Choices are transient and supplied; no real observation, learner-written explanation or single-route proof. This topic already has other scoped references. |
 
 ## Sources, licensing and maintenance
 
