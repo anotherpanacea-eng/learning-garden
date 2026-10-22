@@ -1,4 +1,8 @@
 import assert from 'node:assert/strict';
+import {freshState,restoreState} from '../dist/core.mjs';
+import {storyNodes} from '../dist/story-content.mjs';
+import {startVisit,storyDraft,storyQuestion,ensureGarden,submitStory,finishStoryNode,useStoryReadingTool} from '../dist/garden-core.mjs';
+import {storyPage} from '../dist/garden-ui.mjs';
 import {compileParisPacks,cleanOrder,orderValue,ORDER_PERMUTATIONS} from '../dist/paris-pack-core.mjs';
 import {puppetPostPack} from '../dist/packs/puppet-post.mjs';
 import {parisPacks} from '../dist/packs/index.mjs';
@@ -110,4 +114,21 @@ rejects(p=>p.stories[0].connections.push(clone(p.stories[0].connections[0])),/du
 check(parisPacks.length===1&&parisStories.length===7&&Object.keys(parisLibraryNodes).length===42,'registered pack appends to six original stories');
 check(parisStories.slice(0,6).every(s=>!s.packId)&&parisStories.at(-1).id==='puppet-post','legacy story order and metadata are preserved');
 check(Object.keys(parisLibraryHelpers).length===42,'all generated and legacy tasks have helpers');
+{
+ const s=freshState(),v=startVisit(s,'paris',{destination:'rooftops',variant:2,storyId:'puppet-post'}),d=storyDraft(s),id=v.node,original=structuredClone(storyNodes[id]);
+ useStoryReadingTool(s,'sentence-next');useStoryReadingTool(s,'sentence-next');
+ const before=JSON.stringify(d),saved=JSON.stringify(s),updated=clone(puppetPostPack);
+ updated.stories[0].questions[0].prompt='A revised pack question';
+ const replacement=compileParisPacks([updated]).nodes[id];
+ replacement.readingText=['A shorter revised passage.'];replacement.readingSkill='Revised skill';replacement.practiceOnly=false;
+ try{
+  Object.assign(storyNodes[id],replacement);
+  const r=restoreState(saved);ensureGarden(r);const draft=storyDraft(r);
+  check(JSON.stringify(draft)===before,'a republished pack preserves the frozen question and reading focus on reload');
+  check(storyQuestion(r).prompt===original.prompt&&storyPage(r,draft).includes(original.prompt),'republished pack renders the earlier prompt');
+  submitStory(r,original.answer);draft.method='worked';draft.reading='independent';const o=finishStoryNode(r);
+  ensureGarden(r);
+  check(o.readingSkill===original.readingSkill&&o.practiceOnly===original.practiceOnly&&o.readingTools.focus===1,'observation normalization uses frozen reading metadata and sentence count');
+ }finally{Object.assign(storyNodes[id],original);}
+}
 console.log(`${checks} story-pack validation, content and permutation checks passed.`);

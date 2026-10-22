@@ -6,6 +6,7 @@ import {parisPlan,validateParisRoute} from '../dist/paris-core.mjs';
 import {ORDER_PERMUTATIONS,orderValue,cleanOrder} from '../dist/paris-pack-core.mjs';
 import {ensureGarden,startVisit,currentVisit,storyDraft,noteStorySeen,submitStory,editStoryOrder,submitStoryOrder,finishStoryNode,useStoryReadingTool,openStoryHelp,submitStoryHelp,resumeVisit} from '../dist/garden-core.mjs';
 import {helpers} from '../dist/help-content.mjs';
+import {storyPage,gardenNotes} from '../dist/garden-ui.mjs';
 let checks=0;const check=(value,message)=>{assert.ok(value,message);checks++;};
 const json=JSON.stringify;
 const fresh=()=>{const s=freshState();ensureGarden(s);return s;};
@@ -85,4 +86,57 @@ for(const invalid of [null,{},'012',[0,0,1],[-1,0,1],[0,1,3],[0,1,2,0],[0,1,'2']
  const r=restoreState(json(s));ensureGarden(r);check(json(currentVisit(r))===before&&json(r.practice)===other,'legacy linear Paris and unrelated records retain their content');
  begin(r,3);check(currentVisit(r).route.every(id=>storyNodes[id]),'new packed route coexists with legacy saves');
 }
+// Keep ids and counts unchanged: neither can detect substituted wording or ordering.
+const reloadFailures=[];
+for(const kind of ['choice','order'])for(const change of ['wording','reorder'])for(const legacy of [false,true]){
+ const label=`${legacy?'legacy':'frozen'} ${kind} after ${change}`;
+ const s=fresh(),{v,n,d}=kind==='order'?orderTask(s):(()=>{const v=begin(s);return {v,n:storyNodes[v.node],d:storyDraft(s)};})();
+ const original=structuredClone(n),id=v.node;
+ if(kind==='choice'){d.choice=1;submitStory(s,0);}else{arrange(s,[1,0,2]);submitStoryOrder(s);arrange(s,[2,0]);}
+ if(legacy)delete d.question;
+ const savedDraft=json(d),visitId=v.id;
+ const sibling=startVisit(s,'paris',{destination:'river',variant:1});storyDraft(s);
+ const siblingBefore=json(sibling);resumeVisit(s,visitId);
+ const saved=json(s),oldPage=storyPage(s,storyDraft(s));
+ try{
+  if(change==='wording'){
+   n.prompt='Replacement question wording';n.choices=n.choices.map((_,i)=>`Replacement choice ${i+1}`);
+   if(kind==='order')n.orderItems=n.orderItems.map((_,i)=>`Replacement card ${i+1}`);
+  }else{
+   n.choices=[...n.choices].reverse();n.answer=2;
+   if(kind==='order'){n.orderItems=[...n.orderItems].reverse();n.displayOrder=[...n.displayOrder].reverse();}
+  }
+  const r=restoreState(saved);ensureGarden(r);resumeVisit(r,visitId);
+  const restored=storyDraft(r),html=storyPage(r,restored);
+  check(json(r.garden.visits.find(x=>x.id===sibling.id))===siblingBefore,`${label}: other story is untouched`);
+  if(legacy){
+   check(!html.includes('id="story-answer-form"')&&!html.includes('data-story-choice=')&&!html.includes('data-order-add='),`${label}: legacy answers never appear against current content`);
+   const notes=gardenNotes(r);
+   check(notes.includes('Legacy')&&notes.includes(kind==='choice'?'choice 2 of 3':'card 3 of 3'),`${label}: notes retain positions only`);
+   check(!notes.includes('Replacement')&&json(r.garden.visits.find(x=>x.id===visitId).drafts[id])===savedDraft,`${label}: legacy record stays intact and is never frozen from current content`);
+   check(html.includes('data-new-visit="paris"')&&html.includes('data-paris-story="puppet-post"')&&html.includes('Start this story afresh'),`${label}: fresh start is scoped to this story`);
+   check(!submitStory(r,1)&&!submitStoryOrder(r)&&!editStoryOrder(r,'add',1)&&!finishStoryNode(r,true),`${label}: legacy work cannot be checked or advanced`);
+   const freshVisit=begin(r);
+   check(freshVisit.id!==visitId&&!!storyDraft(r).question&&r.garden.visits.some(x=>x.id===visitId),`${label}: fresh start preserves legacy record`);
+   noteStorySeen(r);check(json(r.garden.visits.find(x=>x.id===visitId).drafts[id])===savedDraft,`${label}: fresh encounter leaves legacy answers intact`);
+   check(json(r.garden.visits.find(x=>x.id===sibling.id))===siblingBefore,`${label}: fresh start preserves other story`);
+  }else{
+   check(html===oldPage,`${label}: exact frozen question, selected text and display order survive reload`);
+   check(json(restored.question)===json(original),`${label}: snapshot retains prompt, key, choices, order and supporting text`);
+   if(kind==='choice')check(submitStory(r,original.answer),`${label}: frozen fitting index is checked`);
+   else{arrange(r,[0,1,2]);check(submitStoryOrder(r),`${label}: frozen arrangement is checked`);}
+   restored.method='worked';restored.reading='independent';const o=finishStoryNode(r);
+   check(o&&o.prompt===original.prompt&&json(o.choices)===json(original.choices)&&o.answer===original.answer,`${label}: observation uses frozen content`);
+  }
+ }catch(error){reloadFailures.push(`${label}: ${error.message}`);}
+ finally{Object.assign(n,original);}
+}
+for(const damage of [q=>q.guide={},q=>{q.visual='array';q.diagram=null;},q=>{q.visual='ruler';q.diagram={max:'unknown'};},q=>q.displayOrder=[0,0,2]]){
+ const s=fresh(),{v,d}=orderTask(s);damage(d.question);const saved=json(d),sibling=begin(s,1);storyDraft(s);const other=json(sibling);
+ const r=restoreState(json(s));ensureGarden(r);resumeVisit(r,v.id);
+ check(storyDraft(r)===null&&storyPage(r,null).includes('Legacy Paris visit'),'unreadable frozen question becomes a preserved positional record');
+ check(json(r.garden.visits.find(x=>x.id===v.id).drafts[v.node])===saved,'unreadable question is kept without repair from current content');
+ check(resumeVisit(r,sibling.id)&&!!storyDraft(r)&&json(r.garden.visits.find(x=>x.id===sibling.id))===other,'unreadable sibling leaves another visit open');
+}
+assert.deepEqual(reloadFailures,[],'saved story content regressions');
 console.log(checks+' ordering, support, pack selection and restore checks passed.');

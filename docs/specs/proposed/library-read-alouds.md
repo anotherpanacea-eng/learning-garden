@@ -112,6 +112,10 @@ There is no timer, score, reward, mastery label, lock or streak. The book is one
 
 That repair gets its own small spec or increment, independent review and tests. The pack spec's scope does not grow to include it. This pack stays content-only and waits on it.
 
+**Repair increment (2026-10-22).** The bounded engine repair freezes the whole main-question node when its draft is first created, including passage, support wording, supplied choices, key and card display order. Rendering, answer checking, observations and reading-record normalization use that saved copy. Index-only paused Paris visits remain in their original visits, with positional records in Grown-up notes and a same-story fresh-start action; they cannot be scored or advanced against the catalogue. Starting again preserves those records and all other stories. The smaller helper examples are outside this main-question freeze guarantee.
+
+This increment reuses the existing visit, notes, start and pack paths. It introduces no learning capability or curriculum content, so it needs no additional Jane/Marble incorporation or upstream refresh. Independent design review identified load normalization and pre-render side effects as required seams; both are included. Regression cases in the existing ordering and pack suites cover reload after wording/reorder changes with unchanged ids/counts, frozen and legacy records, sibling preservation and republished-pack reading metadata. All eight wording/reorder cases failed against the earlier engine before the repair. Independent implementation review cleared the repair after a malformed-snapshot fallback fix. Verification: all 112 `test/*.mjs` suites, the story-pack checker and 12 synthetic browser cases (desktop/tablet/phone, frozen/legacy choice/order) passed. This local increment does not mark the prerequisite as landed on main or release this pack.
+
 **Data boundary.** No free-text field, no learner data in the pack, no network content, upload, scheduler or automatic author. The pack is a reviewed repository source file.
 
 ## Acceptance and gates

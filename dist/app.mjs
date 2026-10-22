@@ -65,7 +65,7 @@ import {helpers,helperLimit} from './help-content.mjs';
 import {helpPage} from './help-ui.mjs';
 import {guides,avatars} from './companions.mjs';
 import {entrances,storyNodes} from './story-content.mjs';
-import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool,editStoryOrder,submitStoryOrder} from './garden-core.mjs';
+import {ensureGarden,currentVisit,entranceById,startVisit,resumeVisit,storyDraft,noteStorySeen,noteGardenFactExposure,submitStory,finishStoryNode,openStoryHelp,submitStoryHelp,useStoryReadingTool,editStoryOrder,submitStoryOrder,storyQuestion,legacyStoryVisit} from './garden-core.mjs';
 import {gardenHome,parisLanding,frenchLanding,companionLink,companionPicker,storyHub,storyPage,storyEnding} from './garden-ui.mjs';
 import {areas} from './broad-content.mjs';
 import {ensureBroad,areaById,itemById,beginTrail,trailQuestion,familiarity,noteBroadExposure,noteLegacyExposure,makeBroadObservation,recordTrail,instantiateBroad} from './broad-core.mjs';
@@ -262,7 +262,8 @@ function render(){
     if(slug==='choose'){const parts=hash.slice(1).split('/');const place=parts[3],variant=parts[4];html=storyHub(state,detail,['paris','french'].includes(detail)&&place?{destination:place,variant:variant==='auto'?'auto':Number(variant),storyId:parts[5]||null}:null);}
     else if((slug==='play'||slug==='end')&&visit){
       if(visit.finished)html=storyEnding(state);
-      else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
+      else if(legacyStoryVisit(visit))html=storyPage(state,null);
+      else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyQuestion(state),`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
     }else html=storyHub(state);
   }
   else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+'<section class="resume-strip garden-progress-link"><span>Every kind of trying helps our garden recover.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
@@ -469,7 +470,7 @@ function bindStory(){
  $('#help-return')?.addEventListener('click',()=>{hx.open=false;helpRender('#story-help');});
  $('#help-skip')?.addEventListener('click',()=>{hx.open=false;finishStory(true);});
  const changeOrder=(action,index)=>{
-  const node=storyNodes[currentVisit(state)?.node],old=storyDraft(state)?.order||[],removed=action==='remove'?old[index]:null;
+  const node=storyQuestion(state),old=storyDraft(state)?.order||[],removed=action==='remove'?old[index]:null;
   if(!editStoryOrder(state,action,index))return;save();render();
   const order=storyDraft(state).order;
   focusElement(order.length===3?'#order-submit':`[data-order-add="${removed??node.displayOrder.find(i=>!order.includes(i))}"]`);
@@ -479,7 +480,7 @@ function bindStory(){
  $('#order-clear')?.addEventListener('click',()=>changeOrder('clear'));
  $('#story-answer')?.addEventListener('input',e=>{d.input=e.target.value;d.error='';save();});
  document.querySelectorAll('[data-story-choice]').forEach(b=>b.onclick=()=>{d.choice=Number(b.dataset.storyChoice);d.error='';save();render();$(`[data-story-choice="${d.choice}"]`).focus();});
- $('#story-answer-form')?.addEventListener('submit',e=>{e.preventDefault();const n=storyNodes[currentVisit(state).node];if(n.kind==='order'){if(orderValue(d.order)===null){d.error='Place all three cards before trying this order.';save();render();focusElement('#story-error');return;}submitStoryOrder(state);save();render();focusElement('#story-feedback');return;}const value=n.kind==='choice'?d.choice:numericAnswer($('#story-answer').value);if(value===null){d.error=n.kind==='choice'?'Choose an idea to try, or leave this question for now.':'Write a whole number, or leave this question for now.';save();render();($('#story-answer')||$('[data-story-choice]')).focus();return;}submitStory(state,value);save();render();focusElement('#story-feedback');});
+ $('#story-answer-form')?.addEventListener('submit',e=>{e.preventDefault();const n=storyQuestion(state);if(n.kind==='order'){if(orderValue(d.order)===null){d.error='Place all three cards before trying this order.';save();render();focusElement('#story-error');return;}submitStoryOrder(state);save();render();focusElement('#story-feedback');return;}const value=n.kind==='choice'?d.choice:numericAnswer($('#story-answer').value);if(value===null){d.error=n.kind==='choice'?'Choose an idea to try, or leave this question for now.':'Write a whole number, or leave this question for now.';save();render();($('#story-answer')||$('[data-story-choice]')).focus();return;}submitStory(state,value);save();render();focusElement('#story-feedback');});
  $('#story-hint')?.addEventListener('click',()=>{d.hinted=true;save();render();focusElement('.hint');});
  $('#story-explain')?.addEventListener('click',()=>{d.revealed=true;save();render();focusElement('.solution');});
  document.querySelectorAll('[data-story-method]').forEach(b=>b.onclick=()=>{d.method=b.dataset.storyMethod;save();render();$('#story-next')?.focus();});

@@ -9,6 +9,23 @@ const pairKey=p=>[...p].sort((a,b)=>a-b).join('x');
 const ownNode=(id,entrance)=>storyNodes[id]?.entrance===entrance;
 const cleanDraft=d=>d&&typeof d==='object'&&Array.isArray(d.attempts)&&d.attempts.every(Number.isFinite);
 const readingNode=n=>Array.isArray(n?.readingText)&&n.type==='task';
+const parisQuestion=n=>n?.entrance==='paris'&&n.type==='task'&&['choice','order'].includes(n.kind);
+function validQuestion(q,id){
+ if(!parisQuestion(q)||q.id!==id||typeof q.prompt!=='string'||!Array.isArray(q.choices)||!q.choices.length||!q.choices.every(x=>typeof x==='string'))return false;
+ const index=i=>Number.isInteger(i)&&i>=0&&i<q.choices.length;
+ if(!index(q.answer)||q.answers!==undefined&&(!Array.isArray(q.answers)||!q.answers.length||!q.answers.every(index)))return false;
+ if(q.readingText!==undefined&&(!Array.isArray(q.readingText)||!q.readingText.length||!q.readingText.every(x=>typeof x==='string')))return false;
+ if(q.guide!==undefined&&typeof q.guide!=='string')return false;
+ const size=x=>Number.isInteger(x)&&x>0&&x<=100;
+ if(q.visual==='array'&&(!size(q.diagram?.rows)||!size(q.diagram?.cols)))return false;
+ if(q.visual==='ruler'&&(!size(q.diagram?.max)||![q.diagram?.start,q.diagram?.end].every(Number.isFinite)))return false;
+
+ return q.kind!=='order'||Array.isArray(q.orderItems)&&q.orderItems.length===3&&q.orderItems.every(x=>typeof x==='string')&&orderValue(q.displayOrder)!==null&&q.choices.length===6;
+}
+export const legacyStoryVisit=v=>v?.entrance==='paris'&&!v.finished&&Object.entries(v.drafts||{}).some(([id,d])=>!v.recorded?.includes(id)&&parisQuestion(storyNodes[id])&&!validQuestion(d.question,id));
+const draftNode=(v,id)=>validQuestion(v?.drafts?.[id]?.question,id)?v.drafts[id].question:storyNodes[id];
+export function storyQuestion(state){const v=currentVisit(state);return !v||v.finished||legacyStoryVisit(v)?null:draftNode(v,v.node);}
+
 const toolSupport=t=>t.audioRequested||t.sentenceUsed||t.supportUncertain;
 function cleanReadingTools(raw,length){
  const tools={audioRequested:false,sentenceUsed:false,focus:null,supportUncertain:false};
@@ -42,7 +59,7 @@ export function ensureGarden(state){
  if(!Array.isArray(g.seen))g.seen=[];g.seen=g.seen.filter(id=>Object.hasOwn(storyNodes,id));
  if(!Array.isArray(g.observations))g.observations=[];
  g.observations=g.observations.filter(o=>o&&Object.hasOwn(storyNodes,o.nodeId)&&typeof o.visitId==='string'&&Array.isArray(o.attempts)&&o.attempts.every(Number.isFinite));
- for(const o of g.observations){cleanHelper(o,o.nodeId);cleanReadingRecord(o,storyNodes[o.nodeId],true,g.seen);if(o.helpUsed){o.supported=true;o.independent=false;o.freshEvidence=false;}}
+ for(const o of g.observations){cleanHelper(o,o.nodeId);cleanReadingRecord(o,draftNode((Array.isArray(g.visits)?g.visits:[]).find(v=>v?.id===o.visitId),o.nodeId),true,g.seen);if(o.helpUsed){o.supported=true;o.independent=false;o.freshEvidence=false;}}
  if(!Array.isArray(g.visits))g.visits=[];
  const ids=new Set();g.visits=g.visits.filter(v=>{
   // A malformed optional field should not cost the whole saved visit.
@@ -51,7 +68,7 @@ export function ensureGarden(state){
   const route=isFrenchExploration(v)||isParisExploration(v)?v.route:null,allowed=id=>route?route.includes(id):ownNode(id,v.entrance)&&!id.startsWith('paris-explore-');
   v.recorded=Array.isArray(v.recorded)?v.recorded.filter(allowed):[];
   if(!v.drafts||typeof v.drafts!=='object'||Array.isArray(v.drafts))v.drafts={};
-  for(const [id,d] of Object.entries(v.drafts)){if(!allowed(id)||!cleanDraft(d))delete v.drafts[id];else{cleanHelper(d,id);cleanReadingRecord(d,storyNodes[id],false,g.seen);if(storyNodes[id].kind==='order')d.order=cleanOrder(d.order);}}
+  for(const [id,d] of Object.entries(v.drafts)){if(!allowed(id)||!cleanDraft(d))delete v.drafts[id];else if(!parisQuestion(storyNodes[id])||validQuestion(d.question,id)){cleanHelper(d,id);const n=draftNode(v,id);cleanReadingRecord(d,n,false,g.seen);if(n.kind==='order')d.order=cleanOrder(d.order);}}
   let id=route?route[0]:entranceById(v.entrance).start;const seen=new Set();
   while(id&&v.recorded.includes(id)&&!seen.has(id)){seen.add(id);id=route?route[route.indexOf(id)+1]:storyNodes[id].next;}
   v.node=id;v.finished=!id;return true;
@@ -88,8 +105,10 @@ export function startVisit(state,entrance,options){
 }
 export function resumeVisit(state,id){const g=ensureGarden(state);if(!g.visits.some(v=>v.id===id))return false;g.current=id;return true;}
 export function storyDraft(state){
- const v=currentVisit(state);if(!v||v.finished)return null;const n=storyNodes[v.node];
+ const v=currentVisit(state);if(!v||v.finished||legacyStoryVisit(v))return null;let n=draftNode(v,v.node);const fresh=!v.drafts[n.id];
  if(!v.drafts[n.id])v.drafts[n.id]={attempts:[],input:'',choice:null,hinted:false,revealed:false,method:null,reading:'unobserved',familiar:state.garden.seen.includes(n.id),knownFact:(n.facts||[]).some(p=>state.broad?.seenFacts?.includes(pairKey(p))),priorExposureUnknown:!!state.broad?.legacyExposureUnknown};
+ if(fresh&&parisQuestion(n))v.drafts[n.id].question=JSON.parse(JSON.stringify(n));
+ n=draftNode(v,v.node);
  if(n.kind==='order')v.drafts[n.id].order=cleanOrder(v.drafts[n.id].order);
  if(readingNode(n)){
   const d=v.drafts[n.id];
@@ -108,46 +127,46 @@ export function storyDraft(state){
  return v.drafts[n.id];
 }
 export function useStoryReadingTool(state,action){
- const v=currentVisit(state),n=v&&storyNodes[v.node];
+ const v=currentVisit(state),n=storyQuestion(state);
  if(!readingNode(n)||v.finished||!['audio','sentence-next','whole'].includes(action))return false;
- const d=storyDraft(state);if(d.helper?.open)return false;
+ const d=storyDraft(state);if(!d||d.helper?.open)return false;
  if(action==='audio')d.readingTools.audioRequested=true;
  else if(action==='sentence-next'){d.readingTools.sentenceUsed=true;d.readingTools.focus=d.readingTools.focus===null?0:Math.min(n.readingText.length-1,d.readingTools.focus+1);}
  else d.readingTools.focus=null;
  return true;
 }
 export function noteStorySeen(state){
- const v=currentVisit(state);if(!v?.node)return;
+ const v=currentVisit(state);if(!v?.node||legacyStoryVisit(v))return;
  if(v.french){
   storyDraft(state);v.french.displayed=true;
   for(const other of state.garden.visits)if(other.id!==v.id&&other.french?.storyId===v.french.storyId)for(const d of Object.values(other.drafts))d.familiar=true;
  }
  if(v.paris){
   storyDraft(state);v.paris.displayed=true;
-  for(const other of state.garden.visits)if(other.id!==v.id&&other.paris?.storyId===v.paris.storyId)for(const d of Object.values(other.drafts))d.familiar=true;
+  for(const other of state.garden.visits)if(!legacyStoryVisit(other)&&other.id!==v.id&&other.paris?.storyId===v.paris.storyId)for(const d of Object.values(other.drafts))d.familiar=true;
  }
  if(!state.garden.seen.includes(v.node))state.garden.seen.push(v.node);
- for(const other of state.garden.visits)if(other.id!==v.id&&other.drafts[v.node])other.drafts[v.node].familiar=true;
+ for(const other of state.garden.visits)if(!legacyStoryVisit(other)&&other.id!==v.id&&other.drafts[v.node])other.drafts[v.node].familiar=true;
  const passageId=storyNodes[v.node].passageId;
- if(passageId)for(const other of state.garden.visits)for(const [id,d] of Object.entries(other.drafts))if((other.id!==v.id||id!==v.node)&&storyNodes[id]?.passageId===passageId)d.priorPassageSeen=true;
+ if(passageId)for(const other of state.garden.visits)for(const [id,d] of Object.entries(other.drafts))if(!legacyStoryVisit(other)&&(other.id!==v.id||id!==v.node)&&storyNodes[id]?.passageId===passageId)d.priorPassageSeen=true;
 }
 export function noteGardenFactExposure(state,pair,except=null){
  const key=pairKey(pair);for(const v of ensureGarden(state).visits)for(const [id,d] of Object.entries(v.drafts)){
-  if(`${v.id}:${id}`!==except&&(storyNodes[id].facts||[]).some(p=>pairKey(p)===key))d.knownFact=true;
+  if(!legacyStoryVisit(v)&&`${v.id}:${id}`!==except&&(storyNodes[id].facts||[]).some(p=>pairKey(p)===key))d.knownFact=true;
  }
 }
 function recordStoryAttempt(n,d,value){
  d.attempts.push(value);d.error='';return acceptsAnswer(n,value);
 }
 export function submitStory(state,value){
- const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);
+ const n=storyQuestion(state),d=storyDraft(state);
  if(!n||!d||d.helper?.open||n.type!=='task'||n.kind==='order'||!Number.isFinite(value))return false;
  if(n.kind==='choice'&&(!Number.isInteger(value)||value<0||value>=n.choices.length))return false;
  if(n.kind==='number'&&(!Number.isInteger(value)||value<0))return false;
  return recordStoryAttempt(n,d,value);
 }
 export function editStoryOrder(state,action,index){
- const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);
+ const v=currentVisit(state),n=storyQuestion(state),d=storyDraft(state);
  if(!n||!d||v.finished||n.type!=='task'||n.kind!=='order'||d.helper?.open||d.attempts.some(a=>acceptsAnswer(n,a)))return false;
  if(action==='clear'){d.order=[];return true;}
  if(!Number.isInteger(index)||index<0||index>2)return false;
@@ -159,13 +178,13 @@ export function editStoryOrder(state,action,index){
  return false;
 }
 export function submitStoryOrder(state){
- const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);
+ const v=currentVisit(state),n=storyQuestion(state),d=storyDraft(state);
  if(!n||!d||v.finished||n.type!=='task'||n.kind!=='order'||d.helper?.open||d.attempts.some(a=>acceptsAnswer(n,a)))return false;
  const value=orderValue(d.order);if(value===null)return false;
  return recordStoryAttempt(n,d,value);
 }
 export function finishStoryNode(state,skip=false){
- const v=currentVisit(state),n=v&&storyNodes[v.node],d=storyDraft(state);if(!n||!d||v.recorded.includes(n.id))return false;
+ const v=currentVisit(state),n=storyQuestion(state),d=storyDraft(state);if(!n||!d||v.recorded.includes(n.id))return false;
  if(d.helper?.open)return false;
  const project=n.type==='project',correct=!project&&!skip&&acceptsAnswer(n,d.attempts.at(-1));
  if(!project&&!skip&&(!correct||!['knew','worked','counted','together'].includes(d.method)))return false;
