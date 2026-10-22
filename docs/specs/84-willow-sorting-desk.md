@@ -1,6 +1,6 @@
 # 84 · Willow Sorting Desk: one rule, two branches
 
-**Status:** Independently reviewed draft with focused findings folded; focused follow-up is pending. No runtime, atlas change, merge, or deployment is authorized by this document.
+**Status:** Independently reviewed draft with all three specification findings folded and focused follow-up cleared at `2baaf683`. An implementation candidate has also received independent internal review at `e343d05`; see the [review receipt](../reviews/84-willow-sorting-desk-review.md). This document does not establish merge, deployment, curriculum coverage, or learning outcomes.
 
 ## The small gap
 
