@@ -136,6 +136,21 @@ const keptFirst=work(state).kept[0].id,keepCounter=work(state).nextKeepId;I.setI
 I.updateInstructionKeep(state,'post',keptFirst);assert.equal(work(state).kept[0].text,'Updated exact text');assert.equal(work(state).nextKeepId,keepCounter);valid(state);
 assert.ok(I.instructionNotes(state).join('\n').includes('Updated exact text'));
 
+// Edits and rejected operations preserve both cases' saved sources; only a new run gets today's source.
+const earlier={};I.chooseInstructionCase(earlier,'loft','welcome-table');
+for(const c of instructionCases){const w=earlier.instructionNotes.cases[c.id];w.source.request=`Earlier ${c.id} request.`;w.source.actions[0].variants.A=`Earlier ${c.id} sentence.`;}
+const earlierSources=Object.fromEntries(Object.entries(earlier.instructionNotes.cases).map(([id,w])=>[id,copy(w.source)]));
+for(const desk of ['post','loft']){
+ for(const edit of [s=>I.setInstructionText(s,desk,'A fictional edit.'),s=>I.editInstructionPlan(s,desk,'add',I.instructionView(s,desk).source.actions[0].id),s=>I.tryInstructionStrip(s,desk),s=>I.keepInstructionDraft(s,desk)]){
+  const changed=copy(earlier);assert.equal(edit(changed),true);
+  assert.deepEqual(Object.fromEntries(Object.entries(changed.instructionNotes.cases).map(([id,w])=>[id,w.source])),earlierSources,'editing either case preserves both saved sources');
+  const w=I.instructionView(changed,desk).case;if(w.runs.length)assert.deepEqual(w.runs[0].source,instructionCases.find(c=>c.id===w.source.id));valid(changed);
+ }
+ for(const reject of [s=>I.setInstructionText(s,desk,'x'.repeat(1201)),s=>I.setInstructionPage(s,desk,'missing'),s=>I.chooseInstructionCase(s,desk,'missing'),s=>I.editInstructionStrip(s,desk,'remove','missing'),s=>I.stepInstructionRun(s,desk,1),s=>I.updateInstructionKeep(s,desk,999)]){
+  const changed=copy(earlier);assert.equal(reject(changed),false);assert.deepEqual(changed,earlier,'rejected operation leaves both cases exact');
+ }
+}
+
 // Saved wording is a frozen copy: reworded content or generated text never locks a save, and the runner uses the current case.
 for(const scope of ['current','run','kept','embedded']){
  const changed=copy(state),w=work(changed),source=scope==='current'?w.source:scope==='run'?w.runs.at(-1).source:scope==='kept'?w.kept.at(-1).source:w.kept.at(-1).run.source;
@@ -158,6 +173,27 @@ const historyShown={};I.editInstructionStrip(historyShown,'post','add','fold');I
 I.useInstructionSupport(historyShown,'post','runFeedback');assert.deepEqual(work(historyShown).runs,historyBefore);
 I.tryInstructionStrip(historyShown,'post');assert.equal(work(historyShown).runs.at(-1).support.includes('runFeedback'),true);valid(historyShown);
 const noHistory={};assert.equal(I.useInstructionSupport(noHistory,'post','runFeedback'),false);assert.deepEqual(noHistory,{});
+// Validate recorded structure and termination, without executing today's rules or comparing prose.
+const outcomes={};for(const id of ['fold','insert','seal'])I.editInstructionStrip(outcomes,'post','add',id);I.tryInstructionStrip(outcomes,'post');I.keepInstructionDraft(outcomes,'post');
+const badOutcomes=[
+ r=>{r.transitions=[];r.terminalScene=null;r.blockedAction='nonexistent';r.requestFulfilled=true;},
+ r=>{r.transitions=[];},r=>{r.transitions.pop();},r=>{r.transitions.push(copy(r.transitions[0]));},
+ r=>{r.blockedAction='nonexistent';},r=>{r.blockedAction='fold';},r=>{r.transitions[0].blocked=true;},r=>{r.transitions.at(-1).blocked=true;},
+ ...['before','after','blocked','wording','description'].map(k=>r=>{delete r.transitions[0][k];}),
+ ...['startingScene','terminalScene','description'].map(k=>r=>{r[k]=null;}),
+ r=>{r.description={toString:'malformed'};},r=>{r.transitions[0].description={toString:'malformed'};},
+ r=>{r.transitions[0].wording=4;},r=>{r.transitions[0].blocked='false';},r=>{r.transitions[0].before=[];},
+ r=>{r.transitions[0].after.note={};},r=>{r.transitions[1].before=copy(r.startingScene);},r=>{r.terminalScene=copy(r.startingScene);}
+];
+for(const embedded of [false,true])for(const mutate of badOutcomes){
+ const bad=copy(outcomes),w=bad.instructionNotes.cases['pocket-note'];mutate(embedded?w.kept[0].run:w.runs[0]);const raw=copy(bad);
+ assert.equal(I.validInstructions(bad.instructionNotes),false,mutate.toString());assert.equal(view(bad).unsupported,true);assert.deepEqual(bad,raw);
+}
+const blocked={};I.editInstructionStrip(blocked,'post','add','insert');I.editInstructionStrip(blocked,'post','add','fold');I.tryInstructionStrip(blocked,'post');valid(blocked);
+for(const mutate of [r=>{r.blockedAction=null;},r=>{r.blockedAction='fold';},r=>{r.transitions[0].blocked=false;}]){const bad=copy(blocked);mutate(bad.instructionNotes.cases['pocket-note'].runs[0]);assert.equal(I.validInstructions(bad.instructionNotes),false);}
+const historical=copy(outcomes),historicalRun=historical.instructionNotes.cases['pocket-note'].runs[0];
+historicalRun.startingScene={note:'inside',envelope:'open'};historicalRun.transitions[0].before=copy(historicalRun.startingScene);historicalRun.requestFulfilled=false;historicalRun.description='Earlier recorded outcome.';historicalRun.transitions[0].wording='Earlier recorded instruction.';valid(historical);
+assert.equal(view(historical).run.requestFulfilled,false,'saved outcome is not recalculated under current rules');
 // Actual arrivals update sticky familiarity without altering snapshots or allocating a missing root.
 const arrivals={};I.setInstructionPage(arrivals,'post','plan');const arrivalsRoot=arrivals.instructionNotes;
 assert.equal(arrivalsRoot.cases['welcome-table'].seen,false);I.chooseInstructionCase(arrivals,'loft','welcome-table');
