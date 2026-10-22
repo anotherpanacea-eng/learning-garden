@@ -10,3 +10,5 @@
 | [Willow Path](../specs/proposed/willow-path.md) | No bounded wording correction was needed. Its status now records this Codex pass without implying that the source-paper audit or independent content review is complete. |
 
 All four remain proposal drafts. Independent content review, the relevant source audits and a separate Claude follow-up review are pending. The Library pack also waits for its separately reviewed saved-Paris-visit repair before build. The phonics/audio and rights gates in the existing roadmap are unaffected. No implementation or learner-outcome claim follows from this document review.
+
+Claude follow-up at `b224f3b` cleared Library, Field kit and Willow at their bounded specification scopes. Its three Town findings are addressed in the next revision: pin both frozen apparatus models, choose/freeze the next distinct share count deterministically, and disclose cap trimming only on an explicit Start. Final Town follow-up remains pending. No source audit or implementation is implied.

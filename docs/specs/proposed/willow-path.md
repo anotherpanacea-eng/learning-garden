@@ -35,7 +35,7 @@ A **turn** is one spin, then stepping the active token one square per tap:
 
 1. **Spin.** A native button shows the result.
 2. **Step.** A native button labelled "Step to 4" names the next square number and advances one square per tap until the spun amount is used. The track highlights the current square and its numeral. The number is spoken only if narration is on.
-3. **Turn passes.** It passes automatically when the steps are used or the token arrives at 10, whichever comes first, with a visible line ("Lantern's turn"). Turns alternate only among tokens that haven't arrived. Once one token is at the bridge, every remaining turn goes to the other until it arrives too. Its line says so ("Leaf is at Willow Bridge. Lantern keeps walking."). Solo mode follows the same rule; the one player moves whichever token is still walking.
+3. **Turn passes.** It passes automatically when the steps are used or the token arrives at 10, whichever comes first, with a visible line ("Lantern's turn"). Reset `spin` to null as the turn passes. Turns alternate only among tokens that haven't arrived. Once one token is at the bridge, every remaining turn goes to the other until it arrives too. Its line says so ("Leaf is at Willow Bridge. Lantern keeps walking."). Solo mode follows the same rule; the one player moves whichever token is still walking.
 
 The token never jumps; it always travels one numbered square at a time. This is the counting-on action from the studied design, so the step button must show the number of the square it moves *to*, not a running count of steps taken. That keeps the child saying "four, five" rather than "one, two".
 

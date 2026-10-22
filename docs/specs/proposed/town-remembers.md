@@ -25,9 +25,9 @@ Each of the three games adds one **optional** field to *newly* kept records: `ke
 **Gap rule:** an artefact is eligible once today's local day is later than its `keptDay`, or when `keptDay` is absent. There is no expiry and no "overdue". Changing the device clock can make an errand appear early or late; that is harmless.
 
 **Form eligibility comes only from the snapshot's own frozen values,** never from the case's targets or today's catalogue. A snapshot that fits no form is simply skipped: nothing is written to it, it isn't marked used, and the learner sees no message about it.
-- **Tray forms** require the snapshot's frozen source to say `unit: 'mL'`, `baseGuests: 2`, `base['cloud-water']: 100` and `base['star-water']: 150`. Their hardcoded version-1 questions and feedback apply only to that base. The frozen portions must then be exactly *c*×100 mL cloud-water and *c*×150 mL star-water, with *c* from 1 to 3. *c* comes from the portions, not the case's planned copies. A different frozen base or unit, empty, partial or mismatched jars are skipped.
+- **Tray forms** require the snapshot's frozen source to say `modelId: 'whole-batches-v1'`, `revision: 1`, `unit: 'mL'`, `baseGuests: 2`, `base['cloud-water']: 100` and `base['star-water']: 150`. That model revision pins the 500 mL jar capacity. The hardcoded version-1 questions and feedback apply only to that model and base. The frozen portions must then be exactly *c*×100 mL cloud-water and *c*×150 mL star-water, with *c* from 1 to 3. *c* comes from the portions, not the case's planned copies. A different frozen base or unit, empty, partial or mismatched jars are skipped.
 - **Share forms** need frozen cuts that divide the snapshot's frozen whole into *n* pieces of equal width, with *n* in {2, 3, 4, 6}. `share-buns` also needs exactly one selected piece. Unequal cuts, or a different number of selected pieces, are skipped.
-- **Jug forms** use one frozen portion *a* (cloud-water first, then star-water) with 50 ≤ *a* ≤ 450. Empty (0 mL) and full (500 mL) readings are skipped, so every scale distractor below stays in range.
+- **Jug forms** require the frozen kitchen source's apparatus to say `unit: 'mL'`, `jarCapacity: 500`, `jugCapacity: 500` and `transfer: 50`. They use one frozen portion *a* (cloud-water first, then star-water) that is a multiple of 50 with 50 ≤ *a* ≤ 450. Empty (0 mL) and full (500 mL) readings are skipped, so every scale distractor below stays in range.
 
 **Artefact identity** needs no record id, which none of the three schemas has. Use the kind, case id and a fixed-order tuple of saved primitive values: tray `[cloud-water portion, star-water portion]`; loaf `[whole id, whole width, cuts in order, selected piece indices in order]`; kitchen `[cloud-water portion, star-water portion]`. Keep tuple boundaries and lengths distinct when comparing keys. No generic JSON canonicalizer or new persisted fingerprint is needed.
 - Replacing a case's snapshot with **different** values creates a new artefact.
@@ -44,10 +44,12 @@ Six errand forms, two per source. Every number comes from the kept artefact, so 
 | --- | --- | --- | --- |
 | `trays-reverse` | kept tray whose frozen jars hold exactly *c* complete batches (1–3) | Purl holds the two jars from that tray, showing *c*×100 mL and *c*×150 mL: "How many guests can these jars serve?" The unknown moves from the jars to the guests. | Choose a guest count from three supplied options: 2*c*, *c* and 2*c*+1. |
 | `trays-shortcut` | as above, with *c* = 1 or 2 | Wisp goes from *c* to *c*+1 copies by adding 100 mL to *both* jars: "Is that one more whole batch?" | Judge the move. One choice explains the additive error (a batch adds 100 mL *and* 150 mL), one accepts the shortcut, and one rejects it for a wrong reason ("the jars would overflow"; at most 300 and 400 mL, both under 500, so the evidence rules it out). |
-| `share-compare` | kept loaf cut into *n* equal pieces (2, 3, 4 or 6) | Clover cuts **the same loaf** into *m* shares, a different count from the pack (*m* ≠ *n*): "Is one of my shares bigger or smaller than one of yours?" | Choose bigger, smaller or "can't tell". "Can't tell" is wrong for an evidence-specific reason: the loaf is stated to be the same whole. |
+| `share-compare` | kept loaf cut into *n* equal pieces (2, 3, 4 or 6) | Clover cuts **the same loaf** into *m* shares, the next count *m* in the cyclic list [2, 3, 4, 6] after *n* (so 6 wraps to 2): "Is one of my shares bigger or smaller than one of yours?" | Choose bigger, smaller or "can't tell". "Can't tell" is wrong for an evidence-specific reason: the loaf is stated to be the same whole. |
 | `share-buns` | kept loaf cut into *n* equal pieces with exactly one selected (every eligible *n* divides 12) | Ember packs the same fraction of the 12-bun basket: "How many buns is that?" The representation changes from a length to a set. | Choose 12/*n* from three supplied counts. The distractors are *n* (share count taken as bun count) and 1 (one share taken as one bun), which are distinct from 12/*n* for every *n* in {2, 3, 4, 6}. |
 | `jug-coarser` | kept portion *a*, 50 ≤ *a* ≤ 450 | Wisp's spare jug is marked every 100 mL with unnumbered midpoints, holding the same *a* mL. "Read my jug." | Choose the amount. Distractors are the nearest 100 mL mark strictly below *a* and the nearest strictly above it. Both are always within 0–500 mL and distinct from *a*. |
 | `jug-more` | kept portion *a*, 50 ≤ *a* ≤ 450 | Purl needs a round amount *t*, the next multiple of 100 above *a*: "How much more do I pour to reach *t*?" This is counting on, not reading. | Choose *t*−*a* from three supplied amounts. Distractors are *t* (the target taken as the pour) and *t*−*a*+50 (counting one interval too many; when that equals *t*, which happens only at *a* = 50, use *t*−*a*+100). All three are then distinct for every *a*. |
+
+At **Start**, freeze the chosen *m* and both share counts in the errand; resuming never chooses *m* again.
 
 A form is offered only when the snapshot meets its eligibility rule above (for example `trays-shortcut` needs *c* ≤ 2, and `share-buns` needs one selected equal piece). Following [AGENTS.md](../../../AGENTS.md):
 - authored option orders vary the fitting choice's position across forms, and each saved errand keeps its order;
@@ -87,8 +89,8 @@ Help offers one worked example built on a *different* artefact value than the le
 
 Optional root `townRemembers: {version: 1, rotation, used, errands}`:
 - `rotation` is the source kind of the most recently started errand, or null.
-- `used` holds artefact keys (kind, case id and value fingerprint, as defined above). It is bounded to the 48 most recent; trimming it can only let an old artefact return, which is harmless.
-- `errands` holds at most 12 readable errands. Each errand carries:
+- `used` holds artefact keys (kind, case id and fixed-order value tuple, as defined above). It is bounded to the 48 most recent; trimming it can only let an old artefact return, which is harmless.
+- `errands` holds at most 12 readable errands. Before Start would create a thirteenth, the card discloses that the oldest kept or set-aside errand will be removed (lowest saved errand id). Only that explicit Start trims it. Never trim on render or remove an open errand; finish or set aside the current open errand before another can start. Each errand carries:
   - a positive safe id;
   - its form id;
   - a **frozen copy** of every artefact value and label it uses, so the errand never re-reads the source game;
@@ -118,7 +120,7 @@ No runtime graph change.
 Independent specification and content review must check all six forms across every artefact value they can receive:
 - *c* from 1 to 3;
 - *n* in {2, 3, 4, 6} with every *m* ≠ *n*;
-- every kitchen amount the source can keep.
+- every kitchen amount the source can keep, plus unsupported apparatus revisions and non-50-mL values that must remain ineligible.
 
 Check that each form's fitting answer, distractors and feedback are correct and that no distractor is cautious without an evidence-specific reason. Resolve findings before build; then independent implementation review, root browser verification and a draft PR. No merge or deployment.
 
@@ -127,7 +129,8 @@ Tests:
 - **Eligibility:** skip a tray with any changed frozen base constant, empty, partial and mismatched trays, unequal or wrongly selected loaves, and 0 or 500 mL portions, without writing to them. Check jug distractors numerically for every eligible *a*.
 - **Identity:** a replaced snapshot with new values becomes a new artefact; a re-keep of identical values does not. Legacy snapshots get keys too. Check fixed tuple boundaries so distinct values cannot collide.
 - **Selection:** rotation and skipping, oldest-first with saved case-id tie-break, one card at a time, used-once, `used` trimming, and purity (no state change on render).
-- **Exact-once:** Start, Set aside and Keep.
+- **Exact-once:** Start, Set aside and Keep. At the cap, disclose and remove only the oldest finished errand on Start; preserve an open errand and never trim on view.
+- **Share comparison:** all four *n* values choose the next distinct cyclic *m*, both counts freeze on Start and remain unchanged after reload.
 - **Frozen values:** frozen artefact values survive changes to source-game content and to the source record itself (deleted or replaced kept work).
 - **Recovery:** unknown form ids and raw siblings, plus per-errand recovery.
 - **Source games:** each game's kept records still load with and without `keptDay`, and their own outcomes, stock and suggestions are untouched.
