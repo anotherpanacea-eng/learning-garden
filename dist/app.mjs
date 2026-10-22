@@ -1,3 +1,4 @@
+import {collectionPage,collectionEntry,bindCollection} from './count-collection-ui.mjs';
 import {hundredthsPage,hundredthsEntry,bindHundredths} from './hundredths-ui.mjs';
 import {tenthsPage,tenthsEntry,bindTenths} from './tenths-ui.mjs';
 import {sortingPage,bindSorting} from './sorting-desk-ui.mjs';
@@ -227,6 +228,7 @@ function render(){
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters',instructionBench=['post','loft'].includes(root)&&slug==='instructions';
   const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return',joiningBench=root==='numbers'&&slug==='join',tenthsBench=root==='numbers'&&slug==='tenths',hundredthsBench=root==='numbers'&&slug==='hundredths';
+  const collectionBench=root==='living'&&slug==='collection';
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',batchBench=root==='cafe'&&slug==='batches',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
@@ -254,7 +256,8 @@ function render(){
   else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state)+fieldKitEntry('weather');}
   else if(sharingBench){exposeStoryFacts({facts:sharingDisplayedFactPairs(state)});save();html=sharingCounterPage(state);}
   else if(rainNotebookBench)html=rainNotebookPage(state);
-  else if(fieldBench){syncFieldPlantExposure('notebook');save();html=fieldNotebookPage(state);}
+  else if(collectionBench)html=collectionPage(state);
+  else if(fieldBench){syncFieldPlantExposure('notebook');save();html=fieldNotebookPage(state)+collectionEntry();}
   else if(plantBench){syncFieldPlantExposure();const ps=plantStudy(state);if(ps){setPlantDay(state,ps.day);save();}html=plantStudyPage(state)+fieldKitEntry('cress');}
   else if(instructionBench)html=renderInstructions(state,root).html;
   else if(letterBench)html=letterPage(state,root,detail)+(root==='post'?fieldKitEntry('notice'):'');
@@ -270,7 +273,7 @@ function render(){
     if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
     else html=orchardPage(state,slug);
   }
-  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}html+=plantStudyEntry()+fieldNotebookEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk'):'');}
+  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}html+=plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk'):'');}
   else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry();
   else if(root==='workshop')html=workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph);
@@ -311,8 +314,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft');
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!hundredthsBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!hundredthsBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!hundredthsBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!hundredthsBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
@@ -383,6 +386,7 @@ function bindBroadExtras(){
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
 function bind(){
+ bindCollection(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target)});
  bindTenths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindSorting(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
