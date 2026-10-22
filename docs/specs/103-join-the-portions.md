@@ -1,6 +1,6 @@
 # 103 · Join the Portions: same pieces, more on the tray
 
-**Proposed specification and original art; independent root math/content/rendered-art review required before build.** Base public main `5432678b47f091adbd5df72a8f202545709c8415`. [Source and overlap audit](../source-audits/103-join-the-portions.md) · [responsive original mock](assets/103-join-the-portions.html). No runtime, new atlas reference or learning outcome is claimed.
+**Specification/math/content/rendered-art gate cleared after independent review and the focused host-guard fold at `e2b7bae`. A local runtime candidate now requires separate independent implementation and final release review.** Base public main `5432678b47f091adbd5df72a8f202545709c8415`. [Source and overlap audit](../source-audits/103-join-the-portions.md) · [responsive original mock](assets/103-join-the-portions.html). No release, new atlas reference or learning outcome is claimed.
 
 ## The missing action
 
