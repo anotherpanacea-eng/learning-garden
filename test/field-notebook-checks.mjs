@@ -9,6 +9,19 @@ const equal=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const copy=x=>JSON.parse(JSON.stringify(x));
 function selectPair(s,c){for(const id of currentFieldCase(s).work.rows.map(r=>r.observation.id))toggleFieldRow(s,id);for(const id of c.targetIds)toggleFieldRow(s,id);}
 function build(s,c){chooseFieldCase(s,c.id);selectPair(s,c);setFieldQuantity(s,'stem');setFieldUnit(s,'mm');for(const id of c.targetIds)setFieldValue(s,id,plantObservationById(id).stemMm);}
+{
+ const s={},c=FIELD_CASES[0];build(s,c);answerFieldModel(s,'light',1);answerFieldDraft(s,'same');keepFieldDraft(s);
+ // Recorded under an earlier key with a different comparison and difference.
+ const w=s.fieldNotebook.cases[c.id];
+ for(const entry of [w.checks[0],w.kept.checks.model])entry.result={...entry.result,answer:'light',difference:1,comparisonCorrect:true,differenceCorrect:true,feedback:'Earlier model feedback'};
+ const serialized=JSON.stringify(s),loaded=JSON.parse(serialized);
+ check(fieldNotebook(loaded),'an unchanged save under an earlier model answer key still loads');
+ equal(currentFieldChecks(loaded).model.result,w.checks[0].result,'recorded model outcome retained despite today\'s key');
+ equal(currentFieldCase(loaded).work.kept,w.kept,'kept draft and recorded outcome retained');
+ equal(JSON.stringify(loaded),serialized,'loading never regrades or rewrites saved work');
+ const badDraft=copy(loaded);badDraft.fieldNotebook.cases[c.id].checks[1].result.answer='first';badDraft.fieldNotebook.cases[c.id].checks[1].result.correct=false;equal(fieldNotebook(badDraft),null,'draft answer must still agree with its own saved bar counts');
+ for(const field of ['comparisonCorrect','differenceCorrect']){const bad=copy(loaded);bad.fieldNotebook.cases[c.id].checks[0].result[field]=false;equal(fieldNotebook(bad),null,'flags must agree with their own saved answers');}
+}
 check(FIELD_CASES.length===8&&new Set(FIELD_CASES.map(c=>c.id)).size===8,'eight finite stable cases');
 for(const c of FIELD_CASES){
  const pair=c.targetIds.map(plantObservationById);check(pair.every(r=>r.day===c.day&&r.specimen===c.specimen),'requested exact day/specimen');equal(pair.map(r=>r.condition),['light','dim'],'one per condition');equal(c.difference,Math.abs(pair[0].stemMm-pair[1].stemMm),'derived absolute difference');

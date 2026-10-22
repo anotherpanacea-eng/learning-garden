@@ -19,6 +19,15 @@ import {recipeJugArt} from '../dist/measuring-recipes-art.mjs';
 import {destinationNotes} from '../dist/notebook-sections.mjs';
 let checks=0;const ok=(v,m)=>{assert.ok(v,m);checks++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;};
 const fresh=()=>initializeExplorerState(freshState());
+{
+ const s=fresh();chooseRecipe(s,'lantern-supper');fillRecipeJug(s);keepRecipe(s);chooseRecipe(s,'welcome-broth');setRecipeReading(s,'50');checkRecipeReading(s);keepRecipe(s);setRecipePage(s,'keep');s.measuringRecipes.cases['welcome-broth'].feedback.reading=false;
+ const readings=w=>[w.reading,w.checks[0].reading,w.kept.reading,w.kept.latestReading.reading];
+ for(let index=0;index<4;index++)for(const value of [undefined,null,17,[],{toString:null}]){
+  const payload=JSON.parse(JSON.stringify(s));readings(payload.measuringRecipes.cases['welcome-broth'])[index].text=value;const loaded=JSON.parse(JSON.stringify(payload)),raw=JSON.stringify(loaded);
+  eq(recipeState(loaded),null,'saved reading text must already be a string');ok(measuringRecipesPage(loaded).includes('An earlier recipe notebook is kept'),'malformed JSON text renders recovery');eq(JSON.stringify(loaded),raw,'recovery view preserves raw text');
+  ok(recoverRecipes(loaded));eq(loaded.measuringRecipes.cases,{'lantern-supper':s.measuringRecipes.cases['lantern-supper']},'recovery drops only unreadable recipe');eq(loaded.measuringRecipes.recovered,JSON.parse(raw).measuringRecipes,'unreadable recipe retained');chooseRecipe(loaded,'lantern-supper');ok(measuringRecipesPage(loaded).includes('Lantern supper'),'other recipe remains open');
+ }
+}
 for(const c of RECIPE_CASES){const s=fresh();chooseRecipe(s,c.id);setRecipeReading(s,'2-');setRecipeUnit(s,'g');fillRecipeJug(s);for(const page of ['measure','tray','keep']){setRecipePage(s,page);const raw=JSON.stringify(s),html=measuringRecipesPage(s);ok(html.includes(c.purpose)&&html.includes(`${c.targets['cloud-water']} mL`)&&html.includes('Measuring jug'),'each turn retains request and apparatus');eq(JSON.stringify(s),raw,'render creates no answer/support');const imported=prepareProgressImport(raw);ok(imported.ok,'case/page imports');eq(imported.state.measuringRecipes,s.measuringRecipes,'raw draft/source/page exact');}keepRecipe(s);eq(prepareProgressImport(JSON.stringify(s)).state.measuringRecipes,s.measuringRecipes,'unfinished kept draft transfers');}
 {
  const s=fresh();nextGuest(s);adjustBite(s,ingredients[0].id,1);startPostOffice(s,deliveries[0].id);startShow(s,'welcome');setSceneDialogue(s,'A fictional measuring show.');drawLetter(s,'post');chooseSharingCase(s,'quarter-basket');shareSharingRound(s);chooseRainCase(s,'space-12');nextRainPhase(s);const before=structuredClone(s);delete before.measuringRecipes;
