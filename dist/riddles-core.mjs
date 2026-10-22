@@ -11,7 +11,7 @@ const fresh=()=>({version:1,size:'any',met:[],current:null,log:[]});
 const uniqueCodes=(xs,n)=>Array.isArray(xs)&&xs.length===n&&xs.every(code)&&new Set(xs).size===n;
 
 export function validRiddleSource(s){
- if(!object(s)||!code(s.id)||!text(s.prompt)||!code(s.answer)||!Array.isArray(s.choices)||s.choices.length!==3||!text(s.clue)||!text(s.why)||!object(s.place)||!text(s.place.label)||typeof s.place.href!=='string'||!/^#[a-z][a-z0-9/-]{0,80}$/.test(s.place.href))return false;
+ if(!object(s)||!code(s.id)||!text(s.prompt)||!code(s.answer)||!Array.isArray(s.choices)||s.choices.length!==3||!text(s.clue)||!text(s.why)||(s.place!==null&&(!object(s.place)||!text(s.place.label)||typeof s.place.href!=='string'||!/^#[a-z][a-z0-9/-]{0,80}$/.test(s.place.href))))return false;
  const codes=s.choices.map(x=>x?.code);if(!uniqueCodes(codes,3)||!codes.includes(s.answer)||!s.choices.every(c=>object(c)&&text(c.text)&&(c.code===s.answer?c.nudge===null:text(c.nudge))))return false;
  try{return bytes(JSON.stringify(s))<=16384;}catch{return false;}
 }
@@ -27,9 +27,9 @@ export function riddleState(state){return !own(state,'riddles')?fresh():validRid
 export function riddleView(state){const r=riddleState(state);if(!r)return {status:'recovery',root:state.riddles};const met=r.met.filter(code),logs=r.log.filter(x=>validRiddleFinished(x)||validRiddleLegacyLog(x)),current=r.current===null?null:validRiddleCurrent(r.current)?r.current:null;return {status:own(state,'riddles')?'ready':'absent',root:r,met,logs,current,unavailableCurrent:r.current!==null&&current===null,rawMet:r.met.length-met.length,rawLog:r.log.length-logs.length};}
 function change(state,fn){const r=riddleState(state);if(!r)return false;const result=fn(r);if(result===false)return false;state.riddles=r;return result;}
 export const riddleById=id=>riddles.find(x=>x.id===id)||null;
-export function riddleSource(card){const p=riddlePlaces[card.place];return {id:card.id,prompt:card.prompt,answer:card.answer,choices:copy(card.choices),clue:card.clue,why:card.why,place:{href:p.href,label:p.label}};}
+export function riddleSource(card){const p=riddlePlaces[card.place];return {id:card.id,prompt:card.prompt,answer:card.answer,choices:copy(card.choices),clue:card.clue,why:card.why,place:p?{href:p.href,label:p.label}:null};}
 export function openRiddle(state){const v=riddleView(state),c=v.root?.current;if(c===null||c===undefined)return null;if(!v.current)return {current:c,card:null};const card=c.source;return {current:c,card,choices:c.order.map(x=>card.choices.find(ch=>ch.code===x))};}
-export function poolFor(size){return riddles.filter(x=>size==='any'||x.band===size);}
+export function poolFor(size){return riddles.filter(x=>size==='any'||(size==='spanish'?x.strand==='spanish':x.band===size));}
 export function chooseSize(state,size){return change(state,r=>{if(!sizes.includes(size))return false;r.size=size;return true;});}
 function shuffled(xs,random){const a=[...xs];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));if(!Number.isSafeInteger(j)||j<0||j>i)return null;[a[i],a[j]]=[a[j],a[i]];}return a;}
 function draw(r,random){const pool=poolFor(r.size),c=r.current;if(!pool.length)return false;const at=c?.id?pool.findIndex(x=>x.id===c.id):-1,rotated=[...pool.slice(at+1),...pool.slice(0,at+1)];const met=r.met.filter(code);const card=rotated.find(x=>!met.includes(x.id)&&x.id!==c?.id)||rotated.find(x=>x.id!==c?.id)||rotated[0],source=riddleSource(card),order=shuffled(source.choices.map(ch=>ch.code),random);if(!order||!validRiddleSource(source))return false;r.current={id:card.id,source,order,picks:[],clue:false,outcome:null};if(!met.includes(card.id))r.met.push(card.id);return card.id;}

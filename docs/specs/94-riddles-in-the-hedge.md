@@ -14,7 +14,7 @@ Status: **reviewed repair amendment, implemented in an unmerged, undeployed draf
 
 ## Cards and challenge bands
 
-18 original cards in `dist/riddles-content.mjs`, six per authoring band, spread over the math, reading, science, world and French strands. Every card has exactly three choices, one fitting.
+24 original cards in `dist/riddles-content.mjs`, six per authoring band, spread over the math, reading, science, world and French strands. Every card has exactly three choices, one fitting.
 
 | Band (authoring label) | Child-facing card choice | Shape |
 |---|---|---|
@@ -22,7 +22,7 @@ Status: **reviewed repair amendment, implemented in an unmerged, undeployed draf
 | `seedling` | Riddles with more clues | Combine clues, a homophone, early fractions, a first French word |
 | `sapling` | Wordplay riddles | Double meanings, two-condition number riddles, a French false friend |
 
-This follows the [challenge-bands proposal](proposed/challenge-bands.md): bands describe tasks, never the child, and every card stays open. The card choice is a local, saved, explicit control (`riddles.size`: `any | sprout | seedling | sapling`, default `any`). It does not read `garden.start`; a later reading-strand shortcut can map onto it without migrating saved work. Changing the choice never alters the card that is out.
+This follows the [challenge-bands proposal](proposed/challenge-bands.md): bands describe tasks, never the child, and every card stays open. The card choice is a local, saved, explicit control (`riddles.size`: `any | sprout | seedling | sapling | spanish`, default `any`). It does not read `garden.start`; a later reading-strand shortcut can map onto it without migrating saved work. Changing the choice never alters the card that is out.
 
 ## Saved work
 
@@ -55,3 +55,10 @@ Jane `LESSONS.md` was refreshed at `60d864fb9004d7090c7ea2f595f679b35bc566ad` on
 ## Checks
 
 `node test/riddles-checks.mjs` must cover card integrity, no em-dashes in child copy, no allocation on view, frozen source/order across reload and catalog edits, varied fitting positions, miss/clue/shown/put-back outcomes, count-preserving completed-current→log transition, band choice and rotation, a legacy code-only current, raw current confirmation, mixed readable/legacy/raw logs, an unsupported root, and unchanged raw siblings through import and download. Exercise an importable near-5MiB actual report that refuses a new card or pick atomically. `test/riddles-browser.js` must cover phone/tablet layout, 44px controls, focus, actual file import/download, stale route/explorer controls, a canceled and used recovery confirmation, no horizontal overflow and truthful notes. Local checks do not establish physical iPad/Safari behavior or learning effects.
+
+
+## Concurrent Spanish content
+
+Preserve the six Spanish cards added on Claude head962c3f5 and its Spanish strand choice. Spanish filtering uses the strand, while the shorter/longer authoring choices continue to use the band. Cards without a built destination freeze `place:null`, are valid on their own source and show no invented destination link. English browser narration is approximate for these words; this is playful vocabulary, not a Spanish-reading or pronunciation assessment.
+
+The `libreria` card uses its explicit buying-books clue. Its explanation qualifies *librería* as a bookshop in this context and says *biblioteca* is usual for a library; do not call the words categorical false friends, since the [RAE/ASALE dictionary](https://dle.rae.es/librer%C3%ADa) also records a library/book-collection sense. Keep all concurrent cards and harmless historical met-list entries; the repair already admits long/mixed met histories without today's-count limits.

@@ -6,7 +6,8 @@ export const riddleSizes=[
  {id:'any',label:'Any riddle'},
  {id:'sprout',label:'Short riddles'},
  {id:'seedling',label:'Riddles with more clues'},
- {id:'sapling',label:'Wordplay riddles'}
+ {id:'sapling',label:'Wordplay riddles'},
+ {id:'spanish',label:'Spanish riddles'}
 ];
 export const riddlePlaces={
  science:{href:'#science',label:'Visit the Water Lab'},
@@ -109,7 +110,37 @@ export const riddles=[
  card('chat','sapling','french','In French, chat is not talking. A chat says meow. What is a chat?','cat',[
   ['dog','A dog','A dog in French is un chien.'],
   ['cat','A cat',null],
-  ['parrot','A parrot','A parrot can talk, but it does not say meow.']
- ],'Listen to the riddle again. What says meow?','Chat is the French word for cat. It looks like an English word, but it means something different.','french')
+  ['parrot','A parrot','In French, a parrot is un perroquet. Chat is a different animal.']
+ ],'Listen to the riddle again. What says meow?','Chat is the French word for cat. It looks like an English word, but it means something different.','french'),
+ card('sol','sprout','spanish','In Spanish, I am called el sol. I shine in the sky in the daytime. What am I?','sun',[
+  ['moon','The moon','The moon is la luna, and it shines at night.'],
+  ['sun','The sun',null],
+  ['cloud','A cloud','A cloud is una nube, and it does not shine.']
+ ],'Sol sounds a little like solar, like solar panels that catch sunlight.','El sol means the sun. In Spanish, many nouns come with el or la in front.',null),
+ card('tres','sprout','spanish','Uno, dos... I come next! Which Spanish number am I?','tres',[
+  ['cuatro','cuatro','Cuatro means four. It comes right after the number you need.'],
+  ['diez','diez','Diez means ten. That is much farther along.'],
+  ['tres','tres',null]
+ ],'Count in English: one, two...','Uno, dos, tres means one, two, three.',null),
+ card('manzana','seedling','spanish','I am una manzana. I am red or green, I grow on a tree, and I can go in a pie. What am I?','apple',[
+  ['apple','An apple',null],
+  ['banana','A banana','A banana is un plátano, and it is yellow.'],
+  ['carrot','A carrot','A carrot grows under the ground, not on a tree.']
+ ],'Think of a red fruit with a crunch.','Manzana means apple.',null),
+ card('gracias','seedling','spanish','People say me in Spanish when someone helps them. I mean thank you. Which word am I?','gracias',[
+  ['hola','hola','Hola means hello.'],
+  ['gracias','gracias',null],
+  ['adios','adiós','Adiós means goodbye.']
+ ],'I sound a little like grateful.','Gracias means thank you. Someone might answer de nada, which means you are welcome.',null),
+ card('perro','sapling','spanish','In Spanish, I am el perro. I wag my tail, and I say guau. What am I?','dog',[
+  ['cat','A cat','A cat is el gato, and it says miau.'],
+  ['horse','A horse','A horse is el caballo, and it neighs. It never says guau.'],
+  ['dog','A dog',null]
+ ],'Say guau out loud. What animal sounds like that?','Perro means dog. In Spanish, dogs say guau, the way English dogs say woof.',null),
+ card('libreria','sapling','spanish','In Spanish, la librería looks like library, but you buy your books there. What is it?','bookshop',[
+  ['bookshop','A bookshop',null],
+  ['library','A library','Here the clue is buying books. A lending library is usually called la biblioteca.'],
+  ['bakery','A bakery','A bakery is la panadería. You buy bread there, not books.']
+ ],'Where do you pay for a new book?','In this riddle, la librería means a bookshop: the buying clue tells us. Biblioteca is the usual word for a library; words can have more than one meaning.',null)
 ];
 export const ownRiddle='Make up your own riddle. Pick something in the garden. Give one clue about how it looks and one about what it does. Then ask: what am I?';

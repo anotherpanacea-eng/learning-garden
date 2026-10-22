@@ -17,12 +17,14 @@ for(const r of riddles){
  assert.equal(r.choices.length,3,r.id);assert.equal(new Set(r.choices.map(c=>c.code)).size,3,r.id);
  assert.equal(r.choices.filter(c=>c.code===r.answer).length,1,r.id);
  for(const c of r.choices)assert.equal(c.code===r.answer?c.nudge===null:typeof c.nudge==='string'&&c.nudge.length>0,true,`${r.id}:${c.code}`);
- assert.ok(riddlePlaces[r.place],r.id);
+ assert.ok(r.place===null||riddlePlaces[r.place],r.id);
 }
 for(const band of ['sprout','seedling','sapling'])assert.ok(poolFor(band).length>=5,band);
 assert.doesNotMatch(JSON.stringify([riddles,riddleSizes,riddlePlaces,ownRiddle]),/—/);
 assert.match(byId('rain').clue,/gray/);assert.match(byId('map').prompt,/one folded sheet/);
 assert.match(byId('caterpillar').prompt,/butterfly emerges/);assert.doesNotMatch(byId('caterpillar').prompt,/as a butterfly caterpillar/);
+assert.deepEqual(poolFor('spanish').map(r=>r.strand),Array(6).fill('spanish'),'Spanish card choice shows only Spanish riddles');
+{const s=freshState();chooseSize(s,'spanish');nextRiddle(s,seeded());assert.equal(riddleById(s.riddles.current.id).strand,'spanish');assert.doesNotMatch(riddlesPage(s),/class="secondary" href="#/,'no place link until the garden has a Spanish destination');}
 
 // Viewing and hearing the invitation do not create a root.
 {
@@ -128,4 +130,12 @@ for(const raw of [{version:2},[],'text']){
  const larger=copy(s);delete larger.extra;assert.deepEqual(commitRiddles(larger,c=>pickChoice(c,wrong),actualExport),{fits:false});
  assert.equal(prepareProgressImport(report(larger)).ok,true);
 }
+// Long histories, including retired ids, stay readable after another draw.
+{
+ const s=freshState();s.riddles={version:1,size:'any',met:Array.from({length:250},(_,i)=>`old-${i}`),current:null,log:[]};
+ assert.ok(validRiddles(s.riddles));assert.ok(nextRiddle(s,seeded()));assert.equal(s.riddles.met.length,251);assert.ok(validRiddles(s.riddles),'a successful draw leaves the notebook readable');
+ assert.match(riddlesPage(restoreStateResult(JSON.stringify(s)).state),/riddle-prompt/);
+}
+
+function riddleById(id){return riddles.find(r=>r.id===id);}
 console.log('Riddles in the Hedge checks passed.');
