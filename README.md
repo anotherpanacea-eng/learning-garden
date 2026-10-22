@@ -455,3 +455,14 @@ Run `node test/garden-paving-checks.mjs`. With `dist` served locally, run `PAVIN
 The optional `#living/movement` bench, linked from Body Clues, lets a learner step separate land-snail and earthworm picture models forward and backward, then compare a muscular foot with a changing ringed body and tiny bristles. The diagrams are simplified teaching art, not a real animal observation or a speed comparison. The bench keeps no learner response or new progress record; earlier Body Clues picture-key trails retain their own saved sources. See [spec97](docs/specs/97-body-movement-bench.md), its [source audit](docs/source-audits/97-body-movement-bench.md) and the [internal review receipt](docs/reviews/97-body-movement-review.md).
 
 Run `node test/body-clues-checks.mjs`, `node test/body-clues-integration-checks.mjs` and `node test/progress-transfer-checks.mjs` for the adjacent saved-work boundaries. A temporary local Chrome probe checked the movement controls at 320 and 820 CSS pixels; the [receipt](docs/reviews/97-body-movement-review.md) gives its scope and limits. The [current roadmap](docs/roadmap.md) tracks merge and publication status separately.
+
+Lantern Circuit Bench at `#workshop/lantern` offers four open screen-model cards. Add or remove four labelled connections, compare a path through two different bulb contacts, and keep an open, glowing or paused arrangement. A wire-only bypass pauses the model; it predicts no physical current, heat or brightness. Learn, Connect and Kept stay open. See [spec98](docs/specs/98-lantern-circuit-bench.md) and its [source audit](docs/source-audits/98-lantern-circuit-bench.md).
+
+Run `node test/lantern-circuit-checks.mjs`; with `dist` served locally and Playwright installed, run `CIRCUIT_TEST_URL=http://127.0.0.1:4173/ node test/lantern-circuit-browser.js`. `PLAYWRIGHT_MODULE`, `CHROME_PATH` and optional `CIRCUIT_ARTIFACTS` select local dependencies and temporary screenshots. The [current roadmap](docs/roadmap.md) tracks publication status.
+
+
+## Ribbon Recut Table
+
+At `#workshop/recut`, add and remove dividing marks while one whole ribbon, its colored length and its flag stay fixed. Five open cases connect halves, thirds and quarters with smaller equal units. This is a transient supplied teaching model: it creates no saved response or attainment record, and existing Fraction Trail, Same Amount, New Cuts and Lantern work stays separate. See [spec100](docs/specs/100-ribbon-recut-table.md), the [source audit](docs/source-audits/100-ribbon-recut-table.md) and [review receipt](docs/reviews/100-ribbon-recut-review.md). The [current roadmap](docs/roadmap.md) tracks publication separately.
+
+Run `node test/ribbon-recut-checks.mjs`; the optional `node test/ribbon-recut-browser.js` uses `RECUT_TEST_URL` for a local `dist` server and installed Playwright/Chrome through the existing browser-test environment variables. Local checks do not establish physical-device behavior or learning gains.
