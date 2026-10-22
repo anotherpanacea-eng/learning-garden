@@ -1,0 +1,7 @@
+# Independent review of text PRs66 and72
+
+PR66 exact head `5ddf22280c89cf70d1f5e32307ca9a09c07398c1` received full independent Claude approval with no P1/P2. The earlier narrow choice/index repair remains in place. Optional old help/solution/talk fields can produce empty helper boxes; that nonblocking presentation follow-up was left outside this review fix.
+
+Full independent review of PR72 `d4bcea7` found three introduced issues: generic shape names paired with special symmetry counts, legacy Bramble saved tasks closing after a wording change, and a new spoken `say` field invalidating paused broad questions. The revised full candidate `bb5972d` cleared those repairs; review then found unsupported archive wording about service resuming “line by line.” Final focused candidate `d8a815333a4c64f1368f6f5848b9a2026a481f73` removes that unsupported detail and corrects two nearby factual caption/scene mismatches. Independent Claude approved it. This later receipt commit changes documentation only.
+
+All source-check modules passed after the substantive repairs. Final focused checks passed948 archive,683 message and402 broad-model assertions. Local Chrome probes covered mobile text disclosure, changed Archive source wording/answers/reload, and real reload of a repaired legacy Bramble save. This is synthetic local browser verification, not physical-device or learning-effect evidence. Root separately verifies the composed runtime before merge; deployment remains deferred.

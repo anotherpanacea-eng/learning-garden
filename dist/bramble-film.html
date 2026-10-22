@@ -51,7 +51,7 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 </head>
 <body>
 <div id="stage">
- <canvas id="film" width="1080" height="1080" aria-label="Animated film: Pip the fox and Dot the ladybug fly to Bramble's ribbon gate, count the ribbon bundles, untangle the ribbons, and race Bramble home over the garden"></canvas>
+ <canvas id="film" width="1080" height="1080" role="img" aria-label="Animated film: Pip the fox and Dot the ladybug fly to Bramble's ribbon gate, count the ribbon bundles, untangle the ribbons, and race Bramble home over the garden"></canvas>
  <button id="start" type="button"><span class="circle"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#183f39"/></svg></span><span class="label">Play with sound</span></button>
 </div>
 <div class="bar"><button id="toggle" type="button" disabled>Pause</button><div class="track" aria-hidden="true"><i id="prog"></i></div><span class="time" id="time">0:00 / 0:31</span></div>
@@ -406,7 +406,7 @@ function paint(t){
  bundles(t);
  sparkles(BX-40,BY-40,t,16.75,10,60);
  g.restore();
- g.save();g.globalAlpha=1;titleCard(t,27.6,'Through the Ribbon Gate',"BRAMBLE'S CHALLENGE");g.restore();
+ g.save();g.globalAlpha=1;titleCard(t,27.6,'Through the Ribbon Gate','Every ribbon finds its arc');g.restore();
  return {storm:0,flash:0,sun:0.35,rain:0,sunPos:[0.15,0.85]};
 }
 const POSTER=14.6;

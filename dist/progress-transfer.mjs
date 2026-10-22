@@ -31,7 +31,7 @@ export function initializeExplorerState(state){
 // File contents remain local. These limits also bound work before destination restore.
 export function prepareProgressImport(raw){
  const fail=message=>({ok:false,message});
- if(typeof raw!=='string'||new TextEncoder().encode(raw).length>MAX_IMPORT_BYTES)return fail('Choose a notes JSON file smaller than 5 MiB. The original file is unchanged.');
+ if(typeof raw!=='string'||new TextEncoder().encode(raw).length>MAX_IMPORT_BYTES)return fail('Choose a notes JSON file smaller than 5 MB. The original file is unchanged.');
  let source;
  try{source=JSON.parse(raw.replace(/^\uFEFF/,''));}catch{return fail('This file is not readable JSON. Choose the file from “Download our notes” on the old site.');}
  if(!object(source)||!boundedProgressValue(source))return fail('This file has an unsupported or overly complex structure. No progress was changed.');

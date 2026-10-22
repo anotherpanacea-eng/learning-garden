@@ -42,7 +42,7 @@ export const frenchStoryData = [
   },
   {
     id: 'fr-bookstall-map', destination: 'bookstall', title: 'Un autre chemin',
-    invitation: 'A closed gate changes a delivery route. Read the map and choose another way.',
+    invitation: 'A gate is closed. How will Nora get in?',
     passages: {
       1: ['Nora apporte un livre au jardin.', 'La première porte du jardin est fermée.', 'Elle prend le chemin près de la rivière.', 'Ce chemin mène à une autre porte, ouverte.'],
       2: ['Nora apporte un livre au jardin.', 'Mais la première porte du jardin est fermée.', 'Elle regarde sa carte pour trouver un autre chemin.', 'Elle prend le chemin près de la rivière.', 'Ce chemin mène à une autre porte, qui est ouverte.'],
@@ -62,7 +62,7 @@ export const frenchStoryData = [
   },
   {
     id: 'fr-river-scarf', destination: 'river', title: 'L’écharpe du banc',
-    invitation: 'Someone leaves a scarf beside the river. Match a written clue to its owner.',
+    invitation: 'Someone leaves a scarf beside the river. Whose scarf is it? Look for a name.',
     passages: {
       1: ['Mila trouve une écharpe verte sur un banc.', 'Une étiquette porte le nom « Léa ».', 'Léa est près du pont.', 'Mila lui rend l’écharpe.'],
       2: ['Mila trouve une écharpe verte sur un banc près de la rivière.', 'Elle regarde l’étiquette dans l’écharpe.', 'L’étiquette porte le nom « Léa ».', 'Mila voit Léa près du pont.', 'Elle lui rend l’écharpe verte.'],
@@ -102,7 +102,7 @@ export const frenchStoryData = [
   },
   {
     id: 'fr-river-box', destination: 'river', title: 'Le bruit dans la boîte',
-    invitation: 'A mysterious sound comes from a box. Read the evidence before opening it.',
+    invitation: 'Something rattles in a box. What could it be?',
     passages: {
       1: ['Zoé trouve une boîte près du pont.', 'La boîte fait un petit bruit quand elle bouge.', 'Zoé ouvre la boîte.', 'À l’intérieur, une clé touche une cuillère.'],
       2: ['Zoé trouve une boîte près du pont.', 'Quand elle bouge la boîte, elle entend un petit bruit.', 'Elle pose la boîte et le bruit s’arrête.', 'Elle l’ouvre pour regarder à l’intérieur.', 'Elle voit une clé qui touche une cuillère.'],

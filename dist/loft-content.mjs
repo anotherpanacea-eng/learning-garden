@@ -1,4 +1,4 @@
-// Original puppet-theatre invitations and finite language; every combination is welcome.
+// Original puppet-theater invitations and finite language; every combination is welcome.
 export const puppets=[{id:'pip',name:'Pip'},{id:'dot',name:'Dot'},{id:'rabbit',name:'Rabbit'},{id:'kitten',name:'Kitten'},{id:'dragon',name:'Dragon'}];
 export const settings=[{id:'garden',name:'Garden',lead:'In the garden'},{id:'cafe',name:'Café',lead:'At the café'},{id:'bridge',name:'Footbridge',lead:'On the footbridge'},{id:'log',name:'Sheltered log',lead:'Beside the sheltered log'}];
 export const actions=[{id:'finds',name:'Finds',verb:'finds'},{id:'carries',name:'Carries',verb:'carries'},{id:'offers',name:'Offers',verb:'offers'},{id:'plays',name:'Plays with',verb:'plays with'},{id:'wonders',name:'Wonders about',verb:'wonders about'}];

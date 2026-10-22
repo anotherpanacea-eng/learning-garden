@@ -4,7 +4,7 @@ import {parisPacks} from './packs/index.mjs';
 export const parisDestinations = [
   {id:'bookstall',title:'Lucie’s bookstall',description:'Unpack unusual books and follow little notes.',symbol:'📚'},
   {id:'river',title:'The river walk',description:'Notice nearby clues and wonder why things happen.',symbol:'🌊'},
-  {id:'rooftops',title:'The rooftop garden',description:'Find evidence and put a small adventure in order.',symbol:'🌱'}
+  {id:'rooftops',title:'The rooftop garden',description:'Find the words that show it, and put a small adventure in order.',symbol:'🌱'}
 ];
 
 const stories = [
@@ -29,7 +29,7 @@ const stories = [
     },
     tasks:[
       {title:'A comfortable place',readingSkill:'Locate an explicit detail',prompt:'Where does Lucie put the cushion?',choices:['In a basket','On the low table','Inside the book'],answer:1,hint:'Look for Lucie’s action and the place named beside it.',explanation:'The passage says Lucie puts the cushion on the low table for the fox.',talk:'How did you find the place without having to remember the whole passage?',helper:'detail'},
-      {title:'A curtain’s next job',readingSkill:'Work out a word-part meaning',prompt:'What does “reuse” mean here?',choices:['Use again','Use very quickly','Never use'],answer:0,hint:'The passage explains what Dot plans to do with the old curtain.',explanation:'Reuse means use again. The curtain has an old job, and Dot uses it again as a rug. Re- contributes the meaning “again.”',talk:'Can you imagine another useful job for an old curtain?',helper:'wordpart'}
+      {title:'A curtain’s next job',readingSkill:'Work out a word-part meaning',prompt:'What does “reuse” mean here?',choices:['Use again','Use very quickly','Never use'],answer:0,hint:'The passage explains what Dot plans to do with the old curtain.',explanation:'Reuse means use again. The curtain has an old job, and Dot uses it again as a rug. Re- adds “again.”',talk:'Can you imagine another useful job for an old curtain?',helper:'wordpart'}
     ]
   },
   {
@@ -41,7 +41,7 @@ const stories = [
     },
     tasks:[
       {title:'A word beside the water',readingSkill:'Use context to understand vocabulary',prompt:'What does “still” mean when it describes the tray’s water?',choices:['Very deep','Full of paper','Not moving'],answer:2,hint:'Read what the passage says about ripples in the tray.',explanation:'Still means not moving here. The passage explains that no ripples moved across the water.',talk:'Which nearby words helped you decide?',helper:'context'},
-      {title:'Why this little harbor?',readingSkill:'Infer a reason from story details',prompt:'Why did Pip most likely choose the tray instead of the fountain?',choices:['The calmer water was less likely to splash the paper boat','The beetle asked for a larger suitcase','The fountain had no water in it'],answer:0,hint:'Compare the tray’s water with what happens at the fountain.',explanation:'The tray’s water is still, while the fountain splashes. Those clues support choosing calmer water for a paper boat. No request for a suitcase is given, and the fountain has water.',talk:'Which two details did you connect?',helper:'inference'}
+      {title:'Why this little harbor?',readingSkill:'Infer a reason from story details',prompt:'Why did Pip most likely choose the tray instead of the fountain?',choices:['The calmer water was less likely to splash the paper boat','The beetle asked for a larger suitcase','The fountain had no water in it'],answer:0,hint:'Compare the tray’s water with what happens at the fountain.',explanation:'The tray’s water is still, while the fountain splashes. Those clues support choosing calmer water for a paper boat. Nobody asks for a suitcase, and the fountain is full.',talk:'Which two details did you connect?',helper:'inference'}
     ]
   },
   {
@@ -65,7 +65,7 @@ const stories = [
     },
     tasks:[
       {title:'Words that show care',readingSkill:'Find a sentence that supports an idea',prompt:'Which sentence shows an action to keep seeds inside the pouches?',choices:['A sparrow watched from a pot.','Last, Pip tied each pouch tightly shut so no seeds could spill.','Next, Dot added seeds to each pouch.'],answer:1,hint:'Find the action that closes the pouches and prevents spilling.',explanation:'Tying each pouch tightly shut is the action that keeps seeds inside. Watching or adding seeds does not close a pouch.',talk:'Which words connect the knot with keeping the seeds safe?',helper:'evidence'},
-      {title:'Pack the seed parcel',readingSkill:'Sequence events using order words',prompt:'Which order matches the packing in this passage?',choices:['Add seeds → tie pouches → fold paper','Tie pouches → fold paper → add seeds','Fold paper → add seeds → tie pouches'],answer:2,hint:'Follow the actions after First, Next and Last.',explanation:'Lucie folds the paper first. Dot adds seeds next. Pip ties the pouches last.',talk:'Why would tying a pouch before adding its seeds be awkward?',helper:'sequence'}
+      {title:'Pack the seed parcel',readingSkill:'Sequence events using order words',prompt:'Which order matches the packing in this passage?',choices:['Add seeds, then tie pouches, then fold paper','Tie pouches, then fold paper, then add seeds','Fold paper, then add seeds, then tie pouches'],answer:2,hint:'Follow the actions after First, Next and Last.',explanation:'Lucie folds the paper first. Dot adds seeds next. Pip ties the pouches last.',talk:'Why would tying a pouch before adding its seeds be awkward?',helper:'sequence'}
     ]
   },
   {
@@ -77,7 +77,7 @@ const stories = [
     },
     tasks:[
       {title:'An action against the breeze',readingSkill:'Find a sentence that supports an idea',prompt:'Which sentence shows Dot taking action to stop the card blowing away?',choices:['Last, she clipped the card to the rail to stop it blowing away.','First, she folded a card.','Pip waved at a passing pigeon.'],answer:0,hint:'Look for the action that fastens the card to something.',explanation:'The sentence about clipping the card to the rail directly shows how Dot stops it blowing away. Folding makes the card, and waving does not fasten it.',talk:'What does the word “clipped” tell you Dot did?',helper:'evidence'},
-      {title:'Make the little sign',readingSkill:'Sequence events using order words',prompt:'What order does Dot follow?',choices:['Draw the arrow → clip the card → fold it','Fold the card → draw the arrow → clip the card','Clip the card → fold it → draw the arrow'],answer:1,hint:'Track Dot’s actions after First, Next and Last.',explanation:'Dot folds the card first, draws the arrow next, and clips the card last.',talk:'Which order words helped you keep track?',helper:'sequence'}
+      {title:'Make the little sign',readingSkill:'Sequence events using order words',prompt:'What order does Dot follow?',choices:['Draw the arrow, then clip the card, then fold it','Fold the card, then draw the arrow, then clip the card','Clip the card, then fold it, then draw the arrow'],answer:1,hint:'Track Dot’s actions after First, Next and Last.',explanation:'Dot folds the card first, draws the arrow next, and clips the card last.',talk:'Which order words helped you keep track?',helper:'sequence'}
     ]
   }
 ];
@@ -105,7 +105,7 @@ for(const story of stories){
         id,entrance:'paris',type:'task',subject:'Reading',practiceOnly:true,
         parisDestination:story.destination,parisStory:story.id,parisVariant:variant,
         passageId,readingText:story.passages[variant],
-        body:index===0?story.title:'The same passage stays open for another question.',
+        body:index===0?story.title:'The story is still here. Let’s look again.',
         guide:'{guide} says, “We can take our time and return to the words whenever we like.”',
         kind:'choice',...fields,next:index===0?ids[1]:'paris-postcard'
       };

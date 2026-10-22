@@ -50,14 +50,14 @@ export function learningSource(state,source){return source==='living'?gardenSour
 export function connectionPairsShown(state,target){return connectionOffers(state,target).map(c=>[c.a,c.b]);}
 export function connectionOffers(state,target){return connectionSources.filter(k=>k!==target).map(k=>learningSource(state,k)).filter(Boolean);}
 export function connectionAvailability(state,target){
- if(target==='living'){const exists=Object.hasOwn(state,'livingExploration'),s=spiralState(state);if(exists&&!s)return 'An earlier garden search needs its kept notes.';if(s?.current&&!spiralClosed(s.current))return 'Our waiting garden search comes first. Finish it or leave its parcel, then bring this idea.';return '';}
+ if(target==='living'){const exists=Object.hasOwn(state,'livingExploration'),s=spiralState(state);if(exists&&!s)return 'An earlier garden search could not be opened. Grown-ups can find it in the notes.';if(s?.current&&!spiralClosed(s.current))return 'Our waiting garden search comes first. Finish it or leave its parcel, then bring this idea.';return '';}
  if(target==='cafe'){
-  const c=state.cafe;if(!knownCafe(c)||!integer(c.seed,1,2147483646)||!integer(c.nextOrder,0,999999999)||!Array.isArray(c.history)||!object(c.stock)||c.current!==null&&(!cafeOrder(c.current)||!['plate','total','stock','served'].includes(c.current.stage)||typeof c.current.served!=='boolean')||!ingredients.every(a=>integer(c.stock[a.id],0,180))||[...c.history,...(c.current?[c.current]:[])].some(r=>!object(r)||!knownConnection(r,r.params?.guests,r.params?.bites)))return 'An earlier café order needs its kept notes.';
+  const c=state.cafe;if(!knownCafe(c)||!integer(c.seed,1,2147483646)||!integer(c.nextOrder,0,999999999)||!Array.isArray(c.history)||!object(c.stock)||c.current!==null&&(!cafeOrder(c.current)||!['plate','total','stock','served'].includes(c.current.stage)||typeof c.current.served!=='boolean')||!ingredients.every(a=>integer(c.stock[a.id],0,180))||[...c.history,...(c.current?[c.current]:[])].some(r=>!object(r)||!knownConnection(r,r.params?.guests,r.params?.bites)))return 'An earlier café order could not be opened. Grown-ups can find it in the notes.';
   if(c.current&&c.current.stage!=='served')return 'Our guest and plate are waiting. Finish this order, then invite the connected table.';return '';
  }
  if(target==='bramble'){
   const p=state.postOffice;if(p?.version!==1||!validBrambleNotebook(p))return 'Choose a delivery at Willow Post Office first.';const v=p.visits.find(v=>v?.id===p.current);if(!object(v)||v.closed||!validPostVisit(v))return 'Choose a delivery at Willow Post Office first.';
-  if(Object.hasOwn(v,'rival')&&(!validPostRival(v.rival)||!['resolved','continued','bypassed'].includes(v.rival.phase)))return 'Bramble’s current puzzle is waiting. Solve it together, answer it, or take the quiet route first.';return '';
+  if(Object.hasOwn(v,'rival')&&(!validPostRival(v.rival)||!['resolved','continued','bypassed'].includes(v.rival.phase)))return 'Bramble’s puzzle is waiting at the Post Office. Finish it there, or choose “Take the quiet route.”';return '';
  }
  return 'Choose a connected destination.';
 }
