@@ -9,16 +9,18 @@ const fs=require('node:fs/promises');
  const {startVisit,storyDraft,noteStorySeen,openStoryHelp}=await load('garden-core.mjs');
  const {storyNodes}=await load('story-content.mjs'),{helpers}=await load('help-content.mjs');
  const {parisStories}=await load('paris-library.mjs'),{ORDER_PERMUTATIONS}=await load('paris-pack-core.mjs');
- const pack=parisStories.find(s=>s.packId),options={destination:pack.destination,storyId:pack.id,variant:1};
+ const french=process.env.PARIS_SOURCE_LANGUAGE==='fr',entrance=french?'french':'paris';
+ const {frenchStories}=await load('french-library.mjs');
+ const pack=french?frenchStories.find(s=>storyNodes[s.variants[1][1]].kind==='order'):parisStories.find(s=>s.packId),options={destination:pack.destination,storyId:pack.id,variant:1};
  const base=()=>{const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;return s;};
- const seed=base(),visit=startVisit(seed,'paris',options);assert.ok(visit.parisSource,'requires implemented captured source');
+ const seed=base(),visit=startVisit(seed,entrance,options);assert.ok(visit.parisSource,'requires implemented captured source');
  const d=storyDraft(seed);noteStorySeen(seed);const first=structuredClone(storyNodes[visit.node]),second=structuredClone(storyNodes[visit.route[1]]),helper=structuredClone(helpers[first.id]);
  d.choice=first.answer;d.reading='independent';openStoryHelp(seed);d.helper.choice=helper.answer;d.helper.attempts=[helper.answer];
  const oldSource=structuredClone(visit.parisSource);
  const replacement={...first,title:'Replacement page from a later edition',readingText:['Replacement passage from a later edition.'],prompt:'Replacement question from a later edition?',choices:first.choices.map((_,i)=>`Replacement choice ${i+1}`),answer:(first.answer+1)%first.choices.length,hint:'Replacement hint.',explanation:'Replacement explanation.'};
  const items=second.orderItems.map((_,i)=>`Replacement event ${i+1}`);
  const replacementSecond={...second,readingText:replacement.readingText,orderItems:items,displayOrder:[2,1,0],choices:ORDER_PERMUTATIONS.map(p=>p.map(i=>items[i]).join(' → '))};
- const replacementHelper={...helper,id:'synthetic-new-example',title:'Replacement helper',choices:['Replacement helper A','Replacement helper B'],answer:0,model:{type:'text',segments:['Replacement single sentence.'],focus:0,clue:'Replacement clue.'}};
+ const replacementHelper={...helper,id:'synthetic-new-example',title:'Replacement helper',choices:['Replacement helper A','Replacement helper B'],answer:0,model:{type:'text',...(french?{language:'fr'}:{}),segments:['Replacement single sentence.'],focus:0,clue:'Replacement clue.'}};
  const playwright=await import(process.env.PLAYWRIGHT_MODULE||'playwright'),{chromium}=playwright.default||playwright;
  const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
  let checks=0;const ok=(x,m)=>{assert.ok(x,m);checks++;},eq=(x,y,m)=>{assert.deepEqual(x,y,m);checks++;};
@@ -59,8 +61,10 @@ const fs=require('node:fs/promises');
    eq(completed.garden.observations[0].choices,first.choices,'recorded choices retain historical wording');
    await noOverflow(page);
    const exported=await report(page);eq(exported.state.garden.visits[0].parisSource,oldSource,'download/import retains complete source');
-   await page.goto(new URL('#paris',origin).href);await page.selectOption(`#paris-pack-length-${pack.id}`,'1');await click(page,`[data-paris-pack-story="${pack.id}"]`);
-   if(await page.locator('[data-new-visit="paris"]').count())await click(page,'[data-new-visit="paris"]');
+   await page.goto(new URL(french?'#french':'#paris',origin).href);
+   if(french){await page.selectOption(`#french-story-${pack.destination}`,pack.id);await page.selectOption(`#french-length-${pack.destination}`,'1');await click(page,`[data-french-destination="${pack.destination}"]`);}
+   else{await page.selectOption(`#paris-pack-length-${pack.id}`,'1');await click(page,`[data-paris-pack-story="${pack.id}"]`);}
+   if(await page.locator(`[data-new-visit="${entrance}"]`).count())await click(page,`[data-new-visit="${entrance}"]`);
    await page.getByText(replacement.title,{exact:true}).waitFor();ok(true,'fresh visit uses new authored page');
    const current=await saved(page);ok(current.garden.visits.length===2,'fresh visit retains earlier completed visit');
    await noOverflow(page);await page.close();
@@ -88,6 +92,6 @@ const fs=require('node:fs/promises');
    eq((await saved(p)).garden.visits[0],before,'invalid source retained without replacing source from catalogue');await noOverflow(p);await p.close();
   }
   eq(errors,[],'no page errors throughout captured, legacy and recovery flows');
-  console.log(`Paris saved-source browser regressions: ${checks} assertions passed.`);
+  console.log(`${french?'French':'English'} Paris saved-source browser regressions: ${checks} assertions passed.`);
  }finally{for(const context of contexts)await context.close();await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
