@@ -3,7 +3,7 @@ export const circuitCopy={
  idea:"A bulb needs a complete circuit. In our model, a path goes from one cell end through the bulb's filament to the other cell end. A connection to only one bulb contact leaves the filament out.",
  contacts:'The bulb has a metal side contact and a separate tip contact. The filament joins them inside. The pale band between side and tip is an insulator; it keeps those contacts separate.',
  limit:'A pretend screen circuit, not a physical result. The drawing shows connections, not measured current, brightness or heat.',
- help:"Follow the labels, not a line's position on the page. The bulb's side and tip are different contacts. Try one cell end at each bulb contact. Two wires meeting at the same contact can leave the filament out. In this little model, wire crossings join only at the labelled nodes. Change one connection, look at the new arrangement, and change it back whenever you like.",
+ help:"Follow the labels, not a line's position on the page. The bulb's side and tip are different contacts. Try one cell end at each bulb contact. Two wires meeting at the same contact can leave the filament out. In this little model, wire crossings join only at the labeled nodes. Change one connection, look at the new arrangement, and change it back whenever you like.",
  talk:'What changed when you removed one link? Can two different arrangements make the same bulb glow?',
  status:{
   open:{title:'Open path: model bulb off',text:'Our connections do not make a complete path through the filament from one cell end to the other. Add or remove a connection and compare.'},
