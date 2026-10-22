@@ -1,6 +1,6 @@
 # 88 · Living Garden Food-Link Fork Board
 
-**Status:** Independently reviewed specification and source pack. The three P2 findings at `6f776fd` were folded and independently cleared at `8ef3502`; the exact rendered fourth-card mock also passed separate science/art review. A runtime candidate is built for independent implementation review. No merge or deployment is claimed.
+**Status:** Independently reviewed specification, source pack and rendered fourth-card mock. The three spec P2 findings at `6f776fd` were folded and independently cleared at `8ef3502`. The runtime draft was independently internally reviewed and its findings cleared at `5b68707`; final Claude release clearance, merge and deployment remain pending.
 
 ## A small new action
 
