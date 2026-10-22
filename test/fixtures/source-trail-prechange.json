@@ -1,0 +1,888 @@
+[
+  {
+    "id": "origin",
+    "first": "photo",
+    "round": {
+      "id": 1,
+      "source": {
+        "version": 1,
+        "id": "origin",
+        "title": "Trace our picture note",
+        "prompt": "Which card was used to make our picture note, Card B?",
+        "choices": [
+          {
+            "id": "photo",
+            "label": "Card A · Photograph"
+          },
+          {
+            "id": "dates",
+            "label": "Card C · Archive date summary"
+          },
+          {
+            "id": "new-witness",
+            "label": "A separate historical witness"
+          },
+          {
+            "id": "unsure",
+            "label": "Not sure yet"
+          }
+        ],
+        "answerId": "photo",
+        "feedback": "B explicitly declares photograph PH8646, Card A, as its source. This modern note adds no separate historical observation.",
+        "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+        "cards": [
+          {
+            "id": "photo",
+            "title": "A · Photograph",
+            "kind": "Historical photograph",
+            "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+            "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+            "creator": "Identité judiciaire",
+            "creationLabel": "Museum production date: 29 January 1910",
+            "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+            "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+            "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+          },
+          {
+            "id": "note",
+            "title": "B · Our picture note",
+            "kind": "Original modern teaching note",
+            "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+            "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+            "creator": "Original game teaching material",
+            "creationLabel": "Modern; made for this game",
+            "eventLabel": "Describes one photographed view of the January 1910 flood",
+            "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+            "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+          },
+          {
+            "id": "dates",
+            "title": "C · Archive date summary",
+            "kind": "Original modern factual summary",
+            "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+            "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+            "creator": "Archives de Paris",
+            "creationLabel": "Modern; exact publication date not stated in the PDF",
+            "eventLabel": "Selected events during the Paris flood, January–March 1910",
+            "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+            "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+          }
+        ],
+        "photo": {
+          "src": "./assets/archive-paris-1910-ph8646.jpg",
+          "filename": "lpdp_30184-10.jpg",
+          "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+          "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+          "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+          "inventory": "PH8646",
+          "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+        },
+        "pictureVersion": 1
+      },
+      "answer": "photo",
+      "card": "note",
+      "familiar": false,
+      "support": [],
+      "checks": [
+        {
+          "source": {
+            "version": 1,
+            "id": "origin",
+            "title": "Trace our picture note",
+            "prompt": "Which card was used to make our picture note, Card B?",
+            "choices": [
+              {
+                "id": "photo",
+                "label": "Card A · Photograph"
+              },
+              {
+                "id": "dates",
+                "label": "Card C · Archive date summary"
+              },
+              {
+                "id": "new-witness",
+                "label": "A separate historical witness"
+              },
+              {
+                "id": "unsure",
+                "label": "Not sure yet"
+              }
+            ],
+            "answerId": "photo",
+            "feedback": "B explicitly declares photograph PH8646, Card A, as its source. This modern note adds no separate historical observation.",
+            "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+            "cards": [
+              {
+                "id": "photo",
+                "title": "A · Photograph",
+                "kind": "Historical photograph",
+                "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+                "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+                "creator": "Identité judiciaire",
+                "creationLabel": "Museum production date: 29 January 1910",
+                "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+                "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "note",
+                "title": "B · Our picture note",
+                "kind": "Original modern teaching note",
+                "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+                "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+                "creator": "Original game teaching material",
+                "creationLabel": "Modern; made for this game",
+                "eventLabel": "Describes one photographed view of the January 1910 flood",
+                "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "dates",
+                "title": "C · Archive date summary",
+                "kind": "Original modern factual summary",
+                "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+                "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+                "creator": "Archives de Paris",
+                "creationLabel": "Modern; exact publication date not stated in the PDF",
+                "eventLabel": "Selected events during the Paris flood, January–March 1910",
+                "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+                "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+              }
+            ],
+            "photo": {
+              "src": "./assets/archive-paris-1910-ph8646.jpg",
+              "filename": "lpdp_30184-10.jpg",
+              "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+              "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+              "license": "CC0 1.0",
+              "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+              "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+              "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+              "inventory": "PH8646",
+              "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+            },
+            "pictureVersion": 1
+          },
+          "input": {
+            "answer": "photo",
+            "support": []
+          },
+          "outcome": true,
+          "selectedLabel": "Card A · Photograph",
+          "feedback": "This supplied choice fits the declared source trail. B explicitly declares photograph PH8646, Card A, as its source. This modern note adds no separate historical observation."
+        }
+      ]
+    }
+  },
+  {
+    "id": "observation",
+    "first": "photo",
+    "round": {
+      "id": 1,
+      "source": {
+        "version": 1,
+        "id": "observation",
+        "title": "Find the underlying evidence",
+        "prompt": "For the note’s water-and-boats detail, what is the underlying evidence?",
+        "choices": [
+          {
+            "id": "photo",
+            "label": "The photograph, repeated in our note"
+          },
+          {
+            "id": "note-only",
+            "label": "A new historical observation made by the note"
+          },
+          {
+            "id": "both-independent",
+            "label": "Two independently obtained observations, A and B"
+          },
+          {
+            "id": "unsure",
+            "label": "Not sure yet"
+          }
+        ],
+        "answerId": "photo",
+        "feedback": "A supplies this pictured local detail; B reports that same photograph. Two representations are present, with one underlying photo observation for this claim. This does not mean only one source could ever exist.",
+        "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+        "cards": [
+          {
+            "id": "photo",
+            "title": "A · Photograph",
+            "kind": "Historical photograph",
+            "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+            "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+            "creator": "Identité judiciaire",
+            "creationLabel": "Museum production date: 29 January 1910",
+            "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+            "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+            "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+          },
+          {
+            "id": "note",
+            "title": "B · Our picture note",
+            "kind": "Original modern teaching note",
+            "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+            "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+            "creator": "Original game teaching material",
+            "creationLabel": "Modern; made for this game",
+            "eventLabel": "Describes one photographed view of the January 1910 flood",
+            "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+            "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+          },
+          {
+            "id": "dates",
+            "title": "C · Archive date summary",
+            "kind": "Original modern factual summary",
+            "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+            "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+            "creator": "Archives de Paris",
+            "creationLabel": "Modern; exact publication date not stated in the PDF",
+            "eventLabel": "Selected events during the Paris flood, January–March 1910",
+            "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+            "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+          }
+        ],
+        "photo": {
+          "src": "./assets/archive-paris-1910-ph8646.jpg",
+          "filename": "lpdp_30184-10.jpg",
+          "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+          "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+          "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+          "inventory": "PH8646",
+          "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+        },
+        "pictureVersion": 1
+      },
+      "answer": "photo",
+      "card": "photo",
+      "familiar": false,
+      "support": [],
+      "checks": [
+        {
+          "source": {
+            "version": 1,
+            "id": "observation",
+            "title": "Find the underlying evidence",
+            "prompt": "For the note’s water-and-boats detail, what is the underlying evidence?",
+            "choices": [
+              {
+                "id": "photo",
+                "label": "The photograph, repeated in our note"
+              },
+              {
+                "id": "note-only",
+                "label": "A new historical observation made by the note"
+              },
+              {
+                "id": "both-independent",
+                "label": "Two independently obtained observations, A and B"
+              },
+              {
+                "id": "unsure",
+                "label": "Not sure yet"
+              }
+            ],
+            "answerId": "photo",
+            "feedback": "A supplies this pictured local detail; B reports that same photograph. Two representations are present, with one underlying photo observation for this claim. This does not mean only one source could ever exist.",
+            "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+            "cards": [
+              {
+                "id": "photo",
+                "title": "A · Photograph",
+                "kind": "Historical photograph",
+                "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+                "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+                "creator": "Identité judiciaire",
+                "creationLabel": "Museum production date: 29 January 1910",
+                "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+                "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "note",
+                "title": "B · Our picture note",
+                "kind": "Original modern teaching note",
+                "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+                "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+                "creator": "Original game teaching material",
+                "creationLabel": "Modern; made for this game",
+                "eventLabel": "Describes one photographed view of the January 1910 flood",
+                "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "dates",
+                "title": "C · Archive date summary",
+                "kind": "Original modern factual summary",
+                "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+                "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+                "creator": "Archives de Paris",
+                "creationLabel": "Modern; exact publication date not stated in the PDF",
+                "eventLabel": "Selected events during the Paris flood, January–March 1910",
+                "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+                "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+              }
+            ],
+            "photo": {
+              "src": "./assets/archive-paris-1910-ph8646.jpg",
+              "filename": "lpdp_30184-10.jpg",
+              "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+              "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+              "license": "CC0 1.0",
+              "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+              "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+              "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+              "inventory": "PH8646",
+              "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+            },
+            "pictureVersion": 1
+          },
+          "input": {
+            "answer": "photo",
+            "support": []
+          },
+          "outcome": true,
+          "selectedLabel": "The photograph, repeated in our note",
+          "feedback": "This supplied choice fits the declared source trail. A supplies this pictured local detail; B reports that same photograph. Two representations are present, with one underlying photo observation for this claim. This does not mean only one source could ever exist."
+        }
+      ]
+    }
+  },
+  {
+    "id": "independence",
+    "first": "shared",
+    "round": {
+      "id": 1,
+      "source": {
+        "version": 1,
+        "id": "independence",
+        "title": "Count cards and observations",
+        "prompt": "What does this packet establish about A and B?",
+        "choices": [
+          {
+            "id": "unsure",
+            "label": "Not sure yet"
+          },
+          {
+            "id": "worthless",
+            "label": "The modern note must be false or useless"
+          },
+          {
+            "id": "independent",
+            "label": "Two independent historical observations"
+          },
+          {
+            "id": "shared",
+            "label": "Two cards that share one underlying photograph"
+          }
+        ],
+        "answerId": "shared",
+        "feedback": "The declared source trail shows one shared photograph behind these two cards. Dependence limits independent confirmation; it does not make the note false or useless.",
+        "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+        "cards": [
+          {
+            "id": "photo",
+            "title": "A · Photograph",
+            "kind": "Historical photograph",
+            "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+            "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+            "creator": "Identité judiciaire",
+            "creationLabel": "Museum production date: 29 January 1910",
+            "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+            "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+            "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+          },
+          {
+            "id": "note",
+            "title": "B · Our picture note",
+            "kind": "Original modern teaching note",
+            "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+            "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+            "creator": "Original game teaching material",
+            "creationLabel": "Modern; made for this game",
+            "eventLabel": "Describes one photographed view of the January 1910 flood",
+            "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+            "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+          },
+          {
+            "id": "dates",
+            "title": "C · Archive date summary",
+            "kind": "Original modern factual summary",
+            "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+            "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+            "creator": "Archives de Paris",
+            "creationLabel": "Modern; exact publication date not stated in the PDF",
+            "eventLabel": "Selected events during the Paris flood, January–March 1910",
+            "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+            "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+          }
+        ],
+        "photo": {
+          "src": "./assets/archive-paris-1910-ph8646.jpg",
+          "filename": "lpdp_30184-10.jpg",
+          "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+          "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+          "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+          "inventory": "PH8646",
+          "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+        },
+        "pictureVersion": 1
+      },
+      "answer": "worthless",
+      "card": "note",
+      "familiar": false,
+      "support": [],
+      "checks": [
+        {
+          "source": {
+            "version": 1,
+            "id": "independence",
+            "title": "Count cards and observations",
+            "prompt": "What does this packet establish about A and B?",
+            "choices": [
+              {
+                "id": "shared",
+                "label": "Two cards that share one underlying photograph"
+              },
+              {
+                "id": "independent",
+                "label": "Two independent historical observations"
+              },
+              {
+                "id": "worthless",
+                "label": "The modern note must be false or useless"
+              },
+              {
+                "id": "unsure",
+                "label": "Not sure yet"
+              }
+            ],
+            "answerId": "shared",
+            "feedback": "The declared source trail shows one shared photograph behind these two cards. Dependence limits independent confirmation; it does not make the note false or useless.",
+            "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+            "cards": [
+              {
+                "id": "photo",
+                "title": "A · Photograph",
+                "kind": "Historical photograph",
+                "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+                "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+                "creator": "Identité judiciaire",
+                "creationLabel": "Museum production date: 29 January 1910",
+                "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+                "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "note",
+                "title": "B · Our picture note",
+                "kind": "Original modern teaching note",
+                "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+                "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+                "creator": "Original game teaching material",
+                "creationLabel": "Modern; made for this game",
+                "eventLabel": "Describes one photographed view of the January 1910 flood",
+                "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "dates",
+                "title": "C · Archive date summary",
+                "kind": "Original modern factual summary",
+                "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+                "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+                "creator": "Archives de Paris",
+                "creationLabel": "Modern; exact publication date not stated in the PDF",
+                "eventLabel": "Selected events during the Paris flood, January–March 1910",
+                "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+                "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+              }
+            ],
+            "photo": {
+              "src": "./assets/archive-paris-1910-ph8646.jpg",
+              "filename": "lpdp_30184-10.jpg",
+              "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+              "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+              "license": "CC0 1.0",
+              "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+              "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+              "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+              "inventory": "PH8646",
+              "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+            },
+            "pictureVersion": 1
+          },
+          "input": {
+            "answer": "shared",
+            "support": []
+          },
+          "outcome": false,
+          "selectedLabel": "Earlier contradictory recorded label",
+          "feedback": "Earlier contradictory recorded result"
+        },
+        {
+          "source": {
+            "version": 1,
+            "id": "independence",
+            "title": "Count cards and observations",
+            "prompt": "What does this packet establish about A and B?",
+            "choices": [
+              {
+                "id": "unsure",
+                "label": "Not sure yet"
+              },
+              {
+                "id": "worthless",
+                "label": "The modern note must be false or useless"
+              },
+              {
+                "id": "independent",
+                "label": "Two independent historical observations"
+              },
+              {
+                "id": "shared",
+                "label": "Two cards that share one underlying photograph"
+              }
+            ],
+            "answerId": "shared",
+            "feedback": "The declared source trail shows one shared photograph behind these two cards. Dependence limits independent confirmation; it does not make the note false or useless.",
+            "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+            "cards": [
+              {
+                "id": "photo",
+                "title": "A · Photograph",
+                "kind": "Historical photograph",
+                "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+                "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+                "creator": "Identité judiciaire",
+                "creationLabel": "Museum production date: 29 January 1910",
+                "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+                "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "note",
+                "title": "B · Our picture note",
+                "kind": "Original modern teaching note",
+                "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+                "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+                "creator": "Original game teaching material",
+                "creationLabel": "Modern; made for this game",
+                "eventLabel": "Describes one photographed view of the January 1910 flood",
+                "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "dates",
+                "title": "C · Archive date summary",
+                "kind": "Original modern factual summary",
+                "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+                "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+                "creator": "Archives de Paris",
+                "creationLabel": "Modern; exact publication date not stated in the PDF",
+                "eventLabel": "Selected events during the Paris flood, January–March 1910",
+                "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+                "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+              }
+            ],
+            "photo": {
+              "src": "./assets/archive-paris-1910-ph8646.jpg",
+              "filename": "lpdp_30184-10.jpg",
+              "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+              "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+              "license": "CC0 1.0",
+              "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+              "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+              "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+              "inventory": "PH8646",
+              "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+            },
+            "pictureVersion": 1
+          },
+          "input": {
+            "answer": "worthless",
+            "support": []
+          },
+          "outcome": false,
+          "selectedLabel": "The modern note must be false or useless",
+          "feedback": "This choice differs from the declared source trail and can be revised. The declared source trail shows one shared photograph behind these two cards. Dependence limits independent confirmation; it does not make the note false or useless."
+        }
+      ]
+    }
+  },
+  {
+    "id": "reply",
+    "first": "qualified",
+    "round": {
+      "id": 1,
+      "source": {
+        "version": 1,
+        "id": "reply",
+        "title": "Prepare a careful display label",
+        "prompt": "Which label gives the display reader a careful source trail?",
+        "choices": [
+          {
+            "id": "qualified",
+            "label": "A supplies the local pictured view. B is our note from A. C gives a modern date summary; this packet does not establish its independence."
+          },
+          {
+            "id": "witnesses",
+            "label": "A and B agree, so two independent witnesses settle the whole flood."
+          },
+          {
+            "id": "certain",
+            "label": "A and C have different publishers, so their independence is certain."
+          },
+          {
+            "id": "unsure",
+            "label": "Not sure yet"
+          }
+        ],
+        "answerId": "qualified",
+        "feedback": "The photograph supplies a local view. Our note explicitly draws on it. The chronology supplies selected dates, but this packet does not establish its independence. Different publishers or source types alone do not settle that question.",
+        "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+        "cards": [
+          {
+            "id": "photo",
+            "title": "A · Photograph",
+            "kind": "Historical photograph",
+            "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+            "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+            "creator": "Identité judiciaire",
+            "creationLabel": "Museum production date: 29 January 1910",
+            "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+            "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+            "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+          },
+          {
+            "id": "note",
+            "title": "B · Our picture note",
+            "kind": "Original modern teaching note",
+            "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+            "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+            "creator": "Original game teaching material",
+            "creationLabel": "Modern; made for this game",
+            "eventLabel": "Describes one photographed view of the January 1910 flood",
+            "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+            "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+          },
+          {
+            "id": "dates",
+            "title": "C · Archive date summary",
+            "kind": "Original modern factual summary",
+            "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+            "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+            "creator": "Archives de Paris",
+            "creationLabel": "Modern; exact publication date not stated in the PDF",
+            "eventLabel": "Selected events during the Paris flood, January–March 1910",
+            "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+            "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+          }
+        ],
+        "photo": {
+          "src": "./assets/archive-paris-1910-ph8646.jpg",
+          "filename": "lpdp_30184-10.jpg",
+          "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+          "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+          "license": "CC0 1.0",
+          "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+          "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+          "inventory": "PH8646",
+          "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+        },
+        "pictureVersion": 1
+      },
+      "answer": "certain",
+      "card": "dates",
+      "familiar": false,
+      "support": [],
+      "checks": [
+        {
+          "source": {
+            "version": 1,
+            "id": "reply",
+            "title": "Prepare a careful display label",
+            "prompt": "Which label gives the display reader a careful source trail?",
+            "choices": [
+              {
+                "id": "qualified",
+                "label": "A supplies the local pictured view. B is our note from A. C gives a modern date summary; this packet does not establish its independence."
+              },
+              {
+                "id": "witnesses",
+                "label": "A and B agree, so two independent witnesses settle the whole flood."
+              },
+              {
+                "id": "certain",
+                "label": "A and C have different publishers, so their independence is certain."
+              },
+              {
+                "id": "unsure",
+                "label": "Not sure yet"
+              }
+            ],
+            "answerId": "qualified",
+            "feedback": "The photograph supplies a local view. Our note explicitly draws on it. The chronology supplies selected dates, but this packet does not establish its independence. Different publishers or source types alone do not settle that question.",
+            "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+            "cards": [
+              {
+                "id": "photo",
+                "title": "A · Photograph",
+                "kind": "Historical photograph",
+                "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+                "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+                "creator": "Identité judiciaire",
+                "creationLabel": "Museum production date: 29 January 1910",
+                "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+                "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "note",
+                "title": "B · Our picture note",
+                "kind": "Original modern teaching note",
+                "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+                "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+                "creator": "Original game teaching material",
+                "creationLabel": "Modern; made for this game",
+                "eventLabel": "Describes one photographed view of the January 1910 flood",
+                "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "dates",
+                "title": "C · Archive date summary",
+                "kind": "Original modern factual summary",
+                "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+                "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+                "creator": "Archives de Paris",
+                "creationLabel": "Modern; exact publication date not stated in the PDF",
+                "eventLabel": "Selected events during the Paris flood, January–March 1910",
+                "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+                "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+              }
+            ],
+            "photo": {
+              "src": "./assets/archive-paris-1910-ph8646.jpg",
+              "filename": "lpdp_30184-10.jpg",
+              "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+              "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+              "license": "CC0 1.0",
+              "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+              "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+              "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+              "inventory": "PH8646",
+              "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+            },
+            "pictureVersion": 1
+          },
+          "input": {
+            "answer": "qualified",
+            "support": []
+          },
+          "outcome": true,
+          "selectedLabel": "A supplies the local pictured view. B is our note from A. C gives a modern date summary; this packet does not establish its independence.",
+          "feedback": "This supplied choice fits the declared source trail. The photograph supplies a local view. Our note explicitly draws on it. The chronology supplies selected dates, but this packet does not establish its independence. Different publishers or source types alone do not settle that question."
+        },
+        {
+          "source": {
+            "version": 1,
+            "id": "reply",
+            "title": "Prepare a careful display label",
+            "prompt": "Which label gives the display reader a careful source trail?",
+            "choices": [
+              {
+                "id": "qualified",
+                "label": "A supplies the local pictured view. B is our note from A. C gives a modern date summary; this packet does not establish its independence."
+              },
+              {
+                "id": "witnesses",
+                "label": "A and B agree, so two independent witnesses settle the whole flood."
+              },
+              {
+                "id": "certain",
+                "label": "A and C have different publishers, so their independence is certain."
+              },
+              {
+                "id": "unsure",
+                "label": "Not sure yet"
+              }
+            ],
+            "answerId": "qualified",
+            "feedback": "The photograph supplies a local view. Our note explicitly draws on it. The chronology supplies selected dates, but this packet does not establish its independence. Different publishers or source types alone do not settle that question.",
+            "help": "A fictional neighbor is making a flood-history display for the town’s market. These source cards are supplied for us to inspect, not hidden evidence. Card B was made by looking at photograph PH8646, Card A: the arrow means “was made using”. The note can be useful without adding a separate historical observation. Card C is a modern date summary; its underlying records are not given here. Unknown independence is not proven dependence, and different publishers do not prove independence. There is no positive independent-witness example in this packet. Supplied choices and feedback do not establish independent historical explanation, research or reading.",
+            "cards": [
+              {
+                "id": "photo",
+                "title": "A · Photograph",
+                "kind": "Historical photograph",
+                "text": "One view at the Quai des Grands-Augustins during the January 1910 flood. Look for water, boats and buildings.",
+                "provenance": "Photograph PH8646, attributed by the museum to Identité judiciaire. The individual photographer and exact purpose are not established here.",
+                "creator": "Identité judiciaire",
+                "creationLabel": "Museum production date: 29 January 1910",
+                "eventLabel": "Scene identified with the January 1910 flood; exact capture moment not established here.",
+                "notice": "Card wording is original, written for this game; not a quotation. The catalogue and digital reproduction are modern. The museum production date does not establish the exact scene moment. Only this named visual is covered by its CC0 reuse permission. This full image does not show the whole city, everybody’s feelings or exact street depth.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "note",
+                "title": "B · Our picture note",
+                "kind": "Original modern teaching note",
+                "text": "In photograph PH8646, water and boats appear beside buildings at this quay.",
+                "provenance": "Made for this game by looking at Card A, photograph PH8646. This note adds no separate historical observation.",
+                "creator": "Original game teaching material",
+                "creationLabel": "Modern; made for this game",
+                "eventLabel": "Describes one photographed view of the January 1910 flood",
+                "notice": "This declared authoring process is supplied openly. The note can be accurate and useful while depending on the photograph. It is not historical testimony or a museum quotation.",
+                "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins"
+              },
+              {
+                "id": "dates",
+                "title": "C · Archive date summary",
+                "kind": "Original modern factual summary",
+                "text": "The chronology places the river’s recorded peak in January and its return to its bed in March 1910.",
+                "provenance": "Based on the modern educational chronology from Archives de Paris. Its underlying historical records are not supplied in this packet; independence is not established here.",
+                "creator": "Archives de Paris",
+                "creationLabel": "Modern; exact publication date not stated in the PDF",
+                "eventLabel": "Selected events during the Paris flood, January–March 1910",
+                "notice": "Card wording is original, written for this game; not a quotation. A different source type does not establish independence. This date summary does not provide a second view of boats at this quay. No chronology image or worksheet prose is reproduced.",
+                "url": "https://archives.paris.fr/offre-pedagogique/ressources-pedagogiques/la-crue-de-1910-une-societe-face-aux-risques"
+              }
+            ],
+            "photo": {
+              "src": "./assets/archive-paris-1910-ph8646.jpg",
+              "filename": "lpdp_30184-10.jpg",
+              "alt": "Historical monochrome photograph of water beside buildings at the Quai des Grands-Augustins. Boats and people appear near a raised wooden structure. This one view does not show all Paris or establish an exact street depth.",
+              "credit": "CC0 Paris Musées / Musée Carnavalet - Histoire de Paris",
+              "license": "CC0 1.0",
+              "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+              "url": "https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins",
+              "manifest": "https://apicollections.parismusees.paris.fr/iiif/320158523/manifest",
+              "inventory": "PH8646",
+              "reproduction": "Unchanged local reproduction of the complete field of view; no resizing, colourization, restoration or invented detail."
+            },
+            "pictureVersion": 1
+          },
+          "input": {
+            "answer": "certain",
+            "support": []
+          },
+          "outcome": false,
+          "selectedLabel": "A and C have different publishers, so their independence is certain.",
+          "feedback": "This choice differs from the declared source trail and can be revised. The photograph supplies a local view. Our note explicitly draws on it. The chronology supplies selected dates, but this packet does not establish its independence. Different publishers or source types alone do not settle that question."
+        }
+      ]
+    }
+  }
+]
