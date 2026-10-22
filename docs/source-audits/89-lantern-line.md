@@ -1,6 +1,6 @@
 # Lantern Line: source and overlap audit
 
-Prepared2026-10-22 for [spec89](../specs/89-lantern-line.md), based on the internally reviewed extended candidate `794b002`. This is author preparation, not independent review or a full-topic mapping.
+Prepared 2026-10-22 for [spec89](../specs/89-lantern-line.md), based on the internally reviewed extended candidate `794b002`. This is author preparation, not independent review or a full-topic mapping.
 
 ## Existing local work
 
@@ -20,4 +20,4 @@ Public source heads checked during this work were Jane [`b7617426`](https://gith
 
 Current incoming hard edges connect number-line experience and unit fractions to the placement topic, and placement/unit-fraction/diagram equivalence to equivalent points. Those are authoring dependencies: inline whole/part/iteration support stays open and no source edge becomes a child access lock. The fresh source names are not enough to infer complete teaching coverage. No atlas row, coverage count or upstream pin change is proposed here; broader fraction ordering, general algorithms, ratio and operations remain separate design.
 
-Jane's application code is MIT; original lessons/docs are CC BY-SA4.0 and its embedded Marble-derived material has separate database/content terms. Marble database is ODbL1.0; authored text is CC BY-SA4.0,©Generative Spark,Inc.(Marble). This feature studies those source meanings and retains exact citations; it copies no lesson prose, prompt, code or art. Existing vendored taxonomy notices and pin remain unchanged. All learner scenarios and diagrams will be original fictional model work, not personal data or physical measurement.
+Jane's application code is MIT; original lessons/docs are CC BY-SA 4.0 and its embedded Marble-derived material has separate database/content terms. Marble database is ODbL 1.0; authored text is CC BY-SA 4.0, © Generative Spark, Inc. (Marble). This feature studies those source meanings and retains exact citations; it copies no lesson prose, prompt, code or art. Existing vendored taxonomy notices and pin remain unchanged. All learner scenarios and diagrams will be original fictional model work, not personal data or physical measurement.

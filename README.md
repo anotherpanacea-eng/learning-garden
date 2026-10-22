@@ -58,6 +58,7 @@ node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
 node test/count-collection-checks.mjs
+node test/lantern-line-checks.mjs
 node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
 node test/fraction-trail-checks.mjs
@@ -411,3 +412,5 @@ Run `node test/tenths-checks.mjs` for the finite picture, notation, saving and r
 My Count Collection at `#living/collection` lets a learner make a pretend button collection, record a table, draw bars and read the chart across four short turns. It distinguishes a faithful representation from an accurate reading of a different chart. Sources, earlier checks and an optional kept version stay tied to their own saved values. This is pictured practice, not a survey or a mastery judgment. See [spec86](docs/specs/86-count-collection.md) and its [source audit](docs/source-audits/86-count-collection.md). Run `node test/count-collection-checks.mjs`; with the static app served locally, run `COLLECTION_TEST_URL=http://127.0.0.1:4173/ node test/count-collection-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
 
 The [Count Collection review](docs/reviews/86-count-collection-review.md) records the exact internally cleared implementation and local checks; release clearance remains separate.
+
+Lantern Line at `#numbers/lanterns` places two fraction stops along the same whole walk. Six open requests contrast unit fractions, same-sized parts, different partitions, equal points, zero and whole endpoints. Reading the actual order is separate from matching the requested stops; optional part guides and a worked example remain supplied support. Partial work, earlier checks and one explicitly kept version stay with their frozen sources. See [spec89](docs/specs/89-lantern-line.md) and its [source audit](docs/source-audits/89-lantern-line.md). Run `node test/lantern-line-checks.mjs`; with the static app served locally, run `LANTERN_TEST_URL=http://127.0.0.1:4173/ node test/lantern-line-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.

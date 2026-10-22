@@ -1,6 +1,6 @@
 # 89 · Lantern Line: two fractions, one walk
 
-**Status: authored proposal awaiting independent specification review.** No runtime or release clearance.
+**Status: independently reviewed specification, implementation in progress.** A separate internal six-lens review cleared `6230f79` with no P1/P2 findings and independently checked all 792 position/choice combinations. No implementation or release clearance.
 
 ## The missing contrast and existing overlap
 
