@@ -13,3 +13,7 @@ Final root follow-up confirmed the Town supplied-fact gap raised during composit
 At the final checkpoint, Town’s spec fold is approved at `cb178b3` but its runtime remains unrepaired. The PR66 choice/index fix is independently approved at `5ddf222`; this does not clear the whole text branch. Integration draft PR76 preserves the tested composition with its hold.
 
 The resumed checkpoint now records merged integration PR76 and Café PR78, reviewed Library/Returning runtime drafts, and the next two authoring slices. An independent internal review of this status rewrite is required before the updated roadmap merges. Earlier conditional approval does not certify these newer status statements.
+
+## Resumed checkpoint review
+
+A separate internal reviewer inspected roadmap `07dbdd325b293d698419517b3f1f15a49bbc2849` against main `68777ed`. One P2 finding required the queue to name the final independent Claude release gate for internal-only PR79 and PR80. The root folded that wording and updated Returning integration status after its separate seam clearance. No other P1/P2 was found. The reviewer verified main ancestry, atlas counts and all relative roadmap links. This is an internal status review, not Claude clearance for the new runtime candidates. Production remains unverified and deployment deferred.
