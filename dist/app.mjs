@@ -5,6 +5,7 @@ import {noteBundleDisplay,syncBundleQuestionExposure} from './bundle-broad-expos
 import {renderFractionTrail,fractionTrailEntry,bindFractionTrail} from './fraction-trail-ui.mjs';
 import {renderParcelPacking,parcelPackingEntry,bindParcelPacking} from './parcel-packing-ui.mjs';
 import {wholeBatchesPage,wholeBatchesEntry,bindWholeBatches} from './whole-batches-ui.mjs';
+import {townPage,townInvitation,bindTown} from './town-remembers-ui.mjs';
 import {batchDisplayedFactPairs} from './whole-batches-core.mjs';
 import {bellStudioPage,bellStudioEntry,bindBellStudio} from './bell-studio-ui.mjs';
 import {createBellPlayer} from './bell-studio-audio.mjs';
@@ -112,7 +113,7 @@ function gardenArt(){let flowers='';for(let r=0;r<3;r++)for(let c=0;c<4;c++)flow
 function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back">← Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
 function noteInstructionArrival(){if(choosingExplorer)return;const [desk,page]=(location.hash||'').slice(1).split('/');if(page==='instructions'&&['post','loft'].includes(desk)&&noteInstructionEntry(state,desk))save();}
 function navigate(hash){stopBell('navigation');if(location.hash===hash){noteInstructionArrival();render();}else location.hash=hash;}
-function home(){return gardenHome(state,persist)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>';}
+function home(){return gardenHome(state,persist)+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>';}
 function startCheckin(){if(state.baseline.complete){navigate('#summary');return;}const q=checkin[state.baseline.index];activity={mode:'checkin',q};const draft=state.baseline.draft;active=draft?.questionId===q.id?{...blank(),...draft}:blank();
   if(draft?.questionId!==q.id&&(state.exposures?.includes(`${q.a}x${q.b}`)||state.exposures?.includes(`${q.b}x${q.a}`)))active.exposed=true;
   screen='activity';render();focusActivity();}
@@ -221,6 +222,7 @@ function render(){
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
   else if(bellBench)html=bellStudioPage(state);
   else if(archiveBench)html=travelersArchivePage(state);
+  else if(root==='town'&&slug==='remembers')html=townPage(state,detail);
   else if(bundleBench){const view=renderBundleExchange(state);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;const changed=noteBundleDisplay(state,view.examples,live);exposeStoryFacts({facts:view.facts});if(changed||view.facts.length)save();}
   else if(fractionBench)html=renderFractionTrail(state).html;
   else if(recipeBench)html=measuringRecipesPage(state);
@@ -361,6 +363,7 @@ function bind(){
  bindMeasuringRecipes(state,{save,render,navigate,focus:focusElement});
  bindParcelPacking(state,{save,render,navigate,focus:focusElement});
  bindWholeBatches(state,{save,render,navigate,focus:focusElement});
+ bindTown(state,{save,render,navigate,focus:focusElement});
  bindRainPaths(state,{save,render,navigate,focus:focusElement,expose:exposeRain});
  bindRainNotebookInvitations(state,{save,navigate,focus:focusElement});
  bindRainNotebook(state,{save,render,navigate,focus:focusElement,expose:exposure=>{noteRainNotebookExposure(state,exposure);exposeRain(exposure);}});

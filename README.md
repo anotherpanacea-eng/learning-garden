@@ -119,6 +119,8 @@ node test/facts-checks.mjs
 node test/forage-checks.mjs
 node test/paris-checks.mjs
 node test/paris-exploration-checks.mjs
+node test/town-remembers-checks.mjs
+node test/town-remembers-integration-checks.mjs
 node test/story-pack-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
@@ -337,3 +339,9 @@ Original words remain separate, exact and ungraded. A person can read them, ask 
 The locally built **Willow packing table** (`#post/packing`) gives the same seed envelopes two purposes: make the most full welcome kits, or carry every envelope in the fewest loaded trips. Four requests include an exact fit; partial bags, loose envelopes and spare capacity stay distinct. Pack/unpack countable objects, read the actual table, revise the purpose-specific answer and keep or seal a plan. Supplied pictures and requested examples support practice without claiming written division or independent mastery. [Spec 51](docs/specs/51-parcel-packing-and-remainders.md).
 
 The locally built **Whole batches for a gathering** activity (`#cafe/batches`) invites children to repeat a two-guest recipe, measure separate portions, and compose a literal delivery label. Three pictured requests retain their own plans and unfinished drafts. Optional models compare repeating the complete recipe with adding the same amount to both ingredients; offering a tray gives a local gathering ending. All checks are supplied picture practice, with support retained, and do not serve a café guest or establish independent mastery. [Spec 50](docs/specs/50-whole-batch-gathering.md).
+
+### The Town Remembers
+
+An optional home invitation returns to a kept tray, loaf or kitchen jar on a later local day. Six finite forms ask for a different unknown or representation: guest counts, a whole-batch shortcut, same-loaf comparisons, a fraction of twelve buns, a coarser jug scale, and an extra pour. Earlier undated keeps are eligible too. Each errand freezes its own source and choices; checking, support and keeping an answer remain separate. Nothing changes the original game or café stock.
+
+To run synthetic browser journeys, serve `dist` locally and run `node test/town-remembers-browser.js` with `TOWN_TEST_URL` pointing to the server. Installed Node Playwright and Chromium are required; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. `TOWN_ARTIFACTS` selects a temporary screenshot directory. Tests cover all six forms at phone/tablet sizes, actual source-game Keep buttons, later-day invitations, revisions, support, recovery and notebook download/import. This is Chromium emulation, not a physical iPad or audible-speech check.
