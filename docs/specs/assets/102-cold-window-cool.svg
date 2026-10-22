@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 250" role="img" aria-labelledby="title desc">
+<title id="title">The cooled pane: whole pane and imagined tiny view</title>
+<desc id="desc">Liquid drops rest on the air-facing side of a continuous cool pane. The other side is dry. In the imagined tiny view, three of seven same-size molecule dots gather at the cool surface; four remain spread in air.</desc>
+<style>.label{font:600 17px system-ui, sans-serif;fill:#183f39}.small{font:600 15px system-ui,sans-serif;fill:#183f39}.tiny{font:600 14px system-ui,sans-serif;fill:#183f39}</style>
+<rect x="1" y="1" width="278" height="116" rx="12" fill="#fffdf7" stroke="#628b89" stroke-width="2"/>
+<text x="16" y="25" class="label">Whole view</text>
+<text x="20" y="49" class="small">Air-facing side</text>
+<text x="194" y="49" class="small">Dry side</text>
+<rect x="162" y="30" width="20" height="69" rx="2" fill="#b7d5df" stroke="#244353" stroke-width="2"/>
+<path d="M166 38v51" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+<path d="M154 51c-6 7-6 12 0 14 6-2 6-7 0-14Zm-1 19c-5 6-5 10 0 12 5-2 5-6 0-12Zm2 18c-5 6-5 10 0 12 5-2 5-6 0-12Z" fill="#4387a7" stroke="#244353" stroke-width="1.5"/><text x="20" y="105" class="small">Drops on air side</text>
+<rect x="1" y="125" width="278" height="124" rx="12" fill="#eef5f4" stroke="#628b89" stroke-width="2"/>
+<text x="16" y="149" class="label">Imagined tiny view</text>
+<text x="20" y="239" class="small">Liquid at cool surface</text>
+<rect x="162" y="160" width="20" height="69" rx="2" fill="#b7d5df" stroke="#244353" stroke-width="2"/>
+<circle cx="36" cy="170" r="5" fill="#83aec2" stroke="#244353" stroke-width="1.5"/><circle cx="60" cy="208" r="5" fill="#83aec2" stroke="#244353" stroke-width="1.5"/><circle cx="101" cy="178" r="5" fill="#83aec2" stroke="#244353" stroke-width="1.5"/><circle cx="119" cy="207" r="5" fill="#83aec2" stroke="#244353" stroke-width="1.5"/><circle cx="153" cy="174" r="5" fill="#4387a7" stroke="#244353" stroke-width="1.5"/><circle cx="153" cy="196" r="5" fill="#4387a7" stroke="#244353" stroke-width="1.5"/><circle cx="153" cy="215" r="5" fill="#4387a7" stroke="#244353" stroke-width="1.5"/>
+</svg>
