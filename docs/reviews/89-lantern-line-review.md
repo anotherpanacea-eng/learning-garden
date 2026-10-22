@@ -1,0 +1,9 @@
+# Lantern Line: independent review receipt
+
+A separate internal six-lens reviewer cleared spec89 at `6230f7951bdae83f6eccaaf4d1bc39641a40c675` with no P1/P2 findings, including the added-value question. Existing ribbon/flag activities do not provide two independently placed fractions with a response about their actual non-equivalent order. The reviewer separately enumerated all 792 bounded/absent position and choice combinations.
+
+Implementation review at `b1660409a0d205a564085be47d6bb85359935ad1` found two P2 issues: a canceled confirmation remained callable, and the worked example described equal parts without drawing them. The focused repair at `754b811e58960806ef89b17dbea06ef5e696ada2` independently cleared both with no remaining P1/P2. Confirm requires its exact dialog to remain connected and open. The example now reveals a whole, aligned half/third guides, then supplied marker positions; learner positions remain unchanged. Source and saved-state scope did not change.
+
+Verification: 860 focused checks, including 792 independent integer-coordinate cases, 88 transfer checks and 151 actual Chrome assertions at 320/820/390 pixels passed. A complete 130-source-suite run passed before the two focused UI repairs; affected source and browser checks were independently rerun after them. Browser checks cover all six requests, wrong placement with a correct actual reading, coincident marker geometry, staged example geometry, canceled and used confirmations, stale controls, partial reload, kept copies, actual notes download/reordered file import, explorer switch, save-off and safe refusal near the actual app report limit. Root and reviewer inspected phone/tablet drawings. Local Chrome does not establish physical iPad/Safari behavior, audible quality or learning gains.
+
+This is internal independent draft clearance, not a Claude release review. Final release clearance, composition verification and intended-account deployment remain separate gates.

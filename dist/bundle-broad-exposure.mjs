@@ -2,7 +2,10 @@
 import {areas} from './broad-content.mjs';
 import {authoredBroadParams} from './broad-variants.mjs';
 import {bundleState,bundleHistoryUnknown,knownBundleSignatures,noteBundleExamples} from './bundle-exchange-core.mjs';
+import {returningState,returningHistoryUnknown,knownReturningSignatures,noteReturningExamples} from './returning-orders-core.mjs';
 import {joiningState,joiningHistoryUnknown,joiningBundleSignatures} from './joining-orders-core.mjs';
+import {comparisonState,comparisonHistoryUnknown,noteComparisonExamples} from './comparing-orders-core.mjs';
+import {comparisonSignatures} from './comparing-orders-content.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const authored=id=>areas.flatMap(a=>[...a.checkin,...a.activities]).find(q=>q.id===id);
 export function bundleQuestionParams(question){
@@ -18,8 +21,10 @@ export function bundleQuestionExposure(state,question){
  if(!p)return {familiar:false,priorExposureUnknown:false};
  const signature=`bundle:0:${p.tens}:${p.ones}`;
  const root=Object.hasOwn(state,'bundleExchange')?bundleState(state):null;
+ const returning=returningState(state);
  const joining=Object.hasOwn(state,'joiningOrders')?joiningState(state):null;
- return {familiar:!!root&&knownBundleSignatures.includes(signature)&&root.shownBundleExamples.includes(signature)||!!joining&&joiningBundleSignatures.includes(signature)&&joining.shownBundleExamples.includes(signature),priorExposureUnknown:knownBundleSignatures.includes(signature)&&bundleHistoryUnknown(state)||joiningBundleSignatures.includes(signature)&&joiningHistoryUnknown(state)};
+ const comparison=Object.hasOwn(state,'comparisonSupplies')?comparisonState(state):null;
+ return {familiar:!!root&&knownBundleSignatures.includes(signature)&&root.shownBundleExamples.includes(signature)||!!joining&&joiningBundleSignatures.includes(signature)&&joining.shownBundleExamples.includes(signature)||!!returning&&knownReturningSignatures.includes(signature)&&returning.shownBundleExamples.includes(signature)||!!comparison&&comparisonSignatures.includes(signature)&&comparison.shownBundleExamples.includes(signature),priorExposureUnknown:knownBundleSignatures.includes(signature)&&bundleHistoryUnknown(state)||joiningBundleSignatures.includes(signature)&&joiningHistoryUnknown(state)||knownReturningSignatures.includes(signature)&&returningHistoryUnknown(state)||comparisonSignatures.includes(signature)&&comparisonHistoryUnknown(state)};
 }
 export function syncBundleQuestionExposure(state,question,draft){
  if(!draft||typeof draft!=='object')return false;
@@ -27,8 +32,7 @@ export function syncBundleQuestionExposure(state,question,draft){
  for(const key of ['familiar','priorExposureUnknown'])if(exposure[key]&&!draft[key]){draft[key]=true;changed=true;}
  return changed;
 }
-export function noteBundleDisplay(state,examples,live=null){
- let changed=noteBundleExamples(state,examples);
+function syncVisibleBundleQuestions(state,changed,live){
  for(const [key,draft] of Object.entries(state.broad?.drafts||{})){
   const question=draft?.question||authored(key.replace(/^(checkin|activity):/,''));
   if(syncBundleQuestionExposure(state,question,draft))changed=true;
@@ -36,3 +40,6 @@ export function noteBundleDisplay(state,examples,live=null){
  if(live&&syncBundleQuestionExposure(state,live.question,live.active))changed=true;
  return changed;
 }
+export function noteBundleDisplay(state,examples,live=null){return syncVisibleBundleQuestions(state,noteBundleExamples(state,examples),live);}
+export function noteReturningDisplay(state,examples,live=null){return syncVisibleBundleQuestions(state,noteReturningExamples(state,examples),live);}
+export function noteComparisonDisplay(state,examples,live=null){return syncVisibleBundleQuestions(state,noteComparisonExamples(state,examples),live);}

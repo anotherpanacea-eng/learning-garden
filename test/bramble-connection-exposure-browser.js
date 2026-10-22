@@ -1,0 +1,50 @@
+// Synthetic composed journey: a pictured connection is not a supplied completed Bramble result.
+const assert=require('node:assert/strict');
+const path=require('node:path');
+const {pathToFileURL}=require('node:url');
+(async()=>{
+ const root=path.resolve(__dirname,'..'),load=file=>import(pathToFileURL(path.join(root,'dist',file)).href);
+ const {freshState}=await load('core.mjs'),{initializeExplorerState}=await load('progress-transfer.mjs');
+ const {ensureCafe,nextGuest,adjustBite,checkPlate,submitCafeNumber,skipCafeStage,serveCafe}=await load('cafe-core.mjs');
+ const {startPostOffice}=await load('post-office-core.mjs'),{deliveries}=await load('post-office-content.mjs');
+ const {learningSource}=await load('learning-connections.mjs');
+ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright').then(m=>m.default||m);
+ const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
+ const base=process.env.BRAMBLE_EXPOSURE_TEST_URL||'http://127.0.0.1:8000/';
+ let checks=0;const ok=(x,m)=>{assert.ok(x,m);checks++},eq=(x,y,m)=>{assert.deepEqual(x,y,m);checks++};
+ const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;ensureCafe(s);
+ ok(startPostOffice(s,deliveries[0].id),'delivery exists');ok(nextGuest(s),'café guest arrives');
+ const order=s.cafe.current;order.params.guests=3;order.params.bites=4;order.params.wanted=['warm','crunchy'];
+ for(let i=0;i<4;i++)adjustBite(s,'moon-crunch',1);
+ ok(checkPlate(s),'real café plate fits');ok(submitCafeNumber(s,12),'real café total fits');
+ skipCafeStage(s);s.cafe.stock['moon-crunch']=180;ok(serveCafe(s),'real café table is served');
+ const source=learningSource(s,'cafe');eq([source.a,source.b],[4,4],'served café offers connected 4 by 4');
+ const errors=[];
+ try{
+  const c=await browser.newContext({viewport:{width:390,height:844},acceptDownloads:true,hasTouch:true});
+  await c.addInitScript(data=>{if(!localStorage.getItem('bramble-composed-seed')){localStorage.setItem('number-garden-v1',JSON.stringify(data));localStorage.setItem('bramble-composed-seed','yes');}},s);
+  const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));
+  const saved=()=>p.evaluate(()=>{const r=JSON.parse(localStorage.getItem('learning-garden-explorers'));return JSON.parse(localStorage.getItem(`number-garden-v1:${r.activeId}`));});
+  await p.goto(new URL('#post',base).href);
+  await p.locator('[data-connection-start="cafe"][data-connection-target="bramble"]').click();
+  let current=await saved(),r=current.postOffice.visits.find(v=>v.id===current.postOffice.current).rival;
+  eq([r.task.a,r.task.b],[4,4],'connected Bramble receives pictured question');
+  ok(!r.priorFactShown,'post render does not claim the offered question supplied its answer');
+  ok(current.exposures.includes('4x4'),'generic pictured connection still records broad familiarity');
+  await p.locator('[data-post-page="bramble"]').click();await p.locator('#post-rival-input').waitFor();
+  ok(!(await p.locator('.post-rival-question').innerText()).includes('matching fact was shown earlier'),'Bramble question gives no false prior-result message');
+  await p.locator('#post-rival-input').fill('16');await p.locator('#post-rival-form button[type="submit"]').click();
+  current=await saved();r=current.postOffice.visits.find(v=>v.id===current.postOffice.current).rival;
+  ok(r.attempts.length===1&&r.attempts[0].correct&&!r.attempts[0].afterSupport&&!r.supported,'first answer keeps actual chronology');
+  if(await p.locator('[data-film-skip]').count())await p.locator('[data-film-skip]').click();
+  await p.locator('[data-rival-continue]').click();
+  current=await saved();const bramble=learningSource(current,'bramble');
+  eq(bramble.outcome,'first-match','unsupplied first answer remains a fresh connection source');
+  eq([bramble.a,bramble.b],[5,4],'fresh connection offers neighboring task');
+  await p.goto(new URL('#living',base).href);ok(await p.locator('[data-connection-start="bramble"][data-connection-target="living"]').isVisible(),'Living Garden onward invitation appears');
+  await p.goto(new URL('#cafe',base).href);ok(await p.locator('[data-connection-start="bramble"][data-connection-target="cafe"]').isVisible(),'Café onward invitation appears');
+  eq((await saved()).postOffice.bramble.history.at(-1).priorFactShown,undefined,'archived round never gets a false supplied-fact flag');
+  eq(errors,[],'no page errors');await c.close();
+  console.log(`${checks} composed Café, Bramble and onward-invitation browser assertions passed.`);
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1});
