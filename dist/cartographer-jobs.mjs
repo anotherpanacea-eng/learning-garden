@@ -11,10 +11,10 @@ const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),text=(x,max)=>t
 const known=id=>marks.some(m=>m.id===id),point=p=>object(p)&&Number.isInteger(p.x)&&p.x>=0&&p.x<=5&&Number.isInteger(p.y)&&p.y>=0&&p.y<=5;
 const samePoint=(a,b)=>!!a&&!!b&&a.x===b.x&&a.y===b.y;
 export function validMapJobSource(s){
- return object(s)&&s.version===1&&typeof s.id==='string'&&/^[A-Za-z0-9_-]{1,60}$/.test(s.id)&&text(s.title,120)&&text(s.mapReaderText,800)&&text(s.request,600)&&object(s.places)&&marks.every(m=>point(s.places[m.id]))&&new Set(marks.map(m=>`${s.places[m.id].x},${s.places[m.id].y}`)).size===4&&[s.from,s.via,s.to].every(known)&&new Set([s.from,s.via,s.to]).size===3;
+ return object(s)&&s.version===1&&typeof s.id==='string'&&/^[A-Za-z0-9_-]{1,60}$/.test(s.id)&&text(s.title,120)&&text(s.mapReaderText,800)&&text(s.request,600)&&object(s.places)&&Object.entries(s.places).every(([id,p])=>known(id)&&(p===null||point(p)))&&new Set(Object.values(s.places).filter(Boolean).map(p=>`${p.x},${p.y}`)).size===Object.values(s.places).filter(Boolean).length&&[s.from,s.via,s.to].every(id=>known(id)&&point(s.places[id]))&&new Set([s.from,s.via,s.to]).size===3;
 }
 export function validMapJob(job,round){
- return object(job)&&job.version===1&&validMapJobSource(job.source)&&['map','dispatch','both'].includes(job.view)&&round.from===job.source.from&&round.to===job.source.to&&marks.every(m=>samePoint(round.places[m.id],job.source.places[m.id]));
+ return object(job)&&job.version===1&&validMapJobSource(job.source)&&['map','dispatch','both'].includes(job.view)&&round.from===job.source.from&&round.to===job.source.to&&marks.every(m=>round.places[m.id]==null&&job.source.places[m.id]==null||samePoint(round.places[m.id],job.source.places[m.id]));
 }
 const validFacts=f=>object(f)&&typeof f.visited==='boolean'&&(f.firstVisit===null||Number.isInteger(f.firstVisit)&&f.firstVisit>=0&&f.firstVisit<=12)&&typeof f.fulfilled==='boolean';
 // Read historical booleans as recorded; do not derive them from old routes to admit a save.
