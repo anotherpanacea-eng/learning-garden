@@ -52,7 +52,7 @@ export function bindDoubleCheck(state,{save,render,navigate,focus,canExport,expl
  const refresh=selector=>{save?.();render?.();focus?.(selector);};
  const attach=(selector,action,event='click')=>root.querySelectorAll(selector).forEach(el=>el.addEventListener(event,e=>{if(!live()||!el.isConnected){e.preventDefault();e.stopImmediatePropagation();return;}action(el,e);}));
  attach('[data-double-start]',()=>{if(!startDouble(state,canExport)){status(refusal);return;}save?.();if(location.hash==='#post/double-check/trace')navigate?.('#post/double-check');else {render?.();focus?.('#double-rule-title');}});
- attach('[data-double-connector]',el=>selectDoubleConnector(state,el.value,canExport)?refresh('#double-rule-sentence'):status(refusal),'change');
+ attach('[data-double-connector]',el=>{if(selectDoubleConnector(state,el.value,canExport)){refresh('#double-rule-sentence');return;}const savedConnector=doubleView(state).root.connector;root.querySelectorAll('[data-double-connector]').forEach(input=>{input.checked=input.value===savedConnector;});status(refusal);},'change');
  attach('[data-double-parcel]',el=>selectDoubleParcel(state,el.dataset.doubleParcel,canExport)?refresh('#double-rule-title'):status(refusal));
  attach('[data-double-contrast]',()=>{const r=doubleView(state).root,stamp=r.source.clues.find(c=>c.feature==='stamp'),wrap=r.source.clues.find(c=>c.feature==='wrap'),p=r.source.parcels.find(x=>x.stamp===stamp.value&&x.wrap!==wrap.value);if(p)selectDoubleParcel(state,p.id,canExport)?refresh('#double-rule-title'):status(refusal);});
  attach('[data-double-predict]',el=>predictDouble(state,el.dataset.doublePredict||null,canExport)?refresh('#double-trace'):status(refusal));
