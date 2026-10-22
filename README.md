@@ -120,6 +120,8 @@ node test/forage-checks.mjs
 node test/paris-checks.mjs
 node test/paris-exploration-checks.mjs
 node test/paris-saved-source-checks.mjs
+node test/town-remembers-checks.mjs
+node test/town-remembers-integration-checks.mjs
 node test/story-pack-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
@@ -344,3 +346,9 @@ The locally built **Whole batches for a gathering** activity (`#cafe/batches`) i
 New visits retain their supplied passages, questions, ordering cards, smaller examples and ending together. Catalogue edits cannot change a paused answer or the next question's passage. Earlier visits without those pages stay in the notebook as records; a fresh visit is offered without guessing the missing wording. French preservation is a separate follow-up.
 
 For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
+
+### The Town Remembers
+
+An optional home invitation returns to a kept tray, loaf or kitchen jar on a later local day. Six finite forms ask for a different unknown or representation: guest counts, a whole-batch shortcut, same-loaf comparisons, a fraction of twelve buns, a coarser jug scale, and an extra pour. Earlier undated keeps are eligible too. Each errand freezes its own source and choices; checking, support and keeping an answer remain separate. Nothing changes the original game or café stock.
+
+To run synthetic browser journeys, serve `dist` locally and run `node test/town-remembers-browser.js` with `TOWN_TEST_URL` pointing to the server. Installed Node Playwright and Chromium are required; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. `TOWN_ARTIFACTS` selects a temporary screenshot directory. Tests cover all six forms at phone/tablet sizes, actual source-game Keep buttons, later-day invitations, revisions, support, recovery and notebook download/import. This is Chromium emulation, not a physical iPad or audible-speech check.
