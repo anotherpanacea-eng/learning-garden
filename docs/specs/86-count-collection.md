@@ -1,6 +1,6 @@
 # 86 · My Count Collection: make data, then draw it
 
-**Status: independently reviewed specification; implementation awaiting independent review.** A separate internal reviewer cleared the source-category clarification at `5dd7261`. Four shorter turns and staggered pictures preserve the reviewed scope. This document does not establish release clearance.
+**Status: internally reviewed specification and implementation; draft awaiting release clearance.** A separate internal reviewer cleared the source-category clarification at `5dd7261` and the implementation fixes at `d4323c4`. Four shorter turns and staggered pictures preserve the reviewed scope. See the [review receipt](../reviews/86-count-collection-review.md). This document does not establish release clearance.
 
 ## Purpose and reuse
 
