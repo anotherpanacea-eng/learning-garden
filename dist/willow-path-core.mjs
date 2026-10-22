@@ -8,7 +8,7 @@ const bytes=x=>new TextEncoder().encode(x).length;
 const required=Object.keys(WILLOW_SOURCE.text);
 const placeholders={spinButton:['token'],turnLine:['token'],atGate:['token'],spinResult:['token','value'],atStone:['token','square'],stepButton:['square'],eventButton:['square'],eventHearButton:['square']};
 export function validWillowSource(source){
- if(!object(source)||source.version!==1||!(/^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/).test(source.id)||source.squares!==10||!Array.isArray(source.spinner)||source.spinner.length!==2||source.spinner[0]!==1||source.spinner[1]!==2||!object(source.text)||!Array.isArray(source.events)||source.events.length>10)return false;
+ if(!object(source)||source.version!==1||typeof source.id!=='string'||!(/^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$/).test(source.id)||source.squares!==10||!Array.isArray(source.spinner)||source.spinner.length!==2||source.spinner[0]!==1||source.spinner[1]!==2||!object(source.text)||!Array.isArray(source.events)||source.events.length>10)return false;
  for(const key of required){const value=source.text[key];if(typeof value!=='string'||!value.trim()||bytes(value)>512||placeholders[key]?.some(name=>!value.includes(`{${name}}`)))return false;}
  const seen=new Set();for(const event of source.events){if(!object(event)||!Number.isInteger(event.square)||event.square<1||event.square>source.squares||seen.has(event.square)||typeof event.title!=='string'||!event.title.trim()||bytes(event.title)>120||typeof event.body!=='string'||!event.body.trim()||bytes(event.body)>512)return false;seen.add(event.square);}
  try{return bytes(JSON.stringify(source))<=16384;}catch{return false;}
