@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="640" viewBox="0 0 920 640" role="img" aria-labelledby="title desc">
+<title id="title">Garden Paving: the missing corner and the completed square</title>
+<desc id="desc">Two original three-to-four planning diagrams retain the same nine old tiles. The first has a new bottom patch of three and a new right patch of three, but an empty bottom-right corner: six added, fifteen total. The second also has the one corner: seven added, sixteen total. This is an L-shaped addition along two sides, not a border around all four sides.</desc>
+<defs>
+<pattern id="old" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#dce8d4"/><circle cx="5" cy="5" r="1.6" fill="#658467"/></pattern>
+<pattern id="bottom" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#f5dfae"/><path d="M0 4H8" stroke="#9d752f" stroke-width="1.5"/></pattern>
+<pattern id="right" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#d6e9e7"/><path d="M-2 2L2-2M0 9L9 0M7 11L11 7" stroke="#4a7e83" stroke-width="1.4"/></pattern>
+<pattern id="corner" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#f0d8d8"/><path d="M5 2V8M2 5H8" stroke="#a65a68" stroke-width="1.3"/></pattern>
+</defs>
+<rect width="920" height="640" rx="22" fill="#fbf7ed"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#293e36">
+<text x="40" y="47" font-size="29" font-weight="700">Keep the old square. Count what is new.</text>
+<text x="40" y="79" font-size="18">Original art mock · old 3 by 3 → finished goal 4 by 4</text>
+<rect x="30" y="103" width="420" height="376" rx="14" fill="#fffdf7" stroke="#d5d7c4"/>
+<rect x="470" y="103" width="420" height="376" rx="14" fill="#fffdf7" stroke="#d5d7c4"/>
+<text x="50" y="137" font-size="22" font-weight="700">One corner is still missing</text>
+<text x="490" y="137" font-size="22" font-weight="700">The finished square</text>
+<rect x="75" y="159" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="123" y="159" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="171" y="159" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="219" y="159" width="43" height="43" rx="4" fill="url(#right)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="75" y="207" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="123" y="207" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="171" y="207" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="219" y="207" width="43" height="43" rx="4" fill="url(#right)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="75" y="255" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="123" y="255" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="171" y="255" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="219" y="255" width="43" height="43" rx="4" fill="url(#right)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="75" y="303" width="43" height="43" rx="4" fill="url(#bottom)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="123" y="303" width="43" height="43" rx="4" fill="url(#bottom)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="171" y="303" width="43" height="43" rx="4" fill="url(#bottom)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="219" y="303" width="43" height="43" rx="4" fill="#fffdf7" stroke="#a65a68" stroke-width="2.5" stroke-dasharray="5 4"/>
+<path d="M69 153H218V302H69Z" fill="none" stroke="#355b40" stroke-width="2.5"/>
+<text x="75" y="378" font-size="18">9 old + 3 below + 3 right</text>
+<text x="75" y="409" font-size="23" font-weight="700">6 new · 15 now</text>
+<path d="M265 328H313" fill="none" stroke="#a65a68" stroke-width="2"/><text x="319" y="325" font-size="16">Empty</text><text x="319" y="346" font-size="16">corner</text>
+<rect x="515" y="159" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="563" y="159" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="611" y="159" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="659" y="159" width="43" height="43" rx="4" fill="url(#right)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="515" y="207" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="563" y="207" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="611" y="207" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="659" y="207" width="43" height="43" rx="4" fill="url(#right)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="515" y="255" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="563" y="255" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="611" y="255" width="43" height="43" rx="4" fill="url(#old)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="659" y="255" width="43" height="43" rx="4" fill="url(#right)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="515" y="303" width="43" height="43" rx="4" fill="url(#bottom)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="563" y="303" width="43" height="43" rx="4" fill="url(#bottom)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="611" y="303" width="43" height="43" rx="4" fill="url(#bottom)" stroke="#536a59" stroke-width="1.3"/>
+<rect x="659" y="303" width="43" height="43" rx="4" fill="url(#corner)" stroke="#536a59" stroke-width="1.3"/>
+<path d="M509 153H658V302H509Z" fill="none" stroke="#355b40" stroke-width="2.5"/>
+<text x="515" y="378" font-size="18">9 old + 3 below + 3 right + 1 corner</text>
+<text x="515" y="409" font-size="23" font-weight="700">7 new · 16 altogether</text>
+<text x="45" y="514" font-size="19" font-weight="700">The two long patches stop before the corner. Count that corner once.</text>
+<rect x="45" y="540" width="28" height="28" rx="4" fill="url(#old)" stroke="#536a59"/><text x="85" y="561" font-size="18">Old tiles</text>
+<rect x="255" y="540" width="28" height="28" rx="4" fill="url(#bottom)" stroke="#536a59"/><text x="295" y="561" font-size="18">Bottom patch</text>
+<rect x="485" y="540" width="28" height="28" rx="4" fill="url(#right)" stroke="#536a59"/><text x="525" y="561" font-size="18">Right patch</text>
+<rect x="700" y="540" width="28" height="28" rx="4" fill="url(#corner)" stroke="#536a59"/><text x="740" y="561" font-size="18">One corner</text>
+<text x="45" y="608" font-size="17">An L-shaped addition along two sides. The old tiles keep their places.</text></g></svg>
