@@ -1,6 +1,6 @@
 # Returning Supply Orders: bounded source audit
 
-**Author research, 2026-10-22; independently reviewed and revised at spec head `2d989488275c8d615927920efd24a83fbc6740d3`.** Supports [spec 78](../specs/78-returning-supply-orders.md). This packet changes no lesson, taxonomy pin, atlas row or completed-topic status. [Joining Supply Orders (spec 77, PR 73)](https://github.com/anotherpanacea-eng/learning-garden/pull/73) remains a separate draft, not a merged prerequisite.
+**Author research, 2026-10-22; independently reviewed and revised through pre-Start fold `e5840bb49e963d76a7c4fe4677411cf59941e567`.** Supports [spec 78](../specs/78-returning-supply-orders.md). This packet changes no lesson, taxonomy pin, atlas row or completed-topic status. [Joining Supply Orders (spec 77, PR 73)](https://github.com/anotherpanacea-eng/learning-garden/pull/73) remains a separate draft, not a merged prerequisite.
 
 ## Existing lesson and external sources
 
