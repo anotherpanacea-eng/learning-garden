@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {ensureBroad,noteLegacyExposure} from '../dist/broad-core.mjs';
 import {helpers,acceptsAnswer,helperLimit} from '../dist/help-content.mjs';
+import {isParisReadingVisit} from '../dist/paris-visit-source.mjs';
 import {parisStories} from '../dist/paris-library.mjs';
 import {storyNodes} from '../dist/story-content.mjs';
 import {ensureGarden,currentVisit,startVisit,resumeVisit,storyDraft,openStoryHelp,submitStoryHelp,submitStory,finishStoryNode,noteGardenFactExposure,editStoryOrder,submitStoryOrder} from '../dist/garden-core.mjs';
@@ -28,7 +29,7 @@ for(const [id,h] of Object.entries(helpers)){
  check(o.helpUsed&&o.supported&&!o.independent&&!o.freshEvidence&&o.helper.attempts.length===2,'helper attempts separate from evidence');
  check(gardenNotes(restored).includes('Smaller example opened.'),'notes show help separately');
  o.helper={exampleId:h.id,open:false};ensureGarden(restored);
- if(n.entrance==='paris')check(JSON.stringify(o.helper)===JSON.stringify({exampleId:h.id,open:false})&&gardenNotes(restored).includes('details unreadable'),'captured Paris helper history stays raw and is safely summarized');
+ if(isParisReadingVisit(currentVisit(restored)))check(JSON.stringify(o.helper)===JSON.stringify({exampleId:h.id,open:false})&&gardenNotes(restored).includes('details unreadable'),'captured Paris helper history stays raw and is safely summarized');
  else check(gardenNotes(restored).includes('Example answers tried: None'),'non-Paris malformed recorded helper retains existing repair');
 }
 for(let i=0;i<4;i++){

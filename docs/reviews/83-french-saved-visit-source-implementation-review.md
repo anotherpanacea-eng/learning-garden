@@ -1,0 +1,9 @@
+# French whole-visit source: implementation review
+
+A separate internal reviewer cleared exact candidate `caaafdfc6c678f3b9c594a814b98daa3aabc349f` on 2026-10-22, with no P1/P2 findings. The runtime is `5573f03`; the final follow-up changes only the helper test's preservation expectation. This is not Claude release clearance. The reviewer traced starts, load, route/ending rendering, choice/order/helper scoring, notes, recovery, familiarity, suggestions and actual import/store probes against [spec83](../specs/83-french-saved-visit-source.md).
+
+The root verified all 30 French routes fit the existing 24 KiB authored-copy cap, source/key/helper changes do not replace saved pages, and retired/re-paired legacy routes retain their records and encounter meaning. The new focused suite passes 75 checks including 200 visits across two actual explorer stores, formatted notebook imports, saving off, reset and quota fallback. The complete 122 source-suite run had one old helper expectation failure; after changing that test to preserve captured French history, its 1,079 checks passed. All other suites passed in that run. The independent reviewer confirmed that test change matches the required contract.
+
+Actual local Chrome journeys passed 60 assertions each for French and English at phone/tablet sizes. They cover paused helper and choices, partial/submitted ordering, first-to-second passage continuity, ending, changed current content, legacy and unknown-source recovery, keyboard fresh start, touch targets, overflow and actual notebook download/import. The shared browser check defaults to English; `PARIS_SOURCE_LANGUAGE=fr` selects French. Physical iPad/Safari, audible French voice quality, production assets and deployment remain unverified.
+
+The branch remains a draft pending final independent Claude release clearance. No source graph, French lesson prose, proficiency claim, remote storage or deployment was added.

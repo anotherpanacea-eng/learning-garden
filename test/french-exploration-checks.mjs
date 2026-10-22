@@ -4,6 +4,7 @@ import {storyNodes} from '../dist/story-content.mjs';
 import {frenchStoryData} from '../dist/french-story-data.mjs';
 import {frenchStories,frenchPlaces,frenchLibraryNodes} from '../dist/french-library.mjs';
 import {frenchPlan,validateFrenchRoute} from '../dist/french-core.mjs';
+import {parisVisitStatus} from '../dist/paris-visit-source.mjs';
 import {parisPlan} from '../dist/paris-core.mjs';
 import {ensureGarden,startVisit,storyDraft,currentVisit,noteStorySeen,submitStory,submitStoryOrder,editStoryOrder,finishStoryNode,useStoryReadingTool,storyDescribe} from '../dist/garden-core.mjs';
 import {frenchLanding,storyPage,gardenNotes,storyHub} from '../dist/garden-ui.mjs';
@@ -85,7 +86,7 @@ for(const kind of ['hint','reveal','audio','sentence','helper','together','retry
 }
 for(const mutate of [v=>v.french=null,v=>v.french=false,v=>delete v.french,v=>v.route.reverse(),v=>v.route=['paris-note','paris-reread','paris-postcard'],v=>v.french.variant=99,v=>v.paris={destination:'bookstall'},v=>v.recorded=['french-postcard']]){
  const s=fresh();startVisit(s,'french',{destination:'bookstall'});answer(s);mutate(s.garden.visits[0]);
- const r=restoreState(json(s));ensureGarden(r);check(r.garden.visits.length===0&&r.garden.observations.length===0,'invalid French metadata/route cannot survive as legacy or inform suggestions');
+ const r=restoreState(json(s));ensureGarden(r);check(r.garden.visits.length===1&&r.garden.observations.length===1&&parisVisitStatus(r.garden.visits[0])==='recovery'&&frenchPlan(r,'river').variant===1,'invalid French metadata/route stays raw in recovery and cannot inform suggestions');
 }
 for(const field of ['frenchDestination','frenchStory','frenchVariant','frenchSelectionReason']){
  const s=fresh();startVisit(s,'french',{destination:'bookstall'});answer(s);s.garden.observations[0][field]='forged';
@@ -94,7 +95,7 @@ for(const field of ['frenchDestination','frenchStory','frenchVariant','frenchSel
 {
  const s=fresh();startVisit(s,'french-bookstall');const original=currentVisit(s).id;storyDraft(s).choice=1;
  let r=restoreState(json(s));ensureGarden(r);check(currentVisit(r).id===original&&storyDraft(r).choice===1,'legacy French visit remains resumable');
- r.garden.visits[0].route=['french-bookstall-1','french-bookstall-2','french-bookstall-postcard'];ensureGarden(r);check(!r.garden.visits.length,'stray route cannot turn legacy French into new exploration');
+ r.garden.visits[0].route=['french-bookstall-1','french-bookstall-2','french-bookstall-postcard'];ensureGarden(r);check(r.garden.visits.length===1&&parisVisitStatus(r.garden.visits[0])==='recovery','stray route cannot turn original French into exploration; raw work remains');
  const e=fresh();startVisit(e,'paris',{destination:'bookstall'});answer(e);const prior=json(e.garden.visits[0]);
  startVisit(e,'french',{destination:'river'});check(json(e.garden.visits[0])===prior&&validateFrenchRoute(currentVisit(e)),'English and French paused routes coexist');
  check(!startVisit(e,'french',null)&&!startVisit(e,'french',{destination:'unknown'})&&!frenchPlan(e,'river',4),'invalid plan requests rejected');

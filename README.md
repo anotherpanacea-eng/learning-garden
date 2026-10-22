@@ -64,6 +64,7 @@ node test/fraction-trail-integration-checks.mjs
 node test/bundle-exchange-checks.mjs
 node test/bundle-exposure-checks.mjs
 node test/bundle-exchange-integration-checks.mjs
+node test/returning-orders-checks.mjs
 node test/instruction-checks.mjs
 node test/instruction-integration-checks.mjs
 node test/rain-paths-checks.mjs
@@ -106,6 +107,7 @@ node test/cafe-checks.mjs
 node test/cafe-start-checks.mjs
 node test/tenths-checks.mjs
 node test/science-checks.mjs
+node test/water-evidence-checks.mjs
 node test/workshop-checks.mjs
 node test/post-office-checks.mjs
 node test/post-office-ui-checks.mjs
@@ -128,9 +130,11 @@ node test/paris-saved-source-checks.mjs
 node test/town-remembers-checks.mjs
 node test/town-remembers-integration-checks.mjs
 node test/story-pack-checks.mjs
+node test/library-flood-almanac-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
 node test/french-exploration-checks.mjs
+node test/french-saved-source-checks.mjs
 node test/storm-film-checks.mjs
 node test/ending-film-checks.mjs
 node test/equal-groups-checks.mjs
@@ -181,6 +185,8 @@ A shortage answer never creates inventory. Serving requires enough actual suppli
 Paris also offers three freely chosen destinations: Lucie’s bookstall, the river walk, and the rooftop garden. Seven original errands each have two questions and three passage lengths (14 question prompts, 42 task versions). The next errand favors less encountered stories and suggests a passage length from recent work at that destination, while all lengths remain open. Help/retries can suggest shorter text; two independent first tries on different previously unseen stories can suggest longer text. Repeated stories, shared passages, supported reading, skips, and unknown reports remain distinct. Suggestions are approximate and finite, not reading levels. Frozen routes preserve paused errands across reloads; the original postcard path remains available. See [Paris exploration](docs/specs/11-paris-exploration.md).
 
 The rooftop puppet show is the first [reviewed story pack](docs/story-packs.md). A plain-data module adds its passage variants, evidence question, tap-to-order cards, and helpers to the existing catalog. The validation command rejects malformed packs and conflicting IDs before publication. Partial card arrangements pause with the story, and exported attempts retain readable orders. New packs using these supported formats can be added without changing the engine. Its Marble connection covers sequence only, leaving central message and full retelling unobserved.
+
+The second pack adds a [reviewed text-only flood almanac](docs/specs/80-library-first-flood-almanac.md) at Lucie’s bookstall. All three optional passage lengths name the historical sources and separate the real 1910 flood from the imagined town; one question finds a dated sentence, and another orders three undated event cards by rereading. English Paris saves retain each visit’s original passage, choices, helper and order when published wording changes. Adult read-aloud and optional local narration are support choices, not evidence of independent reading.
 
 The opening introduces the shared story: neighbors are safe after the storm, and players can gather supplies, feed visitors, investigate water, follow messages, or imagine shelters. The café has a replayable, optional “Why we’re here & how to play” introduction, open at a fresh counter, with read-aloud and three short steps. The story introduction adds no completion gates or learner records.
 
@@ -336,6 +342,12 @@ The optional `#numbers/exchange` table extends Bundle Burrow with seven fixed co
 
 A separate manually stepped sixteen-counter example supplies optional help. Only a visibly complete conventional bundle/ones example and its total marks an exact existing bundle task familiar; paused/future/submitted tasks retain that context without rewriting completed answers. Unsupported/recovered history keeps earlier familiarity unknown. No general mastery, handwriting, written arithmetic, inventory rewards or film milestone is inferred. [Spec 53](docs/specs/53-bundle-exchange.md) defines the bounded scope; this branch is stacked on Fraction Trail and requires composed-release checks before publication.
 
+## Returning Supply Orders — local build
+
+The optional `#numbers/return` activity starts with 42 pretend counters and one of two supplied return requests: 12 or 17. A child can open one wrapped ten, move the requested wrapped ten and loose counters into a visible store tray, reverse those moves, and enter a separate proposed remainder. The two trays always conserve 42; returning changes the table amount while opening a ten does not. Exact source text, unfinished pictures, typed numbers, checks and one kept draft per case remain in the optional local notebook. An unreadable saved root stays available for notes download and explicit recovery.
+
+Only complete conventional tens/ones/total readouts actually shown after Start mark matching original bundle questions familiar. This does not create a broad answer, prove an independent method or score mastery. [Spec 78](docs/specs/78-returning-supply-orders.md) defines the two-case scope and its review gate. Browser checks use `test/returning-orders-browser.js` with a local Chrome and Playwright installation; this candidate still requires independent implementation review and composed-release verification.
+
 ## Instructions for a Reader — local build
 
 The optional `#post/instructions` and `#loft/instructions` desks share one instruction notebook. Two original requests invite planning with picture tickets, arranging separate supplied sentences, manually trying their effects and revising for a reader. Folding matters because this pictured note is too wide for its envelope; a first-time visitor needs preparations before an invitation. Both valid preparation orders work. Later repairs keep the earlier invitation’s consequence rather than silently sending the visitor again.
@@ -352,7 +364,7 @@ Optional Café starting amounts are configured in Grown-up notes. Existing explo
 
 New visits retain their supplied passages, questions, ordering cards, smaller examples and ending together. Catalogue edits cannot change a paused answer or the next question's passage. Earlier visits without those pages stay in the notebook as records; a fresh visit is offered without guessing the missing wording. French preservation is a separate follow-up.
 
-For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
+For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_STORY_ID=flood-almanac` and `PARIS_SOURCE_VARIANT=1`, `2`, or `3` to exercise each Library length; the default remains puppet-post. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
 
 ### The Town Remembers
 

@@ -1,0 +1,80 @@
+// Synthetic browser journey for the optional, unsaved Water Evidence Shelf.
+const assert=require('node:assert/strict');
+const path=require('node:path');
+const fs=require('node:fs/promises');
+const {pathToFileURL}=require('node:url');
+
+(async()=>{
+ const root=path.resolve(__dirname,'..'),load=name=>import(pathToFileURL(path.join(root,'dist',name)).href);
+ const {freshState}=await load('core.mjs'),{initializeExplorerState}=await load('progress-transfer.mjs'),{startScience}=await load('science-core.mjs');
+ const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+ const browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
+ const origin=process.env.EVIDENCE_TEST_URL||'http://127.0.0.1:4173/',errors=[];let assertions=0;
+ const ok=(value,message)=>{assert.ok(value,message);assertions++;};
+ const eq=(actual,expected,message)=>{assert.deepEqual(actual,expected,message);assertions++;};
+ const saved=page=>page.evaluate(()=>{const profile=JSON.parse(localStorage.getItem('learning-garden-explorers'));return JSON.parse(localStorage.getItem(`number-garden-v1:${profile.activeId}`));});
+ const tap=(page,selector)=>page.locator(selector).first().tap();
+ try{
+  for(const width of [390,820]){
+   const seed=initializeExplorerState(freshState());seed.garden.welcomeFilmSeen=true;startScience(seed,'evaporate');const original=structuredClone(seed.science);
+   const context=await browser.newContext({viewport:{width,height:844},hasTouch:true});
+   await context.addInitScript(seed=>{if(!localStorage.getItem('synthetic-water-shelf')){localStorage.setItem('number-garden-v1',JSON.stringify(seed));localStorage.setItem('synthetic-water-shelf','1');}},seed);
+   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
+   await page.goto(new URL('#science',origin).href);
+   await page.locator('.evidence-entry a').waitFor();
+   ok((await page.locator('.science-visits').innerText()).includes('Where did the puddle water go?'),'existing Water Lab visit remains visible at hub');
+   await tap(page,'.evidence-entry a');await page.locator('[data-evidence-root]').waitFor();
+   ok((await page.locator('#evidence-intro-title').innerText()).includes('Water Evidence Shelf'),'entry shows a fresh intro');
+   await tap(page,'[data-evidence-start]');
+   eq(await page.locator('[data-evidence-card]').getAttribute('data-evidence-card'),'puddle','first card opens');
+   eq(await page.evaluate(()=>document.activeElement?.id),'evidence-card-title','start focuses the visible card heading');
+   eq(await page.locator('[data-evidence-root] [role="img"]').count(),2,'before and later illustrations each have a text alternative');
+   await page.locator('[data-evidence-choice="1"]').focus();await page.keyboard.press('Enter');
+   eq(await page.locator('[data-evidence-choice="1"]').getAttribute('aria-pressed'),'true','keyboard activates a note choice');
+   await tap(page,'[data-evidence-note]');
+   eq(await page.evaluate(()=>document.activeElement?.id),'evidence-feedback','reading feedback focuses the visible note');
+   ok((await page.locator('#evidence-feedback').innerText()).includes('cannot single out evaporation'),'puddle overclaim gets a specific explanation');
+   await tap(page,'[data-evidence-clue]');await tap(page,'[data-evidence-talk]');
+   eq(await page.evaluate(()=>document.activeElement?.id),'evidence-talk','talk support focuses its revealed text');
+   ok(await page.locator('#evidence-clue').isVisible()&&await page.locator('#evidence-talk').isVisible(),'optional clue and talk text are visible');
+   await tap(page,'[data-evidence-page="next"]');eq(await page.locator('[data-evidence-card]').getAttribute('data-evidence-card'),'soil','second card opens');
+   eq(await page.evaluate(()=>document.activeElement?.id),'evidence-card-title','page change focuses the new heading');
+   await tap(page,'[data-evidence-choice="1"]');await tap(page,'[data-evidence-note]');
+   ok((await page.locator('#evidence-feedback').innerText()).includes('cannot establish depth, amount, or exclude flow and evaporation'),'soil clue keeps other routes possible');
+   await tap(page,'[data-evidence-page="next"]');eq(await page.locator('[data-evidence-card]').getAttribute('data-evidence-card'),'dish','third card opens');
+   await tap(page,'[data-evidence-choice="2"]');await tap(page,'[data-evidence-note]');
+   ok((await page.locator('#evidence-feedback').innerText()).includes('vapor is not directly seen'),'dish never claims visible vapor');
+   await tap(page,'[data-evidence-page="previous"]');eq(await page.locator('[data-evidence-choice="1"]').getAttribute('aria-pressed'),'true','soil choice remains across pages');
+   await tap(page,'[data-evidence-page="previous"]');eq(await page.locator('[data-evidence-choice="1"]').getAttribute('aria-pressed'),'true','puddle choice remains across pages');
+   ok(await page.locator('#evidence-feedback').isVisible()&&await page.locator('#evidence-clue').isVisible(),'puddle feedback and help remain across pages');
+   eq((await saved(page)).science,original,'shelf did not change the saved Water Lab visit');
+   ok(!Object.keys(await saved(page)).some(k=>/evidenceShelf|waterEvidence/i.test(k)),'shelf creates no saved result root');
+   const geometry=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth,small:[...document.querySelectorAll('[data-evidence-root] button,[data-evidence-root] a')].filter(el=>el.getClientRects().length&&el.getBoundingClientRect().height<44).map(el=>el.textContent.trim())}));
+   eq(geometry.overflow,false,'no horizontal overflow');eq(geometry.small,[],'visible shelf controls meet 44px touch height');
+   await tap(page,'[data-evidence-root] .back');await page.locator('.evidence-entry a').waitFor();await tap(page,'.evidence-entry a');
+   await page.locator('#evidence-intro-title').waitFor();
+   ok(await page.locator('#evidence-intro-title').isVisible(),'leaving the shelf clears its choices');
+   await page.evaluate(()=>{location.hash='#notes';});await page.locator('#download').waitFor();
+   const [download]=await Promise.all([page.waitForEvent('download'),tap(page,'#download')]);
+   const report=JSON.parse(await fs.readFile(await download.path(),'utf8'));
+   eq(report.science,original,'actual downloaded notes retain the existing Water Lab visit');
+   ok(!Object.keys(report).some(k=>/evidenceShelf|waterEvidence/i.test(k)),'actual notes download has no shelf result');
+   await page.evaluate(()=>{location.hash='#science/evidence';});await page.locator('#evidence-intro-title').waitFor();
+   await tap(page,'[data-evidence-start]');await tap(page,'#explorer-switch');await page.locator('#explorer-new').waitFor();await tap(page,'#explorer-new');await tap(page,'#explorer-create');
+   await page.goto(new URL('#science/evidence',origin).href);await page.locator('#evidence-intro-title').waitFor();ok(await page.locator('#evidence-intro-title').isVisible(),'new explorer starts without old choices');
+   eq((await saved(page)).science.visits.length,0,'new explorer does not inherit the earlier Water Lab visit');
+   await page.reload();await page.locator('[data-select-explorer]').first().waitFor();await tap(page,'[data-select-explorer]');
+   await page.evaluate(()=>{location.hash='#science/evidence';});await page.locator('#evidence-intro-title').waitFor();
+   ok(await page.locator('#evidence-intro-title').isVisible(),'reload starts a fresh shelf pass after explorer selection');
+   await page.evaluate(()=>{location.hash='#science/evidence/2';});await page.locator('#evidence-intro-title').waitFor();
+   ok(await page.locator('#evidence-intro-title').isVisible(),'stale card route recovers to intro');
+   await page.evaluate(()=>{location.hash='#notes';});await page.locator('#reset').waitFor();await tap(page,'#reset');await tap(page,'#confirm-reset');
+   if(await page.locator('[data-film-skip]').count())await tap(page,'[data-film-skip]');
+   await page.evaluate(()=>{location.hash='#science/evidence';});await page.locator('#evidence-intro-title').waitFor();
+   ok(await page.locator('#evidence-intro-title').isVisible(),'reset leaves no shelf choice to restore');
+   await context.close();
+  }
+  eq(errors,[],'no browser page errors');
+  console.log(`Water Evidence Shelf Chrome: ${assertions} assertions passed at phone and tablet widths.`);
+ }finally{await browser.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});

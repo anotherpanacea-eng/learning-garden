@@ -1,0 +1,9 @@
+# Water Evidence Shelf: independent reviews
+
+A separate internal reviewer completed six specification lenses at `6e299da5c3fd8e4e99065f584a76dbdb4abf6da9` with no P1/P2 findings. A different internal reviewer cleared implementation `606af0fe68d195558f936f16d8a4c24c628122e3`: the three finite cards, evidence qualifiers, stable choice positions, ephemeral lifecycle and existing Science visit isolation matched [spec82](../specs/82-water-evidence-shelf.md). No external model review is claimed.
+
+The root's tablet visual inspection then found that the original soil picture could read as an underground cutaway. Follow-up `30679fa8d459db34117272b58a212b3197f4db91` changes it to an explicitly labeled view from above, with the puddle and patterned darker patch on the same surface. It also restores the unrelated existing Science initialization on reset. The independent reviewer cleared that exact focused follow-up, rerunning shelf source/session and 68 Science checks. The root inspected the corrected actual Chrome screenshot.
+
+The builder's local phone/tablet Chrome journey passed 61 assertions for choices/support across card changes, exit/re-entry, stale card URLs, reload, explorer switch, reset, focus, touch targets, overflow and unchanged Science records in the actual notebook download. Source/session, Science, transfer, Rain Paths and invitation checks passed. After the visual correction, the root reran source/session, Science, transfer and mobile checks; the correction does not change card routing or selection behavior. Physical iPad/Safari, audible narration and production deployment remain unverified.
+
+Choices are session-only and create no notebook result, attainment record or new source-topic coverage. This is an internal-reviewed draft pending final Claude release clearance. Deployment remains deferred.
