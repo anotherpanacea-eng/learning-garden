@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="1290" viewBox="0 0 390 1290" role="img" aria-labelledby="title desc">
+<title id="title">Review contact sheet: land snail and earthworm movement models</title>
+<desc id="desc">Six original simplified teaching frames at phone width. Three snail pictures show a broad muscular foot, a highlighted foot muscle wave, and a slight illustrative move. Three earthworm pictures show ringed-body shape changes with a separate enlarged callout of tiny bristles. Distances, timing and bristle size are not to scale.</desc>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#173b35}.heading{font-size:21px;font-weight:700}.group{font-size:17px;font-weight:700}.stage{font-size:15px;font-weight:700}.label{font-size:14px}.tiny{font-size:12px}.card{fill:#f7f8ee;stroke:#9bb5a3;stroke-width:1.5}.ground{stroke:#557868;stroke-width:3;stroke-linecap:round}.arrow{stroke:#9b5a35;stroke-width:3;fill:none;stroke-linecap:round}</style>
+<rect width="390" height="1290" fill="#eef3e9"/>
+<text class="heading" x="20" y="35">Two ways to move</text>
+<text class="tiny" x="20" y="57">Original teaching-model frames · phone-width review mock</text>
+<defs><marker id="tip" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#9b5a35"/></marker></defs>
+<text class="group" x="20" y="88">LAND SNAIL · MUSCULAR FOOT</text>
+<g transform="translate(18 100)"><rect class="card" x="0" y="0" width="354" height="178" rx="16"/><text class="stage" x="16" y="25">Land snail · PICTURE 1</text><g transform="translate(0 22)"><path class="ground" d="M34 108H320"/>
+<path d="M48 82Q81 65 125 75L226 69Q241 59 246 38Q261 56 263 80L280 91Q256 99 225 98H77Z" fill="#b4cda3" stroke="#245447" stroke-width="2.5"/>
+<path d="M48 92Q153 104 279 91L268 105H64Z" fill="#d7c58b" stroke="#245447" stroke-width="2"/>
+<circle cx="145" cy="62" r="40" fill="#e7c78b" stroke="#715b3e" stroke-width="3"/><path d="M170 77C190 43 153 24 132 50C114 76 142 88 152 71C164 57 149 49 141 59" fill="none" stroke="#715b3e" stroke-width="3"/>
+<path d="M247 43Q242 21 231 15M259 50Q268 27 279 20" fill="none" stroke="#9b6e37" stroke-width="2"/>
+</g><text class="label" x="16" y="160">Broad foot touches a surface</text></g>
+<g transform="translate(18 284)"><rect class="card" x="0" y="0" width="354" height="178" rx="16"/><text class="stage" x="16" y="25">Land snail · PICTURE 2</text><g transform="translate(0 22)"><path class="ground" d="M34 108H320"/>
+<path d="M53 82Q86 65 130 75L231 69Q246 59 251 38Q266 56 268 80L285 91Q261 99 230 98H82Z" fill="#b4cda3" stroke="#245447" stroke-width="2.5"/>
+<path d="M53 92Q158 104 284 91L273 105H69Z" fill="#d7c58b" stroke="#245447" stroke-width="2"/>
+<path d="M125 96q5 -10 10 0" fill="none" stroke="#9b5a35" stroke-width="4" stroke-linecap="round"/><path d="M137 96q5 -10 10 0" fill="none" stroke="#9b5a35" stroke-width="4" stroke-linecap="round"/><path d="M149 96q5 -10 10 0" fill="none" stroke="#9b5a35" stroke-width="4" stroke-linecap="round"/><path d="M163 96l17 0" class="arrow" marker-end="url(#tip)"/><circle cx="150" cy="62" r="40" fill="#e7c78b" stroke="#715b3e" stroke-width="3"/><path d="M175 77C195 43 158 24 137 50C119 76 147 88 157 71C169 57 154 49 146 59" fill="none" stroke="#715b3e" stroke-width="3"/>
+<path d="M252 43Q247 21 236 15M264 50Q273 27 284 20" fill="none" stroke="#9b6e37" stroke-width="2"/>
+</g><text class="label" x="16" y="160">A highlighted muscle wave crosses the foot</text></g>
+<g transform="translate(18 468)"><rect class="card" x="0" y="0" width="354" height="178" rx="16"/><text class="stage" x="16" y="25">Land snail · PICTURE 3</text><g transform="translate(0 22)"><path class="ground" d="M34 108H320"/>
+<path d="M61 82Q94 65 138 75L239 69Q254 59 259 38Q274 56 276 80L293 91Q269 99 238 98H90Z" fill="#b4cda3" stroke="#245447" stroke-width="2.5"/>
+<path d="M61 92Q166 104 292 91L281 105H77Z" fill="#d7c58b" stroke="#245447" stroke-width="2"/>
+<path d="M180 96q5 -10 10 0" fill="none" stroke="#9b5a35" stroke-width="4" stroke-linecap="round"/><path d="M192 96q5 -10 10 0" fill="none" stroke="#9b5a35" stroke-width="4" stroke-linecap="round"/><path d="M204 96q5 -10 10 0" fill="none" stroke="#9b5a35" stroke-width="4" stroke-linecap="round"/><path d="M218 96l17 0" class="arrow" marker-end="url(#tip)"/><circle cx="158" cy="62" r="40" fill="#e7c78b" stroke="#715b3e" stroke-width="3"/><path d="M183 77C203 43 166 24 145 50C127 76 155 88 165 71C177 57 162 49 154 59" fill="none" stroke="#715b3e" stroke-width="3"/>
+<path d="M260 43Q255 21 244 15M272 50Q281 27 292 20" fill="none" stroke="#9b6e37" stroke-width="2"/>
+</g><text class="label" x="16" y="160">The same foot carries the body onward</text></g>
+<text class="group" x="20" y="678">EARTHWORM · SEGMENTS AND BRISTLES</text>
+<g transform="translate(18 690)"><rect class="card" x="0" y="0" width="354" height="178" rx="16"/><text class="stage" x="16" y="25">Earthworm · PICTURE 1</text><g transform="translate(0 22)"><path class="ground" d="M34 108H320"/>
+<g fill="#c99d83" stroke="#775b45" stroke-width="3"><rect x="52" y="58" width="217" height="36" rx="18"/></g><path d="M80 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M100 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M120 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M140 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M160 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M180 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M200 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M220 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M240 62q-4 14.0 0 28" stroke="#8d634d" stroke-width="2" fill="none"/>
+<circle cx="295" cy="44" r="24" fill="#fff6e7" stroke="#9b5a35" stroke-width="1.8"/>
+<path d="M285 47l-4 11m10-12l-2 12m9-11l2 11m5-13l4 10" stroke="#775b45" stroke-width="2" stroke-linecap="round"/>
+<path d="M277 56L249 82" stroke="#9b5a35" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+</g><text class="label" x="16" y="160">Ringed body; tiny bristles enlarged</text></g>
+<g transform="translate(18 874)"><rect class="card" x="0" y="0" width="354" height="178" rx="16"/><text class="stage" x="16" y="25">Earthworm · PICTURE 2</text><g transform="translate(0 22)"><path class="ground" d="M34 108H320"/>
+<g fill="#c99d83" stroke="#775b45" stroke-width="3"><path d="M52 76Q52 58 70 58H160Q181 58 193 64H302Q316 64 316 78Q316 92 302 92H193Q181 98 160 98H70Q52 98 52 80Z"/></g><path d="M79 62q-4 16.0 0 32" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M98 62q-4 16.0 0 32" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M117 62q-4 16.0 0 32" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M136 62q-4 16.0 0 32" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M155 62q-4 16.0 0 32" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M203 68q-4 10.0 0 20" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M224 68q-4 10.0 0 20" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M245 68q-4 10.0 0 20" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M266 68q-4 10.0 0 20" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M287 68q-4 10.0 0 20" stroke="#8d634d" stroke-width="2" fill="none"/>
+<circle cx="295" cy="44" r="24" fill="#fff6e7" stroke="#9b5a35" stroke-width="1.8"/>
+<path d="M285 47l-4 11m10-12l-2 12m9-11l2 11m5-13l4 10" stroke="#775b45" stroke-width="2" stroke-linecap="round"/>
+<path d="M277 56L249 82" stroke="#9b5a35" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+</g><text class="label" x="16" y="160">Body lengthens; bristles help grip</text></g>
+<g transform="translate(18 1058)"><rect class="card" x="0" y="0" width="354" height="178" rx="16"/><text class="stage" x="16" y="25">Earthworm · PICTURE 3</text><g transform="translate(0 22)"><path class="ground" d="M34 108H320"/>
+<g fill="#c99d83" stroke="#775b45" stroke-width="3"><path d="M72 80Q72 64 90 64H165Q180 64 192 56H247Q261 58 270 64H279Q296 64 296 80Q296 96 279 96H270Q261 100 247 100H192Q180 96 165 96H90Q72 96 72 80Z"/></g><path d="M98 68q-4 12.0 0 24" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M117 68q-4 12.0 0 24" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M136 68q-4 12.0 0 24" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M155 68q-4 12.0 0 24" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M194 60q-4 18.0 0 36" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M212 60q-4 18.0 0 36" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M230 60q-4 18.0 0 36" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M248 60q-4 18.0 0 36" stroke="#8d634d" stroke-width="2" fill="none"/><path d="M278 68q-4 12.0 0 24" stroke="#8d634d" stroke-width="2" fill="none"/>
+<circle cx="295" cy="44" r="24" fill="#fff6e7" stroke="#9b5a35" stroke-width="1.8"/>
+<path d="M285 47l-4 11m10-12l-2 12m9-11l2 11m5-13l4 10" stroke="#775b45" stroke-width="2" stroke-linecap="round"/>
+<path d="M277 56L249 82" stroke="#9b5a35" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+</g><text class="label" x="16" y="160">Body shortens; bristles help hold on</text></g>
+<text class="tiny" x="20" y="1261">Review-only art: no timing, speed, distance or bristle scale.</text></svg>
