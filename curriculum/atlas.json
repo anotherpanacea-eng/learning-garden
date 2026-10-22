@@ -627,6 +627,17 @@
       ],
       "route": "#workshop/clock",
       "scope": "Four fictional morning preparation cards: read a fixed hour/half-hour face, then set a separate coupled model to a supplied digital departure. Independent recorded responses, optional supplied digital label/help, frozen sources and open revision. No independent drawing/hand positioning, elapsed-duration calculation, AM/PM, 24-hour day, physical measurement or real schedule."
+    },
+    {
+      "id": "source-trail",
+      "name": "Follow the Source Trail",
+      "status": "built-local",
+      "patterns": [
+        "read",
+        "build"
+      ],
+      "route": "#workshop/sources",
+      "scope": "Four open supplied-choice questions over the reviewed Paris1910 photograph, an explicitly derivative modern picture note and a modern date summary. Trace a proposed note-to-source link, distinguish card count from independent observation, and choose a limited display label. No positive independent-witness example, independent decoding/explanation/research, source trust ranking or whole-history coverage."
     }
   ],
   "manualReferences": [
@@ -1259,6 +1270,13 @@
       "kind": "scoped-practice",
       "source": "dist/preparation-clock-content.mjs",
       "scope": "Supplied 30-minute half-hour steps and two steps making 60 minutes / one hour. The 24-position model is a 12-hour face, not a day. No 24-hours/day conversion, independent elapsed-duration calculation or physical measurement."
+    },
+    {
+      "game": "source-trail",
+      "topicId": "mt_TTzJTF-OkG",
+      "kind": "scoped-practice",
+      "source": "dist/source-trail-content.mjs",
+      "scope": "Trace the openly declared origin of a modern note from photographPH8646 and limit its independent evidential weight. Four supplied questions, own frozen choices and revised display label. C’s independence is not established; no positive independent corroboration, historical author-purpose inference, independent reading/research or whole-topic attainment."
     }
   ],
   "increments": [

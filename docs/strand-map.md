@@ -42,7 +42,7 @@ Each revisit below is **proposed**, except the existing numerical *Carry an idea
 | [16. Inquiry](#16-scientific-inquiry-and-explanation) | Workshop, Living Garden | Observation versus interpretation; supplied versus designed test |
 | [17. Computing](#17-instructions-algorithms-and-computing) | Post Office → courier programming mode | Literal instruction versus intended meaning |
 | [18. Maps and geography](#18-maps-geography-and-navigation) | Orchard, Post Office → map room | Relative direction versus fixed reference/scale |
-| [19. History](#19-time-history-and-sources) | Proposed Travelers’ Archive | Sequence versus chronology; evidence versus reconstruction |
+| [19. History](#19-time-history-and-sources) | Travelers’ Archive → Source Trail | Chronology versus scene date; derivative note versus independent evidence |
 | [20. Arts and music](#20-visual-art-drama-and-music) | Loft → proposed making studio | Creating an effect versus choosing the correct answer |
 | [21. Money and practical decisions](#21-money-exchange-and-practical-decisions) | Proposed Café market | Quantity of objects versus monetary value |
 | [22. Strategy and reflection](#22-strategy-reflection-and-learning-to-learn) | Across games, with a companion | Reporting a method versus judging whether it helped |
@@ -259,12 +259,12 @@ Evidence: [Post map/places](../dist/post-office-ui.mjs), [gathering clues](../di
 
 | Concept | Status | Contrast to explore | Home | Revisit with a changed demand |
 | --- | --- | --- | --- | --- |
-| Chronology and a bounded place/time setting | **Planned** outline; content setting still undecided | Story order versus historical chronology; duration versus date | [Travelers’ Archive, spec 24](specs/24-travelers-archive.md) | Place a parcel-related event on a timeline and compare a second event |
-| Artifact/account, corroboration and differing perspectives | **Planned** outline | Surviving evidence versus modern reconstruction; agreement versus independent corroboration | Travelers’ Archive | Keep the event fixed, add a second attributed account and ask what can be concluded |
+| Chronology and a bounded place/time setting | **Built** bounded Paris1910 source/date slice; broader periods planned | Event dates versus modern record publication; picture production date versus exact capture moment | [Travelers’ Archive first visit, spec46](specs/46-travelers-archive-first-visit.md); wider [spec24](specs/24-travelers-archive.md) | Compare another attributed dated source without inferring dates from image tone |
+| Artifact/account, source dependence and corroboration | **Built locally** narrow declared-origin trace; positive independent corroboration still planned | Two cards versus two independent observations; useful derivative note versus independent evidence; unknown independence versus proven dependence | [Follow the Source Trail, spec69](specs/69-follow-the-source-trail.md) / Archive | First trace our note back to one photo; later compare independently attributed records and their underlying origins |
 | Broader historical periods and contextual explanations | **Planned** optional artifact-exhibit outline; authored source sequences still missing | Modern assumptions versus evidence about people in their own context | [Travelers’ Archive exhibits](curriculum-gaps.md#new-games-and-later-content-packs) | Compare another attributed object/account, naming its time/place and limits; one object does not cover a whole period |
 | Evaluate interpretations and uncertainty | **Missing** systematic progression | A source’s statement versus a historian’s argument from it | Candidate Archive investigation board | Support two possible interpretations and identify evidence that could distinguish them |
 
-No history learning activity is currently declared in the atlas. Source anchors: `mt_9REmUc8r4D`, `mt_2GDBmKCJxs`, `mt_TTzJTF-OkG`, `mt_wWlZoLQBR6`, `mt_Lu4H4mbsqO`. All require reviewed sources and honest labels for fiction/reconstruction.
+The atlas declares bounded Archive source/date/scope references and Source Trail’s additional narrow declared-origin/weight practice (`mt_TTzJTF-OkG`); these do not establish positive independent corroboration. Fictional Two Windows comparisons are not historical corroboration. Broader source anchors: `mt_9REmUc8r4D`, `mt_2GDBmKCJxs`, `mt_TTzJTF-OkG`, `mt_wWlZoLQBR6`, `mt_Lu4H4mbsqO`. All require reviewed sources and honest labels for fiction/reconstruction.
 
 ## 20. Visual art, drama and music
 
