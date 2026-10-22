@@ -1,6 +1,6 @@
 # 76 — Willow Path: count on to the bridge
 
-Status: **independent specification and content review cleared for build; implementation pending**. This narrows the [reviewed proposal](proposed/willow-path.md) to one original 1–10 path and resolves its event-text/source ambiguity. See [review receipt](../reviews/76-willow-path-spec-review.md) and [source audit 76](../source-audits/76-willow-path.md) for the primary papers, Jane/Marble checks and the limits of the research comparison. All learner-facing lines below are original. No paper or upstream artwork, code or prose is incorporated.
+Status: **local implementation and independent implementation review cleared; draft, unmerged and undeployed**. This narrows the [reviewed proposal](proposed/willow-path.md) to one original 1–10 path and resolves its event-text/source ambiguity. See [implementation receipt](../reviews/76-willow-path-implementation-review.md), [specification review receipt](../reviews/76-willow-path-spec-review.md) and [source audit 76](../source-audits/76-willow-path.md) for the primary papers, Jane/Marble checks and the limits of the research comparison. All learner-facing lines below are original. No paper or upstream artwork, code or prose is incorporated.
 
 ## Purpose and research boundary
 
