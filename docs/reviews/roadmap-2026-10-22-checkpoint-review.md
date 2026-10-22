@@ -5,3 +5,5 @@ Independent Claude reviewed documentation candidate `afab58ac5e0c06aa203177348fe
 Optional wording corrections link PR64, clarify the isolated review receipts, consistently identify synthetic browser checks, and limit the original-copy statement to independently reviewed drafts. PR74 was subsequently added as reviewed specification only, with implementation still absent. The existing French paused-source issue remains outside the English repair; no French fix is claimed.
 
 The reviewer checked local documents and bundled topic counts, not GitHub PR bodies or live deployment. Root separately verified PR status and the upstream inventory. This review certifies the roadmap wording only, not runtime composition, learning outcomes, merge clearance or publication. Deployment remains deferred pending owner access to the intended Cloudflare account.
+
+A subsequent root status refresh records PR73’s separately approved exposure repair and PR66’s newly advanced runtime head. These are verified status updates, not a new review of PR66 or the multi-branch runtime.
