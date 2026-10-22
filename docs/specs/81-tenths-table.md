@@ -1,6 +1,6 @@
 # 81. Tenths Table
 
-Status: **bounded specification awaiting independent review**. No implementation is authorized by this document before that review. The [source audit](../source-audits/81-tenths-table.md) records current upstream and primary curriculum references. This is one M3-II / M3-fractions9 foothold connecting tenths with decimal notation, with M1-number10 as a secondary connection. It is not full decimal, division, ratio or curriculum coverage.
+Status: **bounded specification independently cleared; implementation underway**. The [review receipt](../reviews/81-tenths-table-spec-review.md) records the separate review and focused repairs. The [source audit](../source-audits/81-tenths-table.md) records current upstream and primary curriculum references. This is one M3-II / M3-fractions9 foothold connecting tenths with decimal notation, with M1-number10 as a secondary connection. It is not full decimal, division, ratio or curriculum coverage.
 
 ## One whole, two names
 
@@ -19,11 +19,11 @@ All eight sources use `wholeId='repair-strip-one'`, `partCount=10`, source versi
 | `one-fraction` | One little part | “Make 1/10 of this whole repair strip.” | 1 | fraction |
 | `four-fraction` | Four tenths | “Make 4/10 of this whole repair strip.” | 4 | fraction |
 | `four-decimal` | A second name | “Make 0.4 of this whole repair strip.” | 4 | decimal |
-| `seven-decimal` | Seven tenths in decimal writing | “Make 0.7 of this whole repair strip.” | 7 | decimal |
+| `seven-decimal` | A longer label | “Make 0.7 of this whole repair strip.” | 7 | decimal |
 | `whole-fraction` | All ten parts | “Make 10/10 of this whole repair strip.” | 10 | fraction |
-| `whole-decimal` | One whole in decimal writing | “Make 1.0 of this whole repair strip.” | 10 | decimal |
+| `whole-decimal` | A third decimal request | “Make 1.0 of this whole repair strip.” | 10 | decimal |
 | `zero-fraction` | No strip selected | “Make 0/10 of this whole repair strip.” | 0 | fraction |
-| `zero-decimal` | Zero in decimal writing | “Make 0.0 of this whole repair strip.” | 0 | decimal |
+| `zero-decimal` | A final decimal request | “Make 0.0 of this whole repair strip.” | 0 | decimal |
 
 Chooser order interleaves forms as above; the two four-tenths requests share a target and make changed notation the contrast. No case is called easier. Keep a saved request's wording/form unchanged after content edits. Mathematical identities are stable; changing the target or whole requires a new source ID/version.
 
