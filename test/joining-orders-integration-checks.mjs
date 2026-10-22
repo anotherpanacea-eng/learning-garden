@@ -51,10 +51,16 @@ const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8'),htm
 assert.match(renderBundleExchange(fresh()).html,/#numbers\/join/,'Exchange Table links back to Joining Supply Orders');
 // A recovery must not make an accepted notebook impossible to import again.
 {
- const s=fresh();s.joiningOrders={version:99,padding:''};
- const cap=5*1024*1024;s.joiningOrders.padding='x'.repeat(cap-JSON.stringify(s).length-32);
- assert.equal(prepareProgressImport(JSON.stringify(s)).ok,true,'size-boundary original imports');
- const before=JSON.stringify(s);assert.equal(J.recoverJoiningOrders(s),false,'oversize proposed wrapper is refused');assert.equal(JSON.stringify(s),before,'size refusal is atomic');
+ const cap=5*1024*1024,template=fresh();template.joiningOrders={version:99,padding:''};
+ const recovered=copy(template);assert.equal(J.recoverJoiningOrders(recovered),true);
+ const overhead=new TextEncoder().encode(JSON.stringify(recovered,null,2)).length;
+ for(const delta of [-1,1]){
+  const s=copy(template);s.joiningOrders.padding='x'.repeat(cap+delta-overhead);
+  assert.equal(prepareProgressImport(JSON.stringify(s,null,2)).ok,true,'original pretty notebook imports at both wrapper boundaries');
+  const before=JSON.stringify(s);assert.equal(J.recoverJoiningOrders(s),delta<0,'recovery accepts just below and refuses just above exact pretty byte cap');
+  if(delta>0)assert.equal(JSON.stringify(s),before,'size refusal is atomic');
+  else assert.equal(new TextEncoder().encode(JSON.stringify(s,null,2)).length,cap-1);
+ }
 }
 {
  const s=fresh();let raw={version:99};s.joiningOrders=raw;
