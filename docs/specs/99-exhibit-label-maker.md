@@ -1,6 +1,6 @@
 # 99 · Exhibit Label Maker
 
-**Status: independently reviewed specification and content at `ecaa99074f8c616a9b42906964afe1c60a3f58cb`; an implementation candidate is built, pending independent implementation and release review.** [Source audit](../source-audits/99-exhibit-label-maker.md) · [phone/tablet teaching mock](assets/99-exhibit-label-mock.html).
+**Status: independently reviewed specification and content at `ecaa99074f8c616a9b42906964afe1c60a3f58cb`; the implementation and first-Keep focus repair independently cleared at `0a97b0b`; exact release composition and publication are tracked in the pull request and current roadmap.** [Source audit](../source-audits/99-exhibit-label-maker.md) · [phone/tablet teaching mock](assets/99-exhibit-label-mock.html).
 
 ## One small writing move
 
