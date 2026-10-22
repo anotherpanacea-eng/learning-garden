@@ -1,6 +1,6 @@
 # The Town Remembers: an earlier idea, returned in a new form
 
-Status: numbered implementation candidate, 2026-10-22. The architecture was independently reviewed in [PR62](https://github.com/anotherpanacea-eng/learning-garden/pull/62). Claude independently approved the final content and source appendix at `244cbb4` after the three P2 findings were resolved; see [the review receipt](../reviews/74-town-remembers-spec-review.md). Implementation review and browser verification remain required. No merge or deployment is claimed. Strategy 3.1 of [the proposal](../other-routes-through-the-acts.md).
+Status: numbered implementation candidate, 2026-10-22. The architecture was independently reviewed in [PR62](https://github.com/anotherpanacea-eng/learning-garden/pull/62). Claude independently approved the final content and source appendix at `244cbb4` after the three P2 findings were resolved; see [the review receipt](../reviews/74-town-remembers-spec-review.md). Implementation independently cleared at `11ee575`; [implementation and browser receipt](../reviews/74-town-remembers-implementation-review.md). Integration remains pending. No merge or deployment is claimed. Strategy 3.1 of [the proposal](../other-routes-through-the-acts.md).
 
 ## Purpose and story
 
