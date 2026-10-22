@@ -10,7 +10,7 @@ Use the existing trusted local English Paris pack compiler, bookstall chooser, t
 
 ## Reviewed-content candidate
 
-Two stories, `egypt-reusable-board` and `egypt-writing-palette`, destination `bookstall`, in original `egypt-writing-book` pack version1. Each has two multiple-choice questions at each of three text lengths. All lengths contain every sentence needed by both questions. Short lengths are not decoding/age claims. The following core sentences and meanings must survive any shortening; longer variants can add the explanatory sentences specified here, not unreviewed historical facts.
+The [complete proposed pack](content/95-egypt-writing-book.mjs) is unregistered authoring data. It holds all child-facing passage variants, four exact questions with choices and support, and four complete fictional smaller examples in the existing compiler format. Review and copy that exact finite data into `dist/packs` only after the content gate; this spec describes its constraints. Two stories, `egypt-reusable-board` and `egypt-writing-palette`, use destination `bookstall` in original `egypt-writing-book` pack version1. Each has two multiple-choice questions at each of three text lengths. All lengths contain every sentence needed by both questions. Short lengths are not decoding/age claims. The following core sentences and meanings must survive any shortening; longer variants can add the explanatory sentences specified here, not unreviewed historical facts.
 
 ### The board that could be used again
 
@@ -25,9 +25,9 @@ Core short passage:
 
 Medium adds: **An apprentice is someone learning a skill. The record does not name this learner or give their age.** Longer adds those sentences plus **A surviving object is one kind of evidence about the past. The photograph shows the board today; the museum explains how it understands the writing.** Do not infer the learner's gender, age, feelings, identity or that all Egyptian children used boards. “About” remains part of the date; BCE means Before the Common Era, supplied in an optional source note. No date arithmetic or year-zero lesson.
 
-Question1: **What made this board useful for another round of writing?** Choices: **It could have a new coat of whitewash.** (fits); **Its ink could never be removed.**; **It was made from a fresh sheet of paper each time.** Hint points to the sentence about using it again. Explanation connects removing ink/new coating with reusing the same wooden board; it never treats the app's reading as evidence of physical practice. Talk: **What can you write on and use again today? What is similar, and what is different?**
+Question1: **What made this board useful for another round of writing?** Choices: **Its signs had uneven shapes and spacing.**; **It could receive another coat of whitewash.** (fits); **The Met dates it to about 2030 BCE.** The wrong choices are true details answering different questions. The hint points to the sentence about using it again. The explanation connects removing ink and adding a new coating with reusing the same wooden board; it never treats the app's reading as evidence of physical practice. Talk: **What can you write on and use again today? What is similar, and what is different?**
 
-Question2: **Why do the museum researchers think a learner practiced on this board?** Choices: **They know the learner's exact age.**; **The signs have uneven shapes and spacing.** (fits); **The board tells us every child's name.** Hint/explanation explicitly name the museum's stated clue. Talk: **What would you like to ask that this object record does not answer?** This asks for the reason reported in the text, not independent verification of the museum's interpretation.
+Question2: **Why do the museum researchers think a learner practiced on this board?** Choices: **The board could receive another coat of whitewash.**; **The Met dates the board to about 2030 BCE.**; **The signs have uneven shapes and spacing.** (fits). Recoating and the approximate date are true, nonresponsive alternatives, not overclaims. Hint/explanation explicitly name the museum's stated clue. Talk: **What would you like to ask that this object record does not answer?** This asks for the reason reported in the text, not independent verification of the museum's interpretation.
 
 ### A place for ink and brushes
 
@@ -35,18 +35,18 @@ Core short passage:
 
 1. Lucie's next page shows a real wooden palette from ancient Egypt.
 2. A scribe is someone trained to write.
-3. Scribes used palettes to hold ink and brushes.
+3. Scribes used palettes to hold ink and brushes. The museum lists wood and pigment as the object's materials.
 4. The Met says this palette still has black ink left, while its red ink is almost gone.
 5. Reed brushes had frayed ends to hold ink.
-6. This is our modern summary of The Met's record for object10.176.62, not a translation of an ancient person's words.
+6. The Met dates this palette to about2030–1550BCE, an approximate range. This is our modern summary of The Met's record for object10.176.62, not a translation of an ancient person's words.
 
-Medium adds: **The museum dates this palette to about2030–1550BCE. That is a range, not one known day.** Longer adds those sentences plus **The ink left on an object today is not a complete list of everything once used with it. The museum's description helps us connect the surviving palette with its use.** Do not call the pictured item a complete original kit, claim its missing brushes are present, identify a named owner, say only scribes could ever read, teach invented hieroglyph translations, or equate every hieroglyph with one picture/word. No pigment recipes or reenactment requiring ink/glass.
+Medium clarifies the already supplied approximate date: **That range is not one known day.** Longer adds **The ink left on an object today is not a complete list of everything once used with it. The museum's description helps us connect the surviving palette with its use.** Do not call the pictured item a complete original kit, claim its missing brushes are present, identify a named owner, say only scribes could ever read, teach invented hieroglyph translations, or equate every hieroglyph with one picture/word. No pigment recipes or reenactment requiring ink/glass.
 
-Question1: **According to the passage, what did scribal palettes hold?** Choices: **Clock hands and gears.**; **Seeds and garden soil.**; **Ink and brushes.** (fits). Hint/explanation point to the function sentence. Talk: **What keeps your writing tools together?**
+Question1: **According to the passage, what two things did scribes use palettes to hold?** Choices: **Ink and brushes used when writing.** (fits); **Wood and pigment named as materials.**; **Black ink still left on this object.** The wrong choices confuse the stated function with materials or one surviving trace. Hint/explanation point to the function sentence. Talk: **What keeps your writing tools together?**
 
-Question2: **Which sentence keeps both parts of the museum's ink description?** Choices: **Black ink remains, and red ink is almost gone.** (fits); **Red ink was never used with this palette.**; **Every color of ink is still there.** Hint/explanation distinguish remaining traces from an unsupported claim about the past. Talk: **What else would you want to know about this writing kit?**
+Question2: **Which sentence keeps both parts of The Met's ink description?** Choices: **Red ink remains, while black ink is almost gone.**; **The record says nothing about red ink.**; **Black ink remains, while red ink is almost gone.** (fits). The alternatives reverse the two traces or leave out the stated red trace. Hint/explanation distinguish remaining traces from an unsupported claim about the past. Talk: **What can remaining ink tell us, and what can it not show?**
 
-Provide four original smaller examples using fictional reusable chalk labels, uneven practice shapes, a pouch holding tools, and two colors remaining in different amounts. They demonstrate locating the relevant sentence, reusing a surface, attributing a stated clue and preserving both details. No example introduces extra Egyptian facts or silently supplies an answer to the current historical question. Use the existing `mc` pack format; `connections:[]`, with no atlas/count change.
+The four complete fictional smaller examples in the linked authoring file use a reusable chalk label, a margin note stating a first try, pouch contents versus nearby objects, and two paint pots with different amounts left. They demonstrate locating the relevant sentence, reusing a surface, attributing a stated clue and preserving both details. They do not supply a live Egyptian answer or add historical facts. Use the existing `mc` pack format; `connections:[]`, with no atlas/count change.
 
 ## Photographs and navigation
 
