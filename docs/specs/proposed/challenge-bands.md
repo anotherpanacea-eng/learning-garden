@@ -41,17 +41,17 @@ Only `cafeStart === 'follow'` **and** a valid `start.math` activate the mapping 
 
 On the explicit Grown-up notes action, save the selected `start.math` and `cafeStart='follow'`. Do not overwrite `cafe.range`. On an actual existing Café range-button choice, keep calling `setCafeRange` and set `cafeStart='local'`; leave the saved band alone. Merely rendering the currently selected button is not a choice. Applying the Grown-up action again explicitly returns to follow mode. There is no generic `picked` map in this increment: one control does not need a cross-activity provenance framework.
 
-When writing a valid setting, preserve sibling fields in readable `garden`/`start` objects. If either container has an unreadable non-object shape, keep its raw value unchanged and decline this optional setting with a short explanation; ordinary play and existing recovery remain available. Do not silently replace unreadable containers just to save a preference.
+When writing a valid setting, preserve sibling fields in readable `garden`/`start` objects. Existing loading already normalizes a non-object `garden` container; this feature does not change that behavior or claim to preserve data that loading has already normalized. If `garden.start` has an unreadable non-object shape, keep its raw value unchanged and decline this optional setting with a short explanation; ordinary play remains available. Do not silently replace an unreadable `start` container just to save a preference.
 
 The values travel in the explorer's normal saved state and exports. The profile registry remains unchanged. Never copy a preference to another explorer or serialize a real learner record in repository fixtures.
 
 ## Integration and frozen orders
 
-The integration seam is the existing `nextGuest(state)` in `dist/cafe-core.mjs`, which currently chooses its new parameters from `c.range`. Resolve an effective range read-only at this new-order boundary. No other Café validation or result interpretation needs the preference.
+The integration seam is the existing `nextGuest(state)` in `dist/cafe-core.mjs`, which currently chooses its new parameters from `c.range`. Use one shared read-only effective-range function in both this new-order boundary and the Café range-button rendering. The selected button and next-guest explanation must describe the effective range, not the unchanged stored `cafe.range`. In follow mode, show a neutral line such as “Using the grown-up’s starting amounts,” without a band label. Clicking either range button, even the currently selected one, is a real local choice and sets `cafeStart=local`. No other Café validation or result interpretation needs the preference.
 
 Existing `current.params` and historical `params` remain authoritative in `orderFor`. Band changes and local range changes must not alter an open plate, multiplication question, stock question, repair question, recipe, guest, attempts, support, familiarity, cupboard plan, ingredient stock, served count, supper progress or history. A resumed order uses its original frozen quantities. A refused new-order action must not advance counters or create a guest. Ordinary new-order allocation advances the existing counters exactly once.
 
-Explicitly connected practice orders retain their supplied frozen quantities and provenance. A default never rescales a task carried from another game. The feature adds no observation, support, exposure, score or mastery ledger.
+`startConnection` in `dist/learning-connections.mjs` also calls `nextGuest` on a trial state and then restores `allIndex` before replacing the parameters. Preserve that cursor restoration. Explicitly connected practice orders retain their supplied frozen quantities and provenance. A default never rescales a task carried from another game. The feature adds no observation, support, exposure, score or mastery ledger.
 
 ## Acceptance checks for the first increment
 
@@ -62,8 +62,8 @@ Use synthetic states and the existing focused Café, transfer and browser check 
 3. A local small/full button wins after opt-in, persists across reload, and does not change the saved band. The explicit Grown-up action can return to follow mode.
 4. Change settings during plate, total, stock and repair stages. Before/after snapshots of current order, recipe, attempts, support and plans stay equal. Serve or skip under existing rules; only the next new guest uses the new default.
 5. Explorer switch, reload and export/import preserve each explorer's preference and local override separately. Missing/invalid preference leaves all other work readable. Failed storage follows the existing warning behavior; do not claim persistence on failure.
-6. Existing connected-order quantities and provenance stay equal despite a conflicting band. No new observations or support-use records appear from settings alone.
-7. Browser: clear next-guest explanation, visible local override and selected state, keyboard/focus behavior, touch targets at least 44px, and phone/tablet fit. Grown-up configuration is optional and no band label appears on the child screen. These checks do not establish suitability for a particular age or device-native audio behavior.
+6. Existing connected-order quantities, provenance and `allIndex` cursor stay equal despite a conflicting band. No new observations or support-use records appear from settings alone.
+7. Browser: clear next-guest explanation, visible local override and selected state driven by the same effective-range function as `nextGuest` (including a legacy `all` save following Sprout), clicking an already selected range establishes a local override, keyboard/focus behavior, touch targets at least 44px, and phone/tablet fit. Grown-up configuration is optional and no band label appears on the child screen. These checks do not establish suitability for a particular age or device-native audio behavior.
 
 ## Deferred controls: authoring candidates, not build claims
 
