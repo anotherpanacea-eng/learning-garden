@@ -23,7 +23,7 @@ Core short passage:
 5. A learner could wipe or scrape off ink and add whitewash to use the board again.
 6. This is our modern summary of The Met's record for object28.9.5, not the learner's own story.
 
-Medium adds: **An apprentice is someone learning a skill. The record does not name this learner or give their age.** Longer adds those sentences plus **A surviving object is one kind of evidence about the past. The photograph shows the board today; the museum explains how it understands the writing.** Do not infer the learner's gender, age, feelings, identity or that all Egyptian children used boards. “About” remains part of the date; BCE means Before the Common Era, supplied in an optional source note. No date arithmetic or year-zero lesson.
+Medium adds: **An apprentice is someone learning a skill. The record does not name this learner or give their age.** Longer adds those sentences plus **A surviving object is one kind of evidence about the past. The photograph shows the board today; the museum explains how it understands the writing.** Do not infer the learner's gender, age, feelings, identity or that all Egyptian children used boards. “About” remains part of the date. The installed pack retains BCE as the museum date convention; a separate explanatory source note is not installed. No date arithmetic or year-zero lesson.
 
 Question1: **What made this board useful for another round of writing?** Choices: **Its signs had uneven shapes and spacing.**; **It could receive another coat of whitewash.** (fits); **The Met dates it to about 2030 BCE.** The wrong choices are true details answering different questions. The hint points to the sentence about using it again. The explanation connects removing ink and adding a new coating with reusing the same wooden board; it never treats the app's reading as evidence of physical practice. Talk: **What can you write on and use again today? What is similar, and what is different?**
 
@@ -34,11 +34,12 @@ Question2: **Why do the museum researchers think a learner practiced on this boa
 Core short passage:
 
 1. Lucie's next page shows a real wooden palette from ancient Egypt.
-2. A scribe is someone trained to write.
-3. Scribes used palettes to hold ink and brushes. The museum lists wood and pigment as the object's materials.
-4. The Met says this palette still has black ink left, while its red ink is almost gone.
-5. Reed brushes had frayed ends to hold ink.
-6. The Met dates this palette to about2030–1550BCE, an approximate range. This is our modern summary of The Met's record for object10.176.62, not a translation of an ancient person's words.
+2. A scribe is someone trained to write. Scribes used palettes to hold ink and brushes.
+3. The museum lists wood and pigment as the palette's materials.
+4. The Met dates this palette to about 2030–1550 BCE, an approximate range.
+5. The Met says black ink remains on this palette, while its red ink is almost gone.
+6. Reed brushes had frayed ends to hold ink.
+7. This is our modern summary of The Met's record for object 10.176.62, not a translation of ancient words.
 
 Medium clarifies the already supplied approximate date: **That range is not one known day.** Longer adds **The ink left on an object today is not a complete list of everything once used with it. The museum's description helps us connect the surviving palette with its use.** Do not call the pictured item a complete original kit, claim its missing brushes are present, identify a named owner, say only scribes could ever read, teach invented hieroglyph translations, or equate every hieroglyph with one picture/word. No pigment recipes or reenactment requiring ink/glass.
 
