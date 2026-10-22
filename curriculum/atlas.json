@@ -649,6 +649,17 @@
       ],
       "route": "#workshop/fractions",
       "scope": "Six supplied-reference equal-whole constructions with a required different partition: halves/quarters and thirds/sixths in both directions. Move a proposed working flag, then choose the numerator of its actual position. Matching and naming outcomes remain separate. Existing Fraction Trail already accepts equivalent labels and compares kept/current ribbons; no new parser, free partition construction, independent notation writing/explanation or general fraction algorithm."
+    },
+    {
+      "id": "repeat-deliveries",
+      "name": "Repeat a Delivery Block",
+      "status": "built-local",
+      "patterns": [
+        "compose",
+        "build"
+      ],
+      "route": "#workshop/repeats",
+      "scope": "Four original direct courier jobs on a labelled equal-interval grid. Compose two absolute arrows, repeat the whole pair two or three times, manually step each expanded command and revise. Proposed moves, attempted commands and travelled intervals remain distinct. Fixed expansion/counts are supplied model information, not independent programming or multiplication attainment."
     }
   ],
   "manualReferences": [
@@ -1295,6 +1306,13 @@
       "kind": "scoped-practice",
       "source": "dist/ribbon-matches-content.mjs",
       "scope": "Six directed same-whole ribbon matches with different supplied partitions, especially1/3↔2/6 and2/3↔4/6. Actual endpoint matching and actual-flag numerator choices are separate. Guided partial diagram practice, not independent drawing, verbal explanation, arbitrary equivalence generation or whole-topic attainment."
+    },
+    {
+      "game": "repeat-deliveries",
+      "topicId": "mt__p5n8z5soJ",
+      "kind": "scoped-practice",
+      "source": "dist/repeat-deliveries-content.mjs",
+      "scope": "Partial existing pinned Step-by-Step Instructions anchor: compose a finite two-arrow group repeated2/3 times, trace one command at a time and revise. Fresh upstream loop/repeat topics are documented in audit71 but absent from the vendor/runtime; no unresolved IDs or full loop/branching/forever curriculum claim."
     }
   ],
   "increments": [
