@@ -35,7 +35,7 @@ for(const c of BELL_CARDS){
 }
 for(const pair of BELL_PAIRS){
  const s=fresh('own-call');ok(b.chooseBellPair(s,pair.id));ok(!b.checkBellComparison(s),'pending response not an attempt');
- for(const response of ['higher','lower','same','not-sure']){b.setBellComparisonResponse(s,response);const result=b.checkBellComparison(s);eq(result.assessment.relation,pair.id==='rise'?'higher':pair.id==='fall'?'lower':'same');eq(result.assessment.match,response==='not-sure'?null:response===result.assessment.relation);ok(b.bellView(s).comparisonFeedback.includes('does not tell us what someone heard'));}
+ for(const response of ['higher','lower','same','not-sure']){b.setBellComparisonResponse(s,response);const result=b.checkBellComparison(s);eq(result.assessment.relation,pair.id==='rise'?'higher':pair.id==='fall'?'lower':'same');eq(result.assessment.match,response==='not-sure'?null:response===result.assessment.relation);ok(b.bellView(s).comparisonFeedback.length>0);ok(b.bellView(s).comparisonNote.includes('does not tell us what someone heard'));}
  const old=copy(current(s).checks.at(-1));b.setBellComparisonResponse(s,'higher');eq(b.bellView(s).comparisonFeedback,'');eq(b.bellView(s).priorComparison,old);b.chooseBellPair(s,pair.id==='rise'?'fall':'rise');eq(current(s).response,null,'different pair starts own pending answer');eq(current(s).checks.at(-1),old);b.keepBellCall(s);eq(current(s).kept.latestComparison,old,'kept prior comparison remains source-labelled');
 }
 {
