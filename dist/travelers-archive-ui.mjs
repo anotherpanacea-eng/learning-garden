@@ -34,6 +34,7 @@ export function bindTravelersArchive(state,ctx){const root=document.querySelecto
  // Browser textarea parsing can normalize line endings. Only a real input event may replace exact imported words.
  const validWriting=()=>{if(!writingDirty)return true;const error=root.querySelector('#ta-writing-error');if(error)error.textContent=writingError;focus('#ta-reply-text');return false;};
  const act=(fn,selector='#ta-title')=>{if(validWriting()&&fn()!==false)redraw(selector);};
+ root.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{if(!validWriting())e.preventDefault();}));
  root.querySelector('[data-ta-recover]')?.addEventListener('click',()=>{if(recoverTravelersArchive(state))redraw();});if(!travelersArchive(state))return;
  const visible=[...new Set([...root.querySelectorAll('[data-ta-source-visible]')].flatMap(el=>el.dataset.taSourceVisible.split(' ')))],r=travelersArchive(state);if(visible.some(id=>!r.sourcesExposed.includes(id))){noteArchiveSources(state,visible);save();}
  root.querySelectorAll('[data-ta-page]').forEach(b=>b.onclick=()=>act(()=>{const page=b.dataset.taPage;if(page==='place-dates'&&!['map','order'].includes(travelersArchive(state).task))setArchiveTask(state,'map');if(page==='sources'&&!['claims','source-choice','limits'].includes(travelersArchive(state).task))setArchiveTask(state,archiveQuestionById(travelersArchive(state).question)?.task||'claims');return setArchivePage(state,page);}));
