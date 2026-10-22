@@ -59,4 +59,15 @@ for(let x=0;x<=5;x++)for(let y=0;y<=5;y++)for(let tx=0;tx<=5;tx++)for(let ty=0;t
 for(const bad of [null,'opaque',{version:7,rounds:[]},{version:1,page:'map',mark:'post',side:'A',current:1,nextId:0,rounds:[]}]){
  const s={cartographer:copy(bad)},before=copy(s);eq(mapView(s).status,'unavailable');eq(startMap(s),null);eq(setMapPage(s,'map'),false);eq(selectMapMark(s,'post'),false);eq(checkMapRoutes(s),null);eq(s,before,'future/invalid envelopes never mutate');
 }
+{
+ const s=setup(),r=mapView(s).current;place(s,'garden',1,1);place(s,'bridge',4,1);checkMapRoutes(s);const old=copy(s);
+ marks.push({id:'library',name:'Library',symbol:'L'});
+ try{
+  ok(validMapRound(r),'four-landmark map and check survive a later catalogue entry');eq(mapView(s).rounds,[r]);ok(mapCheckMatches(r),'missing landmark matches the same unplaced check input');eq(s,old,'catalogue extension does not normalize saved maps');
+  r.places.library=null;ok(mapCheckMatches(r),'explicitly unplaced and missing check input agree');delete r.places.library;
+  delete r.places.bridge;delete r.checks[0].places.bridge;ok(validMapRound(r),'save validates its own known landmark entries');ok(mapCheckMatches(r));
+  chooseMapEndpoint(s,'to','library');eq(mapRoutes(r),null,'missing endpoint is unplaced, never a fabricated point');eq(checkMapRoutes(s),null);
+  for(const [id,p]of [['future',{x:3,y:3}],['library',{x:1,y:1}],['library',{x:6,y:0}],['library',undefined]]){const bad=copy(r);bad.places[id]=p;ok(!validMapRound(bad),'unknown ids, duplicate and invalid supplied points remain unreadable');}
+ }finally{marks.pop();}
+}
 console.log(`Cartographer core: ${checks} assertions passed.`);

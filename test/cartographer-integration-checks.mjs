@@ -1,3 +1,4 @@
+import {marks} from '../dist/cartographer-content.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {freshState,restoreStateResult,STORAGE_KEY} from '../dist/core.mjs';
@@ -48,4 +49,12 @@ for(const bad of [null,'<script>unreadable</script>',{version:99,payload:'<img s
  const before=structuredClone(sample.cartographer);ok(cartographerPage(sample).includes('removes 2 oldest readable maps'),'oversized imported history discloses exact two-map eviction before new-sheet action');eq(sample.cartographer,before,'view does not trim oversized imported history');startMap(sample);eq(mapView(sample).rounds.map(r=>r.id),Array.from({length:12},(_,i)=>i+3),'explicit new-sheet action removes exactly the disclosed oldest maps');
 }
 const app=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.includes('workshopPage(state,slug)'),'existing root adapter forwards Workshop slug');ok(!app.includes("from './cartographer"),'no held app-path workaround');ok(readFileSync(new URL('../dist/index.html',import.meta.url),'utf8').includes('cartographer.css'),'stylesheet linked');
+{
+ const sample=structuredClone(s),before=structuredClone(sample.cartographer);marks.push({id:'library',name:'Library',symbol:'L'});
+ try{
+  eq(mapView(sample).rounds.length,before.rounds.length,'old maps remain readable with an extra current landmark');
+  for(const page of ['map','route','compare']){setMapPage(sample,page);const saved=structuredClone(sample.cartographer),html=cartographerPage(sample),notes=cartographerNotes(sample);ok(html.includes('Library')&&html.includes('unplaced'),'missing current landmark renders as unplaced on '+page);ok(notes.includes('Library')&&notes.includes('unplaced'),'notes read missing landmark safely');ok(!html.includes('undefined')&&!html.includes('NaN'));eq(sample.cartographer,saved,'render preserves old input and recorded outcomes');}
+  const imported=prepareProgressImport(JSON.stringify(sample));ok(imported.ok);eq(imported.state.cartographer,sample.cartographer,'real import keeps old map and checks exact after extension');
+ }finally{marks.pop();}
+}
 console.log(`Cartographer integration: ${checks} assertions passed.`);
