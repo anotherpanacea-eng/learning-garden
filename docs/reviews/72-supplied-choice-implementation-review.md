@@ -1,0 +1,11 @@
+# Supplied choices: implementation verification
+
+Both bounded content repairs received independent Claude implementation review. Moss was reviewed on its original PR49 candidate at `070d9f298fc040a89b40b9f250646d24c081a3d4`; Source Trail was reviewed on its original PR58 candidate at `201441178a86a48777b8b06f24cb554d7773eae2`. Claude ran read-only inspection, not the reported tests. Final composed release verification remains separate.
+
+The 28 choices and feedback match [spec72](../specs/72-supplied-choice-cues.md). Only new explicit Starts use the new fixed orders. Existing source packets retain their words, order, selected or retired IDs, private drafts and recorded outcomes; neither validator nor source rights/model data changed. Genuine literal pre-change synthetic fixtures cover the old packets.
+
+Claude found preservation assertions that compared untouched fixture objects instead of the state-owned copies. Those assertions now inspect the live old round, require one appended fresh check, retain earlier checks and exact words, and compare the live old round immediately before and after a new Start. Claude re-review cleared the tests. A documentation finding is resolved by marking the original choice lists in specs60/69 historical and linking this current pack.
+
+Verification performed by the builder and root: Moss core494 and integration44; Source Trail core405 and integration67. The builder ran existing Chrome browser suites (Moss20, Source Trail529) and all seven choice sets at320,390,820 and1440 pixels, checking complete wrapped labels,44px controls, selection/focus and no horizontal overflow. The longest Moss phone prompt-to-check span was about1215px at320; this content repair does not promise a one-screen turn. The builder visually inspected phone/desktop layouts. Root reran the focused suites on the original PR branches; final composed browser checks are separate.
+
+Existing prompt/help narration is unchanged; answer labels can be read aloud by an adult. Moss help may reopen on rerender after support is recorded. No physical iPad/Safari, audible voice, human screen-reader, independent decoding, measured learning gain or production-deployment claim follows from these checks.

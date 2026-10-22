@@ -1,6 +1,8 @@
 # 06 — Story Loft
 
-**Status: Paired-perspective reading expansion planned. The first creative puppet-theatre loop is implemented in [spec 36](36-story-loft-puppet-theatre.md).**
+**Status: A bounded paired-fiction reading slice is built locally in [spec59](59-two-windows.md); the wider six-story, scene-order, retelling and poetry program below remains planned. The first creative puppet-theatre loop is implemented in [spec36](36-story-loft-puppet-theatre.md).**
+
+Spec59 uses three events in two freely chosen language forms (12 passages, not six stories), its own optional twoWindows state and a quiet existing Workshop route. It preserves puppet shows and does not implement this document’s proposed future reading schema or24-visit limit.
 
 ## Goal and play loop
 

@@ -1,0 +1,22 @@
+# Cartographer’s Table: implementation review and verification
+
+[Spec58](../specs/58-cartographers-table.md) passed its separate [specification review](58-cartographer-spec-review.md) before runtime authorship. The new core and UI had separate authors; the root integrated and verified the actual Workshop route and Post Office invitation.
+
+## Independent implementation review
+
+The installed local Claude reviewed the content/core/UI/style and tests in a restricted read-only session. It returned **Approve for draft**, no P1/P2, after tracing the grid geometry, repeated intervals, blocked-prefix arrival, frozen old maps, shape-only saved-result validation, safe ids, preservation boundaries and focus. It did not run tests, inspect a Git diff or review the atlas/docs. Root did those checks; this is not a GitHub review or merge/deploy clearance.
+
+A focused second actual Claude pass confirmed the feedback repairs: truthful failure when saved ids cannot allocate a sheet, empty-route starting text, blocked warning only for a blocked result, one recorded-status report per route and a marked current map. Root then resolved its remaining small raw-history observations: the first point keeps the displayed landmark selection; help/audio do not silently create a map/change its saved page; a failed support action does not claim it was recorded. A separate independent reviewer inspected these final folds and the exact capacity disclosure, reran8,801 core/44 integration assertions and targeted callbacks, and found no remaining P1/P2.
+
+The explicit new-sheet action now discloses how many oldest readable maps it will remove, including an imported history exceeding the current12-map limit. Merely loading or viewing that larger history retains it exactly. No historical outcome is recomputed to qualify it for display. The live-region pattern follows the existing app; human screen-reader announcement behaviour is unverified. No new shared announcement framework or held mobile-path change was introduced.
+
+## Root verification
+
+- All **80 test/*.mjs scripts** pass; new core **8,801 assertions**, integration **44 assertions**. Independent direction arithmetic covers all36 points/four boundaries and all ordered endpoint pairs. Repeated/out-and-back travel, equal/different-length journeys, blocked prefix ending on target, moving both endpoints, repair without restart and exact old outcomes are covered.
+- **175 browser assertions**:142 across desktop1280×900, touch tablet820×1180 and touch phone390×844 with reduced motion;16 focused endpoint-settings/narration-boundary/raw-history checks;17 portable regressions. Root inspected the phone route and map/compare screenshots. A final visual check caught duplicate native/SVG point markers; empty native dots were removed and landmark symbols centred on the actual intersections. Six additional layout assertions verify those corrections. Every native point control is at least44px; no horizontal overflow or page errors. Route buttons precede the compact diagram. Checking focuses feedback; edits keep usable nearby controls focused.
+- Real root navigation, saved-state reload, ordinary transfer, explorer switching and save-off are verified with synthetic data. Old Café/Post Office/Loft/Coin/Fair Test drafts and hidden numerical exposure data remain unchanged. Future envelopes and unreadable siblings are preserved escaped. Local speech was tested with a synthetic declared local voice and stub utterance, not audible output.
+- Atlas generation/check: unchanged1,590 topics/3,221 source edges/54 domains;139 explicit references across74 topics. Four narrow new references do not claim complete coordinate/geometry/measurement attainment. Story-pack validation, changed-document relative links, whitespace and public-content inspection pass. No new source content/code/assets were incorporated, and the bundled pin is unchanged.
+
+Reproduce the portable browser regressions by serving dist locally and running `node test/cartographer-browser.js`. It uses Playwright if installed; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `MAP_TEST_URL` can point to an existing runtime/browser/local server. This optional test adds no website dependency. The broader synthetic layout probes and screenshots are temporary QA artifacts outside the repository.
+
+No physical iPad/Safari, real audio listening, human screen-reader session, independent learner attainment or learning effectiveness is established. This is a draft local build stacked on Coin Counter; nothing was merged or deployed.

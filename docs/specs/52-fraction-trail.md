@@ -1,6 +1,6 @@
 # 52 — Fraction Trail: build the spaces, place the stop
 
-**Status: build-ready after independent specification review and resolved findings; [receipt](../reviews/52-55-independent-spec-review.md). Not implemented or approved for release.** This is the next bounded fraction-number-line candidate in M3-fractions 1–5, with a first beyond-one encounter from item 3. It does not complete the decimal bridge or the still-missing place-value/written-calculation sequence.
+**Status: build-ready after independent specification review and resolved findings; [receipt](../reviews/52-55-independent-spec-review.md). A local implementation now exists on `build/fraction-trail`; [Independent implementation review](../reviews/52-fraction-trail-implementation-review.md) and local browser checks passed; composed-release checks remain a separate gate. Not approved for release.** This is the next bounded fraction-number-line candidate in M3-fractions 1–5, with a first beyond-one encounter from item 3. It does not complete the decimal bridge or the still-missing place-value/written-calculation sequence.
 
 ## The gap and the purpose
 

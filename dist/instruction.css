@@ -1,0 +1,80 @@
+.instruction-notebook{--instruction-ink:#183f39;--instruction-sky:#abc4da;--instruction-plum:#85627d;--instruction-ochre:#e9b84a;color:var(--instruction-ink);max-width:1160px;margin:0 auto;font-family:"Trebuchet MS",sans-serif;line-height:1.55}
+.instruction-notebook *, .instruction-entry *{box-sizing:border-box}
+.instruction-notebook h1,.instruction-notebook h2,.instruction-notebook h3,.instruction-notebook h4{font-family:Georgia,serif;line-height:1.18;color:var(--instruction-ink)}
+.instruction-notebook h1{font-size:clamp(2rem,5vw,3.1rem);margin:.55rem 0}
+.instruction-notebook h2{font-size:clamp(1.5rem,4vw,2rem);margin:0 0 .6rem}
+.instruction-notebook h3{font-size:1.35rem;margin:0 0 .7rem}
+.instruction-notebook p{max-width:72ch}
+.instruction-heading{padding:.5rem 0 1.2rem}
+.instruction-shared{margin:.45rem 0}
+.instruction-picker{display:block;max-width:34rem;font-weight:700}
+.instruction-notebook select{display:block;max-width:100%;width:100%;min-height:48px;margin:.4rem 0 1rem;padding:.55rem;border:2px solid var(--instruction-ink);border-radius:6px;background:#fffef9;color:var(--instruction-ink);font:inherit}
+.instruction-notebook button,.instruction-notebook a.secondary,.instruction-entry a.secondary{min-height:44px;min-width:44px;font-family:"Trebuchet MS",sans-serif;font-size:1rem;white-space:normal;line-height:1.35;overflow-wrap:anywhere;padding:.65rem .9rem}
+.instruction-notebook button{cursor:pointer}
+.instruction-notebook button:disabled{cursor:default;opacity:.48}
+.instruction-notebook button[aria-pressed="true"],.instruction-notebook button[aria-current="page"]{background:var(--instruction-ink);color:#fffef9;border-color:var(--instruction-ink)}
+.instruction-notebook :focus-visible,.instruction-entry :focus-visible{outline:3px solid var(--instruction-plum);outline-offset:4px}
+.instruction-notebook [tabindex="-1"]:focus{outline:3px solid var(--instruction-plum);outline-offset:5px}
+.instruction-pages{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0 1.5rem;border-bottom:3px solid var(--instruction-plum);padding-bottom:1rem}
+.instruction-current-task{padding:0 0 .8rem}
+.instruction-current-task p{margin:.5rem 0}
+.instruction-layout{display:grid;grid-template-columns:minmax(240px,.8fr) minmax(0,1.4fr);gap:1.75rem;align-items:start}
+.instruction-source{background:#edf3ef;padding:1.2rem;border-radius:7px;border-left:6px solid var(--instruction-sky);font-size:.98rem}
+.instruction-source p{margin:.7rem 0}
+.instruction-source .instruction-request{padding-bottom:.5rem;border-bottom:1px solid #b8d4c3}
+.instruction-plan-reminder{padding-top:.6rem;border-top:1px solid #b8d4c3}
+.instruction-notebook summary{cursor:pointer;min-height:44px;padding:.65rem 0;font-weight:700}
+.instruction-scene{overflow:hidden;max-width:100%;margin:.7rem 0;border:3px solid var(--instruction-plum);border-radius:5px;background:var(--instruction-sky)}
+.instruction-scene>svg,.instruction-map>svg{width:100%;height:auto;display:block}
+.instruction-map{position:relative}
+.instruction-map-rabbit{position:absolute;width:15%;bottom:13%;display:block}
+.instruction-map-rabbit.at-fork{left:32%}
+.instruction-map-rabbit.at-table{left:74%}
+.instruction-map-rabbit svg{display:block;width:100%}
+.instruction-reader,.instruction-puppet-reader{display:flex;gap:1rem;align-items:center}
+.instruction-reader>svg{width:100px;flex-shrink:0}
+.instruction-puppet-reader>svg{width:90px;flex-shrink:0}
+.instruction-puppet-reader>div{min-width:0;flex:1}
+.instruction-ticket-strip{background:#fffef9;border:2px dashed #85627d;padding:1rem;min-height:120px;margin-bottom:1rem}
+.instruction-ticket-strip>ol{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:1rem;counter-reset:ticket}
+.instruction-ticket-strip>ol>li{background:#fffef9;border:2px solid #183f39;border-radius:4px;padding:.8rem;position:relative;border-left:8px solid #e9b84a;counter-increment:ticket}
+.instruction-ticket-strip>ol>li::before{content:counter(ticket) ".";font:700 1.25rem Georgia,serif;display:inline-block;margin-right:.55rem}
+.instruction-ticket-art{display:inline-block;width:64px;height:64px;flex-shrink:0;vertical-align:middle}
+.instruction-ticket-art svg{display:block;width:100%;height:100%}
+.instruction-ticket-line{display:flex;gap:.75rem;align-items:center}
+.instruction-ticket-line p{font-size:1.18rem;margin:.3rem 0}
+.instruction-moves,.instruction-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.instruction-moves{border-top:1px solid #abc4da;padding-top:.7rem}
+.instruction-picture-choices{display:flex;flex-wrap:wrap;gap:.6rem}
+.instruction-picture-choices button{flex:1 1 145px;display:flex;align-items:center;gap:.4rem;text-align:left}
+.instruction-notebook fieldset{border:1px solid #abc4da;border-radius:4px;margin:1rem 0;padding:.75rem;min-width:0}
+.instruction-notebook legend{padding:0 .3rem;max-width:100%;font-weight:700}
+.instruction-notebook fieldset button{display:block;width:100%;text-align:left;margin:.4rem 0}
+.instruction-notebook .instruction-questions button{display:inline-block;width:auto;margin:.3rem}
+.instruction-run{padding:1.1rem;background:#edf3ef;border-top:6px solid var(--instruction-plum);margin:1.5rem 0}
+.instruction-exact-strip{padding-left:1.5rem}
+.instruction-exact-strip li{margin:.4rem 0}
+.instruction-result{border-top:2px solid #abc4da;padding-top:.6rem;margin-top:.7rem}
+.instruction-notebook textarea{display:block;width:100%;max-width:100%;resize:vertical;padding:.85rem;min-height:130px;margin:.6rem 0;font:1.1rem/1.65 "Trebuchet MS",sans-serif;color:#183f39;background:#fffef9;border:2px solid #183f39;border-radius:5px;white-space:pre-wrap}
+.instruction-notebook textarea:focus{border-color:#85627d}
+.instruction-notebook label{font-weight:700}
+.instruction-verbatim{white-space:pre-wrap;overflow-wrap:anywhere;margin:.7rem 0;border-left:4px solid #abc4da;padding:.8rem 1rem;background:#fffef9;min-height:44px}
+.instruction-human-snapshot{padding:1rem;background:#edf3ef;border-top:4px solid #85627d;margin:1.2rem 0}
+.instruction-help,.instruction-reports,.instruction-history{border-top:1px solid #abc4da;margin:1.3rem 0;padding:.35rem 0}
+.instruction-help-options{display:flex;flex-wrap:wrap;gap:.4rem}
+.instruction-help-options button{flex:1 1 145px;text-align:left}
+.instruction-help section{padding:1rem;margin-top:1rem;background:#edf3ef;border-left:4px solid #e9b84a}
+.instruction-help blockquote{margin:1rem 0;padding:.8rem;background:#fffef9}
+.instruction-kept{border-bottom:2px solid #abc4da;padding:1rem 0 1.5rem;margin:1rem 0}
+.instruction-notebook .instruction-footer{display:block;clear:both;border-top:3px solid #85627d;margin:2rem 0 0;padding:1rem 0;background:transparent;color:#183f39;text-align:left}
+.instruction-footer>a{display:inline-block;min-height:44px;padding:.6rem 1rem .6rem 0}
+.instruction-entry{display:flex;gap:1rem;align-items:center;padding:1.2rem;background:#edf3ef;border-left:6px solid #85627d;margin:1rem 0}
+.instruction-entry-art{width:90px;flex-shrink:0}
+.instruction-entry-art svg{display:block;width:100%}
+.instruction-entry p{margin:.4rem 0 .9rem}
+.instruction-notes pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
+.instruction-notebook [role="alert"]{color:#722d43;font-weight:700}
+@media(max-width:759px){.instruction-layout{display:flex;flex-direction:column;gap:1rem}.instruction-source,.instruction-work{width:100%}.instruction-source{padding:.85rem;font-size:.92rem}.instruction-source p{margin:.5rem 0}.instruction-full-source>summary{font-size:1rem}.instruction-pages{gap:.35rem}.instruction-pages button{flex:1 1 135px}.instruction-notebook h1{font-size:2rem}.instruction-puppet-reader{align-items:start}.instruction-puppet-reader>svg{width:65px}.instruction-ticket-strip{padding:.65rem}.instruction-ticket-line p{font-size:1.05rem}.instruction-moves button{flex:1 1 75px}.instruction-entry-art{width:65px}}
+@media(prefers-reduced-motion:reduce){.instruction-notebook *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.instruction-compact-source{display:none}.instruction-wording>summary{font-size:.95rem}@media(max-width:759px){.instruction-compact-source{display:block}.instruction-full-summary{display:none}}

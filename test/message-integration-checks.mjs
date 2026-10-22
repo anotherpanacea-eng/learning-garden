@@ -70,5 +70,8 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
  const previous=globalThis.document;globalThis.document={querySelectorAll:selector=>selector==='[data-msg-reading]'?[button]:[],querySelector:selector=>selector==='.msg-reading'?details:null};
  try{bindMessages(s,'post',{save(){},render(){details.open=false;},focus:selector=>{focused=selector;}});button.onclick();ok(details.open&&focused==='[data-msg-reading="together"]','reading report keeps its panel open and focus on the chosen report');}finally{globalThis.document=previous;}
 }
-const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.includes("['post','loft'].includes(root)&&slug==='messages'"),'both message routes before normal game');ok(app.includes("!['choose','groups','messages','letters'].includes(slug)"),'message route does not trigger Bramble ending');ok(app.includes('!groupBench&&!messageBench'),'unrelated invitations suppressed on focused task');
+const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.includes("['post','loft'].includes(root)&&slug==='messages'"),'both message routes before normal game');const endingSource=app.slice(app.indexOf('function endingFilm(){'),app.indexOf("if(!choosingExplorer)playFilm('welcome');"));
+const endingAt=hash=>new Function('location','choosingExplorer','state','currentPostOffice','postOfficeView',endingSource+';return endingFilm();')({hash},false,{},()=>({closed:false,rival:{phase:'resolved'}}),()=> 'bramble');
+for(const route of ['messages','letters','instructions','packing'])eq(endingAt('#post/'+route),null,'focused task does not trigger Bramble ending');
+eq(endingAt('#post/play'),'bramble','ordinary resolved rival still triggers its ending');ok(app.includes('!groupBench&&!messageBench'),'unrelated invitations suppressed on focused task');
 console.log(`Message-reader UI/storage integration: ${checks} passed.`);

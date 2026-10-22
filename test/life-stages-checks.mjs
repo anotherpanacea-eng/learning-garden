@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import {lifeCases,lifeSource,lifePages,stageIds} from '../dist/life-stages-content.mjs';
+import {validLifeSource,validLifeCheck,validLifeRound,lifeView,startLife,resumeLife,setLifePage,setLifeView,chooseLifeNeighbor,chooseLifeMeaning,addLifeSupport,evaluateLife,checkLife,lifeCheckMatches} from '../dist/life-stages-core.mjs';
+let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;},copy=structuredClone;
+const oracle={
+ 'egg-next':['egg','next','larva','same'], 'larva-next':['larva','next','pupa','same'], 'pupa-next':['pupa','next','adult','same'], 'adult-next':['adult','next','egg','offspring'],
+ 'larva-before':['larva','before','egg','same'], 'pupa-before':['pupa','before','larva','same'], 'adult-before':['adult','before','pupa','same'], 'egg-before':['egg','before','adult','offspring'],
+};
+eq(lifeCases.length,8);eq(lifePages,['inspect','connect','meaning','kept']);eq(stageIds,['egg','larva','pupa','adult']);const positions=[];let combinations=0,matches=0,different=0,unobserved=0,meaningYes=0,meaningNo=0;
+for(const src of lifeCases){
+ ok(validLifeSource(src));const [ref,direction,expected,kind]=oracle[src.id];eq([src.reference,src.direction,src.expected.neighbor,src.expected.meaning],[ref,direction,expected,kind]);eq(new Set(src.stages.map(s=>s.id)),new Set(stageIds));eq(src.chartId,'small-white-life-stages');positions.push(src.options.indexOf(expected));const frozen=copy(src),clone=lifeSource(src.id);eq(clone,src);clone.stages[0].text='Synthetic changed earlier words';eq(src,frozen,'factory deep clones all chart material');
+ for(const neighbor of [null,...stageIds,'unsure'])for(const meaning of [null,'same','offspring','unsure']){
+  const input={neighbor,meaning,support:[]},before=copy(input),neighborResult=neighbor===null||neighbor==='unsure'?null:neighbor===expected,meaningResult=neighborResult===true&&['same','offspring'].includes(meaning)?meaning===kind:null,c=evaluateLife(src,input);combinations++;
+  eq(c.neighborMatch,neighborResult,'independent directed-neighbour table');eq(c.meaningMatch,meaningResult,'meaning conditional on intended neighbour');eq(input,before);eq(src,frozen);ok(validLifeCheck(c));
+  if(neighborResult===true)matches++;else if(neighborResult===false)different++;else unobserved++;if(meaningResult===true)meaningYes++;else if(meaningResult===false)meaningNo++;
+  if(neighborResult===false)ok(c.feedback.includes('not assessed'),'wrong pair not confirmed as biology');if(neighborResult===true&&kind==='offspring')ok(c.feedback.includes('does not turn back into an egg'),'both chart directions preserve generation boundary');
+ }
+}
+eq([combinations,matches,different,unobserved,meaningYes,meaningNo],[192,32,96,64,8,8]);eq(positions,[1,3,0,2,2,0,3,1],'correct position actually varies, not just rotation');eq([0,1,2,3].map(i=>positions.filter(x=>x===i).length),[2,2,2,2]);
+const missing={};eq(lifeView(missing).status,'missing');for(const fn of [s=>setLifePage(s,'connect'),s=>setLifeView(s,'egg'),s=>chooseLifeNeighbor(s,'larva'),s=>chooseLifeMeaning(s,'same'),s=>addLifeSupport(s,'audio'),s=>resumeLife(s,1)]){eq(fn(missing),false);eq(missing,{});}eq(checkLife(missing),null);eq(startLife(missing,'no-case'),null);eq(missing,{});
+const state={},r=startLife(state,'egg-next');ok(validLifeRound(r));eq(r.familiar,false);eq(r.view,'egg');eq(state.lifeStages.seen,['small-white-life-stages']);const blank=checkLife(state);eq([blank.neighborMatch,blank.meaningMatch],[null,null]);ok(lifeCheckMatches(r));for(const view of stageIds){ok(setLifeView(state,view));ok(lifeCheckMatches(r),'inspection view is not a changed answer');}for(const page of lifePages){ok(setLifePage(state,page));ok(lifeCheckMatches(r),'page not input');}
+chooseLifeNeighbor(state,'larva');chooseLifeMeaning(state,'offspring');const wrongMeaning=checkLife(state);eq([wrongMeaning.neighborMatch,wrongMeaning.meaningMatch],[true,false]);chooseLifeNeighbor(state,'pupa');eq(r.meaning,'offspring','repair keeps other choice');eq(checkLife(state).meaningMatch,null);chooseLifeNeighbor(state,'larva');chooseLifeMeaning(state,'same');const good=checkLife(state);eq([good.neighborMatch,good.meaningMatch],[true,true]);const oldChecks=copy(r.checks);addLifeSupport(state,'help');ok(!lifeCheckMatches(r),'new support stales recorded input');eq(r.checks,oldChecks);addLifeSupport(state,'help');eq(r.support,['help']);
+const backward=startLife(state,'larva-before');ok(backward.familiar,'same supplied chart familiar across direction/new question');eq(state.lifeStages.seen,['small-white-life-stages'],'no task registry');chooseLifeNeighbor(state,'egg');chooseLifeMeaning(state,'same');eq(checkLife(state).meaningMatch,true);ok(resumeLife(state,r.id));eq(lifeView(state).current,r);eq(resumeLife(state,999),false);
+for(const bad of ['',0,undefined,'outside']){const before=copy(state);eq(chooseLifeNeighbor(state,bad),false);eq(chooseLifeMeaning(state,bad),false);eq(setLifeView(state,bad),false);eq(state,before);}eq(addLifeSupport(state,'score'),false);
+for(const change of [{version:2},{stages:[]},{chartId:5},{direction:'backward-growth'},{options:['egg','egg','pupa','adult']},{expected:{neighbor:'outside',meaning:'same'}}])ok(!validLifeSource({...lifeSource('egg-next'),...change}));
+{
+ const source=lifeSource('adult-before');source.stages[0].drawing={version:25,kind:'future-egg'};ok(validLifeSource(source),'future drawing does not discard understood chart/text');const input={neighbor:'pupa',meaning:'same',support:[]};ok(validLifeCheck(evaluateLife(source,input)));source.expected={neighbor:'larva',meaning:'offspring'};source.question='Earlier supplied chart question';eq(evaluateLife(source,{neighbor:'larva',meaning:'offspring',support:[]}).meaningMatch,true,'new checks use own admitted source, not catalog');
+}
+{
+ const s={},r=startLife(s,'adult-next');chooseLifeNeighbor(s,'egg');chooseLifeMeaning(s,'offspring');const c=checkLife(s),frozen=copy(c);r.source.expected={neighbor:'pupa',meaning:'same'};r.source.overview='Revised chart words';ok(!lifeCheckMatches(r));eq(c,frozen,'retained source/outcome not rewritten');c.neighborMatch=false;c.meaningMatch=true;c.feedback='Earlier contradictory outcome';ok(validLifeRound(r),'historical results shape-checked');for(let i=0;i<10;i++)checkLife(s);eq(r.checks.length,8);
+}
+for(const root of [null,'<b>future</b>',{version:91,raw:'saved'}]){const s={lifeStages:copy(root)},before=copy(s);eq(lifeView(s).status,'unavailable');eq(startLife(s,'egg-next'),null);eq(s,before);}
+{
+ const s={};for(let i=0;i<16;i++)startLife(s,lifeCases[i%8].id);eq(lifeView(s).rounds.length,12);eq(s.lifeStages.rounds[0].id,5);s.lifeStages.rounds.push({id:90,raw:'earlier work'});const raw=copy(s.lifeStages.rounds.at(-1));s.lifeStages.current=90;eq(lifeView(s).current.id,16);startLife(s,'egg-next');eq(s.lifeStages.current,91);eq(lifeView(s).earlier,[raw]);const duplicate=copy(s.lifeStages.rounds[0]);s.lifeStages.rounds.push(duplicate);eq(lifeView(s).earlier,[raw,duplicate]);const before=copy(s);lifeView(s);eq(s,before);
+}
+for(const unsafe of [Infinity,Number.MAX_SAFE_INTEGER]){const s={};startLife(s,'egg-next');s.lifeStages.rounds.push({id:unsafe,raw:true});const before=copy(s);eq(startLife(s,'larva-next'),null);eq(s,before,'unsafe id never evicts retained work');}
+console.log(`Life stages core: ${n} assertions passed across ${combinations} response combinations.`);

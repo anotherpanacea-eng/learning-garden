@@ -341,7 +341,7 @@
         "build"
       ],
       "route": "#living",
-      "scope": "Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained."
+      "scope": "Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained. Optional Life Stages (spec65, #living/stages) uses four original Small White butterfly diagrams and eight next/before chart-neighbour tasks, separating stage position from same-individual/offspring meaning. A supplied named-species chart, not field observation, independent retelling or general insect-life-cycle attainment. Optional Food Links (spec66, #living/food) looks up two named sap/aphid/larval-predator feeding links from either endpoint and interprets a supplied food-to-eater energy legend. Supplied diagrams/facts, not field observation, full diets, independent explanation or a complete food web."
     },
     {
       "id": "cafe",
@@ -530,16 +530,136 @@
       "scope": "Freeze one actual completed current or kept machine result, choose useful counts and construct editable two-bar charts on a fixed 0–24 model-token scale. Draft reading, source fidelity and original runoff questions remain separate. Four finite sources; no measured hydrology, independent scale choice or learning-level inference."
     },
     {
-      "id": "parcel-packing",
-      "name": "Willow packing table",
+      "id": "fraction-trail",
+      "name": "Fraction Trail",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "allocate"
+      ],
+      "route": "#cafe/fractions",
+      "scope": "Six open length-number-line requests on a fixed 0–2 ribbon: edit partitions, step a flag along actual boundaries, separately check spaces, requested stop and raw reading; keep frozen unfinished route cards. Half/quarter/sixth comparison and one five-quarter encounter only; all model-visible practice, no independent mastery or area/set/decimal coverage."
+    },
+    {
+      "id": "bundle-exchange",
+      "name": "Bundle Burrow: Exchange Table",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "allocate"
+      ],
+      "route": "#numbers/exchange",
+      "scope": "Seven fixed collections from 0 to 42, with countable wrapped tens, loose ones and a ten-place frame. Exact reversible conserved exchanges; distinct wrapped-count, total, tens-digit and tens-value forms; frozen unfinished keeps and separate 16 example. Supplied numeral/model practice, no handwriting, arbitrary-range counting, arithmetic algorithm or general place-value proficiency claim."
+    },
+    {
+      "id": "reader-instructions",
+      "name": "Instructions for a Reader",
+      "status": "built-local",
+      "patterns": [
+        "compose",
+        "read",
+        "build"
+      ],
+      "route": "#post/instructions",
+      "scope": "Two original short instruction cases shared with #loft/instructions. Separate picture plan, supplied A/B sentence strip and exact human-read words; finite manual scene consequences, optional reader questions/reports and bounded kept versions. Supplied assembly and guided revision opportunity only; no arbitrary-language parsing, independent composition/decoding/handwriting, listening or programming proficiency claim."
+    },
+    {
+      "id": "fair-test",
+      "name": "Fair Test Bench",
+      "status": "built-local",
+      "patterns": [
+        "experiment",
+        "read"
+      ],
+      "route": "#workshop/fair",
+      "scope": "Choose both setups in the original finite ramp model; distinguish question-relevant, wrong-factor, identical and confounded pairs; reveal up to three examples per side, inspect repeats and keep an ungraded claim or exact note. Authored model comparison practice only; no physical investigation, causal-proof, independent measurement or mastery claim. Optional Moss encounters (spec60) preserve a valid observation while repairing a causal overclaim or recognising a careful statement; demonstration, supplied explanation and exact ungraded prose stay separate. This adds no independently observed teaching-back attainment."
+    },
+    {
+      "id": "coin-counter",
+      "name": "Market Day Coin Counter",
       "status": "built-local",
       "patterns": [
         "allocate",
+        "build"
+      ],
+      "route": "#workshop/coins",
+      "scope": "Payment mode: four supplied US-cent denominations, count versus value, conserved exchanges and two alternative exact payments across eight pretend stall requests. Optional Market Change (spec67, #workshop/change): six fixed price/tender cases, independent coverage and returned-response choices, explicit zero versus shortage, and any fitting coin composition. Frozen historical checks stay separate. No unlabelled real-coin recognition, UK notation, dollars, budgets, scarcity or monetary Café economy."
+    },
+    {
+      "id": "cartographer",
+      "name": "Cartographer’s Table",
+      "status": "built-local",
+      "patterns": [
+        "compose",
+        "build"
+      ],
+      "route": "#workshop/maps",
+      "scope": "Freely place four keyed landmarks on a supplied0–5 intersection grid; read horizontal-first coordinates and compose two adjacent orthogonal routes. Count travelled intervals in fictional model metres, including retraced segments; compare frozen checks separately from revised maps. Supported schematic practice only; no real geography, surveying, physical scale, rates, independent axis construction or full coordinate/geometry attainment. Optional three supplied delivery jobs add freely revealable Map-reader/Dispatcher/Both clue views and child-authored routes through an intermediate stop. Recorded arrival, actual stop visit and serving the request remain separate; no secure separation, partner participation or communication attainment is inferred. Optional structured authoring (spec63) chooses start, collection and final delivery on a complete free map, then creates a separate frozen solving job after a supplied 12-move feasibility check. Generated wording and displayed calculations do not establish independent writing, shortest-path reasoning or general problem-posing attainment."
+    },
+    {
+      "id": "two-windows",
+      "name": "Two Windows",
+      "status": "built-local",
+      "patterns": [
+        "read",
+        "compose"
+      ],
+      "route": "#workshop/windows",
+      "scope": "Three original fictional events with two tellers and freely chosen short/long passages. Distinguish explicit, inferred, contradicted and missing details across both accounts, select supporting lines, and choose a supplied revision for a particular reader. Optional exact own words remain ungraded; no decoding, independent writing, general narrator reliability or historical corroboration claim."
+    },
+    {
+      "id": "balance-stall",
+      "name": "Balance Stall",
+      "status": "built-local",
+      "patterns": [
+        "build"
+      ],
+      "route": "#workshop/balance",
+      "scope": "An ideal equal-arm model with identical one-unit masses: compare two different visible arrangements, make reversible paired/one-sided changes and explore one whole sealed parcel of fixed model mass. Proposed value, isolation, performed actions, support and frozen outcomes stay separate. No physical measurement, two-step/general equation solving or independently demonstrated method claim."
+    },
+    {
+      "id": "preparation-clock",
+      "name": "Preparation Clock",
+      "status": "built-local",
+      "patterns": [
         "build",
         "read"
       ],
-      "route": "#post/packing",
-      "scope": "Four invented seed-envelope requests with whole-bag capacity, full kits, loose envelopes and minimal loaded trips. Countable reversible grouping, actual-model readings and purpose-specific answers remain supplied practice. No written algorithm, decimal quotient, general multistep problem solving, formal place value or independent reading claim."
+      "route": "#workshop/clock",
+      "scope": "Four fictional morning preparation cards: read a fixed hour/half-hour face, then set a separate coupled model to a supplied digital departure. Independent recorded responses, optional supplied digital label/help, frozen sources and open revision. No independent drawing/hand positioning, elapsed-duration calculation, AM/PM, 24-hour day, physical measurement or real schedule."
+    },
+    {
+      "id": "source-trail",
+      "name": "Follow the Source Trail",
+      "status": "built-local",
+      "patterns": [
+        "read",
+        "build"
+      ],
+      "route": "#workshop/sources",
+      "scope": "Four open supplied-choice questions over the reviewed Paris1910 photograph, an explicitly derivative modern picture note and a modern date summary. Trace a proposed note-to-source link, distinguish card count from independent observation, and choose a limited display label. No positive independent-witness example, independent decoding/explanation/research, source trust ranking or whole-history coverage."
+    },
+    {
+      "id": "ribbon-matches",
+      "name": "Same Amount, New Cuts",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "route": "#workshop/fractions",
+      "scope": "Six supplied-reference equal-whole constructions with a required different partition: halves/quarters and thirds/sixths in both directions. Move a proposed working flag, then choose the numerator of its actual position. Matching and naming outcomes remain separate. Existing Fraction Trail already accepts equivalent labels and compares kept/current ribbons; no new parser, free partition construction, independent notation writing/explanation or general fraction algorithm."
+    },
+    {
+      "id": "repeat-deliveries",
+      "name": "Repeat a Delivery Block",
+      "status": "built-local",
+      "patterns": [
+        "compose",
+        "build"
+      ],
+      "route": "#workshop/repeats",
+      "scope": "Four original direct courier jobs on a labelled equal-interval grid. Compose two absolute arrows, repeat the whole pair two or three times, manually step each expanded command and revise. Proposed moves, attempted commands and travelled intervals remain distinct. Fixed expansion/counts are supplied model information, not independent programming or multiplication attainment."
     },
     {
       "id": "whole-batches",
@@ -552,6 +672,18 @@
       ],
       "route": "#cafe/batches",
       "scope": "Three pictured requests for 2/4/6 guests: repeat a complete 100/150 mL two-guest recipe, prepare separate jars, read a supplied scale and compose a finite message. Optional additive contrast and familiar inverse reference; no fractional scaling, general ratio, independent calculation, free writing or physical measuring claim."
+    },
+    {
+      "id": "parcel-packing",
+      "name": "Willow packing table",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "build",
+        "read"
+      ],
+      "route": "#post/packing",
+      "scope": "Four invented seed-envelope requests with whole-bag capacity, full kits, loose envelopes and minimal loaded trips. Countable reversible grouping, actual-model readings and purpose-specific answers remain supplied practice. No written algorithm, decimal quotient, general multistep problem solving, formal place value or independent reading claim."
     }
   ],
   "manualReferences": [
@@ -955,6 +1087,293 @@
       "scope": "Construct bars against a supplied four-token tick scale; distinguish reading the entered chart from source fidelity and compare two runoff counts. No independent scale choice, pictograms or broad graph proficiency."
     },
     {
+      "game": "fraction-trail",
+      "topicId": "mt_Kr3IyA6m-O",
+      "kind": "scoped-practice",
+      "source": "dist/fraction-trail-ui.mjs",
+      "scope": "Build and read a flag location on a fixed 0–2 length line. Supplied whole/scale and visible model; no independent scale selection or full fraction-number topic coverage."
+    },
+    {
+      "game": "fraction-trail",
+      "topicId": "mt_NoB20kVa4w",
+      "kind": "scoped-practice",
+      "source": "dist/fraction-trail-ui.mjs",
+      "scope": "Edit equal/unequal first-whole partitions, repeat those same spaces in the second whole and step only along actual boundaries. Fixed12-tick coordinate model, six authored cases."
+    },
+    {
+      "game": "fraction-trail",
+      "topicId": "mt_ndGqFPWyen",
+      "kind": "scoped-practice",
+      "source": "dist/fraction-trail-ui.mjs",
+      "scope": "Name an actual flag with whole or fraction notation, separating a correct location reading from the requested stop/partition. One five-quarter encounter; no general mixed-number or area/set work."
+    },
+    {
+      "game": "fraction-trail",
+      "topicId": "mt_Ep7TDFuYUa",
+      "kind": "scoped-practice",
+      "source": "dist/fraction-trail-ui.mjs",
+      "scope": "Keep a half-length route and compare a current two-quarter/three-sixth route at the same physical scale. Half family only, no general equivalence/simplification strategy."
+    },
+    {
+      "game": "fraction-trail",
+      "topicId": "mt_vKcxX6iNOA",
+      "kind": "scoped-practice",
+      "source": "dist/fraction-trail-ui.mjs",
+      "scope": "Read/write bounded whole or numerator/denominator notation for an actual visible flag; equivalents accepted. No general symbolic fluency or independent reading proficiency inference."
+    },
+    {
+      "game": "bundle-exchange",
+      "topicId": "mt_xmmgAzxe5j",
+      "kind": "scoped-practice",
+      "source": "dist/bundle-exchange-ui.mjs",
+      "scope": "Count thirteen pictured counters, move ten to a frame and wrap/unwrap the same ten with three outside; a separate supplied sixteen example revisits the action. Only these two teens, not all teen numerals or handwriting."
+    },
+    {
+      "game": "bundle-exchange",
+      "topicId": "mt_r0VXbfAmsH",
+      "kind": "scoped-practice",
+      "source": "dist/bundle-exchange-ui.mjs",
+      "scope": "Wrap exactly ten frame counters into one visibly ten-marked bundle and unwrap into an empty ten-place frame. Fixed totals conserved with reversible one-counter moves; containers add no counters. No arbitrary packing capacity or physical exchange inference."
+    },
+    {
+      "game": "bundle-exchange",
+      "topicId": "mt_THl9GLxwoL",
+      "kind": "scoped-practice",
+      "source": "dist/bundle-exchange-ui.mjs",
+      "scope": "Distinguish actual wrapped bundles from a supplied numeral’s tens digit and tens-place value for selected quantities 0,7,13,20,27,30,42, including noncanonical grouping. Zero/seven have no written tens digit; empty tens place is supplied. No full two-digit range, independent decoding or written arithmetic claim."
+    },
+    {
+      "game": "reader-instructions",
+      "topicId": "mt__p5n8z5soJ",
+      "kind": "scoped-practice",
+      "source": "dist/instruction-ui.mjs",
+      "scope": "Arrange up to three supplied actions in two fixed scenes, inspect missing/out-of-order consequences and manually reveal a computer’s finite rules. One note/envelope premise and one newcomer/preparation case; not general programming or arbitrary natural-language execution."
+    },
+    {
+      "game": "reader-instructions",
+      "topicId": "mt_9P9o6d0Qm3",
+      "kind": "scoped-practice",
+      "source": "dist/instruction-ui.mjs",
+      "scope": "Make an independent picture plan, optionally rehearse off-screen, then explicitly assemble supplied sentences or write exact ungraded words. Plan and both drafts stay separate; no observed oral sentence production, independent prose or narrative beginning/middle/end claim."
+    },
+    {
+      "game": "reader-instructions",
+      "topicId": "mt_OyOYHlZ2_T",
+      "kind": "scoped-practice",
+      "source": "dist/instruction-ui.mjs",
+      "scope": "Read an exact draft with a person, invite clarification, preserve a comment tied to that text and compare explicit versions. A guided opportunity; no automatic reader-comprehension, prose-quality, proofreading or learning judgment."
+    },
+    {
+      "game": "reader-instructions",
+      "topicId": "mt_v5DyOEpbbr",
+      "kind": "explanation",
+      "source": "dist/instruction-ui.mjs",
+      "scope": "Name the reader’s knowledge and this note’s purpose; optionally compare a supplied preparation instruction with an invitation to watch, plus a newcomer/familiar-reader discussion. Supplied form/purpose contrast only; full tone/register/genre choice remains outside this slice."
+    },
+    {
+      "game": "fair-test",
+      "topicId": "mt_qgb76wHN2X",
+      "kind": "scoped-practice",
+      "source": "dist/fair-test-ui.mjs",
+      "scope": "Independently choose A/B height and surface settings for one of two supplied questions; explain whether neither, one relevant, one other or both factors change. Narrow finite-model design practice; no general physical experimental competence."
+    },
+    {
+      "game": "fair-test",
+      "topicId": "mt_ZFwPZaDJ0_",
+      "kind": "scoped-practice",
+      "source": "dist/fair-test-ui.mjs",
+      "scope": "Choose which finite model trials to reveal, inspect a labelled A/B table and shared ruler, and notice unequal repetitions or observed variation. Automatic recording is supported data reading, not independent measurement or table construction."
+    },
+    {
+      "game": "fair-test",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "scoped-practice",
+      "source": "dist/fair-test-ui.mjs",
+      "scope": "Keep frozen stopping distances separate from a provisional claim and exact optional words, with a supplied explanation of what a confounded comparison cannot establish. Prose and physical causal reasoning remain ungraded."
+    },
+    {
+      "game": "coin-counter",
+      "topicId": "mt_cPZwlUk8Nd",
+      "kind": "explanation",
+      "source": "dist/coin-counter-ui.mjs",
+      "scope": "Four labelled schematic US coins with supplied names/cent values and a size-versus-value contrast. US-cent adaptation only; source UK coins/notes and independent real-coin recognition are not met."
+    },
+    {
+      "game": "coin-counter",
+      "topicId": "mt_AF2BeFQwfX",
+      "kind": "scoped-practice",
+      "source": "dist/coin-counter-ui.mjs",
+      "scope": "Construct two different US-cent coin vectors for one marked amount and exchange denominations while conserving value. Separate physical coin count from cents. The source description concerns combinations; giving change and UK-specific evidence remain outside this slice."
+    },
+    {
+      "game": "cartographer",
+      "topicId": "mt_jBQS-CicNn",
+      "kind": "scoped-practice",
+      "source": "dist/cartographer-ui.mjs",
+      "scope": "Read supplied horizontal-first ordered pairs and place labelled landmarks on intersections0–5. The grid/key are supplied; shape vertices and independent explanation remain unobserved."
+    },
+    {
+      "game": "cartographer",
+      "topicId": "mt_oDlduFnemk",
+      "kind": "scoped-practice",
+      "source": "dist/cartographer-ui.mjs",
+      "scope": "Supplied perpendicular axes with origin(0,0), across-first/up-second coordinate labels and a(4,2) versus(2,4) talking invitation. The bundled generic title describes a coordinate system; no independent axis construction or wider attainment."
+    },
+    {
+      "game": "cartographer",
+      "topicId": "mt_snlqRCiA1R",
+      "kind": "scoped-practice",
+      "source": "dist/cartographer-ui.mjs",
+      "scope": "Author fictional landmark positions and interpret two route endpoints on a bounded first-quadrant point grid. No time/distance data graph, negative coordinates or physical map survey."
+    },
+    {
+      "game": "cartographer",
+      "topicId": "mt_cqSf213hSa",
+      "kind": "scoped-practice",
+      "source": "dist/cartographer-ui.mjs",
+      "scope": "Count every travelled unit segment, including retracing, with1 fictional model metre per interval; distinguish six point markers from five intervals. No physical ruler or real-object measurement claim."
+    },
+    {
+      "game": "two-windows",
+      "topicId": "mt_E_OryWIYkn",
+      "kind": "scoped-practice",
+      "source": "dist/two-windows-ui.mjs",
+      "scope": "Compare two original fictional tellers with different access to one event. Noticing, time and visibility change available details; no first/third-person classification, authorial intent or general reliability attainment."
+    },
+    {
+      "game": "two-windows",
+      "topicId": "mt_lp3qyEujIv",
+      "kind": "scoped-practice",
+      "source": "dist/two-windows-ui.mjs",
+      "scope": "Classify supplied statements across both fictional accounts, combining authored supporting line sets. Distinguish inference, explicit contradiction and missing information; supplied selections do not establish independent reading or general evidence evaluation."
+    },
+    {
+      "game": "two-windows",
+      "topicId": "mt_OyOYHlZ2_T",
+      "kind": "scoped-practice",
+      "source": "dist/two-windows-ui.mjs",
+      "scope": "Choose between supplied revisions in response to a fictional reader’s specific question. Exact own words can be kept for a human reader but are ungraded; no claim of independent revision or broad writing-feedback proficiency."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_4vHa3I5bNj",
+      "kind": "scoped-practice",
+      "source": "dist/body-clues-content.mjs",
+      "scope": "Body clues (#living/bodies, local build): compare jointed walking legs plus a second feature on four supplied adult diagrams. Ladybird is a beetle; no universal six-leg converse, life-stage rule, spider practice, real field identification or whole-topic attainment."
+    },
+    {
+      "game": "living",
+      "topicId": "mt__bhJX2SuFJ",
+      "kind": "scoped-practice",
+      "source": "dist/body-clues-content.mjs",
+      "scope": "Body clues (#living/bodies, local build): follow a supplied four-picture two-feature key, retain uncertainty and revise a trail. Not creating keys, identifying unfamiliar organisms outdoors, independent decoding or full evidence coverage."
+    },
+    {
+      "game": "balance-stall",
+      "topicId": "mt_oIzycTBeE4",
+      "kind": "scoped-practice",
+      "source": "dist/balance-stall-ui.mjs",
+      "scope": "Relational equals through two supplied noncanonical grouped arrangements and reversible one-sided/paired unit-mass changes. Actual unequal relations stay visible; no independently composed explanation or general symbolic proof."
+    },
+    {
+      "game": "balance-stall",
+      "topicId": "mt_3JgrHY221M",
+      "kind": "scoped-practice",
+      "source": "dist/balance-stall-ui.mjs",
+      "scope": "One fixed whole-parcel model mass plus loose unit masses equals a known total, including a right-side parcel. Proposed value stays separate from performed paired changes and an isolated level balance. No all-form unknown equation, two-step or general algebra attainment."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_Wr6DDgr_kH",
+      "kind": "scoped-practice",
+      "source": "dist/life-stages-content.mjs",
+      "scope": "Life Stages (#living/stages, local build): four supplied Small White stages, eight directed chart-neighbour questions and same-individual versus offspring choices. Guided partial ordering/continuity practice, not independent explanation, retelling/drawing, field observation or full-topic attainment."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_QH-Fs97twT",
+      "kind": "scoped-practice",
+      "source": "dist/food-links-content.mjs",
+      "scope": "Food Links (#living/food, local build): four supplied endpoint questions over broad bean sap → black bean aphid → seven-spot ladybird larva; neighbour and food-arrow energy meaning assessed separately. Guided partial minibeast feeding practice, not independent chain construction/explanation, field identification, full diets or whole-topic attainment."
+    },
+    {
+      "game": "coin-counter",
+      "topicId": "mt_3tz3Otap5j",
+      "kind": "scoped-practice",
+      "source": "dist/market-change-content.mjs",
+      "scope": "Source-title mismatch: pinned Halves and quarters (age 7+) actually has US-money description/evidence; refreshed upstream names it Money word problems (audit67). Market Change: six supplied whole-cent price/tender cases; choose coverage and build any fitting return, keeping shortage distinct from zero change. No fractions, bills/dollar notation, independent fluency, real cash handling or whole-topic attainment."
+    },
+    {
+      "game": "preparation-clock",
+      "topicId": "mt_0XxyaQLRhn",
+      "kind": "scoped-practice",
+      "source": "dist/preparation-clock-content.mjs",
+      "scope": "Guided hour/half-hour analogue-to-digital choices and digital-to-coupled-model setting across four supplied cards. Software coordinates both hands; no independent drawing, arbitrary minutes, unassisted reading or whole-topic attainment."
+    },
+    {
+      "game": "preparation-clock",
+      "topicId": "mt_2XDGT5tei1",
+      "kind": "scoped-practice",
+      "source": "dist/preparation-clock-content.mjs",
+      "scope": "Supplied 30-minute half-hour steps and two steps making 60 minutes / one hour. The 24-position model is a 12-hour face, not a day. No 24-hours/day conversion, independent elapsed-duration calculation or physical measurement."
+    },
+    {
+      "game": "source-trail",
+      "topicId": "mt_TTzJTF-OkG",
+      "kind": "scoped-practice",
+      "source": "dist/source-trail-content.mjs",
+      "scope": "Trace the openly declared origin of a modern note from photographPH8646 and limit its independent evidential weight. Four supplied questions, own frozen choices and revised display label. C’s independence is not established; no positive independent corroboration, historical author-purpose inference, independent reading/research or whole-topic attainment."
+    },
+    {
+      "game": "ribbon-matches",
+      "topicId": "mt_FbDKeLfBCo",
+      "kind": "scoped-practice",
+      "source": "dist/ribbon-matches-content.mjs",
+      "scope": "Six directed same-whole ribbon matches with different supplied partitions, especially1/3↔2/6 and2/3↔4/6. Actual endpoint matching and actual-flag numerator choices are separate. Guided partial diagram practice, not independent drawing, verbal explanation, arbitrary equivalence generation or whole-topic attainment."
+    },
+    {
+      "game": "repeat-deliveries",
+      "topicId": "mt__p5n8z5soJ",
+      "kind": "scoped-practice",
+      "source": "dist/repeat-deliveries-content.mjs",
+      "scope": "Partial existing pinned Step-by-Step Instructions anchor: compose a finite two-arrow group repeated2/3 times, trace one command at a time and revise. Fresh upstream loop/repeat topics are documented in audit71 but absent from the vendor/runtime; no unresolved IDs or full loop/branching/forever curriculum claim."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_PZ909yPrEC",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Repeat 1–3 complete two-guest cards and retain ingredient-labeled 100/150 mL sums. Supplied model practice only, not independent fact recall."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_U4cIBXVug4",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Compare whole-number copies of the same complete two-guest recipe; distinguish one more whole batch from adding 100 mL to each unequal ingredient. Narrow conceptual illustration, not general ratio/scaling proficiency."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_TMoHjMhRS2",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Use mL next to each named ingredient in a supplied label; compare mL, g and items. No broad mathematical-vocabulary or free-writing claim."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_OlhMP7ShFT",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Match pictured complete cards, the retained request and supplied message phrases. No independent decoding or unseen reading assessment."
+    },
+    {
+      "game": "whole-batches",
+      "topicId": "mt_4lp_b5Pzik",
+      "kind": "scoped-practice",
+      "source": "dist/whole-batches-ui.mjs",
+      "scope": "Revisit exact 50 mL pictured transfers in a supplied 500 mL jug, separate from requested jar amounts. No physical-tool skill or capacity estimation."
+    },
+    {
       "game": "parcel-packing",
       "topicId": "mt_LpSuPgL31x",
       "kind": "scoped-practice",
@@ -995,41 +1414,6 @@
       "kind": "scoped-practice",
       "source": "dist/parcel-packing-ui.mjs",
       "scope": "Relate the literal packing request, capacity and purpose to countable pictured objects and groups. No independent decoding, inference or broad reading level claim."
-    },
-    {
-      "game": "whole-batches",
-      "topicId": "mt_PZ909yPrEC",
-      "kind": "scoped-practice",
-      "source": "dist/whole-batches-ui.mjs",
-      "scope": "Repeat 1–3 complete two-guest cards and retain ingredient-labeled 100/150 mL sums. Supplied model practice only, not independent fact recall."
-    },
-    {
-      "game": "whole-batches",
-      "topicId": "mt_U4cIBXVug4",
-      "kind": "scoped-practice",
-      "source": "dist/whole-batches-ui.mjs",
-      "scope": "Compare whole-number copies of the same complete two-guest recipe; distinguish one more whole batch from adding 100 mL to each unequal ingredient. Narrow conceptual illustration, not general ratio/scaling proficiency."
-    },
-    {
-      "game": "whole-batches",
-      "topicId": "mt_TMoHjMhRS2",
-      "kind": "scoped-practice",
-      "source": "dist/whole-batches-ui.mjs",
-      "scope": "Use mL next to each named ingredient in a supplied label; compare mL, g and items. No broad mathematical-vocabulary or free-writing claim."
-    },
-    {
-      "game": "whole-batches",
-      "topicId": "mt_OlhMP7ShFT",
-      "kind": "scoped-practice",
-      "source": "dist/whole-batches-ui.mjs",
-      "scope": "Match pictured complete cards, the retained request and supplied message phrases. No independent decoding or unseen reading assessment."
-    },
-    {
-      "game": "whole-batches",
-      "topicId": "mt_4lp_b5Pzik",
-      "kind": "scoped-practice",
-      "source": "dist/whole-batches-ui.mjs",
-      "scope": "Revisit exact 50 mL pictured transfers in a supplied 500 mL jug, separate from requested jar amounts. No physical-tool skill or capacity estimation."
     }
   ],
   "increments": [
@@ -1086,7 +1470,7 @@
       "name": "Story Loft and community circle",
       "move": "New collaborative story/creation home; reuse read/compose/create",
       "spec": "docs/specs/06-story-loft.md",
-      "first": "Puppet theatre (specs 36–37) supports optional dialogue and one to twelve scenes. Paired-perspective reading and community-circle conversations remain later scope.",
+      "first": "Puppet theatre (specs36–37) supports optional dialogue and one to twelve scenes. Two Windows (spec59) adds three original paired-fiction events and supplied evidence/message work. Broader retelling, poetry and community-circle conversations remain later scope.",
       "gap": "Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices."
     }
   ],
