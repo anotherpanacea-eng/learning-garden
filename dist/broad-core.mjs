@@ -115,7 +115,7 @@ function broadWordingValid(q){
  const walk=x=>Array.isArray(x)?x.every(walk):!x||typeof x!=='object'||Object.entries(x).every(([k,v])=>BROAD_TEXT.has(k)?(k==='steps'?Array.isArray(v)&&v.every(text):text(v)):walk(v));
  // Checked on the saved question alone: it must still have a visible title and prompt to show.
  if(!walk(q)||![q.title,q.prompt].every(v=>typeof v==='string'&&v.trim()))return false;
- if(q.choices!==undefined&&!(Array.isArray(q.choices)&&q.choices.every(text)))return false;
+ if(q.choices!==undefined&&!(Array.isArray(q.choices)&&q.choices.every(v=>text(v)&&v.trim())))return false;
  return !Array.isArray(q.choices)||typeof q.answer!=='string'||q.choices.includes(q.answer);
 }
 export function instantiateBroad(state,q,mode='checkin',explorerSeed='garden'){
