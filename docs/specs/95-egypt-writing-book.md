@@ -1,6 +1,6 @@
 # 95. A writing board in Lucie's Library
 
-Status: **content independently reviewed and installed in a local implementation draft; implementation review, merge and deployment remain open.** This is one bounded ancient-world reading pack, not an Ancient Egypt course or a new assessment.
+Status: **content and local implementation independently reviewed; merge, release clearance and deployment remain open.** This is one bounded ancient-world reading pack, not an Ancient Egypt course or a new assessment.
 
 ## Purpose and existing home
 
