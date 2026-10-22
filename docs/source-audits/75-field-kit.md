@@ -1,0 +1,49 @@
+# Field Kit: source, safety and curriculum audit
+
+Author preparation for [spec 75](../specs/75-field-kit.md), 2026-10-22. This audit accompanies exact proposed card copy; independent practical-content/specification review is still required. No runtime, taxonomy bundle or existing atlas row changes here.
+
+## Existing product and upstream overlap
+
+The existing Measuring Kitchen has an **invented**, straight-sided 500 mL jug with ten exact 50 mL intervals; it explicitly omits real meniscus and pouring uncertainty (`dist/measuring-recipes-content.mjs`). Seedling Study has supplied plant data, Post Office has supplied message work, Rain Paths has model rain and Living Garden is drawn fiction. Field Kit adds an invitation to use real materials/views and an **adult-reported outcome code**, not a new way to assess those games or import observed values. [Spec 49](../specs/49-six-act-curriculum.md) distinguishes supplied models, learner measurements and optional adult-reported offscreen observation. The kit has no learner measurement or observation field. The five host links are contextual; no host state or model number changes.
+
+Fresh public GitHub HEAD reads on 2026-10-22 found Jane [`d4903954d7c4d8118cbd1d2f7ed770544fd4ac81`](https://github.com/kentlangley/Jane/tree/d4903954d7c4d8118cbd1d2f7ed770544fd4ac81) and Marble [`a8719737ff86ef7940ba5feca11940de1204103e`](https://github.com/withmarbleapp/os-taxonomy/tree/a8719737ff86ef7940ba5feca11940de1204103e). Exact-commit copies of Jane `LESSONS.md`, `src/engine.js`, `src/stuck.js`, `LICENSING.md`, and Marble `data/topics.json`, `data/dependencies.json`, `LICENSE`, `README.md` were read for this audit. Jane's pack stages, help and graded/review engine address screen-known work; they provide no offscreen reporting mechanism to adopt. Its engine, lessons, prose, support codes, rewards and learner model are not used. Local original cards use the existing app's native controls and local narration pattern. Jane licences are path-specific: application code MIT, authored lessons/docs CC BY-SA 4.0, and its Marble-derived data has separate ODbL/CC BY-SA layers. We copy none of those source bytes into this feature.
+
+The Marble public HEAD is newer than the `3de50367b23be6a03d1a8385daae16d5eed2675d` head in several earlier audits; this audit makes **no all-source unchanged claim**. For the seven proposed Field Kit IDs only, current names, descriptions and evidence arrays match the bundled `curriculum/marble/topics.json` exactly. Their direct incoming prerequisite IDs, strengths and reasons also match the bundled `curriculum/marble/dependencies.json`. The bundled pin remains `96a7933754af672e1bfdbf7ecb05c325860c6e0d`; no new bundle or runtime map is needed. This is a targeted check, not a full closure re-audit. Marble's database is ODbL 1.0 and its authored descriptions are CC BY-SA 4.0, © Generative Spark, Inc. (Marble); retain the repository's existing attribution/NOTICE. The new card wording and replies are original, not adapted Marble descriptions or Jane lesson text.
+
+## Seven proposed Marble anchors: disposition
+
+All seven are rejected as **new Field Kit atlas rows**. Their descriptions can inform a discussion prompt, but the saved code is only the adult's report that an activity was attempted, surprising or deferred. No card captures the work or checks any listed evidence. Existing atlas references to supplied-model games are unaffected.
+
+| Candidate ID and current title | Actual source meaning relevant here | Why the Field Kit cannot claim it |
+| --- | --- | --- |
+| `mt_4lp_b5Pzik` Capacity and volume | Measure and begin to record capacity/volume; evidence includes counting cups, using litres and recording number plus unit. | Jug marks may be read offscreen, but no reading, unit or measurement is stored or checked. |
+| `mt_zkFbMLpu3U` Comparing Capacity | Compare two containers, full/empty/more/less/half/quarter language and practical comparisons. | One jug's scale marks are compared with a drawing, not two container capacities. |
+| `mt_3v0VNkwquK` What Plants Need to Grow | Water/light/temperature, predictions and descriptions of simple comparison results. | Two pots are an opportunity to look; neither conditions nor results nor a prediction are captured. |
+| `mt_Hw70LI5xza` Observation vs Interpretation | Distinguish what was seen from what it may mean. | Walk copy prompts this distinction, but the child's words and real view remain offscreen. |
+| `mt_jc9k_HJQGd` Types of Weather | Name types and describe today's weather, with source evidence including pictures/symbols. | The spoken word is deliberately not collected. An outcome code says nothing about accuracy. |
+| `mt_HZvTriQWTh` Local weather patterns | Record conditions over days/weeks, identify patterns and make predictions. | Up to three optional looks, with no dates/records, cannot support a pattern claim. |
+| `mt_cB7hV8sw7X` Writing for an audience | Coherent writing with organization, style, purpose and audience; review a draft. | The optional short paper notice is unseen and ungraded. Adult outcome cannot judge handwriting or writing quality. |
+
+In particular, the proposed Field Kit does not convert a real activity into an on-screen independent attempt. No prerequisite edge becomes a lock, no topic is marked familiar/mastered, and the atlas is not expanded simply because a host game already has a related model reference.
+
+## Practical source checks and limits
+
+| Card | Primary source checked | Supported design decision and limit |
+| --- | --- | --- |
+| Jug | [NIST, *Method of Reading a Meniscus Using Water or Other Wetting Liquid*](https://www.nist.gov/system/files/documents/2019/05/14/gmp-3-reading-meniscus-20190507.pdf) | Eye position matters when reading a marked liquid level. NIST describes calibration apparatus, not household-jug precision. The card asks for eye-level viewing and comparison, never a claimed accurate measurement or required 250/500 mL mark. |
+| Cress | [Royal Horticultural Society, *Make a cress head*](https://www.rhs.org.uk/education-learning/school-gardening/resources/getting-started/make-a-cress-head) | Damp cotton, cress seeds, a light indoor place and repeated looking are workable. Folded kitchen paper is an untested household alternative in our card. The card uses two clean containers, omits RHS's eggshell and knife, and makes no promise of growth by a particular day or comparative outcome. Bright/dimmer pairing is our original exploratory prompt, not an RHS efficacy claim. |
+| Cress safety | [University of Minnesota Extension, *Safe handling of treated seed*](https://blog-nwcrops.extension.umn.edu/2019/04/safe-handling-of-treated-seed.html); [CDC, *Hand Hygiene as a Family Activity*](https://www.cdc.gov/clean-hands/prevention/index.html) | Treated seed requires precautions and must stay out of food/feed; use only untreated garden-cress seed sold for growing. Avoid any eating instruction for experiment plants. Wash hands after handling seed/cotton. The Extension article concerns agricultural treated seed; it does not endorse a particular cress product. |
+| Walk | [National Park Service, *7 Ways to Safely Watch Wildlife*](https://www.nps.gov/subjects/watchingwildlife/7ways.htm); [CDC hand hygiene](https://www.cdc.gov/clean-hands/prevention/index.html) | Observe wildlife without touching/disturbing it; stay on paths where applicable and wash hands after outdoor play. The card offers a full safe-window alternative. These park principles inform a cautious local walk, not a claim that all places share park rules. |
+| Weather | [NOAA, *What's the difference between climate and weather?*](https://www.noaa.gov/explainers/what-s-difference-between-climate-and-weather) | One brief view describes weather then; long-term records are needed for climate/pattern claims. Up to three casual looks do not infer local patterns or climate. No live weather feed, location or date is used. |
+| Notice | The existing Post Office's human-reader distinction and spec 49's offscreen route; no external factual claim. | Paper-and-pencil notice is original fictional play. Neither the notice nor the adult's feedback enters the app. |
+
+The listed official sources support narrow, general choices; they are not a certification of household safety for every child or setting. The adult chooses a safe view/materials and may choose **Not today**. The cards avoid heat, cutting, ingestion, chemicals, roads, water bodies and contact with wildlife. We do not reproduce upstream worksheets, photographs, diagrams or instruction text. Official source pages are linked for review, while exact downloaded public source files are held outside the public repository for the independent reviewer.
+
+## Review questions to close before implementation
+
+1. Practical reviewer: confirm the jug's household eye-level instruction is clear without implying calibration-grade accuracy; a jug lacking a useful numbered mL scale leads to **Not today**.
+2. Practical reviewer: confirm the cress two-spot instruction, untreated-seed/no-eating rule and the realistic “several days” wording; no growth outcome is promised.
+3. Practical reviewer: confirm the window alternative and one-place fallback make the walk safe and usable without demanding wet weather or contact with plants/soil.
+4. Content reviewer: check every neighbour reply for an unobserved-result implication. An adult `done` report says the activity was attempted, not that every step completed.
+
+No source access failure blocked this draft. The official CDC/NOAA pages were read through public web access; direct host download returned 403 for those two, so their exact page bytes were not cached. Their public links above remain available for independent review. Independent review still decides whether practical content is ready to build.
