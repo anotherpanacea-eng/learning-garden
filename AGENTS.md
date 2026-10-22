@@ -8,4 +8,4 @@ In the feature's existing spec or PR, say what was reused, adapted, or studied, 
 
 Keep this app's established choices: parent-guided exploration, open destinations, optional help, and separate records for support, familiarity, and independent attempts. Reusing an upstream component does not require adopting its mastery labels, access locks, timers, rewards, storage, or handling of learner data.
 
-When a task offers supplied choices, vary where the fitting choice sits across cases, and don't let tone give it away: if the wrong choices all overclaim, add one that is too cautious, so the most careful-sounding answer is not always right.
+When a learner activity offers supplied answer choices, vary the fitting choice’s position across cases without letting tone or length give it away. If wrong choices all overclaim, consider one that withholds more than the supplied evidence requires; it must be wrong for an evidence-specific reason, not merely for being cautious. Skip that alternative where it would distort the question. Keep the order stable within a saved question, whether authored or generated, and preserve its choices and order when resuming saved work.
