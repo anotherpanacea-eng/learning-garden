@@ -1,4 +1,4 @@
-// Shared notebook limits, also used before wrapping unreadable saved work.
+// Shared import limits used before a recovery adds a retained-raw wrapper.
 export const MAX_IMPORT_BYTES=5*1024*1024;
 export function boundedProgressValue(source){
  let nodes=0;

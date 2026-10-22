@@ -168,7 +168,7 @@ with sync_playwright() as p:
    page.reload();page.locator('[data-pp-recover]').wait_for()
    ok('Keep readable requests and continue' in page.locator('[data-pp-recover]').inner_text(),'recovery offers to keep readable requests')
    click(page,'[data-pp-recover]')
-   ok('Return to your familiar draft' in page.locator('[data-pp-case="lantern-seeds"]').inner_text(),'valid request remains available')
+   ok('Your plan is waiting' in page.locator('[data-pp-case="lantern-seeds"]').inner_text(),'valid request remains available')
    ok('Try either purpose' in page.locator('[data-pp-case="meadow-seeds"]').inner_text(),'bad request is removed from active cases')
    ok(saved(page)['parcelPacking']['recovered']['cases']['meadow-seeds']['bags'][0]==-1,'whole unreadable original remains in notes')
   ok(not errors,'no page errors: '+str(errors));ok(not failed,'no HTTP errors: '+str(failed))

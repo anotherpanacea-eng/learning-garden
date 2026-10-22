@@ -60,13 +60,13 @@ export const storyNodes = {
   'creature-observe': {
     id: 'creature-observe', entrance: 'creature', type: 'task', subject: 'Science',
     title: 'Luma’s leaf wings',
-    body: 'Pip watches Luma in the story. In a bright patch, Luma opens its wings. In the shade, it closes them. Pip sees the same thing happen twice. Dot writes it down. “A beetle-sized notebook is mostly margin.”',
+    body: 'Pip watches Luma. In a bright patch, Luma opens its wings. In the shade, it closes them. Pip sees the same thing happen twice. Dot writes it down. “A beetle-sized notebook is mostly margin.”',
     guide: '{guide} says, “We can say what Pip saw without claiming we know why.”',
     prompt: 'Which sentence matches Pip’s observations?',
     kind: 'choice',
     choices: ['Every creature closes its wings in shade', 'Luma opened its wings in the bright patch and closed them in shade', 'Luma can never open its wings in shade'],
     answer: 1,
-    hint: 'Choose the sentence about this creature and the events Pip actually watched.',
+    hint: 'Pick the sentence about what Pip saw Luma do.',
     explanation: 'Pip saw Luma open its wings in the bright patch and close them in shade. These observations do not tell us what every creature does, or what Luma can never do.',
     talk: 'What else could Pip observe before trying to explain Luma’s wing movements?',
     next: 'creature-project'
@@ -76,7 +76,7 @@ export const storyNodes = {
     title: 'A trail of your own',
     body: 'Pip offers a blank piece of pretend map. Dot suggests a resting place with a very small welcome mat.',
     guide: '{guide} says, “You can imagine a route here, or save the idea for later.”',
-    prompt: 'Optional off-screen idea: on paper, draw a starting spot and a resting place for Luma. Join them with dots or arrows. Someone can follow the route with a finger. You can simply continue if you prefer.',
+    prompt: 'Want to make one on paper? Draw a starting spot and a resting place for Luma. Join them with dots or arrows. Someone can follow the route with a finger. You can simply continue if you prefer.',
     talk: 'What could make your route easy for someone else to follow?',
     next: null
   },
@@ -110,14 +110,14 @@ export const storyNodes = {
     title: 'Your turn at the postbox',
     body: 'Pip finds a blank card. Dot offers to deliver a pretend message, provided the address is not “somewhere near a leaf.”',
     guide: '{guide} says, “A picture, a few words, or words told to a helper can carry your idea.”',
-    prompt: 'Optional off-screen idea: fold paper into a card. Draw a make-believe meeting place. Write or dictate one instruction for finding it. Invite someone to point to the place your message describes. Or keep the idea for another day.',
+    prompt: 'Want to make one on paper? Fold paper into a card. Draw a make-believe meeting place. Write one instruction for finding it, or say it for a grown-up to write. Invite someone to point to the place your message describes. Or keep the idea for another day.',
     talk: 'Which detail would help your reader find the right place?',
     next: null
   },
   'shelter-test': {
     id: 'shelter-test', entrance: 'shelter', type: 'task', subject: 'Science',
     title: 'Two tiny test roofs',
-    body: 'Pip and Dot tested two paper model roofs. They used equal-sized pieces of the same paper and followed the same steps, leaving one roof flat and folding the other. They put 10 drops on each roof. The card underneath the flat roof had 6 wet marks. Under the folded roof it had 2.',
+    body: 'Pip and Dot tested two paper model roofs. They cut two pieces of the same paper, the same size, and followed the same steps. One roof stayed flat. One was folded. They put 10 drops on each roof. The card underneath the flat roof had 6 wet marks. Under the folded roof it had 2.',
     guide: '{guide} says, “Let’s choose a conclusion that fits this particular test.”',
     prompt: 'What do these test results show?',
     kind: 'choice',
@@ -146,7 +146,7 @@ export const storyNodes = {
     title: 'Choose a hideaway',
     body: 'Pip lays out imaginary plans. Dot asks for a window with a view of something other than Pip’s ankle.',
     guide: '{guide} says, “Your design choices are yours. We can talk about what each feature is for.”',
-    prompt: 'Optional off-screen idea: draw or fold a paper hideaway for a make-believe creature. Choose a tall doorway, a wide roof, or a shape of your own. Add one feature you want to try and explain its job. No water test is needed. You can also leave the plan for later.',
+    prompt: 'Want to make one on paper? Draw or fold a paper hideaway for a make-believe creature. Choose a tall doorway, a wide roof, or a shape of your own. Add one feature you want to try and explain its job. No water test is needed. You can also leave the plan for later.',
     talk: 'What does your creature need, and which feature of your design could help?',
     next: null
   }

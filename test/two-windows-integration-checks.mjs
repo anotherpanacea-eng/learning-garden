@@ -37,7 +37,7 @@ for(const raw of [null,'<script>opaque original</script>',{version:99,payload:'<
 }
 {
  const sample=structuredClone(s),round=windowsView(sample).current;setWindowsPage(sample,'message');
- round.messageChecks=[structuredClone(round.messageChecks.find(c=>c.card!==null))];const html=twoWindowsPage(sample),fit=html.indexOf('Supplied card fit for the reader'),feedback=html.indexOf('windows-feedback'),own=html.indexOf('Own words at this moment — ungraded, not part of this card check');
+ round.messageChecks=[structuredClone(round.messageChecks.find(c=>c.card!==null))];const html=twoWindowsPage(sample),fit=html.indexOf('Supplied card fit for the reader'),feedback=html.indexOf('windows-feedback'),own=html.indexOf('Own words at this moment (ungraded, not part of this card check');
  ok(fit>=0&&fit<feedback&&feedback<own,'supplied card verdict precedes explicitly ungraded own prose');
  round.source.reader.knows='b';ok(twoWindowsPage(sample).includes('knows only account B'),'frozen reader knowledge drives context');
  setWindowsPage(sample,'compare');const c=round.claimChecks[0];c.evidenceFits=null;c.lines=['sign-B1'];let text=twoWindowsPage(sample);ok(text.includes('Reread both accounts for the missing detail')&&!text.includes('Recorded useful lines'),'unknown guidance keeps selection separate from proof of missing fact');

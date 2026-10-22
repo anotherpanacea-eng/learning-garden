@@ -11,7 +11,7 @@ export const RAIN_NOTEBOOK_SCALE=freeze({min:0,max:24,ticks:[0,4,8,12,16,20,24]}
 export const RAIN_NOTEBOOK_DATUM_IDS=freeze(['A:runoffNew','B:runoffNew','A:storedNew','B:storedNew']);
 export function rainNotebookRows(source){
  if(!rainResultSourceValid(source?.result))return [];
- return RAIN_NOTEBOOK_DATUM_IDS.map(id=>{const [trayId,quantity]=id.split(':'),row=source.result.rows.find(r=>r.id===trayId),name=RAIN_NOTEBOOK_QUANTITIES.find(q=>q.id===quantity).label;return {id,trayId,quantity,label:`Tray ${trayId} — ${name.toLowerCase()}`,value:row[quantity],unit:RAIN_NOTEBOOK_UNIT};});
+ return RAIN_NOTEBOOK_DATUM_IDS.map(id=>{const [trayId,quantity]=id.split(':'),row=source.result.rows.find(r=>r.id===trayId),name=RAIN_NOTEBOOK_QUANTITIES.find(q=>q.id===quantity).label;return {id,trayId,quantity,label:`Tray ${trayId}: ${name.toLowerCase()}`,value:row[quantity],unit:RAIN_NOTEBOOK_UNIT};});
 }
 export function rainNotebookQuestion(source){
  const rows=rainNotebookRows(source);if(!rows.length)return null;

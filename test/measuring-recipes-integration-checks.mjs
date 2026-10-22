@@ -45,6 +45,6 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
 {
  const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8'),ending=app.slice(app.indexOf('function endingFilm(){'),app.indexOf("if(!choosingExplorer)playFilm('welcome');")),s=fresh();let calls=0;const ctx=vm.createContext({state:s,choosingExplorer:false,location:{hash:'#cafe/recipes'},cafeSupper(){calls++;return {complete:true,round:1};}});vm.runInContext(ending,ctx);eq(vm.runInContext('endingFilm()',ctx),null,'preparation does not trigger supper film');eq(calls,0,'recipe does not inspect supper goal');
 }
-for(let n=0;n<=500;n+=50){const art=recipeJugArt(n,'cloud-water');ok(art.includes(`contains ${n} millilitres`),'drawing accessible current volume exact');}
+for(let n=0;n<=500;n+=50){const art=recipeJugArt(n,'cloud-water');ok(art.includes(`contains ${n} milliliters`),'drawing accessible current volume exact');}
 ok(measuringRecipesEntry().includes('#cafe/recipes'),'entry reaches kitchen');
 console.log(`Measuring Kitchen UI/storage integration: ${checks} passed.`);

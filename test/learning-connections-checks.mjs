@@ -39,7 +39,7 @@ for(const [help,wrong,outcome] of [[false,false,'first-match'],[true,false,'supp
 }
 // Inverse source is a related direction. Tomorrow uses actual hypothetical groups, including zero.
 for(const [depth,packs,bites,sourceA,proposal] of [[2,4,3,4,'same'],[3,4,3,3,'same'],[3,1,7,0,'positive']]){
- const s=fresh();setSpiralOption(s,'range','all');setAdaptiveChoice(s,'math',depth);startAdaptiveSpiral(s);const r=currentSpiral(s);r.task.packs=packs;r.task.bites=bites;r.task.teaching.keys.math=`${depth}:${packs}x${bites}`;finishGarden(s,{help:true});const c=learningSource(s,'living');equal(c.sourceA,sourceA,'actual math relation');equal(c.proposal,proposal,'explicit zero positive bridge');equal(c.relation,depth===2?'inverse':'tomorrow','relation labelled');check(connectionPanel(s,'cafe').includes(depth===2?'related directions':'plan'),'honest source wording');
+ const s=fresh();setSpiralOption(s,'range','all');setAdaptiveChoice(s,'math',depth);startAdaptiveSpiral(s);const r=currentSpiral(s);r.task.packs=packs;r.task.bites=bites;r.task.teaching.keys.math=`${depth}:${packs}x${bites}`;finishGarden(s,{help:true});const c=learningSource(s,'living');equal(c.sourceA,sourceA,'actual math relation');equal(c.proposal,proposal,'explicit zero positive bridge');equal(c.relation,depth===2?'inverse':'tomorrow','relation labelled');check(connectionPanel(s,'cafe').includes(depth===2?'Last time you found how many packs':'plan'),'honest source wording');
 }
 // Waiting target work and invalid source/target formats remain exact, with a visible explanation.
 for(const target of ['living','cafe','bramble']){

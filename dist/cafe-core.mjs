@@ -1,3 +1,4 @@
+import {effectiveCafeRange,chooseCafeLocal} from './cafe-start-core.mjs';
 import {ingredients,orchardFoods,guests,wishes,cafeSuppers} from './cafe-content.mjs';
 const object=x=>x&&typeof x==='object'&&!Array.isArray(x);
 const integer=(x,min,max)=>Number.isSafeInteger(x)&&x>=min&&x<=max;
@@ -115,13 +116,13 @@ export function cafeSummary(state){
  const c=state.cafe;if(!c?.current)return null;
  const order=orderFor(c),items=currentRecipe(c);return {order,items,missing:items.reduce((sum,a)=>sum+a.missing,0),plan:c.current.cupboardPlan||null,ready:items.every(i=>i.missing===0),...plate(c,c.current.recipe,order.index)};
 }
-export function setCafeRange(state,range){if(!['all','small'].includes(range))return false;ensureCafe(state).range=range;return true;}
+export function setCafeRange(state,range){if(!['all','small'].includes(range))return false;ensureCafe(state).range=range;chooseCafeLocal(state);return true;}
 export function nextGuest(state){
  const c=ensureCafe(state);if(c.current&&c.current.stage!=='served')return false;
  if(c.nextOrder>=1000000000)return false;
  const params=legacyParams(c,c.nextOrder);
  params.guestId=guests[(c.seed%guests.length+c.nextOrder)%guests.length].id;
- if(c.range==='all'){const cell=(c.seed%144+(c.allIndex%144)*37)%144;params.guests=1+Math.floor(cell/12);params.bites=1+cell%12;c.allIndex++;}
+ if(effectiveCafeRange(state)==='all'){const cell=(c.seed%144+(c.allIndex%144)*37)%144;params.guests=1+Math.floor(cell/12);params.bites=1+cell%12;c.allIndex++;}
  c.current={orderIndex:c.nextOrder++,params,stage:'plate',recipe:cleanRecipe({},c),plateAttempts:[],total:blankNumber(),shortfall:blankNumber(),repair:null,repairHistory:[],cupboardPlan:null,served:false,recovered:false};return true;
 }
 export function adjustBite(state,id,delta){
@@ -145,7 +146,7 @@ export function checkPlate(state){
 export function repairQuestion(state){
  const c=state.cafe,x=c?.current,r=x?.repair;if(!x||x.stage!=='plate'||!r?.open||!sameRecipe(r.recipe,x.recipe))return null;
  const choices=r.kind==='ingredient'?availableIngredients(c):null;
- return {...r,attempts:r.attempts.map(a=>({...a})),choices,prompt:r.kind==='ingredient'?'Which ingredient could add something '+r.missingProperty+'?':'How many bites do we need to '+(r.direction==='add'?'add to':'remove from')+' this plate?',explanation:r.kind==='ingredient'?'A bite with '+r.missingProperty+' can supply that missing wish. Check its other qualities and the number of bites when you revise your plate.':'The plate has '+plate(c,r.recipe,x.orderIndex).count+' bites and needs '+orderFor(c).bites+'. '+(r.direction==='add'?'Add':'Remove')+' '+r.needed+' bites, then check the wishes too.'};
+ return {...r,attempts:r.attempts.map(a=>({...a})),choices,prompt:r.kind==='ingredient'?'Which ingredient could add something '+r.missingProperty+'?':'How many bites do we need to '+(r.direction==='add'?'add to':'remove from')+' this plate?',explanation:r.kind==='ingredient'?'A bite that is '+r.missingProperty+' can add that missing wish. When you change your plate, check the other wish and the number of bites too.':'The plate has '+plate(c,r.recipe,x.orderIndex).count+(plate(c,r.recipe,x.orderIndex).count===1?' bite':' bites')+' and needs '+orderFor(c).bites+'. '+(r.direction==='add'?'Add':'Remove')+' '+r.needed+(r.needed===1?' bite':' bites')+', then check the wishes too.'};
 }
 export function answerRepair(state,value){
  const c=ensureCafe(state),q=repairQuestion(state);if(!q||(q.kind==='count'?!integer(value,0,12):!availableIngredients(c).some(a=>a.id===value)))return false;

@@ -35,7 +35,7 @@ function suggestion(state){
   if(o.frenchVariant!==base||o.nodeId!==v.route[0]||o.correct!==true||o.firstCorrect!==true||o.reading!=='independent'||o.priorStorySeen!==false||v.french.priorStorySeen!==false||o.priorPassageSeen!==false||o.familiar||supported(o)||retry(o)||o.answer!==n.answer||o.attempts?.length!==1||o.attempts[0]!==n.answer)continue;
   distinct.add(o.frenchStory);
  }
- if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Keep exploring short paragraphs, or choose another amount whenever you like.':'Two different new stories had a first answer found on the first try, reported read independently without recorded help. Try a little more connected French; every choice stays open.'};
+ if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Keep exploring short paragraphs, or choose another amount whenever you like.':'Two different new stories were answered on the first try. They were reported as read independently, with no help recorded. A little more connected French is ready to try. Every choice stays open.'};
  return {variant:base,reason:'Keep exploring with this amount of French. There is no need to move on until you want to.'};
 }
 export function frenchPlan(state,destination,variant='auto',storyId=null){

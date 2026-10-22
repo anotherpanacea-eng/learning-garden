@@ -17,7 +17,7 @@ for(const [id,h] of Object.entries(helpers)){
  const s=fresh();reach(s,id);const d=storyDraft(s);d.input='Synthetic waiting input';d.choice=1;d.method='worked';d.reading='together';
  const n=storyNodes[id],wrong=n.kind==='number'?999:n.choices.findIndex((_,i)=>!acceptsAnswer(n,i));submitOriginal(s,n,wrong);
  const original=JSON.stringify(d.attempts),visit=currentVisit(s).id;
- check(openStoryHelp(s)===h&&d.helpUsed,'explicit opening marks support');
+ check(openStoryHelp(s)?.id===h.id&&d.helpUsed,'explicit opening marks support');
  check(!finishStoryNode(s,true)&&!submitOriginal(s,n,n.answer),'open helper cannot finish or answer original');
  check(helpPage(s,d).includes('Return to my question')&&helperLimit(h)>0,'helper representation renders');
  check(!submitStoryHelp(s,h.kind==='choice'?h.choices.findIndex((_,i)=>!acceptsAnswer(h,i)):999)&&submitStoryHelp(s,h.answer),'helper permits retry');
@@ -27,7 +27,9 @@ for(const [id,h] of Object.entries(helpers)){
  rd.helper.open=false;submitOriginal(restored,n,n.answer);rd.method='knew';rd.reading='independent';const o=finishStoryNode(restored);
  check(o.helpUsed&&o.supported&&!o.independent&&!o.freshEvidence&&o.helper.attempts.length===2,'helper attempts separate from evidence');
  check(gardenNotes(restored).includes('Smaller example opened.'),'notes show help separately');
- o.helper={exampleId:h.id,open:false};ensureGarden(restored);check(gardenNotes(restored).includes('Example answers tried: None'),'malformed recorded helper repaired without discarding original observation');
+ o.helper={exampleId:h.id,open:false};ensureGarden(restored);
+ if(n.entrance==='paris')check(JSON.stringify(o.helper)===JSON.stringify({exampleId:h.id,open:false})&&gardenNotes(restored).includes('details unreadable'),'captured Paris helper history stays raw and is safely summarized');
+ else check(gardenNotes(restored).includes('Example answers tried: None'),'non-Paris malformed recorded helper retains existing repair');
 }
 for(let i=0;i<4;i++){
  const s=fresh();reach(s,'cafe-substitute');const d=storyDraft(s),valid=[0,2].includes(i);
