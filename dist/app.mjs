@@ -1,7 +1,8 @@
 import {noteInstructionEntry} from './instruction-core.mjs';
 import {renderInstructions,instructionEntry,bindInstructions} from './instruction-ui.mjs';
 import {renderBundleExchange,bundleExchangeEntry,bindBundleExchange} from './bundle-exchange-ui.mjs';
-import {noteBundleDisplay,syncBundleQuestionExposure} from './bundle-broad-exposure.mjs';
+import {renderReturning,returningOrdersEntry,bindReturning} from './returning-orders-ui.mjs';
+import {noteBundleDisplay,noteReturningDisplay,syncBundleQuestionExposure} from './bundle-broad-exposure.mjs';
 import {renderFractionTrail,fractionTrailEntry,bindFractionTrail} from './fraction-trail-ui.mjs';
 import {renderParcelPacking,parcelPackingEntry,bindParcelPacking} from './parcel-packing-ui.mjs';
 import {wholeBatchesPage,wholeBatchesEntry,bindWholeBatches} from './whole-batches-ui.mjs';
@@ -209,7 +210,7 @@ function render(){
   const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters',instructionBench=['post','loft'].includes(root)&&slug==='instructions';
-  const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange';
+  const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return';
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',batchBench=root==='cafe'&&slug==='batches',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
@@ -222,6 +223,7 @@ function render(){
   else if(bellBench)html=bellStudioPage(state);
   else if(archiveBench)html=travelersArchivePage(state);
   else if(bundleBench){const view=renderBundleExchange(state);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;const changed=noteBundleDisplay(state,view.examples,live);exposeStoryFacts({facts:view.facts});if(changed||view.facts.length)save();}
+  else if(returnBench){const view=renderReturning(state,detail);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteReturningDisplay(state,view.examples,live))save();}
   else if(fractionBench)html=renderFractionTrail(state).html;
   else if(recipeBench)html=measuringRecipesPage(state);
   else if(packingBench){const view=renderParcelPacking(state);if(view.facts.length){exposeStoryFacts({facts:view.facts});save();}html=view.html;}
@@ -265,7 +267,7 @@ function render(){
       else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
     }else html=storyHub(state);
   }
-  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+'<section class="resume-strip garden-progress-link"><span>Every kind of trying helps our garden recover.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
+  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+returningOrdersEntry()+'<section class="resume-strip garden-progress-link"><span>Every kind of trying helps our garden recover.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
   else if(screen==='adventure-end')html=adventureEnd();
   else if(root==='checkin'&&areaById(slug)){
     const t=beginTrail(state,slug);save();
@@ -284,8 +286,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft');
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!batchBench&&!fractionBench&&!bundleBench&&!archiveBench&&!bellBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!batchBench&&!fractionBench&&!bundleBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!archiveBench&&!bellBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;updateStorageNotice();bind();
   const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
 }
@@ -357,6 +359,7 @@ function bind(){
  document.querySelector('[data-ta-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const a=travelersArchive(state);if(a){const ids=[...new Set([...a.checks.flatMap(c=>c.sourceIds),...(a.kept?['photo','chronology']:[])])];if(ids.length){noteArchiveSources(state,ids);save();}}}});
  bindInstructions(state,(location.hash||'').startsWith('#loft')?'loft':'post',{save,render,navigate,focus:focusElement});
  bindBundleExchange(state,{save,render,navigate,focus:focusElement});
+ bindReturning(state,{save,render,navigate,focus:focusElement,noteDisplay:examples=>{if(noteReturningDisplay(state,examples))save();}});
  bindFractionTrail(state,{save,render,navigate,focus:focusElement});
  bindMeasuringRecipes(state,{save,render,navigate,focus:focusElement});
  bindParcelPacking(state,{save,render,navigate,focus:focusElement});

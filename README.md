@@ -62,6 +62,7 @@ node test/fraction-trail-integration-checks.mjs
 node test/bundle-exchange-checks.mjs
 node test/bundle-exposure-checks.mjs
 node test/bundle-exchange-integration-checks.mjs
+node test/returning-orders-checks.mjs
 node test/instruction-checks.mjs
 node test/instruction-integration-checks.mjs
 node test/rain-paths-checks.mjs
@@ -327,6 +328,12 @@ All checks are model-visible practice. There is no independent fraction mastery,
 The optional `#numbers/exchange` table extends Bundle Burrow with seven fixed collections. Move individual seed counters into a two-row ten-place frame, wrap exactly ten and unwrap them again. Every constituent counter stays countable; regrouping preserves the quantity, including arrangements with more than nine loose ones. Read and Digits distinguish the actual wrapped-bundle count, total counters, supplied numeral’s tens digit and its value. Zero/seven have no written tens digit. Unfinished arrangements and exact raw responses can be kept and revisited.
 
 A separate manually stepped sixteen-counter example supplies optional help. Only a visibly complete conventional bundle/ones example and its total marks an exact existing bundle task familiar; paused/future/submitted tasks retain that context without rewriting completed answers. Unsupported/recovered history keeps earlier familiarity unknown. No general mastery, handwriting, written arithmetic, inventory rewards or film milestone is inferred. [Spec 53](docs/specs/53-bundle-exchange.md) defines the bounded scope; this branch is stacked on Fraction Trail and requires composed-release checks before publication.
+
+## Returning Supply Orders — local build
+
+The optional `#numbers/return` activity starts with 42 pretend counters and one of two supplied return requests: 12 or 17. A child can open one wrapped ten, move the requested wrapped ten and loose counters into a visible store tray, reverse those moves, and enter a separate proposed remainder. The two trays always conserve 42; returning changes the table amount while opening a ten does not. Exact source text, unfinished pictures, typed numbers, checks and one kept draft per case remain in the optional local notebook. An unreadable saved root stays available for notes download and explicit recovery.
+
+Only complete conventional tens/ones/total readouts actually shown after Start mark matching original bundle questions familiar. This does not create a broad answer, prove an independent method or score mastery. [Spec 78](docs/specs/78-returning-supply-orders.md) defines the two-case scope and its review gate. Browser checks use `test/returning-orders-browser.js` with a local Chrome and Playwright installation; this candidate still requires independent implementation review and composed-release verification.
 
 ## Instructions for a Reader — local build
 
