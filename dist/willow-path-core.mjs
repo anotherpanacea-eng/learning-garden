@@ -1,3 +1,4 @@
+import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 // A walk carries all of its own words and events. Reading never repairs saved data.
 export const WILLOW_SOURCE={version:1,id:'willow-ten',squares:10,spinner:[1,2],text:{
  title:'The path to Willow Bridge',invitation:'The stones lead from the garden gate to Willow Bridge. Leaf and Lantern can walk together.',tokenLeaf:'Leaf',tokenLantern:'Lantern',modeTwo:'Two walkers, two tokens',modeSolo:'One walker, two tokens',modeTip:'Choose a way to play. With two walkers, share the tokens. One walker can move both.',startButton:'Start a walk',gateLabel:'Garden gate',bridgeLabel:'Willow Bridge',adultTip:'Say the number on each stone as the token lands. You can say it together.',spinButton:'Spin for {token}',spinResult:'{token} spun {value}.',oneWord:'one',twoWord:'two',stepButton:'Step to {square}',turnLine:"{token}'s turn.",atGate:'{token} is at the garden gate.',atStone:'{token} is on stone {square}.',leafArrives:'Leaf is at Willow Bridge. Lantern keeps walking.',lanternArrives:'Lantern is at Willow Bridge. Leaf keeps walking.',ending:'Both walkers are at Willow Bridge. The path is ready whenever you want another walk.',helpTitle:'Why is the path straight?',helpBody:'Each stone is the same size. The numbers grow by one as you move right. Seven is farther along than three. If a token is on three and moves twice, name four, then five. Take a turn together or just watch the stones.',eventButton:"What's here on stone {square}?",eventHearButton:'Hear stone {square}',stepVoiceOff:'Hear each step (off)',stepVoiceOn:'Hear each step (on)',newButton:'Start a new walk',replaceWarning:'A walk is here already. Starting again replaces its position. Download your notes first if you want to keep this walk.',keepButton:'Keep this walk',replaceButton:'Start again'
@@ -26,11 +27,13 @@ export function willowStatus(state){
  return root.walk===null?'empty':validWillowWalk(root.walk)?'current':'recovery';
 }
 export function willowWalk(state){return willowStatus(state)==='current'?state.willowPath.walk:null;}
-export function startWillowWalk(state,mode='two'){
+export function startWillowWalk(state,mode='two',canExport=()=>true){
  if(!['two','solo'].includes(mode)||!validWillowSource(WILLOW_SOURCE))return false;
  const prior=state.willowPath,status=willowStatus(state);
  const walk={source:structuredClone(WILLOW_SOURCE),mode,positions:{leaf:0,lantern:0},turn:'leaf',spin:null,done:false};
- state.willowPath=status==='recovery'?{version:1,walk,retainedRaw:prior}:status==='current'||Object.hasOwn(state,'willowPath')?{...prior,version:1,walk}:{version:1,walk};return true;
+ const root=status==='recovery'?{version:1,walk,retainedRaw:prior}:status==='current'||Object.hasOwn(state,'willowPath')?{...prior,version:1,walk}:{version:1,walk};
+ if(status==='recovery'){const candidate={...state,willowPath:root};if(!recoveryFitsProgressLimits(candidate)||!canExport(candidate))return false;}
+ state.willowPath=root;return true;
 }
 export function spinWillow(state,random=Math.random){const walk=willowWalk(state);if(!walk||walk.done||walk.spin)return false;const value=random()<0.5?1:2;walk.spin={value,stepsLeft:value};return value;}
 export function stepWillow(state){const walk=willowWalk(state);if(!walk?.spin)return null;const token=walk.turn,n=walk.source.squares;walk.positions[token]++;walk.spin.stepsLeft--;const square=walk.positions[token],arrived=square===n;

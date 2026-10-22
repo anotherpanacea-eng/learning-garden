@@ -27,9 +27,9 @@ export function willowPathPage(state){const status=willowStatus(state),walk=will
  const t=WILLOW_SOURCE.text;return `${header(t)}<section class="willow-intro" data-willow-root><p>${esc(t.adultTip)}</p>${modePicker(t)}<button type="button" class="primary" data-willow-start>${esc(t.startButton)}</button>${notice?`<p role="alert" tabindex="-1" data-willow-notice>${esc(notice)}</p>`:''}<details><summary>${esc(t.helpTitle)}</summary><p>${esc(t.helpBody)}</p>${hearButton(t.helpBody,t.helpTitle)}</details></section>`;
 }
 export function willowPathEntry(){const t=WILLOW_SOURCE.text;return `<section class="willow-entry"><h2>${esc(t.title)}</h2><p>${esc(t.invitation)}</p><a class="secondary" href="#numbers/path">${esc(t.bridgeLabel)}</a></section>`;}
-export function bindWillowPath(state,{save,render,focus}={}){const scope=document.querySelector('[data-willow-root]');if(!scope)return;
+export function bindWillowPath(state,{save,render,focus,canExport}={}){const scope=document.querySelector('[data-willow-root]');if(!scope)return;
  const mode=()=>scope.querySelector('input[name="willow-mode"]:checked')?.value||'two';
- const fresh=()=>{if(!startWillowWalk(state,mode())){notice='That new walk cannot start in this version. Any current walk stays as it is.';render?.();focus?.('[data-willow-notice]');return;}notice='';stepVoice=false;confirming=false;stopSpeech();save?.();render?.();focus?.('[data-willow-spin]');};
+ const fresh=()=>{if(!startWillowWalk(state,mode(),canExport)){notice=willowStatus(state)==='recovery'?'A separate walk could not be added safely. The earlier record is unchanged. Download it from Grown-up notes, then start a separate explorer.':'That new walk cannot start in this version. Any current walk stays as it is.';render?.();focus?.('[data-willow-notice]');return;}notice='';stepVoice=false;confirming=false;stopSpeech();save?.();render?.();focus?.('[data-willow-spin]');};
  scope.querySelector('[data-willow-start]')?.addEventListener('click',fresh);
  scope.querySelector('[data-willow-new]')?.addEventListener('click',()=>{confirming=true;render?.();focus?.('[data-willow-confirm]');});
  scope.querySelector('[data-willow-cancel]')?.addEventListener('click',()=>{confirming=false;render?.();focus?.('[data-willow-new]');});

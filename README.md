@@ -84,6 +84,7 @@ node test/message-integration-checks.mjs
 node test/loft-checks.mjs
 node test/loft-growing-checks.mjs
 node test/progress-transfer-checks.mjs
+node test/recovery-boundaries-checks.mjs
 node test/word-garden-checks.mjs
 node test/core-checks.mjs
 node test/broad-checks.mjs
