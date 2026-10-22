@@ -1,3 +1,4 @@
+import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 import {fieldMission,FIELD_OUTCOMES} from './field-kit-content.mjs';
 
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
@@ -50,9 +51,11 @@ export function recordFieldOutcome(state,missionId,outcome,support=[]){
  return entry;
 }
 
-export function recoverFieldKit(state){
+export function recoverFieldKit(state,canExport=()=>true){
  const view=fieldKitView(state);
  if(view.absent||!view.unsupported)return false;
- state.fieldKit={version:1,entries:[],recovered:copy(state.fieldKit)};
+ const root={version:1,entries:[],recovered:copy(state.fieldKit)},candidate={...state,fieldKit:root};
+ if(!recoveryFitsProgressLimits(candidate)||!canExport(candidate))return false;
+ state.fieldKit=root;
  return true;
 }
