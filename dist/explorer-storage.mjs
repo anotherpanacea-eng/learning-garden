@@ -55,7 +55,7 @@ export class ExplorerStore{
  _avatar(state,profile){if(!state.garden||typeof state.garden!=='object'||Array.isArray(state.garden))state.garden={};if(!avatarIds.includes(state.garden.avatar))state.garden.avatar=profile.avatar;return state;}
  _readState(profile){
   if(this.memory.has(profile.id))return this.memory.get(profile.id);
-  let state;try{const raw=this._get(stateKey(profile.id));if(raw===null){state=this._fresh(profile);this._warn('A saved explorer had no readable progress copy. This session starts with a fresh notebook.');}else{const result=restoreStateResult(raw);state=result.state;if(result.reason){const kept=this._copy(raw,'kept',profile.id);this._warn(kept?'Some saved progress could not be read. It has been kept.':'Some saved progress could not be read or copied safely. The original is unchanged; this session is temporary.');}}}catch{this._writeBlocked=true;this._warn();state=this._fresh(profile);}
+  let state;try{const raw=this._get(stateKey(profile.id));if(raw===null){state=this._fresh(profile);this._warn('A saved explorer had no readable progress copy. This session starts with a fresh notebook.');}else{const result=restoreStateResult(raw);state=result.state;if(result.reason){const kept=this._copy(raw,'kept',profile.id);this._warn(kept?'We couldn’t open some saved progress. We kept a copy, so nothing is lost.':'Some saved progress could not be read or copied safely. The original is unchanged; this session is temporary.');}}}catch{this._writeBlocked=true;this._warn();state=this._fresh(profile);}
   this._avatar(state,profile);this.memory.set(profile.id,state);return state;
  }
  load(){
@@ -65,7 +65,7 @@ export class ExplorerStore{
    if(rawRegistry!==null){const registry=cleanRegistry(rawRegistry);if(registry){this.registry=registry;this._needsChooser=registry.explorers.length>1;return this._readState(this.active);}if(!this._copy(rawRegistry,'kept','registry'))this._writeBlocked=true;this._warn(this._writeBlocked?'The explorer list could not be read or copied safely. The original is unchanged; this session is temporary.':'The explorer list could not be read. Its original copy has been kept.');}
    const legacy=this._get(STORAGE_KEY),restored=legacy===null?null:restoreStateResult(legacy),p=this._newProfile({avatar:restored?.state.garden?.avatar});this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._avatar(restored?.state||this._fresh(p),p);this.memory.set(p.id,s);
    if(this._writeBlocked)return s;
-   if(legacy!==null){if(!this._copy(legacy,'backup',p.id)||!this._write(stateKey(p.id),legacy)){this._writeBlocked=true;return s;}if(restored.reason){if(!this._copy(legacy,'kept',p.id))this._writeBlocked=true;this._warn(this._writeBlocked?'Some saved progress could not be copied safely. The original is unchanged; this session is temporary.':'Some saved progress could not be read. It has been kept.');}}
+   if(legacy!==null){if(!this._copy(legacy,'backup',p.id)||!this._write(stateKey(p.id),legacy)){this._writeBlocked=true;return s;}if(restored.reason){if(!this._copy(legacy,'kept',p.id))this._writeBlocked=true;this._warn(this._writeBlocked?'Some saved progress could not be copied safely. The original is unchanged; this session is temporary.':'We couldn’t open some saved progress. We kept a copy, so nothing is lost.');}}
    else if(!this._write(stateKey(p.id),JSON.stringify(s))){this._writeBlocked=true;return s;}
    if(!this._writeBlocked&&!this._commitRegistry())this._writeBlocked=true;
    return s;
@@ -101,7 +101,7 @@ export class ExplorerStore{
     let rolledBack=false;
     try{const actual=this._get(REGISTRY_KEY);rolledBack=actual===before;if(actual===rawNext)rolledBack=this._write(REGISTRY_KEY,before);}catch{}
     if(rolledBack){if(!cleanup())return halt('The prior explorer list was restored, but cleanup could not be checked safely. Saving is paused here; keep your file and reload.');return fail('The import could not be completed. Existing explorers are unchanged. Keep your file and try again.');}
-    this._writeBlocked=true;this._importUncertain=true;this._warn('The import may have been saved, but could not be verified. Its progress and original file copy have been kept. Download your current notes, then reload and check the explorer list before importing again.');return fail(this.warning);
+    this._writeBlocked=true;this._importUncertain=true;this._warn('Download your current notes, then reload and check the explorer list before importing again. The import may have been saved, but we couldn’t confirm it. Its progress and the original file are kept.');return fail(this.warning);
    }
   }else this.importCopies.set(recovery,prepared.raw);
   this.registry=next;this.memory.set(profile.id,state);this._needsChooser=false;this._warning='';

@@ -9,10 +9,10 @@ const expected={'low-smooth':[12,13,12],'low-rough':[5,6,5],'middle-smooth':[19,
 const repairSets={height:['low-smooth|high-smooth','low-rough|high-rough'],surface:['low-rough|low-smooth','middle-rough|middle-smooth','high-rough|high-smooth'],careful:['low-smooth|high-smooth','low-rough|high-rough']};
 const reviewedCards={
  height:[
-  ['height-incomplete',false,'B travelled farther in the shown trials. Tell the crew that observation, without addressing Moss’s explanation of what caused the difference.','Moss: That preserves the observation, but I still need help with my height-only explanation.'],
+  ['height-incomplete',false,'B traveled farther in the shown trials. Tell the crew that observation, without addressing Moss’s explanation of what caused the difference.','Moss: That preserves the observation, but I still need help with my height-only explanation.'],
   ['height-useful',true,'B went farther in these trials. Height and surface both changed; compare low and high ramps on the same surface.','Moss: We can retain the distance observation and repair the comparison before isolating height.'],
   ['height-discard',false,'Keep the distances in our notes, but leave them out of the crew’s message until height’s effect has been isolated.','Moss: We can report the shown distance difference now, while explaining that this comparison does not isolate height.'],
-  ['height-overclaim',false,'B travelled farther each time, so tell the crew that raising the ramp caused the difference, even with the changed surface.','Moss: Height and surface changed together. These results do not identify height as the sole cause.'],
+  ['height-overclaim',false,'B traveled farther each time, so tell the crew that raising the ramp caused the difference, even with the changed surface.','Moss: Height and surface changed together. These results do not identify height as the sole cause.'],
  ],surface:[
   ['surface-overclaim',false,'Tell the crew the smooth surface caused the extra distance; the high smooth setup went farther in every shown trial.','Moss: Height changed too, so this comparison does not isolate surface.'],
   ['surface-incomplete',false,'Choose A for the porch because its shown stopping distances are shorter; that gives the crew a practical recommendation to use.','Moss: That addresses the porch’s purpose, but does not explain whether surface caused the difference.'],

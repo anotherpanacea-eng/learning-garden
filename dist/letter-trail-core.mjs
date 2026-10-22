@@ -104,9 +104,9 @@ export function keepLetter(state,place,mode='supplied'){
  e.firstKept=clone(snapshot);r.recent.push(snapshot);r.recent=r.recent.slice(-6);
  if(mode==='supplied'&&snapshot.fits===true&&snapshot.clueRelevant===true){
   const index=LETTER_KINDS.indexOf(snapshot.kind),own=mergeSupport(...Object.values(e.notebook.cases[e.caseId]).map(w=>w.support)),helped=own.help||own.example;
-  if(helped)r.suggested={kind:LETTER_KINDS[Math.max(0,index-1)],reason:'You explored a hint or a different example. A letter with fewer details is available next; every kind stays open.'};
+  if(helped)r.suggested={kind:LETTER_KINDS[Math.max(0,index-1)],reason:'You used a hint or a different example. A letter with fewer details is ready next. Every kind stays open.'};
   else {const successes=new Set(r.recent.filter(a=>a.kind===snapshot.kind&&a.qualifies).map(a=>a.caseId));
-   if(snapshot.qualifies&&successes.size>=2&&index<2)r.suggested={kind:LETTER_KINDS[index+1],reason:'Two new letters used a detail and a clue that served the reader’s request. You could explore a new reason to revise.'};
+   if(snapshot.qualifies&&successes.size>=2&&index<2)r.suggested={kind:LETTER_KINDS[index+1],reason:'You helped two new readers with a useful detail. Want to try a new kind of letter?'};
    else r.suggested={kind:snapshot.kind,reason:'Keep exploring this kind of message, or choose another kind whenever you like.'};
   }
  }

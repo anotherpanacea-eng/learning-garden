@@ -74,7 +74,7 @@ export const parisNodes = {
     prompt:'Which meaning of “narrow” fits this passage?',kind:'choice',
     choices:['Not wide','Very slippery','Full of noise'],answer:0,
     hint:'Why does Pip have to walk behind Lucie instead of beside her?',
-    explanation:'Narrow means not wide here. There is not enough room to walk side by side, so Pip walks behind Lucie. Those details concern width, not slipperiness or noise.',
+    explanation:'Narrow means not wide here. There is not enough room to walk side by side, so Pip walks behind Lucie. Those clues are about how wide the path is.',
     talk:'Which two parts of the passage helped you work out the meaning?',
     next:'paris-infer'
   },
@@ -88,21 +88,21 @@ export const parisNodes = {
     prompt:'Why did Lucie most likely put the waterproof cover over the box?',kind:'choice',
     choices:['To make the box easier to carry','To hide the blue ribbon from Pip','To keep the story pages dry'],answer:2,
     hint:'Connect the rain with the kind of cover Lucie chooses for the box of pages.',
-    explanation:'Rain has started, and Lucie puts a waterproof cover over the box containing the story pages. Together, those details support keeping the pages dry. The cover is not described as a handle, and Pip can still see the ribbon.',
+    explanation:'Rain has started, and Lucie puts a waterproof cover over the box containing the story pages. Together, those details support keeping the pages dry. Nothing says the cover makes the box easier to carry, and Pip can still see the ribbon.',
     talk:'Which details did you connect to find a likely reason?',
     next:'paris-evidence'
   },
   'paris-evidence':{
     id:'paris-evidence',entrance:'paris',type:'task',subject:'Reading',practiceOnly:true,
     readingSkill:'Find a sentence that supports an idea',passageId:rainPassageId,
-    title:'Point to the evidence',
-    body:'The same passage stays open while Pip and Dot look for evidence.',
+    title:'Which words show it?',
+    body:'Dot flips back to the first page. The story is still here.',
     readingText:rainPassage,
     guide:'{guide} says, “We can point to the words that support an idea, even when we have read them before.”',
     prompt:'Which sentence shows Lucie taking action to protect the pages?',kind:'choice',
     choices:[rainPassage[2],rainPassage[1],rainPassage[3]],answer:0,
     hint:'Which sentence describes Lucie doing something that would keep water out of the box?',
-    explanation:'The waterproof-cover sentence describes Lucie’s protective action. The rain sentence explains the situation, but not how she protects the pages. The ribbon sentence does not show protection from rain.',
+    explanation:'The waterproof-cover sentence shows Lucie keeping the pages safe. The rain sentence explains the situation, but not how she protects the pages. The ribbon sentence does not show protection from rain.',
     talk:'How does the sentence about the rain help the cover sentence make sense?',
     next:'paris-sequence'
   },
@@ -120,9 +120,9 @@ export const parisNodes = {
     guide:'{guide} says, “Order words can show us what happened first, next, and last.”',
     prompt:'According to this passage, which order is correct?',kind:'choice',
     choices:[
-      'Tie the ribbon → put in the pages → attach the label',
-      'Put in the pages → tie the ribbon → attach the label',
-      'Attach the label → tie the ribbon → put in the pages'
+      'Tie the ribbon, then put in the pages, then attach the label',
+      'Put in the pages, then tie the ribbon, then attach the label',
+      'Attach the label, then tie the ribbon, then put in the pages'
     ],answer:1,
     hint:'Follow the actions after “First,” “Next,” and “Last” in this passage.',
     explanation:'First Lucie puts the pages into the box. Next Pip ties the ribbon. Last Dot attaches the label. All three events and their order are in this passage.',
@@ -133,7 +133,7 @@ export const parisNodes = {
     id:'paris-postcard',entrance:'paris',type:'project',subject:'Writing',practiceOnly:true,
     title:'A little message home',body:'A blank postcard is waiting for an idea.',
     guide:'{guide} says, “Your message can be told aloud, drawn, or written down by a helper.”',
-    prompt:'Optional idea: tell the Learning Garden about one moment from your Paris errand. You can retell it aloud, draw a postcard on paper, or dictate your words to a helper. You can also keep the idea for later.',
+    prompt:'Make a postcard about your Paris trip. You can say it, draw it, or tell a grown-up what to write. Or save the idea for another day.',
     projectOptions:['Tell a postcard message aloud','Draw a postcard','Dictate a postcard to a helper'],
     talk:'Which moment would you choose for your message, and what would you like the listener or reader to know?',
     next:null
@@ -155,7 +155,7 @@ export const parisHelpers = {
     passage:'Nia ties a bow. The bow comes loose, so she reties it.',
     model:{type:'text',segments:['Nia ties a bow.','The bow comes loose, so she reties it.'],focus:0,clue:'Nia has already tied the bow once. Retie means tie again.'},
     kind:'choice',prompt:'What does “retie” mean here?',choices:['Throw the bow away','Tie the bow again'],answer:1,
-    explanation:'Retie means tie again. The loose bow needs another tying. Try the meaning of the same small word part in your waiting message.'
+    explanation:'Retie means tie again. The loose bow needs another tying. Now try re- in Lucie’s note.'
   },
   'paris-narrow':{
     id:'paris-help-sturdy',title:'Let a detail help',
@@ -186,7 +186,7 @@ export const parisHelpers = {
     lesson:'Order words can help us track events without having to remember a different part of a story.',
     passage:'First, Jo folded the paper. Next, Jo drew a star. Last, Jo put the card in a bag.',
     model:{type:'text',segments:['First, Jo folded the paper.','Next, Jo drew a star.','Last, Jo put the card in a bag.'],focus:0,clue:'First marks folding, next marks drawing, and last marks putting the card in a bag.'},
-    kind:'choice',prompt:'Which order matches this little passage?',choices:['Draw → fold → put in a bag','Fold → draw → put in a bag'],answer:1,
-    explanation:'The order words show folding first, drawing next, and putting the card in a bag last. Look for the order words in the separate waiting passage.'
+    kind:'choice',prompt:'Which order matches this little passage?',choices:['Draw, then fold, then put in a bag','Fold, then draw, then put in a bag'],answer:1,
+    explanation:'The order words show folding first, drawing next, and putting the card in a bag last. Now find the order words in Lucie’s story.'
   }
 };

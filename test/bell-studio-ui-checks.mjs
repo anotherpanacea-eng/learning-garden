@@ -61,4 +61,9 @@ for(const c of BELL_CARDS){
   pair.fire();ok(b.checkBellComparison(s).support.pairAudioRequested,'explicit pair playback records a pair request');
  }finally{globalThis.document=prior;}
 }
+{
+ const s={};chooseBellCard(s,'own-call');setBellPage(s,'make');const html=bellStudioPage(s);
+ ok(/<details class="grownup-note"><summary>For grown-ups<\/summary><p>Playback does not tell us what someone heard\.<\/p><\/details>/.test(html),'playback caveat stays in a grown-up note');
+ setBellPage(s,'compare');ok(/<details class="grownup-note">[\s\S]*not a hearing test/.test(bellStudioPage(s)),'hearing-test caveat stays in a grown-up note');
+}
 console.log(`bell studio UI: ${checks} checks passed`);

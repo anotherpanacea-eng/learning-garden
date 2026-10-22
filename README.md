@@ -53,6 +53,8 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/field-kit-checks.mjs
+node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
 node test/sharing-counter-checks.mjs
@@ -82,6 +84,7 @@ node test/message-integration-checks.mjs
 node test/loft-checks.mjs
 node test/loft-growing-checks.mjs
 node test/progress-transfer-checks.mjs
+node test/recovery-boundaries-checks.mjs
 node test/word-garden-checks.mjs
 node test/core-checks.mjs
 node test/broad-checks.mjs
@@ -119,6 +122,9 @@ node test/facts-checks.mjs
 node test/forage-checks.mjs
 node test/paris-checks.mjs
 node test/paris-exploration-checks.mjs
+node test/paris-saved-source-checks.mjs
+node test/town-remembers-checks.mjs
+node test/town-remembers-integration-checks.mjs
 node test/story-pack-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
@@ -337,3 +343,39 @@ Original words remain separate, exact and ungraded. A person can read them, ask 
 The locally built **Willow packing table** (`#post/packing`) gives the same seed envelopes two purposes: make the most full welcome kits, or carry every envelope in the fewest loaded trips. Four requests include an exact fit; partial bags, loose envelopes and spare capacity stay distinct. Pack/unpack countable objects, read the actual table, revise the purpose-specific answer and keep or seal a plan. Supplied pictures and requested examples support practice without claiming written division or independent mastery. [Spec 51](docs/specs/51-parcel-packing-and-remainders.md).
 
 The locally built **Whole batches for a gathering** activity (`#cafe/batches`) invites children to repeat a two-guest recipe, measure separate portions, and compose a literal delivery label. Three pictured requests retain their own plans and unfinished drafts. Optional models compare repeating the complete recipe with adding the same amount to both ingredients; offering a tray gives a local gathering ending. All checks are supplied picture practice, with support retained, and do not serve a café guest or establish independent mastery. [Spec 50](docs/specs/50-whole-batch-gathering.md).
+
+### Paused English Paris visits
+
+New visits retain their supplied passages, questions, ordering cards, smaller examples and ending together. Catalogue edits cannot change a paused answer or the next question's passage. Earlier visits without those pages stay in the notebook as records; a fresh visit is offered without guessing the missing wording. French preservation is a separate follow-up.
+
+For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
+
+### The Town Remembers
+
+An optional home invitation returns to a kept tray, loaf or kitchen jar on a later local day. Six finite forms ask for a different unknown or representation: guest counts, a whole-batch shortcut, same-loaf comparisons, a fraction of twelve buns, a coarser jug scale, and an extra pour. Earlier undated keeps are eligible too. Each errand freezes its own source and choices; checking, support and keeping an answer remain separate. Nothing changes the original game or café stock.
+
+To run synthetic browser journeys, serve `dist` locally and run `node test/town-remembers-browser.js` with `TOWN_TEST_URL` pointing to the server. Installed Node Playwright and Chromium are required; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. `TOWN_ARTIFACTS` selects a temporary screenshot directory. Tests cover all six forms at phone/tablet sizes, actual source-game Keep buttons, later-day invitations, revisions, support, recovery and notebook download/import. This is Chromium emulation, not a physical iPad or audible-speech check.
+
+## Field Kit: local build
+
+Open `#field` on the locally served build for five optional adult-guided cards: a real measuring jug, growing cress, a handwritten café notice, weather watching and an observation walk or window view. Each card connects to its existing model game, has Before/After pages and can be printed locally. An adult can choose “We did it,” “It surprised us” or “Not today.” These are offscreen reports, not measurements or evidence of attainment. No physical result, photograph, handwriting or location is collected.
+
+The notebook keeps the selected supplied reply and support separately. Earlier cards remain readable even when the current card catalog changes. Ordinary explorer switching, reset, save-off and local export/import also apply. See [spec 75](docs/specs/75-field-kit.md) and its [source audit](docs/source-audits/75-field-kit.md). This branch is draft work; it has not been deployed to the live site.
+
+For synthetic browser verification, serve `dist/` locally and run `node test/field-kit-browser.js` with `FIELD_TEST_URL` set to that server's URL. Set `PLAYWRIGHT_MODULE` to an installed Playwright module and, if needed, `CHROME_PATH` to an installed Chromium browser. Optional `FIELD_ARTIFACTS` saves synthetic screenshots. The test inspects print media, simulates local voice callbacks, and exercises phone/tablet layouts and actual notebook download/import; it does not establish physical-device audio behavior or what happened offscreen.
+
+## Willow Path
+
+The optional `#numbers/path` walk links from Number Garden. Move two shaped tokens along ten equal numbered stones, spinning one or two and naming each destination. Two people can share the tokens, or one person can move both. They finish together at Willow Bridge; there is no winner, score, or learning assessment. Small stories appear at occupied stones. Optional step narration uses the existing local voice settings and resets when you leave.
+
+A waiting walk keeps its own words, events, mode, positions and remaining step. Unknown saved boards remain available in a notes download; starting a separate walk requires confirmation and retains the earlier record. The design studies linear number-board research, but this cooperative digital adaptation has not been evaluated for learning effects. See [spec 76](docs/specs/76-willow-path.md) and its [source audit](docs/source-audits/76-willow-path.md).
+
+Run `node test/willow-path-checks.mjs` for source checks. With the static app served locally and Playwright installed, run `WILLOW_TEST_URL=http://127.0.0.1:4173/ node test/willow-path-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `WILLOW_ARTIFACTS` optionally select a local module, browser and screenshot directory. These are synthetic Chrome checks, not physical iPad or audio verification.
+
+## Joining Supply Orders
+
+The optional `#numbers/join` table extends Bundle Burrow with two pictured additions: 24 + 13 and 24 + 17. Join the orders, move individual counters into a ten-frame, and wrap the same ten when the frame is full. Pip’s and Dot’s counters retain separate shapes and origin labels. A proposed total and a kept draft can be unfinished or revised; a matching number does not claim that a child used regrouping or an independent written method.
+
+Each case keeps its supplied source, grouping, raw total, support and earlier checks. Speech requests are labeled as requests, not proof of playback. Optional help and a separate example remain open. See [spec 77](docs/specs/77-joining-supply-orders.md) and its [source audit](docs/source-audits/77-joining-supply-orders.md).
+
+Run `node test/joining-orders-checks.mjs` and `node test/joining-orders-integration-checks.mjs` for source checks. With the static app served locally and Playwright installed, run `JOIN_TEST_URL=http://127.0.0.1:4173/ node test/joining-orders-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `JOIN_ARTIFACTS` optionally select a local module, browser and screenshot directory. These synthetic checks do not establish physical iPad behavior or learning gains.

@@ -1,0 +1,5 @@
+# Joining Supply Orders exposure fold: independent specification review
+
+**Verdict: approved for implementation.** A separate read-only Claude review cleared the exposure fold at `8351fd09063b6e6d78c38f1a6dbff6846146b989` with no remaining P1 or P2 findings. The first pass at `927ca2489d37d0140328b7813ca9a5a0c6c79e6a` identified four P2s: pre-fold chooser exposure, incomplete joined signatures, chooser titles that still named ones, and unclear render timing. The author folded all four before the second pass.
+
+The reviewed rule requires a bounded saved signature list; older undeployed roots without it remain raw and can be recovered with prior exposure unknown. The chooser states only numeric pairs. A joined signature requires an empty-frame canonical picture and visible current feedback supplying its total. The pure renderer reports signatures on every actual display, including reload and reset; the host records only changed observations. The reviewer checked the spec against current Join, Bundle Exchange and broad-question code. It did not edit or run the app. Runtime changes and combined browser verification remain separate gates.

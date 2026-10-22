@@ -9,7 +9,7 @@ const readings=new Set(['unobserved','together','independent']);
 const statuses=new Set(['ready','running','clarify','delivered','ended']);
 const idNumber=id=>typeof id==='string'&&/^post-\d+$/.test(id)?Number(id.slice(5)):0;
 const validClause=id=>typeof id==='string'&&(id==='there'||/^(go|then):/.test(id)&&place(id.split(':')[1])&&id.split(':').length===2||id.startsWith('give:')&&recipient(id.slice(5)));
-const closedReason='This saved delivery cannot safely continue with this version. Its exact work is kept; choose a fresh delivery to try again.';
+const closedReason='This old delivery can’t open now. We kept it. Pick a new delivery.';
 function close(v){v.closed=true;v.closedReason=closedReason;return v;}
 function validPictures(m){
  const groups=m.pictures?.groups;if(!Array.isArray(groups)||groups.length>12||!groups.every(g=>object(g)&&typeof g.label==='string'&&integer(g.count)&&g.count<=12&&(!('reserved'in g)||integer(g.reserved)&&g.reserved<=g.count)))return false;
@@ -97,7 +97,7 @@ export function submitPostPacking(state){
  const v=active(state);if(!v||v.packing.packed)return false;
  const p=v.packing,trimmed=p.input.trim(),n=trimmed!==''&&/^[+-]?(?:\d+\.?\d*|\.\d+)$/.test(trimmed)?Number(trimmed):NaN,correct=Number.isFinite(n)&&n===v.order.math.answer;
  p.attempts.push({input:p.input,value:Number.isFinite(n)?n:null,correct});p.attempts=p.attempts.slice(-24);
- if(correct){p.packed=true;p.error='';p.feedback=`Packed: ${v.order.math.answer} ${v.order.math.unit}.`;}else {p.error='Let’s check the picture together, or try another count.';p.feedback='The parcel is still waiting at the sorting counter.';}
+ if(correct){p.packed=true;p.error='';p.feedback=`Packed: ${v.order.math.answer} ${v.order.math.unit}.`;}else {p.error='Count the picture again, or press Pack together.';p.feedback='The parcel is still waiting at the sorting counter.';}
  return true;
 }
 export function packPostTogether(state){const v=active(state);if(!v||v.packing.packed)return false;v.packing.packed=true;v.packing.supported=true;v.packing.error='';v.packing.feedback=v.order.math.explanation;return true;}
@@ -107,7 +107,7 @@ export function stepPostRoute(state){
  const v=active(state);if(!v||rivalBlocks(v))return false;const r=v.playback;
  if(!v.packing.packed){r.feedback='Pack the parcel at the sorting counter first. You can count it or choose Pack together.';return true;}
  if(['clarify','ended','delivered'].includes(r.status))return false;
- if(r.cursor>=v.clauses.length){r.status='ended';r.feedback=v.clauses.length?'Your message has ended. Add an instruction to give the parcel to the requested recipient, or revise the route.':'Add an instruction to tell the courier where to go.';recordCheck(v);return true;}
+ if(r.cursor>=v.clauses.length){r.status='ended';r.feedback=v.clauses.length?'Your flight plan is finished, but the parcel is still with you. Add a Give card.':'Add an instruction to tell the courier where to go.';recordCheck(v);return true;}
  const index=r.cursor,id=v.clauses[index];r.cursor++;r.active=index;r.status='running';
  if(id==='there'){
   if(!r.referent){r.status='clarify';r.feedback='Where is “there”? Add an earlier instruction naming a place.';}else{r.location=r.referent;r.feedback=`The courier goes there: ${places.find(p=>p.id===r.location).name}.`;}
@@ -115,13 +115,13 @@ export function stepPostRoute(state){
   r.location=id.split(':')[1];r.referent=r.location;r.feedback=`The courier is at ${places.find(p=>p.id===r.location).name}.`;
  }else{
   const who=id.slice(5),name=recipients.find(x=>x.id===who).name;
-  if(who!==v.order.recipient){r.status='clarify';r.feedback=`This parcel is for ${recipients.find(x=>x.id===v.order.recipient).name}, not ${name}. Revise the give instruction; the parcel stays with you.`;}
+  if(who!==v.order.recipient){r.status='clarify';r.feedback=`This parcel is for ${recipients.find(x=>x.id===v.order.recipient).name}, not ${name}. Change the Give card. You still have the parcel.`;}
   else if(r.location!==v.order.destination||v.recipientLocations[who]!==r.location){r.status='clarify';r.feedback=`${name} is waiting at ${places.find(p=>p.id===v.recipientLocations[who]).name}. Go there before giving the parcel.`;}
   else {r.status='delivered';r.feedback=`Delivered to ${name}!${r.cursor<v.clauses.length?` The remaining ${v.clauses.length-r.cursor} instruction${v.clauses.length-r.cursor===1?' is':'s are'} unused.`:''}`;if(!v.completed){v.completed=true;recordCheck(v);}}
  }
  r.log.push(`${index+1}. ${clauseText(id)}. ${r.feedback}`);r.log=r.log.slice(-6);
  if(r.status==='clarify')recordCheck(v);
- else if(r.status==='running'&&r.cursor===v.clauses.length){r.status='ended';r.feedback+=' Your message has ended. Add a give instruction if the parcel is still with you.';recordCheck(v);}
+ else if(r.status==='running'&&r.cursor===v.clauses.length){r.status='ended';r.feedback+=' Your flight plan is finished. If the parcel is still with you, add a Give card.';recordCheck(v);}
  return true;
 }
 export function setPostPrediction(state,value){const v=active(state);if(!v||value!==null&&!place(value))return false;v.prediction=value;if(v.playback.cursor>0||v.checks.length||v.support.helper||v.support.audioRequested||v.packing.supported)v.predictionAfterSupport=true;return true;}

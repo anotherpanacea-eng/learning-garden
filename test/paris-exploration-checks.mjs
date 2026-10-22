@@ -65,7 +65,7 @@ for(const destination of parisDestinations){
 }
 {
  const mutations=[v=>v.route.reverse(),v=>v.route[0]='message-note',v=>v.route.push('paris-postcard'),v=>v.paris.variant=3,v=>v.paris.destination='river',v=>v.paris.storyId='missing',v=>v.paris.reason=null,v=>v.paris.priorStorySeen='false',v=>v.recorded.push('message-note'),v=>v.drafts['message-note']={attempts:[]}];
- for(const mutate of mutations){const s=fresh(),v=begin(s);answer(s);mutate(v);check(!validateParisRoute(v),'tampered route or metadata fails validation');ensureGarden(s);check(!s.garden.visits.length&&!s.garden.observations.length&&s.garden.current===null,'malformed exploration and its dangling observations are removed');}
+ for(const mutate of mutations){const s=fresh(),v=begin(s);answer(s);mutate(v);check(!validateParisRoute(v),'tampered route or metadata fails validation');ensureGarden(s);check(s.garden.visits.length===1&&s.garden.current===v.id&&s.garden.observations.length===1,'malformed saved-source visit and observations remain for recovery');}
  const s=fresh();begin(s);complete(s);s.garden.observations[0].parisStory='foreign';ensureGarden(s);check(s.garden.observations.length===2,'observation with foreign metadata is rejected');
  const p=fresh();begin(p);complete(p);p.garden.visits=[];ensureGarden(p);check(!p.garden.observations.length,'dangling exploration records are rejected');
 }
@@ -75,5 +75,14 @@ for(const destination of parisDestinations){
  const reread=begin(s,'bookstall',1);check(reread.paris.storyId===waiting.paris.storyId,'least seen selects waiting story for shorter revisit');
  resumeVisit(s,firstId);check(storyDraft(s).priorStorySeen===false&&storyDraft(s).familiar===true,'later variant display preserves frozen history but marks paused task as familiar');
  complete(s);check(parisPlan(s,'bookstall').variant===2,'paused cross-variant reread cannot manufacture second unseen success');
+}
+{
+ const s=fresh();begin(s);complete(s);begin(s);complete(s);
+ check(parisPlan(s,'bookstall').variant===3,'fixture has two independent new stories');
+ const first=s.garden.observations.find(o=>o.status==='answered');first.readingTools=null;const raw=json(s.garden.observations);
+ check(parisPlan(s,'bookstall').variant!==3,'unreadable support cannot justify longer text');
+ check(json(s.garden.observations)===raw,'suggestion never rewrites historical support or outcomes');
+ const latest=s.garden.visits.at(-1).id;for(const o of s.garden.observations.filter(o=>o.visitId===latest&&o.status==='answered'))o.readingTools=null;
+ check(parisPlan(s,'bookstall').reason.includes('details are incomplete'),'uncertain latest support never says help was used');
 }
 console.log(checks+' Paris exploration, adaptation, route and restore checks passed.');
