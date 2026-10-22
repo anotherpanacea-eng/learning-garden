@@ -47,7 +47,7 @@ export const riddles=[
   ['circle','A circle','A circle has no corners at all.']
  ],'Tri means three, like a tricycle with three wheels.','A triangle has three straight sides that meet at three corners.','numbers'),
  card('map','sprout','world','Streets and rivers are drawn on me, but I fold into your pocket. What am I?','map',[
-  ['book','A book','A book folds shut, but it holds stories, not streets.'],
+  ['book','A book','A book closes, but you do not fold it small to fit in your pocket.'],
   ['kite','A kite','A kite flies above the streets. Nobody draws them on it.'],
   ['map','A map',null]
  ],'Travelers use me to find their way.','A map is a flat picture of a place, as if you saw it from above.','orchard'),
@@ -109,7 +109,7 @@ export const riddles=[
  card('chat','sapling','french','In French, chat is not talking. A chat says meow. What is a chat?','cat',[
   ['dog','A dog','A dog in French is un chien.'],
   ['cat','A cat',null],
-  ['parrot','A parrot','A parrot can talk, but it does not say meow.']
+  ['parrot','A parrot','In French, a parrot is un perroquet. Chat is a different animal.']
  ],'Listen to the riddle again. What says meow?','Chat is the French word for cat. It looks like an English word, but it means something different.','french')
 ];
 export const ownRiddle='Make up your own riddle. Pick something in the garden. Give one clue about how it looks and one about what it does. Then ask: what am I?';

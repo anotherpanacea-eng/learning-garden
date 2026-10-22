@@ -3,7 +3,7 @@ import {riddles,riddleSizes} from './riddles-content.mjs';
 // Reading never repairs or fills in saved data; an unreadable notebook is kept as it is.
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const code=x=>typeof x==='string'&&/^[a-z0-9][a-z0-9-]{0,39}$/.test(x);
-const codes=(xs,min=0,max=200)=>Array.isArray(xs)&&xs.length>=min&&xs.length<=max&&xs.every(code)&&new Set(xs).size===xs.length;
+const codes=(xs,min=0,max=Infinity)=>Array.isArray(xs)&&xs.length>=min&&xs.length<=max&&xs.every(code)&&new Set(xs).size===xs.length;
 const sizes=riddleSizes.map(s=>s.id),outcomes=['solved','shown','skipped'];
 const fresh=()=>({version:1,size:'any',met:[],current:null,log:[]});
 const validRound=r=>object(r)&&code(r.id)&&Number.isInteger(r.tries)&&r.tries>=0&&typeof r.clue==='boolean'&&outcomes.includes(r.outcome);

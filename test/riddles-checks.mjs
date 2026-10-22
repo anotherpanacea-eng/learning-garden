@@ -101,5 +101,12 @@ for(const raw of [{version:2},[],'text',{version:1,size:'any',met:[],current:{id
  const preview=prepareProgressImport(JSON.stringify({title:'synthetic',...s}));assert.equal(preview.ok,true);assert.deepEqual(preview.state.riddles,s.riddles);assert.ok(preview.summary.destinations.includes('Riddles in the Hedge'));
 }
 
+// Long histories, including retired ids, stay readable after another draw.
+{
+ const s=freshState();s.riddles={version:1,size:'any',met:Array.from({length:250},(_,i)=>`old-${i}`),current:null,log:[]};
+ assert.ok(validRiddles(s.riddles));assert.ok(nextRiddle(s,seeded()));assert.equal(s.riddles.met.length,251);assert.ok(validRiddles(s.riddles),'a successful draw leaves the notebook readable');
+ assert.match(riddlesPage(restoreStateResult(JSON.stringify(s)).state),/riddle-prompt/);
+}
+
 function riddleById(id){return riddles.find(r=>r.id===id);}
 console.log('Riddles in the Hedge checks passed.');
