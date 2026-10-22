@@ -1,0 +1,31 @@
+.recut-page{max-width:900px;margin:auto;color:#183f39;overflow-wrap:anywhere}
+.recut-sheet{padding:clamp(14px,3vw,24px);background:#fffdf5;border:2px solid #adbdac;border-radius:18px}
+.recut-page .back{display:inline-flex;align-items:center;min-height:44px;margin-right:12px}
+.recut-page button,.recut-page summary,.recut-page .speech-controls button,.recut-page .speech-controls select{min-height:44px}
+.recut-page button{white-space:normal;max-width:100%;padding:10px 14px}
+.recut-page button:focus-visible,.recut-page a:focus-visible,.recut-page summary:focus-visible{outline:3px solid #946625;outline-offset:3px}
+.recut-catalog,.recut-actions,.recut-example-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.recut-catalog button{flex:1 1 220px;text-align:left}
+.recut-actions button{flex:1 1 210px}
+.recut-example-actions button{flex:1 1 130px}
+.recut-request{padding:8px 12px;border-left:4px solid #397958;background:#edf3e8}
+.recut-figure{margin:12px 0 8px;padding:12px;border:1px solid #adbdac;border-radius:12px;background:#f7f5e9}
+.recut-figure figcaption{line-height:1.45}
+.recut-diagram{display:block;width:100%;height:auto;max-width:650px;margin:8px auto}
+.recut-diagram text{fill:#183f39;font-size:16px;font-weight:700;font-family:inherit}
+.recut-whole{fill:#fffdf5}
+.recut-colored{fill:#e9c064}
+.recut-outline{fill:none;stroke:#183f39;stroke-width:2.5}
+.recut-old-cut{fill:none;stroke:#183f39;stroke-width:2.5}
+.recut-new-cut{fill:none;stroke:#245f90;stroke-width:3;stroke-dasharray:5 4}
+.recut-endpoint{fill:none;stroke:#8d5515;stroke-width:3}
+.recut-flag{fill:#8d5515;stroke:#183f39;stroke-width:1.5}
+.recut-picture-text{font-size:15px;margin:6px 0 0}
+.recut-status{padding:10px 12px;background:#edf3e8;border-left:4px solid #397958;line-height:1.45}
+.recut-model-note{font-size:14px;line-height:1.5;padding:10px 12px;background:#f3f6ed}
+.recut-page details{margin:14px 0}
+.recut-page summary{display:list-item;cursor:pointer;padding:8px 4px}
+.recut-example{padding:8px 12px;border:1px solid #adbdac;border-radius:12px}
+.recut-example .recut-diagram{max-width:550px}
+.recut-example-actions [aria-current="step"]{border:3px solid #245f90}
+@media(max-width:400px){.recut-sheet{padding:12px}.recut-catalog button,.recut-actions button,.recut-example-actions button{flex-basis:100%}.recut-diagram text{font-size:18px}}
