@@ -1,6 +1,6 @@
 # Living Garden: how two bodies move
 
-Status: **author draft for independent science, content, art and specification review**. [Source and overlap audit](../source-audits/97-body-movement-bench.md); [original six-frame art mock](assets/97-body-movement-frames.svg). No runtime, atlas change, merge or deployment is claimed.
+Status: **independently reviewed specification and art; implementation candidate awaits separate review**. [Source and overlap audit](../source-audits/97-body-movement-bench.md); [original six-frame art mock](assets/97-body-movement-frames.svg). No atlas change, merge or deployment is claimed.
 
 ## Purpose and boundary
 
