@@ -104,3 +104,13 @@ Saved as draft PR53, https://github.com/anotherpanacea-eng/learning-garden/pull/
 ## Life Stages implementation checkpoint
 
 Spec65 is implemented with independent specification/content and actual original-art review. Root reproduced a long phone turn; a bounded independent UX specification follow-up preceded splitting Stage and Meaning while preserving both answers. Actual Claude initial/follow-up/final reviews required readable arrow direction and genuinely measured controls inside open folds; both are repaired and final local draft approval is explicit. Root94 source scripts,1,219core/80integration and848browser assertions pass. Atlas147refs/79topics, unchanged runtime pin. See docs/reviews/65-living-life-stages-implementation-review.md for precise evidence and limits. Draft publication is next. No held paths, merge or deployment. The next candidate is a separately reviewed food→eater relationship pack, not automatic reuse of life-stage chronology.
+
+
+## Life Stages published / Food Links proposed
+
+Saved as draft PR54, https://github.com/anotherpanacea-eng/learning-garden/pull/54, head8c036bd036aff7b3ff6f8e9a41acb81923dd0621, base build/balance-stall. Worktree clean at publication and owned preview8781 stopped. New worktree learning-garden-food-links / build/living-food-links starts from that exact head. Spec66 proposes two named feeding links, looked up from either end, with food→eater energy meaning separated from lifecycle/travel contrasts. Fresh source audit completed; independent specification/content gate precedes runtime. No held files, merge or deployment.
+
+
+## Food Links implementation checkpoint
+
+Spec66 is implemented with independent specification/content and actual original-art review. Actual Claude required a frozen-label contrast in correct-pair feedback, repaired and independently confirmed. Bounded sap-note/voice-control suggestions were folded; root reproduced/fixed long retained-word phone overflow with one local wrapping property. Root96scripts,779core/72integration and538browser assertions pass. Atlas148refs/80topics, unchanged runtime pin. See docs/reviews/66-living-food-links-implementation-review.md for evidence and limits. Draft publication is next. No held files, merge or deployment. Next candidate: fixed price/tender with an independently editable returned-change mat; exact payment, overpayment and insufficient tender must remain distinct.

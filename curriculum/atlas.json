@@ -341,7 +341,7 @@
         "build"
       ],
       "route": "#living",
-      "scope": "Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained. Optional Life Stages (spec65, #living/stages) uses four original Small White butterfly diagrams and eight next/before chart-neighbour tasks, separating stage position from same-individual/offspring meaning. A supplied named-species chart, not field observation, independent retelling or general insect-life-cycle attainment."
+      "scope": "Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained. Optional Life Stages (spec65, #living/stages) uses four original Small White butterfly diagrams and eight next/before chart-neighbour tasks, separating stage position from same-individual/offspring meaning. A supplied named-species chart, not field observation, independent retelling or general insect-life-cycle attainment. Optional Food Links (spec66, #living/food) looks up two named sap/aphid/larval-predator feeding links from either endpoint and interprets a supplied food-to-eater energy legend. Supplied diagrams/facts, not field observation, full diets, independent explanation or a complete food web."
     },
     {
       "id": "cafe",
@@ -1220,6 +1220,13 @@
       "kind": "scoped-practice",
       "source": "dist/life-stages-content.mjs",
       "scope": "Life Stages (#living/stages, local build): four supplied Small White stages, eight directed chart-neighbour questions and same-individual versus offspring choices. Guided partial ordering/continuity practice, not independent explanation, retelling/drawing, field observation or full-topic attainment."
+    },
+    {
+      "game": "living",
+      "topicId": "mt_QH-Fs97twT",
+      "kind": "scoped-practice",
+      "source": "dist/food-links-content.mjs",
+      "scope": "Food Links (#living/food, local build): four supplied endpoint questions over broad bean sap → black bean aphid → seven-spot ladybird larva; neighbour and food-arrow energy meaning assessed separately. Guided partial minibeast feeding practice, not independent chain construction/explanation, field identification, full diets or whole-topic attainment."
     }
   ],
   "increments": [

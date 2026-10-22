@@ -1,0 +1,28 @@
+# Food Links: implementation review and verification
+
+Status: **APPROVED FOR DRAFT by actual local Claude follow-up; root verification complete**. local draft readiness is separate from exact-head GitHub clearance, merge and deployment.
+
+## Independent gates and root repairs
+
+The [separate specification/content review](66-living-food-links-spec-review.md) cleared four endpoint questions, two exact named feeding links and100 response combinations before build. It checked actual upstream meanings, primary facts and the source/state/integration boundaries through six distinct lenses. A mistaken acceptance-count phrase was corrected before build. The final source also explicitly freezes choice labels/order and the food-arrow legend.
+
+A separate [art/science review](66-living-food-links-art-review.md) actually viewed the original three-diagram contact sheet and inspected the authored facts, all four questions and future/mismatched drawing fallback. It cleared the named broad bean, sap-feeding wingless aphid nymph and elongated seven-spot ladybird larva without required repairs. No source image or prose is incorporated; this is not field identification or a leg-count task.
+
+Root reproduced a phone overflow with an admitted180-character unbroken retained card label:390px viewport,1490px document width. A single local `overflow-wrap:anywhere` property now keeps that exact label and a long retained legend readable within the page. A permanent actual-browser regression preserves their original text while checking geometry. No storage rewrite, truncation or shared style change is needed.
+
+Actual restricted local Claude required one P2 before draft: correct-pair feedback needed an explicit contrast with development/travel, using frozen meaning labels. The core now takes the expected meaning and both alternatives from the saved source, and tests cover all matching-neighbour inputs plus changed earlier wording. Bounded suggestions also limited the affirmative sap note to bean→aphid, removed a redundant selected speech suffix and measured global voice controls/the Life Stages link explicitly. A fresh actual Claude follow-up confirmed the repairs and approved a local draft conditional on the final browser pass; root then verified538 assertions. Both reviews were read-only and do not themselves establish test execution or image inspection. Nonblocking notes remain about punctuation and key-order affecting an advisory earlier/latest label on hand-crafted imported input; no canonicalization framework is needed.
+
+## Root verification
+
+- All96 `test/*.mjs` scripts pass; story-pack and deterministic atlas checks pass. Final source checks include the subsequent frozen-feedback repair.
+- Core:779 assertions across100 independently tabulated responses. The same two food→eater relations are looked up from either endpoint; blank/uncertain and wrong-neighbour meaning responses remain unassessed. Revisions preserve the other choice, display changes do not stale a check, frozen outcomes/expectations/choice labels/order remain their own source, and future/raw/safe-ID/capacity behaviors pass.
+- Integration:72 assertions through actual Living Garden route/notes, all12 page/picture combinations, generic import/transfer/reload/explorer/save-off and unchanged other game roots, including Life Stages and habitat suggestions. Pure readers allocate/trim nothing; unknown work remains escaped and preserved.
+- Actual installed-browser suite:538 assertions at1440×1100 desktop,820×1180 touch tablet,390×844 touch phone and additional320/390/820/1440 control sweeps. All four cases, both lookup roles, wrong/uncertain/correct repairs, wrong self-pairs, both meaning contrasts, persistent legend, real arrow direction text, question retention, open blank Next, local focus, phone taps and actual reload pass. Chooser/help/history/voice folds are explicitly opened before measuring all visible44px controls; fresh no-chart controls are measured too. Retained long words do not overflow the tested phone.
+- Queued old native help and detached narration events cannot mark a new visit. Closed help stays closed. Narration uses a synthetic local voice stub for event verification, not audible-quality evidence.
+- The real-host browser case creates and verifies a valid synthetic Café offer on old Living Garden, then compares the new route: the same incoming numerical facts remain visible/registered and module actions add no further exposures or stock changes.
+- Root actually viewed the original contact sheet and final phone Link/Meaning plus desktop images. The picture choices and reference stay together in a shorter current turn; a child can revise either answer without discarding the other. The separate art reviewer actually viewed the contact sheet.
+- Atlas:148 scoped references across80 topics, adding only narrow partial minibeast feeding practice. Runtime87-node graph/pin stays unchanged; the full three-node source closure is authoring context, not covered prerequisites or learner readiness.
+
+Reproduce with `node test/food-links-checks.mjs` and `node test/food-links-integration-checks.mjs`. Optional `test/food-links-browser.js` accepts FOOD_LINKS_TEST_URL, PLAYWRIGHT_MODULE and CHROME_PATH for an installed browser. No browser dependency enters the site.
+
+All fixtures are synthetic/local, with no family data, uploads, live AI, real feeding or currency. No physical Safari/iPad, audible quality, human screen reader, field identification, complete diets/webs, independent scientific explanation, energy-budget knowledge, learning gain, hosted CI, composed release or production claim. Held app/media/global-style/README/mobile paths remain unchanged. No merge/deploy.

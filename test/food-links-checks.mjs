@@ -1,0 +1,42 @@
+import assert from 'node:assert/strict';
+import {foodCases,foodSource,foodPages,cardIds} from '../dist/food-links-content.mjs';
+import {validFoodSource,validFoodCheck,validFoodRound,foodView,startFood,resumeFood,setFoodPage,setFoodView,chooseFoodNeighbor,chooseFoodMeaning,addFoodSupport,evaluateFood,checkFood,foodCheckMatches} from '../dist/food-links-core.mjs';
+let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;},copy=structuredClone;
+const oracle={
+ 'aphid-food':['aphid','eater','bean'], 'bean-eater':['bean','food','aphid'],
+ 'larva-food':['ladybird-larva','eater','aphid'], 'aphid-eater':['aphid','food','ladybird-larva'],
+};
+eq(foodCases.length,4);eq(foodPages,['inspect','connect','meaning','kept']);eq(cardIds,['bean','aphid','ladybird-larva']);let combinations=0,matches=0,different=0,unobserved=0,meaningYes=0,meaningNo=0;const positions=[],meaningPositions=[];
+for(const src of foodCases){
+ ok(validFoodSource(src));const [ref,role,expected]=oracle[src.id];eq([src.reference,src.role,src.expected.neighbor,src.expected.meaning],[ref,role,expected,'energy']);eq(new Set(src.cards.map(s=>s.id)),new Set(cardIds));eq(src.pathId,'bean-aphid-ladybird-larva');positions.push(src.options.indexOf(expected));meaningPositions.push(src.meaningOptions.indexOf('energy'));const frozen=copy(src),clone=foodSource(src.id);eq(clone,src);clone.cards[0].text='Synthetic changed earlier words';clone.meanings[0].label='Synthetic earlier label';eq(src,frozen,'factory deep clones all supplied material');
+ for(const neighbor of [null,...cardIds,'unsure'])for(const meaning of [null,'energy','development','travel','unsure']){
+  const input={neighbor,meaning,support:[]},before=copy(input),neighborResult=neighbor===null||neighbor==='unsure'?null:neighbor===expected,meaningResult=neighborResult===true&&['energy','development','travel'].includes(meaning)?meaning==='energy':null,c=evaluateFood(src,input);combinations++;
+  eq(c.neighborMatch,neighborResult,'independent endpoint table');eq(c.meaningMatch,meaningResult,'meaning conditional on intended pair');eq(input,before);eq(src,frozen);ok(validFoodCheck(c));
+  if(neighborResult===true)matches++;else if(neighborResult===false)different++;else unobserved++;if(meaningResult===true)meaningYes++;else if(meaningResult===false)meaningNo++;
+  if(neighborResult===false){ok(c.feedback.includes('not assessed'),'wrong pair not confirmed as diet');ok(c.feedback.includes('not a confirmed diet'));}
+  if(neighborResult===true){ok(c.feedback.includes(src.legend));ok(src.meanings.filter(x=>x.id!=='unsure').every(x=>c.feedback.includes(x.label)),'feedback contrasts all frozen substantive meanings');const from=role==='eater'?expected:ref,to=role==='eater'?ref:expected;ok(c.feedback.includes(src.links.find(x=>x.from===from&&x.to===to).text),'matching link retains exact supplied sap/larval fact');}
+ }
+}
+eq([combinations,matches,different,unobserved,meaningYes,meaningNo],[100,20,40,40,4,8]);eq(positions,[2,2,0,1]);eq(meaningPositions,[0,1,2,1]);
+const missing={};eq(foodView(missing).status,'missing');for(const fn of [s=>setFoodPage(s,'connect'),s=>setFoodView(s,'aphid'),s=>chooseFoodNeighbor(s,'bean'),s=>chooseFoodMeaning(s,'energy'),s=>addFoodSupport(s,'audio'),s=>resumeFood(s,1)]){eq(fn(missing),false);eq(missing,{});}eq(checkFood(missing),null);eq(startFood(missing,'no-case'),null);eq(missing,{});
+const state={},r=startFood(state,'aphid-food');ok(validFoodRound(r));eq(r.familiar,false);eq(r.view,'aphid');eq(state.foodLinks.seen,['bean-aphid-ladybird-larva']);const blank=checkFood(state);eq([blank.neighborMatch,blank.meaningMatch],[null,null]);ok(foodCheckMatches(r));for(const view of cardIds){ok(setFoodView(state,view));ok(foodCheckMatches(r),'inspection view is not a changed answer');}for(const page of foodPages){ok(setFoodPage(state,page));ok(foodCheckMatches(r),'page not input');}
+chooseFoodNeighbor(state,'bean');chooseFoodMeaning(state,'development');const wrongMeaning=checkFood(state);eq([wrongMeaning.neighborMatch,wrongMeaning.meaningMatch],[true,false]);chooseFoodNeighbor(state,'ladybird-larva');eq(r.meaning,'development','repair keeps other choice');eq(checkFood(state).meaningMatch,null);chooseFoodNeighbor(state,'bean');chooseFoodMeaning(state,'energy');const good=checkFood(state);eq([good.neighborMatch,good.meaningMatch],[true,true]);const oldChecks=copy(r.checks);addFoodSupport(state,'help');ok(!foodCheckMatches(r),'new support stales recorded input');eq(r.checks,oldChecks);addFoodSupport(state,'help');eq(r.support,['help']);
+const backward=startFood(state,'bean-eater');ok(backward.familiar,'same supplied chart familiar across endpoint/new question');eq(state.foodLinks.seen,['bean-aphid-ladybird-larva'],'no task registry');chooseFoodNeighbor(state,'aphid');chooseFoodMeaning(state,'energy');eq(checkFood(state).meaningMatch,true);ok(resumeFood(state,r.id));eq(foodView(state).current,r);eq(resumeFood(state,999),false);
+for(const bad of ['',0,undefined,'outside']){const before=copy(state);eq(chooseFoodNeighbor(state,bad),false);eq(chooseFoodMeaning(state,bad),false);eq(setFoodView(state,bad),false);eq(state,before);}eq(addFoodSupport(state,'score'),false);
+for(const change of [{version:2},{cards:[]},{pathId:5},{role:'backward-growth'},{options:['aphid','aphid','ladybird-larva']},{expected:{neighbor:'outside',meaning:'energy'}}])ok(!validFoodSource({...foodSource('aphid-food'),...change}));
+{
+ const source=foodSource('larva-food');source.cards[0].drawing={version:25,kind:'future-bean'};ok(validFoodSource(source),'future drawing does not discard understood chart/text');const input={neighbor:'ladybird-larva',meaning:'energy',support:[]};ok(validFoodCheck(evaluateFood(source,input)));source.expected={neighbor:'bean',meaning:'development'};source.question='Earlier supplied chart question';eq(evaluateFood(source,{neighbor:'bean',meaning:'development',support:[]}).meaningMatch,true,'new checks use own admitted source, not catalog');
+}
+{
+ const s={},r=startFood(s,'aphid-eater');chooseFoodNeighbor(s,'aphid');chooseFoodMeaning(s,'development');const c=checkFood(s),frozen=copy(c);r.source.expected={neighbor:'bean',meaning:'development'};r.source.overview='Revised chart words';ok(!foodCheckMatches(r));eq(c,frozen,'retained source/outcome not rewritten');c.neighborMatch=false;c.meaningMatch=true;c.feedback='Earlier contradictory outcome';ok(validFoodRound(r),'historical results shape-checked');for(let i=0;i<10;i++)checkFood(s);eq(r.checks.length,8);
+}
+{
+ const source=foodSource('aphid-food');source.legend='Earlier retained legend.';source.meanings[0].label='Earlier retained energy words';source.options=['ladybird-larva','aphid','bean'];source.meaningOptions=['travel','development','energy'];const before=copy(source),c=evaluateFood(source,{neighbor:'bean',meaning:'energy',support:['together']});eq(c.source,before,'all choice labels/order/legend frozen');ok(c.feedback.includes(source.legend));ok(c.feedback.includes('Earlier retained energy words'),'feedback uses saved meaning wording');source.meanings[0].label='Later changed';eq(c.source.meanings[0].label,'Earlier retained energy words');
+ for(const change of [{meanings:[]},{meaningOptions:['energy','energy','travel']},{meanings:[...before.meanings.slice(0,3),before.meanings[0]]},{legend:3},{links:[]},{cards:before.cards.map((x,i)=>i?x:{...x,scientificName:8})}])ok(!validFoodSource({...before,...change}));
+}
+for(const root of [null,'<b>future</b>',{version:91,raw:'saved'}]){const s={foodLinks:copy(root)},before=copy(s);eq(foodView(s).status,'unavailable');eq(startFood(s,'aphid-food'),null);eq(s,before);}
+{
+ const s={};for(let i=0;i<16;i++)startFood(s,foodCases[i%4].id);eq(foodView(s).rounds.length,12);eq(s.foodLinks.rounds[0].id,5);s.foodLinks.rounds.push({id:90,raw:'earlier work'});const raw=copy(s.foodLinks.rounds.at(-1));s.foodLinks.current=90;eq(foodView(s).current.id,16);startFood(s,'aphid-food');eq(s.foodLinks.current,91);eq(foodView(s).earlier,[raw]);const duplicate=copy(s.foodLinks.rounds[0]);s.foodLinks.rounds.push(duplicate);eq(foodView(s).earlier,[raw,duplicate]);const before=copy(s);foodView(s);eq(s,before);
+}
+for(const unsafe of [Infinity,Number.MAX_SAFE_INTEGER]){const s={};startFood(s,'aphid-food');s.foodLinks.rounds.push({id:unsafe,raw:true});const before=copy(s);eq(startFood(s,'bean-eater'),null);eq(s,before,'unsafe id never evicts retained work');}
+console.log(`Food links core: ${n} assertions passed across ${combinations} response combinations.`);

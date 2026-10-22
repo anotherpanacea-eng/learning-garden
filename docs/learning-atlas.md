@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 147 explicit current references across 79 unique source topics: authored question references, scoped practice or supplied explanations. The other 1511 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 148 explicit current references across 80 unique source topics: authored question references, scoped practice or supplied explanations. The other 1510 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -23,7 +23,7 @@ There are 147 explicit current references across 79 unique source topics: author
 | Life Skills | 37 | 0 | 37 |
 | Mathematics | 503 | 52 | 451 |
 | Personal & Social Development | 88 | 0 | 88 |
-| Science | 547 | 13 | 534 |
+| Science | 547 | 14 | 533 |
 
 Mathematics currently has the broadest authored task collection. Science and English have narrow guided investigations/comprehension references. History, life skills, personal/social development and learning-to-learn require explicit content/evidence design; fictional settings, friendly characters, help use and game completion do not establish those abilities. The source’s Computing topics are grouped under “Artificial Intelligence,” including step-by-step instructions; preserve that source organization without mistaking it for a complete computing curriculum.
 
@@ -55,7 +55,7 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | --- | --- | --- |
 | [Number Garden and open math models](https://after-the-storm-learning.anotherpanacea.workers.dev/#numbers) | build, allocate | Seven authored math areas with variants, editable models and optional explanations; sparse task evidence stays separate from placement. |
 | [Multiplication Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#facts) | build | Ordered facts through 12×12 with counting, derivation, help and method distinctions; no timing-based recall certification. |
-| [Living Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#living) | search, read, build | Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained. Optional Life Stages (spec65, #living/stages) uses four original Small White butterfly diagrams and eight next/before chart-neighbour tasks, separating stage position from same-individual/offspring meaning. A supplied named-species chart, not field observation, independent retelling or general insect-life-cycle attainment. |
+| [Living Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#living) | search, read, build | Nine habitat settings, three separately suggested depths in science/notes/math, renewable sealed café parcels. Original visit retained. Optional Life Stages (spec65, #living/stages) uses four original Small White butterfly diagrams and eight next/before chart-neighbour tasks, separating stage position from same-individual/offspring meaning. A supplied named-species chart, not field observation, independent retelling or general insect-life-cycle attainment. Optional Food Links (spec66, #living/food) looks up two named sap/aphid/larval-predator feeding links from either endpoint and interprets a supplied food-to-eater energy legend. Supplied diagrams/facts, not field observation, full diets, independent explanation or a complete food web. |
 | [Almost-Right Café](https://after-the-storm-learning.anotherpanacea.workers.dev/#cafe) | allocate | Silly ingredient constraints, equal plates, stock shortfall and real inventory; welcome-back dinner/New Game Plus. No assessed money or empathy curriculum. |
 | [Cloud Orchard and gathering hunts](https://after-the-storm-learning.anotherpanacea.workers.dev/#orchard) | search, allocate | Find pretend foods using authored clues/row-column hunts and harvest quantities. Not botanical identification. |
 | [Storm Workshop](https://after-the-storm-learning.anotherpanacea.workers.dev/#workshop) | experiment | Controlled ramp/surface model, repeatable authored distances, table and zero-based bars. Not calibrated physics or independent experimental design. |
@@ -164,7 +164,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Science / Ecosystems & Habitats | 36 | 3 | Search · inspect · compare; Read · infer · support |
 | Science / Energy | 28 | 0 | Change · measure · explain; Build · transform · relate |
 | Science / Forces & Motion | 27 | 1 | Change · measure · explain; Build · transform · relate |
-| Science / Insects & Minibeasts | 22 | 3 | Search · inspect · compare; Read · infer · support |
+| Science / Insects & Minibeasts | 22 | 4 | Search · inspect · compare; Read · infer · support |
 | Science / Matter & Materials | 40 | 1 | Change · measure · explain; Build · transform · relate |
 | Science / Ocean Life | 27 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Organisms & Life Processes | 63 | 1 | Search · inspect · compare; Read · infer · support |
@@ -331,6 +331,7 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [What the equals sign means](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_oIzycTBeE4) | scoped-practice / Balance Stall (local build) / [source](../dist/balance-stall-ui.mjs) | Relational equals through two supplied noncanonical grouped arrangements and reversible one-sided/paired unit-mass changes. Actual unequal relations stay visible; no independently composed explanation or general symbolic proof. |
 | [Unknown in Addition & Subtraction](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_3JgrHY221M) | scoped-practice / Balance Stall (local build) / [source](../dist/balance-stall-ui.mjs) | One fixed whole-parcel model mass plus loose unit masses equals a known total, including a right-side parcel. Proposed value stays separate from performed paired changes and an isolated level balance. No all-form unknown equation, two-step or general algebra attainment. |
 | [Caterpillar to butterfly](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Wr6DDgr_kH) | scoped-practice / Living Garden / [source](../dist/life-stages-content.mjs) | Life Stages (#living/stages, local build): four supplied Small White stages, eight directed chart-neighbour questions and same-individual versus offspring choices. Guided partial ordering/continuity practice, not independent explanation, retelling/drawing, field observation or full-topic attainment. |
+| [Minibeasts in the food chain](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_QH-Fs97twT) | scoped-practice / Living Garden / [source](../dist/food-links-content.mjs) | Food Links (#living/food, local build): four supplied endpoint questions over broad bean sap → black bean aphid → seven-spot ladybird larva; neighbour and food-arrow energy meaning assessed separately. Guided partial minibeast feeding practice, not independent chain construction/explanation, field identification, full diets or whole-topic attainment. |
 
 ## Sources, licensing and maintenance
 
