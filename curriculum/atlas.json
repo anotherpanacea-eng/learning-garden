@@ -584,6 +584,17 @@
       ],
       "route": "#workshop/coins",
       "scope": "Four supplied US-cent denominations, count versus value, conserved exchanges and two alternative exact payments across eight pretend stall requests. Live mats and historical recorded checks stay separate. A supported US-cent adaptation; no unlabelled real-coin recognition, UK notation, dollars, change, budgeting, scarcity or monetary Café economy."
+    },
+    {
+      "id": "cartographer",
+      "name": "Cartographer’s Table",
+      "status": "built-local",
+      "patterns": [
+        "compose",
+        "build"
+      ],
+      "route": "#workshop/maps",
+      "scope": "Freely place four keyed landmarks on a supplied0–5 intersection grid; read horizontal-first coordinates and compose two adjacent orthogonal routes. Count travelled intervals in fictional model metres, including retraced segments; compare frozen checks separately from revised maps. Supported schematic practice only; no real geography, surveying, physical scale, rates, independent axis construction or full coordinate/geometry attainment."
     }
   ],
   "manualReferences": [
@@ -1104,6 +1115,34 @@
       "kind": "scoped-practice",
       "source": "dist/coin-counter-ui.mjs",
       "scope": "Construct two different US-cent coin vectors for one marked amount and exchange denominations while conserving value. Separate physical coin count from cents. The source description concerns combinations; giving change and UK-specific evidence remain outside this slice."
+    },
+    {
+      "game": "cartographer",
+      "topicId": "mt_jBQS-CicNn",
+      "kind": "scoped-practice",
+      "source": "dist/cartographer-ui.mjs",
+      "scope": "Read supplied horizontal-first ordered pairs and place labelled landmarks on intersections0–5. The grid/key are supplied; shape vertices and independent explanation remain unobserved."
+    },
+    {
+      "game": "cartographer",
+      "topicId": "mt_oDlduFnemk",
+      "kind": "scoped-practice",
+      "source": "dist/cartographer-ui.mjs",
+      "scope": "Supplied perpendicular axes with origin(0,0), across-first/up-second coordinate labels and a(4,2) versus(2,4) talking invitation. The bundled generic title describes a coordinate system; no independent axis construction or wider attainment."
+    },
+    {
+      "game": "cartographer",
+      "topicId": "mt_snlqRCiA1R",
+      "kind": "scoped-practice",
+      "source": "dist/cartographer-ui.mjs",
+      "scope": "Author fictional landmark positions and interpret two route endpoints on a bounded first-quadrant point grid. No time/distance data graph, negative coordinates or physical map survey."
+    },
+    {
+      "game": "cartographer",
+      "topicId": "mt_cqSf213hSa",
+      "kind": "scoped-practice",
+      "source": "dist/cartographer-ui.mjs",
+      "scope": "Count every travelled unit segment, including retracing, with1 fictional model metre per interval; distinguish six point markers from five intervals. No physical ruler or real-object measurement claim."
     }
   ],
   "increments": [
