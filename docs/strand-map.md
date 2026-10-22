@@ -1,5 +1,7 @@
 # The learning spiral, strand by strand
 
+**Dated concept map.** Use the [current roadmap](roadmap.md) for the active queue, merged-versus-live status and present atlas counts. The Built/Planned/Missing rows below retain their authoring-date meanings; later bounded specs may have filled a row without completing its strand. The [26-strand programme](six-act-strands.md) is the longer teaching horizon.
+
 **Snapshot update · 2026-10-21.** The planned rows below retain the 2026-10-20 authoring snapshot. Later bounded implementations now cover equal-group unknowns (spec 38; equal groups), reader-revised messages and changing letters (specs 39–40; reading and revision), plant-condition investigation and supplied-data charts (specs 41–42; living systems, inquiry and data), and the Paris 1910 Travelers’ Archive (spec 46). The affected Planned labels and the summary’s “Proposed Travelers’ Archive” describe the earlier plan; these slices are now Built within their specifications’ limits, not whole-topic coverage. Sharing Counter, Measuring Kitchen and Rain Paths also have bounded built slices (specs 43–45 and 47); Bell Studio is built in spec 48. Their exact current scope is recorded in the implementation specs and the curriculum spirals, while broader phonics, ecology, money and source work remain future authoring.
 
 **Authoring map · 2026-10-20 · proposed teaching routes, open entry.**

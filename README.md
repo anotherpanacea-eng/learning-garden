@@ -14,7 +14,7 @@ Number Garden now has a storm-recovery purpose: count saved seeds, plan 24 plant
 
 The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marble reference graph: 1,590 topics, 3,221 prerequisite edges, eight subjects and 54 domains. The [all-topic index](curriculum/topic-coverage.csv) distinguishes current scoped activity references, supplied explanations and topics not yet mapped. Seven reusable play patterns guide extensions and new games; proposed priorities include Word Workshop, field notebooks/food webs, café fractions and money, messages/map-making, historical evidence, sound/light creation and collaborative stories. These are authoring plans, not a required child sequence or claims of full-topic assessment. Geography, art, music and additional languages also need explicitly authored extensions beyond Marble's subject organization.
 
-[Data provenance and licenses](curriculum/README.md) · [Roadmap](docs/roadmap.md). Rebuild or check the offline atlas with `node scripts/build-learning-atlas.mjs` or `node scripts/build-learning-atlas.mjs --check`. The larger reference graph does not change the live app's smaller map or learner saves.
+[Data provenance and licenses](curriculum/README.md) · [Current roadmap and release status](docs/roadmap.md). Rebuild or check the offline atlas with `node scripts/build-learning-atlas.mjs` or `node scripts/build-learning-atlas.mjs --check`. The larger reference graph does not change the live app's smaller map or learner saves.
 
 The home page also offers **Watch the storm pass**, the optional 46-second film from [PR #8](https://github.com/anotherpanacea-eng/learning-garden/pull/8). Pip and Dot shelter their neighbors before the garden’s first morning. It starts on request and has pause/replay controls.
 
@@ -24,7 +24,7 @@ Three more short films celebrate story endings in the same way: *A Postcard Home
 
 The [strand-by-strand curriculum map](docs/strand-map.md) marks concepts, contrasts, game homes and revisits as Built, Planned or Missing, and identifies which additional game modes are needed.
 
-The [curriculum spiral plan](docs/curriculum-spirals.md) proposes the next conceptual connections across familiar games, with checked Jane/Marble references and explicit gaps. It is a plan, not additional live coverage.
+The [dated curriculum spiral plan](docs/curriculum-spirals.md) records conceptual connections across familiar games, with checked Jane/Marble references and explicit gaps. The [current roadmap](docs/roadmap.md) holds the active queue and distinguishes merged code from the live site.
 
 ## Story Loft
 
@@ -142,7 +142,7 @@ This starts and stops its own loopback preview and uses isolated browser profile
 
 ## Roadmap and science expeditions
 
-The [six-step roadmap](docs/roadmap.md) links specifications for Water Lab expeditions, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions, and Story Loft. Water Lab, Storm Workshop, the first Willow Post Office flying-courier increment, Word Garden meaning work and the first Story Loft puppet theatre are implemented. Phonics, ecosystem models and the paired-perspective reading expansion remain planned. The revised sequence also scopes Living Garden and Travelers’ Archive. Sky Post is the original flying-courier adventure within Willow Post Office, with pictured courier choices, freely available practice and the first optional rival-witch encounter.
+The [current roadmap](docs/roadmap.md) names the next reviewed increments and states what is merged versus published. The [earlier six-step roadmap](docs/roadmap-2026-10-22-pre-merge.md#delivery-sequence) preserves the original sequence for Water Lab, Willow Post Office, Storm Workshop, Word Workshop, Ecosystem Expeditions and Story Loft. Sky Post is the flying-courier adventure within Willow Post Office; the wider phonics and ecosystem-model sequences remain future work.
 
 Science offers three guided water visits with optional predictions, a focused external Marble Water Lab link, self-reported observations, original controllable explanation pictures, and a discussion/project invitation. Each mission is independently available and can finish without an external visit or an answer. Link selection is not treated as visiting, experiment completion, or understanding. Explanation use and reported reading mode stay distinct. The latest 24 visits stay browser-local under the existing privacy controls; there is no tracking or data exchange with Marble. External application source/assets are not copied or embedded.
 
@@ -238,7 +238,7 @@ Open `#workshop` to investigate the storm-damaged parcel ramp. Choose ramp heigh
 
 Predictions and explanations are optional and unscored. Support and separately reported reading stay distinct. Paused trials retain exact settings, phase, result and model revision. Older unsupported models remain closed, readable work. The latest 24 comparisons and 24 completed trial rows per comparison stay local; counters continue after older rows are trimmed. Explorer switching, saving off, notes/export and reset apply as elsewhere.
 
-Open `#explore` for the original connected-adventure directory. Workshop, Water Lab, café, orchard, English Paris and measurement/fractions activities offer contextual links. These are thematic invitations, distinct from Marble’s actual prerequisite links. Navigation preserves waiting activities. [Spec 03](docs/specs/03-storm-workshop.md) records model details, scoped connections and upstream study. [The roadmap](docs/roadmap.md) includes the first Sky Post courier loop at Willow Post Office; girl witch, boy wizard and nonbinary sorcerer presets, a freely available ribbon example and Bramble’s optional rival challenge are implemented. Bramble’s generated challenges are implemented; the six real packing orders remain authored examples. Deliveries are the play; no play-credit gate is planned.
+Open `#explore` for the original connected-adventure directory. Workshop, Water Lab, café, orchard, English Paris and measurement/fractions activities offer contextual links. These are thematic invitations, distinct from Marble’s actual prerequisite links. Navigation preserves waiting activities. [Spec 03](docs/specs/03-storm-workshop.md) records model details, scoped connections and upstream study. [The earlier roadmap](docs/roadmap-2026-10-22-pre-merge.md#delivery-sequence) records the first Sky Post courier loop at Willow Post Office; girl witch, boy wizard and nonbinary sorcerer presets, a freely available ribbon example and Bramble’s optional rival challenge are implemented. Bramble’s generated challenges are implemented; the six real packing orders remain authored examples. Deliveries are the play; no play-credit gate is planned.
 
 ## Willow Post Office and Sky Post
 
