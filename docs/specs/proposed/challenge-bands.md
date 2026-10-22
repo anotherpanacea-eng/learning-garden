@@ -1,6 +1,6 @@
 # Challenge bands: one story, different starting challenges
 
-Status: **proposal revised after independent specification review** (2026-10-22). Unnumbered: the builder assigns a spec number. No implementation is included. The first build below needs independent clearance of this revision.
+Status: **proposal revised after independent specification review** (2026-10-22). Unnumbered: the builder assigns a spec number. No implementation is included. The bounded Café specification is independently cleared at the revision recorded in [the review receipt](../../reviews/challenge-bands-spec-review.md); implementation has not started.
 
 ## Purpose and longer-term direction
 
