@@ -4,6 +4,7 @@ const defs={
 };
 export const joiningCases=Object.values(defs);
 export const joiningSupport=['picturedSource','joined','handling','help','example','narrationRequested','together','feedback'];
+export const joiningBundleSignatures=Object.freeze(['bundle:0:2:4','bundle:0:1:3','bundle:0:1:7','bundle:0:3:7','bundle:0:4:1','bundle:0:3:0']);
 const clone=x=>JSON.parse(JSON.stringify(x));
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const keys=(x,expected)=>object(x)&&Object.keys(x).sort().join('|')===expected.slice().sort().join('|');
@@ -43,16 +44,18 @@ function validWork(w,id,unknown){
  return true;
 }
 export function validJoiningOrders(root){
- if(!keys(root,['version','currentCase','cases',...(object(root)&&Object.hasOwn(root,'recovered')?['recovered']:[])])||root.version!==1||!known(root.currentCase)||!object(root.cases)||!Object.hasOwn(root.cases,root.currentCase)||Object.keys(root.cases).length>2)return false;
+ if(!keys(root,['version','currentCase','cases','shownBundleExamples',...(object(root)&&Object.hasOwn(root,'recovered')?['recovered']:[])])||root.version!==1||!known(root.currentCase)||!object(root.cases)||!Object.hasOwn(root.cases,root.currentCase)||Object.keys(root.cases).length>2||!list(root.shownBundleExamples,s=>joiningBundleSignatures.includes(s)))return false;
  const unknown=Object.hasOwn(root,'recovered');return Object.entries(root.cases).every(([id,w])=>!!known(id)&&validWork(w,id,unknown));
 }
 export function joiningState(state){return Object.hasOwn(state,'joiningOrders')?validJoiningOrders(state.joiningOrders)?state.joiningOrders:null:undefined;}
+export function joiningHistoryUnknown(state){return Object.hasOwn(state,'joiningOrders')&&(joiningState(state)===null||Object.hasOwn(state.joiningOrders,'recovered'));}
+export function noteJoiningExamples(state,signatures){if(!Object.hasOwn(state,'joiningOrders')||!list(signatures,s=>joiningBundleSignatures.includes(s)))return false;const root=joiningState(state);if(!root)return false;let changed=false;for(const signature of signatures)if(!root.shownBundleExamples.includes(signature)){root.shownBundleExamples.push(signature);changed=true;}return changed;}
 export function joiningView(state){const root=joiningState(state);if(root===null)return {unsupported:true,raw:state.joiningOrders};if(root===undefined)return {absent:true};const work=root.cases[root.currentCase];return {root,work,source:work.source,model:work.model,feedback:work.history.find(h=>h.id===work.feedbackId)||null,priorExposureUnknown:Object.hasOwn(root,'recovered')};}
 function initialModel(source){return {joined:false,loosePip:4,looseDot:source.dot%10,framePip:0,frameDot:0,newTenPip:0,newTenDot:0};}
 function newWork(source,familiar=false){return {source:clone(source),model:initialModel(source),raw:'',support:['picturedSource'],helpOpen:false,exampleOpen:false,error:null,feedbackId:null,history:[],nextCheckId:1,kept:null,familiar};}
 function change(state,fn){const root=joiningState(state);if(!root||!fn(root,root.cases[root.currentCase]))return false;state.joiningOrders=root;return true;}
 const mark=(w,fact)=>{if(!w.support.includes(fact))w.support.push(fact);};
-export function startJoiningOrder(state,id){const source=known(id),root=joiningState(state);if(!source||root===null)return false;if(root===undefined){state.joiningOrders={version:1,currentCase:id,cases:{[id]:newWork(source)}};return true;}if(root.cases[id])root.cases[id].familiar=true;else root.cases[id]=newWork(source,true);root.currentCase=id;return true;}
+export function startJoiningOrder(state,id){const source=known(id),root=joiningState(state);if(!source||root===null)return false;if(root===undefined){state.joiningOrders={version:1,currentCase:id,cases:{[id]:newWork(source)},shownBundleExamples:[]};return true;}if(root.cases[id])root.cases[id].familiar=true;else root.cases[id]=newWork(source,true);root.currentCase=id;return true;}
 export function joinOrders(state){return change(state,(r,w)=>{if(w.model.joined)return false;w.model.joined=true;mark(w,'joined');return true;});}
 export function moveJoiningOne(state,origin,toFrame){return change(state,(r,w)=>{if(!w.model.joined||!['pip','dot'].includes(origin)||typeof toFrame!=='boolean')return false;const cap=w.model.framePip+w.model.frameDot;const loose=origin==='pip'?'loosePip':'looseDot',frame=origin==='pip'?'framePip':'frameDot';if(toFrame&&(w.model[loose]===0||cap===10)||!toFrame&&w.model[frame]===0)return false;w.model[loose]+=toFrame?-1:1;w.model[frame]+=toFrame?1:-1;mark(w,'handling');return true;});}
 export function wrapJoiningTen(state){return change(state,(r,w)=>{const m=w.model;if(!m.joined||m.framePip+m.frameDot!==10||m.newTenPip+m.newTenDot)return false;m.newTenPip=m.framePip;m.newTenDot=m.frameDot;m.framePip=0;m.frameDot=0;mark(w,'handling');return true;});}
@@ -63,4 +66,4 @@ export function checkJoiningTotal(state){return change(state,(r,w)=>{if(!safe(w.
 export function keepJoiningDraft(state){return change(state,(r,w)=>{w.kept={source:clone(w.source),model:clone(w.model),raw:w.raw,support:[...w.support],latestCheck:w.history.length?clone(w.history.at(-1)):null,familiar:w.familiar||w.history.length>0||Object.keys(r.cases).length>1,priorExposureUnknown:Object.hasOwn(r,'recovered')};return true;});}
 export function useJoiningSupport(state,fact){return change(state,(r,w)=>{if(!['narrationRequested','together'].includes(fact))return false;mark(w,fact);return true;});}
 export function openJoiningHelp(state,kind){return change(state,(r,w)=>{if(!['help','example'].includes(kind))return false;if(kind==='help')w.helpOpen=true;else w.exampleOpen=true;mark(w,kind);return true;});}
-export function recoverJoiningOrders(state){if(!Object.hasOwn(state,'joiningOrders')||joiningState(state)!==null)return false;const raw=clone(state.joiningOrders),source=defs['steady-orders'];state.joiningOrders={version:1,currentCase:source.id,cases:{[source.id]:newWork(source,true)},recovered:raw};return true;}
+export function recoverJoiningOrders(state){if(!Object.hasOwn(state,'joiningOrders')||joiningState(state)!==null)return false;const raw=clone(state.joiningOrders),source=defs['steady-orders'];state.joiningOrders={version:1,currentCase:source.id,cases:{[source.id]:newWork(source,true)},shownBundleExamples:[],recovered:raw};return true;}

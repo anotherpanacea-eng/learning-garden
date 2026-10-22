@@ -2,6 +2,11 @@ import assert from 'node:assert/strict';
 import * as J from '../dist/joining-orders-core.mjs';
 const copy=x=>structuredClone(x),work=s=>J.joiningView(s).work,model=s=>work(s).model;
 const make=id=>{const s={};assert.equal(J.startJoiningOrder(s,id),true);return s;};
+{
+ const s=make('steady-orders');assert.deepEqual(s.joiningOrders.shownBundleExamples,[]);assert.equal(J.noteJoiningExamples(s,['bundle:0:2:4','bundle:0:1:3']),true);assert.equal(J.noteJoiningExamples(s,['bundle:0:2:4']),false);assert.deepEqual(s.joiningOrders.shownBundleExamples,['bundle:0:2:4','bundle:0:1:3']);
+ for(const list of [['bundle:0:2:4','bundle:0:2:4'],['bundle:0:9:9'],[{}]]){const bad=copy(s);bad.joiningOrders.shownBundleExamples=list;assert.equal(J.joiningState(bad),null);}
+ const legacy=copy(s);delete legacy.joiningOrders.shownBundleExamples;const raw=copy(legacy.joiningOrders);assert.equal(J.joiningState(legacy),null,'pre-fold chooser exposure cannot be treated as unseen');assert.equal(J.joiningHistoryUnknown(legacy),true);assert.equal(J.recoverJoiningOrders(legacy),true);assert.deepEqual(legacy.joiningOrders.recovered,raw);assert.deepEqual(legacy.joiningOrders.shownBundleExamples,[]);assert.equal(J.joiningHistoryUnknown(legacy),true);
+}
 const actions=[
  s=>J.joinOrders(s),s=>J.moveJoiningOne(s,'pip',true),s=>J.moveJoiningOne(s,'dot',true),
  s=>J.moveJoiningOne(s,'pip',false),s=>J.moveJoiningOne(s,'dot',false),
