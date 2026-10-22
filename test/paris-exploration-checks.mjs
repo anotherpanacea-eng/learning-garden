@@ -82,5 +82,7 @@ for(const destination of parisDestinations){
  const first=s.garden.observations.find(o=>o.status==='answered');first.readingTools=null;const raw=json(s.garden.observations);
  check(parisPlan(s,'bookstall').variant!==3,'unreadable support cannot justify longer text');
  check(json(s.garden.observations)===raw,'suggestion never rewrites historical support or outcomes');
+ const latest=s.garden.visits.at(-1).id;for(const o of s.garden.observations.filter(o=>o.visitId===latest&&o.status==='answered'))o.readingTools=null;
+ check(parisPlan(s,'bookstall').reason.includes('details are incomplete'),'uncertain latest support never says help was used');
 }
 console.log(checks+' Paris exploration, adaptation, route and restore checks passed.');

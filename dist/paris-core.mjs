@@ -31,7 +31,7 @@ function suggestion(state,destination){
  const base=recent.at(-1).parisVariant,lastSupport=recent.findLastIndex(o=>explicitSupport(o)||retry(o));
  // A later answer on the same passage cannot erase its earlier request for support.
  const latest=recent.at(-1),latestVisit=latest.visitId;
- if(lastSupport>=0&&recent[lastSupport].parisVariant===base&&recent.slice(lastSupport).every(o=>o.visitId===latestVisit))return {variant:Math.max(1,base-1),reason:base===1?'Keep a little text and explore together with any help you like. Every length is available.':'The last story used help or another try. A little less text may leave more room to explore together; every length is available.'};
+ if(lastSupport>=0&&recent[lastSupport].parisVariant===base&&recent.slice(lastSupport).every(o=>o.visitId===latestVisit))return {variant:Math.max(1,base-1),reason:parisSupportUncertain(recent[lastSupport])?'Earlier reading support details are incomplete. You can try a little text together; every length stays available.':base===1?'Keep a little text and explore together with any help you like. Every length is available.':'The last story used help or another try. A little less text may leave more room to explore together; every length is available.'};
  const distinct=new Set();
  for(const o of recent.slice(lastSupport+1).filter(o=>o.parisVariant===base)){
   const v=state.garden.visits.find(v=>v.id===o.visitId);
