@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 175 explicit current references across 96 unique source topics: authored question references, scoped practice or supplied explanations. The other 1494 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 177 explicit current references across 97 unique source topics: authored question references, scoped practice or supplied explanations. The other 1493 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -23,7 +23,7 @@ There are 175 explicit current references across 96 unique source topics: author
 | Life Skills | 37 | 0 | 37 |
 | Mathematics | 503 | 65 | 438 |
 | Personal & Social Development | 88 | 0 | 88 |
-| Science | 547 | 15 | 532 |
+| Science | 547 | 16 | 531 |
 
 Mathematics currently has the broadest authored task collection. Science and English have narrow guided investigations/comprehension references. History, life skills, personal/social development and learning-to-learn require explicit content/evidence design; fictional settings, friendly characters, help use and game completion do not establish those abilities. The source’s Computing topics are grouped under “Artificial Intelligence,” including step-by-step instructions; preserve that source organization without mistaking it for a complete computing curriculum.
 
@@ -97,6 +97,8 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Water Evidence Shelf (`#science/evidence`, local build) | search, read | Choose clue-plus-possible-explanation notes over three supplied before/after water illustrations. Transient fictional-picture practice; no real observation, physical investigation, measured amount, unique-cause proof or water-cycle attainment. |
 | Garden Paving (`#numbers/paving`, local build) | build, read | Preserve a supplied old square and add two disjoint side strips plus a corner to build the next square. Eleven finite plans through 12 by 12 distinguish tiles added, finished total and model completion; no general pattern rule, algebra or physical area measurement. |
 | Two ways to move (`#living/movement`, local build) | read | Manually step and compare two supplied land-snail and earthworm movement diagrams. A muscular-foot versus segmented-body/bristle explanation; no real observation, leg-counting response, three-way movement classification or organism-system attainment. |
+| Lantern Circuit Bench (`#workshop/lantern`, local build) | build, read | Add and remove four fixed contact links around one supplied cell/filament-bulb picture, with open, glow and unsupported-bypass states. Supplied model explanation, not physical apparatus, standard-symbol drawing, switch/buzzer construction or current/voltage measurement. |
+| Ribbon Recut Table (`#workshop/recut`, local build) | build, read | Reversibly split or join every equal space in five supplied ribbons while their whole and colored endpoint remain fixed. Equivalent labels are supplied; no independent explanation, arbitrary conversion, physical measurement or saved attainment. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -178,7 +180,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Science / Dinosaurs & Paleontology | 29 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Earth's Systems | 18 | 0 | Change · measure · explain; Build · transform · relate |
 | Science / Ecosystems & Habitats | 36 | 3 | Search · inspect · compare; Read · infer · support |
-| Science / Energy | 28 | 0 | Change · measure · explain; Build · transform · relate |
+| Science / Energy | 28 | 1 | Change · measure · explain; Build · transform · relate |
 | Science / Forces & Motion | 27 | 1 | Change · measure · explain; Build · transform · relate |
 | Science / Insects & Minibeasts | 22 | 5 | Search · inspect · compare; Read · infer · support |
 | Science / Matter & Materials | 40 | 1 | Change · measure · explain; Build · transform · relate |
@@ -375,6 +377,8 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Observation vs Interpretation](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Hw70LI5xza) | scoped-practice / Water Evidence Shelf (local build) / [source](../dist/water-evidence-ui.mjs) | Distinguish a visible clue from a possible cause in three illustrated before/after cards. Choices are transient and supplied; no real observation, learner-written explanation or single-route proof. This topic already has other scoped references. |
 | [Shape patterns](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_A-FyLLLLzy) | scoped-practice / Garden Paving (local build) / [source](../dist/garden-paving-ui.mjs) | Build one next square from a supplied two-strips-and-corner construction, distinguishing new pieces from final total. No three-term prediction, learner-generated general rule, constant-additive pattern or independent explanation; times-table patterns remain broader. |
 | [How minibeasts move](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt__7hXSTbu9s) | explanation / Two ways to move (local build) / [source](../dist/body-movement-ui.mjs) | Step two supplied ground-movement diagrams and read how a snail foot and worm shape/bristles contribute. No real minibeast observation, three movement ways, leg counting, independent matching or broad recognition; names and explanation are supplied. |
+| [Building a simple circuit](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_DA7-JYRvtP) | explanation / Lantern Circuit Bench (local build) / [source](../dist/lantern-circuit-ui.mjs) | Use a finite supplied cell/wire/filament-bulb model to compare open and complete contact paths. No physical circuit building, switch or buzzer, independent component naming/explanation, appliance recognition or quantitative electricity. |
+| [Equivalent fractions](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_FbDKeLfBCo) | explanation / Ribbon Recut Table (local build) / [source](../dist/ribbon-recut-ui.mjs) | Split/join equal spaces in five supplied same-whole ribbons, keeping colored length fixed while equivalent labels change. No learner-drawn diagram, independent explanation, arbitrary equivalence, set fractions or number-line point placement. This topic already has a separate scoped practice reference. |
 
 ## Sources, licensing and maintenance
 
