@@ -1,6 +1,6 @@
 # Paris: keep the page that was actually read
 
-Status: independently reviewed specification, 2026-10-22. Claude reviewed the initial candidate and focused fold; the final visit-filter clarification below resolves its remaining P2 as requested. Implementation and its independent review remain pending. This is the saved-visit prerequisite for [Library read-alouds](proposed/library-read-alouds.md), not a new lesson or a new coverage claim.
+Status: independently reviewed specification, 2026-10-22. Claude reviewed the initial candidate and focused fold; the final visit-filter clarification below resolves its remaining P2 as requested. Implementation independently cleared at `923ba4e`; source and browser verification are recorded in [the implementation receipt](../reviews/73-paris-source-implementation-review.md). Integration and deployment remain pending. This is the saved-visit prerequisite for [Library read-alouds](proposed/library-read-alouds.md), not a new lesson or a new coverage claim.
 
 ## Problem and scope
 
