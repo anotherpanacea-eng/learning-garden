@@ -1,3 +1,4 @@
+import {notePendingBrambleFactExposure} from '../dist/post-rival.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
@@ -68,7 +69,7 @@ for(const raw of [null,[],{version:87,note:'<img src=x onerror=alert(1)>'}]){
  // Run the app's real exposure bridge with real core functions, rather than a test substitute.
  const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8'),source=app.slice(app.indexOf('function exposeStoryFacts('),app.indexOf('function requestParis('));
  const s=fresh(),q=checkin.find(q=>q.a===4&&q.b===3);ok(q,'legacy reversed 4×3 fixture exists');s.baseline.draft={questionId:q.id,attempts:[],exposed:false};
- const context=vm.createContext({state:s,noteLegacyExposure,noteGardenFactExposure,checkin});vm.runInContext(source,context);
+ const context=vm.createContext({state:s,noteLegacyExposure,noteGardenFactExposure,notePendingBrambleFactExposure,checkin});vm.runInContext(source,context);
  chooseGroupCase(s,'cafe','little-table');context.shown=equalGroupPairsShown(s,'cafe');vm.runInContext('exposeStoryFacts({facts:shown})',context);ok(s.baseline.draft.exposed&&s.exposures.includes('3x4'),'bench marks matching waiting legacy question exposed');
  useGroupSupport(s,'cafe','example');context.shown=equalGroupPairsShown(s,'cafe');vm.runInContext('exposeStoryFacts({facts:shown})',context);ok(s.exposures.includes('2x3'),'smaller example marks its separate fact exposed');eq(s.baseline.observations.length,0,'no baseline answer or success created');
  ok(app.includes("else if(groupBench)"),'bench is routed before normal game pages');ok(equalGroupEntry('cafe').includes('#cafe/groups')&&equalGroupEntry('bramble').includes('#post/groups'),'entries lead to both benches');

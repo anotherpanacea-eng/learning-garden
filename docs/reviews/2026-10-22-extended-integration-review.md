@@ -1,0 +1,9 @@
+# Three further increments: integration review
+
+The local composed runtime at `14b6f75aa06a87b4fdb9b90919b42539b9f84055` adds Willow Sorting Desk (`3d6f744`), Hundredths Bridge (`cb9bdf50`) and My Count Collection (`5d16dd1`) to the five-increment candidate `efa753c`. Each increment has separate internal specification and implementation reviews; this receipt concerns their shared integration seams. No external Claude release review is claimed.
+
+A separate internal reviewer cleared this exact composition with no P1/P2 findings. Reviewed activity modules and their focused tests match their independently cleared originals. The five earlier feature modules remain preserved. The review inspected imports, routes, activity-specific exclusions, all three stylesheets, notes and raw optional-root import handling, actual formatted-report callbacks, and Hundredths’ detached exposure preview and waiting-Bramble familiarity handling. A separate composed probe confirmed simultaneous optional roots and raw unreadable values remain preserved.
+
+Root verification passed all **129 source suites** and **380 actual Chrome assertions** in the composed app: Sorting Desk61, Hundredths250 and Count Collection69. These journeys cover the new activities at phone/tablet widths, actual note-file journeys, saved state, diagram behavior and relevant focus/refusal boundaries. The five-increment parent separately passed126 source suites and595 Chrome assertions before this addition. The generated curriculum atlas is unchanged; no complete-topic or learning-efficacy claim follows.
+
+The extended draft is stacked on the five-increment draft so focused component differences remain reviewable. Both remain subject to final independent Claude release clearance and fresh root checks before any authorized merge. Deployment to the intended site remains deferred.

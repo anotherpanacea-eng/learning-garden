@@ -41,6 +41,8 @@ function brambleSource(state){
  const p=state.postOffice;if(p?.version!==1||!validBrambleNotebook(p)||!p.bramble)return null;
  // Append/finish order, not allocation ID: two waiting deliveries may finish out of order.
  for(const r of p.bramble.history.slice().reverse())if(r.task.kind==='multiply'&&(r.attempts.length||r.resolution==='together')){
+  // A supplied matching fact is not a fresh first-match result or a request for help.
+  if(r.priorFactShown)return null;
   const outcome=r.attempts.length>1||r.attempts.some(a=>!a.correct)?'retry':!r.attempts.length?'explored':r.supported||r.audioRequested||r.attempts[0].afterSupport||r.method==='together'?'supported':'first-match';
   return connectionFrom('bramble',r.id,'direct',r.task.a,r.task.b,outcome,Object.hasOwn(r,'connection')?'familiar':'unknown');
  }
