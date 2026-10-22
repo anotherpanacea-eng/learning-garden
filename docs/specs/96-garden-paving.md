@@ -1,6 +1,6 @@
 # 96 · Garden Paving: old tiles, new tiles, whole square
 
-**Status: independent root specification/content/rendered-art review cleared `f76b410` after the scoped exposure-API fold. Implementation is in progress; its separate exact-head review and release gates remain outstanding.** Base: reviewed draft PR98, `8c7cd230d3c42d540f522a047ce3d4704b71c5c8`. This is not implementation or release clearance. See [source audit 96](../source-audits/96-garden-paving.md) and the [original drawing mock](assets/96-garden-paving.svg).
+**Status: independent root specification/content/rendered-art review cleared `f76b410`; separate internal implementation review cleared `3b4ddb5` after the source-template repair.** See the [implementation review receipt](../reviews/96-garden-paving-review.md) for exact heads and local verification, and the [current roadmap](../roadmap.md) for publication status. Base: reviewed draft PR98, `8c7cd230d3c42d540f522a047ce3d4704b71c5c8`. Release clearance remains separate. See [source audit 96](../source-audits/96-garden-paving.md) and the [original drawing mock](assets/96-garden-paving.svg).
 
 ## One missing action
 
