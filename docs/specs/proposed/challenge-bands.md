@@ -27,6 +27,7 @@ The band chooses a **default**, and every activity keeps its own control where o
 - A control listed in `picked` keeps its stored value whatever the band.
 - A control not listed in `picked` takes the band's default. For a save made before this feature, that covers every stored value, which is acceptable because a missing band reads as `seedling` and `seedling` maps to today's defaults. Nothing changes for an existing explorer until a grown-up picks a band.
 - When a grown-up picks a band, Grown-up notes say plainly that unchanged activities will start at the new band, and that saved work and kept records stay as they are.
+- Only controls whose value is already saved can go in `picked`. The puzzle level is a session-only choice today (`puzzleLevel`, `dist/app.mjs:91`), so it stays outside `picked`: the band sets its suggestion on each visit, and a choice made in that visit lasts until the page reloads.
 - `picked` holds only known activity codes. An unknown or malformed entry is ignored, and nothing else is lost.
 
 1. **Existing controls take the band as their default:**
