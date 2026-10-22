@@ -84,10 +84,10 @@ export function noteReturningExamples(state,signatures){
  if(!list(signatures,s=>knownReturningSignatures.includes(s)))return false;
  return change(state,r=>{let changed=false;for(const s of signatures)if(!r.shownBundleExamples.includes(s)){r.shownBundleExamples.push(s);changed=true;}return changed;});
 }
-export function recoverReturning(state){
+export function recoverReturning(state,canExport=()=>true){
  if(!Object.hasOwn(state,'returningOrders')||returningState(state)!==null)return false;
  const next=blankRoot();next.retainedRaw=copy(state.returningOrders);
  const notebook={...state,returningOrders:next};
- if(!recoveryFitsProgressLimits(notebook))return false;
+ if(!recoveryFitsProgressLimits(notebook)||!canExport(notebook))return false;
  state.returningOrders=next;return true;
 }
