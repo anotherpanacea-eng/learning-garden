@@ -461,3 +461,10 @@ Run `node test/body-clues-checks.mjs`, `node test/body-clues-integration-checks.
 Lantern Circuit Bench at `#workshop/lantern` offers four open screen-model cards. Add or remove four labelled connections, compare a path through two different bulb contacts, and keep an open, glowing or paused arrangement. A wire-only bypass pauses the model; it predicts no physical current, heat or brightness. Learn, Connect and Kept stay open. See [spec98](docs/specs/98-lantern-circuit-bench.md) and its [source audit](docs/source-audits/98-lantern-circuit-bench.md).
 
 Run `node test/lantern-circuit-checks.mjs`; with `dist` served locally and Playwright installed, run `CIRCUIT_TEST_URL=http://127.0.0.1:4173/ node test/lantern-circuit-browser.js`. `PLAYWRIGHT_MODULE`, `CHROME_PATH` and optional `CIRCUIT_ARTIFACTS` select local dependencies and temporary screenshots. The [current roadmap](docs/roadmap.md) tracks publication status.
+
+
+## Ribbon Recut Table
+
+At `#workshop/recut`, add and remove dividing marks while one whole ribbon, its colored length and its flag stay fixed. Five open cases connect halves, thirds and quarters with smaller equal units. This is a transient supplied teaching model: it creates no saved response or attainment record, and existing Fraction Trail, Same Amount, New Cuts and Lantern work stays separate. See [spec100](docs/specs/100-ribbon-recut-table.md), the [source audit](docs/source-audits/100-ribbon-recut-table.md) and [review receipt](docs/reviews/100-ribbon-recut-review.md). The [current roadmap](docs/roadmap.md) tracks publication separately.
+
+Run `node test/ribbon-recut-checks.mjs`; the optional `node test/ribbon-recut-browser.js` uses `RECUT_TEST_URL` for a local `dist` server and installed Playwright/Chrome through the existing browser-test environment variables. Local checks do not establish physical-device behavior or learning gains.
