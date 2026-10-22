@@ -40,4 +40,5 @@ export function bindRecut({render,focus,explorerId}){
  root.querySelectorAll('[data-recut-move]').forEach(b=>b.addEventListener('click',()=>{if(!live())return;const next=recutMove(visit,b.dataset.recutMove);if(!next)return;visit=next;const reverse=b.dataset.recutMove==='split'?'join':'split';redraw(next.stage===0||next.stage===recutCase(next.caseId).stages.length-1?`[data-recut-move="${reverse}"]`:`[data-recut-move="${b.dataset.recutMove}"]`);}));
  root.querySelectorAll('[data-recut-example]').forEach(b=>b.addEventListener('click',()=>{if(!live())return;visit={...visit,exampleFrame:Number(b.dataset.recutExample)};redraw(`[data-recut-example="${visit.exampleFrame}"]`,true);}));
  root.querySelector('#recut-example')?.addEventListener('toggle',e=>{if(!e.target.open&&live()&&visit.exampleFrame!==0){visit={...visit,exampleFrame:0};redraw('#recut-example > summary');}});
+ root.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',e=>{if(!live()){e.preventDefault();e.stopImmediatePropagation();}},{capture:true}));
 }
