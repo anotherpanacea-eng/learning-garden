@@ -1,0 +1,13 @@
+id,family,word,graphemes,phonemes,proposed_ipa,intended_meaning,review_question,status
+cat,at,cat,c|a|t,k|æ|t,/kæt/,a pictured cat,"c represents /k/ here, not in every word",pending-independent-review
+mat,at,mat,m|a|t,m|æ|t,/mæt/,a floor mat,distinguish mat from blanket in the scene,pending-independent-review
+sat,at,sat,s|a|t,s|æ|t,/sæt/,past action of sit,meaning needs a before/after scene,pending-independent-review
+bat,at,bat,b|a|t,b|æ|t,/bæt/,a toy sporting bat,animal homonym remains legitimate but is not pictured,pending-independent-review
+pin,in,pin,p|i|n,p|ɪ|n,/pɪn/,a pictured badge pin,review pre-nasal /ɪ/; no handling task,pending-independent-review
+tin,in,tin,t|i|n,t|ɪ|n,/tɪn/,a small metal container,review noun familiarity and pre-nasal /ɪ/,pending-independent-review
+fin,in,fin,f|i|n,f|ɪ|n,/fɪn/,a fin on a toy fish,"show the part, not the entire fish; review pre-nasal /ɪ/",pending-independent-review
+bin,in,bin,b|i|n,b|ɪ|n,/bɪn/,a storage bin,do not assume waste-container meaning; review pre-nasal /ɪ/,pending-independent-review
+hop,op,hop,h|o|p,h|ɑ|p,/hɑp/,a small jump by a puppet,review contextual /h/ demonstration and /ɑ/,pending-independent-review
+mop,op,mop,m|o|p,m|ɑ|p,/mɑp/,a cleaning mop,review /ɑ/ and complete final stop,pending-independent-review
+top,op,top,t|o|p,t|ɑ|p,/tɑp/,a spinning toy,not the highest point; review /ɑ/,pending-independent-review
+pop,op,pop,p|o|p,p|ɑ|p,/pɑp/,a bubble bursting,two /p/ positions; neither soda nor a person,pending-independent-review
