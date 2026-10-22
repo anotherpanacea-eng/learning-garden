@@ -9,3 +9,5 @@ The reviewer checked local documents and bundled topic counts, not GitHub PR bod
 A subsequent root status refresh records PR73’s separately approved exposure repair and PR66’s newly advanced runtime head. These are verified status updates, not a new review of PR66 or the multi-branch runtime.
 
 Final root follow-up confirmed the Town supplied-fact gap raised during composition review; the roadmap now records that release hold. It also records the exact locally tested composition and excludes Joining Orders/text branches from that claim.
+
+At the final checkpoint, Town’s spec fold is approved at `cb178b3` but its runtime remains unrepaired. The PR66 choice/index fix is independently approved at `5ddf222`; this does not clear the whole text branch. Integration draft PR76 preserves the tested composition with its hold.
