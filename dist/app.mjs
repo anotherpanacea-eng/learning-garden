@@ -1,3 +1,4 @@
+import {hundredthsPage,hundredthsEntry,bindHundredths} from './hundredths-ui.mjs';
 import {tenthsPage,tenthsEntry,bindTenths} from './tenths-ui.mjs';
 import {sortingPage,bindSorting} from './sorting-desk-ui.mjs';
 import {cafeStartPanel,bindCafeStart} from './cafe-start-ui.mjs';
@@ -51,6 +52,7 @@ import {adaptivePairsShown as spiralPairsShown,startAdaptiveSpiral} from './livi
 import {livingPage,bindLiving} from './living-ui.mjs';
 import {ensurePostOffice,currentPostOffice,postOfficeView} from './post-office-core.mjs';
 import {postOfficePage,bindPostOffice} from './post-office-ui.mjs';
+import {notePendingBrambleFactExposure} from './post-rival.mjs';
 import {ensureWorkshop} from './workshop-core.mjs';
 import {workshopPage,bindWorkshop} from './workshop-ui.mjs';
 import {learningInvitations,learningExplore} from './learning-invitations.mjs';
@@ -224,7 +226,7 @@ function render(){
   const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters',instructionBench=['post','loft'].includes(root)&&slug==='instructions';
-  const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return',joiningBench=root==='numbers'&&slug==='join',tenthsBench=root==='numbers'&&slug==='tenths';
+  const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return',joiningBench=root==='numbers'&&slug==='join',tenthsBench=root==='numbers'&&slug==='tenths',hundredthsBench=root==='numbers'&&slug==='hundredths';
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',batchBench=root==='cafe'&&slug==='batches',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
@@ -243,6 +245,7 @@ function render(){
   else if(root==='numbers'&&slug==='path')html=willowPathPage(state);
   else if(tenthsBench)html=tenthsPage(state);
   else if(sortingBench)html=sortingPage(state);
+  else if(hundredthsBench)html=hundredthsPage(state);
   else if(joiningBench){const view=renderJoiningOrders(state);html=view.html;joiningExamples=view.examples;exposeStoryFacts({facts:view.facts});}
   else if(fractionBench)html=renderFractionTrail(state).html+tenthsEntry();
   else if(recipeBench)html=measuringRecipesPage(state)+fieldKitEntry('jug');
@@ -289,7 +292,7 @@ function render(){
       else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(isParisReadingVisit(visit)?parisNode(visit,visit.node):storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
     }else html=storyHub(state);
   }
-  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+returningOrdersEntry()+joiningOrdersEntry()+tenthsEntry()+willowPathEntry()+'<section class="resume-strip garden-progress-link"><span>Every seed you plant is a small hello to the garden.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
+  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+bundleExchangeEntry()+returningOrdersEntry()+joiningOrdersEntry()+tenthsEntry()+hundredthsEntry()+willowPathEntry()+'<section class="resume-strip garden-progress-link"><span>Every seed you plant is a small hello to the garden.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
   else if(screen==='adventure-end')html=adventureEnd();
   else if(root==='checkin'&&areaById(slug)){
     const t=beginTrail(state,slug);save();
@@ -308,8 +311,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft');
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!hundredthsBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!tenthsBench&&!hundredthsBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
@@ -380,6 +383,7 @@ function bindBroadExtras(){
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
 function bind(){
+ bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target)});
  bindTenths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindSorting(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindCafeStart(state,{save,render,focus:focusElement});
@@ -453,11 +457,12 @@ function bind(){
  $('#download')?.addEventListener('click',()=>{const report=notesReport(state);downloadText(JSON.stringify(report,null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`);});
  $('#reset')?.addEventListener('click',showReset);
 }
-function exposeStoryFacts(node,except){
+function exposeStoryFacts(node,except,target=state){
  for(const pair of node.facts||[]){
-  noteLegacyExposure(state,pair);noteGardenFactExposure(state,pair,except);
-  state.exposures??=[];const key=`${pair[0]}x${pair[1]}`;if(!state.exposures.includes(key))state.exposures.push(key);
-  const draft=state.baseline.draft,q=draft&&checkin.find(x=>x.id===draft.questionId),fact=q?.fact||(q&&[q.a,q.b]);
+  noteLegacyExposure(target,pair);noteGardenFactExposure(target,pair,except);
+  notePendingBrambleFactExposure(target,pair);
+  target.exposures??=[];const key=`${pair[0]}x${pair[1]}`;if(!target.exposures.includes(key))target.exposures.push(key);
+  const draft=target.baseline.draft,q=draft&&checkin.find(x=>x.id===draft.questionId),fact=q?.fact||(q&&[q.a,q.b]);
   if(fact&&fact.every(Number.isFinite)&&((fact[0]===pair[0]&&fact[1]===pair[1])||(fact[0]===pair[1]&&fact[1]===pair[0])))draft.exposed=true;
  }
 }
