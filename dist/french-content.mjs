@@ -16,7 +16,7 @@ export const frenchLessons=[
   words:'un bateau = a boat; en papier = made of paper; un bassin = a pool; une feuille = a leaf; sourit = smiles.',
   questions:[
    {title:'A tiny passenger',prompt:'Qu’est-ce qui tombe dans le bateau ?',choices:['Une feuille.','Un livre.','Un chat.'],answer:0,skill:'Find an action and its subject in French',hint:'Find the sentence with « tombe » (falls).',explanation:'« Une feuille tombe dans le bateau. » A leaf falls into the boat.'},
-   {title:'Where does it float?',prompt:'Où Pip met-il le bateau ?',choices:['Sur la table.','Dans un petit bassin.','Sous une chaise.'],answer:1,skill:'Understand a French place phrase',hint:'Look at the sentence beginning « Il met » (He puts).',explanation:'Pip puts the boat « dans un petit bassin » — in a small pool.'}
+   {title:'Where does it float?',prompt:'Où Pip met-il le bateau ?',choices:['Sur la table.','Dans un petit bassin.','Sous une chaise.'],answer:1,skill:'Understand a French place phrase',hint:'Look at the sentence beginning « Il met » (He puts).',explanation:'Pip puts the boat « dans un petit bassin », in a small pool.'}
   ],postcard:'Imagine a new passenger. Try « Une feuille est dans le bateau. » Draw or describe a different passenger together; there is no marked answer.'},
  {id:'french-rooftops',title:'Le jardin sur le toit',place:'In the rooftop garden',symbol:'🌱',
   invitation:'Help with the rooftop garden and follow what happens first and next.',

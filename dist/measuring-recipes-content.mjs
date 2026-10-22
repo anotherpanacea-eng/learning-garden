@@ -7,7 +7,7 @@ export const RECIPE_INGREDIENTS=freeze([
  {id:'star-water',name:'star-water',pattern:'stripes',colour:'#b69b58'}
 ]);
 export const RECIPE_MODEL=freeze({id:RECIPE_MODEL_ID,unit:'mL',jugCapacity:500,jarCapacity:500,sourceAmount:1000,transfer:50,
- notice:'Pretend ingredients, exact picture amounts. We are practising reading a scale.',
+ notice:'Pretend ingredients, exact picture amounts. We are practicing reading a scale.',
  details:'Capacity is the most a container can hold. Contained volume is how much liquid is in it now. Our straight-sided picture jug has ten equal 50 mL intervals between eleven marks. This exact picture machine omits real pouring uncertainty, wet surfaces and meniscus reading. The two preparation jars stay separate; their combined amounts on the tray are not a measured mixture volume.'});
 export const RECIPE_CASES=freeze([
  ['welcome-broth','Welcome-back tray','Purl sets out a welcome-back broth tray.',150,100],

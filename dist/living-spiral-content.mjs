@@ -15,7 +15,7 @@ export const spiralConditions=[
  condition('damp-leaves','The leaf patch','leaves',true,true,false,'Under a thick layer of leaves, this cutaway shows damp leaf litter and shade on land.'),
  condition('pond','The pond close-up','pond',false,false,false,'This spot is below the water surface. It is underwater, not the pond bank.'),
  condition('buds','The flower border','buds',false,false,false,'This pictured patch has tightly closed buds. It does not show open flowers with nectar to drink.'),
- condition('nectar','The flower border','flowers',false,false,true,'Here the open flowers are labelled nectar-bearing. This sheltered patch offers nectar to a visiting adult butterfly.'),
+ condition('nectar','The flower border','flowers',false,false,true,'Here the open flowers are labeled nectar-bearing. This sheltered patch offers nectar to a visiting adult butterfly.'),
  condition('nectar-pot','The planted pot','flowerpot',false,false,true,'The pot holds open, nectar-bearing flowers. Their nectar is accessible to the adult butterfly in this picture.'),
  condition('nectar-hedge','Beside the hedge','hedge',false,false,true,'Beside the hedge are open, nectar-bearing flowers. The pictured hedge gives shelter from the wind.')
 ];

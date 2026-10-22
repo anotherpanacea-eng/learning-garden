@@ -1,7 +1,7 @@
 import {PLANT_DAYS,PLANT_SPECIMENS,plantObservation,plantObservationById,PLANT_MODEL} from './plant-study-content.mjs';
 const freeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
 export const FIELD_QUANTITIES=freeze([{id:'stem',label:'Stem length'},{id:'leaf',label:'Leaf spread'},{id:'plants',label:'Number of plants'}]);
-export const FIELD_UNITS=freeze([{id:'mm',label:'Millimetres (mm)'},{id:'cm',label:'Centimetres (cm)'},{id:'plants',label:'Plants'}]);
+export const FIELD_UNITS=freeze([{id:'mm',label:'Millimeters (mm)'},{id:'cm',label:'Centimeters (cm)'},{id:'plants',label:'Plants'}]);
 export const FIELD_TASKS=freeze(['data','chart','draft','source','model','keep']);
 export const FIELD_CASES=freeze(PLANT_DAYS.flatMap(day=>PLANT_SPECIMENS.map(specimen=>{const a=plantObservation(day,'light',specimen),b=plantObservation(day,'dim',specimen);return {id:`light-day-${day}-${specimen}`,day,specimen,question:`In our invented model, on day ${day}, how do specimen ${specimen}'s stem lengths compare in adequate light and too little light?`,targetIds:[a.id,b.id],difference:Math.abs(a.stemMm-b.stemMm),longer:a.stemMm===b.stemMm?'same':a.stemMm>b.stemMm?'light':'dim'};})));
 export const FIELD_SOURCE_MODEL=freeze({id:PLANT_MODEL.id,notice:PLANT_MODEL.notice,sources:PLANT_MODEL.sources});

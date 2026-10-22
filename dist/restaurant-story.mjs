@@ -22,10 +22,10 @@ export const cafeNodes = {
     prompt: 'Which dish could replace thunder-toast? Choose one that is both warm and crunchy.',
     kind: 'choice',
     choices: [
-      'Moon-crunch — warm and crunchy',
-      'Cloud pudding — warm and soft',
-      'Comet curls — warm and crunchy',
-      'Star snaps — cold and crunchy'
+      'Moon-crunch: warm and crunchy',
+      'Cloud pudding: warm and soft',
+      'Comet curls: warm and crunchy',
+      'Star snaps: cold and crunchy'
     ],
     answer: 0,
     answers: [0, 2],

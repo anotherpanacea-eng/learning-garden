@@ -27,7 +27,7 @@ export function fieldDataResult(snapshot){
  return {matches,status,issues,feedback};
 }
 export function fieldChartResult(snapshot){
- const data=fieldDataResult(snapshot),quantity={matches:snapshot.quantity==='stem',feedback:snapshot.quantity==='stem'?'The quantity label says stem length.':'The supplied task compares stem length; your current quantity label differs or is blank.'},unit={matches:snapshot.unit==='mm',feedback:snapshot.unit==='mm'?'The unit label says millimetres (mm).':'The source values are millimetres (mm); your current unit differs or is blank.'};
+ const data=fieldDataResult(snapshot),quantity={matches:snapshot.quantity==='stem',feedback:snapshot.quantity==='stem'?'The quantity label says stem length.':'The supplied task compares stem length; your current quantity label differs or is blank.'},unit={matches:snapshot.unit==='mm',feedback:snapshot.unit==='mm'?'The unit label says millimeters (mm).':'The source values are millimeters (mm); your current unit differs or is blank.'};
  const bars=snapshot.rows.map(({observation:o})=>{const entered=snapshot.values[o.id],matches=entered===null?null:entered===o.stemMm;return {id:o.id,entered,expected:o.stemMm,matches,feedback:entered===null?`Day ${o.day}, ${o.conditionLabel}, ${o.specimen}: no number entered yet; the source is ${o.stemMm} mm.`:`Day ${o.day}, ${o.conditionLabel}, ${o.specimen}: your draft says ${entered}; the supplied stem length is ${o.stemMm} mm.${matches?' The numbers agree.':' The numbers differ.'}`};});
  return {data,quantity,unit,bars,complete:bars.length===2&&bars.every(b=>b.entered!==null),faithful:bars.length===2&&quantity.matches&&unit.matches&&bars.every(b=>b.matches===true)};
 }

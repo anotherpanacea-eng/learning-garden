@@ -10,7 +10,7 @@ export const RAIN_MODEL=freeze({
  limitation:'Our pretend machine holds water in spaces. Real ground has more paths, and water can keep moving.',
  controls:'Each machine has 12 numbered storage slots in 3 rows of 4, the same entrance geometry, outlet and collector. Each receives the stated new rain separately. Only the named factor changes.',
  details:[
-  'One token is the same arbitrary amount of model water. It is not a molecule, a raindrop, a millimetre, a litre or a unit of time. Four-token batches are not rainfall speed.',
+  'One token is the same arbitrary amount of model water. It is not a molecule, a raindrop, a millimeter, a liter or a unit of time. Four-token batches are not rainfall speed.',
   'We chose these capacities and routes. An open entrance fills available slots before surface water moves to the outlet. A sealed lid admits none. Real runoff can begin before storage fills.',
   'Already-stored tokens stay in place in this closed toy. In real ground, water can mix, move onward and drain; wet ground can transmit water. This model leaves out deep drainage, evaporation, plants and changing rain speed.',
   'Different starting water can be a limited analogy for earlier wetness in the same material. Very dry ground does not always absorb readily: texture, compaction and water-repellent dry surfaces can change what happens.',

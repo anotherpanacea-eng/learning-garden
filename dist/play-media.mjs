@@ -62,9 +62,9 @@ export function bindSpeech(){
  function refreshVoices(){
   const all=voices(),available=localVoices(all,activeLanguage),chosen=chooseLocalVoice(all,selectedVoice,activeLanguage),automaticVoice=chooseLocalVoice(all,'',activeLanguage),exact=available.some(v=>voiceKey(v)===selectedVoice),otherLanguage=!exact&&localVoices(all,activeLanguage==='fr'?'en':'fr').some(v=>voiceKey(v)===selectedVoice),missing=!!selectedVoice&&!exact&&!otherLanguage;
   voiceSelect.replaceChildren();
-  const automatic=document.createElement('option');automatic.value='';automatic.textContent=`Automatic local ${languageName()}${automaticVoice?` — ${automaticVoice.name}`:''}`;voiceSelect.append(automatic);
-  if(missing){const option=document.createElement('option');option.value=selectedVoice;option.textContent='Saved voice — unavailable in this browser';voiceSelect.append(option);}
-  for(const voice of available){const option=document.createElement('option');option.value=voiceKey(voice);option.textContent=`${voice.name} (${voice.lang})${voice.default?' — device default':''}`;voiceSelect.append(option);}
+  const automatic=document.createElement('option');automatic.value='';automatic.textContent=`Automatic local ${languageName()}${automaticVoice?`: ${automaticVoice.name}`:''}`;voiceSelect.append(automatic);
+  if(missing){const option=document.createElement('option');option.value=selectedVoice;option.textContent='Saved voice (unavailable in this browser)';voiceSelect.append(option);}
+  for(const voice of available){const option=document.createElement('option');option.value=voiceKey(voice);option.textContent=`${voice.name} (${voice.lang})${voice.default?' (device default)':''}`;voiceSelect.append(option);}
   voiceSelect.value=exact||missing?selectedVoice:'';
   availability.textContent=missing?`Your saved voice is unavailable for ${languageName()} in this browser. Refresh after voices load, or choose another local voice or Automatic. No replacement will play silently.`:chosen?`${selectedVoice&&!exact?'Your saved choice is for the other language. This passage uses automatic local speech. ':''}${languageName()} voice to preview: ${chosen.name}.`:`${otherLanguage?'Your saved choice is for the other language and is kept. ':''}No local ${languageName()} voices are available yet. Refresh after voices load, or read together.`;
   voiceSelect.disabled=!available.length&&!selectedVoice;controls.querySelector('[data-preview-voice]').disabled=!chosen;
