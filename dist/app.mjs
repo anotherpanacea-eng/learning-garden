@@ -26,6 +26,7 @@ import {createBellPlayer} from './bell-studio-audio.mjs';
 import {travelersArchivePage,travelersArchiveEntry,bindTravelersArchive} from './travelers-archive-ui.mjs';
 import {travelersArchive,noteArchiveSources} from './travelers-archive-core.mjs';
 import {measuringRecipesPage,measuringRecipesEntry,bindMeasuringRecipes} from './measuring-recipes-ui.mjs';
+import {measuringDeskPage,measurementEntry,bindMeasuringDesk} from './measuring-desk-ui.mjs';
 import {fieldKitPage,fieldKitEntry,bindFieldKit,resetFieldKitTurn} from './field-kit-ui.mjs';
 import {rainPathsPage,rainPathsEntry,bindRainPaths} from './rain-paths-ui.mjs';
 import {rainDisplayExposure,noteRainDisplayExposure} from './rain-paths-core.mjs';
@@ -234,7 +235,7 @@ function render(){
   const letterBench=['post','loft'].includes(root)&&slug==='letters',instructionBench=['post','loft'].includes(root)&&slug==='instructions';
   const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return',joiningBench=root==='numbers'&&slug==='join',comparisonBench=root==='numbers'&&slug==='compare',tenthsBench=root==='numbers'&&slug==='tenths',hundredthsBench=root==='numbers'&&slug==='hundredths',seedBench=root==='numbers'&&slug==='seeds';
   const collectionBench=root==='living'&&slug==='collection',lanternBench=root==='numbers'&&slug==='lanterns',noticeBench=root==='loft'&&slug==='printer';
-  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',batchBench=root==='cafe'&&slug==='batches',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
+  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',measureBench=root==='science'&&slug==='measure',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',batchBench=root==='cafe'&&slug==='batches',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
   const navRoot=['paris','french','archive'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
@@ -260,6 +261,7 @@ function render(){
   else if(joiningBench){const view=renderJoiningOrders(state);html=view.html;joiningExamples=view.examples;exposeStoryFacts({facts:view.facts});}
   else if(fractionBench)html=renderFractionTrail(state).html+tenthsEntry();
   else if(recipeBench)html=measuringRecipesPage(state)+fieldKitEntry('jug');
+  else if(measureBench)html=measuringDeskPage(state,explorerStore.active.id);
   else if(packingBench){const view=renderParcelPacking(state);if(view.facts.length){exposeStoryFacts({facts:view.facts});save();}html=view.html;}
   else if(batchBench){exposeStoryFacts({facts:batchDisplayedFactPairs(state)});save();html=wholeBatchesPage(state);}
   else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state)+fieldKitEntry('weather');}
@@ -288,7 +290,7 @@ function render(){
   else if(root==='explore')html=learningExplore(graph);
   else if(root==='science'){
     html=slug==='evidence'?evidenceShelfPage(explorerStore.active.id):slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);
-    if(slug!=='evidence')html+=rainPathsEntry();
+    if(slug!=='evidence')html+=rainPathsEntry()+measurementEntry();
   }
   else if(root==='cafe'){
     if(state.cafe.current){const o=orderFor(state.cafe);exposeStoryFacts({facts:[[o.guests,o.bites],...(state.cafe.current.stage==='stock'?currentRecipe(state.cafe).map(item=>[o.guests,item.count]):[])]});}
@@ -323,8 +325,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry();
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
@@ -406,6 +408,7 @@ function bind(){
  bindWillowPath(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
  bindFieldKit(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
+ bindMeasuringDesk(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindTravelersArchive(state,{save,render,navigate,focus:focusElement});
  document.querySelector('[data-ta-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const a=travelersArchive(state);if(a){const ids=[...new Set([...a.checks.flatMap(c=>c.sourceIds),...(a.kept?['photo','chronology']:[])])];if(ids.length){noteArchiveSources(state,ids);save();}}}});
  bindInstructions(state,(location.hash||'').startsWith('#loft')?'loft':'post',{save,render,navigate,focus:focusElement});
