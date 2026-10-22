@@ -1,0 +1,104 @@
+# 51 — Willow packing table: the same parcels, different answers
+
+Status: build-ready after six independent specification lenses and resolved findings; see [review receipt](../reviews/51-parcel-packing-spec.md). This is the next bounded M2-II unit after the whole-batch gathering activity, not written multi-digit division or completion of the strand. No implementation or publication claim.
+
+## Purpose and boundary
+
+At the Post Office, a courier prepares seed envelopes for two different jobs. A welcome kit must contain a complete bag of the specified size; spare envelopes can wait for a later kit. A delivery must carry every envelope using as few loaded trips as possible. One bag fits on the courier's broom per outward trip. Empty returns are not counted. The same quantities can therefore require different answers without one of them being a mistake.
+
+Choose any request, pack and unpack actual pictured envelopes, read the current model, choose a purpose, revise a plan and explicitly seal it. All pages, requests and both purposes remain open. A sealed plan gets an original local dispatch still, then another request or a changed purpose. It does not move the current Post Office parcel, answer Bramble, consume café stock or award play credits.
+
+The first release has four supplied requests, each available for both purposes:
+
+| ID | Envelopes | Bag capacity | Most full kits | Spare envelopes after full kits | Fewest loaded trips carrying all |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `lantern-seeds` | 17 | 5 | 3 | 2 | 4 |
+| `bridge-seeds` | 23 | 6 | 3 | 5 | 4 |
+| `meadow-seeds` | 29 | 4 | 7 | 1 | 8 |
+| `exact-seeds` | 20 | 5 | 4 | 0 | 4 |
+
+These are invented exact object counts. Keep the exact-fit request equally accessible: carrying everything does **not** always require one more bag. Fractions of envelopes, decimal quotients, nearest-ten rounding, short/long division algorithms, general multi-step word problems, formal place-value proficiency and sharing among a given number of recipients are outside this unit.
+
+## Numbered teaching encounters
+
+| Step | Representation, contrast and response | Scope / later revisit |
+| --- | --- | --- |
+| 1. Name the things and purpose | Picture the request and one bag's capacity. Count seed envelopes separately from bags and loaded trips; explain one bag per loaded trip and the kit's full-bag rule. Optional narration/grown-up reading. | Precise units and literal picture/text matching. Language access never closes the maths. |
+| 2. Make complete groups | Move envelopes from a visible loose pile into equal-capacity bags. Fill one at a time or request an explicitly labelled counted-fill demonstration. Count each complete bag and the envelopes it contains. | Grouping by a given size, distinct from sharing between a given number of people. Count/repeated-addition help remains open. |
+| 3. Read the actual table | Enter the number of full bags and envelopes still loose, as separate readings. Check against the actual model even if its packing is inefficient or unfinished. | A correct reading of a wrong plan remains correct; never score it against the ideal quotient/remainder. Partial bags are explicitly named and shown separately. |
+| 4. Prepare full welcome kits | Ask “What is the greatest number of complete kits we can make?” Repack to full bags; spare envelopes remain loose. Explain why a partly filled bag is not another complete kit. | Quotient counts full equal groups; remainder counts envelopes, not unused spaces in a bag. Optional statement: `17 = 3 × 5 + 2`, with units. No unaided written-equation criterion. |
+| 5. Carry every envelope | Switch the purpose while retaining the same actual table. Ask for the fewest loaded trips. A partly filled final bag is allowed. Show that leftovers must travel rather than vanish. | For 17/capacity5, three full bags plus a two-envelope bag needs four loaded trips. Any capacity-respecting four-bag distribution is valid, including 5/4/4/4; do not require a canonical packing for this goal. |
+| 6. Contrast an exact fit | On the 20/capacity5 request, four full bags leave none loose and need four loaded trips. Explain why blindly adding one would invent an empty journey. | Context-dependent interpretation; not ordinary numerical rounding. Keep zero spare envelopes meaningful. |
+| 7. Keep, seal and revisit | Keep an unfinished plan, or explicitly seal a ready one. Change purpose or request and compare the meanings of the answers. Retain earlier frozen work. | A local dispatch ending, not a fact/mastery or act-completion gate. Later place-value/written-method units can revisit the same purposes with larger quantities. |
+
+A separate supplied worked example uses 14 envelopes with capacity4 (3 full kits,2 spare,4 loaded trips). It is labelled support, never offered as an unseen question or a replacement for the current model. Each demonstration advances only on request. A “prepare this request together” action marks support before filling the current plan and its chosen-purpose answer; sealing remains a separate action. It must explain that it replaces the editable packing but leaves kept/sealed snapshots intact.
+
+## Source placement and prerequisites
+
+Refreshed Jane `d4903954d7c4d8118cbd1d2f7ed770544fd4ac81` lesson/engine/help/licensing and Marble `40372cfe9531b4f94a3e5fe0a6ff2b22f6d62c6b` descriptions/evidence/direct edges on2026-10-21. Selected semantics and the complete hard predecessor closure match bundled pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d`; preserve the bundled files and existing ODbL/CC BY-SA notices unchanged. Jane's purposeful stages and separate worked example inform original teaching. Its generic decimal division helper does not represent these remainder meanings and is not reused. No new upstream code, lesson prose or assets are incorporated.
+
+| Topic | Actual placement | Limit |
+| --- | --- | --- |
+| `mt_LpSuPgL31x` Division as equal sharing | Steps2,4: description includes grouping by a given group size; make full bags and distinguish bag count from envelopes per bag. | Grouping slice only, not a new equal-sharing-between-recipients assessment. |
+| `mt_iNdrM2-oJf` What Division Means | Steps2–5: quotient names complete equal groups; match a supplied expression to the actual bags. | Pictured/supported meaning, not general division competence. |
+| `mt_Zdv-b-iW5K` Multiplication and Division Word Problems | Steps1,4–6: equal-group requests within100, interpreted according to the stated purpose. | Narrow contexts; no broad array/measurement or independent reading claim. |
+| `mt_p-nbe0w_lf` Division with remainders | Steps4–6: contextual distinction between full groups, spare objects and loaded transport count. | **Scoped conceptual rehearsal only.** Full source description includes four-operation multistep problems, letter equations and estimation; those are not taught here. |
+| `mt_TMoHjMhRS2` Precise Maths Communication | Steps1,3–6: attach “full bags,” “loose envelopes” or “loaded trips” to a count. | Finite unit choices and discussion, not independent prose/transcription. |
+| `mt_OlhMP7ShFT` Pictures and Text Working Together | Steps1–3: match the literal request to pictured objects, capacity and actual packing. | Narrow supported match, not independent decoding/inference. |
+
+The transitive hard predecessor closure of the five maths targets has26 IDs (including selected targets reached from another). The following dispositions cover the task's needed meanings without declaring whole ancestors taught:
+
+- Counting/cardinality/separating: `mt_WcfaSfVT33`, `mt_dmNvjroCPT`, `mt_zuKAX6lcYR`. Each envelope remains countable; exact loose/bag counts are inspectable, optional one-by-one counting and grouped sums support the operation.
+- Equal groups/product/quotient: `mt_LpSuPgL31x`, `mt_iNdrM2-oJf`, `mt_gtTl3R5buH`, `mt_PZ909yPrEC`, `mt_GRWwTDZ3wD`, `mt_B1zj1RwQ3a`, `mt_OvyoRo47K-`. Steps2–5 explicitly make complete equal groups, repeated sums and labeled meanings; a partial bag is separate. No automatic fluency inference.
+- Optional counting/multiplication language: `mt_nvdpxAJTBG`, `mt_HhuSDxwDNM`, `mt_zOWwLxa77y`, `mt_lMz9nAs7VO`. Supply countable pictures, requested repeated sums and inline vocabulary rather than requiring memorised tables or symbol fluency.
+The remaining12ancestors were individually checked against the bundled and refreshed descriptions/evidence:
+
+| Ancestor | Required source capability | Disposition in this unit |
+| --- | --- | --- |
+| `mt_18fK9sQdIz` | Written two/three-digit × one-digit multiplication, carrying, estimation | Method exception: pictured grouping supplies totals, no written layout/carrying/estimation criterion. |
+| `mt_AR-K72OIIO` | Distributivity, scaling and harder correspondence problems | Scope exception: packed envelopes plus loose envelopes is one supplied decomposition, not broad distributivity/scaling instruction. |
+| `mt_DyGBW3ZHh3` | Written multiplication/division statements, partitioning, developing formal methods | Supplied labelled notation only; no independent equation construction or formal method criterion. |
+| `mt_EmR5n58jZt` | Scaling, correspondence and missing-number problems | Scope exception: selecting a purpose for one fixed packing model does not establish broader problem solving. |
+| `mt_GDG9_SZmsO` | Division as finding an unknown multiplication factor | Concrete support: three full bags of five account for15packed envelopes, with the2spare separate. Never ask for an integer factor satisfying `5 × ? = 17`. |
+| `mt_K5jM7vlVhA` | Rapid full12×12 multiplication/division recall | Access exception: countable objects and requested sums replace a recall requirement; displayed facts are exposure only. |
+| `mt_M5PPDJStGm` | Counting forward/backward to100from arbitrary starts | Bounded support: count the supplied sets through29with companion support; no backwards/arbitrary-start/whole-range claim. |
+| `mt_MCu_SNg_OW` | Short division up to four digits by one digit, place-value/array strategies and remainders | Explicit method exception: objects rehearse full bags and leftovers, no formal short division or place-value strategy. |
+| `mt_WX30dzi4dt` | Fluent multiplication/division within100, including timed recall evidence | Access exception: pictures/counting/sums stay available; no timer or fluency criterion. |
+| `mt_q9EaJc2FP8` | Formal larger multiplication including two-digit × two-digit/area model | Method exception: not required, taught or inferred. |
+| `mt_wQ89AEXhz3` | Recall/use of the3,4,8tables | Access exception: use actual objects and sums; one bag size cannot establish a whole table. |
+| `mt_wh3UqnWsa7` | Contextual multiplication/division through arrays, sums, mental methods, sharing | Narrow support: repeated sums describe complete bags; mental fluency and sharing among given recipients stay unobserved. |
+
+These dispositions enumerate exactly26unique predecessor IDs across the bullets/table. No separate place-value source node occurs in this closure; place-value assumptions are within formal-method descriptions and are not invented graph edges.
+
+In particular, `mt_p-nbe0w_lf` directly requires `mt_AR-K72OIIO`, `mt_MCu_SNg_OW`, `mt_q9EaJc2FP8`; their edge reasons explicitly require broader solving and formal operations. Those are not learner access gates here. Pinned `mt_MCu_SNg_OW` has a misleading arrays title; its actual description requires short division with remainders (the refreshed upstream title is corrected). Full topic coverage is not defensible; the new atlas link for `mt_p-nbe0w_lf` is explanation only, with the broader source requirements explicitly absent. The original per-case questions remain local supported practice rather than a source-topic assessment. The per-ancestor descriptions above resolve this draft’s original inventory gap; classify the remainder reference as explanation only rather than full coverage. Soft edges remain authoring prompts; no new taxonomy edges or age rules.
+
+## Interaction and model contract
+
+Route `#post/packing`, optional entry from Post Office and the full-group gathering bench if available. Reuse the existing header, native buttons, explorer/transfer facilities and original illustration style; own the new packing state. No dependency on a changed Post Office delivery or on the whole-batch branch being merged. Exclude `#post/packing` from generic connection-panel/invitation actions and Bramble ending-film detection; opening the packing table must not reveal or finish a paused rival round. Bind packing-specific shown-fact exposure only for its visible model/help/artifacts.
+
+Four open pages: **Pack / Read / Purpose / Keep**. All retain the compact request, capacity and current purpose. On Pack, select one of eight numbered bag spaces; display each envelope as a countable mark, distinguish empty/partial/full bags, and keep the loose pile visible. Native tap/keyboard controls: move one loose envelope into the selected bag, return one, return that bag to the loose pile, or clear the table. Optional counted-fill help moves `min(free places, loose envelopes)` into that bag, explicitly marks support and shows its count. No automatic timed filling, dragging or mouse-only interaction.
+
+All eight spaces exist in the model (empty bags do not count as trips). Bag arrays store integer envelope counts from0throughcapacity. Loose amount is computed as the exact source total minus their sum; no object is created/lost, no negative count, no over-capacity bag. A disallowed move preserves the entire draft. Model reading asks separately for full-bag count and actual loose-envelope count; partial bags are not silently treated as loose envelopes or full bags.
+
+The Purpose page permits either `kits` or `all` and has a separate raw numeric-answer draft/unit choice per purpose. Ask the purpose-specific question with the constraints visible. Literal answer validity is distinct from physical plan readiness:
+
+- `kits`: expected answer `floor(total/capacity)`, unit `full bags`. Ready packing requires exactly that many full bags, no partial bags and exactly the mathematical remainder loose. Correct answer with a partly filled plan stays an accurate count prediction, not a ready dispatch.
+- `all`: expected answer `ceil(total/capacity)`, unit `loaded trips`. Ready packing requires all envelopes in bags and exactly that many nonempty bags. Any permitted distribution works. A five-trip packing for17/capacity5 carries everything but is not minimal; explain both facts separately.
+
+Offer keep at any time; sealing requires the chosen purpose's literal answer/unit and ready packing, or its explicit supported ready route. No required prior answer in the other purpose. Give an original still/text dispatch ending; no new film dependency. Focus checks at their feedback/error, keep/seal at the actual result, and self-disabling controls at a relevant local control/container. At least44px targets, clear names/patterns, no color-only meaning, no hover-only action. On a narrow view, keep the current question and relevant model together without an eight-bag vertical scroll before the controls. Reduced motion is complete; optional existing narration is supplied support.
+
+## Local records and preservation
+
+Own optional `parcelPacking` version1. Reading/render/import/notes must leave an absent root absent; unknown/future/invalid payloads remain unchanged and playable earlier formats remain recoverable through an explicit keep-raw/start-fresh action. Add the root to the existing importer destination/exception path without eager initialization. No names, microphone, uploads, server progress or runtime AI.
+
+Each checked-kind/current-feedback map has exactly the four check-kind keys with boolean values. Concrete v1 fields: `version`, `currentCase` (known ID or null), `page` (`choose|pack|read|purpose|keep`), `cases` keyed only by the four known IDs, optional `recovered` raw prior root. Each case work has a frozen `source` (ID, wording, total, capacity, model revision1, object unit), `bags` (eight integers), `selectedBag` (0–7), `purpose` (`kits|all`), `readings.full/loose` and `answers.kits/all`, each `{text:string≤24characters,unit:null|full bags|loose envelopes|loaded trips}`; support flags, help topic/example step, checked-kind flags, current-feedback selectors, `inputError` (null or the malformed check kind), at most24immutable checks, and latest `kept`/`sealed` snapshots. Titles/prose may change; semantic numbers/IDs/units/revision and known shape must still validate. The frozen source shape is `{id,title,purpose,total,capacity,modelRevision:1,objectUnit:'envelopes'}`; only title/purpose wording may differ from current content. Support keys are `visual`, `handling`, `countedFill`, `workedExample`, `group`, `partial`, `capacity`, `meaning`, `narration`, `together`, `readFullFeedback`, `readLooseFeedback`, `kitsFeedback`, `allFeedback`; present flags are true, with visual always true. `helpTopic` is null or `group|partial|capacity|meaning|example`; `exampleStep` is null or0–3. Checked/feedback keys are exactly the four check kinds. A numeric response is trimmed ASCII digits only (`/^\d+$/`) with numeric value0–100. Leading zeroes are accepted, while `+3`, `3.0`, `3e0` and non-ASCII digits are invalid; original text, including surrounding whitespace, is retained; an in-range incorrect number is a wrong response, while blank/malformed/out-of-range input stays an invalid draft. Invalid/blank drafts persist verbatim. Input errors are screen state, clear on edit/page/help change and stay linked to their actual input.
+
+Checks snapshot kind (`read-full|read-loose|kits|all`), literal input/current model, frozen source/target, independent per-part outcomes, support **before** feedback, whether this case/kind was previously checked, `practice:true`, `modelVisible:true`. Retain the latest check of each kind within the24limit. Successful or incorrect checks remain supplied picture practice; support/exposure never becomes independent recall evidence. Model changes invalidate all current feedback. Editing a response/unit invalidates its kind; switching purpose invalidates purpose feedback while leaving raw answers intact. Page/help changes clear only screen input errors; support stays sticky and historical checks are immutable. A true current-feedback selector must match its latest frozen input/model, never an older target. Recompute and validate every stored target, per-part outcome and readiness against its own frozen source/model/input, including historical checks and artifacts. A sealed snapshot must satisfy its own chosen-purpose readiness; forged derived outcomes remain raw and recoverable. Keep/seal freeze the exact draft/source/support/outcome; edits do not mutate earlier artifacts. Repeated unchanged sealing is disabled/idempotent. Only explicit keep/seal can replace that artifact.
+
+The pure renderer reports both HTML and the exact fact pairs from the same visible components. This small local return value addresses the concrete missing-exposure failure found in spec50’s first implementation review; a separate manual list must not silently omit a rendered numerical example. No generic registry is needed. Only literal complete-group relationships actually shown enter existing fact exposure: displayed full bags × capacity (and complete rows within a shown worked example), within1–12. Do not record ceil(trips)×capacity as though it equalled the total when a bag is partial; the spare amount remains a separate count. Read hidden cases/previous snapshots only when actually shown, not on load. Preserve current café/letters/loft/plantings/Post Office/Bramble state exactly apart from these real displayed-example exposures. No packing action becomes their assessment or completion.
+
+## Required evidence before build/release
+
+Complete independent six-lens spec review and resolve its findings before implementation. Independently review final implementation and exact candidate before any publication.
+
+Verify finite moves for all four totals/capacities and every capacity/conservation boundary; actual-model reading versus goal prediction; wrong units; malformed numeric drafts; 3full+2loose versus4loaded for17/5; exact20/5 uses4for both; noncanonical5/4/4/4 valid for carrying17; partial bags never full; five trips carry all but are not minimal; extra empty bags do not count. Check support chronology, shown-example exposure, old wording tolerance, unsupported raw recovery, existing partial game drafts, real ExplorerStore/import/save-off/reset/isolation and immutable artifacts. Exercise keyboard/touch-sized/tablet/narrow pages, local focus/error corrections, narration controls and reload. Run existing suites/story-pack/atlas and inspect the public diff for private information. No browser result establishes physical iPad behavior or learning effectiveness.
