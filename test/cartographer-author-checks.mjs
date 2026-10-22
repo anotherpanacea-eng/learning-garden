@@ -1,3 +1,4 @@
+import {marks} from '../dist/cartographer-content.mjs';
 import assert from 'node:assert/strict';
 import {validMapJobSource,validMapJobCheck} from '../dist/cartographer-jobs.mjs';
 import {mapAuthorView,mapProblemPlan,mapAuthorOrigin} from '../dist/cartographer-author.mjs';
@@ -55,4 +56,20 @@ for(const raw of [null,'<script>earlier draft</script>',{version:99,from:'post'}
  const {s}=setup();draft(s);const job=startAuthoredMapJob(s);job.places={post:{x:0,y:0},bridge:{x:5,y:5},cafe:{x:0,y:1},garden:{x:1,y:1}};job.job.source.places=structuredClone(job.places);job.job.source.request='Earlier exact over-limit request.';job.job.source.authored={version:99,unknown:'retained'};ok(validMapRound(job),'new feasibility/origin rules do not revalidate old sources');job.a=[...'eeeee'];const c=checkMapRoutes(s);c.job.a.fulfilled=true;c.job.a.visited=false;c.job.a.firstVisit=null;ok(validMapJobCheck(c.job),'contradictory recorded outputs are shapes, not regraded truth');ok(validMapRound(job));eq(mapAuthorOrigin(job.job.source),{status:'unavailable',raw:job.job.source.authored});
 }
 eq(mapAuthorOrigin({}),{status:'missing'});eq(mapAuthorOrigin({authored:{version:1,mapId:4}}),{status:'ready',mapId:4});
+{
+ const three={post:square.post,cafe:square.cafe,garden:square.garden},{s,r}=setup(three);ok(setMapAuthorOpen(s,true),'three placed points open authoring');
+ const before=structuredClone(r);eq(chooseMapAuthor(s,'via','bridge'),false,'unplaced collection point is refused');eq(r,before,'refused choice leaves the draft unchanged');
+ ok(chooseMapAuthor(s,'via','post'),'a placed choice remains editable');eq(mapProblemPlan(r).status,'distinct');ok(chooseMapAuthor(s,'via','garden'),'a placed choice repairs the draft');eq(mapProblemPlan(r).status,'ready');
+ r.authorDraft={version:1,open:false,from:'post',via:'bridge',to:'cafe'};const places=structuredClone(r.places);eq(mapProblemPlan(r).status,'missing-map');
+ ok(setMapAuthorOpen(s,true),'saved draft with missing selected point can reopen');ok(chooseMapAuthor(s,'via','garden'),'saved draft can select a placed collection point');eq(r.places,places,'repair never changes landmarks');eq(mapProblemPlan(r).status,'ready');ok(startAuthoredMapJob(s));
+}
+{
+ const {s,r}=setup();draft(s);const old=structuredClone(r);marks.push({id:'library',name:'Library',symbol:'L'});
+ try{
+  const plan=mapProblemPlan(r);eq(plan.status,'ready','older complete map remains authorable after catalogue growth');eq(plan.minimum,6);eq(plan.source.places,square);ok(!plan.source.mapReaderText.includes('undefined'));eq(r,old,'author planning never fills absent landmarks');
+  const job=startAuthoredMapJob(s);ok(job&&validMapRound(job));job.a=[...'eeennn'];eq(checkMapRoutes(s).job.a.fulfilled,true,'authored old-map job still solves');
+  const three=structuredClone(r);delete three.places.garden;eq(mapProblemPlan(three).status,'ready','own three placed landmarks can supply all request points');delete three.places.bridge;eq(mapProblemPlan(three).status,'missing-map','required collection point must be placed');
+  const five=structuredClone(r);five.places.library={x:0,y:0};eq(mapProblemPlan(five).status,'ready','author feasibility does not require exactly four points');five.places.library=null;const unplaced=mapProblemPlan(five);eq(unplaced.status,'ready','optional null landmark is unplaced');eq(unplaced.source.places.library,null,'new job freezes its own unplaced landmark');five.places.library={x:1,y:1};eq(mapProblemPlan(five).status,'missing-map','author rejects overlapping points');
+ }finally{marks.pop();}
+}
 console.log(`Map problem author core: ${n} assertions passed across ${triples} independent position triples.`);

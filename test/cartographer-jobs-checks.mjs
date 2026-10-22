@@ -1,3 +1,4 @@
+import {marks} from '../dist/cartographer-content.mjs';
 import assert from 'node:assert/strict';
 import {freshState} from '../dist/core.mjs';
 import {mapJobs,mapJobSource,validMapJobSource,mapJobFacts} from '../dist/cartographer-jobs.mjs';
@@ -49,5 +50,16 @@ for(const malformed of [null,{version:99,original:'future job'},{version:1,sourc
 }
 {
  const s=freshState(),r=startMapJob(s,'sign');r.job.extra='kept';r.job.source.extra={earlier:true};r.extra=[1,2];s.cartographer.extra=true;setMapPage(s,'route');addMapSupport(s,'audio');setMapJobView(s,'map');eq(r.job.extra,'kept');eq(r.job.source.extra,{earlier:true});eq(r.extra,[1,2]);eq(s.cartographer.extra,true);eq(mapJobSource('sign').extra,undefined,'catalog never mutated by saved work');
+}
+{
+ const s=freshState(),r=startMapJob(s,'sign');r.a=[...'eeennn'];const c=checkMapRoutes(s);c.job.a.fulfilled=false;const old=structuredClone(s),source=mapJobSource('sign');
+ marks.push({id:'library',name:'Library',symbol:'L'});
+ try{
+  ok(validMapJobSource(source),'frozen four-place source survives a new catalogue entry');ok(validMapRound(r));eq(mapView(s).rounds,[r]);ok(mapCheckMatches(r));eq(s,old,'extension never regrades or patches frozen jobs/checks');
+  const three=structuredClone(source);delete three.places.garden;ok(validMapJobSource(three),'source needs its own known places and its three request points, not four');
+  const five=structuredClone(source);five.places.library={x:0,y:0};ok(validMapJobSource(five),'source count is not fixed at four');five.places.library=null;ok(validMapJobSource(five),'optional explicit null source point remains unplaced');
+  for(const mutate of [x=>delete x.places.bridge,x=>x.places.library={x:1,y:1},x=>x.places.future={x:0,y:0},x=>x.places.bridge=null]){const bad=structuredClone(source);mutate(bad);ok(!validMapJobSource(bad),'required stop, unique valid points and known ids remain required');}
+  r.places.library=null;ok(validMapRound(r),'unplaced extra point agrees with missing frozen point');r.places.library={x:0,y:0};ok(!validMapRound(r),'round cannot add a placed point absent from its frozen job');
+ }finally{marks.pop();}
 }
 console.log(`Cartographer jobs core: ${n} assertions passed.`);
