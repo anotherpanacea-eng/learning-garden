@@ -298,6 +298,7 @@ function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=
 function focusElement(selector){const element=$(selector);if(element){if(!element.matches('a[href],button,input,select,textarea,summary,[tabindex]'))element.tabIndex=-1;element.focus();}}
 function rerenderActivity(){const input=$('#answer');if(input)active.input=input.value;syncDraft();render();}
 function openTaskLibrary(selected){return `<section class="panel broad-open-invites"><h2>Questions with room for your ideas</h2><p>Wonder, estimate, invent, and explain together. These invitations have no scored answer.</p><div class="open-task-links">${openTasks().filter(t=>!areaById(selected)||t.area===selected).map(t=>`<a class="secondary" href="#wonder/${t.id}">${esc(t.title)}</a>`).join('')}</div></section>`;}
+function notesReport(notebook){return {title:'After the Storm — observations',exportedAt:new Date().toISOString(),note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:explorerStore.active.avatar,color:explorerStore.active.color,symbol:explorerStore.active.symbol},recommendation:recommendations(notebook),...notebook};}
 function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
 function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
@@ -362,7 +363,7 @@ function bind(){
  document.querySelector('[data-ta-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const a=travelersArchive(state);if(a){const ids=[...new Set([...a.checks.flatMap(c=>c.sourceIds),...(a.kept?['photo','chronology']:[])])];if(ids.length){noteArchiveSources(state,ids);save();}}}});
  bindInstructions(state,(location.hash||'').startsWith('#loft')?'loft':'post',{save,render,navigate,focus:focusElement});
  bindBundleExchange(state,{save,render,navigate,focus:focusElement});
- bindJoiningOrders(state,{save,render,navigate,focus:focusElement});
+ bindJoiningOrders(state,{save,render,navigate,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,focus:focusElement});
  bindFractionTrail(state,{save,render,navigate,focus:focusElement});
  bindMeasuringRecipes(state,{save,render,navigate,focus:focusElement});
  bindParcelPacking(state,{save,render,navigate,focus:focusElement});
@@ -418,7 +419,7 @@ function bind(){
  $('#solution')?.addEventListener('click',()=>{active.revealed=true;markExposure();rerenderActivity();focusElement('.solution');});
  document.querySelectorAll('[data-method]').forEach(b=>b.onclick=()=>{active.method=b.dataset.method;syncDraft();render();$('#next')?.focus();});
  $('#next')?.addEventListener('click',()=>{if(active.method)record();});$('#skip')?.addEventListener('click',()=>record(true));
- $('#download')?.addEventListener('click',()=>{const report={title:'After the Storm — observations',exportedAt:new Date().toISOString(),note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:explorerStore.active.avatar,color:explorerStore.active.color,symbol:explorerStore.active.symbol},recommendation:recommendations(state),...state};downloadText(JSON.stringify(report,null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`);});
+ $('#download')?.addEventListener('click',()=>{const report=notesReport(state);downloadText(JSON.stringify(report,null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`);});
  $('#reset')?.addEventListener('click',showReset);
 }
 function exposeStoryFacts(node,except){

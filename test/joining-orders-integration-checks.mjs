@@ -49,4 +49,21 @@ for(const payload of [null,[],5,{version:99,html:'<img src=x onerror="fictional(
 }
 const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8'),html=fs.readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');assert.match(app,/joiningBench=root==='numbers'&&slug==='join'/);assert.match(app,/bindJoiningOrders\(state/);assert.match(html,/joining-orders\.css/);assert.match(joiningOrdersEntry(),/#numbers\/join/);
 assert.match(renderBundleExchange(fresh()).html,/#numbers\/join/,'Exchange Table links back to Joining Supply Orders');
+// A recovery must not make an accepted notebook impossible to import again.
+{
+ const s=fresh();s.joiningOrders={version:99,padding:''};
+ const cap=5*1024*1024;s.joiningOrders.padding='x'.repeat(cap-JSON.stringify(s).length-32);
+ assert.equal(prepareProgressImport(JSON.stringify(s)).ok,true,'size-boundary original imports');
+ const before=JSON.stringify(s);assert.equal(J.recoverJoiningOrders(s),false,'oversize proposed wrapper is refused');assert.equal(JSON.stringify(s),before,'size refusal is atomic');
+}
+{
+ const s=fresh();let raw={version:99};s.joiningOrders=raw;
+ while(true){const next={version:99,earlier:raw},candidate={...s,joiningOrders:next};if(!prepareProgressImport(JSON.stringify(candidate)).ok)break;raw=next;s.joiningOrders=raw;}
+ const before=JSON.stringify(s);assert.equal(prepareProgressImport(before).ok,true,'depth-boundary original imports');assert.equal(J.recoverJoiningOrders(s),false,'extra recovery depth is refused');assert.equal(JSON.stringify(s),before,'depth refusal preserves whole prior root');
+}
+{
+ const s=fresh();s.joiningOrders={version:99,earlier:'kept'};const before=JSON.stringify(s);
+ assert.equal(J.recoverJoiningOrders(s,()=>false),false,'actual report preflight may refuse metadata overhead');assert.equal(JSON.stringify(s),before);
+ assert.equal(J.recoverJoiningOrders(s),true);assert.equal(prepareProgressImport(JSON.stringify(s,null,2)).ok,true,'ordinary recovered notebook round-trips');
+}
 console.log('Joining Supply Orders integration: lazy views, exact marks, transfer, recovery and host wiring passed.');
