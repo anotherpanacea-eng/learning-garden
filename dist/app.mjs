@@ -9,6 +9,7 @@ import {hundredthsPage,hundredthsEntry,bindHundredths} from './hundredths-ui.mjs
 import {seedPage,seedEntry,bindSeed,resetSeedTurn} from './seed-stall-ui.mjs';
 import {tenthsPage,tenthsEntry,bindTenths} from './tenths-ui.mjs';
 import {sortingPage,bindSorting} from './sorting-desk-ui.mjs';
+import {doublePage,bindDoubleCheck} from './willow-double-ui.mjs';
 import {cafeStartPanel,bindCafeStart} from './cafe-start-ui.mjs';
 import {noteInstructionEntry} from './instruction-core.mjs';
 import {willowPathPage,willowPathEntry,bindWillowPath,resetWillowVoice} from './willow-path-ui.mjs';
@@ -244,7 +245,7 @@ function render(){
   const fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return',joiningBench=root==='numbers'&&slug==='join',comparisonBench=root==='numbers'&&slug==='compare',tenthsBench=root==='numbers'&&slug==='tenths',hundredthsBench=root==='numbers'&&slug==='hundredths',seedBench=root==='numbers'&&slug==='seeds';
   const clockWalkBench=root==='post'&&slug==='clock-walk',pavingBench=root==='numbers'&&slug==='paving';
   const collectionBench=root==='living'&&slug==='collection',lanternBench=root==='numbers'&&slug==='lanterns',noticeBench=root==='loft'&&slug==='printer';
-  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',measureBench=root==='science'&&slug==='measure',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',batchBench=root==='cafe'&&slug==='batches',labelBench=root==='archive'&&slug==='labels',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
+  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',measureBench=root==='science'&&slug==='measure',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',doubleBench=root==='post'&&slug==='double-check',batchBench=root==='cafe'&&slug==='batches',labelBench=root==='archive'&&slug==='labels',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
   const navRoot=['paris','french','archive'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
@@ -266,6 +267,7 @@ function render(){
   else if(pavingBench){const fits=preflightPavingDisplay(state,pavingOptions());html=fits?pavingPage(state):pavingRefusalPage();if(fits)save();}
   else if(clockWalkBench)html=clockWalkPage(state);
   else if(sortingBench)html=sortingPage(state);
+  else if(doubleBench)html=doublePage(state,detail);
   else if(hundredthsBench)html=hundredthsPage(state);
   else if(seedBench)html=seedPage(state);
   else if(lanternBench)html=lanternPage(state);
@@ -338,8 +340,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry();
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&slug==='evidence')){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!joiningBench&&!comparisonBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;
   bindEgyptPhotoFallback(main);
@@ -422,6 +424,7 @@ function bind(){
  bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target,true)});
  bindTenths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindSorting(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
+ bindDoubleCheck(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindCafeStart(state,{save,render,focus:focusElement});
  bindWillowPath(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
