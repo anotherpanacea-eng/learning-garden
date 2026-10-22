@@ -1,3 +1,4 @@
+import {mapJobSource,validMapJob,validMapJobCheck,mapJobFacts} from './cartographer-jobs.mjs';
 import {marks,directions,pages} from './cartographer-content.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const positive=x=>Number.isSafeInteger(x)&&x>0;
@@ -11,8 +12,8 @@ const validCommands=x=>Array.isArray(x)&&x.length<=12&&x.every(id=>directions.so
 const validPlaces=x=>object(x)&&marks.every(m=>x[m.id]===null||validMapPoint(x[m.id]))&&new Set(marks.filter(m=>x[m.id]).map(m=>`${x[m.id].x},${x[m.id].y}`)).size===marks.filter(m=>x[m.id]).length;
 // Stored result fields are checked for readable shapes/ranges, never regraded on load.
 const validResult=x=>object(x)&&validCommands(x.commands)&&Array.isArray(x.points)&&x.points.length>=1&&x.points.length<=13&&x.points.every(validMapPoint)&&bounded(x.steps,12)&&bounded(x.distance,12)&&(x.blocked===null||Number.isInteger(x.blocked)&&x.blocked>=1&&x.blocked<=12)&&typeof x.arrived==='boolean';
-const validCheck=x=>object(x)&&validPlaces(x.places)&&known(x.from)&&known(x.to)&&x.from!==x.to&&validResult(x.a)&&validResult(x.b)&&['shorter','equal','longer'].includes(x.relation)&&typeof x.bothArrived==='boolean'&&typeof x.different==='boolean';
-export function validMapRound(r){return object(r)&&positive(r.id)&&validPlaces(r.places)&&known(r.from)&&known(r.to)&&r.from!==r.to&&validCommands(r.a)&&validCommands(r.b)&&Array.isArray(r.support)&&r.support.length<=codes.length&&r.support.every(c=>codes.includes(c))&&new Set(r.support).size===r.support.length&&Array.isArray(r.checks)&&r.checks.length<=8&&r.checks.every(validCheck);}
+const validCheck=x=>object(x)&&validPlaces(x.places)&&known(x.from)&&known(x.to)&&x.from!==x.to&&validResult(x.a)&&validResult(x.b)&&['shorter','equal','longer'].includes(x.relation)&&typeof x.bothArrived==='boolean'&&typeof x.different==='boolean'&&(x.job===undefined||validMapJobCheck(x.job));
+export function validMapRound(r){return object(r)&&positive(r.id)&&validPlaces(r.places)&&known(r.from)&&known(r.to)&&r.from!==r.to&&validCommands(r.a)&&validCommands(r.b)&&Array.isArray(r.support)&&r.support.length<=codes.length&&r.support.every(c=>codes.includes(c))&&new Set(r.support).size===r.support.length&&Array.isArray(r.checks)&&r.checks.length<=8&&r.checks.every(validCheck)&&(r.job===undefined||validMapJob(r.job,r));}
 export function mapView(state){
  const root=state.cartographer;
  const base={root,rounds:[],earlier:[],current:null,page:'map',mark:'post',side:'A'};
@@ -22,25 +23,29 @@ export function mapView(state){
  for(const r of root.rounds){if(validMapRound(r)&&!ids.has(r.id)){rounds.push(r);ids.add(r.id);}else earlier.push(r);}
  return {status:'ready',root,rounds,earlier,current:rounds.find(r=>r.id===root.current)||rounds.at(-1)||null,page:root.page,mark:root.mark,side:root.side};
 }
-export function startMap(state){
+function newMap(state,source=null){
  const v=mapView(state);if(v.status==='unavailable')return null;
  const root=v.root||{version:1,page:'map',mark:'post',side:'A',current:1,nextId:1,rounds:[]};
  let id=root.nextId;
  for(const r of root.rounds){if(!object(r)||typeof r.id!=='number'||r.id<=0)continue;if(!Number.isFinite(r.id)||r.id>=Number.MAX_SAFE_INTEGER)return null;id=Math.max(id,Math.floor(r.id)+1);}
  if(!positive(id)||id>=Number.MAX_SAFE_INTEGER)return null;
- const r={id,places:emptyMapPlaces(),from:'post',to:'cafe',a:[],b:[],support:[],checks:[]};
+ const r={id,places:source?structuredClone(source.places):emptyMapPlaces(),from:source?.from||'post',to:source?.to||'cafe',a:[],b:[],support:[],checks:[]};
+ if(source)r.job={version:1,source:structuredClone(source),view:'both'};
  const drop=new Set(v.rounds.slice(0,Math.max(0,v.rounds.length-11)));
  root.rounds=root.rounds.filter(r=>!drop.has(r));root.rounds.push(r);root.current=id;root.nextId=id+1;root.page='map';root.mark='post';root.side='A';state.cartographer=root;return r;
 }
+export const startMap=state=>newMap(state);
+export function startMapJob(state,id){const source=mapJobSource(id);return source?newMap(state,source):null;}
+export function setMapJobView(state,view){const r=mapView(state).current;if(!r?.job||!['map','dispatch','both'].includes(view))return false;r.job.view=view;return true;}
 const active=state=>{const v=mapView(state);return v.status==='unavailable'?null:v.current||startMap(state);};
 export function setMapPage(state,page){if(!pages.includes(page)||!active(state))return false;state.cartographer.page=page;return true;}
 export function selectMapMark(state,id){if(!known(id)||!active(state))return false;state.cartographer.mark=id;return true;}
 export function placeMapMark(state,x,y){
- if(!validMapPoint({x,y}))return 'invalid';const mark=mapView(state).mark,r=active(state);if(!r)return 'invalid';state.cartographer.mark=mark;
+ if(!validMapPoint({x,y}))return 'invalid';const mark=mapView(state).mark,r=active(state);if(!r)return 'invalid';if(r.job)return 'fixed-job';state.cartographer.mark=mark;
  if(marks.some(m=>m.id!==mark&&samePoint(r.places[m.id],{x,y})))return 'occupied';
  if(samePoint(r.places[mark],{x,y}))return 'same';r.places[mark]={x,y};return 'changed';
 }
-export function chooseMapEndpoint(state,kind,mark){if(!['from','to'].includes(kind)||!known(mark))return false;const r=active(state);if(!r||r[kind==='from'?'to':'from']===mark)return false;r[kind]=mark;return true;}
+export function chooseMapEndpoint(state,kind,mark){if(!['from','to'].includes(kind)||!known(mark))return false;const r=active(state);if(!r||r.job||r[kind==='from'?'to':'from']===mark)return false;r[kind]=mark;return true;}
 export function selectMapRoute(state,side){if(!['A','B'].includes(side)||!active(state))return false;state.cartographer.side=side;return true;}
 export function addMapSupport(state,code){if(!codes.includes(code))return false;const r=mapView(state).current;if(!r)return false;if(!r.support.includes(code))r.support.push(code);return true;}
 export function resumeMap(state,id){const v=mapView(state);if(!v.rounds.some(r=>r.id===id))return false;v.root.current=id;return true;}
@@ -65,6 +70,7 @@ export function clearMapRoute(state){const v=mapView(state);if(v.status!=='ready
 export function checkMapRoutes(state){
  const r=mapView(state).current;if(!r)return null;const paths=mapRoutes(r);if(!paths)return null;
  const {a,b}=paths,check={places:structuredClone(r.places),from:r.from,to:r.to,a,b,relation:a.distance<b.distance?'shorter':a.distance>b.distance?'longer':'equal',bothArrived:a.arrived&&b.arrived,different:JSON.stringify(r.a)!==JSON.stringify(r.b)};
+ if(r.job)check.job={source:structuredClone(r.job.source),a:mapJobFacts(r.job.source,a),b:mapJobFacts(r.job.source,b)};
  r.checks.push(check);r.checks=r.checks.slice(-8);return check;
 }
-export function mapCheckMatches(r){const c=r.checks.at(-1);return !!c&&r.from===c.from&&r.to===c.to&&marks.every(m=>r.places[m.id]===null&&c.places[m.id]===null||samePoint(r.places[m.id],c.places[m.id]))&&r.a.join(',')===c.a.commands.join(',')&&r.b.join(',')===c.b.commands.join(',');}
+export function mapCheckMatches(r){const c=r.checks.at(-1);return !!c&&((r.job===undefined&&c.job===undefined)||(!!r.job&&!!c.job&&JSON.stringify(r.job.source)===JSON.stringify(c.job.source)))&&r.from===c.from&&r.to===c.to&&marks.every(m=>r.places[m.id]===null&&c.places[m.id]===null||samePoint(r.places[m.id],c.places[m.id]))&&r.a.join(',')===c.a.commands.join(',')&&r.b.join(',')===c.b.commands.join(',');}

@@ -49,3 +49,13 @@ Next worktree learning-garden-apprentice on build/fair-test-apprentice starts fr
 ## Apprentice implementation checkpoint
 
 Spec60 is independently spec/content-cleared and implemented at the same #workshop/fair route. Actual local Claude found one P2 about private typing affecting supplied-card relevance; fixed, all12 cards regressed, and fresh Claude follow-up approved for draft. Root84scripts,443core/44integration,177browser assertions and36exact prior/new parent-ramp figure comparisons pass. The optional child never changes the original investigation, and frozen outcomes survive old wording/numbers. No extra source mapping or held path change. Draft publication is next; then the proposed parent–child map-reader/dispatcher information gap needs source/spec review. No merge/deploy.
+
+## Apprentice published checkpoint
+
+Saved as draft PR49, https://github.com/anotherpanacea-eng/learning-garden/pull/49, head85e52f05f3af5d0c1faaaf9be7950c9d142741d0, base build/two-windows. All84scripts,443core/44integration,177browser and36exact parent-art comparisons pass; actual Claude follow-up approved for draft. Worktree clean, own preview8776 stopped. No merge/deploy.
+
+New worktree learning-garden-two-seats / build/map-reader-dispatcher starts from that exact head. Spec61 proposes optional one-device Map-reader/Dispatcher/Both clue views in the existing Cartographer loop, with three supplied jobs requiring an intermediate stop before final delivery. Child authors native route commands; convenience views are freely revealable and solo play is complete. Arrival and request served are distinct; earlier destination passes are allowed before final completion. Source/spec/content review must precede runtime.
+
+## Map-reader/dispatcher implementation checkpoint
+
+Spec61 and the targeted actual-visit/service distinction are independently cleared. Implemented three supplied jobs in the existing Cartographer route with freely revealable one-device roles and native authored directions. Actual local Claude approved the implementation and fresh compact-feedback follow-up for draft. Root86scripts,32,967newcore/63integration and194browser checks pass. Old free-map regressions and all prior state remain intact; no new source mapping. Draft publication is next. Source inventory for the following Living Garden Body clues pack is prepared only: adult pictured specimen/key action is new work, not already present in habitat questions. Primary fact review and a new source/spec/content gate still precede that build. No merge/deploy.
