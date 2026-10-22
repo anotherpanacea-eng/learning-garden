@@ -17,8 +17,8 @@ export const helpers={
 Object.assign(helpers,parisHelpers);
 export const acceptsAnswer=(q,value)=>(q.answers||[q.answer]).includes(value);
 export function helperLimit(h){const m=h.model;return m.type==='array'?m.rows:m.type==='ruler'?m.end-m.start:m.type==='text'?m.segments.length:m.type==='menu'?m.items.length:m.labels.length;}
-export function cleanHelper(d,nodeId){
- const h=helpers[nodeId];if(!h)return;
+export function cleanHelper(d,nodeId,sourceHelper=helpers[nodeId]){
+ const h=sourceHelper;if(!h)return;
  if(d.helper||d.helpUsed)d.helpUsed=true;
  const x=d.helper;if(!x||typeof x!=='object'||x.exampleId!==h.id){delete d.helper;return;}
  x.open=x.open===true;x.attempts=Array.isArray(x.attempts)?x.attempts.filter(v=>Number.isInteger(v)&&v>=0&&(h.kind!=='choice'||v<h.choices.length)):[];

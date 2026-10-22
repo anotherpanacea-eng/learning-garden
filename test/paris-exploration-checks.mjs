@@ -65,7 +65,7 @@ for(const destination of parisDestinations){
 }
 {
  const mutations=[v=>v.route.reverse(),v=>v.route[0]='message-note',v=>v.route.push('paris-postcard'),v=>v.paris.variant=3,v=>v.paris.destination='river',v=>v.paris.storyId='missing',v=>v.paris.reason=null,v=>v.paris.priorStorySeen='false',v=>v.recorded.push('message-note'),v=>v.drafts['message-note']={attempts:[]}];
- for(const mutate of mutations){const s=fresh(),v=begin(s);answer(s);mutate(v);check(!validateParisRoute(v),'tampered route or metadata fails validation');ensureGarden(s);check(!s.garden.visits.length&&!s.garden.observations.length&&s.garden.current===null,'malformed exploration and its dangling observations are removed');}
+ for(const mutate of mutations){const s=fresh(),v=begin(s);answer(s);mutate(v);check(!validateParisRoute(v),'tampered route or metadata fails validation');ensureGarden(s);check(s.garden.visits.length===1&&s.garden.current===v.id&&s.garden.observations.length===1,'malformed saved-source visit and observations remain for recovery');}
  const s=fresh();begin(s);complete(s);s.garden.observations[0].parisStory='foreign';ensureGarden(s);check(s.garden.observations.length===2,'observation with foreign metadata is rejected');
  const p=fresh();begin(p);complete(p);p.garden.visits=[];ensureGarden(p);check(!p.garden.observations.length,'dangling exploration records are rejected');
 }

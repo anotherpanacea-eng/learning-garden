@@ -75,10 +75,9 @@ check(storyNodes['paris-infer'].passageId===storyNodes['paris-evidence'].passage
 }
 {
  const s=fresh();reach(s,ids[0]);const o=answer(s);o.readingTools=null;o.supported=false;o.independent=true;o.freshEvidence=true;ensureGarden(s);
- check(o.readingTools.supportUncertain&&o.supported&&!o.independent&&!o.freshEvidence,'restored observations conservatively normalize malformed support');
- check(storyDescribe(o).includes('uncertain'),'unknown restored support is described honestly');
- o.readingTools={...tools(),audioRequested:true};o.supported=false;o.independent=true;ensureGarden(s);check(o.supported&&!o.independent&&!o.freshEvidence,'restored requested-audio observation remains supported');
- o.readingTools=tools();o.reading='listened';o.supported=false;o.independent=true;ensureGarden(s);check(o.supported&&!o.independent,'restored listening mode remains supported');
+ check(o.readingTools===null&&!o.supported&&o.independent&&o.freshEvidence,'captured Paris observation keeps malformed historical support fields raw');
+ o.readingTools={...tools(),audioRequested:true};o.supported=false;o.independent=true;ensureGarden(s);check(o.readingTools.audioRequested&&!o.supported&&o.independent&&o.freshEvidence,'captured Paris audio history is not regraded on load');
+ o.readingTools=tools();o.reading='listened';o.supported=false;o.independent=true;ensureGarden(s);check(o.reading==='listened'&&!o.supported&&o.independent,'captured Paris reading report is not regraded on load');
 }
 {
  const s=fresh(),d=reach(s,'paris-infer');check(!d.priorPassageSeen,'first shared-passage encounter starts without prior passage');noteStorySeen(s);ensureGarden(s);check(!d.priorPassageSeen,'own first display does not become earlier exposure');d.hinted=true;answer(s);
