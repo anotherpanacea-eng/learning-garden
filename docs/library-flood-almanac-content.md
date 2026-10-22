@@ -1,6 +1,6 @@
 # Flood almanac: proposed final prose
 
-Authoring draft for independent content review, 2026-10-22. This is plain-data content for the proposed [Library Read-Alouds specification](specs/proposed/library-read-alouds.md), not an installed pack. The separate Paris saved-visit repair must land before implementation. Historical claim checks and upstream decisions are in the [source audit](source-audits/library-flood-almanac.md).
+Content independently approved at `a6ff43e`, 2026-10-22; [review receipt](reviews/library-flood-almanac-content-review.md). This is plain-data content for the proposed [Library Read-Alouds specification](specs/proposed/library-read-alouds.md), not an installed pack. The separate Paris saved-visit repair must land before implementation. Historical claim checks and upstream decisions are in the [source audit](source-audits/library-flood-almanac.md).
 
 The three dated multiple-choice sentences are deliberately identical in all passage lengths. The correct sentence is choice 2 (index 1). The ordering items below are written in date order; the existing compiler will choose a stable shuffled display. No image is proposed.
 
