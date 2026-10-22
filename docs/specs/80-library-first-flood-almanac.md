@@ -1,6 +1,6 @@
 # Library: the first flood almanac
 
-Status: **implementation specification awaiting independent review** (2026-10-22). The [bounded Library proposal](proposed/library-read-alouds.md) establishes the teaching shape. The [complete original prose](../library-flood-almanac-content.md) and [source audit](../source-audits/library-flood-almanac.md) were independently content-reviewed at `a6ff43e`; this specification makes that approved pack installable without adding a reading engine. The [English Paris saved-visit repair](73-paris-saved-visit-source.md) must be integrated before this pack is released. Neither the authoring pack nor this specification is a deployed lesson.
+Status: **independently reviewed implementation specification; build in progress** (2026-10-22; [receipt](../reviews/80-library-first-flood-almanac-spec-review.md)). The [bounded Library proposal](proposed/library-read-alouds.md) establishes the teaching shape. The [complete original prose](../library-flood-almanac-content.md) and [source audit](../source-audits/library-flood-almanac.md) were independently content-reviewed at `a6ff43e`; this specification makes that approved pack installable without adding a reading engine. The [English Paris saved-visit repair](73-paris-saved-visit-source.md) is integrated in this build branch and remains a release prerequisite. Neither the authoring pack nor this specification is a deployed lesson.
 
 ## Learner turn and boundary
 

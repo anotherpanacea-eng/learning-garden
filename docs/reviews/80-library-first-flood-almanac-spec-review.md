@@ -1,0 +1,7 @@
+# Spec 80: independent implementation-specification review
+
+On 2026-10-22, a separate Codex reviewer inspected [spec 80](../specs/80-library-first-flood-almanac.md) at `b8a7710` in six grounded passes: completeness, dependency/integration, scope/overlap, project commitments, mechanical verification, and a hostile saved-visit scenario. This was an **internal independent review**, not a Claude review. It made no source edits and found no P1 or P2 issue. The reviewer tested that the approved authoring object compiles against the existing catalog without registration or content edits. This probe is not a runtime or browser test.
+
+The reviewer confirmed the intended seam: install the reviewed plain-data module through the existing compiler and bookstall selector, then rely on the separately reviewed English Paris whole-visit source repair for paused work. At the review head that repair was absent from the Library checkout, so integrating it before implementation verification was the one concrete pre-build condition. It has since been merged locally into this branch. No new historical, efficacy, independent-reading, French, or deployment claim follows from this review.
+
+The exact review was kept at `/private/tmp/lg-library-spec80-review.md` for the build handoff. Implementation and actual-browser checks require their own independent review and receipt before a PR is presented as cleared.

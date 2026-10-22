@@ -11,7 +11,7 @@ const json=x=>JSON.stringify(x);
 function begin(s,d='bookstall',v='auto'){const visit=startVisit(s,'paris',{destination:d,variant:v});storyDraft(s);noteStorySeen(s);return visit;}
 function answer(s,{reading='independent',retry=false,help=false}={}){const n=storyNodes[currentVisit(s).node],d=storyDraft(s);noteStorySeen(s);if(help)useStoryReadingTool(s,'audio');const attempt=value=>{if(n.kind==='order'){editStoryOrder(s,'clear');for(const card of ORDER_PERMUTATIONS[value])editStoryOrder(s,'add',card);return submitStoryOrder(s);}return submitStory(s,value);};if(retry)attempt((n.answer+1)%n.choices.length);attempt(n.answer);d.method='worked';d.reading=reading;return finishStoryNode(s);}
 function complete(s,opts={}){const first=answer(s,opts);answer(s);finishStoryNode(s);return first;}
-check(parisDestinations.length===3&&parisStories.length===7&&Object.keys(parisLibraryNodes).length===42,'three destinations, seven authored stories, three variants and two questions');
+check(parisDestinations.length===3&&parisStories.length===8&&Object.keys(parisLibraryNodes).length===48,'three destinations, eight authored stories, three variants and two questions');
 for(const destination of parisDestinations){
  const s=fresh(),p=parisPlan(s,destination.id);check(p.variant===2&&p.destination===destination.id&&p.route.length===3&&Object.isFrozen(p)&&Object.isFrozen(p.route),'middle variant and immutable plan');
  for(const variant of [1,2,3]){const v=begin(s,destination.id,variant);check(validateParisRoute(v)&&v.paris.variant===variant,'every manual passage length is available');const route=[...v.route];complete(s);check(v.finished&&json(v.recorded)===json(route),'frozen route completes two tasks and postcard');}
@@ -27,7 +27,7 @@ for(const destination of parisDestinations){
  const s=fresh();begin(s);const a=complete(s);check(!a.priorStorySeen&&a.parisVariant===2&&a.parisSelectionReason&&a.practiceOnly&&!a.freshEvidence,'first observation records selection and fresh-story practice only');
  check(parisPlan(s,'bookstall').variant===2,'one story and two answers cannot advance');
  begin(s);complete(s);check(parisPlan(s,'bookstall').variant===3,'two distinct new stories at same variant suggest longer');
- const first=begin(s);check(storyDraft(s).priorStorySeen,'different passage length of same story is rereading');complete(s);check(parisPlan(s,'bookstall').variant===3,'finite library exhaustion does not invent further evidence');
+ const first=startVisit(s,'paris',{destination:'bookstall',variant:3,storyId:a.parisStory});storyDraft(s);noteStorySeen(s);check(storyDraft(s).priorStorySeen,'different passage length of same story is rereading');complete(s);check(parisPlan(s,'bookstall').variant===3,'revisiting a story does not invent further evidence');
  check(parisPlan(s,'river').variant===2,'destination evidence stays independent');
  const repeat=begin(s,'bookstall',2);check(repeat.paris.storyId!==first.paris.storyId,'repeated actual story visits balance encounters');
 }
@@ -47,9 +47,9 @@ for(const destination of parisDestinations){
  const supported=fresh();begin(supported);complete(supported,{help:true});begin(supported);finishStoryNode(supported,true);finishStoryNode(supported,true);finishStoryNode(supported);check(parisPlan(supported,'bookstall').variant===1,'skips cannot erase earlier support signal');
 }
 {
- const s=fresh();begin(s);answer(s,{help:true});answer(s);finishStoryNode(s);begin(s,'bookstall',2);complete(s);check(parisPlan(s,'bookstall').variant===2,'one new story after support holds current variant');
+ const s=fresh(),supported=begin(s);answer(s,{help:true});answer(s);finishStoryNode(s);begin(s,'bookstall',2);complete(s);check(parisPlan(s,'bookstall').variant===2,'one new story after support holds current variant');
  // Rereading the formerly supported story cannot create a second unseen-story success.
- begin(s,'bookstall',2);complete(s);check(parisPlan(s,'bookstall').variant===2,'rereading cannot manufacture advancement after support');
+ startVisit(s,'paris',{destination:'bookstall',variant:2,storyId:supported.paris.storyId});storyDraft(s);noteStorySeen(s);complete(s);check(parisPlan(s,'bookstall').variant===2,'rereading cannot manufacture advancement after support');
  const copy=restoreState(json(s));ensureGarden(copy);check(parisPlan(copy,'bookstall').variant===2,'reload cannot manufacture fresh story evidence');
 }
 {
@@ -72,7 +72,7 @@ for(const destination of parisDestinations){
 {
  const s=fresh(),waiting=begin(s,'bookstall',2),firstId=waiting.id;
  begin(s,'bookstall',2);complete(s);
- const reread=begin(s,'bookstall',1);check(reread.paris.storyId===waiting.paris.storyId,'least seen selects waiting story for shorter revisit');
+ const reread=startVisit(s,'paris',{destination:'bookstall',variant:1,storyId:waiting.paris.storyId});storyDraft(s);noteStorySeen(s);check(reread.paris.storyId===waiting.paris.storyId,'explicit shorter revisit selects the waiting story');
  resumeVisit(s,firstId);check(storyDraft(s).priorStorySeen===false&&storyDraft(s).familiar===true,'later variant display preserves frozen history but marks paused task as familiar');
  complete(s);check(parisPlan(s,'bookstall').variant===2,'paused cross-variant reread cannot manufacture second unseen success');
 }

@@ -121,6 +121,7 @@ node test/paris-checks.mjs
 node test/paris-exploration-checks.mjs
 node test/paris-saved-source-checks.mjs
 node test/story-pack-checks.mjs
+node test/library-flood-almanac-checks.mjs
 node test/order-story-checks.mjs
 node test/french-and-revision-checks.mjs
 node test/french-exploration-checks.mjs
@@ -174,6 +175,8 @@ A shortage answer never creates inventory. Serving requires enough actual suppli
 Paris also offers three freely chosen destinations: Lucie’s bookstall, the river walk, and the rooftop garden. Seven original errands each have two questions and three passage lengths (14 question prompts, 42 task versions). The next errand favors less encountered stories and suggests a passage length from recent work at that destination, while all lengths remain open. Help/retries can suggest shorter text; two independent first tries on different previously unseen stories can suggest longer text. Repeated stories, shared passages, supported reading, skips, and unknown reports remain distinct. Suggestions are approximate and finite, not reading levels. Frozen routes preserve paused errands across reloads; the original postcard path remains available. See [Paris exploration](docs/specs/11-paris-exploration.md).
 
 The rooftop puppet show is the first [reviewed story pack](docs/story-packs.md). A plain-data module adds its passage variants, evidence question, tap-to-order cards, and helpers to the existing catalog. The validation command rejects malformed packs and conflicting IDs before publication. Partial card arrangements pause with the story, and exported attempts retain readable orders. New packs using these supported formats can be added without changing the engine. Its Marble connection covers sequence only, leaving central message and full retelling unobserved.
+
+The second pack adds a [reviewed text-only flood almanac](docs/specs/80-library-first-flood-almanac.md) at Lucie’s bookstall. All three optional passage lengths name the historical sources and separate the real 1910 flood from the imagined town; one question finds a dated sentence, and another orders three undated event cards by rereading. English Paris saves retain each visit’s original passage, choices, helper and order when published wording changes. Adult read-aloud and optional local narration are support choices, not evidence of independent reading.
 
 The opening introduces the shared story: neighbors are safe after the storm, and players can gather supplies, feed visitors, investigate water, follow messages, or imagine shelters. The café has a replayable, optional “Why we’re here & how to play” introduction, open at a fresh counter, with read-aloud and three short steps. The story introduction adds no completion gates or learner records.
 
@@ -343,4 +346,4 @@ The locally built **Whole batches for a gathering** activity (`#cafe/batches`) i
 
 New visits retain their supplied passages, questions, ordering cards, smaller examples and ending together. Catalogue edits cannot change a paused answer or the next question's passage. Earlier visits without those pages stay in the notebook as records; a fresh visit is offered without guessing the missing wording. French preservation is a separate follow-up.
 
-For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
+For synthetic browser regressions, serve `dist` locally and run `node test/paris-saved-source-browser.js` with `PARIS_SOURCE_TEST_URL` set to that server. This requires installed Node Playwright and Chromium; optional `PLAYWRIGHT_MODULE` and `CHROME_PATH` select existing installations. Set `PARIS_SOURCE_STORY_ID=flood-almanac` and `PARIS_SOURCE_VARIANT=1`, `2`, or `3` to exercise each Library length; the default remains puppet-post. Set `PARIS_SOURCE_ARTIFACTS` to a temporary screenshot directory. The test uses isolated synthetic profiles, altered in-memory catalogue responses, phone/tablet viewports, reload, recovery and actual download/import. It does not establish physical iPad/Safari or audible-speech behavior.
