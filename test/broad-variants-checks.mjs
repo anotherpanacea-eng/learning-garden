@@ -68,6 +68,10 @@ console.log(`${checks} Number Garden variant checks passed.`);
   check(!r.broad.drafts[`checkin:${item.id}`]&&r.broad.closedDrafts.length===1,'a changed answer still closes the paused question and keeps it');}
  {const {s}=fresh();delete s.broad.drafts[`checkin:${item.id}`].question.prompt;const r=reload(s);
   check(!r.broad.drafts[`checkin:${item.id}`],'a saved question missing its prompt is not resumed');}
+ {const {s}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];d.question.title='  ';const r=reload(s);
+  check(!r.broad.drafts[`checkin:${item.id}`],'a saved question with a blank title is not resumed');}
+ {const {s}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];delete d.question.talk;d.question.wonder='An extra earlier wording field';const r=reload(s);
+  check(r.broad.drafts[`checkin:${item.id}`],'adding or dropping an optional wording field keeps the paused question open');}
  {const {s}=fresh();s.broad.drafts[`checkin:${item.id}`].question.prompt={toString:null};const r=reload(s);
   check(!r.broad.drafts[`checkin:${item.id}`],'non-text wording is not resumed');}
 }
