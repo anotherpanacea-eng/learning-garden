@@ -2,6 +2,8 @@
 
 **Status: Planned; not implemented.**
 
+The [phonics content/audio commissioning brief55](55-phonics-content-audio-brief.md) now supplies a proposed12-word audit,51 audio requests, three explicitly adult-supported texts and a manifest example. All remain pending independent linguistic/specification/audio/rights review; there are no approved sound assets or player. The separate meaning/morpheme door was implemented as [Word Garden, spec34](34-word-garden.md), without isolated-phoneme teaching. This older outline does not override brief55's review gates or authorize production/publication.
+
 ## Goal and play loop
 
 Explore how sound changes connect to letters and meaningful word parts. Hear a reviewed example, tap sound/letter pieces, blend at the child’s pace, change one piece, and read the resulting real word in a short shared line. Prediction, explanation, and an optional paper-word transfer remain invitations. This is practice, never an age/grade placement test.

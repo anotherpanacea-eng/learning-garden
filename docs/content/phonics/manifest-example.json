@@ -1,0 +1,80 @@
+{
+  "documentationOnly": true,
+  "runtimeReady": false,
+  "schemaStatus": "proposal-not-a-runtime-schema",
+  "packId": "word-workshop-cvc-proposal",
+  "packRevision": 1,
+  "textRevision": 1,
+  "pronunciationModel": {
+    "id": "ga-short-vowels-proposal-v1",
+    "status": "pending-independent-review",
+    "description": "Proposed General American model: /æ/, /ɪ/ including before /n/, /ɑ/; exact adult speaker model undecided"
+  },
+  "wordExample": {
+    "id": "pop",
+    "graphemes": [
+      "p",
+      "o",
+      "p"
+    ],
+    "phonemes": [
+      "p",
+      "ɑ",
+      "p"
+    ],
+    "soundAssetIds": [
+      "sound-p",
+      "sound-o",
+      "sound-p"
+    ],
+    "wordAssetId": "word-pop",
+    "segmentedAssetId": "segmented-pop",
+    "blendAssetId": "blend-pop"
+  },
+  "assetExample": {
+    "id": "blend-pop",
+    "kind": "blend",
+    "targetId": "pop",
+    "textRevision": 1,
+    "phonemeSequence": [
+      "p",
+      "ɑ",
+      "p"
+    ],
+    "speakerModelRef": null,
+    "master": null,
+    "delivery": null,
+    "sha256": null,
+    "durationMs": null,
+    "timingAnchors": null,
+    "license": null,
+    "publicAttribution": null,
+    "review": {
+      "linguistic": {
+        "status": "pending",
+        "assetSha256": null,
+        "modelRevision": null,
+        "textRevision": null,
+        "publicReviewRecord": null
+      },
+      "audio": {
+        "status": "pending",
+        "assetSha256": null,
+        "modelRevision": null,
+        "textRevision": null,
+        "publicReviewRecord": null
+      },
+      "rights": {
+        "status": "pending",
+        "assetSha256": null,
+        "modelRevision": null,
+        "textRevision": null,
+        "publicReviewRecord": null
+      }
+    }
+  },
+  "independentSpecificationReview": {
+    "status": "pending",
+    "publicReviewRecord": null
+  }
+}
