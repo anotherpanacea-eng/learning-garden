@@ -1,0 +1,44 @@
+# Join the Portions: bounded source and overlap audit
+
+Authoring for [spec 103](../specs/103-join-the-portions.md), 2026-10-22, off public main `5432678b47f091adbd5df72a8f202545709c8415`. All child copy, portion jobs and art are original. No learner record, worksheet, upstream lesson item, external image or new runtime code is incorporated. This is a source study, not independent review or topic coverage.
+
+## Actual local contrast
+
+Read current Fraction Trail 52 core/content/UI (including past-one 5/4 and whole-stop 4/4), Same Amount/New Cuts 70, Tenths 81, Sharing Counter 22 and newly merged Ribbon Recut 100, plus the canonical six-act M3-fractions sequence. Trail iterates a flag and accepts equivalent readings; Matches supplies a reference and asks for the same amount in different cuts; Recut directly changes cuts with a stationary amount; Tenths names fixed tenths; Sharing partitions one loaf or packs a chosen share. These already introduce unit/whole, non-unit and past-one ideas; repeating them with a new question would be weak novelty. None moves pieces from a second already-measured fractional portion into a tray containing the first while preserving the piece unit and identity. Existing recipe pictures transfer 50 mL units, not same-denominator fractions of one fixed whole. The new action is small but distinct.
+
+Canonical **M3-fractions step 6** owns same-unit addition/regrouping. M2 is whole-number multiplication/division; no new strand code or ledger mapping is invented. Present all unit/whole/count teaching inline; earlier visits are optional invitations, not certified prerequisites. This transient guided model needs no saved-source/history/recovery machinery because it records no learner work or result.
+
+## Primary mathematical guidance actually read
+
+- [CCSS 4.NF.B.3a–d](https://www.thecorestandards.org/Math/Content/4/NF/) relates joining/separating to the same whole, builds fractions by repeated unit fractions and later extends decompositions/mixed numbers. That supports equal-size loaf units and explicitly iterating quarters through one whole. The first pack supplies all labels and one origin decomposition per case; it does not observe a learner-generated decomposition, justification or general mixed-number algorithm.
+- [NCETM 3.4, Adding and subtracting within one whole](https://www.ncetm.org.uk/classroom-resources/primm-304-adding-and-subtracting-within-one-whole/) situates equal-unit joining and the inverse separation before wider fraction operations. Its within-one scope supports the first three jobs; it alone is not the source for the fourth beyond-one job.
+- [England mathematics programme, fractions](https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study) distinguishes within-one same-denominator work from later practice beyond one. The crossing-quarter job is openly available supported exploration, not a declaration that every learner is placed at that later point. The uniform whole remains explicit; denominator counts equal parts of one loaf, not all slots in a larger serving tray.
+
+No source drawing, worked numbers, assessment item or prose is copied. These are primary authoring references; standards are not a validation of this app's learning effects. The rendered reference and both tray-row dimensions must actually agree, not merely be called the same whole in a caption.
+
+## Jane: fresh exact design study
+
+Fresh public HEAD read returned [`1a555c1236e4b18babcc78d14307682755576e45`](https://github.com/kentlangley/Jane/tree/1a555c1236e4b18babcc78d14307682755576e45). Downloaded/read exact `LESSONS.md`, `src/engine.js` and `LICENSING.md`. The teaching-first small worked example and available help remain useful design references. Engine `fracbar` supplies a partition/answer and grades its numerical input; its `order` item shuffles a canonical sequence. Neither supplies conserved two-origin movement into a shared tray. A numerical question, fixed-piece shading tap or canonical-order grader would change the task, so none is incorporated. Bosses, rewards, inferred mastery and learner-data handling stay out.
+
+Jane code is MIT; lesson/docs material is CC BY-SA 4.0, © 2026 Kent Langley and Landon. Its research guidance is agent-authored and not learner-tested. No new Jane code/content adaptation is installed; existing app attribution remains. The study does not imply adopting all of Jane's curriculum ordering or evidence policy.
+
+## Marble: selected meanings and every direct incoming edge
+
+Fresh HEAD remains [`a8719737ff86ef7940ba5feca11940de1204103e`](https://github.com/withmarbleapp/os-taxonomy/tree/a8719737ff86ef7940ba5feca11940de1204103e). Reopened exact cached `data/topics.json`, `data/dependencies.json`, database/content licenses; read each selected topic's complete description/evidence and all incoming edges. The following six selected meanings/evidence arrays equal the older bundled pin's corresponding records; no claim of whole-graph equality follows.
+
+| ID / actual meaning | Every direct incoming edge | Bounded disposition |
+| --- | --- | --- |
+| `mt_a1FdAsRKOF` Simple Fraction Sums: add/subtract same-denominator fractions within one whole. | Hard `mt_Kr3IyA6m-O` (fractions as numbers); soft `mt_OvyoRo47K-` (addition as combining). | Three supplied joins within one whole, reversible return. No independent calculation/subtraction explanation or complete topic. |
+| `mt_CBHwluE6Lp` Adding Fractions, Same Denominator: includes sums above one whole and meaning of their names. | Hard `mt_a1FdAsRKOF` (within-one addition first). | One explicitly scaffolded 3/4 + 2/4 path through 4/4 to 5/4. No general improper/mixed conversion. |
+| `mt_VgOePicFYK` Fraction Addition Concepts: join/separate and more than one decomposition. | Hard `mt_09sySPqM9Z` (fraction as repeated unit fractions); hard `mt_CBHwluE6Lp` (same-denominator operations). | Concrete joining/separating supports meaning. One fixed pair of origins per job does not deliver arbitrary multiple decompositions or complete the source's procedural predecessors. |
+| `mt_09sySPqM9Z` Understanding fractions: a/b as a sum of 1/b, including iteration beyond 1. | Hard `mt_ndGqFPWyen` (unit-fraction meaning). | Count fixed quarter/third/sixth-size pieces, including five quarters. No assessed notation or number-line construction. |
+| `mt_ndGqFPWyen` Fractions of a whole: one part of b equal parts, then a such parts. | Hard `mt_cFltwUQi-d` (recognized fractions of shapes/amounts), `mt_vKcxX6iNOA` (numerator/denominator/unit language), `mt_Xp-rj46S2w` (equal partition). | Same-size whole guide and exact equal-piece geometry supply the idea and vocabulary; this bench does not observe independent partitioning or varied sets. |
+| `mt_Kr3IyA6m-O` Fractions on a number line. | Hard `mt_cFltwUQi-d` (fraction meaning); soft `mt_YzM5goBctT` (tenths counting). | Existing Trail is an open nearby home. The new tray is not itself a number-line placement assessment. |
+
+The hard-edge order is source authoring context, not proof that this one lesson completes every predecessor or a reason to lock the crossing-one case. Unlike-denominator addition (`mt_14T5yPXUq_` and related-denominator predecessor `mt_-V7EnqU7gG`) needs separately taught equivalence/common-unit work; those full lessons are deferred. The realistic later Recut→join return is a proposal, not an installed graph connection or proficiency claim.
+
+No Marble repin, atlas row/count, runtime suggestion weight or assessment prompt changes. Marble Skill Taxonomy · © Generative Spark, Inc. (Marble) · https://withmarble.com · ODbL 1.0 database / CC BY-SA 4.0 descriptive content. Existing project notices remain authoritative. The audit paraphrases selected meanings for authoring; the original child-facing lesson does not copy their prompts.
+
+## Original art author check, not independent clearance
+
+The original static [contact sheet](../specs/assets/103-join-the-portions.html) includes all four completed jobs, the crossing-one initial/intermediate states and all three separate teaching frames. An author check enumerated all twelve live states: total food and unique identities are conserved, tray/waiting counts agree with k, and a legal move followed by return restores the arrangement. Chrome rendered the contact sheet at 320 and 820 CSS pixels with no horizontal overflow, controls at least 44 pixels high and identical whole-row widths within every panel. Actual sixths, crossing-one and teaching-frame pixels were inspected. This is design/art evidence only; static buttons do not implement an activity, and the mock is not a production multi-case layout. Independent root math/content/rendered-art review is still required.
