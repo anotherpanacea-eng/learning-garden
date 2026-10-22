@@ -1,6 +1,6 @@
 # Measuring Desk: source and overlap audit
 
-Author preparation2026-10-22, for [spec92](../specs/92-measuring-desk.md). Base is internally reviewed draft composition`affddab`; no new implementation, atlas reference or release is implied.
+Author preparation2026-10-22, for [spec92](../specs/92-measuring-desk.md). The audit studied internally reviewed draft composition`affddab`. The later [implementation review](../reviews/92-measuring-desk-review.md) records the build; no new atlas reference or release is implied.
 
 ## Existing work and new action
 

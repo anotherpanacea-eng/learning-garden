@@ -387,6 +387,12 @@ The notebook keeps the selected supplied reply and support separately. Earlier c
 
 For synthetic browser verification, serve `dist/` locally and run `node test/field-kit-browser.js` with `FIELD_TEST_URL` set to that server's URL. Set `PLAYWRIGHT_MODULE` to an installed Playwright module and, if needed, `CHROME_PATH` to an installed Chromium browser. Optional `FIELD_ARTIFACTS` saves synthetic screenshots. The test inspects print media, simulates local voice callbacks, and exercises phone/tablet layouts and actual notebook download/import; it does not establish physical-device audio behavior or what happened offscreen.
 
+## Measuring Desk
+
+The optional `#science/measure` desk asks an adult and child to read the same unchanged cold-water fill twice in one real jug, enter the two readings they report, and compare only those entered numbers. A neighboring-mark gap is optional context, not a calculated uncertainty. Keeping a version freezes its source, raw entries and comparison without certifying the jug, reading method or physical amount. The pre-Start method can be heard or printed without creating a notebook; a started notebook prints the method without entered readings. Field Kit outcome records and Measuring Kitchen picture practice stay separate. See [spec92](docs/specs/92-measuring-desk.md), its [source audit](docs/source-audits/92-measuring-desk.md) and [implementation review](docs/reviews/92-measuring-desk-review.md).
+
+Run `node test/measuring-desk-checks.mjs` for source, arithmetic, saved-work and recovery checks. With `dist` served locally and Playwright installed, run `MEASURE_TEST_URL=http://127.0.0.1:4173/ node test/measuring-desk-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `MEASURE_SCREENSHOT_DIR` can select local installations and temporary screenshots. The synthetic browser run covers phone/tablet layout, actual notes import/download, root-free narration, method-only print media and near-limit refusal. It does not establish physical iPad/Safari or jug accuracy.
+
 ## Willow Path
 
 The optional `#numbers/path` walk links from Number Garden. Move two shaped tokens along ten equal numbered stones, spinning one or two and naming each destination. Two people can share the tokens, or one person can move both. They finish together at Willow Bridge; there is no winner, score, or learning assessment. Small stories appear at occupied stones. Optional step narration uses the existing local voice settings and resets when you leave.

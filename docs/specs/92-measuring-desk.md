@@ -1,6 +1,6 @@
 # 92 · The Measuring Desk: two readings, one real jug
 
-**Independent specification/practical-content/source/art review at `5c7a78e` found0 P1/2 P2. The exact-credit and malformed-comparison Keep folds await focused clearance. No implementation or release claim.**
+**Independent specification/practical-content/source/art review cleared the folded spec at `73d612f` after two focused repairs. The [implementation review](../reviews/92-measuring-desk-review.md) records the local build and its limits; no release claim follows.**
 
 ## The action and its boundary
 
