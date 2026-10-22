@@ -31,7 +31,7 @@ export function ensureBroad(state) {
   for (const [key,draft] of Object.entries(b.drafts)) {
     if (!draft || !Array.isArray(draft.attempts) || !draft.attempts.every(Number.isFinite)){delete b.drafts[key];continue;}
     if(draft.question&&!validSnapshot(draft.question,key.split(':').slice(1).join(':'))){
-      // A wording/content update can invalidate a frozen question. Keep all earlier work,
+      // A content update (numbers, answer, structure) can invalidate a frozen question. Keep all earlier work,
       // but never score it against the replacement question or feed it to suggestions.
       b.closedDrafts.push({key,draft:structuredClone(draft)});b.draftNotice=true;
       delete b.drafts[key];continue;
@@ -99,7 +99,23 @@ function validSnapshot(q,id){
  const template=itemById(id);if(!template||!q||q.id!==id)return false;
  if(q.variant!==null&&(typeof q.variant?.seed!=='string'||q.variant.seed.length>200))return false;
  const expected=q.variant?generatedBroad(template,q.variant.seed):{...structuredClone(template),variant:null};
- return JSON.stringify(q)===JSON.stringify(expected);
+ return JSON.stringify(semanticBroad(q))===JSON.stringify(semanticBroad(expected))&&broadWordingValid(q);
+}
+// A frozen question keeps its own wording; only its numbers, answer and structure must still match,
+// so a copy edit cannot close a paused question.
+const BROAD_TEXT=new Set(['label','title','prompt','hint','solution','talk','steps','childLesson','lesson','wonder','message']);
+function semanticBroad(x){
+ if(Array.isArray(x))return x.map(semanticBroad);
+ if(!x||typeof x!=='object')return x;
+ const out={};for(const [k,v] of Object.entries(x)){if(BROAD_TEXT.has(k))continue;out[k]=k==='choices'&&Array.isArray(v)?v.length:semanticBroad(v);}
+ return out;
+}
+function broadWordingValid(q){
+ const text=v=>typeof v==='string'&&v.length<=2000;
+ const walk=x=>Array.isArray(x)?x.every(walk):!x||typeof x!=='object'||Object.entries(x).every(([k,v])=>BROAD_TEXT.has(k)?(k==='steps'?Array.isArray(v)&&v.every(text):text(v)):walk(v));
+ if(!walk(q))return false;
+ if(q.choices!==undefined&&!(Array.isArray(q.choices)&&q.choices.every(text)))return false;
+ return !Array.isArray(q.choices)||typeof q.answer!=='string'||q.choices.includes(q.answer);
 }
 export function instantiateBroad(state,q,mode='checkin',explorerSeed='garden'){
  const b=ensureBroad(state),kind=mode.includes('activity')?'activity':'checkin',draft=b.drafts[`${kind}:${q.id}`];

@@ -57,3 +57,15 @@ for(const q of broadItems()){
 const s=freshState();ensureBroad(s);const paused=generatedBroad(broadItems().find(q=>q.id==='operations-anchor'),'paused');s.broad.drafts['checkin:operations-anchor']={question:paused,attempts:[]};noteBroadExposure(s,{id:'other',fact:[...paused.fact].reverse()},'activity');check(s.broad.drafts['checkin:operations-anchor'].knownFact,'paused exact generated factors');
 for(const id of ['number','operations','fractions','patterns','geometry','measurement','reasoning']){const s=freshState();ensureBroad(s);beginTrail(s,id);for(let i=0;i<2;i++){const q=trailQuestion(s,id);recordTrail(s,makeBroadObservation(q,{attempts:[q.answer],method:'worked'},'checkin'));}beginTrail(s,id,true);check(trailQuestion(s,id).id===`${id}-anchor`,'revisit uses fresh anchor');}
 console.log(`${checks} Number Garden variant checks passed.`);
+{
+ // A copy edit must not close a paused question; a changed answer or number still does.
+ const item=broadItems().find(q=>q.kind==='number')||broadItems()[0];
+ const fresh=()=>{const s=freshState();const b=ensureBroad(s);const q=instantiateBroad(s,item,'checkin');b.drafts[`checkin:${item.id}`]={attempts:[],question:q};return {s,q};};
+ const reload=s=>{const r=restoreState(JSON.stringify(s));ensureBroad(r);return r;};
+ {const {s,q}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];d.question.prompt='Earlier prompt wording';d.question.hint='Earlier hint';const r=reload(s);
+  check(r.broad.drafts[`checkin:${item.id}`],'earlier wording keeps the paused question open');check(instantiateBroad(r,item,'checkin').prompt==='Earlier prompt wording','resumed question keeps its own wording');check(!r.broad.draftNotice,'no closed-question notice for a copy edit');}
+ {const {s}=fresh();const d=s.broad.drafts[`checkin:${item.id}`];d.question.answer=typeof d.question.answer==='number'?d.question.answer+1:'changed';const r=reload(s);
+  check(!r.broad.drafts[`checkin:${item.id}`]&&r.broad.closedDrafts.length===1,'a changed answer still closes the paused question and keeps it');}
+ {const {s}=fresh();s.broad.drafts[`checkin:${item.id}`].question.prompt={toString:null};const r=reload(s);
+  check(!r.broad.drafts[`checkin:${item.id}`],'non-text wording is not resumed');}
+}
