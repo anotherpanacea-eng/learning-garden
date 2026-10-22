@@ -30,7 +30,8 @@
 .seed-bar{display:block;height:100%;min-width:0}
 .seed-bar.seed-sun{background:#d8a53d}
 .seed-bar.seed-moon{background:#8d75b6}
-.seed-ticks{display:flex;justify-content:space-between;margin-left:70px;padding-left:.45rem;font-size:.8rem}
+.seed-ticks{position:relative;height:1.2rem;margin-left:2px;font-size:.8rem}
+.seed-ticks span{position:absolute;top:0;transform:translateX(-50%)}
 .seed-run-table,.seed-history table{width:100%;border-collapse:collapse;margin:.8rem 0}
 .seed-run-table th,.seed-run-table td,.seed-history th,.seed-history td{padding:.35rem;border-bottom:1px solid #cbded1;text-align:left}
 .seed-history,.seed-talk{margin:1rem 0;padding:.5rem .8rem;border:1px solid #cbded1;border-radius:10px}
