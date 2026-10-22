@@ -32,6 +32,10 @@ for(const condition of ['stamp-star','stamp-circle','wrap-blue','wrap-yellow'])f
  s.sortingDesk.program={else:'leaf',then:'lantern',condition:'stamp-star'};
  eq(D.sortingView(s).resultAvailable,true,'saved program key order does not hide a matching result');
  const loaded=prepareProgressImport(JSON.stringify(report(s),null,2));ok(loaded.ok);ok(sortingPage(loaded.state).includes('Your rule sent this parcel'));
+ s.sortingDesk.source.text.otherBranch='R&D <example> stays in source';
+ const html=sortingPage(s);ok(html.includes('R&amp;D &lt;example&gt; stays in source'));
+ ok(!html.includes('R&amp;amp;D')&&!html.includes('<example>'),'frozen trace text escaped exactly once');
+ ok(html.includes('Does the stamp show a star?')&&!html.includes('Is stamp is star?'),'trace asks a grammatical condition question');
  const one=seed();ready(one);one.sortingDesk.source.parcels=[one.sortingDesk.source.parcels[0]];run(one);
  ok(!sortingPage(one).includes(one.sortingDesk.source.text.counterexample),'single-card saved source offers no unavailable contrast');
 }
@@ -55,6 +59,7 @@ for(const condition of ['stamp-star','stamp-circle','wrap-blue','wrap-yellow'])f
 }
 {
  const s=seed();ready(s);s.sortingDesk.kept={bad:'<script>synthetic</script>'};const before=structuredClone(s);ok(D.sortingView(s).keptUnreadable);run(s);ok(!D.keepSortingRun(s,preflight),'unreadable kept copy cannot be overwritten');eq(s.sortingDesk.kept,before.sortingDesk.kept);ok(preflight(s));
+ const html=sortingPage(s);ok(html.includes('data-sorting-keep disabled'),'unreadable kept copy disables Keep');ok(html.includes('An earlier kept run is unreadable')&&html.includes('Download notes and start a separate desk'),'unreadable kept explanation is truthful and actionable');
  const deep=seed();let raw='old';for(let i=0;i<59;i++)raw=[raw];deep.sortingDesk=raw;const old=structuredClone(deep);ok(!D.startSorting(deep,preflight,true),'nested depth preflight refuses atomically');eq(deep,old);
 }
 {
