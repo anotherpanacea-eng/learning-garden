@@ -54,6 +54,7 @@ With Node.js installed:
 
 ```sh
 node test/field-kit-checks.mjs
+node test/riddles-checks.mjs
 node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
