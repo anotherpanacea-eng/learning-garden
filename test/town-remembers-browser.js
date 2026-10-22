@@ -78,14 +78,16 @@ const {pathToFileURL}=require('node:url');
   const prior=broad.familiarity(afterCheck,question),observation=broad.makeBroadObservation(question,{attempts:[question.answer],knownFact:prior.knownFact,priorExposureUnknown:prior.priorExposureUnknown},'checkin',false,afterCheck);
   eq(observation.freshEvidence,false,'later independent broad answer is not called fresh after Town explanation');
   eq(afterCheck.townRemembers.errands.at(-1).checks[0].fit,false,'Town Check remains non-fitting');
+  ok(!afterCheck.broad.seenFacts.includes('2x6'),'separate Help fact waits until Help is visible');
   await tap(crossing,'[data-town-support="example"]');
   ok((await saved(crossing)).broad.seenFacts.includes('2x6'),'visible separate Help exposes 2 by 6');
   await crossing.reload();await crossing.locator('.town-example').waitFor();
   ok((await saved(crossing)).broad.seenFacts.includes('3x4'),'checked feedback survives reload');
+  eq((await saved(crossing)).broad.seenFacts.filter(k=>k==='3x4').length,1,'revisiting the page does not duplicate the fact');
   await crossing.close();
   // Imported checked work has no inferred exposure until its text is opened again.
   const hidden=fixture('share-buns','shares',3);town.startTown(hidden);let recorded=hidden.townRemembers.errands.at(-1);
-  town.chooseTown(hidden,recorded.choices.find(c=>c.value!==recorded.expected).value);town.checkTown(hidden);town.asideTown(hidden);
+  town.chooseTown(hidden,recorded.choices.find(c=>c.value!==recorded.expected).value);town.checkTown(hidden);town.supportTown(hidden,'example');town.asideTown(hidden);
   const notesPage=await pageFor(hidden,390,844,'#notes');await notesPage.locator('.town-notes').waitFor();
   ok(!(await saved(notesPage)).broad.seenFacts.includes('3x4'),'collapsed history does not expose checked feedback');
   await notesPage.locator('.town-notes > summary').click();
