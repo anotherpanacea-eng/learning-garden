@@ -17,9 +17,11 @@ for(const r of riddles){
  assert.equal(r.choices.length,3,r.id);assert.equal(new Set(r.choices.map(c=>c.code)).size,3,r.id);
  assert.equal(r.choices.filter(c=>c.code===r.answer).length,1,r.id);
  for(const c of r.choices)assert.equal(c.code===r.answer?c.nudge===null:typeof c.nudge==='string'&&c.nudge.length>0,true,`${r.id}:${c.code}`);
- assert.ok(riddlePlaces[r.place],r.id);
+ assert.ok(r.place===null||riddlePlaces[r.place],r.id);
 }
 for(const band of ['sprout','seedling','sapling'])assert.ok(poolFor(band).length>=5,band);
+assert.deepEqual(poolFor('spanish').map(r=>r.strand),Array(6).fill('spanish'),'Spanish card choice shows only Spanish riddles');
+{const s=freshState();chooseSize(s,'spanish');nextRiddle(s,seeded());assert.equal(riddleById(s.riddles.current.id).strand,'spanish');assert.doesNotMatch(riddlesPage(s),/class="secondary" href="#/,'no place link until the garden has a Spanish destination');}
 const copyText=JSON.stringify([riddles,riddleSizes,riddlePlaces,ownRiddle]);
 assert.doesNotMatch(copyText,/—/,'kid-facing copy has no em-dashes');
 

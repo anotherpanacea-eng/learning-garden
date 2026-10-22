@@ -23,7 +23,7 @@ export function openRiddle(state){
  if(!card||c.order.length!==card.choices.length||!c.order.every(x=>card.choices.some(ch=>ch.code===x)))return {current:c,card:null};
  return {current:c,card,choices:c.order.map(x=>card.choices.find(ch=>ch.code===x))};
 }
-export function poolFor(size){return riddles.filter(x=>size==='any'||x.band===size);}
+export function poolFor(size){return riddles.filter(x=>size==='any'||(size==='spanish'?x.strand==='spanish':x.band===size));}
 export function chooseSize(state,size){return change(state,r=>{if(!sizes.includes(size))return false;r.size=size;return true;});}
 function shuffled(xs,random){const a=[...xs];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 // Unmet cards come first, in authored order after the current one; then the rotation repeats.

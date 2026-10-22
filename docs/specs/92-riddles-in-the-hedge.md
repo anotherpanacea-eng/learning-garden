@@ -14,7 +14,7 @@ Status: **implemented in a draft branch; not merged or deployed.** Requested as 
 
 ## Cards and challenge bands
 
-18 original cards in `dist/riddles-content.mjs`, six per authoring band, spread over the math, reading, science, world and French strands. Every card has exactly three choices, one fitting.
+24 original cards in `dist/riddles-content.mjs`, spread over the math, reading, science, world, French and Spanish strands. Every card has exactly three choices, one fitting. The six Spanish cards (two per band) add the first Spanish content in the garden; they have no place link because there is no Spanish destination yet, and the French cards are unchanged.
 
 | Band (authoring label) | Child-facing card choice | Shape |
 |---|---|---|
@@ -22,7 +22,7 @@ Status: **implemented in a draft branch; not merged or deployed.** Requested as 
 | `seedling` | Riddles with more clues | Combine clues, a homophone, early fractions, a first French word |
 | `sapling` | Wordplay riddles | Double meanings, two-condition number riddles, a French false friend |
 
-This follows the [challenge-bands proposal](proposed/challenge-bands.md): bands describe tasks, never the child, and every card stays open. The card choice is a local, saved, explicit control (`riddles.size`: `any | sprout | seedling | sapling`, default `any`). It does not read `garden.start`; a later reading-strand shortcut can map onto it without migrating saved work. Changing the choice never alters the card that is out.
+This follows the [challenge-bands proposal](proposed/challenge-bands.md): bands describe tasks, never the child, and every card stays open. The card choice is a local, saved, explicit control (`riddles.size`: `any | sprout | seedling | sapling | spanish`, default `any`). **Spanish riddles** filters by strand rather than band, for a child studying Spanish. It does not read `garden.start`; a later reading-strand shortcut can map onto it without migrating saved work. Changing the choice never alters the card that is out.
 
 ## Saved work
 
