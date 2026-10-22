@@ -26,7 +26,7 @@ The first story-pack extension is implemented: Jane's example/publisher informed
 
 Number Garden refresh (specs 15–21) reuses the existing pinned Marble topic links and browser-local responsive-help patterns. Jane `LESSONS.md` was refreshed on 2026-10-18: its procedural math, teach/guided-example distinction and visual response formats informed this implementation. Its mastery, graded bosses, penalties, remote storage and scheduling are not adopted. The pinned Marble topics were also refreshed; no age-based placement or new mastery inference is introduced. All new variants, helpers, SVG art, open invitations and planting prose are original; no additional upstream code or lesson prose is copied.
 
-Riddles in the Hedge (spec 80) refreshes Jane `LESSONS.md` at `60d864fb9004d7090c7ea2f595f679b35bc566ad` on 2026-10-22. Its three-option multiple-choice, nudging hint and short explanation conventions are design references; points, mastery and step-down rules are not adopted, and no Jane code or prose is incorporated. Pinned Marble Homophones and Inference topics are partial thematic references; no atlas mapping is added.
+Riddles in the Hedge (spec 92) refreshes Jane `LESSONS.md` at `60d864fb9004d7090c7ea2f595f679b35bc566ad` on 2026-10-22. Its three-option multiple-choice, nudging hint and short explanation conventions are design references; points, mastery and step-down rules are not adopted, and no Jane code or prose is incorporated. Pinned Marble Homophones and Inference topics are partial thematic references; no atlas mapping is added.
 
 ## Source and license boundaries
 

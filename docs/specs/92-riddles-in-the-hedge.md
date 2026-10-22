@@ -1,4 +1,4 @@
-# 80. Riddles in the Hedge: multiple-choice riddle cards
+# 92. Riddles in the Hedge: multiple-choice riddle cards
 
 Status: **implemented in a draft branch; not merged or deployed.** Requested as a just-for-fun activity: riddles with multiple-choice answers. The riddles are play first, and each answer opens a short "why it fits" line that connects to an existing destination.
 
