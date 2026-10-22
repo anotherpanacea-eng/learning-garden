@@ -29,6 +29,7 @@ const text=Object.freeze({
  helpTitle:'Look at what changes',helpBody:"For comparison, pair equal amounts but leave both crates full. Pip's unmatched counters show how many more. For return, move counters out of Pip's table; the ones still there show how many remain.",
  talk:'How can the same number count different things in these two pictures?',together:'We worked together',hear:'Hear this request',
  history:'Earlier checks and kept copy',earlier:'Earlier picture at this check',keptNotice:'A copy of this draft is kept.',
+ nextTurn:'Continue to our number and meaning',backTurn:'Return to our picture',
  replacePrompt:"Replace this question's earlier kept draft with the current picture, number, and meaning? The earlier copy will leave local history. Download notes first if you want it.",
  replaceConfirm:'Replace kept draft',cancel:'Cancel',
  cap:'The next check will replace this question\'s oldest local check. Download notes first if you want that earlier check.'

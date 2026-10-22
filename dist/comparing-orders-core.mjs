@@ -32,7 +32,7 @@ export function validComparisonMode(w,mode){return object(w)&&validComparisonMod
 export function comparisonState(state){
  if(!Object.hasOwn(state,'comparisonSupplies'))return undefined;
  const r=state.comparisonSupplies;
- return object(r)&&r.version===1&&comparisonModes.includes(r.active)&&validComparisonSource(r.source)&&object(r.modes)&&unique(r.shownBundleExamples,x=>comparisonSignatures.includes(x))?r:null;
+ return object(r)&&r.version===1&&comparisonModes.includes(r.active)&&(!Object.hasOwn(r,'page')||['picture','answer'].includes(r.page))&&validComparisonSource(r.source)&&object(r.modes)&&unique(r.shownBundleExamples,x=>comparisonSignatures.includes(x))?r:null;
 }
 export function comparisonHistoryUnknown(state){return Object.hasOwn(state,'comparisonSupplies')&&(comparisonState(state)===null||Object.hasOwn(state.comparisonSupplies,'retainedRaw'));}
 export function comparisonView(state){const root=comparisonState(state);if(root===undefined)return {absent:true};if(root===null)return {unavailable:true};return {root,mode:root.active,work:validComparisonMode(root.modes[root.active],root.active)?root.modes[root.active]:null};}
@@ -40,7 +40,8 @@ const freshMode=mode=>({model:blankModel(mode),raw:'',meaningChoice:null,support
 export const freshComparisonRoot=()=>({version:1,active:'compare',source:comparisonSource(),modes:{compare:freshMode('compare'),return:freshMode('return')},shownBundleExamples:[]});
 export function startComparison(state){if(comparisonState(state)!==undefined)return false;state.comparisonSupplies=freshComparisonRoot();return true;}
 export function recoverComparison(state){if(!Object.hasOwn(state,'comparisonSupplies'))return false;const r=comparisonState(state);if(r&&validComparisonMode(r.modes[r.active],r.active))return false;const old=copy(state.comparisonSupplies);state.comparisonSupplies={...freshComparisonRoot(),retainedRaw:old};return true;}
-export function switchComparison(state,mode){const r=comparisonState(state);if(!r||!comparisonModes.includes(mode)||!validComparisonMode(r.modes[mode],mode))return false;if(r.active!==mode){r.active=mode;r.modes[mode].familiar=true;r.modes[comparisonModes.find(x=>x!==mode)].familiar=true;}return true;}
+export function switchComparison(state,mode){const r=comparisonState(state);if(!r||!comparisonModes.includes(mode)||!validComparisonMode(r.modes[mode],mode))return false;if(r.active!==mode){r.active=mode;r.page='picture';r.modes[mode].familiar=true;r.modes[comparisonModes.find(x=>x!==mode)].familiar=true;}return true;}
+export function setComparisonPage(state,page){const r=comparisonState(state);if(!r||!['picture','answer'].includes(page)||!validComparisonMode(r.modes[r.active],r.active))return false;r.page=page;return true;}
 function current(state){const r=comparisonState(state);return r&&validComparisonMode(r.modes[r.active],r.active)?{r,w:r.modes[r.active],mode:r.active}:null;}
 export function moveComparison(state,action){const x=current(state);if(!x)return false;const {w,mode}=x,m=w.model;
  const field=mode==='compare'?{ten:'pairedTens',one:'pairedOnes'}:{ten:'storeTens',one:'storeOnes'};
@@ -61,7 +62,7 @@ export function checkComparison(state,allowOverCap=false){const x=current(state)
  w.checks.push(h);w.currentFeedback=w.checks.length-1;w.error=null;w.familiar=true;
  if(!w.support.includes('feedback'))w.support.push('feedback');return true;
 }
-export function keepComparison(state,replace=false){const x=current(state);if(!x)return false;const {r,w,mode}=x;if(w.kept!==null&&!replace||w.kept===null&&replace)return false;const last=readableChecks(w,mode).at(-1);w.kept={mode,source:copy(r.source),model:copy(w.model),raw:w.raw,meaningChoice:w.meaningChoice,support:[...w.support],latestCheck:last===undefined?null:copy(w.checks[last]),familiar:w.familiar,priorHistoryUnknown:Object.hasOwn(r,'retainedRaw')||w.checks.some(v=>!validComparisonCheck(v,mode))};w.error=null;return true;}
+export function keepComparison(state,replace=false){const x=current(state);if(!x)return false;const {r,w,mode}=x;if(w.kept!==null&&!replace||w.kept===null&&replace||w.kept!==null&&replace&&!validComparisonKept(w.kept,mode))return false;const last=readableChecks(w,mode).at(-1);w.kept={mode,source:copy(r.source),model:copy(w.model),raw:w.raw,meaningChoice:w.meaningChoice,support:[...w.support],latestCheck:last===undefined?null:copy(w.checks[last]),familiar:w.familiar,priorHistoryUnknown:Object.hasOwn(r,'retainedRaw')||w.checks.some(v=>!validComparisonCheck(v,mode))};w.error=null;return true;}
 export function comparisonDisplaySignatures(root){if(!root||!validComparisonSource(root.source)||!comparisonModes.includes(root.active))return [];
  const mode=root.active,w=root.modes?.[mode];if(!validComparisonMode(w,mode))return [];
  if(mode==='compare')return ['bundle:0:2:3','bundle:0:1:1'];
