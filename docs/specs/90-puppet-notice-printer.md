@@ -1,6 +1,6 @@
 # 90 · Puppet Notice Printer
 
-**Status: independent root specification/content review cleared the focused fold at `c0b3ade7` with0 remaining P1/P2. Local runtime is awaiting separate independent implementation review. No release clearance.**
+**Status: specification/content review cleared `c0b3ade7`; separate independent internal implementation review cleared the repaired runtime and compact layout at `db78de3`, with no remaining P1/P2. See the [review receipt](../reviews/90-puppet-notice-review.md). Draft only; final Claude/release gates remain.**
 
 ## One new editing action
 
