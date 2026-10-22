@@ -1,6 +1,6 @@
 # 98 · Lantern Circuit Bench: a path through the bulb
 
-**Proposed specification; independent science, content, rendered-art and six-lens review required before build.** Base main `d0535c3394734594ffa07db99a1364e83bbaa88a`. See [source/overlap audit](../source-audits/98-lantern-circuit-bench.md) and the [original cutaway mock](assets/98-lantern-circuit.svg). No implementation, atlas reference, merge or publication is claimed.
+**Specification/content/rendered-art gates cleared at `1365930` after focused independent internal and external Claude follow-up. Runtime is being implemented; separate exact-head implementation and release review remain required.** Base main `d0535c3394734594ffa07db99a1364e83bbaa88a`. See [source/overlap audit](../source-audits/98-lantern-circuit-bench.md) and the [original cutaway mock](assets/98-lantern-circuit.svg). No implementation, atlas reference, merge or publication is claimed.
 
 ## A new science action
 
