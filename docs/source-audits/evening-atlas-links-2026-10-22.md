@@ -1,6 +1,6 @@
 # Two bounded atlas links after Paving and Movement
 
-This authoring candidate uses actual activities merged through PR101 and PR102 and the unchanged Marble pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. It changes declarations only. The complete source topic descriptions, evidence and all direct incoming edges were read alongside the actual runtime and feature audits. It adds no source node/edge, prerequisite credit, learner score, age assignment or claim that a topic is finished. Independent semantic review remains pending.
+This authoring candidate uses actual activities merged through PR101 and PR102 and the unchanged Marble pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. It changes declarations only. The complete source topic descriptions, evidence and all direct incoming edges were read alongside the actual runtime and feature audits. It adds no source node/edge, prerequisite credit, learner score, age assignment or claim that a topic is finished. Independent Claude semantic review approved exact `a1907e78ca5be7e77f3a502c7d8ed651c8980658` with no P1/P2. Later roadmap/status edits need their own factual follow-up and do not expand these two references.
 
 | Component / pinned topic | Actual encounter | What remains missing |
 | --- | --- | --- |
