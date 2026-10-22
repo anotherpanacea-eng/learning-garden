@@ -38,7 +38,7 @@ So `keptDay` stays the only change to the source schemas. A replaced snapshot st
 
 ## Complete finite first pack
 
-Six errand forms, two per source. Every number comes from the kept artefact, so the neighbour's question is about *the learner's own* earlier work, but each form asks for something the original task did not.
+Six errand forms, two per source. Every number comes from the kept artefact, so the neighbour's question is about *the learner's own* earlier work, but each form changes the question or response action. The shortcut revisits a contrast already available in Gathering Trays; judging a supplied proposal is distinct from adjusting those jars, and the same numbers remain familiar practice.
 
 | Form id | Source | Neighbour and change of form | What the learner does |
 | --- | --- | --- | --- |
@@ -52,10 +52,10 @@ Six errand forms, two per source. Every number comes from the kept artefact, so 
 At **Start**, freeze the chosen *m* and both share counts in the errand; resuming never chooses *m* again.
 
 A form is offered only when the snapshot meets its eligibility rule above (for example `trays-shortcut` needs *c* ≤ 2, and `share-buns` needs one selected equal piece). Following [AGENTS.md](../../AGENTS.md):
-- authored option orders vary the fitting choice's position across forms, and each saved errand keeps its order;
+- authored base orders below receive a left rotation across cases, then freeze at Start: use zero-based c-index in [1,2,3] for trays, n-index in [2,3,4,6] for shares, and a-index in [50,100,150,200,250,300,350,400,450] for jugs, modulo 3. Left rotation means [A,B,C]→[B,C,A]→[C,A,B]. Neither selection nor answer correctness chooses the rotation; each saved errand keeps its order;
 - no wrong choice is merely cautious; each fails for a reason the supplied evidence shows.
 
-All wording is original; every neighbour already exists in these games.
+All wording is original; these neighbours already appear in the café, sharing or kitchen activities.
 
 ## Choosing the next errand (interleaving without a queue)
 
@@ -151,9 +151,9 @@ Picture: two separately labelled jars, `{100c} mL cloud-water` and `{150c} mL st
 
 Question: “Purl has these two jars. Each whole batch serves 2 guests. How many guests can these jars serve?”
 
-Choices in display order: `{c} guests`, `{2c} guests` (fitting), `{2c+1} guests`.
+Base choices before the specified rotation: `{c} guests`, `{2c} guests` (fitting), `{2c+1} guests`.
 
-Feedback: “These jars hold {c} whole batch(es). Each batch serves 2 guests, so they can serve {2c} guests. {c} counts batches, not guests; {2c+1} would need more ingredients.” Use singular batch when c=1. Help uses c=2 when the kept c=1, otherwise c=1: “In this separate example, {h} batch(es) use {100h} mL and {150h} mL. Two guests per batch means {2h} guests.” Show two small separate labelled jars and equal guest groups; never animate the waiting jars changing.
+Feedback: “These jars hold {c} whole batch(es). Each batch serves 2 guests, so they can serve {2c} guests. {c} counts batches, not guests; {2c+1} would need more ingredients.” Use singular batch and guest when their displayed count is 1. Help uses c=2 when the kept c=1, otherwise c=1: “In this separate example, {h} batch(es) use {100h} mL and {150h} mL. Two guests per batch means {2h} guests.” Show two small separate labelled jars and equal guest groups; never animate the waiting jars changing.
 
 ### 2. trays-shortcut — Wisp's extra batch
 
@@ -167,13 +167,13 @@ Feedback: “One more batch adds 100 mL cloud-water and 150 mL star-water. Wisp'
 
 ### 3. share-compare — Clover's same loaf
 
-Show the actual saved whole and its n equal pieces, alongside another outline of the **same width and same named whole** with m equal pieces. Mark one piece in each; distinguish that comparison marking from the saved selection. Label “Your cuts: {n} equal pieces” and “Clover's cuts: {m} equal pieces.”
+Show the actual saved whole and its n equal pieces, alongside another outline of the **same width and same named whole** with m equal pieces. Mark one piece in each; distinguish that comparison marking from the saved selection. Label “Kept loaf: {n} equal pieces” and “Clover's cuts: {m} equal pieces.”
 
 Question: “Clover cuts the same loaf into {m} equal pieces. Is one of Clover's pieces bigger or smaller than one of yours?”
 
-Choices in display order: the fitting relation (“Bigger” if m<n, otherwise “Smaller”), the opposite relation, “We cannot compare these pieces.”
+Base choices: “Smaller”, “Bigger”, “We cannot compare these pieces.” Rotate by the n-index rule above, never by which relation is fitting. Bigger fits if m<n; Smaller fits if m>n.
 
-Feedback: “Both pictures show the same whole loaf. {m} equal pieces makes each piece {bigger/smaller} than {n} equal pieces. We know the whole is the same, so we can compare.” Help uses n=3 if kept n=2, otherwise n=2, and that n's cyclic next m. Show a separate same-whole pair and the worked relation. Ask no question about different-sized wholes in this slice.
+Feedback: “Both pictures show the same whole loaf. Cutting into {m} equal pieces makes each piece {bigger/smaller} than cutting into {n}. We know the whole is the same, so we can compare.” Help uses n=3 if kept n=2, otherwise n=2, and that n's cyclic next m. Show a separate same-whole pair and the worked relation. Ask no question about different-sized wholes in this slice.
 
 ### 4. share-buns — Ember's basket
 
@@ -187,13 +187,13 @@ Feedback: “Split 12 buns into {n} equal groups. Each group has {12/n} buns. On
 
 ### 5. jug-coarser — Wisp's spare jug
 
-Show the remembered kitchen jar with its own saved amount and a separate straight-sided model jug containing the same amount a. The jug marks 0,100,200,300,400,500 mL and has unnumbered midpoint ticks at 50,150,250,350,450; liquid height is proportional. Caption: “The same amount, shown on another scale.” The answer may be obtainable from the remembered label: this is a supported representation comparison, not hidden recall.
+Before Check, identify the remembered kitchen jar by its saved case title and ingredient, using an opaque unmarked jar icon without an amount label. A separate straight-sided model jug contains the same amount a. The jug marks 0,100,200,300,400,500 mL and has unnumbered midpoint ticks at 50,150,250,350,450; liquid height is proportional. Caption: “The same amount, shown on another scale.” Before Check, its text alternative describes the level by the scale: at a numbered mark, or at the unnumbered mark halfway between the two named numbered marks. Do not separately print the amount a or expose it in the remembered jar label/alternative until Check. After Check, reveal the exact saved amount alongside feedback. The scale remains visible and accessible throughout; no independent recall claim is made.
 
 Question: “Wisp's spare jug holds the same amount. Read its scale. How many millilitres are inside?”
 
-Choices in order: the nearest strictly lower 100 mL mark, `{a} mL` (fitting), the nearest strictly higher 100 mL mark.
+Base choices before the specified rotation: the nearest strictly lower 100 mL mark, `{a} mL` (fitting), the nearest strictly higher 100 mL mark.
 
-Feedback: “Each numbered interval is 100 mL. Its midpoint is 50 mL farther. The liquid reaches {a} mL. The marks just below and above are {lower} mL and {upper} mL.” When a is a numbered mark, instead say “The liquid meets the numbered {a} mL line; the neighbouring numbered marks are {lower} mL and {upper} mL.” Help uses 350 mL if a=200, otherwise 200 mL, on a separate jug and names the relevant scale position.
+Feedback: “Each numbered interval is 100 mL. The unnumbered midpoint is 50 mL past the lower numbered mark. The liquid reaches {a} mL. The marks just below and above are {lower} mL and {upper} mL.” When a is a numbered mark, instead say “The liquid meets the numbered {a} mL line; the neighbouring numbered marks are {lower} mL and {upper} mL.” Help uses 350 mL if a=200, otherwise 200 mL, on a separate jug and names the relevant scale position.
 
 ### 6. jug-more — Purl's next pour
 
@@ -203,7 +203,7 @@ Question: “Purl has {a} mL and needs {t} mL. How much more should Purl pour?�
 
 Choices: `{t-a} mL` (fitting), `{t} mL`, `{extra} mL`, with extra defined in the finite-form table above.
 
-Feedback: “Count on from {a} mL to {t} mL: add {t-a} mL. {t} mL is the final amount, not the extra pour. Adding {extra} mL would pass the target.” Help uses a=250 if the kept a=150, otherwise a=150, with its next-hundred target. Its separate picture shows the starting liquid, the added 50 mL and the final 300 or 200 mL; label all three.
+Feedback: “Count on from {a} mL to {t} mL: add {t-a} mL. {t} mL is the final amount, not the extra pour. Adding {extra} mL would pass the target.” Help deliberately uses the other extra amount: when the waiting answer is 50 mL, show a separate 200→300 mL example adding 100 mL; when it is 100 mL, show 150→200 mL adding 50 mL. Its separate picture labels the starting liquid, extra pour and final amount; never print the waiting numerical answer as its worked answer.
 
 ### Limits, dates and history
 
