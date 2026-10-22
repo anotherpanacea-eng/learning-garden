@@ -13,9 +13,9 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   const c=await browser.newContext({viewport:{width,height},hasTouch:true,acceptDownloads:true});contexts.push(c);
   await c.addInitScript(({seed,voices})=>{
    if(!localStorage.getItem('synthetic-field-seed')){localStorage.setItem('number-garden-v1',JSON.stringify(seed));localStorage.setItem('synthetic-field-seed','1');}
-   window.__utterances=[];window.__printCalls=0;window.print=()=>{window.__printCalls++;};
+   window.__utterances=[];window.__cancelCalls=0;window.__printCalls=0;window.print=()=>{window.__printCalls++;};
    window.SpeechSynthesisUtterance=class {constructor(text){this.text=text;}};
-   Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>voices?[{name:'Synthetic local English',voiceURI:'synthetic-en',lang:'en-US',localService:true,default:true}]:[],cancel(){},addEventListener(){},removeEventListener(){},speak(u){window.__utterances.push(u);}}});
+   Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>voices?[{name:'Synthetic local English',voiceURI:'synthetic-en',lang:'en-US',localService:true,default:true}]:[],cancel(){window.__cancelCalls++;},addEventListener(){},removeEventListener(){},speak(u){window.__utterances.push(u);}}});
   },{seed,voices});
   const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.goto(new URL(route,origin).href);await p.locator('[data-field-root]').waitFor();return p;
  }
@@ -25,7 +25,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
  const after=async p=>{await tap(p,'[data-field-page="after"]');await p.locator('[data-field-outcome]').first().waitFor();};
  const outcome=async(p,which)=>{await after(p);await tap(p,`[data-field-outcome="${which}"]`);await p.locator('.field-selected [data-field-reply]').waitFor();return (await state(p)).fieldKit.entries.at(-1);};
  const hostRoots=s=>Object.fromEntries(['cafe','measuringRecipes','plants','rainPaths','livingExploration','letters','broad','practice','exposures'].filter(k=>k in s).map(k=>[k,s[k]]));
- async function download(p){await go(p,'#notes');const [d]=await Promise.all([p.waitForEvent('download'),tap(p,'#download')]);const raw=await fs.readFile(await d.path(),'utf8');ok(prepareProgressImport(raw).ok,'actual downloaded notebook accepted by import');return raw;}
+ async function download(p){await go(p,'#notes');await p.emulateMedia({media:'print'});ok(await p.getByRole('heading',{name:'Grown-up notes',exact:true}).isVisible(),'non-card notes remain visible when printing');await p.emulateMedia({media:'screen'});const [d]=await Promise.all([p.waitForEvent('download'),tap(p,'#download')]);const raw=await fs.readFile(await d.path(),'utf8');ok(prepareProgressImport(raw).ok,'actual downloaded notebook accepted by import');return raw;}
  const cards=[['jug','#cafe/recipes'],['cress','#living/plants'],['notice','#post/letters'],['weather','#science/rain'],['walk','#living']];
  try{
   const replies=new Set();
@@ -58,7 +58,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   // Only a real local onstart callback marks narration; a request alone does not.
   const p=await setup(fresh(),390,844,'#field/jug');await tap(p,'[data-field-root] [data-speak]');eq((await state(p)).fieldKit,undefined,'speech request creates no record');
   const e1=await outcome(p,'not-today');eq(e1.support,[],'no onstart means no narration record');await tap(p,'[data-field-retry]');
-  await tap(p,'[data-field-root] [data-speak]');await p.evaluate(()=>window.__utterances.at(-1).onstart?.());await tap(p,'[data-field-together]');
+  await tap(p,'[data-field-root] [data-speak]');await p.evaluate(()=>window.__utterances.at(-1).onstart?.());const cancels=await p.evaluate(()=>window.__cancelCalls);await tap(p,'[data-field-together]');eq(await p.evaluate(()=>window.__cancelCalls),cancels,'reading support toggle leaves playing narration alone');
   const e2=await outcome(p,'done');eq([...e2.support].sort(),['narration','read-together'],'actual start and together support copied independently');
   await tap(p,'[data-field-retry]');const e3=await outcome(p,'surprised');eq(e3.support,[],'replay resets pending support');
   const frozen=(await state(p)).fieldKit,raw=await download(p);eq(prepareProgressImport(raw).state.fieldKit,frozen,'frozen notebook survives actual export and parser');
@@ -76,7 +76,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   // Retired cards, raw siblings, explicit cap and recovery remain accessible.
   const seed=fresh(),entry=i=>({id:i,mission:{id:'retired-card',version:3,title:`Earlier paper card ${i}`},outcome:'not-today',response:`Frozen supplied reply ${i}.`,support:[]});
   const rawSibling={id:100,mission:{future:true},literal:'<img src=x onerror=alert(1)>'};seed.fieldKit={version:1,entries:[entry(1),rawSibling,...Array.from({length:23},(_,i)=>entry(i+2))]};
-  const history=await setup(seed);await history.locator('details').filter({has:history.locator('[data-field-entry="1"]')}).locator('summary').first().click();ok((await history.locator('[data-field-entry="1"]').innerText()).includes('Frozen supplied reply 1.'),'retired card reply readable from index');
+  const history=await setup(seed);await history.emulateMedia({media:'print'});ok(await history.getByRole('heading',{name:'The Field Kit',exact:true}).isVisible(),'index still prints');await history.emulateMedia({media:'screen'});await history.locator('details').filter({has:history.locator('[data-field-entry="1"]')}).locator('summary').first().click();ok((await history.locator('[data-field-entry="1"]').innerText()).includes('Frozen supplied reply 1.'),'retired card reply readable from index');
   await go(history,'#field/unknown-card');await history.locator('[data-field-unknown]').waitFor();eq((await state(history)).fieldKit,seed.fieldKit,'unknown route changes no history');
   await go(history,'#field/jug');await after(history);ok((await history.locator('[data-field-root]').innerText()).includes('Earlier paper card 1'),'cap notice names exact removed frozen title');
   await tap(history,'[data-field-outcome="not-today"]');await history.locator('.field-selected [data-field-reply]').waitFor();const kept=(await state(history)).fieldKit;eq(kept.entries.length,25,'24 readable plus raw sibling retained');eq(kept.entries[0],rawSibling,'explicit append removes oldest readable only');eq(kept.entries.at(-1).id,101,'id allocation respects raw sibling');await history.close();

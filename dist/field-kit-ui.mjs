@@ -47,7 +47,7 @@ export function bindFieldKit(state,ctx){
  const refresh=(selector='#field-title',save=false)=>{if(save)ctx.save();ctx.render();ctx.focus?.(selector);};
  const status=message=>{const target=root.querySelector('[data-field-status]');if(target){target.textContent=message;target.focus();}};
  root.querySelectorAll('[data-field-page]').forEach(b=>b.addEventListener('click',()=>{t.page=b.dataset.fieldPage;refresh(`[data-field-page="${t.page}"]`);}));
- root.querySelector('[data-field-together]')?.addEventListener('click',()=>{t.together=!t.together;refresh('[data-field-together]');});
+ root.querySelector('[data-field-together]')?.addEventListener('click',()=>{t.together=!t.together;root.querySelector('[data-field-together]').setAttribute('aria-pressed',String(t.together));});
  root.addEventListener('garden-speech-start',e=>{if(!e.target.closest('[data-field-narration]')||!root.isConnected||location.hash!==`#field/${missionId}`||(ctx.explorerId?.()??null)!==explorerId||t.selected!==null)return;t.narration=true;});
  root.querySelector('[data-field-print]')?.addEventListener('click',()=>window.print());
  root.querySelectorAll('[data-field-outcome]').forEach(b=>b.addEventListener('click',()=>{
