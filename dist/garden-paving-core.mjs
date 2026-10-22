@@ -17,7 +17,7 @@ const patches=x=>object(x)&&['row','column','corner'].every(k=>typeof x[k]==='bo
 const validSnapshot=s=>object(s)&&validPavingSource(s.source)&&patches(s.patches)&&validDraft(s.addedInput)&&validDraft(s.totalInput)&&['input','unsure'].includes(s.addedMode)&&['input','unsure'].includes(s.totalMode)&&supports(s.support);
 export const pavingSnapshot=w=>copy({source:w.source,patches:w.patches,addedInput:w.addedInput,totalInput:w.totalInput,addedMode:w.addedMode,totalMode:w.totalMode,support:w.support});
 export function pavingResult(s){const a=s.addedMode==='unsure'?{kind:'unsure'}:parsePaving(s.addedInput),t=s.totalMode==='unsure'?{kind:'unsure'}:parsePaving(s.totalInput),c=pavingCounts(s);if(a.kind==='invalid'||t.kind==='invalid')return null;return {addedFit:a.kind==='number'?a.value===c.addedNeeded:null,totalFit:t.kind==='number'?t.value===c.targetTotal:null,modelComplete:s.patches.row&&s.patches.column&&s.patches.corner,addedNow:c.addedNow,totalNow:c.totalNow};}
-export function pavingFeedback(s,r=pavingResult(s)){if(!r)return null;const c=s.source.copy,k=x=>x===null?'Blank':x?'Fits':'Different';return [c['added'+k(r.addedFit)],c['total'+k(r.totalFit)],c[r.modelComplete?'modelComplete':'modelIncomplete'],pavingText(c.counts,s),c.ending].join(' ');}
+export function pavingFeedback(s,r=pavingResult(s)){if(!r)return null;const c=s.source.copy,k=x=>x===null?'Blank':x?'Fits':'Different';return [c['added'+k(r.addedFit)],c['total'+k(r.totalFit)],c[r.modelComplete?'modelComplete':'modelIncomplete'],c.counts,c.ending].map(t=>pavingText(t,s)).join(' ');}
 function validCheck(c){if(!object(c)||!safe(c.id)||!validSnapshot(c.snapshot)||!object(c.result)||!text(c.feedback,4096)||c.practiceOnly!==true||c.priorExposureUnknown!==true)return false;const r=pavingResult(c.snapshot);return r!==null&&Object.keys(r).every(k=>c.result[k]===r[k])&&c.feedback===pavingFeedback(c.snapshot,r);}
 function workView(w,key){
  if(!object(w)||!validSnapshot(w)||w.source.id!==key||!['learn','build','kept'].includes(w.page)||!Array.isArray(w.checks)||!safe(w.nextCheckId)||!(w.feedbackId===null||safe(w.feedbackId)))return null;
@@ -31,17 +31,32 @@ export const pavingMask=p=>Number(p.row)+2*Number(p.column)+4*Number(p.corner);
 export const maskPatches=m=>({row:!!(m&1),column:!!(m&2),corner:!!(m&4)});
 function picturePairs(s){const n=s.source.n,p=s.patches;return [[n,n],...(p.row?[[n+1,n]]:[]),...(p.column?[[n,n+1]]:[]),...(p.row&&p.column&&p.corner?[[n+1,n+1]]:[])];}
 const checkPairs=c=>[...picturePairs(c.snapshot),[c.snapshot.source.n+1,c.snapshot.source.n+1]];
+// Known interpolation tokens carry model meaning; arbitrary historical prose is never parsed.
+function templatePairs(s,keys){
+ const text=keys.map(k=>s.source.copy[k]).join(' '),n=s.source.n,pairs=[];
+ if(text.includes('{oldCount}'))pairs.push([n,n]);
+ if(text.includes('{targetTotal}'))pairs.push([n+1,n+1]);
+ if(text.includes('{totalNow}')){const mask=pavingMask(s.patches);if(mask===0)pairs.push([n,n]);else if(mask===1)pairs.push([n+1,n]);else if(mask===2)pairs.push([n,n+1]);else if(mask===7)pairs.push([n+1,n+1]);}
+ return pairs;
+}
 export function pavingDisplayPairs(state,display={kind:'current',step:0}){
  const v=pavingView(state);if(v.status!=='ready')return [];let pairs=[];
  const history=c=>{for(const r of c.readableChecks.slice(-4))pairs.push(...checkPairs(r));};
- const kept=c=>{if(c.kept){pairs.push(...picturePairs(c.kept.snapshot));if(c.kept.check)pairs.push(...checkPairs(c.kept.check));}};
- if(display.kind==='notes')for(const c of v.readable){pairs.push(...picturePairs(c.work));history(c);kept(c);}
+ const kept=c=>{if(c.kept){pairs.push(...picturePairs(c.kept.snapshot),...templatePairs(c.kept.snapshot,['reference','currentCounts']));if(c.kept.check)pairs.push(...checkPairs(c.kept.check));}};
+ if(display.kind==='notes')for(const c of v.readable){pairs.push(...picturePairs(c.work),...templatePairs(c.work,['reference','currentCounts']));history(c);kept(c);}
  else if(v.work){
-  const w=v.work;
+  const w=v.work; pairs.push(...templatePairs(w,['reference']));
+  if(w.page==='kept')kept(v);
+  else if(w.page==='learn'){
+   pairs.push(...templatePairs(w,['idea','patches']));const step=Number.isInteger(display.step)?display.step:0;
+   if(step>=0&&step<=2)pairs.push(...picturePairs({source:{n:w.source.example.n},patches:maskPatches(w.source.example.masks[step])}));
+  }else {pairs.push(...picturePairs(w),...templatePairs(w,['reminder','addedPrompt','totalPrompt','currentCounts']));if(v.feedback)pairs.push(...checkPairs(v.feedback));}
   if(display.kind==='history')history(v);
-  else if(display.kind==='current'&&w.page==='kept')kept(v);
-  else if(display.kind==='example'||display.kind==='current'&&w.page==='learn'){const step=display.kind==='example'?display.step:0;if(!Number.isInteger(step)||step<0||step>2)return [];pairs.push(...picturePairs({source:{n:w.source.example.n},patches:maskPatches(w.source.example.masks[step])}));}
-  else {pairs.push(...picturePairs(w));if(v.feedback)pairs.push(...checkPairs(v.feedback));}
+  if(display.reveal==='help')pairs.push(...templatePairs(w,['help']));
+  if(display.reveal==='narration'){
+   if(w.page==='build')pairs.push(...templatePairs(w,['narration']));
+   if(w.page==='kept'&&v.kept)pairs.push(...templatePairs(v.kept.snapshot,['reference','narration']));
+  }
  }
  return pairs.filter((p,i)=>pairs.findIndex(q=>p[0]===q[0]&&p[1]===q[1])===i);
 }

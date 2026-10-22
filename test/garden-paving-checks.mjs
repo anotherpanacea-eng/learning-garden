@@ -54,6 +54,14 @@ for(const root of [null,false,{version:9,raw:true}]){const s=fresh();s.gardenPav
 }
 {
  const s=fresh();p.startPaving(s,'paving-3');p.editPaving(s,'page','build');for(let mask=0;mask<8;mask++){p.pavingView(s).work.patches=p.maskPatches(mask);const pairs=p.pavingDisplayPairs(s);ok(pairs.some(x=>json(x)==='[3,3]'));eq(pairs.some(x=>json(x)==='[4,4]'),mask===7);eq(pairs.some(x=>json(x)==='[4,3]'),!!(mask&1));eq(pairs.some(x=>json(x)==='[3,4]'),!!(mask&2));}
- eq(p.pavingDisplayPairs(s,{kind:'example',step:1}),[[3,3],[4,3],[3,4]]);eq(p.pavingDisplayPairs(s,{kind:'example',step:2}),[[3,3],[4,3],[3,4],[4,4]]);
+ p.editPaving(s,'page','learn');eq(p.pavingDisplayPairs(s,{kind:'example',step:1}),[[3,3],[4,3],[3,4]]);eq(p.pavingDisplayPairs(s,{kind:'example',step:2}),[[3,3],[4,3],[3,4],[4,4]]);
+}
+{
+ const s=fresh();p.startPaving(s,'paving-3');let w=p.pavingView(s).work;w.source.copy.reference='Old {oldCount}; added {addedNow}; tiles now {totalNow}.';w.source.copy.idea='Keep {oldCount} old tiles.';w.source.copy.addedBlank='Needed: {addedNeeded}.';w.source.copy.ending='Finished: {targetTotal}.';w.patches=p.maskPatches(7);p.editPaving(s,'page','build');ok(p.checkPaving(s));eq(p.pavingView(s).feedback.feedback.split(' ')[1],'7.');ok(!p.pavingView(s).feedback.feedback.includes('{'));ok(pavingPage(s).includes('tiles now 16.'));ok(p.keepPaving(s));p.editPaving(s,'patch','corner');p.editPaving(s,'page','kept');const html=pavingPage(s);ok(html.includes('tiles now 15.'));ok(html.includes('tiles now 16.'),'kept and checked reference use their copied patches');ok(fits(s));eq(prepareProgressImport(report(s)).state.gardenPaving,s.gardenPaving);
+}
+{
+ const s=fresh();p.startPaving(s,'paving-5');const w=p.pavingView(s).work;w.source.example.n=2;w.source.example.captions=['Four old tiles.','Two below and two beside.','Nine tiles after the corner.'];w.source.copy.idea='Old {oldCount}; finished goal {targetTotal}.';ok(p.validPavingSource(w.source));eq(p.pavingDisplayPairs(s),[[5,5],[6,6],[2,2]],'own copy and example have distinct numeric contexts');ok(pavingPage(s).includes('Old 25; finished goal 36.'));eq(p.pavingDisplayPairs(s,{kind:'example',step:2}),[[5,5],[6,6],[2,2],[3,2],[2,3],[3,3]]);
+ w.source.copy.idea='A plain idea.';w.source.copy.help='Finished goal: {targetTotal}.';w.source.copy.narration='Finished goal: {targetTotal}.';eq(p.pavingDisplayPairs(s),[[2,2]],'closed help is not disclosed');ok(!pavingPage(s).includes('Finished goal: 36.'));ok(p.pavingDisplayPairs(s,{kind:'current',reveal:'help'}).some(x=>json(x)==='[6,6]'));p.editPaving(s,'page','build');ok(!p.pavingDisplayPairs(s).some(x=>json(x)==='[6,6]'));ok(p.pavingDisplayPairs(s,{kind:'current',reveal:'narration'}).some(x=>json(x)==='[6,6]'));
+ const before=json(s);ok(!p.preflightPavingDisplay(s,{...options,display:{kind:'current',reveal:'narration'},canExport:()=>false}));eq(json(s),before,'token disclosure refusal remains detached/atomic');
 }
 console.log(`${count} Garden Paving checks passed, including ${combinations} separate proposal/model outcomes.`);
