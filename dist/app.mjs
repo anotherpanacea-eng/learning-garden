@@ -1,3 +1,5 @@
+import {wholeBatchesPage,wholeBatchesEntry,bindWholeBatches} from './whole-batches-ui.mjs';
+import {batchDisplayedFactPairs} from './whole-batches-core.mjs';
 import {bellStudioPage,bellStudioEntry,bindBellStudio} from './bell-studio-ui.mjs';
 import {createBellPlayer} from './bell-studio-audio.mjs';
 import {travelersArchivePage,travelersArchiveEntry,bindTravelersArchive} from './travelers-archive-ui.mjs';
@@ -199,7 +201,7 @@ function render(){
   const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
   const messageBench=['post','loft'].includes(root)&&slug==='messages';
   const letterBench=['post','loft'].includes(root)&&slug==='letters';
-  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
+  const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',recipeBench=root==='cafe'&&slug==='recipes',batchBench=root==='cafe'&&slug==='batches',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
   const navRoot=['paris','french','archive'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
@@ -211,6 +213,7 @@ function render(){
   else if(bellBench)html=bellStudioPage(state);
   else if(archiveBench)html=travelersArchivePage(state);
   else if(recipeBench)html=measuringRecipesPage(state);
+  else if(batchBench){exposeStoryFacts({facts:batchDisplayedFactPairs(state)});save();html=wholeBatchesPage(state);}
   else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state);}
   else if(sharingBench){exposeStoryFacts({facts:sharingDisplayedFactPairs(state)});save();html=sharingCounterPage(state);}
   else if(rainNotebookBench)html=rainNotebookPage(state);
@@ -238,7 +241,7 @@ function render(){
   }
   else if(root==='cafe'){
     if(state.cafe.current){const o=orderFor(state.cafe);exposeStoryFacts({facts:[[o.guests,o.bites],...(state.cafe.current.stage==='stock'?currentRecipe(state.cafe).map(item=>[o.guests,item.count]):[])]});}
-    save();html=equalGroupEntry('cafe')+renderCafe(state)+sharingCounterEntry()+measuringRecipesEntry()+bellStudioEntry();
+    save();html=equalGroupEntry('cafe')+renderCafe(state)+sharingCounterEntry()+measuringRecipesEntry()+wholeBatchesEntry()+bellStudioEntry();
   }
   else if(root==='companions')html=companionPicker(state);
   else if(root==='storm'){
@@ -268,8 +271,8 @@ function render(){
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft');
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!archiveBench&&!bellBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!batchBench&&!archiveBench&&!bellBench){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!plantBench&&!fieldBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!recipeBench&&!batchBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;updateStorageNotice();bind();
   const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
 }
@@ -340,6 +343,7 @@ function bind(){
  bindTravelersArchive(state,{save,render,navigate,focus:focusElement});
  document.querySelector('[data-ta-notes]')?.addEventListener('toggle',e=>{if(e.currentTarget.open){const a=travelersArchive(state);if(a){const ids=[...new Set([...a.checks.flatMap(c=>c.sourceIds),...(a.kept?['photo','chronology']:[])])];if(ids.length){noteArchiveSources(state,ids);save();}}}});
  bindMeasuringRecipes(state,{save,render,navigate,focus:focusElement});
+ bindWholeBatches(state,{save,render,navigate,focus:focusElement});
  bindRainPaths(state,{save,render,navigate,focus:focusElement,expose:exposeRain});
  bindRainNotebookInvitations(state,{save,navigate,focus:focusElement});
  bindRainNotebook(state,{save,render,navigate,focus:focusElement,expose:exposure=>{noteRainNotebookExposure(state,exposure);exposeRain(exposure);}});
@@ -509,7 +513,7 @@ function endingFilm(){
  if(choosingExplorer)return null;
  const [root,slug]=(location.hash||'#home').slice(1).split('/');
  if(root==='storm'&&['end','play'].includes(slug)){const v=currentVisit(state);if(v?.finished&&(v.entrance==='paris'||entranceById(v.entrance)?.language==='fr'))return 'paris';}
- if(root==='cafe'&&!['groups','sharing','recipes'].includes(slug)){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
+ if(root==='cafe'&&!['groups','sharing','recipes','batches'].includes(slug)){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
  if(root==='post'&&!['choose','groups','messages','letters'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
  return null;
 }

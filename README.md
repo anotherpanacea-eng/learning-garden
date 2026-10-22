@@ -61,6 +61,8 @@ node test/rain-paths-checks.mjs
 node test/rain-paths-integration-checks.mjs
 node test/measuring-recipes-checks.mjs
 node test/measuring-recipes-integration-checks.mjs
+node test/whole-batches-checks.mjs
+node test/whole-batches-integration-checks.mjs
 node test/travelers-archive-checks.mjs
 node test/travelers-archive-ui-checks.mjs
 node test/travelers-archive-integration-checks.mjs
@@ -296,3 +298,6 @@ Carry an actual completed current or kept Rain Paths result to [a water page in 
 The main page and standalone films include static Open Graph and large-image card metadata. The shared1200×630 PNG is `dist/assets/after-the-storm-social-v1.png`; its editable original vector artwork is `design/social-preview.svg`. Hash destinations share the main page preview because the fragment is not sent in an HTTP request. Metadata contains no explorer or saved-progress information. Bump the image filename when replacing it; sharing services may cache earlier cards.
 
 Nine original SVG icons in `dist/icons/` accompany the existing visible navigation names. They are decorative to assistive technology; the text remains the accessible link name. The mobile menu uses four columns with large tap targets. The existing garden mark also supplies the32px PNG favicon and180px Apple touch icon. Raster assets were rendered from the local vector originals with Sharp; no remote fonts, icon library, image service or additional browser dependency is required.
+
+
+The locally built **Whole batches for a gathering** activity (`#cafe/batches`) invites children to repeat a two-guest recipe, measure separate portions, and compose a literal delivery label. Three pictured requests retain their own plans and unfinished drafts. Optional models compare repeating the complete recipe with adding the same amount to both ingredients; offering a tray gives a local gathering ending. All checks are supplied picture practice, with support retained, and do not serve a café guest or establish independent mastery. [Spec 50](docs/specs/50-whole-batch-gathering.md).
