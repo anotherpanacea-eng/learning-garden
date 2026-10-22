@@ -1,6 +1,6 @@
 # 94. Riddles in the Hedge: multiple-choice riddle cards
 
-Status: **repair amendment for an unmerged, undeployed draft; runtime changes await independent review.** Requested as a just-for-fun activity: riddles with multiple-choice answers. The riddles are play first, and each answer opens a short "why it fits" line that connects to an existing destination.
+Status: **reviewed repair amendment, implemented in an unmerged, undeployed draft.** Requested as a just-for-fun activity: riddles with multiple-choice answers. The riddles are play first, and each answer opens a short "why it fits" line that connects to an existing destination.
 
 ## What the learner sees
 
