@@ -1,6 +1,6 @@
 # Town Remembers: source and finite-content audit
 
-2026-10-22. Companion to [spec 74](../specs/74-town-remembers.md). Final independent content review remains pending. This audit checks a changed-form revisit; it makes no claim of demonstrated retrieval, spacing or interleaving benefits.
+2026-10-22. Companion to [spec 74](../specs/74-town-remembers.md). Final independent content review cleared `244cbb4`; implementation has a separate review gate. This audit checks a changed-form revisit; it makes no claim of demonstrated retrieval, spacing or interleaving benefits.
 
 ## Inspected sources and reuse
 
@@ -31,6 +31,6 @@ Marble Skill Taxonomy attribution: © Generative Spark, Inc. (Marble), https://w
 - Extra pour: next-hundred target gives a positive difference of 50 or 100 mL. The third choice adds 50 to that difference, except a=50 uses another 100 to avoid duplicating the target. Every offered count is distinct; both distractors fail for an explicit quantity reason.
 - Each helper uses a different eligible artefact value from the waiting question; jug-more also uses the opposite extra amount (50 versus 100 mL). Its separate picture and explanation never mutate a source game or claim to answer the waiting task independently.
 
-The first independent Claude review confirmed the arithmetic and source eligibility, and requested three content repairs: case-based choice rotation, a jug-more example with a different answer, and withholding the remembered amount label before the jug-coarser check. Those repairs are now specified; focused follow-up review remains before implementation. Runtime tests must enumerate the finite inputs as well; tests alone do not establish pedagogical efficacy.
+The first independent Claude review confirmed the arithmetic and source eligibility, and requested three content repairs: case-based choice rotation, a jug-more example with a different answer, and withholding the remembered amount label before the jug-coarser check. Those repairs were approved in the focused follow-up at `244cbb4`. Runtime tests must enumerate the finite inputs as well; tests alone do not establish pedagogical efficacy.
 
 Independent Claude content review cleared `244cbb4` with no outstanding P1/P2 findings. The source audit remains bounded to the four candidate meanings above; no runtime graph or learning-effect claim is added. See [the review receipt](../reviews/74-town-remembers-spec-review.md).

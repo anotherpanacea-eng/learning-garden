@@ -52,4 +52,12 @@ class Storage{constructor(){this.map=new Map();}get length(){return this.map.siz
  try{bindTown(s,{save:()=>saves++,render:()=>{},navigate:next=>{path=next;},focus:()=>{}});aside.handlers.click();}finally{globalThis.document=original;}
  eq(s.townRemembers.errands[0].status,'aside','raw open without id can be set aside through binder');eq(path,'#town/remembers','raw id uses safe continuation route');eq(saves,1,'aside persisted');
 }
+{
+ const s=fresh();chooseBatchCase(s,'rehearsal-table');s.wholeBatches.cases['rehearsal-table'].model.portions={'cloud-water':100,'star-water':150};keepBatch(s);delete s.wholeBatches.cases['rehearsal-table'].kept.keptDay;
+ const raw=Array.from({length:200},(_,i)=>({id:i+1,form:'future-form',status:'kept',source:'retained earlier record'}));s.townRemembers={version:1,rotation:null,used:[],errands:structuredClone(raw)};
+ ok(startTown(s,today),'raw siblings do not impose an unrelated readable-history cap');
+ ok(townState(s)&&townHistory(s).readable.length===1,'new errand stays readable beside raw siblings');
+ eq(townHistory(s).raw,raw,'all raw siblings remain unchanged');
+ eq(prepareProgressImport(JSON.stringify(s)).state.townRemembers,s.townRemembers,'mixed readable and raw notebook imports');
+}
 console.log(`Town Remembers UI/storage integration: ${checks} passed.`);

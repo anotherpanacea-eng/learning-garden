@@ -49,7 +49,7 @@ export function sourceArtifacts(state,today=localDay()){
  return out;
 }
 const blank=()=>({version:1,rotation:null,used:[],errands:[]});
-const rootValid=r=>obj(r)&&r.version===1&&(r.rotation===null||KINDS.includes(r.rotation))&&Array.isArray(r.used)&&r.used.length<=48&&r.used.every(x=>str(x,500))&&Array.isArray(r.errands)&&r.errands.length<=200;
+const rootValid=r=>obj(r)&&r.version===1&&(r.rotation===null||KINDS.includes(r.rotation))&&Array.isArray(r.used)&&r.used.length<=48&&r.used.every(x=>str(x,500))&&Array.isArray(r.errands);
 export function townState(state){return !Object.hasOwn(state,'townRemembers')?blank():rootValid(state.townRemembers)?state.townRemembers:null;}
 const known=f=>Object.values(FORMS).flat().includes(f);
 export function errandValid(e){
