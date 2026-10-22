@@ -1,7 +1,8 @@
 .willow-heading,.willow-intro,.willow-recovery,.willow-play,.willow-entry{max-width:920px;margin:1.25rem auto;padding:1rem;border-radius:18px;background:#fffdf5;color:#183f39;box-sizing:border-box}
 .willow-heading h1{margin:.45rem 0}.willow-heading p{max-width:60ch}.willow-entry{background:#eaf4e9}.willow-entry h2{margin-top:0}
-.willow-modes{display:flex;flex-wrap:wrap;gap:.65rem 1.3rem;margin:1rem 0;padding:.8rem;border:1px solid #718c80;border-radius:12px}.willow-modes legend{padding:0 .3rem}.willow-modes label{display:flex;align-items:center;gap:.35rem}
-.willow-play button,.willow-intro button,.willow-recovery button,.willow-play summary{min-height:44px}.willow-mode-label{font-weight:700}.willow-adult-tip{max-width:60ch}
+.willow-modes{display:flex;flex-wrap:wrap;gap:.65rem 1.3rem;margin:1rem 0;padding:.8rem;border:1px solid #718c80;border-radius:12px}.willow-modes legend{padding:0 .3rem}.willow-modes label{display:flex;align-items:center;gap:.35rem;min-height:44px}
+.willow-play button,.willow-intro button,.willow-recovery button,.willow-play summary,.willow-intro summary,.willow-recovery summary{min-height:44px;box-sizing:border-box}.willow-mode-label{font-weight:700}.willow-adult-tip{max-width:60ch}
+.willow-heading a,.willow-entry a,.willow-intro a,.willow-recovery a,.willow-play a{display:inline-flex;align-items:center;min-height:44px;box-sizing:border-box}.willow-play summary,.willow-intro summary,.willow-recovery summary{padding-block:.5rem}
 .willow-legend{display:flex;gap:1.25rem;margin:1rem 0}.willow-legend>span{display:flex;align-items:center;gap:.35rem}.willow-legend .willow-token{width:24px;height:24px}
 .willow-board{display:grid;grid-template-columns:minmax(27px,34px) minmax(0,1fr);gap:3px;position:relative;width:100%;max-width:100%;padding-bottom:2.2rem;box-sizing:border-box;overflow:visible}
 .willow-gate{font-size:.7rem;line-height:1.1;text-align:center;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-width:0;padding-bottom:.35rem}.willow-gate>span:first-child{overflow-wrap:anywhere}.willow-gate-tokens{display:flex;flex-direction:column;align-items:center;min-height:27px}
