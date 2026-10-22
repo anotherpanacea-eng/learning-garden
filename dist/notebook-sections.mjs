@@ -6,6 +6,7 @@ import {tenthsNotes} from './tenths-ui.mjs';
 import {sortingNotes} from './sorting-desk-ui.mjs';
 import {instructionNotes} from './instruction-ui.mjs';
 import {fieldKitNotes} from './field-kit-ui.mjs';
+import {measuringDeskNotes} from './measuring-desk-ui.mjs';
 import {willowNotes} from './willow-path-core.mjs';
 import {bundleExchangeNotes} from './bundle-exchange-ui.mjs';
 import {returningOrdersNotes} from './returning-orders-ui.mjs';
@@ -40,4 +41,4 @@ import {forageNotes} from './forage-ui.mjs';
 import {broadNotes} from './broad-ui.mjs';
 
 // Also used on a detached import before it can become the active explorer.
-export function destinationNotes(state,graph=null){return seedNotes(state)+lanternNotes(state)+collectionNotes(state)+hundredthsNotes(state)+sortingNotes(state)+tenthsNotes(state)+willowNotes(state)+townNotes(state)+fieldKitNotes(state)+instructionNotes(state)+bundleExchangeNotes(state)+joiningOrdersNotes(state)+returningOrdersNotes(state)+fractionTrailNotes(state)+parcelPackingNotes(state)+wholeBatchesNotes(state)+bellStudioNotes(state)+travelersArchiveNotes(state)+measuringRecipesNotes(state)+rainPathsNotes(state)+sharingCounterNotes(state)+fieldNotebookNotes(state)+rainNotebookNotes(state)+plantStudyNotes(state)+letterNotes(state)+messageNotes(state)+equalGroupsNotes(state)+loftNotes(state)+wordGardenNotes(state)+gardenNotes(state)+scienceNotes(state)+livingNotes(state)+adaptiveNotes(state)+connectionNotes(state)+workshopNotes(state)+postOfficeNotes(state)+factsNotes(state)+cafeNotes(state)+forageNotes(state)+broadNotes(state,graph);}
+export function destinationNotes(state,graph=null){return seedNotes(state)+lanternNotes(state)+collectionNotes(state)+hundredthsNotes(state)+sortingNotes(state)+tenthsNotes(state)+willowNotes(state)+townNotes(state)+fieldKitNotes(state)+measuringDeskNotes(state)+instructionNotes(state)+bundleExchangeNotes(state)+joiningOrdersNotes(state)+returningOrdersNotes(state)+fractionTrailNotes(state)+parcelPackingNotes(state)+wholeBatchesNotes(state)+bellStudioNotes(state)+travelersArchiveNotes(state)+measuringRecipesNotes(state)+rainPathsNotes(state)+sharingCounterNotes(state)+fieldNotebookNotes(state)+rainNotebookNotes(state)+plantStudyNotes(state)+letterNotes(state)+messageNotes(state)+equalGroupsNotes(state)+loftNotes(state)+wordGardenNotes(state)+gardenNotes(state)+scienceNotes(state)+livingNotes(state)+adaptiveNotes(state)+connectionNotes(state)+workshopNotes(state)+postOfficeNotes(state)+factsNotes(state)+cafeNotes(state)+forageNotes(state)+broadNotes(state,graph);}
