@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {freshState} from '../dist/core.mjs';
 import {apprenticeCases,apprenticeSource} from '../dist/fair-test-apprentice-content.mjs';
 import {apprenticeView,validApprenticeSource,validApprenticeRound,setApprenticeOpen,startApprentice,setApprenticePage,changeApprenticeRepair,chooseApprenticeCard,setApprenticeWords,addApprenticeSupport,resumeApprentice,apprenticeDemonstration,checkApprenticeDemonstration,checkApprenticeCard,keepApprenticeWords,apprenticeCheckMatches} from '../dist/fair-test-apprentice-core.mjs';
@@ -6,8 +7,27 @@ import {startFair,setFairPage,setFairNote,revealFair} from '../dist/fair-test-co
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;};
 const expected={'low-smooth':[12,13,12],'low-rough':[5,6,5],'middle-smooth':[19,18,19],'middle-rough':[9,10,9],'high-smooth':[26,25,26],'high-rough':[14,15,14]};
 const repairSets={height:['low-smooth|high-smooth','low-rough|high-rough'],surface:['low-rough|low-smooth','middle-rough|middle-smooth','high-rough|high-smooth'],careful:['low-smooth|high-smooth','low-rough|high-rough']};
+const reviewedCards={
+ height:[
+  ['height-incomplete',false,'B travelled farther in the shown trials. Tell the crew that observation, without addressing Moss’s explanation of what caused the difference.','Moss: That preserves the observation, but I still need help with my height-only explanation.'],
+  ['height-useful',true,'B went farther in these trials. Height and surface both changed; compare low and high ramps on the same surface.','Moss: We can retain the distance observation and repair the comparison before isolating height.'],
+  ['height-discard',false,'Keep the distances in our notes, but leave them out of the crew’s message until height’s effect has been isolated.','Moss: We can report the shown distance difference now, while explaining that this comparison does not isolate height.'],
+  ['height-overclaim',false,'B travelled farther each time, so tell the crew that raising the ramp caused the difference, even with the changed surface.','Moss: Height and surface changed together. These results do not identify height as the sole cause.'],
+ ],surface:[
+  ['surface-overclaim',false,'Tell the crew the smooth surface caused the extra distance; the high smooth setup went farther in every shown trial.','Moss: Height changed too, so this comparison does not isolate surface.'],
+  ['surface-incomplete',false,'Choose A for the porch because its shown stopping distances are shorter; that gives the crew a practical recommendation to use.','Moss: That addresses the porch’s purpose, but does not explain whether surface caused the difference.'],
+  ['surface-discard',false,'Since these are model trials, wait for real measurements before saying anything about the shown distances from A and B.','Moss: We can compare these authored model distances without claiming they are physical measurements.'],
+  ['surface-useful',true,'B went farther in these trials, but height changed too. Compare rough and smooth at the same height.','Moss: That retains the observation and proposes a comparison that isolates surface within this model.'],
+ ],careful:[
+  ['careful-cautious',false,'Hold back this message until more trials are shown; the present results are too limited to describe any distance difference.','Moss: More trials could extend the investigation, but the present message already limits itself to the shown examples.'],
+  ['careful-overclaim',false,'Keep the message and extend it: these results show that every real cart should travel farther from any high ramp.','Moss: The model examples do not establish that universal real-cart claim.'],
+  ['careful-useful',true,'Keep this message: height changed, the surface stayed smooth, and the distance claim refers only to these shown model examples.','Moss: The comparison changes height while controlling surface, and the wording stays within the supplied evidence.'],
+  ['careful-wrong',false,'Choose a different surface for one ramp before keeping the message; identical surfaces prevent a useful comparison of the two heights.','Moss: Keeping surface the same is useful when investigating height. Changing it would introduce another difference.'],
+ ]};
 for(const item of apprenticeCases){
  const source=apprenticeSource(item.id);ok(validApprenticeSource(source));eq(source.model.length,6);
+ eq(source.cards.map(c=>[c.id,c.fits,c.text,c.feedback]),reviewedCards[item.id],'complete reviewed card order, text, fit and feedback');
+ eq(source.cards.filter(c=>c.fits).length,1,'one current fitting card');
  for(const model of source.model)eq(model.distances,expected[model.id],'reviewed original model values');
  const a=source.model.find(c=>c.id===source.original.a),b=source.model.find(c=>c.id===source.original.b);ok(Math.min(...b.distances)>Math.max(...a.distances),'valid B-farther observation is preserved in every authored case');
  const options=item.mission==='height'?['smooth','rough']:['low','middle','high'];
@@ -26,6 +46,21 @@ for(const item of apprenticeCases){
  const previous=structuredClone(r.checks);chooseApprenticeCard(s,item.id+'-useful');const words='\n  Our fictional words.\r\n<&> “Exactly.”  ';ok(setApprenticeWords(s,words));eq(r.words,words);const own=keepApprenticeWords(s);eq(own.card,null);eq(own.focused,null);eq(own.values,null);eq(own.input.words,words);eq(r.checks.slice(0,previous.length),previous);ok(apprenticeCheckMatches(r,own));
  chooseApprenticeCard(s,null);ok(apprenticeCheckMatches(r,own),'ungraded snapshot not tied to unrelated card choice');setApprenticeWords(s,words+'x');ok(!apprenticeCheckMatches(r,own));
  const unchanged=structuredClone(r);ok(!setApprenticeWords(s,'x'.repeat(801)));eq(r,unchanged,'over-limit text refused without truncation');ok(setApprenticeWords(s,'🪴'.repeat(400)));eq(r.words.length,800,'browser UTF16 limit');ok(!setApprenticeWords(s,'🪴'.repeat(401)));
+}
+const prechange=JSON.parse(readFileSync(new URL('./fixtures/fair-test-apprentice-prechange.json',import.meta.url),'utf8'));
+for(const {id,first,round:oldRound} of prechange){
+ const s=freshState();startApprentice(s,id);s.fairTests.apprentice.rounds[0]=structuredClone(oldRound);
+ const live=s.fairTests.apprentice.rounds[0],saved=structuredClone(live);ok(validApprenticeRound(live));ok(apprenticeView(s).current===live,'pre-change visit remains active');
+ eq(first,id+'-useful','historical first-position fit captured before content change');
+ eq(live.source.cards[0].id,first);eq(live.checks[0].input.card,first);
+ const selected=live.source.cards.find(c=>c.id===live.selectedCard);const fresh=checkApprenticeCard(s);
+ eq(fresh.card,selected,'fresh old-visit check uses own original card metadata');eq(fresh.feedback,selected.feedback);
+ eq(live.checks.length,saved.checks.length+1,'fresh old-source check appended');eq(live.checks.at(-1),fresh);
+ eq(live.checks.slice(0,saved.checks.length),saved.checks,'historical checks retain exact recorded outcomes');
+ eq(live.words,saved.words,'private original words retained');eq(live.repair,saved.repair);
+ const before=structuredClone(live),newRound=startApprentice(s,id);
+ eq(newRound.source.cards,reviewedCards[id].map(([cardId,fits,text,feedback])=>({id:cardId,fits,text,feedback})));
+ eq(s.fairTests.apprentice.rounds[0],before,'new Start leaves old own source, selection and checks unchanged');ok(newRound.familiar);
 }
 {
  const s=freshState(),before=structuredClone(s);eq(apprenticeView(s).status,'missing');eq(s,before);ok(!addApprenticeSupport(s,'help'));ok(!setApprenticePage(s,'show'));eq(s,before,'support/page cannot invent a visit');ok(setApprenticeOpen(s,true));eq(s.fairTests.investigations,[]);eq(s.fairTests.seen,false);eq(s.fairTests.apprentice,undefined,'open creates neither ordinary investigation nor encounter');startApprentice(s,'height');eq(s.fairTests.investigations,[]);eq(s.fairTests.seen,false,'supplied apprentice examples not ordinary independent trials');
