@@ -1,5 +1,7 @@
 # Six-act longitudinal teaching pathways
 
+Publication update, 2026-10-21: Bell Studio subsequently cleared and was published in [PR 27](https://github.com/anotherpanacea-eng/learning-garden/pull/27), with the stack now on main. The “unpublished foothold” wording in the earlier snapshot below is historical. This changes no phonics, musical-proficiency or physical-audibility claim.
+
 Companion to [spec49](specs/49-six-act-curriculum.md). These 26 proposed pathways own all54 pinned domains. The six cells per pathway are **unit-family candidates**, not complete lesson specifications, not age placements and not a claim every listed topic has been taught. Topic-level introduction/contrast/application placements remain explicit gaps in the [full ledger](../curriculum/six-act-topic-plan.csv).
 
 The acts give useful reasons to return. Their columns suggest revisits; a child can use a foundation or a supported advanced activity anywhere. A topic routes to its strand, not automatically to all six cells. Subject review must resolve the actual concepts and prerequisites before a unit is implemented.
