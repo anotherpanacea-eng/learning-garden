@@ -57,6 +57,7 @@ node test/field-kit-checks.mjs
 node test/field-kit-integration-checks.mjs
 node test/field-notebook-checks.mjs
 node test/field-notebook-integration-checks.mjs
+node test/count-collection-checks.mjs
 node test/sharing-counter-checks.mjs
 node test/sharing-counter-integration-checks.mjs
 node test/fraction-trail-checks.mjs
@@ -106,6 +107,7 @@ node test/help-checks.mjs
 node test/cafe-checks.mjs
 node test/cafe-start-checks.mjs
 node test/tenths-checks.mjs
+node test/hundredths-checks.mjs
 node test/science-checks.mjs
 node test/water-evidence-checks.mjs
 node test/workshop-checks.mjs
@@ -262,6 +264,10 @@ Choose a pictured girl witch (she/her), boy wizard (he/him), nonbinary sorcerer 
 
 Pending input, bank selection, clauses, helper step, courier position and the frozen request survive pause/reload and explorer switching. Unsupported saves remain exact kept work. Latest 24 visits, 24 packing attempts and 24 route-check snapshots per visit are retained; replays do not add a second completion. Existing save-off, notes/export and reset controls apply. [Spec 02](docs/specs/02-willow-post-office.md) records the reviewed behavior and upstream study. Courier choices and Bramble’s first rival encounter are implemented in [spec 25](docs/specs/25-sky-post.md).
 
+The optional `#post/sorting` Willow Sorting Desk lets a child set one if/otherwise rule, predict a basket, and step through a fictional parcel's stamp or wrap before comparing the machine's result with Pip's request. Four original cards expose both branches and a contrasting color case. The desk keeps its own source, latest twelve readable checks and one explicitly kept run; it does not deliver parcels, score coding ability, or change an unfinished Post Office visit. See [spec 84](docs/specs/84-willow-sorting-desk.md), its [source audit](docs/source-audits/84-willow-sorting-desk.md), and the [internal review receipt](docs/reviews/84-willow-sorting-desk-review.md). This is a local reviewed candidate, not a claim of production publication.
+
+Run `node test/sorting-desk-checks.mjs` for source checks. With `dist` served locally as above and Playwright installed, run `SORTING_TEST_URL=http://127.0.0.1:4173/ node test/sorting-desk-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `SORTING_ARTIFACTS` optionally select an installed module, browser and temporary screenshots. The synthetic Chrome run covers phone/tablet layouts, keyboard and focus, reload, an unchanged Post Office save and actual notes download/import. It does not establish physical iPad/Safari or learning outcomes.
+
 
 Meet **Bramble**, an original girl witch fixing a storm-tangled ribbon gate. Any delivery offers a generated supplies puzzle or a separate pictured example first. Choose mixed parcels, multiplication, addition or subtraction, with all tables 1–12 or a particular multiplication table. All 144 ordered multiplication facts, including 12×12, are available. Bramble mixes useful revisits, familiar patterns and new examples using recent finished rounds; support-heavy play still gets fresh facts. A miss opens the separate stepped example; try again, solve together, or take the quiet route. Your parcel and pending flight instruction stay exactly where you left them. Continuing is manual, and there are no play credits, hearts or timers.
 
@@ -396,6 +402,12 @@ Each case keeps its supplied source, grouping, raw total, support and earlier ch
 
 Run `node test/joining-orders-checks.mjs` and `node test/joining-orders-integration-checks.mjs` for source checks. With the static app served locally and Playwright installed, run `JOIN_TEST_URL=http://127.0.0.1:4173/ node test/joining-orders-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `JOIN_ARTIFACTS` optionally select a local module, browser and screenshot directory. These synthetic checks do not establish physical iPad behavior or learning gains.
 
+Hundredths Bridge at `#numbers/hundredths` redraws the same conceptual whole as a 10×10 square. Six open requests let learners make tenths and hundredths or compare fixed pictures, with reversible controls and frozen practice records in a separate optional save root. Chooser notation is supplied but untracked, so no case record proves a learner has not seen it. See [spec85](docs/specs/85-hundredths-bridge.md) and its [source audit](docs/source-audits/85-hundredths-bridge.md). Run `node test/hundredths-checks.mjs`, `node test/post-rival-adaptive-checks.mjs`, and `node test/learning-connections-checks.mjs` for the source, saved-work and matching-fact boundaries. With the static app served locally and Playwright installed, run `HUNDREDTHS_TEST_URL=http://127.0.0.1:4173/ node test/hundredths-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations. The [implementation review](docs/reviews/85-hundredths-bridge-implementation-review.md) records the exact cleared heads and local verification.
+
 Tenths Table at `#numbers/tenths` uses one fixed whole with ten reversible parts and eight openly chosen requests. It keeps supplied-picture practice separate from assessment evidence. Its optional save root starts only on an explicit request, and retained sources/checks stay tied to their own wording. See [spec81](docs/specs/81-tenths-table.md) and its [source audit](docs/source-audits/81-tenths-table.md).
 
 Run `node test/tenths-checks.mjs` for the finite picture, notation, saving and recovery checks. With the static app served locally and Playwright installed, run `TENTHS_TEST_URL=http://127.0.0.1:4173/ node test/tenths-browser.js`; `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `TENTHS_ARTIFACTS` optionally select a local module, browser and screenshot directory. These synthetic Chrome checks do not establish physical iPad behavior, audible narration quality or learning gains.
+
+My Count Collection at `#living/collection` lets a learner make a pretend button collection, record a table, draw bars and read the chart across four short turns. It distinguishes a faithful representation from an accurate reading of a different chart. Sources, earlier checks and an optional kept version stay tied to their own saved values. This is pictured practice, not a survey or a mastery judgment. See [spec86](docs/specs/86-count-collection.md) and its [source audit](docs/source-audits/86-count-collection.md). Run `node test/count-collection-checks.mjs`; with the static app served locally, run `COLLECTION_TEST_URL=http://127.0.0.1:4173/ node test/count-collection-browser.js`. `PLAYWRIGHT_MODULE` and `CHROME_PATH` can select local installations.
+
+The [Count Collection review](docs/reviews/86-count-collection-review.md) records the exact internally cleared implementation and local checks; release clearance remains separate.
