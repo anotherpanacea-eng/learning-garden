@@ -1,6 +1,6 @@
 # 83 · Preserve a French Paris visit's own pages
 
-**Status: proposed for independent specification review.** This is a preservation repair, not a new French lesson, proficiency measure or release authorization.
+**Status: specification and internal implementation reviews complete; draft release candidate.** This is a preservation repair, not a new French lesson, proficiency measure or release authorization.
 
 ## Problem and scope
 
