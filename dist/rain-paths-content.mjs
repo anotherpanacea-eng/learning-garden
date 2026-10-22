@@ -5,9 +5,9 @@ export const RAIN_ROUTES=freeze(['straight','holding12']);
 export const RAIN_SUPPORT=freeze(['help','example','audio','together']);
 export const RAIN_MODEL=freeze({
  id:'closed-tray-rain-paths-v1',capacity:12,batchSize:4,
- label:'Invented tabletop water-path machines',
+ label:'Invented tabletop rain trays',
  notice:'These are arbitrary model-water tokens in an invented closed machine, not measured rain or a flood forecast.',
- limitation:'Our pretend machine holds water in spaces. Real ground has more paths, and water can keep moving.',
+ limitation:'Our pretend rain trays hold water in spaces. Real ground has more paths, and water can keep moving.',
  controls:'Each machine has 12 numbered storage slots in 3 rows of 4, the same entrance geometry, outlet and collector. Each receives the stated new rain separately. Only the named factor changes.',
  details:[
   'One token is the same arbitrary amount of model water. It is not a molecule, a raindrop, a millimeter, a liter or a unit of time. Four-token batches are not rainfall speed.',
@@ -32,9 +32,9 @@ export function rainCaseById(id){return RAIN_CASES.find(c=>c.id===id)??null;}
 export function rainQuestions(id){
  const c=rainCaseById(id);if(!c)return [];
  return [
-  {id:'factor',prompt:'Which single factor changed between these matched machines?',choices:[{id:'cover',label:'Open entrance or sealed lid'},{id:'priorStored',label:'Starting stored water'},{id:'rain',label:'New rain amount'},{id:'rain-and-cover',label:'Rain and cover together'},{id:'unsure',label:'Not sure'}],answer:c.factor,feedback:'Both machines receive the same new rain, with the same chamber and outlet. Changing rain and cover together in a proposed test would make the explanation uncertain: either change could matter.'},
-  {id:'runoff',prompt:'Which tray sent more of this new rain to the outlet?',choices:[{id:'A',label:'Tray A'},{id:'B',label:'Tray B'},{id:'same',label:'The same amount'},{id:'unsure',label:'Not sure'}],answer:'B',feedback:'Compare the completed new-runoff column. Reading this supplied result is practice with the source visible.'},
-  {id:'columns',prompt:'Which two columns show where this new rain went?',choices:RAIN_COLUMNS,answer:['storedNew','runoffNew'],feedback:'At a completed run, new rain is newly stored or new runoff. Already-stored water describes the start; it is not a destination of this new rain.'},
-  {id:'difference',prompt:'How many more new-runoff tokens did B collect than A? (Optional)',choices:[],answer:c.factor==='cover'?12:8,feedback:'Subtract the completed new-runoff amounts. A numerical difference describes these model counts; it does not establish a real-world cause.'}
+  {id:'factor',prompt:'What is different about Tray A and Tray B?',choices:[{id:'cover',label:'Open entrance or sealed lid'},{id:'priorStored',label:'Starting stored water'},{id:'rain',label:'New rain amount'},{id:'rain-and-cover',label:'Rain and cover together'},{id:'unsure',label:'Not sure'}],answer:c.factor,feedback:'Both trays get the same new rain and have the same outlet. If the rain and the cover both changed, either change could matter, so we could not tell which one did it.'},
+  {id:'runoff',prompt:'Which tray sent more of this new rain to the outlet?',choices:[{id:'A',label:'Tray A'},{id:'B',label:'Tray B'},{id:'same',label:'The same amount'},{id:'unsure',label:'Not sure'}],answer:'B',feedback:'Look at the New runoff column for each tray.'},
+  {id:'columns',prompt:'Which two columns show where this new rain went?',choices:RAIN_COLUMNS,answer:['storedNew','runoffNew'],feedback:'All the new rain ended up newly stored or as new runoff. Already stored water was there before this rain started.'},
+  {id:'difference',prompt:'How many more tokens ran off Tray B? (You can skip this.)',choices:[],answer:c.factor==='cover'?12:8,feedback:'Take the smaller New runoff number away from the bigger one.'}
  ];
 }

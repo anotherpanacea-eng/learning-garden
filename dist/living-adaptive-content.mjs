@@ -3,7 +3,7 @@ import {validConnection} from './learning-connection-data.mjs';
 import {starterIngredients} from './cafe-content.mjs';
 import {spiralCases,spiralCase,spiralAnimal,spiralPlaces,spiralTarget,spiralReasons} from './living-spiral-content.mjs';
 export const strands=['science','reading','math'];
-export const depths={science:['Match a need','Use picture evidence','Notice a change'],reading:['Find a named tag','Follow a sequence','Read between the lines'],math:['Equal packs','Find the pack count','Plan tomorrow']};
+export const depths={science:['Match a need','Look for clues','Notice a change'],reading:['Find a named tag','Follow the steps','Read between the lines'],math:['Equal packs','How many packs?','Plan tomorrow']};
 export const tags=['leaf','star','shell'];
 export const methods=['knew','worked','counted','together','unreported'];
 const object=x=>x&&typeof x==='object'&&!Array.isArray(x);
