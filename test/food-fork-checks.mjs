@@ -71,6 +71,16 @@ ok(JSON.stringify(malformed.foodFork.checks.find(c=>c?.bad==='check'))===badRaw,
 
 const alternate=roundTrip(freshState());ok(startFork(alternate,canExport),'alternate start');const src=alternate.foodFork.source;src.id='saved-alternate';src.cards=src.cards.map((c,i)=>({...c,id:`saved${i}`,label:`Saved card ${i}`}));const ids=src.cards.map(c=>c.id);src.rows=src.rows.map((r,i)=>({...r,id:`savedrow${i}`,prompt:`Saved prompt ${i}`,initial:{...r.initial,expected:r.initial.expected?{food:ids[[0,1,1][i]],eater:ids[[1,2,3][i]]}:null},closer:r.closer?{...r.closer,expected:{food:ids[1],eater:ids[3]}}:undefined})).map(r=>{if(r.closer===undefined)delete r.closer;return r;});
 alt: {ok(validForkSource(src),'admit saved IDs/copy independent of current catalog');ok(forkView(alternate).status==='ready','alternate saved source resumes');ok(setForkAnswer(alternate,'savedrow0','food','saved0',canExport),'alternate answer');ok(adaptivePage(alternate,'fork').includes('Saved prompt 0'),'alternate rendered own prompt');}
+const savedSmall=freshState();ok(startFork(savedSmall,canExport),'synthetic small source starts');
+const small=savedSmall.foodFork.source;small.id='older-two-card';small.cards=[{id:'old-food',label:'Saved food',scientificName:'Example food',passage:'Saved food passage.',pictureText:'Saved food drawing.',drawing:{version:1,kind:'old-food'}},{id:'old-eater',label:'Saved eater',scientificName:'Example eater',passage:'Saved eater passage.',pictureText:'Saved eater drawing.',drawing:{version:1,kind:'old-eater'}}];
+small.rows=[{id:'old-closer',prompt:'What does this saved slip support?',initial:{text:'The first saved slip names no exact pair.',expected:null,feedback:clone(foodForkSource.rows[2].initial.feedback)},closer:{text:'The later saved slip names Saved food and Saved eater.',expected:{food:'old-food',eater:'old-eater'},feedback:clone(foodForkSource.rows[2].closer.feedback)}}];
+small.copy=Object.fromEntries(Object.keys(small.copy).map(k=>[k,`Saved ${k} wording.`]));small.credits=[{title:'Synthetic saved source',role:'Fixture only',url:'https://example.org/saved'}];
+ok(validForkSource(small)&&forkView(savedSmall).status==='ready','two-card renamed-row saved source admitted');
+ok(forkPage(savedSmall).includes('Read the 2 source cards')&&!forkPage(savedSmall).includes('Read the four source cards'),'card heading uses saved count');
+ok(setForkPage(savedSmall,'build',canExport),'open small saved build');
+ok(forkPage(savedSmall).includes('The first saved slip names no exact pair.')&&!forkPage(savedSmall).includes('aphid-and-hoverfly'),'initial framing uses only saved source');
+ok(setForkEvidence(savedSmall,'closer',canExport),'switch small saved evidence');
+ok(forkPage(savedSmall).includes('The later saved slip names Saved food and Saved eater.')&&!forkPage(savedSmall).includes('The closer study names this exact pair'),'closer framing uses saved source');
 
 const recovery=freshState();recovery.foodFork={version:99,source:{future:true},retainedRaw:{older:{nested:true}}};const raw=JSON.stringify(recovery.foodFork);
 ok(forkView(recovery).status==='recovery','future root recovery');ok(adaptivePage(recovery,'fork').includes('data-fork-confirm')&&!adaptivePage(recovery,'fork').includes('data-fork-start'),'explicit separate board only');
