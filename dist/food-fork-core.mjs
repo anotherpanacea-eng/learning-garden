@@ -61,9 +61,9 @@ export function checkFork(state,canExport=()=>true){
  root.checks.push(check);root.nextCheck++;root.page='kept';if(!fits(state,root,canExport))return false;state.foodFork=root;return true;
 }
 export function forkLiveRow(view,row){
- if(view.status!=='ready')return {status:'unchecked'};const root=view.root,entry=view.readable.at(-1);if(!entry||entry.index!==root.checks.length-1)return {status:'unchecked'};
+ if(view.status!=='ready')return {status:'unchecked'};const root=view.root,entry=view.readable.at(-1);if(!entry)return {status:'unchecked'};
  const c=entry.check,id=row.id;if(c.evidenceView!==root.evidenceView||!own(c.answers,id)||!own(c.outcomes,id)||!own(root.answers,id))return {status:'unchecked'};
- const current=root.answers[id],saved=c.answers[id];if(!answer(current,cardIds(root.source))||!answer(saved,cardIds(root.source))||JSON.stringify(current)!==JSON.stringify(saved)||!outcome(c.outcomes[id]))return {status:'unchecked'};
+ const current=root.answers[id],saved=c.answers[id];if(!answer(current,cardIds(root.source))||!answer(saved,cardIds(root.source))||current.food!==saved.food||current.eater!==saved.eater||current.notEnough!==saved.notEnough||!outcome(c.outcomes[id]))return {status:'unchecked'};
  const recorded=c.outcomes[id],expected=assessForkRow(root.source,row,root.evidenceView,current);if(!expected||recorded.outcome!==expected.outcome)return {status:'recorded-only',recorded};
  return {status:'current',recorded,displayFeedback:expected.feedback,solid:recorded.outcome===true&&!current.notEnough&&current.food!==null&&current.eater!==null};
 }

@@ -36,8 +36,8 @@ export function bindFork(state,{save,render,focus,canExport}={}){const host=docu
  bind('[data-fork-clear]',b=>setForkAnswer(state,b.dataset.forkClear,'notEnough',false,canExport)?refresh(`#fork-result-${b.dataset.forkClear}`,'Choose a food and eater to propose a link.'):status(fail));
  bind('[data-fork-check]',()=>{const v=forkView(state),hasReadable=v.status==='ready'&&v.root.source.rows.some(row=>forkAnswer(v.root,row.id));if(checkFork(state,canExport))refresh('.fork-record','Check kept with its displayed slips and recorded feedback.');else status(!hasReadable?'Choose a pair or Not enough evidence in at least one readable row before checking.':v.root.nextCheck>=Number.MAX_SAFE_INTEGER?'Check numbers have reached the supported limit. Download notes and start a separate board.':fail);});
  bind('[data-fork-together]',()=>setForkSupport(state,'together',canExport)?refresh('[data-fork-together]','Working together recorded as support.'):status(fail));
- const help=host.querySelector('.fork-help');help?.addEventListener('toggle',()=>{if(help.isConnected&&help.open&&setForkSupport(state,'helpOpened',canExport))save?.();});
- host.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',()=>{if(b.isConnected&&setForkSupport(state,'narrationRequested',canExport))save?.();}));
+ const help=host.querySelector('.fork-help');help?.addEventListener('toggle',()=>{if(!help.isConnected||!help.open)return;if(setForkSupport(state,'helpOpened',canExport))save?.();else status(`${fail} Opening Help was not recorded.`);});
+ host.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',()=>{if(!b.isConnected)return;if(setForkSupport(state,'narrationRequested',canExport))save?.();else status(`${fail} This Hear request was not recorded.`);}));
  bind('[data-fork-new]',()=>host.querySelector('.fork-confirm')?.showModal());
  bind('[data-fork-cancel]',()=>host.querySelector('.fork-confirm')?.close());
  bind('[data-fork-confirm]',()=>{if(startFork(state,canExport,true))refresh('#fork-focus','A separate board started. The whole earlier board remains in notes.');else{host.querySelector('.fork-confirm')?.close();status(fail);}});

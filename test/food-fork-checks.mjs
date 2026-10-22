@@ -49,6 +49,14 @@ v=forkView(contradictory);ok(v.status==='ready','contradictory history admitted'
 ok(!forkPage(contradictory).includes('Solid: supported by this displayed slip'),'diagram no solid claim');
 ok(forkNotes(contradictory).includes('Imported historical claim'),'raw historical feedback retained in notes');
 ok(JSON.stringify(roundTrip(contradictory)).includes('Imported historical claim'),'exact JSON retains history');
+const rawAfter=roundTrip(fresh);rawAfter.foodFork.answers.hoverfly={food:'aphid',eater:'hoverfly-larva',notEnough:false};rawAfter.foodFork.checks.push({id:rawAfter.foodFork.nextCheck,broken:true});rawAfter.foodFork.nextCheck++;
+const rawAfterBytes=JSON.stringify(rawAfter.foodFork.checks.at(-1));
+ok(forkView(rawAfter).unreadable.length===1,'raw check after latest readable retained');
+ok(forkLiveRow(forkView(rawAfter),row(rawAfter,'sap')).solid,'last readable support survives later raw sibling');
+ok(JSON.stringify(rawAfter.foodFork.checks.at(-1))===rawAfterBytes,'later raw sibling remains exact');
+const reordered=roundTrip(rawAfter),prior=reordered.foodFork.checks.at(-2).answers.sap;
+reordered.foodFork.answers.sap={notEnough:prior.notEnough,eater:prior.eater,food:prior.food,importedUnknown:'still raw'};
+ok(forkLiveRow(forkView(reordered),row(reordered,'sap')).solid,'known answer fields compare independent of imported object order and extra key');
 const wrongCopy=roundTrip(uncertain);wrongCopy.foodFork.page='build';wrongCopy.foodFork.checks[0].outcomes.hoverfly.feedback='Unsupported imported praise';
 ok(!forkPage(wrongCopy).includes('Current check: Unsupported imported praise'),'live wording comes from frozen slip, not imported feedback');ok(forkNotes(wrongCopy).includes('Unsupported imported praise'),'recorded feedback still exported unchanged');
 
@@ -73,6 +81,7 @@ ok(JSON.stringify(prepared.state.foodFork)===JSON.stringify(malformed.foodFork),
 
 const refusal=freshState();ok(startFork(refusal,canExport),'refusal start');const before=JSON.stringify(refusal.foodFork);
 ok(!setForkPage(refusal,'build',()=>false),'actual report callback refusal');ok(JSON.stringify(refusal.foodFork)===before,'atomic page refusal');
+ok(!setForkSupport(refusal,'helpOpened',()=>false),'help support refuses full report');ok(!setForkSupport(refusal,'narrationRequested',()=>false),'Hear support refuses full report');ok(JSON.stringify(refusal.foodFork)===before,'refused support leaves root exact');
 ok(!startFork(refusal,()=>false,true),'recovery wrapper refused');ok(JSON.stringify(refusal.foodFork)===before,'atomic recovery refusal');
 // Candidate state still fits, but pretty report metadata crosses the real import limit.
 const near=freshState();ok(startFork(near,()=>true),'near-limit source starts without report');
