@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 173 explicit current references across 95 unique source topics: authored question references, scoped practice or supplied explanations. The other 1495 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 175 explicit current references across 96 unique source topics: authored question references, scoped practice or supplied explanations. The other 1494 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -23,7 +23,7 @@ There are 173 explicit current references across 95 unique source topics: author
 | Life Skills | 37 | 0 | 37 |
 | Mathematics | 503 | 65 | 438 |
 | Personal & Social Development | 88 | 0 | 88 |
-| Science | 547 | 14 | 533 |
+| Science | 547 | 15 | 532 |
 
 Mathematics currently has the broadest authored task collection. Science and English have narrow guided investigations/comprehension references. History, life skills, personal/social development and learning-to-learn require explicit content/evidence design; fictional settings, friendly characters, help use and game completion do not establish those abilities. The source’s Computing topics are grouped under “Artificial Intelligence,” including step-by-step instructions; preserve that source organization without mistaking it for a complete computing curriculum.
 
@@ -95,6 +95,8 @@ Each reuse needs a real purpose, reviewed content, suitable representations, mea
 | Hundredths Bridge (`#numbers/hundredths`, local build) | build, read | Make 30/100 and 35/100 on one pictured whole and compare supplied 0.3, 0.30 and 0.35 cases. A fixed visual equivalence bridge; no arbitrary decimal writing, percent, number-line placement or conversion fluency. |
 | Puppet Notice Printer (`#loft/printer`, local build) | compose, read | Reorder five supplied tickets, choose an initial capital and ending mark, try a small authored statement/question response and revise. Controlled-word punctuation practice; no original sentence writing, general grammar, spelling or independent convention use. |
 | Water Evidence Shelf (`#science/evidence`, local build) | search, read | Choose clue-plus-possible-explanation notes over three supplied before/after water illustrations. Transient fictional-picture practice; no real observation, physical investigation, measured amount, unique-cause proof or water-cycle attainment. |
+| Garden Paving (`#numbers/paving`, local build) | build, read | Preserve a supplied old square and add two disjoint side strips plus a corner to build the next square. Eleven finite plans through 12 by 12 distinguish tiles added, finished total and model completion; no general pattern rule, algebra or physical area measurement. |
+| Two ways to move (`#living/movement`, local build) | read | Manually step and compare two supplied land-snail and earthworm movement diagrams. A muscular-foot versus segmented-body/bristle explanation; no real observation, leg-counting response, three-way movement classification or organism-system attainment. |
 
 The live **Carry an idea here** connection now transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -178,7 +180,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Science / Ecosystems & Habitats | 36 | 3 | Search · inspect · compare; Read · infer · support |
 | Science / Energy | 28 | 0 | Change · measure · explain; Build · transform · relate |
 | Science / Forces & Motion | 27 | 1 | Change · measure · explain; Build · transform · relate |
-| Science / Insects & Minibeasts | 22 | 4 | Search · inspect · compare; Read · infer · support |
+| Science / Insects & Minibeasts | 22 | 5 | Search · inspect · compare; Read · infer · support |
 | Science / Matter & Materials | 40 | 1 | Change · measure · explain; Build · transform · relate |
 | Science / Ocean Life | 27 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Organisms & Life Processes | 63 | 1 | Search · inspect · compare; Read · infer · support |
@@ -371,6 +373,8 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Decimal equivalents of tenths and hundredths](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_TqDq6jyOmL) | scoped-practice / Hundredths Bridge (local build) / [source](../dist/hundredths-ui.mjs) | Build or compare a few supplied same-whole 0.3, 0.30 and 0.35 pictures with a separate check. No arbitrary written tenths/hundredths conversion, number-line placement, percent notation or fluency. |
 | [Starting and Ending Sentences](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_QEr24lqzvH) | scoped-practice / Puppet Notice Printer (local build) / [source](../dist/puppet-notice-ui.mjs) | Choose initial capitalization and ending marks for supplied five-word tickets, then hear/try a few authored meanings. Exclamation response remains unmodeled; no free sentence composition or reminder-free conventions. |
 | [Observation vs Interpretation](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Hw70LI5xza) | scoped-practice / Water Evidence Shelf (local build) / [source](../dist/water-evidence-ui.mjs) | Distinguish a visible clue from a possible cause in three illustrated before/after cards. Choices are transient and supplied; no real observation, learner-written explanation or single-route proof. This topic already has other scoped references. |
+| [Shape patterns](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_A-FyLLLLzy) | scoped-practice / Garden Paving (local build) / [source](../dist/garden-paving-ui.mjs) | Build one next square from a supplied two-strips-and-corner construction, distinguishing new pieces from final total. No three-term prediction, learner-generated general rule, constant-additive pattern or independent explanation; times-table patterns remain broader. |
+| [How minibeasts move](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt__7hXSTbu9s) | explanation / Two ways to move (local build) / [source](../dist/body-movement-ui.mjs) | Step two supplied ground-movement diagrams and read how a snail foot and worm shape/bristles contribute. No real minibeast observation, three movement ways, leg counting, independent matching or broad recognition; names and explanation are supplied. |
 
 ## Sources, licensing and maintenance
 

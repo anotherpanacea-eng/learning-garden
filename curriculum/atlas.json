@@ -772,6 +772,27 @@
       ],
       "route": "#science/evidence",
       "scope": "Choose clue-plus-possible-explanation notes over three supplied before/after water illustrations. Transient fictional-picture practice; no real observation, physical investigation, measured amount, unique-cause proof or water-cycle attainment."
+    },
+    {
+      "id": "garden-paving",
+      "name": "Garden Paving",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "route": "#numbers/paving",
+      "scope": "Preserve a supplied old square and add two disjoint side strips plus a corner to build the next square. Eleven finite plans through 12 by 12 distinguish tiles added, finished total and model completion; no general pattern rule, algebra or physical area measurement."
+    },
+    {
+      "id": "body-movement",
+      "name": "Two ways to move",
+      "status": "built-local",
+      "patterns": [
+        "read"
+      ],
+      "route": "#living/movement",
+      "scope": "Manually step and compare two supplied land-snail and earthworm movement diagrams. A muscular-foot versus segmented-body/bristle explanation; no real observation, leg-counting response, three-way movement classification or organism-system attainment."
     }
   ],
   "manualReferences": [
@@ -1558,6 +1579,20 @@
       "kind": "scoped-practice",
       "source": "dist/water-evidence-ui.mjs",
       "scope": "Distinguish a visible clue from a possible cause in three illustrated before/after cards. Choices are transient and supplied; no real observation, learner-written explanation or single-route proof. This topic already has other scoped references."
+    },
+    {
+      "game": "garden-paving",
+      "topicId": "mt_A-FyLLLLzy",
+      "kind": "scoped-practice",
+      "source": "dist/garden-paving-ui.mjs",
+      "scope": "Build one next square from a supplied two-strips-and-corner construction, distinguishing new pieces from final total. No three-term prediction, learner-generated general rule, constant-additive pattern or independent explanation; times-table patterns remain broader."
+    },
+    {
+      "game": "body-movement",
+      "topicId": "mt__7hXSTbu9s",
+      "kind": "explanation",
+      "source": "dist/body-movement-ui.mjs",
+      "scope": "Step two supplied ground-movement diagrams and read how a snail foot and worm shape/bristles contribute. No real minibeast observation, three movement ways, leg counting, independent matching or broad recognition; names and explanation are supplied."
     }
   ],
   "increments": [

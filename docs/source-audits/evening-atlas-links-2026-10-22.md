@@ -1,0 +1,12 @@
+# Two bounded atlas links after Paving and Movement
+
+This authoring candidate uses actual activities merged through PR101 and PR102 and the unchanged Marble pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d`. It changes declarations only. The complete source topic descriptions, evidence and all direct incoming edges were read alongside the actual runtime and feature audits. It adds no source node/edge, prerequisite credit, learner score, age assignment or claim that a topic is finished. Independent semantic review remains pending.
+
+| Component / pinned topic | Actual encounter | What remains missing |
+| --- | --- | --- |
+| [Garden Paving](96-garden-paving.md), `mt_A-FyLLLLzy` Shape patterns | Build one next square using a supplied old square, two disjoint strips and one corner. Numerical proposals and actual construction are separate. | The source expects rule-based pattern generation and informal explanation, including predicting several terms. No general learner-generated rule, three-term prediction or argument is established. Its hard predecessor `mt_w6MxaaoMXZ` Patterns in Times Tables remains broader. Existing two Broad authored-task links already reference this topic; this adds one scoped practice encounter. Do not link square growth to constant-additive pattern nodes. |
+| [Two ways to move](97-body-movement-bench.md), `mt__7hXSTbu9s` How minibeasts move | Manually step two supplied diagrams and compare a land-snail muscular foot with an earthworm's changing segmented shape and gripping bristles. | The source's evidence requires at least three movement ways, creature matching and leg counting; its prompt also asks for real observation. None follows from these two supplied diagrams. Its hard predecessor `mt_yR1moI5kX1` names a wider set of minibeasts and asks for recognition/feature distinctions. Two names are supplied here, not certified. This is an explanation reference. |
+
+The new declarations deliberately describe practice versus supplied explanation differently. Neither gets independent-performance credit. No existing reference is removed. The source graph, generator and saved game state are unchanged; generated counts describe references only. Other reviewed future benches need their own semantic check after implementation.
+
+Marble Skill Taxonomy (v1), © Generative Spark, Inc. (Marble), https://withmarble.com. Database and derived mapping retain ODbL1.0; authored source descriptions retain CC BY-SA4.0 under [NOTICE](../../NOTICE). Original scope wording here does not copy an assessment or add Jane content.
