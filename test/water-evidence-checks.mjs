@@ -34,3 +34,5 @@ assert.equal(evidenceShelfState('explorer-1'),null);
 assert.doesNotMatch(evidenceShelfPage('explorer-1'),/data-evidence-card=/);
 assert.equal(JSON.stringify(state),before,'the shelf creates no saved activity data');
 console.log('Water Evidence Shelf source and transient-session checks passed.');
+
+startEvidenceShelf('synthetic-surface');evidenceShelfAction('synthetic-surface','page',1);assert.ok(evidenceShelfPage('synthetic-surface').includes('Soil surface, seen from above'),'soil picture explicitly uses a surface view');resetEvidenceShelf();
