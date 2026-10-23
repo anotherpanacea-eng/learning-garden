@@ -86,4 +86,13 @@ for(const opt of [{...options,canExport:()=>false},{...options,exposeFacts:()=>{
  const s=fresh();resetScaleSession();const before=clone(s),html=scalePage(s,'synthetic',{...options,canExport:()=>false});ok(html.includes('data-scale-blocked'));ok(!html.includes('Invented town route')&&!html.includes('<svg')&&!html.includes('data-speak='),'initial refusal is source-free');eq(s,before);resetScaleSession();
 }
 ok(app.indexOf('if(scaleBench&&!choosingExplorer)')<app.indexOf('  ensureGarden(state);'),'route precedes host normalizers');
+// Both labels already used U+00A0 at f87; explicit escapes make that intent inspectable.
+const routeSource=fs.readFileSync(new URL('../dist/route-scale.mjs',import.meta.url),'utf8');
+const unitEscape=String.raw`\u00a0`;
+ok(routeSource.includes('${key}'+unitEscape+'m</h2>'),'heading source has an explicit nonbreaking unit separator');
+ok(routeSource.includes('${k}'+unitEscape+'m per edge'),'key-button source has an explicit nonbreaking unit separator');
+resetScaleSession();const unitHtml=scalePage(fresh(),'synthetic-unit-labels',options);
+ok(unitHtml.includes('1 edge represents 2\u00a0m</h2>'),'rendered heading uses U+00A0');
+for(const k of [2,4])ok(unitHtml.includes(`${k}\u00a0m per edge`),'rendered key label uses U+00A0');
+resetScaleSession();
 console.log(`${count} route-scale source checks passed.`);

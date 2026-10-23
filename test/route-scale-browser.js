@@ -24,6 +24,8 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
  async function show(p,v){
   eq(await p.locator('[data-scale-key]').evaluateAll(xs=>xs.map(x=>Number(x.dataset.scaleKey))),v.compare?[v.key,v.key===2?4:2]:[v.key],'correct shown map order');
   for(const k of v.compare?[v.key,v.key===2?4:2]:[v.key])eq((await p.locator(`[data-scale-key="${k}"] .scale-readouts p`).allTextContents()).map(text),scaleReadouts(k),'exact readouts');
+  eq(await p.locator('.scale-sheet h2').allTextContents(),(v.compare?[v.key,v.key===2?4:2]:[v.key]).map(k=>`1 edge represents ${k}\u00a0m`),'actual figure heading keeps numeral/unit together');
+  eq(await p.locator('.scale-key-controls button').evaluateAll(xs=>xs.map(x=>x.firstChild.textContent)),[2,4].map(k=>`${k}\u00a0m per edge`),'actual key buttons keep numeral/unit together');
   eq(await p.locator(target('undo')).isDisabled(),!v.undo);eq(await p.locator('[data-scale-action="key"][aria-pressed="true"]').getAttribute('data-scale-value'),String(v.key));
   ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no horizontal overflow');
   ok(await p.locator('.scale-page button,.scale-page a').evaluateAll(xs=>xs.every(x=>x.getBoundingClientRect().height>=44)),'native targets44px');
@@ -77,6 +79,8 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
  let refusalCase=0;for(const mutate of [s=>{s.broad.observations.push({future:'Synthetic raw'});},s=>{s.garden.visits.push({id:'future',version:77,raw:'Synthetic old story'});},s=>{s.raw='x'.repeat(MAX_IMPORT_BYTES);}]){
   const s=fresh();mutate(s);const p=await setup(320,refusalCase===2?fresh():s);if(refusalCase===2)await p.evaluate(s=>{__saves=0;__replace(s);},s);refusalCase++;ok(await p.locator('[data-scale-blocked]').count(),'unsafe entry refuses case'+refusalCase);eq(await p.locator('.scale-page svg,.scale-page [data-speak],.scale-source').count(),0,'source-free refusal');eq(await p.evaluate(()=>__read()),s,'entry refusal preserves raw notebook exactly');eq(await p.evaluate(()=>__saves),0,'entry refusal does not save');
  }
+ // A refused direct entry with a null Broad root must still permit the real Back link.
+ {const s=fresh();s.broad=null;const p=await setup(320,s);ok(await p.locator('[data-scale-blocked]').count(),'null Broad entry refuses without normalization');eq(await p.evaluate(()=>__read().broad),null,'null Broad remains exact');await p.getByRole('link',{name:'Back to Cartographer’s Table',exact:true}).click();await p.locator('.cart-page').waitFor();ok(await p.locator('.cart-page h1').isVisible(),'Back exits the refused scale entry without a crash');}
  // Uninstrumented app smoke and save-off session behavior.
  const real=await setup(820,fresh(),false);await real.locator(target('key',4)).click();eq((await real.locator('.scale-readouts p').allTextContents()).map(text),scaleReadouts(4),'uninstrumented actual app');
  const off=await setup(320);await go(off,'#notes');await off.locator('#remember').uncheck();await go(off,'#workshop/scale');await off.locator(target('key',4)).click();ok(await off.locator('[data-scale-key="4"]').count(),'save-off view usable');eq(await off.evaluate(()=>localStorage.getItem('number-garden-save')),'off','save-off stays off');
