@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 8: A country that gave its rivers room
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (Act IV, "What other places did", and the archive's Room for the River pack). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** This is real history. **Every figure here came from search summaries and secondary sources, because primary sources could not be opened from the drafting environment. No figure may reach a child before the source review in section 10.** Fiction (Willowbank) and history (the Netherlands) stay labelled apart on every screen.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Act IV, "What other places did", and the archive's Room for the River pack). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** This is real history. **Every figure here came from search summaries and secondary sources, because primary sources could not be opened from the drafting environment. No figure may reach a child before the source review in section 10.** Fiction (Willowbank) and history (the Netherlands) stay labelled apart on every screen.
 
 Case ID `room-for-the-river`. Appears in Act IV with the archive chapter *What other places did*. It is the desk depth of spec 120's Room for the River archive pack, which keeps its own Sprout, Seedling and Sapling jobs.
 
@@ -8,13 +8,13 @@ Case ID `room-for-the-river`. Appears in Act IV with the archive chapter *What o
 
 In Act IV the miller says: "I thought nobody ever undid a wall. Then I read about the Dutch rivers." This case is what the miller read. The Netherlands, famous for dikes, decided after two near-disasters in the 1990s that higher dikes alone weren't enough, and spent years giving its rivers more room: moving dikes back, digging side channels and letting some farmland flood on purpose. It is the Wall and the Sponge as a real national argument, and its answer looks a lot like Some of Each.
 
-The case adds a piece of mathematics the other flood cases don't have: why giving water more width lowers its height, using the area of a rectangle.
+The case adds a fixed-area rectangular arithmetic model. Under its stated assumptions, a wider rectangle is shallower. That is not a general river prediction, and the model cannot set a safe dike height.
 
 ## 2. Hook (fiction, labelled)
 
 > The librarian hands you a slim book with a blue cover, borrowed from the travelling library. It's in English, with a few Dutch words.
 >
-> "The miller's been reading this at the counter for three days," she says. "He keeps saying 'huh' out loud. I'd like someone to read it properly and tell the meeting what's in it, and what isn't."
+> "The miller's been reading this at the counter for three days," they say. "She keeps saying 'huh' out loud. I'd like someone to read it properly and tell the meeting what's in it, and what isn't."
 
 Buttons: **Open the book** · **Later**.
 
@@ -36,7 +36,9 @@ Steps open in any order.
 
 **Short**
 
-> Much of the Netherlands is low, flat land beside big rivers. People have built walls of earth called **dikes** to keep the rivers out. In 1993 and again in 1995 the rivers rose very high. In 1995, about a quarter of a million people had to leave their homes for a few days. The dikes held, just.
+> Much of the Netherlands is low land beside big rivers, protected by earth walls called **dikes**. High water in 1993 and 1995 brought danger. Afterward, the country combined dike work with more space for rivers, preparing for future high water. Most projects finished later.
+
+The common timeline keeps **1993 high water → 1995 high water → programme decision → later project completion** visible beside every passage amount. Detailed dates and figures remain source-review gates; no task requires a hidden longer passage.
 
 **Medium** adds:
 
@@ -60,8 +62,8 @@ Tasks:
   - "Because the dikes broke in 1995."
   - "Because people preferred parks to dikes."
 
-  Reply to the second: "Read the short version again. Did the dikes hold?"
-- **1c.** "What did the Netherlands decide?" Choices: "Only room for the river."; "Only higher dikes."; "Some of both, with more weight on room." The third fits; the reply to the first: "The medium version says *some of both*. Room for the River came alongside dike work, not instead of all of it."
+  Reply to the second: "This reading describes a danger and the response; it does not say the dikes broke in1995. Check the reviewed source card before making that claim."
+- **1c.** "What did the Netherlands decide?" Choices: "Only room for the river."; "Only higher dikes."; "Some of both, with more weight on room." The third fits; the reply to the first: "Every passage amount says the response combined dike work and more room. It was not instead of all dike work."
 
 ## 5. Step 2: Higher walls, or more room?
 
@@ -77,15 +79,15 @@ Tasks:
 - **2b.** Match each Room for the River measure to the Willowbank plan most like it: moving a dike back (the Sponge, or Some of Each); letting farmland flood (the Sponge); a higher dike (the Wall). Not marked; each match gets a reply explaining the likeness and one difference.
 - **2c.** "Is anything in Room for the River like Valencia's choice (Case 2)?" Choices: "Digging a side channel gives the water a second path, a little like Valencia's new channel."; "No, Valencia did nothing like any of this."; "Yes, the Netherlands moved whole rivers away from cities." The first gets: "Yes, on a much smaller scale. Valencia moved the whole river; a side channel only takes the extra in a flood." The third gets: "Not whole rivers. Find what a side channel does in the long reading." (Shown only if the explorer has Case 2.)
 
-## 6. Step 3: Why more room means lower water
+## 6. Step 3: A wider rectangle with the same area
 
 **Model label on every panel: Simplified model. Real rivers are not rectangles, and engineers use much more detailed models.**
 
-**Learn card** (rectangle area; the same idea as the Water Lab's containers):
+**Learn card** (an original fixed-area arithmetic diagram, not a result from the current Water Lab):
 
 > Picture a slice straight across the river, from bank to bank. The water in that slice is roughly a rectangle: **width × depth**.
 >
-> In a flood, a certain amount of water has to get past every second. If the river can't flow faster, it needs a certain **cross-section area**. Make the river wider, and the same area needs less depth.
+> For this diagram we fix the cross-section area at2,000 m². If we also pretend flow speed is unchanged and the beds are level, a wider rectangular channel would need less depth for that same area. Real water does not keep those assumptions for us. The arithmetic does not predict a real flood.
 >
 > Worked example: a flood needs a cross-section of 2,000 square metres. In a channel 400 m wide: 2,000 ÷ 400 = **5 m** deep. Widen it to 500 m: 2,000 ÷ 500 = **4 m** deep.
 
@@ -96,7 +98,7 @@ Tasks (Check my working):
 - **3a.** The same flood needs **2,000 m²**. The river is **250 m** wide. How deep? *Answer: 2,000 ÷ 250 = **8 m**.*
 - **3b.** A side channel adds **150 m** of width. How deep now? *Answer: 2,000 ÷ 400 = **5 m**: 3 m lower.*
 - **3c.** "To bring the water down to **4 m**, how wide must the river be?" *Answer: 2,000 ÷ 4 = **500 m**.*
-- **3d.** Hold it in instead: the river stays 250 m wide. "How high must the dikes be to hold an 8 m flood, with half a metre to spare?" *Answer: **8.5 m**.*
+- **3d.** In the diagram, add a **0.5 m drawn margin** above an **8 m rectangle**. How high is the drawn top? *Answer: **8.5 m**.* This checks addition in the model only, never a dike design or a safe real-world height.
 - **3e.** "What does this simple model leave out?" Choose any; each has a reply; none marked wrong:
   - Water flows faster in some places and slower in others.
   - Real riverbeds are curved, not flat.
@@ -152,7 +154,7 @@ Tasks:
 
 Three parts, each with **Write it yourself** (free text) and **Choose and adapt**:
 
-1. **One thing Willowbank can learn.** Supplied: "A country famous for walls decided walls alone weren't enough."; "Giving water more width lowers its height, as long as the water can get there."; "They did some of both, not one or the other."
+1. **One thing Willowbank can learn.** Supplied: "A country famous for walls decided walls alone weren't enough."; "In our fixed-area diagram, increasing width reduced depth. A real river needs much more evidence."; "They did some of both, not one or the other."
 2. **One way Willowbank is different.** Supplied: "The Netherlands had 2.3 billion euros. Willowbank has a town fund."; "Their rivers are huge. Willow Brook is a brook."; "Their decision took years of study. Ours has a meeting on Thursday."
 3. **Who gives something up.** Supplied: "In Lent, families left their homes. Here, it would be the orchard keepers' trees."; another.
 
@@ -160,7 +162,7 @@ Three parts, each with **Write it yourself** (free text) and **Choose and adapt*
 
 **The librarian's response (the same for every note):**
 
-> "That's the best kind of history lesson," says the librarian. "It doesn't tell us what to do. It tells us we're not the first to argue about it." Behind her, the miller says "huh" again, quietly.
+> "That's the best kind of history lesson," says the librarian. "It doesn't tell us what to do. It tells us we're not the first to argue about it." Behind them, the miller says "huh" again, quietly.
 
 **Supported route:** Choose and adapt alone completes Step 5; steps 1 to 4 can stay open.
 

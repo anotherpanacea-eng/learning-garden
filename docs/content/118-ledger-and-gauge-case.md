@@ -1,12 +1,12 @@
 # Keeper's Desk, Case 5: The ledger and the rain gauge
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (Act IV, Hollis's pages 2 and 4, Nuria's rain gauge letter, the three plans). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Every record here is fiction and uses spec 120's numbers exactly; if spec 120 changes a number, this case changes with it.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Act IV, Hollis's pages 2 and 4, Nuria's rain gauge letter, the three plans). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Every record here is fiction and uses spec 120's numbers exactly; if spec 120 changes a number, this case changes with it.
 
 Case ID `ledger-and-gauge`. Appears in Act IV once the explorer has page 4 (the Sponge drained in year 22) and Nuria's rain gauge letter. This is the "full dossier" spec 120 names for Act IV's older learner.
 
 ## 1. Why this case
 
-Act IV's question is the one the whole story has been building to: did draining the Sponge make the floods worse, or was it just wetter years? Spec 120 built its records so that an honest reader ends at Pip's line, "It's probably both. I hate it when it's both." The desk makes the explorer get there from the numbers, and then write for a town meeting where people want a simpler answer.
+Act IV's question is the one the whole story has been building to: did draining the Sponge make the floods worse, or was it just wetter years? The records do not decide the cause. The desk asks the explorer to distinguish recorded counts and heights from possible explanations, then write for a meeting where people want a simpler answer. Rain, drainage, channel changes, recording practices and other possibilities remain open; no reply steers the explorer to "probably both".
 
 The reasoning is the hard kind: two small records, made by different people for different purposes, two changes made in the same year, and data that is missing on purpose ("Years not written had no flood worth the ink").
 
@@ -93,7 +93,7 @@ Tasks (Check my working):
 
 > Two records are easier to compare when they're on the same grid. Nuria counted rain in tens of years, so count the floods the same way.
 >
-> If two stretches of years had the **same** rain but **different** floods, something other than rain must be part of the story. If they had **different** rain and different floods, rain could be part of it.
+> The **same count** of big-rain events is not the same amount of rain. Six short showers and six much longer storms could make different totals. This table gives no intensity, duration, local ground conditions or stated threshold for big rain. It cannot hold rainfall constant while we test another cause.
 
 **Guided first task (2a):** the first column of the table below, filled together.
 
@@ -109,13 +109,13 @@ Tasks:
 
 - **2b.** "Find two stretches of years with the same number of big rains." *Answer: **years 1 to 10 and 21 to 30**, both 6.*
 - **2c.** "What was different about the floods in those two stretches?" *Answer: the same number of floods (1 each), but **40 cm** against **120 cm**: three times as high.*
-- **2d.** "What changed between them?" Choices:
+- **2d.** "Which change does Hollis's page explicitly record?" Choices:
   - "The Sponge was drained, and the brook was straightened." ← fits Hollis's page
   - "The rain: the later years were much wetter."
   - "Nothing changed, so the difference is a mistake."
 
-  Reply to the second: "Look at the gauge for those two stretches. Were they different?" Reply to the third: "Hollis's page 4 says two things changed in year 22. What were they?"
-- **2e.** "And years 31 to 40?" *Answer: the most big rains (**8**) and the most floods (**4**).* Choices for what this suggests: "More rain, more floods."; "Rain had nothing to do with it."; "We can't tell, because the Sponge was already gone." The first and third are both accepted, with the reply: "Both are true. The rain went up *and* the Sponge was already gone, so this stretch alone can't separate them. Stretches 1 and 3 can, a little."
+  Reply to the second: "The event counts are equal, but we do not know their rainfall totals. This answer needs another record; it is not ruled out by these counts." Reply to the third: "Hollis's page 4 says two things changed in year 22. What were they?"
+- **2e.** "And years 31 to 40?" *Answer: the most recorded big-rain events (**8**) and recorded floods (**4**).* Interpretation choices are ungraded: "More events and more recorded floods occurred together."; "Rain caused the difference."; "We need rainfall and recording details before choosing a cause." The replies distinguish the directly counted association from an untested causal explanation. Neither this decade nor the equal-count pair isolates rainfall from drainage or channel changes.
 
 **I'm stuck (2a):**
 
@@ -141,10 +141,10 @@ Tasks:
 | Card | Fitting tray (reviewer's note) | Reply when placed in "support" |
 | --- | --- | --- |
 | Recorded floods were higher after year 22. | Support | "Yes: means of 50 and 112, highest 60 and 140." |
-| The last ten years were wetter at Vadoalto. | Support | "Yes: 8 big rains against 5 or 6." |
-| Rain alone explains the higher floods. | Count against | "Years 1 to 10 and 21 to 30 had the same rain and very different floods. Rain alone doesn't explain that pair." |
-| Draining the Sponge was the only cause. | Count against | "The wettest decade also had the most floods, so rain looks like part of it." |
-| Draining the Sponge made floods worse. | Can't tell for sure; leans support | "The same-rain pair leans this way. But the brook was straightened the same year, so the records can't say which change mattered." |
+| The last ten years had more recorded big-rain events at Vadoalto. | Support | "Yes: 8 recorded events against 5 or 6; that is not a rainfall total." |
+| Rain alone explains the higher floods. | Can't tell | "Equal event counts can hide different intensity or duration. These records do not rule that explanation in or out." |
+| Draining the Sponge was the only cause. | Can't tell | "The brook was straightened too, and rainfall details are missing. A cause is not isolated here." |
+| Draining the Sponge made floods worse. | Can't tell | "This is a plausible question to investigate, not a conclusion established by equal event counts. The records do not separate the changes." |
 | Straightening the brook made floods worse. | Can't tell | "It happened the same year as the drain. These records can't pull the two apart." |
 | There were no small floods before year 22. | Can't tell | "Hollis only wrote floods 'worth the ink'. Small ones may have happened and gone unwritten." |
 | The storm will happen again next year. | Can't tell | "Nothing in a list of past floods says what next year will bring." |
@@ -156,7 +156,7 @@ Tasks:
 
 Reply to the third: "It's a limit, not a reason to throw it away. What would it make you careful about?"
 
-**3c.** "Bramble says: *My hat and my boots both got wet that year too. Doesn't mean my hat did it.* Which idea is she using?" Choices: "Things happening together doesn't prove one caused the other." · "Hats cause floods." · "You can never learn anything from records." The first gets: "That's it. Now, do the records give any more than 'together'?" (pointing to the same-rain pair).
+**3c.** "Bramble says: *My hat and my boots both got wet that year too. Doesn't mean my hat did it.* Which idea is she using?" Choices: "Things happening together doesn't prove one caused the other." · "Hats cause floods." · "You can never learn anything from records." The first gets: "That's it. Now, do the records give any more than 'together'?" (pointing to the equal-event-count pair and its missing rainfall information).
 
 **I'm stuck (sort):**
 
@@ -174,7 +174,7 @@ Reply to the third: "It's a limit, not a reason to throw it away. What would it 
 
 Five parts, each with **Write it yourself** (free text) and **Choose and adapt**:
 
-1. **What the records show.** Supplied starters: "Floods were higher after the Sponge was drained: a mean of 112 cm against 50 cm."; "In two stretches of years with the same rain, the later floods were three times as high."; "The last ten years were also the wettest."
+1. **What the records show.** Supplied starters: "Floods were higher after the Sponge was drained: a mean of 112 cm against 50 cm."; "Two decades each recorded six big-rain events, but their recorded flood peaks differed."; "The last ten years had the most recorded big-rain events, not a known rainfall total."
 2. **Which plan you'd keep, and your strongest reason.** The Wall, the Sponge or Some of Each, with a reason drawn from the records or from what each plan costs (spec 120's plan table is in the drawer).
 3. **The best objection, and your answer.** Matched to the plan:
    - The Wall: the miller's own words from the Gazette, *"Just a bad storm"*, or Léon's ferry: *"And where does the water go when it reaches the end of your wall?"*
@@ -182,13 +182,13 @@ Five parts, each with **Write it yourself** (free text) and **Choose and adapt**
    - Some of Each: Pip: *"So nobody gets what they wanted. Will it be enough?"*
    The explorer answers it, concedes part of it, or changes plan.
 4. **What you're not sure about.** Supplied: "Two changes happened in year 22, and the records can't separate them."; "We only have seven floods."; "Small floods weren't written down."
-5. **The record that would settle it.** Supplied: "Water heights at the post for every flood, small ones too, from now on."; "A rain gauge at Willowbank, so we're not relying on one upstream."; "Times as well as heights, to see if the water now comes sooner." Ties to [Case 10](118-town-record-case.md) if the explorer has kept a town record.
+5. **A record that would help investigate it.** Supplied: "Water heights at the post for every flood, small ones too, from now on."; "A rain gauge at Willowbank, so we're not relying on one upstream."; "Times as well as heights, to see if the water now comes sooner." Ties to [Case 10](118-town-record-case.md) if the explorer has kept a town record.
 
 **Keep this page** saves it. **Pin it to the meeting board** shows it beside the three plans.
 
 **Wren's response (the same for every plan):**
 
-> Wren reads it, then reads the uncertain part again. "People will want you to be surer than this. Don't let them talk you into it. This is what the records can carry."
+> Wren reads it. "I've kept your page for the meeting. Let's check each claim against the records and mark what we still don't know."
 
 **Story link:** spec 120's own plan prompt in Act IV remains the act's choice and is independent of this page. The page is pinned to the meeting board and appears in the almanac under the explorer's kept plan. Spec 120's "someone changes their mind" line for Vadoalto's rain gauge can show after this case is kept.
 

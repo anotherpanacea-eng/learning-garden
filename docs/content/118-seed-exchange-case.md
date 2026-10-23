@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 3: The seed exchange ledger
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (the desk's conventions, records and acceptance apply) and [spec 120](../specs/120-keeper-of-the-ways.md) (Act III, "The seed exchange"). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Everything here is fiction: Willowbank, Vadoalto, the reed and every number. Nuria's Spanish lines need a fluent reader of Spain's Spanish.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (the desk's conventions, records and acceptance apply) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Act III, "The seed exchange"). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Everything here is fiction: Willowbank, Vadoalto, the reed and every number. Nuria's Spanish lines need a fluent reader of Spain's Spanish.
 
 Case ID `seed-exchange`. Appears with spec 120's Act III chapter *The seed exchange*.
 
@@ -139,7 +139,7 @@ Tasks:
 
 **Question panel:**
 
-> Last spring, both towns planted reed cuttings from the same Vadoalto beds.
+> Last spring, both towns planted reed cuttings from the same Vadoalto beds. Willowbank's cuttings travelled a day downriver before planting; Vadoalto's were planted fresh. The dates, planting methods, soil and water were not kept in this record.
 >
 > | Where | Cuttings planted | Took root |
 > | --- | --- | --- |
@@ -152,7 +152,7 @@ Tasks:
 
 **Learn card** (Marble research for Understanding and Calculating Percentages: always ask "percent of what?"):
 
-> When two groups are different sizes, counts can't be compared directly. Willowbank planted more, so of course more took root.
+> When two groups are different sizes, counts can't be compared directly. Willowbank planted more, which gave more opportunities for rooting; it does not guarantee that more would take root.
 >
 > A **percentage** turns each result into "out of 100", so both are measured the same way.
 >
@@ -169,10 +169,10 @@ Tasks:
 - **3b.** At Vadoalto? *Answer: 20/25 = 4/5 = **80%**.*
 - **3c.** "So Nuria's right?" Choices:
   - "Yes. 80% is more than 75%, so Vadoalto's ground grows reed better."
-  - "Too close to call. Change one Vadoalto cutting and its result moves 4 points." ← fits the evidence
+  - "Vadoalto's observed percentage was higher, but these trials do not isolate ground quality." ← fits the evidence
   - "No. Thirty cuttings took root at Willowbank and only twenty at Vadoalto."
 
-  Reply to the first: "80 is more than 75. Before deciding it means something, try 3d: how much does one cutting change each result?" Reply to the third: "Willowbank planted 15 more cuttings, so it had more chances. Percentages compare the two fairly."
+  Reply to the first: "80 is more than 75. Before deciding it means something, try 3d: how much does one cutting change each result?" Reply to the third: "Willowbank planted 15 more cuttings, so compare the observed percentages as well as counts. Neither measure by itself proves why they differed."
 - **3d.** Use the "what if" table: if **one more** Vadoalto cutting had failed, what would its percentage be? And if one more Willowbank cutting had failed? *Answers: Vadoalto 19/25 = **76%**; Willowbank 29/40 = **72.5%**.* The table shows each town's result for one cutting either way: Vadoalto 76% / 80% / 84%, Willowbank 72.5% / 75% / 77.5%.
 - **3e.** "What else was different between the two plantings, besides the town?" Free choice of any, each with an authored reply; none is marked wrong:
   - Willowbank's cuttings travelled a day down the river first; Vadoalto's were planted fresh.

@@ -80,7 +80,9 @@ Prompts are second person and 15 words or fewer where possible. Multiple-choice 
 | P = 4 in `both-sides-3` (from 4P + 1 = 2P + 11 → 2P = 10 → P = 4) | Arithmetic slip in the last step | "Check it: 4 × 4 + 1 and 2 × 4 + 11. Are they level?" |
 | `bags-of-three`: 3 parcels + 2 units on the left | Opening the bags but adding the units once | "Each bag has 2 units. Three bags have how many?" |
 
-### Bramble's labels
+### Deferred authored idea: Bramble's labels
+
+Outside the first balance extension. These proposed no/every-mass tasks need a separate model and teaching review and commission, as specified in spec 119; their presence here does not clear them for the first pack.
 
 **Prompt:** Bramble wrote two labels but hasn't tried them. Can each balance ever be level?
 
@@ -328,7 +330,7 @@ Run the explorer's rule on these, then compare with Wren's request:
 | ID | Prompt | Sentences | Fitting |
 | --- | --- | --- | --- |
 | `although-2` | Which sentence makes price the afterthought? | (two orders of the causeway sentence, plus a *because* version) | *The causeway floods, although it is cheaper.* |
-| `unless-1` | Join with *unless*. Keep what the source says. | The courier crosses at the ford. The water is over the stones. | *The courier crosses at the ford unless the water is over the stones.* |
+| `unless-1` | Join with *unless*. Keep what the source says. | The courier normally crosses at the ford. When water covers the stones, the courier turns back. | *The courier crosses at the ford unless the water is over the stones.* |
 | `unless-if` | Does the *if* sentence say the same as the *unless* one? Yes · No, the opposite · Partly | — | No, the opposite |
 | `whereas-1` | Join with *whereas* to show the difference. | The footbridge takes walkers. The causeway takes carts. | *The footbridge takes walkers, whereas the causeway takes carts.* |
 | `whereas-better` | Does the *whereas* sentence say one is better? Yes · No · Only the footbridge | — | No |
@@ -338,7 +340,7 @@ Run the explorer's rule on these, then compare with Wren's request:
 
 **`unless-1`**
 1. *Hint:* "*Unless* names the case when something doesn't happen. When doesn't the courier cross?"
-2. *Similar:* "'We walk to school. It rains.' → 'We walk to school unless it rains.' Rain is when we don't. Now the courier."
+2. *Similar:* "'We usually walk to school. On rainy days we take the bus.' → 'We walk to school unless it rains.' The source gives the exception. Now the courier."
 3. **Skip for now.**
 
 **`choose-joiner`**
@@ -388,7 +390,7 @@ Run the explorer's rule on these, then compare with Wren's request:
 | --- | --- | --- |
 | `narrows` | The narrows are 24 m across. How wide on the map? | 1.2 cm |
 | `ford` | The ford is 15 m. How wide on the map? | 0.75 cm |
-| `see-difference` | Could you see the difference on this map? Easily · Only just · Not at all | Only just (0.45 cm apart) |
+| `see-difference` | Could you see the difference on this map? Easily · Only just · Not at all | Unscored observation. The calculated difference is0.45 cm; screen size, zoom and vision affect visibility. |
 | `inset-narrows` | An inset at 1 cm for 5 m. The narrows? | 4.8 cm |
 | `inset-ford` | And the ford? | 3 cm |
 | `reverse` | Mill to library measures 7.5 cm. How far really? | 150 m |
@@ -414,7 +416,7 @@ Run the explorer's rule on these, then compare with Wren's request:
 | 0.375 for `reverse` | Dividing for map-to-real | "The real distance should be bigger. One centimetre stands for 20 metres: multiply." |
 | 150 cm for `reverse` | Losing the unit | "Right number, wrong unit. Each centimetre stands for 20 *metres*." |
 | 1.5 for `ford` | Rounding too early, or 15 ÷ 10 | "Check: 1.5 cm × 20 is 30 m. The ford is 15 m." |
-| "Easily" for `see-difference` | Not checking size | "1.2 cm and 0.75 cm differ by less than half a centimetre. Measure it with your fingernail." |
+| Any choice for `see-difference` | Unscored visibility report | "The two drawn lengths differ by0.45 cm at the stated physical scale. Screens and zoom may show them differently. An inset can help; your eyesight is not being checked." |
 
 ---
 

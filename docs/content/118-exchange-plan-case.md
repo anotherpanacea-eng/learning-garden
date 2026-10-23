@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 11: Keeping the Ways open
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (Act VI, the three Ways, the exchange plan). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Fiction throughout. Travel times and loads are the story's own and must stay consistent with [Case 3](118-seed-exchange-case.md) (the 2 : 3 rate) and [Case 4](118-flood-bell-case.md) (the courier's 3 hours on the river path, unladen, by day).
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127) (Act VI, the three Ways, the exchange plan). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Fiction throughout. Travel times and loads are the story's own and must stay consistent with [Case 3](118-seed-exchange-case.md) (the 2 : 3 rate) and [Case 4](118-flood-bell-case.md) (the courier's 3 hours on the river path, unladen, by day).
 
 Case ID `exchange-plan`. Appears in Act VI with *Compare routes and keep a plan*.
 
@@ -98,7 +98,7 @@ Tasks (Check my working):
 - **3a.** One round trip by the **river path**? *Answer: 4 + 4 = **8 hours**.*
 - **3b.** Two round trips a week: total hours by river path, and by bridge road? *Answers: **16 hours**; **28 hours**.*
 - **3c.** "How much longer does the bridge road take, over the two trips?" *Answer: **12 hours** more.*
-- **3d.** In summer, could the high ford carry the apples? *Answer: **no carts**: on foot, two baskets a person, so 12 baskets would need **6 people** walking. Choices about whether that's sensible follow; none marked.*
+- **3d.** In summer, could the high ford carry the apples? *Answer: **no carts**. With two baskets per loaded person-journey, 12 baskets need **6 loaded person-journeys** up the ford. That could be six people carrying one load each, or fewer people making repeat journeys, with time to return between loads. The count alone does not fix the number of people or the timetable. Choices about whether that's sensible follow; none marked.*
 - **3e.** Build the season table. For each season, choose the Way for the weekly carts and the Way for urgent letters. Not marked; **Check my working** checks only that no choice breaks a rule (no carts on the high ford; no high ford from November to April). The reply to a valid table names what it costs in hours each week.
 
   | Season | Carts | Urgent letters |
@@ -139,11 +139,13 @@ Tasks:
 
 Five parts, each with **Write it yourself** (free text) and **Choose and adapt**:
 
-1. **What goes each way, and how much.** From Step 1, editable.
-2. **How often.** From Step 2.
-3. **Which Way in each season.** From Step 3's table.
-4. **When a Way is closed.** From Step 4.
-5. **What we'll check together after one year.** Supplied: "Whether the amounts were right."; "How many trips were late, and why."; "Whether the winter store was big enough."
+Show kept inputs as **Your earlier idea**, when present. Also offer these **Supplied story options** even if steps 1–4 are all open. Each option is complete, needs no typing and is visibly supplied by the case. Selecting it records support for the plan only; it never backfills an earlier task or claims the explorer calculated the loads.
+
+1. **What goes each way, and how much.** Use Step 1 if kept, or choose: "In the usual week, send 6 baskets of apples up and 4 bundles of reed down; in apple-season weeks, send 12 baskets up and 8 bundles down."
+2. **How often.** Use Step 2 if kept, or choose: "Make one loaded cart round trip each usual week and two each apple-season week. Each cart takes up to 6 baskets up and 4 bundles back."
+3. **Which Way in each season.** Use Step 3's table if kept, or choose: "Use the river path for carts and letters in every season while it is open; use the bridge road when it is closed. Use no cart on the high ford." / "Use the bridge road for carts and letters in every season; leave the high ford out of this plan." The supplied routes avoid the partial spring/autumn ford window rather than treating the whole season as open.
+4. **When a Way is closed.** Use Step 4 if kept, or choose: "Use the other open cart Way if it is available. Tell the other town about delays. Before winter, keep a week of the other town's goods in store. If all Ways are closed, nobody travels; letters wait at the post office and go first when a Way opens."
+5. **What we'll check together after one year.** Choose: "Whether the amounts were right." / "How many trips were late, and why." / "Whether the winter store was big enough."
 
 **Keep this plan** saves it. **Send it to Vadoalto** shows both copies.
 
@@ -182,5 +184,6 @@ Candidates, pending semantic review.
 
 ## 11. What still needs review
 
-- Content review, and a check against spec 120's Act VI text (the three Ways and their descriptions) after any change there.
+- Content review, including the supplied plan options, and a check against spec 120's Act VI text (the three Ways and their descriptions) after any change there. These fallbacks define the supported route; they do not clear remaining teaching/help/reply authoring for commissioning.
+- Future acceptance: open only Step 5, choose supplied text for all five parts and keep with no typing; steps 1–4 remain unobserved and no supplied value is presented as an earlier explorer answer. Verify that the usual-week and apple-season loads each fit their stated round trips.
 - Nuria's Spanish reply needs a fluent reader.

@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 6: What did Hollis write?
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (the Keeper's Pages and their three versions). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Hollis and the pages are fiction.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (the Keeper's Pages and their three versions). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Hollis and the pages are fiction.
 
 Case ID `hollis-pages`. Appears when page 1 dries (end of Act I). Pages 2, 3 and 4 join the case as each one dries; page 5 is blank and page 6 is a clean letter, so neither is in it. Saved work on an earlier page is never changed when a later page joins.
 
@@ -20,7 +20,7 @@ Buttons: **Start on the page** · **Later**.
 
 ## 3. The smudges (proposed for spec 120 to confirm)
 
-Each smudge shows some surviving letters. Underscores are lost letters; the facsimile art draws a stain over them with the visible strokes left clear. The hidden word is never shown to the explorer, only used for replies.
+Each smudge shows some surviving letters. Underscores are lost letters; the facsimile art draws a stain over them with the visible strokes left clear. The proposed hidden word is an authoring note. Replies discuss surviving evidence and uncertainty; they never use that note to certify the explorer's guess.
 
 | Page | Line around the smudge | Surviving letters | Proposed word | What a reader can use |
 | --- | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ Each smudge shows some surviving letters. Underscores are lost letters; the facs
 | 4 | the apples this autumn are [__]. | `m a g _ _ _ _ _ _ _ _` | magnificent | Letter shape; the longer version's "best harvest anyone remembered" |
 | 4 | [__] someone should ask them. | `P _ _ _ _ _ s` | Perhaps | Capital; length; Hollis's habit of hedging ("I admit", "Wet years, or our doing?") |
 
-The page 2 smudge is the case's centre. `Lately` and `Surely` both fit six letters ending in *-ly*, but the surviving first letter is lost. *Lately the gaps grow shorter* reports something Hollis saw. *Surely the gaps grow shorter* is a guess about the future. The letters can't decide between them; the ledger's numbers can lean one way.
+The page 2 smudge has at least two plausible readings. `Lately` means recently; `Surely` expresses confidence in the claim and need not predict the future. Both fit six letters ending in *-ly*. The ledger may support a trend in recorded intervals, but it cannot identify which of these words Hollis wrote. The proposed hidden word is an authoring note, never a key for grading an uncertain reconstruction.
 
 ## 4. Steps
 
@@ -41,7 +41,7 @@ The page 2 smudge is the case's centre. `Lately` and `Surely` both fit six lette
 4. **Did the retelling say more?** (original against retelling)
 5. **The editor's note** (writing for the almanac)
 
-Steps open in any order. Each step works on any dried page the explorer chooses; the worked answers below use page 4, which has the most to find.
+Steps are open in any order only within an authored page pack. The checked transcription, guided lines and retelling below use page4 and must not appear while only page1 is available. Before commissioning this case, supply a finite per-page task/copy map for pages1–3, or scope the first case release explicitly to the available open transcription/uncertainty/note work without those checked tasks. A page not reached is neither revealed nor credited. The editor-note route can keep a visibly supplied generic note without inventing a page2 guess or earlier work.
 
 ## 5. Step 1: Exactly what's there
 
@@ -123,7 +123,7 @@ Tasks:
 > - **the rest of the page**,
 > - **other pages** by the same writer.
 >
-> Then ask: if I'm wrong, does the meaning change? If not, the guess is safe. If it does, say so.
+> Then ask: if I'm wrong, does the meaning change? A guess stays labelled as a guess either way. If it changes the meaning, explain that uncertainty too.
 
 **Guided first task (3a):** page 4's *the apples this autumn are [m a g _ _ _ _ _ _ _ _]*, with the evidence types as tick boxes.
 
@@ -132,8 +132,8 @@ Tasks:
 - **3a.** Page 4, *the apples this autumn are m a g _ _ _ _ _ _ _ _*. Choose a word and the evidence it rests on. *Fitting word: magnificent* (11 letters; *mag* survives; the longer version calls it the best harvest anyone remembered). Other 11-letter *mag* words are offered so the letter count does the work.
 - **3b.** Page 2, *_ _ _ _ l y the gaps grow shorter.* Two candidates fit the letters: **Lately** and **Surely**. "What does each one make Hollis say?" Matching task, with these sentences to place:
   - *Lately:* "Hollis has seen the gaps between floods getting shorter."
-  - *Surely:* "Hollis expects the gaps to get shorter, but hasn't necessarily seen it."
-- **3c.** "Which does the ledger support?" The explorer can open page 2's table. *Fitting answer:* **Lately**, because the gaps between Hollis's recorded floods do shrink: 11 years (4 to 15), 12 (15 to 27), then 4, 3, 2 and 2. The reply: "The numbers lean towards *Lately*. Mark it `[Lately?]`, and say the ledger is your evidence."
+  - *Surely:* "Hollis expresses confidence that the gaps grow shorter; that can describe the same recorded trend."
+- **3c.** "Can the ledger tell us which word was written?" The explorer can open page2's table. The intervals are **11, 12, 4, 3, 2, 2 years**: the later ones are shorter, though not every consecutive interval shrinks. Reply: "Both readings can fit that pattern. The ledger cannot choose the missing word. Keep a guess with a question mark, or leave [smudged]." A mechanical interval check may check those six differences; the word guess is ungraded.
 - **3d.** "Does the guess change what the page means?" For each smudge, choose **No**, **A little** or **Yes**. Authored replies; none is marked wrong. The reply for page 2's smudge notes that it's the one where the guess matters most.
 
 **I'm stuck (3c):**
@@ -147,7 +147,7 @@ Tasks:
 | Entered | Misconception | Reply |
 | --- | --- | --- |
 | Gaps of 15, 12, 4, 3, 2, 2 | Counting the first gap from year 0 | "The first gap is between the first flood and the second, years 4 and 15." |
-| "Surely, because Hollis was sure" | Reading tone instead of evidence | "Maybe Hollis was sure. Which word does the ledger's own numbers support?" |
+| "Surely, because Hollis was sure" | Confidence about an uncertain word | "That is one possible reading. Confidence is not surviving ink; mark it as your guess." |
 
 ## 8. Step 4: Did the retelling say more?
 
@@ -188,16 +188,16 @@ Tasks:
 Three parts, each with **Write it yourself** (free text) and **Choose and adapt**:
 
 1. **How you marked the page.** Supplied: "Words in square brackets with a question mark are my guesses. [smudged] means nothing could be read."
-2. **The guess that matters most.** Supplied: "On page 2, the first word could be *Lately* or *Surely*. I chose *Lately* because the gaps between floods in the ledger do get shorter."
+2. **The guess that matters most.** Supplied, only after page2 is available: "On page2, Lately and Surely both fit the remaining letters. The ledger does not tell me which word was written." Otherwise: "I have left an unreadable word as [smudged], rather than invent it."
 3. **One thing a reader should know.** Supplied: "The short versions of these pages were written later, by the town. They sometimes say more than Hollis did."
 
 **Keep this note** saves it. **Print it in the almanac** shows the page with the note.
 
 **The librarian's response (the same for every note):**
 
-> The librarian reads your note, then the transcription, then your note again. "Now anyone who reads this knows exactly which words are Hollis's and which are ours. That's rarer than it should be."
+> The librarian reads your note, then the transcription. "Thank you for sitting with the page. We can keep looking at the words and the gaps together."
 
-**Story link:** when Hollis returns in Act VI, an optional line can appear if this case was kept. Hollis never says which word they wrote, because that would answer the case. Hollis looks at the transcription for a long time and asks: "Which did you think it said?" Whatever the explorer kept, the reply is the same: "Then you read it the way I meant it, mostly." (Sent to spec 120 for placement in the "Someone comes home" scene.)
+**Story link:** when Hollis returns in Act VI, an optional line can appear if this case was kept. Hollis never says which word they wrote, because that would answer the case. Hollis looks at the transcription for a long time and asks: "Which did you think it said?" Whatever the explorer kept, Hollis acknowledges the effort without validating the guessed text: "Thank you for sitting with those pages. The water has kept some words to itself." (Sent to spec 120 for placement in the "Someone comes home" scene.)
 
 **Supported route:** Choose and adapt alone completes Step 5; steps 1 to 4 can stay open.
 

@@ -16,6 +16,8 @@ Each future extension should author the same Jane-derived shape as [spec 118's d
 
 Before implementing any row, write and independently review its bounded model, actions/UI, source shape/version, validation, kept-result and recovery behavior. Use the existing bench spec for unchanged behavior; explicitly supersede only the old exclusions needed by the new optional mode. No current pack or historical result is migrated, regraded or rewritten just to fit a new mode. Each row needs a complete finite teaching/help/feedback pack before its own build. This does not call for a generic migration or pack framework.
 
+The new companion text is a draft with representative help/replies, not proof that every offered item has a complete path. Before a particular extension is commissioned, enumerate its finite offered item IDs and check that each checked item has its own authored hint, similar example/start line and skip path, and that every offered choice or tagged error has the required keyed response. Folded initial guidance retains its supplied-support context. This is a bounded content review for the chosen pack, not permission to create a generic coverage system or to build all six at once. Deferred Bramble labels remain outside the first balance extension even though their proposed text exists.
+
 | Proposal | Required extension; current capability is narrower |
 | --- | --- |
 | Balance | Per-pan counts of equal-mass parcels, bags/opening, paired parcel removal and a ledger; spec 64 v1 has exactly one fixed parcel. Define finite counts/masses and atomic moves. Bramble's no/every-mass labels below are a separately deferred extension. |
@@ -135,14 +137,14 @@ Bench: [spec 84](84-willow-sorting-desk.md) and [Willow Double Check, spec 101](
 
 Bench: [My Count Collection, spec 86](86-count-collection.md). This pack supplies a fixed dataset and asks which summary describes it fairly.
 
-**Dataset:** the masses of five parcels waiting at the post office, in kilograms: **2, 3, 3, 4, 18.** (The 18 kg parcel is a millstone for the mill.)
+**Dataset:** the masses of five parcels waiting at the post office, in kilograms: **2, 3, 3, 4, 18.** (The 18 kg parcel is an iron bearing for the mill.)
 
 **Tasks:**
 
 - Find the **mean**: (2 + 3 + 3 + 4 + 18) ÷ 5 = 30 ÷ 5 = **6 kg**.
 - Find the **median**: middle value in order = **3 kg**.
 - "The courier asks: how heavy is a usual parcel?" Choices: 6 kg (the mean); 3 kg (the median); 18 kg (the heaviest); "it depends what you need to know". The authored replies explain that four of the five parcels weigh 4 kg or less, so the median describes a usual parcel better here, and that the mean is still the right number for a different question: "If the five parcels were shared evenly between five bags, how much would each bag hold?"
-- Remove the millstone: mean (2 + 3 + 3 + 4) ÷ 4 = **3 kg**, median (3 + 3) ÷ 2 = **3 kg**. One unusual value moved the mean by 3 kg and the median not at all.
+- Remove the iron bearing: mean (2 + 3 + 3 + 4) ÷ 4 = **3 kg**, median (3 + 3) ÷ 2 = **3 kg**. One unusual value moved the mean by 3 kg and the median not at all.
 
 - **Reverse problem** (the research's test of meaning): "A sixth parcel arrives. Now the mean of all six is 7 kg. How heavy is the new parcel?" *Total 6 × 7 = 42; 42 − 30 = **12 kg**.* Reply to an entry of 7: "That's the new mean, not the new parcel. If six parcels share 42 kg evenly, what must the new one add?"
 - Notice that the mean of the first five, 6 kg, is not the mass of any parcel. The reply says so plainly, because expecting the mean to be one of the values is a listed misconception.

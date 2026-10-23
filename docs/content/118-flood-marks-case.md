@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 9: Marks on the wall
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (Léon, Les Saules, the archive's "Flood marks in France" pack). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Les Saules, Léon and the ferry house wall are fiction. Section 7 is real history. **All French needs a fluent reader of France's French, and every historical figure needs source review (section 10) before it reaches a child.**
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Léon, Les Saules, the archive's "Flood marks in France" pack). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Les Saules, Léon and the ferry house wall are fiction. Section 7 is real history. **All French needs a fluent reader of France's French, and every historical figure needs source review (section 10) before it reaches a child.**
 
 Case ID `flood-marks`. Appears after Léon's first letter (Act III). It is the desk depth of spec 120's "Flood marks in France" archive pack.
 
@@ -9,6 +9,10 @@ Case ID `flood-marks`. Appears after Léon's first letter (Act III). It is the d
 Hollis kept a flood post. Downstream, Les Saules does the same thing differently: it marks great floods on walls, with a date and a line. Across France, towns do this by law, and the marks are public records anyone can look up. The case uses that likeness for three things: the explorer's first sustained reading in French, a measurement lesson that matters (two records can only be compared if they measure from the same zero), and a short piece of real history about why towns mark floods at all.
 
 French and English are offered side by side, at the explorer's choice, the same as Nuria's Spanish letters. French reading is never required to finish the case.
+
+**Passage-amount boundary:** the letter and history panels each have an explicit Short / Longer choice, kept separately in this case's eventual frozen source. Ask only questions supported by the currently supplied passages. Letter tasks 1a and 1b work from either amount; 1c and 1d require the Longer letter. History task 4a works from either amount; 4c requires the Longer history panel, and 4d requires the grandfather's words in the Longer letter. In a shorter route, leave those optional questions absent and their responses unobserved, with an optional **Read the longer passage** action. Opening it supplies the relevant text and records support before the extra task appears. Withholding a source-dependent question never blocks keeping the final letter. Task 4b may use the already-dried page 2 in Act III, without introducing a later page.
+
+Cast follows spec 120: the librarian uses they/them and the miller she/her. Language review must preserve that distinction in any new English/French lines.
 
 ## 2. Hook (fiction, labelled Story)
 

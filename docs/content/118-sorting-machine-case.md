@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 7: The borrowed sorting machine
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance), [spec 119](../specs/119-deeper-bench-packs.md) section 4 (the Sorting Desk's hand-written rules) and [spec 120](../specs/120-keeper-of-the-ways.md) (Les Saules, the post office). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Fiction throughout. Needs a content reviewer and a subject reviewer for AI literacy (C1).
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance), [spec 119](../specs/119-deeper-bench-packs.md) section 4 (the Sorting Desk's hand-written rules) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Les Saules, the post office). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Fiction throughout. Needs a content reviewer and a subject reviewer for AI literacy (C1).
 
 Case ID `sorting-machine`. Appears after Act I, once the post is running again.
 
@@ -70,7 +70,7 @@ Steps open in any order.
 
 **Learn card:**
 
-> Some machines sort with a rule a person wrote: *if the label says hill track, send it to the hill farms.* That's the Sorting Desk.
+> Some machines sort with a rule a person wrote: *if the label says hill track, send it to the hill farms.* The Sorting Desk uses that kind of hand-written rule with different parcel features.
 >
 > This machine has no rule like that. It copies the past. For each new parcel it finds old parcels that look the same, **in the ways it was told to look**, and does what most of them did.
 >
@@ -171,7 +171,22 @@ Tasks:
 
 > When you try a fix, change one thing and run the same parcels again, so you know what made the difference. Compare by group as well as overall.
 
-The machine card in the drawer becomes editable: the explorer can tick or untick features, and can add this week's parcels to its examples.
+The machine card in the drawer becomes editable in exactly two ways: select any subset of **size / wrap / road**, and choose **Last year's examples** or **Last year plus this week's ten hill-farm examples**. The second choice adds exactly the four small brown hill-track examples and six large brown hill-track examples from the supplied test table, once. It does not add all forty parcels, allow arbitrary examples or append the same ten repeatedly. Selecting the current choice is a no-op; returning to Last year's examples restores the unchanged 40-example baseline. Every named task starts from the profile its instructions name, regardless of an earlier experiment.
+
+These give sixteen finite profiles: eight feature subsets times two example sets. This table specifies their outcomes on the same forty supplied parcels; no new model registry is needed. Empty feature selection matches all examples in the selected example set. If a future source creates a tied majority, report **No majority in this model** rather than choose a basket; no supplied profile below ties. The current source and task set accept only these authored parcels and example sets, not arbitrary imported labels or roads.
+
+| Features selected | Last year: overall / hill farms correct | Plus ten hill examples: overall / hill farms correct |
+| --- | --- | --- |
+| None | 30/40; 0/10 | 30/40; 0/10 |
+| Size | 30/40; 0/10 | 30/40; 0/10 |
+| Wrap | 30/40; 0/10 | 30/40; 0/10 |
+| Road | 40/40; 10/10 | 40/40; 10/10 |
+| Size and wrap | 30/40; 0/10 | 30/40; 0/10 |
+| Size and road | 34/40; 4/10 | 40/40; 10/10 |
+| Wrap and road | 40/40; 10/10 | 40/40; 10/10 |
+| Size, wrap and road | 34/40; 4/10 | 40/40; 10/10 |
+
+This is an inspectable demonstration using the same fixed table to try changes. Once examples are added from that table, the resulting count is not performance on unseen parcels or an independent evaluation. Freeze the selected feature subset, one of the two example profiles, the relevant source tables and recorded result with each kept check under this case's eventual reviewed contract.
 
 **Guided first task (4a):** the first fix, run row by row.
 
@@ -226,7 +241,7 @@ Four parts, each with **Write it yourself** (free text) and **Choose and adapt**
 
 ## 10. Revisits
 
-- **Willow Sorting Desk, spec 119 section 4:** the hand-written rule *If the road says hill track, put it in Hill farms; otherwise Town* sorts this week's parcels perfectly. The pack's closing card can link here: "A person who knows what matters can write the rule. A machine that copies examples has to be shown what matters."
+- **Willow Sorting Desk, spec 119 section 4:** the supplied comparison *If the road says hill track, put it in Hill farms; otherwise Town* sorts this week's parcels perfectly on paper within this case. Neither the current stamp/wrap desk nor spec 119's proposed size/stamp pack supplies a road-label source mode. An actual runnable revisit would need a separately reviewed road-label extension. The future pack's closing card may link here without pretending it runs that road rule: "A person who knows what matters can write the rule. A machine that copies examples has to be shown what matters."
 
 ## 11. Topic references and prerequisites
 

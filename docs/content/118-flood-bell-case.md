@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 4: When should the bell ring?
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (Vadoalto, Nuria, the six-hour lag, Act VI's long rain). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Every place, distance, time and record here is fiction.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Vadoalto, Nuria, the six-hour lag, Act VI's long rain). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Every place, distance, time and record here is fiction.
 
 Case ID `flood-bell`. Appears after Nuria's first letter (end of Act II), so an explorer who arrives with the letter from upstream has it from the start.
 
@@ -10,7 +10,7 @@ Case ID `flood-bell`. Appears after Nuria's first letter (end of Act II), so an 
 
 Spec 120 fixes one fact about the valley: water from Vadoalto reaches Willowbank **about 6 hours** later. In Act VI that fact saves the town, because Nuria's warning arrives in time and Willowbank passes it on to Les Saules. The four-depths table gives the desk this job: "Nuria's letter says it rose at 9 in the morning. When should the bell ring? What could make the water arrive sooner?"
 
-The case makes the explorer earn Act VI's moment. "About 6 hours" turns out to hide three questions: how long the warning itself takes to travel, where the 6 comes from, and how sure anyone can be of it. The explorer ends by writing the rule for the bell that the town follows in the long rain.
+The case prepares a question that returns in Act VI. "About 6 hours" turns out to hide three questions: how long the warning itself takes to travel, where the 6 comes from, and how sure anyone can be of it. The explorer ends by writing advice for the bell-ringer. It is a human-read fictional recommendation, not a program that the game executes; the supplied Act VI sequence remains owned by spec 120.
 
 ## 2. Hook
 
@@ -43,7 +43,9 @@ Steps open in any order.
 > | {courier}, running the river path by day | 3 hours |
 > | {courier}, on the river path at night | 4 hours |
 >
-> The flood post clock uses the 24-hour clock, like the post office.
+> This story's flood-post day-line uses the 24-hour clock.
+
+**New case model, not inherited clock behavior:** this case needs its own bounded 24-hour day-line, with departure times at whole or half hours and explicit **same day / next day** answer context when midnight is crossed. Clock answers use `00:00` to `23:30` in half-hour steps; elapsed durations are separate numerical answers in hours. The supplied journeys last at most 9 hours, so these examples require at most one day boundary. Keep the time/day context in the case's frozen source and answer. Current Courier Clock Walk is a narrower 12-hour dial with a 60-minute elapsed window; it does not supply this model or its multi-hour/24-hour checks. A later revisit there requires a separately reviewed new pack, rather than relabeling its existing work.
 
 **Learn card** (Marble research for 12-hour and 24-hour time: the day runs 00:00 to 23:59, and only afternoon times get +12):
 
@@ -204,15 +206,15 @@ The rule has four parts, each with **Write it yourself** (free text) and **Choos
 
 **The miller's response (the same for every rule):**
 
-> The miller reads it out loud, slowly, the way you'd read it at two in the morning. "Good. That's the first rule on this post that says what it doesn't know." She draws a box round it in chalk.
+> The miller reads it out loud, slowly, the way you'd read it at two in the morning. "I've kept your proposed rule. Let's read it together and check what it says, and what it can't promise." She draws a box round it in chalk.
 
-**Story link:** spec 120's long rain in Act VI follows the town's rule, whatever it says: the bell rings when Nuria's line arrives, and the explorer sends the warning on to Les Saules. The case never states that a particular rule saved the town.
+**Story link:** spec 120 supplies Act VI's sequence: the town rings the bell when Nuria's message arrives, and the explorer sends the warning on to Les Saules. The kept advice can be displayed beside that scene for a human conversation. The game does not interpret or execute its free text, claim that the supplied sequence followed every possible recommendation, or infer that a particular written rule saved the town. Keeping this case is not required for the scene.
 
 **Supported route:** every part can be finished with Choose and adapt alone, and steps 1 to 3 can stay open.
 
 ## 8. Revisits
 
-- **Courier clock** (the Seedling job in spec 120's Act VI): the 24-hour working from Step 1.
+- **Courier clock** (the Seedling job in spec 120's Act VI): an optional future 24-hour/multi-hour pack could revisit Step 1; the current 12-hour/60-minute model stays unchanged.
 - **Act VI's warning to Les Saules:** the explorer can work out when the water reaches Les Saules if it's another 12 km at 3 km an hour (4 hours more), as an optional extra on the warning card.
 
 ## 9. Topic references and prerequisites
@@ -230,7 +232,7 @@ Candidates, pending semantic review.
 
 | Topic | Hard prerequisites (in app?) | How this case handles them |
 | --- | --- | --- |
-| 12-hour and 24-hour time | Telling time to the minute (age 7+) (no) | The case uses whole and half hours only. The courier clock activity and the existing clock work cover reading time; minutes beyond :30 are a documented exception. |
+| 12-hour and 24-hour time | Telling time to the minute (age 7+) (no) | The new day-line teaches its whole/half-hour and midnight convention inline. Existing clock work is an optional narrower encounter, not an assumed 24-hour prerequisite; minutes beyond :30 are a documented exception. |
 | Comparing Time Durations | Estimating answers (age 7+) (no) | The "check the size" line in Step 2's learn card is the estimate. |
 | Compound Units | Proportion (no); Proportional Reasoning Vocabulary (no); Unit Conversions (no) | Narrowed to one rate in one unit (km per hour). The double number line builds the rate from scratch. Unit conversion is not needed: a documented exception. |
 | Comparing measurements | Calculating the Mean (no); Pictograms and tally charts (age 11+) (no); Statistical Analysis Vocabulary (no) | Median and range are defined in Step 3's learn card; the mean is optional (3b). Spec 119's Count Collection pack teaches the mean with the levelling model. |
