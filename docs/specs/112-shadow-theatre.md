@@ -1,6 +1,6 @@
 # 112 · Shadow Theatre: one card, a changing shadow
 
-**Status:** implementation-review candidate; independent implementation/root/Claude review remains pending. Independent specification, science/content/source/license and actual static-art gates cleared `cc154fc35c169e6a1c7b26493a8033c5e67c9059`, including the focused Claude repair review. This records the prior specification gate, not implementation or production clearance. **One home:** `#loft/shadows`, linked from Story Loft. **Audit:** [112](../source-audits/112-shadow-theatre.md). **Original static proposals:** [320](assets/112-shadow-theatre/phone-320.svg), [820](assets/112-shadow-theatre/tablet-820.svg). No runtime or publication follows from this document.
+**Status:** merged in [PR120](https://github.com/anotherpanacea-eng/learning-garden/pull/120) at `89914f1fec14c60fc33e8c4d41250a6c52ce6c8d` after independent specification/content/art and implementation review plus exact-candidate Claude clearance. No production deployment or learner attainment is claimed. **One home:** `#loft/shadows`, linked from Story Loft. **Audit:** [112](../source-audits/112-shadow-theatre.md). **Original static proposals:** [320](assets/112-shadow-theatre/phone-320.svg), [820](assets/112-shadow-theatre/tablet-820.svg). The static proposals preserve the reviewed authoring design; publication remains separate.
 
 ## A small new stage action
 
