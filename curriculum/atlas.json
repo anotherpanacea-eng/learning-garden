@@ -887,6 +887,27 @@
         "compose"
       ],
       "scope": "Join two supplied clauses with and, because or but; swap, separate and undo while keeping three fictional scenes fixed. Exact meaning notes distinguish a grammatical trial from a source-supported connection. No learner-authored clause, independent writing or punctuation judgment."
+    },
+    {
+      "id": "route-scale",
+      "name": "Same route, different scale",
+      "status": "built-local",
+      "route": "#workshop/scale",
+      "patterns": [
+        "build"
+      ],
+      "scope": "Compare equal-pitch drawings of one invented 8-meter east plus 4-meter north route using 2 or 4 meters per edge. Toggle comparison and undo while the represented journey stays fixed. Supplied relations only; no physical measurement, chosen scale, unit conversion, independent calculation or general ratio evidence."
+    },
+    {
+      "id": "shadow-theatre",
+      "name": "Shadow Theatre",
+      "status": "built-local",
+      "route": "#loft/shadows",
+      "patterns": [
+        "experiment",
+        "create"
+      ],
+      "scope": "Move or remove one opaque card between a fixed point lamp and screen, compare relative shadow sizes in coherent side/front views, reveal selected light paths and undo. A temporary qualitative ideal model; no physical observation, measured data, independent prediction/explanation or saved show scene."
     }
   ],
   "manualReferences": [
@@ -1757,6 +1778,20 @@
       "kind": "explanation",
       "source": "dist/sentence-bridges-ui.mjs",
       "scope": "Explore supplied because/and/but clause relations and reversed order against a fixed scene, with exact reason/contrast meaning notes. No when/if/that/or range, independent composition, sentence-type transformation, punctuation editing or observed human listening."
+    },
+    {
+      "game": "route-scale",
+      "topicId": "mt_1badik7iKJ",
+      "kind": "explanation",
+      "source": "dist/route-scale.mjs",
+      "scope": "Supplied redraws of the same 12-meter invented route at 2 or 4 meters per grid edge, with complete leg/total readouts and equal drawing pitch. No learner-chosen scale, physical map measurement, unit conversion, unknown-distance calculation, area or full similar-shape competence."
+    },
+    {
+      "game": "shadow-theatre",
+      "topicId": "mt_Oru08pKlxd",
+      "kind": "explanation",
+      "source": "dist/shadow-theatre-ui.mjs",
+      "scope": "Supplied point-source blocking and relative-size explanation: move the same opaque card through three positions, remove/return it and inspect selected limiting paths on one fixed screen. No independent prediction/explanation, physical investigation, recorded measurements, daily sunlight pattern or broader material classification."
     }
   ],
   "increments": [
@@ -1790,7 +1825,7 @@
       "move": "Extend compose/execute/revise",
       "spec": "docs/specs/40-changing-letters.md",
       "first": "Implemented: a continuing twelve-letter library with different readers, paired details, purpose-aware revisions and voluntary suggestions; frozen drafts, first-kept evidence and familiar rereading remain separate.",
-      "gap": "Finite grid maps, routes and clocks are built. Wider geographic conventions, scale, broader elapsed time and sustained independent writing remain future work."
+      "gap": "Finite grid maps, routes, clocks and two supplied edge-key redraws are built. Wider geographic conventions, chosen scales, physical measurement, unit conversion, broader elapsed time and sustained independent writing remain future work."
     },
     {
       "priority": 5,
@@ -1805,8 +1840,8 @@
       "name": "Sound and Light Studio",
       "move": "New create/perform/reflect mode, with experiment",
       "spec": "atlas proposal",
-      "first": "Bell Studio supplies a finite composition/revision foothold and Lantern Circuit a contact-path model. Broader sound, shadow and light investigations remain future work.",
-      "gap": "Wave/sound/light mechanisms and wider creative craft need their own representations, reviewed sound and physical observation. No audio recording is introduced."
+      "first": "Bell Studio supplies a finite composition/revision foothold, Lantern Circuit a contact-path model and Shadow Theatre a qualitative point-source blocking/size model.",
+      "gap": "Broader wave/sound/light mechanisms, learner-designed investigations and wider creative craft need distinct teaching, reviewed sound and physical observation. No audio recording or independent science attainment is inferred."
     },
     {
       "priority": 7,

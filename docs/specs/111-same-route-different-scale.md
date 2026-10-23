@@ -1,6 +1,6 @@
 # 111 · Same route, different scale
 
-**Status:** implementation review candidate; independent specification, mathematics/content/source and rendered static-art gates cleared before building. Independent implementation and root release gates must clear the exact candidate before publication. **Home:** `#workshop/scale`, a companion link from Cartographer’s Table (`#workshop/maps`). **Source audit:** [111](../source-audits/111-same-route-different-scale.md). **Original static proposals:** [320](assets/111-route-scale/phone-320.svg), [820](assets/111-route-scale/tablet-820.svg). The original static proposals document the approved design; runtime checks and their limits are recorded in the separate build receipt.
+**Status:** merged in [PR119](https://github.com/anotherpanacea-eng/learning-garden/pull/119) at `8e62a717ca44d2afd43d1f8d982117ab67745fd2` after independent specification/content/art and implementation review plus exact-candidate Claude clearance. No production deployment or learner attainment is claimed. **Home:** `#workshop/scale`, a companion link from Cartographer’s Table (`#workshop/maps`). **Source audit:** [111](../source-audits/111-same-route-different-scale.md). **Original static proposals:** [320](assets/111-route-scale/phone-320.svg), [820](assets/111-route-scale/tablet-820.svg). The original static proposals document the approved design; runtime checks and their limits are recorded in the separate build receipt.
 
 ## Purpose and finite boundary
 
