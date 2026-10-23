@@ -482,3 +482,5 @@ Run `node test/join-portions-checks.mjs`; the optional `node test/join-portions-
 ## Questions to follow
 
 The Explore doorway now offers four open questions about water, sharing, words and garden neighbors. Each leads to three existing activities with a reason to visit and a contrast to discuss. The complete twelve-place directory, scoped topic disclosures and grown-up learning map remain under All places. The doorway introduces no progress record or prerequisite rule. See [spec105](docs/specs/105-explore-questions-doorway.md), its [source audit](docs/source-audits/105-explore-questions-doorway.md) and [review receipt](docs/reviews/105-explore-questions-review.md).
+
+The optional `node test/explore-questions-browser.mjs` uses `EXPLORE_TEST_URL` for a locally served `dist`, installed Playwright through `PLAYWRIGHT_MODULE`, and optionally `CHROME_PATH` and `EXPLORE_ARTIFACTS`. It checks the real question routes, directory, focus, paused work and synthetic notes download/import at phone/tablet widths.
