@@ -1,0 +1,9 @@
+# Join the Portions: independent review and local verification
+
+The independent specification review covered all six required lenses, the primary mathematics sources, the full selected Jane/Marble records and dependencies, and rendered original phone/tablet art. Its host-guard P2 was resolved at `e2b7bae`: both generic café appenders must exclude the portions bench so simply opening a supplied model cannot expose facts or save a connection. That fold cleared before implementation.
+
+A separate implementation reviewer cleared exact `5c0cfe83b6142d6e2c9f21bc28705965134ec801`, with no P1/P2. Root separately read the full model, picture generator, session/binder and route composition. Both contexts independently passed 206 source/model checks, 4,767 connection/provenance checks, 88 transfer checks and 703 actual local Chrome assertions at 320/820 CSS pixels, and inspected the five-quarters and sixths pictures. Every finite movement preserves piece identity, size and the whole-loaf unit. The model creates no saved root, order, stock, evidence or response record.
+
+Root then changed one new punctuation literal to a colon and normally merged cleared main `9b0ac0cf5349a1fb1a08fea9eb341e5e7ff12e21` at `a0d5e81`. The README and stylesheet conflicts retain both activities; the app keeps both portions exclusions, both Double Check exclusions and the Science window exclusion. On that composition root reran the 206 model, 4,767 connection, 88 transfer and Cold Window source/page checks, then 703 Portions and 63 Cold Window actual Chrome assertions. No model or saved-state behavior changed during composition.
+
+These are supplied pictures for reversible exploration, not independent fraction assessment. Synthetic local checks do not establish physical iPad/Safari, human screen-reader experience or learning effects. Final exact-head Claude review and merge are separate gates; deployment remains deferred pending access to the intended Cloudflare account.
