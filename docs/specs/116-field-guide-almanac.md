@@ -93,6 +93,8 @@ Prediction, optional: **"You saw a half moon lit on the right on the 3rd. About 
 
 A field-guide key for minibeasts the child finds **outside**, with a grown-up. No camera, no photos, no location.
 
+Opening card: **"Minibeasts are small animals with no bones inside. Insects, spiders, snails, slugs, worms and woodlice are all minibeasts. Lots of them live in gardens, and they all have a job there."**
+
 Before the key, always shown: **"Look with your eyes, not your fingers. If you lift a stone or a log, ask a grown-up first, and put it back gently. Leave every minibeast where you found it."**
 
 ### The key
@@ -244,6 +246,22 @@ Refreshed 2026-10-23: Marble at `f186a79a9525c189e2d423e31613c62b6805416f` and J
 | Weather vs climate (`mt_Gm12BzcCfX`), Seasonal changes (`mt_go5i87u2b9`) | Make the timescale explicit; climate is more than temperature; don't explain why seasons happen, and never suggest summer is warmer because Earth is closer to the Sun. The "Which timescale?" sort was added; season prompts stay descriptive. |
 
 Jane's `LESSONS.md` is a design reference for its glossary (short definitions for new words such as *pictogram*, *tally*, *climate*) and its three-choice questions. Its mastery, medals, bosses and daily quest schedule are not adopted. No upstream code or prose is copied. These are design references; any atlas declaration still needs its own source audit against the pinned graph.
+
+### Hard-prerequisite crosswalk
+
+[Spec 49 §8](49-six-act-curriculum.md#8-existing-plans-bounded-next-increment-and-delivery-order) asks every hard prerequisite in the pinned graph (`curriculum/marble/dependencies.json`) to have an earlier or same-unit lesson, explicit support, or a documented exception. For the candidate targets above:
+
+| Target | Hard prerequisite | How it's met |
+| --- | --- | --- |
+| Local weather patterns | Seasonal changes (`mt_go5i87u2b9`) | Same unit: the season line and seasonal noticing prompts on the Weather page. Descriptive only, per its research constraints. |
+| Weather vs climate | Seasonal changes, age 8+ (`mt_NYsz6QgaaE`) | Partly: the season prompts and month comparison. Its fuller content is not taught, so the weather-versus-climate pages are a supplied explanation and claim no topic coverage until a seasons lesson exists. |
+| Moon Phases | Sun, Moon & Stars (`mt_PiWZA8Z0ZJ`) | Same unit, partly: "Is it the same moon?" and the daytime-moon line. The sun and stars are not taught; documented gap. |
+| Phases of the Moon (Sapling panel) | The solar system (`mt_5l7iGkf1Tp`), Earth & Space Vocabulary (`mt_LQt4vnKeB4`) | Not taught in the garden. The Sapling panel is a supplied explanation with no topic claim. |
+| Classification Keys | Animal Classification Vocabulary (`mt_1J5fwxNDxL`), Grouping Living Things (`mt_AylKwhbDWM`) | Partly: the group cards supply group names and features, and Body Clues already has a scoped reference for the soft prerequisite Sorting and Identifying Minibeasts. Grouping living things more broadly is not taught, so only "follow a key" is a candidate reference; "Build a key" claims nothing. |
+| Common minibeasts | What is a minibeast? (`mt_BI6oGIO-xM`) | Same unit: the opening card. |
+| Pictograms and tally charts | Pictograms and tally charts age 6+ (`mt_u5HkSxZECM`), Sorting into categories (`mt_xppl18avyY`) | Same unit: the one-picture-per-day pictogram, and sorting each day into one of five fixed categories during the tally. |
+| Bar graphs | Representing numbers with objects, age 8+ (`mt_r8XnXwRA6g`), Pictograms age 6+ | The Field Notebook already holds a scoped reference for the first; the pictogram step comes before the bar step. |
+| Recording Data | Simple tests and experiments (`mt_Wa44s-f8Ws`) | Not met here: the almanac records observations, not tests. No Recording Data claim from this spec; the Fair Test benches are the better home. |
 
 **Art direction.** Minibeast pictures are lifelike illustrations with countable legs and visible body sections. Weather and moon pictures are simple and consistent in size so pictogram rows line up.
 
