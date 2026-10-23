@@ -2,7 +2,7 @@
 
 The seasons follow the device calendar (spec 33). Each season has a festival. Its line shows under the village title all season, beside spec 33's season line. Its job rotates by **story year**: year A until the first Storm Day, B in the second story year, C in the third, then A again.
 
-Festival jobs are never required. Each counts once. In Acts II to VI, a kept festival job also counts for the first chapter in its **Feeds** list that belongs to the current act and has no contribution yet; if none fits, it fills its own seasonal job only. Festival jobs never feed Act I.
+Festival jobs are never required. Each is a proposed authored pack and contribution adapter, not a current runnable task. Each cleared job counts once. In Acts II to VI, a kept festival job also counts for the first chapter in its **Feeds** list that belongs to the current act and has no contribution yet; if none fits, it fills its own seasonal job only. Festival jobs never feed Act I.
 
 Each yearly job has two depths. Either is a whole contribution.
 
@@ -73,7 +73,7 @@ Each yearly job has two depths. Either is a whole contribution.
 | Year | Sprout | Sapling | Feeds |
 | --- | --- | --- | --- |
 | A | Pip: "Hang the lanterns along the bridge. One at each end, the rest in between, evenly." Kept: "Lanterns all the way across. Pip says it's the best bridge in the valley. It's the only one he's seen at night." | Pip: "The bridge is 12 meters. One lantern every 2 meters, with one at each end. How many lanterns?" Kept: "Seven, not six. Pip counts them three times and agrees, eventually." | II ch3 · V path 3 |
-| B | The librarian: "What did the weather do most this year? Point to it on the weather page." Kept: "Rain. Mostly rain. The librarian reads it out, and everyone groans." | The librarian: "Read the weather page and say what this year was like. Was it unusual, or can't we tell yet?" Kept: "Your summary is read out by the fire. The last line, about what we can't tell yet, gets a nod from the miller." | II ch2 · IV ch2 |
+| B | The librarian: "What did the weather do most this year? Point to it on the weather page." Kept: "The librarian reads your saved weather summary, including how many days were noted. The weather stays whatever the record says, even if it surprises Pip." | The librarian: "Read the weather page and say what this year was like. Was it unusual, or can't we tell yet?" Kept: "Your summary is read out by the fire. The last line, about what we can't tell yet, gets a nod from the miller." | II ch2 · IV ch2 |
 | C | Dot: "Pick three pictures of this year to send to Vadoalto." Kept: "Three pictures in the envelope. Nuria will pin them up." | Dot: "Write the winter letter to Vadoalto. What happened in Willowbank this year?" Kept: "Your letter goes up the river. Nuria's comes back down the same week." | III ch4 · VI ch1 |
 
 **After Act VI:** Hollis reads one line of the almanac on Lantern Night, by request, and always chooses one of yours.
@@ -82,7 +82,7 @@ Each yearly job has two depths. Either is a whole contribution.
 
 ## Storm Day
 
-The local date of the explorer's first story visit, or, for a later arrival, the day they arrived. A lantern is lit on the footbridge. It stays lit until the explorer's next visit, so Storm Day is never missed. It asks for nothing.
+The local date of the explorer's first story visit, or, for a later arrival, the day they arrived. A lantern is lit on the first visit on or after that year's anniversary and stays until acknowledged, so Storm Day is never missed. February 29 uses February 28 in non-leap years. Clock rollback never clears an acknowledged anniversary or creates a negative story year. It asks for nothing and gates no act.
 
 **Village line:** A lantern is lit on the footbridge. It's been {years} since the storm. (*a year* in the first year; *two years*, *three years* and so on after.)
 
@@ -90,7 +90,7 @@ The local date of the explorer's first story visit, or, for a later arrival, the
 
 **Short:** A year since the storm. Pip lights a lantern on the footbridge. "Same day as the storm," he says. "Better weather. Better everything, really."
 
-**Longer:** It's a year since the storm. Pip lights a lantern on the footbridge, because somebody should, and sits down beside it with his satchel. People come by one at a time. The miller says the mill wheel hasn't stuck once. The librarian says every book is back on its shelf, and some of them are even in the right place. Dot says she's been here a whole year, which means she isn't new anymore, which is strange. "Same day as the storm," says Pip. "Better weather. Better everything, really."
+**Longer:** It's a year since the storm. Pip lights a lantern on the footbridge, because somebody should, and sits down beside it with his satchel. People come by one at a time. The miller asks what you noticed this year. The librarian opens the pages you kept, if there are any. Dot says she's been here a whole year, which means she isn't new anymore, which is strange. "Same day as the storm," says Pip. "Better weather. Better everything, really."
 
 ### Second Storm Day
 
@@ -119,7 +119,9 @@ For an explorer who arrived after the mending or with the letter. Storm Day coun
 **Body** (filled from records; a line with no record is left out):
 > A year ago, {first line}.
 > Since then: {places mended} places mended, {pages dried} pages dried.
-> This year's weather: mostly {most common weather}. Last year's: mostly {last year's most common weather}.
+> In this year's saved weather notes: {most recorded category or tie}, across {this year noted days} days. Last year's saved notes: {category or tie}, across {last year noted days} days.
+
+Omit a comparison side without a readable source. A count of reported categories is not measured rainfall or a climate conclusion. Earlier kept charts retain their own source; the live anniversary summary is labelled as a view of the currently retained reports.
 
 **First line** by arrival: *the footbridge was down and the mill wheel was stuck* (storm) · *you came to Willowbank just after the welcome-back supper* (mended) · *you walked down the river path with a letter* (letter).
 

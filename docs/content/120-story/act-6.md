@@ -4,7 +4,7 @@
 
 **Hook:** Willowbank and Vadoalto want to keep the Ways open for good. Then the rain starts, and it doesn't stop.
 
-**Opening** (first visit on a later day after the Act V ending): Nuria's letter ([letters.md](letters.md), letter 6), then:
+**Opening** (Continue the story after the Act V ending, or a later visit if paused): Nuria's letter ([letters.md](letters.md), letter 6), then:
 
 **Short:** Nuria writes: let's trade every week, for good. Goods down the river, news and seeds up. Who carries what, and which way?
 
@@ -24,13 +24,13 @@
 
 **Jobs**
 
-**Sprout · [Bundle Exchange]** Nuria: "Sort the goods. What goes up the river to us, and what comes down to you?"
+**Sprout · [new pack: Bundle Exchange]** Nuria: "Sort the goods. What goes up the river to us, and what comes down to you?"
 Kept: "Two piles, one for each town. Pip tries to put himself in the up pile."
 
-**Seedling · [Market change / Balance Stall]** The orchard keeper: "Four bundles of reed for six baskets of apples, every week. How many apples for ten bundles?"
+**Seedling · [new pack: Market change / Balance Stall]** The orchard keeper: "Four bundles of reed for six baskets of apples, every week. How many apples for ten bundles?"
 Kept: "The numbers work. The orchard keeper writes them on the back of her hand, then on paper, at Dot's insistence."
 
-**Sapling · [Messages for a Reader]** Dot: "Write the opening of our agreement: what each town sends and why it matters to them."
+**Sapling · [new pack: Messages for a Reader]** Dot: "Write the opening of our agreement: what each town sends and why it matters to them."
 Kept: "Your words open the agreement. Nuria copies them into Spanish for Vadoalto's notice board."
 
 **Keeper's Desk:** write the purpose of the exchange in three sentences that both towns could sign.
@@ -50,7 +50,7 @@ Kept: "Your words open the agreement. Nuria copies them into Spanish for Vadoalt
 **Sprout · [new: route planner, picture choice]** Dot: "This parcel must stay dry. Which Way should it take: the river path, the bridge road, or the high ford?"
 Kept: "The bridge road. Slow, dry and very boring, which is what a dry parcel wants."
 
-**Seedling · [Courier Clock Walk]** Dot: "{courier} leaves at 9 and the bridge road takes 2 hours each way. When will they be back?"
+**Seedling · [new pack: Courier Clock Walk]** Dot: "{courier} leaves at 9 and the bridge road takes 2 hours each way. When will they be back?"
 Kept: "Back in time for lunch, as planned. Dot writes it in the timetable."
 
 **Sapling · [new: route planner on the Cartographer's Table]** Dot: "Plan a week of deliveries so both towns get what they need, and nobody uses the high ford in winter."
@@ -62,14 +62,14 @@ Kept: "A week planned. Dot pins it on the wall and steps back to admire it."
 **Prompt:** Keep this exchange plan?
 **Choices:** Keep it · Make it smaller · Not yet
 - **Keep it:** "Nuria will get a copy. So will Bramble, who says she's only reading it for the ribbons."
-- **Make it smaller:** {guide}: "One Way, once a week, apples down and reed up. We can grow it later." Then the same kept line.
+- **Make it smaller:** {guide}: "One Way, once a week, apples up and reed down. We can grow it later." Then the same kept line.
 - **Not yet:** "The map stays on the table. Come back to it whenever you like."
 
 ---
 
 ## Chapter 3. The long rain
 
-Starts on the first visit on a later local day after the exchange plan is kept.
+Starts with **Continue the story** after the exchange plan is kept, or on a later visit if the explorer chooses to pause. No real-day wait is required.
 
 ### The rain starts
 
@@ -88,13 +88,13 @@ Starts on the first visit on a later local day after the exchange plan is kept.
 
 Each is a whole contribution to this chapter.
 
-**Sprout · [Gather the Cupboard / Bundle Exchange]** The baker: "Help me carry the flour up to the attic. Bags on the top shelf, jars on the middle."
+**Sprout · [new pack: Gather the Cupboard / Bundle Exchange]** The baker: "Help me carry the flour up to the attic. Bags on the top shelf, jars on the middle."
 Kept: "The flour is up high and dry. The baker sits on the top step to get his breath back."
 
-**Seedling · [Preparation Clock]** The miller: "It's 2 o'clock. The water should be here by 6. The boards take an hour to put in. When must we start, at the latest?"
+**Seedling · [new pack: Preparation Clock]** The miller: "It's 2 o'clock. The water should be here by 6. The boards take an hour to put in. When must we start, at the latest?"
 Kept: "The boards go in with time to spare. The miller's cat supervises from the window."
 
-**Sapling · [Instructions for a Reader]** The librarian: "Write the notice for the bridge: when to stop crossing, and where to go instead."
+**Sapling · [new pack: Instructions for a Reader]** The librarian: "Write the notice for the bridge: when to stop crossing, and where to go instead."
 Kept: "Your notice is on the bridge. People read it, then go round by the high road, as it says."
 
 **Keeper's Desk:** read the flood post, the rain and the warning card together. How sure are we about the time? What would change it? Write the bell-ringer's note.
@@ -120,17 +120,17 @@ Seedling's two other choices (each plausible, each wrong in one way):
 
 ### The water arrives
 
-One scene, chosen by the plan kept in Act IV.
+One **authored fictional outcome** chosen by the plan kept in Act IV; not a calculated model result or advice for a real flood. It describes this particular invented rain, never a general guarantee for a wall or marsh. A missing/unreadable prior plan requires the reviewed fallback in spec120 before this scene can ship.
 
 **The Wall:**
 > **Short:** The water climbs the wall and stops. The orchard stays dry. Downstream, past the wall, it spreads over Léon's meadow.
 >
-> **Longer:** The water climbs the new wall and stops. Behind it, the orchard is dry and the mill boards hold. Downstream, past the end of the wall, the water spreads wide over the meadow by Léon's ferry, and the ferry can't run for two days. The wall did what walls do. It kept this side safe and sent the water on.
+> **Longer:** The water climbs the new wall and stops. Behind it, the orchard is dry and the mill boards hold. Downstream, past the end of the wall, the water spreads wide over the meadow by Léon's ferry, and the ferry can't run for two days. In this story rain the wall held here, while the ferry meadow flooded. That scene alone cannot tell us how another wall or another storm would behave.
 
 **The Sponge:**
 > **Short:** The water spreads into the low fields and slows. The mill stays dry. Three apple trees stand in water to their knees.
 >
-> **Longer:** The water reaches the low fields and spreads out. The reeds bend under it. It slows. The brook reaches the mill an hour later than it used to, and it never comes over the boards. At the low corner, three apple trees stand up to their knees in water. The orchard keeper sighs, and goes to check on the reeds.
+> **Longer:** The water reaches the low fields and spreads out. The reeds bend under it. It slows. The miller watches the post; in this story rain the water stays below the boards. Nobody claims a measured time saving from the tray model. At the low corner, three apple trees stand up to their knees in water. The orchard keeper sighs, and goes to check on the reeds.
 
 **Some of Each:**
 > **Short:** The wall turns the water into the wet meadow. The mill boards hold, just. Nobody got everything. Nobody lost everything.
@@ -155,13 +155,13 @@ Arrives on the explorer's next visit after the long rain ([letters.md](letters.m
 
 **Jobs** (the first journey; any one makes it)
 
-**Sprout · [Parcel packing]** Dot: "Pack the first parcel. Apples at the bottom, drawings on top, so nothing gets squashed."
+**Sprout · [new pack: Parcel packing]** Dot: "Pack the first parcel. Apples at the bottom, drawings on top, so nothing gets squashed."
 Kept: "Packed, labelled and tied with one of Bramble's ribbons. It looks very official."
 
-**Seedling · [Map Reader Dispatcher]** {courier}: "Take me up the Way we planned for this season."
+**Seedling · [new pack: Map Reader Dispatcher]** {courier}: "Take me up the Way we planned for this season."
 Kept: "Up and back, the way the plan said. The plan works. Dot is unbearable about it for a day."
 
-**Sapling · [Messages for a Reader]** Dot: "Write the note that goes with the first parcel. What's in it, and when the next one comes."
+**Sapling · [new pack: Messages for a Reader]** Dot: "Write the note that goes with the first parcel. What's in it, and when the next one comes."
 Kept: "Your note goes in the parcel. Nuria pins it on Vadoalto's notice board, next to her own."
 
 **Keeper's Desk:** after the first journey, revise the plan. What would you change, now that it has been tried once and rained on once?

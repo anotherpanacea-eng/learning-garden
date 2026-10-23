@@ -4,7 +4,7 @@
 
 **Hook:** The worst is over. Now Willowbank gets to decide what kind of town it wants to be. And Pip's old map shows a marsh that isn't there anymore.
 
-**Opening** (first visit on a later day after the supper):
+**Opening** (Continue the story after the supper, or a later visit if paused):
 
 **Short:** The market is coming back, the garden is changing, and it's nearly Ember's birthday. Pip keeps looking at the map.
 
@@ -24,13 +24,13 @@
 
 **Jobs**
 
-**Sprout · [Market Day coin counter]** The spoon seller: "A wooden spoon is 4 coins. Can you pay me exactly? I have no change. I have only spoons."
+**Sprout · [new pack: Market Day coin counter]** The spoon seller: "A wooden spoon is 4 coins. Can you pay me exactly? I have no change. I have only spoons."
 Kept: "Paid, exactly. He gives you a spoon anyway, for luck."
 
-**Seedling · [Market change]** The orchard keeper: "Three apples is 7 coins. You've given me 10. Help me with the change; I'm still thinking about that marsh."
+**Seedling · [new pack: Market change]** The orchard keeper: "Three apples is 7 coins. You've given me 10. Help me with the change; I'm still thinking about that marsh."
 Kept: "Right change, and an extra apple for Pip, who has already eaten it."
 
-**Sapling · [Gathering Budget]** The baker: "I need flour, honey and eggs for the birthday, and I can spend 30 coins. Help me make a list that fits."
+**Sapling · [new pack: Gathering Budget]** The baker: "I need flour, honey and eggs for the birthday, and I can spend 30 coins. Help me make a list that fits."
 Kept: "The baker pins your list above the oven. He says it's the first budget he's ever stuck to."
 
 **Keeper's Desk · case idea:** Use the old map's scale to compare the size of the Sponge with the size of the orchard today. How much of the orchard sits where the marsh was?
@@ -47,13 +47,13 @@ Kept: "The baker pins your list above the oven. He says it's the first budget he
 
 **Jobs**
 
-**Sprout · [Weather log]** Dot: "What's the weather doing outside today? I'll write it down."
+**Sprout · [new pack: Weather log]** Dot: "What's the weather doing outside today? I'll write it down."
 Kept: "Noted. Dot has written it in the almanac, and underlined it."
 
-**Seedling · [Almanac weather page / My Count Collection]** The librarian: "We've a month of weather now. What did we see most?"
+**Seedling · [new pack: Almanac weather page / My Count Collection]** The librarian: "We've a month of weather now. What did we see most?"
 Kept: "The librarian copies your answer onto a card and files it under W."
 
-**Sapling · [Field Notebook]** {guide}: "The bean bed and the pea bed get different amounts of sun. Let's keep notes on both and see what happens."
+**Sapling · [new pack: Field Notebook]** {guide}: "The bean bed and the pea bed get different amounts of sun. Let's keep notes on both and see what happens."
 Kept: "Your notes go in the almanac's garden page. Some things grew. Some things didn't. Both are worth knowing."
 
 **Sapling · [new: design the record sheet]** The miller: "If the town's going to keep records, what should it write down about the brook? And how often?"
@@ -73,13 +73,13 @@ Kept: "The miller nails your record sheet next to the flood post. The first line
 
 **Jobs**
 
-**Sprout · [Sharing Counter]** Ember: "There's one big birthday cake and lots of friends. Can it be fair?"
+**Sprout · [new pack: Sharing Counter]** Ember: "There's one big birthday cake and lots of friends. Can it be fair?"
 Kept: "Fair slices, and one very small slice for the magpie, who insisted."
 
-**Seedling · [Whole-batch gathering trays]** The cook: "One batch of honey cakes serves two guests. We have more guests than that."
+**Seedling · [new pack: Whole-batch gathering trays]** The cook: "One batch of honey cakes serves two guests. We have more guests than that."
 Kept: "A tray set out for the party. Ember counts the cakes. Then she counts them again, slower."
 
-**Sapling · [Measuring Kitchen]** The cook: "The lemonade needs cloud-water and star-water in the right amounts. The jug is tricky."
+**Sapling · [new pack: Measuring Kitchen]** The cook: "The lemonade needs cloud-water and star-water in the right amounts. The jug is tricky."
 Kept: "The lemonade is ready. Puff says it tastes like a light drizzle, which he means kindly."
 
 **Keeper's Desk:** none in this chapter.
@@ -94,13 +94,13 @@ Kept: "The lemonade is ready. Puff says it tastes like a light drizzle, which he
 
 **Jobs**
 
-**Sprout · [Story Loft]** The librarian: "We need a short scene for the show. Anything you like. Puppets are in the box."
+**Sprout · [new pack: Story Loft]** The librarian: "We need a short scene for the show. Anything you like. Puppets are in the box."
 Kept: "Your scene is on the bill. The ducks have been told it is not about them."
 
-**Seedling · [Puppet Notice Printer]** Dot: "Somebody has to tell the village when the show is. Properly. With capital letters."
+**Seedling · [new pack: Puppet Notice Printer]** Dot: "Somebody has to tell the village when the show is. Properly. With capital letters."
 Kept: "The notice is up. Three people come because of it, and one duck."
 
-**Sapling · [Bell Studio]** The miller: "The show needs a call to start it. Something the whole village will hear."
+**Sapling · [new pack: Bell Studio]** The miller: "The show needs a call to start it. Something the whole village will hear."
 Kept: "Your call rings out over the green. The show begins."
 
 **Keeper's Desk:** none in this chapter.

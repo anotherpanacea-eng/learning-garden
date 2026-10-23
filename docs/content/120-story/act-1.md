@@ -20,13 +20,13 @@ While Act I is open, the first visit Pip makes to each place with the parcel sho
 
 **Jobs**
 
-**Sprout · [First Morning: Follow the tiny tracks]** Dot: "Something small went past the window. It left tracks. It might know where the berries are."
+**Sprout · [new pack: First Morning: Follow the tiny tracks]** Dot: "Something small went past the window. It left tracks. It might know where the berries are."
 Kept: "Berries! And a very small winged neighbor who would like you to stop staring."
 
-**Seedling · [Gather the Cupboard / Cloud Orchard]** The cook, back without flour: "Could you bring what the orchard can spare? I'll need it counted."
+**Seedling · [new pack: Gather the Cupboard / Cloud Orchard]** The cook, back without flour: "Could you bring what the orchard can spare? I'll need it counted."
 Kept: "That's a cupboard again. Not a full one. A real one."
 
-**Sapling · [Almost-Right Café]** Puff, at the door: "I've been waiting since before the storm. Well. Since after it. Is that table free?"
+**Sapling · [new pack: Almost-Right Café]** Puff, at the door: "I've been waiting since before the storm. Well. Since after it. Is that table free?"
 Kept: "One table served. The café is open, officially, because Puff says so."
 
 **Keeper's Desk:** none in this chapter.
@@ -43,13 +43,13 @@ Kept: "One table served. The café is open, officially, because Puff says so."
 
 **Jobs**
 
-**Sprout · [First Morning: Open the mysterious note]** Dot: "This one isn't a letter. It's a note on a twig. Dot insists it is not a shopping list."
+**Sprout · [new pack: First Morning: Open the mysterious note]** Dot: "This one isn't a letter. It's a note on a twig. Dot insists it is not a shopping list."
 Kept: "A note read, and a postbox found. Dot is wearing the hat now, provisionally."
 
-**Seedling · [Willow Post Office]** The miller: "My sacks of seed need to reach the bakery and the garden. The path's still muddy."
+**Seedling · [new pack: Willow Post Office]** The miller: "My sacks of seed need to reach the bakery and the garden. The path's still muddy."
 Kept: "Delivered. The miller says you have a courier's feet."
 
-**Sapling · [Instructions for a Reader]** The librarian: "Someone new is coming to help at the library, and they don't know the way. Could you write them instructions a stranger could follow?"
+**Sapling · [new pack: Instructions for a Reader]** The librarian: "Someone new is coming to help at the library, and they don't know the way. Could you write them instructions a stranger could follow?"
 Kept: "The librarian follows your instructions with their eyes closed. Mostly closed. They arrive."
 
 **Keeper's Desk:** none in this chapter.
@@ -66,13 +66,13 @@ Kept: "The librarian follows your instructions with their eyes closed. Mostly cl
 
 **Jobs**
 
-**Sprout · [Living Garden habitat trail]** {guide}: "Something's living under the big leaves. Let's look carefully, without moving anything."
+**Sprout · [new pack: Living Garden habitat trail]** {guide}: "Something's living under the big leaves. Let's look carefully, without moving anything."
 Kept: "You found where it lives. It would like you to keep the secret."
 
-**Seedling · [Water Lab]** The miller: "My millrace is either far too full or far too empty. Where does the water go?"
+**Seedling · [new pack: Water Lab]** The miller: "My millrace is either far too full or far too empty. Where does the water go?"
 Kept: "Now we know a bit more about where water goes. The miller writes it on the back of a flour sack."
 
-**Sapling · [Storm Workshop]** The post office: "The storm broke the parcel ramp. We need a new one that gets parcels down safely, and we need to know it works."
+**Sapling · [new pack: Storm Workshop]** The post office: "The storm broke the parcel ramp. We need a new one that gets parcels down safely, and we need to know it works."
 Kept: "A ramp tested, and the notes kept. Dot sends a parcel down it. Then another, for science."
 
 **Keeper's Desk:** none in this chapter.
@@ -89,16 +89,16 @@ Kept: "A ramp tested, and the notes kept. Dot sends a parcel down it. Then anoth
 
 **Jobs:** the repair jobs in [spec 33's text](../../specs/33-town-content.md), unchanged. Three of them, one per depth, carry an extra line here:
 
-**Sprout · [spec 33: Footbridge, measured planks]** Pip: "Twelve planks. I'll stand on the ones that are done."
+**Sprout · [new pack: spec 33: Footbridge, measured planks]** Pip: "Twelve planks. I'll stand on the ones that are done."
 Kept: "The planks are in. Pip tests every one. Twice."
 
-**Seedling · [spec 33: Footbridge, rope bundles]** Dot: "The handrail needs rope in equal coils, so it's the same strength all the way."
+**Seedling · [new pack: spec 33: Footbridge, rope bundles]** Dot: "The handrail needs rope in equal coils, so it's the same strength all the way."
 Kept: "The handrail is up. Dot leans on it, very officially."
 
-**Sapling · [spec 33: Footbridge, a crossing notice]** The miller: "Someone should say when it's safe to cross, and what to do if the brook is high."
+**Sapling · [new pack: spec 33: Footbridge, a crossing notice]** The miller: "Someone should say when it's safe to cross, and what to do if the brook is high."
 Kept: "Your notice is nailed to the bridge. The ducks ignore it, but everyone else reads it."
 
-**Keeper's Desk · [spec 118: Bridge or ford?]** Which crossing should Willowbank rebuild first?
+**Keeper's Desk · [new pack: spec 118: Bridge or ford?]** Which crossing should Willowbank rebuild first?
 
 ---
 

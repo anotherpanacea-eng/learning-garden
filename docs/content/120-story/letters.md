@@ -1,6 +1,6 @@
 # Letters up and down the river
 
-Shown in the existing letter-and-reader pattern. The explorer chooses English, the other language, or both side by side. **Short** has read-aloud in both languages; **Longer** is for confident readers.
+Proposed new correspondence packs using the letter-and-reader interaction pattern; these multilingual sources and sender/return adapters are not present in the current runtime. The explorer chooses English, the other language, or both side by side. **Short** has read-aloud in both languages; **Longer** is for confident readers.
 
 Nuria writes from Vadoalto in Spanish and English. Léon writes from Les Saules in French and English. Spanish addresses Willowbank as *ustedes*; French uses *vous*.
 
@@ -118,7 +118,7 @@ Sent in answer to the explorer's question in Act III, chapter 4 (any depth may r
 | 21 to 30 | 6 |
 | 31 to 40 | 8 |
 
-Built to support both stories in part. Big rains were steady across the first three decades while Willowbank's floods rose after year 22; the last decade was also wetter. An honest reader concludes "probably both," which is Pip's line in Act IV.
+This table counts events above an unspecified fictional threshold; it does not report rainfall totals, intensity, duration or ground conditions. Similar event counts can accompany very different rainfall. It leaves the causal question open: a reader may propose either explanation, both, or another, while naming the missing evidence. No reply endorses "probably both" as the conclusion a careful reader must reach. A future source pack must define the threshold and record provenance before using these invented counts.
 
 ---
 

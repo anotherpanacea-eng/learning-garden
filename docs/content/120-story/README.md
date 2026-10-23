@@ -26,28 +26,36 @@ Each scene has up to three reading lengths, per spec 120's writing rules:
 ## How to read a job
 
 ```
-**Sprout · [Activity]** Who asks: "The request."
+**Sprout · [new pack: proposed host]** Who asks: "The request."
 Kept: "What someone says when the work is kept."
 ```
 
 - **Sprout, Seedling, Sapling** describe the task's depth, never the child. Any of them is a whole contribution to the chapter.
-- **[Activity]** is the existing activity the job opens. The story supplies the request and the closing line; the activity supplies its own questions, hints and feedback.
-- **[new]** marks a job whose activity does not exist yet. Each is listed below.
+- **[new pack: Activity]** names a proposed host for new scenario content or an extension, not an existing runnable task. **[new: Activity]** names a wholly unbuilt activity. Before build, the host/pack owner must supply the exact model, frozen source, optional support, artifact and contribution adapter. No general-purpose input, graph, map or composing feature is inferred from an activity name.
+- Every job is a proposal. Some can later reuse an unchanged finite task, but that requires source inspection and a reviewed adapter. Story-only scene text does not create a new playable pack.
 - **Keeper's Desk** jobs belong to spec 118 and the older-learner thread. Each chapter names the desk case that fits it, or a case idea where none is written yet.
 
-## Jobs marked [new]
+## Selected new dependencies and critical paths
 
-These need content or an activity that the game does not have yet. The story works without them: every chapter has at least two jobs on existing activities.
+These are selected dependencies, not an exhaustive list of ready work. The story is a commissioning horizon: several chapters and required endings cannot run without new content, adapters or models. All bracketed host associations below are proposals. Existing destinations stay open; later-act completion does not ship until its required paths do.
 
 | Act | Chapter | Job | What it needs |
 | --- | --- | --- | --- |
-| II | A garden across the seasons | Sapling: design the town's record sheet | A small table-design bench: choose columns and how often to fill them |
+| I | Mend the village | All repair jobs | Proposed spec33 town/repair system and reviewed contributions; not required for the existing supper. |
+| II | A garden across the seasons | Weather/records and design a record sheet | Proposed spec116 field log plus a new table-design bench; existing Field Notebook is a supplied plant model, not a real-day log. |
 | III | The floating market | Sapling: the reed-for-apples rate | A ratio table with a fixed trade (2 bundles : 3 baskets) |
 | III | Letters up and down the river | Seedling and Sapling: reply to Nuria or Léon | The existing letter-and-reader pattern with Spanish and French word cards |
-| IV | The proposal for the low fields | All depths: the meeting board | A plan-choosing screen with three plans, costs and optional worries |
-| V | Every project path | Project pages | A "before and after" project page that binds into the almanac |
-| VI | Compare routes and keep a plan | Sprout to Sapling: the exchange plan | A weekly route planner on the Cartographer's Table with seasonal closures |
+| IV | Ledger, orchard models and sources | New source packs | The current Count Collection is a categorical-button model; Rain Paths has no elapsed time or marsh geometry; Water Lab is not a sponge absorption simulator. |
+| IV | The proposal for the low fields | All depths: the meeting board | A required plan-choosing screen with three plans, costs and optional worries; Sentence Bridges cannot write free arguments. |
+| V | Every project path | Project pages and source packs | A required before/after/limit page; new night observations, moon records, route timings and surveys are not supplied by the existing finite benches. |
+| VI | Compare routes and keep a plan | Sprout to Sapling: the exchange plan | A required weekly route planner with seasonal closures and a supported route; Courier Clock Walk only spans 60 minutes, not multi-hour returns. |
 | VI | The long rain | All depths: passing the warning on | French word cards and a send action |
+
+## Closing lines and evidence
+
+The listed Kept lines are authored reactions, not automatic evaluations of original writing or imagined measurements. A result-specific line requires the matching frozen artifact; otherwise use a neutral acknowledgment such as **Your work is kept.** Opened pages alone cannot choose a line claiming the explorer ran an experiment or proved a cause. Ungraded writing never causes an automatic claim that its facts are true. Story contributions do not become independent learning evidence.
+
+No future pack or first runtime slice is build-ready from this index. See spec120's Required delivery slices and the independent content, language, source and implementation gates.
 
 ## Review needs
 

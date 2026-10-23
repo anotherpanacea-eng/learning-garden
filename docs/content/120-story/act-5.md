@@ -4,7 +4,7 @@
 
 **Hook:** The last pages are blank, headed *For the next Keeper*. What do you want to find out?
 
-**Opening** (first visit on a later day after the Act IV ending): page 5 comes free (companion text, section 3), then:
+**Opening** (Continue the story after the Act IV ending, or a later visit if paused): page 5 comes free (companion text, section 3), then:
 
 **Short:** The last pages are empty. Across the top Hollis wrote *For the next Keeper*. "So," says {guide}. "What do you want to find out?"
 
@@ -45,13 +45,13 @@ A child may change paths, shrink a path, or start a second one. Nothing is lost 
 
 **Jobs**
 
-**Sprout · [Living Garden habitat trail]** {guide}: "Let's look at the hedge by day first. Where are the flowers that are closed?"
+**Sprout · [new pack: Living Garden habitat trail]** {guide}: "Let's look at the hedge by day first. Where are the flowers that are closed?"
 Kept: "Found them. Three closed flowers, marked with a stick each, so we can find them in the dark."
 
-**Seedling · [Field Notebook]** The orchard keeper: "Keep notes on the flowers at dusk for a week. Open or shut? Any visitors?"
+**Seedling · [new pack: Field Notebook]** The orchard keeper: "Keep notes on the flowers at dusk for a week. Open or shut? Any visitors?"
 Kept: "A week of notes. Most nights, something came. Twice, nothing did, which also counts."
 
-**Sapling · [Plant investigation]** {guide}: "Plan a fair way to find out whether the flowers open because it's dark or because it's cooler."
+**Sapling · [new pack: Plant investigation]** {guide}: "Plan a fair way to find out whether the flowers open because it's dark or because it's cooler."
 Kept: "A fair plan, and an honest note on what you couldn't control. The orchard keeper says she'll help on the cold nights."
 
 **Keeper's Desk:** design a night survey for the hedge: what to count, when, for how many nights, and what would change your mind.
@@ -74,13 +74,13 @@ Kept: "A fair plan, and an honest note on what you couldn't control. The orchard
 
 **Jobs**
 
-**Sprout · [Puppet Notice Printer]** The librarian: "Pick a picture and a headline for the front page."
+**Sprout · [new pack: Puppet Notice Printer]** The librarian: "Pick a picture and a headline for the front page."
 Kept: "Front page done. Pip says the picture is the best part. Pip drew the picture."
 
-**Seedling · [Messages for a Reader]** The librarian: "Write three sentences about the storm: what happened, where, and when."
-Kept: "Three sentences, all true. The librarian puts them on page one."
+**Seedling · [new pack: Messages for a Reader]** The librarian: "Write three sentences about the storm: what happened, where, and when."
+Kept: "Three sentences kept. The librarian asks a reader to check the report before putting it on page one."
 
-**Sapling · [Water Evidence Shelf / Source Trail]** The librarian: "Read the neighbors' notes about the new wet corner. Write a short report that keeps what people saw separate from what they think."
+**Sapling · [new pack: Water Evidence Shelf / Source Trail]** The librarian: "Read the neighbors' notes about the new wet corner. Write a short report that keeps what people saw separate from what they think."
 Kept: "Your report goes on page two. Two neighbors write in to say it was fair to them. That has never happened before."
 
 **Keeper's Desk:** write the Gazette's opinion piece about the low fields. Give the best argument against your own view, and answer it. A grown-up reads it; nothing grades it.
@@ -103,13 +103,13 @@ Kept: "Your report goes on page two. Two neighbors write in to say it was fair t
 
 **Jobs**
 
-**Sprout · [Field Notebook: draw the Moon]** Pip: "Draw the Moon tonight, the shape it really is. Then draw it again in a few days."
+**Sprout · [new pack: Field Notebook: draw the Moon]** Pip: "Draw the Moon tonight, the shape it really is. Then draw it again in a few days."
 Kept: "Two Moons in the notebook, different shapes. Pip says the Moon is showing off."
 
-**Seedling · [Courier Clock Walk / Preparation Clock]** The librarian: "Sunset is at 7 and it's dark enough an hour later. If we need half an hour to carry the telescope up, when do we start?"
+**Seedling · [new pack: Courier Clock Walk / Preparation Clock]** The librarian: "Sunset is at 7 and it's dark enough an hour later. If we need half an hour to carry the telescope up, when do we start?"
 Kept: "On the mill roof in time. The telescope arrives with all its legs."
 
-**Sapling · [My Count Collection]** {guide}: "Keep a chart of the Moon's shape every clear night for a month. What pattern do you see?"
+**Sapling · [new pack: My Count Collection]** {guide}: "Keep a chart of the Moon's shape every clear night for a month. What pattern do you see?"
 Kept: "A month of Moons on one chart. It goes round, like the seasons, only faster."
 
 **Keeper's Desk:** write a sky guide for Willowbank: what can be seen from the mill roof this month, at what time, and what can't be seen from here and why.
@@ -132,13 +132,13 @@ Kept: "A month of Moons on one chart. It goes round, like the seasons, only fast
 
 **Jobs**
 
-**Sprout · [Story Loft]** The librarian: "Make a short scene for the show. It has to fit in one box."
+**Sprout · [new pack: Story Loft]** The librarian: "Make a short scene for the show. It has to fit in one box."
 Kept: "Your scene is packed. The box closes, just, if Pip sits on it."
 
-**Seedling · [Packing parcels / Equal Groups]** Dot: "Eighteen puppets, three boxes. The same in each, so no box is too heavy."
+**Seedling · [new pack: Packing parcels / Equal Groups]** Dot: "Eighteen puppets, three boxes. The same in each, so no box is too heavy."
 Kept: "Packed evenly. The boat sits level in the water."
 
-**Sapling · [Sentence Bridges / Bell Studio]** The librarian: "Write the welcome for the start of the show, in English with a few Spanish words. Nuria will help with the Spanish."
+**Sapling · [new pack: Sentence Bridges / Bell Studio]** The librarian: "Write the welcome for the start of the show, in English with a few Spanish words. Nuria will help with the Spanish."
 Kept: "Your welcome is learned by heart. Nuria fixes one word and says the rest is *perfecto*."
 
 **Keeper's Desk:** adapt one Willowbank story for an audience who has never been here. What do you cut, what do you explain, and what do you change?
@@ -161,13 +161,13 @@ Kept: "Your welcome is learned by heart. Nuria fixes one word and says the rest 
 
 **Jobs**
 
-**Sprout · [Map Reader Dispatcher]** {courier}: "Help me follow Bramble's old path on the map, one turn at a time."
+**Sprout · [new pack: Map Reader Dispatcher]** {courier}: "Help me follow Bramble's old path on the map, one turn at a time."
 Kept: "Followed to the end. It does reach Les Saules. It also goes past a very surprised goat."
 
-**Seedling · [Courier Clock Walk]** Dot: "The new path takes 4 hours each way. The old road takes 9. If {courier} leaves at 7, when are they back each way?"
+**Seedling · [new pack: Courier Clock Walk]** Dot: "The new path takes 4 hours each way. The old road takes 9. If {courier} leaves at 7, when are they back each way?"
 Kept: "Written in the post office book, both ways. Dot admits the new path is quicker, in small handwriting."
 
-**Sapling · [Same Route, Different Scale / Cartographer's Table]** The librarian: "Draw the new route at the post office map's scale, and mark where it might be closed in spring floods."
+**Sapling · [new pack: Same Route, Different Scale / Cartographer's Table]** The librarian: "Draw the new route at the post office map's scale, and mark where it might be closed in spring floods."
 Kept: "The new route is on the wall, with a blue warning where the brook path floods."
 
 **Keeper's Desk:** write a route card for couriers: the way, the time, the season it's safe, and the other way to take when it isn't.
@@ -190,13 +190,13 @@ Kept: "The new route is on the wall, with a blue warning where the brook path fl
 
 **Jobs**
 
-**Sprout · [Living Garden habitat trail]** {guide}: "Count the frogs and herons at the low corner today. Then again next week."
+**Sprout · [new pack: Living Garden habitat trail]** {guide}: "Count the frogs and herons at the low corner today. Then again next week."
 Kept: "Two counts in the almanac. One frog, then three. Or the same frog, three times."
 
-**Seedling · [My Count Collection]** The orchard keeper: "Mark how far the reeds reach each month, by the fence posts."
+**Seedling · [new pack: My Count Collection]** The orchard keeper: "Mark how far the reeds reach each month, by the fence posts."
 Kept: "A chart of the reeds, post by post. The orchard keeper looks at it for a long time."
 
-**Sapling · [Fair Test / Field Notebook]** The miller: "Design a better flood post for the low corner, so we can read how wet it is after every rain."
+**Sapling · [new pack: Fair Test / Field Notebook]** The miller: "Design a better flood post for the low corner, so we can read how wet it is after every rain."
 Kept: "Your post goes in at the low corner, with a mark at every 10 centimeters. The first rain fills it to the second mark."
 
 **Keeper's Desk:** write a guide to the Sponge for visitors: what it was, what's coming back, what we know and what we don't, with your survey as evidence.

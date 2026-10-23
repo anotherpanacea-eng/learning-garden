@@ -4,7 +4,7 @@
 
 **Hook:** A letter came from Vadoalto, up the river. The storm hit them too. The old path by the high ford is marked with faded ribbons.
 
-**Opening** (first visit on a later day after the Act II celebration):
+**Opening** (Continue the story after the Act II celebration, or a later visit if paused):
 
 **Short:** Vadoalto is a day's walk upstream, by the high ford. Nobody has walked it in years. The old fence posts have faded ribbons on them.
 
@@ -24,10 +24,10 @@
 
 **Jobs**
 
-**Sprout · [Market Day coin counter]** A Vadoalto trader: "A reed basket is 6 coins. Can you pay exactly?"
+**Sprout · [new pack: Market Day coin counter]** A Vadoalto trader: "A reed basket is 6 coins. Can you pay exactly?"
 Kept: "*¡Gracias!* Thank you! The trader gives you the basket with a little bow."
 
-**Seedling · [Balance Stall]** The Vadoalto baker: "Is one of my loaves really as heavy as five of your apples? Let's put them on the scale."
+**Seedling · [new pack: Balance Stall]** The Vadoalto baker: "Is one of my loaves really as heavy as five of your apples? Let's put them on the scale."
 Kept: "The scale settles it. The two bakers shake hands, flour everywhere."
 
 **Sapling · [new: the reed-for-apples rate]** The orchard keeper: "Vadoalto will trade 2 bundles of reed for 3 baskets of apples. I have 9 baskets. And 12 next week."
@@ -47,13 +47,13 @@ Kept: "A fair trade, written down so nobody has to argue next week. The orchard 
 
 **Jobs**
 
-**Sprout · [Equal Groups: packing bundles]** Nuria: "We need the apple seedlings in bundles of 4, so each family upstream gets the same."
+**Sprout · [new pack: Equal Groups: packing bundles]** Nuria: "We need the apple seedlings in bundles of 4, so each family upstream gets the same."
 Kept: "Bundles packed. Nuria counts them in Spanish. *Uno, dos, tres...* She lets you count the last one."
 
-**Seedling · [Seed Stall]** The seed seller: "This bag has reed seeds and apple pips mixed up. If you take one without looking, which is more likely?"
+**Seedling · [new pack: Seed Stall]** The seed seller: "This bag has reed seeds and apple pips mixed up. If you take one without looking, which is more likely?"
 Kept: "A good guess, and a better reason. The seed seller labels her bags, finally."
 
-**Sapling · [Living Garden: plant investigation]** {guide}: "Which plants do best in wet ground, and which in dry? The low corner of the orchard might care."
+**Sapling · [new pack: Living Garden: plant investigation]** {guide}: "Which plants do best in wet ground, and which in dry? The low corner of the orchard might care."
 Kept: "Your notes go to the orchard keeper. She reads them twice, then goes to look at the low corner."
 
 **Keeper's Desk · case idea:** Vadoalto's flood post and Willowbank's, side by side. Nuria has copied Vadoalto's marks for the same storm. Which town's water rose higher, and why might that be?
@@ -70,13 +70,13 @@ Kept: "Your notes go to the orchard keeper. She reads them twice, then goes to l
 
 **Jobs**
 
-**Sprout · [Map Reader Dispatcher]** {courier}: "The parcel has to reach the ford before it can cross. Which way?"
+**Sprout · [new pack: Map Reader Dispatcher]** {courier}: "The parcel has to reach the ford before it can cross. Which way?"
 Kept: "Across the ford, feet wet, parcel dry."
 
-**Seedling · [Courier Clock Walk]** Dot: "If {courier} leaves at 8 and the walk to the ford takes 45 minutes, when do they get there?"
+**Seedling · [new pack: Courier Clock Walk]** Dot: "If {courier} leaves at 8 and the walk to the ford takes 45 minutes, when do they get there?"
 Kept: "On time. Dot writes the time in the post office book."
 
-**Sapling · [Same Route, Different Scale / Cartographer's Table]** The librarian: "The old map and the new map show the same path at different scales. Is the path really longer now, or just drawn bigger?"
+**Sapling · [new pack: Same Route, Different Scale / Cartographer's Table]** The librarian: "The old map and the new map show the same path at different scales. Is the path really longer now, or just drawn bigger?"
 Kept: "The librarian redraws the route for the post office wall, at one scale, with your notes."
 
 **Keeper's Desk · case idea:** The new straight path saves time but floods in spring; the old ribboned path is longer and stays dry. Which should Willowbank mark as the main Way, and for which seasons?
@@ -93,16 +93,16 @@ Kept: "The librarian redraws the route for the post office wall, at one scale, w
 
 **Jobs**
 
-**Sprout · [Letter reader: Nuria or Léon]** Dot: "A letter from upstream! Shall we read it together?" (letters.md, letters 1 and 2, short versions, with read-aloud)
+**Sprout · [new pack: Letter reader: Nuria or Léon]** Dot: "A letter from upstream! Shall we read it together?" (letters.md, letters 1 and 2, short versions, with read-aloud)
 Kept: "Read. Dot pins it up next to the others."
 
 **Seedling · [new: a reply with word cards]** Dot: "We should write back. Use some of their words, if you like."
 Kept: "Your reply goes in the post bag. Dot says your Spanish (or French) handwriting is very elegant."
 
-**Sapling · [Messages for a Reader / Sentence Bridges]** The miller: "Ask Nuria how high Vadoalto's post reached in the storm. Be exact, so she can answer exactly."
+**Sapling · [new pack: Messages for a Reader / Sentence Bridges]** The miller: "Ask Nuria how high Vadoalto's post reached in the storm. Be exact, so she can answer exactly."
 Kept: "A clear question, sent upstream. The answer comes back three days later, with a drawing." ([letters.md](letters.md), letter 3)
 
-**Keeper's Desk · [spec 118: Valencia 1957]** Nuria's grandmother remembers a flood in a big city by the sea. The archive has the sources.
+**Keeper's Desk · [new pack: Valencia archive preview]** Nuria introduces a future real-history folder. Use only its separately reviewed spoiler-safe introduction here; the full [Case2 in draft PR126](https://github.com/anotherpanacea-eng/learning-garden/pull/126) belongs after page4 in ActIV and cannot be dropped into this earlier scene unchanged.
 
 The Paris correspondence carries on as before; Paris is at the far end of the post road, and Dot is delighted to have three directions to sort.
 

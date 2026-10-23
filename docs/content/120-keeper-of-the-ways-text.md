@@ -205,7 +205,7 @@ Every chapter's jobs are now in the act files of [`120-story/`](120-story/README
 
 ## 10. Archive pack outline: Valencia, 1957
 
-Joshua chose this as the next archive pack (2026-10-23). This is an outline for the pack's own spec and source review. Every fact below must be checked against primary or official sources before any child text is final; the dates marked *(check)* disagree across the sources consulted so far.
+Joshua chose this as the next archive pack (2026-10-23). This is an outline for the pack's own spec and source review. The review checked a bounded subset directly against official pages (below); the remaining historical claims and all archive tasks still need source/content review before child text is final. Dates marked *(check)* remain unresolved.
 
 **Title:** *The River That Moved* / *El río que se mudó*
 
@@ -220,10 +220,10 @@ Joshua chose this as the next archive pack (2026-10-23). This is an outline for 
 | 23 December 1961 | A national law (Ley 81/1961, published in the BOE) made the plan official. This is a public-domain Spanish primary source. |
 | 22 December 1969 | The new channel officially opened; work went on until about 1973. It is about 12 km long; sources give its width as 175, 200 or 250 m *(check)*. |
 | 1966 | A city plan proposed building a road along the dry old riverbed. |
-| 1970s | Neighbors campaigned for a park instead, under the slogan *El llit del Túria és nostre i el volem verd*: "The Turia's bed is ours, and we want it green." |
+| 1970s | Neighbors campaigned for a park instead. The city cultural service records the Valencian slogan *El riu es nostre i el volem verd*: "The river is ours, and we want it green." Other variants need their own source if quoted. |
 | 1978 or 1979 *(sources disagree)* | The city council decided the whole old riverbed would be a garden. The Keeper's Desk case turns this disagreement into a task. |
 | 1981 | The architect Ricardo Bofill was asked to plan the park. |
-| 1986 *(check)* | The first parts of the garden opened. Today it runs for about 9 km through the city *(check)*. |
+| 1986 | The regional tourism authority dates the gardens' inauguration to 1986 and describes a 9 km route. This is an attributed account; it does not settle which individual sections opened when. |
 
 **Short text (English):** In 1957, the river in Valencia flooded the city. Afterward, the city dug a new path for the river, around the outside. The old riverbed was left dry. Some people wanted a road there. Neighbors wanted a garden. Today it is a long, green park.
 
@@ -244,4 +244,6 @@ Joshua chose this as the next archive pack (2026-10-23). This is an outline for 
 
 **Keeper's Desk depth:** written in full as spec 118's Valencia case, `docs/content/118-valencia-1957-case.md` (PR #126). In it, Nuria's grandmother remembers the story.
 
-**Sources to review before writing final text:** Valencia city council's history of the old riverbed; contemporary 1957 newspaper reports; official records of the Plan Sur decision; the 1978 council decision; credited photographs of the 1957 flood and of the garden today, with rights checked.
+**Bounded official-source check, 2026-10-23:** [Cultural València](https://cultural.valencia.es/es/conoce-el-jardin-del-turia/) directly supports the road proposal, campaign and quoted slogan. [Turisme Comunitat Valenciana](https://www.comunitatvalenciana.com/es/valencia/valencia/espacios-naturales/jardines-del-rio-turia) gives 1986 and the 9 km route. These two checks do not clear the full flood history or its bilingual teaching text. Facts are paraphrased; no images are reused.
+
+**Still to review before final text:** contemporary 1957 records; the exact channel opening/completion and park-decision events; the slogan variant if retained elsewhere; credited photographs and rights; every archive question against the selected passage amount. The related [Case2 source review in draft PR126](https://github.com/anotherpanacea-eng/learning-garden/pull/126) verifies the historical Plan Sur legislation separately; it is not part of this story proposal's runtime.

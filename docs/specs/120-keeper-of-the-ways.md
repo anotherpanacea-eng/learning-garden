@@ -1,6 +1,6 @@
 # 120: The Keeper of the Ways, the story under the six acts
 
-Status: proposed, 2026-10-23. Writing only: story, structure and the rules a build must keep. Codex owns code, art, film and merge. Child-facing text lives in the companion [120-keeper-of-the-ways-text.md](../content/120-keeper-of-the-ways-text.md) (parcel, pages, arrivals, almanac strings, archive outline) and the full script in [`docs/content/120-story/`](../content/120-story/) (every act, festival, Storm Day and letter). This spec sits under [spec 49](49-six-act-curriculum.md), which keeps ownership of the six acts' teaching purposes; it gives those acts a plot. It keeps the act order and chapter lists from the roadmap's story order and spec 49, and section 15 shows, chapter by chapter, what it keeps and what it adds, along with the Marble topics and Jane conventions it draws on. It builds on the town, seasons and almanac in [spec 33](33-rebuilding-the-town.md) and [its text](33-town-content.md), the [Travelers' Archive](24-travelers-archive.md), the [challenge-band proposal](proposed/challenge-bands.md), the [optional starting flow](114-optional-starting-flow.md) and the [milestone films](../story-milestones-and-films.md). The older-learner destination it names, the Keeper's Desk, is specified in spec 118, drafted alongside this one.
+Status: proposed, 2026-10-23; repaired after independent specification review. **A story/content commissioning plan, not a build-ready whole-game increment.** Writing only: story, structure and the rules a build must keep. Codex owns code, art, film and merge. Child-facing text lives in the companion [120-keeper-of-the-ways-text.md](../content/120-keeper-of-the-ways-text.md) (parcel, pages, arrivals, almanac strings, archive outline) and the full script in [`docs/content/120-story/`](../content/120-story/) (every act, festival, Storm Day and letter). This spec sits under [spec 49](49-six-act-curriculum.md), which keeps ownership of the six acts' teaching purposes; it gives those acts a plot. It keeps the act order and chapter lists from the roadmap's story order and spec 49, and section 15 shows, chapter by chapter, what it keeps and what it adds, along with the Marble topics and Jane conventions it draws on. It builds on the town, seasons and almanac in [spec 33](33-rebuilding-the-town.md) and [its text](33-town-content.md), the [Travelers' Archive](24-travelers-archive.md), the [challenge-band proposal](proposed/challenge-bands.md), the [optional starting flow](114-optional-starting-flow.md) and the [milestone films](../story-milestones-and-films.md). The longer-case destination it names, the Keeper's Desk, is proposed in [spec 118 / draft PR126](https://github.com/anotherpanacea-eng/learning-garden/pull/126), drafted alongside this one; [draft PR128](https://github.com/anotherpanacea-eng/learning-garden/pull/128) separately proposes Rhythm Studio, the Field Guide Almanac and Spanish River Market. These are proposal dependencies, not merged capabilities.
 
 Single device, offline, single player. Every explorer keeps a separate town. Nothing here needs an account, a network call, an age, a grade or a name.
 
@@ -97,7 +97,7 @@ The review question was whether the spine should be six linear acts or a repeati
 | V | One project is kept with a stated limit, in any project path. | Act V has paths, not fixed chapters. |
 | VI | An exchange plan is kept (chapter 2), the long rain has played (chapter 3), and the first journey is made (chapter 4). Chapter 1 is a scene. | Spec 49's finale needs a kept plan, a first exchange and a welcome. |
 
-**Pages that open an act** (4 and 5) come free on the explorer's first visit on a later local day after the previous act's ending, so there is a night to wonder in between. The same rule starts the long rain: it begins on the first later local day after the exchange plan is kept.
+**An optional pause between acts.** After an ending, offer **Pause here** and **Continue the story**. Pages 4 and 5 may be introduced on the next later-day visit if the explorer pauses, but Continue makes them available immediately once the preceding story condition is met. The long rain uses the same choice after the exchange plan. A calendar date only changes an invitation, never readiness: midnight, clock rollback, a timezone change or a long absence cannot lock, erase or repeat a reached ending. Story nights can pass within one sitting. This preserves a night to wonder for anyone who wants it without requiring a real-day wait.
 
 **Festival jobs also count toward the current act.** The script's festival file maps each festival job to the chapters it can feed in Acts II to VI (for example, a spring planting job feeds Act II's "garden across the seasons"). A festival job counts once, for one chapter. A festival job with no matching chapter in the current act still fills its own seasonal job, as in spec 33. Festival jobs never feed Act I, whose ending is the supper. This is how the calendar feeds the plot without ever pacing it.
 
@@ -195,15 +195,15 @@ Children at different bands play the same story. The rule:
 4. **Mixed strengths stay possible.** A child can take a Sapling map job and a Sprout reading job in the same chapter.
 5. **Siblings can compare notes.** Two explorers on one device have separate towns, but the same scenes. "Which plan did you keep?" is a conversation the game sets up without any shared state.
 
-Every job names the activity it opens. A job whose activity already exists is a story wrapper: a request from a character, the existing activity, and a closing line when the work is kept. A job whose activity does not exist yet is marked **[new]** in the script and listed in the script's index, so Codex and the other threads can see what content each one needs. The story text never supplies an activity's internal questions, hints or feedback; the activity's own spec does.
+Every job names a **proposed host**, not a claim that the current activity can run these exact instructions. **[new pack: …]** marks new scenario content or a model/adapter extension on an existing host; **[new: …]** marks an unbuilt activity. The script index records critical dependencies. Even a reusable interaction needs an audited source and contribution adapter before its story job ships. Existing games remain playable while these proposals wait. The story text never substitutes for an activity's internal questions, hints, source snapshot or feedback; its independently reviewed activity/pack spec owns those. A whole-act release must supply its required contribution paths and ending, not just its scene text.
 
 Example for one chapter, Act IV's "puzzling change at the bottom of the orchard":
 
 | Depth | Job | Built on |
 | --- | --- | --- |
-| Sprout | Pour the same rain on a sponge and on a flat stone in the Water Lab model. Which one holds the water? | Water Lab |
-| Seedling | Read three short neighbor notes about the wet corner. Sort what each person saw from what they think caused it. | Water Evidence Shelf; Field Notebook |
-| Sapling | Run Rain Paths with and without the Sponge for the same storm. Compare how fast water reaches the mill, and say what the model leaves out. | Rain Paths; Fair Test |
+| Sprout | Compare an open and sealed entrance in the supplied Rain Paths tray case. Where do the new tokens end up? | Rain Paths; new story pack/adapter |
+| Seedling | Read three short neighbor notes about the wet corner. Sort observations from explanations. | Water Evidence Shelf; new authored source pack |
+| Sapling | Compare new runoff from the two supplied trays for the same input; name what the machine leaves out. | Rain Paths; new story pack/adapter. Tokens are not time and trays are not a valley forecast. |
 | Keeper's Desk | Set the ledger's flood heights against the years after draining. Decide what the pattern supports, what it does not, and what record would settle it. | Spec 118 desk pattern |
 
 The script gives jobs for every chapter in every act.
@@ -257,7 +257,19 @@ Arriving later marks earlier acts as "before you came," and Storm Day counts fro
 
 Codex owns the design. The sketch below only fixes the rules from section 6 and from AGENTS.md.
 
-Per explorer, additive: `story:{arrival, acts:{[actId]:{chapters:[chapterId], ended}}, plan, stormDay, seenScenes:[sceneId]}`. `arrival` is one of `storm | mended | letter`. `plan` is one of `wall | sponge | some-of-each` once kept. `stormDay` is the local day of first story visit. Pages are derived from ended acts and never stored. Contributions record ids only. Unknown ids are dropped from reads without rewriting the save; a missing act or chapter reads as not yet reached. Changing the number of chapters in an act later must not reopen or close an ending already reached.
+Per explorer, additive: `story:{arrival, acts:{[actId]:{chapters:[chapterId], ended}}, plan, stormDay, seenScenes:[sceneId], sources}`. `arrival` is one of `storm | mended | letter`. `plan` is one of `wall | sponge | some-of-each` once kept. `stormDay` is the local day of first story visit. **Page availability** derives from retained story reachability, including the before-you-came arrival facts; it does not create learning observations. **Text is separate:** at first display keep the exact authored scene/page/letter payload, source version, language and chosen amount under that source key. Replay/resume uses that copy, not today's wording; a newly chosen language/amount gets its own first-shown copy. Contributions reference their activity-owned frozen artifacts and never reread current correctness/help to decide an ending. Unknown ids and unreadable source records remain raw and exportable, ignored only in supported views; no rewrite on load. Keep reached endings even if chapter counts or content later change. The first bounded runtime spec must name finite source/text limits, supported readonly fallback, actual pretty-report import preflight and refusal behavior before adding these copies; no generic history service is required.
+
+### Required delivery slices (not an implementation queue)
+
+| Story release | Required before that release can end |
+| --- | --- |
+| I | A reviewed parcel/page adapter and the existing six-table supper trigger; spec33 repair jobs remain optional and unbuilt. |
+| II / III | At least three supported chapter contribution paths per act, their frozen authored packs, ending adapters and reviewed correspondence where used. No chapter is credited merely because its host route opened. |
+| IV | A reviewed meeting board storing any of the three plans, plus two available preceding chapter paths. Supplied model results must match the selected real model source; no time-to-mill result exists in Rain Paths. |
+| V | At least one complete project path and its before/revision/limit page, including a supported small project. The project page is required, not an optional wrapper. |
+| VI | A reviewed exchange planner with a supported smaller plan, warning/send path, a first-journey contribution adapter and a defined no-prior-Act-IV-plan scene. Later arrivals must not invent a kept plan. |
+
+The no-prior-plan case remains an authoring gate: offer the ActIV meeting or an explicitly supplied town plan labelled as supplied, never silently assign the explorer a preference. Seasonal jobs are optional and count only after their own authored pack and artifact adapter are cleared. No claim is made that every chapter already has two runnable jobs.
 
 ## 13. Owner decisions
 
@@ -271,11 +283,11 @@ Decided by Joshua, 2026-10-23:
 - **Festival jobs count toward the current act's chapters** where a chapter lists them.
 - Spanish text keeps ***ustedes***.
 
-No story decisions remain open. Review, Spanish and French reading, and the archive packs' source checks remain (section 14).
+These recorded owner choices remain the premise. They do not clear content, dependency or implementation questions: the first bounded runtime slice, reviewed job packs, missing-plan fallback, Spanish/French reading and archive source checks remain (section 14).
 
 ## 14. Review
 
-Independent review of this spec, its companion text and the script, per the repo's usual gate. The archive packs need source review before final child text. Spanish and French text need fluent readers. Jobs marked **[new]** in the script need their own activity specs; this spec creates none.
+Independent review of this spec, its companion text and the script, per the repo's usual gate. The archive packs need source review before final child text. Spanish and French text need fluent readers. Jobs marked **[new]** or **[new pack]** in the script need reviewed activity or extension specifications; this spec creates none. The story contribution adapters, meeting board, project page and exchange planner are unbuilt critical dependencies. Review does not clear them by analogy to a named existing bench. Before a first runtime slice, select one finite story beat with its real source/artifact boundary, then review that implementation spec; later acts remain a commissioning horizon.
 
 ## 15. What this builds on: the roadmap's acts, Marble and Jane
 
@@ -326,3 +338,7 @@ Adopted as design conventions:
 
 Not adopted: medals, bosses, hearts, points, one-quest-at-a-time queuing, age and grade settings, the nightly author and Leitner gates. Jane's kid prompt for Designing for Weather Hazards has a single right answer ("Which design best protects a house from floods?"); Act IV's plan choice deliberately keeps three defensible answers, while factual jobs inside the act can still have right answers. No Jane code, prose or assets are incorporated, and Jane's license layers are untouched.
 
+
+## Independent review repair note, 2026-10-23
+
+The review removed invented time-to-mill evidence and a prescribed causal conclusion, made calendar pauses optional, corrected exchange direction, and separated frozen text from reachability. Script host labels now mark proposed packs; the dependency index names required meeting/project/exchange work. A scene opening is not a completed investigation, and a toy tray is not a flood forecast. The six-act writing plan remains draft: fluent Spanish/French, historical/scientific source checks, finite job content/adapters, original art and a separately reviewed first runtime slice remain open. No code, atlas reference, saved learner record or deployment changes here.

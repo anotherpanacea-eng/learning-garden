@@ -4,7 +4,7 @@
 
 **Hook:** The pages say the town drained the Sponge, and then the floods got worse. Did one cause the other? Everyone has an opinion.
 
-**Opening** (first visit on a later day after the Act III ending): page 4 comes free (companion text, section 3), then:
+**Opening** (Continue the story after the Act III ending, or a later visit if paused): page 4 comes free (companion text, section 3), then:
 
 **Short:** Now everyone has read the pages, and everyone has an opinion. Bramble says to look at the numbers. Then she shouts about the numbers.
 
@@ -24,13 +24,13 @@
 
 **Jobs**
 
-**Sprout · [Travelers' Archive: put events in order]** Pip: "Help me put Hollis's pages in order. Which happened first?"
+**Sprout · [new pack: Travelers' Archive: put events in order]** Pip: "Help me put Hollis's pages in order. Which happened first?"
 Kept: "In order. Pip reads them through. Map, harvest, flood. He frowns at the gap."
 
-**Seedling · [Two Windows]** The orchard keeper: "My grandfather's story says the low corner was always a bit wet. Hollis's map says it was marsh. Can they both be telling the truth?"
+**Seedling · [new pack: Two Windows]** The orchard keeper: "My grandfather's story says the low corner was always a bit wet. Hollis's map says it was marsh. Can they both be telling the truth?"
 Kept: "Two accounts, both honest, noticing different things. The orchard keeper writes her grandfather's words in the almanac next to the map."
 
-**Sapling · [My Count Collection]** The librarian: "Let's chart Hollis's ledger. How many floods before year 22, and how many after?"
+**Sapling · [new pack: My Count Collection]** The librarian: "Let's chart Hollis's ledger. How many floods before year 22, and how many after?"
 Kept: "The chart goes up on the library wall. People stand in front of it and argue more quietly than before."
 
 **Keeper's Desk · case idea:** Transcribe Hollis's page 4 as written, with its smudged word. What word could fit? How sure are you, and what would make you surer?
@@ -43,20 +43,20 @@ Kept: "The chart goes up on the library wall. People stand in front of it and ar
 
 **Longer:** "The bottom corner of my orchard is always wet now," says the orchard keeper. "Reeds are coming up. I never planted reeds." She leads everyone down to look. The grass squelches. Three of the oldest apple trees stand with their roots in a shallow puddle that never quite dries, and between them, tall and green and very pleased with themselves, are reeds. Nuria, who is visiting, crouches beside one. "*Carrizo*," she says. "It only grows where the ground is wet. It's as if the Sponge is trying to come back."
 
-**Keeper's note:** The toy models in the Water Lab and Rain Paths show how water might move. They use made-up amounts of rain, so they can show a difference, but never how big it would be in a real valley. A model is a way to ask a better question.
+**Keeper's note:** Rain Paths uses invented water tokens and trays. It can compare newly stored tokens and new runoff. It has no river, mill or clock, so it cannot tell us when real floodwater arrives. A model is a way to ask a better question.
 
 **Jobs**
 
-**Sprout · [Water Lab]** {guide}: "Pour the same rain on a sponge and on a flat stone. Which one holds the water?"
-Kept: "The sponge held it, and let it go slowly. The stone didn't. Pip squeezes the sponge onto Dot by accident."
+**Sprout · [new pack: Rain Paths, cover contrast]** {guide}: "Give both trays the same new tokens. Where do they end up?"
+Kept: "You kept a picture of the trays. Pip points at the storage spaces, then at the outlet."
 
-**Seedling · [Water Evidence Shelf]** The librarian: "Three neighbors wrote notes about the wet corner. Sort what each one saw from what each one thinks caused it."
+**Seedling · [new pack: Water Evidence Shelf]** The librarian: "Three neighbors wrote notes about the wet corner. Sort what each one saw from what each one thinks caused it."
 Kept: "Seen on one side, thought on the other. The librarian says that's half of all good thinking."
 
-**Sapling · [Rain Paths / Fair Test]** The miller: "Run the same storm with the Sponge and without it. Which way gets water to my mill fastest? And tell me what your model leaves out."
+**Sapling · [new pack: Rain Paths / Fair Test]** The miller: "Compare the same input in the two supplied trays. Which has more new runoff? What does the model leave out?"
 Kept: "A fair test, and an honest list of what it can't show. The miller pins both to the flood post."
 
-**Keeper's Desk · case idea:** Put Hollis's ledger beside Nuria's rain gauge table (letters.md, letter 4). Big rains were about the same for three decades, while the floods rose after year 22; the last decade was wetter too. What do the two records support together, and what can't they tell us?
+**Keeper's Desk · case idea:** Put Hollis's ledger beside Nuria's rain gauge table (letters.md, letter 4). The first three decades have similar counts of big-rain events; the fourth has more events. The table does not give their intensity, duration or local ground conditions. What do the records support, and what else would you need?
 
 ---
 
@@ -70,16 +70,16 @@ Kept: "A fair test, and an honest list of what it can't show. The miller pins bo
 
 **Jobs**
 
-**Sprout · [Travelers' Archive: Paris 1910]** The librarian: "Here's a real photograph from Paris, in a flood long ago. What can you see?"
+**Sprout · [new pack: Travelers' Archive: Paris 1910]** The librarian: "Here's a real photograph from Paris, in a flood long ago. What can you see?"
 Kept: "What you saw goes in the almanac, next to the picture's real source."
 
-**Seedling · [Exhibit Label Maker]** The librarian: "We're putting the Paris photograph in the library window. Write a label that says only what we know."
+**Seedling · [new pack: Exhibit Label Maker]** The librarian: "We're putting the Paris photograph in the library window. Write a label that says only what we know."
 Kept: "Your label is in the window. It says exactly enough. People stop to read it."
 
-**Sapling · [Source Trail]** The librarian: "Each headline in the Gazette leans on some evidence. Follow each one back. Which evidence is real, and which is a guess?"
+**Sapling · [new pack: Source Trail]** The librarian: "Each headline in the Gazette leans on some evidence. Follow each one back. Which evidence is real, and which is a guess?"
 Kept: "Your notes go to the Gazette. Next week's edition has a correction, in very small print, and a follow-up, in large print."
 
-**Keeper's Desk · [spec 118: Valencia 1957]** A city that moved its river, and a riverbed that became a garden.
+**Keeper's Desk · [new pack: spec 118: Valencia 1957]** A city that moved its river, and a riverbed that became a garden.
 
 ---
 
@@ -96,8 +96,8 @@ Kept: "Your notes go to the Gazette. Next week's edition has a correction, in ve
 
 | Plan | What it is | What it costs | What it protects |
 | --- | --- | --- | --- |
-| **The Wall** | A higher flood wall along the brook through town. | Stone, and many hands to build it. The water still has to go somewhere: downstream, past the wall. | The orchard stays exactly as it is. Everything behind the wall stays dry. |
-| **The Sponge** | Let the lowest orchard fields go back to marsh. | Some apple trees, and some of the orchard keepers' living. They would trade reed with Vadoalto instead. | The marsh holds water and lets it go slowly, so less of it reaches the mill at once. Frogs. Herons. |
+| **The Wall** | A higher flood wall along the brook through town. | Stone, upkeep and many hands; possible effects downstream need investigation. | Intended to protect the orchard and town; its limits still matter. |
+| **The Sponge** | Let the lowest orchard fields go back to marsh. | Some apple trees, and some of the orchard keepers' living; the reed trade is a proposed replacement, not a guaranteed income. | Intended to provide habitat and space for water. How much protection it gives depends on conditions. |
 | **Some of Each** | A lower wall above the mill, and a smaller wet meadow at the orchard's low corner. | A little of both costs. Some trees, some stone. | Some of both protections. Nobody gets everything they wanted. |
 
 **Worries** (the explorer may add one to a kept plan):
@@ -116,10 +116,10 @@ Kept: "Your plan goes in the almanac. Pip says it's a good one. Pip says that ab
 **Seedling · [new: the meeting board, with a worry]** The librarian: "Choose a plan. If something about it worries you, add the worry. Good plans have worries."
 Kept: "Your plan and your worry go in the almanac together. The librarian says the worry is the most useful part."
 
-**Sapling · [Sentence Bridges]** Dot: "Say why, in one sentence. Use *because* for the reason and *but* for the problem."
+**Sapling · [new pack: Sentence Bridges]** Dot: "Say why, in one sentence. Use *because* for the reason and *but* for the problem."
 Kept: "Your sentence is read out at the meeting. Bramble nods once, which from Bramble is applause."
 
-**Keeper's Desk · [spec 118 dossier pattern]** Write a recommendation for the meeting from the ledger, the rain gauge, the model runs, the archive and the orchard keeper's account. Answer Bramble's objection. Name one thing you're unsure of. A grown-up reads it; nothing grades it.
+**Keeper's Desk · [new pack: spec 118 dossier pattern]** Write a recommendation for the meeting from the ledger, the rain gauge, the model runs, the archive and the orchard keeper's account. Answer Bramble's objection. Name one thing you're unsure of. A grown-up reads it; nothing grades it.
 
 **Keeping a plan** (all depths):
 **Prompt:** Which plan would you keep for Willowbank?
@@ -130,11 +130,12 @@ Kept: "Your sentence is read out at the meeting. Bramble nods once, which from B
 
 ## Ending: The Map We Changed
 
-**Someone changes their mind.** One line is shown, chosen by the evidence the explorer opened in chapters 1 to 3 (if several, the first in this order):
+**Someone changes their mind about what they can claim.** A line may refer only to a matching kept source/artifact, never merely an opened page. If none fits, use the fallback below. This is a story response, not proof of the explorer's understanding:
 
-- After the model runs (chapter 2): the orchard keeper: "I thought the Sponge was just a soggy field. But I watched the same rain take twice as long to reach the mill. I've changed my mind about that part."
-- After the archive (chapter 3): the miller: "I thought nobody ever undid a wall. Then I read about the Dutch rivers. I'm not saying we copy them. I'm saying it's been done."
-- After the ledger chart or rain gauge (chapter 1 or 2): Pip: "I was sure it was all the Sponge. But the last few years were wetter too. It's probably both. I hate it when it's both."
+- After a kept supplied tray comparison (chapter 2): the orchard keeper: "I thought the model could tell us when the mill would flood. It only counts water in trays. I've changed my mind about what it tells us."
+- After a kept source from the separately reviewed Dutch archive pack (chapter 3, future): the miller: "I thought nobody ever moved a dike back. This record shows a place that did. It doesn't decide what we do here."
+- After the kept ledger/rain-count comparison (chapter 1 or 2): Pip: "I was sure it was all the Sponge. Now I want to know how heavy those rains were. The counts don't tell us."
+- Fallback after the supported meeting: the librarian: "I thought we had to choose between certainty and doing nothing. We can keep a plan and write down what we still need to know."
 
 **Short:** Nobody agrees about everything. But the map on the meeting board has new pencil on it now.
 
@@ -154,4 +155,4 @@ Kept: "Your sentence is read out at the meeting. Bramble nods once, which from B
 
 **Almanac line:** *Act IV: The Town Has Two Stories. We kept a plan: {plan}.*
 
-**Between acts:** *The rest of the pages are loosening on the windowsill. The baker says tomorrow, probably.*
+**Between acts:** *The pages are loosening on the windowsill. Pause here, or turn the story on.*
