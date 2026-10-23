@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 250" role="img" aria-labelledby="title desc">
+<title id="title">Before cooling: whole pane and imagined tiny view</title>
+<desc id="desc">A dry continuous pane. In a separate imagined tiny view, seven same-size dots represent water molecules spread in invisible vapor on the air-facing side.</desc>
+<style>.label{font:600 17px system-ui, sans-serif;fill:#183f39}.small{font:600 15px system-ui,sans-serif;fill:#183f39}.tiny{font:600 14px system-ui,sans-serif;fill:#183f39}</style>
+<rect x="1" y="1" width="278" height="116" rx="12" fill="#fffdf7" stroke="#628b89" stroke-width="2"/>
+<text x="16" y="25" class="label">Whole view</text>
+<text x="20" y="49" class="small">Air-facing side</text>
+<text x="194" y="49" class="small">Dry side</text>
+<rect x="162" y="30" width="20" height="69" rx="2" fill="#dbe9eb" stroke="#244353" stroke-width="2"/>
+<path d="M166 38v51" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+<text x="20" y="105" class="small">No visible drops</text>
+<rect x="1" y="125" width="278" height="124" rx="12" fill="#eef5f4" stroke="#628b89" stroke-width="2"/>
+<text x="16" y="149" class="label">Imagined tiny view</text>
+<text x="20" y="239" class="small">Invisible vapor in air</text>
+<rect x="162" y="160" width="20" height="69" rx="2" fill="#dbe9eb" stroke="#244353" stroke-width="2"/>
+<circle cx="35" cy="173" r="5" fill="#83aec2" stroke="#244353" stroke-width="1.5"/><circle cx="60" cy="202" r="5" fill="#83aec2" stroke="#244353" stroke-width="1.5"/><circle cx="90" cy="181" r="5" fill="#83aec2" stroke="#244353" stroke-width="1.5"/><circle cx="114" cy="207" r="5" fill="#83aec2" stroke="#244353" stroke-width="1.5"/><circle cx="138" cy="174" r="5" fill="#4387a7" stroke="#244353" stroke-width="1.5"/><circle cx="38" cy="215" r="5" fill="#4387a7" stroke="#244353" stroke-width="1.5"/><circle cx="132" cy="196" r="5" fill="#4387a7" stroke="#244353" stroke-width="1.5"/>
+</svg>
