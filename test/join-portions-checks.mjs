@@ -23,6 +23,6 @@ eq(states,12);eq(portionCase('future'),null);eq(movePortion({caseId:'future',k:0
 resetPortionsSession();ok(portionsPage('synthetic-owner').includes('Choose a portion job'));eq(portionsSession(),null,'chooser allocates no visit');resetPortionsSession();
 const app=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');
 ok(app.includes('else if(portionsBench)html=portionsPage(explorerStore.active.id)'));
-eq((app.match(/!comparisonBench&&!portionsBench/g)||[]).length,2,'both invitation and connection appenders excluded');
-ok(app.indexOf('bindPortions({')<app.indexOf(' bindSpeech();'),'stale Hear guard binds before speech');
+const appenders=app.split('\n').filter(line=>line.includes('html+=learningInvitations(context)')||line.includes('html+=connectionPanel(state,target)'));eq(appenders.length,2,'both actual invitation and connection appenders found');for(const line of appenders){const end=line.indexOf('){');ok(end>0&&line.trimStart().startsWith('if('),'actual appender condition extracted');const condition=line.slice(0,end);ok(condition.includes('!comparisonBench')&&condition.includes('!portionsBench'),'each actual appender condition retains comparison and portions exclusions');}
+const hostBind=app.match(/function bind\(\)\{[\s\S]*?\n\}/)?.[0];ok(hostBind,'ordinary host bind function extracted');ok(hostBind.indexOf('bindPortions({')>=0&&hostBind.indexOf(' bindSpeech();')>=0&&hostBind.indexOf('bindPortions({')<hostBind.indexOf(' bindSpeech();'),'stale Hear guard binds before speech');
 console.log(`Join the Portions: ${n} source/model checks passed across ${states} live states.`);
