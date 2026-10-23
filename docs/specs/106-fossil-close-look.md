@@ -1,6 +1,6 @@
 # 106 · Fossil Close-Look: a body and a trace
 
-**Spec, original interface mock and licensed source assets only. Independent root science/content/rendered-art review is required before runtime.** Base main `7a7d542028cd3eb8e536192316cc3644cba548e2`. [Source/overlap audit](../source-audits/106-fossil-close-look.md) · [responsive original mock](assets/106-fossil-close-look/mock.html). This is a first **S8-I** knowledge foothold, not a fossil-identification, formation, dating, evolution or fieldwork course. No atlas pin, reference count or attainment changes.
+**Independent six-lens science/content/rights/rendered-art review and root gate cleared `384acc9`. A local runtime candidate now requires separate independent implementation and final release review.** Base main `7a7d542028cd3eb8e536192316cc3644cba548e2`. [Source/overlap audit](../source-audits/106-fossil-close-look.md) · [responsive original mock](assets/106-fossil-close-look/mock.html). This is a first **S8-I** knowledge foothold, not a fossil-identification, formation, dating, evolution or fieldwork course. No atlas pin, reference count or attainment changes.
 
 ## A small new way to look
 
@@ -40,7 +40,7 @@ The comparison is accessible regardless of pin count. **Back to this photograph*
 
 Title **“Fossil Close-Look”**. Opening **“The nature corner is looking back beyond the town's story. These real photos show two different clues to past life. Look closely, choose a detail, and compare.”** Persistent note **“Real source photographs. Our looking guides and clue captions are made for this game.”** Two open turns **Look / Compare**; the chosen photo and compact identity remain visible across turns. On Look, two native object buttons **Trilobite photo / Footprint photo**, default body; no randomized position or right-choice selector. The objects' names are supplied.
 
-Short teaching before the first picture, always freely revisitable: **“Fossils are remains or traces of past life preserved in rock or other geological deposits. A body fossil preserves something from a body, such as a shell or bone. A trace fossil preserves a mark of activity, such as a footprint. Not every mark in rock came from life.”** Optional glossary: **“Geological deposits: rock or other material laid down in Earth's past.”** **“Palaeontologists study fossils and their setting to learn about past life.”** No claim that every fossil is mineral-replaced, a dinosaur, a whole dead animal or older than one fixed threshold.
+Short teaching before the first picture, always freely revisitable: **“Fossils are remains or traces of past life preserved in rock or other geological deposits. A body fossil preserves something from a body, such as a shell or bone. A trace fossil preserves a mark of activity, such as a footprint. Not every mark in rock came from life.”** Optional glossary: **“Geological deposits: rock or other material laid down in Earth's past.”** **“Paleontologists study fossils and their setting to learn about past life.”** No claim that every fossil is mineral-replaced, a dinosaur, a whole dead animal or older than one fixed threshold.
 
 Whole-photo alternatives:
 
@@ -52,7 +52,7 @@ Native **Reveal the source's interpretation** opens a separate supplied card, wi
 - Body: **“USGS identifies this as a trilobite fossil, an extinct marine invertebrate. This is a body-form fossil: evidence of something from the animal's body. It is not the trail it made. We cannot decide from this photo alone whether this particular fossil came from a shed outer covering or remains after death.”**
 - Trace: **“NPS identifies this as a fossilized dinosaur footprint. A footprint is a trace of activity. It is not a preserved dinosaur foot. The source names the footprint Eubrontes; this does not name one exact dinosaur species for us.”**
 
-Adjacent label **“From the source and science references — not something the photo's color tells us.”** Source card includes the table's page-date/place qualification and full credits. The open card offers **Hide the source's interpretation**; hiding/reopening changes no pin or photograph. A single optional **What can we say?** disclosure on Compare supplies:
+Adjacent label **“From the source and science references: not something the photo's color tells us.”** Source card includes the table's page-date/place qualification and full credits. The open card offers **Hide the source's interpretation**; hiding/reopening changes no pin or photograph. A single optional **What can we say?** disclosure on Compare supplies:
 
 **“Our two photographs can help us compare a preserved body form with a preserved activity mark. Their source labels help us name that difference. A close view and the full view are one source, not independent confirmation. A pin from the surrounding rock does not make every line a fossil. These two pictures do not tell us the animals' original living colors or sounds, their exact ages, or that they lived together.”**
 
