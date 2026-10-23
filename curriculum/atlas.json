@@ -857,6 +857,36 @@
       ],
       "route": "#living/fossils",
       "scope": "Inspect two credited real photographs and pin one visible detail from each into a temporary comparison. Source interpretations distinguish a body-form fossil and a preserved footprint; no independent identification, excavation, formation, dating or shared physical scale is established."
+    },
+    {
+      "id": "joining-ledger",
+      "name": "Write the Same Sum",
+      "status": "built-local",
+      "route": "#numbers/join/ledger",
+      "patterns": [
+        "build"
+      ],
+      "scope": "Relate two fixed joining pictures to supplied aligned tens/ones writing. Wrap ten of eleven ones and place or lift result digits. Existing Joining Orders work stays separate; no independent calculation, handwriting or general written-method evidence."
+    },
+    {
+      "id": "returning-ledger",
+      "name": "Write What Remains",
+      "status": "built-local",
+      "route": "#numbers/return/ledger",
+      "patterns": [
+        "build"
+      ],
+      "scope": "Relate the same 42 counters to supplied ones-first return steps and aligned remainder digits. Before-returning group counts stay distinct from result digits; earlier Returning work is preserved. No independent calculation, handwriting or general algorithm claim."
+    },
+    {
+      "id": "sentence-bridges",
+      "name": "Sentence Bridges",
+      "status": "built-local",
+      "route": "#loft/bridges",
+      "patterns": [
+        "compose"
+      ],
+      "scope": "Join two supplied clauses with and, because or but; swap, separate and undo while keeping three fictional scenes fixed. Exact meaning notes distinguish a grammatical trial from a source-supported connection. No learner-authored clause, independent writing or punctuation judgment."
     }
   ],
   "manualReferences": [
@@ -1699,6 +1729,34 @@
       "kind": "explanation",
       "source": "dist/fossil-close-ui.mjs",
       "scope": "Compare selected visible details from two credited photographs and reveal the supplied body-fossil versus activity-trace interpretation. No independent classification, formation account, dating, environmental reconstruction or real specimen examination."
+    },
+    {
+      "game": "joining-ledger",
+      "topicId": "mt_UQnAFPs83F",
+      "kind": "explanation",
+      "source": "dist/joining-ledger-ui.mjs",
+      "scope": "Supplied picture-to-writing correspondence for 24 + 13 and 24 + 17, including one regrouped ten. No independently calculated result, mental method, chosen strategy, handwriting, learner explanation or broader addition/subtraction competence."
+    },
+    {
+      "game": "returning-ledger",
+      "topicId": "mt_UQnAFPs83F",
+      "kind": "explanation",
+      "source": "dist/returning-ledger-ui.mjs",
+      "scope": "Supplied picture-to-writing correspondence for 42 minus 12 or 17, with opening a ten distinguished from returning counters. Expanded group counts and final digits are separate. No independent subtraction, mental method, strategy choice, handwriting or general column algorithm."
+    },
+    {
+      "game": "sentence-bridges",
+      "topicId": "mt_YXVQaufkKO",
+      "kind": "explanation",
+      "source": "dist/sentence-bridges-ui.mjs",
+      "scope": "Combine two supplied complete clauses with and in three fixed scenes; swap their order, separate and undo with supplied meaning notes. No learner-originated clauses, list construction or independent spoken/written sentence production."
+    },
+    {
+      "game": "sentence-bridges",
+      "topicId": "mt_wq-1OJ_8s5",
+      "kind": "explanation",
+      "source": "dist/sentence-bridges-ui.mjs",
+      "scope": "Explore supplied because/and/but clause relations and reversed order against a fixed scene, with exact reason/contrast meaning notes. No when/if/that/or range, independent composition, sentence-type transformation, punctuation editing or observed human listening."
     }
   ],
   "increments": [

@@ -10,18 +10,18 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 181 explicit current references across 100 unique source topics: authored question references, scoped practice or supplied explanations. The other 1490 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 185 explicit current references across 103 unique source topics: authored question references, scoped practice or supplied explanations. The other 1487 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
 | Source subject | Topics | Topics with any declared link | Not yet mapped |
 | --- | --- | --- | --- |
 | Computing | 21 | 1 | 20 |
-| English | 286 | 12 | 274 |
+| English | 286 | 14 | 272 |
 | History | 90 | 3 | 87 |
 | Learning to Learn | 18 | 0 | 18 |
 | Life Skills | 37 | 1 | 36 |
-| Mathematics | 503 | 66 | 437 |
+| Mathematics | 503 | 67 | 436 |
 | Personal & Social Development | 88 | 0 | 88 |
 | Science | 547 | 17 | 530 |
 
@@ -105,6 +105,9 @@ These are source-code encounters. Historical `live` labels in the declarations d
 | Join the Portions (`#cafe/portions`) | build, read | Move and return already-cut same-size quarter, third and sixth pieces while the same whole-loaf unit stays fixed. Four supplied cases include five quarters across equal loaf spaces; equations are model readouts, not independent fraction calculation. |
 | Gathering Budget (`#workshop/budget`) | allocate, build | Revise whole packets for two pretend supply requests under fixed pretend-cent limits. Supplied costs and quantities support several working plans; an optional cost idea is separate. No earned currency, actual purchase, household judgment or saved attainment. |
 | Fossil Close-Look (`#living/fossils`) | read | Inspect two credited real photographs and pin one visible detail from each into a temporary comparison. Source interpretations distinguish a body-form fossil and a preserved footprint; no independent identification, excavation, formation, dating or shared physical scale is established. |
+| Write the Same Sum (`#numbers/join/ledger`) | build | Relate two fixed joining pictures to supplied aligned tens/ones writing. Wrap ten of eleven ones and place or lift result digits. Existing Joining Orders work stays separate; no independent calculation, handwriting or general written-method evidence. |
+| Write What Remains (`#numbers/return/ledger`) | build | Relate the same 42 counters to supplied ones-first return steps and aligned remainder digits. Before-returning group counts stay distinct from result digits; earlier Returning work is preserved. No independent calculation, handwriting or general algorithm claim. |
+| Sentence Bridges (`#loft/bridges`) | compose | Join two supplied clauses with and, because or but; swap, separate and undo while keeping three fictional scenes fixed. Exact meaning notes distinguish a grammatical trial from a source-supported connection. No learner-authored clause, independent writing or punctuation judgment. |
 
 The implemented **Carry an idea here** connection transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -149,7 +152,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | --- | --- | --- | --- |
 | Computing / Artificial Intelligence | 21 | 1 | Compose · execute · revise; Search · inspect · compare; Read · infer · support |
 | English / English Thinking | 7 | 2 | Read · infer · support; Search · inspect · compare |
-| English / Grammar & Punctuation | 75 | 1 | Compose · execute · revise; Read · infer · support |
+| English / Grammar & Punctuation | 75 | 3 | Compose · execute · revise; Read · infer · support |
 | English / Handwriting & Transcription | 5 | 0 | Build · transform · relate; Create · perform · reflect |
 | English / Phonics & Word Reading | 23 | 1 | Build · transform · relate; Create · perform · reflect |
 | English / Reading Comprehension | 72 | 4 | Read · infer · support; Search · inspect · compare |
@@ -164,7 +167,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Learning to Learn / Learning to Learn | 18 | 0 | Change · measure · explain; Create · perform · reflect |
 | Life Skills / Entrepreneurship | 17 | 0 | Assemble · allocate · check; Compose · execute · revise |
 | Life Skills / Money & Finance | 20 | 1 | Assemble · allocate · check; Compose · execute · revise |
-| Mathematics / Addition & Subtraction | 52 | 7 | Build · transform · relate; Search · inspect · compare |
+| Mathematics / Addition & Subtraction | 52 | 8 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Algebra | 25 | 0 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Counting & Cardinality | 14 | 2 | Build · transform · relate; Search · inspect · compare |
 | Mathematics / Data & Statistics | 18 | 3 | Change · measure · explain; Read · infer · support |
@@ -389,6 +392,10 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Adding Fractions (Same Denominator)](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_CBHwluE6Lp) | explanation / Join the Portions (local build) / [source](../dist/join-portions-ui.mjs) | Join and return equal fractional units with supplied equations, including five quarters of the same whole. No unsupplied calculation, general subtraction, learner-produced mixed number or independent problem-solving claim. |
 | [Budgeting Pocket Money](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Qzbh-_v0Gq) | scoped-practice / Gathering Budget (local build) / [source](../dist/gathering-budget-ui.mjs) | Choose and revise finite pretend packets within a limit while meeting supplied quantities; totals and remaining amount are supplied. No personal allowance plan, independent calculation, saving over time, real purchase or independently explained trade-off. |
 | [Types of Fossils](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_1VSFoM44JU) | explanation / Fossil Close-Look (local build) / [source](../dist/fossil-close-ui.mjs) | Compare selected visible details from two credited photographs and reveal the supplied body-fossil versus activity-trace interpretation. No independent classification, formation account, dating, environmental reconstruction or real specimen examination. |
+| [Adding two two-digit numbers](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_UQnAFPs83F) | explanation / Write the Same Sum (local build) / [source](../dist/joining-ledger-ui.mjs) | Supplied picture-to-writing correspondence for 24 + 13 and 24 + 17, including one regrouped ten. No independently calculated result, mental method, chosen strategy, handwriting, learner explanation or broader addition/subtraction competence. |
+| [Adding two two-digit numbers](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_UQnAFPs83F) | explanation / Write What Remains (local build) / [source](../dist/returning-ledger-ui.mjs) | Supplied picture-to-writing correspondence for 42 minus 12 or 17, with opening a ten distinguished from returning counters. Expanded group counts and final digits are separate. No independent subtraction, mental method, strategy choice, handwriting or general column algorithm. |
+| [Joining Words with 'And'](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_YXVQaufkKO) | explanation / Sentence Bridges (local build) / [source](../dist/sentence-bridges-ui.mjs) | Combine two supplied complete clauses with and in three fixed scenes; swap their order, separate and undo with supplied meaning notes. No learner-originated clauses, list construction or independent spoken/written sentence production. |
+| [Subordinate clauses](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_wq-1OJ_8s5) | explanation / Sentence Bridges (local build) / [source](../dist/sentence-bridges-ui.mjs) | Explore supplied because/and/but clause relations and reversed order against a fixed scene, with exact reason/contrast meaning notes. No when/if/that/or range, independent composition, sentence-type transformation, punctuation editing or observed human listening. |
 
 ## Sources, licensing and maintenance
 
