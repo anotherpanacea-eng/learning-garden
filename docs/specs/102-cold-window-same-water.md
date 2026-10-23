@@ -1,6 +1,6 @@
 # 102 · Cold Window, Same Water
 
-**Status: independently reviewed specification/science/art draft; both bounded art and lifecycle findings were folded and independently rechecked. A local runtime candidate now awaits independent implementation and release review. No atlas mapping, learner record, PR, or deployment is claimed.** Original spec base: public `origin/main` at `5432678b47f091adbd5df72a8f202545709c8415`. See the [source and overlap audit](../source-audits/102-cold-window-same-water.md) and the [original three-frame art mock](assets/102-cold-window-before.svg), [cooled frame](assets/102-cold-window-cool.svg), [warmed-again frame](assets/102-cold-window-return.svg), and [responsive page mock](assets/102-cold-window-mock.html).
+**Status: specification/content/art and implementation/release reviews cleared; merged in [PR107](https://github.com/anotherpanacea-eng/learning-garden/pull/107).** Original spec base: public `origin/main` at `5432678b47f091adbd5df72a8f202545709c8415`. See the [source and overlap audit](../source-audits/102-cold-window-same-water.md) and the [original three-frame art mock](assets/102-cold-window-before.svg), [cooled frame](assets/102-cold-window-cool.svg), [warmed-again frame](assets/102-cold-window-return.svg), and [responsive page mock](assets/102-cold-window-mock.html).
 
 ## Purpose and boundary
 

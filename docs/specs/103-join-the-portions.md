@@ -1,6 +1,6 @@
 # 103 · Join the Portions: same pieces, more on the tray
 
-**Specification/math/content/rendered-art gate cleared after independent review and the focused host-guard fold at `e2b7bae`. Independent implementation review cleared `5c0cfe8`; the composed candidate now awaits final exact-head release review.** Base public main `5432678b47f091adbd5df72a8f202545709c8415`. [Source and overlap audit](../source-audits/103-join-the-portions.md) · [responsive original mock](assets/103-join-the-portions.html). No release, new atlas reference or learning outcome is claimed.
+**Status: implemented, independently reviewed and merged in [PR108](https://github.com/anotherpanacea-eng/learning-garden/pull/108).** Base public main `5432678b47f091adbd5df72a8f202545709c8415`. [Source and overlap audit](../source-audits/103-join-the-portions.md) · [responsive original mock](assets/103-join-the-portions.html). No publication, new atlas reference or learning outcome is claimed.
 
 ## The missing action
 

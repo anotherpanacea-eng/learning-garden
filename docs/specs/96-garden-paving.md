@@ -1,6 +1,6 @@
 # 96 · Garden Paving: old tiles, new tiles, whole square
 
-**Status: independent root specification/content/rendered-art review cleared `f76b410`; separate internal implementation review cleared `3b4ddb5` after the source-template repair.** See the [implementation review receipt](../reviews/96-garden-paving-review.md) for exact heads and local verification, and the [current roadmap](../roadmap.md) for publication status. Base: reviewed draft PR98, `8c7cd230d3c42d540f522a047ce3d4704b71c5c8`. Release clearance remains separate. See [source audit 96](../source-audits/96-garden-paving.md) and the [original drawing mock](assets/96-garden-paving.svg).
+**Status: implemented, independently reviewed and merged in [PR102](https://github.com/anotherpanacea-eng/learning-garden/pull/102).** The [implementation review receipt](../reviews/96-garden-paving-review.md) records the reviewed heads and local checks; the [current roadmap](../roadmap.md) distinguishes merged code from publication. See [source audit96](../source-audits/96-garden-paving.md) and the [original drawing mock](assets/96-garden-paving.svg).
 
 ## One missing action
 

@@ -1,6 +1,6 @@
 # 100 · Ribbon Recut Table: same color, smaller parts
 
-**Independently reviewed specification; implementation under review.** The [source and overlap audit](../source-audits/100-ribbon-recut-table.md) and [original four-frame mock](assets/100-ribbon-recut-table.svg) are part of this proposal. No atlas reference, score, saved result, merge, or release is claimed.
+**Status: implemented, independently reviewed and merged in [PR104](https://github.com/anotherpanacea-eng/learning-garden/pull/104).** See the [source audit](../source-audits/100-ribbon-recut-table.md), [original mock](assets/100-ribbon-recut-table.svg) and [review receipt](../reviews/100-ribbon-recut-review.md). The [current roadmap](../roadmap.md) distinguishes merge and publication. This transient model creates no score or saved result; this specification adds no atlas reference.
 
 ## The missing action
 
