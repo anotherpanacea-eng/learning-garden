@@ -1,6 +1,6 @@
 # 118. The Keeper's Desk: a real entry for longer, less-guided work
 
-Status: **proposed specification and authored text, 2026-10-23. Not reviewed, not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120](120-keeper-of-the-ways.md) (draft PR #127), which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns only the desk's entry, its working conventions and its first case. Companion: [spec 119](119-deeper-bench-packs.md) adds harder packs to existing benches.
+Status: **proposed specification and authored text, 2026-10-23. Specification review repairs drafted; independent follow-up and content review remain open. Not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120 in draft PR #127](https://github.com/anotherpanacea-eng/learning-garden/pull/127/files) which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns only the desk's entry, its working conventions and its first case. Companion: [spec 119](119-deeper-bench-packs.md) adds harder packs to existing benches.
 
 ## 1. The problem
 
@@ -22,13 +22,15 @@ The desk is described by the shape of its tasks, never by age or ability:
 
 > **Longer cases, less guidance.** Each case asks a real question the town hasn't answered. You choose where to start, skip the teaching when you already know it, and finish by recommending what the town should do.
 
-The desk is open to every explorer from the first visit. A younger explorer can open it with a grown-up; the same case completes with the supported route in section 6. Nothing is locked, scored or required.
+The desk is open to every explorer from the first visit. An explorer can open it with a grown-up; the same case completes with the supported route in section 5.5. Nothing is locked, scored or required.
+
+**Commissioning boundary:** the first implementation increment is the desk and Case 1, *Bridge or ford?*, only. Case 2, the Valencia dossier, is proposed research and draft text for a separate commission: it still needs its own complete task/support/source/save contract, historical source review and fluent Spanish/content review. Its presence in this PR does not add it to the first build. Spec 119 and the later story jobs are separately reviewed dependencies, not capabilities supplied by Case 1.
 
 ## 3. Conventions that make the desk feel different
 
 These apply to every case. They are what makes this an entry for a more independent learner without adding a band or a level.
 
-1. **Teach first, and let the explorer skip it.** This follows Jane's teach, guided practice, then independent order (`LESSONS.md`, "Teach → guided practice → graded → boss"). Each step opens with a short **learn card**: one idea and one worked example, revealed a line at a time. The first task in the step is **guided**, with one to three working lines shown before answering. Then come the unguided tasks. The departure from Jane is one button: **I know this, show me the question** folds the learn card and the guided lines away, and the explorer goes straight to the tasks. Folding them records nothing. They stay one tap away as **Show me how**, and opening them afterwards is recorded as support for that step only.
+1. **Teach first, and let the explorer skip it.** This follows Jane's teach, guided practice, then independent order (`LESSONS.md`, "Teach → guided practice → graded → boss"). Each step opens with a short **learn card**: one idea and one worked example, revealed a line at a time. The first task in the step is **guided**, with one to three working lines shown before answering. Record the initial learn-card lines and guided lines actually shown as supplied support context for that task; later tasks retain any relevant worked-example exposure. Then come the unguided tasks. The departure from Jane is one button: **I know this, show me the question** folds the learn card and the guided lines away, and the explorer goes straight to the tasks. Folding is a display action, not a new help event, and never clears support or exposure already shown. They stay one tap away as **Show me how**, and opening them afterwards is recorded as additional support for that step only. A hidden card is not proof it was unseen; folding cannot turn a supported attempt into an independent one. Where a relevant solution/model was supplied, describe that context instead of claiming independent discovery.
 2. **When stuck, one rung at a time.** This is Jane's "I'm stuck" ladder without hearts or points. Every checked task has **I'm stuck**, and each tap moves down one rung: first a hint, then a worked example of a similar, easier problem with the first line of this one, then **Skip for now**. A skipped task stays open in the case, and the record shows each rung that was used.
 3. **Steps in any order.** The case page lists its steps. The explorer can open any step first, leave a step unfinished, and return. The recommendation step reads whatever the explorer has kept so far and says plainly which steps are still open.
 4. **Mechanical checks only where the answer is mechanical.** Arithmetic and equations get **Check my working**, which compares the entered value with the authored model. Readings of sources, choices among plans and written reasons are never marked right or wrong. Authored replies respond to the choice made, with the same tone for every choice.
@@ -38,7 +40,7 @@ These apply to every case. They are what makes this an entry for a more independ
 
 ## 4. Arrival text
 
-Spec 120 owns the parcel, the old Keeper and the Keeper reveal. This arrival suits its "Arrive with the letter from upstream" entry, which points an explorer at the desk. This arrival must not spoil later pages, so it refers only to the pages that have dried so far and to the desk's purpose. It is written so an explorer can arrive without having played any earlier act.
+Spec 120 in [draft PR #127](https://github.com/anotherpanacea-eng/learning-garden/pull/127) owns the parcel, the old Keeper and the reveal. Desk access does not require that story implementation. Use the fresh arrival below by default. Add only the conditional recap justified by this explorer's explicit story arrival/reached pages, once that integration exists; opening the desk never marks earlier acts, repairs or activities completed.
 
 **Home invitation (one line, below the existing "Find a place to begin"):**
 
@@ -46,7 +48,7 @@ Spec 120 owns the parcel, the old Keeper and the Keeper reveal. This arrival sui
 
 **First visit, arrival panel:**
 
-> The desk stands in a corner of the mended Willowbank library, a desk nobody has used in years. Its drawers are full of things nobody has had time to read: survey maps, a courier's logbook, letters from upriver, and the pages of a parcel the storm left on the bridge, addressed *To the Keeper of the Ways*. Some pages have dried enough to read. The rest are still stuck together.
+> The desk stands in a corner of the Willowbank library, beside books waiting to be put back. Its drawers hold survey maps, a courier's logbook and questions nobody has had time to answer. Wren has cleared a space for a casebook.
 >
 > Wren Halloway has kept the town's ledgers since the storm. She pushes the chair out for you.
 >
@@ -54,14 +56,17 @@ Spec 120 owns the parcel, the old Keeper and the Keeper reveal. This arrival sui
 
 Buttons: **Take the desk** · **Look around first**.
 
-**"What's happened in town" card** (available on the desk at any time, for an explorer who skipped earlier play; facts kept generic until spec 120 fixes them):
+**"What's happened in town" card** (available at any time):
 
-> - A storm flooded Willow Brook and washed out the footbridge and the lower road.
-> - Neighbors reopened the café, replanted the garden and got the post moving again.
-> - The town is past the emergency. Now it has to decide what to build, and how.
-> - The desk is where those decisions get worked out before the town meeting.
+> A storm damaged the town. People are working out what to mend and what to build. The desk is where you can sit with one question before the town meeting.
 
-Reading the card records nothing.
+This fresh recap claims no completed work. Once spec 120 is built, append one of these story recaps only when justified:
+
+- Explicit `mended` arrival or reached Act I ending: "The welcome-back supper has happened. Pip has one dry page from the parcel: an old map."
+- Explicit `letter` arrival or reached Act II ending: "A letter has come from upstream. Pip has two dry pages: an old map and a flood ledger."
+- Otherwise: no parcel-page recap.
+
+An arrival recap describes earlier story events as before you came, never as this explorer's completed work. It does not claim that all town repairs are done. Page text and availability remain owned by spec 120; later pages are never named here. Reading the card records no learning attempt or completed activity.
 
 **"Take the desk" response:**
 
@@ -111,8 +116,10 @@ Tasks:
 - **1a.** Cost of the footbridge at the narrows (24 m). *Answer: 1,200 + 60 × 24 = 2,640.*
 - **1b.** Cost of the causeway at the ford (15 m). *Answer: 400 + 100 × 15 = 1,900.*
 - **1c.** Would both fit in the fund? *Answer: each fits on its own (2,640 ≤ 2,700; 1,900 ≤ 2,700); both together do not (4,540).*
-- **1d.** Bramble's claim, tested properly. "If both plans had to cross the **same** gap, would the causeway always be cheaper?" The explorer can enter any length and see both totals in a table that keeps each try. Then: "At what length do they cost the same?" *Answer: 1,200 + 60L = 400 + 100L, so 800 = 40L and L = 20 m. Below 20 m the causeway is cheaper; above 20 m the footbridge is.*
-- **1e.** Write each plan's cost as a rule for any length L. Supplied tiles let the explorer build `1200 + 60 × L` and `400 + 100 × L`; a keyboard field accepts the same expressions. **Check my working** evaluates the explorer's expression at three lengths and says where it agrees or differs with the price sheet. It does not require one written form: `60L + 1200` is equally correct.
+- **1d.** Bramble's claim, tested properly. "If both plans had to cross the **same** gap, would the causeway always be cheaper?" The explorer can enter a whole-number length from 0 to 100 metres and see both totals in a table that keeps each try. Then: "At what length do they cost the same?" *Answer: 1,200 + 60L = 400 + 100L, so 800 = 40L and L = 20 m. Below 20 m the causeway is cheaper; above 20 m the footbridge is.*
+- **1e.** Write each plan's cost as a rule for any length L. Supplied tiles let the explorer build `1200 + 60 × L` and `400 + 100 × L`; a keyboard field accepts the same expressions. **Check my working** parses the bounded affine grammar below and compares its exact coefficient and constant with the price sheet. It does not require one written form: `60L + 1200` is equally correct. A table at example lengths may illustrate the rule, but agreement at selected lengths is not the equivalence test.
+
+**Expression input contract (1e):** at most 160 characters, 64 tokens and 8 nested parentheses. Accept whole-number literals 0–100,000, `L`, parentheses, unary `+`/`-`, addition/subtraction (`-` or `−`) and multiplication (`*` or `×`); permit `60L` as shorthand for `60 × L`. Multiplication is allowed only when at least one parsed operand is a constant expression. Reject variable-by-variable multiplication, division, powers, other identifiers, equals signs and malformed syntax with "Use whole numbers, L, +, −, × and brackets to write a linear rule." Never use `eval` or a JavaScript expression evaluator. Parse directly to exact integer pairs `(coefficient of L, constant)`, bounding the absolute value of each component at every operation to 100,000; reject an out-of-bounds expression without changing the draft. Compare with `(60,1200)` or `(100,400)`. `60 × (L + 20)` is equivalent to the footbridge rule; `L × L` is outside this task. Tiles use the same parser and bounds.
 
 **Learn card (folds away; reopens as Show me how):**
 
@@ -136,7 +143,7 @@ Tasks:
 Check: 1200 + 60 × 20 = 2400, and 400 + 100 × 20 = 2400
 ```
 
-A typed chain such as `800 = 40L = 20` gets the reply: "Each line should be true by itself. 40L isn't 20; L is. Try writing L = 20 on its own line."
+A supplied contrast card shows the chain `800 = 40L = 20` beside the true separate lines and says: "Each line should be true by itself. 40L isn't 20; L is. Try writing L = 20 on its own line."
 
 **Contrast (after 1d, shown whatever the explorer answered):**
 
@@ -170,8 +177,10 @@ Tasks:
 - **2c.** The same for the rainy Tuesday. *Answer: 2 : 38 = 1 : 19; 2/40 = 1/20, or 5%.*
 - **2d.** Wren asks: "So what share of the town's crossings need a cart?" Choices (order varied per AGENTS.md):
   - "About a quarter, since Saturday counted far more people."
-  - "Between 1 in 20 and 1 in 4, but two days can't show a usual week." ← fits the evidence
-  - "Nothing at all, since counts from two days prove nothing."
+  - "We observed 5% on Tuesday and 25% on Saturday; a usual week could fall outside those figures." ← fits the evidence
+  - "The two days tell us nothing useful about crossings, so we should discard both counts."
+
+  Authored replies: to the first, "Saturday tells us about Saturday. More people counted does not make it a usual day." To the fitting choice, "These are the shares observed on those days. We have no basis for bounding the town's usual share between them." To discarding both, "The counts do describe those two days. Keep them, and ask for more days before describing a usual week."
 - **2e.** "Who might these counts miss?" Free choice of any that apply, each with an authored reply; none is marked wrong:
   - People who stayed home because the ford was too high.
   - Carts that took the long road round instead.
@@ -216,7 +225,15 @@ The learn card for 2a draws 45 : 135 as a bar of 1 block against 3 blocks, so th
 
 Tasks:
 
-- **3a.** For each record, choose what kind of evidence it is: *a memory told later*, *a record written at the time*, *an official note with no dates*. Then choose what it can tell us and what it can't, from authored cards. Example cards for Hob: "how the ford seemed to someone who crossed it for decades" (can) and "how many days a winter it can't be crossed" (can't).
+- **3a.** For each record, choose its kind from *a memory told later*, *a log written at the time*, *a survey warning that dates no flood*. Then place its two supplied claim cards under **Can tell us** or **Cannot tell us**. All six cards and the authored readings are in the table below. The source type is an authored description, not proof of accuracy. These reading choices get the authored explanation without a right/wrong mark.
+
+| Record | Kind and guided line | Can tell us card | Cannot tell us card | Reply after keeping |
+| --- | --- | --- | --- | --- |
+| Hob | Memory told later. Guided: "Hob is speaking now about forty years. A remembered account looks back." | `hob-experience`: How the ford seemed to Hob over decades. | `hob-days`: How many days each winter it could not be crossed. | "Hob tells us what he remembers and values. He has not listed every day or defined right under." |
+| Courier | Log written at the time. | `courier-delays`: The courier recorded seven interruptions over two winters. | `courier-depth`: The measured water depth on each of those days. | "The log records interrupted journeys. It does not give measured depths or every crossing." |
+| Survey map | Survey warning that dates no flood. | `map-warning`: The survey warned that high water could make the ford impassable. | `map-frequency`: How often the ford flooded after 1898. | "The warning names a risk. It supplies no dated flood list or later frequency." |
+
+Show the same source-specific reply after either arrangement; keep the explorer's reading as chosen. The table describes the supplied evidence, not an automatically scored interpretation.
 - **3b.** "Do Hob and the courier contradict each other?" Choices:
   - "Yes. Twice in forty years can't fit seven high-water days in two winters."
   - "No. 'Right under' and 'too high to cross' may differ, over different years." ← fits the evidence
@@ -256,9 +273,30 @@ The recommendation has four parts. Each part offers a **Write it yourself** fiel
 
 **Supported route** (for an explorer working with a grown-up, or anyone who wants it): every part can be completed with **Choose and adapt** alone, and steps 1–3 can be left open. The same closure follows. A grown-up reading aloud and talking it through is a full way to finish.
 
-### 5.6 Revisits
+### 5.6 First-case teaching and help text
 
-The case leaves frozen artifacts other activities can return to:
+This table completes the guided/hint/similar-example authoring list for Case 1's checked tasks. Learn cards are those above; Step 2 first shows its ratio definition and four-block bar, Step 3 first shows its three-question source comparison, and Step 4 first shows the four-part recommendation frame. Their guided first tasks are respectively 2a, Hob's 3a row and the plan choice in 5.5. Step 4 says: "Start with a plan. You can choose one below and change it later." Supplied starters remain visibly supplied support. Steps 3 and 4 have no scored checks or numeric stuck ladder; **Keep**, **Leave this step open**, **Show me how** and the complete authored choices stay available.
+
+For each checked task, **I'm stuck** first shows the Hint column, then the Similar example and first line, then **Skip for now**. Each shown rung is separate support, and the final rung keeps the task open. The shared skip line is "Leave this question open. Your other work stays here." None of the help text depends on a live model or generated prose.
+
+| Task | Hint | Similar example, then first line of this task |
+| --- | --- | --- |
+| 1a | "Pay the setup once, then the price for every metre." | "A stall costs 100 to set up and 10 per metre. At 3 metres: 100 + 10 × 3 = 130. Your first line: 1,200 + 60 × 24." |
+| 1b | "The causeway has its own setup and per-metre price." | "A path costs 50 to start and 20 per metre. At 4 metres: 50 + 20 × 4 = 130. Your first line: 400 + 100 × 15." |
+| 1c | "Compare each price with 2,700, then compare their sum with 2,700." | "With 100 coins, plans costing 60 and 80 each fit alone; together 140 does not. Your first line: 2,640 + 1,900 = ?" |
+| 1d | "How much does the causeway gain on the bridge for each extra metre?" | "100 + 10L = 40 + 20L gives 60 = 10L, so L = 6. Your first line: 1,200 + 60L = 400 + 100L." |
+| 1e | "The fixed part is the setup; the coefficient of L is the price per metre." | "A plan with setup 80 and 5 per metre has rule 80 + 5L. Your first line: footbridge setup + footbridge rate × L." |
+| 2a | "Divide both parts by the same common factor." | "6 carts : 18 walkers becomes 1 : 3 by dividing both by 6. Your first line: 45 : 135, divide both by 45." |
+| 2b | "The whole is carts and walkers together." | "2 carts among 8 crossings is 2/8 = 1/4. Your first line: 45 / (45 + 135)." |
+| 2c | "Keep the ratio's order; for the fraction, use all Tuesday crossings." | "3 carts : 27 walkers is 1 : 9; the cart share is 3/30 = 1/10. Your first lines: 2 : 38; 2 / (2 + 38)." |
+
+1c uses three separate choices, **Each on its own fits / does not fit** for each plan and **Both together fit / do not fit**, with the comparisons in 1c as its mechanical model. 1d checks the entered crossover length only; its trial table and the supplied equation lines are teaching, not independently composed algebra. 1e checks each plan's expression separately under the bounded grammar.
+
+The remaining source/interpretation choices and recommendation text are authored drafts. This list is not content clearance: independent Case 1 review must inspect every learn/guided/help line, source card, response and supported closure before build, including whether choice wording/order gives the response away.
+
+### 5.7 Revisits
+
+The case keeps its own frozen answers. The following are proposed later revisits, each requiring its own reviewed integration and any model extension in spec 119; no current bench automatically reads desk artifacts:
 
 - **Balance Stall:** the crossover equation as a two-sided balance (spec 119 adds the pack).
 - **Count Collection:** chart the two days' counts and choose a fair representation.
@@ -269,7 +307,7 @@ The case leaves frozen artifacts other activities can return to:
 
 Stored per explorer in existing local storage, following the AGENTS.md saved-work rule:
 
-- `desk.arrived` (the arrival panel was answered) and `desk.cases['bridge-or-ford']`, holding the case's frozen source ID and version, each step's kept answers, attempts, which help was used (the learn card reopened, each **I'm stuck** rung, a skip), and familiarity, using the app's existing separate support/familiarity/independent records.
+- `desk.arrived` (the arrival panel was answered) and `desk.cases['bridge-or-ford']`, holding the case's frozen source ID/version and complete understood prompts, source cards, model, choices/order, feedback and help text; each step's kept answers and attempts; the initial learn/guided lines actually shown and relevant prior worked-example exposure; each later help rung and skip; and familiarity. Preserve those distinct contexts on resume. Folding never clears them, and supplied work is never relabeled independent. This is a new case-specific record using the existing separation principles, not an existing generic desk API.
 - **Free text:** the expression field in 1e and the four recommendation fields. These stay local, appear in Grown-up notes and the existing JSON export, are removed by explicit deletion, and are never sent anywhere, scored or reused as content. Prompts are about a fictional town and never invite personal or family details.
 - A save is validated on IDs, counts and outcomes. A later wording or answer-key change never rewrites a kept answer or recommendation. If one step can't be read, the rest of the case stays open.
 - No age, grade, ability label or band is read or written by the desk.
@@ -315,7 +353,7 @@ The [strand families](../six-act-strands.md) place this content mostly in Acts I
 Each needs its own spec, content and source review. Spec 120 proposes several real-flood cases for the desk; they are listed here so the casebook has a visible direction.
 
 - **The parcel's pages** (spec 120): transcribe a damaged page, marking what is certain, what is guessed, and what is missing. Builds on the Source Trail.
-- **Where did Valencia's river go?** Written in full as [Case 2](../content/118-valencia-1957-case.md) (owner's choice, 2026-10-23): the desk depth of spec 120's Valencia 1957 archive pack, with English and Spanish reading at three amounts.
+- **Where did Valencia's river go?** Proposed [Case 2 dossier and draft text](../content/118-valencia-1957-case.md) (owner's choice, 2026-10-23): intended desk depth of spec 120's Valencia 1957 archive pack, with English and Spanish reading at three amounts. It is outside the first commission and is not a complete or reviewed activity contract.
 - **Rivers that made room** (spec 120's candidates): Paris 1910 (already sourced in the app), the Valencia flood of 1957 and the Turia riverbed that became a park, and the Dutch Room for the River programme. Real history from reviewed sources, kept separate from the fictional town. **The Valencia case can offer its sources in Spanish**, with English alongside and language load chosen separately, giving the app its first substantial Spanish reading.
 - **The sorting machine** (C1, AI literacy): the post office borrows a parcel sorter that learned from last year's deliveries and keeps misrouting hill-farm parcels. The explorer inspects its training examples, finds that hill-farm parcels were rare in them, and tests a fix. Builds on Willow Sorting Desk; the sorter's rule must be a fully specified model, never a live AI.
 - **The seed exchange ledger** (M3 ratio and percentage): divide a shared seed store between two communities in a stated ratio, then compare germination as percentages when the samples are very different sizes (30 of 40 against 20 of 25).
@@ -323,14 +361,14 @@ Each needs its own spec, content and source review. Spec 120 proposes several re
 ## 9. Entry points
 
 - Home: the one-line invitation in section 4.
-- Spec 114's "How shall we begin?" flow: add a fifth destination on its Begin page, **Open the Keeper's Desk** → `#desk`. This is the flow's only change. It writes no preference.
+- Spec 114's "How shall we begin?" flow: add a fifth destination on its Begin page, **Open the Keeper's Desk** → `#desk`. It follows spec 114's existing destination-button contract: first apply the entire temporary Math/Reading/French draft atomically, then navigate only if Apply succeeds. Preserve all-Keep/no-op and refused-Apply behavior. Opening the desk itself writes no starting preference; it does not bypass the flow's deliberate Apply.
 - All places: the desk is listed with every other destination.
 
 ## 10. Acceptance
 
 1. A fresh explorer can open `#desk` from Home, Begin and All places, and can open any step of Case 1 first.
-2. Every task in 1a–1e and 2a–2c has an authored answer; **Check my working** agrees with the worked values above, and 1e accepts any expression equivalent at three test lengths.
-3. Each step opens with its learn card and guided first task. **I know this, show me the question** folds them and records nothing; reopening them through **Show me how**, and each rung of **I'm stuck**, is recorded as support for that step only.
+2. Every task in 1a–1e and 2a–2c has an authored answer; **Check my working** agrees with the worked values above, and 1e accepts exactly equivalent affine coefficient/constant pairs within its stated grammar and bounds, and rejects nonlinear expressions rather than sampling them.
+3. Each step opens with its learn card and guided first task. **I know this, show me the question** folds them without a new help event or clearing initially shown support/exposure; reopening them through **Show me how**, and each rung of **I'm stuck**, is recorded as additional support for that step only. Folding never supplies evidence of unseen work or independence.
 4. No reading, choice or recommendation is marked right or wrong; Wren's closing response is identical for every plan.
 5. The case completes through the supported route with no free text and steps 1–3 open.
 6. Kept answers and the recommendation survive reload, explorer switch, export and import, and a changed answer key; an unreadable step leaves the others open.
@@ -350,4 +388,4 @@ Refreshed 2026-10-23: Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060` (`LESSO
 
 ## 12. Boundaries
 
-Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it.
+Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it. These are documentation review repairs, not build or content clearance. Case 1 requires independent specification/content follow-up; Case 2 remains separately uncommissioned and unverified.

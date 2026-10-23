@@ -1,16 +1,29 @@
 # 119. Deeper bench packs: harder cases for benches that already exist
 
-Status: **proposed content specification, 2026-10-23. Not reviewed, not build-ready.** Written by Claude as a writing-first deliverable; code and art are for the builder. Each pack below needs independent content review, and the benches' own specs govern their models, saves and accessibility. Companion to [spec 118](118-keepers-desk-entry.md), whose first case revisits several of these benches.
+Status: **proposed content specification, 2026-10-23. Documentation review repairs drafted; independent follow-up and content review remain open. Not build-ready.** Written by Claude as a writing-first deliverable; code and art are for the builder. Each proposal below needs independent content review. Existing bench specs continue to govern the unchanged old packs. The new modes require the explicit bounded extensions described below before implementation; this document is not a substitute for those model/UI/source/preservation contracts. Companion to [spec 118](118-keepers-desk-entry.md), whose first case proposes later revisits at several of these benches.
 
 ## 1. Purpose
 
-Several benches teach a real idea with a model that would carry much harder work, but stop at the first encounter. An explorer who has the idea needs harder cases in the same model, so the bench stays worth visiting. This is the "packs, not shells" strategy from [other routes through the acts](../other-routes-through-the-acts.md#36-packs-not-shells-throughput): new authored content in a proven interaction, with no new game.
+Several benches offer a useful first encounter and could host harder work. These proposals reuse their purpose and visual language, but several require new model capabilities, not content-only packs. The [packs strategy](../other-routes-through-the-acts.md#36-packs-not-shells-throughput) is a direction, not evidence that the current runtime can execute these cases.
 
-Each bench gets one optional **Harder cases** pack, chosen locally on the bench like any other pack. Every pack is open to every explorer. When the per-strand starting choices in the [challenge-bands proposal](proposed/challenge-bands.md) reach a bench, its Sapling suggestion may point here; that mapping is a later, separate decision, and a local choice always wins. Each pack has its own source ID and version, and saved work keeps the pack version it was started with.
+A later, separately specified extension may add an optional **Harder cases** choice on its bench. Every pack is open to every explorer. When the per-strand starting choices in the [challenge-bands proposal](proposed/challenge-bands.md) reach a bench, its Sapling suggestion may point here; that mapping is a later, separate decision, and a local choice always wins. Each saved new mode must have an explicit understood model/source version and preserve its complete source and outcomes; unchanged v1 work remains readable under the old contract. A source version label alone is not preservation. Transient benches remain transient unless a separately reviewed saved mode is commissioned.
 
 Each pack lists its teaching encounter, contrast, cases with worked answers, and the authored replies that matter most. Numbers are checked; wording is a draft for review.
 
-Every pack follows the same Jane-derived shape as [spec 118's desk](118-keepers-desk-entry.md#3-conventions-that-make-the-desk-feel-different): a learn card with one worked example first (foldable with **I know this, show me the question**), a guided first case, then unguided cases, and the **I'm stuck** ladder of hint, similar worked example, then skip. Where the Marble teaching research bundled with Jane has a record for a pack's topic, the pack's representations and replies follow it; section 9 says which.
+Each future extension should author the same Jane-derived shape as [spec 118's desk](118-keepers-desk-entry.md#3-conventions-that-make-the-desk-feel-different): a learn card with one worked example first (foldable with **I know this, show me the question**), a guided first case, then unguided cases, and the **I'm stuck** ladder of hint, similar worked example, then skip. Where the Marble teaching research bundled with Jane has a record for a pack's topic, the pack's representations and replies follow it; section 9 says which.
+
+### Implementation boundaries still to specify
+
+Before implementing any row, write and independently review its bounded model, actions/UI, source shape/version, validation, kept-result and recovery behavior. Use the existing bench spec for unchanged behavior; explicitly supersede only the old exclusions needed by the new optional mode. No current pack or historical result is migrated, regraded or rewritten just to fit a new mode. Each row needs a complete finite teaching/help/feedback pack before its own build. This does not call for a generic migration or pack framework.
+
+| Proposal | Required extension; current capability is narrower |
+| --- | --- |
+| Balance | Per-pan counts of equal-mass parcels, bags/opening, paired parcel removal and a ledger; spec 64 v1 has exactly one fixed parcel. Define finite counts/masses and atomic moves. Bramble's no/every-mass labels below are a separately deferred extension. |
+| Seed | A distinct two-draw-without-replacement model and 15-trial sets; spec 87 v1 returns each seed and permits six draws per run. Keep old run shapes intact. |
+| Sorting | Size and square-stamp features, three baskets, two ordered tests and NOT; spec 84 v1 has two baskets and one stamp/wrap if/else. Define the new trace and saved source/program shape. |
+| Count Collection | A numeric-observation dataset and paired observations for mean/median/scatter; spec 86 v1 stores categorical imaginary-button counts 0–12. Define units, numerical ranges, chart actions and the precise frozen source/results; do not relabel the old button dataset. |
+| Sentence Bridges | A new finite transient scene/conjunction catalog and complete meaning notes; spec 109's current route/session, no-save/no-learning-record behavior stays unchanged. No per-question saved pack or independent-attempt record is added here. A persisted extension would need a separate commission. |
+| Cartographer / Scale | A bounded map/physical-unit scale-selection and conversion model for the new questions; current map-grid routes and spec 111's fixed 2/4 m-per-edge drawings cannot supply centimetre measurements. Keep existing routes/transient behavior and old saved maps unchanged. |
 
 ## 2. Balance Stall: unknowns on both sides
 
@@ -33,7 +46,7 @@ Bench: [spec 64](64-balance-stall.md). The existing pack has one parcel on one p
 
 After each solved case, the stall's ledger shows the equation beside the balance, for example `3P + 4 = P + 12`, then each move as a line (`2P + 4 = 12`, `2P = 8`, `P = 4`). The explorer can step through the lines and see each one's balance.
 
-**Bramble's labels** (a new mode in this pack; the bench review must decide whether it fits, since these cases do not begin level):
+**Deferred authored idea: Bramble's labels** (outside the first new pack; retain for a separate model/teaching review and commission). No/every-mass cases need symbolic solution-class semantics and cannot be shown honestly as a fixed positive-mass apparatus that always begins level:
 
 > Bramble has written labels for two balances but hasn't tried them. Can each one ever be level?
 
@@ -42,7 +55,7 @@ After each solved case, the stall's ledger shows the equation beside the balance
 
 Reply after both: "Some balances have one answer, some have none, and some work for every mass. The ledger shows which: if the parcels cancel and the units don't match, there's no answer; if everything cancels, every mass works."
 
-**Marble research notes (Solving Linear Equations):** the pack follows its recommended balance model, one true equation per ledger line, collecting the unknown on the side with more by taking the smaller number of parcels from both pans, checking by putting the answer back into the starting balance, and naming the one, none and every-mass cases (Bramble's labels). Its listed misconceptions get authored replies: an operation on one pan only (the contrast above), and a run-on ledger line such as `2P = 8 = 4` ("Each line should be true by itself. 2P isn't 4; P is."). Its advice to handle negative answers explicitly is a **documented exception**: positive masses only, so negative solutions wait for a separate pack with a model that can show them, such as algebra tiles with zero pairs.
+**Marble research notes (Solving Linear Equations):** the pack follows its recommended balance model, one true equation per ledger line, collecting the unknown on the side with more by taking the smaller number of parcels from both pans, checking by putting the answer back into the starting balance, with one positive-mass solution in the first proposed pack. Naming the none/every-mass cases belongs only to the separately deferred Bramble's labels extension. Its listed misconceptions get authored replies: an operation on one pan only (the contrast above), and a run-on ledger line such as `2P = 8 = 4` ("Each line should be true by itself. 2P isn't 4; P is."). Its advice to handle negative answers explicitly is a **documented exception**: positive masses only, so negative solutions wait for a separate pack with a model that can show them, such as algebra tiles with zero pairs.
 
 **Hard prerequisites:** Writing Algebraic Equations, Substituting into Formulae and Using inverse operations have no declared reference in the app. The ledger lines teach the first two inline. The removal moves are inverse operations made concrete.
 
@@ -163,8 +176,8 @@ Bench: [spec 109](109-sentence-bridges.md), which uses *and*, *because* and *but
 | --- | --- | --- |
 | The causeway is cheaper. It floods. | **Although** the causeway is cheaper, it floods. | The flooding is the point the writer wants you to keep. |
 | | The causeway floods, **although** it is cheaper. | The same two facts; now the price is the afterthought. |
-| The courier crosses at the ford. The water is over the stones. | The courier crosses at the ford **unless** the water is over the stones. | High water stops her. |
-| | The courier crosses at the ford **if** the water is over the stones. | The opposite: high water is when she crosses. The source doesn't say this. |
+| The courier normally crosses at the ford. When water covers the stones, she turns back. | The courier crosses at the ford **unless** the water is over the stones. | High water stops her. |
+| | The courier crosses at the ford **if** the water is over the stones. | This says high water is when she crosses; the source instead says she turns back then. |
 | The footbridge takes walkers. The causeway takes carts. | The footbridge takes walkers, **whereas** the causeway takes carts. | A contrast between two things, without saying either is better. |
 
 **Teaching encounter:**
@@ -196,13 +209,13 @@ The research for this topic recommends practising both directions, map to real a
 
 **Candidate topics:** `mt_1badik7iKJ` Scale and similar shapes (age 11+), already the one referenced topic in this source range, now with a chosen scale.
 
-## 8. Acceptance (for each pack)
+## 8. Gates for a future extension (not current build acceptance)
 
-1. The pack is optional, reachable from its bench, and open to every explorer; the existing packs are unchanged.
-2. Every worked value above is reproduced by the bench's model and **Check my working**.
+1. Before build, the extension has its own independently reviewed bounded model/UI/source/preservation contract and complete authored content. It is optional and open to every explorer; existing packs and records stay unchanged.
+2. Its newly specified model reproduces the worked values for the commissioned slice. The old bench model is not claimed to do so; deferred Bramble labels are excluded.
 3. Choice order varies across questions, stays fixed within a saved question, and the fitting choice is not given away by length or tone.
-4. Saved work keeps its pack source ID and version; a later wording or pack edit never rewrites it.
-5. Show me how is recorded as support; familiarity and independent attempts stay separate.
+4. For a commissioned saved mode, work keeps its complete understood frozen source/model and version; a later wording, key or pack edit never rewrites it. Existing transient Sentence Bridges and Scale remain transient; no save requirement is imposed on them by this proposal.
+5. In saved modes, initially shown teaching/guided work and later requested help remain distinct support context, and familiarity stays separate from attempts. Folding never clears shown support or makes an attempt independent. Transient benches keep their existing no-learning-record contract.
 6. No band, age or level is written by choosing a pack.
 
 ## 9. Upstream overlap (AGENTS.md)
