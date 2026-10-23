@@ -85,6 +85,8 @@ The review question was whether the spine should be six linear acts or a repeati
 
 **The acts are the plot.** An act advances by contributions, never by date and never by age. Each act after the first has four chapters. When an explorer has made a story contribution in three of them, the act's ending scene opens; the fourth chapter stays playable. A story contribution is whatever kept, sent or offered outcome the activity's own spec defines. Help, skips inside the activity, a smaller supported plan and work done together all count the same. Act I keeps its existing ending: six served tables at the welcome-back supper.
 
+**Festival jobs also count toward the current act.** Each act's chapters list which festival jobs can feed them (for example, Act II's "garden across the seasons" accepts any spring planting or winter almanac job). A festival job never counts twice, and a festival with no fitting chapter in the current act still fills its own seasonal job as in spec 33. This is how the calendar feeds the plot without ever pacing it.
+
 An act's ending wears the season the explorer reaches it in. A child who reaches the Act II celebration in winter sees it under lanterns.
 
 The festivals keep the town alive between acts. A child who plays for years without pushing the acts sees the seasons turn and the town deepen; a child who plays a lot in one month can reach Act III before the leaves fall. Both are fine.
@@ -237,11 +239,12 @@ Decided by Joshua, 2026-10-23:
 - **Keep the marsh twist.** The town's own past choice made the floods worse, investigated in Act IV with no official answer.
 - **Vadoalto is Spanish-speaking**, and the valley may sit between France and Spain. Section 4 places it in the Pyrenees, with a French town downstream.
 - **Valencia 1957** is the next archive pack to author.
+- **Both clocks** (section 6): real-calendar festivals as the yearly rhythm, acts advanced by contributions.
+- **Storm Day** on each explorer's first-visit anniversary.
+- **Festival jobs count toward the current act's chapters** where a chapter lists them.
+- Spanish text keeps ***ustedes***.
 
-Still open:
-
-1. **Seasons and acts together** (section 6): festivals as the yearly rhythm, acts advanced by contributions. The alternative is acts only.
-2. **Storm Day** on each explorer's first-visit anniversary.
+No story decisions remain open. Review, Spanish and French reading, and the archive packs' source checks remain (section 14).
 
 ## 14. Review
 
