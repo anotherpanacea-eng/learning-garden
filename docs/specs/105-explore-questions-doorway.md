@@ -1,6 +1,6 @@
 # 105 · Questions to follow: a smaller Explore doorway
 
-**Status:** independently reviewed specification; independent implementation review cleared `9fa6373`; the composed candidate awaits final exact-head release review and publication decision. **Home:** `#explore`. **Source audit:** [105](../source-audits/105-explore-questions-doorway.md). **Visual proposal:** [interactive mock](assets/105-explore-questions-doorway.html). This is navigation and authored connective copy, not a new lesson, learner model, assessment, or curriculum-map declaration.
+**Status:** independently reviewed specification; implemented, independently reviewed and merged in [PR110](https://github.com/anotherpanacea-eng/learning-garden/pull/110); publication remains separate. **Home:** `#explore`. **Source audit:** [105](../source-audits/105-explore-questions-doorway.md). **Visual proposal:** [interactive mock](assets/105-explore-questions-doorway.html). This is navigation and authored connective copy, not a new lesson, learner model, assessment, or curriculum-map declaration.
 
 ## Why this change
 
