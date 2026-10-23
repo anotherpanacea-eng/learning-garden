@@ -2,7 +2,7 @@
 
 Companion to [spec 120](../specs/120-keeper-of-the-ways.md). Child-facing text for the build to use as written, after the same independent review as the spec. `{guide}` is the chosen companion's name. `{courier}` is the explorer's courier. Pip is a fox (he/him); Dot is a ladybug (she/her); Bramble is a girl witch (she/her); Hollis is a grey heron (they/them); Nuria is an otter (she/her). Willowbank, Willow Brook, the Sponge, Hollis and Vadoalto are fiction. Nothing here is scored.
 
-Spanish text is a first draft for review by a fluent reader. It uses *ustedes* throughout.
+Spanish and French text is a first draft for review by fluent readers. The Spanish uses *ustedes* throughout. Léon (kingfisher, he/him) keeps the ferry at Les Saules, the French town downstream.
 
 ## 1. The parcel
 
@@ -192,7 +192,7 @@ Then page 2 and Nuria's first letter (section 5).
 - *The floating market.* Boats come down from Vadoalto loaded with reed baskets and big round loaves. Pip tries to trade one apple for one loaf. The baker from Vadoalto laughs and says they'll need to talk about sizes.
 - *The seed exchange.* Vadoalto grows a tall reed that loves wet ground. "It's good for baskets and roofs," says Nuria, "and the ground near the river is always wet anyway." Willowbank's orchard keepers want reed for baskets. Vadoalto wants apple seedlings.
 - *The route by the high ford.* "Ribbons," says {courier}, at the first fork. "Blue on the left post. That must be the way."
-- *Letters with Nuria.* Letters go up and down the river with {courier}.
+- *Letters up and down the river.* Letters go up to Nuria and down to Léon with {courier}.
 
 **Ending** (*Both Ways Across Willow Bridge*):
 > A parcel of apple seedlings goes up the river. A bundle of reeds and a jar of Vadoalto honey come down. Nuria comes with it, to see the mill. While she's reading over your shoulder, the third page comes free.
@@ -275,11 +275,19 @@ Then page 3.
 > **The brook is rising at Vadoalto. You have until evening.**
 >
 > In Willowbank, the bell rings. Everyone knows what to do, because they've talked about nothing else for months.
+>
+> Then Dot remembers Les Saules. "If it's coming here," she says, "it's going there next."
+
+**Passing the warning on** (the explorer sends it; Sprout taps **Send**, Seedling chooses the French sentence that matches the English, Sapling and the desk write it from the word cards):
+> **The brook is rising. It will reach you tomorrow morning. From Willowbank.**
+> **Le ruisseau monte. Il arrivera chez vous demain matin. De la part de Willowbank.**
+
+**After sending:** {courier} is already halfway down the river path.
 
 Then the scene for the explorer's kept plan:
 
 - **The Wall:**
-  > The water climbs the new wall and stops. Behind it, the orchard is dry and the mill boards hold. Downstream, past the end of the wall, the water spreads wide over the meadow by the ferry, and the ferry can't run for two days. The wall did what walls do. It kept this side safe and sent the water on.
+  > The water climbs the new wall and stops. Behind it, the orchard is dry and the mill boards hold. Downstream, past the end of the wall, the water spreads wide over the meadow by Léon's ferry, and the ferry can't run for two days. The wall did what walls do. It kept this side safe and sent the water on.
 
 - **The Sponge:**
   > The water reaches the low fields and spreads out. The reeds bend under it. It slows. The brook reaches the mill an hour later than it used to, and it never comes over the boards. At the low corner, three apple trees stand up to their knees in water. The orchard keeper sighs, and goes to check on the reeds.
@@ -315,7 +323,7 @@ Then page 6, Hollis's letter.
 
 **After the ending, the village line becomes:** *Willowbank, by Willow Brook. The Ways are open.*
 
-## 5. Letters from Nuria
+## 5. Letters up and down the river
 
 Shown in the existing letter-and-reader pattern, at three lengths. The explorer chooses English, Spanish, or both side by side.
 
@@ -338,6 +346,30 @@ Shown in the existing letter-and-reader pattern, at three lengths. The explorer 
 > ¡Hola, Willowbank!
 > La tormenta también pasó por Vadoalto. Nuestro poste de crecidas dice que el arroyo subió más alto de lo que nadie aquí recuerda. ¿Y el de ustedes? Estoy aprendiendo a cuidar nuestro poste y me gustaría comparar notas con quien cuide el suyo. ¿Me escriben?
 > Nuria, aprendiz del poste de crecidas, Vadoalto
+
+### Léon's first letter (Act III)
+
+**English, short:**
+> Hello, Willowbank! I'm Léon. I keep the ferry at Les Saules, downstream. It's running again. Send news!
+
+**English, longer:**
+> Hello, Willowbank!
+> My name is Léon. I keep the ferry at Les Saules, where your brook joins the big river. After the storm, the water came over our landing and the ferry couldn't cross for a week. It's running again now. Nuria from Vadoalto says you are keeping records. Will you send us yours? We'll send ours.
+> Léon
+
+**French, short:**
+> Bonjour, Willowbank ! Je m'appelle Léon. Je garde le bac aux Saules, en aval. Il fonctionne de nouveau. Envoyez des nouvelles !
+
+**French, longer:**
+> Bonjour, Willowbank !
+> Je m'appelle Léon. Je garde le bac aux Saules, là où votre ruisseau rejoint la grande rivière. Après la tempête, l'eau est montée sur notre embarcadère et le bac n'a pas pu traverser pendant une semaine. Maintenant, il fonctionne de nouveau. Nuria, de Vadoalto, dit que vous tenez des registres. Vous nous envoyez les vôtres ? Nous vous enverrons les nôtres.
+> Léon
+
+### Léon's reply after the long rain (Act VI)
+
+> **English:** Thank you! Your warning came in time. We tied up the ferry and moved everything up the hill. Next time it rains, we'll pass it on too. Léon
+>
+> **French:** Merci ! Votre message est arrivé à temps. Nous avons attaché le bac et tout monté sur la colline. La prochaine fois qu'il pleut, nous le ferons passer aussi. Léon
 
 ### The rain gauge letter (Act IV)
 
@@ -498,3 +530,43 @@ One chapter per act, showing the same scene with jobs at each depth. Prompts are
 - **A stuck page:** a curled edge and one readable word.
 - **The plan page** (after Act IV): *The plan you kept for the low fields: {plan}.* Followed by the worry, if one was added.
 - **Hollis's letter** (after Act VI): shown last, on its own page, with the heading *From Hollis.*
+
+## 10. Archive pack outline: Valencia, 1957
+
+Joshua chose this as the next archive pack (2026-10-23). This is an outline for the pack's own spec and source review. Every fact below must be checked against primary or official sources before any child text is final; the dates marked *(check)* disagree across the sources consulted so far.
+
+**Title:** *The River That Moved* / *El río que se mudó*
+
+**Why it belongs:** Valencia had a terrible flood, then made two big choices. The city moved its river, and its people turned the empty riverbed into a garden. Act IV's argument asks what a town should do about its river; here is a real city that answered, in two parts, with people disagreeing along the way.
+
+**Timeline for the pack:**
+
+| When | What happened |
+| --- | --- |
+| 14 October 1957 | The Turia flooded Valencia, in two waves on the same day. Much of the city was under water. Many people died. |
+| 1958 | The national government chose the *Plan Sur*: dig a new channel for the river around the south of the city. |
+| 1960s, finished about 1969 *(check)* | The new channel was dug: about 12 km long and up to 175 m wide *(check)*. |
+| 1966 | A city plan proposed building a road along the dry old riverbed. |
+| 1970s | Neighbors campaigned for a park instead, under the slogan *El llit del Túria és nostre i el volem verd*: "The Turia's bed is ours, and we want it green." |
+| 1978 | The city council decided the whole old riverbed would be a garden. |
+| 1981 | The architect Ricardo Bofill was asked to plan the park. |
+| 1986 *(check)* | The first parts of the garden opened. Today it runs for about 9 km through the city *(check)*. |
+
+**Short text (English):** In 1957, the river in Valencia flooded the city. Afterward, the city dug a new path for the river, around the outside. The old riverbed was left dry. Some people wanted a road there. Neighbors wanted a garden. Today it is a long, green park.
+
+**Short text (Spanish):** En 1957, el río de Valencia inundó la ciudad. Después, la ciudad excavó un camino nuevo para el río, por fuera. El cauce viejo quedó seco. Algunas personas querían una carretera allí. Los vecinos querían un jardín. Hoy es un parque largo y verde.
+
+**The slogan, for older learners:** The neighbors wrote it in Valencian, the language many people in Valencia speak alongside Spanish. In Spanish it would be *El cauce del Turia es nuestro y lo queremos verde.* Comparing the two is a small lesson in how close the languages are.
+
+**Jobs, one per depth:**
+
+| Depth | Job |
+| --- | --- |
+| Sprout | Two pictures of the same place: a river full of water, and a garden with paths and trees. "What changed?" |
+| Seedling | Put four events in order: the flood, the new channel, the neighbors' campaign, the park opening. |
+| Sapling | "The city did two things: it moved the river, and it made a garden. Which one protects the city from floods? Which one did the neighbors ask for?" (keeps evidence and purpose separate) |
+| Keeper's Desk | Read short sources from both sides of the road-or-garden argument. Who wanted what, and why? Then: Willowbank's plans are the Wall, the Sponge and Some of Each. Valencia did something none of them do: it moved the river. Why might Willowbank be unable to do that? |
+
+**Care with the hard part.** The flood killed people; official and unofficial counts differ widely. Child text says "many people died" once, plainly, with no number in the short version. The desk version may give the sourced figures with their disagreement, which is itself a lesson in sources. A grown-up note says that Valencia flooded again in 2024, that this pack is about 1957, and that it does not cover the recent flood; per spec 120, the pack does not use it.
+
+**Sources to review before writing final text:** Valencia city council's history of the old riverbed; contemporary 1957 newspaper reports; official records of the Plan Sur decision; the 1978 council decision; credited photographs of the 1957 flood and of the garden today, with rights checked.

@@ -15,7 +15,7 @@ The six acts have purposes (recovery, belonging, exchange, disagreement, authors
 
 ## 2. The story in one paragraph
 
-On the morning after the storm, Pip and Dot find a waterlogged parcel wedged against their flowerpot. It is addressed **To the Keeper of the Ways, Willowbank, by Willow Brook**, and nobody in Willowbank knows who that is. The pages are stuck together, so they are laid on the bakery windowsill to dry, and one page comes free at the end of each act. The pages tell a slow story: Willow Brook used to wander through a wide marsh called the Sponge; long ago the town drained the Sponge for orchard fields and straightened the brook; floods have come faster since. The pages were written by **Hollis**, an old grey heron who kept the town's flood records and kept its paths open to the towns upstream and down, and who retired to the coast. Willowbank recovers (I), becomes a town of its own (II), makes friends upstream in the town of **Vadoalto** (III), argues honestly about whether to build a higher wall or give the brook back some of its marsh (IV), and lets each explorer chase a question of their own (V). In the last act a long rain comes. Vadoalto sends warning down the river, the town's plan holds, and Hollis comes home to see it. The last page says what the parcel was for: the Keeper of the Ways is whoever keeps the record and keeps the ways open. The explorer has been doing both. A new apprentice arrives with an unfamiliar parcel, and the explorer helps them begin (VI).
+On the morning after the storm, Pip and Dot find a waterlogged parcel wedged against their flowerpot. It is addressed **To the Keeper of the Ways, Willowbank, by Willow Brook**, and nobody in Willowbank knows who that is. The pages are stuck together, so they are laid on the bakery windowsill to dry, and one page comes free at the end of each act. The pages tell a slow story: Willow Brook used to wander through a wide marsh called the Sponge; long ago the town drained the Sponge for orchard fields and straightened the brook; floods have come faster since. The pages were written by **Hollis**, an old grey heron who kept the town's flood records and kept its paths open to the towns upstream and down, and who retired to the coast. Willowbank recovers (I), becomes a town of its own (II), makes friends upstream in the town of **Vadoalto** (III), argues honestly about whether to build a higher wall or give the brook back some of its marsh (IV), and lets each explorer chase a question of their own (V). In the last act a long rain comes. Vadoalto sends warning down the river, Willowbank passes it on to the French town of **Les Saules** below, the town's plan holds, and Hollis comes home to see it. The last page says what the parcel was for: the Keeper of the Ways is whoever keeps the record and keeps the ways open. The explorer has been doing both. A new apprentice arrives with an unfamiliar parcel, and the explorer helps them begin (VI).
 
 ## 3. Why this story
 
@@ -41,6 +41,12 @@ Existing characters keep their established descriptions. New characters are prop
 | **The apprentice**, *from spec 49* | A newcomer with an unfamiliar parcel. | Arrives in the final scene. Spec 49's "teach the apprentice" proposals can bring them in earlier as a learner the explorer helps. |
 
 Vadoalto ("high ford") is an ordinary modern riverside town whose people speak Spanish. It is a partner with its own knowledge, needs and opinions, never a place to be rescued. Its text needs review by a fluent Spanish reader before build.
+
+**Les Saules** ("the willows"), *new*, is the French-speaking town downstream, where Willow Brook joins a bigger river on its way north. Its ferry keeper, **Léon** (kingfisher, he/him), writes short letters in French and English. Les Saules appears in Act III's correspondence and in Act VI, when Willowbank passes the warning on. French text needs review by a fluent French reader.
+
+### Where the valley is
+
+Willow Brook runs down a valley in the Pyrenees, from Spain into France. Vadoalto sits upstream on the Spanish side; Willowbank is a small village near the border; Les Saules is downstream in France, and the bigger river eventually reaches the wider country where Paris is. The game's own text stays in English, as now. The river carries both languages: Spanish upstream for the explorers learning Spanish, French downstream for the ones learning French, with Paris still at the far end of the post road. Willowbank, the Sponge, Vadoalto and Les Saules are fictional, and no real river is named, so the town's flood history never pretends to be a real place's. The archive packs supply the real history, and several of them now come from the same two countries (section 9).
 
 ## 5. The storm parcel
 
@@ -119,7 +125,7 @@ Each act below names the question the child carries, its four chapters with thei
 1. **The floating market.** Vadoalto's traders come downstream by boat. Prices, change and exchange run both ways.
 2. **The seed exchange.** Vadoalto grows a reed that likes wet ground. Willowbank grows apples. Each wants something the other has.
 3. **The route by the high ford.** The courier finds the old path to Vadoalto, marked here and there by faded ribbons. Map scale, timetables and route choice live here.
-4. **Letters with Nuria.** A correspondence in English and Spanish, at three lengths, in the existing letter-and-reader pattern. French readers keep their Paris correspondence; this is a second, parallel door.
+4. **Letters up and down the river.** Nuria writes from Vadoalto in English and Spanish; Léon writes from Les Saules in English and French. Both use the existing letter-and-reader pattern at three lengths, and the Paris correspondence carries on as before.
 
 **Ending:** *Both Ways Across Willow Bridge*. A parcel goes up, a gift comes down. Page 3 comes free, and Nuria recognises Hollis's handwriting: Hollis taught her to read a flood post before they retired to the coast.
 
@@ -156,7 +162,7 @@ Each act below names the question the child carries, its four chapters with thei
 **Chapters:**
 1. **Choose a partner and a purpose.** Willowbank and Vadoalto agree to keep a regular exchange: goods down, news and seeds up.
 2. **Compare routes and keep a plan.** Who carries what, how often, on which Way, and what happens when a Way is closed. The explorer keeps a workable exchange plan, or a smaller companion-supported one.
-3. **The long rain.** Days of rain upstream. Nuria reads Vadoalto's post and sends the courier down the river ahead of the water. Willowbank has hours to prepare. The explorer's Act IV plan meets the water. Each of the three plans has its own short scene, and each holds with an honest cost (companion text). The bridge, the mill and everything the explorer mended stay whole.
+3. **The long rain.** Days of rain upstream. Nuria reads Vadoalto's post and sends the courier down the river ahead of the water. Willowbank has hours to prepare, and it sends the warning on, in French, to Léon at Les Saules: the help that came down the river keeps going down it. The explorer's Act IV plan meets the water. Each of the three plans has its own short scene, and each holds with an honest cost (companion text). The bridge, the mill and everything the explorer mended stay whole.
 4. **The first journey, and someone new.** The rain passes and the first regular exchange goes up the river under the kept plan, with help available. On the way back, Hollis comes home up the river path to see the brook, and stays for supper.
 
 **Ending:** *The Opening of the Ways*. Page 6, Hollis's letter, explains the parcel. Bramble ties a ribbon on each Way. A new apprentice arrives with an unfamiliar parcel, and Dot gets there first. The explorer's guide stays alongside them as they help the apprentice begin. Play continues: festivals, exchanges, investigations and new parcels. The town is never broken again to make a new beginning.
@@ -191,8 +197,9 @@ The Travelers' Archive already holds one real flood, Paris 1910. The story gives
 | Pack | Why it belongs | Act |
 | --- | --- | --- |
 | **Paris, 1910** (built) | A great city flooded, measured the river, studied the flood and recovered. | I, III |
+| **Valencia, 1957, and the Turia gardens** (next to author) | After a disastrous flood, the city moved its river to a new channel south of the city. Citizens then campaigned to make the dry old riverbed a long park instead of a road. A flood that became a garden, with Spanish source reading for older learners. Joshua chose this pack on 2026-10-23; the outline is in the companion text, section 10. | IV, V |
+| **Flood marks in France** | French towns mark the height of great floods on walls and bridges, and the government keeps a public record of these *repères de crues*. Hollis's flood post is the same idea. Toulouse's Garonne flood of June 1875, on a river that rises in Spain and flows into France, is a candidate first example. | II, IV |
 | **The Nile and the Nilometer** | A flood people depended on: the yearly rise brought the soil for farming, and its height was measured on stone gauges. Too low or too high both meant trouble. It ties to the built Egyptian writing objects. | II, IV |
-| **Valencia, 1957, and the Turia gardens** | After a disastrous flood, the city moved its river to a new channel south of the city. Citizens later campaigned to make the dry old riverbed a long park instead of a motorway. A flood that became a garden, with Spanish source reading for older learners. | IV, V |
 | **Room for the River, the Netherlands** | A country famous for dikes chose, in many places, to lower floodplains and move dikes back to give rivers room. The Wall and the Sponge as a real national debate. | IV |
 
 Packs must leave out recent floods with many deaths. Facts about wetlands and channels in child text stay modest and checkable: a marsh can hold water and slow it; a straight channel moves water faster; a wall protects what is behind it and can send water elsewhere. None of these settles the town's plan by itself.
@@ -223,12 +230,18 @@ Codex owns the design. The sketch below only fixes the rules from section 6 and 
 
 Per explorer, additive: `story:{arrival, acts:{[actId]:{chapters:[chapterId], ended}}, plan, stormDay, seenScenes:[sceneId]}`. `arrival` is one of `storm | mended | letter`. `plan` is one of `wall | sponge | some-of-each` once kept. `stormDay` is the local day of first story visit. Pages are derived from ended acts and never stored. Contributions record ids only. Unknown ids are dropped from reads without rewriting the save; a missing act or chapter reads as not yet reached. Changing the number of chapters in an act later must not reopen or close an ending already reached.
 
-## 13. Open questions for Joshua
+## 13. Owner decisions
+
+Decided by Joshua, 2026-10-23:
+
+- **Keep the marsh twist.** The town's own past choice made the floods worse, investigated in Act IV with no official answer.
+- **Vadoalto is Spanish-speaking**, and the valley may sit between France and Spain. Section 4 places it in the Pyrenees, with a French town downstream.
+- **Valencia 1957** is the next archive pack to author.
+
+Still open:
 
 1. **Seasons and acts together** (section 6): festivals as the yearly rhythm, acts advanced by contributions. The alternative is acts only.
-2. **The marsh twist**: the town's own past choice made the floods worse, investigated in Act IV with no official answer. The alternative is a storm with no human cause and Act IV about a different disagreement.
-3. **Vadoalto in Spanish**: the upstream partner town gives Spanish a home in the story, in parallel with Paris for French.
-4. **Storm Day** on each explorer's first-visit anniversary.
+2. **Storm Day** on each explorer's first-visit anniversary.
 
 ## 14. Review
 
