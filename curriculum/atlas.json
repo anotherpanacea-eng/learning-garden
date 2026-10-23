@@ -438,7 +438,7 @@
         "build",
         "read"
       ],
-      "scope": "Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Published with the complete game on Cloudflare."
+      "scope": "Finite prefix/suffix constructions, authored scenes, spelling exceptions and open discussion. Encounters are not independent reading or spelling evidence. Built as part of the complete game; current publication is recorded separately in the roadmap."
     },
     {
       "id": "loft",
@@ -824,7 +824,7 @@
         "read"
       ],
       "route": "#science/window",
-      "scope": "Manually cool and warm one supplied window picture, relating visible drops to a separately labelled tiny molecule sample. A conditional evaporation/condensation explanation, not a physical observation, measured rate, weather forecast or full water cycle."
+      "scope": "Manually cool and warm one supplied window picture, relating visible drops to a separately labeled tiny molecule sample. A conditional evaporation/condensation explanation, not a physical observation, measured rate, weather forecast or full water cycle."
     },
     {
       "id": "join-portions",
