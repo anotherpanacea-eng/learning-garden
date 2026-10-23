@@ -1,6 +1,6 @@
 # 114. How shall we begin?
 
-Status: implementation-review candidate. Independent six-lens specification, source and actual static-design gates cleared `a203ac1b8099e72abcff009151f9f70296c192db`; independent implementation/root/Claude clearance remains pending. This records the prior spec gate, not implementation or publication clearance. This is the first optional starting-flow increment from the [current roadmap](../roadmap.md#different-starting-points-current-capability-and-next-work).
+Status: implemented and independently reviewed. Six-lens specification, source and actual static-design gates cleared `a203ac1b8099e72abcff009151f9f70296c192db`; root, separate implementation and Claude source reviews cleared runtime candidate `78304697fef466d14434ad37ec761b8632953096` with no P1/P2 findings. All 153 source-check suites and 239 local Chrome assertions at 320/820 passed; actual final layouts and focus were inspected independently. Final documentation-only changes receive a separate follow-up before merge. Production deployment remains deferred. This is the first optional starting-flow increment from the [current roadmap](../roadmap.md#different-starting-points-current-capability-and-next-work).
 
 ## Purpose and bounded outcome
 
