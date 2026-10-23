@@ -815,6 +815,38 @@
       ],
       "route": "#workshop/recut",
       "scope": "Reversibly split or join every equal space in five supplied ribbons while their whole and colored endpoint remain fixed. Equivalent labels are supplied; no independent explanation, arbitrary conversion, physical measurement or saved attainment."
+    },
+    {
+      "id": "cold-window",
+      "name": "Cold Window, Same Water",
+      "status": "built-local",
+      "patterns": [
+        "read"
+      ],
+      "route": "#science/window",
+      "scope": "Manually cool and warm one supplied window picture, relating visible drops to a separately labelled tiny molecule sample. A conditional evaporation/condensation explanation, not a physical observation, measured rate, weather forecast or full water cycle."
+    },
+    {
+      "id": "join-portions",
+      "name": "Join the Portions",
+      "status": "built-local",
+      "patterns": [
+        "build",
+        "read"
+      ],
+      "route": "#cafe/portions",
+      "scope": "Move and return already-cut same-size quarter, third and sixth pieces while the same whole-loaf unit stays fixed. Four supplied cases include five quarters across equal loaf spaces; equations are model readouts, not independent fraction calculation."
+    },
+    {
+      "id": "gathering-budget",
+      "name": "Gathering Budget",
+      "status": "built-local",
+      "patterns": [
+        "allocate",
+        "build"
+      ],
+      "route": "#workshop/budget",
+      "scope": "Revise whole packets for two pretend supply requests under fixed pretend-cent limits. Supplied costs and quantities support several working plans; an optional cost idea is separate. No earned currency, actual purchase, household judgment or saved attainment."
     }
   ],
   "manualReferences": [
@@ -1629,6 +1661,27 @@
       "kind": "explanation",
       "source": "dist/ribbon-recut-ui.mjs",
       "scope": "Split/join equal spaces in five supplied same-whole ribbons, keeping colored length fixed while equivalent labels change. No learner-drawn diagram, independent explanation, arbitrary equivalence, set fractions or number-line point placement. This topic already has a separate scoped practice reference."
+    },
+    {
+      "game": "cold-window",
+      "topicId": "mt_Qkewo5M3_c",
+      "kind": "explanation",
+      "source": "dist/cold-window-ui.mjs",
+      "scope": "Step supplied condensation and evaporation pictures around one window. No independent explanation, temperature/rate relation, physical measurement, precipitation or complete water-cycle sequence."
+    },
+    {
+      "game": "join-portions",
+      "topicId": "mt_CBHwluE6Lp",
+      "kind": "explanation",
+      "source": "dist/join-portions-ui.mjs",
+      "scope": "Join and return equal fractional units with supplied equations, including five quarters of the same whole. No unsupplied calculation, general subtraction, learner-produced mixed number or independent problem-solving claim."
+    },
+    {
+      "game": "gathering-budget",
+      "topicId": "mt_Qzbh-_v0Gq",
+      "kind": "scoped-practice",
+      "source": "dist/gathering-budget-ui.mjs",
+      "scope": "Choose and revise finite pretend packets within a limit while meeting supplied quantities; totals and remaining amount are supplied. No personal allowance plan, independent calculation, saving over time, real purchase or independently explained trade-off."
     }
   ],
   "increments": [
@@ -1637,7 +1690,7 @@
       "name": "Word Workshop",
       "move": "New home; reuse build/read, add carefully reviewed speech/sound representations",
       "spec": "docs/specs/04-word-workshop.md",
-      "first": "First word-part release published on Cloudflare; reviewed phonics audio and sound/letter activities remain future work.",
+      "first": "Word-part activities are merged; reviewed phonics recordings and a separately reviewed sound/letter player remain future work.",
       "gap": "Current story comprehension does not teach or assess the missing phonics/decoding/transcription sequence."
     },
     {
@@ -1645,16 +1698,16 @@
       "name": "Living Garden field notebook and food webs",
       "move": "Extend search/inspect/compare",
       "spec": "docs/specs/23-living-garden.md",
-      "first": "Compare organisms and conditions, make a simple food-energy chain, return under changed conditions, keep a table and explanatory note.",
-      "gap": "Current habitat matching omits interdependence, plant needs/growth and extended data collection; later simulations need reviewed assumptions."
+      "first": "Habitat pictures, plant study, field notebooks/charts and supplied food-link models are built. Physical surveys and wider ecological investigation remain later work.",
+      "gap": "Supplied relationships and reported notebook values do not establish real identification, controlled field investigation or population prediction; later simulations need reviewed assumptions."
     },
     {
       "priority": 3,
       "name": "Café bakery and market",
       "move": "Extend assemble/allocate/check",
       "spec": "atlas proposal",
-      "first": "Split a recipe into equal parts, measure ingredients, then use pretend prices and change.",
-      "gap": "Fractions, units and money need new representations and questions; stock counting alone is not those lessons."
+      "first": "Sharing and fraction models, measured recipe planning, Coin Counter, Market Change and Gathering Budget are built as separate bounded activities.",
+      "gap": "Unlike-denominator operations, unit conversion, noninteger ratios, independent written methods and real spending decisions remain distinct lessons; no single café result completes them."
     },
     {
       "priority": 4,
@@ -1662,28 +1715,28 @@
       "move": "Extend compose/execute/revise",
       "spec": "docs/specs/40-changing-letters.md",
       "first": "Implemented: a continuing twelve-letter library with different readers, paired details, purpose-aware revisions and voluntary suggestions; frozen drafts, first-kept evidence and familiar rereading remain separate.",
-      "gap": "Map legend, direction and scale, broader composition and independent writing observation remain future work."
+      "gap": "Finite grid maps, routes and clocks are built. Wider geographic conventions, scale, broader elapsed time and sustained independent writing remain future work."
     },
     {
       "priority": 5,
       "name": "Travelers’ Archive",
       "move": "New historical evidence game; reuse read/infer/support and search",
       "spec": "docs/specs/24-travelers-archive.md",
-      "first": "Compare two short accounts or artifacts, place an event on a timeline/map, explain what each source can and cannot tell us.",
-      "gap": "History currently has no declared learning activity references; a story setting alone does not teach historical inquiry."
+      "first": "Paris1910 source/photo/date and map tasks, two Egyptian writing-object readings and Exhibit Label Maker are built with their own source limits.",
+      "gap": "Wider periods, chronology, competing accounts, missing voices and learner-authored research remain untaught; the town story is not historical evidence."
     },
     {
       "priority": 6,
       "name": "Sound and Light Studio",
       "move": "New create/perform/reflect mode, with experiment",
       "spec": "atlas proposal",
-      "first": "Change a sound or shadow, measure a pattern, make a short rhythm or light composition and revise it.",
-      "gap": "Waves/sound/light and creative music/art need auditory/spatial creation, not only text questions. Recording would need its own privacy decision."
+      "first": "Bell Studio supplies a finite composition/revision foothold and Lantern Circuit a contact-path model. Broader sound, shadow and light investigations remain future work.",
+      "gap": "Wave/sound/light mechanisms and wider creative craft need their own representations, reviewed sound and physical observation. No audio recording is introduced."
     },
     {
       "priority": 7,
       "name": "Story Loft and community circle",
-      "move": "New collaborative story/creation home; reuse read/compose/create",
+      "move": "Extend the existing collaborative story/creation home; reuse read/compose/create",
       "spec": "docs/specs/06-story-loft.md",
       "first": "Puppet theatre (specs36–37) supports optional dialogue and one to twelve scenes. Two Windows (spec59) adds three original paired-fiction events and supplied evidence/message work. Broader retelling, poetry and community-circle conversations remain later scope.",
       "gap": "Speaking/listening, extended composition and personal/social reflection need human context. Do not grade empathy, resilience or virtue from game choices."
