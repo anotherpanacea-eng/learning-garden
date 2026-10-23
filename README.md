@@ -473,6 +473,12 @@ Run `node test/ribbon-recut-checks.mjs`; the optional `node test/ribbon-recut-br
 
 The optional **Cold Window, Same Water** picture at `#science/window` contrasts condensation at an illustrated cool pane with evaporation as it warms again. Paired whole/tiny views keep molecule drawings distinct from visible drops. Controls are temporary and add no visit or progress record. See [spec102](docs/specs/102-cold-window-same-water.md), its [source audit](docs/source-audits/102-cold-window-same-water.md) and [review receipt](docs/reviews/102-cold-window-review.md). Run `node test/cold-window-checks.mjs`; `test/cold-window-browser.js` uses a local `dist` server through `COLD_WINDOW_TEST_URL` and the established Playwright/Chrome environment. The [current roadmap](docs/roadmap.md) records publication separately.
 
+## Join the Portions
+
+At `#cafe/portions`, move already-cut quarter, third or sixth pieces onto a shared tray, then return them. Four open jobs keep the same whole and piece size while the amount on the tray changes; the last joins five quarters across two equal loaf spaces. This supplied teaching model is transient and unscored, with ordinary links to the café and Ribbon Recut. It creates no stock, order, progress or notes record. See [spec 103](docs/specs/103-join-the-portions.md) and its [source audit](docs/source-audits/103-join-the-portions.md) and [review receipt](docs/reviews/103-join-the-portions-review.md). Publication status belongs to the [current roadmap](docs/roadmap.md).
+
+Run `node test/join-portions-checks.mjs`; the optional `node test/join-portions-browser.js` uses `PORTIONS_TEST_URL` for a local `dist/` server and the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` setup. Browser checks use fictional saves and establish local interaction/transfer behavior, not physical-device compatibility or fraction attainment.
+
 ## Gathering Budget
 
 At `#workshop/budget`, choose packets for one of two pretend gathering requests. The pictured basket shows supplied units and cost; checking a plan separately reports whether it meets the request, fits the limit, and matches an optional cost idea. Several baskets work. This is a transient table, with no saved budget, rewards, or judgment about real family choices. See [spec 104](docs/specs/104-gathering-budget.md) and its [source audit](docs/source-audits/104-gathering-budget.md) and [review receipt](docs/reviews/104-gathering-budget-review.md).

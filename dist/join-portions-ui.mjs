@@ -1,0 +1,56 @@
+import {portionCases,portionCase,portionModel,movePortion} from './join-portions-core.mjs';
+import {hearButton} from './play-media.mjs';
+const units={3:['third','thirds'],4:['quarter','quarters'],6:['sixth','sixths']};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const word=(count,d)=>units[d][count===1?0:1];
+const reference='Our unit is one whole model loaf. Both portions use this same-size whole.';
+const contrast='Here we join portions: the same-sized fractional unit, more total amount on the tray. At Ribbon Recut we changed the size of the fractional units while the colored amount stayed fixed.';
+const modelNote='A pretend uniform loaf model, not weighed food. Supplied pictures and labels are for exploring together.';
+const exampleCase={a:1,b:1,d:4};
+const exampleCopy=[
+ 'One quarter waits on the tray. One equal quarter waits beside it. No piece has moved yet.',
+ 'Move the waiting quarter beside the first. Two quarter-size pieces are on the tray: 1/4 + 1/4 = 2/4.',
+ 'Return that same piece. The tray has one quarter again. The piece has moved; its size has not changed.'
+];
+let visit=null,owner=null;
+export function resetPortionsSession(){visit=null;owner=null;}
+export function portionsSession(){return visit?{...visit}:null;}
+function current(id){if(owner!==id){resetPortionsSession();owner=id;}return visit;}
+const button=(attrs,label,disabled=false)=>`<button type="button" class="secondary" ${attrs}${disabled?' disabled':''}>${esc(label)}</button>`;
+function loafRow(c,pieces,kind,row,prefix){
+ const w=264/c.d,id=`portions-${prefix}-${kind}-${row}`;
+ const outline=kind==='waiting'?'':`<g class="portions-capacity"><rect x="33" y="10" width="264" height="44" rx="2"/>${Array.from({length:c.d-1},(_,i)=>`<path d="M${33+(i+1)*w} 10v44"/>`).join('')}</g>`;
+ const food=pieces.filter(p=>kind==='waiting'||Math.floor(p.slot/c.d)===row).map(p=>`<g data-portions-piece="${p.id}" data-origin="${p.origin}"><rect x="${33+(p.slot%c.d)*w}" y="10" width="${w}" height="44" fill="url(#${id}-${p.origin})"/><text x="${33+(p.slot%c.d+.5)*w}" y="38">${p.id}</text></g>`).join('');
+ const label=kind==='guide'?`Reference only: one whole loaf divided into ${c.d} equal ${units[c.d][1]}; not extra food.`:kind==='waiting'?`Waiting pieces: ${pieces.map(p=>p.id).join(', ')||'none'}. Each piece is one ${units[c.d][0]} of the same-size loaf.`:`Tray loaf space ${row+1}. Pieces: ${pieces.filter(p=>Math.floor(p.slot/c.d)===row).map(p=>p.id).join(', ')||'none'}. Empty spaces are not food.`;
+ return `<svg class="portions-row" data-portions-row="${kind}" viewBox="0 0 330 64" role="img" aria-label="${esc(label)}"><defs><pattern id="${id}-a" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#f9dfa4"/><path d="M-2 8L8-2M6 10L10 6" stroke="#b77f3c"/></pattern><pattern id="${id}-b" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#fff0cb"/><circle cx="4" cy="4" r="1.1" fill="#a37533"/></pattern></defs>${outline}${food}</svg>`;
+}
+function wholeName(c,m){return m.trayCount===c.d?`${c.d}/${c.d} is one whole loaf.`:m.trayCount===5&&c.d===4?'5/4 is one whole loaf and one quarter of the same-size loaf.':'';}
+function readout(c,k,m){return `Started on tray: ${c.a}/${c.d}. Moved from B: ${k}/${c.d}. Now on tray: ${m.trayCount}/${c.d}. Waiting B: ${m.waitingCount}/${c.d} loaf. ${wholeName(c,m)}`;}
+function picture(c,k,prefix){
+ const m=portionModel(c,k);
+ return `<div class="portions-picture"><div class="portions-reference"><strong>Unit guide: one whole loaf, ${c.d} equal ${units[c.d][1]}</strong><span>Reference only: not extra food</span>${loafRow(c,[],'guide',0,prefix)}</div><div><strong>Waiting B: ${m.waitingCount} ${word(m.waitingCount,c.d)} (${m.waitingCount}/${c.d} loaf)</strong>${loafRow(c,m.waiting,'waiting',0,prefix)}</div><div class="portions-tray"><strong>On the tray: ${m.trayCount} ${word(m.trayCount,c.d)} (${m.trayCount}/${c.d} loaf)</strong>${Array.from({length:m.rowCount},(_,r)=>`<div><span>Room for one same-size whole loaf</span>${loafRow(c,m.tray,'tray',r,prefix)}</div>`).join('')}</div></div>`;
+}
+function equation(c,k,m){return `<div class="portions-equation" aria-label="${esc(readout(c,k,m))}"><div><small>Started on tray</small><b>${c.a}/${c.d}</b></div><span>+</span><div><small>Moved from B</small><b>${k}/${c.d}</b></div><span>=</span><div><small>Now on tray</small><b>${m.trayCount}/${c.d}</b></div></div>${k===0?'<p>No B pieces have moved yet.</p>':''}${wholeName(c,m)?`<p class="portions-whole-name">${wholeName(c,m)}</p>`:''}`;}
+function status(c,v,m){
+ const counts=`Now ${m.trayCount} ${word(m.trayCount,c.d)} ${m.trayCount===1?'is':'are'} on the tray; ${m.waitingCount} ${word(m.waitingCount,c.d)} ${m.waitingCount===1?'is':'are'} waiting.`;
+ return v.lastAction?`One ${units[c.d][0]} ${v.lastAction==='move'?'moved to the tray':'returned to waiting'}. ${counts}`:'A starts on the tray; B is still waiting.';
+}
+function catalog(){return `<div class="portions-catalog">${portionCases.map(c=>button(`data-portions-start="${c.id}"`,c.title)).join('')}</div>`;}
+function learn(){const frame=visit.exampleFrame,k=frame===1?1:0,m=portionModel(exampleCase,k);return `<section aria-labelledby="portions-learn-title"><h3 id="portions-learn-title" tabindex="-1">Keep the pieces the same size</h3><p>The bottom number names the size of our pieces. The top number counts those pieces. Joining quarter-size pieces gives more quarters on the tray; it does not make the pieces smaller.</p><p>A whole loaf here is always this same size. Empty outlines show room, not extra food. Moving food changes what is on the tray, but not how much food is here altogether.</p><p><strong>A separate supplied example.</strong> This picture does not move the pieces in your job.</p><div class="portions-example-actions">${[0,1,2].map(i=>button(`data-portions-example="${i}" aria-pressed="${frame===i}"`,`Example picture ${i+1}`)).join('')}</div>${picture(exampleCase,k,'example')}<p id="portions-example-copy" tabindex="-1">${exampleCopy[frame]}</p>${equation(exampleCase,k,m)}${hearButton(`${reference} Separate supplied example. ${exampleCopy[frame]} ${readout(exampleCase,k,m)}`,'Hear this picture')}</section>`;}
+function join(c,v){const m=portionModel(c,v.k),s=status(c,v,m);return `<section aria-labelledby="portions-join-title"><h3 id="portions-join-title" tabindex="-1">Move one waiting piece onto the tray. Return it whenever you like.</h3>${picture(c,v.k,'live')}<div class="portions-actions">${button('data-portions-move="move"',`Move one ${units[c.d][0]} to the tray`,v.k===c.b)}${button('data-portions-move="return"',`Return one ${units[c.d][0]} to waiting`,v.k===0)}</div><p id="portions-status" role="status">${s}</p>${v.k===c.b?'<p>Both starting portions are on the tray. You can return a piece or choose another job.</p>':''}<p class="portions-legend">A pieces: striped. B pieces: dotted. Empty outlines are not food.</p>${equation(c,v.k,m)}${hearButton(`${c.title}. ${c.request} ${reference} ${s} ${readout(c,v.k,m)}`,'Hear this picture')}<details><summary>Why does the bottom number stay the same?</summary><p>We are counting equal ${units[c.d][1]} of the same-size loaf. No cuts changed, so each piece is still one ${units[c.d][0]}. We add pieces to the tray, not pieces to the whole-loaf definition.</p></details><details><summary>Talk together</summary><p>What changes when a piece moves? What stays the same about each piece and the whole loaf? Where is every A and B piece now?</p></details></section>`;}
+export function portionsEntry(){return '<section class="portions-entry"><h2>Join the Portions</h2><p>Bring same-size loaf pieces together for the shared table. Move a piece, then return it.</p><a class="secondary" href="#cafe/portions">Join the portions</a></section>';}
+export function portionsPage(explorerId){
+ const v=current(explorerId),c=portionCase(v?.caseId);
+ return `<div class="portions-page"><header class="page-heading"><a class="back" href="#cafe">← Café</a><h1>Join the Portions</h1><p>Moss is bringing loaf portions to the café's shared table. Move the food; keep the size of each piece.</p></header><div class="portions-sheet">${c?`<h2 id="portions-case-title" tabindex="-1">${esc(c.title)}</h2><p>${esc(c.request)}</p><p class="portions-unit">${reference}</p><nav class="portions-turns" aria-label="Open turns">${['learn','join'].map(view=>button(`data-portions-view="${view}" aria-pressed="${v.view===view}"`,view==='learn'?'Learn':'Join')).join('')}</nav>${v.view==='learn'?learn():join(c,v)}<details class="portions-choose"><summary>Choose another portion job</summary><p>This screen visit is not saved. Another job starts with its original portions.</p>${catalog()}</details>`:`<h2 id="portions-chooser-title" tabindex="-1">Choose a portion job</h2><p>Every job is open. Start with quarters for supper, or choose any job.</p><p>This screen visit is not saved. Another job starts with its original portions.</p>${catalog()}`}<p class="portions-model-note">${modelNote}</p><details><summary>Compare with Ribbon Recut</summary><p>${contrast}</p><a class="portions-link" href="#workshop/recut">Compare with Ribbon Recut</a></details><a class="portions-link" href="#cafe">Take the idea back to the café</a><p>Tell your café partner which whole you used and how much went on the tray.</p></div></div>`;
+}
+export function bindPortions({render,focus,explorerId}){
+ const root=document.querySelector('.portions-page');if(!root)return;
+ const capturedOwner=explorerId(),capturedVisit=current(capturedOwner);
+ const live=()=>root.isConnected&&document.querySelector('.portions-page')===root&&location.hash==='#cafe/portions'&&explorerId()===capturedOwner&&owner===capturedOwner&&visit===capturedVisit;
+ const redraw=selector=>{render();focus(selector);};
+ root.querySelectorAll('[data-portions-start]').forEach(b=>b.addEventListener('click',()=>{if(!live()||!portionCase(b.dataset.portionsStart))return;visit={caseId:b.dataset.portionsStart,k:0,view:'learn',exampleFrame:0,lastAction:null};redraw('#portions-case-title');}));
+ root.querySelectorAll('[data-portions-view]').forEach(b=>b.addEventListener('click',()=>{if(!live()||!visit||!['learn','join'].includes(b.dataset.portionsView))return;visit={...visit,view:b.dataset.portionsView,exampleFrame:0};redraw(visit.view==='learn'?'#portions-learn-title':'#portions-join-title');}));
+ root.querySelectorAll('[data-portions-example]').forEach(b=>b.addEventListener('click',()=>{const frame=Number(b.dataset.portionsExample);if(!live()||!visit||visit.view!=='learn'||![0,1,2].includes(frame))return;visit={...visit,exampleFrame:frame};redraw(`[data-portions-example="${frame}"]`);}));
+ root.querySelectorAll('[data-portions-move]').forEach(b=>b.addEventListener('click',()=>{if(!live()||visit?.view!=='join')return;const next=movePortion(visit,b.dataset.portionsMove);if(!next)return;visit=next;const c=portionCase(visit.caseId),reverse=b.dataset.portionsMove==='move'?'return':'move';redraw(`[data-portions-move="${visit.k===0||visit.k===c.b?reverse:b.dataset.portionsMove}"]`);}));
+ root.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',e=>{if(!live()){e.preventDefault();e.stopImmediatePropagation();}},{capture:true}));
+}
