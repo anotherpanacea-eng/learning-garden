@@ -1,6 +1,6 @@
 # 107 — Write the Same Sum
 
-**Status: author draft for independent specification, mathematics, content and rendered-art review. No runtime, atlas or release change is approved by this document.** The [source audit](../source-audits/107-place-value-sum-ledger.md) records the exact overlap and evidence limits. The [responsive original mock](assets/107-place-value-sum-ledger-mock.html) is a visual proposal, not a working lesson.
+**Status: implementation-review candidate. The specification at `f7fcc67cd26a8c23637927f30b1aff50aa1b2fe1` cleared independent six-lens, mathematics, content and rendered-art review before build. Independent implementation review remains in progress; no release is approved by this document.** The [source audit](../source-audits/107-place-value-sum-ledger.md) records the exact overlap and evidence limits. The [responsive original mock](assets/107-place-value-sum-ledger-mock.html) is a visual proposal, not a working lesson.
 
 ## The small missing action
 

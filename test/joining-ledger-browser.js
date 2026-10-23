@@ -146,6 +146,25 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
    ok(restored.joiningOrders.shownBundleExamples.includes('bundle:0:4:1'),'save-off retains successful exposure in actual in-memory notes');
    eq(await p.evaluate(()=>Object.keys(localStorage).filter(k=>k.startsWith('number-garden-v1:'))),[],'save-off ledger writes no persistent explorer notebook');await p.close();
   }
+  {
+   const s=fresh();startJoiningOrder(s,'full-frame-orders');const p=await setup(s);
+   const requested=()=>p.evaluate(()=>window.__utterances.length);
+   await p.evaluate(()=>{window.__oldLedgerHear=document.querySelector('[data-ledger-root] [data-speak]');});
+   await tap(p,'[data-ledger-root] [data-speak]');eq(await requested(),1,'current separate Hear requests its visible caption');
+   await act(p,'join');await p.evaluate(()=>window.__oldLedgerHear.click());
+   eq(await requested(),1,'detached earlier-stage Hear cannot request an obsolete caption');
+   await tap(p,'[data-ledger-root] [data-speak]');eq(await requested(),2,'current joined Hear still requests speech');
+   await p.evaluate(()=>{window.__routeLedgerHear=document.querySelector('[data-ledger-root] [data-speak]');});
+   await go(p,'#notes');await p.evaluate(()=>window.__routeLedgerHear.click());
+   eq(await requested(),2,'Hear retained after route departure cannot request speech');
+   const other=fresh();startJoiningOrder(other,'steady-orders');await importFile(p,other);await go(p,'#numbers/join/ledger');
+   await p.evaluate(()=>window.__routeLedgerHear.click());eq(await requested(),2,'old explorer Hear remains inactive after import switches explorer');
+   await tap(p,'[data-ledger-root] [data-speak]');eq(await requested(),3,'current imported explorer Hear works');
+   await p.evaluate(()=>{window.__explorerLedgerHear=document.querySelector('[data-ledger-root] [data-speak]');});
+   await go(p,'#notes');await tap(p,'#notes-switch-explorer');await tap(p,'[data-select-explorer="explorer-1"]');await go(p,'#numbers/join/ledger');
+   await p.evaluate(()=>window.__explorerLedgerHear.click());eq(await requested(),3,'Hear from the prior selected explorer cannot request speech');
+   await tap(p,'[data-ledger-root] [data-speak]');eq(await requested(),4,'current selected explorer Hear still works');await p.close();
+  }
   eq(errors,[],'no browser page errors');
   console.log('Joining ledger browser: '+count+' assertions passed.');
  }finally{for(const c of contexts)await c.close();await browser.close();}

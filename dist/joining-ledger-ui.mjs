@@ -88,6 +88,8 @@ export function joiningLedgerPage(state,explorerId){
 export function bindJoiningLedger(state,{explorerId,isActive,canExport,save,render,focus}={}){
  const scope=document.querySelector('[data-ledger-root]');if(!scope)return;
  const v=joiningView(state),sourceId=v.source?.id,still=()=>scope.isConnected&&isActive?.()&&joiningView(state).source?.id===sourceId;
+ // Reject obsolete Hear controls before the later global bindSpeech click listener.
+ scope.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',e=>{if(!still()||joiningView(state).source!==v.source){e.preventDefault();e.stopImmediatePropagation();}},{capture:true}));
  const refuse=()=>{const status=scope.querySelector('#ledger-notice');if(!status)return;status.innerHTML='This notebook is too large or complex to record another complete picture safely. Your work is unchanged. <a href="#notes">Download notes</a> first, or use a separate explorer.';focus?.('#ledger-notice');};
  scope.querySelectorAll('[data-ledger-start]').forEach(b=>b.onclick=()=>{
   if(!scope.isConnected||!isActive?.())return;
