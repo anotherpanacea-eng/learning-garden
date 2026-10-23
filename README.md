@@ -113,6 +113,7 @@ node test/hundredths-checks.mjs
 node test/science-checks.mjs
 node test/water-evidence-checks.mjs
 node test/workshop-checks.mjs
+node test/route-scale-checks.mjs
 node test/post-office-checks.mjs
 node test/post-office-ui-checks.mjs
 node test/post-pagination-checks.mjs
@@ -501,3 +502,5 @@ The Explore doorway now offers four open questions about water, sharing, words a
 The optional `node test/explore-questions-browser.mjs` uses `EXPLORE_TEST_URL` for a locally served `dist`, installed Playwright through `PLAYWRIGHT_MODULE`, and optionally `CHROME_PATH` and `EXPLORE_ARTIFACTS`. It checks the real question routes, directory, focus, paused work and synthetic notes download/import at phone/tablet widths.
 
 Sentence Bridges (`#loft/bridges`) keeps three supplied fictional scenes visible while a learner joins two sentence strips with and, because or but, swaps their order, or separates them again. Its exact meaning notes distinguish the tried sentence from what the scene supports. One Undo and optional local Hear are temporary; no notebook, score or independent language evidence is added. See [spec109](docs/specs/109-sentence-bridges.md) and its [source audit](docs/source-audits/109-sentence-bridges.md). Run `node test/sentence-bridges-checks.mjs`; the optional Chrome journey is `BRIDGES_TEST_URL=http://127.0.0.1:4209/ node test/sentence-bridges-browser.js` with the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `BRIDGES_ARTIFACTS` selects synthetic screenshots. These checks do not establish physical-device, audible or language-learning outcomes.
+
+The finite Same route, different scale companion uses `#workshop/scale`. It supplies two drawings of one invented route and records only existing numerical familiarity on disclosure; it has no saved scene or independent-attainment record. Its synthetic browser journey is `node test/route-scale-browser.js` against a local server (`SCALE_TEST_URL`, optional `CHROME_PATH`/`PLAYWRIGHT_MODULE` and `SCALE_ARTIFACTS`).
