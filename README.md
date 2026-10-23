@@ -482,6 +482,12 @@ At `#cafe/portions`, move already-cut quarter, third or sixth pieces onto a shar
 
 Run `node test/join-portions-checks.mjs`; the optional `node test/join-portions-browser.js` uses `PORTIONS_TEST_URL` for a local `dist/` server and the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` setup. Browser checks use fictional saves and establish local interaction/transfer behavior, not physical-device compatibility or fraction attainment.
 
+## Fossil Close-Look
+
+At `#living/fossils`, inspect two real, credited public-domain photographs, enlarge a marked region, and pin one visible clue from each into a revisable comparison. The supplied source interpretation distinguishes a body-form fossil from a fossilized footprint; photographs, source-page dates and unknowns stay separate. This transient nature-corner activity adds no saved work, grade, evidence or inventory. See [spec 106](docs/specs/106-fossil-close-look.md), its [source audit](docs/source-audits/106-fossil-close-look.md), [review receipt](docs/reviews/106-fossil-close-look-review.md) and the [current roadmap](docs/roadmap.md) for publication status.
+
+Run `node test/fossil-close-checks.mjs`; optional `node test/fossil-close-browser.js` uses `FOSSIL_TEST_URL` for a local `dist/` server and the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` settings. Actual local checks cover source-region geometry, native interaction, visible-only narration, failed-image pin refusal and notes transfer with fictional pending work; they do not establish physical-device compatibility or independent fossil identification.
+
 ## Gathering Budget
 
 At `#workshop/budget`, choose packets for one of two pretend gathering requests. The pictured basket shows supplied units and cost; checking a plan separately reports whether it meets the request, fits the limit, and matches an optional cost idea. Several baskets work. This is a transient table, with no saved budget, rewards, or judgment about real family choices. See [spec 104](docs/specs/104-gathering-budget.md) and its [source audit](docs/source-audits/104-gathering-budget.md) and [review receipt](docs/reviews/104-gathering-budget-review.md).

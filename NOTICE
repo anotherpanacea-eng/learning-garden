@@ -58,3 +58,20 @@ Histoire de Paris. Dedicated to the public domain under CC0 1.0:
 https://creativecommons.org/publicdomain/zero/1.0/
 Record: https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/crue-de-la-seine-janvier-1910-quai-des-grands-augustins
 The application MIT license does not apply to this image.
+
+Fossil Close-Look photographs
+The original USGS image Animals_ArachnidsRelatives_00008.jpg is credited to
+Bruce Avera Hunter / USGS and explicitly marked Public Domain by its record:
+https://www.usgs.gov/media/images/trilobite-fossil-0
+The complete original appears in the spec review assets. The runtime
+fossil-trilobite.webp is an aspect-preserving, full-frame technical copy.
+
+The NPS photo DITR-CT-20131115_007.JPG is credited individually to NPS in:
+https://www.nps.gov/subjects/fossils/dinosaurs-in-the-fossil-record.htm
+The runtime fossil-footprint.webp is an aspect-preserving, full-frame technical
+copy of that photograph. The spec uses the same image's NPS-supplied smaller
+screen derivative. Rights: public-domain NPS government work under the stated
+NPS policy: https://www.nps.gov/aboutus/disclaimer.htm
+No claim to original U.S. Government work. No NPS marks or endorsement.
+The application MIT license does not replace these photographs' source terms.
+Complete source/rights/copy boundaries: docs/source-audits/106-fossil-close-look.md.
