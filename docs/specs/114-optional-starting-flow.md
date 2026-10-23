@@ -1,6 +1,6 @@
 # 114. How shall we begin?
 
-Status: authored candidate; independent six-lens specification, source and static-design review pending. No implementation is cleared by this status. This is the first optional starting-flow increment from the [current roadmap](../roadmap.md#different-starting-points-current-capability-and-next-work).
+Status: implementation-review candidate. Independent six-lens specification, source and actual static-design gates cleared `a203ac1b8099e72abcff009151f9f70296c192db`; independent implementation/root/Claude clearance remains pending. This records the prior spec gate, not implementation or publication clearance. This is the first optional starting-flow increment from the [current roadmap](../roadmap.md#different-starting-points-current-capability-and-next-work).
 
 ## Purpose and bounded outcome
 
