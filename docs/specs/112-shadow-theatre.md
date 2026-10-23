@@ -1,6 +1,6 @@
 # 112 · Shadow Theatre: one card, a changing shadow
 
-**Status:** authored specification only. Independent six-lens, science/content/source/license and actual rendered-art review must clear the exact candidate before runtime. **One home:** `#loft/shadows`, linked from Story Loft. **Audit:** [112](../source-audits/112-shadow-theatre.md). **Original static proposals:** [320](assets/112-shadow-theatre/phone-320.svg), [820](assets/112-shadow-theatre/tablet-820.svg). No runtime or publication follows from this document.
+**Status:** implementation-review candidate; independent implementation/root/Claude review remains pending. Independent specification, science/content/source/license and actual static-art gates cleared `cc154fc35c169e6a1c7b26493a8033c5e67c9059`, including the focused Claude repair review. This records the prior specification gate, not implementation or production clearance. **One home:** `#loft/shadows`, linked from Story Loft. **Audit:** [112](../source-audits/112-shadow-theatre.md). **Original static proposals:** [320](assets/112-shadow-theatre/phone-320.svg), [820](assets/112-shadow-theatre/tablet-820.svg). No runtime or publication follows from this document.
 
 ## A small new stage action
 
