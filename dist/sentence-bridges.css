@@ -6,3 +6,4 @@
 .bridges-source{align-self:start}.bridges-trial>h2:first-child{margin-top:0}.bridges-assembly{margin-top:1rem}
 
 .bridges-page summary,.bridges-page .speech-controls span{font-size:1rem}
+.bridges-page button:focus-visible{outline:3px solid #9a6d18;outline-offset:3px}
