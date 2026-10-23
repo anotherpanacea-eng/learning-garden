@@ -25,7 +25,7 @@ try{for(const width of [320,820]){
  await page.goto(url+'#explore');await page.locator('a[href="#explore/words"]').first().click();await page.locator('#explore-title').filter({hasText:'How can words help a neighbor?'}).waitFor();await page.goBack();await page.locator('#explore-title').filter({hasText:'Follow a curiosity.'}).waitFor();ok(await page.evaluate(()=>document.activeElement?.id),'explore-title','browser Back focus');await page.goto(url+'#explore/not-a-question');ok(await page.locator('#explore-title').innerText(),'Follow a curiosity.','unknown fallback');truth(await page.locator('.explore-unknown').isVisible(),'unknown status');
  await page.goto(url+'#explore/');await page.locator('.explore-unknown').waitFor();ok(await page.locator('.explore-questions>a').count(),4,'empty slug keeps four open choices');
  // Each child-facing activity link lands on a merged route, with its own view.
- for(const [id,hrefs] of Object.entries(cases))for(const href of hrefs){await page.goto(url+'#explore/'+id);await page.locator(`.explore-destinations>a[href="${href}"]`).click();ok(new URL(page.url()).hash,href,href+' navigates');truth(await page.locator('main h1').count()>0,href+' has heading');}
+ for(const [id,hrefs] of Object.entries(cases))for(const href of hrefs){await page.goto(url+'#explore/'+id);await page.locator(`.explore-destinations>a[href="${href}"]`).click();await page.locator('#explore-title').waitFor({state:'detached'});ok(new URL(page.url()).hash,href,href+' navigates');truth(await page.locator('main h1').count()>0,href+' has heading');}
  ok(errors,[],'no page errors');
  if(width===320){
   // Paused saved Water Lab visit is unchanged by Explore and resumes.
