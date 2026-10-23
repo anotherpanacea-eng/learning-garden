@@ -472,3 +472,21 @@ At `#workshop/recut`, add and remove dividing marks while one whole ribbon, its 
 Run `node test/ribbon-recut-checks.mjs`; the optional `node test/ribbon-recut-browser.js` uses `RECUT_TEST_URL` for a local `dist` server and installed Playwright/Chrome through the existing browser-test environment variables. Local checks do not establish physical-device behavior or learning gains.
 
 The optional **Cold Window, Same Water** picture at `#science/window` contrasts condensation at an illustrated cool pane with evaporation as it warms again. Paired whole/tiny views keep molecule drawings distinct from visible drops. Controls are temporary and add no visit or progress record. See [spec102](docs/specs/102-cold-window-same-water.md), its [source audit](docs/source-audits/102-cold-window-same-water.md) and [review receipt](docs/reviews/102-cold-window-review.md). Run `node test/cold-window-checks.mjs`; `test/cold-window-browser.js` uses a local `dist` server through `COLD_WINDOW_TEST_URL` and the established Playwright/Chrome environment. The [current roadmap](docs/roadmap.md) records publication separately.
+
+## Join the Portions
+
+At `#cafe/portions`, move already-cut quarter, third or sixth pieces onto a shared tray, then return them. Four open jobs keep the same whole and piece size while the amount on the tray changes; the last joins five quarters across two equal loaf spaces. This supplied teaching model is transient and unscored, with ordinary links to the café and Ribbon Recut. It creates no stock, order, progress or notes record. See [spec 103](docs/specs/103-join-the-portions.md) and its [source audit](docs/source-audits/103-join-the-portions.md) and [review receipt](docs/reviews/103-join-the-portions-review.md). Publication status belongs to the [current roadmap](docs/roadmap.md).
+
+Run `node test/join-portions-checks.mjs`; the optional `node test/join-portions-browser.js` uses `PORTIONS_TEST_URL` for a local `dist/` server and the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` setup. Browser checks use fictional saves and establish local interaction/transfer behavior, not physical-device compatibility or fraction attainment.
+
+## Gathering Budget
+
+At `#workshop/budget`, choose packets for one of two pretend gathering requests. The pictured basket shows supplied units and cost; checking a plan separately reports whether it meets the request, fits the limit, and matches an optional cost idea. Several baskets work. This is a transient table, with no saved budget, rewards, or judgment about real family choices. See [spec 104](docs/specs/104-gathering-budget.md) and its [source audit](docs/source-audits/104-gathering-budget.md) and [review receipt](docs/reviews/104-gathering-budget-review.md).
+
+Run `node test/gathering-budget-checks.mjs`. With `dist` served locally and Playwright/Chrome installed, `GATHERING_TEST_URL=http://127.0.0.1:4198/ node test/gathering-budget-browser.js` checks the two requests, four fit combinations, touch controls, local notes isolation and import. `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `GATHERING_ARTIFACTS` select local browser dependencies and temporary screenshots.
+
+## Questions to follow
+
+The Explore doorway now offers four open questions about water, sharing, words and garden neighbors. Each leads to three existing activities with a reason to visit and a contrast to discuss. The complete twelve-place directory, scoped topic disclosures and grown-up learning map remain under All places. The doorway introduces no progress record or prerequisite rule. See [spec105](docs/specs/105-explore-questions-doorway.md), its [source audit](docs/source-audits/105-explore-questions-doorway.md) and [review receipt](docs/reviews/105-explore-questions-review.md).
+
+The optional `node test/explore-questions-browser.mjs` uses `EXPLORE_TEST_URL` for a locally served `dist`, installed Playwright through `PLAYWRIGHT_MODULE`, and optionally `CHROME_PATH` and `EXPLORE_ARTIFACTS`. It checks the real question routes, directory, focus, paused work and synthetic notes download/import at phone/tablet widths.
