@@ -12,7 +12,7 @@ Music first, a fraction model second. A full bar is a fact about the arrangement
 
 `#studio/rhythm`, a second room in the existing studio, with a link each way between it and Bell Studio. No shared state between the rooms.
 
-In the [Keeper of the Ways story (spec 120)](120-keeper-of-the-ways.md), the room opens in Act I as the place the mending crews come for work songs, and its kept rhythms can be played at Act II's first show and at the summer festival, *Market Fair and the Show*. In Act III a Vadoalto boat brings a rhythm to echo. All cards are open from the start.
+In the [Keeper of the Ways story (spec 120)](https://github.com/anotherpanacea-eng/learning-garden/pull/127), the room opens in Act I as the place the mending crews come for work songs, and its kept rhythms can be played at Act II's first show and at the summer festival, *Market Fair and the Show*. In Act III a Vadoalto boat brings a rhythm to echo. All cards are open from the start.
 
 ## The model, `rhythm-studio-v1`
 
@@ -33,7 +33,7 @@ In the [Keeper of the Ways story (spec 120)](120-keeper-of-the-ways.md), the roo
 
 A card's palette shows only the codes that card offers. In a three-beat bar, the whole note and whole rest are hidden because they can never fit.
 
-- **Sound.** Every note is Bell Studio's Middle tone (330 Hz sine) at its fixed low gain and onset ramp, sounding for the note's length less a 0.06-second gap, so two quarters are heard as two sounds and a half note as one longer sound. Rests are silent. An optional **Hear the beat** toggle adds a quiet 220 Hz tick on each beat at half the note gain.
+- **Sound.** Every note is Bell Studio's Middle tone (330 Hz sine), with its 0.015-second attack and 0.035-second release, sounding for the note's length less a 0.06-second gap, so two quarters are heard as two sounds and a half note as one longer sound. Rests are silent. Let `G = 0.025`, Bell Studio's peak gain. A note uses `2G/3`; the optional **Hear the beat** 220 Hz tick uses `G/3`, half the note gain, for 0.04 seconds with 0.005-second attack and release. The combined instantaneous gain budget is at most `G`, including the beat tick. A new playback stops the old one before scheduling; no release tail extends into the next note onset.
 - **No timed input.** The child never taps along with playback. Clapping along is an off-screen invitation.
 
 ## The bar
@@ -78,9 +78,9 @@ Each card has an optional literal check. The check reports facts about the arran
 
 **Work song.** The child picks one of four lines. Its syllables are shown split under the bar and highlighted in order as notes are placed. Rests may sit between syllables. A line may use one bar or two; the check counts only bars that hold notes, and each of those must be full.
 
-**Two bells.** A separate small model on the same card. A timeline of 24 eighth cells shows two rows. The child sets how often each bell rings, every 2 to 6 eighths; both start on cell 1. Bell A uses Bell Studio's Low tone and Bell B its High tone, each at half gain. Before playing, an optional prediction taps the cell where they will next ring together. Play marks every shared cell, and the explanation names the first meeting as a common multiple. If the first meeting falls past cell 24 (5 and 6 meet at 30), the timeline says so and invites working it out.
+**Two bells.** A separate small model on the same card. A timeline of 24 eighth cells shows two rows. The child sets how often each bell rings, every 2 to 6 eighths; both start on cell 1, at elapsed eighth 0. A bell with interval `a` rings at elapsed eighths `0, a, 2a, ...`, displayed in one-based cells `1, a+1, 2a+1, ...`. Bell A uses Bell Studio's Low tone and Bell B its High tone, each at `G/3` for 0.10 seconds with Bell Studio's attack and release; the optional beat tick uses `G/3` as above. Before playing, an optional prediction taps the cell where they will next ring together. Play marks every shared cell. The next meeting after the start is elapsed `LCM(a,b)` eighths, displayed at cell `LCM(a,b)+1`: 2 and 3 meet after 6 eighths, at cell 7. If the next meeting is outside cells 1–24 (5 and 6 meet after 30 eighths, at cell 31), the timeline says so and invites working it out. Store elapsed counts separately from displayed cell indices; do not call cell 7 a multiple of 2 and 3.
 
-Two bells is the one place this room breaks two of Bell Studio's limits, on purpose: play lasts **six seconds**, and two tones sound at once. Each tone's gain is halved so the sum never passes Bell Studio's peak. Stop works as everywhere else.
+Two bells is the one place this room breaks two of Bell Studio's limits, on purpose: play lasts **six seconds**, and two tones sound at once. The two tones plus an optional beat tick sum to at most `G = 0.025`; this bound covers simultaneous onsets, release tails and every allowed interval pair. Stop works as everywhere else.
 
 ## Saved work
 
@@ -91,12 +91,13 @@ rhythm: {
   size: 'any' | 'sprout' | 'seedling' | 'sapling',
   listened: bool,                                   // Listen first seen
   cards: { [cardId]: { bars: [[code,...], ...], beats: [4|3, ...], kept: [[code,...], ...] | null, line?: songId, echo?: echoId, shown?: bool } },
-  checks: [ { card, at, facts } ],                  // latest 50, frozen when recorded
-  bells: { a, b, prediction: cell | null, met: cell | null, at } | null
+  checks: [ { card, at, facts } ],                  // up to 50, frozen when recorded
+  bells: { a, b, predictionCell: cell | null, nextElapsed: n, nextCell: n, at } | null
 }
 ```
 
-- Validate ids and codes only. An unknown card or an unreadable card is skipped and the rest of the studio stays open. An unknown note code empties that card's working bars and keeps `kept`.
+- Validate ids, codes, lengths and bounded counts in a read-only view. An unknown or unreadable card is unavailable in that view; preserve its raw working bars, kept version and checks unchanged and exportable. An unknown note code never empties the saved working bars on load. Other readable cards stay open.
+- Saving is caused only by an explicit supported choice or edit, including **Keep this rhythm** and **Check my rhythm**; opening a view never normalizes the save. To replace unreadable working content, offer an explicit **Start a fresh version** action that retains the old raw card alongside the replacement. Preflight the candidate against `dist/progress-limits.mjs` and export capacity before committing; if it cannot fit, keep the current save and explain that no work changed. Retained raw work is removed only through explicit deletion. Keep at most 50 readable checks; at capacity refuse an additional check without changing the save, while leaving playback and editing available. New bars contain at most eight codes per bar and two bars; retained raw content is not rewritten to meet these authoring limits. A fresh replacement retains the old card under a raw-history field and must pass the same preflight.
 - A bar is checked only for fitting its own length. Never check a saved bar against today's card rules, and never recompute recorded check facts.
 - Notes export, import, reset and explorer switching include `rhythm`.
 
@@ -131,10 +132,15 @@ Jane's `learn` card (one idea and a worked example, revealed one tap at a time) 
 - Every refusal leaves the bar unchanged; each palette item fills exactly its length.
 - The palette on each card matches the table above; three-beat bars never offer whole notes or rests.
 - `echo` matches only an exact sequence, rests included. `work-song` counts notes against syllables and requires every used bar full.
-- `two-bells` reports the least common multiple for every pair from 2 to 6, and the past-the-timeline message when it exceeds 24.
+- `two-bells` checks all 25 ordered pairs from 2 to 6: elapsed next meeting is LCM, displayed cell is LCM + 1, and the past-the-timeline message appears when that cell exceeds 24. For a divisor pair, the slower bell is named as the one whose every ring coincides, regardless of A/B order.
+- Peak gain never exceeds 0.025 with the beat on, including two-bell coincidences; Stop, replay and edit cannot leave overlapping playback runs.
 - Note starts are scheduled from cumulative eighths with no drift across bars. Stop and edit-during-play behave as in Bell Studio.
-- Saves with an unknown code, an unknown card, no `bells`, or only Bell Studio state all load.
+- Saves with an unknown code, an unknown card, no `bells`, or only Bell Studio state all load. Unknown raw working content survives view, explorer switch and export as unchanged JSON values; capacity refusal leaves the save unchanged.
 - Browser at 320 and 820 px: cells at least 44 px tall; two bars wrap as two rows; the 24-cell timeline wraps into three rows of eight.
+
+## Review follow-up, 2026-10-23
+
+Specified elapsed eighths versus display cells, a peak budget including the beat tick, and non-destructive recovery/export boundaries. These are documentation repairs, not implementation verification or music-content clearance. Independent implementation review and the music-content gate remain open.
 
 ## Review asks
 

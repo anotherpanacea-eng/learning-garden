@@ -47,6 +47,10 @@ Companion to [spec 116](../specs/116-field-guide-almanac.md). Use as written, af
 
 ### Season line and noticing prompts
 
+**Setting label:** Which half of Earth? · Northern · Southern
+
+**Setting explanation:** This changes the seasons and which side of the moon picture is lit. Dot does not ask where you live.
+
 **Header:** It's {season} here. What's changing outside?
 
 | Season | Prompts (one shown per day, rotating) |
@@ -101,7 +105,9 @@ Two pictures side by side: from far above, and from our sky.
 >
 > The dark part is **not** Earth's shadow. When Earth's shadow really does fall on the moon, that's a lunar eclipse. Eclipses only happen a few times a year, because the moon's path is a little tilted. **[check]**
 
-### The moon table (Sapling)
+### Future draft only: the moon table and prediction (deferred)
+
+Do not include the following table, comparison messages or prediction in the first increment. They await the separate science-reviewed mini-spec named in spec 116; its algorithm and reviewed findings may require changing this copy, including the accuracy and seven-day claims.
 
 **Link:** Compare with the moon table
 
@@ -130,7 +136,9 @@ Two pictures side by side: from far above, and from our sky.
 
 ### The key
 
-Each step shows one question, two answers with lifelike pictures, **Go back**, and **I can't tell**.
+Each step shows one question, two answers with lifelike pictures, **Go back**, and **I can't tell**. This key is a draft for qualified science review, not a validated identification guide.
+
+**Leg-count caution, before step 1 and repeated at steps 4 and 7:** A caterpillar has six true legs at the front, plus soft stumpy legs behind. Count only the ones near its head. **[check]** If you can't tell them apart, choose **I can't tell**. This caution must appear before a leg count could send the explorer down another branch.
 
 | Step | Question | Answers |
 | --- | --- | --- |
@@ -207,7 +215,7 @@ Each card shows: the group name, **You identified it as…** with the count and 
 
 ### Build a key (Sapling)
 
-**Intro:** Now you make the key. Choose two yes/no questions that sort these four into four different endings.
+**Intro:** Now you make the key. Add yes/no questions until these four each have their own ending. You may need three questions.
 
 **Cards:** Spider · Ant · Snail · Woodlouse
 
@@ -223,7 +231,11 @@ Each card shows: the group name, **You identified it as…** with the count and 
 | `nice` | Is it nice? | No clear answer: people disagree. |
 | `backbone` | Does it have a backbone? | Clear, but every card answers no. |
 
-The child picks a first question, then a second question for each side that still holds more than one card.
+The child picks a first question, then adds a question at any ending that still holds more than one card. Repeat until every ending has one card; never stop merely because two questions have been chosen. Keep all branches visible and allow Go back/change.
+
+**Worked tree:** Ask `shell`: yes → Snail; no → ask `eight-legs`: yes → Spider; no → ask `six-legs`: yes → Ant; no → Woodlouse.
+
+**A second working tree:** Ask `six-legs`: yes → Ant; no → ask `shell`: yes → Snail; no → ask `eight-legs`: yes → Spider; no → Woodlouse. Both have three question nodes and four endings. Show the child's actual tree on resume.
 
 | Situation | Message |
 | --- | --- |
@@ -362,6 +374,14 @@ Short definitions for tap-a-word, at most 15 words each:
 | new moon | When we can't see the lit part of the moon at all. |
 | hemisphere | The northern or southern half of Earth. |
 | crustacean | An animal with a hard outer shell and jointed legs, like a crab. |
+
+## Keeping work
+
+**Capacity refusal:** There isn't room to keep this new version yet. Your work is unchanged. Ask a grown-up to export it or choose an older item to delete.
+
+**Unavailable older item:** This entry is from an older guide or can't be displayed here. It is still kept in your export.
+
+**New Data desk sheet:** Keep this month as a new sheet. Your earlier sheets stay as you made them.
 
 ## Grown-up notes
 

@@ -1,6 +1,6 @@
 # 116. Field Guide Almanac: look outside, come back tomorrow
 
-Status: **proposed; awaiting independent spec review and a science-content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Adopts the weather log proposed in [spec 33](33-rebuilding-the-town.md) and hosts the Keeper's Pages from [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/116-field-guide-almanac-text.md); this spec holds the model and rules. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review and a science-content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Adopts the weather log proposed in [spec 33](33-rebuilding-the-town.md) and hosts the Keeper's Pages from [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127). Every child-facing line is in [the companion text](../content/116-field-guide-almanac-text.md); this spec holds the model and rules. Code and art are for the implementation pass.
 
 ## Purpose
 
@@ -17,14 +17,14 @@ Everything is a report by the explorer or their grown-up. The game never checks 
 
 ## Place and story
 
-`#almanac`, linked from Home as **Dot's Field Guide**. When spec 33's town exists, its almanac link opens this page. Other specs add tabs here: spec 33's Town, Garden, Café, Words and Thinking stickers, and spec 120's **Keeper's Pages**. This spec owns only its four pages and the shared tab bar.
+`#almanac`, linked from Home as **Dot's Field Guide**. When spec 33's town exists, its almanac link opens this page. This increment ships its four pages and their tab bar. Future adapters may add spec 33's Town, Garden, Café, Words and Thinking stickers and spec 120's **Keeper's Pages**. Those adapters and story/calendar scenes are owned by their specs and are not prerequisites or acceptance requirements for this Field Guide increment. Weather pictures needed by spec 117 are reusable assets, not a dependency on a story adapter.
 
 In spec 120, Hollis kept Willowbank's flood records and the reveal is that the explorer has been keeping the record too. The weather and sky notes are that record. This spec does not count them toward any act; spec 120 decides what a story contribution is. Two of spec 120's calendar moments read from this spec's data:
 
 - **Storm Day** (each explorer's first-visit anniversary) shows a one-page comparison of this year's weather log against last year's, built from the Data desk's month graphs.
 - **Lantern Night** (winter) reads the almanac aloud; the Weather and Sky pages supply one line each (in the companion text).
 
-The almanac opens in Act I and deepens with the acts: noticing in Act I, keeping records and graphing them in Act II (spec 120 names S7-II local records as Act II's), weather versus climate in Act III, and in Act IV the moon table's disagreement with a child's note is a small lesson in evidence. Act V's sky-watching night and night garden can start from the Sky page. All pages are open from the start.
+The almanac opens in Act I and deepens with the acts: noticing in Act I, keeping records and graphing them in Act II (spec 120 names S7-II local records as Act II's), weather versus climate in Act III, and a later, separately specified moon table may offer an Act IV evidence comparison. Act V's sky-watching night and night garden can start from the Sky page. All pages are open from the start.
 
 ## 1. Weather
 
@@ -32,7 +32,7 @@ Once per calendar date on the device, the page asks what the weather is doing, a
 
 **Optional temperature**, typed by a grown-up from a thermometer, with a unit choice of °C or °F and no default. Stored as reported and labeled as reported. Readings outside −60 to 60 °C or −76 to 140 °F are refused. The game never converts units, and no graph mixes them.
 
-**Season line** from the device month and spec 33's hemisphere setting (default northern; the story's valley is northern), with three rotating noticing prompts per season. The prompts are talk invitations and record nothing. They stay descriptive and never explain why seasons happen.
+**Season line** from the device month and an explicit northern/southern setting (default northern; the story's valley is northern). Reuse spec 33's hemisphere setting if present; otherwise this increment supplies the local setting, with the future adapter sharing it rather than maintaining two conflicting values. The line has three rotating noticing prompts per season. The prompts are talk invitations and record nothing. They stay descriptive and never explain why seasons happen.
 
 ## 2. Sky
 
@@ -42,7 +42,7 @@ The page shows the month as a strip of days with each noted shape drawn small.
 
 **Explanations.** For Sprout and Seedling, three observational panels: it's the same moon; at new moon it's still there; the pattern repeats in about 29 and a half days. They never explain the cause and never show a shadow. For Sapling only, **Why it changes shape** shows a view from above (moon half-lit at eight places around Earth) beside the matching sky views, explains the lit half, and says plainly that the dark part is not Earth's shadow and that a lunar eclipse is a different, rarer event.
 
-**The moon table** (Sapling page) shows, for each date the child logged, the phase calculated from an average 29.53-day cycle from a known new moon, labeled as calculated and usually right to within a day. A one-step difference and a larger one each get a message; the child's note is never changed, flagged or hidden. An optional prediction asks how many days until the next full moon after a growing half; the answer comes from the calculation.
+**Deferred: calculated moon table and predictions.** Neither ships in this increment. A separately science-reviewed mini-spec must define the epoch, time/day convention, supported date domain, phase-bin boundaries including new moon, distance/wraparound rule, prediction algorithm and at least twelve named reference dates before implementation. It must assess the accuracy claim and whether comparison copy feels like a correction. The companion's table/prediction copy is future draft material only. The observational Sky log and explanatory panels above remain in this increment, subject to the existing science-content gate.
 
 ## 3. Garden neighbors
 
@@ -52,11 +52,13 @@ A field-guide key for minibeasts found **outside**, with a grown-up. No camera, 
 
 **Adding a find** records the date, the group and where it was, from seven places. The guide shows one card per group with its fact, a look-for line, the number of finds and the first date. A group not yet found shows a grey outline. A find records that the explorer used the key and chose this group; the card says "You identified it as…", never that the identification is right.
 
-**Build a key** (Sapling page, after the key has been used once): four group cards and a list of candidate questions, some that split the set and some that don't (vague, no clear answer, or clear but sending every card the same way). The child picks two; the page shows where each card lands, points out any ending with two cards, and says when the child finds a second working key.
+**Build a key** (Sapling page, after the key has been used once): four group cards and a list of candidate questions, some that split the set and some that don't (vague, no clear answer, or clear but sending every card the same way). The child adds a question at any ending that still holds two or more cards, recursively, until each ending has one. With four cards, at most three useful question nodes are needed. The page shows where each card lands, points out any unresolved ending, and permits changing a node or making a second working tree. The companion supplies two complete three-node examples. The saved work retains each node's question and its yes/no branches, not just an unordered question list.
 
 ## 4. Data desk
 
-Choose a month from the weather log. With fewer than five entries, the desk offers **Dot's practice month** instead, labeled as made up.
+Choose a month from the weather log. With fewer than five readable entries, the desk offers **Dot's practice month** instead, labeled as made up. Starting a Data desk sheet freezes a source of at most 31 dated reports (including reported temperatures), the category codes and their display labels, practice/source version and chosen month. Each sheet has an independent stable ID; a second sheet for the same month is a new sheet, never a replacement. Resume uses this snapshot even if today's note, the practice month or category wording later changes.
+
+Keep tally counts, pictogram scale and half-picture counts, bar counts and axis scale with the sheet. At scale 1 each day is two half-pictures; at scale 2 each day is one half-picture. Add/remove one whole picture at scale 1 and one half-picture at scale 2, so every count from 0 to 31 is representable. Scale choices survive resume. Bar axes may count in twos, but bars can still move by one day so odd totals are representable. A kept sheet and any recorded check facts are frozen; revising it creates a new sheet. There are at most 24 sheets; at capacity, retain all work and offer export or explicit deletion before creating another.
 
 1. **Tally.** Days appear one at a time; the child taps a row to add a mark; marks group in fives (four strokes and a crossing stroke). **Back** undoes the last mark. At the end, a row that differs from the log is named and can be recounted. A finished tally is stored as built.
 2. **Pictogram.** The key comes first and stays on screen. One picture per day, equal in size and aligned to a baseline. The child adds or removes pictures per row until it matches the tally. Sapling option: each picture stands for two days, previewed with a question before building; odd counts use a half picture with its own key line.
@@ -73,22 +75,26 @@ Four, in the companion text. Nothing is recorded.
 
 ## Saved work
 
-Per explorer, absent until the first note:
+Per explorer, each root is absent until its first explicit choice, note or constructed sheet. The local hemisphere setting is optional (`north | south`) and writes only on explicit choice:
 
 ```
-weather:  [ { date: 'YYYY-MM-DD', weather: code, temp?: { value, unit: 'C'|'F' } } ]   // spec 33 shape plus optional temp; latest 400
-sky:      [ { date, shape: code } ]                                                   // latest 400
-finds:    [ { date, group: code, place: code, label?: string } ]                     // latest 500
-dataDesk: { [ 'YYYY-MM' | 'practice' ]: { tally: {code: n}, pictogram: {code: n, scale}, bars: {code: n, scale}, at } }
-moonPredictions: [ { madeOn, fromShape, days, at } ]                                 // latest 50
-keyBuilds: [ { cards: [code], questions: [id], at } ]                                // latest 20
+weather:  [ { date: 'YYYY-MM-DD', weather: code, temp?: { value, unit: 'C'|'F' } } ] // up to 400
+sky:      [ { date, shape: code } ]                                                  // up to 400
+finds:    [ { date, group: code, place: code, label?: string } ]                      // up to 500
+dataDesk: [ { id, source: { month, practice, version, categories, days },
+              tally: {code: n}, pictogram: { halfPictures: {code: n}, scale: 1|2 },
+              bars: { counts: {code: n}, scale: 1|2 }, kept: bool, checks, at } ]      // up to 24 sheets
+keyBuilds: [ { cards: [code], tree: node, at } ]                                      // up to 20
+// node = { question: id, yes: node|{group: code}, no: node|{group: code} }
+// up to 3 question nodes, 4 group leaves; unfinished branches may be null
 ```
 
 - If spec 33 ships first, both specs read and write one `weather` array. Optional `temp` is additive; spec 33 ignores it.
-- Validate dates, codes and numbers only. Drop an entry with an unknown code or malformed date and keep the rest.
-- One entry per date for `weather` and `sky`; a save with two for one date keeps the later.
+- Validate dates, codes and bounded numbers in read-only views. An unknown code, malformed entry or missing temperature unit makes only that item/temperature unavailable to current displays; preserve the original JSON value unchanged and exportable. A new known group list never deletes a prior find.
+- For `weather` and `sky`, display at most one readable entry per date, using the last readable entry in stored array order. Preserve every duplicate in raw storage. View/import does not deduplicate or rewrite. An explicit change to today's note changes only the selected readable entry, preserving other raw entries.
+- All saves follow an explicit action and preflight the whole candidate using `dist/progress-limits.mjs` and the existing export-size limit before mutation. At an array/sheet capacity or export limit, refuse the addition with no data change; explain export/explicit deletion options. Never silently trim older or unreadable work. Labels are at most 120 characters, each sheet source at most 31 days and five categories, counts 0–31, half-picture counts 0–62, and each sheet retains at most eight frozen checks. At a check limit, refuse the new check without losing the sheet; keep editing available.
 - Never check a find against today's key. A group code no longer in the key shows as a group from an older field guide.
-- The moon table, month graphs and Storm Day comparison are computed when opened and never stored.
+- Data desk sheets retain their frozen source, scales, constructed counts and recorded outcomes. Checks compare with that sheet's own source, never today's log or rules, and never regrade recorded outcomes on load. Live month summaries may be computed separately and must be labeled as current summaries; future Storm Day adapters do not rewrite sheets.
 - Notes export, import, reset and explorer switching include all of these. The hemisphere is a setting, never a location.
 
 ## Grown-up notes
@@ -155,11 +161,17 @@ Jane's glossary convention (short definitions for *pictogram*, *tally*, *climate
 - Hemisphere swaps the moon pictures, wording and season names.
 - Every key path reaches a group or "something else"; Go back works at each step; the fourteen questions and fifteen endings match the companion text.
 - Tally, pictogram and bars work from an empty log (practice month), a five-day log and a full month; half pictures appear only for odd counts at scale 2.
-- The moon table is within one step of a published phase table on at least twelve test dates.
-- Unknown codes, a duplicated date, a missing temperature unit and spec-33-only saves all load.
+- The first increment offers no calculated moon table or prediction; those wait for the separately reviewed mini-spec.
+- Both authored three-node key trees separate all four cards, recursive edits preserve the branch structure, and an unfinished tree survives reload.
+- A saved Data desk sheet survives today's observation changing, a practice-source edit, scale changes on a different sheet and a second sheet for the same month. Recorded outcomes are unchanged. Test 24 sheets and capacity/export refusal with the original state unchanged.
+- Unknown codes, duplicated dates, a missing temperature unit and spec-33-only saves all load; readable items stay open and raw unavailable items/duplicates remain exportable without a load-time rewrite. The four pages work with no spec 33/120 adapter.
 - Browser at 320 and 820 px: key answers at least 44 px; the month strip wraps without horizontal scrolling.
+
+## Review follow-up, 2026-10-23
+
+Made key-building recursive with saved branches; deferred calculated moon work; separated future shared-tab/story adapters; specified frozen, bounded Data desk sheets and non-destructive observation views with capacity preflight. The fifteen-group field key and its facts remain a draft needing qualified science review; these repairs do not validate its biological classifications or any child identification. Independent implementation review and science-content clearance remain open.
 
 ## Review asks
 
 - Science content: are the key questions, fifteen facts and moon wording accurate and fair for children? The companion flags the lines most worth checking.
-- Does the moon table feel like a correction of a child's note, even with its wording?
+- The future moon-table mini-spec must assess whether its comparisons feel like a correction; it has no clearance from this review.

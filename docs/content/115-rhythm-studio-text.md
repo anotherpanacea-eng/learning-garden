@@ -187,13 +187,13 @@ Some music counts in threes: ONE two three, ONE two three. Waltzes do. In a bar 
 - **Card:** Two bells ring on a steady count. Choose how often each one rings, then find when they ring together again.
 - **Controls:** Bell A rings every \_\_ eighths · Bell B rings every \_\_ eighths · (2 to 6) · Play the bells
 - **Prediction (optional):** When will they ring together again? Tap the cell.
-- **After play:** Bell A rang every {a} and Bell B every {b}. They met again at {m}, because {m} is the first count that both {a} and {b} fit into evenly. That's called a **common multiple**.
+- **After play:** Bell A rang every {a} and Bell B every {b}. They met again after {elapsed} eighths, at cell {cell}. {elapsed} is the first positive count that both {a} and {b} fit into evenly. That's called a **common multiple**.
 - **Cross-rhythm note** (shown for 2 and 3, or 3 and 2): Musicians call two-against-three a cross-rhythm. Listen to how the bells seem to chase each other.
 - **Same number:** Both bells ring every {a}, so they ring together every time. Try two different numbers.
-- **One fits the other** (for example 2 and 4): Every time Bell B rings, Bell A rings too, because {b} is a multiple of {a}.
-- **Past the timeline:** They don't meet again on this timeline. Can you work out where they would?
+- **One fits the other** (for example 2 and 4): Every time {slowerBell} rings, {fasterBell} rings too, because {largerInterval} is a multiple of {smallerInterval}.
+- **Past the timeline:** They meet again after {elapsed} eighths, at cell {cell}, beyond this timeline. Can you work out why?
 - **Prediction matched:** Your prediction matched.
-- **Prediction different:** You predicted {p}. They met at {m}.
+- **Prediction different:** You predicted cell {p}. They met at cell {cell}, after {elapsed} eighths.
 
 **`own-beat-sapling`**
 - **Card:** Make a waltz, a march, or a rhythm of your own. Choose four beats or three for each bar. Then tell someone which you made, and why it fits.
@@ -210,6 +210,16 @@ Shown as plain text on each group's last card. Nothing is recorded.
 - Find something at home that makes a long sound and something that makes a short sound.
 - Sing a song you know. Clap once for every word part. Are some claps longer than others?
 - (Threes, dots and two parts) March around the room counting in fours, then waltz counting in threes. Which is harder to keep going?
+
+## Keeping older work
+
+**Unavailable card:** This older rhythm can't be displayed here. It is still kept in your export.
+
+**Recovery button:** Start a fresh version
+
+**Recovery explanation:** Your older version stays in your export. This starts a new version for you to work on.
+
+**Capacity refusal:** There isn't room to keep another check or version yet. Your work is unchanged. You can still play and edit. Ask a grown-up to export it or choose older work to delete.
 
 ## Grown-up notes
 

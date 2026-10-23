@@ -331,13 +331,13 @@ necesitamos · los huevos · las patatas · la cebolla · primero · después ·
 
 **Row differs (hint):** Read the sentence with *por la {part}* again.
 
-**Then:** What should the crew do tonight?
+**Then:** What should the crew do tomorrow night?
 
 | Job | Marisol's reply |
 | --- | --- |
 | **Amarrar bien la barca** *(tie the boat up well)* | «Sí. Con viento y el arroyo alto, la barca necesita cuerdas fuertes.» *Yes. With wind and the brook high, the boat needs strong ropes.* |
 | Salir a navegar *(set off sailing)* | «¿Con tanto viento? Mejor esperar al día siguiente.» *In all that wind? Better to wait until the next day.* |
-| Secar las velas *(dry the sails)* | «Buena idea por la tarde, con sol. Pero ¿y esta noche?» *A good idea in the afternoon, in the sun. But what about tonight?* |
+| Secar las velas *(dry the sails)* | «Buena idea por la tarde, con sol. Pero ¿y mañana por la noche?» *A good idea in the afternoon, in the sun. But what about tomorrow night?* |
 
 **After tying up:** «Gracias. Nube ya está debajo de la manta.» *Thanks. Nube is already under the blanket.*
 
@@ -392,6 +392,12 @@ mañana · por la mañana · por la tarde · por la noche · va a llover · va a
 > *Hello! Marisol gave me your postcard. Thank you! Here the flood post shows only a little water, and that's good. Write to me again soon. A hug, Nuria.*
 
 ---
+
+## Keeping work
+
+**Capacity refusal:** There isn't room to save this change yet. Your work is unchanged. Ask a grown-up to export it or choose older work to delete.
+
+**Unavailable errand:** This older errand can't be displayed here. It is still kept in your export. Other errands are open.
 
 ## Mi cuaderno: grammar and sound notes
 

@@ -31,7 +31,7 @@ Each entry gives the kind of play, what it teaches, a bounded first slice and ho
 **Kind:** a field guide the child fills from the real world, a little at a time. Nothing in the garden currently asks a child to look outside and come back tomorrow.
 **Teaches:** weather and seasons, the moon's phases, classification keys for garden minibeasts, and building tallies, pictograms and bar graphs from data the child collected.
 **First slice:** the Field Guide Almanac at `#almanac`, with a weather page, a sky page, a garden-neighbors key and a data desk. It adopts the weather log already proposed in [spec 33](specs/33-rebuilding-the-town.md) and can ship before or after the town scene.
-**Older depth:** compare two months, ask whether one month tells you about climate, predict the next moon phase from the 29.5-day cycle and check it against the real sky.
+**Older depth:** compare two months and ask whether one month tells you about climate. A calculated moon comparison and prediction are later work, deferred from spec 116's first increment until a separate science-reviewed mini-spec fixes the model and its limits.
 
 ### 3. A second additional language: Spanish (spec 117)
 

@@ -1,6 +1,6 @@
 # 117. The River Market: Spanish errands from *La Garza*
 
-Status: **proposed; awaiting independent spec review and a fluent Spanish content review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Reuses the French Paris design ([specs 13](13-french-paris-and-plate-return.md), [14](14-french-exploration.md), [83](83-french-saved-visit-source.md)) for narration, meaning support and saved passages. Fits the valley and towns of [spec 120](120-keeper-of-the-ways.md). Every child-facing line, in English and Spanish, is in [the companion text](../content/117-river-market-text.md); this spec holds the model and rules. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review and a fluent Spanish content review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Reuses the French Paris design ([specs 13](13-french-paris-and-plate-return.md), [14](14-french-exploration.md), [83](83-french-saved-visit-source.md)) for narration, meaning support and saved passages. Fits the valley and towns of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127). Every child-facing line, in English and Spanish, is in [the companion text](../content/117-river-market-text.md); this spec holds the model and rules. Code and art are for the implementation pass.
 
 ## Purpose
 
@@ -44,7 +44,7 @@ No timer, score or lock. An errand can be left and resumed; a finished errand ca
 | `carga` | *La carga*, unloading | Tap an item, then a building (*el café*, *la panadería*, *el jardín*). Short: five items. Longer: six. Done unloading checks placement; Marisol names any item in another place, and the child can move it and finish again. | How many jars of honey? |
 | `camino` | *El camino*, Teo's way to the bakery | Move Teo across a small map with four Spanish direction buttons. A wrong turn at the plaza brings him to the post office, with a hint and a way back. | Short: where is the bakery? Longer: what faces the bakery? |
 | `receta` | *La receta*, Teo's tortilla | Set amounts on the pantry shelf (three distractor foods), then order the step cards (three short, five longer) from a fixed saved shuffle. | What do you do first? |
-| `tiempo` | *El tiempo*, the weather report | Pick a weather picture for morning, afternoon and night tomorrow, from the almanac's five; then one crew job for tonight from three, each with a reply from Marisol. The child can change the job after a reply. | What will the river do? |
+| `tiempo` | *El tiempo*, the weather report | Pick a weather picture for morning, afternoon and night tomorrow, from the almanac's five; then one crew job for tomorrow night from three, each with a reply from Marisol. The child can change the job after a reply. | What will the river do? |
 | `postal` | *Una postal*, open | Tap phrase tiles into a postcard; optional free text; signed with the explorer's picture symbol. **Keep my postcard** saves it; Marisol's reply arrives on a later visit. | none |
 
 Choice positions for the fitting answer: short versions 2, 1, 2, 3; longer versions 2, 3, 1, 3. Fixed within a saved errand.
@@ -59,19 +59,23 @@ Optional root `spanish` per explorer, absent until the first explicit choice or 
 spanish: {
   amount: 'short' | 'longer',
   errands: { [errandId]: {
-    source: { version, amount, passage, choices, cardOrder },   // frozen when the errand starts
-    task: { ... },                                              // placements, Teo's moves, pantry amounts, step order, plan board, job
+    source: { version, amount, passage, sentenceGlosses, wordGlosses, choices, cardOrder,
+              taskModel, checks, replies },                         // complete frozen errand source
+    task: { ... },                                              // current placements/moves/amounts/order/plan/job
+    taskEvidence: { [taskId]: { firstSubmission, latestSubmission, laterCount, laterCountCapped, hints: [feedbackId] } },
     answer: { picks: [choiceId], fitted: bool } | null,
     support: { meaning: bool, narration: bool, oneAtATime: bool },
     state: 'started' | 'done', familiar: bool, at
   } },
-  postcard: { tiles: [tileId], text: string, at } | null,
+  postcard: { tiles: [{ id, spanish, english }], text: string, replySource, at } | null,
   replySeen: bool
 }
 ```
 
-- A started errand keeps its frozen passage, choices and card order, following spec 83.
-- Validate ids, codes and counts only. An unreadable errand is skipped and the rest stays open. Never check a saved task against today's answer key.
+- A started errand keeps its complete frozen source, following spec 83: passage and glosses, choice IDs/order and fitting target, cargo quantities and destination targets, the map's node/edge/button transitions and start/goal, pantry quantities/allowed items, recipe steps and target order, weather slots and targets, crew choices, all check rules and feedback/replies. Resolve every action and check against this saved source, including on resume; never look up today's task model or key. An ID/version alone is not a frozen source. New source versions affect only newly started errands. A kept postcard freezes its selected tile text/order and corresponding reply source too; later tile or reply edits cannot rewrite it.
+- Each task submission records the first input/result/support snapshot once and the latest snapshot; `laterCount` counts subsequent submissions up to 999, then `laterCountCapped` means 999 or more. `hints` is the bounded set of feedback IDs exposed, including wrong-place, wrong-turn, pantry/order and weather-row feedback. Set hint exposure before showing the reply. Resuming never clears it. Current support tools and prior hint exposure accompany each submission; a corrected or retried task cannot become a first independent attempt. A task never submitted remains unobserved. The question's separate picks are retained as authored above; task and question outcomes are not collapsed into one correctness flag.
+- Bound frozen sources to 48 KiB each, free-text postcards to 2,000 characters and 40 tiles, recipe orders to five IDs, cargo to six items, map history to the latest 32 moves with a separate bounded move count, and each evidence snapshot to that task's bounded input shape. Preflight the whole candidate against `dist/progress-limits.mjs` and export capacity before an explicit mutation; refusal keeps the previous save intact. Unreadable/unknown raw errands remain exportable. Feedback-ID sets are limited to the IDs in the frozen source, not today's list.
+- Validate IDs, codes, bounded shapes and stored outcomes without regrading history. An unreadable errand is unavailable in the read-only view and the rest stays open; retain its raw record unchanged. Never check a saved task against today's answer key, regenerate its shuffle, or rewrite its recorded result on load.
 - Spanish observations carry `language: es` and never affect English or French suggestions, starting choices or the atlas.
 - Notes export, import, reset and explorer switching include `spanish`.
 - [Spec 114](114-optional-starting-flow.md)'s starting flow can later offer a Spanish passage-amount choice. Not part of this spec.
@@ -102,10 +106,16 @@ Refreshed 2026-10-23: Marble `f186a79a9525c189e2d423e31613c62b6805416f`, Jane `1
 - Fitting-choice positions match the list above and stay fixed within a saved errand.
 - Meaning support marks task and question as supported, including after resume.
 - Narration selects only `es-*` voices and shows the no-voice message otherwise.
-- A started errand resumes with its frozen passage after the content changes.
+- A started errand resumes with its frozen passage, glosses, task quantities/map/targets/feedback/checks and order after all current content changes.
+- Submit a wrong placement or recipe order, read a hint, correct it, reload and finish: the first submission, retries and hint exposure remain separate from the final fitted result. An untouched task stays unobserved.
+- Capacity/export refusal leaves the previous save unchanged and readable errands remain open alongside retained raw unavailable records.
 - The postcard keeps tiles and free text exactly; the reply appears once, on a later visit.
 - Riddle cards with the `spanish` strand link to `#mercado`.
 - Browser at 320 and 820 px: note and scene fit without horizontal scroll; the note stays visible during each task.
+
+## Review follow-up, 2026-10-23
+
+Expanded frozen sources to include each task's model, keys, glosses and feedback, and specified bounded first/later submission and hint records with non-destructive capacity checks. Aligned the weather crew task with tomorrow night, the period the note describes. These are specification fixes; no fluent Spanish, implementation or human content clearance is claimed. Those gates remain open.
 
 ## Review asks
 
