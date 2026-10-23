@@ -460,7 +460,7 @@ The optional `#living/movement` bench, linked from Body Clues, lets a learner st
 
 Run `node test/body-clues-checks.mjs`, `node test/body-clues-integration-checks.mjs` and `node test/progress-transfer-checks.mjs` for the adjacent saved-work boundaries. A temporary local Chrome probe checked the movement controls at 320 and 820 CSS pixels; the [receipt](docs/reviews/97-body-movement-review.md) gives its scope and limits. The [current roadmap](docs/roadmap.md) tracks merge and publication status separately.
 
-Lantern Circuit Bench at `#workshop/lantern` offers four open screen-model cards. Add or remove four labelled connections, compare a path through two different bulb contacts, and keep an open, glowing or paused arrangement. A wire-only bypass pauses the model; it predicts no physical current, heat or brightness. Learn, Connect and Kept stay open. See [spec98](docs/specs/98-lantern-circuit-bench.md) and its [source audit](docs/source-audits/98-lantern-circuit-bench.md).
+Lantern Circuit Bench at `#workshop/lantern` offers four open screen-model cards. Add or remove four labeled connections, compare a path through two different bulb contacts, and keep an open, glowing or paused arrangement. A wire-only bypass pauses the model; it predicts no physical current, heat or brightness. Learn, Connect and Kept stay open. See [spec98](docs/specs/98-lantern-circuit-bench.md), its [source audit](docs/source-audits/98-lantern-circuit-bench.md) and [review receipt](docs/reviews/98-lantern-circuit-review.md).
 
 Run `node test/lantern-circuit-checks.mjs`; with `dist` served locally and Playwright installed, run `CIRCUIT_TEST_URL=http://127.0.0.1:4173/ node test/lantern-circuit-browser.js`. `PLAYWRIGHT_MODULE`, `CHROME_PATH` and optional `CIRCUIT_ARTIFACTS` select local dependencies and temporary screenshots. The [current roadmap](docs/roadmap.md) tracks publication status.
 
@@ -478,6 +478,12 @@ The optional **Cold Window, Same Water** picture at `#science/window` contrasts 
 At `#cafe/portions`, move already-cut quarter, third or sixth pieces onto a shared tray, then return them. Four open jobs keep the same whole and piece size while the amount on the tray changes; the last joins five quarters across two equal loaf spaces. This supplied teaching model is transient and unscored, with ordinary links to the café and Ribbon Recut. It creates no stock, order, progress or notes record. See [spec 103](docs/specs/103-join-the-portions.md) and its [source audit](docs/source-audits/103-join-the-portions.md) and [review receipt](docs/reviews/103-join-the-portions-review.md). Publication status belongs to the [current roadmap](docs/roadmap.md).
 
 Run `node test/join-portions-checks.mjs`; the optional `node test/join-portions-browser.js` uses `PORTIONS_TEST_URL` for a local `dist/` server and the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` setup. Browser checks use fictional saves and establish local interaction/transfer behavior, not physical-device compatibility or fraction attainment.
+
+## Fossil Close-Look
+
+At `#living/fossils`, inspect two real, credited public-domain photographs, enlarge a marked region, and pin one visible clue from each into a revisable comparison. The supplied source interpretation distinguishes a body-form fossil from a fossilized footprint; photographs, source-page dates and unknowns stay separate. This transient nature-corner activity adds no saved work, grade, evidence or inventory. See [spec 106](docs/specs/106-fossil-close-look.md), its [source audit](docs/source-audits/106-fossil-close-look.md), [review receipt](docs/reviews/106-fossil-close-look-review.md) and the [current roadmap](docs/roadmap.md) for publication status.
+
+Run `node test/fossil-close-checks.mjs`; optional `node test/fossil-close-browser.js` uses `FOSSIL_TEST_URL` for a local `dist/` server and the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` settings. Actual local checks cover source-region geometry, native interaction, visible-only narration, failed-image pin refusal and notes transfer with fictional pending work; they do not establish physical-device compatibility or independent fossil identification.
 
 ## Gathering Budget
 
