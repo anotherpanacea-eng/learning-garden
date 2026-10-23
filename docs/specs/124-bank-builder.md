@@ -1,6 +1,8 @@
 # 124. The Bank Builder: design, build and test along Willow Brook
 
-Status: **proposed; awaiting independent spec review and a science content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II, IV and VI of [spec 120](120-keeper-of-the-ways.md), and gives Act IV's three plans a model the child can run. Every child-facing line is in [the companion text](../content/124-bank-builder-text.md); this spec holds the model, the levels and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review and a science content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II, IV and VI of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md), and gives Act IV's three plans a model the child can run. Every child-facing line is in [the companion text](../content/124-bank-builder-text.md); this spec holds the model, the levels and the saves. Code and art are for the implementation pass.
+
+**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
 
 ## Purpose
 
@@ -18,7 +20,7 @@ The bench is a long table in the Storm Workshop with a clay model of the brook's
 
 ## The model, `bank-v1`
 
-The bank has six sections, upstream to downstream. Heights are in *boards*, the unit on the mill's flood post.
+The bank has six sections, upstream to downstream. Heights are in fictional model *boards*. They have no conversion to the story ledger's centimetres or to real flood measurements.
 
 | Section | What's behind it | Natural height |
 | --- | --- | --- |
@@ -36,7 +38,7 @@ The bank has six sections, upstream to downstream. Heights are in *boards*, the 
 | Sandbags | 1 board | 1 |
 | Stone wall | 2 boards | 3 |
 | Wall and sandbags | 3 boards | 4 |
-| **Room for the brook** (A and C only) | The section is given to the water on purpose and floods. Each one lowers the water by 1 board for every section downstream of it. In a great flood, room lowers the water by at most 1 board in all, because a full marsh holds no more. | 2 (moving fences and paths) |
+| **Room for the brook** (A and C only) | The section is given to the water on purpose and floods. Each one lowers the water by 1 board for every section downstream of it. In a great flood or What if? (levels4 and5), room lowers the water by at most1 board in all, because a full marsh holds no more. | 2 (moving fences and paths) |
 
 **Budget:** 8 coins, unless a level says otherwise.
 
@@ -45,18 +47,18 @@ The bank has six sections, upstream to downstream. Heights are in *boards*, the 
 **Rules, applied section by section from A to F:**
 1. The water level at a section is the flood level, lowered by the room sections upstream of it (as above).
 2. If the water level is higher than the section's height, water gets through, and the land behind it is wet. Water exactly at the top holds.
-3. A build that holds back water the natural bank would not have held **sends water on downstream**. The result counts these sections, takes away one for each room section, and shows the total (never below 0) as **extra water for Les Saules**.
+3. A build that holds back water the natural bank would not have held **sends water on downstream**. For each non-room section, count one if its raised bank holds at the locally reduced level but its natural bank would not. Subtract the number of room sections and clamp to zero. Show this unitless, fictional **downstream impact score for Les Saules**. It is an authored trade-off rule, not water volume, a hydrological prediction, or an input to a second river simulation. Room sections always count as wet and lower only later sections.
 
-Results show which sections held, which land got wet, the coins spent, the land given to the brook, and the extra water for Les Saules. Every result has the line: *This is a made-up model with simple rules. Real rivers are more complicated.*
+Results show which sections held, which land got wet, the coins spent, the land given to the brook, and the fictional downstream impact score for Les Saules. Every result has the line: *This is a made-up model with simple rules. Real rivers are more complicated.*
 
 **Checked by enumerating every design** (all 1,152 designs within 8 coins, 2026-10-23):
 
 | Design | Builds | Coins | Land given | Spring flood | Big flood | Great flood |
 | --- | --- | --- | --- | --- | --- | --- |
 | Nothing built | | 0 | 0 | C wet | A, C, D, F wet | everything wet |
-| **The Wall** | Sandbags A, B, D, F; wall and sandbags C | 8 | 0 | all dry; 1 extra for Les Saules | all dry; 4 extra | A, D, E, F wet; 2 extra |
+| **The Wall** | Sandbags A, B, D, F; wall and sandbags C | 8 | 0 | all dry; impact score1 | all dry; score4 | A, D, E, F wet; score2 |
 | **The Sponge** | Room at A and C; sandbags D, F | 6 | 2 | A, C wet (given) | A, C wet (given) | A, C wet (given) |
-| **Some of Each** | Room at C; sandbags A, D, F | 5 | 1 | C wet (given) | C wet (given) | A, B, C wet; 1 extra |
+| **Some of Each** | Room at C; sandbags A, D, F | 5 | 1 | C wet (given) | C wet (given) | A, B, C wet; score1 |
 
 - No design keeps the meadow and everything else dry in the big flood on 5 coins; keeping all but the meadow dry costs at least 3.
 - In *What if?*, no design within 8 coins keeps the homes lane, the bridge road and the mill path all dry.
@@ -72,7 +74,7 @@ Results show which sections held, which land got wet, the coins spent, the land 
 | `b4` | The low fields (Act IV) | all three | 8 | Try the three plans from the town meeting. Then make the design you'd choose, and say why. |
 | `b5` | Open bank | any | 8 | Your own goal. |
 
-**`b3`, the wearing bank**, is a fair-test bench beside the main model: three identical strips of bank, the same slope and the same pour of water three times. The authored results, shown after each pour: bare soil wears a groove and the water runs off muddy; sandbags hold the water back for two pours, and on the third the water goes over the top and one bag slips; grass with willow roots lets water run over the top every time, the soil stays put and the water runs clearer. The child records what they saw on each strip (I SAW sentence stems, as in [spec 122](122-lost-and-found-mysteries.md)) and then answers *Which strip would you use where?* with a free choice for three places. The bench says that plants help against wind and water both, that sandbags and plants do different jobs, and that the right choice depends on the place.
+**`b3`, the wearing bank**, is a fair-test bench beside the main model: three model strips with the same starting soil, bank dimensions and slope and the same pour of water three times. The authored results, shown after each pour: bare soil wears a groove and the water runs off muddy; sandbags hold the water back for two pours, and on the third the water goes over the top and one bag slips; grass with willow roots lets water run over the top every time, the soil stays put and the water runs clearer. The child records what they saw on each strip (I SAW sentence stems, as in [spec 122](122-lost-and-found-mysteries.md)) and then answers *Which strip would you use where?* with a free choice for three places. These are fictional authored animation outcomes, not measured observations from a real classroom trial. Their science review must check the sequence and its stated limitations before commissioning. The bench says that plants can help against wind and water both, that sandbags and plants do different jobs, and that the right choice depends on the place.
 
 ## Choosing and saying why
 
@@ -142,8 +144,8 @@ Jane's staged worked example shaped `b1`'s first test. Its points and medals are
 ## Checks for implementation
 
 - A test enumerates every design within 8 coins and confirms the results table and the three bullet facts above.
-- Room is offered only at A and C; the great-flood cap of 1 board applies.
-- The extra-water count never goes below 0.
+- Room is offered only at A and C; the total1-board reduction cap applies at both flood4 and flood5.
+- The unitless downstream-impact score never goes below0; it is not presented as a measured volume.
 - A kept design and claim reload exactly; a model version change shows the earlier-model note without changing them.
 - Every result shows the made-up-model line.
 - Browser at 320 and 820 px: the six sections stack vertically on narrow screens with their builds and results readable as a list.

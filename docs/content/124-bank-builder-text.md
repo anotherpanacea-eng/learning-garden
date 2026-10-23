@@ -27,7 +27,7 @@ Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the
 | F | The homes lane | Front doors and gardens |
 
 **Height label:** {n} boards high
-**About boards (Details):** We measure the bank in boards, like the boards on the mill's flood post. A bank 2 boards high holds back water up to 2 boards deep.
+**About boards (Details):** We measure the bank in boards in this made-up model; these boards do not convert to the centimetres in the story ledger. A bank 2 boards high holds back water up to 2 boards deep.
 
 ## Builds
 
@@ -69,11 +69,11 @@ Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the
 **Summary lines:**
 - Dry: {list}. Wet: {list}.
 - Coins spent: {n}. Land given to the brook: {n}.
-- Extra water for Les Saules: {n}. (Water held back here went on down the brook to the town below.)
-- Extra water for Les Saules: none.
+- Downstream impact score for Les Saules: {n}. (A made-up trade-off score, not a measured amount of water.)
+- Downstream impact score for Les Saules:0.
 
 **Les Saules (Details):**
-> Les Saules is the town downstream, where Léon keeps the ferry. When a wall holds water back here, that water doesn't disappear. It goes on down the brook. Giving the brook room here takes some of that back. `[check]`
+> Les Saules is the town downstream, where Léon keeps the ferry. This model gives walls an impact point when they hold water that the natural bank would not, and room takes points away. It is a made-up way to compare trade-offs. Real downstream effects need much more information. `[check]`
 
 **Builder's hint** (after two runs that don't meet the level's goal): Look at where water got through first. Is that bank lower than the others?
 
@@ -115,7 +115,7 @@ Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the
 | 2 | The groove is deeper. More soil washes away. | The bags still hold. | The same as before. The roots hold the soil. |
 | 3 | A gully. Lots of muddy water. | The water goes over the top, and one bag slips down the slope. | The same again. The soil is still there. |
 
-`[check]` These are authored results for the model, chosen to match what usually happens in classroom tray tests.
+`[check]` These are made-up animation results for comparing these three model strips. They are not observations from a real tray experiment, and other materials or conditions can behave differently. A science reviewer must check this illustration before build.
 
 **Record prompt, after each pour:** What did you see on each strip?
 **Stems:** I saw the water… · I saw the soil… · I saw the bags… · I saw the grass…
@@ -126,7 +126,7 @@ Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the
 - By the bridge, for a few days while a flood passes: · bare soil · sandbags · grass and roots
 
 **After answering:**
-> Sandbags hold water back for a while. Plants don't stop water coming over, but their roots hold the soil, so the bank doesn't wear away. Plants help against wind wearing soil away, too. Each one does a different job, so the best choice depends on the place. `[check]`
+> Sandbags hold water back for a while. In these authored animations, the planted strip lets water over and loses less soil. Roots can reduce erosion, but they do not guarantee that a bank will stay put. Plants help against wind wearing soil away, too. Each one does a different job, so the best choice depends on the place. `[check]`
 
 ## b4. The low fields (Act IV)
 
@@ -145,7 +145,7 @@ Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the
 **Comparison table (fills in as the child tests):**
 - Heading: What each plan did
 - Columns: Plan · Coins · Land given · Spring flood · Big flood · Great flood
-- Cells: wet sections and extra water for Les Saules, as tested
+- Cells: wet sections and fictional downstream-impact score for Les Saules, as tested
 
 **After all three plans are tested in all three floods:**
 > Every plan kept the homes, the bridge road and the mill path dry in the big flood. They did it in different ways, with different costs. In the great flood, they were different again. No plan was best at everything.
@@ -184,6 +184,6 @@ Off-screen invitations record nothing.
 
 ## Grown-up notes
 
-- The model is deliberately simple: each section either holds or lets water through, room for the brook lowers the water downstream, and held-back water is counted as going on downstream. Real floods depend on volume, speed, ground, timing and much more.
+- The model is deliberately simple: each section either holds or lets water through, room for the brook lowers the water downstream, and raised banks receive a unitless downstream-impact score. Real floods depend on volume, speed, ground, timing and much more.
 - The three plans match the town meeting in Act IV. The model shows that each has real costs and real benefits; it never picks a winner, and nor should anyone at the meeting.
 - The claim stems ask for evidence from tests the child ran, and a worry. The writing is for a grown-up to read and talk about, never graded.

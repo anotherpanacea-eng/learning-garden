@@ -104,7 +104,7 @@ Each level opens with the miller's request.
 3. "One Forward tile, and the Repeat does the rest. How many times do you need?"
 **Challenge:** Can you do it with just 2 tiles?
 **Hint:** Count the squares in the aisle. That's how many times to repeat.
-**Solved:** "Eight forwards, two tiles. My thumb is grateful."
+**Solved:** "Trundle reached the end of the aisle." The two-tile praise is shown only when that challenge was met.
 **Challenge met:** "Two tiles exactly. That's the shortest there is."
 
 ### m5. Round the millpond
@@ -173,7 +173,7 @@ Each level opens with the miller's request.
 ### d2. Pip's three sacks
 
 **Pip's note:** "I did the three sacks. I put four repeats, to be safe."
-**Run result:** Bump! On move 13, Trundle rolled into the end wall.
+**Run result:** Bump! On move 13, Trundle reached the edge of the floor.
 **Hint:** All three sacks moved. What was Trundle trying to do after that?
 **Fixed:** "Three sacks, three repeats. Being safe wasn't safe after all."
 

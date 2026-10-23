@@ -1,6 +1,8 @@
 # 123. The Clockwork Mill: programming with loops, new moves and debugging
 
-Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II and V of [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/123-clockwork-mill-text.md); this spec holds the machine, the levels and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II and V of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/123-clockwork-mill-text.md); this spec holds the machine, the levels and the saves. Code and art are for the implementation pass.
+
+**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
 
 ## Purpose
 
@@ -15,7 +17,7 @@ The mill's clockwork sack cart, **Trundle**, was knocked over in the storm. The 
 
 ## The machine, `trundle-v1`
 
-The floor is a grid of squares, at most 8 by 8. Each square is **floor**, **wall** (sack piles, posts, the mill wheel), **millpond** or holds a number of **sacks**. Trundle stands on one floor square facing one of four directions, and carries at most one sack.
+The floor is a grid of squares, at most 9 by 9 for authored levels (the designer remains 3–8 per side). Each square is **floor**, **wall** (sack piles, posts, the mill wheel), **millpond** or holds a number of **sacks**. Trundle stands on one floor square facing one of four directions, and carries at most one sack.
 
 | Tile | What Trundle does |
 | --- | --- |
@@ -24,10 +26,12 @@ The floor is a grid of squares, at most 8 by 8. Each square is **floor**, **wall
 | **Lift** | Picks up one sack from its square. Stops with a message if there is no sack or it is already carrying one. |
 | **Drop** | Puts its sack down on its square. Stops with a message if it carries nothing. |
 | **Repeat** *n* | Runs the tiles inside its bracket *n* times, *n* from 2 to 9. Repeats can nest, up to three deep. |
-| **New move** | A named row of tiles, made on the side table and used like any tile. Names are pictures: star, moon, leaf, acorn. A new move can use another, never itself. |
+| **New move** | A named row of tiles, made on the side table and used like any tile. Names are pictures: star, moon, leaf, acorn. A new move can use another only if the complete call graph is acyclic; direct and indirect recursion are refused without changing the draft. |
 | **New move with a number** (from level 9) | A new move whose inside uses a number slot, *n*, in one Repeat. Using it asks for the number: *Go 3*. |
 
-A level is solved when Trundle ends on the goal square and every sack is where the level wants it. Trundle runs at one move per half second, or one move per tap with **Step**. At 300 moves it stops: "Trundle needs winding up again." No program can run forever, because repeats are counted.
+A level is solved only when its program terminates normally on the goal square, carrying nothing, with exactly the requested sack counts and any required final facing/route visits. The starting state alone is not a completed run. For m5, visit (0,3), (3,3), (3,0), then (0,0) in that order during the run; simply remaining at the start does not solve it. m10 additionally ends facing east. Trundle runs at one move per half second, or one move per tap with **Step**. At 300 moves it stops: "Trundle needs winding up again." The 300-move limit counts primitive actions, including failed actions, not Repeat/call wrappers. Acyclic calls and bounded repeats make evaluation finite. Run starts from the unchanged initial grid; Step advances the same run one primitive at a time; Reset returns to that initial state without erasing the program. Editing stops the transient run; the next Run/Step starts fresh.
+
+**Finite program contract:** each level offers F/L/R, adding lift/drop only for sack levels, Repeat from m4, the four picture-named moves from m8 and numeric moves from m9; m8/m9 exclude L even inside a named move. Custom levels offer these same finite tiles subject to a kept allowed-tile set. Numeric arguments are integers2–9; each parameterized move uses its own n only as a Repeat count. Undefined names, cycles, empty Repeat/move bodies or out-of-range arguments are refused in an editable draft without executing them. At most4 move definitions; at most60 AST tiles in the main program and12 per definition; repeat nesting at most3 after following calls (not merely per definition). A Repeat node counts as one source tile plus its body; a call as one source tile, with the separately authored definition excluded from the main challenge count. At most300 primitive actions run, with normal termination after exactly300 allowed; stop before a301st action.
 
 ## The levels
 
@@ -55,7 +59,7 @@ Pip has written programs for four levels, and each has one mistake. The child ru
 | ID | Level | Pip's program | What happens (simulated) | The fix |
 | --- | --- | --- | --- | --- |
 | `d1` | `m6` The steps | Repeat 4 [F R F L] | Bump into the edge on move 3 | Swap R and L |
-| `d2` | `m7` Three sacks | Repeat 4 [F Lift F Drop] | Bump into the end wall on move 13, after all three sacks are moved | Repeat 3 |
+| `d2` | `m7` Three sacks | Repeat 4 [F Lift F Drop] | Bump into the grid edge on move 13, after all three sacks are moved | Repeat 3 |
 | `d3` | `m3` One sack | F F Drop F F Lift | "Nothing to drop" on move 3 | Swap Drop and Lift |
 | `d4` | `m5` Round the millpond | Repeat 4 [F F F L] | Bump into the top edge on move 5 | L to R |
 

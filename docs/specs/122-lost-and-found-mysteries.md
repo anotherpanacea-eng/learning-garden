@@ -1,6 +1,8 @@
 # 122. The Lost and Found Board: deduction mysteries
 
-Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II and IV of [spec 120](120-keeper-of-the-ways.md). Every clue, note and message is in [the companion text](../content/122-lost-and-found-text.md); this spec holds the rules, the checker and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II and IV of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md). Every clue, note and message is in [the companion text](../content/122-lost-and-found-text.md); this spec holds the rules, the checker and the saves. Code and art are for the implementation pass.
+
+**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
 
 ## Purpose
 
