@@ -79,6 +79,9 @@ Companion to [spec 121](../specs/121-games-table.md). Use as written, after the 
 | attention | "I'm watching for the end." · "If you leave me three, I'll take three." |
 | plan | "I'm counting backwards from the end. Don't tell my magpie." · "I like the number I just left you." · "Hm. You left me a number I don't like." (only when Bramble is in a losing position) |
 
+**Origin card (Seed Pile and Ribbon Rows):** `[check]`
+> Games where players take turns taking things away are very old, and people play them all over the world with stones, sticks or seeds. In 1901, a mathematician called Charles Bouton named one of them *Nim* and worked out the secret for winning it with any number of rows.
+
 ## Ribbon Rows
 
 **Setup heading:** How many ribbons in each row?
@@ -119,6 +122,9 @@ Companion to [spec 121](../specs/121-games-table.md). Use as written, after the 
 - "I always shut the big ones while I still can. Big numbers are harder to roll later."
 - "The dice don't care how clever you are. That's what I like about this one."
 - (Only when all shut) "You did it! I've only done that a handful of times."
+
+**Origin card (Shutters):** `[check]`
+> Shutters is based on a dice game called Shut the Box. Families and friends have played it for a long time, especially in Europe, but nobody is sure where it began.
 
 ## Seed Holes
 

@@ -39,7 +39,7 @@ No timer, score or lock. A mystery can be left and resumed with its marks.
 | `prints` | Muddy prints | 4 visitors × 4 boots × 4 places | 5 plus one secondhand clue | A source that might be wrong; I HEARD; clues that can't all be true |
 | `wet-corner` | The wet corner | No grid | 3 neighbor notes | Sort, then more than one explanation and what would tell them apart (Act IV) |
 
-**Checked by brute force over every arrangement** (script kept in the review notes): each grid mystery has exactly one arrangement that fits all its clues, and removing any one clue leaves more than one. After the first round, `ladder` has two arrangements (four after only two clues) and `stalls` has twelve. In `prints`, the five trusted clues have one arrangement; adding the magpie's secondhand clue leaves none; setting aside the magpie's clue restores exactly one, and setting aside any other single clue leaves none or two.
+**Checked by brute force over every arrangement** (2026-10-23; the implementation's tests repeat it): each grid mystery has exactly one arrangement that fits all its clues, and removing any one clue leaves more than one. After the first round, `ladder` has two arrangements (four after only two clues) and `stalls` has twelve. In `prints`, the five trusted clues have one arrangement; adding the magpie's secondhand clue leaves none; setting aside the magpie's clue restores exactly one, and setting aside any other single clue leaves none or two.
 
 ## The secondhand clue
 
