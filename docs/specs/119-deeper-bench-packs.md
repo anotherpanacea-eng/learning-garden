@@ -10,6 +10,8 @@ Each bench gets one optional **Harder cases** pack, chosen locally on the bench 
 
 Each pack lists its teaching encounter, contrast, cases with worked answers, and the authored replies that matter most. Numbers are checked; wording is a draft for review.
 
+Every pack follows the same Jane-derived shape as [spec 118's desk](118-keepers-desk-entry.md#3-conventions-that-make-the-desk-feel-different): a learn card with one worked example first (foldable with **I know this, show me the question**), a guided first case, then unguided cases, and the **I'm stuck** ladder of hint, similar worked example, then skip. Where the Marble teaching research bundled with Jane has a record for a pack's topic, the pack's representations and replies follow it; section 9 says which.
+
 ## 2. Balance Stall: unknowns on both sides
 
 Bench: [spec 64](64-balance-stall.md). The existing pack has one parcel on one pan and loose units. This pack puts identical parcels on both pans and then writes the result as an equation.
@@ -40,6 +42,10 @@ After each solved case, the stall's ledger shows the equation beside the balance
 
 Reply after both: "Some balances have one answer, some have none, and some work for every mass. The ledger shows which: if the parcels cancel and the units don't match, there's no answer; if everything cancels, every mass works."
 
+**Marble research notes (Solving Linear Equations):** the pack follows its recommended balance model, one true equation per ledger line, collecting the unknown on the side with more by taking the smaller number of parcels from both pans, checking by putting the answer back into the starting balance, and naming the one, none and every-mass cases (Bramble's labels). Its listed misconceptions get authored replies: an operation on one pan only (the contrast above), and a run-on ledger line such as `2P = 8 = 4` ("Each line should be true by itself. 2P isn't 4; P is."). Its advice to handle negative answers explicitly is a **documented exception**: positive masses only, so negative solutions wait for a separate pack with a model that can show them, such as algebra tiles with zero pairs.
+
+**Hard prerequisites:** Writing Algebraic Equations, Substituting into Formulae and Using inverse operations have no declared reference in the app. The ledger lines teach the first two inline. The removal moves are inverse operations made concrete.
+
 **Candidate topics:** `mt_QhFEDyIwSO` Solving Linear Equations; `mt_z5iwdZyeDr` Algebraic Transformations; `mt_KwdjWEmMNo` Algebraic Notation. Positive whole-number masses only; negative quantities remain outside the model.
 
 ## 3. Seed Stall: drawing without putting back
@@ -68,6 +74,16 @@ A tree diagram is built branch by branch as the explorer chooses first and secon
 **Contrast:** "Is sun-sun less likely when you keep the first seed out?" Yes: 1/15 against 1/9, because after one sun there's only one left.
 
 **Reply when a run of 15 doesn't match the expected counts:** "Fifteen trials is a short run. The fractions say what happens on average over very many trials, not what any one run must show."
+
+**Marble research notes (Tree diagrams; Experimental vs Theoretical):** multiply along a branch and add across paths; recompute the second branch from the smaller bag; keep fractions uncancelled until the end (thirtieths here) so the paths add easily. Tagged wrong choices with replies:
+
+| Wrong entry | Misconception | Reply |
+| --- | --- | --- |
+| 2/6 on the sun-then-sun branch | Reusing the first draw's probability for the second draw | "One sun is already out. How many seeds are left, and how many are suns?" |
+| 2/6 + 1/5 for sun, sun | Adding along a branch | "Along a branch you need both to happen: multiply. Add only when you join different paths." |
+| "Moon is due after three suns" | The gambler's fallacy | "The bag doesn't remember. Each trial starts with a full bag of 2 sun and 4 moon." |
+
+**Hard prerequisites:** Tree diagrams needs Sets & Venn Diagrams and Experimental probability, and Experimental probability needs The Probability Scale. None has a declared reference in the app. The existing Seed Stall covers simple chance experiments (referenced). This pack lists outcomes systematically and shows each result on a 0 to 1 line in its learn card. Venn diagrams are a **documented exception**, and the tree here is a two-stage ordered list, not a general sample-space method.
 
 **Candidate topics:** `mt_GDtFU5fyUv` Tree diagrams; `mt_-bMnJcPJy8` Experimental vs Theoretical; `mt_sHJqh6UUya` Experimental probability. Still a screen model, never evidence about a real bag.
 
@@ -115,8 +131,13 @@ Bench: [My Count Collection, spec 86](86-count-collection.md). This pack supplie
 - "The courier asks: how heavy is a usual parcel?" Choices: 6 kg (the mean); 3 kg (the median); 18 kg (the heaviest); "it depends what you need to know". The authored replies explain that four of the five parcels weigh 4 kg or less, so the median describes a usual parcel better here, and that the mean is still the right number for a different question: "If the five parcels were shared evenly between five bags, how much would each bag hold?"
 - Remove the millstone: mean (2 + 3 + 3 + 4) ÷ 4 = **3 kg**, median (3 + 3) ÷ 2 = **3 kg**. One unusual value moved the mean by 3 kg and the median not at all.
 
-**Teaching encounter:**
+- **Reverse problem** (the research's test of meaning): "A sixth parcel arrives. Now the mean of all six is 7 kg. How heavy is the new parcel?" *Total 6 × 7 = 42; 42 − 30 = **12 kg**.* Reply to an entry of 7: "That's the new mean, not the new parcel. If six parcels share 42 kg evenly, what must the new one add?"
+- Notice that the mean of the first five, 6 kg, is not the mass of any parcel. The reply says so plainly, because expecting the mean to be one of the values is a listed misconception.
 
+**Teaching encounter** (Marble research for Calculating the Mean: the levelling model first, and the total = mean × count relationship):
+
+> Stack the five parcels' kilograms as towers: 2, 3, 3, 4 and 18. Level them out by moving kilograms from tall towers to short ones until all five are the same height. They level at 6. That's the mean: the total, 30, shared fairly between 5.
+>
 > The mean shares everything out evenly. The median is the one in the middle when you line them up. One very large value pulls the mean towards it; the median barely notices.
 
 **Second dataset (association, not cause):** eight weeks of the courier's records.
@@ -126,7 +147,9 @@ Bench: [My Count Collection, spec 86](86-count-collection.md). This pack supplie
 | Rain (mm) | 5 | 12 | 20 | 8 | 30 | 25 | 2 | 15 |
 | Days delayed | 0 | 1 | 2 | 0 | 3 | 3 | 0 | 1 |
 
-Plot the points; describe the pattern (wetter weeks had more delays). Then a contrast card: "The same weeks also had the most market stalls, because market weeks happened to be wet. Can we tell from this table whether rain or markets caused the delays?" The fitting reply: not from this table alone; both rose together.
+Plot the points; describe the pattern in words first (wetter weeks had more delays), then name it as a positive correlation. Then a contrast card: "The same weeks also had the most market stalls, because market weeks happened to be wet. Can we tell from this table whether rain or markets caused the delays?" The fitting reply: not from this table alone; both rose together. Following the Marble research for Scatter Graphs & Correlation, the learn card names four explanations for a pattern like this: rain causes delays; something else (market weeks) causes both; delays cause rain (here, plainly not); or chance. A second card shows two scatters with lines of the same steepness, one tight and one loose, because the steepness of a line is often mistaken for the strength of a correlation.
+
+**Hard prerequisites:** Coordinates (age 11+) and Comparing measurements have no declared reference; plotting in the first quadrant does. Eight whole-number points need only first-quadrant plotting, so this is a documented narrowing. No line of best fit is drawn in this pack.
 
 **Candidate topics:** `mt_Cg8VPguS_V` Calculating the Mean; `mt_8atyuvPUZc` Scatter Graphs & Correlation. Supplied example data, never a survey of real people.
 
@@ -163,6 +186,9 @@ Bench: [spec 58](58-cartographers-table.md) and [Same route, different scale, sp
 - Choose a scale from: 1 cm for 10 m; 1 cm for 20 m; 1 cm for 50 m. *1 cm for 10 m needs 60 cm and won't fit. 1 cm for 20 m fills the sheet exactly. 1 cm for 50 m fits in 12 cm, leaving room for the key.* Both fitting scales are accepted; the reply names what each gains.
 - With 1 cm for 20 m: the narrows (24 m) are **1.2 cm** and the ford (15 m) is **0.75 cm**. "Would you be able to see the difference between the narrows and the ford at this scale?"
 - An inset at 1 cm for 5 m: narrows **4.8 cm**, ford **3 cm**.
+- **Reading the other way:** "On the 1 cm for 20 m map, the mill to the library measures 7.5 cm. How far is that?" *7.5 × 20 = **150 m**.* Reply to 0.375 (dividing): "The real distance should be bigger than the map distance. One centimetre stands for 20 metres, so multiply." Reply to 150 cm: "That's the map count times 20, but in which unit? Each centimetre stands for 20 *metres*."
+
+The research for this topic recommends practising both directions, map to real and real to map, checking the size of an answer before working it out, and converting units as a separate last step. The pack does all three.
 
 **Teaching encounter:**
 
@@ -181,4 +207,9 @@ Bench: [spec 58](58-cartographers-table.md) and [Same route, different scale, sp
 
 ## 9. Upstream overlap (AGENTS.md)
 
-Studied from the pinned notes in `docs/upstream-opportunities.md`; not refreshed. Marble topic IDs are candidate encounters only. Jane's balance stages and worked-example formats informed the earlier benches; nothing new from Jane is incorporated here. Refresh before building.
+Refreshed 2026-10-23: Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060` (`LESSONS.md` and its bundled Marble teaching research, `data/marble/teaching-research.json`, os-taxonomy `a871973`). The app's vendored Marble pin and the topic IDs above are unchanged.
+
+- **Jane conventions adopted as design:** teach, guided, then independent; the stuck ladder; misconception-tagged wrong choices with short replies; second person and short prompts. Its bosses, medals, review gates and mastery inference are not adopted. No Jane code or prose is copied.
+- **Marble research records used:** Solving Linear Equations (section 2), Tree diagrams and Experimental vs Theoretical (section 3), Calculating the Mean and Scatter Graphs & Correlation (section 5), Scale and similar shapes, age 11+ (section 7). Their representations and misconceptions are paraphrased as design notes. The research text (CC BY-SA 4.0, © Generative Spark, Inc.) is not reproduced.
+- **No research record consulted** for the Sorting Desk and Sentence Bridges packs. Those rest on the earlier benches' own reviewed sources and need a subject reviewer.
+- **Hard prerequisites:** each pack names the hard prerequisites from `curriculum/marble/dependencies.json` that the app does not yet reference, and how the pack supports them or why it narrows them, as spec 49 section 8 requires.
