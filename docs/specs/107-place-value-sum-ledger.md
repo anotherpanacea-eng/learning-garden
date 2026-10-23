@@ -1,6 +1,6 @@
 # 107 — Write the Same Sum
 
-**Status: implementation-review candidate. The specification at `f7fcc67cd26a8c23637927f30b1aff50aa1b2fe1` cleared independent six-lens, mathematics, content and rendered-art review before build. Independent implementation review remains in progress; no release is approved by this document.** The [source audit](../source-audits/107-place-value-sum-ledger.md) records the exact overlap and evidence limits. The [responsive original mock](assets/107-place-value-sum-ledger-mock.html) is a visual proposal, not a working lesson.
+**Status: built and merged in [PR113](https://github.com/anotherpanacea-eng/learning-garden/pull/113) at `c022b060fae479631dbe042a36734acf200cc2b0`. The specification at `f7fcc67cd26a8c23637927f30b1aff50aa1b2fe1` cleared independent six-lens, mathematics, content and rendered-art review before build; independent implementation review and exact-candidate Claude clearance completed at `70a46fcdf9f7cb49b7d6a409caf456ea0102e08e`. Deployment remains deferred; no production version is established by this document.** The [source audit](../source-audits/107-place-value-sum-ledger.md) records the exact overlap and evidence limits. The [responsive original mock](assets/107-place-value-sum-ledger-mock.html) is a visual proposal, not the runtime lesson. See the [current roadmap](../roadmap.md) for the release queue.
 
 ## The small missing action
 
