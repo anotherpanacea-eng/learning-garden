@@ -1,6 +1,6 @@
 # 113. Same pour, new unit
 
-**Status: implementation-review candidate; independent implementation/root/Claude clearance remains pending. Independent specification/source/mathematics/static-art gates cleared `317fb9df1c0cc5b93d1257ead9dda8ff497bf0f5`. This records the prior spec gate, not implementation or publication clearance.**
+**Status, 2026-10-23: implemented and merged in [PR123](https://github.com/anotherpanacea-eng/learning-garden/pull/123) at `f9f8fd49aa8cffe8acf0acd9f9944bc2f3958427`, following spec/design [PR122](https://github.com/anotherpanacea-eng/learning-garden/pull/122). Independent specification/source/mathematics/static-art gates cleared `317fb9df1c0cc5b93d1257ead9dda8ff497bf0f5`; root, separate implementation and full/focused Claude reviews cleared final runtime candidate `855b5ea8fb78383397eb27b484b41553729c96a6`. Deployment to the intended site remains deferred; a merge is not a live-site verification or a learning-outcome claim.**
 
 [Source and overlap audit](../source-audits/113-capacity-unit-bridge.md) records immutable references and the evidence packet.
 
