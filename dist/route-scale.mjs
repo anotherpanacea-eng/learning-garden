@@ -1,5 +1,5 @@
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
-import {hearButton,stopSpeech} from './play-media.mjs';
+import {hearButton,stopSpeech,bindSpeech} from './play-media.mjs';
 
 // Original fixed story. Grid units describe the drawing, never device centimeters.
 export const scaleSource=Object.freeze({id:'post-garden-scale-v1',east:8,north:4,total:12});
@@ -91,9 +91,12 @@ function figure(key){return `<figure class="scale-sheet" data-scale-key="${key}"
 function body(view){return `<p>${scaleOpening}</p><section class="scale-source"><p>${copy(scaleSourceText)}</p><p><strong>${scalePurpose}</strong></p></section><p>${scaleDisclosure}</p><div class="scale-controls"><div class="scale-key-controls" role="group" aria-label="Distance represented by one edge">${[2,4].map(k=>button('key',`${k} m per edge${view.key===k?'<span>✓ Selected</span>':''}`,`data-scale-value="${k}" aria-pressed="${view.key===k}"`)).join('')}</div><div class="scale-view-controls">${button('compare',view.compare?'Show one map':'Compare both maps')}${button('undo','Undo last change',view.undo?'':'disabled')}</div>${view.undo?'':'<p>No change to undo.</p>'}</div><div class="scale-maps${view.compare?' scale-compare':''}">${scaleKeys(view).map(figure).join('')}</div>${view.compare?`<p class="scale-comparison">${copy(scaleComparison)}</p>`:''}${hearButton('Request this view’s current reading.','Hear this view')}${links}`;}
 export function scalePage(notebook,owner,options){
  const fresh=!visit||visit.notebook!==notebook||visit.owner!==owner;
+ const active=typeof document==='undefined'?null:document.activeElement;
+ const action=!fresh&&active?.matches('[data-scale-action]')?active.dataset.scaleAction:null,value=active?.dataset.scaleValue;
  if(fresh){const view=initialScale(),result=recordScaleDisplay(notebook,view,options);visit={notebook,owner,view:result.ok?view:null};if(result.changed)options.save?.();}
  const html=`<section class="scale-page" ${visit.view?'data-scale-root':'data-scale-blocked'}>${heading()}${visit.view?`<div data-scale-view>${body(visit.view)}</div><p id="scale-status" role="status" aria-live="polite" tabindex="-1"></p>`:`<p id="scale-status" role="status" tabindex="-1">${scaleRefusal}</p><a href="#notes">Grown-up notes</a><a href="#workshop/maps">Back to Cartographer’s Table</a>`}</section>`;
  if(fresh&&typeof document!=='undefined'){const captured=visit;queueMicrotask(()=>{if(visit===captured&&location.hash==='#workshop/scale')document.querySelector(visit.view?'#scale-title':'#scale-status')?.focus();});}
+ if(action){const captured=visit;queueMicrotask(()=>{if(visit===captured&&location.hash==='#workshop/scale')document.querySelector(`[data-scale-action="${action}"]${value?`[data-scale-value="${value}"]`:''}:not(:disabled)`)?.focus();});}
  return html;
 }
 export function bindScale({notebook,explorerId,isActive,save,render,focus,...options}){
@@ -104,8 +107,10 @@ export function bindScale({notebook,explorerId,isActive,save,render,focus,...opt
  root.querySelectorAll('[data-scale-action]').forEach(b=>b.addEventListener('click',()=>{
   if(!live(b))return;const action=b.dataset.scaleAction,next=changeScale(visit.view,action,Number(b.dataset.scaleValue));if(!next)return;
   const result=recordScaleDisplay(captured.notebook,next,options);if(!result.ok){refuse();return;}
-  stopSpeech();visit.view=next;if(result.changed)save();render();
-  document.querySelector('#scale-status').textContent=scaleAnnouncement(next,action).replace(/(\d+) m\b/g,'$1\u00a0m');
+  stopSpeech();visit.view=next;if(result.changed)save();
+  root.querySelector('[data-scale-view]').innerHTML=body(next);
+  bindScale({notebook,explorerId,isActive,save,render,focus,...options});bindSpeech();
+  root.querySelector('#scale-status').textContent=scaleAnnouncement(next,action).replace(/(\d+) m\b/g,'$1\u00a0m');
   focus(action==='undo'?'#scale-title':action==='key'?`[data-scale-action="key"][data-scale-value="${next.key}"]`:'[data-scale-action="compare"]');
  }));
  root.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',e=>{
