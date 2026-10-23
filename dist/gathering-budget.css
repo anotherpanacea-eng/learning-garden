@@ -1,0 +1,52 @@
+.gather-budget-page{max-width:920px;margin:auto;color:#183f39;overflow-wrap:anywhere}
+.gather-budget-page .back,.gather-budget-page button,.gather-budget-page summary{min-height:44px}
+.gather-budget-page .back{display:inline-flex;align-items:center}
+.gather-budget-page button{white-space:normal;padding:10px 14px;max-width:100%}
+.gather-budget-page button:focus-visible,.gather-budget-page a:focus-visible,.gather-budget-page summary:focus-visible,.gather-budget-page input:focus-visible{outline:3px solid #8d5515;outline-offset:3px}
+.gather-eyebrow{font-size:.82rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#426453;margin:0 0 4px}
+.gather-panel,.gather-request,.gather-summary{background:#fffdf5;border:2px solid #aec3b2;border-radius:18px;padding:clamp(12px,2.5vw,22px)}
+.gather-panel h2,.gather-request h2{margin:.2em 0 .5em}
+.gather-request{margin-bottom:14px;border-left:6px solid #397958}
+.gather-request-head{display:flex;align-items:center;gap:15px}
+.gather-limit{display:flex;align-items:center;justify-content:center;flex:none;width:65px;height:65px;border:3px solid #183f39;border-radius:50%;background:#e9c66e;font-weight:900;font-size:1.3rem}
+.gather-needs,.gather-turns,.gather-catalog,.gather-review-actions{display:flex;flex-wrap:wrap;gap:10px}
+.gather-needs span{padding:5px 10px;background:#edf3e8;border-radius:999px;font-weight:700}
+.gather-chooser{margin-top:12px}
+.gather-budget-page details summary{display:list-item;cursor:pointer;padding:8px 3px;font-weight:700}
+.gather-chooser button,.gather-catalog button{flex:1 1 260px;text-align:left}
+.gather-turns{margin:12px 0}
+.gather-turns button{flex:1 1 180px}
+.gather-turns [aria-current="page"]{background:#183f39;color:#fff;border-color:#183f39}
+.gather-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:start}
+.gather-layout>div{min-width:0}
+.gather-layout>div>button{width:100%;margin-top:12px}
+.gather-stock-list{display:grid;gap:10px}
+.gather-stock{display:grid;grid-template-columns:68px minmax(0,1fr);gap:6px 12px;align-items:center;border:1px solid #c8d5c6;border-radius:12px;padding:8px;background:#f8faef}
+.gather-stock p{margin:3px 0}
+.gather-packet{width:68px;height:58px;display:flex;align-items:center}
+.gather-packet svg,.gather-chip svg{width:100%;height:100%}
+.gather-stock-controls{grid-column:1/-1;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.gather-stock-controls span{font-weight:700}
+.gather-stock-controls button{min-width:86px}
+.gather-summary{background:#f1f6e9}
+.gather-summary h3{margin:0 0 8px}
+.gather-chips{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin:8px 0;padding:0}
+.gather-chip{width:72px;min-height:78px;border:1px solid #b8c9b7;border-radius:8px;background:#fffdf5;text-align:center;padding:4px;font-size:.74rem;line-height:1.15}
+.gather-chip svg{height:47px;display:block}
+.gather-summary dl{margin:10px 0;display:grid;gap:5px}
+.gather-summary dl>div{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #c8d5c6;padding-top:5px}
+.gather-summary dd{margin:0;font-weight:800;text-align:right}
+.gather-summary .tiny{margin-bottom:0}
+.gather-review .gather-summary{margin:12px 0}
+.gather-review label{display:block;font-weight:800;margin-top:15px}
+.gather-idea-row{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:8px}
+.gather-idea-row input{width:82px;min-height:44px;font-size:1.1rem;padding:6px 8px}
+.gather-idea-row [aria-pressed="true"]{background:#183f39;color:#fff}
+.gather-review-actions{margin:16px 0 10px}
+.gather-feedback{border-left:5px solid #397958;background:#edf3e8;padding:8px 14px;line-height:1.45}
+.gather-feedback p{margin:8px 0}
+.gather-help{margin-top:14px}
+.gather-lifecycle{font-size:.88rem;margin:18px 0}
+.gather-grownup{margin-bottom:22px}
+@media(max-width:680px){.gather-layout{grid-template-columns:1fr}.gather-stock{grid-template-columns:58px minmax(0,1fr)}.gather-packet{width:58px}.gather-summary{margin-top:0}}
+@media(max-width:400px){.gather-request-head{gap:10px}.gather-limit{width:54px;height:54px;font-size:1.1rem}.gather-stock-controls button{flex:1 1 90px}.gather-stock-controls span{flex-basis:100%}.gather-turns button{flex-basis:120px}}
