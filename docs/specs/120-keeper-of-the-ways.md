@@ -1,6 +1,6 @@
 # 120: The Keeper of the Ways, the story under the six acts
 
-Status: proposed, 2026-10-23. Writing only: story, structure and the rules a build must keep. Codex owns code, art, film and merge. Child-facing text lives in the companion [120-keeper-of-the-ways-text.md](../content/120-keeper-of-the-ways-text.md). This spec sits under [spec 49](49-six-act-curriculum.md), which keeps ownership of the six acts' teaching purposes; it gives those acts a plot. It builds on the town, seasons and almanac in [spec 33](33-rebuilding-the-town.md) and [its text](33-town-content.md), the [Travelers' Archive](24-travelers-archive.md), the [challenge-band proposal](proposed/challenge-bands.md), the [optional starting flow](114-optional-starting-flow.md) and the [milestone films](../story-milestones-and-films.md). The older-learner destination it names, the Keeper's Desk, is specified in spec 118, drafted alongside this one.
+Status: proposed, 2026-10-23. Writing only: story, structure and the rules a build must keep. Codex owns code, art, film and merge. Child-facing text lives in the companion [120-keeper-of-the-ways-text.md](../content/120-keeper-of-the-ways-text.md). This spec sits under [spec 49](49-six-act-curriculum.md), which keeps ownership of the six acts' teaching purposes; it gives those acts a plot. It keeps the act order and chapter lists from the roadmap's story order and spec 49, and section 15 shows, chapter by chapter, what it keeps and what it adds, along with the Marble topics and Jane conventions it draws on. It builds on the town, seasons and almanac in [spec 33](33-rebuilding-the-town.md) and [its text](33-town-content.md), the [Travelers' Archive](24-travelers-archive.md), the [challenge-band proposal](proposed/challenge-bands.md), the [optional starting flow](114-optional-starting-flow.md) and the [milestone films](../story-milestones-and-films.md). The older-learner destination it names, the Keeper's Desk, is specified in spec 118, drafted alongside this one.
 
 Single device, offline, single player. Every explorer keeps a separate town. Nothing here needs an account, a network call, an age, a grade or a name.
 
@@ -132,7 +132,7 @@ Each act below names the question the child carries, its four chapters with thei
 **Chapters:**
 1. **The old map and Hollis's account.** Page 4 sets the year of the fine harvest beside the first big flood. Bramble: "Five years apart. My hat and my boots both got wet that year too; that doesn't mean my hat did it." She is right that it proves nothing yet.
 2. **A puzzling change at the bottom of the orchard.** One low corner of the orchard is always wet now. Reeds are growing there that nobody planted. The Water Lab and Rain Paths model what happens to rain on a sponge, on packed ground and in a straight channel. Model effects are labelled as model effects.
-3. **What other places did.** The Travelers' Archive offers real floods and real choices (section 9): a flood people depended on, a city that moved its river and made a garden of the old bed, and a country that gave its rivers room.
+3. **The newspaper's two explanations, and what other places did.** The Willowbank Gazette prints both stories side by side: "Just a bad storm" and "We made it worse." The Travelers' Archive then offers real floods and real choices (section 9): a flood people depended on, a city that moved its river and made a garden of the old bed, and a country that gave its rivers room.
 4. **The proposal for the low fields.** The town meets about the low fields. Three plans are on the table: **the Wall** (a higher flood wall along the brook; the orchard stays as it is), **the Sponge** (let the lowest orchard fields go back to marsh; the orchard keepers lose some trees and get the reed trade with Vadoalto), and **Some of Each** (a lower wall upstream of the mill and a smaller wet meadow at the low corner). Each plan has a real cost and a real benefit. Bramble speaks for the Wall and for the orchard families, and her worries about them are fair.
 
 **Ending:** *The Map We Changed*. The explorer keeps one plan, or a plan with a stated worry. Someone at the meeting changes their mind because of evidence, and says which evidence. The meeting does not need to agree, and the story does not announce a winner. The kept plan belongs to this explorer's town and returns in Act VI.
@@ -155,9 +155,9 @@ Each act below names the question the child carries, its four chapters with thei
 
 **Chapters:**
 1. **Choose a partner and a purpose.** Willowbank and Vadoalto agree to keep a regular exchange: goods down, news and seeds up.
-2. **Compare routes and obligations.** Who carries what, how often, on which Way.
+2. **Compare routes and keep a plan.** Who carries what, how often, on which Way, and what happens when a Way is closed. The explorer keeps a workable exchange plan, or a smaller companion-supported one.
 3. **The long rain.** Days of rain upstream. Nuria reads Vadoalto's post and sends the courier down the river ahead of the water. Willowbank has hours to prepare. The explorer's Act IV plan meets the water. Each of the three plans has its own short scene, and each holds with an honest cost (companion text). The bridge, the mill and everything the explorer mended stay whole.
-4. **Welcome someone new.** The rain passes. Hollis comes home up the river path to see the brook, and stays for supper.
+4. **The first journey, and someone new.** The rain passes and the first regular exchange goes up the river under the kept plan, with help available. On the way back, Hollis comes home up the river path to see the brook, and stays for supper.
 
 **Ending:** *The Opening of the Ways*. Page 6, Hollis's letter, explains the parcel. Bramble ties a ribbon on each Way. A new apprentice arrives with an unfamiliar parcel, and Dot gets there first. The explorer's guide stays alongside them as they help the apprentice begin. Play continues: festivals, exchanges, investigations and new parcels. The town is never broken again to make a new beginning.
 
@@ -233,3 +233,53 @@ Per explorer, additive: `story:{arrival, acts:{[actId]:{chapters:[chapterId], en
 ## 14. Review
 
 Independent review of this spec and its companion text, per the repo's usual gate. The archive packs need source review before any child text is written for them. Spanish text needs a fluent reader. Each chapter that needs a new activity gets its own spec; this one creates none.
+
+## 15. What this builds on: the roadmap's acts, Marble and Jane
+
+### The act structure already in the roadmap
+
+The roadmap's story order (recovery, community making, wider exchange, evidence and disagreement, learner-originated projects, the Opening of the Ways) and spec 49's chapters stay as they are. This spec adds a plot that runs through them and changes only what the plot needs:
+
+| Act | Spec 49 chapters | Kept | Added or changed here |
+| --- | --- | --- | --- |
+| I | Find and feed; deliver and explain; investigate and plant; welcome-back supper | All, and the six-table supper as the ending | The parcel and the "who is the Keeper?" question; page 1 at the supper; spec 33's village repairs as a chapter |
+| II | Weekly market; garden across seasons; dragon's birthday; first original show; courier invitation from beyond the bridge | All five beats, in order | The town starts keeping records (S7-II local records); Bramble's ribbons; Dot stays; page 2; the invitation comes from Vadoalto |
+| III | Floating market; seed exchange; route through unfamiliar ground; extended Paris correspondence | Market, seed exchange and route | Correspondence goes upstream with Nuria in English and Spanish; Paris letters continue alongside. Page 3 |
+| IV | Old map and a returning resident's account; proposal for shared land; puzzling change in the garden; newspaper's competing explanations | All four, with the shared land as the low orchard fields | Hollis's page stands in for the returning resident's account until Hollis returns in VI; the archive's real flood packs join the newspaper chapter; three named plans |
+| V | Authored project paths, choose/plan/make/revise/communicate | All | Projects start from the blank "For the next Keeper" pages; the flood question is one more path |
+| VI | Partner and purpose; routes and obligations; one consequential uncertainty; propose and revise a plan; first journey; welcome someone new | All, folded into four chapters; the ending still needs a kept plan, a first reciprocal exchange and a welcomed newcomer | The long rain is the "consequential uncertainty"; the Act IV plan meets it; Hollis returns; the Keeper reveal |
+
+Two things are new to the structure: the seasonal festivals and Storm Day (section 6), which answer the open "seasons or acts?" question by using both, and the story arrival points (section 10), which take on the roadmap's "author later-act arrivals and returns" item.
+
+### Marble: the topics the story gives a home to
+
+Checked against the pinned graph in `curriculum/marble/` (1,590 topics) and against Marble upstream at [`f186a79`](https://github.com/withmarbleapp/os-taxonomy/tree/f186a79a9525c189e2d423e31613c62b6805416f) (1,838 topics), 2026-10-23. The story's flood question lands squarely on the S7 strand (Earth, water, weather and hazards), whose source topics currently have no declared reference at all, and it matches the strand families spec 49 already placed in these acts: S7-II local records, S7-IV human impacts and uncertainty, S7-VI comparing plans with evidence; S1-IV correlation versus cause; H1-II/III checking accounts and evidence versus interpretation; E3-IV and E4-IV evaluating and writing arguments with counterclaims; E5-IV structured discussion; L3-IV evidence versus value disputes.
+
+| Act | Pinned Marble topics the story's jobs could serve (authoring candidates) |
+| --- | --- |
+| II | Local weather patterns `mt_HZvTriQWTh`; Seasons & Weather Patterns `mt_fI-8iqf_Id`; Using Weather Instruments `mt_sA0RvWXSYY` |
+| III | Weather vs Climate `mt_AB-TEMXSGJ`; Using Multiple Sources `mt_JVVKT-_AD9`; Checking Sources Against Each Other `mt_wWlZoLQBR6` |
+| IV | Changing Environments `mt_Wyd-l-6H7G`; Human impact on environments `mt_YB0qF5KX9C`; Preventing Erosion `mt_m6UaSmrQVG`; Designing for Weather Hazards `mt_JmMtZCifJB`; Changing Your Mind with Evidence `mt_obF-6VYRya`; Evidence Versus Interpretation `mt_Lu4H4mbsqO`; Questioning Historical Sources `mt_TTzJTF-OkG`; Evaluating Arguments in Non-Fiction `mt_gMSFymQlrW`; Persuasive Writing `mt_Qxyikkkzam`; Formal Debates `mt_Yrjn8jAt1c` |
+| V | Evidence-Based Writing `mt_ZxdfRbwkKM`; Research & Source Evaluation `mt_Qcsl1Z1x0l`; Drawing conclusions from evidence (12+) `mt_3jmBpEepYX` |
+| VI | Weather Forecasting & Safety `mt_URezjbU-6f`; Weather-Resistant Engineering `mt_iiUdDUEEGY`; Reducing Human Impact `mt_deexfCHU9m`; Communities Protecting Resources `mt_7e-lG7YOWa` |
+
+Upstream adds a Geography subject that the pinned graph lacks. Its topics fit the story closely: Reading and drawing maps `mt_w4cUnN_SsQ` (page 1), Natural, managed and built features `mt_cUpJvBD1YA`, Managed environments for food `mt_hoc__Jx3sa` (the orchard), People shaping places `mt_ZY38c705Ce`, Managing natural hazards `mt_9wfokahWw6` (Act IV) and How countries are interconnected `mt_n3ojDXoaqC` (upstream and downstream). Upstream also adds Presenting an argument `mt_PsQdUQBw0D`. Using them waits on the separately reviewed pin update the roadmap describes.
+
+These are candidates for the per-chapter activity specs, with descriptions to check one by one. This spec declares no atlas reference, changes no pin and claims no coverage; a story beat is never evidence that a topic was taught. Two cautions in the strand map shape the story directly. H1-VI rules out letting the fictional town stand in for real history, which is why the archive packs are real, sourced and labelled. S7 rules out flood-safety advice from toy rain models, which is why child text about wetlands and walls stays modest and every model run is labelled as a model.
+
+### Jane: what was studied and what was adopted
+
+Studied: Jane [`1927912`](https://github.com/kentlangley/Jane/tree/1927912b8d9cd4f7df6e7fbe8416521194743060) `LESSONS.md` (quests, review gates, teach-before-boss, finished-quest locking, hook length, coverage), its glossary and its kid prompts for the weather and hazard topics above, 2026-10-23.
+
+Adopted as design conventions:
+
+- **A quest is a hook, a path of stages and a finale.** Each act here has a carried question, four chapters and an ending scene.
+- **Short hooks** (Jane caps hooks and intros at about 30 words). The short version of every page and act opening in the companion text keeps to one or two sentences.
+- **"You have to do something from the past to make it to the future."** Earlier pages and kept plans come back in later acts (the ledger in IV, the Act IV plan in the long rain), and spec 74's Town Remembers errands can draw on them. Here they never stand as a gate.
+- **Teach before the finale.** An act's ending asks nothing the act's own chapters did not offer.
+- **A finished quest stays finished, and the quest's story is locked once started.** A reached act ending stays reached, and page text the explorer has read is kept as read, even if the wording is later revised.
+- **Visit a new area.** Act II deliberately brings in S7 weather records, a strand with no current references.
+- **Tap a word.** Jane's glossary convention fits the Keeper's Pages: *marsh*, *flood post*, *ledger*, *upstream*.
+
+Not adopted: medals, bosses, hearts, points, one-quest-at-a-time queuing, age and grade settings, the nightly author and Leitner gates. Jane's kid prompt for Designing for Weather Hazards has a single right answer ("Which design best protects a house from floods?"); Act IV's plan choice deliberately keeps three defensible answers, while factual jobs inside the act can still have right answers. No Jane code, prose or assets are incorporated, and Jane's license layers are untouched.
+

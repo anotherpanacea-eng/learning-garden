@@ -150,7 +150,11 @@ Not in the parcel. Hollis brings it home at the end of Act VI and gives it to th
 
 ## 4. Act openings and endings
 
+Each act starts with a **hook**: one or two sentences, 30 words at most, shown on the village scene and read aloud on request. The longer opening follows for anyone who wants it.
+
 ### Act I. After the Storm
+
+**Hook:** The storm has passed. Pip found a wet parcel for someone called the Keeper of the Ways. Nobody knows who that is.
 
 Act I uses the existing First Morning and supper text. Two additions:
 
@@ -158,6 +162,8 @@ Act I uses the existing First Morning and supper text. Two additions:
 - **Almanac line:** *Act I: After the Storm. Willowbank is mended. One page is dry.*
 
 ### Act II. A Town of Our Own
+
+**Hook:** Willowbank is mended. Now it gets to decide what kind of town it wants to be. And Pip's old map shows a marsh that isn't there anymore.
 
 **Opening** (first visit to the village after the supper):
 > Willowbank is mended. Now it has to decide what kind of town it wants to be. The market is coming back, the garden is changing with the seasons, and someone has heard it's Ember's birthday soon. Pip has the map in his satchel. He keeps looking at the green patch.
@@ -177,6 +183,8 @@ Then page 2 and Nuria's first letter (section 5).
 
 ### Act III. Beyond Willow Bridge
 
+**Hook:** A letter came from Vadoalto, up the river. The storm hit them too. The old path by the high ford is marked with faded ribbons.
+
 **Opening:**
 > Upstream is closer than it sounds. Vadoalto is a day's walk by the high ford, if you can find the path. The faded ribbons on the old fence posts look a lot like Bramble's.
 
@@ -193,12 +201,15 @@ Then page 3.
 
 ### Act IV. The Town Has Two Stories
 
+**Hook:** The pages say the town drained the Sponge, and then the floods got worse. Did one cause the other? Everyone has an opinion.
+
 **Opening:**
 > Now everyone has read the pages, and everyone has an opinion. Some people say the floods are just weather. Some say the town brought them on itself, the year it drained the Sponge. Bramble says both sides should stop shouting and look at the numbers. Then she starts shouting about the numbers.
 
 **Chapter lines:**
 - *The old map and Hollis's account.* Page 4, with Bramble's line about her hat.
 - *A puzzling change.* "The bottom corner of my orchard is always wet now," says the orchard keeper. "Reeds are coming up. I never planted reeds."
+- *The newspaper's two explanations.* The Willowbank Gazette runs two headlines side by side: **JUST A BAD STORM, SAYS MILLER** and **WE MADE IT WORSE, SAYS LIBRARIAN**. Pip reads both twice. "They can't both be right," he says. "Maybe they can," says {guide}. "A bit."
 - *What other places did.* The librarian opens the Travelers' Archive. "Willowbank isn't the first town to have this argument. Let's see what others decided, and what happened after."
 - *The proposal for the low fields.* The bell rings for a town meeting.
 
@@ -229,6 +240,8 @@ Then page 3.
 
 ### Act V. A Question of Your Own
 
+**Hook:** The last pages are blank, headed *For the next Keeper*. What do you want to find out?
+
 **Opening:** page 5.
 > "So," says {guide}. "What do you want to find out?"
 
@@ -245,12 +258,16 @@ Then page 3.
 
 ### Act VI. The Opening of the Ways
 
+**Hook:** Willowbank and Vadoalto want to keep the Ways open for good. Then the rain starts, and it doesn't stop.
+
 **Opening:**
 > Willowbank and Vadoalto want to keep the Ways open for good: goods down the river, news and seeds up. That means deciding who carries what, on which Way, and how often.
 
 **Chapter lines:**
 - *Choose a partner and a purpose.* Nuria writes: "Our bakers want your apples. Your basket-makers want our reed. Everybody wants your café's honey cake, which seems unfair, since the honey is ours."
-- *Compare routes and obligations.* "The river path is fastest, but it floods. The bridge road is slow but always dry. The high ford is short, and only safe in summer."
+- *Compare routes and keep a plan.* "The river path is fastest, but it floods. The bridge road is slow but always dry. The high ford is short, and only safe in summer."
+  **Prompt:** Keep this exchange plan? **Choices:** Keep it · Make it smaller · Not yet
+  **After keeping:** "Nuria will get a copy. So will Bramble, who says she's only reading it for the ribbons."
 
 **The long rain:**
 > It rains for three days. Upstream, Nuria watches Vadoalto's flood post climb past the third mark, then the fourth. She writes one line, and {courier} runs.
@@ -273,8 +290,11 @@ Then the scene for the explorer's kept plan:
 Every version ends:
 > The bridge holds. The mill holds. Everything you mended holds. The miller scratches a new mark on the flood post, and writes the date beside it, and then, after a moment, writes *Warned in time.*
 
+**The first journey:**
+> The rain passes. The first regular parcel goes up the river under your plan: apples, two of Pip's drawings and a honey-cake recipe that Vadoalto says it will improve. {courier} comes back the next evening with reed bundles and a note: *Same time next week?*
+
 **Welcome someone new:**
-> The rain passes. Two mornings later, a tall grey heron comes slowly up the river path, stopping to look at the brook every few steps.
+> On the way back from the landing, you see a tall grey heron coming slowly up the river path, stopping to look at the brook every few steps.
 >
 > "Hollis!" says Nuria.
 >
