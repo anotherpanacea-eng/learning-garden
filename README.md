@@ -475,6 +475,6 @@ The optional **Cold Window, Same Water** picture at `#science/window` contrasts 
 
 ## Gathering Budget
 
-At `#workshop/budget`, choose packets for one of two pretend gathering requests. The pictured basket shows supplied units and cost; checking a plan separately reports whether it meets the request, fits the limit, and matches an optional cost idea. Several baskets work. This is a transient table, with no saved budget, rewards, or judgment about real family choices. See [spec 104](docs/specs/104-gathering-budget.md) and its [source audit](docs/source-audits/104-gathering-budget.md).
+At `#workshop/budget`, choose packets for one of two pretend gathering requests. The pictured basket shows supplied units and cost; checking a plan separately reports whether it meets the request, fits the limit, and matches an optional cost idea. Several baskets work. This is a transient table, with no saved budget, rewards, or judgment about real family choices. See [spec 104](docs/specs/104-gathering-budget.md) and its [source audit](docs/source-audits/104-gathering-budget.md) and [review receipt](docs/reviews/104-gathering-budget-review.md).
 
 Run `node test/gathering-budget-checks.mjs`. With `dist` served locally and Playwright/Chrome installed, `GATHERING_TEST_URL=http://127.0.0.1:4198/ node test/gathering-budget-browser.js` checks the two requests, four fit combinations, touch controls, local notes isolation and import. `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `GATHERING_ARTIFACTS` select local browser dependencies and temporary screenshots.

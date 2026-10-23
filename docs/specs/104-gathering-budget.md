@@ -1,5 +1,7 @@
 # Gathering Budget: choose a plan for a pretend welcome
 
+**Status:** specification independently cleared before build. Independent implementation review and its sole price-visibility fix cleared at `bbc1696`; the composed candidate now awaits final exact-head release review. No deployment is claimed.
+
 ## Problem and bounded action
 
 The Coin Counter makes alternative coin combinations for **one fixed price**; Market Change finds a return from fixed tender. The Café asks for a plate and later gathers ingredient stock without money. None lets a learner choose and revise **several supplies** under a stated limit while checking whether the chosen supplies meet a separate request. This table adds that action. It is a fictional planning exercise, not earned play currency, access to a celebration, a financial judgment, or a real purchase.
