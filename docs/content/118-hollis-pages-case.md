@@ -25,7 +25,7 @@ Each smudge shows some surviving letters. Underscores are lost letters; the facs
 | Page | Line around the smudge | Surviving letters | Proposed word | What a reader can use |
 | --- | --- | --- | --- | --- |
 | 1 | The Sponge holds the spring water and lets it go [__], so the mill boards are seldom needed. | `s _ _ _ l y` | slowly | Letter shape; the sense of "holds … lets it go"; page 3's "the water's ways" |
-| 1 | Scale: one finger to a [__] walk. | `_ a _ ' s` | day's | Apostrophe; the valley map's size; Act III's "a day's walk by the high ford" |
+| 1 | Scale: one finger to a [__] walk. | `_ u _ _ _ _ _ - h _ _ _ ' s` | quarter-hour's | Hyphen and apostrophe; follows *a*, so it can't start with a vowel sound; the map runs from the high ford to the mill, and Vadoalto is a day's walk away, so a finger must stand for much less than a day |
 | 2 | [__] the gaps grow shorter. | `_ _ _ _ l y` | Lately | Capital at line start; the ledger's own years, which do get closer |
 | 3 | A town that closes them [__] finds out where the water goes instead. | none | always | Nothing but sense; this is the truly missing word |
 | 4 | the apples this autumn are [__]. | `m a g _ _ _ _ _ _ _ _` | magnificent | Letter shape; the longer version's "best harvest anyone remembered" |
@@ -197,7 +197,7 @@ Three parts, each with **Write it yourself** (free text) and **Choose and adapt*
 
 > The librarian reads your note, then the transcription, then your note again. "Now anyone who reads this knows exactly which words are Hollis's and which are ours. That's rarer than it should be."
 
-**Story link:** when Hollis returns in Act VI, an optional line can appear if this case was kept: Hollis looks at the transcription and says, "*Lately.* Yes. I wrote it in the spring of year 38." The line confirms only the page 2 word and is shown the same way whichever word the explorer chose. (For spec 120 to accept or drop.)
+**Story link:** when Hollis returns in Act VI, an optional line can appear if this case was kept. Hollis never says which word they wrote, because that would answer the case. Hollis looks at the transcription for a long time and asks: "Which did you think it said?" Whatever the explorer kept, the reply is the same: "Then you read it the way I meant it, mostly." (Sent to spec 120 for placement in the "Someone comes home" scene.)
 
 **Supported route:** Choose and adapt alone completes Step 5; steps 1 to 4 can stay open.
 

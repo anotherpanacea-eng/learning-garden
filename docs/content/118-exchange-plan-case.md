@@ -28,7 +28,7 @@ Buttons: **Start the plan** · **Later**.
 
 **Loads:** a cart carries **6 baskets** of apples or **4 bundles** of reed (reed is bulky).
 
-**What each town wants, each week in the apple season:** Vadoalto wants **12 baskets** of apples. Willowbank wants **8 bundles** of reed. The agreed rate is still **2 bundles for every 3 baskets**.
+**The usual weekly trade** (spec 120): **4 bundles** of reed for **6 baskets** of apples, the same 2 : 3 rate as Act III. **In the apple season** Vadoalto's bakers ask for double: **12 baskets** a week, and Willowbank takes **8 bundles**. The steps below plan for the apple season, the busiest weeks.
 
 ## 4. Steps
 
@@ -50,7 +50,7 @@ Tasks (Check my working):
 
 - **1a.** At 2 bundles for 3 baskets, how many bundles should 12 baskets bring? *Answer: 12 is 4 groups of 3, so **8 bundles**.*
 - **1b.** "Does what each town wants match the rate?" *Answer: **yes**: 12 baskets up, 8 bundles down.*
-- **1c.** "In spring, Vadoalto wants only **6 baskets** a week, but Willowbank still wants 8 bundles. What's fair?" Not marked. Choices: "Willowbank sends 6 baskets and gets 4 bundles."; "Willowbank pays for the other 4 bundles another way, perhaps with honey cake."; "Vadoalto sends 8 bundles anyway; it'll balance out by autumn." Each reply works out what the choice means in baskets and bundles and who carries the difference. The reply to the third adds: "That's a promise over time. It works if both towns keep a record of who owes what."
+- **1c.** "In spring, Vadoalto wants only **3 baskets** a week, but Willowbank still wants its usual 4 bundles. What's fair?" Not marked. Choices: "Willowbank sends 3 baskets and gets 2 bundles."; "Willowbank pays for the other 2 bundles another way, perhaps with honey cake."; "Vadoalto sends 4 bundles anyway; it'll balance out by autumn." Each reply works out what the choice means in baskets and bundles and who carries the difference. The reply to the third adds: "That's a promise over time. It works if both towns keep a record of who owes what."
 
 **I'm stuck (1a):** as Case 3's 1a ladder, with 12 baskets.
 
