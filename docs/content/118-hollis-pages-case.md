@@ -66,7 +66,7 @@ Tasks:
   - "Nothing that matters: *are* and *were* mean the same here."
   - "She made a spelling mistake."
 
-  Reply to the second: "They both say the keepers were pleased. But *are* tells you Hollis wrote it that very year. *Were* could have been written any time later."
+  Reply to the second: "They both say the keepers were pleased. But *are* presents the event as current, while *were* looks back. Tense alone cannot date the writing: a later writer can use a historical present."
 
 **I'm stuck (1a):**
 
@@ -79,7 +79,7 @@ Tasks:
 | Entered | Misconception | Reply |
 | --- | --- | --- |
 | A guessed word in place of [smudged] | Filling the gap during transcription | "Good guess, maybe. Step 3 is for guesses. For now, write what's actually on the page." |
-| *were* for *are*, or *was* for *is* | Changing tense to sound like history | "Keep Hollis's words. They wrote it in the present, which tells us when it was written." |
+| *were* for *are*, or *was* for *is* | Changing tense to sound like history | "Keep Hollis's words. They use the present tense, which changes the voice of the account. That alone does not prove when they wrote it." |
 | Missing *I admit* | Leaving out words that seem unimportant | "Every word counts in a transcription. *I admit* tells us how Hollis felt." |
 
 ## 6. Step 2: Sure, guessed or missing?

@@ -56,14 +56,14 @@ The common timeline keeps **1993 high water → 1995 high water → programme de
 
 Tasks:
 
-- **1a.** Put in order: the 1993 high water; the 1995 high water and evacuation; the decision to give rivers more room; most of the projects finished. *Answer: in that order.*
-- **1b.** "Why did the government change its approach if the dikes held?" Choices:
-  - "Because the dikes only just held, and the rivers might carry more water in future." ← fits the reading
+- **1a.** Put in order: the 1993 high water; the 1995 high water; the decision to give rivers more room; most of the projects finished. *Answer: in that order.*
+- **1b.** "What danger was the response meant to prepare for?" Choices:
+  - "Future high water after the danger in1993 and1995." ← fits the reading
   - "Because the dikes broke in 1995."
   - "Because people preferred parks to dikes."
 
   Reply to the second: "This reading describes a danger and the response; it does not say the dikes broke in1995. Check the reviewed source card before making that claim."
-- **1c.** "What did the Netherlands decide?" Choices: "Only room for the river."; "Only higher dikes."; "Some of both, with more weight on room." The third fits; the reply to the first: "Every passage amount says the response combined dike work and more room. It was not instead of all dike work."
+- **1c.** "What did the Netherlands decide?" Choices: "Only room for the river."; "Only higher dikes."; "Some dike work and some more room." The third fits; the reply to the first: "Every passage amount says the response combined dike work and more room. It was not instead of all dike work."
 
 ## 5. Step 2: Higher walls, or more room?
 
@@ -72,6 +72,8 @@ Tasks:
 > There are two ways to keep a river from flooding a place. **Hold it in:** make the banks higher, so more water fits between them. **Let it spread:** give it more space somewhere it does less harm, so it doesn't rise as high where people live.
 >
 > Willowbank's three plans are the same two ideas. The Wall holds it in. The Sponge lets it spread. Some of Each does a bit of both.
+
+Before these tasks, show all six measure cards with their explanations from the reviewed Long passage, regardless of the earlier reading amount. Record that supplied source/support; do not ask for details from an unopened passage.
 
 Tasks:
 
