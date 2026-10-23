@@ -1,0 +1,51 @@
+.joining-ledger{max-width:860px;margin:auto;color:#183f39;font:1rem/1.4 'Trebuchet MS',sans-serif}
+.joining-ledger *{box-sizing:border-box}
+.joining-ledger h1,.joining-ledger h2,.joining-ledger h3{font-family:Georgia,serif;line-height:1.15}
+.joining-ledger h1{font-size:clamp(1.7rem,4vw,2.4rem);margin:.35rem 0}
+.joining-ledger h2{font-size:1.35rem;margin:.1rem 0 .5rem}
+.joining-ledger h3{font-size:.96rem;margin:.1rem 0 .35rem}
+.joining-ledger p{margin:.4rem 0 .7rem}
+.joining-ledger .ledger-back{display:inline-flex;align-items:center;min-height:44px}
+.ledger-eyebrow{font-size:.78rem;font-weight:bold;letter-spacing:.05em;text-transform:uppercase}
+.ledger-source-line{padding:.5rem .65rem;border-left:5px solid #397958;background:#eef5e9;font-weight:bold}
+.joining-ledger details>summary{min-height:44px;padding:.65rem .2rem;cursor:pointer;font-weight:bold}
+.joining-ledger button{min-height:44px;padding:.55rem .65rem;border:1px solid #9bb8a8;border-radius:.5rem;background:#fff;color:#183f39;font:inherit;font-weight:bold;cursor:pointer}
+.joining-ledger button.primary,.ledger-turns button[aria-current="page"]{background:#183f39;color:#fff}
+.joining-ledger button:disabled{opacity:.55;cursor:default}
+.joining-ledger :focus-visible,.joining-ledger [tabindex="-1"]:focus{outline:3px solid #ac632a;outline-offset:2px}
+.ledger-turns,.ledger-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem}
+.ledger-turns{margin:.65rem 0}
+.ledger-pane{border:2px solid #b5c8b4;border-radius:.9rem;background:#fffdf5;padding:.8rem;margin:.6rem 0}
+.ledger-small{font-size:.89rem;color:#385851}
+.ledger-case-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+.ledger-case-list section{border:1px solid #b5c8b4;border-radius:.7rem;padding:.7rem;background:#f2f7ed}
+.ledger-case-list button{width:100%}
+.ledger-group{border:1px solid #bfd1bd;border-radius:.7rem;padding:.5rem;margin:.45rem 0;background:#f2f7ed}
+.ledger-group.pip{border-left:5px solid #ad6d41}.ledger-group.dot{border-left:5px solid #4f748f}
+.ledger-marks{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.ledger-mark{display:inline-block;width:14px;height:14px;border:2px solid #734927;border-radius:4px;background:#e2ba8a}
+.ledger-mark.ledger-dot{border-color:#305874;background:#b7d3e1;transform:rotate(45deg);border-radius:2px}
+.ledger-packet{display:inline-flex;flex-wrap:wrap;width:82px;gap:2px;padding:4px;border:2px solid #536b57;border-radius:.45rem;background:#fafff1}
+.ledger-packet .ledger-mark{width:12px;height:12px}
+.ledger-full{margin:.5rem 0}
+.ledger-compact{border:2px solid #8ba98e;border-radius:.7rem;padding:.5rem;background:#f6f9f1}
+.ledger-compact .ledger-group{padding:.3rem;margin:.3rem 0}
+.ledger-compact .ledger-group h3{font:800 .82rem 'Trebuchet MS',sans-serif}
+.ledger-compact .ledger-packet{width:59px;gap:1px;padding:3px}
+.ledger-compact .ledger-packet .ledger-mark{width:9px;height:9px;border-width:1px}
+.ledger-caption{background:#eef5e9;border-left:5px solid #397958;padding:.55rem;margin:.6rem 0}
+.ledger-carry{font-size:.85rem;font-weight:bold;color:#64410d;background:#fff0c8;border-radius:.55rem;padding:.5rem}
+.ledger-writing-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:.7rem}
+.ledger-writing-layout>*{min-width:0}
+.ledger-table{border-collapse:collapse;width:100%;max-width:350px;table-layout:fixed;text-align:center;font-variant-numeric:tabular-nums}
+.ledger-table caption{font-size:.85rem;text-align:left;font-weight:bold;margin-bottom:.3rem}
+.ledger-table th,.ledger-table td{border:1px solid #c4d2c4;padding:.3rem .2rem;width:38%;font-size:1.45rem}
+.ledger-table thead th{font:bold .83rem 'Trebuchet MS',sans-serif;background:#edf3e8}
+.ledger-table th:first-child{width:24%;font:bold .83rem 'Trebuchet MS',sans-serif;text-align:left}
+.ledger-result>*{border-top:3px solid #183f39!important;background:#edf3e8;font-weight:bold}
+.ledger-empty{color:#68786d}
+.ledger-hint{grid-column:1/-1}
+.joining-ledger #ledger-notice:not(:empty){padding:.55rem;border-left:5px solid #a04730;background:#fff1e9}
+.ledger-controls .speech-controls{grid-column:1/-1}
+.joining-ledger .speech-controls.speech-playing{position:static;bottom:auto;left:auto;transform:none;width:100%;max-width:100%;max-height:none;overflow:visible;z-index:auto;box-shadow:none}
+@media(max-width:680px){.ledger-writing-layout,.ledger-case-list{grid-template-columns:1fr}.ledger-pane{padding:.65rem}}
