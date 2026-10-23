@@ -1,4 +1,5 @@
 import {prepareRemainsPage,bindRemains,resetRemains} from './returning-ledger-ui.mjs';
+import {bridgesPage,bridgesEntry,bindBridges,resetBridgesSession} from './sentence-bridges-ui.mjs';
 import {fossilPage,fossilEntry,bindFossil,resetFossilSession} from './fossil-close-ui.mjs';
 import {portionsPage,portionsEntry,bindPortions,resetPortionsSession} from './join-portions-ui.mjs';
 import {pavingPage,pavingEntry,pavingRefusalPage,bindPaving} from './garden-paving-ui.mjs';
@@ -242,6 +243,8 @@ function render(){
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   const remainsBench=hash==='#numbers/return/ledger';
   if(!remainsBench||choosingExplorer)resetRemains();
+  const bridgesBench=hash==='#loft/bridges';
+  if(!bridgesBench||choosingExplorer)resetBridgesSession();
   if(root!=='numbers'||slug!=='join'||detail!=='ledger'||choosingExplorer)resetJoiningLedger();
   if(root!=='science'||slug!=='evidence'||choosingExplorer)resetEvidenceShelf();
   if(root!=='numbers'||slug!=='seeds'||choosingExplorer)resetSeedTurn();
@@ -267,6 +270,7 @@ function render(){
   ensureEqualGroups(state);ensureMessages(state);ensureLetters(state);
   let html,joiningExamples=null;
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
+  else if(bridgesBench)html=bridgesPage(explorerStore.active.id);
   else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id);
   else if(bellBench)html=bellStudioPage(state);
   else if(labelBench)html=labelPage(state,detail,explorerStore.active.id);
@@ -317,7 +321,7 @@ function render(){
     else html=orchardPage(state,slug);
   }
   else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:otherLiving;}
-  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry();
+  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry()+bridgesEntry();
   else if(root==='workshop')html=slug==='recut'||slug==='budget'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph,slug);
   else if(root==='science'){
@@ -355,10 +359,10 @@ function render(){
   else if(root==='puzzles')html=puzzlePage();
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
-  else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry();
+  else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry()+bridgesEntry();
   else html=home()+travelersArchiveEntry()+bellStudioEntry();
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
-  if(!choosingExplorer&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
+  if(!choosingExplorer&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
+  if(!choosingExplorer&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
   main.innerHTML=(state.broad.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;
   bindEgyptPhotoFallback(main);
@@ -493,6 +497,7 @@ function bind(){
  bindWorkshop(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindPortions({render,focus:focusElement,explorerId:()=>explorerStore.active.id});
  bindFossil({render,focus:focusElement,explorerId:()=>explorerStore.active.id});
+ bindBridges({explorerId:()=>explorerStore.active.id,focus:focusElement});
  bindSpeech();bindConnections(state,{save,render,navigate,focus:focusElement});
  bindScience(state,{save,render,focus:focusElement});
  bindColdWindow({explorerId:()=>explorerStore.active.id});
