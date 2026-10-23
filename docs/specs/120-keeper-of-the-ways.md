@@ -1,6 +1,6 @@
 # 120: The Keeper of the Ways, the story under the six acts
 
-Status: proposed, 2026-10-23. Writing only: story, structure and the rules a build must keep. Codex owns code, art, film and merge. Child-facing text lives in the companion [120-keeper-of-the-ways-text.md](../content/120-keeper-of-the-ways-text.md). This spec sits under [spec 49](49-six-act-curriculum.md), which keeps ownership of the six acts' teaching purposes; it gives those acts a plot. It keeps the act order and chapter lists from the roadmap's story order and spec 49, and section 15 shows, chapter by chapter, what it keeps and what it adds, along with the Marble topics and Jane conventions it draws on. It builds on the town, seasons and almanac in [spec 33](33-rebuilding-the-town.md) and [its text](33-town-content.md), the [Travelers' Archive](24-travelers-archive.md), the [challenge-band proposal](proposed/challenge-bands.md), the [optional starting flow](114-optional-starting-flow.md) and the [milestone films](../story-milestones-and-films.md). The older-learner destination it names, the Keeper's Desk, is specified in spec 118, drafted alongside this one.
+Status: proposed, 2026-10-23. Writing only: story, structure and the rules a build must keep. Codex owns code, art, film and merge. Child-facing text lives in the companion [120-keeper-of-the-ways-text.md](../content/120-keeper-of-the-ways-text.md) (parcel, pages, arrivals, almanac strings, archive outline) and the full script in [`docs/content/120-story/`](../content/120-story/) (every act, festival, Storm Day and letter). This spec sits under [spec 49](49-six-act-curriculum.md), which keeps ownership of the six acts' teaching purposes; it gives those acts a plot. It keeps the act order and chapter lists from the roadmap's story order and spec 49, and section 15 shows, chapter by chapter, what it keeps and what it adds, along with the Marble topics and Jane conventions it draws on. It builds on the town, seasons and almanac in [spec 33](33-rebuilding-the-town.md) and [its text](33-town-content.md), the [Travelers' Archive](24-travelers-archive.md), the [challenge-band proposal](proposed/challenge-bands.md), the [optional starting flow](114-optional-starting-flow.md) and the [milestone films](../story-milestones-and-films.md). The older-learner destination it names, the Keeper's Desk, is specified in spec 118, drafted alongside this one.
 
 Single device, offline, single player. Every explorer keeps a separate town. Nothing here needs an account, a network call, an age, a grade or a name.
 
@@ -9,7 +9,7 @@ Single device, offline, single player. Every explorer keeps a separate town. Not
 The six acts have purposes (recovery, belonging, exchange, disagreement, authorship, shared agency) and chapter lists. They have no plot. A child playing today meets a storm, a garden, a café, Paris and Bramble's gate, and nothing asks them a question that the next visit might answer. Four problems follow:
 
 1. **No question to carry.** Nothing in Act I points at Act II. A child who finishes the welcome-back supper has no reason to wonder what happens next.
-2. **The arc is too long to feel.** Spec 49 spreads six acts across a horizon of about eight years of childhood. A five-year-old cannot feel an arc that ends at thirteen. A 2026-10-21 outside review of the roadmap suggested a repeating seasonal year with the acts as rare large events; nothing has decided between the two.
+2. **The arc is too long to feel.** Spec 49 spreads six acts across a horizon of about eight years of childhood. A five-year-old cannot feel an arc that ends at thirteen. A 2026-10-21 outside review of the roadmap suggested a repeating seasonal year with the acts as rare large events. Section 6 settles this by using both.
 3. **One story, one level.** Children at different challenge bands share a device. They should be able to talk about the same story while doing different work in it. Today, the story beats that exist are written for the youngest player.
 4. **No door for an older learner.** An older explorer sees picture-book entrances. There is no reason in the story for them to be there, and no work in it that matches what they can do.
 
@@ -19,7 +19,7 @@ On the morning after the storm, Pip and Dot find a waterlogged parcel wedged aga
 
 ## 3. Why this story
 
-- **It grows out of what exists.** The storm, the flowerpot, the brook, the footbridge, the mill's flood boards, the Water Lab, Rain Paths, the weather log, the almanac, the post office and the Paris 1910 flood archive already sit in the game or its accepted specs. The story connects them; it adds one object (the parcel), one offstage character (Hollis), one partner town (Vadoalto) and its correspondent (Nuria).
+- **It grows out of what exists.** The storm, the flowerpot, the brook, the footbridge, the mill's flood boards, the Water Lab, Rain Paths, the weather log, the almanac, the post office and the Paris 1910 flood archive already sit in the game or its accepted specs. The story connects them; it adds one object (the parcel), one offstage character (Hollis), and two neighboring towns with one correspondent each (Vadoalto and Nuria upstream, Les Saules and Léon downstream).
 - **The question is real and has more than one honest answer.** Whether a town should build higher walls, give a river room, or do some of each is a live question in real places. A young child can hold it as "where does the water go?" An older learner can work it with data, sources and trade-offs. Neither group is handed a moral.
 - **The mystery pays off with the learner.** The reveal is that the Keeper is a role, and the explorer has been filling it all along by keeping the almanac and the routes. The ending needs no score: it is a recognition of what they did.
 - **It never re-breaks the town.** Spec 49 forbids a second disaster. The long rain in Act VI is the payoff of the town's preparation. It damages nothing that the explorer mended.
@@ -34,15 +34,18 @@ Existing characters keep their established descriptions. New characters are prop
 | **Dot** (ladybug, she/her) | New to this part of town. Postmaster, after a long discussion about the hat. | From newcomer to the one who belongs: in Act II she is asked to stay; in Act VI she is the first to greet the new apprentice, because she remembers being new. |
 | **The guide** (Mira, Rowan or Ari) | The explorer's companion. Equal in every way. | Asks questions; never knows the answer to the mystery ahead of the explorer. Rowan's "changing his mind" and Ari's "noticing" matter in Act IV, but any guide can say any line. |
 | **Bramble** (girl witch, she/her) and her **magpie** | Keeper of the ribbon gate. Rival, puzzle-setter, funny. | Her ribbons turn out to mark old paths, which her grandmother taught her to tie (Act II). In Act IV she argues for the wall and the orchard, and some of her points are right. In Act VI she ties the ribbons that mark the open Ways. She never needs redeeming. |
-| **The courier** | The explorer's chosen courier at Willow Post Office. | Carries the first letter to Vadoalto (III) and the warning back down the river (VI). |
+| **The courier** | The explorer's chosen courier at Willow Post Office. | Carries the first letter to Vadoalto (III), and in VI carries Willowbank's warning on to Les Saules. |
 | **Ember** (pocket-dragon) and café guests | Existing café regulars. | Ember's birthday is Act II's gathering. |
 | **Hollis** (grey heron, they/them), *new* | The old Keeper. Kept the flood post at the mill and the paths between towns. Retired to the coast before the explorer arrived. | Offstage until Act VI. Speaks only through the pages until they come home. |
-| **Nuria** (otter, she/her), *new* | Apprentice keeper of the flood post in Vadoalto, the town upstream. Writes letters in Spanish and English. | Becomes the explorer's correspondent and friend (III); sends the warning (VI). |
+| **Nuria** (otter, she/her), *new* | Apprentice keeper of the flood post in Vadoalto, the town upstream. Writes letters in Spanish and English. Her grandmother remembers the Valencia flood of 1957 (spec 118's desk case). | Becomes the explorer's correspondent and friend (III); sends the warning down the river with Vadoalto's own runner (VI). |
+| **Léon** (kingfisher, he/him), *new* | Ferry keeper at Les Saules, the town downstream. Writes letters in French and English. Fast, cheerful, always slightly damp. | Writes first in III; gets Willowbank's warning in VI, and sees Hollis pass through on the way home. |
 | **The apprentice**, *from spec 49* | A newcomer with an unfamiliar parcel. | Arrives in the final scene. Spec 49's "teach the apprentice" proposals can bring them in earlier as a learner the explorer helps. |
 
 Vadoalto ("high ford") is an ordinary modern riverside town whose people speak Spanish. It is a partner with its own knowledge, needs and opinions, never a place to be rescued. Its text needs review by a fluent Spanish reader before build.
 
-**Les Saules** ("the willows"), *new*, is the French-speaking town downstream, where Willow Brook joins a bigger river on its way north. Its ferry keeper, **Léon** (kingfisher, he/him), writes short letters in French and English. Les Saules appears in Act III's correspondence and in Act VI, when Willowbank passes the warning on. French text needs review by a fluent French reader.
+**Les Saules** ("the willows"), *new*, is the French-speaking town downstream, where Willow Brook joins a bigger river on its way north. Les Saules appears in Act III's correspondence and in Act VI, when Willowbank passes the warning on. French text needs review by a fluent French reader.
+
+**Supporting cast in Willowbank**, fixed so every writer uses the same people: the **miller** (she/her) and her cat, who keep the mill and its flood post; the **baker** (he/him), whose windowsill dries the pages; the **librarian** (they/them), who runs the library, the Travelers' Archive shelf and, from Act IV, the *Willowbank Gazette*; the **orchard keeper** (she/her), whose family has farmed the low fields for three generations; **Ember** and **Puff**, café regulars. Spec 118 adds **Wren Halloway** (she/her), the town's ledger-keeper, who hands an older learner the Keeper's Desk, and **Hob Pennick** (he/him), a farmer by the ford. Willowbank's people are animals, humans and the occasional dragon, as the café already shows.
 
 ### Where the valley is
 
@@ -81,13 +84,24 @@ The review question was whether the spine should be six linear acts or a repeati
 | Autumn | **Harvest Supper** | The café's big gathering; Ember's birthday falls in this season. |
 | Winter | **Lantern Night** | Lanterns on the bridge; the almanac is read aloud, which doubles as a recap of the year. |
 
-**Storm Day** is each explorer's own anniversary: the local date of their first visit. When it comes round, a lantern is lit on the footbridge and the almanac offers a one-page "a year since the storm" comparison (weather log this year against last year, places mended, pages dried). It appears for one day, asks for nothing, and is never missed: a later visit simply shows the lantern still lit.
+**Storm Day** is each explorer's own anniversary: the local date of their first story visit (for a later arrival, the day they arrived). When it comes round, a lantern is lit on the footbridge and the almanac offers a one-page "a year since the storm" comparison (weather log this year against last year, places mended, pages dried). It appears for one day, asks for nothing, and is never missed: a later visit simply shows the lantern still lit.
 
-**The acts are the plot.** An act advances by contributions, never by date and never by age. Each act after the first has four chapters. When an explorer has made a story contribution in three of them, the act's ending scene opens; the fourth chapter stays playable. A story contribution is whatever kept, sent or offered outcome the activity's own spec defines. Help, skips inside the activity, a smaller supported plan and work done together all count the same. Act I keeps its existing ending: six served tables at the welcome-back supper.
+**The acts are the plot.** An act advances by contributions, never by date and never by age. A story contribution is whatever kept, sent or offered outcome the activity's own spec defines. Help, skips inside the activity, a smaller supported plan and work done together all count the same. Every chapter stays playable after its act ends. When each act's ending opens:
 
-**Festival jobs also count toward the current act.** Each act's chapters list which festival jobs can feed them (for example, Act II's "garden across the seasons" accepts any spring planting or winter almanac job). A festival job never counts twice, and a festival with no fitting chapter in the current act still fills its own seasonal job as in spec 33. This is how the calendar feeds the plot without ever pacing it.
+| Act | Ending opens when | Why |
+| --- | --- | --- |
+| I | Six tables are served at the welcome-back supper (as built). The other Act I chapters are open but never required. | Keeps the existing ending. |
+| II | A contribution in any three of its four chapters. | |
+| III | A contribution in any three of its four chapters. | |
+| IV | A plan is kept at the meeting (chapter 4), plus a contribution in any two other chapters. | Act VI needs the kept plan. |
+| V | One project is kept with a stated limit, in any project path. | Act V has paths, not fixed chapters. |
+| VI | An exchange plan is kept (chapter 2), the long rain has played (chapter 3), and the first journey is made (chapter 4). Chapter 1 is a scene. | Spec 49's finale needs a kept plan, a first exchange and a welcome. |
 
-An act's ending wears the season the explorer reaches it in. A child who reaches the Act II celebration in winter sees it under lanterns.
+**Pages that open an act** (4 and 5) come free on the explorer's first visit on a later local day after the previous act's ending, so there is a night to wonder in between. The same rule starts the long rain: it begins on the first later local day after the exchange plan is kept.
+
+**Festival jobs also count toward the current act.** The script's festival file maps each festival job to the chapters it can feed in Acts II to VI (for example, a spring planting job feeds Act II's "garden across the seasons"). A festival job counts once, for one chapter. A festival job with no matching chapter in the current act still fills its own seasonal job, as in spec 33. Festival jobs never feed Act I, whose ending is the supper. This is how the calendar feeds the plot without ever pacing it.
+
+An act's ending wears the season the explorer reaches it in: the art changes, and each ending has one line written for each season. A child who reaches the Act II celebration in winter sees it under lanterns and hears the winter line.
 
 The festivals keep the town alive between acts. A child who plays for years without pushing the acts sees the seasons turn and the town deepen; a child who plays a lot in one month can reach Act III before the leaves fall. Both are fine.
 
@@ -103,7 +117,7 @@ Each act below names the question the child carries, its four chapters with thei
 
 **Ending:** the welcome-back supper. Page 1 comes free on the bakery windowsill while everyone is eating.
 
-**Older learner:** the Keeper's Desk opens in the mended library with spec 118's first case, *Bridge or ford?*, about which crossing to rebuild first.
+**Older learner:** the Keeper's Desk opens in a corner of the library with spec 118's first case, *Bridge or ford?*, about which crossing to rebuild first.
 
 ### Act II. A Town of Our Own
 
@@ -164,7 +178,7 @@ Each act below names the question the child carries, its four chapters with thei
 **Chapters:**
 1. **Choose a partner and a purpose.** Willowbank and Vadoalto agree to keep a regular exchange: goods down, news and seeds up.
 2. **Compare routes and keep a plan.** Who carries what, how often, on which Way, and what happens when a Way is closed. The explorer keeps a workable exchange plan, or a smaller companion-supported one.
-3. **The long rain.** Days of rain upstream. Nuria reads Vadoalto's post and sends the courier down the river ahead of the water. Willowbank has hours to prepare, and it sends the warning on, in French, to Léon at Les Saules: the help that came down the river keeps going down it. The explorer's Act IV plan meets the water. Each of the three plans has its own short scene, and each holds with an honest cost (companion text). The bridge, the mill and everything the explorer mended stay whole.
+3. **The long rain.** Days of rain upstream. Nuria reads Vadoalto's post and sends Vadoalto's runner down the river ahead of the water. Willowbank has hours to prepare (a preparation job at each depth), and it sends the warning on with the explorer's courier, in French, to Léon at Les Saules: the help that came down the river keeps going down it. The explorer's Act IV plan meets the water. Each of the three plans has its own short scene, and each holds with an honest cost (script, act 6). The bridge, the mill and everything the explorer mended stay whole.
 4. **The first journey, and someone new.** The rain passes and the first regular exchange goes up the river under the kept plan, with help available. On the way back, Hollis comes home up the river path to see the brook, and stays for supper.
 
 **Ending:** *The Opening of the Ways*. Page 6, Hollis's letter, explains the parcel. Bramble ties a ribbon on each Way. A new apprentice arrives with an unfamiliar parcel, and Dot gets there first. The explorer's guide stays alongside them as they help the apprentice begin. Play continues: festivals, exchanges, investigations and new parcels. The town is never broken again to make a new beginning.
@@ -181,6 +195,8 @@ Children at different bands play the same story. The rule:
 4. **Mixed strengths stay possible.** A child can take a Sapling map job and a Sprout reading job in the same chapter.
 5. **Siblings can compare notes.** Two explorers on one device have separate towns, but the same scenes. "Which plan did you keep?" is a conversation the game sets up without any shared state.
 
+Every job names the activity it opens. A job whose activity already exists is a story wrapper: a request from a character, the existing activity, and a closing line when the work is kept. A job whose activity does not exist yet is marked **[new]** in the script and listed in the script's index, so Codex and the other threads can see what content each one needs. The story text never supplies an activity's internal questions, hints or feedback; the activity's own spec does.
+
 Example for one chapter, Act IV's "puzzling change at the bottom of the orchard":
 
 | Depth | Job | Built on |
@@ -190,7 +206,18 @@ Example for one chapter, Act IV's "puzzling change at the bottom of the orchard"
 | Sapling | Run Rain Paths with and without the Sponge for the same storm. Compare how fast water reaches the mill, and say what the model leaves out. | Rain Paths; Fair Test |
 | Keeper's Desk | Set the ledger's flood heights against the years after draining. Decide what the pattern supports, what it does not, and what record would settle it. | Spec 118 desk pattern |
 
-The companion text gives a job table for one chapter in every act.
+The script gives jobs for every chapter in every act.
+
+### Writing rules
+
+For anyone writing story text against this spec:
+
+- **Lengths.** Hooks: 30 words at most. Scenes: a **Short** version (30 words at most, read-aloud available) and a **Longer** one (150 words at most). Where an older reader would want more, a **Keeper's note** (80 words at most) adds context, a number or a source; it is the third reading length. Pages keep their own three versions.
+- **Voice.** Warm, dry, specific. Jokes come from character (Dot's hat, Pip's stomach, Bramble's pride), never at a child's expense. Short sentences. No em-dashes.
+- **Placeholders.** `{guide}` for the chosen companion, `{courier}` for the explorer's courier. The explorer is "you" and never named, aged or gendered.
+- **Languages.** The game's text is English. Spanish appears with Nuria and Vadoalto; French with Léon and Les Saules. Every Spanish or French line has an English line beside it. Both need a fluent reader before build.
+- **Nobody dies in the fiction.** Real loss belongs only to archive history, handled as section 9 says.
+- **Facts.** Anything about real places, floods, wetlands or weather is marked *(check)* until a source review clears it.
 
 ## 9. The archive's flood thread
 
@@ -211,10 +238,10 @@ Packs must leave out recent floods with many deaths. Facts about wetlands and ch
 The starting flow in spec 114 offers preferences and a first activity. This spec adds a story arrival, offered once when an explorer has no story progress:
 
 - **Begin with the storm.** Act I, as today.
-- **Arrive after the mending.** Act II. The village is shown mended, the parcel already found and page 1 dry. A short recap (companion text) tells what happened before the explorer arrived.
+- **Arrive after the mending.** Act II. The supper has happened, the parcel is already found and page 1 is dry. Spec 33's repairs stay open for this explorer to do, and the recap never says the town is fully mended. A short recap (companion text) tells what happened before the explorer arrived.
 - **Arrive with the letter from upstream.** Act III. The explorer arrives as a newcomer travelling with the courier who carries Nuria's letter. Pip meets them at the bridge with the parcel and pages 1 and 2. This is the natural entrance for an older learner, and the Keeper's Desk is pointed out on arrival.
 
-Arriving later marks earlier acts as "before you came." Their places and activities stay open and fully playable, and nothing in them is recorded as done by this explorer. Earlier pages are readable in the almanac. Act IV and later have no arrival point, because their questions depend on pages the explorer should have time to wonder about.
+Arriving later marks earlier acts as "before you came," and Storm Day counts from the day of arrival. Their places and activities stay open and fully playable, and nothing in them is recorded as done by this explorer. Earlier pages are readable in the almanac. Act IV and later have no arrival point, because their questions depend on pages the explorer should have time to wonder about.
 
 ## 11. Rules the story keeps
 
@@ -248,7 +275,7 @@ No story decisions remain open. Review, Spanish and French reading, and the arch
 
 ## 14. Review
 
-Independent review of this spec and its companion text, per the repo's usual gate. The archive packs need source review before any child text is written for them. Spanish text needs a fluent reader. Each chapter that needs a new activity gets its own spec; this one creates none.
+Independent review of this spec, its companion text and the script, per the repo's usual gate. The archive packs need source review before final child text. Spanish and French text need fluent readers. Jobs marked **[new]** in the script need their own activity specs; this spec creates none.
 
 ## 15. What this builds on: the roadmap's acts, Marble and Jane
 
@@ -290,7 +317,7 @@ Studied: Jane [`1927912`](https://github.com/kentlangley/Jane/tree/1927912b8d9cd
 Adopted as design conventions:
 
 - **A quest is a hook, a path of stages and a finale.** Each act here has a carried question, four chapters and an ending scene.
-- **Short hooks** (Jane caps hooks and intros at about 30 words). The short version of every page and act opening in the companion text keeps to one or two sentences.
+- **Short hooks** (Jane caps hooks and intros at about 30 words). Every act has a hook of 30 words or fewer, and every scene has a Short version under the same cap.
 - **"You have to do something from the past to make it to the future."** Earlier pages and kept plans come back in later acts (the ledger in IV, the Act IV plan in the long rain), and spec 74's Town Remembers errands can draw on them. Here they never stand as a gate.
 - **Teach before the finale.** An act's ending asks nothing the act's own chapters did not offer.
 - **A finished quest stays finished, and the quest's story is locked once started.** A reached act ending stays reached, and page text the explorer has read is kept as read, even if the wording is later revised.
