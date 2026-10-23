@@ -1,6 +1,7 @@
 import {circuitPage,bindCircuits} from './lantern-circuit-ui.mjs';
 import {repeatDeliveriesPage,repeatDeliveriesNotes,bindRepeatDeliveries} from './repeat-deliveries-ui.mjs';
 import {recutPage,bindRecut} from './ribbon-recut-ui.mjs';
+import {gatheringBudgetPage,bindGatheringBudget} from './gathering-budget-ui.mjs';
 import {ribbonMatchesPage,ribbonMatchesNotes,bindRibbonMatches} from './ribbon-matches-ui.mjs';
 import {sourceTrailPage,sourceTrailNotes,bindSourceTrail} from './source-trail-ui.mjs';
 import {preparationClockPage,preparationClockNotes,bindPreparationClock} from './preparation-clock-ui.mjs';
@@ -44,6 +45,7 @@ export function workshopPage(state,slug,explorerId){
  if(slug==='lantern')return circuitPage(state);
  if(slug==='repeats')return repeatDeliveriesPage(state);
  if(slug==='recut')return recutPage(explorerId);
+ if(slug==='budget')return gatheringBudgetPage(explorerId);
  if(slug==='fractions')return ribbonMatchesPage(state);
  if(slug==='sources')return sourceTrailPage(state);
  if(slug==='clock')return preparationClockPage(state);
@@ -54,7 +56,7 @@ export function workshopPage(state,slug,explorerId){
  if(slug==='maps')return cartographerPage(state);
  if(slug==='windows')return twoWindowsPage(state);
  const e=current(state),showNew=slug==='new'||!e,experiments=state.workshop?.experiments||[];
- return `<div class="workshop-page"><header class="page-heading"><a class="back" href="#home">← Take a break</a><h1>The Storm Workshop</h1><p>Help a parcel find its landing place. Roll, notice, and try a change.</p>${hearButton('The storm damaged our parcel ramp. Let’s test a new one. Change one thing, release the cart without a push, and compare where it stops. You can ask for help, try again, or take a break.','Hear the workshop welcome')}</header><div class="workshop-layout"><div><nav class="workshop-table-choices" aria-label="Workshop tables"><strong>Other tables</strong><a href="#workshop/lantern">Lantern Circuit Bench</a><a href="#workshop/repeats">Repeat a Delivery Block</a><a href="#workshop/fractions">Same Amount, New Cuts</a><a href="#workshop/recut">Ribbon Recut Table</a><a href="#workshop/sources">Follow the Source Trail</a><a href="#workshop/clock">Preparation Clock</a><a href="#workshop/fair">Fair Test Bench</a><a href="#workshop/coins">Coin Counter</a><a href="#workshop/maps">Cartographer’s Table</a><a href="#workshop/windows">Two Windows story desk</a><a href="#workshop/balance">Balance Stall</a></nav>${showNew?setup():experiment(e)}</div>${guideRail(state,'{guide} says, “A surprising result is something to explore. Let’s change one thing and look closely.”')}</div>${experiments.length?`<details class="panel"><summary>Our comparisons (${experiments.length} kept)</summary><p class="tiny">Your latest 24 comparisons stay here.</p>${[...experiments].reverse().map(x=>`<p>${button(`data-workshop-resume="${esc(x.id)}"`,`${esc(x.id)}: ${x.closed?'kept earlier model':x.finished?'kept comparison':'waiting comparison'}`)}</p>`).join('')}</details>`:''}${learningInvitations('workshop')}</div>`;
+ return `<div class="workshop-page"><header class="page-heading"><a class="back" href="#home">← Take a break</a><h1>The Storm Workshop</h1><p>Help a parcel find its landing place. Roll, notice, and try a change.</p>${hearButton('The storm damaged our parcel ramp. Let’s test a new one. Change one thing, release the cart without a push, and compare where it stops. You can ask for help, try again, or take a break.','Hear the workshop welcome')}</header><div class="workshop-layout"><div><nav class="workshop-table-choices" aria-label="Workshop tables"><strong>Other tables</strong><a href="#workshop/lantern">Lantern Circuit Bench</a><a href="#workshop/repeats">Repeat a Delivery Block</a><a href="#workshop/fractions">Same Amount, New Cuts</a><a href="#workshop/recut">Ribbon Recut Table</a><a href="#workshop/budget">Gathering Budget</a><a href="#workshop/sources">Follow the Source Trail</a><a href="#workshop/clock">Preparation Clock</a><a href="#workshop/fair">Fair Test Bench</a><a href="#workshop/coins">Coin Counter</a><a href="#workshop/maps">Cartographer’s Table</a><a href="#workshop/windows">Two Windows story desk</a><a href="#workshop/balance">Balance Stall</a></nav>${showNew?setup():experiment(e)}</div>${guideRail(state,'{guide} says, “A surprising result is something to explore. Let’s change one thing and look closely.”')}</div>${experiments.length?`<details class="panel"><summary>Our comparisons (${experiments.length} kept)</summary><p class="tiny">Your latest 24 comparisons stay here.</p>${[...experiments].reverse().map(x=>`<p>${button(`data-workshop-resume="${esc(x.id)}"`,`${esc(x.id)}: ${x.closed?'kept earlier model':x.finished?'kept comparison':'waiting comparison'}`)}</p>`).join('')}</details>`:''}${learningInvitations('workshop')}</div>`;
 }
 export function workshopNotes(state){
  const fair=repeatDeliveriesNotes(state)+ribbonMatchesNotes(state)+sourceTrailNotes(state)+preparationClockNotes(state)+marketChangeNotes(state)+balanceStallNotes(state)+fairTestNotes(state)+coinCounterNotes(state)+cartographerNotes(state)+twoWindowsNotes(state),xs=state.workshop?.experiments||[];if(!xs.length)return fair;
@@ -64,6 +66,8 @@ export function bindWorkshop(state,{save,render,navigate,focus,canExport,explore
  if(document.querySelector('[data-lc-root]')){bindCircuits(state,{save,render,focus,canExport,explorerId});return;}
  bindRecut({render,focus,explorerId});
  if(document.querySelector('.recut-page'))return;
+ bindGatheringBudget({render,focus,explorerId});
+ if(document.querySelector('.gather-budget-page'))return;
  bindRepeatDeliveries(state,{save,render,focus});
  if(document.querySelector('.repeat-sheet'))return;
  bindRibbonMatches(state,{save,render,navigate,focus});
