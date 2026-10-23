@@ -183,6 +183,11 @@ A short letter from Léon arrives the same evening ([letters.md](letters.md), le
 >
 > "I hear my parcel got a bit wet," they say.
 
+**Only if the explorer kept spec 118's "What did Hollis write?" case** (the same line whatever they chose):
+> Hollis looks at your transcription for a long time. "Which did you think it said?"
+>
+> After you answer: "Then you read it the way I meant it, mostly."
+
 They stay for supper. Then page 6, Hollis's letter (companion text, section 3).
 
 ---
