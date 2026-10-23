@@ -1,6 +1,6 @@
 # 108 · Grown-up learning atlas
 
-**Status:** proposed for independent specification review; no runtime is built. **Home:** `#atlas` and `#atlas/<topicId>`. **Source audit:** [108](../source-audits/108-grown-up-learning-atlas.md). **Responsive proposal:** [index and topic mock](assets/108-grown-up-learning-atlas.html). This is a grown-up catalog of existing declarations and pinned source relationships, not a lesson, assessment, progress view, or replacement for the child-facing `#map`.
+**Status:** independent six-lens text/data/source/license review cleared `a67d9fc`, with no P1/P2 findings. Root review agrees on the bounded data contract. Rendered-art review remains pending, so implementation is not cleared and no runtime is built. **Home:** `#atlas` and `#atlas/<topicId>`. **Source audit:** [108](../source-audits/108-grown-up-learning-atlas.md). **Responsive proposal:** [index and topic mock](assets/108-grown-up-learning-atlas.html). This is a grown-up catalog of existing declarations and pinned source relationships, not a lesson, assessment, progress view, or replacement for the child-facing `#map`.
 
 ## Purpose and exact boundary
 
@@ -40,7 +40,7 @@ Use “Learning atlas” as the title and this introduction: “Browse the full 
 
 The design reuses the Garden's forest (`#183f39`), paper (`#f5f4ea`), leaf (`#758e65`), pale foliage (`#e9eedf`) and ochre focus (`#9a6d18`). Georgia names and Trebuchet/native controls preserve the existing quiet Garden vocabulary. The memorable element is the subject shelf: a plain, left-aligned field index with names and exact scope beneath them, rather than a web of nodes. At 820: `[filters | topic rows]`; at 320: `[filters]` then `[topic rows]`; detail becomes `[encounters | direct links]` or one column. Rules separate actual sections; no decorative metrics, generic card grid, floating graph or new illustrations are required. The earlier renderable HTML is reused and refined for this proposal; original copy/layout are not upstream material. This is a two-screen design sample, not a functional catalog or a demonstration that runtime route/lifecycle checks have passed.
 
-The unified authoring roadmap remains the existing generated [learning atlas](../learning-atlas.md) and declared increments. This runtime viewer exposes source topics and reviewed encounter declarations; it does not turn unreviewed candidate patterns or old `games.status` into built/planned/production badges. Roadmap corrections and new mappings are separate reviewed changes. Linking an activity means only that its declared local destination opens; publication is deferred.
+The [current roadmap](../roadmap.md) owns the delivery queue. The generated [learning atlas](../learning-atlas.md) and declared design families remain authoring references. This runtime viewer exposes source topics and reviewed encounter declarations; it does not turn unreviewed candidate patterns or old `games.status` into built/planned/production badges. Roadmap corrections and new mappings are separate reviewed changes. Linking an activity means only that its declared local destination opens; publication is deferred.
 
 ## Acceptance and independent review
 
@@ -50,3 +50,8 @@ The unified authoring roadmap remains the existing generated [learning atlas](..
 - With an initialized synthetic notebook, compare saved state and normalized notes-export content (excluding the export timestamp) before/after search, topic/edge navigation, and retry. Import a synthetic file, switch explorer, toggle saving off, reset, and confirm the atlas writes no learner field and all other activities retain their saved work. No efficacy, age-placement, mastery, or production-deployment claim follows from these checks.
 
 The candidate review packet must include the source audit, original HTML and rendered index/detail screenshots at 320 and 820; an unrendered mock does not clear that gate. Review the rendered pages for content and visual fit before implementation. Independent six-lens/content/rendered-art specification review must check the derived-data boundary, route truth, licensing, empty/failure states, and the adult/child separation before any runtime build. Implementation then receives its own independent exact-head review and actual-browser inspection.
+
+
+## Current review boundary
+
+The original HTML is retained as an unrendered design proposal. A browser file-protocol preview was blocked by browser security policy; no alternate browser or indirect preview was attempted. Independent review has checked the text, data shape, source meanings and licenses only. The required 320/820 rendered-art gate is still open. Do not infer responsive fit or implementation readiness from this draft. Publication and any future runtime build remain separate gates.
