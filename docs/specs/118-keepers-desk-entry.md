@@ -1,6 +1,6 @@
 # 118. The Keeper's Desk: a real entry for longer, less-guided work
 
-Status: **proposed specification and authored text, 2026-10-23. Not reviewed, not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120](120-keeper-of-the-ways.md) (draft PR #127), which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns only the desk's entry, its working conventions and its first case. Companion: [spec 119](119-deeper-bench-packs.md) adds harder packs to existing benches.
+Status: **proposed specification and authored text, 2026-10-23. Not reviewed, not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120](120-keeper-of-the-ways.md) (draft PR #127), which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns the desk's entry, its working conventions, its records, Case 1 in full and the casebook index (section 8). The later cases are written in `docs/content/118-*-case.md` and follow this spec's conventions, records and acceptance; spec 120 owns the act and scene text they refer to. Companion: [spec 119](119-deeper-bench-packs.md) adds harder packs to existing benches.
 
 ## 1. The problem
 
@@ -22,7 +22,7 @@ The desk is described by the shape of its tasks, never by age or ability:
 
 > **Longer cases, less guidance.** Each case asks a real question the town hasn't answered. You choose where to start, skip the teaching when you already know it, and finish by recommending what the town should do.
 
-The desk is open to every explorer from the first visit. A younger explorer can open it with a grown-up; the same case completes with the supported route in section 6. Nothing is locked, scored or required.
+The desk is open to every explorer from the first visit. A younger explorer can open it with a grown-up; every case completes through a supported route like Case 1's (section 5.5). Cases appear in the casebook as the story reaches the pages and letters they use (section 8), so a case never spoils a page that hasn't dried; once a case appears it stays. Nothing is locked by score, age or band, and nothing is scored or required.
 
 ## 3. Conventions that make the desk feel different
 
@@ -46,7 +46,7 @@ Spec 120 owns the parcel, the old Keeper and the Keeper reveal. This arrival sui
 
 **First visit, arrival panel:**
 
-> The desk stands in a corner of the mended Willowbank library, a desk nobody has used in years. Its drawers are full of things nobody has had time to read: survey maps, a courier's logbook, letters from upriver, and the pages of a parcel the storm left on the bridge, addressed *To the Keeper of the Ways*. Some pages have dried enough to read. The rest are still stuck together.
+> The desk stands in a corner of the mended Willowbank library, a desk nobody has used in years. Its drawers are full of things nobody has had time to read: survey maps, a courier's logbook, letters from upriver, and the drying pages of the parcel Pip found after the storm, addressed *To the Keeper of the Ways*. Some pages have dried enough to read. The rest are still stuck together.
 >
 > Wren Halloway has kept the town's ledgers since the storm. She pushes the chair out for you.
 >
@@ -54,24 +54,28 @@ Spec 120 owns the parcel, the old Keeper and the Keeper reveal. This arrival sui
 
 Buttons: **Take the desk** · **Look around first**.
 
-**"What's happened in town" card** (available on the desk at any time, for an explorer who skipped earlier play; facts kept generic until spec 120 fixes them):
+**"What's happened in town" card** (available on the desk at any time, for an explorer who skipped earlier play). The first four lines always show. Each later line shows only once the explorer has reached, or arrived at, the point it names, so the card never runs ahead of spec 120's pages:
 
-> - A storm flooded Willow Brook and washed out the footbridge and the lower road.
-> - Neighbors reopened the café, replanted the garden and got the post moving again.
-> - The town is past the emergency. Now it has to decide what to build, and how.
-> - The desk is where those decisions get worked out before the town meeting.
+> - A storm flooded Willow Brook. It knocked down the footbridge, jammed the mill wheel and scattered the library books.
+> - The neighbors mended all of it, and had a supper to celebrate.
+> - The morning after the storm, Pip found a wet parcel addressed *To the Keeper of the Ways*. Nobody knows who that is. Its pages are drying on the bakery windowsill.
+> - The town is past the emergency. Now it has to decide what to build, and how. The desk is where those decisions get worked out.
+> - *(after page 2)* One page is a list of floods at the mill's flood post. They get higher, and closer together. The last line says *Ask upstream.*
+> - *(after Nuria's first letter)* Vadoalto, upstream in Spain, had the storm too. Nuria keeps its flood post and writes in Spanish and English.
+> - *(after Léon's first letter)* Les Saules, downstream in France, keeps a ferry. Léon writes in French and English.
+> - *(after page 4)* The town drained a marsh called the Sponge in year 22 of the old Keeper's records. People are arguing about whether that made the floods worse.
 
 Reading the card records nothing.
 
 **"Take the desk" response:**
 
-> Wren hands you the casebook. "One case is open. Start anywhere. If you want me to show you how I'd work something out, ask. If you'd rather not, don't."
+> Wren hands you the casebook. "Start with whichever case you like, and whichever step. Each step begins with how I'd work it out. If you already know it, fold that away and go straight to the question."
 
 ## 5. Case 1: Bridge or ford?
 
 ### 5.1 The question
 
-> **Case 1 · Bridge or ford?**
+> **Bridge or ford?**
 >
 > The storm took the footbridge at the narrows. People have been wading the old ford downstream, but carts can't manage the bank, and the courier has turned back more than once. The town fund can pay for **one crossing this year: 2,700 coins.**
 >
@@ -229,7 +233,7 @@ Tasks:
 
 > Two accounts **disagree** when they seem to point different ways. They **contradict** only if both can't be true at once. Before deciding someone is wrong, check three things: Are they measuring the same thing? Do they cover the same time? Was each written when it happened, or remembered later?
 
-This step is where the case connects to spec 120's flood story, where Case 1 is Act I's desk case. The parcel's flood ledger (page 2) belongs to the end of Act II, so this case does not use it; a revisit after that page could add the ledger as a fourth record.
+This step is where the case connects to spec 120's flood story, where Case 1 is Act I's desk case. The parcel's flood ledger (page 2) belongs to the end of Act II, so this case does not use it. [Case 5](../content/118-ledger-and-gauge-case.md) takes the ledger up properly.
 
 ### 5.5 Step 4: Your recommendation
 
@@ -263,14 +267,14 @@ The case leaves frozen artifacts other activities can return to:
 - **Balance Stall:** the crossover equation as a two-sided balance (spec 119 adds the pack).
 - **Count Collection:** chart the two days' counts and choose a fair representation.
 - **Cartographer's Table:** plot the narrows and the ford on a scaled town map.
-- **The town remembers** (proposed strategy): weeks later, the courier asks which crossing she should use on a flood day, given the explorer's kept recommendation.
+- **The town remembers** (proposed strategy): weeks later, {courier} asks which crossing to use on a flood day, given the explorer's kept recommendation.
 
 ## 6. Records, privacy and saves
 
 Stored per explorer in existing local storage, following the AGENTS.md saved-work rule:
 
-- `desk.arrived` (the arrival panel was answered) and `desk.cases['bridge-or-ford']`, holding the case's frozen source ID and version, each step's kept answers, attempts, which help was used (the learn card reopened, each **I'm stuck** rung, a skip), and familiarity, using the app's existing separate support/familiarity/independent records.
-- **Free text:** the expression field in 1e and the four recommendation fields. These stay local, appear in Grown-up notes and the existing JSON export, are removed by explicit deletion, and are never sent anywhere, scored or reused as content. Prompts are about a fictional town and never invite personal or family details.
+- `desk.arrived` (the arrival panel was answered) and one `desk.cases[<case id>]` entry per opened case (IDs in section 8), holding the case's frozen source ID and version, each step's kept answers, attempts, which help was used (the learn card reopened, each **I'm stuck** rung, a skip), and familiarity, using the app's existing separate support/familiarity/independent records. A case with reading panels also keeps the language and length the explorer chose, as a preference for that case only; it is never evidence of reading level.
+- **Free text:** every field marked *free text* in a case (in Case 1, the expression field in 1e and the four recommendation fields). These stay local, appear in Grown-up notes and the existing JSON export, are removed by explicit deletion, and are never sent anywhere, scored or reused as content. Prompts are about a fictional town and never invite personal or family details.
 - A save is validated on IDs, counts and outcomes. A later wording or answer-key change never rewrites a kept answer or recommendation. If one step can't be read, the rest of the case stays open.
 - No age, grade, ability label or band is read or written by the desk.
 
@@ -310,15 +314,27 @@ Most hard prerequisites have no declared reference in the app. That is the gap t
 
 The [strand families](../six-act-strands.md) place this content mostly in Acts III and IV: M4-III (expressions and formulae), M4-IV (linear equations), M3-III (ratio against difference), M6-II (choosing relevant data), E3-IV (relevant and sufficient evidence), H1-III (evidence against interpretation) and E4-IV (argument with counterclaims). Spec 120 makes Case 1 the desk's opening in Act I. Spec 49 (section 3) keeps story acts and teaching sequences separate, so this is allowed. It also means the desk is the route by which an explorer meets Act III and IV teaching in an Act I setting. The roadmap's ordering rule, unknown relations before algebra and fractions before ratio, is met through the Balance Stall, Tenths Table and the inline learn cards. It does not depend on story order.
 
-## 8. Later cases (outlines for separate specs)
+## 8. The casebook
 
-Each needs its own spec, content and source review. Spec 120 proposes several real-flood cases for the desk; they are listed here so the casebook has a visible direction.
+The casebook lists cases by title in story order; case numbers below are file references, never shown to the explorer. A case appears when the story reaches the material it uses and then stays. An explorer who arrives later (spec 120, "Arriving later") sees every case whose material their arrival includes. Each case has its own source ID and version, and follows sections 3, 6 and 10.
 
-- **The parcel's pages** (spec 120): transcribe a damaged page, marking what is certain, what is guessed, and what is missing. Builds on the Source Trail.
-- **Where did Valencia's river go?** Written in full as [Case 2](../content/118-valencia-1957-case.md) (owner's choice, 2026-10-23): the desk depth of spec 120's Valencia 1957 archive pack, with English and Spanish reading at three amounts.
-- **Rivers that made room** (spec 120's candidates): Paris 1910 (already sourced in the app), the Valencia flood of 1957 and the Turia riverbed that became a park, and the Dutch Room for the River programme. Real history from reviewed sources, kept separate from the fictional town. **The Valencia case can offer its sources in Spanish**, with English alongside and language load chosen separately, giving the app its first substantial Spanish reading.
-- **The sorting machine** (C1, AI literacy): the post office borrows a parcel sorter that learned from last year's deliveries and keeps misrouting hill-farm parcels. The explorer inspects its training examples, finds that hill-farm parcels were rare in them, and tests a fix. Builds on Willow Sorting Desk; the sorter's rule must be a fully specified model, never a live AI.
-- **The seed exchange ledger** (M3 ratio and percentage): divide a shared seed store between two communities in a stated ratio, then compare germination as percentages when the samples are very different sizes (30 of 40 against 20 of 25).
+| No. | Case ID | Title | Appears | Main strands | Written in | Review needed before build |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | `bridge-or-ford` | Bridge or ford? | From the first visit (Act I) | Linear relationships, ratio, sources, argument | Section 5 | Content review |
+| 6 | `hollis-pages` | What did Hollis write? | When page 1 dries; each later page joins as it dries | Transcription, inference from context, certainty | [118-hollis-pages-case.md](../content/118-hollis-pages-case.md) | Content review |
+| 7 | `sorting-machine` | The borrowed sorting machine | After Act I | AI literacy (C1), rules against learned examples, sampling | [118-sorting-machine-case.md](../content/118-sorting-machine-case.md) | Content review; subject reviewer for C1 |
+| 10 | `town-record` | What should Willowbank write down? | Act II, "A garden across the seasons" | Measurement, data design, records | [118-town-record-case.md](../content/118-town-record-case.md) | Content review |
+| 4 | `flood-bell` | When should the bell ring? | After Nuria's first letter (end of Act II) | Time and rates, upstream timing, uncertainty | [118-flood-bell-case.md](../content/118-flood-bell-case.md) | Content review; the case must not read as flood-safety advice (spec 120, S7) |
+| 3 | `seed-exchange` | The seed exchange ledger | Act III, "The seed exchange" | Ratio, proportion, percentages, sample size | [118-seed-exchange-case.md](../content/118-seed-exchange-case.md) | Content review; Spanish reader for Nuria's note |
+| 9 | `flood-marks` | Marks on the wall | After Léon's first letter (Act III) | Reading French sources, measurement, history | [118-flood-marks-case.md](../content/118-flood-marks-case.md) | **Source review; fluent French reader** |
+| 2 | `valencia-1957` | Where did Valencia's river go? | Act IV, after page 4 | History, Spanish reading, compound units, perspective | [118-valencia-1957-case.md](../content/118-valencia-1957-case.md) | **Source review; fluent Spanish reader** |
+| 8 | `room-for-the-river` | A country that gave its rivers room | Act IV, "What other places did" | History, scale and area, trade-offs | [118-room-for-the-river-case.md](../content/118-room-for-the-river-case.md) | **Source review** |
+| 5 | `ledger-and-gauge` | The ledger and the rain gauge | Act IV, after page 4 and Nuria's rain gauge letter | Mean, comparison of groups, confounding, argument | [118-ledger-and-gauge-case.md](../content/118-ledger-and-gauge-case.md) | Content review |
+| 11 | `exchange-plan` | Keeping the Ways open | Act VI, "Compare routes and keep a plan" | Rates, scheduling, constraints, written plan | [118-exchange-plan-case.md](../content/118-exchange-plan-case.md) | Content review |
+
+Act V's desk depth, the Gazette opinion piece, belongs to spec 49's authored project path and is not a casebook case. Case 5 is the "full dossier" spec 120 names for Act IV's older learner; it reads its plans and the town meeting from spec 120 and writes no act text of its own.
+
+Every case file has the same parts: why the case exists, its hook, its steps, each step's learn card, guided first task, tasks with worked answers, stuck ladder and misconception replies, the recommendation or closing step, its supported route, topic candidates with the hard-prerequisite crosswalk, and what still needs review.
 
 ## 9. Entry points
 
@@ -328,15 +344,16 @@ Each needs its own spec, content and source review. Spec 120 proposes several re
 
 ## 10. Acceptance
 
-1. A fresh explorer can open `#desk` from Home, Begin and All places, and can open any step of Case 1 first.
-2. Every task in 1a–1e and 2a–2c has an authored answer; **Check my working** agrees with the worked values above, and 1e accepts any expression equivalent at three test lengths.
+1. A fresh explorer can open `#desk` from Home, Begin and All places, and can open any step of any listed case first. A case appears no earlier than section 8 says, and never disappears once shown.
+2. Every checked task in every case has an authored answer; **Check my working** agrees with the case's worked values, and Case 1's 1e accepts any expression equivalent at three test lengths.
 3. Each step opens with its learn card and guided first task. **I know this, show me the question** folds them and records nothing; reopening them through **Show me how**, and each rung of **I'm stuck**, is recorded as support for that step only.
-4. No reading, choice or recommendation is marked right or wrong; Wren's closing response is identical for every plan.
-5. The case completes through the supported route with no free text and steps 1–3 open.
-6. Kept answers and the recommendation survive reload, explorer switch, export and import, and a changed answer key; an unreadable step leaves the others open.
+4. No reading, choice or recommendation is marked right or wrong; each case's closing response is identical for every plan or choice.
+5. Each case completes through its supported route with no free text and its checked steps open.
+6. Kept answers and recommendations survive reload, explorer switch, export and import, and a changed answer key; an unreadable step leaves the others open.
 7. Choice order varies across questions and stays fixed within a saved question.
-8. Arrival and the "What's happened" card spoil nothing beyond pages spec 120 marks as available at the start.
+8. Arrival, the "What's happened" card and the casebook spoil nothing beyond the pages and letters the explorer has reached or arrived at.
 9. No age, band or ability field appears in the desk's code, saves or copy.
+10. Real history (Cases 2, 8 and 9) carries the History label on every panel and fiction carries the Story label; no real-history figure ships before its source review.
 
 ## 11. Upstream overlap (AGENTS.md)
 

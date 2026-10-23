@@ -1,6 +1,6 @@
 # 119. Deeper bench packs: harder cases for benches that already exist
 
-Status: **proposed content specification, 2026-10-23. Not reviewed, not build-ready.** Written by Claude as a writing-first deliverable; code and art are for the builder. Each pack below needs independent content review, and the benches' own specs govern their models, saves and accessibility. Companion to [spec 118](118-keepers-desk-entry.md), whose first case revisits several of these benches.
+Status: **proposed content specification, 2026-10-23. Not reviewed, not build-ready.** Written by Claude as a writing-first deliverable; code and art are for the builder. Each pack below needs independent content review, and the benches' own specs govern their models, saves and accessibility. Companion to [spec 118](118-keepers-desk-entry.md), whose first case revisits several of these benches. The full child-facing item text for every pack (learn cards, guided first items, unguided items, stuck ladders and misconception replies) is in [119-deeper-bench-packs-text.md](../content/119-deeper-bench-packs-text.md); where the two differ, this spec's numbers govern and the text file is corrected.
 
 ## 1. Purpose
 
@@ -116,19 +116,19 @@ Bench: [spec 84](84-willow-sorting-desk.md) and [Willow Double Check, spec 101](
 
 **Second request, for NOT:** "Anything that isn't blue goes in the Leaf basket; blue parcels go in the Lantern basket." The explorer can build it as *If not blue → Leaf, otherwise Lantern* or *If blue → Lantern, otherwise Leaf*. Both are accepted. The reply says they sort every parcel the same way.
 
-**Candidate topics:** C1-II deterministic rules; a later machine-learning case (spec 118 §8, "The sorting machine") contrasts these hand-written rules with a sorter that learned from examples.
+**Candidate topics:** C1-II deterministic rules; the Keeper's Desk case [The borrowed sorting machine](../content/118-sorting-machine-case.md) contrasts these hand-written rules with a sorter that learned from examples.
 
 ## 5. Count Collection: a usual value, and when it misleads
 
 Bench: [My Count Collection, spec 86](86-count-collection.md). This pack supplies a fixed dataset and asks which summary describes it fairly.
 
-**Dataset:** the masses of five parcels waiting at the post office, in kilograms: **2, 3, 3, 4, 18.** (The 18 kg parcel is a millstone for the mill.)
+**Dataset:** the masses of five parcels waiting at the post office, in kilograms: **2, 3, 3, 4, 18.** (The 18 kg parcel is a new iron bearing for the mill wheel.)
 
 **Tasks:**
 
 - Find the **mean**: (2 + 3 + 3 + 4 + 18) ÷ 5 = 30 ÷ 5 = **6 kg**.
 - Find the **median**: middle value in order = **3 kg**.
-- "The courier asks: how heavy is a usual parcel?" Choices: 6 kg (the mean); 3 kg (the median); 18 kg (the heaviest); "it depends what you need to know". The authored replies explain that four of the five parcels weigh 4 kg or less, so the median describes a usual parcel better here, and that the mean is still the right number for a different question: "If the five parcels were shared evenly between five bags, how much would each bag hold?"
+- "{courier} asks: how heavy is a usual parcel?" Choices: 6 kg (the mean); 3 kg (the median); 10 kg (halfway between the lightest and heaviest, a listed misconception about the median). The authored replies explain that four of the five parcels weigh 4 kg or less, so the median describes a usual parcel better here, and that the mean is still the right number for a different question: "If the five parcels were shared evenly between five bags, how much would each bag hold?"
 - Remove the millstone: mean (2 + 3 + 3 + 4) ÷ 4 = **3 kg**, median (3 + 3) ÷ 2 = **3 kg**. One unusual value moved the mean by 3 kg and the median not at all.
 
 - **Reverse problem** (the research's test of meaning): "A sixth parcel arrives. Now the mean of all six is 7 kg. How heavy is the new parcel?" *Total 6 × 7 = 42; 42 − 30 = **12 kg**.* Reply to an entry of 7: "That's the new mean, not the new parcel. If six parcels share 42 kg evenly, what must the new one add?"
@@ -163,8 +163,8 @@ Bench: [spec 109](109-sentence-bridges.md), which uses *and*, *because* and *but
 | --- | --- | --- |
 | The causeway is cheaper. It floods. | **Although** the causeway is cheaper, it floods. | The flooding is the point the writer wants you to keep. |
 | | The causeway floods, **although** it is cheaper. | The same two facts; now the price is the afterthought. |
-| The courier crosses at the ford. The water is over the stones. | The courier crosses at the ford **unless** the water is over the stones. | High water stops her. |
-| | The courier crosses at the ford **if** the water is over the stones. | The opposite: high water is when she crosses. The source doesn't say this. |
+| The courier crosses at the ford. The water is over the stones. | The courier crosses at the ford **unless** the water is over the stones. | High water stops the courier. |
+| | The courier crosses at the ford **if** the water is over the stones. | The opposite: high water is when the courier crosses. The source doesn't say this. |
 | The footbridge takes walkers. The causeway takes carts. | The footbridge takes walkers, **whereas** the causeway takes carts. | A contrast between two things, without saying either is better. |
 
 **Teaching encounter:**
