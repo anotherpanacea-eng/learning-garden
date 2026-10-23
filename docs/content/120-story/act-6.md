@@ -50,7 +50,8 @@ Kept: "Your words open the agreement. Nuria copies them into Spanish for Vadoalt
 **Sprout · [new: route planner, picture choice]** Dot: "This parcel must stay dry. Which Way should it take: the river path, the bridge road, or the high ford?"
 Kept: "The bridge road. Slow, dry and very boring, which is what a dry parcel wants."
 
-**Seedling · [new pack: Courier Clock Walk]** Dot: "{courier} leaves at 9 and the bridge road takes 2 hours each way. When will they be back?"
+**Seedling · [new pack: Courier Clock Walk]** Dot: "Our unladen courier leaves at 9; this illustration gives 2 hours each way. When are they back?"
+This proposed multi-hour clock pack is not current Courier Clock Walk. It models an unladen courier; Case11's separately proposed seven-hour bridge trip is for a loaded cart. Do not mix their modes or claim either was measured.
 Kept: "Back in time for lunch, as planned. Dot writes it in the timetable."
 
 **Sapling · [new: route planner on the Cartographer's Table]** Dot: "Plan a week of deliveries so both towns get what they need, and nobody uses the high ford in winter."
@@ -186,7 +187,9 @@ A short letter from Léon arrives the same evening ([letters.md](letters.md), le
 **Only if the explorer kept spec 118's "What did Hollis write?" case** (the same line whatever they chose):
 > Hollis looks at your transcription for a long time. "Which did you think it said?"
 >
-> After you answer: "Then you read it the way I meant it, mostly."
+> After you answer: "Thank you for sitting with those pages. The water has kept some words to itself."
+
+This acknowledges the work without validating a guessed or original transcription. The exact text remains owned by the reviewed Case6 integration.
 
 They stay for supper. Then page 6, Hollis's letter (companion text, section 3).
 
