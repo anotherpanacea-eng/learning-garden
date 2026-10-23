@@ -1,6 +1,6 @@
 # 119. Deeper bench packs: harder cases for benches that already exist
 
-Status: **proposed content specification, 2026-10-23. Documentation review repairs drafted; independent follow-up and content review remain open. Not build-ready.** Written by Claude as a writing-first deliverable; code and art are for the builder. Each proposal below needs independent content review. Existing bench specs continue to govern the unchanged old packs. The new modes require the explicit bounded extensions described below before implementation; this document is not a substitute for those model/UI/source/preservation contracts. Companion to [spec 118](118-keepers-desk-entry.md), whose first case proposes later revisits at several of these benches.
+Status: **proposed content specification, 2026-10-23. Documentation review repairs drafted; independent follow-up and content review remain open. Not build-ready.** Written by Claude as a writing-first deliverable; code and art are for the builder. Each proposal below needs independent content review. Existing bench specs continue to govern the unchanged old packs. The new modes require the explicit bounded extensions described below before implementation; this document is not a substitute for those model/UI/source/preservation contracts. Companion to [spec 118](118-keepers-desk-entry.md), whose first case proposes later revisits at several of these benches. The new [119-deeper-bench-packs-text.md](../content/119-deeper-bench-packs-text.md) preserves proposed child-facing learn cards, guided/unguided items, stuck ladders and replies. It is unreviewed authored material for those future commissions, not implementation clearance. Where numbers differ, this spec's numbers govern and the text must be corrected and reviewed; deferred modes remain deferred even if their prose is already written.
 
 ## 1. Purpose
 
@@ -176,8 +176,8 @@ Bench: [spec 109](109-sentence-bridges.md), which uses *and*, *because* and *but
 | --- | --- | --- |
 | The causeway is cheaper. It floods. | **Although** the causeway is cheaper, it floods. | The flooding is the point the writer wants you to keep. |
 | | The causeway floods, **although** it is cheaper. | The same two facts; now the price is the afterthought. |
-| The courier normally crosses at the ford. When water covers the stones, she turns back. | The courier crosses at the ford **unless** the water is over the stones. | High water stops her. |
-| | The courier crosses at the ford **if** the water is over the stones. | This says high water is when she crosses; the source instead says she turns back then. |
+| The courier normally crosses at the ford. When water covers the stones, the courier turns back. | The courier crosses at the ford **unless** the water is over the stones. | High water stops the courier. |
+| | The courier crosses at the ford **if** the water is over the stones. | This says high water is when the courier crosses; the source instead says the courier turns back then. |
 | The footbridge takes walkers. The causeway takes carts. | The footbridge takes walkers, **whereas** the causeway takes carts. | A contrast between two things, without saying either is better. |
 
 **Teaching encounter:**

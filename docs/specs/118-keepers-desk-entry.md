@@ -1,6 +1,6 @@
 # 118. The Keeper's Desk: a real entry for longer, less-guided work
 
-Status: **proposed specification and authored text, 2026-10-23. Specification review repairs drafted; independent follow-up and content review remain open. Not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120 in draft PR #127](https://github.com/anotherpanacea-eng/learning-garden/pull/127/files) which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns only the desk's entry, its working conventions and its first case. Companion: [spec 119](119-deeper-bench-packs.md) adds harder packs to existing benches.
+Status: **proposed specification and authored text, 2026-10-23. Specification review repairs drafted; independent follow-up and content review remain open. Not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120 in draft PR #127](https://github.com/anotherpanacea-eng/learning-garden/pull/127/files) which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns the desk's entry, its working conventions, its records, Case 1 and the proposed casebook index (section 8). The later case files in `docs/content/118-*-case.md` are commissioning dossiers that refer to these conventions; each still needs its own complete reviewed activity/source/save contract. Spec 120 owns their referenced act and scene text. Companion: [spec 119](119-deeper-bench-packs.md) proposes separately reviewed bench extensions.
 
 ## 1. The problem
 
@@ -24,7 +24,7 @@ The desk is described by the shape of its tasks, never by age or ability:
 
 The desk is open to every explorer from the first visit. An explorer can open it with a grown-up; the same case completes with the supported route in section 5.5. Nothing is locked, scored or required.
 
-**Commissioning boundary:** the first implementation increment is the desk and Case 1, *Bridge or ford?*, only. Case 2, the Valencia dossier, is proposed research and draft text for a separate commission: it still needs its own complete task/support/source/save contract, historical source review and fluent Spanish/content review. Its presence in this PR does not add it to the first build. Spec 119 and the later story jobs are separately reviewed dependencies, not capabilities supplied by Case 1.
+**Commissioning boundary:** the first implementation increment is the desk and Case 1, *Bridge or ford?*, only. All later cases in section 8 are proposed research/content dossiers for separate commissions. Each needs its own complete task/support/source/save contract and applicable historical source, subject, fluent-language and content reviews. Their presence in this PR does not add them to the first build. The casebook's story invitation column is planning metadata, not an implementation/content clearance or a learning prerequisite. No later case is automatically commissioned by reaching an act or page. Spec 119 and the later story jobs are separately reviewed dependencies, not capabilities supplied by Case 1.
 
 ## 3. Conventions that make the desk feel different
 
@@ -65,6 +65,15 @@ This fresh recap claims no completed work. Once spec 120 is built, append one of
 - Explicit `mended` arrival or reached Act I ending: "The welcome-back supper has happened. Pip has one dry page from the parcel: an old map."
 - Explicit `letter` arrival or reached Act II ending: "A letter has come from upstream. Pip has two dry pages: an old map and a flood ledger."
 - Otherwise: no parcel-page recap.
+
+Further proposed recap lines are shown only if the corresponding story page/letter is actually available; they are never unconditional fresh-arrival text:
+
+- After page 2: "One page is a list of floods at the mill's flood post. The last line says Ask upstream." Read its actual values from spec 120's versioned page, not an added claim that every interval or height increased.
+- After Nuria's first letter: "Vadoalto, upstream in Spain, had the storm too. Nuria keeps its flood post and writes in Spanish and English."
+- After Léon's first letter: "Les Saules, downstream in France, keeps a ferry. Léon writes in French and English."
+- After page 4: "The town drained a marsh called the Sponge in year 22 of the old Keeper's records. People are arguing about whether that made the floods worse."
+
+The library may be called mended only if its own completed repair state supports that description. Neither an act ending nor a later arrival marks every repair completed.
 
 An arrival recap describes earlier story events as before you came, never as this explorer's completed work. It does not claim that all town repairs are done. Page text and availability remain owned by spec 120; later pages are never named here. Reading the card records no learning attempt or completed activity.
 
@@ -298,7 +307,7 @@ The remaining source/interpretation choices and recommendation text are authored
 
 The case keeps its own frozen answers. The following are proposed later revisits, each requiring its own reviewed integration and any model extension in spec 119; no current bench automatically reads desk artifacts:
 
-- **Balance Stall:** the crossover equation as a two-sided balance (spec 119 adds the pack).
+- **Balance Stall:** the crossover equation as a two-sided balance (spec 119 proposes a separately reviewed extension).
 - **Count Collection:** chart the two days' counts and choose a fair representation.
 - **Cartographer's Table:** plot the narrows and the ford on a scaled town map.
 - **The town remembers** (proposed strategy): weeks later, the courier asks which crossing she should use on a flood day, given the explorer's kept recommendation.
@@ -307,8 +316,8 @@ The case keeps its own frozen answers. The following are proposed later revisits
 
 Stored per explorer in existing local storage, following the AGENTS.md saved-work rule:
 
-- `desk.arrived` (the arrival panel was answered) and `desk.cases['bridge-or-ford']`, holding the case's frozen source ID/version and complete understood prompts, source cards, model, choices/order, feedback and help text; each step's kept answers and attempts; the initial learn/guided lines actually shown and relevant prior worked-example exposure; each later help rung and skip; and familiarity. Preserve those distinct contexts on resume. Folding never clears them, and supplied work is never relabeled independent. This is a new case-specific record using the existing separation principles, not an existing generic desk API.
-- **Free text:** the expression field in 1e and the four recommendation fields. These stay local, appear in Grown-up notes and the existing JSON export, are removed by explicit deletion, and are never sent anywhere, scored or reused as content. Prompts are about a fictional town and never invite personal or family details.
+- `desk.arrived` (the arrival panel was answered) and `desk.cases['bridge-or-ford']` in the first increment, holding the case's frozen source ID/version and complete understood prompts, source cards, model, choices/order, feedback and help text; each step's kept answers and attempts; the initial learn/guided lines actually shown and relevant prior worked-example exposure; each later help rung and skip; and familiarity. Preserve those distinct contexts on resume. Folding never clears them, and supplied work is never relabeled independent. This is a new case-specific record using the existing separation principles, not an existing generic desk API. A separately commissioned case would use its own ID from section 8 and reviewed contract; a reading case may keep its chosen language/length as a local preference, never evidence of reading level.
+- **Free text:** Case 1's expression field in 1e and four recommendation fields stay local, appear in Grown-up notes and the existing JSON export, are removed by explicit deletion, and are never sent anywhere or reused as content. The expression is checked only for exact affine coefficient/constant agreement under 1e's bounded grammar; this checks a supplied mathematical rule, not prose quality or ability. Recommendation fields are never graded. Any later commissioned case must name and bound its own free-text fields and checking boundary. Prompts are about a fictional town and never invite personal or family details.
 - A save is validated on IDs, counts and outcomes. A later wording or answer-key change never rewrites a kept answer or recommendation. If one step can't be read, the rest of the case stays open.
 - No age, grade, ability label or band is read or written by the desk.
 
@@ -348,15 +357,27 @@ Most hard prerequisites have no declared reference in the app. That is the gap t
 
 The [strand families](../six-act-strands.md) place this content mostly in Acts III and IV: M4-III (expressions and formulae), M4-IV (linear equations), M3-III (ratio against difference), M6-II (choosing relevant data), E3-IV (relevant and sufficient evidence), H1-III (evidence against interpretation) and E4-IV (argument with counterclaims). Spec 120 makes Case 1 the desk's opening in Act I. Spec 49 (section 3) keeps story acts and teaching sequences separate, so this is allowed. It also means the desk is the route by which an explorer meets Act III and IV teaching in an Act I setting. The roadmap's ordering rule, unknown relations before algebra and fractions before ratio, is met through the Balance Stall, Tenths Table and the inline learn cards. It does not depend on story order.
 
-## 8. Later cases (outlines for separate specs)
+## 8. The casebook
 
-Each needs its own spec, content and source review. Spec 120 proposes several real-flood cases for the desk; they are listed here so the casebook has a visible direction.
+This is a proposed commissioning and story-invitation catalog, preserving the later authored dossiers for review. Only Case 1 belongs to the first implementation increment. The column below describes when a future commissioned case would be invited without spoiling its source pages; it does not create an activity gate, claim current availability or approve any case for build. Case numbers are file references, never learner labels. Each separately commissioned case needs its own complete understood source/model version and preservation contract consistent with sections 3 and 6; section 10 currently verifies Case 1 only. A later arrival can supply story context without marking earlier work completed.
 
-- **The parcel's pages** (spec 120): transcribe a damaged page, marking what is certain, what is guessed, and what is missing. Builds on the Source Trail.
-- **Where did Valencia's river go?** Proposed [Case 2 dossier and draft text](../content/118-valencia-1957-case.md) (owner's choice, 2026-10-23): intended desk depth of spec 120's Valencia 1957 archive pack, with English and Spanish reading at three amounts. It is outside the first commission and is not a complete or reviewed activity contract.
-- **Rivers that made room** (spec 120's candidates): Paris 1910 (already sourced in the app), the Valencia flood of 1957 and the Turia riverbed that became a park, and the Dutch Room for the River programme. Real history from reviewed sources, kept separate from the fictional town. **The Valencia case can offer its sources in Spanish**, with English alongside and language load chosen separately, giving the app its first substantial Spanish reading.
-- **The sorting machine** (C1, AI literacy): the post office borrows a parcel sorter that learned from last year's deliveries and keeps misrouting hill-farm parcels. The explorer inspects its training examples, finds that hill-farm parcels were rare in them, and tests a fix. Builds on Willow Sorting Desk; the sorter's rule must be a fully specified model, never a live AI.
-- **The seed exchange ledger** (M3 ratio and percentage): divide a shared seed store between two communities in a stated ratio, then compare germination as percentages when the samples are very different sizes (30 of 40 against 20 of 25).
+| No. | Case ID | Title | Proposed story invitation | Main strands | Written in | Review needed before build |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | `bridge-or-ford` | Bridge or ford? | From the first visit (Act I) | Linear relationships, ratio, sources, argument | Section 5 | Complete activity contract and independent content/spec review |
+| 6 | `hollis-pages` | What did Hollis write? | When page 1 dries; each later page joins as it dries | Transcription, inference from context, certainty | [118-hollis-pages-case.md](../content/118-hollis-pages-case.md) | Complete activity contract and independent content/spec review |
+| 7 | `sorting-machine` | The borrowed sorting machine | After Act I | AI literacy (C1), rules against learned examples, sampling | [118-sorting-machine-case.md](../content/118-sorting-machine-case.md) | Complete activity contract and independent content/spec review; subject reviewer for C1 |
+| 10 | `town-record` | What should Willowbank write down? | Act II, "A garden across the seasons" | Measurement, data design, records | [118-town-record-case.md](../content/118-town-record-case.md) | Complete activity contract and independent content/spec review |
+| 4 | `flood-bell` | When should the bell ring? | After Nuria's first letter (end of Act II) | Time and rates, upstream timing, uncertainty | [118-flood-bell-case.md](../content/118-flood-bell-case.md) | Complete activity contract and independent content/spec review; the case must not read as flood-safety advice (spec 120, S7) |
+| 3 | `seed-exchange` | The seed exchange ledger | Act III, "The seed exchange" | Ratio, proportion, percentages, sample size | [118-seed-exchange-case.md](../content/118-seed-exchange-case.md) | Complete activity contract and independent content/spec review; Spanish reader for Nuria's note |
+| 9 | `flood-marks` | Marks on the wall | After Léon's first letter (Act III) | Reading French sources, measurement, history | [118-flood-marks-case.md](../content/118-flood-marks-case.md) | **Complete activity contract; independent source/content/spec review; fluent French reader** |
+| 2 | `valencia-1957` | Where did Valencia's river go? | Act IV, after page 4 | History, Spanish reading, compound units, perspective | [118-valencia-1957-case.md](../content/118-valencia-1957-case.md) | **Complete activity contract; independent source/content/spec review; fluent Spanish reader** |
+| 8 | `room-for-the-river` | A country that gave its rivers room | Act IV, "What other places did" | History, scale and area, trade-offs | [118-room-for-the-river-case.md](../content/118-room-for-the-river-case.md) | **Complete activity contract; independent source/content/spec review** |
+| 5 | `ledger-and-gauge` | The ledger and the rain gauge | Act IV, after page 4 and Nuria's rain gauge letter | Mean, comparison of groups, confounding, argument | [118-ledger-and-gauge-case.md](../content/118-ledger-and-gauge-case.md) | Complete activity contract and independent content/spec review |
+| 11 | `exchange-plan` | Keeping the Ways open | Act VI, "Compare routes and keep a plan" | Rates, scheduling, constraints, written plan | [118-exchange-plan-case.md](../content/118-exchange-plan-case.md) | Complete activity contract and independent content/spec review |
+
+Act V's desk depth, the Gazette opinion piece, belongs to spec 49's authored project path and is not a casebook case. Case 5 is the "full dossier" spec 120 names for Act IV's older learner; it reads its plans and the town meeting from spec 120 and writes no act text of its own.
+
+The authored files propose the following parts, whose presence is not proof of completeness or review: why the case exists, its hook, its steps, each step's learn card, guided first task, tasks with worked answers, stuck ladder and misconception replies, the recommendation or closing step, its supported route, topic candidates with the hard-prerequisite crosswalk, and what still needs review.
 
 ## 9. Entry points
 
@@ -373,8 +394,9 @@ Each needs its own spec, content and source review. Spec 120 proposes several re
 5. The case completes through the supported route with no free text and steps 1–3 open.
 6. Kept answers and the recommendation survive reload, explorer switch, export and import, and a changed answer key; an unreadable step leaves the others open.
 7. Choice order varies across questions and stays fixed within a saved question.
-8. Arrival and the "What's happened" card spoil nothing beyond pages spec 120 marks as available at the start.
+8. Arrival and the "What's happened" card spoil nothing beyond the story pages/letters actually reached or supplied by the explicit arrival. The section 8 catalog is planning material; uncommissioned cases are not inserted into the first build.
 9. No age, band or ability field appears in the desk's code, saves or copy.
+10. Before any later case is commissioned, real history (Cases 2, 8 and 9) must carry the History label and fiction the Story label; no historical claim reaches a child without its independent source/content review. A fluent reader must review each applicable Spanish/French line. These future gates do not expand the Case 1 acceptance increment.
 
 ## 11. Upstream overlap (AGENTS.md)
 
@@ -388,4 +410,4 @@ Refreshed 2026-10-23: Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060` (`LESSO
 
 ## 12. Boundaries
 
-Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it. These are documentation review repairs, not build or content clearance. Case 1 requires independent specification/content follow-up; Case 2 remains separately uncommissioned and unverified.
+Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it. These are documentation review repairs, not build or content clearance. Case 1 requires independent specification/content follow-up; all later cases remain separately uncommissioned and unverified.
