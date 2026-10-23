@@ -29,5 +29,10 @@ for(const root of [null,[],{version:99,synthetic:'raw'}]){const s=fresh();s.retu
 {
  const s=fresh();startReturning(s,'return-17');s.returningOrders.shownBundleExamples=['bundle:0:4:2'];s.broad.drafts['activity:target']={question:{params:{type:'bundle',hundreds:0,tens:1,ones:7}},attempts:[17],input:'17',familiar:false};s.syntheticPadding='';s.syntheticPadding='x'.repeat(MAX_IMPORT_BYTES-bytes(s)-2);ok(fits(s));const before=copy(s);eq(recordRemainsDisplay(s,remainsSourceExamples(s.returningOrders.cases['return-17'].source),fits).ok,false,'source-already-seen target-new candidate exceeds actual pretty report');eq(s,before,'refused target and waiting familiarity remain unchanged');resetRemains();const p=prepareRemainsPage(s,'cap',fits);ok(p.refused&&!p.html.includes('remains-mark')&&!p.html.includes('Start: 42'),'initial refusal is source-free');eq(s,before);
 }
+{
+ const s=fresh();startReturning(s,'return-12');s.returningOrders.retainedRaw={synthetic:'older unknown history'};const rawBefore=copy(s.returningOrders.retainedRaw);eq(startRemainsCase(s,'return-12',fits).ok,true);eq(s.returningOrders.retainedRaw,rawBefore,'conservative retained recovery remains byte-identical');
+ let deep={};for(let i=0;i<70;i++)deep={child:deep};s.syntheticDeep=deep;const before=copy(s);eq(recordRemainsDisplay(s,['bundle:0:3:0'],fits).ok,false,'actual report depth rejects new disclosure');eq(s,before,'depth refusal preserves all originals');
+ const utf=fresh();utf.syntheticPadding='é';const overhead=bytes(utf)-2;utf.syntheticPadding='é'.repeat(Math.floor((MAX_IMPORT_BYTES-overhead-300)/2));ok(fits(utf),'UTF8 original report fits by bytes');const old=copy(utf);eq(startRemainsCase(utf,'return-17',fits).ok,false,'new source rejected using UTF8 pretty report bytes');eq(utf,old);
+}
 for(const caps of remainsCaptions)for(const caption of caps.filter(Boolean))ok(fs.readFileSync(new URL('../docs/specs/110-write-what-remains.md',import.meta.url),'utf8').includes(caption),'all13 stage captions are exact reviewed copy');
 console.log(`Write what remains: ${n} finite/state/exposure/report assertions passed.`);

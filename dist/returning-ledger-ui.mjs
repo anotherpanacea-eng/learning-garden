@@ -4,8 +4,9 @@ import {freshRemains,moveRemains,remainsCounts,remainsSourceExamples,remainsResu
 import {remainsCaptions} from './returning-ledger-content.mjs';
 import {hearButton} from './play-media.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let session=null,owner=null;
-export function resetRemains(){session=null;owner=null;}
+// A replaced notebook/source starts fresh; our own exposure commits adopt their new source reference.
+let session=null,owner=null,notebook=null,frozenSource=null;
+export function resetRemains(){session=null;owner=null;notebook=null;frozenSource=null;}
 const notice='This notebook is too large or complex to show another complete picture safely. Your work is unchanged. Download notes, or use a separate explorer.';
 const noticeHtml=()=>esc(notice).replace('Download notes','<a href="#notes">Download notes</a>');
 const button=(label,action,disabled=false)=>`<button type="button" data-remains-action="${action}"${disabled?' disabled':''}>${esc(label)}</button>`;
@@ -23,21 +24,22 @@ const header='<header><a href="#numbers/return">Return to the returning table</a
 export function remainsRefusal(){return `<section class="returning-ledger" data-remains-root>${header}<p id="remains-status" role="status" tabindex="-1">${noticeHtml()}</p><a href="#notes">Grown-up notes</a></section>`;}
 function page(state,s){const p=session;return `<section class="returning-ledger" data-remains-root>${header}<p>One supplied ones-first strategy.</p><p class="remains-source">Start: 42 counters. Return ${s.target}: one ten and ${s.returnedOnes===2?'two':'seven'} ones.</p><details><summary>Read the original return request</summary><p>${esc(s.text.prompt)}</p></details><div class="remains-turns" role="group" aria-label="Writing picture turn">${['picture','write'].map(t=>`<button type="button" data-remains-turn="${t}" aria-pressed="${p.turn===t}">${t==='picture'?'Picture':'Write'}</button>`).join('')}</div><section class="remains-pane"><h2 id="remains-turn-title" tabindex="-1">${p.turn==='picture'?'Picture the return':'Write from this picture'}</h2><div class="${p.turn==='write'?'remains-layout':'remains-full'}"><div>${picture(s,p)}<p class="remains-caption">${esc(caption(s,p))}</p>${p.turn==='picture'?`<div class="remains-actions">${grouping(s,p)}</div>`:''}</div>${p.turn==='write'?writing(s,p):''}</div>${hearButton(speech(s,p),'Hear this step')}<details><summary>Talk together</summary><p>${s.returnedOnes===2?'Why could these two ones be returned without opening a ten?':'What stayed the same when a ten opened? What changed when counters moved to the store tray?'}</p></details></section><details><summary>Choose another writing picture</summary>${choices()}</details><p id="remains-status" role="status" tabindex="-1"></p></section>`;}
 export function prepareRemainsPage(state,explorerId,canExport){
- if(owner!==explorerId){resetRemains();owner=explorerId;}const v=returningView(state);
+ if(owner!==explorerId||notebook!==state){resetRemains();owner=explorerId;notebook=state;}const v=returningView(state);
  if(v.unavailable)return {html:`<section class="returning-ledger" data-remains-root>${header}<p>This saved return uses an unfamiliar format. Its original work is kept in your notes.</p><a href="#notes">Grown-up notes</a></section>`,changed:false};
+ if(session&&v.root?.cases[session.caseId]?.source!==frozenSource)session=null;
  const id=session?.caseId||v.root?.active,s=v.root?.cases[id]?.source;
  if(!s)return {html:`<section class="returning-ledger" data-remains-root>${header}${choices()}<p id="remains-status" role="status" tabindex="-1"></p></section>`,changed:false};
  const out=recordRemainsDisplay(state,remainsSourceExamples(s),canExport);if(!out.ok)return {html:remainsRefusal(),changed:false,refused:true};
- if(!session)session=freshRemains(id);return {html:page(state,returningState(state).cases[id].source),changed:out.changed};
+ if(!session)session=freshRemains(id);frozenSource=returningState(state).cases[id].source;return {html:page(state,returningState(state).cases[id].source),changed:out.changed};
 }
 export function bindRemains(state,{explorerId,isActive,canExport,save,render,focus}){
  const root=document.querySelector('[data-remains-root]');if(!root)return;
  const captured=session,id=captured?.caseId,source=returningState(state)?.cases[id]?.source;
- const live=()=>root.isConnected&&document.querySelector('[data-remains-root]')===root&&isActive()&&session===captured&&returningState(state)?.cases[id]?.source===source;
+ const live=()=>root.isConnected&&document.querySelector('[data-remains-root]')===root&&isActive()&&notebook===state&&session===captured&&returningState(state)?.cases[id]?.source===source;
  const refuse=()=>{const p=root.querySelector('#remains-status');p.innerHTML=noticeHtml();focus('#remains-status');};
- root.querySelectorAll('[data-remains-start]').forEach(b=>b.onclick=()=>{if(!live())return;const out=startRemainsCase(state,b.dataset.remainsStart,canExport);if(!out.ok){refuse();return;}session=freshRemains(b.dataset.remainsStart);owner=explorerId;if(out.changed)save();render();focus('#remains-turn-title');});
+ root.querySelectorAll('[data-remains-start]').forEach(b=>b.onclick=()=>{if(!live())return;const out=startRemainsCase(state,b.dataset.remainsStart,canExport);if(!out.ok){refuse();return;}session=freshRemains(b.dataset.remainsStart);owner=explorerId;frozenSource=returningState(state).cases[session.caseId].source;if(out.changed)save();render();focus('#remains-turn-title');});
  root.querySelectorAll('[data-remains-turn]').forEach(b=>b.onclick=()=>{if(!live()||!captured||!['picture','write'].includes(b.dataset.remainsTurn))return;session={...session,turn:b.dataset.remainsTurn};render();focus('#remains-turn-title');});
  const inverse={open:'close',close:'open','return-ones':'bring-ones','bring-ones':'return-ones','return-ten':'bring-ten','bring-ten':'return-ten','place-ones':'lift-ones','lift-ones':'place-ones','place-tens':'lift-tens','lift-tens':'place-tens'};
- root.querySelectorAll('[data-remains-action]').forEach(b=>b.onclick=()=>{if(!live())return;const next=moveRemains(session,source,b.dataset.remainsAction);if(!next)return;if(b.dataset.remainsAction==='place-tens'){const out=recordRemainsDisplay(state,[remainsResultExample(source)],canExport);if(!out.ok){refuse();return;}if(out.changed)save();}session=next;render();const selector=`[data-remains-action="${inverse[b.dataset.remainsAction]}"]:not(:disabled)`;focus(document.querySelector(selector)?selector:'#remains-turn-title');});
+ root.querySelectorAll('[data-remains-action]').forEach(b=>b.onclick=()=>{if(!live())return;const next=moveRemains(session,source,b.dataset.remainsAction);if(!next)return;if(b.dataset.remainsAction==='place-tens'){const out=recordRemainsDisplay(state,[remainsResultExample(source)],canExport);if(!out.ok){refuse();return;}if(out.changed)save();frozenSource=returningState(state).cases[session.caseId].source;}session=next;render();const selector=`[data-remains-action="${inverse[b.dataset.remainsAction]}"]:not(:disabled)`;focus(document.querySelector(selector)?selector:'#remains-turn-title');});
  root.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',e=>{if(!live()){e.preventDefault();e.stopImmediatePropagation();return;}b.dataset.speak=speech(source,session);},{capture:true}));
 }
