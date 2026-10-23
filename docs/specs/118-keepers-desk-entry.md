@@ -1,6 +1,6 @@
 # 118. The Keeper's Desk: a real entry for longer, less-guided work
 
-Status: **proposed specification and authored text, 2026-10-23. Not reviewed, not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in spec 120 (in progress), which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns only the desk's entry, its working conventions and its first case. Companion: [spec 119](119-deeper-bench-packs.md) adds harder packs to existing benches.
+Status: **proposed specification and authored text, 2026-10-23. Not reviewed, not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120](120-keeper-of-the-ways.md) (draft PR #127), which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns only the desk's entry, its working conventions and its first case. Companion: [spec 119](119-deeper-bench-packs.md) adds harder packs to existing benches.
 
 ## 1. The problem
 
@@ -37,7 +37,7 @@ These apply to every case. They are what makes this an entry for a more independ
 
 ## 4. Arrival text
 
-Spec 120 owns the parcel and the Keeper reveal. This arrival must not spoil later pages, so it refers only to the pages that have dried so far and to the desk's purpose. It is written so an explorer can arrive without having played any earlier act.
+Spec 120 owns the parcel, the old Keeper and the Keeper reveal. This arrival suits its "Arrive with the letter from upstream" entry, which points an explorer at the desk. This arrival must not spoil later pages, so it refers only to the pages that have dried so far and to the desk's purpose. It is written so an explorer can arrive without having played any earlier act.
 
 **Home invitation (one line, below the existing "Find a place to begin"):**
 
@@ -45,7 +45,7 @@ Spec 120 owns the parcel and the Keeper reveal. This arrival must not spoil late
 
 **First visit, arrival panel:**
 
-> The desk sits in the old tollhouse at the end of Willow Bridge. Its drawers are full of things nobody has had time to read: survey maps, a courier's logbook, letters from upriver, and the pages of a parcel the storm left on the bridge, addressed *To the Keeper of the Ways*. Some pages have dried enough to read. The rest are still stuck together.
+> The desk stands in a corner of the mended Willowbank library, a desk nobody has used in years. Its drawers are full of things nobody has had time to read: survey maps, a courier's logbook, letters from upriver, and the pages of a parcel the storm left on the bridge, addressed *To the Keeper of the Ways*. Some pages have dried enough to read. The rest are still stuck together.
 >
 > Wren Halloway has kept the town's ledgers since the storm. She pushes the chair out for you.
 >
@@ -180,7 +180,7 @@ Tasks:
 
 **Question panel:** three records from the desk's drawers, each with its kind and date visible.
 
-> **1. Hob Pennick, the miller, talking to Wren last week.**
+> **1. Hob Pennick, who farms beside the ford, talking to Wren last week.**
 > "I've lived by that ford forty years. I've seen it go right under twice. Once was this storm. It's a fine crossing."
 >
 > **2. The courier's logbook, last two winters.** Seven entries in all, for example:
@@ -191,12 +191,12 @@ Tasks:
 
 Tasks:
 
-- **3a.** For each record, choose what kind of evidence it is: *a memory told later*, *a record written at the time*, *an official note with no dates*. Then choose what it can tell us and what it can't, from authored cards. Example cards for the miller: "how the ford seemed to someone who crossed it for decades" (can) and "how many days a winter it can't be crossed" (can't).
-- **3b.** "Do the miller and the courier contradict each other?" Choices:
+- **3a.** For each record, choose what kind of evidence it is: *a memory told later*, *a record written at the time*, *an official note with no dates*. Then choose what it can tell us and what it can't, from authored cards. Example cards for Hob: "how the ford seemed to someone who crossed it for decades" (can) and "how many days a winter it can't be crossed" (can't).
+- **3b.** "Do Hob and the courier contradict each other?" Choices:
   - "Yes. Twice in forty years can't fit seven high-water days in two winters."
   - "No. 'Right under' and 'too high to cross' may differ, over different years." ← fits the evidence
   - "Yes. The courier must be exaggerating to excuse the late post."
-  - "Yes. The miller must be forgetting how often it really floods."
+  - "Yes. Hob must be forgetting how often it really floods."
 
   The reply for the third and fourth choices: "That could be true, but nothing in these records shows it. What else could explain both?"
 - **3c.** "What would you want to know that none of these records tells you?" Free choice, authored replies: the depth of water on the courier's days; whether the causeway would stay passable when the shallows are too deep to wade; records from other years; what the hill farms say.
@@ -205,7 +205,7 @@ Tasks:
 
 > Two accounts **disagree** when they seem to point different ways. They **contradict** only if both can't be true at once. Before deciding someone is wrong, check three things: Are they measuring the same thing? Do they cover the same time? Was each written when it happened, or remembered later?
 
-This step is where the case connects to spec 120's flood story. A later page of the parcel could add a fourth record here; this spec does not depend on it.
+This step is where the case connects to spec 120's flood story, where Case 1 is Act I's desk case. The parcel's flood ledger (page 2) belongs to the end of Act II, so this case does not use it; a revisit after that page could add the ledger as a fourth record.
 
 ### 5.5 Step 4: Your recommendation
 
@@ -228,7 +228,7 @@ The recommendation has four parts. Each part offers a **Write it yourself** fiel
 
 > Wren reads it twice. "Good. Whatever they choose tomorrow, they'll know what each crossing costs, who it leaves out, and what we still don't know. That's what the desk is for."
 
-**Story closure:** the recommendation is pinned to the tollhouse board. Spec 120 decides what the town meeting does next; this case must not imply that one plan was correct.
+**Story closure:** the recommendation is pinned to the library noticeboard. Spec 120 decides what the town meeting does next; this case must not imply that one plan was correct.
 
 **Supported route** (for an explorer working with a grown-up, or anyone who wants it): every part can be completed with **Choose and adapt** alone, and steps 1–3 can be left open. The same closure follows. A grown-up reading aloud and talking it through is a full way to finish.
 
