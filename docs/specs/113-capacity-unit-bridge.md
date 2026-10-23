@@ -1,0 +1,104 @@
+# 113. Same pour, new unit
+
+**Status: authored specification candidate, awaiting independent spec, source, mathematics and static-art review. No runtime build, publication or coverage mapping is authorized by this document.**
+
+[Source and overlap audit](../source-audits/113-capacity-unit-bridge.md) records immutable references and the evidence packet.
+
+## The useful middle step
+
+Add an optional **Same pour, new unit** desk at exact route `#cafe/units`. Read a supplied recipe label in liters and a jug scale in milliliters, then change the scale's unit while the liquid stays still. Contrast that with adding or returning one 50 mL measure, which changes the contained amount. This is supplied exploration, without a question, answer field, Check, Keep, score, mastery, age placement or independent conversion result.
+
+Tenths Table and Hundredths Bridge already rename parts of one repair whole. Measuring Kitchen already measures integer mL amounts in a 500 mL jug. Neither shows the size/count relation between L and mL. This desk uses a different, explicitly **1 L capacity** jug: a full jug is 1 L here; a full Kitchen jug remains 500 mL. A liter is a unit of volume, not a synonym for “one full container.” The existing roots, recipe cards, replies, checks, supports, kept drafts and apparatus remain exact. Nothing imports their contents into this desk.
+
+A quiet invitation **“Same pour, new unit”**, followed by **“Compare a recipe label with a jug label.”**, appears after the current Measuring Kitchen panel, including its unreadable-work fallback. It does not initialize or normalize that root. Add reciprocal quiet links from Tenths Table and Hundredths Bridge after their existing work. An offered link alone contains no completed relation. No home card, general unit engine, new graph node or atlas mapping is part of this slice. At this new route, render before global learning-root initialization, as Scale does, so unrelated pending/raw work is not cleaned up merely by visiting. Other café routes keep their actual fallbacks; `#cafe/units/extra` is not this exact destination.
+
+## One finite supplied model
+
+Source ID `jug-label-desk-v1`. One imaginary ingredient, cloud-water, is conserved between one jug and an undrawn reserve. The complete collection is 1000 model mL. Start at 300 mL in the jug and 700 mL in reserve. The only other contained amount is 350 mL, with 650 mL in reserve. The reserve is a text ledger, not a second filled jug or extra collection. Derive it as `1000 - amountMl`; never duplicate the jug amount in a tray or annotation supply. No jars, mixing, recipe completion, real ingredients, automatic target snap or other Kitchen action is present.
+
+The fixed recipe target is 0.35 L, explicitly supplied as 350 mL. It stays visible even when the actual amount is 300 mL. There is no success claim at 350 mL: say only that the jug now has the amount on this supplied label. Numeric state is integer mL throughout; decimal strings are authored display values, never accumulated binary decimals. Unit is `mL` or `L`. Four views are possible: (300,mL), (300,L), (350,mL), (350,L). Initial view is (300,mL).
+
+One original passive straight-sided jug has constant interior cross-section. Its zero baseline and capacity line bound exactly 20 equal 50 mL intervals, hence 21 marks. Level height is `amountMl / 1000` of the interior height, anchored at zero, in both modes and at both widths. Major labels occur at every second interval: mL mode 0,100,200,300,400,500,600,700,800,900,1000; L mode 0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0. Minor marks are unnumbered. There is no rescaling or change to the capacity/geometry when the selected unit changes. A horizontal surface and exact level marker distinguish the current level from the target. Do not draw a second target fill. Show a small labeled target notch at the seventh interval, distinct from the current level, only if it remains legible; the numeric recipe card is authoritative and sufficient without that optional notch. Count spaces from zero, not marks. Neither a small interval nor one mark means 1 mL.
+
+## Exact visible copy and actions
+
+Use American prose, uppercase `L`, and nonbreaking spaces between each number and its unit. The exact compact labels are authoritative; line wrapping may change, words and mathematical relations may not.
+
+| Place | Exact copy |
+| --- | --- |
+| Title | Same pour, new unit |
+| Purpose | Read a recipe and a jug when their labels use different units. |
+| Source card | Supplied recipe label: 0.35 L = 350 mL. |
+| Unit reference | 1 L = 1000 mL. A milliliter is the smaller unit, so the same amount needs more milliliters than liters. |
+| Capacity | Jug capacity: 1 L = 1000 mL. The most this jug can hold. |
+| Interval key | Each small space: 50 mL = 0.05 L. Count spaces from zero, not marks. |
+| Figure heading | Jug scale: mL (milliliters) / Jug scale: L (liters), according to selected unit |
+| Current at 300 | In the jug: 300 mL = 0.30 L. 6 small spaces reach the liquid level. |
+| Current at 350 | In the jug: 350 mL = 0.35 L. 7 small spaces reach the liquid level. |
+| Reserve at 300 / 350 | Reserve: 700 mL. / Reserve: 650 mL. |
+| Ledger | Jug + reserve = 1000 mL. |
+| Unit action note | Change the unit label: the liquid stays still. |
+| Quantity action note | Move one 50 mL measure: the liquid level changes. |
+| Model disclosure | Pretend liquid, exact picture amounts. This straight-sided jug is a model, not a real measuring tool. |
+| Model details | Real pouring and reading can be uncertain. This model omits splashes, liquid left on surfaces and the curved liquid surface. |
+| Initial small status | A supplied example. Try changing the unit label. |
+| Links | Back to Measuring Kitchen · Tenths Table · Hundredths Bridge · Grown-up notes |
+
+Native unit buttons **“mL”** and **“L”** have `aria-pressed` and visible **“Selected”** text on the active choice. They replace the axis labels and figure heading only; current dual-unit reading and recipe relation remain supplied in both views. Selecting the current unit is a no-op: no new undo, status, exposure mutation or save. This simultaneous reference is intentional: the useful action is seeing the scale change while the same horizontal liquid level and two names remain visible, not guessing a hidden conversion.
+
+Native **“Add 50 mL”** acts only at 300; it moves 50 from reserve to jug. **“Return 50 mL”** acts only at 350 and reverses it. Keep both buttons present; disable the impossible one. Nearby reason at 300: **“This example moves between 300 mL and 350 mL.”** At 350 use the same reason, not a capacity-overflow claim: this jug has room above 350, but this finite teaching contrast stops there. This is a model restriction, not a measurement law.
+
+One-step **“Undo last change”** restores the immediately previous amount and unit together and clears undo; it does not retract familiarity already supplied. Each effective unit/quantity action replaces the one undo snapshot `{amountMl,unit}`. No-op/boundary actions preserve it. Initial undo is disabled with **“No change to undo.”** No reset button is needed: leaving and reentering opens the initial supplied example.
+
+After a unit change announce **“The jug scale now uses liters. The liquid amount stayed the same.”** or **“… milliliters. …”** After Add: **“50 mL moved from reserve to jug. In the jug: 350 mL = 0.35 L.”** After Return: **“50 mL moved from jug to reserve. In the jug: 300 mL = 0.30 L.”** After Undo: **“The previous amount and unit label are restored.”** These are polite status messages, not scores.
+
+**“Hear this view”** requests current visible text: purpose, source card, unit reference, capacity, selected figure heading, the eleven selected-unit major readings in order from zero, interval key, current reading, reserve, ledger and model disclosure/details. Say decimal values as their written decimal readings with the unit; do not substitute fractions or add a hidden worked conversion. Speak no previous/hidden view, target answer check or learner-result claim. The exact figure alternative names capacity, current amount in both units, 20 equal intervals, the selected unit and current six/seven spaces; it does not describe the reserve as a drawn liquid collection. Supplied narration is practice, not observed listening or independent reading.
+
+## Actual supplied arithmetic and custody
+
+The ordinary story exposure hook already admits finite decimal factors and its actual formatted report can reimport them; this is a seam observation, not permission to qualify arbitrary products. Record only the following actually supplied relationships. An ordered pair `[a,b]` means the existing supplied fact `a × b = a*b`; it is familiarity, not a response. Preserve ordering where the existing hook does, and let its existing canonical facts qualify matching Broad/Garden questions. A reverse pair is not separately manufactured.
+
+| Actually complete display or speech | Pair set |
+| --- | --- |
+| 1 L = 1000 mL; capacity uses the same completed relation | `[1,1000]` |
+| 50 mL = 0.05 L | `[0.05,1000]` |
+| Supplied recipe 0.35 L = 350 mL | `[0.35,1000]` |
+| One labeled interval and its two unit sizes | `[1,50]`, `[1,0.05]` |
+| Full 20-interval jug, complete capacity and both interval sizes | `[20,50]`, `[20,0.05]` |
+| Current dual reading and explicitly counted n=6 or 7 small spaces | `[n,50]`, `[n,0.05]`; at 300 also `[0.3,1000]` (350 conversion already supplied by recipe) |
+| Selected axis, each labeled prefix reached by k small spaces from zero | mL: `[k,50]`; L: `[k,0.05]`, for literal k in `{0,2,4,6,8,10,12,14,16,18,20}` |
+
+The four exact view lists are 19 distinct ordered pairs each, with 30 distinct ordered pairs across all views; the durable static math check enumerates them. These counts describe supplied relationships, never a lesson score.
+
+The key, full jug and selected labeled prefixes meet the same equal-interval reading boundary as Scale. An offered unit button alone does not. Do not infer another product because it is computable, because a helper accepts it, or by combining remembered labels from different views. The reserve's single mL label and the additive ledger do not supply a multiplication fact or L conversion. No `[50,0.001]`, arbitrary×1000 table, decimal proficiency, recipe fit or independent method is inferred. Earlier successfully qualified views remain qualified after Undo, route exit, reload or later refusal. No scene history or decimal familiarity is inserted into Tenths Table/Hundredths Bridge: their repair-material whole is a different source, and absence of these roots cannot establish fresh conversion.
+
+Before initial source display, every effective action revealing its next view, and every current Hear request, clone the **whole notebook**, apply only this view's finite facts through the actual `exposeStoryFacts` hook with its verified-display pending-Bramble argument, and require both existing progress limits and `prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok`. Include actual metadata/report escaping/UTF-8 size, all unrelated normalized and raw pending work, and actual helper changes. Never substitute a stripped envelope, compact state-only serialization, successful helper call or synthetic generic importer. Commit permitted exposure additions and matching pending familiarity flags atomically before display/speech. Source entry is already a disclosure of its recipe/key/capacity, not merely availability of a hidden lesson.
+
+Use Scale's small preserve-or-refuse boundary, adapted locally if needed: existing exposure arrays may append; existing matching unfinished Broad/Garden `knownFact`, baseline `exposed`, and pending Post Office/Bramble `priorFactShown` may become true. Missing helper-owned roots may receive their normal initialization. **Existing unrelated fields anywhere inside those roots, unknown/old drafts, seen/history entries, completed results, raw roots/recovered records and unrelated sibling roots must remain exact.** If a helper would trim/normalize/repair any such work, refuse this display rather than install its wholesale candidate. New scene state/root/history, generic delta registry, migration, recovery UI or schema change is unnecessary. Actual pretty-report/import preflight is still required even if facts were seen earlier; ordinary rerender of an already admitted view need not rerun it or cause a refusal.
+
+On initial source-entry refusal, render a source-free page under the new hash: heading plus exact notice **“This picture needs room in your notes to mark its supplied number facts. Nothing was changed. Open Grown-up notes to download your work, or return to Measuring Kitchen.”** and links to `#notes`/`#cafe/recipes`. No blocked recipe, key, caption, picture or stale other-route DOM appears. On action/Undo/Hear refusal retain the exact previously admitted live picture, amount, unit, reserve, undo and notebook; update only this notice/status and focus it. Cancel current speech; do not speak the rejected/new view. No partial flags or failed-start root survive. Save-off may keep the allowed changes in the in-memory notebook, with the existing honest save-off message; storage-write failure does not silently claim saved work.
+
+## Visit, focus and return contract
+
+One transient view `{amountMl:300|350, unit:mL|L, undo:null|snapshot}` is owned by the current notebook object, explorer ID, exact hash and current live root/session. It has no learner save. Ordinary host rerender preserves that view/undo and does not create a source exposure again. Route exit/reentry, explorer chooser/switch, import/reset, same-hash notebook replacement or reload discards the transient view and stops speech; the next admitted entry starts 300/mL. Existing saved notebooks remain subject only to their normal custody rules.
+
+Guard all action and Hear listeners before they can act: captured notebook identity, explorer identity, active explorer mode, exact route, current visit/root and connected owned node. A retained detached unit, transfer, Undo or Hear node must do nothing after stage/root/rerender/route/explorer/import changes. Put local capture guards before global speech binding, as Scale does. Never change global narration semantics to fix this destination.
+
+Use native buttons at least 44 px in both dimensions, normal tab order, 16 px body copy, a visible focus ring separate from selected state, and no drag/hover/timer requirement. Preserve focus on the same enabled unit control after relabeling; after quantity movement disables the triggering button, move focus to the now-enabled inverse button. Undo focuses the heading or restored enabled control. First admitted entry focuses the heading; refusal focuses status. Current picture/status must agree at all times. Responsive reflow may stack the reading beside/below the jug, but cannot change scale geometry/amount proportion, labels or represented capacity. No motion is necessary; reduced motion has no lost information.
+
+The literal Back link goes to `#cafe/recipes` and resumes its existing work under its existing rules, without choosing a case, filling, checking, support, Keep or recipe outcome. Tenths/Hundredths links similarly open their actual destination, without recording an answer or claiming transfer. A genuine **later, separately reviewed return** would read a 250 mL recipe against a 500 mL-capacity jug labeled 0.25 L, reversing the unit direction and contrasting contained volume 0.25 L with capacity 0.5 L. That future source would test whether the idea travels when a full jug is not 1 L. It is planned, not implemented or assessed by this four-view desk, and needs its own finite exposure/source review. No current saved Kitchen source is edited to imitate it.
+
+## Original art and bounded acceptance
+
+[320 px design](../design/113-capacity-unit-bridge/phone.svg) and [820 px design](../design/113-capacity-unit-bridge/tablet.svg) show the 350/L view, with exact 7/20 liquid height,650 mL reserve, selected L control and inverse transfer. They are original static SVGs, not a runtime prototype. Native raster previews and full public pinned records are review evidence in the dated capacity 113 packet documented by the audit. The artwork has no dependency on an atlas/browser preview.
+
+Before build, independently review the actual source records, finite math, exposure table and both actual nativePNG pixels. Before release, implementation review must independently check:
+
+- All 4 views, unit no-op, Add/Return bounds, one-step Undo/no-op behavior and conservation 300+700=350+650=1000. Unit change leaves every modeled quantity and level coordinate exact; transfer changes height by 1/20. Twenty equal spaces vs 21 marks and the 11 major readings agree at 320/820.
+- Complete exact child strings, reserve distinct from drawn jug, capacity distinct from current volume, selected-unit scale, accessible alternative and current narration. No real measurement, standard completion, mastery, age or independent conversion claim.
+- Enumerate exactly the finite facts for each view, including zero prefixes, capacity/key/source/current and earlier views retained after Undo. Matching pending baseline/Broad/Garden/Bramble flags qualify; unmatched/completed work and all old recipe/decimal roots remain exact. No additive reserve ledger becomes a multiplication result.
+- Actual whole pretty-report download/reimport at valid and limit boundaries, future/raw/helper-cleanup roots, escaped metadata, pending normalized/raw work and frozen completed results. Initial refusal is source-free; failed later action/Undo/Hear preserves live DOM/view/undo/notebook. Already-admitted ordinary rerender survives a subsequent export-limit change; later Hear must independently refuse if it cannot preflight.
+- Save-off/write failure, same-hash import/notebook replacement, explorer switch/chooser, reset, reload, route exit/back and reentry; retained stale action/Hear nodes and old roots cannot act or speak. Existing actual notes transfer includes only permitted old helper facts/flags, no scene root.
+- Actual 320/820 browser pixels and keyboard-selected focus for both unit controls, inverse focus at transfer limits, nonbreaking numeric unit labels,44 px targets, no horizontal overflow, source-free refusal and return to uninitialized/raw Kitchen without an exit crash. Static review is not this runtime verification.
+
+Implementation should stay one small route module and local CSS, reusing existing media, exposure, report/import and save seams. No runtime work is included in this authored spec candidate. The parent owns independent review, subsequent build authorization and any publication gate.
