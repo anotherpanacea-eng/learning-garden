@@ -1,6 +1,6 @@
 # 113. Same pour, new unit
 
-**Status: authored specification candidate, awaiting independent spec, source, mathematics and static-art review. No runtime build, publication or coverage mapping is authorized by this document.**
+**Status: implementation-review candidate; independent implementation/root/Claude clearance remains pending. Independent specification/source/mathematics/static-art gates cleared `317fb9df1c0cc5b93d1257ead9dda8ff497bf0f5`. This records the prior spec gate, not implementation or publication clearance.**
 
 [Source and overlap audit](../source-audits/113-capacity-unit-bridge.md) records immutable references and the evidence packet.
 
