@@ -112,4 +112,30 @@ A card that sends the child to the real kitchen, yard or window: measure a real 
 6. **Design and build**, **Sign Painter** and **spatial puzzles**, in whichever order the art work allows.
 7. **Stewardship over seasons**, after the act structure settles.
 
-Every spec in this list should check Jane and the pinned Marble graph for overlap at spec time, as [AGENTS.md](../AGENTS.md) requires. A first look at the pinned topic index found useful targets for the almanac (Local weather patterns, Seasonal changes, Weather vs climate, Moon Phases, Recording Data), mysteries (Inference vs Explicit Meaning, Observation vs Interpretation) and spatial puzzles (Lines of symmetry). Marble has no music, art or Spanish topics, so those three are original extensions.
+## Fit with the six acts and the strand map
+
+The [six-act programme](specs/49-six-act-curriculum.md) and its [26 strand pathways](six-act-strands.md) are the curriculum backbone, and the [roadmap's story order](roadmap.md#story-order-and-review-rule) is the act structure: recovery, community making, wider exchange, evidence and disagreement, learner-originated projects, and the Opening of the Ways. Each kind above has a natural first act and strand family. Places stay open from the start; the act is where the story first invites the child in.
+
+| Kind | First act, and where it returns | Strand families |
+| --- | --- | --- |
+| Rhythm Studio | I (mending songs), II (the town's first show) | Music extension steps 2–3; M3-I/II; E5 |
+| Field Guide Almanac | I onward, deepening each act | S7-I to III; S8-I/II; S3-I/II; M6-I/II |
+| Spanish River Market | III (the floating market) | New Spanish extension row, beside French |
+| Strategy games | II (the weekly market's games table), III (a visiting game) | M7 practices; M1/M2 fluency; L2 choosing a strategy |
+| Deduction mysteries | II (small town puzzles), IV (*The Town Has Two Stories*) | E3 inference; S1 observation versus interpretation; H1 claims and evidence |
+| Clockwork Mill | II, then V for designing levels | C1 and the programming extension pathway |
+| Design, build and test | II (repairs), IV (competing plans), VI | S1 engineering practices; S6; S7-VI |
+| Sign Painter | II (new shop signs) | Visual art extension; M5 symmetry and pattern; S6 light (color mixing) |
+| Spatial puzzles | I (window repairs), II | M5 space and geometry |
+| Stewardship over seasons | II (a garden across seasons), V (a night garden) | S3-III to V; M6; L1 |
+| Off-screen missions | Every act | Whatever the activity teaches; adult-reported, never scored |
+
+Every spec that comes out of this list follows the programme's [intermediate teaching contract](specs/49-six-act-curriculum.md#5-intermediate-teaching-contract): a target, a teaching encounter, a contrast, supported practice, a new application, a purposeful revisit in another act, and a stated data boundary. Specs 115–117 each include that table.
+
+## Jane and Marble
+
+As [AGENTS.md](../AGENTS.md) requires, specs 115–117 refreshed both upstreams on 2026-10-23 (Marble `f186a79`, Jane `1927912`). The most useful new material is Marble's **teaching research** file, which now gives teaching approaches, common misconceptions and constraints for about 1,050 topics. Jane's own review of it advises following its `learn` constraints where fields disagree, and these specs do.
+
+It changed the almanac most. The moon explanations for younger players now describe the pattern without the cause and never show a shadow, with the cause kept for older players alongside the orbit view. The minibeast key was rewritten as two-way questions about visible features, the picture gallery was removed, and a "build a key" page was added. The weather prompt now asks the child to look outside before choosing, the pictogram leads with its key, and a weather-or-climate sort makes the timescale explicit. Rhythm Studio's fraction labels always name the whole bar, following the unit-fractions misconceptions. Jane's learn-card pattern (one idea, one worked example, revealed a tap at a time) became Rhythm Studio's **Listen first**, and its writing rules (speak to the learner, keep it short, three choices) shaped the Spanish questions. Jane's mastery, medals, bosses and schedules stay out, as in every earlier spec.
+
+Marble has no music, art or Spanish topics, so those are original extensions; its newer graph adds "Rhythm in rhymes and songs", which is clap-based and stays an off-screen invitation. For the later kinds, a first look at the pinned topic index found targets for mysteries (Inference vs Explicit Meaning, Observation vs Interpretation) and spatial puzzles (Lines of symmetry). Each later spec should read the teaching-research records for its own targets before its text is written.

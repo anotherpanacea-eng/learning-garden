@@ -249,9 +249,27 @@ spanish: {
 
 **"River Market (Spanish): [n] of 4 errands done, [n] with meaning support. Postcard: kept / not yet."** Details: **"The market practices reading short Spanish notes and acting on them. It doesn't assess Spanish ability. Errands done with meaning support used English glosses. If you speak Spanish, reading the notes aloud together helps more than anything the game can do."**
 
+## Curriculum fit
+
+**Acts.** Act III, *Beyond Willow Bridge*, opens with a floating market, and *La Garza* is one of its first boats. The errands fit that act's purpose: another community with its own language, knowledge and needs, and a reciprocal exchange (the town helps unload; the crew brings seeds and oranges; a postcard goes home and a reply comes back). The destination stays open before Act III, as every place does. The postcard and reply are the seed of a longer correspondence that Act VI's sustained exchange could pick up.
+
+**Strands** ([six-act strands](../six-act-strands.md)): a new **Spanish** row in the explicit extension pathways, parallel to French and added to that table in this PR. The four errands cover its first three steps (familiar words and phrases → purposeful short sentences → linked instructions and accounts), with *va a* plus a verb as a first look at the fourth (tense). Secondary: **M1** quantities in the cargo and recipe, **L1-II** a market exchange, **S7** the weather report, and the cartographer's directions vocabulary.
+
+**Teaching contract** ([spec 49 §5](49-six-act-curriculum.md#5-intermediate-teaching-contract)):
+
+| Part | In this spec |
+| --- | --- |
+| Target | Read a short practical Spanish note and act on it; meet numbers, places, directions, food, order words and weather words in use. |
+| Teaching encounter | Each errand's note with sentence-by-sentence glosses and narration, read before any task. |
+| Contrast | *Al lado de* versus *enfrente de*; *primero / después / al final*; *subir* versus *bajar*; *me gusta* versus *me gustan*; the two *tortillas*. |
+| Supported practice | **What does it mean?**, **Hear it**, **Read one sentence at a time**; Teo's "read the line about la plaza again"; Marisol's replies to each crew job. |
+| New application | The same words return in a later errand (*hay*, numbers, *el café*, *el puente*) and in the postcard tiles; the longer note asks for the same action with more to read. |
+| Purposeful revisit | The six Spanish riddle cards link here; the weather errand uses the almanac's pictures; Marisol's reply comes on a later visit. |
+| Data boundary | Stored: errand choices and placements, support flags, postcard tiles and optional free text, all local. The postcard is signed with the explorer's picture symbol. No name, place or voice is collected. |
+
 ## Upstream check
 
-Marble has no Spanish or additional-language topics, so this is an original extension, as French is. Jane's short-quest and glossary conventions are design references through the French specs; no Jane code or text is used. All passages, names and art direction are original.
+Refreshed 2026-10-23: Marble at `f186a79a9525c189e2d423e31613c62b6805416f` and Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060`. Marble has no Spanish or additional-language topics, even in its newer graph, so this is an original extension, as French is. Jane's `LESSONS.md` writing rules shaped the text: questions speak to the learner, stay short, and offer three choices with one fitting; glosses are short definitions in the style of its glossary; and its "teach first, then a guided task, then a question" order matches each errand's note, task and question. Jane's points, medals, bosses and daily quest schedule are not adopted, and no Jane code or text is used. All passages, names and art direction are original.
 
 ## Checks for implementation
 

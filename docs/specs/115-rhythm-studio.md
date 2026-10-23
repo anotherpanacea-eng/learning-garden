@@ -36,6 +36,8 @@ This is music first and a fraction model second. A bar that is full is a fact ab
 
 The bar is a horizontal strip divided into eight equal cells with beat numbers **1 2 3 4** above every second cell. A note is a block whose width matches its length. Each block is labeled with its name and, when **Show fractions** is on, its part of the bar ("half note · 1/2 of the bar"). **Show music notes** draws the standard note symbol under each block. Rests are hatched blocks with a pause symbol and the word "rest". Color is never the only cue.
 
+**First visit: "Listen first."** Before the first card, a short worked example plays one step per tap, with the bar filling on screen: **"Here's one whole note. It lasts the whole bar."** (tap) **"Here are two half notes. Together they last just as long."** (tap) **"Four quarter notes. Still the same bar."** (tap) **"Now you try. Fill a bar any way you like."** The example can be replayed from **Listen first** at any time and is skipped on later visits. This is the teaching encounter the cards build on: the bar stays the same while the notes cut it into more, shorter pieces.
+
 Controls, all buttons that work by touch and keyboard with no dragging:
 
 - A palette of the notes and rests the current card allows.
@@ -161,9 +163,27 @@ rhythm: {
 
 One line in the explorer's notes: **"Rhythm Studio: [n] cards with a kept rhythm. Echo rhythms built by ear: [n]; with the rhythm shown: [n]."** A Details panel: **"Rhythm Studio checks whether a bar is full and whether it matches a card's request. It doesn't judge whether a rhythm is musical, and it can't hear clapping. Ask your explorer to play you their work song and sing it together."**
 
+## Curriculum fit
+
+**Acts.** Rhythm Studio belongs to Act I's mending (the work songs and hammer blows) and Act II's gatherings and the town's first original show, where a kept rhythm can be played for an audience. In Act III the floating market can bring a visiting rhythm to echo; in Act V a "traveling theatre" project path can use it for a score. Every card stays open from the start.
+
+**Strands** ([six-act strands](../six-act-strands.md)): the **Music / sound creation** extension pathway, steps 2 and 3 ("repeat/contrast and pulse → duration/rhythm and phrase"), with the cross-rhythm card reaching toward step 4 (texture). Secondary: **M3-I/M3-II** (unit fractions of one whole and equivalence) as a supplied representation, and **E5** speaking and listening through the work songs' syllables.
+
+**Teaching contract** ([spec 49 §5](49-six-act-curriculum.md#5-intermediate-teaching-contract)):
+
+| Part | In this spec |
+| --- | --- |
+| Target | Hear and build note lengths that fill a bar; recognise that different note groups can last the same time. |
+| Teaching encounter | **Listen first**: one whole, two halves, four quarters in the same bar. |
+| Contrast | Same bar, more pieces (`same-as-half`, `two-ways-whole`); long versus short (`long-and-short`); sound versus planned silence (`rest-for-breath`); four-beat versus three-beat bars (`waltz`). |
+| Supported practice | The refusal messages name the space left; **How full is this bar?**; **Show me the rhythm** in `echo`. |
+| New application | Words to notes in `work-song`; listening-to-building in `echo`; two parts at once in `two-bells`. |
+| Purposeful revisit | Bell Studio for pitch; the Fraction Trail and Ribbon Recut for halves and quarters of a fixed whole; a kept rhythm in the Act II show. |
+| Data boundary | Stored: note codes, card ids, check facts, the bells pair and prediction. No recording, microphone or free text. |
+
 ## Upstream check
 
-Marble has no music topics. The fraction link touches Unit Fractions and Fractions of a Whole only as a supplied representation; no atlas reference is proposed in this spec. Jane has no rhythm or music format. Bell Studio's audio, gain, stop and save rules are reused as written.
+Refreshed 2026-10-23: Marble at `f186a79a9525c189e2d423e31613c62b6805416f` and Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060`. Marble has no music subject. Its newer graph adds **Rhythm in rhymes and songs** (`mt_OTFABm2xdf`), which is not in the pinned graph; its evidence is clapping a steady beat and repeating a chant, which a screen can't observe, so it stays an upstream-only reference and the off-screen invitations carry it. The research record for **Unit fractions** (`mt_k2WE0-22-4`) warns about reading the denominator as the answer and naming parts against parts instead of the whole; the bar strip always shows the whole bar, and the fraction labels say "of the bar". Jane's `learn` card (one idea and a worked example revealed one tap at a time) is the model for **Listen first**, and its `fracbar` format is a design reference for the bar strip. Jane's points, medals and bosses are not adopted, and no upstream code or prose is copied. No atlas reference is proposed in this spec.
 
 ## Checks for implementation
 

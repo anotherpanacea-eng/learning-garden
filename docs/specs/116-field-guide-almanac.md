@@ -23,7 +23,7 @@ Opening line: **"Dot's Field Guide. Everything in here is something you noticed.
 
 ## 1. Weather
 
-Once per calendar date on the device, the Weather page asks: **"What's the weather doing outside today?"** (spec 33's prompt). Choices, using spec 33's five codes:
+Once per calendar date on the device, the Weather page asks: **"What's the weather doing outside today?"** (spec 33's prompt), with the line **"Look out of a window or step outside first, then choose."** Children often record the weather they'd like; looking first keeps the log honest. Choices, using spec 33's five codes:
 
 | Code | Button | Picture |
 | --- | --- | --- |
@@ -73,8 +73,13 @@ The sky page shows the month as a strip of days with each noted shape drawn smal
 
 ### Explanations
 
-- **"Why does the moon change shape?"** "The moon doesn't make its own light. Sunlight lights up half of it, always. As the moon travels around Earth, we see different amounts of that lit half. When we see all of it, that's a full moon. When the lit half faces away from us, we can't see the moon at all. That's called a new moon."
-- **"How long does it take?"** "From one full moon to the next takes about 29 and a half days. That's close to a month. The word *month* comes from *moon*."
+The Sprout and Seedling explanations stay observational, as Marble's teaching research for Moon Phases advises: they describe the pattern and never explain its cause, and they never show a shadow.
+
+- **"Is it the same moon?"** "Yes. It's always the same moon. It looks different on different nights, and it changes slowly, a little each night."
+- **"Where does the moon go at new moon?"** "It's still there. On those nights we can't see the part that's lit, so it looks as if it's gone."
+- **"Is there a pattern?"** "The moon grows from a thin curve to full, then shrinks back again. From one full moon to the next takes about 29 and a half days, close to a month. The word *month* comes from *moon*."
+
+**Why it changes shape** (Sapling only). Two pictures side by side: a view from far above, with the Sun's light coming from one side and the moon at eight places around Earth, half-lit in every position; and the view from Earth's sky for each place. Text: "Sunlight always lights up half of the moon. As the moon travels around Earth, we see different amounts of that lit half. When we see all of it, that's a full moon. When the lit half faces away from us, that's a new moon." Then: **"The dark part is not Earth's shadow. When Earth's shadow really does fall on the moon, that's a lunar eclipse, and it only happens a few times a year."** This keeps the two views together and heads off the most common moon misconception, both flagged in the research.
 
 ### The moon table (Sapling page)
 
@@ -92,18 +97,26 @@ Before the key, always shown: **"Look with your eyes, not your fingers. If you l
 
 ### The key
 
-One question per screen, with a picture for each choice and **Go back** at every step. **"I'm not sure"** is always a choice; it ends at a "something else" card the child can label in their own words (kept local, never sent anywhere).
+The child follows a ready-made key. Every question has two answers, each about a feature the child can see, which is how Marble's teaching research says a key should work. One question per screen, with a picture for each answer and **Go back** at every step.
 
 1. **"Does it have legs?"** Yes → 4. No → 2.
 2. **"Does it carry a shell on its back?"** Yes → **Snail**. No → 3.
-3. **"Does it have feelers on its head?"** Yes → **Slug**. No, and its body is long and made of rings → **Earthworm**.
-4. **"Count its legs. Pick the closest."** Six → 5. Eight → 8. Fourteen (seven pairs) → **Woodlouse**. Lots and lots → 9. I couldn't count → **"It's hard to count legs on something that's moving. Look at its body instead."** → 10.
-5. **"Does it have wings you can see?"** No → 6. Yes → 7.
-6. **"Does it have a narrow waist?"** Yes → **Ant**. No, it's soft and long → **Caterpillar** (with the note: "A caterpillar has six true legs at the front, plus soft stumpy legs behind. Count only the ones near its head.") No, it has a hard shiny back → 7.
-7. **"What do the wings or back look like?"** Hard wing cases with spots → **Ladybug**. Other hard wing cases → **Beetle**. Big wings with colors or patterns → **Butterfly or moth**. Thin see-through wings and a narrow waist → **Bee or wasp**. One pair of thin wings → **Fly**.
-8. **"Is its body in two parts, or one round blob?"** Two parts → **Spider**. One round blob with very long thin legs → **Harvestman**.
-9. **"Is it flat and fast, or round and slow?"** Flat and fast → **Centipede**. Round and slow → **Millipede**.
-10. **"Which is closest?"** Shows all 15 group pictures and "something else".
+3. **"Does it have feelers on its head?"** Yes → **Slug**. No → **Earthworm**.
+4. **"Does it have more than eight legs?"** Yes → 5. No → 7.
+5. **"Does it have more than twenty legs?"** Yes → 6. No → **Woodlouse** (fourteen legs).
+6. **"Are there two pairs of legs on most body sections?"** Yes → **Millipede**. No, one pair → **Centipede**.
+7. **"Does it have eight legs?"** Yes → 8. No, six → 9.
+8. **"Is its body in two parts?"** Yes → **Spider**. No, one round piece → **Harvestman**.
+9. **"Is its back hard and shiny, like a closed lid?"** Yes → 10. No → 11.
+10. **"Does the lid have spots?"** Yes → **Ladybug**. No → **Beetle**. (Card note: "Most ladybugs have spots, but a few kinds don't.")
+11. **"Can you see wings?"** Yes → 12. No → 14.
+12. **"Are the wings big, with colors or patterns?"** Yes → **Butterfly or moth**. No → 13.
+13. **"Does it have a narrow waist?"** Yes → **Bee or wasp**. No → **Fly**.
+14. **"Does it have a narrow waist?"** Yes → **Ant**. No, it's soft and long → **Caterpillar** (note: "A caterpillar has six true legs at the front, plus soft stumpy legs behind. Count only the ones near its head.")
+
+**"I can't tell"** is available at every step. It explains why that feature is hard to see on a moving creature ("Legs are hard to count when something is moving. Watch it for a moment, or look for where it stops.") and offers **Go back** or **Finish as "something else"**, which the child can label in their own words (kept local, never sent anywhere). There is no picture gallery to match against, because a key identifies by answering questions about features.
+
+**Build a key** (Sapling page). After a child has used the key at least once, a page offers four group cards (spider, ant, snail, woodlouse) and asks the child to choose two yes/no questions from a list that sorts them into four separate endings. The list mixes questions that work ("Does it have a shell?", "Does it have eight legs?") with ones that don't: a vague one ("Is it big?"), one with no clear answer ("Is it nice?"), and a clear one that sends every card the same way ("Does it have a backbone?"). The page shows where each card lands and points out any ending with two cards in it. More than one key works, and the page says so when the child finds a second one.
 
 ### Group cards
 
@@ -121,7 +134,7 @@ Each card has a name, one true fact and a "look for" line. Facts are authored he
 | Beetle | "Beetles have hard front wings called wing cases that close like a lid." | "A line down the middle of its back where the cases meet." |
 | Butterfly or moth | "Butterfly and moth wings are covered in tiny scales, like colored dust." | "Most butterflies rest with wings up; many moths rest with wings flat." |
 | Bee or wasp | "Bees and wasps have two pairs of wings and a narrow waist." | "Bees visit flowers. Watch from a safe distance and never touch." |
-| Fly | "Flies have one pair of wings. Bees and wasps have two." | "Big eyes that cover much of its head." |
+| Fly | "Flies have one pair of wings. Bees and wasps have two." | "Big eyes that cover much of its head. Hoverflies have yellow and black stripes like a wasp; count the wings." |
 | Spider | "Spiders have eight legs and two body parts. Most spin silk." | "A web, especially in the morning when it has dew on it." |
 | Harvestman | "Harvestmen have eight legs like spiders, but their body is one round piece and they don't spin silk." | "Very long, thin legs on a small body." |
 | Centipede | "Centipedes have one pair of legs on each body section. They hunt other minibeasts." | "Long feelers and a fast, wriggling run." |
@@ -142,7 +155,7 @@ Choose a month from the weather log. If the log has fewer than five entries, the
 ### Steps
 
 1. **Tally.** The days appear one at a time with their picture. The child taps the matching row to add a tally mark. Marks group in fives (four strokes and a crossing stroke). **Next day** moves on; **Back** undoes the last mark. At the end: **"Every day is tallied."** If a row's tally differs from the log, the desk says which row and offers **Recount that row**. A finished tally is stored as the child built it.
-2. **Pictogram.** One picture per day. The child adds or removes pictures in each row with + and − until it matches their tally. Sapling option: **"Make each picture stand for 2 days."** Odd counts use a half picture, with the key **"Half a picture means 1 day."**
+2. **Pictogram.** The key comes first and stays on screen: **"Each picture stands for 1 day."** One picture per day, all the same size and lined up from the same edge. The child adds or removes pictures in each row with + and − until it matches their tally. Sapling option: **"Make each picture stand for 2 days."** The key changes first, and the page asks **"How many pictures will 7 days need now?"** before the child builds the row. Odd counts use a half picture, with the key **"Half a picture means 1 day."**
 3. **Bar graph.** The child raises each bar with + and − to the tally's count. The scale counts in ones, with a Sapling option to count in twos.
 4. **Questions**, chosen from these and answered by tapping, with the answer revealed from the child's own graph:
    - "Which weather did we see most?"
@@ -155,9 +168,11 @@ The desk never says a tally is wrong; it reports which row differs and lets the 
 
 ### Comparing months (Sapling page)
 
-With two logged months, show both bar graphs side by side on the same scale. Prompt: **"This month had more rain than last month. Does that mean it will be rainy next year too?"** Details panel, **"Weather and climate"**: **"Weather is what the sky is doing today. Climate is what the weather is usually like in a place over many years. One month of your log is weather. Scientists use about 30 years of records to describe a climate."**
+With two logged months, show both bar graphs side by side on the same scale. Prompt: **"This month had more rain than last month. Does that mean it will be rainy next year too?"** Details panel, **"Weather and climate"**: **"Weather is what the sky is doing today. Climate is what the weather is usually like in a place over many years: how warm, how wet, how windy, season by season. One month of your log is weather. Scientists use about 30 years of records to describe a climate."**
 
-If the log has reported temperatures in one unit for at least five days in a month, a **Temperature** strip shows them as dots in date order, with the warmest and coolest marked and the difference named: **"The warmest day was 9 degrees warmer than the coolest."** Celsius and Fahrenheit readings are never mixed on one strip.
+**Which timescale?** Five statement cards to sort into **Weather** or **Climate**: "It's raining today." (weather) · "This month had more sunny days than last month." (weather) · "Summers here are usually warm and dry." (climate) · "It snowed once in a place where it hardly ever snows." (weather) · "Over many years, this town gets lots of rain in autumn." (climate). After sorting, the page names any card in a different pile, with its reason: **"One snowy day is weather. It doesn't change what a place is usually like."**
+
+If the log has reported temperatures in one unit for at least five days in a month, a **Temperature** strip shows them as dots in date order, joined by a line because temperature is measured over time (a Details panel says so), with the warmest and coolest marked and the difference named: **"The warmest day was 9 degrees warmer than the coolest."** Celsius and Fahrenheit readings are never mixed on one strip.
 
 ## Off-screen invitations
 
@@ -190,9 +205,47 @@ moonPredictions: [ { madeOn, fromShape, days, at } ]                            
 
 **"Field Guide: [n] weather notes, [n] moon notes, [n] minibeast finds in [n] groups. Data desk: [n] months graphed."** Details: **"Everything in the field guide is something your explorer reported. The game doesn't check it against real weather or the real sky. The best thing you can do is go outside together and look."**
 
+## Curriculum fit
+
+**Acts.** The almanac starts in Act I, when the storm has passed and the town is looking around again, and stays open through every act. Its pages deepen with the acts in the [roadmap's story order](../roadmap.md#story-order-and-review-rule): observing in Act I, keeping records and graphing them in Act II, weather versus climate in Act III, and in Act IV the moon table's "your note and the calculation disagree" becomes a small lesson in evidence. Act V's night garden and observatory project paths can start from the sky page.
+
+**Strands** ([six-act strands](../six-act-strands.md)):
+
+| Page | Strand families |
+| --- | --- |
+| Weather | S7-I weather observations; S7-II local records and temperature instruments (reported, never measured by the game) |
+| Sky | S8-I sky observations; S8-II moon models (Sapling "why it changes shape" only) |
+| Garden neighbors | S3-I local organisms; S3-II classification keys and observations |
+| Data desk | M6-I sort, record, read tables and bars; M6-II scaled pictograms and bars, blank versus zero; S7-III weather versus climate |
+
+**Teaching contract** ([spec 49 §5](49-six-act-curriculum.md#5-intermediate-teaching-contract)):
+
+| Part | In this spec |
+| --- | --- |
+| Target | Record real observations over days; follow a two-way key; build and read a tally, pictogram and bar graph from one's own record; tell weather from climate. |
+| Teaching encounter | The first weather and moon notes, each with its short explanation; the key's first walk-through; the data desk's practice month. |
+| Contrast | Growing versus shrinking moon; a key question that splits the set versus one that doesn't; one picture per day versus two days per picture; weather versus climate statements. |
+| Supported practice | "I can't tell" at every key step; **Recount that row**; the practice month when a log is short. |
+| New application | The child's own month replaces the practice month; a second month to compare; building a key for four new cards. |
+| Purposeful revisit | Spanish errand 4 ([spec 117](117-spanish-river-market.md)) reuses the weather pictures; Rain Paths and the Field Notebook charts can link to the data desk; the minibeast cards are a natural home for a later Minibeast Meadow with Dot. |
+| Data boundary | Stored: dates, codes, optional reported temperatures, optional free-text labels for "something else" finds. No location, photo, name or health data. All local; export, reset and explorer switching cover it. |
+
 ## Upstream check
 
-Pinned Marble topics with a likely fit, to be checked against full descriptions, evidence and prerequisite edges in a source audit before any atlas declaration: Local weather patterns (`mt_HZvTriQWTh`), Seasonal changes (`mt_go5i87u2b9`), Weather vs climate (`mt_Gm12BzcCfX`), Moon Phases (`mt_ByXgbTld6R`), Classification Keys (`mt_brgde1Vx0P`), Common minibeasts: naming and recognising (`mt_yR1moI5kX1`), Pictograms and tally charts (`mt_c29FaCTNsx`), Bar graphs (`mt_ChjMU2GDJa`) and Recording Data (`mt_ZFwPZaDJ0_`). Jane is a design reference for stable stages only. Marble's source wording is UK-shaped ("minibeasts"); the child-facing text keeps "minibeasts" and uses "ladybug" to match Dot.
+Refreshed 2026-10-23: Marble at `f186a79a9525c189e2d423e31613c62b6805416f` and Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060`. Marble's new `data/teaching-research.json` has records for every topic below, and this spec follows their `learn` constraints, which Jane's own review of that research also recommends where the fields disagree:
+
+| Topic | What the research says, and what changed here |
+| --- | --- |
+| Moon Phases (`mt_ByXgbTld6R`) and Phases of the Moon (`mt_4V-vYhFUcm`) | Keep younger work observational with growing/shrinking names; never show shadows; teach that new moon is still there and that phases change slowly. For older learners, show the orbit view and sky view together and keep phases distinct from eclipses. The explanations were rewritten to match, and the cause moved to a Sapling-only panel. |
+| Classification Keys (`mt_brgde1Vx0P`) | Questions must be two-way, observable and actually split the set; follow a key before building one; a key works by questions, not by matching a picture. The key was rewritten as fourteen yes/no steps, the picture gallery was removed, and a Sapling "Build a key" page was added. |
+| Common minibeasts (`mt_yR1moI5kX1`) | Include unloved creatures with calm, caring language; use lifelike art (cartoons distort legs and segments); flags bee/wasp/hoverfly confusion. The art direction below asks for lifelike pictures, and the fly card now mentions hoverflies. |
+| Local weather patterns (`mt_HZvTriQWTh`), Recording Data (`mt_ZFwPZaDJ0_`) | Real outdoor observation is essential; children record the weather they wish for; categories are fixed before collecting; close the loop by reading the record. The prompt now asks the child to look first; the five codes are fixed. |
+| Pictograms and tally charts (`mt_c29FaCTNsx`), Bar graphs (`mt_ChjMU2GDJa`) | Build charts from data the children tallied; read the key first and preview many-to-one keys; equal symbols on a baseline; tallies in gated fives; ask both to read and to build. The pictogram step now leads with its key and previews the two-day key. |
+| Weather vs climate (`mt_Gm12BzcCfX`), Seasonal changes (`mt_go5i87u2b9`) | Make the timescale explicit; climate is more than temperature; don't explain why seasons happen, and never suggest summer is warmer because Earth is closer to the Sun. The "Which timescale?" sort was added; season prompts stay descriptive. |
+
+Jane's `LESSONS.md` is a design reference for its glossary (short definitions for new words such as *pictogram*, *tally*, *climate*) and its three-choice questions. Its mastery, medals, bosses and daily quest schedule are not adopted. No upstream code or prose is copied. These are design references; any atlas declaration still needs its own source audit against the pinned graph.
+
+**Art direction.** Minibeast pictures are lifelike illustrations with countable legs and visible body sections. Weather and moon pictures are simple and consistent in size so pictogram rows line up.
 
 ## Checks for implementation
 
