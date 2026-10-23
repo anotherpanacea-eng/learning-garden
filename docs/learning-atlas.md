@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 180 explicit current references across 99 unique source topics: authored question references, scoped practice or supplied explanations. The other 1491 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 181 explicit current references across 100 unique source topics: authored question references, scoped practice or supplied explanations. The other 1490 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -23,7 +23,7 @@ There are 180 explicit current references across 99 unique source topics: author
 | Life Skills | 37 | 1 | 36 |
 | Mathematics | 503 | 66 | 437 |
 | Personal & Social Development | 88 | 0 | 88 |
-| Science | 547 | 16 | 531 |
+| Science | 547 | 17 | 530 |
 
 Mathematics currently has the broadest authored task collection. Science and English have narrow guided investigations/comprehension references. History, life skills, personal/social development and learning-to-learn require explicit content/evidence design; fictional settings, friendly characters, help use and game completion do not establish those abilities. The source’s Computing topics are grouped under “Artificial Intelligence,” including step-by-step instructions; preserve that source organization without mistaking it for a complete computing curriculum.
 
@@ -104,6 +104,7 @@ These are source-code encounters. Historical `live` labels in the declarations d
 | Cold Window, Same Water (`#science/window`) | read | Manually cool and warm one supplied window picture, relating visible drops to a separately labelled tiny molecule sample. A conditional evaporation/condensation explanation, not a physical observation, measured rate, weather forecast or full water cycle. |
 | Join the Portions (`#cafe/portions`) | build, read | Move and return already-cut same-size quarter, third and sixth pieces while the same whole-loaf unit stays fixed. Four supplied cases include five quarters across equal loaf spaces; equations are model readouts, not independent fraction calculation. |
 | Gathering Budget (`#workshop/budget`) | allocate, build | Revise whole packets for two pretend supply requests under fixed pretend-cent limits. Supplied costs and quantities support several working plans; an optional cost idea is separate. No earned currency, actual purchase, household judgment or saved attainment. |
+| Fossil Close-Look (`#living/fossils`) | read | Inspect two credited real photographs and pin one visible detail from each into a temporary comparison. Source interpretations distinguish a body-form fossil and a preserved footprint; no independent identification, excavation, formation, dating or shared physical scale is established. |
 
 The implemented **Carry an idea here** connection transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -182,7 +183,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Personal & Social Development / Self-Awareness | 7 | 0 | Read · infer · support; Create · perform · reflect |
 | Personal & Social Development / Self-Regulation & Resilience | 17 | 0 | Read · infer · support; Create · perform · reflect |
 | Science / Animals of the World | 27 | 0 | Search · inspect · compare; Read · infer · support |
-| Science / Dinosaurs & Paleontology | 29 | 0 | Search · inspect · compare; Read · infer · support |
+| Science / Dinosaurs & Paleontology | 29 | 1 | Search · inspect · compare; Read · infer · support |
 | Science / Earth's Systems | 18 | 0 | Change · measure · explain; Build · transform · relate |
 | Science / Ecosystems & Habitats | 36 | 3 | Search · inspect · compare; Read · infer · support |
 | Science / Energy | 28 | 1 | Change · measure · explain; Build · transform · relate |
@@ -387,6 +388,7 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Evaporation & the Water Cycle](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Qkewo5M3_c) | explanation / Cold Window, Same Water (local build) / [source](../dist/cold-window-ui.mjs) | Step supplied condensation and evaporation pictures around one window. No independent explanation, temperature/rate relation, physical measurement, precipitation or complete water-cycle sequence. |
 | [Adding Fractions (Same Denominator)](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_CBHwluE6Lp) | explanation / Join the Portions (local build) / [source](../dist/join-portions-ui.mjs) | Join and return equal fractional units with supplied equations, including five quarters of the same whole. No unsupplied calculation, general subtraction, learner-produced mixed number or independent problem-solving claim. |
 | [Budgeting Pocket Money](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Qzbh-_v0Gq) | scoped-practice / Gathering Budget (local build) / [source](../dist/gathering-budget-ui.mjs) | Choose and revise finite pretend packets within a limit while meeting supplied quantities; totals and remaining amount are supplied. No personal allowance plan, independent calculation, saving over time, real purchase or independently explained trade-off. |
+| [Types of Fossils](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_1VSFoM44JU) | explanation / Fossil Close-Look (local build) / [source](../dist/fossil-close-ui.mjs) | Compare selected visible details from two credited photographs and reveal the supplied body-fossil versus activity-trace interpretation. No independent classification, formation account, dating, environmental reconstruction or real specimen examination. |
 
 ## Sources, licensing and maintenance
 

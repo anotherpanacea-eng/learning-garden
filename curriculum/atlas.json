@@ -847,6 +847,16 @@
       ],
       "route": "#workshop/budget",
       "scope": "Revise whole packets for two pretend supply requests under fixed pretend-cent limits. Supplied costs and quantities support several working plans; an optional cost idea is separate. No earned currency, actual purchase, household judgment or saved attainment."
+    },
+    {
+      "id": "fossil-close",
+      "name": "Fossil Close-Look",
+      "status": "built-local",
+      "patterns": [
+        "read"
+      ],
+      "route": "#living/fossils",
+      "scope": "Inspect two credited real photographs and pin one visible detail from each into a temporary comparison. Source interpretations distinguish a body-form fossil and a preserved footprint; no independent identification, excavation, formation, dating or shared physical scale is established."
     }
   ],
   "manualReferences": [
@@ -1682,6 +1692,13 @@
       "kind": "scoped-practice",
       "source": "dist/gathering-budget-ui.mjs",
       "scope": "Choose and revise finite pretend packets within a limit while meeting supplied quantities; totals and remaining amount are supplied. No personal allowance plan, independent calculation, saving over time, real purchase or independently explained trade-off."
+    },
+    {
+      "game": "fossil-close",
+      "topicId": "mt_1VSFoM44JU",
+      "kind": "explanation",
+      "source": "dist/fossil-close-ui.mjs",
+      "scope": "Compare selected visible details from two credited photographs and reveal the supplied body-fossil versus activity-trace interpretation. No independent classification, formation account, dating, environmental reconstruction or real specimen examination."
     }
   ],
   "increments": [
