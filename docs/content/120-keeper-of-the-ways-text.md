@@ -544,11 +544,12 @@ Joshua chose this as the next archive pack (2026-10-23). This is an outline for 
 | When | What happened |
 | --- | --- |
 | 14 October 1957 | The Turia flooded Valencia, in two waves on the same day. Much of the city was under water. Many people died. |
-| 1958 | The national government chose the *Plan Sur*: dig a new channel for the river around the south of the city. |
-| 1960s, finished about 1969 *(check)* | The new channel was dug: about 12 km long and up to 175 m wide *(check)*. |
+| July 1958 | The national government chose the *Plan Sur*: dig a new channel for the river around the south of the city. |
+| 23 December 1961 | A national law (Ley 81/1961, published in the BOE) made the plan official. This is a public-domain Spanish primary source. |
+| 22 December 1969 | The new channel officially opened; work went on until about 1973. It is about 12 km long; sources give its width as 175, 200 or 250 m *(check)*. |
 | 1966 | A city plan proposed building a road along the dry old riverbed. |
 | 1970s | Neighbors campaigned for a park instead, under the slogan *El llit del Túria és nostre i el volem verd*: "The Turia's bed is ours, and we want it green." |
-| 1978 | The city council decided the whole old riverbed would be a garden. |
+| 1978 or 1979 *(sources disagree)* | The city council decided the whole old riverbed would be a garden. The Keeper's Desk case turns this disagreement into a task. |
 | 1981 | The architect Ricardo Bofill was asked to plan the park. |
 | 1986 *(check)* | The first parts of the garden opened. Today it runs for about 9 km through the city *(check)*. |
 
@@ -568,5 +569,7 @@ Joshua chose this as the next archive pack (2026-10-23). This is an outline for 
 | Keeper's Desk | Read short sources from both sides of the road-or-garden argument. Who wanted what, and why? Then: Willowbank's plans are the Wall, the Sponge and Some of Each. Valencia did something none of them do: it moved the river. Why might Willowbank be unable to do that? |
 
 **Care with the hard part.** The flood killed people; official and unofficial counts differ widely. Child text says "many people died" once, plainly, with no number in the short version. The desk version may give the sourced figures with their disagreement, which is itself a lesson in sources. A grown-up note says that Valencia flooded again in 2024, that this pack is about 1957, and that it does not cover the recent flood; per spec 120, the pack does not use it.
+
+**Keeper's Desk depth:** written in full as spec 118's Valencia case, `docs/content/118-valencia-1957-case.md` (PR #126). In it, Nuria's grandmother remembers the story.
 
 **Sources to review before writing final text:** Valencia city council's history of the old riverbed; contemporary 1957 newspaper reports; official records of the Plan Sur decision; the 1978 council decision; credited photographs of the 1957 flood and of the garden today, with rights checked.
