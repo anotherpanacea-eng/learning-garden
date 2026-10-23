@@ -1,6 +1,6 @@
 # New kinds of play beyond reading, writing and math
 
-Proposal, 2026-10-23. Planning only: nothing here is built, reviewed or scheduled. Every kind below stays single-player, local and offline, with no accounts, online content or multiplayer. Every kind now has a numbered spec and a companion file with all of its child-facing text, fitted to the story in [spec 120](specs/120-keeper-of-the-ways.md); each still needs the usual independent reviews before any build.
+Proposal, 2026-10-23. Planning only: nothing here is built or scheduled; review repairs do not clear the remaining commissioning gates. Every kind below stays single-player, local and offline, with no accounts, online content or multiplayer. Every kind now has a numbered proposal and companion draft; some still need finite content/model fixtures and complete help paths before commissioning. The proposed text is fitted to the story in [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md); each still needs the usual independent reviews before any build.
 
 | Kind | Spec | Child-facing text |
 | --- | --- | --- |
@@ -88,7 +88,7 @@ Each entry gives the kind of play, what it teaches, a bounded first slice and ho
 
 **Kind:** a making studio for images. The game has no place where color, shape and pattern are the material.
 **Teaches:** shape, symmetry and pattern; color mixing; composition for a viewer. Visual art is an explicit extension outside Marble, and artistic quality is never scored.
-**First slice:** the Sign Painter. The town needs new shop signs after the storm. Choose shapes, flip and turn them, build a repeating border, and mix colors on two palettes: paint (mixing makes darker) and lamplight (mixing makes lighter), which is a real and surprising contrast.
+**First slice:** the Sign Painter. The town needs new shop signs after the storm. Choose shapes, flip and turn them, build a repeating border, and mix colors on two palettes: finite pigment recipes and additive lamplight, which is a real and surprising contrast.
 **Older depth:** rotational symmetry, tessellations that tile a floor, and a studied page on one credited public-domain artwork per visit, asking what choices the artist made.
 
 ### 9. Spatial puzzles (spec 126)

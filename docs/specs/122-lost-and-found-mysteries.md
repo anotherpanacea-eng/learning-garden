@@ -12,7 +12,7 @@ The mysteries teach careful reading, inference, elimination as a method, observa
 
 ## Place and story
 
-Dot, as postmaster, keeps a **Lost and Found Board** in Willow Post Office. After the storm, things are borrowed, moved and mixed up all over town, and people pin notes to the board. Route: `#post/lost-and-found`, linked from the `#post` hub and from the market scene in Act II. Open from the start. A solved mystery with its answer kept is a contribution to Act II, chapter 1 (the weekly market) for mysteries 1 to 4.
+Dot, as postmaster, keeps a **Lost and Found Board** in Willow Post Office. After the storm, things are borrowed, moved and mixed up all over town, and people pin notes to the board. Route: `#post/lost-and-found`, linked from the `#post` hub and from the market scene in Act II. Open from the start. A kept mystery attempt or note, with unresolved work allowed, is a contribution to Act II, chapter 1 (the weekly market) for mysteries 1 to 4.
 
 Mystery 6, *The wet corner*, belongs to Act IV, chapter 2 (spec 120 §8's Seedling job) and counts there.
 
@@ -20,10 +20,10 @@ Mystery 6, *The wet corner*, belongs to Act IV, chapter 2 (spec 120 §8's Seedli
 
 1. **The board note.** What happened, in two or three sentences, with a picture.
 2. **The witness notes.** Short notes, one per witness, each a sentence or two. Some sentences are things a witness saw; some are what the witness thinks.
-3. **Sort the sentences.** The child drags or taps each sentence into **I SAW** or **I THINK** (older mysteries add **I HEARD**). Sorting is supported: **Why?** under each sentence explains the sort after a choice. A sentence sorted into I THINK is not used on the grid. The child can skip sorting; the clues then appear already sorted, marked as supported.
+3. **Sort the sentences.** The child drags or taps each sentence into **I SAW** or **I THINK** (older mysteries add **I HEARD**). Preserve that choice as the child's response. **Why?** explains the authored sort after the choice and before the clue card is used; viewing it is support. The solver uses the reviewed, tagged clue predicates below, never the child's sort as executable evidence. A guessed I SAW cannot become trusted; an observation marked I THINK is not removed. The child can skip sorting; show the authored sort and record support. Only explicit set-aside actions change the solver's active clue set.
 4. **The grid.** Rows are people (or baskets, or trails); columns are things and places. The child marks cells **yes** or **no**. Marks belong to the child: the game never fills, corrects or removes a mark on its own.
 5. **Can we tell yet?** Clues for `ladder` and `stalls` arrive in two rounds. After the first round the child is asked whether the clues decide the answer yet. Choices: *Yes, I know who* · *Not yet: it could be more than one way*. The second fits and gets a short why; the first opens **Show me another way that fits**, which displays a second arrangement that fits every clue so far.
-6. **My answer.** The child sets one answer per row. **Does it fit?** checks the answer against the sorted clues and names the first clue it breaks, if any. Answers can be changed freely.
+6. **My answer.** The child sets one answer per row, using every thing and place exactly once. **Does it fit?** first asks for missing or duplicate assignments to be resolved, then checks the authored active predicates and names the first broken clue in clue order. Answers can be changed freely. Neither incomplete assignments nor grid marks become extra solver constraints.
 7. **The reveal.** A short scene where the person involved explains. The I THINK sentences are then looked at again: "Pip thought Bramble took the ladder. Was he right?"
 
 No timer, score or lock. A mystery can be left and resumed with its marks.
@@ -39,15 +39,27 @@ No timer, score or lock. A mystery can be left and resumed with its marks.
 | `prints` | Muddy prints | 4 visitors × 4 boots × 4 places | 5 plus one secondhand clue | A source that might be wrong; I HEARD; clues that can't all be true |
 | `wet-corner` | The wet corner | No grid | 3 neighbor notes | Sort, then more than one explanation and what would tell them apart (Act IV) |
 
-**Checked by brute force over every arrangement** (2026-10-23; the implementation's tests repeat it): each grid mystery has exactly one arrangement that fits all its clues, and removing any one clue leaves more than one. After the first round, `ladder` has two arrangements (four after only two clues) and `stalls` has twelve. In `prints`, the five trusted clues have one arrangement; adding the magpie's secondhand clue leaves none; setting aside the magpie's clue restores exactly one, and setting aside any other single clue leaves none or two.
+**Authoritative finite source.** Each arrangement is two bijections from rows to things and places. `T(row)` is its thing; `P(row)` its place; `rowWith(thing)` is the unique row assigned that thing. The following ordered clue IDs are the only solver predicates. Board introductions, pictures, Why? lines, guesses and reveals supply no extra constraints, even when they repeat a clue. Setting a clue aside must not silently retain it through board flavor. Show children: **Only the cards in Clues are used to check an answer.** Freeze these predicates, order and rounds with the case source.
+
+| Case | Ordered clue IDs and predicates |
+| --- | --- |
+| `ladder` | `roof`: P(miller)=mill-roof; `rope`: P(rowWith(rope))=footbridge; `pip`: P(Pip)=orchard; round 2 `ladder-roof`: P(rowWith(ladder))=mill-roof. |
+| `baskets` | `apples`: P(rowWith(apples))=cafe; `blue`: P(blue)=post-office; `yellow`: T(yellow)=seeds (no-apples/no-wool is one compound clue). |
+| `trails` | `fox`: T(A)=Pip; `end-c`: P(C)=footbridge; `courier`: P(rowWith(courier))=bakery. |
+| `stalls` | `baker`: P(baker)=1; `miller`: P(miller)=3; `seeds`: T(orchard-keeper)=seeds; round 2 `lanterns`: P(rowWith(lanterns)) is 1 or 4; `baskets-before`: P(rowWith(baskets))=P(miller)-1. |
+| `prints` | `dot`: T(Dot)=no-boots; `yellow`: P(rowWith(yellow-boots))=orchard; `library`: P(Pip)=library; `bramble`: T(Bramble) is not yellow-boots; `red`: P(rowWith(red-boots))=post-office; secondhand `magpie`: T(Pip)=red-boots. |
+
+**Independent enumeration, 2026-10-23:** every grid case has one answer using its complete trusted set. Removing each trusted clue in the order above gives ladder `2,2,2,2`; baskets `4,4,4`; trails `4,4,4`; stalls `4,4,8,2,6`; prints `8,6,8,2,4`. Thus each trusted clue is needed in that exact abstraction. Ladder round 1 has two answers (four after the first two clues); stalls round 1 has twelve. Prints with magpie added has zero. Removing one clue from that six-clue set gives `0,0,2,0,2,1`: library or red removal leaves two, magpie removal leaves one, other single removals leave none. Future implementation checks must reproduce these counts from the same source; this is not proof of implemented behavior.
 
 ## The secondhand clue
 
-In `prints`, the magpie repeats something it heard. With it, no arrangement fits. The child is told: *These clues can't all be true. Which one would you set aside?* Each clue can be set aside in turn to see what happens. The text helps the child weigh sources: the post office ledger is written down on the day; the magpie repeats words it heard somewhere, sometime. Setting aside the magpie's clue gives one answer, which the reveal confirms. Setting aside a trusted clue is allowed and shows the result honestly (no arrangement, or two).
+In `prints`, the magpie repeats something it heard. With it, no arrangement fits. The child is told: *These clues can't all be true. Which one would you set aside?* Each clue can be set aside in turn. The library sign-in book was written on the day; the magpie repeats words heard somewhere, sometime. Removing magpie leaves one answer, library or red leaves two, and dot, yellow or bramble leaves none. Multiple set-aside cards use their actual computed count, not a one-card canned reply. The reveal confirms the answer with magpie set aside.
 
 ## The wet corner (Act IV)
 
 Three neighbors write about the low corner of the orchard that is always wet now. The child sorts each sentence into I SAW and I THINK. The game then asks for explanations: the child picks from five supplied explanations (and may add one in their own words) and, for each chosen explanation, picks what could be checked to tell it apart from the others, from a supplied list. Nothing is graded. The page ends with *Which check would you do first, and why?*, free text, kept with the Keeper's Pages if the child chooses. Several explanations are reasonable; the page says so.
+
+The wet-corner weather categories can compare how many logged days were marked rainy, not rainfall amounts or a whole year's wetness. A measured rain-gauge record would be separate evidence. Wetness through a dry week shows persistence only: held rain, slow drainage, a spring and several causes together remain possible. No supplied check isolates a cause by itself.
 
 ## Write a mystery (older depth)
 
@@ -68,20 +80,22 @@ Optional root `mysteries` per explorer, absent until a mystery is opened:
 ```
 mysteries: {
   cases: { [caseId]: {
-    version, sort: { [sentenceId]: 'saw' | 'think' | 'heard' } | 'skipped',
+    source, sort: { [sentenceId]: 'saw' | 'think' | 'heard' } | 'skipped',
     marks: { [cellId]: 'yes' | 'no' },
     round: 1 | 2, tellYet: 'yes' | 'not-yet' | null,
     setAside: [clueId], answer: { [rowId]: [thingId, placeId] } | null,
     revealSeen: bool, explanations: [explanationId], checks: { [explanationId]: checkId },
-    ownExplanation: string, firstCheck: string, at
+    ownExplanation: string, firstCheck: string, checksKept: [check], earlier: [case], at
   } },
   written: [{ rows, columns, answer, clues: [clue], at }]   // latest 6
 }
 ```
 
-- `version` freezes the case text in use, following spec 83. A content change never alters a started case.
-- Validate ids and counts. Unknown cell, sentence or clue ids are dropped on read without rewriting the save. Never recheck stored marks against the answer on load.
-- Export, import, reset and explorer switching include `mysteries`.
+- `source` is the complete understood frozen case payload: case ID/model version, row/thing/place definitions, witness sentences and their authored roles, clue semantics/order and round boundaries, choices/order, teaching/help/feedback, reveal and the wet-corner explanation/check cards. Cap a new source at 32 KiB UTF-8, four rows/things/places, 32 witness sentences and 32 clues. It is a finite mystery source, not arbitrary executable constraints or a new catalog service. This implements spec 83's own-source preservation rather than treating a version number as stored text.
+- Validate IDs/linkage, finite counts and stored outcome shapes against the saved source, never today's catalog or answer key. Preserve raw unknown cell/sentence/clue IDs and harmless fields exactly; supported views may omit unsupported controls with an unavailable notice but must not replace the original with a filtered object. An unsupported source makes only that case read-only/exportable. Marks, sorts, reveal state and prior check outcomes are never corrected, completed or regraded by loading.
+- Each explicit answer/clue check kept in `checksKept` snapshots its own source, selected clue set/round, answer/sort/support context and literal result/feedback. Keep at most eight readable checks per case, disclosing an oldest-readable replacement before a new check. Retain malformed siblings unchanged. Ordinary edits clear only live feedback, not historical checks. **Start a fresh case** explicitly retains the entire previous entry in `earlier` and creates a separate current source; it does not overwrite the old response or silently attach today's source to it.
+- Written mysteries retain their own rows, columns, chosen answer, template clues, model version and recorded solution count/needed-clue result. Use 3 or 4 rows, at most 32 clues, and at most 2,000 characters per free-text answer (80 per authored label). Keep the latest six readable written mysteries only on an explicit keep with replacement disclosed; unreadable entries are not evicted.
+- New sources, checks, keeps and fresh-version retention preflight the complete notebook and actual pretty `notesReport` through existing `prepareProgressImport` byte/depth/node limits. Refusal leaves all previous data unchanged and offers Download notes. Normal export/import retains the raw optional root; reset, save-off and explorer switching use existing notebook behavior. No new migration framework is required.
 
 ## Curriculum fit
 
@@ -129,5 +143,7 @@ Jane's three-choice question style is used for Can we tell yet? and the guess st
 - Browser at 320 and 820 px: the 4 × 4 grid fits without horizontal scrolling, with a list mode ("Bramble and the maps: yes / no / not sure") as an alternative to tapping cells.
 
 ## Review asks
+
+- Predicate boundaries, exact clue-removal counts and limited evidence checks are repaired in the proposal. Implementation and subject-content gates remain open.
 
 - Are the secondhand clue and the wet corner right for Act IV's older players, and gentle enough for younger ones who meet them early?

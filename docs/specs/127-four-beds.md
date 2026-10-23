@@ -1,10 +1,12 @@
 # 127. The Four Beds: a garden planned across the seasons
 
-Status: **proposed; awaiting independent spec review and a science content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Act II, chapter 2, *a garden across the seasons*, and Act V's night garden in [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/127-four-beds-text.md); this spec holds the model, the modes and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review and a science content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Act II, chapter 2, *a garden across the seasons*, and Act V's night garden in [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/127-four-beds-text.md); this spec holds the model, the modes and the saves. Code and art are for the implementation pass.
+
+**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
 
 ## Purpose
 
-A slow planning game. Moss gives the explorer four garden beds. Each year the child chooses what family of crop grows in each bed; at the harvest, an authored soil model reports how each bed did and what the soil now holds. Over several years the child discovers that the same crop in the same bed does worse each year, that beans give something back to the soil, that hungry crops do best right after beans, and that a plan which moves each family round the beds keeps every harvest good.
+A slow planning game. Moss gives the explorer four garden beds. Each year the child chooses what model crop group grows in each bed; at the harvest, an authored soil model reports how each bed did and what the soil now holds. Over several years the child discovers that the same crop in the same bed does worse each year, that beans give something back to the soil, that hungry crops do best right after beans, and that a plan which moves each family round the beds keeps every harvest good.
 
 It teaches systems thinking, trade-offs, crop rotation and soil, and planning across time. Older explorers add neighbors that share pests, a wet bed, and weather they can't know in advance.
 
@@ -19,20 +21,20 @@ Four raised beds at the edge of the regrown garden ([spec 21](21-regrowing-the-g
 ## Two ways to play
 
 - **Play the years** (default). **Grow this year** runs the model at once; the next year opens straight away. A plan can run for up to eight years.
-- **Grow with the seasons.** The child plans in the real spring, and the harvest report appears from the first day of real autumn on the device calendar (southern hemisphere flips with the almanac setting). Missing a season leaves nothing undone; an unplanted spring simply leaves the beds resting, which the model treats as clover.
+- **Grow with the seasons.** The child plans in the real spring, and the harvest report appears from the first day of real autumn on the device calendar (southern hemisphere flips with the almanac setting). Missing a season leaves the saved garden unchanged. No unplanted/rest year is simulated or inserted without an explicit grow action.
 
 The child can switch modes between years. Each mode keeps its own garden.
 
 ## The model, `beds-v1`
 
-Each bed has a **soil goodness** from 0 to 4, starting at 3. Goodness stands for the minerals in the soil that plants need to be healthy, a little like vitamins. Plants make their own food from air, water and light; the text says so and never says plants eat soil.
+Each bed has a **soil goodness** from 0 to 4, starting at 3. Goodness stands for the minerals in the soil that plants need to be healthy, a deliberately simplified meter, not a complete measure of fertility. Plants make their own food from air, water and light; the text says so and never says plants eat soil.
 
-| Family | Examples in pictures | Needs goodness | After the year |
+| Model crop group (not a botanical family) | Examples in pictures | Needs goodness | After the year |
 | --- | --- | --- | --- |
 | Beans | peas, runner beans, broad beans | 0 | +2 |
 | Leaves | cabbage, kale, lettuce | 3 | −1 |
 | Fruit | squash, tomatoes, courgettes | 2 | −1 |
-| Roots | carrots, beetroot, onions | 1 | 0 |
+| Roots | carrots, beetroot, parsnips | 1 | 0 |
 | Clover (a rest year) | clover and grass | 0 | +2, no harvest |
 
 **Harvest:** **good** if goodness is at least the need; **fair** if one short; **poor** if two or more short. If the same family grew in that bed last year, the harvest is one step worse: pests and diseases that like that family wait in the soil. Goodness never goes below 0 or above 4.
@@ -50,9 +52,13 @@ These are properties of the model, which is a simple story about real gardens; t
 
 ## Older depth
 
-- **Neighbors** (toggle): beds stand in a row. Two neighboring beds growing the same family in the same year are each one step worse that year: pests hop next door. A four-bed plan where each family is in a different bed each year, and each bed has each family once in four years, avoids it. The page shows that plan as a 4 by 4 grid and asks what is special about it (each family once in every row and every column), with the older-only note that such grids are called Latin squares.
+- **Neighbors** (toggle): beds stand in a row. Two neighboring beds growing the same family in the same year are each one step worse that year: pests hop next door. A four-bed plan where each family is in a different bed each year, and each bed has each family once in four years, avoids it. Only after checking the actual kept four-year grid has exactly the four crop groups, each once in every row and column, does the page identify it as a Latin square. Avoiding same-group neighbors alone is insufficient. Other plans get a neutral invitation to compare rows and columns, never this automatic claim.
 - **The wet bed** (Act IV link): a fifth bed at the low corner. Every family from the table is one step worse there; reeds and watercress, a sixth family called *wet-lovers*, are good there and poor anywhere else. The question at harvest: *What grows best depends on the place. What would you grow in the low corner?*
-- **Weather you can't know** (toggle): in Play the years, a fixed authored sequence brings a wet summer in years 3 and 7 (fruit and roots one step worse) and a dry summer in year 5 (leaves one step worse). The plan is chosen before the year's weather shows. In Grow with the seasons, the summer counts as wet if the almanac's weather log for the three summer months has more rain days than sun days, and as ordinary otherwise. The report says which. A plan that does well in every kind of year is the older goal.
+- **Weather you can't know** (toggle): in Play the years, a fixed authored sequence brings a wet summer in years 3 and 7 (fruit and roots one step worse) and a dry summer in year 5 (leaves one step worse). The plan is chosen before the year's weather shows. In Grow with the seasons, any optional almanac comparison shows only the counts of reported rain days, sun days and unreported dates, from a frozen date range and source. It does not measure rainfall amount or classify the real summer as wet/dry. The garden's fictional weather must instead be explicitly chosen from a supplied model scenario before running, with **Use an ordinary model year** available. No reports means **not observed**, not an ordinary real summer. This remains separate from the real observations and never writes invented days into the almanac. A plan that does well in every kind of year is the older goal.
+
+**Bounded rule/authoring details:** apply the chosen compost to pre-year goodness, then compute baseline harvest from that value and the group's need. Clamp a grade downgrade at poor; same-group, neighbor, wet-bed and weather penalties each add one downgrade when applicable. Update goodness once from the group table after computing harvest and clamp0–4; penalties do not change that update. Clover has no harvest or pest penalty. Wet-lovers have need0/change0, baseline good only in bed5 and poor in beds1–4; this fictional special group receives weather penalties only if separately authored and reviewed, and is exempt from repetition/neighbor penalties in this version. Freeze options at the beginning of each year: adding the fifth bed starts it at goodness3 with no previous crop; hiding it retains its earlier work and does not delete it. Only an explicit new-year confirmation runs a model; elapsed calendar time never inserts planted/rest years or evidence.
+
+The eight-year immediate cycle ends with **Keep this garden** and **Start another garden**; it does not overwrite its kept plans. Seasonal date rules must be fixed in a commissioning mini-spec (month boundaries/hemisphere, first autumn after the chosen spring, missed seasons, and explicit switching to immediate play). Until that exists, commission only Play the years. Science/content review must also check the grouping (these are game groups, not taxonomic families), nitrogen/soil explanation and every because-line; no grade promises actual gardening results.
 
 ## Saved work
 
@@ -62,16 +68,19 @@ Optional root `beds` per explorer, absent until the first plan:
 beds: {
   mode: 'years' | 'seasons',
   gardens: { years: garden, seasons: garden },
-  options: { neighbors: bool, wetBed: bool, weather: bool }
+  options: { neighbors: bool, wetBed: bool, weather: bool },
+  earlier: [garden]
 }
-garden: { year: n, plans: [{ year, beds: [familyId], compost: bedIndex | null, weather?, at }],
-          reports: [{ year, harvest: [grade], goodness: [n] }], kept: [year], startedSeason? }
+garden: { mode, year: n, plans: [{ year, source, beds: [familyId], compost: bedIndex | null, at }],
+          reports: [{ year, source, plan, soilBefore, harvest: [grade], goodness: [n], support, at }], kept: [year], startedSeason? }
 ```
 
-- Reports are computed once, when the year is grown, and stored. They are never recomputed on load, even if the model changes; a model version is stored with each report.
-- Validate family ids, bed counts (4 or 5), compost index and year order. A broken year and every later year are dropped; earlier years stay.
-- In Grow with the seasons, a device clock change never re-grows or rewrites a stored year.
-- Export, import, reset and explorer switching include `beds`.
+- Every year's `source` freezes the understood model/version, crop-group and grade tables, update/penalty order, actual options and active/retained bed layout, starting soil/previous crops, fictional weather scenario and the displayed task/help/report explanations. Each source is at most 16 KiB; a supported garden has at most eight model years and five beds, including a hidden fifth bed's retained history. A change of options affects only the next explicitly confirmed year, never a stored one.
+- Seasonal sources additionally freeze the hemisphere, chosen planting/growing season, device-calendar date boundaries and mode-switch context under the separately commissioned seasonal rules. Any almanac comparison freezes the exact date range and reported rain/sun/unreported counts plus source identity actually used; it is a reported-log comparison, not rainfall amount or a real-summer classification. The fictional scenario selected for the garden is stored separately. A lack of reports stays **not observed** and creates no observation or weather day.
+- Reports are computed once at the authorized grow action from the frozen source, exact plan and pre-year soil. Store the resulting grades and soil, support context and timestamp alongside those inputs. Never recompute a stored report with today's model, options, almanac or clock. **Keep this garden** retains these same plans/reports; a later garden cannot overwrite their evidence. An untested plan has no invented harvest.
+- Validate known family ids, bed counts, compost indices and year order against each saved source. A broken/unknown year and every later entry remain exact and exportable; never drop a year or reset its historical grades. Independently readable later reports can still be viewed as historical reports, but continuation is unavailable where the preceding soil/model cannot be understood. Show that local limitation and leave the other garden usable. Starting another supported garden is an explicit choice that moves the complete prior garden into `earlier`; if it cannot be retained, refuse without altering it.
+- In Grow with the seasons, a device clock change never re-grows, inserts or rewrites a year. Missing dates or seasons are not fabricated planted/rest years, attempts or evidence. The seasonal mini-spec is still required before that mode is built.
+- Preflight new year sources/reports and retained new gardens against the actual pretty `notesReport` export and `prepareProgressImport` whole-notebook limits; refuse atomically with the existing export/reset choices if they would not fit. Export, import, reset, save-off and explorer switching include the full raw `beds` root through the existing generic notebook transfer, including unsupported years and unknown fields; never trim on load.
 
 ## Curriculum fit
 

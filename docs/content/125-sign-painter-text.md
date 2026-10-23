@@ -89,9 +89,9 @@ Companion to [spec 125](../specs/125-sign-painter.md). Use as written, after the
 - red and yellow make orange.
 - yellow and blue make green.
 - red and blue make purple.
-- red, yellow and blue make a dark brown. Mixing all your paints makes something dark.
+- red, yellow and blue make a dark brown. That is this palette's authored mix; real paints vary.
 - {color} and white make a lighter {color}.
-**After the first mix, either prediction:** "{result}! Paint gets darker the more colors you mix." (The child's prediction is never marked right or wrong.)
+**After the first mix, either prediction:** "{result}! That is what these model paints made. White paint can make a mix lighter." (The child's prediction is never marked right or wrong.)
 **Real paints note (Details):** Real paints vary. Some reds and blues make a muddy purple, depending on the paint. `[check]`
 
 **Lamplight heading:** Lanterns on the white wall
@@ -102,11 +102,11 @@ Companion to [spec 125](../specs/125-sign-painter.md). Use as written, after the
 - green and blue light make cyan, a sky blue-green.
 - red and blue light make magenta, a pinky purple.
 - red, green and blue light together make white.
-**After the first overlap:** "Yellow! From red and green! Light gets lighter the more colors you mix. That's the opposite of paint." `[check]`
-**White wall (Details):** A white wall gives back all the light that lands on it. That's why every lantern's color shows up on it. A dark wall would soak up most of the light. `[check]`
+**After the first overlap:** "{result}! That is the color of these overlapping lights." `[check]`
+**White wall (Details):** A white wall reflects much of the visible light that reaches it. That's why every lantern's color shows up on it. A dark wall would soak up most of the light. `[check]`
 
 **Why are they opposite? (older Details):**
-> Paint soaks up some colors of light and gives back the rest. Mix two paints, and together they soak up more, so less light comes back: darker. Lanterns each make their own light. Shine two together, and you add their light: lighter. `[check]`
+> Paint soaks up some colors of light and gives back the rest. Mixing different pigments changes which light comes back. Some mixes look darker or duller; adding white can lighten them. Lanterns each make their own light. Shine two together, and you add their light: lighter. `[check]`
 
 **Colors in words:** every swatch and lantern also shows its name, so you never have to tell colors apart by looking alone.
 
@@ -122,12 +122,12 @@ Companion to [spec 125](../specs/125-sign-painter.md). Use as written, after the
 **Floor tiles:**
 - Title: Floor tiles
 - Card: Which shapes can cover a floor with no gaps and no overlaps? Try each one.
-- Shape choices: squares · equal-sided triangles · regular hexagons · regular pentagons · a triangle you draw · a four-sided shape you draw
+- Shape choices: squares · equal-sided triangles · regular hexagons · regular pentagons · a triangle you draw · a simple four-sided shape you draw
 - Try prompt: Lay copies down. Turn them if you need to.
 - After trying squares, triangles or hexagons: These cover the floor. They always do.
 - After trying pentagons: There's always a gap. Regular pentagons can't cover a floor without gaps or overlaps, however you lay them. `[check]`
 - After trying a drawn triangle: Every triangle can cover a floor. Turn every other copy half way round. `[check]`
-- After trying a drawn four-sided shape: Every four-sided shape can cover a floor, even a lopsided one, by turning every other copy half way round. `[check]`
+- After trying a drawn four-sided shape: Every simple four-sided shape, with no crossing sides, can cover a floor, even a lopsided one, by turning every other copy half way round. `[check]`
 
 ## Look closely (older page)
 
@@ -158,14 +158,14 @@ Each order: **customer**, **brief** (in their words), **asks** (checked by Is it
 - One ask isn't met yet: {ask}.
 - Not yet: {ask}. Everything else is there.
 
-**Buttons:** Is it ready? · Keep this sign · Keep painting
+**Buttons:** Is it ready? · Keep this sign · Keep painting. Keep is always available, even with asks still open; use a neutral saved acknowledgement in that case. Customer templates that claim a hat/loaf/green exists require the matching supplied design metadata and are not guesses from an image. The open sign can be kept with a generic acknowledgement.
 
 | ID | Customer | Brief | Asks | Reply |
 | --- | --- | --- | --- | --- |
 | `bakery` | The baker | "I'd like a loaf on my sign, so people know it's the bakery even before they can read it." | Made from shapes · at least two colors | "{choice}! I can see that loaf from the bridge." |
 | `post` | Dot | "A post office sign with my hat on it. It was a long discussion, the hat. And I'd like it to look the same on both sides, like a proper official sign." | Mirror line up and down · passes Fold to check | "{choice}. Perfectly official. The hat looks very distinguished." |
 | `cafe` | Ember, at the café | "A border round the edge, please, with something flipping. Like pancakes." | A border · repeats with flips | "Look, {choice}! Flip, flip, flip. I'm hungry now." |
-| `mill` | The miller | "A sign like the mill wheel. It should look the same when you turn it." | Looks the same after a half turn (older: or a quarter turn) | "{choice}. Turn it any way up and it's still the mill. Like the wheel." |
+| `mill` | The miller | "A sign like the mill wheel. It should look the same when you turn it." | Looks the same after a half turn (older: or a quarter turn) | "{choice}. Turn it by the checked half or quarter turn and it still matches. Like the wheel." |
 | `library` | The librarian | "Something calm. A sign with a slanting mirror line, like a book lying open on a desk." | Corner-to-corner mirror line · passes Fold to check | "{choice}. Very calm. Please don't let Pip sleep under it." |
 | `games` | Bramble | "My Games Table needs a sign. A border. Something that turns, because games go round and round." | A border · repeats with a half turn | "{choice}. Acceptable. The magpie approves, and it approves of nothing." |
 | `orchard` | The orchard keeper | "Apples on a green field. But I want a green nobody's seen before. Mix it yourself." | Made from shapes · uses a paint you mixed | "{choice}. That's a green I'd plant." |

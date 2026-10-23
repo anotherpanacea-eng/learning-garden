@@ -4,6 +4,8 @@ Status: **proposed; awaiting independent spec review.** Part of the [new kinds o
 
 **Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
 
+**Bounded first candidate:** Seed Pile and Ribbon Rows, including their listed variants, plus solo Shutters. Seed Holes and Hex are later candidates: their rules and companion copy are drafts, not selectable games in this increment. Before either is commissioned, a separate model review must pin board coordinates, legal/terminal states, search depth including extra turns, evaluation and move ordering, and a bounded fallback. The proposed four-move/two-move descriptions below are not opponent guarantees.
+
 ## Purpose
 
 The garden has rivals who ask questions, but nobody who plays *against* the child and plans. The Games Table adds five small two-sided and solo games, with Bramble as an opponent whose strength the child sets. The games teach thinking ahead, working backwards from the end, number bonds through use, and, for older explorers, finding and testing a winning rule.
@@ -22,9 +24,11 @@ Before each game the child sets how Bramble plays. The dial describes Bramble, n
 
 | Setting | What Bramble does |
 | --- | --- |
-| **Bramble is sleepy** | Picks any allowed move at random. |
-| **Bramble is paying attention** | Takes a move that wins at once if there is one; otherwise picks at random. |
-| **Bramble has a plan** | Plays the best move the game's rule below allows. When no move can win against best play, takes the smallest allowed move, which leaves the child the most room. |
+| **Bramble is sleepy** | Picks uniformly among the legal moves. |
+| **Bramble is paying attention** | Takes the first immediate winning move in the order below; otherwise picks uniformly among legal moves. Taking the last seed is not a winning move in last-seed-loses. |
+| **Bramble has a plan** | Takes the first move leaving a losing position under the exact Seed Pile/Ribbon Rows rules below. If none exists, takes the first legal move in the same order. This fallback is a convention, not a claim that it gives the child the most room. |
+
+**Move order for the first candidate:** Seed Pile: take 1, then 2, then 3 where allowed. Ribbon Rows: ascending row index, then ascending number taken. A move always removes a positive available number. Starting rows are each 1–7; a dealt row is uniform in that range. Rows may reach zero during play. Shutters has no opponent dial. The later Seed Holes/Hex candidates do not inherit an undefined "smallest move" policy.
 
 Bramble's lines (companion text) comment on the game, never on the child: "I'm counting backwards from the end. Don't tell my magpie."
 
@@ -45,7 +49,11 @@ The child chooses who starts in every two-sided game. The setup screen says, onc
 
 **The three-row rule.** Split each row into bundles of 4, 2 and 1 (5 is 4 and 1; 6 is 4 and 2; 7 is 4, 2 and 1). If every bundle size appears an even number of times across the rows, the player about to move can always be beaten. Bramble's plan moves to such a position whenever she can. This is the binary rule for Nim, taught as bundles; the word *binary* appears only in the grown-up note.
 
-**Checked results** (brute force, 2026-10-23; the implementation's tests repeat it): losing positions for the player to move are multiples of 4 for `pile`, multiples of 3 for `pile-two`, one more than a multiple of 4 for `pile-last-loses`, equal rows for `rows`, and exactly the positions the bundle rule names for `rows-three` (all positions up to 7, 7, 7). In `holes` with three seeds, the first player wins by 6 seeds with best play, opening from the second hole counted from the end farthest from its store. In `shutters` with best play, the small box shuts about 22% of the time and the full box about 10%. Always shutting the biggest shutter you can comes within half a percentage point of best play; always shutting as many small shutters as possible drops the full box to about 1%.
+**Reviewed finite checks** (2026-10-23; implementation tests must repeat them): losing positive positions through 30 are multiples of 4 for `pile`, multiples of 3 for `pile-two`, and one more than a multiple of 4 for `pile-last-loses`; equal rows lose in `rows`, and exactly the bundle-rule positions lose in `rows-three` (all row sizes 0–7). A bounded review probe did not establish the proposed Seed Holes optimal opening or six-seed margin; those claims are removed from child facts and require a complete independent solution before reuse.
+
+**Shutters comparison contract.** A legal action is a nonempty subset of open shutters summing exactly to the roll. Habit A chooses the lexicographically largest descending list of shutter numbers; Habit B chooses the largest number of shutters, then the lexicographically smallest ascending list. The objective of "best play" is maximizing the probability of shutting every shutter, not minimizing the remaining sum. Exact enumeration under the stated one-die switch gives about 22.08% (small) and 9.76% (full) for that objective, 21.65%/9.48% for A and 11.16%/1.13% for B. These are model-specific calculations, not empirical win rates or guarantees.
+
+The full-box worked comparison uses these twenty ordered die pairs, in order: `(3,6), (5,2), (1,4), (6,6), (2,3), (4,1), (5,5), (2,6), (3,3), (1,2), (6,1), (4,4), (2,2), (5,3), (1,6), (3,4), (6,2), (4,5), (2,1), (5,6)`. Each replay consumes one pair per turn: use both faces while two dice are required and only the first face when one die is required. Stop that replay as soon as it cannot move or all shutters close; never consume another pair after its ending. Habit A finishes with shutters 1 and 6 (sum 7); B with 7, 8 and 9 (sum 24). Unused pairs stay unused. These authored rolls illustrate one comparison and do not estimate the probabilities above.
 
 ## Explains pages
 
@@ -69,7 +77,7 @@ Each game has a short origin card. Text that names real history carries a `[chec
 ## Older depth
 
 - **Why can't Hex end in a draw?** A page with a full board picture: once every hexagon is filled, one color always links its sides. The page asks the child to try to fill a small 3 by 3 board with no winner, then explains in two sentences why a wall that blocks one player is itself a path for the other. No proof claim beyond that.
-- **Design a pile game.** The child sets "take 1 to k" and "last seed wins or loses", then fills a table of win and lose positions from 0 upward, with each cell checked by the game. The page ends with *What rule did you find?*, free text, never graded.
+- **Design a pile game** (later candidate). Take limit `k` is an integer 1–6; the table is positions 0–30. A positive position is winning if some legal take leaves a losing position. Zero is a terminal convention: losing for the player to move in last-seed-wins, winning in last-seed-loses because the previous player took the last seed and lost. Explain zero separately rather than asking for a move there. Optional rule text is at most 2,000 characters. This designer needs its own content acceptance before commissioning.
 - **Who should go first?** For a dealt Ribbon Rows position, predict whether the first player can win, then play it against Bramble's plan.
 
 ## Game notes and saved work
@@ -81,17 +89,19 @@ Optional root `games` per explorer, absent until the first game starts:
 ```
 games: {
   dial: 'sleepy' | 'attention' | 'plan',     // last used
-  current: { gameId, setup, moves: [move], firstPlayer: 'child' | 'bramble', dial, at } | null,
-  notes: [{ gameId, stem, text, at }],        // latest 24
+  current: { source, setup, moves: [move], firstPlayer: 'child' | 'bramble', dial, at } | null,
+  earlier: [game],                          // retained prior versions, not automatically trimmed
+  notes: [{ gameId, stem, text, proof, at }], // latest 24 readable notes
   explains: { [pageId]: { stepsSeen, testPlayed: bool } },
   designs: [{ k, lastLoses: bool, table: [cell], text, at }]   // latest 6
 }
 ```
 
-- `current` holds the setup and the move list, so a game replays to the same position on resume. Dice rolls in Shutters are stored as moves.
-- Validate ids, setup ranges and that each stored move is allowed in the replayed position. If a move is not allowed, drop `current` and keep everything else. Never reinterpret a finished game.
-- No win or loss is stored outside `current` and the child's own note.
-- Export, import, reset and explorer switching include `games`.
+- `source` freezes the game ID, understood rule/model version and parameters, setup choices and rule/ending text used by this game. A model ID selects only a supported finite interpreter; imported source text is never executable code. Source is at most 16 KiB UTF-8; a supported current replay holds at most 512 finite moves, including the actual dice rolls and Bramble moves. New moves preflight this cap before changing anything; a cap refusal keeps the current game intact. Replay uses its own supported source and stored moves, never today's rules or a fresh random draw.
+- Validate IDs, finite setup/move shapes and legality only under that saved source. An unknown model, malformed move or unsupported replay remains exact, read-only and exportable; do not drop `current` or change a recorded outcome. Other games and notes stay usable. **Start a fresh game** explicitly moves the entire prior current entry unchanged to `earlier` before creating a separate supported game; if retention cannot fit, refuse the start without overwriting it. Loading/rendering never trims `earlier` or repairs a source.
+- A note's `proof` is a bounded copy of its own source/setup, actual moves, requested support and literal ending/result, if a result exists. A partial note has no invented outcome. Notes retain their own text and context when current work changes; no totals or learning-level inference is derived from wins/losses. Note/rule prose is at most 2,000 characters. Designer tables keep their own take/terminal rules, entered cells and recorded checks; earlier checks are not regraded on load.
+- The latest-24 notes and latest-6 designs windows apply only on an explicit new keep, with any oldest readable replacement disclosed before the action. Never evict an unreadable/raw sibling to make room. New starts, keeps and retained copies preflight the whole candidate through the existing limits and actual formatted `notesReport`/`prepareProgressImport` download path; refusal is atomic and offers Download notes. No new storage service is needed.
+- Export/import preserve the entire optional root and opaque unknown fields. Reset, save-off and explorer switching follow the existing shared notebook behavior; recovery never resets another game or silently changes historical evidence.
 
 ## Curriculum fit
 
@@ -133,13 +143,16 @@ Choosing a Strategy (`mt_q7zxOloj_L`, Learning to Learn) has no teaching-researc
 ## Checks for implementation
 
 - Each game's rule engine accepts exactly the moves above; a brute-force test confirms Bramble's plan wins every winnable position up to pile 30, rows up to 7 and three rows up to 7, 7, 7.
-- Bramble's plan in Seed Holes and Hex never takes longer than half a second on a low-end device; if it would, it plays its best move found so far.
+- Seed Holes and Hex stay unavailable in the first candidate; later model review must name a device/work budget and honest fallback before any lookahead claim ships.
+- Shutters reproduces the fixed comparison (A: 1 and 6; B: 7, 8 and 9), the exact subset policy and the model-specific closure probabilities. No pair is used after an ending.
 - Resuming replays to the identical position, including dice.
 - Dial setting changes are refused mid-game and offered at the end.
 - The setup message about first player appears for Seed Pile and Ribbon Rows only.
 - Browser at 320 and 820 px: seeds, ribbons, holes and hexagons are at least 44 px targets or have a list alternative; the move list reads in order to a screen reader.
 
 ## Review asks
+
+- The first candidate's rules/policies and comparison fixture are specified; this is not implementation or specialist content clearance. Seed Holes, Hex and the designer retain their separate commissioning gates.
 
 - Is "Bramble has a plan" too discouraging for a younger child even with the dial? The default is "paying attention."
 - Origin card facts: see the `[check]` lines in the companion.

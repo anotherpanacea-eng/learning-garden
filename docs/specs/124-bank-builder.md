@@ -93,17 +93,20 @@ Optional root `bank` per explorer, absent until a level opens:
 ```
 bank: {
   levels: { [levelId]: {
-    design: { [sectionId]: 'none' | 'bags' | 'wall' | 'wall-bags' | 'room' },
-    runs: [{ flood: 2 | 3 | 4 | 5, at }],          // latest 12; results are recomputed from the model version
-    kept: { design, claim: { because, cost, worry }, version, at } | null,
-    strips: { [pour]: { [stripId]: [stemId, text] } }   // b3 only
+    source, design: { [sectionId]: 'none' | 'bags' | 'wall' | 'wall-bags' | 'room' },
+    runs: [{ source, design, flood: 2 | 3 | 4 | 5, result, support, at }], // latest 12 readable runs
+    kept: { source, design, runs, claim: { because, cost, worry }, at } | null,
+    strips: { [pour]: { source, notes: { [stripId]: [stemId, text] } } }, // b3 only
+    earlier: [level]
   } }
 }
 ```
 
-- `kept.version` records the model version. A kept design and claim are never rewritten if the model changes; the page shows "made with an earlier model" if the version differs.
-- Validate section ids, build ids (room only at A and C), flood levels and budget. An invalid design is dropped, and its level reopens empty.
-- Export, import, reset and explorer switching include `bank`.
+- `source` freezes the understood model/level version, six section definitions/heights, build IDs/costs/locations, flood definitions, budget, rule parameters and displayed goal/model notices (at most 16 KiB UTF-8). Validate supported sources on that own finite shape, not today's budget/catalog. No imported expression or source prose is executed.
+- Every explicit run copies the tested design, that source, flood, support and computed result once. `result` holds each section's water/height/held/wet state, spend, land given and the model's downstream-impact count. Render historical tests from this result: never recompute them from an edited design, current model or later source. A kept claim copies its own design/source and the exact tests it cites; ordinary edits and twelve-run rollover cannot remove that evidence. Display an earlier-model notice when appropriate without rewriting the claim/result. A partial kept design cites no invented test.
+- The twelve-readable-run window changes only after an explicit new test, with oldest-readable replacement disclosed first; unreadable/raw slots are never evicted. Strip notes retain their own authored pour/strip source and optional prose, bounded to 2,000 characters per field. Claims use the same prose bound.
+- An unknown version, malformed design/run or unsupported build remains exact and exportable, with only the affected actions read-only/unavailable. Never drop a design, reopen its saved level as empty, or rewrite historical outcomes. **Start a fresh model version** explicitly retains the complete prior level entry in `earlier` before opening a separate supported draft; if retention fails, preserve the old entry and refuse the start. Other levels stay usable.
+- New sources, tests, keeps and retained copies preflight the whole notebook and actual formatted `notesReport` through existing `prepareProgressImport` limits. Export/import preserves raw optional data/unknown fields; reset, save-off and explorer switching use the existing shared behavior. No new storage backend or general model-history framework is needed.
 
 ## Curriculum fit
 

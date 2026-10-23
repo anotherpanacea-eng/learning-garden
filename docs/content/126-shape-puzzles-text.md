@@ -51,7 +51,7 @@ Companion to [spec 126](../specs/126-shape-puzzles.md). Use as written, after th
 | --- | --- | --- |
 | `w1` | The bakery square | The bakery's window is a square. |
 | `w2` | The post office triangle | Dot's window is a triangle. Dot says it's pointier than she expected. |
-| `w3` | The café rectangle | The café window is a long rectangle. Three pieces are already in. |
+| `w3` | The café rectangle | The café window is a long rectangle. You can see the outlines of three pieces. |
 | `w4` | Pip's fox | Pip wants a fox in his window. Of course he does. |
 | `w5` | The heron | A tall bird with long legs, for the window by the brook. |
 | `w6` | The boat | A boat for the boat-mender's window. |
@@ -134,7 +134,7 @@ Companion to [spec 126](../specs/126-shape-puzzles.md). Use as written, after th
 
 **Messages:**
 - The floor is full! No gaps, no overlaps.
-- There's a gap here that no tile can fill. Move a tile, or try a different corner.
+- There is still an uncovered space. Try another position, or move a tile.
 - (Only for f1 and f2) Show me one piece
 
 ## The floor that can't be done (older page)
@@ -162,7 +162,7 @@ Companion to [spec 126](../specs/126-shape-puzzles.md). Use as written, after th
 ## Off-screen invitations
 
 - Cut a square of paper into the seven tangram pieces with a grown-up, and make your own window shapes.
-- Find a box at home, cut along some edges with a grown-up, and lay it flat. Is it one of the eleven?
+- Find a box at home, cut along some edges with a grown-up, and lay it flat. Does its flat shape look like one of the cube nets? Other kinds of boxes have different nets.
 - Draw a chessboard and color it. Cover two opposite corners with coins. Can dominoes or pieces of paper the size of two squares cover the rest?
 
 Off-screen invitations record nothing.

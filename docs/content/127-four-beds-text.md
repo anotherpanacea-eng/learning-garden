@@ -13,16 +13,18 @@ Companion to [spec 127](../specs/127-four-beds.md). Use as written, after the sa
 
 **Later visits:** Moss is leaning on a spade by your beds. "What's the plan this year?"
 
+The cards use simplified game groups, not botanical families; real plants in one group do not all share the same pests or needs.
+
 **Every report (always shown):** This is a simple model of a garden. Real soil and real plants are more complicated.
 
-## The crop families
+## The model crop groups
 
 | Family | Card | Picture labels |
 | --- | --- | --- |
 | Beans | Beans and peas. They don't need rich soil, and they leave the soil better than they found it. | peas · runner beans · broad beans |
 | Leaves | Leafy crops. Hungry: they need rich soil. | cabbage · kale · lettuce |
 | Fruit | Crops we eat the fruit of. Fairly hungry. | squash · tomatoes · courgettes |
-| Roots | Crops we eat the roots of. They don't need much. | carrots · beetroot · onions |
+| Roots | Crops we eat the roots of. They don't need much. | carrots · beetroot · parsnips |
 | Clover | A rest year. Clover and grass grow, and the soil gets better. No harvest. | clover · grass |
 
 **Why do beans help? (Details):**
@@ -40,7 +42,7 @@ Companion to [spec 127](../specs/127-four-beds.md). Use as written, after the sa
 **Bed labels:** Bed 1 · Bed 2 · Bed 3 · Bed 4
 **Compost:** Use this year's compost on: {bed} · nobody this year
 **Compost note:** The town compost heap has enough for one bed each year. It adds 1 to soil goodness.
-**Compost on a full bed:** This bed's goodness is already 4. Compost won't help it: the soil can't use more. More isn't always better.
+**Compost on a full bed:** This bed's goodness is already 4. Compost won't help it: the model meter can't go higher. More isn't always better.
 **Moss's suggestion button (optional):** What would Moss do?
 **Grow button:** Grow this year
 
@@ -106,7 +108,7 @@ One step per tap.
 **Spring prompt:** It's spring. Time to plan your beds for this year.
 **Waiting line:** Your beds are growing. The harvest will be ready in autumn.
 **Autumn line:** It's autumn! Your harvest is ready.
-**Missed spring:** Your beds rested this year, like a clover year. The soil is better for it.
+**Missed spring:** No plan was run for that season. Your saved garden is still here. You can plan a model year whenever you like.
 **Season note:** Seasons follow the almanac's setting for your half of the world.
 
 ## Older pages
@@ -114,7 +116,7 @@ One step per tap.
 **Neighbors:**
 - Toggle: Neighbors share pests
 - Card: Your beds are in a row. If two beds side by side grow the same family, pests can hop from one to the other, and both do a little worse.
-- Grid prompt (after a four-year plan with no neighbor trouble): Here's your plan as a grid. Look along each row, and down each column. What do you notice?
+- Grid prompt (only after the kept four-year grid is checked to contain each of the four groups exactly once per row and column): Here's your plan as a grid. Look along each row, and down each column. What do you notice?
 - Answer reveal (on tap): Each family appears once in every row and once in every column. Grids like this are called Latin squares.
 
 **The wet bed:**
@@ -128,12 +130,12 @@ One step per tap.
 - Toggle: Weather matters
 - Card: Some summers are wet and some are dry, and you plant before you know. Wet summers are hard on fruit and roots. Dry summers are hard on leaves.
 - Report line: This year was {an ordinary / a wet / a dry} summer.
-- Seasons mode line: Your almanac recorded {n} rain days and {m} sun days this summer, so the garden had a {wet/ordinary} summer.
+- Seasons mode line: Your almanac has {n} reported rain days, {m} reported sun days and {u} unreported dates in this date range. These reports do not measure how much rain fell. Choose a fictional model-weather scenario for the garden.
 - Goal card: Can you find a plan that does well whatever the weather?
 
 ## Off-screen invitations
 
-- With a grown-up, plant a bean in a jar with damp paper towel, against the glass. Watch the roots grow. Later, look for little bumps on them. `[check]`
+- With a grown-up, sprout a suitable bean chosen by the grown-up in a jar with damp paper towel, against the glass. Watch the roots grow; do not expect nitrogen-fixing nodules from this jar experiment. `[check]`
 - Visit a garden or allotment and ask a gardener what they grow in the same place every year, and what they move.
 - Fill two cups with soil from different places. Pour the same water into each. Which drains faster?
 

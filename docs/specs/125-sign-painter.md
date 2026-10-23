@@ -1,6 +1,8 @@
 # 125. The Sign Painter: shape, symmetry, pattern and color
 
-Status: **proposed; awaiting independent spec review, a science check of the color lines and a licence check of the artworks.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Act II and Lantern Night in [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/125-sign-painter-text.md); this spec holds the benches, the models and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review, a science check of the color lines and a licence check of the artworks.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Act II and Lantern Night in [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/125-sign-painter-text.md); this spec holds the benches, the models and the saves. Code and art are for the implementation pass.
+
+**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
 
 ## Purpose
 
@@ -42,7 +44,7 @@ Two palettes, side by side, with every color named in text as well as shown.
 | red + blue | purple |
 | red + yellow + blue | a dark brown |
 | any color + white | a lighter version of that color |
-| any color + more of it | stronger |
+| any color + more of the same color | the same color, more paint |
 
 | Lanterns (light overlapping on a white wall) | Result shown |
 | --- | --- |
@@ -52,7 +54,7 @@ Two palettes, side by side, with every color named in text as well as shown.
 | red + green + blue | white |
 | one lantern dimmed | that color fades towards the others' mix |
 
-The contrast is the lesson: mixing paint gives darker colors, and mixing light gives lighter ones. The text gives the reason in one line for each, for older players: paint soaks up some colors of light and gives back the rest, so each paint added soaks up more; lanterns each add their own light, so more lanterns add more. Real paints vary, and the text says so. The lamplight bench says the white wall gives back all the light that lands on it, which is why the colors show on it.
+The contrast is how the models combine color: the supplied pigment mixes can darken or mute a color, whereas adding light adds illumination. Adding white paint can lighten a mix; adding more of the same paint need not change its color. Neither model teaches that every paint addition darkens or that every unequal lamp mix is white. The text gives the reason in one line for each, for older players: paint soaks up some colors of light and gives back the rest, so mixing different pigments can change which light comes back; lanterns each add their own light, so more lanterns add more. Real paints vary, and the text says so. The lamplight bench says a white wall reflects much of the visible light that reaches it, which is why the colors show on it.
 
 ### 5. Look closely (older depth)
 
@@ -65,7 +67,11 @@ One artwork per visit, from a short list of public-domain works, shown with its 
 ### Older benches
 
 - **Turn signs:** a sign that looks the same after a half turn or a quarter turn. **Turn to check** animates the turn and marks squares that land on a different color.
-- **Floor tiles:** which shapes cover a floor with no gaps or overlaps? The child tries squares, equal-sided triangles, regular hexagons, regular pentagons, and any triangle or any four-sided shape they draw. The bench lets the child try, and then says what is true: the first three always tile; regular pentagons never do; every triangle and every four-sided shape can tile, by turning copies.
+- **Floor tiles:** which shapes cover a floor with no gaps or overlaps? The child tries squares, equal-sided triangles, regular hexagons, regular pentagons, and any non-degenerate triangle or simple, non-self-intersecting four-sided shape they draw. The bench lets the child try, and then says what is true: the first three always tile; regular pentagons never do; every non-degenerate triangle and simple four-sided polygon can tile, by turning copies.
+
+**Finite model and authoring gate:** before commissioning a bench, its mini-spec must supply the bounded canvas sizes, piece coordinates/anchors, allowed scales/turns/flips, snap and coverage rules, exact outline/solution fixtures (where checked), palette codes and displayed colors, and each order's finite ask predicates. The current prose does not supply those geometry fixtures. Mirror/turn checks compare named grid-cell colors (including blank) under the reviewed grid transform, not image similarity. The border task uses supplied finite symbol sequences and accepts a smallest period under cyclic shift; its rendered edge/corner convention must be specified before build. Paint is a finite authored recipe lookup, not a general chemical mixing engine; undefined combinations stay unoffered. Lamp output needs fixed RGB intensity/overlap rules and display swatches before commissioning. Keep signs and free writing without meeting any ask; readiness feedback is optional and never a condition for story contribution. This commissioning gate is not a request to build a generic geometry or evaluation framework.
+
+Color-model reference checked during review: [UW–Madison Physics, subtractive color mixing](https://www.physics.wisc.edu/ingersollmuseum/exhibits/opticscolor/subcolormix/). It supports distinguishing pigment absorption from adding light, not literal accuracy of every proposed RYB paint recipe or artwork claim. Full science and asset checks remain open.
 
 ## Orders
 
@@ -79,17 +85,21 @@ Optional root `signs` per explorer, absent until the first bench opens:
 
 ```
 signs: {
-  orders: { [orderId]: { design: design, kept: bool, replySeen: bool, at } },
-  free: [design],                                       // latest 12, outside orders
+  orders: { [orderId]: { source, design, kept: [copy], replySeen: bool, at, earlier: [order] } },
+  free: [{ source, design, at }],                       // latest 12 readable keeps, outside orders
   benchState: { borderUnitsFound: [borderId], paintMixesTried: [mixId], lampMixesTried: [mixId] },
-  looked: [{ artId, answers: [string], at }]            // latest 12
+  looked: [{ source, artId, answers: [string], at }]    // latest 12 readable keeps
 }
-design: { kind: 'shapes' | 'mirror' | 'border' | 'turn' | 'floor', size, cells | shapes, mirror?, tile?, repeat?, palette }
+design: { kind: 'shapes' | 'mirror' | 'border' | 'turn' | 'floor' | 'lamplight', size, cells?, shapes?, mirror?, tile?, repeat?, palette, lamps? }
+copy: { source, design, support, reply?, checkResult?, at }
 ```
 
-- Validate ids, sizes and color codes; drop an unreadable design and keep the rest.
-- A kept sign is never re-checked against an order's asks on load, even if the asks change.
-- Export, import, reset and explorer switching include `signs`.
+- A lamplight composition retains the three named lanterns' enabled state, intensity and position under its own frozen finite lamp model, so a kept banner can be resumed without substituting today's overlap. The exact intensity/position domain remains the commissioning gate above.
+- Each design's `source` freezes its understood model/version, bounded canvas and geometry, palette/recipe/transform definitions, and the actual order asks and help/reply text used. An art response freezes the artwork identity, attribution/source reference, displayed facts and questions; a reviewed image uses an immutable bundled asset key, and an unavailable older image gets a notice rather than a different painting. It need not duplicate image bytes. Each source is at most 16 KiB. The commissioned bench supplies its finite limits (at most 12×12 cells and 64 placed shapes); an unsupported larger saved design is retained, not truncated. Free answers are at most 2,000 characters when newly written.
+- Validate known ids, sizes and color codes against that saved source. An unknown model or unreadable design remains exact, read-only and exportable, with an unavailable-work notice at that entry; other readable work stays open. Never drop a design or unknown fields on load. Starting a supported fresh version is an explicit choice that retains the entire earlier entry in `earlier`, and refuses without changing either entry if it cannot retain it.
+- **Keep** takes a copy of the source and current composition, including support/reply context and any optional mechanical check already performed. A partial or unchecked sign can be kept without inventing a check. Later editing does not rewrite that copy or make its earlier check apply to the edited design. No kept sign is re-checked against today's asks on load; no result grades free answers or ability.
+- The latest 12 readable free signs and art responses may roll over only on an explicit keep with a visible notice of what will be replaced. Unreadable siblings and unknown fields are not evicted by that policy. Preflight each new keep, source or retained fresh version against the actual pretty `notesReport` export and `prepareProgressImport` whole-notebook limits; if it would not fit, refuse atomically and offer the existing export/reset choices. Do not trim on load.
+- Export, import, reset, save-off and explorer switching include the complete `signs` root, including raw unsupported entries; use the existing generic notebook transfer, not a filtered reconstruction of these known fields.
 
 ## Curriculum fit
 

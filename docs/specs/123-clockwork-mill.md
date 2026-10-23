@@ -12,8 +12,8 @@ The garden already teaches literal instructions ([Instructions for a Reader, spe
 
 The mill's clockwork sack cart, **Trundle**, was knocked over in the storm. The miller has wound it up again but has forgotten how to set its program drum. Trundle reads a row of command tiles and does them in order. Route: `#mill`, linked from the town map's mill and from spec 71's end screen ("Try a machine that turns"). Open from the start.
 
-- **Act II:** a kept solved level (any of 1 to 10) counts toward chapter 1, the weekly market, since the mill is getting flour and sacks to the stalls.
-- **Act V:** the level designer is one of the "new courier route" project paths' companions; a kept level with its check is a project first version (spec 120, Act V).
+- **Act II:** a kept program attempt (any of1 to10, solved or still open) counts toward chapter 1, the weekly market, since the mill is getting flour and sacks to the stalls.
+- **Act V:** the level designer is one of the "new courier route" project paths' companions; a kept designed level with its latest attempted check, whether solved or still open, is a project first version (spec 120, Act V).
 
 ## The machine, `trundle-v1`
 
@@ -29,7 +29,7 @@ The floor is a grid of squares, at most 9 by 9 for authored levels (the designer
 | **New move** | A named row of tiles, made on the side table and used like any tile. Names are pictures: star, moon, leaf, acorn. A new move can use another only if the complete call graph is acyclic; direct and indirect recursion are refused without changing the draft. |
 | **New move with a number** (from level 9) | A new move whose inside uses a number slot, *n*, in one Repeat. Using it asks for the number: *Go 3*. |
 
-A level is solved only when its program terminates normally on the goal square, carrying nothing, with exactly the requested sack counts and any required final facing/route visits. The starting state alone is not a completed run. For m5, visit (0,3), (3,3), (3,0), then (0,0) in that order during the run; simply remaining at the start does not solve it. m10 additionally ends facing east. Trundle runs at one move per half second, or one move per tap with **Step**. At 300 moves it stops: "Trundle needs winding up again." The 300-move limit counts primitive actions, including failed actions, not Repeat/call wrappers. Acyclic calls and bounded repeats make evaluation finite. Run starts from the unchanged initial grid; Step advances the same run one primitive at a time; Reset returns to that initial state without erasing the program. Editing stops the transient run; the next Run/Step starts fresh.
+A level is solved only when its program terminates normally on the goal square, carrying nothing, with exactly the requested sack counts and any required final facing/route visits. The starting state alone is not a completed run. For m5, visit (0,3), (3,3), (3,0), then (0,0) in that order during the run; simply remaining at the start does not solve it. m10 additionally ends facing east. Trundle runs at one move per half second, or one move per tap with **Step**. Before a 301st move it stops: "Trundle needs winding up again." The 300-move limit counts primitive actions, including failed actions, not Repeat/call wrappers. Acyclic calls and bounded repeats make evaluation finite. Run starts from the unchanged initial grid; Step advances the same run one primitive at a time; Reset returns to that initial state without erasing the program. Editing stops the transient run; the next Run/Step starts fresh.
 
 **Finite program contract:** each level offers F/L/R, adding lift/drop only for sack levels, Repeat from m4, the four picture-named moves from m8 and numeric moves from m9; m8/m9 exclude L even inside a named move. Custom levels offer these same finite tiles subject to a kept allowed-tile set. Numeric arguments are integers2–9; each parameterized move uses its own n only as a Repeat count. Undefined names, cycles, empty Repeat/move bodies or out-of-range arguments are refused in an editable draft without executing them. At most4 move definitions; at most60 AST tiles in the main program and12 per definition; repeat nesting at most3 after following calls (not merely per definition). A Repeat node counts as one source tile plus its body; a call as one source tile, with the separately authored definition excluded from the main challenge count. At most300 primitive actions run, with normal termination after exactly300 allowed; stop before a301st action.
 
@@ -77,17 +77,18 @@ Optional root `mill` per explorer, absent until a level opens:
 
 ```
 mill: {
-  levels: { [levelId]: { program: [tile], moves: { [name]: { param: bool, body: [tile] } },
-                         solved: bool, challengeMet: bool, at } },
-  designs: [{ size, cells, start, facing, goal, sacksEnd, program, moves, ready: bool, at }]   // latest 8
+  levels: { [levelId]: { source, program: [tile], moves: { [name]: { param: bool, body: [tile] } },
+                         solved: bool, challengeMet: bool, proofs: [proof], earlier: [level], at } },
+  designs: [{ source, program, moves, ready: bool, proof, at }]   // latest 8 readable designs
 }
 // tile: 'F' | 'L' | 'R' | 'lift' | 'drop' | { repeat: n | 'n', body: [tile] } | { move: name, n? }
 ```
 
-- A saved program is kept exactly as the child built it, including a nested repeat or new move they used.
-- Validate tile names, repeat counts 2 to 9, nesting at most 3 deep, at most 60 tiles per program and 12 per new move, and that named moves exist and are not self-referring. A failing program is dropped and its level shows unsolved; the rest of the save stays.
-- `solved` is set by a run the child started. It is not recomputed on load.
-- Export, import, reset and explorer switching include `mill`.
+- Each `source` captures the understood model/level version, full map, start/facing, goal, sack targets, allowed tile set, challenge definition and request/help text, within 16 KiB UTF-8. A custom design's source contains those same owned inputs. Resume uses this copy, not today's level catalog. Source text is never executed.
+- Keep the exact program/named moves, including partial or presently unexecutable drafts. For a supported execution, use the finite program contract above: at most four named definitions, 60 main AST tiles, 12 per definition, repeat/call expansion depth bounded as stated, and at most 300 primitive actions. Validate references and reject direct/indirect cycles before a new run. Validation does not delete an unsupported saved program, label its level unsolved, or clear historical `ready`/challenge flags. Such work stays raw, read-only/exportable where needed; other levels remain open.
+- A child-started explicit run records a bounded `proof`: its own frozen source, program and move definitions, pre-run support, actual ending/goal/sack result, solved/challenge outcomes and timestamp. Up to four readable proofs per level are retained, with replacement disclosed before a new run; malformed siblings remain intact. Historical solved/ready/check outcomes are never recomputed on load. After an edit, show the old proof as earlier and the current draft as untested; do not present an old success as proof of the edited program.
+- **Start a fresh version** explicitly retains the entire prior level entry unchanged in `earlier` before creating a separate supported level. A new custom design never overwrites an unsupported design. The eight-readable-design window changes only on explicit keep after disclosed replacement; unreadable/raw designs are not evicted. If retention cannot fit, refuse that new action without changing previous work.
+- New sources, proofs, keeps and retained copies preflight the whole notebook and its actual formatted `notesReport` through existing `prepareProgressImport` limits. Export/import preserves the full optional root and unknown fields; reset, save-off and explorer switching follow existing shared behavior. No load-time repair or new storage/migration service is introduced.
 
 ## Curriculum fit
 

@@ -24,7 +24,7 @@ Shown before the first sort, one step per tap. Button: **Next**. Last button: **
 1. "Some sentences tell us what someone **saw** or **did**. 'I saw a blue basket on the counter.' That's an **I SAW** sentence."
 2. "Some sentences tell us what someone **thinks**. 'I think the basket is Moss's.' That's an **I THINK** sentence."
 3. "Thinking is good. Detectives think all the time. But an I THINK sentence is an idea to check. It isn't a clue yet."
-4. "Let's sort the notes. Then we'll use the I SAW sentences to solve the mystery."
+4. "Let's sort the notes. Then open the clue cards, with an explanation from each note. Only the cards in Clues are used to check an answer."
 
 **Sort buttons:** I SAW · I THINK (older mysteries add: I HEARD)
 **Skip button:** Sort them for me
@@ -52,6 +52,9 @@ Shown before the first sort, one step per tap. Button: **Next**. Last button: **
 - That fits every clue.
 - That doesn't fit this clue: "{clue}". Have another look.
 - Every row needs an answer first.
+- Use each thing and each place once. One of yours is used twice.
+
+**Source note for the builder:** the clue cards use the ordered IDs and finite predicates in spec 122. The child's sort is a preserved response, not an executable rule. Show the authored Why? before using a card and record support. Board introductions, pictures and reveals add no hidden predicates. If a clue is set aside, its repeated wording elsewhere is not another independent clue.
 
 **Can we tell yet?**
 - Question: Can we tell what happened yet?
@@ -189,7 +192,7 @@ Shown before the first sort, one step per tap. Button: **Next**. Last button: **
 ## Mystery 5: Muddy prints
 
 **Board note:**
-> This morning someone left muddy red-boot prints all over the post office floor while Dot was out. Pip, Dot, Bramble and the orchard keeper were all out and about. Each was in one place: the bakery, the post office, the orchard or the library. Each wore red boots, green boots, yellow boots, or no boots at all. Who made the prints?
+> This morning someone left muddy prints all over the post office floor. Pip, Dot, Bramble and the orchard keeper were all out and about. Each was in one place: the bakery, the post office, the orchard or the library. Each wore red boots, green boots, yellow boots, or no boots at all. Who made the prints? Read the clue cards to find out.
 
 **Grid:** Pip, Dot, Bramble, the orchard keeper × red boots, green boots, yellow boots, no boots × the bakery, the post office, the orchard, the library
 
@@ -213,7 +216,10 @@ Shown before the first sort, one step per tap. Button: **Next**. Last button: **
 **Messages when a clue is set aside:**
 - Magpie's clue set aside: Now exactly one answer fits the rest.
 - Library book set aside: Now two answers fit. We can't tell.
-- Any other clue set aside: Still nothing fits. That clue wasn't the problem.
+- Dot's red-prints clue (`red`) set aside: Now two answers fit. We can't tell.
+- Only `dot`, `yellow` or `bramble` set aside: Still nothing fits. Setting this one aside hasn't settled it.
+
+**Multiple cards set aside:** No answer fits these cards. / Exactly one answer fits these cards. / {n} answers fit these cards. The message follows the current active predicate set; do not reuse a one-card result.
 
 **Weighing the sources** (Details, linked from the set-aside step):
 > The library book was written at nine o'clock and at twelve o'clock, by Pip, in the library. Dot is looking at the prints right now. The magpie repeats words it hears, but we don't know when it heard them, or who said them. Which would you trust most?
@@ -263,10 +269,10 @@ Shown before the first sort, one step per tap. Button: **Next**. Last button: **
 
 | Check | What it could show |
 | --- | --- |
-| Compare this year's rain in the almanac with other years. | Whether this year really is wetter than usual. |
+| Compare the number of logged days marked rainy in the almanac, with the number of days noted in each year. | Whether more of the recorded days were marked rainy. This doesn't measure how much rain fell or settle whether the whole year was wetter. |
 | Look at the corner when the flood boards are out, and when they're in. | Whether the boards make a difference. |
 | Look at Hollis's old map for where the Sponge was. | Whether the wet corner sits where the marsh used to be. |
-| Check whether the corner stays wet through a dry week. | Whether the water is coming from rain or from somewhere else. |
+| Check whether the corner stays wet through a dry week. | Whether the wetness lasts after rain stops. Held rain, slow drainage, a spring or several causes could all fit; this check alone can't choose among them. |
 | Walk along the bank and look for worn or broken places. | Whether water is getting out through the bank. |
 
 **Closing:**

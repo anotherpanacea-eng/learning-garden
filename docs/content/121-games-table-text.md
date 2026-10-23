@@ -29,6 +29,8 @@ Companion to [spec 121](../specs/121-games-table.md). Use as written, after the 
 | Seed Holes | Sow seeds around the board and fill your store. |
 | Hex | Link your two sides of the board before Bramble links hers. |
 
+**Commissioning note for the builder:** only Seed Pile, Ribbon Rows and Shutters are in the first candidate. Seed Holes, Hex and the designer text below are later drafts; do not show their cards or pages until their separate model/content gates clear.
+
 **Variant buttons (Seed Pile):** Take 1, 2 or 3 · Take 1 or 2 · Last seed loses
 **Variant buttons (Ribbon Rows):** Two rows · Three rows
 **Variant buttons (Shutters):** Small box, 1 to 6 · Full box, 1 to 9
@@ -219,14 +221,15 @@ One step per tap. Button: **Next**. Last button: **Test it**.
 1. "Shutters has no sure way to win. The dice decide a lot."
 2. "But some choices make the next roll easier. Say you roll 9. You could shut the 9, or the 5 and the 4, or the 6, 2 and 1."
 3. "If you shut lots of small shutters, the big ones are left. And big numbers need big rolls. Late in the game, when you roll one die, you can't make anything over 6."
-4. "Let's test two habits on the same 20 rolls. Habit A: shut the biggest shutter you can. Habit B: shut as many small shutters as you can."
-5. (After the side-by-side replay) "With these rolls, Habit A had {a} left open and Habit B had {b}. One set of rolls can be lucky, though."
-6. "People have worked out the best play over every possible roll. With the full box, even perfect play shuts every shutter only about 1 game in 10. Habit A comes very close to perfect. Habit B shuts the box only about 1 game in 100." `[check: figures computed for this spec]`
+4. "Let's test two habits with the same set of dice. Habit A chooses the biggest shutter first, then the biggest possible next one. Habit B chooses the most shutters it can, starting with the smallest if there's a choice."
+5. (After the fixed side-by-side replay in spec 121) "Habit A left 1 and 6 open: 7 altogether. Habit B left 7, 8 and 9: 24 altogether. One set of rolls can be lucky, though."
+6. "That shows what happened with these rolls. It doesn't mean either habit will win next time. The dice still have a say."
 
 ## Design a pile game (older page)
 
 **Heading:** Make your own pile game
 **Setup:** Players can take from 1 up to {k} seeds. · The last seed wins / The last seed loses.
+**Later designer limits:** k is 1–6 and the table ends at 30. For zero, show a terminal explanation: "Last seed wins: the previous player already won, so zero is bad for the player next." / "Last seed loses: the previous player already lost, so zero is good for the player next." Nobody takes a move from zero.
 **Table prompt:** For each number of seeds, is it good or bad to have on your turn? Start at 0 and work up.
 **Cell buttons:** Good for me · Bad for me
 **Checked cell, fits:** Yes.
@@ -270,4 +273,4 @@ Off-screen invitations record nothing.
 
 - Seed Pile and Ribbon Rows are versions of Nim. Every position is either winning or losing for the player to move, and the explains pages teach the child to find which by working backwards. The three-row bundle rule is the binary-digit (nim-sum) rule, taught without the word.
 - Shutters with best play shuts the full box about 10% of the time and the small box about 22% (computed for this spec). Losing is the usual ending, and the text treats it that way.
-- The dial sets Bramble's strength. Nothing records wins, losses or which setting the child chose beyond the last one used.
+- The dial sets Bramble's strength. The current game retains its own dial and moves so it can resume; there are no accumulated win/loss totals. Seed Holes and Hex remain later drafts, without a verified best-play margin or promised search strength.

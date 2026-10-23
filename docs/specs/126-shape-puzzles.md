@@ -1,6 +1,8 @@
 # 126. The Shape Bench: window pieces, parcel boxes and floors
 
-Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts I and II of [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/126-shape-puzzles-text.md); this spec holds the puzzles, the checks and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts I and II of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/126-shape-puzzles-text.md); this spec holds the puzzles, the checks and the saves. Code and art are for the implementation pass.
+
+**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
 
 ## Purpose
 
@@ -33,9 +35,11 @@ The seven pieces of a standard tangram: two large triangles, one middle triangle
 | `w9` | The trapezoid | outline only | Sapling |
 | `w10` | Square challenges | "Make a square from 2 pieces · 3 · 4 · 5 · 6 · 7" | Sapling |
 
-Each window ships with one stored solution layout, which a test confirms covers the outline exactly. Piece lines (`w1` to `w3`) are a support; **Show me one piece** places one piece of the stored solution, recorded as support.
+Before a window is commissioned, supply its exact outline polygon, each piece's canonical vertices, one exact solution layout, and a test confirming that solution covers the outline exactly. This draft does not yet contain those window fixtures. Piece lines (`w1` to `w3`) are a support; **Show me one piece** places one piece of the stored solution, recorded as support.
 
 `w10` includes the six-piece square, which cannot be made. The page lets the child try, then says so, and invites the child to find which counts are possible. `[check]` The known result is that a square can be made from 1, 2, 3, 4, 5 or 7 of the pieces, never 6; this needs a source or a computed check before build.
+
+**Geometry authoring gate:** select a first bounded table before build. For windows, fix a common exact-coordinate lattice supporting the proposed eighth turns (or exact algebraic coordinates), placements, canonical flip/anchor semantics, and coverage/no-overlap comparison; do not compare rendered pixels or use an unspecified floating tolerance. For floors, supply the twelve canonical pentomino cell sets and exact puzzle domains. Every piece can be placed by tap and turn/flip buttons. The 6×6 contrast must name the two removed cell coordinates before it is offered; a count for an unnamed pair is not a fixture. The square-impossibility and published hall-count claims remain withheld from child copy until source/computation review; a failed search by the learner is not proof.
 
 ## Parcel boxes (cube nets)
 
@@ -80,17 +84,21 @@ Optional root `shapes` per explorer, absent until a table opens:
 
 ```
 shapes: {
-  windows: { [windowId]: { pieces: [{ pieceId, x, y, turn, flipped }], filled: bool, support: bool, at } },
-  boxes: { [netId]: { prediction: 'yes' | 'no', folded: bool, base: squareId | null, at } },
-  ownNets: [{ cells, folds: bool, at }],          // older: latest 40
-  floors: { [floorId]: { pieces: [placement], filled: bool, at } },
-  proof: { tried: bool, reasonSeen: bool, at } | null
+  windows: { [windowId]: { source, pieces: [{ pieceId, x, y, turn, flipped }], filled: bool, support, proofs: [proof], at, earlier: [window] } },
+  boxes: { [netId]: { current: attempt, attempts: [attempt], earlier: [box] } },
+  ownNets: [{ source, cells, folds: bool, result?, support, at }], // latest 40 readable keeps
+  floors: { [floorId]: { source, pieces: [placement], filled: bool, proofs: [proof], at, earlier: [floor] } },
+  proof: { source, tried: bool, reasonSeen: bool, support, at } | null
 }
+attempt: { id, source, prediction: 'yes' | 'no' | null, folded: bool, result?, base: squareId | null, support, priorReveal: bool, at }
+proof: { source, pieces: [placement], filled: bool, support, at }
 ```
 
-- A prediction is stored once and never changed by the fold. A second visit can predict again on a fresh copy.
-- Validate ids, positions and turn values. `filled` and `folds` are set when the child places or folds, never recomputed on load.
-- Export, import, reset and explorer switching include `shapes`.
+- `source` freezes the understood table/model/version and its finite piece and domain geometry, coordinate/turn/flip conventions, target/net/base identities, check rules and displayed task/help/reason text (at most 16 KiB per source). The selected table's commissioning gate supplies its exact finite placement bounds; saved geometry is not interpreted using a changed table. Sources are data for a known bounded model, not executable instructions.
+- A prediction is initially absent (`null`), then committed once before folding and never changed by the fold. **Try another prediction** explicitly keeps the completed or partial current attempt and starts a new id with the same frozen net source; the earlier prediction/result remains visible. Keep at most eight readable earlier attempts per net, rolling over only on that explicit action with notice. Preserve whether the answer/reason was already revealed and any help shown; a new copy does not establish an unseen independent attempt. Do not silently replace the sole prediction on return.
+- Validate ids, positions and turns against their own source. `filled`, `folds` and recorded fold results are set at the child's place/fold action, never recomputed on load. Each optional kept window/floor proof freezes its placements/source/support/result; editing labels the current arrangement untested while retaining the historical proof. Keep at most four readable proofs per puzzle, with disclosed rollover on the explicit keep. Own-net keeps freeze the six cells, model and fold result actually tried; keeping an untried drawing invents no fold result.
+- Unknown model/ids, malformed placements and unreadable attempts remain exact, read-only and exportable at that entry; other readable work stays open. Never delete them, change a saved success to false or filter-install a cleaned root on load. An explicit fresh supported window/floor/box retains the complete prior entry in `earlier`. Neither the latest-40 own-net policy nor the readable attempt/proof caps evict unsupported siblings.
+- Preflight new sources, attempts, proof/own-net keeps and retained fresh versions against the actual pretty `notesReport` export and `prepareProgressImport` whole-notebook limits. If retention would not fit, refuse atomically with existing export/reset choices; do not trim on load. Export, import, reset, save-off and explorer switching include the complete raw `shapes` root through the existing generic notebook transfer.
 
 ## Curriculum fit
 

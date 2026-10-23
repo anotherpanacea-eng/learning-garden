@@ -1,6 +1,8 @@
 # 128. Out and About: off-screen missions for every place
 
-Status: **proposed; awaiting independent spec review and a child-safety read of every card.** Part of the [new kinds of play proposal](../new-game-kinds.md). Applies across [spec 120](120-keeper-of-the-ways.md)'s town and festivals. Every card is in [the companion text](../content/128-out-and-about-text.md); this spec holds the card format, where cards appear and what is (and isn't) kept.
+Status: **proposed; awaiting independent spec review and a child-safety read of every card.** Part of the [new kinds of play proposal](../new-game-kinds.md). Applies across [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md)'s town and festivals. Every card is in [the companion text](../content/128-out-and-about-text.md); this spec holds the card format, where cards appear and what is (and isn't) kept.
+
+**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
 
 ## Purpose
 
@@ -20,7 +22,7 @@ The game never knows whether a mission happened. It never asks for proof, a phot
 | Come-back question | One open question to talk about together. Never quiz-shaped; no answer is stored or checked. |
 | Needs | Small icons: paper, kitchen, outdoors, a grown-up, a friend or family member. |
 
-Cards are written for any age in the explorer's horizon. The same card works for a younger child with a grown-up doing more, and for an older one doing more alone. Cards never assume a garden, pets, siblings, money or a particular home.
+Cards are written for any age in the explorer's horizon. A grown-up chooses what is suitable and handles the actions named in the card's grown-up line; the bank does not automatically remove that support for older children. Cards never assume a garden, pets, siblings, money or a particular home.
 
 ## Where cards appear
 
@@ -35,25 +37,27 @@ Cards never appear before a task, never interrupt one, and never block anything.
 
 Nothing about whether a mission was done. Two small things are allowed:
 
-- **Later list.** **Save for later** puts a card's id on a short list on the Out and About page (latest 12). Removing it is one tap. The list says *ideas to try*, never *to do*.
-- **We tried it.** A button on every card that opens its come-back question and then closes. It stores nothing.
+- **Later list.** **Save for later** puts a card's id on a short list on the Out and About page (latest 12 supported ids). Removing it is one tap. The list says *ideas to try*, never *to do*. Any rollover is disclosed at that explicit save; nothing is trimmed on load.
+- **We tried it.** A button on every card that opens its come-back question and then closes. It stores nothing, including no done/seen flag, timestamp, exposure record, answer or observation.
 
 ```
 outAndAbout: { later: [cardId] }    // latest 12, ids only
 ```
 
-Validate ids against the card bank; unknown ids are dropped on read without rewriting. Export, import, reset and explorer switching include `outAndAbout`.
+Validate visible ids against the current reviewed card bank. Unknown ids remain exact in the stored root and export; omit them from the active card list with an unavailable-card notice, without installing a filtered list or substituting another card. Explicit save/remove actions change only the selected supported ids and do not evict unknown entries or fields. Newly saved ids must be stable card-bank ids, at most 80 characters; unsupported imported strings are not truncated. Preflight an explicit list change against the actual pretty `notesReport` export and `prepareProgressImport` whole-notebook limits; refuse atomically with existing export/reset choices if it would not fit.
+
+Export, import, reset, save-off and explorer switching include the complete raw `outAndAbout` root through the existing generic notebook transfer. Unknown imported fields (including journal, done or verified flags) stay inert, read-only and exportable; they do not become mission completion, an observation or an active journal. This spec adds no private journal and does not exclude opaque imported data from a child/adult's explicit whole-notebook export.
 
 No mission contributes to the story, a chapter, a festival job or any observation record. A future spec may add an adult-reported observation for one card, as spec 49 allows; this one does not.
 
 ## Safety rules for every card
 
 - No card asks a child to go anywhere alone, outdoors or out of sight of home, or to talk to strangers.
-- No card uses heat, sharp tools, mains electricity or chemicals. Kitchen cards say a grown-up is in charge.
+- No mission asks a child to use heat, sharp tools, mains electricity or chemicals. A grown-up prepares any pre-cut paper/card or food; kitchen missions use cold assembly and put the grown-up in charge.
 - Animal cards are look-don't-touch, and never involve stinging, biting or wild animals beyond garden minibeasts; minibeasts go back where they were found.
 - Plants are never tasted unless a grown-up has grown or bought them as food.
 - Water cards never involve open water such as ponds, rivers or the sea.
-- No card asks for photos, uploads, names, addresses, or anything said about other people.
+- No card collects or requests proof, photos, uploads, names, addresses or private accounts about other people. Come-back prompts are optional spoken conversations at home, with no answer field and nothing sent or stored.
 - Cards with torches or lights say batteries only and never looking into a light.
 
 A child-safety read of the whole bank is a build blocker.
@@ -61,6 +65,8 @@ A child-safety read of the whole bank is a build blocker.
 ## The bank
 
 The companion holds **61 cards** across the garden's places: the invitations already written in specs 115 to 127, gathered and given the card fields, plus new cards for older destinations (the café and Measuring Kitchen, Willow Post Office, the Story Loft, Paris and the French letters, the riddles, the Water Lab and Rain Paths, the Cartographer's Table, Bell Studio, the Lantern Circuit Bench, the living-things and fossil destinations, the Word Garden, the Keeper's Pages) and for each festival.
+
+**Catalog authoring gate:** before commissioning, map every section/card to an explicit stable route or festival ID and a fixed needs set; the headings and icons here are proposed display copy, not an implicit route parser. A card's alternate indoor/window version must have matching needs. Where a card is copied from another proposal, these reviewed cards govern the eventual128 presentation; neither copy makes it a built destination. The child-safety read must inspect the actual final card bank after repairs, including each grown-up line and optional spoken question. Source checks also remain open for experiment claims; no off-screen outcome is guaranteed.
 
 ## Curriculum fit
 
