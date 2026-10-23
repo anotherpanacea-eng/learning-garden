@@ -1,6 +1,6 @@
 # 110 — Write what remains
 
-**Status: specification candidate; independent spec, mathematics, content and rendered static-art review required before runtime build.** Base: main `c022b060` (includes reviewed Join writing turn 107). [Source/overlap audit](../source-audits/110-write-what-remains.md). Original static design frames: [320 opened](assets/110-remains-opened-320.svg), [320 finished](assets/110-remains-finished-320.svg), [820 opened](assets/110-remains-opened-820.svg), [820 finished](assets/110-remains-finished-820.svg), [320 no-exchange](assets/110-remains-steady-320.svg), [820 no-exchange](assets/110-remains-steady-820.svg). These drawings are proposals, not browser/runtime verification.
+**Status: implementation-review candidate. Independent specification, mathematics, content and static-art gates cleared exact `f2ede9665d59c8c3c1da272a592ee1ccb0c53fb4`, including the focused target-exposure repair. Implementation review remains pending; no release is approved.** Base: main `c022b060` (includes reviewed Join writing turn 107). [Source/overlap audit](../source-audits/110-write-what-remains.md). Original static design frames: [320 opened](assets/110-remains-opened-320.svg), [320 finished](assets/110-remains-finished-320.svg), [820 opened](assets/110-remains-opened-820.svg), [820 finished](assets/110-remains-finished-820.svg), [320 no-exchange](assets/110-remains-steady-320.svg), [820 no-exchange](assets/110-remains-steady-820.svg). These drawings are proposals, not browser/runtime verification.
 
 ## One supplied strategy, beside the old return
 
