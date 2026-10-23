@@ -50,6 +50,7 @@ export function validJoiningOrders(root){
 }
 export function joiningState(state){return Object.hasOwn(state,'joiningOrders')?validJoiningOrders(state.joiningOrders)?state.joiningOrders:null:undefined;}
 export function joiningHistoryUnknown(state){return Object.hasOwn(state,'joiningOrders')&&(joiningState(state)===null||Object.hasOwn(state.joiningOrders,'recovered'));}
+// Exact complete bundle examples displayed in either Join picture or its written-ledger turn.
 export function noteJoiningExamples(state,signatures){if(!Object.hasOwn(state,'joiningOrders')||!list(signatures,s=>joiningBundleSignatures.includes(s)))return false;const root=joiningState(state);if(!root)return false;let changed=false;for(const signature of signatures)if(!root.shownBundleExamples.includes(signature)){root.shownBundleExamples.push(signature);changed=true;}return changed;}
 export function joiningView(state){const root=joiningState(state);if(root===null)return {unsupported:true,raw:state.joiningOrders};if(root===undefined)return {absent:true};const work=root.cases[root.currentCase];return {root,work,source:work.source,model:work.model,feedback:work.history.find(h=>h.id===work.feedbackId)||null,priorExposureUnknown:Object.hasOwn(root,'recovered')};}
 function initialModel(source){return {joined:false,loosePip:4,looseDot:source.dot%10,framePip:0,frameDot:0,newTenPip:0,newTenDot:0};}

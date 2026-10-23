@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Write the Same Sum: original two-turn mock</title>
+<style>
+:root{font:17px/1.35 system-ui,sans-serif;color:#183f39;background:#fafaf6}
+*{box-sizing:border-box}body{margin:0}main{max-width:850px;margin:auto;padding:12px}
+h1,h2,h3,p{margin:0 0 9px}h1{font:800 clamp(1.65rem,4vw,2.2rem)/1.1 Georgia,serif}
+h2{font:800 1.2rem Georgia,serif}h3{font:800 1rem Georgia,serif}
+.back{display:inline-flex;align-items:center;min-height:44px;color:#183f39}
+.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#426453}
+.lead{font-size:1rem;font-weight:600}.note{font-size:.83rem;color:#385851}
+.source-line{border-left:5px solid #397958;padding:6px 10px;background:#eef5e9}
+.panel{background:#fffdf5;border:2px solid #b5c8b4;border-radius:15px;padding:12px;margin:10px 0}
+button,summary{font:700 .9rem system-ui,sans-serif;color:#183f39}
+button{min-height:44px;padding:8px 11px;border:1px solid #9bb8a8;border-radius:9px;background:#fff;white-space:normal}
+button.primary,.turns button[aria-current="page"]{background:#183f39;color:#fff}
+button[disabled]{color:#6f827b;background:#f1f4ec}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #ac632a;outline-offset:2px}
+.turns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+details summary{min-height:44px;padding:10px 3px;cursor:pointer}
+.group{border:1px solid #bfd1bd;border-radius:10px;padding:8px;margin:6px 0;background:#f2f7ed}
+.group.pip{border-left:5px solid #ad6d41}.group.dot{border-left:5px solid #4f748f}
+.group h3{margin-bottom:4px}.marks{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.mark{display:inline-block;width:14px;height:14px;border:2px solid #734927;border-radius:4px;background:#e2ba8a}
+.mark.dot{border-color:#305874;background:#b7d3e1;transform:rotate(45deg);border-radius:2px}
+.bundle{display:inline-flex;flex-wrap:wrap;width:82px;gap:2px;padding:4px;border:2px solid #536b57;border-radius:7px;background:#fafff1}
+.bundle .mark{width:12px;height:12px}.tray{border:2px dashed #839d85;border-radius:10px;padding:8px;background:#fff}
+.compact-picture{border:2px solid #8ba98e;border-radius:12px;padding:8px;background:#f6f9f1;margin:8px 0}
+.compact-picture .group{padding:5px;margin:5px 0}.compact-picture .group h3{font:800 .83rem system-ui,sans-serif}
+.compact-picture .bundle{width:59px;gap:1px;padding:3px}
+.compact-picture .bundle .mark{width:9px;height:9px;border-width:1px}
+.compact-picture .marks{gap:4px}
+.stage{background:#eef5e9;border-left:5px solid #397958;padding:8px;margin:9px 0}
+.carry{font-size:.84rem;font-weight:800;color:#64410d;background:#fff0c8;border-radius:9px;padding:7px;margin:6px 0}
+.ledger{border-collapse:collapse;width:100%;max-width:345px;table-layout:fixed;text-align:center;font-variant-numeric:tabular-nums}
+.ledger th,.ledger td{border:1px solid #c4d2c4;padding:5px 3px;width:38%;font-size:1.4rem}
+.ledger th{font:800 .84rem system-ui,sans-serif;background:#edf3e8}
+.ledger th:first-child,.ledger td:first-child{width:24%;font:700 .84rem system-ui,sans-serif;text-align:left}
+.ledger tr.result td{border-top:3px solid #183f39;background:#edf3e8;font-weight:900}
+.empty{color:#6b776a}.writing-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px}
+.writing-layout>*{min-width:0}
+@media(max-width:680px){.writing-layout{grid-template-columns:1fr}main{padding:10px}.panel{padding:10px}}
+</style>
+</head>
+<body><main>
+<a class="back" href="#">← Return to the joining table</a>
+<p class="eyebrow">Bundle Burrow · optional writing picture</p>
+<h1>Write the Same Sum</h1>
+<p class="source-line" id="source-line"></p>
+<details><summary>Read the original order request</summary><p id="request"></p></details>
+<div class="turns" role="group" aria-label="Writing picture turn">
+<button type="button" id="picture-turn">Picture</button><button type="button" id="write-turn">Write</button>
+</div>
+<section class="panel" id="picture-pane" hidden>
+<h2 tabindex="-1">Picture the same counters</h2>
+<p class="note">This fresh picture starts again when you leave. Your joining table stays as you left it.</p>
+<div id="full-picture"></div><p class="stage" id="picture-caption"></p>
+<div class="controls" id="model-controls"></div>
+</section>
+<section class="panel" id="write-pane" hidden>
+<h2 tabindex="-1">Put this picture into places</h2>
+<p class="note">The compact picture shows these same counters, not more counters. Each column names a place.</p>
+<div class="writing-layout">
+<div><div class="compact-picture" id="compact-picture"></div><p class="stage" id="write-caption"></p></div>
+<div><div id="carry"></div><table class="ledger" aria-label="Aligned tens and ones">
+<thead><tr><th>Order</th><th>Tens</th><th>Ones</th></tr></thead><tbody id="ledger-rows"></tbody></table>
+<p id="line-note" class="stage"></p><div class="controls" id="digit-controls"></div></div>
+</div>
+<details><summary>Talk about what changed</summary><p id="talk"></p></details>
+</section>
+<p class="note">Original visual mock for specification review. Its query-selectable states show intended copy and control bounds; this is not the working lesson.</p>
+</main>
+<script>
+const query=new URLSearchParams(location.search);
+const exchange=query.get('case')!=='steady';
+const requestedStage=['separate','joined','wrapped','ones','finished'].includes(query.get('stage'))?query.get('stage'):'wrapped';
+const stage=!exchange&&requestedStage==='wrapped'?'joined':requestedStage;
+const turn=query.get('view')==='write'?'write':'picture';
+const dot=exchange?17:13,ones=exchange?7:3,result=exchange?41:37;
+const wrapped=exchange&&['wrapped','ones','finished'].includes(stage);
+const joined=stage!=='separate',onesPlaced=['ones','finished'].includes(stage),tensPlaced=stage==='finished';
+const mark=(origin,n)=>Array.from({length:n},()=>'<span class="mark '+origin+'" aria-hidden="true"></span>').join('');
+const bundle=(pip,dot)=>'<span class="bundle" role="img" aria-label="Ten counter bundle: '+pip+' Pip and '+dot+' Dot">'+mark('pip',pip)+mark('dot',dot)+'</span>';
+const originals=bundle(10,0)+bundle(10,0)+bundle(0,10);
+const group=(label,content,kind='')=>'<section class="group '+kind+'"><h3>'+label+'</h3><div class="marks">'+content+'</div></section>';
+const separate=group('Pip: 2 tens and 4 ones',bundle(10,0)+bundle(10,0)+mark('pip',4),'pip')+group('Dot: 1 ten and '+ones+' ones',bundle(0,10)+mark('dot',ones),'dot');
+const together=group('Original tens: 2 Pip, 1 Dot',originals)+(wrapped?group('One new ten: 4 Pip, 6 Dot',bundle(4,6))+group('Loose: 1 Dot one',mark('dot',1)):group('Ones working tray: '+(4+ones),mark('pip',4)+mark('dot',ones)));
+const currentPicture=joined?together:separate;
+document.getElementById('source-line').textContent='Pip: 24 counters. Dot: '+dot+' counters.';
+document.getElementById('request').textContent="Pip's order has 24 seed counters. Dot's order has "+dot+" seed counters. Join both orders. How many individual counters are there altogether?";
+document.getElementById('full-picture').innerHTML=currentPicture;
+document.getElementById('compact-picture').innerHTML=currentPicture;
+const captions=exchange?{
+ separate:'Pip has two tens and four ones. Dot has one ten and seven ones. Their written numbers line up in tens and ones places.',
+ joined:'Four ones and seven ones make eleven ones. Ten of them can become one new ten.',
+ wrapped:'Ten of the same eleven ones are now one new ten. One Dot one stays loose. No counter was added or lost.',
+ ones:'The one loose Dot counter puts 1 under ones. The new bundle waits with the tens.',
+ finished:'Two Pip tens, one Dot ten and the new ten make four tens. The same counters read 24 + 17 = 41.'
+}:{
+ separate:'Pip has two tens and four ones. Dot has one ten and three ones. Their written numbers line up in tens and ones places.',
+ joined:'Four ones and three ones make seven ones. Seven ones cannot make a new ten.',
+ wrapped:'Four ones and three ones make seven ones. Seven ones cannot make a new ten.',
+ ones:'The seven ones in the picture put 7 under ones. The original tens are still waiting.',
+ finished:'Two Pip tens and one Dot ten make three tens. The same counters read 24 + 13 = 37.'
+};
+document.getElementById('picture-caption').textContent=captions[stage];
+document.getElementById('write-caption').textContent=captions[stage];
+document.getElementById('carry').innerHTML=wrapped?'<p class="carry">+1 ten from ones: the same wrapped bundle joins the tens.</p>':'';
+document.getElementById('ledger-rows').innerHTML='<tr><td>Pip</td><td>2</td><td>4</td></tr><tr><td>+ Dot</td><td>1</td><td>'+ones+'</td></tr><tr class="result"><td>=</td><td>'+(tensPlaced?(exchange?4:3):'<span class="empty">□</span>')+'</td><td>'+(onesPlaced?(exchange?1:7):'<span class="empty">□</span>')+'</td></tr>';
+document.getElementById('line-note').textContent=tensPlaced?'Supplied writing: 24 + '+dot+' = '+result+'.':onesPlaced?(exchange?'Ones line: 4 + 7 = 11; 10 become 1 ten, leaving 1 one.':'Ones line: 4 + 3 = 7 ones.'):joined?'Ones to consider: 4 + '+ones+' = '+(4+ones)+'. The result places are still blank.':'The source rows are aligned. Join the ones to begin.';
+document.getElementById('model-controls').innerHTML=stage==='separate'?'<button class="primary">Join the ones</button><button>Hear this step</button>':'<button'+(stage!=='joined'||onesPlaced?' disabled':'')+'>Separate the ones again</button>'+(exchange?'<button'+(stage==='joined'?'':' disabled')+'>Wrap ten of these ones</button><button'+(wrapped&&!onesPlaced?'':' disabled')+'>Unwrap the new ten</button>':'<button disabled>Seven ones cannot fill a ten</button>')+'<button>Hear this step</button>';
+document.getElementById('digit-controls').innerHTML='<button'+((exchange?!wrapped:!joined)||onesPlaced?' disabled':'')+'>Place the ones digit from this picture</button><button'+(onesPlaced&&!tensPlaced?'':' disabled')+'>Lift the ones digit</button><button'+(onesPlaced&&!tensPlaced?'':' disabled')+'>Place the tens digit from this picture</button><button'+(tensPlaced?'':' disabled')+'>Lift the tens digit</button><button>Hear this step</button>';
+document.getElementById('talk').textContent=exchange?'What did the new ten change in the picture and in the written tens place? What stayed the same?':'Why did the ones stay as seven? What did joining change without making a new ten?';
+function setTurn(which){
+ document.getElementById('picture-pane').hidden=which!=='picture';
+ document.getElementById('write-pane').hidden=which!=='write';
+ for(const name of ['picture','write'])document.getElementById(name+'-turn').setAttribute('aria-current',name===which?'page':'false');
+}
+setTurn(turn);
+for(const name of ['picture','write'])document.getElementById(name+'-turn').onclick=()=>{
+ setTurn(name);
+ document.querySelector('#'+name+'-pane h2').focus();
+};
+</script>
+</body></html>

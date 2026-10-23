@@ -1,6 +1,6 @@
 # 98 · Lantern Circuit Bench: a path through the bulb
 
-**Specification/content/rendered-art gates cleared at `1365930` after focused independent internal and external Claude follow-up. Runtime is being implemented; separate exact-head implementation and release review remain required.** Base main `d0535c3394734594ffa07db99a1364e83bbaa88a`. See [source/overlap audit](../source-audits/98-lantern-circuit-bench.md) and the [original cutaway mock](assets/98-lantern-circuit.svg). No implementation, atlas reference, merge or publication is claimed.
+**Status: specification/content/rendered-art and implementation/release reviews cleared; merged in [PR103](https://github.com/anotherpanacea-eng/learning-garden/pull/103).** See the [review receipt](../reviews/98-lantern-circuit-review.md), [source audit](../source-audits/98-lantern-circuit-bench.md) and [original cutaway mock](assets/98-lantern-circuit.svg). The [current roadmap](../roadmap.md) tracks publication separately. No atlas reference or physical-circuit result follows.
 
 ## A new science action
 

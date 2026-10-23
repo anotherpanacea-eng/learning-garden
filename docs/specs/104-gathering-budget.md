@@ -1,6 +1,6 @@
 # Gathering Budget: choose a plan for a pretend welcome
 
-**Status:** specification independently cleared before build. Independent implementation review and its sole price-visibility fix cleared at `bbc1696`; the composed candidate now awaits final exact-head release review. No deployment is claimed.
+**Status:** specification/content/art and implementation/release reviews cleared; merged in [PR109](https://github.com/anotherpanacea-eng/learning-garden/pull/109). Deployment remains separate.
 
 ## Problem and bounded action
 

@@ -1,6 +1,6 @@
 # Living Garden: how two bodies move
 
-Status: **independently reviewed specification and art; implementation candidate awaits separate review**. [Source and overlap audit](../source-audits/97-body-movement-bench.md); [original six-frame art mock](assets/97-body-movement-frames.svg). No atlas change, merge or deployment is claimed.
+**Status: implemented, independently reviewed and merged in [PR101](https://github.com/anotherpanacea-eng/learning-garden/pull/101).** [Source and overlap audit](../source-audits/97-body-movement-bench.md) · [original art mock](assets/97-body-movement-frames.svg) · [review receipt](../reviews/97-body-movement-review.md). The [current roadmap](../roadmap.md) records separate mapping and publication status; this specification itself adds no atlas reference.
 
 ## Purpose and boundary
 
