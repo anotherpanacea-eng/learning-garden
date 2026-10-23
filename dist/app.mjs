@@ -70,6 +70,7 @@ import {notePendingBrambleFactExposure} from './post-rival.mjs';
 import {ensureWorkshop} from './workshop-core.mjs';
 import {workshopPage,bindWorkshop} from './workshop-ui.mjs';
 import {resetRecutSession} from './ribbon-recut-ui.mjs';
+import {resetGatheringBudget} from './gathering-budget-ui.mjs';
 import {learningInvitations,learningExplore} from './learning-invitations.mjs';
 import {orderValue} from './paris-pack-core.mjs';
 import {ensureForage} from './forage-core.mjs';
@@ -242,6 +243,7 @@ function render(){
   if(root!=='numbers'||slug!=='path')resetWillowVoice();
   if(root!=='archive'||slug!=='labels'||choosingExplorer)resetLabelTurn();
   if(root!=='workshop'||slug!=='recut'||choosingExplorer)resetRecutSession();
+  if(root!=='workshop'||slug!=='budget'||choosingExplorer)resetGatheringBudget();
   if(root!=='cafe'||slug!=='portions'||choosingExplorer)resetPortionsSession();
   if(root!=='living'||slug!=='fossils'||choosingExplorer)resetFossilSession();
   const groupBench=['cafe','post'].includes(root)&&slug==='groups',groupPlace=root==='cafe'?'cafe':'bramble';
@@ -308,8 +310,8 @@ function render(){
   }
   else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:otherLiving;}
   else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry();
-  else if(root==='workshop')html=slug==='recut'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
-  else if(root==='explore')html=learningExplore(graph);
+  else if(root==='workshop')html=slug==='recut'||slug==='budget'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
+  else if(root==='explore')html=learningExplore(graph,slug);
   else if(root==='science'){
     html=slug==='window'?coldWindowPage():slug==='evidence'?evidenceShelfPage(explorerStore.active.id):slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);
     if(!['evidence','window'].includes(slug))html+=rainPathsEntry()+measurementEntry();
@@ -358,6 +360,7 @@ function render(){
 }
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
 function focusElement(selector){const element=$(selector);if(element){if(!element.matches('a[href],button,input,select,textarea,summary,[tabindex]'))element.tabIndex=-1;element.focus();}}
+function focusExploreStart(){if(!choosingExplorer&&(location.hash||'').slice(1).split('/')[0]==='explore'){focusElement('#explore-title');return true;}return false;}
 function rerenderActivity(){const input=$('#answer');if(input)active.input=input.value;syncDraft();render();}
 function openTaskLibrary(selected){return `<section class="panel broad-open-invites"><h2>Questions with room for your ideas</h2><p>Wonder, estimate, invent, and explain together. These invitations have no scored answer.</p><div class="open-task-links">${openTasks().filter(t=>!areaById(selected)||t.area===selected).map(t=>`<a class="secondary" href="#wonder/${t.id}">${esc(t.title)}</a>`).join('')}</div></section>`;}
 function notesReport(notebook){return {title:'After the Storm: observations',exportedAt:new Date().toISOString(),note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:explorerStore.active.avatar,color:explorerStore.active.color,symbol:explorerStore.active.symbol},recommendation:recommendations(notebook),...notebook};}
@@ -365,7 +368,7 @@ function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
 function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
 function useExplorer(next,destination='#home'){
- if(!next)return;stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetPortionsSession();resetFossilSession();state=next;initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
+ if(!next)return;stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();state=next;initializeExplorerState(state);setSpeechPreferences(state.garden.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
  if(destination!=='#notes')playFilm('welcome');
 }
@@ -586,12 +589,13 @@ function bindStory(){
  $('#story-project-next')?.addEventListener('click',()=>finishStory());
 }
 function renderPuzzleEnd(q,o){main.innerHTML=`${heading('An idea to keep.','You made room for a little wondering.')}<section class="summary-callout"><h2>${esc(q.title)}</h2><p>${esc(describe(o))}. ${o.status==='skipped'?'You can return to this puzzle whenever you like.':esc(q.talk)}</p><div class="summary-links"><a href="#puzzles" class="primary">Choose another puzzle</a><a href="#home" class="secondary">Back to the garden</a></div></section>`;main.focus();}
- function showReset(){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>Start with a fresh page?</h2><p>This clears this explorer’s garden, café, stories, practice, guide and character choices, and notes. Other explorers stay in place. Earlier shared copies can be removed separately from notes. Download your notes first if you want to keep them.</p><div class="dialog-actions"><button class="secondary" id="cancel-reset">Keep our progress</button><button class="primary danger" id="confirm-reset">Clear progress</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('#cancel-reset').onclick=()=>d.close();d.querySelector('#confirm-reset').onclick=()=>{stopBell('reset');resetSpeechPreferences();resetEvidenceShelf();resetPortionsSession();resetFossilSession();state=explorerStore.clearActive();ensurePlantings(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);practiceSession=null;activity=null;active=null;screen='';save();d.close();navigate('#home');};d.addEventListener('close',()=>d.remove());}
- document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(a?.getAttribute('href')==='#main'){event.preventDefault();main.focus();return;}if(a&&a.getAttribute('href')===location.hash){event.preventDefault();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();main.focus();window.scrollTo(0,0);}});
- window.addEventListener('hashchange',()=>{cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();main.focus();window.scrollTo(0,0);});
+ function showReset(){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>Start with a fresh page?</h2><p>This clears this explorer’s garden, café, stories, practice, guide and character choices, and notes. Other explorers stay in place. Earlier shared copies can be removed separately from notes. Download your notes first if you want to keep them.</p><div class="dialog-actions"><button class="secondary" id="cancel-reset">Keep our progress</button><button class="primary danger" id="confirm-reset">Clear progress</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('#cancel-reset').onclick=()=>d.close();d.querySelector('#confirm-reset').onclick=()=>{stopBell('reset');resetSpeechPreferences();resetEvidenceShelf();resetGatheringBudget();resetPortionsSession();resetFossilSession();state=explorerStore.clearActive();ensurePlantings(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);practiceSession=null;activity=null;active=null;screen='';save();d.close();navigate('#home');};d.addEventListener('close',()=>d.remove());}
+ document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(a?.getAttribute('href')==='#main'){event.preventDefault();main.focus();return;}if(a&&a.getAttribute('href')===location.hash){event.preventDefault();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);}});
+ window.addEventListener('hashchange',()=>{cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);});
  $('#privacy-button').onclick=()=>$('#about-dialog').showModal();
 noteInstructionArrival();
  render();
+ focusExploreStart();
 
 // Films play once per explorer: the storm film on a first visit, and a short film at three story endings.
 // Watching one is not learning evidence.

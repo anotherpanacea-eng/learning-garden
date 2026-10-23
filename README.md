@@ -484,3 +484,15 @@ Run `node test/join-portions-checks.mjs`; the optional `node test/join-portions-
 At `#living/fossils`, inspect two real, credited public-domain photographs, enlarge a marked region, and pin one visible clue from each into a revisable comparison. The supplied source interpretation distinguishes a body-form fossil from a fossilized footprint; photographs, source-page dates and unknowns stay separate. This transient nature-corner activity adds no saved work, grade, evidence or inventory. See [spec 106](docs/specs/106-fossil-close-look.md), its [source audit](docs/source-audits/106-fossil-close-look.md) and the [current roadmap](docs/roadmap.md) for publication status.
 
 Run `node test/fossil-close-checks.mjs`; optional `node test/fossil-close-browser.js` uses `FOSSIL_TEST_URL` for a local `dist/` server and the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` settings. Actual local checks cover source-region geometry, native interaction, visible-only narration, failed-image pin refusal and notes transfer with fictional pending work; they do not establish physical-device compatibility or independent fossil identification.
+
+## Gathering Budget
+
+At `#workshop/budget`, choose packets for one of two pretend gathering requests. The pictured basket shows supplied units and cost; checking a plan separately reports whether it meets the request, fits the limit, and matches an optional cost idea. Several baskets work. This is a transient table, with no saved budget, rewards, or judgment about real family choices. See [spec 104](docs/specs/104-gathering-budget.md) and its [source audit](docs/source-audits/104-gathering-budget.md) and [review receipt](docs/reviews/104-gathering-budget-review.md).
+
+Run `node test/gathering-budget-checks.mjs`. With `dist` served locally and Playwright/Chrome installed, `GATHERING_TEST_URL=http://127.0.0.1:4198/ node test/gathering-budget-browser.js` checks the two requests, four fit combinations, touch controls, local notes isolation and import. `PLAYWRIGHT_MODULE`, `CHROME_PATH` and `GATHERING_ARTIFACTS` select local browser dependencies and temporary screenshots.
+
+## Questions to follow
+
+The Explore doorway now offers four open questions about water, sharing, words and garden neighbors. Each leads to three existing activities with a reason to visit and a contrast to discuss. The complete twelve-place directory, scoped topic disclosures and grown-up learning map remain under All places. The doorway introduces no progress record or prerequisite rule. See [spec105](docs/specs/105-explore-questions-doorway.md), its [source audit](docs/source-audits/105-explore-questions-doorway.md) and [review receipt](docs/reviews/105-explore-questions-review.md).
+
+The optional `node test/explore-questions-browser.mjs` uses `EXPLORE_TEST_URL` for a locally served `dist`, installed Playwright through `PLAYWRIGHT_MODULE`, and optionally `CHROME_PATH` and `EXPLORE_ARTIFACTS`. It checks the real question routes, directory, focus, paused work and synthetic notes download/import at phone/tablet widths.
