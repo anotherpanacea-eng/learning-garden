@@ -99,6 +99,14 @@ All rows below are in main through PR98. Component PR links preserve the focused
 | [Courier Clock Walk PR97](https://github.com/anotherpanacea-eng/learning-garden/pull/97) | Move a coupled clock along a supplied minute line; distinguish reaching an arrival from naming elapsed time. | Six known-endpoint five-minute cards within an hour, not arbitrary minutes or a full time curriculum. |
 | [Egyptian writing objects PR99](https://github.com/anotherpanacea-eng/learning-garden/pull/99) | Read about a reusable board and writing palette through two credited museum records, three lengths and passage-based questions. | Two objects, not an Ancient Egypt course. Museum interpretation, modern summary and surviving evidence remain distinct. |
 
+## Games Table increments
+
+- **Built and released:** Seed Pile (spec129), with three take-away rules, adjustable Bramble and supplied strategy explanations.
+- **Implemented in the next review candidate:** [Shutters (spec130)](specs/130-shutters.md), a solo six-/nine-shutter dice box. Multiple decompositions, reversible choices and chance revisit quantity from a different purpose. Publication remains a separate release decision.
+- **Next candidate:** two-row Ribbon Rows, then its three-row bundle contrast after a bounded model/content review. Seed Holes and Hex remain later drafts in PR128; their presence in the proposal does not commission them.
+
+These games offer mathematical choices and discussion; game endings do not complete a topic, strand or act.
+
 ## Built footholds and the missing middle
 
 These are selected merged-code examples. Their specifications give exact task limits; no whole strand or act is complete.

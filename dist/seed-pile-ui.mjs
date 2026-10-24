@@ -1,3 +1,4 @@
+import {gamesTableNav} from './shutters-ui.mjs';
 import {pileRules,pileDials,pileSource} from './seed-pile-content.mjs';
 import {gamesView,pilePosition,newPileGame,takePile,brambleTake,startPile,movePile,explainPile,keepPileNote,resumePile,removePileRecord,readablePileNote,validPileSource} from './seed-pile-core.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -28,7 +29,7 @@ export function pilePage(state,owner){
  if(!visit||visit.state!==state||visit.owner!==owner)visit={state,owner,page:'game',practice:null,remove:null,message:''};
  const v=gamesView(state),g=v.current;
  const content=visit.practice?board(visit.practice,true):visit.page==='lesson'?lesson(v):visit.page==='setup'||!g?setup(v):board(g);
- return `<section class="pile-page" data-pile-root><a class="back" href="#orchard">Back to the Orchard</a>${v.unsupported||v.root?.current&&!g?'<p class="pile-warning">An earlier Games Table record is kept unchanged in your download. Starting a new game will retain it.</p>':''}${content}${visit.remove?'<div class="pile-confirm" role="group" aria-label="Remove this record?"><p>Remove this one record? Download your notes first if you want to keep it. The current game and other places stay here.</p><button type="button" data-pile-confirm>Remove this record</button><button type="button" data-pile-cancel>Keep it</button></div>':''}<p id="pile-status" role="status" tabindex="-1">${esc(visit.message)}</p>${!v.unsupported?history(v.root):''}<p class="tiny">No timer. No running score. You can leave and return to your pile.</p></section>`;
+ return `<section class="pile-page" data-pile-root><a class="back" href="#orchard">Back to the Orchard</a>${gamesTableNav('pile')}${v.unsupported||v.root?.current&&!g?'<p class="pile-warning">An earlier Games Table record is kept unchanged in your download. Starting a new game will retain it.</p>':''}${content}${visit.remove?'<div class="pile-confirm" role="group" aria-label="Remove this record?"><p>Remove this one record? Download your notes first if you want to keep it. The current game and other places stay here.</p><button type="button" data-pile-confirm>Remove this record</button><button type="button" data-pile-cancel>Keep it</button></div>':''}<p id="pile-status" role="status" tabindex="-1">${esc(visit.message)}</p>${!v.unsupported?history(v.root):''}<p class="tiny">No timer. No running score. You can leave and return to your pile.</p></section>`;
 }
 export function pileNotes(state){
  if(!Object.hasOwn(state,'games'))return '';
