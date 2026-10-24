@@ -58,11 +58,12 @@ with sync_playwright() as pw:
    # New rule and last-loses finish: first child take3 from5, rival leaves1, child loses.
    p.locator('[data-pile-new]').click();p.locator('[name=variant]').select_option('pile-last-loses');p.locator('[name=start]').fill('5');p.locator('[name=dial]').select_option('attention');p.locator('[data-pile-form] button[type=submit]').click()
    p.locator('[data-pile-take="3"]').click();p.locator('[data-pile-bramble]').click();ok(notebook(p)['games']['current']['moves'][-1]['take']==1,'attention leaves last seed');ok(p.locator('[data-pile-take="2"]').is_disabled(),'cannot take more than remains');p.locator('[data-pile-take="1"]').click();ok('Bramble wins' in p.locator('#pile-turn').inner_text(),'last seed loses')
+   p.locator('[data-pile-new]').click();ok(p.locator('[name=variant]').input_value()=='pile-last-loses','play again retains rule');ok(p.locator('[name=start]').input_value()=='5','play again retains pile');ok(p.locator('[name=dial]').input_value()=='attention','play again retains rival strength');p.locator('[data-pile-back]').click()
    p.locator('[data-pile-explain]').click()
    for i in range(3):p.locator('[data-pile-step="'+str(i+1)+'"]').click()
    p.locator('[data-pile-practice]').click();p.locator('.pile-history summary').click();p.locator('[data-pile-resume="0"]').click();ok('Practice board' not in p.locator('.pile-board-head').inner_text(),'resume leaves temporary practice')
    go(p,'#home');ok(p.locator('a[href="#orchard/games"]').count()>0,'home invitation');go(p,'#orchard');ok(p.locator('a[href="#orchard/games"]').count()>0,'orchard invitation')
-   go(p,'#notes');p.locator('#remember').uncheck();go(p,'#orchard/games');p.locator('[data-pile-new]').click();p.locator('[data-pile-form] button[type=submit]').click();p.locator('[data-pile-take="1"]').click();ok(p.evaluate("()=>!Object.keys(localStorage).some(k=>k.startsWith('number-garden-v1:'))"),'save-off keeps game in memory only')
+   prior_first=notebook(p)['games']['current']['first'];go(p,'#notes');p.locator('#remember').uncheck();go(p,'#orchard/games');p.locator('[data-pile-new]').click();ok(p.locator('[name=first]').input_value()==prior_first,'play again retains starting player');p.locator('[name=first]').select_option('child');p.locator('[data-pile-form] button[type=submit]').click();p.locator('[data-pile-take="1"]').click();ok(p.evaluate("()=>!Object.keys(localStorage).some(k=>k.startsWith('number-garden-v1:'))"),'save-off keeps game in memory only')
    context.close()
   ok(not errors,'no browser errors: '+str(errors));print(f'Seed Pile Chrome: {checks} assertions passed at320/820.')
  finally:browser.close()

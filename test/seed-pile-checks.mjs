@@ -38,6 +38,8 @@ s.games.current.source.model='future-pile';const older=structuredClone(s.games.c
 s.games.current.source.rule='<img src=x onerror=alert(1)>';eq(pilePosition(s.games.current).left,13,'saved prose not checked against today');
 const before=structuredClone(s);s.other={large:'x'.repeat(5*1024*1024)};const snapshot=structuredClone(s);ok(!movePile(s,'child',1,admit));eq(s,snapshot,'whole notebook refusal atomic');
 s.games={...before.games,padding:'x'.repeat(MAX_GAMES_BYTES)};const cap=structuredClone(s.games);ok(!startPile(s,{},()=>true));eq(s.games,cap,'games budget does not grow without bound');
+s.other={};s.games={...before.games,earlier:[newPileGame()],notes:[{text:'Keep',game:newPileGame()}],padding:'x'.repeat(MAX_GAMES_BYTES)};
+const largeStart=JSON.stringify(s.games).length;ok(removePileRecord(s,'earlier',0,admit),'decreasing removal allowed above games cap');ok(JSON.stringify(s.games).length<largeStart&&JSON.stringify(s.games).length>MAX_GAMES_BYTES,'removal can make partial progress');ok(removePileRecord(s,'notes',0,admit),'second decreasing removal allowed');
 const m=newPileGame({variant:'pile-last-loses',first:'bramble',dial:'attention',start:5});m.moves=[{who:'bramble',take:1},{who:'child',take:1}];eq(brambleTake(m),2,'attention leaves one in last-loses');
 const one={...m,moves:[{who:'bramble',take:1},{who:'child',take:3}]};eq(pilePosition(one).left,1);eq(brambleTake(one),1,'forced last seed');
 console.log(`Seed Pile: ${checks} assertions passed.`);

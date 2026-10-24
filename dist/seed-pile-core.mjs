@@ -5,7 +5,8 @@ const text=(x,n=1600)=>typeof x==='string'&&x.length>0&&x.length<=n;
 const integer=(x,a,b)=>Number.isSafeInteger(x)&&x>=a&&x<=b;
 const copy=x=>structuredClone(x);
 export const MAX_GAMES_BYTES=256*1024;
-const fitsGames=r=>new TextEncoder().encode(JSON.stringify(r)).length<=MAX_GAMES_BYTES;
+const gamesBytes=r=>new TextEncoder().encode(JSON.stringify(r)).length;
+const fitsGames=r=>gamesBytes(r)<=MAX_GAMES_BYTES;
 export const freshGames=()=>({version:1,current:null,earlier:[],notes:[],lesson:null});
 export function validPileSource(s){return object(s)&&s.model==='seed-pile-v1'&&text(s.id,80)&&text(s.title)&&text(s.rule)&&[2,3].includes(s.maxTake)&&typeof s.lastLoses==='boolean'&&text(s.childWin)&&text(s.brambleWin)&&Array.isArray(s.frames)&&s.frames.length===4&&s.frames.every(f=>object(f)&&integer(f.pile,1,30)&&text(f.text));}
 export function pilePosition(g){
@@ -50,7 +51,9 @@ function commit(state,change,canExport){
  const c=copy(state);const v=gamesView(c);
  if(v.unsupported)return false;
  if(v.absent)c.games=freshGames();
- if(change(c.games)===false||!fitsGames(c.games)||!recoveryFitsProgressLimits(c)||typeof canExport!=='function'||!canExport(c))return false;
+ if(change(c.games)===false)return false;
+ const after=gamesBytes(c.games),before=gamesBytes(state.games);
+ if((after>MAX_GAMES_BYTES&&after>before)||!recoveryFitsProgressLimits(c)||typeof canExport!=='function'||!canExport(c))return false;
  state.games=c.games;return true;
 }
 export function startPile(state,setup,canExport){
