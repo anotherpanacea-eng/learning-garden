@@ -39,12 +39,12 @@ Films and songs are optional presentation. A still picture and short text must a
 | Video | What it is for | When to make it |
 | --- | --- | --- |
 | Storm parcel scene | Act I: Pip hands over the parcel (spec 120 §5). | Ship as a still and text with Push B's first slice. A short film is optional later. |
-| *A Town of Our Own* | Act II ending anchor. | Update a provisional brief during Push B's second-slice specification; final production during its reviewed runtime build, with the trigger checked before final cut. Include the Vadoalto letter. |
+| *A Town of Our Own* | Act II ending anchor. | Provisional storyboard written; revise during Push B's second-slice specification; final production during its reviewed runtime build, with the trigger checked before final cut. Include the Vadoalto letter. |
 | *A tray for the gathering* | Optional chapter film for the whole-batch recipe slice. | Only when that slice is built. |
 | *Both Ways Across Willow Bridge* | Act III ending anchor: the exchange with Vadoalto. | Provisional concept art now; final production during the reviewed Act III ending and River Market runtime build, after language review. |
 | *The Map We Changed* | Act IV ending anchor. Wall, Sponge and Some of Each must all look defensible. | Provisional storyboard now; final production during the reviewed Bank Builder (spec 124) and meeting-board ending build. |
-| *A Question of Our Own*, *The Opening of the Ways* | Act V and VI anchors. | Storyboard later, provisionally; produce during each act ending's reviewed runtime build. |
-| Fractions song | Rhythm Studio (spec 115): durations fill a four-beat bar with whole, half and quarter notes. Three-beat bars need their own explanation; a whole note does not fit them. | Lyrics can be written now; record during the reviewed Rhythm Studio runtime build, after a music-content check. Generated audio needs a rights check like any other asset. |
+| *A Question of Our Own*, *The Opening of the Ways* | Act V and VI anchors. | Provisional storyboards written in the 2026-10-24 writing pass; revise after the owning specs are reviewed; produce during each act ending's reviewed runtime build. |
+| Fractions song | Rhythm Studio (spec 115): durations fill a four-beat bar with whole, half, quarter and eighth notes, plus rests. Three-beat bars need their own explanation; a whole note does not fit them. | Lyrics can be written now; record during the reviewed Rhythm Studio runtime build, after a music-content check. Generated audio needs a rights check like any other asset. |
 | Short how-to demonstrations | Only for a game that is still confusing after Push C. | Added case by case from Push C findings. |
 
 ## Release and maintenance queue

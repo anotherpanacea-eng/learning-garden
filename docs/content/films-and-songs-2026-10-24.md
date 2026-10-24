@@ -1,6 +1,6 @@
 # Provisional films and songs: writing for review
 
-Writing pass, 2026-10-24. This document covers three kinds of provisional writing associated with the [roadmap's film timing table](../roadmap.md#films-and-songs-when-each-is-needed) covers: the fractions song for Rhythm Studio, the concept art brief for *Both Ways Across Willow Bridge*, and storyboards for the act films. Each item names what has to happen before it is produced. The story comes from [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/specs/120-keeper-of-the-ways.md) and its script in [`120-story/`](https://github.com/anotherpanacea-eng/learning-garden/tree/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story) (draft [PR127](https://github.com/anotherpanacea-eng/learning-garden/pull/127)). Rhythm Studio is [spec 115](https://github.com/anotherpanacea-eng/learning-garden/blob/e02613122f71901879c1c57ffd8261028a20d404/docs/specs/115-rhythm-studio.md) (draft [PR128](https://github.com/anotherpanacea-eng/learning-garden/pull/128)). These pinned drafts are not cleared specifications. If they change names or events, revise this writing. Nothing here makes a runtime adapter or final production ready.
+Writing pass, 2026-10-24. This document provides provisional writing associated with the [roadmap's film timing table](../roadmap.md#films-and-songs-when-each-is-needed): the fractions song for Rhythm Studio, the concept art brief for *Both Ways Across Willow Bridge*, and storyboards for the act films. Each item names what has to happen before it is produced. The story comes from [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/specs/120-keeper-of-the-ways.md) and its script in [`120-story/`](https://github.com/anotherpanacea-eng/learning-garden/tree/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story) (draft [PR127](https://github.com/anotherpanacea-eng/learning-garden/pull/127)). Rhythm Studio is [spec 115](https://github.com/anotherpanacea-eng/learning-garden/blob/e02613122f71901879c1c57ffd8261028a20d404/docs/specs/115-rhythm-studio.md) (draft [PR128](https://github.com/anotherpanacea-eng/learning-garden/pull/128)). These pinned drafts are not cleared specifications. If they change names or events, revise this writing. Nothing here makes a runtime adapter or final production ready.
 
 The rules in [story milestones and films](../story-milestones-and-films.md#delivery-and-integration-contract) apply to everything here: a still picture and short text always deliver the same ending, no video gates play, sound starts only when the player chooses it, captions and a transcript ship with every film, and no film shows the answer to an active task.
 
@@ -20,7 +20,7 @@ Three more rules apply to every piece:
 
 - **Tempo:** 120 beats per minute in 4/4, so one beat lasts 0.5 seconds, Rhythm Studio's beat. Every bar of the song has four beats.
 - **Voices:** one friendly lead voice, plus a small group on the chorus. Spoken lines are marked with the character's name; any voice can sing any line. Pip is he/him, Dot is she/her, Bramble is she/her.
-- **Picture:** a single bar strip of eight equal cells with beat numbers 1 to 4 above every second cell, as in spec 115. In each verse the blocks for that verse's notes appear on the beat they start, labeled with the note's name and, from the second time through, its fraction of the bar. Rests appear as hatched blocks with the word "rest". Color is never the only cue.
+- **Picture:** a single bar strip of eight equal cells with beat numbers 1 to 4 above every second cell, as in spec 115. In each verse the blocks for that verse's notes appear on the beat they start, labeled with the note's name and, from the second line of each verse, its fraction of the bar. Accessible labels and read-aloud text say fractions in words ("one half", "one quarter", "one eighth"). Rests appear as hatched blocks with the word "rest". Color is never the only cue.
 - **Exposure:** the song teaches arrangements used by studio cards, including four quarter notes. A separately reviewed player must retain song use and pictured examples as support before making any unfamiliar or independent-task claim. Keep it off an active echo response unless deliberately opened as support. This writing implements no player or exposure adapter.
 - **Accuracy:** every arrangement the song names fills exactly eight eighths. The check table follows the lyrics.
 
@@ -38,7 +38,7 @@ Three more rules apply to every piece:
 > one, two, three, four, and then it's done.
 > One whole note fills the bar. Just one.
 
-*Picture: one block, the whole bar wide, labeled "whole note". Second time through: "1 whole".*
+*Picture: one block, the whole bar wide, labeled "whole note". From the second line: "1 whole".*
 
 **Chorus**
 > Fill the bar, fill the bar,
@@ -56,11 +56,11 @@ Three more rules apply to every piece:
 > Half a bar, then half a bar:
 > two halves make one whole. There you are.
 
-*Picture: two blocks, each half the bar, labeled "half note", "1/2" on the second time through.*
+*Picture: two blocks, each half the bar, labeled "half note", "1/2" from the second line.*
 
 **Verse 3: quarter notes**
 > The mending crew begin to hammer,
-> tap, tap, tap, tap, without a stammer.
+> tap, tap, tap, tap, a steady clamor.
 > One beat each, and four in all:
 > four quarters fill the bar, wall to wall.
 
@@ -78,7 +78,7 @@ Three more rules apply to every piece:
 
 **Bridge: rests** (softer, the tick keeps going)
 > Shh. A rest is quiet, but a rest still counts.
-> It takes up room, the same amount.
+> As long as a note its size, it counts.
 > A quarter rest, a beat of air,
 > the bar keeps time while nothing's there.
 
@@ -128,7 +128,7 @@ Three more rules apply to every piece:
 | # | Piece | What it shows | Notes |
 | --- | --- | --- | --- |
 | 1 | **The valley map** | One valley in the Pyrenees: Vadoalto upstream, Willowbank in the middle, Les Saules downstream, where Willow Brook joins a bigger river going north. The three Ways out of Willowbank: the river path, the bridge road and the high ford. | A painted map, not a satellite view. No real town names or borders. It must work as a story map, not a lesson in geography. |
-| 2 | **Vadoalto's waterfront** | An ordinary modern riverside town on a hillside above the river. A landing with flat, wide boats. Reed baskets stacked on the boats. Vadoalto's flood post by the water, with marks every 50 cm. | Everyday and lived-in. Not quaint, not poor, not a ruin. The storm reached Vadoalto too, so a little repair work can show, but nothing like a disaster scene. |
+| 2 | **Vadoalto's waterfront** | An ordinary modern riverside town on a hillside above the river. A landing with flat, wide boats. Reed baskets stacked on the boats. Vadoalto's flood post by the water, with unnumbered marks; reviewed source material will determine any later scale. | Everyday and lived-in. Not quaint, not poor, not a ruin. The storm reached Vadoalto too, so a little repair work can show, but nothing like a disaster scene. |
 | 3 | **Nuria** | Character sheet: an otter, she/her, the apprentice keeper of Vadoalto's flood post. Carrying a bundle of green reeds taller than she is. A satchel of letters. | Front, side and back views, three expressions (curious, laughing, reading carefully). She is a peer and a friend, never a guide who knows more than everyone. |
 | 4 | **Léon** | Character sheet: a kingfisher, he/him, the ferry keeper at Les Saules. Fast, cheerful, always slightly damp. | He appears in Act III's letters and in Act VI. One sheet now saves redrawing later. |
 | 5 | **The high ford path** | An old path along the river, with fence posts tied with faded ribbons in neat knots: blue at one fork, gold at another. Halfway along, a newer straight path cuts across the old one, with no ribbon on it. | The knots match the bow Bramble ties on the parcel in Act II. |
@@ -174,7 +174,7 @@ These are provisional candidate refinements to the shot suggestions in [story mi
 | 0–6 s | The town meeting in the library. Three large sheets pinned side by side: a drawing of **the Wall**, of **the Sponge** and of **Some of Each**. No labels needed beyond the drawings. |
 | 6–14 s | Bramble standing up for the Wall and the orchard families. The orchard keeper beside her. People listen; nobody laughs. |
 | 14–22 s | The miller walks to the front holding the flood ledger and points at a line in it. She is changing her mind and says why. (Which plan she moves toward is not shown; the camera stays on the ledger and her face.) |
-| 22–30 s | The low corner of the orchard at dusk: standing water and reeds nobody planted. The orchard keeper looks at them for a long moment. |
+| 22–30 s | The low corner of the orchard at dusk: standing water around the youngest trees. The orchard keeper and the miller look at it together, each pointing at something different. |
 | 30–38 s | Back at the meeting: the three sheets are still pinned up. Someone adds a note to one of them. Nobody tears anything down. |
 | 38–45 s | Next morning: neighbors put small stakes in the ground at the low corner to watch how the water moves. It is a first step that can be undone. A question card stays on the noticeboard. |
 
