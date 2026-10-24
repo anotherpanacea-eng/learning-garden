@@ -104,7 +104,8 @@ All rows below are in main through PR98. Component PR links preserve the focused
 - **Built and released:** Seed Pile (spec129), with three take-away rules, adjustable Bramble and supplied strategy explanations.
 - **Built and released:** [Shutters (spec130)](specs/130-shutters.md), a solo six-/nine-shutter dice box, merged and deployed through [PR130](https://github.com/anotherpanacea-eng/learning-garden/pull/130). Multiple decompositions, reversible choices and chance revisit quantity from a different purpose.
 - **Built:** [two-row Ribbon Rows (spec131)](specs/131-ribbon-rows.md), with revisable takes, three Bramble play styles and separate pictured explanation/practice. Matching rows revisit equality and taking away through strategic play.
-- **Next candidate:** Ribbon Rows’ three-row bundle contrast after a bounded model/content review. Seed Holes and Hex remain later drafts in PR128; their presence in the proposal does not commission them.
+- **Built:** [three-row Ribbon Rows (spec132)](specs/132-three-row-ribbons.md), with a six-thought4/2/1 bundle explanation, an even-total counterexample, optional current-board bundle pictures and separate practice. Two-row saves retain their own model.
+- **Later candidates:** Seed Holes and Hex remain drafts in PR128; their presence in the proposal does not commission them.
 
 These games offer mathematical choices and discussion; game endings do not complete a topic, strand or act.
 
