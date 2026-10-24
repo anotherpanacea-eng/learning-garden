@@ -4,7 +4,7 @@ Status: **proposed; awaiting independent spec review.** Part of the [new kinds o
 
 **Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec 120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
 
-**Bounded first candidate:** Seed Pile and Ribbon Rows, including their listed variants, plus solo Shutters. Seed Holes and Hex are later candidates: their rules and companion copy are drafts, not selectable games in this increment. Before either is commissioned, a separate model review must pin board coordinates, legal/terminal states, search depth including extra turns, evaluation and move ordering, and a bounded fallback. The proposed four-move/two-move descriptions below are not opponent guarantees.
+**Bounded first candidate:** Seed Pile and Ribbon Rows, including their listed variants, plus solo Shutters. Seed Holes and Hex are on the [roadmap for much later](../roadmap.md#much-later-parts-held-back-from-the-new-game-kinds): their rules and companion copy are drafts, not selectable games in this increment. Before either is commissioned, a separate model review must pin board coordinates, legal/terminal states, search depth including extra turns, evaluation and move ordering, and a bounded fallback. The proposed four-move/two-move descriptions below are not opponent guarantees.
 
 ## Purpose
 
