@@ -2,7 +2,7 @@ import {shuttersView,shuttersPosition,shutterWays,validShuttersSource,readableSh
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let visit=null;
 export const resetShuttersVisit=()=>{visit=null;};
-export const gamesTableNav=active=>`<nav class="games-table-nav" aria-label="Games Table"><a href="#orchard/games"${active==='pile'?' aria-current="page"':''}>Seed Pile · with Bramble</a><a href="#orchard/games/shutters"${active==='shutters'?' aria-current="page"':''}>Shutters · solo</a></nav>`;
+export const gamesTableNav=active=>`<nav class="games-table-nav" aria-label="Games Table"><a href="#orchard/games"${active==='pile'?' aria-current="page"':''}>Seed Pile · with Bramble</a><a href="#orchard/games/shutters"${active==='shutters'?' aria-current="page"':''}>Shutters · solo</a><a href="#orchard/games/rows"${active==='rows'?' aria-current="page"':''}>Ribbon Rows · with Bramble</a></nav>`;
 const dice=faces=>`<div class="shutter-dice" role="img" aria-label="${faces.join(' plus ')}${faces.length===2?` makes ${faces[0]+faces[1]}`:''}">${faces.map(n=>`<span class="shutter-die"><span class="shutter-pips" aria-hidden="true">${Array.from({length:9},(_,i)=>`<i${({1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]})[n].includes(i)?' class="ink"':''}></i>`).join('')}</span><span class="shutter-face">${n}</span></span>`).join('')}</div>`;
 function tiles(size,open,selected,interactive=false){return `<div class="shutter-tiles">${Array.from({length:size},(_,i)=>i+1).map(n=>{
  const status=!open.includes(n)?'closed':selected.includes(n)?'selected':'open';
