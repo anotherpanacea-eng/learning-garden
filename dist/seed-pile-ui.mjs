@@ -1,9 +1,11 @@
 import {gamesTableNav} from './shutters-ui.mjs';
 import {pileRules,pileDials,pileSource} from './seed-pile-content.mjs';
-import {gamesView,pilePosition,newPileGame,takePile,brambleTake,startPile,movePile,explainPile,keepPileNote,resumePile,removePileRecord,readablePileNote,validPileSource} from './seed-pile-core.mjs';
+import {gamesView,pilePosition,newPileGame,takePile,brambleTake,losingPile,startPile,movePile,explainPile,keepPileNote,resumePile,removePileRecord,readablePileNote,validPileSource} from './seed-pile-core.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let visit=null;
 export function resetPileVisit(){visit=null;}
+// The practice board starts where the explainer goes first can still win, so the plan can be tried and seen to work.
+export function practicePile(source){let start=Math.max(5,source.frames[2].pile);while(start<30&&losingPile(start,source.maxTake,source.lastLoses))start++;return {...newPileGame({start,dial:'plan',support:['explanation']}),source:structuredClone(source)};}
 const seed='<span class="pile-seed"></span>';
 function seeds(n){return `<div class="pile-seeds" aria-hidden="true">${Array.from({length:Math.ceil(n/5)},(_,i)=>`<div class="pile-five">${seed.repeat(Math.min(5,n-i*5))}</div>`).join('')}</div>`;}
 const bramble=`<svg class="pile-bramble" viewBox="0 0 180 170" aria-hidden="true"><path d="M40 151Q35 109 67 105H112Q143 113 147 151" fill="#56355c"/><path d="M56 70Q39 79 47 121M117 70Q136 86 125 123" fill="none" stroke="#44302b" stroke-width="15" stroke-linecap="round"/><ellipse cx="87" cy="76" rx="35" ry="37" fill="#d49b77"/><path d="M51 71Q43 39 80 35Q116 31 125 65L105 48L82 62L65 51Z" fill="#44302b"/><path d="M55 38L83 4L105 31L132 41Q90 60 33 44Z" fill="#56355c"/><path d="M57 35L108 32" stroke="#e9b84a" stroke-width="7"/><circle cx="75" cy="76" r="3" fill="#302b2c"/><circle cx="100" cy="76" r="3" fill="#302b2c"/><path d="M78 92Q88 100 99 90" fill="none" stroke="#6b3f40" stroke-width="3" stroke-linecap="round"/><path d="M57 130L69 153M116 130L108 153" stroke="#d49b77" stroke-width="13" stroke-linecap="round"/><ellipse cx="151" cy="115" rx="15" ry="19" fill="#273b3c"/><path d="M148 103Q136 120 151 126L158 118" fill="#f7f5eb"/><circle cx="155" cy="93" r="10" fill="#273b3c"/><circle cx="158" cy="91" r="2" fill="white"/><path d="M164 94l12 4-12 2M148 130l-10 23 16-19" fill="#273b3c"/></svg>`;
@@ -57,7 +59,7 @@ export function bindPile(state,ctx){
  root.querySelector('[data-pile-back]')?.addEventListener('click',()=>{if(live()){visit.page='game';visit.practice=null;render();}});
  root.querySelector('[data-pile-explain]')?.addEventListener('click',()=>act(()=>explainPile(state,gamesView(state).current?.source.id||'pile',0,ctx.canExport)&&((visit.page='lesson'),true),'#pile-title'));
  root.querySelectorAll('[data-pile-step]').forEach(b=>b.onclick=()=>act(()=>explainPile(state,'pile',Number(b.dataset.pileStep),ctx.canExport),'#pile-thought'));
- root.querySelector('[data-pile-practice]')?.addEventListener('click',()=>{if(!live())return;const s=gamesView(state).root?.lesson?.source;if(!validPileSource(s))return;visit.practice={...newPileGame({start:6,dial:'plan',support:['explanation']}),source:structuredClone(s)};render();});
+ root.querySelector('[data-pile-practice]')?.addEventListener('click',()=>{if(!live())return;const s=gamesView(state).root?.lesson?.source;if(!validPileSource(s))return;visit.practice=practicePile(s);render();});
  root.querySelector('[data-pile-end-practice]')?.addEventListener('click',()=>{if(live()){visit.practice=null;visit.page='lesson';render();}});
  root.querySelector('[data-pile-note]')?.addEventListener('submit',e=>{e.preventDefault();act(()=>{if(!keepPileNote(state,new FormData(e.target).get('note'),ctx.canExport))return false;visit.message='Your game note is kept.';return true;},'#pile-status');});
  root.querySelectorAll('[data-pile-resume]').forEach(b=>b.onclick=()=>act(()=>resumePile(state,Number(b.dataset.pileResume),ctx.canExport)&&((visit.page='game'),(visit.practice=null),true)));
