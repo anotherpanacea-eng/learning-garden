@@ -33,7 +33,7 @@ for(let a=0;a<=7;a++)for(let b=0;b<=7;b++){
 }
 eq(dealRows(()=>0),[1,1]);eq(dealRows(()=>1),[7,7]);eq(dealRows(()=>NaN),[1,1]);eq(dealRows(()=>-1),[1,1]);for(let i=0;i<7;i++)eq(dealRows(()=>(i+.5)/7),[i+1,i+1]);
 const seq=[0,.999];eq(dealRows(()=>seq.shift()),[1,7],'separate deal samples');
-for(const bad of [[0,1],[1,8],[1],[1,2,3],[1.5,2]])eq(newRowsGame({start:bad}),null);
+for(const bad of [[0,1],[1,8],[1],[1,2,3,4],[1.5,2]])eq(newRowsGame({start:bad}),null);
 ok(validRowsSource(rowsSource()));let p=[3,3];for(const [i,f] of rowsSource().frames.entries()){if(i===0)eq(f.rows,[3,3]);for(const m of f.moves){const next=afterRowMove(f.rows,m);ok(next,'authored move legal individually');}let left=f.rows;for(const m of f.moves){left=afterRowMove(left,m);ok(left);}if(i===3)eq(left,[0,0],'final explanation ending');}
 const s=freshState();ok(rowsView(s).absent);rowsPage(s,'synthetic');ok(!Object.hasOwn(s,'ribbonRows'),'render absent root pure');
 ok(startRows(s,{},admit));ok(chooseRow(s,0,admit));ok(chooseRowCount(s,2,admit));eq(s.ribbonRows.current.draft,{row:0,take:2});eq(restoreState(JSON.stringify(s)).ribbonRows,s.ribbonRows);
