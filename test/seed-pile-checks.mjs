@@ -3,6 +3,7 @@ import {freshState,restoreState} from '../dist/core.mjs';
 import {pileRules,pileSource} from '../dist/seed-pile-content.mjs';
 import {gamesView,newPileGame,pilePosition,losingPile,brambleTake,startPile,movePile,explainPile,keepPileNote,resumePile,removePileRecord,MAX_GAMES_BYTES} from '../dist/seed-pile-core.mjs';
 import {prepareProgressImport} from '../dist/progress-transfer.mjs';
+import {practicePile} from '../dist/seed-pile-ui.mjs';
 const admit=s=>prepareProgressImport(JSON.stringify({...s,title:'Synthetic notebook'},null,2)).ok;
 let checks=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;},ok=(a,m)=>{assert.ok(a,m);checks++;};
 // Independent recursive game tree, rather than copying the implementation's recurrence table.
@@ -42,4 +43,6 @@ s.other={};s.games={...before.games,earlier:[newPileGame()],notes:[{text:'Keep',
 const largeStart=JSON.stringify(s.games).length;ok(removePileRecord(s,'earlier',0,admit),'decreasing removal allowed above games cap');ok(JSON.stringify(s.games).length<largeStart&&JSON.stringify(s.games).length>MAX_GAMES_BYTES,'removal can make partial progress');ok(removePileRecord(s,'notes',0,admit),'second decreasing removal allowed');
 const m=newPileGame({variant:'pile-last-loses',first:'bramble',dial:'attention',start:5});m.moves=[{who:'bramble',take:1},{who:'child',take:1}];eq(brambleTake(m),2,'attention leaves one in last-loses');
 const one={...m,moves:[{who:'bramble',take:1},{who:'child',take:3}]};eq(pilePosition(one).left,1);eq(brambleTake(one),1,'forced last seed');
+// After any explanation, the practice board must be winnable for the child against Bramble's plan.
+for(const r of pileRules){const g=practicePile(pileSource(r.id));ok(pilePosition(g),r.id+' practice board is a legal game');eq(g.first,'child');ok(winner(g.start,r.maxTake,r.lastLoses),r.id+' practice start is winnable for the child');}
 console.log(`Seed Pile: ${checks} assertions passed.`);
