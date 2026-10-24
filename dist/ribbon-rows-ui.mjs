@@ -4,7 +4,7 @@ import {rowsView,rowsPosition,afterRowMove,takeRows,brambleRowMove,dealRows,read
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let visit=null;
 export const resetRowsVisit=()=>{visit=null;};
-const result=g=>{const p=rowsPosition(g);return !p?'Earlier game':p.winner?(p.winner==='child'?g.source.childWin:g.source.brambleWin):`${p.left.length} rows (${p.left.join(", ")}) of ribbons; ${p.turn==='child'?'your':'Bramble’s'} turn`;};
+const result=g=>{const p=rowsPosition(g);if(!p)return 'Earlier game';const kind=p.left.length===3?'Three rows':'Two rows';return `${kind} (started ${g.start.join(', ')}): ${p.winner?(p.winner==='child'?g.source.childWin:g.source.brambleWin):`${p.left.join(', ')} ribbons left; ${p.turn==='child'?'your':'Bramble’s'} turn`}`;};
 function mat(left,draft={row:null,take:null},interactive=false){return `<div class="rows-mat">${left.map((n,row)=>{
  const chosen=draft.row===row,body=`<span class="rows-row-label">Row ${row+1}<strong>${n} ${n===1?'ribbon':'ribbons'}</strong></span><span class="rows-knots" aria-hidden="true">${Array.from({length:7},(_,i)=>`<span class="rows-slot${i<n?' filled':''}${chosen&&draft.take!==null&&i>=n-draft.take&&i<n?' taking':''}">${i<n?'<i class="rows-knot"></i>':''}</span>`).join('')}</span>`;
  return interactive?`<button type="button" class="rows-row row-${row}${chosen?' chosen':''}" data-rows-row="${row}" aria-pressed="${chosen}" aria-label="Row ${row+1}, ${n} ${n===1?'ribbon':'ribbons'}${chosen?', chosen':''}" aria-describedby="rows-draft"${n===0?' disabled':''}>${body}</button>`:`<div class="rows-row row-${row}">${body}</div>`;

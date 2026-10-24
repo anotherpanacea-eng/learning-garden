@@ -4,7 +4,7 @@ import {freshState,restoreState} from '../dist/core.mjs';
 import {prepareProgressImport} from '../dist/progress-transfer.mjs';
 import {rowsSource} from '../dist/ribbon-rows-content.mjs';
 import {rowsPosition,rowMoves,afterRowMove,newRowsGame,brambleRowMove,takeRows,bundleCounts,pairedBundles,startRows,chooseRow,chooseRowCount,moveRows,explainRows,showRowBundles,practiceRows,readableRowsLesson,resumeRows,keepRowNote,dealRows,ROWS_BYTES} from '../dist/ribbon-rows-core.mjs';
-import {rowsPage,rowsBundleTable,resetRowsVisit} from '../dist/ribbon-rows-ui.mjs';
+import {rowsPage,rowsBundleTable,rowsNotes,resetRowsVisit} from '../dist/ribbon-rows-ui.mjs';
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;};
 const admit=s=>prepareProgressImport(JSON.stringify({...s,title:'Synthetic notebook'},null,2)).ok;
 const old=JSON.parse(fs.readFileSync(new URL('./fixtures/ribbon-rows-two-v1.json',import.meta.url),'utf8'));
@@ -38,5 +38,7 @@ s.ribbonRows.current=g;ok(showRowBundles(s,admit));eq(s.ribbonRows.current.bundl
 for(const change of [g=>g.start=[1,2],g=>g.source.practiceStart=[1,2],g=>g.source.frames[0].rows=[1,2],g=>g.source.frames.pop(),g=>g.bundlesAt=22,g=>g.draft={row:3,take:null}]){const t=newRowsGame({start:[1,2,4]});change(t);eq(rowsPosition(t),null);}
 const legacy=structuredClone(old);legacy.bundlesAt='an older harmless field';ok(rowsPosition(legacy),'legacy interpreter ignores newly named harmless fields');legacy.start=[1,2,4];eq(rowsPosition(legacy),null,'two-row model never becomes three');
 const cap=freshState();ok(startRows(cap,{start:[1,2,4]},admit));cap.ribbonRows.current.support=Array.from({length:12},(_,i)=>`unknown-${i}`);let snapshot=structuredClone(cap);ok(!showRowBundles(cap,admit));eq(cap,snapshot,'support cap refusal atomic');cap.ribbonRows.current.support=[];cap.ribbonRows.padding='x'.repeat(ROWS_BYTES);snapshot=structuredClone(cap);ok(!showRowBundles(cap,admit));eq(cap,snapshot,'byte cap refusal atomic');
+let duo=newRowsGame({start:[1,1]});duo=takeRows(duo,'child',0,1);duo=takeRows(duo,'bramble',1,1);
+const both=freshState();both.ribbonRows={version:1,current:g,earlier:[duo],notes:[{text:'Synthetic identical note',game:duo},{text:'Synthetic identical note',game:g}],lesson:null};resetRowsVisit();const labels=rowsPage(both,'synthetic');ok(labels.includes('Two rows (started 1, 1)'),'finished two-row history/note labelled');ok(labels.includes('Three rows (started 7, 7, 7)'),'finished three-row history/note labelled');ok(rowsNotes(both).includes('Three rows (started 7, 7, 7)'),'finished grown-up summary labelled');
 const table=rowsBundleTable([7,6,5]);ok(table.includes('2 bundles'));ok(table.includes('1 unpaired'));ok(table.includes('7 = 4 + 2 + 1'));ok(!table.includes('<script'));
 console.log(`Three-row Ribbon Rows: ${n} assertions passed.`);
