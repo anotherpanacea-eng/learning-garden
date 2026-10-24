@@ -1,8 +1,8 @@
 # 126. The Shape Bench: window pieces, parcel boxes and floors
 
-Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts I and II of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/126-shape-puzzles-text.md); this spec holds the puzzles, the checks and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts I and II of [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/126-shape-puzzles-text.md); this spec holds the puzzles, the checks and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
+**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec 120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
 
 ## Purpose
 

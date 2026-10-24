@@ -1,8 +1,8 @@
 # 125. The Sign Painter: shape, symmetry, pattern and color
 
-Status: **proposed; awaiting independent spec review, a science check of the color lines and a licence check of the artworks.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Act II and Lantern Night in [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/125-sign-painter-text.md); this spec holds the benches, the models and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review, a science check of the color lines and a licence check of the artworks.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Act II and Lantern Night in [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/125-sign-painter-text.md); this spec holds the benches, the models and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
+**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec 120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
 
 ## Purpose
 

@@ -70,7 +70,7 @@ Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the
 - Dry: {list}. Wet: {list}.
 - Coins spent: {n}. Land given to the brook: {n}.
 - Downstream impact score for Les Saules: {n}. (A made-up trade-off score, not a measured amount of water.)
-- Downstream impact score for Les Saules:0.
+- Downstream impact score for Les Saules: 0.
 
 **Les Saules (Details):**
 > Les Saules is the town downstream, where Léon keeps the ferry. This model gives walls an impact point when they hold water that the natural bank would not, and room takes points away. It is a made-up way to compare trade-offs. Real downstream effects need much more information. `[check]`

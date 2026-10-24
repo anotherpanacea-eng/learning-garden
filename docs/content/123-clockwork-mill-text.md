@@ -104,8 +104,8 @@ Each level opens with the miller's request.
 3. "One Forward tile, and the Repeat does the rest. How many times do you need?"
 **Challenge:** Can you do it with just 2 tiles?
 **Hint:** Count the squares in the aisle. That's how many times to repeat.
-**Solved:** "Trundle reached the end of the aisle." The two-tile praise is shown only when that challenge was met.
-**Challenge met:** "Two tiles exactly. That's the shortest there is."
+**Solved:** "Trundle reached the end of the aisle. My thumb is grateful."
+**Challenge met (shown instead, only when the program used 2 tiles):** "Eight forwards, two tiles. That's the shortest there is. My thumb is grateful."
 
 ### m5. Round the millpond
 

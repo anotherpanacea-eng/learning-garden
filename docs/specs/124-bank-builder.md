@@ -1,8 +1,8 @@
 # 124. The Bank Builder: design, build and test along Willow Brook
 
-Status: **proposed; awaiting independent spec review and a science content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II, IV and VI of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md), and gives Act IV's three plans a model the child can run. Every child-facing line is in [the companion text](../content/124-bank-builder-text.md); this spec holds the model, the levels and the saves. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review and a science content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II, IV and VI of [spec 120](120-keeper-of-the-ways.md), and gives Act IV's three plans a model the child can run. Every child-facing line is in [the companion text](../content/124-bank-builder-text.md); this spec holds the model, the levels and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
+**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec 120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
 
 ## Purpose
 
@@ -38,7 +38,7 @@ The bank has six sections, upstream to downstream. Heights are in fictional mode
 | Sandbags | 1 board | 1 |
 | Stone wall | 2 boards | 3 |
 | Wall and sandbags | 3 boards | 4 |
-| **Room for the brook** (A and C only) | The section is given to the water on purpose and floods. Each one lowers the water by 1 board for every section downstream of it. In a great flood or What if? (levels4 and5), room lowers the water by at most1 board in all, because a full marsh holds no more. | 2 (moving fences and paths) |
+| **Room for the brook** (A and C only) | The section is given to the water on purpose and floods. Each one lowers the water by 1 board for every section downstream of it. In a great flood or What if? (levels 4 and 5), room lowers the water by at most 1 board in all, because a full marsh holds no more. | 2 (moving fences and paths) |
 
 **Budget:** 8 coins, unless a level says otherwise.
 
@@ -56,9 +56,9 @@ Results show which sections held, which land got wet, the coins spent, the land 
 | Design | Builds | Coins | Land given | Spring flood | Big flood | Great flood |
 | --- | --- | --- | --- | --- | --- | --- |
 | Nothing built | | 0 | 0 | C wet | A, C, D, F wet | everything wet |
-| **The Wall** | Sandbags A, B, D, F; wall and sandbags C | 8 | 0 | all dry; impact score1 | all dry; score4 | A, D, E, F wet; score2 |
+| **The Wall** | Sandbags A, B, D, F; wall and sandbags C | 8 | 0 | all dry; impact score 1 | all dry; score 4 | A, D, E, F wet; score 2 |
 | **The Sponge** | Room at A and C; sandbags D, F | 6 | 2 | A, C wet (given) | A, C wet (given) | A, C wet (given) |
-| **Some of Each** | Room at C; sandbags A, D, F | 5 | 1 | C wet (given) | C wet (given) | A, B, C wet; score1 |
+| **Some of Each** | Room at C; sandbags A, D, F | 5 | 1 | C wet (given) | C wet (given) | A, B, C wet; score 1 |
 
 - No design keeps the meadow and everything else dry in the big flood on 5 coins; keeping all but the meadow dry costs at least 3.
 - In *What if?*, no design within 8 coins keeps the homes lane, the bridge road and the mill path all dry.
@@ -147,8 +147,8 @@ Jane's staged worked example shaped `b1`'s first test. Its points and medals are
 ## Checks for implementation
 
 - A test enumerates every design within 8 coins and confirms the results table and the three bullet facts above.
-- Room is offered only at A and C; the total1-board reduction cap applies at both flood4 and flood5.
-- The unitless downstream-impact score never goes below0; it is not presented as a measured volume.
+- Room is offered only at A and C; the total 1-board reduction cap applies at both flood 4 and flood 5.
+- The unitless downstream-impact score never goes below 0; it is not presented as a measured volume.
 - A kept design and claim reload exactly; a model version change shows the earlier-model note without changing them.
 - Every result shows the made-up-model line.
 - Browser at 320 and 820 px: the six sections stack vertically on narrow screens with their builds and results readable as a list.

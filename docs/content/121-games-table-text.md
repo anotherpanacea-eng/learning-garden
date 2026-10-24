@@ -223,7 +223,7 @@ One step per tap. Button: **Next**. Last button: **Test it**.
 3. "If you shut lots of small shutters, the big ones are left. And big numbers need big rolls. Late in the game, when you roll one die, you can't make anything over 6."
 4. "Let's test two habits with the same set of dice. Habit A chooses the biggest shutter first, then the biggest possible next one. Habit B chooses the most shutters it can, starting with the smallest if there's a choice."
 5. (After the fixed side-by-side replay in spec 121) "Habit A left 1 and 6 open: 7 altogether. Habit B left 7, 8 and 9: 24 altogether. One set of rolls can be lucky, though."
-6. "That shows what happened with these rolls. It doesn't mean either habit will win next time. The dice still have a say."
+6. "People have worked out the best play over every possible roll. With the full box, even perfect play shuts every shutter only about 1 game in 10. Habit A comes very close to perfect. Habit B shuts the box only about 1 game in 100. So Habit A is a good habit, even though the dice still decide any one game." `[check: figures computed for spec 121: 9.76%, 9.48% and 1.13%]`
 
 ## Design a pile game (older page)
 

@@ -105,7 +105,7 @@ Companion to [spec 125](../specs/125-sign-painter.md). Use as written, after the
 **After the first overlap:** "{result}! That is the color of these overlapping lights." `[check]`
 **White wall (Details):** A white wall reflects much of the visible light that reaches it. That's why every lantern's color shows up on it. A dark wall would soak up most of the light. `[check]`
 
-**Why are they opposite? (older Details):**
+**Why do paint and light mix differently? (older Details):**
 > Paint soaks up some colors of light and gives back the rest. Mixing different pigments changes which light comes back. Some mixes look darker or duller; adding white can lighten them. Lanterns each make their own light. Shine two together, and you add their light: lighter. `[check]`
 
 **Colors in words:** every swatch and lantern also shows its name, so you never have to tell colors apart by looking alone.

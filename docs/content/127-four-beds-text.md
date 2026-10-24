@@ -135,7 +135,7 @@ One step per tap.
 
 ## Off-screen invitations
 
-- With a grown-up, sprout a suitable bean chosen by the grown-up in a jar with damp paper towel, against the glass. Watch the roots grow; do not expect nitrogen-fixing nodules from this jar experiment. `[check]`
+- With a grown-up, sprout a suitable bean chosen by the grown-up in a jar with damp paper towel, against the glass. Watch the roots grow, day by day. `[check]`
 - Visit a garden or allotment and ask a gardener what they grow in the same place every year, and what they move.
 - Fill two cups with soil from different places. Pour the same water into each. Which drains faster?
 

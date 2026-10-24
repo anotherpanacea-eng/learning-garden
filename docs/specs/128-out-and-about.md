@@ -1,8 +1,8 @@
 # 128. Out and About: off-screen missions for every place
 
-Status: **proposed; awaiting independent spec review and a child-safety read of every card.** Part of the [new kinds of play proposal](../new-game-kinds.md). Applies across [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md)'s town and festivals. Every card is in [the companion text](../content/128-out-and-about-text.md); this spec holds the card format, where cards appear and what is (and isn't) kept.
+Status: **proposed; awaiting independent spec review and a child-safety read of every card.** Part of the [new kinds of play proposal](../new-game-kinds.md). Applies across [spec 120](120-keeper-of-the-ways.md)'s town and festivals. Every card is in [the companion text](../content/128-out-and-about-text.md); this spec holds the card format, where cards appear and what is (and isn't) kept.
 
-**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
+**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec 120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
 
 ## Purpose
 
@@ -66,7 +66,7 @@ A child-safety read of the whole bank is a build blocker.
 
 The companion holds **61 cards** across the garden's places: the invitations already written in specs 115 to 127, gathered and given the card fields, plus new cards for older destinations (the café and Measuring Kitchen, Willow Post Office, the Story Loft, Paris and the French letters, the riddles, the Water Lab and Rain Paths, the Cartographer's Table, Bell Studio, the Lantern Circuit Bench, the living-things and fossil destinations, the Word Garden, the Keeper's Pages) and for each festival.
 
-**Catalog authoring gate:** before commissioning, map every section/card to an explicit stable route or festival ID and a fixed needs set; the headings and icons here are proposed display copy, not an implicit route parser. A card's alternate indoor/window version must have matching needs. Where a card is copied from another proposal, these reviewed cards govern the eventual128 presentation; neither copy makes it a built destination. The child-safety read must inspect the actual final card bank after repairs, including each grown-up line and optional spoken question. Source checks also remain open for experiment claims; no off-screen outcome is guaranteed.
+**Catalog authoring gate:** before commissioning, map every section/card to an explicit stable route or festival ID and a fixed needs set; the headings and icons here are proposed display copy, not an implicit route parser. A card's alternate indoor/window version must have matching needs. Where a card is copied from another proposal, these reviewed cards govern the eventual 128 presentation; neither copy makes it a built destination. The child-safety read must inspect the actual final card bank after repairs, including each grown-up line and optional spoken question. Source checks also remain open for experiment claims; no off-screen outcome is guaranteed.
 
 ## Curriculum fit
 

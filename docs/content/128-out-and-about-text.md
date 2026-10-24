@@ -97,15 +97,15 @@ Companion to [spec 128](../specs/128-out-and-about.md). Use as written, after th
 
 | id | Title | Mission | Grown-up line | Come-back question | Needs |
 | --- | --- | --- | --- | --- | --- |
-| `beds-bean-jar` | A bean in a jar | With a grown-up, sprout a suitable bean against damp kitchen paper. Watch the root and shoot; root nodules are not an expected result of this jar experiment. | A grown-up chooses an untreated seed suitable for sprouting and handles it. Don't eat it. `[check]` | What grew first, the root or the shoot? | 🧑 |
-| `beds-ask-gardener` | Ask a gardener | Ask a grown-up at home about a plant they grow, or read a gardening page together. | Talk together at home. | What did you notice? | 🌳 🧑 |
+| `beds-bean-jar` | A bean in a jar | With a grown-up, sprout a suitable bean against damp kitchen paper. Watch the root and the shoot grow, day by day. | A grown-up chooses an untreated seed suitable for sprouting and handles it. Don't eat it. `[check]` | What grew first, the root or the shoot? | 🧑 |
+| `beds-ask-gardener` | Ask about a plant | Ask a grown-up at home about a plant they grow or remember, or read a gardening page together. | Talk together at home. | What did you find out? | 🧑 |
 | `beds-soil-cups` | Two soils | Fill two cups with soil from two different places. Pour the same water into each. | Make small holes in the cups' bottoms first; a grown-up does this. | Which drained faster? | 🧑 |
 
 ## The café and the Measuring Kitchen
 
 | id | Title | Mission | Grown-up line | Come-back question | Needs |
 | --- | --- | --- | --- | --- | --- |
-| `cafe-cup-of-water` | A real cup of water | Measure one cup of water with a measuring jug. Pour it into unbreakable containers. | A grown-up helps with cold water over a sink or towel. | Did it look like the same amount each time? | 🍳 🧑 |
+| `cafe-cup-of-water` | A real cup of water | Measure one cup of water with a measuring jug. Pour it into an unbreakable bowl, then a cup, then a tall beaker. | A grown-up helps with cold water over a sink or towel. | Did it look like the same amount each time? | 🍳 🧑 |
 | `cafe-share-fairly` | Share it fairly | Help a grown-up cut a piece of fruit or a sandwich into equal parts for everyone. | A grown-up does the cutting. | How did you check the parts were equal? | 🍳 🧑 |
 
 ## Willow Post Office

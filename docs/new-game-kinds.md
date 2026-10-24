@@ -1,6 +1,6 @@
 # New kinds of play beyond reading, writing and math
 
-Proposal, 2026-10-23. Planning only: nothing here is built or scheduled; review repairs do not clear the remaining commissioning gates. Every kind below stays single-player, local and offline, with no accounts, online content or multiplayer. Every kind now has a numbered proposal and companion draft; some still need finite content/model fixtures and complete help paths before commissioning. The proposed text is fitted to the story in [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md); each still needs the usual independent reviews before any build.
+Proposal, 2026-10-23. Planning only: nothing here is built or scheduled; review repairs do not clear the remaining commissioning gates. Every kind below stays single-player, local and offline, with no accounts, online content or multiplayer. Every kind now has a numbered proposal and companion draft; some still need finite content/model fixtures and complete help paths before commissioning. The proposed text is fitted to the story in [spec 120](specs/120-keeper-of-the-ways.md); each still needs the usual independent reviews before any build.
 
 | Kind | Spec | Child-facing text |
 | --- | --- | --- |
