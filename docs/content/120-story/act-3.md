@@ -102,7 +102,7 @@ Kept: "Your reply goes in the post bag. Dot says your Spanish (or French) handwr
 **Sapling · [new pack: Messages for a Reader / Sentence Bridges]** The miller: "Ask Nuria how high Vadoalto's post reached in the storm. Be exact, so she can answer exactly."
 Kept: "A clear question, sent upstream. The answer comes back three days later, with a drawing." ([letters.md](letters.md), letter 3)
 
-**Keeper's Desk · [new pack: Valencia archive preview]** Nuria introduces a future real-history folder. Use only its separately reviewed spoiler-safe introduction here; the full [Case2 in draft PR126](https://github.com/anotherpanacea-eng/learning-garden/pull/126) belongs after page4 in ActIV and cannot be dropped into this earlier scene unchanged.
+**Keeper's Desk · teaser only** Nuria: "My grandmother remembers a flood in a big city by the sea, long ago. One day I'll bring you the whole story." (Spec 118's Valencia case opens in Act IV, after page 4.)
 
 The Paris correspondence carries on as before; Paris is at the far end of the post road, and Dot is delighted to have three directions to sort.
 

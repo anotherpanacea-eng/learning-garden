@@ -97,7 +97,7 @@ Kept: "Your notes go to the Gazette. Next week's edition has a correction, in ve
 | Plan | What it is | What it costs | What it protects |
 | --- | --- | --- | --- |
 | **The Wall** | A higher flood wall along the brook through town. | Stone, upkeep and many hands; possible effects downstream need investigation. | Intended to protect the orchard and town; its limits still matter. |
-| **The Sponge** | Let the lowest orchard fields go back to marsh. | Some apple trees, and some of the orchard keepers' living; the reed trade is a proposed replacement, not a guaranteed income. | Intended to provide habitat and space for water. How much protection it gives depends on conditions. |
+| **The Sponge** | Let the lowest orchard fields go back to marsh. | Some apple trees, and some of the orchard keepers' living; the reed trade is a proposed replacement, not a guaranteed income. | The marsh holds water and lets it go slowly, so less of it reaches the mill at once. Frogs. Herons. |
 | **Some of Each** | A lower wall above the mill, and a smaller wet meadow at the orchard's low corner. | A little of both costs. Some trees, some stone. | Some of both protections. Nobody gets everything they wanted. |
 
 **Worries** (the explorer may add one to a kept plan):
@@ -133,7 +133,7 @@ Kept: "Your sentence is read out at the meeting. Bramble nods once, which from B
 **Someone changes their mind about what they can claim.** A line may refer only to a matching kept source/artifact, never merely an opened page. If none fits, use the fallback below. This is a story response, not proof of the explorer's understanding:
 
 - After a kept supplied tray comparison (chapter 2): the orchard keeper: "I thought the model could tell us when the mill would flood. It only counts water in trays. I've changed my mind about what it tells us."
-- After a kept source from the separately reviewed Dutch archive pack (chapter 3, future): the miller: "I thought nobody ever moved a dike back. This record shows a place that did. It doesn't decide what we do here."
+- After a kept source from the separately reviewed Dutch archive pack (chapter 3, future): the miller: "I thought nobody ever undid a wall. Then I read about the Dutch rivers. It doesn't decide what we do here."
 - After the kept ledger/rain-count comparison (chapter 1 or 2): Pip: "I was sure it was all the Sponge. Now I want to know how heavy those rains were. The counts don't tell us."
 - Fallback after the supported meeting: the librarian: "I thought we had to choose between certainty and doing nothing. We can keep a plan and write down what we still need to know."
 
