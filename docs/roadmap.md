@@ -32,7 +32,7 @@ The earlier 2026-10-18 UX review also flagged hidden hint buttons, the question 
 
 ### Films and songs: when each is needed
 
-Films and songs are optional presentation. A still picture and short text must always deliver the same ending, and no video gates play. Children's faces, voices and names never go into hosted generation tools; invented characters only.
+Films and songs are optional presentation. A still picture and short text must always deliver the same ending, and no video gates play. Children's faces, voices and names never go into hosted generation tools; invented characters only. The song lyrics, the Willow Bridge concept art brief and storyboards for the act films are written in [films and songs that can start now](content/films-and-songs-2026-10-24.md).
 
 | Video | What it is for | When to make it |
 | --- | --- | --- |
