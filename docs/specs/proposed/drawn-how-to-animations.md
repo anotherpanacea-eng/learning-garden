@@ -1,6 +1,6 @@
 # Drawn how-tos: short pencil-drawn animations for instructions
 
-Status: **proposal, not reviewed** (2026-10-24). Unnumbered: the builder assigns a spec number. Not built or build-ready. It needs independent Codex and Claude specification review, a license and source audit, and a working prototype of the authoring script before any build. Roadmap fit: priority 3 (clear instruction text and graphics) and the "short how-to demonstrations" row of the [film timing table](../../roadmap.md#films-and-songs-when-each-is-needed) under priority 5.
+Status: **proposal with a first build** (2026-10-24). Unnumbered: the builder assigns a spec number. The owner asked for the first three drawn how-tos to be built from this draft; they are in the same PR (see "First build" below). Independent Codex and Claude review of the spec and the build is still needed. Roadmap fit: priority 3 (clear instruction text and graphics) and the "short how-to demonstrations" row of the [film timing table](../../roadmap.md#films-and-songs-when-each-is-needed) under priority 5.
 
 ## Purpose
 
@@ -46,7 +46,7 @@ A drawn how-to can show exactly that. The pilot is one panel in two parts:
 
 The pilot is a demonstration only. It asks no question and records nothing. Interpreting, labelling and building rings are later activities that need their own spec. The garden setting fits Act II (community making: the market and garden), which has room for life-cycle content.
 
-**Layout risk to test first.** Pele's state-diagram layout drew a five-state test cycle as a vertical column with one long return edge (local test, Pele 1.10.0). That reads like a line with a back arrow, which is the misconception the pilot exists to correct. The prototype must show a layout that reads as a ring. If Pele can't produce one, the ring is placed by the authoring script on a circle and Pele is used only where its layouts help: flowcharts, timelines and how-to-play steps.
+**Layout risk, answered by the build.** Pele's state-diagram layout drew a five-state test cycle as a vertical column with one long return edge (local test, Pele 1.10.0). That reads like a line with a back arrow, which is the misconception the pilot exists to correct. The prototype must show a layout that reads as a ring. Pele can't produce one, so the authoring script places the ring on an upright ellipse, and Pele lays out only the flowcharts.
 
 ## How a drawn how-to is made
 
@@ -129,3 +129,15 @@ Spec 49's six acts are recovery, community making, wider exchange, evidence and 
 - the still-and-captions view after the last step.
 
 Passing these shows the player works as specified, not that any child learned anything.
+
+## First build (2026-10-24)
+
+The owner asked for the first three to be built. What shipped, and where it differs from the text above:
+
+- **Life-cycle ring** in the help fold of "One butterfly, changing bodies" (`#living/stages`). It is the small white only, since that is the species the game teaches; the grasshopper comparison waits for its own reviewed content. The ring is placed by the script, as described above, and the last step traces the ring again in green.
+- **How to play Shutters** and **How to play Ribbon Rows**, Pele flowcharts of a turn. Neither game has a help fold, so the "Show me how to play" button sits under the rules on the setup and game screens. Ribbon Rows leaves it out of strategy practice. The two-row and three-row variations share one turn rule, so one drawing serves both.
+- **Player.** A small custom element, `<drawn-howto>`, builds its own panel and stops any drawing when the page re-renders or the child leaves. Pages add it with one tag, and no game's saved state or binder changed.
+- **Lettering.** In-picture labels use Hershey's single-stroke sans letters, drawn at a 24 px layout size. At 820 px they are about full size. On a 320 px phone the Shutters drawing, the widest, scales its labels to about 11 to 14 px, below body text. Captions carry every instruction in 18 px text, so nothing depends on the small labels, but a narrower Shutters layout is worth trying in review.
+- **Themes.** The game has one light theme, so the pencil colors use its tokens and no dark palette was added.
+- **Checks.** `test/drawn-howtos-checks.mjs` covers content limits, the generated art and the playback rules. `test/drawn-howtos-browser.js` covers play-through timing, Pause, Back, Next, Watch again, Close, focus, reduced motion, leaving mid-play, 44 px targets, no overflow and no saved change at 320 and 820 px. The existing Shutters, Ribbon Rows, three-row and life-stages browser checks still pass.
+
