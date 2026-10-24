@@ -6,7 +6,7 @@ Case ID `room-for-the-river`. Appears in Act IV with the archive chapter *What o
 
 ## 1. Why this case
 
-In Act IV, after a kept source from this pack, the miller says: "I thought nobody ever moved a dike back. This record shows a place that did. It doesn't decide what we do here." This case is what the miller read. The Netherlands, famous for dikes, decided after two near-disasters in the 1990s that higher dikes alone weren't enough, and spent years giving its rivers more room: moving dikes back, digging side channels and letting some farmland flood on purpose. It is the Wall and the Sponge as a real national argument, and its answer looks a lot like Some of Each.
+In Act IV, after a kept source from this pack, the miller says: "I thought nobody ever undid a wall. Then I read about the Dutch rivers. It doesn't decide what we do here." (spec 120, Act IV, at #127 `563e6aa`) This case is what the miller read. The Netherlands, famous for dikes, decided after two near-disasters in the 1990s that higher dikes alone weren't enough, and spent years giving its rivers more room: moving dikes back, digging side channels and letting some farmland flood on purpose. It is the Wall and the Sponge as a real national argument, and its answer looks a lot like Some of Each.
 
 The case adds a fixed-area rectangular arithmetic model. Under its stated assumptions, a wider rectangle is shallower. That is not a general river prediction, and the model cannot set a safe dike height.
 

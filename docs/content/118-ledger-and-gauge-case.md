@@ -188,7 +188,7 @@ Five parts, each with **Write it yourself** (free text) and **Choose and adapt**
 
 **Wren's response (the same for every plan):**
 
-> Wren reads it through once, then again with a pencil, ticking each number against the ledger. "Half the room will want this to say more than it does. The other half will want it to say less. It's going on the board as it is."
+> Wren reads it through once, then lays it on the board next to Hollis's ledger. "Half the room will want this to say more than it does. The other half will want it to say less. They can hold it up against the ledger themselves."
 
 **Story link:** spec 120's own plan prompt in Act IV remains the act's choice and is independent of this page. The page is pinned to the meeting board and appears in the almanac under the explorer's kept plan. Spec 120's "someone changes their mind" line for Vadoalto's rain gauge can show after this case is kept.
 

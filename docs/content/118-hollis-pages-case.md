@@ -195,7 +195,7 @@ Three parts, each with **Write it yourself** (free text) and **Choose and adapt*
 
 **The librarian's response (the same for every note):**
 
-> The librarian reads your note, then the transcription, then lifts the glass and looks at the stain for a while. "So now the almanac shows what Hollis wrote and what we guessed, side by side. If anyone ever finds a clearer copy, we'll know exactly which brackets to check."
+> The librarian reads your note, then lifts the glass and looks at the stain for a while. "It goes in the almanac next to Hollis's page. Anyone who reads it can look from one to the other and judge for themselves. If a clearer copy ever turns up, we'll look again."
 
 **Story link:** when Hollis returns in Act VI, an optional line can appear if this case was kept. Hollis never says which word they wrote, because that would answer the case. Hollis looks at the transcription for a long time and asks: "Which did you think it said?" Whatever the explorer kept, Hollis acknowledges the effort without validating the guessed text: "Thank you for sitting with those pages. The water has kept some words to itself." (Sent to spec 120 for placement in the "Someone comes home" scene.)
 
