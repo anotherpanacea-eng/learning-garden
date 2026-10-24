@@ -68,7 +68,7 @@ This fresh recap claims no completed work. Once spec 120 is built, append one of
 
 Further proposed recap lines are shown only if the corresponding story page/letter is actually available; they are never unconditional fresh-arrival text:
 
-- After page 2: "One page is a list of floods at the mill's flood post. The last line says Ask upstream." Read its actual values from spec 120's versioned page, not an added claim that every interval or height increased.
+- After page 2: "One page is a list of floods at the mill's flood post. The last line says Ask upstream." *(Builder note: take any values from spec 120's versioned page; the card adds no claim of its own.)*
 - After Nuria's first letter: "Vadoalto, upstream in Spain, had the storm too. Nuria keeps its flood post and writes in Spanish and English."
 - After Léon's first letter: "Les Saules, downstream in France, keeps a ferry. Léon writes in French and English."
 - After page 4: "The town drained a marsh called the Sponge in year 22 of the old Keeper's records. People are arguing about whether that made the floods worse."

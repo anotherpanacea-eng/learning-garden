@@ -31,8 +31,6 @@ Steps open in any order.
 
 > A useful record makes the question and method clear enough for someone else to repeat. "The brook looked high" leaves us guessing. "I read 52 cm on the flood post at 09:00, above its ordinary-water zero" says what was read and how.
 >
-> Two people can follow that method honestly and still report different readings, perhaps 51 cm and 52 cm. The water may move, and a scale can be hard to read exactly. Keep both reports and note that uncertainty; don't change one just to make them agree.
->
 > A measurement needs three things: a **number**, a **unit**, and a **zero** (what you measured from).
 
 **Guided first task (1a):** the first two cards sorted together.
@@ -53,6 +51,12 @@ Tasks:
 
   Reply to the second: "Everyone knows *now*. Will they in fifty years?"
 - **1c.** Rewrite one vague card as a record. Free text, with **Choose and adapt** starters: "The brook was at __ cm on the flood post at __:__."; "The rain jar held __ mm."
+- **1d.** "You read 52 cm. A minute later the baker reads the same post and gets 51 cm. What goes in the record?" Choices:
+  - "Both readings, with the times." ← fits
+  - "52 cm, because you read it first."
+  - "51.5 cm, so they agree."
+
+  Reply to the second and third: "Water moves and scales are hard to read exactly. Keeping both shows how sure anyone could be."
 
 **I'm stuck (1a):**
 

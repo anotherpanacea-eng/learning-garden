@@ -206,7 +206,7 @@ The rule has four parts, each with **Write it yourself** (free text) and **Choos
 
 **The miller's response (the same for every rule):**
 
-> The miller reads it out loud, slowly, the way you'd read it at two in the morning. "I've kept your proposed rule. Let's read it together and check what it says, and what it can't promise." She draws a box round it in chalk.
+> The miller reads it out loud, slowly, the way you'd read it at two in the morning, yawning on purpose. "Right. That's the rule on the board now, holes and all. When the next flood comes, we'll find out which holes matter." She draws a box round it in chalk.
 
 **Story link:** spec 120 supplies Act VI's sequence: the town rings the bell when Nuria's message arrives, and the explorer sends the warning on to Les Saules. The kept advice can be displayed beside that scene for a human conversation. The game does not interpret or execute its free text, claim that the supplied sequence followed every possible recommendation, or infer that a particular written rule saved the town. Keeping this case is not required for the scene.
 
