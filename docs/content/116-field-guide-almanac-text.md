@@ -121,7 +121,7 @@ Two pictures side by side: from far above, and from our sky.
 | "Couldn't see", table shows a shape | No shape to compare. The table thought it would look like {shape}. |
 | "Couldn't see", table shows new moon | No shape to compare. The table thought it would be a new moon, when the lit part faces away from us, so there was nothing lit to see. |
 
-**Prediction prompt** (after a growing half): You saw a half moon lit on the right on {date}. About how many days until it looks full?
+**Prediction prompt** (only after a growing half that the table also shows as a growing half): You saw a half moon lit on the right on {date}. About how many days until it looks full?
 
 **After a prediction:** You said {n} days. The table says about {days} days, so around {date}. Have a look that night and the nights either side. **[check: predicted date is the true full-moon date about 7 times in 10 and otherwise one day off; computed for spec 116]**
 

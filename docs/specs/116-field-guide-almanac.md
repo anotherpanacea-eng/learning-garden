@@ -57,7 +57,7 @@ The model, fixed so that every build gives the same answer:
 | Distance | Circular steps between bins: the smaller of the two ways round the eight. `thin-shrinking` and `thin-growing` are two steps apart through `new`. |
 | Hemisphere | The bins are the same in both settings; only the pictures and left/right wording swap, as for the log. |
 
-**Prediction** (optional, after the child logs `half-growing`): the child picks a number of days from 1 to 14 until the moon looks full. The table's answer is round((0.5 − fraction) × cycle) days for that logged night, which for a growing half is always 5 to 9 days, and the page names the date that many days on. The child's number is shown beside it and is not saved, scored or marked.
+**Prediction** (optional; offered only when the child logs `half-growing` **and** the table's bin for that night is also `half-growing`; otherwise the note is kept and no prediction is offered): the child picks a number of days from 1 to 14 until the moon looks full. The table's answer is round((0.5 − fraction) × cycle) days for that logged night, which for a growing half is always 5 to 9 days, and the page names the date that many days on. The child's number is shown beside it and is not saved, scored or marked.
 
 **Accuracy, checked for this spec** with a full ephemeris (PyEphem, Sun-Moon elongation) on 20,000 random dates from 2000 to 2099 at 21:00 local in five time zones from UTC−8 to UTC+10: the calculated age was never more than 0.97 days from the true one (median 0.34, 99th percentile 0.90), so "usually right to within a day" is honest and conservative. The table's bin matched the true bin on about 9 nights in 10 (18,097 of 20,000) and was never more than one step off. On 5,000 `half-growing` nights, the predicted full-moon date was the true local date in 71%, one day early in 24% and one day late in 5%, which is why the copy says *around* that date.
 
@@ -198,6 +198,7 @@ Jane's glossary convention (short definitions for *pictogram*, *tally*, *climate
 - Every key path reaches a group or "something else"; Go back works at each step; the fourteen questions and fifteen endings match the companion text.
 - Tally, pictogram and bars work from an empty log (practice month), a five-day log and a full month; half pictures appear only for odd counts at scale 2.
 - The moon table gives exactly the bins and ages in the reference-date table above, and is within one step of a published phase table on all twelve dates.
+- A `half-growing` note on a night whose table bin is not `half-growing` (for example 2024-04-02, table `half-shrinking`) offers no prediction and names no date.
 - Distance is circular through `new`; dates outside 2000 to 2099 show the out-of-range line; nothing from the table or prediction is saved.
 - Both authored three-node key trees separate all four cards, recursive edits preserve the branch structure, and an unfinished tree survives reload.
 - A saved Data desk sheet survives today's observation changing, a practice-source edit, scale changes on a different sheet and a second sheet for the same month. Recorded outcomes are unchanged. Test 24 sheets and capacity/export refusal with the original state unchanged.
