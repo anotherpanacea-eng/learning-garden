@@ -24,13 +24,13 @@
 
 **Jobs**
 
-**Sprout · [new pack: Travelers' Archive: put events in order]** Pip: "Help me put Hollis's pages in order. Which happened first?"
+**Sprout · [Travelers' Archive: put events in order]** Pip: "Help me put Hollis's pages in order. Which happened first?"
 Kept: "In order. Pip reads them through. Map, harvest, flood. He frowns at the gap."
 
-**Seedling · [new pack: Two Windows]** The orchard keeper: "My grandfather's story says the low corner was always a bit wet. Hollis's map says it was marsh. Can they both be telling the truth?"
+**Seedling · [Two Windows]** The orchard keeper: "My grandfather's story says the low corner was always a bit wet. Hollis's map says it was marsh. Can they both be telling the truth?"
 Kept: "Two accounts, both honest, noticing different things. The orchard keeper writes her grandfather's words in the almanac next to the map."
 
-**Sapling · [new pack: My Count Collection]** The librarian: "Let's chart Hollis's ledger. How many floods before year 22, and how many after?"
+**Sapling · [My Count Collection]** The librarian: "Let's chart Hollis's ledger. How many floods before year 22, and how many after?"
 Kept: "The chart goes up on the library wall. People stand in front of it and argue more quietly than before."
 
 **Keeper's Desk · case idea:** Transcribe Hollis's page 4 as written, with its smudged word. What word could fit? How sure are you, and what would make you surer?
@@ -47,13 +47,13 @@ Kept: "The chart goes up on the library wall. People stand in front of it and ar
 
 **Jobs**
 
-**Sprout · [new pack: Rain Paths, cover contrast]** {guide}: "Give both trays the same new tokens. Where do they end up?"
+**Sprout · [Rain Paths, cover contrast]** {guide}: "Give both trays the same new tokens. Where do they end up?"
 Kept: "You kept a picture of the trays. Pip points at the storage spaces, then at the outlet."
 
-**Seedling · [new pack: Water Evidence Shelf]** The librarian: "Three neighbors wrote notes about the wet corner. Sort what each one saw from what each one thinks caused it."
+**Seedling · [Water Evidence Shelf]** The librarian: "Three neighbors wrote notes about the wet corner. Sort what each one saw from what each one thinks caused it."
 Kept: "Seen on one side, thought on the other. The librarian says that's half of all good thinking."
 
-**Sapling · [new pack: Rain Paths / Fair Test]** The miller: "Compare the same input in the two supplied trays. Which has more new runoff? What does the model leave out?"
+**Sapling · [Rain Paths / Fair Test]** The miller: "Compare the same input in the two supplied trays. Which has more new runoff? What does the model leave out?"
 Kept: "A fair test, and an honest list of what it can't show. The miller pins both to the flood post."
 
 **Keeper's Desk · case idea:** Put Hollis's ledger beside Nuria's rain gauge table (letters.md, letter 4). The first three decades have similar counts of big-rain events; the fourth has more events. The table does not give their intensity, duration or local ground conditions. What do the records support, and what else would you need?
@@ -70,16 +70,16 @@ Kept: "A fair test, and an honest list of what it can't show. The miller pins bo
 
 **Jobs**
 
-**Sprout · [new pack: Travelers' Archive: Paris 1910]** The librarian: "Here's a real photograph from Paris, in a flood long ago. What can you see?"
+**Sprout · [Travelers' Archive: Paris 1910]** The librarian: "Here's a real photograph from Paris, in a flood long ago. What can you see?"
 Kept: "What you saw goes in the almanac, next to the picture's real source."
 
-**Seedling · [new pack: Exhibit Label Maker]** The librarian: "We're putting the Paris photograph in the library window. Write a label that says only what we know."
+**Seedling · [Exhibit Label Maker]** The librarian: "We're putting the Paris photograph in the library window. Write a label that says only what we know."
 Kept: "Your label is in the window. It says exactly enough. People stop to read it."
 
-**Sapling · [new pack: Source Trail]** The librarian: "Each headline in the Gazette leans on some evidence. Follow each one back. Which evidence is real, and which is a guess?"
+**Sapling · [Source Trail]** The librarian: "Each headline in the Gazette leans on some evidence. Follow each one back. Which evidence is real, and which is a guess?"
 Kept: "Your notes go to the Gazette. Next week's edition has a correction, in very small print, and a follow-up, in large print."
 
-**Keeper's Desk · [new pack: spec 118: Valencia 1957]** A city that moved its river, and a riverbed that became a garden.
+**Keeper's Desk · [spec 118: Valencia 1957]** A city that moved its river, and a riverbed that became a garden.
 
 ---
 
@@ -116,10 +116,10 @@ Kept: "Your plan goes in the almanac. Pip says it's a good one. Pip says that ab
 **Seedling · [new: the meeting board, with a worry]** The librarian: "Choose a plan. If something about it worries you, add the worry. Good plans have worries."
 Kept: "Your plan and your worry go in the almanac together. The librarian says the worry is the most useful part."
 
-**Sapling · [new pack: Sentence Bridges]** Dot: "Say why, in one sentence. Use *because* for the reason and *but* for the problem."
+**Sapling · [Sentence Bridges]** Dot: "Say why, in one sentence. Use *because* for the reason and *but* for the problem."
 Kept: "Your sentence is read out at the meeting. Bramble nods once, which from Bramble is applause."
 
-**Keeper's Desk · [new pack: spec 118 dossier pattern]** Write a recommendation for the meeting from the ledger, the rain gauge, the model runs, the archive and the orchard keeper's account. Answer Bramble's objection. Name one thing you're unsure of. A grown-up reads it; nothing grades it.
+**Keeper's Desk · [spec 118 dossier pattern]** Write a recommendation for the meeting from the ledger, the rain gauge, the model runs, the archive and the orchard keeper's account. Answer Bramble's objection. Name one thing you're unsure of. A grown-up reads it; nothing grades it.
 
 **Keeping a plan** (all depths):
 **Prompt:** Which plan would you keep for Willowbank?
@@ -133,7 +133,7 @@ Kept: "Your sentence is read out at the meeting. Bramble nods once, which from B
 **Someone changes their mind about what they can claim.** A line may refer only to a matching kept source/artifact, never merely an opened page. If none fits, use the fallback below. This is a story response, not proof of the explorer's understanding:
 
 - After a kept supplied tray comparison (chapter 2): the orchard keeper: "I thought the model could tell us when the mill would flood. It only counts water in trays. I've changed my mind about what it tells us."
-- After a kept source from the separately reviewed Dutch archive pack (chapter 3, future): the miller: "I thought nobody ever undid a wall. Then I read about the Dutch rivers. It doesn't decide what we do here."
+- After a kept source from the separately reviewed Dutch archive pack (chapter 3, future): the miller: "I thought nobody ever moved a dike back. This record shows a place that did. It doesn't decide what we do here."
 - After the kept ledger/rain-count comparison (chapter 1 or 2): Pip: "I was sure it was all the Sponge. Now I want to know how heavy those rains were. The counts don't tell us."
 - Fallback after the supported meeting: the librarian: "I thought we had to choose between certainty and doing nothing. We can keep a plan and write down what we still need to know."
 

@@ -24,13 +24,13 @@
 
 **Jobs**
 
-**Sprout · [new pack: Bundle Exchange]** Nuria: "Sort the goods. What goes up the river to us, and what comes down to you?"
+**Sprout · [Bundle Exchange]** Nuria: "Sort the goods. What goes up the river to us, and what comes down to you?"
 Kept: "Two piles, one for each town. Pip tries to put himself in the up pile."
 
-**Seedling · [new pack: Market change / Balance Stall]** The orchard keeper: "Four bundles of reed for six baskets of apples, every week. How many apples for ten bundles?"
+**Seedling · [Market change / Balance Stall]** The orchard keeper: "Four bundles of reed for six baskets of apples, every week. How many apples for ten bundles?"
 Kept: "The numbers work. The orchard keeper writes them on the back of her hand, then on paper, at Dot's insistence."
 
-**Sapling · [new pack: Messages for a Reader]** Dot: "Write the opening of our agreement: what each town sends and why it matters to them."
+**Sapling · [Messages for a Reader]** Dot: "Write the opening of our agreement: what each town sends and why it matters to them."
 Kept: "Your words open the agreement. Nuria copies them into Spanish for Vadoalto's notice board."
 
 **Keeper's Desk:** write the purpose of the exchange in three sentences that both towns could sign.
@@ -50,7 +50,7 @@ Kept: "Your words open the agreement. Nuria copies them into Spanish for Vadoalt
 **Sprout · [new: route planner, picture choice]** Dot: "This parcel must stay dry. Which Way should it take: the river path, the bridge road, or the high ford?"
 Kept: "The bridge road. Slow, dry and very boring, which is what a dry parcel wants."
 
-**Seedling · [new pack: Courier Clock Walk]** Dot: "{courier} leaves at 9 with only letters. The river path takes 3 hours each way. When will they be back?"
+**Seedling · [Courier Clock Walk]** Dot: "{courier} leaves at 9 with only letters. The river path takes 3 hours each way. When will they be back?"
 Kept: "Back by mid-afternoon, as planned. Dot writes it in the timetable."
 
 **Sapling · [new: route planner on the Cartographer's Table]** Dot: "Plan a week of deliveries so both towns get what they need, and nobody uses the high ford in winter."
@@ -88,13 +88,13 @@ Starts with **Continue the story** after the exchange plan is kept, or on a late
 
 Each is a whole contribution to this chapter.
 
-**Sprout · [new pack: Gather the Cupboard / Bundle Exchange]** The baker: "Help me carry the flour up to the attic. Bags on the top shelf, jars on the middle."
+**Sprout · [Gather the Cupboard / Bundle Exchange]** The baker: "Help me carry the flour up to the attic. Bags on the top shelf, jars on the middle."
 Kept: "The flour is up high and dry. The baker sits on the top step to get his breath back."
 
-**Seedling · [new pack: Preparation Clock]** The miller: "It's 2 o'clock. The water should be here by 6. The boards take an hour to put in. When must we start, at the latest?"
+**Seedling · [Preparation Clock]** The miller: "It's 2 o'clock. The water should be here by 6. The boards take an hour to put in. When must we start, at the latest?"
 Kept: "The boards go in with time to spare. The miller's cat supervises from the window."
 
-**Sapling · [new pack: Instructions for a Reader]** The librarian: "Write the notice for the bridge: when to stop crossing, and where to go instead."
+**Sapling · [Instructions for a Reader]** The librarian: "Write the notice for the bridge: when to stop crossing, and where to go instead."
 Kept: "Your notice is on the bridge. People read it, then go round by the high road, as it says."
 
 **Keeper's Desk:** read the flood post, the rain and the warning card together. How sure are we about the time? What would change it? Write the bell-ringer's note.
@@ -120,7 +120,7 @@ Seedling's two other choices (each plausible, each wrong in one way):
 
 ### The water arrives
 
-One **authored fictional outcome** chosen by the plan kept in Act IV; not a calculated model result or advice for a real flood. It describes this particular invented rain, never a general guarantee for a wall or marsh. A missing/unreadable prior plan requires the reviewed fallback in spec120 before this scene can ship.
+One **authored fictional outcome** chosen by the plan kept in Act IV; not a calculated model result or advice for a real flood. It describes this particular invented rain, never a general guarantee for a wall or marsh. A missing/unreadable prior plan requires the reviewed fallback in spec 120 before this scene can ship.
 
 **The Wall:**
 > **Short:** The water climbs the wall and stops. The orchard stays dry. Downstream, past the wall, it spreads over Léon's meadow.
@@ -155,13 +155,13 @@ Arrives on the explorer's next visit after the long rain ([letters.md](letters.m
 
 **Jobs** (the first journey; any one makes it)
 
-**Sprout · [new pack: Parcel packing]** Dot: "Pack the first parcel. Apples at the bottom, drawings on top, so nothing gets squashed."
+**Sprout · [Parcel packing]** Dot: "Pack the first parcel. Apples at the bottom, drawings on top, so nothing gets squashed."
 Kept: "Packed, labelled and tied with one of Bramble's ribbons. It looks very official."
 
-**Seedling · [new pack: Map Reader Dispatcher]** {courier}: "Take me up the Way we planned for this season."
+**Seedling · [Map Reader Dispatcher]** {courier}: "Take me up the Way we planned for this season."
 Kept: "Up and back, the way the plan said. The plan works. Dot is unbearable about it for a day."
 
-**Sapling · [new pack: Messages for a Reader]** Dot: "Write the note that goes with the first parcel. What's in it, and when the next one comes."
+**Sapling · [Messages for a Reader]** Dot: "Write the note that goes with the first parcel. What's in it, and when the next one comes."
 Kept: "Your note goes in the parcel. Nuria pins it on Vadoalto's notice board, next to her own."
 
 **Keeper's Desk:** after the first journey, revise the plan. What would you change, now that it has been tried once and rained on once?
@@ -188,7 +188,7 @@ A short letter from Léon arrives the same evening ([letters.md](letters.md), le
 >
 > After you answer: "Thank you for sitting with those pages. The water has kept some words to itself."
 
-This acknowledges the work without validating a guessed or original transcription. The exact text remains owned by the reviewed Case6 integration.
+This acknowledges the work without validating a guessed or original transcription. The exact text remains owned by the reviewed case 6 integration.
 
 They stay for supper. Then page 6, Hollis's letter (companion text, section 3).
 

@@ -26,12 +26,12 @@ Each scene has up to three reading lengths, per spec 120's writing rules:
 ## How to read a job
 
 ```
-**Sprout · [new pack: proposed host]** Who asks: "The request."
+**Sprout · [proposed host]** Who asks: "The request."
 Kept: "What someone says when the work is kept."
 ```
 
 - **Sprout, Seedling, Sapling** describe the task's depth, never the child. Any of them is a whole contribution to the chapter.
-- **[new pack: Activity]** names a proposed host for new scenario content or an extension, not an existing runnable task. **[new: Activity]** names a wholly unbuilt activity. Before build, the host/pack owner must supply the exact model, frozen source, optional support, artifact and contribution adapter. No general-purpose input, graph, map or composing feature is inferred from an activity name.
+- **[Activity]** names a proposed host for new scenario content or an extension, not an existing runnable task. **[new: Activity]** names a wholly unbuilt activity. Before build, the host/pack owner must supply the exact model, frozen source, optional support, artifact and contribution adapter. No general-purpose input, graph, map or composing feature is inferred from an activity name.
 - Every job is a proposal. Some can later reuse an unchanged finite task, but that requires source inspection and a reviewed adapter. Story-only scene text does not create a new playable pack.
 - **Keeper's Desk** jobs belong to spec 118 and the older-learner thread. Each chapter names the desk case that fits it, or a case idea where none is written yet.
 
@@ -41,8 +41,8 @@ These are selected dependencies, not an exhaustive list of ready work. The story
 
 | Act | Chapter | Job | What it needs |
 | --- | --- | --- | --- |
-| I | Mend the village | All repair jobs | Proposed spec33 town/repair system and reviewed contributions; not required for the existing supper. |
-| II | A garden across the seasons | Weather/records and design a record sheet | Proposed spec116 field log plus a new table-design bench; existing Field Notebook is a supplied plant model, not a real-day log. |
+| I | Mend the village | All repair jobs | Proposed spec 33 town/repair system and reviewed contributions; not required for the existing supper. |
+| II | A garden across the seasons | Weather/records and design a record sheet | Proposed spec 116 field log plus a new table-design bench; existing Field Notebook is a supplied plant model, not a real-day log. |
 | III | The floating market | Sapling: the reed-for-apples rate | A ratio table with a fixed trade (2 bundles : 3 baskets) |
 | III | Letters up and down the river | Seedling and Sapling: reply to Nuria or Léon | The existing letter-and-reader pattern with Spanish and French word cards |
 | IV | Ledger, orchard models and sources | New source packs | The current Count Collection is a categorical-button model; Rain Paths has no elapsed time or marsh geometry; Water Lab is not a sponge absorption simulator. |
@@ -51,11 +51,13 @@ These are selected dependencies, not an exhaustive list of ready work. The story
 | VI | Compare routes and keep a plan | Sprout to Sapling: the exchange plan | A required weekly route planner with seasonal closures and a supported route; Courier Clock Walk only spans 60 minutes, not multi-hour returns. |
 | VI | The long rain | All depths: passing the warning on | French word cards and a send action |
 
+Every job, including one on an existing activity, needs its own reviewed content pack before it ships. Brackets name the host activity; **[new]** marks a host that does not exist yet.
+
 ## Closing lines and evidence
 
 The listed Kept lines are authored reactions, not automatic evaluations of original writing or imagined measurements. A result-specific line requires the matching frozen artifact; otherwise use a neutral acknowledgment such as **Your work is kept.** Opened pages alone cannot choose a line claiming the explorer ran an experiment or proved a cause. Ungraded writing never causes an automatic claim that its facts are true. Story contributions do not become independent learning evidence.
 
-No future pack or first runtime slice is build-ready from this index. See spec120's Required delivery slices and the independent content, language, source and implementation gates.
+No future pack or first runtime slice is build-ready from this index. See spec 120's section 12 and the independent content, language, source and implementation gates.
 
 ## Review needs
 
