@@ -105,24 +105,25 @@ Two pictures side by side: from far above, and from our sky.
 >
 > The dark part is **not** Earth's shadow. When Earth's shadow really does fall on the moon, that's a lunar eclipse. Eclipses only happen a few times a year, because the moon's path is a little tilted. **[check]**
 
-### Future draft only: the moon table and prediction (deferred)
-
-Do not include the following table, comparison messages or prediction in the first increment. They await the separate science-reviewed mini-spec named in spec 116; its algorithm and reviewed findings may require changing this copy, including the accuracy and seven-day claims.
+### The moon table (Sapling)
 
 **Link:** Compare with the moon table
 
 **Label:** Calculated from the calendar. It's usually right to within a day.
+
+**Out of range:** The table only covers 2000 to 2099.
 
 | Situation | Message |
 | --- | --- |
 | Same step | Your note and the table agree. |
 | One step apart | Your note and the table are one step apart. Shapes near the change are hard to tell apart, and the table can be a day off. |
 | More than one step | Your note and the table are quite different. Was it the moon? Was it a different night? Both are worth wondering about. |
-| "Couldn't see" | No shape to compare. The table thought it would look like {shape}. |
+| "Couldn't see", table shows a shape | No shape to compare. The table thought it would look like {shape}. |
+| "Couldn't see", table shows new moon | No shape to compare. The table thought it would be a new moon, when the lit part faces away from us, so there was nothing lit to see. |
 
-**Prediction prompt** (after a growing half): You saw a half moon lit on the right on {date}. About how many days until it's full?
+**Prediction prompt** (after a growing half): You saw a half moon lit on the right on {date}. About how many days until it looks full?
 
-**After a prediction:** The table says about 7 days. Look on {date} and see. **[check]**
+**After a prediction:** You said {n} days. The table says about {days} days, so around {date}. Have a look that night and the nights either side. **[check: predicted date is the true full-moon date about 7 times in 10 and otherwise one day off; computed for spec 116]**
 
 ## Garden neighbors
 

@@ -24,7 +24,7 @@ In spec 120, Hollis kept Willowbank's flood records and the reveal is that the e
 - **Storm Day** (each explorer's first-visit anniversary) shows a one-page comparison of this year's weather log against last year's, built from the Data desk's month graphs.
 - **Lantern Night** (winter) reads the almanac aloud; the Weather and Sky pages supply one line each (in the companion text).
 
-The almanac opens in Act I and deepens with the acts: noticing in Act I, keeping records and graphing them in Act II (spec 120 names S7-II local records as Act II's), weather versus climate in Act III, and a later, separately specified moon table may offer an Act IV evidence comparison. Act V's sky-watching night and night garden can start from the Sky page. All pages are open from the start.
+The almanac opens in Act I and deepens with the acts: noticing in Act I, keeping records and graphing them in Act II (spec 120 names S7-II local records as Act II's), weather versus climate in Act III, and in Act IV the moon table's disagreement with a child's note is a small lesson in evidence. Act V's sky-watching night and night garden can start from the Sky page. All pages are open from the start.
 
 ## 1. Weather
 
@@ -42,7 +42,43 @@ The page shows the month as a strip of days with each noted shape drawn small.
 
 **Explanations.** For Sprout and Seedling, three observational panels: it's the same moon; at new moon it's still there; the pattern repeats in about 29 and a half days. They never explain the cause and never show a shadow. For Sapling only, **Why it changes shape** shows a view from above (moon half-lit at eight places around Earth) beside the matching sky views, explains the lit half, and says plainly that the dark part is not Earth's shadow and that a lunar eclipse is a different, rarer event.
 
-**Deferred: calculated moon table and predictions.** Neither ships in this increment. A separately science-reviewed mini-spec must define the epoch, time/day convention, supported date domain, phase-bin boundaries including new moon, distance/wraparound rule, prediction algorithm and at least twelve named reference dates before implementation. It must assess the accuracy claim and whether comparison copy feels like a correction. The companion's table/prediction copy is future draft material only. The observational Sky log and explanatory panels above remain in this increment, subject to the existing science-content gate.
+**The moon table** (Sapling page). For each date the child logged, the page shows the shape calculated for that night beside the child's own note, labeled as calculated and usually right to within a day. The child's note is never changed, flagged or hidden. The table and the prediction are computed when opened and never stored.
+
+The model, fixed so that every build gives the same answer:
+
+| Part | Rule |
+| --- | --- |
+| Epoch | The new moon of 2000-01-06 18:14 UTC. |
+| Cycle | The mean synodic month, 29.530588853 days. No other correction. |
+| Time of day | 21:00 device-local time on the logged calendar date, converted to UTC with the device's offset for that date. The game stores no time zone and no location. |
+| Date domain | 2000-01-01 to 2099-12-31. Outside it, the page says *The table only covers 2000 to 2099* and shows no comparison. |
+| Age | Days since the epoch at that moment, modulo the cycle. The phase fraction is age ÷ cycle, from 0 up to 1. |
+| Bins | Eight equal bins centered on the eight principal shapes: bin = floor(fraction × 8 + 0.5) mod 8, giving 0 `new`, 1 `thin-growing`, 2 `half-growing`, 3 `fat-growing`, 4 `full`, 5 `fat-shrinking`, 6 `half-shrinking`, 7 `thin-shrinking`. `new` is a table value only; the child's choices stay the seven shapes and `not-seen`. |
+| Distance | Circular steps between bins: the smaller of the two ways round the eight. `thin-shrinking` and `thin-growing` are two steps apart through `new`. |
+| Hemisphere | The bins are the same in both settings; only the pictures and left/right wording swap, as for the log. |
+
+**Prediction** (optional, after the child logs `half-growing`): the child picks a number of days from 1 to 14 until the moon looks full. The table's answer is round((0.5 − fraction) × cycle) days for that logged night, which for a growing half is always 5 to 9 days, and the page names the date that many days on. The child's number is shown beside it and is not saved, scored or marked.
+
+**Accuracy, checked for this spec** with a full ephemeris (PyEphem, Sun-Moon elongation) on 20,000 random dates from 2000 to 2099 at 21:00 local in five time zones from UTC−8 to UTC+10: the calculated age was never more than 0.97 days from the true one (median 0.34, 99th percentile 0.90), so "usually right to within a day" is honest and conservative. The table's bin matched the true bin on about 9 nights in 10 (18,097 of 20,000) and was never more than one step off. On 5,000 `half-growing` nights, the predicted full-moon date was the true local date in 71%, one day early in 24% and one day late in 5%, which is why the copy says *around* that date.
+
+**Reference dates** (UTC, so time-zone offset 0; the table's bin at 21:00 on that date). Each published phase instant comes from the same ephemeris and should be rechecked against a published phase table at science review:
+
+| Date | Published phase (UTC) | Table bin | Table age (days) |
+| --- | --- | --- | --- |
+| 2000-01-06 | New moon 18:13 | `new` | 0.12 |
+| 2010-06-19 | First quarter 04:29 | `half-growing` | 7.67 |
+| 2020-03-09 | Full moon 17:47 | `full` | 15.00 |
+| 2024-04-02 | Last quarter 03:14 | `half-shrinking` | 23.47 |
+| 2025-09-21 | New moon 19:54 | `new` | 28.92 |
+| 2026-01-26 | First quarter 04:47 | `half-growing` | 8.27 |
+| 2026-10-26 | Full moon 04:11 | `full` | 15.49 |
+| 2030-07-22 | Last quarter 08:07 | `half-shrinking` | 22.08 |
+| 2040-11-04 | New moon 18:55 | `new` | 0.17 |
+| 2060-02-08 | First quarter 21:41 | `half-growing` | 6.89 |
+| 2080-08-30 | Full moon 10:40 | `full` | 15.12 |
+| 2099-11-05 | Last quarter 19:41 | `half-shrinking` | 22.37 |
+
+**Does it feel like a correction?** The copy is written so that it doesn't: the child's note always comes first, the table is introduced as a calculation that can be a day off, a one-step difference is explained by shapes near a change being hard to tell apart, and a bigger difference is framed as two questions to wonder about with no answer stored. Science review should still read it with this question in mind.
 
 ## 3. Garden neighbors
 
@@ -161,7 +197,8 @@ Jane's glossary convention (short definitions for *pictogram*, *tally*, *climate
 - Hemisphere swaps the moon pictures, wording and season names.
 - Every key path reaches a group or "something else"; Go back works at each step; the fourteen questions and fifteen endings match the companion text.
 - Tally, pictogram and bars work from an empty log (practice month), a five-day log and a full month; half pictures appear only for odd counts at scale 2.
-- The first increment offers no calculated moon table or prediction; those wait for the separately reviewed mini-spec.
+- The moon table gives exactly the bins and ages in the reference-date table above, and is within one step of a published phase table on all twelve dates.
+- Distance is circular through `new`; dates outside 2000 to 2099 show the out-of-range line; nothing from the table or prediction is saved.
 - Both authored three-node key trees separate all four cards, recursive edits preserve the branch structure, and an unfinished tree survives reload.
 - A saved Data desk sheet survives today's observation changing, a practice-source edit, scale changes on a different sheet and a second sheet for the same month. Recorded outcomes are unchanged. Test 24 sheets and capacity/export refusal with the original state unchanged.
 - Unknown codes, duplicated dates, a missing temperature unit and spec-33-only saves all load; readable items stay open and raw unavailable items/duplicates remain exportable without a load-time rewrite. The four pages work with no spec 33/120 adapter.
@@ -169,9 +206,9 @@ Jane's glossary convention (short definitions for *pictogram*, *tally*, *climate
 
 ## Review follow-up, 2026-10-23
 
-Made key-building recursive with saved branches; deferred calculated moon work; separated future shared-tab/story adapters; specified frozen, bounded Data desk sheets and non-destructive observation views with capacity preflight. The fifteen-group field key and its facts remain a draft needing qualified science review; these repairs do not validate its biological classifications or any child identification. Independent implementation review and science-content clearance remain open.
+Made key-building recursive with saved branches; deferred calculated moon work (restored 2026-10-24 at Joshua's request, with the model fixed in section 2); separated future shared-tab/story adapters; specified frozen, bounded Data desk sheets and non-destructive observation views with capacity preflight. The fifteen-group field key and its facts remain a draft needing qualified science review; these repairs do not validate its biological classifications or any child identification. Independent implementation review and science-content clearance remain open.
 
 ## Review asks
 
 - Science content: are the key questions, fifteen facts and moon wording accurate and fair for children? The companion flags the lines most worth checking.
-- The future moon-table mini-spec must assess whether its comparisons feel like a correction; it has no clearance from this review.
+- The moon table: recheck the twelve reference dates against a published phase table, and read the comparison copy for whether it feels like a correction.
