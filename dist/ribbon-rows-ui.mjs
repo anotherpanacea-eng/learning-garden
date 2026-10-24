@@ -51,5 +51,5 @@ export function bindRows(state,ctx){
  root.querySelectorAll('[data-rows-resume]').forEach(b=>b.onclick=()=>act(()=>resumeRows(state,Number(b.dataset.rowsResume),ctx.canExport)&&((visit.page='game'),(visit.practice=null),true),'#rows-title'));
  root.querySelectorAll('[data-rows-remove]').forEach(b=>b.onclick=()=>{if(live()){visit.remove=b.dataset.rowsRemove;render('[data-rows-cancel]');}});
  root.querySelector('[data-rows-cancel]')?.addEventListener('click',()=>{if(live()){visit.remove=null;render('#rows-title');}});
- root.querySelector('[data-rows-confirm]')?.addEventListener('click',()=>{if(!visit.remove)return;const [kind,index]=visit.remove.split(':');act(()=>removeRowRecord(state,kind,Number(index),ctx.canExport),'#rows-title');});
+ root.querySelector('[data-rows-confirm]')?.addEventListener('click',()=>{if(!live()||!visit.remove)return;const [kind,index]=visit.remove.split(':');act(()=>removeRowRecord(state,kind,Number(index),ctx.canExport),'#rows-title');});
 }
