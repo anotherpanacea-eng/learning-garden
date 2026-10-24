@@ -12,12 +12,13 @@ A drawn how-to is optional presentation, like every film. A still picture and sh
 
 ## What the child sees
 
-A "Show me" button inside an existing help fold opens a drawing panel in place. The panel has the drawing, one caption line under it, and three native buttons: **Next step**, **Show it again** and **Close**.
+A "Show me" button inside an existing help fold opens a drawing panel in place. The panel has the drawing, one caption line under it, and native buttons: **Pause** (which becomes **Play**), **Back**, **Next**, **Watch again** and **Close**.
 
-- **One step per tap.** Each tap of Next step draws the next part of the picture in one to two seconds while the caption changes to say what was just drawn. This follows Jane's worked-example rule (reveal the steps one tap at a time) and keeps the child in control of pace. There is no autoplay, no timeline scrubber and no sound.
+- **It plays, then you can step.** Opening the panel plays the whole drawing once, step by step. Each step draws in one to two seconds while the caption changes to say what was just drawn, with a short rest before the next step. The whole play-through lasts about 15 seconds at most. There is no sound and no timeline scrubber.
+- **Stepping at any time.** Back and Next move one step at a time; using either pauses playback. Play resumes from the current step. This keeps Jane's worked-example rule (each step can be revealed one at a time) while letting the first viewing run on its own.
 - **Short.** At most six steps. A caption is one sentence of 15 words or fewer, in the second person, using the shared glossary names from Push C.
-- **Finished picture stays.** After the last step the whole drawing remains as a still, with every caption listed beneath it as a numbered list, so a reader can review without replaying.
-- **Show it again** clears and redraws from step one. Close returns focus to the "Show me" button.
+- **Finished picture stays.** When playback ends, the whole drawing remains as a still, with every caption listed beneath it as a numbered list, so a reader can review without replaying. Back and Next still step through it from there.
+- **Watch again** clears and plays from step one. Close returns focus to the "Show me" button.
 
 ## Two kinds of drawn how-to
 
@@ -38,7 +39,7 @@ Its suggested activity even ends with the ring animating once around to make "no
 
 A drawn how-to can show exactly that. The pilot is one panel in two parts:
 
-1. Draw a butterfly's stages (egg, caterpillar, chrysalis, butterfly) one per tap, with a "turns into" arrow before each new stage.
+1. Draw a butterfly's stages (egg, caterpillar, chrysalis, butterfly) one per step, with a "turns into" arrow before each new stage.
 2. Draw the closing arrow last, on its own step, with the caption "The butterfly lays eggs, so the ring starts again."
 3. Draw a grasshopper ring beside it (egg, nymph, adult), closing it the same way.
 4. A final step marks the stage the grasshopper does not have.
@@ -63,8 +64,8 @@ A check script confirms each output still matches its source text, and fails if 
 ## Accessibility and motion
 
 - The drawing has `role="img"` and an `aria-label` describing the finished picture. Each caption is announced through a polite live region as its step draws.
-- With `prefers-reduced-motion`, each tap shows the step's strokes complete at once, with no drawing motion.
-- Buttons are native, at least 44 px, keyboard reachable, with visible focus. Focus stays on Next step while stepping.
+- With `prefers-reduced-motion`, nothing plays on open. The panel opens on step one with its strokes complete, and Back and Next show each step complete at once, with no drawing motion. Play is still offered and shows the steps complete one after another.
+- Buttons are native, at least 44 px, keyboard reachable, with visible focus. Opening the panel moves focus to Pause, so a keyboard or switch user can stop playback at once. Focus stays on Next while stepping.
 - Meaning never depends on colour alone. Pencil colours come from the app's light and dark tokens and pass contrast in both themes.
 - Layout holds from 320 px wide with no horizontal scroll. Wide diagrams scale down; if a diagram can't stay legible at 320 px, it is redesigned for portrait, and a phone never gets a sideways-scrolling picture.
 
@@ -74,7 +75,7 @@ None. Opening, stepping through or replaying a drawn how-to saves nothing and is
 
 ## Upstream study
 
-- **Jane** ([kentlangley/Jane](https://github.com/kentlangley/Jane) at `27264f47`, `LESSONS.md`): reused the worked-example rule, one idea plus steps revealed one tap at a time, and the short second-person wording limits. A drawn how-to is the "show me" rung that sits before guided practice and inside the stuck-help ladder. Not adopted: quests, bosses, medals or timers. No Jane code or content is incorporated.
+- **Jane** ([kentlangley/Jane](https://github.com/kentlangley/Jane) at `27264f47`, `LESSONS.md`): reused the short second-person wording limits and adapted the worked-example rule (one idea plus steps revealed one tap at a time). Here the drawing plays once on its own first, and each step can then be revisited one at a time. A drawn how-to is the "show me" rung that sits before guided practice and inside the stuck-help ladder. Not adopted: quests, bosses, medals or timers. No Jane code or content is incorporated.
 - **Marble** ([withmarbleapp/os-taxonomy](https://github.com/withmarbleapp/os-taxonomy) at `a8719737` via Jane's `data/marble/teaching-research.json`; the app's pinned copy is in `curriculum/marble/`): the pilot follows the teaching research for `mt_7EqhgErJyU` as summarized above, paraphrased with no research text copied (CC BY-SA). Its hard prerequisite is Sorting into categories (`mt_xppl18avyY`), which `topic-coverage.csv` lists as not yet mapped. The pilot is a demonstration, so no coverage is claimed for either topic.
 - **Pele** ([obsidianmd/pele](https://github.com/obsidianmd/pele) at `4eff76f9`, version 1.10.0, MIT, author kepano): studied as a dev-time layout tool. Its own website animates diagrams for a social video; that is a design reference only. Nothing is incorporated until the build records the exact version and license in `NOTICE`.
 - **The inspiration site** is a design reference only. Its drawing code is not available to reuse and none is copied.
@@ -115,13 +116,15 @@ Spec 49's six acts are recovery, community making, wider exchange, evidence and 
 - the check script fails when source text and output drift;
 - the authoring script gives identical output on repeat runs;
 - the player draws nothing beyond the current step;
-- reduced motion shows complete strokes;
-- Show it again resets to step one;
+- opening plays every step once in order, then stops on the finished still;
+- Back, Next and Pause stop playback and Play resumes from the current step;
+- reduced motion plays nothing on open and shows complete strokes;
+- Watch again resets to step one and plays;
 - nothing is written to saved state.
 
 **Browser checks:**
 - legibility and no horizontal overflow at 320, 820 and desktop widths in both themes;
-- keyboard-only stepping;
+- keyboard-only pausing and stepping;
 - screen-reader announcement of each caption;
 - the still-and-captions view after the last step.
 
