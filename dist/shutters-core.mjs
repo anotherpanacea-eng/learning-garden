@@ -88,7 +88,7 @@ export function explainShutters(state,step,canExport){
  if(!int(step,0,3))return false;
  return commit(state,r=>{
   if(!shuttersPosition(r.current)||!support(r.current,'explanation'))return false;
-  if(r.lesson!==null&&(!validShuttersSource(r.lesson?.source)||!int(r.lesson.step,0,3)))r.earlier.push({lesson:copy(r.lesson)});
+  if(r.lesson!=null&&(!validShuttersSource(r.lesson?.source)||!int(r.lesson.step,0,3)))r.earlier.push({lesson:copy(r.lesson)});
   r.lesson={source:copy(r.current.source),step};
  },canExport);
 }

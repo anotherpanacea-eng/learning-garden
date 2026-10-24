@@ -51,4 +51,6 @@ const cap=freshState();ok(startShutters(cap,6,admit));cap.shutters.earlier=Array
 cap.shutters.earlier=[];cap.shutters.current.support=Array.from({length:12},(_,i)=>`unknown-${i}`);snapshot=structuredClone(cap);ok(!explainShutters(cap,0,admit));eq(cap,snapshot,'support cap atomic');
 const ended=structuredClone(win.shutters.current);cap.shutters.current=ended;cap.shutters.notes=Array.from({length:24},()=>({text:'Synthetic note',game:ended}));snapshot=structuredClone(cap);ok(!keepShutterNote(cap,'one too many',admit));eq(cap,snapshot,'notes never silently evicted');
 const imported=prepareProgressImport(JSON.stringify({...s,title:'Synthetic notebook'},null,2));ok(imported.ok,'actual formatted import accepts preserved root');
+const missing=freshState();ok(startShutters(missing,6,admit));delete missing.shutters.lesson;ok(explainShutters(missing,0,admit));eq(missing.shutters.earlier,[],'absent lesson does not invent a retained record');
+const refused=structuredClone(s);const refusedRoot=refused.shutters;const refusedCopy=structuredClone(refused);ok(!removeShutterRecord(refused,'earlier',0,()=>false));eq(refused,refusedCopy,'refused removal atomic');eq(refused.shutters,refusedRoot,'refused removal retains identity');
 console.log(`Shutters: ${checks} assertions passed.`);
