@@ -26,7 +26,7 @@ Audit for [spec 154](../specs/154-ramps-levers-hoist.md) and its [companion text
 
 | Source | URL | Supports |
 | --- | --- | --- |
-| Mental Floss, "Hammer and Feather Drop on the Moon" (quotes the Apollo 15 Preliminary Science Report via Joe Allen) | https://www.mentalfloss.com/article/22913/hammer-and-feather-drop-moon | 1.32 kg aluminum geological hammer; 0.03 kg falcon feather; dropped together from about 1.6 m; same acceleration, landed together. |
+| Mental Floss, "Hammer and Feather Drop on the Moon" (quotes the Apollo 15 Preliminary Science Report via Joe Allen) | https://www.mentalfloss.com/article/22913/hammer-and-feather-drop-moon | 1.32 kg aluminum geological hammer; (mass omitted: the report value is disputed) falcon feather; dropped together from about 1.6 m; same acceleration, landed together. |
 | Atlas Obscura, "The Falcon Feather on the Moon" | https://www.atlasobscura.com/articles/objects-of-intrigue-the-falcon-feather-on-the-moon | The feather was left on the Moon. |
 | Nautilus, "55 years ago an Apollo 15 astronaut dropped a hammer on the Moon"; STAO | https://nautil.us/55-years-ago-an-apollo-15-astronaut-dropped-a-hammer-on-the-moon-1283339 ; https://stao.ca/hammer-feather-experiment-on-the-moon-1971/ | David Scott; 2 August 1971; near the end of the third moonwalk, facing the TV camera. |
 | Wikipedia, "Galileo's Leaning Tower of Pisa experiment" | https://en.wikipedia.org/wiki/Galileo%27s_Leaning_Tower_of_Pisa_experiment | The story comes from Viviani's biography (composed about 1654); Galileo's own writings do not mention the tower; many historians treat it as doubtful or a thought experiment. |
@@ -87,3 +87,6 @@ Numbers: every answer and wrong-choice value recomputed independently (`review-1
 Contract: the crosswalk was re-derived from the pinned `curriculum/marble/dependencies.json` by script; all 13 hard edges for the 7 targets match, with correct names; every id exists in the pinned `topics.json`; 27 Forces & Motion topics, 1 mapped.
 
 Cross-pack: spec 147 says the Clockwork Mill (123) owns gears, but 123 is a programming spec with no gear teaching, so this pack's gear panel duplicates nothing. 147 also says it keeps work = force × distance out; this pack's "push × distance stays the same" is a model pattern only and never names work, so the two agree. Spec 133's Long Line has no 1586, 1638 or 1971 card, and spec 141's Galileo card is the telescope (1609-1610); the spec's revisit row now says so.
+
+
+Review correction (2026-10-25): NASA flags the reported feather mass as a likely typo; no feather mass or mass ratio is taught. Retain the heavier-hammer/lighter-feather fall demonstration. https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_15_feather_drop.html

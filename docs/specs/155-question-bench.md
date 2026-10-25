@@ -42,7 +42,7 @@ Facts are checked in the [source audit](../source-audits/155-question-bench.md);
 
 **Repeats and spread (a made-up model).** Paper spinners from the library balcony, seconds: long wings 2.4, 2.6, 2.5 (range 0.2, mean 2.5); short wings 1.8, 2.0, 2.2 (range 0.4, mean 2.0). Every long time exceeds every short time. Pip's single tries (2.4, 2.2) told him little. Bramble's plain (2.5, 2.1, 2.7) and ribbon-tail (2.4, 2.6, 2.2) spinners overlap: "can't tell yet". An odd reading (2.5, 2.6, 4.1, noted "caught on a shelf") stays in the record, marked, and the try is repeated.
 
-**Precision and accuracy (Keeper's Desk only).** Precision is how closely repeats agree; accuracy is how close results are to the true value (NIST). The baker's 500 g weight: bakery scale 512, 511, 513 g (mean 512, range 2: precise, 12 g heavy); market scale 494, 506, 500 g (mean 500, range 12). Repeats shrink scatter; they cannot remove a steady offset. No significant figures.
+**Precision and accuracy (Keeper's Desk only).** Precision is how closely repeats agree; accuracy is how close results are to the true value (NIST). The baker's 500 g weight: bakery scale 512, 511, 513 g (mean 512, range 2: precise, 12 g heavy); market scale 494, 506, 500 g (mean 500, range 12). Averaging repeated readings can reduce random uncertainty in the mean; they cannot remove a steady offset. No significant figures.
 
 **Together or because (a made-up model).** Puff's café week (table in the companion): 16 to 28 °C, ice creams 9 to 40, sun hats 1 to 8; sorted by temperature, both rise at every step. Three routes to check: a **hidden cause** (warm sunny days), a **backwards arrow** (rain brings umbrellas) and **chance**. A deciding test holds the weather the same and changes only the hats.
 

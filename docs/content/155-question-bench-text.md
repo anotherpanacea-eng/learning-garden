@@ -390,7 +390,7 @@ The baker's test weight is exactly 500 g; readings as in B8. The target picture 
 - Feedback: always: "More readings help with scatter. A steady 12 g stays." Average: "The mean would still be near 512." No: "Yes. The scale needs checking against the 500 g weight."
 - Hint: Is the bakery scale scattered, or steadily off?
 - I'm stuck: A ruler with its first centimeter cut off reads long every time. Measuring more won't fix it. Now try.
-- Explanation: Repeats reduce scatter. A steady offset needs a check against a known value.
+- Explanation: Averaging repeats helps estimate a value more reliably. A steady offset needs a check against a known value.
 
 ### Set C: Together, because, and changing minds
 
