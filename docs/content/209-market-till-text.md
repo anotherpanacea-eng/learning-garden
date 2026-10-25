@@ -113,7 +113,7 @@ Worked example: 1. $2.65 + $1.85. 2. Cents: 65 + 85 = 150¢, which is $1.50. 3. 
 
 **T5. How much more?** (A true thing about math)
 > Count up from what you have to the price. Jump to the next ten cents, then the next dollar.
-Worked example: 1. Have $2.40. Pie: $3.05. 2. $2.40 to $2.50: 10¢. 3. To $3.00: 50¢. 4. To $3.05: 5¢. 5. 65¢ more.
+Worked example: 1. Have $2.40. Soup: $3.05. 2. $2.40 to $2.50: 10¢. 3. To $3.00: 50¢. 4. To $3.05: 5¢. 5. 65¢ more.
 
 **T6. Change by counting up** (A true thing about math)
 > Change is the gap from the price up to what was paid. Count up in jumps, then add the jumps.
@@ -224,8 +224,8 @@ Keeper's note:
 **Model card** (A made-up model):
 > Rounding gives "about". Close to your money? Work it out exactly.
 
-**Opening:** Estimate first. Lock it in. Then work it out.
-**Buttons:** Round each price · Lock my estimate · Work it out · Round up to be safe
+**Opening:** Estimate first. Keep it. Then work it out.
+**Buttons:** Round each price · Keep my estimate · Work it out · Round up to be safe
 **Answer buttons:** Enough · Not enough · Too close to tell yet
 **After the exact total:** Estimate: about [estimate]. Exact: [total]. The estimate [was close / was far off].
 
@@ -375,7 +375,7 @@ Hint: Add all the cents first. Did they reach 100?
 Explanation: Three prices, one total. The cents gave one extra dollar.
 
 **B5 (Sapling, number)**
-Prompt: Ember has $2.40. The pie costs $3.05. How much more?
+Prompt: Ember has $2.40. The soup costs $3.05. How much more?
 Answer: 65¢.
 Worked steps: 1. $2.40 to $2.50: 10¢. 2. $2.50 to $3.00: 50¢. 3. $3.00 to $3.05: 5¢. 4. 10 + 50 + 5 = 65¢.
 Tests: $5.45 (adding the two amounts); $1.35 (3 − 2 dollars, then the smaller cents from the larger, 40 − 5).
@@ -464,12 +464,12 @@ Feedback B: Here the estimate is far below $10. That already tells you.
 Feedback C: Count the money, not the things. About $3 is small.
 
 **D3 (Sapling, 3-choice)**
-Prompt: Five pies at $2.40. Estimate: about $10. Ember has $10. Now what?
+Prompt: Five sandwiches at $2.40. Estimate: about $10. Ember has $10. Now what?
 - A. Say yes. The estimate is $10. *(tests: trusting a close estimate)*
 - B. Work it out exactly. It's close, and each price rounded down. *(right)*
 - C. Say no. Five is too many things. *(tests: counting items, not money)*
 Hint: Did $2.40 round up or down?
-Explanation: Each pie lost 40¢ in rounding. Five lots of $2.40 make $12. Not enough.
+Explanation: Each sandwich lost 40¢ in rounding. Five lots of $2.40 make $12. Not enough.
 Feedback A: Every price rounded down, so the real total is more. Check.
 Feedback B: Yes. Exact is $12, so $10 is not enough.
 Feedback C: The number of things doesn't decide. Their total does.
@@ -479,7 +479,7 @@ Prompt: Loaf, jam, pie, honey cake. Estimate, then exact. Is $10 enough?
 Answer: estimate about $9; exact $8.60; yes, with $1.40 left.
 Worked steps: 1. Round: $3 + $2 + $2 + $2 = $9. 2. Close to $10, so work it out. 3. Cents: 65 + 85 + 35 + 75 = 260¢ = $2.60. 4. Dollars: 2 + 1 + 2 + 1 = 6. 5. $8.60.
 Tests: $6.60 (forgetting both traded dollars); $7.60 (trading only one dollar).
-Hint: Lock your estimate first. Then add the cents.
+Hint: Keep your estimate first. Then add the cents.
 Explanation: The estimate was close, so the exact total settled it.
 
 **D5 (Keeper's Desk, 3-choice)**

@@ -155,7 +155,7 @@ Worked example: 1. Small triangle: up 3, across 4. 3 ÷ 4 = 0.75. 2. Big one: up
 
 **T14. Height from the table** (A true thing about math)
 > Height above your eye = distance × the tangent of your angle. Then add your eye height.
-Worked example: 1. Angle 45°, 9 m from the tree. 2. Table: tangent 45° is 1.00. 3. 9 × 1.00 = 9. 4. 9 + 1.5 = 10.5 m.
+Worked example: 1. Angle 45°, 9 m from the tree, eye 1.5 m up. 2. Table: tangent 45° is 1.00. 3. 9 × 1.00 = 9. 4. 9 + 1.5 = 10.5 m.
 
 **T15. Sine and cosine** (A true thing about math)
 > Sine = opposite ÷ hypotenuse. Cosine = adjacent ÷ hypotenuse. Pick the ratio that uses the side you know and the side you want.
@@ -649,11 +649,13 @@ Step 3: **Skip for now.** You can come back any time.
 - **enlargement**: a similar copy grown or shrunk from a center.
 - **center of enlargement**: the point the copy grows from.
 - **corresponding sides**: sides in the same place on the shape and its copy.
+- **ratio**: one length divided by another, like new ÷ old.
 - **right angle**: a square corner, 90°.
 - **hypotenuse**: the side across from the right angle; the longest side.
 - **opposite**: the side across from the angle you marked.
 - **adjacent**: the side next to the angle you marked, not the hypotenuse.
 - **Pythagoras' theorem**: in a right triangle, the two small squares add up to the big square.
+- **square root**: the side of a square with that area. 10 × 10 = 100, so the square root of 100 is 10.
 - **tangent**: opposite ÷ adjacent for an angle.
 - **sine**: opposite ÷ hypotenuse for an angle.
 - **cosine**: adjacent ÷ hypotenuse for an angle.

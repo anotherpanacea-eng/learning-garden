@@ -183,7 +183,7 @@ From the pinned `curriculum/marble/dependencies.json`:
 | 12-hour and 24-hour time | Telling time to the minute (age 7+) (`mt_4m8BimI4G5`) | Taught here (T12 before T13). |
 | Numbers on a number line (elapsed time) | Comparing Time Durations (`mt_4emC463IyW`) | Taught here (T15 before T16). |
 | Numbers on a number line (elapsed time) | Telling time to the minute (age 8+) (`mt_UNzojLkNdm`) | Taught here (Mended Clock before Day Line). |
-| Telling time to the minute (age 9+) | Converting measurement units (`mt_d8al9JcajP`) | Documented gap: in neither the build-out map nor any spec. Supported inline for time units only (T14); no claim. |
+| Telling time to the minute (age 9+) | Converting measurement units (`mt_d8al9JcajP`) | Documented gap: no spec on main and no pack in the build-out claims it (merged spec 135 lists it as a documented gap too; sibling spec 201 teaches metric conversion under its own target). Supported inline for time units only (T14); no claim. |
 | Telling time to the minute (age 9+) | Numbers on a number line (`mt_IL86kadLSS`) | Taught here (reassigned to this pack from spec 189 by the coordinator). |
 
 Soft prerequisites noted: Counting in 2s (`mt_nvdpxAJTBG`, for Telling Time: Minutes; counting in fives is used and taught on the rim); Time Units and Calendar Facts (`mt_EXlmTURK_o`, for Comparing Time Durations; draft spec 134 claims it). Claim check, 2026-10-25: no spec on main (`b68d8de`) or any draft PR (126, 128, 137-151) claims the thirteen targets. Specs 68 and 93's audits and draft spec 118 Cases 3 and 4 name some of them only as deferred or candidate references; spec 189 drops `mt_IL86kadLSS` toward this pack.

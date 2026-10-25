@@ -89,7 +89,7 @@ Five sets, **34 items**, full text in the companion:
 | D. Squares on the sides | Sapling (D1-D4), Keeper's Desk (D5-D7) | 7 | 3-choice, number |
 | E. The Surveyor's Table | Sapling (E1-E4), Keeper's Desk (E5-E9) | 9 | 3-choice, number, number with a given rule, *say why* |
 
-Sprout is not offered here (all tasks need lengths). Over the 18 three-choice items the right answer sits at A, B and C six times each. Production items (number and coordinate entry) outnumber choices in Sets A, B, D and E, as both research records ask. Four items (C1, C5, D6, and A5's evidence check) include a choice that withholds more than the evidence requires or claims more than one pair shows. *Say why* (E9) is spoken to a grown-up and never stored or graded.
+Sprout is not offered here (all tasks need lengths). Over the 18 three-choice items the right answer sits at A, B and C six times each. Production items (number and coordinate entry) sit beside the choices in every set, as both research records ask: two or three in Sets A to D, and five, outnumbering the choices, in Set E. Four items (C1, C5, D6, and A5's evidence check) include a choice that withholds more than the evidence requires or claims more than one pair shows. *Say why* (E9) is spoken to a grown-up and never stored or graded.
 
 ## Saved work
 

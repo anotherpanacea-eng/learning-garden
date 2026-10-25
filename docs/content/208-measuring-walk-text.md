@@ -53,7 +53,7 @@ Companion to [spec 208](../specs/208-measuring-walk.md). Use as written, after i
 > Pip lines up two sticks, just to check.
 
 **Keeper's note** (A true thing about math):
-> The red plank was nearer the finish because it was nearer the start too. Comparing far ends only works when the near ends match. That is why races begin on one line.
+> The red plank reached farther only because it started farther along. Comparing far ends only works when the near ends match. That is why races begin on one line.
 
 ### Scene 2. The door that would not move (Act I, chapter 4: mend the village)
 
@@ -185,7 +185,7 @@ Worked example: 1. 10 mm make 1 cm. 2. 100 cm make 1 m. 3. 1000 m make 1 km.
 
 **T11. How much longer?** (A true thing about math)
 > Measure both in the same unit. Take the shorter from the longer. Say the answer with its unit.
-Worked example: 1. Plank: 110 cm. 2. Shelf: 90 cm. 3. 110 − 90 = 20. 4. The plank is 20 cm longer.
+Worked example: 1. New plank: 110 cm. 2. Old plank: 90 cm. 3. 110 − 90 = 20. 4. The new plank is 20 cm longer.
 
 **T12. The heavier side goes down** (A true thing about math)
 > On a balance, the heavier side goes down. Level means the same weight. Big things can be light.
@@ -498,7 +498,7 @@ Feedback B: Ten small clips cover less. Table B goes farther.
 Feedback C: Yes. Same number, bigger units, longer table.
 
 **C6 (Keeper's Desk, say why; spoken to a grown-up, not stored)**
-Prompt: Bramble got 6 hand spans. Pip got 9 paw spans. Both right?
+Prompt: One bench: Bramble gets 6 hand spans, Pip gets 9 paw spans. Both right?
 Model answer for the grown-up: Yes. Pip's paw span is smaller, so more fit across the same bench. That's why people agree on units like the centimeter.
 Tests: only one count can be right; bigger number means a longer bench.
 Hint: Whose span is smaller?

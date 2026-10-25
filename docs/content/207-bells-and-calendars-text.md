@@ -172,7 +172,7 @@ Worked example: 1. Long hand on the 4. 2. Count: 5, 10, 15, 20. 3. Twenty minute
 
 **T10. Past and to** (A true thing about math)
 > On the right side, say minutes past this hour. On the left side, say minutes to the next hour.
-Worked example: 1. Long hand on the 9. 2. Left side: 15 minutes to go. 3. Quarter to four: 3:45.
+Worked example: 1. Long hand on the 9, short hand nearly at 4. 2. Left side: 15 minutes to go. 3. Quarter to four: 3:45.
 
 **T11. To the minute** (A true thing about math)
 > Find the last five the long hand passed. Count on the little marks. The hour is the number the short hand last passed.
@@ -713,6 +713,7 @@ Step 3: **Skip for now.** You can come back any time.
 - **month**: 28 to 31 days. 12 months make a year.
 - **leap year**: a year with 366 days, with February 29.
 - **century year**: a year ending in 00, like 1900 or 2000.
+- **divisible by 4**: divides by 4 exactly, with nothing left over.
 - **quarter past / quarter to**: 15 minutes after the hour / 15 minutes before the next hour.
 - **a.m. / p.m.**: from midnight to noon / from noon to midnight.
 - **noon / midnight**: 12:00 in the middle of the day / 00:00 at the start of the day.
