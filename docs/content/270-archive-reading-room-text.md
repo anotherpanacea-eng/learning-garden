@@ -503,10 +503,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **D3 (Sapling; after page 4 comes free).**
 - Records on the desk (shown first, A story from Willowbank): **The miller's rain book**, kept by her family for seventy years: "That storm night had the most rain of any night in this book." **The town's market book**: "Orchard apples sold at market every year it lists."
-- Prompt: Which sentence needs evidence about a marsh's capacity?
-- Choices: "The storm brought more rain in one night than anyone could remember." (`different-evidence-question`) · "The orchard has fed Willowbank for as long as anyone can recall." (`different-evidence-question`) · "No marsh could have soaked up all that water." ✔
-- Feedback: More rain: This needs rainfall evidence, not a marsh model. · Orchard: This needs harvest evidence, not a marsh model.
-- Hint: Which sentence makes a claim about a marsh, rather than rain or apples?
+- Prompt: Which sentence has no record on the desk to check it?
+- Choices: "The storm brought more rain than any night in the miller's seventy-year book." (`checked-seen-as-unchecked`) · "Orchard apples sold at market every year the market book lists." (`checked-seen-as-unchecked`) · "No marsh could have soaked up all that water." ✔
+- Feedback: More rain: The rain book backs this limited comparison. · Orchard: The market book records sales in every listed year.
+- Hint: Match each sentence to a record. Which one has none?
 - Explanation: The supplied records describe rain and apples. They do not measure what a marsh could have held.
 
 **D4 (Keeper's Desk; after page 4 comes free).**

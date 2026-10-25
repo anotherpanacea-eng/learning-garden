@@ -295,7 +295,7 @@ Worked example: *Pepys's diary.*
 - Hob's letter, "I moved my sheep up the hill": firsthand. *Hob did it himself.*
 - A library book about this storm, by a writer who was not there and used eyewitness reports: secondhand. *The writer used other people’s observations.*
 - A diary line by someone at the mill: “I watched water rise past the window”: firsthand. *The writer describes their own observation.*
-- A history page about this storm, written years later from the miller’s note: secondhand. *The writer uses an earlier witness’s record.*
+- A history page about this storm, written later by someone who used the miller’s note: secondhand. *The writer uses an earlier witness’s record.*
 
 **Clue words card:** "I saw," "we heard," "I pulled" often mean firsthand. "People say," "records show," "she was told" often mean secondhand.
 
