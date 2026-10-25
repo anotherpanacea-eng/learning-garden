@@ -180,7 +180,9 @@ The eight rows account for all 48 specs exactly once as primary homes. Teaching 
 
 ### Suggested delivery passes
 
-1. **Keep the current town usable.** Complete the bounded Keeper's Desk and story work under priorities 1/2; continue the residual text/graphics sweep under priority 3. The live Games Table and 83 drawn how-tos are footholds, not new history/science packs.
+Passes are preferences under the roadmap's ready-work rule, not stages to finish in order.
+
+1. **Keep the current town usable.** Continue the bounded Keeper's Desk and story work under priorities 1/2; continue the residual text/graphics sweep under priority 3. The live Games Table and 83 drawn how-tos are footholds, not new history/science packs.
 2. **Add different ways to act.** Use priority-4 turns for Rhythm Studio (115), the bounded Almanac/data desk (116), and a first history source/timeline experience (133 with one chosen follow-on). These add composing with sound, reported-data construction and time/source reasoning. Prefer Spanish errands (117) after the Almanac when fluent content and errand-model reviews are ready; a ready history slice can proceed while that review waits. The order is a preference, not a requirement to finish these whole proposals.
 3. **Make investigation richer.** Alternate selected materials, organism and weather slices with a mystery (122), programming puzzle (123) or visual/spatial creation (125/126). Revisit something already built using a new unknown, representation, criterion or reader. Avoid scheduling a whole subject family as one build.
 4. **Give the growing town harder questions.** As Act III/IV work is commissioned, select real-history comparison, weather/causal evidence, relative motion, Bank Builder (124) and the meeting board's own reviewed adapter. Spec 119's six deeper bench extensions keep advanced math and language work in the same town. None of the new pack lists substitutes for that intermediate instruction.

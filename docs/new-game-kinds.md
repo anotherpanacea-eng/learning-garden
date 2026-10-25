@@ -1,6 +1,6 @@
 # New kinds of play beyond reading, writing and math
 
-Original survey, 2026-10-23; status updated 2026-10-25. The proposals and companion drafts are merged. Ten kinds remain proposed; the Games Table is partly live with Seed Pile, Shutters and two/three-row Ribbon Rows (specs 129–132). Its mancala/Hex and later designer work remain proposals. The [current delivery queue](roadmap.md#new-material-status-and-next-builds) owns scheduling. Each new slice retains its content/model/source/save and implementation reviews; original survey descriptions below are design history where the numbered spec or current queue narrows them. Play remains single-player and local, with open destinations and no learner-data upload.
+Original survey, 2026-10-23; status updated 2026-10-25. The proposals and companion drafts are merged. Ten kinds remain proposed; the Games Table is partly live with Seed Pile, Shutters and two/three-row Ribbon Rows (specs 129–132). Its mancala/Hex and later opponent-design work remain proposals. The [current delivery queue](roadmap.md#new-material-status-and-next-builds) owns scheduling. Each new slice retains its content/model/source/save and implementation reviews; original survey descriptions below are design history where the numbered spec or current queue narrows them. Play remains single-player and local, with open destinations and no learner-data upload.
 
 | Kind | Spec | Child-facing text |
 | --- | --- | --- |
