@@ -159,6 +159,38 @@ def geometry(p, expected):
        'pixel pan bases agree with heavier/lower relation')
 
 
+def share_sketch(p, groups):
+    row = work(p)['moves'][-1]
+    ok(row['operation'] == {'kind': 'share', 'groups': groups}, 'sketch belongs to the frozen last share row')
+    sketch = p.locator('[data-both-share-sketch]')
+    ok(sketch.count() == 1, 'a share has one visible before/group sketch')
+    for side in ['left', 'right']:
+        before = row['before'][side]
+        pan = sketch.locator('[data-both-share-side="' + side + '"]')
+        ok(pan.count() == 1 and 'before sharing' in pan.inner_text(), side + ' sketch names its before arrangement')
+        ok(f"{before['parcels']} whole parcels and {before['units']} unit weights" in pan.inner_text(),
+           side + ' before counts come from the frozen row')
+        drawn = pan.locator('[data-both-group]')
+        ok(drawn.count() == groups and pan.locator('[data-both-group="compared"]').count() == 1 and
+           pan.locator('[data-both-group="aside"]').count() == groups - 1,
+           side + ' shows one compared group and every other group set aside')
+        for i in range(groups):
+            group = drawn.nth(i)
+            ok(group.locator('.both-mini-parcel').count() * groups == before['parcels'] and
+               group.locator('.both-mini-unit').count() * groups == before['units'],
+               side + ' group tokens reconstruct the exact before parcel and unit counts')
+
+
+def proposed_wording(p, check, relation):
+    feedback = check['feedback'].lower()
+    ok('is lower' not in feedback and 'model mass' not in feedback,
+       'a different proposal reply never asserts a new physical pan relation')
+    text = p.locator('[data-both-recorded-substitution]').inner_text().lower()
+    expected = 'the proposed totals are equal' if relation == 'equal' else f'the proposed {relation} total is greater'
+    ok(expected in text and 'is lower' not in text and 'model mass' not in text,
+       'recorded proposed-total wording remains separate from the actual apparatus')
+
+
 def live(left, right):
     return dict(zip(['left', 'right'], [dict(zip(['parcels', 'units', 'bags'], x)) for x in [left, right]]))
 
@@ -247,6 +279,9 @@ with sync_playwright() as pw:
             remove.focus()
             p.keyboard.press('Enter')
             ok(work(p)['live'] == live((2, 4, 0), (0, 12, 0)), 'keyboard paired removal changes both pans')
+            row_source = work(p)['moves'][-1]['source']
+            ok(set(row_source) == {'version', 'kind', 'id', 'parcelMass', 'bagUnits'} and
+               row_source['kind'] == 'balance-both-row', 'new ledger rows keep only their compact frozen model source')
             ok(p.locator('[data-both-action="parcel-pair"]').evaluate('x=>document.activeElement===x'),
                'move restores local keyboard focus')
             proposal(p, '8')
@@ -261,6 +296,14 @@ with sync_playwright() as pw:
             share(p, 2)
             ok(work(p)['live'] == live((1, 0, 0), (0, 4, 0)), 'whole-group sharing isolates one parcel without splitting it')
             ok('set aside' in p.locator('.both-page').inner_text(), 'sharing explains the other whole groups set aside')
+            share_sketch(p, 2)
+            shared = copy.deepcopy(work(p)['live'])
+            action(p, 'unit-right')
+            ok(p.locator('[data-both-share-sketch]').count() == 0, 'a following move hides the earlier share sketch')
+            geometry(p, 'left')
+            tap(p, '[data-both-undo]')
+            ok(work(p)['live'] == shared, 'Undo restores the shared arrangement without changing its frozen sketch inputs')
+            share_sketch(p, 2)
             proposal(p, '')
             keep(p)
             last = work(p)['checks'][-1]
@@ -276,6 +319,8 @@ with sync_playwright() as pw:
             last = work(p)['checks'][-1]
             ok(last['valueMatch'] is False and last['isolated'] is True and last['model']['relation'] == 'equal',
                'different proposed value does not change the actual level isolated picture')
+            ok(last['proposedModel'] == {'left': 19, 'right': 17, 'relation': 'left'}, 'P5 gives proposed totals 19/17')
+            proposed_wording(p, last, 'left')
             page(p, 'balance')
             geometry(p, 'equal')
             bounds(p)
@@ -347,6 +392,7 @@ with sync_playwright() as pw:
                     action(p, 'unit-pair')
                 share(p, groups)
                 ok(work(p)['live'] == expected, case + ' isolates by exact whole groups')
+                share_sketch(p, groups)
                 proposal(p, '')
                 keep(p)
                 ok(work(p)['checks'][-1]['isolated'] and work(p)['checks'][-1]['valueMatch'] is None,
@@ -396,6 +442,25 @@ with sync_playwright() as pw:
             go(p)
             ok(book(p)['balanceBoth'] == expected, 'original explorer remains isolated after importing another')
 
+            # Imported full row sources from the earlier format remain readable, unchanged.
+            legacy = copy.deepcopy(raw)
+            w = legacy['balanceBoth']['cases']['both-sides-1']
+            full_source = copy.deepcopy(w['source'])
+            w['moves'][0]['source'] = full_source
+            w['inspection'] = 0
+            w['page'] = 'balance'
+            legacy['balanceBoth']['currentId'] = 'both-sides-1'
+            bring(p, legacy)
+            go(p)
+            ok(work(p)['moves'][0]['source'] == full_source, 'full historical row source is retained without compaction')
+            geometry(p, 'right')
+            ok('2P + 4' in p.locator('.both-equation').first.inner_text(), 'full historical source still renders its recorded expression')
+            tap(p, '[data-both-current]')
+            geometry(p, 'equal')
+            legacy_export = download(p)
+            ok(legacy_export['balanceBoth']['cases']['both-sides-1']['moves'][0]['source'] == full_source,
+               'actual download retains the old full row source exactly')
+
             # Supported historical sources and contradictory old outcomes stay authoritative.
             revised = copy.deepcopy(raw)
             w = revised['balanceBoth']['cases']['both-sides-1']
@@ -436,7 +501,14 @@ with sync_playwright() as pw:
             last = work(p)['checks'][-1]
             ok(last['valueMatch'] is False and last['proposedModel']['relation'] == 'equal' and last['model']['relation'] == 'right',
                'P6 balances imported 2P+4/P+10 while differing from fixed model P4')
+            ok(last['proposedModel']['left'] == last['proposedModel']['right'] == 16 and
+               last['model']['left'] == 12 and last['model']['right'] == 14,
+               'equal proposed 16/16 remains distinct from fixed-model 12/14')
+            proposed_wording(p, last, 'equal')
             ok('not level' in p.locator('.both-page').inner_text(), 'unequal saved starting model is disclosed')
+            p.locator('.both-record details > summary').click()
+            geometry(p, 'right')
+            shot(p, f'proposed-vs-model-{width}.png')
             page(p, 'balance')
             proposal(p, '4')
             keep(p, 'proposal')

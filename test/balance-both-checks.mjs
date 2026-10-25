@@ -3,12 +3,13 @@ import fs from 'node:fs';
 import {bothCases,bothInputMessage} from '../dist/balance-both-content.mjs';
 import * as B from '../dist/balance-both-core.mjs';
 import {freshState,recommendations,restoreStateResult} from '../dist/core.mjs';
-import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
+import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from '../dist/progress-transfer.mjs';
 import {noteLegacyExposure} from '../dist/broad-core.mjs';
 import {noteGardenFactExposure} from '../dist/garden-core.mjs';
 import {notePendingBrambleFactExposure} from '../dist/post-rival.mjs';
 import {checkin} from '../dist/content.mjs';
-let count=0,oracleCases=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);count++;},ok=(v,m)=>{assert.ok(v,m);count++;},copy=x=>structuredClone(x);
+import {startPrice,setPriceField,preparePriceDisplay} from '../dist/slope-equation-core.mjs';
+let count=0,oracleCases=0,maximumReportBytes=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);count++;},ok=(v,m)=>{assert.ok(v,m);count++;},copy=x=>structuredClone(x);
 const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');
 const exposureSource=app.slice(app.indexOf('function exposeStoryFacts('),app.indexOf('function requestParis('));
 const expose=new Function('noteLegacyExposure','noteGardenFactExposure','notePendingBrambleFactExposure','checkin',exposureSource+';return exposeStoryFacts;')(noteLegacyExposure,noteGardenFactExposure,notePendingBrambleFactExposure,checkin);
@@ -132,5 +133,33 @@ for(const s of bothCases){const state=make(s.id);const original=copy(work(state)
 {
  const s=make('bags-of-three');ok(B.checkBoth(s,{kind:'arrangement',raw:''},options).recorded);const first=copy(work(s).firstKept),live=copy(work(s).live);ok(B.setBothPage(s,'balance',options));for(let i=0;i<3;i++)ok(B.bothHelp(s,options));const history=copy(work(s).checks);eq(work(s).helpStage,3);eq(B.bothFacts(s),[]);ok(B.bothHelp(s,options));eq(work(s).helpStage,1);eq(B.bothFacts(s),[]);ok(work(s).support.skip&&work(s).support.hint&&work(s).support.example);eq(work(s).checks,history);eq(work(s).firstKept,first);eq(work(s).live,live);ok(B.bothHelp(s,options));eq(work(s).helpStage,2);eq(B.bothFacts(s),[[2,5]]);eq(work(s).checks,history);eq(work(s).firstKept,first);
  const before=copy(s);ok(!B.bothHelp(s,{...options,canExport:()=>false}));eq(s,before,'repeat skip preflight remains atomic');
+}
+// New move rows keep only their frozen numeric model, while supported full
+// historical sources and all unknown fields remain exact and readable.
+{
+ const s=make('both-sides-3');ok(B.moveBoth(s,{kind:'parcel-left'},options).ok);const r=work(s).moves[0];eq(r.source,{version:1,kind:'balance-both-row',id:'both-sides-3',parcelMass:5,bagUnits:2});eq(B.bothRowSource(r),r.source);eq(B.bothExpression(r.source,r.after,'left'),'3P + 1');eq(B.bothModel(r.source,r.after),{left:16,right:21,relation:'right'});ok(!B.validBothSource(r.source),'compact model is not a whole teaching/check source');
+ r.source=copy(work(s).source);r.source.future={raw:'retained historical source'};r.source.parcelMass=9;r.model={left:0,right:80,relation:'left'};r.feedback='Stored historic relation stays as recorded';const old=copy(r);ok(B.validBothWork(work(s)));ok(B.checkBoth(s,{kind:'arrangement',raw:''},options).recorded);eq(work(s).checks[0].input.moves[0],old);const kept=copy(work(s).checks[0]);ok(B.setBothInspection(s,0,options));eq(work(s).moves[0],old);eq(B.bothRowSource(work(s).moves[0]),old.source);eq(prepareProgressImport(JSON.stringify(report(s),null,2)).state.balanceBoth,s.balanceBoth);eq(work(s).checks[0],kept,'inspection/import do not compact old full rows or regrade them');
+}
+// Proposed relations describe hypothetical arithmetic, never the real tilt.
+{
+ const s=make();for(const [raw,word] of [['5','left'],['3','right']]){const r=B.checkBoth(s,{kind:'proposal',raw},options);eq(r.code,'try-substitution');ok(r.feedback.includes(`The proposed ${word} total is greater.`));ok(!r.feedback.includes('is lower')&&!r.feedback.includes('model mass'));eq(r.model.relation,'equal');}
+ const old=work(s).checks[0];old.feedback='The left pan has greater model mass and is lower.';const historical=copy(old);ok(B.checkBoth(s,{kind:'proposal',raw:'2'},options).recorded);eq(work(s).checks[0],historical,'saved feedback is not edited to new wording');
+ const u=make('both-sides-3');work(u).source.parcelMass=4;work(u).source.start={left:{parcels:2,units:4,bags:0},right:{parcels:1,units:10,bags:0}};work(u).live=copy(work(u).source.start);const r=B.checkBoth(u,{kind:'proposal',raw:'6'},options);eq(r.code,'try-substitution');eq(r.valueMatch,false);eq(r.model.relation,'right');eq(r.proposedModel.relation,'equal');ok(r.feedback.includes('The proposed totals are equal.'));ok(!r.feedback.includes('is lower')&&!r.feedback.includes('model mass'));
+}
+// Genuine maximum forward paths in all four waiting cases, each retained in
+// eight checks plus firstKept. Exercise the actual pretty notes/import gate at
+// every move, record and repeated Skip; unrelated Price work must stay open.
+{
+ const s=initializeExplorerState(freshState());ok(startPrice(s,'bag',options));
+ const measure=()=>{const text=JSON.stringify(report(s),null,2),bytes=Buffer.byteLength(text);maximumReportBytes=Math.max(maximumReportBytes,bytes);ok(bytes<MAX_IMPORT_BYTES);ok(prepareProgressImport(text).ok);return bytes;};
+ for(const source of bothCases){ok(B.startBoth(s,source.id,options));work(s).source.start={left:{parcels:2,units:14,bags:3},right:{parcels:2,units:14,bags:3}};work(s).live=copy(work(s).source.start);
+  for(const side of ['left','right']){for(let i=0;i<3;i++)ok(B.moveBoth(s,{kind:`open-${side}`},options).ok);for(let i=0;i<5;i++)ok(B.moveBoth(s,{kind:`parcel-${side}`},options).ok);for(let i=0;i<20;i++)ok(B.moveBoth(s,{kind:`unit-${side}`},options).ok);}
+  eq(work(s).moves.length,56);for(let i=0;i<8;i++)ok(B.checkBoth(s,{kind:'arrangement',raw:''},options).recorded);eq(work(s).checks.length,8);eq(work(s).firstKept.input.moves.length,56);ok(work(s).checks.every(c=>c.input.moves.length===56));measure();
+ }
+ const full=copy(s.balanceBoth);eq(Object.keys(full.cases).length,4);ok(Object.values(full.cases).every(w=>w.moves.length===56&&w.checks.length===8&&w.firstKept.input.moves.length===56));
+ for(const source of bothCases){ok(B.startBoth(s,source.id,options));const first=copy(work(s).firstKept);const ninth=B.checkBoth(s,{kind:'proposal',raw:String(source.parcelMass)},options);ok(ninth.recorded&&ninth.evicted&&ninth.feedback.includes('oldest readable'));eq(work(s).checks.length,8);eq(work(s).firstKept,first);ok(B.setBothPage(s,'balance',options));for(let cycle=0;cycle<9;cycle++){for(let stage=0;stage<3;stage++)ok(B.bothHelp(s,options));eq(work(s).checks.length,8);eq(work(s).firstKept,first);measure();}ok(work(s).checks.every(c=>c.kind==='skipped'));eq(work(s).moves.length,56);}
+ const finalBytes=measure();ok(setPriceField(s,'m','2',options),'other bench can still preflight a write');ok(preparePriceDisplay(s,options).ok,'other bench can still preflight answer-bearing display');ok(B.setBothDraft(s,' 4 ',options),'current case remains editable');
+ const old=copy(s);ok(!B.setBothDraft(s,'5',{...options,canExport:()=>false}));eq(s,old,'forced export refusal at maximum retention is atomic');const imported=prepareProgressImport(JSON.stringify(report(s),null,2));ok(imported.ok);eq(imported.state.balanceBoth,s.balanceBoth);
+ console.log(`Maximum bounded retention: ${maximumReportBytes} peak pretty-report bytes; ${finalBytes} bytes after Skip cycling; limit ${MAX_IMPORT_BYTES}.`);
 }
 console.log(`Parcels on both pans: ${count} assertions passed; ${oracleCases} bounded action oracle cases. Browser, audio and educational-effect checks are separate.`);
