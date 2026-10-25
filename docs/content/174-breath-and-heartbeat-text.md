@@ -273,9 +273,9 @@ Choices: Right atrium (fits) · Left ventricle · Right ventricle
 
 **Card 1:** The café stove burns wood with air. It gives off heat, carbon dioxide and water vapor.
 
-**Card 2:** Every living cell does something like this with food. It is called **respiration**.
+**Card 2:** Most plant and animal cells release energy from food using oxygen. This is **aerobic respiration**.
 
-**Card 3:** Cells use glucose, a sugar from food, and oxygen. Out come carbon dioxide and water.
+**Card 3:** In aerobic respiration, cells use glucose, a sugar from food, and oxygen. Out come carbon dioxide and water.
 
 **Card 4:** Energy is **released**, not made. It was stored in the glucose.
 
@@ -466,19 +466,19 @@ Positions of right answers in 3-choice items: A3, B1, B5, C2 at A; A1, B2, C1, C
 - Hint: What goes into a cell? What comes out?
 - Explanation: Cells use glucose and oxygen and give out carbon dioxide and water. Energy is released.
 
-**C4 (Seedling, 3-choice).** Where does respiration happen?
+**C4 (Seedling, 3-choice).** Where does aerobic respiration happen in muscle cells?
 - Only in the lungs `respiration-in-lungs`: Lungs do breathing and gas exchange. Respiration is in cells.
-- In every living cell (fits): Yes. All the time, in every cell.
-- Only in working muscles `only-exercise`: Muscles respire more when working, but every cell respires always.
+- Inside the muscle cells (fits): Yes. It releases energy inside the cells.
+- Only in working muscles `only-exercise`: Muscle cells also release energy when the body is resting.
 - Hint: Remember the three different words.
-- Explanation: Respiration happens in all living cells. Breathing brings the oxygen in.
+- Explanation: Aerobic respiration releases energy inside cells. Breathing brings oxygen into the lungs.
 
 **C5 (Sapling, true or not true).** "The willow trees by the brook respire too."
 - Answer: True `plants-dont-respire`.
-- Feedback (not true): Plants respire, day and night. Every living cell does.
+- Feedback (not true): Plants respire, day and night.
 - Feedback (true): Right. Plants respire all the time, as animals do.
 - Hint: Are willow trees made of living cells?
-- Explanation: Plants make food in light, and respire in every cell, always.
+- Explanation: Plants make food in light and release energy through respiration day and night.
 
 **C6 (Sapling, 3-choice).** The baker is too hot by the oven. Which response cools him?
 - Shivering `wrong-way`: Shivering warms a body. It pushes the same way as the change.

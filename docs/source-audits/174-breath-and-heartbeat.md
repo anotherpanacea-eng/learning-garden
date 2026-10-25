@@ -95,3 +95,6 @@ Seven web searches (excerpts only; WebFetch blocked). Settled or softened:
 ## Images and rights
 
 No images are embedded. Builder art should be original diagrams. Suitable public-domain references: Harvey's 1628 vein-valve figures (public domain; Wellcome Collection open access), and 18th-century engravings of Lavoisier's laboratory apparatus (public domain by age; check the holding institution's terms before reuse). The heart cutaway, air sac, dial and glass must be drawn fresh, not traced from textbook figures.
+
+
+Review correction (2026-10-25): The glucose-plus-oxygen pathway is aerobic respiration, not a universal pathway of every living cell. Mature mammalian red blood cells lack mitochondria and use anaerobic glycolysis. Scope the pictured muscle/plant examples accordingly. https://www.ncbi.nlm.nih.gov/sites/books/NBK546695/?report=printable
