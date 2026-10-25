@@ -51,9 +51,9 @@ Sourced in the [audit](../source-audits/270-archive-reading-room.md); unconfirme
 
 Jane's **teach -> guided -> practice**: twelve teach cards, one idea each with a worked example revealed a step per tap; each set's first item shows 1-3 visible steps. **"I'm stuck" ladder** on every item: hint -> an easier worked case plus how to start this one (a recipe card; a hen chart; a soaked lawn; *first, then, finally*; the café's opening time against its buns; two notes about Dot's hat) -> skip for now, no penalty.
 
-**Contrasts:** words against the picture that adds a number; "first" against "four hours first"; one flood in time order against the same flood as problem and solution; a true fact against a fact that fits the point; a checkable sentence against a sure-sounding opinion; after against because; a summary against a retelling or a review; copying against own words with a source.
+**Contrasts:** words against the picture that adds a number; "first" against "four hours first"; one flood in time order against the same flood as problem and solution; a true fact against a fact that fits the point; a checked fact, a sure-sounding claim nobody has checked yet, and an opinion; after against because; a summary against a retelling or a review; copying against own words with a source.
 
-**Misconceptions tagged on choices:** `features-are-decoration`, `heading-skipped`, `picture-explains-cause`, `picture-shows-everything`, `picture-repeats-words`, `not-in-text`, `town-story-transfer`, `after-means-because`, `signal-word-only`, `structure-is-topic`, `same-topic-same-structure`, `structure-is-truth`, `compare-means-winner`, `confident-is-fact`, `evidence-any-fact`, `opinion-as-evidence`, `checkable-is-opinion`, `disagree-means-wrong`, `popular-is-evidence`, `one-text-has-all`, `summary-adds-opinion`, `detail-as-main-idea`, `copy-is-synthesis`, `changed-meaning`.
+**Misconceptions tagged on choices:** `features-are-decoration`, `heading-skipped`, `picture-explains-cause`, `picture-shows-everything`, `picture-repeats-words`, `not-in-text`, `town-story-transfer`, `after-means-because`, `signal-word-only`, `structure-is-topic`, `same-topic-same-structure`, `structure-is-truth`, `compare-means-winner`, `confident-is-fact`, `evidence-any-fact`, `opinion-as-evidence`, `checked-seen-as-unchecked`, `disagree-means-wrong`, `popular-is-evidence`, `one-text-has-all`, `summary-adds-opinion`, `detail-as-main-idea`, `copy-is-synthesis`, `changed-meaning`.
 
 ## The game or activity
 
@@ -97,7 +97,7 @@ archiveReading: {
 }
 ```
 
-Codes only: ids, counts and ordered id lists, validated on load against the pack's known ids and counts (at most six guide cards, one heading each); no free text ("say why" is spoken, the guide's own sentence is on paper). `support` records the highest stuck-ladder step used and is kept apart from an independent attempt, never merged. Kept outcomes are never recomputed on load. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. No existing root is touched. No field holds anything about the child.
+Codes only: ids, counts and ordered id lists. Validate the ids, counts and outcome codes the save actually holds, against structural bounds and the save's own entries; never require today's bench sizes or full item lists, and never check against today's wording or answer key. A missing item reads as absent. Structural bounds: at most six guide cards, one heading each; no free text ("say why" is spoken, the guide's own sentence is on paper). `support` records the highest stuck-ladder step used and is kept apart from an independent attempt, never merged. Kept outcomes are never recomputed on load. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. No existing root is touched. No field holds anything about the child.
 
 ## Curriculum fit
 

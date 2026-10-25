@@ -266,11 +266,12 @@ Worked example: *Two Ways to Keep a Town Dry.*
 3. It fits the point.
 
 **Card 9. Fact or opinion?**
-> A fact can be checked. An opinion is what someone thinks. Words like clearly or best can make an opinion sound like a fact.
+> A fact can be checked. An opinion is what someone thinks. Some claims could be checked but have not been yet. Sounding sure doesn't make them facts.
 
 Worked example: *Two sentences about the Turia Gardens.*
 1. "The gardens opened in 1986." Can we check it? Yes. Fact.
 2. "They are the best park anywhere." Opinion.
+3. "Nobody ever floods there now." Could be checked, but has it been? Not yet. An unchecked claim.
 
 **Card 10. Main ideas and a summary**
 > A summary gives the main ideas in a few sentences. It leaves out small details and your own opinion.
@@ -339,7 +340,7 @@ Worked example: *A fact card.*
 
 **Header:** Find the point. Then check each piece of evidence: does it fit, and is it enough?
 
-**Evidence sorter (the Gazette page; after page 4 comes free):** each sentence goes in one tray: *fact you could check* · *opinion* · *evidence for the point*. A sentence can be a fact and evidence at once; tap both trays.
+**Evidence sorter (the Gazette page; after page 4 comes free):** each sentence goes in one tray: *checked fact* · *claim not checked yet* · *opinion* · *evidence for the point*. A sentence can be a fact and evidence at once; tap both trays.
 
 **Bramble's card (A story from Willowbank):** "Both pieces have a point. Neither one is enough on its own. That's not the same as both being wrong."
 
@@ -488,8 +489,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **D1 (Sapling, guided sort).** Steps shown first: 1. Can someone check it? 2. Or is it what someone thinks? 3. Look for clearly or best.
 - Prompt: Fact or opinion? Sort each sentence.
-- Cards: "The Turia Gardens opened in 1986." (fact) · "The Turia Gardens are the best park in Spain." (opinion) · "The old map shows marsh where the water now sits." (fact, A story from Willowbank) · "No marsh could have soaked up all that water." (opinion, A story from Willowbank)
-- Feedback for the last card in fact (`confident-is-fact`): It sounds sure. But no record shows it. It's what the writer thinks.
+- Cards: "The Turia Gardens opened in 1986." (fact) · "The Turia Gardens are the best park in Spain." (opinion) · "The old map shows marsh where the water now sits." (fact, A story from Willowbank) · "The new footbridge is the prettiest place in Willowbank." (opinion, A story from Willowbank)
+- Feedback for the last card in fact (`confident-is-fact`): Prettiest is what someone thinks. Nobody can check it.
 - Hint: Could you check it in a record?
 - Explanation: Facts can be checked. Opinions can be argued for, but not checked.
 
@@ -501,11 +502,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Evidence must fit the point, not just be true.
 
 **D3 (Sapling; after page 4 comes free).**
-- Prompt: Which sentence in "Just a bad storm" is an opinion dressed as fact?
-- Choices: "The storm brought more rain in one night than anyone could remember." (`checkable-is-opinion`) · "The orchard has fed Willowbank for as long as anyone can recall." (`checkable-is-opinion`) · "No marsh could have soaked up all that water." ✔
-- Feedback: More rain: The weather log and people's memories could check that. · The orchard: The town's records could check that.
-- Hint: Which one is the writer's guess, with no record behind it?
-- Explanation: Nobody measured what a marsh would have held that night. It is a sure-sounding opinion.
+- Prompt: Which sentence in "Just a bad storm" sounds sure but is not checked yet?
+- Choices: "The storm brought more rain in one night than anyone could remember." (`checked-seen-as-unchecked`) · "The orchard has fed Willowbank for as long as anyone can recall." (`checked-seen-as-unchecked`) · "No marsh could have soaked up all that water." ✔
+- Feedback: More rain: The town's weather log already records that night. · The orchard: The town's records already show that.
+- Hint: Which one could be tested, but no record has tested it?
+- Explanation: Nobody measured what a marsh would have held that night. It is a claim records could test, not a checked fact.
 
 **D4 (Keeper's Desk; after page 4 comes free).**
 - Prompt: Page 4: one big flood five years after draining. Does that prove the cause?
@@ -584,7 +585,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Campaign:** working together to ask for a change.
 - **Point:** what a writer wants you to believe.
 - **Evidence:** facts that back up a point.
-- **Fact:** something that can be checked. **Opinion:** what someone thinks or feels.
+- **Fact:** something that can be checked. **Unchecked claim:** something that could be checked but hasn't been yet. **Opinion:** what someone thinks or feels.
 - **Main idea:** what a whole text or part is mostly about.
 - **Summary:** the main ideas, short, without your opinion.
 - **Source:** where a piece of information came from.

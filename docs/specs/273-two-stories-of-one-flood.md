@@ -99,7 +99,7 @@ accounts: {
 }
 ```
 
-Validate ids against the pack's own id lists, counts against the bench sizes, and outcomes against the saved choice; never recompute a kept result on load. Codes only; no free text ("say why" is spoken). Support is a separate flag per kept item, never merged with an independent attempt. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the drawer. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. `twoWindows` and every other root are untouched. Set C entries kept before page 4 cannot exist; if imported, they display as kept. No field holds anything about the child.
+Validate the ids, counts and outcome codes the save actually holds, against structural bounds and the save's own entries; never require today's bench sizes or full item lists, and never check against today's wording or answer key. A missing item reads as absent. Never recompute a kept result on load. Codes only; no free text ("say why" is spoken). Support is a separate flag per kept item, never merged with an independent attempt. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the drawer. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. `twoWindows` and every other root are untouched. Set C entries kept before page 4 cannot exist; if imported, they display as kept. No field holds anything about the child.
 
 ## Curriculum fit
 

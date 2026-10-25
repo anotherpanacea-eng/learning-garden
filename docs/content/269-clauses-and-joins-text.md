@@ -193,7 +193,7 @@ Worked example: *Léon is the ferry keeper who lives at Les Saules.*
 3. Who is the relative pronoun.
 
 **Card 8. Fragments**
-> A fragment is part of a sentence standing alone. It is missing a subject, a verb, or the main clause it leans on.
+> A fragment stands alone but is missing a subject, a full verb, or a main clause. An -ing verb needs a helper: I am waiting.
 
 Worked example: *Running along the river path.*
 1. What is the verb? Running.
@@ -329,12 +329,12 @@ Worked example: *You must close the gate. The gate must be stuck.*
 **Line feedback:**
 - Line 2 as sentence: Read it aloud. Where would you stop for breath?
 - Line 3 as sentence: Because leaves us waiting. Because we have plums, what?
-- Line 5 as sentence: Who is waiting? Add a subject.
+- Line 5 as sentence: Who is waiting? Add a subject and a helping verb, like I am.
 
 **Choose a fix:** For each line marked, pick one fix. Every fix shown works.
 - Line 2: a period (The river path is better. The runner can stay for supper.) · comma plus and (The river path is better, and the runner can stay for supper.)
 - Line 3: join it to line 2 (The runner can stay for supper because we have plums.) · put it first (Because we have plums, the runner can stay for supper.)
-- Line 5: add a subject (I am waiting for your answer by the bridge.) · add a subject and verb (I will wait by the bridge for your answer.)
+- Line 5: add a subject and a helping verb (I am waiting for your answer by the bridge.) · add a subject and change the verb (I will wait by the bridge for your answer.)
 
 **Note on lines 1 and 6:** Greetings and sign-offs are fine as they are. Letters always use them.
 
@@ -371,7 +371,7 @@ Worked example: *You must close the gate. The gate must be stuck.*
 
 **Seedling: clue cards.** Read the clue. Slide the word along the line until it fits.
 - The clues from F1 (clouds: might) and F2 (flood post: must have).
-- Clue: The bridge is dry and the brook is low. → The bridge can't have flooded today.
+- Clue: Dot watched the bridge all day. It stayed dry. → The bridge can't have flooded today.
 
 **Sapling: the Act IV cards (A story from Willowbank).**
 - Hollis's page 4: the Sponge drained, a fine harvest, then a big flood five years later. → Draining might have made floods worse.

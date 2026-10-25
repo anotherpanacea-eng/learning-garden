@@ -91,7 +91,7 @@ speechMarks: {
 }
 ```
 
-Codes only: catalog ids for lines, slots, marks, cards and choices; no typed text, and "say why" is spoken. Validation checks every id against the catalog, slot counts per line and the allowed outcomes; a kept result is shown as kept and never recomputed on load. `supported` is set when the item was answered after opening the stuck ladder, and is never merged with an independent attempt. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. `loft`, the printer and the bridges roots are untouched. No field holds anything about the child.
+Codes only: catalog ids for lines, slots, marks, cards and choices; no typed text, and "say why" is spoken. Validate the ids, counts and outcome codes the save actually holds, against structural bounds and the save's own entries; never require today's bench sizes or full item lists, and never check against today's wording or answer key. A missing item reads as absent. Allowed outcome codes are a fixed set; a kept result is shown as kept and never recomputed on load. `supported` is set when the item was answered after opening the stuck ladder, and is never merged with an independent attempt. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. `loft`, the printer and the bridges roots are untouched. No field holds anything about the child.
 
 ## Curriculum fit
 
