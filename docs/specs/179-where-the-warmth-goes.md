@@ -80,7 +80,7 @@ Every activity follows Jane's **teach → guided → practice** order: one teach
 - 27 settings; the child predicts, places, then taps **Check the apples** to compare the two crates.
 - Model line: "Real shade depends on the hour, the season, the cover's size and the breeze. This bench uses three Sun spots and three covers."
 
-**(c) Clack on the Green, model `clack-v1`.** Roll `slow`, `medium` or `fast` into a target `same size`, `heavier` or `lighter`. The child predicts **both** balls, then rolls; authored before-and-after speed arrows show the outcomes in The knowledge, longer arrows and a louder clack for faster rolls. A ten-token **energy tally**: same size 9 to the target, 0 kept, 1 to sound and warming; heavier or lighter 8, 1, 1. The total always shows ten. Model line: "A made-up tally, rounded. Real balls lose different amounts, and grass slows them." 
+**(c) Clack on the Green, model `clack-v1`.** Roll `slow`, `medium` or `fast` into a target `same size`, `heavier` or `lighter`. The child predicts **both** balls, then rolls; authored before-and-after speed arrows show the outcomes in The knowledge, longer arrows and a louder clack for faster rolls. A ten-token **energy tally**: same size 9 to the target, 0 kept, 1 to sound and warming; heavier or lighter 8, 1, 1. The total always shows ten. Model line: "A made-up tally, rounded. Real balls lose different amounts, and grass slows them."
 
 **(d) Warmth Trail.** Three parts.
 
