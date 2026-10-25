@@ -101,7 +101,7 @@ Fact-check pass, 2026-10-25 (search excerpts only; WebFetch blocked):
 
 ## Review pass (independent reviewer, 2026-10-25)
 
-- **Great Pyramid date aligned to spec 134:** the card now reads about 2550 BCE (Harvard's Digital Giza, spec 134's source 30). The earlier 2560 BCE sat before the start of Khufu's reign in The Met's 2551-2528 BCE list, so the card contradicted its own details; 2550 BCE lies inside both lists. T3, G3, A2, D1 and the card follow. Every number still holds (2550 − 753 = 1,797, "about 1,800").
+- **Great Pyramid date aligned to spec 134:** the card now reads about 2550 BCE (Harvard's Digital Giza, spec 134's source 30). The earlier 2560 BCE sat before the start of Khufu's reign in The Met's 2551-2528 BCE list, so the card contradicted its own details; 2550 BCE is inside The Met's range but outside 2589–2566 BCE; retain the differing chronologies rather than claim agreement. T3, G3, A2, D1 and the card follow. Every number still holds (2550 − 753 = 1,797, "about 1,800").
 - **Story:** the Act II adapter now uses page 2's flood ledger (gaps between floods); page 4's five-year gap belongs to Act IV chapter 1, as spec 120 places it.
 - **D6 feedback:** 66 cm is 6,600 years, before Egypt's unification; "when Egypt was young" was cut.
 - Arithmetic re-run by the reviewer with `python3 -I` (BCE converted to astronomical years): 79, 824, 131, 1, 1,838, 3,070, 1,998, 496, 61, 68, 84, 5,068 years; 10.86, 7.53, 50.68 cm; 6.6 km; about 0.05 mm; strict centuries. All pass. Hard prerequisites re-checked against the pinned files by script; all ids exist and the crosswalk is complete.

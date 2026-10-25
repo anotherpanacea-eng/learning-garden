@@ -386,6 +386,8 @@ Depth names describe the task, not the reader. Every item has the I'm stuck ladd
 - **Easier one first:** ? + 2 = 5. Take 2 from both sides: ? = 3.
 - **Explanation:** Taking 5 from both sides keeps the balance level and leaves ? = 7.
 
+**Keeper Roman learn card (shown before A9):** D stands for 500 and M for 1000. A smaller C before D makes CD, 400; before M it makes CM, 900. Worked example, one line per tap: 1452 = 1000 + 400 + 50 + 2; M + CD + L + II; MCDLII. Add D and M to this Roman palette.
+
 **A9 · Keeper's Desk · 3-choice**
 - **Prompt:** Fibonacci's book appeared in 1202. Which Roman numeral is 1202?
 - **Choices:** (a) MCCII ✔ · (b) MCMII · (c) MMCII
