@@ -390,7 +390,7 @@ Run the explorer's rule on these, then compare with Wren's request:
 | --- | --- | --- |
 | `narrows` | The narrows are 24 m across. How wide on the map? | 1.2 cm |
 | `ford` | The ford is 15 m. How wide on the map? | 0.75 cm |
-| `see-difference` | Could you see the difference on this map? Easily · Only just · Not at all | Unscored observation. The calculated difference is0.45 cm; screen size, zoom and vision affect visibility. |
+| `see-difference` | Could you see the difference on this map? Easily · Only just · Not at all | Unscored observation. The calculated difference is 0.45 cm; screen size, zoom and vision affect visibility. |
 | `inset-narrows` | An inset at 1 cm for 5 m. The narrows? | 4.8 cm |
 | `inset-ford` | And the ford? | 3 cm |
 | `reverse` | Mill to library measures 7.5 cm. How far really? | 150 m |
@@ -416,7 +416,7 @@ Run the explorer's rule on these, then compare with Wren's request:
 | 0.375 for `reverse` | Dividing for map-to-real | "The real distance should be bigger. One centimetre stands for 20 metres: multiply." |
 | 150 cm for `reverse` | Losing the unit | "Right number, wrong unit. Each centimetre stands for 20 *metres*." |
 | 1.5 for `ford` | Rounding too early, or 15 ÷ 10 | "Check: 1.5 cm × 20 is 30 m. The ford is 15 m." |
-| Any choice for `see-difference` | Unscored visibility report | "The two drawn lengths differ by0.45 cm at the stated physical scale. Screens and zoom may show them differently. An inset can help; your eyesight is not being checked." |
+| Any choice for `see-difference` | Unscored visibility report | "The two drawn lengths differ by 0.45 cm at the stated physical scale. Screens and zoom may show them differently. An inset can help; your eyesight is not being checked." |
 
 ---
 

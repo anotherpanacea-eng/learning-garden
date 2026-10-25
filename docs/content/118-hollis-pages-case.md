@@ -41,7 +41,7 @@ The page 2 smudge has at least two plausible readings. `Lately` means recently; 
 4. **Did the retelling say more?** (original against retelling)
 5. **The editor's note** (writing for the almanac)
 
-Steps are open in any order only within an authored page pack. The checked transcription, guided lines and retelling below use page4 and must not appear while only page1 is available. Before commissioning this case, supply a finite per-page task/copy map for pages1–3, or scope the first case release explicitly to the available open transcription/uncertainty/note work without those checked tasks. A page not reached is neither revealed nor credited. The editor-note route can keep a visibly supplied generic note without inventing a page2 guess or earlier work.
+Steps are open in any order only within an authored page pack. The checked transcription, guided lines and retelling below use page 4 and must not appear while only page 1 is available. Before commissioning this case, supply a finite per-page task/copy map for pages 1–3, or scope the first case release explicitly to the available open transcription/uncertainty/note work without those checked tasks. A page not reached is neither revealed nor credited. The editor-note route can keep a visibly supplied generic note without inventing a page 2 guess or earlier work.
 
 ## 5. Step 1: Exactly what's there
 
@@ -133,7 +133,7 @@ Tasks:
 - **3b.** Page 2, *_ _ _ _ l y the gaps grow shorter.* Two candidates fit the letters: **Lately** and **Surely**. "What does each one make Hollis say?" Matching task, with these sentences to place:
   - *Lately:* "Hollis has seen the gaps between floods getting shorter."
   - *Surely:* "Hollis expresses confidence that the gaps grow shorter; that can describe the same recorded trend."
-- **3c.** "Can the ledger tell us which word was written?" The explorer can open page2's table. The intervals are **11, 12, 4, 3, 2, 2 years**: the later ones are shorter, though not every consecutive interval shrinks. Reply: "Both readings can fit that pattern. The ledger cannot choose the missing word. Keep a guess with a question mark, or leave [smudged]." A mechanical interval check may check those six differences; the word guess is ungraded.
+- **3c.** "Can the ledger tell us which word was written?" The explorer can open page 2's table. The intervals are **11, 12, 4, 3, 2, 2 years**: the later ones are shorter, though not every consecutive interval shrinks. Reply: "Both readings can fit that pattern. The ledger cannot choose the missing word. Keep a guess with a question mark, or leave [smudged]." A mechanical interval check may check those six differences; the word guess is ungraded.
 - **3d.** "Does the guess change what the page means?" For each smudge, choose **No**, **A little** or **Yes**. Authored replies; none is marked wrong. The reply for page 2's smudge notes that it's the one where the guess matters most.
 
 **I'm stuck (3c):**
@@ -188,7 +188,7 @@ Tasks:
 Three parts, each with **Write it yourself** (free text) and **Choose and adapt**:
 
 1. **How you marked the page.** Supplied: "Words in square brackets with a question mark are my guesses. [smudged] means nothing could be read."
-2. **The guess that matters most.** Supplied, only after page2 is available: "On page2, Lately and Surely both fit the remaining letters. The ledger does not tell me which word was written." Otherwise: "I have left an unreadable word as [smudged], rather than invent it."
+2. **The guess that matters most.** Supplied, only after page 2 is available: "On page 2, Lately and Surely both fit the remaining letters. The ledger does not tell me which word was written." Otherwise: "I have left an unreadable word as [smudged], rather than invent it."
 3. **One thing a reader should know.** Supplied: "The short versions of these pages were written later, by the town. They sometimes say more than Hollis did."
 
 **Keep this note** saves it. **Print it in the almanac** shows the page with the note.

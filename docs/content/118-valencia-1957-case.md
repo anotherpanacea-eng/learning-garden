@@ -38,33 +38,33 @@ Steps open in any order, following spec 118 conventions 1 to 7.
 
 **English, short**
 
-> In October 1957 there was very heavy rain upstream of Valencia, in Spain. On 14 October the River Turia burst its banks. Water ran through the city streets. It came twice: once in the early morning, and again around midday. The second wave was larger. Many people died, and thousands lost their homes or work.
+> In October 1957 there was very heavy rain upstream of Valencia, in Spain. On 14 October the River Turia burst its banks. Water ran through the city streets. It came twice: once in the early morning, and again in the early afternoon. The second wave was larger. Many people died, and thousands lost their homes or work.
 
 **Spanish, short (corto)**
 
-> En octubre de 1957 llovió muchísimo río arriba de Valencia. El 14 de octubre, el río Turia se desbordó. El agua corrió por las calles de la ciudad. Llegó dos veces: una de madrugada y otra hacia el mediodía. La segunda crecida fue mayor. Murieron muchas personas, y miles perdieron su casa o su trabajo.
+> En octubre de 1957 llovió muchísimo río arriba de Valencia. El 14 de octubre, el río Turia se desbordó. El agua corrió por las calles de la ciudad. Llegó dos veces: una de madrugada y otra a primera hora de la tarde. La segunda crecida fue mayor. Murieron muchas personas, y miles perdieron su casa o su trabajo.
 
 **English, medium**
 
-> In October 1957, storms dropped very heavy rain on the hills and valleys upstream of Valencia. Early on 14 October the River Turia burst its banks where it ran through the city. Around midday a second, even larger wave of water arrived. Large parts of the city were flooded. The official count was 81 people dead; some historians think the real number was higher.
+> In October 1957, storms dropped very heavy rain on the hills and valleys upstream of Valencia. Early on 14 October the River Turia burst its banks where it ran through the city. In the early afternoon a second, even larger wave of water arrived. Large parts of the city were flooded. The official count was 81 people dead; some historians think the real number was higher.
 >
 > Afterwards, the government decided to move the river away from the city. The project was called the **Plan Sur** (the South Plan): a new channel, about 12 kilometres long, that carries the Turia round the south of Valencia to the sea.
 
 **Spanish, medium (medio)**
 
-> En octubre de 1957, unas tormentas descargaron lluvias muy fuertes en los montes y valles río arriba de Valencia. En la madrugada del 14 de octubre, el río Turia se desbordó a su paso por la ciudad. Hacia el mediodía llegó una segunda crecida, todavía mayor. El agua inundó gran parte de la ciudad. La cifra oficial fue de 81 muertos, pero algunos historiadores creen que fueron más.
+> En octubre de 1957, unas tormentas descargaron lluvias muy fuertes en los montes y valles río arriba de Valencia. En la madrugada del 14 de octubre, el río Turia se desbordó a su paso por la ciudad. A primera hora de la tarde llegó una segunda crecida, todavía mayor. El agua inundó gran parte de la ciudad. La cifra oficial fue de 81 muertos, pero algunos historiadores creen que fueron más.
 >
 > Después, el gobierno decidió alejar el río de la ciudad. El proyecto se llamó **Plan Sur**: un cauce nuevo, de unos 12 kilómetros, que lleva el Turia por el sur de Valencia hasta el mar.
 
 **English, long** adds two paragraphs:
 
-> The old riverbed, now dry, ran right through the middle of the city. The government planned to build a motorway along it. Many people in Valencia disagreed. They campaigned with a slogan in Valencian, the language many people in Valencia speak alongside Spanish: *El riu es nostre i el volem verd*, "The river is ours, and we want it green." At the end of the 1970s the city decided that the old riverbed would become a park. The first parts opened in the 1980s. Today the Turia Garden runs for about 9 kilometres, with paths, trees, playgrounds and sports fields where the river used to be.
+> The old riverbed, now dry, ran right through the middle of the city. The government planned to build a motorway along it. Many people in Valencia disagreed. They campaigned with a slogan in Valencian, the language many people in Valencia speak alongside Spanish: *El riu és nostre i el volem verd*, "The river is ours, and we want it green." At the end of the 1970s the city decided that the old riverbed would become a park. The first parts opened in the 1980s. Today the Turia Garden runs for about 9 kilometres, with paths, trees, playgrounds and sports fields where the river used to be.
 >
 > The new channel protected the city, but it had costs too. It was dug through farmland, the *huerta*, and it left some neighbourhoods and villages on the far side of a wide concrete channel from the rest of the city.
 
 **Spanish, long (largo)** adds:
 
-> El antiguo cauce, ya seco, atravesaba el centro de la ciudad. El gobierno quería construir allí una autopista. Mucha gente en Valencia no estaba de acuerdo. Hicieron campaña con un lema en valenciano, la lengua que mucha gente en Valencia habla además del español: *El riu es nostre i el volem verd*, «El río es nuestro y lo queremos verde». A finales de los años setenta, la ciudad decidió que el antiguo cauce sería un parque. Las primeras partes se abrieron en los años ochenta. Hoy el Jardín del Turia mide unos 9 kilómetros, con caminos, árboles, parques infantiles y campos de deporte donde antes pasaba el río.
+> El antiguo cauce, ya seco, atravesaba el centro de la ciudad. El gobierno quería construir allí una autopista. Mucha gente en Valencia no estaba de acuerdo. Hicieron campaña con un lema en valenciano, la lengua que mucha gente en Valencia habla además del español: *El riu és nostre i el volem verd*, «El río es nuestro y lo queremos verde». A finales de los años setenta, la ciudad decidió que el antiguo cauce sería un parque. Las primeras partes se abrieron en los años ochenta. Hoy el Jardín del Turia mide unos 9 kilómetros, con caminos, árboles, parques infantiles y campos de deporte donde antes pasaba el río.
 >
 > El nuevo cauce protegió la ciudad, pero también tuvo costes. Se excavó a través de la huerta, y dejó algunos barrios y pueblos al otro lado de un ancho cauce de hormigón, separados del resto de la ciudad.
 
@@ -88,7 +88,7 @@ The slogan is in **Valencian**, not Spanish. The reading panel says so, and a gl
 ### 4.2 Tasks
 
 - **1a. Put these in order** (ordering cards, Spanish or English): the flood (1957); the Plan Sur law (1961); the new channel opens (1969); the decision to make a park (late 1970s); the first parts of the garden open (1980s). *Teaches nothing new for an explorer who already orders dates; the guided first card shows the flood placed first.*
-- **1b. Two waves.** "Which wave was bigger?" Choices: the early-morning wave; the midday wave ← fits the reading; they were the same size. Reply to the first choice: "The short reading says the second wave was larger: *La segunda crecida fue mayor*. The longer reading says *todavía mayor*, even bigger."
+- **1b. Two waves.** "Which wave was bigger?" Choices: the early-morning wave; the early-afternoon wave ← fits the reading; they were the same size. Reply to the first choice: "The short reading says the second wave was larger: *La segunda crecida fue mayor*. The longer reading says *todavía mayor*, even bigger."
 - **1c. Spanish meaning check** (only when the explorer reads in Spanish; read-aloud and glossary allowed and recorded as support): "*El gobierno decidió alejar el río de la ciudad* means:" The government decided to move the river away from the city ← fits; The government decided to clean the river in the city; The government decided to bring the river closer to the city. Reply to the third: "*Alejar* is *lejos*, far, made into a verb: to make something far away."
 
 ## 5. Step 2: The numbers that disagree
@@ -206,13 +206,13 @@ Spanish has no Marble topics. It belongs to the extension pathways in [six-act s
 
 ## 10. Sources and what still needs checking
 
-The initial dossier relied partly on search summaries. During review the original BOE 1961 law confirmed its preamble's assigned 75/20/5 hydraulic-cost split and Article 2's design dimensions: 12,692 m length, 200 m width and 5,000 m³/s capacity. The BOE 1971 law confirms a later cap on the provincial contribution. Valencia's municipal cultural history attests the campaign form *El riu es nostre i el volem verd*. These narrow checks do not clear the dossier. **Every child-facing historical assertion, quotation/transcription, date, design-versus-built distinction, causal explanation, institutional description and source-comparison inference needs a source ledger and independent historical/content review before build.** Discrepancies remain questions, not evidence that all reports are compatible. Fluent Spanish review remains separate.
+The initial dossier relied partly on search summaries. During review the original BOE 1961 law confirmed its preamble's assigned 75/20/5 hydraulic-cost split and Article 2's design dimensions: 12,692 m length, 200 m width and 5,000 m³/s capacity. The BOE 1971 law confirms a later cap on the provincial contribution. Valencia's municipal cultural history attests the campaign form *El riu és nostre i el volem verd*. These narrow checks do not clear the dossier. **Every child-facing historical assertion, quotation/transcription, date, design-versus-built distinction, causal explanation, institutional description and source-comparison inference needs a source ledger and independent historical/content review before build.** Discrepancies remain questions, not evidence that all reports are compatible. Fluent Spanish review remains separate.
 
 | Source | Used for | License / reuse |
 | --- | --- | --- |
 | [Ley 81/1961, de 23 de diciembre, BOE original](https://www.boe.es/buscar/doc.php?id=BOE-A-1961-23727) | Original preamble: assigned 75/20/5 shares of hydraulic-works cost. Article 2: design length 12,692 m, width 200 m, capacity 5,000 m³/s. These are statutory design/financing provisions, not an as-built measurement or expenditure audit. | Primary source checked for these bounded points; final Spanish transcription/context and content review remain open. |
 | [Ley 24/1971, BOE original](https://www.boe.es/buscar/doc.php?id=BOE-A-1971-790) | Later cap on the provincial contribution; prevents presenting the original split as an unchanged actual-payment account. | Primary source checked for this later change; final source card must explain the scope. |
-| [Valencia municipal cultural history, Conoce el Jardín del Turia](https://cultural.valencia.es/es/conoce-el-jardin-del-turia/) | Attests the campaign form El riu es nostre i el volem verd. The alternate llit del Túria form remains unverified here. | Municipal source checked for the attested form; no prose copied. |
+| [Valencia municipal cultural history, Conoce el Jardín del Turia](https://cultural.valencia.es/es/conoce-el-jardin-del-turia/) | Attests the campaign form El riu és nostre i el volem verd. The alternate llit del Túria form remains unverified here. | Municipal source checked for the attested form; no prose copied. |
 | [eldiario.es, "Radiografía de la riada que dejó 81 muertos en la València de 1957"](https://www.eldiario.es/comunitat-valenciana/valencia/radiografia-riada-dejo-muertos-valencia_1_3792136.html) | Official toll; peak about 3,700 m³/s | Facts only; no text reused |
 | [Gran riada de Valencia, Spanish Wikipedia](https://es.wikipedia.org/wiki/Gran_riada_de_Valencia) and [1957 Valencia flood, English Wikipedia](https://en.wikipedia.org/wiki/1957_Valencia_flood) | Two waves (about 2,700 then over 3,700 m³/s); estimates up to about 300; Cortes approval December 1961; works 1964 to 1973 | CC BY-SA; facts only |
 | [esdiario.com, "La gran riada de 1957"](https://www.esdiario.com/comunidad-valenciana/valencia/190531/43483/la-gran-riada-de-1957.html) | Peak about 3,600 m³/s | Facts only |
@@ -223,8 +223,8 @@ The initial dossier relied partly on search summaries. During review the origina
 
 **Checks for the source reviewer:**
 
-1. The municipal cultural history attests *El riu es nostre i el volem verd*. The variant *El llit del Túria és nostre i el volem verd* remains unchecked; do not silently treat it as the same quotation. Check historical campaign evidence and final Valencian transcription with a qualified reader.
-2. The times of the two waves, and whether "early morning" and "around midday" are right for 14 October.
+1. The municipal cultural history attests *El riu és nostre i el volem verd*. The variant *El llit del Túria és nostre i el volem verd* remains unchecked; do not silently treat it as the same quotation. Check historical campaign evidence and final Valencian transcription with a qualified reader.
+2. The times of the two waves. LG-1 review (2026-10-25, from search summaries of a UPV note and press histories) puts the first peak at about 04:00 and the second at about 14:00 to 14:30, so the text now says "in the early afternoon" / "a primera hora de la tarde" where it said "around midday". Confirm against a primary source.
 3. The date of the park decision (1978 or 1979) and of the first free municipal elections (3 April 1979). Step 4c is written to work whichever date is right.
 4. Which neighbourhoods and villages the channel separated. The text names none on purpose until a source confirms them.
 5. The official toll (81), the basis/range of later estimates, both wave sizes and every statement about government, censorship, elections and who made the park decision. Verify all reported dates/dimensions and the evidence needed for each proposed explanation; this is not a five-item clearance checklist.

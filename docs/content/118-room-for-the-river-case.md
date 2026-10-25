@@ -6,7 +6,7 @@ Case ID `room-for-the-river`. Appears in Act IV with the archive chapter *What o
 
 ## 1. Why this case
 
-In Act IV, after a kept source from this pack, the miller says: "I thought nobody ever undid a wall. Then I read about the Dutch rivers. It doesn't decide what we do here." (spec 120, Act IV, at #127 `563e6aa`) This case is what the miller read. The Netherlands, famous for dikes, decided after two near-disasters in the 1990s that higher dikes alone weren't enough, and spent years giving its rivers more room: moving dikes back, digging side channels and letting some farmland flood on purpose. It is the Wall and the Sponge as a real national argument, and its answer looks a lot like Some of Each.
+In Act IV, after a kept source from this pack, the miller says: "I thought nobody ever moved a dike back. This record shows a place that did. It doesn't decide what we do here." (spec 120, Act IV, at #127 `be78fd5`) This case is what the miller read. The Netherlands, famous for dikes, decided after two near-disasters in the 1990s that higher dikes alone weren't enough, and spent years giving its rivers more room: moving dikes back, digging side channels and letting some farmland flood on purpose. It is the Wall and the Sponge as a real national argument, and its answer looks a lot like Some of Each.
 
 The case adds a fixed-area rectangular arithmetic model. Under its stated assumptions, a wider rectangle is shallower. That is not a general river prediction, and the model cannot set a safe dike height.
 
@@ -14,7 +14,7 @@ The case adds a fixed-area rectangular arithmetic model. Under its stated assump
 
 > The librarian hands you a slim book with a blue cover, borrowed from the travelling library. It's in English, with a few Dutch words.
 >
-> "The miller's been reading this at the counter for three days," they say. "She keeps saying 'huh' out loud. I'd like someone to read it properly and tell the meeting what's in it, and what isn't."
+> "The miller's been reading this at the counter for three days," they say. "Every so often there's a 'huh' out loud. I'd like someone to read it properly and tell the meeting what's in it, and what isn't."
 
 Buttons: **Open the book** · **Later**.
 
@@ -58,11 +58,11 @@ Tasks:
 
 - **1a.** Put in order: the 1993 high water; the 1995 high water; the decision to give rivers more room; most of the projects finished. *Answer: in that order.*
 - **1b.** "What danger was the response meant to prepare for?" Choices:
-  - "Future high water after the danger in1993 and1995." ← fits the reading
+  - "Future high water after the danger in 1993 and 1995." ← fits the reading
   - "Because the dikes broke in 1995."
   - "Because people preferred parks to dikes."
 
-  Reply to the second: "This reading describes a danger and the response; it does not say the dikes broke in1995. Check the reviewed source card before making that claim."
+  Reply to the second: "This reading describes a danger and the response; it does not say the dikes broke in 1995. Check the reviewed source card before making that claim."
 - **1c.** "What did the Netherlands decide?" Choices: "Only room for the river."; "Only higher dikes."; "Some dike work and some more room." The third fits; the reply to the first: "Every passage amount says the response combined dike work and more room. It was not instead of all dike work."
 
 ## 5. Step 2: Higher walls, or more room?
@@ -89,7 +89,7 @@ Tasks:
 
 > Picture a slice straight across the river, from bank to bank. The water in that slice is roughly a rectangle: **width × depth**.
 >
-> For this diagram we fix the cross-section area at2,000 m². If we also pretend flow speed is unchanged and the beds are level, a wider rectangular channel would need less depth for that same area. Real water does not keep those assumptions for us. The arithmetic does not predict a real flood.
+> For this diagram we fix the cross-section area at 2,000 m². If we also pretend flow speed is unchanged and the beds are level, a wider rectangular channel would need less depth for that same area. Real water does not keep those assumptions for us. The arithmetic does not predict a real flood.
 >
 > Worked example: a flood needs a cross-section of 2,000 square metres. In a channel 400 m wide: 2,000 ÷ 400 = **5 m** deep. Widen it to 500 m: 2,000 ÷ 500 = **4 m** deep.
 

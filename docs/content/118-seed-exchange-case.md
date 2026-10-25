@@ -80,7 +80,7 @@ Tasks (Check my working for each):
 | 8 for 1a | Adding the same amount to both rows (3 + 6 = 9, so 2 + 6 = 8) | "Adding 6 to both changes the deal. 9 baskets is 3 groups of 3. How many bundles is 3 groups of 2?" |
 | 27 or 18 for 1a | Multiplying only one row, or by the wrong number | "Each group of 3 baskets gets 2 bundles. How many groups of 3 are in 9?" |
 | 13.5 for 1a | Using the rate the wrong way round (9 × 3 ÷ 2) | "That's more bundles than baskets. The rate always gives fewer bundles than baskets: 2 for every 3." |
-| 7 for 1c | Adding 5 to both | "10 bundles is 5 groups of 2 bundles. Each group goes with 3 baskets." |
+| 11 for 1c | Adding the same amount to both rows (2 + 8 = 10, so 3 + 8 = 11) | "10 bundles is 5 groups of 2 bundles. Each group goes with 3 baskets." |
 
 ## 5. Step 2: Sharing the nursery
 
