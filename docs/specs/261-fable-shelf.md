@@ -80,28 +80,46 @@ Five sets contain 25 stored/practice items (A1-E5), plus the ungraded, unstored 
 
 ## Saved work
 
-Optional root `fables` per explorer, absent until an explicit Start or Keep freezes its source:
+Optional root `fables` per explorer. An explicit Start freezes only the selected visit's complete working source; Keep freezes that source if no visit has started. New visits retain earlier visits. No snapshot of every catalog item is required.
+
+The sketch uses `Saved<T>` only as shorthand for an inline first/latest record, not a shared runtime helper or a source registry. `FullSource` is the complete selected authored source: passages and provenance labels; instructions, teaching and examples; models/data and captions; every selected question, ordered choice text, key and feedback; help and read-back text or asset references. It contains authored prose; only the response payload `T` uses codes.
 
 ```
+ObservedHelp = { observed: true, concept: [{ forId, kind }], reading: [{ forId, kind }] }
+Snapshot<T> = {
+  source: FullSource,
+  shown: { question: text, choices: [{ id, text }], key, feedback },
+  answer: T,
+  outcome: 'fit' | 'not-yet' | 'shown' | 'skipped' | 'kept',
+  helpBefore?: ObservedHelp,
+  at
+}
+Saved<T> = { first: Snapshot<T>, latest?: Snapshot<T> }
+
 fables: {
   v: 1,
-  source: { /* complete frozen authored source for this started/kept visit */ },
-  message: { [fableId]: { sort: { [cardId]: 'events' | 'message' | 'topic' }, details: [detailId, detailId] }, at },
-  morals: { match: { [moralId]: fableId }, bramble: choiceId, at },
-  parts: { sort: { [partId]: 'chapter' | 'scene' | 'stanza' }, stanzas: 0..12, buildsOn: choiceId, at },
-  patterns: { table: { [taleId]: { [rowId]: cellId } }, journey: [stopId], at },
-  summary: { cards: { [cardId]: 'main' | 'detail' | 'opinion' }, built: [cardId], at },
-  answers: { [itemId]: { choice: choiceId | number | [id], support: bool } }
+  visits: { [visitId]: {
+    working: { source: FullSource, help?: ObservedHelp },
+    message: { [fableId]: Saved<{ sort: { [cardId]: 'events' | 'message' | 'topic' }, details: [detailId, detailId] }> },
+    morals: Saved<{ match: { [moralId]: fableId }, bramble: choiceId }>,
+    parts: Saved<{ sort: { [partId]: 'chapter' | 'scene' | 'stanza' }, stanzas: 0..12, buildsOn: choiceId }>,
+    patterns: Saved<{ table: { [taleId]: { [rowId]: cellId } }, journey: [stopId] }>,
+    summary: Saved<{ cards: { [cardId]: 'main' | 'detail' | 'opinion' }, built: [cardId] }>,
+    answers: { [itemId]: {
+      first: Snapshot<choiceId | number | [id]>,
+      latest?: Snapshot<choiceId | number | [id]>
+    } }
+  } }
 }
 ```
 
-Responses use codes only; no free text ("say why" is spoken). Support is a separate flag per kept item, never merged with an independent attempt. Kept results are never recomputed on load. Validate the ids, counts and outcome codes the save actually holds, against structural bounds and the save's own entries; never require today's catalog sizes or full item lists, and never check against today's wording or answer key. A missing item reads as absent. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. The `loft` root (specs 36, 37) is untouched. No field holds anything about the child.
+**Frozen source and first response.** Every `Snapshot` above embeds its own full source, shown question/instruction, ordered choices, key, feedback, response and original outcome. For a bench with no supplied choices or key, preserve its instruction and use an empty choice list and null key; an ungraded keep uses `kept`. The working source is frozen before the visit begins and is never replaced by today's catalog. Waiting work and saved responses render only from their own sources. `first` is write-once at the first recorded response/keep; later attempts have a separate `latest`, and later skips/help never change `first`. Explicitly starting revised content creates another visit and retains earlier sources and work. No original spoken or written explanation is graded.
 
-**Frozen authored source and first response.** An explicit Start or Keep freezes the complete selected authored source with the saved visit or bench: passages and provenance labels, instructions, teaching and examples, supplied models/data and captions, question wording, ordered choices, key and feedback, and help/read-back text or asset references. Include this `source` snapshot in the owning root; the response fields above remain codes. A started waiting task and earlier kept work render from that snapshot, never today's catalog. An explicitly chosen new visit may use revised authoring while retaining earlier sources and work. For recorded items, preserve the first response, its original outcome and support-before separately from later attempts/keeps; a retry or later skip cannot replace it. Do not grade original spoken or written explanations.
+**Observed help before reveal.** During a newly tracked visit, `observed: true` with empty arrays means no help request was recorded in that visit so far, not demonstrated independent performance. Commit concept-help codes (hint, guided step, example, shown answer, meaning or slot scaffold), with the affected task/item id, to working help before their first reveal. Commit read-aloud/prompt-audio codes and the affected task/item id separately to `reading` before playback. Copy the observation into each response's `helpBefore` at the response time. A later request changes working help and the next response only. Missing older observations remain unobserved: never infer them from a later response or turn them into an empty list, false or “none.” Help requests are not proof that help was used; reading/audio data establish neither independent reading nor independent listening.
 
-**Support before reveal.** Commit a support code before showing or playing a hint, guided step, worked example, answer, meaning, slot scaffold or read-aloud. Keep audio/reading support separate from the conceptual response; it does not establish independent reading. A later support request does not rewrite an earlier response's support-before. Missing older support information is unobserved, never proof of an unassisted attempt.
+**Validation and preservation.** Validate structural bounds, ids, counts, outcome codes and consistency with the save's own source/choices; never require today's catalog membership, bench sizes, wording or answer key. A missing item is absent. Never recompute a saved result. Unknown versions and unreadable entries remain exact and exportable; only the affected visit/bench becomes read-only, and one bad item never closes the pack. Response payloads contain no free text; say why is spoken and unstored. No field holds a real learner's identity, age, grade or coursework. The `loft` root (specs 36, 37) is untouched; spoken E6 is ungraded and unstored.
 
-**Atomic saves and capacity.** Every mutation must pass the actual host's pretty-notes serialization/import preflight and shared limits before committing only this root. Refusal preserves the whole earlier state and visible pending work; do not rerender, navigate or change explorer in a way that silently loses unsaved words/selections. Offer the existing notes download and an explicit confirmed restore of saved words where needed. No silent truncation, history eviction or replacement of saved writing. Preview, render and suggestion reads are save-neutral. Existing source/language/cultural/rights checks remain open until separately cleared.
+**Atomic saves and capacity.** Every mutation, including source copies and help-before records, must pass the actual host's pretty-notes serialization/import preflight and shared limits before committing only this root. Refusal preserves the whole earlier state and visible pending work; do not rerender, navigate or change explorer in a way that silently loses unsaved words/selections. Offer the existing notes download and an explicit confirmed restore of saved words where needed. No silent truncation, history eviction or replacement of saved writing. Export, import, reset and save-off use the shared store; preview/render/suggestion reads are save-neutral. Existing source/language/cultural/rights checks remain open until separately cleared.
 
 ## Curriculum fit
 
@@ -117,7 +135,7 @@ Responses use codes only; no free text ("say why" is spoken). Support is a separ
 | Supported practice | Guided first items; "I'm stuck" ladder; per-choice feedback; the pattern table. |
 | New application | Bramble's reading of the goat story; the terrapin story with no moral; Nuria's and Léon's tellings; building a summary for Léon. |
 | Purposeful revisit | Story Loft scenes (36, 37); "A story people told" (157); Act III's letters; packs 267, 272 and 276 later. |
-| Data boundary | Codes only, local. Nothing about the child, their family or their views. "Say why" and off-screen shows are adult-led and unrecorded. |
+| Data boundary | Response codes and complete frozen authored sources, local. Nothing about the child, their family or their views. "Say why" and off-screen shows are adult-led and unrecorded. |
 
 ## Upstream check
 

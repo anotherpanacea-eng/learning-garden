@@ -81,26 +81,47 @@ Seven sets, 28 items in the companion; 24 are three-choice. Right answers sit A 
 
 ## Saved work
 
-Optional root `meeting` per explorer, absent until an explicit Start or Keep freezes its source:
+Optional root `meeting` per explorer. An explicit Start freezes only the selected visit's complete working source; Keep freezes that source if no visit has started. New visits retain earlier visits. No snapshot of every catalog item is required.
+
+The sketch uses `Saved<T>` only as shorthand for an inline first/latest record, not a shared runtime helper or a source registry. `FullSource` is the complete selected authored source: passages and provenance labels; instructions, teaching and examples; models/data and captions; every selected question, ordered choice text, key and feedback; help and read-back text or asset references. It contains authored prose; only the response payload `T` uses codes.
 
 ```
+ObservedHelp = { observed: true, concept: [{ forId, kind }], reading: [{ forId, kind }] }
+Snapshot<T> = {
+  source: FullSource,
+  shown: { question: text, choices: [{ id, text }], key, feedback },
+  answer: T,
+  outcome: 'fit' | 'not-yet' | 'shown' | 'skipped' | 'kept',
+  helpBefore?: ObservedHelp,
+  taskBefore?: { initialStimulusRequested: clipId },
+  at
+}
+Saved<T> = { first: Snapshot<T>, latest?: Snapshot<T> }
+
 meeting: {
   v: 1,
-  source: { /* complete frozen authored source for this started/kept visit */ },
-  prep: { [setId]: { facts: [cardId], question: cardId, at } },
-  sorts: { [speechId]: { [sentenceId]: 'claim' | 'reason' | 'evidence' | 'problem' | 'other', support: bool, at } },
-  answers: { [itemId]: { choice: choiceId, support: bool, at } },
-  shows: { [showId]: { slides: [{ picture: cardId, caption: cardId }], sound: cardId | null, at } }
+  visits: { [visitId]: {
+    working: { source: FullSource, help?: ObservedHelp, task?: { initialStimulusRequested: clipId } },
+    prep: { [setId]: Saved<{ facts: [cardId], question: cardId }> },
+    sorts: { [speechId]: Saved<{ [sentenceId]: 'claim' | 'reason' | 'evidence' | 'problem' | 'other' }> },
+    shows: { [showId]: Saved<{ slides: [{ picture: cardId, caption: cardId }], sound: cardId | null }> },
+    answers: { [itemId]: {
+      first: Snapshot<choiceId>,
+      latest?: Snapshot<choiceId>
+    } }
+  } }
 }
 ```
 
-Responses use codes only. No child audio, transcript, free text or playback duration is recorded. Authored clip/read-aloud requests are recorded locally as support before playback, not as evidence that the child listened. Spoken tasks store nothing. Support (a guided step or the stuck ladder) is a separate flag per kept item, never merged with an independent attempt. Validate ids, counts and outcomes; kept results are never recomputed against today's answer key on load. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the corner. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. `story.plan` (spec 120) is never read or written here.
+**Frozen source and first response.** Every `Snapshot` above embeds its own full source, shown question/instruction, ordered choices, key, feedback, response and original outcome. For a bench with no supplied choices or key, preserve its instruction and use an empty choice list and null key; an ungraded keep uses `kept`. The working source is frozen before the visit begins and is never replaced by today's catalog. Waiting work and saved responses render only from their own sources. `first` is write-once at the first recorded response/keep; later attempts have a separate `latest`, and later skips/help never change `first`. Explicitly starting revised content creates another visit and retains earlier sources and work. No original spoken or written explanation is graded.
 
-**Frozen authored source and first response.** An explicit Start or Keep freezes the complete selected authored source with the saved visit or bench: passages and provenance labels, instructions, teaching and examples, supplied models/data and captions, question wording, ordered choices, key and feedback, and help/read-back text or asset references. Include this `source` snapshot in the owning root; the response fields above remain codes. A started waiting task and earlier kept work render from that snapshot, never today's catalog. An explicitly chosen new visit may use revised authoring while retaining earlier sources and work. For recorded items, preserve the first response, its original outcome and support-before separately from later attempts/keeps; a retry or later skip cannot replace it. Do not grade original spoken or written explanations.
+**Listening task and help.** Record an initial stimulus-clip request as `task.initialStimulusRequested` before playing it and copy it to the response’s `taskBefore`; the initial clip is the task, not conceptual or reading support. Replays, transcript reveals and prompt read-aloud are distinct `reading` codes, recorded before their reveal/playback. A request never proves the clip was heard or establishes independent listening.
 
-**Support before reveal.** Commit a support code before showing or playing a hint, guided step, worked example, answer, meaning, slot scaffold or read-aloud. Keep audio/reading support separate from the conceptual response; it does not establish independent reading. A later support request does not rewrite an earlier response's support-before. Missing older support information is unobserved, never proof of an unassisted attempt.
+**Observed help before reveal.** During a newly tracked visit, `observed: true` with empty arrays means no help request was recorded in that visit so far, not demonstrated independent performance. Commit concept-help codes (hint, guided step, example, shown answer, meaning or slot scaffold), with the affected task/item id, to working help before their first reveal. Commit read-aloud/prompt-audio codes and the affected task/item id separately to `reading` before playback. Copy the observation into each response's `helpBefore` at the response time. A later request changes working help and the next response only. Missing older observations remain unobserved: never infer them from a later response or turn them into an empty list, false or “none.” Help requests are not proof that help was used; reading/audio data establish neither independent reading nor independent listening.
 
-**Atomic saves and capacity.** Every mutation must pass the actual host's pretty-notes serialization/import preflight and shared limits before committing only this root. Refusal preserves the whole earlier state and visible pending work; do not rerender, navigate or change explorer in a way that silently loses unsaved words/selections. Offer the existing notes download and an explicit confirmed restore of saved words where needed. No silent truncation, history eviction or replacement of saved writing. Preview, render and suggestion reads are save-neutral. Existing source/language/cultural/rights checks remain open until separately cleared.
+**Validation and preservation.** Validate structural bounds, ids, counts, outcome codes and consistency with the save's own source/choices; never require today's catalog membership, bench sizes, wording or answer key. A missing item is absent. Never recompute a saved result. Unknown versions and unreadable entries remain exact and exportable; only the affected visit/bench becomes read-only, and one bad item never closes the pack. Response payloads contain no free text; say why is spoken and unstored. No field holds a real learner's identity, age, grade or coursework. No child audio, transcript, free text or playback duration is recorded. Spoken tasks store nothing. The `story.plan` root (spec 120) is never read or written here.
+
+**Atomic saves and capacity.** Every mutation, including source copies and help-before records, must pass the actual host's pretty-notes serialization/import preflight and shared limits before committing only this root. Refusal preserves the whole earlier state and visible pending work; do not rerender, navigate or change explorer in a way that silently loses unsaved words/selections. Offer the existing notes download and an explicit confirmed restore of saved words where needed. No silent truncation, history eviction or replacement of saved writing. Export, import, reset and save-off use the shared store; preview/render/suggestion reads are save-neutral. Existing source/language/cultural/rights checks remain open until separately cleared.
 
 ## Curriculum fit
 
@@ -116,7 +137,7 @@ Responses use codes only. No child audio, transcript, free text or playback dura
 | Supported practice | Guided first items; the stuck ladder; per-choice feedback; sentence replay; the speaker map. |
 | New application | The Low Fields set after the market set; Nuria's picture talk; Pip's show; spoken talk cards at home. |
 | Purposeful revisit | Pages 1, 2 and 4 and Nuria's letter 4 (spec 120); 253's talk; 270's written reasons; Act VI's kept plan. |
-| Data boundary | Codes only, local. No voice, image or free text; spoken tasks unstored; nothing about the child, family or home. |
+| Data boundary | Response codes and complete frozen authored sources, local. No voice, image or free text; spoken tasks unstored; nothing about the child, family or home. |
 
 ## Upstream check
 
