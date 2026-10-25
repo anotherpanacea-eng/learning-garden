@@ -86,6 +86,17 @@ eq(P.randomPairIndex(4),null);
  eq(root(s).runs.length,6);for(const mode of ['keep','return']){const before=copy(s);ok(!P.beginPairRun(s,mode,options));eq(s,before);}for(const row of root(s).runs){ok(P.selectPairRun(s,row.id,options));eq(current(s).id,row.id);}
  eq(prepareProgressImport(JSON.stringify(report(s),null,2)).state.seedPairs,s.seedPairs);
 }
+// Explicit Draw navigation and rule changes prefer the waiting set after a
+// completed result was inspected. No reader or historical record is rewritten.
+{
+ const s=make();for(let set=0;set<2;set++){ok(P.beginPairRun(s,'keep',options));for(let i=0;i<15;i++){ok(P.drawPairFirst(s,i%6,options));ok(P.drawPairSecond(s,i%5,options));}}
+ ok(P.beginPairRun(s,'keep',options));ok(P.drawPairFirst(s,1,options));const waitingId=current(s).id,waiting=copy(current(s)),allRuns=copy(root(s).runs);eq(root(s).runs.length,3);ok(P.setPairPage(s,'results',options));ok(P.selectPairRun(s,1,options));eq(current(s).pairs.length,15);const inspected=copy(s);P.pairView(s);P.pairTallies(current(s),root(s).source.slots);eq(s,inspected,'passive result inspection never changes the selected set');
+ ok(P.setPairPage(s,'draw',options));eq(current(s).id,waitingId);eq(current(s),waiting);eq(root(s).runs,allRuns);ok(P.setPairPage(s,'results',options));ok(P.selectPairRun(s,2,options));ok(P.setPairMode(s,'return',options));ok(P.setPairMode(s,'keep',options));eq(current(s).id,waitingId);eq(current(s),waiting);eq(root(s).runs,allRuns);
+ // An imported notebook can have multiple unfinished sets. Preserve the one
+ // explicitly selected if it is already waiting, rather than jumping to first.
+ root(s).runs[0].pairs=root(s).runs[0].pairs.slice(0,2);root(s).runs[0].pending=3;ok(P.selectPairRun(s,waitingId,options));const importedRuns=copy(root(s).runs);ok(P.setPairPage(s,'draw',options));eq(current(s).id,waitingId);ok(P.setPairMode(s,'keep',options));eq(current(s).id,waitingId);eq(root(s).runs,importedRuns);
+ ok(P.setPairPage(s,'results',options));ok(P.selectPairRun(s,2,options));const before=copy(s);ok(!P.setPairPage(s,'draw',{...options,canExport:()=>false}));eq(s,before,'waiting selection is part of the atomic preflight');ok(P.setPairPage(s,'draw',options));eq(current(s).id,1,'a completed selection falls back to the first readable waiting set');eq(root(s).runs,importedRuns);eq(prepareProgressImport(JSON.stringify(report(s),null,2)).state.seedPairs,s.seedPairs);
+}
 // Reader and malformed-sibling boundaries never regrade old checks or change
 // raw/unknown work. Existing modes and other destinations stay accessible.
 {

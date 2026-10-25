@@ -261,6 +261,8 @@ with sync_playwright() as pw:
             go(p, '#numbers/seeds')
             original = book(p)
             ok(p.locator('a[href="#numbers/seeds/pairs"]').count() > 0, 'old Seed Stall links to the new investigation')
+            entry_size = p.locator('a[href="#numbers/seeds/pairs"]').first.bounding_box()
+            ok(entry_size['height'] >= 44 and entry_size['width'] >= 44, 'new investigation entry is a44px target on the old Seed Stall')
             go(p)
             ok('seedPairs' not in book(p), 'passive route visit allocates no new progress')
             bounds(p)
@@ -537,13 +539,30 @@ with sync_playwright() as pw:
         tree_bags(p)
         c.close()
 
-        # Finish the third set in each mode through UI, then verify the hard cap.
+        # A completed Results selection must not strand the waiting third set.
+        # Complete its15th pair only after page and mode navigation returns to it.
         c, p = setup(browser, 820, 'capped')
         go(p)
         for name in ['keep', 'return']:
             mode(p, name)
+            waiting_id = run(p)['id']
             ok(len(run(p)['pairs']) == 14, 'third set starts with14 preserved pairs')
-            full_pair(p)
+            first(p)
+            waiting = copy.deepcopy(run(p))
+            ok(waiting['pending'] == 0, 'third set retains the first seed of its15th pair')
+            page(p, 'results')
+            completed_id = next(r['id'] for r in root(p)['runs'] if r['mode'] == name and len(r['pairs']) == 15)
+            tap(p, '[data-pair-run="' + str(completed_id) + '"]')
+            ok(run(p)['id'] == completed_id, 'Results can inspect an earlier completed set')
+            page(p, 'draw')
+            ok(run(p) == waiting and run(p)['id'] == waiting_id,
+               'Draw pairs restores the waiting set after inspecting a completed result')
+            bag(p, 5 if name == 'keep' else 6)
+            ok(p.locator('[data-pair-second]').is_visible(), 'waiting second-draw control is reachable at the three-set cap')
+            mode(p, 'return' if name == 'keep' else 'keep')
+            mode(p, name)
+            ok(run(p) == waiting, 'switching draw rules restores the same pending first seed')
+            second(p)
             ok(len(run(p)['pairs']) == 15 and len([v for v in root(p)['runs'] if v['mode'] == name]) == 3,
                'third set completes without growing another run')
             ok(p.locator('[data-pair-begin]').count() == 0 or p.locator('[data-pair-begin]').is_disabled(),
@@ -553,6 +572,30 @@ with sync_playwright() as pw:
             if name == 'return':
                 ok(p.locator('[data-pair-expected]').count() == 0, 'return results do not reuse whole keep-mode means')
             page(p, 'draw')
+        c.close()
+
+        # Imported Draw pages keep their selected history until an explicit
+        # resume, even when a later set is waiting and all three slots are used.
+        saved_draw = copy.deepcopy(fixtures['capped'])
+        r = saved_draw['seedPairs']
+        r['mode'] = 'keep'
+        r['page'] = 'draw'
+        waiting_row = next(v for v in r['runs'] if v['mode'] == 'keep' and len(v['pairs']) == 14)
+        waiting_row['pending'] = 0
+        waiting = copy.deepcopy(waiting_row)
+        completed_id = next(v['id'] for v in r['runs'] if v['mode'] == 'keep' and len(v['pairs']) == 15)
+        r['currentRun']['keep'] = completed_id
+        c, p = setup(browser, 320, saved_draw)
+        go(p)
+        ok(run(p)['id'] == completed_id and root(p)['runs'] == r['runs'],
+           'passive imported Draw view preserves selected history and pending record')
+        ok(p.locator('[data-pair-resume]').is_visible(), 'imported completed Draw view offers an explicit return to waiting set')
+        tap(p, '[data-pair-resume]')
+        ok(run(p) == waiting and len(root(p)['runs']) == 6, 'explicit resume preserves pending slot and creates no fourth set')
+        bag(p, 5)
+        ok(p.locator('[data-pair-second]').is_visible(), 'imported waiting trial has a reachable second-draw control')
+        bounds(p)
+        shot(p, 'resumed-imported-draw-320.png')
         c.close()
 
         for unsupported in [None, {'version': 99, 'future': 'Synthetic raw format'}]:
