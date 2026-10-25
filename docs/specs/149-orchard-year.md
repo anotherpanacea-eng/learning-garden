@@ -160,7 +160,7 @@ From the **pinned** `curriculum/marble/dependencies.json`. Hard edges are author
 ## Review asks
 
 - **Science:** is "same variety sets no fruit" acceptable as a labeled simplification, given some apples are partly self-fruitful? Default: keep, with the grown-up note.
-- **Cross-spec (settled in review):** spec 150 says "same kind of plant" (apple to apple) and puts each Pollen Path blossom on a different tree, so its bench never contradicts this pack; this pack says "variety" for the apple rule and glosses the word.
+- **Cross-spec (settled in review):** spec 150 says "same kind of plant" (apple to apple) and uses mutually compatible apple varieties flowering together in Pollen Path, consistent with this pack; this pack says "variety" for the apple rule and glosses the word.
 - **History:** the fact-check relied on search excerpts. Please open a van Helmont translation (numbers, fallen leaves) before build.
 - **Owner:** own route `#orchard/year`? Default: yes, linked from the market stall and `#living/plants`.
 - **Owner:** Nuria's Spanish line (*¿Nos mandáis semillas de manzana?*, Peninsular form) needs a fluent reader. Default: keep, English beside it.
