@@ -33,7 +33,7 @@ Every one of the 205 is assigned to exactly one pack below. The ids are candidat
 
 ## The packs
 
-Ages are the union of the Marble age ranges of each pack's targets. Every pack still offers jobs at more than one depth (Sprout, Seedling, Sapling, Keeper's Desk), as spec 120 §8 requires, and the depth names describe the task, never the child.
+Ages are the union of the Marble age ranges of each pack's targets. Spec 120 §8 asks each story chapter, not each pack, to offer jobs at more than one depth. Each pack uses the depths that suit its targets (Sprout, Seedling, Sapling, Keeper's Desk), and the depth names describe the task, never the child.
 
 | Spec | Pack | Ages | Home | What the child does | Strands |
 | --- | --- | --- | --- | --- | --- |
@@ -73,14 +73,14 @@ The [appendix](#appendix-target-topics-by-pack) lists every pack's target ids.
 
 Placement follows [spec 120](specs/120-keeper-of-the-ways.md): its acts, chapters, seasonal festivals and writing rules. Every pack is an optional job; none is required by the story, and none decides a town choice.
 
-**The Hollis rule.** Hollis is unnamed in child text until page 3 comes free at the end of Act III. Before that, text says "the old Keeper", and the miller remembers "an old heron who used to read the flood post" but not their name (spec 120 Act I). This applies to every job that touches the parcel, the pages or the flood post before Act IV, most of all in 260 (the ledger) and 268 (the pages' handwriting), and in any 252 or 257 scene where Pip carries the parcel. Pack 268 is named for "the old Keeper" on purpose, and its first-version child text must not name Hollis even at Keeper's Desk depth. From Act IV on, packs 270, 273, 274 and 275 may name Hollis, because their scenes come after page 3.
+**The Hollis rule.** Hollis is unnamed in child text until page 3 comes free at the end of Act III. Before that, text says "the old Keeper", and the miller remembers "an old heron who used to read the flood post" but not their name (spec 120 Act I). This applies to every job that touches the parcel, the pages or the flood post before Act IV, most of all in 260 (the ledger) and in any 252 or 257 scene where Pip carries the parcel. Page release keeps its own order too: a job that reads a page opens only after that page comes free. So 268's page-3 handwriting job sits after the Act III ending, and before then, or in standalone play, 268 uses page 1's map labels or newly written samples. From Act IV on, packs 270, 273, 274 and 275 may name Hollis, because their scenes come after page 3.
 
 | Act | Packs offering jobs there |
 | --- | --- |
 | I After the Storm | 250 (seed packets washed blank, "mend the village"), 251 (Dot's first deliveries, "deliver and explain"), 252 (Pip asleep on the library cushions), 253 (talk at the welcome-back supper), 257 (re-shelving the storm-soaked library) |
 | II A Town of Our Own | 254 and 260 (ch. 2, the garden and the town's own records "so next time we'll know"; 260's ledger job opens only when page 2 comes free, as "the old Keeper's ledger"), 255, 261 and 264 (ch. 4, rehearsing the first show), 256, 258, 259 and 263 (ch. 1, the weekly market), 262 and 265 (ch. 3, Ember's birthday: things left behind, Bramble and her magpie arrive) |
-| III Beyond Willow Bridge | 263 (ch. 1, Vadoalto's traders' signs at the floating market), 266, 269 and 271 (ch. 4, letters up and down the river in English, Spanish and French), 261 (Nuria and Léon each send a fable from their own tradition), 268 (ch. 4, the handwriting on page 3) |
-| IV The Town Has Two Stories | 270 and 273 (ch. 3, the newspaper's two explanations and what other places did; ch. 1, page 4 as a firsthand account), 274 (ch. 3, the Gazette's sentences), 269 (modals for how sure: "might have", "must have"), 265 (Bramble's arguments in figures of speech), 271 and 275 (ch. 4, the meeting about the low fields) |
+| III Beyond Willow Bridge | 263 (ch. 1, Vadoalto's traders' signs at the floating market), 266, 269 and 271 (ch. 4, letters up and down the river in English, Spanish and French), 261 (Nuria and Léon each send a fable from their own tradition), 268 (from ch. 4's letters, on newly written samples) |
+| IV The Town Has Two Stories | 268 (page 3's handwriting, now free, read for its old spellings), 270 and 273 (ch. 3, the newspaper's two explanations and what other places did; ch. 1, page 4 as a firsthand account), 274 (ch. 3, the Gazette's sentences), 269 (modals for how sure: "might have", "must have"), 265 (Bramble's arguments in figures of speech), 271 and 275 (ch. 4, the meeting about the low fields) |
 | V A Question of Your Own | 277 (the blank pages headed *For the next Keeper*, the newspaper path), 272 (a reading project), 276 (the travelling show to Vadoalto), 270 (a source-led project) |
 | VI The Opening of the Ways | 278 (ch. 2, the exchange plan as a manifest), 267 (ch. 4, a book for the new apprentice), 253 (welcoming someone new) |
 | Festivals, every year | Spring Flood Boards and Planting: 250, 254. Summer Market Fair and the Show: 259, 263, 276. Autumn Harvest Supper: 253. Winter Lantern Night: 267 (the reading list), 276 (a poem recited) |
@@ -101,7 +101,7 @@ Every pack takes the OCA-13 contract that specs 133 to 212 used: a spec, a `docs
 
 ## Suggested order
 
-Under the [roadmap priorities](roadmap.md#owner-priorities-in-order) these sit in priority 1 (advanced curriculum: every pack has Keeper's Desk depth) and priority 3 (clear text). Once admitted and written, a suggested first slice: 264 and 269, which extend the built Story Loft and Sentence Bridges (109), then 262 once spec 122's proposed Lost and Found Board clears its own review. All three serve the intermediate grammar strand. Next come 270 and 273, which serve Act IV directly, and then 257 and 261, the young reader's shelf. Phonics (250, 252) waits on brief 55 whatever the order.
+Under the [roadmap priorities](roadmap.md#owner-priorities-in-order) these sit in priority 1 (advanced curriculum, for the packs with Keeper's Desk depth) and priority 3 (clear text). Once admitted and written, a suggested first slice: 264 and 269, which extend the built Story Loft and Sentence Bridges (109), then 262 once spec 122's proposed Lost and Found Board clears its own review. All three serve the intermediate grammar strand. Next come 270 and 273, which serve Act IV directly, and then 257 and 261, the young reader's shelf. Phonics (250, 252) waits on brief 55 whatever the order.
 
 ## Open owner questions (defaults in bold)
 
@@ -114,7 +114,7 @@ Under the [roadmap priorities](roadmap.md#owner-priorities-in-order) these sit i
 7. **Public-domain novels (272).** **Excerpts from the titles listed under Texts, retold or abridged where a passage is too hard, with the source named.** The owner may prefer a different shelf.
 8. **Multimedia presentations (275, 276).** **The child arranges supplied picture and caption cards into a short show played to a grown-up; nothing leaves the device.**
 9. **New routes.** **Each pack gets its own route under an existing hub** (`#words`, `#post`, `#loft`, `#library`, `#archive`, `#cafe`, `#riddles`, `#desk`), so built destinations stay untouched. `#library/meeting` is a placeholder until spec 120's meeting board has its own reviewed home.
-10. **Pack size.** Packs hold 5 to 11 targets. **Keep each as one pack, with Keeper's Desk depth shipping last.**
+10. **Pack size.** Packs hold 5 to 11 targets. **Keep each as one pack, with any Keeper's Desk depth shipping last.**
 
 ## Appendix: target topics by pack
 
