@@ -110,7 +110,7 @@ Sprout items use no digits. Each of the 25 three-choice items has exactly one ri
 
 ## Saved work
 
-**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+**Frozen source and capacity contract (required before build).** On the first explicit action in an owned bench, freeze all its authored cases: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus the selected configuration. That complete value is the bench's working `source`; a pack/version label or id alone is insufficient. The sketches below have one waiting/current state per bench, not multiple working versions. A catalog revision never changes that waiting bench or any old record. Every newly kept record and retained response carries its own direct complete `source` snapshot copied from the working bench at the time of that record; it never points back to the shared working slot. New kept records continue to use that bench's frozen cases, not today's catalog. No source registry or implicit source refresh is introduced. Rendering, previews, notes and suggestion reads are pure; resuming/importing never rebuilds source, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
 
 Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
 
@@ -121,14 +121,14 @@ waterAndAir: {
   version: 1,
   places: { source, tagged: { [placeId]: 'liquid'|'solid' } },          // 7 ids
   cups: { source, bars: { [barId]: number } | null },                    // 4 bars, each 0-100
-  zones: { source, kept: [{ id, place, height, rain, zone, at }] },          // capacity 8; refuse if full; never evict
+  zones: { source, kept: [{ id, source, place, height, rain, zone, at }] },          // capacity 8; refuse if full; never evict
   fuels: { source, paired: { [sourceId]: [cardId, cardId] } },            // 6 sources
-  carbon: { source, kept: [{ id, scenario, turn, stores: [a, p, n, s, f], at }] },   // capacity 8; refuse if full; never evict; turn 0-4
+  carbon: { source, kept: [{ id, source, scenario, turn, stores: [a, p, n, s, f], at }] },   // capacity 8; refuse if full; never evict; turn 0-4
   answers: { [itemId]: { source, choice | value | order | match, support: ['hint'|'example'|'skip'], at } }
 }
 ```
 
-- `source` freezes the model version (`cups-v1`, `zones-v1`, `coast-v1`, `carbon-v1`), each rule, and each item's choices and order. Codes and numbers only, never prose; *say why* is not stored.
+- Every `source` in the sketch is a complete authored value, including text, as defined above. Only learner response payloads are restricted to bounded codes, ids, numbers and the declared structured selections or placements; no free-form learner prose is collected. Spoken *say why* responses are not stored.
 - The coast bench has no settings, so nothing of it is saved (a "seen" flag would record only that a screen was opened, and nothing reads it).
 - Validate ids, counts and ranges (bars 0-100; stores 0-25 summing to 25; turn 0-4). Never recompute or rewrite saved results on load; an unreadable entry stays raw and exportable while everything else stays open.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and switching are shared.
@@ -147,7 +147,7 @@ waterAndAir: {
 | Supported practice | Guided items with visible steps; the ladder; the zoom; the graph's "how many cups?" reply; the zone bench's twelve settings; the token counter that always shows 25. |
 | New application | The fresh-only graph (2.6); eastern Canada vs western Europe (5.4); the room of air (4.5); a regrowth run (6.6); tracing an atom aloud (6.7); the Act V Sponge guide. |
 | Purposeful revisit | Spec 140's water cycle, barometer and weather vs climate; 143's currents; 152's transpiration loop; 147's renewable sort; 149's photosynthesis and 174's respiration on the carbon bench; 151's rot log as decomposition; 169's sea breeze beside the coast bench. |
-| Data boundary | Tags, bar heights, bench settings, kept runs, choices and support codes, all local. No timing, free text, location or body data. Off-screen cards record nothing. |
+| Learner-response boundary | Tags, bar heights, bench settings, kept runs, choices and support codes, all local. No timing, free-form learner prose, location or body data. Off-screen cards record nothing. |
 
 ## Upstream check
 
