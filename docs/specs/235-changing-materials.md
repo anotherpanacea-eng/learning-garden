@@ -1,6 +1,6 @@
-# 224. Changing Materials: mixtures, reactions, new materials and forces
+# 235. Changing Materials: mixtures, reactions, new materials and forces
 
-Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md), wave 6. Every child-facing line is in [the companion text](../content/224-changing-materials-text.md); sources and open checks are in the [source audit](../source-audits/224-changing-materials.md).
+Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md), wave 6. Every child-facing line is in [the companion text](../content/235-changing-materials-text.md); sources and open checks are in the [source audit](../source-audits/235-changing-materials.md).
 
 **Commissioning boundary:** a proposal only. Select a bounded first slice after independent review (the Clean-Up Bench or the Spring Bench is natural); the seven benches do not commission each other. Story links are future adapters to [spec 120](120-keeper-of-the-ways.md); standalone play stays open and no completion is inferred from a missing adapter. **All chemistry, heat, flames and electric current stay on screen.** No acid, flame, kiln, still or mains is ever a child activity; the only off-screen cards are kitchen-safe and grown-up-led.
 
@@ -82,7 +82,15 @@ Every bench shows its model line and the safety line. No timers, scores, streaks
 - **Spring test:** a 10.0 cm spring, a ruler, a newton meter hook, loads 0-7 N in 1 N steps. The ruler shows **length**; the child records **extension**. Authored extension readings (cm, length minus 10.0) with scatter: 0, 2.1, 3.9, 6.1, 8.0, 10.0, 13.5, 18.0. Points drop onto a force-extension graph; the best-fit tool never forces the line through each dot (slope through zero from 0-5 N: 2.0 cm per N; every point within 0.15 cm). After 5 N the line bends (the 6 N point sits 1.5 cm off it); unloaded from 7 N the spring reads 12.0 cm long, a leftover extension of 2.0 cm. The market scale's story spring is this spring.
 - **Pull Cart** (Keeper's Desk): a 2 kg or 4 kg cart pulled with 2, 4 or 6 N; predicted speed gain each second = force ÷ mass; measured shows the 0.4 N friction (2 kg, 6 N: predicted 3.0, measured 2.8 m/s each second). Starts from rest. *A made-up model with tidy numbers.*
 
-**(f) Gap and Depth, models `gap-v1` and `tank-v1`.** **Bridge gap:** a 10 m steel handrail section with a 6 mm gap at 15 °C; a temperature dial from −10 to 40 °C; the gap reads 9.0 mm at −10 and 3.0 mm at 40 and never closes. **No gap** shows the rail bowing on a hot day. A particle window keeps every dot the **same size**; only spacing grows. A ring-and-hole picture. **Tank:** the miller's 1.0 m barrel on a 1.0 m ledge, holes at 0.2, 0.5 and 0.8 m deep; pressure arrows of 2, 5 and 8 units at right angles to every wall and the base; jets land furthest from the bottom hole (computed: landing distance 2√(depth × drop) gives 1.96, 1.73 and 1.20 m). Diver panel at Keeper's Desk: about one more atmosphere per 10 m. *Made-up sizes; steel's 12 millionths per °C and water's one atmosphere per 10 m are real rounded values.*
+**(f) Gap and Depth, models `gap-v1` and `tank-v1`.** **Bridge gap:** a 10 m steel handrail section with a 6 mm gap at 15 °C; a temperature dial from −10 to 40 °C; the gap reads 9.0 mm at −10 and 3.0 mm at 40 and never closes. **No gap** shows the rail bowing on a hot day. A particle window keeps every dot the **same size**; only spacing grows. A ring-and-hole picture. **Tank:** the miller's 1.0 m barrel on a 1.0 m ledge, holes at 0.2, 0.5 and 0.8 m deep; pressure arrows of 2, 5 and 8 units at right angles to every wall and the base; jets land furthest from the bottom hole for this supplied geometry. The free surface is 2.0 m above the ground; horizontal landing distance = 2√(depth below the surface × drop to the ground), with negligible resistance. The explicit table fixes each distance to its hole:
+
+| Depth below surface (m) | Hole height/drop to ground (m) | Horizontal landing distance (m) |
+| --- | --- | --- |
+| 0.2 | 1.8 | 1.20 |
+| 0.5 | 1.5 | 1.73 |
+| 0.8 | 1.2 | 1.96 |
+
+Diver panel at Keeper's Desk: about one more atmosphere per 10 m. *Made-up sizes; steel's 12 millionths per °C and water's one atmosphere per 10 m are real rounded values.*
 
 **(g) Wire Jump, model `motor-v1`.** A stiff wire across the gap between two magnets, a small cell in the picture, a switch. Controls: current **toward you / away**, magnets **N left / N right**. Only after T19 does the child predict up, down, toward a pole or no push. Rule (computed as current × field): toward you with N left → up; one reversal → down; both → up. Then **Coil**: two sides pushed opposite ways, the coil turns; **Cone**: current flipping back and forth moves the cone in and out. *A picture model. It shows which way the push goes, not why or how strong. On screen only.*
 
@@ -103,19 +111,23 @@ Sprout items use no digits. Twenty-six 3-choice items, each with exactly one rig
 
 ## Saved work
 
+**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+
+Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
+
 Optional root `changes` per explorer, absent until a first explicit action.
 
 ```
 changes: {
   version: 1,
-  clean:   { source, kept: [{ mixture, want, plan: [tool, tool?], result, at }] },  // latest 8
+  clean:   { source, kept: [{ id, mixture, want, plan: [tool, tool?], result, at }] },  // capacity 8; refuse if full; never evict
   shelf:   { source, bins: { [cardId]: [binId, binId?] }, at } | null,
-  salts:   { source, kept: [{ acid, partner, tiles: [code], at }] },              // latest 8
+  salts:   { source, kept: [{ id, acid, partner, tiles: [code], at }] },              // capacity 8; refuse if full; never evict
   rig:     { source, jobs: { [jobId]: materialId }, at } | null,
   spring:  { source, loads: [0..7], extensions: [number], at } | null,             // child-entered, 0.0-30.0 cm, one decimal
-  cart:    { source, kept: [{ mass, force, at }] },                                 // latest 6
+  cart:    { source, kept: [{ id, mass, force, at }] },                                 // capacity 6; refuse if full; never evict
   gap:     { source, tempC: -10..40, at } | null,
-  wire:    { source, kept: [{ current, magnets, predicted, at }] },                 // latest 8
+  wire:    { source, kept: [{ id, current, magnets, predicted, at }] },                 // capacity 8; refuse if full; never evict
   answers: { [itemId]: { source, choice | value | order | tiles, support: ['hint'|'example'|'skip'], at } }
 }
 ```

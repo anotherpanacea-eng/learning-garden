@@ -1,6 +1,6 @@
 # Light, Stars and Signals: all child-facing text
 
-Companion to [spec 225](../specs/225-light-stars-signals.md). Use as written. `{guide}` is the chosen companion and `{courier}` the explorer's courier; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them.
+Companion to [spec 236](../specs/236-light-stars-signals.md). Use as written. `{guide}` is the chosen companion and `{courier}` the explorer's courier; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them.
 
 ## Labels used on every card
 

@@ -1,6 +1,6 @@
 # Changing Materials: all child-facing text
 
-Companion to [spec 224](../specs/224-changing-materials.md). Use as written. `{guide}` is the chosen companion; `{courier}` is the explorer's courier; the explorer is "you". US spelling, metric first, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them.
+Companion to [spec 235](../specs/235-changing-materials.md). Use as written. `{guide}` is the chosen companion; `{courier}` is the explorer's courier; the explorer is "you". US spelling, metric first, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them.
 
 ## Labels used on every card
 

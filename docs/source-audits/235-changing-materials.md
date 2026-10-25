@@ -1,6 +1,6 @@
 # Changing Materials: source audit
 
-Audit for [spec 224](../specs/224-changing-materials.md) and its [companion text](../content/224-changing-materials-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the bench models (`separate-v1`, `reaction-cards-v1`, `salt-namer-v1`, `rig-v1`, `spring-v1`, `cart-v1`, `gap-v1`, `tank-v1`, `motor-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
+Audit for [spec 235](../specs/235-changing-materials.md) and its [companion text](../content/235-changing-materials-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the bench models (`separate-v1`, `reaction-cards-v1`, `salt-namer-v1`, `rig-v1`, `spring-v1`, `cart-v1`, `gap-v1`, `tank-v1`, `motor-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
 
 ## Verification method (read first)
 
@@ -77,3 +77,9 @@ Audit for [spec 224](../specs/224-changing-materials.md) and its [companion text
 ## Rights notes
 
 No images are embedded. If art is wanted: Faraday's rotation apparatus (Royal Institution), Monier's patent drawings and museum composite bows exist in collections; check each item's licence and prefer public-domain or open-access images. All Willowbank art is original. Marble records are paraphrased; no shared run of six or more words was copied.
+
+## Bounded authoring repair, 2026-10-25
+
+The wave's public spec identifiers and companion/audit links were renumbered to avoid existing specs. Historical private checker filenames and scratch paths above retain their original names; reported authoring checks describe those earlier runs, not a fresh implementation or complete-source review. The selected build still requires its stated subject, primary-source, cultural and fluent-reader gates, independent review and actual runtime/browser verification. The owning spec now requires complete authored source freezing and explicit capacity refusal/download/selected-confirmed removal, with no silent kept-work eviction. No code, route, taxonomy pin or coverage declaration is commissioned by this repair.
+
+**Tank-table repair:** depths0.2,0.5,0.8m now explicitly pair with drops1.8,1.5,1.2m and ranges1.20,1.73,1.96m. The previous descending range list was ambiguous against the ascending depth list. This corrects the pairing, not the conclusion that the deepest of these three holes reaches farthest. Derivation: https://openstax.org/books/college-physics/pages/12-3-the-most-general-applications-of-bernoullis-equation (Torricelli exit speed), combined with horizontal projectile motion. No physical apparatus or broader source check is commissioned.

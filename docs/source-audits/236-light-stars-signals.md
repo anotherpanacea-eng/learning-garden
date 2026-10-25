@@ -1,6 +1,6 @@
 # Light, Stars and Signals: source audit
 
-Audit for [spec 225](../specs/225-light-stars-signals.md) and its [companion text](../content/225-light-stars-signals-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the six bench models (`lamp-code-v1`, `sky-wheel-v1`, Star Seeds, `ray-v1`, `fates-v1`, `forge-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
+Audit for [spec 236](../specs/236-light-stars-signals.md) and its [companion text](../content/236-light-stars-signals-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the six bench models (`lamp-code-v1`, `sky-wheel-v1`, Star Seeds, `ray-v1`, `fates-v1`, `forge-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
 
 ## Verification method (read first)
 
@@ -89,3 +89,7 @@ Copying check: a six-word-window comparison of all three files against the seven
 ## Rights notes
 
 No images are embedded. If art is wanted: the Library of Congress Morse tape, Huygens's sketch and Chappe tower drawings are old enough to be likely public domain, but check each item's listed rights; NASA images are generally public domain with credit. Matariki and Yorùbá drumming art should be reviewed by people from those communities before publication. All Willowbank art is original.
+
+## Bounded authoring repair, 2026-10-25
+
+The wave's public spec identifiers and companion/audit links were renumbered to avoid existing specs. Historical private checker filenames and scratch paths above retain their original names; reported authoring checks describe those earlier runs, not a fresh implementation or complete-source review. The selected build still requires its stated subject, primary-source, cultural and fluent-reader gates, independent review and actual runtime/browser verification. The owning spec now requires complete authored source freezing and explicit capacity refusal/download/selected-confirmed removal, with no silent kept-work eviction. No code, route, taxonomy pin or coverage declaration is commissioned by this repair.

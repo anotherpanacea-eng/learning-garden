@@ -1,6 +1,6 @@
-# 225. Light, Stars and Signals: rays, the spectrum, codes and the lives of stars
+# 236. Light, Stars and Signals: rays, the spectrum, codes and the lives of stars
 
-Status: **proposed, 2026-10-25; independent review done 2026-10-25 (facts, numbers, story fit, safety); awaiting a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md), wave 6. Every child-facing line is in [the companion text](../content/225-light-stars-signals-text.md); sources and open checks are in the [source audit](../source-audits/225-light-stars-signals.md).
+Status: **proposed, 2026-10-25; independent review done 2026-10-25 (facts, numbers, story fit, safety); awaiting a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md), wave 6. Every child-facing line is in [the companion text](../content/236-light-stars-signals-text.md); sources and open checks are in the [source audit](../source-audits/236-light-stars-signals.md).
 
 **Commissioning boundary:** a proposal only. Select a bounded first slice after independent review; the six activities do not commission each other. Story links are future adapters to [spec 120](120-keeper-of-the-ways.md); standalone play stays open and no completion is inferred from a missing adapter. Real sky, lens and lamp work is off screen and grown-up-led; the Sun rule from [spec 162](162-light-room.md) is fixed.
 
@@ -113,15 +113,19 @@ Sprout items use no digits (checked by script). Each of the 28 three-choice item
 
 ## Saved work
 
+**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+
+Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
+
 Optional root `signals` per explorer, absent until a first explicit action.
 
 ```
 signals: {
   version: 1,
-  codes: { source, kept: [{ patterns: { [msgId]: 'S'|'L' string, 1-5 }, card: true|false, rain: true|false, at }] }, // latest 8
+  codes: { source, kept: [{ id, patterns: { [msgId]: 'S'|'L' string, 1-5 }, card: true|false, rain: true|false, at }] }, // capacity 8; refuse if full; never evict
   grid: { source, cells: '0'|'1' x 25, darkIs: '0'|'1', at } | null,
-  rays: { source, kept: [{ tool: 'mirror'|'lens', place, rays: [[x1,y1,x2,y2,dashed]] (max 4), kind: [real, upright, size], at }] }, // latest 8
-  fates: { source, kept: [{ material, wave, predicted, at }] },   // latest 12
+  rays: { source, kept: [{ id, tool: 'mirror'|'lens', place, rays: [[x1,y1,x2,y2,dashed]] (max 4), kind: [real, upright, size], at }] }, // capacity 8; refuse if full; never evict
+  fates: { source, kept: [{ id, material, wave, predicted, at }] },   // capacity 12; refuse if full; never evict
   forge: { source, sorted: { [element]: binId }, at } | null,
   answers: { [itemId]: { source, choice | value | order, support: ['hint'|'example'|'skip'], at } }
 }
