@@ -1,6 +1,6 @@
 # New kinds of play beyond reading, writing and math
 
-Proposal, 2026-10-23. Planning only: nothing here is built or scheduled; review repairs do not clear the remaining commissioning gates. Every kind below stays single-player, local and offline, with no accounts, online content or multiplayer. Every kind now has a numbered proposal and companion draft; some still need finite content/model fixtures and complete help paths before commissioning. The proposed text is fitted to the story in [spec 120](specs/120-keeper-of-the-ways.md); each still needs the usual independent reviews before any build.
+Original survey, 2026-10-23; status updated 2026-10-25. The proposals and companion drafts are merged. Ten kinds remain proposed; the Games Table is partly live with Seed Pile, Shutters and two/three-row Ribbon Rows (specs 129–132). Its mancala/Hex and later opponent-design work remain proposals. The [current delivery queue](roadmap.md#new-material-status-and-next-builds) owns scheduling. Each new slice retains its content/model/source/save and implementation reviews; original survey descriptions below are design history where the numbered spec or current queue narrows them. Play remains single-player and local, with open destinations and no learner-data upload.
 
 | Kind | Spec | Child-facing text |
 | --- | --- | --- |
@@ -58,9 +58,9 @@ Each entry gives the kind of play, what it teaches, a bounded first slice and ho
 
 ### 4. Strategy games against Bramble (spec 121)
 
-**Kind:** two-sided games on one device, the child against Bramble. The first opponent in the garden who *plans*.
+**Kind:** two-sided games on one device, the child against Bramble. An opponent who plans, already present in the live Seed Pile game.
 **Teaches:** thinking ahead, working backwards from the end, and number bonds through repeated play. Fluency without timers.
-**First slice:** three small games at a Games Table in the orchard: Nim with seed piles, Shut the Box with two dice, and a short mancala with an attributed origin card. Bramble's strength is a visible dial the child sets: "Bramble is sleepy", "Bramble is paying attention", "Bramble has a plan". No score kept across sessions; a game can be abandoned at any time.
+**Original survey scope (superseded by the current build queue):** three small games at a Games Table in the orchard: Nim with seed piles, Shut the Box with two dice, and a short mancala with an attributed origin card. Bramble's strength is a visible dial the child sets: "Bramble is sleepy", "Bramble is paying attention", "Bramble has a plan". No score kept across sessions; a game can be abandoned at any time.
 **Older depth:** the winning strategy for Nim is learnable. A "Bramble explains" page walks through why certain piles are safe, and the child can test the rule by playing it. Hex on a small board adds a game with no draws, which invites the question "why can't Hex end in a tie?"
 
 ### 5. Deduction mysteries (spec 122)
@@ -120,13 +120,9 @@ A card that sends the child to the real kitchen, yard or window: measure a real 
 
 ## Suggested order
 
-1. **Rhythm Studio (115).** Smallest new kind, reuses Bell Studio's audio and save shape, and joins music to fractions.
-2. **Field Guide Almanac (116).** Gives a reason to come back tomorrow and starts the collect, classify, connect pattern every knowledge strand can reuse.
-3. **Spanish River Market (117).** A second language world, with content that works for a teen beginner.
-4. **Strategy games against Bramble.** The cheapest high-reuse kind after these, and it scales well for older explorers.
-5. **Deduction mysteries** and **the Clockwork Mill**, which give older explorers the most room.
-6. **Design and build**, **Sign Painter** and **spatial puzzles**, in whichever order the art work allows.
-7. **Stewardship over seasons**, after the act structure settles.
+The [current roadmap queue](roadmap.md#next-build-queue) supersedes this survey's original order. Under priority 4, prefer a bounded Rhythm Studio slice, then an Almanac/data slice, then a Spanish errand when its fluent review is ready. A ready history/source slice or investigation can proceed during a review wait. The [48-pack delivery families](history-and-science-buildout.md#delivery-families-and-first-slices) show the other new material and its purposeful returns.
+
+The Games Table's three existing game families are live. Further opponents, the Mill, mysteries, maker/spatial work and stewardship receive separate bounded commissions; the [held-back-parts table](roadmap.md#much-later-parts-held-back-from-the-new-game-kinds) retains the geometry, seasonal and game-model requirements. Shared controls or a thematic link do not supply a new model/save contract.
 
 ## Fit with the six acts and the strand map
 
