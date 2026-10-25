@@ -72,7 +72,7 @@ Companion to [spec 193](../specs/193-letters-for-numbers.md). Use as written, af
 >
 > "That's a lot of answers," says Pip.
 >
-> Nuria taps the table. "Here's another rule. Vadoalto needs four more bundles of reed than seedlings. Their roofs blew off."
+> Nuria taps the table. "Here's another rule. You'll want four more bundles of reed than seedlings, for your roofs."
 >
 > The librarian runs a finger down the table. Only one row works for both rules.
 >
@@ -86,7 +86,7 @@ Companion to [spec 193](../specs/193-letters-for-numbers.md). Use as written, af
 **Hook:** The Gazette prints a price rule with a mistake in it. The librarian, who edits it, needs a correction.
 
 **Short:**
-> The Gazette says four baskets of (L + 3) cost 4L + 3. "That's too cheap," says the baker. The librarian reaches for very small print.
+> The Gazette says four baskets of (L + 3) hold 4L + 3. "That's too few rolls," says the baker. The librarian reaches for very small print.
 
 **Longer:**
 > Hidden on page three of the *Willowbank Gazette*, under the two big headlines, is a small notice. **Basket rule: 4 baskets, each with L loaves and 3 rolls. Total: 4L + 3.**
@@ -707,6 +707,7 @@ Step 3: **Skip for now.** You can come back any time.
 - **term**: one part of an expression, like 3a or 7.
 - **expression**: terms joined by + or −, with no equals sign.
 - **like terms**: terms with the same letter and the same power.
+- **power**: the small raised number on a letter, like the 2 in a². A plain a has power 1.
 - **simplify**: write an expression shorter, without changing its value.
 - **squared**: a number times itself. a² means a × a.
 - **open a bracket (expand)**: multiply each term inside by the number outside.

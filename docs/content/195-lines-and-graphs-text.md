@@ -25,14 +25,14 @@ Companion to [spec 195](../specs/195-lines-and-graphs.md). Use as written, after
 **Hook:** Before the meeting, the librarian draws what the Wall and the Sponge would cost, year by year, as two lines.
 
 **Short:**
-> The librarian draws two lines: the Wall's cost and the Sponge's. "The Sponge is cheaper," says Bramble. "Look at year twenty," says Pip.
+> The librarian draws two lines: the Wall's cost and the Sponge's. "The Sponge is cheaper," says Pip. "Look at year twenty," says Bramble.
 
 **Longer:**
 > The librarian pins a graph to the meeting board: years along, dollars up.
 > "The Wall costs $9,000 to build," they say, "then $600 a year to mend. The Sponge costs $3,000 to start. Then $1,200 a year, to help the orchard keepers."
 > Two lines climb the paper. The Wall's starts higher but climbs more gently.
-> "The Sponge is cheaper," says Bramble. "Done."
-> Pip puts his paw on the right-hand edge. "Not at year twenty. Look."
+> "The Sponge is cheaper," says Pip. "Done."
+> Bramble puts her finger on the right-hand edge. "Not at year twenty. Look."
 > The lines cross at year ten. Before it, the Sponge has cost less. After it, the Wall has.
 > "And Some of Each?" asks Dot.
 > "No line for it yet," says the librarian. "It's still on the board."
@@ -392,7 +392,7 @@ Feedback B: That one climbs. Down needs a minus.
 Feedback C: Yes. Down 2, start at 5.
 
 **B6 (Keeper's Desk, say why; spoken to a grown-up, not stored)**
-Prompt: Bramble says, "The Sponge is cheaper. Its line starts lower." What would you tell her?
+Prompt: Pip says, "The Sponge is cheaper. Its line starts lower." What would you tell him?
 Model answer for the grown-up: It is cheaper at the start. Its line is steeper, $1,200 a year against $600, so it catches up. They cross at year 10; after that the Wall has cost less. Cost is also not the only thing to weigh, and Some of Each is a third plan the graph doesn't show.
 Tests: starting value read as the whole story; the graph read as choosing the plan.
 Hint: Which line climbs faster? What happens at year 10?
@@ -665,6 +665,7 @@ Step 3: **Skip for now.** You can come back any time.
 ## Key terms (glossary)
 
 - **table of values**: rows of matching pairs, such as minutes and copies.
+- **axis**: one of the two number lines on a graph: the across axis and the up axis. They cross at (0, 0).
 - **point**: a place on a grid, written (across, up).
 - **gradient**: how far a line goes up for each one across. Negative means down.
 - **intercept**: where a line crosses the up axis; the starting value.
@@ -690,7 +691,7 @@ Step 3: **Skip for now.** You can come back any time.
 
 **What this teaches:** tables of values as points; straight-line graphs and y = mx + c, with the gradient as "up per one across" and the intercept as the starting value; gradient from two points; telling linear from non-linear; simultaneous equations as two lines crossing, then by elimination and substitution; expanding two brackets with an area grid; quadratic graphs (the U shape, its symmetry line and roots); estimating values and solutions from graphs.
 
-**What it does not claim:** the plan costs, press counts and prices are made up. The graph of costs shows when each plan is cheaper; it does not choose a plan. It does not teach factorising quadratics, the quadratic formula, or inequalities on graphs.
+**What it does not claim:** the plan costs, press counts and prices are made up. The graph of costs shows when each plan is cheaper; it does not choose a plan. It does not teach factoring quadratics, the quadratic formula, or inequalities on graphs.
 
 **Sources in brief:** Nicole Oresme's 1350s treatise via the Stanford Encyclopedia of Philosophy, Britannica and encyclopedia summaries; *The Nine Chapters* chapter 8 via reference summaries and university exhibits; Galileo's *Two New Sciences* (1638) via university course pages. Full list in the source audit.
 

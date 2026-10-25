@@ -103,7 +103,7 @@ Worked example: 1. Story: 3 trays, 4 buns on each. 2. Equal groups, so times. 3.
 
 **T2. Read it without working it out** (A true thing about math)
 > You can read a number sentence like a sentence. 3 × (1,250 + 375) means three lots of (1,250 + 375).
-Worked example: 1. Look inside the brackets: one sack of flour, 1,250 + 375. 2. Outside: × 3. 3. So it is 3 times as much. No adding needed.
+Worked example: 1. Look inside the brackets: one amount, 1,250 + 375. 2. Outside: × 3. 3. So it is 3 times as much. No adding needed.
 
 **T3. Brackets mean "do this part first"** (A true thing about math)
 > Brackets put a fence around one part. Work out the inside first. Then use that number.
@@ -601,6 +601,7 @@ Step 3: **Skip for now.** You can come back any time.
 - **agreed order**: brackets, then × and ÷ left to right, then + and − left to right.
 - **operation**: adding, taking away, times or dividing.
 - **power**: a small raised number saying how many copies to multiply: 2³ = 2 × 2 × 2.
+- **square root (√)**: the number that times itself makes this one: √100 = 10, because 10 × 10 = 100.
 - **reciprocal**: the number that multiplies another to make 1: 1/5 for 5.
 - **inverse**: the operation that undoes another one.
 - **unknown**: a number you don't know yet, shown by a box or a letter.

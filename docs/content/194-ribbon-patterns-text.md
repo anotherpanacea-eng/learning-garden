@@ -126,7 +126,7 @@ Worked example: 1. Not "it goes up". 2. "Start with 4 ribbons. Each new square a
 Worked example: 1. 47 − 10 = 37. 57 − 10 = 47. 2. Rule: the tens digit drops by 1. 3. Test: 82 − 10 = 72. It holds.
 
 **T7. Tables have patterns** (A true thing about math)
-> A table pairs each input with an output. A pattern down a column can check an answer.
+> A table pairs each number of posts with its number of ribbons. A pattern down a column can check an answer.
 Worked example: 1. Posts and ribbons, 4 each: 4, 8, 12, 16. 2. All even. 3. An odd answer can't be right.
 
 **T8. Build from facts you know** (A true thing about math)
@@ -370,7 +370,7 @@ Prompt: Which rule could someone use to build the ribbon squares?
 - C. "Add 4 each time." *(tests: using the first term as the step)*
 Hint: Could someone build the pattern from your rule alone?
 Explanation: A rule needs a start and a step.
-Feedback A: Lots of patterns go up. By how much, from where?
+Feedback A: Lots of patterns go up. Where does it start? What does each step add?
 Feedback B: Yes. A start and a step build it.
 Feedback C: Add 4 gives 4, 8, 12. That's a different pattern.
 
@@ -450,12 +450,12 @@ Feedback C: Look down each pair, not along one row.
 **C6 (Sapling, 3-choice)**
 Prompt: Pairs so far: (3, 6) and (6, 12). Which point comes next?
 - A. (18, 9) *(tests: reversing the pair)*
-- B. (12, 15) *(tests: adding 3 to each number)*
+- B. (9, 15) *(tests: adding 3 to each number)*
 - C. (9, 18) *(right)*
 Hint: Bramble's number first. Across, then up.
 Explanation: Bramble's 9 pairs with the magpie's 18. Across 9, up 18.
 Feedback A: Bramble's number goes first. Across 9, then up.
-Feedback B: Each pair is (Bramble's, magpie's). What comes after 6 and 12?
+Feedback B: The magpie adds 6 each time, not 3. After 12 comes 18.
 Feedback C: Yes. It sits on the same straight line.
 
 ### Set D. The Number Ribbon (Sapling and Keeper's Desk)
@@ -486,7 +486,7 @@ Prompt: Which rule rebuilds 5, 3, 1, −1 exactly?
 - C. "Start at 5. Subtract 2 each time." *(right)*
 Hint: Could the rule make a different sequence too?
 Explanation: Without the start, 9, 7, 5 also subtracts 2.
-Feedback A: By how much, and from where?
+Feedback A: Down how much each step? Starting where?
 Feedback B: Good step. Where does it start?
 Feedback C: Yes. Start and step rebuild it exactly.
 
