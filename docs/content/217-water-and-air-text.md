@@ -85,17 +85,17 @@ The rain arrived at noon, exactly as promised. The orchard keeper did not say sh
 
 ### Scene 4. Cold on the way up (Act III, chapter 3: the route by the high ford)
 
-**Short:** The path to the high ford climbs and climbs. It is summer, but Pip's breath makes a cloud.
+**Short:** The path to the high ford climbs and climbs. The higher it goes, the colder the air gets.
 
 **Longer:** The courier's map showed the old path to Vadoalto, marked here and there by faded ribbons. It climbed past the last orchard, through beech woods, and up onto open grass.
 
-"It's summer," said Pip, "so why is my nose cold?"
+"It was warmer down in Willowbank," said Pip, "so why is my nose cold up here?"
 
 "We're high up," said {guide}. "Air gets colder the higher you climb, in the low part of the sky where weather happens."
 
-Above them, snow still lay in the shadows of the peaks.
+Above them, snow lay in the shadows of the peaks.
 
-"Down in Willowbank the apples are ripening," said Dot. "Up here it's still spring."
+"Whatever the time of year," said Dot, "up here is colder than down in the valley."
 
 "The mountains have their own climate," said {guide}. "Every few hundred meters you climb, the trees change."
 
@@ -189,8 +189,8 @@ Worked example: (1) A flat balloon. (2) A full one. (3) The full one tips the sc
 **T14. A thin coat.** The atmosphere is the air around Earth. It is very thin compared with Earth. Almost all weather happens in its lowest layer.
 Worked example: (1) A globe 30 cm (12 in) across. (2) The weather layer: about two sheets of paper thick. (3) That's very thin.
 
-**T15. Two jobs of the air.** The ozone layer, high up, blocks much of the Sun's harmful ultraviolet light. Gases in the air also hold in warmth. Two different jobs.
-Worked example: (1) Ultraviolet comes in. (2) Ozone blocks much of it. (3) Separately, the air holds warmth near the ground.
+**T15. Two jobs of the air.** High up, the ozone layer soaks up much of the Sun's harmful ultraviolet light. Some gases also hold in warmth, and ozone is one of them. Two jobs.
+Worked example: (1) Ultraviolet comes in. (2) Ozone high up soaks up much of it. (3) A second job: some gases, ozone too, hold warmth near the ground.
 
 **T16. The ocean stores warmth.** Water warms up slowly and cools down slowly. So the sea keeps coasts milder: cooler summers, warmer winters.
 Worked example: (1) Summer: the sea stays cooler than the land. (2) Winter: the sea stays warmer. (3) The coast swings less.
@@ -273,7 +273,7 @@ Layer board: Drag the cloud, the rain and the airplane into the right layer.
 Layer labels: **Troposphere** (lowest: almost all weather) · **Stratosphere** (above: the ozone layer) · **Higher layers** (very thin air).
 Zoom reveal: Zoom out from Willowbank. Watch how thin the air is.
 Zoom line: On a globe 30 cm (12 in) across, the weather layer is about two sheets of paper thick.
-Two-jobs line: Ozone blocks harmful light. Other gases hold in warmth. Two jobs.
+Two-jobs line: Ozone soaks up harmful ultraviolet. Some gases, ozone too, hold in warmth. Two jobs.
 Climb line: In the lowest layer, air gets colder as you climb.
 Wind line: Air flows from where it presses harder to where it presses less. That moving air is wind.
 
@@ -523,13 +523,13 @@ Feedback: A: Higher up, air is too thin for clouds. B: Ozone sits above the weat
 Explanation: Almost all weather happens in the troposphere, the lowest layer.
 
 **4.3 (Sapling, 3-choice)**
-Prompt: What job does the ozone layer do?
-- A. It keeps Earth warm. *(misconception: ozone-causes-warming)*
-- B. It blocks much of the Sun's harmful ultraviolet light. *(right)*
-- C. It makes the clouds. *(misconception: ozone-is-weather)*
-Hint: Two jobs, two different things. Which is ozone's?
-Feedback: A: That's a different job, done by other gases. B: Yes. Ozone is the shield. C: Clouds form lower down.
-Explanation: Ozone blocks harmful light. Other gases hold in warmth. Two separate jobs.
+Prompt: How does the ozone layer protect living things from ultraviolet light?
+- A. It sends all sunlight back into space. *(misconception: ozone-blocks-all-sunlight)*
+- B. High up, it soaks up much of the Sun's ultraviolet. *(right)*
+- C. It makes clouds that shade the ground. *(misconception: ozone-is-weather)*
+Hint: Ozone stops one kind of light. Which kind, and where?
+Feedback: A: Most sunlight gets through, or the day would be dark. Ozone soaks up ultraviolet. B: Yes. High in the stratosphere, ozone soaks up much of it. C: Clouds form lower down, in the troposphere.
+Explanation: High up, ozone soaks up much of the Sun's harmful ultraviolet before it reaches the ground.
 
 **4.4 (Sapling, 3-choice)**
 Prompt: Which way does air press on things?
@@ -711,7 +711,7 @@ Explanation: Carbon goes round. It is never used up, only moved.
 - **Atmosphere:** the layer of air around Earth.
 - **Troposphere:** the lowest layer of air, where almost all weather happens.
 - **Stratosphere:** the layer above, where the ozone layer is.
-- **Ozone layer:** a layer of gas high up that blocks much harmful sunlight.
+- **Ozone layer:** a layer of gas high up that soaks up much of the Sun's harmful ultraviolet light.
 - **Ultraviolet (UV):** invisible sunlight that can harm living things.
 - **Air pressure:** the push of air on everything around it.
 - **Evaporate:** to change from liquid water into water vapor.

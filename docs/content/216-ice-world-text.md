@@ -264,7 +264,8 @@ Model line (A made-up model): A drawing with made-up depths. Real thaw depth cha
 Opening: Slide the marker from the equator to a pole.
 Buttons: **latitude slider 0° to 90°** · **Show the beam** · **Data card**.
 Guided first item (3 steps shown): (1) Put the marker at 0°. (2) Show the beam. (3) Slide to 60°. What happens to the patch?
-Beam readout (Sapling): The beam covers {n} patches. (0°: 1.0 · 30°: 1.2 · Willowbank, 42.5°: 1.4 · 60°: 2.0 · 70°: 2.9 · 80°: 5.8)
+Beam readout (Sapling, 0° to 85°): The beam covers {n} patches. (0°: 1.0 · 30°: 1.2 · Willowbank, 42.5°: 1.4 · 60°: 2.0 · 70°: 2.9 · 80°: 5.8 · 85°: 11.5)
+Horizon line (86° to 90°, no number): Near the pole in March, the noon Sun sits on the horizon. Its light skims the ground, spread too thin to count.
 Zone labels: **Tropical** · **Dry** · **Temperate** · **Continental** · **Polar**.
 Willowbank pin line: Willowbank is temperate. The high peaks above it are as cold as a polar place, because they are high.
 Data card, polar: Warmest month below 10 °C (50 °F). Very little snow or rain. Strong winds.
@@ -673,13 +674,13 @@ Feedback: A: Yes. Saltier, colder water is heavier, so it sinks. B: Floating ice
 Explanation: Freezing sea water leaves most of its salt behind. The cold, salty water sinks and feeds the deep currents.
 
 **6.6 (Keeper's Desk, number with steps)**
-Given: the Ross Sea protected area is about 1.55 million km². About 72 of every 100 parts ban all fishing.
-Prompt: About how many km² ban all fishing?
+Given: the Ross Sea protected area is about 1.55 million km². About 72 of every 100 parts are closed to fishing for sale. Scientists may still take small, approved catches there.
+Prompt: About how many km² are closed to fishing for sale?
 Answer: about 1.1 million km².
 Steps: (1) 1,550,000 ÷ 100 = 15,500. (2) 15,500 × 72 = 1,116,000. (3) About 1.1 million km².
 Misconception tested: forgetting the share (answering 1.55 million).
 Hint: Find 1 part in 100 first.
-Explanation: About 1.1 million km² bans all fishing. That's about twice the size of Spain.
+Explanation: About 1.1 million km² is closed to fishing for sale, with small science catches allowed. That's about twice the size of Spain.
 
 **6.7 (Keeper's Desk, say why, to a grown-up)**
 Prompt: Pick two voice cards. What does each need? Where do they clash?
@@ -708,6 +709,7 @@ Explanation: Polar choices weigh real needs against each other. Agreements help,
 
 - **Pole:** the very top (North Pole) or very bottom (South Pole) of the Earth.
 - **Equator:** the imaginary line around Earth's middle.
+- **Horizon:** the line where the land or sea seems to meet the sky.
 - **Ice:** water frozen solid.
 - **Crystal:** a solid with a regular shape, like a snow crystal with six arms.
 - **Iceberg:** a huge chunk of ice from a glacier, floating in the sea.
