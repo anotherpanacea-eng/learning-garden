@@ -40,14 +40,14 @@ Companion to [spec 190](../specs/190-planting-rows.md). Use as written, after in
 >
 > "Mine has longer rows," says Dot.
 >
-> {guide} walks round Dot's plan and looks at it from the side. "It's the same plan, turned. Same 24 trees."
+> {guide} walks around Dot's plan and looks at it from the side. "It's the same plan, turned. Same 24 trees."
 >
 > Bramble's magpie lands on a peg and counts, very loudly, to 24. Twice.
 >
 > "Then let's find every way," says the orchard keeper. "I like to choose."
 
 **Keeper's note** (A true thing about math):
-> Twenty-four makes four rectangles: 1 by 24, 2 by 12, 3 by 8 and 4 by 6. Turning one round does not make a new one. Each side length is a factor of 24.
+> Twenty-four makes four rectangles: 1 by 24, 2 by 12, 3 by 8 and 4 by 6. Turning one around does not make a new one. Each side length is a factor of 24.
 
 ### Scene 2. Twenty-three won't (Act II, chapter 2: a garden across the seasons)
 
@@ -86,7 +86,7 @@ Companion to [spec 190](../specs/190-planting-rows.md). Use as written, after in
 >
 > Pip counts the front: 9. "Nine," he says.
 >
-> "That's one face," says {guide}. "There are 3 layers of 9 behind it."
+> "That's one face," says {guide}. "There are 3 layers of 9, front to back."
 >
 > "Twenty-seven," says Dot, and writes it down. "Three cubed."
 >
@@ -103,7 +103,7 @@ Companion to [spec 190](../specs/190-planting-rows.md). Use as written, after in
 > Twenty-four apple seedlings, thirty-six reed cuttings. Nuria wants every parcel the same. "As many parcels as we can," she says.
 
 **Longer** (Spanish line for a fluent reader's check):
-> Nuria comes down the river with an armful of reed cuttings. "*¡Hola, Willowbank!*" (Hello, Willowbank!) "Thirty-six cuttings, for your low corner."
+> Nuria comes down the river with an armful of reed cuttings. "*¡Hola, Willowbank!*" (Hello, Willowbank!) "Thirty-six cuttings, for baskets and roofs."
 >
 > The orchard keeper has 24 apple seedlings ready for Vadoalto. "Our families like things fair," says Nuria. "Every parcel the same. Apples and reeds together, nothing left over."
 >
@@ -206,7 +206,7 @@ Worked example: 1. 7² is not 7 × 2. 2. Seven rows of seven. 3. 49 trees.
 
 **T15. Undoing a square** (A true thing about math)
 > A square root undoes squaring. 49 trees in a square: √49 = 7 on each side. Some roots never come out exact.
-Worked example: 1. 64 crates in a cube. 2. What times itself, times itself, is 64? 3. 4. So ∛64 = 4.
+Worked example: 1. 64 crates in a cube. 2. What times itself, times itself, is 64? 3. 4. So the cube root of 64 is 4: ∛64 = 4.
 
 **T16. Factor trees** (A true thing about math)
 > Split a number into two factors. Keep splitting until every branch ends in a prime. Every way of splitting gives the same primes.
@@ -378,7 +378,7 @@ Prompt: Pip pairs two rows. One seedling has no partner. Odd or even?
 - B. Even. Two rows always means even. *(tests: any two groups make even)*
 - C. Even. The rows are nearly the same. *(tests: near-equal is good enough)*
 Hint: Do the two rows match, one for one?
-Explanation: After pairing every seedling you can, exactly one is left over. That makes the number odd.
+Explanation: Pair them up. One seedling is left over. That means odd.
 Feedback A: Yes. One left over after pairing means odd.
 Feedback B: Two rows can hold odd or even totals. Pair the seedlings.
 Feedback C: Nearly isn't enough. One seedling has no partner.
@@ -600,7 +600,7 @@ Prompt: Is 2 a prime number?
 Hint: List the factors of 2.
 Explanation: Exactly two factors: 1 and 2. It's the only even prime.
 Feedback A: Yes. The only even prime.
-Feedback B: Every other even number has 2 as a factor. 2 itself doesn't.
+Feedback B: Other even numbers have 2 as an extra factor. The factors of 2 are just 1 and 2.
 Feedback C: Size doesn't matter. Count the factors.
 
 **D4 (Sapling, tap the primes on a 1 to 20 bed)**

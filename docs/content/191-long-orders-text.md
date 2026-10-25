@@ -57,10 +57,10 @@ Companion to [spec 191](../specs/191-long-orders.md). Use as written, after inde
 **Hook:** Vadoalto wants apple seedlings. The orchard keeper hears "three more" when Nuria said "three times as many".
 
 **Short:**
-> "Last year you sent 7 bundles," says Nuria. "We need three times as many." The orchard keeper packs 10. Nuria smiles and waits.
+> "The first boat took 7 bundles," says Nuria. "Now we need three times as many." The orchard keeper packs 10. Nuria smiles and waits.
 
 **Longer:**
-> Nuria comes down on *La Garza* with a bundle of reeds taller than she is. "Our orchard was flattened in the storm," she says. "Last year you sent us 7 bundles of seedlings. This year we need three times as many."
+> Nuria comes down on *La Garza* with a bundle of reeds taller than she is. "Our orchard was flattened in the storm," she says. "The first boat took 7 bundles of your seedlings home. This time we need three times as many."
 >
 > The orchard keeper nods and packs seven bundles, then three more. "Ten. There you are."
 >
@@ -68,7 +68,7 @@ Companion to [spec 191](../specs/191-long-orders.md). Use as written, after inde
 >
 > "Isn't that the same?"
 >
-> {guide} draws a bar on the chalk wall: seven little squares. Then the same bar again, and again, three bars in a row. "Three times as many is three whole copies of last year."
+> {guide} draws a bar on the chalk wall: seven little squares. Then the same bar again, and again, three bars in a row. "Three times as many is three whole copies of the first order."
 >
 > The orchard keeper counts the squares. "Twenty-one bundles." She looks at her seedling rows. "Good thing I planted extra."
 >
@@ -127,7 +127,7 @@ Companion to [spec 191](../specs/191-long-orders.md). Use as written, after inde
 Each card is under 30 words. Worked steps appear one tap at a time.
 
 **T1. Times a ten** (A true thing about math)
-> 30 is 3 tens. So 4 × 30 is 4 lots of 3 tens: 12 tens. Twelve tens is 120.
+> 30 is 3 tens. So 4 × 30 is 4 groups of 3 tens: 12 tens. Twelve tens is 120.
 Worked example: 1. Known fact: 4 × 3 = 12. 2. Now each 3 is 3 tens. 3. 12 tens = 120.
 
 **T2. Ten times bigger: the digits move** (A true thing about math)
@@ -159,7 +159,7 @@ Worked example: 1. Pip has 4 sacks. 2. 3 more: 4 + 3 = 7. 3. 3 times as many: 3 
 Worked example: 1. 23 × 15: sides 20 + 3 and 10 + 5. 2. Parts: 200, 30, 100, 15. 3. 200 + 30 + 100 + 15 = 345.
 
 **T9. Long multiplication** (A true thing about math)
-> Row 1 multiplies by the ones. Row 2 multiplies by the tens, so it starts with a zero. Add the rows.
+> Row 1 multiplies by the ones. Row 2 multiplies by the tens, so its ones place holds a zero. Add the rows.
 Worked example: 1. 23 × 15. 2. Row 1: 23 × 5 = 115. 3. Row 2: 23 × 10 = 230. 4. 115 + 230 = 345.
 
 **T10. Decimals times a whole number** (A true thing about math)
@@ -391,7 +391,7 @@ Prompt: 19 × 6 is close to 20 × 6 = 120. Now what?
 - C. Add 6: 126 *(tests: fixing the wrong way)*
 Hint: 20 × 6 has one extra 6 in it.
 Explanation: 20 sixes is one six too many. 120 − 6 = 114.
-Feedback A: You rounded 19 up by one six, not by one.
+Feedback A: Rounding 19 up to 20 added one whole 6, not 1.
 Feedback B: Yes. One extra six comes off.
 Feedback C: 20 × 6 is already too big. Take away.
 
@@ -476,7 +476,7 @@ Hint: There are four parts. Fill all four.
 Explanation: Every part of 24 meets every part of 36.
 
 **D2 (Sapling, 3-choice)**
-Prompt: In 24 × 36, why does row 2 start with a 0?
+Prompt: In 24 × 36, why does row 2 end in a 0?
 - A. Row 2 is 24 × 30, not 24 × 3. *(right)*
 - B. It makes the two rows the same length. *(tests: the zero as decoration)*
 - C. Because 6 × 0 is 0. *(tests: inventing a step)*
@@ -647,7 +647,7 @@ Answer: 312.
 Worked steps: 1. Double: 1 × 24 = 24, 2 × 24 = 48, 4 × 24 = 96, 8 × 24 = 192. 2. 13 = 8 + 4 + 1. 3. 192 + 96 + 24 = 312.
 Tests: 336 (rows 8, 4 and 2: that's 14); 288 (rows 8 and 4: that's 12).
 Hint: Which doubling rows add up to 13?
-Explanation: Rows 1, 4 and 8 make 13 lots of 24.
+Explanation: Rows 1, 4 and 8 make 13 groups of 24.
 
 **F7 (Keeper's Desk, say why; spoken to a grown-up, not stored)**
 Prompt: The estimate for 487 × 23 is 10,000. Does it prove 11,201 exactly?

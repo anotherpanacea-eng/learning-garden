@@ -19,7 +19,7 @@ A child comes to understand that multiplying by a ten scales a known fact, so th
 | Act and chapter (future adapters to spec 120) | Beat (full text in the companion) | Job depths |
 | --- | --- | --- |
 | III, ch. 1 *the floating market* | *La Garza* brings Nuria's order card: 36 crates of 24 jars. Pip counts jars one by one; Bramble adds 24 and 36 and gets "about sixty". | Sapling: area model and estimate (D1, F1). |
-| III, ch. 2 *the seed exchange* | Nuria asks for three times as many seedling bundles as last year; the orchard keeper packs three more. | Sprout and Seedling: Compare Bars (C1-C3). |
+| III, ch. 2 *the seed exchange* | Nuria asks for three times as many seedling bundles as the first boat took; the orchard keeper packs three more. | Sprout and Seedling: Compare Bars (C1-C3). |
 | III, ch. 4 *letters up and down the river* | Nuria's autumn order: 150 crates at 36 a trip, and 50 kg of flour for 8 bakers. Her cousin says "4 trips, 6 left over". | Sapling: trips (E5). Keeper's Desk: flour (E6). |
 | V, path 4 *a traveling show* | Vadoalto's square fits 23 rows of 15 chairs; the librarian must print exactly enough tickets. | Sapling: area model, columns, estimate (T8, T9). |
 
@@ -150,7 +150,7 @@ Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble 
 | Dividing by two-digit numbers (`mt_FvEq4heNBx`) | Choose short or long by the numbers; neither always better; secure multiples first; interpret remainders. T12 (short with 16, chunks with 24); E4, E7; multiples list. |
 | Division with remainders, age 10+ (`mt_WsM4EmdOLe`) | Chunking as a legitimate bridge; multiples menu; fraction, decimal and rounded remainders all practiced; multiply back. Share Ledger; T12, T13; E3-E7. |
 | Properties of Operations (`mt_Lb2ZnMdkYR`) | Strategies, not names; division not commutative; both parts multiplied in a split; area as the distributive law. Shortcut Board; T6; B3, B5; Area Tray. |
-| Estimation to check answers (`mt_ilPrU0cbtT`) | Estimate first and independently; flags size errors, not digits; sensible rounding; accuracy by purpose. About-Right Board; T14; F1, F2, F7. |
+| Estimation to check answers to calculations (`mt_ilPrU0cbtT`) | Estimate first and independently; flags size errors, not digits; sensible rounding; accuracy by purpose. About-Right Board; T14; F1, F2, F7. |
 | Rounding Answers (`mt_QU5R7Aajy9`) | Context decides up, down or nearest; round at the end; truncating is not rounding; sensible accuracy. T13, T15; E5, F3, F4. |
 | Multiplying and dividing (`mt_LlMl2PbaZe`) | Digits shift across columns; placeholder zeros; no "add a zero" or bare "move the point". Tens Shelf slide; T2; A5. |
 | Multiplying and dividing, age 10+ (`mt_wPgpMJ0-PA`) | Point stays, digits move; chart to ten-thousandths; confront missing placeholders. Chart headers; A6 (0.0452). |
@@ -173,7 +173,7 @@ From the pinned `curriculum/marble/dependencies.json`:
 | Division with remainders, age 10+ | Arrays for multiplication, age 9+ (`mt_MCu_SNg_OW`) | As above. |
 | Properties of Operations | Commutative Multiplication (`mt_C9ZfT-4cgn`) | Met elsewhere: spec 190 in this math build-out (draft); recapped in T6. Documented gap if 190 does not ship. |
 | Properties of Operations | What Multiplication Means (`mt_gtTl3R5buH`) | Supported by specs 50 and 51 on main (equal groups, copies) without a claim there; recapped in T1 and A2. Documented gap. |
-| Estimation to check answers | Checking Answers by Rounding (`mt_G3sVFQNCme`) | Met elsewhere: proposed spec 212 (*quick-sums*, math build-out); T14 teaches the needed rounding inline. Documented gap if 212 does not ship. |
+| Estimation to check answers to calculations | Checking Answers by Rounding (`mt_G3sVFQNCme`) | Met elsewhere: proposed spec 212 (*quick-sums*, math build-out); T14 teaches the needed rounding inline. Documented gap if 212 does not ship. |
 | Rounding Answers | Decimal place value (`mt__casygEB85`: rounding decimals) | Met elsewhere: proposed spec 199 (*decimal-scales*, math build-out); T15 and F3 support inline. |
 | Rounding Answers | Division with Decimals (`mt_lU-2aTRB9f`) | Supported inline (E6, F4 produce decimal quotients; 2 ÷ 8 = 0.25 shown); no claim. Documented gap. |
 | Multiplying and dividing | Dividing by 10 and 100 (`mt_kDMKJ5Ztt6`) | Met elsewhere: proposed spec 199 (math build-out); T2's ÷1,000 example recaps it. |

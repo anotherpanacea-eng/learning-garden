@@ -104,7 +104,7 @@ Companion to [spec 188](../specs/188-long-count.md). Use as written, after indep
 **Keeper's note** (A true thing about math):
 > Commas split a big number into groups of three: ones, thousands, millions. Read each group as a small number, then say its name. 7,045,200 is seven million, forty-five thousand, two hundred.
 
-### Scene 4. The headline (Act V, path 2: The Willowbank Gazette)
+### Scene 4. The headline (Act V, path 2: a Willowbank newspaper)
 
 **Hook:** The librarian wants a headline about seeds swapped across the valley. Bramble wants every digit.
 
@@ -218,9 +218,9 @@ Keeper's note:
 > A khipu has a main cord with many cords hanging from it. On each hanging cord, the cluster nearest the main cord is the biggest place. The ones are farthest down. A blank space meant zero. A researcher named Leslie Leland Locke is usually credited with showing, in 1912, that these knots work in tens, like our digits. On some khipu, one cord holds the total of others. Not every khipu is numbers; scholars still study the rest.
 
 **H2. Counting the sand** (A true thing from history; Keeper's Desk)
-> Over 2,000 years ago, Archimedes bounded the sand filling his model universe. A myriad meant ten thousand. He built bigger numbers.
+> Over 2,000 years ago, Archimedes asked how much sand would fill the universe, as people then pictured it. He proved it was less than a number he could write.
 Keeper's note:
-> The Greek word for ten thousand was a *myriad*. Archimedes took a myriad of myriads (100,000,000) as a new unit and kept building. His book, *The Sand Reckoner*, was written for King Gelon of Syracuse. He proved an upper bound: the count in his model was smaller than a huge number, rather than an exact count of grains.
+> The Greek word for ten thousand was a *myriad*. Archimedes took a myriad of myriads (100,000,000) as a new unit and kept building. His book, *The Sand Reckoner*, was written for King Gelon of Syracuse. He did not find the exact number of grains. He proved the count was smaller than a huge number he could write. That is called an upper bound.
 
 ## Bench (a): The Counting Rail
 
@@ -359,12 +359,12 @@ Explanation: A 9 that rolls over pushes a 1 into the next place left.
 Prompt: Count on in 10s: 3,980, 3,990, ... What comes next?
 - A. 3,1000 *(tests: writing ten tens inside one place)*
 - B. 4,000 *(right)*
-- C. 3,900 *(tests: counting back by mistake)*
+- C. 3,900 *(tests: rolling the tens over without carrying the 1)*
 Hint: Nine tens and one more ten make what?
 Explanation: Ten tens make a hundred, and ten hundreds make a thousand. 3,990 + 10 = 4,000.
 Feedback A: Each place holds one digit. Ten tens roll over.
 Feedback B: Yes. Two places rolled over at once.
-Feedback C: That goes down. Counting on goes up.
+Feedback C: The tens rolled over, but the 1 must go left. 3,900 is less than 3,990.
 
 **A6 (Seedling, number)**
 Prompt: Count on in 10,000s: 462,000, 472,000, 482,000. Next three?

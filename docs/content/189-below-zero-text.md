@@ -326,7 +326,7 @@ Prompt: It is 3 °C. It cools 1 degree an hour for 5 hours. Now?
 Hint: Count down 5: 2, 1, and keep going.
 Explanation: 2, 1, 0, −1, −2. Five steps, zero counted once.
 Feedback A: Yes. 2, 1, 0, −1, −2.
-Feedback B: The cold keeps going past zero. Count on: −1, −2.
+Feedback B: The cold keeps going past zero. Keep counting: −1, −2.
 Feedback C: Zero is a step too. Count 2, 1, 0, −1, −2.
 
 ### Set B. Which is colder, which is lower? (Seedling and Sapling)
