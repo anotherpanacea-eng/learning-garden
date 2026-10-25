@@ -25,7 +25,7 @@ Every one of the 355 was assigned to exactly one pack. After review, **365 topic
 
 ## The packs
 
-About 1,100 problem items across the 32 packs, each pack with four to seven sets from Sprout to Keeper's Desk.
+About 1,100 problem items across the 32 packs, each pack with four to seven sets from Sprout to Keeper's Desk. Draft PRs: [#154](https://github.com/anotherpanacea-eng/learning-garden/pull/154) (this overview and 181-183), [#155](https://github.com/anotherpanacea-eng/learning-garden/pull/155) (184-187), [#156](https://github.com/anotherpanacea-eng/learning-garden/pull/156) (188-191), [#157](https://github.com/anotherpanacea-eng/learning-garden/pull/157) (192-195), [#158](https://github.com/anotherpanacea-eng/learning-garden/pull/158) (196-198), [#159](https://github.com/anotherpanacea-eng/learning-garden/pull/159) (199-201), [#160](https://github.com/anotherpanacea-eng/learning-garden/pull/160) (202-203), [#161](https://github.com/anotherpanacea-eng/learning-garden/pull/161) (204-205), [#162](https://github.com/anotherpanacea-eng/learning-garden/pull/162) (206-209) and [#163](https://github.com/anotherpanacea-eng/learning-garden/pull/163) (210-212).
 
 | Spec | Pack | Home | What the child does | Strands |
 | --- | --- | --- | --- | --- |
