@@ -2,14 +2,14 @@
 
 Companion to [spec 273](../specs/273-two-stories-of-one-flood.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip, Hob and the baker he/him; Dot, the miller, the orchard keeper and Bramble she/her; the librarian and Hollis they/them; the magpie "it". Samuel Pepys (a real person) he/him. Sources: [audit](../source-audits/273-two-stories-of-one-flood.md). Nothing is scored, timed or locked.
 
-**Hollis and page rule:** scenes 1 to 3, benches (a), (c) to (f) and sets A, B, D, E and F never name Hollis and read no page. Scene 4, scene 5, the Act IV versions of benches (b) and (c), and set C open only after page 4 comes free (opening of Act IV).
+**Hollis and page rule:** scenes 1 to 3, benches (a) to (f) in their standalone forms and sets A, B, D, E and F never name Hollis and read no page. Scene 4, scene 5, the Act IV versions of benches (b) and (c), and set C open only after page 4 comes free (opening of Act IV).
 
 **Labels used throughout:**
 - **A story from Willowbank** marks the town, its people and everything they write (fiction).
 - **A true thing about language** marks teach cards about accounts, narrators and purpose.
 - **A true thing from history** marks Samuel Pepys, the Great Fire of London and the *London Gazette* of 1666.
 
-Quoted lines from Pepys keep his 1666 spelling. Each sits beside a line in today's US English.
+Quoted lines from Pepys keep the old spelling of Henry B. Wheatley's 1893 edition (Pepys wrote in shorthand, so the spelling is the editors'). Each sits beside a line in today's US English.
 
 ## Arriving
 
@@ -32,7 +32,7 @@ Quoted lines from Pepys keep his 1666 spelling. Each sits beside a line in today
 > The miller wrote her note during the storm. Dot wrote her notice a week later. Both are about the same night. They tell it differently.
 
 **Longer:**
-> The miller turns the mill book round so everyone can see. Her writing goes uphill across the page.
+> The miller turns the mill book around so everyone can see. Her writing goes uphill across the page.
 >
 > "I wrote that by lamplight," she says. "The cat was on my lap. I could hardly hold the pen."
 >
@@ -96,7 +96,7 @@ Quoted lines from Pepys keep his 1666 spelling. Each sits beside a line in today
 > Pip hears scratching at the mill door all night. He is sure it is a monster. The clues say something else.
 
 **Pip's story** (first person; Pip believes every word):
-> Something scratched at the mill door. Scratch, scratch, scratch. A monster, I was sure of it. I bravely hid under the flour sacks. It went on for ages. In the morning there were little paw prints in the spilled flour. The miller's cat was asleep by the door, looking very full. I still say it was a monster.
+> Something scratched at the mill door. Scratch, scratch, scratch. A monster, I was sure of it. I bravely hid under the flour sacks. It went on for ages. In the morning there were little paw prints in the spilled flour. The miller's cat was asleep by the door, with flour on its paws. I still say it was a monster.
 
 ### Scene 4. Page 4 and the archive column (Act IV ch. 1, after page 4 comes free)
 
@@ -137,7 +137,7 @@ Page 4 itself is shown exactly as written in the [spec 120 companion](120-keeper
 >
 > Bramble reads "We made it worse" twice. Then she taps it.
 >
-> "This quotes Hollis," she says. "But it leaves out the bit where Hollis asks, 'Wet years, or our doing?'"
+> "This uses Hollis's page," she says. "But it leaves out the bit where Hollis asks, 'Wet years, or our doing?'"
 >
 > She is right. It does.
 >
@@ -164,15 +164,15 @@ Page 4 itself is shown exactly as written in the [spec 120 companion](120-keeper
 **Keeper's note (A true thing from history):**
 > Samuel Pepys worked for the navy in London. He kept a diary from 1660 to 1669, in shorthand, a fast code-like writing. He wrote it for himself. It was first printed in 1825, long after he died.
 
-**From Pepys's diary** (A true thing from history; short excerpts, 1666 spelling, with today's English beside each):
+**From Pepys's diary** (A true thing from history; short excerpts in old spelling, in diary order, with today's English beside each):
 
 | Pepys wrote | In today's English |
 | --- | --- |
-| 2 September: "Jane called us up about three in the morning" | Jane, a maid, woke the house at about 3 a.m. to say there was a fire. |
+| 2 September: "Jane called us up about three in the morning" | Jane, one of the maids, woke the house at about 3 a.m. to say there was a fire. |
 | He looked, thought it was far off, "and so went to bed again and to sleep." | He went back to bed. |
-| "So I down to the waterside, and there got a boat and through bridge, and there saw a lamentable fire." | Later he took a boat on the river and saw how terrible the fire was. |
-| "the poor pigeons, I perceive, were loth to leave their houses, but hovered about the windows and balconies" | The pigeons didn't want to leave their homes. They flew around the windows. |
-| He was told "that it begun this morning in the King's baker's house in Pudding-lane" | Someone told him it began that morning in the king's baker's house on Pudding Lane. |
+| He was told "that it begun this morning in the King's baker's house in Pudding-lane" | Later, an officer at the Tower of London told him it began that morning in the king's baker's house on Pudding Lane. |
+| "So I down to the water-side, and there got a boat and through bridge, and there saw a lamentable fire." | He took a boat on the river and saw how terrible the fire was. |
+| "the poor pigeons, I perceive, were loth to leave their houses, but hovered about the windows and balconys" | The pigeons didn't want to leave their homes. They flew around the windows. |
 | 4 September: "and I my Parmazan cheese, as well as my wine and some other things." | He buried his Parmesan cheese and his wine in a pit, to keep them safe. |
 
 **A history page** (A true thing from history; newly written for Willowbank's archive):
@@ -202,7 +202,7 @@ Worked example: *Dot's notice.*
 3. Secondhand.
 
 **Card 3. Was the writer there?**
-> A diary or letter is often firsthand. A textbook is often secondhand. But the kind of paper doesn't decide. Ask: was this writer there?
+> A diary or letter is often firsthand. A textbook is often secondhand. But that's only a clue. The real test: was this writer there?
 
 Worked example: *Two newspapers.*
 1. A reporter stood on the bridge and watched the water. Firsthand.
@@ -210,7 +210,7 @@ Worked example: *Two newspapers.*
 3. Both are news reports.
 
 **Card 4. Close up or big picture**
-> Firsthand accounts give close details and feelings. Secondhand accounts often give the big picture: totals, causes and what happened next. Each has a different focus.
+> Firsthand accounts usually give close details and feelings. Secondhand accounts often give the big picture: totals, causes and what happened next. Each has a different focus.
 
 Worked example: *The storm night.*
 1. The miller: the cat, the lamp, rain like gravel. Close up.
@@ -234,7 +234,7 @@ Worked example: *Four people, one storm.*
 3. Each saw their own corner, and cared about it.
 
 **Card 7. Who is telling?**
-> The narrator is the voice telling a story. A first-person narrator is in the story and says "I." They know only what they saw and thought.
+> The narrator is the voice telling a story. A first-person narrator is in the story and says "I." They usually know only what they saw, heard and thought.
 
 Worked example: *Pip's version.*
 1. "I blamed the wind." Pip says "I."
@@ -242,7 +242,7 @@ Worked example: *Pip's version.*
 3. He never saw the magpie, so he can't tell you.
 
 **Card 8. Limited or all-knowing**
-> A third-person narrator says "he," "she" or "they." A limited one follows one character's thoughts. An all-knowing, or omniscient, narrator knows everyone's thoughts.
+> A third-person narrator says "he," "she" or "they." A limited one follows one character's thoughts. An all-knowing, or omniscient, narrator can tell anyone's thoughts.
 
 Worked example: *Dot's side and the whole party.*
 1. Dot's side: only Dot's thoughts. Limited.
@@ -262,11 +262,11 @@ Worked example: *The magpie.*
 
 Worked example: *Pip and the scratching.*
 1. Pip thinks a monster scratched the door.
-2. You see the paw prints and the full cat.
+2. You see the paw prints and the floury cat.
 3. You know more than Pip. That's why it's funny.
 
 **Card 11. Purpose and audience**
-> A text's purpose is its job: to record, inform, entertain or persuade. Its audience is who it's for. Both shape the words a writer picks.
+> A text's purpose is its job, such as to record, inform, entertain or persuade. Its audience is who it's for. Both shape the words a writer picks.
 
 Worked example: *The baker's sign.*
 1. Job: get people to come in. Persuade.
@@ -316,23 +316,23 @@ Worked example: *Pepys's diary.*
 
 **Card after placing:** Pepys gives what he saw, did and heard. The history page gives the whole city, the cause and the totals.
 
-**Act IV version (after page 4 comes free):** page 4 and *From the Archive* side by side, same columns. Cards: "I admit, am I" pleased (only Hollis) · "Wet years, or our doing?" (only Hollis) · what the Sponge was (only the column) · five years from harvest to flood (both).
+**Act IV version (after page 4 comes free):** page 4 and *From the Archive* side by side, same columns. Cards: Hollis was pleased too ("so, I admit, am I") (only Hollis) · "Wet years, or our doing?" (only Hollis) · what the Sponge was (only the column) · five years from harvest to flood (both).
 
 ### (c) Many Tellings
 
 **Header:** Four people, one stormy night. Tap a fact all four agree on. Then tap a detail only one gives.
 
 **The four accounts (A story from Willowbank):**
-- **The miller** (at the mill): The brook went over the second flood board. I pulled the third one in. The cat sat on my lap all night.
-- **Hob** (by the ford): The ford turned into a river. I moved the sheep up the hill before dark. Every one of them complained.
-- **The orchard keeper** (in the low fields): By midnight, water stood between the rows. By morning it had gone down. The trees were all still standing.
+- **The miller** (at the mill): Rain drummed on the roof all night. The brook went over the second flood board. I pulled the third one in. The cat sat on my lap.
+- **Hob** (by the ford): It rained hard from dusk. The ford turned into a river. I moved the sheep up the hill in the dark. Every one of them complained.
+- **The orchard keeper** (in the low fields): The rain never stopped. By midnight, water stood between the rows. By morning it had gone down. The trees were all still standing.
 - **The baker** (in the bakery): The rain was so loud I couldn't hear the oven. I baked all night for anyone who needed bread.
 
 **Agree-on facts to find:** heavy rain · at night
 
 **Why so different?** For each account, choose: *where they were* or *what they care about*. (Both fit each one; the bench accepts either and shows the other.)
 
-**Act IV version (after page 4 comes free):** "Just a bad storm", "We made it worse" and the orchard keeper's account. **What does each leave out?** Then Bramble's line: "This quotes Hollis, but leaves out the question." The bench ends with *What we still don't know*. It never says which story is right.
+**Act IV version (after page 4 comes free):** "Just a bad storm", "We made it worse" and the orchard keeper's account. **What does each leave out?** Then Bramble's line: "This uses Hollis's page, but leaves out the question." The bench ends with *What we still don't know*. It never says which story is right.
 
 ### (d) Who Is Telling?
 
@@ -340,7 +340,7 @@ Worked example: *Pepys's diary.*
 
 **Step 1.** Read Pip's, Dot's and the whole party's versions. For each, choose: *first person* · *third person, limited* · *third person, all-knowing*.
 
-**Step 2. What can they know?** Tap each fact the narrator could tell you.
+**Step 2. What can they know?** Tap each fact the narrator knows.
 - The ribbon was gone: all three.
 - Not a leaf was moving: Dot's side and the whole party.
 - Pip was glad of the extra cake: Pip's version and the whole party.
@@ -359,12 +359,11 @@ Worked example: *Pepys's diary.*
 - "Ribbons blow about." + "Nobody felt any wind." *It argues against itself.*
 - "I was nowhere near the gate." + the whole party's version. *Another account puts it at the nest with the ribbon.*
 
-**Three kinds of untrustworthy (sort two narrators):**
+**Two kinds of untrustworthy (sort two narrators):**
 - Fibs on purpose: the magpie.
 - Honest but mistaken: Pip and the scratching.
-- Doesn't understand what they see: neither, this time.
 
-**Why tell it this way?** *Because you know more than the narrator, the story is funny.* Card: That gap is dramatic irony.
+**Why tell it this way?** *You can see what the magpie won't admit. That gap is the joke.* Card: When you know something a character doesn't, like Pip and the cat, that's dramatic irony.
 
 ### (f) Who Is It For?
 
@@ -387,7 +386,7 @@ Worked example: *Pepys's diary.*
 
 **Act III version (ch. 4, letters):** add Dot's letter to Nuria. "Dear Nuria, you asked about our storm. The brook came right up to the mill steps! The miller stayed up all night with her cat. We're all fine. Write soon! Dot." Job: share news with a friend. Audience: a friend far away.
 
-**Keeper's Desk: context.** Pepys's diary (for himself, in shorthand, day by day), the *London Gazette* (for the king's people, a week later) and today's history page (for learners). Match each to when, who for and why.
+**Keeper's Desk: context.** Pepys's diary (for himself, in shorthand, day by day), the *London Gazette* (for the king's people, eight days after the fire began) and today's history page (for learners). Match each to when, who for and why.
 
 ## Problem sets
 
@@ -404,14 +403,14 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **A2 (Sprout).**
 - Prompt: Dot wrote her notice a week later, from what people told her. Which kind?
-- Choices: Firsthand (`form-decides`) · Secondhand ✔ · A made-up story (`secondhand-is-false`)
+- Choices: Firsthand (`told-is-seen`) · Secondhand ✔ · A made-up story (`secondhand-is-false`)
 - Feedback: Firsthand: Dot wasn't at the mill. She asked others. · Made up: Secondhand isn't made up. Dot asked people who were there.
 - Hint: Was Dot at the mill that night?
 - Explanation: Dot learned it from others. Secondhand, and still useful.
 
 **A3 (Seedling, sort).** Put each card in a tray: firsthand or secondhand.
-- Cards: a diary written on the day · a textbook page · a letter from someone who was there · a news report written from phone calls · a biography of a sailor · an autobiography
-- Answer: firsthand: diary, letter, autobiography. Secondhand: textbook, news report from phone calls, biography.
+- Cards: a diary written on the day · a textbook page written years later · a letter from someone who was there · a news report written from phone calls · a biography of a sailor from long ago · an autobiography
+- Answer: firsthand: diary, letter, autobiography. Secondhand: textbook page, news report from phone calls, biography.
 - Hint: For each one, ask: was this writer there?
 - Explanation: An autobiography is a life told by the person who lived it. A biography is told by someone else.
 
@@ -498,7 +497,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **C4 (Keeper's Desk).**
 - Prompt: What does "We made it worse" leave out from page 4?
-- Choices: The five years between the harvest and the flood (`swap-accounts`) · That the Sponge was drained for orchard fields (`swap-accounts`) · Hollis asking, "Wet years, or our doing?" ✔
+- Choices: The five years between the harvest and the flood (`swap-accounts`) · That the Sponge was drained (`swap-accounts`) · Hollis asking, "Wet years, or our doing?" ✔
 - Feedback: Five years: It has that. Read it again. · Drained: It has that too.
 - Hint: Find the question mark on page 4.
 - Explanation: The piece kept the facts and dropped Hollis's doubt.
@@ -545,10 +544,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **E1.**
 - Prompt: The magpie says it untied nothing. Which line gives it away?
-- Choices: "I was being helpful, as usual, all day." (`claim-is-clue`) · "The knot was tight, and it took ages." ✔ · "I kept it safe in my nest. You're welcome." (`claim-is-clue`)
-- Feedback: Helpful: That's a claim, not a clue. · Kept it safe: Another claim. Find a slip.
-- Hint: Which line could only an untier know?
-- Explanation: It knows how long the knot took. So it was there.
+- Choices: "I was being helpful, as usual." (`claim-is-clue`) · "The knot was very tight, anyway." ✔ · "Let me tell you what really happened." (`claim-is-clue`)
+- Feedback: Helpful: That's a claim, not a clue. · Really happened: Another claim. Find a slip.
+- Hint: Who would know how tight the knot was?
+- Explanation: It knows how tight the knot was. So it was there.
 
 **E2.**
 - Prompt: Pip is sure a monster scratched the door. Is Pip lying?
@@ -562,7 +561,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Choices: It has lots and lots of jokes in it (`funny-means-jokes`) · Magpies are always silly (`joke-is-the-character`) · You know more than it admits ✔
 - Feedback: Jokes: It never tells a joke. · Silly: It thinks it's very clever.
 - Hint: What do you know that it won't say?
-- Explanation: You know more than the narrator. That's dramatic irony.
+- Explanation: You can see what it won't admit. The joke is in that gap.
 
 ### Set F. Who is it for? (Sapling, Keeper's Desk)
 
@@ -601,8 +600,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **narrator:** the voice telling a story.
 - **first person:** told by an "I" inside the story.
 - **third person:** told with "he," "she" or "they."
-- **limited:** knows one character's thoughts.
-- **all-knowing (omniscient):** knows every character's thoughts.
+- **limited:** follows one character's thoughts.
+- **all-knowing (omniscient):** can tell any character's thoughts.
 - **unreliable narrator:** a teller you can't fully trust.
 - **dramatic irony:** when you know more than a character.
 - **purpose:** a text's job.

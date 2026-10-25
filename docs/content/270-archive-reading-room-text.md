@@ -2,7 +2,7 @@
 
 Companion to [spec 270](../specs/270-archive-reading-room.md). Use as written, after review. `{guide}` and `{courier}` are never gendered. Pronouns: the librarian they/them; the miller she/her; Bramble, Nuria and Dot she/her; Pip he/him; Hollis they/them. Sources: [audit](../source-audits/270-archive-reading-room.md). Nothing is scored, timed or locked.
 
-**Hollis rule:** Hollis is named only in Act IV and Act V scenes (sections marked *Act IV* or *Act V*). The Act III scene and every standalone screen say "the old Keeper".
+**Hollis and page rule:** Hollis is named only in Act IV and Act V scenes (sections marked *Act IV* or *Act V*). The Act III scene and every standalone screen say "the old Keeper". The Gazette page, the Point and Proof sorter, Bramble's card, "What would help?" and items D3 to D5 name Hollis or read page 4, so they open only after page 4 comes free (opening of Act IV). That is spec 120's page-release order, not a learning gate. Set D's D1 and D2 read no page and stay open in standalone play.
 
 **Care rule (spec 120 §9):** no recent floods with many deaths. Real loss appears once, in the Keeper's length of the Valencia text, said plainly and gently. Lines about walls, dikes and wet land stay modest and never choose Willowbank's plan.
 
@@ -40,7 +40,7 @@ All passages are newly written for this pack. Signal words are shown in plain ty
 > The autumn of 1909 was very wet around the Seine. Month after month, rain fell on the river's land, and the ground filled up with water. Then, from 18 to 21 January 1910, heavy rain fell for four days. The ground was soaked, and in places it was frozen, so the rain could not sink in. As a result, it ran off into streams and rivers. Several rivers that flow into the Seine rose at the same time, and their water reached Paris together. On 28 January, the gauge at the Austerlitz bridge read 8.62 meters, the highest of that flood.
 
 **Keeper's length** adds:
-> Rivers that flow into a bigger river are called tributaries. The Yonne and the Marne are two of the Seine's. In 1910 their high water came at about the same time, so the Seine had to carry it all at once. While the water was still high, the government set up a commission to study why it happened and how to lessen future floods.
+> Rivers that flow into a bigger river are called tributaries. The Yonne and the Marne are two of the Seine's. In 1910 their high water came at about the same time, so the Seine had to carry it all at once. More rain fell from 23 to 25 January and kept the rivers high. While the water was still high, the government set up a commission to study why it happened and how to lessen future floods.
 
 **Text 1B. The Flood on a Line** (A true thing from history; a timeline and a gauge picture)
 
@@ -97,9 +97,9 @@ All passages are newly written for this pack. Signal words are shown in plain ty
 **Longer:**
 > **Way one: a higher dike.** A dike is a long bank of earth beside a river. A higher dike protects the land behind it. But the water it holds back still has to go somewhere.
 >
-> **Way two: more room.** Move a dike back from the river, lower the land beside it, or dig a side channel. Then high water can spread out and flow past.
+> **Way two: more room.** Move a dike back from the river, lower the land beside it, or dig a side channel. Then high water can spread out and flow past. But it needs land, and people may already be using that land.
 >
-> **What the Netherlands did.** In 1993 and 1995, high water on the big rivers made more than 200,000 people leave their homes for a while. Afterward, the country did not only raise its dikes. In many places it also gave its rivers more room. The program was called Room for the River.
+> **What the Netherlands did.** In 1993 and 1995, the big rivers rose very high. In 1995, more than 200,000 people had to leave their homes for a while. Afterward, the country did not only raise its dikes. In many places it also gave its rivers more room. The program was called Room for the River.
 
 **Keeper's length** adds:
 > In the city of Nijmegen, a dike was moved back about 350 meters, and a side channel about 3 kilometers long was dug beside the river Waal. The land between them became an island. Work there finished around 2016.
@@ -111,10 +111,10 @@ All passages are newly written for this pack. Signal words are shown in plain ty
 **Text 4. Marks on the Wall** (A true thing from history; laid out with headings, a caption and a key word in bold)
 
 **Heading: What a flood mark is**
-> In many French towns, small marks on walls and bridges show how high the water came in a great flood. Each has a line and a date. In French, a flood mark is a **repère de crue**. *(French term: fluent reader needed.)*
+> In many French towns, small marks on walls and bridges show how high the water came in a great flood. Most have a line and a date. In French, a flood mark is a **repère de crue**. *(French term: fluent reader needed.)*
 
 **Heading: What the law asks**
-> A French law from 2003 asks towns in flood areas to do three things. First, find and list their old flood marks. Next, put up marks for great floods. Then, look after the marks and keep them where people can see them.
+> A French law from 2003 says towns in flood areas must do three things. First, find and list their old flood marks. Next, put up marks for great floods. Then, look after the marks and keep them where people can see them.
 
 **Heading: Why marks matter**
 > Great floods are rare. People forget, and newcomers may never know. A mark shows how high the water once came, long after the flood has gone.
@@ -129,7 +129,7 @@ All passages are newly written for this pack. Signal words are shown in plain ty
 > In ancient Egypt, the Nile flooded every year. Farmers needed the flood: it left rich new soil. People read the flood's height on stone gauges called nilometers.
 
 **Longer** adds:
-> On Elephantine Island at Aswan, a stone stair runs down to the river, with level marks on its walls. A low flood could mean hunger. A very high flood could wash away fields and houses. A flood that was just right meant a good harvest.
+> On Elephantine Island at Aswan, a stone stair runs down to the river, with level marks on its walls. A low flood could mean hunger. A very high flood could damage crops and buildings. A flood that was just right meant a good harvest.
 
 **Link line:** More about the Nile year is in the Nile drawer (`#archive/nile`).
 
@@ -229,7 +229,7 @@ Worked example: *The Day the Turia Overflowed.*
 > Some texts explain why something happened. One thing leads to another. Look for because, so and as a result.
 
 Worked example: *Why the Seine Rose.*
-1. The ground was full and frozen.
+1. The ground was full, and frozen in places.
 2. So the rain could not sink in.
 3. As a result, it ran into the rivers.
 
@@ -339,7 +339,7 @@ Worked example: *A fact card.*
 
 **Header:** Find the point. Then check each piece of evidence: does it fit, and is it enough?
 
-**Evidence sorter (the Gazette page):** each sentence goes in one tray: *fact you could check* · *opinion* · *evidence for the point*. A sentence can be a fact and evidence at once; tap both trays.
+**Evidence sorter (the Gazette page; after page 4 comes free):** each sentence goes in one tray: *fact you could check* · *opinion* · *evidence for the point*. A sentence can be a fact and evidence at once; tap both trays.
 
 **Bramble's card (A story from Willowbank):** "Both pieces have a point. Neither one is enough on its own. That's not the same as both being wrong."
 
@@ -361,7 +361,7 @@ Worked example: *A fact card.*
 
 **Fact cards (each with its folder tag):**
 - The Seine was highest on 28 January 1910. (Folder 1)
-- Paris set up a commission to study the flood. (Folder 1)
+- France's government set up a commission to study the flood. (Folder 1)
 - Valencia moved its river around the city. (Folder 2)
 - Neighbors campaigned for a park in the old riverbed. (Folder 2)
 - The Netherlands gave its rivers more room in many places. (Folder 3)
@@ -374,7 +374,7 @@ Worked example: *A fact card.*
 
 ## Problem sets
 
-Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ marks the right one. Tags in backticks name the misconception a wrong choice tests.
+Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ marks the right one. Tags in backticks name the misconception a wrong choice tests. An item marked *uses the Longer text* or *uses the Keeper's length* shows that line above the prompt and opens that length beside it; every other item works with the Short length. D3 to D5 open only after page 4 comes free.
 
 ### Set A. Features and pictures (Seedling)
 
@@ -421,15 +421,15 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Hint: What was the ground like after the wet autumn?
 - Explanation: Full, frozen ground could not soak up more, so the rain ran off.
 
-**B2 (order).** Put the Paris chain in order.
+**B2 (order; uses the Longer text).** Put the Paris chain in order.
 - Cards: the tributaries rise together · a very wet autumn · the Seine is highest on 28 January · four days of heavy rain
 - Answer: a very wet autumn, four days of heavy rain, the tributaries rise together, the Seine is highest on 28 January.
 - Hint: Which came months before the others?
 - Explanation: Each step set up the next. The peak came last.
 
-**B3.**
+**B3 (uses the Keeper's length).**
 - Prompt: How are the Yonne and the Marne linked to the Seine's flood?
-- Choices: They flooded only after the Seine went down (`after-means-because`) · They are other names for the Seine (`not-in-text`) · They flow into it and rose at the same time ✔
+- Choices: They flooded only after the Seine had already gone down (`after-means-because`) · They are other names for the Seine (`not-in-text`) · They flow into it and rose at the same time ✔
 - Feedback: After: The text says they rose at about the same time. · Other names: They are tributaries, rivers that flow into the Seine.
 - Hint: Read the Keeper's length. What is a tributary?
 - Explanation: Their water reached the Seine together, so it had to carry it all at once.
@@ -442,7 +442,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **B5.**
 - Prompt: Why could Valencia make a garden in the old riverbed?
-- Choices: The river had been moved, so the bed was dry ✔ · The flood left rich soil for gardens (`town-story-transfer`) · The neighbors dug the new channel themselves (`not-in-text`)
+- Choices: The river had been moved, so the bed was dry ✔ · The flood had left rich new soil there for gardens (`town-story-transfer`) · The neighbors dug the new channel themselves (`not-in-text`)
 - Feedback: Rich soil: That's the Nile's flood, in another folder. · Neighbors dug: The government dug it. Neighbors asked for the park.
 - Hint: What happened to the old riverbed after the new channel?
 - Explanation: Moving the river left a dry bed. That made the park possible.
@@ -456,65 +456,65 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Hint: Does the word answer when, why, what fixed it, or how they differ?
 - Explanation: Signal words are clues to a text's shape.
 
-**C2 (Sapling).**
+**C2 (Sapling; uses the Longer text).**
 - Prompt: What shape is "A River Moved, a Garden Made"?
 - Choices: Compare and contrast (`structure-is-topic`) · Time order (`signal-word-only`) · Problem and solution ✔
 - Feedback: Compare: It doesn't set two things side by side. · Time order: Its headings name problems and solutions.
 - Hint: Read the four headings.
 - Explanation: It names a problem, a solution, a new problem and its solution.
 
-**C3 (Sapling).**
+**C3 (Sapling; uses the Longer text).**
 - Prompt: What shape is "The Day the Turia Overflowed"?
 - Choices: Problem and solution (`same-topic-same-structure`) · Time order ✔ · Compare and contrast (`structure-is-topic`)
 - Feedback: Problem and solution: That's the other Valencia text. Same flood, different shape. · Compare: It follows one flood through time.
 - Hint: Look for first, then and finally.
 - Explanation: It tells events in the order they happened.
 
-**C4 (Keeper's Desk).**
+**C4 (Keeper's Desk; uses the Longer text).**
 - Prompt: Both Valencia texts tell one flood. How do their shapes differ?
 - Choices: One goes in time order; one shows problems and fixes ✔ · One is true and the other one is made up (`structure-is-truth`) · One is about the city and the other is about the river (`structure-is-topic`)
 - Feedback: Made up: Both are true things from history. · City and river: Both are about both.
 - Hint: Compare their signal words and headings.
 - Explanation: One shape shows when. The other shows what people did about it.
 
-**C5 (Keeper's Desk).**
+**C5 (Keeper's Desk; uses the Longer text).**
 - Prompt: Why might "Two Ways to Keep a Town Dry" compare two ways?
 - Choices: To prove that higher dikes never work anywhere at all (`compare-means-winner`) · Because the events happened in time order (`signal-word-only`) · So readers can weigh one way against the other ✔
 - Feedback: Never work: The text says the country kept its dikes too. · Time order: Its headings set two ways side by side.
 - Hint: What does the reader get from side by side?
 - Explanation: Comparing helps readers see how each way works.
 
-### Set D. Point and proof (Sapling, Keeper's Desk)
+### Set D. Point and proof (Sapling, Keeper's Desk; D3 to D5 after page 4 comes free)
 
 **D1 (Sapling, guided sort).** Steps shown first: 1. Can someone check it? 2. Or is it what someone thinks? 3. Look for clearly or best.
 - Prompt: Fact or opinion? Sort each sentence.
 - Cards: "The Turia Gardens opened in 1986." (fact) · "The Turia Gardens are the best park in Spain." (opinion) · "The old map shows marsh where the water now sits." (fact, A story from Willowbank) · "No marsh could have soaked up all that water." (opinion, A story from Willowbank)
-- Feedback for the last card in fact (`confident-is-fact`): It sounds sure. But no record could check it.
+- Feedback for the last card in fact (`confident-is-fact`): It sounds sure. But no record shows it. It's what the writer thinks.
 - Hint: Could you check it in a record?
 - Explanation: Facts can be checked. Opinions can be argued for, but not checked.
 
-**D2 (Sapling).**
+**D2 (Sapling; uses the Longer text).**
 - Prompt: Which detail is evidence that higher dikes alone were not enough?
 - Choices: Dikes are long banks of earth built beside rivers (`evidence-any-fact`) · High water made over 200,000 people leave home ✔ · The Netherlands is a lovely country (`opinion-as-evidence`)
 - Feedback: Banks of earth: True, but it describes a dike. It doesn't back the point. · Lovely: That's an opinion, and off the point.
 - Hint: Which detail shows dikes alone were not keeping people safe?
 - Explanation: Evidence must fit the point, not just be true.
 
-**D3 (Sapling).**
+**D3 (Sapling; after page 4 comes free).**
 - Prompt: Which sentence in "Just a bad storm" is an opinion dressed as fact?
 - Choices: "The storm brought more rain in one night than anyone could remember." (`checkable-is-opinion`) · "The orchard has fed Willowbank for as long as anyone can recall." (`checkable-is-opinion`) · "No marsh could have soaked up all that water." ✔
 - Feedback: More rain: The weather log and people's memories could check that. · The orchard: The town's records could check that.
-- Hint: Which one could no record ever check?
+- Hint: Which one is the writer's guess, with no record behind it?
 - Explanation: Nobody measured what a marsh would have held that night. It is a sure-sounding opinion.
 
-**D4 (Keeper's Desk).**
+**D4 (Keeper's Desk; after page 4 comes free).**
 - Prompt: Page 4: one big flood five years after draining. Does that prove the cause?
 - Choices: Yes, because one flood came after the other one (`after-means-because`) · Not alone; one flood after could be chance ✔ · No, so page 4 must be wrong (`disagree-means-wrong`)
 - Feedback: Yes: After is not the same as because. Bramble's hat didn't cause the rain. · Page 4 wrong: The page can be right and still not prove a cause.
 - Hint: Remember Bramble's hat and boots.
 - Explanation: One event after another is a clue, not proof. More records are needed.
 
-**D5 (Keeper's Desk).**
+**D5 (Keeper's Desk; after page 4 comes free).**
 - Prompt: Which record could help test both Gazette pieces?
 - Choices: Rain records for the same years, from Vadoalto ✔ · A copy of each piece in much bigger print (`confident-is-fact`) · A list of everyone in town who agrees with each piece (`popular-is-evidence`)
 - Feedback: Bigger print: Size doesn't add evidence. · Who agrees: Many people agreeing doesn't make it true.
@@ -523,7 +523,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ### Set E. Two texts together (Keeper's Desk)
 
-**E1 (guided sort).** Steps shown first: 1. Read Text 1A, Longer. 2. Read the timeline. 3. Find each fact in each.
+**E1 (guided sort; uses the Longer text).** Steps shown first: 1. Read Text 1A, Longer. 2. Read the timeline. 3. Find each fact in each.
 - Prompt: Sort each fact: in both, only the paragraph, only the timeline.
 - Cards: highest on 28 January (both) · four days of heavy rain (both) · ground frozen in places (only the paragraph) · back in its bed by 15 March (only the timeline)
 - Feedback for "15 March" in both (`one-text-has-all`): Look again. The Longer paragraph stops at 28 January.
@@ -553,7 +553,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **E5 (say why, read by a grown-up; never graded, nothing stored).**
 - Prompt: Tell a grown-up what Paris, Valencia and the Netherlands each did after high water.
-- Grown-up guide: A strong answer gives one action per place, with its folder: Paris set up a commission to study the flood (Folder 1); Valencia moved its river and later made a park (Folder 2); the Netherlands kept its dikes and gave rivers more room (Folder 3). It does not need to say what Willowbank should do.
+- Grown-up guide: A strong answer gives one action per place, with its folder: in Paris, the government set up a commission to study the flood (Folder 1); Valencia moved its river and later made a park (Folder 2); the Netherlands kept its dikes and gave rivers more room (Folder 3). It does not need to say what Willowbank should do.
 
 ## "I'm stuck" ladder
 
@@ -580,6 +580,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Tributary:** a river that flows into a bigger river.
 - **Channel:** a path dug or worn for water to flow along.
 - **Dike:** a long bank of earth that keeps water out.
+- **Commission:** a group of people chosen to study a problem.
+- **Campaign:** working together to ask for a change.
 - **Point:** what a writer wants you to believe.
 - **Evidence:** facts that back up a point.
 - **Fact:** something that can be checked. **Opinion:** what someone thinks or feels.

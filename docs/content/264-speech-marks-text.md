@@ -86,22 +86,22 @@ Companion to [spec 264](../specs/264-speech-marks.md). Use as written, after rev
 **Longer:**
 > Two letters arrive on the same day. One is from Nuria in Vadoalto. One is from Léon in Les Saules, and it is slightly damp.
 >
-> Nuria writes: «Las cañas crecen bien en el barro.» Underneath, in English: "The reeds grow well in the mud."
+> Nuria's letter quotes her grandmother: *Mi abuela dice: «Las cañas crecen bien en el barro».* Underneath, in English: *My grandmother says, "Reeds grow well in mud."*
 >
-> Léon writes: « Je suis encore mouillé ! » Underneath, in English: "I am still wet!"
+> Léon's letter quotes the whole town: *Ici, tout le monde me dit : « Léon, tu es encore mouillé ! »* Underneath, in English: *Everyone here tells me, "Léon, you are still wet!"*
 >
 > "Their marks look like little arrows," says Pip.
 >
 > "Lots of Spanish and French writers use those," says {guide}. "Same job. Exact words go inside."
 >
-> Dot starts the town's reply. "Nuria said the reeds grow well," she says. "That's telling it my way. No marks."
+> Dot starts the town's reply. "Nuria's grandmother says reeds like mud," she says. "That's telling it my way. No marks."
 >
-> "And if we copy her exact words?" asks Pip.
+> "And if we copy the exact words?" asks Pip.
 >
-> "Then they go inside quotation marks," says Dot. "Every word, just as she wrote it."
+> "Then they go inside quotation marks," says Dot. "Every word, just as it was written."
 
 **Keeper's note (A true thing about language):**
-> Spanish and French printers often use angle marks, « », for quoted words. French puts a small space inside them. English uses " ". The job is the same: someone's exact words.
+> Spanish and French printers often use angle marks, « », for quoted words. French puts a small space inside them. Spanish puts the period after the closing mark; American English puts it inside. The job is the same: someone's exact words.
 
 *(Fluent-reader flag: the Spanish and French lines above need a fluent reader before build.)*
 
@@ -130,7 +130,7 @@ Companion to [spec 264](../specs/264-speech-marks.md). Use as written, after rev
 > Bramble studies the brackets. "Those are fine," she says. "Cake is very important extra information."
 
 **Keeper's note (A true thing about language):**
-> Twenty-odd puppets means about twenty puppets. Twenty odd puppets means twenty strange ones. The Story Loft has both.
+> Twenty-odd puppets means a few more than twenty. Twenty odd puppets means twenty strange ones. The Story Loft has both.
 
 ## Teach cards
 
@@ -156,16 +156,16 @@ Worked example: *Dot starts the show.*
 > When the speaker comes first, put a comma after the speaker. The spoken words start with a capital letter.
 
 Worked example: *Dot calls the cast.*
-1. Speaker: Dot called.
+1. Speaker: Dot called
 2. Comma, then the marks open.
 3. Dot called, "Places, everyone!"
 
 **Card 4. Words split in two**
-> Sometimes the speaker sits in the middle. Close the marks, name the speaker, then open them again. The second part starts with a small letter.
+> Sometimes the speaker sits in the middle. Close the marks, name the speaker, then open them again. If the sentence goes on, the second part starts with a small letter.
 
 Worked example: *Dot gives a cue.*
-1. First part: When the bell rings.
-2. Speaker: said Dot.
+1. First part: When the bell rings
+2. Speaker: said Dot
 3. "When the bell rings," said Dot, "open the curtain."
 
 **Card 5. New speaker, new line**
@@ -185,7 +185,7 @@ Worked example: *Three short lines.*
 3. It's a good show, isn't it?
 
 **Card 7. Openers take a comma**
-> An opener tells when, where or how. Move it to the front of a sentence, and put a comma after it. A front opener is called a fronted adverbial.
+> An opener tells when, where or how. Move it to the front of a sentence, and usually put a comma after it. A front opener is called a fronted adverbial.
 
 Worked example: *Pip ate a sandwich before the show.*
 1. Find the when part: before the show.
@@ -209,7 +209,7 @@ Worked example: *Ember (the café's dragon) sat on a cushion.*
 3. Still a whole sentence. The brackets were right.
 
 **Card 10. Loud, quiet or in between**
-> Dashes make extra information stand out. Brackets make it quiet, like a whisper. Commas sit in between.
+> Dashes usually make extra information stand out. Brackets make it quiet, like a whisper. Commas sit in between.
 
 Worked example: *The magpie – a terrible actor – stole the show.*
 1. The writer wants the joke to stand out.
@@ -217,7 +217,7 @@ Worked example: *The magpie – a terrible actor – stole the show.*
 3. Brackets would make it a whisper.
 
 **Card 11. Hyphens join words**
-> A hyphen joins two words into one describing word before a noun. It can also join a prefix to a word, so it doesn't become another word.
+> A hyphen can join two words into one describing word before a noun. It can also join a prefix to a word, so it doesn't become another word.
 
 Worked example: *Two pairs.*
 1. A two-hour show: two and hour work together.
@@ -257,7 +257,7 @@ Worked example: *Two pairs.*
 
 **Lines and Pip's misreadings (A story from Willowbank):**
 - Let's eat Pip. Pip's misreading: "Eat me? I'm a fox, not a sandwich!"
-- Thank you Dot for the hat. Pip's misreading: "Who thanked whom? I'm lost."
+- Thank you Dot for the hat. Pip's misreading: "Thank you Dot? Is that her whole name?"
 - Yes I already unpacked. Pip's misreading: "Yes I? Is that a new word?"
 - It's a good show isn't it. Pip's misreading: "Is it, or isn't it? I can't tell."
 - While Dot painted the puppet watched. Pip's misreading: "Dot painted the puppet? It looks the same."
@@ -280,7 +280,7 @@ Worked example: *Two pairs.*
 **Feedback:**
 - Opener moved, no comma: Good move. Now add a comma where the opener ends.
 - Comma after the next word instead: Put the comma right where the opener ends.
-- Opener left at the end: That works too. Openers at the end need no comma.
+- Opener left at the end: That works too. Openers at the end usually need no comma.
 
 ### (d) Whisper or Shout (Sapling, Keeper's Desk)
 
@@ -307,19 +307,19 @@ Worked example: *Two pairs.*
 - a sock-chasing cat · a sock chasing cat
 - re-cover the chair · recover the chair
 - re-sort the props · resort
-- a two-hour show · two hour shows
+- a small-puppet show · a small puppet show
 - twenty-odd puppets · twenty odd puppets
 
 **Picture captions:**
 - Sock-chasing cat: The miller's cat chases a sock.
 - Sock chasing cat: A sock chases the miller's cat. The cat looks surprised.
 - Re-cover: Dot puts new cloth on the old chair.
-- Recover: The chair gets better. Chairs don't usually do that.
+- Recover: Dot gets the chair back. Someone had borrowed it.
 - Re-sort: Pip sorts the props again.
 - Resort: A place for a holiday. Not a pile of props.
-- Two-hour show: One show, two hours long.
-- Two hour shows: Two shows, each one hour long.
-- Twenty-odd puppets: About twenty puppets.
+- Small-puppet show: A show starring very small puppets.
+- Small puppet show: A small show. The puppets can be any size.
+- Twenty-odd puppets: A few more than twenty puppets.
 - Twenty odd puppets: Twenty strange puppets.
 
 ## Problem sets
@@ -346,7 +346,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **A3 (Seedling, tile).**
 - Prompt: Add the marks so Dot's words are clear.
 - Line: Let's begin said Dot
-- Answer: "Let's begin," said Dot.
+- Answer: "Let's begin," said Dot. (Also accepted: "Let's begin!" said Dot.)
 - Feedback: Period inside: Said Dot comes next, so use a comma. · Comma outside: Tuck the comma inside the closing marks.
 - Hint: Look at card 2.
 - Explanation: Spoken words, comma, closing marks, then said Dot and a period.
@@ -371,7 +371,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Choices: Keep both speakers on one line (`one-paragraph`) · Leave out quotation marks for Dot (`answer-unmarked`) · Start a new line for Dot ✔
 - Feedback: One line: Readers lose track of who is talking. · No marks: Dot's words are spoken too. They need marks.
 - Hint: Look at card 5.
-- Explanation: New speaker, new line. Readers can always tell who speaks.
+- Explanation: New speaker, new line. Readers can tell who speaks.
 
 **A7 (Sapling).**
 - Prompt: Which line gives Dot's exact words?
@@ -512,16 +512,16 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: Add one hyphen. The show lasts two hours.
 - Line: a two hour show
 - Answer: a two-hour show
-- Feedback: No hyphen: Two hour shows could mean two shows.
+- Feedback: No hyphen: Two and hour describe the show together. Hook them.
 - Hint: Which two words describe the show together?
 - Explanation: Two-hour is one describing word before show.
 
 **F4 (Keeper's Desk).**
 - Prompt: The loft has twenty-odd puppets. What does that mean?
-- Choices: Exactly twenty puppets (`odd-means-number`) · Twenty strange puppets (`hyphen-ignored`) · About twenty puppets ✔
-- Feedback: Exactly: Odd here means a few more, give or take. · Strange: Without the hyphen it would. The hyphen joins twenty and odd.
+- Choices: Exactly twenty puppets (`odd-means-number`) · Twenty strange puppets (`hyphen-ignored`) · A few more than twenty ✔
+- Feedback: Exactly: Odd here means a few extra, not exactly twenty. · Strange: Without the hyphen it would. The hyphen joins twenty and odd.
 - Hint: The hyphen joins twenty and odd.
-- Explanation: Twenty-odd means about twenty. Twenty odd means twenty strange ones.
+- Explanation: Twenty-odd means a few more than twenty. Twenty odd means twenty strange ones.
 
 **F5 (Keeper's Desk, say why, read by a grown-up; never graded, nothing stored).**
 - Prompt: Tell a grown-up what the hyphen changes in a sock-chasing cat.
@@ -538,10 +538,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: A name comma inside the spoken words, then a question mark inside the marks.
 
 **G2 (Keeper's Desk, tile).**
-- Prompt: Punctuate Dot's answer, with an opener first.
+- Prompt: Punctuate Dot's answer. Give the opener a comma too.
 - Line: After the show Dot said yes I already unpacked
-- Answer: After the show, Dot said, "Yes, I already unpacked."
-- Feedback: No opener comma: After the show is an opener. It needs a comma. · No yes comma: Yes needs a comma after it.
+- Answer: After the show, Dot said, "Yes, I already unpacked." (Also accepted with ! in place of the period.)
+- Feedback: No opener comma: After the show is an opener. Give it a comma. · No yes comma: Yes needs a comma after it.
 - Hint: Find three places: the opener, the speaker, and yes.
 - Explanation: Opener comma, speaker comma, marks, yes comma, period inside.
 
@@ -564,12 +564,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Quotation marks:** marks that go around someone's exact words. Also called speech marks.
 - **Speaker:** the one who says the words.
 - **Direct speech:** someone's exact words, inside quotation marks.
-- **Opener:** words at the front of a sentence that tell when, where or how.
+- **Opener:** words at the front of a sentence, before the main part. Many tell when, where or how.
 - **Fronted adverbial:** an opener moved to the front of a sentence.
 - **Tag question:** a short question added at the end, like isn't it.
 - **Extra information:** words you can take out and still have a whole sentence.
 - **Brackets:** a pair of curved marks, ( ), around extra information.
-- **Dash:** a short line between words, used in pairs around extra information.
+- **Dash:** a short line between words. Here, dashes come in pairs around extra information.
 - **Hyphen:** a very short line that joins words or word parts.
 - **Prefix:** a word part added to the front of a word, like re-.
 - **Misread:** to read something in a way the writer didn't mean.
@@ -584,6 +584,6 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **What this teaches:** punctuating direct speech (Year 3 to 4 in England's national curriculum, grades 3 to 4 in the Common Core); commas after fronted adverbials and other introductory elements; commas with yes, no, tag questions and names (direct address); commas that prevent misreading; brackets, dashes and commas for parenthesis; and hyphens that avoid ambiguity.
 
-**Terms:** in England, quotation marks are called inverted commas and often printed single (' '); a period is a full stop; the child text uses American terms and double marks with the comma and period inside. "Fronted adverbial" is England's classroom term, taught here beside the plainer "opener." This pack says "brackets" for ( ), the word used across Learning Garden's packs; in the United States these are usually called parentheses.
+**Terms:** in England, quotation marks are called inverted commas and often printed single (' '); a period is a full stop; the child text uses American terms and double marks with the comma and period inside. Spanish (per the Real Academia Española) puts the period after the closing « », and Spanish and French novels often mark dialogue with a dash instead of quotation marks; the pack shows « » only for quoted words in letters. "Fronted adverbial" is England's classroom term, taught here beside the plainer "opener." This pack says "brackets" for ( ), the word used across Learning Garden's packs; in the United States these are usually called parentheses.
 
-**What it does not claim:** style guides differ at the edges. Many adult writers leave out the comma after a very short opener, and American books often print a long dash with no spaces. The pack teaches the classroom rules, which are always correct. Colons and semicolons are taught in a later pack. Nothing the child places is graded or recorded beyond the saved bench choices.
+**What it does not claim:** style guides differ at the edges. Many adult writers leave out the comma after a very short opener (the *Chicago Manual of Style* calls it optional unless misreading is likely), and American books often print a long dash with no spaces. The pack teaches the classroom convention: a comma after an opener is usual and never a mistake in these sentences, and items that need it say so. Colons and semicolons are taught in a later pack. Nothing the child places is graded or recorded beyond the saved bench choices.

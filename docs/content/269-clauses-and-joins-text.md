@@ -2,7 +2,7 @@
 
 Companion to [spec 269](../specs/269-clauses-and-joins.md). Use as written, after review. `{guide}` is never gendered; `{courier}` is the explorer's courier. Pronouns: Pip he/him; Dot, Bramble, Nuria she/her; Léon he/him; the librarian they/them; Hollis they/them. Sources: [audit](../source-audits/269-clauses-and-joins.md). Nothing is scored, timed or locked.
 
-**Hollis rule:** Act III scenes never name Hollis. Hollis is named only in the Act IV scenes, after page 3 has come free.
+**Hollis and page 4:** Act III scenes and every standalone screen never name Hollis or read a page. Scene 3, bench (f)'s Act IV cards, the Keeper's Desk almanac and items F3 and F7 read page 4, so they open only after page 4 comes free (spec 120's page order, not a learning gate).
 
 **Labels used throughout:**
 - **A story from Willowbank** marks the town, its people, letters and floods (fiction).
@@ -154,7 +154,7 @@ Worked example: *Before dawn, and before the sun rose.*
 3. So that before is a conjunction.
 
 **Card 3. Pairs that travel together**
-> Some joining words come in pairs: either and or, neither and nor, both and and, not only and but also, whether and or. Keep each pair together.
+> Some joining words come in pairs: either... or, neither... nor, both... and, not only... but also, whether... or. Keep each pair together.
 
 Worked example: *Neither the boat ___ the runner came.*
 1. Find the first half: neither.
@@ -312,7 +312,7 @@ Worked example: *You must close the gate. The gate must be stuck.*
 
 **Name it:** Tap the relative clause. Then tap its relative pronoun.
 
-**Keeper's note (A true thing about language):** Many American editors use that when a clause picks out which one, and which with commas when it adds an extra fact. Both are correct English.
+**Keeper's note (A true thing about language):** Many American editors use that when a clause picks out which one. They use which, with commas, for an extra fact. Which without commas is correct English too.
 
 ### (d) Mend the Letter (Seedling)
 
@@ -332,9 +332,9 @@ Worked example: *You must close the gate. The gate must be stuck.*
 - Line 5 as sentence: Who is waiting? Add a subject.
 
 **Choose a fix:** For each line marked, pick one fix. Every fix shown works.
-- Line 2: a period (The river path is better. The runner can stay for supper.) · comma plus so (The river path is better, so the runner can stay for supper.)
-- Line 3: join it to line 2 (The runner can stay for supper because we have plums.)
-- Line 5: add a subject (I am waiting for your answer by the bridge.)
+- Line 2: a period (The river path is better. The runner can stay for supper.) · comma plus and (The river path is better, and the runner can stay for supper.)
+- Line 3: join it to line 2 (The runner can stay for supper because we have plums.) · put it first (Because we have plums, the runner can stay for supper.)
+- Line 5: add a subject (I am waiting for your answer by the bridge.) · add a subject and verb (I will wait by the bridge for your answer.)
 
 **Note on lines 1 and 6:** Greetings and sign-offs are fine as they are. Letters always use them.
 
@@ -370,8 +370,7 @@ Worked example: *You must close the gate. The gate must be stuck.*
 **The line:** can't · might · could · should · will · must
 
 **Seedling: clue cards.** Read the clue. Slide the word along the line until it fits.
-- Clue: Dark clouds over the high ford. → It might rain.
-- Clue: The flood post is wet to the third mark, with fresh mud. → The water must have reached it.
+- The clues from F1 (clouds: might) and F2 (flood post: must have).
 - Clue: The bridge is dry and the brook is low. → The bridge can't have flooded today.
 
 **Sapling: the Act IV cards (A story from Willowbank).**
@@ -382,7 +381,7 @@ Worked example: *You must close the gate. The gate must be stuck.*
 
 **Two jobs for must:** Tap each sentence: a rule, or a sure guess?
 
-**Keeper's Desk: what we know so far.** Help {guide} set a sureness word on each almanac line. Some lines are sure. Most are could.
+**Keeper's Desk: what we know so far.** Help {guide} set a sureness word on each almanac line. One line is sure. The others are less sure.
 - The low corner is wet now. (sure: it is)
 - The reeds arrived by water. (could)
 - Draining the Sponge caused the floods. (might have; one flood can't settle it)
@@ -431,7 +430,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **B2 (Sapling).**
 - Prompt: Which sentence uses its pair correctly?
-- Choices: Either Nuria writes or she sends the runner. ✔ · Either Nuria writes nor she sends the runner. (`pair-mismatch`) · Both Nuria writes or sends the runner. (`pair-mismatch`)
+- Choices: Either Nuria writes or she sends the runner. ✔ · Either Nuria writes nor she sends the runner. (`pair-mismatch`) · Nuria both writes or sends the runner. (`pair-mismatch`)
 - Feedback: Nor: Nor belongs with neither. Either takes or. · Both: Both travels with and, not or.
 - Hint: Find each first half. Is its partner there?
 - Explanation: Either goes with or. The pair offers two choices.
@@ -473,7 +472,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Sentence: Nuria keeps the flood post. She lives in Vadoalto.
 - Prompt: Which joins them with a relative clause?
 - Choices: Nuria keeps the flood post, she lives in Vadoalto. (`comma-splice`) · Nuria lives in Vadoalto, and she keeps the flood post. (`any-join-is-relative`) · Nuria, who lives in Vadoalto, keeps the flood post. ✔
-- Feedback: Comma: A comma alone can't join two sentences. A pointer word can. · And: A good sentence, but it uses and. Look for who.
+- Feedback: Comma: In school writing, a comma alone doesn't join two sentences. A pointer word can. · And: A good sentence, but it uses and. Look for who.
 - Hint: Find a choice with a pointer word.
 - Explanation: Who lives in Vadoalto is a relative clause. It adds a fact about Nuria.
 
@@ -504,7 +503,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **D3 (Seedling).**
 - Prompt: Which line fixes "The plums were ripe I ate six"?
 - Choices: The plums were ripe, I ate six. (`comma-splice`) · The plums were ripe. Eating six of them. (`new-fragment`) · The plums were ripe, so I ate six. ✔
-- Feedback: Comma: A comma alone can't hold two sentences. Add a joining word. · Eating: Eating six of them has no subject. Who ate?
+- Feedback: Comma: A comma alone usually isn't enough between two sentences. Add a joining word. · Eating: Eating six of them has no subject. Who ate?
 - Hint: Which fix uses a joining word as well as a comma?
 - Explanation: A comma plus so joins them. A period would work too.
 
@@ -520,7 +519,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **E1 (Sapling, guided sort).** Steps shown first: 1. Count the clauses. 2. Find any main clause. 3. Look for because, when or if.
 - Prompt: Sort these four sentences by shape.
-- Cards: The ferry leaked. (simple) · The ferry leaked, but Léon bailed it out. (compound) · When the ferry leaked, Léon bailed it out. (complex) · When the ferry leaked, Léon bailed it out, and Pip held the letters. (compound-complex)
+- Cards: the four shape cards from bench (e), in a new order.
 - Feedback for complex placed in compound (`subordinate-is-coordinating`): When makes its clause lean on the other. That's complex.
 - Hint: Which clauses make sense alone?
 - Explanation: Main clauses stand alone. Subordinate clauses lean. Count each kind.
@@ -537,7 +536,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Sentence: The bridge is open. It was mended in spring. Carts may cross it.
 - Prompt: Which keeps all three facts in one sentence?
 - Choices: The bridge is open, it was mended, carts may cross. (`comma-splice`) · The bridge was mended in spring and is open. (`trim-drops-meaning`) · Mended in spring, the bridge is open to carts. ✔
-- Feedback: Commas: Commas alone can't join three sentences. · Mended and open: Where did the carts go? Keep all three facts.
+- Feedback: Commas: Commas alone usually don't join sentences. And where did spring go? · Mended and open: Where did the carts go? Keep all three facts.
 - Hint: Check each choice for the bridge, spring and carts.
 - Explanation: One opening phrase and one clause hold all three facts.
 
@@ -575,7 +574,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **F2 (Seedling).**
 - Sentence: The flood post is wet to the third mark. Fresh mud sits on it. The water ___ reached the third mark.
-- Prompt: Which words fit the evidence?
+- Prompt: Which words match how strong the clues are?
 - Choices: must have ✔ · might have (`too-unsure`) · can't have (`against-evidence`)
 - Feedback: Might: The wet line and fresh mud are right there. You can be surer. · Can't: The post is wet to the mark. That says it did.
 - Hint: How strong are the clues?
@@ -658,6 +657,6 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **Terms:** this pack uses US terms (period, not full stop). The English national curriculum's Year 5 terms modal verb, relative pronoun, relative clause and ambiguity appear here. Parenthesis, brackets and dashes are taught in Speech Marks for the Puppets (pack 264), and cohesion in For the Next Keeper (pack 277).
 
-**What it does not claim:** grammar rules here are school conventions for clear writing. Good writers use fragments and long sentences on purpose, and the "that or which" choice is a style preference. The sureness line is a simple model; real meaning depends on the whole sentence. Willowbank, its letters and its floods are invented. The pack does not decide whether draining the Sponge made floods worse: it only asks which words the evidence supports.
+**What it does not claim:** grammar rules here are school conventions for clear writing. Good writers use fragments and long sentences on purpose, and the "that or which" choice is a style preference. Many US school books count a comma splice (two sentences joined by a comma alone) as a run-on; some handbooks keep the names apart, and writers sometimes splice short clauses on purpose. "A phrase has no subject and verb of its own" is the school definition; the English national curriculum glossary also counts verb groups without a subject (*running along the path*) as non-finite clauses. The sureness line is a simple model; real meaning depends on the whole sentence. Willowbank, its letters and its floods are invented. The pack does not decide whether draining the Sponge made floods worse: it only asks which words the evidence supports.
 
 **Talk and writing:** "Say why" answers are spoken to you and never stored. Nothing the child writes is recorded.
