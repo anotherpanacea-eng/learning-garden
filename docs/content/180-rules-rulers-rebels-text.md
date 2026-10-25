@@ -361,11 +361,11 @@ Cards: Caesar crosses the Rubicon (49 BCE) · Octavian is named Augustus (27 BCE
 **B6** · Keeper's Desk · 3-choice
 **Prompt:** How were many Athenian officials and Rome's consuls chosen?
 1. Many Athenian offices used lots; Rome elected its consuls **(right)**
-2. Rome let women vote, and Athens never did *(misconception: Rome was more open)*
-3. Athens was ruled by one king; Rome by two consuls *(mix-up: Athens's democracy forgotten)*
+2. Athens elected all officials; Rome chose consuls by lot *(misconception: election and lot reversed)*
+3. Both chose all officials by lot *(misconception: one rule for all offices)*
 **Feedback 1:** Yes. Lots chose many Athenian officeholders; voters chose Rome's consuls.
-**Feedback 2:** Neither let women vote. Both left many people out.
-**Feedback 3:** Athens had a democracy then, with no king.
+**Feedback 2:** Rome elected its consuls; many Athenian offices used lots.
+**Feedback 3:** Some offices used elections. Rome elected its consuls.
 **Hint:** Look at the Athens and Rome card.
 **Explanation:** Both had citizen assemblies passing laws. The contrast here is how these officials were chosen.
 
