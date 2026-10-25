@@ -7,6 +7,7 @@ const parcelTail=[
 ];
 export const keeperStoryContent={
  title:'The Keeper’s Pages',label:'Story · an invented valley and map',
+ ui:{reminderTitle:'The parcel in Pip’s satchel',revealTitle:'A page comes free',revealReplayTitle:'How the page came free',recoveryTitle:'Your earlier story is safe',recoveryBody:'This version cannot continue that saved story. Its contents remain unchanged in your notes. Every other place is open.',recoveryReplay:'Read the parcel story together',orchardToggle:'See where the orchard is now'},
  parcel:{
   title:'A very wet parcel',
   fresh:['The rain has stopped. Everything drips.','Pip is tugging at something wedged against the flowerpot. “It’s a parcel,” says Dot. “A very wet parcel.”',...parcelTail],
