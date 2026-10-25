@@ -1,6 +1,6 @@
-# History and science build-out: sixteen packs
+# History and science build-out: twenty-six packs
 
-Proposal, 2026-10-25. **Writing only:** specs 133 to 148, each with a companion file holding every child-facing line and a source audit. Nothing here is built, scheduled or cleared. Each spec still needs an independent spec review and a subject check, and the owner chooses a first slice before Codex builds anything. Story links are future adapters to draft [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127) (the Keeper of the Ways); every pack also plays standalone from an open destination.
+Proposal, 2026-10-25. **Writing only:** specs 133 to 148 and, in a second wave, 149 to 158, each with a companion file holding every child-facing line and a source audit. Nothing here is built, scheduled or cleared. Each spec still needs an independent spec review and a subject check, and the owner chooses a first slice before Codex builds anything. Story links are future adapters to draft [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127) (the Keeper of the Ways); every pack also plays standalone from an open destination.
 
 ## Why
 
@@ -45,6 +45,25 @@ The target topic ids in each spec are candidates for a reviewed reference, never
 | [146](specs/146-bell-and-drum.md) | **The Bell and the Drum** | `#studio/sound` | Louder versus higher as two separate dials, sound through solids, liquids and gases (not space), a bell's sound down a made-up valley, the thunder count. | S6 |
 | [147](specs/147-mills-energy.md) | **Where the Mill's Energy Goes** | `#mill/energy` | Follows energy from sunlight to bread, a wheel bench with friction, a perpetual-motion detective for Bramble's self-filling wheel, renewable and non-renewable sources. | S6 |
 | [148](specs/148-where-pips-supper-goes.md) | **Where Pip's Supper Goes** | `#living/journey` | A generic person's body (never the child's): the supper journey through digestion, tooth match with a fox comparison, a red blood cell's loop, which system?, and how Harvey's evidence overturned an old idea. No body data anywhere. | S2 |
+
+## Second wave: ten more packs (specs 149 to 158)
+
+Written the same day, after the first sixteen, for the largest gaps left on the pinned graph: Ecosystems & Habitats (1 of 36 topics referenced), Organisms & Life Processes (3 of 63), Insects & Minibeasts, Rainforests (0 of 25), Polar Regions (3 of 25), Forces & Motion (3 of 27) and Scientific Inquiry, plus the history topics the first wave left untaught (Egyptian beliefs, Roman myth and legacy, Vikings and castles). They follow the same contract, were fact-checked in a second pass and independently reviewed, and are proposed in three further draft PRs.
+
+| Spec | Pack | Home | What the child does | Strands |
+| --- | --- | --- | --- | --- |
+| 149 | **The Orchard Year** | `#orchard/year` | One apple tree through the four festivals: parts of a plant, a bean jar, a pollination bench (the plant's side), seed travel, a dye-stalk series; at Keeper's Desk, van Helmont's willow (right about soil, wrong about water alone) and photosynthesis. | S3, S1 |
+| 150 | **The Bee Meadow** | `#living/meadow` | The insect body plan, complete and incomplete metamorphosis, a hive window, the waggle dance on a labeled made-up distance rule, pollen paths (the bee's side), camouflage and mimicry, and what helps insects. | S3, S4 |
+| 151 | **The Meadow Comes Back** | `#living/regrowth` | Hob's flooded water-meadow surveyed over five visits: living, dead or never alive; reading and editing food webs (arrows match specs 66, 88, 143); the rot log and matter cycling; succession after a flood; energy loss between levels at older depth. | S4, S3, M6 |
+| 152 | **Up Through the Canopy** | `#library/canopy` | Rainforests from a box of seed and leaf cards: where they are, layers by light, drip tips and buttress roots, the forest's own rain, thin soil, the Yanomami and Baka in the present tense, foods, temperate rainforests, and trade-offs at Keeper's Desk. | S4, S7 |
+| 153 | **The Cold Shelf** | `#library/poles` | Arctic or Antarctic, midnight sun and polar night (reusing spec 141's tilt), a keep-warm bench, polar food chains, sea ice versus ice sheets, the Inuit and Sámi, the race to the South Pole told gently, the Antarctic Treaty, calm polar change. | S4, S7, S8 |
+| 154 | **Ramps, Levers and the Mill Hoist** | `#mill/hoist` | Touch or gap (contact and non-contact forces), an arrow board for balanced and unbalanced forces, a drop door with a Moon switch and Galileo's ramp, a lever and pulley bench that states its trade-off, a magnet sweep. Energy stays in 147. | S6, M5 |
+| 155 | **The Question Bench** | `#science/questions` | A thinking toolkit for Act V: wonder to testable question, change/measure/keep, repeats and spread, hidden cause versus real cause, predict and change your mind, with continental drift as the real case of science revised. Builds on the built Fair Test Bench. | S1, M6 |
+| 156 | **Houses of Forever** | `#archive/forever` | Egypt beyond the river: pyramids and who built them (honest about uncertainty), gods and the afterlife labeled as belief, the weighing of the heart at older depth, who did what, trade with Punt and Lebanon, and museum care for human remains. | H2, H1 |
+| 157 | **Myth, Ash and Empire** | `#archive/myths` | "What kind of thing is this?" for Greece and Rome: Romulus and Remus against the Palatine huts, linked gods, the Parthenon's many lives, Pompeii through bread and wall notices, Latin in Nuria's and Léon's words (Basque as contrast), and 476 as a convention. | H2, H1, L1 |
+| 158 | **Castles and Longships** | `#archive/castles` | Vikings as traders, settlers and raiders (horned helmets as a later costume), castles in order of design, clothing and dyes, the Bayeux embroidery as a source with a point of view; the Black Death in an opt-in Keeper's Desk folder. | H2, H1 |
+
+Owner questions from the second wave, with defaults: **one observation hive** in 150, with a card saying most bees are wild and solitary; **Scott's death** in 153 only as a short Keeper's note; the **weighing of the heart** in 156 at Sapling and Keeper's Desk only; the **Black Death** folder in 158 opt-in at Keeper's Desk; the **Yanomami, Baka, Inuit and Sámi** cards (152, 153) read by community or specialist reviewers before build; **Puff's pronouns** (none used) settled once in spec 120.
 
 ## How the packs hold together
 
