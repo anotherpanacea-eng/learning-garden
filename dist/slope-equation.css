@@ -3,3 +3,5 @@
 .price-page a{display:inline-flex;align-items:center;min-height:44px;max-width:100%;box-sizing:border-box}
 
 .price-layout>.price-turn:only-child{grid-column:1/-1}.price-comparison{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}.price-comparison>*{min-width:0}@media(max-width:700px){.price-comparison{grid-template-columns:1fr}}
+
+.price-rise-run text{font-size:14px;paint-order:stroke;stroke:#f1f5ef;stroke-width:3px;stroke-linejoin:round}@media(max-width:700px){.price-layout>.price-reference{display:contents}.price-reference>.price-graph{grid-row:1}.price-layout>.price-turn{grid-row:2}.price-reference>.price-table{grid-row:3}.price-layout>.price-turn:only-child{grid-row:auto}}
