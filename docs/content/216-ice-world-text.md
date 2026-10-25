@@ -265,7 +265,8 @@ Opening: Slide the marker from the equator to a pole.
 Buttons: **latitude slider 0° to 90°** · **Show the beam** · **Data card**.
 Guided first item (3 steps shown): (1) Put the marker at 0°. (2) Show the beam. (3) Slide to 60°. What happens to the patch?
 Beam readout (Sapling, 0° to 85°): The beam covers {n} patches. (0°: 1.0 · 30°: 1.2 · Willowbank, 42.5°: 1.4 · 60°: 2.0 · 70°: 2.9 · 80°: 5.8 · 85°: 11.5)
-Horizon line (86° to 90°, no number): Near the pole in March, the noon Sun sits on the horizon. Its light skims the ground, spread too thin to count.
+Low-Sun line (86° to 89°, no number): Near the pole in March, the noon Sun is very low above the horizon. Its light skims the ground, spread too thin to count.
+Horizon line (90°, no number): At the pole in March, the noon Sun sits on the horizon. Its light skims the ground, spread too thin to count.
 Zone labels: **Tropical** · **Dry** · **Temperate** · **Continental** · **Polar**.
 Willowbank pin line: Willowbank is temperate. The high peaks above it are as cold as a polar place, because they are high.
 Data card, polar: Warmest month below 10 °C (50 °F). Very little snow or rain. Strong winds.
