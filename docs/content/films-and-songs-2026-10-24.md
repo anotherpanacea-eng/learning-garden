@@ -16,6 +16,8 @@ Three more rules apply to every piece:
 
 **When to produce it:** these lyrics can be reviewed now. Record it during the reviewed Rhythm Studio runtime build, after a music-content check, so the picture matches the built bar. A proposed **Hear the song** button would play it in the studio and is never needed to play a card.
 
+**Provisional recording (2026-10-25):** [`media/fill-the-bar/`](media/fill-the-bar/README.md) holds a recorded song, captions and an animated bar strip, made ahead of the runtime build. The lyrics below are the ones recorded. Its README lists how it was made and where it differs from this brief. When the studio's bar is built, check the picture against it before wiring up **Hear the song**.
+
 ### Production sheet
 
 - **Tempo:** 120 beats per minute in 4/4, so one beat lasts 0.5 seconds, Rhythm Studio's beat. Every bar of the song has four beats.
@@ -35,8 +37,12 @@ Three more rules apply to every piece:
 **Verse 1: the whole note**
 > Pip rings the bell and lets it go,
 > it hums the whole way through, so slow:
-> one, two, three, four, and then it's done.
-> One whole note fills the bar. Just one.
+> one, two, three, four,
+> and then it's done.
+> One whole note fills the bar.
+> Just one.
+
+*Performance: the count is whispered, one word per beat, over one held bell note. (The recording dropped the last two lines.)*
 
 *Picture: one block, the whole bar wide, labeled "whole note". From the second line: "1 whole".*
 
@@ -60,9 +66,13 @@ Three more rules apply to every piece:
 
 **Verse 3: quarter notes**
 > The mending crew begin to hammer,
-> tap, tap, tap, tap, a steady clamor.
+> they never stop and never stammer.
+> Tap, tap, tap, tap.
+> Tap, tap, tap, tap.
 > One beat each, and four in all:
-> four quarters fill the bar, wall to wall.
+> four quarters fill it, wall to wall.
+
+*Performance: one tap per beat, on the tick.*
 
 *Picture: four blocks, one beat each, labeled "quarter note", "1/4".*
 
@@ -78,9 +88,13 @@ Three more rules apply to every piece:
 
 **Bridge: rests** (softer, the tick keeps going)
 > Shh. A rest is quiet, but a rest still counts.
-> As long as a note its size, it counts.
+> It takes up room, the same amount.
 > A quarter rest, a beat of air,
 > the bar keeps time while nothing's there.
+> Tap, tap, tap.
+> Tap, tap, tap.
+
+*Performance: the taps fall on beats one to three, with silence on beat four.*
 
 *Picture: three quarter notes and one quarter rest. The rest is hatched and labeled "rest". On the rest, the music drops out and only the tick plays.*
 
@@ -88,11 +102,11 @@ Three more rules apply to every piece:
 > Now a half, and then a quarter,
 > then two eighths to fill the last.
 > Long, then shorter, then the shortest:
-> the same four beats, from first to last.
+> one whole bar, from slow to fast.
 
 *Picture: half note, quarter note, two eighth notes, filling the bar in order.*
 
-**Final chorus** (twice, the second time with the whole group)
+**Final chorus** (once, with the whole group)
 
 **Tag** (spoken)
 > **Dot:** Your turn.
@@ -111,9 +125,9 @@ Three more rules apply to every piece:
 
 ### Before release
 
-- A music check of the lyrics against the notes as sung. Where the singer holds a syllable, the picture's block must match what is heard.
-- Rights and credits for the generated audio, recorded as for any other asset. Keep the lyric sheet and prompts so the song can be made again on another tool.
-- Captions with the lyrics, and a transcript. The song must make sense with the sound off, through the picture and captions.
+- A music check of the lyrics against the notes as sung. Where the singer holds a syllable, the picture's block must match what is heard. *2026-10-25: the sung melody never holds a whole bar, so the provisional recording adds a bell that plays each pictured pattern.*
+- Rights and credits for the generated audio, recorded as for any other asset. Keep the lyric sheet and prompts so the song can be made again on another tool. *2026-10-25: tools, voices and the style prompt are in the [recording's README](media/fill-the-bar/README.md).*
+- Captions with the lyrics, and a transcript. The song must make sense with the sound off, through the picture and captions. *2026-10-25: [`fill-the-bar.srt`](media/fill-the-bar/fill-the-bar.srt) serves as both.*
 
 ## 2. Concept art brief: *Both Ways Across Willow Bridge*
 
