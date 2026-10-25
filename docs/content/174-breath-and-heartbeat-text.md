@@ -50,7 +50,7 @@ Companion to [spec 174](../specs/174-breath-and-heartbeat.md). Use as written, a
 >
 > Ember peeks out of the café door. "Mine are only for birthdays," Ember says, and a spark pops.
 >
-> The librarian pulls their scarf higher. "No smoke, Pip. That cloud is tiny drops of water from warm breath, meeting cold air. But you're not wrong about the fire. Inside every living thing, something slow is going on. It uses air, and it gives off warmth."
+> The librarian pulls their scarf higher. "No smoke, Pip. That cloud is tiny drops of water from warm breath, meeting cold air. But you're not wrong about the fire. Inside many living things, something slow is going on. It uses oxygen, and it gives off warmth."
 >
 > {guide} looks at the lanterns. "Can we see how?"
 >
@@ -466,7 +466,7 @@ Positions of right answers in 3-choice items: A3, B1, B5, C2 at A; A1, B2, C1, C
 - Hint: What goes into a cell? What comes out?
 - Explanation: Cells use glucose and oxygen and give out carbon dioxide and water. Energy is released.
 
-**C4 (Seedling, 3-choice).** Where does aerobic respiration happen in muscle cells?
+**C4 (Seedling, 3-choice).** Where can aerobic respiration release energy?
 - Only in the lungs `respiration-in-lungs`: Lungs do breathing and gas exchange. Respiration is in cells.
 - Inside the muscle cells (fits): Yes. It releases energy inside the cells.
 - Only in working muscles `only-exercise`: Muscle cells also release energy when the body is resting.
