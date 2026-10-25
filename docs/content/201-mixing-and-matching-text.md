@@ -87,11 +87,11 @@ Companion to [spec 201](../specs/201-mixing-and-matching.md). Use as written, af
 >
 > *First year: Willowbank's post, 80 cm. Vadoalto's, 120 cm. "Vadoalto 40 cm higher!"*
 >
-> *Second year: Willowbank's post, 20 cm. Vadoalto's, 60 cm. "Vadoalto 40 cm higher again!"*
+> *Second year: Willowbank's post, 40 cm. Vadoalto's, 80 cm. "Vadoalto 40 cm higher again!"*
 >
 > "Same both years," says Pip.
 >
-> Nuria shakes her head. "In the second year ours was three times yours. In the first year, only one and a half times."
+> Nuria shakes her head. "In the second year ours was twice yours. In the first year, only one and a half times."
 >
 > "So which headline is true?" asks Dot.
 >
@@ -100,7 +100,7 @@ Companion to [spec 201](../specs/201-mixing-and-matching.md). Use as written, af
 > The librarian writes a third headline in pencil, very small.
 
 **Keeper's note** (A made-up model):
-> A difference subtracts: 120 − 80 = 40. A ratio asks how many times: 120 is 1.5 times 80. When the amounts are small, the same difference can be a much bigger ratio. These flood marks are made up.
+> A difference subtracts: 120 − 80 = 40. A ratio asks how many times: 120 is 1.5 times 80. When the amounts are small, the same difference can be a bigger ratio. These flood marks are made up.
 
 ### Scene 4. The meadow seed (Act IV, chapter 4: the proposal for the low fields)
 

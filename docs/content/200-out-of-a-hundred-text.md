@@ -33,7 +33,7 @@ Companion to [spec 200](../specs/200-out-of-a-hundred.md). Use as written, after
 **Longer:**
 > The librarian pins a new sign over the Gazette's last column. *The Numbers Corner. Say it out of a hundred.*
 >
-> Pip reads the café's advert out loud. "Fifty percent off apples! Good. I'll have fifty apples."
+> Pip reads the café's ad out loud. "Fifty percent off apples! Good. I'll have fifty apples."
 >
 > "Fifty percent is half," says the librarian. "Half of the price. Half of what you buy. Never fifty of anything."
 >
@@ -91,7 +91,7 @@ Companion to [spec 200](../specs/200-out-of-a-hundred.md). Use as written, after
 >
 > Underneath, she writes: *130% of last year.*
 >
-> Ember flutters up to the board and taps it with a claw. "That's wrong. One hundred percent is everything. You can't have more than everything."
+> Ember flutters up to the board and taps it with a claw. "That can't be right. One hundred percent is everything. You can't have more than everything."
 >
 > "One hundred percent of **last year** is all of last year," says the orchard keeper. "Four hundred baskets. This year I got all of that, and more."
 >
@@ -106,7 +106,7 @@ Companion to [spec 200](../specs/200-out-of-a-hundred.md). Use as written, after
 **Keeper's note** (A made-up model):
 > 520 out of 400 is 130 out of 100: 130%. The extra 120 baskets are 30% of last year. The harvest numbers are made up.
 
-### Scene 4. The cider price comes back wrong (Act V, path 2: the Willowbank Gazette)
+### Scene 4. The cider price that didn't come back (Act V, path 2: the Willowbank Gazette)
 
 **Hook:** The baker raised the cider price by 10% in autumn and lowered it by 10% in winter. He is sure it is back where it started.
 
@@ -210,7 +210,7 @@ Worked example: 1. "Sales up 50%!" 2. From 4 baskets to 6. 3. True, and only 2 m
 **H1. One part in a hundred, in Rome** (A true thing from history; Sapling and up)
 > In ancient Rome, goods sold at public auction paid a tax of one part in every hundred. It was called the *centesima*, "the hundredth".
 Keeper's note:
-> The emperor Augustus sent this tax's money to a treasury for soldiers who had finished their service. Later, under the emperor Tiberius, the rate was cut to half of one percent: one part in every two hundred. A sale of 300 coins paid 3 coins at the first rate.
+> The emperor Augustus used this tax's money to pay soldiers when they finished their service. Later, under the emperor Tiberius, the rate was cut to half of one percent: one part in every two hundred. A sale of 300 coins paid 3 coins at the first rate.
 
 **H2. How % got its shape** (A true thing from history; Seedling and up)
 > Italian merchants wrote *per cento*, "for each hundred". Writers shortened it. Over hundreds of years the short form slowly turned into the sign %.
@@ -684,7 +684,7 @@ Step 2 of the ladder: an easier case, then how to start this one.
 - **Share items:** "6 of 20 children: 6/20 = 30/100 = 30%. Start: which number is the whole?"
 - **Ratio items:** "1 red to 1 green: half are red, 50%. Start: add the parts."
 - **Change items:** "$10 up 10% is $11. Start: find 10% of the old price."
-- **Up-then-down items:** "$10 up 10% is $11. Down 10% of $11 is $9.90. Start: which price is the second percent of?"
+- **Up-then-down items:** "$10 up 10% is $11. Down 10% from $11 is $9.90. Start: which price is the second percent of?"
 - **Back-to-before items:** "50% off leaves $100: before, it was $200. Start: what percent is left?"
 - **Interest items:** "$100 at 2% simple for 3 years: $2 each year, $6. Start: one year first."
 - **Claim items:** "From 2 wet fields to 3: one more, a rise of 50%. Start: percent of what?"

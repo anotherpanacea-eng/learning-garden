@@ -591,14 +591,14 @@ Feedback C: Yes. 8 tenths beats 4 tenths.
 Prompt: Order these weights, lightest first: 0.4, 0.312, 0.5, 0.38 kg.
 Answer: 0.312, 0.38, 0.4, 0.5.
 Worked steps: 1. Write each to three places: 0.400, 0.312, 0.500, 0.380. 2. Tenths: 3, 3, 4, 5. 3. 0.312 before 0.380.
-Tests: 0.4, 0.5, 0.38, 0.312 (shortest first); 0.5, 0.4, 0.38, 0.312 (longest is lightest).
+Tests: 0.4, 0.5, 0.38, 0.312 (shortest first); 0.5, 0.4, 0.38, 0.312 (heaviest first: the order turned around).
 Hint: Fill with zeros so all have three places.
 Explanation: Compare tenths first. Only the two 3-tenths weights need the hundredths.
 
 **D6 (Sapling, number)**
 Prompt: A rope is 2.5 m. You cut off 0.75 m. How much is left?
 Answer: 1.75 m.
-Worked steps: 1. Line up the points: 2.50 − 0.75. 2. Hundredths: 0 − 5, exchange a tenth. 3. 1.75 m.
+Worked steps: 1. Line up the points: 2.50 − 0.75. 2. Hundredths: 0 − 5, so regroup a tenth as ten hundredths. 3. 1.75 m.
 Tests: 2.25 (taking the smaller digit from the bigger in each place); 2.85 (exchanging without reducing the place you took from).
 Hint: Write 2.5 as 2.50 first.
 Explanation: Lined-up points keep tenths with tenths. Check: 1.75 + 0.75 = 2.5.
@@ -638,10 +638,10 @@ Feedback C: That's dividing by 100. A kilogram is 1000 grams.
 **E4 (Keeper's Desk, number)**
 Prompt: A jar holds 1.5 kg. You use 0.375 kg. How much is left?
 Answer: 1.125 kg.
-Worked steps: 1. Line up: 1.500 − 0.375. 2. Exchange across the zeros. 3. 1.125 kg.
+Worked steps: 1. Line up: 1.500 − 0.375. 2. Regroup across the zeros. 3. 1.125 kg.
 Tests: 1.275 (taking the smaller digit from the bigger in each place); 1.235 (exchanging without reducing the place you took from).
 Hint: Write 1.5 as 1.500.
-Explanation: The zeros give hundredths and thousandths room to exchange. Check: 1.125 + 0.375 = 1.5.
+Explanation: The zeros give hundredths and thousandths room to regroup. Check: 1.125 + 0.375 = 1.5.
 
 **E5 (Keeper's Desk, number)**
 Prompt: Two weights make exactly 1 kg. One is 0.264 kg. The other?
@@ -736,6 +736,7 @@ Step 3: **Skip for now.** You can come back any time.
 - **decimal point**: the dot after the ones place.
 - **place value**: what a digit is worth because of where it sits.
 - **placeholder zero**: a zero that keeps a place open.
+- **regroup**: trade one of a place for ten of the next place to the right.
 - **equivalent**: worth the same amount, written a different way.
 - **round**: replace a number with the nearer of two posts.
 - **significant figures**: digits counted from the first one that isn't zero.

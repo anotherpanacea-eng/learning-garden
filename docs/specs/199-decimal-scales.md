@@ -174,7 +174,7 @@ From the pinned `curriculum/marble/dependencies.json`:
 
 | Target | Hard prerequisite | How it's met |
 | --- | --- | --- |
-| Tenths | Fractions of amounts (`mt_cFltwUQi-d`) | Met elsewhere: spec 43 (Sharing Counter, main). |
+| Tenths | Fractions of amounts (`mt_cFltwUQi-d`) | Met elsewhere, narrowly: spec 43's Sharing Counter (main) holds it as a scoped practice reference (one or three quarters of twelve buns), not a general fraction-of-an-amount method. |
 | Tenths, age 8+ | Tenths (`mt_YzM5goBctT`) | Taught here (T1, T2). |
 | Tenths, age 9+ | Decimals for Tenths & Hundredths (`mt_Vi4Vo5xs_g`) | Taught here (T8 before T4's notation items). |
 | Decimal place value (1 dp rounding) | Decimal equivalents of tenths and hundredths (`mt_TqDq6jyOmL`) | Taught here (T1, T3, T8, B1; claimed by this pack after review, see the upstream table). |
