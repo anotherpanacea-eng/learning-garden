@@ -153,3 +153,8 @@ Whole-batch gathering trays (spec 50) refresh Jane `d4903954d7c4d8118cbd1d2f7ed7
 ## Adaptive subject returns · 2026-10-25
 
 Specs222–226 refresh Jane `286300f822944b8c039d5ea8d483a6cb52759f51` (LESSONS, engine, stuck support and licensing) and Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (complete relevant topic descriptions and direct edges). Owning specs record the narrow math, evidence/perspective, forces and spatial-language records studied. Stable supplied work, different examples and review invitations inform original bounded generators and authored stories. Jane’s grading, mastery/reward and remote learner machinery are not adopted. English preposition records do not establish French proficiency. No new upstream code, lesson prose, assets, runtime taxonomy mapping or pin/license change is incorporated.
+
+
+## Storm-record source comparison · 2026-10-25
+
+[Spec237](specs/237-storm-source-pair.md) refreshes Jane LESSONS/licensing at `286300f822944b8c039d5ea8d483a6cb52759f51` and the relevant complete Marble topic records/direct edges at `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac`. Stable supplied tasks, separate examples and optional help are design study only. Firsthand/Secondhand and Multiple Accounts inform the source/focus contrast; the current audience record's narrower title/description is respected rather than its older broad label. The pinned graph, licenses and coverage declarations remain unchanged. Draft PR180/spec273 supplies original project fiction adapted into the existing219/224 English notebook; no new Jane/Marble code, lesson prose, art or learner data is incorporated. The short fictional pair is not a fifth complete story or a completed history topic.
