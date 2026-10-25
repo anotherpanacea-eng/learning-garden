@@ -1,3 +1,9 @@
+import {pathwayPage,pathwayInvitation,bindPathways} from './pathway-entry-ui.mjs';
+import {linearPage,linearRefusal,bindLinear} from './linear-pathway-ui.mjs';
+import {prepareLinearDisplay} from './linear-pathway-core.mjs';
+import {evidenceVoicePage,bindEvidenceVoice} from './evidence-voice-ui.mjs';
+import {motionPage,bindMotion} from './motion-evidence-ui.mjs';
+import {frenchRoomsPage,bindFrenchRooms} from './french-rooms-ui.mjs';
 import {orderedPage,orderedRefusal,orderedEntry,bindOrdered} from './ordered-sorting-ui.mjs';
 import {prepareOrderedDisplay} from './ordered-sorting-core.mjs';
 import {pairsPage,pairsRefusal,pairsEntry,bindPairs} from './seed-pairs-ui.mjs';
@@ -139,7 +145,7 @@ const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
 keepOfferingHowto(main,()=>choosingExplorer?'':location.hash);
-let needsExplorerInitialization=location.hash==='#begin'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
+let needsExplorerInitialization=['pathways','learn'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
 let graph=null;
@@ -155,7 +161,12 @@ function updateStorageNotice(){
  const status=main.querySelector('[data-saving-status]');if(status)status.textContent=savingStatus();
 }
 function save(){storageOK=explorerStore.save(state);persist=explorerStore.persist;updateStorageNotice();}
-document.addEventListener('garden-speech-preference',e=>{state.garden.speech=e.detail;save();});
+document.addEventListener('garden-speech-preference',e=>{
+  if(Object.hasOwn(state,'garden')&&(!state.garden||typeof state.garden!=='object'||Array.isArray(state.garden)))return;
+  const candidate=structuredClone(state);candidate.garden??={};candidate.garden.speech=structuredClone(e.detail);
+  if(!priceOptions().canExport(candidate))return;
+  state.garden=candidate.garden;save();
+});
 function syncDraft(){
   if(activity?.mode==='checkin')state.baseline.draft={questionId:activity.q.id,...active};
   if(activity?.mode.startsWith('broad-'))state.broad.drafts[`${activity.mode==='broad-checkin'?'checkin':'activity'}:${activity.q.id}`]={...active};
@@ -168,7 +179,7 @@ function gardenArt(){let flowers='';for(let r=0;r<3;r++)for(let c=0;c<4;c++)flow
 function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back">← Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
 function noteInstructionArrival(){if(choosingExplorer)return;const [desk,page]=(location.hash||'').slice(1).split('/');if(page==='instructions'&&['post','loft'].includes(desk)&&noteInstructionEntry(state,desk))save();}
 function navigate(hash){stopBell('navigation');if(location.hash===hash){noteInstructionArrival();render();}else location.hash=hash;}
-function home(){return startingInvitation()+deskEntry()+gardenHome(state,persist,parcelHome(state,{blocked:keeperFilmBlocked()}))+pileEntry()+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
+function home(){return pathwayInvitation()+startingInvitation()+deskEntry()+gardenHome(state,persist,parcelHome(state,{blocked:keeperFilmBlocked()}))+pileEntry()+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
 function startCheckin(){if(state.baseline.complete){navigate('#summary');return;}const q=checkin[state.baseline.index];activity={mode:'checkin',q};const draft=state.baseline.draft;active=draft?.questionId===q.id?{...blank(),...draft}:blank();
   if(draft?.questionId!==q.id&&(state.exposures?.includes(`${q.a}x${q.b}`)||state.exposures?.includes(`${q.b}x${q.a}`)))active.exposed=true;
   screen='activity';render();focusActivity();}
@@ -301,6 +312,27 @@ function render(){
     return;
   }
   resetStartingFlow();
+  // Subject entry and unit visits do not normalize or advance other activities.
+  if(root==='pathways'||root==='learn'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
+    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    const options={save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,entryLesson:detail};
+    let content;
+    if(choosingExplorer)content=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
+    else if(root==='learn'&&slug==='math'){const ready=prepareLinearDisplay(state,{...priceOptions(),entryLesson:detail});content=ready.ok?linearPage(state,detail):linearRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='english')content=evidenceVoicePage(state,detail);
+    else if(root==='learn'&&slug==='science')content=motionPage(state,detail);
+    else if(root==='learn'&&slug==='french')content=frenchRoomsPage(state,detail);
+    else content=pathwayPage(state,slug||'math');
+    main.innerHTML=content;updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{
+      $('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());
+      bindPathways(state,options);bindLinear(state,options);bindEvidenceVoice(state,options);bindMotion(state,options);bindFrenchRooms(state,options);bindSpeech();
+    }
+    return;
+  }
   if(hash==='#cafe/units'){
     if(choosingExplorer)resetUnits();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
@@ -744,4 +776,4 @@ function endingFilm(){
  if(root==='post'&&!['choose','groups','messages','letters','instructions','packing'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
  return null;
 }
-if(!choosingExplorer&&location.hash!=='#begin'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale')playFilm('welcome');
+if(!choosingExplorer&&!['pathways','learn'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale')playFilm('welcome');

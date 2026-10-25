@@ -551,3 +551,12 @@ The pictures are written as Mermaid text or a ring of stages in `dist/drawn-howt
 Keep it out is a bounded Seed Stall investigation at `#numbers/seeds/pairs`: draw two seeds, compare returning the first with keeping it out, inspect a chance branch, and try the finite question pack. Old Seed Stall experiments retain their original behavior. See [spec215](docs/specs/215-seed-stall-keep-it-out.md). Source checks: `node test/seed-pairs-checks.mjs`; synthetic browser journeys: `python3 test/seed-pairs-browser.py` (local preview required).
 
 Which test first? (`#post/sorting/order`) adds three separate requests to Sorting Desk: size first, stamp first, and NOT blue. Build an ordered rule, trace one parcel, swap the rules, or compare all supplied cards. Old Sorting Desk, Double Check and delivery records stay separate. See [spec216](docs/specs/216-which-test-first.md). Run `node test/ordered-sorting-checks.mjs`; synthetic local/hosted browser journeys use `python3 test/ordered-sorting-browser.py` with `ORDERED_TEST_URL` and `ORDERED_ARTIFACTS`.
+
+
+### Separate starting points and connected subject units
+
+`#pathways` offers Math, English, Science and French starting choices independently for each explorer, with optional short try-it examples. Direct exploration does not set a level or discard a waiting lesson. The earlier Café and reading-amount controls remain at `#begin`.
+
+Four open short units extend the advanced pathway: signed rates and linear equations (`#learn/math`, six lessons); a whole original story, evidence and reader-directed revision (`#learn/english`, five lessons); forces, collision evidence and a revised design (`#learn/science`, five lessons); and French rooms, directions and recent/next actions (`#learn/french`, four lessons). These are bounded supported teaching sequences, not completed courses or placement tests. Writing is human-read and ungraded. Optional French meanings and device-local speech are support, not independent listening evidence.
+
+See [specs217–221](docs/specs/217-subject-pathway-entry.md), the [current roadmap](docs/roadmap.md#current-subject-pathway-delivery) and [course routes](docs/course-routes.md#first-connected-subject-units--2026-10-25-delivery). Run the corresponding `test/{pathway-entry,linear-pathway,evidence-voice,motion-evidence,french-rooms}-checks.mjs` suites and matching Python browser journeys. Use synthetic work only. The owning PR records exact-candidate review and deployment verification.
