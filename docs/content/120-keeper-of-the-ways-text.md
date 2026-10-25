@@ -6,7 +6,7 @@ Spanish and French text is a first draft for review by fluent readers. The Spani
 
 ## 1. The parcel
 
-Shown once, on the garden home, after the storm film on a first visit.
+First runtime slice: shown on the garden home after the storm film, and in the Keeper’s Pages until Keep it safe is chosen. Leaving it open is allowed; a replay stays available after Keeping.
 
 > The rain has stopped. Everything drips.
 >
@@ -21,13 +21,15 @@ Shown once, on the garden home, after the storm film on a first visit.
 > Inside, the pages are stuck together in one damp lump. "We dry them," says Dot. "Slowly. Nobody is peeling anything."
 
 **Button:** Keep it safe
-**After:** Pip puts the parcel in his satchel. He will check on it every few minutes.
+**After:** Pip tucks the wrapper, label and all, into his satchel. Dot carries the damp pages to the bakery windowsill. “Warmest one in Willowbank,” she says.
 
-**For an explorer who began before the parcel existed** (shown once, next visit to the garden home):
+**For an explorer who began before the parcel existed** (offered on the garden home or in the Keeper’s Pages until Keep it safe is chosen):
 
 > Pip has been keeping something for you. "I found it after the storm," he says, "and I didn't open it. Mostly."
 
 Then the parcel text above from "The label is smudged."
+
+The future asking-around bakery line below should acknowledge this already-arranged drying place rather than offer it as new information. It is not commissioned by the first runtime slice.
 
 ## 2. Asking around (Act I)
 
@@ -44,7 +46,9 @@ One line appears at a mended or mending place, the first time Pip visits it with
 
 ## 3. The Keeper's Pages
 
-The almanac gains a section. **Heading:** The Keeper's Pages. **Under it:** *Drying on the bakery windowsill.* A page that hasn't come free shows its stuck edge and one word you can read, given below.
+The almanac gains a section. **Heading:** The Keeper's Pages. **Under it, only after the parcel is found:** *Drying on the bakery windowsill.* A page that hasn't come free shows its stuck edge and one word you can read, given below.
+
+First runtime slice note: Page 1’s third button is **Water-stained original · story**. Hollis’s name and the transcription/confidence case are not displayed in this slice. All three reading versions have English local read-aloud; the broader labels below are authoring metadata for later commissions.
 
 Each page has three versions: **Short** (with read-aloud), **Longer**, and **Hollis's page**, the original at the Keeper's Desk. In Hollis's page, `[smudged]` marks a word the water took. The desk invites the reader to guess the word from the rest of the page and to mark how sure they are.
 
@@ -52,8 +56,8 @@ Each page has three versions: **Short** (with read-aloud), **Longer**, and **Hol
 
 **Edge word before it comes free:** *Sponge*
 
-**When it comes free** (during the welcome-back supper):
-> While everyone is eating, Dot slips out to check the windowsill. She comes back holding one page by its corners. "It came free," she says. "It's a map."
+**When it comes free** (after the welcome-back supper milestone; narrative time passes without a timer):
+> A little later, Dot comes back from the bakery holding one page by its corners. "This one came free," she says. "It's a map."
 
 **Short:** An old map of our valley. The brook wanders through a big green patch called *the Sponge*. The orchard is there now.
 
@@ -62,7 +66,7 @@ Each page has three versions: **Short** (with read-aloud), **Longer**, and **Hol
 **Hollis's page:**
 > The valley, drawn in my second year of keeping. Willow Brook from the high ford to the mill. The Sponge holds the spring water and lets it go [smudged], so the mill boards are seldom needed. Reeds, frogs, a great many herons, one of them me. The bridge road runs on the dry side. Scale: one finger to a [smudged] walk.
 
-**Guide line after reading:** "{guide}: A map is a picture of what was there when someone drew it. I wonder what changed."
+**Guide line after reading:** "{guide}: A map shows how someone drew a place. What might have changed?"
 
 ### Page 2: The flood ledger
 

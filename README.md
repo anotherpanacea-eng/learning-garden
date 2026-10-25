@@ -22,6 +22,10 @@ The introductory storm film opens automatically the first time each saved explor
 
 Three more short films celebrate story endings in the same way: *A Postcard Home* (32 seconds) when a Paris errand ends, *Welcome Back, Neighbors* (34 seconds) when the first café supper lights all six lanterns, and *Through the Ribbon Gate* (31 seconds) when Bramble’s gate is untangled. Each opens once per explorer, can be skipped, and stays available from a “Watch … film” link on that ending. Watching a film is not recorded as learning evidence. The Bramble film shows 3 × 4 as a story example, so it notes that fact as seen, which keeps a later 3 × 4 answer from counting as unseen.
 
+The [Courier’s Price bench](docs/specs/213-slope-to-equation.md) connects a stated slope/rate to a fixed starting charge and `y = mx + b`, then works backwards from a total. Three original price cards support reversible picture/table/graph exploration and kept explanations at `#desk/linear`. The implementation is supported practice, not a full linear-equations course. [PR168](https://github.com/anotherpanacea-eng/learning-garden/pull/168) is merged and deployed; [try the live bench](https://after-the-storm-learning.anotherpanacea.workers.dev/#desk/linear).
+
+The [course routes](docs/course-routes.md) organize a first-year framework with subject-specific entry, missing teaching bridges and human/off-screen work. The [audience proposal](docs/audience-presentation.md) separates presentation from challenge and support; the [joined media inventory](docs/story-milestones-and-films.md#joined-media-inventory) identifies story films, teaching models, audio and celebrations. These are plans, not completed courses or a built theme selector.
+
 The [strand-by-strand curriculum map](docs/strand-map.md) marks concepts, contrasts, game homes and revisits as Built, Planned or Missing, and identifies which additional game modes are needed.
 
 The [dated curriculum spiral plan](docs/curriculum-spirals.md) records conceptual connections across familiar games, with checked Jane/Marble references and explicit gaps. The [current roadmap](docs/roadmap.md) holds the active queue and distinguishes merged code from the live site.
@@ -53,6 +57,8 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/keeper-story-checks.mjs
+node test/keepers-desk-checks.mjs
 node test/field-kit-checks.mjs
 node test/riddles-checks.mjs
 node test/field-kit-integration-checks.mjs
