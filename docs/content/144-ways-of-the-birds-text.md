@@ -1,13 +1,13 @@
 # The Ways of the Birds: all child-facing text
 
-Companion to [spec 144](../specs/144-ways-of-the-birds.md). Use as written, after independent review and a subject check. `{guide}` is the explorer's chosen companion and is never gendered. Pip is a fox (he/him), Dot a ladybug (she/her), Bramble a girl witch (she/her) with a magpie, Nuria an otter (she/her) in Vadoalto. Hollis is they/them. Nothing here is scored.
+Companion to [spec 144](../specs/144-ways-of-the-birds.md). Use as written, after independent review and a subject check. `{guide}` is the explorer's chosen companion and is never gendered. Pip is a fox (he/him), Dot a ladybug (she/her), Bramble a girl witch (she/her) with a magpie, Nuria an otter (she/her) in Vadoalto. Nothing here is scored.
 
 **Facts were checked on 2026-10-25 from web-search excerpts; sources are numbered in the source audit.** Only the Spanish lines still need a reader before build. The fictional parts need no check.
 
 ## Labels used on every card
 
 - **A true thing about birds** (real science, sourced in the audit)
-- **A story from Willowbank** (fiction: the High Notch, its counts, the letters, Hollis's pages)
+- **A story from Willowbank** (fiction: the High Notch, its counts, the letters, the pages)
 - **A made-up morning** (fiction: invented numbers about real birds)
 - **A simplified map** (a model, not the real world)
 
@@ -48,12 +48,12 @@ Companion to [spec 144](../specs/144-ways-of-the-birds.md). Use as written, afte
 >
 > "How do they know the way?" asks {guide}.
 >
-> Nobody at the table is sure. The librarian says Hollis used to count the birds up at the High Notch, and wrote it all down. The line of cranes bends, straightens, and is gone over the ridge.
+> Nobody at the table is sure. The librarian says an old heron used to count birds up at the High Notch, and wrote it all down. The line of cranes bends, straightens, and is gone over the ridge.
 
 **Keeper's note:**
 > A true thing about birds: common cranes from northern Europe cross the western Pyrenees in autumn, often in lines or V shapes, calling loudly. Many spend the winter in Spain, and some in France. Volunteers have counted at Organbidexka, a real pass in the French Basque Country, since 1979. In autumn 2020 they counted about 32,000 black kites and 19,000 honey buzzards. Willowbank and the High Notch are made up.
 
-### Hollis's margin line (adapter proposal for spec 120, page 3)
+### Margin line (adapter proposal for spec 120, page 3)
 
 > *The birds keep their own Ways. Count them at the Notch in autumn. H.*
 
@@ -97,8 +97,8 @@ Companion to [spec 144](../specs/144-ways-of-the-birds.md). Use as written, afte
 > > *Mis números son distintos de los vuestros. ¿Quién tiene razón?*
 > > My numbers are different from yours. Who is right?
 > >
-> > *Hollis decía: "Dos ojos ven medio cielo."*
-> > Hollis used to say, "Two eyes see half the sky."
+> > *Quien me enseñó a contar decía: "Dos ojos ven medio cielo."*
+> > The one who taught me to count used to say, "Two eyes see half the sky."
 > >
 > > Nuria
 >
@@ -108,7 +108,7 @@ Companion to [spec 144](../specs/144-ways-of-the-birds.md). Use as written, afte
 >
 > "Maybe," says {guide}. "Or maybe not. Let's look."
 
-Spanish wording needs a fluent reader before build. The Hollis saying is fiction, written for this story.
+Spanish wording needs a fluent reader before build. The saying is fiction.
 
 ## Teach cards
 

@@ -12,7 +12,7 @@ Companion to [spec 145](../specs/145-bakers-window.md). Use as written, after in
 **Place title:** The Baker's Window
 
 **First visit** (A story from Willowbank):
-> The bakery's back counter is warm and smells of bread. Hollis's pages lie in a row on the sunny windowsill. Beside them the baker has set out an ice cube, a pat of butter, a cup of tea and a bowl of dough.
+> The bakery's back counter is warm and smells of bread. The parcel's pages lie in a row on the sunny windowsill. Beside them the baker has set out an ice cube, a pat of butter, a cup of tea and a bowl of dough.
 >
 > "Things change in here all day," he says. "Some change back. Some never do. I've never worked out which is which."
 
@@ -24,7 +24,7 @@ Companion to [spec 145](../specs/145-bakers-window.md). Use as written, after in
 
 ### Scene 1. Will the pages melt?
 
-**Hook (A story from Willowbank):** Hollis's pages are drying on the baker's sunny sill. "They'll melt!" says Pip. The baker isn't sure. {guide} looks at you.
+**Hook (A story from Willowbank):** The parcel's pages are drying on the baker's sunny sill. "They'll melt!" says Pip. The baker isn't sure. {guide} looks at you.
 
 **Short:**
 > Pip fears the sun will melt the pages. Paper doesn't melt. The water in the pages leaves as invisible vapor. That is drying.
