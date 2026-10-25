@@ -1,6 +1,6 @@
-# 216. Ice World: the polar regions
+# 227. Ice World: the polar regions
 
-Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md) (wave 6). Every child-facing line is in [the companion text](../content/216-ice-world-text.md); sources and open checks are in the [source audit](../source-audits/216-ice-world.md).
+Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md) (wave 6). Every child-facing line is in [the companion text](../content/227-ice-world-text.md); sources and open checks are in the [source audit](../source-audits/227-ice-world.md).
 
 **Commissioning boundary:** a proposal only. Select a bounded first slice after independent review; the nine activities do not commission each other. Story links are future adapters to [spec 120](120-keeper-of-the-ways.md); standalone play stays open and no completion is inferred from a missing adapter. Ice stays on screen; off-screen cards are grown-up-led. The Many Voices cards need review by Arctic Indigenous readers or organizations before build, as spec 153's book 6 does.
 
@@ -106,15 +106,19 @@ Sprout items carry no digits. Right answers among the 27 three-choice items: **A
 
 ## Saved work
 
+**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+
+Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
+
 Optional root `iceworld` per explorer, absent until a first explicit action.
 
 ```
 iceworld: {
   version: 1,
-  tank:   { source, kept: [{ piece, pushed, view, at }] },          // latest 8 readable
+  tank:   { source, kept: [{ id, piece, pushed, view, at }] },          // capacity 8; refuse if full; never evict
   show:   { source, picked: [cardId], at } | null,
-  tundra: { source, kept: [{ month, tree, at }] },                   // latest 8
-  globe:  { source, kept: [{ lat, at }] },                           // latest 8; readout re-read from source
+  tundra: { source, kept: [{ id, month, tree, at }] },                   // capacity 8; refuse if full; never evict
+  globe:  { source, kept: [{ id, lat, at }] },                           // capacity 8; refuse if full; never evict; readout re-read from source
   store:  { source, predictions: { floating, rock }, loop: [cardId], at } | null,
   engine: { source, stack: [jarId], melted: 0..10, at } | null,
   poles:  { source, placed: { [cardId]: 'arctic' | 'antarctic' }, at } | null,

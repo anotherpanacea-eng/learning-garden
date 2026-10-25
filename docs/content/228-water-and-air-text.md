@@ -1,6 +1,6 @@
 # Water and Air: all child-facing text
 
-Companion to [spec 217](../specs/217-water-and-air.md). Use as written. `{guide}` is the chosen companion; the explorer is "you". US spelling, metric first with US units where a US reader needs them, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them. Before the end of Act III the old Keeper is never named.
+Companion to [spec 228](../specs/228-water-and-air.md). Use as written. `{guide}` is the chosen companion; the explorer is "you". US spelling, metric first with US units where a US reader needs them, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them. Before the end of Act III the old Keeper is never named.
 
 ## Labels used on every card
 

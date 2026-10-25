@@ -1,6 +1,6 @@
 # Ice World: source audit
 
-Audit for [spec 216](../specs/216-ice-world.md) and its [companion text](../content/216-ice-world-text.md). Date: 2026-10-25. All proposed copy, characters, scenes, the voice cards and the six bench models (`float-v1`, `tundra-v1`, `beam-v1`, `melt-v1`, `sink-v1`, `shine-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
+Audit for [spec 227](../specs/227-ice-world.md) and its [companion text](../content/227-ice-world-text.md). Date: 2026-10-25. All proposed copy, characters, scenes, the voice cards and the six bench models (`float-v1`, `tundra-v1`, `beam-v1`, `melt-v1`, `sink-v1`, `shine-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
 
 ## Verification method (read first)
 
@@ -78,3 +78,7 @@ Right answers A 9 / B 9 / C 9. Option lengths rebalanced in review: the right op
 ## Rights notes
 
 No images are embedded. Snowflake photographs (Bentley's are old enough to be public domain in the US; check each scan), Shirase's expedition photographs and the 1969 photograph (US Navy/NSF) should be checked item by item if art is wanted. All Willowbank art is original.
+
+## Bounded authoring repair, 2026-10-25
+
+The wave's public spec identifiers and companion/audit links were renumbered to avoid existing specs. Historical private checker filenames and scratch paths above retain their original names; reported authoring checks describe those earlier runs, not a fresh implementation or complete-source review. The selected build still requires its stated subject, primary-source, cultural and fluent-reader gates, independent review and actual runtime/browser verification. The owning spec now requires complete authored source freezing and explicit capacity refusal/download/selected-confirmed removal, with no silent kept-work eviction. No code, route, taxonomy pin or coverage declaration is commissioned by this repair.

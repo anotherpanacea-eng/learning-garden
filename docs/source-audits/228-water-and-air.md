@@ -1,6 +1,6 @@
 # Water and Air: source audit
 
-Audit for [spec 217](../specs/217-water-and-air.md) and its [companion text](../content/217-water-and-air-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the four bench models (`cups-v1`, `zones-v1`, `coast-v1`, `carbon-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
+Audit for [spec 228](../specs/228-water-and-air.md) and its [companion text](../content/228-water-and-air-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the four bench models (`cups-v1`, `zones-v1`, `coast-v1`, `carbon-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
 
 ## Verification method (read first)
 
@@ -83,3 +83,7 @@ Audit for [spec 217](../specs/217-water-and-air.md) and its [companion text](../
 ## Rights notes
 
 No images are embedded. If art is wanted: Humboldt's *Tableau physique* (1807), Franklin's Gulf Stream chart and Keeling-curve plots exist in library and agency collections; check each item's licence and prefer public-domain or open-access images (NOAA and Scripps graphics have their own terms). All Willowbank art is original.
+
+## Bounded authoring repair, 2026-10-25
+
+The wave's public spec identifiers and companion/audit links were renumbered to avoid existing specs. Historical private checker filenames and scratch paths above retain their original names; reported authoring checks describe those earlier runs, not a fresh implementation or complete-source review. The selected build still requires its stated subject, primary-source, cultural and fluent-reader gates, independent review and actual runtime/browser verification. The owning spec now requires complete authored source freezing and explicit capacity refusal/download/selected-confirmed removal, with no silent kept-work eviction. No code, route, taxonomy pin or coverage declaration is commissioned by this repair.

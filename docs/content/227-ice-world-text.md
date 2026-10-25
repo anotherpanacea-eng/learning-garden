@@ -1,6 +1,6 @@
 # Ice World: all child-facing text
 
-Companion to [spec 216](../specs/216-ice-world.md). Use as written after review and a subject check; the voice cards in Many Voices also need review by Arctic Indigenous readers or organizations before build. Pip he/him, Dot she/her, Bramble she/her, Léon he/him, the miller she/her, the librarian they/them; `{guide}` is never gendered. US spelling, metric first. No em-dashes. Facts marked [check] in the source audit stay out of this text until cleared. Nothing is scored.
+Companion to [spec 227](../specs/227-ice-world.md). Use as written after review and a subject check; the voice cards in Many Voices also need review by Arctic Indigenous readers or organizations before build. Pip he/him, Dot she/her, Bramble she/her, Léon he/him, the miller she/her, the librarian they/them; `{guide}` is never gendered. US spelling, metric first. No em-dashes. Facts marked [check] in the source audit stay out of this text until cleared. Nothing is scored.
 
 ## Labels used on every card
 

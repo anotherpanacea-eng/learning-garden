@@ -1,6 +1,6 @@
-# 217. Water and Air: Earth's water, air and climate zones
+# 228. Water and Air: Earth's water, air and climate zones
 
-Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md), wave 6. Every child-facing line is in [the companion text](../content/217-water-and-air-text.md); sources and open checks are in the [source audit](../source-audits/217-water-and-air.md).
+Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md), wave 6. Every child-facing line is in [the companion text](../content/228-water-and-air-text.md); sources and open checks are in the [source audit](../source-audits/228-water-and-air.md).
 
 **Commissioning boundary:** a proposal only. Select a bounded first slice after independent review (we suggest activity (a), *Where the Water Is*, with Set 1); the six activities do not commission each other. Story links are future adapters to the merged [spec 120](120-keeper-of-the-ways.md) proposal; standalone play stays open and no completion is inferred from a missing adapter. Off-screen cards are grown-up-led and record nothing.
 
@@ -110,6 +110,10 @@ Sprout items use no digits. Each of the 25 three-choice items has exactly one ri
 
 ## Saved work
 
+**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+
+Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
+
 Optional root `waterAndAir` per explorer, absent until a first explicit action. Local only.
 
 ```
@@ -117,9 +121,9 @@ waterAndAir: {
   version: 1,
   places: { source, tagged: { [placeId]: 'liquid'|'solid' } },          // 7 ids
   cups: { source, bars: { [barId]: number } | null },                    // 4 bars, each 0-100
-  zones: { source, kept: [{ place, height, rain, zone, at }] },          // latest 8
+  zones: { source, kept: [{ id, place, height, rain, zone, at }] },          // capacity 8; refuse if full; never evict
   fuels: { source, paired: { [sourceId]: [cardId, cardId] } },            // 6 sources
-  carbon: { source, kept: [{ scenario, turn, stores: [a, p, n, s, f], at }] },   // latest 8; turn 0-4
+  carbon: { source, kept: [{ id, scenario, turn, stores: [a, p, n, s, f], at }] },   // capacity 8; refuse if full; never evict; turn 0-4
   answers: { [itemId]: { source, choice | value | order | match, support: ['hint'|'example'|'skip'], at } }
 }
 ```
