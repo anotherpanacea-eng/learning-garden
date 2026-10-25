@@ -79,7 +79,7 @@ Every pack follows the same contract as the history and science packs:
 
 - **Spec 49 §5:** a teaching-contract table and a hard-prerequisite crosswalk against the pinned `curriculum/marble/dependencies.json`. Each prerequisite is taught here, met elsewhere (named spec or draft), supported inline with no claim, or listed as a documented gap. Gaps never gate play.
 - **Jane** (`kentlangley/Jane` at `0ec55f7`, refreshed 2026-10-24): teach first with a worked example revealed a step at a time, then one guided item, then practice; the "I'm stuck" ladder (hint, then an easier worked case and how to start, then skip for now with nothing lost); three-option choices with distractors tagged to named misconceptions and kind per-choice feedback; short second-person prompts; a glossary. **Not adopted:** points, medals, bosses, mastery, gates, timers, step-downs.
-- **Marble teaching research** (`withmarbleapp/os-taxonomy` at `7bd8b67`, refreshed 2026-10-24): every target's record was read and paraphrased (never quoted; CC BY-SA). Many Marble math topics carry names that do not match their descriptions (for example "Ratio (age 11+)" is order of operations, "Understanding angles (age 9+)" is angle rules). Each spec claims a topic for what its **description and research** say, and notes the mismatch.
+- **Marble teaching research** (`withmarbleapp/os-taxonomy` at `7bd8b67`, refreshed 2026-10-24): every target's record was read and paraphrased (never quoted; CC BY-SA), except `mt_3XJkeIn6J6` (207), which has no record at that revision. Many Marble math topics carry names that do not match their descriptions (for example "Ratio (age 11+)" is order of operations, "Understanding angles (age 9+)" is angle rules). Each spec claims a topic for what its **description and research** say, and notes the mismatch.
 - **Contrasting cases and misconceptions** are the core move: a fraction's top number against its size, perimeter against area, "twice as many" against "more by", percent of different wholes, a chart's height against its change.
 - **A true thing from history** in every pack, from many cultures: the Rhind papyrus, Babylonian astronomical diaries, the Nine Chapters, Brahmagupta, al-Kashi, Ibn al-Banna, the suanpan, Maya and Roman numerals, Playfair and Nightingale, Pascal, Fermi questions.
 - **Numbers checked twice:** each writer's script checked every item, worked example and model, with brute-force uniqueness checks for puzzles; an independent reviewer then wrote a fresh script and rechecked everything. Combined, more than 2,600 checks pass. Answer positions in three-choice items are balanced and stated per pack, with no length or tone giveaway.
@@ -94,7 +94,7 @@ This session could not open web pages directly, so facts were checked against se
 ## Topics left open
 
 - **`mt_gNUE4B3vuk`** ("Mixed & Improper Fractions"; its description is written methods with signed numbers and decimals). No pack teaches it. Default: leave it for a later written-methods pack.
-- **Documented gaps** (taught inline or met only by an existing task reference, claimed by no spec): `mt_sBcRdUfAzV` 2-D shapes (age 6+), `mt_NSC3LT_-ch` estimating volume, `mt_aPBzD28_mT` three-digit digits, `mt_m1W6nTQJ2b` add and subtract within 20, `mt_yTWxkzzoOZ` two-step word problems, `mt_q9EaJc2FP8` long multiplication and `mt_MCu_SNg_OW` arrays (age 9+) in 191, `mt_5HV4mbgSGH` fractions on a number line in 201. Each is listed in its spec's crosswalk.
+- **Documented gaps** (taught inline or met only by an existing task reference, claimed by no spec): `mt_sBcRdUfAzV` 2-D shapes (age 6+), `mt_NSC3LT_-ch` estimating volume, `mt_aPBzD28_mT` three-digit digits, `mt_m1W6nTQJ2b` add and subtract within 20, `mt_yTWxkzzoOZ` two-step word problems, `mt_q9EaJc2FP8` long multiplication and `mt_MCu_SNg_OW` arrays (age 9+) in 191, `mt_5HV4mbgSGH` fractions on a number line in 201, `mt_mnEVZNkX3p` flat vs solid shapes in 184, `mt_h0gJcSuwdL` ratio problems in 196, `mt_pyMD_SIiYO` justifying reasoning (age 8+) in 205. Each is listed in its spec's crosswalk.
 
 ## Suggested order
 
@@ -111,3 +111,20 @@ Under the [roadmap priorities](roadmap.md#owner-priorities-in-order), these sit 
 7. **191:** claim long multiplication and arrays (age 9+), which it teaches inline? **No claim for now.**
 8. **`mt_gNUE4B3vuk`:** **leave unclaimed** for a later pack.
 9. **Measurement units:** line plots in inches and eighths (203), metric for the mill and plots. **Keep both**, metric first with customary where US rulers lead.
+
+Raised in the second review (2026-10-25, OCA-11), each with its default and left for the owner:
+
+10. **Marble example numbers:** many packs reuse short worked numbers from the Marble research records (for example 8 + 4 = ☐ + 5, 5/8 against 3/7, 3, 7, 11, 15 → 4n − 1), always in new wording; 212 T16, which was a record's whole worked problem, was renumbered. Swap the rest for new numbers? **Keep them.**
+11. **Guided items that replay practice:** 210 Duck Count = B1, Duck Raft = C4; 211 Seed Line = D2, Planting Orders ≈ E1; 212 Step Planner = E3. **Give each guided item fresh numbers before build.**
+12. **"Brackets" or "parentheses"** in child text (189, 192 and others)? **Keep "brackets"**, decided once for all packs.
+13. **195:** y = mx + c, or y = mx + b as in spec 213 and US textbooks? **Switch child text to y = mx + b**, keeping the pinned names.
+14. **192 and 193:** US dollars, against spec 120's market "coins" and spec 213's pretend coins? **Keep US dollars.**
+15. **182 Scene 2** (Act III ch. 3) puts the footbridge's side frames in the Truss Yard after Act I mended the bridge. **Keep it**, with one clause saying the Act I planks hold while the side frames are replaced.
+16. **182 Twin Trusses:** Codex deferred the bench pending an exact-geometry contract; unsnapped lengths saving outcome codes only would be a smaller fix. **Keep the deferral as written.**
+17. **184:** claim Flat vs Solid (`mt_mnEVZNkX3p`), which it teaches inline? **Leave it unclaimed**, as a documented gap.
+18. **196:** three representation targets (`mt_dXq9VWm31W`, `mt_3VmBdlAeOZ`, `mt_CUmjcE7W6c`) have descriptions broader than the pack teaches. **Keep the claims**, with the narrowing stated in the upstream rows.
+19. **Ratio Problems (`mt_h0gJcSuwdL`):** unclaimed hard prerequisite of 196's `mt_FnUJMXPUZX`. **Leave it a documented gap**; 201 is the natural later home.
+20. **201 Scene 2** puts Nuria at the Act III chapter 1 market, before spec 120 brings her in person in chapter 2. **Keep her there**; chapters within an act are unordered.
+21. **203 Sorting Tray** uses four groups; pinned `mt_ylXdiVRAYv` says up to three, Other included. **Keep four**, documented as a stretch.
+22. **202 and 203** show Hollis's ledger numbers in standalone play from Act I, before page 2 comes free at the end of Act II. **Keep the benches open, but use a separate made-up practice record until page 2 comes free, then the story ledger**, so spec 120's page reveal keeps its timing without locking a destination.
+23. **208** claims `mt_OzRZ89GrQW`, whose description names inches and feet, but estimates only in centimeters and meters. **Keep the claim** (metric first, question 9) and note the partial fit.

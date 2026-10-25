@@ -35,7 +35,7 @@ One shared scene per chapter; any job is a whole contribution; nothing locks a s
 
 **Points, lines, segments, rays.** A **point** is an exact spot. A **line** goes on forever both ways; a **line segment** stops at two ends; a **ray** starts at one point and goes on. Drawn lines stand for ideal lines with no thickness.
 
-**Parallel and perpendicular.** Lines are **parallel** when they stay the same distance apart and never meet, however far extended; segments are parallel when they lie on such lines, whatever their lengths. A drawing can only be extended so far, so "not meeting on the page" supports, but does not prove, never meeting; the same-gap test does more. Lines are **perpendicular** when they meet at a right angle, at any tilt. **Horizontal** and **vertical** are directions; parallel and perpendicular are relationships between two lines.
+**Parallel and perpendicular.** Lines are **parallel** when the gap between them never changes, so they never meet however long they run; two segments of any lengths are parallel if the lines through them are. No drawing runs forever, so two lines that stay apart on the page only suggest they never meet; the same-gap test is the stronger check. Lines are **perpendicular** when they meet at a right angle, at any tilt. **Horizontal** and **vertical** are directions; parallel and perpendicular are relationships between two lines.
 
 **Diagram marks and names.** A small square states exactly 90°. Single ticks on two sides state those two are equal; double ticks mark a second, independent equal pair (not equal to the first). Matching arcs state equal angles; arrows state parallel lines. ∠ABC is the angle at the **middle** letter, B, with arms BA and BC (∠CBA is the same angle). Marks override appearance: the Mark-up Board's diagrams are labeled *not to scale*, and an unmarked feature is unknown.
 
@@ -142,7 +142,7 @@ Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble 
 
 | Target (pinned id) | What the research asks, and how this spec does it |
 | --- | --- |
-| Understanding angles (`mt_8OAGVdeTJ_`) | Turn first, then corners; vary arm length against a fixed opening; overlay to compare; treat the whole-figure view as a starting point. Sail Hinge's frozen arc while arms stretch; corner card on a turn; A1, A3. |
+| Understanding angles (`mt_8OAGVdeTJ_`) | Turn first, then corners; stretch the arms while the opening stays put; overlay to compare; treat the whole-figure view as a starting point. Sail Hinge's frozen arc while arms stretch; corner card on a turn; A1, A3. |
 | Types of angles (`mt_h0CVtqI2xo`) | Compare with a right-angle checker before naming; order by overlay, not tips or area; mnemonics stay hooks. Name buttons follow the card; A4, A5 with baited arm lengths. |
 | Types of angles (age 8+) (`mt_e4V6hvcuEJ`) | Marks as stated relationships; read and produce; not-to-scale diagrams; mark every member of an equal pair; ∠ABC middle letter. Mark-up Board's two modes; B4-B6. |
 | Lines, Rays & Angles (`mt_QysgF57dxh`) | Vocabulary through drawing and marking; tilted and unequal-length cases; lenient scoring of free drawing. Line Loft draws all four objects; B1-B3; no accuracy judgment on free drawing. |

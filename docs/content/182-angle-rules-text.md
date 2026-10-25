@@ -89,17 +89,17 @@ Companion to [spec 182](../specs/182-angle-rules.md). Use as written, after inde
 > "Even for a tiny one," says Nuria. "Size doesn't change it."
 
 **Keeper's note** (A true thing about math):
-> Every triangle's three angles add to 180°. A steep roof has a smaller top angle and bigger angles at the eaves. The total stays 180°.
+> Every triangle's three angles add to 180°. A steep roof has a smaller top angle and bigger angles at the bottom corners. The total stays 180°.
 
 ### Scene 4. Hollis's bridge drawing (Act IV, chapter 1: the old map and Hollis's account)
 
-**Hook:** A page in Hollis's ledger shows the footbridge frame. Bramble says the new bottom beam sags.
+**Hook:** The back of Hollis's ledger page shows the footbridge frame. Bramble says the new bottom beam sags.
 
 **Short:**
 > Bramble measures two angles that should match. They don't. "Then the beams aren't parallel," she says. "The bottom one sags."
 
 **Longer:**
-> Tucked in Hollis's ledger is a drawing of the footbridge frame, with every angle written in small neat numbers.
+> On the back of Hollis's ledger page is a drawing of the footbridge frame, with every angle written in small neat numbers.
 >
 > Bramble checks the new frame against it. At the top beam, the diagonal makes 50°. At the bottom, in the same position, she measures 54°.
 >
@@ -221,7 +221,7 @@ Keeper's note:
 **Opening:** Make shapes with string. What makes a triangle a triangle?
 **Buttons:** Add a peg · Join · Turn it · Make it bigger · Paint it · Wobble test · Square check
 **Sort labels:** Triangle · Not a triangle
-**Build orders:** Make a triangle that looks different from mine. · Make a shape with four corners. · Make a pentagon. · Make a hexagon. · Make a shape with one square corner.
+**Build orders:** Make a triangle unlike mine. · Make a shape with four corners. · Make a pentagon. · Make a hexagon. · Make a shape with one square corner.
 **After a build:** Count the sides with me. Mark each one.
 **Wobble test line:** Push the frame. Does it lean?
 **After the wobble test:** Four sides can lean. Add one diagonal pole. Now it is two triangles, and it holds.
@@ -263,14 +263,14 @@ Keeper's note:
 ## Bench (d): Polygon Frames
 
 **Model card** (A made-up model):
-> Frames have 3 to 12 sides, with no dents or crossed sides. Drag a corner; those conditions stay fixed.
+> Frames have 3 to 12 sides, with no dents or crossed sides. Drag a corner; the frame never dents or crosses.
 
 **Opening:** Split the frame into triangles from one corner.
 **Buttons:** Pick a corner · Draw a line · Regular / Irregular · Walk the edge
 **Running tally:** Triangles: [n − 2]. Total: [n − 2] × 180°.
 **Walk the edge line:** At each corner, turn by the outside angle. Back at the start, you have turned all the way round: 360°.
 
-**Guided item:** Split a pentagon frame from one corner.
+**Guided item:** Split a regular pentagon frame from one corner.
 - Step 1: How many triangles? *(3.)*
 - Step 2: 3 × 180 = 540°.
 - Step 3: It is regular, so each angle is 540 ÷ 5 = 108°.
@@ -482,12 +482,12 @@ Explanation: The right angle counts: 180 − 90 − 35 = 55.
 
 **C4 (Sapling, 3-choice; diagram not drawn to scale)**
 Prompt: Two sides look equal. The angles shown are 40° and 75°. The third?
-- A. 70°, because two angles look equal *(tests: assuming equal from the picture)*
+- A. 75°, because two angles look equal *(tests: assuming equal from the picture)*
 - B. 65° *(right)*
 - C. 245° *(tests: using 360)*
 Hint: Use the numbers given, not the look of it.
 Explanation: 40 + 75 = 115, and 180 − 115 = 65. The picture isn't to scale.
-Feedback A: It isn't drawn to scale. Use the two numbers.
+Feedback A: It isn't drawn to scale. 40 + 75 + 75 is more than 180. Use the numbers.
 Feedback B: Yes. 180 − 40 − 75 = 65.
 Feedback C: A triangle shares 180°, not 360°.
 
@@ -542,7 +542,7 @@ Prompt: A huge twelve-sided frame. Its outside angles add to?
 - B. 1,800° *(tests: mixing up outside angles with the inside total)*
 - C. More than a small frame's, because it's bigger *(tests: angle sum grows with size)*
 Hint: Walk the edge. How far do you turn in all?
-Explanation: Walking round these convex frames, you turn once all the way: 360°.
+Explanation: Walking round a frame with no dents, you turn once all the way: 360°.
 Feedback A: Yes. One full turn, whatever the size or sides.
 Feedback B: 1,800° is the inside total. Outside angles make one turn.
 Feedback C: Size doesn't change the turning. One lap, one full turn.
@@ -700,7 +700,7 @@ Feedback C: Three sides already fix the angles. No measuring needed.
 
 **G2 (Keeper's Desk, 3-choice)**
 Prompt: Both triangles have sides 6 m and 4 m, and 30° not between them. Twins?
-- A. Yes. Two sides and an angle always fix a triangle. *(tests: angle not between treated as between)*
+- A. Yes. Two sides and any angle give just one triangle. *(tests: angle not between treated as between)*
 - B. Not always. The 4 m side can swing to two places. *(right)*
 - C. Yes. Any three matching parts make twins. *(tests: any three parts fix a triangle)*
 Hint: Is the angle between the two sides? Try Swing the side.
@@ -752,7 +752,8 @@ Step 3: **Skip for now.** You can come back any time.
 - **straight line angle**: a half turn, 180°.
 - **opposite angles**: the angles across from each other where two lines cross; they are equal.
 - **parallel**: always the same distance apart, never meeting.
-- **diagonal (transversal)**: a line that crosses two or more other lines.
+- **diagonal**: a straight line from one corner of a shape to a corner that is not next to it.
+- **transversal**: a line that crosses two or more other lines. On the Parallel Beams, the diagonal is the transversal.
 - **corresponding angles**: angles in the same position at two crossings.
 - **alternate angles**: angles between parallel lines, on opposite sides of the crossing line.
 - **co-interior angles**: angles between parallel lines, on the same side; they add to 180°.

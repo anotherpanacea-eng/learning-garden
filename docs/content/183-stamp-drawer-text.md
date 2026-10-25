@@ -498,7 +498,7 @@ Explanation: The square is the only regular shape with a square corner.
 
 **D1 (Sapling, 3-choice)**
 Prompt: Is the square stamp a rectangle?
-- A. No: a rectangle has to be longer than it is wide. *(tests: the long-rectangle picture)*
+- A. No: a rectangle is always long and thin. *(tests: the long-rectangle picture)*
 - B. Yes: four right angles, opposite sides parallel, and more. *(right)*
 - C. No: a shape can only have one name. *(tests: shapes have one name)*
 Hint: List what every rectangle has. Does the square have it all?
@@ -602,7 +602,7 @@ Prompt: Predict: which straight line across a circle is longest?
 Hint: Measure lines farther and farther from the center.
 Explanation: The farther a line is from the center, the shorter it gets.
 Feedback A: Measure it. Lines near the edge are short.
-Feedback B: On a 3 cm circle, lines measure 6, 5.66 and 4.47 cm.
+Feedback B: On a circle of radius 3 cm, lines measure 6, 5.66 and 4.47 cm.
 Feedback C: Yes. The diameter is the longest line across.
 
 **E5 (Keeper's Desk, draw and measure)**
@@ -698,6 +698,7 @@ Step 3: **Skip for now.** You can come back any time.
 
 ## Key terms (glossary)
 
+- **property**: something a shape has, like four sides or a square corner.
 - **side**: a straight edge of a flat shape.
 - **vertex (corner)**: where two sides meet. More than one: vertices.
 - **closed**: every corner is joined, with no gaps.
@@ -719,6 +720,8 @@ Step 3: **Skip for now.** You can come back any time.
 - **diagonal**: a line joining two opposite corners.
 - **Venn diagram**: loops for sorting; the overlap holds things with both properties.
 - **Carroll diagram**: a grid for sorting by two yes-or-no questions.
+- **compass**: a tool for drawing circles; its opening is the radius.
+- **protractor**: a tool for measuring and drawing angles in degrees.
 - **center**: the middle point of a circle.
 - **radius**: a line from the center to the edge.
 - **diameter**: a line from edge to edge through the center; two radii long.

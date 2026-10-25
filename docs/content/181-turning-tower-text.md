@@ -629,6 +629,8 @@ Step 3: **Skip for now.** You can come back any time.
 - **angle**: the amount of turn between two arms that meet at a point.
 - **vertex**: the point where the two arms of an angle meet.
 - **arm**: one of the two lines that make an angle.
+- **arc**: part of a circle's edge. On a diagram, a small curve in a corner marks an angle.
+- **benchmark**: a known angle to compare with, like 45°, 90° or 180°.
 - **right angle**: a quarter turn; a square corner; 90°.
 - **acute angle**: less open than a right angle.
 - **obtuse angle**: more open than a right angle, less than a straight line.
