@@ -68,7 +68,7 @@ Audit for [spec 225](../specs/225-light-stars-signals.md) and its [companion tex
 | about 5 billion years from now | Spec 172 (red giant in about 5 billion years); script: 10 − 4.6 = 5.4. |
 | 3 parts hydrogen to 1 part helium; 25 kg and 75 kg | LBL and SFU (about 75% and 25% by mass); arithmetic by script. |
 | Beats: 1, 3, 1 gap; 5; 12; 36 | `lamp-code-v1` rule; brute force by script. |
-| Lens: F at 4; 12, 8, 6, 4, 2 squares; images 6, 8, 12, none, 4 behind | `ray-v1` rule; exact fractions and ray intersections by script. |
+| Lens: F at 4; 12, 8, 6, 4, 2 squares; images 6, 8, 12, far off (no sheet catches it), 4 behind | `ray-v1` rule; exact fractions and ray intersections by script. |
 | 10 tokens in the fate bar | `fates-v1`, labeled made-up; only the largest share is a claim. |
 
 Copying check: a six-word-window comparison of all three files against the seven Marble records (`overlap225.py`, scratch area) finds no shared run of six words.
@@ -80,7 +80,8 @@ Copying check: a six-word-window comparison of all three files against the seven
 3. **Star declinations and constellation RAs** in `check225.py` are typed catalog values (e.g. Alkaid +49.3°, Antares −26.4°, Orion center about 5.6 h), not fetched. Results have wide margins (Alkaid clears +47.5° by 1.8°; each month's nearest pattern is unique by more than 4 h), but a reviewer should spot-check them.
 4. **`fates-v1` cells**: glass and warm-object infrared, stone and radio, metal and infrared rest on excerpts and textbook knowledge; the largest-share claims need a subject check. Thickness, moisture and frequency within a band change real results; the model line says so.
 5. **Betelgeuse distance and timing** (`[check]`): no distance or date is in child text; "probably not for a very long time" only.
-6. **Hazard wording**: "from ultraviolet up, rays can harm living cells" follows Marble's threshold "around UV" and EPA's note that UV damages tissue; review ask 2.
+6. **Hazard wording**: "ultraviolet and higher can harm living cells" follows Marble's threshold "around UV" and EPA's note that UV damages tissue. After Codex review, the earlier "lower rungs harm only when very strong / by heating" line was replaced by a bounded rule: harm depends on the kind of light, how strong it is and how long it shines (bright blue light can harm the eye without heating). Review ask 2.
+6a. **Lens at F** (Codex review): the rays leave parallel, so no sheet catches an image, but an eye looking through the lens sees a virtual, upright, bigger image far off (the relaxed magnifier). Child text, the spec table, the classify controls and item 4.6's distractor C now agree.
 7. **Gold and GW170817**: NASA says the merger forged heavy elements such as gold; gold was inferred, not seen line by line, so child text now says "probably" (T27, 6.3, the history card).
 8. **Review changes to story and safety**: the Act III radio moved to Nuria's grandmother's city (spec 120's valley has no radios, and a valley radio would undercut the Act VI runner); Betelgeuse is "near the end of its life", not "very old" (it is far younger than the Sun); the Sun rule is now spec 162's companion text word for word; "Shade and screens help" was cut as on-screen sun-care advice.
 9. **Spanish line** (*¡Hola desde Vadoalto!*) needs spec 120's fluent reader.

@@ -210,8 +210,8 @@ Worked example: (1) Radio: few waves each second, long waves. (2) Visible light:
 **T19. All the same speed.** In empty space, every member of the family travels at the same speed: about 300,000 km (186,000 miles) each second.
 Worked example: (1) The Sun is about 150 million km away. (2) 150,000,000 ÷ 300,000 = 500. (3) 500 seconds is 8 minutes 20 seconds, for every rung.
 
-**T20. More energy, more care.** Higher frequency means more energy in each bit of light. From ultraviolet up, each bit has enough energy to harm living cells. Lower rungs harm only when very strong.
-Worked example: (1) Radio: low energy in each bit. (2) Visible: medium. (3) Ultraviolet and up: enough to harm cells. (4) A very strong microwave beam can still heat things.
+**T20. More energy, more care.** Higher frequency means more energy in each bit. Ultraviolet and higher can harm living cells. Harm depends on the kind of light, its strength and how long it shines.
+Worked example: (1) Radio: low energy in each bit. (2) Visible: medium. (3) Ultraviolet and up: enough to harm cells. (4) Very bright light of other kinds can harm too.
 
 **T21. Three things can happen.** When a wave meets a material, some bounces off (reflects), some soaks in (absorbs) and some goes through (transmits). Absorbed energy warms the material.
 Worked example: (1) Sunlight hits black cloth. (2) Most soaks in. (3) The cloth warms.
@@ -293,12 +293,13 @@ Guided first item (3 steps): (1) Mark F on both sides. (2) Draw the level ray, t
 Lamp places (lens, F is 4 squares): **12 squares** · **8 squares** · **6 squares** · **4 squares** · **2 squares**.
 Ray lines: Solid line: light really goes here. Dashed line: light only seems to come from here.
 Classify buttons: **Real** / **Virtual** · **Upright** / **Upside down** · **Bigger** / **Same size** / **Smaller**.
+At 4 squares: No sheet catches it, so it is virtual. Through the lens it looks upright and bigger, far off.
 Check line: Here are the bench's rays. Do yours cross in the same place?
 Results (A made-up model):
 - 12 squares: picture 6 squares past the lens. Real, upside down, smaller. Like a camera.
 - 8 squares: picture 8 squares past the lens. Real, upside down, same size.
 - 6 squares: picture 12 squares past the lens. Real, upside down, bigger. Like the magic lantern.
-- 4 squares: the rays leave side by side and never meet. No picture.
+- 4 squares: the rays leave side by side and never meet. No sheet catches a picture. But an eye looking through the lens sees the lamp big and far off. Virtual, upright, bigger.
 - 2 squares: rays spread apart. Trace them back: a picture 4 squares behind, on the lamp's side. Virtual, upright, bigger. Like a magnifying glass.
 Catch it: **Move the sheet**. Real picture: The picture is sharp on the sheet. Virtual picture: No sheet catches it. Only the eye sees it.
 Predict, then try:
@@ -618,9 +619,9 @@ Explanation: Between F and twice F, a lens throws a big, upside-down, real pictu
 Prompt: The lamp is 2 squares from the lens. F is 4. What picture?
 - A. Real and upside down, on a sheet *(misconception: every-lens-picture-is-real)*
 - B. Virtual, upright and bigger *(right)*
-- C. No picture of any kind *(misconception: mixing up inside F with at F)*
+- C. No picture, because the rays never cross *(misconception: no-crossing-means-no-picture, forgetting the dashed traced-back rays)*
 Hint: The rays spread apart. Trace them back, dashed.
-Feedback: A: The rays never meet ahead, so no sheet catches it. B: Yes. A magnifying glass. C: At exactly F there's none. Inside F there's a virtual one.
+Feedback: A: The rays never meet ahead, so no sheet catches it. B: Yes. A magnifying glass. C: Trace the rays back, dashed. They meet behind the lens, so the eye sees a picture.
 Explanation: Inside F, the rays spread, and their dashed lines meet behind the lens: a virtual, upright, bigger picture.
 
 ### Set 5. One family of light (Sapling 5.1-5.3, Keeper's Desk 5.4-5.7)

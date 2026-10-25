@@ -266,7 +266,7 @@ Length-entered reply: That's the whole length. Take away 10.0 cm.
 Graph line: Draw one straight line. Let points sit on both sides.
 Join-the-dots reply: Real readings wobble. One line through the middle shows the pattern.
 Bend line (shown when the 6 N point lands off the line): The line bends after 5 N. The rule stops.
-Unload line (after 7 N): Back to 0 N, but 2.0 cm longer. It went past its elastic limit.
+Unload line (after 7 N): Back to 0 N. Length 12.0 cm, so the extension is 2.0 cm. It went past its elastic limit.
 
 **Pull Cart** (Keeper's Desk). Opening: Predict the speed gain. Then pull.
 Buttons: mass **2 kg** / **4 kg**; pull **2 N** / **4 N** / **6 N**; **Pull from rest**.
