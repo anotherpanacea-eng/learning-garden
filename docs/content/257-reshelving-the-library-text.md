@@ -463,15 +463,17 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 ### (e) Linking Words (Sapling)
 
-**Header:** Read Ask the Weather. Find the words that link ideas.
+**Header:** Read Ask the Weather. Find the words that show order or cause.
 
 **Hunt text (shown in the task, the same at every reading length):** First, bend down to look at the water. Next, read the number and write it down. Finally, tip the water out. The vane's tail is wide, so the wind pushes it away. As a result, the arrow points into the wind.
 
-**Hunt:** Tap every link word in the text above. (first, next, finally, so, as a result)
+**Hunt:** Tap every word that shows order or cause. (first, next, finally, so, as a result)
 
 **Link word feedback:** first, next, finally: order words. so, as a result: cause and effect words.
 
-**Not a link word:** That word doesn't join two ideas. Look for one that does.
+**And:** And joins two things, but it doesn't show order or cause. Look again.
+
+**Other words:** That word doesn't show order or cause. Look for one that does.
 
 **Two pages, one link (A true thing about language):** Page 5 says how rain forms. Page 6 says what happens after it falls. Cause, then effect.
 

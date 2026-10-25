@@ -66,7 +66,7 @@ Every book screen offers read-aloud and the three lengths. No score, timer, lock
 - **(b) Cover to Index (Sprout, Seedling).** *Swallows Come Home* as a turnable book. Six questions, each answered by tapping a part (cover, back cover, title page, contents, heading, *Words to know*, index). **Why is it there?** matches four parts to their jobs.
 - **(c) What's It Mostly About? (Seedling, Sapling).** *The Busy Hive*: tap the main topic, then two key details; at Sapling, match each page to its focus.
 - **(d) The Notes Table (Sapling).** Fill a swallow table from six supplied note cards (three fit); a second card does the bees. No free text.
-- **(e) Linking Words (Sapling).** *Ask the Weather*: tap the link words in a short hunt text the task shows (the same at every reading length); order the gauge steps; match causes to effects.
+- **(e) Linking Words (Sapling).** *Ask the Weather*: tap the words that show order or cause in a short hunt text the task shows (the same at every reading length; "and" gets its own feedback: it joins, but shows neither); order the gauge steps; match causes to effects.
 - **(f) Why Did They Write It? (Sapling).** Six texts into three purpose trays; the two notices: each author's view and reasons, word choice, then "which do you agree with?" spoken to a grown-up.
 
 ## Problem sets
