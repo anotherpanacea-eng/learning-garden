@@ -1,6 +1,6 @@
 # Body Signals: source audit
 
-Audit for [spec 223](../specs/223-body-signals.md) and its [companion text](../content/223-body-signals-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the four bench models (`path-v1`, `snip-v1`, `steady-v1`, `sprint-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
+Audit for [spec 234](../specs/234-body-signals.md) and its [companion text](../content/234-body-signals-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the four bench models (`path-v1`, `snip-v1`, `steady-v1`, `sprint-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
 
 ## Verification method (read first)
 
@@ -39,7 +39,7 @@ Audit for [spec 223](../specs/223-body-signals.md) and its [companion text](../c
 | Nobel Prize, Physiology or Medicine 1922 | https://www.nobelprize.org/prizes/medicine/1922/summary/ | Hill (heat in muscle) and Meyerhof (oxygen and lactic acid); awarded in 1923. |
 | Sportscience, "A. V. Hill" | https://sportsci.org/news/history/hill/hill.html | Hill introduced "oxygen debt" (1922); studied trained runners. |
 | PMC review (2022) on the 1922 prize | https://pmc.ncbi.nlm.nih.gov/articles/PMC9304278/ | The prize ideas were superseded within a decade. |
-| Outside Online and coaching reviews on lactate (popular sources summarizing the research) | https://www.outsideonline.com/health/training-performance/lactic-acid-muscle-fatigue/ | In the body lactic acid is mostly lactate plus hydrogen ions; lactate is reused as fuel; the burn is put mostly on acid build-up, itself debated. Basis for "linked to", never "causes". |
+| Outside Online and coaching reviews on lactate (popular sources summarizing the research) | https://www.outsideonline.com/health/training-performance/lactic-acid-muscle-fatigue/ | In the body lactic acid is mostly lactate plus hydrogen ions; lactate is reused as fuel; the burn is put mostly on acid build-up, itself debated. Historical basis for the earlier caveat; the repair below removes the causal interaction itself. |
 | Sportscience Hill page; di Prampero review (1999); EPOC study notes | https://sportsci.org/news/history/hill/hill.html | Hill and Lupton's oxygen debt was later judged too simple; EPOC has a fast part (refilling phosphocreatine and ATP) and a slower part including lactate clearance. Basis for "helps clear". |
 | Houston Methodist, lactic acid and soreness | https://houstonmethodist.org/blog/articles/2021/oct/is-lactic-acid-buildup-really-what-causes-muscle-soreness-after-a-workout | Lactate does not cause next-day soreness; clears well before. Clearance times vary across sources (15 min to 2 h; most 40-60 min): spec says "within about an hour". |
 | OpenAnesthesia, aerobic vs anaerobic | https://www.openanesthesia.org/keywords/aba_aerobic_vs/ | 2 ATP anaerobic; about 32 aerobic (other sources 36-38). Grown-up panel says "roughly 30 to 38"; child text uses only model tokens. |
@@ -84,3 +84,9 @@ No `[check]` item is in the child text. For the subject reviewer:
 ## Rights notes
 
 No images are embedded. If art is wanted: Cajal's drawings are public domain by age (Instituto Cajal holds originals; check reproduction terms); Vesalius's *Fabrica* plates are public domain; the Müller-Lyer figure is a simple redraw. All Willowbank art is original.
+
+## Bounded authoring repair, 2026-10-25
+
+The wave's public spec identifiers and companion/audit links were renumbered to avoid existing specs. Historical private checker filenames and scratch paths above retain their original names; reported authoring checks describe those earlier runs, not a fresh implementation or complete-source review. The selected build still requires its stated subject, primary-source, cultural and fluent-reader gates, independent review and actual runtime/browser verification. The owning spec now requires complete authored source freezing and explicit capacity refusal/download/selected-confirmed removal, with no silent kept-work eviction. No code, route, taxonomy pin or coverage declaration is commissioned by this repair.
+
+**Sprint-model repair:** removed the lactic-acid-threshold forced jog and the heavy-legs transition. Pace remains learner-selected; the marker is schematic, recovery is a separate explanatory card, and fatigue/breathing are not computed. The earlier sprint enumeration must be rerun for a selected implementation; its old pass count is not clearance of this changed model. Published physiological reviews reject treating lactate as a direct fatigue toxin and discuss reuse as fuel: Robergs et al. (2004), https://pubmed.ncbi.nlm.nih.gov/15308499/ ; Hall et al. (2016), https://pubmed.ncbi.nlm.nih.gov/26972271/ . Only the indexed abstracts were available during this bounded repair. Full subject/source review remains required before this bench is built.

@@ -1,6 +1,6 @@
 # Deep Time and Genes: source audit
 
-Audit for [spec 222](../specs/222-deep-time-and-genes.md) and its [companion text](../content/222-deep-time-and-genes-text.md). Date: 2026-10-25. All proposed copy, characters, scenes, the ford quarry, the ford duckbill and the bench models (`tree-v1`, `halving-v1`, `duckbill-v1`, `pea-v1`, `race-v1`, the twenty-change tally) are original. No learner or family record, image, worksheet or lesson code is included. No human inheritance example is used.
+Audit for [spec 233](../specs/233-deep-time-and-genes.md) and its [companion text](../content/233-deep-time-and-genes-text.md). Date: 2026-10-25. All proposed copy, characters, scenes, the ford quarry, the ford duckbill and the bench models (`tree-v1`, `halving-v1`, `duckbill-v1`, `pea-v1`, `race-v1`, the twenty-change tally) are original. No learner or family record, image, worksheet or lesson code is included. No human inheritance example is used.
 
 ## Verification method (read first)
 
@@ -83,3 +83,7 @@ Standard facts used without a separate search (textbook level, flagged for the s
 ## Rights notes
 
 No images are embedded. Any Pompeii photograph, tusk image or Mendel portrait must be checked for licence; prefer public-domain or open-access museum images. No plaster casts. Marble research is CC BY-SA and is paraphrased only. All Willowbank art and the ford duckbill are original.
+
+## Bounded authoring repair, 2026-10-25
+
+The wave's public spec identifiers and companion/audit links were renumbered to avoid existing specs. Historical private checker filenames and scratch paths above retain their original names; reported authoring checks describe those earlier runs, not a fresh implementation or complete-source review. The selected build still requires its stated subject, primary-source, cultural and fluent-reader gates, independent review and actual runtime/browser verification. The owning spec now requires complete authored source freezing and explicit capacity refusal/download/selected-confirmed removal, with no silent kept-work eviction. No code, route, taxonomy pin or coverage declaration is commissioned by this repair.

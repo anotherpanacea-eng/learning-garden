@@ -1,6 +1,6 @@
-# 222. Deep Time and Genes: clocks in rocks, branching trees, peas and lost giants
+# 233. Deep Time and Genes: clocks in rocks, branching trees, peas and lost giants
 
-Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Wave 6 of the [history and science build-out](../history-and-science-buildout.md). Every child-facing line is in [the companion text](../content/222-deep-time-and-genes-text.md); sources and open checks are in the [source audit](../source-audits/222-deep-time-and-genes.md).
+Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Wave 6 of the [history and science build-out](../history-and-science-buildout.md). Every child-facing line is in [the companion text](../content/233-deep-time-and-genes-text.md); sources and open checks are in the [source audit](../source-audits/233-deep-time-and-genes.md).
 
 **Commissioning boundary:** a proposal only; it commissions no code, art, route or storage. Select a bounded first slice after independent review (suggested: the Ash Box plus the Branching Tree, sets A and B); the six activities do not commission each other. Story links are future adapters to [spec 120](120-keeper-of-the-ways.md); standalone play stays open and no completion is inferred from a missing adapter. Inheritance uses plants and animals only. Real loss (Pompeii, extinction, the bucardo) is brief, gentle and at older depth.
 
@@ -101,6 +101,10 @@ Sprout items carry no digits. Right answers among the 25 three-choice items: **A
 
 ## Saved work
 
+**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+
+Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
+
 Optional root `deeptime` per explorer, absent until a first explicit action.
 
 ```
@@ -111,7 +115,7 @@ deeptime: {
   clock: { source, shelf: { [thingId]: clockId }, at } | null,
   board: { source, clash: choiceId | null, at } | null,
   peas: { source, cross: [genotypeId, genotypeId] | null, sides: { for: [chipId], against: [chipId] }, at } | null,
-  race: { source, kept: [{ change: 1..3, adapt: 1..2, lostAt: 1..10 | null, at }] },   // latest 6
+  race: { source, kept: [{ id, change: 1..3, adapt: 1..2, lostAt: 1..10 | null, at }] },   // capacity 6; refuse if full; never evict
   answers: { [itemId]: { source, choice | value | order | strand, support: ['hint'|'example'|'skip'], at } }
 }
 ```

@@ -1,6 +1,6 @@
 # Body Signals: all child-facing text
 
-Companion to [spec 223](../specs/223-body-signals.md). Use as written. `{guide}` is the chosen companion; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them (none are in this file).
+Companion to [spec 234](../specs/234-body-signals.md). Use as written. `{guide}` is the chosen companion; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them (none are in this file).
 
 ## Labels used on every card
 
@@ -331,15 +331,17 @@ Model line (A made-up model): Real blood sugar wobbles all day inside a range an
 Opening: Pick Pip's pace. Watch oxygen and lactic acid.
 Buttons: **Rest** · **Walk** · **Jog** · **Sprint**.
 Guided first run (3 steps): (1) Jog: oxygen covers all 10 tokens. (2) Sprint: 40 needed, 10 covered. (3) Where do the other 30 come from?
-Bar labels: **Oxygen can cover (10)** · **Needed** · **From anaerobic** · **Lactic acid** · **Breathing**.
+Bar labels: **Oxygen can cover (10)** · **Needed** · **From anaerobic** · **Lactic acid marker** · **Recovery card**.
 Readouts:
 - Jog: Oxygen keeps up. No lactic acid added.
 - Sprint: Short by 30 tokens. Anaerobic covers them. Lactic acid +1.
-- Heavy legs (lactic acid 3): Pip's legs feel heavy. He slows to a jog.
-- Rest or walk: Lactic acid −1. Breathing stays fast: the oxygen debt.
+- Pace choice: You choose Pip's pace. The lactic-acid marker never changes it.
+- Rest or walk: Lactic acid marker −1, stopping at zero.
+- Recovery card: After hard effort, extra oxygen helps several processes, including refilling energy stores and reusing lactate.
+Run limit: Keep up to 20 pace actions. If the run is full, keep or download it; no earlier action is removed to make room.
 Per glucose panel: Aerobic: 30 tokens. Anaerobic: 2 tokens.
 Yeast jar: Yeast, no oxygen: carbon dioxide + ethanol. The bubbles raise the dough. Most of the ethanol bakes off in the oven.
-Model line (A made-up model): Real muscles mix both kinds of respiration and the amounts vary. Nothing here is advice about running.
+Model line (A made-up model): Real muscles mix both kinds of respiration and the amounts vary. This bench does not calculate fatigue or breathing. Nothing here is advice about running.
 
 ## History cards
 
@@ -774,7 +776,7 @@ Explanation: After hard effort, extra oxygen helps clear the lactic acid: the ox
 
 **What this teaches:** naming outside parts and matching each sense to its part, on a drawn person and animals; six major bones by science name, everyday name and job, and inside versus outside skeletons; the central nervous system and nerves, with the spinal reflex shortcut; how neurons signal, a brain map by job, practice changing connections and illusions as evidence; physical and chemical digestion and enzymes as catalysts; homeostasis as negative feedback, with insulin and glucagon, and nerves versus hormones; anaerobic respiration, lactic acid and the oxygen debt, compared with aerobic respiration and with yeast.
 
-**What it does not claim:** the benches are made-up models with stated rules. The sugar dial is not a reading and measures nobody. The sprint tokens are not real energy units; textbooks give roughly 30 to 38 units of usable energy (ATP) per glucose aerobically and 2 anaerobically. In the body, lactic acid is mostly present as lactate. It is linked to the burn of hard effort but is not its only cause (acid build-up and other changes matter too), and it does not cause next-day soreness. Scientists now call the oxygen debt EPOC: the extra oxygen also refills muscle energy stores, and clearing lactic acid is only one part. Ethanol is named only as something yeast makes in bread dough; nothing here is about drinks. Nothing here is advice about health, food, sugar, exercise or the brain. Puberty, illness and medicine are left to families.
+**What it does not claim:** the benches are made-up models with stated rules. The sugar dial is not a reading and measures nobody. The sprint tokens are not real energy units; textbooks give roughly 30 to 38 units of usable energy (ATP) per glucose aerobically and 2 anaerobically. In the body, lactic acid is mostly present as lactate. Lactate can be reused as fuel. This bench does not model the causes of burning or fatigue and never uses lactate to force a pace change. Lactate does not cause next-day soreness. Scientists now call the oxygen debt EPOC: the extra oxygen also refills muscle energy stores, and clearing lactic acid is only one part. Ethanol is named only as something yeast makes in bread dough; nothing here is about drinks. Nothing here is advice about health, food, sugar, exercise or the brain. Puberty, illness and medicine are left to families.
 
 **Every body here is a drawing, a wooden model or an animal.** No screen asks a child to point to, feel, taste, measure or describe their own body, and nothing about anyone's body is stored.
 

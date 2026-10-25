@@ -1,6 +1,6 @@
 # Deep Time and Genes: all child-facing text
 
-Companion to [spec 222](../specs/222-deep-time-and-genes.md). Use as written. `{guide}` is the chosen companion; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them. Every inheritance example is a plant or an animal. No line asks about the explorer's body, family, food, feelings, health or home.
+Companion to [spec 233](../specs/233-deep-time-and-genes.md). Use as written. `{guide}` is the chosen companion; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them. Every inheritance example is a plant or an animal. No line asks about the explorer's body, family, food, feelings, health or home.
 
 ## Labels used on every card
 
