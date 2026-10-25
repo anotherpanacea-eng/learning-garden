@@ -197,7 +197,7 @@ Worked example: (1) A fox runs. (2) Its body warms. (3) The warmth spreads into 
 **T13. Some poisons stay** (Keeper's Desk). Some poisons break down quickly. Some don't. A **persistent** poison stays in an animal's body, meal after meal.
 Worked example: (1) A small fish eats poisoned plankton. (2) The poison stays. (3) Next meal adds more.
 
-**T14. Packed tighter up the chain.** Each step up, most of the food leaves as warmth. Only a little becomes body. A persistent poison is all kept.
+**T14. Packed tighter up the chain.** Each step up, only a little eaten food builds new bodies. The rest leaves as waste and breathed-out gas. A persistent poison is all kept.
 Worked example: (1) Plankton: 1,000 units of living stuff, 1,000 of poison. (2) Small fish: only 100 units of living stuff, all 1,000 of poison. (3) Poison in each unit: 1 in plankton, 10 in small fish.
 
 **T15. Energy down, poison up.** Energy gets smaller up a food chain. A persistent poison gets more concentrated. The top hunter's body holds it most densely.
@@ -283,8 +283,8 @@ Meter readouts: Living stuff in all the {level}: {b}. · Poison in all the {leve
 Energy overlay button: **Show energy too**. Readout: Energy in all the {level}: {e}.
 Guided first run (3 steps): (1) Poison stays. (2) Passed up: a tenth. (3) Feed the chain. Which "each unit" meter climbs highest?
 Total line: The total poison stays 1,000. It is packed into less and less living stuff.
-Breaks-down line: This poison breaks down before it is passed up. Every "each unit" meter shows only 1.
-Model line (A made-up model): Here every bit of poison is eaten and kept, and the same share passes up each step. Real chains are messier. The meters show amounts, not harm.
+Breaks-down line: This poison breaks down before anything eats it. Only the plankton hold any. Every meter above them shows 0.
+Model line (A made-up model): The same share passes up each step. In "stays" mode, every bit of poison is eaten and kept. Real chains are messier. The meters show amounts, not harm.
 Real-figures card (A true thing from history): In 1967, scientists measured DDT in a salt marsh on Long Island, New York. Plankton held about 0.04 parts per million. One gull held 75 parts per million.
 
 ## History cards
@@ -573,12 +573,12 @@ Explanation: The same poison sits in a tenth as much living stuff each step. (Ma
 
 **5.3 (Keeper's Desk, 3-choice)**
 Prompt: Switch the poison to "breaks down". What does the osprey's "each unit" meter show?
-- A. 1, the same as the plankton *(right)*
+- A. 0. None of it reaches the osprey. *(right)*
 - B. Still 1,000 *(misconception: persistence makes no difference)*
-- C. Less than the plankton *(misconception: the poison thins out going up)*
+- C. 1, the same as the plankton *(misconception: a poison that breaks down still passes up unchanged)*
 Hint: A poison that breaks down can't be saved up.
-Feedback: A: Yes. Nothing piles up. B: Only a poison that stays can pile up. C: In this model it doesn't thin out. It just doesn't build.
-Explanation: Persistence is what lets a poison build up the chain.
+Feedback: A: Yes. It broke down before anything ate it. B: Only a poison that stays can pile up. C: It breaks down before it is eaten, so none passes up.
+Explanation: Here a poison that breaks down never leaves the plankton. Persistence is what lets a poison build up the chain.
 
 **5.4 (Keeper's Desk, number with steps)**
 Given: in a real 1967 study, plankton held about 0.04 ppm of DDT, and one gull up to 75 ppm.

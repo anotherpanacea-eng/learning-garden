@@ -56,7 +56,7 @@ Audit for [spec 221](../specs/221-who-eats-what.md) and its [companion text](../
 3. **Bearded vulture plate "bones".** Cleared in review: Wikipedia (70-90% bone, citing Margalida et al. 2009) and the VCF feeding guidelines (about 70% by biomass) both support a bone-based scavenger diet. Card wording ("bones are its main food") holds.
 4. **Al-Jahiz paraphrase.** Checked in review against Zirkle's English passage: faithful (mosquitoes seek blood, flies hunt mosquitoes, predators eat flies). The passage reaches English through a Spanish translation, so an Arabic-reading historian could still confirm it before build; the card's hedge ("some historians call it") stays.
 5. **Osprey recovery figures** (Long Island young per nest, Stony Brook symposium page) are kept out of child text.
-6. **Subject check** on omnivore exemplars, the heron's plate, the hare's heart and the ledger's flat "breaks down" rule (spec review asks).
+6. **Subject check** on omnivore exemplars, the heron's plate, the hare's heart and the ledger's "breaks down" rule (only the plankton hold any) (spec review asks).
 
 ## Teaching-research notes (paraphrased)
 
