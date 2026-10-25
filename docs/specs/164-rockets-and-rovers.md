@@ -27,7 +27,7 @@ A child who plays this comes to understand that:
 - **Act V, A Question of Your Own:** a *Long Way Up* page for the *Gazette* or a balloon race for the traveling show (off-screen, grown-up led).
 - **Act VI, Hollis comes home:** Dot compares Hollis's slow letters with radio to Mars.
 
-**Story beat:** Ember asks how a dragon would get to space; Bramble insists rockets push on the air until her magpie's balloon helps test it. Dot notes that Hollis's letters take three days, so Hollis sent whole plans, which is how rovers are driven.
+**Story beat:** Ember asks how a dragon would get to space; Bramble insists rockets push on the air until her magpie's balloon helps test it. Dot notes the old heron's letters took three days, so they sent whole plans, which is how rovers are driven.
 
 ## The knowledge
 

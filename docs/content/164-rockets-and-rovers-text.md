@@ -45,12 +45,12 @@ Companion to [spec 164](../specs/164-rockets-and-rovers.md). Use as written, aft
 ### Scene 2. The letter that took three days *(A story from Willowbank)*
 
 **Short:**
-> Dot sorts a letter from Hollis, three days from the coast. "Hollis always sent the whole plan at once," she says. "No time for questions."
+> Dot sorts a letter that took three days to come. "The old heron who read the flood post wrote like that," she says. "Always the whole plan at once. No time for questions."
 
 **Longer:**
-> Dot is sorting the morning post on the library steps. A letter from the coast has Hollis's spiky writing on it.
+> Dot is sorting the morning post on the library steps. One letter is stamped three days ago.
 >
-> "Three days to get here," she says. "Three days for an answer to go back. So Hollis never wrote, *Shall I mend the gate?* Hollis wrote, *Mend the gate, then the fence, and if it rains, leave the fence.*"
+> "Three days to get here," she says. "Three days for an answer to go back. The old heron who read the flood post sent letters like that when they were away. They never wrote, *Shall I mend the gate?* They wrote, *Mend the gate, then the fence, and if it rains, leave the fence.*"
 >
 > "That's a plan with an if in it," says {guide}.
 >
