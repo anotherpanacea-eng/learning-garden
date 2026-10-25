@@ -1,6 +1,6 @@
 # 182. The Truss Yard: angle facts, triangles and parallel beams
 
-Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a math check.** Part of the [math build-out](https://github.com/anotherpanacea-eng/learning-garden/pull/MATHPR). Every child-facing line is in [the companion text](../content/182-angle-rules-text.md); sources and open checks are in the [source audit](../source-audits/182-angle-rules.md).
+Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a math check.** Part of the [math build-out](https://github.com/anotherpanacea-eng/learning-garden/pull/154). Every child-facing line is in [the companion text](../content/182-angle-rules-text.md); sources and open checks are in the [source audit](../source-audits/182-angle-rules.md).
 
 **Commissioning boundary:** a proposal only. Select a bounded first slice after independent content, model and save review; the seven benches do not commission each other. All Act and chapter links are future adapters to the separately proposed [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127) (draft PR #127). Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter. **Fact-check status:** history facts checked against search excerpts on 2026-10-25 (page fetches blocked); no `[check]` item is in child text. The mathematics is standard school geometry and still needs the math check.
 
