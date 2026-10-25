@@ -32,7 +32,7 @@ Companion to [spec 260](../specs/260-then-now-and-next.md). Use as written, afte
 
 ### Scene 1. So next time we'll know (Act II, a garden across the seasons)
 
-**Hook (A story from Willowbank):** The librarian opens a new weather book. Pip grabs the pen first. He writes three lines very fast.
+**Hook (A story from Willowbank):** The librarian opens a new weather book. Pip grabs the pen first. He writes two lines very fast.
 
 **Short:**
 > Pip writes "Yesterday it rains" and "Tomorrow it rained." Dot can't tell which day was wet. The verb has to match the day.
@@ -42,7 +42,7 @@ Companion to [spec 260](../specs/260-then-now-and-next.md). Use as written, afte
 >
 > "Me first," says Pip. He writes fast and turns the book around.
 >
-> *Yesterday it rains. Today it rained. Tomorrow it rained.*
+> *Yesterday it rains. Tomorrow it rained.*
 >
 > Dot reads it twice. "So which day was wet?"
 >
@@ -59,7 +59,7 @@ Companion to [spec 260](../specs/260-then-now-and-next.md). Use as written, afte
 > "Now I'd know," says Dot. "Next time."
 
 **Keeper's note (A true thing about language):**
-> English adds an ending to show the past: rain, rained. It has no ending for the future. It puts a helper word in front instead: will rain.
+> Most English verbs add an ending to show the past: rain, rained. English has no ending for the future. It puts a helper word in front instead: will rain.
 
 ### Scene 2. Pip's goed (Act II, a garden across the seasons)
 
@@ -81,14 +81,14 @@ Companion to [spec 260](../specs/260-then-now-and-next.md). Use as written, afte
 >
 > "But walked works. Jumped works." Pip frowns at the page. "Why do some verbs get -ed and some don't?"
 >
-> "Some verbs are very old," says the librarian. "We say them so often that they kept their own past forms."
+> "We say some verbs so often," says the librarian, "that they kept their old past forms."
 >
 > Pip fixes the lines. Then he stops at the last one.
 >
 > "Ate," says Dot. "And that's still two breakfasts."
 
 **Keeper's note (A true thing about language):**
-> Long ago, help had an odd past form too. Over hundreds of years it became helped. The verbs people use most, like go and be, kept their odd forms.
+> Long ago, the past of help was holp. Over hundreds of years it became helped. The verbs people use most, like go and be, kept their odd forms.
 
 ### Scene 3. Still raining (Act II, a garden across the seasons)
 
@@ -168,7 +168,7 @@ Opens only after page 2 comes free.
 >
 > "Then we ask," says Dot, and starts a letter to Nuria.
 >
-> *The old Keeper's ledger lists the floods at our mill. In the later years, the floods come closer together. We have started a weather log. We will send you a page each month.*
+> *The old Keeper's ledger lists the floods at our mill. Back then, the floods come closer together. We have started a weather log. We will send you a page each month.*
 >
 > "You keep switching," says Pip. "Lists. Have started. Will send."
 >
@@ -179,14 +179,14 @@ Opens only after page 2 comes free.
 > Two weeks later, Nuria's reply arrives. *Aquí ha llovido toda la semana.* Underneath, in English: *Here it has rained all week.*
 
 **Keeper's note (A true thing about language):**
-> Spanish shows the future with an ending: llueve (it rains), llovió (it rained), lloverá (it will rain). English uses the helper word will instead.
+> Spanish can show the future with an ending: llueve (it rains), llovió (it rained), lloverá (it will rain). English uses the helper word will instead.
 
 ## Teach cards
 
 Each card is 30 words or fewer; worked-example steps appear one tap at a time. Every card is **A true thing about language**; the example sentences are **A story from Willowbank**.
 
 **Card 1. Verbs tell when**
-> A verb's form tells when something happens. It rained: then. It rains: now, or usually. It will rain: next. This is called tense.
+> A verb's form tells when something happens. It rained: then. It is raining: now. It will rain: next. This is called tense.
 
 Worked example: *Written on Tuesday morning.*
 1. Monday is before Tuesday: then. *It rained on Monday.*
@@ -194,7 +194,7 @@ Worked example: *Written on Tuesday morning.*
 3. Wednesday is after: next. *It will rain on Wednesday.*
 
 **Card 2. Day words are clues**
-> Yesterday, last night and in March point to then. Today and right now point to now. Tomorrow and next week point to next.
+> Yesterday, last night and last week point to then. Right now and at the moment point to now. Tomorrow and next week point to next.
 
 Worked example: *Tomorrow the boards ___ in.*
 1. Find the day word: tomorrow.
@@ -220,10 +220,10 @@ Worked example: *The hen ___ under the cart. (hide)*
 3. *The hen hid under the cart.*
 
 **Card 5. Odd families**
-> Many odd verbs come in families that change the same way. Blow, blew; grow, grew; throw, threw. Sing, sang; ring, rang; drink, drank.
+> Many odd verbs come in families: blow, blew; grow, grew. Sing, sang; drink, drank. Families help you remember, but not every look-alike joins: glow, glowed.
 
 Worked example: *The wind ___ all night. (blow)*
-1. Blow sounds like grow.
+1. Blow is in the grow family.
 2. Grow, grew. So blow, blew.
 3. *The wind blew all night.*
 
@@ -238,13 +238,13 @@ Worked example: *Look outside. Rain is falling right now.*
 **Card 7. Every day, or right now?**
 > The plain present tells what usually happens: the miller opens the mill at six. Is opening tells what is happening right now.
 
-Worked example: *Every morning, Dot ___ the post. (sort)*
-1. Every morning is a habit.
-2. A habit takes the plain present.
-3. *Every morning, Dot sorts the post.*
+Worked example: *These days, Dot ___ the post every morning. (sort)*
+1. Every morning is a habit. These days means it still happens.
+2. A habit that still happens takes the plain present.
+3. *These days, Dot sorts the post every morning.*
 
 **Card 8. A long action and a short one**
-> When a short event cuts into a longer one, the longer one uses was or were plus -ing. The short one uses the plain past.
+> When a short event cuts into a longer one, the longer one usually uses was or were plus -ing. The short one uses the plain past.
 
 Worked example: *Pip ___ when the thunder ___. (sleep, crack)*
 1. Which went on for a while? Sleeping.
@@ -252,15 +252,15 @@ Worked example: *Pip ___ when the thunder ___. (sleep, crack)*
 3. *Pip was sleeping when the thunder cracked.*
 
 **Card 9. Has happened, and matters now**
-> Has or have plus a past form tells that something happened before now, and it matters now. It has rained. The paths are still muddy.
+> Has or have plus a word like rained or gone tells that something happened before now, and it matters now. It has rained. The paths are still muddy.
 
-Worked example: *The paths are muddy. Why?*
+Worked example: *The rain is over, but the paths are still muddy.*
 1. The rain is over.
 2. Its mud is here now.
 3. *It has rained.*
 
 **Card 10. Rained, or has rained?**
-> Named, finished time, like yesterday or last spring? Use the plain past: it rained. No time named, or a time reaching up to now? Use has rained.
+> Named, finished time, like yesterday or last spring? Use the plain past: it rained. A time reaching up to now, like so far? Use has rained.
 
 Worked example: *The brook ___ last spring. This week it ___, and it's still high. (rise)*
 1. Last spring is finished: *rose*.
@@ -275,7 +275,7 @@ Worked example: *The miller ___ to market. She isn't back yet. (go)*
 3. *The miller has gone to market.*
 
 **Card 12. Hold it steady**
-> In one log entry about one time, keep the verbs in one tense. Change the tense only when the time changes.
+> In one log entry about one time, keep the verbs in one tense. Change the tense when the time changes.
 
 Worked example: *Last night the wind blew. The gate banged. A bucket rolls away.*
 1. All three happened last night.
@@ -291,7 +291,7 @@ Worked example: *Last spring the brook rose to the second mark. Now it is at the
 3. Tomorrow: will check. Three times, three tenses.
 
 **Card 14. Which came first? (Keeper's Desk)**
-> Had plus a past form shows the earlier of two past events. The boards had gone in before the water came.
+> Had plus a has form, like gone, can show the earlier of two past events. The boards had gone in before the water came.
 
 Worked example: *The boards went in. Then the water came.*
 1. Which came first? The boards.
@@ -317,18 +317,19 @@ Worked example: *___ tomorrow, we will check the post. (rain)*
 **Sprout page (A story from Willowbank), written on Tuesday morning; tiles: rained · rains · will rain**
 - Yesterday it ___ all day. (rained)
 - Hob says it ___ tomorrow. (will rain)
-- Every spring it ___ a lot here. (rains)
+- These days, it ___ a lot every spring. (rains)
 
-**Seedling page (A story from Willowbank), written on Thursday at noon; tiles: rained · is raining · will rain · has rained**
+**Seedling page (A story from Willowbank), written on Thursday at noon; tiles: rained · is raining · will rain · has rained; use each tile once**
 - Look out the window. It ___ right now. (is raining)
 - Last Monday it ___ all night. (rained)
-- So far this week it ___ twice. (has rained)
-- Hob says it ___ again on Saturday. (will rain)
+- Since Monday it ___ twice. (has rained)
+- Hob says it ___ again next Saturday. (will rain)
 
 **Log Desk feedback:**
 - Past clue, future tile: Yesterday is before the entry. Will rain is for later.
 - Future clue, past tile: Tomorrow hasn't happened yet. Rained is for before.
-- Habit clue, past tile: Every spring means usually. Use the plain present.
+- Habit clue, other tile: These days means it still happens every spring. Use the plain present: rains.
+- Past clue, present tile: Yesterday is before the entry. Use the past: rained.
 - Right now, past tile: It is still falling. Use is raining for right now.
 - So far, past tile: So far reaches up to now. Use has rained.
 - Last Monday, has rained tile: Last Monday is a finished time. Use rained.
@@ -364,7 +365,7 @@ Worked example: *___ tomorrow, we will check the post. (rain)*
 
 **Clue trays:** Put each clue on the rained tray or the has rained tray.
 - yesterday (rained) · last spring (rained) · two days ago (rained)
-- so far (has rained) · since Monday (has rained) · this week, and still wet (has rained)
+- so far (has rained) · since Monday (has rained) · up to now (has rained)
 
 **The has shelf:** Match each past to its has form.
 - went · gone
@@ -410,11 +411,11 @@ Worked example: *___ tomorrow, we will check the post. (rain)*
 
 **Entry 2 (Sapling):** *Last spring the brook rose to the second mark. This week it has risen to the first. Tomorrow we will check again.* (no slips)
 
-**Entry 3 (Sapling):** *Every morning Dot opens the post. She sorted the letters. She hangs up her hat.* (one slip: sorted)
+**Entry 3 (Sapling):** *These days Dot opens the post every morning. She sorted the letters. She hangs up her hat.* (one slip: sorted)
 
 **A letter upstream (Keeper's Desk; opens after page 2 comes free):** Dot's letter to Nuria, one line at a time.
 - *The old Keeper's ledger lists the floods at our mill.* (steady: the ledger lists them now)
-- *In the later years, the floods come closer together.* (slip: came)
+- *Back then, the floods come closer together.* (slip: came)
 - *We have started a weather log.* (steady: it matters now)
 - *We will send you a page each month.* (steady: next)
 - Then choose one line to add: *The brook had risen before the old Keeper wrote each number.* or *The brook has risen before the old Keeper wrote each number.* (had)
@@ -454,7 +455,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Is shining is happening now.
 
 **A4 (Sprout, sort).** Sort the day words into then, now or next.
-- Cards: yesterday (then) · last night (then) · today (now) · right now (now) · tomorrow (next) · next week (next)
+- Cards: yesterday (then) · last night (then) · at the moment (now) · right now (now) · tomorrow (next) · next week (next)
 - Feedback for a then card under next (`time-word-ignored`): That time already went by. It belongs in then.
 - Hint: Has it happened yet?
 - Explanation: Day words tell you which tense to use.
@@ -476,8 +477,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Go, went. Some verbs don't take -ed.
 
 **B2 (Sprout).**
-- Prompt: Pip wrote "A hen runned." What should he write?
-- Choices: A hen ran. ✔ · A hen runned. (`overregularized`) · A hen runs. (`present-for-past`)
+- Prompt: Pip wrote "Last night a hen runned." What should he write?
+- Choices: Last night a hen ran. ✔ · Last night a hen runned. (`overregularized`) · Last night a hen runs. (`present-for-past`)
 - Feedback: Runned: Run is odd. Its past is ran. · Runs: Runs is for now. The hen ran last night.
 - Hint: Run is like sit: sit, sat.
 - Explanation: Run, ran. Like sit, sat.
@@ -541,12 +542,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ### Set D. Has it rained? (Sapling)
 
-**D1 (Sapling, guided).** Steps shown first: 1. Is a time named? 2. Is the rain over? 3. Is the mud here now?
-- Prompt: The sky is clear now, but the paths are muddy. It ___.
+**D1 (Sapling, guided).** Steps shown first: 1. Is a time named? 2. Is the rain over? 3. Are the paths still wet now?
+- Prompt: The sky is clear now, but the paths are still wet from rain. It ___.
 - Choices: will rain (`time-word-ignored`) · is raining (`progressive-for-finished`) · has rained ✔
-- Feedback: Will rain: The mud is here already. The rain came first. · Is raining: The sky is clear. The rain is over.
-- Hint: Is the rain over? Is the mud still here?
-- Explanation: It has rained: the rain is over, and the mud is here now.
+- Feedback: Will rain: The paths are wet already. The rain came first. · Is raining: The sky is clear. The rain is over.
+- Hint: Is the rain over? Are the paths still wet?
+- Explanation: It has rained: the rain is over, and the paths are still wet now.
 
 **D2 (Sapling).**
 - Prompt: Which fits? "It ___ yesterday."
@@ -564,7 +565,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **D4 (Sapling).**
 - Prompt: "The miller has gone to market." Where is she now?
-- Choices: Still away at market ✔ · Back at the mill already (`perfect-as-plain-past`) · We can't tell from this sentence (`withholds-perfect-meaning`)
+- Choices: Not back from market yet ✔ · Back at the mill already (`perfect-as-plain-past`) · We can't tell from this sentence (`withholds-perfect-meaning`)
 - Feedback: Back already: Has gone means she went and isn't back. · Can't tell: Has gone tells us she is still away.
 - Hint: Has gone: it happened, and it matters now.
 - Explanation: Has gone tells us she left and is still away.
@@ -587,7 +588,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: It all happened last night, so: a bucket rolled away.
 
 **E2 (Sapling).**
-- Entry: *Every morning Dot opens the post. She sorted the letters.*
+- Entry: *These days Dot opens the post every morning. She sorted the letters.*
 - Prompt: Which fix keeps the entry steady?
 - Choices: She sorts the letters. ✔ · She sorting the letters. (`be-missing`) · She will sort the letters. (`time-word-ignored`)
 - Feedback: Sorting: An -ing verb needs a helper like is. · Will sort: Every morning is a habit, not next.
@@ -597,7 +598,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **E3 (Sapling).**
 - Entry: *Last spring the brook rose to the second mark. This week it has risen to the first. Tomorrow we will check again.*
 - Prompt: Pip says the tense keeps slipping. Is he right?
-- Choices: Yes, every sentence should use the same tense (`any-shift-is-wrong`) · No, the time changes each sentence ✔ · We can't tell without the old record (`withholds-tense-check`)
+- Choices: Yes, every sentence should use the same tense (`any-shift-is-wrong`) · No, the time changes each sentence ✔ · We can't tell without the rest of the log (`withholds-tense-check`)
 - Feedback: Same tense: The times are different. Each time needs its own tense. · Can't tell: The day words are enough: last spring, this week, tomorrow.
 - Hint: Find the time words in each sentence.
 - Explanation: The time moves, so the tense moves too.
@@ -611,7 +612,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **E5 (Keeper's Desk).**
 - Prompt: Which line is right for a plan?
-- Choices: If it will rain tomorrow, we check the post. (`will-after-if`) · If it rained tomorrow, we will check the post. (`past-for-future`) · If it rains tomorrow, we will check the post. ✔
+- Choices: If it will rain tomorrow, we will check the post. (`will-after-if`) · If it rained tomorrow, we will check the post. (`past-for-future`) · If it rains tomorrow, we will check the post. ✔
 - Feedback: If it will rain: After if, use the plain present: if it rains. · Rained: Tomorrow is next. For a plan, say if it rains.
 - Hint: After if, which tense points to the future?
 - Explanation: After if or when, the plain present can point to the future.
@@ -638,16 +639,16 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Verb:** a word for an action or a state, like rain, run or is.
 - **Tense:** the form of a verb that shows when: then, now or next.
 - **Past tense:** a verb form for then: rained, ran.
-- **Present tense:** a verb form for now, or what usually happens: rains, runs.
+- **Present tense:** a verb form for now, or what usually happens: is raining, rains.
 - **Future:** what comes next. English uses will: will rain.
 - **Regular verb:** a verb that adds -ed for the past: walk, walked.
 - **Irregular verb:** a verb with its own past form: go, went.
 - **Progressive:** be plus an -ing verb, for something going on: is raining. Also called continuous.
-- **Present perfect:** has or have plus a past form: has rained. It happened before now and matters now.
+- **Present perfect:** has or have plus a past participle: has rained, has gone. It happened before now and matters now.
 - **Past participle:** the form after has or have, like gone, risen or rained.
 - **Habit:** something that usually happens, again and again.
 - **Log:** a book where you write down what happens each day.
-- **Ledger:** an old record book, written by hand.
+- **Ledger:** an old record book, written by hand. (Shown only after page 2 comes free.)
 
 ## Off-screen cards (adult-led)
 
@@ -667,7 +668,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **About "goed":** forms like *goed* and *runned* show that a child has learned the -ed pattern and is applying it everywhere. Research on children's speech found these forms fairly uncommon and usually temporary. A gentle recast ("Yes, the hen ran!") works better than a correction drill.
 
-**About American usage:** in American speech, *I just ate* and *Did you eat yet?* are common and accepted, where British English prefers the present perfect. The items here avoid *just*, *already* and *yet*, so they are right in both.
+**About American usage:** in American speech, *I just ate* and *Did you eat yet?* are common and accepted, where British English prefers the present perfect. The items here avoid *just*, *already* and *yet*, and key *has rained* only on words like *so far* and *since*, or on a result still here now.
 
 **Home and regional forms:** some families and regions say *I seen it* or *it done rained*. This pack teaches the forms used in written logs and letters. It never marks a child's own speech wrong.
 

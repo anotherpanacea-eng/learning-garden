@@ -28,7 +28,7 @@ Companion to [spec 262](../specs/262-which-hat.md). Use as written, after review
 
 ### Scene 1. Six hats on the pegs (Act II ch. 3, Ember's birthday)
 
-**Hook (A story from Willowbank):** The party is over. Six hats hang on the café pegs. Dot's note says FOUND: A BLUE HAT. Three people come to collect it, and none of them agree.
+**Hook (A story from Willowbank):** The party is over. Six hats hang on the café pegs. Dot's note says FOUND: A BLUE HAT. Two people come to collect it, and Dot's own hat is blue too.
 
 **Short:**
 > Six hats are left after Ember's party. "A blue hat" fits four of them. Dot needs more words, in the usual order.
@@ -38,13 +38,15 @@ Companion to [spec 262](../specs/262-which-hat.md). Use as written, after review
 >
 > Dot pins up a note: *FOUND: a blue hat.*
 >
-> By lunchtime, three people have come for it. A fourth blue hat belongs to Puff, who is still asleep.
+> By lunchtime, two people have come for it.
 >
 > "Mine's blue," says the baker.
 >
 > "So is mine," says the orchard keeper.
 >
 > "Mine too," says Dot, a little stiffly. "I never take my hat off. I took it off to dance. It was a special occasion."
+>
+> A fourth blue hat belongs to Puff, who is still asleep.
 >
 > Pip squints at the pegs. "There are two small blue ones."
 >
@@ -59,7 +61,7 @@ Companion to [spec 262](../specs/262-which-hat.md). Use as written, after review
 
 ### Scene 2. Lost: my patience (Act II ch. 3)
 
-**Hook:** Pip has waited all afternoon for cake. He pins a note to Dot's shelf: LOST, MY PATIENCE. Dot is not sure it counts.
+**Hook:** Pip has waited all afternoon for cake. He pins a note to Dot's shelf: LOST: MY PATIENCE. Dot is not sure it counts.
 
 **Short:**
 > Pip's note says he lost his patience. Bramble says nobody can hand that back. Patience is a noun, but not one you can touch.
@@ -80,9 +82,6 @@ Companion to [spec 262](../specs/262-which-hat.md). Use as written, after review
 > The cake arrives. Pip waits, very still, while Ember blows out the candles, all of them, twice.
 >
 > "Found it," says Dot, and takes the note down.
-
-**Keeper's note (A true thing about language):**
-> Most nouns name people, places and things. Some name ideas, qualities and feelings, like patience, kindness and surprise. These are abstract nouns. You can't touch them, but you can lose your patience, show kindness and get a surprise.
 
 ### Scene 3. Ember's thank-you notes (Act II ch. 3)
 
@@ -113,7 +112,7 @@ Companion to [spec 262](../specs/262-which-hat.md). Use as written, after review
 **Hook:** After the party, a spoon, a button and a ribbon go missing. They turn up in a row on Bramble's ribbon gate. Bramble says the magpie only borrowed them.
 
 **Short:**
-> Dot writes notes to return what the magpie took. Bramble points out that one note could mean two people. She is right.
+> Dot writes notes to return what the magpie took. Bramble points out that one note could mean two people. Bramble is right.
 
 **Longer:**
 > By evening the magpie has collected a spoon, a button and one of Bramble's own ribbons. It lines them up along the ribbon gate.
@@ -133,9 +132,6 @@ Companion to [spec 262](../specs/262-which-hat.md). Use as written, after review
 > "Better," says Bramble. She lifts her ribbon off the gate. "This one is mine, by the way."
 >
 > The magpie looks at the ribbon, then at Bramble, and says nothing at all.
-
-**Keeper's note (A true thing about language):**
-> A pronoun points back to a noun. If two nouns could fit, the reader has to guess. Writers fix it by naming the person again, or by moving the words so only one person fits.
 
 ### Scene 5. The reddest apples (Act II ch. 1, the weekly market)
 
@@ -157,7 +153,7 @@ Companion to [spec 262](../specs/262-which-hat.md). Use as written, after review
 >
 > The baker thinks. "Than last week's."
 >
-> "Then say so," says Dot. "Bigger needs a than."
+> "Then say so," says Dot. "Or nobody knows what they're bigger than."
 >
 > The baker fetches his chalk. *BIGGER BUNS THAN LAST WEEK.* Then, under it, *BEST BUNS ON THE GREEN.*
 >
@@ -166,9 +162,6 @@ Companion to [spec 262](../specs/262-which-hat.md). Use as written, after review
 > "One," says the baker. "Me."
 >
 > "Then they're also the worst," says Pip, and buys two.
-
-**Keeper's note (A true thing about language):**
-> Bigger and redder are comparatives: they compare two things, often with than. Biggest and reddest are superlatives: they pick one from three or more. Long words use more and most instead: more colorful, the most colorful.
 
 ## Teach cards
 
@@ -179,11 +172,11 @@ Each card is 30 words or fewer; worked-example steps appear one tap at a time. E
 
 Worked example: *The tired fox ate slowly.*
 1. Tired tells about the fox, a noun. Adjective.
-2. Slowly tells how he ate. Ate is a verb. Adverb.
+2. Slowly tells how the fox ate. Ate is a verb. Adverb.
 3. Many adverbs end in -ly.
 
 **Card 2. After is, seems and tastes**
-> After words like is, was, seems, looks and tastes, an adjective often describes the noun: the cake tastes sweet. Nobody is doing anything to the cake.
+> After words like is, was, seems, looks and tastes, an adjective often describes the noun: the cake tastes sweet. Tastes links the cake to sweet.
 
 Worked example: *Ember's cake was ___. Delicious or deliciously?*
 1. Was links the cake to a describing word.
@@ -214,13 +207,13 @@ Worked example: *Two buns, then three buns.*
 3. Bigger is a comparative. Biggest is a superlative.
 
 **Card 6. Vowel letters and consonant letters**
-> A, e, i, o, u are vowel letters; the rest are consonant letters. One vowel letter, then one consonant letter at the end? Double it: big, bigger.
+> A, e, i, o, u are vowel letters; the rest are consonant letters. Short word ending in one consonant letter after just one vowel letter? Double it: big, bigger.
 
 Worked example: *hot, wide, tiny, new*
 1. Hot: one vowel letter, one consonant letter. Hotter.
 2. Wide ends in e. Just add r: wider.
 3. Tiny: the y turns to i. Tinier.
-4. New ends in w. W is never doubled: newer.
+4. New ends in w. W, x and y are never doubled: newer.
 
 **Card 7. Words with their own forms**
 > Some words change completely: good, better, best; bad, worse, worst. Adverbs compare too: fast, faster, fastest. Most -ly adverbs use more and most: more carefully.
@@ -231,7 +224,7 @@ Worked example: *Pip's first cake, second cake, third cake.*
 3. The third was the best.
 
 **Card 8. Abstract nouns**
-> Some nouns name things you can see or touch: a hat, a spoon. Abstract nouns name ideas, qualities and feelings: patience, kindness, surprise. They are still nouns.
+> Some nouns name things you can see or touch: a hat, a spoon. Abstract nouns name ideas, qualities and feelings: patience, kindness, honesty. They are still nouns.
 
 Worked example: *Pip lost his patience.*
 1. Can you see patience? No. Touch it? No.
@@ -268,7 +261,7 @@ Worked example: *the hat*
 Worked example: *blue, small, old*
 1. Size first: small.
 2. Then age: old.
-3. Color goes nearest the noun: the small old blue hat.
+3. Color comes last, just before hat: the small old blue hat.
 
 **Card 13. Prepositional phrases**
 > A prepositional phrase is a preposition plus a noun phrase: under the bench. It can say which one, or where, when or how something happened.
@@ -288,9 +281,9 @@ Worked example: *After the party, Dot sorted the hats carefully.*
 **Card 15. Pronouns point back**
 > A pronoun stands in for a noun: Dot found her hat. It points back to a noun already named. If two nouns could fit, the pronoun is unclear.
 
-Worked example: *Dot gave the miller the button because she found it.*
-1. She could be Dot or the miller.
-2. Name the finder: because Dot found it.
+Worked example: *Pip told the baker that he was hungry.*
+1. He could be Pip or the baker.
+2. Name the hungry one first: Pip was hungry. He told the baker.
 3. Now only one reading fits.
 
 **Card 16. Reflexive pronouns**
@@ -302,12 +295,12 @@ Worked example: *Dot warmed ___ by the stove.*
 3. Same one, so: Dot warmed herself.
 
 **Card 17. Possessive pronouns**
-> My, your, her and their come before a noun: her hat. Mine, yours, hers and theirs stand alone: the hat is hers. Those are possessive pronouns.
+> My, your, her and their come before a noun: her hat. Mine, yours, hers and theirs stand alone: the hat is hers. Those are possessive pronouns. His does both.
 
-Worked example: *The red hat with a blue ribbon is the miller's. It is ___.*
+Worked example: *The small new hat is the baker's. It is ___.*
 1. Nothing comes after the gap.
 2. We need a word that stands alone.
-3. It is hers.
+3. It is his.
 
 **Card 18. Clauses and conjunctions**
 > A clause has a subject and a verb: the party ended. A subordinate clause leans on a main clause: when the party ended. Conjunctions like when and because join clauses.
@@ -361,37 +354,36 @@ Worked example: *When the party ended, Dot sorted the hats.*
 - Lovely not first: Opinions like lovely usually come first: a lovely small hat.
 - Determiner not first: Words like the and Dot's usually go at the very front.
 
-**Kept:** "{Owner} takes the {description} home. Dot crosses it off."
+**Kept:** "{Owner} takes {description} home. Dot crosses it off."
 
-**Keeper's Desk, The finished notice:** Dot's notice for the last hat. Tap a word, then its name.
+**Keeper's Desk, The finished notice:** Dot's notice for the last hat. Tap a word or group of words, then its name.
 - Notice: When the party ended, a big old blue hat with a gold ribbon was left on the top peg. Is it yours?
 - Names: conjunction (When) · subordinate clause (When the party ended) · determiner (a) · adjective (big, old, blue) · head noun (hat) · preposition (with) · adverbial (on the top peg) · possessive pronoun (yours)
+- (Not shown: accept every true name. When the party ended is a subordinate clause and also an adverbial; on and with are both prepositions; a and the are both determiners.)
 - Feedback for a wrong name: Ask what job the word does in this notice.
 
 ### (b) Can It Go on the Shelf? (Seedling)
 
 **Header:** Pip's note says LOST: MY PATIENCE. Which of these could go on Dot's shelf?
 
-**Cards:** hat · ribbon · spoon · umbrella · patience · kindness · surprise · friendship
+**Cards:** hat · ribbon · spoon · umbrella · patience · kindness · honesty · friendship
 
 **Trays:** Could go on the shelf · Nobody can hand it back
 
 **Per-card feedback:**
 - Hat, ribbon, spoon, umbrella: You can see it and hold it. It could go on the shelf.
-- Patience, kindness, surprise, friendship: You can't hold it. It's still a noun: an abstract noun.
+- Patience, kindness, honesty, friendship: You can't hold it. It's still a noun: an abstract noun.
 
-**Word families:** Tap the noun in each family.
+**Word families:** Tap the word that names the quality.
 - patient · patiently · patience
 - kind · kindly · kindness
 - brave · bravely · bravery
-- friend · friendly · friendship
+- happy · happily · happiness
 
 **Word family feedback:**
-- Right noun: That one names the quality. It's the noun.
+- Right word: That one names the quality. It's an abstract noun.
 - Adjective tapped: That one describes someone. Look for the word that names the idea.
 - Adverb tapped: That one tells how. Look for the word that names the idea.
-
-**Friend note:** Friend is a noun too, one you can see. Friendship is the abstract one.
 
 ### (c) How Did It Go? (Seedling)
 
@@ -414,7 +406,7 @@ Worked example: *When the party ended, Dot sorted the hats.*
 
 ### (d) Bigger and Biggest (Seedling, Sapling)
 
-**Header:** Market signs compare things. Two things, or three and more?
+**Header:** Market signs compare things. Two things, or three or more?
 
 **Stalls (A story from Willowbank):** the orchard keeper's apples (red) · the baker's buns (big) · Bramble's ribbons (colorful) · two rolls of string (long)
 
@@ -427,7 +419,7 @@ Worked example: *When the party ended, Dot sorted the hats.*
 **Compare feedback:**
 - Two picked, -est chosen: Only two things. Use -er or more.
 - Three picked, -er chosen: Three or more things. Use -est or most.
-- More with a short word: Short words take -er. Long words take more.
+- More with a short word: Short words usually take -er. Long words take more.
 
 **Spelling bench (Sapling):** Add -er to each word: big · hot · wide · tiny · new · good.
 
@@ -438,7 +430,10 @@ Worked example: *When the party ended, Dot sorted the hats.*
 - New: W is never doubled. Just add -er.
 - Good: Good has its own forms: better, best.
 
-**How they moved (adverbs, Sapling):** The magpie flew fast. Pip walked slowly. Pick the sign for each: The magpie went faster than Pip. Pip went more slowly than the magpie.
+**How they moved (adverbs, Sapling):** The magpie flew fast. Pip walked slowly. Pick the sign for each.
+- The magpie went ___ than Pip. (faster ✔ · more faster · fastest)
+- Pip went ___ than the magpie. (more slowly ✔ · most slowly · slowlier)
+- (Not shown: slower is also correct for Pip, so it is never offered as a wrong choice.)
 
 ### (e) Where Exactly? (Sapling)
 
@@ -464,9 +459,9 @@ Worked example: *When the party ended, Dot sorted the hats.*
 **Header:** The magpie borrowed things. Help Dot give them back clearly.
 
 **Who is she?** Tap any pronoun that could point to two people. Then pick the clearer note.
-- Dot gave the miller the button because she found it. → Dot found the button, so she gave it to the miller.
-- Bramble told Dot that she had lost her ribbon. → Bramble had lost her ribbon. She told Dot.
-- The baker thanked Pip when he found the spoon. → When Pip found the spoon, the baker thanked him.
+- The miller gave Dot the spoon after she cleaned it. (unclear: she) → The miller cleaned the spoon, then gave it to Dot.
+- Bramble told Dot that she had lost her ribbon. (unclear: she, her) → Bramble had lost her ribbon. She told Dot.
+- The baker thanked Pip when he found the button. (unclear: he) → When Pip found the button, the baker thanked him.
 
 **Who is she? feedback:**
 - Unclear pronoun found: Yes. Two people could be meant. Who is it?
@@ -480,8 +475,6 @@ Worked example: *When the party ended, Dot sorted the hats.*
 
 **Himself or him?** Two pictures: Pip helped himself to cake (Pip takes a slice) · Pip helped him to cake (Pip passes a slice to the baker). Tap the sentence for each.
 
-**Keeper's Desk:** The finished notice (bench a) opens here too.
-
 ## Problem sets
 
 Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ marks the right one. Tags in backticks name the misconception a wrong choice tests.
@@ -489,6 +482,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set A. Which hat? (Seedling, Sapling, Keeper's Desk)
 
 **A1 (Seedling, guided).** Steps shown first: 1. Look at the six pegs. 2. Count the hats each description fits. 3. Pick the one that fits only Dot's.
+- Sentence: Dot's hat hangs on peg 1. The six pegs are shown.
 - Prompt: Which description fits only Dot's hat?
 - Choices: the small blue hat (`too-little-detail`) · the small old blue hat ✔ · the small old blue hat with a gold ribbon (`detail-that-doesnt-fit`)
 - Feedback: Small blue: Two hats are small and blue. One is new. · Gold ribbon: Dot's hat has no ribbon. Now no hat fits.
@@ -499,7 +493,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Sentence: Ember's hat is ___.
 - Prompt: Which says the words in the usual order?
 - Choices: a new big red hat (`order-any-way`) · a red big new hat (`order-any-way`) · a big new red hat ✔
-- Feedback: New big red: Clear, but it sounds odd. We usually say size before age. · Red big new: Clear, but color usually goes nearest the noun.
+- Feedback: New big red: Clear, but it sounds odd. We usually say size before age. · Red big new: Clear, but color usually comes last, just before hat.
 - Hint: Say each one aloud. Size, then age, then color.
 - Explanation: Big is size, new is age, red is color. That's the usual order.
 
@@ -520,10 +514,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **A5 (Sapling).**
 - Prompt: Which is the usual order for these words?
-- Choices: small Dot's old hat (`determiner-after-adjective`) · small old Dot's hat (`determiner-after-adjective`) · Dot's small old hat ✔
-- Feedback: Small Dot's: Dot's is a determiner. Determiners come first. · Small old Dot's: Dot's goes before all the describing words.
+- Choices: small my old hat (`determiner-after-adjective`) · small old my hat (`determiner-after-adjective`) · my small old hat ✔
+- Feedback: Small my: My is a determiner. Determiners come first. · Small old my: My goes before all the describing words.
 - Hint: Words like the, my and Dot's go at the very front.
-- Explanation: Determiners such as the, my and Dot's come before any adjectives.
+- Explanation: Determiners such as the, my and Dot's come before any adjectives: my small old hat.
 
 **A6 (Keeper's Desk).**
 - Prompt: Which is true about the usual order of adjectives?
@@ -550,7 +544,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Patience names something, so it is a noun. You just can't touch it.
 
 **B3 (Seedling).**
-- Sentence: Dot thanked Pip for his ___.
+- Sentence: Pip waited all afternoon. Dot thanked him for his ___.
 - Prompt: Which word fits the gap?
 - Choices: patient (`adjective-for-noun`) · patiently (`adverb-for-noun`) · patience ✔
 - Feedback: Patient: Patient describes Pip. After "his" here, we need a noun. · Patiently: Patiently tells how. After "his" here, we need a noun.
@@ -560,20 +554,20 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set C. How did it go? (Seedling, Sapling)
 
 **C1 (Seedling, guided).** Steps shown first: 1. Find the word it tells about. 2. Is that a noun or a verb? 3. Noun: adjective. Verb: adverb.
-- Sentence: The magpie hopped ___ across the table.
+- Sentence: The magpie set the spoon down ___.
 - Prompt: Which word fits the gap?
-- Choices: quick (`adjective-for-verb`) · quickly ✔ · quicker (`comparison-without-two`)
-- Feedback: Quick: It tells how the magpie hopped. Hopped is a verb, so add -ly. · Quicker: Quicker than what? Nothing is compared here.
-- Hint: Is it telling about the magpie, or about how it hopped?
-- Explanation: Quickly tells how the magpie hopped. Words that tell about verbs are adverbs.
+- Choices: gentle (`adjective-for-verb`) · gently ✔ · gentleness (`noun-for-adverb`)
+- Feedback: Gentle: It tells how the magpie set it down. That's a verb, so use gently. · Gentleness: Gentleness is a noun. We need a word that tells how.
+- Hint: Is it telling about the magpie, or about how it set the spoon down?
+- Explanation: Gently tells how the magpie set the spoon down. Words that tell about verbs are adverbs.
 
 **C2 (Seedling).**
-- Sentence: Ember's cake was ___.
+- Sentence: After the party, the café was ___.
 - Prompt: Which word fits the gap?
-- Choices: delicious ✔ · deliciously (`adverb-after-be`) · more deliciously (`adverb-after-be`)
-- Feedback: Deliciously: After "was," we describe the cake. Use an adjective. · More deliciously: After "was," we describe the cake. Nothing is compared.
-- Hint: Is it telling about the cake, or about doing something?
-- Explanation: After is, was and seems, an adjective describes the noun. The cake was delicious.
+- Choices: quiet ✔ · quietly (`adverb-after-be`) · more quietly (`adverb-after-be`)
+- Feedback: Quietly: After "was," we describe the café. Use an adjective. · More quietly: That's still an adverb. After "was," describe the café.
+- Hint: Is it telling about the café, or about doing something?
+- Explanation: After is, was and seems, an adjective describes the noun. The café was quiet.
 
 **C3 (Sapling).**
 - Prompt: In which sentence is the -ly word an adjective?
@@ -605,7 +599,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Choices: biger (`no-doubling`) · bigerr (`doubles-wrong-letter`) · bigger ✔
 - Feedback: Biger: Big ends in one vowel letter, then one consonant letter. Double it. · Bigerr: Double the g at the end of big, not the r.
 - Hint: Big: one vowel letter, then one consonant letter at the end.
-- Explanation: After one vowel letter and one consonant letter, double the consonant: big, bigger, biggest.
+- Explanation: A short word ending in one vowel letter, then one consonant letter, doubles it: big, bigger, biggest.
 
 **D3 (Sapling).**
 - Sentence: Bramble's ribbon is the ___ one at the party.
@@ -616,7 +610,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Long adjectives use more and most. The most colorful ribbon of all.
 
 **D4 (Sapling).**
-- Sentence: Pip's first cake was good. His second was ___.
+- Sentence: Pip baked two cakes. The first was good. The second was ___.
 - Prompt: Which word fits the gap?
 - Choices: best (`superlative-for-two`) · gooder (`regular-for-irregular`) · better ✔
 - Feedback: Best: Only two cakes are compared, so better. · Gooder: Good has its own forms: good, better, best.
@@ -627,7 +621,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Sentence: Dot wrapped the gift ___ than Pip did.
 - Prompt: Which words fit the gap?
 - Choices: more carefully ✔ · carefuller (`er-on-ly-adverb`) · most carefully (`superlative-for-two`)
-- Feedback: Carefuller: Carefully is a long -ly adverb. It takes more. · Most carefully: Two people are compared, so more, not most.
+- Feedback: Carefuller: We need the adverb carefully. Most -ly adverbs take more. · Most carefully: Two people are compared, so more, not most.
 - Hint: Is it two people, or three or more? Is carefully short or long?
 - Explanation: Most -ly adverbs compare with more. Two people: more carefully.
 
@@ -659,8 +653,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set F. Whose is it? (Sapling, Keeper's Desk)
 
 **F1 (Sapling, guided).** Steps shown first: 1. Find the name used twice. 2. Swap the second one for a pronoun. 3. Read it aloud.
-- Sentence: Dot found Dot's hat on the top peg.
-- Prompt: Which word can replace the second "Dot's"?
+- Sentence: Dot found Dot's hat on the first peg.
+- Prompt: Which word can replace "Dot's"?
 - Choices: her ✔ · hers (`pronoun-before-noun`) · herself (`reflexive-for-possessive`)
 - Feedback: Hers: Hers stands alone. Before a noun like hat, use her. · Herself: Herself points back to the doer, like "Dot warmed herself."
 - Hint: Dot found ___ hat.
@@ -699,7 +693,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Hers stands alone, with no noun after it. It is a possessive pronoun.
 
 **F6 (Keeper's Desk).**
-- Sentence: When the party ended, Dot found her small old hat under the table.
+- Sentence: When the party ended, Dot found her small old hat on the first peg.
 - Prompt: What is "When the party ended" in this sentence?
 - Choices: a subordinate clause ✔ · a prepositional phrase (`clause-as-phrase`) · a noun phrase (`clause-as-noun-phrase`)
 - Feedback: Prepositional phrase: It has a subject, the party, and a verb, ended. That makes it a clause. · Noun phrase: It has a verb, ended. It is a clause that leans on the main clause.
@@ -707,8 +701,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: It has a subject and a verb but can't stand alone. It's a subordinate clause, starting with the conjunction when.
 
 **F7 (Keeper's Desk, match).** Match each word to its name.
-- Sentence: When the party ended, Dot quickly found her hat under the table. Hers was the smallest.
-- Pairs: When → conjunction · the → determiner · quickly → adverb · under → preposition · Hers → possessive pronoun · smallest → superlative
+- Sentence: When the party ended, Dot quickly found her hat on the first peg. Hers was smaller than Puff's.
+- Pairs: When → conjunction · the → determiner · quickly → adverb · on → preposition · Hers → possessive pronoun · smaller → comparative
 - Feedback for a wrong pair: Ask what job the word does in this sentence.
 - Hint: Start with the words you are sure of.
 - Explanation: A word's name comes from the job it does in its sentence.
@@ -724,7 +718,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **Step 2, an easier case and how to start:**
 - Hat items: "Try this one first: a red hat. Two red hats are on the pegs. A big red hat fits one. Now count yours."
 - Order items: "Try this one first: a small blue cup. Size, then color. Now find the size word in yours."
-- Abstract noun items: "Try this one first: a spoon and a surprise. You can hold a spoon. Now ask about yours."
+- Abstract noun items: "Try this one first: a spoon and kindness. You can hold a spoon. Now ask about yours."
 - Adjective and adverb items: "Try this one first: a slow snail, crawling slowly. Slow tells about the snail. Now find what yours tells about."
 - Comparing items: "Try this one first: two cups, a bigger cup. Three cups, the biggest. Now count yours."
 - Phrase items: "Try this one first: on the mat. On is the preposition. Now find yours."
@@ -764,10 +758,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ## Grown-up panel
 
-**What this teaches:** adjectives and adverbs and when to use each; comparatives and superlatives, with their spelling; abstract nouns and word families; longer noun phrases with a head noun, describing nouns and prepositional phrases; the usual order of adjectives; prepositional phrases that describe a noun or act as adverbials; pronouns that are clear, reflexive and possessive; and the English national curriculum's Year 3 and 4 terms (preposition, conjunction, clause, subordinate clause, word family, consonant letter, vowel letter, determiner, pronoun, possessive pronoun, adverbial).
+**What this teaches:** describing a thing so exactly that only one fits: adjective or adverb, comparing, abstract nouns, longer noun phrases in the usual order, prepositional phrases, clear pronouns, and the English national curriculum's Year 3 and 4 grammar terms.
 
-**Terms:** this pack uses US spelling and terms. England's curriculum calls a prepositional phrase a "preposition phrase." It treats my, your and her before a noun as determiners and keeps "possessive pronoun" for mine, yours and hers; many American books call my and her possessive pronouns or possessive adjectives. Both are in use. Direct speech and inverted commas are taught in Speech Marks for the Puppets (pack 264), prefixes in Word Garden and packs 263 and 266, and fronted adverbials with commas in pack 264.
+**Terms:** this pack uses US spelling and terms. England's curriculum calls a prepositional phrase a "preposition phrase." It treats my, your and her before a noun as determiners and keeps "possessive pronoun" for mine, yours and hers; many American books call my and her possessive pronouns or possessive adjectives. Both are in use.
 
-**What it does not claim:** the adjective order here is a strong habit of English, not a law; grammar books list the full order differently (some put shape before age), and writers break it on purpose. "Two things: -er; three or more: -est" is the school convention; people sometimes say "the best of the two" in speech. Some adverbs without -ly are standard (fast, hard, and slow in "go slow"). Two-syllable adjectives vary: quieter and more quiet are both used. The senses test for abstract nouns is a rule of thumb; some nouns sit on the line. A spoken or regional form is never marked wrong here; the items practice the forms most used in writing. Willowbank and its party are invented.
+**What it does not claim:** the adjective order here is a strong habit of English, not a law; grammar books list the full order differently (some put shape before age), and writers break it on purpose. "Two things: -er; three or more: -est" is the school convention; people sometimes say "the best of the two" in speech. Some adverbs without -ly are standard (fast, hard, and slow in "go slow"). Two-syllable adjectives vary: quieter and more quiet are both used. The senses test for abstract nouns is a rule of thumb; some nouns sit on the line. The items practice the forms most used in writing; feedback names what writing usually uses and never calls a spoken or regional form bad. "Dot and myself went" is common in speech; writing usually keeps myself for pointing back (Dot and I went; I helped myself), and nothing here scolds the spoken form. Willowbank and its party are invented.
 
 **Talk and writing:** "Say why" answers are spoken to you and never stored. Nothing the child writes or says is recorded.

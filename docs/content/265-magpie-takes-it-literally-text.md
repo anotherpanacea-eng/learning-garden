@@ -174,7 +174,7 @@ Worked example: *"Nobody spoke. Dot told a joke to break the ice. Soon everyone 
 > A proverb is an old saying that gives advice. "The early bird catches the worm" means starting early can help.
 
 Worked example: *"Don't judge a book by its cover."*
-1. Is it about books? Partly.
+1. Is it about books? Not really.
 2. What advice does it give? Don't decide too fast from how something looks.
 3. You could say it about a person, a plan, or a cake.
 
@@ -187,12 +187,12 @@ Worked example: *Heavy rain.*
 3. Different pictures. Same meaning: very heavy rain.
 
 **Card 8. Similes (Seedling)**
-> A simile compares two different kinds of things using "like" or "as." Two things of the same kind are not a simile.
+> A simile compares two different kinds of things, usually with "like" or "as." Comparing two of the same kind, like two hats, is usually called a plain comparison.
 
 Worked example: *"Ember glows like a lantern."*
 1. A dragon and a lantern: different kinds of things.
 2. It uses "like."
-3. A simile. "Dot's hat is like Bramble's hat" compares two hats: not a simile.
+3. A simile. "Dot's hat is like Bramble's hat" compares two hats: a plain comparison.
 
 **Card 9. Metaphors (Seedling)**
 > A metaphor says one thing is another. Ask two questions: what two things are compared? What do they share?
@@ -203,7 +203,7 @@ Worked example: *"The cake is a golden hill."*
 3. Not shared: grass, sheep. A metaphor borrows only some things.
 
 **Card 10. Like a person (Sapling)**
-> Personification gives a thing a person's feelings or actions. "The leaves hang trembling" makes leaves seem afraid.
+> Personification gives a thing a person's feelings or actions. "The trees bow down their heads" makes trees seem like people.
 
 Worked example: *"The wind howled down the chimney."*
 1. Who howls? Wolves, dogs, upset people.
@@ -235,7 +235,7 @@ Worked example: *"The market is the town's heart."*
 3. Reasons might: who meets there, what is sold.
 
 **Card 14. Saying the opposite (Keeper's Desk)**
-> Irony is when words or events turn out opposite to what you'd expect. Saying "Lovely weather!" in a storm is irony.
+> Irony is saying the opposite of what you mean, or an event turning out opposite to what you'd expect. "Lovely weather!" in a storm is irony.
 
 Worked example: *Two rainy moments.*
 1. Bramble says "Lovely weather" in a downpour: words opposite to meaning. Irony.
@@ -256,7 +256,7 @@ Worked example: *The baker's sign: "Fresh bread. We knead you."*
 Worked example: *Three words for a thin cat.*
 1. Slender: sounds graceful.
 2. Thin: sounds plain.
-3. Scrawny: sounds sorry for it. Same cat, three feelings.
+3. Scrawny: sounds unkind. Same cat, three feelings.
 
 ## Benches
 
@@ -296,7 +296,7 @@ Worked example: *Three words for a thin cat.*
 - Dot: "That riddle was a piece of cake." *The magpie pictures a riddle card on a cake plate.*
 - The miller: "It's raining cats and dogs." *The magpie pictures cats and dogs under tiny umbrellas, falling.*
 
-**Say it plain:** Now pick plain words that mean the same.
+**How the cards play:** five cards are set B items (horse B1, butterflies B3, cake B4, ice B5, cat B6). The miller's card shows its meaning, then joins the two trays.
 
 **The magpie, after each right meaning:** "Oh. So no horse." · "So the pond is fine." · "So Ember is just nervous." · "So the cat was never in a bag." · "So nobody ate the riddle." · "So it's only very wet."
 
@@ -325,7 +325,12 @@ Worked example: *Three words for a thin cat.*
 
 **Proverb cards (A true thing about language):** The early bird catches the worm. · Don't judge a book by its cover. · Actions speak louder than words.
 
-**When would you say it?** Pick the moment that fits each proverb.
+**When would you say it?** Match each moment to a proverb.
+- Dot gets to the market first and finds the best apples. → The early bird catches the worm.
+- The plainest cake at the party tastes the best. → Don't judge a book by its cover.
+- Pip says he'll help tidy up. Dot just picks up a broom. → Actions speak louder than words.
+
+**When would you say it? feedback (`wrong-pair`):** Read the moment again. Which advice does it show?
 
 **Note on Zamora (A true thing from history):** Zamora is a city in Spain. The saying remembers a long fight over the city, hundreds of years ago.
 
@@ -335,9 +340,9 @@ Worked example: *Three words for a thin cat.*
 
 **Header:** Sort each line: a simile, a metaphor, or a plain comparison.
 
-**Lines:** small as a teacup (simile) · glows like a lantern (simile) · the cake is a golden hill (metaphor) · The brook was a silver ribbon (metaphor) · Dot's hat is like Bramble's hat (plain comparison) · Pip runs as fast as Dot (plain comparison)
+**Lines:** small as a teacup (simile) · glows like a lantern (simile) · the cake is a golden hill (metaphor) · The brook was a silver ribbon (metaphor) · Dot's hat is like Bramble's hat (plain comparison) · This cake is as big as last year's cake (plain comparison)
 
-**Plain comparison feedback (`like-means-simile`):** Two hats are the same kind of thing. That's a plain comparison, not a simile.
+**Plain comparison feedback (`like-means-simile`):** Two hats, or two cakes, are the same kind of thing. Most people call that a plain comparison.
 
 **Two things and what they share:** Pick the two things compared. Then pick what they share.
 - The brook / a ribbon / long, thin and shiny
@@ -346,22 +351,22 @@ Worked example: *Three words for a thin cat.*
 
 **Too far?** The magpie asks: "The fog was a gray blanket. So is the fog warm?" Choose: warm, or covering everything.
 
-**Feedback:** Blankets are warm, but the fog borrows only "covering." A metaphor never borrows everything.
+**Feedback:** Blankets are warm, but the fog borrows only "covering." A metaphor doesn't borrow everything.
 
 ### (e) Old Stories in New Words (Sapling)
 
 **Header:** Some words point to an old story. Open the story to find the meaning.
 
 **Cards. Each shows a sentence, the story behind it, and the meaning:**
-- **Herculean.** "Clearing the storm mud was a Herculean task." *A story people told:* Hercules was a hero who had to do twelve huge, hard jobs. **Meaning:** very big and hard. (The Greeks called him Heracles. See gods with two names at Myth, Ash and Empire, `#archive/myths`.)
+- **Herculean.** "Clearing the storm mud was a Herculean task." *A story people told:* Hercules was a hero who had to do twelve huge, hard jobs. **Meaning:** very big and hard. (Hercules is his Roman name. The Greeks called him Heracles. More old stories: Myth, Ash and Empire, `#archive/myths`, once it is built.)
 - **Achilles' heel.** "Pip's Achilles' heel is cake." *A story people told:* the hero Achilles could be hurt nowhere except on one heel. **Meaning:** one weak spot.
 - **Pandora's box.** "Pip's question opened a Pandora's box." *A story people told:* Pandora opened a jar, and troubles flew out into the world. **Meaning:** something that lets out many troubles at once.
 - **The Midas touch.** "The baker has the Midas touch with pies." *A story people told:* King Midas wished that all he touched would turn to gold. Then his supper did too. **Meaning:** a knack for making things go well.
 - **Gargantuan.** "The baker made a gargantuan loaf." *A true thing from history:* Gargantua is a giant with a huge appetite in books by the French writer François Rabelais, from the 1530s. **Meaning:** enormous.
-- **Tilting at windmills.** "Arguing with the weather is tilting at windmills." *A true thing from history:* in *Don Quixote* (1605), by the Spanish writer Miguel de Cervantes, a knight charges at windmills, sure they are giants. **Meaning:** fighting enemies that aren't really there.
-- **Sour grapes.** "Saying the prize was silly was just sour grapes." *A story people told:* in a fable, a fox can't reach some grapes, so he says they must be sour. **Meaning:** pretending you never wanted what you couldn't get. (The whole fable is on the Fable Shelf, `#loft/fables`.)
+- **Tilting at windmills.** "Pip charged at the scarecrow, sure it was a pie thief. He was tilting at windmills." *A true thing from history:* in *Don Quixote* (1605), by the Spanish writer Miguel de Cervantes, a knight charges at windmills, sure they are giants. **Meaning:** fighting enemies that aren't really there.
+- **Sour grapes.** "Saying the prize was silly was just sour grapes." *A story people told:* in a fable, a fox can't reach some grapes, so he says they must be sour. **Meaning:** pretending you never wanted what you couldn't get. (The whole fable is on the Fable Shelf, `#loft/fables`, once it is built.)
 
-**Keeper's note on Pandora (A true thing from history):** In the oldest Greek telling, Pandora's container was a big storage jar. In 1508 the scholar Erasmus wrote it in Latin as a box, and "box" stuck.
+**Keeper's note on Pandora (A true thing from history):** In the oldest Greek telling, Pandora's container was a big storage jar. "Box" came much later. It is usually traced to the scholar Erasmus, who retold the story in Latin in 1508.
 
 **Keeper's note on Gargantua (A true thing about language):** The giant's name may come from *garganta* **[ES]**, a Spanish word for throat. Nobody is sure.
 
@@ -379,7 +384,7 @@ Worked example: *Three words for a thin cat.*
 - Dot: "The meadow is a breath of fresh air." **Plain:** the meadow is pleasant and new. **Leaves out:** how far it is to carry the stalls.
 
 **Act IV version (opens after page 4; A story from Willowbank):**
-- Bramble: "A wall is the town's umbrella." **Plain:** a higher wall would keep floodwater off the houses and orchard behind it. **Leaves out:** umbrellas drip at the edges. Where would the water go instead?
+- Bramble: "A wall is the town's umbrella." **Plain:** a higher wall would keep floodwater off the houses and orchard behind it. **Leaves out:** where the water would go instead.
 - Bramble: "The orchard is the town's heart." **Plain:** the orchard families matter a lot to the town. **Leaves out:** which plan protects them best.
 - Bramble: "Draining the Sponge is water under the bridge." **Plain:** the draining is done, so plan for now. **Leaves out:** whether some fields could be wet again.
 - Hollis's old map: "the Sponge." **Plain:** a marsh can hold water and slow it down. **Leaves out:** how much water, and whose fields.
@@ -390,31 +395,31 @@ Worked example: *Three words for a thin cat.*
 **Two Storms (A story from Willowbank):**
 > **Storm A.** It rained all night. The wind blew. In the morning the brook was high.
 >
-> **Storm B.** All night the rain drummed on the roofs. The wind howled down the chimney like a lost dog. By morning the brook was a brown, growling beast.
+> **Storm B.** All night the rain drummed on the roofs. The wind howled down the chimney like a lost dog. By morning the brook was high, a growling beast.
 
 **Two Storms questions:** Are the facts the same? Which words change the feeling?
 
 **One thing, many names (Keeper's Desk).** Tap the feeling each name carries: kind, plain, or unkind.
 - Standalone: the miller's cat is *slender* (kind) · *thin* (plain) · *scrawny* (unkind).
-- Act IV version: the old marsh is *a wetland* (plain) · *the Sponge* (kind) · *a soggy swamp* (unkind). Both sides use loaded names. The plain word is *marsh*.
+- Act IV version: the old marsh is *the Sponge* (kind) · *the marsh* (plain) · *a soggy swamp* (unkind). Both sides can use loaded names.
 
 ### (g) Saying the Opposite (Keeper's Desk)
 
 **Header:** Words that say the opposite, play with sound, or keep a picture going.
 
 **Irony cards (A story from Willowbank):**
-- Rain drums on the library roof. Bramble says, "Lovely weather for a meeting about floods." *Words opposite to the meaning: verbal irony.*
+- Rain drums on the library roof. Bramble, dripping, grumbles, "Lovely weather for a meeting about floods." *Words opposite to the meaning: verbal irony.*
 - The baker sells umbrellas at the Fair. On the wettest day, he is the only one soaked. *Events opposite to what you'd expect: situational irony.*
 - It rains on market day. *Just bad luck. Not irony.*
 - When the reader knows something a character doesn't, that's dramatic irony. Meet it at Two Stories of One Flood (`#archive/accounts`).
 
 **Pun card (A story from Willowbank):** The baker's sign: "Fresh bread. We knead you." The magpie: "Need, or knead? Both, I suppose."
 
-**Oxymoron card (A true thing from history):** In *Romeo and Juliet* (about 1597), William Shakespeare's Juliet says parting is "such sweet sorrow." Sweet and sorrow are opposites, joined.
+**Oxymoron card (A true thing from history):** In *Romeo and Juliet* (first printed 1597), William Shakespeare's Juliet says parting is "such sweet sorrow." Sweet and sorrow are opposites, joined.
 
 **Extended metaphor cards (A true thing from history):**
-- Emily Dickinson's poem, first printed in 1891, begins: *"Hope" is the thing with feathers / That perches in the soul.* Tap the bird words that keep the picture going.
-- Robert Louis Stevenson's "Windy Nights" (*A Child's Garden of Verses*, 1885) begins: *Whenever the moon and stars are set, / Whenever the wind is high, / All night long in the dark and wet, / A man goes riding by.* Who is the rider?
+- Emily Dickinson's poem "Hope," as first printed in 1891, begins: *Hope is the thing with feathers / That perches in the soul,* Tap the bird words that keep the picture going.
+- Robert Louis Stevenson's "Windy Nights" (*A Child's Garden of Verses*, 1885) begins: *Whenever the moon and stars are set, / Whenever the wind is high, / All night long in the dark and wet, / A man goes riding by.* The poem never says who the rider is. Many readers hear the wind, galloping all night. What do you think? Tell a grown-up.
 
 **The magpie, on Dickinson:** "I have feathers. I perch. Am I hope?" Bramble: "Today, a bit."
 
@@ -482,7 +487,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: The lines around it show the meaning: people relaxed and started talking.
 
 **B6 (Seedling).**
-- Prompt: "Pip let the cat out of the bag about the cake." Which is right?
+- Prompt: "Pip let the cat out of the bag about the cake." What does it mean?
 - Choices: Pip opened a sack with a cat in it (`literal-reading`) · Pip told the surprise too soon ✔ · Pip lost a bag at the party (`word-association`)
 - Feedback: Sack: The miller's cat is asleep by the fire. · Lost a bag: Nothing was lost. Something was told.
 - Hint: What was meant to be a secret at the party?
@@ -524,7 +529,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Choices: Yes, because it uses like (`like-means-simile`) · No, both are hats ✔ · No, similes need as (`as-only`)
 - Feedback: Uses like: "Like" alone isn't enough. A simile compares different kinds of things. · Needs as: Similes can use like or as.
 - Hint: Are the two things different kinds, or the same kind?
-- Explanation: Two hats are the same kind of thing. That's a plain comparison.
+- Explanation: Two hats are the same kind of thing. Most people call that a plain comparison.
 
 **D3 (Sapling).**
 - Prompt: "The brook was a silver ribbon." Which two things are compared?
@@ -536,7 +541,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **D4 (Sapling).**
 - Prompt: "The fog was a gray blanket over the town." What does it show?
 - Choices: The fog covered everything ✔ · Someone left a blanket outside (`literal-reading`) · The fog was warm and cozy (`wrong-quality`)
-- Feedback: Blanket outside: That's the magpie's picture. · Warm: Fog is cold. The metaphor borrows covering, not warmth.
+- Feedback: Blanket outside: That's the magpie's picture. · Warm: Fog isn't cozy. The metaphor borrows covering, not warmth.
 - Hint: What does a blanket do to a bed?
 - Explanation: A metaphor borrows some things, not all. The fog covered the town.
 
@@ -572,12 +577,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Hint: Find the sound words in Storm B.
 - Explanation: Same facts, different feeling. Word choices made the storm wild.
 
-**F2 (Sapling).** *But when the leaves hang trembling, / The wind is passing through.* (Christina Rossetti, 1872)
-- Prompt: Which word makes the leaves seem like a person?
-- Choices: hang (`wrong-word`) · trembling ✔ · passing through (`wrong-word`)
-- Feedback: Hang: Leaves really do hang. · Passing through: That's what the wind does, not a feeling.
-- Hint: Which word could describe someone afraid?
-- Explanation: People tremble when afraid. "Trembling" gives the leaves a feeling.
+**F2 (Sapling).** *But when the trees bow down their heads / The wind is passing by.* (Christina Rossetti, *Sing-Song*, 1872)
+- Prompt: Which word makes the trees seem like people?
+- Choices: trees (`wrong-word`) · heads ✔ · passing (`wrong-word`)
+- Feedback: Trees: That word just names them. · Passing: Wind really does pass by. That isn't a person word.
+- Hint: Trees have trunks and branches. Which word belongs to a person?
+- Explanation: Trees have no heads. "Bow down their heads" makes them seem like people.
 
 **F3 (Sapling).**
 - Prompt: Does "the market is the town's heart" prove the market should stay?
@@ -593,10 +598,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set G. Saying the opposite (Keeper's Desk)
 
 **G1 (Keeper's Desk).**
-- Prompt: In a downpour, Bramble says, "Lovely weather." What is she doing?
-- Choices: Saying the opposite of what she means ✔ · Telling everyone she really loves floods (`literal-reading`) · Getting the weather wrong, by accident (`irony-is-error`)
-- Feedback: Loves floods: Look at her, rain dripping off her hat. She doesn't mean it. · Mistake: She can see the rain. She means it on purpose.
-- Hint: Is the weather lovely? Does she know that?
+- Prompt: Soaked in a downpour, Bramble grumbles, "Lovely weather." What is she doing?
+- Choices: Saying the opposite of what she means ✔ · Telling everyone she truly loves the rain (`literal-reading`) · Getting the weather wrong, by accident (`irony-is-error`)
+- Feedback: Loves rain: She's soaked and grumbling. She doesn't mean it. · Mistake: She can see the rain. She said it on purpose.
+- Hint: How does she sound? Does she know it's raining?
 - Explanation: Saying the opposite on purpose is verbal irony.
 
 **G2 (Keeper's Desk).**
@@ -604,7 +609,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Choices: It's a spelling mistake (`pun-is-typo`) · Knead and need mean exactly the same thing (`homophone-same-meaning`) · It sounds like need, but bakers knead ✔
 - Feedback: Mistake: The baker chose it on purpose. · Same meaning: Knead means pressing dough. Need means wanting.
 - Hint: Say "knead" aloud. What other word sounds the same?
-- Explanation: One sound, two meanings, both true at once. That's a pun.
+- Explanation: One sound, two meanings at once. That's a pun.
 
 **G3 (Keeper's Desk).**
 - Prompt: Which one is an oxymoron?
@@ -622,8 +627,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **G5 (Keeper's Desk).**
 - Prompt: In Dickinson's lines, which words keep the bird picture going?
-- Choices: Hope, thing and soul (`tenor-vehicle-swap`) · That and in (`function-words`) · feathers, perches ✔
-- Feedback: Hope, thing and soul: Those name what the poem is about. The bird words describe it. · That and in: These small words carry no picture.
+- Choices: Hope and soul (`tenor-vehicle-swap`) · That, with, the and in (`function-words`) · Feathers and perches ✔
+- Feedback: Hope and soul: Those name what the poem is about. The bird words describe it. · That, with, the and in: These small words carry no picture.
 - Hint: Which words would you use for a bird?
 - Explanation: Feathers, perches and later lines keep one picture going: an extended metaphor.
 
@@ -650,12 +655,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Figure of speech:** a way of saying something that isn't meant literally, like a simile or an idiom.
 - **Idiom:** a group of words with its own meaning, like "a piece of cake."
 - **Proverb:** an old saying that gives advice.
-- **Simile:** a comparison of two different kinds of things using "like" or "as."
+- **Simile:** a comparison of two different kinds of things, usually with "like" or "as."
 - **Metaphor:** saying one thing is another, to show what they share.
 - **Personification:** giving a thing a person's feelings or actions.
 - **Allusion:** a word or phrase that points to a famous story.
 - **Plain claim:** what a figure of speech means, said in plain words.
-- **Irony:** words or events that turn out opposite to what you'd expect.
+- **Irony:** saying the opposite of what you mean, or events turning out opposite to what you'd expect.
 - **Pun:** a joke that plays with two meanings of one sound or word.
 - **Oxymoron:** two opposite words joined, like "sweet sorrow."
 - **Extended metaphor:** a metaphor that keeps going for many lines.

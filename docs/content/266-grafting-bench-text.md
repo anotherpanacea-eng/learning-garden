@@ -45,7 +45,7 @@ Companion to [spec 266](../specs/266-grafting-bench.md). Use as written, after r
 >
 > Nobody knows. So {guide} fetches the librarian, who brings the big dictionary.
 >
-> The librarian reads, and smiles. "Very old cousins. Graft was named after a pointed writing stick."
+> The librarian reads, and smiles. "Very old cousins. Graft was probably named after a pointed writing stick."
 >
 > The orchard keeper holds up her twig. It is thin and pointed, like a pencil.
 >
@@ -108,7 +108,7 @@ Worked example: *Growl.*
 3. It isn't about growing. Not family.
 
 **Card 3. Prefixes that change actions: re- and over-**
-> A prefix joins the front of a verb and changes the action. Re- means again or back. Over- means too much.
+> A prefix joins the front of a verb and changes the action. Re- can mean again or back. Over- often means too much.
 
 Worked example: *Plant and water.*
 1. Replant: plant again.
@@ -116,7 +116,7 @@ Worked example: *Plant and water.*
 3. The action stays. The prefix changes how it's done.
 
 **Card 4. Prefixes that change actions: dis-, de- and mis-**
-> Dis- often means the opposite. De- means undo or take away. Mis- means wrongly.
+> Dis- often means the opposite. De- can mean undo or take away. Mis- means wrongly.
 
 Worked example: *Three actions.*
 1. Disappear: the opposite of appear.
@@ -132,7 +132,7 @@ Worked example: *Three new verbs.*
 3. memory → memorize (the y drops off)
 
 **Card 6. Roots from Latin**
-> Many English words have Latin roots. Port means carry. Scrib and script mean write. Vox means voice. Dict means say.
+> Many English words have Latin roots. Port means carry. Scrib and script mean write. Vox and voc mean voice. Dict means say.
 
 Worked example: *Transport.*
 1. Trans- means across.
@@ -148,7 +148,7 @@ Worked example: *Autograph.*
 3. An autograph: your name, written by yourself.
 
 **Card 8. Cousins in other languages**
-> Spanish and French grew from Latin, so they share many roots with English words. Cousins can help you guess a meaning.
+> Spanish and French grew from Latin. English took many words from Latin and French. So cousins can help you guess a meaning.
 
 Worked example: *Write.*
 1. Latin: scribere.
@@ -206,7 +206,7 @@ Worked example: *Bank.*
 **Verbs and prefixed forms (only these grow; each shows its meaning):**
 - appear: disappear (the opposite of appear) · reappear (appear again)
 - agree: disagree (not agree)
-- connect: disconnect (undo the connection) · reconnect (connect again)
+- connect: disconnect (the opposite of connect) · reconnect (connect again)
 - frost: defrost (take the frost away)
 - code: decode (undo the code to find the message)
 - place: misplace (put in the wrong place) · replace (put back, or swap)
@@ -217,16 +217,16 @@ Worked example: *Bank.*
 - tell: retell (tell again)
 - write: rewrite (write again)
 
-**Any other pair (a word to wonder about):** That one isn't in the dictionary. Could it mean something in a story? Try another cutting.
+**Any other pair (a word to wonder about):** That one isn't on our list. Is it a real word? Check a dictionary, or try another cutting.
 
 **Prefix meanings card:**
 - re-: again, or back
-- over-: too much
+- over-: often, too much
 - dis-: the opposite of, or not
 - de-: undo, or take away
 - mis-: wrongly
 
-**Not every over- means too much:** An overcoat goes over your other clothes. Overcoat is a thing, not an action.
+**Not every over- means too much:** An overcoat goes over your other clothes. To overhear is to hear by chance.
 
 ### (c) Verb Makers (Sapling)
 
@@ -268,14 +268,14 @@ Worked example: *Bank.*
 
 **Drifted far:** important is family too. Its meaning drifted a long way from carry.
 
-**Card after the bench (A true thing about language):** Three languages, one Latin root. English borrowed it. Spanish and French grew from it.
+**Card after the bench (A true thing about language):** Three languages, one Latin root. Spanish and French grew from Latin. English borrowed many Latin words.
 
 **More rootstocks (after the first slice):**
-- scrib, script (write): describe · script · manuscript. Cousins: *escribir* (to write), *écrire* (to write). (fluent reader)
-- vox (voice): vocal · voice. Cousins: *voz* (voice), *voix* (voice). (fluent reader)
-- dict (say): predict · contradict. Cousins: *decir* (to say), *dire* (to say). (fluent reader)
+- scrib, script (write): describe (tell in words) · script (the written lines of a play) · manuscript (written by hand). Cousins: *escribir* (to write), *écrire* (to write). (fluent reader)
+- vox, voc (voice): vocal (using the voice) · voice. Cousins: *voz* (voice), *voix* (voice). (fluent reader)
+- dict (say): predict (say before it happens) · contradict (say the opposite). Cousins: *decir* (to say), *dire* (to say). (fluent reader)
 
-**Greek corner:** graph (write): autograph, photograph. tele (far), phon (sound): telephone. Cousins: *teléfono*, *téléphone*. (fluent reader)
+**Greek corner:** graph (write): autograph (your name, written by you), photograph (light + write). tele (far), phon (sound): telephone. Cousins: *teléfono*, *téléphone*. (fluent reader)
 
 ### (e) Cousin Letters (Sapling)
 
@@ -312,9 +312,9 @@ Worked example: *Bank.*
 **Tool 2, look inside it:** port (carry) + -age (the act of).
 
 **Tool 3, look it up (dictionary card, A true thing about language):**
-> **portage** (noun) 1. carrying boats or goods over land, from one water to another, or around rapids. 2. the place where this is done.
+> **portage** 1. (noun) carrying boats or goods over land, from one water to another, or around rapids. 2. (noun) the place where this is done. 3. (verb) to carry a boat over land this way.
 
-**Tool 4, check it fits:** "So we carry the boat over land." It fits.
+**Tool 4, check it fits:** Use sense 3, the verb: "So we carry the boat over land." It fits.
 
 **Two meanings shelf:** current (moving water; happening now) · bank (ground by a river; a place for money) · stock (the rooted part of a grafted tree; goods in a shop; a cooking broth).
 
@@ -327,7 +327,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **A1 (Sprout, guided).** Steps shown first: 1. Say grow. 2. Look for grow inside. 3. Is it about growing?
 - Prompt: Which word is in the grow family?
 - Choices: growled (`same-letters-same-family`) · regrow ✔ · row (`same-letters-same-family`)
-- Feedback: growled: Growled is about a sound. It isn't about growing. · row: Row is part of grow, but means a line.
+- Feedback: growled: Growled is about a sound. It isn't about growing. · row: Row hides inside grow, but it isn't about growing.
 - Hint: Which one means grow again?
 - Explanation: Regrow means grow again. Same root, same meaning.
 
@@ -385,7 +385,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: Which prefix turns appear into its opposite?
 - Choices: dis- ✔ · re- (`re-means-opposite`) · over- (`over-means-opposite`)
 - Feedback: re-: Reappear means appear again. · over-: Overappear isn't a usual word.
-- Hint: When the moth flew off, it ___ appeared.
+- Hint: When the moth flew off, it ___appeared.
 - Explanation: Disappear is the opposite of appear.
 
 **B5 (Sapling).**
@@ -405,7 +405,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Pollen becomes pollinate. Bees pollinate flowers.
 
 **C2 (Sapling).**
-- Prompt: Which word is the verb that grew from simple?
+- Prompt: Which word is the verb in the simple family?
 - Choices: simplicity (`suffix-always-verb`) · simplify ✔ · simply (`suffix-always-verb`)
 - Feedback: simplicity: Simplicity names a thing. It isn't an action. · simply: Simply tells how. It isn't an action.
 - Hint: The librarian will ___ the map.
@@ -464,10 +464,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ### Set E. The unknown word (Keeper's Desk)
 
-**E1 (Keeper's Desk, guided).** Steps shown first: 1. Read around portage. 2. Look inside: port. 3. Guess, then check.
+**E1 (Keeper's Desk, guided; Léon's note is shown with the item).** Steps shown first: 1. Read around portage. 2. Look inside: port. 3. Guess, then check.
 - Prompt: In Léon's note, what does portage mean?
 - Choices: carrying a boat over land ✔ · rowing past the falls (`ignore-context`) · a harbor where boats rest (`letters-not-sentence`)
-- Feedback: rowing: The river's too wild to row. They lift the boat out. · harbor: Nobody stops in a harbor. Look at what they do.
+- Feedback: rowing: The river's too wild to row. They lift the boat out. · harbor: Port, the harbor word, comes from a different Latin word. Here they carry the boat.
 - Hint: What do they do with the boat?
 - Explanation: Port means carry. They carry the boat over land.
 
@@ -529,6 +529,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Greek:** the language of ancient Greece. English borrowed many Greek roots.
 - **Cousin words:** words in different languages that grew from the same root.
 - **Context:** the words and sentences around a word.
+- **Rapids:** a part of a river where the water runs fast and rough.
 - **Dictionary entry:** what a dictionary says about one word, with each meaning numbered.
 - **Sense:** one meaning of a word that has several.
 - **Rootstock:** the rooted part of a grafted tree. Also called the stock.
@@ -547,6 +548,6 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **Spelling: -ize and -ise.** The child text uses US spelling: memorize, fossilize, magnetize. In British English these are often spelled -ise (memorise); Oxford spelling keeps -ize. Some verbs end in -ise in every kind of English (advertise, surprise, exercise, supervise), because they were never made with the suffix. The English national curriculum calls these suffixes "-ate, -ise, -ify". The ending -en also makes verbs (sharpen, darken); it isn't taught here.
 
-**Spanish and French:** the cousin words and letter lines are short and always shown with English. A fluent reader has checked them before release (required). Cousin words are often called cognates. Words that look alike but mean different things, like *librería* (bookshop), are often called false friends.
+**Spanish and French:** the cousin words and letter lines are short and always shown with English. A fluent reader must check them before release. Cousin words are often called cognates. Words that look alike but mean different things, like *librería* (bookshop), are often called false friends.
 
-**What it does not claim:** a shared root is a clue, not proof of a meaning. The pack shows a small, checked set of roots, not every Latin or Greek root. Real grafting science is taught at the Orchard Year (`#orchard/year`), not here.
+**What it does not claim:** a shared root is a clue, not proof of a meaning. The pack shows a small, checked set of roots, not every Latin or Greek root. Real grafting science is taught at the Orchard Year (`#orchard/year`), not here. The *bank* card is simplified: many dictionaries give the river bank and the money bank separate entries, because they are two different words that happen to match.
