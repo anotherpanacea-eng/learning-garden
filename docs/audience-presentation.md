@@ -1,0 +1,40 @@
+# Audience presentation: one world, several ways to see it
+
+Proposed bounded design, 2026-10-25; no runtime style selector exists. Companion to the [course routes](course-routes.md) and [media inventory](story-milestones-and-films.md#joined-media-inventory). This proposal commissions no new cast, voice recordings or wholesale art replacement.
+
+## Choice without sorting children
+
+Offer **Storybook** and **Field Journal** as optional presentations to everyone. A later **Mystery & Adventure** treatment is a candidate only. Never select a style from age, gender, pronouns, avatar, school level or performance. Keep style, subject challenge, English reading support, French language load, avatar and guide independent. Do not collect demographic information to make this work. The existing guide/character presets remain selectable; broaden representation through separately reviewed art/content without changing which tasks can be played.
+
+| Element | Storybook | Field Journal | Shared invariant |
+| --- | --- | --- | --- |
+| Framing | Expressive characters, warm humor, helping neighbors | Notebooks, maps, quieter humor, investigator/designer/correspondent | Same world, named events, relationships and story closures |
+| Parcel hook | “Pip found a very wet parcel. Who could the Keeper be?” | “The storm left an undelivered parcel addressed to the Keeper of the Ways. Nobody here recognizes the title.” | Same available clues, reveal timing and explicit Keep/Read actions |
+| Café | Peculiar guests and silly cupboard | Tasting counter and supply problems; keep whimsical guests if desired | Same guest wishes, quantities, units, ingredient properties and multiple valid plates |
+| Post Office | Flying adventure and rival banter | Dispatch, route tests and a local message, with any later correspondent appearing only at spec 120’s reviewed reveal point | Same route semantics, tasks and optional help |
+| Garden / Desk | Find a creature; help compare plans | Habitat survey; evidence dossier and recommendation | Observation/model distinction and source meaning unchanged |
+| Celebration | Brief flourish and character response | Letter received, artifact filed, exhibition opened | Same story completion; presentation never creates learning evidence |
+
+Field Journal is not just smaller text and gray colors. Retain legibility, warmth, agency and delight. A mature treatment can ask the same accessible mathematical question with a less instructional voice. Changing a character's name or hiding teaching does not provide deeper work; the course route supplies deeper analysis, interpretation and authorship where appropriate. Keep helpful instructions obvious in both treatments.
+
+## First comparison: parcel and one café turn
+
+Bound CR1 to the existing parcel/Page 1 invitation and a normal café order/plate/question/serve sequence. Use the same cast, pictures initially, and existing controls. The table’s hooks are concept examples, not approved replacement script. Any parcel, Page 1 or reveal-copy variant amends spec 120 §16.1 and needs independent story review, English read-aloud/text parity, `lang="en"`, and §16 palette/contrast compliance. Change a small set of independently reviewed introductory/transition/celebration copy and presentation tokens; keep canonical source passages, old-map text and task statements unchanged unless a separately reviewed variant is deliberately authored. Show “Presentation” with two plainly named options in preferences and a usable preview; **Storybook means the current shipped copy and appearance by default**, not the unreviewed sample hook above; no third default mode is introduced. Put the Presentation choice in the existing Grown-up preferences, visible with the current child-facing style preview and freely reversible; do not add a demographic question. Switching is reversible during pending work.
+
+**Required behavior for this slice:** no new activity answers, scores, unlocks, course placement or level. Preserve the active explorer's order, ingredients/stock, plate, entered arithmetic, attempt/support history, story scenes, chosen guide/avatar, narration/language settings and current turn. Do not restart a film, announce a task as completed, or replay an ending when style changes. Keep other explorers' choices separate. Existing exports with no presentation preference retain today's default. Unknown future preference values and malformed siblings remain retained under existing preservation rules; the implementation spec must define the smallest compatible preference field without normalizing old saves.
+
+A pending task's frozen source, choices, order and semantics stay unchanged across style switch/reload/import. Use presentation around that source rather than replacing it. Story replays can use current reviewed framing, but keep scene identity/reveal rules stable. No progress reset or learner-data upload. Save-off stays session-only. No appearance or narration preference is interpreted as a skill observation.
+
+**Before building:** inventory only the parcel/café copy and colors actually changed; identify immutable task/source strings, labels and exposure-sensitive help. Write the bounded preference/read/write/resume contract and migration-free fallback; subject/source review any changed meaning. Independent spec review precedes implementation. No generic theme/content framework is required for two surfaces; use existing content/UI seams and minimal style tokens.
+
+**Acceptance:** exercise a fresh and returning parcel path and a pending café order, including the arithmetic stage; toggle both styles, reload, change explorer, export/import and return to the same work. Keyboard/touch and narrow/tablet layouts retain visible purpose/question/action, contrast and readable controls. Apply Push C’s child-screen wording rules, shared glossary/control names, US spelling and answer-giveaway checks to both variants. Read-aloud names the same controls and source; reduced motion and film sound behavior are unchanged. Compare synthetic before/after learning records to confirm that switching alone writes no evidence. Ask human players about tone without implying that a style is for an age or gender. Browser checks cannot establish which treatment children prefer.
+
+## Representation and later expansion
+
+The existing Mira, Rowan and Ari guides and avatar/courier choices remain independent. More hair, clothing, portraits, voices and personality choices are later art/content work, not a requirement to ship CR1. Female guides and girl avatars should be easy to find; offer equivalent choice and dignity throughout. Avoid “boys get competition, girls get care” assumptions. Competition, cooperation, mystery, making and humor can be chosen by anyone.
+
+Mystery & Adventure could emphasize missing records, reciprocal deliveries, rival theories and graphic-novel panels. It needs its own narrative review so it does not reveal the Keeper early, manufacture a villain or contradict Bramble's role. A different universe/cast is a separate, substantially larger project. Neither is part of CR1.
+
+## Media consequences
+
+Reuse underlying diagrams, controllable animations, captions and story logic. Prefer films with the learner's chosen guide/avatar off-camera and a shared cast; do not double the film budget by default. Keep scripts intelligible across styles. Commission alternate key art or short transitions only after the comparison shows a concrete need. More subdued celebrations should remain visible and meaningful, not disappear. All modes retain still/text fallbacks and optional narration. New recorded voices require a separate voice/rights/content decision; a presentation selector does not authorize cloning anyone's voice.
