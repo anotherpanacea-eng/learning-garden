@@ -50,9 +50,9 @@ Companion to [spec 187](../specs/187-grid-and-compass.md). Use as written, after
 >
 > Pip unfolds his old map beside the chalk one. "Mine has a marsh," he says. "Yours doesn't."
 >
-> "Then one of them is wrong," says Dot. "Or old."
+> "Then one of them is mistaken," says Dot. "Or old."
 
-**Keeper's note** (A story from Willowbank):
+**Keeper's note** (A true thing about math):
 > A position word only works with a landmark: next to *what*, in front of *what*. "Over there" points, but nobody can follow a point from far away.
 
 ### Scene 2. Bramble's mirror copy (Act II, chapter 1: the weekly market)
@@ -60,7 +60,7 @@ Companion to [spec 187](../specs/187-grid-and-compass.md). Use as written, after
 **Hook:** Bramble traces the market plan to pin up at her ribbon stall. Something has gone strange.
 
 **Short:**
-> Bramble's copy of the market plan has the bakery on the wrong side. Every stall has swapped. "I traced it through the back," she says.
+> Bramble's copy of the market plan has the bakery on the other side. Every stall has swapped. "I traced it through the back," she says.
 
 **Longer:**
 > Bramble wants her own copy of the market plan. She lays thin paper on the floor map and traces it with chalk. Then she turns the paper over, because the chalk side smudges.
@@ -82,7 +82,7 @@ Companion to [spec 187](../specs/187-grid-and-compass.md). Use as written, after
 
 ### Scene 3. The upside-down map (Act III, chapter 3: the route by the high ford)
 
-**Hook:** The old map marks the high ford. The mark seems to be in the wrong place.
+**Hook:** The old map marks the high ford. The mark seems to be in a strange place.
 
 **Short:**
 > The old map puts the ford down below the mill. "Impossible," says Dot. The librarian turns the map a half turn. "Try it this way."
@@ -209,7 +209,7 @@ The flag has corners A (1, 1), B (1, 4) and C (3, 3).
 **H1. Grid squares in old China** (A true thing from history; Sapling and up)
 > About 1,800 years ago in China, a mapmaker named Pei Xiu wrote rules for good maps. Two rules: draw an even grid, and use a scale.
 Keeper's note:
-> Pei Xiu lived from 224 to 271 and worked for the Jin court. His own maps are lost, but his rules survive in an old history book. A stone map carved in 1136 in China has a grid of squares, each standing for 100 li of real distance.
+> Pei Xiu lived from 224 to 271 and worked for the Jin court. His own maps are lost, but his rules survive in an old history book. A stone map carved in 1136 in China has a grid of squares, each standing for 100 li (an old Chinese measure of distance).
 
 **H2. Naming chess squares** (A true thing from history; Seedling and up)
 > In 1737, a chess player from Aleppo, in Syria, printed a book that named chess squares with a letter and a number.
@@ -495,7 +495,7 @@ Feedback C: The map goes to 10 along and 8 up. Look again.
 Prompt: A tent has corners (1, 1), (1, 4), (5, 4). Fourth corner?
 Answer: (5, 1).
 Worked steps: 1. Below (5, 4): first number 5. 2. Beside (1, 1): second number 1. 3. (5, 1). 4. Check: sides 4, 3, 4, 3.
-Tests: (5, 5) (second number from the wrong neighbor); (4, 1) (the side length used as a coordinate).
+Tests: (1, 5) (the pair reversed, up number first); (4, 1) (the side length used as a coordinate).
 Hint: Which corner is it below? Which is it beside?
 Explanation: A rectangle's corner shares numbers with its two neighbors.
 
@@ -559,9 +559,9 @@ Feedback C: Yes. (4, 3).
 Prompt: Mirror (2, 2) in the up line through 4. Where does it land?
 Answer: (6, 2).
 Worked steps: 1. (2, 2) is 2 left of the line. 2. Go 2 right of the line: 4 + 2 = 6. 3. Height stays: (6, 2).
-Tests: (5, 2) (one step short); (4, 2) (stopping on the mirror line).
+Tests: (5, 2) (counting the mirror line as 1, so one short); (4, 2) (stopping on the mirror line).
 Hint: How far is the point from the mirror line?
-Explanation: Same distance on the other side, straight across the line at a square corner.
+Explanation: Same distance on the other side, along a line at a square corner to the mirror.
 
 **D5 (Sapling, 3-choice)**
 Prompt: After the slide, how does the flag compare?
@@ -653,7 +653,7 @@ Feedback C: Yes. (−0.5, 3).
 **F1 (Keeper's Desk, 3-choice)**
 Prompt: The old map marks the ford at (4, −3). Half turn it. Where?
 - A. (−4, −3) *(tests: changing one sign, a mirror)*
-- B. (3, −4) *(tests: swapping the numbers)*
+- B. (−3, 4) *(tests: swapping the numbers, the y = x mirror)*
 - C. (−4, 3) *(right)*
 Hint: A half turn about zero flips both signs.
 Explanation: Both signs flip: (−4, 3). That's the High ford.

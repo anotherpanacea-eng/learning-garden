@@ -72,7 +72,7 @@ Companion to [spec 186](../specs/186-wheel-and-stones.md). Use as written, after
 > "Every circle," says {guide}. "Big or small. Try the cat's bowl."
 
 **Keeper's note** (A true thing about math):
-> Round any circle is always a little more than 3 times across: about 3.14. That number is called pi. The wheel is 4 m across, so each turn is about 12.56 m.
+> The way around any circle is a little more than 3 times the way across: about 3.14. That number is called pi. The wheel is 4 m across, so each turn is about 12.56 m.
 
 ### Scene 3. A cloth for the cake table (Act II, chapter 3: Ember's birthday)
 
@@ -142,7 +142,7 @@ Companion to [spec 186](../specs/186-wheel-and-stones.md). Use as written, after
 >
 > The miller here says your wheel is bigger than ours. Ours is 3½ meters across. I measured it twice, standing in the cold water.
 >
-> She says the rim goes about three and a bit times across in one turn. My brother says exactly three. We have a bet. The loser carries the flour.
+> She says the rim goes about three and a bit times across in one turn. My brother says exactly three. I side with the miller. We have a bet. The loser carries the flour.
 >
 > Please work it out. I would rather not carry the flour.
 >
@@ -408,7 +408,7 @@ Feedback C: Count tiles, don't add numbers. 6 out of 12.
 Prompt: 1/2 m² is less than 2/3 and 3/4. How can that be?
 - A. Area is always more than the sides. *(tests: area must be bigger)*
 - B. It's part of a part, so it's smaller. *(right)*
-- C. I must have counted the tiles wrong. *(tests: distrusting a small answer)*
+- C. My tile count must be off. *(tests: distrusting a small answer)*
 Hint: Both sides are less than 1 m.
 Explanation: Both sides are under 1, so the cloth is part of a part.
 Feedback A: Not when both sides are less than 1. Look at the bold square.

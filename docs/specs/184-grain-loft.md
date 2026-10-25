@@ -165,7 +165,7 @@ From the pinned `curriculum/marble/dependencies.json`:
 
 | Target | Hard prerequisite | How it's met |
 | --- | --- | --- |
-| 3-D shapes (age 5+) | 2-D shapes (`mt_KJeEeTutJI`) | Met elsewhere: proposed specs 125 and 126 (draft PR #128); shape names recapped in T4. |
+| 3-D shapes (age 5+) | 2-D shapes (`mt_KJeEeTutJI`) | Met elsewhere: the built Number Garden's *Pavilion badge* task (`#checkin/geometry`, declared reference); proposed specs 125 and 126 (draft PR #128) use the names; recapped in T4. |
 | 3-D shapes (age 5+) | 3-D shapes (`mt_Qcp2d_kuta`) | Taught here (T1, A5; claimed). Spec 126 names solids but makes no lesson on them. |
 | 3-D shapes (age 9+) | 2-D shapes (age 7+) (`mt_vJUa62bxeR`) | Met elsewhere: proposed spec 183 (math build-out). Documented gap if 183 does not ship. |
 | 3-D shapes (age 9+) | Nets of 3-D Shapes (`mt_vnJEztczji`) | Met elsewhere: proposed spec 126 (parcel boxes). |
@@ -173,8 +173,8 @@ From the pinned `curriculum/marble/dependencies.json`:
 | 3-D shapes (age 10+) | 3-D shapes (age 9+) (`mt_wUSbRt3-qw`) | Taught here (Drawing Wall before Card Kit). |
 | 3-D shapes (age 11+) | 3-D shapes (age 10+) (`mt_REwgr0d_ss`) | Taught here (Card Kit before Slicing). |
 | 3-D shapes (age 11+) | 3-D shapes (age 9+) (`mt_wUSbRt3-qw`) | Taught here. |
-| 2-D faces on 3-D shapes | 2-D shapes (`mt_KJeEeTutJI`) | Met elsewhere: specs 125, 126. |
-| 2-D faces on 3-D shapes | Flat vs Solid Shapes (`mt_mnEVZNkX3p`) | Met elsewhere: spec 126; recapped in Scene 2 and T4. |
+| 2-D faces on 3-D shapes | 2-D shapes (`mt_KJeEeTutJI`) | Met elsewhere: the Number Garden *Pavilion badge* task (declared reference); specs 125, 126 use the names. |
+| 2-D faces on 3-D shapes | Flat vs Solid Shapes (`mt_mnEVZNkX3p`) | Supported inline (Scene 2, T4 and the glossary), no claim. Spec 126 names the card flat and the box solid but says "no claim beyond that", and no other spec claims it: **documented gap**. |
 | 2-D faces on 3-D shapes | 3-D shapes (`mt_Qcp2d_kuta`) | Taught here (T1). |
 | Edges, vertices, and faces | 3-D shapes (`mt_Qcp2d_kuta`) | Taught here (T1). |
 | Edges, vertices, and faces | 3-D shapes (age 5+) (`mt_yGv8doDAmp`) | Taught here (Rolling Plank, Flour Prints before the Tally Beam). |

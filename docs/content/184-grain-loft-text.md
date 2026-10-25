@@ -84,7 +84,7 @@ Companion to [spec 184](../specs/184-grain-loft.md). Use as written, after indep
 >
 > "How many blocks in this one?" she asks.
 >
-> Pip walks around the crate and counts every block he can see: the top, the front, the side. "Nineteen!"
+> Pip looks at the crate from one corner and counts every block he can see: the top, the front, the side. "Nineteen!"
 >
 > The miller lifts out the top layer: nine blocks, three rows of three. Underneath is another layer of nine, and under that, another.
 >

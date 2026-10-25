@@ -28,7 +28,7 @@ Date: 2026-10-25. Spec: [185](../specs/185-fences-and-plots.md). Companion: [185
 | 16 | "Acre" | Wikipedia | https://en.wikipedia.org/wiki/Acre | 4,840 sq yd = 10 square chains = 160 square rods; furlong by chain shape. |
 | 17 | 3.MD.C.7c | Common Core State Standards | https://thecorestandards.org/Math/Content/3/MD/C/7/c/ | Use tiling to show a rectangle with sides a and b + c has area a × b + a × c; area models for the distributive property. |
 | 18 | "Perimeter with composite rectilinear shapes" (Year 7 lesson) | Oak National Academy | https://thenational.academy/pupils/programmes/maths-secondary-year-7/units/perimeter-and-area/lessons/perimeter-with-composite-rectilinear-shapes/video | A composite rectilinear shape is made only from rectangles; missing lengths deduced from given ones. |
-| 19 | Marble teaching-research records for the seven targets | Marble repo at `7bd8b67` (CC BY-SA; paraphrased, not copied) | local clone | Pedagogy summarized in the spec's upstream check. |
+| 19 | Marble teaching-research records for the nine targets (seven assigned, plus `mt_GzcJEVkNRn` and `mt_eiB3-6pu6a` claimed on review) | Marble repo at `7bd8b67` (CC BY-SA; paraphrased, not copied) | local clone | Pedagogy summarized in the spec's upstream check. |
 
 ## Claims and status
 
