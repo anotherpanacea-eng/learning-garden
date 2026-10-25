@@ -1,6 +1,6 @@
 # Story milestones and film production plan
 
-Planning brief, 2026-10-21. The [six-act programme](specs/49-six-act-curriculum.md) owns the dramatic arc; individual activity specifications own their actual completion rules. This document identifies useful endings and commissionable films. Proposed triggers below are design requirements for future slices, **not implemented achievements**.
+Planning brief, 2026-10-21. The [six-act programme](specs/49-six-act-curriculum.md) owns the dramatic arc; individual activity specifications own their actual completion rules. This document identifies useful endings and commissionable films. The [current roadmap timing table](roadmap.md#films-and-songs-when-each-is-needed) owns commissioning order; this dated brief’s older “commission now” labels do not override that queue. Proposed triggers below are design requirements for future slices, **not implemented achievements**.
 
 A story win means something was made, shared, tried or deliberately kept. It does not mean a subject was mastered. Help, narration, a smaller supplied plan and working together can reach the same ending. Every destination stays open. A film is optional presentation: its still picture and short text must deliver the complete ending when a file is unavailable, skipped, or unsuitable for reduced motion. No video asset is a prerequisite for playing or finishing.
 
