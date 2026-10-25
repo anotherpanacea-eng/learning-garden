@@ -487,7 +487,7 @@ Positions of right answers in 3-choice items: A3, B1, B5, C2 at A; A1, B2, C1, C
 - Hint: Which one pushes against "too hot"?
 - Explanation: Sweat cools when it evaporates. Responses work against the change.
 
-**C7 (Keeper's Desk, true or not true from this source).** Source card (A true thing from history; a summary, not their own words): *In the winter of 1782 to 1783, Lavoisier and Laplace put a guinea pig in a container surrounded by ice. They measured how much ice melted, and how much carbon dioxide it breathed out, and compared both with burning charcoal.* 
+**C7 (Keeper's Desk, true or not true from this source).** Source card (A true thing from history; a summary, not their own words): *In the winter of 1782 to 1783, Lavoisier and Laplace put a guinea pig in a container surrounded by ice. They measured how much ice melted, and how much carbon dioxide it breathed out, and compared both with burning charcoal.*
 **Prompt:** Does the source say it? Tap each statement.
 - "They measured heat by the ice that melted." Says it.
 - "They saw respiration happen inside cells." Does not say it `present-back`: cells came into the story later.
