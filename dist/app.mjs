@@ -1,3 +1,5 @@
+import {bothPage,bothRefusal,bindBoth} from './balance-both-ui.mjs';
+import {prepareBothDisplay} from './balance-both-core.mjs';
 import {pricePage,priceEntry,priceRefusal,bindPrice} from './slope-equation-ui.mjs';
 import {preparePriceDisplay} from './slope-equation-core.mjs';
 import {keeperPages,parcelHome,keeperInvitation,bindKeeperStory,refreshKeeperVisibility} from './keeper-story-ui.mjs';
@@ -391,6 +393,7 @@ function render(){
   }
   else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:otherLiving;}
   else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry()+bridgesEntry();
+  else if(root==='workshop'&&slug==='balance'&&detail==='both'){const ready=prepareBothDisplay(state,priceOptions());html=ready.ok?bothPage(state):bothRefusal();if(ready.changed)save();}
   else if(root==='workshop')html=slug==='recut'||slug==='budget'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph,slug);
   else if(root==='science'){
@@ -510,6 +513,7 @@ function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON
 function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function bind(){
  bindKeeperStory(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
+ bindBoth(state,{save,render,focus:focusElement,...priceOptions(),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindPrice(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindDesk(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindRows(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});

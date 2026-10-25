@@ -1,3 +1,4 @@
+import {bothEntry} from './balance-both-ui.mjs';
 import {circuitPage,bindCircuits} from './lantern-circuit-ui.mjs';
 import {repeatDeliveriesPage,repeatDeliveriesNotes,bindRepeatDeliveries} from './repeat-deliveries-ui.mjs';
 import {recutPage,bindRecut} from './ribbon-recut-ui.mjs';
@@ -50,7 +51,7 @@ export function workshopPage(state,slug,explorerId){
  if(slug==='sources')return sourceTrailPage(state);
  if(slug==='clock')return preparationClockPage(state);
  if(slug==='change')return marketChangePage(state);
- if(slug==='balance')return balanceStallPage(state);
+ if(slug==='balance')return bothEntry()+balanceStallPage(state);
  if(slug==='fair')return fairTestPage(state);
  if(slug==='coins')return coinCounterPage(state);
  if(slug==='maps')return cartographerPage(state);
