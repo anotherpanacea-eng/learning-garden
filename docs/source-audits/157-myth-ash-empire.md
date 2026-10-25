@@ -10,7 +10,7 @@ Date: 2026-10-25. For [spec 157](../specs/157-myth-ash-empire.md) and [its compa
 
 | Source | Publisher | URL | Supports |
 | --- | --- | --- | --- |
-| Source audit 133, rows on Varro, the Palatine and Casa Romuli | this repo (draft PR #137) | `docs/source-audits/133-long-line.md` | 753 BCE as a traditional date fixed by Varro in the 1st century BCE; Palatine hut post-holes, about 1000 to 700 BCE (cleared there against the Parco archeologico del Colosseo). |
+| Source audit 133, rows on Varro, the Palatine and Casa Romuli | this repo (draft PR #137) | `docs/source-audits/133-long-line.md` | 753 BCE as a traditional date fixed by Varro in the 1st century BCE; Palatine hut post-holes, about 1000 to 700 BCE (recorded in that proposed audit against the Parco archeologico del Colosseo). |
 | Capitoline Wolf | Wikipedia (via search) | https://en.wikipedia.org/wiki/Capitoline_Wolf | Long thought Etruscan, 5th century BCE; radiocarbon casting window about 1021 to 1153 CE (95%); 2021 thermoluminescence also medieval; twins added late 15th century, probably Pollaiolo; 2025 lead-isotope study contested; first record 1471 (Sixtus IV's gift). |
 | Capitoline She-Wolf: 12th century | Rogue Classicism | https://rogueclassicism.com/2012/06/24/capitoline-she-wolf-12th-century/ | University of Salento accelerator mass spectrometry result, 11th to 12th century CE (corroboration). |
 | The History Blog, 2012 | thehistoryblog.com | https://www.thehistoryblog.com/archives/17774 | Corroboration of the radiocarbon report. |
@@ -26,7 +26,7 @@ Date: 2026-10-25. For [spec 157](../specs/157-myth-ash-empire.md) and [its compa
 
 | Source | Publisher | URL | Supports |
 | --- | --- | --- | --- |
-| Source audit 133, Parthenon rows (British Museum KS2 resource; Acropolis Museum building accounts) | this repo | `docs/source-audits/133-long-line.md` | Built 447 to 432 BCE (cleared there). |
+| Source audit 133, Parthenon rows (British Museum KS2 resource; Acropolis Museum building accounts) | this repo | `docs/source-audits/133-long-line.md` | Built 447 to 432 BCE (recorded in that proposed audit). |
 | Parthenon | Encyclopaedia Britannica; Britannica Kids | https://www.britannica.com/topic/Parthenon/Introduction ; https://kids.britannica.com/students/article/Parthenon/574648 | Temple to Athena on the Acropolis; Pheidias and the gold-and-ivory statue. |
 | Parthenon | World History Encyclopedia | https://www.worldhistory.org/parthenon/ | 8 columns at each end, 17 along each side; statue gold and ivory over a wooden core, almost 12 m with its pedestal. Other results give "over 35 feet" or "over 12 m"; the spec says roughly 11 to 12 m. |
 | The Parthenon, general information | University of Kansas, Wilcox Collection | https://wilcoxcollection.ku.edu/s/wilcox/page/parthenon-general | Column layout (corroboration). |
