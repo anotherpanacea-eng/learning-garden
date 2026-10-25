@@ -16,7 +16,7 @@ function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
  ensureGarden(state);state.garden.welcomeFilmSeen=welcomeSeen;
  const listeners=new Set(),dialogs=[],exposures=[],lifecycle=[];let focused=0,saves=0,stopped=0;
  const focus={isConnected:true,focus(){focused++;}},main={focus(){focused++;}};
- const context={state,choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
+ const context={state,explorerStore:{active:{id:'synthetic-explorer'}},refreshKeeperVisibility(){},keeperFilmBlocked:()=>dialogs.some(d=>d.open),choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
  currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,
  save(){saves++;},stopBell(reason){lifecycle.push(['bell-stop',reason]);},stopSpeech(){stopped++;lifecycle.push(['speech-stop']);},esc:x=>String(x),exposeStoryFacts:x=>exposures.push(x),
  document:{activeElement:focus,querySelector:()=>dialogs.find(d=>d.open)||null,body:{append:d=>dialogs.push(d)},createElement(){
@@ -72,6 +72,15 @@ for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall'
  f.dialogs.at(-1).close();eq(f.listeners.size,0,'native close/Escape cleanup');
  f.read('playFilm("paris",{replay:true})');f.message('garden-film-example');eq(f.exposures.length,1,'other films cannot add fact exposure');
  eq(rivalTasks.some(t=>t.kind==='multiply'&&t.a===3&&t.b===4)&&/different puzzle/.test(f.read('FILMS.bramble.note')),false,'the film note cannot call a 3×4 Bramble puzzle different');
+}
+
+// The owner captured by a film prevents late examples from reaching another explorer.
+{
+ const f=fixture();f.read('playFilm("bramble")');f.context.explorerStore.active.id='other-explorer';f.message('garden-film-example');eq(f.exposures.length,0,'late film example cannot write to another explorer');f.dialogs.at(-1).close();
+}
+// If the storm film was pending, the earned café film follows its close before the page invitation.
+{
+ const f=fixture(freshState(),{welcomeSeen:false});f.context.location.hash='#cafe';f.state.cafe={served:6,supper:{round:1,startedAtServed:0}};f.dialogs[0].skip.onclick();eq(f.dialogs.length,2,'earned supper film follows welcome close');eq(f.dialogs[1].open,true,'supper film is open');eq(f.state.garden.filmsSeen.cafe,true,'supper once flag belongs to this explorer');f.dialogs[1].close();
 }
 eq(app.includes('if(endingFilm()===film)playFilm(film)'),true,'queued auto-play rechecks current ending');
 for(const file of ['garden-ui.mjs','cafe-ui.mjs','post-office-ui.mjs']){
