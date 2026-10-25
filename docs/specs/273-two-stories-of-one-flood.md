@@ -2,7 +2,7 @@
 
 Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [English build-out](https://github.com/anotherpanacea-eng/learning-garden/pull/172). Every child-facing line is in [the companion text](../content/273-two-stories-of-one-flood-text.md); sources are in the [source audit](../source-audits/273-two-stories-of-one-flood.md).
 
-**Commissioning boundary:** a proposal only. Select a bounded first slice after independent content, subject and save review. We suggest **Was You There?** (the storm-night pair) plus **Who Is Telling?**, sets A, B1-B3 and D: one firsthand/secondhand pair about a Willowbank event and the viewpoint bench, with no pages, no Hollis and no real history. The other benches are not commissioned by their presence here. Act and chapter links are future adapters to [spec 120](120-keeper-of-the-ways.md), which is merged. Standalone play stays open, and no story completion is inferred from an unavailable adapter.
+**Commissioning boundary:** a proposal only. Select a bounded first slice after independent content, subject and save review. We suggest **Were You There?** (the storm-night pair) plus **Who Is Telling?**, sets A, B1-B3 and D: one firsthand/secondhand pair about a Willowbank event and the viewpoint bench, with no pages, no Hollis and no real history. The other benches are not commissioned by their presence here. Act and chapter links are future adapters to [spec 120](120-keeper-of-the-ways.md), which is merged. Standalone play stays open, and no story completion is inferred from an unavailable adapter.
 
 **Story rule (binding):** comparing accounts is never choosing the town's answer. Act IV's *Gazette* pieces are compared for viewpoint, focus and what they leave out. No bench, item or line says which explanation of the floods is right, and Bramble's objection is allowed to be right ([spec 120 §11](120-keeper-of-the-ways.md#11-rules-the-story-keeps)).
 
@@ -10,7 +10,7 @@ Status: **proposed, 2026-10-25; writing only, awaiting independent spec review a
 
 All five targets are "not yet mapped" in `curriculum/topic-coverage.csv`: Firsthand and Secondhand Accounts (`mt_j32D5DZX7x`), Multiple Accounts of Events (`mt_5FREdVoS8s`), Different viewpoints in texts (`mt_LCJNRaRXtW`), Narrative Perspective and Unreliable Narrators (`mt_x2sWtfTeYT`) and Purpose, audience, and context (`mt_jIcgbCmziD`). Strand E3 asks for exactly this run: compare accounts (E3-III), narrator perspective (E3-IV), irony and unreliable narration (E3-V). H1-II asks to check a source's creator, time and purpose and set accounts against one another.
 
-Built work stops one step short. [Two Windows](59-two-windows.md) (built locally, `#workshop/windows`) combines two compatible fictional accounts of one small event and sorts statements as stated, inferred, contradicted or unknown. It says plainly that it does not teach first- versus third-person narration, authorial choice, eyewitness testimony or narrator reliability. Nothing teaches whether a writer was there, why accounts differ in focus, what a limited or all-knowing narrator can know, how to catch a narrator who can't be trusted, or how purpose and audience shape a text.
+Built work stops one step short. [Two Windows](59-two-windows.md) (built locally, `#workshop/windows`) combines two compatible fictional accounts of one small event and sorts statements as stated, inferred, contradicted or unknown. It says plainly that it does not teach first- versus third-person narration, authorial choice, eyewitness testimony or narrator reliability. Evidence & voice (219, extended by224) already supplies sustained stories, differing access, inference, reader purposes and revision. This pack adds explicit firsthand/secondhand source basis and focused short contrasts in narrator form and reliability; it does not require a second English engine or replace that sustained reading/writing sequence.
 
 A child learns: a firsthand account comes from someone who was there, a secondhand one from someone who wasn't, and the kind of text is a clue, not the test; firsthand gives close detail and feeling, secondhand the big picture; what a firsthand writer was told is secondhand; several accounts agree on some facts and differ where the tellers stood and what they cared about; a narrator can be first person, third person limited or all-knowing, and that sets what the reader can learn; an unreliable narrator may fib or be honestly mistaken, and when the reader knows something a character does not, that gap is dramatic irony; every text has a job, an audience and a context that shape its words.
 
@@ -18,11 +18,11 @@ A child learns: a firsthand account comes from someone who was there, a secondha
 
 **Host:** a new Travelers' Archive drawer, **Two Stories of One Flood**, at `#archive/accounts`, registered before the generic `#archive` branch (as `#archive/labels` is in [spec 99](99-exhibit-label-maker.md)). Linked from the Archive landing, from Two Windows (`#workshop/windows`, "more than two windows") and from the Library. Open from the start; spec 62's route pattern; no existing root touched.
 
-The librarian (they/them) lays the town's papers about one wet night on the archive table. Six benches: **Was You There?**, **The Fire Diary**, **Many Tellings**, **Who Is Telling?**, **The Magpie's Version** (Keeper's Desk) and **Who Is It For?**
+The librarian (they/them) lays the town's papers about one wet night on the archive table. Six benches: **Were You There?**, **The Fire Diary**, **Many Tellings**, **Who Is Telling?**, **The Magpie's Version** (Keeper's Desk) and **Who Is It For?**
 
 | Scene (future adapters) | Beat | Teaches | Job it can feed |
 | --- | --- | --- | --- |
-| Act II ch. 2, "so next time we'll know": *The storm night, twice told* | The miller's storm-night note and Dot's notice from a week later go into the town's records. | Firsthand and secondhand, focus | Act II ch. 2 (Sprout: Was You There?; Seedling: the pair) |
+| Act II ch. 2, "so next time we'll know": *The storm night, twice told* | The miller's storm-night note and Dot's notice from a week later go into the town's records. | Firsthand and secondhand, focus | Act II ch. 2 (Sprout: Were You There?; Seedling: the pair) |
 | Act II ch. 3, Ember's birthday: *The missing ribbon* | Bramble's ribbon vanishes; Pip, Dot's side and the whole party tell it; then the magpie's version. | Narrator, limited and all-knowing; unreliable narrator | Act II ch. 3 (Seedling: Who Is Telling?; Keeper's Desk: The Magpie's Version) |
 | Spring, Flood Boards and Planting: *Pip and the scratching* | Pip guards the new flood boards overnight and is sure a monster came. | Honest but mistaken narrator; dramatic irony | Act II ch. 2 (Sapling) |
 | Act III ch. 4, letters: *Dear Nuria* | Dot tells Nuria about the storm in a letter. | Purpose and audience | Act III ch. 4 (Sapling: Who Is It For?) |
@@ -61,7 +61,7 @@ Jane's **teach -> guided -> practice**: twelve teach cards, one idea each with a
 
 Every screen: *Comparing accounts isn't picking a winner. Look at what each one shows and what it leaves out.* No score, timer, lock or mastery label. Drags have tap equivalents. All texts are short and on screen; optional read-aloud.
 
-- **(a) Was You There?** Six cards into two trays (*the writer was there* / *wasn't*) with per-card feedback and a clue-words card. Then the storm-night pair side by side: tap a line, then **Only here** or **In both**.
+- **(a) Were You There?** Six cards into two trays (*the writer was there* / *wasn't*) with per-card feedback and a clue-words card. Then the storm-night pair side by side: tap a line, then **Only here** or **In both**.
 - **(b) The Fire Diary.** Six Pepys excerpts with modern lines, and a newly written history page. Place five detail cards under *Only Pepys*, *Only the history page* or *Both*. Act IV version: page 4 beside *From the Archive*.
 - **(c) Many Tellings.** Four storm-night accounts (miller, Hob, orchard keeper, baker). Find two facts all four agree on, then a detail only one gives; for each, **Why so different?** (where they were, or what they care about: both fit, and the bench shows the other). Act IV version: the two *Gazette* pieces and the orchard keeper's account; **What does each leave out?**; Bramble's objection; ends on *What we still don't know*.
 - **(d) Who Is Telling?** The ribbon told three ways. Name each narrator; tap what each could know; **Switch the window** to the magpie's "I."
@@ -74,7 +74,7 @@ Six sets, 27 items in the companion. Three-choice right answers sit A 8 / B 8 / 
 
 | Set | Items | Depths | Formats |
 | --- | --- | --- | --- |
-| A. Was you there? | 5 | Sprout, Seedling | 3-choice, sort |
+| A. Were you there? | 5 | Sprout, Seedling | 3-choice, sort |
 | B. Two accounts, one event | 6 | Seedling, Sapling | 3-choice, true / not true |
 | C. Page 4 and the Gazette (Act IV, after page 4) | 5 | Seedling, Sapling, Keeper's Desk | 3-choice, grown-up-read "say why" |
 | D. Who is telling? | 4 | Seedling, Sapling | 3-choice |
@@ -83,11 +83,12 @@ Six sets, 27 items in the companion. Three-choice right answers sit A 8 / B 8 / 
 
 ## Saved work
 
-Optional root `accounts` per explorer, absent until something is kept:
+Optional root `accounts` per explorer, absent until an explicit Start or Keep freezes its source:
 
 ```
 accounts: {
   v: 1,
+  source: { /* complete frozen authored source for this started/kept visit */ },
   trays: { [cardId]: 'first' | 'second', at },
   pairs: { [pairId]: { [lineId]: 'only' | 'both' }, at },
   fire: { [cardId]: 'pepys' | 'page' | 'both', at },
@@ -99,7 +100,13 @@ accounts: {
 }
 ```
 
-Validate the ids, counts and outcome codes the save actually holds, against structural bounds and the save's own entries; never require today's bench sizes or full item lists, and never check against today's wording or answer key. A missing item reads as absent. Never recompute a kept result on load. Codes only; no free text ("say why" is spoken). Support is a separate flag per kept item, never merged with an independent attempt. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the drawer. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. `twoWindows` and every other root are untouched. Set C entries kept before page 4 cannot exist; if imported, they display as kept. No field holds anything about the child.
+Validate the ids, counts and outcome codes the save actually holds, against structural bounds and the save's own entries; never require today's bench sizes or full item lists, and never check against today's wording or answer key. A missing item reads as absent. Never recompute a kept result on load. Responses use codes only; no free text ("say why" is spoken). Support is a separate flag per kept item, never merged with an independent attempt. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the drawer. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. `twoWindows` and every other root are untouched. Set C entries kept before page 4 cannot exist; if imported, they display as kept. No field holds anything about the child.
+
+**Frozen authored source and first response.** An explicit Start or Keep freezes the complete selected authored source with the saved visit or bench: passages and provenance labels, instructions, teaching and examples, supplied models/data and captions, question wording, ordered choices, key and feedback, and help/read-back text or asset references. Include this `source` snapshot in the owning root; the response fields above remain codes. A started waiting task and earlier kept work render from that snapshot, never today's catalog. An explicitly chosen new visit may use revised authoring while retaining earlier sources and work. For recorded items, preserve the first response, its original outcome and support-before separately from later attempts/keeps; a retry or later skip cannot replace it. Do not grade original spoken or written explanations.
+
+**Support before reveal.** Commit a support code before showing or playing a hint, guided step, worked example, answer, meaning, slot scaffold or read-aloud. Keep audio/reading support separate from the conceptual response; it does not establish independent reading. A later support request does not rewrite an earlier response's support-before. Missing older support information is unobserved, never proof of an unassisted attempt.
+
+**Atomic saves and capacity.** Every mutation must pass the actual host's pretty-notes serialization/import preflight and shared limits before committing only this root. Refusal preserves the whole earlier state and visible pending work; do not rerender, navigate or change explorer in a way that silently loses unsaved words/selections. Offer the existing notes download and an explicit confirmed restore of saved words where needed. No silent truncation, history eviction or replacement of saved writing. Preview, render and suggestion reads are save-neutral. Existing source/language/cultural/rights checks remain open until separately cleared.
 
 ## Curriculum fit
 
@@ -123,7 +130,7 @@ Jane at `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble at `7bd8b6794cb78d
 
 | Target | What the topic asks, and how this spec does it |
 | --- | --- |
-| Firsthand and Secondhand Accounts (`mt_j32D5DZX7x`, RI.4.6) | Explain the difference; compare a diary and a textbook on one event; how participant against researcher shapes information and tone. Was You There?, the storm pair, the Fire Diary, A1-A5, B1-B6, C1-C3. |
+| Firsthand and Secondhand Accounts (`mt_j32D5DZX7x`, RI.4.6) | Explain the difference; compare a diary and a textbook on one event; how participant against researcher shapes information and tone. Were You There?, the storm pair, the Fire Diary, A1-A5, B1-B6, C1-C3. |
 | Multiple Accounts of Events (`mt_5FREdVoS8s`, RI.5.6) | Compare accounts of one event; how background and purpose shape them; which facts agree. Many Tellings, C4-C5. **Partial:** two news articles appear only as the *Gazette* pieces. |
 | Different viewpoints in texts (`mt_LCJNRaRXtW`, RL.5.6) | First or third person and its effect; retelling from another character; how a narrator's knowledge limits the reader's. Who Is Telling?, D1-D4. Claimed for its description (limited against omniscient), which matches its name. |
 | Narrative Perspective and Unreliable Narrators (`mt_x2sWtfTeYT`, RL/RI.6-8.6) | Perspective limits or widens what a reader knows; dramatic irony; one event from two characters; spot clues to an unreliable narrator. The Magpie's Version, Pip and the scratching, E1-E3. **Partial:** suspense is named, not practiced; texts are short scenes, not whole works (272). |
@@ -161,4 +168,4 @@ From the **pinned** `curriculum/marble/dependencies.json`, hard edges only, list
 - **Owner:** the magpie's pronoun. Spec 120 sets none; specs 122, 141 and 166 use "it". Default: "it".
 - **Owner:** the magpie talks here (a full first-person telling), where spec 122 has it only repeat words it has heard. Default: keep for this pack's comic narrator; if the owner wants the magpie wordless, Bramble can "translate" its version.
 - **Owner:** route `#archive/accounts`. Default: yes, linked from Two Windows and the Library.
-- **Owner:** first slice. Default: Was You There? plus Who Is Telling? (sets A, B1-B3 and D).
+- **Owner:** first slice. Default: Were You There? plus Who Is Telling? (sets A, B1-B3 and D).

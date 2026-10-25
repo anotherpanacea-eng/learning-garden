@@ -283,19 +283,19 @@ Worked example: *Pepys's diary.*
 
 ## Benches
 
-### (a) Was You There?
+### (a) Were You There?
 
 **Header:** Read each card. Was the writer there? Put it in a tray.
 
 **Trays:** Firsthand: the writer was there · Secondhand: the writer wasn't there
 
-**Cards and feedback (A story from Willowbank, except the last two):**
+**Cards and feedback (A story from Willowbank):**
 - The miller's note, written at the mill that night: firsthand. *She saw it and wrote it down.*
 - Dot's notice, written a week later from what people said: secondhand. *Dot wasn't at the mill.*
 - Hob's letter, "I moved my sheep up the hill": firsthand. *Hob did it himself.*
-- A library book about storms, by someone far away: secondhand. *The writer learned it from records.*
-- The diary of a person who was in London in 1666: firsthand. *They lived through it.* (A true thing from history)
-- A history page written today about 1666: secondhand. *Nobody alive today was there.* (A true thing from history)
+- A library book about this storm, by a writer who was not there and used eyewitness reports: secondhand. *The writer used other people’s observations.*
+- A diary line by someone at the mill: “I watched water rise past the window”: firsthand. *The writer describes their own observation.*
+- A history page about this storm, written years later from the miller’s note: secondhand. *The writer uses an earlier witness’s record.*
 
 **Clue words card:** "I saw," "we heard," "I pulled" often mean firsthand. "People say," "records show," "she was told" often mean secondhand.
 
@@ -392,7 +392,7 @@ Worked example: *Pepys's diary.*
 
 Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ marks the right one. Tags in backticks name the misconception a wrong choice tests. Set C opens only after page 4 comes free; the other sets never name Hollis.
 
-### Set A. Was you there? (Sprout, Seedling)
+### Set A. Were you there? (Sprout, Seedling)
 
 **A1 (Sprout, guided).** Steps shown first: 1. Where was the miller? 2. When did she write? 3. Did she see it herself?
 - Prompt: The miller wrote her note at the mill, during the storm. What kind is it?

@@ -193,7 +193,7 @@ Worked example: *Léon is the ferry keeper who lives at Les Saules.*
 3. Who is the relative pronoun.
 
 **Card 8. Fragments**
-> A fragment stands alone but is missing a subject, a full verb, or a main clause. An -ing verb needs a helper: I am waiting.
+> A fragment lacks a subject, a full verb or a main clause. As the sentence's main verb, an -ing form needs a helper: I am waiting.
 
 Worked example: *Running along the river path.*
 1. What is the verb? Running.
