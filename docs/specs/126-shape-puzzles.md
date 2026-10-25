@@ -86,7 +86,7 @@ shapes: {
   boxes: { [netId]: { current: foldAttempt, firstAttempt: foldAttempt | null, earlier: [box] } },
   ownNets: [{ source, cells, folds: bool, result?, support, at }], // latest 40 readable keeps
   floors: { [floorId]: { source, pieces: [placement], filled: bool, firstAttempt: attempt | null, at, earlier: [floor] } },
-  firstFold: { source, tried: bool, reasonSeen: bool, support, at } | null
+  impossibleCovering: { source, tried: bool, reasonSeen: bool, support, at } | null
 }
 foldAttempt: { id, source, prediction: 'yes' | 'no' | null, folded: bool, result?, base: squareId | null, support, priorReveal: bool, at }
 attempt: { source, pieces: [placement], filled: bool, support, at }
@@ -94,6 +94,7 @@ attempt: { source, pieces: [placement], filled: bool, support, at }
 
 - `source` freezes the understood table/model/version and its finite piece and domain geometry, coordinate/turn/flip conventions, target/net/base identities, check rules and displayed task/help/reason text (at most 16 KiB per source). The selected table's commissioning gate supplies its exact finite placement bounds; saved geometry is not interpreted using a changed table. Sources are data for a known bounded model, not executable instructions.
 - A prediction starts absent, is committed before folding, and the first input/source/support/result is kept once. Another prediction replaces only the working draft after disclosure; it keeps reveal/support flags and cannot become an unseen independent attempt. No per-net attempt history is needed.
+- The impossible-covering record keeps whether a covering was tried and whether the reason was shown. It is a single exposure latch, never cleared on reload.
 - Validate ids, positions and turns against their own source. Set outcomes only at the explicit check/fold action, never on load. Keep the first window/floor attempt once, with its placements/source/support/result; later editing makes the current draft untested without rewriting that first attempt. Own-net keeps retain the six cells and any fold result actually tried; an untried drawing invents no result.
 - Unknown model/ids, malformed placements and unreadable attempts remain exact, read-only and exportable at that entry; other readable work stays open. Never delete them, change a saved success to false or filter-install a cleaned root on load. An explicit fresh supported window/floor/box retains the complete prior entry in `earlier`. Neither the latest-40 own-net policy nor the readable keep caps evict unsupported siblings.
 - Preflight new sources, attempts, own-net keeps and retained fresh versions against the actual pretty `notesReport` export and `prepareProgressImport` whole-notebook limits. If retention would not fit, refuse atomically with existing export/reset choices; do not trim on load. Export, import, reset, save-off and explorer switching include the complete raw `shapes` root through the existing generic notebook transfer.
