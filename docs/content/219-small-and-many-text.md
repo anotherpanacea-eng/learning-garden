@@ -230,8 +230,9 @@ Model line (A made-up model): Real fleas, beetles and dragonflies vary. These si
 Opening: Tap a part. What job does it do?
 Guided first tap (2 steps): (1) Find the row of dots on the beetle's side. (2) Tap one. What goes in?
 Part cards: Compound eye: many tiny lenses, each seeing a small piece. · Beetle's view: like a mosaic, good for spotting movement. · Spiracle: a breathing hole; air goes in here. · Air tubes: branching tubes carry air all through the body. · Mandibles: jaws that cut and chew. · Antennae: feelers that touch and smell. · Exoskeleton: a hard skeleton on the outside.
-**Mouthpart table.** Opening: Try each mouth on each food. Mouths: **Beetle jaws** · **Butterfly's coiled straw** · **Housefly's sponge pad**. Foods: **Leaf** · **Nectar** · **Spilled sugar water**.
-Fits: Yes. This mouth fits this food. Doesn't fit: Jaws are too short and wide for a deep flower. · A straw can sip, not cut. · A sponge mops up liquid. It can't cut a leaf. · The nectar is too deep for a sponge pad. · Jaws cut; a sponge pad mops spills better. · A straw sips from deep flowers; a sponge pad mops spills.
+**Mouthpart table.** Opening: Try each mouth on each way of feeding. Mouths: **Beetle jaws** · **Butterfly's coiled straw** · **Housefly's sponge pad**. Ways: **Cut and chew a leaf** · **Sip nectar from deep in a flower** · **Mop up a spill on a flat surface**.
+Fits: Yes. That's how this mouth feeds. Doesn't fit: Jaws are short. They can't reach deep into a flower. · Jaws cut and chew. They can't soak up a spill. · A straw can sip, not cut. · A straw sucks through a tube. It doesn't mop. · A sponge pad can't cut a leaf. · A sponge pad is short. It can't reach deep nectar.
+Shared-food line: Some foods suit more than one mouth. A butterfly and a housefly can both drink sugar water. They just do it in different ways.
 **Molt strip.** Opening: How does a grasshopper grow? Tap each step. Steps: (1) The old skin splits down the back. (2) The young grasshopper climbs out, soft. (3) It swells bigger. (4) The new skin hardens. Line: Its old skin is left behind on the stem.
 **Copy it.** Opening: Engineers copied these. Match each. Many lenses on a dome · a camera that sees very wide. A termite mound's air flow · a building cooled by chimneys.
 New-part card: A newly found insect has a mouth like a long, thin, hollow tube. What could it eat?
@@ -453,13 +454,13 @@ Feedback: A: Yes. Spiracles lead to air tubes. B: Insects breathe through spirac
 Explanation: Air goes in through spiracles and along tubes inside.
 
 **4.2 (Sapling, match)**
-Prompt: Match each mouth to its food.
+Prompt: Match each mouth to the way it feeds.
 Mouths: beetle jaws · butterfly's coiled straw · housefly's sponge pad
-Foods: leaf · nectar · spilled sugar water
-Answer: jaws → leaf; coiled straw → nectar; sponge pad → spilled sugar water.
+Ways: cut and chew a leaf · sip nectar from deep in a flower · mop up a spill on a flat surface
+Answer: jaws → cut and chew a leaf; coiled straw → sip nectar from deep in a flower; sponge pad → mop up a spill on a flat surface.
 Misconception tested: mouthparts-interchangeable.
-Hint: Cutting, sipping or mopping?
-Explanation: Each mouth fits the food it eats.
+Hint: Which one cuts? Which one reaches deep? Which one mops?
+Explanation: Each mouth has its own way of feeding. Some foods, like sugar water, suit more than one mouth.
 
 **4.3 (Sapling, 3-choice)**
 Prompt: Could a grown butterfly chew a leaf if it tried?
@@ -604,7 +605,7 @@ Explanation: Helping pollinators works, but it takes seasons.
 - **Insect or not:** A grasshopper: count six legs. Start: count the legs first.
 - **Kinds:** Ten robins and one blackbird. Start: robins are one kind, so two kinds.
 - **For its size:** A 1 cm beetle walks 10 cm. Start: 10 ÷ 1 = 10 lengths.
-- **Close look:** A bee drinks nectar. Start: is that cutting, sipping or mopping?
+- **Close look:** A moth drinks nectar from a deep flower. Start: is that cutting, sipping or mopping?
 - **Generations:** 8 twiggy, birds find 1 in 4. Start: 8 ÷ 4 = 2 found, 6 left.
 - **Orchard:** 200 blossoms, 25 apples per 100. Start: 2 × 25 = 50 apples.
 

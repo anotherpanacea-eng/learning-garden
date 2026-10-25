@@ -163,7 +163,7 @@ Worked example: (1) Rain falls almost every day. (2) Warm air holds lots of wate
 **T3. Loud and dripping.** Hidden animals call and buzz all day and night. Rain and dew drip off millions of leaves.
 Worked example: (1) The rain stops. (2) Water still runs off the leaves. (3) Drip, drip, drip, long after the rain.
 
-**T4. Insects everywhere.** Insects are the most numerous animals in the rainforest. There are far more insects than all the other animals.
+**T4. Insects everywhere.** Insects far outnumber the bigger animals in the rainforest. There are far more insects than birds, monkeys and frogs.
 Worked example: (1) One tree. (2) A few birds, a monkey, some frogs. (3) Insects on every leaf and branch.
 
 **T5. Ant farmers.** Leaf-cutter ants carry leaf pieces home. They feed the leaves to a fungus garden. The fungus feeds the colony.
@@ -374,7 +374,7 @@ Explanation: The thick treetops block most sunlight, so the floor stays dim.
 **1.2 (Sprout, 3-choice)**
 Prompt: Why does the rainforest air feel sticky?
 - A. It is warm and full of water. *(right)*
-- B. Honey drips from the trees. *(misconception: literal-sticky)*
+- B. Sweet honey drips down from the trees. *(misconception: literal-sticky)*
 - C. It is cool and dry. *(misconception: cool-dry-like-a-local-wood)*
 Hint: What falls from the sky almost every day?
 Feedback: A: Yes. Warm, wet air feels sticky. That's humid. B: Not honey. The sticky feeling comes from water in the air. C: Rainforests are warm and wet.
@@ -382,8 +382,8 @@ Explanation: Warm air full of water feels damp and sticky. We call it humid.
 
 **1.3 (Sprout, 3-choice)**
 Prompt: The rainforest is loud. What makes the noise?
-- A. Only the wind. *(misconception: quiet-forest)*
-- B. Nothing. Forests are quiet. *(misconception: quiet-like-a-library)*
+- A. Only the wind in the leaves. *(misconception: quiet-forest)*
+- B. Nothing. Forests are as quiet as a library. *(misconception: quiet-like-a-library)*
 - C. Hidden animals calling and buzzing. *(right)*
 Hint: Who lives in the trees?
 Feedback: A: Wind helps, but listen for animals. B: Listen again. The forest is full of calls. C: Yes. Frogs, birds, monkeys and insects.
@@ -391,7 +391,7 @@ Explanation: Hundreds of hidden animals call and buzz, so the forest is loud.
 
 **1.4 (Sprout, 3-choice)**
 Prompt: The rain has stopped. Do the leaves still drip?
-- A. Yes. Water still runs off the leaves. *(right)*
+- A. Yes. Water keeps running off. *(right)*
 - B. No. It's only wet while it rains. *(misconception: only-wet-when-raining)*
 - C. No. The leaves drink it all at once. *(misconception: leaves-drink-it-all)*
 Hint: Think of a wet umbrella after rain.
@@ -411,19 +411,19 @@ Explanation: Each feeling has a cause. That's what makes it a rainforest.
 Prompt: What do leaf-cutter ants do with the leaves?
 - A. They eat them for dinner. *(misconception: ants-eat-leaves)*
 - B. They feed them to a fungus garden. *(right)*
-- C. They use them as umbrellas. *(misconception: leaves-for-shelter)*
+- C. They carry them home to use as umbrellas. *(misconception: leaves-for-shelter)*
 Hint: What grows in the ants' nest?
 Feedback: A: They don't eat the leaves. They grow food with them. B: Yes. The fungus is their food. C: A fun idea, but the leaves go to the fungus.
 Explanation: Leaf-cutter ants are farmers. The leaves feed the fungus, and the fungus feeds the ants.
 
 **2.2 (Sprout, 3-choice)**
-Prompt: Which rainforest animals are there the most of?
-- A. Jaguars, because they are big. *(misconception: big-animals-most-numerous)*
+Prompt: Which rainforest animals are there far more of?
+- A. Jaguars, because they are big and strong. *(misconception: big-animals-most-numerous)*
 - B. Birds, because you hear them most. *(misconception: loudest-is-most)*
 - C. Insects, small but everywhere. *(right)*
 Hint: Look at every leaf and branch on one tree.
-Feedback: A: Jaguars are rare. You might never see one. B: Birds are loud, but insects far outnumber them. C: Yes. Insects are the biggest crowd.
-Explanation: Insects are the most numerous animals in the rainforest.
+Feedback: A: Jaguars are rare. You might never see one. B: Birds are loud, but insects far outnumber them. C: Yes. Insects far outnumber the bigger animals.
+Explanation: Insects far outnumber the bigger animals in the rainforest: birds, monkeys and frogs.
 
 **2.3 (Sprout, 3-choice)**
 Prompt: Look at the stick insect. What is it?
@@ -450,13 +450,13 @@ Answer: 39.
 Steps: (1) Others: 4 + 3 + 2 = 9. (2) 48 − 9 = 39.
 Misconception tested: the biggest animals are the commonest.
 Hint: Add up the animals that aren't insects first.
-Explanation: Even on this small made-up tree, insects outnumber everything else. (Made-up model.)
+Explanation: Even on this small made-up tree, insects far outnumber the bigger animals. (Made-up model.)
 
 **2.6 (Seedling, 3-choice)**
 Prompt: What are most rainforest insects like?
 - A. Dangerous to people. *(misconception: all-insects-dangerous)*
 - B. Harmless, and busy helping the forest. *(right)*
-- C. Not really animals at all. *(misconception: insects-arent-animals)*
+- C. Not really animals at all, just tiny bugs. *(misconception: insects-arent-animals)*
 Hint: Who carries pollen and clears up dead leaves?
 Feedback: A: A few sting or bite. Most are harmless to people. B: Yes. They pollinate, feed birds and recycle leaves. C: Insects are animals, just without a backbone.
 Explanation: Most rainforest insects are harmless to people and vital to the forest.
@@ -467,7 +467,7 @@ Explanation: Most rainforest insects are harmless to people and vital to the for
 Prompt: A bat flies at night. Which group is it in?
 - A. Birds, because it flies. *(misconception: flies-means-bird)*
 - B. Mammals, because it has fur and milk. *(right)*
-- C. Insects, because it has wings. *(misconception: wings-mean-insect)*
+- C. Insects, because it has wings like a moth. *(misconception: wings-mean-insect)*
 Hint: What covers a bat's body?
 Feedback: A: Flying doesn't decide. Bats have fur, not feathers. B: Yes. Fur and milk make a mammal. C: Bats have no six legs. Look at its body.
 Explanation: Sort by body features. A bat has fur and feeds its babies milk, so it's a mammal.
@@ -475,7 +475,7 @@ Explanation: Sort by body features. A bat has fur and feeds its babies milk, so 
 **3.2 (Seedling, 3-choice)**
 Prompt: An orchid grows on a high branch. Which group?
 - A. Plants. It makes its own food. *(right)*
-- B. Animals. It lives up a tree. *(misconception: sorting-by-habitat)*
+- B. Animals. It lives up in a tall tree. *(misconception: sorting-by-habitat)*
 - C. Not a living thing. *(misconception: plants-not-organisms)*
 Hint: Does it have green leaves that use sunlight?
 Feedback: A: Yes. Plants make food from sunlight. B: Where it lives doesn't decide. C: Orchids are alive. They grow and make seeds.
@@ -528,7 +528,7 @@ Explanation: Bright warning colors say "poison". Hunters learn to stay away.
 **4.2 (Seedling, 3-choice)**
 Prompt: A green tree frog sits on brown bark. What happens?
 - A. A hungry bird can spot it more easily. *(right)*
-- B. It stays invisible anywhere. *(misconception: camouflage-means-invisible)*
+- B. It stays invisible on any background at all. *(misconception: camouflage-means-invisible)*
 - C. Nothing. Color makes no difference. *(misconception: features-just-for-looks)*
 Hint: Does green match brown?
 Feedback: A: Yes. Camouflage only works on the right background. B: Camouflage isn't magic. It needs a matching background. C: Color matters. On green leaves, it would hide.
@@ -545,7 +545,7 @@ Explanation: Feature, then job, then how it helps the animal survive.
 **4.4 (Sapling, 3-choice)**
 Prompt: What does a spider monkey's tail do?
 - A. Only helps it balance. *(misconception: tail-just-for-balance)*
-- B. Nothing. It's just for looks. *(misconception: features-just-for-looks)*
+- B. Nothing. The tail is just there for looks. *(misconception: features-just-for-looks)*
 - C. Grips branches like an extra hand. *(right)*
 Hint: Watch it hang from one branch.
 Feedback: A: It does more. It can hold the monkey's whole weight. B: The tail does a real job. C: Yes. It wraps and grips.
@@ -553,8 +553,8 @@ Explanation: A gripping tail holds on, so both hands are free for fruit.
 
 **4.5 (Sapling, 3-choice)**
 Prompt: Why are many rainforest animals awake at night?
-- A. Rainforest animals never sleep. *(misconception: night-animals-never-sleep)*
-- B. Night is brighter in the forest. *(misconception: floor-bright)*
+- A. Rainforest animals never sleep at all. *(misconception: night-animals-never-sleep)*
+- B. Night is brighter than day in the forest. *(misconception: floor-bright)*
 - C. To hide, find food, or stay cool. *(right)*
 Hint: Who is hunting by day?
 Feedback: A: They sleep too, just in the daytime. B: Night is darker, which helps them hide. C: Yes. Night has its own advantages.
@@ -573,8 +573,8 @@ Explanation: Features like long beaks are passed down from parents, over many ge
 
 **5.1 (Seedling, 3-choice)**
 Prompt: Where is the Amazon rainforest?
-- A. In one country called Amazon. *(misconception: amazon-is-a-country)*
-- B. In nine countries and territories in South America. *(right)*
+- A. In one country, which is called Amazon. *(misconception: amazon-is-a-country)*
+- B. In nine countries and territories. *(right)*
 - C. In Africa. *(misconception: other-continent)*
 Hint: Look at the map. How many names does the green patch touch?
 Feedback: A: Amazon isn't a country. The forest crosses many. B: Yes. Most of it is in Brazil. C: Africa has the Congo rainforest. The Amazon is in South America.
@@ -583,7 +583,7 @@ Explanation: The Amazon rainforest spreads across nine countries and territories
 **5.2 (Seedling, 3-choice)**
 Prompt: The Amazon is the biggest river. Biggest in what way?
 - A. It carries the most water. *(right)*
-- B. It is surely the longest. *(misconception: largest-means-longest)*
+- B. It is surely the longest river. *(misconception: largest-means-longest)*
 - C. It is the oldest river. *(misconception: superlative-guess)*
 Hint: Think about the water, not the length.
 Feedback: A: Yes. No river carries more water. B: Which is longest is still argued about. C: "Biggest" here is about water, not age.
@@ -648,9 +648,9 @@ Explanation: Every step passes the rubber to the next pair of hands, all the way
 
 **6.2 (Sapling, 3-choice)**
 Prompt: Which market things might hide palm oil?
-- A. Only chocolate and bananas. *(misconception: only-exotic-foods)*
+- A. Only chocolate and bananas, nothing else. *(misconception: only-exotic-foods)*
 - B. Some soaps, snacks and lipsticks. *(right)*
-- C. Nothing in Willowbank's market. *(misconception: too-far-away-to-matter)*
+- C. Nothing at all in Willowbank's market. *(misconception: too-far-away-to-matter)*
 Hint: Palm oil isn't always on the front of the box.
 Feedback: A: Those are rainforest foods, but palm oil hides in more. B: Yes. It's hidden in many everyday things. C: Faraway forests reach every market.
 Explanation: Palm oil hides in many everyday things, often under other names on the label.
@@ -676,7 +676,7 @@ Explanation: Stopping all buying can harm small farmers. Other oils need more la
 **6.5 (Keeper's Desk, 3-choice)**
 Prompt: A "checked farm" label is on the chocolate. What does it tell you?
 - A. A group checked the farm against rules. *(right)*
-- B. It can never harm any forest. *(misconception: label-is-a-guarantee)*
+- B. The farm can never harm any forest at all. *(misconception: label-is-a-guarantee)*
 - C. Nothing. Labels are just decoration. *(misconception: labels-are-useless)*
 Hint: Is a label a promise or a sign?
 Feedback: A: Yes. A helpful sign, not a promise. B: Labels help, but checks vary. C: The check is real, even if it isn't perfect.
@@ -713,6 +713,7 @@ Explanation: Every chain starts with someone buying. Choices travel back down th
 - **Dew:** tiny drops of water that form on leaves when warm, wet air cools.
 - **Humid:** air that is damp and sticky with water.
 - **Insect:** a small animal with six legs and three body parts.
+- **Outnumber:** to be more in number than something else.
 - **Pollinate:** to carry pollen from flower to flower, so plants can make seeds.
 - **Nectar:** a sweet juice inside flowers.
 - **Minibeast:** a small animal with no backbone, like an insect or a spider.
@@ -753,7 +754,7 @@ Explanation: Every chain starts with someone buying. Choices travel back down th
 
 ## Grown-up panel
 
-**What this teaches:** what it feels like inside a rainforest, with a cause for each sense; that insects are its biggest crowd, including leaf-cutter ants that farm fungus; sorting rainforest life into groups by body features with a key; how features help animals survive (camouflage, warning colors, gripping tails, beaks, night activity), passed down over generations; the Amazon's place, river and range of life; biodiversity as variety, and why a small area can matter a lot; and, at the Keeper's Desk, how everyday goods trace back to rainforests through supply chains, and how buyers' choices can push back.
+**What this teaches:** what it feels like inside a rainforest, with a cause for each sense; that insects far outnumber its bigger animals, including leaf-cutter ants that farm fungus; sorting rainforest life into groups by body features with a key; how features help animals survive (camouflage, warning colors, gripping tails, beaks, night activity), passed down over generations; the Amazon's place, river and range of life; biodiversity as variety, and why a small area can matter a lot; and, at the Keeper's Desk, how everyday goods trace back to rainforests through supply chains, and how buyers' choices can push back.
 
 **What it does not claim:** the stage light, the one-tree tally, the spot bench and the 100-square bench are made-up models with stated rules, not measurements. Amazon species counts and the land and species shares are estimates that differ between sources. Labels and certification are described in general terms; the pack names no brand or scheme. Nothing here is shopping or diet advice, and nothing asks what your household buys or eats.
 
