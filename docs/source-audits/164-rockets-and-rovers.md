@@ -92,3 +92,6 @@ No images are embedded. For build, prefer NASA imagery (generally not copyrighte
 - **Cross-pack:** Mars distances and Sputnik, Gagarin, Apollo 11, ISS and Perseverance dates match spec 141; the Long Line card IDs and 1 box = 100 years match spec 133. Since the space age (1957-2021) crosses 2000 it spans two of 133's boxes, so "fits in one box" became "shorter than one box". This pack states no Moon gravity value, so it cannot conflict with spec 154 (1.62 m/s², about one sixth).
 - **Staleness:** "today", "ever since" and "less than 70 years ago" wording was replaced with dated or past-tense lines (ISS crews "with no gap, for decades"; "first person went to space in 1961"). B2 now asks where astronauts have lived for months, which stays true with more than one station in orbit.
 - **No disaster content** confirmed by search of all three files.
+
+
+Review correction (2026-10-25): Real rover speed is far slower than walking: JPL gives 4.2 cm/s maximum wheel speed. https://robotics.jpl.nasa.gov/what-we-do/flight-projects/mars-2020-rover/m2020mobility/
