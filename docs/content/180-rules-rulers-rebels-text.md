@@ -511,7 +511,7 @@ Cards: English courts use juries of neighbors · Today in England and Wales, jur
 2. Jurors were neighbors meant to know the facts **(right)**
 3. Jurors were picked by a stone machine, like Athens *(mix-up with spec 136's kleroterion)*
 **Feedback 1:** Jurors were ordinary local men. Judges were separate.
-**Feedback 2:** Yes. Today in England and Wales, jurors use court evidence beforehand.
+**Feedback 2:** Yes. Modern jurors in England and Wales decide from evidence admitted in court.
 **Feedback 3:** That was Athens. English jurors were local men.
 **Hint:** Compare the juries card with the today card.
 **Explanation:** Then, jurors brought local knowledge. Today in England and Wales, prior knowledge or connections are reported for a judge to assess; the jury decides on admitted evidence.
