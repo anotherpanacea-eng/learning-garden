@@ -78,6 +78,7 @@ node test/whole-batches-checks.mjs
 node test/whole-batches-integration-checks.mjs
 node test/travelers-archive-checks.mjs
 node test/travelers-archive-ui-checks.mjs
+node test/drawn-howtos-checks.mjs
 node test/travelers-archive-integration-checks.mjs
 node test/plant-study-checks.mjs
 node test/plant-study-integration-checks.mjs
@@ -532,3 +533,9 @@ Open `#orchard/games/rows`, or choose Ribbon Rows beside Seed Pile and Shutters.
 A pictured four-step explanation offers a matching strategy. Its temporary practice board leaves the waiting game and selected take unchanged. Games resume after leaving or reloading; earlier games can be resumed or explicitly removed. Optional finished-game notes use the existing explorer download/import. Winning is not a math level, and supplied explanations stay separate from play. Three-row play has a six-thought bundle explanation and a separate1,2,4 practice board. Optional Show bundles pictures the actual board in4/2/1 groups; its first exposure is recorded separately from explanations. Two-row matching and its older saves remain available.
 
 See [spec131](docs/specs/131-ribbon-rows.md) and [spec132](docs/specs/132-three-row-ribbons.md). Run `node test/ribbon-rows-checks.mjs`; with `dist/` served at port4188, run `python3 test/ribbon-rows-browser.py` (Python Playwright and Chrome). `ROWS_TEST_URL`, `CHROME_PATH` and `ROWS_ARTIFACTS` select another origin, browser or screenshot folder. For the extension, run `node test/three-row-ribbons-checks.mjs` and `python3 test/three-row-ribbons-browser.py`. All fixtures are synthetic. Checks at320/820px do not establish physical iPad Safari behavior or learning effects.
+
+## Drawn how-tos
+
+Every activity has a short pencil drawing that shows how it works: the butterfly life-cycle ring in the life-stages help (`#living/stages`), how a turn goes in Shutters and Ribbon Rows, and a "Show me how" button under the title of each other activity page. A button opens its drawing in place. It plays through once in about 15 seconds, then Back and Next step through it; Pause and Play hold or resume it. The finished picture stays with every caption listed. With reduced motion nothing plays, and each step appears whole. Watching saves nothing. See the [proposal](docs/specs/proposed/drawn-how-to-animations.md).
+
+The pictures are written as Mermaid text or a ring of stages in `dist/drawn-howtos-content.mjs`. To change one, run `npm ci` in `scripts/drawn-howtos`, then `node scripts/drawn-howtos/build.mjs` to regenerate `dist/drawn-howtos/` (`--check` confirms it matches). Each entry's `at` list names the pages that offer it. The game loads only the generated path data, one drawing at a time. Run `node test/drawn-howtos-checks.mjs`; with `dist/` served at port 4213, run `node test/drawn-howtos-browser.js` with the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables (`HOWTO_TEST_URL` and `HOWTO_ARTIFACTS` select another origin or a screenshot folder). These checks do not establish that any child learned a rule from a drawing.

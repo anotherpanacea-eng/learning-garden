@@ -1,0 +1,11 @@
+{
+  "name": "drawn-howtos-authoring",
+  "private": true,
+  "description": "Authoring-time layout for drawn how-tos. Not shipped; the game loads only the generated modules in dist/drawn-howtos/.",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "hersheytext": "2.0.0",
+    "pele": "1.10.0"
+  }
+}
