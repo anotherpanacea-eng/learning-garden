@@ -379,7 +379,7 @@ Act V's desk depth, the Gazette opinion piece, belongs to spec 49's authored pro
 
 The authored files propose the following parts, whose presence is not proof of completeness or review: why the case exists, its hook, its steps, each step's learn card, guided first task, tasks with worked answers, stuck ladder and misconception replies, the recommendation or closing step, its supported route, topic candidates with the hard-prerequisite crosswalk, and what still needs review.
 
-The later dossiers currently contain representative help and replies, not a complete deployable content set. Before each separate case build, its author and independent reviewer must resolve the applicable finite content gaps: Case 5 needs all three statement-tray reply columns; Case 9 needs every offered French/English choice and keyed reply at each supported passage amount; Case 3 needs the offered control/reason choices and their authored responses for its fair-trial plan. Case 6 needs source-page-specific tasks/help that work when only page 1 is available and never reveal undried pages. 
+The later dossiers currently contain representative help and replies, not a complete deployable content set. Before each separate case build, its author and independent reviewer must resolve the applicable finite content gaps: Case 5 needs all three statement-tray reply columns; Case 9 needs every offered French/English choice and keyed reply at each supported passage amount; Case 3 needs the offered control/reason choices and their authored responses for its fair-trial plan. Case 6 needs source-page-specific tasks/help that work when only page 1 is available and never reveal undried pages.
 
 ## 9. Entry points
 
@@ -412,4 +412,4 @@ Refreshed 2026-10-23: Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060` (`LESSO
 
 ## 12. Boundaries
 
-Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it. 
+Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it.
