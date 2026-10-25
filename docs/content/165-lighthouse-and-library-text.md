@@ -180,7 +180,7 @@ Companion to [spec 165](../specs/165-lighthouse-and-library.md). Use as written,
 | The lighthouse stood on Pharos island. | We know | Its location is supported. Putting this in Nobody knows would say too little. |
 | Its fire guided ships at night. | We know | Its purpose is supported. Putting this in Nobody knows would say too little. |
 
-**After sorting:** You sorted every card. Look at the two "too little" cards: saying "nobody knows" can be wrong too.
+**After sorting:** You sorted every card. Look at the cards about location and purpose: putting known facts in Nobody knows says too little.
 
 ## The Shadow Bench (A simplified picture)
 
