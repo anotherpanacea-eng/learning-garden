@@ -19,7 +19,7 @@ export function parseAffine(input){
  while(p<s.length){if(/\s/.test(s[p])){p++;continue;}const m=s.slice(p).match(/^(?:\d[\d,]*|L|[()+*\-])/);if(!m)return {ok:false,error:format.rule};const raw=m[0];if(/^\d/.test(raw)){const n=groupedNumber(raw);if(n===null)return {ok:false,error:format.rule};tokens.push({kind:'n',value:BigInt(n)});}else tokens.push({kind:raw});p+=raw.length;if(tokens.length>96)return {ok:false,error:large};}
  let at=0,depth=0;const peek=()=>tokens[at]?.kind,fail=message=>{throw Error(message);},bounded=pair=>{if(!safePair(pair))fail(large);return pair;};
  function atom(){if(++depth>12)fail(large);let r;const k=peek();if(k==='+'||k==='-'){at++;const a=atom();r=k==='-'?a.map(n=>-n):a;}else if(k==='n'){r=[0n,tokens[at++].value];}else if(k==='L'){at++;r=[1n,0n];}else if(k==='('){at++;r=sum();if(peek()!==')')fail(format.rule);at++;}else fail(format.rule);depth--;return bounded(r);}
- function product(){let a=atom();while(peek()==='*'||['n','L','('].includes(peek())){if(peek()==='*')at++;const b=atom();if(a[0]!==0n&&b[0]!==0n)fail(format.rule);a=bounded([a[0]*b[1]+a[1]*b[0],a[1]*b[1]]);}return a;}
+ function product(){let a=atom();while(peek()==='*'||['L','('].includes(peek())){if(peek()==='*')at++;const b=atom();if(a[0]!==0n&&b[0]!==0n)fail(format.rule);a=bounded([a[0]*b[1]+a[1]*b[0],a[1]*b[1]]);}return a;}
  function sum(){let a=product();while(peek()==='+'||peek()==='-'){const op=tokens[at++].kind,b=product();a=bounded([a[0]+(op==='+'?b[0]:-b[0]),a[1]+(op==='+'?b[1]:-b[1])]);}return a;}
  try{if(!tokens.length)return {ok:false,error:format.rule};const [a,b]=sum();if(at!==tokens.length)return {ok:false,error:format.rule};return {ok:true,coefficient:Number(a),constant:Number(b)};}catch(e){return {ok:false,error:e.message};}
 }
@@ -58,6 +58,7 @@ export function checkDeskValue(source,taskId,value){
  if(v.a===a/g&&v.b===b/g)return result('match','This answer matches the supplied model.');
  if(v.a*b===v.b*a)return result('different','Those parts give an equivalent ratio. Can both still be divided by the same common factor?');
  if(v.a*a===v.b*b)return result('different','Farm carts were asked for first, so farm carts go first: carts to walkers.');
+ if(a-v.a>0n&&a-v.a===b-v.b)return result('different','Taking the same amount off both parts changes the comparison. Divide both parts by the same number instead.');
  return result('different',mismatch);
  }
  if(t.kind==='share'){const v=parseShare(value);if(!v.ok)return result('uncheckable',v.error,'format');const day=m[t.day],a=BigInt(day.carts),b=BigInt(day.walkers);if(v.numerator*(a+b)===v.denominator*a)return result('match','This answer matches the supplied model.');if(v.numerator*b===v.denominator*a)return result('different','That compares carts with walkers. Which count includes everyone?');return result('different',mismatch);}
@@ -98,7 +99,7 @@ function validSource(s){
 function validDraft(v){return text(v,1000)||Array.isArray(v)&&v.length<=64&&v.every(x=>text(x,80))||object(v)&&Object.keys(v).length<=20&&Object.values(v).every(x=>text(x,1000)||object(x)&&Object.keys(x).length<=20&&Object.values(x).every(y=>text(y,80)));}
 function validAttempt(a){return object(a)&&validDraft(a.value)&&outcomes.includes(a.outcome)&&text(a.feedback,12000)&&text(a.code,80)&&object(a.support)&&integer(a.priorAttempts)&&typeof a.familiar==='boolean';}
 function validStep(s){
- try{return object(s)&&object(s.drafts)&&Object.entries(s.drafts).length<=64&&Object.entries(s.drafts).every(([k,v])=>id(k)&&validDraft(v))&&integer(s.shownLearn,30)&&Array.isArray(s.shownGuided)&&s.shownGuided.length<=64&&s.shownGuided.every(id)&&typeof s.folded==='boolean'&&Array.isArray(s.support)&&s.support.length<=10000&&s.support.every(x=>object(x)&&text(x.code,80)&&(!x.taskId||id(x.taskId)))&&object(s.help)&&Object.entries(s.help).every(([k,v])=>id(k)&&integer(v,3))&&object(s.attempts)&&Object.entries(s.attempts).every(([k,v])=>id(k)&&Array.isArray(v)&&v.length<=32&&v.every(validAttempt))&&object(s.first)&&Object.entries(s.first).every(([k,v])=>id(k)&&validAttempt(v))&&object(s.counts)&&Object.entries(s.counts).every(([k,v])=>id(k)&&integer(v))&&Object.entries(s.attempts).every(([k,a])=>!a.length||own(s.first,k)&&integer(s.counts[k])&&s.counts[k]>=a.length)&&(!own(s,'trials')||Array.isArray(s.trials)&&s.trials.length<=20&&s.trials.every(v=>object(v)&&integer(v.length,100)&&integer(v.bridge,2e6)&&integer(v.causeway,2e6)));}catch{return false;}
+ try{return object(s)&&object(s.drafts)&&Object.entries(s.drafts).length<=64&&Object.entries(s.drafts).every(([k,v])=>id(k)&&validDraft(v))&&integer(s.shownLearn,30)&&Array.isArray(s.shownGuided)&&s.shownGuided.length<=64&&s.shownGuided.every(id)&&typeof s.folded==='boolean'&&Array.isArray(s.support)&&s.support.length<=200000&&s.support.every(x=>object(x)&&text(x.code,80)&&(!x.taskId||id(x.taskId))&&(!own(x,'count')||Number.isSafeInteger(x.count)&&x.count>0))&&object(s.help)&&Object.entries(s.help).every(([k,v])=>id(k)&&integer(v,3))&&object(s.attempts)&&Object.entries(s.attempts).every(([k,v])=>id(k)&&Array.isArray(v)&&v.length<=32&&v.every(validAttempt))&&object(s.first)&&Object.entries(s.first).every(([k,v])=>id(k)&&validAttempt(v))&&object(s.counts)&&Object.entries(s.counts).every(([k,v])=>id(k)&&integer(v))&&Object.entries(s.attempts).every(([k,a])=>!a.length||own(s.first,k)&&integer(s.counts[k])&&s.counts[k]>=a.length)&&(!own(s,'trials')||Array.isArray(s.trials)&&s.trials.length<=20&&s.trials.every(v=>object(v)&&integer(v.length,100)&&integer(v.bridge,2e6)&&integer(v.causeway,2e6)));}catch{return false;}
 }
 function validRecommendation(r){
  const fields=['plan','reason','objection','uncertainty'];
@@ -120,13 +121,50 @@ function opened(v,stepId,taskId){const s=v.steps[stepId],def=v.source.steps.find
 export function setDeskLocation(state,stepId,taskId=null,options={}){return mutate(state,options,c=>{const v=deskView(c);if(v.status!=='ready')return false;if(stepId===null&&taskId===null){v.record.location={stepId:null,taskId:null};return true;}if(!v.steps[stepId]||taskId!==null&&!v.source.tasks.some(t=>t.stepId===stepId&&t.id===taskId))return false;if(!opened(v,stepId,taskId))return false;v.record.location={stepId,taskId};return true;});}
 export function setDeskDraft(state,taskId,value,options={}){if(!validDraft(value))return false;return mutate(state,options,c=>{const v=deskView(c),t=getTask(v,taskId),s=t&&v.steps[t.stepId];if(!s||typeof value==='string'&&value.length>160)return false;s.drafts[taskId]=clone(value);return true;});}
 export function showDeskLearn(state,stepId,options={}){return mutate(state,options,c=>{const v=deskView(c),s=v.steps[stepId],def=v.source?.steps.find(x=>x.id===stepId);if(!s||!def)return false;s.folded=false;opened(v,stepId,v.record.location.taskId);s.shownLearn=Math.min(def.learn.length,s.shownLearn+1);return true;});}
-export function foldDeskLearn(state,stepId,folded,options={}){return mutate(state,options,c=>{const v=deskView(c),s=v.steps[stepId];if(!s||typeof folded!=='boolean')return false;if(!folded&&s.folded)s.support.push({code:'show-how'});s.folded=folded;if(!folded)opened(v,stepId,v.record.location.taskId);return true;});}
-export function addDeskSupport(state,stepId,code,taskId=null,options={}){if(!id(code)||taskId!==null&&!id(taskId))return false;return mutate(state,options,c=>{const v=deskView(c),s=v.steps[stepId];if(!s)return false;s.support.push({code,...(taskId?{taskId}:{})});return true;});}
-export function deskHelp(state,taskId,options={}){return mutate(state,options,c=>{const v=deskView(c),t=getTask(v,taskId),s=t&&v.steps[t.stepId];if(!s||!mechanical.includes(t.kind))return false;const rung=Math.min(3,(s.help[taskId]||0)+1);s.help[taskId]=rung;s.support.push({code:rung===1?'hint':rung===2?'similar-example':'skip',taskId});if(rung===3)return recordTask(v,t,'skipped','Leave this question open. Your other work stays here.','skip');return rung;});}
-function supportSnapshot(v,stepId){const s=v.steps[stepId],def=v.source.steps.find(x=>x.id===stepId);return {learn:Array.from({length:Math.min(s.shownLearn,def.learn.length)},(_,i)=>i),guided:clone(s.shownGuided),guidedLines:s.shownGuided.length?def.guided.map((_,i)=>i):[],events:clone(s.support)};}
+// Repeated explicit support actions coalesce. Old log entries and earlier snapshots are not normalized on load.
+function supportEvent(s,code,taskId=null){
+ const existing=s.support.find(e=>e.code===code&&(e.taskId||null)===taskId);
+ if(existing){const next=(existing.count??1)+1;if(!Number.isSafeInteger(next))return false;existing.count=next;}
+ else s.support.push({code,...(taskId?{taskId}:{}),count:1});
+ return true;
+}
+function compactSupport(events){
+ const found=new Map();for(const e of events){const key=JSON.stringify([e.code,e.taskId||null]),current=found.get(key),n=e.count??1;if(current)current.count+=n;else found.set(key,{code:e.code,...(e.taskId?{taskId:e.taskId}:{}),count:n});}
+ return [...found.values()];
+}
+export function foldDeskLearn(state,stepId,folded,options={}){return mutate(state,options,c=>{const v=deskView(c),s=v.steps[stepId];if(!s||typeof folded!=='boolean')return false;if(!folded&&s.folded&&!supportEvent(s,'show-how'))return false;s.folded=folded;if(!folded)opened(v,stepId,v.record.location.taskId);return true;});}
+export function addDeskSupport(state,stepId,code,taskId=null,options={}){if(!id(code)||taskId!==null&&!id(taskId))return false;return mutate(state,options,c=>{const v=deskView(c),s=v.steps[stepId];if(!s)return false;return supportEvent(s,code,taskId);});}
+export function deskHelp(state,taskId,options={}){
+ const current=deskView(state),task=getTask(current,taskId),step=task&&current.steps[task.stepId];
+ if(!step||!mechanical.includes(task.kind))return false;
+ if(step.help[taskId]===3)return {outcome:'skipped',feedback:'Leave this question open. Your other work stays here.',recorded:false};
+ return mutate(state,options,c=>{const v=deskView(c),t=getTask(v,taskId),s=t&&v.steps[t.stepId];if(!s)return false;const rung=(s.help[taskId]||0)+1;s.help[taskId]=rung;if(!supportEvent(s,rung===1?'hint':rung===2?'similar-example':'skip',taskId))return false;if(rung===3)return recordTask(v,t,'skipped','Leave this question open. Your other work stays here.','skip');return rung;});
+}
+function supportSnapshot(v,stepId){const s=v.steps[stepId],def=v.source.steps.find(x=>x.id===stepId);return {learn:Array.from({length:Math.min(s.shownLearn,def.learn.length)},(_,i)=>i),guided:clone(s.shownGuided),guidedLines:s.shownGuided.length?def.guided.map((_,i)=>i):[],events:compactSupport(s.support)};}
 function recordTask(v,t,outcome,feedback,code){const s=v.steps[t.stepId],prior=s.counts[t.id]||0;if(prior>=1e9)return false;const value=own(s.drafts,t.id)?clone(s.drafts[t.id]):t.kind==='multi'?[]:'';const a={value,outcome,feedback,code,support:supportSnapshot(v,t.stepId),priorAttempts:prior,familiar:prior>0};if(!own(s.first,t.id))s.first[t.id]=clone(a);s.attempts[t.id]=[...(s.attempts[t.id]||[]),a].slice(-32);s.counts[t.id]=prior+1;return a;}
-export function keepDeskTask(state,taskId,options={}){return mutate(state,options,c=>{const v=deskView(c),t=getTask(v,taskId);if(!t||!v.steps[t.stepId])return false;const s=v.steps[t.stepId];if(v.record.location.stepId!==t.stepId||v.record.location.taskId!==taskId)return false;const value=own(s.drafts,taskId)?s.drafts[taskId]:t.kind==='multi'?[]:'';const checked=checkDeskValue(v.source,taskId,value);return recordTask(v,t,checked.outcome,checked.feedback,checked.code);});}
-export function addDeskTrial(state,length,options={}){const n=whole(String(length),true);if(n===null||n<0||n>100)return false;return mutate(state,options,c=>{const v=deskView(c),s=v.steps.cost;if(!s)return false;const m=v.source.model,row={length:n,bridge:m.bridge.setup+m.bridge.rate*n,causeway:m.causeway.setup+m.causeway.rate*n};s.trials=[...s.trials,row].slice(-20);s.support.push({code:'trial-table',taskId:'1d'});return row;});}
-export function setDeskRecommendation(state,field,value,options={}){if(!['plan','reason','objection','uncertainty'].includes(field)||!text(value,1000))return false;return mutate(state,options,c=>{const v=deskView(c),r=v.recommendation,s=v.steps.recommendation;if(!r||!s)return false;if(field==='objection'&&!r.draft.objection.trim())r.objectionCode=r.planId;r.draft[field]=value;if(field==='plan')r.planId=options.planId&&v.source.recommendation.plans.some(p=>p.id===options.planId)?options.planId:'custom';if(field==='plan'&&!r.draft.objection.trim())r.objectionCode=r.planId;if(field==='objection'&&!r.draft.objection.trim())r.objectionCode=r.planId;if(options.supplied)s.support.push({code:'supplied-'+field});return true;});}
+export function keepDeskTask(state,taskId,options={}){
+ const v=deskView(state),t=getTask(v,taskId),step=t&&v.steps[t.stepId];
+ if(!step||v.record.location.stepId!==t.stepId||v.record.location.taskId!==taskId)return false;
+ const value=own(step.drafts,taskId)?step.drafts[taskId]:t.kind==='multi'?[]:'',checked=checkDeskValue(v.source,taskId,value);
+ if(checked.outcome==='uncheckable')return {...checked,recorded:false};
+ return mutate(state,options,c=>{const view=deskView(c),task=getTask(view,taskId);return recordTask(view,task,checked.outcome,checked.feedback,checked.code);});
+}
+export function addDeskTrial(state,length,options={}){const n=whole(String(length),true);if(n===null||n<0||n>100)return false;return mutate(state,options,c=>{const v=deskView(c),s=v.steps.cost;if(!s)return false;const m=v.source.model,row={length:n,bridge:m.bridge.setup+m.bridge.rate*n,causeway:m.causeway.setup+m.causeway.rate*n};s.trials=[...s.trials,row].slice(-20);if(!supportEvent(s,'trial-table','1d'))return false;return row;});}
+export function setDeskRecommendation(state,field,value,options={}){
+ if(!['plan','reason','objection','uncertainty'].includes(field)||!text(value,1000))return false;
+ return mutate(state,options,c=>{const v=deskView(c),r=v.recommendation,s=v.steps.recommendation;if(!r||!s)return false;
+ // Editing chosen words does not change the plan or the question visible beside its answer.
+ if(field==='plan'&&own(options,'planId')){
+ if(!v.source.recommendation.plans.some(p=>p.id===options.planId))return false;
+ r.planId=options.planId;if(!r.draft.objection.trim())r.objectionCode=r.planId;
+ }
+ if(field==='objection'&&own(options,'objectionCode')){
+ if(!own(v.source.recommendation.objections,options.objectionCode))return false;
+ if(!r.draft.objection.trim()&&value.trim())r.objectionCode=options.objectionCode;
+ }
+ r.draft[field]=value;
+ if(options.supplied&&!supportEvent(s,'supplied-'+field))return false;
+ return true;});
+}
 export function useDeskObjection(state,options={}){return mutate(state,options,c=>{const v=deskView(c),r=v.recommendation;if(!r)return false;r.objectionCode=r.planId;r.draft.objection='';return true;});}
 export function keepDeskRecommendation(state,options={}){return mutate(state,options,c=>{const v=deskView(c),r=v.recommendation;if(!r||!v.steps.recommendation||!Object.values(r.draft).every(x=>x.trim()))return false;if(v.record.location.stepId!=='recommendation')return false;const kept={...clone(r.draft),planId:r.planId,objectionCode:r.objectionCode,objectionQuestion:v.source.recommendation.objections[r.objectionCode]||r.objectionCode,support:supportSnapshot(v,'recommendation')};if(!r.first)r.first=clone(kept);r.kept=kept;return kept;});}

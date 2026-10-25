@@ -23,7 +23,7 @@ for(const t of deskSource.tasks){if(t.kind==='choice')for(const c of t.choices){
  const s=freshState(),before=structuredClone(s);equal(deskView(s).status,'missing');equal(s,before);ok(!startDesk(s,{canExport:()=>false}));equal(s,before);ok(startDesk(s,{canExport}));equal(s.desk.location,{stepId:null,taskId:null});ok(!startDesk(s));
 }
 {
- const s=make();ok(setDeskLocation(s,'cost','1a'));equal(s.desk.steps.cost.shownLearn,1);equal(s.desk.steps.cost.shownGuided,['1a']);setDeskDraft(s,'1a','2640');const first=keepDeskTask(s,'1a');equal(first.outcome,'match');equal(first.support.learn,[0]);equal(first.support.guidedLines,[0,1,2]);ok(foldDeskLearn(s,'cost',true));equal(s.desk.steps.cost.support,[]);addDeskSupport(s,'cost','together');const second=keepDeskTask(s,'1a');equal(second.support.events,[{code:'together'}]);equal(first.support.events,[],'later support cannot alter old attempt');ok(second.familiar);ok(!first.familiar);ok(foldDeskLearn(s,'cost',false));equal(s.desk.steps.cost.support.at(-1).code,'show-how');ok(showDeskLearn(s,'cost'));equal(s.desk.steps.cost.shownLearn,2);
+ const s=make();ok(setDeskLocation(s,'cost','1a'));equal(s.desk.steps.cost.shownLearn,1);equal(s.desk.steps.cost.shownGuided,['1a']);setDeskDraft(s,'1a','2640');const first=keepDeskTask(s,'1a');equal(first.outcome,'match');equal(first.support.learn,[0]);equal(first.support.guidedLines,[0,1,2]);ok(foldDeskLearn(s,'cost',true));equal(s.desk.steps.cost.support,[]);addDeskSupport(s,'cost','together');const second=keepDeskTask(s,'1a');equal(second.support.events,[{code:'together',count:1}]);equal(first.support.events,[],'later support cannot alter old attempt');ok(second.familiar);ok(!first.familiar);ok(foldDeskLearn(s,'cost',false));equal(s.desk.steps.cost.support.at(-1).code,'show-how');ok(showDeskLearn(s,'cost'));equal(s.desk.steps.cost.shownLearn,2);
  for(let i=0;i<40;i++)keepDeskTask(s,'1a');equal(s.desk.steps.cost.attempts['1a'].length,32);equal(s.desk.steps.cost.first['1a'],first);equal(s.desk.steps.cost.counts['1a'],42);
  ok(setDeskLocation(s,'crossings','2b'));ok(foldDeskLearn(s,'crossings',true));ok(setDeskLocation(s,'crossings','2a'));equal(s.desk.steps.crossings.shownGuided,[],'folded first-task guidance was not shown');ok(foldDeskLearn(s,'crossings',false));equal(s.desk.steps.crossings.shownGuided,['2a']);
  const old=structuredClone(s.desk);equal(prepareProgressImport(JSON.stringify(s)).state.desk,old,'whole import keeps source/support/attempts');
@@ -61,11 +61,35 @@ for(const t of deskSource.tasks){if(t.kind==='choice')for(const c of t.choices){
 {
  const s=make();const before=structuredClone(s);ok(!keepDeskTask(s,'1a'));equal(s,before,'checking unopened task cannot manufacture exposure');ok(!keepDeskRecommendation(s));equal(s,before);ok(setDeskLocation(s,'cost','1a'));ok(setDeskLocation(s,null,null));equal(s.desk.location,{stepId:null,taskId:null});
  setDeskLocation(s,'cost','1a');const old=structuredClone(s);ok(!setDeskDraft(s,'1a','1'.repeat(161)));equal(s,old,'answer limit checked before writing');
- // Last permitted event can be read; no operation can push a readable step over its event bound.
- s.desk.steps.cost.support=Array.from({length:10000},()=>({code:'reference'}));const full=structuredClone(s);ok(!addDeskSupport(s,'cost','together'));equal(s,full);equal(deskView(s).steps.cost.support.length,10000);
+ // Legacy append logs stay readable; a new event cannot strand the step at an arbitrary event cap.
+ s.desk.steps.cost.support=Array.from({length:10000},()=>({code:'reference'}));const legacy=structuredClone(s.desk.steps.cost.support);ok(addDeskSupport(s,'cost','together'));equal(s.desk.steps.cost.support.slice(0,10000),legacy);equal(deskView(s).steps.cost.support.length,10001);
 }
 {
  const s=make();setDeskLocation(s,'crossings','2d');const task=s.desk.source.tasks.find(t=>t.id==='2d');task.choices[0].id='future-reading';setDeskDraft(s,'2d','future-reading');equal(keepDeskTask(s,'2d').outcome,'interpretation');equal(prepareProgressImport(JSON.stringify(s)).state.desk,s.desk,'saved choice IDs/order not restricted to current catalog');
  const held=structuredClone(s.desk.steps.crossings.first['2d']);task.choices.reverse();equal(s.desk.steps.crossings.first['2d'],held,'saved reading not regraded after source arrangement change');
+}
+{
+ for(const [task,value] of [['1a',''],['1a','twelve'],['1c',{bridge:'fits'}],['1e-bridge','L*L'],['2d',''],['3a-hob',{kind:'memory',cards:{'hob-experience':'can'}}]]){
+ const s=make(),t=s.desk.source.tasks.find(t=>t.id===task);setDeskLocation(s,t.stepId,task);setDeskDraft(s,task,value);const before=structuredClone(s),answer=keepDeskTask(s,task);equal(answer.outcome,'uncheckable');equal(answer.recorded,false);equal(s,before,'invalid check writes no attempt, first version or familiarity');equal(s.desk.steps[t.stepId].counts[task],undefined);equal(s.desk.steps[t.stepId].first[task],undefined);
+ }
+ const s=make();setDeskLocation(s,'cost','1a');setDeskDraft(s,'1a','');keepDeskTask(s,'1a');setDeskDraft(s,'1a','2640');const checked=keepDeskTask(s,'1a');equal(checked.priorAttempts,0);equal(checked.familiar,false);equal(s.desk.steps.cost.first['1a'],checked);
+ for(const value of ['1 200 + 60L','12 34','1200+6 0L'])ok(!parseAffine(value).ok,'numeric adjacency is a grammar error');
+ for(const [task,value] of [['2a','0:90'],['2a','44:134'],['2c-ratio','1:37']])ok(checkDeskValue(deskSource,task,value).feedback.startsWith('Taking the same amount off both parts'),'subtraction misconception');
+}
+{
+ const s=make();setDeskLocation(s,'recommendation');const reasons=deskSource.recommendation.starters;
+ setDeskRecommendation(s,'plan','Build the timber footbridge',{planId:'bridge',supplied:true});const displayed=deskSource.recommendation.objections.bridge;
+ setDeskRecommendation(s,'plan','Build the timber footbridge with a wider hand-cart rail');equal(s.desk.recommendation.planId,'bridge','adapting chosen plan preserves identity');equal(s.desk.recommendation.objectionCode,'bridge');
+ setDeskRecommendation(s,'objection','A synthetic reply to the displayed footbridge question',{objectionCode:'bridge'});setDeskRecommendation(s,'reason',reasons.reason[0],{supplied:true});setDeskRecommendation(s,'uncertainty',reasons.uncertainty[0],{supplied:true});equal(keepDeskRecommendation(s).objectionQuestion,displayed);
+ setDeskRecommendation(s,'plan','Build the stone causeway',{planId:'causeway'});const oldQuestion=s.desk.recommendation.objectionCode;setDeskRecommendation(s,'objection','');equal(s.desk.recommendation.objectionCode,oldQuestion,'clearing the answer does not silently change its visible question');setDeskRecommendation(s,'objection','Another synthetic answer',{objectionCode:'bridge'});equal(keepDeskRecommendation(s).objectionQuestion,displayed);
+ const before=structuredClone(s);ok(!setDeskRecommendation(s,'objection','',{objectionCode:'unknown-question'}),'invalid code cannot overwrite an answer');equal(s,before);
+}
+{
+ const s=make();setDeskLocation(s,'cost','1e-bridge');for(let i=0;i<2000;i++)ok(addDeskSupport(s,'cost','tiles','1e-bridge'));
+ equal(s.desk.steps.cost.support,[{code:'tiles',taskId:'1e-bridge',count:2000}],'tile context has one bounded counter');setDeskDraft(s,'1e-bridge','1200+60L');const first=keepDeskTask(s,'1e-bridge');equal(first.support.events,[{code:'tiles',taskId:'1e-bridge',count:2000}]);
+ addDeskSupport(s,'cost','tiles','1e-bridge');equal(first.support.events[0].count,2000,'later events do not alter old snapshots');const later=keepDeskTask(s,'1e-bridge');equal(later.support.events[0].count,2001);
+ for(const task of s.desk.source.tasks.filter(t=>t.stepId==='cost')){setDeskLocation(s,'cost',task.id);const input={'1a':'2640','1b':'1900','1c':{bridge:'fits',causeway:'fits',both:'not'},'1d':'20','1e-bridge':'1200+60L','1e-causeway':'400+100L'}[task.id];setDeskDraft(s,task.id,input);for(let i=0;i<35;i++)ok(keepDeskTask(s,task.id));}
+ ok(canExport(s),'2,001 tile events and all six task histories preserve whole-notebook headroom');ok(JSON.stringify(s).length<200000,'support snapshot size depends on distinct contexts, not repeated taps');
+ setDeskLocation(s,'cost','1a');deskHelp(s,'1a');deskHelp(s,'1a');deskHelp(s,'1a');const skipped=structuredClone(s);const again=deskHelp(s,'1a');equal(again.recorded,false);equal(s,skipped,'repeated skip at rung3 adds neither event nor attempt');
 }
 console.log(`Keeper’s Desk: ${count} oracle, content, support, preservation and boundary checks passed.`);

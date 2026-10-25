@@ -45,7 +45,7 @@ export const deskSource={
  equality:['1200 + 60L = 400 + 100L','800 + 60L = 100L — take 400 from both sides','800 = 40L — take 60L from both sides','20 = L — divide both sides by 40','Check: 1200 + 60 × 20 = 2400 and 400 + 100 × 20 = 2400'],
  equalityContrast:'Each line should be true by itself. The chain 800 = 40L = 20 is not true: 40L is not 20; L is. Write L = 20 on its own line.',
  costContrast:'For these two sites, the causeway does cost less. Setup alone does not explain that: on the same gap beyond 20 metres, the footbridge costs less. One example cannot show a plan is always cheaper.',
- ratioContrast:'Saturday: ratio 45:135 = 1:3; difference 90; cart share 45/180 = 1/4. Tuesday: ratio 2:38 = 1:19; difference 36; cart share 2/40 = 1/20. Ratios compare parts; fractions compare a part with the whole.',
+ ratioContrast:'Saturday had 90 more walkers than farm-cart journeys. Tuesday had 36 more. Differences compare by subtracting; ratios compare the sizes of the parts, and fractions compare a part with the whole.',
  tasks:[
  {id:'1a',stepId:'cost',kind:'number',prompt:'What does the footbridge at the 24-metre narrows cost?',hint:'Pay the setup once, then the price for every metre.',example:'A stall costs 100 to set up and 10 per metre. At 3 metres: 100 + 10 × 3 = 130. Your first line: 1,200 + 60 × 24.'},
  {id:'1b',stepId:'cost',kind:'number',prompt:'What does the causeway at the 15-metre ford cost?',hint:'The causeway has its own setup and per-metre price.',example:'A path costs 50 to start and 20 per metre. At 4 metres: 50 + 20 × 4 = 130. Your first line: 400 + 100 × 15.'},
@@ -71,7 +71,7 @@ export const deskSource={
  ['courier','The courier’s log','The courier recorded seven interruptions over two winters.','The measured water depth on each of those days.','courier-delays','courier-depth'],
  ['map','The survey map','The survey warned high water could make the ford impassable.','How often the ford flooded after 1898.','map-warning','map-frequency']
  ].map(([recordId,name,can,cannot,canId,cannotId])=>({id:`3a-${recordId}`,stepId:'records',kind:'source',recordId,prompt:`What can ${name.toLowerCase()} tell us?`,claims:[{id:canId,label:can},{id:cannotId,label:cannot}]})),
- {id:'3b',stepId:'records',kind:'choice',prompt:'Do Hob and the courier necessarily contradict each other?',choices:choices([
+ {id:'3b',stepId:'records',kind:'choice',prompt:'Do Hob and the courier contradict each other?',choices:choices([
  ['different','No. “Right under” and “too high to cross” may differ, within overlapping years.','Both accounts may fit: they count different things within overlapping years. That does not prove either account complete.'],
  ['twice','Yes. Twice in forty years cannot fit seven interrupted journeys in two winters.','Hob counts times it went right under; the courier records interrupted journeys. They may be counting different things.'],
  ['wrong','Yes. One of them must be remembering or reporting it wrong.','That could be true, but nothing in these records shows it. What else could explain both?']])},
