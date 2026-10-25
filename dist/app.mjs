@@ -1,3 +1,5 @@
+import {orderedPage,orderedRefusal,orderedEntry,bindOrdered} from './ordered-sorting-ui.mjs';
+import {prepareOrderedDisplay} from './ordered-sorting-core.mjs';
 import {pairsPage,pairsRefusal,pairsEntry,bindPairs} from './seed-pairs-ui.mjs';
 import {preparePairDisplay} from './seed-pairs-core.mjs';
 import {bothPage,bothRefusal,bindBoth} from './balance-both-ui.mjs';
@@ -354,8 +356,9 @@ function render(){
   else if(tenthsBench)html=tenthsPage(state)+unitsEntry();
   else if(pavingBench){const fits=preflightPavingDisplay(state,pavingOptions());html=fits?pavingPage(state):pavingRefusalPage();if(fits)save();}
   else if(clockWalkBench)html=clockWalkPage(state);
-  else if(sortingBench)html=sortingPage(state);
-  else if(doubleBench)html=doublePage(state,detail);
+  else if(hash==='#post/sorting/order'){const ready=prepareOrderedDisplay(state,candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok);html=ready.ok?orderedPage(state):orderedRefusal();if(ready.changed)save();}
+  else if(sortingBench)html=orderedEntry()+sortingPage(state);
+  else if(doubleBench)html=orderedEntry()+doublePage(state,detail);
   else if(hundredthsBench)html=hundredthsPage(state)+unitsEntry();
   else if(hash==='#numbers/seeds/pairs'){const ready=preparePairDisplay(state,priceOptions());html=ready.ok?pairsPage(state):pairsRefusal();if(ready.changed)save();}
   else if(seedBench)html=pairsEntry()+seedPage(state);
@@ -516,6 +519,7 @@ function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON
 function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function bind(){
  bindKeeperStory(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
+ bindOrdered(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,downloadNotes:()=>downloadText(JSON.stringify(notesReport(state),null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindPairs(state,{save,render,focus:focusElement,...priceOptions(),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindBoth(state,{save,render,focus:focusElement,...priceOptions(),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindPrice(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
