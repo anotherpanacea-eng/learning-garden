@@ -145,7 +145,7 @@ Refreshed 2026-10-24: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91`, Marble `7
 | Science Can Be Revised (`mt_1GVAmcwAiO`) | A real revision, framed as strength; best-supported vs anything goes; old ideas reasonable (C6); name the new evidence (C7). Its case is heliocentrism (spec 141 has Galileo); we use continental drift. |
 | Controlling variables (`mt_ArVBEpMAPk`) | Match inquiry type to question; assign and justify change, measure, keep. Bench (b). Real independent planning is not observed. |
 | Drawing conclusions from evidence (`mt_7VrR1GzhrN`) | A conclusion answers the question from data, apart from a recount. Its core is the child's own words, here spoken and unstored, so the claim is narrow: choosing a supported conclusion (B4, B6, C2). |
-| Repeated tests for reliability (`mt_auJqTemMpI`) | Precision (spread) vs accuracy (offset) on a target; repeats reduce scatter, not bias. Keeper's Desk only (B8, B9); no significant figures or resolution claim. |
+| Repeated tests for reliability (`mt_auJqTemMpI`) | Precision (spread) vs accuracy (offset) on a target; averaging repeats reduces random uncertainty of the mean, not steady bias. Keeper's Desk only (B8, B9); no significant figures or resolution claim. |
 
 Reference only: Tables, charts, and graphs (`mt_YHsUhi4Prc`; its record asks for best-fit lines and gradients); Fair testing (`mt_qgb76wHN2X`) and Observation vs Interpretation (`mt_Hw70LI5xza`), revisited from existing scoped references.
 
