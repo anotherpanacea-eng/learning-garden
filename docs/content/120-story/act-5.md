@@ -106,7 +106,7 @@ Kept: "Your report goes on page two. Two neighbors write in to say it was fair t
 **Sprout · [Field Notebook: draw the Moon]** Pip: "Draw the Moon tonight, the shape it really is. Then draw it again in a few days."
 Kept: "Two Moons in the notebook, different shapes. Pip says the Moon is showing off."
 
-**Seedling · [Courier Clock Walk / Preparation Clock]** The librarian: "Sunset is at 7 and it's dark enough an hour later. If we need half an hour to carry the telescope up, when do we start?"
+**Seedling · [new: hours clock]** The librarian: "Sunset is at 7 and it's dark enough an hour later. If we need half an hour to carry the telescope up, when do we start?"
 Kept: "On the mill roof in time. The telescope arrives with all its legs."
 
 **Sapling · [My Count Collection]** {guide}: "Keep a chart of the Moon's shape every clear night for a month. What pattern do you see?"
@@ -164,7 +164,7 @@ Kept: "Your welcome is learned by heart. Nuria fixes one word and says the rest 
 **Sprout · [Map Reader Dispatcher]** {courier}: "Help me follow Bramble's old path on the map, one turn at a time."
 Kept: "Followed to the end. It does reach Les Saules. It also goes past a very surprised goat."
 
-**Seedling · [Courier Clock Walk]** Dot: "The new path takes 4 hours each way. The old road takes 9. If {courier} leaves at 7, when are they back each way?"
+**Seedling · [new: hours clock]** Dot: "The new path takes 4 hours each way. If {courier} leaves at 7, when are they back?"
 Kept: "Written in the post office book, both ways. Dot admits the new path is quicker, in small handwriting."
 
 **Sapling · [Same Route, Different Scale / Cartographer's Table]** The librarian: "Draw the new route at the post office map's scale, and mark where it might be closed in spring floods."

@@ -50,7 +50,7 @@ Kept: "Your words open the agreement. Nuria copies them into Spanish for Vadoalt
 **Sprout · [new: route planner, picture choice]** Dot: "This parcel must stay dry. Which Way should it take: the river path, the bridge road, or the high ford?"
 Kept: "The bridge road. Slow, dry and very boring, which is what a dry parcel wants."
 
-**Seedling · [Courier Clock Walk]** Dot: "{courier} leaves at 9 with only letters. The river path takes 3 hours each way. When will they be back?"
+**Seedling · [new: hours clock]** Dot: "{courier} leaves at 9 with only letters. The river path takes 3 hours each way. When will they be back?"
 Kept: "Back by mid-afternoon, as planned. Dot writes it in the timetable."
 
 **Sapling · [new: route planner on the Cartographer's Table]** Dot: "Plan a week of deliveries so both towns get what they need, and nobody uses the high ford in winter."
@@ -91,7 +91,7 @@ Each is a whole contribution to this chapter.
 **Sprout · [Gather the Cupboard / Bundle Exchange]** The baker: "Help me carry the flour up to the attic. Bags on the top shelf, jars on the middle."
 Kept: "The flour is up high and dry. The baker sits on the top step to get his breath back."
 
-**Seedling · [Preparation Clock]** The miller: "It's 2 o'clock. The water should be here by 6. The boards take an hour to put in. When must we start, at the latest?"
+**Seedling · [new: hours clock]** The miller: "It's 2 o'clock. The water should be here by 6. The boards take an hour to put in. When must we start, at the latest?"
 Kept: "The boards go in with time to spare. The miller's cat supervises from the window."
 
 **Sapling · [Instructions for a Reader]** The librarian: "Write the notice for the bridge: when to stop crossing, and where to go instead."

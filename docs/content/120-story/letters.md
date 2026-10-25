@@ -49,7 +49,7 @@ Nuria writes from Vadoalto in Spanish and English. Léon writes from Les Saules 
 > Hello, Willowbank! I'm Léon. I keep the ferry at Les Saules, downstream. It's running again. Send news!
 
 **French, short:**
-> Bonjour, Willowbank ! Je m'appelle Léon. Je garde le bac aux Saules, en aval. Il fonctionne de nouveau. Envoyez des nouvelles !
+> Bonjour, Willowbank ! Je m'appelle Léon. Je garde le bac aux Saules, en aval. Il fonctionne de nouveau. Donnez-nous des nouvelles !
 
 **English, longer:**
 > Hello, Willowbank!
@@ -70,10 +70,10 @@ Nuria writes from Vadoalto in Spanish and English. Léon writes from Les Saules 
 Sent in answer to the explorer's question in Act III, chapter 4 (any depth may receive it).
 
 **English, short:**
-> In the storm, our brook came almost to the fifth mark. Each mark is 50 centimeters. That's about 240! Higher than yours? Nuria
+> In the storm, our brook came almost to the fifth mark. There is a mark every 50 centimeters. That's about 240! Higher than yours? Nuria
 
 **Spanish, short:**
-> En la tormenta, nuestro arroyo llegó casi a la quinta marca. Cada marca son 50 centímetros. ¡Son unos 240! ¿Más alto que el de ustedes? Nuria
+> En la tormenta, nuestro arroyo llegó casi a la quinta marca. Hay una marca cada 50 centímetros. ¡Son unos 240! ¿Más alto que el de ustedes? Nuria
 
 **English, longer:**
 > Dear Willowbank,
@@ -200,6 +200,6 @@ Arrives the evening of the first journey.
 > A tall grey heron came off the coast boat today. They asked about the brook, then walked up the river path. I think they're coming to you! Léon
 
 **French, short:**
-> Un grand héron gris est descendu du bateau de la côte aujourd'hui. Des questions sur le ruisseau, puis en route vers l'amont, par le chemin de la rivière. Je crois que c'est pour vous ! Léon
+> Un grand héron gris est descendu du bateau de la côte aujourd'hui. Ce héron a posé des questions sur le ruisseau, puis a pris le chemin de la rivière vers l'amont. Je crois que c'est pour vous ! Léon
 
 *For the reader:* Hollis is they/them. The French avoids a pronoun for Hollis on purpose. *Un grand héron* is grammatically masculine as a noun, which is normal French; please check whether *iel* should appear anywhere, or whether avoiding the pronoun is the better choice for young learners.

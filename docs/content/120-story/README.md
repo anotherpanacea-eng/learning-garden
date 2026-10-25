@@ -50,6 +50,7 @@ These are selected dependencies, not an exhaustive list of ready work. The story
 | V | Every project path | Project pages and source packs | A required before/after/limit page; new night observations, moon records, route timings and surveys are not supplied by the existing finite benches. |
 | VI | Compare routes and keep a plan | Sprout to Sapling: the exchange plan | A required weekly route planner with seasonal closures and a supported route; Courier Clock Walk only spans 60 minutes, not multi-hour returns. |
 | VI | The long rain | All depths: passing the warning on | French word cards and a send action |
+| V, VI | Sky-watching, courier route, routes, the long rain | Seedling clock jobs | An hours clock: Courier Clock Walk spans 5 to 60 minutes and Preparation Clock does not reach evening or afternoon spans. |
 
 Every job, including one on an existing activity, needs its own reviewed content pack before it ships. Brackets name the host activity; **[new]** marks a host that does not exist yet.
 

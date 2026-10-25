@@ -36,7 +36,7 @@ Each yearly job has two depths. Either is a whole contribution.
 
 | Year | Sprout | Sapling | Feeds |
 | --- | --- | --- | --- |
-| A | Dot: "Twelve stalls in equal rows along the green. How many in each row if we make three rows?" Kept: "Four in each. The green looks like a market again." | The baker: "Each stall needs 3 meters and the green is 40 meters long. How many fit in one row, with a gap to walk through?" Kept: "Your plan fits. The spoon seller gets the corner, as always." | II ch1 · III ch1 · VI ch1 |
+| A | Dot: "Twelve stalls in equal rows along the green. How many in each row if we make three rows?" Kept: "Four in each. The green looks like a market again." | The baker: "Each stall needs 3 meters and the green is 40 meters long. How many fit in one row, with one 4-meter gap to walk through?" Kept: "Your plan fits. The spoon seller gets the corner, as always." | II ch1 · III ch1 · VI ch1 |
 | B | The librarian: "Pick a picture for the show poster." Kept: "The poster has a heron on it. It always has a heron on it." | The librarian: "Write the poster: who, what, where and when, so anyone can come." Kept: "Your poster is up. Two people from Vadoalto come because of it." | II ch4 · V path 2 · V path 4 |
 | C | The baker: "Honey cake is 3 coins. Can you pay exactly?" Kept: "Exactly right. The baker gives you the corner piece, which is the best piece." | The baker: "Vadoalto's honey costs more this year. Should the cake cost more, or should it be smaller? What's fair to both?" Kept: "A fair answer, and the baker uses it. Nuria writes to say Vadoalto agrees, mostly." | III ch1 · VI ch1 |
 
