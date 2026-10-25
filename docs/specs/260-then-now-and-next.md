@@ -76,11 +76,12 @@ Five sets, 26 items in the companion. Three-choice right answers sit A 7 / B 8 /
 
 ## Saved work
 
-Optional root `tenses` per explorer, absent until something is kept:
+Optional root `tenses` per explorer, absent until an explicit Start or Keep freezes its source:
 
 ```
 tenses: {
   v: 1,
+  source: { /* complete frozen authored source for this started/kept visit */ },
   log: { [pageId]: { [lineId]: tileId }, at },
   going: { built: { [lineId]: helperId }, sort: { [cardId]: 'habit' | 'now' }, cutIn: { [pairId]: [actionId, actionId] }, at },
   perfect: { trays: { [clueId]: 'past' | 'perfect' }, shelf: { [pastId]: participleId }, whereNow: choiceId, at },
@@ -90,7 +91,13 @@ tenses: {
 }
 ```
 
-Codes only; no free text ("say why" is spoken). Read-aloud use is not stored. Support (`s`, set when the stuck ladder reached step 2) is a separate flag per kept item, never merged with an independent attempt. Validation checks each saved entry's ids and outcome codes against the save's own entries and shape, never today's bench sizes, item lists, answer key or wording; a missing item reads as absent. Kept results are never recomputed on load. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Choice order is stable within a saved question and restored as saved. Each kept item also stores `shown`, its choice ids in the order shown, and `o`, the outcome code at the keep (`fit` or `not-yet`), so it is restored as kept without today's content. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. Spec 116's weather log and every other root are untouched. No field holds anything about the child.
+Responses use codes only; no free text ("say why" is spoken). Read-aloud requests are recorded locally before playback as reading support. Support (`s`, set before any hint, guided step, example, shown answer or read-aloud) is a separate flag per kept item, never merged with an independent attempt. Validation checks each saved entry's ids and outcome codes against the save's own entries and shape, never today's bench sizes, item lists, answer key or wording; a missing item reads as absent. Kept results are never recomputed on load. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Choice order is stable within a saved question and restored as saved. Each kept item also stores `shown`, its choice ids in the order shown, and `o`, the outcome code at the keep (`fit` or `not-yet`), so it is restored as kept without today's content. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. Spec 116's weather log and every other root are untouched. No field holds anything about the child.
+
+**Frozen authored source and first response.** An explicit Start or Keep freezes the complete selected authored source with the saved visit or bench: passages and provenance labels, instructions, teaching and examples, supplied models/data and captions, question wording, ordered choices, key and feedback, and help/read-back text or asset references. Include this `source` snapshot in the owning root; the response fields above remain codes. A started waiting task and earlier kept work render from that snapshot, never today's catalog. An explicitly chosen new visit may use revised authoring while retaining earlier sources and work. For recorded items, preserve the first response, its original outcome and support-before separately from later attempts/keeps; a retry or later skip cannot replace it. Do not grade original spoken or written explanations.
+
+**Support before reveal.** Commit a support code before showing or playing a hint, guided step, worked example, answer, meaning, slot scaffold or read-aloud. Keep audio/reading support separate from the conceptual response; it does not establish independent reading. A later support request does not rewrite an earlier response's support-before. Missing older support information is unobserved, never proof of an unassisted attempt.
+
+**Atomic saves and capacity.** Every mutation must pass the actual host's pretty-notes serialization/import preflight and shared limits before committing only this root. Refusal preserves the whole earlier state and visible pending work; do not rerender, navigate or change explorer in a way that silently loses unsaved words/selections. Offer the existing notes download and an explicit confirmed restore of saved words where needed. No silent truncation, history eviction or replacement of saved writing. Preview, render and suggestion reads are save-neutral. Existing source/language/cultural/rights checks remain open until separately cleared.
 
 ## Curriculum fit
 
