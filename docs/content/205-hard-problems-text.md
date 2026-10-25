@@ -43,7 +43,7 @@ Companion to [spec 205](../specs/205-hard-problems.md). Use as written, after in
 >
 > "Nothing," says Wren. "That's the first thing to notice."
 
-**Keeper's note** (A made-up model):
+**Keeper's note** (A true thing about math):
 > Two steps. Nine trays of twelve is 108 buns. Take away the twenty he sold: 88 buns are left. The squeaky wheel is extra information.
 
 ### Scene 2. Sixty thousand what? (Act IV, chapter 4: the proposal for the low fields)
@@ -54,7 +54,7 @@ Companion to [spec 205](../specs/205-hard-problems.md). Use as written, after in
 > The board says the marsh "holds 60,000". Bramble stands up. "Sixty thousand what? And why should we believe it?"
 
 **Longer:**
-> The meeting board is crowded with the librarian's best pen. Under *The Sponge* someone has written: *holds 60,000*.
+> The meeting board is crowded with notes in the librarian's best pen. Under *The Sponge* someone has written: *holds 60,000*.
 >
 > Bramble stands up. "Sixty thousand what? Spoons? Ducks?"
 >
@@ -68,7 +68,7 @@ Companion to [spec 205](../specs/205-hard-problems.md). Use as written, after in
 >
 > Bramble sits down. "Better," she says. "Now I can argue with it properly."
 
-**Keeper's note** (A story from Willowbank):
+**Keeper's note** (A true thing about math):
 > A number without a unit can't be checked. "About" tells a reader it's an estimate. Showing how you got it lets a skeptic test your reasoning, not just your answer.
 
 ### Scene 3. A plan that meets the rain (Act VI, chapter 2: compare routes and keep a plan; chapter 4: the first journey)
@@ -116,7 +116,7 @@ Worked example: 1. "Loaves cost $3. The oven is old." 2. Oven age: extra. 3. "Ho
 
 **T5. Found and still to find** (A true thing about math)
 > In a long problem, keep two lists: what you've found, and what's still to find. Set up the unknown with a bar or a letter first.
-Worked example: 1. Pip and Bramble have 30 ribbons. Bramble has 6 more. 2. Bar: p and p + 6 make 30. 3. 2p = 24, so p = 12.
+Worked example: 1. Pip and Bramble have 30 ribbons. Bramble has 6 more. 2. Let p be Pip's ribbons. Bramble's are p + 6. 3. Take off the 6: p + p = 24, so p = 12.
 
 **T6. Three people to convince** (A true thing about math)
 > Convince yourself: try it. Convince a friend: show it. Convince a skeptic: give a reason that works every time. Link reasons with "since" and "so".
@@ -127,7 +127,7 @@ Worked example: 1. Since 6 × 10 = 60 2. and 6 × 2 = 12, 3. so 6 × 8 = 60 − 
 Worked example: 1. 71 − 26. Step: "6 − 1 = 5." 2. That swaps the numbers. 3. Exchange a ten: 11 − 6 = 5, then 6 − 2 = 4. 45.
 
 **T8. One example, one counterexample** (A true thing about math)
-> One example that works doesn't prove "always". One example that fails is enough to show "not always". You met this at the desk with Bramble.
+> One example that works doesn't prove "always". One example that fails is enough to show "not always". You may have met this at the desk with Bramble.
 Worked example: 1. "Every shape with 4 sides is a square." 2. Try a rectangle 2 cm by 5 cm. 3. It has 4 sides but is not a square, so not always.
 
 **T9. Units carry meaning** (A true thing about math)
@@ -164,7 +164,7 @@ Worked example: 1. 48 people, boats hold 8. 2. 48 ÷ 8 = 6. 3. Nobody left over:
 
 **T17. Fermi estimates** (A true thing about math)
 > Some questions have no data to look up. Break them into pieces you can guess. Multiply the guesses. Aim for the right size, not the exact number.
-Worked example (A made-up model): 1. Apples Vadoalto eats each week? 2. Guess 50 families, 3 apples a day each. 3. 50 × 3 × 7 = 1,050: about 1,000.
+Worked example (A made-up model): 1. How many eggs does Willowbank eat each week? 2. Guess 50 families, 3 eggs a day each. 3. 50 × 3 × 7 = 1,050: about 1,000.
 
 **T18. One slip, many forms** (A true thing about math; Plan Card)
 > A bar, an equation, a table and a grid can all show one slip. Each part keeps its meaning. = means both sides are the same amount.
@@ -343,7 +343,7 @@ Explanation: Two steps: the reed share, then half of it.
 ### Set B. Extra, missing and longer problems (Sapling and Keeper's Desk)
 
 **B1 (Sapling, 3-choice)**
-Prompt: The baker sells 36 loaves at $3, then spends $40. Which fact is extra?
+Prompt: How much money does the baker have left? Which fact on the slip is extra?
 Facts on the slip: 36 loaves sold · $3 each · his oven is 12 years old · $40 on flour.
 - A. He spends $40 on flour *(tests: dropping a needed fact)*
 - B. He sells 36 loaves at $3 *(tests: dropping a needed fact)*
@@ -355,7 +355,7 @@ Feedback B: You need the loaves to know what he made.
 Feedback C: Yes. Use the rest: $108 − $40 = $68.
 
 **B2 (Sapling, 3-choice)**
-Prompt: Bramble moves 50 sacks by wagon. What fact is missing?
+Prompt: Bramble moves 50 sacks by wagon. How many trips? Which fact is missing?
 - A. How many sacks fit in one load. *(right)*
 - B. How far away each trip has to go. *(tests: asking for a fact that doesn't change the answer)*
 - C. Nothing is missing, so it's 50 trips. *(tests: grabbing the only number)*
@@ -418,7 +418,7 @@ Explanation: Bar, equation and grid show one slip. 41 − 5 = 36 in sacks, so 12
 **C1 (Seedling, 3-choice)**
 Prompt: Bramble says 1/5 is bigger than 1/3. Which reason convinces a friend?
 - A. Cut equal strips into 5 and 3. Fifths are smaller. *(right)*
-- B. My answer is different from hers, so she must be wrong. *(tests: judging by answers, not reasons)*
+- B. My answer is different from hers, so hers can't be right. *(tests: judging by answers, not reasons)*
 - C. Thirds are just bigger. Everyone in town knows that. *(tests: saying it louder, no reason)*
 Hint: Picture the same strip cut two ways.
 Explanation: More equal parts of the same whole means smaller parts. So 1/5 is less than 1/3.
@@ -457,7 +457,7 @@ Hint: Draw an odd number as pairs. What's left?
 Explanation: A skeptic needs a reason that works every time, not one example.
 
 **C5 (Keeper's Desk, 3-choice)**
-Prompt: Bramble got 47 × 99 = 4,663. "It's near 4,700, so it's proved."
+Prompt: Bramble got 47 × 99 = 4,663. "It's near 4,700, so it's proved." Your reply?
 - A. Near 4,700 shows the size only. Check another way. *(right)*
 - B. Yes. Being close to the estimate proves every digit. *(tests: an estimate as proof)*
 - C. Estimates are no use at all for checking. *(tests: throwing away a useful check)*
@@ -648,7 +648,7 @@ Prompt: The plan said 30 kg a trip. Trips carried 26, 24, 27, 23.
 Question line: What should Dot do with her model?
 - A. Keep it as it is. The trip notes don't change the plan. *(tests: ignoring the test)*
 - B. Revise it: about 25 kg a trip, so 5 trips. *(right)*
-- C. Throw it away, because models never work. *(tests: giving up on modelling)*
+- C. Throw it away, because models never work. *(tests: giving up on modeling)*
 Hint: What did a trip really carry, on average?
 Explanation: The average is 25. 120 ÷ 25 = 4.8, so plan 5 trips.
 Feedback A: Four trips at about 25 carry 100, not 120.
@@ -725,8 +725,10 @@ Step 3: **Skip for now.** Leave this question open. Your other work stays here.
 - **ratio**: how much of one thing for each amount of another.
 - **structure**: how a problem or number is built.
 - **model**: math that stands for a real situation.
+- **average (mean)**: add the amounts, then share the total equally: 26, 24, 27 and 23 kg average 25 kg.
 - **assumption**: something you decide to treat as true for now.
 - **Fermi estimate**: a rough answer from guessing pieces and multiplying.
+- **power of ten**: 10, 100, 1,000 and so on, each ten times the one before.
 
 ## Off-screen invitation (optional, grown-up-led)
 
@@ -734,7 +736,7 @@ Step 3: **Skip for now.** Leave this question open. Your other work stays here.
 
 ## Grown-up panel
 
-**What this teaches:** planning, doing and checking multi-step problems, including ones with extra or missing facts; estimating first and checking by undoing or another method; building and critiquing arguments (convince yourself, a friend, a skeptic; find the broken step); precise units, words and rounding; choosing a tool for the job; spotting structure that turns long sums into short ones; and moving one slip between a bar, an equation and a grid; and the modelling cycle, including rounding to fit the story and Fermi estimates.
+**What this teaches:** planning, doing and checking multi-step problems, including ones with extra or missing facts; estimating first and checking by undoing or another method; building and critiquing arguments (convince yourself, a friend, a skeptic; find the broken step); precise units, words and rounding; choosing a tool for the job; spotting structure that turns long sums into short ones; and moving one slip between a bar, an equation and a grid; and the modeling cycle, including rounding to fit the story and Fermi estimates.
 
 **What it does not claim:** "Say why" answers are spoken and never graded. Spotting a broken step on screen is practice for, not proof of, explaining in your own words. Town prices, recipes and trips are made up. Volume, ratio and percent methods are recapped here and taught in their own packs.
 

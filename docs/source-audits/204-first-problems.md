@@ -30,6 +30,7 @@ Date: 2026-10-25. Spec: [204](../specs/204-first-problems.md). Companion: [204 t
 | --- | --- | --- |
 | *How to Solve It*, by George Pólya, first published 1945 (Princeton University Press) | 1, 3 | Checked |
 | Four steps: understand, plan, carry out, look back | 1, 4, 5 | Checked (child text: "understand, plan, do, look back") |
+| Written at Stanford, published 1945 (child text: "It came out in 1945", not "wrote... in 1945") | 1, 3; preface dated Stanford, 1 August 1944 (MacTutor, cited in audit 205) | Checked (review 2026-10-25 changed H1 from "In 1945... wrote") |
 | Pólya born in Budapest (1887); taught at Stanford and wrote the book there | 2, 3 | Checked (Keeper's note only) |
 | Printed in many languages | 1 | Checked ("more than 15 languages"; child text says "many") |
 | Clay tokens in the Near East, each standing for one unit of goods | 6, 7, 8 | Checked |

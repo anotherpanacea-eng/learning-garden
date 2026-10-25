@@ -14,7 +14,7 @@ A child comes to understand that a word problem is a little story to understand 
 
 ## Place and story
 
-**Host:** **Pip's Puzzle Basket**, a basket of picture problems hung on the garden gate at the Number Garden home, route `#garden/puzzles`, linked from the Number Garden home, the `#explore` doorway's All places list, and the end screens of the Café, Post Office and Orchard. `#garden` is unused as a route root on main and in every draft PR checked (the existing `#puzzles` page is a different place and is left unchanged). Open from the start; no bench requires another. Pip "loves a plan" (spec 15's home line), so his four-step plan card is the pack's spine.
+**Host:** **Pip's Puzzle Basket**, a basket of picture problems hung on the garden gate at the Number Garden home, route `#garden/puzzles`, linked from the Number Garden home, the `#explore` doorway's All places list, and the end screens of the Café, Post Office and Orchard. `#garden` is unused as a route root on main; sibling spec 210 (math build-out) also uses it, for `#garden/pond` (the existing `#puzzles` page is a different place and is left unchanged). Open from the start; no bench requires another. Pip "loves a plan" (spec 15's home line), so his four-step plan card is the pack's spine.
 
 | Act and chapter (future adapters to spec 120) | Beat (full text in the companion) | Job depths |
 | --- | --- | --- |
@@ -132,7 +132,7 @@ puzzleBasket: {
 
 ## Upstream check
 
-Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (both 2026-10-24). Ids confirmed in the pinned `curriculum/marble/topics.json`. Two targets, *Shape patterns* and *Shape patterns (age 7+)*, have misleading names: their descriptions and evidence are "look for and use structure" practice, which is how this spec treats them.
+Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` (`LESSONS.md`) and Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (`data/teaching-research.json`, the records for all twelve targets), both 2026-10-24. Ids confirmed in the pinned `curriculum/marble/topics.json`. Two targets, *Shape patterns* and *Shape patterns (age 7+)*, have misleading names: their descriptions and evidence are "look for and use structure" practice, which is how this spec treats them.
 
 | Target (pinned id) | What the research asks, and how this spec does it |
 | --- | --- |
@@ -186,12 +186,12 @@ Claim check, 2026-10-25: no spec on main or any draft PR (126, 128, 137-151) cla
 
 **Math or early-years expert:**
 1. Is "We can't tell yet" as an always-present button safe, given that A4 and B5 deliberately make it a distractor?
-2. Is the bar model at Seedling (T10, D4) appropriate, or should it start at Sapling?
+2. Is the bar model at Seedling (T10 on the Four Ways Board; D4 is Sapling) appropriate, or should it start at Sapling?
 3. Does F7 (a square in the rectangles group) belong in a "use structure" pack, or should it wait for the geometry packs?
 4. Is D5 (8 + 4 = ☐ + 5) a fair single relational-equals item without a full equals-sign lesson?
 
 **Owner questions, with defaults:**
-1. Route `#garden/puzzles` at the Number Garden home, separate from the existing `#puzzles` page? *Default: yes; rename to `#numbers/basket` if `#garden` should stay free for a later home hub.*
+1. Route `#garden/puzzles` at the Number Garden home, separate from the existing `#puzzles` page? *Default: yes; rename to `#numbers/basket` if `#garden` should stay free for a later home hub (sibling 210's `#garden/pond` would then move too).*
 2. Twelve targets in one pack, including the two reassigned *Shape patterns* topics? *Default: one pack; the Quick-Way Path's Sapling structure items can ship later as a follow-on.*
 3. Keep slate pictures (stamp codes) or make the slate temporary like Ribbon Recut? *Default: keep, capped at 40 stamps per item.*
 4. First slice? *Default: the Basket Table with Set A, then the Show-Me Slate.*

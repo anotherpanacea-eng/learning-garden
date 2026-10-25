@@ -49,7 +49,7 @@ Companion to [spec 204](../specs/204-first-problems.md). Use as written, after i
 >
 > "Five plates and three more is eight," says Pip. "One each." He writes it on the card. Then he draws the plates, just to be sure.
 
-**Keeper's note** (A made-up model):
+**Keeper's note** (A true thing about math):
 > Pip's first answer used every number he saw. That is a common slip. Reading the puzzle as a story first, then asking "what do we want?", turned thirteen into three.
 
 ### Scene 2. Planks and a plan (Act I, chapter 4: mend the village)
@@ -78,7 +78,7 @@ Companion to [spec 204](../specs/204-first-problems.md). Use as written, after i
 >
 > "Three planks to fix," he says. "Look back: five, four and three make twelve." He stands on each new plank. Twice.
 
-**Keeper's note** (A made-up model):
+**Keeper's note** (A true thing about math):
 > A long job keeps its whole picture in view. Pip's bar showed all twelve planks, so he did not stop at "nine fixed". The brook's width was a true number that did not help.
 
 ### Scene 3. The market window (Act II, chapter 1: the weekly market)
@@ -109,7 +109,7 @@ Companion to [spec 204](../specs/204-first-problems.md). Use as written, after i
 >
 > The spoon seller sighs. "It's one spoon fewer," he says. "That's math."
 
-**Keeper's note** (A made-up model):
+**Keeper's note** (A true thing about math):
 > Math goes both ways. You can spot a counting question in a real scene. You can also start with 3 + 4 and tell a story that fits it.
 
 ### Scene 4. Count them again, slower (Act II, chapter 3: Ember's birthday)
@@ -136,7 +136,7 @@ Companion to [spec 204](../specs/204-first-problems.md). Use as written, after i
 >
 > Pip claps. Ember eats cake number nine, to celebrate. Now there are eight.
 
-**Keeper's note** (A made-up model):
+**Keeper's note** (A true thing about math):
 > Ember's drawing showed her thinking, so she could find her own slip. Saying "because every ring has one line" is a real reason.
 
 ## Teach cards
@@ -189,7 +189,7 @@ Worked example: 1. 4 + 3. 2. Draw 4 dots, then 3 dots. 3. Count on from 4: 5, 6,
 
 **T12. Say why, with because** (A true thing about math)
 > Say what you did. Then say why it works, starting with "because". Checking another way helps too.
-Worked example: 1. "I made 10 first." 2. "Because 7 and 3 make 10, and 6 is 3 and 3." 3. 10 + 3 = 13.
+Worked example: 1. 7 + 6: "I made 10 first." 2. "Because 7 and 3 make 10, and 6 is 3 and 3." 3. 10 + 3 = 13.
 
 **T13. Three ways to add** (A true thing about math)
 > Count all from one. Count on from a number. Or use a fact you already know. Each one gets the same total.
@@ -210,7 +210,7 @@ Worked example: 1. 12 planks, 5 fixed, 4 more fixed. 2. Step 1: 5 + 4 = 9 fixed.
 ## Real-world and history cards
 
 **H1. A book about solving problems** (A true thing from history; Seedling and up)
-> In 1945, George Pólya wrote a book called *How to Solve It*. He gave four steps: understand, plan, do, look back.
+> George Pólya wrote a book called *How to Solve It*. It came out in 1945. He gave four steps: understand, plan, do, look back.
 Keeper's note:
 > Pólya was a mathematician born in Budapest, Hungary. He taught at Stanford University in California and wrote the book there. It has been printed in many languages. Pip's plan card uses his four steps in simpler words.
 
@@ -477,7 +477,7 @@ Feedback B: Flying away takes ducks away. 3 + 4 puts groups together.
 Feedback C: The numbers fit, but the question asks only about ducks.
 
 **C4 (Seedling, 3-choice)**
-Prompt: Pip pays 10 cents for a 7-cent apple. What does 3 mean?
+Prompt: Pip pays 10 cents for a 7-cent apple. 10 − 7 = 3. What does 3 mean?
 - A. Pip gets 3 cents change. *(right)*
 - B. Pip buys 3 apples at the stall. *(tests: giving the number the wrong job)*
 - C. Pip pays 3 cents for the apple. *(tests: mixing up the price and the change)*
@@ -653,12 +653,12 @@ Feedback C: Look at the ones digit. Has it changed so far?
 **F5 (Sapling, 3-choice)**
 Prompt: You know 6 × 4 = 24. Which do you also know?
 - A. 4 × 6 = 10 *(tests: adding in place of multiplying)*
-- B. 24 ÷ 4 = 8 *(tests: working each fact out separately, and slipping)*
+- B. 24 ÷ 4 = 8 *(tests: grabbing another fact for 24, 3 × 8, in place of the array)*
 - C. 24 ÷ 6 = 4 *(right)*
 Hint: Picture 6 rows of 4. What does the array also show?
 Explanation: 6 rows of 4 is 24, so 24 shared into 6 rows is 4 in each.
 Feedback A: 4 + 6 is 10. 4 rows of 6 is still 24.
-Feedback B: Check with the array: 4 rows of 6, not 8.
+Feedback B: 3 × 8 is 24 too, but that's another array. Here, 24 ÷ 4 = 6.
 Feedback C: Yes. One fact gave you another.
 
 **F6 (Sapling, number)**
@@ -742,9 +742,14 @@ Step 3: **Skip for now.** You can come back any time.
 - **working**: what you did to get an answer, shown with objects, drawings or words.
 - **because**: the word that starts a reason.
 - **count on**: start at one number and count up from there.
+- **digit**: one of the signs 0 to 9. In 47, the 4 is the tens digit and the 7 is the ones digit.
+- **hundred square**: the numbers 1 to 100 in ten rows of ten.
+- **array**: things set out in equal rows, like 6 rows of 4.
 - **pattern**: something that repeats, so you can predict it.
 - **look back**: check that your answer makes sense in the story.
 - **token**: a small clay shape that stood for one thing, long ago.
+- **Near East**: the lands around Iraq and Syria today, where some of the first farms were.
+- **archaeologist**: someone who digs up and studies things people left long ago.
 
 ## Off-screen invitation (optional, grown-up-led)
 

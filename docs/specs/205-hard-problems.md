@@ -131,7 +131,7 @@ problemShelf: {
 
 ## Upstream check
 
-Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (both 2026-10-24). Ids confirmed in the pinned `curriculum/marble/topics.json`. Every target has a Marble research record; all are paraphrased here, none copied (CC BY-SA).
+Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` (`LESSONS.md`) and Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (`data/teaching-research.json`), both 2026-10-24. Ids confirmed in the pinned `curriculum/marble/topics.json`. Every target has a Marble research record; all are paraphrased here, none copied (CC BY-SA).
 
 | Target (pinned id) | What the research asks, and how this spec does it |
 | --- | --- |
@@ -163,16 +163,16 @@ From the pinned `curriculum/marble/dependencies.json`:
 | Multi-Step Problem Solving, 8-9 | Multi-Step Problem Solving, 7-8 (`mt_RKeheOL9uo`) | Taught here (Set A, A1-A3, before A4-A5). |
 | Complex Multi-Step Problems | Multi-Step Problem Solving, 8-9 (`mt_SmghasIvbT`) | Taught here (A4-A5 before Set B). |
 | Advanced Multi-Step Problems | Complex Multi-Step Problems (`mt_GpltXPoaoc`) | Taught here (B1-B4 before B5-B6). |
-| Justifying mathematical reasoning, 8+ | Justifying mathematical reasoning (`mt_pyMD_SIiYO`) | Documented gap: in neither the build-out map nor any spec's claim (main's strand map lists it as an anchor with "structured mathematical explanation" missing). Taught inline with no claim (T6, T7, guided item). |
+| Justifying mathematical reasoning, 8+ | Justifying mathematical reasoning (`mt_pyMD_SIiYO`) | Documented gap: claimed by no spec; met on main only by two authored-task references in `curriculum/topic-coverage.csv` (`#checkin/reasoning`, `#adventure/reasoning-stretch-activity`), and main's strand map lists it as an anchor with "structured mathematical explanation" missing. Taught inline with no claim (T6, T7, guided item). |
 | Mathematical Precision | Understanding fractions, 7+ (`mt_HY8Yycu_rz`) | Met elsewhere: proposed spec 196 (math build-out); recap inline in T9 and D1. |
 | Precise Maths Vocabulary | Mathematical Precision (`mt_mywsN77hGZ`) | Taught here (T9, D1-D2 before D3-D4). |
 | Advanced Maths Vocabulary | Precise Maths Vocabulary (`mt_xfwv0M83mJ`) | Taught here (T10-T11, D3-D4 before D5-D7). |
-| Choosing mathematical tools | Choosing the right strategy (`mt_mQcWGh02no`) | Met elsewhere: referenced by spec 130 (Shutters, main) and claimed by proposed spec 121 (draft PR #128); recap inline in T12. |
-| Choosing Maths Tools | Choosing representations strategically (`mt_IwEOCN6bL1`) | Met elsewhere: as above (spec 130 main; spec 121, draft PR #128); tool cards recap it. |
+| Choosing mathematical tools | Choosing the right strategy (`mt_mQcWGh02no`) | Met elsewhere: a target of spec 121 (draft PR #128); spec 130 (Shutters, main) only studied its research record. Recap inline in T12. |
+| Choosing Maths Tools | Choosing representations strategically (`mt_IwEOCN6bL1`) | Met elsewhere: spec 121's upstream check (draft PR #128); spec 130 (main) only studied its research record. Tool cards recap it. |
 | Using Mathematical Structure | Shape patterns, 7+ (`mt_FAXjFkgG6X`) | Met elsewhere: proposed spec 204 (math build-out; reassigned there from 194); recap inline in T13. |
 | Order of operations, 10+ | Fractions, Decimals & Percentages (`mt_hlGKg5M7qJ`) | Met elsewhere: proposed spec 200 (math build-out); 1/8 = 12.5% recapped in T14. |
 | Real-World Maths Modelling | Modelling with multiplication and fractions (`mt_K3R0yaHVcx`) | Met elsewhere: proposed spec 198 (math build-out); recap inline in T15. |
-| Real-World Mathematical Modelling | Real-World Maths Modelling (`mt_8xVHooT4aI`) | Taught here (T15, F3 before F1-F2 and F4-F5). |
+| Real-World Mathematical Modelling | Real-World Maths Modelling (`mt_8xVHooT4aI`) | Taught here (B3 in Set B and T15 before F1-F2 and F4-F5; F3 practices it too). |
 | Understanding fractions, 10+ | Fractions on a number line, 9+ (`mt_CUmjcE7W6c`) | Met elsewhere: proposed spec 196 (math build-out); the bar-to-sentence move is recapped inline in T18. |
 
 Claim check, 2026-10-25: no spec on main or any draft PR (126, 128, 137-151) claims these fifteen targets. Sibling spec 192 names `mt_hImiKNiaNh` only to drop it; the build-out map now assigns it here. Sibling spec 196 drops `mt_9KmVWCuh5_`; it is claimed here at the coordinator's request. Spec 118 (draft PR #126) claims *Expressions & Equations Vocabulary*, *Solving Linear Equations*, *Ratio Notation*, *Ratio Problems* and *Constructing mathematical arguments*; this pack uses those only as material and recaps (see Builds on).
