@@ -113,7 +113,7 @@ Under the [roadmap priorities](roadmap.md#owner-priorities-in-order) these sit i
 6. **Free text in writing packs (258, 277, 278).** **Spoken or on paper, nothing stored**, unless the owner wants optional local notes with a stated bound.
 7. **Public-domain novels (272).** **Excerpts from the titles listed under Texts, retold or abridged where a passage is too hard, with the source named.** The owner may prefer a different shelf.
 8. **Multimedia presentations (275, 276).** **The child arranges supplied picture and caption cards into a short show played to a grown-up; nothing leaves the device.**
-9. **New routes.** **Each pack gets its own route under an existing hub** (`#words`, `#post`, `#loft`, `#library`, `#archive`, `#cafe`, `#riddles`, `#desk`), so built destinations stay untouched. `#library/meeting` is a placeholder until spec 120's meeting board has its own reviewed home.
+9. **New routes.** **Each pack gets its own route** under a built hub (`#words`, `#post`, `#loft`, `#archive`, `#cafe`, `#riddles`, `#desk`) or under `#library`, which has no built hub yet and is used only by proposed routes, as in the history and science packs. Built destinations stay untouched. `#library/meeting` is a placeholder until spec 120's meeting board has its own reviewed home.
 10. **Pack size.** Packs hold 5 to 11 targets. **Keep each as one pack, with any Keeper's Desk depth shipping last.**
 
 ## Appendix: target topics by pack
