@@ -209,9 +209,9 @@ Keeper's note:
 > Others drew similar pictures before him, including Leonhard Euler in 1768. Venn's paper made the overlapping circles famous. We still call them Venn diagrams.
 
 **H3. Pingala's rhythms** (A true thing from history; Keeper's Desk)
-> In India, more than 2,000 years ago, Pingala wrote about poetry rhythms. Each beat is short or long. He listed every pattern.
+> In India, more than 2,000 years ago, Pingala wrote about poetry rhythms. Each syllable is short or long. He listed every pattern.
 Keeper's note:
-> One beat: 2 patterns. Two beats: 4. Three beats: 8. Each new beat doubles the list. That is the same counting as rows times columns in a two-way table.
+> One syllable: 2 patterns. Two syllables: 4. Three syllables: 8. Each new syllable doubles the list. This fixes the number of syllables, not the duration: a long syllable lasts twice a short one. Counting patterns of a fixed duration is a different question.
 
 ## Bench (a): The Likelihood Line
 
@@ -617,6 +617,7 @@ Hint: How many cells? How many are rain and bean?
 Explanation: One cell of twelve.
 
 **F3 (Keeper's Desk, 3-choice)**
+Model: Each round has two equally likely winners, independent of earlier rounds. The game is made up.
 Prompt: First to 2 points wins 12 packets. It stops at 1 to 0. Fair split?
 - A. 6 each. Nobody has won yet. *(tests: ignoring the lead)*
 - B. All 12 to the leader. *(tests: withholding the trailer's real chance)*
@@ -628,11 +629,11 @@ Feedback B: The other player could still win two rounds. That's 1 way in 4.
 Feedback C: Yes. 3/4 of 12 is 9. 1/4 is 3.
 
 **F4 (Keeper's Desk, number)**
-Prompt: A rhythm has 3 beats. Each is short or long. How many patterns?
+Prompt: A rhythm has 3 syllables, each short or long. How many patterns?
 Answer: 8.
-Worked steps: 1. One beat: 2. 2. Two beats: 2 × 2 = 4. 3. Three beats: 4 × 2 = 8.
-Tests: 6 (2 × 3); 3 (one per beat).
-Hint: Each new beat doubles the list.
+Worked steps: 1. One syllable: 2. 2. Two syllables: 2 × 2 = 4. 3. Three syllables: 4 × 2 = 8.
+Tests: 6 (2 × 3); 3 (one per syllable).
+Hint: Each new syllable doubles the list.
 Explanation: SSS, SSL, SLS, SLL, LSS, LSL, LLS, LLL: 8.
 
 **F5 (Keeper's Desk, true / not true from this source)**

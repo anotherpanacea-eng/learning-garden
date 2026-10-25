@@ -47,7 +47,7 @@ Date: 2026-10-25. Spec: [202](../specs/202-chance-scale.md). Companion: [202 tex
 1. Pascal's location in 1654: cleared on a search excerpt in independent review (Paris); still not in child text.
 2. Whether Hollis's ledger runs exactly years 1 to 40 (owner question 3 in the spec). Independent review changed the card from 1 to 38 to 1 to 40, matching spec 120's letter 4 ("years of Hollis's keeping", 1 to 40) and sibling spec 203; the 4/40 and 4/20 figures depend on it.
 3. Nuria's Spanish line, *¡Hola desde Vadoalto!*, for a fluent Spanish reader (spec 120 rule).
-4. Re-read sources 1, 4, 7 and 10 at the source when fetches are available.
+4. Re-read sources 1, 4, 7 and 10 at the source when fetches are available. Source 11's Hall paper was read directly on 2026-10-25 (pp. 1-2): it distinguishes fixed-syllable meters from fixed-duration meters and gives 2, 4, 8 for one, two, three syllables. H3 and F4 now use syllables; the other historical anchors still need their source pass.
 
 ## Rights notes for images
 
