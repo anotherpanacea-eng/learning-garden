@@ -372,15 +372,15 @@ Feedback A: Lots or few doesn't matter. Look for one left alone.
 Feedback B: Yes. One left over means odd.
 Feedback C: A pair is two. Three is not a pair.
 
-**A2 (Sprout, 3-choice; picture of two rows, one row longer)**
-Prompt: Pip makes two rows. One row is longer. Is it even?
-- A. No. Even means both rows match. *(right)*
-- B. Yes. Two rows always means even. *(tests: any two groups make even)*
-- C. Yes. The rows are nearly the same. *(tests: near-equal is good enough)*
+**A2 (Sprout, 3-choice; picture of two rows paired one for one, exactly one extra seedling)**
+Prompt: Pip pairs two rows. One seedling has no partner. Odd or even?
+- A. Odd. One seedling has no partner. *(right)*
+- B. Even. Two rows always means even. *(tests: any two groups make even)*
+- C. Even. The rows are nearly the same. *(tests: near-equal is good enough)*
 Hint: Do the two rows match, one for one?
-Explanation: Even means two rows that match, with none left over.
-Feedback A: Yes. The longer row has one left over.
-Feedback B: The rows must match. One sticks out here.
+Explanation: After pairing every seedling you can, exactly one is left over. That makes the number odd.
+Feedback A: Yes. One left over after pairing means odd.
+Feedback B: Two rows can hold odd or even totals. Pair the seedlings.
 Feedback C: Nearly isn't enough. One seedling has no partner.
 
 **A3 (Sprout, 3-choice; picture of a plan, then the same plan turned)**

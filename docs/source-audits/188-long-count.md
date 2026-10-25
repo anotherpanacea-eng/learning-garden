@@ -2,9 +2,11 @@
 
 Date: 2026-10-25. Spec: [188](../specs/188-long-count.md). Companion: [188 text](../content/188-long-count-text.md).
 
-**Method.** Five web searches (WebSearch; page fetches were blocked in this session, so claims rest on search-result excerpts and should be re-read at the source in the second pass). The mathematics (place value to ten million, comma groups, rounding half up, ranges of rounded values, × and ÷ by powers of ten, exponents, thousandths, standard form) is standard school mathematics and needs no web source; it is checked by the math reviewer and by script. All counts in the town (seeds, bricks, reeds, the Gazette's totals) are **made-up labeled data**, verified by `check188.py` (65 checks, all passing; scratch area, not in the repo), including a brute-force uniqueness check for the E3 puzzle. Pedagogy follows the Marble teaching-research records for the seventeen targets (two, `mt_jY7uf0Cb7o` and `mt_MHaiUd2FLA`, added in independent review) (Marble `7bd8b67`, CC BY-SA, paraphrased, never copied) and Jane `0ec55f7` `LESSONS.md`.
+**Method.** Original draft: five web searches (WebSearch; page fetches were blocked in this session, so claims rest on search-result excerpts and should be re-read at the source in the second pass). The mathematics (place value to ten million, comma groups, rounding half up, ranges of rounded values, × and ÷ by powers of ten, exponents, thousandths, standard form) is standard school mathematics and needs no web source; it is checked by the math reviewer and by script. All counts in the town (seeds, bricks, reeds, the Gazette's totals) are **made-up labeled data**, verified by `check188.py` (65 checks, all passing; scratch area, not in the repo), including a brute-force uniqueness check for the E3 puzzle. Pedagogy follows the Marble teaching-research records for the seventeen targets (two, `mt_jY7uf0Cb7o` and `mt_MHaiUd2FLA`, added in independent review) (Marble `7bd8b67`, CC BY-SA, paraphrased, never copied) and Jane `0ec55f7` `LESSONS.md`.
 
 **Anchor choice.** The assignment offered Archimedes' *Sand Reckoner*, Inca khipu and Fibonacci's *Liber Abaci*. *Liber Abaci* and the journey of Hindu-Arabic numerals are already taught in draft spec 138 (numeral bench and Baghdad reading), so they are left out here to avoid re-teaching. The two anchors kept come from the Andes and ancient Syracuse.
+
+Direct-source follow-up, 2026-10-25: source 17 was opened and read for the Sand Reckoner correction below. This does not clear the other source or human checks.
 
 ## Sources consulted
 
@@ -26,16 +28,17 @@ Date: 2026-10-25. Spec: [188](../specs/188-long-count.md). Companion: [188 text]
 | 14 | University of Melbourne news item on khipu research | University of Melbourne | https://findanexpert.unimelb.edu.au/news/94927-the-incas-used-mysterious-stringy-objects-called-%E2%80%98khipus%E2%80%99-to-record-data.-we-just-got-a-step-closer-to-understanding-them | Khipu recorded data; scholarship still ongoing (context). |
 | 15 | Marble teaching-research records for the seventeen targets (and `mt_b4lbTOJYwI`, read and dropped; now owned by proposed spec 199) | Marble repo at `7bd8b67` (CC BY-SA; paraphrased, not copied) | local clone | Pedagogy summarized in the spec's upstream check. |
 | 16 | Jane `LESSONS.md` | Jane repo at `0ec55f7` | local clone | Teach → guided → practice; "I'm stuck" ladder; misconception-tagged choices; glossary. |
+| 17 | Archimedes, *The Sand-Reckoner*, trans. T. L. Heath, pp. 524, 526-527 | *The Works of Archimedes* (1897), transcription hosted by Internet Sacred Text Archive | https://sacred-texts.com/book/the-sand-reckoner-of-archimedes/start-reading | Direct page read, 2026-10-25: ordinary expressions already reach a myriad myriads; upper bounds are less than 10⁵¹ and less than 10⁶³ for the two models. |
 
 ## Claims and status
 
 | Claim | Sources | Status |
 | --- | --- | --- |
 | Archimedes wrote *The Sand Reckoner*, 3rd century BCE, addressed to King Gelon (Gelo II) of Syracuse | 1, 2 | Checked |
-| He asked how many grains of sand would fill the universe as he pictured it, and showed the number is finite | 1, 2, 3 | Checked |
-| Greek number words stopped at a myriad, 10,000; he took a myriad of myriads (10⁸) as a new unit | 1, 2 | Checked |
+| He bounded the sand filling his model universe rather than determining an exact count | 17, pp. 526-527 | Verified by direct reading in this review; child text now keeps the distinction |
+| A myriad meant 10,000; ordinary expressions could reach a myriad myriads (10⁸), which he took as a new unit | 17, p. 524 | Verified by direct reading; removed the misleading claim that expressible numbers stopped at 10,000 |
 | "More than 2,000 years ago" | 1 (3rd century BCE) | Checked |
-| Modern accounts usually give his answer as about 8 × 10⁶³ | 1, 2 | Checked as the usual figure; one abstract (5) gives 10⁵¹ for a smaller universe and one popular source gives 10⁶³. Child text says only "Modern books usually write his answer as about 8 × 10⁶³" in the Keeper's note. Second pass: confirm against a scholarly translation (Heath). |
+| "Answer about 8 × 10⁶³" | 1, 2; corrected against 17, pp. 526-527 | Rejected in direct-source review. Heath gives <10⁵¹ for the smaller model and <10⁶³ for the fixed-star model. Child text now says only that he proved an upper bound. |
 | Khipu: Inca record keepers in the Andes kept counts on knotted cords hanging from a main cord | 9, 11, 13 | Checked |
 | Biggest place nearest the main cord, ones farthest; a blank position means zero | 7, 9, 11 | Checked |
 | Ones: long knots with 2-9 turns, figure-eight for 1; higher places: clusters of simple knots | 9, 10, 11 | Checked (F1 uses a 5-turn knot for 5) |
@@ -47,11 +50,11 @@ Date: 2026-10-25. Spec: [188](../specs/188-long-count.md). Companion: [188 text]
 
 ## Open checks
 
-1. Archimedes' answer: confirm the "about 8 × 10⁶³" wording against a scholarly translation; if the reviewer prefers, the Keeper's note can say "a number more than sixty digits long" instead, which is true of the usual figure.
+1. Resolved in direct-source review: read Heath, pp. 524, 526-527 (source 17); removed the unsupported 8 × 10⁶³ and exact-answer wording from the companion and spec. The other source-page and fluent-reader checks remain pending.
 2. Nuria's Spanish number, *Cuatrocientos tres mil setenta y dos* (403,072), for a fluent Spanish reader (spec 120 rule). Grammar is standard (no "y" between hundreds and thousands; "setenta y dos").
 3. `[check]` items above (khipukamayuq training time; number of surviving khipu) stay out of child text.
 
-**Independent review, 2026-10-25.** Repeated searches on *The Sand Reckoner* (Wikipedia, Weber State, UC Santa Cruz excerpts: the Greek system named numbers up to a myriad; a myriad myriads as the new unit; addressed to Gelo II; about 8 × 10⁶³ for Aristarchus's universe, with smaller bounds in some accounts) and on Locke's 1912 *American Anthropologist* paper ("The Ancient Quipu, a Peruvian Knot Record", vol. 14; figure-eight knot for 1; place by distance from the main cord). Both anchors stand as written; no child-text change was needed for facts.
+**Independent review, 2026-10-25.** Repeated searches on *The Sand Reckoner* (Wikipedia, Weber State, UC Santa Cruz excerpts: the Greek system named numbers up to a myriad; a myriad myriads as the new unit; addressed to Gelo II; about 8 × 10⁶³ for Aristarchus's universe, with smaller bounds in some accounts) and on Locke's 1912 *American Anthropologist* paper ("The Ancient Quipu, a Peruvian Knot Record", vol. 14; figure-eight knot for 1; place by distance from the main cord). That excerpt-only conclusion is superseded for the Sand Reckoner by the direct-source correction above. The khipu anchor has not received a full direct-source review here.
 
 ## Rights notes for images
 

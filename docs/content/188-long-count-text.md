@@ -218,9 +218,9 @@ Keeper's note:
 > A khipu has a main cord with many cords hanging from it. On each hanging cord, the cluster nearest the main cord is the biggest place. The ones are farthest down. A blank space meant zero. A researcher named Leslie Leland Locke is usually credited with showing, in 1912, that these knots work in tens, like our digits. On some khipu, one cord holds the total of others. Not every khipu is numbers; scholars still study the rest.
 
 **H2. Counting the sand** (A true thing from history; Keeper's Desk)
-> More than 2,000 years ago, Archimedes asked how many grains of sand would fill the universe he pictured. Greek number words stopped at ten thousand. He built bigger ones.
+> Over 2,000 years ago, Archimedes bounded the sand filling his model universe. A myriad meant ten thousand. He built bigger numbers.
 Keeper's note:
-> The Greek word for ten thousand was a *myriad*. Archimedes took a myriad of myriads (100,000,000) as a new unit and kept building. His book, *The Sand Reckoner*, was written for King Gelon of Syracuse. His point: the number of grains is huge, and it still has an end. Modern books usually write his answer as about 8 × 10⁶³.
+> The Greek word for ten thousand was a *myriad*. Archimedes took a myriad of myriads (100,000,000) as a new unit and kept building. His book, *The Sand Reckoner*, was written for King Gelon of Syracuse. He proved an upper bound: the count in his model was smaller than a huge number, rather than an exact count of grains.
 
 ## Bench (a): The Counting Rail
 
@@ -649,7 +649,7 @@ Feedback C: The cord for 2,035 has a zero hundreds. How is it shown?
 **F3 (Keeper's Desk, true / not true from this source)**
 Source: card H2, Counting the sand.
 Prompt: Tap each sentence: true from this card, or not from this card.
-- "Greek number words stopped at ten thousand." *(true from this card)*
+- "A myriad meant ten thousand." *(true from this card)*
 - "Archimedes built bigger numbers from a myriad of myriads." *(true from this card)*
 - "Archimedes said the sand cannot be counted, because it is endless." *(not from this card: he said the opposite)*
 - "Archimedes counted every grain himself." *(not from this card: he reasoned, he did not count)*
