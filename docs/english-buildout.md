@@ -1,10 +1,12 @@
 # English build-out: twenty-nine packs
 
-**Inventory and plan, 2026-10-25. Step 1 only.** This doc groups every pinned English topic that nothing on `main` names into 29 proposed packs, gives each pack its ages, story placement and a spec number, and lists the owner's questions. No spec, companion text or source audit exists yet. Step 2, writing the packs, waits for the owner to admit this plan. It is the English companion to the [history and science build-out](history-and-science-buildout.md) (specs 133-180) and the math build-out (specs 181-212, draft PR [#154](https://github.com/anotherpanacea-eng/learning-garden/pull/154)). Story links are future adapters to the merged [spec 120 proposal](specs/120-keeper-of-the-ways.md); every pack also plays standalone from an open destination.
+**Historical inventory and proposed plan, 2026-10-25.** This is the step-1 inventory against `main` at `ca337ff` and Marble pin `96a7933`, not a current coverage report. It assigned 205 then-unnamed English topics to 29 proposed packs, with ages, story placement, spec numbers and owner questions. Subsequent writing-only drafts now supply specs, companion texts and source audits for twelve packs: [PR180](https://github.com/anotherpanacea-eng/learning-garden/pull/180) (264, 269, 270, 273), [PR181](https://github.com/anotherpanacea-eng/learning-garden/pull/181) (257, 261, 274, 275), and [PR182](https://github.com/anotherpanacea-eng/learning-garden/pull/182) (260, 262, 265, 266). Authored drafts are not runtime implementations or validated coverage; each needs a bounded commissioning decision and the relevant independent content, source, save, language, cultural and rights checks before build. The remaining seventeen packs are plan entries here.
+
+It is the English companion to the [history and science build-out](history-and-science-buildout.md) (specs 133-180) and the math build-out (specs 181-212, draft PR [#154](https://github.com/anotherpanacea-eng/learning-garden/pull/154)). Story links are future adapters to the merged [spec 120 proposal](specs/120-keeper-of-the-ways.md); every pack also plays standalone from an open destination.
 
 ## Why
 
-On the pinned Marble graph (`96a7933`) there are **286 English topics**. **25** have a declared reference in `curriculum/topic-coverage.csv` or appear as a target in a spec. **81** are named somewhere under `docs/` (a spec, a companion text, a source audit, the atlas or a plan). The other **205** are named nowhere: no spec, no draft, no audit. The open draft PRs (#154 to #163 and #167) name none of them either. English is the largest gap left once the math drafts land.
+In that historical snapshot, on the pinned Marble graph (`96a7933`), there were **286 English topics**. **25** had a declared reference in `curriculum/topic-coverage.csv` or appeared as a target in a spec. **81** were named somewhere under `docs/` (a spec, a companion text, a source audit, the atlas or a plan). The other **205** were named nowhere in that snapshot: no spec, no draft, no audit. The then-open draft PRs (#154 to #163 and #167) named none of them either. These counts have not been recomputed for current `main` or the later English drafts.
 
 | Domain | Pinned | Named on main | Unclaimed | Packs here |
 | --- | ---: | ---: | ---: | --- |
@@ -20,18 +22,20 @@ On the pinned Marble graph (`96a7933`) there are **286 English topics**. **25** 
 
 How the count was made: a topic counts as named if its id appears in any Markdown file under `docs/` on `main` at `ca337ff`. That is the widest reading of "claimed", and it reproduces the board's figure of 205. The narrow reading (a declared reference or a spec target) leaves 261 unclaimed. The 56 topics in between are named only in source audits, the atlas or planning docs. This inventory leaves all 81 named topics where they are and plans only the 205.
 
-Every one of the 205 is assigned to exactly one pack below. The ids are candidates for a reviewed reference, never coverage claims. No atlas, coverage file, route table or Marble pin changes here.
+Every one of those historical 205 is assigned to exactly one pack below. The ids are candidates for a reviewed reference, never coverage claims. No atlas, coverage file, route table or Marble pin changes here.
 
 ## Spec numbers
 
-**Proposed range: 250 to 278**, one number per pack, in the order of the table below.
+**Proposed range: 250 to 278**, one number per pack, in the order of the table below. The allocation rationale below records the original snapshot; it is not a current free-number or open-branch inventory. Check current `main` and open work before allocating additional numbers.
 
-- `main` already uses 213 to 215 (Codex's runtime specs, landed 2026-10-25: Courier's Price, Parcels on both pans, Keep it out). The next free number is 216.
-- The math drafts hold 181 to 212 on their PR branches. No other open PR or remote branch holds a number above 215.
-- OCA-13 (history and science wave 6) takes its numbers from `main` when it starts, so it begins at 216. With about 89 topics at the earlier waves' density, it needs about 8 to 10 numbers. Codex keeps adding runtime specs at the next free number.
-- Starting at 250 leaves 216 to 249 (34 numbers) for both, so neither has to wait on this plan. If the owner prefers the English packs to follow OCA-13 directly, renumbering is a one-line change here before step 2 starts.
+- At that snapshot, `main` used 213 to 215 (Codex's runtime specs, landed 2026-10-25: Courier's Price, Parcels on both pans, Keep it out). The next free number was 216.
+- The math drafts held 181 to 212 on their PR branches. No other then-open PR or remote branch held a number above 215.
+- OCA-13 (history and science wave 6) was expected to take its numbers from `main`, beginning at 216, and to need about 8 to 10 numbers for about 89 topics. Codex was also adding runtime specs at the next free number.
+- Starting at 250 reserved 216 to 249 (34 numbers) for both streams. That was the original reason for the range; it does not reserve numbers for future work.
 
 ## The packs
+
+These original pack targets remain proposals; current built work and overlap must be checked before commissioning. In particular, 273 extends Two Windows (59) and Evidence & voice (219, 224) with explicit firsthand/secondhand source basis, rather than introducing a second sustained reading engine.
 
 Ages are the union of the Marble age ranges of each pack's targets. Spec 120 §8 asks each story chapter, not each pack, to offer jobs at more than one depth. Each pack uses the depths that suit its targets (Sprout, Seedling, Sapling, Keeper's Desk), and the depth names describe the task, never the child.
 
@@ -96,7 +100,7 @@ Every pack takes the OCA-13 contract that specs 133 to 212 used: a spec, a `docs
 - **Texts.** Sample passages are public domain or newly written for the pack, never the owner's writing. Candidate public-domain sources include Aesop and La Fontaine, *Calila e Dimna* for the Spanish side (check), Kipling's *Just So Stories*, Grahame's *The Wind in the Willows*, Burnett's *The Secret Garden*, and Stevenson's *A Child's Garden of Verses*. Nonfiction passages are written new, and they may draw on the facts already audited in the history and science packs.
 - **Phonics.** Packs 250 and 252 teach sounds, so they sit behind [brief 55](specs/55-phonics-content-audio-brief.md)'s linguistic, audio and rights review. Step 2 writes their text and audio request lists; build waits for that review.
 - **What is never recorded.** Speaking, handwriting and composition are seen by a person, not by the device. Talk prompts are spoken to a grown-up. Handwriting is done on paper. Writing is read by a human and never graded. Listening tasks use authored audio only. No pack records a child's voice, image or free text unless the owner chooses optional local notes (question 6).
-- **Supplied choices.** AGENTS.md's rule on varying the fitting choice's position, and on keeping a saved question's choices and order stable, applies to every pack.
+- **Supplied choices and saved sources.** AGENTS.md's rule on varying the fitting choice's position applies to every pack. Started/kept visits freeze complete authored source, ordered choices, teaching, help, original outcomes and support-before. Older saved work renders from that source; help and audio requests are recorded before reveal, and missing support records never establish an unassisted attempt. Failed saves preserve earlier work and visible pending words/selections, with no silent discard. The individual draft specs define the bounded host/import checks.
 - **Labels kept apart:** "A true thing about language", "A story people told", "A story from Willowbank" and "A made-up model", as in the other build-outs.
 
 ## Suggested order
