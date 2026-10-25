@@ -77,6 +77,8 @@ Audit for [spec 221](../specs/221-who-eats-what.md) and its [companion text](../
 ## Cross-pack consistency
 
 - Food-arrow legend and reversed-arrow read-back match specs 66, 88, 151 and 153 exactly.
+- After Codex review, sunlight claims are scoped to the pack's own chains ("every chain here", "in this activity"); spec 171 teaches vent chains built on chemical energy, and the Grown-up panel points to it.
+- After Codex review, the Osprey Ledger reads concentration per whole level (poison ÷ living stuff), not one animal's total, and its energy overlay comes from the same share rule; this matches spec 151's per-level tenth rule and its point that the share is rough (the a-fifth setting).
 - The energy tenths rule matches spec 151; the soil-is-not-energy line matches spec 149's van Helmont teaching; sunlight-to-bread energy stays spec 147's.
 - Route `#living/who-eats` is unused on main (`grep -rn "#living/who-eats" docs` finds only this pack).
 - The scenes add to spec 120 without contradicting it: Act III ch. 3 keeps the ribbons and the new straight path, and the beaver pond floods a meadow beside the ribboned path, not the path itself (review fix: act 3's desk case says the old ribboned path stays dry); Act III ch. 2 keeps Vadoalto's wet-ground reed; the Act IV desk card sits beside, and does not touch, the town's three flood plans.

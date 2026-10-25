@@ -86,6 +86,7 @@ No images are embedded. If art is wanted, prefer public-domain or open-licensed 
 ## Wording decisions from the fact pass
 
 - **Blue whale:** "bigger or heavier than any animal ever found", not "longest"; a few long-necked dinosaurs might have matched its length (Marble constraint and NOAA). The dinosaur card says "no dinosaur yet found was as heavy".
+- **Tallest and biggest on land (Codex review, PR #175):** sauropods such as *Brachiosaurus* and *Giraffatitan* held their heads far higher than a giraffe (estimates run from about 9 to 15 m, against a giraffe's 5.5 m or so; Britannica Kids, https://kids.britannica.com/students/article/Brachiosaurus/310341), and several were heavier than an elephant. So the giraffe is "the tallest animal alive today" and the elephant "the biggest on land today" wherever a record sits beside the dinosaur card. Dot now says some dinosaurs were taller. Item 1.5 now asks "about as long as", so only two buses fits; a small car is too short rather than also true.
 - **Cheetah:** "fastest on land, for a short dash"; the falcon card says only "dives faster", with no speed, because sources range from about 99 to over 200 mph.
 - **Bee hummingbird:** a weight claim (lighter than a nickel) and a size claim (small enough to perch on a pencil) kept apart; no coin is used to show size.
 - **Seahorse:** "bony plates instead of ordinary scales", resolved by backbone and gills, as the research asks.

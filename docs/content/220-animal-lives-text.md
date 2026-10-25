@@ -40,13 +40,13 @@ Dot adjusted her hat and turned the card over. "The back says blue whale."
 
 Pip looked at the dinosaur. Then at the whale. "Can the dinosaur be the tallest, then?"
 
-"The giraffe is the tallest," said Dot. "The dinosaur can still be in the show."
+"Some dinosaurs were taller than any animal now," said Dot. "The giraffe is the tallest animal alive today. The dinosaur can still be in the show."
 
 "Every record is its own kind of most," said {guide}. "Biggest, tallest, fastest, smallest. Let's stand each one next to something we know."
 
 Pip put the cheetah at the front. Nobody argued with that.
 
-**Keeper's note (A true thing about science):** No animal ever found is bigger or heavier than the blue whale. A few long-necked dinosaurs might have been about as long, but none was as heavy. The biggest animal on land today is the elephant.
+**Keeper's note (A true thing about science):** No animal ever found is bigger or heavier than the blue whale. A few long-necked dinosaurs might have been about as long, but none was as heavy. Some long-necked dinosaurs were taller than a giraffe, too. Today, the giraffe is the tallest animal alive, and the elephant is the biggest animal on land.
 
 ### Scene 2. Ants on the bean plants (Act II, chapter 2: a garden across the seasons)
 
@@ -167,7 +167,7 @@ Hollis laughed. "I came home for supper. The whale's trip is a good deal longer.
 Each worked example reveals one step per tap.
 
 **T1. A record is a kind of most** (A true thing about science). Biggest, tallest, fastest and smallest are different records. Different animals hold them.
-Worked example: (1) Biggest: blue whale. (2) Tallest: giraffe. (3) Fastest on land: cheetah. (4) Smallest bird: bee hummingbird.
+Worked example: (1) Biggest: blue whale. (2) Tallest alive today: giraffe. (3) Fastest on land: cheetah. (4) Smallest bird: bee hummingbird.
 
 **T2. Stand it next to something you know.** A record means more next to something familiar.
 Worked example: (1) Blue whale: longer than two school buses end to end. (2) Giraffe: tall enough to look in an upstairs window.
@@ -237,7 +237,7 @@ Placement replies:
 - Bee hummingbird beside the nickel: Lighter than a nickel coin.
 - Any other pairing: Try another. Which thing shows this record best?
 **Kind of most** sorter: Put each record in its row: **biggest**, **tallest**, **fastest**, **smallest**.
-Sorter reply (giraffe in biggest): The giraffe is the tallest. Which animal is the heaviest?
+Sorter reply (giraffe in biggest): The giraffe is the tallest animal alive today. Which animal is the heaviest?
 Sorter reply (cheetah in fastest, with the falcon card): Fastest on land. The falcon dives faster.
 Dinosaur card (A true thing about science): Some dinosaurs were huge. No dinosaur yet found was as heavy as a blue whale.
 
@@ -378,7 +378,7 @@ Prompt: Which is the biggest animal that ever lived?
 - B. The blue whale *(right)*
 - C. The elephant *(misconception: biggest-is-on-land)*
 Hint: It lives in the sea.
-Feedback: A: No dinosaur yet found was as heavy. B: Yes. Bigger than any dinosaur. C: The elephant holds the record on land only.
+Feedback: A: No dinosaur yet found was as heavy. B: Yes. Bigger than any dinosaur. C: The elephant holds the record on land today.
 Explanation: No animal we know of, ever, was bigger than the blue whale.
 
 **1.2 (Sprout, 3-choice)**
@@ -387,7 +387,7 @@ Prompt: Which animal runs fastest on land?
 - B. The giraffe *(misconception: one-animal-all-records, tallest is fastest)*
 - C. The elephant *(misconception: biggest is fastest)*
 Hint: Think of a spotted cat.
-Feedback: A: Yes. Faster than a car on a town street. B: The giraffe holds the tallest record. C: Big doesn't mean fast.
+Feedback: A: Yes. Faster than a car on a town street. B: The giraffe is the tallest alive today. C: Big doesn't mean fast.
 Explanation: The cheetah is the fastest runner on land, for a short dash.
 
 **1.3 (Sprout, order the cards)**
@@ -396,7 +396,7 @@ Cards: horse · giraffe · bee hummingbird · elephant
 Answer: giraffe → elephant → horse → bee hummingbird.
 Misconception tested: biggest and tallest as one record.
 Hint: Who can look in an upstairs window?
-Explanation: The giraffe is the tallest. The tiny hummingbird comes last.
+Explanation: The giraffe is the tallest animal alive today. The tiny hummingbird comes last.
 
 **1.4 (Sprout, 3-choice)**
 Prompt: The bee hummingbird is the smallest what?
@@ -408,22 +408,22 @@ Feedback: A: Many bugs are smaller. B: It's a bird, not a fish. C: Yes. The smal
 Explanation: Each record has a group. This one is about birds.
 
 **1.5 (Sprout, 3-choice)**
-Prompt: A big blue whale is longer than what?
+Prompt: A big blue whale is about as long as what?
 - A. One small car *(underclaim: misses the scale)*
 - B. Two school buses end to end *(right)*
 - C. A whole mountain *(overclaim: no size check)*
 Hint: Picture buses lined up on a road.
-Feedback: A: Much longer than a car. B: Yes. Longer than two buses. C: A mountain is far bigger.
+Feedback: A: A car is far too short. A whale is much longer. B: Yes. About two buses, end to end. C: A mountain is far bigger than any animal.
 Explanation: Standing it beside buses shows how big it is.
 
 **1.6 (Sprout, 3-choice)**
-Prompt: Which animal is the biggest on land?
+Prompt: Which animal is the biggest on land today?
 - A. The elephant *(right)*
 - B. The blue whale *(misconception: whale-on-land)*
 - C. The giraffe *(misconception: tallest is biggest)*
 Hint: The blue whale lives in the sea.
-Feedback: A: Yes. Biggest on land. B: The whale lives in the sea. C: Tallest, yes. Not heaviest.
-Explanation: The whale is the biggest of all. On land, the elephant is.
+Feedback: A: Yes. Biggest on land today. B: The whale lives in the sea. C: Tallest, yes. Not heaviest.
+Explanation: The whale is the biggest of all. On land today, the elephant is.
 
 ### Set 2. The ocean key (Seedling 2.1-2.6)
 
@@ -700,7 +700,7 @@ Explanation: The tags show nesting turtles return to one beach. Other studies li
 ## "I'm stuck" worked examples (step 2 of the ladder)
 
 - **Records:** Which is taller, a giraffe or a horse? Start: which one could look in an upstairs window?
-- **Kind of most:** The elephant is the biggest on land. Is it the fastest too? Start: one record each.
+- **Kind of most:** The elephant is the biggest on land today. Is it the fastest too? Start: one record each.
 - **Ocean key:** A crab. Backbone? Start: its hard part is outside, like a shell. So, no backbone.
 - **Groups:** Three izards, each looking up 2 minutes. Start: 3 × 2 = 6 minutes watched.
 - **Argument:** Claim: herds help. Start: find a readout that shows it.

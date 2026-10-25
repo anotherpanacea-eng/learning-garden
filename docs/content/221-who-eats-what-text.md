@@ -188,7 +188,7 @@ Worked example: (1) Claim: soft feathers help the owl hunt. (2) Evidence: its fl
 **T10. Plants catch sunlight.** Plants use sunlight to make their own food. That food holds energy from the Sun. Soil gives water and minerals, not energy.
 Worked example: (1) Sunlight falls on clover leaves. (2) The clover makes food. (3) The food stores the Sun's energy.
 
-**T11. Follow the food back.** Ask, "Where did its energy come from?" Keep asking. Every food chain ends at plants, and plants at the Sun.
+**T11. Follow the food back.** Ask, "Where did its energy come from?" Keep asking. Every chain here ends at plants, and plants at the Sun.
 Worked example: (1) Fox: from a rabbit. (2) Rabbit: from clover. (3) Clover: from sunlight.
 
 **T12. Energy goes one way.** An animal uses food energy to move, grow, mend and keep warm. Most leaves as warmth. It never goes round again.
@@ -197,11 +197,11 @@ Worked example: (1) A fox runs. (2) Its body warms. (3) The warmth spreads into 
 **T13. Some poisons stay** (Keeper's Desk). Some poisons break down quickly. Some don't. A **persistent** poison stays in an animal's body, meal after meal.
 Worked example: (1) A small fish eats poisoned plankton. (2) The poison stays. (3) Next meal adds more.
 
-**T14. It piles up the chain.** A big fish eats many small fish. It keeps the poison from all of them. Each step up holds more.
-Worked example: (1) One small fish: 1 unit. (2) A big fish eats 10. (3) It holds 10 units.
+**T14. Packed tighter up the chain.** Each step up, most of the food leaves as warmth. Only a little becomes body. A persistent poison is all kept.
+Worked example: (1) Plankton: 1,000 units of living stuff, 1,000 of poison. (2) Small fish: only 100 units of living stuff, all 1,000 of poison. (3) Poison in each unit: 1 in plankton, 10 in small fish.
 
-**T15. Energy down, poison up.** Energy gets smaller up a food chain. A persistent poison gets bigger. The top hunter gets the most.
-Worked example: (1) Plankton: 1,000 energy, 1 poison. (2) Small fish: 100 and 10. (3) Big fish: 10 and 100. (4) Osprey: 1 and 1,000.
+**T15. Energy down, poison up.** Energy gets smaller up a food chain. A persistent poison gets more concentrated. The top hunter's body holds it most densely.
+Worked example (energy in the whole level; poison in each unit of living stuff): (1) Plankton: 1,000 energy, 1 poison. (2) Small fish: 100 and 10. (3) Big fish: 10 and 100. (4) Osprey: 1 and 1,000.
 
 ## Activity (a): Who Eats What?
 
@@ -267,7 +267,7 @@ Chains:
 - Sun → algae → mayfly young → brown trout → heron
 Guided first chain (3 steps shown): (1) The fox ate a rabbit. (2) Where did the rabbit's energy come from? (3) Clover. Keep going.
 Question button: **Where did its energy come from?**
-End line (every chain): You reached the Sun. Every chain ends there.
+End line (every chain): You reached the Sun. Every chain in this activity ends there.
 Soil card: The soil gives plants water and minerals. Not energy.
 Energy jobs panel: Food energy helps an animal **move**, **grow**, **mend** and **keep warm**. Most ends as warmth in the air.
 One-way line: Energy flows one way. Matter goes round, like the rot log in the Meadow pack.
@@ -277,13 +277,14 @@ Reversed arrow read-back: This says the fox is food for the rabbit. Is that righ
 ## Activity (e): The Osprey Ledger (Keeper's Desk)
 
 Opening: A poison gets into a pond. Feed the chain. Watch the meters.
-Levels: **plankton** · **small fish** · **big fish** · **osprey**.
-Switches: poison **stays** / **breaks down**; meals per animal **2** / **5** / **10**; **Feed the chain**.
-Meter readout: Poison units in one {animal}: {n}.
-Energy overlay button: **Show energy too**. Readout: Energy units reaching one {animal}: {e}.
-Guided first run (3 steps): (1) Poison stays. (2) Meals: 10. (3) Feed the chain. Which meter climbs highest?
-Breaks-down line: This poison breaks down before the next meal. Each meter shows only 1.
-Model line (A made-up model): Real animals eat different numbers of meals, and real amounts never rise by exactly the same step. Energy here passes up by a tenth.
+Levels (each is the whole level, not one animal): **all the plankton** · **all the small fish** · **all the big fish** · **all the ospreys**.
+Switches: poison **stays** / **breaks down**; passed up each step **a tenth** / **a fifth**; **Feed the chain**.
+Meter readouts: Living stuff in all the {level}: {b}. · Poison in all the {level}: {p}. · Poison in each unit of {level}: {c}.
+Energy overlay button: **Show energy too**. Readout: Energy in all the {level}: {e}.
+Guided first run (3 steps): (1) Poison stays. (2) Passed up: a tenth. (3) Feed the chain. Which "each unit" meter climbs highest?
+Total line: The total poison stays 1,000. It is packed into less and less living stuff.
+Breaks-down line: This poison breaks down before it is passed up. Every "each unit" meter shows only 1.
+Model line (A made-up model): Here every bit of poison is eaten and kept, and the same share passes up each step. Real chains are messier. The meters show amounts, not harm.
 Real-figures card (A true thing from history): In 1967, scientists measured DDT in a salt marsh on Long Island, New York. Plankton held about 0.04 parts per million. One gull held 75 parts per million.
 
 ## History cards
@@ -542,13 +543,13 @@ Feedback: A: Yes. Algae use sunlight, like plants. B: Water carries the trout. I
 Explanation: Water chains work the same way: algae catch sunlight, and it passes up.
 
 **4.7 (Sapling, number with steps)**
-Given: the clover stores 1,000 units of energy. About a tenth passes up each step.
-Prompt: How many units reach the fox?
+Given: a field's clover stores 1,000 units of energy. About a tenth passes up each step.
+Prompt: How many units reach all the field's foxes?
 Answer: 10.
-Steps: (1) Clover to rabbit: 1,000 ÷ 10 = 100. (2) Rabbit to fox: 100 ÷ 10 = 10.
+Steps: (1) Clover to all the rabbits: 1,000 ÷ 10 = 100. (2) Rabbits to all the foxes: 100 ÷ 10 = 10.
 Misconception tested: all the energy passes up (answering 1,000).
 Hint: Divide by 10 for each arrow.
-Explanation: Most energy leaves as warmth at each step, so only 10 units reach the fox. (A made-up round number; the real share varies.)
+Explanation: Most energy leaves as warmth at each step, so only 10 units reach all the foxes together. (A made-up round number; the real share varies.)
 
 ### Set 5. Up the chain (Keeper's Desk 5.1-5.7)
 
@@ -557,21 +558,21 @@ Prompt: A persistent poison gets into a pond. Where will it be most concentrated
 - A. In the water, where it entered *(misconception: highest where it enters)*
 - B. Spread evenly through every animal *(misconception: it harms all levels equally)*
 - C. In the osprey at the top *(right)*
-Hint: Who eats the most poisoned meals?
-Feedback: A: The water holds very little. Animals pile it up. B: Each step up holds more, not the same. C: Yes. It eats fish that ate fish.
-Explanation: A persistent poison is kept and added up meal after meal, so the top hunter holds the most.
+Hint: Where is the poison packed into the least living stuff?
+Feedback: A: The water holds very little. Animals pile it up. B: Each step up holds more, not the same. C: Yes. All the poison is packed into the least living stuff.
+Explanation: A persistent poison is kept while living stuff shrinks, so each unit of the top hunter holds the most.
 
 **5.2 (Keeper's Desk, number with steps)**
-Given: ledger set to "stays", 10 meals. One plankton holds 1 unit.
-Prompt: How many units does one osprey hold?
-Answer: 1,000.
-Steps: (1) Small fish: 1 × 10 = 10. (2) Big fish: 10 × 10 = 100. (3) Osprey: 100 × 10 = 1,000.
-Misconception tested: adding 10 each step (answering 31 or 40).
-Hint: Each animal eats 10 of the one below.
-Explanation: Multiply by 10 at each step: 1, 10, 100, 1,000. (Made-up model.)
+Given: ledger set to "stays", a tenth passes up. All the plankton: 1,000 units of living stuff, 1,000 of poison.
+Prompt: How much poison is in each unit of big fish?
+Answer: 100.
+Steps: (1) Living stuff: 1,000 → 100 → 10 in all the big fish. (2) Poison kept: still 1,000. (3) 1,000 ÷ 10 = 100.
+Misconception tested: reading the total as the concentration (answering 1,000), or thinking the concentration stays put because the total does (answering 1).
+Hint: Find the big fish's living stuff first. Then divide.
+Explanation: The same poison sits in a tenth as much living stuff each step. (Made-up model.)
 
 **5.3 (Keeper's Desk, 3-choice)**
-Prompt: Switch the poison to "breaks down". What does the osprey's meter show?
+Prompt: Switch the poison to "breaks down". What does the osprey's "each unit" meter show?
 - A. 1, the same as the plankton *(right)*
 - B. Still 1,000 *(misconception: persistence makes no difference)*
 - C. Less than the plankton *(misconception: the poison thins out going up)*
@@ -589,13 +590,13 @@ Hint: "How many times" means divide.
 Explanation: The gull held nearly two thousand times the plankton's level. Real chains don't rise by a neat ten each step.
 
 **5.5 (Keeper's Desk, 3-choice)**
-Prompt: Energy shrinks up the chain, but a persistent poison grows. Why?
+Prompt: Energy shrinks up the chain, but a persistent poison gets more concentrated. Why?
 - A. The poison turns into energy *(misconception: mixing up poison and energy)*
 - B. They're the same thing, measured twice *(misconception: mixing up poison and energy)*
 - C. Energy is used and leaves as warmth; the poison is kept *(right)*
 Hint: What happens to energy after a meal? And the poison?
 Feedback: A: A poison is a substance, not energy. B: Energy and poison behave differently. C: Yes. One leaves, one stays.
-Explanation: Most eaten energy leaves as warmth, but a persistent poison is kept and adds up.
+Explanation: Most eaten energy leaves as warmth, but a persistent poison is kept, so it is packed into less living stuff.
 
 **5.6 (Keeper's Desk, 3-choice)**
 Prompt: Which is the best evidence that DDT harmed the ospreys?
@@ -603,15 +604,15 @@ Prompt: Which is the best evidence that DDT harmed the ospreys?
 - B. Big birds cope best, so it can't be DDT *(misconception: top hunters are big enough to cope)*
 - C. Thin shells came with DDT, and ospreys recovered after it stopped *(right)*
 Hint: Look for a change that came and went with DDT.
-Feedback: A: The poison came mostly through food, not water. B: The top hunter gets the biggest dose. C: Yes. Two pieces of evidence point the same way.
+Feedback: A: The poison came mostly through food, not water. B: The top hunter carries the most concentrated poison. C: Yes. Two pieces of evidence point the same way.
 Explanation: The harm appeared with DDT and eased after it stopped. That pattern is strong evidence.
 
 **5.7 (Keeper's Desk, say why, to a grown-up)**
-Prompt: Why were ospreys hit harder than small fish? Use the ledger.
-Answer to listen for: the poison stays (persistent); each animal eats many of the one below; so it piles up, and the osprey at the top holds the most; claim, evidence and reasoning.
+Prompt: Why is poison more concentrated in ospreys than in small fish? Use the ledger.
+Answer to listen for: the poison stays (persistent); only a small share of living stuff passes up each step, but all the poison is kept; so each unit of osprey holds the most; the harm itself is shown by real evidence (thin eggshells), not by the model; claim, evidence and reasoning.
 Misconception tested: the poison thins out going up.
 Hint: Start with "The poison stays, so..."
-Explanation: A good argument names persistence, many meals, and the top of the chain.
+Explanation: A good argument names persistence, shrinking living stuff, and the top of the chain.
 
 ## "I'm stuck" worked examples (step 2 of the ladder)
 
@@ -623,8 +624,8 @@ Explanation: A good argument names persistence, many meals, and the top of the c
 - **Structures:** A duck has webbed feet. Start: what are its feet doing in the water?
 - **Arguments:** Holly has prickly leaves. Start: what happens to a mouth that bites them?
 - **Trace back:** A frog eats a fly. The fly ate nectar. Start: where did the flower get its energy?
-- **Energy tenths:** Grass stores 100 units. Start: 100 ÷ 10 = 10 reach the rabbit.
-- **Ledger:** 5 meals, poison stays. Start: 1, then 1 × 5 = 5.
+- **Energy tenths:** A field's grass stores 100 units. Start: 100 ÷ 10 = 10 reach all its rabbits.
+- **Ledger:** a fifth passes up, poison stays. Start: small fish hold 1,000 ÷ 5 = 200 units of living stuff. Then 1,000 poison ÷ 200 = 5 in each unit.
 
 ## Key terms (glossary)
 
@@ -648,7 +649,8 @@ Explanation: A good argument names persistence, many meals, and the top of the c
 - **Reasoning:** how the evidence supports the claim.
 - **Energy:** what makes things move, grow, warm up or happen.
 - **Food chain:** a line of arrows showing who eats whom.
-- **Producer:** a plant or alga that makes its own food from sunlight.
+- **Producer:** a living thing that makes its own food. Here, plants and algae, using sunlight.
+- **Living stuff:** the bodies of all the living things at one step of a chain. Scientists call it **biomass**.
 - **Minerals:** natural materials in soil and rock. Plants take in tiny amounts with water.
 - **Oxygen:** a gas in air and water that living things need.
 - **Pollen:** a fine powder that flowers pass to each other so seeds can form.
@@ -670,9 +672,9 @@ Explanation: A good argument names persistence, many meals, and the top of the c
 
 ## Grown-up panel
 
-**What this teaches:** sorting wild animals as herbivores, carnivores or omnivores by what they eat (looks and teeth are only clues); how living things, people included, change where they live to meet their needs; how a plant's or animal's parts, inside and outside, help it survive, grow and make seeds or young, argued with claim, evidence and reasoning; how the energy in any animal's food traces back through plants to the Sun and flows one way; and, at the Keeper's Desk, how a persistent poison builds up a food chain, with DDT and fish-eating birds as the real case.
+**What this teaches:** sorting wild animals as herbivores, carnivores or omnivores by what they eat (looks and teeth are only clues); how living things, people included, change where they live to meet their needs; how a plant's or animal's parts, inside and outside, help it survive, grow and make seeds or young, argued with claim, evidence and reasoning; how the energy in the food chains shown here traces back through plants to the Sun and flows one way; and, at the Keeper's Desk, how a persistent poison builds up a food chain, with DDT and fish-eating birds as the real case.
 
-**What it does not claim:** the Osprey Ledger and the energy tenths are made-up models with stated rules, not measurements. Real food chains are tangled webs. The pack covers wild and farm animals only. It never asks what your child eats, gives no diet advice and does not sort people. If your child asks, people are animals too, and scientists call humans omnivores; what a family eats is its own choice.
+**What it does not claim:** the Osprey Ledger and the energy tenths are made-up models with stated rules, not measurements. Real food chains are tangled webs. Not every chain starts with sunlight: around deep-sea vents, bacteria make food from chemicals in the water (the Down to the Deep pack, spec 171). The ledger's meters show amounts of poison, not harm; the real evidence of harm is the thin eggshells. The pack covers wild and farm animals only. It never asks what your child eats, gives no diet advice and does not sort people. If your child asks, people are animals too, and scientists call humans omnivores; what a family eats is its own choice.
 
 **Kindness line:** This pack is about what animals eat. It never asks what you eat.
 
