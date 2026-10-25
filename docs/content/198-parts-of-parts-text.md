@@ -219,7 +219,7 @@ Keeper's note:
 **H3. Flip the divisor** (A true thing from history; Keeper's Desk)
 > Around the year 850, the Indian mathematician Mahavira wrote a rule: to divide by a fraction, swap its top and bottom, then multiply.
 Keeper's note:
-> His book is called the Ganita Sara Sangraha. He gave a second way too: multiply each fraction by the other's bottom number, so no bottoms are left, then divide like whole numbers. Both ways give the same answer. T15 and T16 are these two ways.
+> His book is called the Ganita Sara Sangraha. His second way uses cross-products. For a/b divided by c/d, multiply a by d and b by c, then divide those products. For 3/4 divided by 3/8: 24 divided by 12 is 2. The same answer as T15 and T16.
 
 ## Bench (a): The Cup Line
 

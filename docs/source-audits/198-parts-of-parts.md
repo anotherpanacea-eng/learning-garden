@@ -41,7 +41,7 @@ Date: 2026-10-25. Spec: [198](../specs/198-parts-of-parts.md). Companion: [198 t
 ## Open checks
 
 1. The Nine Chapters problem with a 4/7 by 3/5 field: number and wording in a primary translation (Shen, Crossley and Lun, 1999). Not in child text.
-2. Mahavira's rule: confirm the verse numbers in chapter 3 of the Rangacharya edition.
+2. Mahavira's rule: a direct reading of the linked Rangacharya translation on 2026-10-25 locates the division rule at chapter 3, verse 8 (printed page 39). Its prose about multiplying fractions by each other's denominators is ambiguous when read as a modern procedure; the companion now gives the exact cross-products (a × d) ÷ (b × c) instead. The scan could not be fetched in this pass. Confirm against the printed notation or a scholarly study before treating the historical account as cleared.
 3. Rhind date in the second pass: child text follows the British Museum (about 1550 BCE).
 
 ## Rights notes for images

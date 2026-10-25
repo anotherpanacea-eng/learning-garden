@@ -48,7 +48,7 @@ One shared scene per chapter; any job is a whole contribution; nothing locks a s
 **Real anchors (see audit).**
 - **The Rhind papyrus.** An Egyptian scroll copied by the scribe Ahmose around 1550 BCE from an older text, now in the British Museum. Its first six problems share 1, 2, 6, 7, 8 and 9 loaves among 10 men; for 9 loaves each share is written 2/3 + 1/5 + 1/30 (= 9/10). Used for sharing, and at Keeper's Desk for checking the sum with a common denominator.
 - **The Nine Chapters on the Mathematical Art.** A Chinese collection compiled over several centuries and in its final form by about the 1st century BCE or CE; its first chapter, *Fangtian* (rectangular fields), finds field areas from width and length and works out rules for computing with fractions. Liu Hui's commentary is usually dated 263 CE. The specific fraction-sided field problem (4/7 by 3/5) is `[check]` and stays out of child text.
-- **Mahavira's rule.** In the *Ganita Sara Sangraha* (about 850 CE), the Jain mathematician Mahavira gives the division of fractions in two ways: swap the divisor's numerator and denominator and multiply, or multiply each fraction by the other's denominator and divide as whole numbers. These are T16 and, in spirit, T15.
+- **Mahavira's rule.** In the *Ganita Sara Sangraha* (about 850 CE), the Jain mathematician Mahavira gives the division of fractions in two ways: swap the divisor's numerator and denominator and multiply, or form the cross-products: a/b ÷ c/d = (a × d) ÷ (b × c), with b, c and d nonzero. The latter has the same result as T15's common-denominator count; the reciprocal method is T16.
 
 ## The lesson
 

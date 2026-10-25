@@ -130,8 +130,8 @@ Worked example: 1. 1/3 is colored. 2. Split each third into 2. 3. Now 2 of 6 par
 Worked example: 1. 1/3, split each part in 2. 2. Top: 1 × 2 = 2. Bottom: 3 × 2 = 6. 3. 1/3 = 2/6. 4. Adding 1 to each gives 2/4: a longer stretch.
 
 **T3. Chains of names** (A true thing about math)
-> Split into 2, then 3, then 4. You get a chain of names for one amount. Look for the times-table pattern.
-Worked example: 1. 1/4. 2. Split in 2: 2/8. 3. Split in 3: 3/12. 4. Tops go 1, 2, 3. Bottoms go 4, 8, 12.
+> Start from the same ribbon each time. Split each part into 2, 3 or 4. New names, same amount. Look for the times-table pattern.
+Worked example: 1. Start at 1/4. 2. Split in 2: 2/8. 3. Start again at 1/4; split in 3: 3/12. 4. Tops go 1, 2, 3. Bottoms go 4, 8, 12.
 
 **T4. Group the parts** (A true thing about math)
 > Group the parts into equal bunches. Fewer, bigger parts, same colored stretch. Divide top and bottom by the bunch size.
@@ -155,7 +155,7 @@ Worked example: 1. 2/5 + 2/5. 2. Count fifths: 2 + 2 = 4. 3. Still fifths. 4. 4/
 
 **T9. Never add the bottoms** (A true thing about math)
 > Adding the bottoms makes smaller pieces. Lay four tenths beside four fifths. They only cover two fifths. Too short!
-Worked example: 1. 2/5 + 2/5 is not 4/10. 2. 4/10 = 2/5, less than you started with. 3. The answer is 4/5.
+Worked example: 1. 2/5 + 2/5 is not 4/10. 2. 4/10 = 2/5, equal to just one addend. 3. The answer is 4/5.
 
 **T10. Many ways to split** (A true thing about math)
 > One fraction can be split into same-size pieces in many ways. Every way adds back to the same amount.
