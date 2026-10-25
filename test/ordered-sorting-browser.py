@@ -139,6 +139,45 @@ def step(p, keyboard=False):
         control.tap()
 
 
+
+def active_not(program):
+    return program['first']['not'] or (program['second']['test'] not in [None, 'off'] and program['second']['not'])
+
+
+def catches(row, card):
+    if row['test'] in [None, 'off']:
+        return False
+    feature, value = row['test'].split('-', 1)
+    answer = card[feature] == value
+    return not answer if row['not'] else answer
+
+
+def result_replies(p, recorded):
+    source, program = recorded['source'], recorded['program']
+    card = next(v for v in source['parcels'] if v['id'] == recorded['parcelId'])
+    expected = {'firstMatch': recorded['steps'][-1]['second'] == 'not-tested',
+                'overlap': catches(program['first'], card) and catches(program['second'], card),
+                'notReply': active_not(program)}
+    container = p.locator('[data-ordered-result]')
+    for key, visible in expected.items():
+        reply = container.locator('[data-ordered-reply="' + key + '"]')
+        ok(reply.count() == (1 if visible else 0), 'result condition selects source-owned ' + key)
+        if visible:
+            ok(reply.inner_text() == source['text'][key], 'result renders its frozen ' + key + ' reply')
+
+
+def comparison_replies(p, recorded):
+    source, program = recorded['source'], recorded['program']
+    expected = {'finite': recorded['matchCount'] == len(source['parcels']), 'equivalent': True,
+                'notReply': active_not(program) or active_not(source['requestProgram'])}
+    container = p.locator('[data-ordered-comparison]')
+    for key, visible in expected.items():
+        reply = container.locator('[data-ordered-reply="' + key + '"]')
+        ok(reply.count() == (1 if visible else 0), 'comparison condition selects source-owned ' + key)
+        if visible:
+            ok(reply.inner_text() == source['text'][key], 'comparison renders its frozen ' + key + ' reply')
+
+
 def sent(p, presses, expected):
     before = len(work(p)['runs'])
     for i in range(presses):
@@ -161,6 +200,7 @@ def sent(p, presses, expected):
     arrived = p.locator('[data-ordered-arrived-parcel]')
     ok(arrived.count() == 1 and arrived.evaluate("el=>el.closest('[data-ordered-basket]').dataset.orderedBasket") == expected,
        'one parcel visibly arrives in exactly the selected destination basket')
+    result_replies(p, result)
     return result
 
 
@@ -171,7 +211,9 @@ def compare(p, expected):
     ok(rows.count() == len(work(p)['source']['parcels']), 'comparison renders each frozen parcel once')
     ok(p.locator('[data-ordered-compare-row][data-match="true"]').count() == expected,
        'comparison match count follows independent routing expectation')
-    return copy.deepcopy(work(p)['comparison'])
+    recorded = copy.deepcopy(work(p)['comparison'])
+    comparison_replies(p, recorded)
+    return recorded
 
 
 def bounds(p):
@@ -296,6 +338,7 @@ def journeys(browser, fx, width):
        'first-match record contains no evaluated second predicate or false substitute')
     ok('not tested' in p.locator('[data-ordered-trace]').inner_text().lower(),
        'sent first-match trace keeps the unvisited row distinct from false')
+    result_replies(p, first)
     bounds(p)
     shot(p, f'large-first-trace-{width}.png')
     page(p, 'build')
@@ -592,6 +635,37 @@ def retained_and_refusals(browser, fx, raw):
         c.close()
 
 
+
+def frozen_reply_sources(browser, fx, raw):
+    # Current case wording can change without reinterpreting a recorded Send or
+    # comparison. Each record keeps its own complete source, including replies.
+    frozen = copy.deepcopy(raw)
+    for name, w in frozen['orderedSorting']['cases'].items():
+        recorded = w['runs'][-1]
+        w['trace'] = {key: copy.deepcopy(recorded[key]) for key in
+                      ['source', 'program', 'parcelId', 'prediction', 'steps', 'actualBasket']}
+        w['trace']['phase'] = 'sent'
+        w['currentResultId'] = recorded['id']
+        w['page'] = 'step'
+        for key in w['source']['text']:
+            w['source']['text'][key] = 'Synthetic current ' + name + ' ' + key + ' replacement.'
+    c, p = setup(browser, 320, fx['fresh'])
+    bring(p, frozen)
+    go(p)
+    for name in ['large-first', 'star-first', 'not-blue']:
+        case(p, name)
+        w = work(p)
+        result = next(v for v in w['runs'] if v['id'] == w['currentResultId'])
+        result_replies(p, result)
+        ok('Synthetic current' not in p.locator('[data-ordered-result]').inner_text(),
+           name + ' result never borrows current case reply wording')
+        page(p, 'compare')
+        comparison_replies(p, work(p)['comparison'])
+        ok('Synthetic current' not in p.locator('[data-ordered-comparison]').inner_text(),
+           name + ' comparison never borrows current case reply wording')
+    c.close()
+
+
 def near_limit_refusals(browser, fx):
     # At the real shared bound, the plain notebook fits while the actual notes
     # report does not. Every attempted DOM action must leave the root identical.
@@ -712,6 +786,7 @@ def main():
             for width in [320, 820]:
                 raw = journeys(browser, fx, width)
             retained_and_refusals(browser, fx, raw)
+            frozen_reply_sources(browser, fx, raw)
             near_limit_refusals(browser, fx)
             ok(not errors, 'zero browser runtime errors: ' + str(errors))
             ok(not network_errors, 'zero module network failures: ' + str(network_errors))

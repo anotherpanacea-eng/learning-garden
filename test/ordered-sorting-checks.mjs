@@ -4,6 +4,7 @@ import {freshState,recommendations} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from '../dist/progress-transfer.mjs';
 import {orderedSources,orderedTests} from '../dist/ordered-sorting-content.mjs';
 import * as O from '../dist/ordered-sorting-core.mjs';
+import {orderedPage} from '../dist/ordered-sorting-ui.mjs';
 
 let checks=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;},ok=(x,m)=>{assert.ok(x,m);checks++;};
 const clone=structuredClone;
@@ -67,6 +68,66 @@ for(const source of orderedSources){
  const r=work(s).runs[0];r.actualBasket='leaf';r.requestedBasket='cart';r.matches=true;r.steps[0].yes=!r.steps[0].yes;eq(O.orderedView(s).case.readable.length,1,'historical outcomes remain shape checked, not regraded');
  work(s).comparison.rows[0].actualBasket='leaf';work(s).comparison.rows[0].matches=false;work(s).comparison.matchCount=0;eq(O.orderedView(s).case.comparisonStatus,'ready');
  const imported=prepareProgressImport(JSON.stringify(notesReport(s),null,2));ok(imported.ok);eq(imported.state.orderedSorting,s.orderedSorting);
+}
+// Keyed teaching replies render from each recorded source, with evidence-specific triggers.
+{
+ const keys=['match','mismatch','firstMatch','overlap','finite','equivalent','notReply'];
+ const mark=(w,prefix)=>{for(const key of keys)w.source.text[key]=`${prefix} ${key} retained reply`;};
+ const contains=(html,reply,message)=>ok(html.includes(reply),message);
+ const absent=(html,reply,message)=>ok(!html.includes(reply),message);
+ for(const source of orderedSources){
+  const s=configured(source.id);mark(work(s),`Frozen ${source.id}`);
+  ok(O.selectOrderedParcel(s,source.id==='not-blue'?'large-yellow-star':'large-blue-star',fits));
+  const {run}=finish(s);ok(run.matches);eq(run.steps.at(-1).second,'not-tested');
+  ok(O.pageOrdered(s,'step',fits));let html=orderedPage(s);
+  contains(html,run.source.text.match,`${source.id} shows its recorded match reply`);
+  contains(html,run.source.text.firstMatch,`${source.id} explains an untested second row`);
+  if(source.id==='not-blue'){
+   contains(html,run.source.text.notReply,'active NOT gets its own saved explanation');
+   absent(html,run.source.text.overlap,'off second row has no overlap reply');
+  }else {
+   const card=run.source.parcels.find(p=>p.id===run.parcelId);ok(oracleTest(run.program.first,card)&&oracleTest(run.program.second,card));
+   contains(html,run.source.text.overlap,`${source.id} explains both matching tests`);
+   absent(html,run.source.text.notReply,'positive program has no NOT reply');
+  }
+  absent(html,run.source.text.mismatch,'fitting result does not show mismatch reply');
+  absent(html,run.source.text.finite,'one fitting card does not prove whole-source agreement');
+  ok(O.compareOrdered(s,fits));const comparison=clone(work(s).comparison);eq(comparison.matchCount,comparison.rows.length);
+  mark(work(s),`Current ${source.id}`);
+  html=orderedPage(s);
+  contains(html,run.source.text.firstMatch,'current result keeps the frozen first-match reply');
+  for(const key of keys)absent(html,work(s).source.text[key],`current source ${key} does not replace recorded result wording`);
+  ok(O.historyOrdered(s,run.id,fits));html=orderedPage(s);contains(html,run.source.text.firstMatch,'selected history keeps the recorded first-match reply');
+  for(const key of keys)absent(html,work(s).source.text[key],`current source ${key} does not replace selected history wording`);
+  ok(O.pageOrdered(s,'compare',fits));html=orderedPage(s);
+  contains(html,comparison.source.text.finite,`${source.id} complete comparison names its finite scope`);
+  contains(html,comparison.source.text.equivalent,`${source.id} comparison permits equivalent programs`);
+  if(source.id==='not-blue')contains(html,comparison.source.text.notReply,'NOT comparison keeps its source reply');
+  else absent(html,comparison.source.text.notReply,'unrelated positive requests get no NOT tip');
+  for(const key of keys)absent(html,work(s).source.text[key],`current source ${key} does not replace recorded comparison wording`);
+  ok(O.editOrdered(s,'first','basket',source.id==='star-first'?'cart':'lantern',fits));
+  finish(s);ok(O.pageOrdered(s,'step',fits));const differing=O.orderedView(s).case.result;ok(!differing.matches);
+  html=orderedPage(s);contains(html,differing.source.text.mismatch,`${source.id} differing route has its own source reply`);absent(html,differing.source.text.match,'differing route does not claim a match');
+  ok(O.compareOrdered(s,fits));ok(O.pageOrdered(s,'compare',fits));const differs=work(s).comparison;ok(differs.matchCount<differs.rows.length);html=orderedPage(s);
+  absent(html,differs.source.text.finite,'partial agreement does not receive the all-cards reply');contains(html,differs.source.text.equivalent,'comparison keeps equivalence invitation even when current routes differ');
+ }
+ // The positive alternate still compares with the saved NOT request. An off row's waiting NOT is inactive.
+ const s=configured('not-blue');mark(work(s),'Positive alternate');
+ configure(s,{first:row('wrap-blue','lantern'),second:row('off','cart',true),otherwise:'leaf'});
+ ok(O.selectOrderedParcel(s,'small-blue-star',fits));finish(s);ok(O.pageOrdered(s,'step',fits));let html=orderedPage(s);
+ absent(html,work(s).source.text.notReply,'NOT on an off second row does not explain a positive run');
+ absent(html,work(s).source.text.overlap,'off second row is never an overlap');
+ ok(O.compareOrdered(s,fits));const comparison=clone(work(s).comparison);eq(comparison.matchCount,12);mark(work(s),'Changed alternate');ok(O.pageOrdered(s,'compare',fits));html=orderedPage(s);
+ contains(html,comparison.source.text.notReply,'positive alternate comparison retains request-owned NOT explanation');
+ contains(html,comparison.source.text.equivalent,'positive alternate comparison gives source-owned equivalence reply');
+ contains(html,comparison.source.text.finite,'positive alternate agrees on all supplied cards');
+ absent(html,work(s).source.text.notReply,'positive alternate does not borrow the changed live request reply');
+ // A negated active second row can overlap even though the first match leaves it untested.
+ const negated=configured('large-first');mark(work(negated),'Negated overlap');ok(O.editOrdered(negated,'second','not',true,fits));ok(O.selectOrderedParcel(negated,'large-blue-circle',fits));const negatedRun=finish(negated).run;eq(negatedRun.steps.at(-1).second,'not-tested');ok(O.pageOrdered(negated,'step',fits));html=orderedPage(negated);
+ contains(html,negatedRun.source.text.notReply,'an active second NOT has a saved explanation even when first match short-circuits');contains(html,negatedRun.source.text.overlap,'overlap reply accounts for negated tests');
+ // An Otherwise result has no first-match or overlapping-test explanation.
+ const other=configured('large-first');mark(work(other),'Otherwise route');ok(O.selectOrderedParcel(other,'small-yellow-square',fits));finish(other);ok(O.pageOrdered(other,'step',fits));html=orderedPage(other);
+ absent(html,work(other).source.text.firstMatch,'Otherwise does not claim the first rule matched');absent(html,work(other).source.text.overlap,'non-overlap parcel does not get priority explanation');
 }
 // Unsupported harmless case keys remain raw without holding healthy siblings closed.
 {

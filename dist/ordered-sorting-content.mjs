@@ -32,7 +32,7 @@ const commonText={
  mismatch:'These destinations differ. Revise the rule and try another parcel.',
  firstMatch:'The first rule matched. The second row was not tested.',
  overlap:'Both tests can catch this parcel. Which test comes first decides its route.',
- finite:'These routes agree on the supplied cards in this saved source. This is practice with a finite rule machine, not an independent coding assessment.',
+ finite:'This rule fits every supplied card in this comparison. It tells us about these cards; try another request to explore a different rule.',
  equivalent:'Different programs can agree on every supplied card in this source.',
  notReply:'NOT reverses the answer to one test. It does not reverse the program or swap baskets.'
 };
@@ -43,14 +43,14 @@ export const orderedSources=[
   requestProgram:program(row('size-large','cart'),row('stamp-star','lantern'),'leaf'),learn:[...generalLearn,'Wren gives large parcels first priority. “Of the rest” means parcels still waiting after that first rule.'],
   guided:['Guided first rule: choose Large parcel as the first test, with Cart basket.','Choose Star stamp as the second test, with Lantern basket. Choose Leaf basket for Otherwise.','Select a large star parcel. It has both clues. Read the first test: Yes means the second row is not tested.','Send the parcel, compare its destination with Wren’s request, then try swapping the two complete rules.'],
   hint:'Which feature does Wren give priority to before saying “of the rest”?',example:structuredClone(blueExample),start:'Start by putting large in the first row and compare its destination with the request.',skip,
-  text:{...commonText,overlap:'With a star rule first, a large star follows the stamp rule. Wren gave size first priority.'}
+  text:{...commonText,overlap:'This parcel passes both of your tests, so the first matching rule chooses its basket. Wren’s request gives size priority before checking stars.'}
  },
  {
   version:1,id:'star-first',title:'Stamp first',request:'Star stamps go in Lantern. Of the rest, large parcels go in Cart. Everything else goes in Leaf.',baskets:structuredClone(baskets),parcels:structuredClone(parcels),
   requestProgram:program(row('stamp-star','lantern'),row('size-large','cart'),'leaf'),learn:[...generalLearn,'This request gives star stamps first priority. The large-parcel rule only sees parcels that did not match the star rule.'],
   guided:['Try a large star: both clues fit, so the order matters.','Read the first matching rule before considering the next row.','A fitting small star alone does not test which rule has priority for a large star.'],
   hint:'Which parcels are already routed before Wren mentions size?',example:{program:program(row('size-small','leaf'),row('stamp-circle','cart'),'lantern'),parcels:['small-yellow-circle','large-blue-circle'].map(card),steps:[{parcelId:'small-yellow-circle',text:'Small? Yes. Choose Leaf. The circle test is not tested.'},{parcelId:'large-blue-circle',text:'Small? No. Circle? Yes. Choose Cart.'}]},start:'Start with the star rule before the size rule.',skip,
-  text:{...commonText,overlap:'Both clues fit this large star, so priority chooses the basket. This request gives stamp priority.'}
+  text:{...commonText,overlap:'This parcel passes both of your tests, so priority chooses its basket. Wren’s request gives star stamps priority before checking size.'}
  },
  {
   version:1,id:'not-blue',title:'Turn one test around',request:'Anything that is not blue goes in Leaf. Blue parcels go in Lantern.',baskets:structuredClone(baskets),parcels:structuredClone(parcels),
