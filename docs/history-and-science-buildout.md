@@ -1,4 +1,4 @@
-# History and science build-out: twenty-six packs
+# History and science build-out: thirty-three packs
 
 Proposal, 2026-10-25. **Writing only:** specs 133 to 148 and, in a second wave, 149 to 158, each with a companion file holding every child-facing line and a source audit. Nothing here is built, scheduled or cleared. Each spec still needs an independent spec review and a subject check, and the owner chooses a first slice before Codex builds anything. Story links are future adapters to draft [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127) (the Keeper of the Ways); every pack also plays standalone from an open destination.
 
@@ -64,6 +64,22 @@ Written the same day, after the first sixteen, for the largest gaps left on the 
 | 158 | **Castles and Longships** | `#archive/castles` | Vikings as traders, settlers and raiders (horned helmets as a later costume), castles in order of design, clothing and dyes, the Bayeux embroidery as a source with a point of view; the Black Death in an opt-in Keeper's Desk folder. | H2, H1 |
 
 Owner questions from the second wave, with defaults: **one observation hive** in 150, with a card saying most bees are wild and solitary; **Scott's death** in 153 only as a short Keeper's note; the **weighing of the heart** in 156 at Sapling and Keeper's Desk only; the **Black Death** folder in 158 opt-in at Keeper's Desk; the **Yanomami, Baka, Inuit and Sámi** cards (152, 153) read by community or specialist reviewers before build; **Puff's pronouns** (none used) settled once in spec 120.
+
+## Third wave: seven more packs (specs 159 to 165)
+
+A third pass in the same session went after domains the first two waves touched only at the edges. Declared references in `curriculum/topic-coverage.csv`: The Human Body 0 of 25, Organisms & Life Processes 1 of 63, Waves, Light & Sound 1 of 25, Energy 1 of 28 (the circuit topics among them unmapped), Space Exploration 0 of 26, Ancient Egypt 0 of 29 and Ancient Greece & Rome 0 of 29. Same contract, fact-check pass and independent review; three draft PRs (#143, #144, #145).
+
+| Spec | Pack | Home | What the child does | Strands |
+| --- | --- | --- | --- | --- |
+| 159 | **The Puppet's Bones** | `#loft/puppet-bones` | Helps the librarian build the Traveler, a string puppet: the skeleton's three jobs, a few named bones, muscles that pull in pairs, nerves as messages. | S2, S8 |
+| 160 | **Small Worlds** | `#science/lens` | The librarian's brass microscope: what "40 times" means, cells, plant versus animal cells, helpful microbes; Hooke and Leeuwenhoek; a handwashing scene at Keeper's Desk only. | S2, S1 |
+| 161 | **Like and Unlike** | `#living/likeness` | Life cycles compared, born-with versus picked-up traits in sheep and plants, variation and adaptation, the peppered moth. No human family examples. | S3 |
+| 162 | **The Light Room** | `#loft/light` | Routing a beam to center stage: light enters the eye and nothing comes out, sources and reflectors, straight lines, mirrors, shadows, prisms; Ibn al-Haytham, Newton, Fresnel; an absolute Sun rule. | S6 |
+| 163 | **Sparks and Switches** | `#workshop/switches` | Rewiring the lanterns: conductors and insulators, a switch as a gap, circuit symbols, series and parallel; Volta and Ørsted. Safety covers mains, fallen wires and small cells only. | S6 |
+| 164 | **Rockets, Rovers and the Long Way Up** | `#library/rockets` | Balloon rockets and orbits, the station, a Rover Yard planning grid with signal delay, Sputnik through Artemis II, with no disasters in child text. | S8, S6, H1 |
+| 165 | **The Lighthouse and the Library** | `#archive/alexandria` | Alexandria where Egypt, Greece and Rome meet: the Pharos, the Library's copying, Eratosthenes measuring the Earth (an honest range), Cleopatra, Roman Egypt; Hypatia in a Keeper's note only. | H2, H1, M5, S8 |
+
+Owner questions from the third wave, with defaults: **Hypatia** in 165 stays in an older-depth Keeper's note; the **handwashing** scene in 160 sits at Keeper's Desk with no illness lines; the **black-lamb** scene in 161 stays; **Artemis II** in 164 is told as a past event (April 2026); **no off-screen coil-and-nail** activity in 163; spec 141 may mark "What Astronauts Do" as met by 164.
 
 ## How the packs hold together
 
