@@ -1,4 +1,4 @@
-# History and science build-out: forty-one packs
+# History and science build-out: forty-eight packs
 
 Proposal, 2026-10-25. **Writing only:** specs 133 to 148 and, in a second wave, 149 to 158, each with a companion file holding every child-facing line and a source audit. Nothing here is built, scheduled or cleared. Each spec still needs an independent spec review and a subject check, and the owner chooses a first slice before Codex builds anything. Story links are future adapters to draft [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127) (the Keeper of the Ways); every pack also plays standalone from an open destination.
 
@@ -97,6 +97,22 @@ The last pass in the session took the science domains that still had the most un
 | 173 | **Stones that Remember** | `#living/dig` | A dig square and slice table, coprolites from Anning to Buckland, feathered dinosaurs, a Life Rope of deep time, *Abditosaurus* from the Tremp Basin; extinctions calm, at Keeper's Desk. | S8, S1, H1 |
 
 Owner questions from the fourth wave, with defaults: bears in 166 stay **tracks only**; the old Keeper stays **unnamed in child text before the end of Act III** (draft 140 names Hollis earlier, so align one way once spec 120 is settled); the red-cabbage card in 168 stays **grown-up-led**, deferring safety to the ACS activity; natural tsunami signs in 170 appear **only in the grown-up panel**; end-Permian in 173 told as **"about 8 in 10 sea species, maybe more"** at Keeper's Desk only.
+
+## Fifth wave: seven more packs (specs 174 to 180)
+
+The fifth pass took the remaining unclaimed topics that fit a young reader: body systems, classification and evolution, engineering design, small bodies and exoplanets, motion graphs, heat transfer, and the last untouched topics in the pinned History domains. Topics about puberty, human reproduction, drugs, diet problems or illness were left to families on purpose. Same writer-then-review pipeline. Draft PRs #149, #150 and #151.
+
+| Spec | Pack | Home | What the child does | Strands |
+| --- | --- | --- | --- | --- |
+| 174 | **Breath and Heartbeat** | `#living/breath` | Diffusion as a dot model, air sacs, a four-room heart from the miller's one-way pump flap, respiration, keeping warm; Lavoisier and Laplace. Nothing asks about or measures the child's body. | S2 |
+| 175 | **Sorting Life** | `#living/sorting` | Re-sorting spilled creature cards: vertebrate groups, big groups, claim-evidence-reason, a branching key, two-part names; at Keeper's Desk, forelimb bones, the Grants' finches, a cell-to-gene zoom. | S3, S1 |
+| 176 | **The Design Table** | `#workshop/design` | A brief, three ideas on one yardstick, test-predict-test, how sure and whose evidence, a tile-built report; the toolkit for Act VI's crate job. Mary Anderson, the Wrights. | S1 |
+| 177 | **Moons, Comets and Other Suns' Planets** | `#library/orrery` | The Moon's path, planet features, comets and dwarf planets, falling around, finding exoplanets by starlight dips; Halley, Pluto, 51 Pegasi b. | S8 |
+| 178 | **How Fast, Which Way** | `#post/yard` | The courier road: motion words, distance-time graphs, relative motion on the ferry deck, resultant forces on a tow line; Galileo's ship and the chip log. | S6, M6 |
+| 179 | **Where the Warmth Goes** | `#science/warmth` | Sun, shade and seasons, an awning builder, a collision energy tally, conduction/convection/radiation, watts; Rumford, Herschel, Joule. | S6 |
+| 180 | **Rules, Rulers and Rebels** | `#archive/rules` | Then and now, the Roman Republic's safeguards breaking, Boudicca through two Roman sources, and from ordeals to juries; feeds Act II's first town rules. | H2, H1 |
+
+Owner questions from the fifth wave, with defaults: 174 keeps the **37 °C history as typical measured values** at Keeper's Desk; 176's dropped **fact/judgment/guess sorter** stays deferred; 179's **kettle** appears only as a number at Keeper's Desk, never as a mains activity; 180 **does not claim the Magna Carta topic** and tells **Caesar's death in one plain sentence from Sapling up**.
 
 ## How the packs hold together
 
