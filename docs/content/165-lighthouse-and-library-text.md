@@ -177,8 +177,8 @@ Companion to [spec 165](../specs/165-lighthouse-and-library.md). Use as written,
 | Earthquakes brought it down in the 1300s. | We know | Written records of the earthquakes. |
 | The Library held exactly 400,000 scrolls. | Nobody knows | Guesses range from 40,000 to 400,000. |
 | The Library burned down in one great fire. | A story people told | It faded over centuries. |
-| Nobody knows where the lighthouse stood. | We know | We do know: on Pharos island. That card says too little. |
-| Nobody knows what the tower was for. | We know | Its fire guided ships at night. That card says too little. |
+| The lighthouse stood on Pharos island. | We know | Its location is supported. Putting this in Nobody knows would say too little. |
+| Its fire guided ships at night. | We know | Its purpose is supported. Putting this in Nobody knows would say too little. |
 
 **After sorting:** You sorted every card. Look at the two "too little" cards: saying "nobody knows" can be wrong too.
 

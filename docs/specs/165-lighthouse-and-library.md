@@ -71,7 +71,7 @@ Jane's order everywhere: **teach** (one idea, a worked example revealed step by 
 
 **Readings** open at Short, Longer or Keeper's note, with read-aloud and labels. A **map card** (original schematic, "simplified picture, not to scale") shows Macedonia, Alexandria, Syene, Memphis, Athens, Babylon, the Indus and Rome, with Alexander's route as one arrow and no borders.
 
-**Know or Guess Board** (`#archive/alexandria/pharos`). Ten cards about the Pharos and the Library; four columns: **We know**, **Experts think**, **Nobody knows**, **A story people told**. Cards can move back; after sorting each flips to show its source. Two cards test underclaiming. No timer.
+**Know or Guess Board** (`#archive/alexandria/pharos`). Ten cards about the Pharos and the Library; four columns: **We know**, **Experts think**, **Nobody knows**, **A story people told**. Cards can move back; after sorting each flips to show its source. Two known-fact cards test underclaiming when placed in Nobody knows. No timer.
 
 **Shadow Bench** (`#archive/alexandria/shadows`), model `shadow-v1`, labeled **"A simplified picture: a perfectly round Earth, a Sun so far away its rays arrive parallel, and two towns on one north-south line. Sizes are not to scale."**
 
