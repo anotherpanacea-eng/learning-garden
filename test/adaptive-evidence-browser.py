@@ -63,6 +63,7 @@ with sync_playwright() as pw:
    for key in last_keys:
     p.locator('.ev-removal > summary').click();p.locator('[data-ev-remove-choice]').select_option(key);p.locator('[data-ev-remove-review]').click();p.locator('[data-ev-remove-confirm]').click()
    ok(not any(w['source']['id']=='last-seat' for w in branch(p)['units'].values()),'all selected copies of one story removed');ok('last-seat' in branch(p)['exploration']['seenStories'],'only story ID retains familiarity after all copies removed');ok('rereading' in p.locator('[data-ev-story] option[value="last-seat"]').inner_text(),'selector retains rereading label after all copies removed');create(p,'last-seat');ok(work(p)['visit']['familiarity']=='rereading','recreated story never relabeled unseen');p.reload();
+   p.locator('[data-ev-root], [data-select-explorer]').first.wait_for()
    if p.locator(f'[data-select-explorer="{owner}"]').count():p.locator(f'[data-select-explorer="{owner}"]').click()
    try:p.locator('[data-ev-root]').wait_for()
    except Exception:

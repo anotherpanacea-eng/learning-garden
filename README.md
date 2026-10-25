@@ -580,3 +580,8 @@ See [the continuing-exploration contract](docs/specs/222-revisiting-subject-unit
 
 
 Adaptive journeys use `test/adaptive-{linear,evidence,motion,french}-browser.py` against the real static app at320/820. Set `LINEAR_TEST_URL`, `ENGLISH_TEST_URL` or `SUBJECT_TEST_URL` for the desired origin; corresponding `*_ARTIFACTS` variables select synthetic screenshot output. Keep original unit/entry/integration journeys in release verification too. These checks establish interaction and saved-record behavior, not physical-device or learning outcomes.
+
+
+**Two records of storm night** (`#learn/english/storm-records`) is a short fictional source comparison beside Evidence & voice. Compare the miller's own observations with Dot's gathered reports, then keep and revise a message for a visiting neighbor. Seven supplied checks remain practice; firsthand does not mean accurate or complete, and secondhand does not mean false. The four complete stories remain separate and open. See [spec237](docs/specs/237-storm-source-pair.md) and its [teaching text](docs/content/237-storm-source-pair-text.md).
+
+Run `node test/storm-accounts-checks.mjs`; `python3 test/storm-accounts-browser.py` starts its own temporary static preview unless `ACCOUNTS_TEST_URL` is set. `ACCOUNTS_ARTIFACTS` and `CHROME_PATH` select synthetic screenshot output and the installed Chrome binary. The browser journey includes320/820 layouts, source preview without changing a current story, speech support before playback, first/latest drafts, separate explorers and actual notebook download/import. These checks do not establish physical iPad/Safari behavior or learning gains.
