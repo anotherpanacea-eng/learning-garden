@@ -231,7 +231,9 @@ Worked example: *Two notices.*
 
 ## The books
 
-Every book was written for this pack. The people who wrote and drew them are Willowbank fiction; the facts inside are real and sourced in the audit. Each page has three reading lengths. Read-aloud is on every page. The index matches the longer reading.
+Every book was written for this pack. The people who wrote and drew them are Willowbank fiction; the facts inside are real and sourced in the audit. Each page has three reading lengths. Read-aloud is on every page.
+
+**Length rule:** every fact, heading word and index word that a card, bench, item or hint uses appears at all three lengths of its page. Longer readings only add extra detail. Where a task needs exact words, it shows them itself.
 
 **Title page line in every fact book:** The people who made this book live in Willowbank. The facts in it are true.
 
@@ -244,23 +246,23 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 **Contents:** Spring: Back to the barn, 2 · Summer: Mud nests, 3 · Autumn: The long trip, 4 · Winter: Far away, 5 · Words to know, 6 · Index, 7
 
 **Page 2. Spring: Back to the barn** (A true thing about living things)
-- Short: Spring is here. The swallows are back!
-- Middle: In spring, swallows fly back to the valley. Look for a forked tail. They swoop into barns and sheds to nest.
+- Short: Spring is here. The swallows are back! They nest in barns. Look for two long streamers on the tail.
+- Middle: In spring, swallows fly back to the valley. Look for a forked tail with two long streamers. They swoop into barns and sheds to nest.
 - Longer: Every spring, swallows fly north to raise their young. Many build their nests inside barns and sheds. You can tell a swallow by its tail. It has a deep fork, with two long, thin streamers.
 
 **Page 3. Summer: Mud nests**
-- Short: Two swallows build a nest of mud.
-- Middle: Both parents help build the nest. They bring mud and shape it into a cup. Soon there are hungry chicks inside.
+- Short: Two swallows build a mud nest, shaped like a cup. They line it with feathers. They feed their chicks small flying insects.
+- Middle: Both parents help build the nest. They bring mud, shape it into a cup and line it with feathers. Soon there are hungry chicks inside. The parents catch small flying insects to feed them.
 - Longer: Both parents help build the nest. They bring mud, often mixed with bits of grass, and shape it into a cup. They line it with feathers. The chicks are always hungry. Their parents catch small flying insects in the air to feed them.
 
 **Page 4. Autumn: The long trip**
-- Short: In autumn, the swallows fly south.
-- Middle: In autumn, the days get shorter. Soon there will be few flying insects to eat. So the swallows fly south.
+- Short: In autumn, swallows fly south. The reason is food. Swallows eat flying insects, and in winter there are few here. They cross the Sahara desert.
+- Middle: In autumn, the days get shorter. Food is the big reason swallows leave. They eat small flying insects, and in winter there are few insects here. So they fly south, across the Sahara, a huge desert.
 - Longer: Why do swallows leave? Food is the big reason. Swallows eat small flying insects, and in winter there are few insects here. Shorter autumn days are the signal to go. Swallows fly over the sea and across the Sahara, a huge desert.
 
 **Page 5. Winter: Far away**
-- Short: In winter, the swallows are in Africa.
-- Middle: Many swallows spend the winter in Africa, south of the Sahara. There are plenty of insects there in our winter.
+- Short: In winter, the swallows are in Africa, south of the Sahara. There are insects to eat there. A ring on one swallow's leg showed how far they go.
+- Middle: Many swallows spend our winter in Africa, south of the Sahara, where there are plenty of insects. How do we know? Scientists put tiny numbered rings on birds' legs. One swallow's ring was found in South Africa.
 - Longer: Many swallows spend our winter in Africa, south of the Sahara, where there are insects to eat. How do we know? Scientists put a tiny numbered ring on a bird's leg. In 1912, a swallow ringed in Britain was found in South Africa. Its ring showed how far swallows go.
 
 **Page 6. Words to know**
@@ -280,23 +282,23 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 **Contents:** One queen, 2 · Many workers, 3 · A few drones, 4 · The waggle dance, 5 · Words to know, 6 · Index, 7
 
 **Page 2. One queen** (A true thing about living things)
-- Short: This is the queen. She lays eggs.
-- Middle: Each hive has one queen. Her job is to lay eggs. In early summer she can lay more than a thousand eggs a day.
+- Short: This is the queen. Her job is to lay eggs. In summer she can lay about 1,500 eggs a day. The workers do the other jobs.
+- Middle: Each hive has one queen. Her job is to lay eggs. In early summer she can lay about 1,500 eggs a day. The workers share out the other jobs.
 - Longer: Each hive has one queen bee. Her job is to lay eggs. In early summer she can lay about 1,500 eggs in a single day. She does not give orders. The workers share out the other jobs.
 
 **Page 3. Many workers**
-- Short: These are workers. They do lots of jobs.
-- Middle: Most bees in a hive are workers. They are all female. Workers clean, feed young bees, build, guard the door and fetch food.
-- Longer: In summer, a hive can hold tens of thousands of workers. They are all female. A young worker starts inside, cleaning cells and feeding young bees. Later she builds with wax, stores food or guards the door. From about three weeks old, she flies to flowers for nectar and pollen.
+- Short: These are workers. They are all female. They clean cells, build with wax, guard the door and fetch food. Older workers fly to flowers for nectar and pollen.
+- Middle: Most bees in a hive are workers. They are all female. Workers clean cells, feed young bees, build with wax, guard the door and fetch food. Older workers fly to flowers for nectar and pollen.
+- Longer: In summer, a hive can hold tens of thousands of workers. They are all female. A young worker starts inside, cleaning cells and feeding young bees. Later she builds with wax, stores food or guards the door. From about three weeks old, she flies to flowers for nectar and pollen, to fetch food for the hive.
 
 **Page 4. A few drones**
-- Short: These are drones. They are male bees.
-- Middle: In summer, a hive has a few hundred drones. Drones are male bees. They have no sting.
+- Short: These are drones. They are male bees, with no sting. They do not fetch food or guard the door. They mate with a young queen.
+- Middle: In summer, a hive has a few hundred drones. Drones are male bees. They have no sting. They do not fetch food or guard the door. Their job is to mate with a young queen.
 - Longer: A summer hive has a few hundred drones. Drones are male bees, and they have no sting. They do not fetch food or guard the door. Their job is to mate with a young queen.
 
 **Page 5. The waggle dance**
-- Short: A worker dances to show where flowers are.
-- Middle: A worker finds good flowers. Back in the hive, she does a waggle dance. The dance shows other workers which way to fly.
+- Short: A worker dances to show where flowers are. The dance shows which way to fly. A longer waggle means the flowers are farther away.
+- Middle: A worker finds good flowers. Back in the hive, she does a waggle dance. The dance shows other workers which way to fly. A longer waggle means the flowers are farther away.
 - Longer: When a worker finds good flowers, she flies home and dances. She runs in a straight line, waggling her body, then loops around and runs again. The direction of the run shows which way to fly. A longer waggle means the flowers are farther away.
 
 **Page 6. Words to know**
@@ -317,23 +319,23 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 **Contents:** What does a rain gauge do? 2 · How do you read a rain gauge? 3 · Which way is the wind blowing? 4 · Where does rain come from? 5 · Why does a river rise after the rain stops? 6 · Words to know, 7 · Index, 8
 
 **Page 2. What does a rain gauge do?** (A true thing about weather)
-- Short: A rain gauge catches rain.
-- Middle: A rain gauge catches rain in a funnel. Then you can measure how much rain fell. Stand it in the open, away from trees.
+- Short: A rain gauge catches rain in a funnel. We measure rain in millimeters. Under a tree, the gauge shows too little rain.
+- Middle: A rain gauge catches rain in a funnel. Then you can measure how much rain fell, in millimeters. Stand it in the open. Under a tree, the leaves catch some rain first, so the gauge shows too little.
 - Longer: A rain gauge catches rain in a funnel and holds it in a tube. We measure rain as a depth, in millimeters. Stand the gauge in the open. Under a tree, the leaves catch some rain first, so the gauge shows too little.
 
 **Page 3. How do you read a rain gauge?**
-- Short: Look. Write it down. Tip it out.
-- Middle: First, read the water level. Next, write the number down. Finally, tip the water out.
+- Short: First, bend down so your eyes are level with the water. Next, read the number and write it down. Finally, tip the rain out.
+- Middle: Read the rain gauge each day. First, bend down so your eyes are level with the water. Next, read the number on the side and write it down. Finally, tip the water out.
 - Longer: Read the gauge at the same time each day. First, bend down so your eyes are level with the water. Next, read the number on the side and write it down. Finally, tip the water out, ready for tomorrow's rain.
 
 **Page 4. Which way is the wind blowing?**
-- Short: The arrow points to where the wind comes from.
-- Middle: A wind vane has an arrow and a wide tail. The wind pushes the tail away. So the arrow points into the wind.
+- Short: A wind vane has a wide tail, so the wind pushes the tail away. As a result, the arrow points into the wind.
+- Middle: A wind vane has an arrow and a wide tail. The wind pushes hardest on the wide tail, so the tail swings away. As a result, the arrow points into the wind.
 - Longer: A wind vane turns on a pole. Its tail is wider than its arrow, so the wind pushes hardest on the tail. The tail swings away. As a result, the arrow points into the wind. Winds are named for where they come from. A west wind blows from the west.
 
 **Page 5. Where does rain come from?**
-- Short: Water goes up. Rain comes down.
-- Middle: The sun warms water, and some turns into vapor, a gas you cannot see. The vapor rises, cools and makes tiny drops: a cloud. Heavy drops fall as rain.
+- Short: The sun warms water in rivers and ponds. Some turns into vapor and rises. The vapor cools and condenses into a cloud. Heavy drops fall as rain.
+- Middle: The sun warms water in ponds and rivers, and some turns into vapor, a gas you cannot see. The vapor rises and cools, and condenses into tiny drops: a cloud. Heavy drops fall as rain.
 - Longer: The sun warms water in puddles, ponds and rivers. Because of that warmth, some water evaporates into vapor, a gas you cannot see. Rising air carries the vapor up, where it cools. As a result, the vapor condenses into tiny drops, and we see a cloud. When drops join and grow heavy, they fall as rain.
 
 **Page 6. Why does a river rise after the rain stops?**
@@ -463,7 +465,9 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 **Header:** Read Ask the Weather. Find the words that link ideas.
 
-**Hunt:** Tap every link word on pages 3 and 4. (first, next, finally, so, as a result)
+**Hunt text (shown in the task, the same at every reading length):** First, bend down to look at the water. Next, read the number and write it down. Finally, tip the water out. The vane's tail is wide, so the wind pushes it away. As a result, the arrow points into the wind.
+
+**Hunt:** Tap every link word in the text above. (first, next, finally, so, as a result)
 
 **Link word feedback:** first, next, finally: order words. so, as a result: cause and effect words.
 
@@ -582,8 +586,8 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 - Explanation: Fetching nectar and pollen is one of the workers' jobs.
 
 **C3 (match).**
-- Prompt: Match each heading to a sentence from that page.
-- Pairs: One queen → She can lay about 1,500 eggs in a single day. · Many workers → She flies to flowers for nectar and pollen. · A few drones → They do not fetch food or guard the door. · The waggle dance → A longer waggle means the flowers are farther away.
+- Prompt: Match each heading to the sentence that fits its page.
+- Pairs: One queen → She can lay about 1,500 eggs a day. · Many workers → She flies to flowers for nectar and pollen. · A few drones → They do not fetch food or guard the door. · The waggle dance → A longer waggle means the flowers are farther away.
 - Feedback for a wrong pair: Which bee is the sentence about?
 - Hint: The heading says the page's focus.
 - Explanation: Each page has its own focus.
@@ -614,7 +618,7 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 **D2 (3-choice).**
 - Prompt: Which is the best short summary of The Busy Hive?
 - Choices: Bees. (`too-short`) · In summer, a hive can hold tens of thousands of workers. They are all female. A young worker starts inside, cleaning cells. (`copied-chunk`) · One queen lays eggs, workers do most jobs, and drones are males. Workers dance to show where flowers are. ✔
-- Feedback: Bees: Too short. It leaves out the jobs. · Copied: That's copied from one page. A summary covers every page.
+- Feedback: Bees: Too short. It leaves out the jobs. · Copied: That's all about workers, word for word. A summary covers every page.
 - Hint: A summary covers every page in a few words.
 - Explanation: A good summary gives each part's main point, in your own words.
 
@@ -631,8 +635,8 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 - Hint: Look for so, because and as a result.
 - Explanation: A cause makes an effect happen.
 
-**D5 (3-choice).**
-- Prompt: Ask the Weather, page 4: why does it say "as a result"?
+**D5 (3-choice).** Shown above the question: "The wind pushes the tail away. As a result, the arrow points into the wind."
+- Prompt: Why does Ask the Weather say "as a result" here?
 - Choices: It shows what happens next, in time order (`result-is-sequence`) · It compares two things (`result-is-compare`) · It shows an effect of what came before ✔
 - Feedback: Time: Order words are first, next and finally. · Compare: Compare words are both, but and unlike.
 - Hint: What made the arrow turn?
@@ -648,7 +652,7 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 
 **E2 (3-choice).**
 - Prompt: What does Bramble want readers to do?
-- Choices: Mow the green every week ✔ · Learn how grass grows (`inform-for-persuade`) · Laugh at a funny story (`entertain-for-persuade`)
+- Choices: Mow the green every week ✔ · Learn all about how grass grows (`inform-for-persuade`) · Laugh at a funny story (`entertain-for-persuade`)
 - Feedback: Learn: Her notice doesn't teach about grass. It asks for mowing. · Laugh: It's a notice, not a story.
 - Hint: Read her last line.
 - Explanation: "Mow it every week!" tells readers what she wants.
@@ -725,7 +729,7 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 
 **About the books:** the three fact books were written for this game. Their authors and illustrators are Willowbank characters, but the facts about swallows, honeybees and weather are real, checked in the source audit, and shared with the Bird, Bee Meadow and Weather Station packs. *Rain* is a real poem by Robert Louis Stevenson (1885), long out of copyright. The baker's poem and the other covers are invented.
 
-**Reading lengths:** short, middle and longer readings tell the same facts at three sizes. The length a child picks is never recorded and says nothing about their reading. Read-aloud is always there.
+**Reading lengths:** short, middle and longer readings carry every fact the tasks use; longer ones add extra detail. The length a child picks is never recorded and says nothing about their reading. Read-aloud is always there.
 
 **What it does not claim:** this is not a decoding check, a reading level or a test. "Inform, persuade, entertain" is a common classroom starting frame, not a rule: many texts do more than one, so the sorting items use only clear cases and ask for the main job.
 

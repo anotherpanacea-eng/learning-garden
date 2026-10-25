@@ -348,10 +348,11 @@ Every story card shows **A story people told**, a source line, and three scene t
 
 **After choosing:** A moral is one story's message. Two stories can point opposite ways.
 
-**One story, three tellers (Sapling):** The goat story, three morals. Tap each to read it.
-- *Look before you leap.* (an English book of the 1800s)
-- *Never trust the advice of a man in difficulties.* (Joseph Jacobs, 1894)
-- *En toute chose il faut considérer la fin.* *(fluent reader)* In everything, think about how it will end. (La Fontaine, 1668)
+**One story, three tellers (Sapling):** Three tellings of the goat story. Tap each to see how the goat gets in, and the moral.
+- An English book of the 1800s: the stuck fox praises the water, so the goat jumps in. *Look before you leap.*
+- Joseph Jacobs, 1894: the stuck fox says a long dry time is coming. *Never trust the advice of a man in difficulties.*
+- La Fontaine, 1668: the fox and goat climb down together to drink. *En toute chose il faut considérer la fin.* *(fluent reader)* In everything, think about how it will end.
+- **After tapping all three:** Each time, the fox climbs out on the goat's horns. The details and the morals change.
 
 ### (c) Chapter, Scene, Stanza (Seedling, Sapling)
 
@@ -443,11 +444,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: A reading is supported if story details show it. Bramble's is.
 
 **B4 (Sapling).**
-- Prompt: Three tellers gave the goat story three morals. What does that show?
-- Choices: Two of the tellers got it wrong (`one-true-moral`) · A moral is a teller's choice ✔ · The story changed each time (`pattern-means-copy`)
-- Feedback: Got it wrong: Each moral fits the story's details. · Changed: The events stayed the same. Only the moral line changed.
-- Hint: Did the fox and goat do anything different?
-- Explanation: Same events, three morals. Each teller chose which message to say.
+- Prompt: Three tellers told the goat story. What does comparing them show?
+- Choices: Two of the tellers got the story wrong (`one-true-moral`) · One pattern, with different details and morals ✔ · Each teller copied exactly the same events from the others (`pattern-means-copy`)
+- Feedback: Got it wrong: Each moral fits its own telling's details. No one telling is the true one. · Copied: Look again. In La Fontaine, the fox and goat climb down together to drink.
+- Hint: How does the goat get into the well each time?
+- Explanation: The fox always escapes on the goat's horns. How the goat gets in, and the moral, change.
 
 **B5 (Sapling).**
 - Prompt: After the show, is "Look before you leap" a Willowbank rule?
@@ -474,10 +475,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **C3 (Sapling).**
 - Prompt: How does stanza 2 build on stanza 1?
-- Choices: It starts a brand new story about something else (`later-part-unconnected`) · It's about a different animal (`later-part-unconnected`) · The smile stays, but now it's scary ✔
-- Feedback: New story: Same crocodile, same pond. · Different animal: Look again. Whose grin is it?
-- Hint: Is the crocodile still cheerful? What do the jaws do?
-- Explanation: Stanza 1 is cheerful. Stanza 2 keeps the smile but shows the jaws.
+- Choices: It starts a brand new story about something else (`later-part-unconnected`) · It's about a different animal (`later-part-unconnected`) · Now the crocodile welcomes fishes into its jaws ✔
+- Feedback: New story: Same crocodile, same river. Stanza 2 carries on from stanza 1. · Different animal: Look again. Whose claws and jaws are they?
+- Hint: Stanza 1 shows the tail and scales. What does stanza 2 show?
+- Explanation: Stanza 1 shows the crocodile shining in the Nile. Stanza 2 shows its grin and its welcoming jaws.
 
 **C4 (Seedling, order).** Put the goat show's scenes in order.
 - Cards: The way out · The well · The goat

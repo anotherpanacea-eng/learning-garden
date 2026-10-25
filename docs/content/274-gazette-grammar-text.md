@@ -203,7 +203,7 @@ Worked example: *Two café notices.*
 3. Who should wipe? You, the reader. "You" is understood.
 
 **Card 8. The subjunctive**
-> The subjunctive is for things imagined, wished or formally asked for. "If I were a dragon" imagines. "We ask that he be on time" asks, formally.
+> The subjunctive is for things wished, untrue right now, or formally asked for. "If I were a dragon" imagines what isn't so. "We ask that he be here" asks formally.
 
 Worked example: *If Pip were taller, he would reach the pie.*
 1. Is Pip taller? No. The "if" part imagines it.
@@ -456,12 +456,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Hint: Who is reading the notice?
 - Explanation: Commands speak to "you," even when "you" isn't written.
 
-**C3 (Sapling).**
-- Prompt: You imagine running the café. Which suits a formal letter to the council?
-- Choices: If I am ever in charge of the café (`real-for-unreal`) · If I were in charge of the café ✔ · If I was in charge of the café (`informal-for-formal`)
-- Feedback: I am ever: That's for something that might really happen. · I was: Many people say this, and it's fine in talk. Formal writing usually uses "were."
-- Hint: It's imagined. Which verb does formal writing use?
-- Explanation: For an imagined "if," formal writing uses "were."
+**C3 (Sapling).** Shown above the question: A formal letter to the council. You do not run the café.
+- Prompt: Which opening suits the letter?
+- Choices: If I am the one in charge of the café now (`real-for-unreal`) · If I were in charge of the café now ✔ · If I was in charge of the café now (`informal-for-formal`)
+- Feedback: I am: You don't run the café now. For something untrue now, formal writing uses "were." · I was: Many people say this, and it's fine in talk. Formal writing usually uses "were."
+- Hint: You don't run the café now. Which verb does formal writing use?
+- Explanation: For something untrue right now, formal writing uses "were." For a real maybe, "If I am ever" is fine.
 
 **C4 (Sapling).**
 - Prompt: "If Pip were a dragon, he would breathe fire." Is Pip a dragon?
@@ -589,7 +589,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Mood:** what job a verb does: tell, order, imagine or predict.
 - **Indicative:** the mood for statements and facts.
 - **Imperative:** the mood for commands.
-- **Subjunctive:** the mood for imagined things and formal asks: *if I were*, *that he be*.
+- **Subjunctive:** the mood for wishes, things untrue right now, and formal asks: *if I were*, *that he be*.
 - **Conditional:** a "would" sentence about what might happen.
 - **Formal:** careful language for official letters, reports and speeches.
 - **Headline:** the big title over a newspaper story.
@@ -614,7 +614,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **UK terms:** schools in England say *semi-colon* and *full stop*, and the Year 6 word list is part of the national curriculum's grammar appendix. This pack uses US spellings.
 
-**About "if I was":** many people say "if I was" in everyday talk, and it is not marked wrong here. The pack teaches "were" as the usual choice in formal writing, as the English national curriculum does.
+**About "if I was":** many people say "if I was" in everyday talk, and it is not marked wrong here. The pack teaches "were" as the usual choice in formal writing for something untrue now ("If I were in charge", when you are not), as the English national curriculum does. For a real possibility, "If I am ever in charge" is correct, and no item marks it wrong.
 
 **About moods:** US school standards name five moods, adding the interrogative (questions); question sentences are taught with sentence types in the clauses pack. Many grammarians treat "would" as a modal verb rather than a mood. The pack uses the school names because children will meet them.
 
