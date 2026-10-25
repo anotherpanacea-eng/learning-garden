@@ -154,7 +154,7 @@ Worked example: 1. Rule: 3n − 2. 2. n = 1: 3 − 2 = 1. 3. n = 2: 4. n = 3: 7.
 Worked example: 1. 1 + 3 = 4. 2. 1 + 3 + 3 = 7. 3. So 3n + 1. The 1 is the zeroth term.
 
 **T14. Is that number in the sequence?** (A true thing about math)
-> Set the rule equal to the number. If the position comes out whole, it is in. If not, it isn't.
+> Set the rule equal to the number. It is in only if the position is a whole number at least 1.
 Worked example: 1. 4n − 1 = 99. 2. 4n = 100, n = 25. In. 3. 4n − 1 = 100 gives 25.25. Not in.
 
 **T15. Hold one choice still** (A true thing about math)
