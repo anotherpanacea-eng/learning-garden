@@ -176,7 +176,7 @@ Worked example: *The bread was baked by the baker.*
 Worked example: *The bell was rung at noon.*
 1. The subject is "the bell."
 2. The verb is "was rung."
-3. Who mended it? The sentence doesn't say.
+3. Who rang it? The sentence doesn't say.
 
 **Card 5. Not every "was" is passive**
 > A passive needs "be" plus a past participle, with the receiver as subject. "Puff was sleepy" and "Ember was singing" are not passive.

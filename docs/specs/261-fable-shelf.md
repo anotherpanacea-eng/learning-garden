@@ -68,7 +68,7 @@ Every fable card shows **A story people told** and its source line; read-aloud o
 
 ## Problem sets
 
-Five sets, 25 items in the companion (plus one grown-up-read "say why"). Eighteen three-choice items; right answers sit A 6 / B 6 / C 6, never the single longest.
+Five sets contain 25 stored/practice items (A1-E5), plus the ungraded, unstored spoken invitation E6: 26 numbered prompts in the companion. Eighteen three-choice items; right answers sit A 6 / B 6 / C 6, never the single longest.
 
 | Set | Items | Depths | Formats |
 | --- | --- | --- | --- |
@@ -76,15 +76,16 @@ Five sets, 25 items in the companion (plus one grown-up-read "say why"). Eightee
 | B. Two morals | 5 | Seedling, Sapling | match, 3-choice |
 | C. Chapter, scene, stanza | 5 | Seedling, Sapling | sort, count, order, 3-choice |
 | D. Same pattern, different place | 5 | Sapling, Keeper's Desk | 3-choice, order the journey |
-| E. Say it plain | 5 | Sapling, Keeper's Desk | 3-choice, build a summary; "say why" (E6) |
+| E. Say it plain | 5 stored/practice + 1 spoken | Sapling, Keeper's Desk | 3-choice, build a summary; "say why" (E6) |
 
 ## Saved work
 
-Optional root `fables` per explorer, absent until something is kept:
+Optional root `fables` per explorer, absent until an explicit Start or Keep freezes its source:
 
 ```
 fables: {
   v: 1,
+  source: { /* complete frozen authored source for this started/kept visit */ },
   message: { [fableId]: { sort: { [cardId]: 'events' | 'message' | 'topic' }, details: [detailId, detailId] }, at },
   morals: { match: { [moralId]: fableId }, bramble: choiceId, at },
   parts: { sort: { [partId]: 'chapter' | 'scene' | 'stanza' }, stanzas: 0..12, buildsOn: choiceId, at },
@@ -94,7 +95,13 @@ fables: {
 }
 ```
 
-Codes only; no free text ("say why" is spoken). Support is a separate flag per kept item, never merged with an independent attempt. Kept results are never recomputed on load. Validate the ids, counts and outcome codes the save actually holds, against structural bounds and the save's own entries; never require today's catalog sizes or full item lists, and never check against today's wording or answer key. A missing item reads as absent. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. The `loft` root (specs 36, 37) is untouched. No field holds anything about the child.
+Responses use codes only; no free text ("say why" is spoken). Support is a separate flag per kept item, never merged with an independent attempt. Kept results are never recomputed on load. Validate the ids, counts and outcome codes the save actually holds, against structural bounds and the save's own entries; never require today's catalog sizes or full item lists, and never check against today's wording or answer key. A missing item reads as absent. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. The `loft` root (specs 36, 37) is untouched. No field holds anything about the child.
+
+**Frozen authored source and first response.** An explicit Start or Keep freezes the complete selected authored source with the saved visit or bench: passages and provenance labels, instructions, teaching and examples, supplied models/data and captions, question wording, ordered choices, key and feedback, and help/read-back text or asset references. Include this `source` snapshot in the owning root; the response fields above remain codes. A started waiting task and earlier kept work render from that snapshot, never today's catalog. An explicitly chosen new visit may use revised authoring while retaining earlier sources and work. For recorded items, preserve the first response, its original outcome and support-before separately from later attempts/keeps; a retry or later skip cannot replace it. Do not grade original spoken or written explanations.
+
+**Support before reveal.** Commit a support code before showing or playing a hint, guided step, worked example, answer, meaning, slot scaffold or read-aloud. Keep audio/reading support separate from the conceptual response; it does not establish independent reading. A later support request does not rewrite an earlier response's support-before. Missing older support information is unobserved, never proof of an unassisted attempt.
+
+**Atomic saves and capacity.** Every mutation must pass the actual host's pretty-notes serialization/import preflight and shared limits before committing only this root. Refusal preserves the whole earlier state and visible pending work; do not rerender, navigate or change explorer in a way that silently loses unsaved words/selections. Offer the existing notes download and an explicit confirmed restore of saved words where needed. No silent truncation, history eviction or replacement of saved writing. Preview, render and suggestion reads are save-neutral. Existing source/language/cultural/rights checks remain open until separately cleared.
 
 ## Curriculum fit
 
@@ -145,7 +152,7 @@ Soft edges (not crosswalked): Reading between the lines, Discussing Texts as a G
 
 ## Checks for implementation
 
-- **Script:** `check261.py` (writer's scratch, `python3 -I`, run 2026-10-25) confirmed: the six target ids exist in the pinned `topics.json` as English and are each claimed; seven hard prerequisite edges, all in the crosswalk (four inside the pack); 25 problem items, 18 three-choice with positions A 6 / B 6 / C 6, no right answer the single longest; every prompt and hint 15 words or fewer, feedback 20 or fewer, teach statements 30 or fewer; hooks and Shorts 30 or fewer, Longers 150 or fewer, Keeper's notes 80 or fewer; no em-dash in the three files; no UK spellings in child text; Hollis not named. Numbers: "more than seventy" hedgehog runs (Grimm: 73 more, falling on the 74th); 4 − 1 = 3 ridges; 2026 − 570 = 1,456 (more than 1,400 years); 2026 − 1251 = 775; 1865 − 1715 = 150; 8 lines ÷ 4 = 2 stanzas.
+- **Script:** `check261.py` (writer's scratch, `python3 -I`, run 2026-10-25) confirmed: the six target ids exist in the pinned `topics.json` as English and are each claimed; seven hard prerequisite edges, all in the crosswalk (four inside the pack); 25 stored/practice items plus spoken E6 (26 numbered prompts), 18 three-choice with positions A 6 / B 6 / C 6, no right answer the single longest; every prompt and hint 15 words or fewer, feedback 20 or fewer, teach statements 30 or fewer; hooks and Shorts 30 or fewer, Longers 150 or fewer, Keeper's notes 80 or fewer; no em-dash in the three files; no UK spellings in child text; Hollis not named. Numbers: "more than seventy" hedgehog runs (Grimm: 73 more, falling on the 74th); 4 − 1 = 3 ridges; 2026 − 570 = 1,456 (more than 1,400 years); 2026 − 1251 = 775; 1865 − 1715 = 150; 8 lines ÷ 4 = 2 stanzas.
 - **Moral lint:** every moral line carries "A story people told" or sits under a fable card; grep the companion for "lesson for", "we should", "Willowbank must": no hit gives the town a moral.
 - **Language lint:** every Spanish or French line has an English line beside it and *(fluent reader)*.
 - Kept work reloads exactly; the `loft` root is byte-identical before and after. Browser at 320 and 820 px: scene tickets stack; the pattern table becomes one card per tale; targets at least 44 px; the journey map has a text list.
