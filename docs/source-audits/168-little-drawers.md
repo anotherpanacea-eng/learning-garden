@@ -75,3 +75,6 @@ The cabinet, the old school, the letters' wording, the pink soup and every chara
 ## Rights notes for images
 
 Do not embed images. Prefer public-domain material: Mendeleev's 1869 table and portraits (published before 1900, public domain), Dalton's 1808 symbol plates (Science History Institute digital copy; check its stated rights), the Curies' period photographs (check each archive's rights; many are public domain by age). The Squeeze Box, Pan Curve, Color Jar and cabinet art should be original drawings.
+
+
+Review correction (2026-10-25): The finite 20-card historical deck excludes neon: Li, Be, B, C, N, O, F, Na, Mg, Al, Si, P, S, Cl, K, Ca, Zn, As, Se, Br. Melting-water copy makes no move-apart claim: ice is less dense than liquid water. https://www.acs.org/middleschoolchemistry/lessonplans/chapter2/lesson5.html

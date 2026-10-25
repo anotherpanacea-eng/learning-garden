@@ -116,7 +116,7 @@ Companion to [spec 168](../specs/168-little-drawers.md). Use as written, after i
 - Worked example: 1. Vinegar reads 20 °C. 2. Add baking soda. It fizzes. 3. Now 16 °C. 4. Colder, so energy went in.
 - **Model line:** *Made-up readings.* Real ones depend on the amounts.
 
-**Atom window line:** Melting: the molecules stay whole and move apart. Rusting: atoms regroup into something new.
+**Atom window line:** Melting: the molecules stay whole and can move past one another. Rusting: atoms regroup into something new.
 **Balloon scale line:** *On screen only. Never seal a real fizzing bottle.*
 
 ## Story scenes
