@@ -74,9 +74,9 @@ Every activity follows Jane's **teach → guided → practice** order: one teach
 
 **(b) Who Changed This Place?** Six before-and-after pairs (beaver pond, nest, burrow, worm casts, root-lifted stone, a house). Pick the changer, then the need (food, water, shelter, safety). Replies ask the child to look again, never mark. A spoken sentence frame turns it into a claim with a because.
 
-**(c) Built to Survive.** Ten structure cards fill a three-slot chain (structure → function → how it helps), then an inside/outside tray. The **argument builder** offers three claim, three evidence and three reasoning tiles per organism; the child joins one of each. Three broken arguments (wants-to-be-safe, prickles-and-green, feathers-for-swimming) are fixed by choosing what the part does.
+**(c) Built to Survive.** Ten structure cards fill a three-slot chain (structure → function → how it helps), then an inside/outside tray. The **argument builder** offers three claim, three evidence and three reasoning tiles per organism; the child joins one of each. Three broken arguments (wants-to-be-safe, prickles-and-green, feather-edges-see-at-night) are fixed by choosing what the part does.
 
-**(d) Trace It Back.** Start at a hungry animal and press **Where did its energy come from?** to follow feeding links back to a producer, then a distinct sunlight-energy link to the Sun. Show sunlight links dashed and labeled sunlight energy, feeding links solid and labeled food, and give both meanings in text. Freeze each link’s kind and legend with the source. Three chains (field, night, stream). A reversed arrow reads back "This says the fox is food for the rabbit. Is that right?" An energy-jobs panel (move, grow, mend, keep warm; most leaves as warmth) and a one-way line contrasting matter's loop (151).
+**(d) Trace It Back.** Start at a hungry animal and press **Where did its energy come from?** to follow feeding links back to a producer, then a distinct sunlight-energy link to the Sun. Show sunlight links dashed and labeled sunlight energy, feeding links solid and labeled food, and give both meanings in text. Freeze each link’s kind and legend with the source. The learner orders cards only; sunlight and feeding links are drawn and labeled automatically from that source, without a separate link-label response. Three chains (field, night, stream). A reversed arrow reads back "This says the fox is food for the rabbit. Is that right?" An energy-jobs panel (move, grow, mend, keep warm; most leaves as warmth) and a one-way line contrasting matter's loop (151).
 
 **(e) The Osprey Ledger (Keeper's Desk), model `chain-v1`.** *A made-up model; the rule is on screen.*
 
@@ -111,18 +111,20 @@ Optional root `whoEats` per explorer, absent until a first explicit action.
 ```
 whoEats: {
   version: 1,
-  sorts: { source, kept: [{ animal, basket, at }] },                   // retained; no automatic eviction
-  changes: { source, kept: [{ pair, changer, need, at }] },            // retained; no automatic eviction
-  survival: { source, kept: [{ card, claim, evidence, reason, at }] }, // tile ids, retained; no automatic eviction
-  chains: { source, kept: [{ chain, links: [ids], at }] },             // retained; no automatic eviction
-  ledger: { source, kept: [{ persist, share, readout: [4 ints], at }] }, // retained; no automatic eviction
-  answers: { [itemId]: { source, choice | value | order | tiles, support: ['hint'|'example'|'skip'], at } }
+  sorts: { source, kept: [{ source, animal, basket, at }] },                   // retained; no automatic eviction
+  changes: { source, kept: [{ source, pair, changer, need, at }] },            // retained; no automatic eviction
+  survival: { source, kept: [{ source, card, claim, evidence, reason, at }] }, // tile ids, retained; no automatic eviction
+  chains: { source, kept: [{ source, chain, links: [ids], at }] },             // retained; no automatic eviction
+  ledger: { source, kept: [{ source, persist, share, readout: [4 ints], at }] }, // retained; no automatic eviction
+  answers: [{ source, itemId, choice | value | order | tiles, support: ['hint'|'example'|'skip'], at }]
 }
 ```
 
 - `source` preserves the complete authored prompt, passage/card text, ordered choices, answer key and feedback, hints and worked examples, model rules/parameters/units, and the source version used for that visit. Freeze any diagram/link meanings and selection metadata too; resume and export from this saved source, not today’s catalog. Codes identify fields and records; they do not replace the authored text needed to render earlier work.
 - Never rewrite saved results on load: a kept ledger readout stays as shown even if the rule changes. Validate ids against the frozen source, `share` in {5, 10} (one in five or one in ten), readout integers 0 to 1,000 and the shape of retained lists; an unreadable entry stays raw and exportable while everything else stays open.
-- Learner prose policy is separate from authored lesson text: *say why* and spoken sentence frames remain human-read, ungraded and unrecorded; the pack does not collect personal or family information.
+- Each section’s outer `source` belongs to its current working visit only. Every `kept[]` entry, retained lift and checked response carries its own direct clone of the complete frozen source, including the authored text; no source registry or current-catalog lookup is needed to read it. The sketches repeat `source` deliberately.
+- A check appends an immutable response record; it never overwrites the earlier response for that item. Keep appends the working settings/drafts and their source. Before opening a new authored case, retain the old working visit (including unfinished drafts/settings) in that section’s kept records, then start a separate working visit without clearing the retained records. Never replace an old record’s source to show a new case. Each kept record and checked response renders/exports from its own source, and all of those snapshots count in the shared preflight.
+- Learner prose policy is separate from authored lesson text: *say why* and spoken sentence frames remain human-read, ungraded and unrecorded; the pack does not collect personal or family information. Structured learner responses remain codes, IDs and numeric values; this response-only limit does not exclude authored public prose from `source`.
 - Retain kept visits without silently dropping, truncating or overwriting earlier kept work. At shared report/recovery limits, refuse the whole save unchanged and offer the existing notes download. Only an explicit, confirmed removal of a learner-selected kept visit may free space, with a warning naming the settings/answers it removes; protect fixed lessons and unreadable raw work. Current working controls remain editable, and source wording/key changes never regrade saved results. Use the existing notes/recovery path, not a second backup system.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and switching are shared.
 

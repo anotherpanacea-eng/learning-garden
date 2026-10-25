@@ -109,19 +109,21 @@ Optional root `lives` per explorer, absent until a first explicit action.
 ```
 lives: {
   version: 1,
-  parade:   { source, kept: [{ card, beside, row, at }] },            // retained; no automatic eviction
-  key:      { source, kept: [{ card, answers: [yn, yn?, yn?], group, at }] }, // retained; no automatic eviction
-  lookout:  { source, kept: [{ herd, look, watched, bites, at }] },    // retained; no automatic eviction
-  claim:    { source, claim, evidence: [id, id], reason, at } | null,
-  partners: { source, kept: [{ pair, a, b, kind, at }] },              // retained; no automatic eviction; a, b in '+','0','-','?'
-  ocean:    { source, kept: [{ animal, month, place, at }] },          // retained; no automatic eviction
-  answers:  { [itemId]: { source, choice | value | order | grid, support: ['hint'|'example'|'skip'], at } }
+  parade:   { source, kept: [{ source, card, beside, row, at }] },            // retained; no automatic eviction
+  key:      { source, kept: [{ source, card, answers: [yn, yn?, yn?], group, at }] }, // retained; no automatic eviction
+  lookout:  { source, kept: [{ source, herd, look, watched, bites, at }] },    // retained; no automatic eviction
+  claim:    { source, claim, evidence: [id, id], reason, at, kept: [{ source, claim, evidence: [id, id], reason, at }] } | null,
+  partners: { source, kept: [{ source, pair, a, b, kind, at }] },              // retained; no automatic eviction; a, b in '+','0','-','?'
+  ocean:    { source, kept: [{ source, animal, month, place, at }] },          // retained; no automatic eviction
+  answers:  [{ source, itemId, choice | value | order | grid, support: ['hint'|'example'|'skip'], at }]
 }
 ```
 
 - `source` preserves the complete authored prompt, passage/card text, ordered choices, answer key and feedback, hints and worked examples, model rules/parameters/units, and the source version used for that visit. Freeze any diagram/link meanings and selection metadata too; resume and export from this saved source, not today’s catalog. Codes identify fields and records; they do not replace the authored text needed to render earlier work.
 - Validate ids against the frozen card lists, `herd` in {1, 2, 5, 10}, `look` in {2, 6, 10}, `watched` 0-10, `bites` 0-4, `month` 1-12. Never recompute or rewrite saved results on load; an unreadable entry stays raw and exportable while everything else stays open.
-- Learner prose policy is separate from authored lesson text: *say why* and spoken sentence frames remain human-read, ungraded and unrecorded; the pack does not collect personal or family information.
+- Each section’s outer `source` belongs to its current working visit only. Every `kept[]` entry, retained lift and checked response carries its own direct clone of the complete frozen source, including the authored text; no source registry or current-catalog lookup is needed to read it. The sketches repeat `source` deliberately.
+- A check appends an immutable response record; it never overwrites the earlier response for that item. Keep appends the working settings/drafts and their source. Before opening a new authored case, retain the old working visit (including unfinished drafts/settings) in that section’s kept records, then start a separate working visit without clearing the retained records. Never replace an old record’s source to show a new case. Each kept record and checked response renders/exports from its own source, and all of those snapshots count in the shared preflight.
+- Learner prose policy is separate from authored lesson text: *say why* and spoken sentence frames remain human-read, ungraded and unrecorded; the pack does not collect personal or family information. Structured learner responses remain codes, IDs and numeric values; this response-only limit does not exclude authored public prose from `source`.
 - Retain kept visits without silently dropping, truncating or overwriting earlier kept work. At shared report/recovery limits, refuse the whole save unchanged and offer the existing notes download. Only an explicit, confirmed removal of a learner-selected kept visit may free space, with a warning naming the settings/answers it removes; protect fixed lessons and unreadable raw work. Current working controls remain editable, and source wording/key changes never regrade saved results. Use the existing notes/recovery path, not a second backup system.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and switching are shared.
 

@@ -254,8 +254,8 @@ Argument builder: Pick a claim, a piece of evidence and a reason. Do they join u
 Broken argument cards (fix one):
 - The hedgehog has spines because it wants to be safe.
 - Holly has prickles. Holly is green.
-- The owl's feathers help it swim.
-Fix replies: Plants and animals don't choose their parts. What does the part do? · Green isn't the reason. What do prickles do? · Soft fringed edges quiet an owl's flight. What do they do in the air?
+- The owl's soft feather edges help it see at night.
+Fix replies: Plants and animals don't choose their parts. What does the part do? · Green isn't the reason. What do prickles do? · Feathers don't see. Soft edges quiet its flight.
 
 ## Activity (d): Trace It Back
 
@@ -509,9 +509,10 @@ Feedback: A: Soil gives water and minerals, not energy. B: Yes. Leaves use sunli
 Explanation: Plants make their food using sunlight. That's where the energy starts.
 
 **4.3 (Sapling, order with arrows)**
-Prompt: Build the energy chain. Label sunlight and feeding links.
+Prompt: Put the cards in order. Sunlight and feeding links are drawn and labeled for you.
 Cards: fox · Sun · rabbit · clover
 Answer: Sun ⇢ clover → rabbit → fox.
+Response: card order only. The source-defined sunlight and feeding links are drawn and labeled automatically; the learner does not choose link types.
 Misconception tested: arrows drawn from eater to food.
 Hint: Start with the Sun. Who uses sunlight first?
 Explanation: Sun ⇢ clover carries sunlight energy. Clover → rabbit and rabbit → fox carry food energy from food to eater.
