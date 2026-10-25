@@ -83,6 +83,7 @@ Answer: the Antarctic, at the bottom.
 **Card captions:** Polar bear · Emperor penguin · Arctic fox · Adélie penguin · Walrus · Narwhal · Leopard seal · An Inuit town · Sámi reindeer herders · A research station · Ice on rock · Ice on water
 **Read-back for a penguin placed in the Arctic:** This puts penguins in the Arctic. Check the penguin card.
 **Research station:** Both is right. Scientists work near both poles.
+**Ice on rock / Ice on water:** Both is right for these generic regional cards. Both polar regions have land ice and sea ice; A2 uses a separately labeled cross-section exactly at a geographic pole.
 **Model line:** A simplified picture: real coastlines are more complicated, and some Arctic land has thick ice on rock.
 
 ## Book 2. The Sun that stays up: midnight sun and polar night

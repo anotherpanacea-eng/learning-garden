@@ -86,7 +86,7 @@ Each book runs Jane's **teach** (one idea, worked example one step per tap) → 
 
 ## The games
 
-**Which pole?** Two top-down globes over two cross-sections (ice on water, ice on rock). Twelve cards (polar bear, emperor and Adélie penguins, Arctic fox, walrus, narwhal, leopard seal, an Inuit town, Sámi reindeer herders, a research station, ice on rock, ice on water); tap a card, then **Arctic**, **Antarctic** or **Both** (stations). **Why?** chips follow each placement. A misplaced penguin is read back, never refused. Line: *A simplified picture: real coastlines are more complicated.*
+**Which pole?** Two top-down globes over two cross-sections (ice on water, ice on rock). Twelve cards (polar bear, emperor and Adélie penguins, Arctic fox, walrus, narwhal, leopard seal, an Inuit town, Sámi reindeer herders, a research station, ice on rock, ice on water); tap a card, then **Arctic**, **Antarctic** or **Both** (stations and the generic ice-on-rock/ice-on-water cards). **Why?** chips follow each placement. A misplaced penguin is read back, never refused. Line: *A simplified picture: real coastlines are more complicated.*
 
 **The Sun dial**, model `sun-v1`. A 24-hour ring with a horizon, four places and twelve months. Predict *Will the Sun set today?*, then **Play a day**: the Sun circles above or below the horizon from an authored table for the 15th of each month (PyEphem, 2026). Sapling adds **Show the lean** (spec 141's globe when built, else a static tilted globe). Line: *A simplified picture: one day in each month.* No location is read.
 
