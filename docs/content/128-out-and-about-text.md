@@ -99,7 +99,7 @@ Companion to [spec 128](../specs/128-out-and-about.md). Use as written, after th
 | --- | --- | --- | --- | --- | --- |
 | `beds-bean-jar` | A bean in a jar | With a grown-up, sprout a suitable bean against damp kitchen paper. Watch the root and the shoot grow, day by day. | A grown-up chooses an untreated seed suitable for sprouting and handles it. Don't eat it. `[check]` | What grew first, the root or the shoot? | 🧑 |
 | `beds-ask-gardener` | Ask about a plant | Ask a grown-up at home about a plant they grow or remember, or read a gardening page together. | Talk together at home. | What did you find out? | 🧑 |
-| `beds-soil-cups` | Two soils | Fill two cups with soil from two different places. Pour the same water into each. | Make small holes in the cups' bottoms first; a grown-up does this. Wash hands afterwards. | Which drained faster? | 🧑 |
+| `beds-soil-cups` | Two soils | Fill two cups with soil from two different places. Pour the same water into each. | Make small holes in the cups' bottoms first; a grown-up does this. Wash hands afterwards. | Which drained faster? | 🌳 🧑 |
 
 ## The café and the Measuring Kitchen
 
@@ -176,7 +176,7 @@ Companion to [spec 128](../specs/128-out-and-about.md). Use as written, after th
 
 | id | Title | Mission | Grown-up line | Come-back question | Needs |
 | --- | --- | --- | --- | --- | --- |
-| `keeper-family-weather` | A weather story | Ask a grown-up about a time they remember with a lot of rain, snow or wind. | | What did they do when it happened? | 🧑 |
+| `keeper-family-weather` | A weather story | Ask a grown-up about a time with a lot of rain, snow or wind, a memory they're happy to share. | | What did they do when it happened? | 🧑 |
 | `keeper-own-record` | Keep a record | For one week, write one line each day about the weather or something you noticed. | | Reading it back, what surprised you? | 📄 |
 
 ## Festivals

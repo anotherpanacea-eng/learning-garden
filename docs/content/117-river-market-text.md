@@ -196,7 +196,7 @@ sigue recto · cruza · gira · a la izquierda · a la derecha · al lado de · 
 
 ### Note, a longer note
 
-> Esta noche hay cena en el mercado y yo cocino una tortilla de patatas. Necesitamos seis huevos, tres patatas, una cebolla, aceite de oliva y un poco de sal. Primero, pela y corta las patatas. Después, fríe las patatas y la cebolla en el aceite, despacio, hasta que estén blandas. Luego, bate los huevos y mézclalo todo. Al final, cocina la tortilla por los dos lados. ¡Cuidado al darle la vuelta!
+> Esta noche hay cena en el mercado y yo preparo una tortilla de patatas. Necesitamos seis huevos, tres patatas, una cebolla, aceite de oliva y un poco de sal. Primero, pela y corta las patatas. Después, fríe las patatas y la cebolla en el aceite, despacio, hasta que estén blandas. Luego, bate los huevos y mézclalo todo. Al final, cocina la tortilla por los dos lados. ¡Cuidado al darle la vuelta!
 
 ### Sentence meanings
 
@@ -207,7 +207,7 @@ sigue recto · cruza · gira · a la izquierda · a la derecha · al lado de · 
 | Primero, corta las patatas. | First, cut the potatoes. |
 | Después, fríe las patatas con la cebolla. | Afterwards, fry the potatoes with the onion. |
 | Al final, añade los huevos. | At the end, add the eggs. |
-| Esta noche hay cena en el mercado y yo cocino una tortilla de patatas. | Tonight there's a dinner at the market and I'm cooking a potato tortilla. |
+| Esta noche hay cena en el mercado y yo preparo una tortilla de patatas. | Tonight there's a dinner at the market and I'm making a potato tortilla. |
 | Necesitamos seis huevos, tres patatas, una cebolla, aceite de oliva y un poco de sal. | We need six eggs, three potatoes, an onion, olive oil and a little salt. |
 | Primero, pela y corta las patatas. | First, peel and cut the potatoes. |
 | Después, fríe las patatas y la cebolla en el aceite, despacio, hasta que estén blandas. | Afterwards, fry the potatoes and the onion in the oil, slowly, until they're soft. |
@@ -217,7 +217,7 @@ sigue recto · cruza · gira · a la izquierda · a la derecha · al lado de · 
 
 ### Words
 
-*necesitamos* we need · *los huevos* eggs · *las patatas* potatoes · *la cebolla* onion · *primero* first · *corta* cut · *después* afterwards · *fríe* fry · *al final* at the end · *añade* add · *esta noche* tonight · *la cena* dinner · *el mercado* market · *cocino* I cook · *el aceite de oliva* olive oil · *un poco de sal* a little salt · *pela* peel · *despacio* slowly · *hasta que estén blandas* until they're soft · *luego* then · *bate* beat · *mézclalo todo* mix it all · *por los dos lados* on both sides · *darle la vuelta* to flip it
+*necesitamos* we need · *los huevos* eggs · *las patatas* potatoes · *la cebolla* onion · *primero* first · *corta* cut · *después* afterwards · *fríe* fry · *al final* at the end · *añade* add · *esta noche* tonight · *la cena* dinner · *el mercado* market · *preparo* I make · *el aceite de oliva* olive oil · *un poco de sal* a little salt · *pela* peel · *despacio* slowly · *hasta que estén blandas* until they're soft · *luego* then · *bate* beat · *mézclalo todo* mix it all · *por los dos lados* on both sides · *darle la vuelta* to flip it
 
 ### Task, part 1: the pantry
 

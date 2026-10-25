@@ -1,6 +1,6 @@
 # The Shape Bench: all child-facing text
 
-Companion to [spec 126](../specs/126-shape-puzzles.md). Use as written, after the same independent review. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him), Dot a ladybug (she/her). The glazier, the miller and the baker have no pronouns in this text. These puzzles are meant to work from pictures; every line here can also be read aloud. Nothing here is scored.
+Companion to [spec 126](../specs/126-shape-puzzles.md). Use as written, after the same independent review. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him), Dot a ladybug (she/her). The miller is she/her (spec 120). The glazier and the baker have no pronouns in this text. These puzzles are meant to work from pictures; every line here can also be read aloud. Nothing here is scored.
 
 ## Arriving
 

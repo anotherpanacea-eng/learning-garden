@@ -82,7 +82,7 @@ In the southern setting, "right" and "left" swap in every button and message.
 
 **After a shape:** Noted. Dot drew it on the sky page.
 
-**After "I couldn't see the moon":** That happens a lot. Clouds can hide it, and some nights the moon rises after bedtime. Sometimes it's up in the daytime instead. Have a look tomorrow afternoon.
+**After "I couldn't see the moon":** That happens a lot. Clouds can hide it, and some nights the moon rises after bedtime. Sometimes it's up in the daytime instead, in the afternoon or the morning. Have a look in daylight too.
 
 **Already noted tonight:** Tonight's moon is in the almanac. Look again tomorrow night.
 

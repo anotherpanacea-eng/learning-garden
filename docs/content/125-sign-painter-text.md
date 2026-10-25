@@ -1,6 +1,6 @@
 # The Sign Painter: all child-facing text
 
-Companion to [spec 125](../specs/125-sign-painter.md). Use as written, after the same independent review. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him), Dot a ladybug (she/her), Bramble a girl witch (she/her) with a magpie, Marisol the captain of *La Garza* (she/her). The baker, the miller, the orchard keeper and Moss have no pronouns in this text. Lines marked `[check]` need a science or licence check before build. Nothing here judges how a sign looks.
+Companion to [spec 125](../specs/125-sign-painter.md). Use as written, after the same independent review. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him), Dot a ladybug (she/her), Bramble a girl witch (she/her) with a magpie, Marisol the captain of *La Garza* (she/her). The miller is she/her (spec 120). The baker, the orchard keeper and Moss have no pronouns in this text. Lines marked `[check]` need a science or licence check before build. Nothing here judges how a sign looks.
 
 ## Arriving
 
@@ -25,7 +25,7 @@ Companion to [spec 125](../specs/125-sign-painter.md). Use as written, after the
 **Worked example (first visit):** one step per tap.
 1. "Here's a triangle. Press Turn. It turns a quarter of the way round, like a clock hand going from 12 to 3."
 2. "Press Flip across. Now it's flipped over, like turning a page."
-3. "Two right-angled triangles can make a square. Try it: turn one, and push them together."
+3. "Two right-angled triangles with two equal sides can make a square. Try it: turn one, and push them together."
 4. "Trying things until they fit is exactly how sign painters work."
 
 **Outline filled:** Your shapes cover the outline.
@@ -145,7 +145,7 @@ Companion to [spec 125](../specs/125-sign-painter.md). Use as written, after the
 
 | Work | Caption | One fact (Details) |
 | --- | --- | --- |
-| William Morris, *Strawberry Thief*, 1883 | A printed fabric with birds and strawberries. | Morris got the idea from thrushes stealing strawberries in his garden. The fabric was printed by hand with carved wooden blocks, one block for each color. |
+| William Morris, *Strawberry Thief*, 1883 | A printed fabric with birds and strawberries. | Morris got the idea from thrushes stealing strawberries in his garden. It was printed by hand with carved wooden blocks in a slow, old way: the cloth was dyed blue first, and the blocks printed a paste that took the blue out where other colors would go. Some of the greens came from printing yellow over blue. |
 | Owen Jones, a plate from *The Grammar of Ornament*, 1856 | A page of patterns collected from many places and times. | Jones collected and drew patterns from buildings and objects from many parts of the world, to show how designers use repeats and color. |
 | Katsushika Hokusai, *The Great Wave off Kanagawa*, about 1831 | A huge wave, small boats, and Mount Fuji far away. | It's a woodblock print, so many copies were made from the same carved blocks. Mount Fuji is the little peak in the middle. |
 

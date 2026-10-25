@@ -70,7 +70,7 @@ Explains pages never test the child. Test it records nothing beyond "played."
 Each game has a short origin card. Text that names real history carries a `[check]` mark in the companion and needs a source check before build:
 
 - Nim-type take-away games are old and widespread; the name *Nim* and the full rule for many rows were published by Charles Bouton in 1901–1902.
-- Mancala is a family of sowing games played across Africa and western Asia for centuries, with many local names and rules, such as oware and bao. Seed Holes is a small modern version, close to the twentieth-century game Kalah, and the card says so.
+- Mancala is a family of sowing games played across Africa and western Asia for well over a thousand years, with many local names and rules, such as oware and bao. Seed Holes is a small modern version, close to the twentieth-century game Kalah, and the card says so.
 - Shut the Box is a pub and family dice game with an uncertain origin.
 - Hex was invented by Piet Hein in 1942 and, separately, by John Nash in 1948.
 

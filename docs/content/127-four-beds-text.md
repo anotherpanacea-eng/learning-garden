@@ -22,13 +22,13 @@ The cards use simplified game groups, not botanical families; real plants in one
 | Family | Card | Picture labels |
 | --- | --- | --- |
 | Beans | Beans and peas. They don't need rich soil, and they leave the soil better than they found it. | peas · runner beans · broad beans |
-| Leaves | Leafy crops. Hungry: they need rich soil. | cabbage · kale · lettuce |
+| Leaves | Leafy crops. Hungry: they need rich soil. | cabbage · kale · broccoli |
 | Fruit | Crops we eat the fruit of. Fairly hungry. | squash · tomatoes · courgettes |
 | Roots | Crops we eat the roots of. They don't need much. | carrots · beetroot · parsnips |
 | Clover | A rest year. Clover and grass grow, and the soil gets better. No harvest. | clover · grass |
 
 **Why do beans help? (Details):**
-> Beans and peas have tiny living things in little bumps on their roots. Together they take something plants need from the air and leave it in the soil. So after beans, the soil is better for the next crop. `[check]`
+> Beans and peas have tiny living things in little bumps on their roots. Together they take something plants need from the air and leave it in the soil. So after beans, especially if their roots are left in the ground, the soil is often a little better for the next crop. `[check]`
 
 ## Soil goodness
 
@@ -136,7 +136,7 @@ One step per tap.
 ## Off-screen invitations
 
 - With a grown-up, sprout a suitable bean chosen by the grown-up in a jar with damp paper towel, against the glass. Watch the roots grow, day by day. `[check]`
-- Visit a garden or allotment and ask a gardener what they grow in the same place every year, and what they move.
+- With a grown-up, visit a garden or allotment and ask a gardener what they grow in the same place every year, and what they move.
 - Fill two cups with soil from different places. Pour the same water into each. Which drains faster?
 
 Off-screen invitations record nothing.

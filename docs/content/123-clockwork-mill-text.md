@@ -1,6 +1,6 @@
 # The Clockwork Mill: all child-facing text
 
-Companion to [spec 123](../specs/123-clockwork-mill.md). Use as written, after the same independent review. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him). The miller has no pronouns in this text. Trundle is a machine and is "it". Nothing here is scored.
+Companion to [spec 123](../specs/123-clockwork-mill.md). Use as written, after the same independent review. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him). The miller is she/her (spec 120). Trundle is a machine and is "it". Nothing here is scored.
 
 ## Arriving
 

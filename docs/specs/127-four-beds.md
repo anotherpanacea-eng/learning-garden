@@ -32,7 +32,7 @@ Each bed has a **soil goodness** from 0 to 4, starting at 3. Goodness stands for
 | Model crop group (not a botanical family) | Examples in pictures | Needs goodness | After the year |
 | --- | --- | --- | --- |
 | Beans | peas, runner beans, broad beans | 0 | +2 |
-| Leaves | cabbage, kale, lettuce | 3 | −1 |
+| Leaves | cabbage, kale, broccoli | 3 | −1 |
 | Fruit | squash, tomatoes, courgettes | 2 | −1 |
 | Roots | carrots, beetroot, parsnips | 1 | 0 |
 | Clover (a rest year) | clover and grass | 0 | +2, no harvest |

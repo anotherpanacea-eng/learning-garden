@@ -1,6 +1,6 @@
 # The Lost and Found Board: all child-facing text
 
-Companion to [spec 122](../specs/122-lost-and-found-mysteries.md). Use as written, after the same independent review. `{guide}` is the explorer's chosen companion; `{courier}` is the explorer's chosen courier. Pip is a fox (he/him), Dot a ladybug (she/her), Bramble a girl witch (she/her) with a magpie. The miller, the baker, the orchard keeper and Moss have no pronouns in this text. Nothing here is scored.
+Companion to [spec 122](../specs/122-lost-and-found-mysteries.md). Use as written, after the same independent review. `{guide}` is the explorer's chosen companion; `{courier}` is the explorer's chosen courier. Pip is a fox (he/him), Dot a ladybug (she/her), Bramble a girl witch (she/her) with a magpie. The miller is she/her (spec 120). The baker, the orchard keeper and Moss have no pronouns in this text. Nothing here is scored.
 
 Every clue below was checked by brute force: each mystery has exactly one arrangement that fits all its trusted clues.
 

@@ -150,7 +150,7 @@ Companion to [spec 121](../specs/121-games-table.md). Use as written, after the 
 | plan | "I'm counting seeds four moves ahead." · "I'm keeping that hole empty on purpose." |
 
 **Origin card:** `[check]`
-> Mancala is the name for a big family of sowing games. People have played them across Africa and in western Asia for hundreds of years, with many names and rules, such as oware in West Africa and bao in East Africa. The rules here are a small modern version, close to a game called Kalah. If you know a mancala game from your own family, its rules are just as real.
+> Mancala is the name for a big family of sowing games. People have played them across Africa and in western Asia for well over a thousand years, with many names and rules, such as oware in West Africa and bao in East Africa. The rules here are a small modern version, close to a game called Kalah. If you know a mancala game from your own family, its rules are just as real.
 
 ## Hex
 

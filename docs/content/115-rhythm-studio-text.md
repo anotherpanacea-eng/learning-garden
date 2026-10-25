@@ -180,7 +180,7 @@ Some music counts in threes: ONE two three, ONE two three. Waltzes do. In a bar 
 
 **`dotted-swing`**
 - **Card:** Try a dotted quarter note followed by an eighth note: long, short. Fill a four-beat bar with that pattern twice.
-- **Met:** Long-short, long-short. 1 and a half beats plus half a beat makes 2, and twice makes 4. That uneven pattern is what gives a lot of music its swing.
+- **Met:** Long-short, long-short. 1 and a half beats plus half a beat makes 2, and twice makes 4. That uneven long-short pattern gives a lot of music a lilt, as in many jigs and marches.
 - **Not yet:** This card asks for dotted quarter, eighth, dotted quarter, eighth. Your bar has {summary}.
 
 **`two-bells`**

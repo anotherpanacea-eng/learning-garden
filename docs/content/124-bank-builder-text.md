@@ -1,6 +1,6 @@
 # The Bank Builder: all child-facing text
 
-Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the same independent review and a science content check. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him), Bramble a girl witch (she/her) with a magpie. The miller and Moss have no pronouns in this text. Lines marked `[check]` need a science check before build. Nothing here is scored.
+Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the same independent review and a science content check. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him), Bramble a girl witch (she/her) with a magpie. The miller is she/her (spec 120). Moss has no pronouns in this text. Lines marked `[check]` need a science check before build. Nothing here is scored.
 
 ## Arriving
 
