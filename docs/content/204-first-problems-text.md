@@ -317,15 +317,15 @@ Twenty-six three-choice items put the right answer at A nine times, B nine times
 
 **A1 (Sprout, 3-choice)**
 Picture: Dot holds some letters. More letters blow in the window.
-Prompt: More letters blew in. What does Dot want to find out?
+Prompt: Which question asks about the number of letters?
 - A. How many letters she has now. *(right)*
 - B. What color the envelopes are. *(tests: noticing a detail in place of the question)*
 - C. Where each letter should go. *(tests: answering a different question)*
-Hint: Look at the letters coming in. What changes?
-Explanation: More letters came in, so Dot wants to know how many she has now.
-Feedback A: Yes. That is the question the picture asks.
-Feedback B: Colors are fun to see. What changes when letters blow in?
-Feedback C: That is a good job for later. What does this picture ask?
+Hint: Look for a question you could answer by counting.
+Explanation: "How many" asks for a count. The other questions ask about color or where letters go.
+Feedback A: Yes. "How many" asks about the number of letters.
+Feedback B: That asks about color. Which question asks for a count?
+Feedback C: That asks where letters go. Which question asks for a count?
 
 **A2 (Sprout, 3-choice)**
 Story: The miller had a pile of sacks. The wind blew some away.
