@@ -43,7 +43,7 @@ One shared scene per chapter; any job is a whole contribution; nothing locks a s
 
 **Sets, Venn diagrams and tables (Keeper's Desk).** A rectangle holds everything (the universal set); each circle holds a set. Fill the overlap (**both**, A ∩ B) first, then each "only" part, then **neither** (inside the box, outside both circles); the parts add to the total. **Either or both** (A ∪ B) counts each part once. Wren's 24 seed packets (made up): 13 flowers, 9 like wet ground, 5 both. So 8 flowers only, 4 wet only, 17 in either or both (not 22, which counts the 5 twice), 7 neither. Picking one packet at random: P(both) = 5/24, P(either or both) = 17/24. Only when told to pick from the wet-ground packets does the total shrink: P(flower) = 5/9. A count can be bigger than 1; a probability cannot. A **two-way table** lists every pair of outcomes from two things: a three-part weather spinner and a four-part seed spinner, all parts equal, give 3 × 4 = 12 equally likely pairs, so P(rain and bean) = 1/12.
 
-**Honest uncertainty.** A flood is not a spinner: years are not equally likely outcomes, so there is no fraction to count. Hollis's ledger (spec 120, page 2) lists floods in years 4, 15, 27, 31, 34, 36 and 38. Taking "big" as 100 cm or more at the flood post (our label): years 27, 34, 36 and 38. Hollis kept the post for 40 years (Nuria's rain table in spec 120, letter 4, counts "years of Hollis's keeping" 1 to 40). Over all 40 years that is 4 in 40, 1 in 10; over the last 20 years (21 to 40) it is 4 in 20, 1 in 5; before year 22 there were none. Which years to count is a choice, the Sponge changed things, and no record promises next year. The honest answer is an "about", with its reason and its limit.
+**Honest uncertainty.** A flood is not a spinner: years are not equally likely outcomes, so there is no fraction to count. Hollis's ledger (spec 120, page 2) lists floods in years 4, 15, 27, 31, 34, 36 and 38. Taking "big" as 100 cm or more at the flood post (our label): years 27, 34, 36 and 38. Hollis kept the post for 40 years (spec 120's page 6: "For forty years I read the flood post"; Nuria's rain table in letter 4 counts "years of Hollis's keeping" 1 to 40). Over all 40 years that is 4 in 40, 1 in 10; over the last 20 years (21 to 40) it is 4 in 20, 1 in 5; before year 22 there were none. Which years to count is a choice, the Sponge changed things, and no record promises next year. The honest answer is an "about", with its reason and its limit.
 
 **Real anchors (see audit).**
 - **Pascal and Fermat's letters (1654).** In 1654 Blaise Pascal and Pierre de Fermat wrote to each other about a puzzle: a game between two players stops early, so how should the prize be shared fairly? They agreed the share should follow how the game **could still** finish, not what had happened so far. The two never met. Child text tells it as "a fair split of an unfinished game", with no gambling detail. F3 uses independent, equally likely round winners, so the four two-round continuations are equally likely.
@@ -132,7 +132,7 @@ chanceWindow: {
 
 ## Upstream check
 
-Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (both 2026-10-24). Ids confirmed in the pinned `curriculum/marble/topics.json`.
+Refreshed upstreams: Jane `LESSONS.md` at `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and the Marble topics and teaching-research records at `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (both 2026-10-24). Ids confirmed in the pinned `curriculum/marble/topics.json`.
 
 | Target (pinned id) | What the research asks, and how this spec does it |
 | --- | --- |
@@ -141,7 +141,7 @@ Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble 
 | Equally Likely Outcomes (`mt_xSgAgg9Ej_`) | Equal vs unequal parts with the same colors; random is not equally likely; two senses of fair; build fair and unfair; sampling as the check, small runs vary. Spinner Table Build and Spin 20; B1-B6. |
 | Probability as a Fraction (`mt_-c4Ca_nBzX`) | Derive from countable equal outcomes; part-whole, not odds; place on the line at once; equally likely first; construct, not only read. Fraction Bag; C1-C3; T6, T7. |
 | The 0-to-1 Probability Scale (`mt_t0g2SlP404`) | One line with 0, 1/2, 1; one point three ways; both directions; never above 1 or a count; convert before comparing; 0.5 not a default. T8, T9; C4-C6. |
-| The Probability Scale (`mt_vmQJAtAFuy`) | Probability as a measure; fair devices calculated, uneven ones estimated or given; three colors not 1/3 each; bounds. Nuria's spinner (B5, scene 2); flood card as the estimated contrast; C6. |
+| The Probability Scale (`mt_vmQJAtAFuy`) | Probability as a measure; fair devices calculated, uneven ones estimated or given; three colors not 1/3 each; bounds. Nuria's spinner (scene 2) and the weather spinner (B1); flood card as the estimated contrast; C6. |
 | Calculating Simple Probability (`mt_Zt30Gxi-qp`) | Count favorable, count total, write, simplify, across contexts; equally-likely check first; more favorable, bigger fraction. Fraction Bag's live fraction and Simplify; C2, C3, E5. |
 | Probabilities Sum to One (`mt_3fwYu7imd4`) | A bar of length 1; exhaustive and exclusive first; complement as shortcut beside counting; spot the table that does not add to 1; covered part predicted before uncovering. Whole Bar; D1-D4. |
 | Complementary events (`mt_XfyqXLqzpx`) | Define cannot-happen-together; complement by 1 − P(A) with its reason; even-or-prime overlap; invalid distributions; common denominators. D2, D4, D5; Overlap lens. |
@@ -196,5 +196,4 @@ Claim check, 2026-10-25: no spec on main or any draft PR (126, 128, 137-151) cla
 **Owner questions, with defaults:**
 1. Route `#numbers/chance` at the Seed Stall's back table, linked from the almanac weather page? *Default: yes; the almanac link is one button and reads no almanac data.*
 2. Eleven targets in one pack, or split the Venn Desk off? *Default: one pack; the Venn Desk and Table can ship as a later slice.*
-3. Does Hollis's ledger run from year 1 to year 40, as spec 120's letter 4 ("years of Hollis's keeping", 1 to 40) and sibling spec 203 assume? *Default: yes; if spec 120 changes the span, the card's fractions are recomputed before build.*
-4. First slice? *Default: the Likelihood Line with Set A, then the Spinner Table with Set B.*
+3. First slice? *Default: the Likelihood Line with Set A, then the Spinner Table with Set B.*

@@ -45,7 +45,7 @@ Date: 2026-10-25. Spec: [202](../specs/202-chance-scale.md). Companion: [202 tex
 ## Open checks
 
 1. Pascal's location in 1654: cleared on a search excerpt in independent review (Paris); still not in child text.
-2. Whether Hollis's ledger runs exactly years 1 to 40 (owner question 3 in the spec). Independent review changed the card from 1 to 38 to 1 to 40, matching spec 120's letter 4 ("years of Hollis's keeping", 1 to 40) and sibling spec 203; the 4/40 and 4/20 figures depend on it.
+2. Cleared: Hollis's ledger runs years 1 to 40. Spec 120's page 6 says "For forty years I read the flood post" and letter 4 counts "years of Hollis's keeping" 1 to 40, as sibling spec 203 assumes; the 4/40 and 4/20 figures rest on it.
 3. Nuria's Spanish line, *¡Hola desde Vadoalto!*, for a fluent Spanish reader (spec 120 rule).
 4. Re-read sources 1, 4, 7 and 10 at the source when fetches are available. Source 11's Hall paper was read directly on 2026-10-25 (pp. 1-2): it distinguishes fixed-syllable meters from fixed-duration meters and gives 2, 4, 8 for one, two, three syllables. H3 and F4 now use syllables; the other historical anchors still need their source pass.
 
@@ -55,4 +55,4 @@ No images are embedded. For build art, prefer original drawings of spinners, bag
 
 ## Pedagogy note (Marble, paraphrased)
 
-The research records agree on a few design constraints this pack follows: words justified from composition rather than wishes; endpoints reserved for all or none; equal chance decided by part size; part-whole over part-part; one line with three notations and conversion before comparing; sum to 1 only for complete, non-overlapping lists, with the even-or-prime trap; Venn regions filled overlap first, with "neither" inside the box; and recognition tasks paired with construction (the Build, Cover and Build-from-totals modes). The records' own worked numbers were not reused: this pack's Venn uses 24 packets (13, 9, 5) and its spinners and bags are original.
+The research records agree on a few design constraints this pack follows: words justified from composition rather than wishes; endpoints reserved for all or none; equal chance decided by part size; part-whole over part-part; one line with three notations and conversion before comparing; sum to 1 only for complete, non-overlapping lists, with the even-or-prime trap; Venn regions filled overlap first, with "neither" inside the box; and recognition tasks paired with construction (the Build, Cover and Build-from-totals modes). A few of the records' example numbers are reused as bare numbers, in new wording and settings: 3 of 4 against 6 of 12 (A6, T3), 40%, 1/4 and 0.3 (C5), 3 of 10 against 3/7 (C2), 1 in 6 against 1/5 (A5) and even-or-prime on 1 to 6 (D5, T13). The Venn (24 packets: 13, 9, 5), the spinners and the other bags are original.

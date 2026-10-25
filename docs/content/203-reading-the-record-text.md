@@ -51,10 +51,10 @@ Companion to [spec 203](../specs/203-reading-the-record.md). Use as written, aft
 >
 > Wren Halloway, who keeps the ledgers at the Keeper's Desk, taps the page. "How many years in each part?" "Twenty-one before," says Dot. "Nineteen after." "So the after part is shorter," says Wren, "and it still has more floods. That's worth knowing. Does it tell us why?"
 >
-> Bramble looks at Nuria's letter about the big rains, pinned beside the ledger. "We need the rain on the same chart," she says. "Now you're keeping a record," says Wren.
+> Bramble frowns at the chart. "Maybe it just rained more after year 22. We need the rain on the same chart," she says. "Vadoalto keeps a rain gauge," says Wren. "Let's ask Nuria. Now you're keeping a record."
 
 **Keeper's note** (A made-up model):
-> By ten-year blocks, Hollis's floods go 1, 1, 1, 4. Nuria's big rains go 6, 5, 6, 8. Floods rose much more than big rains. That is a clue, not a proof of what caused it.
+> By ten-year blocks, Hollis's floods go 1, 1, 1, 4. That shows when the floods came. It doesn't show why. The rain could be a clue.
 
 ### Scene 3. Charts for the Gazette (Act V, path 2: the Willowbank Gazette)
 
@@ -140,7 +140,7 @@ Worked example: 1. More umbrellas, higher brook. 2. Umbrellas don't fill brooks.
 ## Real-world and history cards
 
 **H1. A river written on clay** (A true thing from history; Seedling and up)
-> In ancient Babylon, sky watchers wrote diaries on clay tablets. Each month they noted the weather, the price of barley and dates, and how high the Euphrates river stood.
+> In ancient Babylon, sky watchers wrote diaries on clay tablets. Each month they noted the weather, the prices of barley and of dates (a sweet fruit), and how high the Euphrates river stood.
 Keeper's note:
 > The diaries cover about 600 years, ending about 2,000 years ago. Most tablets are broken pieces. Like the old Keeper's tables, they are a long record kept by careful people, so later people could compare.
 
@@ -204,10 +204,10 @@ Keeper's note:
 **The market boat, going upstream (morning):**
 | Stop | Early boat | Middle boat | Late boat |
 | --- | --- | --- | --- |
-| Les Saules landing | 7:10 | 8:45 | 10:20 |
+| Orchard landing | 7:10 | 8:45 | 10:20 |
 | Willowbank mill | 7:40 | 9:15 | 10:50 |
 | Willow Bridge | 7:55 | 9:30 | 11:05 |
-| Vadoalto quay | 8:45 | 10:20 | 11:55 |
+| High ford | 8:45 | 10:20 | 11:55 |
 
 **Where the storm finds were picked up:**
 | | Shells | Buttons | Feathers | Total |
@@ -289,7 +289,7 @@ Keeper's note:
 ## Bench (h): The Scatter Desk
 
 **Model card** (A made-up model):
-> The old Keeper's made-up river chart: rain at Vadoalto one day, the rise at the mill post the next morning.
+> A made-up river chart: rain at Vadoalto one day, the rise at the mill post the next morning.
 
 **Rain (mm), rise (cm):** 4, 6 · 8, 8 · 12, 34 · 15, 15 · 20, 17 · 22, 20 · 28, 25 · 30, 25 · 35, 30 · 40, 33
 **Note pinned to the 12 mm day:** *Ice jammed below the mill.*
@@ -330,7 +330,7 @@ Feedback A: Yes. The shells with no partner are the extra ones.
 Feedback B: Big buttons are still just buttons. Match them one to one.
 Feedback C: The buttons are spread out. Match them one to one.
 
-**A3 (Sprout, 3-choice)**
+**A3 (Seedling, 3-choice)**
 Prompt: Sort by kind, then by size. Where does a small shell go?
 - A. The big shells box. *(tests: using only the first rule)*
 - B. The small buttons box. *(tests: using only the second rule)*
@@ -435,7 +435,7 @@ Feedback B: That's the early boat, one column over.
 Feedback C: Yes. Row and column meet at 9:15.
 
 **C2 (Sapling, number)**
-Prompt: The middle boat leaves Willow Bridge at 9:30. It reaches Vadoalto at 10:20. How long?
+Prompt: The middle boat leaves Willow Bridge at 9:30. It reaches the high ford at 10:20. How long?
 Answer: 50 minutes.
 Worked steps: 1. 9:30 to 10:00 is 30 minutes. 2. 10:00 to 10:20 is 20 minutes. 3. 30 + 20 = 50.
 Tests: 90 (taking 930 from 1020 like ordinary numbers); 0.90 hours (reading minutes as decimals).
@@ -443,7 +443,7 @@ Hint: Count on to 10:00 first.
 Explanation: An hour has 60 minutes, so count on in jumps.
 
 **C3 (Sapling, 3-choice)**
-Prompt: You reach Willow Bridge at 9:40. How long until a boat to Vadoalto?
+Prompt: You reach Willow Bridge at 9:40. How long until a boat to the high ford?
 - A. 1 hour 25 minutes *(right)*
 - B. 1 hour 65 minutes *(tests: taking 940 from 1105 like ordinary numbers)*
 - C. No wait. The middle boat stops there. *(tests: missing that it left at 9:30)*
@@ -719,4 +719,4 @@ Step 3: **Skip for now.** You can come back any time.
 
 **Sources in brief:** the Babylonian Astronomical Diaries (Livius and reference summaries of the Sachs and Hunger edition); William Playfair's *Commercial and Political Atlas* (1786) and *Statistical Breviary* (1801); Florence Nightingale's 1858 diagram in her *Notes* on the army's health. Full list in the source audit.
 
-**Story note:** Willowbank, the record room, the boats, the poll and the old Keeper's river charts are made up. The flood counts come from the story's own ledger.
+**Story note:** Willowbank, the record room, the boats, the poll and the river charts are made up. The flood counts come from the story's own ledger.

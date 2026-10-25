@@ -112,7 +112,7 @@ Companion to [spec 202](../specs/202-chance-scale.md). Use as written, after ind
 > Wren draws two circles in a box. "Flowers here. Wet ground here. Both in the middle. Neither, outside the circles but inside the box."
 
 **Longer:**
-> The low fields flood. Whatever is planted there must like wet ground. The town also wants flowers, for the bees.
+> If the low fields go back to marsh, whatever grows there must like wet ground. The town also wants flowers, for the bees.
 >
 > Wren tips out 24 seed packets. She draws a big box, then two circles that overlap. "Flowers in this circle. Likes wet ground in that one."
 >
