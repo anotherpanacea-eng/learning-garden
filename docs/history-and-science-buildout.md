@@ -1,4 +1,4 @@
-# History and science build-out: thirty-three packs
+# History and science build-out: forty-one packs
 
 Proposal, 2026-10-25. **Writing only:** specs 133 to 148 and, in a second wave, 149 to 158, each with a companion file holding every child-facing line and a source audit. Nothing here is built, scheduled or cleared. Each spec still needs an independent spec review and a subject check, and the owner chooses a first slice before Codex builds anything. Story links are future adapters to draft [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127) (the Keeper of the Ways); every pack also plays standalone from an open destination.
 
@@ -80,6 +80,23 @@ A third pass in the same session went after domains the first two waves touched 
 | 165 | **The Lighthouse and the Library** | `#archive/alexandria` | Alexandria where Egypt, Greece and Rome meet: the Pharos, the Library's copying, Eratosthenes measuring the Earth (an honest range), Cleopatra, Roman Egypt; Hypatia in a Keeper's note only. | H2, H1, M5, S8 |
 
 Owner questions from the third wave, with defaults: **Hypatia** in 165 stays in an older-depth Keeper's note; the **handwashing** scene in 160 sits at Keeper's Desk with no illness lines; the **black-lamb** scene in 161 stays; **Artemis II** in 164 is told as a past event (April 2026); **no off-screen coil-and-nail** activity in 163; spec 141 may mark "What Astronauts Do" as met by 164.
+
+## Fourth wave: eight more packs (specs 166 to 173)
+
+The last pass in the session took the science domains that still had the most untouched topics after three waves: Animals of the World, Matter & Materials, Weather & Climate, Volcanoes & Earthquakes, Ocean Life, Space Systems & Earth's History and Dinosaurs & Paleontology. Every target is a topic no other spec claims. Each pack went through a writer and then one independent review that doubled as the fact-check pass. Draft PRs #146, #147 and #148.
+
+| Spec | Pack | Home | What the child does | Strands |
+| --- | --- | --- | --- | --- |
+| 166 | **The Valley Animal Book** | `#living/valley` | "Who came back?" after the storm: homes, night animals, signals, wild/farm/pet, the Red List shelf with the desman, bucardo, bearded vulture and condor; bears as tracks only. | S4, S3 |
+| 167 | **The Mending Shed** | `#workshop/mending` | Mending the village: objects versus materials, property words, a test table before sorting, choosing materials, Hob's gate taken apart and rebuilt, Macintosh's cloth, recycling at Keeper's Desk. | S5, S1 |
+| 168 | **The Cabinet of Little Drawers** | `#library/drawers` | Particles, states and heating curves, atoms and compounds, Mendeleev's gaps and gallium, metals and non-metals, red-cabbage pH (grown-up-led), physical versus chemical change. | S5 |
+| 169 | **Reading the Sky Ahead** | `#science/forecast` | The forecast chain, weather maps, the Sun's engine and sea breezes, a calm storm day, building and dressing for weather; Le Verrier, FitzRoy, TIROS-1. Safety on a grown-up card only. | S7, S1 |
+| 170 | **The Restless Ground** | `#workshop/ground` | A volcano cutaway, runny and sticky magma, plate edges, seismometers and magnitude, a made-up watch desk, tsunami speed, a shake table on a budget. No death counts or peril. | S7, M6 |
+| 171 | **Down to the Deep** | `#library/deep` | Sounding the millpond, then the ocean: echo depth, the sea-floor profile and Marie Tharp, deep-sea light and vents, reefs and ripple effects; more "H." postcards. | S4, S7 |
+| 172 | **Beyond the Planets** | `#library/far` | Planet names, the solar system to scale, Newton's hill, brightness and distance, a long zoom to galaxies, a star's life; Leavitt, Hubble, Payne. Carries the Sun rule. | S8, S6 |
+| 173 | **Stones that Remember** | `#living/dig` | A dig square and slice table, coprolites from Anning to Buckland, feathered dinosaurs, a Life Rope of deep time, *Abditosaurus* from the Tremp Basin; extinctions calm, at Keeper's Desk. | S3, S8, H1 |
+
+Owner questions from the fourth wave, with defaults: bears in 166 stay **tracks only**; the old Keeper stays **unnamed in child text before the end of Act III** (draft 140 names Hollis earlier, so align one way once spec 120 is settled); the red-cabbage card in 168 stays **grown-up-led**, deferring safety to the ACS activity; natural tsunami signs in 170 appear **only in the grown-up panel**; end-Permian in 173 told as **"about 8 in 10 sea species, maybe more"** at Keeper's Desk only.
 
 ## How the packs hold together
 
