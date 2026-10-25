@@ -213,7 +213,7 @@ const storyContrasts={
     "wrongNotice": "Ada moves the reserved chair; Tomas infers her motive",
     "wrongAccount": "Tomas says he moved the chair to carry the music stands through the doorway",
     "wrongRecord": "the floor plan records that the doorway had already been measured and approved",
-    "falseLimit": "whether the singer had requested a wheelchair space near the door",
+    "falseLimit": "whether the requested clear space was near the back entrance",
     "wrongConnection": "the clear-space request means Ada’s reserved chair was intended for the singer’s father",
     "omission": "Tomas describes letting his explanation wait while he fetched the music stands",
     "wrongOmission": "Tomas admits he had not been told what the clear space was for, leaving his reason a guess"
@@ -222,7 +222,7 @@ const storyContrasts={
     "wrongNotice": "the printed map shows the orchard path ending at the stone trough",
     "wrongAccount": "Leena says the missing route was removed because the orchard gate is always locked",
     "wrongRecord": "the printer’s entry records that the walking layer was printed on the delivered batch",
-    "falseLimit": "whether the assistant’s sketch placed the orchard fork in the correct position",
+    "falseLimit": "which day the replacement delivery was scheduled for",
     "wrongConnection": "the blank reverse means Leena had not surveyed the cart routes",
     "omission": "Leena describes writing a notice but not checking whether it had reached the shop",
     "wrongOmission": "Leena admits she never measured the cart road, leaving the map’s intended purpose uncertain"
@@ -242,7 +242,7 @@ const teaching={
  2:{learn:'Two accounts can agree on an event and differ in access to motives. A document may corroborate part of an account without settling the whole dispute.',guided:'Compare the shared encounter in c1-p2 and c2-p1. Then connect the dated material in c3-p1 with the earlier interpretation. Name both a supported point and an unanswered question.',hint:'Agreement about an event is not automatically agreement about its purpose. What does the document actually record?',example:'Different example: two people hear a crash. One describes a dropped tray; a log records a delivery at that time. The log supports timing, but does not identify who dropped anything.'},
  3:{learn:'Test a claim against a plausible alternative and a fair objection. A useful revision may narrow the claim while preserving what its evidence really supports.',guided:'Set the earlier interpretation beside c3-p1. Consider the second account as an alternative, not a verdict. Ask which uncertainty matters to your selected reader and explain why a revised claim survives it.',hint:'A fair objection targets a real gap. Does your revision answer that gap, or just repeat the original claim?',example:'Different example: muddy shoes suggest a visitor used the garden path. The objection is that mud could come from elsewhere. A revision can say the shoes fit the path theory, while a matching footprint would strengthen it.'}
 };
-function question(id,lesson,prompt,fit,over,under,reason,position){const items=[{label:over,outcome:'different',feedback:'Compare this claim with the exact text. '+reason},{label:under,outcome:'different',feedback:'Compare what this claim leaves out with the exact text. '+reason}];items.splice(position,0,{label:fit,outcome:'fits',feedback:reason});return {id,lesson,prompt,choices:items.map((c,i)=>({id:`choice-${i+1}`,...c,label:c.label.charAt(0).toUpperCase()+c.label.slice(1)}))};}
+function question(id,lesson,prompt,fit,over,under,reason,order){const position=order%3,items=[{label:over,outcome:'different',feedback:'Compare this claim with the exact text. '+reason},{label:under,outcome:'different',feedback:'Compare what this claim leaves out with the exact text. '+reason}];if(order>=3)items.reverse();items.splice(position,0,{label:fit,outcome:'fits',feedback:reason});return {id,lesson,prompt,choices:items.map((c,i)=>({id:`choice-${i+1}`,...c,label:c.label.charAt(0).toUpperCase()+c.label.slice(1)}))};}
 export function makeEvidenceStory(storyId,challenge=1,readerId='newcomer'){
  const original=evidenceStories.find(s=>s.id===storyId),reader=evidenceReaders.find(r=>r.id===readerId),t=teaching[challenge],d=details[storyId],contrast=storyContrasts[storyId];if(!original||!reader||!t||!d)return null;
  const source=structuredClone(original),chapters=source.chapters.map(c=>c.id),later=chapters.slice(2);
@@ -270,5 +270,5 @@ export function makeEvidenceStory(storyId,challenge=1,readerId='newcomer'){
  ['later','Which revision answers that objection fairly?',`${d.supports}; we still need evidence about ${d.limit}.`,`${contrast.wrongRecord}; we still need evidence about ${d.limit}.`,'The later record gives no support because it leaves a gap.',`The record supports this point: ${d.supports}. A fair revision leaves open the question of ${d.limit}.`],
  ['revise','Which response best serves a reader deciding what to do?',`Explain that ${d.supports}, identify the open question of ${d.limit}, and propose a relevant check.`,`Explain that ${d.supports}, identify the open question of ${contrast.falseLimit}, and propose a relevant check.`,'Give no interpretation or next step until every uncertainty disappears.',`A decision can be proportionate: ${d.supports}, while the open question of ${d.limit} calls for a relevant check.`]
  ];
- const storyIndex=evidenceStories.findIndex(s=>s.id===storyId);source.questions=rows.map(([lesson,prompt,fit,over,under,reason],i)=>question(`depth-${challenge}-question-${i+1}`,lesson,prompt,fit,over,under,reason,(storyIndex+i+challenge)%3));return source;
+ const storyIndex=evidenceStories.findIndex(s=>s.id===storyId);source.questions=rows.map(([lesson,prompt,fit,over,under,reason],i)=>question(`depth-${challenge}-question-${i+1}`,lesson,prompt,fit,over,under,reason,(storyIndex+i+challenge)%6));return source;
 }
