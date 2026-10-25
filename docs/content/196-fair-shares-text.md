@@ -225,6 +225,7 @@ Keeper's note:
 **Jump readout:** "[n] jumps of 1/[d]: [n]/[d]."
 **At a whole number:** "[n]/[d] lands on [w]."
 **Keeper's Desk extension:** The line stretches left past 0 to the cold cellar's −2.
+**Symbol strip (Keeper's Desk):** = is equal to · ≠ is not equal to · < is less than · > is greater than · ≤ is less than or equal to · ≥ is greater than or equal to
 
 **Guided item:** Where does 3/4 go?
 - Step 1: Find 0 and 1. That's one whole.
@@ -662,6 +663,8 @@ Step 3: **Skip for now.** You can come back any time.
 - **denominator**: the bottom number. It says how many equal parts make the whole.
 - **half, quarter**: one of two, or one of four, equal parts.
 - **number line**: a line where every number has its own place.
+- **decimal**: a number written with a dot, like 0.3 for three tenths.
+- **scribe**: a person whose job was writing and copying.
 - **benchmark**: a landmark number, like 1/2 or 1, to compare with.
 - **line plot**: a number line with an X for each thing measured.
 - **inch**: a unit of length, about the width of a grown-up's thumb.

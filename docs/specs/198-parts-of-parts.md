@@ -146,7 +146,7 @@ Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble 
 | Multiplying fractions (age 11+) (`mt_J339bO7qLe`) | Unit part then a copies; percent via its fraction; chained discount; operators above and below 1. "Of" mode; T9, T10; C3, C5. |
 | Real-world fraction multiplication (`mt_lvaSGHwvQ5`) | Mixed numbers via improper fractions or all four area pieces; estimate to catch dropped cross pieces. Mixed mode; T11; C4, F1, F2. |
 | Dividing unit fractions and whole numbers (`mt_rCMdwG-YOE`) | Sort sharing from how many fit before computing; amount first; sense check; inverse check. Story sort; T14; D4, F-set contexts. |
-| Dividing fractions (unit fractions) (`mt_ifPDOYvUqm`) | Split a shaded unit fraction and extend the cuts across the whole; 3 × 4 = 12; inverse check; contrast with whole ÷ unit fraction. Cut into shares; T12; D1, D2, D5. |
+| Dividing fractions (unit fractions) (`mt_ifPDOYvUqm`) | Cut the shaded unit fraction, then carry those cuts through every part of the whole; 3 × 4 = 12; inverse check; contrast with whole ÷ unit fraction. Cut into shares; T12; D1, D2, D5. |
 | Dividing by Fractions (`mt_1PAWhRhpdg`) | Predict first, then fit unit pieces along a length; a bigger answer explained; inverse check. Fill with scoops; T13; D3, E4. |
 | Dividing fractions (`mt_9Y96vxG_LH`) | How many fit on a common-denominator bar; derive the flip; flip only the divisor; estimate. Fit Board; T15, T16; E1-E5. |
 | Modelling with multiplication and fractions (`mt_K3R0yaHVcx`) | Choose a representation; compute; return with unit and referent; numbers kept attached to things. Order Slips; T17; F1, F3, F4. |

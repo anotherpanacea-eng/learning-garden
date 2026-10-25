@@ -2,7 +2,7 @@
 
 Date: 2026-10-25. Spec: [198](../specs/198-parts-of-parts.md). Companion: [198 text](../content/198-parts-of-parts-text.md).
 
-**Method.** Ten web searches (WebSearch; page fetches were blocked in this session, so claims rest on search-result excerpts with the URLs below and should be re-read at the source in the second pass). The arithmetic (whole × fraction as repeated addition; fraction × fraction by area and by multiplying numerators and denominators; multiplying by a factor below 1 gives a smaller product; "of" as multiplication; percent as hundredths; partition and measurement division; dividing by a fraction as multiplying by its reciprocal) is standard school mathematics, cross-checked against the Marble teaching-research records for the nine targets, which cite the IES fractions practice guide and the US Common Core and UK national curriculum statements. All recipes, fields, maps, prices and orders in items are **made-up labeled data**, verified by `check198.py` (184 checks, all passing; scratch area, not in the repo). The companion was checked with `style198.py` (0 em-dashes; 185 line checks within the word limits).
+**Method.** Ten web searches (WebSearch; page fetches were blocked in this session, so claims rest on search-result excerpts with the URLs below and should be re-read at the source in the second pass). The arithmetic (whole × fraction as repeated addition; fraction × fraction by area and by multiplying numerators and denominators; multiplying by a factor below 1 gives a smaller product; "of" as multiplication; percent as hundredths; partition and measurement division; dividing by a fraction as multiplying by its reciprocal) is standard school mathematics, cross-checked against the Marble teaching-research records for the ten targets, which cite the IES fractions practice guide and the US Common Core and UK national curriculum statements. All recipes, fields, maps, prices and orders in items are **made-up labeled data**, verified by `check198.py` (184 checks, all passing; scratch area, not in the repo). The companion was checked with `style198.py` (0 em-dashes; 185 line checks within the word limits).
 
 ## Sources consulted
 
@@ -20,7 +20,7 @@ Date: 2026-10-25. Spec: [198](../specs/198-parts-of-parts.md). Companion: [198 t
 | 10 | "Fractions (kalasavarna-vyavahara) [Chapter 3]", *Ganita-sara-sangraha* (Rangacharya translation, 1912) | Wisdom Library | https://www.wisdomlib.org/hinduism/book/ganita-sara-sangraha-by-mahavira-acharya/d/doc1603020.html | Division of fractions: make the divisor's denominator its numerator and vice versa, then multiply; or multiply divisor and dividend by each other's denominators and divide as whole numbers. |
 | 11 | "Mahavira" | MacTutor | https://mathshistory.st-andrews.ac.uk/Biographies/Mahavira/ | *Ganita Sara Samgraha* about 850 CE; chapter 3 on fractions; Jain mathematician in southern India. |
 | 12 | "Ganitasarasangraha" | Britannica | https://www.britannica.com/topic/Ganitasarasangraha | Written by Mahavira around 850 CE; covers fractions. |
-| 13 | Marble teaching-research records for the nine targets | Marble repo at `7bd8b67` (CC BY-SA; paraphrased, not copied) | local clone | Pedagogy and misconceptions summarized in the spec's upstream check. |
+| 13 | Marble teaching-research records for the ten targets | Marble repo at `7bd8b67` (CC BY-SA; paraphrased, not copied) | local clone | Pedagogy and misconceptions summarized in the spec's upstream check. |
 
 ## Claims and status
 
@@ -41,7 +41,7 @@ Date: 2026-10-25. Spec: [198](../specs/198-parts-of-parts.md). Companion: [198 t
 ## Open checks
 
 1. The Nine Chapters problem with a 4/7 by 3/5 field: number and wording in a primary translation (Shen, Crossley and Lun, 1999). Not in child text.
-2. Mahavira's rule: a direct reading of the linked Rangacharya translation on 2026-10-25 locates the division rule at chapter 3, verse 8 (printed page 39). Its prose about multiplying fractions by each other's denominators is ambiguous when read as a modern procedure; the companion now gives the exact cross-products (a × d) ÷ (b × c) instead. The scan could not be fetched in this pass. Confirm against the printed notation or a scholarly study before treating the historical account as cleared.
+2. Mahavira's rule: a direct reading of the linked Rangacharya translation on 2026-10-25 locates the division rule at chapter 3, verse 8 (printed page 39). Its prose about multiplying fractions by each other's denominators is ambiguous when read as a modern procedure; the companion now gives the exact cross-products (a × d) ÷ (b × c), shown with numbers only: (3 × 8) ÷ (3 × 4) = 2. The scan could not be fetched in this pass. Confirm against the printed notation or a scholarly study before treating the historical account as cleared.
 3. Rhind date in the second pass: child text follows the British Museum (about 1550 BCE).
 
 ## Rights notes for images

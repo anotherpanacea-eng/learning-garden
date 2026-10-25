@@ -59,7 +59,7 @@ Companion to [spec 198](../specs/198-parts-of-parts.md). Use as written, after i
 > "Three of my four strips are orchard," says the orchard keeper. "Half of that is for Vadoalto's seedlings." Pip asks, "So, half the field?"
 
 **Longer:**
-> The orchard keeper's square field is cut into four strips. Three strips hold the orchard. The last one is the wet corner where the reeds grow.
+> The orchard keeper's square field is cut into four strips. Three strips hold the orchard. The last one is the low corner, which is often wet.
 >
 > "Vadoalto's orchard was flattened in the storm," she says. "They need seedlings. I'll grow them in half of my orchard."
 >
@@ -112,7 +112,7 @@ Companion to [spec 198](../specs/198-parts-of-parts.md). Use as written, after i
 **Hook:** The travelling show goes upstream by boat. Six players need supper on the way, and the order slip must be right.
 
 **Short:**
-> Six players, one boat, one order slip. The card feeds four. "Write it so I can't get it wrong," says the baker.
+> Six players, one boat, one order slip. The card feeds four. "Write it so I can't mix it up," says the baker.
 
 **Longer:**
 > The travelling show is going to Vadoalto by boat, and six players will need supper on the way. The baker hands you a blank order slip.
@@ -209,7 +209,7 @@ Worked example: 1. Oats for 6: 3/4 × 1 1/2. 2. 9/8 = 1 1/8. 3. "1 1/8 cups of o
 **H1. Loaves shared in Egypt** (A true thing from history; Seedling and up)
 > An Egyptian scroll, the Rhind papyrus, is about 3,500 years old. Its first problems share loaves of bread among 10 people.
 Keeper's note:
-> A scribe named Ahmose copied the scroll around 1550 BCE. Sharing 1 loaf among 10 gives each person 1/10. For 9 loaves, the scribe wrote each share as 2/3 + 1/5 + 1/30. Egyptian scribes wrote most fractions as sums of different unit fractions. That is still 9/10 of a loaf.
+> A scribe named Ahmose copied the scroll around 1550 BCE. Sharing 1 loaf among 10 gives each person 1/10. For 9 loaves, the scribe wrote each share as 2/3 + 1/5 + 1/30. That is still 9/10 of a loaf. Egyptian scribes wrote most fractions as sums of different unit fractions.
 
 **H2. A book that starts with fields** (A true thing from history; Sapling and up)
 > In China, about 2,000 years ago, a book called The Nine Chapters gathered math problems. Its first chapter is about fields. It works with fractions.
@@ -219,7 +219,7 @@ Keeper's note:
 **H3. Flip the divisor** (A true thing from history; Keeper's Desk)
 > Around the year 850, the Indian mathematician Mahavira wrote a rule: to divide by a fraction, swap its top and bottom, then multiply.
 Keeper's note:
-> His book is called the Ganita Sara Sangraha. His second way uses cross-products. For a/b divided by c/d, multiply a by d and b by c, then divide those products. For 3/4 divided by 3/8: 24 divided by 12 is 2. The same answer as T15 and T16.
+> His book is called the Ganita Sara Sangraha. He gave a second way too. For 3/4 divided by 3/8, multiply each top by the other fraction's bottom: 3 × 8 = 24 and 3 × 4 = 12. Then 24 divided by 12 is 2, the same answer as T15 and T16.
 
 ## Bench (a): The Cup Line
 
@@ -628,7 +628,7 @@ Prompt: Tap each sentence: true from this card, or not from this card.
 - "Mahavira wrote a rule for dividing by a fraction." *(true from this card)*
 - "His rule swaps the divisor's top and bottom, then multiplies." *(true from this card)*
 - "Mahavira was the first person ever to divide fractions." *(not from this card: the card does not say first)*
-- "His second way gives a different answer." *(not from this card: the card says both give the same answer)*
+- "His second way gives a different answer." *(not from this card: the card shows it gives the same answer, 2)*
 Hint: Read the card again. What does it say, and what does it leave out?
 Explanation: A card tells you some things. It does not tell you everything.
 
@@ -659,6 +659,7 @@ Step 3: **Skip for now.** You can come back any time.
 - **unit fraction**: one part, like 1/3 or 1/8.
 - **mixed number**: a whole number and a fraction, like 2 1/3.
 - **top-heavy fraction (improper fraction)**: a fraction with the top bigger than the bottom, like 7/3.
+- **factor**: a number that goes into another with nothing left over, like 3 into 12.
 - **simplest form**: the same fraction with the smallest numbers.
 - **scale**: make every amount bigger or smaller by the same multiplier.
 - **of**: in math, "3/4 of 200" means 3/4 × 200.
@@ -668,6 +669,7 @@ Step 3: **Skip for now.** You can come back any time.
 - **reciprocal**: a fraction flipped over; the reciprocal of 3/8 is 8/3.
 - **divisor**: the number you divide by.
 - **unit**: what a number counts or measures, like cups or meters.
+- **scribe**: a person whose job was writing and copying.
 
 ## Off-screen invitation (optional, grown-up-led)
 
