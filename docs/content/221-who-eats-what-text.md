@@ -283,7 +283,7 @@ Meter readouts: Living stuff in all the {level}: {b}. · Poison in all the {leve
 Energy overlay button: **Show energy too**. Readout: Energy in all the {level}: {e}.
 Guided first run (3 steps): (1) Poison stays. (2) Passed up: a tenth. (3) Feed the chain. Which "each unit" meter climbs highest?
 Total line: The total poison stays 1,000. It is packed into less and less living stuff.
-Breaks-down line: This poison breaks down before anything eats it. Only the plankton hold any. Every meter above them shows 0.
+Breaks-down line: This poison breaks down before anything eats it. Only the plankton hold any. Both poison meters above them show 0.
 Model line (A made-up model): The same share passes up each step. In "stays" mode, every bit of poison is eaten and kept. Real chains are messier. The meters show amounts, not harm.
 Real-figures card (A true thing from history): In 1967, scientists measured DDT in a salt marsh on Long Island, New York. Plankton held about 0.04 parts per million. One gull held 75 parts per million.
 
