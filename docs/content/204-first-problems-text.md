@@ -200,7 +200,7 @@ Worked example: 1. 6 + 3. 2. Count all: 1 to 9, nine counts. 3. Count on: 7, 8, 
 Worked example: 1. 2 + 9 is 9 + 2: two hops. 2. 47 + 10: one row down. 3. 57.
 
 **T15. One fact gives you more** (A true thing about math)
-> One array shows four facts. Adding a hundred changes only the hundreds digit. Ask: what do I already know?
+> One array shows four facts. Adding a hundred keeps tens and ones the same. If hundreds reach ten, make a thousand.
 Worked example: 1. 6 rows of 4: 24. 2. So 4 × 6 = 24. 3. 24 ÷ 4 = 6 and 24 ÷ 6 = 4.
 
 **T16. Long jobs: plan, then look back** (A true thing about math)
