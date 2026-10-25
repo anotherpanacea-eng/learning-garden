@@ -300,6 +300,9 @@ Keeper's note:
 **Opening:** Start with a price. Make it go up or down by a percent.
 **Buttons:** Up 10% · Down 10% · Up 25% · Down 20% · Undo a change · Show the multiplier
 **Change tag pattern:** "[old] × [multiplier] = [new]"
+**Disabled change message:** That change makes part of a cent. Try another change.
+**Bench note:** We use prices in whole cents here. Only changes that land on whole cents are offered. Nothing is rounded.
+**Undo note:** Undo returns to the last price.
 
 **Guided item:** The cider costs $2.00. It goes up 10%.
 - Step 1: 10% of $2.00 is $0.20.
