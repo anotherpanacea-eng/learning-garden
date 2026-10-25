@@ -556,10 +556,10 @@ Feedback B: Right changes the first number, not the second.
 Feedback C: Yes. (4, 3).
 
 **D4 (Sapling, number pair)**
-Prompt: Mirror (3, 2) in the up line through 5. Where does it land?
-Answer: (7, 2).
-Worked steps: 1. (3, 2) is 2 left of the line. 2. Go 2 right of the line: 5 + 2 = 7. 3. Height stays: (7, 2).
-Tests: (8, 2) (the line counted as a step); (5, 2) (stopping on the mirror line).
+Prompt: Mirror (2, 2) in the up line through 4. Where does it land?
+Answer: (6, 2).
+Worked steps: 1. (2, 2) is 2 left of the line. 2. Go 2 right of the line: 4 + 2 = 6. 3. Height stays: (6, 2).
+Tests: (5, 2) (one step short); (4, 2) (stopping on the mirror line).
 Hint: How far is the point from the mirror line?
 Explanation: Same distance on the other side, straight across the line at a square corner.
 
