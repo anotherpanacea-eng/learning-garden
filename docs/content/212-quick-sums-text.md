@@ -211,7 +211,7 @@ Keeper's note:
 **Opening:** Make jumps on the handrail. Big jumps first.
 **Buttons:** Jump to the ten · Count up · Jump past, step back · Double and adjust · Undo a jump
 **Arc label pattern:** "Jump [size], from [start] to [end]."
-**Which digit changes? prompt:** Before you jump: which digit will change?
+**Which digits change? prompt:** Before you jump: which digits will change? Pick every place you expect to change.
 **Chart labels:** Hundreds · Tens · Ones
 
 **Guided item:** Show 47 + 36 on the rail.

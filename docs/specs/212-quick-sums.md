@@ -70,7 +70,7 @@ Jane's **teach → guided → practice** order on every bench: a teach card with
 
 **(a) Tally Pot, model `tally-pot-v1`.** A clay pot with pebbles, and cloth bags that hold exactly ten. Buttons add or take a pebble or a bag; **Bag up ten** turns ten loose pebbles into one bag and **Open a bag** does the reverse. A **digit card** under the pot shows tens and ones and lights the digit that just changed. Sprout mode hides every numeral and asks with pictures (more bags, fewer bags, did the loose pile change?). Range 0-99. *A made-up model: one pebble for each crossing; real bridge counters use clickers or sensors.*
 
-**(b) Handrail Jumps, model `rail-jumps-v1`.** The handrail is a number line with a post at every ten (0-100) and a second rail with a post at every hundred (0-1000). The child drags or taps jump tiles (+1 to +9, tens, hundreds, and back jumps) and the jumps draw as arcs with their sizes. Strategy cards set up a move: **Jump to the ten**, **Count up**, **Jump past, step back** (compensation), **Double and adjust**. A three-column **Which digit changes?** chart asks for a prediction first, then lights the digits that changed. *A made-up model: the rail's posts are evenly spaced, as a ruler's are.*
+**(b) Handrail Jumps, model `rail-jumps-v1`.** The handrail is a number line with a post at every ten (0-100) and a second rail with a post at every hundred (0-1000). The child drags or taps jump tiles (+1 to +9, tens, hundreds, and back jumps) and the jumps draw as arcs with their sizes. Strategy cards set up a move: **Jump to the ten**, **Count up**, **Jump past, step back** (compensation), **Double and adjust**. A three-column **Which digits change?** chart lets the child select one or more places as a prediction first, then lights the digits that changed. Prediction cases stay below 1000 so the three columns cover every changed place. *A made-up model: the rail's posts are evenly spaced, as a ruler's are.*
 
 **(c) Ledger Columns, model `ledger-columns-v1`.** A ruled ledger page with column headings (hundred-thousands to ones, and a decimal point column at Keeper's Desk), and place-value counters in matching trays above. **Bag ten** moves ten counters into one counter of the next tray left, and a small carried digit appears in the next column at the same moment; **Open one** does the reverse and the crossed-out digit and new digits appear together. The child types every digit. **Spot the slip** shows a worked column with one named bug to find. *A made-up model: counters stand for crossings; the ledger page has no limit on columns, but practice stays within six places.*
 
@@ -105,7 +105,7 @@ Optional root `crossingsLedger` per explorer, absent until a first explicit acti
 crossingsLedger: {
   version: 1,
   pot:     { source, bags: 0-9, loose: 0-9, at },                       // latest only
-  jumps:   [{ source, caseId, start, jumps: [int], predict: 'O'|'T'|'H'|'TH', at }], // latest 12
+  jumps:   [{ source, caseId, start, jumps: [int], predict: [placeCode], at }], // latest 12
   columns: { [caseId]: { source, digits: [str], carries: [str], at } },
   boxes:   { [caseId]: { source, boxAt: 'part'|'whole', method, value, at } },
   plans:   { [caseId]: { source, steps: [{ op, value, method, name }], at } },
@@ -113,7 +113,7 @@ crossingsLedger: {
 }
 ```
 
-`source` freezes the model version and the item's choices and order. Codes and numbers only; step names are chosen from fixed tags, never typed. Validate ids and ranges only (bags and loose 0-9; digits single characters 0-9 or the point); never recompute or rewrite saved results on load, and never mark a saved column "fixed". An unreadable entry stays raw and exportable while the rest stays open. Support stays separate from answers; no mastery flag. Shared export, import, reset and explorer switching.
+`source` freezes the model version and the item's choices and order. Codes and numbers only; step names are chosen from fixed tags, never typed. A prediction stores the selected set of place codes (`O` ones, `T` tens, `H` hundreds), each at most once: `['O', 'T']` for 263 + 8, or `['T', 'H']` for 386 + 50. Preserve the selection on resume; it is not a recomputed result. Validate ids and ranges only (bags and loose 0-9; digits single characters 0-9 or the point); never recompute or rewrite saved results on load, and never mark a saved column "fixed". An unreadable entry stays raw and exportable while the rest stays open. Support stays separate from answers; no mastery flag. Shared export, import, reset and explorer switching.
 
 ## Curriculum fit
 

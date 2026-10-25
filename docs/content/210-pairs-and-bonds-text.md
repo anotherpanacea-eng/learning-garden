@@ -205,7 +205,7 @@ Keeper's note:
 **Number card:** numeral · word · nests (all three show the same number)
 **Build a number:** Put the tiles in order to make [spoken number].
 **Build a word:** Use the tiles to make the word for [numeral].
-**Word tiles:** one · two · three · four · five · six · seven · eight · nine · ten · eleven · twelve · thir · fif · teen · ty · twenty
+**Word tiles:** one · two · three · four · five · six · seven · eight · nine · ten · eleven · twelve · thir · fif · eigh · teen · ty · twenty
 
 **Guided item:** How many ducks on the bank?
 - Step 1: Tap a duck. It moves to a nest. Say "one".

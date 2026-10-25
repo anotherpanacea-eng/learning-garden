@@ -106,7 +106,7 @@ Optional root `seedStorehouse` per explorer, absent until a first explicit actio
 seedStorehouse: {
   version: 1,
   packing: [{ source, orderId, boxes: 0-10, packets: 0-10, loose: 0-9, at }],                 // latest 12
-  labels:  [{ source, orderId, typed: 'digits', tiles: [tileId], at }],                        // latest 12
+  labels:  [{ source, orderId, typed: digitString|null, draft: numericDraft|null, tiles: [tileId], at }],                        // latest 12
   counts:  [{ source, start: 0-1000, step: 1|5|10|100, dir: 'on'|'back', steps: 1-20, at }],  // latest 12
   line:    [{ source, lineId, target, placed, at }],                                           // latest 12
   orders:  { [orderId]: { source, split: [n, n], value, at } },
@@ -114,7 +114,7 @@ seedStorehouse: {
 }
 ```
 
-`source` freezes the model version and the item's choices and order. Codes and numbers only; typed numerals are stored as digit strings validated to 0-1000 (raw text kept as an invalid draft, never a wrong check). `placed` is an integer position on the stated line. Never recompute or rewrite saved results on load; validate ids and ranges only. An unreadable entry stays raw and exportable while the rest stays open. Support stays separate from answers; no mastery flag. Shared export, import, reset and explorer switching; lazy read plus explicit mutation as in spec 53.
+`source` freezes the model version and the item's choices and order. Codes, numbers and bounded numeric strings only. On explicit submit, a valid numeral is stored in `typed` as a digit string for 0-1000. `draft` may preserve an unfinished or out-of-range numeric input in this numeral field only: at most 8 ASCII characters, drawn only from digits, commas and spaces. It never holds arbitrary free text, enters an answer record or counts as a wrong check; other records keep their typed codes and numbers. `placed` is an integer position on the stated line. Never recompute or rewrite saved results on load; validate ids and ranges only. An unreadable entry stays raw and exportable while the rest stays open. Support stays separate from answers; no mastery flag. Shared export, import, reset and explorer switching; lazy read plus explicit mutation as in spec 53.
 
 ## Curriculum fit
 
