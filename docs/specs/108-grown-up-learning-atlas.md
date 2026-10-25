@@ -1,6 +1,6 @@
 # 108 · Grown-up learning atlas
 
-**Status:** independent six-lens text/data/source/license review cleared `a67d9fc`, with no P1/P2 findings. Root review agrees on the bounded data contract. Rendered-art review remains pending, so implementation is not cleared and no runtime is built. **Home:** `#atlas` and `#atlas/<topicId>`. **Source audit:** [108](../source-audits/108-grown-up-learning-atlas.md). **Responsive proposal:** [index and topic mock](assets/108-grown-up-learning-atlas.html). This is a grown-up catalog of existing declarations and pinned source relationships, not a lesson, assessment, progress view, or replacement for the child-facing `#map`.
+**Status:** independent six-lens text/data/source/license review cleared `a67d9fc`, with no P1/P2 findings. Root review agrees on the bounded data contract. Independent 320/820 index/detail mock review passed on 2026-10-25. This clears the rendered proposal only; no runtime is built. **Home:** `#atlas` and `#atlas/<topicId>`. **Source audit:** [108](../source-audits/108-grown-up-learning-atlas.md). **Responsive proposal:** [index and topic mock](assets/108-grown-up-learning-atlas.html). This is a grown-up catalog of existing declarations and pinned source relationships, not a lesson, assessment, progress view, or replacement for the child-facing `#map`.
 
 ## Purpose and exact boundary
 
@@ -54,4 +54,6 @@ The candidate review packet must include the source audit, original HTML and ren
 
 ## Current review boundary
 
-The original HTML is retained as an unrendered design proposal. A browser file-protocol preview was blocked by browser security policy; no alternate browser or indirect preview was attempted. Independent review has checked the text, data shape, source meanings and licenses only. The required 320/820 rendered-art gate is still open. Do not infer responsive fit or implementation readiness from this draft. Publication and any future runtime build remain separate gates.
+The exact HTML proposal at `38b039b` was rendered in temporary local Chrome at 320 and 820 on 2026-10-25, with both index and detail screenshots inspected. No horizontal overflow, clipping or material visual finding was observed; visible control labels provide at least 44px targets. This clears the static mock gate only, not real catalog behavior, speech, Safari or implementation.
+
+Implementation notes: the existing app eagerly imports activities; lazy-load only this new catalog rather than promise a router rewrite. Preserve a requested atlas deep link through explorer selection. Own the filter DOM or preserve focused nodes/caret across global rerenders. Use the two specified adult entry links and existing site header; mock navigation is a preview affordance. Add the specified curriculum-only JSON download and license layers in the actual build. The pinned 9-incoming/15-outgoing maxima are measured reference values, never permanent validator limits. Actual routing, filtering, pagination, loading/failure guards and save neutrality still need runtime acceptance checks.
