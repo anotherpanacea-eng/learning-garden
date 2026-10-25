@@ -8,7 +8,7 @@ export const startingPages=[
  {id:'french',label:'French',title:'How much French today?',purpose:'French can start somewhere different from English and math.',options:[['keep','Keep my starting choice',''],['auto','Use suggestions','Let recent French visits suggest an amount.'],...[1,2,3].map(n=>[n,frenchLengths[n],''])]},
  {id:'begin',label:'Begin',title:'Choose your first errand',purpose:'These choices are for future orders and new reading visits. Anything waiting keeps its own numbers and pages.'}
 ];
-const destinations=[['#cafe','Go to the Café','Feed a waiting neighbor.'],['#paris','Read in Paris','Follow a story and a clue.'],['#french','Explore Paris in French','Read a little French together.'],['#explore','Choose another place','Keep every destination open.']];
+const destinations=[['#desk','Open the Keeper’s Desk','Sit with a longer question from the town.'],['#cafe','Go to the Café','Feed a waiting neighbor.'],['#paris','Read in Paris','Follow a story and a clue.'],['#french','Explore Paris in French','Read a little French together.'],['#explore','Choose another place','Keep every destination open.']];
 let visit=null;
 export function resetStartingFlow(){visit=null;}
 export const startingInvitation=()=>'<aside class="starting-invitation"><a class="secondary" href="#begin">Find a place to begin</a><p>Choose numbers and reading amounts, or explore as you are.</p></aside>';

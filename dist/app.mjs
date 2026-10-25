@@ -1,3 +1,4 @@
+import {deskPage,deskEntry,bindDesk} from './keepers-desk-ui.mjs';
 import {rowsPage,rowsNotes,bindRows,resetRowsVisit} from './ribbon-rows-ui.mjs';
 import {offerHowto,keepOfferingHowto} from './drawn-howto.mjs';
 import {shuttersPage,shuttersNotes,bindShutters,resetShuttersVisit} from './shutters-ui.mjs';
@@ -157,7 +158,7 @@ function gardenArt(){let flowers='';for(let r=0;r<3;r++)for(let c=0;c<4;c++)flow
 function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back">← Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
 function noteInstructionArrival(){if(choosingExplorer)return;const [desk,page]=(location.hash||'').slice(1).split('/');if(page==='instructions'&&['post','loft'].includes(desk)&&noteInstructionEntry(state,desk))save();}
 function navigate(hash){stopBell('navigation');if(location.hash===hash){noteInstructionArrival();render();}else location.hash=hash;}
-function home(){return startingInvitation()+gardenHome(state,persist)+pileEntry()+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
+function home(){return startingInvitation()+deskEntry()+gardenHome(state,persist)+pileEntry()+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
 function startCheckin(){if(state.baseline.complete){navigate('#summary');return;}const q=checkin[state.baseline.index];activity={mode:'checkin',q};const draft=state.baseline.draft;active=draft?.questionId===q.id?{...blank(),...draft}:blank();
   if(draft?.questionId!==q.id&&(state.exposures?.includes(`${q.a}x${q.b}`)||state.exposures?.includes(`${q.b}x${q.a}`)))active.exposed=true;
   screen='activity';render();focusActivity();}
@@ -329,6 +330,7 @@ function render(){
   let html,joiningExamples=null;
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
   else if(bridgesBench)html=bridgesPage(explorerStore.active.id);
+  else if(root==='desk')html=deskPage(state);
   else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id);
   else if(bellBench)html=bellStudioPage(state);
   else if(labelBench)html=labelPage(state,detail,explorerStore.active.id);
@@ -497,6 +499,7 @@ function bindBroadExtras(){
 }
 function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
 function bind(){
+ bindDesk(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindRows(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindShutters(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindPile(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});

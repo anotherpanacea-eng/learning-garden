@@ -53,6 +53,7 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/keepers-desk-checks.mjs
 node test/field-kit-checks.mjs
 node test/riddles-checks.mjs
 node test/field-kit-integration-checks.mjs

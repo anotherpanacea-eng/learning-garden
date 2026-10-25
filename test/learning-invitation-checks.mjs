@@ -12,7 +12,7 @@ let checks=0;
 const check=(x,message)=>{assert.ok(x,message);checks++;};
 const equal=(a,b,message)=>{assert.deepEqual(a,b,message);checks++;};
 for(const p of learningPlaces){
- check(/^#(?:loft|words|living|numbers|post|workshop|science|cafe|orchard|paris|activities\/(?:measurement|fractions))$/.test(p.href),'destination has a working app route');
+ check(/^#(?:desk|loft|words|living|numbers|post|workshop|science|cafe|orchard|paris|activities\/(?:measurement|fractions))$/.test(p.href),'destination has a working app route');
  check(learningInvitations(p.id).includes('#explore'),'every place can reach the directory');
  for(const topic of p.topics){check(byId.has(topic.id),'topic link exists in bundled graph');check(topic.scope.length>40,'partial match has explanatory scope');check(placeMatches(topic.id).some(x=>x.id===p.id),'map can reach matched activity');}
 }

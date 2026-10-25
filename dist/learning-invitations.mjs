@@ -1,5 +1,6 @@
 // Original thematic bridges. Topic matches describe only the stated activity scope.
 export const learningPlaces=[
+ {id:'desk',href:'#desk',mark:'▤',title:'The Keeper’s Desk',body:'Longer cases from the town, with less guidance. Compare costs, read records and keep a recommendation.',topics:[]},
  {id:'loft',href:'#loft',mark:'♬',title:'Make a little puppet show',body:'Choose scenes, perform a story, and try a new idea for your audience.',topics:[{id:'mt_U_8iVFZuHH',scope:'Practices telling a story in order with picture cards, for an audience. It doesn’t check discussion, free story writing or the wider topic.'}]},
  {id:'words',href:'#words',mark:'❀',title:'Grow a word and a new idea',body:'Try word plants and meaning-changing cuttings. Discover familiar words and combinations to wonder about.',topics:[{id:'mt_HrgDjxcWvf',scope:'Explores a set list of prefix and suffix meanings, plus unscored talk about new words. It doesn’t check independent decoding, spelling or the whole topic.'}]},
  {id:'living',href:'#living',mark:'❦',title:'Follow a Living Garden trail',body:'Follow a snail’s silver trail to a lost café parcel.',topics:[]},
