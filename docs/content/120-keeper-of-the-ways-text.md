@@ -218,9 +218,9 @@ Joshua chose this as the next archive pack (2026-10-23). This is an outline for 
 | 14 October 1957 | The Turia flooded Valencia, in two waves on the same day. Much of the city was under water. Many people died. |
 | July 1958 | The national government chose the *Plan Sur*: dig a new channel for the river around the south of the city. |
 | 23 December 1961 | A national law (Ley 81/1961, published in the BOE) made the plan official. This is a public-domain Spanish primary source. |
-| 22 December 1969 | The new channel officially opened; work went on until about 1973. It is about 12 km long; sources give its width as 175, 200 or 250 m *(check)*. |
 | 1966 | A city plan proposed building a road along the dry old riverbed. |
-| 1970s | Neighbors campaigned for a park instead. The city cultural service records the Valencian slogan *El riu es nostre i el volem verd*: "The river is ours, and we want it green." Other variants need their own source if quoted. |
+| 22 December 1969 | The new channel officially opened; work went on until about 1973. It is about 12 km long; sources give its width as 175, 200 or 250 m *(check)*. |
+| 1970s | Neighbors campaigned for a park instead. The city cultural service records the Valencian slogan *El riu és nostre i el volem verd*: "The river is ours, and we want it green." Other variants need their own source if quoted. |
 | 1978 or 1979 *(sources disagree)* | The city council decided the whole old riverbed would be a garden. The Keeper's Desk case turns this disagreement into a task. |
 | 1981 | The architect Ricardo Bofill was asked to plan the park. |
 | 1986 | The regional tourism authority dates the gardens' inauguration to 1986 and describes a 9 km route. This is an attributed account; it does not settle which individual sections opened when. |
@@ -229,7 +229,7 @@ Joshua chose this as the next archive pack (2026-10-23). This is an outline for 
 
 **Short text (Spanish):** En 1957, el río de Valencia inundó la ciudad. Después, la ciudad excavó un camino nuevo para el río, por fuera. El cauce viejo quedó seco. Algunas personas querían una carretera allí. Los vecinos querían un jardín. Hoy es un parque largo y verde.
 
-**The slogan, for older learners:** The neighbors wrote it in Valencian, the language many people in Valencia speak alongside Spanish. In Spanish it would be *El cauce del Turia es nuestro y lo queremos verde.* Comparing the two is a small lesson in how close the languages are.
+**The slogan, for older learners:** The neighbors wrote it in Valencian, the language many people in Valencia speak alongside Spanish. In Spanish it would be *El río es nuestro y lo queremos verde.* Comparing the two is a small lesson in how close the languages are.
 
 **Jobs, one per depth:**
 
