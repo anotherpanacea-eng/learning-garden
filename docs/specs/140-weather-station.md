@@ -1,4 +1,4 @@
-# 140. Hollis's Weather Station: instruments, the water cycle, and weather versus climate
+# 140. The Old Weather Station: instruments, the water cycle, and weather versus climate
 
 Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md). Every child-facing line is in [the companion text](../content/140-weather-station-text.md); sources are in [the source audit](../source-audits/140-weather-station.md). Code and art are for the implementation pass.
 
@@ -22,15 +22,15 @@ This spec owns those three things, at the mill where the story's flood records l
 
 **Route:** `#science/station`, a sibling of `#science/window` and `#science/rain`, linked from the Water Lab hub, from Rain Paths, from Cold Window, and (when spec 123 or spec 33's mill exists) from the mill's flood post. Open from the start.
 
-**The place:** a small fenced patch of grass by the mill's flood post. Hollis's old station: a white louvered box on legs (a Stevenson screen) with a thermometer inside, a rain gauge on a post in the open, a wind vane on a pole, a homemade cup anemometer, and a barometer hanging inside the mill door. A brass plate reads *Willowbank weather, kept by H.*
+**The place:** a small fenced patch of grass by the mill's flood post. The old station: a white louvered box on legs (a Stevenson screen) with a thermometer inside, a rain gauge on a post in the open, a wind vane on a pole, a homemade cup anemometer, and a barometer hanging inside the mill door. A brass plate reads *Willowbank weather, kept by H.* The old Keeper is Hollis (spec 120); child text before page 3 (end of Act III) and all act-agnostic text say "the old Keeper" and never explain the H.
 
 **Story links (future adapters to spec 120):**
 
 | Act and chapter | Beat (full text in the companion) | Job depths |
 | --- | --- | --- |
 | I, *mend the village* | After the storm the miller and Hob Pennick find the vane snapped off its pole. Pip mends it and insists the arrow points where the wind is going. It doesn't. | Sprout: which tool tells which thing. Seedling: read the vane. |
-| II, *a garden across the seasons*, and the Act II ending | When page 2 (the flood ledger) dries, the librarian lays it beside Hollis's rain record from the station. The town starts reading the instruments again "so next time we'll know". | Seedling: a week of rain in mm. Sapling: why the gauge stands away from the trees. |
-| III, *letters up and down the river* | Nuria writes that rain fell in Vadoalto first. The flood post at the mill rose later. Hollis's note: *Rain up there is the brook down here, later.* | Sapling: the rain-to-brook lag card (qualitative). |
+| II, *a garden across the seasons*, and the Act II ending | When page 2 (the flood ledger) dries, the librarian lays it beside the station's rain record. The town starts reading the instruments again "so next time we'll know". | Seedling: a week of rain in mm. Sapling: why the gauge stands away from the trees. |
+| III, *letters up and down the river* | Nuria writes that rain fell in Vadoalto first. The flood post at the mill rose later. The old Keeper's note: *Rain up there is the brook down here, later.* | Sapling: the rain-to-brook lag card (qualitative). |
 | IV, *the old map and Hollis's account* | Bramble reads two decade averages off the long record and says "wetter". Wren Halloway asks whether one difference proves it. | Keeper's Desk: bench (d), older part. |
 
 One shared scene per chapter; any job is a whole contribution; nothing here opens or locks a story place. The station's record is Willowbank fiction; the instruments, units and science are real.
@@ -44,7 +44,7 @@ All facts below are checked in the [source audit](../source-audits/140-weather-s
 - **Stevenson screen**: a white box with louvered (slatted) sides, on legs over grass. White reflects sunlight, the louvers let air through and keep sun and rain off, so the thermometer measures the air, not sunshine on the glass. The UK Met Office places its thermometers about 1.25 m above the ground. The screen was designed by the Scottish engineer Thomas Stevenson (father of the writer Robert Louis Stevenson) and reported in 1864.
 - **Rain gauge** collects rain in a funnel and measures it as a **depth** in millimeters: how deep the rain would be if none ran off, soaked in or dried up. 1 mm of rain over 1 square meter is 1 liter. It is read, then emptied, once per period (usually each day), so each reading is that period's rain only. It stands in the open: a common rule is at least twice an obstacle's height away from it (some guides say two to four times). A gauge under a tree catches less rain than falls.
 - **Wind vane** turns on a pivot. Its tail has the larger surface, so the wind swings the tail away and the **arrow points into the wind**, toward where the wind comes from. Winds are named for where they come **from**: a west wind blows from the west, toward the east.
-- **Anemometer** measures wind speed. A cup anemometer spins faster in a faster wind. Hollis's homemade one is counted in turns per 30 seconds, which compares windier and calmer moments but is not a calibrated speed.
+- **Anemometer** measures wind speed. A cup anemometer spins faster in a faster wind. The homemade one is counted in turns per 30 seconds, which compares windier and calmer moments but is not a calibrated speed.
 - **Barometer** measures air pressure, in hectopascals (hPa; 1 hPa = 1 millibar). Average sea-level pressure is about 1013 hPa. Low pressure tends to bring unsettled weather (cloud and rain), high pressure settled weather. A falling barometer makes unsettled weather more likely; it promises nothing.
 - **Units matter more than size.** 15 means nothing alone: 15 mm of rain and 15 °C are different things.
 
@@ -56,7 +56,7 @@ All facts below are checked in the [source audit](../source-audits/140-weather-s
 
 **Weather and climate.** Weather is the state of the air on a day: temperature, rain, wind, cloud. Climate is the pattern of weather in a place over a long time, described by averages and ranges. The World Meteorological Organization's standard climate "normals" are averages over 30 years, currently 1991 to 2020, updated each decade. Contrasts: one rainy month vs a wet climate; one cold day vs a cold place. A climate includes rain, wind and seasons as well as temperature.
 
-**The long record (made up).** Thirty yearly rainfall totals for Willowbank, Hollis's record years 1 to 30. These numbers were made up for this game; they are not data for any real place.
+**The long record (made up).** Thirty yearly rainfall totals for Willowbank, record years 1 to 30. These numbers were made up for this game; they are not data for any real place.
 
 | Years | Yearly rain (mm) | Mean |
 | --- | --- | --- |
@@ -97,7 +97,7 @@ Jane's order throughout: **teach** (one idea and one worked example, steps revea
 
 **(c) Weather or climate?** Eight cards, sorted into two baskets (Weather / Climate), with per-card feedback and a **Why?** reveal. A card can be moved back. Nothing is scored.
 
-**(d) The long record.** Hollis's record as a bar chart of 30 years (equal intervals, axis labeled mm, made-up label on screen). Tools: **Level the bars** (drag any set of selected bars into a common height, which shows the mean), **Line at the mean** toggle, **Sort the bars** (for median and range). Older part: two decade boxes; the child computes both means, then answers "Does this difference prove Willowbank is getting wetter?" with three choices and a grown-up-read **Say why** box. Every screen: *Made-up numbers for a made-up village.*
+**(d) The long record.** The record as a bar chart of 30 years (equal intervals, axis labeled mm, made-up label on screen). Tools: **Level the bars** (drag any set of selected bars into a common height, which shows the mean), **Line at the mean** toggle, **Sort the bars** (for median and range). Older part: two decade boxes; the child computes both means, then answers "Does this difference prove Willowbank is getting wetter?" with three choices and a grown-up-read **Say why** box. Every screen: *Made-up numbers for a made-up village.*
 
 ## Problem sets
 
@@ -176,7 +176,7 @@ From the pinned `curriculum/marble/dependencies.json`:
 | Using Weather Instruments | Temperature & Thermometers (`mt_PrWc-HZzDl`) | Taught inline (same unit, Sprout thermometer job). |
 | The Water Cycle | Cloud Types (`mt_IhWzO4sQPg`) | Partly supported: the cloud card (drops not vapor; three kinds). Identification from a real sky is not taught; documented gap. |
 | The Water Cycle | Rain & Puddles (`mt_TlLE4cZgOr`) | Taught inline (same unit, puddle item and worked example). |
-| Weather vs Climate | Geography & Local Weather (`mt_hjJkBWruO6`) | Partly: the "cold day vs cold place" contrast and Hollis's coast vs Willowbank card. No lesson on why places differ; documented gap. |
+| Weather vs Climate | Geography & Local Weather (`mt_hjJkBWruO6`) | Partly: the "cold day vs cold place" contrast and the seaside vs Willowbank card. No lesson on why places differ; documented gap. |
 | Weather vs Climate | Types of Weather (`mt_jc9k_HJQGd`) | Supported, as above. |
 | Calculating the Mean | Statistical Analysis Vocabulary (`mt_fmm-P17Vka`) | Taught inline: mean, median, range and average in the glossary and teach card. |
 | Calculating the Mean | Addition and subtraction strategies, age 10+ (`mt_JH_6RpNWjr`) | Avoided by design: all data are whole numbers. The claim covers whole-number means only. |
@@ -186,7 +186,7 @@ Temperature & Thermometers, What Is Wind?, Rain & Puddles and Evaporation and co
 
 ## Checks for implementation
 
-- **Script check, run 2026-10-25** (`python3 -I`, scratch area, not in the repo): confirmed the record's 30 values total 27,000 (mean 900), decade means 884, 904 and 912, median 898.5, range 625 (640 to 1,265), year 30 = 900; and every numeric answer in the companion: A3 15 °C, A4 7 mm, A7 26 mm, A8 7 mm, A9 6 mm, A10 2 in, A11 68 °F and 23 °F, A12 a 12 hPa fall, D1 year 12 tallest of years 11 to 15, D2 900, D3 921, D4 median 882 and range 353, D5 365, D6 year 30 = 900, D7 28 mm, D8 missing year 800, D9 broken-gauge mean 720; teach examples 9 °C, 25.4 mm and 254 mm. A build test repeats these from the shipped data.
+- **Script check, run 2026-10-25** (`python3 -I`, outside the repo): confirmed the record's 30 values total 27,000 (mean 900), decade means 884, 904 and 912, median 898.5, range 625 (640 to 1,265), year 30 = 900; and every numeric answer in the companion: A3 15 °C, A4 7 mm, A7 26 mm, A8 7 mm, A9 6 mm, A10 2 in, A11 68 °F and 23 °F, A12 a 12 hPa fall, D1 year 12 tallest of years 11 to 15, D2 900, D3 921, D4 median 882 and range 353, D5 365, D6 year 30 = 900, D7 28 mm, D8 missing year 800, D9 broken-gauge mean 720; teach examples 9 °C, 25.4 mm and 254 mm. A build test repeats these from the shipped data.
 - Thermometer and gauge scales use equal tick spacing; at 320 px wide each minor tick is at least 6 px apart, otherwise the scale scrolls vertically, never squeezes.
 - The wind vane accepts only "from" names as correct, and every vane feedback names both where the wind comes from and where it goes.
 - The water-cycle ring accepts any rotation of the correct order.

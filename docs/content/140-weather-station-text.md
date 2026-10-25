@@ -1,18 +1,18 @@
-# Hollis's Weather Station: all child-facing text
+# The Old Weather Station: all child-facing text
 
-Companion to [spec 140](../specs/140-weather-station.md). Use as written, after independent review and a subject check. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him), Dot a ladybug (she/her), Bramble a girl witch (she/her) with a magpie, the miller she/her (with her cat), Hob Pennick he/him, Wren Halloway she/her, the librarian they/them, Hollis a gray heron (they/them), Nuria an otter (she/her). Lines marked `[check]` need a subject check before build. Nothing here is scored.
+Companion to [spec 140](../specs/140-weather-station.md). Use as written, after independent review and a subject check. `{guide}` is the explorer's chosen companion. Pip is a fox (he/him), Dot a ladybug (she/her), Bramble a girl witch (she/her) with a magpie, the miller she/her (with her cat), Hob Pennick he/him, Wren Halloway she/her, the librarian they/them, Hollis a gray heron (they/them; "the old Keeper" before Act IV), Nuria an otter (she/her). Lines marked `[check]` need a subject check before build. Nothing here is scored.
 
 **Labels used throughout** (same wording every time):
-- **A story from Willowbank:** fiction. The village, its people, Hollis's record and its numbers.
+- **A story from Willowbank:** fiction. The village, its people, the station's record and its numbers.
 - **True science:** checked facts about weather, instruments and water.
-- **Made-up numbers:** shown on every screen that uses Hollis's record or a placement reading.
+- **Made-up numbers:** shown on every screen that uses the station's record or a placement reading.
 
 ## Arriving
 
-**Place title:** Hollis's Weather Station
+**Place title:** The Old Weather Station
 
 **First visit (Short):**
-> A white box on legs, a tube on a post, an arrow on a pole. "Hollis's old weather station," says {guide}. "Shall we wake it up?"
+> A white box on legs, a tube on a post, an arrow on a pole. "The old Keeper's weather station," says {guide}. "Shall we wake it up?"
 
 **First visit (Longer):**
 > Behind the mill, by the flood post, there's a little square of grass with a fence round it. In the middle stands a white wooden box on four legs, with slatted sides like a shutter. Nearby, a glass tube sits on a short post. A pole holds a metal arrow, and next to it, four little cups on sticks.
@@ -38,7 +38,7 @@ Companion to [spec 140](../specs/140-weather-station.md). Use as written, after 
 **Longer:**
 > The morning after the storm, the miller and Hob Pennick walk the mill fence. In the nettles they find the station's wind vane, snapped clean off its pole.
 >
-> "Hollis would want that back up," says the miller. Her cat sits on the flood post and supervises.
+> "The old Keeper would want that back up," says the miller. Her cat sits on the flood post and supervises.
 >
 > Pip takes charge. He pushes the vane back onto its pin and gives it a spin. It wobbles, then settles, arrow pointing at the hills.
 >
@@ -57,13 +57,13 @@ Companion to [spec 140](../specs/140-weather-station.md). Use as written, after 
 
 ### Act II, *a garden across the seasons*, and the Act II ending: Two records side by side
 
-**Hook:** Page 2 is dry. It's Hollis's flood ledger. The librarian thinks it has a partner.
+**Hook:** Page 2 is dry. It's the old Keeper's flood ledger. The librarian thinks it has a partner.
 
 **Short:**
-> The librarian lays the flood ledger beside Hollis's rain book from the station. Big floods, and the rain before them. "We should keep reading," says Dot.
+> The librarian lays the flood ledger beside the old Keeper's rain book. Big floods, and the rain before them. "We should keep reading," says Dot.
 
 **Longer:**
-> Page 2 comes free on the bakery windowsill: Hollis's flood ledger, a column of years and how high the brook rose at the mill's flood post.
+> Page 2 comes free on the bakery windowsill: the old Keeper's flood ledger, a column of years and how high the brook rose at the mill's flood post.
 >
 > The librarian frowns at it, then goes to the station and comes back with a damp notebook from inside the white box. *Rain, Willowbank, by the year.*
 >
@@ -78,14 +78,14 @@ Companion to [spec 140](../specs/140-weather-station.md). Use as written, after 
 > "Then we'll read it every morning," says Dot. "So next time, we'll know."
 
 **Keeper's note:**
-> A flood depends on how much rain falls and how fast, how wet the ground already is, and where the rain lands. That's why a yearly total and a flood height don't always match. Hollis's two books together are a better record than either alone.
+> A flood depends on how much rain falls and how fast, how wet the ground already is, and where the rain lands. That's why a yearly total and a flood height don't always match. The two books together are a better record than either alone.
 
 ### Act III, *letters up and down the river*: Rain up there
 
 **Hook:** Nuria's letter says it rained in Vadoalto all night. In Willowbank it barely drizzled. So why is the flood post rising?
 
 **Short:**
-> Rain all night in Vadoalto, writes Nuria. Hardly a drop here, yet the brook rises by afternoon. Hollis wrote: *Rain up there is the brook down here, later.*
+> Rain all night in Vadoalto, writes Nuria. Hardly a drop here, yet the brook rises by afternoon. The old Keeper wrote: *Rain up there is the brook down here, later.*
 
 **Longer:**
 > The courier brings Nuria's letter at breakfast. *Llovió toda la noche.* "It rained all night," she writes. "Our flood post went up a hand's width."
@@ -96,7 +96,7 @@ Companion to [spec 140](../specs/140-weather-station.md). Use as written, after 
 >
 > "It didn't rain here," says Pip. "Where did the water come from?"
 >
-> {guide} opens Hollis's rain book. On the inside cover, in Hollis's spiky hand: *Rain up there is the brook down here, later.*
+> {guide} opens the rain book. On the inside cover, in a spiky hand: *Rain up there is the brook down here, later.*
 >
 > "The rain fell on the hills upstream," says the miller. "It has to run down the slopes and along the brook before it gets to us. That takes time."
 >
@@ -180,7 +180,7 @@ Revealed one tap at a time.
 
 ### The placement bench
 
-**Card:** Hollis's notes say where each instrument should stand. Try a spot and see.
+**Card:** Notes say where each instrument should stand. Try a spot and see.
 
 | Spot | Thermometer result | Rain gauge result |
 | --- | --- | --- |
@@ -264,11 +264,11 @@ Revealed one tap at a time.
 
 ### Contrast card: a cold day and a cold place
 
-> Hollis lives by the sea, where winters are usually mild. One frosty morning there is weather. A place where winters are usually freezing has a cold climate.
+> By the sea, winters are often mild. One frosty morning there is weather. A place where winters are usually freezing has a cold climate.
 
 ## Bench (d): The long record (Made-up numbers)
 
-**Heading:** Hollis's rain book: 30 years
+**Heading:** The old rain book: 30 years
 
 **Always shown:** Made-up numbers for a made-up village. They aren't real data for any place.
 
@@ -342,7 +342,7 @@ Each item gives the prompt, the answer, what each wrong choice tests, a hint, an
 - I'm stuck: A dark car in the sun gets hotter than the air around it. A thermometer in the sun is like that. Now try.
 - Explanation: Sunshine heats the thermometer itself. The white, slatted box shades it but lets air through.
 
-**A7 (Seedling).** Shown: Hollis's week of rain, in mm (Made-up numbers): Mon 0, Tue 4, Wed 12, Thu 0, Fri 7, Sat 3, Sun 0.
+**A7 (Seedling).** Shown: a week of rain, in mm (Made-up numbers): Mon 0, Tue 4, Wed 12, Thu 0, Fri 7, Sat 3, Sun 0.
 - Prompt: How much rain fell all week?
 - Steps (on request): 4 + 12 = 16 · 16 + 7 = 23 · 23 + 3 = 26
 - Answer: 26 mm.
@@ -357,7 +357,7 @@ Each item gives the prompt, the answer, what each wrong choice tests, a hint, an
 - Wrong entries named: 12 (`gauge-total`: the gauge shows all rain ever); 17 (`add-not-subtract`).
 - Hint: Some of that 12 was already there on Monday.
 - I'm stuck: A jar had 2 acorns. Now it has 5. How many were added? 3. Now try the gauge.
-- Explanation: 12 − 5 = 7 mm. That's why Hollis wrote: empty it after every reading.
+- Explanation: 12 − 5 = 7 mm. That's why the note says: empty it after every reading.
 
 **A9 (Sapling).** Shown: the gauge under the oak reads 3 mm. The gauge on open grass reads 9 mm.
 - Prompt 1: Which is the fair reading?
@@ -464,7 +464,7 @@ Each item gives the prompt, the answer, what each wrong choice tests, a hint, an
 
 (Willowbank and Vadoalto's climates are part of the story, not real places.)
 
-**C2 (Seedling).** Shown: it snowed one morning by the sea where Hollis lives. Winters there are usually mild.
+**C2 (Seedling).** Shown: it snowed one morning in a town by the sea. Winters there are usually mild.
 - Prompt: Is the climate there cold now?
 - Choices: No, one snowy morning is weather ✓ · Yes, it snowed, so it's cold there now (`one-day-climate`) · Nobody can say anything about a climate (`record-proves-nothing`)
 - Feedback: no: "Yes. Mild winters over many years still make a mild climate." Yes: "One morning can't change many years. That's weather." Nobody: "Many years of records tell us the usual pattern."
@@ -592,7 +592,7 @@ Each item gives the prompt, the answer, what each wrong choice tests, a hint, an
 
 **What this teaches:** how weather instruments work and why they stand where they do; the units (°C with °F for US readers, mm of rain, hPa); the water cycle as a loop with no water lost; the difference between weather and climate; and the mean, median and range on a made-up 30-year record, including why one difference between two averages doesn't prove a trend.
 
-**What it does not claim:** Hollis's rain record, every placement reading and every week of rain are made up for a made-up village. The bench makes no forecast and gives no safety advice. The brook's rise after upstream rain is described in words only, without hours. The climate-change note reports the IPCC's 2021 findings in brief; the game teaches neither the greenhouse effect nor its causes, and nothing links the fictional storm to climate change.
+**What it does not claim:** The rain record, every placement reading and every week of rain are made up for a made-up village. The bench makes no forecast and gives no safety advice. The brook's rise after upstream rain is described in words only, without hours. The climate-change note reports the IPCC's 2021 findings in brief; the game teaches neither the greenhouse effect nor its causes, and nothing links the fictional storm to climate change.
 
 **Sources in brief:** WMO and NOAA NCEI on 30-year climate normals; NASA Climate Kids on weather and climate; the UK Met Office on measuring weather, thermometer screens and pressure; USGS Water Science School on condensation and the water cycle; NASA Glenn on how a wind vane turns; the IPCC Sixth Assessment Report (2021) Summary for Policymakers. Full list in the source audit.
 

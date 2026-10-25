@@ -1,4 +1,4 @@
-# Source audit: spec 140, Hollis's Weather Station
+# Source audit: spec 140, The Old Weather Station
 
 Date: 2026-10-25. For [spec 140](../specs/140-weather-station.md) and [its companion text](../content/140-weather-station-text.md).
 
