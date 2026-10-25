@@ -322,7 +322,7 @@ Adopted as design conventions:
 - **Short hooks** (Jane caps hooks and intros at about 30 words). Every act has a hook of 30 words or fewer, and every scene has a Short version under the same cap.
 - **"You have to do something from the past to make it to the future."** Earlier pages and kept plans come back in later acts (the ledger in IV, the Act IV plan in the long rain), and spec 74's Town Remembers errands can draw on them. Here they never stand as a gate.
 - **Teach before the finale.** An act's ending asks nothing the act's own chapters did not offer.
-- **A finished quest stays finished, and the quest's story is locked once started.** A reached act ending stays reached, and page text the explorer has read is kept as read, even if the wording is later revised.
+- **A finished story beat stays finished.** Reached act endings stay reached; scene, page and letter IDs map to current narrative text in the UI. Activity-owned frozen task/source artifacts keep their own preservation rules.
 - **Visit a new area.** Act II deliberately brings in S7 weather records, a strand with no current references.
 - **Tap a word.** Jane's glossary convention fits the Keeper's Pages: *marsh*, *flood post*, *ledger*, *upstream*.
 
