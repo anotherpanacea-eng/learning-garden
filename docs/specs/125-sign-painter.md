@@ -2,8 +2,6 @@
 
 Status: **proposed; awaiting independent spec review, a science check of the color lines and a licence check of the artworks.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Act II and Lantern Night in [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/125-sign-painter-text.md); this spec holds the benches, the models and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec 120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
-
 ## Purpose
 
 Nowhere in the garden are color, shape and pattern the material. The Sign Painter is a making studio where the town's shops, stalls and the post office order new signs after the storm. Each order is a short written brief; the child designs a sign to it with shapes, mirror lines, repeating borders and mixed colors; the customer replies about the choices the child made.

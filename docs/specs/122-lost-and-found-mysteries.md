@@ -2,8 +2,6 @@
 
 Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II and IV of [spec 120](120-keeper-of-the-ways.md). Every clue, note and message is in [the companion text](../content/122-lost-and-found-text.md); this spec holds the rules, the checker and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec 120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
-
 ## Purpose
 
 Small town mysteries solved with a logic grid. A note says something went missing or something odd happened; witnesses leave short notes; the child sorts what each witness **saw** from what they **think**, then crosses out possibilities on a grid until one answer is left, or until it is clear the clues don't decide yet.
@@ -85,7 +83,7 @@ mysteries: {
     round: 1 | 2, tellYet: 'yes' | 'not-yet' | null,
     setAside: [clueId], answer: { [rowId]: [thingId, placeId] } | null,
     revealSeen: bool, explanations: [explanationId], checks: { [explanationId]: checkId },
-    ownExplanation: string, firstCheck: string, checksKept: [check], earlier: [case], at
+    ownExplanation: string, firstCheck: check | null, earlier: [case], at
   } },
   written: [{ rows, columns, answer, clues: [clue], at }]   // latest 6
 }
@@ -93,7 +91,7 @@ mysteries: {
 
 - `source` is the complete understood frozen case payload: case ID/model version, row/thing/place definitions, witness sentences and their authored roles, clue semantics/order and round boundaries, choices/order, teaching/help/feedback, reveal and the wet-corner explanation/check cards. Cap a new source at 32 KiB UTF-8, four rows/things/places, 32 witness sentences and 32 clues. It is a finite mystery source, not arbitrary executable constraints or a new catalog service. This implements spec 83's own-source preservation rather than treating a version number as stored text.
 - Validate IDs/linkage, finite counts and stored outcome shapes against the saved source, never today's catalog or answer key. Preserve raw unknown cell/sentence/clue IDs and harmless fields exactly; supported views may omit unsupported controls with an unavailable notice but must not replace the original with a filtered object. An unsupported source makes only that case read-only/exportable. Marks, sorts, reveal state and prior check outcomes are never corrected, completed or regraded by loading.
-- Each explicit answer/clue check kept in `checksKept` snapshots its own source, selected clue set/round, answer/sort/support context and literal result/feedback. Keep at most eight readable checks per case, disclosing an oldest-readable replacement before a new check. Retain malformed siblings unchanged. Ordinary edits clear only live feedback, not historical checks. **Start a fresh case** explicitly retains the entire previous entry in `earlier` and creates a separate current source; it does not overwrite the old response or silently attach today's source to it.
+- Keep the first explicit check's frozen source, input, support and result once. Later checks show current feedback without building a check ledger; edits do not rewrite the first attempt or clear support/reveal flags. A readable fresh case replaces the working draft after disclosure; only unreadable/unsupported entries need recovery `earlier`.
 - Written mysteries retain their own rows, columns, chosen answer, template clues, model version and recorded solution count/needed-clue result. Use 3 or 4 rows, at most 32 clues, and at most 2,000 characters per free-text answer (80 per authored label). Keep the latest six readable written mysteries only on an explicit keep with replacement disclosed; unreadable entries are not evicted.
 - New sources, checks, keeps and fresh-version retention preflight the complete notebook and actual pretty `notesReport` through existing `prepareProgressImport` byte/depth/node limits. Refusal leaves all previous data unchanged and offers Download notes. Normal export/import retains the raw optional root; reset, save-off and explorer switching use existing notebook behavior. No new migration framework is required.
 

@@ -2,8 +2,6 @@
 
 Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Act II of [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/121-games-table-text.md); this spec holds the rules, the opponent and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec 120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
-
 **Bounded first candidate:** Seed Pile and Ribbon Rows, including their listed variants, plus solo Shutters. Seed Holes and Hex are on the [roadmap for much later](../roadmap.md#much-later-parts-held-back-from-the-new-game-kinds): their rules and companion copy are drafts, not selectable games in this increment. Before either is commissioned, a separate model review must pin board coordinates, legal/terminal states, search depth including extra turns, evaluation and move ordering, and a bounded fallback. The proposed four-move/two-move descriptions below are not opponent guarantees.
 
 ## Purpose
@@ -90,16 +88,16 @@ Optional root `games` per explorer, absent until the first game starts:
 games: {
   dial: 'sleepy' | 'attention' | 'plan',     // last used
   current: { source, setup, moves: [move], firstPlayer: 'child' | 'bramble', dial, at } | null,
-  earlier: [game],                          // retained prior versions, not automatically trimmed
-  notes: [{ gameId, stem, text, proof, at }], // latest 24 readable notes
+  earlier: [game],                          // unreadable/unsupported recovery only
+  notes: [{ gameId, stem, text, at }], // latest 24 readable notes
   explains: { [pageId]: { stepsSeen, testPlayed: bool } },
   designs: [{ k, lastLoses: bool, table: [cell], text, at }]   // latest 6
 }
 ```
 
 - `source` freezes the game ID, understood rule/model version and parameters, setup choices and rule/ending text used by this game. A model ID selects only a supported finite interpreter; imported source text is never executable code. Source is at most 16 KiB UTF-8; a supported current replay holds at most 512 finite moves, including the actual dice rolls and Bramble moves. New moves preflight this cap before changing anything; a cap refusal keeps the current game intact. Replay uses its own supported source and stored moves, never today's rules or a fresh random draw.
-- Validate IDs, finite setup/move shapes and legality only under that saved source. An unknown model, malformed move or unsupported replay remains exact, read-only and exportable; do not drop `current` or change a recorded outcome. Other games and notes stay usable. **Start a fresh game** explicitly moves the entire prior current entry unchanged to `earlier` before creating a separate supported game; if retention cannot fit, refuse the start without overwriting it. Loading/rendering never trims `earlier` or repairs a source.
-- A note's `proof` is a bounded copy of its own source/setup, actual moves, requested support and literal ending/result, if a result exists. A partial note has no invented outcome. Notes retain their own text and context when current work changes; no totals or learning-level inference is derived from wins/losses. Note/rule prose is at most 2,000 characters. Designer tables keep their own take/terminal rules, entered cells and recorded checks; earlier checks are not regraded on load.
+- Validate IDs, finite setup/move shapes and legality only under that saved source. An unknown model, malformed move or unsupported replay remains exact, read-only and exportable; do not drop `current` or change a recorded outcome. Other games and notes stay usable. **Start a fresh game** replaces a readable current game after disclosing that replacement. Only unreadable or unsupported entries move to recovery `earlier`; if that recovery cannot fit, refuse without overwriting it. Loading/rendering never trims `earlier` or repairs a source.
+- Notes keep their own text and game ID. No move-copy proof is added to a note, and wins/losses supply no learning level. Note/rule prose is at most 2,000 characters. Designer tables keep their own take/terminal rules, entered cells and first check plus support flags; earlier outcomes are not regraded on load.
 - The latest-24 notes and latest-6 designs windows apply only on an explicit new keep, with any oldest readable replacement disclosed before the action. Never evict an unreadable/raw sibling to make room. New starts, keeps and retained copies preflight the whole candidate through the existing limits and actual formatted `notesReport`/`prepareProgressImport` download path; refusal is atomic and offers Download notes. No new storage service is needed.
 - Export/import preserve the entire optional root and opaque unknown fields. Reset, save-off and explorer switching follow the existing shared notebook behavior; recovery never resets another game or silently changes historical evidence.
 

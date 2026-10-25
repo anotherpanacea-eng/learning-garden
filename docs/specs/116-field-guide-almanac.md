@@ -114,8 +114,8 @@ Four, in the companion text. Nothing is recorded.
 Per explorer, each root is absent until its first explicit choice, note or constructed sheet. The local hemisphere setting is optional (`north | south`) and writes only on explicit choice:
 
 ```
-weather:  [ { date: 'YYYY-MM-DD', weather: code, temp?: { value, unit: 'C'|'F' } } ] // up to 400
-sky:      [ { date, shape: code } ]                                                  // up to 400
+weather:  [ { date: 'YYYY-MM-DD', weather: code, temp?: { value, unit: 'C'|'F' } } ] // latest 1,098 readable notes (at least three years)
+sky:      [ { date, shape: code } ]                                                  // latest 1,098 readable notes (at least three years)
 finds:    [ { date, group: code, place: code, label?: string } ]                      // up to 500
 dataDesk: [ { id, source: { month, practice, version, categories, days },
               tally: {code: n}, pictogram: { halfPictures: {code: n}, scale: 1|2 },
@@ -125,10 +125,10 @@ keyBuilds: [ { cards: [code], tree: node, at } ]                                
 // up to 3 question nodes, 4 group leaves; unfinished branches may be null
 ```
 
-- If spec 33 ships first, both specs read and write one `weather` array. Optional `temp` is additive; spec 33 ignores it.
+- If spec 33 ships first, both specs read and write one `weather` array with the same rolling latest-1,098-readable-notes policy. During the Almanac build, update the existing writer to this shared limit; this proposal does not change the current writer. Optional `temp` is additive; spec 33 ignores it.
 - Validate dates, codes and bounded numbers in read-only views. An unknown code, malformed entry or missing temperature unit makes only that item/temperature unavailable to current displays; preserve the original JSON value unchanged and exportable. A new known group list never deletes a prior find.
 - For `weather` and `sky`, display at most one readable entry per date, using the last readable entry in stored array order. Preserve every duplicate in raw storage. View/import does not deduplicate or rewrite. An explicit change to today's note changes only the selected readable entry, preserving other raw entries.
-- All saves follow an explicit action and preflight the whole candidate using `dist/progress-limits.mjs` and the existing export-size limit before mutation. At an array/sheet capacity or export limit, refuse the addition with no data change; explain export/explicit deletion options. Never silently trim older or unreadable work. Labels are at most 120 characters, each sheet source at most 31 days and five categories, counts 0–31, half-picture counts 0–62, and each sheet retains at most eight frozen checks. At a check limit, refuse the new check without losing the sheet; keep editing available.
+- All saves follow an explicit action and preflight the whole candidate using `dist/progress-limits.mjs` and the existing export-size limit before mutation. For weather and sky, an explicit new note rolls the oldest readable note once 1,098 are retained; never trim on load or evict unreadable entries. At other array/sheet capacities or an export limit, refuse the addition with no data change; explain export/explicit deletion options. Never silently trim older or unreadable work. Labels are at most 120 characters, each sheet source at most 31 days and five categories, counts 0–31, half-picture counts 0–62, and each sheet retains at most eight frozen checks. At a check limit, refuse the new check without losing the sheet; keep editing available.
 - Never check a find against today's key. A group code no longer in the key shows as a group from an older field guide.
 - Data desk sheets retain their frozen source, scales, constructed counts and recorded outcomes. Checks compare with that sheet's own source, never today's log or rules, and never regrade recorded outcomes on load. Live month summaries may be computed separately and must be labeled as current summaries; future Storm Day adapters do not rewrite sheets.
 - Notes export, import, reset and explorer switching include all of these. The hemisphere is a setting, never a location.
@@ -205,9 +205,6 @@ Jane's glossary convention (short definitions for *pictogram*, *tally*, *climate
 - Unknown codes, duplicated dates, a missing temperature unit and spec-33-only saves all load; readable items stay open and raw unavailable items/duplicates remain exportable without a load-time rewrite. The four pages work with no spec 33/120 adapter.
 - Browser at 320 and 820 px: key answers at least 44 px; the month strip wraps without horizontal scrolling.
 
-## Review follow-up, 2026-10-23
-
-Made key-building recursive with saved branches; deferred calculated moon work (restored 2026-10-24 at Joshua's request, with the model fixed in section 2); separated future shared-tab/story adapters; specified frozen, bounded Data desk sheets and non-destructive observation views with capacity preflight. The fifteen-group field key and its facts remain a draft needing qualified science review; these repairs do not validate its biological classifications or any child identification. Independent implementation review and science-content clearance remain open.
 
 ## Review asks
 

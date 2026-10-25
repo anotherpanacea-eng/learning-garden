@@ -2,8 +2,6 @@
 
 Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II and V of [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/123-clockwork-mill-text.md); this spec holds the machine, the levels and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec 120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
-
 ## Purpose
 
 The garden already teaches literal instructions ([Instructions for a Reader, spec 54](54-instructions-for-a-reader.md)), absolute-direction repeats ([Repeat a Delivery Block, spec 71](71-repeat-delivery-block.md)) and one condition with two branches ([Willow Sorting Desk, spec 84](84-willow-sorting-desk.md)). Spec 71 deliberately left out turns relative to the machine, nesting, named moves and debugging someone else's program. The Clockwork Mill adds exactly those, on a small grid with sacks to carry.
@@ -78,15 +76,15 @@ Optional root `mill` per explorer, absent until a level opens:
 ```
 mill: {
   levels: { [levelId]: { source, program: [tile], moves: { [name]: { param: bool, body: [tile] } },
-                         solved: bool, challengeMet: bool, proofs: [proof], earlier: [level], at } },
-  designs: [{ source, program, moves, ready: bool, proof, at }]   // latest 8 readable designs
+                         solved: bool, challengeMet: bool, firstAttempt: attempt | null, earlier: [level], at } },
+  designs: [{ source, program, moves, ready: bool, firstAttempt, at }]   // latest 8 readable designs
 }
 // tile: 'F' | 'L' | 'R' | 'lift' | 'drop' | { repeat: n | 'n', body: [tile] } | { move: name, n? }
 ```
 
 - Each `source` captures the understood model/level version, full map, start/facing, goal, sack targets, allowed tile set, challenge definition and request/help text, within 16 KiB UTF-8. A custom design's source contains those same owned inputs. Resume uses this copy, not today's level catalog. Source text is never executed.
 - Keep the exact program/named moves, including partial or presently unexecutable drafts. For a supported execution, use the finite program contract above: at most four named definitions, 60 main AST tiles, 12 per definition, repeat/call expansion depth bounded as stated, and at most 300 primitive actions. Validate references and reject direct/indirect cycles before a new run. Validation does not delete an unsupported saved program, label its level unsolved, or clear historical `ready`/challenge flags. Such work stays raw, read-only/exportable where needed; other levels remain open.
-- A child-started explicit run records a bounded `proof`: its own frozen source, program and move definitions, pre-run support, actual ending/goal/sack result, solved/challenge outcomes and timestamp. Up to four readable proofs per level are retained, with replacement disclosed before a new run; malformed siblings remain intact. Historical solved/ready/check outcomes are never recomputed on load. After an edit, show the old proof as earlier and the current draft as untested; do not present an old success as proof of the edited program.
+- Keep the first explicit run's source, program, moves, support and result once. Later runs update the working draft and current feedback without a proof ledger. Editing labels that draft untested; neither editing nor reloading changes the first attempt or clears support.
 - **Start a fresh version** explicitly retains the entire prior level entry unchanged in `earlier` before creating a separate supported level. A new custom design never overwrites an unsupported design. The eight-readable-design window changes only on explicit keep after disclosed replacement; unreadable/raw designs are not evicted. If retention cannot fit, refuse that new action without changing previous work.
 - New sources, proofs, keeps and retained copies preflight the whole notebook and its actual formatted `notesReport` through existing `prepareProgressImport` limits. Export/import preserves the full optional root and unknown fields; reset, save-off and explorer switching follow existing shared behavior. No load-time repair or new storage/migration service is introduced.
 

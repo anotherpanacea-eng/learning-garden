@@ -2,8 +2,6 @@
 
 Status: **proposed; awaiting independent spec review and a science content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts II, IV and VI of [spec 120](120-keeper-of-the-ways.md), and gives Act IV's three plans a model the child can run. Every child-facing line is in [the companion text](../content/124-bank-builder-text.md); this spec holds the model, the levels and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this remains a proposal. Select a bounded first slice after independent content/model/save review; the presence of later games, levels or designers does not commission them all. All Act/chapter links and contributions below are future adapters to the separately proposed spec 120. Standalone play stays open without that shell, and no story completion is inferred from an unavailable adapter.
-
 ## Purpose
 
 The Storm Workshop and Fair Test benches compare set-ups the game supplies. Here the child designs one: protect a stretch of Willow Brook's bank with a budget, run an authored flood model, see where water gets through and what it costs, and revise. The model is openly simple and says so on every result.

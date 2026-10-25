@@ -2,8 +2,6 @@
 
 Status: **proposed; awaiting independent spec review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Fits Acts I and II of [spec 120](120-keeper-of-the-ways.md). Every child-facing line is in [the companion text](../content/126-shape-puzzles-text.md); this spec holds the puzzles, the checks and the saves. Code and art are for the implementation pass.
 
-**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec 120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
-
 ## Purpose
 
 Wordless shape puzzles for spatial reasoning: fitting, turning and flipping pieces; folding a flat net into a closed box; covering a floor exactly; and, for older explorers, proving that a covering can't exist. Geometry is thin across the garden, and these puzzles work for a child who can't yet read: every puzzle can be played from its picture alone, with read-aloud for the few words.
@@ -84,21 +82,21 @@ Optional root `shapes` per explorer, absent until a table opens:
 
 ```
 shapes: {
-  windows: { [windowId]: { source, pieces: [{ pieceId, x, y, turn, flipped }], filled: bool, support, proofs: [proof], at, earlier: [window] } },
-  boxes: { [netId]: { current: attempt, attempts: [attempt], earlier: [box] } },
+  windows: { [windowId]: { source, pieces: [{ pieceId, x, y, turn, flipped }], filled: bool, support, firstAttempt: attempt | null, at, earlier: [window] } },
+  boxes: { [netId]: { current: attempt, firstAttempt: attempt | null, earlier: [box] } },
   ownNets: [{ source, cells, folds: bool, result?, support, at }], // latest 40 readable keeps
-  floors: { [floorId]: { source, pieces: [placement], filled: bool, proofs: [proof], at, earlier: [floor] } },
-  proof: { source, tried: bool, reasonSeen: bool, support, at } | null
+  floors: { [floorId]: { source, pieces: [placement], filled: bool, firstAttempt: attempt | null, at, earlier: [floor] } },
+  firstFold: { source, tried: bool, reasonSeen: bool, support, at } | null
 }
 attempt: { id, source, prediction: 'yes' | 'no' | null, folded: bool, result?, base: squareId | null, support, priorReveal: bool, at }
-proof: { source, pieces: [placement], filled: bool, support, at }
+attempt: { source, pieces: [placement], filled: bool, support, at }
 ```
 
 - `source` freezes the understood table/model/version and its finite piece and domain geometry, coordinate/turn/flip conventions, target/net/base identities, check rules and displayed task/help/reason text (at most 16 KiB per source). The selected table's commissioning gate supplies its exact finite placement bounds; saved geometry is not interpreted using a changed table. Sources are data for a known bounded model, not executable instructions.
-- A prediction is initially absent (`null`), then committed once before folding and never changed by the fold. **Try another prediction** explicitly keeps the completed or partial current attempt and starts a new id with the same frozen net source; the earlier prediction/result remains visible. Keep at most eight readable earlier attempts per net, rolling over only on that explicit action with notice. Preserve whether the answer/reason was already revealed and any help shown; a new copy does not establish an unseen independent attempt. Do not silently replace the sole prediction on return.
-- Validate ids, positions and turns against their own source. `filled`, `folds` and recorded fold results are set at the child's place/fold action, never recomputed on load. Each optional kept window/floor proof freezes its placements/source/support/result; editing labels the current arrangement untested while retaining the historical proof. Keep at most four readable proofs per puzzle, with disclosed rollover on the explicit keep. Own-net keeps freeze the six cells, model and fold result actually tried; keeping an untried drawing invents no fold result.
-- Unknown model/ids, malformed placements and unreadable attempts remain exact, read-only and exportable at that entry; other readable work stays open. Never delete them, change a saved success to false or filter-install a cleaned root on load. An explicit fresh supported window/floor/box retains the complete prior entry in `earlier`. Neither the latest-40 own-net policy nor the readable attempt/proof caps evict unsupported siblings.
-- Preflight new sources, attempts, proof/own-net keeps and retained fresh versions against the actual pretty `notesReport` export and `prepareProgressImport` whole-notebook limits. If retention would not fit, refuse atomically with existing export/reset choices; do not trim on load. Export, import, reset, save-off and explorer switching include the complete raw `shapes` root through the existing generic notebook transfer.
+- A prediction starts absent, is committed before folding, and the first input/source/support/result is kept once. Another prediction replaces only the working draft after disclosure; it keeps reveal/support flags and cannot become an unseen independent attempt. No per-net attempt history is needed.
+- Validate ids, positions and turns against their own source. Set outcomes only at the explicit check/fold action, never on load. Keep the first window/floor attempt once, with its placements/source/support/result; later editing makes the current draft untested without rewriting that first attempt. Own-net keeps retain the six cells and any fold result actually tried; an untried drawing invents no result.
+- Unknown model/ids, malformed placements and unreadable attempts remain exact, read-only and exportable at that entry; other readable work stays open. Never delete them, change a saved success to false or filter-install a cleaned root on load. An explicit fresh supported window/floor/box retains the complete prior entry in `earlier`. Neither the latest-40 own-net policy nor the readable keep caps evict unsupported siblings.
+- Preflight new sources, attempts, own-net keeps and retained fresh versions against the actual pretty `notesReport` export and `prepareProgressImport` whole-notebook limits. If retention would not fit, refuse atomically with existing export/reset choices; do not trim on load. Export, import, reset, save-off and explorer switching include the complete raw `shapes` root through the existing generic notebook transfer.
 
 ## Curriculum fit
 

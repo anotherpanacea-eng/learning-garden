@@ -97,7 +97,7 @@ rhythm: {
 ```
 
 - Validate ids, codes, lengths and bounded counts in a read-only view. An unknown or unreadable card is unavailable in that view; preserve its raw working bars, kept version and checks unchanged and exportable. An unknown note code never empties the saved working bars on load. Other readable cards stay open.
-- Saving is caused only by an explicit supported choice or edit, including **Keep this rhythm** and **Check my rhythm**; opening a view never normalizes the save. To replace unreadable working content, offer an explicit **Start a fresh version** action that retains the old raw card alongside the replacement. Preflight the candidate against `dist/progress-limits.mjs` and export capacity before committing; if it cannot fit, keep the current save and explain that no work changed. Retained raw work is removed only through explicit deletion. Keep at most 50 readable checks; at capacity refuse an additional check without changing the save, while leaving playback and editing available. New bars contain at most eight codes per bar and two bars; retained raw content is not rewritten to meet these authoring limits. A fresh replacement retains the old card under a raw-history field and must pass the same preflight.
+- Saving is caused only by an explicit supported choice or edit, including **Keep this rhythm** and **Check my rhythm**; opening a view never normalizes the save. To replace unreadable working content, offer an explicit **Start a fresh version** action that retains the old raw card alongside the replacement. Preflight the candidate against `dist/progress-limits.mjs` and export capacity before committing; if it cannot fit, keep the current save and explain that no work changed. Retained raw work is removed only through explicit deletion. Keep the latest 50 readable checks, rolling the oldest readable check only on an explicit new check; preserve support/reveal flags and unsupported raw entries. Playback and editing remain available. New bars contain at most eight codes per bar and two bars; retained raw content is not rewritten to meet these authoring limits. A fresh replacement retains the old card under a raw-history field and must pass the same preflight.
 - A bar is checked only for fitting its own length. Never check a saved bar against today's card rules, and never recompute recorded check facts.
 - Notes export, import, reset and explorer switching include `rhythm`.
 
@@ -138,9 +138,6 @@ Jane's `learn` card (one idea and a worked example, revealed one tap at a time) 
 - Saves with an unknown code, an unknown card, no `bells`, or only Bell Studio state all load. Unknown raw working content survives view, explorer switch and export as unchanged JSON values; capacity refusal leaves the save unchanged.
 - Browser at 320 and 820 px: cells at least 44 px tall; two bars wrap as two rows; the 24-cell timeline wraps into three rows of eight.
 
-## Review follow-up, 2026-10-23
-
-Specified elapsed eighths versus display cells, a peak budget including the beat tick, and non-destructive recovery/export boundaries. These are documentation repairs, not implementation verification or music-content clearance. Independent implementation review and the music-content gate remain open.
 
 ## Review asks
 

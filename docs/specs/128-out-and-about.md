@@ -2,8 +2,6 @@
 
 Status: **proposed; awaiting independent spec review and a child-safety read of every card.** Part of the [new kinds of play proposal](../new-game-kinds.md). Applies across [spec 120](120-keeper-of-the-ways.md)'s town and festivals. Every card is in [the companion text](../content/128-out-and-about-text.md); this spec holds the card format, where cards appear and what is (and isn't) kept.
 
-**Commissioning boundary:** this is a proposal for separately selected, bounded increments. Later benches, editors and story adapters are not commissioned by the presence of their prose. Story links depend on the separately proposed spec 120; standalone activities remain open without that shell. The named content/model/source reviews below remain required before build.
-
 ## Purpose
 
 Some of the most important learning can't happen on a screen: holding a pencil, measuring a real cup of water, clapping with someone, watching tonight's moon, finding a woodlouse under a log. Spec 49 keeps these as adult and off-screen routes and says off-screen work may go unrecorded. This spec gives them one shared shape: a short **mission card** that sends the child into the real kitchen, yard or window, and welcomes them back with a question for a conversation with a grown-up.
@@ -44,9 +42,7 @@ Nothing about whether a mission was done. Two small things are allowed:
 outAndAbout: { later: [cardId] }    // latest 12, ids only
 ```
 
-Validate visible ids against the current reviewed card bank. Unknown ids remain exact in the stored root and export; omit them from the active card list with an unavailable-card notice, without installing a filtered list or substituting another card. Explicit save/remove actions change only the selected supported ids and do not evict unknown entries or fields. Newly saved ids must be stable card-bank ids, at most 80 characters; unsupported imported strings are not truncated. Preflight an explicit list change against the actual pretty `notesReport` export and `prepareProgressImport` whole-notebook limits; refuse atomically with existing export/reset choices if it would not fit.
-
-Export, import, reset, save-off and explorer switching include the complete raw `outAndAbout` root through the existing generic notebook transfer. Unknown imported fields (including journal, done or verified flags) stay inert, read-only and exportable; they do not become mission completion, an observation or an active journal. This spec adds no private journal and does not exclude opaque imported data from a child/adult's explicit whole-notebook export.
+Save only the latest 12 selected card IDs. Export, import, reset, save-off and explorer switching use the existing optional-root behavior. Unknown imported data stays preserved and inert; it supplies no completed mission or observation.
 
 No mission contributes to the story, a chapter, a festival job or any observation record. A future spec may add an adult-reported observation for one card, as spec 49 allows; this one does not.
 

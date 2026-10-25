@@ -62,7 +62,7 @@ spanish: {
     source: { version, amount, passage, sentenceGlosses, wordGlosses, choices, cardOrder,
               taskModel, checks, replies },                         // complete frozen errand source
     task: { ... },                                              // current placements/moves/amounts/order/plan/job
-    taskEvidence: { [taskId]: { firstSubmission, latestSubmission, laterCount, laterCountCapped, hints: [feedbackId] } },
+    taskEvidence: { [taskId]: { firstSubmission, hints: [feedbackId] } },
     answer: { picks: [choiceId], fitted: bool } | null,
     support: { meaning: bool, narration: bool, oneAtATime: bool },
     state: 'started' | 'done', familiar: bool, at
@@ -73,7 +73,7 @@ spanish: {
 ```
 
 - A started errand keeps its complete frozen source, following spec 83: passage and glosses, choice IDs/order and fitting target, cargo quantities and destination targets, the map's node/edge/button transitions and start/goal, pantry quantities/allowed items, recipe steps and target order, weather slots and targets, crew choices, all check rules and feedback/replies. Resolve every action and check against this saved source, including on resume; never look up today's task model or key. An ID/version alone is not a frozen source. New source versions affect only newly started errands. A kept postcard freezes its selected tile text/order and corresponding reply source too; later tile or reply edits cannot rewrite it.
-- Each task submission records the first input/result/support snapshot once and the latest snapshot; `laterCount` counts subsequent submissions up to 999, then `laterCountCapped` means 999 or more. `hints` is the bounded set of feedback IDs exposed, including wrong-place, wrong-turn, pantry/order and weather-row feedback. Set hint exposure before showing the reply. Resuming never clears it. Current support tools and prior hint exposure accompany each submission; a corrected or retried task cannot become a first independent attempt. A task never submitted remains unobserved. The question's separate picks are retained as authored above; task and question outcomes are not collapsed into one correctness flag.
+- Keep each task's first input/result/support snapshot once; later edits change the working draft without replacing that first attempt. `hints` is the bounded set of feedback IDs exposed, including wrong-place, wrong-turn, pantry/order and weather-row feedback. Set hint exposure before showing the reply. Resuming never clears it. Current support tools and prior hint exposure accompany each submission; a corrected or retried task cannot become a first independent attempt. A task never submitted remains unobserved. The question's separate picks are retained as authored above; task and question outcomes are not collapsed into one correctness flag.
 - Bound frozen sources to 48 KiB each, free-text postcards to 2,000 characters and 40 tiles, recipe orders to five IDs, cargo to six items, map history to the latest 32 moves with a separate bounded move count, and each evidence snapshot to that task's bounded input shape. Preflight the whole candidate against `dist/progress-limits.mjs` and export capacity before an explicit mutation; refusal keeps the previous save intact. Unreadable/unknown raw errands remain exportable. Feedback-ID sets are limited to the IDs in the frozen source, not today's list.
 - Validate IDs, codes, bounded shapes and stored outcomes without regrading history. An unreadable errand is unavailable in the read-only view and the rest stays open; retain its raw record unchanged. Never check a saved task against today's answer key, regenerate its shuffle, or rewrite its recorded result on load.
 - Spanish observations carry `language: es` and never affect English or French suggestions, starting choices or the atlas.
@@ -113,9 +113,6 @@ Refreshed 2026-10-23: Marble `f186a79a9525c189e2d423e31613c62b6805416f`, Jane `1
 - Riddle cards with the `spanish` strand link to `#mercado`.
 - Browser at 320 and 820 px: note and scene fit without horizontal scroll; the note stays visible during each task.
 
-## Review follow-up, 2026-10-23
-
-Expanded frozen sources to include each task's model, keys, glosses and feedback, and specified bounded first/later submission and hint records with non-destructive capacity checks. Aligned the weather crew task with tomorrow night, the period the note describes. These are specification fixes; no fluent Spanish, implementation or human content clearance is claimed. Those gates remain open.
 
 ## Review asks
 
