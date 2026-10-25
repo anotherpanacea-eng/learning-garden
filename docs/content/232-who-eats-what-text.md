@@ -1,6 +1,6 @@
 # Who Eats What: all child-facing text
 
-Companion to [spec 221](../specs/221-who-eats-what.md). Use as written. `{guide}` is the chosen companion and `{courier}` the explorer's courier; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them.
+Companion to [spec 232](../specs/232-who-eats-what.md). Use as written. `{guide}` is the chosen companion and `{courier}` the explorer's courier; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them.
 
 ## Labels used on every card
 
@@ -255,16 +255,17 @@ Broken argument cards (fix one):
 - The hedgehog has spines because it wants to be safe.
 - Holly has prickles. Holly is green.
 - The owl's feathers help it swim.
-Fix replies: Plants and animals don't choose their parts. What does the part do? · Green isn't the reason. What do prickles do? · Owls don't swim. What do the feathers do in the air?
+Fix replies: Plants and animals don't choose their parts. What does the part do? · Green isn't the reason. What do prickles do? · Soft fringed edges quiet an owl's flight. What do they do in the air?
 
 ## Activity (d): Trace It Back
 
-Opening: Start with a hungry animal. Follow its food back to the Sun.
-Legend (on every screen): Arrow: food → eater. Food supplies energy to the eater.
+Opening: Start with a hungry animal. Follow its food back, then the plant’s energy to the Sun.
+Legend (on every screen): Feeding arrow: food → eater. Food supplies energy to the eater. Sunlight link: Sun ⇢ plant. Sunlight supplies energy for making food; sunlight is not food.
+Link labels: **sunlight energy** beside ⇢; **food** beside →. The diagram uses a dashed sunlight link and solid feeding links; its text equivalent names both meanings.
 Chains:
-- Sun → clover → rabbit → fox
-- Sun → beech seeds → wood mouse → tawny owl
-- Sun → algae → mayfly young → brown trout → heron
+- Sun ⇢ clover → rabbit → fox
+- Sun ⇢ beech seeds → wood mouse → tawny owl
+- Sun ⇢ algae → mayfly young → brown trout → heron
 Guided first chain (3 steps shown): (1) The fox ate a rabbit. (2) Where did the rabbit's energy come from? (3) Clover. Keep going.
 Question button: **Where did its energy come from?**
 End line (every chain): You reached the Sun. Every chain in this activity ends there.
@@ -272,7 +273,7 @@ Soil card: The soil gives plants water and minerals. Not energy.
 Energy jobs panel: Food energy helps an animal **move**, **grow**, **mend** and **keep warm**. Most ends as warmth in the air.
 One-way line: Energy flows one way. Matter goes round, like the rot log in the Meadow pack.
 Warm-in-the-sun card: Sunshine can warm a lizard's skin. But its food energy still came through plants.
-Reversed arrow read-back: This says the fox is food for the rabbit. Is that right?
+Reversed feeding-arrow read-back: This says the fox is food for the rabbit. Is that right?
 
 ## Activity (e): The Osprey Ledger (Keeper's Desk)
 
@@ -508,12 +509,12 @@ Feedback: A: Soil gives water and minerals, not energy. B: Yes. Leaves use sunli
 Explanation: Plants make their food using sunlight. That's where the energy starts.
 
 **4.3 (Sapling, order with arrows)**
-Prompt: Build the chain with food → eater arrows.
+Prompt: Build the energy chain. Label sunlight and feeding links.
 Cards: fox · Sun · rabbit · clover
-Answer: Sun → clover → rabbit → fox.
+Answer: Sun ⇢ clover → rabbit → fox.
 Misconception tested: arrows drawn from eater to food.
 Hint: Start with the Sun. Who uses sunlight first?
-Explanation: Each arrow goes from the food to the eater, so energy flows up from the Sun.
+Explanation: Sun ⇢ clover carries sunlight energy. Clover → rabbit and rabbit → fox carry food energy from food to eater.
 
 **4.4 (Sapling, 3-choice)**
 Prompt: An owl hunts at night. Where did its energy first come from?

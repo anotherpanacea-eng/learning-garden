@@ -1,6 +1,6 @@
-# 220. Animal Lives: records, minds, partners, groups and ocean travelers
+# 231. Animal Lives: records, minds, partners, groups and ocean travelers
 
-Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Wave 6 of the [history and science build-out](../history-and-science-buildout.md). Every child-facing line is in [the companion text](../content/220-animal-lives-text.md); sources and open checks are in the [source audit](../source-audits/220-animal-lives.md).
+Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Wave 6 of the [history and science build-out](../history-and-science-buildout.md). Every child-facing line is in [the companion text](../content/231-animal-lives-text.md); sources and open checks are in the [source audit](../source-audits/231-animal-lives.md).
 
 **Commissioning boundary:** a proposal only. Select a bounded first slice after independent review; the six benches do not commission each other. Story links are future adapters to the merged [spec 120 proposal](120-keeper-of-the-ways.md); standalone play stays open and no completion is inferred from a missing adapter. Wild animals appear on screen only; off-screen cards are grown-up-led and nothing from them is recorded.
 
@@ -109,18 +109,20 @@ Optional root `lives` per explorer, absent until a first explicit action.
 ```
 lives: {
   version: 1,
-  parade:   { source, kept: [{ card, beside, row, at }] },            // latest 8
-  key:      { source, kept: [{ card, answers: [yn, yn?, yn?], group, at }] }, // latest 10
-  lookout:  { source, kept: [{ herd, look, watched, bites, at }] },    // latest 8
+  parade:   { source, kept: [{ card, beside, row, at }] },            // retained; no automatic eviction
+  key:      { source, kept: [{ card, answers: [yn, yn?, yn?], group, at }] }, // retained; no automatic eviction
+  lookout:  { source, kept: [{ herd, look, watched, bites, at }] },    // retained; no automatic eviction
   claim:    { source, claim, evidence: [id, id], reason, at } | null,
-  partners: { source, kept: [{ pair, a, b, kind, at }] },              // latest 10; a, b in '+','0','-','?'
-  ocean:    { source, kept: [{ animal, month, place, at }] },          // latest 8
+  partners: { source, kept: [{ pair, a, b, kind, at }] },              // retained; no automatic eviction; a, b in '+','0','-','?'
+  ocean:    { source, kept: [{ animal, month, place, at }] },          // retained; no automatic eviction
   answers:  { [itemId]: { source, choice | value | order | grid, support: ['hint'|'example'|'skip'], at } }
 }
 ```
 
-- `source` freezes the model version, rules and each item's choices and order. Codes and numbers only, never prose; *say why* is not stored.
+- `source` preserves the complete authored prompt, passage/card text, ordered choices, answer key and feedback, hints and worked examples, model rules/parameters/units, and the source version used for that visit. Freeze any diagram/link meanings and selection metadata too; resume and export from this saved source, not today’s catalog. Codes identify fields and records; they do not replace the authored text needed to render earlier work.
 - Validate ids against the frozen card lists, `herd` in {1, 2, 5, 10}, `look` in {2, 6, 10}, `watched` 0-10, `bites` 0-4, `month` 1-12. Never recompute or rewrite saved results on load; an unreadable entry stays raw and exportable while everything else stays open.
+- Learner prose policy is separate from authored lesson text: *say why* and spoken sentence frames remain human-read, ungraded and unrecorded; the pack does not collect personal or family information.
+- Retain kept visits without silently dropping, truncating or overwriting earlier kept work. At shared report/recovery limits, refuse the whole save unchanged and offer the existing notes download. Only an explicit, confirmed removal of a learner-selected kept visit may free space, with a warning naming the settings/answers it removes; protect fixed lessons and unreadable raw work. Current working controls remain editable, and source wording/key changes never regrade saved results. Use the existing notes/recovery path, not a second backup system.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and switching are shared.
 
 ## Curriculum fit
@@ -172,6 +174,8 @@ From the pinned `curriculum/marble/dependencies.json`:
 | Ocean Animal Migrations | Ocean Animal Adaptations (`mt_9EoS35vaYB`) | Supported inline, no claim: blubber for the fast, the turtle's magnetic sense. Documented gap (143 and 171 leave it unclaimed). |
 
 ## Checks for implementation
+
+Earlier scratch-script and receipt filenames below retain their pre-renumbering numbers as historical evidence; they are not current specification IDs.
 
 - **Numbers script run (2026-10-25):** `numbers220.py` (scratch area, `python3 -I`) computed every Lookout output, brute-forced the six settings to confirm only the herd of 5 has full watching and enough grass (item 3.5), and checked items 3.3 (4), 3.4 (2), 6.4 (4,800 ÷ 28 ≈ 171.4 km; 3,000 ÷ 28 ≈ 107 miles), 6.5 (9,600 km; 6,000 miles), 3,000 miles ≈ 4,828 km, the Tortuguero ratio (1,412 of about 12,000, 0.118), the stuck examples (6 minutes; 100 km a day), the record comparisons (two 40 ft buses under an 80-100 ft whale; 64 mph over town traffic; at most 2.6 g under a 5 g nickel, so the penny claim is not used) and the Long Line order: **38 checks passed**. `lint220.py` on the companion: 36 items, 26 three-choice with one right answer each (A 9, B 9, C 8), no digits in Sprout items, prompts ≤15 words, feedback ≤20 words, teach cards ≤30 words, scenes within spec 120's lengths, no em-dashes, Hollis unnamed before Act VI: **316 checks**, one false positive ("compass point north").
 - **Independent review (2026-10-25):** a fresh script recomputed every model output, key and count (178 checks, 0 failing after fixes). Fixes: six-word runs shared with the Marble records reworded; Betty caveat dated 2016; Herodotus's bird eats leeches; wolves line supported by MacNulty; izard herd size moved to `[check]`; bee and blossom cut from the grid (a brief visit fails the pack's own symbiosis test); Léon's cards now come up the river from the coast (Les Saules is on the river, not the sea); unused `cases` save field cut.

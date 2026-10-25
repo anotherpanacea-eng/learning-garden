@@ -1,6 +1,6 @@
 # Who Eats What: source audit
 
-Audit for [spec 221](../specs/221-who-eats-what.md) and its [companion text](../content/221-who-eats-what-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the bench model (`chain-v1`, the Osprey Ledger) are original. No learner or family record, image, worksheet or lesson code is included. Nothing in the pack asks about a child's food, body, family or location.
+Audit for [spec 232](../specs/232-who-eats-what.md) and its [companion text](../content/232-who-eats-what-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the bench model (`chain-v1`, the Osprey Ledger) are original. No learner or family record, image, worksheet or lesson code is included. Nothing in the pack asks about a child's food, body, family or location.
 
 ## Verification method (read first)
 
@@ -14,7 +14,7 @@ Audit for [spec 221](../specs/221-who-eats-what.md) and its [companion text](../
 | Material | Used for |
 | --- | --- |
 | Spec 120 and `docs/content/120-story/` (acts 1-5) | Cast and pronouns; Act I ch. 1, Act II ch. 2, Act III ch. 2 and 3, Act IV ch. 3, Act V path 1; Hollis rule (the old Keeper does not appear); spec 120's ribbons and new path left intact in Scene 4. |
-| Specs 66 and 88 (built `#living/food`, `#living/fork`) and spec 153's text | The food legend, copied word for word: "Arrow: food → eater. Food supplies energy to the eater." Reversed-arrow read-back pattern. |
+| Specs 66 and 88 (built `#living/food`, `#living/fork`) and spec 153's text | The feeding-link meaning is retained: food → eater, with food supplying energy. The added Sun ⇢ producer link is separately labeled sunlight energy, not food. Reversed-arrow read-back pattern. |
 | Spec 151 | Producer word, rot log (matter loop), energy-tenths rule; claims Food Webs (`mt_URTJbS3hhs`) in part; records herbivore/carnivore/omnivore as a gap this pack fills. |
 | Spec 149 | Claims How Plant Parts Work (`mt_6xsEXxKdUX`) and Plants Grow from Air & Water (`mt_3-ii06P4YS`); lists What Living Things Need as met in part elsewhere. |
 | Specs 175, 159, 148, 160, 142, 147 | 175 claims Naming Common Animals (`mt_zVLOm6U7bh`); 159 claims Skeletons & Muscles (`mt_g4YSiOCS8g`); 148/160 cite Cells, Tissues & Organs; 142 and 148 teeth; 147 sunlight-to-bread energy. |
@@ -76,7 +76,7 @@ Audit for [spec 221](../specs/221-who-eats-what.md) and its [companion text](../
 
 ## Cross-pack consistency
 
-- Food-arrow legend and reversed-arrow read-back match specs 66, 88, 151 and 153 exactly.
+- Feeding-link meaning and reversed-arrow read-back match specs 66, 88, 151 and 153. The sunlight-energy link is separately typed, labeled and drawn so the Sun is not represented as food.
 - After Codex review, sunlight claims are scoped to the pack's own chains ("every chain here", "in this activity"); spec 171 teaches vent chains built on chemical energy, and the Grown-up panel points to it.
 - After Codex review, the Osprey Ledger reads concentration per whole level (poison ÷ living stuff), not one animal's total, and its energy overlay comes from the same share rule; this matches spec 151's per-level tenth rule and its point that the share is rough (the a-fifth setting).
 - The energy tenths rule matches spec 151; the soil-is-not-energy line matches spec 149's van Helmont teaching; sunlight-to-bread energy stays spec 147's.
@@ -86,3 +86,7 @@ Audit for [spec 221](../specs/221-who-eats-what.md) and its [companion text](../
 ## Rights notes
 
 No images are embedded. If art is wanted: Darwin, Carson and Ratcliffe portraits and eggshell specimens exist in museum and archive collections; check each item's licence and prefer public-domain or open-access images. All Willowbank art, food plates and skull drawings are original.
+
+## Bounded repair note (2026-10-25)
+
+The structure/function reply now explains the quiet-flight job of soft fringed feather edges instead of denying that owls swim. Audubon’s filmed Great Horned Owl and interviewed ornithologists document swimming: https://www.audubon.org/news/can-owls-swim (opened in this repair review). The Sun-to-producer link is now a distinct sunlight-energy edge; the food-to-eater legend applies to feeding edges only. These are targeted copy/representation repairs, not a full subject or source clearance. The open source and language checks above remain open.

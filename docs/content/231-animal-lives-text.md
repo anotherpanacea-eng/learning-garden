@@ -1,6 +1,6 @@
 # Animal Lives: all child-facing text
 
-Companion to [spec 220](../specs/220-animal-lives.md). Use as written. `{guide}` is the chosen companion; `{courier}` is the explorer's courier; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them. Depth tags (Sprout, Seedling, Sapling, Keeper's Desk) describe the task, never the child.
+Companion to [spec 231](../specs/231-animal-lives.md). Use as written. `{guide}` is the chosen companion; `{courier}` is the explorer's courier; the explorer is "you". US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them. Depth tags (Sprout, Seedling, Sapling, Keeper's Desk) describe the task, never the child.
 
 ## Labels used on every card
 

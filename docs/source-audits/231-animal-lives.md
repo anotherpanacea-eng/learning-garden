@@ -1,6 +1,6 @@
 # Animal Lives: source audit
 
-Audit for [spec 220](../specs/220-animal-lives.md) and its [companion text](../content/220-animal-lives-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the two bench models (`lookout-v1`, `ocean-year-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
+Audit for [spec 231](../specs/231-animal-lives.md) and its [companion text](../content/231-animal-lives-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the two bench models (`lookout-v1`, `ocean-year-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
 
 ## Verification method (read first)
 
