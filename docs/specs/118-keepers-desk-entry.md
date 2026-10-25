@@ -1,6 +1,6 @@
 # 118. The Keeper's Desk: a real entry for longer, less-guided work
 
-Status: **proposed specification and authored text, 2026-10-23. Specification review repairs drafted; independent follow-up and content review remain open. Not build-ready.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120 in draft PR #127](https://github.com/anotherpanacea-eng/learning-garden/pull/127/files) which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns the desk's entry, its working conventions, its records, Case 1 and the proposed casebook index (section 8). The later case files in `docs/content/118-*-case.md` are commissioning dossiers that refer to these conventions; each still needs its own complete reviewed activity/source/save contract. Spec 120 owns their referenced act and scene text. Companion: [spec 119](119-deeper-bench-packs.md) proposes separately reviewed bench extensions.
+Status: **Case 1 specification and content independently reviewed, 2026-10-25; first runtime commission in sections 13–13.3. Implementation review remains a separate gate. Later case dossiers remain proposals.** Written by Claude as a writing-first deliverable; code, art and layout are for the builder. It needs independent specification and content review before any build. The story home comes from the act-structure work in [spec 120 in draft PR #127](https://github.com/anotherpanacea-eng/learning-garden/pull/127/files) which owns the six-act spine, the waterlogged parcel addressed "To the Keeper of the Ways", and the Keeper role. This spec owns the desk's entry, its working conventions, its records, Case 1 and the proposed casebook index (section 8). The later case files in `docs/content/118-*-case.md` are commissioning dossiers that refer to these conventions; each still needs its own complete reviewed activity/source/save contract. Spec 120 owns their referenced act and scene text. Companion: [spec 119](119-deeper-bench-packs.md) proposes separately reviewed bench extensions.
 
 ## 1. The problem
 
@@ -33,7 +33,7 @@ These apply to every case. They are what makes this an entry for a more independ
 1. **Teach first, and let the explorer skip it.** This follows Jane's teach, guided practice, then independent order (`LESSONS.md`, "Teach → guided practice → graded → boss"). Each step opens with a short **learn card**: one idea and one worked example, revealed a line at a time. The first task in the step is **guided**, with one to three working lines shown before answering. Record the initial learn-card lines and guided lines actually shown as supplied support context for that task; later tasks retain any relevant worked-example exposure. Then come the unguided tasks. The departure from Jane is one button: **I know this, show me the question** folds the learn card and the guided lines away, and the explorer goes straight to the tasks. Folding is a display action, not a new help event, and never clears support or exposure already shown. They stay one tap away as **Show me how**, and opening them afterwards is recorded as additional support for that step only. A hidden card is not proof it was unseen; folding cannot turn a supported attempt into an independent one. Where a relevant solution/model was supplied, describe that context instead of claiming independent discovery.
 2. **When stuck, one rung at a time.** This is Jane's "I'm stuck" ladder without hearts or points. Every checked task has **I'm stuck**, and each tap moves down one rung: first a hint, then a worked example of a similar, easier problem with the first line of this one, then **Skip for now**. A skipped task stays open in the case, and the record shows each rung that was used.
 3. **Steps in any order.** The case page lists its steps. The explorer can open any step first, leave a step unfinished, and return. The recommendation step reads whatever the explorer has kept so far and says plainly which steps are still open.
-4. **Mechanical checks only where the answer is mechanical.** Arithmetic and equations get **Check my working**, which compares the entered value with the authored model. Readings of sources, choices among plans and written reasons are never marked right or wrong. Authored replies respond to the choice made, with the same tone for every choice.
+4. **Mechanical checks only where the answer is mechanical.** Arithmetic and equations get **Check my answer**, which compares the entered value with the authored model. Readings of sources, choices among plans and written reasons are never marked right or wrong. Authored replies respond to the choice made, with the same tone for every choice.
 5. **The town's adults lead.** Cases come from named adults in town with a real stake. Pip and Dot can appear, but they do not narrate or explain. Text is denser and plainer than in early activities; read-aloud remains available wherever the rest of the app offers it.
 6. **Disagreement is normal.** Sources disagree, and Bramble often raises the best objection. The desk distinguishes a contradiction (two claims that cannot both be true) from a disagreement (claims that measure different things, cover different times, or rest on different values).
 7. **Keep, then revise.** Every kept answer, reading and recommendation can be reopened and changed. The earlier version stays visible as "your first version" (the existing keep/replace pattern).
@@ -87,12 +87,12 @@ An arrival recap describes earlier story events as before you came, never as thi
 
 > **Case 1 · Bridge or ford?**
 >
-> The storm took the footbridge at the narrows. People have been wading the old ford downstream, but carts can't manage the bank, and the courier has turned back more than once. The town fund can pay for **one crossing this year: 2,700 coins.**
+> The footbridge at the narrows had been closed as unsafe for two winters. The recent storm took what was left. People have been wading the old ford downstream, but farm carts struggle up the bank and sometimes get stuck, and the courier has turned back more than once. The town fund can pay for **one crossing this year: 2,700 coins.**
 >
 > Two plans are on the table:
 >
-> - **A timber footbridge at the narrows.** High banks, so it stays above floods. Walkers and hand-carts only.
-> - **A stone causeway at the ford.** A raised stone path across the shallows. Carts can use it. In a flood it goes under.
+> - **A timber footbridge at the narrows.** High banks, so it stays above floods. Walkers and hand-carts only; no farm carts.
+> - **A stone causeway at the ford.** A raised stone path across the shallows. Farm carts can use it. In a flood it goes under.
 >
 > Wren needs a recommendation for the town meeting.
 
@@ -116,7 +116,7 @@ All quantities, people and records in this case are fictional and labelled as su
 > | Timber footbridge | 1,200 coins | 60 coins |
 > | Stone causeway | 400 coins | 100 coins |
 >
-> The narrows are **24 metres** across. The ford is **15 metres** across.
+> The bridge at the narrows must span **24 metres from bank-top to bank-top**; the shallow ford crossing downstream is **15 metres**. The sites measure different kinds of crossing width.
 >
 > Bramble has left a note on the sheet: *"The causeway is cheaper. Look at the setup cost."*
 
@@ -126,7 +126,7 @@ Tasks:
 - **1b.** Cost of the causeway at the ford (15 m). *Answer: 400 + 100 × 15 = 1,900.*
 - **1c.** Would both fit in the fund? *Answer: each fits on its own (2,640 ≤ 2,700; 1,900 ≤ 2,700); both together do not (4,540).*
 - **1d.** Bramble's claim, tested properly. "If both plans had to cross the **same** gap, would the causeway always be cheaper?" The explorer can enter a whole-number length from 0 to 100 metres and see both totals in a table that keeps each try. Then: "At what length do they cost the same?" *Answer: 1,200 + 60L = 400 + 100L, so 800 = 40L and L = 20 m. Below 20 m the causeway is cheaper; above 20 m the footbridge is.*
-- **1e.** Write each plan's cost as a rule for any length L. Supplied tiles let the explorer build `1200 + 60 × L` and `400 + 100 × L`; a keyboard field accepts the same expressions. **Check my working** parses the bounded affine grammar below and compares its exact coefficient and constant with the price sheet. It does not require one written form: `60L + 1200` is equally correct. A table at example lengths may illustrate the rule, but agreement at selected lengths is not the equivalence test.
+- **1e.** Write each plan's cost as a rule for any length L. Supplied tiles let the explorer build `1200 + 60 × L` and `400 + 100 × L`; a keyboard field accepts the same expressions. **Check my answer** parses the bounded affine grammar below and compares its exact coefficient and constant with the price sheet. It does not require one written form: `60L + 1200` is equally correct. A table at example lengths may illustrate the rule, but agreement at selected lengths is not the equivalence test.
 
 **Expression input contract (1e):** without `eval`, parse whole-number literals, `L`, parentheses, signs, addition/subtraction and multiplication (including `60L`) to exact `(coefficient of L, constant)` pairs. Compare with `(60,1200)` or `(100,400)`; equivalent affine forms fit. Reject nonlinear or malformed input with "Use whole numbers, L, +, −, × and brackets to write a linear rule." Keep the entered draft when it cannot be checked.
 
@@ -156,7 +156,7 @@ A supplied contrast card shows the chain `800 = 40L = 20` beside the true separa
 
 **Contrast (after 1d, shown whatever the explorer answered):**
 
-> Bramble compared the setup costs and stopped. The setup is only part of the price. Comparing two plans means comparing their totals at the length you actually need.
+> Bramble looked only at setup costs. At these two sites the causeway does cost less, but setup alone does not explain it. Across the same gap, beyond 20 metres the footbridge costs less. A claim about always needs every length, not just one.
 
 **Authored replies to likely errors** (keyed to the entered value):
 
@@ -172,12 +172,12 @@ A supplied contrast card shows the chain `800 = 40L = 20` beside the true separa
 
 > Wren asked two volunteers to count crossings at the ford on two different days.
 >
-> | Day | Crossings with a cart | Crossings on foot | Total |
+> | Day | Crossings with a farm cart | Crossings on foot (including hand-carts) | Total |
 > | --- | --- | --- | --- |
 > | Market Saturday | 45 | 135 | 180 |
 > | A rainy Tuesday | 2 | 38 | 40 |
 >
-> The footbridge can't take carts.
+> The footbridge cannot take farm carts. Hand-carts were counted in the on-foot group. The courier carries parcels on foot, so a footbridge would help that route.
 
 Tasks:
 
@@ -223,7 +223,7 @@ The learn card for 2a draws 45 : 135 as a bar of 1 block against 3 blocks, so th
 
 **Question panel:** three records from the desk's drawers, each with its kind and date visible.
 
-> **1. Hob Pennick, who farms beside the ford, talking to Wren last week.**
+> **1. Hob Pennick, who farms beside the ford, talking to Wren today.**
 > "I've lived by that ford forty years. I've seen it go right under twice. Once was this storm. It's a fine crossing."
 >
 > **2. The courier's logbook, last two winters.** Seven entries in all, for example:
@@ -245,7 +245,7 @@ Tasks:
 Show the same source-specific reply after either arrangement; keep the explorer's reading as chosen. The table describes the supplied evidence, not an automatically scored interpretation.
 - **3b.** "Do Hob and the courier contradict each other?" Choices:
   - "Yes. Twice in forty years can't fit seven high-water days in two winters."
-  - "No. 'Right under' and 'too high to cross' may differ, over different years." ← fits the evidence
+  - "No. 'Right under' may mean deeper water than 'too high for the courier'." ← fits the evidence
   - "Yes. One of them must be remembering or reporting it wrong."
 
   The reply for the third choice: "That could be true, but nothing in these records shows it. What else could explain both?"
@@ -268,7 +268,7 @@ This step is where the case connects to spec 120's flood story, where Case 1 is 
 The recommendation has four parts. Each part offers a **Write it yourself** field and a **Choose and adapt** set of supplied sentences, which the explorer can edit after choosing.
 
 1. **What should the town build?** Choices: the footbridge; the causeway; the causeway now and a footbridge later; neither yet (spend on something else first). Another plan can be written in.
-2. **Your strongest reason.** Supplied starters draw on each step: "The causeway costs 740 coins less, which leaves money for…"; "A quarter of Saturday's crossings needed a cart, and the footbridge can't take carts, so…"; "The courier was stopped seven times in two winters, so a crossing that floods…".
+2. **Your strongest reason.** Supplied starters draw on each step: "The causeway costs 740 coins less, which leaves money for…"; "A quarter of Saturday's crossings needed a cart, and the footbridge can't take carts, so…"; "The courier was delayed or turned back seven times in two winters, so a crossing that floods…".
 3. **The best objection, and your answer.** Bramble supplies one objection matched to the plan chosen. For example, for the causeway: *"And when it's under water? The courier turns back, same as now."* For the footbridge: *"So carts keep wading the ford. You've built a bridge for walkers and left the farms where they were."* The explorer answers it, concedes it, or changes plan.
 4. **What you're not sure about.** One sentence, written or chosen: "We only counted two days"; "We don't know how deep the water was on the courier's days"; another.
 
@@ -276,7 +276,7 @@ The recommendation has four parts. Each part offers a **Write it yourself** fiel
 
 **Wren's response (the same for every plan):**
 
-> Wren reads it twice. "Good. Whatever they choose tomorrow, they'll know what each crossing costs, who it leaves out, and what we still don't know. That's what the desk is for."
+> Wren reads it twice. "Thank you. I’ll read this out tomorrow, as you set it out."
 
 **Story closure:** the recommendation is pinned to the library noticeboard. Spec 120 decides what the town meeting does next; this case must not imply that one plan was correct.
 
@@ -293,7 +293,7 @@ For each checked task, **I'm stuck** first shows the Hint column, then the Simil
 | 1a | "Pay the setup once, then the price for every metre." | "A stall costs 100 to set up and 10 per metre. At 3 metres: 100 + 10 × 3 = 130. Your first line: 1,200 + 60 × 24." |
 | 1b | "The causeway has its own setup and per-metre price." | "A path costs 50 to start and 20 per metre. At 4 metres: 50 + 20 × 4 = 130. Your first line: 400 + 100 × 15." |
 | 1c | "Compare each price with 2,700, then compare their sum with 2,700." | "With 100 coins, plans costing 60 and 80 each fit alone; together 140 does not. Your first line: 2,640 + 1,900 = ?" |
-| 1d | "How much does the causeway gain on the bridge for each extra metre?" | "100 + 10L = 40 + 20L gives 60 = 10L, so L = 6. Your first line: 1,200 + 60L = 400 + 100L." |
+| 1d | "For each extra metre, how much more does the causeway cost than the footbridge?" | "100 + 10L = 40 + 20L gives 60 = 10L, so L = 6. Your first line: 1,200 + 60L = 400 + 100L." |
 | 1e | "The fixed part is the setup; the coefficient of L is the price per metre." | "A plan with setup 80 and 5 per metre has rule 80 + 5L. Your first line: footbridge setup + footbridge rate × L." |
 | 2a | "Divide both parts by the same common factor." | "6 carts : 18 walkers becomes 1 : 3 by dividing both by 6. Your first line: 45 : 135, divide both by 45." |
 | 2b | "The whole is carts and walkers together." | "2 carts among 8 crossings is 2/8 = 1/4. Your first line: 45 / (45 + 135)." |
@@ -316,7 +316,7 @@ The case keeps its own frozen answers. The following are proposed later revisits
 
 Stored per explorer in existing local storage, following the AGENTS.md saved-work rule:
 
-- `desk.arrived` (the arrival panel was answered) and `desk.cases['bridge-or-ford']` in the first increment, holding the case's source IDs/version and frozen task quantities, model parameters and choice order (message/help codes map to UI text); each step's kept answers and attempts; the initial learn/guided lines actually shown and relevant prior worked-example exposure; each later help rung and skip; and familiarity. Preserve those distinct contexts on resume. Folding never clears them, and supplied work is never relabeled independent. This is a new case-specific record using the existing separation principles, not an existing generic desk API. A separately commissioned case would use its own ID from section 8 and reviewed contract; a reading case may keep its chosen language/length as a local preference, never evidence of reading level.
+- `desk.arrived` (the arrival panel was answered) and one flat Case 1 source/steps record in the first increment (section 13), holding the case's source IDs/version and frozen task quantities, model parameters and choice order (message/help codes map to UI text); each step's kept answers and attempts; the initial learn/guided lines actually shown and relevant prior worked-example exposure; each later help rung and skip; and familiarity. Preserve those distinct contexts on resume. Folding never clears them, and supplied work is never relabeled independent. This is a new case-specific record using the existing separation principles, not an existing generic desk API. A separately commissioned case would use its own ID from section 8 and reviewed contract; a reading case may keep its chosen language/length as a local preference, never evidence of reading level.
 - **Free text:** Case 1's expression field in 1e and four recommendation fields stay local, appear in Grown-up notes and the existing JSON export, are removed by explicit deletion, and are never sent anywhere or reused as content. The expression is checked only for exact affine coefficient/constant agreement under 1e's bounded grammar; this checks a supplied mathematical rule, not prose quality or ability. Recommendation fields are never graded. Any later commissioned case must name and bound its own free-text fields and checking boundary. Prompts are about a fictional town and never invite personal or family details.
 - A save is validated on IDs, counts and outcomes. A later wording or answer-key change never rewrites a kept answer or recommendation. If one step can't be read, the rest of the case stays open.
 - No age, grade, ability label or band is read or written by the desk.
@@ -390,7 +390,7 @@ The later dossiers currently contain representative help and replies, not a comp
 ## 10. Acceptance
 
 1. A fresh explorer can open `#desk` from Home, Begin and All places, and can open any step of Case 1 first.
-2. Every task in 1a–1e and 2a–2c has an authored answer; **Check my working** agrees with the worked values above, and 1e accepts exactly equivalent affine coefficient/constant pairs within its stated grammar and bounds, and rejects nonlinear expressions rather than sampling them.
+2. Every task in 1a–1e and 2a–2c has an authored answer; **Check my answer** agrees with the worked values above, and 1e accepts exactly equivalent affine coefficient/constant pairs within its stated grammar and bounds, and rejects nonlinear expressions rather than sampling them.
 3. Each step opens with its learn card and guided first task. **I know this, show me the question** folds them without a new help event or clearing initially shown support/exposure; reopening them through **Show me how**, and each rung of **I'm stuck**, is recorded as additional support for that step only. Folding never supplies evidence of unseen work or independence.
 4. No reading, choice or recommendation is marked right or wrong; Wren's closing response is identical for every plan.
 5. The case completes through the supported route with no free text and steps 1–3 open.
@@ -413,3 +413,92 @@ Refreshed 2026-10-23: Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060` (`LESSO
 ## 12. Boundaries
 
 Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it.
+
+
+## 13. First runtime commission (2026-10-25)
+
+This section makes the first increment concrete; sections 2–6 and 10 remain its content and acceptance contract. Only Case 1 is commissioned. No story state, later cases, topic declarations or spec 119 extensions are added.
+
+### Interaction and content
+
+`#desk` is a casebook index and fresh Wren arrival, followed by four freely chosen step tabs. Within a step, show one task at a time with Back/Next, an index of that step's questions, and a persistent reference drawer. The drawer holds the map/price sheet, two count days, and all three fictional records; it is available without losing drafts. The first arrival offers Take the desk or Look around first; both leave all steps open. A separate What's happened card uses only the fresh recap in section 4. No parcel or completed-repair claim is inferred.
+
+All content in section 5 is included, including the equality contrast, ratio/difference contrast, misconception replies, six source-claim cards, and four recommendation fields. Split composite checks into 1e-bridge/1e-causeway and 2c-ratio/2c-share so each has one answer. 1c retains three separate budget choices checked together. 2d and 3b receive authored evidence feedback, never correctness marks. 2e and 3c allow multiple choices and give a response for each; an empty selection may be kept. 3a gives a source-kind selection and two can/cannot placements per source; always give that source's neutral authored reply, without grading. Order the fitting response at different positions for 2d and 3b; freeze all offered IDs/order in the case source.
+
+Each step first opens with the first learn-card line visible. The lines in the runtime content array are the frozen line segmentation for shown-line records. Next line reveals one more; the first task also shows its guided working. Record exactly which learn/guided lines were shown, on that step, before accepting an answer. Folding is a view action and preserves that exposure. Opening Show me how adds a help event; hints/similar examples/skips are task-specific events. Existing learn exposure remains relevant to later tasks on the same step; the current step’s price sheet, counts or source records are shown beside its prompt, without a help event. Opening the cross-step reference drawer records a neutral reference-view context, not a hint. Trial-table use is likewise recorded as supplied-model context. Hear this page and Thinking together record support too. No independent flag or inferred reading/mathematics proficiency is generated. A task's check/keep snapshots the support and prior-attempt context at that moment, not later support.
+
+A 0–100 whole-metre trial table for 1d keeps the latest 20 trials, with the limit visible. The algebra checker accepts at most 160 characters, 96 tokens, nesting depth 12 and safe integer intermediate coefficient/constant pairs; recursive descent, never eval. Multiplication is allowed only if at least one factor is constant. Whole-number literals, L, unary signs, parentheses, +/− and multiplication (`*`, `×`, adjacency such as 60L) are allowed. Nonlinear expressions, including those that only coincide at sampled points, are rejected. For ratios accept colon pairs of nonnegative whole numbers and require simplest form for the ratio tasks; fraction/share tasks accept exact integer fractions, finite decimals or percentages and compare rationally (no float tolerance). Typed answers are bounded to 160 characters. Invalid syntax keeps the draft and gives a correction prompt. Arithmetic checks are mechanical model agreement only.
+
+Recommendation fields are plan, reason, objection answer and uncertainty (each at most 1,000 characters). All have supplied editable starters, sufficient to finish with steps 1–3 open. The plan field offers the four authored plans plus another plan. Choosing a supplied starter records support, including plan and uncertainty. Bramble's objection follows the plan selection; custom/combined/deferred plans receive a neutral constraint question. The objection answer stores its objection code; changing the plan never silently pairs an old answer with a new objection. Keep the old draft visibly labelled with its captured objection; let an explicit “Answer this objection instead” action start an answer to the new question. Each kept page freezes the question and answer. Keeping requires four nonblank fields only, never semantic grading. Read it to Wren displays the exact text; her neutral response is identical for every plan. A noticeboard and first version remain available after revision. Keeping a recommendation completes this case artifact, not the prior steps, a learning level or a story act.
+
+### State and preservation
+
+Use one optional top-level `desk` record per existing explorer: version 1, arrived, current step/task, a frozen Case 1 source (ID/version/model quantities, source IDs, choice order and message codes), and independent step records. Creation occurs only on explicit desk entry action, never a page render, notes view or import. Drafts persist on input so navigation does not lose work. Each readable step holds its drafts, shown-line indices, support events, current help rung, checks/keeps and first kept version per task. Keep the latest 32 attempt records per task and the first separately; show the limit. Keep first/latest recommendation separately. Familiarity is prior attempts of that task, separate from support and value match.
+
+Validate structural bounds and stored outcomes; do not recheck historical answers against today's catalog, answer key, words or model. New checks use that saved case's model parameters, not today's constants. Unknown choice IDs may render as saved IDs; never replace them with a current choice. Frozen source validation checks safe bounded types/quantities without requiring every current content-list item. A malformed step is retained raw and read-only while all other steps stay usable. An unsupported root/source is retained raw with an explanation; other destinations stay open. No normalization-on-load or automatic attempt writes. Existing whole-notebook export/import, explorer switching and explicit deletion carry/remove the record with the rest of the notebook. Grown-up notes show the free text, support context and kept outcomes and explain their limited meaning.
+
+### Visual direction and verification
+
+Use the existing garden typography, with a library-blue working surface (#203f58), paper (#fffdf6), decorative river blue (#78b7cf), pencil (#304341) and leaf accent (#496b4d). The memorable element is an original crossing sketch showing the two locations, their different widths and access trade-offs, explicitly not to scale. Below it, keep the active prompt left aligned with a maximum readable line length, large tap controls, visible keyboard focus, table overflow within its own region and no page overflow at 320px. River blue is decorative, never text on paper; leaf text appears on paper, not on library blue. Focus rings must contrast at least 3:1 on their adjacent surfaces. No automatic animation or dragging is required. The step/task controls carry actual page structure, not decorative numbering.
+
+Verify independent arithmetic/parser oracles and nonlinear rejection; equivalent rules; ratio versus part/whole errors; all finite choice feedback; support before/after folding and checks; full supported closure; edit/reload/switch/export/import; malformed sibling isolation; saved model/key changes; stale event guards; HTML escaping; 320/820 layouts and keyboard/touch controls. Run affected existing suites and proportionate source regression checks. Independent implementation review inspects exact candidate content/code and browser evidence before merge/deploy.
+
+### Upstream refresh
+
+On 2026-10-25, refreshed Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` LESSONS.md and Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` data/topics.json. Teach/guided/supported work and the selected algebra/ratio/evidence descriptions are design references, not incorporated code or prose. This first build uses original content and code under the existing project notices, leaves the licensed bundled taxonomy unchanged, and declares no new topic coverage. Prerequisite exceptions in section 7.1 remain visible teaching limitations; the desk does not test prerequisite attainment or require prior games.
+
+
+### 13.1 Remaining finite text for Case 1
+
+The drawer shows all seven fictional ford-interruption entries from the two winters while the footbridge was closed. The log does not record water depth or days without a delivery: first winter, 12 Nov “Ford too high; turned back and took the hill road (two hours)”; 19 Dec “Water over the stones; took the hill road”; 3 Feb “Water over the stones at dawn; waited until noon”; second winter, 8 Nov “Ford too high for this delivery; went round”; 21 Dec “Water covered the stepping stones; returned to the post office”; 17 Jan “Could not cross at the ford; used the hill road”; 4 Mar “Waited at the ford; crossed later that day.” These are seven interrupted journeys, not necessarily seven floods or seven whole impassable days. The model supplies no precise water depths or hours beyond the stated entries.
+
+For 2e the replies, in the offered order in section 5.3, are: “People who stayed home would not appear in a count at the ford”; “A count at the ford misses people using the long road”; “We do not know the volunteers' counting hours”; and the existing reply for “everyone”. These are observations to consider, never scored choices.
+
+For 3b the first reply is “Hob counts times it went right under; the courier records interrupted journeys. They may be counting different things.” The second reply is “Both accounts may fit: they count different things within overlapping years. That does not prove either account complete.” Keep the third reply in section 5.4. No reply marks a chosen interpretation correct.
+
+For 3c the replies, in the offered order, are: “Measured depths could help compare the courier's days”; “A causeway changes the crossing, so its height and limits matter”; “Other years could show whether those winters were unusual”; “People using other routes may have different experiences.”
+
+Additional Step 1 learn line: “An expression gives a rule, such as 1200 + 60L. An equation says two expressions are equal, such as 1200 + 60L = 400 + 100L.” Additional Step 2 lines: “A common factor divides both counts exactly. Divide both by it to make an equivalent ratio. Simplest means no factor greater than 1 still divides both”; “A fraction compares a part with its whole. Saturday's 45 carts are 45 of 180 crossings, one of four equal shares: 1/4. A percent says how many out of 100; 1/4 is 25 out of 100.” Additional Step 3 line: “A record preserves an account of something. Evidence is what in the record supports a claim. An account may include both observations and a person's interpretation.” These clarify the vocabulary promised in section 7.1 without claiming to teach every prerequisite.
+
+Recommendation supported sentences: plans are “Build the timber footbridge”, “Build the stone causeway”, “Build the causeway now and consider a footbridge in a later year's budget”, and “Choose neither yet; gather more evidence before spending”. Reasons may use the three existing starters, plus a complete editable option “The causeway costs 740 coins less and allows carts to cross.” Objection answers include “I accept that drawback; the town would still need another route in some conditions”, “We should gather more evidence before deciding”, and “I would change my plan after considering this objection.” Uncertainty choices are the two existing sentences plus “We do not know how the people who stayed home would have travelled.” Each is explicitly supplied and editable. Footbridge/causeway objections are the quoted Bramble lines in section 5.5; combined plan: “Only one crossing fits this year's fund. What would wait?”; deferred plan: “What do people use while we wait for more evidence?”; custom plan: “What would this cost, who could cross, and when might it fail?” Wren's neutral reply is identical for every recommendation and does not assert that unvisited steps were completed. Before it, show which steps remain open and call chosen starters supplied text.
+
+
+### 13.2 Review resolutions and final finite checking text
+
+Section 13 supersedes earlier runtime shape and UI names: the first record is flat with a single Case 1 source; Begin navigation and rendering create nothing. Both Take the desk and Look around first explicitly create it. Look around first says “The casebook is open. Choose any part; you can return to Wren’s question whenever you like.” All record headers show “Story · invented town record”; the map date says “1898 (invented date in this story)”. This is not historical evidence or real flood-safety guidance.
+
+For 3b the fitting choice is first, followed by twice/seven and unreliable-reporter choices; 2d keeps its fitting choice second. The time-span distinction is overlap, not different years. All references to carts in the counts and claim cards mean farm carts; on-foot includes hand-carts. Need a cart becomes used a farm cart; journeys do not establish need. The courier travels on foot. The contrast explicitly distinguishes actual sites from the hypothetical same-gap comparison. The map is not to scale and labels the bridge as bank-top span.
+
+Common numerical feedback is “This answer matches the supplied model” or “This answer does not match the supplied model yet. Compare the quantities or open a hint.” Format replies: number “Enter a whole number, such as 130”; ratio “Use two whole numbers separated by a colon, such as 1:3”; share “Use a fraction, decimal or percent, such as 1/4, 0.25 or 25%”; share with a colon “Write a share as a fraction, decimal or percent, such as 1/4, not with a colon”; rule uses section 5.2's grammar message. Bounds/overflow: “That expression is too large to check here. Use a shorter linear rule with whole numbers.” Complete the three budget comparisons before checking; each comparison gets “matches the fund comparison” or “compare this total with the fund” separately. No source/interpretation/recommendation gets this mechanical match wording.
+
+Additional misconception replies: 1b 1500 “That is the per-metre part. Include the setup once”; 500 “That is one metre. This crossing needs fifteen”; 7500 “The setup is paid once, not for every metre”. 1d 800 “That is the difference in setup costs. How many extra metres use it up?”; 40 “That is the extra cost per metre. Compare it with the setup difference”; 2400 “That is a shared cost. The question asks for the length”. 1e an equivalent wrong coefficient/constant pair receives the common mismatch plus “The fixed part is paid once; the coefficient is how much one extra metre adds.” A coefficient means the number multiplying L. For ratios compute any reversed or non-simplest equivalent pair instead of enumerating exact strings. For 2b 1/3 or 2c-share 1/19: “That compares carts with walkers. Which count includes everyone?”
+
+The 1e tiles are a notation aid, available by tap and keyboard, using the displayed plan's setup, rate, +, ×, L and brackets; they do not preassemble a rule. Record tile use as supplied notation context. Accept correctly grouped thousands commas, lowercase l, spaced adjacency and U+2212 minus. Number input may strip the appropriate coins/m suffix and allow L = before a length; share input rejects ratio syntax with the above prompt. Reject a nonlinear multiplication at its operation, even if a later subtraction would cancel it. No division in rules. There is no promise to accept arbitrary mathematical typography.
+
+The 1c worked example reveals earlier costs; record it as relevant worked-example exposure on every subsequent cost attempt, including reopened 1a/1b. Step 3's Hob guided line is its worked example of source kind, not an accuracy verdict. Step 4's supplied complete plan/reason pair is its worked example. Choosing any supplied sentence records support, and the plain Wren reply never claims steps 1–3 were done. Add the general complete reason “I am weighing who can cross, what it costs, and what remains uncertain” for combined, deferred or custom plans.
+
+3a always returns the source-specific explanation after any selected kind or card arrangement; this is an explicit non-grading exception to choice-specific feedback. The source kind describes the authored document, not the explorer's success. Empty 2e/3c selection may be kept with “No questions chosen yet; you can add one later.” The existing cautious 2d discard choice remains: it is wrong for a specific evidence reason (two observed days still describe those days), as required by AGENTS. It is not a proficiency item.
+
+The recommendation summary lists each step's task IDs with “open”, “kept model match”, “kept model mismatch” or “kept reading”; no learning-level summary. Include first versions and latest kept versions, saved source/model and support separately. A reference drawer can make cross-step information available but never marks a step done.
+
+
+### 13.3 Final content follow-up
+
+Spec 120's Act I begins on the morning after the storm, so Case 1 uses this consistent timeline: the footbridge was closed as unsafe for the two previous winters; the recent storm took the remaining structure. Record 2 is “The courier's logbook · the two winters while the footbridge was closed”. All seven entries in 13.1 appear in the drawer; those exact entry strings supersede the earlier two illustrative excerpts. The log does not enumerate all flood days. Use delayed or turned back throughout, not stopped or seven floods.
+
+Complete supplied reasons replace dangling fragments: “The causeway costs 740 coins less, which leaves money for other repairs this year”; “A quarter of Saturday's crossings used a farm cart, so the footbridge would not serve those crossings”; “The courier was delayed or turned back seven times in two winters, so a crossing that stays above high water matters”; “The footbridge stays above floods in this story, so walkers and the courier could cross on high-water days”. Retain the complete causeway reason and make the general “I am weighing…” reason available for every plan. Step 4's initial worked example is a neutral writing frame: “My plan is __. My reason is __. One drawback is __. I am unsure about __.” It supplies no preferred decision.
+
+Each split task has its own complete authored support:
+
+| Task | Prompt | Hint | Similar example and first line |
+| --- | --- | --- | --- |
+| 1e-bridge | Write the footbridge's cost rule for any length L. | The setup is fixed; the coefficient of L is the price per metre. | A plan with setup 80 and 5 per metre has rule 80 + 5L. Your first line: footbridge setup + footbridge rate × L. |
+| 1e-causeway | Write the causeway's cost rule for any length L. | The setup is fixed; the coefficient of L is the price per metre. | A plan with setup 80 and 5 per metre has rule 80 + 5L. Your first line: causeway setup + causeway rate × L. |
+| 2c-ratio | On rainy Tuesday, write farm carts to walkers in simplest form. | Keep farm carts first; divide both by a common factor. | 3 carts : 27 walkers is 1 : 9. Your first line: 2 : 38. |
+| 2c-share | What fraction of Tuesday's crossings used a farm cart? | Use all Tuesday crossings as the whole. | 3 carts among 30 crossings is 3/30 = 1/10. Your first line: 2 / (2 + 38). |
+
+3b replies use IDs, never position: `different` gives “Both accounts may fit: they count different things within overlapping years. That does not prove either account complete”; `twice` gives “Hob counts times it went right under; the courier records interrupted journeys. They may be counting different things”; `wrong` gives the existing uncertainty reply. The source content array fixes the order and line positions at creation. Existing copied-topic learn examples remain deliberate supplied teaching, not independent probes; support records describe that exposure. No assessment claim is made.
+
+Additional supplied objection answers are available to every plan, and none is scored: “The footbridge would help walkers and the courier, even though farm carts still need another route”; “I would accept flood-day detours to make farm-cart access easier on other days”; “The later bridge is a proposal for another year's budget, not a second purchase now”; “Gathering better evidence may avoid spending the fund on the wrong crossing”; “I would compare my other plan's cost, access and limits before proposing it.” Wren's neutral reply is “Thank you. I'll read this out tomorrow, as you set it out.” The current question's specific misconception reply replaces generic mismatch text; no interpretation uses model-match wording. Child-facing summaries use “kept; matches the supplied quantities”, “kept; does not match yet”, “kept reading”, or “open”, with kept values visible; no engineer wording or proficiency summary.
+
+The open set of supplied objection answers is intentional: the UI says these ideas fit different plans and asks the explorer to choose and edit. The page is human-read, never semantically graded. The colon prompt replacement is in section 13.2 and the runtime content; it makes no claim that all ratios compare separate parts.
