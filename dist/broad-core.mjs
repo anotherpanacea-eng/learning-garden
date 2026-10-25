@@ -134,22 +134,34 @@ export function familiarity(state,q){
  const familiar=bundle.familiar||b.seenVariants.includes(key)||(hasTemplate&&!q.variant&&!b.seenVariants.some(x=>x.startsWith(`${q.id}:`)));
  return {familiar,sameKind:hasTemplate&&!familiar,knownFact:(q.facts||[q.fact]).filter(Boolean).some(f=>b.seenFacts.includes(pairKey(f))),priorExposureUnknown:!!b.legacyExposureUnknown||bundle.priorExposureUnknown};
 }
-export function noteBroadExposure(state,q,mode){
- const b=ensureBroad(state);if(!b.seenItems.includes(q.id))b.seenItems.push(q.id);
+export function noteBroadExposure(state,q,mode,{normalize=true}={}){
+ let b;
+ if(normalize)b=ensureBroad(state);
+ else{
+  if(state.broad===undefined)state.broad={};
+  b=state.broad;
+  if(!b||typeof b!=='object'||Array.isArray(b))throw new Error('Earlier fact records are unreadable.');
+  for(const key of ['seenItems','seenVariants','seenFacts']){if(b[key]===undefined)b[key]=[];if(!Array.isArray(b[key]))throw new Error('Earlier fact records are unreadable.');}
+  if(b.drafts===undefined)b.drafts={};
+  if(!b.drafts||typeof b.drafts!=='object'||Array.isArray(b.drafts))throw new Error('Earlier drafts are unreadable.');
+ }
+if(!b.seenItems.includes(q.id))b.seenItems.push(q.id);
  const vkey=variantKey(q);if(!b.seenVariants.includes(vkey))b.seenVariants.push(vkey);
  for(const fact of (q.facts||[q.fact]).filter(Boolean)){
   const key=pairKey(fact);if(!b.seenFacts.includes(key))b.seenFacts.push(key);
   for(const [draftKey,d]of Object.entries(b.drafts)){
+   if(!d||typeof d!=='object'||Array.isArray(d))continue;
    const other=d.question||itemById(draftKey.replace(/^(checkin|activity):/,''));
-   if((other?.facts||[other?.fact]).filter(Boolean).some(f=>pairKey(f)===key)&&draftKey!==`${mode}:${q.id}`)d.knownFact=true;
+   const facts=other?.facts||[other?.fact];
+   if(Array.isArray(facts)&&facts.some(f=>Array.isArray(f)&&f.length===2&&f.every(Number.isFinite)&&pairKey(f)===key)&&draftKey!==`${mode}:${q.id}`)d.knownFact=true;
   }
  }
 }
 export function broadSupportLevel(active){return active.revealed?3:active.stepsSeen||active.helpUsed||active.modelUsed?2:active.hinted?1:0;}
 
-export function noteLegacyExposure(state, fact) {
+export function noteLegacyExposure(state, fact, options) {
   if (!fact) return;
-  noteBroadExposure(state, {id:`legacy-${pairKey(fact)}`,fact}, 'legacy');
+  noteBroadExposure(state, {id:`legacy-${pairKey(fact)}`,fact}, 'legacy',options);
 }
 
 export function makeBroadObservation(q, active, mode, skip=false, state=null) {

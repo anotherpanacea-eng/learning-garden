@@ -107,6 +107,12 @@ node test/broad-help-checks.mjs
 node test/broad-model-checks.mjs
 node test/explorer-storage-checks.mjs
 node test/plantings-and-speech-checks.mjs
+node test/subject-pathway-exposure-checks.mjs
+node test/pathway-entry-checks.mjs
+node test/linear-pathway-checks.mjs
+node test/evidence-voice-checks.mjs
+node test/motion-evidence-checks.mjs
+node test/french-rooms-checks.mjs
 node test/mobile-quality-checks.mjs
 node test/number-garden-story-checks.mjs
 node test/living-garden-checks.mjs
@@ -520,7 +526,7 @@ Shadow Theatre (`#loft/shadows`) moves one original opaque card between a fixed 
 
 Same pour, new unit (`#cafe/units`) keeps a separate 1 L picture jug fixed while switching L/mL labels or moving one 50 mL measure between 300 and 350 mL. Supplied relations pass whole-notebook preservation and actual pretty-report import preflight before appearing; existing Kitchen/Tenths/Hundredths work is separate. No saved scene or independent conversion result is added. See [spec113](docs/specs/113-capacity-unit-bridge.md). Run `node test/capacity-units-checks.mjs`; with dist served locally, run `UNITS_TEST_URL=http://127.0.0.1:4213/ node test/capacity-units-browser.js` with the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `UNITS_ARTIFACTS` selects synthetic screenshots. These checks do not establish physical-device, audible-quality, physical measuring or learning outcomes.
 
-How shall we begin? (`#begin`) is an optional four-page starting-choice flow, reached from **Find a place to begin** on Home or **Change starting choices** in Grown-up notes. It applies future Café amounts and new English/French reading defaults together; Keep, Skip and local activity overrides remain available. Waiting orders, frozen reading visits and automatic suggestions retain their existing behavior. There is no age placement or global level. See [spec114](docs/specs/114-optional-starting-flow.md). Run `node test/starting-flow-checks.mjs`; with dist served locally, run `STARTING_TEST_URL=http://127.0.0.1:4214/ node test/starting-flow-browser.js` using the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `STARTING_ARTIFACTS` selects synthetic screenshots. The implementation passed independent review; no production deployment or learning outcome is established.
+How shall we begin? (`#begin`) is an optional four-page starting-choice flow, reached from **Café and reading amounts** on Home or **Change starting choices** in Grown-up notes. It applies future Café amounts and new English/French reading defaults together; Keep, Skip and local activity overrides remain available. Waiting orders, frozen reading visits and automatic suggestions retain their existing behavior. There is no age placement or global level. See [spec114](docs/specs/114-optional-starting-flow.md). Run `node test/starting-flow-checks.mjs`; with dist served locally, run `STARTING_TEST_URL=http://127.0.0.1:4214/ node test/starting-flow-browser.js` using the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `STARTING_ARTIFACTS` selects synthetic screenshots. The implementation passed independent review; no production deployment or learning outcome is established.
 
 ## Bramble’s Seed Pile
 
@@ -551,3 +557,12 @@ The pictures are written as Mermaid text or a ring of stages in `dist/drawn-howt
 Keep it out is a bounded Seed Stall investigation at `#numbers/seeds/pairs`: draw two seeds, compare returning the first with keeping it out, inspect a chance branch, and try the finite question pack. Old Seed Stall experiments retain their original behavior. See [spec215](docs/specs/215-seed-stall-keep-it-out.md). Source checks: `node test/seed-pairs-checks.mjs`; synthetic browser journeys: `python3 test/seed-pairs-browser.py` (local preview required).
 
 Which test first? (`#post/sorting/order`) adds three separate requests to Sorting Desk: size first, stamp first, and NOT blue. Build an ordered rule, trace one parcel, swap the rules, or compare all supplied cards. Old Sorting Desk, Double Check and delivery records stay separate. See [spec216](docs/specs/216-which-test-first.md). Run `node test/ordered-sorting-checks.mjs`; synthetic local/hosted browser journeys use `python3 test/ordered-sorting-browser.py` with `ORDERED_TEST_URL` and `ORDERED_ARTIFACTS`.
+
+
+### Separate starting points and connected subject units
+
+`#pathways` offers Math, English, Science and French starting choices independently for each explorer, with optional short try-it examples. Direct exploration does not set a level or discard a waiting lesson. The earlier Café and reading-amount controls remain at `#begin`.
+
+Four open short units extend the advanced pathway: signed rates and linear equations (`#learn/math`, six lessons); a whole original story, evidence and reader-directed revision (`#learn/english`, five lessons); forces, collision evidence and a revised design (`#learn/science`, five lessons); and French rooms, directions and recent/next actions (`#learn/french`, four lessons). These are bounded supported teaching sequences, not completed courses or placement tests. Writing is human-read and ungraded. Optional French meanings and device-local speech are support, not independent listening evidence.
+
+See [specs217–221](docs/specs/217-subject-pathway-entry.md), the [current roadmap](docs/roadmap.md#current-subject-pathway-delivery) and [course routes](docs/course-routes.md#first-connected-subject-units--2026-10-25-delivery). Run the corresponding `test/{pathway-entry,linear-pathway,evidence-voice,motion-evidence,french-rooms}-checks.mjs` suites and matching Python browser journeys. Use synthetic work only. The owning PR records exact-candidate review and deployment verification.

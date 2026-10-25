@@ -11,7 +11,7 @@ export const startingPages=[
 const destinations=[['#desk','Open the Keeper’s Desk','Sit with a longer question from the town.'],['#cafe','Go to the Café','Feed a waiting neighbor.'],['#paris','Read in Paris','Follow a story and a clue.'],['#french','Explore Paris in French','Read a little French together.'],['#explore','Choose another place','Keep every destination open.']];
 let visit=null;
 export function resetStartingFlow(){visit=null;}
-export const startingInvitation=()=>'<aside class="starting-invitation"><a class="secondary" href="#begin">Find a place to begin</a><p>Choose numbers and reading amounts, or explore as you are.</p></aside>';
+export const startingInvitation=()=>'<aside class="starting-invitation"><a class="secondary" href="#begin">Café and reading amounts</a><p>Choose numbers and reading amounts, or explore as you are.</p></aside>';
 export const startingNotesLink=()=>'<section class="panel"><a class="secondary" href="#begin">Change starting choices</a><p>Choose Café and reading amounts for this explorer. The Café panel’s Sprout/Seedling/Sapling choices use the same small/full ranges.</p></section>';
 const mark='<span aria-hidden="true"> ✓</span>';
 function summary(v){return `<aside class="starting-summary"><h2>Your choices</h2>${['math','reading','french'].map(k=>`<p><strong>${{math:'Café math',reading:'English reading',french:'French'}[k]}</strong><br>${esc(startingDraftDescription(v.draft,k))}</p>`).join('')}</aside>`;}
@@ -24,7 +24,7 @@ export function startingFlowPage(notebook,owner){
  const fresh=!visit||visit.notebook!==notebook||visit.owner!==owner;
  if(fresh)visit={notebook,owner,draft:freshStartingDraft(),page:0,message:''};
  if(fresh&&typeof document!=='undefined'){const captured=visit;queueMicrotask(()=>{if(visit===captured&&location.hash==='#begin')document.querySelector('#starting-title')?.focus();});}
- return `<section class="starting-page" data-start-root><header><p>How shall we begin?</p><svg aria-hidden="true" viewBox="0 0 40 35"><path d="M20 32V12Q3-3 2 10Q3 23 20 22Q38 22 38 7Q24 5 20 16"/></svg></header><div data-start-view>${body(visit)}</div><p id="starting-status" role="status" aria-live="polite" tabindex="-1">${esc(visit.message)}</p><a href="#notes">Grown-up notes</a></section>`;
+ return `<section class="starting-page" data-start-root><p><a class="secondary" href="#pathways">Choose a starting point by subject</a></p><header><p>How shall we begin?</p><svg aria-hidden="true" viewBox="0 0 40 35"><path d="M20 32V12Q3-3 2 10Q3 23 20 22Q38 22 38 7Q24 5 20 16"/></svg></header><div data-start-view>${body(visit)}</div><p id="starting-status" role="status" aria-live="polite" tabindex="-1">${esc(visit.message)}</p><a href="#notes">Grown-up notes</a></section>`;
 }
 export function bindStartingFlow({notebook,explorerId,isActive,save,navigate,focus,canExport}){
  const root=document.querySelector('[data-start-root]');if(!root||!visit)return;const captured=visit,page=visit.page;
