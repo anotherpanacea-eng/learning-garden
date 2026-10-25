@@ -54,7 +54,7 @@ Companion to [spec 166](../specs/166-valley-animal-book.md). Use as written. Sou
 
 **Longer:** The *Willowbank Gazette* prints one line: *Bear tracks seen on the high path.* Hob Pennick counts his ewes at the ford. Then he counts again. All forty are there. "Bears don't belong here," says Bramble. "They frighten the sheep." "Bears lived in these mountains long before the village," says the librarian. "They almost vanished. People brought a few back." Bramble folds her arms. "And who helps when a sheep is lost?" "That's a fair question," says the librarian. "People are still working it out." Hob scratches his chin. "A shepherd in Les Saules keeps a big white dog with her flock. A patou. It grew up with the sheep. It doesn't fight. It just stands there, being enormous." The next week the patou arrives, sniffs Pip politely, and lies down among the ewes.
 
-**Keeper's note:** *A true thing from science.* By the mid-1990s only a handful of brown bears were left in the Pyrenees. Three bears from Slovenia were released in 1996. In 2024, French wildlife officers reported at least 96 bears there. Guardian dogs, shepherds and night pens help protect flocks, and people still debate what works best on steep ground.
+**Keeper's note:** *A true thing from science.* By the mid-1990s only a handful of brown bears were left in the Pyrenees. Three bears from Slovenia were released in 1996–1997. In 2024, French wildlife officers reported at least 96 bears there. Guardian dogs, shepherds and night pens help protect flocks, and people still debate what works best on steep ground.
 
 ### 5. The café goldfish (Act V, the night garden project)
 
@@ -153,7 +153,7 @@ Cards: marmot, wild rabbit, wild boar, dipper (wild) · Hob's ewe, Hob's patou, 
 - **Pyrenean desman.** Shows: a small river animal, now Endangered; its range has shrunk a lot. Think: dams, dirty water and less water hurt it. Not known yet: how much escaped American mink harm it.
 - **Bucardo (Pyrenean ibex).** Shows: a wild mountain goat, now extinct; the last one died in 2000. Not known yet: how much hunting, disease and other causes each mattered. Then: a related ibex was released in the French Pyrenees from 2014, 14 years later.
 - **Bearded vulture.** Shows: gone from the Alps by about 1913; zoo-bred birds released there from 1986; the first wild Alpine chick in 1997. Think: people stopped shooting and poisoning them. Not known yet: how big the Pyrenean population is now; counts disagree.
-- **Brown bear.** Shows: three Slovenian bears released in 1996; at least 96 reported for 2024. Think: more unrelated bears are needed. Not known yet: the exact number; the model says about 97 to 123.
+- **Brown bear.** Shows: three Slovenian bears released in 1996–1997; at least 96 reported for 2024. Think: more unrelated bears are needed. Not known yet: the exact number; the model says about 97 to 123.
 - **California condor.** Shows: only 27 left in 1987, all taken into care; 561 in 2022, 347 of them wild. Think: breeding worked because there were wild places to release them.
 - **Gray squirrel.** Shows: brought to Britain from North America; carries squirrelpox. Think: the virus, competition and habitat loss all hurt red squirrels.
 
@@ -290,7 +290,7 @@ Choices are listed A, B, C; ✔ marks the answer. Feedback for each choice is 20
 
 **C4 (Keeper's Desk).** At least 83 bears were detected in 2023, and at least 96 in 2024.
 - (a) How many more were detected? Steps: 96 − 83 = 13. **13.**
-- (b) How many more than the 3 released in 1996? Steps: 96 − 3 = 93. **93.**
+- (b) How many more than the 3 released in 1996–1997? Steps: 96 − 3 = 93. **93.**
 - (c) Does (a) prove exactly 13 cubs were born? **No.** Detection changes each year, and bears also die or wander.
 - Misconception tested: `minimum-is-total`.
 - Hint: "At least" means the true number could be higher.
