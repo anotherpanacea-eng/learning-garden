@@ -1,3 +1,5 @@
+import {pairsPage,pairsRefusal,pairsEntry,bindPairs} from './seed-pairs-ui.mjs';
+import {preparePairDisplay} from './seed-pairs-core.mjs';
 import {bothPage,bothRefusal,bindBoth} from './balance-both-ui.mjs';
 import {prepareBothDisplay} from './balance-both-core.mjs';
 import {pricePage,priceEntry,priceRefusal,bindPrice} from './slope-equation-ui.mjs';
@@ -355,7 +357,8 @@ function render(){
   else if(sortingBench)html=sortingPage(state);
   else if(doubleBench)html=doublePage(state,detail);
   else if(hundredthsBench)html=hundredthsPage(state)+unitsEntry();
-  else if(seedBench)html=seedPage(state);
+  else if(hash==='#numbers/seeds/pairs'){const ready=preparePairDisplay(state,priceOptions());html=ready.ok?pairsPage(state):pairsRefusal();if(ready.changed)save();}
+  else if(seedBench)html=pairsEntry()+seedPage(state);
   else if(lanternBench)html=lanternPage(state);
   else if(noticeBench)html=noticePage(state);
   else if(joiningLedgerBench){const v=joiningView(state),examples=v.source?ledgerSourceExamples(v.source):[];const outcome=recordLedgerDisplay(state,examples,candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok);html=outcome.ok?joiningLedgerPage(state,explorerStore.active.id):ledgerRefusalPage();if(outcome.changed)save();if(!outcome.ok)queueMicrotask(()=>{if(location.hash==='#numbers/join/ledger')focusElement('#ledger-notice');});}
@@ -513,6 +516,7 @@ function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON
 function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function bind(){
  bindKeeperStory(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
+ bindPairs(state,{save,render,focus:focusElement,...priceOptions(),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindBoth(state,{save,render,focus:focusElement,...priceOptions(),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindPrice(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindDesk(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
