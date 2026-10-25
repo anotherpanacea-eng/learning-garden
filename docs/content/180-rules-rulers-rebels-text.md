@@ -141,7 +141,7 @@ Visible steps:
 > Old rich families were patricians. Most citizens were plebeians. After a long struggle, plebeians won their own officials, tribunes, who could block a law.
 
 **Card 2.3 Athens and Rome** *(A true thing from history)*
-> In Athens, citizen men voted on laws themselves. In Rome, citizens mostly chose officials, and the Senate's advice carried great weight.
+> Both Athens and Rome had citizen assemblies voting on laws. Many Athenian offices were chosen by lot; Roman consuls were elected.
 
 **The Rule Board** *(A made-up model)*
 > Four safeguards kept one man from ruling Rome: a one-year term, two consuls, armies kept out of Rome, and tribunes who could block.
@@ -247,7 +247,7 @@ Events slide on one at a time. Predict which safeguard each breaks, then flip.
 > For small wrongs, most punishments were fines. Some people were put in the stocks or the pillory: wooden frames in a public place, so everyone saw what they had done.
 
 **Card 4.11 Today** *(A true thing from history)*
-> Today, jurors must not know about the case before the trial. They decide only from what they hear in court.
+> Today in England and Wales, jurors decide from evidence admitted in court. They report prior knowledge or connections for the judge to assess.
 
 **Keeper's note** *(A true thing from history)*
 > Four copies of the 1215 charter survive. Later, many read its promise as a right to trial by jury, though that was not its first meaning.
@@ -359,15 +359,15 @@ Cards: Caesar crosses the Rubicon (49 BCE) · Octavian is named Augustus (27 BCE
 **Explanation:** People describe themselves kindly. His words show what he wanted people to believe.
 
 **B6** · Keeper's Desk · 3-choice
-**Prompt:** How did Athens and the Roman Republic differ?
-1. Athens voted on laws; Rome mostly chose leaders **(right)**
+**Prompt:** How were many Athenian officials and Rome's consuls chosen?
+1. Many Athenian offices used lots; Rome elected its consuls **(right)**
 2. Rome let women vote, and Athens never did *(misconception: Rome was more open)*
 3. Athens was ruled by one king; Rome by two consuls *(mix-up: Athens's democracy forgotten)*
-**Feedback 1:** Yes. Direct voting in Athens; chosen leaders in Rome.
+**Feedback 1:** Yes. Lots chose many Athenian officeholders; voters chose Rome's consuls.
 **Feedback 2:** Neither let women vote. Both left many people out.
 **Feedback 3:** Athens had a democracy then, with no king.
 **Hint:** Look at the Athens and Rome card.
-**Explanation:** Athenian citizen men decided laws themselves. Roman citizens mostly elected officials who led and proposed laws.
+**Explanation:** Both had citizen assemblies passing laws. The contrast here is how these officials were chosen.
 
 **B7** · Keeper's Desk · say why (spoken to a grown-up, never saved)
 **Prompt:** Could the Republic have been saved? Tell a grown-up one reason.
@@ -408,7 +408,7 @@ Cards: Caesar crosses the Rubicon (49 BCE) · Octavian is named Augustus (27 BCE
 **Feedback 2:** Yes. Tacitus and Cassius Dio, both Roman.
 **Feedback 3:** Two Roman writers did write about her. Look at their cards.
 **Hint:** Look at Teach card 3.
-**Explanation:** Both accounts come from Rome's side, years later. The Iceni's own story was never written down.
+**Explanation:** Both accounts come from Rome's side, years later. No account from the Iceni's side survives.
 
 **C4** · Sapling · number with steps
 **Prompt:** Revolt in 61 CE, Tacitus writing in 116 CE. How many years apart?
@@ -480,7 +480,7 @@ Cards: Caesar crosses the Rubicon (49 BCE) · Octavian is named Augustus (27 BCE
 
 **D3** · Seedling · order the cards
 **Prompt:** Put these in time order, oldest first.
-Cards: English courts use juries of neighbors · Today, jurors must not know the case · Ordeals decide some cases · A Church council tells priests to stop ordeals
+Cards: English courts use juries of neighbors · Today in England and Wales, jurors use court evidence · Ordeals decide some cases · A Church council tells priests to stop ordeals
 **Answer:** Ordeals; the 1215 council; juries from about 1220; today.
 **Misconception tested:** juries were always there, or Magna Carta began them.
 **Hint:** Which change made the next one necessary?
@@ -511,10 +511,10 @@ Cards: English courts use juries of neighbors · Today, jurors must not know the
 2. Jurors were neighbors meant to know the facts **(right)**
 3. Jurors were picked by a stone machine, like Athens *(mix-up with spec 136's kleroterion)*
 **Feedback 1:** Jurors were ordinary local men. Judges were separate.
-**Feedback 2:** Yes. Today, jurors must not know the case beforehand.
+**Feedback 2:** Yes. Today in England and Wales, jurors use court evidence beforehand.
 **Feedback 3:** That was Athens. English jurors were local men.
 **Hint:** Compare the juries card with the today card.
-**Explanation:** Then, jurors were expected to know. Today, knowing the case keeps a person off a jury.
+**Explanation:** Then, jurors brought local knowledge. Today in England and Wales, prior knowledge or connections are reported for a judge to assess; the jury decides on admitted evidence.
 
 **I'm stuck (Set D):** Easier case: the sign says 10 apples, the bag has 8. 10 − 8 = 2 short. Now the loaf: sign minus scale.
 

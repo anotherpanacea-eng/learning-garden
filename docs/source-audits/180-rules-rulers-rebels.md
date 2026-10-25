@@ -102,3 +102,6 @@ All numeric answers and wrong choices were checked by `check180.py` (24 checks) 
 ## Rights notes for images
 
 No images are embedded. Suggested sources for the builder, all to be confirmed item by item: British Museum collection images (knucklebones statue, a bulla, a wax tablet) under its non-commercial terms, or museum open-access images where available; Colchester Archaeological Trust photos of the burnt layer only with permission; the Thornycroft statue photographed fresh or from a public-domain or CC0 image; the British Library's 1215 Magna Carta images under its stated terms. A simple drawing is preferred to any battle or punishment picture, and the pack shows no punishment scene at all.
+
+
+Review correction (2026-10-25): Roman assemblies passed laws as well as electing magistrates; compare election versus lot for the named offices, not direct versus representative lawmaking. No surviving Iceni account does not prove none was written. For modern England/Wales juries, prior knowledge is assessed rather than automatically disqualifying: https://www.judiciary.uk/wp-content/uploads/2022/06/Crown-Court-Compendium-Part-I.pdf (jury management 2-1 to 2-3).
