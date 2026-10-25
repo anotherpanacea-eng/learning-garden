@@ -120,7 +120,7 @@ Companion to [spec 121](../specs/121-games-table.md). Use as written, after the 
 **Play again:** Roll again with a fresh box
 
 **Bramble's comments** (she doesn't play; she watches):
-- "Nine and two, or eight and three, or the eleven way. Choices, choices."
+- "Nine and two, or eight and three, or seven and four. Choices, choices."
 - "I always shut the big ones while I still can. Big numbers are harder to roll later."
 - "The dice don't care how clever you are. That's what I like about this one."
 - (Only when all shut) "You did it! I've only done that a handful of times."

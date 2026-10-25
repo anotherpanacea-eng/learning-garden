@@ -178,7 +178,7 @@ Companion to [spec 124](../specs/124-bank-builder.md). Use as written, after the
 
 - With a grown-up, fill two trays with soil and tilt them. Plant grass seed in one and wait for it to grow. Then pour the same jug of water down each. What happens to the soil? `[check: safe and simple at home]`
 - Next time it rains, look at where water runs and where it puddles near your home. Where is the ground low?
-- Build a little sand bank at the beach or in a sandpit and pour water against it. Where does it break first?
+- Build a little sand bank in a sandpit or a tray of damp sand, and pour water against it. Where does it break first?
 
 Off-screen invitations record nothing.
 

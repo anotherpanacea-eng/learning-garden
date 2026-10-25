@@ -313,7 +313,7 @@ Shown before the first sort, one step per tap. Button: **Next**. Last button: **
 ## Off-screen invitations
 
 - Write a three-clue mystery on paper for someone at home. Check that your clues lead to exactly one answer.
-- Next time someone says "I think…", ask them: "What did you see that made you think that?"
+- Next time someone at home says "I think…", ask them: "What did you see that made you think that?"
 - Look for footprints after rain: paws, shoes, birds. Which way were they going?
 
 Off-screen invitations record nothing.

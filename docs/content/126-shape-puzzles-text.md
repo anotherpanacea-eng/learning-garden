@@ -161,8 +161,8 @@ Companion to [spec 126](../specs/126-shape-puzzles.md). Use as written, after th
 
 ## Off-screen invitations
 
-- Cut a square of paper into the seven tangram pieces with a grown-up, and make your own window shapes.
-- Find a box at home, cut along some edges with a grown-up, and lay it flat. Does its flat shape look like one of the cube nets? Other kinds of boxes have different nets.
+- Ask a grown-up to cut a square of paper into the seven tangram pieces, and make your own window shapes.
+- Find a box at home, ask a grown-up to cut along some edges, and lay it flat. Does its flat shape look like one of the cube nets? Other kinds of boxes have different nets.
 - Draw a chessboard and color it. Cover two opposite corners with coins. Can dominoes or pieces of paper the size of two squares cover the rest?
 
 Off-screen invitations record nothing.

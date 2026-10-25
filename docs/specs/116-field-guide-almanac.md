@@ -65,18 +65,18 @@ The model, fixed so that every build gives the same answer:
 
 | Date | Published phase (UTC) | Table bin | Table age (days) |
 | --- | --- | --- | --- |
-| 2000-01-06 | New moon 18:13 | `new` | 0.12 |
+| 2000-01-06 | New moon 18:14 | `new` | 0.12 |
 | 2010-06-19 | First quarter 04:29 | `half-growing` | 7.67 |
-| 2020-03-09 | Full moon 17:47 | `full` | 15.00 |
-| 2024-04-02 | Last quarter 03:14 | `half-shrinking` | 23.47 |
+| 2020-03-09 | Full moon 17:48 | `full` | 15.00 |
+| 2024-04-02 | Last quarter 03:15 | `half-shrinking` | 23.47 |
 | 2025-09-21 | New moon 19:54 | `new` | 28.92 |
 | 2026-01-26 | First quarter 04:47 | `half-growing` | 8.27 |
-| 2026-10-26 | Full moon 04:11 | `full` | 15.49 |
+| 2026-10-26 | Full moon 04:12 | `full` | 15.49 |
 | 2030-07-22 | Last quarter 08:07 | `half-shrinking` | 22.08 |
-| 2040-11-04 | New moon 18:55 | `new` | 0.17 |
+| 2040-11-04 | New moon 18:56 | `new` | 0.17 |
 | 2060-02-08 | First quarter 21:41 | `half-growing` | 6.89 |
 | 2080-08-30 | Full moon 10:40 | `full` | 15.12 |
-| 2099-11-05 | Last quarter 19:41 | `half-shrinking` | 22.37 |
+| 2099-11-05 | Last quarter 19:42 | `half-shrinking` | 22.37 |
 
 **Does it feel like a correction?** The copy is written so that it doesn't: the child's note always comes first, the table is introduced as a calculation that can be a day off, a one-step difference is explained by shapes near a change being hard to tell apart, and a bigger difference is framed as two questions to wonder about with no answer stored. Science review should still read it with this question in mind.
 

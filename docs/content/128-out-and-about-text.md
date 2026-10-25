@@ -31,7 +31,7 @@ Companion to [spec 128](../specs/128-out-and-about.md). Use as written, after th
 | id | Title | Mission | Grown-up line | Come-back question | Needs |
 | --- | --- | --- | --- | --- | --- |
 | `almanac-same-window` | The same window tomorrow | Look out of the same window at the same time tomorrow. | | What was different, and what stayed the same? | |
-| `almanac-three-minibeasts` | Three minibeasts | Look under a stone, a leaf and a log for minibeasts. Look closely, then put everything back the way it was. | Go out together. Look, don't touch, and put stones and logs back gently. | Which hiding place had the most? | 🌳 🧑 |
+| `almanac-three-minibeasts` | Three minibeasts | Look under a stone, a leaf and a log for minibeasts. Look closely, then put everything back the way it was. | Go out together. A grown-up lifts stones and logs and puts them back gently. Look, don't touch, and wash hands afterwards. | Which hiding place had the most? | 🌳 🧑 |
 | `almanac-daytime-moon` | The daytime moon | With a grown-up, look for the moon through a window during the day this week. | The grown-up chooses a view away from the Sun. Never look at the Sun. | When did you spot it, and what shape was it? | 🧑 |
 | `almanac-rain-cup` | Catch the rain | Use the same cup in a safe place to catch rain over two equal-length periods. Compare the water, without assuming it describes a whole day. | Choose a safe spot together. | Which measured period caught more? | 🌳 🧑 |
 
@@ -57,7 +57,7 @@ Companion to [spec 128](../specs/128-out-and-about.md). Use as written, after th
 | id | Title | Mission | Grown-up line | Come-back question | Needs |
 | --- | --- | --- | --- | --- | --- |
 | `mystery-three-clues` | Write a three-clue mystery | Write a mystery on paper with three clues. Check that your clues lead to exactly one answer. Give it to someone to solve. | | Did they solve it the way you expected? | 📄 👥 |
-| `mystery-saw-think` | "What did you see?" | Next time someone says "I think…", ask them kindly: "What did you see that made you think that?" | | What did they say? | 👥 |
+| `mystery-saw-think` | "What did you see?" | Next time someone at home says "I think…", ask them kindly: "What did you see that made you think that?" | | What did they say? | 👥 |
 | `mystery-footprints` | Footprints after rain | After rain, look for footprints: paws, shoes, birds. | Go out together. | Which way were they going? | 🌳 🧑 |
 
 ## The Clockwork Mill
@@ -72,9 +72,9 @@ Companion to [spec 128](../specs/128-out-and-about.md). Use as written, after th
 
 | id | Title | Mission | Grown-up line | Come-back question | Needs |
 | --- | --- | --- | --- | --- | --- |
-| `bank-soil-trays` | Two trays of soil | Fill two trays with soil and tilt them. Grow grass seed in one. When it has grown, pour the same jug of water down each. | A grown-up helps set up the trays outside or over a sink. | What happened to the soil on each tray? | 🌳 🧑 |
+| `bank-soil-trays` | Two trays of soil | Fill two trays with soil and tilt them. Grow grass seed in one. When it has grown, pour the same jug of water down each. | A grown-up helps set up the trays outside or over a sink. Wash hands afterwards. | What happened to the soil on each tray? | 🌳 🧑 |
 | `bank-puddles` | Where does the water go? | Next time it rains, look at where water runs and where it puddles near your home. | Go out together, and stay away from deep water and roads. | Where was the ground lowest? | 🌳 🧑 |
-| `bank-sand` | A sand bank | At the beach or a sandpit, build a little bank of sand and pour water against it. | A grown-up chooses the spot, away from the sea's edge. | Where did it break first? | 🌳 🧑 |
+| `bank-sand` | A sand bank | In a sandpit or a tray of damp sand, build a little bank of sand and pour water against it. | A grown-up brings the water and chooses the spot. | Where did it break first? | 🌳 🧑 |
 
 ## The Sign Painter
 
@@ -99,14 +99,14 @@ Companion to [spec 128](../specs/128-out-and-about.md). Use as written, after th
 | --- | --- | --- | --- | --- | --- |
 | `beds-bean-jar` | A bean in a jar | With a grown-up, sprout a suitable bean against damp kitchen paper. Watch the root and the shoot grow, day by day. | A grown-up chooses an untreated seed suitable for sprouting and handles it. Don't eat it. `[check]` | What grew first, the root or the shoot? | 🧑 |
 | `beds-ask-gardener` | Ask about a plant | Ask a grown-up at home about a plant they grow or remember, or read a gardening page together. | Talk together at home. | What did you find out? | 🧑 |
-| `beds-soil-cups` | Two soils | Fill two cups with soil from two different places. Pour the same water into each. | Make small holes in the cups' bottoms first; a grown-up does this. | Which drained faster? | 🧑 |
+| `beds-soil-cups` | Two soils | Fill two cups with soil from two different places. Pour the same water into each. | Make small holes in the cups' bottoms first; a grown-up does this. Wash hands afterwards. | Which drained faster? | 🧑 |
 
 ## The café and the Measuring Kitchen
 
 | id | Title | Mission | Grown-up line | Come-back question | Needs |
 | --- | --- | --- | --- | --- | --- |
 | `cafe-cup-of-water` | A real cup of water | Measure one cup of water with a measuring jug. Pour it into an unbreakable bowl, then a cup, then a tall beaker. | A grown-up helps with cold water over a sink or towel. | Did it look like the same amount each time? | 🍳 🧑 |
-| `cafe-share-fairly` | Share it fairly | Help a grown-up cut a piece of fruit or a sandwich into equal parts for everyone. | A grown-up does the cutting. | How did you check the parts were equal? | 🍳 🧑 |
+| `cafe-share-fairly` | Share it fairly | Watch a grown-up cut a piece of fruit or a sandwich into equal parts for everyone. Decide together where each cut should go. | A grown-up does the cutting. | How did you check the parts were equal? | 🍳 🧑 |
 
 ## Willow Post Office
 
@@ -157,7 +157,7 @@ Companion to [spec 128](../specs/128-out-and-about.md). Use as written, after th
 
 | id | Title | Mission | Grown-up line | Come-back question | Needs |
 | --- | --- | --- | --- | --- | --- |
-| `lantern-torch-look` | Inside a torch | With a grown-up, open the battery cover of a torch and look at which way the batteries go in. | A grown-up opens a battery torch and keeps hold of its batteries. Match the marked directions; do not reverse them. Never open anything that plugs into the wall. `[check]` | Which markings matched the battery directions? | 🧑 |
+| `lantern-torch-look` | Inside a torch | With a grown-up, open the battery cover of a torch and look at which way the batteries go in. | A grown-up opens a battery torch and keeps hold of its batteries. Match the marked directions; do not reverse them. Not a torch with button or coin batteries. Never open anything that plugs into the wall. `[check]` | Which markings matched the battery directions? | 🧑 |
 
 ## Living things and fossils
 

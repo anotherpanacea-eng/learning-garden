@@ -103,7 +103,7 @@ Two pictures side by side: from far above, and from our sky.
 
 > Sunlight always lights up half of the moon, the half facing the Sun. As the moon travels around Earth, we see different amounts of that lit half. When we can see all of it, that's a full moon. When the lit half faces away from us, that's a new moon.
 >
-> The dark part is **not** Earth's shadow. When Earth's shadow really does fall on the moon, that's a lunar eclipse. Eclipses only happen a few times a year, because the moon's path is a little tilted. **[check]**
+> The dark part is **not** Earth's shadow. When Earth's shadow really does fall on the moon, that's a lunar eclipse. Eclipses don't happen every month, because the moon's path is a little tilted. **[check]**
 
 ### The moon table (Sapling)
 
@@ -201,7 +201,7 @@ Each card shows: the group name, **You identified it as…** with the count and 
 | Woodlouse | Woodlice are crustaceans, cousins of crabs and shrimp. They need damp places to breathe. **[check]** | Some roll into a ball when they're disturbed. |
 | Millipede | Millipedes have two pairs of legs on most body sections. They eat dead leaves. | Legs moving in waves along its body. |
 | Centipede | Centipedes have one pair of legs on each body section. They hunt other minibeasts. | Long feelers and a fast, wriggling run. |
-| Spider | Spiders have eight legs and two body parts. Most spin silk. | A web, especially in the morning with dew on it. |
+| Spider | Spiders have eight legs and two body parts. All spiders make silk, and many spin webs. | A web, especially in the morning with dew on it. |
 | Harvestman | Harvestmen have eight legs like spiders, but their body is one round piece and they don't spin silk. **[check]** | Very long, thin legs on a small body. |
 | Ladybug | Ladybugs are beetles. Their spotted wing cases open to let out thin wings for flying. | Count the spots. Different kinds have different numbers. |
 | Beetle | Beetles have hard front wings, called wing cases, that close like a lid. | A line down the middle of its back where the cases meet. |
