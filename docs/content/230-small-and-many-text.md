@@ -538,9 +538,9 @@ Explanation: The twiggy share went from three quarters to nine in ten in one gen
 
 **5.6 (Keeper's Desk, say why, to a grown-up)**
 Prompt: How is the stick insect like the peppered moth?
-Answer to listen for: in both, the variation was already there; the ones that were harder to see left more young; the mix of inherited traits changed over generations; no individual chose to become twiggy or plain. Real development and molting are different from that population change.
+Answer to listen for: in both, the variation was already there; the ones that were harder to see left more young; the mix of inherited traits changed over generations; no individual chose its color or shape. Real development and molting are different from that population change.
 Misconception tested: environment-makes-trait.
-Hint: Did any moth or stick insect change itself?
+Hint: Did any moth or stick insect choose its color or shape?
 Explanation: Both show the same idea: who is left to have young changes the mix.
 
 ### Set 6. The market without bees (Keeper's Desk)
