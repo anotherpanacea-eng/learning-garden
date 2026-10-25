@@ -1,6 +1,6 @@
-# 218. Under the Canopy: inside the rainforest, its crowds and its reach
+# 229. Under the Canopy: inside the rainforest, its crowds and its reach
 
-Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md), wave 6. Every child-facing line is in [the companion text](../content/218-under-the-canopy-text.md); sources and open checks are in the [source audit](../source-audits/218-under-the-canopy.md).
+Status: **proposed, 2026-10-25; writing only, awaiting independent spec review and a subject check.** Part of the [history and science build-out](../history-and-science-buildout.md), wave 6. Every child-facing line is in [the companion text](../content/229-under-the-canopy-text.md); sources and open checks are in the [source audit](../source-audits/229-under-the-canopy.md).
 
 **Commissioning boundary:** a proposal only; it commissions no code, art, route or storage. Select a bounded first slice after independent review (suggested: the Canopy Stage, the Bug Gallery and the Puppet Trays, sets 1 to 3); the seven activities do not commission each other. Story links are future adapters to [spec 120](120-keeper-of-the-ways.md); standalone play stays open and no completion is inferred from a missing adapter. Animals are puppets and pictures only; nothing on or off screen handles a real animal.
 
@@ -117,14 +117,16 @@ rainforest: {
   version: 1,
   stage: { source, treetops: 'none'|'thin'|'thick', at } | null,
   trays: { source, placed: { [puppetId]: trayCode }, at } | null,     // free placing, never graded on load
-  spot: { source, kept: [{ animal, background, result, at }] },        // latest 6
+  spot: { source, kept: [{ animal, background, result, at }] },        // retained; no automatic eviction
   chain: { source, good, direction: 'forward'|'backward', at } | null,
   answers: { [itemId]: { source, choice | value | order | pairs, support: ['hint'|'example'|'skip'], at } }
 }
 ```
 
-- `source` freezes the model version, rule, and each item's choices and order. Codes and numbers only, never prose; *say why* and the café choice board are not stored.
-- Never recompute or rewrite saved results on load; validate ids against the frozen source, counts, and ranges (kept lists at most 6); an unreadable entry stays raw and exportable while everything else stays open.
+- `source` preserves the complete authored prompt, passage/card text, ordered choices, answer key and feedback, hints and worked examples, model rules/parameters/units, and the source version used for that visit. Freeze any diagram/link meanings and selection metadata too; resume and export from this saved source, not today’s catalog. Codes identify fields and records; they do not replace the authored text needed to render earlier work.
+- Never recompute or rewrite saved results on load; validate ids against the frozen source, counts, and ranges (shared report and recovery limits); an unreadable entry stays raw and exportable while everything else stays open.
+- Learner prose policy is separate from authored lesson text: *say why* and spoken sentence frames remain human-read, ungraded and unrecorded; the pack does not collect personal or family information.
+- Retain kept visits without silently dropping, truncating or overwriting earlier kept work. At shared report/recovery limits, refuse the whole save unchanged and offer the existing notes download. Only an explicit, confirmed removal of a learner-selected kept visit may free space, with a warning naming the settings/answers it removes; protect fixed lessons and unreadable raw work. Current working controls remain editable, and source wording/key changes never regrade saved results. Use the existing notes/recovery path, not a second backup system.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and explorer switching are shared.
 
 ## Curriculum fit
@@ -179,6 +181,8 @@ From the pinned `curriculum/marble/dependencies.json` (checked with `crosswalk2.
 | Rainforest Products in Daily Life (`mt_xE_b3JiDZU`) | Everyday Foods from Rainforests (`mt_s08-QxASd2`) | Met elsewhere: spec 152 claims it (From forest to table); the chocolate chain revisits it. |
 
 ## Checks for implementation
+
+Earlier scratch-script and receipt filenames below retain their pre-renumbering numbers as historical evidence; they are not current specification IDs.
 
 - **Numbers and text script run (2026-10-25):** `check218.py` (scratch area, `python3 -I`), **420 checks, all passed**: the one-tree tally (9 others, 39 more insects); 2,700 − 1,300 = 1,400; the 100-square bench (50 ÷ 6 ≈ 8.3, 50 ÷ 94 ≈ 0.53, ratio 94 ÷ 6 ≈ 15.7, so "about 16"); all 6 spot-bench settings; the key brute-forced over all 64 feature combinations (seven distinct endings) and over all 19 puppets (each reaches its own tray, none carries two group features); the 3.4 sort; and, parsed from the companion, 36 items, 28 three-choice items with exactly one right answer each (A 9, B 10, C 9), every distractor tagged, per-choice feedback of 20 words or fewer, a hint on every item, prompts of 15 words or fewer, no digits in Sprout items, teach cards and scenes within limits, no em-dashes, no "wrong", no UK spellings, no Hollis. Independent review rerun (2026-10-25, `rv218.py` and `len218.py`, fresh scripts): see the source audit. The right option is uniquely longest in 5 of 28 three-choice items.
 - Model lines on every bench; the floor light is the only input-driven sense; the dart frog is never "hidden".

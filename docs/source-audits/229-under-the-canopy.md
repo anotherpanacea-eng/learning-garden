@@ -1,6 +1,6 @@
 # Under the Canopy: source audit
 
-Audit for [spec 218](../specs/218-under-the-canopy.md) and its [companion text](../content/218-under-the-canopy-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the five bench models (`stage-light-v1`, `one-tree-v1`, `rainforest-key-v1`, `spot-v1`, `slice-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
+Audit for [spec 229](../specs/229-under-the-canopy.md) and its [companion text](../content/229-under-the-canopy-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the five bench models (`stage-light-v1`, `one-tree-v1`, `rainforest-key-v1`, `spot-v1`, `slice-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
 
 ## Verification method (read first)
 

@@ -1,6 +1,6 @@
 # Under the Canopy: all child-facing text
 
-Companion to [spec 218](../specs/218-under-the-canopy.md). Use as written. `{guide}` is the chosen companion; the explorer is "you". US spelling, metric first, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them. None are marked in this file.
+Companion to [spec 229](../specs/229-under-the-canopy.md). Use as written. `{guide}` is the chosen companion; the explorer is "you". US spelling, metric first, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them. None are marked in this file.
 
 ## Labels used on every card
 

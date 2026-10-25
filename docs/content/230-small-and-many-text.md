@@ -1,6 +1,6 @@
 # Small and Many: all child-facing text
 
-Companion to [spec 219](../specs/219-small-and-many.md). Use as written, after independent review and a subject check. `{guide}` is the chosen companion; the explorer is "you". Pip is a fox (he/him), Dot a ladybug (she/her), Bramble she/her, the librarian they/them, the orchard keeper she/her, Nuria an otter (she/her). US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them.
+Companion to [spec 230](../specs/230-small-and-many.md). Use as written, after independent review and a subject check. `{guide}` is the chosen companion; the explorer is "you". Pip is a fox (he/him), Dot a ladybug (she/her), Bramble she/her, the librarian they/them, the orchard keeper she/her, Nuria an otter (she/her). US spelling, no em-dashes. Facts marked [check] stay out of the build until the source audit clears them.
 
 **House rules for this text:** every body fact is about a drawn figure, a cast animal or a real minibeast. No line asks about the explorer's own body, home, family, feelings or where they live. The "you" in prompts is the explorer doing the task. Real minibeasts are looked at off screen only, with a grown-up, and nothing from that is recorded.
 
@@ -160,8 +160,8 @@ Worked example: (1) A twig-shaped mother. (2) Twig-shaped eggs hatch. (3) Twig-s
 **T19. Who is left changes the mix.** Birds find plain insects more easily. Twiggy ones are left to have young. Next time, more are twiggy.
 Worked example: (1) Half twiggy, half plain. (2) Birds find more plain ones. (3) The young are mostly twiggy.
 
-**T20. Many generations.** One insect never changes its shape. The mix changes, a little each generation, over many generations.
-Worked example: (1) Follow one twiggy insect. (2) It stays twiggy all its life. (3) The mix around it changes.
+**T20. Many generations.** In this model, each insect keeps its twiggy or plain trait as it grows. The mix changes over generations; real insects can change form during development.
+Worked example: (1) Tag one twiggy insect. (2) It stays in the twiggy category as it grows. (3) Its young inherit that trait.
 
 **T21. Two steps** (Keeper's Desk). Pollination: pollen is carried to the flower's stigma. Fertilization: later, inside, a pollen cell joins an egg cell. Then a seed forms.
 Worked example: (1) A bee brings pollen to the stigma. (2) Later, inside, cells join. (3) A seed starts.
@@ -240,14 +240,14 @@ New-part card: A newly found insect has a mouth like a long, thin, hollow tube. 
 ## Activity (e): Twig and Ant
 
 Opening: Watch the hedge for four generations. Who is left?
-Guided first run (3 steps): (1) Tag one twiggy insect. (2) Watch it all its life. (3) Did its shape change?
+Guided first run (3 steps): (1) Tag one twiggy insect. (2) Follow it as it grows. (3) Does it stay in the twiggy group?
 Rule card (A made-up model): Birds find 1 in 4 twiggy insects and 3 in 4 plain ones. Each insect left has two young like itself.
 Buttons: **Next generation** · **Follow one** · **Start again**. Readout: Twiggy {t} · Plain {p}. Generations: 16 and 16 · 24 and 8 · 36 and 4 · 54 and 2.
 Mix bar line: Twiggy share: half · three quarters · nine in ten · 27 in 28.
-Lines: Same shape all its life. Its young look like it. · No insect changed. The mix changed.
+Lines: The tagged insect stays in the same twiggy/plain category as it grows. Its young inherit that category. · The mix of inherited traits changes between generations.
 Ant-mimic card (A true thing about science): This jumping spider looks like an ant. Count its legs: eight. When it stops, it lifts its front legs like feelers. Many hunters avoid ants. It was born ant-shaped. It didn't choose.
 Moth link: The peppered moth is a real case, with real records. Open the moth file.
-Model line (A made-up model): Real stick insects vary in many ways, and real birds and numbers vary. No insect in this bench changes its own shape.
+Model line (A made-up model): Real stick insects grow and can change form as they develop. This model keeps the twiggy/plain trait fixed for each insect; real birds and numbers vary.
 
 ## Activity (f): The Market Without Bees (Keeper's Desk)
 
@@ -538,7 +538,7 @@ Explanation: The twiggy share went from three quarters to nine in ten in one gen
 
 **5.6 (Keeper's Desk, say why, to a grown-up)**
 Prompt: How is the stick insect like the peppered moth?
-Answer to listen for: in both, the variation was already there; the ones that were harder to see left more young; the mix changed over generations; no individual changed.
+Answer to listen for: in both, the variation was already there; the ones that were harder to see left more young; the mix of inherited traits changed over generations; no individual chose to become twiggy or plain. Real development and molting are different from that population change.
 Misconception tested: environment-makes-trait.
 Hint: Did any moth or stick insect change itself?
 Explanation: Both show the same idea: who is left to have young changes the mix.

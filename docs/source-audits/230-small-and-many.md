@@ -1,6 +1,6 @@
 # Small and Many: source audit
 
-Audit for [spec 219](../specs/219-small-and-many.md) and its [companion text](../content/219-small-and-many-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the three bench models (`scale-v1`, `twig-v1`, `orchard-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
+Audit for [spec 230](../specs/230-small-and-many.md) and its [companion text](../content/230-small-and-many-text.md). Date: 2026-10-25. All proposed copy, characters, scenes and the three bench models (`scale-v1`, `twig-v1`, `orchard-v1`) are original. No learner or family record, image, worksheet or lesson code is included.
 
 ## Verification method (read first)
 
@@ -88,3 +88,7 @@ No images are embedded. Hooke's *Micrographia* plates (1665) are public domain; 
 - Edmond Albius's enslavement appears once, gently, at Keeper's Desk depth only, named person first ("a boy ... named Edmond Albius, who was enslaved") and ending with his freedom; "enslaved" is in the glossary.
 - *(Codex review, PR #176)* The mouthpart table and item 4.2 matched each mouth to one food and rejected a butterfly drinking spilled sugar water, which butterflies do (fed sugar water through the proboscis is standard butterfly husbandry). Both now match each mouth to a feeding way (cut and chew a leaf; sip nectar from deep in a flower; mop up a spill on a flat surface), which stays one-to-one: jaws and a housefly's short sponging pad cannot reach deep nectar, a proboscis cannot cut or sponge, and jaws do not sponge. A shared-food line says sugar water suits both butterfly and housefly. The saved `mouths` map now stores a way id.
 - *(review)* Item 4.5 and the new-part card now ask about "a newly found insect", not "a new beetle": every beetle has chewing jaws, and long-snouted weevils drill into seeds, which made distractor B arguably right.
+
+## Bounded repair note (2026-10-25)
+
+The twig model keeps an inherited twiggy/plain category fixed for an individual; it no longer claims that an insect’s body cannot change during its lifetime. Growth, molting and metamorphosis remain explicit and distinct from changes in a population’s inherited-trait mix. NC State’s General Entomology account describes gradual and complete changes of form: https://genent.cals.ncsu.edu/bug-bytes/morphogenesis/ (opened in this repair review). This scoped repair is not a full biology/source or fluent-language clearance; the open checks above remain open.
