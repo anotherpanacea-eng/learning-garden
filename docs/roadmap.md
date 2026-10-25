@@ -171,6 +171,16 @@ These are selected merged-code examples. Their specifications give exact task li
 
 Choose one missing middle at a time using the [26 pathways](six-act-strands.md) and [teaching bridges](six-act-teaching-bridges.md). Teach fraction/decimal relations before ratio planning; unknown relations before algebra; scale, units and broader time before complex journeys; data construction and short trials before statistical claims. These dependencies guide authoring, never compulsory child routes. Every new step needs teaching, a meaningful action, a contrast and a later return in another purpose; a familiar shell alone does not create a learning spiral.
 
+## Much later: parts held back from the new game kinds
+
+These parts of the [new kinds of play](new-game-kinds.md) are written but kept out of their specs' first builds. Each waits until its first build has shipped and been played, and then needs the work listed before it can start. None is a promise of order or date.
+
+| Later part | Belongs to | Needs before it can start |
+| --- | --- | --- |
+| Seed Holes and Hex | [Spec 121](specs/121-games-table.md) Games Table, after Seed Pile, Ribbon Rows and Shutters | A model review per game: board coordinates, legal and end states, search depth (including Seed Holes' extra turns), evaluation, move order, a device work budget and an honest fallback. Seed Holes also needs a complete independent solution before any opening or margin claim returns to child copy. |
+| Grow with the seasons | [Spec 127](specs/127-four-beds.md) Four Beds, after Play the years | A seasonal-rules mini-spec: month boundaries by hemisphere, the first autumn after the chosen spring, missed seasons, device clock changes and switching to Play the years. The almanac comparison stays a count of reported days. |
+| Window pieces and Floors | [Spec 126](specs/126-shape-puzzles.md) Shape Bench, after Parcel boxes | Exact geometry fixtures: a common lattice for the window pieces with eighth turns, each window's outline, piece vertices and one checked solution; the twelve pentomino cell sets and each floor's exact cells; the named two cells removed in the 6×6 contrast. The impossibility and hall-count claims need source or computation review before child copy uses them. |
+
 ## Upstream refresh, separate from curriculum completion
 
 The 2026-10-22 source refresh found Marble at [`a871973`](https://github.com/withmarbleapp/os-taxonomy/tree/a8719737ff86ef7940ba5feca11940de1204103e), with **1,930 topics and 4,102 edges**, while this repository still deliberately uses the 1,590-topic pin above. Comparing IDs gives **341 additions and one removal**. Added topics span mathematics (85), English (82), science (48), computing (38), personal/social development (36), geography (25), history (22) and life skills (5). The removed topic is `mt_3XJkeIn6J6`, estimating answers. These counts are an inventory, not reviewed lesson coverage or permission to replace the graph automatically.
