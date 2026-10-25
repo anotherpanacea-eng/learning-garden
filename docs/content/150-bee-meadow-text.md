@@ -152,7 +152,7 @@ Each worked example reveals one step per tap.
 - Worked example (two apple blossoms):
   1. A bee drinks nectar from blossom one.
   2. Yellow pollen sticks to her fuzzy body.
-  3. She flies to blossom two, on the next apple tree. Some pollen rubs off.
+  3. She flies to blossom two, on a tree of a different, compatible variety, flowering at the same time. Some pollen rubs off.
   4. Now blossom two can grow into an apple.
 
 **Teach 6: Hide, warn or copy.** (A true thing about insects)
@@ -270,7 +270,7 @@ Each worked example reveals one step per tap.
 **Guided item (visible steps):** Help blossom two make an apple.
 1. Tap blossom one. The bee drinks nectar.
 2. Look at her legs and body. Pollen!
-3. Tap blossom two, on the next tree. Some pollen rubs off.
+3. Tap blossom two, on a tree of a compatible different variety. Some pollen rubs off.
 4. In autumn, blossom two has an apple.
 
 **Feedback:**
@@ -280,7 +280,7 @@ Each worked example reveals one step per tap.
 
 **Picture label:** A simplified picture. One visit is shown as enough, and summer is skipped.
 
-**Link line:** Why must apple pollen come from a different tree? Visit the Orchard Year.
+**Link line:** Why do most apple trees need pollen from a compatible different variety? Visit the Orchard Year.
 
 ### Hedge of Tricks
 

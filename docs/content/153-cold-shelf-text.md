@@ -341,10 +341,10 @@ Right answers in **bold**. Say-why answers are spoken to a grown-up, never saved
 Hint: Look at the polar bear card on the top globe.
 Explanation: Polar bears live in the Arctic. Wild penguins live in the south.
 
-**A2 (Sprout, 3-choice).** This picture shows ice sitting on rock. Which pole is it?
+**A2 (Sprout, 3-choice).** This cross-section is exactly at one geographic pole. Ice rests on rock. Which pole?
 - **the Antarctic**: Right. Antarctica is land, so its ice sits on rock.
-- the Arctic *(misconception: poles-same)*: Arctic ice mostly floats on the ocean. Look again at the rock.
-- you can't tell *(misconception: rock-not-a-clue)*: The rock is the clue. Which pole is land?
+- the Arctic *(misconception: poles-same)*: Ice at the geographic North Pole floats on ocean, though Arctic land can also hold ice.
+- you can't tell *(misconception: rock-not-a-clue)*: For this explicitly labeled geographic-pole section, which pole stands on a continent?
 Hint: Which pole is land with ocean around it?
 Explanation: Antarctica is a continent, so its ice rests on rock. The North Pole's ice floats.
 

@@ -40,7 +40,7 @@ Two writer passes (31 searches) and an independent review pass (5 searches) chec
 
 **Keeping warm.** Adaptations arise over many generations, never by an animal's wish.
 - *Wrap up:* fur and feathers trap air; blubber is thick fat under the skin. A polar bear has dense fur, see-through guard hairs that look white, black skin and a thick fat layer. Insulation slows heat leaving; the body makes the heat.
-- *Less skin to lose heat from:* the Arctic fox has small rounded ears, a short muzzle and short legs, and is the only dog-family animal with furred pads. Pip, a red fox, has bigger ears.
+- *Less skin to lose heat from:* the Arctic fox has small rounded ears, a short muzzle and short legs, and is a dog-family animal with furred footpads. Pip, a red fox, has bigger ears.
 - *Huddle:* emperor penguin fathers hold the egg on their feet under a fold of skin through winters below −40 °C and huddle; air inside a tight huddle can rise above 20 °C, and birds shuffle so all get turns inside.
 - *Change coat:* the white Arctic fox (about 99% of them) is white in winter, brown and gray in summer.
 - *Go away:* some animals leave for the worst months (the Arctic tern, spec 144).

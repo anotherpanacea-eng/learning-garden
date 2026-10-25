@@ -11,7 +11,7 @@ Date: 2026-10-25. Spec: [153-cold-shelf.md](../specs/153-cold-shelf.md). Compani
 | S1 | Bedmap3 press release | Newcastle University / British Antarctic Survey (2025) | https://www.ncl.ac.uk/press/articles/archive/2025/03/bedmap3/ | Antarctic ice (with shelves) about 13.63 million km²; mean thickness 1,948 m (2,148 m without shelves); thickest 4,757 m in Wilkes Land. |
 | S2 | Bedmap3 data record | NERC / BAS Polar Data Centre | https://data-search.nerc.ac.uk/geonetwork/srv/api/records/GB_NERC_BAS_PDC_01620 | Same dataset (record only). |
 | S3 | "Why aren't there penguins in the Arctic?" | BBC Wildlife (Discover Wildlife) | https://www.discoverwildlife.com/animal-facts/birds/why-are-there-no-penguins-in-the-arctic | Penguins only in the Southern Hemisphere except the Galápagos penguin; food-rich cold water as the likely reason. Secondary. |
-| S4 | Arctic fox | Wikipedia (citing Polar Research and *Arctic*) | https://en.wikipedia.org/wiki/Arctic_fox | Small rounded ears, short muzzle and legs; only canid with furred pads; white morph white in winter, brown and gray in summer; about 99% white morph; counter-current exchange in legs. |
+| S4 | Arctic fox | Wikipedia (citing Polar Research and *Arctic*) | https://en.wikipedia.org/wiki/Arctic_fox | Small rounded ears, short muzzle and legs; a canid with furred pads; white morph white in winter, brown and gray in summer; about 99% white morph; counter-current exchange in legs. |
 | S5 | Arctic fox review | *Polar Research* | https://polarresearch.net/index.php/polar/article/download/2726/6188 | Reduced surface from ears and muzzle. |
 | S6 | Arctic fox paper | *Arctic* 44(2), 1991 | https://pubs.aina.ucalgary.ca/arctic/Arctic44-2-132.pdf | Short muzzle, ears and legs reduce heat loss. |
 | S7 | Most efficient insulation in a bear | Guinness World Records | https://www.guinnessworldrecords.com/world-records/118885-most-efficient-insulation-in-a-bear | Fur and blubber together up to 10 cm; black skin; guard hairs transparent. |
@@ -112,3 +112,6 @@ Five searches (standard mode), plus local scripts. What was checked and changed:
 **Cross-pack:** tilt vocabulary (axis, leans toward the Sun, Show the lean, Play a day) matches spec 141; melting and freezing stay with spec 145 (`#science/bakery`); the food legend matches the built `#living/food` text exactly; `#library/*` routing matches spec 152's `#library/canopy`. No conflicting facts found.
 
 **Still open:** Book 6 still needs Inuit and Sámi review; inuksuit still rest on Wikipedia (S27).
+
+
+Review correction (2026-10-25): Furred footpads are not exclusive to Arctic foxes; fennec foxes have them too (https://animals.sandiegozoo.org/animals/fennec-fox). Generic ice on rock occurs in both polar regions; A2 now specifies the geographic-pole cross-section.
