@@ -311,12 +311,14 @@ Keeper's note:
 ## Bench (e): The Slide Shelf
 
 **Model card** (A made-up model):
-> Digit tiles slide on a shelf of places. The point is nailed down. The rule is real; the shelf is not.
+> Digit tiles slide from thousands to thousandths. Only steps that fit are offered. The point stays still. The rule is real; the shelf is not.
 
 **Opening:** Divide by 10 or 100. Watch the digits move.
 **Buttons:** ÷ 10 · ÷ 100 · × 10 · × 100 · Change unit
-**After a slide:** Every digit moved [one/two] places. The point stayed still.
-**Unit pairs:** cm and m · g and kg · mL and L · m and km
+**After a slide:** Every digit moved [one/two/three] places. The point stayed still.
+**Unit pairs:** cm and m (two places) · g and kg (three) · mL and L (three) · m and km (three)
+**Unit-step label:** [start] [old unit] [×/÷] [100/1000] = [result] [new unit]
+**Undo unit change:** Slide back by the same number of places.
 
 **Guided item:** What is 37 ÷ 10?
 - Step 1: Put 3 in tens, 7 in ones.
