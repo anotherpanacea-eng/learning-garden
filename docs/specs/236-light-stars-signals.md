@@ -113,7 +113,7 @@ Sprout items use no digits (checked by script). Each of the 28 three-choice item
 
 ## Saved work
 
-**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+**Frozen source and capacity contract (required before build).** On the first explicit action in an owned bench, freeze all its authored cases: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus the selected configuration. That complete value is the bench's working `source`; a pack/version label or id alone is insufficient. The sketches below have one waiting/current state per bench, not multiple working versions. A catalog revision never changes that waiting bench or any old record. Every newly kept record and retained response carries its own direct complete `source` snapshot copied from the working bench at the time of that record; it never points back to the shared working slot. New kept records continue to use that bench's frozen cases, not today's catalog. No source registry or implicit source refresh is introduced. Rendering, previews, notes and suggestion reads are pure; resuming/importing never rebuilds source, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
 
 Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
 
@@ -122,17 +122,17 @@ Optional root `signals` per explorer, absent until a first explicit action.
 ```
 signals: {
   version: 1,
-  codes: { source, kept: [{ id, patterns: { [msgId]: 'S'|'L' string, 1-5 }, card: true|false, rain: true|false, at }] }, // capacity 8; refuse if full; never evict
+  codes: { source, kept: [{ id, source, patterns: { [msgId]: 'S'|'L' string, 1-5 }, card: true|false, rain: true|false, at }] }, // capacity 8; refuse if full; never evict
   grid: { source, cells: '0'|'1' x 25, darkIs: '0'|'1', at } | null,
-  rays: { source, kept: [{ id, tool: 'mirror'|'lens', place, rays: [[x1,y1,x2,y2,dashed]] (max 4), kind: [real, upright, size], at }] }, // capacity 8; refuse if full; never evict
-  fates: { source, kept: [{ id, material, wave, predicted, at }] },   // capacity 12; refuse if full; never evict
+  rays: { source, kept: [{ id, source, tool: 'mirror'|'lens', place, rays: [[x1,y1,x2,y2,dashed]] (max 4), kind: [real, upright, size], at }] }, // capacity 8; refuse if full; never evict
+  fates: { source, kept: [{ id, source, material, wave, predicted, at }] },   // capacity 12; refuse if full; never evict
   forge: { source, sorted: { [element]: binId }, at } | null,
   answers: { [itemId]: { source, choice | value | order, support: ['hint'|'example'|'skip'], at } }
 }
 ```
 
 - No `sky` or `stars` records: the wheel month, spin/orbit toggle and mass switch are views, not work, so nothing is saved for them (cut at review).
-- `source` freezes the model version, rules and each item's choices and order. Codes, ids and grid numbers only, never prose; *say why* and "easy to learn" are not stored.
+- Every `source` in the sketch is a complete authored value, including text, as defined above. Only learner response payloads are restricted to bounded codes, ids, numbers and the declared structured selections or placements; no free-form learner prose is collected. Spoken *say why* responses are not stored.
 - Never recompute or rewrite saved results on load (beats, readability, image kind and fates are shown from the frozen source and rule, not re-derived into the record); validate ids, pattern strings (`^[SL]{1,5}$`), grid length, ray counts and coordinate ranges; an unreadable entry stays raw and exportable while everything else stays open.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and switching are shared.
 
@@ -150,7 +150,7 @@ signals: {
 | Supported practice | Guided items with visible steps; the ladder; the beat counter; the bench check overlays; the 10-token bar. |
 | New application | The Act VI rain code; the magic-lantern dragon; Nuria's grandmother's radio and the metal elevator; the microwave door; the iron in the lantern's hinge. |
 | Purposeful revisit | 141's spin and orbit and the Sun as a star; 146's sound and its communication gap; 162's straight rays, mirrors, prisms and Sun rule; 172's Star Story and Payne; 177's starlight as evidence; 179's Herschel and infrared. |
-| Data boundary | Codes, grid cells, bench settings, drawn ray coordinates, choices and support codes, all local. No free text, timing, location, body, sky-observation or off-screen data. |
+| Learner-response boundary | Codes, grid cells, bench settings, drawn ray coordinates, choices and support codes, all local. No free-form learner prose, timing, location, body, sky-observation or off-screen data. |
 
 ## Upstream check
 

@@ -111,7 +111,7 @@ Sprout items use no digits. Twenty-six 3-choice items, each with exactly one rig
 
 ## Saved work
 
-**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+**Frozen source and capacity contract (required before build).** On the first explicit action in an owned bench, freeze all its authored cases: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus the selected configuration. That complete value is the bench's working `source`; a pack/version label or id alone is insufficient. The sketches below have one waiting/current state per bench, not multiple working versions. A catalog revision never changes that waiting bench or any old record. Every newly kept record and retained response carries its own direct complete `source` snapshot copied from the working bench at the time of that record; it never points back to the shared working slot. New kept records continue to use that bench's frozen cases, not today's catalog. No source registry or implicit source refresh is introduced. Rendering, previews, notes and suggestion reads are pure; resuming/importing never rebuilds source, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
 
 Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
 
@@ -120,19 +120,19 @@ Optional root `changes` per explorer, absent until a first explicit action.
 ```
 changes: {
   version: 1,
-  clean:   { source, kept: [{ id, mixture, want, plan: [tool, tool?], result, at }] },  // capacity 8; refuse if full; never evict
+  clean:   { source, kept: [{ id, source, mixture, want, plan: [tool, tool?], result, at }] },  // capacity 8; refuse if full; never evict
   shelf:   { source, bins: { [cardId]: [binId, binId?] }, at } | null,
-  salts:   { source, kept: [{ id, acid, partner, tiles: [code], at }] },              // capacity 8; refuse if full; never evict
+  salts:   { source, kept: [{ id, source, acid, partner, tiles: [code], at }] },              // capacity 8; refuse if full; never evict
   rig:     { source, jobs: { [jobId]: materialId }, at } | null,
   spring:  { source, loads: [0..7], extensions: [number], at } | null,             // child-entered, 0.0-30.0 cm, one decimal
-  cart:    { source, kept: [{ id, mass, force, at }] },                                 // capacity 6; refuse if full; never evict
+  cart:    { source, kept: [{ id, source, mass, force, at }] },                                 // capacity 6; refuse if full; never evict
   gap:     { source, tempC: -10..40, at } | null,
-  wire:    { source, kept: [{ id, current, magnets, predicted, at }] },                 // capacity 8; refuse if full; never evict
+  wire:    { source, kept: [{ id, source, current, magnets, predicted, at }] },                 // capacity 8; refuse if full; never evict
   answers: { [itemId]: { source, choice | value | order | tiles, support: ['hint'|'example'|'skip'], at } }
 }
 ```
 
-- `source` freezes the model version, rule and each item's choices and order. Codes, ids and numbers only, never prose; *say why* is not stored.
+- Every `source` in the sketch is a complete authored value, including text, as defined above. Only learner response payloads are restricted to bounded codes, ids, numbers and the declared structured selections or placements; no free-form learner prose is collected. Spoken *say why* responses are not stored.
 - Never recompute saved results on load; validate ids, counts and ranges (extensions 0.0-30.0, temperatures −10 to 40, masses 2 or 4, forces 2, 4 or 6); an unreadable entry stays raw and exportable while everything else stays open.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and switching are shared.
 
@@ -150,7 +150,7 @@ changes: {
 | Supported practice | Guided items with visible steps; the ladder; the want toggle; tiles for word equations; the graph's best-fit tool. |
 | New application | The three-part mixture; the copper-in-magnesium-sulfate card; nitric acid at Keeper's Desk; the carbon-fiber frame; the cart's friction; the loudspeaker. |
 | Purposeful revisit | Spec 145's sieve, filter and evaporating dish; 167's property words; 168's particles, chemical change and pH; 154 and 178's arrows and resultants; 163's electromagnet; Act VI's flood boards. |
-| Data boundary | Bench settings, kept runs, child-entered extensions, choices and support codes, all local. No timing, free text, location or body data. |
+| Learner-response boundary | Bench settings, kept runs, child-entered extensions, choices and support codes, all local. No timing, free-form learner prose, location or body data. |
 
 ## Upstream check
 
