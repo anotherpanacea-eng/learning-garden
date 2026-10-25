@@ -35,7 +35,7 @@ Willowbank and its people are fiction, labeled apart from science, history and m
 
 - **Conduction:** energy passed along through a material that stays put (a spoon in hot tea warms to the handle). Metals conduct well. A metal latch and a wooden shutter in the same cold morning are the same temperature; the metal feels colder because it carries warmth from the hand faster. (Particles are spec 168's; property words spec 167's.)
 - **Convection:** warm air or water expands and rises, cooler fluid takes its place, and the moving fluid carries the energy in a loop. The café stove and a radiator warm a room partly this way, partly by radiation; the share varies. "Heat rises" is loose: warm air rises. (Spec 169's sea breeze is the outdoor loop.)
-- **Radiation:** everything gives out and takes in infrared, an invisible light, hotter things far more. It needs no air, so the Sun's warmth crosses space. Dark, dull surfaces absorb and emit it better than pale, shiny ones. Nothing nuclear is meant.
+- **Radiation:** light carries energy without needing air. Warm everyday objects mainly emit invisible infrared; sunlight carries energy in visible and invisible light across space. Dark, dull surfaces absorb and emit it better than pale, shiny ones. Nothing nuclear is meant.
 
 **Insulators slow it; they make no warmth.** A tea cozy slows the teapot's cooling and would slow an iced drink warming. Insulation is spec 153's; the teapot bench revisits it once.
 
@@ -84,7 +84,7 @@ Every activity follows Jane's **teach → guided → practice** order: one teach
 
 **(d) Warmth Trail.** Three parts.
 
-1. **What moves?** Eight scene cards (spoon in the teapot; stove air rising; sunlight through the window; oven floor under a loaf; warm oven walls; hand on a cold latch; steam rising from tea; a wrapped warm brick) sort into *passed along through stuff that stays put*, *warm air or water moves*, *invisible light, no air needed*. Cards with two honest answers say so.
+1. **What moves?** Eight scene cards (spoon in the teapot; stove air rising; sunlight through the window; oven floor under a loaf; warm oven walls; hand on a cold latch; steam rising from tea; a wrapped warm brick) sort into *passed along through stuff that stays put*, *warm air or water moves*, *light/radiation, no air needed*. Cards with two honest answers say so.
 2. **Arrow board.** Draw the warmth arrow between tea and room, hand and latch, window and room on a frosty night. Only hotter-to-cooler arrows are accepted; a reverse arrow asks "Which one is warmer?"
 3. **Teapot bench, model `teapot-v1`.** *A made-up model.* Room 20 °C, tea 84 °C. Each 5-minute step keeps half the difference bare, three quarters with a cozy: 84, 52, 36, 28 and 84, 68, 56, 47 at 0, 5, 10, 15 minutes. Model line: "Real teapots cool in a similar pattern, but the amounts depend on the pot, the room and the lid."
 

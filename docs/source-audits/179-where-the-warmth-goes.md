@@ -79,3 +79,6 @@ Ten WebSearch calls (standard mode); WebFetch blocked, so judged from excerpts. 
 ## Rights notes
 
 No images are embedded. If art is wanted: Herschel and Rumford portraits and Joule's apparatus exist in museum collections (Science Museum Group, Royal Institution); check each item's licence and prefer public-domain or open-access images. All Willowbank art is original.
+
+
+Review correction (2026-10-25): Radiation includes visible as well as infrared light. Keep warm-object infrared examples, but do not classify all sunlight as invisible. https://science.nasa.gov/mission/webb/science-overview/science-explainers/spectroscopy-101-light-and-matter/ and https://scied.ucar.edu/learning-zone/earth-system/types-of-energy

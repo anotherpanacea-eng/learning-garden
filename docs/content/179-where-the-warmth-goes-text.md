@@ -111,7 +111,7 @@ Worked example: (1) A metal spoon stands in hot tea. (2) Warmth passes up the sp
 **T9. Convection.** Warm air or water rises, and cooler air or water slides in below. The moving air or water carries the warmth around.
 Worked example: (1) The stove warms the air beside it. (2) Warm air rises. (3) Cooler air flows in. (4) The room warms.
 
-**T10. Radiation.** Warm things give out invisible light called infrared. It needs no air. That is how the Sun's warmth crosses space.
+**T10. Radiation.** Warm everyday things give out invisible infrared. Light needs no air; sunlight carries energy in visible and invisible light.
 Worked example: (1) The oven walls are hot. (2) They give out infrared. (3) The bread warms, even where it isn't touching.
 
 **T11. Big difference, fast cooling.** The bigger the difference, the faster warmth moves. A cozy slows it down. A cozy makes no warmth of its own.
@@ -173,7 +173,7 @@ Model line (A made-up model): A made-up tally, rounded. Real balls lose differen
 ## Activity (d): Warmth Trail
 
 **What moves?** Opening: What carries the warmth here?
-Bins: **Passed along through stuff that stays put** · **Warm air or water moves** · **Invisible light, no air needed**.
+Bins: **Passed along through stuff that stays put** · **Warm air or water moves** · **Light/radiation, no air needed**.
 Guided first card (1 step shown, "what moves?"): Spoon in the teapot. Does the spoon move? No. So warmth passes along it.
 Two-answer cards: The wrapped warm brick passes warmth into the cloth, and gives out infrared too. Both bins are right. The oven floor and oven walls are two cards: one touches, one shines.
 
@@ -324,7 +324,7 @@ Explanation: Warmth moves from the warm room to the cold glass and air outside.
 **3.2 (Sapling, sort)**
 Prompt: Sort each card by what carries the warmth.
 Cards: spoon in hot tea · warm air rising from the stove · sunlight through the window · the hot oven floor under a loaf
-Answer: spoon and oven floor → passed along through stuff that stays put (conduction); stove air → warm air moves (convection); sunlight → invisible light (radiation).
+Answer: spoon and oven floor → passed along through stuff that stays put (conduction); stove air → warm air moves (convection); sunlight → light/radiation, no air needed.
 Misconception tested: heat-rises (sorting everything as rising air).
 Hint: Ask: does anything move? Is anything touching?
 Explanation: Touching and staying put is conduction. Moving air is convection. Light across a gap is radiation.
@@ -340,11 +340,11 @@ Explanation: Both are the same temperature. Metal conducts warmth away from your
 
 **3.4 (Sapling, 3-choice)**
 Prompt: How does the Sun's warmth reach Willowbank?
-- A. As invisible light that needs no air. *(right)*
+- A. As visible and invisible light that needs no air. *(right)*
 - B. As warm air flowing down from space. *(misconception: convection through space)*
 - C. Passed along from bit to bit of space. *(misconception: conduction needs no material)*
 Hint: Is there air between us and the Sun?
-Feedback: A: Yes. Infrared crosses empty space. B: Space has no air to flow. C: Empty space has nothing to pass it along.
+Feedback: A: Yes. Visible and invisible light carry energy across empty space. B: Space has no air to flow. C: Empty space has nothing to pass it along.
 Explanation: Radiation needs no air, so the Sun's warmth crosses empty space.
 
 **3.5 (Keeper's Desk, number with steps)**
@@ -433,7 +433,7 @@ Explanation: 1,000 ÷ 4,200 ≈ 0.24 °C: tiny, and hard to measure (simplified:
 - **Temperature:** how hot or cold something is, measured in degrees.
 - **Conduction:** warmth passed along through something that stays put.
 - **Convection:** warm air or water moving and carrying warmth.
-- **Radiation (infrared):** invisible light that carries warmth, even across empty space. Not the nuclear kind.
+- **Radiation:** energy traveling as light, including visible light and invisible infrared, across empty space. Warm everyday objects mainly emit infrared; sunlight includes both.
 - **Insulator:** something that slows warmth moving. It makes none.
 - **Power:** how fast energy moves.
 - **Watt (W):** one joule each second.
