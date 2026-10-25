@@ -8,7 +8,7 @@ It is the English companion to the [history and science build-out](history-and-s
 
 In that historical snapshot, on the pinned Marble graph (`96a7933`), there were **286 English topics**. **25** had a declared reference in `curriculum/topic-coverage.csv` or appeared as a target in a spec. **81** were named somewhere under `docs/` (a spec, a companion text, a source audit, the atlas or a plan). The other **205** were named nowhere in that snapshot: no spec, no draft, no audit. The then-open draft PRs (#154 to #163 and #167) named none of them either. These counts have not been recomputed for current `main` or the later English drafts.
 
-| Domain | Pinned | Named on main | Unclaimed | Packs here |
+| Domain | Pinned | Named on main at `ca337ff` | Unclaimed | Packs here |
 | --- | ---: | ---: | ---: | --- |
 | Grammar & Punctuation | 75 | 12 | 63 | 251, 254, 255, 256, 260, 262, 264, 266, 269, 271, 274, 277, 278 |
 | Reading Comprehension | 72 | 19 | 53 | 257, 261, 265, 267, 270, 272, 273, 276 |
@@ -95,7 +95,7 @@ Placement follows [spec 120](specs/120-keeper-of-the-ways.md): its acts, chapter
 
 Every pack takes the OCA-13 contract that specs 133 to 212 used: a spec, a `docs/content/` companion with every child-facing line, a `docs/source-audits/` file, the Spec 49 §5 teaching-contract table and hard-prerequisite crosswalk, a refreshed Jane and Marble teaching-research check, the spec 120 story fit, and then an independent fact and child-text review in a fresh context before the PRs open as drafts.
 
-- **Prerequisites.** The 205 targets have 253 hard prerequisite edges on the pinned graph. 89 fall inside the same pack, 74 in an earlier pack in this table, and 90 on English topics already named on `main` (21 of those have a declared reference or spec target; 69 are named only in audits or plans). None points to a later pack. Step 2's crosswalks classify each of the 90 as taught, met elsewhere, supported inline or a documented gap. Gaps never gate play.
+- **Prerequisites.** The 205 targets have 253 hard prerequisite edges on the pinned graph. 89 fall inside the same pack, 74 in an earlier pack in this table, and 90 on English topics already named on `main` at `ca337ff` (21 of those have a declared reference or spec target; 69 are named only in audits or plans). None points to a later pack. Step 2's crosswalks classify each of the 90 as taught, met elsewhere, supported inline or a documented gap. Gaps never gate play.
 - **Jane and Marble.** As in the earlier waves: teach first with a worked example, one guided item, then practice; the "I'm stuck" ladder; three-choice items with one distractor tied to a named misconception; no points, medals, timers or gates. Each target's Marble research record is read and paraphrased, never quoted (CC BY-SA). Where a topic has no record, the spec says so.
 - **Texts.** Sample passages are public domain or newly written for the pack, never the owner's writing. Candidate public-domain sources include Aesop and La Fontaine, *Calila e Dimna* for the Spanish side (check), Kipling's *Just So Stories*, Grahame's *The Wind in the Willows*, Burnett's *The Secret Garden*, and Stevenson's *A Child's Garden of Verses*. Nonfiction passages are written new, and they may draw on the facts already audited in the history and science packs.
 - **Phonics.** Packs 250 and 252 teach sounds, so they sit behind [brief 55](specs/55-phonics-content-audio-brief.md)'s linguistic, audio and rights review. Step 2 writes their text and audio request lists; build waits for that review.
