@@ -137,7 +137,7 @@ export const evidenceVoiceSource = {
       "learn": "A claim tells a reader what you think. A detail gives the reader something precise to inspect. Reasoning explains why that detail supports this claim. A quote alone does not explain its importance.",
       "guided": "For a different library story: Claim: the room was not necessarily abandoned. Detail: a fresh cup stood beside the open window. Reasoning: a recently used cup suggests someone had been there, although it cannot tell us who. The final limitation keeps the claim proportionate.",
       "hint": "Ask your reader: “How does this detail make my claim more convincing?” Your next sentence can answer that question.",
-      "example": "Different example: Claim: the path is used recently. Detail: wet footprints cross the dry dust. Reasoning: the wet marks must have arrived after the dust settled. Limit: they do not identify the walker.",
+      "example": "Different example: Claim: the path has been used recently. Detail: wet footprints cross the dry dust. Reasoning: the wet marks must have arrived after the dust settled. Limit: they do not identify the walker.",
       "prompt": "The fictional town editor asks: “How should the town describe the silence of the clock?” Write a paragraph for someone who has read the story but disagrees with you. The planning fields are optional; your paragraph is your own.",
       "fields": [
         "claim",

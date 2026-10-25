@@ -4,7 +4,7 @@ import {frenchRoomsLessons} from '../dist/french-rooms-content.mjs';
 import {frenchRoomsPage,frenchRoomsNotes} from '../dist/french-rooms-ui.mjs';
 const options={canExport:()=>true},fresh=()=>({other:{waiting:'synthetic draft'}});let checks=0;
 const ok=(v,m)=>{assert.ok(v,m);checks++;};
-let s=fresh();const before=structuredClone(s);ok(frenchRoomsView(s).status==='missing','passive missing view');ok(!Object.hasOwn(s,'frenchRooms'),'view allocates nothing');
+let s=fresh();const otherRef=s.other,before=structuredClone(s);ok(frenchRoomsView(s).status==='missing','passive missing view');ok(!Object.hasOwn(s,'frenchRooms'),'view allocates nothing');
 for(const lesson of frenchRoomsLessons){
  ok(startFrenchRooms(s,lesson.id,options),'open every lesson');let w=frenchRoomsView(s).work;ok(validFrenchRoomsWork(w),'fresh work valid');
  for(const q of w.source.items){
@@ -16,7 +16,7 @@ for(const lesson of frenchRoomsLessons){
  ok(setFrenchRoomsField(s,'explanation','  Original synthetic words.\n',options),'exact original draft');ok(keepFrenchRooms(s,options),'first keep');
  ok(setFrenchRoomsField(s,'revision',' Revised synthetic words. ',options),'exact revision');ok(keepFrenchRooms(s,options),'latest keep');ok(frenchRoomsView(s).work.drafts.explanation==='  Original synthetic words.\n','no normalization');
 }
-ok(s.other===s.other&&JSON.stringify(s.other)===JSON.stringify(before.other),'foreign waiting branch unchanged');
+ok(s.other===otherRef&&JSON.stringify(s.other)===JSON.stringify(before.other),'foreign waiting branch unchanged');
 s=fresh();startFrenchRooms(s,frenchRoomsLessons[0].id,options);let w=frenchRoomsView(s).work;const originalTitle=w.source.title;frenchRoomsLessons[0].title='Changed live wording';ok(frenchRoomsView(s).work.source.title===originalTitle,'frozen source unchanged by author update');frenchRoomsLessons[0].title=originalTitle;
 const first=w.source.items[0];setFrenchRoomsField(s,first.id,first.choices[0].id,options);checkFrenchRooms(s,first.id,options);let old=structuredClone(frenchRoomsView(s).work.checks);ok(validFrenchRoomsWork(frenchRoomsView(s).work),'saved outcomes validate own frozen choices');
 for(let i=0;i<40;i++)checkFrenchRooms(s,first.id,options);ok(frenchRoomsView(s).work.checks.length===24,'bounded recent checks');
@@ -33,3 +33,9 @@ console.log(`${checks} french-rooms checks passed`);
 s=fresh();startFrenchRooms(s,'return',options);setFrenchRoomsField(s,'explanation','Je viens de rentrer. Je vais chercher le sac.',options);revealFrenchRoomsData(s,options);ok(frenchRoomsView(s).work.firstKept.drafts.explanation==='Je viens de rentrer. Je vais chercher le sac.','reveal retains exact original');setFrenchRoomsField(s,'revision',"Je vais chercher le sac dans l’entrée.",options);keepFrenchRooms(s,options);ok(frenchRoomsView(s).work.firstKept.newData===false,'original source context retained');
 const html=frenchRoomsPage(s);ok(!html.includes('I have just come home.'),'English passage meaning initially hidden');showFrenchRoomsHelp(s,'intro:meaning',options);ok(frenchRoomsPage(s).includes('I have just come home.'),'English meaning appears after saved request');ok(!frenchRoomsPage(s,'plan').includes('data-rooms-field'),'different requested lesson previews without switching');ok(frenchRoomsView(s).work.source.id==='return','preview leaves current unchanged');ok(setFrenchRoomsSelection(s,'sac',options),'interactive map selection');const b=JSON.stringify(s);ok(!setFrenchRoomsSelection(s,'lit',{canExport:()=>false}),'map refusal');ok(JSON.stringify(s)===b,'map refusal unchanged');ok(frenchRoomsNotes(s).includes('Je viens de rentrer.'),'original notes exact');
 console.log(`Final ${checks} assertions passed`);
+// Partial readable historical plans remain displayable without normalizing them.
+for(const absent of [['chambre'],['entree'],['chambre','entree']]){
+ const partial=structuredClone(s);partial.frenchRooms.lessons.return.source.rooms=partial.frenchRooms.lessons.return.source.rooms.filter(r=>!absent.includes(r.id));
+ const prior=JSON.stringify(partial);ok(validFrenchRoomsWork(partial.frenchRooms.lessons.return),'partial saved source remains readable');ok(frenchRoomsPage(partial).includes('rooms-grid'),'partial saved map renders without missing-room crash');ok(JSON.stringify(partial)===prior,'partial map render preserves saved source');
+}
+console.log(`Final including partial-source recovery: ${checks} assertions passed`);

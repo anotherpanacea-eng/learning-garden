@@ -107,6 +107,12 @@ node test/broad-help-checks.mjs
 node test/broad-model-checks.mjs
 node test/explorer-storage-checks.mjs
 node test/plantings-and-speech-checks.mjs
+node test/subject-pathway-exposure-checks.mjs
+node test/pathway-entry-checks.mjs
+node test/linear-pathway-checks.mjs
+node test/evidence-voice-checks.mjs
+node test/motion-evidence-checks.mjs
+node test/french-rooms-checks.mjs
 node test/mobile-quality-checks.mjs
 node test/number-garden-story-checks.mjs
 node test/living-garden-checks.mjs
@@ -520,7 +526,7 @@ Shadow Theatre (`#loft/shadows`) moves one original opaque card between a fixed 
 
 Same pour, new unit (`#cafe/units`) keeps a separate 1 L picture jug fixed while switching L/mL labels or moving one 50 mL measure between 300 and 350 mL. Supplied relations pass whole-notebook preservation and actual pretty-report import preflight before appearing; existing Kitchen/Tenths/Hundredths work is separate. No saved scene or independent conversion result is added. See [spec113](docs/specs/113-capacity-unit-bridge.md). Run `node test/capacity-units-checks.mjs`; with dist served locally, run `UNITS_TEST_URL=http://127.0.0.1:4213/ node test/capacity-units-browser.js` with the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `UNITS_ARTIFACTS` selects synthetic screenshots. These checks do not establish physical-device, audible-quality, physical measuring or learning outcomes.
 
-How shall we begin? (`#begin`) is an optional four-page starting-choice flow, reached from **Find a place to begin** on Home or **Change starting choices** in Grown-up notes. It applies future Café amounts and new English/French reading defaults together; Keep, Skip and local activity overrides remain available. Waiting orders, frozen reading visits and automatic suggestions retain their existing behavior. There is no age placement or global level. See [spec114](docs/specs/114-optional-starting-flow.md). Run `node test/starting-flow-checks.mjs`; with dist served locally, run `STARTING_TEST_URL=http://127.0.0.1:4214/ node test/starting-flow-browser.js` using the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `STARTING_ARTIFACTS` selects synthetic screenshots. The implementation passed independent review; no production deployment or learning outcome is established.
+How shall we begin? (`#begin`) is an optional four-page starting-choice flow, reached from **Café and reading amounts** on Home or **Change starting choices** in Grown-up notes. It applies future Café amounts and new English/French reading defaults together; Keep, Skip and local activity overrides remain available. Waiting orders, frozen reading visits and automatic suggestions retain their existing behavior. There is no age placement or global level. See [spec114](docs/specs/114-optional-starting-flow.md). Run `node test/starting-flow-checks.mjs`; with dist served locally, run `STARTING_TEST_URL=http://127.0.0.1:4214/ node test/starting-flow-browser.js` using the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `STARTING_ARTIFACTS` selects synthetic screenshots. The implementation passed independent review; no production deployment or learning outcome is established.
 
 ## Bramble’s Seed Pile
 

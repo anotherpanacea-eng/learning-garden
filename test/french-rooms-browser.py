@@ -25,6 +25,8 @@ def setup(browser,width):
  c.route('**/app.mjs',app);p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)));return c,p
 def go(p):
  p.goto(BASE+'#learn/french');p.locator('[data-rooms-root]').wait_for()
+def dismiss_film(p):
+ if p.locator('[data-film-skip]').count():p.locator('[data-film-skip]').click()
 def start(p,id):p.locator('[data-rooms-start="'+id+'"]').first.click()
 def fill(p,k,value):p.locator('[data-rooms-field="'+k+'"]').fill(value)
 def bounds(p):
@@ -44,30 +46,31 @@ with sync_playwright() as pw:
     start(p,id);ok(work(p)['source']['id']==id,'every lesson open');bounds(p)
     for index in range(len(work(p)['source']['items'])):
      q=work(p)['source']['items'][index]
-     p.locator('[data-rooms-help="'+q['id']+':hint"]').click()
-     p.locator('[data-rooms-skip="'+q['id']+'"]').click()
+     p.locator('[data-rooms-help="'+q['id']+':hint"]').click();ok(p.evaluate('document.activeElement.id')=='rooms-item-'+q['id'],'hint keeps focus with its item')
+     p.locator('[data-rooms-skip="'+q['id']+'"]').click();ok(p.evaluate('document.activeElement.id')=='rooms-item-'+q['id'],'skip keeps focus with its item')
      if index==1 and work(p)['source'].get('newMessage'):p.locator('[data-rooms-new]').click()
      right=next(x for x in q['choices'] if x['outcome']=='match')
      p.locator('[data-rooms-field="'+q['id']+'"][value="'+right['id']+'"]').check()
-     p.locator('[data-rooms-check="'+q['id']+'"]').click()
+     p.locator('[data-rooms-check="'+q['id']+'"]').click();ok(p.evaluate('document.activeElement.id')=='rooms-item-'+q['id'],'check keeps focus with its item')
      ok(work(p)['checks'][-1]['outcome']=='match','structured finite choice')
      ok(q['id']+':hint' in work(p)['checks'][-1]['helpSeenBefore'],'prior support saved')
    ok(not p.locator('.rooms-meaning').count(),'English passage meanings hidden initially')
-   p.locator('[data-rooms-help="intro:meaning"]').click();ok('I have just come home.' in p.locator('.rooms-meaning').first.inner_text(),'explicit meaning request shows English');ok('intro:meaning' in work(p)['help'],'meaning support saved before display')
-   p.locator('[data-room-object="sac"]').click();ok(work(p)['model']['selected']=='sac','interactive bag location selection')
-   fill(p,'explanation','Je viens de rentrer. Je vais chercher le sac.');p.locator('[data-rooms-keep]').first.click();fill(p,'revision','Je vais chercher le sac dans l’entrée.');p.locator('[data-rooms-keep]').last.click()
+   p.locator('[data-rooms-help="intro:meaning"]').click();ok('I have just come home.' in p.locator('.rooms-meaning').first.inner_text(),'explicit meaning request shows English');ok('intro:meaning' in work(p)['help'],'meaning support saved before display');ok(p.evaluate('document.activeElement.id')=='rooms-passage-intro','passage meaning focuses its own passage')
+   p.locator('[data-room-object="sac"]').click();ok(work(p)['model']['selected']=='sac','interactive bag location selection');ok(p.locator('[data-rooms-select="sac"]').evaluate('e=>e===document.activeElement'),'map selection restores selected control focus')
+   fill(p,'explanation','\nJe viens de rentrer. Je vais chercher le sac.');p.locator('[data-rooms-keep]').first.click();fill(p,'revision','\nJe vais chercher le sac dans l’entrée.');p.locator('[data-rooms-keep]').last.click()
    ok(work(p)['firstKept']['drafts']['explanation']=='','first earlier blank snapshot is not silently rewritten')
    b=p.locator('[data-speak]').first;p.evaluate('window.__pathRefuse=true');before=book(p);b.click();ok(book(p)==before,'refused audio request leaves support and source unchanged');p.evaluate('window.__pathRefuse=false');b.click();ok('intro:audio' in work(p)['help'],'audio request recorded before optional local playback');ok('could not be saved' not in p.locator('#rooms-status').inner_text(),'successful later audio request clears old refusal message')
    first=book(p)['baseline']['draft'];ok(first==seed['baseline']['draft'],'old pending baseline preserved')
    p.evaluate('scrollTo(0,0)');p.screenshot(path=str(OUT/f'final-{width}.png'),full_page=True)
    exported=download(p);ok(exported['frenchRooms']==book(p)['frenchRooms'],'actual notes download retains root')
    p.locator('#progress-file').set_input_files({'name':'synthetic-subject.json','mimeType':'application/json','buffer':json.dumps(exported).encode()});p.locator('#progress-import-confirm').click();ok('Notebook brought' in p.locator('#progress-import-status').inner_text(),'actual import accepts download')
-   p.goto(BASE+'#learn/french');p.locator('[data-rooms-root]').wait_for();ok(work(p)['drafts']['explanation']=='Je viens de rentrer. Je vais chercher le sac.','reload/import exact original: '+repr(work(p)['drafts']));ok(work(p)['drafts']['revision']=='Je vais chercher le sac dans l’entrée.','reload/import exact revision: '+repr(work(p)['drafts']))
+   p.goto(BASE+'#learn/french');p.locator('[data-rooms-root]').wait_for();ok(work(p)['drafts']['explanation']=='\nJe viens de rentrer. Je vais chercher le sac.','reload/import exact original: '+repr(work(p)['drafts']));ok(work(p)['drafts']['revision']=='\nJe vais chercher le sac dans l’entrée.','reload/import exact revision: '+repr(work(p)['drafts']))
+   ok(p.locator('[data-rooms-field="explanation"]').input_value()==work(p)['drafts']['explanation'],'render preserves leading newline in original');ok(p.locator('[data-rooms-field="revision"]').input_value()==work(p)['drafts']['revision'],'render preserves leading newline in revision')
    # Root preflight refusal keeps typed words visible and blocks lossy rerenders.
-   p.evaluate('window.__pathRefuse=true');before=book(p);fill(p,'explanation','Unsaved synthetic words');ok(book(p)==before,'refusal leaves notebook unchanged');p.locator('[data-rooms-start="plan"]').first.click();ok(p.locator('[data-rooms-field="explanation"]').input_value()=='Unsaved synthetic words','refused input remains visible through attempted navigation');p.evaluate('window.__pathRefuse=false');fill(p,'explanation','Je viens de rentrer. Je vais chercher le sac.');
+   p.evaluate('window.__pathRefuse=true');before=book(p);fill(p,'explanation','Unsaved synthetic words');ok(book(p)==before,'refusal leaves notebook unchanged');p.locator('[data-rooms-start="plan"]').first.click();ok(p.locator('[data-rooms-field="explanation"]').input_value()=='Unsaved synthetic words','refused input remains visible through attempted navigation');p.evaluate('window.__pathRefuse=false');fill(p,'explanation','\nJe viens de rentrer. Je vais chercher le sac.');
    original_id=p.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId")
    held_root=book(p)['frenchRooms'];stale=p.locator('[data-rooms-field="explanation"]').element_handle()
-   p.locator('#explorer-switch').click();p.locator('#explorer-new').click();p.locator('[data-explorer-avatar]').nth(1).click();p.locator('#explorer-create').click();p.locator('[data-film-skip]').click();p.goto(BASE+'#learn/french');p.locator('[data-rooms-root]').wait_for()
+   p.locator('#explorer-switch').click();p.locator('#explorer-new').click();p.locator('[data-explorer-avatar]').nth(1).click();p.locator('#explorer-create').click();dismiss_film(p);p.goto(BASE+'#learn/french');p.locator('[data-rooms-root]').wait_for()
    ok('frenchRooms' not in book(p),'second explorer has no inherited unit')
    stale.evaluate("e=>{e.value='stale synthetic';e.dispatchEvent(new Event('input',{bubbles:true}));}")
    ok('frenchRooms' not in book(p),'detached first explorer input cannot write second explorer')

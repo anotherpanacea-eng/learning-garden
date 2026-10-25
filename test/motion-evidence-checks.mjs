@@ -4,7 +4,7 @@ import {motionLessons} from '../dist/motion-evidence-content.mjs';
 import {motionPage,motionNotes} from '../dist/motion-evidence-ui.mjs';
 const options={canExport:()=>true},fresh=()=>({other:{waiting:'synthetic draft'}});let checks=0;
 const ok=(v,m)=>{assert.ok(v,m);checks++;};
-let s=fresh();const before=structuredClone(s);ok(motionView(s).status==='missing','passive missing view');ok(!Object.hasOwn(s,'motionEvidence'),'view allocates nothing');
+let s=fresh();const otherRef=s.other,before=structuredClone(s);ok(motionView(s).status==='missing','passive missing view');ok(!Object.hasOwn(s,'motionEvidence'),'view allocates nothing');
 for(const lesson of motionLessons){
  ok(startMotion(s,lesson.id,options),'open every lesson');let w=motionView(s).work;ok(validMotionWork(w),'fresh work valid');
  for(const q of w.source.items){
@@ -16,7 +16,7 @@ for(const lesson of motionLessons){
  ok(setMotionField(s,'explanation','  Original synthetic words.\n',options),'exact original draft');ok(keepMotion(s,options),'first keep');
  ok(setMotionField(s,'revision',' Revised synthetic words. ',options),'exact revision');ok(keepMotion(s,options),'latest keep');ok(motionView(s).work.drafts.explanation==='  Original synthetic words.\n','no normalization');
 }
-ok(s.other===s.other&&JSON.stringify(s.other)===JSON.stringify(before.other),'foreign waiting branch unchanged');
+ok(s.other===otherRef&&JSON.stringify(s.other)===JSON.stringify(before.other),'foreign waiting branch unchanged');
 s=fresh();startMotion(s,motionLessons[0].id,options);let w=motionView(s).work;const originalTitle=w.source.title;motionLessons[0].title='Changed live wording';ok(motionView(s).work.source.title===originalTitle,'frozen source unchanged by author update');motionLessons[0].title=originalTitle;
 const first=w.source.items[0];setMotionField(s,first.id,first.choices[0].id,options);checkMotion(s,first.id,options);let old=structuredClone(motionView(s).work.checks);ok(validMotionWork(motionView(s).work),'saved outcomes validate own frozen choices');
 for(let i=0;i<40;i++)checkMotion(s,first.id,options);ok(motionView(s).work.checks.length===24,'bounded recent checks');
