@@ -10,7 +10,7 @@ const fitsGames=r=>gamesBytes(r)<=MAX_GAMES_BYTES;
 export const freshGames=()=>({version:1,current:null,earlier:[],notes:[],lesson:null});
 export function validPileSource(s){return object(s)&&s.model==='seed-pile-v1'&&text(s.id,80)&&text(s.title)&&text(s.rule)&&[2,3].includes(s.maxTake)&&typeof s.lastLoses==='boolean'&&text(s.childWin)&&text(s.brambleWin)&&Array.isArray(s.frames)&&s.frames.length===4&&s.frames.every(f=>object(f)&&integer(f.pile,1,30)&&text(f.text));}
 export function pilePosition(g){
- if(!object(g)||!validPileSource(g.source)||!integer(g.start,5,30)||!['child','bramble'].includes(g.first)||!pileDials.some(d=>d[0]===g.dial)||!Array.isArray(g.moves)||g.moves.length>30||!Array.isArray(g.support)||g.support.length>12||!g.support.every(s=>text(s,80))||typeof g.noteKept!=='boolean')return null;
+ if(!object(g)||!validPileSource(g.source)||!integer(g.start,5,30)||!['child','bramble'].includes(g.first)||!text(g.dial,80)||!Array.isArray(g.moves)||g.moves.length>30||!Array.isArray(g.support)||g.support.length>12||!g.support.every(s=>text(s,80))||typeof g.noteKept!=='boolean')return null;
  let left=g.start,turn=g.first,winner=null;
  for(const m of g.moves){
   if(winner||!object(m)||m.who!==turn||!integer(m.take,1,Math.min(left,g.source.maxTake)))return null;
@@ -37,6 +37,7 @@ export function brambleTake(g,random=Math.random){
  const r=random();return takes[Math.min(takes.length-1,Math.max(0,Math.floor((Number.isFinite(r)?r:0)*takes.length)))];
 }
 export function newPileGame({variant='pile',start=13,first='child',dial='attention',support=[]}={}){
+ if(!pileDials.some(d=>d[0]===dial))return null;
  const g={source:pileSource(variant),start,first,dial,moves:[],support:[...support],noteKept:false};return pilePosition(g)?g:null;
 }
 export function takePile(g,who,take){const p=pilePosition(g);if(!p||p.winner||p.turn!==who||!integer(take,1,Math.min(p.left,g.source.maxTake)))return null;const next=copy(g);next.moves.push({who,take});return next;}
