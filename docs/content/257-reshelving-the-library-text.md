@@ -21,7 +21,7 @@ Companion to [spec 257](../specs/257-reshelving-the-library.md). Use as written,
 >
 > "Everything dried," says the librarian. "Nothing is where it belongs."
 
-**What you already know (recall card):** You have read stories with a grown-up. Today we look inside the books, too.
+**What you already know (recall card):** Libraries hold stories, poems and fact books. Today we look inside them.
 
 ## Story scenes
 
@@ -79,7 +79,7 @@ Companion to [spec 257](../specs/257-reshelving-the-library.md). Use as written,
 
 ### Scene 3. Notes for next time (Act II, ch. 2, the town keeps its own records)
 
-**Hook:** The swallows are back over the millpond. Pip wants to know when they'll leave. The librarian starts a notes table.
+**Hook:** The swallows are back over the brook. Pip wants to know when they'll leave. The librarian starts a notes table.
 
 **Short:**
 > Pip wants to know about the swallows. The librarian pins up a table. Short notes go in each box.
@@ -97,18 +97,15 @@ Companion to [spec 257](../specs/257-reshelving-the-library.md). Use as written,
 >
 > "Shorter," says the librarian, kindly. "Then next time, we'll know."
 
-**Keeper's note (A true thing about living things):**
-> Scientists learn where swallows go by putting a tiny numbered ring on a bird's leg. In December 1912, a swallow ringed in Britain was found in South Africa. It was the first ring to show how far they travel.
-
 ### Scene 4. Two notices (Act II, ch. 3, Ember's birthday)
 
-**Hook:** Ember's party is on the green by the library. Two notices appear on the library door. They do not agree.
+**Hook:** Ember's party is at the café, with a picnic on the green after. Two notices appear on the library door. They do not agree.
 
 **Short:**
 > Bramble wants the whole green kept short. The orchard keeper wants one corner left long. Each notice gives reasons.
 
 **Longer:**
-> The party is on the green tomorrow. By morning, two notices are pinned to the library door.
+> Ember's party is tomorrow, with a picnic on the green. By morning, two notices are pinned to the library door.
 >
 > Bramble's says KEEP THE GREEN SHORT in big letters. The orchard keeper's says LET ONE CORNER GROW.
 >
@@ -126,7 +123,7 @@ Companion to [spec 257](../specs/257-reshelving-the-library.md). Use as written,
 
 ### Festival hook. Swallow watch (spring, Flood Boards and Planting)
 
-**Hook:** The first swallow of spring skims the millpond. The librarian puts *Swallows Come Home* in the window, with its new cover.
+**Hook:** The first swallow of spring skims the brook. The librarian puts *Swallows Come Home* in the window, with its new cover.
 
 **Short:**
 > The swallows are back! Hob's book sits in the library window. Read it to find out where they went.
@@ -136,7 +133,7 @@ Companion to [spec 257](../specs/257-reshelving-the-library.md). Use as written,
 Each card is 30 words or fewer; worked-example steps appear one tap at a time. Cards are **A true thing about language**.
 
 **Card 1. Three kinds of books**
-> A story tells what happens to its characters. A poem plays with sounds and short lines. A fact book tells true things about the world.
+> A story tells what happens to its characters. A poem is written in lines and plays with sounds. A fact book tells true things about the world.
 
 Worked example: *The Busy Hive.*
 1. Is it about characters and what happens to them? No.
@@ -152,7 +149,7 @@ Worked example: *Ask the Weather.*
 3. Wren drew the pictures too. One person, both jobs.
 
 **Card 3. Covers and the title page**
-> The front cover shows the title and a picture. The back cover tells a little about the book. The title page names the title, author and illustrator.
+> The front cover shows the title and a picture. The back cover often tells a little about the book. The title page names the title, author and illustrator.
 
 Worked example: *A book with no cover.*
 1. The covers are gone.
@@ -212,12 +209,12 @@ Worked example: *One sentence into a note.*
 > Some words show order: first, next, finally. Some show cause and effect: because, so, as a result. Some compare: both, but, unlike.
 
 Worked example: *"The tail is wider, so the wind pushes it away."*
-1. What happens first? The tail is wider.
+1. The cause: the tail is wider.
 2. Link word: so.
 3. What does that cause? The wind pushes the tail away.
 
 **Card 11. Why did the author write it?**
-> Authors write to inform, which means to tell facts. They write to persuade, to change your mind. They write to entertain, for fun.
+> Three big reasons authors write: to inform, telling facts; to persuade, changing your mind; to entertain, for fun. Many texts do more than one. Ask: what is its main job?
 
 Worked example: *Bramble's notice.*
 1. It says: Mow it every week!
@@ -240,11 +237,9 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 ### Book 1. Swallows Come Home (time order)
 
-**Front cover:** Swallows Come Home · Words by Hob Pennick · Pictures by Wren Halloway · *(picture: a swallow swooping in at a barn door)*
+**Front cover and title page:** Swallows Come Home · Words by Hob Pennick · Pictures by Wren Halloway. The cover adds a picture (a swallow swooping in at a barn door); the title page adds "Willowbank Library".
 
 **Back cover:** Every spring, swallows fly back to Hob's barn. Where have they been all winter? Turn the page and find out.
-
-**Title page:** Swallows Come Home · Words by Hob Pennick · Pictures by Wren Halloway · Willowbank Library
 
 **Contents:** Spring: Back to the barn, 2 · Summer: Mud nests, 3 · Autumn: The long trip, 4 · Winter: Far away, 5 · Words to know, 6 · Index, 7
 
@@ -255,13 +250,13 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 **Page 3. Summer: Mud nests**
 - Short: Two swallows build a nest of mud.
-- Middle: Both parents build the nest. They bring mud and shape it into a cup. Soon there are hungry chicks inside.
-- Longer: Both parents build the nest. They bring mud, often mixed with bits of grass, and shape it into a cup. They line it with feathers. The chicks are always hungry. Their parents catch small flying insects in the air to feed them.
+- Middle: Both parents help build the nest. They bring mud and shape it into a cup. Soon there are hungry chicks inside.
+- Longer: Both parents help build the nest. They bring mud, often mixed with bits of grass, and shape it into a cup. They line it with feathers. The chicks are always hungry. Their parents catch small flying insects in the air to feed them.
 
 **Page 4. Autumn: The long trip**
 - Short: In autumn, the swallows fly south.
 - Middle: In autumn, the days get shorter. Soon there will be few flying insects to eat. So the swallows fly south.
-- Longer: Why do swallows leave? Food is the big reason. Swallows eat small flying insects, and in winter there are few insects here. Shorter autumn days are the signal to go. Swallows flap the whole way, over the sea and across the Sahara, a huge desert.
+- Longer: Why do swallows leave? Food is the big reason. Swallows eat small flying insects, and in winter there are few insects here. Shorter autumn days are the signal to go. Swallows fly over the sea and across the Sahara, a huge desert.
 
 **Page 5. Winter: Far away**
 - Short: In winter, the swallows are in Africa.
@@ -271,7 +266,6 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 **Page 6. Words to know**
 - desert: a very dry place where little rain falls.
 - insect: a small animal with six legs, like a fly.
-- migrate: to travel to another place each year, and back again.
 - ring: a tiny numbered band put on a bird's leg.
 - streamer: a long, thin tail feather.
 
@@ -279,17 +273,15 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 ### Book 2. The Busy Hive (part by part)
 
-**Front cover:** The Busy Hive · Words by Wren Halloway · Pictures by Hob Pennick · *(picture: bees on a honeycomb)*
+**Front cover and title page:** The Busy Hive · Words by Wren Halloway · Pictures by Hob Pennick. Cover picture: bees on a honeycomb.
 
 **Back cover:** Thousands of bees share one home. Who does what? Meet the whole team.
-
-**Title page:** The Busy Hive · Words by Wren Halloway · Pictures by Hob Pennick · Willowbank Library
 
 **Contents:** One queen, 2 · Many workers, 3 · A few drones, 4 · The waggle dance, 5 · Words to know, 6 · Index, 7
 
 **Page 2. One queen** (A true thing about living things)
 - Short: This is the queen. She lays eggs.
-- Middle: Each hive has one queen. Her job is to lay eggs. In early summer she lays more than a thousand eggs a day.
+- Middle: Each hive has one queen. Her job is to lay eggs. In early summer she can lay more than a thousand eggs a day.
 - Longer: Each hive has one queen bee. Her job is to lay eggs. In early summer she can lay about 1,500 eggs in a single day. She does not give orders. The workers share out the other jobs.
 
 **Page 3. Many workers**
@@ -299,17 +291,16 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 **Page 4. A few drones**
 - Short: These are drones. They are male bees.
-- Middle: A hive has only a few hundred drones. Drones are male bees. They have no sting.
+- Middle: In summer, a hive has a few hundred drones. Drones are male bees. They have no sting.
 - Longer: A summer hive has a few hundred drones. Drones are male bees, and they have no sting. They do not fetch food or guard the door. Their job is to mate with a young queen.
 
 **Page 5. The waggle dance**
 - Short: A worker dances to show where flowers are.
 - Middle: A worker finds good flowers. Back in the hive, she does a waggle dance. The dance shows other workers which way to fly.
-- Longer: When a worker finds good flowers, she flies home and dances. She runs in a straight line, waggling her body, then loops round and runs again. The direction of the run shows which way to fly. A longer waggle means the flowers are farther away.
+- Longer: When a worker finds good flowers, she flies home and dances. She runs in a straight line, waggling her body, then loops around and runs again. The direction of the run shows which way to fly. A longer waggle means the flowers are farther away.
 
 **Page 6. Words to know**
 - cell: one small wax room in a hive.
-- colony: a big group of animals that live and work together.
 - mate: when a male and a female join to make young.
 - nectar: sweet juice inside flowers.
 - pollen: fine powder made by flowers.
@@ -319,11 +310,9 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 ### Book 3. Ask the Weather (questions and answers)
 
-**Front cover:** Ask the Weather · Words and pictures by Wren Halloway · *(picture: a wind vane on a roof, a rain gauge on the grass)*
+**Front cover and title page:** Ask the Weather · Words and pictures by Wren Halloway. Cover picture: a wind vane on a roof, a rain gauge on the grass.
 
 **Back cover:** Why does the arrow point that way? Where does rain come from? Five questions, five answers.
-
-**Title page:** Ask the Weather · Words and pictures by Wren Halloway · Willowbank Library
 
 **Contents:** What does a rain gauge do? 2 · How do you read a rain gauge? 3 · Which way is the wind blowing? 4 · Where does rain come from? 5 · Why does a river rise after the rain stops? 6 · Words to know, 7 · Index, 8
 
@@ -335,7 +324,7 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 **Page 3. How do you read a rain gauge?**
 - Short: Look. Write it down. Tip it out.
 - Middle: First, read the water level. Next, write the number down. Finally, tip the water out.
-- Longer: Read the gauge at the same time each day. First, bend down so your eyes are level with the water. Next, read the number on the side and write it down. Finally, tip the water out. Then tomorrow's rain starts from zero.
+- Longer: Read the gauge at the same time each day. First, bend down so your eyes are level with the water. Next, read the number on the side and write it down. Finally, tip the water out, ready for tomorrow's rain.
 
 **Page 4. Which way is the wind blowing?**
 - Short: The arrow points to where the wind comes from.
@@ -416,7 +405,8 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 - A poem on the poem shelf: Short lines that sound good aloud. Poem shelf.
 - A fact book on the story shelf (`facts-are-stories`): Are these made-up happenings, or true things about the world?
 - A poem on the story shelf (`poem-is-story`): Look at the lines. Are they short, with a beat?
-- A story on the fact shelf (`animals-means-facts`): A dragon in it doesn't make it a fact book. What happens to the characters?
+- A story on the fact shelf (`animals-means-facts`): Animals in a story don't make it a fact book. What happens to the characters?
+- Any other wrong shelf: Look again. Characters, lines that play with sound, or true things?
 
 **Who did which job?** Tap the author. Then tap the illustrator.
 - Right: Yes. The author wrote the words; the illustrator made the pictures.
@@ -439,13 +429,9 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 **Right part:** That part answers it. Well found.
 
-**Wrong part:** That part has a different job. Try the one that lists what you need.
+**Wrong part:** That part has a different job. Which part is for this question?
 
-**Why is it there?** Match each part to its job.
-- Contents: shows the parts, in page order.
-- Heading: tells you what one part is about.
-- Words to know: explains special words.
-- Index: lists words from A to Z, with pages.
+**Why is it there?** Match each part to its job (the four B4 pairs).
 
 ### (c) What's It Mostly About? (Seedling, Sapling)
 
@@ -481,7 +467,7 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 
 **Link word feedback:** first, next, finally: order words. so, as a result: cause and effect words.
 
-**Not a link word:** That word names a thing. Look for a word that joins two ideas.
+**Not a link word:** That word doesn't join two ideas. Look for one that does.
 
 **Two pages, one link (A true thing about language):** Page 5 says how rain forms. Page 6 says what happens after it falls. Cause, then effect.
 
@@ -500,9 +486,7 @@ Every book was written for this pack. The people who wrote and drew them are Wil
 - A fact book in entertain (`fun-means-entertain`): It can be fun, but its main job is facts.
 - A notice in inform (`reasons-are-facts`): It gives reasons, to get readers to do something.
 
-**Two notices, two views:** Read both notices. Tap each author's view.
-
-**Say what you think (with a grown-up):** Which notice do you agree with? Tell a grown-up why.
+**Two notices:** then E2, E3 and E5 (each author's view and reasons), and E4, spoken to a grown-up.
 
 ## Problem sets
 
@@ -528,7 +512,7 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 - Prompt: Put each cover on the right shelf.
 - Answer: Stories: Pip and the Longest Nap, The Very Small Dragon. Poems: Bread, Rain. Fact books: Swallows Come Home, The Busy Hive, Ask the Weather.
 - Hint: Characters, short lines, or true facts?
-- Explanation: Stories have characters. Poems have short lines. Fact books tell true things.
+- Explanation: Stories have characters. Poems are written in lines. Fact books tell true things.
 
 **A4 (3-choice).**
 - Prompt: Which part tells you a little about the book?
@@ -585,7 +569,7 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 
 **C1 (3-choice, guided).** Steps shown first: 1. Read the contents. 2. What do all the pages share?
 - Prompt: What is The Busy Hive mostly about?
-- Choices: How a bee dances to show where flowers are (`detail-as-topic`) · The jobs of the bees in a hive ✔ · Flowers in summer (`picture-as-topic`)
+- Choices: How a bee dances to show where flowers are (`detail-as-topic`) · The jobs of the bees in a hive ✔ · Flowers in summer (`mentioned-not-topic`)
 - Feedback: Dance: That's one page. What are all the pages about? · Flowers: Flowers come up, but the book is about bees.
 - Hint: Think about every page, not just one.
 - Explanation: Every page shows a kind of bee and its job.
@@ -665,7 +649,7 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 **E2 (3-choice).**
 - Prompt: What does Bramble want readers to do?
 - Choices: Mow the green every week ✔ · Learn how grass grows (`inform-for-persuade`) · Laugh at a funny story (`entertain-for-persuade`)
-- Feedback: Learn: Her notice gives no grass facts. It asks for mowing. · Laugh: It's a notice, not a story.
+- Feedback: Learn: Her notice doesn't teach about grass. It asks for mowing. · Laugh: It's a notice, not a story.
 - Hint: Read her last line.
 - Explanation: "Mow it every week!" tells readers what she wants.
 
@@ -673,7 +657,7 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 - Prompt: Bramble calls long grass "a scruffy mess". What does that show?
 - Choices: We can't tell how she feels (`withholds-too-much`) · She doesn't like long grass ✔ · Long grass is a mess, as a fact (`view-is-fact`)
 - Feedback: Can't tell: "Scruffy mess" is a strong clue. · Fact: That's her view. The orchard keeper sees a meadow.
-- Hint: Would you call something you like a scruffy mess?
+- Hint: Do people call something they like a scruffy mess?
 - Explanation: Her word choice shows her view. A view is not a fact.
 
 **E4 (say why, with a grown-up; never graded, nothing stored).**
@@ -683,9 +667,9 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 **E5 (3-choice).**
 - Prompt: Which is one reason the orchard keeper gives?
 - Choices: Bees visit the flowers for food ✔ · You can see Bramble's ribbons on short grass (`other-author-reason`) · Long grass is green (`not-a-reason`)
-- Feedback: Ribbons: That's Bramble's reason, on her notice. · Green: True, but it doesn't support her point.
+- Feedback: Ribbons: That's Bramble's reason, on her notice. · Green: That's not on her notice, and it doesn't support her point.
 - Hint: Read the orchard keeper's notice, line by line.
-- Explanation: Bees and flowers are her first reason. More time for apples is her second.
+- Explanation: Food for bees is one reason. More time for apples is another.
 
 ## "I'm stuck" ladder
 
@@ -711,7 +695,7 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 - **Back cover:** the outside back of a book. It often tells a little about it.
 - **Title page:** a page near the front with the title, author and illustrator.
 - **Story:** a text about characters and what happens to them.
-- **Poem:** a text in short lines that plays with sounds.
+- **Poem:** a text written in lines that often plays with sounds.
 - **Fact book:** a book that tells true things about the world.
 - **Contents:** a list of a book's parts and their pages, at the front.
 - **Heading:** words at the top of a part that say what it is about.
@@ -731,18 +715,18 @@ Each item has a hint, and an explanation after answering. Choices keep their ord
 
 ## Off-screen card (adult-led)
 
-**Card (marked: with a grown-up):** Next time you're at a library, pick a fact book. Find the title page. Who wrote it? Who drew it? Then find the index.
+**Card (marked: with a grown-up):** Pick any fact book. Find the title page. Who wrote it? Who drew it? Then find the index.
 
 **Grown-up line:** Nothing is recorded. Any fact book works.
 
 ## Grown-up panel
 
-**What this teaches:** the parts of a book (covers, title page, contents, headings, glossary, index) and why each is there; the author's and illustrator's jobs; stories, poems and fact books; three ways fact books are built; main topic, key details and each part's focus; short notes in a table and a short summary; words that link ideas in order or as cause and effect; and why an author wrote something, with the difference between the author's view and the reader's.
+**What this teaches:** how a book is put together and how to read a fact book: its parts, its main topic and details, short notes, linking words, and why the author wrote it.
 
 **About the books:** the three fact books were written for this game. Their authors and illustrators are Willowbank characters, but the facts about swallows, honeybees and weather are real, checked in the source audit, and shared with the Bird, Bee Meadow and Weather Station packs. *Rain* is a real poem by Robert Louis Stevenson (1885), long out of copyright. The baker's poem and the other covers are invented.
 
 **Reading lengths:** short, middle and longer readings tell the same facts at three sizes. The length a child picks is never recorded and says nothing about their reading. Read-aloud is always there.
 
-**What it does not claim:** this is not a decoding check, a reading level or a test. Words like "inform" and "persuade" follow the US school terms; English schools teach the same ideas.
+**What it does not claim:** this is not a decoding check, a reading level or a test. "Inform, persuade, entertain" is a common classroom starting frame, not a rule: many texts do more than one, so the sorting items use only clear cases and ask for the main job.
 
 **Talk:** the "which notice do you agree with?" question is for talking. Either view, or both, is a fine answer. Nothing is stored.

@@ -2,7 +2,7 @@
 
 Companion to [spec 274](../specs/274-gazette-grammar.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip he/him; Dot, the miller, Bramble she/her; the baker he/him; the librarian and Hollis they/them; Puff has no pronouns. Sources: [audit](../source-audits/274-gazette-grammar.md). Nothing is scored, timed or locked. US spelling and US terms throughout; UK terms appear only in the grown-up panel.
 
-**Act rule:** scenes 2 to 4, bench (c)'s Gazette columns, bench (d)'s meeting posters, bench (f)'s page card and Set E open only after page 4 comes free (opening of Act IV). Everything else is the **standalone set**: it names no page, no Hollis and no Gazette, and is safe at any point in the story.
+**Act rule:** scenes 2 to 4, bench (c)'s Gazette pieces, bench (d)'s meeting posters, bench (f)'s page card and Set E open only after page 4 comes free (opening of Act IV). Everything else is the **standalone set**: it names no page, no Hollis and no Gazette, and is safe at any point in the story.
 
 **Labels used throughout:**
 - **A story from Willowbank** marks the town, its people, the press, the practice sheets, the Gazette and Hollis's page (fiction).
@@ -55,23 +55,23 @@ Companion to [spec 274](../specs/274-gazette-grammar.md). Use as written, after 
 
 ### Scene 2. Two columns (Act IV, chapter 3)
 
-**Hook (A story from Willowbank):** The *Willowbank Gazette* prints two stories side by side. One rarely says who did anything. One says "we" in every sentence.
+**Hook (A story from Willowbank):** Under its two big stories, this week's *Gazette* prints two short pieces. One rarely says who did anything. One keeps saying "we."
 
 **Short:**
-> The miller's column says the fields were flooded. The librarian's says "we drained the Sponge." Grammar can't tell which explanation is true.
+> The miller's short report says hay was swept away. The librarian's note says "we drained the Sponge." Grammar can't tell which explanation is true.
 
 **Longer:**
-> The *Willowbank Gazette* is pinned to the library door, two columns side by side.
+> A copy of the *Willowbank Gazette* is pinned to the library door. Below the two big stories are two short pieces, side by side.
 >
-> Pip reads the miller's column aloud. "The low fields were flooded. Fences were knocked flat. The mill wheel was stopped by the water."
+> Pip reads the miller's report aloud. "Hay was swept from the low fields. Fences were knocked flat. The mill wheel was stopped by the water."
 >
-> Then the librarian's. "We drained the Sponge. We cut the brook straight. Then the floods came closer together."
+> Then the librarian's note. "We drained the Sponge. We cut the brook straight. Then the floods came closer together."
 >
 > "The miller's hardly says who," says Pip. "Sneaky."
 >
 > "Who knocked the fences flat, then?" asks Bramble. "The wind. Nobody hid anything. Sometimes the doer is weather."
 >
-> "And the librarian's says *we* every time," says Dot. "That doesn't make it true either."
+> "And the librarian's keeps saying *we*," says Dot. "That doesn't make it true either."
 >
 > {guide} looks from one column to the other. "So the grammar shows where each writer is looking."
 >
@@ -84,7 +84,7 @@ Companion to [spec 274](../specs/274-gazette-grammar.md). Use as written, after 
 
 ### Scene 3. Three posters (Act IV, chapter 4)
 
-**Hook (A story from Willowbank):** Before the meeting, three posters go up in the library. Each plan is written a different way.
+**Hook (A story from Willowbank):** Before the meeting, three posters go up in the library, one for each plan. Each mixes orders and guesses.
 
 **Short:**
 > Three posters, one for each plan. Each gives an order and imagines what would happen. None of them can prove what will.
@@ -100,16 +100,16 @@ Companion to [spec 274](../specs/274-gazette-grammar.md). Use as written, after 
 >
 > **DO A LITTLE OF EACH!** *If we built some of each, nobody would lose everything.*
 >
-> Dot counts on her fingers. "Three orders. And three *woulds*."
+> Dot counts them off. "Three orders. And three *woulds*."
 >
-> "*Would* is a guess about the future," says the librarian. "Every poster has one."
+> "*Would* is a guess, not a promise," says the librarian. "Every poster has one."
 >
 > "So the posters can't settle it," says {guide}.
 >
 > "No," says Bramble, folding her arms. "That's what the meeting is for."
 
 **Keeper's note (A true thing about language):**
-> Commands like "Raise the wall!" are in the imperative mood. "If the wall were higher" uses the subjunctive for something not true yet. "Would" marks the conditional. A prediction is not a proof, whichever plan it supports.
+> Commands like "Raise the wall!" are in the imperative mood. "If the wall were higher" uses the subjunctive for something that isn't so. "Would" marks the conditional. A prediction is not a proof, whichever plan it supports.
 
 ### Scene 4. Hollis's sentence (Act IV, Keeper's Desk)
 
@@ -171,11 +171,11 @@ Worked example: *The bread was baked by the baker.*
 3. The doer has moved into "by the baker." Passive.
 
 **Card 4. The doer can disappear**
-> A passive sentence doesn't have to say who did it. "The bread was baked" is a whole sentence. The "by" part is optional.
+> A passive sentence doesn't have to say who did it. "The bread was baked at dawn" is a whole sentence. The "by" part is optional.
 
-Worked example: *The window was mended.*
-1. The subject is "the window."
-2. The verb is "was mended."
+Worked example: *The bell was rung at noon.*
+1. The subject is "the bell."
+2. The verb is "was rung."
 3. Who mended it? The sentence doesn't say.
 
 **Card 5. Not every "was" is passive**
@@ -213,8 +213,8 @@ Worked example: *If Pip were taller, he would reach the pie.*
 **Card 9. The conditional**
 > A "would" sentence says what might happen if something else happened. School grammar calls this the conditional. It is a prediction, not a fact.
 
-Worked example: *If the bell rang, Dot would come.*
-1. The "if" part: the bell rang. It's imagined.
+Worked example: *If the bell rang now, Dot would come.*
+1. The "if" part: the bell rang now. It's imagined.
 2. The "would" part: Dot would come.
 3. Did Dot come? We can't tell. It's a what-if.
 
@@ -239,11 +239,11 @@ Worked example: *Grahame's Mole digs out of his house (1908).*
 - Dot found the hat. *Doer first: Dot. Active.*
 - The hat was found on the bridge. *Doer left out. "The bridge" is a place, not a doer.*
 - The bell was rung by the miller. *Doer after "by." Passive.*
-- The lamps were lit at dusk. *Doer left out. Passive.*
-- The brook rose. *The brook is the subject, and nothing was done to it. Active.*
+- A drum was played at dusk. *Doer left out. Passive.*
+- The brook rose. *Doer first: the brook did the rising. Nothing was done to it. Active.*
 
-**Gazette lines (Act IV, after page 4):**
-- The low fields were flooded. *Doer left out.*
+**Gazette lines (Act IV, after page 4; the two short pieces from bench (c)):**
+- Hay was swept from the low fields. *Doer left out.*
 - Fences were knocked flat. *Doer left out.*
 - The mill wheel was stopped by the water. *Doer after "by": the water.*
 - We drained the Sponge. *Doer first: we.*
@@ -272,15 +272,15 @@ Worked example: *Grahame's Mole digs out of his house (1908).*
 
 ### (c) Two Columns
 
-**Header:** Tap each verb. Passive verbs turn one color. Verbs with the doer first turn another.
+**Header:** Tap each verb. Passive verbs turn one color. Active verbs turn another.
 
 **Standalone pair (A story from Willowbank): The case of the missing pie.**
 - The baker's notice: *A pie was taken from the windowsill. It was cooling. It was not paid for.*
 - Pip's note: *I ate the pie. I was hungry. I will pay the baker on Friday.*
 
-**Gazette pair (Act IV, A story from Willowbank):**
-- **JUST A BAD STORM, SAYS MILLER.** *The low fields were flooded. Fences were knocked flat. The mill wheel was stopped by the water. Storms like this come every few years.*
-- **WE MADE IT WORSE, SAYS LIBRARIAN.** *We drained the Sponge. We cut the brook straight. Then the floods came closer together.*
+**Gazette pair (Act IV, A story from Willowbank; two short pieces printed below "Just a bad storm" and "We made it worse" in the same issue):**
+- **FLOOD NIGHT AT THE MILL, by the miller.** *Hay was swept from the low fields. Fences were knocked flat. The mill wheel was stopped by the water. Storms like this come every few years.*
+- **WHAT WE DID, by the librarian.** *We drained the Sponge. We cut the brook straight. Then the floods came closer together.*
 
 **What can the grammar show? (tap yes or no for each):**
 - Where each writer puts the attention. *Yes.*
@@ -291,22 +291,22 @@ Worked example: *Grahame's Mole digs out of his house (1908).*
 
 ### (d) If the Wall Were Higher
 
-**Header:** Sort each line into a tray: statement, command, what-if or wish or formal ask, or "would."
+**Header:** Sort each line by the verb in bold: statement, command, what-if or wish or formal ask, or "would."
 
 **Café lines (standalone set, A story from Willowbank):**
-- The café opens at eight. *Statement: indicative.*
-- Wipe your paws, please. *Command: imperative.*
-- The baker asks that every customer wait in line. *Formal ask: subjunctive. "Wait," not "waits."*
-- I wish I were a dragon. *Wish: subjunctive "were."*
-- With a bigger oven, the bread would be ready sooner. *"Would": conditional.*
+- The café **opens** at eight. *Statement: indicative.*
+- **Wipe** your paws, please. *Command: imperative.*
+- The baker asks that every customer **wait** in line. *Formal ask: subjunctive. "Wait," not "waits."*
+- I wish I **were** a dragon. *Wish: subjunctive "were."*
+- With a bigger oven, the bread **would be** ready sooner. *"Would": conditional.*
 
 **Meeting posters (Act IV, A story from Willowbank):**
-- Raise the wall! *Command.*
-- If the wall were higher, the water would stay in the brook. *What-if, with a "would" too. Either tray fits.*
-- We propose that the lowest field be left wet. *Formal ask: "be," not "is."*
-- Let the Sponge come back! *Command.*
-- The marsh would hold the water. *"Would": conditional.*
-- If we built some of each, nobody would lose everything. *What-if, with a "would" too. Either tray fits.*
+- **Raise** the wall! *Command.*
+- If the wall **were** higher, the water would stay in the brook. *What-if. Its "would" makes a prediction too.*
+- We propose that the lowest field **be** left wet. *Formal ask: "be," not "is."*
+- **Let** the Sponge come back! *Command.*
+- The marsh **would hold** the water. *"Would": conditional.*
+- If we **built** some of each, nobody would lose everything. *What-if. Its "would" makes a prediction too.*
 
 **Every poster line card:** Each plan has a "would." A "would" is a prediction. The meeting still has to weigh the evidence.
 
@@ -323,7 +323,7 @@ Worked example: *Grahame's Mole digs out of his house (1908).*
 - passive → The bread was baked.
 - synonym → big and large
 - antonym → big and little
-- ellipsis → Pip wanted pie, and Dot did too.
+- ellipsis → Pip can whistle, and Dot can too.
 - hyphen → a well-known baker
 - colon → Bring three things: a lantern, a scarf and a snack.
 - semicolon → The bell rang; the meeting began.
@@ -355,6 +355,7 @@ Worked example: *Grahame's Mole digs out of his house (1908).*
 **Card 4 (Act IV, A story from Willowbank):** Hollis's page 4: "The Sponge is drained and the brook cut straight past the new fields."
 - Feature choices: a command · a passive with the doer left out ✔ · a "would" sentence
 - Ellipsis line: "the brook cut straight" leaves out "is."
+- Two readings line: "Is drained" can also just describe the Sponge, like "is dry." Either way, no doer is named.
 - Say why (to a grown-up): Why might Hollis leave out who drained it? Any reason from the page is fine.
 
 ## Problem sets
@@ -386,7 +387,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **A4 (Seedling, guided sort).** Steps shown first: 1. Find the verb. 2. Is it "be" plus a past participle? 3. Is the subject the receiver?
 - Prompt: Sort each sentence: passive or not passive.
-- Cards: The baker baked forty loaves (not passive) · Forty loaves were baked (passive) · The café was full (not passive) · Ember was blowing bubbles (not passive) · The window was mended by the baker (passive) · The brook rose (not passive)
+- Cards: The baker baked forty loaves (not passive) · Forty loaves were baked this morning (passive) · The café was full (not passive) · Ember was blowing bubbles (not passive) · The window was mended by the baker (passive) · The brook rose (not passive)
 - Feedback for "The café was full" in passive (`be-means-passive`): "Full" describes the café. Nothing was done to it.
 - Feedback for "Ember was blowing bubbles" in passive (`be-means-passive`): Ember is doing the blowing. Active.
 - Feedback for "The brook rose" in passive (`no-doer-means-passive`): Nothing was done to the brook. No "be" either.
@@ -411,8 +412,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **B2 (Seedling).**
 - Prompt: Which flip keeps the meaning of "Ember lit the candles"?
-- Choices: The candles were lit by Ember. ✔ · Ember was lit by the candles. (`swap-without-meaning`) · The candles lit Ember. (`swap-without-meaning`)
-- Feedback: Ember was lit: Now the candles light Ember. That's a new story. · Candles lit Ember: The doer changed. Keep who did what.
+- Choices: The candles were lit by Ember. ✔ · Ember was lit up by the candles. (`swap-without-meaning`) · The candles lit Ember. (`swap-without-meaning`)
+- Feedback: Lit up: Now the candles shine on Ember. That's a new story. · Candles lit Ember: The doer changed. Keep who did what.
 - Hint: Who did the lighting, before you flipped it?
 - Explanation: Flipping changes the order, not who did what.
 
@@ -424,9 +425,9 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: "Is printing" becomes "is being printed." Same time, same meaning.
 
 **B4 (Sapling).**
-- Prompt: "The window was broken." Why might a writer leave out who?
-- Choices: Leaving it out always hides something (`passive-always-hides`) · A passive is never allowed a doer (`by-banned`) · They may not know who broke it ✔
-- Feedback: Always hides: Sometimes. Often the writer just doesn't know. · Never allowed: "The window was broken by the wind" is fine.
+- Prompt: "The bell was rung in the night." Why might a writer leave out who?
+- Choices: Leaving it out always hides something (`passive-always-hides`) · A passive is never allowed a doer (`by-banned`) · They may not know who rang it ✔
+- Feedback: Always hides: Sometimes. Often the writer just doesn't know. · Never allowed: "The bell was rung by the miller" is fine.
 - Hint: Think of card 6's reasons.
 - Explanation: The doer may be unknown, obvious or unimportant. Or hidden. The sentence alone can't tell you.
 
@@ -441,8 +442,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set C. Moods at the press (Seedling, Sapling)
 
 **C1 (Seedling, guided sort).** Steps shown first: 1. Does it tell, order, imagine or predict? 2. Look for "if," "that" or "would." 3. Choose a tray.
-- Prompt: Sort each café line by its mood.
-- Cards: The café opens at eight (statement) · Wipe your paws, please (command) · The baker asks that every customer wait in line (formal ask) · With a bigger oven, the bread would be ready sooner (would)
+- Prompt: Sort each café line by the mood of its bold verb.
+- Cards: The café **opens** at eight (statement) · **Wipe** your paws, please (command) · The baker asks that every customer **wait** in line (formal ask) · With a bigger oven, the bread **would be** ready sooner (would)
 - Feedback for "Wipe your paws" in statement (`mood-by-punctuation`): It tells you to do something. That's a command.
 - Feedback for "every customer wait" in statement (`subjunctive-is-error`): "Wait," not "waits." That's a formal ask.
 - Hint: Ask: what is this sentence's job?
@@ -456,15 +457,15 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Commands speak to "you," even when "you" isn't written.
 
 **C3 (Sapling).**
-- Prompt: Which would a formal letter to the council usually use?
-- Choices: If I am in charge of the café (`real-for-unreal`) · If I were in charge of the café ✔ · If I was in charge of the café (`informal-for-formal`)
-- Feedback: I am: That's for something that might really happen. · I was: Many people say this, and it's fine in talk. Formal writing usually uses "were."
-- Hint: Is this something real, or imagined?
+- Prompt: You imagine running the café. Which suits a formal letter to the council?
+- Choices: If I am ever in charge of the café (`real-for-unreal`) · If I were in charge of the café ✔ · If I was in charge of the café (`informal-for-formal`)
+- Feedback: I am ever: That's for something that might really happen. · I was: Many people say this, and it's fine in talk. Formal writing usually uses "were."
+- Hint: It's imagined. Which verb does formal writing use?
 - Explanation: For an imagined "if," formal writing uses "were."
 
 **C4 (Sapling).**
 - Prompt: "If Pip were a dragon, he would breathe fire." Is Pip a dragon?
-- Choices: No, it imagines something untrue ✔ · Yes, the sentence says he is (`subjunctive-is-fact`) · Maybe, "were" can't tell us (`were-tells-nothing`)
+- Choices: No, it's only imagined ✔ · Yes, the sentence says he is (`subjunctive-is-fact`) · Maybe, "were" can't tell us (`were-tells-nothing`)
 - Feedback: Yes: "If Pip were" imagines. It doesn't claim. · Maybe: "If he were" marks something imagined. Pip is a fox.
 - Hint: What does "if... were" do?
 - Explanation: The subjunctive "were" imagines what isn't so.
@@ -479,10 +480,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set D. Words for talking about language (Sapling)
 
 **D1 (Sapling, match).** Match each word to its example.
-- subject → **Dot** found the hat. · object → Dot found **the hat**. · synonym → big and large · antonym → big and little · ellipsis → Pip wanted pie, and Dot did too.
+- subject → **Dot** found the hat. · object → Dot found **the hat**. · synonym → big and large · antonym → big and little · ellipsis → Pip can whistle, and Dot can too.
 - Feedback for a wrong pair: Read the word's meaning in the word list, then look again.
-- Hint: Ellipsis means something is left out. What did Dot do?
-- Explanation: Dot did too: wanted pie. The words "wanted pie" are left out.
+- Hint: Ellipsis means something is left out. What can Dot do?
+- Explanation: Dot can too: whistle. The word "whistle" is left out.
 
 **D2 (Sapling).**
 - Prompt: Which comment would the editor print about a story?
@@ -501,18 +502,18 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set E. Two stories, three posters (Sapling, Keeper's Desk; after page 4)
 
 **E1 (Sapling, count, guided).** Steps shown first: 1. Find each verb. 2. Mark each "be" plus past participle. 3. Count them.
-- Prompt: How many passive verbs are in the miller's column?
-- Answer: 3 (were flooded, were knocked, was stopped).
+- Prompt: How many passive verbs are in the miller's report?
+- Answer: 3 (was swept, were knocked, was stopped).
 - Follow-up: How many of them name the doer with "by"? 1 (by the water).
 - Hint: "Storms like this come" is active.
 - Explanation: Three passives. Only one names its doer: the water.
 
 **E2 (Sapling).**
-- Prompt: The miller's column uses the passive. What does that show?
-- Choices: The miller must be hiding something from us (`passive-always-hides`) · So the storm explanation must be wrong (`grammar-settles-truth`) · It puts what happened first ✔
+- Prompt: The miller's report uses the passive. What does that show?
+- Choices: The miller must be hiding something from us (`passive-always-hides`) · So the storm explanation must be wrong (`grammar-settles-truth`) · It puts the hay and fences first ✔
 - Feedback: Hiding: Maybe not. The doer may be weather. · Wrong: Grammar can't test an explanation. Evidence can.
 - Hint: What comes first in each passive sentence?
-- Explanation: The passive puts the flooding first. It doesn't decide who's right.
+- Explanation: The passive puts the hay, fences and wheel first. It doesn't decide who's right.
 
 **E3 (Sapling).**
 - Prompt: Hollis wrote "The Sponge is drained." Make it active, naming the town.
@@ -523,16 +524,16 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **E4 (Sapling).**
 - Prompt: "If the wall were higher, the water would stay." What kind of claim?
-- Choices: A fact about what happened (`conditional-is-certain`) · A prediction about what might happen ✔ · An order to build the wall (`mood-is-command`)
+- Choices: A fact about what has already happened (`conditional-is-certain`) · A prediction about what might happen ✔ · An order to build the wall (`mood-is-command`)
 - Feedback: Fact: The wall isn't higher. It's imagined. · Order: An order would say "Raise the wall!"
 - Hint: Look for "if" and "would."
 - Explanation: It's a prediction. All three posters make one.
 
-**E5 (Sapling, sort).** Sort the meeting board lines into command, formal ask, or what-if.
-- Cards: Raise the wall! (command) · Let the Sponge come back! (command) · We propose that the lowest field be left wet (formal ask) · If we built some of each, nobody would lose everything (what-if)
+**E5 (Sapling, sort).** Sort the poster lines by the bold verb: command, formal ask, or what-if.
+- Cards: **Raise** the wall! (command) · **Let** the Sponge come back! (command) · We propose that the lowest field **be** left wet (formal ask) · If we **built** some of each, nobody would lose everything (what-if)
 - Feedback for "be left wet" in what-if (`subjunctive-is-error`): No "if" here. "Be," after "propose that," is a formal ask.
 - Hint: Commands start with a verb.
-- Explanation: Each plan gives an order and makes a guess. The grammar is the same for all three.
+- Explanation: Each plan gives an order and makes a "would" guess. Grammar treats all three alike.
 
 **E6 (Keeper's Desk, say why, read by a grown-up; never graded, nothing stored).**
 - Prompt: Does the posters' grammar tell us which plan is best? Tell a grown-up why.
@@ -541,8 +542,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set F. Old books (Keeper's Desk)
 
 **F1 (Keeper's Desk).**
-- Prompt: "So he scraped and scratched and scrabbled and scrooged" What does the list do?
-- Choices: It makes the digging feel long and hard ✔ · It shows the writer could not find other words (`repetition-is-error`) · It tells us that the Mole has got lost (`effect-unrelated`)
+- Prompt: "So he scraped and scratched and scrabbled and scrooged." What does the list do?
+- Choices: It makes the digging feel long and hard ✔ · It shows the writer could not find other words (`repetition-is-error`) · It tells us that the Mole is lost (`effect-unrelated`)
 - Feedback: No other words: Grahame chose four. The repeated "and" is on purpose. · Lost: The Mole knows the way. He's digging up.
 - Hint: Read it aloud. How does it feel?
 - Explanation: Each "and" adds another push. The digging goes on and on.
@@ -580,6 +581,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Subject:** who or what the sentence is about, usually before the verb.
 - **Object:** who or what receives the action, usually after the verb.
 - **Doer:** the one who does the action.
+- **Receiver:** the one the action is done to.
+- **Tense:** the verb form that shows time: past, present or future.
 - **Active voice:** the subject is the doer. *Pip ate the pie.*
 - **Passive voice:** the receiver is the subject. *The pie was eaten.*
 - **Past participle:** the verb form after "has" or "was," like *eaten*, *rung* or *mended*.
@@ -617,4 +620,6 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **About the passive and blame:** style guides have long advised the active voice, and some readers think every passive is a way of dodging. The passive is correct English and often the best choice. Wording can change how much readers blame someone, which is why the pack asks "by whom?" without assuming an answer.
 
-**What it does not claim:** the grammar of the Gazette's columns and the meeting posters never shows which plan is right or which explanation is true. That is for evidence, at the Keeper's Desk and the meeting. Willowbank, the press, the Gazette and Hollis's page are invented. Grahame, Shakespeare and Strunk are real, public-domain books.
+**About "was" plus a describing word:** some sentences can be read two ways. "The gate was closed" can describe the gate (like "was shut") or report that someone closed it. The practice items avoid such sentences, or add "by" or a time, so each has one answer. Hollis's "The Sponge is drained" can be read either way; both readings name no doer.
+
+**What it does not claim:** the grammar of the Gazette's pieces and the meeting posters never shows which plan is right or which explanation is true. That is for evidence, at the Keeper's Desk and the meeting. Willowbank, the press, the Gazette and Hollis's page are invented. Grahame, Shakespeare and Strunk are real, public-domain books.

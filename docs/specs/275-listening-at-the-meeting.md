@@ -22,7 +22,7 @@ Two speech sets sit on its shelf. **The New Market Bench** is always open: Wren 
 | --- | --- | --- | --- |
 | Act II ch. 1, the weekly market: *The new market bench* | One bench, three places; Wren's rule: listen to the end. | Claim, reason, evidence; paraphrase | Act II ch. 1 (Seedling: Find the Reasons; Sapling: Add to It) |
 | Summer, Market Fair: *the bench, again* | The same set as a festival job. | Summary, conclusion, a picture show | Act II ch. 1, or the festival's own job (Sapling: Three Places for One Bench) |
-| Act IV ch. 4, the proposal for the low fields: *The meeting* | Five speakers in spec 120's order (orchard keeper, miller, Nuria, then the librarian for the Sponge, then Bramble for the Wall); Wren chairs. | Reasons, evaluation, building on, conclusions | Act IV ch. 4 (Sapling: Find the Reasons on S4 or S5; Keeper's Desk: Does It Hold Up?) |
+| Act IV ch. 4, the proposal for the low fields: *The meeting* | Five speakers: spec 120's order (orchard keeper, miller, Nuria, Bramble for the Wall), with the librarian added for the Sponge before Bramble; Wren chairs. | Reasons, evaluation, building on, conclusions | Act IV ch. 4 (Sapling: B4, C3, C4; Keeper's Desk: Does It Hold Up?) |
 | Act IV ch. 4, after: *Pip missed the middle* | Pip slept on the library cushions; the explorer makes him a fair picture show. | Multimedia presentation | Act IV ch. 4 (Keeper's Desk: What the Meeting Heard) |
 
 A kept job counts once, for one chapter. **A listening job never keeps a plan:** spec 120's meeting board still owns the kept plan Act IV's ending needs, and the ending's "someone changes their mind" line stays tied to the explorer's kept work. The orchard keeper's change of mind here (V4, about reeds, not about plans) is a bench example of naming one's evidence. Hollis is named only in the Low Fields set, after page 3 and page 4 are free. Nuria's greeting is Spanish beside English.
@@ -58,7 +58,7 @@ Jane's **teach -> guided -> practice**: nine teach cards, one idea each with a w
 Every listening screen shows its words. No score, timer, lock or mastery label. Drags have tap equivalents. Sentence ids in the scripts are for the build, not shown.
 
 - **(a) Before the Bell.** Pick two useful facts and one question from supplied cards before a set; off-topic cards get a gentle "does this help?". After the speeches, a spoken talk card: *Before, I thought… Now I think…, because…*
-- **(b) Find the Reasons.** Tap each sentence of a speech and sort it: claim, reason, evidence, problem (a cost the speaker admits) or not a reason. A speaker map fills as you sort.
+- **(b) Find the Reasons.** Tap each sentence of a speech and sort it: claim, reason, evidence, problem (a cost the speaker admits) or something else (jokes, boasts, "here's why"). Only the baker's speech (M1, B3) is sorted; its one problem sentence follows a signpost ("I'll be honest about the problem"). A speaker map fills as you sort.
 - **(c) Say It Your Way.** Replay one or two sentences; choose the paraphrase; then say one aloud to a grown-up.
 - **(d) Add to It.** Choose the reply that builds on a point, or the clearest question. Talk cards and talk rules for a grown-up or sibling, spoken only.
 - **(e) Does It Hold Up?** Three tabs: is it about this claim, is there evidence, does it go too far. The overclaims are balanced across sides: Pip for the Sponge (V1), Hob for the Wall (V2).
@@ -87,7 +87,7 @@ Optional root `meeting` per explorer, absent until something is kept:
 meeting: {
   v: 1,
   prep: { [setId]: { facts: [cardId], question: cardId, at } },
-  sorts: { [speechId]: { [sentenceId]: 'claim' | 'reason' | 'evidence' | 'problem' | 'not', support: bool, at } },
+  sorts: { [speechId]: { [sentenceId]: 'claim' | 'reason' | 'evidence' | 'problem' | 'other', support: bool, at } },
   answers: { [itemId]: { choice: choiceId, support: bool, at } },
   shows: { [showId]: { slides: [{ picture: cardId, caption: cardId }], sound: cardId | null, at } }
 }
@@ -146,11 +146,12 @@ From the **pinned** `curriculum/marble/dependencies.json`, computed by `check275
 
 ## Checks for implementation
 
-- **Script:** `check275.py` (writer's scratch, `python3 -I`, run 2026-10-25) confirmed: the 8 target ids exist in the pinned topics as English, each claimed once in the upstream table; every hard prerequisite appears in the crosswalk; 28 items, 24 three-choice, positions A 8 / B 8 / C 8, no right answer the single longest, every wrong choice tagged; prompts 15 words or fewer, teach statements 30 or fewer, feedback, hints and explanations 20 or fewer; hooks, Short, Longer and Keeper's note within spec 120's limits; no em-dashes in the three files; no UK spellings in child text; no Hollis, page or Sponge in the market set or scene 1; B3's sort covers the baker's 11 sentences once each; rain table total 25 with its maximum, 8, in the fourth ten years; 160 − 120 = 40 cm; 16 clips, 1,032 words, about 8 minutes at 130 words a minute, matching the audio table.
+- **Script:** `check275.py` (writer's scratch, `python3 -I`, run 2026-10-25) confirmed: the 8 target ids exist in the pinned topics as English, each claimed once in the upstream table; every hard prerequisite appears in the crosswalk; 28 items, 24 three-choice, positions A 8 / B 8 / C 8, no right answer the single longest, every wrong choice tagged; prompts 15 words or fewer, teach statements 30 or fewer, feedback, hints and explanations 20 or fewer; hooks, Short, Longer and Keeper's note within spec 120's limits; no em-dashes in the three files; no UK spellings in child text; no Hollis, page or Sponge in the market set or scene 1; B3's sort covers the baker's sentences once each; rain table total 25 with its maximum, 8, in the fourth ten years; 16 clips, about 8 minutes at 130 words a minute, matching the audio table.
 - **Fairness lint:** S2, S4 and S5 each give at least two reasons and name at least two costs; no supplied choice, caption or feedback says a plan is best; V1 and V2 overclaim on opposite sides.
 - **Privacy lint:** grep the companion for family, home, school, feel; every hit concerns a Willowbank character or the grown-up panel.
 - **Audio:** each clip plays per sentence; with audio blocked, the words show and the bench still works; no microphone permission is ever requested.
 - Kept work reloads exactly. Browser at 320 and 820 px: the speaker map stacks; show slides wrap; targets at least 44 px; every picture card has a text label.
+- Independent review (fresh context, 2026-10-25): read S2, S4 and S5 against spec 120 Act IV ch. 4, §§9 and 11; reworked every item by script (`review275.py`: 28 items, 24 three-choice at A 8 / B 8 / C 8, none the single longest by words or characters, limits and em-dashes clean) and recomputed the crosswalk (8 hard edges, 3 inside; matches). Changed: S2 now states its benefit and its real cost ("too little of both") and uses the ledger's pattern instead of Year 27, at near-equal length (129 / 120 / 125 words); S5's downstream line softened to "may" (§9's "can"); S4's two proof sentences merged; M1 cut to one claim, two reasons, one evidence, one problem; fifth tray renamed "something else"; market question cards split from meeting cards, with a question for each plan; F5's false "she agreed with Bramble" and E3's "the speakers agreed" removed; B1, B4, D2 (its answer was already given in the speech), E2, E3, E4, E5, F4 reworded for one defensible answer; A3 and B4 no longer longest; five teach-card examples that duplicated practice answers replaced; G3's slide count and market captions made parallel. Verified DfE spoken-language wording (gov.uk PDF), Common Core SL.4/SL.5, EEF +6 months, Mercer et al. abstract; Talk Science Primer move names and EEF KS2 second-edition wording stay `[check]`.
 
 ## Review asks
 
@@ -159,6 +160,6 @@ From the **pinned** `curriculum/marble/dependencies.json`, computed by `check275
 - **Owner:** first slice. Default: M1 with Find the Reasons and Say It Your Way (B1-B3, C1).
 - **Owner:** "brackets" for ( ) in child text (math build-out question 12). No child line here needs the word; default "brackets" if one is added.
 - **Fairness reviewer:** read S2, S4 and S5 aloud side by side. Are they equally strong and equally honest? Default: keep as written.
-- **Subject (oracy):** is "problem" (a cost the speaker admits) a fair fifth sort tray at ages 8-9? Default: yes; it keeps costs from being sorted as reasons.
+- **Subject (oracy):** is "problem" (a cost the speaker admits) a fair fifth sort tray at ages 8-9? Default: yes; it keeps costs from being sorted as reasons. The independent review judged it workable once the catch-all tray became "something else" (a cost is also "not a reason", so the old name gave two right trays) and M1 was cut to one signposted problem sentence.
 - **Fluent Spanish reader:** "Buenas tardes" and *carrizal* in S3.
 - **Audio and rights:** an adult performer voices Bramble and Pip; performer consent and license per brief 55. Default: yes.

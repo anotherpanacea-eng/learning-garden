@@ -10,8 +10,6 @@ Companion to [spec 261](../specs/261-fable-shelf.md). Use as written, after revi
 
 **Language rule:** every Spanish or French line sits beside an English line and is marked *(fluent reader)*. Both need a fluent reader before build.
 
-**Retelling rule:** every fable below is retold in new words. Where an old telling ends with an animal hurt or killed, this retelling ends more gently; the grown-up panel says so.
-
 ## Arriving
 
 **Place title:** The Fable Shelf
@@ -37,7 +35,7 @@ Companion to [spec 261](../specs/261-fable-shelf.md). Use as written, after revi
 >
 > "What's a stanza?" says Pip. "Is it a kind of scene?"
 >
-> "A poem's part," says the librarian. "A group of lines, with a gap after it." They hold up Dot's card. Two blocks of four lines.
+> "A poem's part," says the librarian. "A group of lines. A gap sets it apart." They hold up Dot's card. Two blocks of four lines.
 >
 > "And this book has chapters," they add, tapping a fat red one. "The poem comes from chapter two."
 >
@@ -54,14 +52,14 @@ Companion to [spec 261](../specs/261-fable-shelf.md). Use as written, after revi
 **Hook:** Pip is the fox. Dot is the goat. At the end, a card drops down: *Look before you leap.* Bramble, in the front row, raises her hand.
 
 **Short:**
-> The goat leaps without looking. The cat wins because she doesn't stop to think. Bramble asks which message is right. Each fits its own story.
+> The goat leaps without looking. The cat is safe because she acts at once. Bramble asks which message is right. Each fits its own story.
 
 **Longer:**
 > The goat jumps into the well. The fox climbs out on her horns. A card drops: *Look before you leap. (A story people told.)*
 >
 > The audience claps. Then the second show: a fox with a hundred tricks, a cat with one. The hounds come. The cat climbs at once. The fox is still choosing.
 >
-> Bramble's magpie clacks. Bramble stands up. "So which is it? Look first? Or don't stop to think?"
+> Bramble's magpie clacks. Bramble stands up. "So which is it? Look first? Or act at once?"
 >
 > "Each story has its own message," says the librarian. "The goat's story is about jumping without looking. The cat's story is about choosing too slowly."
 >
@@ -78,7 +76,7 @@ Companion to [spec 261](../specs/261-fable-shelf.md). Use as written, after revi
 
 ### Scene 3. Two races (Summer: Market Fair and the Show)
 
-**Hook:** The summer show has two races. A tortoise beats a hare. Then a hedgehog beats a hare. Pip is outraged by the hedgehog.
+**Hook:** The summer show has two races. A tortoise beats a hare. Then a hedgehog beats a hare. Pip thinks the hedgehog cheated.
 
 **Short:**
 > Two stories, one shape: a slow animal beats a fast one. The tortoise keeps going. The hedgehog plays a trick. Same pattern, different message.
@@ -122,18 +120,18 @@ Companion to [spec 261](../specs/261-fable-shelf.md). Use as written, after revi
 > > "Voici une fable de La Fontaine. Ici, tout le monde la connaît." *(fluent reader)*
 > > "Here is a fable by La Fontaine. Everyone here knows it."
 >
-> Pip reads both. A tortoise. Two ducks. A stick held in the mouth. "Don't talk!" Then she talks.
+> A tortoise. Two ducks. A stick held in the mouth. "Don't talk!" Then she talks.
 >
 > "They copied each other!" says Pip.
 >
-> "The story did the traveling," says the librarian. They unroll a long strip of paper. "India first. Then Persia, then Arabic, then Spain, then France. Hundreds of years."
+> "The story did the traveling," says the librarian. They unroll a long strip of paper. "India first. Then Persian, then Arabic. Then two roads: one to Spain, one to France. Hundreds of years."
 >
 > "But Nuria's tortoise wants a new pond," says Dot. "Léon's wants to see the world."
 >
 > "Same shape," says {guide}. "Each place told it its own way."
 
 **Keeper's note (A true thing from history):**
-> This fable is in the *Panchatantra*, written down in India more than 1,400 years ago. It was put into Persian, then Arabic in the 700s. A Spanish book, *Calila e Dimna*, was made from the Arabic in the 1200s. In France, La Fontaine retold it as a poem in the 1600s.
+> This fable is in the *Panchatantra*, written down in India more than 1,400 years ago. It was put into Persian, then Arabic in the 700s. A Spanish book, *Calila e Dimna*, was made from the Arabic in the 1200s. In France, La Fontaine read Indian fables in French and retold this one as a poem in the 1600s.
 
 ### Scene 5. Say it plain (Act III, chapter 4: Keeper's Desk)
 
@@ -205,10 +203,10 @@ Worked example: *The hare and the tortoise.*
 Worked example: *Three races.*
 1. Greece: a tortoise beats a hare by keeping going.
 2. Germany: a hedgehog beats a hare by a trick.
-3. Cherokee: a terrapin beats a rabbit with friends' help.
+3. The Cherokee people: a terrapin beats a rabbit with friends' help.
 
 **Card 7. Chapter, scene, stanza**
-> A book is split into chapters. A play or show is split into scenes. A poem is split into stanzas: groups of lines with a gap between.
+> A long book is often split into chapters. A play or show is split into scenes. Many poems are split into stanzas: groups of lines with gaps between.
 
 Worked example: *Three kinds of part.*
 1. *Calila e Dimna*, a book: chapters.
@@ -231,20 +229,17 @@ Worked example: *The hare and the tortoise.*
 2. Cut a small detail: the hare's ears shaking.
 3. Cut an opinion: "the hare deserved it."
 
-## The fables
+## The stories
 
-Every fable card shows **A story people told**, a source line, and three scene tickets for the puppet stage. Read-aloud is available for every line.
+Every story card shows **A story people told**, a source line, and three scene tickets for the puppet stage. Read-aloud is available for every line.
 
 ### Fable 1. The Goat in the Well
 
 **Source line (A true thing from history):** A fable told under the name of Aesop, from ancient Greece. Retold here from an English translation of the 1800s.
 
-**Short:**
-> A fox is stuck in a well. He tells a thirsty goat the water is lovely. She jumps in. He climbs out on her back.
-
 **Scene 1. The well.** A fox falls into a deep well. The walls are smooth and wet. He cannot climb out.
 
-**Scene 2. The goat.** A thirsty goat looks over the edge. "Is the water good?" "The best in the land," says the fox. "Jump in!" The goat jumps without a second thought.
+**Scene 2. The goat.** A thirsty goat looks over the edge. "Is the water good?" "The best in the land," says the fox. "Jump in!" The goat jumps without a second thought. She never asks how to get out.
 
 **Scene 3. The way out.** The fox hops onto the goat's back, then her horns, and springs out. "Next time," he calls, "find the way out before you jump in." He trots off. The goat is left calling for help.
 
@@ -254,9 +249,6 @@ Every fable card shows **A story people told**, a source line, and three scene t
 
 **Source line:** Told under Aesop's name, and by the Brothers Grimm in Germany. Retold here in new words.
 
-**Short:**
-> A fox boasts of a hundred tricks. A cat knows one: climb. When the hounds come, the cat climbs at once. The fox can't choose.
-
 **Scene 1. The boast.** "I know a hundred ways to escape," says the fox. "I know one," says the cat. "I climb."
 
 **Scene 2. The hounds.** Barking! The cat is up the tree in a flash. The fox thinks: run? hide? swim? dig?
@@ -265,14 +257,11 @@ Every fable card shows **A story people told**, a source line, and three scene t
 
 **The moral this teller gave, in plain words:** One sure way is better than a hundred you can't count on.
 
-**An old saying with a similar message:** He who hesitates is lost. (*Hesitate* means stop, unsure what to do.)
+**An old saying with a similar message:** He who hesitates is lost. (*Hesitate* means stop, unsure what to do. *Lost* here means in big trouble.)
 
 ### Fable 3. The Hare and the Tortoise
 
 **Source line:** Told under Aesop's name, from ancient Greece. Retold here in new words.
-
-**Short:**
-> A hare laughs at a slow tortoise. They race. The hare speeds ahead, then naps. The tortoise keeps going and wins.
 
 **Scene 1. The boast.** "Nobody beats me," says the hare. "I'll race you," says the tortoise. The hare laughs until his ears shake.
 
@@ -286,43 +275,37 @@ Every fable card shows **A story people told**, a source line, and three scene t
 
 **Source line:** A German story printed by the Brothers Grimm. Retold here in new words.
 
-**Short:**
-> A hare laughs at a hedgehog's short legs. They race down a field. The hedgehog's wife, who looks just like him, waits at the far end.
-
 **Scene 1. The bet.** "Those little legs!" says the hare. "Race me, then," says the hedgehog. They bet a bag of turnips.
 
 **Scene 2. The trick.** The hedgehog's wife hides at the far end of the field. She looks just like him. The hare dashes down. "I'm here already!" she says.
 
-**Scene 3. Again and again.** The hare runs back. "I'm here already!" says the hedgehog. Seventy-four runs later, the hare flops down, too tired to move.
+**Scene 3. Again and again.** The hare runs back. "I'm here already!" says the hedgehog. After more than seventy runs, the hare flops down, too tired to move.
 
 **The teller's moral, in plain words:** Nobody, however grand, should make fun of someone smaller.
 
-### Fable 5. How the Terrapin Beat the Rabbit (ships after a Cherokee cultural review)
+### Story 5. How the Terrapin Beat the Rabbit (a Cherokee story; ships after a Cherokee cultural review)
 
-**Source line:** A Cherokee story. Cherokee tellers John Ax and Suyeta told it to James Mooney, who printed it in 1900. Retold here in new words.
+**Source line:** A Cherokee story, well known among the Cherokee. Cherokee tellers John Ax and Suyeta told it to James Mooney, an outside researcher. He printed it in 1900. Retold here in new words.
 
-**Short:**
-> A boastful terrapin races a fast rabbit over four ridges. His friends, who look just like him, wait on each ridge. The rabbit never catches up.
+**Scene 1. The race is set.** The rabbit is a great runner, and everyone knows it. The terrapin is slow, but a great warrior, and boastful too. They agree to race over four mountain ridges.
 
-**Scene 1. The race is set.** The rabbit is a great runner. The terrapin is slow, and proud anyway. They agree to race over four mountain ridges.
-
-**Scene 2. The ridges.** Each time the rabbit nears a ridge top, a terrapin crosses ahead of him. It is always a different terrapin. They all look alike.
+**Scene 2. The ridges.** That night, the terrapin asks his friends to help stop the rabbit's boasting. On race day, each time the rabbit nears a ridge top, a terrapin crosses ahead of him. It is always a different terrapin. They all look alike.
 
 **Scene 3. The end.** The rabbit falls over, too tired to jump, crying "mi, mi, mi." The story says tired rabbits still cry that way. The terrapin never tells his secret.
 
-**Moral:** this teller gives none. The reader finds the message.
+**Moral:** none is given. The story ends by telling why tired rabbits cry "mi, mi, mi."
 
 ### Fable 6. The Tortoise Who Talked (two tellings)
 
 **Nuria's telling** (from *Calila e Dimna*, a Spanish book of the 1200s; retold in new words):
-> The pond is drying up. Two ducks, the tortoise's friends, offer to fly her to a new pond. "Bite this stick. Don't say a word." People below laugh at the sight. The tortoise opens her mouth to answer, and falls. She lands, plop, in a muddy ditch, unhurt, a long walk from the new pond.
+> The pond is drying up. Two ducks, the tortoise's friends, offer to fly her to Long Pond. "Bite this brown stick. Don't say a word." People below point and stare. The tortoise opens her mouth to answer, and falls. She lands, plop, in a muddy ditch, unhurt, a long walk from Long Pond.
 
 **In the book, who tells it and why:** a bird tells it to her mate. She wants him to take good advice and move their nest.
 
 **Léon's telling** (from La Fontaine's fables, France, 1600s; retold in new words):
 > The tortoise is tired of home and wants to see the world. Two ducks offer to carry her on a stick. People below shout, "The queen of the tortoises!" She opens her mouth to say "Yes!" and falls. She lands, plop, in a pond, unhurt, very far from the world.
 
-**La Fontaine's moral, beside English:**
+**La Fontaine's moral begins, beside English:**
 > "Imprudence, babil, et sotte vanité" *(fluent reader)*
 > Carelessness, chatter, and silly pride.
 
@@ -374,7 +357,7 @@ Every fable card shows **A story people told**, a source line, and three scene t
 
 **Header:** Is it a chapter, a scene, or a stanza? Sort the cards.
 
-**Cards:** a part of the goat show · a group of lines in the crocodile poem · a part of a long book · a part of the hedgehog show · the second block of Watts's bee poem
+**Cards:** the five cards in C1.
 
 **Builds on (Sapling):** Read stanza 1, then stanza 2. What changes?
 
@@ -384,7 +367,7 @@ Every fable card shows **A story people told**, a source line, and three scene t
 
 **Table rows:** Who is fast? · Who is slow? · Who boasts? · How does the slow one win? · Is there a moral?
 
-**Map card (A true thing from history):** The tortoise's journey. India · Persia · Arabic · Spain · France. Tap each stop in order.
+**Map card (A true thing from history):** The tortoise's journey: India, then Persian, then Arabic. Then one road to Spain, another to France. Tap each telling, oldest first.
 
 **Pattern card:** Same shape, different telling. Each place told the tortoise story its own way.
 
@@ -404,7 +387,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **A1 (Sprout, guided).** Steps shown first: 1. What did the goat do? 2. What went wrong? 3. What does the story show?
 - Prompt: What message does the goat story show?
-- Choices: A fox fell into a well (`moral-is-summary`) · Think before you jump in ✔ · Goats get thirsty (`detail-not-message`)
+- Choices: A fox fell down into a deep well (`moral-is-summary`) · Think before you jump in ✔ · Goats get thirsty (`detail-not-message`)
 - Feedback: Fox fell: That's something that happens. What does it show? · Thirsty: True, but it's a detail, not the message.
 - Hint: What did the goat forget to check?
 - Explanation: The goat jumped without looking. The story shows: think first.
@@ -486,7 +469,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: How many stanzas does the crocodile poem have?
 - Answer: 2 (eight lines, a gap after the fourth).
 - Feedback for 8 (`stanza-is-line`): Eight lines, yes. A stanza is a group of lines.
-- Hint: Count the gaps, not the lines.
+- Hint: Count the groups of lines, not the lines.
 - Explanation: Two groups of four lines: two stanzas.
 
 **C3 (Sapling).**
@@ -514,34 +497,34 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **D1 (Sapling).**
 - Prompt: What do all three race stories share?
 - Choices: A slow animal beats a boastful fast one ✔ · They were all first told in the same country (`one-place-only`) · The slow animal tricks the fast one (`same-pattern-same-message`)
-- Feedback: One country: Greece, Germany and the Cherokee are far apart. · Tricks: The tortoise wins by keeping going, not by a trick.
+- Feedback: One country: Greece, Germany and the Cherokee homeland are far apart. · Tricks: The tortoise wins by keeping going, not by a trick.
 - Hint: Check the pattern table's top rows.
 - Explanation: Same shape everywhere. How the slow one wins changes.
 
 **D2 (Sapling).**
 - Prompt: How do the hedgehog and the terrapin win?
-- Choices: By running faster (`detail-not-message`) · By waiting for the hare to nap (`same-pattern-same-message`) · With helpers who look just like them ✔
+- Choices: By running faster and never stopping to rest (`detail-not-message`) · By waiting for the hare to nap (`same-pattern-same-message`) · With helpers who look just like them ✔
 - Feedback: Faster: Neither one runs faster. · Nap: That's the tortoise's race.
 - Hint: Who waits at the far end, or on the ridges?
 - Explanation: Both use lookalikes. The tortoise just keeps going.
 
 **D3 (Keeper's Desk).**
 - Prompt: Nuria's and Léon's tortoise stories match. Do their messages match too?
-- Choices: Yes, a story keeps one message (`same-pattern-same-message`) · Not quite: each stresses something different ✔ · No, they're different stories (`different-place-different-story`)
+- Choices: Yes, a story always keeps one message (`same-pattern-same-message`) · Not quite: each stresses its own ✔ · No, they're two different stories (`different-place-different-story`)
 - Feedback: One message: Each telling stresses its own. · Different stories: Same tortoise, same ducks, same stick.
 - Hint: Read who tells Nuria's story and why. Then read La Fontaine's line.
 - Explanation: Nuria's telling warns: listen to good advice. Léon's warns against chatter and silly pride.
 
-**D4 (Keeper's Desk, order).** Put the tortoise story's journey in order.
-- Cards: Arabic, in the 700s · India, more than 1,400 years ago · Spain, in the 1200s · France, in the 1600s · Persia
-- Answer: India, Persia, Arabic, Spain, France.
-- Hint: Start where it was first written down.
-- Explanation: The story traveled from India to France over many centuries.
+**D4 (Keeper's Desk, order).** Put the tortoise story's tellings in order, oldest first.
+- Cards: In Arabic, in the 700s · In India, more than 1,400 years ago · In Spanish, in the 1200s · In French, by La Fontaine, in the 1600s · In Persian
+- Answer: India, Persian, Arabic, Spanish, French.
+- Hint: Start where it was first written down. Persian came before Arabic.
+- Explanation: Spain's telling came from the Arabic. La Fontaine's came by another road.
 
 **D5 (Keeper's Desk).**
 - Prompt: Why can far-apart places share a story pattern?
-- Choices: Stories travel, or people invent similar ones ✔ · Every place copied the same old Aesop book (`pattern-means-copy`) · It must be a coincidence (`only-one-cause`)
-- Feedback: Copied Aesop: The tortoise story came from India, not Aesop. · Coincidence: The tortoise story's journey is written down.
+- Choices: Stories travel, or people invent similar ones ✔ · Every place copied from the same old Aesop book (`pattern-means-copy`) · It just happened by chance each time (`only-one-cause`)
+- Feedback: Copied Aesop: The tortoise story came from India, not Aesop. · By chance: The tortoise story's journey is written down.
 - Hint: Look at the tortoise's map. Then the three races.
 - Explanation: Some patterns traveled. Some grew up in more than one place.
 
@@ -577,7 +560,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **E5 (Keeper's Desk, build a summary).** Steps shown first: 1. Who? 2. What happens? 3. How does it end?
 - Prompt: Build Nuria's story in three cards. Leave out the rest.
-- Cards: Ducks offer to fly a tortoise on a stick ✔ · The stick was brown · People laugh, and she opens her mouth to answer ✔ · She was a show-off · She falls into a muddy ditch ✔ · The pond was called Long Pond
+- Cards: Ducks offer to fly a tortoise on a stick ✔ · The stick was brown · People stare, and she opens her mouth to answer ✔ · She was a show-off · She falls into a muddy ditch ✔ · The pond was called Long Pond
 - Answer, in order: ducks offer; she opens her mouth; she falls.
 - Feedback for an opinion card: That's a view. It goes in Bramble's envelope.
 - Feedback for a small detail: True, but too small for a summary.
@@ -585,7 +568,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Main events, in order, with no views and no tiny details.
 
 **E6 (say why, spoken to a grown-up; never graded, nothing stored).**
-- Prompt: Tell a grown-up what one fable here means. Point to two moments.
+- Prompt: Tell a grown-up what one story here means. Point to two moments.
 - Grown-up guide: A strong answer names a message in the child's own words and points to two story moments that show it. A message different from the printed moral is fine if the moments support it.
 
 ## "I'm stuck" ladder
@@ -613,14 +596,14 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Version, telling:** one way of telling a story. Old stories have many.
 - **Teller:** the person who tells or writes down a version.
 - **Chapter:** one part of a book.
-- **Scene:** one part of a play or show, in one place and time.
-- **Stanza:** a group of lines in a poem, with a gap after it.
+- **Scene:** one part of a play or show, usually in one place and time.
+- **Stanza:** a group of lines in a poem. A gap usually sets it apart.
 - **Summary:** the main events, in order, said briefly.
 - **Opinion:** what someone thinks, which others might not.
 - **Detail:** one small piece of a story.
 - **Boast:** to show off about yourself.
 - **Hesitate:** to stop, unsure what to do.
-- **Terrapin:** a kind of turtle that lives in or near fresh water.
+- **Terrapin:** a name for some kinds of turtle.
 - **Castile:** a part of Spain, and once its own kingdom.
 - **Persia:** an old name for Iran.
 - **Mood:** the feeling a part of a story or poem gives.
@@ -644,7 +627,7 @@ If the Cherokee story is not cleared, use these lines instead.
 - D1 prompt: What do both race stories share?
 - D1 feedback, one country: Greece and Germany are far apart.
 - D2 prompt: How does the hedgehog win?
-- D2 choices: By running faster (`detail-not-message`) · By waiting for the hare to nap (`same-pattern-same-message`) · With a helper who looks just like him ✔
+- D2 choices: By running faster and never stopping to rest (`detail-not-message`) · By waiting for the hare to nap (`same-pattern-same-message`) · With a helper who looks just like him ✔
 - D2 feedback, nap: That's the tortoise's race. Who waits at the far end?
 - A5 explanation, second sentence: *Many old stories never say their message at all.*
 
@@ -656,6 +639,6 @@ If the Cherokee story is not cleared, use these lines instead.
 
 **About the retellings:** every fable is retold in new words. Several older tellings end harshly: the fox and the cat (the fox is killed), the hare and the hedgehog (the hare dies), and the talkative tortoise (she dies in the fall). These retellings end with the animal tired, muddy or far from home instead. The goat story and the terrapin story keep their old endings.
 
-**About the Cherokee story:** it comes from a book published in 1900 by James Mooney, who wrote it down from Cherokee tellers. It ships only after a Cherokee cultural reviewer has read the retelling.
+**About the Cherokee story:** it is a Cherokee story. James Mooney, an outside researcher, wrote it down from Cherokee tellers John Ax and Suyeta and printed it in 1900. It is not an Aesop-style fable: it states no moral, and it ends by explaining why tired rabbits cry "mi, mi, mi." The child is never asked for its moral. It ships only after a Cherokee cultural reviewer has read the retelling.
 
 **What it does not claim:** nobody knows much about Aesop himself. The dates for the *Panchatantra* are estimates. The Spanish and French lines are newly written, except La Fontaine's own words, and need a fluent reader.

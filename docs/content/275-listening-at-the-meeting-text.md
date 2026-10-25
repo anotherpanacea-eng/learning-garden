@@ -105,7 +105,7 @@ Speech scripts are passages, not prompts. Sentences are short so that **Hear one
 > [1] Thank you for coming. [2] We have wood for one new bench at the market. [3] Three neighbors want it in three places. [4] Each will speak. [5] Listen for what they want and why. [6] Then we'll talk.
 
 **M1. The baker** (A story from Willowbank; the count is a made-up model):
-> [1] Put the new bench by the bakery door. [2] Here's why. [3] People buy warm bread and want to eat it right away, but there's nowhere to sit. [4] Last market day I counted eleven people sitting on my flour sacks. [5] Eleven! [6] The sacks did not enjoy it. [7] Older neighbors wait in my morning line, and standing a long time is hard for some of them. [8] I'll be honest about the problem. [9] The morning line is crowded, and a bench might squeeze the path. [10] We'd have to put it to one side. [11] Also, my cinnamon buns are the best in the valley.
+> [1] Put the new bench by the bakery door. [2] Here's why. [3] People buy warm bread and want to eat it right away, but there's nowhere to sit. [4] Last market day I counted eleven people sitting on my flour sacks. [5] The sacks did not enjoy it. [6] Older neighbors wait in my morning line, and standing a long time is hard for some of them. [7] I'll be honest about the problem. [8] The morning line is crowded, and a bench might squeeze the path. [9] Also, my cinnamon buns are the best in the valley.
 
 **M2. Dot** (A story from Willowbank; the count is a made-up model):
 > [1] I think the bench should go beside the post office. [2] On market day, the parcel line goes out the door. [3] At noon last week I counted nine people waiting, and some had heavy parcels. [4] People like to open their letters right away, and it's hard to read a letter standing in a crowd. [5] And benches look nice by blue doors. [6] Our door is blue. [7] Here's the problem. [8] The post office is at the quiet end of the market. [9] Fewer people walk past, so the bench might sit empty in the afternoon.
@@ -124,8 +124,8 @@ Speech scripts are passages, not prompts. Sentences are short so that **Hear one
 **S1. The orchard keeper: what each plan means for her** (A story from Willowbank):
 > [1] My family has farmed the low fields for three generations. [2] Those trees are older than I am. [3] Lately the bottom corner stays wet all year, and reeds grow there that nobody planted. [4] I've read Hollis's map. [5] I know there was marsh there once. [6] Here's what each plan means for me. [7] The Wall keeps my trees. [8] The Sponge takes my lowest rows. [9] Some of Each takes a few. [10] I don't know yet which is right. [11] I came to listen, and I'll say so if I change my mind.
 
-**S2. The miller: Some of Each** (A story from Willowbank; ledger figures from spec 120's page 2):
-> [1] I said in the Gazette it was just a bad storm. [2] I still think big storms are most of it. [3] But I can't prove that, and nobody can prove the other side yet either. [4] Here's what I do know. [5] My mill sits just below the low fields. [6] Hollis's ledger shows the brook came 120 centimeters up the post in Year 27. [7] In this year's storm it came 160. [8] So I'd do a bit of both: a lower wall above the mill, and a small wet meadow at the low corner. [9] The cost? [10] It's two jobs instead of one. [11] Some stone, some trees. [12] Nobody gets everything they wanted, me included.
+**S2. The miller: Some of Each** (A story from Willowbank; ledger pattern from spec 120's page 2, the later floods higher and closer together; the storm's 160 cm from the town's new mark):
+> [1] I said in the Gazette it was just a bad storm. [2] I still think big storms are most of it. [3] But I can't prove that, and nobody can prove the other side yet either. [4] My mill sits just below the low fields. [5] Hollis's ledger shows floods coming higher and closer together. [6] This year's storm came 160 centimeters up the post. [7] So I'd do a bit of both: a lower wall above the mill, and a small wet meadow at the low corner. [8] The wall protects the mill now, the meadow slows some water, and most trees stay. [9] The cost? [10] It's two jobs, not one: some stone, some trees. [11] Half a wall and half a marsh might be too little of both. [12] And nobody gets everything they wanted, me included.
 
 **S3. Nuria: a picture talk about Vadoalto's reed bed** (A story from Willowbank; the rain table is Nuria's letter 4, a made-up model). Pictures change at each marker.
 > [Picture 1: Vadoalto's reed bed beside the river.]
@@ -142,10 +142,10 @@ Speech scripts are passages, not prompts. Sentences are short so that **Hear one
 Spanish line: "Buenas tardes" (Good afternoon) sits beside its English. *carrizal* is glossed by "our reed bed" in the same sentence. Both need a fluent Spanish reader before build.
 
 **S4. The librarian: the Sponge** (A story from Willowbank):
-> [1] I'm speaking for the Sponge. [2] Let the lowest orchard fields go back to marsh. [3] My first reason: a marsh holds water and lets it go slowly, so less reaches the mill at once. [4] My second: Hollis's map shows the Sponge right where the low fields are now. [5] And Hollis wrote that the mill boards were seldom needed then. [6] My third: reeds are already coming back at the low corner. [7] I must be fair about the cost. [8] The orchard keepers would lose trees, and some of their living. [9] The reed trade is a hope, not a promise. [10] A marsh takes years to grow back. [11] And I can't prove that draining the Sponge caused the floods. [12] Bramble is right that five years apart is not proof.
+> [1] I'm speaking for the Sponge. [2] Let the lowest orchard fields go back to marsh. [3] My first reason: a marsh holds water and lets it go slowly, so less reaches the mill at once. [4] My second: Hollis's map shows the Sponge right where the low fields are now. [5] And Hollis wrote that the mill boards were seldom needed then. [6] My third: reeds are already coming back at the low corner. [7] I must be fair about the cost. [8] The orchard keepers would lose trees, and some of their living. [9] The reed trade is a hope, not a promise. [10] A marsh takes years to grow back. [11] And five years apart is not proof, so I can't say draining the Sponge caused the floods.
 
 **S5. Bramble: the Wall** (A story from Willowbank; sentences 1 to 4 are spec 120's own lines):
-> [1] Everyone keeps talking about frogs. [2] What about the orchard keepers? [3] Those trees are their whole year. [4] If you want them to give up their fields, you'd better be very sure, and you'd better help them with what comes after. [5] So I'm speaking for the Wall. [6] A higher wall along the brook keeps the town and the orchard as they are. [7] It protects us now, not years from now while a marsh grows. [8] And a new apple tree takes years to give a good crop, so lost trees aren't quickly replaced. [9] I'll say the hard part too. [10] A wall needs mending forever. [11] Water stopped here goes somewhere else, so we'd have to ask Les Saules. [12] And a flood could come higher than any wall.
+> [1] Everyone keeps talking about frogs. [2] What about the orchard keepers? [3] Those trees are their whole year. [4] If you want them to give up their fields, you'd better be very sure, and you'd better help them with what comes after. [5] So I'm speaking for the Wall. [6] A higher wall along the brook keeps the town and the orchard as they are. [7] It protects us now, not years from now while a marsh grows. [8] And a new apple tree takes years to give a good crop, so lost trees aren't quickly replaced. [9] I'll say the hard part too. [10] A wall needs mending forever. [11] Water held back here may go somewhere else, so we'd have to ask Les Saules. [12] And a flood could come higher than any wall.
 
 **Voices from the room** (short clips, A story from Willowbank):
 - **V1. Pip:** "If we bring the Sponge back, we'll never flood again!"
@@ -165,23 +165,23 @@ For the producer, not shown to the child. Adult performers only; no child is rec
 | Clip | Speaker | Words | About | Direction |
 | --- | --- | ---: | ---: | --- |
 | M0 | Wren Halloway | 34 | 16 s | Brisk, friendly chair. |
-| M1 | The baker | 99 | 46 s | Warm, a little proud; the bun line is a cheerful boast, not a punchline. |
+| M1 | The baker | 90 | 42 s | Warm, a little proud; the bun line is a cheerful boast, not a punchline. |
 | M2 | Dot | 91 | 42 s | Earnest, quick; slightly shy on the blue-door line. |
 | M3 | The orchard keeper | 90 | 42 s | Calm, practical; plain about the mud. |
 | M4 | Wren Halloway | 24 | 11 s | Even; decides nothing. |
 | W1 | Wren Halloway | 41 | 19 s | Steady; a bigger room. |
 | S1 | The orchard keeper | 87 | 40 s | Quiet, honest, undecided; no sadness played for effect. |
-| S2 | The miller | 109 | 50 s | Dry, plain-spoken; numbers said clearly ("one hundred twenty centimeters"). |
+| S2 | The miller | 129 | 60 s | Dry, plain-spoken; the number said clearly ("one hundred sixty centimeters"). |
 | S3 | Nuria | 118 | 54 s | Bright, a little nervous; "Buenas tardes" and *carrizal* in natural Spanish, needs a fluent speaker. Pause at each picture marker. |
-| S4 | The librarian | 124 | 57 s | Careful, fair; the cost sentences get the same weight as the reasons. |
-| S5 | Bramble | 123 | 57 s | Serious for once, firm, not angry; the hard-part sentences said as plainly as the rest. |
+| S4 | The librarian | 120 | 55 s | Careful, fair; the cost sentences get the same weight as the reasons. |
+| S5 | Bramble | 125 | 58 s | Serious for once, firm, not angry; the hard-part sentences said as plainly as the rest. |
 | V1 | Pip | 10 | 5 s | Excited. |
 | V2 | Hob Pennick | 12 | 6 s | Confident, good-humored. |
 | V3 | Dot | 15 | 7 s | Thoughtful. |
 | V4 | The orchard keeper | 29 | 13 s | Surprised, then sure; light on "Just the reeds." |
 | W2 | Wren Halloway | 26 | 12 s | Even; decides nothing. |
 
-Total about 1,030 words, about 8 minutes of audio. Fairness check for the recording session: the three plan speeches (S2, S4, S5) get the same care, pace and warmth, and no performer plays a cost line as a weakness.
+Total about 1,040 words, about 8 minutes of audio. Fairness check for the recording session: the three plan speeches (S2, S4, S5) get the same care, pace and warmth, and no performer plays a cost line as a weakness.
 
 ## Teach cards
 
@@ -206,10 +206,10 @@ Worked example: *The baker.*
 **Card 3. Reasons and evidence**
 > A reason says why. Evidence shows the reason is true: something counted, seen or written down.
 
-Worked example: *Dot.*
-1. Claim: the bench should go by the post office.
-2. Reason: people wait a long time for parcels.
-3. Evidence: she counted nine people waiting at noon.
+Worked example: *The orchard keeper.*
+1. Claim: the bench should go under the willow.
+2. Reason: the willow gives the only shade on the green.
+3. Evidence: by noon, every apple seller had moved into that shade.
 
 **Card 4. Not everything is a reason**
 > Speakers also joke, tell stories and say what they like. Ask: does this help show the claim is right? If not, it isn't a reason.
@@ -230,33 +230,33 @@ Worked example: *The orchard keeper.*
 **Card 6. Build on what you heard**
 > To build on a point, add a fact or example, or ask a question about it. Repeating it or changing the subject doesn't build.
 
-Worked example: *After Dot speaks.*
-1. Dot: "People wait a long time for parcels."
-2. Build: "Yes, and the line is longest at noon."
-3. Or ask: "How long do they wait?"
+Worked example: *After the baker speaks.*
+1. The baker: "Standing a long time is hard for some people."
+2. Build: "Yes, and some of them carry heavy baskets too."
+3. Or ask: "How long do they stand?"
 
 **Card 7. Does it hold up?**
 > Check each reason. Is it about this claim? Is there evidence? Watch big words like "never" and "always." They need very strong evidence.
 
-Worked example: *Pip's "never".*
-1. Pip: "We'll never flood again!"
-2. The evidence: a marsh slows water.
-3. Slowing is not stopping. "Never" goes too far.
+Worked example: *Ember's "everybody".*
+1. Ember: "Everybody loves lemon cake!"
+2. The evidence: three guests asked for lemon.
+3. Three is not everybody. "Everybody" goes too far.
 
 **Card 8. Summary and conclusion**
 > A summary gives the main points of the whole talk, briefly, without your own opinion. A conclusion says what all of it lets you say.
 
-Worked example: *The market bench talk.*
-1. Main points: three places, each with reasons and a problem.
-2. Summary: "Three neighbors chose three places. Each gave reasons and a problem."
-3. Conclusion: "Every place helps someone and has a cost."
+Worked example: *Puff, Ember and Dot each suggest a picnic spot.*
+1. Main points: three spots, each with a reason.
+2. Summary: "Each friend suggested a spot and gave a reason."
+3. Conclusion: "There is more than one good spot."
 
 **Card 9. Pictures that help**
 > In a picture show, each picture should help the main idea. A funny picture that's off the point pulls eyes away from it.
 
-Worked example: *A slide about shade.*
-1. Caption: "Under the willow: shade on hot days."
-2. Willow shade on a sunny day: helps.
+Worked example: *A slide about the bakery.*
+1. Caption: "By the bakery: warm bread, nowhere to sit."
+2. People sitting on flour sacks: helps.
 3. The magpie stealing a bun: funny, off the point.
 
 ## Benches
@@ -269,7 +269,9 @@ Worked example: *A slide about shade.*
 
 **Meeting prep cards:** Hollis's map shows the Sponge · Hollis's ledger of flood heights · Page 4: the fine harvest, then the flood · Nuria's rain table · Ember's birthday menu
 
-**Question cards:** Who needs a seat most? · How long would a marsh take to grow back? · Do you like apples? · Is the meeting today?
+**Market question cards:** Who needs a seat most? · Do you like benches? · Is it market day today?
+
+**Meeting question cards:** How long would a marsh take to grow back? · How often would a wall need mending? · Would a small wet meadow be enough? · Do you like eating the apples from the orchard? · Is the meeting in the library today?
 
 **Feedback for an off-topic card:** Does this help with the question? Try another.
 
@@ -277,16 +279,19 @@ Worked example: *A slide about shade.*
 
 ### (b) Find the Reasons
 
-**Header:** Tap a sentence. Is it the claim, a reason, evidence, or not a reason?
+**Header:** Tap a sentence. Is it the claim, a reason, evidence, a problem, or something else?
 
 **Speaker map (fills as you sort):** Claim at the top. Reasons below it. Evidence under each reason.
 
 **Sort feedback:**
 - A cost sentence put under reasons: That's a problem the speaker admits. Put it under "problems."
-- A joke or boast put under reasons: Does it show the claim is right? Try "not a reason."
+- A joke or boast put under reasons: Does it show the claim is right? Try "something else."
 - An evidence sentence put under claim: That's something counted or seen. It backs up a reason.
+- A sentence that only says a problem is coming, put under problems: Which sentence is the problem itself?
 
 **Problems tray:** Good speakers say what their idea costs. Put those here.
+
+**Something else tray:** Jokes, boasts and "here's why" sentences go here.
 
 ### (c) Say It Your Way
 
@@ -327,12 +332,12 @@ Worked example: *A slide about shade.*
 **Header:** Make a short show. Choose a picture for each caption, then put them in order.
 
 **Market show: Three Places for One Bench (Sapling)**
-- Caption cards: By the bakery: warm bread, nowhere to sit. · By the post office: a long wait for parcels. · Under the willow: shade, but mud after rain. · One bench, three places. What do you think?
-- Picture cards: people sitting on flour sacks · a parcel line out the post office door · willow shade on a sunny market day · muddy grass under the willow · Bramble's magpie stealing a cinnamon bun · a map of the whole valley
+- Caption cards: By the bakery: warm bread, but a crowded path. · By the post office: a long wait, but a quiet corner. · Under the willow: shade, but mud after rain. · One bench, three places. What do you think?
+- Picture cards: people sitting on flour sacks · a parcel line out the post office door · willow shade on a sunny day · muddy grass under the willow · Bramble's magpie stealing a cinnamon bun · a map of the whole valley
 - Sound card (choose one or none): the market's chatter · a birthday song · loud drums
 
 **Meeting show: What the Meeting Heard, for Pip (Keeper's Desk)**
-- Caption cards: Three plans for the low fields. · The Wall: keeps the trees. Costs: mending forever. · The Sponge: holds water. Costs: some apple trees. · Some of Each: a bit of both. Costs: two jobs. · The orchard keeper: three generations of trees.
+- Caption cards: Three plans for the low fields. · The Wall: protects the town now. Cost: mending forever. · The Sponge: slows the water. Cost: some apple trees. · Some of Each: some of both. Cost: two jobs. · The orchard keeper: three generations of trees.
 - Picture cards: a high stone wall along the brook · a wet meadow full of reeds · a small wall above the mill and a wet corner · old apple trees in a row · Ember's birthday cake · Bramble's magpie with a ribbon
 
 **Show feedback:**
@@ -368,7 +373,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **A3 (Sapling, meeting).**
 - Prompt: Which question would help most at the meeting?
-- Choices: Do you like eating apples from the orchard? (`vague-question`) · Is the meeting in the library today? (`already-known`) · How long would a marsh take to grow back? ✔
+- Choices: Do you like eating the apples from the orchard? (`off-point-question`) · Is the meeting in the library today? (`already-known`) · How long would a marsh take to grow back? ✔
 - Feedback: Apples: Almost everyone does. It won't help choose. · Today: You already know that. You're at it.
 - Hint: Which answer would help you weigh a plan?
 - Explanation: A good question asks for something the plans depend on.
@@ -376,7 +381,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set B. Find the reasons (Seedling, Sapling)
 
 **B1 (Seedling, guided, the baker).** Steps shown first: 1. Hear his first sentence. 2. What does he want? 3. That's the claim.
-- Prompt: What does the baker want?
+- Prompt: What does the baker ask the town for?
 - Choices: The bench by the bakery door ✔ · More people buying his bread every day (`detail-as-claim`) · A wider path for his line (`detail-as-claim`)
 - Feedback: More bread: He sells bread already. What does he ask for? · Wider path: He worries about the path. He doesn't ask for it.
 - Hint: Listen to his very first words.
@@ -389,18 +394,18 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Hint: Which one tells why a bench would help?
 - Explanation: A reason says why the claim is right. People need a seat to eat.
 
-**B3 (Seedling, sort, the baker).** Sort each sentence: claim, reason, evidence, problem, or not a reason.
-- Answer: claim [1]; reasons [3], [7]; evidence [4]; problems [9], [10]; not a reason [2], [5], [6], [8], [11].
-- Feedback for [11] under reasons (`aside-as-reason`): Buns are nice. Do they show where to sit?
+**B3 (Seedling, sort, the baker).** Sort each sentence: claim, reason, evidence, problem, or something else.
+- Answer: claim [1]; reasons [3], [6]; evidence [4]; problem [8]; something else [2], [5], [7], [9].
+- Feedback for [9] under reasons (`aside-as-reason`): Buns are nice. Do they show where to sit?
 - Hint: Find the claim first. Then ask "why?" of it.
-- Explanation: One claim, two reasons, one piece of evidence, and an honest problem.
+- Explanation: One claim, two reasons, one piece of evidence and one honest problem.
 
 **B4 (Sapling, Bramble).**
-- Prompt: What evidence does Bramble give that trees are hard to replace?
-- Choices: Everyone keeps talking about frogs. (`aside-as-reason`) · A new apple tree takes years to crop well. ✔ · A marsh holds water and lets it go slowly. (`other-speaker`)
-- Feedback: Frogs: That's her complaint, not evidence. · Marsh: The librarian said that, for the Sponge.
+- Prompt: What does Bramble say to show lost trees are hard to replace?
+- Choices: Everyone keeps talking about frogs. (`aside-as-reason`) · New trees take years to grow many apples. ✔ · A marsh holds water and lets it go slowly. (`other-speaker`)
+- Feedback: Frogs: That's a complaint. It says nothing about new trees. · Marsh: The librarian said that, for the Sponge.
 - Hint: Listen for what she says about new trees.
-- Explanation: New trees take years to give a good crop. That backs her reason.
+- Explanation: New trees take years to give a good crop. That backs her point.
 
 ### Set C. Say it your way (Seedling, Sapling)
 
@@ -427,7 +432,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **C4 (Sapling, Nuria).**
 - Prompt: Nuria said the table "doesn't say how heavy each rain was." Which fits?
-- Choices: It counts big rains but not how hard each one fell. ✔ · It shows the big rains got heavier every single year. (`changed-meaning`) · It doesn't say how heavy each rain was, she says. (`copy-not-paraphrase`)
+- Choices: It counts big rains, not how hard each one fell. ✔ · It shows the big rains got heavier every single year. (`changed-meaning`) · It doesn't say how heavy each rain was, she says. (`copy-not-paraphrase`)
 - Feedback: Heavier: She said it doesn't show heaviness at all. · Copy: Same words, just moved around.
 - Hint: What does the table count? What does it leave out?
 - Explanation: It counts rains. It doesn't measure how heavy they were.
@@ -436,17 +441,17 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **D1 (Sapling, market).**
 - Prompt: Dot says people wait a long time. Which reply builds on her point?
-- Choices: People wait a long time for parcels. (`repeat-not-build`) · The miller's cat likes sitting on parcels. (`change-subject`) · Yes, and the line is longest at noon. ✔
+- Choices: People wait a long time for parcels. (`repeat-not-build`) · The miller's cat likes to sit on the parcels. (`change-subject`) · Yes, and the line is longest at noon. ✔
 - Feedback: Repeat: That's her point again. What can you add? · Cat: Fun, but it changes the subject.
 - Hint: Add something new about the same thing.
 - Explanation: Adding a fact about the same point builds on it.
 
 **D2 (Sapling, meeting).**
-- Prompt: The miller says her mill is below the fields. Which question is clearest?
-- Choices: What do you think about it all? (`vague-question`) · How high did the storm reach at your mill? ✔ · Do you like living and working at the mill? (`off-point-question`)
+- Prompt: The miller wants a lower wall above her mill. Which question is clearest?
+- Choices: What do you think about it all? (`vague-question`) · Would a lower wall keep your mill dry? ✔ · Do you like living and working at the mill? (`off-point-question`)
 - Feedback: Think about it all: Too wide. What exactly do you want to know? · Like living there: That's not about the floods.
-- Hint: Ask for one fact about her point.
-- Explanation: A clear question asks for one thing tied to the point. She can answer: 160 cm.
+- Hint: Ask about one thing she said.
+- Explanation: A clear question asks one thing, tied to her point, that she hasn't answered yet.
 
 **D3 (Keeper's Desk, spoken with a grown-up or sibling).**
 - Prompt: Take turns. One reads a speaker's point. The other builds on it.
@@ -463,28 +468,28 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **E2 (Sapling, market).**
 - Prompt: Which evidence best supports Dot's claim?
-- Choices: Nine people waited at noon on market day. ✔ · Benches look nice by blue doors. (`weak-reason`) · Dot runs the post office, so she knows best. (`who-not-what`)
-- Feedback: Blue doors: A reason, but about looks, not need. · Runs it: Who says it isn't evidence. What shows it?
+- Choices: She counted nine people waiting at noon. ✔ · Benches look nice by blue doors. (`weak-reason`) · Dot runs the post office, so she knows best. (`who-not-what`)
+- Feedback: Blue doors: Nice, but it's about looks, not who needs a seat. · Runs it: Who says it isn't evidence. What shows it?
 - Hint: Which one was counted?
 - Explanation: Counting people waiting shows the need. That's the strongest support.
 
 **E3 (Keeper's Desk, V1).**
-- Prompt: Pip says, "We'll never flood again!" Does the evidence support "never"?
-- Choices: Yes, because a marsh can hold a lot of floodwater. (`overclaim-accepted`) · Partly: a marsh slows water, but not "never." ✔ · No, a marsh does nothing at all to water. (`dismiss-side`)
-- Feedback: Yes: Holding water slows it. Nobody showed it stops every flood. · Nothing: The speakers agreed a marsh slows water.
+- Prompt: Pip says, "We'll never flood again!" Which answer holds up?
+- Choices: Yes, because a marsh can hold a lot of floodwater. (`overclaim-accepted`) · A marsh slows water, but "never" goes too far. ✔ · No, a marsh does nothing at all to water. (`dismiss-side`)
+- Feedback: Yes: Holding water slows it. Nobody showed it stops every flood. · Nothing: A marsh holds water and lets it go slowly.
 - Hint: Look at the big word in his sentence.
 - Explanation: The evidence supports "slows." It doesn't support "never."
 
 **E4 (Keeper's Desk, V2).**
 - Prompt: Hob says a high wall means no more flood worries. Which answer holds up?
-- Choices: That's true, because a wall stops every bit of water. (`overclaim-accepted`) · That's wrong, because a wall can't protect anything. (`dismiss-side`) · A wall helps, but it needs mending forever. ✔
-- Feedback: Every bit: Bramble said a flood could come higher. · Can't protect: Walls protect what's behind them.
+- Choices: That's true, because a wall stops every bit of water. (`overclaim-accepted`) · That's wrong, because a wall can't protect anything. (`dismiss-side`) · A wall helps, but a flood could still come higher. ✔
+- Feedback: Every bit: A big enough flood can come over a wall. · Can't protect: Walls protect what's behind them.
 - Hint: What did Bramble admit about her own plan?
-- Explanation: Bramble herself named the wall's costs. "No more worries" goes too far.
+- Explanation: A wall protects, but "no more worries" goes too far.
 
 **E5 (Keeper's Desk, Nuria's table).**
 - Prompt: Big rains: six, five, six, then eight. What can you fairly say?
-- Choices: The last ten years had the most big rains. ✔ · Draining the Sponge caused all of the floods. (`overclaim-cause`) · This table tells us nothing at all. (`withhold-too-much`)
+- Choices: The table's last ten years had the most big rains. ✔ · Draining the Sponge must have caused all of the floods. (`overclaim-cause`) · This table tells us nothing at all. (`withhold-too-much`)
 - Feedback: Caused: The table counts rain. It can't show what caused floods. · Nothing: It does show counts. Eight is the most.
 - Hint: Find the biggest number. Which ten years?
 - Explanation: Eight is the most. That's all the table can show by itself.
@@ -507,22 +512,22 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **F3 (Keeper's Desk, Nuria's picture talk).**
 - Prompt: Which is the best summary of Nuria's picture talk?
-- Choices: Nuria likes frogs, so she wants more frogs in Willowbank. (`one-detail-summary`) · Nuria told everyone in Willowbank to choose the Sponge plan for its low fields. (`opinion-in-summary`) · Her reed bed slows water; reeds have uses; the table doesn't settle it. ✔
+- Choices: Nuria likes frogs, so she wants more frogs in Willowbank. (`one-detail-summary`) · Nuria told everyone in Willowbank to choose the Sponge plan for its low fields. (`changed-meaning`) · Her reed bed slows water; reeds have uses; the table doesn't settle it. ✔
 - Feedback: Frogs: One picture, and she never asked for frogs. · Choose: She said it's your town and your choice.
 - Hint: What did each picture show?
 - Explanation: Pictures, numbers and words together: slow water, useful reeds, an open question.
 
 **F4 (Keeper's Desk, the meeting).**
 - Prompt: Which conclusion does the whole meeting support?
-- Choices: The Sponge plan won the meeting tonight. (`decide-for-town`) · Every plan protects something and costs something. ✔ · Nobody knows anything, so the town should do nothing. (`withhold-too-much`)
-- Feedback: Won: Nobody voted. Wren said nobody had to agree. · Do nothing: People know a lot. They disagree about what to do.
+- Choices: The meeting chose the best plan tonight. (`decide-for-town`) · Every plan protects something and costs something. ✔ · Nobody knows anything, so the town should do nothing. (`withhold-too-much`)
+- Feedback: Chose: Nobody voted. Wren said nobody had to agree. · Do nothing: People know a lot. They disagree about what to do.
 - Hint: What did every plan speaker admit?
 - Explanation: Each speaker named a cost. That's what the meeting showed.
 
 **F5 (Keeper's Desk, V4).**
 - Prompt: The orchard keeper changed her mind. What evidence changed it?
-- Choices: Bramble's speech about the wall (`wrong-source`) · The miller's mark on the flood post (`wrong-source`) · Nuria's pictures of reeds being cut ✔
-- Feedback: Bramble: She agreed with Bramble already. Listen to V4 again. · Flood post: That's about water height, not reeds.
+- Choices: Bramble's speech about the wall (`wrong-source`) · The flood heights in Hollis's ledger (`wrong-source`) · Nuria's pictures of reeds being cut ✔
+- Feedback: Bramble: She changed her mind about reeds. What showed her reeds? · Ledger: That's about water height, not reeds.
 - Hint: What did she change her mind about?
 - Explanation: She said Nuria's pictures showed reeds are used. She named her evidence.
 
@@ -534,7 +539,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **G1 (Sapling, market show).**
 - Prompt: Caption: "Under the willow: shade on hot days." Which picture helps most?
-- Choices: Willow shade on a sunny market day ✔ · Bramble's magpie stealing a cinnamon bun (`fun-not-helpful`) · A map of the whole valley (`too-broad-picture`)
+- Choices: Willow shade on a sunny day ✔ · Bramble's magpie stealing a cinnamon bun (`fun-not-helpful`) · A map of the whole valley (`too-broad-picture`)
 - Feedback: Magpie: Funny, but it's off the point. · Map: It shows everything. Which shows shade?
 - Hint: Which picture shows what the caption says?
 - Explanation: The picture should show the caption's main idea.
@@ -548,7 +553,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **G3 (Keeper's Desk, arrange and play).**
 - Prompt: Build Pip's show: four slides, a picture and caption each. Then play it.
-- Answer: title slide first; one slide for each plan with its cost caption, in any order; the orchard keeper's slide may replace the title or follow it. The cake and magpie stay out.
+- Answer: four slides: the title first, then one slide for each plan with its cost caption, in any order. The orchard keeper's slide may take the title's place. The cake and magpie stay out.
 - Grown-up guide: Watch the show. Ask: does each picture help its caption? Is every plan there with its cost? Nothing is stored except the card order.
 
 ## "I'm stuck" ladder
