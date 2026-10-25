@@ -133,7 +133,7 @@ Worked example: *Water from a jug, poured into a tray.*
 4. It flows and takes the shape. It's a liquid.
 
 **Card 2. Melting is not dissolving**
-> Melting: one thing warms and turns liquid. Dissolving: a solid spreads through a liquid, in pieces too small to see.
+> Melting: one thing warms and turns liquid. In our bench, dissolving spreads a solid through water, in pieces too small to see.
 
 Worked example: *An ice cube on the sill; sugar stirred into water.*
 1. The ice cube warms. It becomes water. Nothing else was needed.
@@ -528,7 +528,7 @@ All C items use the scale model: zeroed with the empty jar, exact grams.
 - **Condense:** a gas cools and becomes liquid drops, like mist on a cold window.
 - **Water vapor:** water as a gas. You can't see it.
 - **Boil:** a liquid gets hot enough to make bubbles of vapor all through it.
-- **Dissolve:** a solid spreads through a liquid in pieces too small to see.
+- **Dissolve:** a substance spreads through another to make a solution. Our bench uses solids in water; gases can dissolve too.
 - **Solution:** a liquid with something dissolved in it.
 - **Mixture:** two or more things mixed together that can be separated.
 - **Reversible:** can be undone; you can get the first stuff back.
