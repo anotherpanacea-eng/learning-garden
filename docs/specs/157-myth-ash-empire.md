@@ -199,4 +199,3 @@ Because two targets rest on an untaught Roman Republic topic, Legacy Today, Roma
 - **Owner, Parthenon sculptures:** default one neutral Keeper's-note sentence. Alternative: leave it out.
 - **Owner, gladiators:** default two sentences and one item (C4).
 - **Owner, scope:** default first slice Stations 1, 2 and 5 with Sets A, B and D (Act III letters); the rest follow.
-
