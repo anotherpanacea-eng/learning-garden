@@ -61,4 +61,19 @@ const solve=(s,{wrong=false,help=false}={})=>{const w=p.linearView(s).work,i=w.s
  const s=freshState(),older=create(s,'revisit');s.linearPathway.exploration.nextSerial=48;create(s,'revisit');solve(s);p.startLinear(s,older,o);solve(s,{wrong:true});eq(p.linearSuggestion(s).count,1,'same math case deduplicates by earliest actual response even when created later');eq(p.linearSuggestion(s).challenge,'revisit');
  const before=clone(s);s.linearPathway.lessons[older].firstChecks.own.order=Number.MAX_SAFE_INTEGER;const held=clone(s);create(s,'unknown');const w=p.linearView(s).work;for(const f of w.source.items[1].fields)p.setLinearField(s,'own',f.id,f.answer,o);const saved=clone(s);ok(!p.checkLinear(s,'own',o));eq(s,saved,'unrepresentable next response order refuses atomically');
 }
+
+// Different worked examples must change the solved arithmetic, not merely the starting balance.
+for(let serial=0;serial<48;serial++)for(const kind of ['revisit','unknown']){
+ const source=generatedLinearSource(serial,kind),own=source.items[1],m=p.parseLinearNumber(source.model.m),t=2+Math.floor(serial/16),product={n:m.n*t,d:m.d};
+ ok(m.n*2!==5*m.d,'worked-example rate is outside the complete input/output catalog');ok(t!==6,'worked-example input differs');ok(product.n!==15*product.d,'worked-example reduced right side differs');const target=p.linearValue(source.model,t);ok(target.n!==11*target.d,'worked-example output differs');ok(own.example.includes('(5/2)x = 15')&&own.example.includes('x = 6'),'different worked arithmetic retained');
+}
+for(let serial=0;serial<48;serial++){
+ const source=generatedLinearSource(serial,'contrast'),own=source.items[1];ok(own.fields.find(f=>f.id==='x').answer!=='5','comparison worked-example meeting input differs across catalog');ok(own.example.includes('x = 5, both balances 6')&&own.example.includes('At x = 4, A = 4 and B = 5; at x = 6, A = 8 and B = 7.'),'comparison different example is arithmetically complete');
+}
+{
+ const s=freshState(),key=create(s,'unknown');s.linearPathway.lessons[key].source.items[1].example='Earlier frozen worked example, retained verbatim.';const held=clone(s.linearPathway.lessons[key]);ok(p.startLinear(s,key,o));eq(s.linearPathway.lessons[key],held,'new generator help never rewrites a frozen saved example');
+}
+
+eq(p.linearValue({m:'5/2',b:'-4'},6),{n:11,d:1},'different input example substitutes to11');
+for(const [x,a,b] of [[4,4,5],[5,6,6],[6,8,7]]){eq(p.linearValue({m:'2',b:'-4'},x),{n:a,d:1});eq(p.linearValue({m:'1',b:'1'},x),{n:b,d:1});}
 console.log(`Adaptive linear: ${n} source, arithmetic, distinct evidence, retention, preview and actual import assertions passed.`);

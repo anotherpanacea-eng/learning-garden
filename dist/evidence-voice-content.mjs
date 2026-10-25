@@ -117,7 +117,7 @@ export const evidenceVoiceSource = {
         "chapter-4"
       ],
       "learn": "Later details can make an earlier interpretation less convincing without settling every question. Reconsider a claim by naming the new detail, the earlier claim, and the connection between them.",
-      "guided": "Return to c1-p3. Mara suspects someone wants a broken clock. Now read the dated ledger sentence in c3-p1 and its timing in c3-p2. The repair problem predates the posters. The ledger does not show who read the warning. That weakens one theory while leaving responsibility open.",
+      "guided": "Return to c1-p3. Mara suspects someone wants a broken clock. Now read the dated ledger sentence in c3-p1 and its timing in c3-p2. The repair problem predates the posters. The ledger does not show who had read the warning before the posters were printed. That weakens one theory while leaving responsibility open.",
       "hint": "Put the date of the ledger beside the date of printing. Then ask what a signature does and does not establish.",
       "example": "Different example: a puddle seems to show that a roof leaked overnight. An earlier note says a cleaner spilled a bucket there. That weakens the roof theory, but does not prove the roof never leaks.",
       "prompt": "Revisit your first interpretation. What would you change or retain, and which later detail gives you that reason?",
@@ -175,7 +175,7 @@ export const evidenceVoiceSource = {
       "choices": [
         {
           "id": "choice-1",
-          "label": "Ivo puts the key away because he wants to damage the clock.",
+          "label": "Ivo puts the key away because he wants the clock to stay broken.",
           "outcome": "different",
           "feedback": "The action is stated, but the intention is Mara’s interpretation."
         },
@@ -187,9 +187,9 @@ export const evidenceVoiceSource = {
         },
         {
           "id": "choice-3",
-          "label": "Mara does not notice anything Ivo does near the clock.",
+          "label": "Mara sees Ivo leave the brass key beside the paper cups.",
           "outcome": "different",
-          "feedback": "C1-p2 gives several observations, including Ivo putting the key away."
+          "feedback": "C1-p2 shows Ivo putting the key in his coat; it is Mara who sets the cups down."
         }
       ]
     },
@@ -212,9 +212,9 @@ export const evidenceVoiceSource = {
         },
         {
           "id": "choice-3",
-          "label": "Neither account includes any event the other remembers.",
+          "label": "Mara asks about the key, while Ivo remembers a question about the river.",
           "outcome": "different",
-          "feedback": "Both accounts remember Mara asking whether the clock would run."
+          "feedback": "Both accounts remember Mara asking whether the clock would run, rather than asking about the key or the river."
         }
       ]
     },
@@ -281,9 +281,9 @@ export const evidenceVoiceSource = {
         },
         {
           "id": "choice-2",
-          "label": "The earlier date weakens a theory of damage during preparations.",
+          "label": "The recorded fault offers a repair explanation for the silence, so the silence alone does not establish Ivo’s intention.",
           "outcome": "fits",
-          "feedback": "Yes: this connects the timing detail to the interpretation it weakens."
+          "feedback": "Yes: this connects the fault record to a narrower claim about what the silence can show."
         },
         {
           "id": "choice-3",

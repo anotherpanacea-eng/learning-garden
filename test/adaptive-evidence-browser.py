@@ -33,7 +33,7 @@ with sync_playwright() as pw:
     response=route.fetch();body=response.text();assert 'bindEvidenceVoice(state,options)' in body
     route.fulfill(response=response,body=body.replace('bindEvidenceVoice(state,options)','bindEvidenceVoice(state,{...options,canExport:c=>!window.__englishRefuse&&options.canExport(c)})'))
    c.route('**/app.mjs',app)
-   p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)));go(p,'#learn/english/revise')
+   p=c.new_page();p.on('pageerror',lambda e:(errors.append(str(e)),print('Page error:',str(e),flush=True)));go(p,'#learn/english/revise')
    ok('evidenceVoice' not in notebook(p),'deep writing preview save-neutral');bounds(p)
    p.locator('[data-ev-story]').select_option('last-seat');ok('evidenceVoice' not in notebook(p),'story choice save-neutral')
    create(p,'last-seat','2','skeptic');ok(work(p)['source']['id']=='last-seat','fresh whole story selected');ok(len(work(p)['source']['chapters'])==3,'three complete chapters');ok(work(p)['visit']['challenge']==2,'learner override challenge');ok(work(p)['source']['reader']['id']=='skeptic','reader selected');ok(work(p)['lesson']=='before','new visit begins with explicit first lesson');ok(p.evaluate('document.activeElement.id')=='ev-heading','create local focus')
@@ -58,6 +58,15 @@ with sync_playwright() as pw:
     create(p,story)
     for j in range(2):
      q=work(p)['source']['questions'][j];lesson(p,q['lesson']);choice=next(x for x in q['choices'] if x['outcome']=='fits');p.locator(f'[data-ev-answer="{q["id"]}:{choice["id"]}"]').click()
-   ok(p.locator('.ev-exploration > p').first.inner_text().startswith('Two distinct first checks differed'),'repeated copy cannot replace earliest wrong context');ok(branch(p)['units'][wrong_key]['firstResponses']==first_wrong,'repeated copy preserves old wrong evidence');c.close()
+   ok(p.locator('.ev-exploration > p').first.inner_text().startswith('Two distinct first checks differed'),'repeated copy cannot replace earliest wrong context');ok(branch(p)['units'][wrong_key]['firstResponses']==first_wrong,'repeated copy preserves old wrong evidence')
+   last_keys=[key for key,w in branch(p)['units'].items() if w['source']['id']=='last-seat']
+   for key in last_keys:
+    p.locator('.ev-removal > summary').click();p.locator('[data-ev-remove-choice]').select_option(key);p.locator('[data-ev-remove-review]').click();p.locator('[data-ev-remove-confirm]').click()
+   ok(not any(w['source']['id']=='last-seat' for w in branch(p)['units'].values()),'all selected copies of one story removed');ok('last-seat' in branch(p)['exploration']['seenStories'],'only story ID retains familiarity after all copies removed');ok('rereading' in p.locator('[data-ev-story] option[value="last-seat"]').inner_text(),'selector retains rereading label after all copies removed');create(p,'last-seat');ok(work(p)['visit']['familiarity']=='rereading','recreated story never relabeled unseen');p.reload();
+   if p.locator(f'[data-select-explorer="{owner}"]').count():p.locator(f'[data-select-explorer="{owner}"]').click()
+   try:p.locator('[data-ev-root]').wait_for()
+   except Exception:
+    print('Reload body:',p.locator('body').inner_text()[:3000],flush=True);raise
+   ok(work(p)['visit']['familiarity']=='rereading','rereading survives reload after removal');c.close()
   ok(not errors,'no browser page errors '+str(errors));print(f'Adaptive Evidence & voice Chrome: {n} assertions at320/820.')
  finally:b.close()
