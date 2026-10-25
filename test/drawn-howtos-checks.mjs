@@ -42,4 +42,5 @@ s=play(howtoNext({},'open',4),4,['drawn','advance','next']);eq([s.step,s.playing
 eq(howtoNext({reduced:true},'open',3),{step:0,playing:false,drawn:true,reduced:true},'reduced motion opens on a complete first step and does not play');
 eq(howtoNext({step:1,playing:false,drawn:true,reduced:true},'next',3),{step:2,playing:false,drawn:true,reduced:true},'reduced motion steps show complete strokes');
 eq(howtoNext({step:2,playing:false,drawn:true,reduced:false},'again',3),{step:0,playing:true,drawn:false,reduced:false},'Watch again plays from step one');
+eq(howtoNext({step:0,playing:true,drawn:true,reduced:true},'advance',3).drawn,true,'reduced-motion autoplay keeps later steps complete');
 console.log(`Drawn how-tos: ${n} checks passed.`);

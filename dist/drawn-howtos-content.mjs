@@ -443,7 +443,7 @@ const authored=[
    ['Take some seeds','On your turn, take an amount allowed by your chosen rule.'],
    ['Let Bramble play','Tap Let Bramble play. She takes some seeds too.']],
   more:[{loop:'seeds left',to:1,caption:'Seeds left? Take your next turn.'},
-   {end:true,box:'Last seed wins',caption:'In the usual rule, whoever takes the last seed wins.'}]},
+   {end:true,box:'Last seed:<br>win or lose?',caption:'Your rule says whether taking the last seed wins or loses.'}]},
 
  {version:1,id:'life-ring',button:'Show me the life cycle',title:'How one small white butterfly’s life leads to the next',
   alt:'A ring of four stages: egg, caterpillar, chrysalis and butterfly. Arrows go around the ring, and the butterfly lays eggs that start it again.',

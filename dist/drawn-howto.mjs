@@ -14,7 +14,7 @@ export function howtoNext(s,action,count){
  switch(action){
   case 'open':case 'again':return {step:0,playing:!s.reduced,drawn:!!s.reduced,reduced:!!s.reduced};
   case 'drawn':return {...s,drawn:true,playing:s.playing&&s.step<last};
-  case 'advance':return s.playing&&s.drawn&&s.step<last?{...s,step:s.step+1,drawn:false}:s;
+  case 'advance':return s.playing&&s.drawn&&s.step<last?{...s,step:s.step+1,drawn:!!s.reduced}:s;
   case 'next':return s.step<last?{...s,step:s.step+1,playing:false,drawn:!!s.reduced}:{...s,playing:false,drawn:true};
   case 'back':return s.step>0?{...s,step:s.step-1,playing:false,drawn:true}:{...s,playing:false,drawn:true};
   case 'pause':return {...s,playing:false};

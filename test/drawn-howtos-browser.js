@@ -33,7 +33,9 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
    await p.locator('.dh-open').click();await p.locator('.dh-panel').waitFor();await p.evaluate(()=>location.hash='#home');await p.waitForTimeout(2600);eq(await p.locator('drawn-howto').count(),0,`${label}: leaving mid-play removes the drawing`);await p.close();}
   // Reduced motion: nothing plays; each step appears whole.
   const p=await setup(820,hash,'reduce');await prepare(p);await p.locator('.dh-open').click();await p.locator('.dh-panel').waitFor();let v=await view(p);eq([v.caption,v.toggle,v.running,v.shown],[h.steps[0].caption,'Play',0,1],`${id} reduced: opens on a complete first step`);ok(await focused(p,'[data-dh="next"]'),`${id} reduced: focus on Next`);
-  await p.locator('[data-dh="next"]').click();v=await view(p);eq([v.caption,v.running,v.shown],[h.steps[1].caption,0,2],`${id} reduced: Next shows the step whole`);await p.close();}
+  await p.locator('[data-dh="next"]').click();v=await view(p);eq([v.caption,v.running,v.shown],[h.steps[1].caption,0,2],`${id} reduced: Next shows the step whole`);
+  await p.evaluate(()=>{window.howtoUnexpectedMotion=false;window.howtoMotionTimer=setInterval(()=>{if(document.getAnimations().some(a=>a.playState==='running'))window.howtoUnexpectedMotion=true;},10);});
+  await p.locator('[data-dh="toggle"]').click();await p.waitForFunction(()=>!document.querySelector('drawn-howto .dh-all').hidden);ok(await p.evaluate(()=>{clearInterval(window.howtoMotionTimer);return !window.howtoUnexpectedMotion;}),`${id} reduced: Play advances without stroke animation`);await p.close();}
   // Every other activity page offers its how-to just after the heading; it opens, steps to the end and saves nothing.
   const sample={'orchard/gather/*':'orchard/gather/dew-drop','field/*':'field/walk','checkin/*':'checkin/number','wonder/*':'wonder/many-rectangles'};
   for(const h of drawnHowtos.filter(h=>h.at)){const page=sample[h.at[0]]||h.at[0],label=`${h.id} on #${page}`,p=await setup(320,'#'+page,'reduce');
