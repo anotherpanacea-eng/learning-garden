@@ -35,7 +35,7 @@ The town follows the device's calendar. Season comes from the month, with a grow
 
 Each season adds one optional job, never required to finish a place: spring flood boards at the mill, summer awnings at the bakery, autumn harvest baskets for the library's festival, winter lanterns on the footbridge. They are fed the same way as other jobs and stay filled after the season ends.
 
-A **weather log** sits on the town scene: once per calendar day the child can tap sun, clouds, rain, wind or snow for what they see outside. Nothing is fetched; a missed day is simply blank. The log stores `{date,weather}` per explorer (latest 400 days) and feeds the almanac's weather page.
+A **weather log** sits on the town scene: once per calendar day the child can tap sun, clouds, rain, wind or snow for what they see outside. Nothing is fetched; a missed day is simply blank. The log stores `{date,weather}` per explorer (latest 1,098 readable daily notes when the spec 116 Almanac is built (current runtime keeps 400)) and feeds the almanac's weather page.
 
 ## The almanac
 

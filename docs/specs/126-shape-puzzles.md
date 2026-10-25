@@ -83,12 +83,12 @@ Optional root `shapes` per explorer, absent until a table opens:
 ```
 shapes: {
   windows: { [windowId]: { source, pieces: [{ pieceId, x, y, turn, flipped }], filled: bool, support, firstAttempt: attempt | null, at, earlier: [window] } },
-  boxes: { [netId]: { current: attempt, firstAttempt: attempt | null, earlier: [box] } },
+  boxes: { [netId]: { current: foldAttempt, firstAttempt: foldAttempt | null, earlier: [box] } },
   ownNets: [{ source, cells, folds: bool, result?, support, at }], // latest 40 readable keeps
   floors: { [floorId]: { source, pieces: [placement], filled: bool, firstAttempt: attempt | null, at, earlier: [floor] } },
   firstFold: { source, tried: bool, reasonSeen: bool, support, at } | null
 }
-attempt: { id, source, prediction: 'yes' | 'no' | null, folded: bool, result?, base: squareId | null, support, priorReveal: bool, at }
+foldAttempt: { id, source, prediction: 'yes' | 'no' | null, folded: bool, result?, base: squareId | null, support, priorReveal: bool, at }
 attempt: { source, pieces: [placement], filled: bool, support, at }
 ```
 
