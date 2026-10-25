@@ -26,6 +26,7 @@ for(const page of [...pages,...pages.slice().reverse()]){
  if(page==='fly')ok(html.includes('Your flight plan')&&html.includes('Then go to Almost-Right Café')&&html.includes('Change my flight plan'),'flight carries composed instructions beside map');
  if(page==='help')ok(html.includes('Pip’s separate example')&&html.includes('Return to my waiting task'),'helper has separate material and return');
 }
+setPostPage(s,'plan');const planHtml=postOfficePage(s);eq((planHtml.match(/data-post-to-flight/g)||[]).length,2,'flight action available before and after route cards');ok(planHtml.includes('Fly this route'),'flight action names its purpose');ok(planHtml.indexOf('Fly this route')<planHtml.indexOf('class="post-word-bank"'),'first flight action precedes the word bank');
 const invalid=copy(s);ok(!setPostPage(s,'unavailable'),'unknown page rejected');eq(s,invalid,'invalid page cannot mutate');
 setPostPage(s,'fly');setPostPage(s,'help');setPostPage(s,'help');ok(returnFromPostHelp(s),'helper returns');eq(postOfficeView(v),'fly','reopening same helper preserves origin');eq(work(v),before,'helper navigation preserves input, example cursor and real delivery');
 // Older notebooks derive a useful page without migration writes. Unknown view data is kept.
