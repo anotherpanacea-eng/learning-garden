@@ -306,7 +306,7 @@ Companion to [spec 138](../specs/138-keepers-of-books.md). Use as written, after
 | A wooden chest | depends | A chest keeps out dust and light. It can trap damp, so air it on dry days. |
 | A sunny window | depends | Sunlight fades ink and yellows paper. A warm, shaded sill is better. |
 
-**Say why (a grown-up reads it):** Which card would you tell Hollis about first? Why?
+**Say why (a grown-up reads it):** Which card would you tell the old Keeper first? Why?
 
 ## Problem sets
 

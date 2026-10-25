@@ -75,7 +75,7 @@ Each page follows Jane's order: **teach** (one idea, one worked example revealed
 | --- | --- | --- | --- |
 | River and land | Farms sat where the flood reached. | Trace the green strip on the map; the desert edge is where the flood stopped. | The delta (wide) and the valley (narrow); Upper (south) and Lower (north). |
 | The flood year | The year ran in three seasons set by the flood. | Wheel: flood, growing, harvest, with what farmers did in each. | Four seasons at home and three in Egypt. Basin flooding and lifting water by shaduf. |
-| Measuring the flood | A gauge turns "high" into a number you can compare. | Water at the 14th mark reads 14 cubits; the card says "gladness". | Two gauges with different zero points; Hollis's post in cm and a nilometer in cubits. |
+| Measuring the flood | A gauge turns "high" into a number you can compare. | Water at the 14th mark reads 14 cubits; the card says "gladness". | Two gauges with different zero points; the mill's post in cm and a nilometer in cubits. |
 | Counting like a scribe | Signs repeat and add up. | 1 hobble and 2 strokes is 12. | Place value at home (305) and no zero sign in Egyptian numerals. |
 | Calendar (within Counting) | 365 days, about ¼ day short each year. | 4 years → 1 day; 40 years → 10 days. | A leap-year calendar that stays put. |
 | How we know | An object shows some things; people interpret others. | Granary model: "men carrying sacks" (you can see it) and "an accounting area" (the museum's reading). | Same decree in a script people could read and in one they couldn't. |
@@ -158,7 +158,7 @@ nileYear: {
 | Teaching encounter | Each page's teach card and stepped worked example (companion). |
 | Contrast | Upper (south) and Lower (north); good and too-high floods; two gauges with different zeros; place value and additive signs; a drifting calendar and a leap-year one; seeing and interpreting. |
 | Supported practice | Guided first items with visible steps; the I'm stuck ladder; the judging card and number tray stay on screen. |
-| New application | Hollis's post and Nuria's post in cubits; the harvest tally; the Keeper's Desk source and ethics items. |
+| New application | The mill's post and Nuria's post in cubits; the harvest tally; the Keeper's Desk source and ethics items. |
 | Purposeful revisit | Spec 120 Act II spring flood post, Act III letter, Act IV archive chapter; spec 95 readings; spec 99 label maker; spec 118 desk. |
 | Data boundary | Choices, numbers, card orders, short human-read text, all local. No location; no child data beyond the per-explorer save. |
 

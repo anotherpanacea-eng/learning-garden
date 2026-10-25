@@ -49,7 +49,7 @@ Companion to [spec 134](../specs/134-nile-year.md). Use as written, after indepe
 **Longer:**
 > At Flood Boards and Planting, the miller reads the post by the millrace and calls out the number. The cat watches the water as if it owes her money.
 >
-> "Hollis used to do this," says the miller. "Every spring. Same post, same marks."
+> "The old Keeper used to do this," says the miller. "Every spring. Same marks."
 >
 > {guide} is thinking. "There's a drawer in the library about a river that people measured on steps. In Egypt, a very long time ago."
 >
@@ -367,7 +367,7 @@ Prompt: Gauge A calls 7 cubits good. Gauge B calls 16 good. Why?
 - Gauge B's flood was better. `bigger-is-better` · Feedback: Not from these numbers. Each gauge counts up from its own bottom mark.
 - ✓ They counted from different bottom marks. · Feedback: Yes. Each gauge had its own zero, so numbers differ.
 Hint: Where does each gauge's counting start?
-Explanation: Gauges A and B are made up for practice. A reading counts up from that gauge's own zero. A good flood is a different number on different gauges. The same is true of Hollis's post and Nuria's.
+Explanation: Gauges A and B are made up for practice. A reading counts up from that gauge's own zero. A good flood is a different number on different gauges. The same is true of the mill's post and Nuria's.
 
 **C6 · Sapling · number, with steps (three parts)**
 Prompt: A cubit is 7 palms. A palm is 4 digits.
@@ -379,7 +379,7 @@ Hint: For (c), count 4 digits for each of the 7 palms.
 Explanation: 3 × 7 = 21 palms; 2 × 4 = 8 digits; 7 × 4 = 28 digits in a royal cubit.
 
 **C7 · Keeper's Desk · say why (grown-up reads)** *(counts with Set C's six checked items as a seventh, unchecked)*
-Prompt: Hollis's post and a nilometer: what can you compare, and what can't you?
+Prompt: The mill's post and a nilometer: what can you compare, and what can't you?
 Starter: We can compare … but not … unless …
 What a grown-up might hear: whether each was high for its own river; not the raw numbers, because the units and zero points differ; we'd need to know where each starts and how big a normal flood is there.
 

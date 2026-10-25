@@ -61,7 +61,7 @@ Adapter to spec 120, Act I (after the welcome-back supper). Fiction throughout; 
 > Bramble looks at her ribbon for a long moment. "Fine. Older than the bakery."
 
 **Keeper's note (80 words max):**
-> Hollis's pages carry dates, counted from the town's own events: the year of the fine harvest, then five years to the first big flood. Real people did this too. Egyptians dated by the year of the king's reign; Romans sometimes counted from the city's legendary founding. A town's own count can't go on the Long Line until it is tied to a real year, and Willowbank's is a story.
+> The parcel's pages carry dates, counted from the town's own events: the year of the fine harvest, then five years to the first big flood. People did this too. Egyptians dated by the year of the king's reign; Romans sometimes counted from the city's legendary founding. A town's own count can't go on the Long Line until it is tied to a real year, and Willowbank's is a story.
 
 **Later scene, when Hollis's pages dry (Short, 30 words max):**
 > Hollis wrote "the year of the fine harvest" and "five years later, the first big flood." The librarian pins both on the bunting strip, five steps apart.
