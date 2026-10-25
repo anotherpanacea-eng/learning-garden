@@ -88,11 +88,11 @@ grafting: {
   makers: { [wordId]: endingId, at },
   bench: { [stockId]: { twigs: [wordId], cousins: { [cousinId]: wordId }, at } },
   letters: { [lineId]: wordId, at },
-  items: { [itemId]: { choice: choiceId | [pairId], support: 'none' | 'hint' | 'example', skipped: bool, at } }
+  items: { [itemId]: { choice: choiceId | [pairId], shown: [choiceId], o: 'fit' | 'not-yet', support: 'none' | 'hint' | 'example', skipped: bool, at } }
 }
 ```
 
-Codes only; no free text ("say why" is spoken and never stored). Load checks the ids and outcome codes of the entries the save holds and its own structural bounds, never today's bench sizes or item lists; a missing item is read as absent. Support is a separate flag per kept item, never merged with an independent attempt. Kept results are never recomputed against today's answer key on load. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. Spec 34's `words` extension is untouched. No field holds anything about the child.
+Codes only; no free text ("say why" is spoken and never stored). Load checks the ids and outcome codes of the entries the save holds and its own structural bounds, never today's bench sizes or item lists; a missing item is read as absent. Support is a separate flag per kept item, never merged with an independent attempt. Kept results are never recomputed against today's answer key on load. Each kept item also stores `shown`, its choice ids in the order shown, and `o`, the outcome code at the keep (`fit` or `not-yet`), so it is restored as kept without today's content. Choice order is stable within a saved question and restored as saved. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. Spec 34's `words` extension is untouched. No field holds anything about the child.
 
 ## Curriculum fit
 

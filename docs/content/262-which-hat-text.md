@@ -677,10 +677,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: When Bramble is the only person named first, her and she can only mean Bramble.
 
 **F4 (Sapling).**
+- Before the sentence: Nobody else got cake. Pip took the third slice.
 - Sentence: At the party, Pip helped ___ to a third slice of cake.
 - Prompt: Which word fits the gap?
-- Choices: himself ✔ · him (`object-for-reflexive`) · themselves (`reflexive-wrong-number`)
-- Feedback: Him: Him would mean Pip helped someone else. · Themselves: Themselves is for more than one. Pip is one fox.
+- Choices: himself ✔ · him (`object-for-reflexive`) · themselves (`reflexive-wrong-person`)
+- Feedback: Him: Him would mean Pip helped someone else. · Themselves: Pip uses he and him, so himself. Themselves fits a group, or someone who uses they.
 - Hint: Who did the helping? Who got the cake?
 - Explanation: Pip helped, and Pip got the cake. Same one, so himself.
 

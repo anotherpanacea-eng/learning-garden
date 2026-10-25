@@ -340,7 +340,7 @@ Worked example: *___ tomorrow, we will check the post. (rain)*
 
 **Builder (tiles: am · is · are · was · were · will be):**
 - Right now the wind ___ blowing. (is)
-- At three o'clock, rain ___ falling. (was)
+- At three o'clock yesterday, rain ___ falling. (was)
 - All afternoon tomorrow, we ___ planting. (will be)
 
 **Every day, or right now?** Put each card on its side.

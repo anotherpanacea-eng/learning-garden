@@ -234,6 +234,7 @@ Worked example: *Bank.*
 
 **Words and verbs:**
 - pollen + -ate → pollinate: Bees pollinate the apple blossom.
+- pollen + -ize → pollenize: a rare word that also means pollinate. Pollinate is the usual one.
 - active + -ate → activate: Press the lever to activate the pump.
 - simple + -ify → simplify: The librarian will simplify the map.
 - pure + -ify → purify: A filter can purify the water.
@@ -397,12 +398,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ### Set C. Verb makers (Sapling)
 
-**C1 (Sapling, guided).** Steps shown first: 1. Pollen is a thing. 2. We need an action. 3. Try each ending.
-- Prompt: Bees carry pollen. Which ending makes the verb for this?
-- Choices: -ate ✔ · -ify (`any-ending-fits`) · -ize (`any-ending-fits`)
-- Feedback: -ify: That isn't the usual word. Try another ending. · -ize: That isn't the usual word. Try another ending.
-- Hint: Bees ___ the blossom. Say each one aloud.
-- Explanation: Pollen becomes pollinate. Bees pollinate flowers.
+**C1 (Sapling, guided).** Steps shown first: 1. Pure describes a thing. 2. We need an action. 3. Try each ending.
+- Prompt: Filters make water pure. Which ending makes the verb for this?
+- Choices: -ify ✔ · -ate (`any-ending-fits`) · -ize (`any-ending-fits`)
+- Feedback: -ate: Purate isn't a word. Try another ending. · -ize: Purize isn't a word. Try another ending.
+- Hint: Filters ___ the water. Say each one aloud.
+- Explanation: Pure becomes purify. Filters purify water.
 
 **C2 (Sapling).**
 - Prompt: Which word is the verb in the simple family?

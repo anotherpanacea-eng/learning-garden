@@ -86,11 +86,11 @@ tenses: {
   perfect: { trays: { [clueId]: 'past' | 'perfect' }, shelf: { [pastId]: participleId }, whereNow: choiceId, at },
   odd: { mends: { [slipId]: formId }, families: { [formId]: familyId }, at },
   steady: { [entryId]: { slips: [verbId], none: bool }, letter: { lines: { [lineId]: 'steady' | 'slip' }, added: choiceId }, at },
-  sets: { [itemId]: { a: choiceId | [ids] | { [id]: id }, s: true?, at } }
+  sets: { [itemId]: { a: choiceId | [ids] | { [id]: id }, shown: [choiceId], o: 'fit' | 'not-yet', s: true?, at } }
 }
 ```
 
-Codes only; no free text ("say why" is spoken). Read-aloud use is not stored. Support (`s`, set when the stuck ladder reached step 2) is a separate flag per kept item, never merged with an independent attempt. Validation checks each saved entry's ids and outcome codes against the save's own entries and shape, never today's bench sizes, item lists, answer key or wording; a missing item reads as absent. Kept results are never recomputed on load. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Choice order is stable within a saved question and restored as saved. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. Spec 116's weather log and every other root are untouched. No field holds anything about the child.
+Codes only; no free text ("say why" is spoken). Read-aloud use is not stored. Support (`s`, set when the stuck ladder reached step 2) is a separate flag per kept item, never merged with an independent attempt. Validation checks each saved entry's ids and outcome codes against the save's own entries and shape, never today's bench sizes, item lists, answer key or wording; a missing item reads as absent. Kept results are never recomputed on load. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Choice order is stable within a saved question and restored as saved. Each kept item also stores `shown`, its choice ids in the order shown, and `o`, the outcome code at the keep (`fit` or `not-yet`), so it is restored as kept without today's content. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. Spec 116's weather log and every other root are untouched. No field holds anything about the child.
 
 ## Curriculum fit
 
