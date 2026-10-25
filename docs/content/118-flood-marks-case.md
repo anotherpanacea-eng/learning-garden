@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 9: Marks on the wall
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Léon, Les Saules, the archive's "Flood marks in France" pack). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Les Saules, Léon and the ferry house wall are fiction. Section 7 is real history. **All French needs a fluent reader of France's French, and every historical figure needs source review (section 10) before it reaches a child.**
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (Léon, Les Saules, the archive's "Flood marks in France" pack). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Les Saules, Léon and the ferry house wall are fiction. Section 7 is real history. **All French needs a fluent reader of France's French, and every historical figure needs source review (section 10) before it reaches a child.**
 
 Case ID `flood-marks`. Appears after Léon's first letter (Act III). It is the desk depth of spec 120's "Flood marks in France" archive pack.
 

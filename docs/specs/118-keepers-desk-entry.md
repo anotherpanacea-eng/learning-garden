@@ -79,7 +79,7 @@ An arrival recap describes earlier story events as before you came, never as thi
 
 **"Take the desk" response:**
 
-> Wren hands you the casebook. "One case is open. Start anywhere. If you want me to show you how I'd work something out, ask. If you'd rather not, don't."
+> Wren hands you the casebook. "One case is open. Start anywhere. I'll open each part with a little worked example. Fold it away when you want the question, and open it again whenever you like."
 
 ## 5. Case 1: Bridge or ford?
 
@@ -128,7 +128,7 @@ Tasks:
 - **1d.** Bramble's claim, tested properly. "If both plans had to cross the **same** gap, would the causeway always be cheaper?" The explorer can enter a whole-number length from 0 to 100 metres and see both totals in a table that keeps each try. Then: "At what length do they cost the same?" *Answer: 1,200 + 60L = 400 + 100L, so 800 = 40L and L = 20 m. Below 20 m the causeway is cheaper; above 20 m the footbridge is.*
 - **1e.** Write each plan's cost as a rule for any length L. Supplied tiles let the explorer build `1200 + 60 × L` and `400 + 100 × L`; a keyboard field accepts the same expressions. **Check my working** parses the bounded affine grammar below and compares its exact coefficient and constant with the price sheet. It does not require one written form: `60L + 1200` is equally correct. A table at example lengths may illustrate the rule, but agreement at selected lengths is not the equivalence test.
 
-**Expression input contract (1e):** at most 160 characters, 64 tokens and 8 nested parentheses. Accept whole-number literals 0–100,000, `L`, parentheses, unary `+`/`-`, addition/subtraction (`-` or `−`) and multiplication (`*` or `×`); permit `60L` as shorthand for `60 × L`. Multiplication is allowed only when at least one parsed operand is a constant expression. Reject variable-by-variable multiplication, division, powers, other identifiers, equals signs and malformed syntax with "Use whole numbers, L, +, −, × and brackets to write a linear rule." Never use `eval` or a JavaScript expression evaluator. Parse directly to exact integer pairs `(coefficient of L, constant)`, bounding the absolute value of each component at every operation to 100,000; reject an out-of-bounds expression without changing the draft. Compare with `(60,1200)` or `(100,400)`. `60 × (L + 20)` is equivalent to the footbridge rule; `L × L` is outside this task. Tiles use the same parser and bounds.
+**Expression input contract (1e):** without `eval`, parse whole-number literals, `L`, parentheses, signs, addition/subtraction and multiplication (including `60L`) to exact `(coefficient of L, constant)` pairs. Compare with `(60,1200)` or `(100,400)`; equivalent affine forms fit. Reject nonlinear or malformed input with "Use whole numbers, L, +, −, × and brackets to write a linear rule." Keep the entered draft when it cannot be checked.
 
 **Learn card (folds away; reopens as Show me how):**
 
@@ -185,9 +185,9 @@ Tasks:
 - **2b.** What fraction of Saturday's crossings used a cart? *Answer: 45/180 = 1/4, or 25%.*
 - **2c.** The same for the rainy Tuesday. *Answer: 2 : 38 = 1 : 19; 2/40 = 1/20, or 5%.*
 - **2d.** Wren asks: "So what share of the town's crossings need a cart?" Choices (order varied per AGENTS.md):
-  - "About a quarter, since Saturday counted far more people."
-  - "We observed 5% on Tuesday and 25% on Saturday; a usual week could fall outside those figures." ← fits the evidence
-  - "The two days tell us nothing useful about crossings, so we should discard both counts."
+  - "Use Saturday's quarter for a usual week; it counted more people."
+  - "Keep both days' figures; neither tells us a usual week's share." ← fits the evidence
+  - "Discard both days' figures; neither tells us anything useful about crossings."
 
   Authored replies: to the first, "Saturday tells us about Saturday. More people counted does not make it a usual day." To the fitting choice, "These are the shares observed on those days. We have no basis for bounding the town's usual share between them." To discarding both, "The counts do describe those two days. Keep them, and ask for more days before describing a usual week."
 - **2e.** "Who might these counts miss?" Free choice of any that apply, each with an authored reply; none is marked wrong:
@@ -316,7 +316,7 @@ The case keeps its own frozen answers. The following are proposed later revisits
 
 Stored per explorer in existing local storage, following the AGENTS.md saved-work rule:
 
-- `desk.arrived` (the arrival panel was answered) and `desk.cases['bridge-or-ford']` in the first increment, holding the case's frozen source ID/version and complete understood prompts, source cards, model, choices/order, feedback and help text; each step's kept answers and attempts; the initial learn/guided lines actually shown and relevant prior worked-example exposure; each later help rung and skip; and familiarity. Preserve those distinct contexts on resume. Folding never clears them, and supplied work is never relabeled independent. This is a new case-specific record using the existing separation principles, not an existing generic desk API. A separately commissioned case would use its own ID from section 8 and reviewed contract; a reading case may keep its chosen language/length as a local preference, never evidence of reading level.
+- `desk.arrived` (the arrival panel was answered) and `desk.cases['bridge-or-ford']` in the first increment, holding the case's source IDs/version and frozen task quantities, model parameters and choice order (message/help codes map to UI text); each step's kept answers and attempts; the initial learn/guided lines actually shown and relevant prior worked-example exposure; each later help rung and skip; and familiarity. Preserve those distinct contexts on resume. Folding never clears them, and supplied work is never relabeled independent. This is a new case-specific record using the existing separation principles, not an existing generic desk API. A separately commissioned case would use its own ID from section 8 and reviewed contract; a reading case may keep its chosen language/length as a local preference, never evidence of reading level.
 - **Free text:** Case 1's expression field in 1e and four recommendation fields stay local, appear in Grown-up notes and the existing JSON export, are removed by explicit deletion, and are never sent anywhere or reused as content. The expression is checked only for exact affine coefficient/constant agreement under 1e's bounded grammar; this checks a supplied mathematical rule, not prose quality or ability. Recommendation fields are never graded. Any later commissioned case must name and bound its own free-text fields and checking boundary. Prompts are about a fictional town and never invite personal or family details.
 - A save is validated on IDs, counts and outcomes. A later wording or answer-key change never rewrites a kept answer or recommendation. If one step can't be read, the rest of the case stays open.
 - No age, grade, ability label or band is read or written by the desk.
@@ -363,23 +363,23 @@ This is a proposed commissioning and story-invitation catalog, preserving the la
 
 | No. | Case ID | Title | Proposed story invitation | Main strands | Written in | Review needed before build |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `bridge-or-ford` | Bridge or ford? | From the first visit (Act I) | Linear relationships, ratio, sources, argument | Section 5 | Complete activity contract and independent content/spec review |
-| 6 | `hollis-pages` | What did Hollis write? | When page 1 dries; each later page joins as it dries | Transcription, inference from context, certainty | [118-hollis-pages-case.md](../content/118-hollis-pages-case.md) | Complete activity contract and independent content/spec review |
-| 7 | `sorting-machine` | The borrowed sorting machine | After Act I | AI literacy (C1), rules against learned examples, sampling | [118-sorting-machine-case.md](../content/118-sorting-machine-case.md) | Complete activity contract and independent content/spec review; subject reviewer for C1 |
-| 10 | `town-record` | What should Willowbank write down? | Act II, "A garden across the seasons" | Measurement, data design, records | [118-town-record-case.md](../content/118-town-record-case.md) | Complete activity contract and independent content/spec review |
-| 4 | `flood-bell` | When should the bell ring? | After Nuria's first letter (end of Act II) | Time and rates, upstream timing, uncertainty | [118-flood-bell-case.md](../content/118-flood-bell-case.md) | Complete activity contract and independent content/spec review; the case must not read as flood-safety advice (spec 120, S7) |
-| 3 | `seed-exchange` | The seed exchange ledger | Act III, "The seed exchange" | Ratio, proportion, percentages, sample size | [118-seed-exchange-case.md](../content/118-seed-exchange-case.md) | Complete activity contract and independent content/spec review; Spanish reader for Nuria's note |
-| 9 | `flood-marks` | Marks on the wall | After Léon's first letter (Act III) | Reading French sources, measurement, history | [118-flood-marks-case.md](../content/118-flood-marks-case.md) | **Complete activity contract; independent source/content/spec review; fluent French reader** |
-| 2 | `valencia-1957` | Where did Valencia's river go? | Act IV, after page 4 | History, Spanish reading, compound units, perspective | [118-valencia-1957-case.md](../content/118-valencia-1957-case.md) | **Complete activity contract; independent source/content/spec review; fluent Spanish reader** |
-| 8 | `room-for-the-river` | A country that gave its rivers room | Act IV, "What other places did" | History, scale and area, trade-offs | [118-room-for-the-river-case.md](../content/118-room-for-the-river-case.md) | **Complete activity contract; independent source/content/spec review** |
-| 5 | `ledger-and-gauge` | The ledger and the rain gauge | Act IV, after page 4 and Nuria's rain gauge letter | Mean, comparison of groups, confounding, argument | [118-ledger-and-gauge-case.md](../content/118-ledger-and-gauge-case.md) | Complete activity contract and independent content/spec review |
-| 11 | `exchange-plan` | Keeping the Ways open | Act VI, "Compare routes and keep a plan" | Rates, scheduling, constraints, written plan | [118-exchange-plan-case.md](../content/118-exchange-plan-case.md) | Complete activity contract and independent content/spec review |
+| 1 | `bridge-or-ford` | Bridge or ford? | From the first visit (Act I) | Linear relationships, ratio, sources, argument | Section 5 | Case-specific authoring |
+| 6 | `hollis-pages` | What did Hollis write? | When page 1 dries; each later page joins as it dries | Transcription, inference from context, certainty | [118-hollis-pages-case.md](../content/118-hollis-pages-case.md) | Case-specific authoring |
+| 7 | `sorting-machine` | The borrowed sorting machine | After Act I | AI literacy (C1), rules against learned examples, sampling | [118-sorting-machine-case.md](../content/118-sorting-machine-case.md) | subject reviewer for C1 |
+| 10 | `town-record` | What should Willowbank write down? | Act II, "A garden across the seasons" | Measurement, data design, records | [118-town-record-case.md](../content/118-town-record-case.md) | Case-specific authoring |
+| 4 | `flood-bell` | When should the bell ring? | After Nuria's first letter (end of Act II) | Time and rates, upstream timing, uncertainty | [118-flood-bell-case.md](../content/118-flood-bell-case.md) | the case must not read as flood-safety advice (spec 120, S7) |
+| 3 | `seed-exchange` | The seed exchange ledger | Act III, "The seed exchange" | Ratio, proportion, percentages, sample size | [118-seed-exchange-case.md](../content/118-seed-exchange-case.md) | Spanish reader for Nuria's note |
+| 9 | `flood-marks` | Marks on the wall | After Léon's first letter (Act III) | Reading French sources, measurement, history | [118-flood-marks-case.md](../content/118-flood-marks-case.md) | **Source and fluent French review** |
+| 2 | `valencia-1957` | Where did Valencia's river go? | Act IV, after page 4 | History, Spanish reading, compound units, perspective | [118-valencia-1957-case.md](../content/118-valencia-1957-case.md) | **Source and fluent Spanish review** |
+| 8 | `room-for-the-river` | A country that gave its rivers room | Act IV, "What other places did" | History, scale and area, trade-offs | [118-room-for-the-river-case.md](../content/118-room-for-the-river-case.md) | **Historical-source review** |
+| 5 | `ledger-and-gauge` | The ledger and the rain gauge | Act IV, after page 4 and Nuria's rain gauge letter | Mean, comparison of groups, confounding, argument | [118-ledger-and-gauge-case.md](../content/118-ledger-and-gauge-case.md) | Case-specific authoring |
+| 11 | `exchange-plan` | Keeping the Ways open | Act VI, "Compare routes and keep a plan" | Rates, scheduling, constraints, written plan | [118-exchange-plan-case.md](../content/118-exchange-plan-case.md) | Case-specific authoring |
 
 Act V's desk depth, the Gazette opinion piece, belongs to spec 49's authored project path and is not a casebook case. Case 5 is the "full dossier" spec 120 names for Act IV's older learner; it reads its plans and the town meeting from spec 120 and writes no act text of its own.
 
 The authored files propose the following parts, whose presence is not proof of completeness or review: why the case exists, its hook, its steps, each step's learn card, guided first task, tasks with worked answers, stuck ladder and misconception replies, the recommendation or closing step, its supported route, topic candidates with the hard-prerequisite crosswalk, and what still needs review.
 
-The later dossiers currently contain representative help and replies, not a complete deployable content set. Before each separate case build, its author and independent reviewer must resolve the applicable finite content gaps: Case 5 needs all three statement-tray reply columns; Case 9 needs every offered French/English choice and keyed reply at each supported passage amount; Case 3 needs the offered control/reason choices and their authored responses for its fair-trial plan. Case 6 needs source-page-specific tasks/help that work when only page 1 is available and never reveal undried pages. These are named commissioning gates, not requests to fill every future dossier before the Case 1 increment. Presence of a file, help heading or worked answer does not clear them.
+The later dossiers currently contain representative help and replies, not a complete deployable content set. Before each separate case build, its author and independent reviewer must resolve the applicable finite content gaps: Case 5 needs all three statement-tray reply columns; Case 9 needs every offered French/English choice and keyed reply at each supported passage amount; Case 3 needs the offered control/reason choices and their authored responses for its fair-trial plan. Case 6 needs source-page-specific tasks/help that work when only page 1 is available and never reveal undried pages. 
 
 ## 9. Entry points
 
@@ -412,4 +412,4 @@ Refreshed 2026-10-23: Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060` (`LESSO
 
 ## 12. Boundaries
 
-Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it. These are documentation review repairs, not build or content clearance. Case 1 requires independent specification/content follow-up; all later cases remain separately uncommissioned and unverified.
+Single device, offline, local saves. No accounts, uploads, multiplayer or live AI. No timers, scores, streaks or locks. The desk adds a destination and a way of working; it does not assign anyone to it. 

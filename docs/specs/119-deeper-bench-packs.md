@@ -143,7 +143,7 @@ Bench: [My Count Collection, spec 86](86-count-collection.md). This pack supplie
 
 - Find the **mean**: (2 + 3 + 3 + 4 + 18) ÷ 5 = 30 ÷ 5 = **6 kg**.
 - Find the **median**: middle value in order = **3 kg**.
-- "The courier asks: how heavy is a usual parcel?" Choices: 6 kg (the mean); 3 kg (the median); 18 kg (the heaviest); "it depends what you need to know". The authored replies explain that four of the five parcels weigh 4 kg or less, so the median describes a usual parcel better here, and that the mean is still the right number for a different question: "If the five parcels were shared evenly between five bags, how much would each bag hold?"
+- "The courier asks: how heavy is a usual parcel?" Choices: 6 kg (the mean); 3 kg (the median); 10 kg (the midrange misconception). The authored replies explain that four of the five parcels weigh 4 kg or less, so the median describes a usual parcel better here, and that the mean is still the right number for a different question: "If the five parcels were shared evenly between five bags, how much would each bag hold?"
 - Remove the iron bearing: mean (2 + 3 + 3 + 4) ÷ 4 = **3 kg**, median (3 + 3) ÷ 2 = **3 kg**. One unusual value moved the mean by 3 kg and the median not at all.
 
 - **Reverse problem** (the research's test of meaning): "A sixth parcel arrives. Now the mean of all six is 7 kg. How heavy is the new parcel?" *Total 6 × 7 = 42; 42 − 30 = **12 kg**.* Reply to an entry of 7: "That's the new mean, not the new parcel. If six parcels share 42 kg evenly, what must the new one add?"

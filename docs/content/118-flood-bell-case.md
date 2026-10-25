@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 4: When should the bell ring?
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Vadoalto, Nuria, the six-hour lag, Act VI's long rain). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Every place, distance, time and record here is fiction.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (Vadoalto, Nuria, the six-hour lag, Act VI's long rain). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Every place, distance, time and record here is fiction.
 
 Case ID `flood-bell`. Appears after Nuria's first letter (end of Act II), so an explorer who arrives with the letter from upstream has it from the start.
 

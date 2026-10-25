@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 3: The seed exchange ledger
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (the desk's conventions, records and acceptance apply) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Act III, "The seed exchange"). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Everything here is fiction: Willowbank, Vadoalto, the reed and every number. Nuria's Spanish lines need a fluent reader of Spain's Spanish.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (the desk's conventions, records and acceptance apply) and [spec 120](../specs/120-keeper-of-the-ways.md) (Act III, "The seed exchange"). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Everything here is fiction: Willowbank, Vadoalto, the reed and every number. Nuria's Spanish lines need a fluent reader of Spain's Spanish.
 
 Case ID `seed-exchange`. Appears with spec 120's Act III chapter *The seed exchange*.
 
@@ -16,7 +16,7 @@ Act III is about exchange, and spec 120 gives it a real trade: Vadoalto's reed f
 
 > *Willowbank: our reed is doing well at your mill pond! Ours did better, though. Our abuela says reed likes its feet wet and its head in the sun. Shall we try again next year, and do it properly this time? Nuria*
 >
-> *Willowbank: ¡nuestro carrizo crece bien junto a su estanque del molino! Aunque el nuestro creció mejor. Nuestra abuela dice que al carrizo le gustan los pies mojados y la cabeza al sol. ¿Lo intentamos otra vez el año que viene, y esta vez bien hecho? Nuria*
+> *Willowbank: ¡nuestro carrizo crece bien junto al estanque de su molino! Aunque el nuestro creció mejor. Nuestra abuela dice que al carrizo le gustan los pies mojados y la cabeza al sol. ¿Lo intentamos otra vez el año que viene, y esta vez bien hecho? Nuria*
 
 Buttons: **Open the ledger** · **Later**.
 
@@ -169,10 +169,10 @@ Tasks:
 - **3b.** At Vadoalto? *Answer: 20/25 = 4/5 = **80%**.*
 - **3c.** "So Nuria's right?" Choices:
   - "Yes. 80% is more than 75%, so Vadoalto's ground grows reed better."
-  - "Vadoalto's observed percentage was higher, but these trials do not isolate ground quality." ← fits the evidence
+  - "Wait. With 25 and 40 cuttings, one cutting changes the percentages noticeably." ← fits the evidence
   - "No. Thirty cuttings took root at Willowbank and only twenty at Vadoalto."
 
-  Reply to the first: "80 is more than 75. Before deciding it means something, try 3d: how much does one cutting change each result?" Reply to the third: "Willowbank planted 15 more cuttings, so compare the observed percentages as well as counts. Neither measure by itself proves why they differed."
+  Reply to the fitting choice: "Try the one-cutting changes in 3d before drawing a larger conclusion from these small groups." Reply to the first: "80 is more than 75. Before deciding it means something, try 3d: how much does one cutting change each result?" Reply to the third: "Willowbank planted 15 more cuttings, so compare the observed percentages as well as counts. Neither measure by itself proves why they differed."
 - **3d.** Use the "what if" table: if **one more** Vadoalto cutting had failed, what would its percentage be? And if one more Willowbank cutting had failed? *Answers: Vadoalto 19/25 = **76%**; Willowbank 29/40 = **72.5%**.* The table shows each town's result for one cutting either way: Vadoalto 76% / 80% / 84%, Willowbank 72.5% / 75% / 77.5%.
 - **3e.** "What else was different between the two plantings, besides the town?" Free choice of any, each with an authored reply; none is marked wrong:
   - Willowbank's cuttings travelled a day down the river first; Vadoalto's were planted fresh.

@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 6: What did Hollis write?
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (the Keeper's Pages and their three versions). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Hollis and the pages are fiction.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (the Keeper's Pages and their three versions). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Hollis and the pages are fiction.
 
 Case ID `hollis-pages`. Appears when page 1 dries (end of Act I). Pages 2, 3 and 4 join the case as each one dries; page 5 is blank and page 6 is a clean letter, so neither is in it. Saved work on an earlier page is never changed when a later page joins.
 

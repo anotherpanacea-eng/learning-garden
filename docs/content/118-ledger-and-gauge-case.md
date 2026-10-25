@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 5: The ledger and the rain gauge
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/blob/claude/project-thread-zpfie6/docs/specs/120-keeper-of-the-ways.md) (Act IV, Hollis's pages 2 and 4, Nuria's rain gauge letter, the three plans). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Every record here is fiction and uses spec 120's numbers exactly; if spec 120 changes a number, this case changes with it.
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](../specs/120-keeper-of-the-ways.md) (Act IV, Hollis's pages 2 and 4, Nuria's rain gauge letter, the three plans). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Every record here is fiction and uses spec 120's numbers exactly; if spec 120 changes a number, this case changes with it.
 
 Case ID `ledger-and-gauge`. Appears in Act IV once the explorer has page 4 (the Sponge drained in year 22) and Nuria's rain gauge letter. This is the "full dossier" spec 120 names for Act IV's older learner.
 

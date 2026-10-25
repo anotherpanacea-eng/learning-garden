@@ -94,7 +94,6 @@ Tasks (Check my working):
 - **2d.** **Every six hours**? *Answer: **70 cm**, Thursday 15:00.*
 - **2e.** Count one weekly check in each of **52 full weeks**. Separately, count daily checks and checks every six hours in a **365-day, non-leap year**. *Answers: **52 weekly checks in those 52 weeks**; **365 daily checks** in the stated year; 365 × 4 = **1,460 checks** every six hours.*
 
-  **Calendar note:** a calendar year can contain 52 or 53 occurrences of a chosen weekday. A leap year has an extra day. These practice totals do not prescribe how many reports a real log must contain; keep actual dates and missed readings as reported.
 - **2f.** "Could even every-six-hours have missed the real highest point?" Choices:
   - "Yes. The brook could have peaked between 15:00 and 21:00 on Thursday." ← fits the table
   - "No. Four readings a day catches everything."
@@ -161,7 +160,7 @@ Keep earlier answers available as **Your earlier idea**, when present. Beside th
 
 (That last line points towards Hollis's ledger, which the explorer meets at the end of Act II, without naming it.)
 
-**Future story adapter, separately commissioned:** a story-only Brook tab may display the kept fictional rules and this case's supplied week table (at most seven chosen column headings and 28 authored readings in its frozen source). Label it **Story record: Willow Brook is made up.** It must not put fictional heights or a generated schedule into the Field Guide's real reported `weather`, `sky` or `finds` arrays, synthesize missing reports, or imply the explorer observed the brook. A future record beyond that bounded supplied week needs its own authored source and review. In Act IV, [Case 5](118-ledger-and-gauge-case.md)'s final step can offer the explorer's kept rules as one answer to "the record that would settle it"; that is a proposed record, not evidence that any observation took place.
+**Future story adapter:** label the kept rules and supplied week table as **Story record: Willow Brook is made up.** Keep them separate from the Field Guide's real reported weather, sky and finds; never synthesize an observation from a proposed schedule. Case 5 may use the kept rules as a proposed record, not evidence that observations took place.
 
 **Supported route:** Choose and adapt alone completes Step 4; steps 1 to 3 can stay open.
 
