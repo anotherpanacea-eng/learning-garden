@@ -48,7 +48,7 @@ The target topic ids in each spec are candidates for a reviewed reference, never
 
 ## Second wave: ten more packs (specs 149 to 158)
 
-Written the same day, after the first sixteen, for the largest gaps left on the pinned graph: Ecosystems & Habitats (1 of 36 topics referenced), Organisms & Life Processes (3 of 63), Insects & Minibeasts, Rainforests (0 of 25), Polar Regions (3 of 25), Forces & Motion (3 of 27) and Scientific Inquiry, plus the history topics the first wave left untaught (Egyptian beliefs, Roman myth and legacy, Vikings and castles). They follow the same contract, were fact-checked in a second pass and independently reviewed, and are proposed in three further draft PRs.
+Written the same day, after the first sixteen, for the largest gaps left on the pinned graph: topics with a declared reference in `curriculum/topic-coverage.csv`: Ecosystems & Habitats 3 of 36, Organisms & Life Processes 1 of 63, Rainforests 0 of 25, Polar Regions 0 of 25, Forces & Motion 1 of 27, plus Insects & Minibeasts (5 of 22) and Scientific Inquiry (4 of 30), plus the history topics the first wave left untaught (Egyptian beliefs, Roman myth and legacy, Vikings and castles). They follow the same contract, were fact-checked in a second pass and independently reviewed, and are proposed in three further draft PRs.
 
 | Spec | Pack | Home | What the child does | Strands |
 | --- | --- | --- | --- | --- |
