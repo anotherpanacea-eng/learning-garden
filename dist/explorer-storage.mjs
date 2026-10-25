@@ -1,3 +1,4 @@
+import {freshStory} from './keeper-story-core.mjs';
 import {STORAGE_KEY,freshState,restoreStateResult} from './core.mjs';
 
 export const REGISTRY_KEY='learning-garden-explorers';
@@ -50,7 +51,7 @@ export class ExplorerStore{
   }
   this._warn('All explorer pictures are in use. Choose an existing explorer to keep playing.');return null;
  }
- _fresh(profile){return {...freshState(),garden:{avatar:profile.avatar}};}
+ _fresh(profile){return {...freshState(),story:freshStory(),garden:{avatar:profile.avatar}};}
  _commitRegistry(){if(!this._persist||this._writeBlocked)return false;try{const raw=this._get(REGISTRY_KEY);if(raw!==null&&!cleanRegistry(raw)&&!this._copy(raw,'kept','registry'))return false;return this._write(REGISTRY_KEY,JSON.stringify(this.registry));}catch{this._warn();return false;}}
  _avatar(state,profile){if(!state.garden||typeof state.garden!=='object'||Array.isArray(state.garden))state.garden={};if(!avatarIds.includes(state.garden.avatar))state.garden.avatar=profile.avatar;return state;}
  _readState(profile){

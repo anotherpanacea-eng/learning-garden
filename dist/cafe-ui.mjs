@@ -107,7 +107,7 @@ export function cafeNotes(state){
  const x=c.current,o=x?orderFor(c):null,waiting=x&&x.stage!=='served';
  return `<section class="panel cafe-notebook"><h2>Café practice</h2><p>All café play is practice. Plate checks, arithmetic attempts, skips, and support are recorded separately. These notes show what your child tried and what help they used. They are not grades.</p><p><strong>Café story:</strong> ${cafeSupper(c).round===1?'Welcome-back dinner':'Gathering '+cafeSupper(c).round} · ${cafeSupper(c).progress} of 6 tables served${cafeSupper(c).complete?' · Goal complete':''}. Story progress counts served orders, including orders with help; it is separate from mathematical evidence.</p><p>Orchard discoveries: ${c.discoveries?.length||0} of 3. Discoveries record pretend play, not scientific or food knowledge.</p>${waiting?`<div class="cafe-waiting-note"><h3>A guest is waiting: ${esc(o.guest.name)}</h3><p>Current step: ${esc({plate:'make a plate',total:'bites for the table',stock:'cupboard shortfall'}[x.stage]||'preparing')}.</p><p>${x.plateAttempts.length} plate checks recorded so far.</p>${repairNote(x)}${numberNote('For the table',x.total)}${numberNote('Cupboard shortfall',x.shortfall)}<a href="#cafe">Continue this order</a></div>`:x?.recovered?'<p>A recovered saved visit is closed and cannot spend stock again.</p>':''}<p class="tiny">${c.served} served orders in this browser. The latest ${c.history.length} served or skipped orders are listed below, up to 24. These counts describe play, not achievement.</p>${[...c.history].reverse().map(r=>recordNote(c,r)).join('')||'<p>No served or skipped orders yet.</p>'}<a href="#cafe">Return to the café</a></section>`;
 }
-export function bindCafe(state,{save,render,exposeFacts,focus}){
+export function bindCafe(state,{save,render,exposeFacts,focus,onServed}){
  const view=document.querySelector('[data-cafe-view]');if(!view)return;
  const reveal=(selector,fallback)=>{const target=document.querySelector(selector)?selector:fallback||selector;focus(target);document.querySelector(target)?.scrollIntoView({block:['#cafe-plate-editor-title','#cafe-cupboard-title'].includes(target)?'start':'nearest',behavior:'auto'});};
  const redraw=(selector,fallback)=>{save();render();if(selector)reveal(selector,fallback);};
@@ -147,6 +147,6 @@ export function bindCafe(state,{save,render,exposeFacts,focus}){
    redraw('#cafe-help-title');return;
   }
   const actions={check:checkPlate,'skip-stage':skipCafeStage,serve:serveCafe,next:nextGuest,'skip-guest':skipGuest};
-  if(actions[id]){const wasComplete=cafeSupper(state.cafe).complete;actions[id](state);redraw(id==='serve'&&!wasComplete&&cafeSupper(state.cafe).complete?'#cafe-supper-title':id==='check'&&state.cafe.current.stage==='plate'&&!repairQuestion(state)?'[data-cafe-action="check"]':'#cafe-work-title');}
+  if(actions[id]){const wasComplete=cafeSupper(state.cafe).complete;const completed=actions[id](state);if(id==='serve'&&completed)onServed?.();redraw(id==='serve'&&!wasComplete&&cafeSupper(state.cafe).complete?'#cafe-supper-title':id==='check'&&state.cafe.current.stage==='plate'&&!repairQuestion(state)?'[data-cafe-action="check"]':'#cafe-work-title');}
  }));
 }
