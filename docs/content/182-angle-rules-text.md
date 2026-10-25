@@ -160,8 +160,8 @@ Worked example: 1. A right angle, 90°, and 30°. 2. 90 + 30 = 120. 3. 180 − 1
 > Draw one line from corner to corner. A quadrilateral becomes two triangles. So its angles add to 2 × 180° = 360°.
 Worked example: 1. Angles 80°, 100°, 90° and one unknown. 2. 80 + 100 + 90 = 270. 3. 360 − 270 = 90°.
 
-**T11. Any polygon: count the triangles** (A true thing about math)
-> From one corner, draw lines to every other corner. A shape with n sides makes n − 2 triangles. Multiply by 180°.
+**T11. Convex frames: count the triangles** (A true thing about math)
+> These frames have no dents or crossed sides. From one corner, draw diagonals: n sides make n − 2 triangles. Multiply by 180°.
 Worked example: 1. Hexagon: 6 sides. 2. From one corner: 4 triangles. 3. 4 × 180 = 720°.
 
 **T12. Regular shapes and outside angles** (A true thing about math)
@@ -263,7 +263,7 @@ Keeper's note:
 ## Bench (d): Polygon Frames
 
 **Model card** (A made-up model):
-> Frames with 3 to 12 sides. Drag a corner to make the frame irregular; the count of sides and the total stay the same.
+> Frames have 3 to 12 sides, with no dents or crossed sides. Drag a corner; those conditions stay fixed.
 
 **Opening:** Split the frame into triangles from one corner.
 **Buttons:** Pick a corner · Draw a line · Regular / Irregular · Walk the edge
@@ -303,8 +303,10 @@ Keeper's note:
 
 ## Bench (g): Twin Trusses (Keeper's Desk)
 
+**Authoring boundary:** this bench and Set G are deferred until spec 182's exact-geometry contract is reviewed. The following is proposed copy, not a commissioned interaction.
+
 **Model card** (A made-up model):
-> Perfect sticks in whole meters and angles in 5° steps. Real timber bends a little.
+> Perfect straight pieces keep the given lengths and angles exactly. Real timber bends a little.
 
 **Opening:** Three parts are given. Build a truss triangle. Can you build a different one?
 **Buttons:** Add a stick · Set an angle · Swing the side · Try another · Match the letters
@@ -540,7 +542,7 @@ Prompt: A huge twelve-sided frame. Its outside angles add to?
 - B. 1,800° *(tests: mixing up outside angles with the inside total)*
 - C. More than a small frame's, because it's bigger *(tests: angle sum grows with size)*
 Hint: Walk the edge. How far do you turn in all?
-Explanation: Walking round any polygon, you turn once all the way: 360°.
+Explanation: Walking round these convex frames, you turn once all the way: 360°.
 Feedback A: Yes. One full turn, whatever the size or sides.
 Feedback B: 1,800° is the inside total. Outside angles make one turn.
 Feedback C: Size doesn't change the turning. One lap, one full turn.
