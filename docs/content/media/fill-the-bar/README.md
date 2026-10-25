@@ -1,6 +1,6 @@
 # "Fill the Bar": provisional recording
 
-The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studio.md)), written in [films and songs, section 1](../../films-and-songs-2026-10-24.md#1-the-fractions-song-fill-the-bar). Recorded 2026-10-25, ahead of the Rhythm Studio runtime build. Nothing in `dist/` plays it yet. The proposed **Hear the song** button and the exposure rules in section 1 still belong to the reviewed studio build.
+The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studio.md)), written in [films and songs, section 1](../../films-and-songs-2026-10-24.md#1-the-fractions-song-fill-the-bar). Recorded 2026-10-25, ahead of the Rhythm Studio runtime build. **Provisional authoring asset: human music/lyric listening, source/voice rights review and studio integration review remain pending; not release-cleared.** Nothing in `dist/` plays it yet. The proposed **Hear the song** button and the exposure rules in section 1 still belong to the reviewed studio build.
 
 | File | What it is |
 | --- | --- |
@@ -16,7 +16,7 @@ The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studi
 | --- | --- |
 | Intro (0 s) | empty bar, beats counted |
 | Verse 1 (8 s) | whole |
-| Choruses (20 s, 56 s, 104 s) | whole, half, quarter, eighth, two bars each |
+| Choruses (about 20 s, 56 s, 100 s) | whole, half, quarter, eighth, two bars each |
 | Verse 2 (36 s) | half, half |
 | Verse 3 (44 s) | four quarters |
 | Verse 4 (73 s) | eight eighths |
@@ -40,3 +40,9 @@ The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studi
 - The song runs 125 s, against the brief's provisional 90 s.
 
 The runtime build still owns the read-aloud fraction text ("one half", "one quarter") and the accessible labels.
+
+## Review scope, 2026-10-25
+
+Container probe confirms a 125.033-second 1280×720/30fps MP4 with H.264 picture, AAC audio and a mov_text caption track. Root inspected sampled frames for the whole/half/quarter/eighth/rest/mixed arrangements and the final chorus/tag; caption order and lengths are structurally valid. The final chorus begins around 100 seconds (SRT 99.920), not 104. The exact boundary can precede the next frame: sample inside a beat rather than rounding a 30fps frame to a downbeat.
+
+This visual/container review does not establish that every sung word, note onset/duration, accent and rest agrees with the stated grid. The original tempo/zero-offset claims above remain production notes, not independent audio measurements. A human music-content listener must compare the finished mix with the score and bar states before a release claim. Stock voice/model provenance describes how the asset was produced; retain the applicable generation/voice/music rights confirmation before distribution. No runtime integration or new commercial-use assurance is added here.

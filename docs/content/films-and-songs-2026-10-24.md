@@ -16,7 +16,7 @@ Three more rules apply to every piece:
 
 **When to produce it:** these lyrics can be reviewed now. Record it during the reviewed Rhythm Studio runtime build, after a music-content check, so the picture matches the built bar. A proposed **Hear the song** button would play it in the studio and is never needed to play a card.
 
-**Provisional recording (2026-10-25):** [`media/fill-the-bar/`](media/fill-the-bar/README.md) holds a recorded song, captions and an animated bar strip, made ahead of the runtime build. The lyrics below are the ones recorded. Its README lists how it was made and where it differs from this brief. When the studio's bar is built, check the picture against it before wiring up **Hear the song**.
+**Provisional recording (2026-10-25):** [`media/fill-the-bar/`](media/fill-the-bar/README.md) holds a recorded song, captions and an animated bar strip, made ahead of the runtime build. The lyric sheet below preserves the written verse, with the omitted recording lines clearly separated; the SRT is the as-recorded transcript. Its README lists how it was made and where it differs from this brief. When the studio's bar is built, check the picture against it before wiring up **Hear the song**.
 
 ### Production sheet
 
@@ -39,8 +39,8 @@ Three more rules apply to every piece:
 > it hums the whole way through, so slow:
 > one, two, three, four,
 > and then it's done.
-> One whole note fills the bar.
-> Just one.
+
+*Written ending omitted from the provisional recording:* “One whole note fills the bar. Just one.”
 
 *Performance: the count is whispered, one word per beat, over one held bell note. (The recording dropped the last two lines.)*
 
