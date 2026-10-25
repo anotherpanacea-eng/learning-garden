@@ -234,7 +234,7 @@ A storm over the far hills, seen from inside the café. Ember and Puff watch fro
 **Built on:** the spark (spec 163's Switch Table) and the flash-to-boom count (spec 146's Thunder counter), both linked. This bench adds warnings: who sends them, the colors, who decides.
 
 ### Thunder card (True science, Sprout)
-> Thunder is loud. But thunder is only a sound. It can't touch you.
+> Thunder is the sound of lightning. When we hear it, a grown-up follows weather-service guidance.
 
 ### Who decides? card (all depths)
 > Weather services watch storms and send warnings. Grown-ups use those warnings to decide what everyone does.
@@ -391,9 +391,9 @@ Each item: prompt, answer, wrong-choice tags, hint, **I'm stuck** example, expla
 ### Set D: Storm day, calmly
 
 **D1 (Sprout).** What is thunder?
-- Choices: Clouds bumping together (`cloud-bump`) · The sound lightning makes ✓ · Something that can hit you (`thunder-hurts`)
-- Feedback: bumping: "A story people told. Thunder is lightning's sound." Sound: "Yes. Loud, but only a sound." Hit you: "Thunder is only a sound. It can't touch you."
-- Hint: You hear it. You can't touch it.
+- Choices: Clouds bumping together (`cloud-bump`) · The sound lightning makes ✓ · The sound of water flowing (`thunder-water`)
+- Feedback: bumping: "A story people told. Thunder is lightning's sound." Sound: "Yes. It is the sound of lightning." Water: "That is a different sound. Thunder comes from lightning."
+- Hint: Which flash comes with thunder?
 - I'm stuck: A drum makes a boom. The boom is a sound. Thunder is lightning's boom.
 - Explanation: Thunder is the sound lightning makes. It is loud, but it is only a sound.
 

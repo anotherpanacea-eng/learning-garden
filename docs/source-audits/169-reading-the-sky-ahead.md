@@ -65,3 +65,6 @@ Ship and life losses in the 1854 and 1859 storms; FitzRoy's death; Franklin's ki
 ## Image rights
 
 No images are embedded. For the build: Met Office archive images of early Daily Weather Reports (check Crown copyright and the Met Office's reuse terms); NOAA and NASA images (TIROS-1, surface analysis maps) are generally US public domain, with credit; Franklin portraits from museum open-access collections (for example the Smithsonian's National Portrait Gallery open-access items). The valley map and stall are original game art.
+
+
+Review correction (2026-10-25): Remove absolute no-harm/no-touch reassurance. Audible thunder accompanies a lightning hazard; child copy delegates response to a grown-up and official guidance. https://www.cdc.gov/lightning/faq/index.html
