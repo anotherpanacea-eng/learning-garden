@@ -136,3 +136,8 @@ Ordered-rule bridge: [Which test first?, spec216](specs/216-which-test-first.md)
 - **Independent French / CR7:** [Rooms and plans221](specs/221-french-rooms-plans.md) moves from a plan and prepositions to ambiguity, clarification, recent past, near future and a revised message. English meaning and local French speech are optional recorded support; reviewed native recordings remain separate work.
 
 The next curriculum decision should follow a trial of these connected units: where does a learner need a bridge, another whole text, a richer investigation or another language situation? Topic inventories and draft packs inform that choice; their size does not substitute for teaching sequences, subject review or observed use.
+
+
+## Repeatable returns within the first units
+
+[Shared contract222](specs/222-revisiting-subject-units.md) and subject specs[223](specs/223-adaptive-linear-explorations.md),[224](specs/224-changing-stories-and-readers.md),[225](specs/225-adaptive-motion-investigations.md),[226](specs/226-changing-french-errands.md) turn the first units into continuing explorations. Different unknowns revisit linear quantities; new whole stories and readers revisit evidence and revision; changing controlled science cases revisit cause/model/constraint distinctions; fresh French errands revisit spatial and temporal meaning. Suggestions use local structured practice and support records, with open learner overrides. Rereading and familiar cases stay labeled, and free prose is never automatically scored. These returns deepen the bounded first units; the all-strand endpoints and missing bridges above remain the course-completion work.

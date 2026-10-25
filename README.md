@@ -108,6 +108,10 @@ node test/broad-model-checks.mjs
 node test/explorer-storage-checks.mjs
 node test/plantings-and-speech-checks.mjs
 node test/subject-pathway-exposure-checks.mjs
+node test/adaptive-linear-checks.mjs
+node test/adaptive-evidence-checks.mjs
+node test/adaptive-motion-checks.mjs
+node test/adaptive-french-checks.mjs
 node test/pathway-entry-checks.mjs
 node test/linear-pathway-checks.mjs
 node test/evidence-voice-checks.mjs
@@ -566,3 +570,13 @@ Which test first? (`#post/sorting/order`) adds three separate requests to Sortin
 Four open short units extend the advanced pathway: signed rates and linear equations (`#learn/math`, six lessons); a whole original story, evidence and reader-directed revision (`#learn/english`, five lessons); forces, collision evidence and a revised design (`#learn/science`, five lessons); and French rooms, directions and recent/next actions (`#learn/french`, four lessons). These are bounded supported teaching sequences, not completed courses or placement tests. Writing is human-read and ungraded. Optional French meanings and device-local speech are support, not independent listening evidence.
 
 See [specs217–221](docs/specs/217-subject-pathway-entry.md), the [current roadmap](docs/roadmap.md#current-subject-pathway-delivery) and [course routes](docs/course-routes.md#first-connected-subject-units--2026-10-25-delivery). Run the corresponding `test/{pathway-entry,linear-pathway,evidence-voice,motion-evidence,french-rooms}-checks.mjs` suites and matching Python browser journeys. Use synthetic work only. The owning PR records exact-candidate review and deployment verification.
+
+
+### Keep exploring in each subject
+
+Each new subject unit offers another investigation, story or mission, with open challenge choices and a modest suggestion from that explorer’s recent structured practice. Math changes quantities and unknowns; English adds complete original stories and readers; science changes controlled cases and constraints; French changes locations, errands and messages. Sources freeze on creation, so a waiting case and its writing survive changes to the authoring code. Rereading is labeled and original writing remains human-read. There is no global level, automatic prose grade or remote generation.
+
+See [the continuing-exploration contract](docs/specs/222-revisiting-subject-units.md) and its four owning specs. Saved generated visits can be resumed or explicitly selected and confirmed for removal; no old work is silently evicted. Notebook download/import remains the existing recovery path. The owning PR records review and release verification.
+
+
+Adaptive journeys use `test/adaptive-{linear,evidence,motion,french}-browser.py` against the real static app at320/820. Set `LINEAR_TEST_URL`, `ENGLISH_TEST_URL` or `SUBJECT_TEST_URL` for the desired origin; corresponding `*_ARTIFACTS` variables select synthetic screenshot output. Keep original unit/entry/integration journeys in release verification too. These checks establish interaction and saved-record behavior, not physical-device or learning outcomes.

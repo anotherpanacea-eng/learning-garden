@@ -148,3 +148,8 @@ Whole-batch gathering trays (spec 50) refresh Jane `d4903954d7c4d8118cbd1d2f7ed7
 ## Paris saved reading pages
 
 [Spec 73](specs/73-paris-saved-visit-source.md) refreshes Jane's publisher, engine and licensing at `d4903954d7c4d8118cbd1d2f7ed770544fd4ac81`, and Marble's topic file at `a8719737ff86ef7940ba5feca11940de1204103e`. Jane's supplied task shape and explicit legacy completion records inform preservation; the inspected completion snapshot does not preserve the complete Paris passage/helper context. Reuse the existing pack compiler and an original visit-source copy, without new upstream code/content, mastery gates or remote progress. The existing partial story-sequence anchor still leaves retelling, central message and broader nonfiction relations unobserved. No new atlas reference or source pin is added.
+
+
+## Adaptive subject returns · 2026-10-25
+
+Specs222–226 refresh Jane `286300f822944b8c039d5ea8d483a6cb52759f51` (LESSONS, engine, stuck support and licensing) and Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (complete relevant topic descriptions and direct edges). Owning specs record the narrow math, evidence/perspective, forces and spatial-language records studied. Stable supplied work, different examples and review invitations inform original bounded generators and authored stories. Jane’s grading, mastery/reward and remote learner machinery are not adopted. English preposition records do not establish French proficiency. No new upstream code, lesson prose, assets, runtime taxonomy mapping or pin/license change is incorporated.
