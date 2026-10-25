@@ -409,10 +409,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Dot learned it from others. Secondhand, and still useful.
 
 **A3 (Seedling, sort).** Put each card in a tray: firsthand or secondhand.
-- Cards: a diary by someone who saw the fire, written that day · a textbook page written years later · a letter from someone who saw the flood · a news report written from phone calls · a biography of a sailor from long ago · an autobiography about the writer's own life
+- Cards: a diary by someone who saw the fire, written that day · a textbook page by a writer born years later, who used old records · a letter from someone who saw the flood · a news report by a writer who wasn't there, written from phone calls · a biography of a sailor, written from her letters by someone born later · an autobiography about the writer's own life
 - Answer: firsthand: the diary by someone who saw the fire, the letter from someone who saw the flood, the autobiography. Secondhand: textbook page, news report from phone calls, biography.
 - Hint: For each one, ask: was this writer there?
-- Explanation: Each firsthand card says the writer saw it or lived it. A diary or letter alone doesn't prove that.
+- Explanation: Each card says whether its writer saw it. The kind of paper alone doesn't decide.
 
 **A4 (Seedling).**
 - Prompt: Which words show the writer was there?

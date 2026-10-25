@@ -502,10 +502,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Evidence must fit the point, not just be true.
 
 **D3 (Sapling; after page 4 comes free).**
-- Prompt: Which sentence in "Just a bad storm" sounds sure but is not checked yet?
+- Records on the desk (shown first, A story from Willowbank): **Vadoalto's rain record**, kept for forty years: "That storm night had the most rain in all forty years." **The town's market book**: "Orchard apples sold at market every year it lists."
+- Prompt: Which sentence in "Just a bad storm" has no record on the desk to check it?
 - Choices: "The storm brought more rain in one night than anyone could remember." (`checked-seen-as-unchecked`) · "The orchard has fed Willowbank for as long as anyone can recall." (`checked-seen-as-unchecked`) · "No marsh could have soaked up all that water." ✔
-- Feedback: More rain: The town's weather log already records that night. · The orchard: The town's records already show that.
-- Hint: Which one could be tested, but no record has tested it?
+- Feedback: More rain: The rain record backs it: the most in forty years. · The orchard: The market book backs it: apples every year.
+- Hint: Match each sentence to a record. Which one has none?
 - Explanation: Nobody measured what a marsh would have held that night. It is a claim records could test, not a checked fact.
 
 **D4 (Keeper's Desk; after page 4 comes free).**
