@@ -49,7 +49,7 @@ Read aloud as "three dollars and five cents". Never "three point five". Under on
 >
 > "Three dollars and fifty," says the baker. "Obviously."
 >
-> "Cents always get two places," says {guide}. "Five cents is $3.05. Fifty cents is $3.50."
+> "Cents always get two places," says {guide}. "Three dollars and five cents is $3.05. Three dollars and fifty cents is $3.50."
 >
 > The baker rubs out the tag and writes **$3.50**. Then Ember arrives with a fistful of pennies for a honey cake.
 >

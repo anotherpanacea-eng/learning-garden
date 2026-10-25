@@ -26,7 +26,7 @@ One shared scene per chapter; any job is a whole contribution; nothing locks a s
 
 ## The knowledge
 
-**Notation.** 100 cents (¢) make 1 dollar ($). An amount can be written $3.05, 305¢ or 3 dollars and 5 cents, all the same money. After the point come exactly two places, and they are cents: $3.05 is 5 cents and $3.50 is 50. Under a dollar, 75¢ or $0.75. Never both signs on one amount ($0.75¢ and $1.50¢ appear only as labeled tags to fix). Read aloud place-value-honestly: "three dollars and five cents" (never "three point five"). Bills $1, $5, $10, $20 and coins 1¢, 5¢, 10¢, 25¢; size and count never decide value.
+**Notation.** 100 cents (¢) make 1 dollar ($). An amount can be written $3.05, 305¢ or 3 dollars and 5 cents, all the same money. After the point come exactly two places for cents: $3.05 is 3 dollars and 5 cents; $3.50 is 3 dollars and 50 cents. Under a dollar, 75¢ or $0.75. Never both signs on one amount ($0.75¢ and $1.50¢ appear only as labeled tags to fix). Read aloud place-value-honestly: "three dollars and five cents" (never "three point five"). Bills $1, $5, $10, $20 and coins 1¢, 5¢, 10¢, 25¢; size and count never decide value.
 
 **Adding and subtracting money.** Add cents, add dollars; when cents reach 100 or more, trade 100¢ for $1 ($2.65 + $1.85: 150¢ = $1.50, plus $3, total $4.50). Treat each price as one amount; never carry three digits after the point. "How much more?" is a gap found by counting up ($2.40 to $3.05: 10¢ + 50¢ + 5¢ = 65¢), the same structure as change.
 
