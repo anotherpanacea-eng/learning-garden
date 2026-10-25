@@ -103,7 +103,7 @@ Sprout items use no digits. Twenty-four 3-choice items put the right answer at A
 
 ## Saved work
 
-**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+**Frozen source and capacity contract (required before build).** On the first explicit action in an owned bench, freeze all its authored cases: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus the selected configuration. That complete value is the bench's working `source`; a pack/version label or id alone is insufficient. The sketches below have one waiting/current state per bench, not multiple working versions. A catalog revision never changes that waiting bench or any old record. Every newly kept record and retained response carries its own direct complete `source` snapshot copied from the working bench at the time of that record; it never points back to the shared working slot. New kept records continue to use that bench's frozen cases, not today's catalog. No source registry or implicit source refresh is introduced. Rendering, previews, notes and suggestion reads are pure; resuming/importing never rebuilds source, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
 
 Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
 
@@ -112,15 +112,14 @@ Optional root `bodySignals` per explorer, absent until a first explicit action. 
 ```
 bodySignals: {
   version: 1,
-  source: { pack: 'body-signals', version: 1, authored }, // complete authored source copy defined above
-  tags: { [boneId]: { job: 'support'|'protection'|'movement' } },
-  steady: { kept: [{ id, events: ['supper'|'walk'], steps: number, level: number, at }] },  // capacity 8; refuse if full; never evict; level 0-100
-  sprint: { kept: [{ id, paces: ['rest'|'walk'|'jog'|'sprint'], lactic: number, at }] },     // capacity 8; refuse if full; never evict; paces max 20; lactic 0-20
+  tags: { source, placed: { [boneId]: { source, job: 'support'|'protection'|'movement' } } } | null,
+  steady: { source, kept: [{ id, source, events: ['supper'|'walk'], steps: number, level: number, at }] },  // capacity 8; refuse if full; never evict; level 0-100
+  sprint: { source, kept: [{ id, source, paces: ['rest'|'walk'|'jog'|'sprint'], lactic: number, at }] },     // capacity 8; refuse if full; never evict; paces max 20; lactic 0-20
   answers: { [itemId]: { source, choice | value | order, support: ['hint'|'example'|'skip'], at } }
 }
 ```
 
-- Codes and numbers only, never prose; no free-text field. Validate ids, counts and ranges; never recompute or regrade saved results on load. An unreadable entry stays raw and exportable while everything else stays open.
+- Every `source` in the sketch is a complete authored value, including text, as defined above. Only learner response payloads are restricted to bounded codes, ids, numbers and the declared structured selections or placements; no free-form learner prose is collected. Spoken *say why* responses are not stored. Validate ids, counts and ranges; never recompute or regrade saved results on load. An unreadable entry stays raw and exportable while everything else stays open.
 - **No body data:** no field for the explorer's senses, bones, pulse, breath, temperature, sugar, food, feelings or anything about their body. A builder must not add one.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and switching are shared. The relay's practice thickness is not saved; it resets each visit.
 
@@ -138,7 +137,7 @@ bodySignals: {
 | Supported practice | Guided items with visible steps; the ladder; route and relay animations; the dial and bar readouts. |
 | New application | The mill pond twin; the giraffe count; the bile cube problem; the token problem; the yeast jar. |
 | Purposeful revisit | 148 (the food tube, the fold-out book), 159 (three jobs, the relay, the Traveler), 162 (the eye), 174 (aerobic equation, the temperature dial, Pip panting), 146 (Dot's bell), 145 (the baker's window). |
-| Data boundary | Tags, kept runs, choices and support codes, all local. No timing, free text, location, perception or body data. |
+| Learner-response boundary | Tags, kept runs, choices and support codes, all local. No timing, free-form learner prose, location, perception or body data. |
 
 ## Upstream check
 

@@ -101,7 +101,7 @@ Sprout items carry no digits. Right answers among the 25 three-choice items: **A
 
 ## Saved work
 
-**Frozen source and capacity contract (required before build).** On the first explicit action, freeze the complete authored source used by the selected run or visit: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus any selected configuration. Pack/version labels or ids alone are not the source. Rendering, previews, notes and suggestion reads are pure; resuming/importing uses this saved source and never rebuilds it from today's catalog, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
+**Frozen source and capacity contract (required before build).** On the first explicit action in an owned bench, freeze all its authored cases: teaching and worked examples, task prompts, ordered choices and keys, feedback, hint/example text, model tables, assumptions and rules, plus the selected configuration. That complete value is the bench's working `source`; a pack/version label or id alone is insufficient. The sketches below have one waiting/current state per bench, not multiple working versions. A catalog revision never changes that waiting bench or any old record. Every newly kept record and retained response carries its own direct complete `source` snapshot copied from the working bench at the time of that record; it never points back to the shared working slot. New kept records continue to use that bench's frozen cases, not today's catalog. No source registry or implicit source refresh is introduced. Rendering, previews, notes and suggestion reads are pure; resuming/importing never rebuilds source, regrades saved outcomes or requires today's item counts. Keep malformed siblings raw and exportable while readable work stays open.
 
 Each retained run or visit has a bounded stable local id. The list capacities below are refusal limits, not rolling windows: never silently evict, trim or overwrite already-kept work. Before any write, test the whole candidate against shared recovery limits and the actual pretty-notes-report `prepareProgressImport` preflight; on refusal leave all roots unchanged and keep any unsaved visible input. Offer the existing notes download, then allow selection of a removable retained run/visit and a separate confirmation naming it and warning that its source and kept work will be removed. Cancellation writes nothing; remove exactly the confirmed selection, protect fixed teaching and unrelated work, and commit only this subject root after successful preflight. Downloading does not itself authorize removal. No second backup system, mastery claim or automatic history loss is introduced.
 
@@ -115,12 +115,12 @@ deeptime: {
   clock: { source, shelf: { [thingId]: clockId }, at } | null,
   board: { source, clash: choiceId | null, at } | null,
   peas: { source, cross: [genotypeId, genotypeId] | null, sides: { for: [chipId], against: [chipId] }, at } | null,
-  race: { source, kept: [{ id, change: 1..3, adapt: 1..2, lostAt: 1..10 | null, at }] },   // capacity 6; refuse if full; never evict
+  race: { source, kept: [{ id, source, change: 1..3, adapt: 1..2, lostAt: 1..10 | null, at }] },   // capacity 6; refuse if full; never evict
   answers: { [itemId]: { source, choice | value | order | strand, support: ['hint'|'example'|'skip'], at } }
 }
 ```
 
-- `source` freezes the model version, rule and each item's choices and order. Codes, small integers and enum ids only, never prose; *say why* is not stored.
+- Every `source` in the sketch is a complete authored value, including text, as defined above. Only learner response payloads are restricted to bounded codes, ids, numbers and the declared structured selections or placements; no free-form learner prose is collected. Spoken *say why* responses are not stored.
 - Validate ids, ranges (change 1-3, adapt 1-2, lostAt 1-10 or null) and lengths. Traces, spins, bead taps, letter changes and the fixed claim counts are exploration or fixed model output and are not saved (cut in review). Never recompute kept results on load (a kept `lostAt` is shown as kept). An unreadable entry stays raw and exportable while everything else stays open.
 - Support codes stay separate from answers; no mastery flag. Writes preflight through `prepareProgressImport`; export, import, reset and explorer switching are shared. No field holds anything about the child.
 
@@ -138,7 +138,7 @@ deeptime: {
 | Supported practice | Guided items with visible steps; the ladder; trace highlighting; the bead counter; "lines that agree" counts; single-allele headers. |
 | New application | Add a fossil; the Pompeii argon check; the clash card; Nuria's peaches; the melomys; the bucardo argument board. |
 | Purposeful revisit | 139's superposition; 142's birds as dinosaurs; 161's peppered moth and natural selection; 173's coprolites and five extinctions; 175's zoom and Photo 51; 166's bucardo; 157's Pompeii loaf; the Long Line (133). |
-| Data boundary | Bench settings, kept runs, choices and support codes, all local. No free text, body, family, health or location data. No human inheritance examples. |
+| Learner-response boundary | Bench settings, kept runs, choices and support codes, all local. No free-form learner prose, body, family, health or location data. No human inheritance examples. |
 
 ## Upstream check
 
