@@ -236,9 +236,9 @@ Each item: prompt; choices (✓ marks the right one); misconception tags on wron
 **1.1 (Sprout)** Were dinosaurs real animals?
 - a) No, they are made up, like dragons. `dragon-real` · Feedback: We find real dinosaur bones and footprints. Dragons are stories.
 - b) ✓ Yes, we find their fossils. · Feedback: Yes. Their bones, teeth and footprints turned to stone.
-- c) Yes, and some still walk about. `extinct-hiding` · Feedback: The big dinosaurs are all gone. None are hiding anywhere.
+- c) Yes, and living Tyrannosaurus hide nearby. `extinct-hiding` · Feedback: Tyrannosaurus is extinct; none are hiding nearby. Birds are living dinosaurs.
 - Hint: What do we find in rocks?
-- Explanation: Dinosaurs were real. We know because we find their fossils. Extinct means none are left alive anywhere.
+- Explanation: Non-bird dinosaurs such as Tyrannosaurus were real, and are extinct. We know them from fossils. Birds are living dinosaurs.
 
 **1.2 (Sprout)** Did people live with the big dinosaurs?
 - a) ✓ No. The big dinosaurs were gone long before. · Feedback: Yes. There was a huge gap of time.

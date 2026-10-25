@@ -139,7 +139,7 @@ Each card is 30 words or fewer. Worked examples reveal one step per tap.
 
 **Teach 2:** The Sun looks like it moves across the sky. That's because we turn. "Sunrise" is a name for how it looks.
 
-**What if the Sun went round?** In this toggle, the lamp circles the still globe. "From Willowbank, this looks the same. So how do we know which is true?" (Answer card: Other evidence, like Galileo's moons and the January distance, fits a turning Earth going round the Sun.)
+**What if the Sun went round?** In this toggle, the lamp circles the still globe. "From Willowbank, this looks the same. So how do we know which is true?" (Answer card: This ground view alone cannot decide. Other evidence is needed. Jupiter's moons show that not everything circles Earth; the January distance helps test the seasons explanation, not Earth's daily spin.)
 
 **Teach 3:** Earth also travels all the way round the Sun. One trip takes about 365 days. That's a year. Spin makes the day. Orbit makes the year.
 
