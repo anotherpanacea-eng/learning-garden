@@ -1,7 +1,7 @@
 // Drawn how-tos in Chrome: play once, step, pause, reduced motion, layout and no saved changes. Synthetic notebooks only.
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),{pathToFileURL}=require('node:url');
 (async()=>{const root=path.resolve(__dirname,'..'),load=f=>import(pathToFileURL(path.join(root,'dist',f)).href);
- const {freshState}=await load('core.mjs'),{initializeExplorerState}=await load('progress-transfer.mjs'),{lifeCases}=await load('life-stages-content.mjs'),{startLife}=await load('life-stages-core.mjs'),{drawnHowto}=await load('drawn-howtos-content.mjs');
+ const {drawnHowtos}=await load('drawn-howtos-content.mjs'),{freshState}=await load('core.mjs'),{initializeExplorerState}=await load('progress-transfer.mjs'),{lifeCases}=await load('life-stages-content.mjs'),{startLife}=await load('life-stages-core.mjs'),{drawnHowto}=await load('drawn-howtos-content.mjs');
  const pw=await import(process.env.PLAYWRIGHT_MODULE||'playwright'),{chromium}=pw.default||pw,browser=await chromium.launch({headless:true,...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{})});
  const origin=process.env.HOWTO_TEST_URL||'http://127.0.0.1:4213/',art=process.env.HOWTO_ARTIFACTS,contexts=[],errors=[];let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;};if(art)await fs.mkdir(art,{recursive:true});
  const seed=()=>{const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;startLife(s,lifeCases[0].id);return s;};
@@ -16,7 +16,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
  try{for(const [id,hash,prepare] of pages){const h=drawnHowto(id),last=h.steps.length;
   for(const width of [320,820]){const label=`${id} at ${width}`,p=await setup(width,hash);await prepare(p);const before=await notebook(p);
    eq(await p.locator('drawn-howto .dh-open').innerText(),h.button,`${label}: button names the how-to`);eq(await p.locator('.dh-panel').count(),0,`${label}: nothing opens by itself`);
-   await p.locator('.dh-open').click();let v=await view(p);eq([v.caption,v.count,v.toggle,v.backOff,v.shown],[h.steps[0].caption,`Step 1 of ${last}`,'Pause',true,1],`${label}: opening plays step one`);ok(v.running>0,`${label}: step one is drawing`);ok(await focused(p,'[data-dh="toggle"]'),`${label}: focus lands on Pause`);
+   await p.locator('.dh-open').click();await p.locator('.dh-panel').waitFor();let v=await view(p);eq([v.caption,v.count,v.toggle,v.backOff,v.shown],[h.steps[0].caption,`Step 1 of ${last}`,'Pause',true,1],`${label}: opening plays step one`);ok(v.running>0,`${label}: step one is drawing`);ok(await focused(p,'[data-dh="toggle"]'),`${label}: focus lands on Pause`);
    eq(await p.locator('.dh-picture').getAttribute('role'),'img',`${label}: picture role`);eq(await p.locator('.dh-picture').getAttribute('aria-label'),h.alt,`${label}: whole-picture description`);eq(await p.locator('.dh-caption').getAttribute('aria-live'),'polite',`${label}: captions announced`);
    if(width===320){// Pause holds the picture; Play resumes it.
     await p.locator('[data-dh="toggle"]').click();const paused=await view(p);eq([paused.toggle,paused.running],['Play',0],`${label}: Pause stops drawing`);await p.waitForTimeout(2500);eq((await view(p)).caption,paused.caption,`${label}: a paused drawing stays put`);await p.locator('[data-dh="toggle"]').click();eq((await view(p)).toggle,'Pause',`${label}: Play resumes`);}
@@ -30,10 +30,20 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
    await p.locator('[data-dh="again"]').click();v=await view(p);eq([v.caption,v.shown,v.toggle],[h.steps[0].caption,1,'Pause'],`${label}: Watch again plays from step one`);
    await p.locator('[data-dh="close"]').click();eq(await p.locator('.dh-panel').count(),0,`${label}: Close removes the panel`);ok(await focused(p,'.dh-open'),`${label}: focus returns to the button`);eq(await p.evaluate(()=>document.getAnimations().length),0,`${label}: no drawing left running`);
    eq(await notebook(p),before,`${label}: watching saves nothing`);
-   await p.locator('.dh-open').click();await p.evaluate(()=>location.hash='#home');await p.waitForTimeout(2600);eq(await p.locator('drawn-howto').count(),0,`${label}: leaving mid-play removes the drawing`);await p.close();}
+   await p.locator('.dh-open').click();await p.locator('.dh-panel').waitFor();await p.evaluate(()=>location.hash='#home');await p.waitForTimeout(2600);eq(await p.locator('drawn-howto').count(),0,`${label}: leaving mid-play removes the drawing`);await p.close();}
   // Reduced motion: nothing plays; each step appears whole.
-  const p=await setup(820,hash,'reduce');await prepare(p);await p.locator('.dh-open').click();let v=await view(p);eq([v.caption,v.toggle,v.running,v.shown],[h.steps[0].caption,'Play',0,1],`${id} reduced: opens on a complete first step`);ok(await focused(p,'[data-dh="next"]'),`${id} reduced: focus on Next`);
+  const p=await setup(820,hash,'reduce');await prepare(p);await p.locator('.dh-open').click();await p.locator('.dh-panel').waitFor();let v=await view(p);eq([v.caption,v.toggle,v.running,v.shown],[h.steps[0].caption,'Play',0,1],`${id} reduced: opens on a complete first step`);ok(await focused(p,'[data-dh="next"]'),`${id} reduced: focus on Next`);
   await p.locator('[data-dh="next"]').click();v=await view(p);eq([v.caption,v.running,v.shown],[h.steps[1].caption,0,2],`${id} reduced: Next shows the step whole`);await p.close();}
-  eq(errors,[],'no Chrome errors');console.log(`Drawn how-tos Chrome: ${n} assertions passed at 320/820 and with reduced motion.`);
+  // Every other activity page offers its how-to just after the heading; it opens, steps to the end and saves nothing.
+  const sample={'orchard/gather/*':'orchard/gather/dew-drop','field/*':'field/walk','checkin/*':'checkin/number','wonder/*':'wonder/many-rectangles'};
+  for(const h of drawnHowtos.filter(h=>h.at)){const page=sample[h.at[0]]||h.at[0],label=`${h.id} on #${page}`,p=await setup(320,'#'+page,'reduce');
+   eq(await p.locator('drawn-howto').count(),1,`${label}: one how-to`);
+   ok(await p.evaluate(()=>{const t=document.querySelector('main h1'),e=document.querySelector('drawn-howto');return !!(t.compareDocumentPosition(e)&Node.DOCUMENT_POSITION_FOLLOWING);}),`${label}: placed after the page title`);
+   const before=await notebook(p);await p.locator('.dh-open').click();await p.locator('.dh-picture').waitFor();
+   for(let i=1;i<h.steps.length;i++)await p.locator('[data-dh="next"]').click();
+   eq(await p.locator('.dh-all li').allTextContents(),h.steps.map(s=>s.caption),`${label}: every caption listed at the end`);
+   ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${label}: no horizontal overflow`);
+   await p.locator('[data-dh="close"]').click();eq(await notebook(p),before,`${label}: watching saves nothing`);await p.close();}
+  eq(errors,[],'no Chrome errors');console.log(`Drawn how-tos Chrome: ${n} assertions passed at 320/820, with reduced motion, and on every activity page.`);
  }finally{for(const c of contexts)await c.close();await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

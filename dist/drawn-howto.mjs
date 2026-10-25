@@ -1,7 +1,7 @@
 // Drawn how-tos: a short pencil drawing that plays through once, then can be stepped with Back and Next.
 // Watching records nothing. Pages include drawnHowtoTag(id); the element builds and cleans up itself.
-import {drawnHowto} from './drawn-howtos-content.mjs';
-import {drawnArt} from './drawn-howtos-art.mjs';
+// Each picture is a small module of its own, fetched the first time its how-to opens.
+import {drawnHowto,howtoForPage} from './drawn-howtos-content.mjs';
 
 export const REST_MS=650;
 // Each step draws in one to two seconds, scaled by how much pencil it uses.
@@ -23,19 +23,29 @@ export function howtoNext(s,action,count){
  }
 }
 
-export const drawnHowtoTag=id=>drawnHowto(id)&&drawnArt[id]?`<drawn-howto data-how="${id}"></drawn-howto>`:'';
+export const loadArt=id=>import(`./drawn-howtos/${id}.mjs`).then(m=>m.default);
+export const drawnHowtoTag=id=>drawnHowto(id)?`<drawn-howto data-how="${id}"></drawn-howto>`:'';
+// Pages without their own tag get their how-to just after the page heading.
+export function offerHowto(main,hash){const h=howtoForPage(hash),title=main.querySelector('h1');if(!h||!title||main.querySelector('drawn-howto'))return;
+ const box=title.parentElement,isHeading=box!==main&&(box.tagName==='HEADER'||/heading/.test(box.className));
+ const after=isHeading?box:title.nextElementSibling?.tagName==='P'?title.nextElementSibling:title;after.insertAdjacentHTML('afterend',drawnHowtoTag(h.id));}
+// Some benches redraw their own part of the page; offer the how-to again if a redraw removed it.
+export function keepOfferingHowto(main,page){let queued=false;new MutationObserver(()=>{if(queued)return;queued=true;queueMicrotask(()=>{queued=false;offerHowto(main,page());});}).observe(main,{childList:true,subtree:true});}
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const reducedMotion=()=>typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function picture(h,a){return `<svg class="dh-picture" viewBox="-6 -6 ${a.width+12} ${a.height+12}" role="img" aria-label="${esc(h.alt)}">${a.steps.map((step,i)=>`<g data-dh-step="${i}" visibility="hidden">${step.map(([kind,d,len])=>kind[0]==='w'||kind==='bg'?`<path class="dh-${kind}" d="${d}"/>`:`<path class="dh-${kind}" d="${d}" data-len="${len}"/>`).join('')}</g>`).join('')}</svg>`;}
+function picture(h,a){return `<svg class="dh-picture" viewBox="-6 -6 ${a.width+12} ${a.height+12}" style="max-width:${Math.round((a.width+12)*1.25)}px" role="img" aria-label="${esc(h.alt)}">${a.steps.map((step,i)=>`<g data-dh-step="${i}" visibility="hidden">${step.map(([kind,d,len])=>kind[0]==='w'||kind==='bg'?`<path class="dh-${kind}" d="${d}"/>`:`<path class="dh-${kind}" d="${d}" data-len="${len}"/>`).join('')}</g>`).join('')}</svg>`;}
 
 const Base=typeof HTMLElement==='undefined'?class{}:HTMLElement;
 class DrawnHowto extends Base{
- connectedCallback(){if(this.ready)return;this.ready=true;const h=drawnHowto(this.dataset.how);if(!h||!drawnArt[h.id])return;this.how=h;this.art=drawnArt[h.id];this.token=0;this.anims=[];
+ connectedCallback(){if(this.ready)return;this.ready=true;const h=drawnHowto(this.dataset.how);if(!h)return;this.how=h;this.token=0;this.anims=[];
   this.innerHTML=`<button type="button" class="soft-button dh-open" aria-expanded="false">${esc(h.button)}</button>`;
-  this.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!this.contains(b))return;if(b.classList.contains('dh-open'))this.open();else if(b.dataset.dh)this.act(b.dataset.dh);});}
+  this.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!this.contains(b))return;if(b.classList.contains('dh-open'))this.load();else if(b.dataset.dh)this.act(b.dataset.dh);});}
  disconnectedCallback(){this.stop();}
  stop(){clearTimeout(this.rest);this.rest=null;this.token++;for(const a of this.anims||[])a.cancel();this.anims=[];}
+ // A failed fetch leaves the button in place to try again.
+ load(){const b=this.querySelector('.dh-open');if(this.art)return this.open();if(b.getAttribute('aria-busy'))return;b.setAttribute('aria-busy','true');
+  loadArt(this.how.id).then(art=>{b.removeAttribute('aria-busy');if(!this.isConnected)return;this.art=art;this.open();},()=>b.removeAttribute('aria-busy'));}
  open(){const h=this.how,openButton=this.querySelector('.dh-open');openButton.hidden=true;openButton.setAttribute('aria-expanded','true');
   this.insertAdjacentHTML('beforeend',`<div class="dh-panel" role="group" aria-label="${esc(h.title)}">${picture(h,this.art)}<p class="dh-caption" aria-live="polite"></p><div class="dh-controls"><button type="button" data-dh="back">Back</button><button type="button" data-dh="toggle"></button><button type="button" data-dh="next">Next</button><span class="dh-count"></span></div><ol class="dh-all" hidden>${h.steps.map(s=>`<li>${esc(s.caption)}</li>`).join('')}</ol><div class="dh-controls"><button type="button" data-dh="again">Watch again</button><button type="button" data-dh="close">Close</button></div></div>`);
   this.state=howtoNext({reduced:reducedMotion()},'open',h.steps.length);this.show(true);this.querySelector(this.state.reduced?'[data-dh="next"]':'[data-dh="toggle"]').focus();}

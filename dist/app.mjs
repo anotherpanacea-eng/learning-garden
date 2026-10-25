@@ -1,4 +1,5 @@
 import {rowsPage,rowsNotes,bindRows,resetRowsVisit} from './ribbon-rows-ui.mjs';
+import {offerHowto,keepOfferingHowto} from './drawn-howto.mjs';
 import {shuttersPage,shuttersNotes,bindShutters,resetShuttersVisit} from './shutters-ui.mjs';
 import {pilePage,pileEntry,pileNotes,bindPile,resetPileVisit} from './seed-pile-ui.mjs';
 import {startingInvitation,startingNotesLink,startingFlowPage,bindStartingFlow,resetStartingFlow} from './starting-flow-ui.mjs';
@@ -126,6 +127,7 @@ let browserStorage;try{browserStorage=localStorage;}catch{}
 const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
+keepOfferingHowto(main,()=>choosingExplorer?'':location.hash);
 let needsExplorerInitialization=location.hash==='#begin'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
@@ -282,7 +284,7 @@ function render(){
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
     $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
-    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):startingFlowPage(state,explorerStore.active.id);
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):startingFlowPage(state,explorerStore.active.id);if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindStartingFlow({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}
     return;
@@ -292,7 +294,7 @@ function render(){
     if(choosingExplorer)resetUnits();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#cafe'?'page':'false'));
-    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):unitsPage(state,explorerStore.active.id,{...pavingOptions(),save});
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):unitsPage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindUnits({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,focus:focusElement,...pavingOptions()});bindSpeech();}return;
   }
   resetUnits();
@@ -300,7 +302,7 @@ function render(){
     if(choosingExplorer)resetShadow();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#loft'?'page':'false'));
-    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):shadowPage(explorerStore.active.id,state);
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):shadowPage(explorerStore.active.id,state);if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();
     if(choosingExplorer)bindExplorers();else {$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindShadow({explorerId:()=>explorerStore.active.id,notebookState:()=>state,focus:focusElement});bindSpeech();}
     return;
@@ -312,7 +314,7 @@ function render(){
    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
-   main.innerHTML=scalePage(state,explorerStore.active.id,{...pavingOptions(),save});
+   main.innerHTML=scalePage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
    updateStorageNotice();bindExplorers();
    bindScale({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,...pavingOptions()});
    bindSpeech();return;
@@ -423,7 +425,7 @@ function render(){
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
-  main.innerHTML=(state.broad?.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;
+  main.innerHTML=(state.broad?.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;if(!choosingExplorer)offerHowto(main,location.hash);
   bindEgyptPhotoFallback(main);
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
   updateStorageNotice();bind();

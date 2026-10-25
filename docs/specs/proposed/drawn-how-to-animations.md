@@ -1,6 +1,6 @@
 # Drawn how-tos: short pencil-drawn animations for instructions
 
-Status: **proposal with a first build** (2026-10-24). Unnumbered: the builder assigns a spec number. The owner asked for the first three drawn how-tos to be built from this draft; they are in the same PR (see "First build" below). Independent Codex and Claude review of the spec and the build is still needed. Roadmap fit: priority 3 (clear instruction text and graphics) and the "short how-to demonstrations" row of the [film timing table](../../roadmap.md#films-and-songs-when-each-is-needed) under priority 5.
+Status: **proposal with a first build** (2026-10-24). Unnumbered: the builder assigns a spec number. The owner asked for the first three drawn how-tos to be built from this draft, then for one on every activity so far; both are in the same PR (see "First build" and "Every activity" below). Independent Codex and Claude review of the spec and the build is still needed. Roadmap fit: priority 3 (clear instruction text and graphics) and the "short how-to demonstrations" row of the [film timing table](../../roadmap.md#films-and-songs-when-each-is-needed) under priority 5.
 
 ## Purpose
 
@@ -141,3 +141,13 @@ The owner asked for the first three to be built. What shipped, and where it diff
 - **Themes.** The game has one light theme, so the pencil colors use its tokens and no dark palette was added.
 - **Checks.** `test/drawn-howtos-checks.mjs` covers content limits, the generated art and the playback rules. `test/drawn-howtos-browser.js` covers play-through timing, Pause, Back, Next, Watch again, Close, focus, reduced motion, leaving mid-play, 44 px targets, no overflow and no saved change at 320 and 820 px. The existing Shutters, Ribbon Rows, three-row and life-stages browser checks still pass.
 
+## Every activity (2026-10-25)
+
+The owner then asked for drawn how-tos on all the activities so far. There are now 83: the three above, plus 80 offered by the pages themselves.
+
+- **Which pages.** Every page where a child does something has one: each café, post, loft, workshop, number, living, water and field bench, the orchard and its gathering trips, Seed Pile, the stories, Paris and French, the Word Garden, riddles, the archive and label maker, the Bell Studio, the multiplication garden, the shared question pages (garden walks, adventures, practice, puzzles) and the open wonders. Hubs and lists (home, Explore, the map, the Number Garden home, companions, the starting flow) have none. Pages that share one rule share one drawing: both instruction desks, both message desks, both letter rounds, every Field Kit card, every gathering trail and every garden-walk question.
+- **Where the button goes.** One rule, in `offerHowto`: just after the page heading block, or after the title and its first paragraph when there is no heading block. A page that already places its own tag (life stages, Shutters, Ribbon Rows) is left alone. If a bench redraws its part of the page, the button is offered again. No bench module changed.
+- **Authoring.** Most how-tos are a short `chain` of boxes and captions, drawn top to bottom, with an optional side box (a common detour, like "Jar low? Go gathering"), an end box or a loop back. Captions were checked against each page's actual buttons and tabs, not only its spec. They describe the rule and the order of play; none gives away an answer.
+- **Loading.** Each picture is its own small module in `dist/drawn-howtos/`, fetched the first time its button is pressed, so no page loads all 83 (about 1 MB together, 10 to 20 KB each).
+- **Size.** Narrow chains keep near their drawn size. The widest drawings are under 500 layout units; at 320 px their labels are smaller than body text, but every instruction is also in the 18 px caption.
+- **Checks.** The Node checks now cover every how-to: caption length, short box lines, generated art present and current, one how-to per page, and the page lookup. The Chrome check adds a sweep that opens every page's how-to at 320 px with reduced motion, steps to the end, and confirms its place after the title, every caption, no overflow and no saved change. The existing browser suites were run against main for comparison.
