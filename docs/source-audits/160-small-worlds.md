@@ -74,3 +74,6 @@ Two searches, plus scripts in the reviewer's scratch (`review-160/math.py`, `rev
 - Hooke's *Micrographia* (1665) plates, including the cork (Observation XVIII) and the flea, are public domain; scans are available from the Science History Institute (S4), Project Gutenberg and the Wellcome Collection. Confirm each host's reuse terms before copying a file.
 - Leeuwenhoek's letters and published figures in *Philosophical Transactions* (1677 onward) are public domain. Photographs of surviving microscopes are museum images; use only an open-access or public-domain photograph, or draw an original.
 - All cell, pond and yeast pictures should be original drawings. Do not embed images in the docs.
+
+
+Review correction (2026-10-25): Nucleus wording is scoped to the typical pictured plant/animal cells. Bacteria and specialized cells such as mature mammalian red blood cells do not have nuclei. The proposed diagrams are not universal cell templates.

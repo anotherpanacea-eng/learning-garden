@@ -185,7 +185,7 @@ Worked example: *Three slides.*
 2. Pondweed leaf: boxes with green dots inside.
 3. A prepared slide of animal cells: rounder shapes, each with a dark dot.
 
-**Card 5. Parts every cell needs**
+**Card 5. Parts of our pictured plant and animal cells**
 > A membrane holds the cell in and lets some things through. Cytoplasm fills it. The nucleus holds the instructions that run the cell.
 
 Worked example: *One animal cell.*

@@ -579,7 +579,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **Why there are no human examples:** many school lessons ask children which parent they look like. This pack never does. Children in adoptive, foster, kinship, donor-conceived and blended families can find that question painful, and a child's body and family are private. Plants, Hob's sheep, the miller's kittens and the moths teach the same science. Please keep conversations on those too.
 
-**What it does not claim:** pictures and numbers are simplified. The pod lengths, the 120 and 75 apples, the moth model, *Lantern Red* and every Willowbank animal are invented. No genes or DNA are taught. Insect life cycles are taught at the Life Stages corner and the Bee Meadow, not here. Nobody in Willowbank dies; the "life ends" stage appears only in real-science cards.
+**What it does not claim:** pictures and numbers are simplified. The pod lengths, the 120 and 75 apples, the moth model, *Lantern Red* and every Willowbank animal are invented. No genetic mechanisms or DNA model are taught. Insect life cycles are taught at the Life Stages corner and the Bee Meadow, not here. Nobody in Willowbank dies; the "life ends" stage appears only in real-science cards.
 
 **About the peppered moth:** Kettlewell's 1950s experiments were criticized for their methods. Majerus's six-year redesign (published 2012) answered the critics and supported bird predation: science checking itself.
 
