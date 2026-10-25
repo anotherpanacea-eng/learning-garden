@@ -156,7 +156,7 @@ Worked example: 1. 8 and 5 make 13. 2. 8 + 5 = 13 and 5 + 8 = 13. 3. 13 − 5 = 
 Worked example: 1. Read 8 = 5 + 3 aloud. 2. "8 is the same as 5 plus 3." 3. Rope them: none left over.
 
 **T12. Swap to add, never to take away** (A true thing about math)
-> Swap the lily pads: 3 + 5 and 5 + 3 are both 8. Take-away cannot swap: 5 − 3 is 2, but from 3 you run out.
+> Swap the lily pads: 3 + 5 and 5 + 3 are both 8. Take-away cannot swap: 5 − 3 is 2, but with 3 − 5 you run out.
 Worked example: 1. 3 + 5 = 8. 2. Swap: 5 + 3 = 8. 3. 5 − 3 = 2. Try 3 − 5: not enough ducks.
 
 **T13. Find the missing number** (A true thing about math)
@@ -189,7 +189,7 @@ Keeper's note:
 **H2. Partners of ten on the soroban** (A true thing from history; Sapling and Keeper's Desk)
 > In Japan, people still calculate on a bead frame called a soroban. A top bead is worth 5. Each bottom bead is worth 1.
 Keeper's note:
-> Soroban users learn partners of ten. To add 9 when the beads are full, they add 10 on the next rod and take 1 away, because 9 is 10 − 1. The soroban came from the Chinese abacus, the suanpan. Today's soroban has one top bead and four bottom beads on each rod.
+> Soroban users learn partners of ten. To add 9 when the beads are full, they add 10 on the next rod and take 1 away, because 9 is 10 − 1. The soroban came from the Chinese bead frame, the suanpan. Today's soroban has one top bead and four bottom beads on each rod.
 
 ## Bench (a): Duck Count
 
@@ -260,9 +260,9 @@ Keeper's note:
 **Lily Square opening:** One hundred lily pads, ten in each row. Jump straight down.
 **Long Path opening:** Stones go on past 20. Jump to the next ten.
 
-**Guided item:** Start on stone 15. Jump forward 7, then back 7.
-- Step 1: Forward 7: land on 22.
-- Step 2: Back 7: where do you land? *(15.)*
+**Guided item:** Start on stone 12. Jump forward 7, then back 7.
+- Step 1: Forward 7: land on 19.
+- Step 2: Back 7: where do you land? *(12.)*
 - Step 3: Back the same jump undoes the forward jump.
 
 ## Bench (e): Pond Stories
@@ -316,7 +316,7 @@ Feedback B: Size doesn't change how many. Look at the leftovers.
 Feedback C: Every duck has one. But two crusts have no duck.
 
 **A2 (Sprout, 3-choice)**
-Prompt: Bramble's ducks make a long line. Pip's huddle. All are paired. Which has more?
+Prompt: Bramble's ducks make a long line. Pip's ducks huddle. All are paired. Which has more?
 - A. Bramble's, because her line is longer. *(tests: longer means more)*
 - B. Pip's, because his look crowded. *(tests: crowded means more)*
 - C. The same. Every duck has a partner. *(right)*
@@ -538,10 +538,10 @@ Hint: Count up from 8 to 13.
 Explanation: 8 + 5 = 13, so 5 is missing.
 
 **D6 (Seedling, 3-choice)**
-Prompt: Start on stone 15. Hop forward 7, then back 7. Where are you?
-- A. 15 *(right)*
-- B. 22 *(tests: forgetting the back hop)*
-- C. 29 *(tests: treating back as forward)*
+Prompt: Start on stone 6. Hop forward 7, then back 7. Where are you?
+- A. 6 *(right)*
+- B. 13 *(tests: forgetting the back hop)*
+- C. 20 *(tests: treating back as forward)*
 Hint: What does the back hop do to the forward hop?
 Explanation: Back 7 undoes forward 7. You land where you started.
 Feedback A: Yes. Back the same undoes it.
@@ -703,6 +703,7 @@ Step 3: **Skip for now.** You can come back any time.
 - **fact family**: three numbers and the four facts they make.
 - **missing number**: the one you have to find, shown as ?.
 - **number line**: numbers in order, one step apart, like the stepping stones.
+- **monk**: a man who lives with others in a quiet life of prayer and study.
 
 ## Off-screen invitation (optional, grown-up-led)
 

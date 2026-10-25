@@ -19,7 +19,7 @@ Date: 2026-10-25. Spec: [212](../specs/212-quick-sums.md). Companion: [212 text]
 | 9 | Abacus history article (F. Swetz) | Mathematical Association of America | https://old.maa.org/node/3403439 | Bead abacus developed by the Yuan period; calls the 1592 *Suan fa tong zong* illustration the earliest (contested, see Open checks). |
 | 10 | Analysis of abacus images in Ming textbooks (1558, 1573) | Springer | https://link.springer.com/10.1007/978-3-319-68294-5_14 | Earlier printed abacus images than 1592 in Ming textbooks; so no "first" date in child text. |
 | 11 | Chinese abacus museum record | Horniman Museum | https://www.horniman.ac.uk/object/nn16472/json | A real suanpan with the two-and-five bead pattern (corroborates 6). |
-| 12 | Marble teaching-research records for the 24 targets | Marble repo at `7bd8b67` (CC BY-SA; paraphrased, not copied) | local clone | Pedagogy summarized in the spec's upstream check. Marble's example calculations are not reused; every number in this pack is original. |
+| 12 | Marble teaching-research records for the 24 targets | Marble repo at `7bd8b67` (CC BY-SA; paraphrased, not copied) | local clone | Pedagogy summarized in the spec's upstream check. A few calculations match the records' own examples (for example 402 − 137 across a zero, 12,450 in E6, 52,000 in F5); the wording is the pack's own, and T16's worked example was renumbered at second review. |
 
 ## Claims and status
 

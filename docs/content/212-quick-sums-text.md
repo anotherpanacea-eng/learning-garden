@@ -167,7 +167,7 @@ Worked example: 1. 634 − 287 = 347. 2. Add back: 347 + 287. 3. 634. It checks.
 
 **T16. Plan the steps** (A true thing about math)
 > Draw the story as bars. Name the middle number. Then answer the question asked.
-Worked example: 1. 415 apples. 168 sold. 230 come in. 2. Step 1: 415 − 168 = 247. That's the middle number. 3. Step 2: 247 + 230 = 477 apples.
+Worked example: 1. 432 pebbles. 175 taken out. 260 put in. 2. Step 1: 432 − 175 = 257. That's the middle number. 3. Step 2: 257 + 260 = 517 pebbles.
 
 **T17. Find the tidy pairs** (A true thing about math)
 > Adding a list? Look for pairs that make tens. You can add in any order.
@@ -568,11 +568,11 @@ Feedback C: Yes. Two steps, and the second answers the question.
 
 **E5 (Keeper's Desk, number)**
 Prompt: Road: 3.45 km, then 2.8 km. Path: 5.9 km. Which is shorter, by how much?
-Answer: the river path, by 0.35 km.
-Worked steps: 1. Road: 3.45 + 2.80 = 6.25 km. 2. 6.25 − 5.90 = 0.35 km. 3. The river path is shorter.
+Answer: the path, by 0.35 km.
+Worked steps: 1. Road: 3.45 + 2.80 = 6.25 km. 2. 6.25 − 5.90 = 0.35 km. 3. The path is shorter.
 Tests: 6.25 (stopping at the road's length); 3.73 (lining up last digits, not points).
 Hint: Add the road's two parts first.
-Explanation: The road is 6.25 km. The river path is 0.35 km shorter.
+Explanation: The road is 6.25 km. The path is 0.35 km shorter.
 
 **E6 (Keeper's Desk, say why; spoken to a grown-up, not stored)**
 Prompt: Wren's goal: 40,000 crossings. Spring 12,450, summer 18,605. How many more?

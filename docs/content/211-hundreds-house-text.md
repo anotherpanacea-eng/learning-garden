@@ -429,7 +429,7 @@ Feedback B: Yes. The zero says "no packets".
 Feedback C: 150 is one hundred fifty: five packets. We want five seeds.
 
 **B6 (Sapling, number and words)**
-Prompt: Write 306 in words and in expanded form.
+Prompt: Build 306 in words, then in expanded form.
 Answer: three hundred six; 300 + 6 (300 + 0 + 6 also counts).
 Worked steps: 1. 3 boxes: three hundred, 300. 2. 0 packets: nothing to say or add. 3. 6 seeds: six, 6.
 Tests: thirty-six and 36 (dropping the empty place); 3 + 0 + 6 (digits without their places).

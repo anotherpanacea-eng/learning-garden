@@ -162,7 +162,7 @@ Refreshed upstreams: Jane `0ec55f7e083976e6fcc3977fca460b1f5e199d91` and Marble 
 | Addition and subtraction word problems, lengths (`mt_DLcEzmmj2r`) | Model before calculating; comparison and cut-off stories; units; from 0. E1, E2. |
 | Ratio, age 10+ (`mt_vmW2cb5c7A`; description: mental calculation with mixed operations and large numbers) | A repertoire (partition, compensate, derive) and when each fits; a dropped partial and an unadjusted compensation named; multiply before adding; estimate to sanity-check; jottings, never a column in the head. T18; F7, F8. No ratio content is claimed or taught. Scope is narrow: multiplication with addition in Keeper's Desk strings; mental division is not practiced here. |
 
-**Jane:** adopted teach → guided → practice, the three-step "I'm stuck" ladder, short second-person prompts, three-option choices with misconception-tagged distractors, step-revealed worked examples and a glossary. Not adopted: medals, bosses, mastery, gates, timers, step-downs, points. No Jane code or text copied. Marble research paraphrased; its example numbers are not reused.
+**Jane:** adopted teach → guided → practice, the three-step "I'm stuck" ladder, short second-person prompts, three-option choices with misconception-tagged distractors, step-revealed worked examples and a glossary. Not adopted: medals, bosses, mastery, gates, timers, step-downs, points. No Jane code or text copied. Marble research paraphrased in the pack's own words.
 
 ### Hard-prerequisite crosswalk
 
