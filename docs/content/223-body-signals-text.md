@@ -200,7 +200,7 @@ Worked example: (1) Two arrow lines. (2) Most people see the top one as longer. 
 Worked example: (1) A bite of bread. (2) Mouth, food pipe, stomach. (3) Small intestine: taken into blood. (4) Large intestine: water back.
 
 **T16. Squash and snip.** Physical digestion breaks food into smaller pieces. Chemical digestion changes big molecules into small ones, using enzymes.
-Worked example: (1) Teeth chew: squash. (2) Stomach churns: squash. (3) Amylase cuts starch into sugars: snip.
+Worked example: (1) Teeth chew: squash. (2) Stomach churns: squash. (3) Amylase cuts starch into short sugar chains: snip.
 
 **T17. Enzymes are helpers.** An enzyme speeds up a change and is not used up. It is not alive. Small molecules can pass into the blood; big ones can't.
 Worked example: (1) Amylase cuts a starch chain. (2) It cuts again, and again. (3) It is still whole.
@@ -245,14 +245,19 @@ Opening: Hang each tag. Then pick its job.
 Buttons: tag **Skull** / **Ribcage** / **Spine** / **Humerus** / **Pelvis** / **Femur**; job **Support** / **Protection** / **Movement**; **Turn the tag**.
 Tag backs: skull: head bones · ribcage: rib bones · spine: backbone (many vertebrae) · humerus: upper-arm bone · pelvis: hip bones · femur: thigh bone.
 Guided first run (3 steps): (1) Pick the skull tag. (2) Hang it on the head. (3) Pick its job: protection.
-Job replies:
-- Skull, protection: Yes. It guards the brain.
-- Spine, support: Yes. It holds the body up. It guards the spinal cord too.
-- Ribcage, protection: Yes. It guards the heart and lungs. It moves with each breath too.
-- Pelvis, support: Yes. It carries weight to the legs.
-- Femur, support or movement: Yes. It does both.
-- Humerus, movement: Yes. Muscles pull it to move the arm.
-- Any other pair: Does it guard something soft, hold weight, or move? Try another job.
+Accepted jobs (a bone with more than one job accepts any of them, and the reply names them all):
+- Skull: Protection. Reply: Yes. It guards the brain.
+- Spine: Support, Protection or Movement. Reply: Yes. It holds the body up, guards the spinal cord and bends.
+- Ribcage: Protection or Movement. Reply: Yes. It guards the heart and lungs, and moves with each breath.
+- Pelvis: Support or Protection. Reply: Yes. It carries weight to the legs and holds some soft parts.
+- Femur: Support or Movement. Reply: Yes. It holds the body up and helps the leg move.
+- Humerus: Movement. Reply: Yes. Muscles pull it to move the arm.
+Try-again replies:
+- Skull, support or movement: The skull is a hard case around something soft. Try another job.
+- Ribcage, support: The ribcage is a cage around soft parts. Try another job.
+- Pelvis, movement: On this chart, the pelvis carries weight and holds soft parts. Try another job.
+- Femur, protection: The femur doesn't wrap around a soft part to guard it. Try another job.
+- Humerus, support or protection: On this chart, the humerus is the arm's mover. Try another job.
 Inside or outside shelf: **Inside** · **Outside** · **Shell** · **No hard skeleton**. Cards: the drawn person · Dot · a crab · a snail · an earthworm.
 Shelf replies: Person: inside. Dot and the crab: a hard case on the outside. Snail: a shell it carries. Earthworm: no hard skeleton. Any other shelf: Is anything hard inside, or outside? Try again.
 Giraffe card: A giraffe has 7 neck bones. A person has 7. Same count, much longer bones.
@@ -293,15 +298,16 @@ Model line (A made-up model): Real neurons connect to thousands of others.
 ## Activity (e): Breakdown Bench
 
 Opening: Follow the bite. Squash or snip?
-Buttons: **Squash** · **Snip with amylase** · **Snip with protease** · **Snip with lipase** · **Add bile** · **Next stop**.
-Guided first run (3 steps): (1) In the mouth, pick amylase. (2) Snip the starch chain. (3) Count the cuts. Is amylase still whole?
+Buttons: **Squash** · **Snip with amylase** · **Snip with maltase** · **Snip with protease** · **Snip with lipase** · **Add bile** · **Next stop**.
+Guided first run (3 steps): (1) In the mouth, pick amylase. (2) Snip the starch chain into pairs. (3) Count the cuts. Is amylase still whole?
 Stop lines:
-- Mouth: Teeth squash. Amylase in spit starts on starch.
+- Mouth: Teeth squash. Amylase in spit starts cutting starch into sugar pairs.
 - Food pipe: Muscles squeeze the bite down.
 - Stomach: It churns (squash). Protease starts on protein.
-- Small intestine: Bile from the liver splits fat into droplets. Pancreas enzymes finish the snipping. Small molecules pass into the blood.
+- Small intestine: Bile from the liver splits fat into droplets. Pancreas enzymes keep snipping. Maltase on the wall splits each sugar pair into single sugars. Small molecules pass into the blood.
 - Large intestine: Water goes back into the body.
 Mismatched-scissors reply: These scissors fit a different chain. Which chain is this?
+Pair reply (amylase on a sugar pair): Amylase stops at pairs. Maltase in the small intestine splits them.
 Big-bead reply: Too big to pass. Snip it smaller first.
 Counter line: Cuts made: {n}. Scissors used up: none.
 Bile line: One big drop, many small drops. Bile doesn't snip. It squashes.
@@ -540,13 +546,13 @@ Feedback: A: Yes. Nearly all of it does something. B: Scans show most of it acti
 Explanation: The ten percent claim is a myth. Different parts are busy at different times.
 
 **4.4 (Keeper's Desk, 3-choice)**
-Prompt: Which part is linked to emotions and memory?
+Prompt: Which label on our brain map groups the deep parts for emotions and memory?
 - A. The cerebellum *(misconception: lobe-mix-up)*
 - B. The occipital lobe *(misconception: lobe-mix-up)*
 - C. The limbic system *(right)*
-Hint: It sits deep inside the brain.
-Feedback: A: The cerebellum helps balance. B: The occipital lobe handles seeing. C: Yes. Deep inside, linked to emotions and memory.
-Explanation: The limbic system, deep inside, is linked to emotions and memory.
+Hint: Read the map's cards. Which label is deep inside?
+Feedback: A: Our map's cerebellum card says balance and smooth movement. B: Our map's occipital card says seeing. C: Yes. That label groups the deep parts.
+Explanation: On our map, the limbic system label groups the deep parts linked to emotions and memory. Real brain parts share many jobs.
 
 **4.5 (Keeper's Desk, 3-choice)**
 Prompt: Dot practices her bell pattern for weeks. What changes?
@@ -595,13 +601,13 @@ Feedback: A: Enzymes aren't alive. Cells make them. B: The scissors stayed whole
 Explanation: Enzymes are biological catalysts. They speed changes and are reused.
 
 **5.4 (Keeper's Desk, number with steps)**
-Given: a starch chain of 12 sugar beads. Amylase cuts it into single beads.
-Prompt: How many cuts?
-Answer: 11 cuts, all by the same enzyme.
-Steps: (1) A cut goes between two beads. (2) 12 beads have 11 gaps. (3) 11 cuts.
+Given: a starch chain of 12 sugar beads. Amylase cuts it into pairs. Then maltase splits each pair.
+Prompt: How many cuts in all, by both enzymes?
+Answer: 11 cuts (amylase 5, maltase 6).
+Steps: (1) 12 beads make 6 pairs, so amylase makes 5 cuts. (2) Maltase splits 6 pairs: 6 cuts. (3) 5 + 6 = 11.
 Misconception tested: count-beads-not-cuts (answering 12).
-Hint: Try 3 beads first. How many cuts?
-Explanation: 12 beads, 11 gaps, 11 cuts. One enzyme can make them all.
+Hint: Try 4 beads first. How many cuts in all?
+Explanation: 12 beads, 11 gaps, 11 cuts in all. Each enzyme makes many cuts and stays whole. (Made-up model.)
 
 **5.5 (Keeper's Desk, number with steps)**
 Given: a fat drop shaped like a 4 cm cube. Bile breaks it into 1 cm cubes.
@@ -695,7 +701,7 @@ Explanation: After hard effort, extra oxygen helps clear the lactic acid: the ox
 - **Message lines:** A hand touches a hot cup in the book. Start: where does the message turn first?
 - **Relay:** One neuron, one gap, one neuron. Start: what crosses the gap?
 - **Brain map:** Hearing the bell. Start: hearing is at the sides of the brain.
-- **Enzymes:** 3 beads, single beads. Start: 2 gaps, so 2 cuts.
+- **Enzymes:** 4 beads. Amylase makes 2 pairs: 1 cut. Start: maltase splits 2 pairs, 2 cuts, so 3 in all.
 - **Surface:** A 2 cm cube cut into 1 cm cubes. Start: 24 cm² becomes 8 × 6 = 48 cm², twice.
 - **Feedback dial:** The dial is at 66. Start: gap 16, half is 8, so 58.
 - **Sprint tokens:** 10 tokens, anaerobic. Start: 2 per glucose, so 10 ÷ 2 = 5 glucose.
@@ -735,6 +741,8 @@ Explanation: After hard effort, extra oxygen helps clear the lactic acid: the ox
 - **Chemical digestion:** changing big molecules into small ones.
 - **Molecule:** a tiny particle of a substance, far too small to see.
 - **Enzyme:** a helper made by cells that speeds a change and isn't used up.
+- **Amylase:** an enzyme that cuts starch into short sugar chains, mostly pairs.
+- **Maltase:** an enzyme on the small intestine's wall that splits sugar pairs into single sugars.
 - **Catalyst:** something that speeds a change without being used up.
 - **Bile:** a liquid from the liver that splits fat into small drops.
 - **Villi:** tiny finger shapes lining the small intestine.

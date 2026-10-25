@@ -184,10 +184,10 @@ Worked example: (1) All six lay eggs. (2) That splits no one. (3) Only T. rex an
 **T9. The halving clock** (Sapling). Some atoms slowly change into other atoms. One half-life is how long it takes half of them to change. Then half the rest change.
 Worked example: (1) Start with 64. (2) One half-life: 32 left. (3) Two half-lives: 16 left. (4) Never quite zero.
 
-**T10. Read the share, not a stopwatch** (Keeper's Desk). We measure how many original atoms are left beside the new ones. The share shows how many halvings have happened.
+**T10. Read the share, not a stopwatch** (Keeper's Desk). Labs compare a sample's carbon-14 with the amount living things have. That shows the share left, and the share shows how many halvings happened.
 Worked example: (1) A quarter of the carbon-14 is left. (2) That is two halvings. (3) 2 × 5,730 = 11,460 years.
 
-**T11. Pick the clock that fits** (Keeper's Desk). Carbon-14 works on things once alive, up to about 50,000 years. Uranium-lead works on crystals in rock, over millions and billions of years.
+**T11. Pick the clock that fits** (Keeper's Desk). Carbon-14 works on things once alive, up to about 50,000 years. Uranium-lead compares uranium left with lead made in rock crystals, over millions and billions of years.
 Worked example: (1) A burnt log in a cave: carbon-14. (2) A dinosaur bone: too old. (3) Date the ash around it instead.
 
 **T12. Ash above, ash below** (Keeper's Desk). We usually date the volcanic ash, not the fossil. A fossil between two dated ash layers is between their ages.
@@ -280,7 +280,7 @@ Clocks: **Carbon-14** (half-life about 5,730 years; things that were once alive;
 Things to date: a burnt log from a cave · a woolly mammoth's hair · a volcanic ash layer from dinosaur times · a dinosaur bone.
 Dinosaur bone reply: Too old for carbon-14. Date the ash layers above and below it.
 Bracket bench: two ash layers, a fossil between. Slide the ages; the fossil's window follows.
-Carbon clock readout (Keeper's Desk): Half-lives {n} · About {n × 5,730} years.
+Carbon clock readout (Keeper's Desk): Share of gold left {p} of 64 · Half-lives {n} · About {n × 5,730} years. Carbon labs read only the share of carbon-14 left; they don't count the new atoms.
 
 ## Activity (d): The Case Board (Keeper's Desk)
 
@@ -305,7 +305,7 @@ Model line (A made-up model): The ford duckbill is made up. Its clues copy the k
 
 Real cards (A true thing about science, Keeper's Desk):
 - **A mammoth's travels.** Scientists sampled a mammoth tusk, layer by layer. Its chemistry showed the mammoth roamed huge distances across Alaska in its life of about 28 years.
-- **T. rex rings.** Rings in T. rex ribs and other bones show it grew fastest as a teenager and reached full size at about 20.
+- **T. rex rings.** Growth marks in T. rex bones show its growth sped up, then slowed. Studies of more bones keep changing the guess for when it was fully grown.
 - **Wood and shells.** Fossil droppings from Utah, about 75 million years old, hold chewed rotting wood and shell bits. Duck-billed dinosaurs probably left them.
 
 ## Activity (e): The Pea Bench (Keeper's Desk)
@@ -801,4 +801,4 @@ Explanation: It's a real dilemma. Good arguments hear the other side.
 
 **Calm line:** Some cards here are about real loss, long ago and today. They are short, and you can skip any of them.
 
-**Sources in brief:** Renne and colleagues' 1997 argon dating of Pompeii's pumice (*Science*); Pliny the Younger's letters to Tacitus; Mendel's 1866 paper; the 2014 nectarine gene study; van't Hof and colleagues on the peppered moth mutation (2016); Wooller and colleagues on a mammoth tusk (2021); Erickson and colleagues on T. rex growth (2004); Chin and colleagues on duckbill droppings (2017); Wrangel Island mammoth studies; the bucardo record; Hennig (1950), Kimura (1968), Libby, Patterson (1956); Mojica, Charpentier and Doudna (Nobel 2020). Full list in the source audit.
+**Sources in brief:** Renne and colleagues' 1997 argon dating of Pompeii's pumice (*Science*); Pliny the Younger's letters to Tacitus; Mendel's 1866 paper; the 2014 nectarine gene study; van't Hof and colleagues on the peppered moth mutation (2016); Wooller and colleagues on a mammoth tusk (2021); Erickson and colleagues (2004) and Woodward and colleagues (2026) on T. rex growth; Chin and colleagues on duckbill droppings (2017); Wrangel Island mammoth studies; the bucardo record; Hennig (1950), Kimura (1968), Libby, Patterson (1956); Mojica, Charpentier and Doudna (Nobel 2020). Full list in the source audit.
