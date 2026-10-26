@@ -93,7 +93,7 @@ ObservedHelp = { observed: true, concept: [{ forId, kind }], reading: [{ forId, 
 Snapshot<T> = {
   source: FullSource,
   shown: { question: text, choices: [{ id, text }], key, feedback },
-  answer: T,
+  answer: T | null,
   outcome: 'fit' | 'not-yet' | 'shown' | 'skipped' | 'kept',
   helpBefore?: ObservedHelp,
   at
@@ -118,7 +118,7 @@ magpie: {
 }
 ```
 
-**Frozen source and first response.** Every `Snapshot` above embeds its own full source, shown question/instruction, ordered choices, key, feedback, response and original outcome. For a bench with no supplied choices or key, preserve its instruction and use an empty choice list and null key; an ungraded keep uses `kept`. The working source is frozen before the visit begins and is never replaced by today's catalog. Waiting work and saved responses render only from their own sources. `first` is write-once at the first recorded response/keep; later attempts have a separate `latest`, and later skips/help never change `first`. Explicitly starting revised content creates another visit and retains earlier sources and work. No original spoken or written explanation is graded.
+**Frozen source and first response.** Every `Snapshot` above embeds its own full source, shown question/instruction, ordered choices, key, feedback, response and original outcome. For a bench with no supplied choices or key, preserve its instruction and use an empty choice list and null key; an ungraded keep uses `kept`. The working source is frozen before the visit begins and is never replaced by today's catalog. Waiting work and saved responses render only from their own sources. `first` is write-once at the first recorded response/keep; later attempts have a separate `latest`, and later skips/help never change `first`. Explicitly starting revised content creates another visit and retains earlier sources and work. `answer: null` is allowed only when no selection exists and the outcome is `skipped` or `shown`; otherwise retain the actual response. No original spoken or written explanation is graded.
 
 **Observed help before reveal.** During a newly tracked visit, `observed: true` with empty arrays means no help request was recorded in that visit so far, not demonstrated independent performance. Commit concept-help codes (hint, guided step, example, shown answer, meaning or slot scaffold), with the affected task/item id, to working help before their first reveal. Commit read-aloud/prompt-audio codes and the affected task/item id separately to `reading` before playback. Copy the observation into each response's `helpBefore` at the response time. A later request changes working help and the next response only. Missing older observations remain unobserved: never infer them from a later response or turn them into an empty list, false or “none.” Help requests are not proof that help was used; reading/audio data establish neither independent reading nor independent listening.
 
