@@ -385,8 +385,8 @@ const authored={
       "hintId": "entry-counts-hint",
       "exampleId": "entry-counts-example",
       "skipId": "entry-counts-skip",
-      "match": "Two entries are in years 1–21:4 and 15. Five are in years 22–40:27, 31, 34, 36, 38. These are recorded entries, not a complete flood count.",
-      "different": "Count the written years on each side of 22. Years 4 and 15 are before;27, 31, 34, 36, 38 are in the later period. An unwritten year is not another flood entry.",
+      "match": "Two entries are in years 1–21: 4 and 15. Five are in years 22–40: 27, 31, 34, 36, 38. These are recorded entries, not a complete flood count.",
+      "different": "Count the written years on each side of 22. Years 4 and 15 are before; 27, 31, 34, 36, 38 are in the later period. An unwritten year is not another flood entry.",
       "errors": [],
       "fields": [
         {
@@ -419,8 +419,8 @@ const authored={
       "hintId": "mean-before-hint",
       "exampleId": "mean-before-example",
       "skipId": "mean-before-skip",
-      "match": "40 + 60 = 100 cm in total;100 ÷ 2 = 50 cm. That is the exact mean of these two entries.",
-      "different": "Add the two written heights,40 and 60, then divide their 100 cm total by 2 entries. Dividing by 21 years answers a different question.",
+      "match": "40 + 60 = 100 cm in total; 100 ÷ 2 = 50 cm. That is the exact mean of these two entries.",
+      "different": "Add the two written heights, 40 and 60, then divide their 100 cm total by 2 entries. Dividing by 21 years answers a different question.",
       "errors": [],
       "fields": [
         {
@@ -444,8 +444,8 @@ const authored={
       "hintId": "mean-after-hint",
       "exampleId": "mean-after-example",
       "skipId": "mean-after-skip",
-      "match": "120 + 80 + 120 + 140 + 100 = 560 cm;560 ÷ 5 = 112 cm. Both 120 cm entries count. The separate storm is excluded.",
-      "different": "Use the five dated later entries. Add both 120 s,80, 140 and 100, then divide their 560 cm total by 5 entries. The later storm is a separate note.",
+      "match": "120 + 80 + 120 + 140 + 100 = 560 cm; 560 ÷ 5 = 112 cm. Both 120 cm entries count. The separate storm is excluded.",
+      "different": "Use the five dated later entries. Add both entries of 120 cm, then 80, 140 and 100 cm, then divide their 560 cm total by 5 entries. The later storm is a separate note.",
       "errors": [
         {
           "fieldId": "mean",
@@ -495,7 +495,7 @@ const authored={
       "exampleId": "ranges-example",
       "skipId": "ranges-skip",
       "match": "The earlier range is 60 − 40 = 20 cm. The later range is 140 − 80 = 60 cm. These describe the two recorded groups.",
-      "different": "Use highest minus lowest within each group. Earlier:60 − 40. Later:140 − 80. A maximum alone is not a range.",
+      "different": "Use highest minus lowest within each group. Earlier: 60 − 40. Later: 140 − 80. A maximum alone is not a range.",
       "errors": [],
       "fields": [
         {
@@ -593,17 +593,17 @@ const authored={
         {
           "id": "mean-limit-1",
           "text": "It is the mean of every flood in those 21 years.",
-          "reply": "Hollis did not record every flood.50 cm is the mean of 40 and 60, not a known mean of all earlier floods."
+          "reply": "Hollis did not record every flood. 50 cm is the mean of 40 and 60, not a known mean of all earlier floods."
         },
         {
           "id": "mean-limit-2",
           "text": "Nothing numerical can be said about just two recorded values.",
-          "reply": "We can calculate the mean of these values:100 ÷ 2 = 50 cm. The limit concerns generalising beyond them."
+          "reply": "We can calculate the mean of these values: 100 ÷ 2 = 50 cm. The limit concerns generalising beyond them."
         },
         {
           "id": "mean-limit-3",
           "text": "It is the exact mean of the two written heights.",
-          "reply": "40 and 60 have total 100;100 ÷ 2 = 50 cm. The arithmetic is exact for those entries, while unwritten floods remain unknown."
+          "reply": "40 and 60 have total 100; 100 ÷ 2 = 50 cm. The arithmetic is exact for those entries, while unwritten floods remain unknown."
         }
       ]
     },
@@ -857,7 +857,7 @@ const authored={
         {
           "id": "straddling-period-1",
           "text": "It includes years on both sides of 22.",
-          "reply": "Year 21 is before 22;22 through 30 belong to the later period. The whole interval cannot be called wholly before or wholly after."
+          "reply": "Year 21 is before 22; 22 through 30 belong to the later period. The whole interval cannot be called wholly before or wholly after."
         },
         {
           "id": "straddling-period-2",
@@ -1383,7 +1383,7 @@ const authored={
     },
     "entry-counts-example": {
       "title": "Different example",
-      "text": "Entries in years2,6,12 with a change at10: two before, one after.",
+      "text": "Entries in years 2, 6, 12 with a change at 10: two before, one after.",
       "facts": []
     },
     "entry-counts-skip": {
@@ -1393,12 +1393,12 @@ const authored={
     },
     "mean-before-hint": {
       "title": "Hint",
-      "text": "Add40 and60, then divide by two entries.",
+      "text": "Add 40 and 60, then divide by two entries.",
       "facts": []
     },
     "mean-before-example": {
       "title": "Different example",
-      "text": "Example heights20 and40 have total60;60÷2=30cm.",
+      "text": "Example heights 20 and 40 have total 60; 60 ÷ 2 = 30 cm.",
       "facts": []
     },
     "mean-before-skip": {
@@ -1408,12 +1408,12 @@ const authored={
     },
     "mean-after-hint": {
       "title": "Hint",
-      "text": "Add all five heights, including both120s; divide by five.",
+      "text": "Add all five heights, including both entries of 120 cm; divide by five.",
       "facts": []
     },
     "mean-after-example": {
       "title": "Different example",
-      "text": "Example20,40,60 totals120;120÷3=40cm.",
+      "text": "Example heights 20, 40, 60 total 120; 120 ÷ 3 = 40 cm.",
       "facts": []
     },
     "mean-after-skip": {
@@ -1428,7 +1428,7 @@ const authored={
     },
     "ranges-example": {
       "title": "Different example",
-      "text": "Heights10,30,50 have range50−10=40cm.",
+      "text": "Heights 10, 30, 50 have range 50 − 10 = 40 cm.",
       "facts": []
     },
     "ranges-skip": {
@@ -1438,12 +1438,12 @@ const authored={
     },
     "mean-difference-hint": {
       "title": "Hint",
-      "text": "Compare112 with50; do not report just one mean.",
+      "text": "Compare 112 with 50; do not report just one mean.",
       "facts": []
     },
     "mean-difference-example": {
       "title": "Different example",
-      "text": "Means75 and45 differ by75−45=30cm.",
+      "text": "Means 75 and 45 differ by 75 − 45 = 30 cm.",
       "facts": []
     },
     "mean-difference-skip": {
@@ -1458,7 +1458,7 @@ const authored={
     },
     "count-periods-example": {
       "title": "Different example",
-      "text": "Two entries in10years and four in20years have different counts but the same count per year.",
+      "text": "Two entries in 10 years and four in 20 years have different counts but the same count per year.",
       "facts": []
     },
     "count-periods-skip": {
@@ -1473,7 +1473,7 @@ const authored={
     },
     "mean-limit-example": {
       "title": "Different example",
-      "text": "The mean of10 and30 is20. It need not be the mean of every event omitted from a record.",
+      "text": "The mean of 10 and 30 is 20. It need not be the mean of every event omitted from a record.",
       "facts": []
     },
     "mean-limit-skip": {
@@ -1488,7 +1488,7 @@ const authored={
     },
     "unwritten-years-example": {
       "title": "Different example",
-      "text": "A blank thermometer entry is not a reading of0degrees or yesterday's temperature.",
+      "text": "A blank thermometer entry is not a reading of 0 degrees or yesterday's temperature.",
       "facts": []
     },
     "unwritten-years-skip": {
@@ -1498,12 +1498,12 @@ const authored={
     },
     "period-one-hint": {
       "title": "Hint",
-      "text": "Include only years1–10.",
+      "text": "Include only years 1–10.",
       "facts": []
     },
     "period-one-example": {
       "title": "Different example",
-      "text": "years3,12,18: the first interval contains year3 only.",
+      "text": "Years 3, 12, 18: the first interval contains year 3 only.",
       "facts": []
     },
     "period-one-skip": {
@@ -1513,12 +1513,12 @@ const authored={
     },
     "period-two-hint": {
       "title": "Hint",
-      "text": "Find the entries in11–20, then their maximum.",
+      "text": "Find the entries in 11–20, then their maximum.",
       "facts": []
     },
     "period-two-example": {
       "title": "Different example",
-      "text": "years3,12,18:11–20 contains two entries; heights20/50 have maximum50.",
+      "text": "Years 3, 12, 18: 11–20 contains two entries; heights 20 and 50 have maximum 50.",
       "facts": []
     },
     "period-two-skip": {
@@ -1528,12 +1528,12 @@ const authored={
     },
     "period-three-hint": {
       "title": "Hint",
-      "text": "Use the whole interval without calling it wholly after22.",
+      "text": "Use the whole interval without calling it wholly after 22.",
       "facts": []
     },
     "period-three-example": {
       "title": "Different example",
-      "text": "years23/29 lie in21–30; heights30/40 have maximum40.",
+      "text": "Years 23 and 29 lie in 21–30; heights 30 and 40 have maximum 40.",
       "facts": []
     },
     "period-three-skip": {
@@ -1543,12 +1543,12 @@ const authored={
     },
     "period-four-hint": {
       "title": "Hint",
-      "text": "Count31,34,36,38 and choose their highest height.",
+      "text": "Count 31, 34, 36, 38 and choose their highest height.",
       "facts": []
     },
     "period-four-example": {
       "title": "Different example",
-      "text": "heights20,50,40 have three entries and maximum50.",
+      "text": "Heights 20, 50, 40 have three entries and maximum 50.",
       "facts": []
     },
     "period-four-skip": {
@@ -1563,7 +1563,7 @@ const authored={
     },
     "equal-tallies-example": {
       "title": "Different example",
-      "text": "two periods each with4events can have different rainfall totals.",
+      "text": "Two periods each with 4 events can have different rainfall totals.",
       "facts": []
     },
     "equal-tallies-skip": {
@@ -1578,7 +1578,7 @@ const authored={
     },
     "recorded-changes-example": {
       "title": "Different example",
-      "text": "a new road and a timetable changed together; a later delay does not separate their effects.",
+      "text": "A new road and a timetable changed together; a later delay does not separate their effects.",
       "facts": []
     },
     "recorded-changes-skip": {
@@ -1588,12 +1588,12 @@ const authored={
     },
     "straddling-period-hint": {
       "title": "Hint",
-      "text": "List where year21 and year22 fall.",
+      "text": "List where year 21 and year 22 fall.",
       "facts": []
     },
     "straddling-period-example": {
       "title": "Different example",
-      "text": "interval9–12 crosses a change at10.",
+      "text": "Interval 9–12 crosses a change at 10.",
       "facts": []
     },
     "straddling-period-skip": {

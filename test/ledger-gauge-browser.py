@@ -54,6 +54,12 @@ const old=structuredClone(base);L.startLedger(old);const o=w(old),s=o.source;s.i
 const damaged=structuredClone(old);L.keepLedgerNote(damaged);w(damaged).kept={future:'unreadable latest note'};w(damaged).checks.push({taskId:'earlier-maximum',future:'unreadable latest check'});damaged.ledgerGauge.visits['[raw visit]']={synthetic:'raw exact visit'};seeds.damaged=damaged;
 const foldedProvenance=structuredClone(base);L.startLedger(foldedProvenance);const fw=w(foldedProvenance),fp=fw.source.pages.find(p=>p.id==='records');fw.learn.records={count:fp.learn.length,guided:true,folded:true};fw.shown=[];seeds.foldedProvenance=foldedProvenance;
 seeds.future=structuredClone(base);seeds.future.ledgerGauge={version:99,raw:['synthetic future exact root']};
+
+const voice=pending(7,8);L.startLedger(voice);const vw=w(voice),vp=vw.source.pages.find(p=>p.id==='records'),vt=vw.source.tasks[0];vp.title='Synthetic audible current title';vp.learn[0].text='VISIBLE_LEARNING_SENTINEL: two times three is six.';vp.learn[0].facts=[[2,3]];vp.learn[1].text='UNREQUESTED_LEARNING_SENTINEL';vt.prompt='Synthetic current numeric question?';vt.context='VISIBLE_CONTEXT_SENTINEL: two times three is six.';vt.facts=[[2,3]];vw.source.help['audio-records'].text='AUDIO_METADATA_SENTINEL';vw.source.help['audio-records'].facts=[[7,8]];vw.source.help[vt.hintId].text='UNREQUESTED_HINT_SENTINEL';vw.source.help[vt.exampleId].text='REQUESTED_EXAMPLE_SENTINEL: a different set of values can be shared equally.';const archive=vw.source.tasks.find(t=>t.id==='period-four').exampleId;vw.source.help[archive].text='ARCHIVED_HELPER_SENTINEL';vw.source.help[archive].facts=[[7,8]];vw.help.push(archive);seeds.voice=voice;
+for(const role of ['claims','note']){const n=pending(7,8);L.startLedger(n);let v=w(n),t=v.source.tasks[0];t.context='HIDDEN_TASK_CONTEXT_SENTINEL';t.facts=[[7,8]];for(const field of t.fields)L.answerLedger(n,t.id,field.id,String(field.answer.n));L.checkLedger(n,t.id);v=w(n);t=v.source.tasks[0];t.pageId=role;delete v.tasks.records;v.tasks[role]=t.id;v.pageId=role;v.source.help[t.hintId].text='HIDDEN_TASK_HELPER_SENTINEL';v.source.help[t.hintId].facts=[[7,8]];v.help.push(t.hintId);const page=v.source.pages.find(p=>p.role===role);page.learn[0].text='VISIBLE_ROLE_CONTEXT_SENTINEL: 2 × 3 = 6.';page.learn[0].facts=[[2,3]];v.learn[page.id]={count:1,guided:false,folded:false};v.shown.push(page.learn[0].id);seeds['hiddenTask-'+role]=n;}
+const missingInvalid=structuredClone(base);L.startLedger(missingInvalid);delete w(missingInvalid).source.labels.invalid;seeds.missingInvalid=missingInvalid;
+const oldTables=structuredClone(old),ot=w(oldTables);ot.source.id='earlier-own-source-tables';ot.source.records.events.find(e=>e.year===15).height=66;ot.source.records.intervals.forEach((i,n)=>i.rainCount=[2,9,4,7][n]);const cp=L.createLedgerSource().pages.find(p=>p.role==='claims');cp.learn=cp.learn.slice(0,1);cp.learn[0].text='Use this earlier copied record.';cp.learn[0].facts=[];ot.source.pages.push(cp);for(const page of ot.source.pages){page.learn.forEach(l=>{l.text='Use this earlier copied record.';l.facts=[];});page.guided=[];delete page.guidedFor;ot.learn[page.id]={count:1,guided:false,folded:false};}ot.shown=[];ot.pageId='claims';ot.source.claims[0].text='Compare the earlier selected records.';for(const key of Object.keys(ot.source.claims[0].replies))ot.source.claims[0].replies[key]='These are the earlier selected observations.';ot.source.parts[0].options.forEach(o=>o.text='This earlier copied ledger has a height of 66 at year 15.');seeds.oldTables=oldTables;
+const keptPlan=structuredClone(base);L.startLedger(keptPlan);L.planLedger(keptPlan,'wall');L.keepLedgerNote(keptPlan);const kp=w(keptPlan);kp.pageId='note';kp.planId='sponge';kp.source.plans.find(p=>p.id==='wall').title='CURRENT_CHANGED_PLAN_TITLE_SENTINEL';seeds.keptPlan=keptPlan;
 console.log(JSON.stringify(seeds));
 """
     return json.loads(subprocess.check_output(['node','--input-type=module','-e',code],cwd=ROOT,text=True))
@@ -105,10 +111,19 @@ def bounds(p):
     ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal overflow')
     small=p.locator('[data-ledger-root] button,[data-ledger-root] a,[data-ledger-root] summary,[data-ledger-root] input,[data-ledger-root] select,[data-ledger-root] textarea').evaluate_all("xs=>xs.filter(x=>x.getClientRects().length).map(x=>x.matches('input[type=checkbox]')?x.closest('label')||x:x).filter(x=>x.getBoundingClientRect().height<44||x.getBoundingClientRect().width<44).map(x=>({text:x.textContent.trim(),w:x.offsetWidth,h:x.offsetHeight}))")
     ok(not small,'44px visible native targets: '+str(small))
+def source_tables(p,expected,label):
+    drawer=p.locator('.ledger-sources')
+    if not drawer.evaluate('x=>x.open'):click(p,'.ledger-sources > summary')
+    tables=p.locator('.ledger-source-tables table');ok(tables.count()==2,'own ledger and tally available '+label)
+    rows=tables.nth(0).locator('tbody tr').evaluate_all("xs=>xs.map(x=>[...x.querySelectorAll('th,td')].map(c=>c.textContent.trim()))")
+    ok(rows==[[str(e['year']),str(e['height'])+' '+expected['units']['cm']] for e in expected['records']['events']],'actual own ledger rows '+label)
+    tally=tables.nth(1).locator('tbody tr').evaluate_all("xs=>xs.map(x=>[...x.querySelectorAll('th,td')].map(c=>c.textContent.trim()))")
+    ok(tally==[[i['label'],str(i['rainCount'])] for i in expected['records']['intervals']],'actual own copied tally rows '+label)
+    ok(drawer.is_visible() and tables.nth(0).is_visible() and tables.nth(1).is_visible(),'record evidence accessible without leaving current page '+label)
 def choose_task(p,t):
     turn(p,t['pageId']);p.locator('[data-ledger-task]').select_option(t['id'])
     ok(p.locator('.ledger-task').count()==1 and p.locator('#ledger-question').inner_text()==t['prompt'],'one current source-owned question '+t['id'])
-    ok(t['context'] in p.locator('.ledger-task').inner_text(),'current task source context visible '+t['id'])
+    ok(t['context'] in p.locator('.ledger-task').inner_text(),'current task source context visible '+t['id']);page=next(x for x in work(p)['source']['pages'] if x['id']==t['pageId']);target=page.get('guidedFor');eligible=bool(page['guided']) and (not target or target['kind']=='task' and target['id']==t['id']);ok(p.locator('[data-ledger-learn="guided"]').count()==int(eligible),'Show me how offered only for eligible source target '+t['id']);ok('could not be kept safely' not in p.locator('#ledger-status').inner_text(),'choosing an ineligible guided target gives no false storage warning')
 def fill_task(p,t):
     choose_task(p,t)
     if t['kind']=='numeric':
@@ -133,7 +148,7 @@ def failshot(p,name):
     print('Browser page errors: '+str(errors),flush=True)
     print('Current URL: '+p.url,flush=True)
     p.screenshot(path=str(OUT/(name+'.png')),full_page=True)
-    (OUT/(name+'.html')).write_text(p.content())
+    (OUT/(name+'.html')).write_text(p.content());(OUT/(name+'-speech.json')).write_text(json.dumps(p.evaluate('window.__ledgerSpoken||[]'),indent=2))
 
 def journey(browser,width,base,seeds):
     c,p=setup(browser,width,seeds['base'])
@@ -149,13 +164,15 @@ def journey(browser,width,base,seeds):
         click(p,'[data-ledger-model="reset"]');ok(work(p)['modelStage']==source['model']['stages'][0]['id'],'model reset local example')
         for page in source['pages']:
             turn(p,page['id'])
+            if page['role'] in ['claims','note']:
+                held_history=copy.deepcopy(work(p)['claimHistory']);source_tables(p,source,'before response '+page['role']);ok(work(p)['claimHistory']==held_history,'viewing source tables adds no claim response')
             ok(work(p)['learn'][page['id']]['count']>=1,'first teaching line opens '+page['id'])
             for line in page['learn'][1:]:click(p,'[data-ledger-learn="next"]');ok(line['text'] in p.locator('.ledger-learning').inner_text(),'source teaching line rendered '+line['id'])
             if page['guided']:
                 click(p,'[data-ledger-learn="guided"]');ok(all(line['id'] in work(p)['shown'] for line in page['guided']),'guided support recorded '+page['id'])
             held=copy.deepcopy(work(p)['shown']);click(p,'[data-ledger-learn="question"]');ok(work(p)['learn'][page['id']]['folded'],'question folds teaching');ok(work(p)['shown']==held,'fold retains earlier support');ok(not p.locator('.ledger-model').count(),'fold hides model');click(p,'[data-ledger-fold="false"]')
             click(p,f'[data-ledger-help="together-{page["id"]}"]');ok(f'together-{page["id"]}' in work(p)['help'],'thinking support saved')
-            click(p,'[data-ledger-root] [data-speak]');spoken=p.evaluate('window.__ledgerSpoken');ok(spoken,'speech stub receives local utterance');r=spoken[-1]['book']['ledgerGauge'];sw=r['visits'][r['current']];ok(f'audio-{page["id"]}' in sw['help'],'support saved before local playback')
+            click(p,'[data-ledger-root] [data-speak]');spoken=p.evaluate('window.__ledgerSpoken');ok(spoken,'speech stub receives local utterance');said=spoken[-1]['text'];ok(page['title'] in said,'actual current title is spoken');current=work(p);target=next((t for t in source['tasks'] if t['id']==current['tasks'].get(page['id'])),None) if page['role'] in ['records','rain'] else None;ok((target['prompt'] in said and target['context'] in said) if target else (next(c for c in source['claims'] if c['id']==current['claimId'])['text'] in said if page['role']=='claims' else next(x for x in source['parts'] if x['id']==current['partId'])['prompt'] in said),'actual current task/claim/writing prompt spoken');ok(source['help'][f'audio-{page["id"]}']['text'] not in said,'audio provenance body is not the narration');r=spoken[-1]['book']['ledgerGauge'];sw=r['visits'][r['current']];ok(f'audio-{page["id"]}' in sw['help'],'support saved before local playback')
             bounds(p)
         turn(p,'records')
         for card in source['sources']:
@@ -163,7 +180,8 @@ def journey(browser,width,base,seeds):
         print(f'Ledger journey {width}: all questions, claims, note',flush=True)
         for task in source['tasks']:
             fill_task(p,task)
-            for hid in [task['hintId'],task['exampleId']]:click(p,f'[data-ledger-help="{hid}"]');ok(hid in work(p)['help'],'task support saved '+hid)
+            for hid in [task['hintId'],task['exampleId']]:click(p,f'[data-ledger-help="{hid}"]');ok(hid in work(p)['help'],'task support saved '+hid);ok('could not be kept safely' not in p.locator('#ledger-status').inner_text(),'Hint and Different example usable '+task['id']);
+            if task['id']=='mean-before':ok('Add 40 and 60' in p.locator('.ledger-task').inner_text() and '20 and 40 have total 60; 60 ÷ 2 = 30 cm' in p.locator('.ledger-task').inner_text(),'readable helper number words and punctuation independent of source equality')
             count=len(work(p)['checks']);click(p,f'[data-ledger-skip="{task["id"]}"]');ok(task['skipId'] in work(p)['help'] and len(work(p)['checks'])==count,'skip source support without attempt')
         ok(len(work(p)['checks'])==15,'all15questions checked in actual app')
         turn(p,'claims');count=len(work(p)['checks'])
@@ -202,6 +220,41 @@ def journey(browser,width,base,seeds):
         raise
     finally:c.close()
 
+def review_regressions(browser,base,seeds):
+    c,p=setup(browser,820,seeds['voice'])
+    try:
+        go(p,base);v=work(p);page=next(x for x in v['source']['pages'] if x['id']=='records');task=v['source']['tasks'][0]
+        def hear():
+            click(p,'[data-ledger-root] [data-speak]');return p.evaluate('window.__ledgerSpoken.at(-1)')
+        event=hear();said=event['text'];ok(page['title'] in said and task['prompt'] in said and task['context'] in said,'Hear reads actual current title, prompt and context');ok('VISIBLE_LEARNING_SENTINEL' in said,'visible learning line read aloud');ok(all(x not in said for x in ['AUDIO_METADATA_SENTINEL','UNREQUESTED_LEARNING_SENTINEL','UNREQUESTED_HINT_SENTINEL','ARCHIVED_HELPER_SENTINEL','The current displayed words were made available']),'metadata and unrequested/archived words never replace actual narration');saved=event['book']['ledgerGauge'];ok('audio-records' in saved['visits'][saved['current']]['help'],'audio marker saved before actual page playback');ok('AUDIO_METADATA_SENTINEL' not in p.locator('main').inner_text(),'audio provenance body never rendered');ok(not rival(p).get('priorFactShown') and '2x3' in book(p).get('exposures',[]),'audio metadata7x8 does not qualify while current visible2x3 does')
+        click(p,'[data-ledger-fold="true"]');said=hear()['text'];ok('VISIBLE_LEARNING_SENTINEL' not in said and page['learn'][1]['text'] not in said and v['source']['model']['title'] not in said,'folded learning and model are not spoken');ok(task['prompt'] in said and task['context'] in said,'folded card keeps current question narration')
+        click(p,f'[data-ledger-help="{task["exampleId"]}"]');said=hear()['text'];ok(v['source']['help'][task['exampleId']]['text'] in said,'requested active example is actually spoken');ok('ARCHIVED_HELPER_SENTINEL' not in said and 'UNREQUESTED_HINT_SENTINEL' not in said,'archived or unrequested helpers remain silent')
+        choice=next(t for t in v['source']['tasks'] if t['id']=='count-periods');choose_task(p,choice);said=hear()['text'];ok(choice['prompt'] in said and all(x['text'] in said for x in choice['choices']),'active question choices are read from frozen source');ok(v['source']['help'][task['exampleId']]['text'] not in said,'earlier task helper no longer spoken after selecting another question')
+        turn(p,'claims');claim=next(x for x in work(p)['source']['claims'] if x['id']==work(p)['claimId']);ok(claim['text'] in hear()['text'],'actual current claim spoken');turn(p,'note');part=next(x for x in work(p)['source']['parts'] if x['id']==work(p)['partId']);said=hear()['text'];ok(part['title'] in said and part['prompt'] in said,'actual current writing title and prompt spoken')
+    except Exception:failshot(p,'failure-review-speech');raise
+    finally:c.close()
+    for role in ['claims','note']:
+        c,p=setup(browser,820,seeds['hiddenTask-'+role])
+        try:
+            go(p,base);ok(p.locator('.ledger-task').count()==0,'earlier task assigned to '+role+' is not rendered');ok(not rival(p).get('priorFactShown') and '2x3' in book(p).get('exposures',[]),'hidden task/check/helper7x8 excluded beside rendered '+role+' context2x3');ok('VISIBLE_ROLE_CONTEXT_SENTINEL' in p.locator('.ledger-learning').inner_text(),'positive visible role context rendered');click(p,'[data-ledger-root] [data-speak]');said=p.evaluate('window.__ledgerSpoken.at(-1).text');ok('VISIBLE_ROLE_CONTEXT_SENTINEL' in said and 'HIDDEN_TASK_CONTEXT_SENTINEL' not in said and 'HIDDEN_TASK_HELPER_SENTINEL' not in said,'actual '+role+' speech excludes hidden task/check/helper');source_tables(p,work(p)['source'],'earlier task placement '+role)
+        except Exception:failshot(p,'failure-hidden-task-'+role);raise
+        finally:c.close()
+    c,p=setup(browser,320,seeds['oldTables'])
+    try:
+        go(p,base);expected=copy.deepcopy(work(p)['source']);held=copy.deepcopy(ledger(p));source_tables(p,expected,'older claims before response');ok(len(expected['records']['events'])==6 and expected['records']['events'][0]['height']==66,'older synthetic source differs from current seven-entry record');ok([i['rainCount'] for i in expected['records']['intervals']]==[2,9,4,7],'older copied tally differs from current6/5/6/8');turn(p,'note');source_tables(p,expected,'older note before writing');ok(work(p)['claimHistory']==[] and work(p)['writing']=={} and work(p)['source']==expected,'own older evidence accessible without answering or rewriting source');bounds(p)
+    except Exception:failshot(p,'failure-earlier-source-tables');raise
+    finally:c.close()
+    c,p=setup(browser,820,seeds['missingInvalid'])
+    try:
+        go(p,base);task=work(p)['source']['tasks'][0];before=book(p);click(p,f'[data-ledger-check="{task["id"]}"]');text=p.locator('#ledger-status').inner_text();ok('Enter a number' in text and 'undefined' not in text and 'could not be kept safely' not in text,'missing old invalid label displays neutral instructions');ok(book(p)==before,'incomplete check with missing label creates no saved attempt');p.locator(f'[data-ledger-field="{task["fields"][0]["id"]}"]').fill('1e3');click(p,f'[data-ledger-check="{task["id"]}"]');ok('Enter a number' in p.locator('#ledger-status').inner_text() and len(work(p)['checks'])==0,'unreadable syntax retains neutral instructions without an attempt')
+    except Exception:failshot(p,'failure-missing-invalid');raise
+    finally:c.close()
+    c,p=setup(browser,820,seeds['keptPlan'])
+    try:
+        go(p,base);kept=work(p)['kept'];original=next(x for x in kept['source']['plans'] if x['id']==kept['planId']);p.locator('.ledger-kept details[data-ledger-panel^="read-"]').evaluate_all('xs=>xs.forEach(x=>x.open=true)');labels=p.locator('.ledger-kept-plan').all_inner_texts();ok(len(labels)>=4,'first/latest keep and both Read your page views show original plan');ok(all(original['title'] in text and original['text'] in text and 'CURRENT_CHANGED_PLAN_TITLE_SENTINEL' not in text for text in labels),'kept plan uses original selected plan label and description after current source/plan changes');ok(work(p)['planId']=='sponge' and kept['planId']=='wall','current plan and original kept plan remain separate')
+    except Exception:failshot(p,'failure-kept-plan');raise
+    finally:c.close()
+
 def edges(browser,base,seeds):
     c,p=setup(browser,820,seeds['foldedProvenance'])
     try:
@@ -224,7 +277,7 @@ def edges(browser,base,seeds):
             go(p,base);held=copy.deepcopy(ledger(p))
             if name=='future':ok(not p.locator('[data-ledger-start]').count(),'future root read-only');ok(ledger(p)==held,'future root exact');p.goto(base+'#pathways/science');p.locator('a[href="'+ROUTE+'"]').first.wait_for(state='attached');ok(ledger(p)==held,'other destinations open around future root')
             else:
-                ok('Earlier empty interval' in p.locator('.ledger-task').inner_text(),'earlier own source prompt/context');fill_task(p,work(p)['source']['tasks'][0]);ok('Not available' in p.locator('.ledger-table-wrap').inner_text(),'older empty maximum unavailable');turn(p,'note');ok(p.locator('[data-ledger-part] option').count()==2,'one earlier writing part with chooser placeholder');own(p,work(p)['source']['parts'][0]['id'],'Healthy synthetic old-source note.');click(p,'[data-ledger-keep]');ok(work(p)['source']==held['visits'][held['current']]['source'],'old unknown source never current-catalog rewritten')
+                ok('Earlier empty interval' in p.locator('.ledger-task').inner_text(),'earlier own source prompt/context');fill_task(p,work(p)['source']['tasks'][0]);ok('Not available' in p.locator('.ledger-table-wrap').first.inner_text(),'older empty maximum unavailable');turn(p,'note');ok(p.locator('[data-ledger-part] option').count()==2,'one earlier writing part with chooser placeholder');own(p,work(p)['source']['parts'][0]['id'],'Healthy synthetic old-source note.');click(p,'[data-ledger-keep]');ok(work(p)['source']==held['visits'][held['current']]['source'],'old unknown source never current-catalog rewritten')
                 if name=='damaged':
                     ok(work(p)['checks'][0]=={'taskId':'earlier-maximum','future':'unreadable latest check'},'raw malformed check retained');p.locator('[data-ledger-remove-choice]').evaluate("x=>{for(let e=x.parentElement;e;e=e.parentElement)if(e.tagName==='DETAILS')e.open=true}");p.locator('[data-ledger-remove-choice]').select_option('[raw visit]');before=copy.deepcopy(work(p));serial=ledger(p)['next'];p.once('dialog',lambda d:d.accept());click(p,'[data-ledger-remove]');ok('[raw visit]' not in ledger(p)['visits'] and work(p)==before and ledger(p)['next']==serial,'confirmed raw-key deletion preserves healthy visit and serial')
         except Exception:failshot(p,'failure-'+name);raise
@@ -261,7 +314,7 @@ if __name__=='__main__':
             browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'))
             try:
                 for width in [320,820]:journey(browser,width,base,seeds)
-                edges(browser,base,seeds);legacy_transfer(browser,base,seeds);ok(not errors,'no actual page errors '+str(errors));print(f'Ledger Chrome: {checks} assertions passed; synthetic artifacts {OUT}')
+                edges(browser,base,seeds);review_regressions(browser,base,seeds);legacy_transfer(browser,base,seeds);ok(not errors,'no actual page errors '+str(errors));print(f'Ledger Chrome: {checks} assertions passed; synthetic artifacts {OUT}')
             finally:browser.close()
     finally:
         if server:server.shutdown()

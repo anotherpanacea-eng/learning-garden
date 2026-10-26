@@ -585,10 +585,10 @@ The specification supplies the numeric fields, expected values, hint and differe
 
 | ID | Match reply | Different reply |
 | --- | --- | --- |
-| entry-counts | Two entries are in years 1–21:4 and 15. Five are in years 22–40:27, 31, 34, 36, 38. These are recorded entries, not a complete flood count. | Count the written years on each side of 22. Years 4 and 15 are before;27, 31, 34, 36, 38 are in the later period. An unwritten year is not another flood entry. |
-| mean-before | 40 + 60 = 100 cm in total;100 ÷ 2 = 50 cm. That is the exact mean of these two entries. | Add the two written heights,40 and 60, then divide their 100 cm total by 2 entries. Dividing by 21 years answers a different question. |
-| mean-after | 120 + 80 + 120 + 140 + 100 = 560 cm;560 ÷ 5 = 112 cm. Both 120 cm entries count. The separate storm is excluded. | Use the five dated later entries. Add both 120 s,80, 140 and 100, then divide their 560 cm total by 5 entries. The later storm is a separate note. |
-| ranges | The earlier range is 60 − 40 = 20 cm. The later range is 140 − 80 = 60 cm. These describe the two recorded groups. | Use highest minus lowest within each group. Earlier:60 − 40. Later:140 − 80. A maximum alone is not a range. |
+| entry-counts | Two entries are in years 1–21: 4 and 15. Five are in years 22–40: 27, 31, 34, 36, 38. These are recorded entries, not a complete flood count. | Count the written years on each side of 22. Years 4 and 15 are before; 27, 31, 34, 36, 38 are in the later period. An unwritten year is not another flood entry. |
+| mean-before | 40 + 60 = 100 cm in total; 100 ÷ 2 = 50 cm. That is the exact mean of these two entries. | Add the two written heights, 40 and 60, then divide their 100 cm total by 2 entries. Dividing by 21 years answers a different question. |
+| mean-after | 120 + 80 + 120 + 140 + 100 = 560 cm; 560 ÷ 5 = 112 cm. Both 120 cm entries count. The separate storm is excluded. | Use the five dated later entries. Add both entries of 120 cm, then 80, 140 and 100 cm, then divide their 560 cm total by 5 entries. The later storm is a separate note. |
+| ranges | The earlier range is 60 − 40 = 20 cm. The later range is 140 − 80 = 60 cm. These describe the two recorded groups. | Use highest minus lowest within each group. Earlier: 60 − 40. Later: 140 − 80. A maximum alone is not a range. |
 | mean-difference | The two recorded means are 112 and 50 cm. Their difference is 112 − 50 = 62 cm; this is not a measured causal effect. | Subtract the earlier mean 50 from the later mean 112. Reporting either mean alone does not give the difference. |
 | period-one | Year 4 is the only entry in years 1–10. This group has 1 recorded entry and maximum 40 cm. | Use only years 1–10. The ledger entry at year 4 has height 40 cm. Unwritten years add no known heights. |
 | period-two | Year 15 is the only entry in years 11–20. This group has 1 recorded entry and maximum 60 cm. | Use only years 11–20. Year 15 belongs here; year 4 and year 27 do not. The one supplied height is 60 cm. |
@@ -611,9 +611,9 @@ Prompt: **Which sentence keeps the counts and time periods clear?**
 
 Prompt: **What does the earlier 50 cm mean establish?**
 
-1. “It is the mean of every flood in those 21 years.” Reply: “Hollis did not record every flood.50 cm is the mean of 40 and 60, not a known mean of all earlier floods.”
-2. “Nothing numerical can be said about just two recorded values.” Reply: “We can calculate the mean of these values:100 ÷ 2 = 50 cm. The limit concerns generalising beyond them.”
-3. “It is the exact mean of the two written heights.” Reply: “40 and 60 have total 100;100 ÷ 2 = 50 cm. The arithmetic is exact for those entries, while unwritten floods remain unknown.” **Fits.**
+1. “It is the mean of every flood in those 21 years.” Reply: “Hollis did not record every flood. 50 cm is the mean of 40 and 60, not a known mean of all earlier floods.”
+2. “Nothing numerical can be said about just two recorded values.” Reply: “We can calculate the mean of these values: 100 ÷ 2 = 50 cm. The limit concerns generalising beyond them.”
+3. “It is the exact mean of the two written heights.” Reply: “40 and 60 have total 100; 100 ÷ 2 = 50 cm. The arithmetic is exact for those entries, while unwritten floods remain unknown.” **Fits.**
 
 ### unwritten-years
 
@@ -643,7 +643,7 @@ Prompt: **Which changes does Hollis explicitly record at year 22?**
 
 Prompt: **Where does period 21–30 sit beside the change at 22?**
 
-1. “It includes years on both sides of 22.” Reply: “Year 21 is before 22;22 through 30 belong to the later period. The whole interval cannot be called wholly before or wholly after.” **Fits.**
+1. “It includes years on both sides of 22.” Reply: “Year 21 is before 22; 22 through 30 belong to the later period. The whole interval cannot be called wholly before or wholly after.” **Fits.**
 2. “Every year in it is after the change.” Reply: “Year 21 is in the interval and comes before 22. The decade total cannot be treated as an entirely later rain total.”
 3. “Every year in it is before the change.” Reply: “Years 22 through 30 are also in this interval. It spans the boundary rather than ending before it.”
 
