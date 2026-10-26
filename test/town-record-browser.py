@@ -176,7 +176,9 @@ const zero=structuredClone(base);startRecord(zero,recordFamilies.find(f=>/zero/i
 const zw=zero.townRecord.visits[zero.townRecord.current];zw.page=1;zw.planning=zw.source.cells.filter(c=>c.value===0).map(c=>c.id);
 const ownSupport=structuredClone(pending);const ownRival=ownSupport.postOffice.visits.find(v=>v.id===ownSupport.postOffice.current).rival;ownRival.task=generateRivalTask('multiply',5,6,0);
 startRecord(ownSupport,recordFamilies[0].id,o);const ow=ownSupport.townRecord.visits[ownSupport.townRecord.current],hid=ow.source.sortTask.exampleId;ow.source.id='earlier-helper-source';ow.source.help[hid]={title:'A different earlier example',text:'An earlier example: 5 × 6 = 30.'};ow.source.helpFacts[hid]=[[5,6]];
-console.log(JSON.stringify({base,pending,saved,malformed,future,missing,zero,ownSupport,families:recordFamilies}));
+const inheritedNames=structuredClone(base);startRecord(inheritedNames,recordFamilies[0].id,o);const inherited=inheritedNames.townRecord.visits[inheritedNames.townRecord.current].source;inherited.questions[0].id='hasOwnProperty';inherited.sortTask.id='isPrototypeOf';inherited.parts[0].id='toLocaleString';inherited.questions[1].page=3;inherited.questions[1].id='later-plan-question';const reservedNames=structuredClone(inheritedNames);reservedNames.townRecord.visits[reservedNames.townRecord.current].source.questions[0].id='toString';
+const damaged=structuredClone(base);damaged.townRecord={version:1,current:'[raw-0]',next:17,visits:Object.fromEntries(Array.from({length:16},(_,i)=>['[raw-'+i+']',{synthetic:'unreadable week '+i}]))};
+console.log(JSON.stringify({base,pending,saved,malformed,future,missing,zero,ownSupport,inheritedNames,reservedNames,damaged,families:recordFamilies}));
 """)
 
 
@@ -271,6 +273,11 @@ def journey(browser,width,base,seeds):
         question(p,q['id'],wrong);first_choice=copy.deepcopy(work(p)['firstChecks'][q['id']])
         question(p,q['id'],q['fit'])
         ok(work(p)['checks'][-1]['outcome']=='match' and work(p)['firstChecks'][q['id']]==first_choice,'revised choice keeps original first source/outcome')
+        secondq=next(q for q in source['questions'] if q['page']==0 and q['id']!=source['questions'][0]['id'])
+        panel=p.locator(f'[data-record-panel="question-{secondq["id"]}"]');panel.evaluate('x=>x.open=true')
+        p.locator(f'[data-record-panel="question-{q["id"]}"]').evaluate('x=>x.open=false')
+        click(p,f'[data-record-panel="question-{secondq["id"]}"] [data-record-help="{secondq["hintId"]}"]')
+        ok(p.evaluate("id=>document.activeElement.closest('[data-record-panel=\"question-'+id+'\"]')!==null",secondq['id']),'shared hint focuses the actual requesting question rather than a collapsed copy')
         rewrite='\nSynthetic method <tag> & exact punctuation.'
         p.locator('[data-record-rewrite]').fill(rewrite)
         turn(p,1);bounds(p)
@@ -282,6 +289,10 @@ def journey(browser,width,base,seeds):
         ok('70 cm' not in p.locator('#record-run-result').inner_text(),'uncollected70cm reading stays out of the sampled result text')
         ok(p.locator('#record-run-result [data-record-point]').count()==run(p)['plannedCount'],'sample chart renders only selected slot marks')
         ok(p.locator('#record-run-result polyline').count()==0,'sample chart draws no fabricated continuous curve')
+        qpeak=next(q for q in source['questions'] if q['id']=='peak')
+        question(p,qpeak['id'],qpeak['fit']);early_general=copy.deepcopy(work(p)['firstChecks'][qpeak['id']])
+        shown=' '.join(p.locator(f'#record-result-{qpeak["id"]} .record-check-context').all_inner_texts())
+        ok(not run(p)['checks'] and 'Highest collected reading:' not in shown and 'numeric readings and' not in shown,'general claim context does not print unanswered numeric aggregates')
         planned=copy.deepcopy(work(p)['planning']);oldrun=copy.deepcopy(run(p))
         cell=next(c for c in source['cells'] if c['id'] not in planned)
         toggle_slot(p,cell)
@@ -310,7 +321,9 @@ def journey(browser,width,base,seeds):
         preset(p,all_preset['id']);collect(p);second_run=run(p)['id']
         ok(run(p)['plannedCount']==28 and run(p)['maximum']==70,'all supplied readings show maximum70 without inventing continuous heights')
         ok(run(p)['plannedCount']>source['budget'],'observer budget is a comparison, not a collection lock')
-        ok(work(p)['firstChecks'][qpeak['id']]['runContext']==context,'a later collection cannot replace earlier claim context')
+        ok(work(p)['firstChecks'][qpeak['id']]==early_general,'a later collection cannot replace earlier claim context')
+        preset(p,all_preset['id']);collect(p)
+        ok('repeated collection' in p.locator('#record-run-result').inner_text().lower(),'collecting the same supplied selection again is labelled as a repeated collection')
         click(p,f'[data-record-run="{first_run}"]')
         ok(run(p)['drafts']['highest']=='0' and run(p)['firstCheck']==first_numeric,'resuming an earlier run restores its own draft and checks')
         click(p,f'[data-record-run="{second_run}"]')
@@ -325,11 +338,15 @@ def journey(browser,width,base,seeds):
         for col in roles.values():click(p,f'[data-record-column="{col["id"]}"]')
         click(p,f'[data-record-check="{source["sheetTask"]["id"]}"]')
         ok(work(p)['checks'][-1]['outcome']=='match','sheet check uses date/time/measurement semantics')
+        missed=next(q for q in source['questions'] if q['id']=='missed');panel=p.locator(f'[data-record-panel="question-{missed["id"]}"]');panel.evaluate('x=>x.open=true')
+        click(p,f'[data-record-panel="question-{missed["id"]}"] [data-record-help="{missed["hintId"]}"]')
+        ok(p.evaluate("id=>document.activeElement.closest('[data-record-panel=\"question-'+id+'\"]')!==null",missed['id']),'a shared sheet hint remains in the missed-reading question')
         turn(p,3);bounds(p)
         part=source['parts'][0];pid=part['id'];own='\nMy original synthetic instructions <tag> & punctuation.'
         plan_own(p,pid,own)
         click(p,f'[data-record-plan-mode="{pid}"][data-mode="supplied"]')
         p.locator(f'[data-record-plan-choice="{pid}"]').select_option(part['options'][0]['id'])
+        ok(p.locator(f'[data-record-plan-choice="{pid}"]').evaluate('x=>document.activeElement===x'),'supplied sentence selection keeps keyboard focus on its own select')
         ok(work(p)['plan'][pid]['own']==own,'supplied choice preserves separate original writing')
         click(p,'[data-record-keep]');first_keep=copy.deepcopy(work(p)['firstKept'])
         ok(first_keep['supportedParts'],'kept supplied text is recorded as support')
@@ -460,6 +477,41 @@ def edge_cases(browser,base,seeds):
         remove=p.locator('[data-record-remove-choice]');remove.evaluate("x=>{for(let e=x.parentElement;e;e=e.parentElement)if(e.tagName==='DETAILS')e.open=true}");remove.select_option('[earlier raw key]')
         p.once('dialog',lambda d:d.accept());click(p,'[data-record-remove]')
         ok('[earlier raw key]' not in root(p)['visits'] and root(p)['visits'][root(p)['current']]==before_remove,'confirmed raw-key removal makes room without resetting healthy work')
+    finally:c.close()
+    c,p=setup(browser,820,seeds['damaged'])
+    try:
+        go(p,base);held=copy.deepcopy(root(p));start(p,seeds['families'][0]['id'])
+        ok(root(p)==held,'a full unreadable book refuses a new visit without dropping raw records')
+        remove=p.locator('[data-record-remove-choice]');remove.evaluate("x=>{for(let e=x.parentElement;e;e=e.parentElement)if(e.tagName==='DETAILS')e.open=true}");remove.select_option('[raw-0]')
+        p.once('dialog',lambda d:d.accept());click(p,'[data-record-remove]')
+        ok(len(root(p)['visits'])==15 and '[raw-0]' not in root(p)['visits'],'an unreadable current book still offers confirmed raw-record removal')
+        start(p,seeds['families'][0]['id'])
+        ok(len(root(p)['visits'])==16 and work(p)['source']['family']==seeds['families'][0]['id'],'making room opens a healthy week while keeping other raw records')
+    finally:c.close()
+    c,p=setup(browser,820,seeds['inheritedNames'])
+    try:
+        go(p,base);source=work(p)['source'];q=source['questions'][0]
+        question(p,q['id'],q['fit'])
+        ok(work(p)['answers']['hasOwnProperty']['choiceId']==q['fit'] and work(p)['checks'][-1]['outcome']=='match','a valid earlier task name creates its own answer rather than reading an inherited method')
+        for card in source['cards']:click(p,f'[data-record-card="{card["id"]}"][data-choice="{card["fit"]}"]')
+        click(p,'[data-record-check="isPrototypeOf"]')
+        ok(work(p)['checks'][-1]['outcome']=='match','an earlier card-task name is stored in its own map slot')
+        turn(p,3);late=next(q for q in source['questions'] if q['page']==3);question(p,late['id'],late['fit'])
+        ok(work(p)['checks'][-1]['taskId']=='later-plan-question' and work(p)['checks'][-1]['outcome']=='match','a supported earlier question on the writing page remains reachable and source-owned')
+        part=source['parts'][0]
+        ok(p.locator('[data-record-plan-mode="toLocaleString"][data-mode="own"]').get_attribute('aria-pressed')=='true','an absent earlier plan entry begins in own-writing mode')
+        plan_own(p,part['id'],'Synthetic own words for an earlier part name.')
+        click(p,'[data-record-keep]')
+        ok(work(p)['plan']['toLocaleString']['own']=='Synthetic own words for an earlier part name.','earlier part names preserve raw writing normally')
+        ok(not p.evaluate("Object.hasOwn(Object.prototype.toLocaleString,'own') || Object.hasOwn(Object.prototype.isPrototypeOf,'assignments')"),'valid source identifiers never write on inherited JavaScript functions')
+    finally:c.close()
+    c,p=setup(browser,820,seeds['reservedNames'])
+    try:
+        go(p,base);held=copy.deepcopy(root(p));earlier=root(p)['current']
+        ok(not p.locator('[data-record-answer]').count() and not p.locator('[data-record-plan-text]').count(),'shared-export reserved source identifiers are retained read-only rather than offered unexportable edits')
+        ok(root(p)==held,'unsupported reserved identifiers remain raw and unchanged')
+        start(p,seeds['families'][1]['id'])
+        ok(root(p)['visits'][earlier]==held['visits'][earlier] and root(p)['current']!=earlier,'a healthy new week stays open around an unsupported optional source')
     finally:c.close()
     c,p=setup(browser,320,seeds['future'])
     try:
