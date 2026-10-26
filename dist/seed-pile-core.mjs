@@ -81,6 +81,11 @@ export function explainPile(state,variant,step,canExport){
   if(pilePosition(r.current)&&!r.current.support.includes('explanation')){if(r.current.support.length>=12)return false;r.current.support.push('explanation');}
  },canExport);
 }
+// Stepping keeps the explanation's own saved source, even if today's catalog wording differs.
+export function stepPile(state,step,canExport){
+ if(!integer(step,0,3))return false;
+ return commit(state,r=>{if(!validPileSource(r.lesson?.source))return false;r.lesson={source:r.lesson.source,step};},canExport);
+}
 export function keepPileNote(state,value,canExport){
  if(typeof value!=='string'||value.length>1000)return false;
  return commit(state,r=>{if(!pilePosition(r.current)||r.current.noteKept||r.notes.filter(readablePileNote).length>=24)return false;r.notes.push({text:value,game:copy(r.current)});r.current.noteKept=true;},canExport);
