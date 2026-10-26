@@ -483,11 +483,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Huge and enormous are too close to rank. Either order fits on a shared rung.
 
 **C5 (Sapling).**
-- Prompt: Light rain fell for a minute. The clothes on the line are...?
+- Prompt: The clothes on the line were dry. After a little rain, Pip feels that they are only slightly wet. No water is dripping from them. Which word fits the clothes now?
 - Choices: Soaked (`stronger-is-better`) · Dripping (`stronger-is-better`) · Damp ✔
-- Feedback: Soaked: A minute of light rain won't soak it. · Dripping: That needs much more rain.
-- Hint: Which is the least wet word?
-- Explanation: The strongest word isn't always best. Pick the shade that matches.
+- Feedback: Soaked: Soaked means thoroughly wet. Pip feels only slight wetness. · Dripping: The story says no water is dripping from the clothes.
+- Hint: Use what Pip notices about the clothes, rather than guessing from how long it rained.
+- Explanation: Damp means slightly wet. Choose the shade that matches the observed clothes; the time or amount of rain alone would not establish their wetness.
 
 **C6 (Seedling, which walk).** Tap the walking word for each sentence.
 - Sentences: Pip ___ past the sleeping cat. · The band ___ through the fair, all in step.
