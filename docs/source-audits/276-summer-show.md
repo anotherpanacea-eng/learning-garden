@@ -2,7 +2,7 @@
 
 For [spec 276](../specs/276-summer-show.md) and its [companion text](../content/276-summer-show-text.md). Writer's pass, 2026-10-26.
 
-**Method and limits.** The public-domain texts were downloaded as plain text from Project Gutenberg (#136, #1322, #1041, #1539, #43825, and #28722 and #76703 for comparison) into the writer's scratch and matched by script (`check276.py`), word for word after whitespace and curly quotes were normalized. Syllable counts and rhymes were checked against the CMU Pronouncing Dictionary (cmusphinx/cmudict, downloaded from GitHub), with seven hand-entered words it lacks (millpond, footbridge, creaks, and the elided forms *dimm'd*, *untrimm'd*, *ow'st*, *grow'st*, *wander'st*, *learn'd*, *wander'd*, *look'd*, *boil'd*, each given the one syllable count its spelling marks). England's programmes of study were read in the DfE text already in the writer's scratch (KS1-2 and KS3). Common Core pages were fetched directly. Other claims were checked by web search excerpts or fetched glossary pages (9 fetches, 4 searches); Britannica and the Poetry Foundation refused fetches. **Marble has no English teaching research** (`research` null for all nine targets). No living author's text is used, and nothing is drawn from the owner's own writing.
+**Method and limits.** The public-domain texts were downloaded as plain text from Project Gutenberg (#136, #1322, #1041, #1539, #43825, and #28722 and #76703 for comparison) into the writer's scratch and matched by script (`check276.py`), word for word after whitespace and curly quotes were normalized. Syllable counts and rhymes were checked against the CMU Pronouncing Dictionary (cmusphinx/cmudict, downloaded from GitHub), with twelve hand-entered words it lacks (millpond, footbridge, creaks, and the elided forms *dimm'd*, *untrimm'd*, *ow'st*, *grow'st*, *wander'st*, *learn'd*, *wander'd*, *look'd*, *boil'd*, each counted without the syllable its apostrophe drops: *untrimm'd*, *wander'st* and *wander'd* are two, the rest one). England's programmes of study were read in the DfE text already in the writer's scratch (KS1-2 and KS3). Common Core pages were fetched directly. Other claims were checked by web search excerpts or fetched glossary pages (9 fetches, 4 searches); Britannica and the Poetry Foundation refused fetches. **Marble has no English teaching research** (`research` null for all nine targets). No living author's text is used, and nothing is drawn from the owner's own writing.
 
 ## Sources
 
@@ -31,7 +31,7 @@ For [spec 276](../specs/276-summer-show.md) and its [companion text](../content/
 | The four public-domain poems as quoted (texts) | Verbatim in the Gutenberg files, by script. | S1, S2, S4, S7 |
 | "Exit, pursued by a bear." is the whole direction, act 3 scene 3 (F2, the bear) | Confirmed in the Gutenberg text; five words. | S6 |
 | Ballad summary: a deal, two strangers at midnight eat the puddings, the husband speaks first, his wife tells him to bar the door (texts) | Confirmed against stanzas 4-11. The strangers plan to shave him with hot pudding water and kiss his wife; child text says only "their plans make the husband jump up and shout". | S7 |
-| Stanza 1 rhymes lines 2 and 4, than/pan (E6) | Confirmed in spelling; "than" is Scots for "then" (Child's text; DSL entry not fetched `[check]`). Lines 1 and 3 (time, mak) do not rhyme. | S7 |
+| Stanza 1 rhymes lines 2 and 4, than/pan (E6) | Confirmed in spelling; "than" as "then": the Dictionary of the Older Scottish Tongue entry *Than, Then, adv.* gives the time sense "at that time, then" (reviewer's search excerpt, dsl.ac.uk/entry/dost/than; the SND page failed to display). Lines 1 and 3 (time, mak) do not rhyme. | S7 |
 | Sonnet 18: 14 lines; ten syllables each; rhymes 5-8 CDCD; line 9 begins "But"; line 3 ten syllables, nine words (E1-E4) | Confirmed by script. Ten syllables needs *temperate* = 3 and *every* = 2, both listed pronunciations. Lines 2/4 rhyme only on an unstressed syllable, so no item keys them. | S4, S14 |
 | Shakespeare's sonnets printed together in 1609, 154 of them (scene 3) | Confirmed. | S5 |
 | Shakespearean sonnet abab cdcd efef gg; iambic pentameter; volta (cards 12-13) | Confirmed; "often turns at line 9" is held to Sonnet 18's own "But". | S8 |
@@ -58,6 +58,9 @@ Stevenson (d. 1894), Whitman (d. 1892), Shakespeare (d. 1616) and the anonymous 
 - "Bed in Summer" line 3's comma, against the 1885 first printing.
 - Whitman's text against the 1865 *Drum-Taps* printing (the quoted text is the late arrangement).
 - First Folio as the first printing of *The Winter's Tale* (standard, not fetched).
-- "than" as Scots for "then" (Dictionary of the Scots Language).
 - Stenhouse's 1790 stage-show report (grown-up panel only).
 - The two Spanish lines, for a fluent reader.
+
+## Independent review (2026-10-25)
+
+Fresh-context reviewer. Re-downloaded Gutenberg #136, #1322, #1041, #1539 and #43825 and the CMU dictionary into a separate folder and re-ran the checks (`review276.py`): all four poems verbatim, the bear direction exact, every count and rhyme the items key confirmed. Whitman's first printing in *Drum-Taps* (1865) confirmed by the Whitman Archive entry (S3, search excerpt). The full "Get Up and Bar the Door" ends with the two strangers planning to shave the husband with a knife and scald him with pudding water; only stanzas 1-2 (the Martinmas puddings and the cold wind) are shown, and the child summary names no knife or scalding.

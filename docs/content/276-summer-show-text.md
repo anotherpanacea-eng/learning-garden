@@ -2,11 +2,7 @@
 
 Companion to [spec 276](../specs/276-summer-show.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip he/him; Dot, Bramble, Nuria and the miller she/her; the librarian they/them; Puff and Ember have no pronouns here. Sources: [audit](../source-audits/276-summer-show.md). Nothing is scored, timed or locked.
 
-**Labels used throughout:**
-- **A story from Willowbank** marks the town, its people and the hat story in all three versions (fiction, newly written).
-- **A true thing about language** marks how poems, scripts and prose work.
-- **A true thing from history** marks real poets, books and dates.
-- **A poem from long ago** marks each public-domain poem, with its source line.
+**Labels:** **A story from Willowbank** (the town, its people, the hat story in all three versions); **A true thing about language** (how poems, scripts and prose work); **A true thing from history** (real poets, books, dates); **A poem from long ago** (each public-domain poem, with its source line).
 
 **Speaking rule (binding):** every "say it" card is spoken to a grown-up. The garden never listens, records or keeps a voice. A child's own poem is written on paper or said aloud; it is never typed in and never stored.
 
@@ -95,7 +91,7 @@ Companion to [spec 276](../specs/276-summer-show.md). Use as written, after revi
 **Longer:**
 > The last lantern is lit. The librarian stands with a very old book. "Shall I compare thee to a summer's day?" they read.
 >
-> Bramble counts on her fingers, then borrows Pip's. "Fourteen lines."
+> Bramble counts on her fingers, then borrows Pip's claws. "Fourteen lines."
 >
 > "A sonnet," says the librarian. "Fourteen lines, and a beat like a heart: da-DUM, five times a line."
 >
@@ -107,10 +103,10 @@ Companion to [spec 276](../specs/276-summer-show.md). Use as written, after revi
 >
 > "The person in the poem. For as long as people read it."
 >
-> Pip looks round at the crowd, all listening. "Well," he says. "It's working."
+> Pip looks around at the crowd, all listening. "Well," he says. "It's working."
 
 **Keeper's note (A true thing from history):**
-> Shakespeare's sonnets were first printed together in 1609: 154 of them. This is Sonnet 18. The spelling here follows a modern transcription that keeps old marks like *dimm'd*, where a letter is left out so the beat stays even.
+> Shakespeare's sonnets were first printed together in 1609: 154 of them. This is Sonnet 18. The spelling follows a modern transcription that keeps old marks like *dimm'd*: the mark shows a left-out letter that is not said.
 
 ### Scene 4. A poem on the bridge (Winter: Lantern Night)
 
@@ -143,7 +139,7 @@ Companion to [spec 276](../specs/276-summer-show.md). Use as written, after revi
 **Keeper's note (A true thing from history):**
 > Robert Louis Stevenson printed "Bed in Summer" in *A Child's Garden of Verses* in 1885. Its first stanza sets winter beside summer: getting up in the dark, going to bed in daylight. Saying a poem by heart for others is called reciting.
 
-### Scene 5. The travelling show (Act V: a travelling show to Vadoalto)
+### Scene 5. The traveling show (Act V: a traveling show to Vadoalto)
 
 **Hook (A story from Willowbank):** Vadoalto has never seen a Willowbank show. The hat story must fit in a boat, and make sense to people who have never met Dot.
 
@@ -182,7 +178,7 @@ Companion to [spec 276](../specs/276-summer-show.md). Use as written, after revi
 **1. Prose: from a made-up Willowbank book, *Tales from the Footbridge***
 
 **Chapter 3. The Hat Goes Sailing**
-> The evening was warm, and the sky over Willow Brook had turned orange. Dot was crossing the footbridge with the last letters of the day when the wind came round the mill. It lifted her hat clean off her head.
+> The evening was warm, and the sky over Willow Brook had turned orange. Dot was crossing the footbridge with the last letters of the day when the wind came around the mill. It lifted her hat clean off her head.
 >
 > The hat spun once in the air. Then it landed on the brook, upside down, like a little boat, and sailed away.
 >
@@ -386,12 +382,12 @@ Worked example: *Bed in Summer, last stanza.*
 3. Let your voice rise at "by day?"
 
 **Card 6. Haiku**
-> A haiku is a short poem about one moment, often with a season clue. In English it often has three lines of 5, 7 and 5 syllables.
+> A haiku is a short poem about one moment, often with a season clue. In English, many poets use three lines of 5, 7 and 5 syllables. Others use fewer.
 
 Worked example: *Bees in the bean rows.*
 1. Three lines.
 2. Claps: 5, 7, 5.
-3. Season clue: bees and bean flowers mean summer.
+3. Season clue: bees in the bean rows mean summer.
 
 **Card 7. Free verse**
 > Free verse has no set rhyme and no steady beat. Its lines can be any length. Where a line stops still matters.
@@ -434,7 +430,7 @@ Worked example: *stanza 2, two ways.*
 3. Dark blue picture: the hat feels far away.
 
 **Card 12. Sonnet (Keeper's Desk)**
-> A sonnet is a 14-line poem. Shakespeare's sonnets rhyme ABAB CDCD EFEF GG: three groups of four lines, then a couplet.
+> A sonnet is a 14-line poem. Most of Shakespeare's sonnets rhyme ABAB CDCD EFEF GG: three groups of four lines, then a couplet.
 
 Worked example: *Sonnet 18, lines 1 to 4.*
 1. Day: A. Temperate: B.
@@ -469,7 +465,7 @@ Worked example: *three poems.*
 > A director chooses the set, the lights, the sound and where actors stand. Two stagings of one script can make an audience feel different things.
 
 Worked example: *the hat flies.*
-1. Script: *(Too late. The hat flies off.)*
+1. Script: *(Too late. The hat flies off ...)*
 2. Dot's staging: bright light, quick whistling. Funny.
 3. Bramble's staging: light fades to blue, wind sound. Worried.
 
@@ -487,11 +483,11 @@ Worked example: *My hat!*
 
 **Header:** Ten poems on one shelf. Which kind is each one?
 
-**Shelf cards:** What Is Quick? · Bed in Summer · three haiku · The Footbridge at Night · When I Heard the Learn'd Astronomer (Sapling) · The Ballad of Dot's Hat · Get Up and Bar the Door (Keeper's Desk) · Sonnet 18 (Keeper's Desk)
+**Shelf cards:** The Footbridge at Night · The Ballad of Dot's Hat · What Is Quick? · three haiku · Sonnet 18 (Keeper's Desk) · When I Heard the Learn'd Astronomer (Sapling) · Bed in Summer · Get Up and Bar the Door (Keeper's Desk)
 
 **Kinds (drop zones):** rhyming couplets · haiku · free verse · ballad · sonnet
 
-**How I knew (clue cards):** Its lines rhyme in pairs · Three short lines, a season clue · No rhyme, no steady beat · It tells a story in four-line stanzas · Fourteen lines, rhyme groups and a couplet
+**How I knew (clue cards):** Fourteen lines, rhyme groups and a couplet · No rhyme, no steady beat · Its lines rhyme in pairs · It tells a story in four-line stanzas · Three short lines, a season clue
 
 **Clap counter:** Tap once for each clap. A dot appears for each one.
 - After a line: That line has {n} claps.
@@ -529,14 +525,14 @@ Worked example: *My hat!*
 
 **Header:** Make a poem of your own. Write it on paper, or say it aloud.
 
-**Pattern frame:** What is ___? A ___ is ___, / ___ing ___.
+**Pattern frame (shown to copy onto paper; nothing to type):** What is ___? A ___ is ___, / ___ing ___.
 
 **Rhyme hunt:** Tap every word that rhymes with *bell*.
 - Cards: shell · ball · well · bed · tell
 - After tapping: Shell, well and tell end in "ell." They rhyme with bell.
 
 **Ending chooser:** "What is red? A rose is red, / ___" Which ending makes a couplet?
-- Choices: growing by the garden wall · growing by the garden shed · in the sun all day long
+- Choices: growing by the old stone wall · growing by the garden shed · in the sun all day long
 - After choosing: Red and shed rhyme. That makes a rhyming couplet.
 
 **Paper card:** Now write your own pattern poem on paper, or say it to a grown-up. The garden doesn't keep it. It's yours.
@@ -547,7 +543,7 @@ Worked example: *My hat!*
 
 **Columns:** Prose · Play script · Poem
 
-**Feature cards:** a chapter heading · paragraphs · "said" and quotation marks · a cast list · speakers' names · stage directions · stanzas · rhyme · a steady beat
+**Feature cards:** a cast list · stanzas · paragraphs · a steady beat · "said" after someone speaks · stage directions · a chapter heading · rhyme · speakers' names
 
 **After sorting:** Same story. Different shapes for reading, acting and saying aloud.
 
@@ -562,11 +558,11 @@ Worked example: *My hat!*
 **Book or stage? (Sapling):** Does each stage moment match the book, or change it? (Set D, D1.)
 
 **Two stagings (Keeper's Desk):** Watch both. The words are the same.
-- Dot's staging: the orange light stays bright. Quick, cheerful whistling. Everyone moves fast.
+- Dot's staging: the orange light stays bright. Quick, cheerful whistling. Pip races along the bank.
 - Bramble's staging: the orange light fades to blue as the hat flies. A soft wind sound. A long silence before the miller speaks.
 - After both: Same script, two stagings. Each one makes its own choices.
 
-**The bear (Keeper's Desk):** Shakespeare wrote only "Exit, pursued by a bear." How would you show it?
+**The bear (Keeper's Desk):** The stage direction says only "Exit, pursued by a bear." How would you show it?
 - An actor in a bear costume · A huge bear shadow on a sheet · Just a roar, and the actor running off
 - After choosing: Tell a grown-up why. Any of these can work.
 
@@ -584,7 +580,7 @@ Worked example: *My hat!*
 
 **After playing:** Did each picture match its words? Did the colors change the feeling?
 
-### The Travelling Show (Act V project)
+### The Traveling Show (Act V project)
 
 **Header:** Plan the show for Vadoalto. It has to fit in one boat.
 
@@ -610,7 +606,7 @@ Worked example: *My hat!*
 
 ## Problem sets
 
-Twenty-eight items. Three-choice right answers sit A 7 / B 6 / C 6. "Say it" items are spoken to a grown-up, never graded and never stored.
+Twenty-eight items; "say it" items are spoken to a grown-up, never graded and never stored.
 
 ### Set A. Rhyme, beat and pattern (Sprout, Seedling)
 
@@ -658,7 +654,7 @@ Twenty-eight items. Three-choice right answers sit A 7 / B 6 / C 6. "Say it" ite
 **B2 (Seedling, 3-choice).**
 - Prompt: Which card describes a haiku?
 - Choices: Three lines, 5, 7 and 5 claps, a summer moment ✔ · Four lines that tell a story; lines 2 and 4 rhyme (`form-from-rhyme`) · Five lines, no rhymes, lines of any length (`haiku-is-any-short`)
-- Feedback: Story card: A story in four lines with rhymes sounds like a ballad stanza. · Five lines: That sounds like free verse. A haiku has three lines.
+- Feedback: Story card: A story in four lines with rhymes sounds like a ballad stanza. · Five lines: That sounds like free verse. A haiku usually has three lines.
 - Hint: Count the lines first.
 - Explanation: A haiku is three short lines about one moment, often with a season clue.
 
@@ -717,10 +713,11 @@ Twenty-eight items. Three-choice right answers sit A 7 / B 6 / C 6. "Say it" ite
 
 **D1 (Sapling, guided sort).** Steps shown first: 1. Find the moment in the book. 2. Find it in the script. 3. Same, or changed?
 - Prompt: Does each stage moment match the book, or change it?
-- Cards: an orange light (matches) · Pip runs along the bank (matches) · the miller nets the hat on the bridge stage, not at the millpond (changes) · Puff plays the wind with a fan (changes) · Pip eats an apple (changes)
-- Feedback for the wind card in "matches" (`stage-must-copy-book`): The book has wind, but nobody plays it. The show added that.
+- Cards: an orange light (matches) · the miller nets the hat by the footbridge, not at the millpond (changes) · Pip runs along the bank (matches) · Pip eats an apple (changes) · Dot cries "My hat!" (matches)
+- Feedback for the apple in "matches" (`stage-must-copy-book`): The book has no apple. The show added it. Adding is a change.
+- Feedback for the orange light in "changes" (`stage-must-copy-book`): The sky is orange in both. The stage shows it with light.
 - Hint: Look for each moment in the book's words.
-- Explanation: A show keeps some details, changes some and adds some.
+- Explanation: A show keeps some details, changes some and adds some. Adding is a change too.
 
 **D2 (Sapling, 3-choice).**
 - Prompt: Which stage line grew from the book's "like a little boat"?
@@ -797,10 +794,10 @@ Twenty-eight items. Three-choice right answers sit A 7 / B 6 / C 6. "Say it" ite
 - Explanation: A script leaves room. Each staging makes its own choices.
 
 **F2 (Keeper's Desk, 3-choice).**
-- Prompt: A Shakespeare script says only "Exit, pursued by a bear." What must each staging decide?
+- Prompt: Shakespeare's stage direction says only "Exit, pursued by a bear." What must each staging decide?
 - Choices: What the bear says (`directions-spoken`) · How to show the bear ✔ · Which chapter the bear is in (`scene-is-chapter`)
 - Feedback: Says: The direction gives the bear no words. · Chapter: Plays have acts and scenes, not chapters.
-- Hint: The script gives five words. What do they leave open?
+- Hint: The direction gives five words. What do they leave open?
 - Explanation: A bear chases a character off. Each staging decides how to show it.
 
 **F3 (Keeper's Desk, 3-choice).**
@@ -839,8 +836,8 @@ Twenty-eight items. Three-choice right answers sit A 7 / B 6 / C 6. "Say it" ite
 - **Syllable:** one beat of a word. Clap it: jump-ing has two.
 - **Beat:** the steady pulse you can clap or tap in a poem.
 - **Pattern poem:** a poem that repeats a shape, changing some words.
-- **Haiku:** a short poem about one moment, often three lines of 5, 7 and 5 syllables in English.
-- **Season clue:** a word that tells the time of year, like bees or lanterns.
+- **Haiku:** a short poem about one moment. In English, often three lines of 5, 7 and 5 syllables, but not always.
+- **Season clue:** a word that tells the time of year, like bees or snow.
 - **Free verse:** a poem with no set rhyme and no steady beat.
 - **Ballad:** a story told as a song or poem, often in four-line stanzas.
 - **Narrative poem:** a poem that tells a story.
@@ -882,15 +879,7 @@ Twenty-eight items. Three-choice right answers sit A 7 / B 6 / C 6. "Say it" ite
 
 ## Off-screen cards (adult-led)
 
-**Card 1 (marked: with a grown-up):** Write a pattern poem on paper: "What is ___? A ___ is ___." Add a rhyming line. Read it to your grown-up.
-
-**Grown-up line:** The poem stays on paper. Nothing is typed, kept or graded. Any rhyme or near-rhyme the child enjoys is fine.
-
-**Card 2 (marked: with a grown-up):** Learn four lines of a poem by heart this week. Then say them to your grown-up.
-
-**Grown-up line:** Any poem works, in any language. Nothing is recorded.
-
-**Card 3 (marked: with a grown-up):** Act the hat scene with a hat and a fan. Swap parts. Try it fast, then slow.
+**Card (marked: with a grown-up):** Act the hat scene with a hat and a fan. Swap parts. Try it fast, then slow.
 
 **Grown-up line:** Ask which way felt funnier and why. There is no right answer.
 
@@ -909,10 +898,10 @@ Authored read-aloud only; no voice is ever captured.
 
 ## Grown-up panel
 
-**What this teaches:** rhyme, syllables and beat; writing a pattern poem with rhyming couplets (on paper); learning a poem by heart and saying it with expression; haiku, free verse, the ballad and the sonnet; rhyme scheme, meter, enjambment, caesura and sound devices; how a poem, a play script and prose are laid out; how a stage version keeps, changes and adds to a book's details; how pictures and color change the feel of a poem; and how directors and performers make choices a script leaves open. UK schools call slanted letters "italics," and the end mark a "full stop"; this pack uses US terms in child text.
+**What this teaches:** reading, writing (on paper) and performing poems and scripts, from rhyme and claps to the sonnet and staging; the teach cards list each step. A pattern poem's rhyme or near-rhyme is the child's own and is never graded. UK schools call slanted letters "italics," and the end mark a "full stop"; this pack uses US terms in child text.
 
 **About speaking and writing:** reciting and performing happen out loud, to you. The garden never records a voice and never stores the child's own poem. If you help with a forgotten word, that is ordinary rehearsal help, like a prompter in a theater.
 
-**About the texts:** the hat story, the ballad, the haiku and the two new poems were written for this pack. "Bed in Summer" (1885), Whitman's poem (1865), Sonnet 18 (1609), the ballad stanzas (first printed 1776; this text 1858) and the Shakespeare stage direction (1623) are public domain; sources are in the audit. The bear direction comes from *The Winter's Tale*, where a character is chased off stage by a bear; the pack quotes only the direction. In the full ballad of *Get Up and Bar the Door*, the strangers plan to shave the husband with hot pudding water and kiss his wife; the pack says only that their plans make him shout. Child's 1858 notes quote an earlier writer, William Stenhouse, saying the ballad gave a scene to a London stage show, *No Song, No Supper*, in 1790: a ballad turned into a play.
+**About the texts:** the hat story, the ballad, the haiku and the two new poems were written for this pack. The old poems and the stage direction are public domain, each dated where it appears; sources are in the audit. In *The Winter's Tale* the bear chases a character off stage; the pack quotes only the direction. In the full ballad of *Get Up and Bar the Door*, the strangers plan to shave the husband with hot pudding water and kiss his wife; the pack says only that their plans make him shout. Child's 1858 notes quote an earlier writer, William Stenhouse, saying the ballad gave a scene to a London stage show, *No Song, No Supper*, in 1790: a ballad turned into a play.
 
-**What it does not claim:** haiku in English do not all count 5, 7 and 5, and the pack says so. Stresses in a line can be read more than one way; the pack counts syllables and teaches da-DUM as the usual pattern, not a rule for every line. The Spanish lines are newly written and need a fluent reader.
+**What it does not claim:** 5, 7 and 5 is a common convention for English haiku, not a rule, and the pack says so. Stresses in a line can be read more than one way; the pack counts syllables and teaches da-DUM as the usual pattern, not a rule for every line. The Spanish lines are newly written and need a fluent reader.

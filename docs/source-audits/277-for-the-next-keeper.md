@@ -23,7 +23,7 @@ Willowbank, the writing table beside the Keeper's Desk, every supplied draft (Pi
 | S9 | Silva Rhetoricae, Brigham Young University | https://rhetoric.byu.edu/Figures/A/anaphora.htm ; https://rhetoric.byu.edu/Figures/E/erotema.htm ; https://rhetoric.byu.edu/Figures/T/tricolon.htm | Anaphora: "Repetition of the same word or group of words at the beginning of successive clauses, sentences, or lines." Erotema: "The rhetorical question. To affirm or deny a point strongly by asking it as a question." Tricolon: three parallel elements in a series (search excerpt; other guides allow unequal lengths, so the glossary says only "three words, phrases or sentences in a row"). |
 | S10 | Merriam-Webster, "fast" (adverb) | https://www.merriam-webster.com/dictionary/fast | "Fast" is a standard adverb meaning quickly, with a usage note calling it a flat adverb; so "ran fast" and "ran quickly" are both standard (D6's "either works"). Seen in a search excerpt (direct fetch was blocked). |
 | S11 | Pack 161 source audit, S9-S11 and second pass (frog facts) | `docs/source-audits/161-like-and-unlike.md` (this repo) | Spawn from late winter or spring, timing set by place and weather, later at altitude (Pyrenean survey: early April near 1,500 m to June near 2,330 m); hatching about 10 days to three weeks; back legs, then front legs, tail absorbed, froglet leaves the water. The library frog card states only these. |
-| S12 | Pack 261 companion text (Fable Shelf) | `docs/content/261-fable-shelf-text.md` (draft, English build-out branch `docs/english-packs-2`) | The two fable cards and every fable line in F1-F3 and F5, quoted exactly from 261's newly written retellings. If 261's wording changes in review, these cards change with it. |
+| S12 | Pack 261 companion text (Fable Shelf) | `docs/content/261-fable-shelf-text.md` (draft, English build-out branch `docs/english-packs-2`) | The two fable cards and every fable line in F1-F3 and F5, quoted exactly from 261's newly written retellings. If 261's wording changes in review, these cards change with it. Independent review 2026-10-25 rechecked every segment against `origin/docs/english-packs-2` at the 261 commit "Fix Codex findings on packs 257, 261 and 274" (after review and Codex's repairs): all exact. |
 | S13 | Kenneth Grahame, *The Wind in the Willows* (1908), Project Gutenberg eBook #289; pack 272's cards W2, W3, W3b | https://www.gutenberg.org/ebooks/289 ; `docs/content/272-long-story-text.md` (branch `docs/english-packs-5`) | Book cards W2, W3 and W3b and every book line in F4 and F5, exact against the Gutenberg text and identical to 272's cards. Public domain in the US (published before 1931) and UK/EU (Grahame died 1932); see 272's audit. |
 
 ## How the quotations were made
@@ -36,9 +36,9 @@ Willowbank, the writing table beside the Keeper's Desk, every supplied draft (Pi
 
 | Claim in spec or companion | Result |
 | --- | --- |
-| A new speaker starts a new paragraph in a story | A widely taught dialogue convention; the KS2 and Appendix 2 texts do not state it in these words `[check]`. Child text says "In a story, each new speaker starts a new paragraph," as a convention; flagged as a review ask. |
-| "Meanwhile" means at the same time | The DfE glossary's own example uses "Meanwhile" to refer back to "the time of waiting" (S3). |
-| Script stage directions go in brackets | A convention; published scripts also use italics `[check]`. Child text teaches brackets as this pack's layout, and card 13 shows one form. |
+| A new speaker starts a new paragraph in a story | A widely taught dialogue convention: writing guides (MasterClass, a Pennsylvania school-district handout, Writers' Toolbox) give it as the usual rule; the KS2 and Appendix 2 texts do not state it in these words, and no style manual was checked `[check]`. Child text (A3) calls it "a writing custom" that stories "usually" follow; the grown-up note says it is not a grammar rule. |
+| "Meanwhile" can mean at the same time | Merriam-Webster (search excerpt, review 2026-10-25): adverb, "during the intervening time" and "at the same time"; Britannica and Oxford Learner's agree. The DfE glossary's example uses the first sense ("the time of waiting", S3). The child text says *can mean* and no longer adds "somewhere else", which is not part of the word's meaning. |
+| Script stage directions go in brackets | A convention; published scripts also use italics `[check]`. Child text says actions "often" go in brackets (card 13, G2, glossary) and the grown-up note names italics. |
 | D6 "lovely" and "delicious" are both fine for the stated reader | Both are ordinary adjectives of approval; the reader card asks for nothing that separates them. |
 | Hob is "a farmer by the ford" | Spec 120 §4, quoting spec 118. |
 | The *Gazette* runs from Act IV | Spec 120 §4. Scenes 1-6 are Act V, so the paper may be named there; bench screens do not name it. |
@@ -57,3 +57,10 @@ No images are embedded. For build, draw original art for the writing table, pape
 ## Marble and Jane
 
 Marble's `research` is null for all nine targets at `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac` (no English teaching research, 0 of 331 English topics, nor at upstream head); the spec paraphrases each topic's description and evidence lines only. Jane at `0ec55f7e083976e6fcc3977fca460b1f5e199d91` informed the lesson shape; no Jane text or code is used.
+
+## Independent review, 2026-10-25
+
+- **Quotations** rechecked by script (`review277.py`): the goat and cat cards, Pip's quote in scene 5, card 12, F1-F3 and F5 against the current 261 companion; W2, W3, W3b, F4 and F5 against Gutenberg #289 (cached text) and 272's current cards on `origin/docs/english-packs-5`. All exact. No *Secret Garden* (#113) line is quoted in this pack.
+- **"Fast" as an adverb** (S10): a second search excerpt shows Merriam-Webster's adverb sense 3a, "in a rapid manner : quickly", and its flat-adverb usage note; direct fetch was refused (403), so the page itself is still unread. D6's "either works" stands.
+- **DfE wording** (S1-S3) rechecked against the cached extracts: the Year 5 and Year 6 cohesion lines and the glossary's cohesion and ellipsis definitions match.
+- Not reopened: Silva Rhetoricae (S9), the KS3 page (S4), Common Core pages (S5), S6-S8 (background only).
