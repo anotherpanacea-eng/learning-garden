@@ -1,5 +1,7 @@
 # 246 · The ledger and the rain gauge
 
+Status: **bounded runtime delivered, 2026-10-26**, through [PR200](https://github.com/anotherpanacea-eng/learning-garden/pull/200#issuecomment-6415649110). The receipt records independent exact-head clearance, merged/deployed assets and hosted verification. The wider Act IV dossier and meeting remain separate future work.
+
 Commissioned 2026-10-26 from [Case 5](../content/118-ledger-and-gauge-case.md), after an independent source/subject advisory. The complete [authored text](../content/246-ledger-gauge-text.md) supplies provenance, teaching,27claim replies and writing options. This commissions a complete standalone data investigation, not the full Act IV dossier, a meeting board, a causal simulation or an official town plan. Route `#learn/science/ledger`; every part is open. [Spec 120](120-keeper-of-the-ways.md) continues to own story pages, letters, acts and plan progression.
 
 ## Purpose and story boundary
