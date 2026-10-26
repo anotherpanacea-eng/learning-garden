@@ -241,6 +241,7 @@ def choose_day(p,cell):
 def toggle_slot(p,cell):
     choose_day(p,cell)
     click(p,f'[data-record-slot="{cell["id"]}"]')
+    ok(p.evaluate("id=>document.activeElement?.dataset.recordSlot===id&&document.activeElement.getClientRects().length>0",cell['id']),'toggling a slot keeps focus on its visible responsive planner control')
 
 
 def plan_own(p,part,value):
