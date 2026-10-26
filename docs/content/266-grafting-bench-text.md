@@ -390,10 +390,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Disappear is the opposite of appear.
 
 **B5 (Sapling).**
-- Prompt: Which word is an action you can do?
-- Choices: dishonest (`prefix-only-verbs`) · overcoat (`prefix-only-verbs`) · overcook ✔
-- Feedback: dishonest: Dishonest describes someone. It isn't an action. · overcoat: An overcoat is a thing you wear.
-- Hint: Can you say "I will ___ it"?
+- Prompt: In which sentence is the bold word an action?
+- Choices: Bramble is never **dishonest**. (`prefix-only-verbs`) · Dot wore her **overcoat**. (`prefix-only-verbs`) · Don't **overcook** the beans. ✔
+- Feedback: dishonest: Here dishonest describes someone. It isn't an action. · overcoat: Here overcoat names the thing Dot wore.
+- Hint: In its sentence, which bold word is something you do?
 - Explanation: Overcook is a verb. Prefixes join nouns and adjectives too.
 
 ### Set C. Verb makers (Sapling)

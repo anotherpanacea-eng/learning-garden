@@ -341,7 +341,8 @@ Worked example: *___ tomorrow, we will check the post. (rain)*
 **Builder (tiles: am · is · are · was · were · will be):**
 - Right now the wind ___ blowing. (is)
 - At three o'clock yesterday, rain ___ falling. (was)
-- All afternoon tomorrow, we ___ planting. (will be)
+- All afternoon tomorrow, we ___ planting. (will be; are also fits)
+  - Feedback for are: Yes. We are planting tomorrow works too: it says the plan is set.
 
 **Every day, or right now?** Put each card on its side.
 - The brook runs past the mill. (every day)
