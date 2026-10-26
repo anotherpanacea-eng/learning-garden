@@ -526,7 +526,7 @@ After page 5 comes free (Act V), the header adds: *It is for the next Keeper.*
 
 **Step 6. Make one change for your reader.** Change your plan if you need to, then tap **Keep my new plan.** Your first plan stays beside it.
 
-**Step 7. Say one honest limit.** Pick a card: *I wrote about one place only.* · *I haven't checked my facts with anyone.* · *My first version was very short.* · *I ran out of time for a second change.*
+**Step 7. Say one honest limit.** Pick a card: *I wrote about one place only.* · *I haven't checked my facts with anyone.* · *My first version was very short.* · *I ran out of time for a second change.* · *A different limit, told to a grown-up.*
 
 **Done line:** Your plan, your change and your limit are kept here. Your writing stays on paper, with you.
 After page 5 comes free, the done line adds: *They go into the Keeper's Pages.*
@@ -599,9 +599,9 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **C2 (Keeper's Desk).**
 - Card: Paragraph 1 praises the new market roof: it keeps the stalls dry. Paragraph 2 gives a downside: it cost more than the town planned.
-- Prompt: Which opener starts paragraph 2?
+- Prompt: Which opener signals that paragraph 2 is the other side?
 - Choices: As a result of this, (`result-for-contrast`) · On the other hand, ✔ · In addition to this, (`addition-for-contrast`)
-- Feedback: As a result: Dry stalls didn't cause the cost. · In addition: This isn't one more good thing. It's a downside.
+- Feedback: As a result: Dry stalls didn't cause the cost. · In addition: It adds a fact, but doesn't signal the other side.
 - Hint: Is paragraph 2 more of the same, a result, or the other side?
 - Explanation: A downside after a good point is a contrast: "On the other hand."
 

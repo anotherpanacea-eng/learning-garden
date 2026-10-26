@@ -295,8 +295,9 @@ Worked example: *the miller's notice*
 
 **Load it (Pip loads one crate per item, reading exactly the marks placed):**
 - All fits: Pip loads one crate for each item. Every label makes sense.
-- Commas where semicolons go: Pip loads six crates. One just says TWO BOXES. Two boxes of what?
-- Slot 1 empty on a lead-in line: Pip reads the lead-in and the first item as one. He looks for "river apples."
+- Commas in both slots 2 and 3 on manifest line 2 (the cart line): Pip loads six crates. One just says TWO BOXES. Two boxes of what?
+- Commas where semicolons go on any other line: Pip can't tell where one load ends and the next begins.
+- Slot 1 empty on a lead-in line: Pip reads the lead-in and the first item as one long item. Where does the list start?
 - A semicolon in slot 1: A semicolon joins two whole sentences. The list isn't one.
 - A colon after *We need*: Pip stops after "We need." Need what? The colon cut the sentence in half.
 - Any other pattern: Pip loads it just as it stands.

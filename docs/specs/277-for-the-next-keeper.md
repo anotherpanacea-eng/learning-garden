@@ -72,7 +72,7 @@ Every screen: *These drafts were written for this table. Your own writing stays 
 - **(e) The Research Corner (Seedling, Sapling).** Three source cards (a library frog book, the miller's pond notes, Pip's unchecked guess); pick the question they answer; tap the sources that help; sort four notes under two headings; choose the short note; tell or write two paragraphs off-screen.
 - **(f) Point and Quote (Sapling, Keeper's Desk).** Two fable cards quoted exactly from 261 and three book cards from 272; **Find the line** for a stated point; **Build the paragraph** in point, quote, explain order; **Two stories, one point** with a line from each.
 - **(g) Form and Effect (Keeper's Desk).** Match four jobs to four forms; turn a story line into a script line; tap the repeated opening, a rhetorical question and the group of three in Bramble's advert; try one technique on paper; an **Either works** card.
-- **Your Page (Act V; Sapling, Keeper's Desk).** Pick a form, a reader and two or three heading cards; write on paper; keep the first plan; read to a grown-up and tick a four-line reader checklist; make one change and keep the new plan beside the first; pick a limit card.
+- **Your Page (Act V; Sapling, Keeper's Desk).** Pick a form, a reader and two or three heading cards; write on paper; keep the first plan; read to a grown-up and tick a four-line reader checklist; make one change and keep the new plan beside the first; pick a limit card, or *A different limit, told to a grown-up* (stored only as its code, `told`), so no one has to choose a limit that isn't true.
 
 ## Problem sets
 

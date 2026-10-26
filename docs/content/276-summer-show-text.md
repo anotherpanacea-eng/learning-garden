@@ -57,7 +57,7 @@ Companion to [spec 276](../specs/276-summer-show.md). Use as written, after revi
 **Hook (A story from Willowbank):** The summer show has a poem between every scene. Pip says one of them is broken. It doesn't rhyme.
 
 **Short:**
-> Pip thinks a poem must rhyme. Bramble says it doesn't, and she's right. Free verse has no rhymes. A haiku doesn't need them either.
+> Pip thinks a poem must rhyme. Bramble says it doesn't, and she's right. Free verse doesn't have to rhyme. A haiku doesn't need them either.
 
 **Longer:**
 > Lanterns hang from the willows. The program is pinned to the hat stall, where Dot is not buying a hat.
