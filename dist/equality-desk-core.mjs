@@ -32,7 +32,7 @@ function proof(source){
  return last.left.m.n===0&&(source.key==='every'?last.right.b.n===0:last.right.b.n!==0);
 }
 export function validEqualitySource(s){try{
- if(!obj(s)||!id(s.id)||!str(s.title,160)||!str(s.family,100)||s.domain!=='real'||!expr(s.left)||!expr(s.right)||!str(s.story)||!arr(s.teaching,12)||!s.teaching.every(t=>str(t))||!obj(s.help)||!str(s.help.hint)||!str(s.help.example)||!str(s.feedback)||!arr(s.choices,3)||s.choices.length!==3||!s.choices.every(c=>obj(c)&&keys.includes(c.id)&&str(c.label,160))||new Set(s.choices.map(c=>c.id)).size!==3||!keys.includes(s.key))return false;
+ if(!obj(s)||!id(s.id)||!str(s.title,160)||!str(s.family,100)||s.domain!=='real'||!expr(s.left)||!expr(s.right)||!str(s.story)||!arr(s.teaching,12)||!s.teaching.every(t=>str(t))||!obj(s.helpFacts)||!['hint','example'].every(key=>arr(s.helpFacts[key],24)&&s.helpFacts[key].every(p=>Array.isArray(p)&&p.length===2&&p.every(n=>int(n,1,12))))||!obj(s.help)||!str(s.help.hint)||!str(s.help.example)||!str(s.feedback)||!arr(s.choices,3)||s.choices.length!==3||!s.choices.every(c=>obj(c)&&keys.includes(c.id)&&str(c.label,160))||new Set(s.choices.map(c=>c.id)).size!==3||!keys.includes(s.key))return false;
  const result=classification(normalizeExpression(s.left),normalizeExpression(s.right));if(s.key!==result.key)return false;
  if(s.key==='one'){if(!number(s.solution)||!same(s.solution,result.solution))return false;const parsed=parseLinearNumber(formatNumber(s.solution));if(!parsed||!same(parsed,s.solution))return false;}else if(s.solution!==null)return false;
  return proof(s);
@@ -87,10 +87,10 @@ function sourcePairs(pairs,source,depth){if(depth>=1)for(const e of [source.left
 function checkPairs(pairs,c){if(!validEqualityCheck(c)||c.source.key!=='one')return;for(const e of [c.source.left,c.source.right])evalPairs(pairs,e,c.source.solution);if(c.raw.choice==='one'){const x=parseLinearNumber(c.raw.answer);if(x)for(const e of [c.source.left,c.source.right])evalPairs(pairs,e,x);}}
 export function equalityFacts(s){try{
  const w=equalityView(s).work;if(!w)return [];const pairs=new Map();
- if(w.page===0)addPair(pairs,fraction(2),fraction(3));
+ if(w.page===0)for(const [a,b] of w.source.helpFacts.example)addPair(pairs,fraction(a),fraction(b));
  if(w.page===1)for(const t of w.tests)if(validEqualityProbe(t))for(const e of [w.source.left,w.source.right])evalPairs(pairs,e,parseLinearNumber(t.raw));
  if(w.page===2)sourcePairs(pairs,w.source,w.line);
- if(w.page===3){if(w.help.includes('example'))addPair(pairs,fraction(2),fraction(3));if(has(w,'firstCheck'))checkPairs(pairs,w.firstCheck);if(w.checks.length)checkPairs(pairs,w.checks.at(-1));for(const k of [w.firstKept,w.kept])if(validEqualityKeep(k)&&validEqualityCheck(k.latestCheck))checkPairs(pairs,k.latestCheck);}
+ if(w.page===3){for(const kind of ['hint','example'])if(w.help.includes(kind))for(const [a,b] of w.source.helpFacts[kind])addPair(pairs,fraction(a),fraction(b));if(has(w,'firstCheck'))checkPairs(pairs,w.firstCheck);if(w.checks.length)checkPairs(pairs,w.checks.at(-1));for(const k of [w.firstKept,w.kept])if(validEqualityKeep(k)&&validEqualityCheck(k.latestCheck))checkPairs(pairs,k.latestCheck);}
  return [...pairs.values()];
  }catch{return [];}}
 export function prepareEqualityDisplay(s,o={}){try{if(!equalityView(s).work)return {ok:true,changed:false};const c=clone(s);o.exposeFacts?.(equalityFacts(c),c);const changed=JSON.stringify(c)!==JSON.stringify(s);if(!changed)return {ok:true,changed:false};if(!fit(c,o))return {ok:false,changed:false};commit(s,c);return {ok:true,changed:true};}catch{return {ok:false,changed:false};}}

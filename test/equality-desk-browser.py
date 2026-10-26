@@ -59,7 +59,9 @@ w.tests.push({synthetic:'unreadable original test'});w.checks.push({synthetic:'u
 w.kept={synthetic:'unreadable latest kept version'};
 malformed.equalityDesk.visits['broken-sibling']={synthetic:'unreadable original work'};
 const future=structuredClone(base);future.equalityDesk={version:99,current:'future',visits:{future:{raw:'exact future words'}}};
-console.log(JSON.stringify({base,pending,saved,malformed,future}));
+const ownSupport=structuredClone(pending);const ownRival=ownSupport.postOffice.visits.find(v=>v.id===ownSupport.postOffice.current).rival;ownRival.task=generateRivalTask('multiply',5,6,0);
+startEquality(ownSupport,'twins',o);const own=ownSupport.equalityDesk.visits[ownSupport.equalityDesk.current];own.source.id='earlier-helper-source';own.source.help.example='An earlier worked example: 5 × 6 = 30.';own.source.helpFacts.example=[[5,6]];own.source.help.hint='An earlier hint: 7 × 8 = 56.';own.source.helpFacts.hint=[[7,8]];
+console.log(JSON.stringify({base,pending,saved,malformed,future,ownSupport}));
 """)
 
 
@@ -412,6 +414,24 @@ def edge_journeys(browser, base, seeds):
         expected=copy.deepcopy(original);expected['priorFactShown']=True
         ok(rival()==expected,'pending Bramble task, raw input and attempts stay otherwise exact')
         ok('2x3' in book(p).get('exposures',[]),'actual host records displayed product exposure')
+    finally:
+        c.close()
+
+
+    # A saved helper owns its product list; today's helper never substitutes for it.
+    c, p = setup(browser, 820, seeds['ownSupport'])
+    try:
+        go(p,base)
+        v=next(v for v in book(p)['postOffice']['visits'] if v['id']==book(p)['postOffice']['current'])
+        ok(v['rival'].get('priorFactShown') is True, 'saved5x6 example qualifies the actual waiting5x6 rival')
+        ok('5x6' in book(p).get('exposures',[]) and '2x3' not in book(p).get('exposures',[]), 'saved example uses its own products instead of today catalog example')
+        ok('5 × 6 = 30' in p.locator('.equality-example').inner_text(), 'actual saved example prose remains visible')
+        turn(p,3)
+        ok('7x8' not in book(p).get('exposures',[]), 'unopened saved hint is not exposed')
+        held=book(p);p.evaluate('window.__equalityRefuse=true');click(p,'[data-equality-help="hint"]')
+        ok(book(p)==held and '7 × 8 = 56' not in p.locator('.equality-help').inner_text(), 'refused saved hint reveals and qualifies nothing')
+        p.evaluate('window.__equalityRefuse=false');click(p,'[data-equality-help="hint"]')
+        ok('7x8' in book(p).get('exposures',[]) and '7 × 8 = 56' in p.locator('.equality-help').inner_text(), 'saved hint qualifies its own product before showing its own text')
     finally:
         c.close()
 
