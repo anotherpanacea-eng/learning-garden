@@ -336,7 +336,7 @@ Each card has one idea and a worked example revealed one step per tap.
 **The river's words:** tap three words or phrases on Card W2 that make the river seem alive. Any of "chasing", "chuckling", "gripping", "a gurgle", "a laugh", "animal" fit.
 - Feedback when a tapped word is about the Mole: That word is about the Mole. Find one about the river.
 
-**The garden's words:** on Card G3, tap the word Mary says twice about the garden. ("still")
+**The garden's words:** on Card G3, tap the word Mary repeats that makes the garden sound quiet. ("still")
 - Done line: A quiet, shut-away place. Ten years with no one talking.
 
 ### (b) Side by Side (Seedling, Sapling)
@@ -465,7 +465,7 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 **A4 (3-choice).** Card G3.
 - Prompt: What does "the first person who has spoken in here for ten years" show?
 - Choices: The garden has been shut a long time. ✔ · Mary has come here every single day. (`contradicts-text`) · The garden is full of noisy birds singing. (`contradicts-text`)
-- Feedback: Every day: She's the first in ten years. · Birds: Mary says twice how still it is.
+- Feedback: Every day: She's the first in ten years. · Birds: Mary keeps saying how still it is.
 - Hint: Ten years with nobody talking. What does that tell you?
 - Explanation: Ten silent years: a shut-away, forgotten place.
 
