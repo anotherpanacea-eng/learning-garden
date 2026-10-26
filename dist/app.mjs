@@ -1,3 +1,5 @@
+import {riverPage,riverEntry,riverRefusal,bindRiver,guardRiverNavigation} from './river-room-ui.mjs';
+import {prepareRiverDisplay} from './river-room-core.mjs';
 import {sorterPage,sorterEntry,bindSorter,guardSorterNavigation} from './borrowed-sorter-ui.mjs';
 import {recordPage,recordRefusal,recordEntry,bindRecord,guardRecordNavigation} from './town-record-ui.mjs';
 import {prepareRecordDisplay} from './town-record-core.mjs';
@@ -350,18 +352,19 @@ function render(){
     const options={save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,entryLesson:detail};
     let content;
     if(choosingExplorer)content=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
+    else if(root==='learn'&&slug==='history'&&detail==='river-room'){const ready=prepareRiverDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?riverPage(state):riverRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='computing'&&detail==='sorting')content=sorterPage(state);
     else if(root==='learn'&&slug==='math'&&detail==='equality'){const ready=prepareEqualityDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?equalityPage(state):equalityRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='math'){const ready=prepareLinearDisplay(state,{...priceOptions(),entryLesson:detail,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?linearPage(state,detail):linearRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='english')content=evidenceVoicePage(state,detail);
-    else if(root==='learn'&&slug==='science'&&detail==='records'){const ready=prepareRecordDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?recordPage(state):recordRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='science'&&detail==='records'){const ready=prepareRecordDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?recordPage(state)+riverEntry():recordRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='science')content=motionPage(state,detail);
     else if(root==='learn'&&slug==='french')content=frenchRoomsPage(state,detail);
-    else content=pathwayPage(state,slug||'math')+(slug==='science'?sorterEntry()+recordEntry()+codesEntry()+waterEntry():slug==='english'?hatsEntry():(!slug||slug==='math')?equalityEntry():'');
+    else content=pathwayPage(state,slug||'math')+(slug==='science'?riverEntry()+sorterEntry()+recordEntry()+codesEntry()+waterEntry():slug==='english'?riverEntry()+hatsEntry():(!slug||slug==='math')?equalityEntry():'');
     main.innerHTML=content;updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{
       $('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());
-      bindSorter(state,options);bindRecord(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindEquality(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindPathways(state,options);bindLinear(state,options);bindEvidenceVoice(state,options);bindMotion(state,options);bindFrenchRooms(state,options);bindSpeech();
+      bindRiver(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindSorter(state,options);bindRecord(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindEquality(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindPathways(state,options);bindLinear(state,options);bindEvidenceVoice(state,options);bindMotion(state,options);bindFrenchRooms(state,options);bindSpeech();
     }
     return;
   }
@@ -409,7 +412,7 @@ function render(){
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
   else if(bridgesBench)html=bridgesPage(explorerStore.active.id);
   else if(root==='desk'&&slug==='linear'){const v=preparePriceDisplay(state,priceOptions());html=v.ok?pricePage(state):priceRefusal();if(v.changed)save();}
-  else if(root==='desk')html=sorterEntry()+recordEntry()+priceEntry()+deskPage(state);
+  else if(root==='desk')html='<details class="panel river-casebook"><summary>Choose another investigation</summary>'+riverEntry()+sorterEntry()+recordEntry()+priceEntry()+'</details>'+deskPage(state);
   else if(root==='almanac')html=keeperPages(state,{blocked:keeperFilmBlocked()});
   else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id);
   else if(bellBench)html=bellStudioPage(state);
@@ -769,7 +772,7 @@ function bindStory(){
 function renderPuzzleEnd(q,o){main.innerHTML=`${heading('An idea to keep.','You made room for a little wondering.')}<section class="summary-callout"><h2>${esc(q.title)}</h2><p>${esc(describe(o))}. ${o.status==='skipped'?'You can return to this puzzle whenever you like.':esc(q.talk)}</p><div class="summary-links"><a href="#puzzles" class="primary">Choose another puzzle</a><a href="#home" class="secondary">Back to the garden</a></div></section>`;main.focus();}
  function showReset(){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>Start with a fresh page?</h2><p>This clears this explorer’s garden, café, stories, practice, guide and character choices, and notes. Other explorers stay in place. Earlier shared copies can be removed separately from notes. Download your notes first if you want to keep them.</p><div class="dialog-actions"><button class="secondary" id="cancel-reset">Keep our progress</button><button class="primary danger" id="confirm-reset">Clear progress</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('#cancel-reset').onclick=()=>d.close();d.querySelector('#confirm-reset').onclick=()=>{stopBell('reset');resetSpeechPreferences();resetEvidenceShelf();resetGatheringBudget();resetPortionsSession();resetFossilSession();state=explorerStore.clearActive();ensurePlantings(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);practiceSession=null;activity=null;active=null;screen='';save();d.close();navigate('#home');};d.addEventListener('close',()=>d.remove());}
  document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(a?.getAttribute('href')==='#main'){event.preventDefault();main.focus();return;}if(a&&a.getAttribute('href')===location.hash){event.preventDefault();if(location.hash==='#numbers/return/ledger')resetRemains();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);}});
- window.addEventListener('hashchange',event=>{if(guardSorterNavigation()||guardRecordNavigation()||guardEqualityNavigation()||guardWaterNavigation())return;if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#begin'&&new URL(event.newURL).hash!=='#begin')resetStartingFlow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#cafe/units'&&new URL(event.newURL).hash!=='#cafe/units')resetUnits();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#loft/shadows'&&new URL(event.newURL).hash!=='#loft/shadows')resetShadow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/scale'&&new URL(event.newURL).hash!=='#workshop/scale')resetScaleSession();cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);});
+ window.addEventListener('hashchange',event=>{if(guardRiverNavigation()||guardSorterNavigation()||guardRecordNavigation()||guardEqualityNavigation()||guardWaterNavigation())return;if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#begin'&&new URL(event.newURL).hash!=='#begin')resetStartingFlow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#cafe/units'&&new URL(event.newURL).hash!=='#cafe/units')resetUnits();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#loft/shadows'&&new URL(event.newURL).hash!=='#loft/shadows')resetShadow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/scale'&&new URL(event.newURL).hash!=='#workshop/scale')resetScaleSession();cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);});
  $('#privacy-button').onclick=()=>$('#about-dialog').showModal();
 noteInstructionArrival();
  render();
