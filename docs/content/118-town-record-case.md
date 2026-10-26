@@ -2,6 +2,8 @@
 
 Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance) and [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127) (Act II, "A garden across the seasons"). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Fiction throughout.
 
+**Bounded runtime commissioning,2026-10-26:** [spec242](../specs/242-town-record.md) owns the reviewed first-slice contract and supersedes the draft’s changing ordinary-water reference, isolated method-card context and stale topic crosswalk for implementation. Annual arithmetic, condition-triggered monitoring and ActII adapters remain proposed; the runtime must not adopt them implicitly.
+
 Case ID `town-record`. Appears with Act II's chapter *A garden across the seasons*, when the librarian says "From now on, Willowbank keeps records." It must not use page 2 (the flood ledger), which dries at the end of Act II.
 
 ## 1. Why this case

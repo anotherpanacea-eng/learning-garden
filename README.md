@@ -12,6 +12,8 @@ Number Garden now has a storm-recovery purpose: count saved seeds, plan 24 plant
 
 The **Equality Desk** (`#learn/math/equality`) follows the signed-rate lessons. Test exact numbers against two rules, reveal equivalent transformations, and distinguish one solution, no solutions and every real number as a solution. Four open families revisit60 variants with negative and fractional solutions, brackets and an answer beyond the sample table. Waiting work keeps its original sources, tests, support and first/latest claims; these are supported investigations, not grades.
 
+The **Town Record** (`#learn/science/records`) turns a blank town book into a sampling investigation. Choose when to observe a fictional week, compare what schedules capture, keep zero separate from missing readings, and write instructions a future reader could follow. Earlier collections and writing remain available when planning a new run. It supplies a bounded data-design step, not real flood advice or a complete statistics course.
+
 ## Full learning graph and next games
 
 The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marble reference graph: 1,590 topics, 3,221 prerequisite edges, eight subjects and 54 domains. The [all-topic index](curriculum/topic-coverage.csv) distinguishes current scoped activity references, supplied explanations and topics not yet mapped. Seven reusable play patterns guide extensions and new games; proposed priorities include Word Workshop, field notebooks/food webs, café fractions and money, messages/map-making, historical evidence, sound/light creation and collaborative stories. These are authoring plans, not a required child sequence or claims of full-topic assessment. Geography, art, music and additional languages also need explicitly authored extensions beyond Marble's subject organization.
@@ -61,6 +63,7 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/town-record-checks.mjs
 node test/equality-desk-checks.mjs
 node test/keeper-story-checks.mjs
 node test/keepers-desk-checks.mjs

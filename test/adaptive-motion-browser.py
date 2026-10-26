@@ -20,11 +20,15 @@ def setup(browser,width):
  def app(route):
   r=route.fetch();body=r.text();assert 'let graph=null;' in body
   body=body.replace('let graph=null;','window.__pathRead=()=>structuredClone(state);let graph=null;',1)
+  marker='bindMotion(state,options);';assert marker in body
+  body=body.replace(marker,marker+"document.querySelector('[data-motion-root]')?.setAttribute('data-test-motion-route',location.hash);",1)
   body=body.replace('function notesReport(notebook){return {',"function notesReport(notebook){if(window.__pathRefuse)throw Error('Synthetic preflight refusal');return {",1)
   route.fulfill(response=r,body=body)
  c.route('**/app.mjs',app);p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)));return c,p
+def ready(p):
+ p.wait_for_function("document.querySelector('[data-motion-root]')?.getAttribute('data-test-motion-route')===location.hash")
 def go(p):
- p.goto(BASE+'#learn/science');p.locator('[data-motion-root]').wait_for()
+ p.goto(BASE+'#learn/science');p.locator('[data-motion-root]').wait_for();ready(p)
 def dismiss_film(p):
  if p.locator('[data-film-skip]').count():p.locator('[data-film-skip]').click()
 def start(p,id):p.locator('[data-motion-start="'+id+'"]').first.click()
@@ -43,7 +47,7 @@ with sync_playwright() as pw:
   for width in [320,820]:
    c,p=setup(browser,width);go(p);ok('motionEvidence' not in book(p),'read-only entry does not allocate');bounds(p)
    start(p,'arrows');fixed=book(p)['motionEvidence']['lessons']['arrows'];
-   p.goto(BASE+'#learn/science/arrows');p.locator('[data-motion-root]').wait_for()
+   p.goto(BASE+'#learn/science/arrows');p.locator('[data-motion-root]').wait_for();ready(p)
    p.locator('[data-motion-challenge]').select_option('design');p.locator('[data-motion-create]').click();
    p.wait_for_function("window.__pathRead().motionEvidence.currentId.includes('-design-')")
    ok(work(p)['source']['adaptive']['kind']=='design','explicit open override creates chosen concept')
@@ -57,17 +61,17 @@ with sync_playwright() as pw:
    fill(p,'revision','\nRevised synthetic message after the new information.');p.locator('[data-motion-keep]').last.click();held=work(p)
    ok(held['firstKept']['drafts']['explanation']=='\nOriginal synthetic message and reasoning.','first original retained before reveal')
    p.locator('[data-motion-create]').click();ok(book(p)['motionEvidence']['currentId']!=held_id,'new return allocates separate visit');ok(work(p)['source']['adaptive']['caseId']!=src['adaptive']['caseId'],'new case changes meaningful model/map/source');start(p,held_id);ok(work(p)==held,'history resumes exact frozen source/support/drafts/kept writing')
-   p.reload();p.locator('[data-motion-root]').wait_for();ok(work(p)==held,'reload does not regenerate source');bounds(p)
+   p.reload();p.locator('[data-motion-root]').wait_for();ready(p);ok(work(p)==held,'reload does not regenerate source');bounds(p)
    exported=download(p);ok(exported['motionEvidence']==book(p)['motionEvidence'],'actual notes export includes generated visits')
    p.locator('#progress-file').set_input_files({'name':'synthetic-adaptive.json','mimeType':'application/json','buffer':json.dumps(exported).encode()});p.locator('#progress-import-confirm').click();ok('Notebook brought' in p.locator('#progress-import-status').inner_text(),'actual generated notebook import succeeds')
-   p.goto(BASE+'#learn/science/'+held_id);p.locator('[data-motion-root]').wait_for();ok(work(p)==held,'actual import preserves frozen generated work and exact writing')
+   p.goto(BASE+'#learn/science/'+held_id);p.locator('[data-motion-root]').wait_for();ready(p);ok(work(p)==held,'actual import preserves frozen generated work and exact writing')
    p.evaluate('window.__pathRefuse=true');before=book(p);fill(p,'explanation','Unsaved synthetic words');ok(book(p)==before,'actual host refusal atomic');p.locator('[data-motion-create]').click();ok(p.locator('[data-motion-field="explanation"]').input_value()=='Unsaved synthetic words','refused creation keeps unsaved draft visible');p.evaluate('window.__pathRefuse=false');fill(p,'explanation','\nOriginal synthetic message and reasoning.');
    # Explicit selected deletion requires a separate confirmation; cancellation is pure.
    p.locator('.motion-removal summary').click();p.locator('[data-motion-remove-select]').select_option(held_id);before=book(p);p.locator('[data-motion-remove]').click();ok(p.evaluate('document.activeElement.hasAttribute(\"data-motion-remove-confirm\")'),'confirmation focus is local');ok(book(p)==before,'removal prompt is save-neutral');ok(held_id in p.locator('[data-motion-remove-description]').inner_text(),'confirmation names exact visit');ok('first/latest kept snapshots' in p.locator('[data-motion-remove-description]').inner_text(),'confirmation warns about kept writing');p.locator('[data-motion-remove-cancel]').click();ok(book(p)==before,'cancel preserves notebook');p.locator('[data-motion-remove]').click();p.locator('[data-motion-remove-confirm]').click();ok(held_id not in book(p)['motionEvidence']['lessons'],'only confirmed selected generated visit removed');ok(book(p)['motionEvidence']['lessons']['arrows']==fixed,'fixed lesson protected');ok(not book(p)['motionEvidence']['currentId'],'removed current returns to selection');bounds(p)
    # New explorer and detached stale generated controls cannot cross owners.
-   p.locator('[data-motion-challenge]').select_option('design');p.locator('[data-motion-create]').click();held_root=book(p)['motionEvidence'];stale=p.locator('[data-motion-field="explanation"]').element_handle();original_id=p.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId")
-   p.locator('#explorer-switch').click();p.locator('#explorer-new').click();p.locator('[data-explorer-avatar]').nth(1).click();p.locator('#explorer-create').click();dismiss_film(p);p.goto(BASE+'#learn/science');p.locator('[data-motion-root]').wait_for();ok('motionEvidence' not in book(p),'second explorer does not inherit visits');stale.evaluate("e=>{e.value='stale synthetic';e.dispatchEvent(new Event('input',{bubbles:true}));}")
-   ok('motionEvidence' not in book(p),'detached generated control cannot write second explorer');p.locator('[data-motion-create]').click();ok(work(p)['source']['adaptive']['serial']==1,'second explorer has independent counters');p.locator('#explorer-switch').click();p.locator('[data-select-explorer="'+original_id+'"]').click();p.goto(BASE+'#learn/science');p.locator('[data-motion-root]').wait_for();ok(book(p)['motionEvidence']==held_root,'first explorer retains exact history');p.screenshot(path=str(OUT/f'final-{width}.png'),full_page=True)
+   ready(p);p.locator('[data-motion-challenge]').select_option('design');p.locator('[data-motion-create]').click();p.wait_for_function("(()=>{const r=window.__pathRead().motionEvidence;return r.currentId&&r.lessons[r.currentId]?.source.adaptive?.kind==='design';})()");ready(p);held_root=book(p)['motionEvidence'];stale=p.locator('[data-motion-field="explanation"]').element_handle();original_id=p.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId")
+   p.locator('#explorer-switch').click();p.locator('#explorer-new').click();p.locator('[data-explorer-avatar]').nth(1).click();p.locator('#explorer-create').click();dismiss_film(p);p.goto(BASE+'#learn/science');p.locator('[data-motion-root]').wait_for();ready(p);ok('motionEvidence' not in book(p),'second explorer does not inherit visits');stale.evaluate("e=>{e.value='stale synthetic';e.dispatchEvent(new Event('input',{bubbles:true}));}")
+   ok('motionEvidence' not in book(p),'detached generated control cannot write second explorer');p.locator('[data-motion-create]').click();ok(work(p)['source']['adaptive']['serial']==1,'second explorer has independent counters');p.locator('#explorer-switch').click();p.locator('[data-select-explorer="'+original_id+'"]').click();p.goto(BASE+'#learn/science');p.locator('[data-motion-root]').wait_for();ready(p);ok(book(p)['motionEvidence']==held_root,'first explorer retains exact history');p.screenshot(path=str(OUT/f'final-{width}.png'),full_page=True)
    for family in ['forces', 'evidence']:
     p.locator('[data-motion-challenge]').select_option(family);p.locator('[data-motion-create]').focus();p.keyboard.press('Enter');p.wait_for_function("window.__pathRead().motionEvidence.lessons[window.__pathRead().motionEvidence.currentId].source.adaptive.kind==="+json.dumps(family));ok(work(p)['source']['adaptive']['kind']==family,'keyboard creation opens chosen family');bounds(p)
     q=work(p)['source']['items'][0];right=next(x for x in q['choices'] if x['outcome']=='match');p.locator('[data-motion-field="'+q['id']+'"][value="'+right['id']+'"]').check();p.locator('[data-motion-check="'+q['id']+'"]').focus();p.keyboard.press('Enter');ok(work(p)['checks'][-1]['outcome']=='match','keyboard check saves supplied response')
