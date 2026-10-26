@@ -1,6 +1,6 @@
 # Keeper's Desk, Case 7: The borrowed sorting machine
 
-Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance), [spec 119](../specs/119-deeper-bench-packs.md) section 4 (the Sorting Desk's hand-written rules) and [spec 120](../specs/120-keeper-of-the-ways.md) (Les Saules, the post office). Status: **proposed case text, 2026-10-23. Not reviewed, not build-ready.** Fiction throughout. Needs a content reviewer and a subject reviewer for AI literacy (C1).
+Companion to [spec 118](../specs/118-keepers-desk-entry.md) (conventions, records and acceptance), [spec 119](../specs/119-deeper-bench-packs.md) section 4 (the Sorting Desk's hand-written rules) and [spec 120](../specs/120-keeper-of-the-ways.md) (Les Saules, the post office). Status: **original proposed case text, 2026-10-23.** Fiction throughout. [Bounded runtime contract243](../specs/243-borrowed-sorter.md) now owns the commissioned implementation and incorporates independent subject review and six-lens specification review. That contract qualifies the analogy and completes task/support wording; this original dossier is not an independent implementation or release clearance.
 
 Case ID `sorting-machine`. Appears after Act I, once the post is running again.
 
