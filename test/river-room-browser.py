@@ -38,6 +38,7 @@ base.syntheticOther={version:99,raw:['future exact sibling']};startPostOffice(ba
 const pending=structuredClone(base);startAdaptiveRival(pending);pending.postOffice.visits.find(v=>v.id===pending.postOffice.current).rival.task=generateRivalTask('multiply',3,4,0);
 const old=structuredClone(base);startRiver(old);const w=old.riverRoom.visits[old.riverRoom.current],s=w.source;s.id='earlier-river-source';s.title='An earlier bounded river book';s.timeline=s.timeline.slice(0,2);w.order=s.timeline.map(x=>x.id);s.measures=s.measures.slice(0,2);s.analogy.measures=s.analogy.measures.filter(id=>s.measures.some(m=>m.id===id));s.tasks=s.tasks.slice(0,1);s.parts=s.parts.slice(0,1);s.geometry.area={n:1800,d:1};s.geometry.minWidth=225;s.geometry.maxWidth=675;s.geometry.step=225;s.geometry.initialWidth=225;s.geometry.tile={rows:2,columns:3};w.modelWidth=225;
 const malformed=structuredClone(old);keepRiverNote(malformed);const mw=malformed.riverRoom.visits[malformed.riverRoom.current];mw.models.push({synthetic:'unreadable latest model'});mw.checks.push({taskId:mw.source.tasks[0].id,synthetic:'unreadable latest check'});mw.kept={synthetic:'unreadable latest note'};malformed.riverRoom.visits['[raw visit]']={synthetic:'retained raw visit'};
+const malformedAnswer=structuredClone(old);const ma=malformedAnswer.riverRoom.visits[malformedAnswer.riverRoom.current];ma.page=2;ma.answers[ma.source.tasks[0].id]={fields:{[ma.source.tasks[0].fields[0].id]:'x'.repeat(41)},unit:'m'};
 const future=structuredClone(base);future.riverRoom={version:99,raw:['future exact source']};
 const restored=structuredClone(pending);startRiver(restored);restored.riverRoom.visits[restored.riverRoom.current].page=2;
 const helper=structuredClone(restored);const hw=helper.riverRoom.visits[helper.riverRoom.current];hw.page=2;hw.source.id='earlier-helper-source';hw.source.geometry.tile={rows:2,columns:2};const hid=Object.keys(hw.source.help).find(k=>k.includes('example'))||Object.keys(hw.source.help)[0];hw.source.help[hid]={title:'Earlier helper',text:'Earlier: 3 × 4 = 12.',facts:[[3,4]]};
@@ -45,7 +46,7 @@ const scale20=structuredClone(base);startRiver(scale20);const sw=scale20.riverRo
 const legacyScale=structuredClone(scale20);delete legacyScale.riverRoom.visits[legacyScale.riverRoom.current].source.scale;
 function summaryCase(tile,dimensions=false){const n=structuredClone(pending);startRiver(n);const w=n.riverRoom.visits[n.riverRoom.current];if(dimensions){w.source.geometry.area={n:10,d:1};w.source.geometry.minWidth=2;w.source.geometry.maxWidth=2;w.source.geometry.step=1;w.source.geometry.initialWidth=2;w.source.geometry.tile={rows:2,columns:2};w.modelWidth=2;}pageRiver(n,2);keepRiverModel(n);n.riverRoom.visits[n.riverRoom.current].models[0].model.tile=tile;pageRiver(n,4);keepRiverNote(n);return n;}
 const summaryOnly=summaryCase({rows:3,columns:4});const oldTileOnly=summaryCase({rows:2,columns:5});oldTileOnly.postOffice.visits.find(v=>v.id===oldTileOnly.postOffice.current).rival.task=generateRivalTask('multiply',2,5,0);const visibleSummary=summaryCase({rows:2,columns:2},true);visibleSummary.postOffice.visits.find(v=>v.id===visibleSummary.postOffice.current).rival.task=generateRivalTask('multiply',2,5,0);
-console.log(JSON.stringify({base,pending,old,malformed,future,restored,helper,hid,scale20,legacyScale,summaryOnly,oldTileOnly,visibleSummary}));
+console.log(JSON.stringify({base,pending,old,malformed,malformedAnswer,future,restored,helper,hid,scale20,legacyScale,summaryOnly,oldTileOnly,visibleSummary}));
 """
     return json.loads(subprocess.check_output(['node','--input-type=module','-e',source],cwd=ROOT,text=True))
 
@@ -269,6 +270,13 @@ def edge_cases(browser,base,seeds):
                     ok(work(p)['kept']=={'synthetic':'unreadable latest note'},'unreadable latest never falls back');ok(p.locator('[data-river-unreadable]').filter(has_text='Latest note cannot be read here.').count()==1,'unreadable latest labelled');click(p,'[data-river-keep-note]');ok(work(p)['checks'][0]=={'taskId':work(p)['source']['tasks'][0]['id'],'synthetic':'unreadable latest check'},'healthy keeping preserves bad check raw');ok('[raw visit]' in root(p)['visits'],'unreadable sibling visit retained')
                     removal=p.locator('[data-river-remove-choice]');removal.evaluate("x=>{for(let e=x.parentElement;e;e=e.parentElement)if(e.tagName==='DETAILS')e.open=true}");removal.select_option('[raw visit]');held_work=copy.deepcopy(work(p));serial=root(p)['next'];p.once('dialog',lambda d:d.accept());click(p,'[data-river-remove]');ok('[raw visit]' not in root(p)['visits'] and work(p)==held_work and root(p)['next']==serial,'confirmed unreadable raw-key removal preserves healthy work and serial')
         finally:c.close()
+    c,p=setup(browser,820,seeds['malformedAnswer'])
+    try:
+        go(p,base);held=copy.deepcopy(work(p)['answers'])
+        ok(not p.locator('[data-river-field]').count(),'malformed overlong numeric draft is retained read-only')
+        ok(p.locator('.river-numeric [data-river-unreadable]').count()==1,'malformed draft has a visible retained notice')
+        turn(p,4);own(p,work(p)['source']['parts'][0]['id'],'Healthy synthetic writing around malformed numeric draft.');click(p,'[data-river-keep-note]');ok(work(p)['answers']==held,'healthy note preserves malformed answer exactly')
+    finally:c.close()
     for name in ['summaryOnly','oldTileOnly','visibleSummary']:
         c,p=setup(browser,820,seeds[name])
         try:
