@@ -84,7 +84,7 @@ Optional root `summerShow` per explorer, absent until something is kept:
 ```
 summerShow: {
   v: 1,
-  shelf: { shown: [poemId], clues: [clueId], placed: { [poemId]: { kind: kindId, clue: clueId, outcome } }, letters: { [poemId]: { [lineId]: 'A'..'H' } }, at },
+  shelf: { shown: [poemId], clues: [clueId], placed: { [poemId]: { kind: kindId, clue: clueId, outcome } }, letters: { [poemId]: { [lineId]: 'A'..'Z' } }, at },
   rhymeHunt: { shown: [cardId], picked: [cardId], outcome, at },
   ways: { shown: [featureId], placed: { [featureId]: { to: 'poem' | 'script' | 'prose', outcome } }, at },
   stage: { light: lightId, set: [pieceId], places: { [actorId]: placeId }, bear: { shown: [optionId], choice: optionId }, at },

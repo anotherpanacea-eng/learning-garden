@@ -451,7 +451,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Card: *The cart carries three loads [1] apples, six baskets [2] honey cake, two boxes [3] and seeds, one tin.*
 - Prompt: Put a mark in each gap.
 - Answer: [1] colon · [2] semicolon · [3] semicolon.
-- Feedback for a comma in [2] or [3] (`commas-split-items`): Now "six baskets" looks like its own load. Try a semicolon.
+- Feedback for a comma in [2] (`commas-split-items`): Now "six baskets" and "honey cake" run together. Try a semicolon.
+- Feedback for a comma in [3] (`commas-split-items`): Now "two boxes" and "seeds" run together. Try a semicolon.
 - Hint: Each load has a comma inside it already.
 - Explanation: A colon opens the list. Semicolons split the three loads.
 
