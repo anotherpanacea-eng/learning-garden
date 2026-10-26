@@ -63,6 +63,7 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
+node test/ledger-gauge-checks.mjs
 node test/river-room-checks.mjs
 node test/borrowed-sorter-checks.mjs
 node test/town-record-checks.mjs

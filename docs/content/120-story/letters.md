@@ -118,7 +118,7 @@ Sent in answer to the explorer's question in Act III, chapter 4 (any depth may r
 | 21 to 30 | 6 |
 | 31 to 40 | 8 |
 
-This table counts events above an unspecified fictional threshold; it does not report rainfall totals, intensity, duration or ground conditions. Similar event counts can accompany very different rainfall. It leaves the causal question open: a reader may propose either explanation, both, or another, while naming the missing evidence. No reply endorses "probably both" as the conclusion a careful reader must reach. A future source pack must define the threshold and record provenance before using these invented counts.
+This table counts events above an unspecified fictional threshold; it does not report rainfall totals, intensity, duration or ground conditions. Similar event counts can accompany very different rainfall. It leaves the causal question open: a reader may propose either explanation, both, or another, while naming the missing evidence. No reply endorses "probably both" as the conclusion a careful reader must reach. A future source pack that treats these as calibrated measurements must define the threshold and record provenance. The separately reviewed standalone case in [spec246](../../specs/246-ledger-gauge.md) instead uses an explicitly incomplete English copied extract: its absent threshold is named as missing evidence. It does not invent a value, claim comparable rainfall, deliver the full bilingual letter or change story availability.
 
 ---
 
