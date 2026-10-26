@@ -1,3 +1,5 @@
+import {hatsPage,bindHats,hatsEntry} from './which-hat-ui.mjs';
+import {codesPage,bindCodes,codesEntry} from './lantern-codes-ui.mjs';
 import {pathwayPage,pathwayInvitation,bindPathways} from './pathway-entry-ui.mjs';
 import {linearPage,linearRefusal,bindLinear} from './linear-pathway-ui.mjs';
 import {prepareLinearDisplay} from './linear-pathway-core.mjs';
@@ -145,7 +147,7 @@ const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
 keepOfferingHowto(main,()=>choosingExplorer?'':location.hash);
-let needsExplorerInitialization=['pathways','learn'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
+let needsExplorerInitialization=['#post/codes','#post/descriptions'].includes(location.hash)||['pathways','learn'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
 let graph=null;
@@ -300,6 +302,20 @@ function render(){
   const clockWalkBench=root==='post'&&slug==='clock-walk',pavingBench=root==='numbers'&&slug==='paving';
   const collectionBench=root==='living'&&slug==='collection',lanternBench=root==='numbers'&&slug==='lanterns',noticeBench=root==='loft'&&slug==='printer';
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',measureBench=root==='science'&&slug==='measure',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',doubleBench=root==='post'&&slug==='double-check',batchBench=root==='cafe'&&slug==='batches',labelBench=root==='archive'&&slug==='labels',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
+  if(hash==='#post/descriptions'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#post'?'page':'false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):hatsPage(state);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindHats(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});bindSpeech();}return;
+  }
+  if(hash==='#post/codes'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#post'?'page':'false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):codesPage(state);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindCodes(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});bindSpeech();}return;
+  }
   if(hash==='#begin'){
     if(choosingExplorer)resetStartingFlow();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
@@ -325,7 +341,7 @@ function render(){
     else if(root==='learn'&&slug==='english')content=evidenceVoicePage(state,detail);
     else if(root==='learn'&&slug==='science')content=motionPage(state,detail);
     else if(root==='learn'&&slug==='french')content=frenchRoomsPage(state,detail);
-    else content=pathwayPage(state,slug||'math');
+    else content=pathwayPage(state,slug||'math')+(slug==='science'?codesEntry():slug==='english'?hatsEntry():'');
     main.innerHTML=content;updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{
       $('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());
@@ -496,9 +512,9 @@ function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
 function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
 function useExplorer(next,destination='#home'){
- if(!next)return;resetStartingFlow();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=destination==='#cafe/units'||['pathways','learn'].includes(destination.slice(1).split('/')[0]);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
+ if(!next)return;resetStartingFlow();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=['#post/codes','#post/descriptions'].includes(destination)||destination==='#cafe/units'||['pathways','learn'].includes(destination.slice(1).split('/')[0]);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
- if(destination!=='#notes'&&destination!=='#cafe/units'&&!['pathways','learn'].includes(destination.slice(1).split('/')[0]))playFilm('welcome');
+ if(destination!=='#notes'&&destination!=='#cafe/units'&&!['#post/codes','#post/descriptions'].includes(destination)&&!['pathways','learn'].includes(destination.slice(1).split('/')[0]))playFilm('welcome');
 }
 function freshExplorerChoice(){for(const avatar of ['sky','fern','reed'])for(const color of EXPLORER_COLORS)for(const symbol of EXPLORER_SYMBOLS)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
 function chooseExplorer(create=false){resetStartingFlow();cancelProgressImport();if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
@@ -528,7 +544,7 @@ function bindExplorers(){
  $('#explorer-new')?.addEventListener('click',()=>{explorerDraft=freshExplorerChoice();creatingExplorer=true;render();});
  $('#explorer-back')?.addEventListener('click',()=>{creatingExplorer=false;render();});
  $('#explorer-cancel')?.addEventListener('click',e=>{e.preventDefault();choosingExplorer=false;creatingExplorer=false;noteInstructionArrival();render();});
- const explorerDestination=()=>['pathways','learn'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
+ const explorerDestination=()=>['#post/codes','#post/descriptions'].includes(location.hash)?location.hash:['pathways','learn'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
  document.querySelectorAll('[data-select-explorer]').forEach(b=>b.onclick=()=>useExplorer(explorerStore.select(b.dataset.selectExplorer,state),explorerDestination()));
  for(const field of ['avatar','color','symbol'])document.querySelectorAll(`[data-explorer-${field}]`).forEach(b=>b.onclick=()=>{explorerDraft[field]=b.dataset[`explorer${field[0].toUpperCase()+field.slice(1)}`];render();$(`[data-explorer-${field}="${explorerDraft[field]}"]`)?.focus();});
  $('#explorer-create')?.addEventListener('click',()=>useExplorer(explorerStore.add(explorerDraft,state),explorerDestination()));
@@ -778,7 +794,7 @@ function endingFilm(){
  const [root,slug]=(location.hash||'#home').slice(1).split('/');
  if(root==='storm'&&['end','play'].includes(slug)){const v=currentVisit(state);if(v?.finished&&(v.entrance==='paris'||entranceById(v.entrance)?.language==='fr'))return 'paris';}
  if(root==='cafe'&&!['groups','sharing','recipes','batches','fractions','units'].includes(slug)){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
- if(root==='post'&&!['choose','groups','messages','letters','instructions','packing'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
+ if(root==='post'&&!['choose','groups','messages','letters','instructions','packing','codes','descriptions'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
  return null;
 }
-if(!choosingExplorer&&!['pathways','learn'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale')playFilm('welcome');
+if(!choosingExplorer&&!['pathways','learn'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale'&&!['#post/codes','#post/descriptions'].includes(location.hash))playFilm('welcome');
