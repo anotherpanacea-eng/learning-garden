@@ -24,7 +24,7 @@ const cards=[
  {id:'saline',title:'Saline water',text:'Saline means salty. Most saline water is in oceans. Some lakes and groundwater are salty too.',pictureDescription:'Ocean waves with a labeled saline-water card.'},
  {id:'ice',title:'Ice caps, glaciers and permanent snow',text:'Ice is water in solid form. These frozen stores hold most freshwater in this rounded model. The label does not include sea ice or every kind of frozen ground.',pictureDescription:'A mountain glacier and ice cap labeled as frozen freshwater.'},
  {id:'ground',title:'Fresh groundwater',text:'Below the water table, spaces in soil and rock are filled with water. That is the saturated zone. This table’s groundwater is there; it need not be an underground lake. Some groundwater is saline.',pictureDescription:'A cutaway with soil moisture above a water table and water-filled spaces below; groundwater is below the line.'},
- {id:'other',title:'Other freshwater',text:'This smaller group includes soil moisture above the water table, ground ice and permafrost, lakes, atmosphere, wetlands, rivers and water in living things. Each part is counted once. Other does not mean only rivers, only liquid, or water safe to drink.',pictureDescription:'Separate labeled small stores: soil moisture, frozen ground, a lake, air, wetland, river and a plant.'}
+ {id:'other',title:'Other freshwater',text:'This smaller group includes soil moisture above the water table, ground ice and permafrost, freshwater lakes, atmosphere, wetlands, rivers and water in living things. Each part is counted once. Other does not mean only rivers, only liquid, or water safe to drink.',pictureDescription:'Separate labeled small stores: soil moisture, frozen ground, a lake, air, wetland, river and a plant.'}
 ];
 export function makeWaterSource(family='fresh-amount',cups=100){
  const index=waterFamilies.findIndex(f=>f.id===family);if(index<0||![100,200].includes(cups))return null;
@@ -35,7 +35,7 @@ export function makeWaterSource(family='fresh-amount',cups=100){
    rows:[{id:'saline',label:'Saline water',units:195*factor,detail:'Oceans plus other saline stores, including salty lakes and groundwater.'},{id:'fresh',label:'Freshwater',units:5*factor,detail:'All freshwater together, frozen and liquid; this is the part the other tray zooms into.'}]},
   {id:'fresh',label:'Freshwater only',whole:`${cups} model cups represent only Earth’s freshwater`,totalHalf,
    description:'A larger view of only the fresh part of the all-water model, not more water added to Earth.',
-   rows:[{id:'ice',label:'Ice caps, glaciers, permanent snow',units:138*factor,detail:'The modeled share is 69% of freshwater, not 69% of all Earth’s water.'},{id:'ground',label:'Fresh groundwater',units:60*factor,detail:'Fresh water in the saturated zone below the water table.'},{id:'other',label:'All other freshwater',units:2*factor,detail:'Several other stores, including ground ice, soil moisture, lakes, air, wetlands, rivers and living things.'}]}
+   rows:[{id:'ice',label:'Ice caps, glaciers, permanent snow',units:138*factor,detail:'Frozen freshwater in ice caps, glaciers and permanent snow.'},{id:'ground',label:'Fresh groundwater',units:60*factor,detail:'Fresh water in the saturated zone below the water table.'},{id:'other',label:'All other freshwater',units:2*factor,detail:'Several other stores, including ground ice, soil moisture, freshwater lakes, air, wetlands, rivers and living things.'}]}
  ];
  const definitions={
   'fresh-amount':{view:'all',prompt:`How many of these ${cups} all-water model cups are fresh?`,context:'Use the freshwater row in the all-water table.',fit:`${number(amount)} model cups`,wrong:[`${25*factor} model cups`,`${number(97.5*factor)} model cups`],feedback:['Check the place value. The fresh share is much smaller than one quarter.','That is the saline row. Read the fresh row.'],explain:`The fresh row is ${number(amount)} out of ${cups} model cups.`,hint:'Read the row named Freshwater, not Saline water.'},
@@ -48,7 +48,18 @@ export function makeWaterSource(family='fresh-amount',cups=100){
   underground:{view:'fresh',prompt:'Does groundwater have to be fresh?',context:'The cards describe both fresh and saline groundwater; the freshwater table counts the fresh part.',fit:'Some groundwater is fresh and some is saline',wrong:['Every underground water store is fresh','There is no evidence of fresh groundwater in the model'],feedback:['Being underground does not determine salt content.','The table explicitly has a fresh-groundwater row.'],explain:'The freshwater diagram includes only fresh groundwater. Other groundwater belongs to saline water in the all-water model.',hint:'Compare the groundwater card with the fresh-groundwater row.'}
  };
  const d=definitions[family],options=[{text:d.fit,feedback:d.explain,fit:true},...d.wrong.map((text,i)=>({text,feedback:d.feedback[i],fit:false}))],rotation=(index+(cups===200?1:0))%3,ordered=[...options.slice(rotation),...options.slice(0,rotation)];
- const question={id:family,view:d.view,context:d.context,prompt:d.prompt,key:['a','b','c'][ordered.findIndex(x=>x.fit)],choices:ordered.map((x,i)=>({id:['a','b','c'][i],text:x.text,feedback:x.feedback})),hint:d.hint,example:copies.example,together:`First name the whole. Then read the relevant source row or card. ${d.explain}`};
- return {version:1,id:`${family}-${cups}`,title:'Hundred Cups',family,cups,views,cards:structuredClone(cards),question,copy:structuredClone(copies),sources:[{label:'USGS · Where is Earth’s Water?',url:'https://www.usgs.gov/water-science-school/science/where-earths-water'},{label:'NOAA · What a Cycle!',url:'https://www.noaa.gov/jetstream/max-what-cycle'}]};
+ const examples={
+  'fresh-amount':copies.example,
+  'fresh-store':'A different, invented button tray holds 70 blue, 20 red and 10 green buttons. Blue is the largest row because 70 is larger than 20 or 10.',
+  'other-share':'In a make-believe toolbox, Other combines thread, buttons and ribbon. Calling it only ribbon would leave out parts the source lists.',
+  'which-whole':copies.example,
+  drinking:'A model jar’s label says low salt. That describes one property. It does not say that the contents have been checked for drinking safety.',
+  'two-trays':copies.example,
+  'ice-counts':'A labeled ice cube is frozen water. Putting it in the frozen group does not mean leaving it out of a model of water.',
+  underground:'Two labeled model jars, fresh and saline, could be in the same cupboard. Their location alone does not tell us which salt label fits.'
+ };
+ const selectedCopy=structuredClone(copies);if(cups===200)selectedCopy.half='Half a model cup is one of two equal parts; two halves make one cup. This 200-cup all-water model has 195 saline and 5 fresh cups. The 100-cup version has 97½ saline and 2½ fresh cups.';
+ const question={id:family,view:d.view,context:d.context,prompt:d.prompt,key:['a','b','c'][ordered.findIndex(x=>x.fit)],choices:ordered.map((x,i)=>({id:['a','b','c'][i],text:x.text,feedback:x.feedback})),hint:d.hint,example:examples[family],together:`First name the whole. Then read the relevant source row or card. ${d.explain}`};
+ return {version:1,id:`${family}-${cups}`,title:'Hundred Cups',family,cups,views,cards:structuredClone(cards),question,copy:selectedCopy,sources:[{label:'USGS · Where is Earth’s Water?',url:'https://www.usgs.gov/water-science-school/science/where-earths-water'},{label:'NOAA · What a Cycle!',url:'https://www.noaa.gov/jetstream/max-what-cycle'},{label:'CDC · Natural water and drinking safety',url:'https://www.cdc.gov/drinking-water/prevention/water-treatment-hiking-camping-traveling.html'}]};
 }
 export const waterSource=makeWaterSource();

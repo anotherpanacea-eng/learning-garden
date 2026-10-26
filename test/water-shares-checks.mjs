@@ -186,8 +186,8 @@ for(const mutate of [s=>s.version=99,s=>s.views=[],s=>s.views[1].id=s.views[0].i
 {
  const state=make();for(let i=0;i<16;i++)accept(W.checkWater(state,options));refuse(state,()=>W.checkWater(state,options),'seventeenth check refuses');
  for(let i=0;i<16;i++)accept(W.keepWater(state,options));refuse(state,()=>W.keepWater(state,options),'seventeenth keep refuses');
- const key=state.waterShares.current,old=clone(work(state));for(let i=1;i<8;i++)accept(W.startWater(state,options));eq(W.waterView(state).visits.length,8);eq(state.waterShares.visits[key],old);refuse(state,()=>W.startWater(state,options),'ninth visit refuses');
- const previous=clone(state.waterShares.visits),serial=state.waterShares.nextSerial;accept(W.removeWater(state,key,true,options));delete previous[key];eq(state.waterShares.visits,previous);eq(state.waterShares.nextSerial,serial);accept(W.startWater(state,options));eq(Object.keys(state.waterShares.visits).length,8);roundTrip(state,'capacity and named removal');
+ const key=state.waterShares.current,old=clone(work(state));for(let i=1;i<16;i++)accept(W.startWater(state,options));eq(W.waterView(state).visits.length,16);eq(state.waterShares.visits[key],old);refuse(state,()=>W.startWater(state,options),'seventeenth visit refuses');
+ const previous=clone(state.waterShares.visits),serial=state.waterShares.nextSerial;accept(W.removeWater(state,key,true,options));delete previous[key];eq(state.waterShares.visits,previous);eq(state.waterShares.nextSerial,serial);accept(W.startWater(state,options));eq(Object.keys(state.waterShares.visits).length,16);roundTrip(state,'capacity and named removal');
 }
 {
  const expanded=clone(source);expanded.views.push(...Array.from({length:5},(_,i)=>({...clone(source.views[0]),id:`earlier-view-${i}`})));ok(W.validWaterSource(expanded),'retired additional view contexts readable');
@@ -229,5 +229,57 @@ for(const raw of [null,[],42,'old root',{version:2,current:null,visits:{}}]){
  accept(W.startWater(state,options));fill(state,'all');accept(W.supportWater(state,'together',options));accept(W.checkWater(state,options));edit(state,'page','reader');accept(W.answerWater(state,'a',options));accept(W.skipWater(state,options));accept(W.keepWater(state,options));
  const before=clone(state);W.waterView(state);W.viewWater(work(state).source,'all');W.valuesWater(work(state));W.assessWater(work(state).source,'all',W.valuesWater(work(state)));W.waterReply(work(state));W.waterReady(work(state));eq(state,before,'all pure reads preserve state exactly');
  const after=clone(state);delete after.waterShares;eq(after,foreign,'only the new root changes');const restored=roundTrip(state,'foreign-root isolation');delete restored.waterShares;eq(restored,foreign,'real report import preserves foreign roots');
+}
+// Every default setting fits a complete first pass without deleting earlier visits.
+{
+ const state=seed(),seen=[];
+ for(let i=0;i<16;i++){accept(W.startWater(state,options));seen.push(work(state).source.id);}
+ eq(new Set(seen).size,16,'one complete16-setting cycle is retained');
+ eq(Object.keys(state.waterShares.visits).length,16,'no forced deletion halfway through the cycle');
+ roundTrip(state,'full sixteen-setting cycle');
+}
+
+// Older help metadata is evidence to retain, not a catalog-membership gate.
+{
+ const state=make();
+ const retained={observed:true,concept:[{forId:'earlier-view',kind:'retired-clue'},{forId:'all',kind:'future-overlay'}],reading:[{forId:'earlier-reader',kind:'older-audio'}]};
+ state.waterShares.visits[state.waterShares.current].help=clone(retained);
+ ok(work(state),'structurally readable future help leaves the graph open');
+ roundTrip(state,'future help codes before new requests');
+ accept(W.supportWater(state,'hint',options));
+ eq(work(state).help,{...retained,concept:[...retained.concept,{forId:'all',kind:'hint'}]},'current help appends without rewriting earlier codes');
+ accept(W.checkWater(state,options));
+ eq(work(state).checks.at(-1).helpBefore.concept,[retained.concept[1],{forId:'all',kind:'hint'}],'snapshot preserves unknown help for its own graph context');
+ ok(W.validWaterCheck(work(state).checks.at(-1)),'new check with retained help is readable');
+ refuse(state,()=>W.supportWater(state,'future-overlay',options),'retention does not authorize requesting an unknown current support');
+ roundTrip(state,'future help codes after current request');
+}
+
+// A retained unreadable visit cannot permanently occupy the next allocator ID.
+{
+ const state=seed(),raw={future:'Retained unreadable water visit',nested:[1,2,3]};
+ state.waterShares={version:1,current:'water-0',nextSerial:0,visits:{'water-0':clone(raw)}};
+ accept(W.startWater(state,options));eq(state.waterShares.current,'water-1','allocation finds the next unused visit identity');
+ eq(state.waterShares.nextSerial,2);eq(state.waterShares.visits['water-0'],raw,'colliding unreadable work stays exact');
+ ok(work(state),'new visit remains usable beside the retained collision');
+ roundTrip(state,'colliding imported allocator counter');
+}
+
+// Visit labels use each saved selected source, and repeated source IDs refer to
+// the earliest readable visit rather than being counted as new evidence.
+{
+ const state=seed(),saved=makeWaterSource('fresh-store',100);
+ saved.title='Earlier selected model';saved.question.prompt='Earlier frozen visitor wording';
+ accept(W.startWater(state,{...options,source:saved}));const first=state.waterShares.current;
+ accept(W.startWater(state,{...options,family:'fresh-store',cups:100}));const revisit=state.waterShares.current;
+ accept(W.startWater(state,{...options,family:'fresh-store',cups:200}));const larger=state.waterShares.current;
+ const before=clone(state),visits=W.waterView(state).visits;
+ const metadata=id=>{const v=visits.find(v=>v.id===id);return {cups:v.cups,sourceId:v.sourceId,revisitOf:v.revisitOf};};
+ eq(metadata(first),{cups:100,sourceId:'fresh-store-100',revisitOf:null});
+ eq(metadata(revisit),{cups:100,sourceId:'fresh-store-100',revisitOf:first});
+ eq(metadata(larger),{cups:200,sourceId:'fresh-store-200',revisitOf:null});
+ eq(visits.find(v=>v.id===first).title,saved.question.prompt,'earlier source supplies its own visit wording');
+ eq(state,before,'metadata reads do not refresh saved full sources from the catalog');
+ roundTrip(state,'source-owned labels and revisit metadata');
 }
 console.log(`${checks} Hundred Cups source checks passed: ${gridCases} independently assessed diagrams, all 16 reader settings, frozen observations, request fulfillment, limits and actual-report recovery boundaries.`);

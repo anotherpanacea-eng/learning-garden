@@ -43,6 +43,11 @@ const m=malformed.waterShares.visits[malformed.waterShares.current];
 m.checks.unshift({synthetic:'unreadable original check'});m.kept.unshift({synthetic:'unreadable original diagram'});
 m.answer.first={synthetic:'unreadable original response'};
 malformed.waterShares.visits['future-sibling']={synthetic:'retained unreadable visit'};
+const resumable=structuredClone(base);startWater(resumable,o);resumable.waterShares.current=null;
+const foreign=structuredClone(base),another=structuredClone(base);
+startWater(foreign,o);startWater(another,{...o,family:'underground',cups:200});
+answerWater(another,another.waterShares.visits['water-0'].source.question.key,o);
+foreign.waterShares.visits['water-0'].answer.first=structuredClone(another.waterShares.visits['water-0'].answer.first);
 const old=structuredClone(base),source=makeWaterSource();
 source.id='retired-ten-cups';source.family='retired-family';source.cups=10;
 source.views=[{id:'earlier-whole',label:'Earlier named water set',whole:'10 model cups represent an earlier named water set',totalHalf:20,description:'Earlier whole retained exactly.',rows:[{id:'earlier-part',label:'Earlier part',units:6,detail:'Earlier part retained.'},{id:'earlier-rest',label:'Earlier rest',units:14,detail:'Earlier rest retained.'}]}];
@@ -55,7 +60,7 @@ delete w.help;delete w.checks[0].helpBefore;delete w.kept[0].helpBefore;delete w
 const odd=structuredClone(old),a=odd.waterShares.visits[odd.waterShares.current];
 a.source.views[0].whole='10½ model cups represent an earlier named water set';a.source.views[0].totalHalf=21;a.source.views[0].rows[0].units=7;
 a.bars['earlier-whole']['earlier-part']=7;a.checks=[];a.kept=[];
-console.log(JSON.stringify({base,malformed,old,odd}));
+console.log(JSON.stringify({base,malformed,foreign,resumable,old,odd}));
 """)
 fixture = fixtures['base']
 
@@ -218,9 +223,14 @@ def journey(browser, width, base):
         ok(work(p)['source']['id'] == 'fresh-amount-100', 'default visitor starts with one hundred all-water cups')
         ok(work(p)['page'] == 'meet', 'explicit start opens reservoir teaching')
         ok(p.locator('#water-heading').evaluate('x=>document.activeElement===x'), 'start focuses local heading')
-        p.locator('[data-water-panel="source"]').evaluate('x=>x.open=true')
+        ok(p.locator('[data-water-panel="source"]').evaluate('x=>x.open'), 'source tables open immediately after Start')
         ok(p.locator('.water-source table').count() == 2, 'both frozen source tables available on meet turn')
         ok('all Earth’s water' in p.locator('.water-table-whole').first.inner_text() and 'only Earth’s freshwater' in p.locator('.water-table-whole').last.inner_text(), 'table labels name distinct nested wholes')
+        p.locator('[data-water-panel="source"] > summary').click()
+        turn(p,'reader')
+        ok(not p.locator('[data-water-panel="source"]').evaluate('x=>x.open'), 'turn change respects deliberate source-panel closure')
+        p.locator('[data-water-panel="source"] > summary').click()
+        turn(p,'meet')
         for reservoir in ['saline','ice','ground','other']:
             click(p,f'[data-water-help="card-{reservoir}"]')
         ok(p.locator('.water-card-copy').count() == 4, 'all reservoir concepts freely open')
@@ -382,6 +392,7 @@ def settings(browser, base):
                     p.locator(selector).first.evaluate("x=>{for(let e=x.parentElement;e;e=e.parentElement)if(e.tagName==='DETAILS')e.open=true}")
                     p.locator(selector).first.select_option(value)
                 click(p,'[data-water-chosen-start]')
+                ok(p.locator('[data-water-panel="source"]').evaluate('x=>x.open'), 'new selected visitor starts with open source tables')
                 w=work(p);source=copy.deepcopy(w['source'])
                 ok(source['id'] == f'{family}-{cups}', 'transparent open setting '+source['id'])
                 turn(p,'reader');q=source['question']
@@ -401,16 +412,91 @@ def settings(browser, base):
                 ok(q['prompt'] in clip and all(v['whole'] in clip for v in source['views']), 'source clip uses the currently frozen request and wholes '+source['id'])
                 turn(p,'reader');click(p,'.water-question [data-speak]')
                 ok(q['prompt'] in p.evaluate('window.__waterSpoken.at(-1).text'), 'reader clip changes with selected visitor '+source['id'])
+            earlier=copy.deepcopy(root(p)['visits'])
+            for index in range(8,16):
+                seen={v['source']['id'] for v in root(p)['visits'].values()}
+                start(p)
+                ok(len(root(p)['visits']) == index+1 and all(root(p)['visits'][k] == v for k,v in earlier.items()), 'full16-setting pass does not evict earlier work')
+                repeated=work(p)['source']['id'] in seen
+                ok(p.locator('[data-water-revisit]').count() == int(repeated), 'repeated sources get an honest revisit label')
             saved=book(p);start(p)
-            ok(book(p) == saved and len(root(p)['visits']) == 8, 'visit limit never evicts earlier settings')
-            disposable=root(p)['current'];serial=root(p)['nextSerial']
-            snapshot=book(p);p.once('dialog',lambda d:d.dismiss());click(p,f'[data-water-delete="{disposable}"]')
+            ok(book(p) == saved and len(root(p)['visits']) == 16, 'seventeenth visit refuses without eviction')
+            visits=copy.deepcopy(root(p)['visits']);seen_sources={}
+            for visit_id,visit in visits.items():
+                source=visit['source'];expected=f'{source["cups"]} model cups'
+                label=p.locator(f'[data-water-resume="{visit_id}"]').text_content()
+                remove_label=p.locator(f'[data-water-delete="{visit_id}"]').text_content()
+                ok(expected in label and source['question']['prompt'] in label, 'visit selector distinguishes frozen request and tray size '+visit_id)
+                ok(expected in remove_label and source['question']['prompt'] in remove_label, 'removal control names frozen request and tray size '+visit_id)
+                repeated=source['id'] in seen_sources
+                ok(('revisit of '+seen_sources[source['id']] in label) if repeated else 'revisit of' not in label, 'revisit metadata names only the same frozen source '+visit_id)
+                seen_sources.setdefault(source['id'],visit_id)
+            p.goto(base+'#notes');p.locator('.water-notes > summary').click()
+            note_labels=p.locator('.water-notes > section > h3').all_text_contents()
+            ok(len(note_labels)==16, 'notes expose all sixteen saved visitor identities')
+            ok(p.locator('.water-notes h1,.water-notes h2').count()==0 and p.locator('.water-notes > section > h4').count()==16, 'notebook headings nest kept sections below their visit headings')
+            ok(p.locator('.water-notes .water-saved-graph').evaluate_all("xs=>xs.length>0&&xs.every(x=>x.firstElementChild.tagName==='H6')"), 'saved graph headings remain below kept-diagram notebook headings')
+            for label,(visit_id,visit) in zip(note_labels,visits.items()):
+                ok(f'{visit["source"]["cups"]} model cups' in label and visit['source']['question']['prompt'] in label, 'notes distinguish source scale and request '+visit_id)
+            go(p,base)
+            ok(root(p)['visits']==visits, 'notes preserve exact visit metadata and histories')
+            disposable=root(p)['current'];serial=root(p)['nextSerial'];dialogs=[]
+            snapshot=book(p);p.once('dialog',lambda d:(dialogs.append(d.message),d.dismiss()));click(p,f'[data-water-delete="{disposable}"]')
             ok(book(p) == snapshot, 'canceled visit removal preserves exact notebook')
+            source=visits[disposable]['source']
+            ok(f'{source["cups"]} model cups' in dialogs[0] and source['question']['prompt'] in dialogs[0], 'removal confirmation names the selected frozen request and scale')
             p.once('dialog',lambda d:d.accept());click(p,f'[data-water-delete="{disposable}"]')
             ok(disposable not in root(p)['visits'] and root(p)['nextSerial'] == serial, 'confirmed readable removal does not reuse allocation counter')
             bounds(p)
         finally:
             c.close()
+
+
+
+def reader_sources(browser, base):
+    for width in [320,820]:
+        c,p=setup(browser,width,fixtures['resumable'])
+        try:
+            go(p,base)
+            ok(p.locator('[data-water-panel="source"]').count()==0, 'unselected visit preview has no borrowed source-panel state')
+            click(p,'[data-water-resume="water-0"]')
+            ok(p.locator('[data-water-panel="source"]').evaluate('x=>x.open'), 'Resume from preview opens its frozen source tables by default')
+            ok(p.locator('.water-source table').first.is_visible(), 'resumed source table is visibly open without test intervention')
+        finally:
+            c.close()
+        for family,cups,reservoir in [('other-share',100,'other'),('underground',200,'ground')]:
+            c,p=setup(browser,width)
+            try:
+                go(p,base)
+                p.locator('[data-water-family]').first.evaluate("x=>x.closest('details').open=true")
+                p.locator('[data-water-family]').first.select_option(family)
+                p.locator('[data-water-cups]').first.select_option(str(cups))
+                click(p,'[data-water-chosen-start]');turn(p,'reader')
+                frozen=copy.deepcopy(work(p)['source']);q=frozen['question']
+                ok(work(p)['help']['concept'] == [] and work(p)['help']['reading'] == [], 'direct Reader starts without invented source-card support')
+                panel=p.locator('.water-source [data-water-panel="reservoirs"]')
+                if not panel.evaluate('x=>x.open'):
+                    panel.locator(':scope > summary').click()
+                control=panel.locator(f'[data-water-help="card-{reservoir}"]')
+                ok(control.count() == 1 and control.is_visible(), 'reader can reach its reservoir card in persistent frozen source '+family)
+                control.click()
+                card=next(card for card in frozen['cards'] if card['id']==reservoir)
+                ok(card['text'] in p.locator('.water-source').inner_text(), 'reader reveals exact frozen reservoir explanation without visiting Meet '+family)
+                support={'forId':q['id'],'kind':'card-'+reservoir}
+                ok(support in work(p)['help']['concept'], 'source card request commits to this reader before response '+family)
+                click(p,f'[data-water-answer="{q["key"]}"]')
+                answer=work(p)['answer']['first']
+                ok(answer['outcome']=='fits' and support in answer['helpBefore']['concept'], 'reader answer freezes prior source-card support '+family)
+                detail_id='row-fresh-other' if reservoir=='other' else 'row-fresh-ground'
+                detail=p.locator(f'.water-source [data-water-panel="{detail_id}"]')
+                if not detail.evaluate('x=>x.open'):
+                    detail.locator(':scope > summary').click()
+                row=next(row for v in frozen['views'] if v['id']=='fresh' for row in v['rows'] if row['id']==reservoir)
+                ok(row['detail'] in detail.inner_text(), 'frozen row explanation available beside reader '+family)
+                bounds(p)
+                p.screenshot(path=str(OUT/f'reader-source-{family}-{width}.png'),full_page=True)
+            finally:
+                c.close()
 
 
 def retained_preview(browser, base):
@@ -443,10 +529,16 @@ def retained_history(browser, base):
         go(p,base);raw=copy.deepcopy(work(p)['answer'])
         turn(p,'kept')
         ok(p.locator('.water-kept-diagram').count() == 1, 'malformed diagram does not hide healthy sibling')
+        counts=p.locator('[data-water-history-count="keeps"]').inner_text()
+        ok('1 readable of 2 retained' in counts and '1 unreadable record' in counts and 'count toward this limit' in counts, 'keeps show raw retained count and unreadable capacity use')
         turn(p,'reader');before=book(p)
         click(p,'[data-water-answer="a"]')
         ok(book(p) == before and work(p)['answer'] == raw, 'malformed response retained exactly and cannot silently extend')
-        turn(p,'build');quantity(p,'fresh',0);click(p,'[data-water-check]');click(p,'[data-water-keep]')
+        turn(p,'build')
+        p.locator('[data-water-panel="checks"] > summary').click()
+        counts=p.locator('[data-water-history-count="checks"]').inner_text()
+        ok('1 readable of 2 retained' in counts and '1 unreadable record' in counts and 'count toward this limit' in counts, 'checks show raw retained count and unreadable capacity use')
+        quantity(p,'fresh',0);click(p,'[data-water-check]');click(p,'[data-water-keep]')
         ok(work(p)['checks'][0] == {'synthetic':'unreadable original check'} and work(p)['kept'][0] == {'synthetic':'unreadable original diagram'}, 'healthy graph edits retain unreadable historical entries')
         saved=copy.deepcopy(root(p));exported=download(p,base)
         ok(exported['waterShares'] == saved, 'actual download retains malformed raw records and sibling visits')
@@ -455,6 +547,16 @@ def retained_history(browser, base):
         start(p);turn(p,'reader');q=work(p)['source']['question'];click(p,f'[data-water-answer="{q["key"]}"]')
         ok(work(p)['answer']['first']['outcome'] == 'fits', 'healthy new visitor remains answerable')
         ok(root(p)['visits'][saved['current']] == saved['visits'][saved['current']], 'new visitor leaves earlier malformed visit exact')
+    finally:
+        c.close()
+    c,p=setup(browser,320,fixtures['foreign'])
+    try:
+        go(p,base);turn(p,'reader');before=copy.deepcopy(work(p)['answer'])
+        notice=p.locator('[data-water-retained-response="first"]').inner_text()
+        ok('another frozen source' in notice and 'does not answer' in notice, 'foreign-source saved answer is visibly marked as retained and irrelevant to current request')
+        ok('Retained first response' in p.locator('.water-saved-answer').inner_text(), 'foreign answer keeps its original request and retained label')
+        turn(p,'build');fill_source(p);click(p,'[data-water-keep]')
+        ok(work(p)['kept'][-1]['fulfilled'] is False and work(p)['answer']==before, 'foreign fitting reply cannot fulfill or be rewritten by current graph work')
     finally:
         c.close()
     c,p=setup(browser,820,fixtures['old'])
@@ -529,6 +631,7 @@ if __name__ == '__main__':
                 for width in [320,820]:
                     journey(browser,width,base)
                 settings(browser,base)
+                reader_sources(browser,base)
                 retained_preview(browser,base)
                 retained_history(browser,base)
                 unknown_root(browser,base)

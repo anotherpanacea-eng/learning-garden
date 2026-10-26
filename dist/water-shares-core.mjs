@@ -16,14 +16,18 @@ const valuesValid=(s,key,values)=>{const v=viewWater(s,key);return !!v&&record(v
 export function valuesWater(w,key=w.view){const v=viewWater(w.source,key),given=w.bars?.[key]??{};return Object.fromEntries(v.rows.map(r=>[r.id,own(given,r.id)?given[r.id]:null]));}
 const context=w=>w.page==='reader'?w.source.question.id:w.view;
 const kindValid=(s,k)=>['hint','example','together','one','fill','half','percent','zoom','teach','audio','meaning'].includes(k)||s.cards.some(c=>k===`card-${c.id}`);
-function helps(h,s){return h===undefined||(obj(h)&&typeof h.observed==='boolean'&&['concept','reading'].every(channel=>Array.isArray(h[channel])&&h[channel].length<=64&&h[channel].every(r=>obj(r)&&(r.forId===s.question.id||viewWater(s,r.forId))&&kindValid(s,r.kind)&&(channel==='reading'?['audio','meaning'].includes(r.kind):!['audio','meaning'].includes(r.kind))))&&h.concept.length+h.reading.length<=64&&unique([...h.concept,...h.reading].map(r=>`${r.forId}:${r.kind}`)));}
+function helps(h,s){return h===undefined||(obj(h)&&typeof h.observed==='boolean'&&['concept','reading'].every(channel=>Array.isArray(h[channel])&&h[channel].length<=64&&h[channel].every(r=>obj(r)&&id(r.forId)&&text(r.kind,160)))&&h.concept.length+h.reading.length<=64&&unique([...h.concept,...h.reading].map(r=>JSON.stringify([r.forId,r.kind]))));}
 const helpFor=(w,key)=>w.help===undefined?undefined:{observed:w.help.observed,concept:copy(w.help.concept.filter(r=>r.forId===key)),reading:copy(w.help.reading.filter(r=>r.forId===key))};
 const barsValid=w=>record(w.bars)&&Object.entries(w.bars).every(([key,v])=>valuesValid(w.source,key,v));
 const workValid=w=>obj(w)&&validWaterSource(w.source)&&pages.includes(w.page)&&viewWater(w.source,w.view)&&barsValid(w)&&helps(w.help,w.source);
 export function waterView(state){
  if(!own(state,'waterShares'))return {status:'ready',root:null,visits:[],work:null};
  const r=state.waterShares;if(!obj(r)||r.version!==1||!obj(r.visits))return {status:'unavailable',root:r,visits:[],work:null};
- const visits=Object.entries(r.visits).map(([key,w])=>({id:key,readable:id(key)&&workValid(w),title:id(key)&&workValid(w)?w.source.question.prompt:'Retained unreadable water visit'}));
+ const seen=new Map(),visits=Object.entries(r.visits).map(([key,w])=>{
+  const readable=id(key)&&workValid(w),sourceId=readable?w.source.id:null,revisitOf=readable?(seen.get(sourceId)??null):null;
+  if(readable&&!seen.has(sourceId))seen.set(sourceId,key);
+  return {id:key,readable,title:readable?w.source.question.prompt:'Retained unreadable water visit',cups:readable?w.source.cups:null,sourceId,revisitOf};
+ });
  return {status:'ready',root:r,visits,work:id(r.current)&&own(r.visits,r.current)&&workValid(r.visits[r.current])?r.visits[r.current]:null};
 }
 export function assessWater(s,key,values){const v=viewWater(s,key),missing=v.rows.filter(r=>values[r.id]===undefined||values[r.id]===null).map(r=>r.id),sumHalf=v.rows.reduce((n,r)=>n+(values[r.id]??0),0),wrongRows=v.rows.filter(r=>values[r.id]!==null&&values[r.id]!==undefined&&values[r.id]!==r.units).map(r=>r.id),outcome=missing.length?'missing':sumHalf!==v.totalHalf?'total':wrongRows.length?'rows':'match';return {outcome,sumHalf,missing,wrongRows,feedback:s.copy.checks[outcome]};}
@@ -47,12 +51,14 @@ function change(state,fn,o={}){try{if(waterView(state).status==='unavailable')re
 const workChange=(s,fn,o)=>change(s,c=>{const w=waterView(c).work;return w?fn(w):result(false,'Open a readable water visit first.');},o);
 export function startWater(s,o={}){return change(s,c=>{
  c.waterShares??={version:1,current:null,nextSerial:0,visits:{}};const r=c.waterShares;
- if(Object.keys(r.visits).length>=8)return result(false,'Eight visits are kept. Download notes, then choose and confirm a readable visit to remove if you need space.');
+ if(Object.keys(r.visits).length>=16)return result(false,'Sixteen visits are kept. Download notes, then choose and confirm a readable visit to remove if you need space.');
  if(!integer(r.nextSerial,0,999999))return result(false,'The visit counter is retained but cannot allocate a new visit. Earlier readable visits stay open.');
- const source=copy(o.source??makeWaterSource(o.family??waterFamilies[r.nextSerial%waterFamilies.length].id,o.cups??(Math.floor(r.nextSerial/waterFamilies.length)%2?200:100)));
+ let serial=r.nextSerial;while(serial<1000000&&own(r.visits,`water-${serial}`))serial++;
+ if(serial>=1000000)return result(false,'No free visit id is available in this format. Earlier work stays retained.');
+ const source=copy(o.source??makeWaterSource(o.family??waterFamilies[serial%waterFamilies.length].id,o.cups??(Math.floor(serial/waterFamilies.length)%2?200:100)));
  if(!validWaterSource(source))return result(false,'Choose an available visitor and model size.');
- const key=`water-${r.nextSerial}`;if(own(r.visits,key))return result(false,'That visit id is already kept. Nothing was replaced.');
- r.visits[key]={source,page:'meet',view:source.question.view,bars:Object.fromEntries(source.views.map(v=>[v.id,Object.fromEntries(v.rows.map(row=>[row.id,null]))])),help:{observed:true,concept:[],reading:[]},answer:{},checks:[],kept:[]};r.current=key;r.nextSerial++;return {...result(true),key};
+ const key=`water-${serial}`;
+ r.visits[key]={source,page:'meet',view:source.question.view,bars:Object.fromEntries(source.views.map(v=>[v.id,Object.fromEntries(v.rows.map(row=>[row.id,null]))])),help:{observed:true,concept:[],reading:[]},answer:{},checks:[],kept:[]};r.current=key;r.nextSerial=serial+1;return {...result(true),key};
  },o);}
 export const resumeWater=(s,key,o={})=>change(s,c=>{const r=c.waterShares;if(!r||!id(key)||!own(r.visits,key)||!workValid(r.visits[key]))return result(false,'That visit stays retained but cannot be opened here.');r.current=key;return result(true);},o);
 export function editWater(s,kind,value,o={}){return workChange(s,w=>{
