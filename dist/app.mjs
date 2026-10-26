@@ -336,6 +336,8 @@ function render(){
   if(hash==='#cafe/units'){
     if(choosingExplorer)resetUnits();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
+    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#cafe'?'page':'false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):unitsPage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindUnits({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,focus:focusElement,...pavingOptions()});bindSpeech();}return;
@@ -344,6 +346,8 @@ function render(){
   if(hash==='#loft/shadows'){
     if(choosingExplorer)resetShadow();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
+    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#loft'?'page':'false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):shadowPage(explorerStore.active.id,state);if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();
@@ -352,13 +356,13 @@ function render(){
   }
   resetShadow();
   // This independent scene must reach its atomic exposure check before normalizers/binders.
-  if(scaleBench&&!choosingExplorer){
+  if(scaleBench){
    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
-   main.innerHTML=scalePage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
-   updateStorageNotice();bindExplorers();
+   main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):scalePage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
+   updateStorageNotice();bindExplorers();if(choosingExplorer)return;
    bindScale({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,...pavingOptions()});
    bindSpeech();return;
   }
