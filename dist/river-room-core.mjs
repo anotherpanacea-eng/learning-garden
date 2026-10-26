@@ -83,7 +83,7 @@ export function riverFacts(s){try{
  if(w.page===0)addDefinition(source.display,w.amounts.history);
  if(w.page===3)addDefinition(source.display,w.amounts.lent);
  const currentTasks=source.tasks.filter(t=>t.page===w.page);
- for(const t of currentTasks){for(const pair of t.facts||[])add(...pair);addRequested(t.hintId);addRequested(t.exampleId);}
+ for(const t of currentTasks){if(!own(w.answers,t.id)||numericRaw(w.answers[t.id]))for(const pair of t.facts||[])add(...pair);addRequested(t.hintId);addRequested(t.exampleId);}
  // Opened reference definitions are rendered on every case page. Discussion
  // source cards and the adult design card are also locally available in DOM.
  for(const card of source.sources){if(card.id==='design')addDefinition(source.help,`source-${card.id}`);else addRequested(`source-${card.id}`);}

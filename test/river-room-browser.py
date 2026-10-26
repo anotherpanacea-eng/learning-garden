@@ -38,7 +38,7 @@ base.syntheticOther={version:99,raw:['future exact sibling']};startPostOffice(ba
 const pending=structuredClone(base);startAdaptiveRival(pending);pending.postOffice.visits.find(v=>v.id===pending.postOffice.current).rival.task=generateRivalTask('multiply',3,4,0);
 const old=structuredClone(base);startRiver(old);const w=old.riverRoom.visits[old.riverRoom.current],s=w.source;s.id='earlier-river-source';s.title='An earlier bounded river book';s.timeline=s.timeline.slice(0,2);w.order=s.timeline.map(x=>x.id);s.measures=s.measures.slice(0,2);s.analogy.measures=s.analogy.measures.filter(id=>s.measures.some(m=>m.id===id));s.tasks=s.tasks.slice(0,1);s.parts=s.parts.slice(0,1);s.geometry.area={n:1800,d:1};s.geometry.minWidth=225;s.geometry.maxWidth=675;s.geometry.step=225;s.geometry.initialWidth=225;s.geometry.tile={rows:2,columns:3};w.modelWidth=225;
 const malformed=structuredClone(old);keepRiverNote(malformed);const mw=malformed.riverRoom.visits[malformed.riverRoom.current];mw.models.push({synthetic:'unreadable latest model'});mw.checks.push({taskId:mw.source.tasks[0].id,synthetic:'unreadable latest check'});mw.kept={synthetic:'unreadable latest note'};malformed.riverRoom.visits['[raw visit]']={synthetic:'retained raw visit'};
-const malformedAnswer=structuredClone(old);const ma=malformedAnswer.riverRoom.visits[malformedAnswer.riverRoom.current];ma.page=2;ma.answers[ma.source.tasks[0].id]={fields:{[ma.source.tasks[0].fields[0].id]:'x'.repeat(41)},unit:'m'};
+const malformedAnswer=structuredClone(old);const ma=malformedAnswer.riverRoom.visits[malformedAnswer.riverRoom.current];ma.page=2;ma.source.tasks[0].facts=[[9,10]];ma.source.tasks[0].context+=' Synthetic displayed9 ×10 =90.';ma.answers[ma.source.tasks[0].id]={fields:{[ma.source.tasks[0].fields[0].id]:'x'.repeat(41)},unit:'m'};
 const future=structuredClone(base);future.riverRoom={version:99,raw:['future exact source']};
 const restored=structuredClone(pending);startRiver(restored);restored.riverRoom.visits[restored.riverRoom.current].page=2;
 const helper=structuredClone(restored);const hw=helper.riverRoom.visits[helper.riverRoom.current];hw.page=2;hw.source.id='earlier-helper-source';hw.source.geometry.tile={rows:2,columns:2};const hid=Object.keys(hw.source.help).find(k=>k.includes('example'))||Object.keys(hw.source.help)[0];hw.source.help[hid]={title:'Earlier helper',text:'Earlier: 3 × 4 = 12.',facts:[[3,4]]};
@@ -172,6 +172,7 @@ def journey(browser,width,base,seeds):
                 ok(code in work(p)['help'],'all nine analogies remain ungraded support')
         print(f'River journey {width}: geometry',flush=True)
         turn(p,2);bounds(p)
+        scaffold=p.locator('[data-river-question="rectangle-extended"] .river-context');ok('\nFirst:' in scaffold.inner_text() and scaffold.evaluate('x=>getComputedStyle(x).whiteSpace')=='pre-line','two-step scaffold preserves line breaks in the actual layout')
         ok(source['labels']['geometry'].casefold() in p.locator('main').inner_text().casefold(),'invented geometry label visible')
         slider=p.locator('[data-river-width]');slider.scroll_into_view_if_needed();handle=slider.element_handle();box=slider.bounding_box();start_width=work(p)['modelWidth']
         # Real pointer sequence must retain the exact input node through multiple moves.
@@ -275,6 +276,7 @@ def edge_cases(browser,base,seeds):
         go(p,base);held=copy.deepcopy(work(p)['answers'])
         ok(not p.locator('[data-river-field]').count(),'malformed overlong numeric draft is retained read-only')
         ok(p.locator('.river-numeric [data-river-unreadable]').count()==1,'malformed draft has a visible retained notice')
+        ok('9x10' not in book(p).get('exposures',[]) and 'Synthetic displayed9' not in p.locator('main').inner_text(),'hidden malformed task context neither renders nor qualifies')
         turn(p,4);own(p,work(p)['source']['parts'][0]['id'],'Healthy synthetic writing around malformed numeric draft.');click(p,'[data-river-keep-note]');ok(work(p)['answers']==held,'healthy note preserves malformed answer exactly')
     finally:c.close()
     for name in ['summaryOnly','oldTileOnly','visibleSummary']:
