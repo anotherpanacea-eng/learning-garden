@@ -509,10 +509,10 @@ Feedback: A: Soil gives water and minerals, not energy. B: Yes. Leaves use sunli
 Explanation: Plants make their food using sunlight. That's where the energy starts.
 
 **4.3 (Sapling, order with arrows)**
-Prompt: Put the cards in order. Sunlight and feeding links are drawn and labeled for you.
+Prompt: Order the cards. Arrows follow your order; their kinds and labels are supplied.
 Cards: fox · Sun · rabbit · clover
 Answer: Sun ⇢ clover → rabbit → fox.
-Response: card order only. The source-defined sunlight and feeding links are drawn and labeled automatically; the learner does not choose link types.
+Response: card order only. Arrows follow the learner's card order. Only each arrow's kind and label come from the frozen source (from the Sun: sunlight energy; otherwise: food). The learner does not choose link types.
 Misconception tested: arrows drawn from eater to food.
 Hint: Start with the Sun. Who uses sunlight first?
 Explanation: Sun ⇢ clover carries sunlight energy. Clover → rabbit and rabbit → fox carry food energy from food to eater.
