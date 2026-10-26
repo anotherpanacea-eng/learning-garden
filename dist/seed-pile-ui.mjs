@@ -1,6 +1,6 @@
 import {gamesTableNav} from './shutters-ui.mjs';
 import {pileRules,pileDials,pileSource} from './seed-pile-content.mjs';
-import {gamesView,pilePosition,newPileGame,takePile,brambleTake,losingPile,startPile,movePile,explainPile,keepPileNote,resumePile,removePileRecord,readablePileNote,validPileSource} from './seed-pile-core.mjs';
+import {gamesView,pilePosition,newPileGame,takePile,brambleTake,losingPile,startPile,movePile,explainPile,stepPile,keepPileNote,resumePile,removePileRecord,readablePileNote,validPileSource} from './seed-pile-core.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let visit=null;
 export function resetPileVisit(){visit=null;}
@@ -58,7 +58,7 @@ export function bindPile(state,ctx){
  root.querySelector('[data-pile-new]')?.addEventListener('click',()=>{if(live()){visit.page='setup';render();}});
  root.querySelector('[data-pile-back]')?.addEventListener('click',()=>{if(live()){visit.page='game';visit.practice=null;render();}});
  root.querySelector('[data-pile-explain]')?.addEventListener('click',()=>act(()=>explainPile(state,gamesView(state).current?.source.id||'pile',0,ctx.canExport)&&((visit.page='lesson'),true),'#pile-title'));
- root.querySelectorAll('[data-pile-step]').forEach(b=>b.onclick=()=>act(()=>explainPile(state,'pile',Number(b.dataset.pileStep),ctx.canExport),'#pile-thought'));
+ root.querySelectorAll('[data-pile-step]').forEach(b=>b.onclick=()=>act(()=>stepPile(state,Number(b.dataset.pileStep),ctx.canExport),'#pile-thought'));
  root.querySelector('[data-pile-practice]')?.addEventListener('click',()=>{if(!live())return;const s=gamesView(state).root?.lesson?.source;if(!validPileSource(s))return;visit.practice=practicePile(s);render();});
  root.querySelector('[data-pile-end-practice]')?.addEventListener('click',()=>{if(live()){visit.practice=null;visit.page='lesson';render();}});
  root.querySelector('[data-pile-note]')?.addEventListener('submit',e=>{e.preventDefault();act(()=>{if(!keepPileNote(state,new FormData(e.target).get('note'),ctx.canExport))return false;visit.message='Your game note is kept.';return true;},'#pile-status');});
