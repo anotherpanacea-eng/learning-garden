@@ -2,9 +2,7 @@
 
 Companion to [spec 251](../specs/251-dots-first-postcards.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip and the baker he/him; Dot she/her. Sources: [audit](../source-audits/251-dots-first-postcards.md). Nothing is scored, timed or locked.
 
-**Paper rule (binding, owner question 4):** handwriting and the postcard lines are written on paper and seen by a grown-up. The screen shows letters, families and the order of strokes. It never captures, photographs, scores or takes tracing on a letter shape. Nothing about what the child wrote is stored.
-
-**Privacy rule:** no line asks for the child's own name, anyone the child knows, an address, a school, or what the child does on any day. Every name, place and day in this pack belongs to Willowbank.
+**Paper and privacy rules (binding; spec 251):** all writing is on paper, seen by a grown-up; the screen only shows, with no tracing, capture or scoring. No line asks about the child, anyone they know, their home, school or days; every name, place and day belongs to Willowbank.
 
 **Reading rule for build:** every Sprout line, card and prompt has read-aloud. Picture notes in *italics* say what the art must show; the same words are the art's text equivalent.
 
@@ -47,7 +45,7 @@ All five scenes sit in Act I, chapter 2, deliver and explain. Pip carries the pa
 >
 > {guide} looks closer. "There are no gaps. Pip can't see where each word stops."
 >
-> Dot sighs and writes it again. This time she leaves a little gap after every word.
+> Dot sighs and writes it again. This time she leaves a little gap between every two words.
 >
 > "The. Post. Office. Is. Open," reads Pip. "Oh! The post office is open."
 >
@@ -89,14 +87,14 @@ All five scenes sit in Act I, chapter 2, deliver and explain. Pip carries the pa
 **Hook:** Dot's postcard to the café says the buns come on monday. The baker says Monday deserves a capital.
 
 **Short:**
-> The names of the days start with a capital letter. So does I, when you write it for yourself. The word day does not.
+> In English, the names of the days start with a capital letter. So does I, when you write it for yourself. The word day does not.
 
 **Longer:**
 > The baker reads Dot's postcard aloud. "The buns come on monday. i will bring them."
 >
 > "Is something wrong?" says Dot.
 >
-> "Monday is the name of a day," says the baker. "Days get capitals. Monday, Tuesday, all seven."
+> "Monday is the name of a day," says the baker. "In English, days get capitals. Monday, Tuesday, all seven."
 >
 > "And i?"
 >
@@ -165,119 +163,77 @@ All five scenes sit in Act I, chapter 2, deliver and explain. Pip carries the pa
 
 ## Teach cards
 
-Each card is 30 words or fewer; worked-example steps appear one tap at a time. Every card is **A true thing about language**.
+Each card is 30 words or fewer; the three worked-example steps appear one tap at a time. Every card is **A true thing about language**.
 
 **Card 1. Spaces between words (Sprout)**
-> A space is a little gap after each word. It shows where one word stops and the next word starts.
+> A space is a little gap between two words. It shows where one word stops and the next word starts.
 
-Worked example: *Seeyouatthebridge.*
-1. Read it. It is hard to tell where words stop.
-2. Find each word: see, you, at, the, bridge.
-3. Leave a gap after each one: See you at the bridge.
+Worked example, *Seeyouatthebridge.*: 1. Read it. It is hard to tell where words stop. 2. Find each word: see, you, at, the, bridge. 3. Leave a gap between them: See you at the bridge.
 
 **Card 2. Counting words (Sprout)**
-> Each word sits between spaces. Point to each word and count. The spaces are the gaps between them.
+> Spaces show where words stop. Point to each word and count. The spaces are the gaps between them.
 
-Worked example: *Dot has a hat.*
-1. Point: Dot.
-2. Point: has, a, hat.
-3. Four words. Three spaces between them.
+Worked example, *Dot has a hat.*: 1. Point: Dot. 2. Point: has, a, hat. 3. Four words. Three spaces between them.
 
 **Card 3. Letter, word, sentence (Sprout)**
-> A letter is one mark, like d. Letters make a word, like Dot. Words make a sentence, like Dot has a hat.
+> A letter is one sign from the alphabet, like d. Letters make a word, like Dot. Words make a sentence, like Dot has a hat.
 
-Worked example: *Dot has a hat.*
-1. d is one letter.
-2. Dot is a word with three letters.
-3. Dot has a hat. That is a sentence. It starts with a capital and ends with a period.
+Worked example, *Dot has a hat.*: 1. d is one letter. 2. Dot is a word with three letters. 3. Dot has a hat. That is a sentence. It starts with a capital and ends with a period.
 
 **Card 4. End marks (Seedling)**
 > A period ends a telling sentence. A question mark ends a question. An exclamation mark shows strong feeling. These marks are called punctuation.
 
-Worked example: *Three ways to end one line.*
-1. The mill is open. It tells.
-2. Is the mill open? It asks.
-3. The mill is open! It tells with strong feeling.
+Worked example, *Three ways to end one line.*: 1. The mill is open. It tells. 2. Is the mill open? It asks. 3. The mill is open! It tells with strong feeling.
 
 **Card 5. One, or more than one (Seedling)**
 > One hat is singular. Two hats is plural. Many words add s for more than one. But not every s means more than one.
 
-Worked example: *card, cards, glass.*
-1. One card: card. Singular.
-2. Three cards: cards. Plural.
-3. Glass ends in s, but one glass is still singular.
+Worked example, *card, cards, glass.*: 1. One card: card. Singular. 2. Three cards: cards. Plural. 3. Glass ends in s, but one glass is still singular.
 
 **Card 6. Names get capitals (Seedling)**
 > A name starts with a capital letter. People's names: Dot, Pip. Places' names: Willowbank. A capital can change the meaning: a dot, or Dot.
 
-Worked example: *a pip in an apple, and Pip the fox.*
-1. A pip is a seed. Small p.
-2. Pip is the fox's name.
-3. A name gets a capital: Pip.
+Worked example, *a pip in an apple, and Pip the fox.*: 1. A pip is a seed. Small p. 2. Pip is the fox's name. 3. A name gets a capital: Pip.
 
 **Card 7. Days get capitals (Seedling)**
-> The seven days of the week are names, so each one starts with a capital letter. The word day does not.
+> In English, the names of the seven days each start with a capital letter. The word day does not.
 
-Worked example: *Buns on monday.*
-1. Is monday the name of a day? Yes.
-2. Give it a capital.
-3. Buns on Monday.
+Worked example, *Buns on monday.*: 1. Is monday the name of a day? Yes. 2. Give it a capital. 3. Buns on Monday.
 
 **Card 8. I is always a capital (Seedling)**
 > When you write I for yourself, it is always a capital letter, even in the middle of a sentence.
 
-Worked example: *Pip and i went.*
-1. The i means the writer.
-2. Make it a capital.
-3. Pip and I went.
+Worked example, *Pip and i went.*: 1. The i means the writer. 2. Make it a capital. 3. Pip and I went.
 
 **Card 9. Jobs are not names (Sapling)**
 > The baker, the miller and the librarian are jobs, not names. Jobs keep small letters. Names, days and places' names get capitals.
 
-Worked example: *The baker went to willowbank on friday.*
-1. Baker is a job. Small b.
-2. Willowbank is a place's name. Friday is a day.
-3. The baker went to Willowbank on Friday.
+Worked example, *The baker went to willowbank on friday.*: 1. Baker is a job. Small b. 2. Willowbank is a place's name. Friday is a day. 3. The baker went to Willowbank on Friday.
 
 **Card 10. Letter families (Sprout)**
 > Some letters start the same way. Letters that start alike make a family. Practicing a family lets your hand try one move many times.
 
-Worked example: *c, a, d.*
-1. Start near the top of the curve.
-2. Go round to the left, like c.
-3. For a and d, go up and come straight down.
+Worked example, *c, a, d.*: 1. Start near the top of the curve. 2. Go round to the left, like c. 3. For a and d, go up and come straight down.
 
 **Card 11. Four families (Sprout)**
-> One common way to sort: curly letters start like c. Ladder letters go straight down. Robot letters go down, back up, then over or round. Zigzag letters use slanting lines.
+> One common way: curly letters start like c. Ladder letters go straight down. Robot letters go down, back up the same line, then over or round. Zigzag letters slant.
 
-Worked example: *o, l, n, v.*
-1. o starts like c: curly.
-2. l goes straight down: ladder.
-3. n goes down, up and over: robot. v slants: zigzag.
+Worked example, *o, l, n, v.*: 1. o starts like c: curly. 2. l goes straight down: ladder. 3. n goes down, back up and over: robot. v slants: zigzag.
 
 **Card 12. Tall capitals (Seedling)**
 > Capital letters are tall. They reach the top line, like the tall small letters b, d and l. Small letters like a, c and o stop halfway.
 
-Worked example: *Dot.*
-1. D reaches the top line.
-2. o stops halfway.
-3. Dot: one tall capital, then small letters.
+Worked example, *Dot.*: 1. D reaches the top line. 2. o stops halfway. 3. Dot: one tall capital, then small letters.
 
 **Card 13. Tricky words (Seedling)**
 > Some words don't spell their sounds the usual way. Find the tricky part and remember it. In said, the ai sounds like the e in bed.
 
-Worked example: *come.*
-1. Say it: come.
-2. The middle sound is spelled with o, not u.
-3. The e at the end makes no sound. That's the tricky part.
+Worked example, *come.*: 1. Say it: come. 2. The middle sound is spelled with o, not u. 3. The e at the end makes no sound. That's the tricky part.
 
 **Card 14. Writing what you hear (Seedling)**
 > A grown-up says a line. Say it back. Count the words on your fingers. Write it. Then check spaces, capitals, the end mark and tricky words.
 
-Worked example: *Pip writes for Dot.*
-1. Dot says: I will come on Monday. Pip says it back.
-2. Five words, five fingers. Pip writes.
-3. Pip checks against the printed line and fixes I.
+Worked example, *Pip writes for Dot.*: 1. Dot says: I will come on Monday. Pip says it back. 2. Five words, five fingers. Pip writes. 3. Pip checks against the printed line and fixes I.
 
 ## Benches
 
@@ -300,17 +256,17 @@ Worked example: *Pip writes for Dot.*
 
 **Count the words (after a fitted line):** How many words are on this postcard?
 
-**Off-screen card (paper):** On paper, leave a gap about one finger wide after each word.
+**Off-screen card (paper, with a grown-up):** Write one line from the Postcard Desk on paper. Leave a gap about one finger wide between words.
 
 ### (b) The Capital Stamp (Seedling, Sapling)
 
 **Header:** Tap each word that needs a capital. Dot's stamp changes its first letter.
 
-**Lines** (a cue card sits above each line; the first word already has its capital):
+**Lines** (a cue card sits above each line as a picture, and its words are read aloud, never printed, so it never shows a capital; the first word of the line already has its capital):
 1. *Cue: This postcard is for Dot the ladybug.* Dear dot, the buns are here. → Dot
 2. Pip and i will come. → I
 3. The café shuts on sunday. → Sunday
-4. *Cue: Lantern Hill is the name of a place.* Ember lives at lantern hill. → Lantern Hill
+4. *Cue: Lantern Hill is the name of a place.* Ember flew to lantern hill. → Lantern Hill
 5. *Cue: Pip the fox.* The miller saw pip on tuesday. → Pip, Tuesday
 6. (Sapling) *Cue: The baker bakes the town's bread.* On friday the baker and i went to willowbank. → Friday, I, Willowbank
 
@@ -328,7 +284,7 @@ Worked example: *Pip writes for Dot.*
 **Letter, word or sentence?** Put each card on a shelf.
 - d → letter · P → letter · hat → word · Pip → word · Dot has a hat. → sentence · Is the mill open? → sentence
 
-**Feedback:** One mark is a letter. Letters together make a word. Words together, with a capital and an end mark, make a sentence.
+**Feedback:** One sign from the alphabet is a letter. Letters together make a word. Words together, with a capital and an end mark, make a sentence.
 
 **Name the marks:** Tap the label, then the mark on Dot's postcard: capital letter · period · question mark · exclamation mark.
 
@@ -344,14 +300,14 @@ Worked example: *Pip writes for Dot.*
 
 **Family tabs (A true thing about language):**
 - **Curly letters:** c, a, d, o, g, q. They start near the top of a curve and go round to the left, like c.
-- **Ladder letters:** l, i, t, u, j. They start with a line straight down.
+- **Ladder letters:** l, i, t, u, j. They start with a line straight down, and don't go back up it.
 - **Robot letters:** r, n, m, h, b, p. They go down, come back up the same line, then go over or round.
 - **Zigzag letters:** v, w, x, z. They use slanting lines.
 - **Sorted in different ways:** e, s, f, k and y. This pack leaves them out, because charts sort them differently.
 
 **Family line (always shown):** This is one common way to sort letters. Other charts may sort them another way.
 
-**Which family?** Watch each letter start, then put it in its family: c · o · l · t · n · h · v · w
+**Which family?** Watch each letter's strokes, then put it in its family: c · o · l · t · n · h · v · w
 
 **Capital corner:** Each capital sits beside its small letter. Tap Play to see its strokes.
 
@@ -360,7 +316,7 @@ Worked example: *Pip writes for Dot.*
 
 **Tall line card:** Capitals reach the top line. Small a, c and o stop at the middle line.
 
-**Paper card:** Now try one family on paper. Your grown-up can watch where you start.
+**Paper card (with a grown-up):** Pick a family. Write each letter in it on paper, starting where the green dot was. Your grown-up can watch where you start.
 
 ### (e) The Tricky Word Mailbox (Seedling, Sapling)
 
@@ -371,13 +327,11 @@ Worked example: *Pip writes for Dot.*
 **Find the tricky part** (tap the letters):
 - said: ai. *The ai sounds like the e in bed.*
 - friend: ie. *The ie sounds like the e in bed.*
-- come: o and e. *The o sounds like the u in up. The e makes no sound.*
-- some: o and e. *The o sounds like the u in up. The e makes no sound.*
-- love: o and e. *The o sounds like the u in up. The e makes no sound.*
+- come, some, love (one card each): o and e. *The o sounds like the u in up. The e makes no sound.*
 - Monday: o. *The o sounds like the u in up.*
-- Wednesday: the first d. *Most people don't say this d.*
+- Wednesday: the first d and the e after n. *Most people don't say this d or this e.*
 
-**Whole-word cards** (was, one, the, you, are, were, our, there): *The tricky part is most of the word. Look at it, say it, then write it.*
+**Whole-word cards** (was, one, the, you, are, were, our, there): *Look at the whole word. Say it. Then write it.*
 
 **Look, say, cover, write, check:** Look at the word. Say it. Tap Cover. Write it on paper. Tap Show and check your paper.
 
@@ -415,7 +369,7 @@ Worked example: *Pip writes for Dot.*
 | P8. Will our friend come on Wednesday? I hope so. | Sapling | 9 | 8 | Will, Wednesday, I | ? . | our, friend, come, Wednesday, I, so |
 | P9. Dot and I said hello to the baker on Friday. | Sapling | 10 | 9 | Dot, I, Friday | . | I, said, to, the |
 
-**Look-for list on screen (example, P4):** 7 words · a space after each word · capitals: Pip and I · a period at the end · tricky words: I, to, the
+**Look-for list on screen (example, P4):** 7 words · a space between words · capitals: Pip and I · a period at the end · tricky words: I, to, the
 
 ## Problem sets
 
@@ -423,18 +377,18 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ### Set A. Spaces (Sprout, Seedling)
 
-**A1 (Sprout, guided, read aloud).** Steps shown first: 1. Look for the gaps. 2. Is there a gap after every whole word? 3. Pick the card Pip can read.
+**A1 (Sprout, guided, read aloud).** Steps shown first: 1. Look for the gaps. 2. Is there a gap between every two words? 3. Pick the card Pip can read.
 - Prompt: Which postcard can Pip read?
 - Choices: Seeyouatthebridge. (`no-spaces`) · See you at the bridge. ✔ · Se eyo uat thebri dge. (`space-inside-word`)
 - Feedback: Seeyouatthebridge: The words run together. Pip can't see where they stop. · Se eyo: These gaps cut words in half.
-- Hint: Find the card with a gap after every whole word.
-- Explanation: A gap after each word: See you at the bridge.
+- Hint: Find the card with a gap between every two words.
+- Explanation: A gap between words: See you at the bridge.
 
 **A2 (Sprout, number, read aloud).**
 - Card shown: Dot has a hat.
 - Prompt: How many words are on this postcard?
 - Answer: 4.
-- Hint: Point to each word between the spaces.
+- Hint: Point to each word and count.
 - Explanation: Dot, has, a, hat. Four words, three spaces.
 
 **A3 (Seedling, tap).**
@@ -448,15 +402,15 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **A4 (Seedling).**
 - Card shown: Pip wrote: Ilikebuns.
 - Prompt: What should Pip fix?
-- Choices: Add a space after each word ✔ · Add a period at the end (`mark-fine`) · Make every letter a capital (`random-capital`)
+- Choices: Add a space between words ✔ · Add a period at the end (`mark-fine`) · Make every letter a capital (`random-capital`)
 - Feedback: Period: Look again. The period is already there. · Every letter: Capitals don't make gaps. The words still run together.
 - Hint: Can you see where each word stops?
-- Explanation: I like buns. Three words with a gap after each.
+- Explanation: I like buns. Three words, two gaps.
 
 ### Set B. Capitals for names, days and I (Seedling, Sapling)
 
 **B1 (Seedling, guided).** Steps shown first: 1. Read the cue card. 2. Find a name, a day or I. 3. That word needs a capital.
-- Card shown: This postcard is for Dot the ladybug.
+- Card shown: a picture of the ladybug postmaster; read aloud: "This postcard is for Dot the ladybug."
 - Line: Dear dot, the buns are here.
 - Prompt: Which word needs a capital?
 - Choices: buns (`random-capital`) · here (`random-capital`) · dot ✔
@@ -481,7 +435,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: I for yourself is always a capital. Pip and I went to the mill.
 
 **B4 (Seedling).**
-- Card shown: The baker bakes the town's bread.
+- Card shown: a picture of the baker at his oven; read aloud: "The baker bakes the town's bread."
 - Line: The baker looked everywhere in willowbank.
 - Prompt: Which word needs a capital?
 - Choices: baker (`job-is-name`) · everywhere (`random-capital`) · willowbank ✔
@@ -490,7 +444,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Willowbank is the town's name. The baker looked everywhere in Willowbank.
 
 **B5 (Seedling).**
-- Card shown: Pip the fox likes naps.
+- Card shown: a picture of the fox asleep; read aloud: "Pip the fox likes naps."
 - Prompt: Which line has every capital it needs?
 - Choices: On Friday, Pip naps. ✔ · On friday, Pip naps. (`day-lowercase`) · On Friday, pip naps. (`name-lowercase`)
 - Feedback: On friday: Friday is the name of a day. It needs a capital. · pip naps: Here pip is the fox's name. Capital P.
@@ -507,17 +461,17 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ### Set C. Letter, word, sentence (Sprout, Seedling, Sapling)
 
-**C1 (Sprout, guided, read aloud).** Steps shown first: 1. A letter is one mark. 2. A word is letters together. 3. Find just one mark.
+**C1 (Sprout, guided, read aloud).** Steps shown first: 1. A letter is one sign from the alphabet. 2. A word is letters together. 3. Find just one letter.
 - Prompt: Which card shows one letter?
 - Choices: hat (`word-is-letter`) · Dot has a hat. (`sentence-is-letter`) · d ✔
 - Feedback: hat: Hat has three letters. Together they make a word. · Dot has a hat: That's a whole sentence, with many letters.
-- Hint: Which card has just one mark?
+- Hint: Which card is just one sign from the alphabet?
 - Explanation: d is one letter. Letters make words.
 
 **C2 (Seedling).**
 - Prompt: Which card is a sentence?
 - Choices: Dot has a hat. ✔ · a red hat with a long feather (`phrase-is-sentence`) · hat (`word-is-sentence`)
-- Feedback: a red hat: It names a hat but doesn't tell us about it. No capital or end mark either. · hat: Hat is one word.
+- Feedback: a red hat: It names a hat but doesn't finish a thought. No capital or end mark either. · hat: Hat is one word.
 - Hint: Which card tells us something, with a capital and an end mark?
 - Explanation: Dot has a hat. It tells us something, starts with a capital and ends with a period.
 
@@ -546,8 +500,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **C6 (Sapling).**
 - Card shown: *Dot holds out an envelope.* "A letter for you, Pip!"
 - Prompt: What does letter mean here?
-- Choices: one mark, like a, b or c (`one-sense-only`) · a note sent by mail ✔ · a capital (`one-sense-only`)
-- Feedback: one mark: Letter can mean that. But Dot is holding an envelope. · a capital: A capital is a kind of letter mark. Look at the envelope.
+- Choices: one sign, like a, b or c (`one-sense-only`) · a note sent by mail ✔ · a capital (`one-sense-only`)
+- Feedback: one sign: Letter can mean that. But Dot is holding an envelope. · a capital: A capital is a kind of letter mark. Look at the envelope.
 - Hint: What is Dot holding out to Pip?
 - Explanation: Letter has two meanings. Here it means a note sent by mail.
 
@@ -566,9 +520,9 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: Put each letter in its family.
 - Letters: o · t · n · w
 - Answer: o curly · t ladder · n robot · w zigzag
-- Feedback for a wrong place: Watch it start. Like c, straight down, down and over, or slanting?
-- Hint: Watch only the very first stroke.
-- Explanation: o starts like c. t goes straight down. n goes down, up and over. w slants.
+- Feedback for a wrong place: Watch it again. Does it start like c, go back up its line, or slant?
+- Hint: After the line down, does it go back up the same line?
+- Explanation: o starts like c. t goes straight down, then across. n goes down, back up and over. w slants.
 
 **D3 (Seedling).**
 - Prompt: Which capital has only straight lines?
@@ -578,7 +532,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: E has only straight lines.
 
 **D4 (Sapling).**
-- Card shown: Pip's chart puts e with the curly letters. Dot's chart puts e by itself.
+- Card shown: Pip's chart puts e with the curly letters. Dot's chart leaves e out of them.
 - Prompt: Whose chart is right?
 - Choices: Only Pip's. Every school uses his. (`one-true-scheme`) · Both. Schools sort e differently. ✔ · Only Dot's. Every school uses hers. (`one-true-scheme`)
 - Feedback: Only Pip's: Schools don't all sort letters the same way. · Only Dot's: Schools don't all sort letters the same way.
@@ -640,12 +594,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: I and Monday need capitals: I will come on Monday.
 
 **F2 (Sapling).**
-- Card shown: Dot said: Dot said hello to me. Pip wrote: Dot said hello tome.
+- Card shown: Dot said: The baker said hello to me. Pip wrote: The baker said hello tome.
 - Prompt: What should Pip fix?
 - Choices: Add a space in tome ✔ · Add a capital to hello (`random-capital`) · Take out the period (`mark-fine`)
 - Feedback: hello: Hello isn't a name, a day or I. It stays small. · period: The line tells something. It needs its period.
 - Hint: Dot said two little words at the end. Can you see both?
-- Explanation: Tome is a real word, a big book. Dot said to me.
+- Explanation: Tome is a real word for a big book. Dot said to me.
 
 ## "I'm stuck" ladder
 
@@ -654,7 +608,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **Step 2, an easier case and how to start:**
 - Space items: "Try this one first: Pipnaps. Pip, then naps. One gap: Pip naps. Now say yours slowly."
 - Capital items: "Try this one first: i see dot. I means the writer. Dot is a name. Now find yours."
-- Letter, word and sentence items: "Try this one first: d, Dot, Dot naps. One mark, one word, one sentence. Now look at yours."
+- Letter, word and sentence items: "Try this one first: d, Dot, Dot naps. One letter, one word, one sentence. Now look at yours."
 - Family items: "Try this one first: c. Watch it start, round to the left. Now watch yours start."
 - Tricky word items: "Try this one first: said. Say it. Which letters don't match the sound? Now try yours."
 - Check items: "Try this one first: check spaces, then capitals, then the end mark. One at a time."
@@ -663,11 +617,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ## Key terms (glossary)
 
-- **Letter:** one mark, like a, b or c. A letter can also mean a note you send by mail.
+- **Letter:** one of the 26 signs in the alphabet, like a, b or c. (A period is a mark, but not a letter.) A letter can also mean a note you send by mail.
 - **Capital letter:** a big letter, like D in Dot. Names, days and I start with one.
-- **Word:** letters together that mean something, like hat.
+- **Word:** one or more letters that mean something, like hat or a.
 - **Sentence:** words that tell or ask something. It starts with a capital and ends with a mark like a period.
-- **Space:** a little gap after a word.
+- **Space:** a little gap between two words.
 - **Period:** a dot like this . that ends a telling sentence.
 - **Question mark:** a mark like this ? that ends a question.
 - **Exclamation mark:** a mark like this ! that shows strong feeling.
@@ -680,28 +634,22 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Postmaster:** the person in charge of a post office.
 - **Postcard:** a card with a short message, sent by mail.
 - **Slate:** a small board to write on with chalk.
-- **Cue card:** a card that tells you who or what a line is about.
+- **Cue card:** a picture card, read aloud, that tells you who or what a line is about.
 
-## Off-screen cards (adult-led)
-
-**Card 1 (marked: with a grown-up):** Pick a letter family. Write each letter in it on paper, starting at the green dot's place.
-
-**Card 2:** Write one line from the Postcard Desk on paper. Leave a finger space after each word.
-
-**Grown-up line:** Nothing is recorded. Watch where your child starts each letter, and say what went well. There is no score.
+**Grown-up line on the paper cards (Space Bench, Slate):** Nothing is recorded. Watch where your child starts each letter, and say what went well. There is no score.
 
 ## Grown-up panel
 
 **What this teaches:** spaces between words; capital letters for names of people and places, the days of the week and I; the words letter, capital letter, word, sentence, punctuation, period, question mark, exclamation mark, singular and plural; letter formation families; forming capital letters; common tricky words and the days of the week; and writing a short line from dictation.
 
-**Paper only:** the screen shows how letters are formed; it never watches or scores your child's writing, and nothing is photographed or stored. Please look at the paper together. Praise a good start point or a clear space before pointing at anything to fix.
+**Paper only:** the screen shows how letters are formed; there is no on-screen tracing, it never watches or scores your child's writing, and nothing is photographed or stored. The Show buttons are for your child's own comparison and keep nothing. Please look at the paper together. Praise a good start point or a clear space before pointing at anything to fix.
 
-**Letter families and stroke order:** England's national curriculum asks Year 1 children to learn which letters belong to which handwriting "families" but does not say which families. Many schools use four (often called curly caterpillar, long ladder, one-armed robot and zig-zag monster letters). Sources disagree on e, s and f, and k and y are written in more than one shape (a looped or a kicked k; a y with a curve or two slants), so their family depends on the shape a school teaches. The pack leaves those five unsorted. Stroke order and letter shapes also differ between schools and published programs. The pack shows one plain print model drawn for it. If your child's school teaches a different way, use the school's way; nothing here marks it wrong.
+**Letter families and stroke order:** England's national curriculum asks Year 1 children to learn which letters belong to which handwriting "families" but does not say which families. One widely used grouping has four (often called curly caterpillar, long ladder, one-armed robot and zig-zag monster letters); it is a convention, and other programs group letters differently. Sources disagree on e, s and f, and k and y are written in more than one shape (a looped or a kicked k; a y with a curve or two slants), so their family depends on the shape a school teaches. The pack leaves those five unsorted. Stroke order and letter shapes also differ between schools and published programs. The pack shows one plain print model drawn for it. If your child's school teaches a different way, use the school's way; nothing here marks it wrong.
 
-**Spaces:** a "finger space" is a classroom habit, not a rule of size. Left-handed writers often find a finger in the way; a craft stick or any small spacer works too.
+**Spaces:** a "finger space" is a classroom habit, not a rule of size. Some writers, often left-handed ones, find a finger in the way; a craft stick or any small spacer works too.
 
-**Terms:** this pack uses American terms. England's curriculum says full stop for a period and common exception words for tricky words. Both use exclamation mark, as Willowbank's Puppet Notice Printer does; many American books say exclamation point.
+**Terms:** this pack uses American terms. English capitalizes the days of the week; Spanish and French write them in lowercase (lunes, lundi), so the cards say "in English" (flag for a fluent reader). England's curriculum says full stop for a period and common exception words for tricky words. Both use exclamation mark, as Willowbank's Puppet Notice Printer does; many American books say exclamation point.
 
-**Tricky parts:** how a word sounds varies by accent. The pack only names tricky parts that hold across common American and British speech (said, friend, come, some, love, Monday), and says "most people" for Wednesday's first d.
+**Tricky parts:** how a word sounds varies by accent. The pack only names tricky parts that hold across common American and British speech (said, friend, come, some, love, Monday), and says "most people" for Wednesday's first d and second e. Words such as was, are, our and there sound different in different accents, so they get whole-word cards with no tapped part.
 
-**What it does not claim:** the postcard lines and every name in them are invented. Getting a line right on screen is not a measure of handwriting or spelling, which only a person looking at paper can see. Nothing is scored; saved work keeps only codes for on-screen choices and which postcard lines were mailed.
+**What it does not claim:** the postcard lines and every name in them are invented. Getting a line right on screen is not a measure of handwriting or spelling, which only a person looking at paper can see. Nothing is scored; saved work keeps only codes for on-screen choices and the ids of postcard lines that were mailed.

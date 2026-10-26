@@ -2,13 +2,9 @@
 
 Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip he/him; the librarian they/them; Dot she/her. Ember and Puff take no pronouns here. Sources: [audit](../source-audits/252-pips-library-cushions.md). Nothing is scored, timed or locked.
 
-**Brief 55 gate (binding):** this file is writing and an audio request list only. No sound is played, no letter-sound symbol is shown to a child, and every audio request below is pending review. Until reviewed audio exists, a grown-up reads aloud anything the child asks for, and the device never says a target word before the child has tried it.
+**Brief 55 gate and listening rule (binding):** this file is writing and an audio request list only. No sound plays, no letter-sound symbol is shown to a child, and every audio request is pending review. Until reviewed audio exists, a grown-up reads aloud whatever the child asks for. On benches and items, device speech never says a target word before the child's try; a book narration, played only on request, is support, and nothing afterward claims the child read that book alone. Nothing here listens to, records or times the child, and nothing about a reading or a reread is stored.
 
-**Listening rule (binding):** nothing here listens to, records or times the child. Reading aloud is heard by a grown-up in the room. Nothing about a reading, a reread or how it went is stored.
-
-**Labels used throughout:**
-- **A story from Willowbank** marks the town, its people and the three bedtime books.
-- **A true thing about language** marks real facts about words and spelling.
+**Labels used throughout:** **A story from Willowbank** marks the town, its people and the three bedtime books. **A true thing about language** marks real facts about words and spelling.
 
 ## Arriving
 
@@ -33,19 +29,13 @@ Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, 
 > Pip falls asleep on the library cushions while the librarian reads to him. He is still hugging the parcel for the Keeper of the Ways.
 
 **Longer:**
-> The storm soaked the library. Now the cushions are dry, piled by the window, and Pip has found the softest one.
->
-> He still has the parcel for the Keeper of the Ways under one arm. He takes it everywhere.
+> The storm soaked the library. Now the cushions are dry, piled by the window, and Pip has found the softest one. He still has the parcel for the Keeper of the Ways under one arm. He takes it everywhere.
 >
 > "Just one book," says the librarian. "Then home."
 >
-> They read *Nell Naps*. A hen wants a nap. A duck says quack. A frog says ribbit.
+> They read *Nell Naps*. A hen wants a nap. A duck says quack. A frog says ribbit. By the frog page, Pip's eyes are closed. By the last page, he is snoring.
 >
-> By the frog page, Pip's eyes are closed.
->
-> By the last page, he is snoring.
->
-> The librarian tucks a blanket over him, parcel and all. "Nell got her nap," they whisper. "So did you."
+> The librarian tucks a blanket over him. "Nell got her nap," they whisper. "So did you."
 
 **Keeper's note (A true thing about language):**
 > *Nell Naps* is a decodable book. Nearly every word can be sounded out with letters a new reader knows. The few others are sight words, which readers learn to know at a glance.
@@ -58,23 +48,15 @@ Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, 
 > Pip wants the same book again. This time he reads some of it himself. The second time sounds smoother. He still falls asleep.
 
 **Longer:**
-> "Again?" says the librarian. "You know how it ends."
+> "Again?" says the librarian. "You know how it ends." "That's why," says Pip.
 >
-> "That's why," says Pip.
+> So they read it again. This time Pip reads the duck page himself. "Quack! A duck sits on the rug." He knows said now. He knows the. He does not stop at them at all.
 >
-> So they read it again. This time Pip reads the duck page himself. "Quack! A duck sits on the rug."
->
-> He knows said now. He knows the. He does not stop at them at all.
->
-> "Shh," reads Pip, very sternly, the way Nell would.
->
-> {guide} laughs. "You sound just like a cross hen."
+> "Shh," reads Pip, very sternly, the way Nell would. {guide} laughs. "You sound just like a cross hen."
 >
 > "Same book," says the librarian. "Smoother reader."
 >
-> Pip yawns. "One more time tomorrow."
->
-> He is asleep before anyone can answer.
+> Pip yawns. "One more time tomorrow." He is asleep before anyone can answer.
 
 ### Scene 3. The cushion covers (Act I, mend the village)
 
@@ -84,9 +66,7 @@ Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, 
 > Each cover had one word across two patches. Pip matches them: bed and time make bedtime. Car and pet look right, but carpet is not a car pet.
 
 **Longer:**
-> Patches lie all over the rug. BED. MOON. TIME. SHELF. LIGHT. BOOK.
->
-> "Each cover had one word," says the librarian. "Two patches each."
+> Patches lie all over the rug. BED. MOON. TIME. SHELF. LIGHT. BOOK. "Each cover had one word," says the librarian. "Two patches each."
 >
 > Pip pins BED to TIME. "Bedtime!" He pins MOON to LIGHT. "Moonlight!"
 >
@@ -94,9 +74,7 @@ Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, 
 >
 > "That one is carpet," says the librarian. "It came from an old word long ago. It only looks like car and pet."
 >
-> Pip looks at the floor. "So the rug is not a pet."
->
-> "Not even a little bit."
+> Pip looks at the floor. "So the rug is not a pet." "Not even a little bit."
 >
 > Pip pins BOOK to SHELF, very carefully, in case.
 
@@ -110,21 +88,15 @@ Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, 
 **Longer:**
 > The café table is covered in cards. Pip has been asked to read them, because he asked to read them.
 >
-> "To the biggest little dragon," he reads. He stops. "Bigg. Est. Big! Biggest!"
->
-> Ember looks pleased.
+> "To the biggest little dragon," he reads. He stops. "Bigg. Est. Big! Biggest!" Ember looks pleased.
 >
 > "Best wishes from the café," reads Dot. "Wish, then es."
 >
-> The last card says: *Unfold me slowly.*
->
-> "Un. Fold," says Pip. "Not folded anymore."
+> The last card says: *Unfold me slowly.* "Un. Fold," says Pip. "Not folded anymore."
 >
 > Ember unfolds it slowly. It becomes a paper dragon with wings as wide as the table.
 >
-> "Unfolded," says Pip, and eats a cake while nobody is looking.
->
-> Puff was looking.
+> "Unfolded," says Pip, and eats a cake while nobody is looking. Puff was looking.
 
 ### Scene 5. Pip's line (Act II, the first show)
 
@@ -136,21 +108,13 @@ Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, 
 **Longer:**
 > "Is that a storm," reads Pip. It sounds like a shopping list.
 >
-> The librarian taps the end of the line. "What is that mark?"
->
-> "A hook with a dot under it."
->
-> "A question mark. It asks you to ask."
+> The librarian taps the end of the line. "What is that mark?" "A hook with a dot under it." "A question mark. It asks you to ask."
 >
 > Pip tries again. "Is that a storm?" His voice goes up at the end, all by itself.
 >
 > Every night that week, Pip reads his line on the cushions. Then the page before it. Then the page after.
 >
-> On the night of the show, the thunder sheet rattles. Pip steps forward.
->
-> "Is that a storm?"
->
-> Somebody at the back says, "Yes!" Everyone laughs. Pip bows anyway.
+> On the night of the show, the thunder sheet rattles. Pip steps forward. "Is that a storm?" Somebody at the back says, "Yes!" Everyone laughs. Pip bows anyway.
 
 ### Scene 6. Know inside (Act II, the town keeps its own records)
 
@@ -160,25 +124,17 @@ Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, 
 > The sign says TOWN KNOWLEDGE. Pip spots know inside the long word. Knowledge is what we know. "So next time we'll know," says the librarian.
 
 **Longer:**
-> The new shelf is for the town's own records: rain, river, frost, the first swallow.
+> The new shelf is for the town's own records: rain, river, frost, the first swallow. The librarian paints the sign. TOWN, and then a long word.
 >
-> The librarian paints the sign. TOWN, and then a long word.
+> Pip squints. "Town... something." "Look for a word you already know," says {guide}.
 >
-> Pip squints. "Town... something."
->
-> "Look for a word you already know," says {guide}.
->
-> Pip covers the end with his paw. "Know! It starts with know."
->
-> "Then the rest," says the librarian.
+> Pip covers the end with his paw. "Know! It starts with know." "Then the rest," says the librarian.
 >
 > "Ledge," says Pip. "Know-ledge. Knowledge!" He frowns. "It doesn't sound like know and ledge, though."
 >
 > "Not quite. Words can change a little when they join. But know got you started."
 >
-> "Knowledge is what we know," says Pip.
->
-> "So next time we'll know," says the librarian, and hangs the sign.
+> "Knowledge is what we know," says Pip. "So next time we'll know," says the librarian, and hangs the sign.
 
 ### Scene 7. Lantern tags (Winter, Lantern Night)
 
@@ -188,25 +144,17 @@ Companion to [spec 252](../specs/252-pips-library-cushions.md). Use as written, 
 > Each lantern has a tag with a long word. Pip splits each word into chunks, reads each chunk, then puts them together: lan, tern, lantern.
 
 **Longer:**
-> The bridge is lined with lanterns. Each one has a paper tag tied to its handle.
+> The bridge is lined with lanterns. Each one has a paper tag tied to its handle. Pip reads the first tag. "Lan... tern. Lantern."
 >
-> Pip reads the first tag. "Lan... tern. Lantern."
+> The next tag is longer. FANTASTIC. "Too long," says Pip. "Chunk it," says Dot. "Fan. Tas. Tic." Pip reads each chunk, then runs them together. "Fantastic!"
 >
-> The next tag is longer. FANTASTIC.
->
-> "Too long," says Pip.
->
-> "Chunk it," says Dot. "Fan. Tas. Tic."
->
-> Pip reads each chunk, then runs them together. "Fantastic!"
->
-> Later, wrapped in a blanket on the library cushions, he asks for *Eight Lanterns*. He has read it before. Tonight he reads every page himself, slowly, then not so slowly.
+> Later, wrapped in a blanket on the library cushions, he asks for *Eight Lanterns*. He has read it before. Tonight he reads every page himself, slowly at first, then more smoothly.
 >
 > The librarian listens and says nothing at all, which is the nicest thing to say.
 
 ## The bedtime books
 
-Three short books, **A story from Willowbank**, written new for this pack. Each lists the letter patterns and sight words it assumes. A grown-up reads the "read together" words if needed. A book is read to a grown-up, never to the device.
+Three short books, **A story from Willowbank**, written new for this pack. Each lists the letter patterns and sight words it assumes; every other word is in its "read together" or "work out together" list. A grown-up reads the "read together" words if needed. A book is read to a grown-up, never to the device.
 
 ### Book 1. *Nell Naps* (Sprout)
 
@@ -228,10 +176,10 @@ Three short books, **A story from Willowbank**, written new for this pack. Each 
 
 ### Book 2. *One More Book* (Seedling)
 
-**Assumes:** everything in Book 1, plus ai, ar, ee, er, igh, oo, or, ou, ow as in owl, ur, wh, i with an e at the end as in time, a with an e at the end as in came, y at the end as in sleepy and sky; endings -s, -es, -ed, -ing, -er, -est; un- at the start.
-**Sight words it assumes:** the, was, he, they, said, one, again, about, from.
+**Assumes:** everything in Book 1, plus ai, ar, ee, er, igh, oo, or, ou, ow as in owl, ur, wh, i with an e at the end as in time, a with an e at the end as in came, y at the end as in sleepy and sky; endings -s, -es, -ed, -ing, -er, -est, with a doubled last letter as in begged.
+**Sight words it assumes:** the, a, was, he, they, said, one, again, about, from.
 **Read together:** library, librarian, cushion, more, tomorrow.
-**Decodable words:** it, at, books, still, sat, in, boxes, Pip, curled, up, on, softest, book, begged, looked, out, just, picked, a, sleepy, owl, hooting, and, flapping, nodding, sky, got, darker, stars, came, waited, asleep, unfolded, quilt, tucked, him, whispered, storm.
+**Decodable words:** it, at, books, still, sat, in, boxes, Pip, curled, up, on, softest, book, begged, looked, out, just, picked, sleepy, owl, hooting, and, flapping, nodding, sky, got, darker, stars, came, waited, sleeping, quilt, tucked, him, whispered, storm.
 **Two-word words:** bedtime, moonlight.
 
 1. It was bedtime at the library. Books from the storm still sat in boxes.
@@ -243,35 +191,31 @@ Three short books, **A story from Willowbank**, written new for this pack. Each 
 7. The owl was hooting and flapping.
 8. Pip was nodding.
 9. The sky got darker. The stars came out.
-10. The librarian waited. Pip was asleep.
-11. They unfolded a quilt and tucked him in.
+10. The librarian waited. Pip was sleeping.
+11. They got out a quilt and tucked him in.
 12. "Again tomorrow," they whispered.
 
 ### Book 3. *Eight Lanterns* (Sapling)
 
-**Assumes:** everything in Book 2, plus words of two and three syllables.
-**Sight words it assumes:** the, a, he, is, said, to, one, once, all, was, only, water, half, every, walk.
-**Decodable words:** on, lantern, lanterns, night, in, carried, bridge, Pip, at, that, more, than, Dot, for, bakery, and, mill, walked, snow, very, carefully, across, splash, it, fish, duck, wobbled, but, not, fell, small, lights, shone, dark, remember, this.
+**Assumes:** everything in Book 2, plus dge as in bridge, and words of two syllables.
+**Sight words it assumes:** the, a, he, is, said, to, one, once, all, was, only, water, every, we.
+**Decodable words:** on, lantern, lanterns, night, in, took, bridge, Pip, at, that, than, Dot, for, garden, and, mill, went, frost, step, by, then, splash, brook, it, fish, duck, tipped, but, not, fell, lights, lit, up, dark, must, forget, this.
 **Words to work out together:** eight, enough, library, through, heard, thought, special.
-**Read together:** librarian.
-**Two-word words:** everyone, Willowbank, halfway.
+**Read together:** Willowbank, librarian, more.
+**Two-word word:** everyone.
 
-1. On Lantern Night, everyone in Willowbank carried a lantern to the bridge.
-2. Pip carried eight lanterns, all at once.
+1. On Lantern Night, everyone in Willowbank took a lantern to the bridge.
+2. Pip took eight lanterns, all at once.
 3. "That is more than enough," said Dot.
-4. "One is for the library," said Pip. "One is for the bakery, and one is for the mill."
-5. He walked through the snow, very carefully.
-6. Halfway across, he heard a splash.
+4. "One is for the library," said Pip. "One is for the garden, and one is for the mill."
+5. He went through the frost, step by step.
+6. Then he heard a splash in the brook.
 7. Pip thought it was a fish. It was only a duck.
-8. The lanterns wobbled, but not one fell.
-9. On the bridge, eight small lights shone on the dark water.
-10. "Remember this night," said the librarian. "It is a special one."
+8. The lanterns tipped, but not one fell.
+9. On the bridge, eight lights lit up the dark water.
+10. "We must not forget this night," said the librarian. "It is a special one."
 
-**Read it again (with a grown-up, any book):**
-1. Listen: a grown-up reads a page.
-2. Together: read the same page at the same time.
-3. On your own: read it to the grown-up.
-4. Another night: read the whole book again.
+**Read it again (with a grown-up, any book):** 1. Listen: a grown-up reads a page. 2. Together: read the same page at the same time. 3. On your own: read it to the grown-up. 4. Another night: read the whole book again.
 
 **Grown-up line:** Nothing is recorded or counted. Talk about the story, not about how fast it went.
 
@@ -279,141 +223,56 @@ Three short books, **A story from Willowbank**, written new for this pack. Each 
 
 Each card is 30 words or fewer; worked-example steps appear one tap at a time. All cards are **A true thing about language**.
 
-**Card 1. Words you know at a glance**
-> Some words come again and again: the, said, was, you. Soon you know them at a glance. Those are sight words.
+**Card 1. Words you know at a glance.** Some words come again and again: the, said, was, you. Soon you know them at a glance. Those are sight words.
+Worked example, *Nell Naps*: 1. Find said where Nell first talks. 2. Find said again when Nell says shh. 3. Same word, same letters. Soon you just know it.
 
-Worked example: *Nell Naps.*
-1. Find said where Nell first talks.
-2. Find said again when Nell says shh.
-3. Same word, same letters. Soon you just know it.
+**Card 2. Find the tricky part.** In many sight words, most letters work the usual way. Often just one part is odd. Find that part and remember it.
+Worked example, *said*: 1. The s works like the s in sun. 2. The d works like the d in dog. 3. The ai is the odd part. It does not sound like rain. It sounds like the e in bed.
 
-**Card 2. Find the tricky part**
-> Most letters in a sight word work the usual way. Often just one part is odd. Find that part and remember it.
+**Card 3. Two words in one.** Some long words are two words joined together. Each part usually keeps its own spelling. These are compound words.
+Worked example, *bedtime*: 1. Look for a word you know at the start: bed. 2. Look at what is left: time. 3. bed + time = bedtime.
 
-Worked example: *said.*
-1. The s works like the s in sun.
-2. The d works like the d in dog.
-3. The ai is the odd part. It does not sound like rain. It sounds like the e in bed.
+**Card 4. What the parts tell you.** Often the second word names the thing. The first word tells what kind. But not always.
+Worked example, *raincoat and butterfly*: 1. A raincoat is a coat. Rain tells what kind. 2. A butterfly is not a fly made of butter. 3. The parts give a clue. They are not a promise.
 
-**Card 3. Two words in one**
-> Some long words are two words joined together. Each part keeps its own spelling. These are compound words.
+**Card 5. Only looks like two.** Some words hide two little words but are not compound words. Carpet came from an old word. It was never car and pet.
+Worked example, *carpet*: 1. You can see car and pet in the letters. 2. But a carpet is not a car or a pet. 3. A dictionary tells you where a word came from.
 
-Worked example: *bedtime.*
-1. Look for a word you know at the start: bed.
-2. Look at what is left: time.
-3. bed + time = bedtime.
+**Card 6. Peel off the ending.** Endings like -s, -es, -ing and -ed sit on a root word. Peel the ending off. Read the root. Put it back. Sometimes the root changes a little.
+Worked example, *jumping*: 1. Find the ending: ing. 2. Read what is left: jump. 3. Put it back: jump + ing = jumping.
 
-**Card 4. What the parts tell you**
-> Often the second word names the thing. The first word tells what kind. But not always.
+**Card 7. Bigger and biggest.** On a describing word, -er usually means more: darker. -est means the most of a group: biggest. Sometimes the last letter doubles first.
+Worked example, *dark, darker; big, biggest*: 1. The sky got darker: darker than before. 2. The biggest card: bigger than every other card. 3. Biggest has two g's. The root is still big.
 
-Worked example: *raincoat and butterfly.*
-1. A raincoat is a coat. Rain tells what kind.
-2. A butterfly is not a fly made of butter.
-3. The parts give a clue. They are not a promise.
+**Card 8. un- at the start.** un- at the start often means not, or undo. Unfold means open out what was folded.
+Worked example, *unfolded*: 1. Take off un: folded. 2. Take off ed: fold. 3. un + fold + ed: it was opened out.
 
-**Card 5. Only looks like two**
-> Some words hide two little words but are not compound words. Carpet came from an old word. It was never car and pet.
+**Card 9. One letter or two?** Hopping has two p's: the root is hop. Hoping has one p: the root is hope, with its e taken off. One letter or two is a clue.
+Worked example, *Pip is hoping. The frog is hopping.*: 1. hoping: one p. Root: hope. 2. hopping: two p's. Root: hop. 3. Pip hopes for a book. The frog hops.
 
-Worked example: *carpet.*
-1. You can see car and pet in the letters.
-2. But a carpet is not a car or a pet.
-3. A dictionary tells you where a word came from.
+**Card 10. Every beat has a vowel sound.** Long words have beats, called syllables. Every syllable has a vowel sound. In print, each chunk usually has a vowel letter: a, e, i, o, u, or y.
+Worked example, *basket*: 1. Clap it with a grown-up: bas, ket. Two beats. 2. bas has a. ket has e. 3. b alone has no vowel letter. It is not a chunk here.
 
-**Card 6. Peel off the ending**
-> Endings like -s, -es, -ing and -ed sit on the end of a root word. Peel the ending off. Read the root. Put it back.
+**Card 11. Chunk, read, blend.** Two consonants between vowels? You can usually split between them. Read each chunk. Then run the chunks together.
+Worked example, *rabbit and fantastic*: 1. rab | bit. Read rab. Read bit. Rabbit. 2. fan | tas | tic. 3. Fan, tas, tic. Fantastic.
 
-Worked example: *jumping.*
-1. Find the ending: ing.
-2. Read what is left: jump.
-3. Put it back: jump + ing = jumping.
+**Card 12. Try it one way, then the other.** With one consonant between vowels, try splitting before it first. If that is not a word you know, split after it instead.
+Worked example, *tiger and robin*: 1. ti | ger. Tiger. A word you know. 2. ro | bin. Not a word you know. 3. Try rob | in. Robin!
 
-**Card 7. Bigger and biggest**
-> -er compares two things. -est picks out one from a whole group. Sometimes the last letter doubles before the ending.
+**Card 13. Read it again.** The first time, a book can feel bumpy. Read it again, and again on another night. It usually gets smoother.
+Worked example, *Pip and Nell Naps*: 1. Night one: Pip stops at said. 2. Night two: Pip reads said at a glance. 3. Same book, smoother reader.
 
-Worked example: *dark, darker; big, biggest.*
-1. The sky got darker: darker than before.
-2. The biggest card: bigger than every other card.
-3. Biggest has two g's. The root is still big.
+**Card 14. Let the marks help.** A question mark asks you to ask. An exclamation point often asks for a big voice. A period asks for a telling voice.
+Worked example, *Is that a storm?*: 1. Look at the end: a question mark. 2. Read it as a question. 3. Then read the line again with that voice.
 
-**Card 8. un- at the start**
-> un- at the start often means not, or undo. Unfold means open out what was folded.
+**Card 15. Does it make sense?** If a sentence stops making sense, go back. Read it again and look closely at the word that went wrong.
+Worked example, *The duck sat on the rag.*: 1. Look again: the book says rug. 2. Read it again: The duck sat on the rug. 3. Now it matches the page.
 
-Worked example: *unfolded.*
-1. Take off un: folded.
-2. Take off ed: fold.
-3. un + fold + ed: it was opened out.
+**Card 16. A word you know inside.** Stuck on a long word? Look for a word you know inside it. Read that part. Then work out the rest.
+Worked example, *knowledge*: 1. Find a word you know: know. 2. Read what is left: ledge. 3. Put them together, then fix it to a word you have heard: knowledge.
 
-**Card 9. One letter or two?**
-> In hopping, two p's usually mean the root is hop. In hoping, one p usually means the root is hope, with its e taken off.
-
-Worked example: *Pip is hoping. The frog is hopping.*
-1. hoping: one p. Root: hope.
-2. hopping: two p's. Root: hop.
-3. Pip hopes for a book. The frog hops.
-
-**Card 10. Every beat has a vowel sound**
-> Long words have beats, called syllables. Every syllable has a vowel sound. In print, each chunk usually has a vowel letter: a, e, i, o, u, or y.
-
-Worked example: *basket.*
-1. Clap it with a grown-up: bas, ket. Two beats.
-2. bas has a. ket has e.
-3. b alone has no vowel. It cannot be a chunk.
-
-**Card 11. Chunk, read, blend**
-> When two consonants sit between vowels, split between them. Read each chunk. Then run the chunks together.
-
-Worked example: *rabbit and fantastic.*
-1. rab | bit. Read rab. Read bit. Rabbit.
-2. fan | tas | tic.
-3. Fan, tas, tic. Fantastic.
-
-**Card 12. Try it one way, then the other**
-> With one consonant between vowels, try splitting before it first. If that is not a word you know, split after it instead.
-
-Worked example: *tiger and robin.*
-1. ti | ger. Tiger. A word you know.
-2. ro | bin. Not a word you know.
-3. Try rob | in. Robin!
-
-**Card 13. Read it again**
-> The first time, a book can feel bumpy. Read it again, and again on another night. It gets smoother each time.
-
-Worked example: *Pip and Nell Naps.*
-1. Night one: Pip stops at said.
-2. Night two: Pip reads said at a glance.
-3. Same book, smoother reader.
-
-**Card 14. Let the marks help**
-> A question mark asks you to ask. An exclamation point asks for a big voice. A period asks for a telling voice.
-
-Worked example: *Is that a storm?*
-1. Look at the end: a question mark.
-2. Read it as a question.
-3. Then read the line again with that voice.
-
-**Card 15. Does it make sense?**
-> If a sentence stops making sense, go back. Read it again and look closely at the word that went wrong.
-
-Worked example: *The duck sat on the rag.*
-1. Look again: the book says rug.
-2. Read it again: The duck sat on the rug.
-3. Now it matches the page.
-
-**Card 16. A word you know inside**
-> Stuck on a long word? Look for a word you know inside it. Read that part. Then work out the rest.
-
-Worked example: *knowledge.*
-1. Find a word you know: know.
-2. Read what is left: ledge.
-3. Put them together, then fix it to a word you have heard: knowledge.
-
-**Card 17. Try another sound (Keeper's Desk)**
-> Some letters do something unusual. Try the usual sound first. If the word sounds strange, try another, until it matches a word you have heard.
-
-Worked example: *heard.*
-1. You see hear, plus d.
-2. Said like hear, it is not a word you know.
-3. Try it to rhyme with bird. Heard!
+**Card 17. Try another sound (Keeper's Desk).** Some letters do something unusual. Try the usual sound first. If the word sounds strange, try another, until it matches a word you have heard.
+Worked example, *heard*: 1. You see hear, plus d. 2. Said like hear, it is not a word you know. 3. Try it to rhyme with bird. Heard!
 
 ## Benches
 
@@ -432,7 +291,7 @@ Worked example: *heard.*
 8. "___ and nap with me." · Came · Come ✔ · Cone
 9. Pip wants ___ milk. · same · son · some ✔
 10. Just ___ more book. · one ✔ · on · own
-11. The cushion is over ___. · where · there ✔ · these
+11. The cushion is over ___. · where · there ✔ · their
 12. "Read it ___!" says Pip. · against · gain · again ✔
 
 **When the word fits:** The lamp lights. The tricky part glows.
@@ -442,7 +301,7 @@ Worked example: *heard.*
 **Tricky parts (shown when a lamp lights; A true thing about language):**
 - the: The e does not sound like the e in hen.
 - said: The ai sounds like the e in bed, not like rain.
-- was: The s sounds like the s in his.
+- was: The a does not sound like the a in cat.
 - you: The ou does not sound like out.
 - they: The ey sounds like the ay in day.
 - of: The f sounds like the v in van.
@@ -470,12 +329,12 @@ Worked example: *heard.*
 **Build header:** Make the word on the label from two patches.
 
 **Build labels (four patches each; ✔ marks the pair):**
-- a light from a lamp: lamp ✔ · night · light ✔ · flake
+- a light from a lamp: lamp ✔ · coat · light ✔ · flake
 - a flake of snow: rain · snow ✔ · flake ✔ · case
 - a coat for the rain: coat ✔ · moon · shelf · rain ✔
 - a case for a pillow: book · case ✔ · pillow ✔ · time
 
-**Build feedback:** The second word names the thing. Which word names it here?
+**Build feedback:** Here the second word names the thing. Which word names it?
 
 **Only looks like two:** Is this word two words joined, or does it only look that way?
 - carpet: Only looks like two. *Carpet came from an old word. It is not a car pet.*
@@ -499,6 +358,10 @@ Worked example: *heard.*
 
 **Root feedback:** Which part is the ending? What word is left when you take it off?
 
+**After begged:** Two g's, one root: beg. The g doubled before -ed.
+
+**After hoping:** One p, so the root is hope. Its e came off before -ing.
+
 **After unfolded:** un + fold + ed. Two parts came off, one at each end.
 
 ### (d) Lantern Tags (Sapling)
@@ -519,7 +382,7 @@ Worked example: *heard.*
 
 **Split feedback:** Look at each chunk. Does every chunk have a vowel letter?
 
-**Clap it (with a grown-up, not recorded):** Say the word together and clap each beat.
+**Clap it (with a grown-up):** Say the word together and clap each beat.
 
 ### (e) Read It Like You Mean It (Seedling)
 
@@ -535,17 +398,13 @@ Worked example: *heard.*
 
 **Line feedback:** Look right at the end of the line. Which mark is there?
 
-**Then:** Read the line to a grown-up in that voice. Nothing is recorded.
+**Then:** Read the line to a grown-up in that voice.
 
 ### (f) The Puzzle-Word Lamp (Sapling, Keeper's Desk)
 
 **Header:** A long, odd word. Light the lamp one step at a time.
 
-**Steps (the same for every word):**
-1. Look for a word you know inside.
-2. Read the parts you can.
-3. Try a sound for the odd part. Then try another.
-4. Is it a word you have heard? Does it fit?
+**Steps (the same for every word):** 1. Look for a word you know inside. 2. Read the parts you can. 3. Try a sound for the odd part. Then try another. 4. Is it a word you have heard? Does it fit?
 
 **Words (step 1 offers three words; ✔ marks the one the word was built from):**
 - eighth: eight ✔ · height · weigh. *Eighth is eight plus h.*
@@ -555,7 +414,7 @@ Worked example: *heard.*
 - business: busy ✔ · bus · sin. *Business is busy plus ness, with the y changed to i.*
 - breakfast, two words joined: brea + kfast · break + fast ✔ · bre + akfast. *Fast can mean no food. Breakfast breaks the night's fast.*
 
-**Step 1 feedback:** That is not the word it was built from. Look for a word you know, right at the start.
+**Step 1 feedback:** Those letters are there, but the long word was not built from that word. Try another.
 
 ## Problem sets
 
@@ -654,7 +513,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **C4 (Seedling).**
 - Prompt: Pip is ___ for one more book. He wants one!
 - Choices: hoping ✔ · hopping (`double-ignored`) · hopped (`double-ignored`)
-- Feedback: hopping: Two p's: the root is hop. Pip is not jumping about. · hopped: Two p's again, from hop. And is hopped does not fit.
+- Feedback: hopping: Two p's: the root is hop, to jump. Wanting is hope. · hopped: Two p's again, from hop. And is hopped does not fit.
 - Hint: Pip wants a book. Is he hoping or jumping?
 - Explanation: One p: the root is hope. Pip hopes for one more book.
 
@@ -671,10 +530,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: Which split of basket works?
 - Choices: b | asket (`chunk-without-vowel`) · bas | ket ✔ · baske | t (`chunk-without-vowel`)
 - Feedback: b | asket: The chunk b has no vowel letter. · baske | t: The chunk t has no vowel letter.
-- Hint: Every chunk needs a vowel letter. Check each side.
+- Hint: Every chunk needs a vowel letter here. Check each side.
 - Explanation: bas | ket. Read bas, read ket, then blend: basket.
 
-**D2 (Seedling, number, with a grown-up).** Clap the beats together. Nothing is recorded.
+**D2 (Seedling, number, with a grown-up).** Clap the beats together.
 - Prompt: How many syllables are in fantastic?
 - Answer tiles: 1 · 2 · 3 ✔ · 4
 - Hint: Chunk it first: fan, tas, tic.
@@ -688,11 +547,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: rob | in. Robin, a word you know.
 
 **D4 (Sapling).**
-- Prompt: Which chunk of umbrella has no vowel letter?
-- Choices: um (`vowel-missed`) · brel (`vowel-missed`) · mbr ✔
-- Feedback: um: Um has u, a vowel letter. · brel: Brel has e, a vowel letter.
+- Prompt: Pip tries u | mbr | ella. Which chunk has no vowel letter?
+- Choices: u (`vowel-missed`) · ella (`vowel-missed`) · mbr ✔
+- Feedback: u: U is a vowel letter. · ella: Ella has e and a, two vowel letters.
 - Hint: Look for a, e, i, o, u or y in each chunk.
-- Explanation: mbr has no vowel letter, so it cannot be a chunk. The split is um | brel | la.
+- Explanation: mbr has no vowel letter, so this split does not work. Try um | brel | la.
 
 ### Set E. Read it again (Seedling)
 
@@ -714,7 +573,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **E3 (Seedling, true / not true).**
 - "Reading fast is the same as reading well." Not true (`fast-is-fluent`): smooth, clear reading matters more than speed.
 - "Reading a book again can make it sound smoother." True.
-- "An exclamation point asks for a big voice." True.
+- "An exclamation point can ask for a big voice." True.
 - Hint: Think about Pip and *Nell Naps* on the second night.
 - Explanation: Rereading makes reading smoother. The marks tell you which voice to use.
 
@@ -740,7 +599,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **F3 (Sapling).**
 - Prompt: Island starts like eye. Which letter makes no sound?
 - Choices: the d (`every-letter-sounds`) · the i (`every-letter-sounds`) · the s ✔
-- Feedback: the d: You can hear d at the end: is-land. · the i: The i starts it, like eye.
+- Feedback: the d: You can hear the d at the end of land. · the i: The i starts it, like eye.
 - Hint: Say island with a grown-up. Which letter do you not hear?
 - Explanation: The s makes no sound. Island has land inside it.
 
@@ -784,12 +643,13 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Sight word:** a word you know at a glance, without sounding it out.
 - **Tricky part:** the part of a word that does not work the usual way.
 - **Compound word:** two words joined into one, like bedtime.
-- **Root word:** the word left when you take an ending or un- off.
+- **Root word:** the word under an ending or un-, like jump in jumping.
 - **Ending:** letters added at the end of a word, like -ing or -ed.
+- **Describing word:** a word that tells what something is like, like soft or dark.
 - **Syllable:** one beat in a word. Rabbit has two.
 - **Chunk:** a piece of a long word to read on its own.
 - **Vowel letters:** a, e, i, o, u, and sometimes y.
-- **Consonant:** any letter that is not a vowel letter.
+- **Consonant:** a letter that is not a vowel letter. Y can be either.
 - **Reread:** read something again.
 - **Smooth reading:** reading that sounds like talking, without many stops.
 - **Question mark, exclamation point, period:** marks at the end of a sentence.
@@ -798,7 +658,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **Card (marked: with a grown-up):** Choose a book you have read before. Read it aloud to a grown-up. Another night, read it again.
 
-**Grown-up line:** Nothing is recorded, timed or counted. If a page has many hard words, read it together first. Talk about the story afterward.
+**Grown-up line:** If a page has many hard words, read it together first. Talk about the story afterward.
 
 ## Grown-up panel
 
@@ -806,7 +666,9 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **What it does not do:** it does not listen to, record, time or score reading. There is no words-per-minute, no accuracy percentage and no reading level. Rereading is something you hear, in the room, and nothing about it is saved. It does not teach letter sounds from scratch: Book 1 assumes the short vowels and common consonants, and Books 2 and 3 assume more, as listed with each book.
 
-**About sounds:** the tricky-part lines compare a letter with a known word ("like the e in bed"). People say some words differently in different places. *Again*, *shone* and *library* are common examples, and any natural way of saying a word is right. No pronunciation is marked wrong.
+**About sounds:** the tricky-part lines compare a letter with a known word ("like the e in bed"). People say some words differently in different places. *Again*, *was* and *library* are common examples, and any natural way of saying a word is right. No pronunciation is marked wrong.
+
+**About "usually":** the cards say a chunk *usually* has a vowel letter because a few words, like *rhythm*, have a beat without one. None of those words appears in an item.
 
 **UK terms:** in England, sight words like *said* and *was* are called common exception words, and a period is a full stop. The exclamation point is an exclamation mark.
 
@@ -820,7 +682,7 @@ For brief 55's linguistic, audio and rights reviewers, and never shown to a chil
 | --- | --- | --- | --- | --- | --- |
 | p252-b1-read | shared-text | *Nell Naps*, all 9 pages | Listen step of Read it again, on request | natural pace; adult model, not a fluency target | pending-independent-review |
 | p252-b2-read | shared-text | *One More Book*, all 12 pages | Listen step, on request | natural pace; *tomorrow* /təˈmɑroʊ/ | pending-independent-review |
-| p252-b3-read | shared-text | *Eight Lanterns*, all 10 pages | Listen step, on request | *shone* /ʃoʊn/ in GA; other varieties differ | pending-independent-review |
+| p252-b3-read | shared-text | *Eight Lanterns*, all 10 pages | Listen step, on request | natural pace; *Willowbank* /ˈwɪloʊbæŋk/ | pending-independent-review |
 | p252-sw-the | word | the | after the child's try on a lamp | citation form /ðə/; /ði/ also heard | pending-independent-review |
 | p252-sw-said | word | said | after the try | /sɛd/ | pending-independent-review |
 | p252-sw-was | word | was | after the try | /wʌz/ or /wɑz/; speaker's natural form | pending-independent-review |

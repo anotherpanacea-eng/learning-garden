@@ -2,7 +2,7 @@
 
 Companion to [spec 250](../specs/250-sounds-in-the-seed-packets.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip he/him; the orchard keeper and Wren Halloway she/her; Hob Pennick he/him. Sources: [audit](../source-audits/250-sounds-in-the-seed-packets.md). Nothing is scored, timed or locked. No Hollis, no pages and no parcel appear here.
 
-**Brief 55 rule (binding):** this file is text and an audio request list only. No sound plays until [brief 55](../specs/55-phonics-content-audio-brief.md)'s linguistic, audio and rights review approves real recordings. Until then every bench runs in **adult-read mode**: a grown-up says the words and sounds. Child text never shows phoneme slashes; it names a sound by a key word ("the sound at the start of ship"). Slashes appear only in the grown-up panel and the audio table.
+**Brief 55 rule (binding):** text and audio requests only; nothing plays until [brief 55](../specs/55-phonics-content-audio-brief.md)'s review approves real recordings, so every bench runs in **adult-read mode**. Child text names a sound by a key word ("the sound at the start of ship"), never by slashes; slashes appear only in the audio table.
 
 **Labels used throughout:**
 - **A story from Willowbank** marks the town, its people and its seed shed (fiction).
@@ -13,7 +13,7 @@ Companion to [spec 250](../specs/250-sounds-in-the-seed-packets.md). Use as writ
 **Place title:** Sounds in the Seed Packets
 
 **First visit** (A story from Willowbank):
-> The orchard keeper's seed shed has a wet floor and a bench full of drying packets. The pictures survived the storm. The names ran.
+> The orchard keeper's seed shed has a wet floor and a bench full of drying packets.
 >
 > "Every packet needs its name back," says the orchard keeper. "I can't plant what I can't read."
 
@@ -55,16 +55,16 @@ Companion to [spec 250](../specs/250-sounds-in-the-seed-packets.md). Use as writ
 **Hook:** One packet shows thin green stalks. Pip hopes very hard that it says chips.
 
 **Short:**
-> Pip hopes a packet says chips. It says chives. The e at the end is quiet, but it changes the i.
+> Pip hopes a packet says chips. It says chives. The e before the s is quiet, but it changes the i.
 
 **Longer:**
 > Pip holds up a packet. Thin green stalks on the front, and one word: chives.
 >
 > "Chips," he says. "Someone grows chips."
 >
-> "Look at the end," says the orchard keeper.
+> "Look near the end," says the orchard keeper.
 >
-> Pip looks. "There's an e. It doesn't say anything."
+> Pip looks. "There's an e before the s. It doesn't say anything."
 >
 > "It doesn't," says {guide}. "But it changes the i. Like pin and pine."
 >
@@ -79,14 +79,14 @@ Companion to [spec 250](../specs/250-sounds-in-the-seed-packets.md). Use as writ
 **Hook:** Planting day. The boards are in the millrace and the packets are dry. Pip reads the first one out loud.
 
 **Short:**
-> A packet says sow in spring. Pip reads sow like cow, which means a pig. Hob laughs. Here it is sow like snow: plant.
+> A packet says sow in spring. Pip reads sow like cow, which means a pig. Hob grins. Here it is sow like snow: plant.
 
 **Longer:**
 > Planting day. The flood boards are in, the beds are raked, and the packets sit in a row on the wall.
 >
 > Pip reads the first one out loud. "Sow in spring." He says sow like cow.
 >
-> Hob Pennick laughs so hard he has to sit down on the wall. "My sow is in her pen," he says. "She can stay there."
+> Hob Pennick grins. "My sow is in her pen," he says. "She can stay there."
 >
 > "A sow is a mother pig," says {guide}. "But this is a seed packet."
 >
@@ -123,10 +123,10 @@ Companion to [spec 250](../specs/250-sounds-in-the-seed-packets.md). Use as writ
 >
 > "English," says Pip, "is full of tricks."
 >
-> "Not tricks," says Wren. "History. Every odd letter has a story."
+> "Not tricks," says Wren. "History. Lots of odd letters have a story."
 
 **Keeper's note (A true thing about language):**
-> In Old English, the w in words like wren and write was said out loud. It went quiet about four hundred years ago, but the spelling kept it. The k in knot has a similar story.
+> In Old English, the w in words like wren and write was said out loud. It went quiet hundreds of years ago, but the spelling kept it. The k in knot has a similar story.
 
 ## Teach cards
 
@@ -141,7 +141,7 @@ Worked example: *shed.*
 3. Then the rest: shed.
 
 **Card 2. ch and th**
-> The c and h in chip make one sound. The t and h in thin make one sound. In this, th sounds a little different. Both are th.
+> The c and h in chip make one sound. The t and h in thin make one sound. In the word this, th sounds a little different. Both are th.
 
 Worked example: *chick and thin.*
 1. chick starts with the ch team.
@@ -157,7 +157,7 @@ Worked example: *patch.*
 3. Read it: patch.
 
 **Card 4. ph, wh and k**
-> ph sounds like the f in fin, as in photo. wh sounds like the w in wet, as in wheat. Before e or i, you often see k, not c.
+> ph in photo sounds like the f in fin. wh often sounds like the w in wet, as in wheat. Before e or i, you often see k, not c.
 
 Worked example: *photo.*
 1. Find the team at the start: p and h.
@@ -189,7 +189,7 @@ Worked example: *thread.*
 3. That's it: thread.
 
 **Card 8. The end e**
-> An e at the end is often quiet, but it changes the vowel before it. cap becomes cape. kit becomes kite.
+> An e at the end is often quiet. Often it changes the vowel before it. cap becomes cape. kit becomes kite.
 
 Worked example: *cape.*
 1. Read cap.
@@ -197,7 +197,7 @@ Worked example: *cape.*
 3. The a changes: cape.
 
 **Card 9. The end e with other vowels**
-> The end e works with every vowel. pin, pine. hop, hope. cub, cube. In these, it changes an e.
+> The end e works with every vowel. pin, pine. hop, hope. cub, cube. In the word these, it changes an e.
 
 Worked example: *hope.*
 1. Read hop.
@@ -205,7 +205,7 @@ Worked example: *hope.*
 3. The o changes, as in home: hope.
 
 **Card 10. Not every end e**
-> Some words have an end e that changes nothing. give, have and come keep their short vowels. If one way doesn't make sense, try the other.
+> Some words have an end e that changes nothing. give and have keep their short vowels. If one way doesn't make sense, try the other.
 
 Worked example: *give.*
 1. Try i as in bike: it doesn't make a word that fits.
@@ -280,7 +280,7 @@ Worked example: *knot.*
 > Some letters can make more than one sound. Try the usual one. If it doesn't make a word that fits, try the other.
 
 Worked example: *giant sunflower.*
-1. Try g as in gum. That isn't a word you know.
+1. Try g as in gum. That doesn't make a word that fits.
 2. Try g as in jam.
 3. giant. A very big sunflower.
 
@@ -294,7 +294,7 @@ Worked example: *giant sunflower.*
 - Packets, first slice: shed · ship · fish · chip · chick · chest · thin · bath · this
 - Packets, later: duck · patch · ring · photo · wheat · kit
 
-**Name the packet:** Tap the name that goes with this picture.
+**Name the packet:** Tap the name that goes with this picture. Uses the cards and feedback of items A2 and A3; no other card sets are written yet.
 
 **Fix the packet:** The team washed off. Pick the team that finishes the word.
 - shed: tiles sh · ch · th. Fitting tile: sh.
@@ -312,7 +312,7 @@ Worked example: *giant sunflower.*
 
 **Team trays:** Put each packet on its team's tray: rain · day · tree · leaf · boat · hoe · coin · boy.
 
-**Two-way shelf:** Is the oo like moon or like book? moon · spoon · food · book · wood · hook.
+**Two-way shelf:** Is the oo like moon or like book? moon · spoon · zoo · book · wood · hook.
 
 **Two-way shelf:** Is the ea like leaf or like bread? leaf · bean · pea · bread · thread · spread.
 
@@ -326,7 +326,7 @@ Worked example: *giant sunflower.*
 
 **Each pair, after the slide:** The e is quiet. It changed the vowel.
 
-**Odd-ones shelf:** give · have · come. These end e's change nothing. Read them with a short vowel.
+**Odd-ones shelf:** give · have. These end e's change nothing. Read them with a short vowel.
 
 ### (d) Two-Way Teams (Sapling)
 
@@ -450,9 +450,9 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written and a
 - Explanation: wood and book share one oo sound. moon and spoon share the other.
 
 **B5 (Seedling).**
-- Prompt: Pip reads thread as threed. Which ea should he try?
+- Prompt: Pip reads the ea in thread like leaf. Which ea should he try?
 - Choices: the ea in bread ✔ · the ea in leaves (`one-way-only`) · the a in cat (`team-split`)
-- Feedback: the ea in leaves: That's the sound Pip tried. It made threed. · the a in cat: e and a are a team. Read them together.
+- Feedback: the ea in leaves: That's the sound Pip tried. It doesn't make thread. · the a in cat: e and a are a team. Read them together.
 - Hint: ea has two sounds. Pip tried one.
 - Explanation: thread has the ea of bread.
 
@@ -571,8 +571,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written and a
 
 **F5 (Sapling).**
 - Prompt: In treasure, the s sounds like which?
-- Choices: the s at the start of sun (`s-always-s`) · the sh at the start of shop (`sh-zh-mixed`) · the s in measure ✔
-- Feedback: the s at the start of sun: Here the s is buzzy. Try measure. · the sh at the start of shop: Close, but buzzier. Try measure.
+- Choices: the s at the start of sun (`s-always-s`) · the sh at the start of ship (`sh-zh-mixed`) · the s in measure ✔
+- Feedback: the s at the start of sun: Here the s is buzzy. Try measure. · the sh at the start of ship: Close, but buzzier. Try measure.
 - Hint: Say treasure and measure. Do they match?
 - Explanation: The s in treasure and measure makes the same buzzy sound.
 
@@ -600,7 +600,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written and a
 - **Vowel:** the letters a, e, i, o and u. Sometimes y works like one.
 - **Consonant:** any letter that isn't a vowel, like b, s or t.
 - **Short vowel:** the vowel sound in cat, shed, pin, top or cub.
-- **End e:** an e at the end of a word that is quiet but changes the vowel before it.
+- **End e:** an e at the end of a word that is quiet and often changes the vowel before it.
+- **Team with r:** a vowel team and an r read together, like air in chair.
 - **Two-way team:** a letter team with two common sounds, like ow in cow and snow.
 - **Quiet letter:** a letter you don't hear, like the k in knot.
 
@@ -612,7 +613,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written and a
 
 ## Grown-up panel
 
-**What this teaches:** reading words with consonant digraphs (sh, ch, th, ck, tch, ng, ph, wh, and k before e, i, y), vowel digraphs (ai, ay, ee, ea, oa, oe, oo, oi, oy), split digraphs (a-e, e-e, i-e, o-e, u-e), diphthongs and other complex vowels (ow, ou, ew, ue, ie, aw, au, final y), r-controlled vowels (ar, or, ore, er, ir, ur), trigraphs (igh, and air, ear, are) and other spellings for known sounds (soft c and g, ge, dge, kn, gn, wr, s in treasure). UK schools say "split digraph"; many US programs say "silent e" or "VCe". This page says "end e".
+**What this teaches:** reading consonant and vowel digraphs, split digraphs, two-way vowel teams and final y, r-controlled vowels, igh with air, ear and are, and other spellings for known sounds (soft c and g, dge, kn, gn, wr, s in treasure). UK schools say "split digraph"; many US programs say "silent e" or "VCe". This page says "end e".
 
 **How sounds are shown:** until reviewed recordings exist, you are the audio. Please say the sound, not the letter name: for ch, say the sound at the start of chip, not "see aitch". Sounds like p, t, k, b, d, g and ch are short; say them crisply without adding "uh". Read the prompt aloud but not the answer choices, so your child does the reading. For ages 4 to 6, sit together, read aloud, and help freely. Help is never counted against anyone.
 
@@ -621,16 +622,16 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written and a
 - **air, ear and are.** In English school phonics these are taught as three letters for one sound. In General American the r is still said, so this page calls them teams with r.
 - **aw and au.** Many Americans say saw and haul with the same vowel as top; others keep them different. No item asks your child to tell those apart.
 - **wh.** Most Americans say wheat like "weet". Some say a breathy "hweet". Both are fine.
-- **u-e, ew and ue.** After j, r and l, everyone says "oo" (June, rule, blue). After t, d and n, General American usually says "oo" too (tube, new), where much British English says "yoo". After c, f, m and p, both say "yoo" (cube, few). The key words here don't depend on this difference.
+- **u-e, ew and ue.** After j, r and l, almost everyone says "oo" (June, rule, blue). After t, d and n, General American usually says "oo" too (tube, new), where much British English says "yoo". After c, f, m and p, both say "yoo" (cube, few). The key words here don't depend on this difference.
 - **bath, path.** General American has the vowel of cat; much of southern England has the vowel of car.
 
-**Letter names and the end e:** many programs say the end e "makes the vowel say its name". That works for most words, but this page keeps letter names separate from sounds, so it uses key words (cake, bike, home, cube) instead. The odd-ones shelf shows words like give and come where the e changes nothing.
+**Letter names and the end e:** many programs say the end e "makes the vowel say its name". That works for most words, but this page keeps letter names separate from sounds, so it uses key words (cake, bike, home, cube) instead. The odd-ones shelf shows give and have, where the e changes nothing.
 
 **What it does not claim:** this is practice, not a reading level or test. Choosing a word under a picture is not the same as reading it alone. Brief 55's twelve short-vowel words come first in the Word Workshop plan; this page builds beyond them. Spelling these sounds in writing is pack 263's job; reading longer words is pack 252's.
 
 ## Audio request list (pending review)
 
-Same columns as [`docs/content/phonics/audio-requests.csv`](phonics/audio-requests.csv); that file is not edited. Every row is `pending-independent-review`: no file, checksum, license or clearance exists. Notation is broad phonemic, General American, no length marks, as in brief 55. One sound take serves every spelling named in its row unless the linguistic reviewer asks for separate takes. Brief 55's own words (cat, sat, pin, fin, top, hop) are reused by their brief 55 ids, not requested again. Segmented and blend takes are requested only for the first slice (bench (a), sh, ch and th); other benches add theirs when commissioned.
+Same columns as [`docs/content/phonics/audio-requests.csv`](phonics/audio-requests.csv), which is not edited; a row naming several spellings in `target_id` is quoted when copied to CSV. Every row is pending: no file, checksum, license or clearance exists. Broad phonemic General American notation, as in brief 55. One sound take serves every spelling named in its row unless the linguistic reviewer asks for separate takes. Brief 55's own words (cat, sat, pin, fin, top, hop) are reused by their brief 55 ids, not requested again. Segmented and blend takes are requested only for the first slice (bench (a), sh, ch and th); other benches add theirs when commissioned.
 
 | id | kind | target_id | proposed_text_or_phonemes | status | review_note |
 | --- | --- | --- | --- | --- | --- |
@@ -641,7 +642,7 @@ Same columns as [`docs/content/phonics/audio-requests.csv`](phonics/audio-reques
 | p250-sound-k | sound | ck, k | /k/ | pending-independent-review | stop; same phoneme as brief 55 sound-c, reviewer may approve one take |
 | p250-sound-ng | sound | ng | /ŋ/ | pending-independent-review | conditional: approve isolated /ŋ/ or withhold and use the word ring |
 | p250-sound-f | sound | ph | /f/ | pending-independent-review | same phoneme as brief 55 sound-f, reviewer may approve one take |
-| p250-sound-w | sound | wh | /w/ | pending-independent-review | conditional: /w/ glides; withhold if unclear alone; /hw/ not modelled |
+| p250-sound-w | sound | wh | /w/ | pending-independent-review | conditional: /w/ glides; withhold if unclear alone; /hw/ not modeled |
 | p250-sound-ei | sound | ai, ay, a-e | /eɪ/ | pending-independent-review | gliding vowel; one natural take |
 | p250-sound-i-long | sound | ee, ea, e-e, ie, y | /i/ | pending-independent-review | the vowel in tree and the end of happy |
 | p250-sound-e-short | sound | ea | /ɛ/ | pending-independent-review | the vowel in bread |
