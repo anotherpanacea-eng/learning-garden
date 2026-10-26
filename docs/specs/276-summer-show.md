@@ -91,7 +91,7 @@ summerShow: {
   pictureShow: { shown: [pictureId], pictures: { [stanzaId]: pictureId }, wash: { [stanzaId]: washId }, at },
   marks: { [textId]: { [lineId]: [markId] }, at },
   travelling: { first: { order: [actId], light: lightId }, note: noteId, changed: { order: [actId], light: lightId } | { kept: reasonId }, limit: limitId, at },
-  answers: { [itemId]: { shown: [choiceId], choice: choiceId | number | ['A'..'H'] | { [cardId]: binId }, outcome: 'fits' | 'not-yet', support: bool, at } }
+  answers: { [itemId]: { shown: [choiceId], choice: choiceId | number | ['A'..'Z'] | { [cardId]: binId }, outcome: 'fits' | 'not-yet', support: bool, at } }
 }
 ```
 
