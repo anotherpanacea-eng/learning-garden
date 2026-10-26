@@ -15,7 +15,7 @@ export function evaluateExpression(e,x){const inner=plus(times(q(e.a),x),q(e.b))
 function term(coef,variable){if(coef.n===0)return variable?'0x':'0';if(!variable)return formatNumber(coef);if(same(coef,one))return 'x';if(same(coef,fraction(-1)))return '−x';return `${coef.d===1?formatNumber(coef):`(${formatNumber(coef)})`}x`;}
 function constantText(text,b){return b.n===0?text:`${text} ${b.n<0?'−':'+'} ${formatNumber(fraction(Math.abs(b.n),b.d))}`;}
 export function normalText(n){return constantText(term(n.m,true),n.b);}
-export const normalEquation=s=>`${normalText(s.left)} = ${normalText(s.right)}`;
+export const normalEquation=s=>`${normalText(s.left)} = ${s.right.m.n===0?formatNumber(s.right.b):normalText(s.right)}`;
 export function exprText(e){const k=q(e.k),a=q(e.a),b=q(e.b),c=q(e.c);if(a.n===0)return formatNumber(plus(times(k,b),c));let inner=constantText(term(a,true),b),out;if(same(k,one))out=inner;else if(b.n===0&&same(a,one))out=term(k,true);else out=`${k.d===1?formatNumber(k):`(${formatNumber(k)})`} × (${inner})`;return constantText(out,c);}
 export function classification(left,right){const a=minus(left.m,right.m),b=minus(right.b,left.b);return a.n===0?{key:b.n===0?'every':'none',solution:null}:{key:'one',solution:divide(b,a)};}
 export const equalityFamilies=[
@@ -40,8 +40,8 @@ export function generateEqualitySource(family,serial){
  const push=(operation,reason)=>steps.push({operation,left:structuredClone(l),right:structuredClone(r),reason});
  push('start','These two expressions are equal only for their solutions. We allow every real number as x.');
  push('expand','Distribute the outside factor to every term inside each bracket, then collect constants on each side. The rules have not changed.');
- const m=r.m;l={m:minus(l.m,m),b:l.b};r={m:minus(r.m,m),b:r.b};push('remove-x',`Subtract (${formatNumber(m)})x from BOTH sides. This reversible step keeps exactly the same solutions.`);
- const b=l.b;l={m:l.m,b:minus(l.b,b)};r={m:r.m,b:minus(r.b,b)};push('remove-constant',`Subtract (${formatNumber(b)}) from BOTH sides. This is reversible too.`);
+ const m=r.m;if(m.n!==0){l={m:minus(l.m,m),b:l.b};r={m:minus(r.m,m),b:r.b};push('remove-x',`Subtract (${formatNumber(m)})x from BOTH sides. This reversible step keeps exactly the same solutions.`);}
+ const b=l.b;if(b.n!==0){l={m:l.m,b:minus(l.b,b)};r={m:r.m,b:minus(r.b,b)};push('remove-constant',`Subtract (${formatNumber(b)}) from BOTH sides. This is reversible too.`);}
  let feedback;
  if(result.key==='one'){
   const d=l.m;l={m:divide(l.m,d),b:divide(l.b,d)};r={m:divide(r.m,d),b:divide(r.b,d)};push('divide',`Divide BOTH sides by ${formatNumber(d)}, which is not zero. This leaves x = ${formatNumber(result.solution)}.`);

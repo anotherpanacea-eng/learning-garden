@@ -179,6 +179,7 @@ def evaluate(expr, raw):
 
 def assert_probe(p, raw):
     latest = work(p)['tests'][-1]
+    ok(p.locator('[data-equality-probe-result]').evaluate('x=>document.activeElement===x'), 'number test focuses its visible result for keyboard users')
     s = work(p)['source']
     left, right = evaluate(s['left'], raw), evaluate(s['right'], raw)
     ok(latest['raw'] == raw, 'probe retains exact raw numeric syntax')
@@ -196,6 +197,11 @@ def reveal_all(p):
         ok(work(p)['line'] == n and work(p)['seenLine'] == n, 'one explicit proof reveal advances depth')
         ok(p.locator('[data-equality-proof]').count() == 1, 'proof has a readable text representation')
     deepest = work(p)['seenLine']
+    last = source['steps'][-1]
+    q = last['right']['b']
+    value = str(q['n']) if q['d'] == 1 else f"{q['n']}/{q['d']}"
+    expected = f"{'x' if source['key'] == 'one' else '0x'} = {value}"
+    ok(p.locator('.equality-proof-equation').last.inner_text() == expected, 'terminal equation visibly matches its one/no/every explanation')
     for n in range(len(source['steps'])-2, -1, -1):
         click(p, f'[data-equality-line="{n}"]')
     ok(work(p)['line'] == 0 and work(p)['seenLine'] == deepest, 'reviewing earlier line retains deepest support separately')
@@ -225,9 +231,11 @@ def journey(browser, width, base, initial):
         ok(p.locator('[data-equality-equation]').count() >= 1, 'source equation persists above task')
         source = copy.deepcopy(work(p)['source'])
         turn(p, 1);bounds(p)
+        field(p, 'input', '7/3')
         for raw in ['-2', '0', '2']:
             click(p, f'[data-equality-preset="{raw}"]')
             assert_probe(p, raw)
+            ok(work(p)['input'] == '7/3' and p.locator('[data-equality-field="input"]').input_value() == '7/3', 'preset test preserves a separately typed draft')
         ok(not any(t['equal'] for t in work(p)['tests']), 'sample table has no match without implying no solution')
         ok('none of' in p.locator('main').inner_text().lower(), 'failed sample table is qualified as tested numbers')
         field(p, 'input', '1/2');click(p, '[data-equality-probe]');assert_probe(p, '1/2')

@@ -53,7 +53,7 @@ export function equalityView(s){
 function fit(c,o){try{return recoveryFitsProgressLimits(c)&&(!o.canExport||o.canExport(c)===true);}catch{return false;}}
 function commit(s,c){for(const [k,v] of Object.entries(c))s[k]=v;}
 function change(s,fn,o={}){try{if(has(s,'equalityDesk')&&!wrapper(s))return false;const c=clone(s),r=fn(c);if(!r)return false;const w=equalityView(c).work;if(w&&!validEqualityWork(w))return false;o.exposeFacts?.(equalityFacts(c),c);if(!fit(c,o))return false;commit(s,c);return r;}catch{return false;}}
-function workChange(s,fn,o={}){return change(s,c=>{const w=equalityView(c).work;return w?fn(w,c):false;},o);}
+function workChange(s,fn,o={}){return change(s,c=>{const w=equalityView(c).work;if(!w)return false;const result=fn(w,c);return result&&validEqualityWork(w)?result:false;},o);}
 export function startEquality(s,family,o={}){if(!equalityFamilies.some(f=>f.id===family))return false;return change(s,c=>{
  c.equalityDesk??={version:1,current:'',next:1,visits:{}};const r=c.equalityDesk;if(Object.keys(r.visits).length>=24)return false;
  let serial=r.next;while(has(r.visits,`equality-${serial}`)){serial++;if(!Number.isSafeInteger(serial))return false;}if(serial>=Number.MAX_SAFE_INTEGER)return false;
@@ -67,7 +67,7 @@ export const editEquality=(s,key,value,o={})=>['input','choice','answer','note']
 export const helpEquality=(s,key,o={})=>['hint','example'].includes(key)&&workChange(s,w=>{if(!w.help.includes(key))w.help.push(key);return true;},o);
 export function probeEquality(s,raw=undefined,o={}){
  const w=equalityView(s).work;if(!w)return false;raw??=w.input;const q=parseLinearNumber(raw);if(!q)return {recorded:false,feedback:'Enter an integer, a fraction such as -3/2, or a decimal with up to three places. Use a number from -1000 to 1000; expressions are not accepted.'};
- return workChange(s,v=>{if(v.tests.length>=12)return false;v.input=raw;const left=evaluateExpression(v.source.left,q),right=evaluateExpression(v.source.right,q);const record={raw,left,right,equal:same(left,right)};v.tests.push(record);return {...clone(record),recorded:true};},o);
+ return workChange(s,v=>{if(v.tests.length>=12)return false;const left=evaluateExpression(v.source.left,q),right=evaluateExpression(v.source.right,q);const record={raw,left,right,equal:same(left,right)};v.tests.push(record);return {...clone(record),recorded:true};},o);
 }
 export function checkEquality(s,o={}){
  const w=equalityView(s).work;if(!w)return false;if(!keys.includes(w.choice))return {recorded:false,feedback:'Choose how many real numbers you think make the rules equal.'};
