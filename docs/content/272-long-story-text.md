@@ -409,7 +409,7 @@ Each card has one idea and a worked example revealed one step per tap.
 
 **No ruling:** the bench never says whether Dot or Bramble is right. *Tell a grown-up which side your strongest line supports.*
 
-**Two books, two ways:** Cards G7 and W8 side by side. Which writer states the idea as a rule? (item F6)
+**Two books, two ways:** Cards G7 and W8 side by side. Which writer states the idea as a rule? (item F5)
 
 ### (g) A Guide for the Next Keeper (Act V reading project; Sapling, Keeper's Desk)
 

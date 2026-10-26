@@ -484,7 +484,7 @@ Each set's first item shows its steps before you answer. Three-choice items show
 **D3 (Keeper's Desk).**
 - Pip's message: c u at mill 6ish, bring the numbers!!
 - Prompt: Which is the formal written version?
-- Choices: See you at the mill at six, bring the numbers! (`informal-for-formal`) · Please meet us at the mill at six with the readings. ✔ · Please could you kindly possibly come along to the mill at sixish with numbers!! (`formal-is-long`)
+- Choices: See you at the mill at six, bring the numbers! (`informal-for-formal`) · Please meet us at the mill at about six with the readings. ✔ · Please could you kindly possibly come along to the mill at sixish with numbers!! (`formal-is-long`)
 - Feedback: See you: Clearer, but still a chat. · Kindly possibly: Longer isn't more formal. It is harder to read.
 - Hint: Whole sentence, no slang, one clear request.
 - Explanation: Formal writing is clear and complete, not just long.
