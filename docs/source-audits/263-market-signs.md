@@ -30,18 +30,18 @@ Keyed answers follow the rule shown with them; `check263.py` reproduces the pref
 | A3 | warm | **worm: real word**, feedback says so; wurm: no English entry. |
 | A4 | here | **hear: real word**, feedback says so; hiar: no English entry. (*heer*, a yarn measure, and *heere*, an obsolete spelling, were cut.) |
 | B1, B2, B6 | re-, pre-, auto- | prefix tiles, no word claims. (*antigraph* and *supergraph* are real technical words, so B6 uses tiles.) |
-| B3 | misspells | mispells, missspells: no entry. |
+| B3 | misspells | **mispell: recorded only as a misspelling of misspell** (reviewer, 2026-10-26), so feedback says "common slip"; missspells: no entry. |
 | B4 | unnamed | unamed: no entry; **misnamed: real word**, feedback gives its meaning. |
 | C1-C5, C7 | freshly, happily, gently, Famous, invitation, dramatically | freshley, freshlee, happyly, happly, gentlely, gentley, fameous, famus, inviteation, invitasion, dramaticly, drammatically: no entry. |
 | D1, D2 | weight, enough | wieght, enogh, enouhg: no entry; wayt: no English entry. |
 | D3, D4, E3 | different, separate, friend | diffrent, seperate, freind: recorded only as misspellings (seperate also an obsolete form); feedback says "common slip" or compares letters, never "not a word". differrent, seprate, frend: no English entry. |
 | E4 | wr | kn, qu: starts, not words. |
 
-**Prefix joins (no letter change):** reopen, rewrite, preheat, prepay, preview, unsold, unwrapped, unnamed, unnoticed, dislike, disobey, misprint, mislabel, misspell, antifreeze, autograph, autopilot, superstar, supermarket; dissatisfied in a Keeper's note. None uses a spec 34 base or a pack 266 word. **Suffix joins:** 22 bench roots plus dramatic and basic, listed in the companion; odd ones truly, publicly, courageous. **Years 3-4 list words used (23, all on S1's list):** eight, eighth, weight, height, enough, though, although, thought, through, early, earth, heard, learn, address, appear, different, difficult, possible, opposite, separate, business, island, believe.
+**Prefix joins (no letter change):** reopen, reuse, preheat, prepay, preview, unsold, unwrapped, unnamed, unnoticed, dislike, disobey, misprint, mislabel, misspell, antifreeze, autograph, autopilot, superstar, supermarket; dissatisfied in a Keeper's note. None uses a spec 34 base; *autograph* is shared with pack 266, which uses it for the Greek root graph (here only the prefix auto-). *Rewrite*, a 266 word, was replaced by *reuse* in review. **Suffix joins:** 22 bench roots plus dramatic and basic, listed in the companion; odd ones truly, publicly, courageous. **Years 3-4 list words used (23, all on S1's list):** eight, eighth, weight, height, enough, though, although, thought, through, early, earth, heard, learn, address, appear, different, difficult, possible, opposite, separate, business, island, believe.
 
 ## Open checks
 
-None in child text. **[check]** S5's general -ción/-tion and -oso/-ous pattern (not used). For a reviewer with ordinary web access: confirm the A2-A4 and D-set distractors against Merriam-Webster, and the US usage *mislabeled* (one l), which the pack assumes from the US rule in pack 254's audit (S8 there). The memory helpers (a rat in separate, bus in business) are common classroom mnemonics; the Marble topic's own evidence line names the separate one. They are teaching aids, not claims.
+None in child text. **[check]** S5's general -ción/-tion and -oso/-ous pattern (not used). For a reviewer with ordinary web access: confirm the A2-A4 and D-set distractors against Merriam-Webster (still refused, HTTP 403, in review). *Mislabeled* (one l): Wiktionary's *mislabel* takes the optional doubled l (`{{en-verb|+l}}`), and the single l is the US form, as with *labeled*; checked in review. The memory helpers (a rat in separate, bus in business) are common classroom mnemonics; the Marble topic's own evidence line names the separate one. They are teaching aids, not claims.
 
 ## Rights notes for images
 

@@ -45,7 +45,7 @@ Companion to [spec 272](../specs/272-long-story.md). Use as written, after revie
 >
 > In the story it is a snowy December night. The Mole catches a smell in the dark. "Home!" reads the librarian. His old house is close by.
 >
-> But the Rat is far ahead, worried about snow, and doesn't hear him call.
+> But the Rat is far ahead, worried about snow, and can't hear him clearly.
 >
 > "Why doesn't Mole just go?" says Dot. "It's his house."
 >
@@ -60,7 +60,7 @@ Companion to [spec 272](../specs/272-long-story.md). Use as written, after revie
 > "Best chapter," says Pip, who missed it.
 
 **Keeper's note (A true thing from history):**
-> Chapter 5 of *The Wind in the Willows* is called "Dulce Domum." That is Latin for "sweet home." It is the chapter where the Mole finds his way back to his own small house.
+> Chapter 5 of *The Wind in the Willows* is called "Dulce Domum." That is Latin, usually put into English as "sweet home." It is the chapter where the Mole finds his way back to his own small house.
 
 ### Scene 2. Has Toad changed? (Winter Lantern Night, a later week)
 
@@ -110,11 +110,11 @@ Companion to [spec 272](../specs/272-long-story.md). Use as written, after revie
 > Bramble reads over your shoulder. "Pick Toad," she says. "Then argue with me."
 
 **Keeper's note (A true thing about language):**
-> A reader's guide follows one thread through a whole book. Three moments from the beginning, middle and end show change better than three from one chapter. A stated limit, such as "I read excerpts, not the whole book," makes a guide more trustworthy, not less.
+> A reader's guide follows one thread through a whole book. Three moments from the beginning, middle and end show change better than three from one chapter. A stated limit, such as "I read excerpts, not the whole book," can make a guide easier to trust, not harder.
 
 ## Book cards
 
-All quotations are exact from the Project Gutenberg texts named in the audit. `[...]` marks a cut. Words to know sit under the card.
+All quotations are exact from the Project Gutenberg texts named in the audit. `[...]` marks a cut inside a quoted piece or at a sentence it leaves unfinished. Lines inside one quoted block are continuous in the book; a new quoted block on the same card is a later place in the chapter (show a visible gap). Words to know sit under the card.
 
 **Card W1** (*The Wind in the Willows*, Kenneth Grahame, 1908, chapter 1)
 > It was small wonder, then, that he suddenly flung down his brush on the floor, said “Bother!” and “O blow!” and also “Hang spring-cleaning!” and bolted out of the house without even waiting to put on his coat.
@@ -122,9 +122,9 @@ All quotations are exact from the Project Gutenberg texts named in the audit. `[
 Words to know: *small wonder* means "no surprise." The Mole has been spring-cleaning all morning.
 
 **Card W1b** (chapter 1, a little later)
-> “Hold up!” said an elderly rabbit at the gap. “Sixpence for the privilege of passing by the private road!” He was bowled over in an instant by the impatient and contemptuous Mole
+> “Hold up!” said an elderly rabbit at the gap. “Sixpence for the privilege of passing by the private road!” He was bowled over in an instant by the impatient and contemptuous Mole [...]
 
-Words to know: *contemptuous* means "looking down on others." A *sixpence* was a small coin.
+Words to know: *contemptuous* means "looking down on others." A *sixpence* was a small coin. A *privilege* is a special right.
 
 **Card W2** (chapter 1)
 > Never in his life had he seen a river before [...] this sleek, sinuous, full-bodied animal, chasing and chuckling, gripping things with a gurgle and leaving them with a laugh [...] The Mole was bewitched, entranced, fascinated.
@@ -139,7 +139,7 @@ Words to know: *sculls* are oars; *sculling* is rowing.
 **Card W3b** (chapter 1, a moment later)
 > Over went the boat, and he found himself struggling in the river.
 
-> Then a firm paw gripped him by the back of his neck. It was the Rat, and he was evidently laughing
+> Then a firm paw gripped him by the back of his neck. It was the Rat, and he was evidently laughing [...]
 
 **Card W4** (chapter 1)
 > “That? O, that’s just the Wild Wood,” said the Rat shortly. “We don’t go there very much, we river-bankers.”
@@ -160,27 +160,39 @@ Toad says this after a motor-car roars past. The horse panics, and their cart en
 Later on the same pages, two more paragraphs start the same way:
 > Then the whistling began.
 
+> [...] he was alone, and unarmed, and far from any help; and the night was closing in.
+
 > Then the pattering began.
+
+Words to know: *dusk* is the dim light after sunset. *Unarmed* means "with nothing to fight with."
 
 **Card W8** (chapter 5)
 > Home! That was what they meant, those caressing appeals, those soft touches wafted through the air, those invisible little hands pulling and tugging, all one way! Why, it must be quite close by him at that moment, his old home that he had hurriedly forsaken and never sought again, that day when he first found the river!
 
-Words to know: *forsaken* means "left behind."
+Words to know: *forsaken* means "left behind." *Wafted* means "carried gently on the air."
 
-**Card W9** (chapter 5, the Rat is far ahead and has not heard)
+**Card W9** (chapter 5, the Rat is far ahead and has not heard clearly)
 > But even under such a test as this his loyalty to his friend stood firm. Never for a moment did he dream of abandoning him.
 
-> With a wrench that tore his very heartstrings he set his face down the road and followed submissively in the track of the Rat
+> With a wrench that tore his very heartstrings he set his face down the road and followed submissively in the track of the Rat [...]
+
+Words to know: *submissively* means "meekly, giving in."
 
 **Card W10** (chapter 9)
 > “Going South, with the rest of them,” murmured the Rat in a dreamy monotone, never looking at him.
 
 > Presently the tactful Mole slipped away and returned with a pencil and a few half-sheets of paper, which he placed on the table at his friend’s elbow.
 
-Words to know: *tactful* means "careful of someone's feelings."
+Words to know: *monotone* is a flat voice on one note. *Tactful* means "careful of someone's feelings."
 
 **Card W11** (chapter 1, then the end of chapter 10)
 > A brown little face, with whiskers.
+>
+> A grave round face, with the same twinkle in its eye that had first attracted his notice.
+>
+> Small neat ears and thick silky hair.
+>
+> It was the Water Rat!
 
 > Brown and small, with whiskers.
 >
@@ -188,7 +200,7 @@ Words to know: *tactful* means "careful of someone's feelings."
 >
 > It was the Water Rat!
 
-In chapter 1 the Mole sees this face in a hole in the river bank. At the end of chapter 10, Toad, swept down the river, sees it in a hole in the bank.
+In chapter 1 the Mole sees this face in a hole in the bank across the river. At the end of chapter 10, Toad, swept down the river, sees it in a hole in the bank. Words to know: *grave* here means "serious."
 
 **Card W12** (chapter 12)
 > Hence forth I will be a very different Toad.
@@ -197,8 +209,10 @@ In chapter 1 the Mole sees this face in a hole in the river bank. At the end of 
 
 > He sang this very loud, with great unction and expression; and when he had done, he sang it all over again.
 
+Words to know: *swelling visibly* means "puffing himself up." *Unction* here means "showy feeling."
+
 **Card W13** (chapter 12, at the dinner)
-> and Toad felt, as he moved from one guest to the other, making his modest responses, that he was an object of absorbing interest to every one.
+> [...] and Toad felt, as he moved from one guest to the other, making his modest responses, that he was an object of absorbing interest to every one.
 
 > He was indeed an altered Toad!
 
@@ -207,7 +221,7 @@ Words to know: *absorbing interest* means "everyone was very interested"; *alter
 **Card G1** (*The Secret Garden*, Frances Hodgson Burnett, 1911, chapter 5)
 > “No,” she answered. “It’s th’ wind.
 
-Mary has asked Martha, a maid, whether she hears someone crying in the house.
+Mary has asked Martha, a maid, whether she hears someone crying in the house. Martha speaks the Yorkshire way: *th'* means "the."
 
 **Card G2** (chapter 8)
 > There is no doubt that the fresh, strong, pure air from the moor had a great deal to do with it. Just as it had given her an appetite, and fighting with the wind had stirred her blood, so the same things had stirred her mind. [...] Already she felt less “contrary,” though she did not know why.
@@ -227,16 +241,16 @@ Words to know: *contrary* means "always wanting the opposite; hard to please."
 The crying leads Mary to Colin, her cousin, who has been kept in his room.
 
 **Card G5** (chapter 18, Mary and Colin talking)
-> “Ben Weatherstaff said I was like him,” said Mary. “He said he’d warrant we’d both got the same nasty tempers. I think you are like him too. We are all three alike [...] But I don’t feel as sour as I used to before I knew the robin and Dickon.”
-
 > “I wish I was friends with things,” he said at last, “but I’m not. I never had anything to be friends with, and I can’t bear people.”
 
-Words to know: *warrant* here means "be sure." Ben Weatherstaff is the old gardener. Dickon is a boy from the moor who is friends with animals.
+> “Ben Weatherstaff said I was like him,” said Mary. “He said he’d warrant we’d both got the same nasty tempers. I think you are like him too. We are all three alike [...] But I don’t feel as sour as I used to before I knew the robin and Dickon.”
+
+Colin speaks first; Mary answers a few lines later. Words to know: *warrant* here means "be sure." Ben Weatherstaff is the old gardener. Dickon is a boy from the moor who is friends with animals.
 
 **Card G6** (chapter 27, the last chapter)
 > While the secret garden was coming alive and two children were coming alive with it, there was a man wandering about certain far-away beautiful places in the Norwegian fiords and the valleys and mountains of Switzerland and he was a man who for ten years had kept his mind filled with dark and heart-broken thinking.
 
-The man is Mr. Craven, Mary's uncle and Colin's father.
+The man is Mr. Craven, Mary's uncle and Colin's father. *Fiords* (now usually spelled fjords) are long, narrow arms of the sea between cliffs.
 
 **Card G7** (chapter 27)
 > “Where you tend a rose, my lad,
@@ -247,7 +261,7 @@ Words to know: to *tend* is to look after. A *thistle* is a prickly weed.
 **Card G8** (chapter 27, the book's last scene, seen from a window of the house)
 > Across the lawn came the Master of Misselthwaite and he looked as many of them had never seen him.
 
-The "Master" is Mr. Craven, home at last. Colin is walking beside him.
+The "Master" is Mr. Craven, home at last. Misselthwaite is the name of the house. Colin is walking beside him.
 
 ## Chapter cards (Retold for this pack)
 
@@ -352,7 +366,7 @@ Each card has one idea and a worked example revealed one step per tap.
 - Card W11's first face (chapter 1) → chapter 10
 - Feedback for a wrong join: Read the later chapter card. Does it answer this line?
 
-**Mole's line:** three narrator words for Mole, to place on the map: "contemptuous" (chapter 1), "triumphant" (chapter 1), "tactful" (chapter 9). Then: *What changed?*
+**Mole's line:** three narrator words for Mole, to place on the map, with Cards W1b, W3 and W10 open beside them: "contemptuous" (chapter 1), "triumphant" (chapter 1), "tactful" (chapter 9). Then: *What changed?*
 - Done line: Early on, Mole barges about. Later, he thinks about his friend first.
 
 **The Secret Garden map (second book):** join Card G1 (chapter 5, "It's th' wind") to chapter 13.
@@ -364,7 +378,7 @@ Each card has one idea and a worked example revealed one step per tap.
 **Whose chapter?** Tag chapters 6 to 10: *Toad* or *Mole and Rat*. (6 Toad, ending in prison; 7 Mole and Rat; 8 Toad; 9 Mole and Rat; 10 Toad.)
 - Done line: They take turns. At the end of chapter 10, Toad lands at the Rat's door.
 
-**The same face:** Card W11. Tap the words that repeat from chapter 1 to chapter 10. ("Brown", "with whiskers")
+**The same face:** Card W11. Tap the words that repeat from chapter 1 to chapter 10. (Any of "Brown", "with whiskers", "Grave", "round", "neat ears", "silky hair", "It was the Water Rat!")
 
 **Then, then, then:** Card W7. Tap the three short paragraphs. Then choose what they do (item D3).
 
@@ -387,9 +401,10 @@ Each card has one idea and a worked example revealed one step per tap.
 **Toad's lines:** sort each line of Cards W12 and W13 into *Shows a change*, *Shows he still loves attention*, or *Could be read either way*.
 - "Hence forth I will be a very different Toad." → Could be read either way (a promise, not yet a deed)
 - "locked the door, drew the curtains" and the song sung twice → Shows he still loves attention
-- "making his modest responses" → Shows a change (in how he acts)
-- "an object of absorbing interest to every one" → Shows he still loves attention
-- "He was indeed an altered Toad!" → Could be read either way (the narrator says it right after the song)
+- "making his modest responses" → Shows a change (in how he acts); *Could be read either way* also fits (Bramble says he is acting)
+- "an object of absorbing interest to every one" → Shows he still loves attention; *Could be read either way* also fits
+- "He was indeed an altered Toad!" → Could be read either way (the narrator says it after the dinner, but the song came earlier that evening); *Shows a change* also fits
+- Feedback when a second fitting tray is chosen: That fits too. Some readers would put it in the other tray.
 - Done line: Both of them have evidence. The strongest lines say what Toad did and felt, not what he promised.
 
 **No ruling:** the bench never says whether Dot or Bramble is right. *Tell a grown-up which side your strongest line supports.*
@@ -428,8 +443,8 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 
 **A1 (3-choice, guided).** Card W1. Steps shown first: 1. Find what Mole does. 2. Find what Mole says. 3. Put them together.
 - Prompt: What does the flung brush tell you about Mole right now?
-- Choices: He's tired of cleaning and wants to get out. ✔ · He's cross with the Rat for making him clean. (`outside-the-text`) · He's a careful mole who finishes every job. (`ignores-detail`)
-- Feedback: Rat: The Rat isn't in the story yet. Mole meets him later. · Careful: He flung the brush down and ran. That's not finishing.
+- Choices: He's tired of cleaning and wants to get out. ✔ · He feels calm and would like to keep cleaning. (`contradicts-text`) · He's a careful mole who finishes every job. (`ignores-detail`)
+- Feedback: Calm: He said "Bother!" and bolted out of the house. · Careful: He flung the brush down and ran. That's not finishing.
 - Hint: What does he do with the brush? Where does he go?
 - Explanation: His actions and his words both say: enough cleaning.
 
@@ -470,12 +485,12 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 
 **B3 (3-choice).** Card G5.
 - Prompt: How are Mary and Colin alike, as Mary tells it?
-- Choices: Both made friends with Dickon at once. (`outside-the-text`) · Both have had the same nasty tempers. ✔ · Both hated the robin at first. (`outside-the-text`)
-- Feedback: Dickon: Colin says he never had anything to be friends with. · Robin: The card doesn't say that. Mary says the robin helped her.
+- Choices: Both made friends with Dickon at once. (`contradicts-text`) · Both have had the same nasty tempers. ✔ · Both say they feel less sour than they used to. (`same-not-different`)
+- Feedback: Dickon: Colin says he never had anything to be friends with. · Less sour: Only Mary says that. Colin says he can't bear people.
 - Hint: Ben says Mary is like him. Who does Mary say is like him too?
 - Explanation: "The same nasty tempers." Mary sees herself, and Ben, in Colin.
 
-**B4 (3-choice, events).** Card W9 and its note.
+**B4 (3-choice, events).** Cards W8 and W9.
 - Prompt: Why does Mole follow the Rat instead of going home?
 - Choices: He won't leave his friend behind. ✔ · He has forgotten where home is. (`contradicts-text`) · He doesn't really want to go home. (`contradicts-text`)
 - Feedback: Forgotten: Card W8 says home is "quite close." · Doesn't want: It "tore his very heartstrings" to leave.
@@ -519,7 +534,7 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 
 ### Set D. Two threads (Keeper's Desk)
 
-**D1 (3-choice, guided).** Chapter cards 6 and 7. Steps shown first: 1. Where is Toad at the end of 6? 2. Who is chapter 7 about?
+**D1 (3-choice, guided).** Chapter cards 6, 7 and 8. Steps shown first: 1. Where is Toad at the end of 6? 2. Who is chapter 7 about?
 - Prompt: Chapter 7 leaves Toad in prison. What does that do?
 - Choices: Shows that Toad's story is over for good. (`cut-means-ended`) · Shows Toad was never really caught. (`contradicts-text`) · Makes us wait to learn what happens. ✔
 - Feedback: Over: Chapter 8 goes straight back to Toad. · Never caught: Chapter 6 ends with him locked in.
@@ -528,29 +543,29 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 
 **D2 (3-choice).** Card W11.
 - Prompt: Chapter 10 ends with chapter 1's whiskered face. What does that do?
-- Choices: It joins Toad's story to the river bank. ✔ · It shows Toad is dreaming about chapter 1. (`outside-the-text`) · It shows the Rat has moved house. (`outside-the-text`)
-- Feedback: Dreaming: Toad is wide awake, in the river. · Moved: Nothing on the card says the Rat moved.
+- Choices: It joins Toad's story to the river bank. ✔ · It brings a brand-new character into the story. (`contradicts-text`) · It moves the story far away from the river. (`contradicts-text`)
+- Feedback: New: "It was the Water Rat!" We met him in chapter 1. · Far away: Toad is in the river, at a hole in the bank.
 - Hint: Whose story is chapter 10? Whose face is it?
 - Explanation: Two threads meet. The echo takes us back to the Rat's door, where Mole first saw that face.
 
 **D3 (3-choice).** Card W7.
 - Prompt: Three short paragraphs start "Then the..." What effect does that have?
-- Choices: It shows the wood is calm, quiet and safe. (`contradicts-text`) · Fear builds, one new danger at a time. ✔ · It tells us the Mole has fallen asleep. (`outside-the-text`)
-- Feedback: Calm: Faces, whistling, pattering. Do those feel safe? · Asleep: Mole is awake and running.
+- Choices: It shows the wood is calm, quiet and safe. (`contradicts-text`) · Fear builds, one new danger at a time. ✔ · It shows the light is getting brighter. (`contradicts-text`)
+- Feedback: Calm: He is "alone, and unarmed." Faces, whistling, pattering. Safe? · Brighter: The card says the light is "draining away."
 - Hint: What begins each time?
 - Explanation: Short lines, one after another, make the reader's heart beat faster too.
 
 **D4 (3-choice).** Card G6.
 - Prompt: Why might the last chapter go to Mr. Craven abroad?
-- Choices: Mary has left the house and won't come back. (`outside-the-text`) · The garden has stopped growing and died again. (`contradicts-text`) · Someone else still needs to come alive. ✔
-- Feedback: Left: Nothing on the card says so. · Died: The card says the garden "was coming alive."
+- Choices: Mr. Craven is already happy and well. (`contradicts-text`) · The garden has stopped growing and died again. (`contradicts-text`) · Someone else still needs to come alive. ✔
+- Feedback: Happy: For ten years his mind was "dark and heart-broken." · Died: The card says the garden "was coming alive."
 - Hint: Read what the card says about his mind.
 - Explanation: Ten years of "dark" thinking. The book's idea now reaches him too.
 
 ### Set E. The thread of a theme (Sapling, Keeper's Desk)
 
-**E1 (3-choice, guided).** Steps shown first: 1. A topic is a few words. 2. A theme says something about it.
-- Prompt: Which is a theme of the book, not just a topic?
+**E1 (3-choice, guided).** Card W8 and chapter cards 1, 5, 9 and 12. Steps shown first: 1. A topic is a few words. 2. A theme says something about it.
+- Prompt: Which is a theme of *The Wind in the Willows*, not a topic?
 - Choices: Some animals who live beside a river bank. (`topic-is-theme`) · Home can pull you back after adventures. ✔ · Toad, his cars and his big house. (`topic-is-theme`)
 - Feedback: Animals: That says who's in it, not what it says. · Toad: That's a topic. What does the book say about it?
 - Hint: Which one says something, like a sentence with an idea?
@@ -565,7 +580,7 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 **E3 (3-choice).** Cards G3, G5 and G7.
 - Prompt: Which line, near the end, sums up an idea the book keeps growing?
 - Choices: "Where you tend a rose, my lad, / A thistle cannot grow." ✔ · "I am the first person who has spoken in here for ten years." (`setting-not-theme`) · "I never had anything to be friends with, and I can't bear people." (`one-moment-not-theme`)
-- Feedback: First person: That's one moment in the garden, early on. · Friends: That's Colin in chapter 18, before he changes.
+- Feedback: First person: That's one moment in the garden, in chapter 9. · Friends: That's one moment, in chapter 18, not near the end.
 - Hint: Which line is about growing things, and could be about people too?
 - Explanation: Look after the good, and the weeds have no room. Garden and children both.
 
@@ -581,7 +596,7 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 **F1 (3-choice, guided).** Cards W12 and W13. Steps shown first: 1. Read the point. 2. Read each line. 3. Which fits closest?
 - Prompt: Point: Toad still loves attention. Which line is the strongest evidence?
 - Choices: "Hence forth I will be a very different Toad." (`against-the-point`) · "an object of absorbing interest to every one" ✔ · "He was indeed an altered Toad!" (`against-the-point`)
-- Feedback: Promise: That line points the other way. · Altered: The narrator says he changed. That works against the point.
+- Feedback: Promise: It's a promise to change. It doesn't show attention. · Altered: The narrator says he changed. That works against the point.
 - Hint: Which line is about how Toad felt at the dinner?
 - Explanation: He felt everyone was interested in him, while acting modest.
 
@@ -594,8 +609,8 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 
 **F3 (3-choice).** Cards W12 and W13.
 - Prompt: Why is "an altered Toad" weaker evidence than it looks?
-- Choices: The narrator never tells the reader the truth. (`narrator-always-lies`) · Toad never went to the dinner at all. (`contradicts-text`) · Just before, he sang about himself, twice. ✔
-- Feedback: Never: Not always. Check this line against what came before. · Dinner: Card W13 is at the dinner.
+- Choices: It is Toad's own boast, not the narrator's. (`contradicts-text`) · Toad never went to the dinner at all. (`contradicts-text`) · Earlier, he sang about himself twice. ✔
+- Feedback: Boast: It says "He was." The narrator is speaking, not Toad. · Dinner: Card W13 is at the dinner.
 - Hint: What did Toad do just before the dinner?
 - Explanation: Read a line beside its neighbors. The song makes "altered" less certain.
 
@@ -614,9 +629,9 @@ Three-choice right answers sit A 8 / B 8 / C 8. Each item shows its own card.
 - Explanation: Burnett tells the idea outright, in a rhyme. Grahame shows it through Mole.
 
 **F6 (3-choice).** Cards W2 and G2.
-- Prompt: In both books, a new place works on a character. Which pair fits?
+- Prompt: On these two cards, a new place works on a character. Which pair?
 - Choices: Rat by the Wild Wood; Mary by a city. (`outside-the-text`) · Badger by the river; Colin by the sea. (`outside-the-text`) · Mole by the river; Mary by the moor. ✔
-- Feedback: Rat: The Rat avoids the Wild Wood. No city in these cards. · Badger: Neither is on these cards.
+- Feedback: Rat: Card W2 is about Mole and the river. Card G2 has no city. · Badger: Card W2 is about Mole. Card G2 is about Mary.
 - Hint: Who is amazed by the river? Who is changed by moor air?
 - Explanation: Two writers, one idea: a new place can change a person, or a mole.
 

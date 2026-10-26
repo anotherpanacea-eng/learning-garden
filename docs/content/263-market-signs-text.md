@@ -1,6 +1,6 @@
 # Market Signs: all child-facing text
 
-Companion to [spec 263](../specs/263-market-signs.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip, the baker he/him; Dot, the miller, Bramble, the orchard keeper and the Vadoalto cheese trader she/her. Sources: [audit](../source-audits/263-market-signs.md). Nothing is scored, timed or locked.
+Companion to [spec 263](../specs/263-market-signs.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip, the baker he/him; Dot, the miller, Bramble and the Vadoalto cheese trader she/her. Sources: [audit](../source-audits/263-market-signs.md). Nothing is scored, timed or locked.
 
 **Read-aloud rule:** at Sprout and Seedling a grown-up or the device reads every prompt, hook and card aloud. Spelling choices are shown, not read aloud, because they sound alike. No sound is taught on screen; the grown-up panel explains the sounds.
 
@@ -31,18 +31,16 @@ Companion to [spec 263](../specs/263-market-signs.md). Use as written, after rev
 **Hook (A story from Willowbank):** The stalls are coming back. Pip offered to paint the signs. He finished every one before breakfast.
 
 **Short:**
-> Pip's signs say HUNNY, WOLK THIS WAY, PAY HEAR and WORM BREAD. Dot checks the stall dictionary. They become honey, walk, here and warm.
+> Pip's signs say HUNNY, WOLK THIS WAY, PAY HEAR and WORM BREAD. Dot checks the dictionary. They become honey, walk, here and warm.
 
 **Longer:**
-> The stalls are back on the green, and every one has a new sign. Pip painted them all before breakfast.
->
-> The baker reads his. "Worm bread?"
+> The baker reads his new sign. "Worm bread?"
 >
 > "Warm," says Pip. "Warm bread."
 >
 > "It says worm," says the baker. "Nobody wants worm bread."
 >
-> Dot walks along the row with the stall dictionary. *HUNNY. WOLK THIS WAY. PAY HEAR.*
+> Dot walks along the row with the dictionary. *HUNNY. WOLK THIS WAY. PAY HEAR.*
 >
 > "Honey has an o, like Monday and money," she says. "Walk is spelled like talk. And here means this place. Hear means listening."
 >
@@ -144,7 +142,7 @@ Companion to [spec 263](../specs/263-market-signs.md). Use as written, after rev
 >
 > "Almost," says Dot. "In English it's famous. F, a, m, o, u, s."
 >
-> "Famoso, famous," says the trader. She rubs out the last o and chalks -ous. "Easy to swap."
+> "Famoso, famous," says the trader. She rubs out -oso and chalks -ous.
 >
 > Pip points to the next boat. Its board says *INFORMACIÓN*. Underneath, someone has chalked *INFORMACION*.
 >
@@ -152,7 +150,7 @@ Companion to [spec 263](../specs/263-market-signs.md). Use as written, after rev
 >
 > "Not quite," says the trader. "English writes information. T, i, o, n."
 >
-> Dot checks the stall dictionary to be sure. *Information.* The trader nods.
+> Dot checks the dictionary to be sure. *Information.* The trader nods.
 >
 > She sells Pip a piece of famous cheese. It is, he says, very famous indeed.
 
@@ -174,7 +172,7 @@ Worked example: *SM_LL APPLES*
 3. Small apples.
 
 **Card 2. The Monday family, and -ey**
-> Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey belongs to both families.
+> Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey and money belong to both.
 
 Worked example: *The h____ stall*
 1. Honey is in the Monday family: o.
@@ -206,7 +204,7 @@ Worked example: *PAY H___*
 3. Here.
 
 **Card 6. A prefix goes at the front**
-> A prefix goes at the start of a word and changes its meaning. Re- means again: reopen. Pre- means before: preheat.
+> A prefix goes at the start of a word and changes its meaning. Re- often means again: reopen. Pre- usually means before: preheat.
 
 Worked example: *The stalls ____open after the storm.*
 1. They were open before the storm.
@@ -214,7 +212,7 @@ Worked example: *The stalls ____open after the storm.*
 3. Re- means again: reopen.
 
 **Card 7. Not, and wrongly**
-> Un- and dis- usually mean not: unsold, dislike. Mis- means wrongly: misprint, mislabel.
+> Un- and dis- usually mean not: unsold, dislike. Mis- usually means wrongly: misprint, mislabel.
 
 Worked example: *A jar with the wrong label*
 1. The label is wrong.
@@ -222,7 +220,7 @@ Worked example: *A jar with the wrong label*
 3. The jar is mislabeled.
 
 **Card 8. Against, self, above**
-> Anti- means against: antifreeze works against freezing. Auto- means self: an autograph is your own name, written by you. Super- means above or more: superstar.
+> Anti- usually means against: antifreeze works against freezing. Auto- usually means self: an autograph is your own name, written by you. Super- often means above or more: superstar.
 
 Worked example: *Bramble's star act*
 1. A star is famous.
@@ -238,7 +236,7 @@ Worked example: *mis + spell*
 3. Misspell, with two s's.
 
 **Card 10. -ly tells how**
-> -ly turns a describing word into a word that tells how: fresh, freshly; neat, neatly. It starts with a consonant, so usually just add it.
+> -ly turns a describing word into a word that tells how or how often: fresh, freshly; neat, neatly. It starts with a consonant, so usually just add it.
 
 Worked example: *usual + -ly*
 1. Usual ends in l.
@@ -246,7 +244,7 @@ Worked example: *usual + -ly*
 3. Usually, with two l's.
 
 **Card 11. When -ly changes the word**
-> A word ending in a consonant and y usually changes y to i: happy, happily. A word ending in a consonant and le swaps le for ly: gentle, gently.
+> A word ending in a consonant and y usually changes y to i: happy, happily. A word ending in a consonant and le usually swaps le for ly: gentle, gently.
 
 Worked example: *simple + -ly*
 1. Simple ends in p, then le.
@@ -254,7 +252,7 @@ Worked example: *simple + -ly*
 3. Simply.
 
 **Card 12. -ous**
-> -ous makes a describing word: danger, dangerous. It starts with a vowel letter, so the usual rules work: fame drops its e, famous. Some -ous words have no root.
+> -ous makes a describing word: danger, dangerous. A final e usually drops: fame, famous. Y after a consonant usually becomes i: glory, glorious. Some have no root word.
 
 Worked example: *glory + -ous*
 1. Glory ends in r, then y.
@@ -262,7 +260,7 @@ Worked example: *glory + -ous*
 3. Glorious.
 
 **Card 13. -ation**
-> -ation turns a doing word into a naming word: inform, information. It starts with a vowel letter, so a final e drops first: invite, invitation.
+> -ation turns a doing word into a naming word: inform, information. It starts with a vowel letter, so a final e usually drops first: invite, invitation.
 
 Worked example: *prepare + -ation*
 1. Prepare ends in r, then e.
@@ -343,10 +341,7 @@ Worked example: *basic + -ly*
 
 **Two-words shelf:** here, hear · two, too, to · bee, be · blue, blew. Each card shows a picture sentence: *Pay here. I hear the bell. Two pies. Me too. A bee in the hive. Be careful. A blue sign. The wind blew.*
 
-**Hint feedback (the sign waits; nothing is crossed out):**
-- A gap filled with u in the Monday family: This word is in the Monday family. Try o.
-- A gap filled with er or ur after w: After w, warm has ar and word has or.
-- A two-words card in the wrong sentence: Read the whole sentence. Which meaning fits?
+**Hint feedback (the sign waits; nothing is crossed out):** A5's feedback lines for gaps; on the two-words shelf: Read the whole sentence. Which meaning fits?
 
 ### (b) The Prefix Signs (Seedling, Sapling; first slice)
 
@@ -354,7 +349,7 @@ Worked example: *basic + -ly*
 
 **Prefixes:** re-, pre-, un-, dis-, mis-, anti-, auto-, super-.
 
-**Joins on the sign board, with their meanings:** reopen, open again · rewrite, write again · preheat, heat before · prepay, pay before · preview, a look before · unsold, not sold · unwrapped, not wrapped · unnamed, with no name yet · unnoticed, not noticed · dislike, not like · disobey, not obey · misprint, a mistake in printing · mislabel, label wrongly · misspell, spell wrongly · antifreeze, works against freezing · autograph, your own name, written by you · autopilot, flies a plane by itself · superstar, a very famous star · supermarket, a very big food store.
+**Joins on the sign board, with their meanings:** reopen, open again · reuse, use again · preheat, heat before · prepay, pay before · preview, a look before · unsold, not sold · unwrapped, not wrapped · unnamed, with no name yet · unnoticed, not noticed · dislike, not like · disobey, not obey · misprint, a mistake in printing · mislabel, label wrongly · misspell, spell wrongly · antifreeze, works against freezing · autograph, your own name, written by you · autopilot, flies a plane by itself · superstar, a very famous star · supermarket, a very big food store.
 
 **The join:** each join shows prefix and word in two colors. Where a letter doubles, both letters glow: mi**s s**pell, u**n n**amed, u**n n**oticed.
 
@@ -413,7 +408,7 @@ Worked example: *basic + -ly*
 - **fudge:** a soft, sweet candy.
 
 **heard to honey**
-- **heard:** the past of hear. *Dot heard the bell.*
+- **heard:** from hear, when it already happened. *Dot heard the bell.*
 - **heavy:** hard to lift.
 - **height:** how tall something is.
 - **here:** in this place.
@@ -424,16 +419,16 @@ Worked example: *basic + -ly*
 - **knife:** a tool with a sharp blade, for cutting.
 - **knit:** to make cloth from yarn with long needles.
 - **knob:** a round handle, like on a drawer.
-- **knock:** to tap on a door to be let in.
+- **knock:** to tap hard on something, like a door.
 - **knot:** a tie made by looping string or ribbon.
 
 **wall to world**
-- **wall:** a side of a building, or a row of stones.
+- **wall:** a side of a room or a building, or a fence made of stone or brick.
 - **want:** to wish to have.
-- **warm:** a little hot; nicely not cold.
+- **warm:** a little hot, but not too hot.
 - **watch:** to look at something for a while.
 - **weight:** how heavy something is.
-- **word:** letters that go together and mean something.
+- **word:** a part of what we say or write that has its own meaning, like cat.
 - **work:** a job; to do a job.
 - **world:** the Earth and everything on it.
 
@@ -452,7 +447,7 @@ Twenty-eight items. Twenty-two three-choice items place the right answer A 7 / B
 
 ### Set A. Families on the signs (Sprout to Sapling)
 
-**A1 (Sprout, guided; picture: a honey jar).** Steps shown first: 1. Honey is in the Monday family. 2. That family has o. 3. It ends like key: -ey.
+**A1 (Sprout, guided; picture: a honey jar).** Steps shown first: card 2's worked example, stopping before step 3.
 - Prompt: Which spelling goes on the honey sign?
 - Choices: hunney (`o-family-missed`) · honey ✔ · honny (`ey-missed`)
 - Feedback: Hunney: Honey is in the Monday family. It has an o. · Honny: Honey ends in -ey, like key and valley.
@@ -488,24 +483,24 @@ Twenty-eight items. Twenty-two three-choice items place the right answer A 7 / B
 
 ### Set B. Prefix signs (Seedling, Sapling)
 
-**B1 (Seedling, guided; root tag: open).** Steps shown first: 1. The stalls were open before the storm. 2. Now they open again. 3. Which prefix means again?
+**B1 (Seedling, guided; root tag: open).** Steps shown first: card 6's worked example, stopping before step 3.
 - Prompt: The stalls open again after the storm. Which prefix fits?
 - Choices: re- ✔ · un- (`prefix-meaning-mixed`) · dis- (`prefix-meaning-mixed`)
-- Feedback: Un-: Un- means not. These stalls are opening again. · Dis-: Dis- means not or the opposite. This is again.
+- Feedback: Un-: Un- usually means not. These stalls are opening again. · Dis-: Dis- usually means not or the opposite. This is again.
 - Hint: Which prefix means again?
 - Explanation: Re- means again: reopen.
 
 **B2 (Seedling; root tag: heat).**
 - Prompt: The baker heats the oven before the bread goes in. Which prefix?
 - Choices: re- (`prefix-meaning-mixed`) · anti- (`prefix-meaning-mixed`) · pre- ✔
-- Feedback: Re-: Re- means again. This heat comes before the baking. · Anti-: Anti- means against. Look for before.
+- Feedback: Re-: Re- often means again. This heat comes before the baking. · Anti-: Anti- usually means against. Look for before.
 - Hint: Which prefix means before?
 - Explanation: Pre- means before: preheat.
 
 **B3 (Seedling; root tag: spell).**
 - Prompt: When Pip rushes, he spells words wrong. He ___ them.
 - Choices: mispells (`double-letter-dropped`) · misspells ✔ · missspells (`extra-letter`)
-- Feedback: Mispells: Mis plus spells. Keep every letter: two s's. · Missspells: Mis has one s, and spells starts with one. That's two.
+- Feedback: Mispells: A common slip. Mis plus spells keeps every letter: two s's. · Missspells: Mis has one s, and spells starts with one. That's two.
 - Hint: Write mis. Then write spells with no change.
 - Explanation: Mis + spells = misspells. Nothing falls off.
 
@@ -525,9 +520,9 @@ Twenty-eight items. Twenty-two three-choice items place the right answer A 7 / B
 **B6 (Sapling; root tag: graph).**
 - Prompt: Pip signs his own name for Dot to keep. Which prefix fits?
 - Choices: auto- ✔ · anti- (`prefix-meaning-mixed`) · super- (`prefix-meaning-mixed`)
-- Feedback: Anti-: Anti- means against. This is Pip's own name. · Super-: Super- means above or more. Look for self.
+- Feedback: Anti-: Anti- usually means against. This is Pip's own name. · Super-: Super- often means above or more. Look for self.
 - Hint: Which prefix means self?
-- Explanation: Auto- means self. An autograph is your own name, written by you.
+- Explanation: In autograph, auto- means self: your own name, written by you.
 
 ### Set C. Ending signs (Seedling to Keeper's Desk)
 
@@ -553,7 +548,7 @@ Twenty-eight items. Twenty-two three-choice items place the right answer A 7 / B
 - Explanation: Gentle ends in t, then le. Swap le for ly: gently.
 
 **C4 (Seedling; root tag: fame).**
-- Prompt: The honey sign: ___ Valley Honey.
+- Prompt: The honey sign: ___ Willowbank Honey.
 - Choices: Fameous (`e-kept`) · Famous ✔ · Famus (`ous-spelled-us`)
 - Feedback: Fameous: -ous starts with a vowel letter, so fame drops its e. · Famus: The ending is -ous: o, u, s.
 - Hint: Does -ous start with a vowel letter?
@@ -581,7 +576,7 @@ Twenty-eight items. Twenty-two three-choice items place the right answer A 7 / B
 
 ### Set D. The word-list crate (Seedling, Sapling)
 
-**D1 (Seedling, guided).** Steps shown first: 1. Weight is in the eight family. 2. That family has eigh. 3. w, eigh, t.
+**D1 (Seedling, guided).** Steps shown first: card 15's worked example, stopping before step 3.
 - Prompt: Bramble's sign: guess its ___.
 - Choices: wieght (`letters-swapped`) · wayt (`spell-as-heard-ay`) · weight ✔
 - Feedback: Wieght: The e comes first: eigh, like eight. · Wayt: Weight is in the eight family: eigh.
@@ -693,7 +688,7 @@ Twenty-eight items. Twenty-two three-choice items place the right answer A 7 / B
 
 **What this teaches:** other spellings for sounds a child already knows (a before l, o in Monday, -ey, a, ar and or after w, the -tion ending, and four homophone pairs); the prefixes re-, pre-, un-, dis-, mis-, anti-, auto- and super-, their meanings and the rule that a prefix usually changes no letters; the suffixes -ly, -ous and -ation and the root changes they bring; less common spellings (y in gym, ou in young, -sure and -ture); words from the Years 3 and 4 list, chosen by pattern; and finding a word in a dictionary by its first two, three or four letters.
 
-**About sounds:** the English national curriculum states these patterns by sound. The ball family is the "aw" sound of saw, spelled a before l (the curriculum, in a British accent, calls it "or"); the Monday family is the "u" sound in "cup" spelled o; -ey spells the "ee" sound at the end of key; after w, a spells the vowel of "hot" (watch), ar the "or" sound of "for" (warm), and or the vowel of "her" (word). -sure ends measure and -ture ends picture: the endings sound different, and the sound tells you which, usually. The k in kn was sounded hundreds of years ago, and wr probably keeps an old pronunciation too; the spelling stayed when speech changed. Here and hear, two, too and to, bee and be, blue and blew sound the same: they are homophones, and meaning decides. On screen, this pack shows only spelling families and meanings. Say the words aloud together if that helps. Sound teaching and recorded audio are for the separate phonics review.
+**About sounds:** the English national curriculum states these patterns by sound. The ball family is the "aw" sound of saw, spelled a before l (the curriculum, in a British accent, calls it "or"); the Monday family is the "u" sound in "cup" spelled o; -ey spells the "ee" sound at the end of key; after w, a spells the vowel of "hot" (watch), ar the "or" sound of "for" (warm), and or the vowel of "her" (word). -sure ends measure and -ture ends picture: the endings sound different, and the sound tells you which, usually. Why kn and wr are spelled that way belongs to The Old Keeper's Spellings; here they are only places to look in a dictionary. Here and hear, two, too and to, bee and be, blue and blew sound the same: they are homophones, and meaning decides. On screen, this pack shows only spelling families and meanings. Say the words aloud together if that helps. Sound teaching and recorded audio are for the separate phonics review.
 
 **About the word list:** the Years 3 and 4 list in England is statutory there. Here it is a reference only: words are chosen by pattern, and British spellings on it (centre, favourite) are not used. Families and helpers (a rat in separate) make long lists easier than drilling them one by one.
 

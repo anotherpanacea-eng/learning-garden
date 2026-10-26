@@ -53,7 +53,7 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 **Keeper's note (A true thing about language):**
 > Island was once written iland. Writers added an s about 500 years ago, because they thought it came from isle. It doesn't. The two words only look like family.
 
-**Map label proposal (for the spec 120 owner):** High Ford · Knoll Wood · the Writing Stone · Gnat Corner · Lamb Fold · Thistle Bank · the Island · the Sponge. If page 1's drawn map does not carry these, the tracing is headed *The librarian's map of the valley* instead, with the same names.
+**Map label proposal (for the spec 120 owner):** High Ford · Knoll Wood · the Writing Stone · Gnat Corner · Lamb Fold · Thistle Bank · the Island · the Sponge. Page 1's text names only the high ford, the Sponge, the mill and the bridge road; these labels add to its drawing and change none of its words. If the owner declines, the tracing is headed *The librarian's map of the valley* instead, with the same names, and scene 1's hook and first line say "draws a map of the valley" in place of "traces the old Keeper's map".
 
 ### Scene 2. A letter to Vadoalto's library (Act III ch. 4)
 
@@ -65,7 +65,7 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 **Longer:**
 > "Dear friends upstream," the librarian reads aloud. "We have a precious old map. It is not official, but it is essential to our town."
 >
-> Dot holds out her paw for the letter. "Endings first. Then the post bag."
+> Dot lands on the letter. "Endings first. Then the post bag."
 >
 > "Every ending?" says Pip.
 >
@@ -87,7 +87,7 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 >
 > "Every word sounds right," says Pip.
 >
-> "Sounds right is half of it," says Dot. "Advice is the thing she gave you. Advise is what she does."
+> "Sounds right is half of it," says Dot. "Advice is the thing I gave you. Advise is what I do."
 >
 > Pip looks at the card. "So which ones are wrong?"
 >
@@ -155,12 +155,12 @@ Worked example: *Gnat Corner.*
 3. So the g stays: Gnat Corner.
 
 **Card 3. Some were added by writers**
-> Some silent letters were never said in English. Writers added them to look like an older word. Island, debt and doubt got letters this way.
+> Some silent letters were added by writers to look like an older word. People kept saying the words without them. Island, debt and doubt got letters this way.
 
 Worked example: *Debt.*
 1. Old spelling: dette, no b.
 2. Writers added b to match the Latin word debitum.
-3. The b was never said in English.
+3. People kept saying det, with no b.
 
 **Card 4. Hear it in the family**
 > A silent letter is often heard in a family word. In sign, the g is silent, but signal says it. In muscle, the c is silent, but muscular says it.
@@ -171,7 +171,7 @@ Worked example: *Bomb.*
 3. So bomb keeps its b.
 
 **Card 5. -cious or -tious?**
-> If the root word ends in -ce, use -cious: space, spacious. If a -tion word is in the family, -tious is usual: caution, cautious.
+> If the root word ends in -ce, -cious is usual: space, spacious. If a -tion word is in the family, -tious is usual: caution, cautious.
 
 Worked example: *Grace.*
 1. The root is grace. It ends in -ce.
@@ -187,7 +187,7 @@ Worked example: *Confidential.*
 3. So -tial: confidential.
 
 **Card 7. -ant or -ent?**
-> If c or g sounds hard, as in cat or go, use -ant: significant, elegant. If it sounds soft, as in city or gem, use -ent: innocent.
+> If c or g sounds hard, as in cat or go, use -ant: significant, elegant. If it sounds soft, as in city or gem, -ent is usual: innocent.
 
 Worked example: *Elegant and intelligent.*
 1. In elegant, the g sounds hard, like go.
@@ -219,7 +219,7 @@ Worked example: *Possible.*
 3. Possibly.
 
 **Card 11. Double the r when the beat stays on fer**
-> Clap the word with a grown-up. If the strong beat stays on fer, double the r: preferring. If it moves away, don't: preference.
+> Clap the word with a grown-up. If the strong beat stays on fer, the r usually doubles: preferring. If it moves away, one r: preference.
 
 Worked example: *Refer.*
 1. Clap re-FER-ring. The strong beat stays on fer.
@@ -235,7 +235,7 @@ Worked example: *Hob's hens.*
 3. The hyphen tells you which one.
 
 **Card 13. ei after c**
-> When it sounds like ee right after c, write ei: receive, ceiling. Learn the odd ones: seize, protein. In science, ie doesn't sound like ee.
+> With i and e together, the ee sound is usually ie: field. Right after c, it's ei: receive. Odd ones: seize, protein. In science, ie doesn't sound like ee.
 
 Worked example: *Receipt.*
 1. After c, the sound is ee.
@@ -271,6 +271,8 @@ Worked example: *Photosynthesis.*
 ### (a) The Stained Map (Seedling, Sapling; suggested first slice)
 
 **Header:** The water took some letters. Restore each label. Then sort the silent letters.
+
+**Letter tiles (the same row, in this order, for every label):** gh · k · w · g · b · t · s · nothing missing. A tile that starts a label shows as a capital.
 
 **Labels to restore (stain shown as ▢):**
 - Hi▢▢ Ford → gh. Note: *Once said, like the end of Scottish loch.*
@@ -314,7 +316,7 @@ Worked example: *Photosynthesis.*
 **Ending trays:** -cious / -tious · -cial / -tial · -ant / -ent · -able / -ible
 
 **Gap feedback (one per gap, on a wrong ending):**
-- precious: Precious is one to learn. No -ce root, no -tion family.
+- precious: Precious is one to learn by heart.
 - official: Office ends in -ce, and i before the ending is a vowel letter.
 - essential: The letter before the ending is n, a consonant letter: -tial.
 - significant: The c in significant sounds hard, like cat. Hard c takes -ant.
@@ -322,7 +324,7 @@ Worked example: *Photosynthesis.*
 - cautious: Caution is in the family, so -tious.
 - comfortable: Comfort is a whole word, so -able is likely.
 
-**Ending pairs (tap to flip):** observant, observance · innocent, innocence · tolerable, tolerably · visible, visibly
+**Ending pairs (tap to flip):** observant, observance · innocent, innocence · reasonable, reasonably · visible, visibly
 
 **Keeper's note (A true thing about language; Spanish and French for a fluent reader):**
 > Nuria writes *visible* in Spanish. Léon writes *visible* in French. The same Latin ending reached all three languages.
@@ -331,11 +333,11 @@ Worked example: *Photosynthesis.*
 
 **Header:** Clap each word with a grown-up. Then choose the spelling. Nothing is recorded.
 
-**Beat cards:** refer + ing → referring · refer + ence → reference · prefer + ed → preferred · prefer + ence → preference · transfer + ing → transferring · refer + ee → referee
+**Beat cards** (two spellings each, in this order; ✔ marks the right one): refer + ing: refering / referring ✔ · refer + ence: reference ✔ / referrence · prefer + ed: preferred ✔ / prefered · prefer + ence: preferrence / preference ✔ · confer + ed: confered / conferred ✔ · refer + ee: referee ✔ / referree
 
 **Look-alike cards (A true thing about language):** offer and suffer end in -fer too, but the strong beat is on the first part. Offering, suffering: one r.
 
-**Hyphen pairs:** recover / re-cover · resign / re-sign · coop / co-op. Tap the meaning for each.
+**Hyphen pairs:** recover (get well, or get back) / re-cover (cover again) · resign (leave a job) / re-sign (sign again) · coop (a hen house) / co-op (a shop its members own). Tap the meaning for each.
 
 **ei after c:** receive · ceiling · deceive · receipt. Odd ones: seize, protein.
 
@@ -343,25 +345,29 @@ Worked example: *Photosynthesis.*
 
 ### (d) Pip's Copy (Seedling, Sapling)
 
-**Deck 1, the postcard (open any time; A story from Willowbank):** four slips in Pip's postcard to Léon (scene 3).
-- advise → advice: *a thing she gave, a noun*
-- affect → effect: *a big ___ is a thing, a noun*
-- lead → led: *yesterday, so past*
-- high stays high: *river high is right. Leave it.*
+**Deck 1, the postcard (open any time; A story from Willowbank):** three slips in Pip's postcard to Léon (scene 3), and one word to leave alone.
+- advise → advice: *a thing she gave, a noun*. Fixes offered: advice ✔ · advize · advise (leave it)
+- affect → effect: *a big ___ is a thing, a noun*. Fixes offered: affect (leave it) · effect ✔ · efect
+- lead → led: *yesterday, so past*. Fixes offered: leed · lead (leave it) · led ✔
+- high stays high: *river high is right. Leave it.* Fixes offered: hi · high (leave it) ✔ · hie
 
-**Deck 2, page 3 (Act IV, only after page 3 is free):** Pip's copy, set beside Hollis's page.
+**Deck 2, page 3 (Keeper's Desk; Act IV, only after page 3 is free):** Pip's copy, set beside Hollis's page.
 
 Pip's copy:
 > Their are three Weighs between Willowbank and Vadoalto: the river path, the bridge rode and the hi ford. Keep them open, even in winter, even when nobody seems to knead them. Someone always does. There are also the water's ways, witch are wear it goes when there is to much of it.
 
-Slips and fixes: Their → There · Weighs → Ways · rode → road · hi → high · knead → need · witch → which · wear → where · to → too.
+Slips and fixes: Their → There · Weighs → Ways · rode → road · hi → high · knead → need · witch → which · wear → where · to much → too much.
 
-**Fix feedback:**
-- Right fix: Fixed. Same sound, the meaning Hollis wanted.
-- A different homophone: That sounds right too. Which one means what the page means?
-- Nothing changed: Read it for meaning. Does this word mean what the page means?
+Fixes offered, in this order (✔ right): They're · There ✔ · Their (leave it) | Ways ✔ · Way's · Weighs (leave it) | rowed · rode (leave it) · road ✔ | hie · high ✔ · hi (leave it) | need ✔ · kneed · knead (leave it) | wich · witch (leave it) · which ✔ | where ✔ · ware · wear (leave it) | two · too ✔ · to (leave it). Right fixes sit A 3 / B 3 / C 2.
 
-**Hollis's handwriting card (A story from Willowbank):** Hollis wrote high with gh and which with wh. Old letters, kept on purpose.
+**Fix feedback (both decks and the glossary card; it never names Hollis):**
+- Right fix: Fixed. Same sound, the meaning the writer wanted.
+- Leaving high alone (deck 1): Right. That word was fine all along.
+- A different homophone: That sounds right too. Which one means what the sentence means?
+- Nothing changed: Read it for meaning. Does this word mean what the sentence means?
+- A spelling that isn't a word (advize, efect, leed, wich, permeible): That one isn't a word. Look at the letters again.
+
+**Hollis's handwriting card (A story from Willowbank):** Hollis wrote high with gh and which with wh. Old letters, still in every dictionary.
 
 ### (e) The Word List Shelf (Sapling)
 
@@ -370,7 +376,7 @@ Slips and fixes: Their → There · Weighs → Ways · rode → road · hi → h
 **Trays and words:**
 - Double letters: accommodate · committee · embarrass · necessary · recommend
 - Silent letters: muscle · yacht · rhythm · foreign
-- Hidden vowels (find a family word): definite (define) · desperate (desperation) · familiar (family)
+- Hidden vowels (find a family word): definite (definition) · desperate (desperation) · familiar (family)
 - Endings: conscious · sufficient · relevant · existence · available
 - ie or ei: achieve · mischievous · leisure
 
@@ -389,9 +395,9 @@ Slips and fixes: Their → There · Weighs → Ways · rode → road · hi → h
 **The glossary card (A story from Willowbank; three slips):**
 > **Catchment:** the land wich drains into one river.
 > **Permeable:** lets water soak through. The Sponge was permiable.
-> **Embankment:** a raised bank. It can effect where floods go.
+> **Embankment:** a raised bank. It has an affect on where floods go.
 
-Slips: wich → which · permiable → permeable · effect → affect.
+Slips: wich → which · permiable → permeable · affect → effect. Fixes offered, in this order (✔ right): which ✔ · witch · wich (leave it) | permeible · permeable ✔ · permiable (leave it) | affect (leave it) · efect · effect ✔.
 
 ## Problem sets
 
@@ -429,7 +435,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **A5 (Sapling, true / not true).** Read each and choose True or Not true.
 - "Every silent letter was once said." Not true (`all-once-spoken`): the s in island never was.
-- "The b in debt was never said in English." True.
+- "Writers added the b in debt." True.
 - "You can hear the c of muscle in muscular." True.
 - Hint: Think of the three kinds: once said, added, heard in the family.
 - Explanation: Silent letters have different stories. Each story can help you remember.
@@ -439,7 +445,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **B1 (guided).** Steps shown first: 1. The root is space. 2. It ends in -ce. 3. Swap -ce for -cious.
 - Prompt: The root word is space. Which spelling is right?
 - Choices: spaceous (`keep-whole-root`) · spacious ✔ · spatious (`tious-after-ce`)
-- Feedback: spaceous: The -ce goes. -cious takes its place. · spatious: A -ce root takes -cious, not -tious.
+- Feedback: spaceous: The -ce goes. -cious takes its place. · spatious: A -ce root usually takes -cious, not -tious.
 - Hint: What does space end with?
 - Explanation: Space ends in -ce, so spacious.
 
@@ -453,8 +459,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **B3.**
 - Prompt: Which spelling means "only part of something"?
 - Choices: parcial (`cial-after-consonant`) · partical (`extra-letter`) · partial ✔
-- Feedback: parcial: After the consonant letter t, use -tial. · partical: There's no extra c. Part, then -ial.
-- Hint: Part ends with a consonant letter.
+- Feedback: parcial: The letter before the ending is r, a consonant letter: -tial. · partical: There's no c in this word: par-tial.
+- Hint: Find the letter before the shul sound.
 - Explanation: After a consonant letter, -tial is common: partial.
 
 **B4.** The c in this word sounds soft, as in city.
@@ -518,9 +524,9 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set D. Homophones (Seedling, Sapling)
 
 **D1 (Seedling, guided).** Steps shown first: 1. Pressing and folding dough is kneading. 2. Kneading has a silent k. 3. Choose the one with k.
-- Prompt: The baker presses and folds the dough. He ___ it each morning.
+- Prompt: The baker ___ the dough by pressing and folding it.
 - Choices: needs (`sound-picks-spelling`) · kneeds (`silent-letter-only`) · kneads ✔
-- Feedback: needs: That means he must have it. He's pressing it. · kneeds: The k is right. The vowels are ea.
+- Feedback: needs: Needs means must have. Here he is pressing the dough. · kneeds: The k is right. The vowels are ea.
 - Hint: Which word means press and fold?
 - Explanation: Knead means press and fold. Need means must have.
 
@@ -546,7 +552,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Led is the past of lead. It sounds like the metal lead.
 
 **D5.**
-- Prompt: "___ Way is safest in winter?" asks Pip.
+- Prompt: "___ path is safest in winter?" asks Pip.
 - Choices: witch (`sound-picks-spelling`) · wich (`silent-letter-dropped`) · which ✔
 - Feedback: witch: A witch is a person, like Bramble. Pip is asking a question. · wich: The question word keeps an h: wh.
 - Hint: Question words often start with wh.
@@ -562,11 +568,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Accommodate has double c and double m.
 
 **E2.**
-- Prompt: Define is in its family. Which spelling is right?
+- Prompt: Definition is in its family. Which spelling is right?
 - Choices: definite ✔ · definate (`hidden-vowel-guess`) · defenite (`hidden-vowel-guess`)
-- Feedback: definate: Define has an i there, so definite does too. · defenite: Define starts def-i, so definite does too.
-- Hint: Say define slowly. Which vowels do you hear?
-- Explanation: The family word define shows the hidden vowels: definite.
+- Feedback: definate: Definition has an i after the n, so definite does too. · defenite: Definition starts def-i, so definite does too.
+- Hint: Say definition slowly. You can hear the i after n.
+- Explanation: The family word definition shows the hidden vowels: definite.
 
 **E3.**
 - Prompt: Which word has a silent consonant letter?
@@ -578,7 +584,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set F. Long words (Keeper's Desk)
 
 **F1.**
-- Prompt: Permeation is in its family. Which spelling is right?
+- Prompt: Permeation is in its family, and -ation points to -able. Which spelling?
 - Choices: permeable ✔ · permeible (`ible-for-part-word`) · permiable (`spell-as-heard`)
 - Feedback: permeible: An -ation family word points to -able. · permiable: Permeation spells perme. Keep those letters.
 - Hint: Look at the family word's letters.
@@ -600,10 +606,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **F4 (Keeper's Desk, find and fix).** The glossary card (bench f).
 - Prompt: Find three slips on the glossary card. Fix each one.
-- Answer: wich → which; permiable → permeable; effect → affect ("It can ___ where floods go" needs a verb).
-- Feedback for effect left unchanged (`affect-effect-swap`): "It can ___" needs a verb. The verb is usually affect.
+- Answer: wich → which; permiable → permeable; affect → effect ("It has an ___ on" needs a noun).
+- Feedback for affect left unchanged (`affect-effect-swap`): "An ___" names a thing. The noun is usually effect.
 - Hint: Check one homophone, one silent letter and one ending.
-- Explanation: Three rules found three slips: wh, the -ation family, and affect as the verb.
+- Explanation: Three rules found three slips: wh, the -ation family, and effect as the noun.
 
 ## "I'm stuck" ladder
 
