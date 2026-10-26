@@ -176,7 +176,7 @@ Three short books, **A story from Willowbank**, written new for this pack. Each 
 
 ### Book 2. *One More Book* (Seedling)
 
-**Assumes:** everything in Book 1, plus ai, ar, ee, er, igh, oo, or, ou, ow as in owl, ur, wh, i with an e at the end as in time, a with an e at the end as in came, y at the end as in sleepy and sky; endings -s, -es, -ed, -ing, -er, -est, with a doubled last letter as in begged.
+**Assumes:** everything in Book 1, plus ai, ar, ee, er (also in an unstressed beat, as in whispered), igh, oo, or, ou, ow as in owl, ur, wh, i with an e at the end as in time, a with an e at the end as in came, y at the end as in sleepy and sky; endings -s, -es, -ed, -ing, -er, -est, with a doubled last letter as in begged.
 **Sight words it assumes:** the, a, was, he, they, said, one, again, about, from.
 **Read together:** library, librarian, cushion, more, tomorrow.
 **Decodable words:** it, at, books, still, sat, in, boxes, Pip, curled, up, on, softest, book, begged, looked, out, just, picked, sleepy, owl, hooting, and, flapping, nodding, sky, got, darker, stars, came, waited, sleeping, quilt, tucked, him, whispered, storm.
@@ -199,7 +199,7 @@ Three short books, **A story from Willowbank**, written new for this pack. Each 
 
 **Assumes:** everything in Book 2, plus dge as in bridge, and words of two syllables.
 **Sight words it assumes:** the, a, he, is, said, to, one, once, all, was, only, water, every, we.
-**Decodable words:** on, lantern, lanterns, night, in, took, bridge, Pip, at, that, than, Dot, for, garden, and, mill, went, frost, step, by, then, splash, brook, it, fish, duck, tipped, but, not, fell, lights, lit, up, dark, must, forget, this.
+**Decodable words:** on, lantern, lanterns, night, in, took, bridge, Pip, at, that, than, Dot, for, barn, and, mill, went, frost, step, by, then, splash, brook, it, fish, duck, tipped, but, not, fell, lights, lit, up, dark, must, tell, this, story.
 **Words to work out together:** eight, enough, library, through, heard, thought, special.
 **Read together:** Willowbank, librarian, more.
 **Two-word word:** everyone.
@@ -207,13 +207,13 @@ Three short books, **A story from Willowbank**, written new for this pack. Each 
 1. On Lantern Night, everyone in Willowbank took a lantern to the bridge.
 2. Pip took eight lanterns, all at once.
 3. "That is more than enough," said Dot.
-4. "One is for the library," said Pip. "One is for the garden, and one is for the mill."
+4. "One is for the library," said Pip. "One is for the barn, and one is for the mill."
 5. He went through the frost, step by step.
 6. Then he heard a splash in the brook.
 7. Pip thought it was a fish. It was only a duck.
 8. The lanterns tipped, but not one fell.
 9. On the bridge, eight lights lit up the dark water.
-10. "We must not forget this night," said the librarian. "It is a special one."
+10. "We must tell this story," said the librarian. "It is a special one."
 
 **Read it again (with a grown-up, any book):** 1. Listen: a grown-up reads a page. 2. Together: read the same page at the same time. 3. On your own: read it to the grown-up. 4. Another night: read the whole book again.
 

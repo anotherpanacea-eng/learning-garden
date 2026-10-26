@@ -261,7 +261,7 @@ Worked example: *Dot's roof notice.*
 3. *For example*, rain made Dot's hat poster run last Tuesday.
 
 **Card 7. A recount tells what happened, in order**
-> A recount tells real events in the order they happened. Time words like *first*, *then*, *after that* and *at last* show the order.
+> A recount tells real events in the order they happened. Time words like *first*, *then*, *after that* and *last* show the order.
 
 Worked example: *Dot's stall list.*
 1. Seven: stalls arrive. Nine: bell rings.
@@ -361,9 +361,9 @@ Tiles: The bell rings at nine. · Spilled soup ruins ribbons. ✔ · Hot soup wa
 
 **Time words:** These four lines are in order. Put a time word on each.
 - Lines: 1. ___ we set out the tables. 2. ___ we hung the flags. 3. ___ we filled the soup pot. 4. ___ the bell rang.
-- Tiles: First · Then · After that · At last
-- *First* fits line 1 and *At last* fits line 4. *Then* and *After that* both fit lines 2 and 3, in either order.
-- Feedback: *At last* early: "At last" means the very end. More happens after this line. · *First* later: Only one thing can come first.
+- Tiles: First · Then · After that · Last
+- *First* fits line 1 and *Last* fits line 4. *Then* and *After that* both fit lines 2 and 3, in either order.
+- Feedback: *Last* early: More happens after this line, so it isn't last yet. · *First* later: Only one thing can come first.
 
 **What is it for?** Match each piece to its job.
 - "Buy our buns! They are warm." → tells everyone what you want
@@ -513,8 +513,8 @@ Every item shows its own card, with read-aloud. The first item in each set shows
 **C2 (3-choice).**
 - Card: Three lines in order: 1. *First, we set out the tables.* 2. *___ we hung the flags.* 3. *At last, the bell rang.*
 - Prompt: Which time word fits line 2?
-- Choices: First (`start-word-twice`) · At last (`end-word-in-middle`) · Then ✔
-- Feedback: First: Line 1 already came first. · At last: That means the very end, but line 3 comes after.
+- Choices: First (`start-word-twice`) · Last (`end-word-in-middle`) · Then ✔
+- Feedback: First: Line 1 already came first. · Last: Line 3 comes after line 2, so line 2 isn't last.
 - Hint: Line 2 comes after line 1 and before line 3.
 - Explanation: *Then* means next. It fits a step in the middle.
 
@@ -662,7 +662,7 @@ Every item shows its own card, with read-aloud. The first item in each set shows
 - **Notice:** writing pinned up for everyone to read.
 - **Linking word:** a word that joins ideas, like *because*, *also* or *for example*.
 - **Recount:** writing that tells real events in the order they happened.
-- **Time word:** a word that shows order, like *first*, *then* or *at last*.
+- **Time word:** a word that shows order, like *first*, *then* or *last*.
 - **Letter:** writing for one reader, who is named at the start.
 - **Period:** the dot at the end of a sentence.
 - **Quotation marks:** the marks that hold someone's exact spoken words.

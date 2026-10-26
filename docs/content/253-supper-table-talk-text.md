@@ -179,12 +179,12 @@ Worked example: *Pip at Ember's birthday.*
 3. Together: "I think plum is best, because it's sweet."
 
 **Card 6. A reason has to fit**
-> A reason has to be about your choice. Saying your choice again isn't a reason. A reason for the other choice doesn't fit.
+> A reason has to help your choice. Saying your choice again isn't a reason. A point for the other choice doesn't help. A point against it can.
 
-Worked example: *Bramble picks lemon cake.*
+Worked example: *Bramble picks lemon cake, not plum cake.*
 1. "Because it's the best" just says lemon again.
-2. "Because plum is sweet" is about plum.
-3. "Because it's fresh" is about lemon. It fits.
+2. "Because it's fresh" is a point for lemon. It fits.
+3. "Because the plum cake is stale" is a point against plum. That fits too.
 
 **Card 7. Take turns**
 > One person talks at a time. Listen to the end. Then take your turn. A talking spoon shows whose turn it is.
@@ -435,12 +435,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: A reason that fits tells why Dot's choice makes sense.
 
 **C2 (Seedling).**
-- Card: Pip thinks soup is the best supper. Facts: Soup is warm. Soup comes with rolls. Salad is crunchy.
+- Card: Pip thinks soup is the best supper. Facts: Soup comes with rolls. Salad is crunchy. Pip likes crunchy food.
 - Prompt: Which reason fits Pip's opinion?
 - Choices: "because it is the best supper" (`says-it-again`) · "because salad is crunchy" (`other-side-reason`) · "because it comes with rolls" ✔
-- Feedback: Best supper: That says his opinion again. Why is it best? · Crunchy: That's a reason to like salad.
-- Hint: Which fact is about soup?
-- Explanation: "Because it comes with rolls" is about soup. It says why.
+- Feedback: Best supper: That says his opinion again. Why is it best? · Crunchy: Pip likes crunchy food, so that's a point for salad.
+- Hint: Which fact is a point for soup?
+- Explanation: "Because it comes with rolls" is a point for soup. It says why.
 
 **C3 (Seedling).**
 - Card: Dot thinks lemon cake is best, because it's fresh. Pip thinks plum cake is best, because it's sweet.

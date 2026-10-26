@@ -290,9 +290,16 @@ Worked example: *giant sunflower.*
 
 **Header:** Each packet has a letter team. Find it, then read the name.
 
-**Find the team:** Tap the two letters that make one sound.
-- Packets, first slice: shed · ship · fish · chip · chick · chest · thin · bath · this
-- Packets, later: duck · patch · ring · photo · wheat · kit
+**Find the team:** Each packet names one place in its word, the start or the end. The child taps two or three letters.
+- Prompt on a start packet: Tap the letters that make the sound at the start.
+- Prompt on an end packet: Tap the letters that make the sound at the end.
+- First slice, the start: shed (sh) · ship (sh) · chip (ch) · chick (ch) · chest (ch) · thin (th) · this (th)
+- First slice, the end: fish (sh) · bath (th)
+- Later, the start: photo (ph) · wheat (wh)
+- Later, the end: duck (ck) · ring (ng) · patch (tch, three letters)
+- Each word has exactly one fitting team at its named place. chick asks only about the start.
+- Feedback, wrong letters: Say the word slowly. Which letters make that one sound?
+- Feedback, c and h tapped in patch: Close. Here t, c and h make one sound together.
 
 **Name the packet:** Tap the name that goes with this picture. Uses the cards and feedback of items A2 and A3; no other card sets are written yet.
 
