@@ -79,7 +79,7 @@ Companion to [spec 256](../specs/256-whose-parcel.md). Use as written, after rev
 >
 > "And we never write on somebody else's label," says Dot.
 >
-> Pip tucks the parcel back into his satchel. "Then I'll keep looking for the Keeper."
+> Pip tucks it back into his satchel. "Then I'll keep looking for the Keeper."
 
 **Keeper's note (A true thing about language):**
 > Of can show who something goes with, just like 's does: the door of the mill, or the mill's door. This label uses of: the Keeper of the Ways. Both ways are right.
@@ -111,7 +111,7 @@ Companion to [spec 256](../specs/256-whose-parcel.md). Use as written, after rev
 > Pip buys an apple. He checks it for worms. None.
 
 **Keeper's note (A true thing about language):**
-> Shop signs often put an apostrophe in a word that only means more than one. It's an easy mistake, and grown-ups make it too. Ask: does anything belong?
+> Shop signs sometimes put an apostrophe in a word that only means more than one. It's an easy mistake, and grown-ups make it too. Ask: does anything belong?
 
 ### Scene 4. Parcels up and down the river (Act III, letters up and down the river)
 
@@ -330,13 +330,13 @@ No problem item asks for this choice.
 - EGG'S FOR SALE. Fix: EGGS FOR SALE. *Just many eggs. No mark.*
 - PEARS. Leave it. *Just many pears. It was right already.*
 
-**Sign feedback:** A sign left wrong: Read it again. Does anything belong? · A right sign changed: That one was right. Plurals need no mark.
+**Sign feedback:** A sign left wrong: Read it again. Does anything belong? · A right sign changed: That one was right. Just more than one needs no mark.
 
-**The parcel's own label (read-only card, shown after the shelf):** To the Keeper of the Ways, Willowbank, by Willow Brook. Look for an s. Ways just means more than one way. Nothing on this label needs an apostrophe.
+**The label on the parcel for the Keeper of the Ways (read-only card, shown after the shelf):** To the Keeper of the Ways, Willowbank, by Willow Brook. Look for an s. Ways just means more than one way. Nothing on this label needs an apostrophe.
 
 ### (d) Say It Long (Sapling, Keeper's Desk)
 
-**Header:** Say it long. If it is or it has makes sense, the mark is short for it.
+**Header:** Say it long. If the long words make sense, the mark stands for missing letters.
 
 **Short or belonging?** Tap: short for is, or belongs.
 - Dot's here! (short for is)
@@ -346,7 +346,7 @@ No problem item asks for this choice.
 - Pip's hungry. (short for is)
 - Pip's satchel (belongs)
 
-**Feedback:** Belongs, when it's short for is: Say it long: Dot is here. That works. · Short for is, when it belongs: Say it long: Dot is hat? No. It belongs.
+**Feedback:** Belongs, when it's short for is: Say it long with is. It works, so it's short for is. · Short for is, when it belongs: Say it long with is. It doesn't work, so it shows belonging.
 
 **It's or its?** Choose for each gap.
 - ___ raining. (It's)
@@ -358,7 +358,7 @@ No problem item asks for this choice.
 - ___ parcel is this? (Whose)
 - ___ at the door? (Who's)
 
-**Feedback:** It's in a belonging gap: Say it long: lost it is string? No mark here. · Its in an it is gap: Say it long: it is raining. That needs the mark.
+**Feedback:** It's in a belonging gap: Say it long. It is doesn't fit here, so use its. · Its in an it is gap: Say it long. It is fits here, so use it's.
 
 **Dot's busy note (Keeper's Desk):** item E5 below.
 
@@ -371,7 +371,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **A1 (Sprout, guided).** Steps shown first: 1. Find the mark. 2. Say the two long words. 3. Pick the match.
 - Prompt: Dot's note says I'm at the mill. What does I'm mean?
 - Choices: I am ✔ · I made (`wrong-letters-missing`) · I mean (`wrong-letters-missing`)
-- Feedback: I made: I'm has no d or e. The mark stands for one letter. · I mean: Say it long: I am at the mill.
+- Feedback: I made: I'm has no d or e. The mark stands for one letter. · I mean: I'm has no e or n. Say it long: I am.
 - Hint: The mark sits where a letter dropped out.
 - Explanation: I'm means I am. The apostrophe takes the place of the a.
 
@@ -425,7 +425,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: The cat belongs to the miller. Build the label.
 - Tiles: the · miller · cat · apostrophe · s
 - Answer: the miller's cat.
-- Feedback for the millers cat (`no-apostrophe`): Millers sounds like many millers. The mark shows the cat is hers.
+- Feedback for the millers cat (`no-apostrophe`): Millers means many millers. The mark shows the cat is hers.
+- Feedback for the millers' cat (`many-for-one`): The mark after s means many millers. There is one miller.
 - Hint: Owner first, then 's, then the thing.
 - Explanation: miller + 's, then cat: the miller's cat.
 
@@ -438,7 +439,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **B4 (Seedling).**
 - Prompt: In Ember's birthday, what does the 's tell you?
-- Choices: There is more than one Ember (`s-means-plural`) · Ember is a birthday party (`all-s-is-contraction`) · The birthday is Ember's ✔
+- Choices: There is more than one Ember (`s-means-plural`) · It's short for Ember is (`all-s-is-contraction`) · The birthday is Ember's ✔
 - Feedback: More than one: There's only one Ember. The mark shows belonging. · Ember is: Say it long: Ember is birthday? That doesn't make sense.
 - Hint: Whose birthday is it?
 - Explanation: Ember's birthday is the birthday that goes with Ember.
@@ -483,18 +484,18 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Sheep can mean one or many, so sheep's fits both. Look at the picture, or ask.
 
 **C6 (Keeper's Desk).**
-- Prompt: Write the Keeper of the Ways with an apostrophe instead. Which is right?
+- Prompt: Ways means many ways. Write the Keeper of the Ways with an apostrophe.
 - Choices: the Ways' Keeper ✔ · the Way's Keeper (`one-for-many`) · the Ways's Keeper (`s-twice`)
-- Feedback: Way's: That's one way. Ways means more than one. · Ways's: Ways already ends in s. Add just the mark.
+- Feedback: Way's: That's one way. Ways means more than one. · Ways's: Ways means many ways and already ends in s. Add just the mark.
 - Hint: Ways already ends in s.
 - Explanation: Ways means many ways and ends in s, so add just the mark: the Ways' Keeper.
-- Grown-up line: the label's own "of" is just as right. Dot never rewrites somebody else's label.
+- Grown-up line: the label's own "of" is just as right. Dot never rewrites somebody else's label. Even read as a name, Ways is plural in form, and Chicago gives such names the apostrophe alone (the United States' role), so Ways's is not an accepted style choice here.
 
 ### Set D. Plural or belonging? (Seedling, Sapling)
 
 **D1 (Seedling, guided).** Steps shown first: 1. Read the word Ways. 2. Does anything belong to it? 3. Just more than one: no mark.
 - Prompt: Which spelling fits the label? To the Keeper of the ___
-- Choices: Way's (`every-s-needs-one`) · Ways' (`every-s-needs-one`) · Ways ✔
+- Choices: Way's (`s-means-belonging`) · Ways' (`every-s-needs-one`) · Ways ✔
 - Feedback: Way's: That would mean something belongs to one way. · Ways': The s just means more than one way. No mark needed.
 - Hint: Is it many ways, or does something belong?
 - Explanation: Ways just means more than one way. Not every s needs a mark.
@@ -512,7 +513,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Choices: FRESH APPLES ✔ · FRESH APPLES' (`every-s-needs-one`) · FRESH APPLE'S (`apostrophe-for-plural`)
 - Feedback: APPLES': Nothing belongs to the apples. No mark needed. · APPLE'S: That says something belongs to one apple. She means many apples.
 - Hint: Does anything belong to the apples?
-- Explanation: Apples just means more than one apple. Plurals need no mark.
+- Explanation: Apples just means more than one apple. Nothing belongs, so no mark.
 
 **D4 (Sapling).**
 - Prompt: There is one cat. Which fixes the cats bowl?
@@ -577,7 +578,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: It's means it is. Hens' means six hens. Don't means do not.
 
 **E6 (say why, read by a grown-up; never graded, nothing stored).**
-- Prompt: Tell a grown-up why the parcel's label needs no apostrophe.
+- Prompt: Tell a grown-up why To the Keeper of the Ways needs no apostrophe.
 - Grown-up guide: A strong answer says Ways just means more than one way, and nothing belongs to it. A stronger one adds that "of" already shows the Keeper goes with the Ways.
 
 ## "I'm stuck" ladder

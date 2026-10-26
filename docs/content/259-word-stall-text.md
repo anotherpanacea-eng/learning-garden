@@ -108,7 +108,7 @@ Companion to [spec 259](../specs/259-word-stall.md). Use as written, after revie
 >
 > Then the trader points at the word stall's ladder. "¿Qué significa *scorching*? What does scorching mean?"
 >
-> Pip stands up tall. "Very, very hot. Hotter than hot. Like the fair last summer."
+> Pip stands up tall. "Very, very hot. Hotter than hot. Like the Summer Fair."
 >
 > The trader laughs and chalks *scorching* above *caliente*.
 
@@ -159,7 +159,7 @@ Worked example: *A right answer, a right hand.*
 Worked example: *The sign says* Skeins of wool.
 1. Ask: what is a skein?
 2. Look: the picture shows coils of yarn.
-3. Link: a skein is a loose coil of yarn.
+3. Link: it is like a ball of yarn, wound loosely.
 
 **Card 6. Try out a new word**
 > Use a new word where its meaning fits. Enormous means very, very big. An enormous mill wheel fits. An enormous crumb does not.
@@ -178,7 +178,7 @@ Worked example: *Damp, soaked, wet.*
 3. Soaked: wet all the way through. Ladder: damp, wet, soaked.
 
 **Card 8. Too close to call**
-> Some words are too close to rank. Huge, enormous and gigantic are all much bigger than big. People order them differently, so they can share a rung.
+> Some words are too close to rank. Huge, enormous and gigantic all mean much bigger than big. Dictionaries give them almost the same meaning, so they can share a rung.
 
 Worked example: *Big, huge, enormous.*
 1. Big goes on the bottom rung.
@@ -212,10 +212,10 @@ Worked example: *Jog and sprint.*
 **Card 12. Using a thesaurus**
 > A thesaurus lists words close in meaning. Many words have more than one meaning, so find the meaning you need first. Then try each word in your sentence.
 
-Worked example: *The paint ran down the sign.*
+Worked example: *A thin line of paint ran slowly down the sign.*
 1. Which meaning of run? Here, run means flow.
 2. Look in the flow group: drip, pour, stream, trickle.
-3. Only a little paint? Trickled fits.
+3. A thin, slow line? Trickled fits.
 
 **Card 13. The vivid word**
 > A vivid word helps a reader picture something exactly. Ask what you want the reader to see or feel. Then check the word is still true.
@@ -327,7 +327,7 @@ Every bench screen shows: *Words can fit more than one way. Tap* Why? *to see th
 
 **So is a...? (Sapling):** Does anything else fit your label? Then add a feature.
 - duck: So is a swan! Add: with a short neck.
-- pear: So is an apple! Add: that narrows toward the stalk.
+- pear: So is an apple! Add: that narrows toward the stem.
 - spade: So is a trowel! Add: with a long handle.
 
 ### (e) The Sign Board (Sapling)
@@ -337,15 +337,15 @@ Every bench screen shows: *Words can fit more than one way. Tap* Why? *to see th
 **Say it first:** Say the sign aloud with each word. Then choose.
 
 **Signs:**
-- Baker: *Nice bread.* Should smell warm. Bank: crusty · nice · fine. → *Crusty loaves, warm from the oven.*
-- Orchard keeper: *Good apples.* Should sound crunchy. Bank: crisp · good · okay. → *Crisp red apples.*
+- Baker: *Nice bread.* Should look fresh from the oven. Bank: crusty · nice · fine. → *Crusty loaves, warm from the oven.*
+- Orchard keeper: *Good apples.* Should sound crunchy. Bank: crisp · good · okay. → *Crisp apples from the orchard.*
 - Pip's note: *Pip went past Bramble's stall.* Should feel quiet. Bank: tiptoed · stomped · went. → *Pip tiptoed past Bramble's stall.*
 
 **True as well as vivid:** Bramble's first sign said GIGANTIC BUNS. The buns were ordinary. A vivid word must still be true.
 
 ### (f) The Stall Thesaurus (Keeper's Desk)
 
-**Header (A made-up model, written for this pack):** A thesaurus groups words by meaning. Here is the stall's own page for *run*.
+**Header (A made-up model, written for this pack):** A thesaurus groups words by meaning. Here is the stall's own entry for *run*.
 
 **The entry:**
 > **run** (verb)
@@ -362,13 +362,13 @@ Every bench screen shows: *Words can fit more than one way. Tap* Why? *to see th
 
 **Pick the word:** Swap *ran* for the word that fits best.
 - Pip ran as fast as he could. → sprinted
-- A few drops of paint ran down the sign. → trickled
+- A thin line of paint ran slowly down the sign. → trickled
 - A mouse ran under the stall in tiny, quick steps. → scampered
 
 **Close, not the same (cards):**
-- jog / sprint: Both are running. A jog is easy. A sprint is flat out.
-- trickle / pour: Both are flowing. A trickle is a little. A pour is a lot.
-- whisper / announce: Both are saying. A whisper is for one listener. An announcement is for everyone.
+- jog / sprint: Both are running. A jog is easy. A sprint is as fast as you can go.
+- trickle / pour: Both are flowing. A trickle is a little. Pouring is a lot.
+- whisper / announce: Both are ways of saying. A whisper is for someone close by. An announcement is for everyone.
 
 **Where the word comes from (A true thing about language):** *Thesaurus* comes from a Greek word for a treasure or a storehouse: a store of words.
 
@@ -389,8 +389,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **A2 (Sprout, odd one out).** Cards: apple · pear · spade · plum. Tap the odd one out: spade.
 - Prompt: Why doesn't *spade* belong?
-- Choices: It is a tool ✔ · It has the most letters (`sort-by-letters`) · It starts with the letter s (`sort-by-letters`)
-- Feedback: Most letters: Apple has five letters too. Look at what each thing is. · Letter s: Sort by what things are, not how they're spelled.
+- Choices: It is a tool ✔ · It has the most letters (`sort-by-letters`) · It is the shortest word (`sort-by-letters`)
+- Feedback: Most letters: Apple has five letters too. Look at what each thing is. · Shortest: Pear and plum are shorter. Sort by what things are.
 - Hint: Three of these grow on trees.
 - Explanation: Apple, pear and plum are fruit. A spade is a tool.
 
@@ -426,10 +426,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **B1 (Sprout, guided).** Steps shown first: 1. Look at the picture. 2. Read the sign. 3. Is it like a word you know?
 - Prompt: The sign says *damsons*. The basket holds small purple fruit. Damsons are...?
-- Choices: A kind of tool (`ignore-the-clues`) · A kind of plum ✔ · A kind of bread (`ignore-the-clues`)
+- Choices: A kind of tool (`ignore-the-clues`) · A kind of fruit ✔ · A kind of bread (`ignore-the-clues`)
 - Feedback: Tool: Look at the basket. Tools don't grow purple. · Bread: The picture shows fruit, not loaves.
 - Hint: What does the picture show?
-- Explanation: A damson is a small purple plum. The picture and the sign told you.
+- Explanation: The picture showed fruit. Damsons are small purple plums.
 
 **B2 (Seedling).**
 - Prompt: Dot must fetch a *skein*. She doesn't know the word. Best first step?
@@ -449,7 +449,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: Pip's new word is *enormous*. Which thing is enormous?
 - Choices: A single breadcrumb (`new-word-anywhere`) · The mill wheel ✔ · A poppy seed (`new-word-anywhere`)
 - Feedback: Breadcrumb: Crumbs are tiny. Enormous means very, very big. · Poppy seed: A poppy seed is tiny. Try a big thing.
-- Hint: Which one is bigger than a house?
+- Hint: Which one is the biggest?
 - Explanation: A new word fits where its meaning fits. The mill wheel is enormous.
 
 ### Set C. Shades of meaning (Seedling, Sapling)
@@ -458,7 +458,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: Put these on the ladder, least hot at the bottom.
 - Cards: scorching · warm · hot
 - Answer: warm, hot, scorching (bottom to top).
-- Hint: Which word would you use for the fair's melted butter?
+- Hint: Which word means very, very hot?
 - Explanation: Warm, then hot, then scorching. Each says more heat.
 
 **C2 (Seedling, order).**
@@ -476,14 +476,14 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Whisper, talk, shout. Shout is the loudest.
 
 **C4 (Sapling).**
-- Prompt: Huge or enormous: which is bigger?
-- Choices: Too close to call ✔ · Huge is bigger (`one-right-order`) · Enormous is bigger (`one-right-order`)
-- Feedback: Either one: Both mean much bigger than big. People rank these two differently.
+- Prompt: Pip puts enormous above huge. Dot puts huge above enormous. Who is right?
+- Choices: Both ✔ · Only Pip (`one-right-order`) · Only Dot (`one-right-order`)
+- Feedback: Only Pip: Dot's order fits too. These words are too close to rank. · Only Dot: Pip's order fits too. These words are too close to rank.
 - Hint: Look at card 8.
-- Explanation: Some words are too close to rank. They can share a rung.
+- Explanation: Huge and enormous are too close to rank. Either order fits on a shared rung.
 
 **C5 (Sapling).**
-- Prompt: Light rain fell for a minute. The washing on the line is...?
+- Prompt: Light rain fell for a minute. The clothes on the line are...?
 - Choices: Soaked (`stronger-is-better`) · Dripping (`stronger-is-better`) · Damp ✔
 - Feedback: Soaked: A minute of light rain won't soak it. · Dripping: That needs much more rain.
 - Hint: Which is the least wet word?
@@ -521,10 +521,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **D4 (Sapling).**
 - Prompt: A pear is a fruit from a tree. So is an apple! Add a feature.
-- Choices: It is juicy (`feature-not-special`) · It has small seeds in the middle (`feature-not-special`) · It narrows toward the stalk ✔
+- Choices: It is juicy (`feature-not-special`) · It has small seeds in the middle (`feature-not-special`) · It narrows toward the stem ✔
 - Feedback: Juicy: Apples are juicy too. · Seeds: Apples have seeds in the middle too.
 - Hint: Picture the two shapes side by side.
-- Explanation: A pear narrows toward its stalk. That sets it apart from an apple.
+- Explanation: A pear narrows toward its stem. That sets it apart from an apple.
 
 ### Set E. Close words, the thesaurus and the vivid word (Sapling, Keeper's Desk)
 
@@ -550,11 +550,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: All mean running. Sprinted says as fast as he could.
 
 **E4 (Keeper's Desk).**
-- Prompt: *A few drops of paint ran down the sign.* Which word fits?
+- Prompt: *A thin line of paint ran slowly down the sign.* Which word fits?
 - Choices: poured (`stronger-is-better`) · trickled ✔ · streamed (`stronger-is-better`)
-- Feedback: Poured: Pouring is a lot. These are a few drops. · Streamed: A stream is steady and full.
+- Feedback: Poured: Pouring is a lot. This is a thin line. · Streamed: A stream is steady and full.
 - Hint: How much paint is it?
-- Explanation: A few drops trickle. The thesaurus words are close, not the same.
+- Explanation: A thin, slow line trickles. The thesaurus words are close, not the same.
 
 **E5 (Sapling).**
 - Prompt: Pip wants nobody to notice him. *Pip ___ past Bramble's stall.*
@@ -564,7 +564,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: A vivid word shows the reader exactly what you mean. Tiptoed shows quiet.
 
 **E6 (Sapling).**
-- Prompt: The buns are ordinary buns. Which sign is vivid and true?
+- Prompt: The buns are ordinary size, warm and golden. Which sign is vivid and true?
 - Choices: The biggest buns in the world! (`vivid-not-true`) · Some nice buns (`plain-word`) · Warm, golden buns ✔
 - Feedback: Biggest: Vivid, but not true. · Nice: True, but nice doesn't help a reader picture them.
 - Hint: Which sign is both true and easy to picture?

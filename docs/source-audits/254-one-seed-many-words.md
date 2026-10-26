@@ -20,7 +20,7 @@ Willowbank, the planting labels (BOXS, BUSHS, BERRYS), Pip's frog sign, the mill
 | S6 | Britannica Dictionary, "Doubling the final consonant before adding -ed or -ing" | https://britannica.com/dictionary/eb/qa/Doubling-the-final-consonant-before-adding-ed-or-ing | Longer words double only when the final syllable is stressed; w, x and y are not counted as final consonants for doubling. |
 | S7 | Upward and Davidson, *The History of English Spelling* (Open Book Publishers), ch. 4 | https://books.openbookpublishers.com/10.11647/obp.0053/ch4.xhtml | w, x and y are never or almost never doubled. Supports card 10 with S6. |
 | S8 | Dictionary.com, "canceled vs. cancelled"; Chicago Manual of Style FAQ (defers to Merriam-Webster) | https://www.dictionary.com/e/canceled-vs-cancelled/ ; https://www.chicagomanualofstyle.org/qanda/data/faq/topics/YouCouldLookItUp/faq0036.html | US labeled, traveled; UK labelled, travelled. |
-| S9 | Merriam-Webster and Oxford Learner's Dictionaries, *hoe* | https://merriam-webster.com/dictionary/hoe ; https://www.oxfordlearnersdictionaries.com/us/definition/english/hoe_2 | Verb forms hoed, hoeing. |
+| S9 | Merriam-Webster and Oxford Learner's Dictionaries, *hoe* | https://merriam-webster.com/dictionary/hoe ; https://www.oxfordlearnersdictionaries.com/us/definition/english/hoe_2 | Verb forms hoed, hoeing. Shelf contrasts toeing, seeing (e kept) and arguing (e dropped) are standard dictionary forms; Appendix 1's drop-e heading names only words with a consonant before the e. |
 | S10 | Merriam-Webster and Dictionary.com, *dibble* | https://merriam-webster.com/dictionary/dibble ; https://dictionary.com/browse/dibble | Noun: a small hand tool for making planting holes; verb: to plant with a dibble, to make holes with one; dibbled, dibbling. |
 | S11 | Online Etymology Dictionary column, i-mutation; Purdue Fort Wayne history-of-English handout | https://www.etymonline.com/columns/post/imutate ; https://users.pfw.edu/dfleming/_HEL2022/imutation.pdf | Mice, geese, feet, teeth, men keep an old vowel-change plural; *book* once followed it and later took -s. Scene 3's Keeper's note. |
 | S12 | Marcus 1995, "Children's overregularization of English plurals: a quantitative analysis", *Journal of Child Language* 22: 447-460 | https://dx.doi.org/10.1017/S0305000900009879 | Ten children (CHILDES), noun overregularization about 8.5%, similar to past tense, U-shaped. Grown-up panel's "normal stage". Later work (Maslen et al. 2004) disputes the account, not the rarity. |
@@ -34,7 +34,7 @@ Checked by `check254.py` against the rule each card states; dictionary forms are
 
 | Rule | Words |
 | --- | --- |
-| Just -s | seeds, pots, beds, trays, keys, houses, trowels, stomachs (exception shelf), pianos, photos, roofs |
+| Just -s | seeds, buckets, pots, beds, trays, keys, houses, trowels, stomachs (exception shelf), pianos, photos, roofs |
 | -es after s, x, z, ch, sh | boxes, bushes, benches, foxes, fixes, wishes, mixes; potatoes, tomatoes (o-words, exception shelf) |
 | Consonant-y to -ies | berries, daisies |
 | No change | fills, filling, filled; picks, picking, picked; weeding; waters, watering, watered; taller, tallest, longest, freshest; sprayed, spraying; fixing, mixing, snowing; jumped; raining; hopeful |
@@ -43,13 +43,15 @@ Checked by `check254.py` against the rule each card states; dictionary forms are
 | Double | hopping, biggest, bigger, wetter, planned; tapped (Keeper's note) |
 | Longer words | beginning, forgetting (stressed); gardening, visited, watering (unstressed); labeled (US) |
 | Odd plurals | mice, geese, children, teeth, feet, leaves, loaves, sheep |
-| Exceptions shelf | hoeing (outside the rule), being, argument, said, paid |
+| Exceptions shelf | hoeing, toeing, seeing (oe/ee keep e before -ing), arguing (ue drops it), being, argument, said, paid |
 
-**Wrong choices checked as non-standard in their item's sense:** *gooses* is the plural of a tailor's iron and a verb form, and *mouses* is accepted for computer mice (Merriam-Webster, `mouse` and `goose` entries, confirmed by search excerpt); D1 and D2 name the animals (shed, pond), so only *mice* and *geese* fit. *Hopping* and *hoping* are real words keyed by meaning (a frog; the miller and rain). *Housen* was cut as a distractor because some dictionaries record it as a dialect plural; *mudder* was cut because it is a real noun. No other distractor is a dictionary word.
+**Wrong choices checked as non-standard in their item's sense:** *gooses* is the plural of a tailor's iron and a verb form, and *mouses* is accepted for computer mice (Merriam-Webster, `mouse` and `goose` entries, confirmed by search excerpt); D1 and D2 name the animals (shed, pond), so only *mice* and *geese* fit. *Hopping* and *hoping* are real words keyed by meaning (a frog; the miller and rain). *Housen* was cut as a distractor because some dictionaries record it as a dialect plural; *mudder* was cut because it is a real noun.
+
+**Independent review, 2026-10-26.** Merriam-Webster gives the plural of *seed* as "seed or seeds", so A2's `plural-unmarked` choice *seed* was defensible; A2 now uses *bucket* (Wiktionary has no *bucketes*). All remaining distractors were run against Wiktionary, the most permissive dictionary to hand: *pickt* (obsolete) and *carryed* (archaic) are recorded old spellings, *hice* a humorous nonstandard plural, *mices* only a verb form of *mice*; the rest have no English entry. No feedback says "not a word": B2 now says *pickt* is "not the usual spelling", and the others name the usual spelling and its rule. *Mouses* and *gooses* stand on the animal sense, as above.
 
 ## Open checks
 
-None in child text. Weaker items for a reviewer: S2 was read from a school copy, not the official PDF; the Common Core K, 1 and 3 wordings come from the Marble standard codes, not a fetch; S13 was seen through a secondary summary and is used only for a misconception tag.
+None in child text. S2 was confirmed against the official DfE PDF by the independent reviewer (2026-10-26): the Year 1 -s/-es and -ed wording, the Year 2 y, drop-e (heading: "ending in -e with a consonant before it", exception *being*), doubling ("one syllable", x never doubled) and consonant-suffix (*argument*) rules, and the Years 3-4 stressed-syllable rule all match. Marcus 1995's abstract confirms ten CHILDES children and a mean of 8.5%. Weaker items left: the Common Core K, 1 and 3 wordings come from the Marble standard codes, not a fetch; S13 was seen through a secondary summary and is used only for a misconception tag.
 
 ## Rights notes for images
 

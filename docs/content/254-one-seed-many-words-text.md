@@ -120,7 +120,7 @@ Companion to [spec 254](../specs/254-one-seed-many-words.md). Use as written, af
 > The three mice go on eating.
 
 **Keeper's note (A true thing about language):**
-> Mice, geese, feet and teeth are very old plurals. Long ago, English often showed more than one by changing a vowel inside a word. Only a few words still do.
+> Mice, geese, feet and teeth are very old plurals. Long ago, more English words made plurals by changing a vowel inside. Only a few still do.
 
 ### Scene 4. The bigest pumpkin (Act II, a garden across the seasons, late summer)
 
@@ -173,7 +173,7 @@ Companion to [spec 254](../specs/254-one-seed-many-words.md). Use as written, af
 >
 > "And the root is dibble," says {guide}. "Drop the e, add -ed."
 >
-> "Unripe," Pip goes on. "Un- means not. Not ripe. Don't eat the plums."
+> "Unripe," Pip goes on. "Here un- means not. Not ripe. Don't eat the plums."
 >
 > "Trowels has an s," says Dot. "More than one trowel."
 >
@@ -209,7 +209,7 @@ Worked example: *One fox, two ___.*
 3. Two foxes.
 
 **Card 3. A y at the end**
-> If a word ends in a consonant and y, change y to i and add -es: berry, berries. A vowel and y just adds -s: tray, trays.
+> If a word ends in a consonant and y, usually change y to i and add -es: berry, berries. A vowel and y just adds -s: tray, trays.
 
 Worked example: *One daisy, many ___.*
 1. The last letter is y.
@@ -217,7 +217,7 @@ Worked example: *One daisy, many ___.*
 3. Change y to i, add -es: daisies.
 
 **Card 4. Endings on doing words**
-> Doing words take endings: -s or -es, -ing and -ed. Most just add the ending: pick, picks, picking, picked. The ending for already done is always spelled -ed.
+> Doing words take endings: -s or -es, -ing and -ed. Most just add the ending: pick, picks, picking, picked. Most show already done with -ed.
 
 Worked example: *fill*
 1. Dot fills the can.
@@ -225,7 +225,7 @@ Worked example: *fill*
 3. Dot filled the can. No change to fill.
 
 **Card 5. Same letters as plurals**
-> Doing words use the plural letters too. After s, x, z, ch or sh, add -es: fix, fixes; wish, wishes; mix, mixes.
+> Doing words use the plural letters too. After s, x, z, ch or sh, usually add -es: fix, fixes; wish, wishes; mix, mixes.
 
 Worked example: *Dot ___ the gate every week.* Seed tag: fix.
 1. Fix ends in x.
@@ -233,7 +233,7 @@ Worked example: *Dot ___ the gate every week.* Seed tag: fix.
 3. Dot fixes the gate.
 
 **Card 6. Comparing with -er and -est**
-> -er compares two things: taller. -est picks the most out of three or more: tallest. Most describing words just add the ending.
+> -er compares two things: taller. -est picks the most out of three or more: tallest. Many short describing words just add the ending.
 
 Worked example: *Three sunflowers.*
 1. Pip's sunflower is tall.
@@ -243,7 +243,7 @@ Worked example: *Three sunflowers.*
 Small line under the card: In the Word Garden, -er on painter means a person who paints. Same letters, different job.
 
 **Card 7. Snip the e**
-> If a word ends in a consonant and e, usually drop the e before an ending that starts with a vowel: hope, hoping. Keep it before a consonant: hopeful.
+> If a word ends in a consonant and e, usually drop the e before an ending that starts with a vowel: hope, hoping. Usually keep it before a consonant: hopeful.
 
 Worked example: *rake + ing*
 1. Rake ends in k, then e.
@@ -261,15 +261,15 @@ Worked example: *muddy + er*
 3. Swap y for i: muddier.
 
 **Card 9. Double it**
-> A one-beat word with one vowel, then one consonant at the end, usually doubles that consonant before -ing, -ed, -er or -est: hop, hopping.
+> A word with only one vowel letter, then one consonant at the end, usually doubles that consonant before -ing, -ed, -er or -est: hop, hopping.
 
 Worked example: *big + est*
-1. Big has one beat.
-2. One vowel, i, then one consonant, g.
+1. Big has only one vowel letter, i.
+2. Then one consonant at the end, g.
 3. Double the g: biggest.
 
 **Card 10. When not to double**
-> Don't double after two vowels: rain, raining. Don't double after two consonants: jump, jumped. Never double x, w or y: mixing, snowing, spraying.
+> After two vowels, usually don't double: rain, raining. After two consonants, don't double: jump, jumped. Never double x, w or y: mixing, snowing, spraying.
 
 Worked example: *weed + ing*
 1. Weed ends in d.
@@ -309,7 +309,7 @@ Worked example: *unwashed carrots*
 3. Un-: not. Unwashed means not washed yet.
 
 **Card 15. Longer words (Keeper's Desk)**
-> In a longer word, double only when the last beat is the strong one: begin, beginning. If the strong beat comes first, don't double: garden, gardening.
+> A longer word ending in one vowel, then one consonant, usually doubles only if its last beat is strong: begin, beginning. Garden's first beat is strong: gardening.
 
 Worked example, with a grown-up: *forget and visit*
 1. Clap forget: for-GET. Strong beat last. Forgetting.
@@ -354,9 +354,9 @@ Worked example, with a grown-up: *forget and visit*
 **Tools:** No change · Snip the e · Swap y for i · Double it
 
 **Tool reach cards (shown when a tool doesn't fit):**
-- Snip the e: Only for a word ending in a consonant and e, before a vowel ending.
-- Swap y for i: Only for a consonant and y. Not before -ing.
-- Double it: Only for one beat, one vowel, one consonant. Never x, w or y.
+- Snip the e: Fits a word ending in a consonant and e, before a vowel ending.
+- Swap y for i: Fits a consonant and y. Not before -ing.
+- Double it: Fits a word with only one vowel letter, then one consonant. Never x, w or y.
 - No change: This root changes. Look at its last two letters.
 
 ### (d) The Odd Plot (Sapling)
@@ -389,7 +389,7 @@ Worked example, with a grown-up: *forget and visit*
 **Words:** begin, beginning · forget, forgetting · garden, gardening · visit, visited · water, watering
 
 **Honest exceptions shelf (A true thing about language):**
-- Hoeing keeps its e. Hoe has a vowel before the e, so the rule doesn't reach it.
+- Hoeing keeps its e. Words ending in oe or ee keep it before -ing: toeing, seeing. But argue drops it: arguing.
 - Being keeps its e. It is a true exception.
 - Argue drops its e in argument, though -ment starts with a consonant.
 - Say, said and pay, paid change the y after a vowel.
@@ -411,12 +411,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Hint: What letter does box end with?
 - Explanation: Box ends in x, so it takes -es: boxes.
 
-**A2 (Sprout; picture: one seed, then a handful).**
-- Prompt: One seed, many ___.
-- Choices: seedes (`es-everywhere`) · seed (`plural-unmarked`) · seeds ✔
-- Feedback: Seedes: Seed ends in d. Most words just add -s. · Seed: That says one. Many needs an ending.
-- Hint: Does seed end in s, x, z, ch or sh?
-- Explanation: Seed just adds -s: seeds.
+**A2 (Sprout; picture: one bucket, then three buckets).**
+- Prompt: One bucket, three ___.
+- Choices: bucketes (`es-everywhere`) · bucket (`plural-unmarked`) · buckets ✔
+- Feedback: Bucketes: Bucket ends in t. Most words just add -s. · Bucket: That says one. Three needs an ending.
+- Hint: Does bucket end in s, x, z, ch or sh?
+- Explanation: Bucket just adds -s: buckets.
 
 **A3 (Sprout, sort).** Sort each picture card: one, or more than one.
 - Cards: fox → one · foxes → more · bench → one · benches → more · tray → one · trays → more
@@ -450,7 +450,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **B2 (Sprout; picture: an empty pea row, Hob with a full basket; seed tag: pick).**
 - Prompt: Yesterday Hob ___ the peas.
 - Choices: pickt (`spell-as-heard`) · pickked (`over-doubling`) · picked ✔
-- Feedback: Pickt: The ending for already done is always spelled -ed. · Pickked: Pick ends in two consonants, c and k. No doubling.
+- Feedback: Pickt: Not the usual spelling. Pick adds -ed: picked. · Pickked: Pick ends in two consonants, c and k. No doubling.
 - Hint: Which ending means it already happened?
 - Explanation: Pick plus -ed: picked. Pick doesn't change.
 
@@ -556,7 +556,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 ### Set E. Clues and roots (Sprout to Keeper's Desk)
 
 **E1 (Sprout, guided).** Steps shown first: 1. Find the end of dibbled. 2. It is -ed. 3. -ed says it already happened.
-- Prompt: Hob dibbled the rows. When did he do it?
+- Prompt: Hob dibbled the rows. Is this happening now, before, or later?
 - Choices: Already ✔ · Right now (`ed-means-now`) · Not yet (`ed-means-later`)
 - Feedback: Right now: That would be dibbling, with -ing. · Not yet: The -ed ending says it already happened.
 - Hint: Look at the end of dibbled.
@@ -595,7 +595,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Choices: hoeing ✔ · hoping (`drop-e-missed`) · baking (`drop-e-missed`)
 - Feedback: Hoping: Hope ends in a consonant and e, so it drops the e. · Baking: Bake ends in a consonant and e, so it drops the e.
 - Hint: Look at the letter just before the e.
-- Explanation: Hoe has a vowel before its e. The drop-e rule needs a consonant there. Hoeing.
+- Explanation: Hoe ends in o, then e. Words ending in oe keep the e before -ing: hoeing.
 
 **E7 (Keeper's Desk, say why, read by a grown-up; never graded, nothing stored).**
 - Prompt: Tell a grown-up why hopping has two p's but hoping has one.
@@ -624,7 +624,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Ending:** letters added at the end of a word, like -s, -ed or -ing. Also called a suffix.
 - **Vowels:** the letters a, e, i, o and u.
 - **Consonants:** the other letters. Y can work either way, so these rules look at the letter before it.
-- **Beat:** one part of a word you can clap. Garden has two beats: gar, den.
+- **Beat (Keeper's Desk):** one part of a word you can clap with a grown-up. Garden has two beats: gar, den.
 - **Group word:** a word for a whole group, like flock.
 - **Odd plural:** a plural made its own way, like mice.
 - **Clue:** a part of a word that helps you guess its meaning.
@@ -645,7 +645,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **What this teaches:** regular plurals with -s and -es, and consonant-y plurals with -ies; -s or -es, -ing and -ed on verbs and -er and -est on adjectives with no change to the root; the three root changes (drop a final e, change y to i, double a final consonant) and where each one stops; common irregular plurals and collective nouns; finding a root inside a changed word; and -s, -ed, -ing and un- as clues to a new word's meaning. At Keeper's Desk: doubling in longer words, and honest exceptions.
 
-**About sounds:** the English national curriculum states the plural rule by sound. If the ending sounds like s or z it is spelled -s; if it adds an extra beat it is spelled -es. The past ending can sound like "id" (hunted), "d" (buzzed) or "t" (jumped), but is always spelled -ed. This pack shows the letter version on screen, which gives the same answer for every word here. Sound teaching and recorded audio are for the separate phonics review.
+**About sounds:** the English national curriculum states the plural rule by sound. If the ending sounds like s or z it is spelled -s; if it adds an extra beat it is spelled -es. The regular past ending can sound like "id" (hunted), "d" (buzzed) or "t" (jumped), but is always spelled -ed. This pack shows the letter version on screen, which gives the same spelling for every word here except stomachs, which is on the exceptions shelf. Words already ending in e, like house, add a beat but just -s. Doubling on screen uses a letter test (only one vowel letter) where the curriculum says one syllable; they agree for every word here. Beats and stress appear only at Keeper's Desk, clapped with a grown-up. Sound teaching and recorded audio are for the separate phonics review.
 
 **About doubling:** the double-letter rule keeps a short vowel short (hopping, not hoping). In longer words, it depends on stress: be-GIN-ning doubles, GAR-den-ing does not. American spelling keeps one l on unstressed endings (labeled, traveled); British spelling doubles it (labelled, travelled).
 

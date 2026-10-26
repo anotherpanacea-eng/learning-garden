@@ -48,7 +48,7 @@ Companion to [spec 255](../specs/255-puppets-sentence-cards.md). Use as written,
 > "These are close," says Dot. "And dry. Hooray."
 
 **Keeper's note (A true thing about language):**
-> This and these point to things close to the speaker. That and those point to things farther away. This and that are for one thing; these and those are for more than one.
+> This and these usually point to things close to the speaker. That and those usually point to things farther away. This and that are for one thing; these and those are for more than one.
 
 ### Scene 2. Dot's first note (Act I, ch. 2, deliver and explain)
 
@@ -112,7 +112,7 @@ Companion to [spec 255](../specs/255-puppets-sentence-cards.md). Use as written,
 >
 > *Two puppets bows. The dragon sing a song.*
 >
-> "Your program has a wobble," says Bramble. Her magpie taps the page, as if it agrees.
+> "Your program has a wobble," says Bramble. Her magpie taps the paper, as if it agrees.
 >
 > Dot reads it again. "Oh. Two puppets bow. The dragon sings a song."
 >
@@ -122,7 +122,7 @@ Companion to [spec 255](../specs/255-puppets-sentence-cards.md). Use as written,
 >
 > "We have one dragon," says Dot. "So the dragon sings. I'll print a new one."
 >
-> Bramble folds her program into a fan. "Keep the old one. It's funnier."
+> Bramble folds her old program into a fan. "I'll keep this one too."
 
 **Keeper's note (A true thing about language):**
 > English is spoken in many places, in many ways. In some kinds of English, people say "she sing" or "I sings." Those follow their own patterns. Most printed books use "she sings" and "I sing."
@@ -179,12 +179,12 @@ Worked example: *The kitten sings.*
 3. Sings. That is the doing word.
 
 **Card 3. One word, two jobs (Sapling)**
-> A word's job depends on its line. "Pip waves": waves is a verb. "Pip gives a wave": wave is a noun. A noun can fit after a or the.
+> A word's job depends on its line. "Pip waves": waves is a verb. "Pip gives a wave": wave is a noun, the thing Pip gives.
 
 Worked example: *Pip gives a wave.*
 1. Find the doing word: gives.
-2. Look at wave. A comes just before it.
-3. Here, wave is a noun.
+2. What does Pip give? A wave.
+3. Here, wave names a thing: a noun.
 
 **Card 4. A and the (Sprout)**
 > Say "a" for any one, or one we haven't met yet. Say "the" for one we already know.
@@ -195,7 +195,7 @@ Worked example: *A dragon comes in. The dragon waves.*
 3. The dragon.
 
 **Card 5. This, that, these, those (Sprout)**
-> This is one thing close to you. That is one thing far away. These are many close. Those are many far.
+> This is one thing close to you. That is one thing far away. These are more than one, close by. Those are more than one, far away.
 
 Worked example: *Pip holds a hat. Dot's hat hangs across the loft.*
 1. Pip's hat is close to him: this hat.
@@ -243,15 +243,15 @@ Worked example: *Puff sat in Puff's seat.*
 3. Puff sat in Puff's seat. That's right as it is.
 
 **Card 11. I or me? (Sapling)**
-> I does the action: I bowed. Me gets the action: Dot waved at me. With two names, cover the other one and listen.
+> In print, I does the action: I bowed. Me gets the action: Dot waved at me. With two people, cover the other name and listen.
 
-Worked example: *Pip and ___ took a bow.*
-1. Cover "Pip and."
-2. "I took a bow" or "me took a bow"?
-3. I took a bow. So: Pip and I took a bow.
+Worked example: *Dot and ___ found a hat.*
+1. Cover "Dot and."
+2. "I found a hat" or "me found a hat"?
+3. I found a hat. So: Dot and I found a hat.
 
 **Card 12. Words for anyone and everyone (Sapling)**
-> Some pronouns don't name anyone in particular. Anyone, everyone, nobody, something and everything are like that.
+> Some pronouns don't name one particular person or thing. Anyone, everyone, nobody, something and everything are like that.
 
 Worked example: *The loft is empty. Not one person is there.*
 1. Not one person: nobody.
@@ -264,7 +264,7 @@ Worked example: *The loft is empty. Not one person is there.*
 Worked example: *The rabbit hops. Two rabbits hop.*
 1. One rabbit: the rabbit hops.
 2. Two rabbits: two rabbits hop.
-3. The s moves from the doing word to the naming word.
+3. With two rabbits, the doing word has no s.
 
 **Card 14. Growing a noun (Seedling)**
 > A noun and the words that tell more about it make a noun phrase. A dragon. A small dragon. A small green dragon.
@@ -275,7 +275,7 @@ Worked example: *the dragon*
 3. The noun is still dragon. The rest tells more.
 
 **Card 15. What job does a sentence do? (Seedling)**
-> A statement tells. A question asks. A command tells someone to do something. An exclamation starts with What or How and shows strong feeling.
+> A statement tells. A question asks. A command tells someone to do something. Here we use a strict rule: an exclamation starts with What or How.
 
 Worked example: *Four lines from the show.*
 1. The drum is loud. A statement.
@@ -283,7 +283,7 @@ Worked example: *Four lines from the show.*
 3. Bang the drum. A command. What a loud drum it is! An exclamation.
 
 **Card 16. Words about words (Sapling)**
-> An adjective tells more about a noun: sleepy dragon. An adverb tells how a verb happens: hops slowly. Tense tells when: hops is present, hopped is past.
+> An adjective tells more about a noun: sleepy dragon. An adverb can tell how something happens: hops slowly. Tense tells when: hops is present, hopped is past.
 
 Worked example: *The sleepy dragon hopped slowly.*
 1. Sleepy tells about the dragon: an adjective.
@@ -340,6 +340,8 @@ Worked example: *The sleepy dragon hopped slowly.*
 **Step 2:** Choose a or an.
 
 **Feedback:**
+- a apple, a egg, a owl or a orange: Say it. It starts with a vowel sound. Use an.
+- an drum: Say drum. You hear d first. That is a consonant sound.
 - an hat: Say hat. You hear h first. That is a consonant sound.
 - a hour: Say hour. The h is silent. It starts with a vowel sound.
 - an unicorn or an uniform: Say it. It starts with "yoo," like yes. Use a.
@@ -366,7 +368,7 @@ Worked example: *The sleepy dragon hopped slowly.*
 - he, she, his or her for the librarian: The librarian uses they and their.
 - Any card for Puff: Puff uses no pronouns. Keep Puff's name.
 - Swapping the first name: Keep the first name, so readers know who it is.
-- They holds: With they, the doing word has no s: they hold.
+- They holds: Many people say it that way. In print, they hold.
 
 **He hops, we hop:** Choose the doing word for each line of the program.
 - Lines: The rabbit ___ (hop / hops) · Two rabbits ___ (hop / hops) · I ___ (hop / hops) · We ___ (hop / hops) · The librarian ___ (wave / waves) · They ___ (wave / waves) · Everyone ___ (clap / claps)
@@ -374,10 +376,11 @@ Worked example: *The sleepy dragon hopped slowly.*
 
 **He hops, we hop feedback:**
 - hop with one rabbit: Many people say it that way. In printed books, one rabbit hops.
-- hops with two rabbits: The s is already on rabbits. Two rabbits hop.
-- hops with I: I means one, but I never takes the s: I hop.
-- waves with they: They takes no s, even for one person: they wave.
-- clap with everyone: Everyone counts as one group. In books: everyone claps.
+- hops with two rabbits: Many people say it that way. In printed books, two rabbits hop.
+- hops with I or we: Many people say it that way. In printed books, I hop and we hop.
+- wave with the librarian: Many people say it that way. In printed books, the librarian waves.
+- waves with they: Many people say it that way. In print, they takes no s, even for one person.
+- clap with everyone: Many people say it that way. In printed books, everyone takes the s: everyone claps.
 
 ### (e) Grow the Noun (Seedling, Sapling)
 
@@ -391,32 +394,30 @@ Worked example: *The sleepy dragon hopped slowly.*
 
 **Card after growing:** Your noun phrase: the small green dragon. The noun is dragon. Small and green tell more about it.
 
-**Which one?** *Two drums on the stool: one red, one blue.* Grow a noun phrase so Dot passes the right drum.
-- the drum: There are two drums. Which one?
-- the blue drum or the red drum: Now Dot knows exactly which.
+**Which one?** Item F2 (its card, choices and feedback) shown as a bench.
 
 ### (f) The Word Box (Seedling, Sapling)
 
 **Header:** These are the words people use to talk about sentences.
 
-**Label the line:** *The sleepy dragon hopped slowly.* Tap a word, then tap its name: noun, verb, adjective or adverb.
-- Answers: sleepy, adjective · dragon, noun · hopped, verb · slowly, adverb · The is left unlabeled (a pointing word, shown grayed).
+**Label the line:** *The tiny kitten sang loudly.* Tap a word, then tap its name: noun, verb, adjective or adverb.
+- Answers: tiny, adjective · kitten, noun · sang, verb · loudly, adverb · The is left unlabeled (a pointing word, shown grayed).
 
 **Label feedback:**
-- slowly as adjective: Slowly tells how the dragon hopped. It tells about the verb: an adverb.
-- sleepy as adverb: Sleepy tells what the dragon is like: an adjective.
+- loudly as adjective: Loudly tells how the kitten sang. It tells about the verb: an adverb.
+- tiny as adverb: Tiny tells what the kitten is like: an adjective.
 
 **Sentence jobs:** Sort four lines into statement, question, command and exclamation.
 - The show starts soon. (statement) · Is the drum ready? (question) · Pass me the drum. (command) · How loud that drum is! (exclamation)
 
 **Sentence jobs feedback:**
 - Pass me the drum in statement: It tells someone to do something. That is a command.
-- How loud that drum is! in question: It shows strong feeling and ends with !. An exclamation.
+- How loud that drum is! in question: It starts with How and doesn't ask. An exclamation.
+- Pass me the drum in exclamation: Here, exclamations start with What or How. This one is a command.
 
 **Then or now?** Toggle the line between *The dragon hops.* (present tense) and *The dragon hopped.* (past tense).
 
-**Four more words:** match each word to its example, with links to the benches that teach them.
-- compound: sunhat (two words joined) · suffix: the -ed in jumped · apostrophe: Dot's hat · comma: a soft, warm hat
+**Four more words:** item G6 shown as a bench, with links to the benches that teach each word.
 
 ## Problem sets
 
@@ -443,12 +444,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Sings tells what the kitten does. It is the doing word, a verb.
 
 **A3 (Sapling).**
-- Line: Pip gives a wave.
-- Prompt: In this line, what job does wave do?
-- Choices: A noun: a comes just before it ✔ · A verb: waving is an action (`action-means-verb`) · An adjective: it tells about Pip (`any-word-describes`)
-- Feedback: Verb: The doing word here is gives. Wave is the thing Pip gives. · Adjective: Wave doesn't tell what Pip is like.
-- Hint: Find the doing word first. Then look at the word before wave.
-- Explanation: A noun can fit after a or the. Here, wave is a noun.
+- Line: Pip takes a nap.
+- Prompt: In this line, what job does nap do?
+- Choices: A noun: it names what Pip takes ✔ · A verb: napping is an action (`action-means-verb`) · An adjective: it tells about Pip (`any-word-describes`)
+- Feedback: Verb: The doing word here is takes. Nap is the thing Pip takes. · Adjective: Nap doesn't tell what Pip is like.
+- Hint: Find the doing word first. Then ask: what does Pip take?
+- Explanation: Nap names the thing Pip takes. Here, nap is a noun.
 
 ### Set B. A, the, this and that (Sprout, Seedling)
 
@@ -466,7 +467,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Choices: This (`one-many`) · These (`near-far`) · Those ✔
 - Feedback: This: There are two drums. This is for one. · These: The drums are far from Dot. These is for close.
 - Hint: How many drums? Are they close or far?
-- Explanation: Many things far away are those. Those drums are loud.
+- Explanation: More than one, far away, is those. Those drums are loud.
 
 **B3 (Seedling).**
 - Card shown: Pip wants to play a drum. Any drum will do.
@@ -511,7 +512,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **D1 (Seedling, guided).** Steps shown first: 1. Dot is already named. 2. Dot uses she and her. 3. Which card fits?
 - Line: Dot is new. ___ is the postmaster.
-- Prompt: Dot uses she and her. Which word fits?
+- Prompt: The missing word means Dot. Dot uses she and her. Which word fits?
 - Choices: She ✔ · They (`ignores-stated-pronoun`) · It (`it-for-person`)
 - Feedback: They: Dot uses she and her. · It: It is for things. Dot is someone, not a thing.
 - Hint: What does Dot use?
@@ -529,25 +530,25 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Line: Pip and ___ took a bow.
 - Prompt: For the printed program, which word fits?
 - Choices: me (`me-as-subject`) · I ✔ · myself (`myself-for-I`)
-- Feedback: Me: Lots of people say it that way. In print, cover Pip: I took a bow. · Myself: Cover Pip: myself took a bow? Try I.
+- Feedback: Me: Many people say it that way. In print, cover Pip: I took a bow. · Myself: Some people say it that way. In print, cover Pip: I took a bow.
 - Hint: Cover "Pip and." What sounds right on its own?
 - Explanation: I does the action. In print: Pip and I took a bow.
 
 **D4 (Sapling).**
 - Line: The librarian lost ___ script.
-- Prompt: The librarian uses they and their. Which word fits?
+- Prompt: The script is the librarian's own. The librarian uses they and their. Which word fits?
 - Choices: her (`ignores-stated-pronoun`) · theirs (`standalone-possessive`) · their ✔
 - Feedback: Her: The librarian uses they and their. · Theirs: Theirs stands alone: the script is theirs. Before script, use their.
 - Hint: Which word goes right before script?
 - Explanation: Their shows the script belongs to the librarian.
 
 **D5 (Sapling).**
-- Card shown: The loft is empty. Not one person is there.
-- Prompt: Pip calls out. Which word fits: "___ is here!"
-- Choices: Everybody (`indefinite-opposite`) · Nobody ✔ · Somebody (`indefinite-opposite`)
-- Feedback: Everybody: Not one person is there. · Somebody: The card says not one person is there.
+- Card shown: Pip peeks into the loft. Not one person is inside.
+- Prompt: Pip tells Dot. Which word fits: "___ is in the loft."
+- Choices: Everybody (`indefinite-opposite`) · Nobody ✔ · Somebody (`some-for-none`)
+- Feedback: Everybody: Not one person is inside. · Somebody: The card says not one person is inside.
 - Hint: How many people are in the loft?
-- Explanation: Nobody means not one person. Nobody is here.
+- Explanation: Nobody means not one person. Nobody is in the loft.
 
 ### Set E. He hops, we hop (Seedling, Sapling)
 
@@ -556,7 +557,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Line: The rabbit ___.
 - Prompt: For the printed program, which word fits?
 - Choices: hop (`register-form`) · hops ✔ · hopping (`ing-alone`)
-- Feedback: Hop: Many people say it that way. In print, one rabbit hops. · Hopping: In print, hopping needs is: the rabbit is hopping.
+- Feedback: Hop: Many people say it that way. In print, one rabbit hops. · Hopping: Many people say it that way. In print, add is: the rabbit is hopping.
 - Hint: Look at card 13. One rabbit or many?
 - Explanation: In most printed books, one rabbit hops.
 
@@ -566,23 +567,23 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Answer: hops becomes hop: I hop on stage.
 - Feedback: Tapped I: Keep I. Change the doing word. · Tapped stage: Stage is fine. Look at the doing word.
 - Hint: I is one person. Does I take the s?
-- Explanation: I never takes the s in print: I hop.
+- Explanation: Many people say "I hops." In print, I takes no s: I hop.
 
 **E3 (Sapling).**
 - Line: They ___ the curtain.
 - Prompt: They means the librarian. For the program, which word fits?
 - Choices: pull ✔ · pulls (`they-one-means-s`) · pulling (`ing-alone`)
-- Feedback: Pulls: They takes no s, even for one person. · Pulling: In print, pulling needs are: they are pulling.
+- Feedback: Pulls: Many people say it that way. In print, they takes no s, even for one person. · Pulling: Many people say it that way. In print, add are: they are pulling.
 - Hint: Look at card 13. Is they on the s list?
-- Explanation: They takes no s, even for one person: they pull.
+- Explanation: In print, they takes no s, even for one person: they pull.
 
 **E4 (Sapling).**
 - Line: Everyone ___ at the end.
 - Prompt: For the printed program, which word fits?
 - Choices: clapping (`ing-alone`) · clap (`everyone-is-many`) · claps ✔
-- Feedback: Clapping: In print, clapping needs is: everyone is clapping. · Clap: Everyone counts as one group, so it takes the s.
+- Feedback: Clapping: Many people say it that way. In print, add is: everyone is clapping. · Clap: Many people say it that way. In print, everyone takes the s.
 - Hint: Say "everyone is." Is or are?
-- Explanation: Everyone takes the s, like he and she: everyone claps.
+- Explanation: In print, everyone takes the s, like he and she: everyone claps.
 
 ### Set F. Grow the noun (Seedling, Sapling)
 
@@ -622,18 +623,18 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **G2 (Sapling).**
 - Line: "Sit down now!" says Dot.
-- Prompt: What kind of sentence is "Sit down now!"?
+- Prompt: Using card 15's What-or-How rule, what kind of sentence is "Sit down now!"?
 - Choices: Exclamation (`mark-decides-type`) · Question (`command-is-question`) · Command ✔
-- Feedback: Exclamation: The ! shows strong feeling, but the job is telling someone to sit. · Question: Dot isn't asking.
+- Feedback: Exclamation: Many people would call it one. Our rule needs What or How. It's a command. · Question: Dot isn't asking.
 - Hint: What does Dot want someone to do?
-- Explanation: It tells someone to sit. A command can end with ! too.
+- Explanation: It tells someone to sit: a command. A command can end with ! too.
 
 **G3 (Sapling).**
-- Prompt: Which one is an exclamation?
+- Prompt: Using card 15's What-or-How rule, which one is an exclamation?
 - Choices: What is that loud noise by the door? (`what-means-question`) · What a loud drum that is! ✔ · Bang that loud drum by the door! (`mark-decides-type`)
-- Feedback: Loud noise: It asks something. That is a question. · Bang: It tells someone to act. That is a command.
-- Hint: Look at card 15. Which one shows strong feeling, starting with What?
-- Explanation: What a loud drum that is! shows strong feeling. It is an exclamation.
+- Feedback: Loud noise: It asks something. That is a question. · Bang: Many people would call it one. Our rule needs What or How. It's a command.
+- Hint: Look at card 15. Which one starts with What and doesn't ask?
+- Explanation: What a loud drum that is! starts with What and doesn't ask. It is an exclamation.
 
 **G4 (Sapling).**
 - Prompt: Which line is in the past tense?
@@ -652,7 +653,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **G6 (Sapling, match).** Steps shown first: 1. Read one word. 2. Look for its example. 3. Match them.
 - Prompt: Match each word to its example.
-- Pairs: compound → sunhat · suffix → the -ed in jumped · apostrophe → Dot's hat · comma → a soft, warm hat
+- Pairs: compound → sunflower · suffix → the -ed in jumped · apostrophe → Dot's hat · comma → a soft, warm hat
 - Feedback for a wrong pair: Read that example again. Which part of writing does it show?
 - Hint: A compound is two words joined into one.
 - Explanation: Each word names a part of writing. Other benches teach them in full.
@@ -679,7 +680,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Doing word:** a word that tells what someone does. Also called a verb.
 - **Verb:** a doing word, like hops or sings. Is and has are verbs too.
 - **Vowel sound:** a sound you make with your mouth open, like the start of apple, egg, owl or up.
-- **Consonant sound:** a sound where your lips, tongue or teeth stop the air a little, like b, h or the "y" in yes.
+- **Consonant sound:** a sound where you block or squeeze the air, like b, h or the "y" in yes.
 - **Pronoun:** a word that stands in for a noun, like he, she, they, it, I or me.
 - **Noun phrase:** a noun and the words that tell more about it, like the small green dragon.
 - **Adjective:** a word that tells more about a noun, like sleepy or green.
@@ -687,12 +688,12 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - **Statement:** a sentence that tells something.
 - **Question:** a sentence that asks something.
 - **Command:** a sentence that tells someone to do something.
-- **Exclamation:** a sentence that starts with What or How and shows strong feeling, like What a loud drum that is!
+- **Exclamation:** in this pack, a sentence that starts with What or How, like What a loud drum that is! Many people call any line with ! an exclamation.
 - **Tense:** the form of a verb that shows when. Hops is present tense; hopped is past tense.
-- **Compound:** a word made of two words joined, like sunhat.
+- **Compound:** a word made of two words joined, like sunflower.
 - **Suffix:** a word part added to the end of a word, like -ed in jumped.
 - **Apostrophe:** a mark like this ' that can show who owns something, as in Dot's hat.
-- **Comma:** a mark like this , that shows a small pause or separates words.
+- **Comma:** a mark like this , that separates words or parts of a sentence.
 - **Program:** a printed sheet that tells the audience about a show.
 
 ## Off-screen card (adult-led)
@@ -707,6 +708,6 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **About everyday speech:** English has many varieties, and some use different verb patterns ("she sing," "I sings," "we was"). These follow their own rules and are not mistakes. This pack teaches the forms most printed books use, as a choice for a printed program, and it never checks or marks how a child speaks. Please don't correct your child's own speech during these benches; talk about the program instead.
 
-**Terms:** England's national curriculum introduces a or an in Year 3 and the listed terms in Year 2; the child text uses American spelling and says "period" where England says "full stop." England's grammar glossary calls my, his, her and their "possessive determiners"; the Common Core and this pack call them possessive pronouns. "Naming word" and "doing word" are starting points only: some verbs (is, has, likes) name no action, and a word like wave can be a noun or a verb, so older items test a word's job in its line. England's glossary treats an exclamation as a What or How sentence (*What a good friend you are!*); everyday usage calls any strong-feeling sentence with ! exclamatory. The pack keys only What and How exclamations, so both readings agree, and a command ending in ! is still a command.
+**Terms:** England's national curriculum introduces a or an in Year 3 and the listed terms in Year 2; the child text uses American spelling. The pack calls my, his, her and their possessive pronouns, as England's grammar glossary and the Common Core do; many grammar books call them possessive determiners when they come before a noun. No item asks for the term. "Naming word" and "doing word" are starting points only: some verbs (is, has, likes) name no action, and a word like wave can be a noun or a verb, so older items test a word's job in its line. Exclamations: England's grammar glossary gives *What a good friend you are!* as its example, and England's key stage 1 grammar test framework (the Standards and Testing Agency's) narrows the term to sentences that begin with What or How. Everyday usage, and the Common Core's "exclamatory sentences," also count lines like *Sit down now!* G2, G3 and the sentence-jobs sort use the narrow rule and say so on screen: a command ending in ! is filed as a command, and the feedback adds that many people would call it an exclamation.
 
-**What it does not claim:** pictures and lines are simplified. Every puppet line, the program and the poster are invented. Some h-words (historic, and herb, which most Americans say without the h) vary between speakers, so the pack uses only hour, where the h is silent everywhere. Longer noun phrases, adjective order and clear pronouns come in a later pack; tense, apostrophes, commas, compounds and suffixes are taught in full on other benches. Nothing the child taps is graded or recorded beyond the saved bench choices.
+**What it does not claim:** pictures and lines are simplified. Every puppet line, the program and the poster are invented. Some h-words (historic, and herb, which most Americans say without the h) vary between speakers, so the pack uses only hour, where the h is silent everywhere. Longer noun phrases, adjective order and clear pronouns come in a later pack; tense, apostrophes, commas, compounds and suffixes are taught in full on other benches. Nothing is scored; saved work keeps only codes for the child's choices and their outcomes.
