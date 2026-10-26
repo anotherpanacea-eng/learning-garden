@@ -12,7 +12,7 @@ export function validHatSource(s){
   Array.isArray(s.hats)&&s.hats.length>=1&&s.hats.length<=12&&unique(s.hats.map(h=>h?.id))&&s.hats.every(h=>obj(h)&&id(h.id)&&text(h.label,200)&&text(h.owner,200)&&attributes.every(k=>text(h[k],100)))&&
   Array.isArray(s.tiles)&&s.tiles.length<=16&&unique(s.tiles.map(t=>t?.id))&&s.tiles.every(t=>obj(t)&&id(t.id)&&text(t.text,200)&&Number.isInteger(t.rank)&&t.rank>=0&&t.rank<=20&&typeof t.after==='boolean'&&((t.property===null&&t.value===null)||(attributes.includes(t.property)&&text(t.value,100))))&&
   obj(s.frame)&&text(s.frame.before,100)&&text(s.frame.noun,100)&&obj(s.copy)&&['welcome','job','limit','hint','example','guided','usual','other','goal','scaffold'].every(k=>text(s.copy[k]))&&obj(s.copy.results)&&results.every(k=>text(s.copy.results[k]))&&
-  Array.isArray(s.questions)&&s.questions.length>=1&&s.questions.length<=20&&unique(s.questions.map(q=>q?.id))&&s.questions.every(q=>obj(q)&&id(q.id)&&['context','prompt','hint','example','explanation'].every(k=>text(q[k]))&&Array.isArray(q.choices)&&q.choices.length>=2&&q.choices.length<=8&&unique(q.choices.map(c=>c?.id))&&q.choices.every(c=>obj(c)&&id(c.id)&&text(c.text,500)&&text(c.feedback))&&q.choices.some(c=>c.id===q.key));
+  Array.isArray(s.questions)&&s.questions.length>=1&&s.questions.length<=20&&unique(s.questions.map(q=>q?.id))&&s.questions.every(q=>obj(q)&&id(q.id)&&(q.together===undefined||text(q.together))&&['context','prompt','hint','example','explanation'].every(k=>text(q[k]))&&Array.isArray(q.choices)&&q.choices.length>=2&&q.choices.length<=8&&unique(q.choices.map(c=>c?.id))&&q.choices.every(c=>obj(c)&&id(c.id)&&text(c.text,500)&&text(c.feedback))&&q.choices.some(c=>c.id===q.key));
 }
 const tilesValid=(s,x)=>Array.isArray(x)&&x.length<=16&&unique(x)&&x.every(t=>s.tiles.some(a=>a.id===t));
 const targetValid=(s,x)=>s.hats.some(h=>h.id===x),itemValid=(s,x)=>s.questions.some(q=>q.id===x);
@@ -34,8 +34,8 @@ export function assessHat(s,tiles,target){
  return {phrase:describeHat(s,tiles),matches,order,outcome,feedback:s.copy.results[outcome]};
 }
 export function validHatClaim(c){try{return obj(c)&&validHatSource(c.source)&&targetValid(c.source,c.target)&&tilesValid(c.source,c.tiles)&&text(c.phrase,4000)&&Array.isArray(c.matches)&&unique(c.matches)&&c.matches.every(i=>targetValid(c.source,i))&&['usual','other'].includes(c.order)&&results.includes(c.outcome)&&c.outcome===(c.matches.length===0?'none':c.matches.length>1?'several':c.matches[0]===c.target?'target':'other')&&text(c.feedback)&&helps(c.helpBefore,c.source);}catch{return false;}}
-export function validHatAnswer(a){try{return obj(a)&&validHatSource(a.source)&&itemValid(a.source,a.itemId)&&['fits','again'].includes(a.outcome)&&a.source.questions.find(q=>q.id===a.itemId).choices.some(c=>c.id===a.choice)&&text(a.feedback)&&helps(a.helpBefore,a.source);}catch{return false;}}
-export const validHatSkip=a=>{try{return obj(a)&&validHatSource(a.source)&&itemValid(a.source,a.itemId)&&a.outcome==='skipped'&&helps(a.helpBefore,a.source);}catch{return false;}};
+export function validHatAnswer(a,itemId){try{return obj(a)&&(itemId===undefined||a.itemId===itemId)&&validHatSource(a.source)&&itemValid(a.source,a.itemId)&&['fits','again'].includes(a.outcome)&&a.source.questions.find(q=>q.id===a.itemId).choices.some(c=>c.id===a.choice)&&text(a.feedback)&&helps(a.helpBefore,a.source);}catch{return false;}}
+export const validHatSkip=(a,itemId)=>{try{return obj(a)&&(itemId===undefined||a.itemId===itemId)&&validHatSource(a.source)&&itemValid(a.source,a.itemId)&&a.outcome==='skipped'&&helps(a.helpBefore,a.source);}catch{return false;}};
 const workValid=w=>obj(w)&&validHatSource(w.source)&&pages.includes(w.page)&&targetValid(w.source,w.target)&&tilesValid(w.source,w.tiles)&&itemValid(w.source,w.question)&&helps(w.support,w.source);
 export function hatView(state){
  if(!own(state,'descriptions'))return {status:'ready',root:null,visits:[],work:null};
@@ -73,6 +73,7 @@ export function editHat(s,kind,value,o={}){return workChange(s,w=>{
  }else return result(false,'Choose a hat action.');return result(true);
  },o);}
 export const hatContext=w=>w.page==='questions'?w.question:w.target;
+const helpFor=(w,forId)=>w.support===undefined?undefined:{observed:w.support.observed,concept:copy(w.support.concept.filter(r=>r.forId===forId)),reading:copy(w.support.reading.filter(r=>r.forId===forId))};
 export function supportHat(s,kind,o={}){return workChange(s,w=>{
  if(!kinds.includes(kind))return result(false,'Choose a support.');
  const forId=hatContext(w),support=w.support??{observed:false,concept:[],reading:[]};
@@ -83,21 +84,21 @@ export function supportHat(s,kind,o={}){return workChange(s,w=>{
 export const keepHat=(s,o={})=>workChange(s,w=>{
  if(!Array.isArray(w.claims)||w.claims.length>=24)return result(false,'The earlier discoveries stay kept. Download notes or start another visit for a new discovery.');
  const claim={source:copy(w.source),target:w.target,tiles:copy(w.tiles),...assessHat(w.source,w.tiles,w.target)};
- if(w.support!==undefined)claim.helpBefore=copy(w.support);w.claims.push(claim);return {...result(true),claim:copy(claim)};
+ if(w.support!==undefined)claim.helpBefore=helpFor(w,w.target);w.claims.push(claim);return {...result(true),claim:copy(claim)};
  },o);
 export function answerHat(s,choice,o={}){return workChange(s,w=>{
  const q=w.source.questions.find(q=>q.id===w.question),c=q.choices.find(c=>c.id===choice);if(!c)return result(false,'Choose one of this question’s answers.');
  if(!record(w.answers))return result(false,'Earlier answers are retained. Start a new visit to answer separately.');
- const old=w.answers[q.id];if(old!==undefined&&(!obj(old)||(old.first!==undefined&&!validHatAnswer(old.first))||(old.latest!==undefined&&!validHatAnswer(old.latest))||(old.skipped!==undefined&&!validHatSkip(old.skipped))))return result(false,'This earlier item is retained exactly. Other questions stay open; start a new visit for a separate answer.');
+ const old=w.answers[q.id];if(old!==undefined&&(!obj(old)||(old.first!==undefined&&!validHatAnswer(old.first,q.id))||(old.latest!==undefined&&!validHatAnswer(old.latest,q.id))||(old.skipped!==undefined&&!validHatSkip(old.skipped,q.id))))return result(false,'This earlier item is retained exactly. Other questions stay open; start a new visit for a separate answer.');
  if(!old&&Object.keys(w.answers).length>=5)return result(false,'Five question records are kept. Download notes or start another visit.');
- const a={source:copy(w.source),itemId:q.id,choice,outcome:choice===q.key?'fits':'again',feedback:c.feedback};if(w.support!==undefined)a.helpBefore=copy(w.support);
+ const a={source:copy(w.source),itemId:q.id,choice,outcome:choice===q.key?'fits':'again',feedback:c.feedback};if(w.support!==undefined)a.helpBefore=helpFor(w,w.question);
  const slot=w.answers[q.id]??={};if(!slot.first)slot.first=copy(a);else slot.latest=copy(a);return {...result(true),answer:copy(a)};
  },o);}
 export const skipHat=(s,o={})=>workChange(s,w=>{
  if(!record(w.answers))return result(false,'Earlier answers are retained. Start another visit to make new question notes.');
- const old=w.answers[w.question];if(old!==undefined&&(!obj(old)||(old.first!==undefined&&!validHatAnswer(old.first))||(old.latest!==undefined&&!validHatAnswer(old.latest))||(old.skipped!==undefined&&!validHatSkip(old.skipped))))return result(false,'This item’s earlier answers remain exact; other questions stay open.');
+ const old=w.answers[w.question];if(old!==undefined&&(!obj(old)||(old.first!==undefined&&!validHatAnswer(old.first,w.question))||(old.latest!==undefined&&!validHatAnswer(old.latest,w.question))||(old.skipped!==undefined&&!validHatSkip(old.skipped,w.question))))return result(false,'This item’s earlier answers remain exact; other questions stay open.');
  if(!old&&Object.keys(w.answers).length>=5)return result(false,'Five question records are kept. Download notes or start another visit.');
- const a={source:copy(w.source),itemId:w.question,outcome:'skipped'};if(w.support!==undefined)a.helpBefore=copy(w.support);
+ const a={source:copy(w.source),itemId:w.question,outcome:'skipped'};if(w.support!==undefined)a.helpBefore=helpFor(w,w.question);
  (w.answers[w.question]??={}).skipped=a;return result(true);
  },o);
 export const removeHats=(s,key,confirmed,o={})=>change(s,c=>{const r=c.descriptions;if(confirmed!==true||!r||!id(key)||!own(r.visits,key)||!workValid(r.visits[key]))return result(false,'Choose a readable visit and confirm its removal.');delete r.visits[key];if(r.current===key)r.current=null;return result(true);},o);

@@ -3,6 +3,7 @@ import {freshState,recommendations,restoreStateResult} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from '../dist/progress-transfer.mjs';
 import {hatSource} from '../dist/which-hat-content.mjs';
 import * as H from '../dist/which-hat-core.mjs';
+import {hatsPage} from '../dist/which-hat-ui.mjs';
 
 let checks=0;
 const ok=(value,label)=>{assert.ok(value,label);checks++;};
@@ -41,6 +42,7 @@ const oracleMatches=tiles=>table.filter(h=>tiles.every(id=>{const w=words.find(w
 const oraclePhrase=tiles=>['the',...tiles.map(id=>words.find(w=>w[0]===id)).filter(w=>!w[5]).map(w=>w[1]),'hat',...tiles.map(id=>words.find(w=>w[0]===id)).filter(w=>w[5]).map(w=>w[1])].join(' ');
 const oracleOrder=tiles=>{const ranks=tiles.map(id=>words.find(w=>w[0]===id)).filter(w=>!w[5]).map(w=>w[4]);return ranks.every((r,i)=>!i||r>=ranks[i-1])?'usual':'other';};
 ok(H.validHatSource(source),'reviewed source is structurally readable');
+ ok(source.questions[0].together.includes('1. Look at the six pegs'),'A1 has source-owned guided steps');
 eq(source.hats.map(h=>[h.id,h.size,h.age,h.color,h.ribbon]),table,'exact pinned six-hat table');
 eq(source.tiles.map(t=>[t.id,t.text,t.property===null?null:['id','size','age','color','ribbon'].indexOf(t.property),t.value,t.rank,t.after]),words,'exact predicates and ranks');
 let cases=0;
@@ -115,6 +117,7 @@ for(const [qid,patterns] of [['a1',[/two hats/i,/only Dot/i,/no hat/i]],['a2',[/
  eq(work(state).answers.a1.first,first,'help and retry preserve first');eq(latest.outcome,'fits');ok(H.validHatAnswer(latest));
  ok(latest.helpBefore.concept.some(h=>h.forId==='a1'&&h.kind==='hint'),'concept help recorded before later answer');
  ok(latest.helpBefore.reading.some(h=>h.forId==='a1'&&h.kind==='audio'),'audio recorded separately before later answer');
+ ok(latest.helpBefore.concept.every(h=>h.forId==='a1')&&latest.helpBefore.reading.every(h=>h.forId==='a1'),'answer snapshot contains only relevant support context');
  eq(first.helpBefore.concept,[],'late concept help cannot enter first');eq(first.helpBefore.reading,[],'late audio cannot enter first');
  accept(H.skipHat(state,options));eq(work(state).answers.a1.first,first);eq(work(state).answers.a1.latest,latest,'skip never becomes latest answer');
  eq(work(state).answers.a1.skipped.outcome,'skipped');ok(H.validHatSkip(work(state).answers.a1.skipped),'skip is a readable separate observation');
@@ -122,7 +125,7 @@ for(const [qid,patterns] of [['a1',[/two hats/i,/only Dot/i,/no hat/i]],['a2',[/
  for(const q of source.questions){edit(state,'question',q.id);accept(H.answerHat(state,q.key,options));const answer=work(state).answers[q.id].latest??work(state).answers[q.id].first;eq(answer.outcome,'fits');eq(answer.feedback,q.choices.find(c=>c.id===q.key).feedback);}
  edit(state,'page','build');edit(state,'target','peg-2');for(const kind of ['hint','example','together','readback','audio'])accept(H.supportHat(state,kind,options));
  const support=clone(work(state).support);accept(H.supportHat(state,'hint',options));eq(work(state).support,support,'repeat requests do not consume capacity');
- accept(H.keepHat(state,options));eq(work(state).claims[0].helpBefore,support,'keep freezes before-support observation');
+ accept(H.keepHat(state,options));eq(work(state).claims[0].helpBefore,{observed:support.observed,concept:support.concept.filter(r=>r.forId==='peg-2'),reading:support.reading.filter(r=>r.forId==='peg-2')},'keep freezes only this target’s before-support observation');
  roundTrip(state,'first/latest/support/skip');
 }
 
@@ -221,4 +224,19 @@ for(const raw of [null,[],42,'old root',{version:2,current:null,visits:{}}]){
  const after=clone(state);delete after.descriptions;eq(after,foreign,'only descriptions root changes');const restored=roundTrip(state,'foreign roots');delete restored.descriptions;eq(restored,foreign,'actual import keeps foreign roots exact');
 }
 
+
+// An answer filed under another item is retained, not shown/extended as that item.
+{
+ const state=make();edit(state,'page','questions');edit(state,'question','a2');
+ accept(H.answerHat(state,'a',options));const misplaced=clone(work(state).answers.a2);
+ work(state).answers.a1=misplaced;edit(state,'question','a1');
+ ok(!H.validHatAnswer(misplaced.first,'a1'),'foreign item cannot masquerade under another question');
+ ok(hatsPage(state).includes('An earlier entry cannot be displayed here.'),'misfiled response is marked retained instead of shown as current item');
+ ok(!hatsPage(state).includes('First response · kept as answered'),'misfiled original is not presented as this question’s first response');
+ refuse(state,()=>H.answerHat(state,'b',options),'misfiled answer retained instead of extended');
+ refuse(state,()=>H.skipHat(state,options),'misfiled answer cannot get a new skip');
+ edit(state,'question','a3');accept(H.answerHat(state,'c',options));
+ ok(H.validHatAnswer(work(state).answers.a3.first,'a3'),'healthy sibling remains answerable');
+ roundTrip(state,'misfiled answer retained raw');
+}
 console.log(`${checks} Which Hat source checks passed: 512 subsets, ${cases} subset/target cases, frozen own sources, first/latest/support observations and actual-report refusal/recovery boundaries.`);

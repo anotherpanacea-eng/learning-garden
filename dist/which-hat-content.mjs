@@ -22,7 +22,7 @@ export const hatSource={
  ],
  frame:{before:'the',noun:'hat'},
  copy:{
-  welcome:'The storm is over, and neighbors have been gathering at the café. Six hats were left on the pegs. Help Dot describe one so its owner can find it.',
+  welcome:'The storm is over, and neighbors have been gathering at the café. Dot brought six hats left at the café to the pegs beside the Post Office. Describe one so its owner can find it.',
   job:'An owner points to a peg. Choose words that fit that hat. Can your description pick it out from all six?',
   limit:'A made-up rack: size and age are supplied labels. Lovely is an opinion; in this model it rules no hat out. Pictures and printed clues tell the same story.',
   hint:'Start with a word that fits the requested hat. Look at the hats that still match. What detail would separate them?',
@@ -37,7 +37,7 @@ export const hatSource={
  questions:[
   {id:'a1',context:'Dot’s hat is on peg 1. Use the rack and count the hats that fit each phrase.',prompt:'Which description fits only Dot’s hat?',key:'b',
    choices:[{id:'a',text:'the small blue hat',feedback:'Two hats are small and blue. One is new.'},{id:'b',text:'the small old blue hat',feedback:'Small, old and blue together fit only Dot’s hat.'},{id:'c',text:'the small old blue hat with a gold ribbon',feedback:'Dot’s hat has no ribbon. No hat fits all these words.'}],
-   hint:'Count the hats each description fits.',example:'Small red cup fits just the small red cup on our example shelf.',explanation:'Useful details separate things that otherwise match.'},
+   together:'1. Look at the six pegs. 2. Count the hats each description fits. 3. Pick the one that fits only Dot’s: blue fits four, small blue fits two, and small old blue fits one.',hint:'Count the hats each description fits.',example:'Small red cup fits just the small red cup on our example shelf.',explanation:'Useful details separate things that otherwise match.'},
   {id:'a2',context:'Ember’s hat is big, new and red. All three phrases can be understood.',prompt:'Which puts the describing words in the usual order?',key:'c',
    choices:[{id:'a',text:'a new big red hat',feedback:'Understandable. Most speakers put size before age.'},{id:'b',text:'a red big new hat',feedback:'Understandable. Color usually comes after size and age.'},{id:'c',text:'a big new red hat',feedback:'Big is size, new is age, red is color: the usual order.'}],
    hint:'Size, then age, then color.',example:'A small old green cup follows the usual order.',explanation:'The usual order is a habit, not a rule that makes every other order meaningless.'},
