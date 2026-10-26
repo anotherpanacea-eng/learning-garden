@@ -1,0 +1,93 @@
+# 240. Hundred Cups · the whole changes when we zoom
+
+Status: bounded runtime commission, 2026-10-25; independent spec review precedes build. Adapted from draft PR178/spec228(b), not the whole Water and Air pack. This spec replaces the draft's additive97/2/1/sliver graph with two explicitly nested, internally closed models. It does not commission climate zones, air pressure, ocean circulation, carbon, real-history cards or later-act completion.
+
+## One useful job
+
+After the storm, the millpond is full. Pip thinks this means fresh water is plentiful everywhere. Dot brings two model trays to the Water Lab: a model of all Earth's water, and a zoom into just its freshwater. Help build a diagram a visitor can read without confusing the whole. This is original fiction around real estimates, not a local water-quality test.
+
+Open route `#science/water-shares`, linked from the Water Lab hub and science pathway; no chapter, earlier water map, fraction unit or reading check blocks entry. Teach reservoir words here before using their quantities. Later `#library/globe` can invite this activity without sharing or migrating its state. Existing Water Lab flow, Rain Paths, freshwater ecosystem games and the proposed228(a) map retain their different jobs.
+
+## Science and mathematical model
+
+The underlying published estimates are approximate, not measurements made in the game. Show a child-readable model line and source link in a grown-up panel. Original art; no downloaded map/diagram.
+
+| View | What the whole means | Rounded proportions used in this model |
+| --- | --- | --- |
+| All water | All Earth's water represented by100 model cups |97.5 saline;2.5 fresh. Saline includes oceans plus salty lakes/groundwater; do not call all97.5 ocean water. |
+| Freshwater zoom | Only Earth's freshwater, redrawn as100 model cups |69 ice caps/glaciers/permanent snow;30 fresh groundwater;1 all other freshwater. |
+
+Each row totals exactly100 **within its own rounded teaching model**. The second whole is inside the first's fresh portion; it is not another100 cups to add. No97+2+1+sliver additive table. No pretend precision:69/30/1 approximates the source68.7/30.1/1.2. The1 includes ground ice/permafrost, lakes, soil moisture, atmosphere, wetlands, rivers and living things. It is not all rivers/lakes, not all surface water, not necessarily liquid, not all accessible or drinkable. Salt/fresh describe dissolved salt content; fresh does not establish safe drinking water. Never offer a taste test or drinking instruction.
+
+Reservoir cards name ocean/saline water, glacial ice, fresh groundwater, and the other category with its examples. Explain that ice is water and groundwater in this table fills spaces in soil/rock below the water table (the saturated zone), not necessarily an underground lake. A labeled cutaway distinguishes that filled zone from soil moisture above it; the table counts soil moisture and ground ice/permafrost separately in Other, never in both bars. Some lakes and groundwater are salty. The model teaches stored shares, not rainfall, annual flow, usable supply or how much a household can obtain.
+
+A visit uses one tray of100 or two trays of100 (200 model cups), selected openly. The same percentages then give:
+
+-100 all-water cups:97.5 saline /2.5 fresh;200:195/5.
+-100 freshwater cups:69/30/1;200:138/60/2.
+
+A model cup is a representative share, not a claim about the volume of a real reservoir. The display says which total and water set it represents at every turn. Freshwater zoom at the same drawn size is a **change of scale and denominator**, not creation of more water. Equal-length diagrams with different wholes do not imply equal real quantities.
+
+Store quantities as integer half-cup units: total200 or400, source rows [195,5] or[390,10] and [138,60,2] or[276,120,4]. Arithmetic/graphics derive from these exact model integers. Display half cups as `½` with an ordinary spoken form. No floating-point answer comparison.
+
+## The repeatable loop
+
+Three short open turns: **Meet the water**, **Build a diagram**, **A reader's question**; **Kept diagrams** is an open notebook turn. Native buttons/inputs, no drag-only interaction. Source table, selected whole and request stay available across turns. Compact material panel alongside the active task on tablet; collapsible source details and a persistent whole label on small screens. Large labels and exact values back up tiny bars; color never carries the answer alone.
+
+1. **Choose a visitor request.** Eight request families below, each with100/200-cup versions:16 transparent recurring settings. A default new visitor cycles through them; children can select any family and tray size. It is a revisitable finite model space, not unlimited unseen data or a placement/adaptive mastery engine. Starting a visit freezes that selected full source and request. Changing family/scale starts a separate visit and retains earlier work; changing the displayed water view within one visit preserves both working graphs.
+2. **Meet the water.** Tap the four reservoir cards for short labeled diagrams and read a worked example in steps. Explain half cups using one visibly divided cup. A different example compares half of a10-cup tray with half of a20-cup tray. Supplies are not consumed and no physical experiment is implied.
+3. **Build a diagram from its table.** Choose all water or freshwater zoom. Each category has a native quantity input plus ±10, ±1 and ±½ tap buttons, bounded0..the selected model total. Horizontal bars share a labeled0-to-total scale, source/title/unit labels, and printed draft values. A live draft sum can differ from the source; it says so without silently repairing numbers or changing the scientific data. `Check this view` distinguishes missing quantity, wrong row value, wrong draft total and source-matching graph. Support includes `Show one bar` and `Fill from the table`, recorded before reveal/fill; they remain available and do not imply independent construction. Drafts remain editable after checks/questions/keeps. No huge run of single-cup clicks is necessary.
+4. **Answer for this reader.** One supplied three-choice question uses the same frozen tables. All source text remains visible/available, so success is supported graph interpretation, not memorization. Record first answer once and latest separately; help/retry/skip do not overwrite first. Do not grade original spoken explanations. Ask an optional off-screen "How could your diagram help the reader?" with no audio/text recording.
+5. **Keep a diagram.** Keep any current view and result, including a mismatching or unfinished draft, as a discovery. A current request is fulfilled only when the kept view is the one requested, its actual bars match its own source table and the latest supplied response fits that request. Say "This visitor can read your diagram"; name recorded support and table availability honestly. A correct chart in another view is a useful diagram, but does not fulfill this reader's request. No score, mastery, timer, item consumption, unlock or completion of an act. Static celebration, no video required. New visitor stays open before or after fulfillment.
+
+## The sixteen settings
+
+For the first source, supplied questions have the following contracts. Choice wording is original and must keep one clear fitting choice; fit positions vary over the eight families (A/B/C), with authored or deterministic ordering frozen per visit. Each incorrect choice gets evidence-specific feedback. A cautious incorrect choice is used where it misreads available evidence, not punished for caution.
+
+| Family | Requested graph / question distinction | Fits; tempting alternatives |
+| --- | --- | --- |
+| fresh-amount | All water; how many fresh model cups in this tray? |2.5 or5 by tray size;25 or50 (decimal place),97.5 or195 (saline row). |
+| fresh-store | Freshwater; which category holds the most in this model? |Ice caps/glaciers/permanent snow; fresh groundwater; rivers/lakes alone. |
+| other-share | Freshwater; what does Other include? |Several smaller stores, including ground ice and rivers; only rivers/lakes; the cards give no examples (despite their explicit list). |
+| which-whole | Freshwater; a reader says the69% is of all Earth's water. |It is of freshwater; it is of all water; the table gives no whole. |
+| drinking | All water; does the fresh label prove the water safe to drink? |No, it identifies low salt and does not establish drinking safety; yes, all fresh is safe; no fresh water can be liquid. |
+| two-trays | All water; compare100/200 models with the same share. |Fresh model amount doubles2.5→5; it remains2.5; the real Earth's freshwater doubles. Both modeled totals/table rows are supplied in this request. |
+| ice-counts | Freshwater; should glacier water be removed because it is frozen? |No, ice still counts as water in this freshwater whole; yes, fresh means liquid; the supplied table cannot show whether ice is counted. |
+| underground | Freshwater; does groundwater have to be fresh? |Some groundwater is fresh and some saline; every underground store is fresh; the model gives no evidence of any fresh groundwater. |
+
+Scale variants preserve science: they change the model quantity/printed values, not Earth's estimated distribution. Repeated source IDs are labeled revisits, not new independent evidence. Keep a source-owned guided example and hint for each family; optional meanings/read-aloud are recorded separately from concept help. Returning invitations can point to Fraction Trail's equal-whole work, Measuring Kitchen's quantity/units or Rain Paths' groundwater explanation; they carry a named concept, never an age, grade or assumed proficiency. The first slice cycles/selects challenges; performance-based recommendations remain a separately reviewed extension.
+
+## Saved work and isolation
+
+New optional opaque root `waterShares`, using the established local explorer store, notebook/export/import/save-off/reset. No personal identities, ages/grades, voice, free text or remote generation.
+
+`{version:1,current,nextSerial,visits:{id:{source,page,view,bars,help,answer,checks,kept}}}`. Complete selected source includes both water tables/wholes, model units/rules, selected request/question/ordered choices/key/feedback, teaching/captions/reservoir cards, model/source notes, original diagrams' descriptions, and help. It need not copy every future request in the catalog. Start freezes only this selected source; reads never refresh it.
+
+Working bars are keyed by source view/category IDs; null means unentered, including distinct zero inputs. Check snapshots and each keep contain complete own source, actual view/whole/bars/total, original feedback/outcome and request/response as applicable. First/latest supplied answers each embed complete source, shown ordered choices/key, actual choice/result and relevant support-before. Skips are separate; a later skip/help does not replace answered first/latest. Read saved results from records, never regrade. Later working edits do not replace old checks or diagrams.
+
+Support observation is scoped to graph view or reader question; concept help (hint/example/bar reveal/fill/together) and reading (meanings/audio) commit before reveal/playback and freeze only relevant requests with a result. Every graph and answer records that the source table was available. Empty newly tracked help is only a request observation, not independent performance. Missing old observations stay unobserved; requests made later do not rewrite earlier records.
+
+All changes clone/preflight through actual pretty-notes import and shared limits, then commit only this root. Refusal keeps earlier state and visible pending input; do not rerender away an unsaved quantity or navigate/explorer-switch in a way that silently loses it. Pure render/preview/suggestion performs no mutation. Preserve future/malformed optional histories raw/exportable and keep healthy siblings open. Unknown root version stays exact/read-only. Validate structural bounds, source-owned IDs, integer units and recorded result/total self-consistency, not today's quantities/wording/keys/category counts/request IDs. Retired internally readable sources open, and stored source/results never change to today's teaching model.
+
+Limits:8 visits,16 checks and16 keeps per visit, one first/latest answer/skip record per visit; request observation count capped64, without counting duplicates anew. Shared notebook limits can refuse earlier; no promised capacity beyond them. Never evict. Offer notes download and explicitly confirmed removal of one readable selected visit. Stale/detached/route/explorer controls and speech cannot act in another notebook. Direct entry and fresh/existing explorer selection must bypass unrelated initialization, exposure, film and legacy normalizers; preserve all existing independent routes. No film is automatically played here.
+
+## Sources, overlap and verification
+
+Primary numeric support: [USGS Where is Earth's Water?](https://www.usgs.gov/water-science-school/science/where-earths-water), the Shiklomanov1993 estimate, and [NOAA's matching distribution table](https://www.noaa.gov/jetstream/max-what-cycle). The USGS direct page presented a robot check to this tool; the current primary indexed table and complete NOAA page were read. NOAA confirms2.5% fresh and the68.7/30.1 reservoir figures.97.5 is the model's complement of2.5, including all saline stores, not a claim that oceans alone are97.5. [CDC](https://www.cdc.gov/drinking-water/prevention/water-treatment-hiking-camping-traveling.html) supports the distinction between clear/natural water and confirmed drinking safety; no treatment instructions are used. Content/art/labels are original, with source data/limitations attributed. No historical/cultural/foreign-language scene is included.
+
+Jane `286300f822944b8c039d5ea8d483a6cb52759f51`: study LESSONS/license map for optional teaching, guided example and practice, no copied code/prose/mastery. Marble `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac`: complete selected water distribution/reservoir and graph/whole topics, direct edges and relevant research refreshed. Selected topic/edge/research files are private review evidence; dataset pins and licenses unchanged. `mt_LsY4-T2fU7` motivates constructing a graph and nested wholes; its broad drinkable/accessible wording is narrowed using primary sources. `mt_nRF_VRntrW` supplies reservoir recognition as a teaching bridge, not an entry gate. Bar/whole study informs labeled scales and shares. This is partial chart/data/science work; no pie-sector-angle construction, complete fraction topic, cryosphere/sea-level prediction, validated assessment or practical water-quality competence is claimed.
+
+Independent six-lens spec review precedes build. Source oracles independently verify four tables' exact integer sums/ratios,100/200 scaling, view/denominator distinctions, half-unit bounds, correct/wrong/missing/zero cases, all16 question keys/choices/feedback, first/latest/help timing, fulfillment for requested vs other view, frozen/retired sources and malformed siblings. Verify actual import/pretty report, refusal/no loss and foreign roots. Browser320/820: visual/text/scale/whole labels, native quantity inputs/tap controls, source/working view retention, graphs and questions in either order, corrected keeps/new visitors, consecutive edits/focus, support-before speech, refusal with visible pending input, import/export and separate explorers, no automatic film, old sources, malformed entries and affected science/notebook paths. Independent exact-head Claude clearance, expected-head merge, canonical deploy, tracked hosted byte equality and affected hosted journeys complete delivery.
+
+### Review folds: diagnostics, fulfillment and categories
+
+Graph check precedence is **missing → wrong total → wrong row → match**. A null quantity is unentered, distinct from an entered zero. The live partial sum is explicitly "entered so far" until all rows are entered; missing does not also produce a wrong-total verdict. With all rows entered, a total different from the source whole gets the total diagnostic first; if the total agrees but one or more rows differ, name those rows; otherwise match. The stored check keeps the actual draft, partial/complete sum and original primary diagnostic. These are deterministic integer comparisons against that visit's own frozen table.
+
+Fulfillment is an **immutable keep-time observation**, not a global current completion flag. Keep-before-answer saves a useful diagram with fulfilled=false; a later fitting answer does not rewrite it—Keep again to save a fulfilled version. A fulfilled keep remains fulfilled if a later working answer or bar changes, and is labeled an earlier result. Current readiness is derived only from the current requested view, bars and latest answered response for this visit's frozen request; it is displayed as ready to keep, not as a newly fulfilled visitor. A later skip leaves an earlier answered first/latest intact. Retained unreadable/misfiled responses cannot supply fulfillment; graph work and other visits stay open. Each keep freezes the response actually used and the relevant support observations with its own source.
+
+The cutaway explicitly separates saturated groundwater below the water table from soil moisture above it; the model follows the source table and counts soil moisture and ground ice in Other, never twice. This resolves the adversarial P3 without claiming every underground store is liquid or fresh.
+
+All six independent spec lenses are complete. Completeness, dependency, scope/overlap and firewall were CLEAR. The adversarial category-overlap P3 and two mechanizability P2s are folded above; a bounded independent follow-up cleared the diagnostic and fulfillment folds. The bounded specification is BUILD-READY; implementation and exact-head release gates remain required.
+
+
+Runtime folds: optional source-owned percent teaching defines parts out of100; older sources without it receive no new-wording fallback. Pending typed quantities stay visible on refused edits, keyboard Tab stays available, and an activity-owned guard runs before the host hash-change renderer to protect browser Back/forward/hash navigation; no navigation registry or new store is introduced. Historical table availability and unknown past support are displayed only as recorded, with later known requests separate. Unknown saved reservoir artwork falls back to its own picture description rather than a different current card image. A malformed latest response cannot fall back to a fitting first response to fulfill a new keep.
