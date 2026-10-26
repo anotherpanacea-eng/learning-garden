@@ -85,7 +85,7 @@ It fits the story better than most themes would: the parcel is a real mystery, t
 - **Pressure.** No timers, countdowns, "case closed" scores, bosses or locks. Clues are kept work under each activity's own rules, never a gate.
 - **Fiction and history.** Archive packs are real history. A case-file frame must not dress a real flood with real deaths as an adventure.
 
-If commissioned (phase 5), it needs its own narrative review against spec 120 §11 before any copy is written. A different universe or cast is a separate, much larger project and is out of scope.
+If commissioned (phase 5), it needs its own narrative review against spec 120 §11 before any copy is written. The owner expects a mystery frame to need text changes beyond the frame layer (O3), so that review also decides whether it needs authored story variants (O1). A different universe or cast is a separate, much larger project and is out of scope.
 
 ### 4.4 Styles considered and set aside
 
@@ -182,7 +182,7 @@ Each phase is its own bounded spec or PR with independent review, under owner pr
 
 | Phase | Finish line | Gate to start |
 | --- | --- | --- |
-| **P0 · This plan** | Spec 244, companion copy, roadmap entry | Owner answers O1 to O3 (§12); review |
+| **P0 · This plan** | Spec 244, companion copy, roadmap entry | Owner answered O1 to O3 on 2026-10-26 (§12); review |
 | **P1 · CR1 comparison** | `garden.style`, the Grown-up notes choice with preview, Field Journal tokens and frame copy on two surfaces: the Home parcel area (frame only; spec 120 text unchanged) and one café turn (guest arrival and thanks lines, supper eyebrow and progress line, receipt). Acceptance from the audience proposal: switch mid-order including the arithmetic stage, reload, explorer switch, export and import, keyboard, touch, 320 and 820 widths, read-aloud, reduced motion, synthetic before/after records showing no evidence writes | Bounded implementation spec reviewed; the café and Home strings involved have passed their Push C pass |
 | **P2 · Try it** | The owner watches real play at home and decides: continue, adjust, or stop. Nothing about who chose what goes on GitHub, and the game records nothing beyond the preference | P1 deployed |
 | **P3 · Field Journal across the shell** | One surface per PR: Home map and All places, Keeper's Pages, Post Office, Garden, Keeper's Desk chrome, then the rest of the Café. Each PR lists the frame strings it varies and the colors it tokenizes | Owner says continue after P2 |
@@ -210,13 +210,13 @@ Refreshed 2026-10-26: Jane `286300f822944b8c039d5ea8d483a6cb52759f51` (`LESSONS.
 
 ## 12. Owner decisions
 
-Work proceeds on the recommended option until the owner answers.
+Answered by the owner on 2026-10-26.
 
-| # | Question | Options | Recommended |
-| --- | --- | --- | --- |
-| O1 | Should story text (spec 120 scenes, pages, letters) ever differ by style? | (a) Never in phases 1 to 4; frame only. (b) Allow reviewed scene variants that keep §8.1's events and jokes | (a): keeps siblings on the same scene, avoids reveal leaks, halves story review |
-| O2 | Where is the style chosen? | (a) Grown-up notes with a child-readable preview. (b) Also a small switch the child can reach from Home | (a) for P1; reconsider after P2 |
-| O3 | What happens to Mystery & Adventure? | (a) Keep as a P5 candidate. (b) Drop it. (c) Build it instead of Field Journal | (a) |
+| # | Question | Decision |
+| --- | --- | --- |
+| O1 | Should story text (spec 120 scenes, pages, letters) ever differ by style? | **Not at first.** Phases 1 to 4 vary the frame only. Authored scene variants stay possible someday, through the route in §5.3 (amend spec 120, keep §8.1's events and jokes, same story review) |
+| O2 | Where is the style chosen? | **Grown-up notes with a child-readable preview** for phase 1, as §6 says. A child-reachable switch can be reconsidered after phase 2 |
+| O3 | What happens to Mystery & Adventure? | **Keep it as a later candidate** (phase 5). The owner expects it to need text changes, so its phase-5 review must also decide whether it needs authored story variants under O1 |
 
 ## 13. Acceptance for this planning increment
 
