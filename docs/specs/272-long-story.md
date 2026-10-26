@@ -93,12 +93,15 @@ longStory: {
   items: { [itemId]: { ver: itemVersionId, shown: [choiceId] | [cardId], pick: choiceId | [cardId] | { [cardId]: slotId } | null,
                        outcome: 'fit' | 'not-yet' | 'shown' | 'skipped', support: 0..3, at } },
   benches: {
-    close:  { ver, shown: [id], sort: { [cardId]: 'says' | 'does' | 'thinks' | 'others' }, taps: [wordId], at },
-    side:   { ver, shown: [id], trays: { [pairId]: { [cardId]: 'left' | 'right' | 'both' } }, at },
-    map:    { ver, shown: [id], links: { [lineId]: chapterId }, mole: { [wordId]: chapterId }, at },
-    threads:{ ver, shown: [id], tags: { [chapterId]: 'toad' | 'riverbank' }, taps: [wordId], at },
-    theme:  { ver, shown: [id], orders: { [threadId]: [momentId] }, at },
-    weigh:  { ver, shown: [id], sort: { [lineId]: 'change' | 'attention' | 'either' }, at }
+    // R = one evaluated response: { shown: [optionId], pick, out: 'fit' | 'not-yet' | 'either' }
+    //   shown: the options offered for it (trays, chapters, word ids, moments), in the order shown
+    // T = one tap task: { shown: [wordId], picks: { [wordId]: 'fit' | 'not-yet' } }
+    close:  { ver, shown: [id], sort: { [cardId]: R /* pick: 'says' | 'does' | 'thinks' | 'others' */ }, taps: { [taskId]: T }, at },
+    side:   { ver, shown: [id], trays: { [pairId]: { [cardId]: R /* pick: 'left' | 'right' | 'both' */ } }, at },
+    map:    { ver, shown: [id], links: { [lineId]: R /* pick: chapterId */ }, mole: { [wordId]: R /* pick: chapterId */ }, at },
+    threads:{ ver, shown: [id], tags: { [chapterId]: R /* pick: 'toad' | 'riverbank' */ }, taps: { [taskId]: T }, at },
+    theme:  { ver, shown: [id], orders: { [threadId]: R /* pick: [momentId], in placed order */ }, at },
+    weigh:  { ver, shown: [id], sort: { [lineId]: R /* pick: 'change' | 'attention' | 'eitherWay' */ }, at }
   },
   guide: { ver, book: bookId, thread: threadId,
            before: { [slot]: cardId }, after?: { [slot]: cardId }, strength: { [slot]: 'strong' | 'weak' },
@@ -106,7 +109,7 @@ longStory: {
 }
 ```
 
-Codes only: ids, ordered id lists and fixed outcome codes. Each kept item keeps its authored item-version id, the choice ids in the order shown, the selection and the kept outcome, so it restores without today's wording or key; each bench entry likewise keeps its version id and `shown`, the ids offered in the order shown, and its placements are checked only against its own `shown`. Validate only what the save holds against structural bounds (three choices; at most twelve chapter ids; `slot` is `begin`, `middle` or `end`; `before` and `after` at most three entries each; one limit); never require today's bench sizes, item lists, wording or answer key. A missing item reads as absent. Never recompute a kept outcome on load. `support` records the highest stuck-ladder step used, kept apart from the independent attempt and never merged. `before` is written once; a revision writes `after` beside it. No free text: the guide itself and "say why" are on paper or spoken, never stored. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the nook. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. No existing root is touched. No field holds anything about the child.
+Codes only: ids, ordered id lists and fixed outcome codes. Each kept item keeps its authored item-version id, the choice ids in the order shown, the selection and the kept outcome, so it restores without today's wording or key; each bench entry likewise keeps its version id and `shown`, the cards offered in the order shown, and every evaluated bench response (a tray, a join, a tag, an order, each tapped word) keeps its own `shown` where choices were offered, its pick and its kept outcome code: `fit` for the keyed placement, `not-yet` for another, and `either` when the line accepts more than one reading and the pick is one of them (Weigh the Evidence's three two-tray lines). Responses are restored with these kept codes, without the current answer key, and each pick is checked only against its own `shown`. The guide's picks are a plan, not evaluated, so they keep no outcome. Validate only what the save holds against structural bounds (three choices; bench `out` one of `fit`, `not-yet`, `either`, and a tap's code one of `fit`, `not-yet`; at most twelve chapter ids; `slot` is `begin`, `middle` or `end`; `before` and `after` at most three entries each; one limit); never require today's bench sizes, item lists, wording or answer key. A missing item reads as absent. Never recompute a kept outcome on load. `support` records the highest stuck-ladder step used, kept apart from the independent attempt and never merged. `before` is written once; a revision writes `after` beside it. No free text: the guide itself and "say why" are on paper or spoken, never stored. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the nook. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. No existing root is touched. No field holds anything about the child.
 
 ## Curriculum fit
 
@@ -167,6 +170,7 @@ From the **pinned** `curriculum/marble/dependencies.json`, hard edges only (twel
 - **Moral lint:** no line in scene 2, bench (f) or F7 says whether Toad changed.
 - Kept work reloads exactly. Browser at 320 and 820 px: the chapter map wraps to two rows of six; string joins have a tap-then-tap equivalent and a text list; targets at least 44 px.
 - Independent review (fresh context, 2026-10-25): re-fetched Gutenberg #289 and #113 and rechecked all 23 book cards word for word by script (`review272.py`), every quoted phrase in the three files, all twelve chapter titles and the chapter-card plots; recomputed targets (8, research null) and the twelve hard edges, positions A 8 / B 8 / C 8, never the single longest, word limits and em-dashes. Changed: two plot facts (the Rat is "too far to hear clearly"; "an altered Toad" follows the banquet, not the song) and their bench/item text; G5 put in book order, W11 shows the whole chapter-1 face, W7 adds a cue for fear, `[...]` added at four unfinished sentences and the one-block-continuous rule stated; distractors that were only unsupported replaced with ones the cards contradict (A1, B3, D2, D3, D4, F3) and cards added where feedback relied on unseen ones (B4, D1, E1, F6); bench (f) accepts two trays for three lines; twelve words or names glossed; bench entries keep `shown`; Dulce Domum, Methuen, Stokes, the serial months and RL.5.5 confirmed; Lantern Night placement raised as an owner ask.
+- **Codex review fix (2026-10-26):** the six bench records now keep an outcome code with each evaluated response (`fit`, `not-yet`, or `either` where Weigh the Evidence accepts two trays) and `shown` wherever choices were offered, restored without the current answer key; the weigh tray id `either` became `eitherWay` so it cannot be mistaken for the outcome code.
 
 ## Review asks
 

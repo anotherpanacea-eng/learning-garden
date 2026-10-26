@@ -2,12 +2,14 @@
 
 Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, after review. `{guide}` is never gendered. Pronouns: Pip he/him; Dot, Bramble, Nuria she/her; the baker he/him; the librarian they/them; Léon he/him; Hollis they/them (named only in scene 4 and after it, once page 3 is free). Sources: [audit](../source-audits/268-old-keepers-spellings.md). Nothing is scored, timed or locked.
 
-**Page rule:** scenes 1 to 3 and every bench except Pip's Copy use page 1's map labels (free since the end of Act I) or lines newly written for this pack, and say "the old Keeper". Scene 4, scene 5 and Pip's Copy read page 3 and open only after page 3 comes free at the end of Act III. In standalone play without that page, Pip's Copy is not offered and nothing else changes.
+**Page rule:** scenes 1 to 3 and every bench except Pip's Copy, deck 2, use lines newly written for this pack, and say "the old Keeper". Scene 4, scene 5 and Pip's Copy, deck 2, read page 3 and open only after page 3 comes free at the end of Act III. In standalone play without that page, deck 2 is not offered and nothing else changes.
+
+**Map rule:** the route is open from the start, so an explorer can reach the map before page 1 comes free at the end of Act I. Until page 1 is free, and in standalone play without it, every map line uses **the librarian's map of the valley**: a map the librarian drew themself, with the same eight labels. The lines marked *Before page 1* below are shown then. Only after page 1's reveal do the *After page 1* lines, which call it a tracing of the old Keeper's map, replace them.
 
 **Read-aloud rule:** spelling choices are shown, never read aloud, because homophones and silent letters sound alike. Scenes, cards and prompts have read-aloud.
 
 **Labels used throughout:**
-- **A story from Willowbank** marks the town, its people, the map tracing and every letter or copy in it (fiction).
+- **A story from Willowbank** marks the town, its people, both maps and every letter or copy in it (fiction).
 - **A true thing about language** marks real spelling patterns and real word histories.
 - **A made-up model** is not used: nothing here is a model.
 
@@ -16,8 +18,14 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 **Place title:** The Old Keeper's Spellings
 
 **First visit** (A story from Willowbank):
+
+*Before page 1:*
+> The library has a new table by the window. On it: a big map of the valley, a pot of pencils and a dictionary as thick as a loaf.
+
+*After page 1:*
 > The library has a new table by the window. On it: a big tracing of the old map, a pot of pencils and a dictionary as thick as a loaf.
->
+
+*Then, in both:*
 > "Spelling," says the librarian, "is where old words keep their luggage."
 
 **What you already know (recall card):** You've added endings like -ous and -ation. You've met there, their and they're. Here the words get longer and older.
@@ -28,14 +36,27 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 
 ### Scene 1. The stained labels (Act III ch. 4, letters up and down the river)
 
-**Hook (A story from Willowbank):** Nuria asked what the valley looked like long ago. The librarian traces the old Keeper's map to send her. Some labels are stained.
+**Hook (A story from Willowbank):**
+- *Before page 1:* Nuria asked what the valley looks like. The librarian draws a map of the valley to send her. Some labels get stained.
+- *After page 1:* Nuria asked what the valley looked like long ago. The librarian traces the old Keeper's map to send her. Some labels are stained.
 
 **Short:**
+
+*Before page 1:*
+> The librarian draws a map of the valley for Nuria. Water has stained some labels. The missing letters are ones you can't hear.
+
+*After page 1:*
 > The librarian traces the old map for Nuria. Water has stained some labels. The missing letters are ones you can't hear.
 
-**Longer:**
+**Longer** (only the first paragraph differs):
+
+*Before page 1:*
+> The librarian draws a map of the valley on thin paper, label by label. "Nuria asked what our valley looks like," they say. "So she gets the whole thing." Then the teapot tips over.
+
+*After page 1:*
 > The librarian copies the old Keeper's map onto thin paper, label by label. "Nuria asked what our valley looked like before," they say. "So she gets the whole thing."
->
+
+*Then, in both:*
 > Some labels have stains. Hi▢▢ Ford. ▢noll Wood. The I▢land.
 >
 > Pip squints. "The water took the letters nobody says. That's suspicious."
@@ -53,7 +74,7 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 **Keeper's note (A true thing about language):**
 > Island was once written iland. Writers added an s about 500 years ago, because they thought it came from isle. It doesn't. The two words only look like family.
 
-**Map label proposal (for the spec 120 owner):** High Ford · Knoll Wood · the Writing Stone · Gnat Corner · Lamb Fold · Thistle Bank · the Island · the Sponge. Page 1's text names only the high ford, the Sponge, the mill and the bridge road; these labels add to its drawing and change none of its words. If the owner declines, the tracing is headed *The librarian's map of the valley* instead, with the same names, and scene 1's hook and first line say "draws a map of the valley" in place of "traces the old Keeper's map".
+**Map labels:** High Ford · Knoll Wood · the Writing Stone · Gnat Corner · Lamb Fold · Thistle Bank · the Island · the Sponge. They are the librarian's own labels, written for this pack, so the librarian's map of the valley needs nothing from any page. **Proposal (for the spec 120 owner):** after page 1 is free, the same labels on page 1's drawn map. Page 1's text names only the high ford, the Sponge, the mill and the bridge road; these labels add to its drawing and change none of its words. If the owner declines, the *Before page 1* lines stay in use for good.
 
 ### Scene 2. A letter to Vadoalto's library (Act III ch. 4)
 
@@ -63,7 +84,7 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 > The librarian writes a letter full of long words. You check the endings before Dot puts it in the post bag.
 
 **Longer:**
-> "Dear friends upstream," the librarian reads aloud. "We have a precious old map. It is not official, but it is essential to our town."
+> "Dear friends upstream," the librarian reads aloud. "We have a precious map of our valley. It is not official, but it is essential to our town."
 >
 > Dot lands on the letter. "Endings first. Then the post bag."
 >
@@ -77,21 +98,21 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 
 ### Scene 3. Pip's postcard to Léon (Act III ch. 4)
 
-**Hook:** Pip writes a postcard to Léon at Les Saules. He writes fast, by ear. The words sound right. Some are not.
+**Hook:** Pip writes a postcard to Léon at Les Saules. He writes fast. Some words look right, or sound nearly right. They are not.
 
 **Short:**
-> Pip writes to Léon by ear. Some words sound right but are spelled wrong. Words that sound alike need meaning to choose.
+> Pip writes to Léon fast. Some words are mixed up with words that sound alike, or nearly alike. Meaning tells you which to choose.
 
 **Longer:**
 > Pip's postcard says: *Dear Léon, the river is high. Dot gave me some advise: write small. The rain had a big affect on the apples. Yesterday the baker lead us to the mill.*
 >
-> "Every word sounds right," says Pip.
+> "It all sounds right in my head," says Pip.
 >
-> "Sounds right is half of it," says Dot. "Advice is the thing I gave you. Advise is what I do."
+> "Say advice and advise out loud," says Dot. "One ends with a hiss. One ends with a buzz. Advice is the thing I gave you. Advise is what I do."
 >
-> Pip looks at the card. "So which ones are wrong?"
+> Pip says them both. "Huh. So which other ones are wrong?"
 >
-> "Read it for meaning," says {guide}. "Not for sound."
+> "Read it for meaning," says {guide}. "Not just for sound."
 
 ### Scene 4. Pip copies page 3 (Act IV ch. 1; opens only after page 3 is free)
 
@@ -128,7 +149,7 @@ Companion to [spec 268](../specs/268-old-keepers-spellings.md). Use as written, 
 **Longer:**
 > "Catchment. Embankment. Permeable." The librarian writes each word on a card. "If the town is going to argue about floods, it should spell them properly."
 >
-> "Permeable means water can soak through," says {guide}. "Like the Sponge on the old map."
+> "Permeable means water can soak through," says {guide}. "Like the Sponge on the map."
 >
 > "Then why is this one spelled *permiable*?" asks Pip.
 >
@@ -226,8 +247,8 @@ Worked example: *Refer.*
 2. So double the r: referring.
 3. Clap REF-er-ence. The beat moved, so one r.
 
-**Card 12. Hyphens that change the meaning**
-> A hyphen can keep two meanings apart. Recover means get well. Re-cover means cover again. Resign means leave a job. Re-sign means sign again.
+**Card 12. Hyphens that keep meanings clear**
+> A hyphen can keep two meanings apart. Recover usually means get well or get back. Re-cover means cover again. Resign usually means leave a job. Re-sign means sign again.
 
 Worked example: *Hob's hens.*
 1. A coop is a hen house.
@@ -242,12 +263,12 @@ Worked example: *Receipt.*
 2. So write ei: rec-ei-pt.
 3. The p is silent too. Writers added it.
 
-**Card 14. Homophones need meaning**
-> Homophones sound the same but have different spellings and meanings. Need and knead. Ways and weighs. Read for meaning, then choose.
+**Card 14. Homophones, and pairs that get mixed up**
+> Homophones sound the same but differ in spelling and meaning: need and knead. Some mixed-up pairs sound a little different: advice, advise. Read for meaning, then choose.
 
 Worked example: *Advice or advise?*
-1. Advice is a noun, a thing you give.
-2. Advise is a verb, an action you do.
+1. Say them. Advice ends with an s sound. Advise ends with a z sound.
+2. Advice, with c, is a noun: a thing you give. Advise, with s, is a verb.
 3. "Dot gave good advice." A thing, so advice.
 
 **Card 15. One letter string, many sounds (ough)**
@@ -270,7 +291,7 @@ Worked example: *Photosynthesis.*
 
 ### (a) The Stained Map (Seedling, Sapling; suggested first slice)
 
-**Header:** The water took some letters. Restore each label. Then sort the silent letters.
+**Header:** The water took some letters from the map. Restore each label. Then sort the silent letters.
 
 **Letter tiles (the same row, in this order, for every label):** gh · k · w · g · b · t · s · nothing missing. A tile that starts a label shows as a capital.
 
@@ -282,12 +303,12 @@ Worked example: *Photosynthesis.*
 - Lam▢ Fold → b. Note: *People once said the b in lamb.*
 - This▢le Bank → t. Note: *A silent t, as in castle and listen.*
 - The I▢land → s. Note: *Once written iland. Writers added the s.*
-- The Sponge → nothing missing. Note: *Every letter here is said.*
+- The Sponge → nothing missing. Note: *No stain here. No letters were stained out or lost.*
 
 **Restore feedback:**
 - Right letter: Restored. That letter is written, not said.
 - No letter chosen for a stained label: The stain hides a letter. Which one isn't heard?
-- A letter for the Sponge: Nothing is missing here. Every letter is said.
+- A letter for the Sponge: Nothing is missing here. No letters were stained out or lost.
 
 **Once said, or added?** Sort by the note on each card: *Once said* or *Added by writers*.
 - Knoll, write, gnat, lamb, high: Once said.
@@ -309,7 +330,7 @@ Worked example: *Photosynthesis.*
 **The letter (newly written; endings to choose shown in brackets in this spec only, as gaps on screen):**
 > Dear friends upstream,
 >
-> We have a [precious] old map of our valley. It is not [official], but it is [essential] to us. A [significant] part of it shows a marsh. Is it [possible] that you have a map like it? We would be grateful. We are being [cautious] with ours, and very [comfortable] with long letters.
+> We have a [precious] map of our valley. It is not [official], but it is [essential] to us. A [significant] part of it shows a marsh. Is it [possible] that you have a map like it? We would be grateful. We are being [cautious] with ours, and very [comfortable] with long letters.
 >
 > The Willowbank librarian
 
@@ -337,7 +358,7 @@ Worked example: *Photosynthesis.*
 
 **Look-alike cards (A true thing about language):** offer and suffer end in -fer too, but the strong beat is on the first part. Offering, suffering: one r.
 
-**Hyphen pairs:** recover (get well, or get back) / re-cover (cover again) · resign (leave a job) / re-sign (sign again) · coop (a hen house) / co-op (a shop its members own). Tap the meaning for each.
+**Hyphen pairs:** recover (usually get well, or get back) / re-cover (cover again) · resign (usually leave a job) / re-sign (sign again) · coop (a hen house) / co-op (a shop its members own). Tap the meaning each spelling shows most clearly.
 
 **ei after c:** receive · ceiling · deceive · receipt. Odd ones: seize, protein.
 
@@ -345,7 +366,7 @@ Worked example: *Photosynthesis.*
 
 ### (d) Pip's Copy (Seedling, Sapling)
 
-**Deck 1, the postcard (open any time; A story from Willowbank):** three slips in Pip's postcard to Léon (scene 3), and one word to leave alone.
+**Deck 1, the postcard (open any time; A story from Willowbank):** three slips in Pip's postcard to Léon (scene 3), and one word to leave alone. (Note for builders: led is a true homophone of lead, the metal; affect and effect sound alike for many US speakers, not all; advise and advice sound different, a z sound and an s sound, so they are taught as a mixed-up pair.)
 - advise → advice: *a thing she gave, a noun*. Fixes offered: advice ✔ · advize · advise (leave it)
 - affect → effect: *a big ___ is a thing, a noun*. Fixes offered: affect (leave it) · effect ✔ · efect
 - lead → led: *yesterday, so past*. Fixes offered: leed · lead (leave it) · led ✔
@@ -361,11 +382,18 @@ Slips and fixes: Their → There · Weighs → Ways · rode → road · hi → h
 Fixes offered, in this order (✔ right): They're · There ✔ · Their (leave it) | Ways ✔ · Way's · Weighs (leave it) | rowed · rode (leave it) · road ✔ | hie · high ✔ · hi (leave it) | need ✔ · kneed · knead (leave it) | wich · witch (leave it) · which ✔ | where ✔ · ware · wear (leave it) | two · too ✔ · to (leave it). Right fixes sit A 3 / B 3 / C 2.
 
 **Fix feedback (both decks and the glossary card; it never names Hollis):**
-- Right fix: Fixed. Same sound, the meaning the writer wanted.
+- Right fix: Fixed. That spelling has the meaning the writer wanted.
 - Leaving high alone (deck 1): Right. That word was fine all along.
-- A different homophone: That sounds right too. Which one means what the sentence means?
+- A different homophone (hi, hie, They're, Way's, rowed, kneed, witch, ware, two): That sounds right too. Which one means what the sentence means?
 - Nothing changed: Read it for meaning. Does this word mean what the sentence means?
-- A spelling that isn't a word (advize, efect, leed, wich, permeible): That one isn't a word. Look at the letters again.
+
+**Fix feedback for other spellings** (none is called "not a word": advize is an old spelling of advise, leed an old Scots spelling of lead, wich another word in dictionaries. Each line says what this sentence needs):
+- advize (deck 1): Dot gave a thing, so the noun. Today it is spelled advice, with c.
+- efect (deck 1): A big ___ needs the noun effect. Today it is spelled with two f's.
+- leed (deck 1): Yesterday points to the past. The past of lead is spelled led.
+- wich (deck 2): This word points back to the water's ways. Today it is spelled which, with wh.
+- permeible (glossary): Permeation is in its family, and that points to -able: permeable.
+- efect (glossary): "An ___ on" needs the noun effect. Today it is spelled with two f's.
 
 **Hollis's handwriting card (A story from Willowbank):** Hollis wrote high with gh and which with wh. Old letters, still in every dictionary.
 
@@ -408,7 +436,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **A1 (Seedling, guided).** Steps shown first: 1. The stain hides two letters. 2. Say high. 3. Which two letters aren't heard?
 - Prompt: The stain hides two letters: Hi▢▢ Ford. Which two?
 - Choices: gh ✔ · ge (`spell-as-heard`) · No letters: it says Hi Ford (`silent-letter-dropped`)
-- Feedback: ge: Hige isn't a word. Think of night and light. · No letters: The stain hides two letters. Something is missing.
+- Feedback: ge: High ends like night and light. Which two letters do they share? · No letters: The stain hides two letters. Something is missing.
 - Hint: Night and light end the same way.
 - Explanation: High keeps gh. It was once a sound, like the end of loch.
 
@@ -473,7 +501,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **B5.**
 - Prompt: Depend is a whole word. Which spelling is right?
 - Choices: dependable ✔ · dependible (`ible-after-whole-word`) · dependeble (`spell-as-heard`)
-- Feedback: dependible: A whole word before the ending usually takes -able. · dependeble: The ending is -able or -ible, never -eble.
+- Feedback: dependible: A whole word before the ending usually takes -able. · dependeble: This ending is spelled -able or -ible. Depend is whole, so -able.
 - Hint: Cover the ending. Is a whole word left?
 - Explanation: Depend is whole, so -able: dependable.
 
@@ -501,11 +529,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: The beat moved, so one r: preference.
 
 **C3.** Dot's chair has torn cloth. She will put new cloth over it.
-- Prompt: Which word means "cover again"?
-- Choices: recover (`hyphen-never-matters`) · re cover (`split-word`) · re-cover ✔
-- Feedback: recover: Recover means get well, or get back. · re cover: The prefix joins its word. Use a hyphen here.
-- Hint: Which one keeps the word cover whole?
-- Explanation: Re-cover means cover again. The hyphen keeps it apart from recover.
+- Prompt: Which spelling makes "cover again" clearest?
+- Choices: recover (`hyphen-adds-nothing`) · re cover (`split-word`) · re-cover ✔
+- Feedback: recover: Dictionaries list recover for this too, but readers may think get back. The hyphen is clearer. · re cover: The prefix joins its word. A hyphen joins it and keeps it clear.
+- Hint: Which spelling can't be read as get back?
+- Explanation: Recover can mean cover again, but re-cover avoids mixing it up with get back.
 
 **C4.**
 - Prompt: After c, the sound is ee. Which spelling is right?
@@ -521,7 +549,9 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Hint: Say each word. Listen for ee, and for the ough sound.
 - Explanation: The ei rule is for an ee sound after c. Ough has many sounds.
 
-### Set D. Homophones (Seedling, Sapling)
+### Set D. Homophones and mixed-up pairs (Seedling, Sapling)
+
+D1, D4 and D5 are homophones (D5 for speakers who say which and witch alike). D2's advice and advise sound different (s, z), and D3's affect and effect sound alike only for some speakers; both are pairs that get mixed up.
 
 **D1 (Seedling, guided).** Steps shown first: 1. Pressing and folding dough is kneading. 2. Kneading has a silent k. 3. Choose the one with k.
 - Prompt: The baker ___ the dough by pressing and folding it.
@@ -533,9 +563,9 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **D2.**
 - Prompt: Dot gave Pip some ___: "Write small."
 - Choices: advice ✔ · advise (`noun-verb-swap`) · advize (`spell-as-heard`)
-- Feedback: advise: Advise is the action. Some ___ needs the thing. · advize: Neither word is spelled with z.
-- Hint: "Some ___" names a thing. Thing words end in -ice.
-- Explanation: Advice is the noun. Advise is the verb.
+- Feedback: advise: Advise, with s, is the action. Some ___ needs the thing. · advize: Some ___ needs the thing. Today that noun is spelled advice, with c.
+- Hint: "Some ___" names a thing. Say it: does it end with an s sound?
+- Explanation: Advice, with c and an s sound, is the noun. Advise, with a z sound, is the verb.
 
 **D3.**
 - Prompt: The rain had a big ___ on the apples.
@@ -547,7 +577,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **D4.**
 - Prompt: Yesterday, Nuria ___ the boats down the river.
 - Choices: led ✔ · lead (`lead-for-led`) · leaded (`add-ed-always`)
-- Feedback: lead: Yesterday is past. The past of lead is led. · leaded: The past of lead is led, with no -ed.
+- Feedback: lead: Yesterday is past. The past of lead is led. · leaded: Here lead means guide. Its past is led, with no -ed.
 - Hint: Yesterday means the past. What is the past of lead?
 - Explanation: Led is the past of lead. It sounds like the metal lead.
 
@@ -608,7 +638,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Prompt: Find three slips on the glossary card. Fix each one.
 - Answer: wich → which; permiable → permeable; affect → effect ("It has an ___ on" needs a noun).
 - Feedback for affect left unchanged (`affect-effect-swap`): "An ___" names a thing. The noun is usually effect.
-- Hint: Check one homophone, one silent letter and one ending.
+- Hint: Check one silent letter, one ending and one mixed-up pair.
 - Explanation: Three rules found three slips: wh, the -ation family, and effect as the noun.
 
 ## "I'm stuck" ladder
@@ -619,7 +649,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Silent-letter items: "Try this one first: knee. You say nee. The k is silent. Now find yours."
 - Ending items: "Try this one first: grace. It ends in -ce, so gracious. Now look at your root."
 - Beat items: "Try this one first: clap re-FER. Two beats, strong on fer. Now clap yours."
-- Homophone items: "Try this one first: I ate eight grapes. Ate is the action. Eight is the number. Now read yours for meaning."
+- Homophone and mixed-up-pair items: "Try this one first: I ate eight grapes. Ate is the action. Eight is the number. Now read yours for meaning."
 - Word-list items: "Try this one first: family, then familiar. The family word shows the a. Now find yours."
 - Long-word items: "Try this one first: sun + flower. Spell each part, then join. Now split yours."
 
@@ -656,10 +686,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 ## Grown-up panel
 
-**What this teaches:** Years 5 and 6 spelling patterns from England's national curriculum, written in US spelling: silent letters and their histories, -cious and -tious, -cial and -tial, -ant and -ent, -able and -ible with their -ably and -ibly forms, doubling after -fer, hyphens that keep meanings apart, ei after c, ough, homophones, words from the Years 5 and 6 list sorted by pattern, and, at Keeper's Desk, applying all of these to long subject words.
+**What this teaches:** Years 5 and 6 spelling patterns from England's national curriculum, written in US spelling: silent letters and their histories, -cious and -tious, -cial and -tial, -ant and -ent, -able and -ible with their -ably and -ibly forms, doubling after -fer, hyphens that keep meanings apart, ei after c, ough, homophones and often-confused pairs (advice and advise sound different, so they are taught as a mixed-up pair, not as homophones), words from the Years 5 and 6 list sorted by pattern, and, at Keeper's Desk, applying all of these to long subject words.
 
 **US and UK spelling:** the game uses US spelling. The English curriculum teaches *practice* (noun) and *practise* (verb), and *licence* and *license*, in British spelling; in US spelling *practice* and *license* serve as noun and verb, so this pack never asks children to choose between them. *Advice* and *advise*, *device* and *devise* work the same in both. British spelling hyphenates *co-ordinate*, *co-operate* and *re-enter*; US dictionaries usually close them (*coordinate*, *cooperate*, *reenter*), so the pack keys hyphens only where meaning changes. The statutory list's *criticise*, *marvellous*, *neighbour*, *programme* and *recognise* appear here as *criticize*, *marvelous*, *neighbor*, *program* and *recognize*, and the curriculum's *plough* appears as *bough*.
 
-**About sounds:** spelling choices are never read aloud. Stress is clapped with you, never played or recorded. Accents differ: for many speakers *which* and *witch* sound alike, and some still say the h.
+**About sounds:** spelling choices are never read aloud. Stress is clapped with you, never played or recorded. Accents differ: for many speakers *which* and *witch* sound alike, and some still say the h. *Affect* and *effect* sound alike for many US speakers but not all.
 
-**What it does not claim:** rules here "usually" work, and the odd ones are named. Willowbank, Hollis, the map tracing, the librarian's letter, Pip's postcard and the glossary card are invented. Word histories come from dictionaries, named in the source audit.
+**What it does not claim:** rules here "usually" work, and the odd ones are named. Willowbank, Hollis, the librarian's map of the valley, the tracing of the old map, the librarian's letter, Pip's postcard and the glossary card are invented. Word histories come from dictionaries, named in the source audit.

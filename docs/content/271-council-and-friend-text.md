@@ -219,11 +219,11 @@ Worked example: *Dot looks at her two letters.*
 **Header (A story from Willowbank):** Same news, two readers. Tap a word tile for each gap in each letter.
 
 **The letter to Nuria (gaps marked [1] to [4]):**
-> [1: Hi Nuria! · Dear Members of the Council,]
+> [1: Dear Members of the Council, · Hi Nuria!]
 >
 > The reed seeds got here fine. [2: Thanks a million! · We are most grateful.] Pip tried one. He says not tasty.
 >
-> Could you [3: find out · discover] if your council will send the flood post readings from the storm? We want to see when the water got to you.
+> Could you [3: discover · find out] if your council will send the flood post readings from the storm? We want to see when the water got to you.
 >
 > [4: Write soon! · Sincerely,]
 >
@@ -234,13 +234,15 @@ Worked example: *Dot looks at her two letters.*
 >
 > Thank you for the reed seeds, which have arrived safely.
 >
-> We [2: request · ask for] a copy of your flood post readings from the night of the storm. We hope to [3: discover · find out] when the brook rose in Vadoalto and when it reached us.
+> We [2: ask for · request] a copy of your flood post readings from the night of the storm. We hope to [3: discover · find out] when the brook rose in Vadoalto and when it reached us.
 >
-> Our courier will call at your town hall. Should the courier [4: enter · go in] by the front door?
+> Our courier will call at your town hall. Should the courier [4: go in · enter] by the front door?
 >
 > Sincerely,
 >
 > Dot, Postmaster of Willowbank
+
+**Tile order (for builders):** each gap shows its two tiles in the order written above, every time. The fitting tile is first in four gaps (Nuria's [2] and [4], the council's [1] and [3]) and second in four (Nuria's [1] and [3], the council's [2] and [4]). Gaps [1] and [3] show the same pair in the same order in both letters; only the reader changes which tile fits. The formal tile is first in four gaps, and the fitting tile is longer, shorter or the same length as the other across the eight, so neither place, tone nor length marks it.
 
 **Tile feedback (any gap):**
 - A friendly tile in the council letter: That's friendly and clear. The council may expect a more formal word here.
