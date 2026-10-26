@@ -255,7 +255,7 @@ No problem item asks for this choice.
 
 **Fold it up header:** Tap the letters that drop out. Watch the words fold up.
 
-**Pairs** (for cannot, either n may be tapped): do not -> don't · I am -> I'm · we will -> we'll · it is -> it's · did not -> didn't · she will -> she'll · cannot -> can't · is not -> isn't
+**Pairs** (for cannot, the second n and the o drop out): do not -> don't · I am -> I'm · we will -> we'll · it is -> it's · did not -> didn't · she will -> she'll · cannot -> can't · is not -> isn't
 
 **Fold feedback:**
 - A letter that stays: That letter stays in the short word. Try another.

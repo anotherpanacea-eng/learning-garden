@@ -92,11 +92,12 @@ wordStall: {
   labels: { tried: { [wordId]: pictureId }, built: { [wordId]: { kind: tileId, feature: [tileId] } }, at },
   signs: { [signId]: wordId, at },
   thesaurus: { meaning: { [sentenceId]: meaningNo }, word: { [sentenceId]: wordId }, at },
+  // each bench object above also holds shown: [id], the ids offered in shown order
   items: { [itemId]: { order: [choiceId], picks: [choiceId], outcome: 'fit' | 'shown' | 'skipped', supported: bool, at } }
 }
 ```
 
-Codes only; no free text ("say why" is spoken). A ladder stores rungs as lists so a shared rung is kept as the child left it. Validate ids (string pattern), counts (structural bounds, for example at most 64 entries per map) and outcomes (the enums above); a save may agree with itself, but is never checked against today's card lists, answer key or wording, and a missing card or item reads as absent. Kept results are never recomputed on load. Support is the separate `supported` flag per kept item, never merged with an independent attempt. A kept item's choice order is stored and replayed. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad entry never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. Spec 34's `words` root is untouched. No field holds anything about the child.
+Codes only; no free text ("say why" is spoken). Every bench entry also keeps `shown`, the card, tile or choice ids it offered in the order shown, so a resumed bench keeps its choices and order without today's content (AGENTS.md). A ladder stores rungs as lists so a shared rung is kept as the child left it. Validate ids (string pattern), counts (structural bounds, for example at most 64 entries per map) and outcomes (the enums above); a save may agree with itself, but is never checked against today's card lists, answer key or wording, and a missing card or item reads as absent. Kept results are never recomputed on load. Support is the separate `supported` flag per kept item, never merged with an independent attempt. A kept item's choice order is stored and replayed. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad entry never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. Spec 34's `words` root is untouched. No field holds anything about the child.
 
 ## Curriculum fit
 

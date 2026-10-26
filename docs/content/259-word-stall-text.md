@@ -416,10 +416,10 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Hot, warm, cool, cold. Warm is a step between.
 
 **A6 (Sapling).**
-- Prompt: This box is *light*. What is the opposite here?
+- Prompt: This box is *light*. Pip lifts it with one paw. What's the opposite?
 - Choices: Dark (`opposite-ignores-meaning`) · Bright (`synonym-for-opposite`) · Heavy ✔
-- Feedback: Dark: That's the opposite of a light room. Boxes are light or heavy. · Bright: Bright is close to light, not opposite.
-- Hint: Is this light about color, or about lifting?
+- Feedback: Dark: That's light as in color. Pip's paw tells us it's about lifting. · Bright: Bright is close to light, not opposite.
+- Hint: Pip lifts it easily. Is this light about color, or weight?
 - Explanation: A light box is easy to lift. Its opposite is heavy.
 
 ### Set B. Asking about and using new words (Sprout, Seedling)
@@ -551,8 +551,8 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 
 **E4 (Keeper's Desk).**
 - Prompt: *A thin line of paint ran slowly down the sign.* Which word fits?
-- Choices: poured (`stronger-is-better`) · trickled ✔ · streamed (`stronger-is-better`)
-- Feedback: Poured: Pouring is a lot. This is a thin line. · Streamed: A stream is steady and full.
+- Choices: poured (`stronger-is-better`) · trickled ✔ · cascaded (`stronger-is-better`)
+- Feedback: Poured: Pouring is a lot. This is a thin line. · Cascaded: A cascade tumbles fast, like a waterfall. This is slow.
 - Hint: How much paint is it?
 - Explanation: A thin, slow line trickles. The thesaurus words are close, not the same.
 
