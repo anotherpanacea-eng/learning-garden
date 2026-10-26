@@ -483,11 +483,11 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 - Explanation: Huge and enormous are too close to rank. Either order fits on a shared rung.
 
 **C5 (Sapling).**
-- Prompt: The clothes on the line were dry. After a little rain, Pip feels that they are only slightly wet. No water is dripping from them. Which word fits the clothes now?
+- Prompt: The clothes were dry. Now they feel slightly wet, without drips. Which word fits?
 - Choices: Soaked (`stronger-is-better`) · Dripping (`stronger-is-better`) · Damp ✔
-- Feedback: Soaked: Soaked means thoroughly wet. Pip feels only slight wetness. · Dripping: The story says no water is dripping from the clothes.
-- Hint: Use what Pip notices about the clothes, rather than guessing from how long it rained.
-- Explanation: Damp means slightly wet. Choose the shade that matches the observed clothes; the time or amount of rain alone would not establish their wetness.
+- Feedback: Soaked: Soaked means thoroughly wet. These clothes feel only slightly wet. · Dripping: The story says no water is dripping from the clothes.
+- Hint: Use the wetness described. A stronger word is not always better.
+- Explanation: Damp means slightly wet. The clothes are only a little wet, with no drips. Match the observation, not rainfall.
 
 **C6 (Seedling, which walk).** Tap the walking word for each sentence.
 - Sentences: Pip ___ past the sleeping cat. · The band ___ through the fair, all in step.
