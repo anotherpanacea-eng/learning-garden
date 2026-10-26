@@ -504,7 +504,7 @@ Every item has the "I'm stuck" ladder. Choices appear in the order written; ✔ 
 **D3 (Sapling; after page 4 comes free).**
 - Records on the desk (shown first, A story from Willowbank): **The miller's rain book**, kept by her family for seventy years: "That storm night had the most rain of any night in this book." **The town's market book**: "Orchard apples sold at market every year it lists."
 - Prompt: Which sentence has no record on the desk to check it?
-- Choices: "The storm brought more rain than any night in the miller's seventy-year book." (`checked-seen-as-unchecked`) · "Orchard apples sold at market every year the market book lists." (`checked-seen-as-unchecked`) · "No marsh could have soaked up all that water." ✔
+- Choices: "The storm brought more rain than any other night listed over seventy years." (`checked-seen-as-unchecked`) · "Orchard apples sold at market in every listed year." (`checked-seen-as-unchecked`) · "No marsh could have soaked up all that water." ✔
 - Feedback: More rain: The rain book backs this limited comparison. · Orchard: The market book records sales in every listed year.
 - Hint: Match each sentence to a record. Which one has none?
 - Explanation: The supplied records describe rain and apples. They do not measure what a marsh could have held.
