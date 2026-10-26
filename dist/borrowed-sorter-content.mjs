@@ -75,7 +75,9 @@ export function createSorterSource(serial = 1) {
     option('size', 'Parcel size', 'This week has large parcels for both Town and Hill, so size cannot distinguish them.'),
     option('wrap', 'Wrapping colour', 'Brown parcels go to both destinations. Wrap cannot distinguish those parcels.'),
     option('road', 'The road on the label', 'Yes. In these invented tables, valley road corresponds to Town and hill track to Hill farms. This does not cover every possible future label.')
-  ], 'Road distinguishes these destinations in the supplied data. A human chose whether the model could use that feature.', traceHint, traceExample);
+  ], 'Road distinguishes these destinations in the supplied data. A human chose whether the model could use that feature.',
+    'Compare the actual destinations in the tables. Does the same size or wrapping occur at both places? Which feature separates them here?',
+    'Different labelled set: if both a red packet and a blue packet are for the same street, colour alone does not tell a sorter which street to use. Look for the feature that distinguishes the actual destinations.');
   for (const [id, prompt, key, denominator, feedback, p] of [
     ['4a-hill', 'More examples profile: size+wrap, plus ten Hill examples. Of this week’s 10 Hill parcels, how many are correct?', 0, 10, 'Hill: 0/10. Small brown still votes 12 Town to 8 Hill; large brown votes 8 Town to 6 Hill.', extra],
     ['4a-overall', 'More examples profile: size+wrap, plus ten Hill examples. How many of this week’s 40 parcels are correct overall?', 30, 40, 'Overall: 30/40, or 75%. Adding these examples does not fix the ignored-road problem.', extra],
@@ -85,7 +87,7 @@ export function createSorterSource(serial = 1) {
     ['4c-hill', 'All-features profile, last year’s examples: how many of this week’s 10 Hill parcels are correct?', 4, 10, 'Hill: 4/10, or 40%. The four small Hill parcels match examples; the six large Hill parcels fall back to Town.', all]
   ]) number(id, 3, prompt, key, denominator, feedback, fixHint, fixExample, p);
   choice('4d', 3, 'Why does baseline all-features do worse here than baseline road-only?', 'fallback', [
-    option('always', 'Adding features always makes models worse.', 'Not always. In this corpus, adding size splits Hill examples into a supported small group and an unsupported large group.'),
+    option('always', 'Adding features always makes models worse.', 'Not always. In this corpus, adding size splits Hill parcels into a supported small group and an unsupported large group.'),
     option('broken', 'The road value breaks when size is selected.', 'The road value has not changed. Exact matching now requires size too.'),
     option('fallback', 'No large Hill example matches all features, so fallback votes Town.', 'Yes. More detailed matching can create an empty matching group.')
   ], 'All-features requires a large, brown, hill-track example. None exists in baseline, so its fallback uses the whole corpus’s Town majority.', fixHint, fixExample, all);

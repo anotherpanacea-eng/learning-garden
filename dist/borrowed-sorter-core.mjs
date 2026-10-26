@@ -173,13 +173,36 @@ function renderedAdvice(source, plan) {
   }
   return {renderedParts, supportedParts};
 }
+function summaryResult(result) {
+  return {batch:result.batch, total:result.total, correct:result.correct,
+    undecided:result.undecided, percent:result.percent, groups:clone(result.groups)};
+}
+// Advice keeps aggregate evidence. Detailed rows remain in the original run.
+export function validSorterSummary(record, keptSource) {
+  try {
+    if (!object(record) || record.summary !== true || !id(record.sourceId) || !strings(record.helpBefore)) return false;
+    const source = own(record, 'source') ? record.source : keptSource;
+    if (!validSorterSource(source) || source.id !== record.sourceId || !validProfile(source, record) ||
+        !object(record.result) || !batches.includes(record.result.batch)) return false;
+    return matches(record.result, summaryResult(evaluate(source, record.features, record.dataset, record.result.batch)));
+  } catch { return false; }
+}
+function summarizeRun(run, keptSource) {
+  const record = {summary:true, sourceId:run.source.id, features:clone(run.features), dataset:run.dataset,
+    result:summaryResult(run.result), helpBefore:clone(run.helpBefore)};
+  // Even a same-id source may hold different frozen wording or tables.
+  if (JSON.stringify(run.source) !== JSON.stringify(keptSource)) record.source = clone(run.source);
+  return record;
+}
 export function validSorterKeep(record) {
   try {
     if (!object(record) || !validSorterSource(record.source) || !object(record.plan) || !strings(record.helpBefore) || !list(record.runs, 24)) return false;
     const advice = renderedAdvice(record.source, record.plan);
     return matches(record.renderedParts, advice.renderedParts) && matches(record.supportedParts, advice.supportedParts) &&
-      record.runs.every(run => object(run) && validSorterSource(run.source) && validProfile(run.source, run) &&
-        (!own(run, 'helpBefore') || strings(run.helpBefore)) && object(run.result) && batches.includes(run.result.batch) && matches(run.result, evaluate(run.source, run.features, run.dataset, run.result.batch)));
+      record.runs.every(run => run?.summary === true ? validSorterSummary(run, record.source) :
+        object(run) && validSorterSource(run.source) && validProfile(run.source, run) &&
+        (!own(run, 'helpBefore') || strings(run.helpBefore)) && object(run.result) && batches.includes(run.result.batch) &&
+        matches(run.result, evaluate(run.source, run.features, run.dataset, run.result.batch)));
   } catch { return false; }
 }
 export function validSorterWork(work) {
@@ -313,10 +336,10 @@ export function starterSorter(state, partId, confirmed = false, options = {}) {
     const entry = own(work.plan, partId) ? work.plan[partId] : null;
     if (!part || !validSorterPart(entry, part)) return false;
     const option = part.options.find(o => o.id === entry.choiceId);
-    if (!option || (entry.own.length > 0 && confirmed !== true)) return false;
+    if (!option || !string(option.text, 1200) || (entry.own.length > 0 && confirmed !== true)) return false;
     if (!addHelp(work, `${partId}:starter`)) return false;
     work.plan[partId] = {...clone(entry), mode:'own', own:option.text};
-    return true;
+    return validSorterPart(work.plan[partId], part);
   }, options);
 }
 export function runSorter(state, presetId = null, options = {}) {
@@ -348,6 +371,17 @@ export function traceSorter(state, options = {}) {
     return {recorded:true, ...clone(record)};
   }, options);
 }
+// A checked response keeps its own full task and all support actually opened,
+// plus the complete model. Unrelated question catalogs are not its evidence.
+function sourceForCheck(work, task) {
+  const source = clone(work.source);
+  source.tasks = source.tasks.filter(item => item.id === task.id ||
+    work.help.includes(`${item.id}:hint`) || work.help.includes(`${item.id}:example`));
+  source.discussions = source.discussions.filter(discussion =>
+    discussion.options.some(option => work.help.includes(`${discussion.id}:${option.id}`)));
+  source.parts = source.parts.filter(part => work.help.includes(`${part.id}:starter`));
+  return source;
+}
 export function checkSorter(state, taskId, options = {}) {
   const work = sorterView(state).work;
   const task = work?.source.tasks.find(t => t.id === taskId);
@@ -367,7 +401,8 @@ export function checkSorter(state, taskId, options = {}) {
     const ownTask = current.source.tasks.find(t => t.id === taskId);
     const selected = ownTask.choices.find(c => c.id === answer);
     const feedback = selected ? `${selected.reply} ${ownTask.feedback}` : ownTask.feedback;
-    const record = {source:clone(current.source), taskId, raw, profile:clone(ownTask.profile),
+    const source = sourceForCheck(current, ownTask);
+    const record = {source, taskId, raw, profile:clone(ownTask.profile),
       resultContext:evaluate(current.source, ownTask.profile.features, ownTask.profile.dataset, ownTask.batch),
       helpBefore:clone(current.help), outcome:answer === ownTask.key ? 'match' : 'different', feedback, supported:true};
     if (!validSorterCheck(record)) return false;
@@ -380,7 +415,7 @@ export function keepSorter(state, options = {}) {
   return workChange(state, work => {
     const advice = renderedAdvice(work.source, work.plan);
     const record = {source:clone(work.source), plan:clone(work.plan), ...advice, helpBefore:clone(work.help),
-      runs:work.runs.filter(validSorterRun).map(run => ({source:clone(run.source), features:clone(run.features), dataset:run.dataset, result:clone(run.result), helpBefore:clone(run.helpBefore)}))};
+      runs:work.runs.filter(validSorterRun).map(run => summarizeRun(run, work.source))};
     if (!validSorterKeep(record)) return false;
     if (!own(work, 'firstKept')) work.firstKept = clone(record);
     work.kept = clone(record);

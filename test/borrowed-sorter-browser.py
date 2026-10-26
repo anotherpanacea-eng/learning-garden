@@ -164,7 +164,7 @@ w.source.tasks=w.source.tasks.slice(0,2);w.source.parts=w.source.parts.slice(0,1
 w.source.tables.test=w.source.tables.test.slice(0,4);w.parcelId=w.source.tables.test[0].id;
 const malformed=structuredClone(saved),m=sorterView(malformed).work;m.runs.push({futureRun:true});m.traces.push({futureTrace:true});m.checks.push({futureCheck:true});m.kept={futureKeep:true};
 const future=structuredClone(base);future.borrowedSorter={version:99,raw:['unmodified future source']};
-const earlierKept=structuredClone(base);startSorter(earlierKept);runSorter(earlierKept,'original');keepSorter(earlierKept);const ew=sorterView(earlierKept).work;ew.page=4;for(const kept of [ew.firstKept,ew.kept])for(const r of kept.runs)delete r.helpBefore;
+const earlierKept=structuredClone(base);startSorter(earlierKept);runSorter(earlierKept,'original');keepSorter(earlierKept);const ew=sorterView(earlierKept).work;ew.page=4;for(const kept of [ew.firstKept,ew.kept])kept.runs=ew.runs.map(r=>({source:structuredClone(r.source),features:structuredClone(r.features),dataset:r.dataset,result:structuredClone(r.result)}));
 const invalid=structuredClone(saved);invalid.borrowedSorter.visits[invalid.borrowedSorter.current].source.mode='future-model';
 console.log(JSON.stringify({base,saved,malformed,future,invalid,earlierKept}));
 """)
@@ -195,6 +195,7 @@ def journey(browser, width, base, seeds):
         t=next(t for t in source['tasks'] if t['page']==0 and t['kind']=='choice')
         wrong=next(q['id'] for q in t['choices'] if q['id']!=t['key'])
         checked=check_task(p,t,wrong);ok(checked['outcome']=='different','wrong routing prediction receives a useful mismatch')
+        ok('differs' in p.locator(f'[data-sorter-result="{t["id"]}"] [data-sorter-saved-outcome]').first.inner_text().lower(),'numeric or choice feedback explicitly reports its original saved mismatch')
         first_check=copy.deepcopy(work(p)['firstChecks'][t['id']]);checked=check_task(p,t,t['key'])
         ok(checked['outcome']=='match' and work(p)['firstChecks'][t['id']]==first_check,'revised answer retains original source/response')
         click(p,f'[data-sorter-help="{t["id"]}:hint"]')
@@ -231,6 +232,10 @@ def journey(browser, width, base, seeds):
         ok(work(p)['plan'][pid]['own']==own,'supplied choice preserves independent original words')
         click(p,'[data-sorter-keep]');first_keep=copy.deepcopy(work(p)['firstKept'])
         ok(first_keep['supportedParts'][0]['text']==part['options'][0]['text'],'kept supplied letter freezes exact chosen text')
+        summary_panel=p.locator('[data-sorter-kept]').first.locator('details').first
+        summary_panel.evaluate('x=>x.open=true')
+        ok(p.locator('[data-sorter-kept-run-summary]').count()>=len(first_keep['runs']),'kept advice exposes compact aggregate run summaries')
+        ok(p.locator('[data-sorter-kept-run-summary] table').count()==0,'detailed parcel rows stay with working runs rather than duplicating kept advice')
         ok(all('run' in r.get('helpBefore',[]) for r in first_keep['runs']),'kept model results preserve actual earlier supplied support')
         ok(any(x['text']=='' for x in first_keep['renderedParts']),'unfinished letter may be kept honestly')
         click(p,f'[data-sorter-plan-mode="{pid}"][data-mode="own"]')
