@@ -1670,7 +1670,7 @@ const authored={
   "closing": "Wren lays the page beside the records. “We will keep them together. There is room to add a thought, change a reason, or leave a question open.”",
   "keepConfirmation": "Your case note is kept here. You can reopen it and revise any part, including the provisional plan.",
   "connections": [
-    {"id":"timing-desk","title":"The message and the water","href":"#learn/math/timing-desk","text":"Compare journey times, rates and five selected records in a separate fictional investigation."},
+    {"id":"timing-desk","title":"Open the timing preview","href":"#learn/math/timing-desk","text":"A height record asks how high. A timing sheet asks how long. Compare the message and the water in another fictional case."},
     {
       "id": "town-record",
       "title": "Open the Town Record",

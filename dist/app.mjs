@@ -418,7 +418,7 @@ function render(){
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
   else if(bridgesBench)html=bridgesPage(explorerStore.active.id);
   else if(root==='desk'&&slug==='linear'){const v=preparePriceDisplay(state,priceOptions());html=v.ok?pricePage(state):priceRefusal();if(v.changed)save();}
-  else if(root==='desk')html='<details class="panel river-casebook"><summary>Choose another investigation</summary>'+timingEntry()+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+priceEntry()+'</details>'+deskPage(state);
+  else if(root==='desk')html='<details class="panel river-casebook"><summary>Choose another investigation</summary>'+timingEntry('desk')+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+priceEntry()+'</details>'+deskPage(state);
   else if(root==='almanac')html=keeperPages(state,{blocked:keeperFilmBlocked()});
   else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id);
   else if(bellBench)html=bellStudioPage(state);

@@ -572,7 +572,8 @@ const authored={
             "minute": 900
           }
         }
-      ]
+      ],
+      "title": "The six-hour water journey"
     },
     {
       "id": "day-message",
@@ -604,7 +605,8 @@ const authored={
             "minute": 720
           }
         }
-      ]
+      ],
+      "title": "The day message"
     },
     {
       "id": "day-gap",
@@ -646,7 +648,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "How much time lies between?"
     },
     {
       "id": "night-arrivals",
@@ -698,7 +701,8 @@ const authored={
             "minute": 30
           }
         }
-      ]
+      ],
+      "title": "Across midnight"
     },
     {
       "id": "night-gap",
@@ -730,7 +734,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "Between the night arrivals"
     },
     {
       "id": "which-origin",
@@ -769,7 +774,8 @@ const authored={
           "reply": "The cards do give a beginning: the noticed rise and immediate dispatch at Vadoalto. What they cannot give is an exact prediction for a real river."
         }
       ],
-      "fit": "after-rise"
+      "fit": "after-rise",
+      "title": "Six hours after what?"
     },
     {
       "id": "rate-three",
@@ -844,7 +850,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "Three kilometers each hour"
     },
     {
       "id": "rate-four-half",
@@ -886,7 +893,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "Four and a half kilometers each hour"
     },
     {
       "id": "rate-two",
@@ -928,7 +936,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "Two kilometers each hour"
     },
     {
       "id": "fast-day",
@@ -981,7 +990,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "The four-hour day card"
     },
     {
       "id": "fast-night",
@@ -1034,7 +1044,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "The four-hour night card"
     },
     {
       "id": "ordered-times",
@@ -1106,7 +1117,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "Put every entry in order"
     },
     {
       "id": "median",
@@ -1148,7 +1160,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "Find the middle"
     },
     {
       "id": "range",
@@ -1180,7 +1193,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "How far apart are the ends?"
     },
     {
       "id": "minimum",
@@ -1212,7 +1226,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "Shortest on the copy"
     },
     {
       "id": "below-six",
@@ -1254,7 +1269,8 @@ const authored={
             "d": 1
           }
         }
-      ]
+      ],
+      "title": "Earlier than six hours"
     },
     {
       "id": "what-copy",
@@ -1292,7 +1308,8 @@ const authored={
           "reply": "Yes. You can read the listed durations while keeping the missing dates and selection information open."
         }
       ],
-      "fit": "selected-undated"
+      "fit": "selected-undated",
+      "title": "What sort of record?"
     }
   ],
   "trays": [
