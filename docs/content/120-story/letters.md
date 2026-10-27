@@ -203,3 +203,7 @@ Arrives the evening of the first journey.
 > Un grand héron gris est descendu du bateau de la côte aujourd'hui. Ce héron a posé des questions sur le ruisseau, puis a pris le chemin de la rivière vers l'amont. Je crois que c'est pour vous ! Léon
 
 *For the reader:* Hollis is they/them. The French avoids a pronoun for Hollis on purpose. *Un grand héron* is grammatically masculine as a noun, which is normal French; please check whether *iel* should appear anywhere, or whether avoiding the pronoun is the better choice for young learners.
+
+## Standalone timing-case boundary · spec247
+
+[The message and the water](../../specs/247-message-and-water.md) uses newly authored English timing sheets under an explicit later-record preview. The 18 km route, fixed rates/message durations and undated five-entry copy are invented supplied material for that case, not words or measurements taken from the first letter above. Opening the case delivers no letter and changes no page, act or official rule. Bilingual text and its fluent-reader gates stay unchanged.
