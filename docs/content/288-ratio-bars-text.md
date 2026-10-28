@@ -111,14 +111,16 @@ Decode these exact frozen templates from recorded statuses. The numeric given-am
 
 | Source key / status | Exact template |
 | --- | --- |
-| ratioSame / same | **Same proportions. Your ordered block counts keep the supplied recipe.** |
-| ratioDifferent / different | **Different proportions. Your ordered block counts do not keep the supplied recipe yet.** |
-| referenceFits / fits | **Reference fits. Your marker names {source reference}, as the Given line does.** |
-| referenceDifferent / different | **Different reference. Your marker names {proposed reference}; the Given line names {source reference}.** |
-| amountFits / fits | **Given amount fits. Your {source reference} has {actual source-referent amount} scoops, matching the given {given amount}.** |
-| amountDifferent / different | **Given amount differs. Your {source reference} has {actual source-referent amount} scoops; the Given line supplies {given amount}.** |
+| ratioSame / same | **Recorded proportions: same.** |
+| ratioDifferent / different | **Recorded proportions: different.** |
+| referenceFits / fits | **Recorded reference result: fits. Marker used: {recorded reference}.** |
+| referenceDifferent / different | **Recorded reference result: different. Marker used: {recorded reference}.** |
+| amountFits / fits | **Recorded given-amount result: fits. Source given: {given amount} scoops for {source reference}.** |
+| amountDifferent / different | **Recorded given-amount result: different. Source given: {given amount} scoops for {source reference}.** |
 
-Use **whole** for source/proposed whole reference in feedback, otherwise its named ingredient. These amount lines describe exact model arithmetic, even when ratio/reference differ. Never say “all correct” from one fitting line. Do not assert **Given amount fits** merely because a wrong marked share happens to equal the source numeral.
+Use **whole** for a whole reference, otherwise its frozen ingredient label. The recorded reference substitution comes from the checked observation’s reference, never the draft or source answer. These six lines report literal recorded statuses; they do not newly certify agreement with computed numbers. Keep the source Given line visible. Never say “all correct” from one fitting line or infer a fit from the numeral under a wrong marker.
+
+Separate arithmetic labels for a supported checked model: **Computed shares for this checked model: {ordered named amounts}.** · **Computed whole for this checked model: {total} scoops.** These use its own recorded counts and unit and do not alter a recorded result. For an unsupported model: **Amounts are not recomputed for this earlier model. Its recorded counts, value, marker and results stay here.** No current-model formula is assumed for it.
 
 Longer fold: **A supplied example and a reason to discuss**
 
@@ -156,6 +158,8 @@ Three-part helper title: **Count all three parts**
 
 Every helper footer: **This is a supplied worked example. Your own bars stay unchanged. Return at any step.**
 
+Own-invitation helper notice, when its frozen steps refer to the current case: **This example uses this invitation’s own recipe and given amount. It may supply part or all of a fitting plan. A later fit has this example as support; it is not fresh new-use evidence.** Opening does not establish that every step was viewed.
+
 Together: **Choose Working together if a grown-up is helping with this invitation. It is your report, not a test.**
 
 ## Return and retained work
@@ -171,6 +175,8 @@ Bridge labels: **Recipe from these bars** · **Latest checked model** · **Curre
 Discovery: **Equal Blocks** / **Build equal blocks to share a whole, then try a given share.** / **Visit Equal Blocks**.
 
 Notes: **Ungraded bars** · **First comparison** · **Latest retry** · **{n} comparisons**; singular **1 comparison** · **Recorded proportions** · **Recorded reference** · **Recorded given amount** · **Block counts** · **Scoops in every block** · **Reference marker** · **Clue opened** · **Hear requested** · **Working together reported** · **Whole example opened** · **Share example opened** · **Three-part example opened** · **Feedback available for this comparison**.
+
+Notes helper-overlap labels, derived from frozen helper steps when the corresponding teaching-before flag is true: **Whole example opened for this invitation’s own recipe and given amount** · **Share example opened for this invitation’s own recipe and given amount** · **Three-part example opened for this invitation’s own recipe and given amount**. Follow each with **The example may supply part or all of a fitting plan; opening does not show which steps were viewed.** If an opened helper’s details are unreadable: **Earlier opened-example details are unavailable; overlap with this invitation is unknown.** Do not treat unknown overlap as no answer support.
 
 Notes supplied context: **Supplied starting blocks: {ordered named counts}** · **Supplied value: {u} scoops in every block** or **Supplied value: not chosen** · **Supplied reference: {reference}** or **Supplied reference: not placed** · **Guided example shown with this invitation** when guided lines present. Show this context for every recorded case even if optional flags false. False flag: **Not recorded before this comparison**, not no help in real life.
 

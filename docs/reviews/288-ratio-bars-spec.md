@@ -32,3 +32,14 @@ This is AI mathematical/content review, not qualified-human approval or implemen
 - Existing profile/avatar normalization is the baseline for entry/switch checks, separate from legacy lesson initialization.
 
 Final independent Claude adjudication of the complete public candidate is pending. Build starts only after material findings are resolved. Subsequent exact-candidate implementation review, real browser/progress checks, expected-head merge and hosted verification remain separate gates.
+
+## Final adjudication round1 and bounded repairs
+
+Claude Opus reviewed exact candidate `4ec1b7652ca2f94129f26c4cb2547a4f82c99fd8`: **not build-ready, 0 P1 / 2 P2**. The reviewer read the supplied public documents and existing code excerpts, checked the sixteen-plan arithmetic, but executed nothing and rendered no app.
+
+1. **Answer-support disclosure.** The authored share/three helpers include their own invitations’ fitting plans. Notes and helper framing now derive same-invitation overlap from frozen step caseIds plus the recorded teaching-before flag. The label says the example uses this invitation’s recipe and given amount; later fits are potentially answer-supported, not fresh new-use evidence. No additional flag or step-view log is added. A separate subject repair read caught an overstatement for valid historical one-step helpers: matching caseId does not prove a complete plan was present. Generic text now says part or all of a plan may be supplied, without claiming every step was seen or regrading old helper plans.
+2. **Literal results versus arithmetic.** The six frozen feedback templates now report recorded statuses without asserting new numerical equalities. Reference text uses the observation’s recorded marker; given-amount text separately states the frozen given. Supported-model arithmetic is a separate readout from recorded counts/unit; unknown models have no recomputed amounts or diagrams. A historical `blocks:[5,5],unit:5,reference:blue` record with same/fits/fits statuses remains raw and literal, but must not assert that whole50 matches source20 or that the marker was whole.
+
+Related optional clarifications state missing/nonobject teaching handling, the exact deferred-film/Notes/map seams, always-open family links and fresh known fields for a new latest snapshot rather than transplanting older snapshot metadata. The prior latest is intentionally unretained under the disclosed first/latest rule; this does not discard untouched source/owner/first data. No new model, engine, quota, migration or curricular scope is introduced.
+
+Repaired-candidate independent adjudication remains pending. No runtime has been built or cleared by this record.
