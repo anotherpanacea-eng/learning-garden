@@ -1,6 +1,6 @@
 # 290. Field Strips: a part of a part
 
-Finite implementation commission, 2026-10-28. **Build-ready after independent specification/content review; runtime not yet built.** [Original finite text](../content/290-field-strips-text.md), [source study](../source-audits/290-field-strips.md). Fleet1216 owns this slice of ongoing LG-1; the main roadmap is separately held under Fleet1164.
+Finite implementation commission, 2026-10-28. **Build-ready after independent specification/content review; runtime candidate implemented; independent implementation review and release verification pending.** [Original finite text](../content/290-field-strips-text.md), [source study](../source-audits/290-field-strips.md). Fleet1216 owns this slice of ongoing LG-1; the main roadmap is separately held under Fleet1164.
 
 ## Problem and boundary
 
