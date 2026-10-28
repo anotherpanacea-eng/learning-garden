@@ -62,7 +62,7 @@ export function feedingCaseView(stateOrView,id){
  if(v.status!=='ready')return {status:v.status};const c=caseOf(v.source,id);if(!c)return {status:'missing'};
  const kind=isSort(v.source,id)?'sort':'idea',records=kind==='sort'?v.sorts:v.ideas,drafts=kind==='sort'?v.draftSorts:v.draftIdeas;
  const record=entry(records,id),draft=entry(drafts,id),latest=record?.latest||record?.first||null,field=kind==='sort'?'basketId':'choiceId';
- return {status:bad(records,id)||bad(drafts,id)||bad(v.support,id)||typeof v.root.teaching!=='boolean'?'unreadable':'ready',case:c,kind,draft,record,latest,support:entry(v.support,id)||{caseId:id,...freshSupport()},draftReadable:!bad(drafts,id),recordReadable:!bad(records,id),supportReadable:!bad(v.support,id),draftStatus:!draft?(record?'waiting':'unchecked'):!record?'unchecked':draft[field]===latest[field]?'checked':'changed'};
+ return {status:bad(records,id)||bad(drafts,id)||bad(v.support,id)||typeof v.root.teaching!=='boolean'?'unreadable':'ready',case:c,kind,draft,record,latest,support:entry(v.support,id)||{caseId:id,...freshSupport()},draftReadable:!bad(drafts,id),recordReadable:!bad(records,id),supportReadable:!bad(v.support,id),draftStatus:bad(records,id)||bad(drafts,id)?'unreadable':!draft?(record?'waiting':'unchecked'):!record?'unchecked':draft[field]===latest[field]?'checked':'changed'};
 }
 function commit(state,root,canExport){
  try{const candidate=structuredClone(state);candidate.feedingBoard=root;if(typeof canExport!=='function'||!recoveryFitsProgressLimits(candidate)||canExport(candidate)!==true)return result(false,false,'report-safety');state.feedingBoard=root;return result(true,true,'changed');}catch{return result(false,false,'report-safety');}

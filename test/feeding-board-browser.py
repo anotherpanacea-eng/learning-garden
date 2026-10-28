@@ -166,6 +166,58 @@ def route_exit(browser, base, seed):
     ok(actual == book(q), 'complete notebook matches actual Notes baseline, including legacy normalization')
     snap(p, 'immediate-route-exit-notes')
 
+def damage_disclosure(browser, base, fixtures):
+    p = setup(browser, 820, 1180, fixtures['disclosure'], 'unreadable-evidence')
+    go(p, base)
+    before = copy.deepcopy(owner(p))
+    ok(p.locator('#fb-focus').inner_text() == 'Domestic cow', 'first unchecked navigation selects known absence rather than unreadable records')
+    for case in ['fox', 'rabbit']:
+        text = p.locator(f'[data-fb-case="{case}"]').inner_text()
+        ok('cannot be changed safely' in text and 'Not checked yet' not in text,
+           'rail distinguishes unreadable evidence from unchecked: ' + case)
+    ok('cannot be changed safely' in p.locator('.fb-rail > summary').inner_text(), 'unreadable observations suppress misleading participation count')
+    select_case(p, 'fox')
+    ok(p.locator('[data-fb-check]').is_disabled(), 'malformed target record is retained behind disabled Check')
+    ok('cannot be changed safely' in p.locator('.fb-choice-state').inner_text(), 'malformed target status is explicitly unreadable')
+    select_case(p, 'rabbit')
+    ok('First check here' in p.locator('.fb-feedback').inner_text() or 'Checked before here' in p.locator('.fb-feedback').inner_text(), 'readable historical checks stay visible beside unreadable draft')
+    ok('You chose:' in p.locator('.fb-feedback').inner_text(), 'draft damage does not hide actual checked selection')
+    button(p, 'Looks and food')
+    ok('cannot be changed safely' in p.locator('.fb-ideas-participation').inner_text(), 'raw ideas section never claims zero observed ideas')
+    ok('cannot be changed safely' in p.locator('.fb-choice-state').inner_text(), 'raw ideas section has unreadable case state')
+    go(p, base, '#notes', '#download')
+    p.locator('.fb-notes > summary').click()
+    titles = ['Red fox'] + [c['title'] for c in before['source']['contrasts']]
+    for title in titles:
+        section = p.locator('.fb-notes > section').filter(has=p.get_by_role('heading', name=title, exact=True))
+        text = section.inner_text()
+        ok('cannot be changed safely' in text, 'Notes explicitly disclose unreadable target: ' + title)
+        ok('No check recorded' not in text and 'Not checked yet' not in text, 'Notes never equate unreadable target with absence: ' + title)
+    cow = p.locator('.fb-notes > section').filter(has=p.get_by_role('heading', name='Domestic cow', exact=True)).inner_text()
+    ok('No check recorded' in cow and 'Not checked yet' in cow, 'healthy truly absent observation retains ordinary wording')
+    rabbit = p.locator('.fb-notes > section').filter(has=p.get_by_role('heading', name='European rabbit', exact=True)).inner_text()
+    ok('First check' in rabbit and 'Recorded outcome: other' in rabbit and 'Latest retry' in rabbit,
+       'Notes retain literal first/latest even when only the draft is damaged')
+    ok(owner(p) == before, 'rendering damaged cases and Notes preserves every raw owner value')
+    snap(p, 'unreadable-evidence-notes')
+    exported = download(p, base, 'unreadable-evidence-notes')
+    ok(exported['feedingBoard'] == before, 'actual download preserves unreadable records/sections/draft without repair')
+    p = setup(browser, 820, 1180, fixtures['helperSubset'], 'missing-helpers-subset')
+    go(p, base)
+    before = copy.deepcopy(owner(p))
+    ok(len(before['source']['animals']) == 1 and not before['source']['contrasts'], 'actual historical subset remains open')
+    for helper in ['teaching', 'example', 'glossary']:
+        ok(not p.locator(f'[data-fb-helper="{helper}"]').count(), 'unavailable helper operation omitted: ' + helper)
+    ok('cannot be shown here' in p.locator('.fb-toolbar').inner_text(), 'missing helpers have a bounded availability notice')
+    ok(owner(p) == before and not owner(p)['teaching'] and not owner(p)['support'], 'missing helper rendering records no false exposure')
+    choose(p, 'carnivore')
+    button(p, 'Check this basket')
+    ok(entry(p, 'sorts', 'rabbit')['checkCount'] == before['sorts'][0]['checkCount'] + 1, 'missing helpers preserve normal explicit checking')
+    button(p, 'Clue')
+    support = entry(p, 'support', 'rabbit')
+    ok(support['clue'] and not support['example'] and not owner(p)['teaching'], 'available Clue records its actual support only')
+    snap(p, 'missing-helper-subset')
+
 def main():
     fixtures = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', "import {feedingFixtures} from './test/feeding-board-checks.mjs';console.log(JSON.stringify(feedingFixtures()));"], cwd=ROOT, text=True))
     server = None
@@ -188,6 +240,13 @@ def main():
             launch['executable_path'] = os.environ['CHROME_PATH']
         browser = pw.chromium.launch(**launch)
         try:
+            if os.environ.get('FEEDING_FOCUS') == 'damage':
+                damage_disclosure(browser, base, fixtures)
+                ok(not errors, 'no damage-disclosure page errors')
+                ok(not faults, 'no damage-disclosure browser faults')
+                (OUT / 'receipt.json').write_text(json.dumps({'status': 'passed', 'checks': checks, 'base': base, 'scope': 'unreadable evidence disclosure, retained first/latest and missing helpers in historical subset', 'pageErrors': errors, 'faults': faults}, indent=2))
+                print(f'Feeding damage browser: {checks} assertions passed; artifacts {OUT}')
+                return
             route_exit(browser, base, fixtures['partial'])
             if os.environ.get('FEEDING_FOCUS') == 'route-exit':
                 ok(not errors, 'no route-exit page errors')
@@ -195,6 +254,7 @@ def main():
                 (OUT / 'receipt.json').write_text(json.dumps({'status': 'passed', 'checks': checks, 'base': base, 'scope': 'immediate native route exit before rerender and actual Notes normalization baseline', 'pageErrors': errors, 'faults': faults}, indent=2))
                 print(f'Feeding route-exit browser: {checks} assertions passed; artifacts {OUT}')
                 return
+            damage_disclosure(browser, base, fixtures)
             for width, height in sizes:
                 p = setup(browser, width, height, fixtures['base'], f'board-{width}')
                 go(p, base)
@@ -238,6 +298,7 @@ def main():
                 ok(entry(p, 'sorts', 'rabbit')['latest']['basketId'] == 'carnivore', 'draft never rewrites checked placement')
                 button(p, 'Check this basket')
                 ok(entry(p, 'sorts', 'rabbit')['first'] == first and entry(p, 'sorts', 'rabbit')['latest']['outcome'] == 'fits', 'revision keeps immutable first and actual latest')
+                ok('choose another basket and check again' not in p.locator('.fb-feedback').inner_text(), 'fitting feedback omits unnecessary retry invitation')
                 # Every actual authored animal/food rendering is retained for independent visual review.
                 animals = owner(p)['source']['animals']
                 for animal in animals:

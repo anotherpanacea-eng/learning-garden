@@ -17,7 +17,9 @@ export function feedingFixtures(){
  const historical=copy(partial),a=historical.feedingBoard.source.animals.find(x=>x.id==='ladybird');a.name='Earlier larval beetle';a.scientificName='Earlier retained species';a.usualDiet='Earlier retained food note.';a.art={kind:'earlier-art',version:7,description:'Earlier larval beetle drawing.'};
  historical.feedingBoard.draft.sorts=historical.feedingBoard.draft.sorts.filter(x=>x.caseId!=='rabbit');
  const refusal=copy(partial);refusal.syntheticOther.payload='';const proposed=copy(refusal);f.noteFeedingSupport(proposed,'cow','source',allow);refusal.syntheticOther.payload='x'.repeat(MAX_IMPORT_BYTES-Buffer.byteLength(JSON.stringify(proposed,null,2))-32);
- return {base,partial,damaged,historical,refusal};
+ const disclosure=copy(damaged);disclosure.feedingBoard.ideas={future:'Synthetic unreadable ideas section'};disclosure.feedingBoard.draft.sorts[0]={caseId:'rabbit',basketId:'future-basket',raw:'Synthetic unreadable draft'};
+ const helperSubset=copy(partial);helperSubset.feedingBoard.source.animals=helperSubset.feedingBoard.source.animals.slice(0,1);helperSubset.feedingBoard.source.contrasts=[];delete helperSubset.feedingBoard.source.helpers;helperSubset.feedingBoard.draft.sorts=helperSubset.feedingBoard.draft.sorts.filter(x=>x.caseId==='rabbit');
+ return {base,partial,damaged,historical,refusal,disclosure,helperSubset};
 }
 export function runFeedingBoardChecks(){
  let n=0;const ok=(v,m)=>{assert.ok(v,m);n++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;};
@@ -52,6 +54,11 @@ export function runFeedingBoardChecks(){
  {
   const s=feedingFixtures().damaged,raw=copy(s.feedingBoard.sorts[1]);ok(f.setSortDraft(s,'fox','omnivore',feedingCanExport).ok);refused(s,()=>f.checkSort(s,'fox',feedingCanExport),'unreadable record cannot be overwritten');ok(f.setSortDraft(s,'cow','herbivore',feedingCanExport).ok);ok(f.checkSort(s,'cow',feedingCanExport).ok);eq(s.feedingBoard.sorts[1],raw,'raw damage survives sibling writes');s.feedingBoard.support.push({caseId:'cow',clue:'future'});refused(s,()=>f.checkSort(s,'cow',feedingCanExport),'unreadable support blocks target check');refused(s,()=>f.noteFeedingSupport(s,'cow','source',feedingCanExport));ok(f.setSortDraft(s,'elephant','herbivore',feedingCanExport).ok);ok(f.checkSort(s,'elephant',feedingCanExport).ok);
   s.feedingBoard.ideas={future:'Synthetic raw section'};ok(f.setIdeaDraft(s,'large-small','a',feedingCanExport).ok);refused(s,()=>f.checkIdea(s,'large-small',feedingCanExport));ok(f.setSortDraft(s,'beaver','herbivore',feedingCanExport).ok);ok(f.checkSort(s,'beaver',feedingCanExport).ok);const before=copy(s);f.readFeedingBoard(s);eq(s,before);
+ }
+ {
+  const s=feedingFixtures().disclosure,before=JSON.stringify(s);for(const id of ['fox','large-small']){const c=view(s,id);eq(c.recordReadable,false,'malformed observations are unknown, not absent');eq(c.draftStatus,'unreadable','unreadable evidence never presents unobserved status');eq(c.record,null);}
+  const rabbit=view(s,'rabbit');eq(rabbit.draftReadable,false);eq(rabbit.recordReadable,true);eq(rabbit.record.first,s.feedingBoard.sorts[0].first,'readable first survives malformed draft');eq(rabbit.draftStatus,'unreadable');eq(view(s,'cow').draftStatus,'unchecked','healthy unobserved sibling retains true absence');eq(view(s,'cow').recordReadable,true);eq(JSON.stringify(s),before,'evidence readers preserve raw bytes');
+  const subset=feedingFixtures().helperSubset,saved=copy(subset);ok(f.validFeedingSource(subset.feedingBoard.source));eq(f.readFeedingBoard(subset).helpers,{teaching:null,workedExample:null,glossary:null});eq(subset,saved,'missing helpers never record exposure or change source');ok(f.setSortDraft(subset,'rabbit','carnivore',feedingCanExport).ok);ok(f.checkSort(subset,'rabbit',feedingCanExport).ok,'missing helpers preserve healthy checking');
  }
  {
   const s=fresh(),source=copy(s.feedingBoard.source);noop(s,()=>f.createFeedingBoard(s,()=>{throw Error('Existing source never recreated');}));eq(s.feedingBoard.source,source,'Start never refreshes frozen source');

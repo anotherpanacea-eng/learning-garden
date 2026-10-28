@@ -247,7 +247,7 @@ Reset explanation in grown-up help: **The game's confirmed reset removes this ex
 
 ## Grown-up panel
 
-**This is a supplied-evidence science board. The animal names and foods are given. The first rabbit is guided; optional teaching, help, source rereading, requested narration, working together, feedback and familiar cases are recorded separately. A fitting basket or idea is a response to this task. It does not show independent reading, animal identification, dietary expertise, an explanation in the child's own words, or mastery.**
+**This is a supplied-evidence science board. The animal names and foods are given. The first rabbit is guided; optional teaching, help, source-note opening, requested narration, working together, feedback and familiar cases are recorded separately. A fitting basket or idea is a response to this task. It does not show independent reading, animal identification, dietary expertise, an explanation in the child's own words, or mastery.**
 
 **Invite a reason: “Which foods helped you decide?” Listen for plants, animals or both, using a food on the card. For an omnivore, invite a plant food and an animal food. Speaking, pointing, a grown-up reading, and leaving the question open are all welcome. Spoken words are not recorded, scored or automatically interpreted.**
 
