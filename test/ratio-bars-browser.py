@@ -140,6 +140,8 @@ def bounds(p, tablet=False):
     ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal overflow')
     bad=p.locator(VIEW+' button,'+VIEW+' a,'+VIEW+' summary,'+VIEW+' select').evaluate_all("xs=>xs.filter(x=>x.getClientRects().length&&(x.getBoundingClientRect().height<44||x.getBoundingClientRect().width<44||parseFloat(getComputedStyle(x).fontSize)<16)).map(x=>({text:x.textContent,w:x.offsetWidth,h:x.offsetHeight,font:getComputedStyle(x).fontSize}))")
     ok(not bad,'44px actions /16px text '+str(bad))
+    intersections=p.locator('.rb-board .rb-row').evaluate_all('rows=>rows.flatMap(row=>[...row.querySelectorAll(".rb-block")].flatMap(block=>[...row.querySelectorAll("button")].filter(button=>{const a=block.getBoundingClientRect(),b=button.getBoundingClientRect();return a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top}).map(button=>({row:row.dataset.rbRow,action:button.textContent}))))')
+    ok(not intersections,'blocks never overlap native actions '+str(intersections))
     sizes=p.locator('.rb-block').evaluate_all('xs=>xs.map(x=>({w:x.getBoundingClientRect().width,h:x.getBoundingClientRect().height}))')
     ok(sizes and all(abs(x['w']-sizes[0]['w'])<.1 and abs(x['h']-sizes[0]['h'])<.1 for x in sizes),'identical block geometry across ingredients')
     if tablet:
@@ -235,6 +237,7 @@ def regressions(browser,base,f):
         p=setup(browser,820,1180,f[key],key);go(p,base);select_case(p,'guided-twenty');before=copy.deepcopy(owner(p))
         text=view(p).inner_text()
         ok('No comparison recorded here yet' not in text and 'Current model, not compared' not in text,'unknown retained work never absent main status '+key)
+        ok(text.count('An earlier comparison cannot be read here.')==1 and 'cannot be changed safely' not in text,'unreadable comparison has one precise notice without falsely blocking draft edits '+key)
         click(p,VIEW+' [data-speak]')
         spoken=p.evaluate('ratioSpeechRequests.at(-1)')
         ok('No comparison recorded here yet' not in spoken and 'Current model, not compared' not in spoken,'unknown retained work Hear stays unknown')
@@ -258,7 +261,78 @@ def regressions(browser,base,f):
     p=setup(browser,820,1180,f['refusal'],'whole-pretty-report-refusal');go(p,base);select_case(p,'guided-twenty');before=book(p);speech=p.evaluate('ratioSpeechRequests.length')
     for selector in ['[data-rb-helper="clue"]',VIEW+' [data-speak]','[data-rb-adjust][data-delta="1"]','[data-rb-compare]']:
         click(p,selector);ok(book(p)==before,'actual pretty-report refuses before edit/help/Hear/Compare '+selector)
+    retained=plan(p,'guided-twenty')
+    p.locator('[data-rb-unit]').select_option('7')
+    ok(p.locator('[data-rb-unit]').input_value()==str(retained['unit']) and book(p)==before,'report-refused native select reverts to retained unit')
+    wrong='white' if retained['reference']!='white' else 'blue'
+    p.locator(f'[data-rb-reference="{wrong}"]').click()
+    ok(p.locator(f'[data-rb-reference="{retained["reference"]}"]').is_checked() and not p.locator(f'[data-rb-reference="{wrong}"]').is_checked() and book(p)==before,'report-refused native radio reverts to retained brace')
     ok(p.evaluate('ratioSpeechRequests.length')==speech and not p.locator('[data-rb-close]').count(),'refusal discloses no helper or speech');snap(p,'pretty-report-refusal')
+
+def interaction_repairs(browser,base,f):
+    # Whole-board touch journeys use actual tap events for case, block, radio and
+    # Compare buttons. Native select values use select_option after opening the menu by tap.
+    p=setup(browser,768,1024,f['base'],'tap-768');go(p,base)
+    p.locator('[data-rb-start]').tap()
+    goals={'guided-twenty':([2,3],4,'whole'),'twenty-four':([1,2],8,'whole'),'three-sixty':([1,2,3],10,'whole'),'white-eight':([2,3],4,'white'),'yellow-twelve':([3,2],4,'yellow'),'blue-twenty':([1,2,3],10,'blue')}
+    for case,(blocks,unit,reference) in goals.items():
+        p.locator(f'[data-rb-case="{case}"]').tap()
+        c=next(x for x in owner(p)['source']['cases'] if x['id']==case)
+        for i,target in enumerate(blocks):
+            now=plan(p,case)['blocks'][i]
+            for _ in range(abs(target-now)):p.locator(f'[data-rb-adjust="{c["ingredientIds"][i]}"][data-delta="{1 if target>now else -1}"]').tap()
+        p.locator('[data-rb-unit]').tap();p.keyboard.press('Escape');p.locator('[data-rb-unit]').select_option(str(unit))
+        ok(p.locator('[data-rb-unit]').input_value()==str(unit),'native select_option reaches unit after actual tap '+case)
+        p.locator(f'[data-rb-reference="{reference}"]').tap();p.locator('[data-rb-compare]').tap()
+        first=copy.deepcopy(observation(p,case)['first'])
+        ok([first['ratio'],first['referenceStatus'],first['amountStatus']]==['same','fits','fits'],'tap constructs fitting whole board '+case)
+        ingredient=c['ingredientIds'][0]
+        p.locator(f'[data-rb-adjust="{ingredient}"][data-delta="1"]').tap();p.locator('[data-rb-compare]').tap()
+        ok(observation(p,case)['latest']['ratio']=='different','tap makes and checks changed blocks '+case)
+        p.locator(f'[data-rb-adjust="{ingredient}"][data-delta="-1"]').tap();p.locator('[data-rb-compare]').tap()
+        ok(observation(p,case)['first']==first and observation(p,case)['latest']['ratio']=='same','tap repairs bars retaining first '+case)
+        bounds(p);snap(p,'tap-768-'+case)
+    # A representative job is built entirely with native keyboard actions.
+    p=setup(browser,768,1024,f['base'],'keyboard-768');go(p,base)
+    p.locator('[data-rb-start]').focus();p.keyboard.press('Enter');p.locator('[data-rb-case="twenty-four"]').focus();p.keyboard.press('Enter')
+    for ingredient,count in [('white',1),('blue',2)]:
+        for _ in range(count):p.locator(f'[data-rb-adjust="{ingredient}"][data-delta="1"]').focus();p.keyboard.press('Enter')
+    p.locator('[data-rb-unit]').focus();p.keyboard.press('8')
+    ok(p.locator('[data-rb-unit]').input_value()=='8','keyboard selects one-block value')
+    p.locator('[data-rb-reference="whole"]').focus();p.keyboard.press('Space')
+    ok(p.locator('[data-rb-reference="whole"]').is_checked(),'keyboard places whole radio brace')
+    p.locator('[data-rb-compare]').focus();p.keyboard.press('Enter')
+    ok(observation(p,'twenty-four')['first']['amountStatus']=='fits','keyboard Compare records representative fitting plan')
+    ok(p.locator('#rb-checked-focus').evaluate('x=>document.activeElement===x'),'keyboard Compare restores checked heading focus');snap(p,'keyboard-768')
+    # Concrete reviewer responsive defect: at12 the warning happens to make the
+    # rows tall enough; at11 blocks intersected Add buttons before the repair.
+    for width in [744,768]:
+        p=setup(browser,width,1024,f['partial'],'overlap-'+str(width));go(p,base);select_case(p,'three-sixty')
+        for count in [12,11]:
+            set_plan(p,'three-sixty',[count]*3,20,'whole');bounds(p);snap(p,f'overlap-{width}-{count}')
+    # Partial teaching damage blocks Compare and the affected helper only.
+    seed=copy.deepcopy(f['partial']);seed['ratioBars']['teaching']['share']='Synthetic unreadable teaching flag'
+    p=setup(browser,820,1180,seed,'partial-teaching');go(p,base)
+    ok(p.locator('[data-rb-compare]').is_disabled(),'unknown teaching blocks Compare')
+    affected=p.locator('[data-rb-helper="share"]');ok(not affected.count() or affected.is_disabled(),'only affected share helper unavailable')
+    for key in ['whole','three']:
+        helper(p,key)
+        text=p.locator('.rb-helper').inner_text()
+        ok('Example brace:' in text and 'Your reference marker:' not in text,'teaching pictures label supplied example brace '+key)
+        click(p,'[data-rb-close]');ok(owner(p)['teaching'][key] is True and owner(p)['teaching']['share']==seed['ratioBars']['teaching']['share'],'unaffected helper records exposure without repairing malformed neighbor')
+    # Every named brace in actual Notes has the actual block-row extent; Notes
+    # renders outside the live board and must provide its own geometry variables.
+    p=setup(browser,820,1180,f['partial'],'notes-structure');go(p,base)
+    for case in ['white-eight','yellow-twelve']:
+        select_case(p,case);set_plan(p,case,*goals[case]);compare(p)
+    helper(p,'bridge')
+    ok(p.locator('#rb-checked-focus').count()==1 and p.locator('.rb-helper .rb-statuses[role="status"]').count()==0,'bridge adds no duplicate checked focus id or live statuses')
+    download(p,base,'notes-structure');semantic(p)
+    ok(p.locator('.rb-notes #rb-checked-focus').count()==0,'Notes has no repeated live checked focus ids')
+    ok(p.locator('.rb-notes .rb-statuses[role="status"],.rb-notes .rb-statuses[aria-live]').count()==0,'Notes has no multiplied live result regions')
+    geometry=p.locator('.rb-notes .rb-brace[style]').evaluate_all('xs=>xs.map(x=>{const row=x.closest(".rb-picture-row"),blocks=[...row.querySelectorAll(".rb-block")].map(b=>b.getBoundingClientRect()),r=x.getBoundingClientRect();return {width:r.width,blocks:Math.max(...blocks.map(b=>b.right))-Math.min(...blocks.map(b=>b.left)),row:row.getBoundingClientRect().width}})')
+    ok(len(geometry)>=2 and all(abs(g['width']-g['blocks'])<1 and g['width']<g['row'] for g in geometry),'Notes named-share braces fit their block extent '+str(geometry));snap(p,'notes-structure')
+    p.locator('.rb-notes .rb-checked').filter(has=p.locator('.rb-brace[style]')).first.screenshot(path=str(OUT/'notes-named-share.png'))
 
 def main():
     fixtures=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {ratioFixtures} from './test/ratio-bars-checks.mjs';console.log(JSON.stringify(ratioFixtures()));"],cwd=ROOT,text=True))
@@ -344,6 +418,7 @@ def main():
                 if film.count():film.click()
                 go(p,base);ok('ratioBars' not in book(p),'scoped reset clears selected owner')
                 click(p,'#explorer-switch');click(p,f'[data-select-explorer="{first_id}"]');go(p,base);ok(owner(p)==first_root,'reset preserves other explorer')
+            interaction_repairs(browser,base,fixtures)
             regressions(browser,base,fixtures)
             p=setup(browser,820,1180,fixtures['partial'],'storage-failure');go(p,base);select_case(p,'yellow-twelve')
             p.evaluate("()=>{window.originalRatioSet=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw new DOMException('Synthetic storage failure','QuotaExceededError')}}")
@@ -359,7 +434,7 @@ def main():
             p.locator('[data-rb-unit]').select_option('4');p.locator('[data-rb-reference="yellow"]').check();compare(p)
             ok('Saving is off' in view(p).inner_text(),'save-off disclosed');report=download(p,base,'save-off-notes');ok(next(x for x in report['ratioBars']['observations'] if x['caseId']=='yellow-twelve')['first']['amountStatus']=='fits','save-off memory downloadable')
             ok(not errors,'no page errors '+json.dumps(errors));ok(not faults,'no browser faults '+json.dumps(faults))
-            receipt={'status':'passed','checks':checks,'base':base,'viewports':sizes,'pageErrors':errors,'faults':faults,'scope':'actual native Chrome controls and whole Notes download/import/reload/redownload; fictional synthetic profiles; speech requests only; no physical iPad, audibility, human approval or efficacy claim'}
+            receipt={'status':'passed','checks':checks,'base':base,'viewports':sizes+[(744,1024),(768,1024)],'inputCoverage':'mouse clicks in original journeys; actual tap events for six 768px case/block/radio/Compare construction-and-repair loops; native select_option after tapping select menu; keyboard-only representative twenty-four job','pageErrors':errors,'faults':faults,'scope':'actual native Chrome controls and whole Notes download/import/reload/redownload; fictional synthetic profiles; speech requests only; no physical iPad, audibility, human approval or efficacy claim'}
             (OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(f'Equal Blocks browser: {checks} assertions passed; artifacts {OUT}')
         except Exception:
             (OUT/'failure.txt').write_text(traceback.format_exc())
