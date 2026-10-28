@@ -226,3 +226,7 @@ Grown-up note: **Supplied choices show choices for these briefs. They do not sho
 - Entry/footer destinations **Post Office** → `#post`; **Change a letter** → `#post/letters`; **Grown-up notes** → `#notes`.
 
 Set A introduction: **Your letter is here to look back at, with the words you chose. These short challenges do not change your letter choices.** Notes on later packets: **Same authored letters revisited.** Together reported button: **Working together reported**. Literal saved afterFeedback: **Feedback available on revisit: Yes/No**; No does not mean independent, unseen or unaided.
+
+## Touch-first desk labels
+
+Envelope controls use each frozen letter's title/reader. **Try these words** identifies an unsaved sentence preview; **Use these words** explicitly commits it. **Read the news**, **Look at the whole letter**, **Desk tools**, **Back to the Post Office** open or leave the corresponding views. A reader reply keeps the actual chosen wording and its exact supplied feedback visible; a seal is a visual cue for choosing words, not sending a real letter or earning a grade. Smaller historical sources show only their own available envelopes.

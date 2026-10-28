@@ -79,6 +79,7 @@ import {createBellPlayer} from './bell-studio-audio.mjs';
 import {rhythmPage,rhythmEntry,bindRhythm,resetRhythmVisit} from './rhythm-ui.mjs';
 import {createRhythmPlayer} from './rhythm-audio.mjs';
 import {weatherPage,talliesPage,bindWeatherTally,resetWeatherTallyVisit,weatherEntry} from './weather-tally-ui.mjs';
+import {twoLettersPage,bindTwoLetters,resetTwoLettersVisit,twoLettersEntry} from './two-letters-ui.mjs';
 import {pairedPage,bindPairedPoints,resetPairedVisit,pairedEntry} from './paired-points-ui.mjs';
 import {travelersArchivePage,travelersArchiveEntry,bindTravelersArchive} from './travelers-archive-ui.mjs';
 import {travelersArchive,noteArchiveSources} from './travelers-archive-core.mjs';
@@ -167,7 +168,7 @@ const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
 keepOfferingHowto(main,()=>choosingExplorer?'':location.hash);
-let needsExplorerInitialization=['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
+let needsExplorerInitialization=['#post/codes','#post/descriptions','#post/register','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
 // Optional map data must never hold the first playable screen behind a download.
@@ -312,6 +313,7 @@ function exposeRain(exposure){noteRainDisplayExposure(state,exposure);exposeStor
 function render(){
   stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
+  if(hash!=='#post/register'||choosingExplorer)resetTwoLettersVisit();
   if(hash!=='#learn/math/paired'||choosingExplorer)resetPairedVisit();
   if(!['#almanac/weather','#almanac/tallies'].includes(hash)||choosingExplorer)resetWeatherTallyVisit();
   if(hash!=='#studio/rhythm'||choosingExplorer)resetRhythmVisit();
@@ -342,6 +344,13 @@ function render(){
   const clockWalkBench=root==='post'&&slug==='clock-walk',pavingBench=root==='numbers'&&slug==='paving';
   const collectionBench=root==='living'&&slug==='collection',lanternBench=root==='numbers'&&slug==='lanterns',noticeBench=root==='loft'&&slug==='printer';
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',measureBench=root==='science'&&slug==='measure',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',doubleBench=root==='post'&&slug==='double-check',batchBench=root==='cafe'&&slug==='batches',labelBench=root==='archive'&&slug==='labels',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
+  if(hash==='#post/register'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):twoLettersPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindTwoLetters(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell});bindSpeech();}return;
+  }
   if(hash==='#learn/math/paired'){
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
@@ -517,7 +526,7 @@ function render(){
   else if(fieldBench){syncFieldPlantExposure('notebook');save();html=fieldNotebookPage(state)+collectionEntry();}
   else if(plantBench){syncFieldPlantExposure();const ps=plantStudy(state);if(ps){setPlantDay(state,ps.day);save();}html=plantStudyPage(state)+fieldKitEntry('cress');}
   else if(instructionBench)html=renderInstructions(state,root).html;
-  else if(letterBench)html=letterPage(state,root,detail)+(root==='post'?fieldKitEntry('notice'):'');
+  else if(letterBench)html=letterPage(state,root,detail)+(root==='post'?fieldKitEntry('notice')+twoLettersEntry():'');
   else if(messageBench)html=messagePage(state,root,detail);
   else if(groupBench){if(detail!=='choose'){noteGroupView(state,groupPlace);exposeStoryFacts({facts:equalGroupPairsShown(state,groupPlace)});save();}html=equalGroupsPage(state,groupPlace,detail);}
   else if(root==='regrow'){syncFieldPlantExposure('planting');save();html=plantingPage(state,Number(slug||0))+plantPlanPanel(state)+fieldNotebookPlanPanel(state);}
@@ -535,7 +544,7 @@ function render(){
     else html=orchardPage(state,slug)+(!slug?pileEntry():'');
   }
   else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:otherLiving;}
-  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry()+bridgesEntry();
+  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry()+bridgesEntry()+twoLettersEntry();
   else if(root==='workshop'&&slug==='balance'&&detail==='both'){const ready=prepareBothDisplay(state,priceOptions());html=ready.ok?bothPage(state):bothRefusal();if(ready.changed)save();}
   else if(root==='workshop')html=slug==='recut'||slug==='budget'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph,slug);
@@ -598,9 +607,9 @@ function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
 function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
 function useExplorer(next,destination='#home'){
- if(!next)return;resetPairedVisit();resetWeatherTallyVisit();resetRhythmVisit();resetStartingFlow();resetArrivalVisit();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)||['#cafe/units','#begin','#arrive'].includes(destination)||['pathways','learn'].includes(destination.slice(1).split('/')[0]);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
+ if(!next)return;resetTwoLettersVisit();resetPairedVisit();resetWeatherTallyVisit();resetRhythmVisit();resetStartingFlow();resetArrivalVisit();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=['#post/codes','#post/descriptions','#post/register','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)||['#cafe/units','#begin','#arrive'].includes(destination)||['pathways','learn'].includes(destination.slice(1).split('/')[0]);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
- if(destination!=='#notes'&&destination!=='#begin'&&destination!=='#arrive'&&destination!=='#cafe/units'&&!['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)&&!['pathways','learn'].includes(destination.slice(1).split('/')[0]))requestAutomaticFilm('welcome');
+ if(destination!=='#notes'&&destination!=='#begin'&&destination!=='#arrive'&&destination!=='#cafe/units'&&!['#post/codes','#post/descriptions','#post/register','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)&&!['pathways','learn'].includes(destination.slice(1).split('/')[0]))requestAutomaticFilm('welcome');
 }
 function freshExplorerChoice(){for(const avatar of ['sky','fern','reed'])for(const color of EXPLORER_COLORS)for(const symbol of EXPLORER_SYMBOLS)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
 function chooseExplorer(create=false){resetStartingFlow();resetArrivalVisit();cancelProgressImport();if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
@@ -630,7 +639,7 @@ function bindExplorers(){
  $('#explorer-new')?.addEventListener('click',()=>{explorerDraft=freshExplorerChoice();creatingExplorer=true;render();});
  $('#explorer-back')?.addEventListener('click',()=>{creatingExplorer=false;render();});
  $('#explorer-cancel')?.addEventListener('click',e=>{e.preventDefault();choosingExplorer=false;creatingExplorer=false;noteInstructionArrival();render();});
- const explorerDestination=()=>['#post/codes','#post/descriptions','#science/water-shares','#arrive','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)?location.hash:['pathways','learn'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
+ const explorerDestination=()=>['#post/codes','#post/descriptions','#post/register','#science/water-shares','#arrive','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)?location.hash:['pathways','learn'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
  document.querySelectorAll('[data-select-explorer]').forEach(b=>b.onclick=()=>useExplorer(explorerStore.select(b.dataset.selectExplorer,state),explorerDestination()));
  for(const field of ['avatar','color','symbol'])document.querySelectorAll(`[data-explorer-${field}]`).forEach(b=>b.onclick=()=>{explorerDraft[field]=b.dataset[`explorer${field[0].toUpperCase()+field.slice(1)}`];render();$(`[data-explorer-${field}="${explorerDraft[field]}"]`)?.focus();});
  $('#explorer-create')?.addEventListener('click',()=>useExplorer(explorerStore.add(explorerDraft,state),explorerDestination()));
@@ -892,10 +901,10 @@ function endingFilm(){
  const [root,slug]=(location.hash||'#home').slice(1).split('/');
  if(root==='storm'&&['end','play'].includes(slug)){const v=currentVisit(state);if(v?.finished&&(v.entrance==='paris'||entranceById(v.entrance)?.language==='fr'))return 'paris';}
  if(root==='cafe'&&!['groups','sharing','recipes','batches','fractions','units'].includes(slug)){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
- if(root==='post'&&!['choose','groups','messages','letters','instructions','packing','codes','descriptions'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
+ if(root==='post'&&!['choose','groups','messages','letters','instructions','packing','codes','descriptions','register'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
  return null;
 }
-if(!choosingExplorer&&!['pathways','learn'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#arrive'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale'&&!['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash))requestAutomaticFilm('welcome');
+if(!choosingExplorer&&!['pathways','learn'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#arrive'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale'&&!['#post/codes','#post/descriptions','#post/register','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash))requestAutomaticFilm('welcome');
 
 // Loading this optional reference never re-renders an activity or changes a notebook.
 void loadCurriculumMap();
