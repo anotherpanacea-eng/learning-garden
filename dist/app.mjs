@@ -1,5 +1,36 @@
+import {timingPage,timingEntry,timingRefusal,bindTiming,guardTimingNavigation} from './timing-desk-ui.mjs';
+import {prepareTimingDisplay} from './timing-desk-core.mjs';
+import {ledgerPage,ledgerEntry,ledgerRefusal,bindLedger,guardLedgerNavigation} from './ledger-gauge-ui.mjs';
+import {prepareLedgerDisplay} from './ledger-gauge-core.mjs';
+import {riverPage,riverEntry,riverRefusal,bindRiver,guardRiverNavigation} from './river-room-ui.mjs';
+import {prepareRiverDisplay} from './river-room-core.mjs';
+import {sorterPage,sorterEntry,bindSorter,guardSorterNavigation} from './borrowed-sorter-ui.mjs';
+import {recordPage,recordRefusal,recordEntry,bindRecord,guardRecordNavigation} from './town-record-ui.mjs';
+import {prepareRecordDisplay} from './town-record-core.mjs';
+import {equalityPage,equalityRefusal,equalityEntry,bindEquality,guardEqualityNavigation} from './equality-desk-ui.mjs';
+import {prepareEqualityDisplay} from './equality-desk-core.mjs';
+import {waterPage,bindWater,waterEntry,guardWaterNavigation} from './water-shares-ui.mjs';
+import {hatsPage,bindHats,hatsEntry} from './which-hat-ui.mjs';
+import {codesPage,bindCodes,codesEntry} from './lantern-codes-ui.mjs';
+import {pathwayPage,pathwayInvitation,bindPathways} from './pathway-entry-ui.mjs';
+import {linearPage,linearRefusal,bindLinear} from './linear-pathway-ui.mjs';
+import {prepareLinearDisplay} from './linear-pathway-core.mjs';
+import {evidenceVoicePage,bindEvidenceVoice} from './evidence-voice-ui.mjs';
+import {motionPage,bindMotion} from './motion-evidence-ui.mjs';
+import {frenchRoomsPage,bindFrenchRooms} from './french-rooms-ui.mjs';
+import {orderedPage,orderedRefusal,orderedEntry,bindOrdered} from './ordered-sorting-ui.mjs';
+import {prepareOrderedDisplay} from './ordered-sorting-core.mjs';
+import {pairsPage,pairsRefusal,pairsEntry,bindPairs} from './seed-pairs-ui.mjs';
+import {preparePairDisplay} from './seed-pairs-core.mjs';
+import {bothPage,bothRefusal,bindBoth} from './balance-both-ui.mjs';
+import {prepareBothDisplay} from './balance-both-core.mjs';
+import {pricePage,priceEntry,priceRefusal,bindPrice} from './slope-equation-ui.mjs';
+import {preparePriceDisplay} from './slope-equation-core.mjs';
 import {keeperPages,parcelHome,keeperInvitation,bindKeeperStory,refreshKeeperVisibility} from './keeper-story-ui.mjs';
 import {captureFirstSupper} from './keeper-story-core.mjs';
+import {arrivalSkipsWelcome} from './story-arrivals-core.mjs';
+import {arrivalPage,arrivalInvitation,bindArrival,resetArrivalVisit} from './story-arrivals-ui.mjs';
+import {actTwoPage,actTwoReturn,bindActTwo} from './act-two-ui.mjs';
 import {deskPage,deskEntry,bindDesk} from './keepers-desk-ui.mjs';
 import {rowsPage,rowsNotes,bindRows,resetRowsVisit} from './ribbon-rows-ui.mjs';
 import {offerHowto,keepOfferingHowto} from './drawn-howto.mjs';
@@ -45,6 +76,9 @@ import {townDisplayedFactPairs} from './town-remembers-core.mjs';
 import {batchDisplayedFactPairs} from './whole-batches-core.mjs';
 import {bellStudioPage,bellStudioEntry,bindBellStudio} from './bell-studio-ui.mjs';
 import {createBellPlayer} from './bell-studio-audio.mjs';
+import {rhythmPage,rhythmEntry,bindRhythm,resetRhythmVisit} from './rhythm-ui.mjs';
+import {createRhythmPlayer} from './rhythm-audio.mjs';
+import {weatherPage,talliesPage,bindWeatherTally,resetWeatherTallyVisit,weatherEntry} from './weather-tally-ui.mjs';
 import {travelersArchivePage,travelersArchiveEntry,bindTravelersArchive} from './travelers-archive-ui.mjs';
 import {travelersArchive,noteArchiveSources} from './travelers-archive-core.mjs';
 import {measuringRecipesPage,measuringRecipesEntry,bindMeasuringRecipes} from './measuring-recipes-ui.mjs';
@@ -119,9 +153,10 @@ import {broadHome,checkinHub,activityLibrary,trailSummary,learningMap,renderMode
 import {observation,recommendations,makePractice,methodLabel,describe,numericAnswer} from './core.mjs';
 import {checkin,puzzles,skills} from './content.mjs';
 const $=s=>document.querySelector(s), main=$('#main');
-let bellPlayer=null;
-const stopBell=(reason='page-change')=>bellPlayer?.stop(reason);
-const bellPlayback={play:(sequence,callbacks)=>(bellPlayer??=createBellPlayer()).play(sequence,callbacks),stop:stopBell};
+let bellPlayer=null,rhythmPlayer=null;
+const stopBell=(reason='page-change')=>{bellPlayer?.stop(reason);rhythmPlayer?.stop(reason);};
+const bellPlayback={play:(sequence,callbacks)=>{rhythmPlayer?.stop('other-studio');return (bellPlayer??=createBellPlayer()).play(sequence,callbacks);},stop:stopBell};
+const rhythmPlayback={play:(sequence,callbacks)=>{bellPlayer?.stop('other-studio');return (rhythmPlayer??=createRhythmPlayer()).play(sequence,callbacks);},stop:stopBell};
 document.addEventListener('click',e=>{if(e.target.closest('[data-speak],[data-preview-voice],a[href^="#"]'))stopBell('speech-or-navigation');},true);
 window.addEventListener('pagehide',()=>{stopBell('pagehide');stopSpeech();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){stopBell('hidden');stopSpeech();}});
@@ -131,11 +166,28 @@ const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
 keepOfferingHowto(main,()=>choosingExplorer?'':location.hash);
-let needsExplorerInitialization=location.hash==='#begin'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
+let needsExplorerInitialization=['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
-let graph=null;
-try {const response=await fetch('./marble-map.json');if(response.ok)graph=await response.json();}catch{}
+// Optional map data must never hold the first playable screen behind a download.
+let graph=null,graphLoading=true,graphLoad=null;
+function updateMapLoadNotice(){
+ const notice=document.querySelector('[data-map-load-status]'),button=document.querySelector('[data-map-refresh]');
+ if(!notice||!button)return;
+ notice.textContent=graph?'The map is ready. Choose Show the map when you want to open it.':graphLoading?'The map data is loading. All the games are open while you wait.':'The map data is unavailable right now. You can try again or keep exploring.';
+ button.disabled=graphLoading;button.textContent=graph?'Show the map':graphLoading?'Loading map data…':'Try loading the map again';
+}
+function loadCurriculumMap(){
+ if(graphLoad)return graphLoad;
+ graphLoading=true;updateMapLoadNotice();
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
+ graphLoad=Promise.resolve().then(async()=>{
+  try{const response=await fetch('./marble-map.json',{signal:controller.signal});if(response.ok){const value=await response.json();if(Array.isArray(value?.topics)&&value.topics.length&&Array.isArray(value.dependencies))graph=value;}}
+  catch{}finally{clearTimeout(timer);graphLoading=false;graphLoad=null;updateMapLoadNotice();}
+ });
+ return graphLoad;
+}
+
 let screen='',activity=null,active=null,practiceSession=null,routeChoice='auto',puzzleLevel=null,lastAdventure=null;
 const blank=()=>({attempts:[],hinted:false,revealed:false,method:null,choice:null,input:'',error:'',exposed:false});
 function storageWarning(){return explorerStore.warning||(!storageOK?'This browser cannot save progress right now. You can still explore; download notes before leaving.':'');}
@@ -147,7 +199,12 @@ function updateStorageNotice(){
  const status=main.querySelector('[data-saving-status]');if(status)status.textContent=savingStatus();
 }
 function save(){storageOK=explorerStore.save(state);persist=explorerStore.persist;updateStorageNotice();}
-document.addEventListener('garden-speech-preference',e=>{state.garden.speech=e.detail;save();});
+document.addEventListener('garden-speech-preference',e=>{
+  if(Object.hasOwn(state,'garden')&&(!state.garden||typeof state.garden!=='object'||Array.isArray(state.garden)))return;
+  const candidate=structuredClone(state);candidate.garden??={};candidate.garden.speech=structuredClone(e.detail);
+  if(!priceOptions().canExport(candidate))return;
+  state.garden??={};state.garden.speech=candidate.garden.speech;save();
+});
 function syncDraft(){
   if(activity?.mode==='checkin')state.baseline.draft={questionId:activity.q.id,...active};
   if(activity?.mode.startsWith('broad-'))state.broad.drafts[`${activity.mode==='broad-checkin'?'checkin':'activity'}:${activity.q.id}`]={...active};
@@ -160,7 +217,7 @@ function gardenArt(){let flowers='';for(let r=0;r<3;r++)for(let c=0;c<4;c++)flow
 function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back">← Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
 function noteInstructionArrival(){if(choosingExplorer)return;const [desk,page]=(location.hash||'').slice(1).split('/');if(page==='instructions'&&['post','loft'].includes(desk)&&noteInstructionEntry(state,desk))save();}
 function navigate(hash){stopBell('navigation');if(location.hash===hash){noteInstructionArrival();render();}else location.hash=hash;}
-function home(){return startingInvitation()+deskEntry()+gardenHome(state,persist,parcelHome(state,{blocked:keeperFilmBlocked()}))+pileEntry()+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
+function home(){return pathwayInvitation()+startingInvitation()+arrivalInvitation(state)+deskEntry()+gardenHome(state,persist,parcelHome(state,{blocked:keeperFilmBlocked()}))+pileEntry()+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
 function startCheckin(){if(state.baseline.complete){navigate('#summary');return;}const q=checkin[state.baseline.index];activity={mode:'checkin',q};const draft=state.baseline.draft;active=draft?.questionId===q.id?{...blank(),...draft}:blank();
   if(draft?.questionId!==q.id&&(state.exposures?.includes(`${q.a}x${q.b}`)||state.exposures?.includes(`${q.b}x${q.a}`)))active.exposed=true;
   screen='activity';render();focusActivity();}
@@ -254,6 +311,8 @@ function exposeRain(exposure){noteRainDisplayExposure(state,exposure);exposeStor
 function render(){
   stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
+  if(!['#almanac/weather','#almanac/tallies'].includes(hash)||choosingExplorer)resetWeatherTallyVisit();
+  if(hash!=='#studio/rhythm'||choosingExplorer)resetRhythmVisit();
   const scaleBench=hash==='#workshop/scale';
   if(!scaleBench||choosingExplorer)resetScaleSession();
   const remainsBench=hash==='#numbers/return/ledger';
@@ -281,6 +340,51 @@ function render(){
   const clockWalkBench=root==='post'&&slug==='clock-walk',pavingBench=root==='numbers'&&slug==='paving';
   const collectionBench=root==='living'&&slug==='collection',lanternBench=root==='numbers'&&slug==='lanterns',noticeBench=root==='loft'&&slug==='printer';
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',measureBench=root==='science'&&slug==='measure',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',doubleBench=root==='post'&&slug==='double-check',batchBench=root==='cafe'&&slug==='batches',labelBench=root==='archive'&&slug==='labels',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
+  if(['#almanac/weather','#almanac/tallies'].includes(hash)){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):(hash==='#almanac/weather'?weatherPage(state,explorerStore.active.id):talliesPage(state,explorerStore.active.id));updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWeatherTally(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell});bindSpeech();}return;
+  }
+  if(hash==='#studio/rhythm'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):rhythmPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRhythm(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,player:rhythmPlayback,stopSpeech});bindSpeech();}return;
+  }
+  if(hash==='#science/water-shares'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#science'?'page':'false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):waterPage(state);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWater(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});bindSpeech();}return;
+  }
+  if(hash==='#post/descriptions'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#post'?'page':'false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):hatsPage(state);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindHats(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});bindSpeech();}return;
+  }
+  if(hash==='#post/codes'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#post'?'page':'false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):codesPage(state);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindCodes(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});bindSpeech();}return;
+  }
+  if(hash==='#arrive'){
+    resetStartingFlow();
+    if(choosingExplorer)resetArrivalVisit();
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):arrivalPage(state,explorerStore.active.id,{blocked:!!document.querySelector('dialog.welcome-film[open]')});updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindArrival({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,replayWelcome:()=>playFilm('welcome',{replay:true})});bindSpeech();}return;
+  }
+  resetArrivalVisit();
   if(hash==='#begin'){
     if(choosingExplorer)resetStartingFlow();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
@@ -293,9 +397,39 @@ function render(){
     return;
   }
   resetStartingFlow();
+  // Subject entry and unit visits do not normalize or advance other activities.
+  if(root==='pathways'||root==='learn'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
+    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    const options={save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,entryLesson:detail};
+    let content;
+    if(choosingExplorer)content=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
+    else if(root==='learn'&&slug==='math'&&detail==='timing-desk'){const ready=prepareTimingDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?timingPage(state):timingRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='science'&&detail==='ledger'){const ready=prepareLedgerDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?ledgerPage(state):ledgerRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='history'&&detail==='river-room'){const ready=prepareRiverDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?riverPage(state)+ledgerEntry():riverRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='computing'&&detail==='sorting')content=sorterPage(state);
+    else if(root==='learn'&&slug==='math'&&detail==='equality'){const ready=prepareEqualityDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?equalityPage(state):equalityRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='math'){const ready=prepareLinearDisplay(state,{...priceOptions(),entryLesson:detail,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?linearPage(state,detail):linearRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='english')content=evidenceVoicePage(state,detail);
+    else if(root==='learn'&&slug==='science'&&detail==='records'){const ready=prepareRecordDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?recordPage(state)+ledgerEntry()+riverEntry():recordRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='science')content=motionPage(state,detail);
+    else if(root==='learn'&&slug==='french')content=frenchRoomsPage(state,detail);
+    else content=pathwayPage(state,slug||'math')+(slug==='science'?timingEntry()+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+codesEntry()+waterEntry():slug==='english'?riverEntry()+hatsEntry():(!slug||slug==='math')?timingEntry()+ledgerEntry()+equalityEntry():'');
+    if(!choosingExplorer&&root==='learn'&&slug==='science'&&detail==='records')content+=actTwoReturn(state,'garden');
+    main.innerHTML=content;updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{
+      $('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());
+      bindTiming(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindLedger(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindRiver(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindSorter(state,options);bindRecord(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindEquality(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindPathways(state,options);bindLinear(state,options);bindEvidenceVoice(state,options);bindMotion(state,options);bindFrenchRooms(state,options);bindSpeech();
+    }
+    return;
+  }
   if(hash==='#cafe/units'){
     if(choosingExplorer)resetUnits();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
+    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#cafe'?'page':'false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):unitsPage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindUnits({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,focus:focusElement,...pavingOptions()});bindSpeech();}return;
@@ -304,6 +438,8 @@ function render(){
   if(hash==='#loft/shadows'){
     if(choosingExplorer)resetShadow();
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
+    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#loft'?'page':'false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):shadowPage(explorerStore.active.id,state);if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();
@@ -312,13 +448,13 @@ function render(){
   }
   resetShadow();
   // This independent scene must reach its atomic exposure check before normalizers/binders.
-  if(scaleBench&&!choosingExplorer){
+  if(scaleBench){
    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
-   main.innerHTML=scalePage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
-   updateStorageNotice();bindExplorers();
+   main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):scalePage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
+   updateStorageNotice();bindExplorers();if(choosingExplorer)return;
    bindScale({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,...pavingOptions()});
    bindSpeech();return;
   }
@@ -332,10 +468,11 @@ function render(){
   let html,joiningExamples=null;
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
   else if(bridgesBench)html=bridgesPage(explorerStore.active.id);
-  else if(root==='desk')html=deskPage(state);
-  else if(root==='almanac')html=keeperPages(state,{blocked:keeperFilmBlocked()});
-  else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id);
-  else if(bellBench)html=bellStudioPage(state);
+  else if(root==='desk'&&slug==='linear'){const v=preparePriceDisplay(state,priceOptions());html=v.ok?pricePage(state):priceRefusal();if(v.changed)save();}
+  else if(root==='desk')html='<details class="panel river-casebook"><summary>Choose another investigation</summary>'+timingEntry('desk')+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+priceEntry()+'</details>'+deskPage(state);
+  else if(root==='almanac')html=['town','celebration','flood-ledger','upstream-letter'].includes(slug)?actTwoPage(state,{part:slug,chapter:detail,blocked:keeperFilmBlocked()}):keeperPages(state,{blocked:keeperFilmBlocked()})+weatherEntry();
+  else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id)+weatherEntry('field');
+  else if(bellBench)html=bellStudioPage(state)+rhythmEntry();
   else if(labelBench)html=labelPage(state,detail,explorerStore.active.id);
   else if(archiveBench)html=travelersArchivePage(state)+labelEntry();
   else if(root==='town'&&slug==='remembers'){const pairs=townDisplayedFactPairs(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=townPage(state,detail);}
@@ -347,10 +484,12 @@ function render(){
   else if(tenthsBench)html=tenthsPage(state)+unitsEntry();
   else if(pavingBench){const fits=preflightPavingDisplay(state,pavingOptions());html=fits?pavingPage(state):pavingRefusalPage();if(fits)save();}
   else if(clockWalkBench)html=clockWalkPage(state);
-  else if(sortingBench)html=sortingPage(state);
-  else if(doubleBench)html=doublePage(state,detail);
+  else if(hash==='#post/sorting/order'){const ready=prepareOrderedDisplay(state,candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok);html=ready.ok?orderedPage(state)+sorterEntry():orderedRefusal();if(ready.changed)save();}
+  else if(sortingBench)html=orderedEntry()+sortingPage(state);
+  else if(doubleBench)html=orderedEntry()+doublePage(state,detail);
   else if(hundredthsBench)html=hundredthsPage(state)+unitsEntry();
-  else if(seedBench)html=seedPage(state);
+  else if(hash==='#numbers/seeds/pairs'){const ready=preparePairDisplay(state,priceOptions());html=ready.ok?pairsPage(state):pairsRefusal();if(ready.changed)save();}
+  else if(seedBench)html=pairsEntry()+seedPage(state);
   else if(lanternBench)html=lanternPage(state);
   else if(noticeBench)html=noticePage(state);
   else if(joiningLedgerBench){const v=joiningView(state),examples=v.source?ledgerSourceExamples(v.source):[];const outcome=recordLedgerDisplay(state,examples,candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok);html=outcome.ok?joiningLedgerPage(state,explorerStore.active.id):ledgerRefusalPage();if(outcome.changed)save();if(!outcome.ok)queueMicrotask(()=>{if(location.hash==='#numbers/join/ledger')focusElement('#ledger-notice');});}
@@ -362,7 +501,7 @@ function render(){
   else if(measureBench)html=measuringDeskPage(state,explorerStore.active.id);
   else if(packingBench){const view=renderParcelPacking(state);if(view.facts.length){exposeStoryFacts({facts:view.facts});save();}html=view.html;}
   else if(batchBench){exposeStoryFacts({facts:batchDisplayedFactPairs(state)});save();html=wholeBatchesPage(state);}
-  else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state)+fieldKitEntry('weather');}
+  else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state)+fieldKitEntry('weather')+weatherEntry('field');}
   else if(sharingBench){exposeStoryFacts({facts:sharingDisplayedFactPairs(state)});save();html=sharingCounterPage(state);}
   else if(rainNotebookBench)html=rainNotebookPage(state);
   else if(collectionBench)html=collectionPage(state);
@@ -388,10 +527,11 @@ function render(){
   }
   else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:otherLiving;}
   else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry()+bridgesEntry();
+  else if(root==='workshop'&&slug==='balance'&&detail==='both'){const ready=prepareBothDisplay(state,priceOptions());html=ready.ok?bothPage(state):bothRefusal();if(ready.changed)save();}
   else if(root==='workshop')html=slug==='recut'||slug==='budget'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph,slug);
   else if(root==='science'){
-    html=slug==='window'?coldWindowPage():slug==='evidence'?evidenceShelfPage(explorerStore.active.id):slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);
+    html=slug==='window'?coldWindowPage():slug==='evidence'?evidenceShelfPage(explorerStore.active.id):slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);if(!['window','evidence'].includes(slug)&&!(slug==='play'&&currentScience(state)))html+=waterEntry();
     if(!['evidence','window'].includes(slug))html+=rainPathsEntry()+measurementEntry();
   }
   else if(root==='cafe'){
@@ -419,28 +559,29 @@ function render(){
   else if(screen==='practice-end')html=practiceEnd();
   else if(root==='checkin')html=checkinHub(state);
   else if(root==='activities')html=activityLibrary(state,graph,areaById(slug)?slug:'all')+openTaskLibrary(slug);
-  else if(root==='map')html=learningMap(state,graph,slug);
+  else if(root==='map')html=graph?learningMap(state,graph,slug):`${heading('The learning connections','The optional map can load while the games stay open.')}<section class="panel"><p data-map-load-status role="status">${graphLoading?'The map data is loading. All the games are open while you wait.':'The map data is unavailable right now. You can try again or keep exploring.'}</p><button type="button" class="secondary" data-map-refresh ${graphLoading?'disabled':''}>${graphLoading?'Loading map data…':'Try loading the map again'}</button><p><a href="#explore">Keep exploring</a></p></section>`;
   else if(root==='multiplication')html=checkinIntro();
   else if(root==='practice')html=practiceIntro();
   else if(root==='puzzles')html=puzzlePage();
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry()+bridgesEntry()+shadowEntry();
-  else html=home()+travelersArchiveEntry()+bellStudioEntry();
+  else html=home()+travelersArchiveEntry()+bellStudioEntry()+rhythmEntry();
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
+  if(!choosingExplorer){const townChapter=root==='workshop'&&slug==='coins'?'market':root==='cafe'&&slug==='batches'?'birthday':root==='loft'&&!slug?'show':null;if(townChapter)html+=actTwoReturn(state,townChapter);}
   if(!choosingExplorer&&root==='cafe'&&!slug)html+=keeperInvitation(state,{blocked:keeperFilmBlocked()});
   main.innerHTML=(state.broad?.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;if(!choosingExplorer)offerHowto(main,location.hash);
   bindEgyptPhotoFallback(main);
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
   updateStorageNotice();bind();
-  if(!choosingExplorer&&['home','almanac'].includes(root)&&!filmSeen('welcome')){const openingOwner=explorerStore.active.id;queueMicrotask(()=>{if(!choosingExplorer&&explorerStore.active.id===openingOwner&&['#home','#almanac','#almanac/keepers',''].includes(location.hash))playFilm('welcome');});}
-  const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
+  if(!choosingExplorer&&['home','almanac'].includes(root)&&!filmSeen('welcome')){const openingOwner=explorerStore.active.id;queueMicrotask(()=>{if(!choosingExplorer&&explorerStore.active.id===openingOwner&&(['#home',''].includes(location.hash)||location.hash==='#almanac'||location.hash.startsWith('#almanac/')))requestAutomaticFilm('welcome');});}
+  const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)requestAutomaticFilm(film);});
 }
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
 function focusElement(selector){const element=$(selector);if(element){if(!element.matches('a[href],button,input,select,textarea,summary,[tabindex]'))element.tabIndex=-1;element.focus();}}
-function focusExploreStart(){if(!choosingExplorer&&location.hash==='#begin'){focusElement('#starting-title');return true;}if(!choosingExplorer&&location.hash==='#cafe/units'){focusElement(document.querySelector('[data-units-root]')?'#units-title':'#units-status');return true;}if(!choosingExplorer&&location.hash==='#loft/shadows'){focusElement('#shadow-title');return true;}if(!choosingExplorer&&(location.hash||'').slice(1).split('/')[0]==='explore'){focusElement('#explore-title');return true;}return false;}
+function focusExploreStart(){if(!choosingExplorer&&location.hash==='#arrive'){focusElement('#arrival-title');return true;}if(!choosingExplorer&&location.hash==='#begin'){focusElement('#starting-title');return true;}if(!choosingExplorer&&location.hash==='#cafe/units'){focusElement(document.querySelector('[data-units-root]')?'#units-title':'#units-status');return true;}if(!choosingExplorer&&location.hash==='#loft/shadows'){focusElement('#shadow-title');return true;}if(!choosingExplorer&&(location.hash||'').slice(1).split('/')[0]==='explore'){focusElement('#explore-title');return true;}return false;}
 function rerenderActivity(){const input=$('#answer');if(input)active.input=input.value;syncDraft();render();}
 function openTaskLibrary(selected){return `<section class="panel broad-open-invites"><h2>Questions with room for your ideas</h2><p>Wonder, estimate, invent, and explain together. These invitations have no scored answer.</p><div class="open-task-links">${openTasks().filter(t=>!areaById(selected)||t.area===selected).map(t=>`<a class="secondary" href="#wonder/${t.id}">${esc(t.title)}</a>`).join('')}</div></section>`;}
 function notesReport(notebook){return {title:'After the Storm: observations',exportedAt:new Date().toISOString(),note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:explorerStore.active.avatar,color:explorerStore.active.color,symbol:explorerStore.active.symbol},recommendation:recommendations(notebook),...notebook};}
@@ -448,12 +589,12 @@ function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
 function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
 function useExplorer(next,destination='#home'){
- if(!next)return;resetStartingFlow();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=destination==='#cafe/units';if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
+ if(!next)return;resetWeatherTallyVisit();resetRhythmVisit();resetStartingFlow();resetArrivalVisit();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)||['#cafe/units','#begin','#arrive'].includes(destination)||['pathways','learn'].includes(destination.slice(1).split('/')[0]);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
- if(destination!=='#notes'&&destination!=='#cafe/units')playFilm('welcome');
+ if(destination!=='#notes'&&destination!=='#begin'&&destination!=='#arrive'&&destination!=='#cafe/units'&&!['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)&&!['pathways','learn'].includes(destination.slice(1).split('/')[0]))requestAutomaticFilm('welcome');
 }
 function freshExplorerChoice(){for(const avatar of ['sky','fern','reed'])for(const color of EXPLORER_COLORS)for(const symbol of EXPLORER_SYMBOLS)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
-function chooseExplorer(create=false){resetStartingFlow();cancelProgressImport();if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
+function chooseExplorer(create=false){resetStartingFlow();resetArrivalVisit();cancelProgressImport();if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
 function bindProgressTransfer(){
  if(explorerStore.importUncertain)document.querySelectorAll('#remember,#reset,#clear-all-explorers,[data-remove-copy]').forEach(el=>el.disabled=true);
  $('#progress-file')?.addEventListener('change',async e=>{
@@ -480,9 +621,10 @@ function bindExplorers(){
  $('#explorer-new')?.addEventListener('click',()=>{explorerDraft=freshExplorerChoice();creatingExplorer=true;render();});
  $('#explorer-back')?.addEventListener('click',()=>{creatingExplorer=false;render();});
  $('#explorer-cancel')?.addEventListener('click',e=>{e.preventDefault();choosingExplorer=false;creatingExplorer=false;noteInstructionArrival();render();});
- document.querySelectorAll('[data-select-explorer]').forEach(b=>b.onclick=()=>useExplorer(explorerStore.select(b.dataset.selectExplorer,state)));
+ const explorerDestination=()=>['#post/codes','#post/descriptions','#science/water-shares','#arrive','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)?location.hash:['pathways','learn'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
+ document.querySelectorAll('[data-select-explorer]').forEach(b=>b.onclick=()=>useExplorer(explorerStore.select(b.dataset.selectExplorer,state),explorerDestination()));
  for(const field of ['avatar','color','symbol'])document.querySelectorAll(`[data-explorer-${field}]`).forEach(b=>b.onclick=()=>{explorerDraft[field]=b.dataset[`explorer${field[0].toUpperCase()+field.slice(1)}`];render();$(`[data-explorer-${field}="${explorerDraft[field]}"]`)?.focus();});
- $('#explorer-create')?.addEventListener('click',()=>useExplorer(explorerStore.add(explorerDraft,state)));
+ $('#explorer-create')?.addEventListener('click',()=>useExplorer(explorerStore.add(explorerDraft,state),explorerDestination()));
  document.querySelectorAll('[data-download-copy]').forEach(b=>b.onclick=()=>{const copy=explorerStore.keptCopies()[Number(b.dataset.downloadCopy)];if(copy)downloadText(copy.raw,`number-garden-notes-kept-${new Date().toISOString().slice(0,10)}.json`);});
  document.querySelectorAll('[data-remove-copy]').forEach(b=>b.onclick=()=>{const copy=explorerStore.keptCopies()[Number(b.dataset.removeCopy)];if(copy)confirmGardenAction('Remove this kept copy?','Download it first if you want to keep it. Other explorer records remain.',()=>explorerStore.removeCopy(copy.key));});
  $('#clear-all-explorers')?.addEventListener('click',()=>confirmGardenAction('Clear every explorer?','This removes every saved explorer, earlier shared save, backup and kept copy from this device. Download notes first. Downloaded files are unaffected.',()=>useExplorer(explorerStore.clearAll())));
@@ -502,10 +644,17 @@ function bindBroadExtras(){
  $('#broad-help-explain')?.addEventListener('click',()=>{helper.revealed=true;syncDraft();render();focusElement('.solution');});
  $('#broad-help-return')?.addEventListener('click',()=>{helper.open=false;syncDraft();render();focusElement('#answer, [data-choice]');});
 }
+function priceOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
 function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
-function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
+function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&!arrivalSkipsWelcome(state)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function bind(){
+ $('[data-map-refresh]')?.addEventListener('click',()=>{if(graph){render();main.focus();}else void loadCurriculumMap();});
+ bindActTwo(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindKeeperStory(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
+ bindOrdered(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,downloadNotes:()=>downloadText(JSON.stringify(notesReport(state),null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
+ bindPairs(state,{save,render,focus:focusElement,...priceOptions(),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
+ bindBoth(state,{save,render,focus:focusElement,...priceOptions(),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
+ bindPrice(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindDesk(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindRows(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindShutters(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
@@ -604,9 +753,9 @@ function bind(){
  $('#download')?.addEventListener('click',()=>{const report=notesReport(state);downloadText(JSON.stringify(report,null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`);});
  $('#reset')?.addEventListener('click',showReset);
 }
-function exposeStoryFacts(node,except,target=state,qualifyPendingBramble=false){
+function exposeStoryFacts(node,except,target=state,qualifyPendingBramble=false,normalize=true){
  for(const pair of node.facts||[]){
-  noteLegacyExposure(target,pair);noteGardenFactExposure(target,pair,except);
+  noteLegacyExposure(target,pair,{normalize});noteGardenFactExposure(target,pair,except,{normalize});
   if(qualifyPendingBramble)notePendingBrambleFactExposure(target,pair);
   target.exposures??=[];const key=`${pair[0]}x${pair[1]}`;if(!target.exposures.includes(key))target.exposures.push(key);
   const draft=target.baseline.draft,q=draft&&checkin.find(x=>x.id===draft.questionId),fact=q?.fact||(q&&[q.a,q.b]);
@@ -683,7 +832,7 @@ function bindStory(){
 function renderPuzzleEnd(q,o){main.innerHTML=`${heading('An idea to keep.','You made room for a little wondering.')}<section class="summary-callout"><h2>${esc(q.title)}</h2><p>${esc(describe(o))}. ${o.status==='skipped'?'You can return to this puzzle whenever you like.':esc(q.talk)}</p><div class="summary-links"><a href="#puzzles" class="primary">Choose another puzzle</a><a href="#home" class="secondary">Back to the garden</a></div></section>`;main.focus();}
  function showReset(){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>Start with a fresh page?</h2><p>This clears this explorer’s garden, café, stories, practice, guide and character choices, and notes. Other explorers stay in place. Earlier shared copies can be removed separately from notes. Download your notes first if you want to keep them.</p><div class="dialog-actions"><button class="secondary" id="cancel-reset">Keep our progress</button><button class="primary danger" id="confirm-reset">Clear progress</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('#cancel-reset').onclick=()=>d.close();d.querySelector('#confirm-reset').onclick=()=>{stopBell('reset');resetSpeechPreferences();resetEvidenceShelf();resetGatheringBudget();resetPortionsSession();resetFossilSession();state=explorerStore.clearActive();ensurePlantings(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);practiceSession=null;activity=null;active=null;screen='';save();d.close();navigate('#home');};d.addEventListener('close',()=>d.remove());}
  document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(a?.getAttribute('href')==='#main'){event.preventDefault();main.focus();return;}if(a&&a.getAttribute('href')===location.hash){event.preventDefault();if(location.hash==='#numbers/return/ledger')resetRemains();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);}});
- window.addEventListener('hashchange',event=>{if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#begin'&&new URL(event.newURL).hash!=='#begin')resetStartingFlow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#cafe/units'&&new URL(event.newURL).hash!=='#cafe/units')resetUnits();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#loft/shadows'&&new URL(event.newURL).hash!=='#loft/shadows')resetShadow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/scale'&&new URL(event.newURL).hash!=='#workshop/scale')resetScaleSession();cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);});
+ window.addEventListener('hashchange',event=>{if(guardTimingNavigation()||guardLedgerNavigation()||guardRiverNavigation()||guardSorterNavigation()||guardRecordNavigation()||guardEqualityNavigation()||guardWaterNavigation())return;if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#arrive'&&new URL(event.newURL).hash!=='#arrive')resetArrivalVisit();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#begin'&&new URL(event.newURL).hash!=='#begin')resetStartingFlow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#cafe/units'&&new URL(event.newURL).hash!=='#cafe/units')resetUnits();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#loft/shadows'&&new URL(event.newURL).hash!=='#loft/shadows')resetShadow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/scale'&&new URL(event.newURL).hash!=='#workshop/scale')resetScaleSession();cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);});
  $('#privacy-button').onclick=()=>$('#about-dialog').showModal();
 noteInstructionArrival();
  render();
@@ -697,11 +846,11 @@ const FILMS={
  cafe:{src:'./cafe-film.html',title:'Welcome Back, Neighbors: the café supper film',heading:'The welcome-back supper',skip:'Skip the film',note:'Six tables, six lanterns. Sound is optional. You can watch it again from the café goal.'},
  bramble:{src:'./bramble-film.html',title:'Through the Ribbon Gate: Bramble’s film',heading:'Through the ribbon gate',skip:'Skip the film',note:'A story example: Bramble ties three bundles of four ribbons. Your own work stays in your notebook. Sound is optional.'}
 };
-function filmSeen(id){return id==='welcome'?state.garden.welcomeFilmSeen===true:state.garden.filmsSeen?.[id]===true;}
-function markFilmSeen(id){if(id==='welcome')state.garden.welcomeFilmSeen=true;else{if(!state.garden.filmsSeen||typeof state.garden.filmsSeen!=='object'||Array.isArray(state.garden.filmsSeen))state.garden.filmsSeen={};state.garden.filmsSeen[id]=true;}save();}
+function filmSeen(id){return id==='welcome'?state.garden?.welcomeFilmSeen===true:state.garden?.filmsSeen?.[id]===true;}
+function markFilmSeen(id){if(!Object.hasOwn(state,'garden'))state.garden={};if(!state.garden||typeof state.garden!=='object'||Array.isArray(state.garden))return;if(id==='welcome')state.garden.welcomeFilmSeen=true;else{if(!state.garden.filmsSeen||typeof state.garden.filmsSeen!=='object'||Array.isArray(state.garden.filmsSeen))state.garden.filmsSeen={};state.garden.filmsSeen[id]=true;}save();}
 function playFilm(id,{replay=false}={}){
  if(!Object.hasOwn(FILMS,id)||(!replay&&filmSeen(id))||document.querySelector('dialog[open]'))return false;
- const f=FILMS[id],returnFocus=document.activeElement,filmOwner=explorerStore.active.id,filmNotebook=state;stopBell('film');stopSpeech();
+ const f=FILMS[id],returnFocus=document.activeElement,filmOwner=explorerStore.active.id,filmNotebook=state,filmRoute=location.hash;stopBell('film');stopSpeech();
  const dialog=document.createElement('dialog');dialog.className='welcome-film';dialog.setAttribute('aria-labelledby','welcome-film-title');
  dialog.innerHTML=`<div class="welcome-film-heading"><h2 id="welcome-film-title">${esc(f.heading)}</h2><button type="button" class="secondary" data-film-skip autofocus>${esc(f.skip)}</button></div><iframe title="${esc(f.title)}" src="${f.src}?autoplay=1&amp;embedded=1"></iframe><p class="tiny">${esc(f.note)}</p>`;
  document.body.append(dialog);
@@ -710,13 +859,23 @@ function playFilm(id,{replay=false}={}){
  const finished=e=>{
   if(e.origin!==location.origin||e.source!==frame.contentWindow)return;
   if(e.data==='garden-film-finished')dialog.close();
-  else if(id==='bramble'&&state===filmNotebook&&explorerStore.active.id===filmOwner&&!choosingExplorer&&e.data==='garden-film-example'&&!exampleOffered){exampleOffered=true;exposeStoryFacts({facts:[[3,4]]});save();}
+  else if(id==='bramble'&&state===filmNotebook&&explorerStore.active.id===filmOwner&&location.hash===filmRoute&&!choosingExplorer&&e.data==='garden-film-example'&&!exampleOffered){exampleOffered=true;exposeStoryFacts({facts:[[3,4]]});save();}
  };
  dialog.querySelector('[data-film-skip]').onclick=()=>dialog.close();
- dialog.addEventListener('close',()=>{window.removeEventListener('message',finished);frame.remove();dialog.remove();refreshKeeperVisibility(keeperFilmBlocked());if(!choosingExplorer&&state===filmNotebook&&explorerStore.active.id===filmOwner){const next=endingFilm();if(id==='welcome'&&next&&!filmSeen(next)&&playFilm(next))return;const target=id==='welcome'?document.querySelector('[data-keeper-intro] [data-keeper-heading]'):id==='cafe'?document.querySelector('[data-keeper-invite] [data-keeper-heading]'):null;if(target&&!replay){target.focus();return;}}if(returnFocus?.isConnected&&typeof returnFocus.focus==='function')returnFocus.focus();else main.focus();},{once:true});
+ dialog.addEventListener('close',()=>{window.removeEventListener('message',finished);frame.remove();dialog.remove();refreshKeeperVisibility(keeperFilmBlocked());if(choosingExplorer||state!==filmNotebook||explorerStore.active.id!==filmOwner||location.hash!==filmRoute)return;const next=endingFilm();if(id==='welcome'&&next&&!filmSeen(next)&&requestAutomaticFilm(next))return;const target=id==='welcome'?document.querySelector('[data-keeper-intro] [data-keeper-heading]'):id==='cafe'?document.querySelector('[data-keeper-invite] [data-keeper-heading]'):null;if(target&&!replay){target.focus();return;}if(returnFocus?.isConnected&&typeof returnFocus.focus==='function')returnFocus.focus();else main.focus();},{once:true});
  window.addEventListener('message',finished);
  dialog.showModal();refreshKeeperVisibility(true);
  markFilmSeen(id);return true;
+}
+// An explorer or route may change while a film is open. Queue only that current
+// owner's still-eligible automatic film, so closing the older dialog cannot leave
+// an unseen introduction hidden or move focus/credits to an unrelated owner.
+function requestAutomaticFilm(id){
+ const owner=explorerStore.active.id,book=state,route=location.hash;
+ const eligible=()=>!choosingExplorer&&state===book&&explorerStore.active.id===owner&&location.hash===route&&!filmSeen(id)&&(id==='welcome'?route!=='#arrive'&&!['#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(route)&&!arrivalSkipsWelcome(state):endingFilm()===id);
+ if(!eligible())return false;
+ const modal=document.querySelector('dialog[open]');if(modal){modal.addEventListener('close',()=>{if(eligible())requestAutomaticFilm(id);},{once:true});return false;}
+ return playFilm(id);
 }
 // The story endings that earn a film: the Paris errand, the first café supper, and Bramble's gate.
 function endingFilm(){
@@ -724,7 +883,10 @@ function endingFilm(){
  const [root,slug]=(location.hash||'#home').slice(1).split('/');
  if(root==='storm'&&['end','play'].includes(slug)){const v=currentVisit(state);if(v?.finished&&(v.entrance==='paris'||entranceById(v.entrance)?.language==='fr'))return 'paris';}
  if(root==='cafe'&&!['groups','sharing','recipes','batches','fractions','units'].includes(slug)){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
- if(root==='post'&&!['choose','groups','messages','letters','instructions','packing'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
+ if(root==='post'&&!['choose','groups','messages','letters','instructions','packing','codes','descriptions'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
  return null;
 }
-if(!choosingExplorer&&location.hash!=='#begin'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale')playFilm('welcome');
+if(!choosingExplorer&&!['pathways','learn'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#arrive'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale'&&!['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash))requestAutomaticFilm('welcome');
+
+// Loading this optional reference never re-renders an activity or changes a notebook.
+void loadCurriculumMap();

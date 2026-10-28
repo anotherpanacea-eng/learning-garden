@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {freshState,STORAGE_KEY} from '../dist/core.mjs';
 import {prepareProgressImport,initializeExplorerState,MAX_IMPORT_BYTES} from '../dist/progress-transfer.mjs';
+import {startPile} from '../dist/seed-pile-core.mjs';
 import {ExplorerStore,REGISTRY_KEY} from '../dist/explorer-storage.mjs';
 import {startVisit} from '../dist/garden-core.mjs';
 import {startPostOffice} from '../dist/post-office-core.mjs';
@@ -96,5 +97,10 @@ for(const label of [{toString:null},{unexpected:'object'}])check(!prepareProgres
 {
  const hostile=structuredClone(original);hostile.garden.visits[0].id='<img src=x onerror=alert(1)>"';
  const r=prepareProgressImport(JSON.stringify(hostile));check(r.ok,'hostile visit id still imports');check(!storyHub(r.state).includes('<img'),'imported visit id is escaped in the story hub');
+}
+{
+ // Newer places appear in the import preview by name.
+ const s=initializeExplorerState(freshState()),admit=c=>prepareProgressImport(JSON.stringify(c)).ok;check(startPile(s,{},admit));
+ const prepared=prepareProgressImport(JSON.stringify(s));check(prepared.ok&&prepared.summary.destinations.includes('Games Table: Seed Pile'),'import preview names the Games Table');
 }
 console.log(`${checks} progress transfer checks passed.`);

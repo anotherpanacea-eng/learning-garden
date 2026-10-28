@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {pileRules,pileSource} from '../dist/seed-pile-content.mjs';
-import {gamesView,newPileGame,pilePosition,losingPile,brambleTake,startPile,movePile,explainPile,keepPileNote,resumePile,removePileRecord,MAX_GAMES_BYTES} from '../dist/seed-pile-core.mjs';
+import {gamesView,newPileGame,pilePosition,losingPile,brambleTake,startPile,movePile,explainPile,stepPile,keepPileNote,resumePile,removePileRecord,MAX_GAMES_BYTES} from '../dist/seed-pile-core.mjs';
 import {prepareProgressImport} from '../dist/progress-transfer.mjs';
 import {practicePile} from '../dist/seed-pile-ui.mjs';
 const admit=s=>prepareProgressImport(JSON.stringify({...s,title:'Synthetic notebook'},null,2)).ok;
@@ -46,4 +46,11 @@ const one={...m,moves:[{who:'bramble',take:1},{who:'child',take:3}]};eq(pilePosi
 // After any explanation, the practice board must be winnable for the child against Bramble's plan.
 for(const r of pileRules){const g=practicePile(pileSource(r.id));ok(pilePosition(g),r.id+' practice board is a legal game');eq(g.first,'child');ok(winner(g.start,r.maxTake,r.lastLoses),r.id+' practice start is winnable for the child');}
 const retired=newPileGame();retired.dial='retired-synthetic-dial';ok(pilePosition(retired),'a retired dial does not hide a frozen game');ok(!newPileGame({dial:'retired-synthetic-dial'}),'new games still use current dial choices');
+{
+ // A saved explanation keeps its own frozen rule and wording while stepping, even with no current game.
+ const s=freshState(),frozen=structuredClone(pileSource(pileRules.find(r=>r.id!=='pile').id));frozen.frames[1].text='Synthetic earlier wording.';
+ s.games={version:1,current:null,earlier:[],notes:[],lesson:{source:structuredClone(frozen),step:0}};
+ ok(stepPile(s,1,admit));eq(s.games.lesson,{source:frozen,step:1},'step keeps the saved lesson source');
+ ok(!stepPile(s,4,admit));s.games.lesson=null;const before=structuredClone(s.games);ok(!stepPile(s,1,admit),'no saved lesson to step');eq(s.games,before);
+}
 console.log(`Seed Pile: ${checks} assertions passed.`);

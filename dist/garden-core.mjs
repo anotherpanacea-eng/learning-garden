@@ -151,10 +151,12 @@ export function noteStorySeen(state){
  const passageId=(isParisReadingVisit(v)?parisNode(v,v.node):storyNodes[v.node])?.passageId;
  if(passageId)for(const other of state.garden.visits){if(isParisReadingVisit(other)&&parisVisitStatus(other)!=='current')continue;for(const [id,d] of Object.entries(other.drafts||{}))if((other.id!==v.id||id!==v.node)&&(isParisReadingVisit(other)?parisNode(other,id):storyNodes[id])?.passageId===passageId)d.priorPassageSeen=true;}
 }
-export function noteGardenFactExposure(state,pair,except=null){
- const key=pairKey(pair);for(const v of ensureGarden(state).visits){
+export function noteGardenFactExposure(state,pair,except=null,{normalize=true}={}){
+ const visits=normalize?ensureGarden(state).visits:Array.isArray(state.garden?.visits)?state.garden.visits:[];
+ const key=pairKey(pair);for(const v of visits){
+  if(!v||typeof v!=='object'||Array.isArray(v)||!isParisReadingVisit(v)&&!entranceById(v.entrance))continue;
   if(isParisReadingVisit(v)&&parisVisitStatus(v)!=='current')continue;
-  for(const [id,d] of Object.entries(v.drafts||{}))if(`${v.id}:${id}`!==except&&((isParisReadingVisit(v)?parisNode(v,id):storyNodes[id])?.facts||[]).some(p=>pairKey(p)===key))d.knownFact=true;
+  for(const [id,d] of Object.entries(v.drafts||{}))if(d&&typeof d==='object'&&!Array.isArray(d)&&`${v.id}:${id}`!==except&&((isParisReadingVisit(v)?parisNode(v,id):storyNodes[id])?.facts||[]).some(p=>pairKey(p)===key))d.knownFact=true;
  }
 }
 function recordStoryAttempt(n,d,value){

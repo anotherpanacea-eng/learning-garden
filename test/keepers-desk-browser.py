@@ -19,6 +19,7 @@ def active(p):return p.evaluate("JSON.parse(localStorage.getItem('learning-garde
 def go(p,h):
  p.goto(BASE+h)
  p.locator('[data-desk-root]' if h=='#desk' else 'main').wait_for()
+ p.wait_for_function("window.__deskTestRenderedRoute===location.hash")
 def part(p,id):p.locator('.desk-tabs [data-desk-step="'+id+'"]').click()
 def task(p,id):p.locator('.desk-task-nav [data-desk-task="'+id+'"]').click()
 def answer(p,value):p.locator('[data-desk-answer]').fill(value);p.locator('[data-desk-keep]').click()
@@ -28,7 +29,7 @@ def bounds(p):
  ok(not bad,'44px touch target heights: '+str(bad))
  ok(p.locator('.desk-page').evaluate("x=>parseFloat(getComputedStyle(x).fontSize)>=16"),'base text at least16px')
 def reload(p):
- identity=active(p);p.reload();p.locator('main').wait_for()
+ identity=active(p);p.reload();p.locator('main').wait_for();p.wait_for_function("window.__deskTestRenderedRoute===location.hash")
  if p.locator('[data-select-explorer]').count():p.locator('[data-select-explorer="'+identity+'"]').click()
  p.locator('[data-desk-root]').wait_for()
 def report(p):
@@ -42,6 +43,11 @@ def setup(browser,width,seed=None):
  c=browser.new_context(viewport={'width':width,'height':1000},has_touch=True,accept_downloads=True)
  s=seed if seed is not None else initial
  c.add_init_script("if(!localStorage.getItem('desk-fixture')){localStorage.setItem('number-garden-v1',"+json.dumps(json.dumps(s))+");localStorage.setItem('desk-fixture','1');}")
+ def app(route):
+  response=route.fetch();body=response.text();marker='function render(){';assert body.count(marker)==1
+  body=body.replace(marker,marker+'window.__deskTestRenderedRoute=location.hash;',1)
+  route.fulfill(response=response,body=body)
+ c.route('**/app.mjs',app)
  p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)));return c,p
 
 def supported_page(p):

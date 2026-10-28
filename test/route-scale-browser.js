@@ -16,7 +16,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
   const c=await browser.newContext({viewport:{width,height:width===320?800:1080},hasTouch:true,acceptDownloads:true});contexts.push(c);
   await c.addInitScript(s=>{localStorage.setItem('number-garden-v1',JSON.stringify(s));window.__spoken=[];window.__cancels=0;window.__saves=0;window.__exposures=0;window.SpeechSynthesisUtterance=class{constructor(t){this.text=t;}};Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[{name:'Synthetic English',voiceURI:'synthetic',lang:'en-US',localService:true,default:true}],cancel(){__cancels++;},addEventListener(){},removeEventListener(){},speak(u){__spoken.push(u.text);}}});},seed);
   if(instrument)await c.route('**/app.mjs',async r=>{const response=await r.fetch();let body=await response.text();body=body.replace('let graph=null;',`window.__read=()=>state;window.__redraw=()=>render();window.__replace=s=>{state=s;render();};window.__report=()=>notesReport(state);let graph=null;`).replace('function save(){','function save(){window.__saves++;').replace('function exposeStoryFacts(node,except,target=state,qualifyPendingBramble=false){','function exposeStoryFacts(node,except,target=state,qualifyPendingBramble=false){window.__exposures++;');await r.fulfill({response,body});});
-  const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.goto(origin+startHash);await p.locator(startHash==='#workshop/scale'?'.scale-page':'.cart-page').waitFor().catch(async e=>{console.error(errors,await p.locator('body').innerText());throw e;});return p;
+  const p=await c.newPage();p.on('pageerror',e=>errors.push(e.message));await p.goto(origin+startHash);await p.locator(startHash==='#workshop/scale'?'.scale-page':startHash==='#workshop'?'.workshop-page':'.cart-page').waitFor().catch(async e=>{console.error(errors,await p.locator('body').innerText());throw e;});return p;
  }
  const go=async(p,hash)=>{await p.evaluate(h=>location.hash=h,hash);await p.waitForFunction(h=>location.hash===h,hash);await p.waitForTimeout(35);};
  const target=(a,k)=>`[data-scale-action="${a}"]${k?`[data-scale-value="${k}"]`:''}`;
@@ -62,6 +62,17 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
   await p.locator('#progress-file').setInputFiles({name:'synthetic-scale.json',mimeType:'application/json',buffer:Buffer.from(raw)});await p.locator('#progress-import-confirm').click();await p.getByText('Notebook brought into a separate explorer',{exact:false}).first().waitFor();await go(p,'#workshop/scale');await show(p,initialScale());
   await go(p,'#notes');await p.locator('#notes-switch-explorer').click();await p.locator('[data-select-explorer="explorer-1"]').click();await go(p,'#workshop/scale');await show(p,initialScale());await go(p,'#notes');await p.locator('#reset').click();await p.locator('#confirm-reset').click();if(await p.locator('[data-film-skip]').count())await p.locator('[data-film-skip]').click();await go(p,'#workshop/scale');await show(p,initialScale());
  }
+ // The Workshop pill opens the existing scale scene and keeps a waiting delivery.
+ for(const width of [320,820]){
+  const s=pending();startPostOffice(s,deliveries[0].id);const p=await setup(width,s,true,'#workshop');
+  const link=p.getByRole('link',{name:'Same route, different scale',exact:true});eq(await link.count(),1,'one direct Workshop scale invitation');
+  const box=await link.boundingBox();ok(box&&box.width>=44&&box.height>=44,'Workshop scale link has a touch-sized target');
+  ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Workshop pill bar wraps without overflow');
+  const held=await p.evaluate(()=>({postOffice:__read().postOffice,cartographer:__read().cartographer,future:__read().future}));
+  await link.tap();await p.locator('[data-scale-root]').waitFor();await show(p,initialScale());
+  eq(await p.evaluate(()=>location.hash),'#workshop/scale','Workshop link reaches the existing scale route');
+  eq(await p.evaluate(()=>({postOffice:__read().postOffice,cartographer:__read().cartographer,future:__read().future})),held,'scale navigation preserves the waiting delivery and retained map data');
+ }
  // The invitation itself supplies no numerical pair and needs no readable old map.
  for(const old of [false,true]){const s=fresh();if(old)s.cartographer={version:99,raw:'Synthetic earlier map'};const p=await setup(320,s,true,'#workshop/maps');
   eq(await p.evaluate(()=>__exposures),0,'companion invitation alone exposes no pair');eq(await p.evaluate(()=>__saves),0,'companion invitation alone saves nothing');eq(await p.locator('.scale-entry a').innerText(),'Same route, different scale');
@@ -84,6 +95,8 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
  // Uninstrumented app smoke and save-off session behavior.
  const real=await setup(820,fresh(),false);await real.locator(target('key',4)).click();eq((await real.locator('.scale-readouts p').allTextContents()).map(text),scaleReadouts(4),'uninstrumented actual app');
  const off=await setup(320);await go(off,'#notes');await off.locator('#remember').uncheck();await go(off,'#workshop/scale');await off.locator(target('key',4)).click();ok(await off.locator('[data-scale-key="4"]').count(),'save-off view usable');eq(await off.evaluate(()=>localStorage.getItem('number-garden-save')),'off','save-off stays off');
+ const sw=await setup(320),kept=await sw.evaluate(()=>JSON.stringify(__read())),saves=await sw.evaluate(()=>__saves);await sw.locator('#explorer-switch').click();await sw.locator('#explorer-cancel').waitFor();eq(await sw.evaluate(()=>JSON.stringify(__read())),kept,'explorer chooser on this route leaves the notebook unnormalized');await sw.locator('#explorer-cancel').click();await sw.locator('.scale-page').waitFor();eq(await sw.evaluate(()=>[JSON.stringify(__read()),__saves]),[kept,saves],'cancelled switch returns to the scene unchanged');
+ for(const [hash,page] of [['#cafe/units','.units-page'],['#loft/shadows','.shadow-page'],['#workshop/scale','.scale-page']]){const d=await sw.context().newPage();d.on('pageerror',e=>errors.push(e.message));await d.goto(origin+hash);await d.locator(page).waitFor();ok(await d.locator('#companion-link').evaluate(x=>x.innerHTML.trim()!==''),hash+' direct load shows the header guide link');await d.close();}
  eq(errors,[],'no browser errors');console.log(`${n} scale111 Chrome checks passed at320/820.`);
  }finally{for(const c of contexts)await c.close();await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

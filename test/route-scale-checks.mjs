@@ -85,7 +85,7 @@ for(const opt of [{...options,canExport:()=>false},{...options,exposeFacts:()=>{
 {
  const s=fresh();resetScaleSession();const before=clone(s),html=scalePage(s,'synthetic',{...options,canExport:()=>false});ok(html.includes('data-scale-blocked'));ok(!html.includes('Invented town route')&&!html.includes('<svg')&&!html.includes('data-speak='),'initial refusal is source-free');eq(s,before);resetScaleSession();
 }
-ok(app.indexOf('if(scaleBench&&!choosingExplorer)')<app.indexOf('  ensureGarden(state);'),'route precedes host normalizers');
+ok(app.indexOf('if(scaleBench){')<app.indexOf('  ensureGarden(state);'),'route precedes host normalizers');
 // Both labels already used U+00A0 at f87; explicit escapes make that intent inspectable.
 const routeSource=fs.readFileSync(new URL('../dist/route-scale.mjs',import.meta.url),'utf8');
 const unitEscape=String.raw`\u00a0`;

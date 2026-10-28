@@ -118,7 +118,7 @@ Sent in answer to the explorer's question in Act III, chapter 4 (any depth may r
 | 21 to 30 | 6 |
 | 31 to 40 | 8 |
 
-This table counts events above an unspecified fictional threshold; it does not report rainfall totals, intensity, duration or ground conditions. Similar event counts can accompany very different rainfall. It leaves the causal question open: a reader may propose either explanation, both, or another, while naming the missing evidence. No reply endorses "probably both" as the conclusion a careful reader must reach. A future source pack must define the threshold and record provenance before using these invented counts.
+This table counts events above an unspecified fictional threshold; it does not report rainfall totals, intensity, duration or ground conditions. Similar event counts can accompany very different rainfall. It leaves the causal question open: a reader may propose either explanation, both, or another, while naming the missing evidence. No reply endorses "probably both" as the conclusion a careful reader must reach. A future source pack that treats these as calibrated measurements must define the threshold and record provenance. The separately reviewed standalone case in [spec246](../../specs/246-ledger-gauge.md) instead uses an explicitly incomplete English copied extract: its absent threshold is named as missing evidence. It does not invent a value, claim comparable rainfall, deliver the full bilingual letter or change story availability.
 
 ---
 
@@ -203,3 +203,7 @@ Arrives the evening of the first journey.
 > Un grand héron gris est descendu du bateau de la côte aujourd'hui. Ce héron a posé des questions sur le ruisseau, puis a pris le chemin de la rivière vers l'amont. Je crois que c'est pour vous ! Léon
 
 *For the reader:* Hollis is they/them. The French avoids a pronoun for Hollis on purpose. *Un grand héron* is grammatically masculine as a noun, which is normal French; please check whether *iel* should appear anywhere, or whether avoiding the pronoun is the better choice for young learners.
+
+## Standalone timing-case boundary · spec247
+
+[The message and the water](../../specs/247-message-and-water.md) uses newly authored English timing sheets under an explicit later-record preview. The 18 km route, fixed rates/message durations and undated five-entry copy are invented supplied material for that case, not words or measurements taken from the first letter above. Opening the case delivers no letter and changes no page, act or official rule. Bilingual text and its fluent-reader gates stay unchanged.

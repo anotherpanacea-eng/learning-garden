@@ -10,6 +10,10 @@ Visits can be paused, resumed, replayed, or left waiting while another path is e
 
 Number Garden now has a storm-recovery purpose: count saved seeds, plan 24 planting spaces, and compare lengths and borders. Its illustrated planning table connects existing open math activities to water, gathering, and the café. [Living Garden](https://number-garden-together.tastypeach3.chatgpt.site/#living) now offers renewable searches across nine authored settings: meet land snails, woodlice and adult butterflies, compare changing conditions, follow a delivery note, and count equal packs of café supplies. Small parcels and all ordered facts through 12×12 are open choices. The [original snail visit](https://number-garden-together.tastypeach3.chatgpt.site/#living/first) and its one-time parcel remain intact. This is guided picture investigation, not a field study or ecosystem simulator. New searches independently suggest deeper nature clues, note comprehension and parcel math from a few distinct finished tasks. Every depth stays open: use habitat evidence and before/after changes, follow sequences or infer a parcel from its contents, and find pack counts or plan tomorrow’s delivery. Help and narration remain separate from first-response matching, retries and familiarity. Paused older visits keep their original questions. [Spec 30](docs/specs/30-adaptive-living-garden.md) describes the conservative suggestion rules and limits.
 
+The **Equality Desk** (`#learn/math/equality`) follows the signed-rate lessons. Test exact numbers against two rules, reveal equivalent transformations, and distinguish one solution, no solutions and every real number as a solution. Four open families revisit60 variants with negative and fractional solutions, brackets and an answer beyond the sample table. Waiting work keeps its original sources, tests, support and first/latest claims; these are supported investigations, not grades.
+
+The **Town Record** (`#learn/science/records`) turns a blank town book into a sampling investigation. Choose when to observe a fictional week, compare what schedules capture, keep zero separate from missing readings, and write instructions a future reader could follow. Earlier collections and writing remain available when planning a new run. It supplies a bounded data-design step, not real flood advice or a complete statistics course.
+
 ## Full learning graph and next games
 
 The [learning atlas](docs/learning-atlas.md) brings in the complete pinned Marble reference graph: 1,590 topics, 3,221 prerequisite edges, eight subjects and 54 domains. The [all-topic index](curriculum/topic-coverage.csv) distinguishes current scoped activity references, supplied explanations and topics not yet mapped. Seven reusable play patterns guide extensions and new games; proposed priorities include Word Workshop, field notebooks/food webs, café fractions and money, messages/map-making, historical evidence, sound/light creation and collaborative stories. These are authoring plans, not a required child sequence or claims of full-topic assessment. Geography, art, music and additional languages also need explicitly authored extensions beyond Marble's subject organization.
@@ -21,6 +25,10 @@ The home page also offers **Watch the storm pass**, the optional 46-second film 
 The introductory storm film opens automatically the first time each saved explorer visits this version. It starts silently, lets sound join at the current picture, and can be skipped at any time. Reduced-motion settings leave playback manual. The home-page “Watch the storm pass” link always remains available. With saving off or unavailable, the reminder lasts only for the current page session.
 
 Three more short films celebrate story endings in the same way: *A Postcard Home* (32 seconds) when a Paris errand ends, *Welcome Back, Neighbors* (34 seconds) when the first café supper lights all six lanterns, and *Through the Ribbon Gate* (31 seconds) when Bramble’s gate is untangled. Each opens once per explorer, can be skipped, and stays available from a “Watch … film” link on that ending. Watching a film is not recorded as learning evidence. The Bramble film shows 3 × 4 as a story example, so it notes that fact as seen, which keeps a later 3 × 4 answer from counting as unseen.
+
+[Parcels on both pans](docs/specs/214-parcels-on-both-pans.md) extends Balance Stall with four positive whole-mass cases, opening bags, paired removals, whole-group sharing and a revisitable equation ledger at `#workshop/balance/both`. Earlier pictures and first/latest kept checks retain their sources; one-sided experiments, Undo, optional help and a blank arrangement keep remain available. It leaves the original single-parcel stall unchanged. The owning PR’s release receipt records hosted verification.
+
+The [Courier’s Price bench](docs/specs/213-slope-to-equation.md) connects a stated slope/rate to a fixed starting charge and `y = mx + b`, then works backwards from a total. Three original price cards support reversible picture/table/graph exploration and kept explanations at `#desk/linear`. The implementation is supported practice, not a full linear-equations course. [PR168](https://github.com/anotherpanacea-eng/learning-garden/pull/168) is merged and deployed; [try the live bench](https://after-the-storm-learning.anotherpanacea.workers.dev/#desk/linear).
 
 The [course routes](docs/course-routes.md) organize a first-year framework with subject-specific entry, missing teaching bridges and human/off-screen work. The [audience proposal](docs/audience-presentation.md) separates presentation from challenge and support; the [joined media inventory](docs/story-milestones-and-films.md#joined-media-inventory) identifies story films, teaching models, audio and celebrations. These are plans, not completed courses or a built theme selector.
 
@@ -55,102 +63,10 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
-node test/keeper-story-checks.mjs
-node test/keepers-desk-checks.mjs
-node test/field-kit-checks.mjs
-node test/riddles-checks.mjs
-node test/field-kit-integration-checks.mjs
-node test/field-notebook-checks.mjs
-node test/field-notebook-integration-checks.mjs
-node test/count-collection-checks.mjs
-node test/lantern-line-checks.mjs
-node test/sharing-counter-checks.mjs
-node test/sharing-counter-integration-checks.mjs
-node test/fraction-trail-checks.mjs
-node test/fraction-trail-integration-checks.mjs
-node test/bundle-exchange-checks.mjs
-node test/bundle-exposure-checks.mjs
-node test/bundle-exchange-integration-checks.mjs
-node test/returning-orders-checks.mjs
-node test/instruction-checks.mjs
-node test/instruction-integration-checks.mjs
-node test/rain-paths-checks.mjs
-node test/rain-paths-integration-checks.mjs
-node test/measuring-recipes-checks.mjs
-node test/measuring-recipes-integration-checks.mjs
-node test/whole-batches-checks.mjs
-node test/whole-batches-integration-checks.mjs
-node test/travelers-archive-checks.mjs
-node test/travelers-archive-ui-checks.mjs
-node test/drawn-howtos-checks.mjs
-node test/travelers-archive-integration-checks.mjs
-node test/plant-study-checks.mjs
-node test/plant-study-integration-checks.mjs
-node test/letter-trail-checks.mjs
-node test/letter-trail-integration-checks.mjs
-node test/message-checks.mjs
-node test/message-integration-checks.mjs
-node test/loft-checks.mjs
-node test/loft-growing-checks.mjs
-node test/progress-transfer-checks.mjs
-node test/recovery-boundaries-checks.mjs
-node test/word-garden-checks.mjs
-node test/core-checks.mjs
-node test/broad-checks.mjs
-node test/broad-variants-checks.mjs
-node test/paused-draft-checks.mjs
-node test/broad-help-checks.mjs
-node test/broad-model-checks.mjs
-node test/explorer-storage-checks.mjs
-node test/plantings-and-speech-checks.mjs
-node test/mobile-quality-checks.mjs
-node test/number-garden-story-checks.mjs
-node test/living-garden-checks.mjs
-node test/living-spiral-checks.mjs
-node test/living-adaptive-checks.mjs
-node test/garden-turn-checks.mjs
-node test/story-checks.mjs
-node test/help-checks.mjs
-node test/cafe-checks.mjs
-node test/cafe-start-checks.mjs
-node test/tenths-checks.mjs
-node test/hundredths-checks.mjs
-node test/science-checks.mjs
-node test/water-evidence-checks.mjs
-node test/workshop-checks.mjs
-node test/route-scale-checks.mjs
-node test/post-office-checks.mjs
-node test/post-office-ui-checks.mjs
-node test/post-pagination-checks.mjs
-node test/post-rival-checks.mjs
-node test/post-rival-adaptive-checks.mjs
-node test/post-rival-adaptive-ui-checks.mjs
-node test/parcel-packing-checks.mjs
-node test/parcel-packing-integration-checks.mjs
-node test/courier-rival-ui-checks.mjs
-node test/learning-invitation-checks.mjs
-node test/learning-connections-checks.mjs
-node test/cafe-expedition-checks.mjs
-node test/cafe-supper-checks.mjs
-node test/facts-checks.mjs
-node test/forage-checks.mjs
-node test/paris-checks.mjs
-node test/paris-exploration-checks.mjs
-node test/paris-saved-source-checks.mjs
-node test/town-remembers-checks.mjs
-node test/town-remembers-integration-checks.mjs
-node test/story-pack-checks.mjs
-node test/library-flood-almanac-checks.mjs
-node test/order-story-checks.mjs
-node test/french-and-revision-checks.mjs
-node test/french-exploration-checks.mjs
-node test/french-saved-source-checks.mjs
-node test/storm-film-checks.mjs
-node test/ending-film-checks.mjs
-node test/equal-groups-checks.mjs
-node test/equal-groups-integration-checks.mjs
-node scripts/check-story-packs.mjs
+node scripts/run-checks.mjs
 ```
+
+The runner checks the offline atlas and story packs, then discovers and runs every `test/*checks*.mjs` source suite in filename order. It stops at the first failure. Browser journeys remain separate and are described with their activities below.
 
 These checks use synthetic observations. They check the application logic; they do not validate the assessment as an educational instrument.
 
@@ -516,13 +432,13 @@ Shadow Theatre (`#loft/shadows`) moves one original opaque card between a fixed 
 
 Same pour, new unit (`#cafe/units`) keeps a separate 1 L picture jug fixed while switching L/mL labels or moving one 50 mL measure between 300 and 350 mL. Supplied relations pass whole-notebook preservation and actual pretty-report import preflight before appearing; existing Kitchen/Tenths/Hundredths work is separate. No saved scene or independent conversion result is added. See [spec113](docs/specs/113-capacity-unit-bridge.md). Run `node test/capacity-units-checks.mjs`; with dist served locally, run `UNITS_TEST_URL=http://127.0.0.1:4213/ node test/capacity-units-browser.js` with the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `UNITS_ARTIFACTS` selects synthetic screenshots. These checks do not establish physical-device, audible-quality, physical measuring or learning outcomes.
 
-How shall we begin? (`#begin`) is an optional four-page starting-choice flow, reached from **Find a place to begin** on Home or **Change starting choices** in Grown-up notes. It applies future Café amounts and new English/French reading defaults together; Keep, Skip and local activity overrides remain available. Waiting orders, frozen reading visits and automatic suggestions retain their existing behavior. There is no age placement or global level. See [spec114](docs/specs/114-optional-starting-flow.md). Run `node test/starting-flow-checks.mjs`; with dist served locally, run `STARTING_TEST_URL=http://127.0.0.1:4214/ node test/starting-flow-browser.js` using the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `STARTING_ARTIFACTS` selects synthetic screenshots. The implementation passed independent review; no production deployment or learning outcome is established.
+How shall we begin? (`#begin`) is an optional four-page starting-choice flow, reached from **Café and reading amounts** on Home or **Change starting choices** in Grown-up notes. It applies future Café amounts and new English/French reading defaults together; Keep, Skip and local activity overrides remain available. Waiting orders, frozen reading visits and automatic suggestions retain their existing behavior. There is no age placement or global level. See [spec114](docs/specs/114-optional-starting-flow.md). Run `node test/starting-flow-checks.mjs`; with dist served locally, run `STARTING_TEST_URL=http://127.0.0.1:4214/ node test/starting-flow-browser.js` using the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables. `STARTING_ARTIFACTS` selects synthetic screenshots. The implementation passed independent review; no production deployment or learning outcome is established.
 
 ## Bramble’s Seed Pile
 
 The first Games Table game is at `#orchard/games`, with links from Home and the Orchard. Choose a pile, who starts, one of three take-away rules and how hard Bramble tries. Take seeds, then let her play. The board resumes after leaving or reloading. Optional step-by-step explanations have a temporary practice board that leaves the waiting game unchanged. Earlier games can be resumed or explicitly removed; optional notes stay in the existing notebook download. No timer, accumulated score or skill level is inferred.
 
-Seed Pile, the solo Shutters box and Ribbon Rows are the three implemented Games Table games; other game types remain proposals. See [spec129](docs/specs/129-seed-pile-first-playable.md). Run `node test/seed-pile-checks.mjs`; with `dist/` served at `http://127.0.0.1:4188/`, run `python3 test/seed-pile-browser.py` (Python Playwright and Chrome). Set `PILE_TEST_URL`, `CHROME_PATH` or `PILE_ARTIFACTS` for another local preview, browser binary or screenshot directory. Browser checks use synthetic notebooks at320/820px, not physical iPad Safari.
+Seed Pile, the solo Shutters box and Ribbon Rows are the three implemented Games Table games; other game types remain proposals. See [spec129](docs/specs/129-seed-pile-first-playable.md). Run `node test/seed-pile-checks.mjs`; with `dist/` served at `http://127.0.0.1:4188/`, run `python3 test/seed-pile-browser.py` (Python Playwright and Chrome). Set `PILE_TEST_URL`, `CHROME_PATH` or `PILE_ARTIFACTS` for another local preview, browser binary or screenshot directory. Browser checks use synthetic notebooks at 320/820px, not physical iPad Safari.
 
 ## Shutters at the Games Table
 
@@ -536,10 +452,65 @@ Open `#orchard/games/rows`, or choose Ribbon Rows beside Seed Pile and Shutters.
 
 A pictured four-step explanation offers a matching strategy. Its temporary practice board leaves the waiting game and selected take unchanged. Games resume after leaving or reloading; earlier games can be resumed or explicitly removed. Optional finished-game notes use the existing explorer download/import. Winning is not a math level, and supplied explanations stay separate from play. Three-row play has a six-thought bundle explanation and a separate1,2,4 practice board. Optional Show bundles pictures the actual board in4/2/1 groups; its first exposure is recorded separately from explanations. Two-row matching and its older saves remain available.
 
-See [spec131](docs/specs/131-ribbon-rows.md) and [spec132](docs/specs/132-three-row-ribbons.md). Run `node test/ribbon-rows-checks.mjs`; with `dist/` served at port4188, run `python3 test/ribbon-rows-browser.py` (Python Playwright and Chrome). `ROWS_TEST_URL`, `CHROME_PATH` and `ROWS_ARTIFACTS` select another origin, browser or screenshot folder. For the extension, run `node test/three-row-ribbons-checks.mjs` and `python3 test/three-row-ribbons-browser.py`. All fixtures are synthetic. Checks at320/820px do not establish physical iPad Safari behavior or learning effects.
+See [spec131](docs/specs/131-ribbon-rows.md) and [spec132](docs/specs/132-three-row-ribbons.md). Run `node test/ribbon-rows-checks.mjs`; with `dist/` served at port4188, run `python3 test/ribbon-rows-browser.py` (Python Playwright and Chrome). `ROWS_TEST_URL`, `CHROME_PATH` and `ROWS_ARTIFACTS` select another origin, browser or screenshot folder. For the extension, run `node test/three-row-ribbons-checks.mjs` and `python3 test/three-row-ribbons-browser.py`. All fixtures are synthetic. Checks at 320/820px do not establish physical iPad Safari behavior or learning effects.
 
 ## Drawn how-tos
 
 Every activity has a short pencil drawing that shows how it works: the butterfly life-cycle ring in the life-stages help (`#living/stages`), how a turn goes in Shutters and Ribbon Rows, and a "Show me how" button under the title of each other activity page. A button opens its drawing in place. It plays through once in about 15 seconds, then Back and Next step through it; Pause and Play hold or resume it. The finished picture stays with every caption listed. With reduced motion nothing plays, and each step appears whole. Watching saves nothing. See the [proposal](docs/specs/proposed/drawn-how-to-animations.md).
 
 The pictures are written as Mermaid text or a ring of stages in `dist/drawn-howtos-content.mjs`. To change one, run `npm ci` in `scripts/drawn-howtos`, then `node scripts/drawn-howtos/build.mjs` to regenerate `dist/drawn-howtos/` (`--check` confirms it matches). Each entry's `at` list names the pages that offer it. The game loads only the generated path data, one drawing at a time. Run `node test/drawn-howtos-checks.mjs`; with `dist/` served at port 4213, run `node test/drawn-howtos-browser.js` with the existing `PLAYWRIGHT_MODULE`/`CHROME_PATH` variables (`HOWTO_TEST_URL` and `HOWTO_ARTIFACTS` select another origin or a screenshot folder). These checks do not establish that any child learned a rule from a drawing.
+
+Keep it out is a bounded Seed Stall investigation at `#numbers/seeds/pairs`: draw two seeds, compare returning the first with keeping it out, inspect a chance branch, and try the finite question pack. Old Seed Stall experiments retain their original behavior. See [spec215](docs/specs/215-seed-stall-keep-it-out.md). Source checks: `node test/seed-pairs-checks.mjs`; synthetic browser journeys: `python3 test/seed-pairs-browser.py` (local preview required).
+
+Which test first? (`#post/sorting/order`) adds three separate requests to Sorting Desk: size first, stamp first, and NOT blue. Build an ordered rule, trace one parcel, swap the rules, or compare all supplied cards. Old Sorting Desk, Double Check and delivery records stay separate. See [spec216](docs/specs/216-which-test-first.md). Run `node test/ordered-sorting-checks.mjs`; synthetic local/hosted browser journeys use `python3 test/ordered-sorting-browser.py` with `ORDERED_TEST_URL` and `ORDERED_ARTIFACTS`.
+
+
+### Separate starting points and connected subject units
+
+`#pathways` offers Math, English, Science and French starting choices independently for each explorer, with optional short try-it examples. Direct exploration does not set a level or discard a waiting lesson. The earlier Café and reading-amount controls remain at `#begin`.
+
+Four open short units extend the advanced pathway: signed rates and linear equations (`#learn/math`, six lessons); a whole original story, evidence and reader-directed revision (`#learn/english`, five lessons); forces, collision evidence and a revised design (`#learn/science`, five lessons); and French rooms, directions and recent/next actions (`#learn/french`, four lessons). These are bounded supported teaching sequences, not completed courses or placement tests. Writing is human-read and ungraded. Optional French meanings and device-local speech are support, not independent listening evidence.
+
+See [specs217–221](docs/specs/217-subject-pathway-entry.md), the [current roadmap](docs/roadmap.md#current-subject-pathway-delivery) and [course routes](docs/course-routes.md#first-connected-subject-units--2026-10-25-delivery). Run the corresponding `test/{pathway-entry,linear-pathway,evidence-voice,motion-evidence,french-rooms}-checks.mjs` suites and matching Python browser journeys. Use synthetic work only. The owning PR records exact-candidate review and deployment verification.
+
+
+### Keep exploring in each subject
+
+Each new subject unit offers another investigation, story or mission, with open challenge choices and a modest suggestion from that explorer’s recent structured practice. Math changes quantities and unknowns; English adds complete original stories and readers; science changes controlled cases and constraints; French changes locations, errands and messages. Sources freeze on creation, so a waiting case and its writing survive changes to the authoring code. Rereading is labeled and original writing remains human-read. There is no global level, automatic prose grade or remote generation.
+
+See [the continuing-exploration contract](docs/specs/222-revisiting-subject-units.md) and its four owning specs. Saved generated visits can be resumed or explicitly selected and confirmed for removal; no old work is silently evicted. Notebook download/import remains the existing recovery path. The owning PR records review and release verification.
+
+
+Adaptive journeys use `test/adaptive-{linear,evidence,motion,french}-browser.py` against the real static app at 320/820. Set `LINEAR_TEST_URL`, `ENGLISH_TEST_URL` or `SUBJECT_TEST_URL` for the desired origin; corresponding `*_ARTIFACTS` variables select synthetic screenshot output. Keep original unit/entry/integration journeys in release verification too. These checks establish interaction and saved-record behavior, not physical-device or learning outcomes.
+
+
+**Two records of storm night** (`#learn/english/storm-records`) is a short fictional source comparison beside Evidence & voice. Compare the miller's own observations with Dot's gathered reports, then keep and revise a message for a visiting neighbor. Seven supplied checks remain practice; firsthand does not mean accurate or complete, and secondhand does not mean false. The four complete stories remain separate and open. See [spec237](docs/specs/237-storm-source-pair.md) and its [teaching text](docs/content/237-storm-source-pair-text.md).
+
+Run `node test/storm-accounts-checks.mjs`; `python3 test/storm-accounts-browser.py` starts its own temporary static preview unless `ACCOUNTS_TEST_URL` is set. `ACCOUNTS_ARTIFACTS` and `CHROME_PATH` select synthetic screenshot output and the installed Chrome binary. The browser journey includes320/820 layouts, source preview without changing a current story, speech support before playback, first/latest drafts, separate explorers and actual notebook download/import. These checks do not establish physical iPad/Safari behavior or learning gains.
+
+
+**Lantern Codes** (`#post/codes`) opens a small Signal Tower game beside the Post Office. Design four short/long patterns, give Dot an actual copy, send one framed message and compare what survives pretend rain. Dot retains her old card when you edit yours. New visits and kept designs preserve earlier work; computer-model tests do not establish independent decoding or practical device-building. See [spec238](docs/specs/238-lantern-codes.md).
+
+Run `node test/lantern-codes-checks.mjs`. With Python Playwright and Chrome installed, `python3 test/lantern-codes-browser.py` uses its own temporary static server unless `CODES_TEST_URL` is set; `CODES_ARTIFACTS` and `CHROME_PATH` select screenshots and browser. Tests use synthetic notebooks, local speech stubs and actual download/import, not personal progress or physical iPad/Safari verification.
+
+
+**Which Hat?** (`#post/descriptions`) adds a visual description workshop beside the Post Office. Choose a requested peg, build and revise a phrase, and see whether several hats, one hat or none fit. Meaning and usual adjective order stay separate. Five supplied reader questions revisit descriptions, the head noun and determiners; kept discoveries and first/latest responses retain their original sources and support observations. See [spec239](docs/specs/239-which-hat.md).
+
+Run `node test/which-hat-checks.mjs` and, with Python Playwright and Chrome, `python3 test/which-hat-browser.py`. The browser test starts a temporary preview unless `HATS_TEST_URL` is set; `HATS_ARTIFACTS` selects synthetic screenshots. These checks establish model, interaction and saved-record behavior; they do not establish learning gains or physical iPad/Safari behavior.
+
+
+**Hundred Cups** (`#science/water-shares`) is a source-based water-distribution workshop. Build a graph, zoom between all water and freshwater-only wholes, and answer a changing visitor request. Eight families have 100/200-cup versions; any of the sixteen settings stays open. Original diagrams, first/latest replies and recorded support remain separate and frozen. See [spec240](docs/specs/240-hundred-cups.md). The model does not test drinking safety or certify independent graph construction.
+
+Run `node test/water-shares-checks.mjs`. With Python Playwright and installed Chrome, `python3 test/water-shares-browser.py` starts a temporary static server unless `H2O_TEST_URL` is set; `H2O_ARTIFACTS` selects synthetic screenshots. The browser journey covers nested wholes, both source scales, graph edits, pending-input navigation protection, keep-time fulfillment, support before speech, separate explorers and actual notebook transfer. These are interaction/model checks, not physical iPad/Safari verification or evidence of learning gains.
+
+### The message and the water
+
+Open `#learn/math/timing-desk` from the Keeper’s Desk or Math/Science paths. Four freely available parts connect 24-hour clock and day labels, invented constant-rate journeys, five selected undated records, and a provisional note. Manual journey lines and rate steps, optional teaching and original first/latest responses remain separate from ungraded claim discussions and both writing versions. The supplied case does not predict floods, establish a future minimum, change the town’s warning rule or advance the story. See [spec247](docs/specs/247-message-and-water.md), its [complete authored text](docs/content/247-message-and-water-text.md) and [specification review](docs/reviews/247-message-and-water-spec.md). The source runner includes `test/timing-desk-checks.mjs`; `python3 test/timing-desk-browser.py` exercises the actual local app with installed Playwright/Chrome. `TIMING_TEST_URL` selects a served site and `TIMING_ARTIFACTS` selects a private synthetic output directory. Publication status belongs to the [roadmap](docs/roadmap.md).
+
+### A Town of Our Own
+
+The bounded Act II story in [spec248](docs/specs/248-a-town-of-our-own.md) connects explicit offers from Coin Counter, the Town Record, Whole-batch gathering trays and Story Loft. Three different contributions enable an optional illustrated celebration; supported and unfinished work counts alike, with no skill inference. The second Keeper’s Page contains seven fictional flood entries and an undated storm annotation, followed by a separately opened English letter. Short/Longer story and letter choices are independent of the page’s reading amount. See the [authored text](docs/content/248-a-town-of-our-own-text.md) and [independent specification review](docs/reviews/248-a-town-of-our-own-spec.md). The source runner includes `test/act-two-checks.mjs`. `python3 test/act-two-browser.py` exercises the actual app and host activities; `ACT_TWO_TEST_URL`, `ACT_TWO_ARTIFACTS` and `CHROME_PATH` select the served site, private synthetic evidence directory and installed browser. Publication status belongs to the [roadmap](docs/roadmap.md). No Act II video asset or foreign-language letter is supplied.
+
+### Optional story arrivals
+
+The optional `#arrive` flow commissioned by [spec249](docs/specs/249-story-arrivals.md) previews three beginnings and saves one explicit story choice. After-mending and upstream-letter arrivals supply earlier context labelled Before you came, separate from actual services, offers, endings and reading actions. Café/English/French choices and direct subject entry stay independent. The [finite recaps](docs/content/249-story-arrivals-text.md) and [six-lens review](docs/reviews/249-story-arrivals-spec.md) define the bounded slice. The source runner includes `test/story-arrivals-checks.mjs`; `python3 test/story-arrivals-browser.py` exercises the actual app, with `ARRIVAL_TEST_URL`, `ARRIVAL_ARTIFACTS` and `CHROME_PATH` selecting site, private synthetic artifacts and browser. Publication status belongs to the [roadmap](docs/roadmap.md); no full ActIII, foreign letter, film or date system is supplied.
