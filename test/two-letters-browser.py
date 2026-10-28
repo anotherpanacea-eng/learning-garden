@@ -65,6 +65,15 @@ def choose(p,choice,submit=True):
 def reveal_letter(p):
     disclosure=p.locator('.tl-letter-disclosure')
     if disclosure.get_attribute('open') is None:disclosure.locator('summary').click()
+def gap_styles(p):
+    rows=p.locator('.tl-letter-disclosure .tl-gap').evaluate_all("xs=>xs.map(x=>{const s=getComputedStyle(x);return {answered:x.dataset.tlAnswered,current:x.getAttribute('aria-current')==='step',font:s.fontStyle,border:s.borderBottomStyle,borderWidth:parseFloat(s.borderBottomWidth),outline:s.outlineStyle,outlineWidth:parseFloat(s.outlineWidth),color:s.color,background:s.backgroundColor,classes:x.className,outcome:x.getAttribute('data-tl-outcome')}})")
+    h.ok(any(r['answered']=='true' for r in rows) and any(r['answered']=='false' for r in rows),'source peek exercises both answered and unanswered slots');h.ok(sum(r['current'] for r in rows)==1,'exact current gap marked in source peek')
+    h.ok(all(r['borderWidth']>0 and r['border']!='none' for r in rows),'every source slot has a noncolor border distinction')
+    h.ok(all(r['font']=='italic' and r['border']=='dashed' for r in rows if r['answered']=='false'),'unanswered slots use italic dashed noncolor styling')
+    h.ok(all(r['outlineWidth']>0 and r['outline']!='none' for r in rows if r['current']),'current source gap has a visible noncolor outline')
+    h.ok(all(r['outcome'] is None and not any(code in r['classes'].split() for code in ['fits','other','alternative']) for r in rows),'source slot classes encode completion/current state without outcome grading')
+    return rows
+
 def focused(p,selector):h.ok(p.locator(selector).evaluate('x=>document.activeElement===x'),'focus on '+selector)
 def bounds(p):
     h.ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal page overflow')
@@ -116,11 +125,16 @@ def ordinary(browser,width,base,f):
         choose(p,choice);focused(p,'#tl-question');record=packet(p,identity)['answers'][-1];h.ok(record['questionId']==qid and record['choiceId']==choice and record['afterFeedback'] is False,'first committed answer literal '+qid)
         h.ok('Your words: '+text in p.locator('[data-tl-feedback]').inner_text(),'actual selected text displayed '+qid)
         h.ok(f'Choice {i+1} of 13' in p.locator('#tl-question').inner_text(),'submission does not auto-advance')
+        if qid in ['a4','a5']:
+            line=p.locator('[data-tl-preview] .tl-selected-line')
+            geometry=line.evaluate('x=>{const r=document.createRange();r.selectNodeContents(x.parentElement.firstChild);return {display:getComputedStyle(x).display,top:x.getBoundingClientRect().top,precedingBottom:r.getBoundingClientRect().bottom,text:x.textContent}}')
+            h.ok(geometry['display']=='block' and geometry['top']>=geometry['precedingBottom']-1,'recognition selection starts its own rendered line '+qid)
+            h.ok(geometry['text']==text,'recognition selected line contains actual supplied choice '+qid)
         if i==0:
-            h.ok('Check this reader' in p.locator('[data-tl-feedback]').inner_text(),'wrong reader has category plus source feedback');snap(p,f'committed-reply-{width}');reveal_letter(p);h.ok('Dear Members of the Council,' in p.locator('.tl-letter-text').inner_text(),'actual wrong selection rendered in letter')
+            h.ok('Check this reader' in p.locator('[data-tl-feedback]').inner_text(),'wrong reader has category plus source feedback');snap(p,f'committed-reply-{width}');reveal_letter(p);h.ok('Dear Members of the Council,' in p.locator('.tl-letter-text').inner_text(),'actual wrong selection rendered in letter');wrong_gap=gap_styles(p)[0];h.ok(wrong_gap['answered']=='true','actual other-classified words marked answered');snap(p,f'wrong-answer-source-slots-{width}')
             stable=h.book(p);p.evaluate('window.__tlStaleUse.click();window.__tlStaleRadio.checked=true;window.__tlStaleRadio.dispatchEvent(new Event("change",{bubbles:true}))');h.ok(h.book(p)==stable,'detached earlier controls cannot mutate answers')
             click(p,'compare');h.ok(packet(p,identity)['support']['comparison'],'comparison marked');h.ok(p.locator('.tl-comparison-letter').count()==2,'both original and chosen letters supplied');h.ok('not identical' in p.locator('.tl-helper').inner_text(),'shared facts and differences explicit');h.ok('Dear Members of the Council,' in p.locator('.tl-comparison-letter').first.inner_text(),'comparison uses actual committed wording');bounds(p);click(p,'close');focused(p,sel('compare'))
-            choose(p,'nuria-greeting');h.ok(packet(p,identity)['answers'][0]['afterFeedback'] is True,'changed response records feedback revisit')
+            choose(p,'nuria-greeting');h.ok(packet(p,identity)['answers'][0]['afterFeedback'] is True,'changed response records feedback revisit');reveal_letter(p);fitting_gap=gap_styles(p)[0];h.ok({k:wrong_gap[k] for k in ['color','background','border','borderWidth','outline','outlineWidth']}=={k:fitting_gap[k] for k in ['color','background','border','borderWidth','outline','outlineWidth']},'source slot styling does not color-grade other versus fitting selected words')
         bounds(p)
         if i<12:click(p,'next');focused(p,'#tl-question')
     h.ok(packet(p,identity)['answers'][:8][1:]==gap_answers[1:],'five Set A questions leave gap answers unchanged')
@@ -144,7 +158,7 @@ def landscape(browser,base,f):
     choose(p,'nuria-greeting',False);h.ok(packet(p,identity)['answers']==[],'landscape native tile preview uncommitted');h.ok('Hi Nuria!' in p.locator('[data-tl-preview]').inner_text(),'landscape native selected preview')
     p.evaluate('window.scrollTo(0,0)');bounds(p);snap(p,'landscape-preview-1024x768');(OUT/'landscape-geometry.json').write_text(json.dumps(p.locator(sel('use')).evaluate('x=>({viewport:{width:innerWidth,height:innerHeight},seal:{top:x.getBoundingClientRect().top,bottom:x.getBoundingClientRect().bottom},stageHeight:document.querySelector(".tl-stage").getBoundingClientRect().height})'),indent=2));print('Landscape preview screenshot captured: '+str(OUT/'landscape-preview-1024x768.png'),flush=True)
     click(p,'use');h.ok(packet(p,identity)['answers'][0]['choiceId']=='nuria-greeting','landscape explicit seal commits supplied words');h.ok('Your words: Hi Nuria!' in p.locator('[data-tl-feedback]').inner_text(),'landscape actual reader reply');p.evaluate('window.scrollTo(0,0)');snap(p,'landscape-reply-1024x768')
-    reveal_letter(p);h.ok('Hi Nuria!' in p.locator('.tl-letter-text').inner_text(),'landscape native source peek retains selected wording');safe=h.book(p);click(p,'cards');h.ok(packet(p,identity)['support']['help'],'landscape native tool records support');click(p,'close');h.ok(packet(p,identity)['answers']==safe['twoLetters'][-1]['answers'],'landscape helper preserves answers');bounds(p)
+    reveal_letter(p);h.ok('Hi Nuria!' in p.locator('.tl-letter-text').inner_text(),'landscape native source peek retains selected wording');gap_styles(p);h.ok(p.locator(sel('use')).evaluate('x=>{const panel=x.closest(".tl-choice-panel");return !!panel&&panel.contains(document.querySelector(".tl-word-tiles"))&&x.getBoundingClientRect().top>=panel.querySelector(".tl-word-tiles").getBoundingClientRect().bottom}'),'landscape seal stays in choice panel below visible tiles while source peek is open');snap(p,'landscape-source-peek-1024x768');safe=h.book(p);click(p,'cards');h.ok(packet(p,identity)['support']['help'],'landscape native tool records support');click(p,'close');h.ok(packet(p,identity)['answers']==safe['twoLetters'][-1]['answers'],'landscape helper preserves answers');bounds(p)
 
 def retained_and_faults(browser,width,base,f):
     _,old=setup(browser,width,f['historical'],f'historical-{width}');go(old,base);reopen(old,f['historicalId']);h.ok('Earlier <reader> & "friend"' in old.locator('.tl-brief').first.inner_text(),'historical labels escaped and literal');h.ok('Choice 1 of 1' in old.locator('#tl-question').inner_text(),'historical own smaller count');h.ok(old.locator('[data-tl-choice]').count()==2,'historical own choices');h.ok('Your words: ask for' in old.locator('[data-tl-feedback]').inner_text() and 'Check this reader' in old.locator('[data-tl-feedback]').inner_text(),'historical recorded outcome not regraded from source');h.ok(not old.locator('[data-tl-root] reader').count(),'historical text not interpreted as markup');click(old,'cards');h.ok('Earlier card' in old.locator('#tl-helper-heading').inner_text(),'historical own card');click(old,'close');bounds(old);snap(old,f'historical-{width}')
