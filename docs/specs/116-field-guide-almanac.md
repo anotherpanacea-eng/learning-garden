@@ -128,6 +128,7 @@ keyBuilds: [ { cards: [code], tree: node, at } ]                                
 // up to 3 question nodes, 4 group leaves; unfinished branches may be null
 ```
 
+- Spec281's shared `dataDesk` entries use its additive `kind:'weather-tally',version:1` format with a frozen source, placements, support, checks and kept snapshot. Its24-entry cap counts all raw sibling entries; the broader proposed shape above is not a second writer or a substitute format for that slice.
 - Spec281 establishes one shared `weather` array/writer for this first slice. At1,098 readable entries it refuses a new append; no existing entry is automatically deleted. Future33 controls must share it. Optional `temp` is retained unchanged; this slice does not enter or interpret it.
 - Validate dates, codes and bounded numbers in read-only views. An unknown code, malformed entry or missing temperature unit makes only that item/temperature unavailable to current displays; preserve the original JSON value unchanged and exportable. A new known group list never deletes a prior find.
 - For `weather` and `sky`, display at most one readable entry per date, using the last readable entry in stored array order. Preserve every duplicate in raw storage. View/import does not deduplicate or rewrite. An explicit change to today's note changes only the selected readable entry, preserving other raw entries.

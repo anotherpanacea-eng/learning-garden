@@ -471,7 +471,7 @@ function render(){
   else if(root==='desk'&&slug==='linear'){const v=preparePriceDisplay(state,priceOptions());html=v.ok?pricePage(state):priceRefusal();if(v.changed)save();}
   else if(root==='desk')html='<details class="panel river-casebook"><summary>Choose another investigation</summary>'+timingEntry('desk')+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+priceEntry()+'</details>'+deskPage(state);
   else if(root==='almanac')html=['town','celebration','flood-ledger','upstream-letter'].includes(slug)?actTwoPage(state,{part:slug,chapter:detail,blocked:keeperFilmBlocked()}):keeperPages(state,{blocked:keeperFilmBlocked()})+weatherEntry();
-  else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id)+weatherEntry();
+  else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id)+weatherEntry('field');
   else if(bellBench)html=bellStudioPage(state)+rhythmEntry();
   else if(labelBench)html=labelPage(state,detail,explorerStore.active.id);
   else if(archiveBench)html=travelersArchivePage(state)+labelEntry();
@@ -501,7 +501,7 @@ function render(){
   else if(measureBench)html=measuringDeskPage(state,explorerStore.active.id);
   else if(packingBench){const view=renderParcelPacking(state);if(view.facts.length){exposeStoryFacts({facts:view.facts});save();}html=view.html;}
   else if(batchBench){exposeStoryFacts({facts:batchDisplayedFactPairs(state)});save();html=wholeBatchesPage(state);}
-  else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state)+fieldKitEntry('weather')+weatherEntry();}
+  else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state)+fieldKitEntry('weather')+weatherEntry('field');}
   else if(sharingBench){exposeStoryFacts({facts:sharingDisplayedFactPairs(state)});save();html=sharingCounterPage(state);}
   else if(rainNotebookBench)html=rainNotebookPage(state);
   else if(collectionBench)html=collectionPage(state);

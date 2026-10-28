@@ -5,6 +5,7 @@ const own=(x,k)=>Object.hasOwn(x,k);
 const clone=x=>structuredClone(x);
 const dense=(x,max)=>Array.isArray(x)&&x.length<=max&&Object.keys(x).length===x.length&&Array.from(x).every((_,i)=>own(x,i));
 const text=(x,max)=>typeof x==='string'&&x.length>0&&x.length<=max;
+const MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MAX_ID=1e9,SUPPORT=['teaching','narration','together','feedback'];
 const reserved=new Set(['__proto__','constructor','prototype','toString','valueOf']);
 const categoryCode=x=>text(x,80)&&/^[\x20-\x7e]+$/.test(x)&&!reserved.has(x);
@@ -52,7 +53,7 @@ export function saveWeatherNote(state,renderedISO,code,options={}){
 export function practiceWeatherSource(){return {version:1,kind:'practice',id:'dots-practice-month',title:"Dot's practice month",month:null,categories:clone(WEATHER_CATEGORIES),days:PRACTICE_WEATHER_DAYS.map((weather,i)=>({day:i+1,date:null,weather}))};}
 export function weatherMonthSource(state,month){
  if(!validMonth(month))return null;const days=weatherRead(state).selected.filter(x=>x.entry.date.startsWith(month+'-')).map(({entry})=>({day:Number(entry.date.slice(8)),date:entry.date,weather:entry.weather}));
- return days.length?{version:1,kind:'reported',id:`reported-${month}`,title:`Your notes for ${month}`,month,categories:clone(WEATHER_CATEGORIES),days}:null;
+ return days.length?{version:1,kind:'reported',id:`reported-${month}`,title:`Your notes for ${MONTH_NAMES[Number(month.slice(5,7))-1]} ${month.slice(0,4)}`,month,categories:clone(WEATHER_CATEGORIES),days}:null;
 }
 export function readableSource(s){
  if(!object(s)||!Number.isSafeInteger(s.version)||s.version<1||!['practice','reported'].includes(s.kind)||!text(s.id,160)||!text(s.title,160)||!dense(s.categories,5)||s.categories.length<1||!dense(s.days,31))return false;

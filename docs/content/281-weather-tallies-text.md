@@ -1,6 +1,6 @@
 # Spec281 · finite child text
 
-Original text for [the bounded weather/tally commission](../specs/281-weather-tallies.md), after independent specification/content review. Safely interpolate `{date}`, `{month}`, `{n}`, row labels and counts. No names/locations/private data. Narration uses words for numbers and only visible content. Literal codes are implementation references, not child labels.
+Original text for [the bounded weather/tally commission](../specs/281-weather-tallies.md), after independent specification/content review. Safely interpolate `{date}`, `{month}`, `{n}`, row labels and counts, using singular report/card/mark wording for one. Spoken dates use natural month/day/year words; kept source text stays unchanged. No names/locations/private data. Narration uses words for numbers and only visible content. Literal codes are implementation references, not child labels.
 
 ## Links and story invitation
 

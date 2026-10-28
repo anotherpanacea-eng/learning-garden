@@ -1,6 +1,6 @@
 # Spec281 · independent specification and content review
 
-**BUILD-READY after four unique P2 folds and one P3; no P1.** Six independent contexts reviewed the finite [commission](../specs/281-weather-tallies.md), [child text](../content/281-weather-tallies-text.md) and actual repository seams. No lens is absent. This is contract/content clearance, not implementation or release clearance. Runtime work waits for the verified Rhythm release.
+**BUILD-READY after four unique P2 folds and one P3; no P1.** Six independent contexts reviewed the finite [commission](../specs/281-weather-tallies.md), [child text](../content/281-weather-tallies-text.md) and actual repository seams. No lens is absent. This is contract/content clearance, not implementation or release clearance. The preceding Rhythm release is verified through PR210/211; runtime implementation and canonical publication have their own gates.
 
 | Lens | Disposition |
 | --- | --- |

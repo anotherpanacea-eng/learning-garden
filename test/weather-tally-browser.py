@@ -184,6 +184,9 @@ def main():
                 own=new_sheet(p,fixtures['month']);own_source=copy.deepcopy(sheet(p,own)['source'])
                 h.ok(own_source['kind']=='reported' and 1<=len(own_source['days'])<=2,'own source freezes readable reported days only')
                 h.ok('Reported choices' in p.locator('.wt-origin').inner_text(),'own source origin stays visible')
+                own_narration=p.locator('[data-wt-hear]').get_attribute('data-speak')
+                h.ok(own_source['title'].startswith('Your notes for ') and fixtures['month'] not in own_source['title'],'new reported source title uses a named month')
+                h.ok(all(day['date'] not in own_narration for day in own_source['days']),'reported dates are narrated with a named month and day rather than ISO strings')
                 h.click(p,'[data-wt-keep]');kept_controls_absent(p)
                 practice_id=new_sheet(p,'practice')
                 h.ok(sheet(p,practice_id)['source']['kind']=='practice' and len(sheet(p,practice_id)['source']['days'])==30,'separate invented source has thirty ordinal cards')
@@ -200,6 +203,9 @@ def main():
                 h.click(p,'[data-wt-place="sun"]');p.keyboard.press('Enter')
                 h.ok(sheet(p,practice_id)['placements']==['sun','sun'],'touch then keyboard Enter adds one mark per card')
                 h.ok(p.locator('[data-wt-row="0"]').evaluate('x=>document.activeElement===x'),'row focus survives a mark')
+                description=p.locator('[data-wt-row="0"]').evaluate(r"x=>(x.getAttribute('aria-describedby')||'').split(/\s+/).map(id=>({id,text:document.getElementById(id)?.textContent.trim()}))")
+                h.ok(any(x['id']=='wt-heading' and 'Day 3: Cloudy' in x['text'] for x in description),'refocused row describes the actual next card')
+                h.ok(any(x['id']=='wt-progress' and x['text']=='2 of 30 cards counted' for x in description),'refocused row describes current progress')
                 h.click(p,'[data-wt-compare]');first_check=copy.deepcopy(sheet(p,practice_id)['checks'][0])
                 h.ok(not first_check['complete'] and not first_check['matches'],'unfinished comparison stays an aggregate practice record')
                 h.click(p,'[data-wt-stage="count"]');h.click(p,'[data-wt-place="clouds"]')
@@ -275,6 +281,16 @@ def main():
                 h.click(old,'[data-wt-compare]');h.ok(sheet(old,fixtures['historicalId'])['checks'][-1]['matches'],'historical own-source categories compare without current-catalog substitution')
                 bounds(old);snap(old,f'historical-rows-{width}')
 
+                unsupported=copy.deepcopy(fixtures['base']);unsupported['weather']={'version':99,'retained':'Synthetic unsupported weather'}
+                _,u=setup(browser,width,unsupported,f'unsupported-weather-{width}')
+                go(u,base,'#almanac/weather')
+                h.ok('Earlier weather notes are kept' in u.locator('[data-wt-root]').inner_text() and not u.locator('.wt-calendar,.wt-calendar-day').count(),'unsupported weather keeps its notice without a fabricated empty calendar')
+                h.ok(h.book(u)['weather']==unsupported['weather'],'unsupported weather view retains the original root')
+                malformed=copy.deepcopy(fixtures['historical']);next(x for x in malformed['dataDesk'] if x.get('id')==fixtures['historicalId'])['checks']=None
+                _,bad=setup(browser,width,malformed,f'malformed-checks-{width}')
+                go(bad,base,'#almanac/tallies');reopen(bad,fixtures['historicalId']);bad_before=h.book(bad);h.click(bad,'[data-wt-compare]')
+                h.ok(h.book(bad)==bad_before and 'earlier' in bad.locator('#wt-status').inner_text().lower() and 'could not be kept safely' not in bad.locator('#wt-status').inner_text(),'malformed check refusal names retained earlier records and leaves them exact')
+
                 # Deterministic date changes affect only this separate UTC context.
                 _,d=setup(browser,width,fixtures['base'],f'clock-{width}',clock='2026-10-28T12:00:00.000Z')
                 go(d,base,'#almanac/weather');pick_weather(d,'rain');clock_before=h.book(d)
@@ -290,15 +306,22 @@ def main():
                 snap(d,f'date-flips-{width}')
 
                 # Raw candidate fits, but actual pretty-report preflight refuses support.
-                _,r=setup(browser,width,fixtures['refusal'],f'support-refusal-{width}')
+                refusal_context,r=setup(browser,width,fixtures['refusal'],f'support-refusal-{width}')
+                refusal_context.add_init_script(r'''
+                  window.__wtSpeakCalls=[];
+                  const nativeSpeak=window.speechSynthesis.speak.bind(window.speechSynthesis);
+                  window.speechSynthesis.speak=utterance=>{window.__wtSpeakCalls.push(utterance.text);return nativeSpeak(utterance);};
+                ''')
                 go(r,base,'#almanac/tallies');reopen(r,fixtures['refusalId']);safe=h.book(r)
                 h.click(r,'[data-wt-teach]')
                 h.ok(h.book(r)==safe and not r.locator('[data-wt-teaching]').count(),'refused first teaching preflight discloses no worked example')
+                h.ok(r.locator('button[data-wt-hear][data-speak-lang]').count()==1 and 'data-speak-lang=' in r.locator('[data-wt-hear]').get_attribute('data-speak'),'adversarial title leaves the guard marker on the actual Hear button')
                 h.click(r,'[data-wt-hear]')
+                h.ok(r.evaluate('window.__wtSpeakCalls.length')==0,'refused narration never calls native speechSynthesis.speak')
                 h.ok(h.book(r)==safe and r.evaluate('window.__wtHearBubbles.length')==0,'refused first narration preflight stops propagation before speech/disclosure')
                 h.ok('could not be kept safely' in r.locator('#wt-status').inner_text(),'support refusal gives a concrete recovery notice')
             h.ok(not h.errors,'no page errors: '+json.dumps(h.errors));h.ok(not h.console_errors,'no console errors: '+json.dumps(h.console_errors));h.ok(not h.request_failures,'no failed requests: '+json.dumps(h.request_failures));h.ok(not h.http_failures,'no HTTP failures: '+json.dumps(h.http_failures))
-            receipt={'status':'passed','checks':h.checks,'base':base,'pageErrors':h.errors,'consoleErrors':h.console_errors,'requestFailures':h.request_failures,'httpFailures':h.http_failures,'navigationAborts':h.navigation_aborts,'scope':'ordinary local-date reports, thirty native practice placements, real persistent two-explorer transfer; separate Date/preflight fault contexts; no app interception/tracing'}
+            receipt={'status':'passed','checks':h.checks,'base':base,'pageErrors':h.errors,'consoleErrors':h.console_errors,'requestFailures':h.request_failures,'httpFailures':h.http_failures,'navigationAborts':h.navigation_aborts,'scope':'ordinary local-date reports, thirty native practice placements, real persistent two-explorer transfer; separate Date/preflight fault contexts; refusal-only native speech call-through spy; no app interception/tracing'}
             (OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(f'Weather tallies browser: {h.checks} assertions passed at320/820; artifacts {OUT}')
         except Exception:
             (OUT/'failure.txt').write_text(traceback.format_exc());(OUT/'browser-faults.json').write_text(json.dumps({'pageErrors':h.errors,'consoleErrors':h.console_errors,'requestFailures':h.request_failures,'httpFailures':h.http_failures,'navigationAborts':h.navigation_aborts},indent=2))
