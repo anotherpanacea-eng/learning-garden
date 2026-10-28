@@ -202,7 +202,7 @@ Companion to [spec 258](../specs/258-town-noticeboard.md). Use as written, after
 >
 > "Not yet."
 >
-> Wren moves it to a new corner labeled STILL TO CHECK. "Not wrong. Not checked."
+> Wren moves it to a new corner labeled STILL TO CHECK. "We don’t know yet. Not checked."
 
 **Keeper's note (A true thing about living things):**
 > A hen's egg needs warmth for about 21 days before the chick hatches. A hen gives that warmth by sitting on her eggs. Farmers can use a warm box called an incubator instead.
@@ -411,7 +411,7 @@ Tiles: The bell rings at nine. · Spilled soup ruins ribbons. ✔ · Hot soup wa
 - The bird book (A true thing about living things): *A hen's egg, kept warm, hatches after about 21 days.* → helps. *It tells how long until chicks hatch.*
 - The miller: *My cat sleeps by the oven.* → doesn't help. *True, but it's about where the cat sleeps.*
 - The animal book (A true thing about living things): *Marmots in the Pyrenees sleep in burrows for about half the year.* → doesn't help. *True, but it's about sleeping, not young ones arriving.*
-- Pip: *I think ducklings hatch in March. Nobody has checked.* → still to check. *Not wrong. Not checked yet.*
+- Pip: *I think ducklings hatch in March. Nobody has checked.* → still to check. *We don’t know yet. Not checked yet.*
 
 **Who could we ask?** *(Items F2 and F3.)*
 
@@ -630,7 +630,7 @@ Every item shows its own card, with read-aloud. The first item in each set shows
 - Choices: In the answer on the board (`guess-as-fact`) · In the trash, because it's wrong (`guess-is-wrong`) · In the still to check corner ✔
 - Feedback: Answer: Nobody has checked it yet. It can't be our answer. · Trash: Nobody knows it's wrong either. It needs checking.
 - Hint: Has anyone checked Pip's card?
-- Explanation: A guess nobody has checked is not wrong. It is not checked. It waits until someone checks.
+- Explanation: We don’t yet know whether an unchecked guess is right or wrong. It still needs checking.
 
 **F5 (3-choice).**
 - Card: The cards that help: *My lambs come in spring. My hens sit on their eggs in spring. A hen's egg, kept warm, hatches after about 21 days.*

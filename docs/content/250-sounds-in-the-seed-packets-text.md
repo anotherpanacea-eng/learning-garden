@@ -311,7 +311,7 @@ Worked example: *giant sunflower.*
 - Feedback for bash on the bath packet: That makes bash. The picture shows a bird bath.
 - Any other wrong tile: Say the picture's name slowly. Which team do you hear?
 
-**Recap card:** sh, ch and th. Three teams, three sounds.
+**Recap card:** sh, ch and th: three letter teams. Listen to the sounds they can make.
 
 ### (b) Vowel Teams (Seedling)
 

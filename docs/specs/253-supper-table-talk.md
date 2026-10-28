@@ -79,14 +79,20 @@ Optional root `supperTalk` per explorer, absent until something is kept:
 ```
 supperTalk: {
   v: 1,
-  items: { [itemId]: { shown: [choiceId, ...], pick: choiceId, outcome: 'fits' | 'other', support: bool, at } },
-  orders: { [itemId]: { shown: [cardId, ...], placed: [cardId, ...], outcome: 'in-order' | 'other', support: bool, at } },
-  guess: { [roundId]: { shown: [pictureId, ...], pick: pictureId, outcome: 'fits' | 'other', support: bool, at } },
-  cafeTalk: { opening: { shown, pick, outcome }, facts: { shown, picked: [factId, ...], outcome }, closing: { shown, pick, outcome }, support: bool, at }
+  items: { [itemId]: { ver: itemVersionId, shown: [choiceId, ...], pick: choiceId, outcome: 'fits' | 'other', support: bool, at } },
+  orders: { [itemId]: { ver: itemVersionId, shown: [cardId, ...], placed: [cardId, ...], outcome: 'in-order' | 'other', support: bool, at } },
+  guess: { [roundId]: { ver: entryVersionId, shown: [pictureId, ...], pick: pictureId, outcome: 'fits' | 'other', support: bool, at } },
+  cafeTalk: { ver: entryVersionId, opening: { shown, pick, outcome }, facts: { shown, picked: [factId, ...], outcome }, closing: { shown, pick, outcome }, support: bool, at }
 }
 ```
 
 Codes only. No audio, no transcript, no free text, and no field records whether a talk card was pulled, used or for how long. Every entry keeps `shown` (the ids offered, in order) and its own outcome code, so it restores without today's content. Validation uses the save's own entries and structural bounds: `shown` holds 2 to 6 distinct ids, `pick` is in `shown`, `placed` is a permutation of `shown`, `picked` holds up to three distinct ids from `shown`, outcomes are in their enums, `at` is a finite timestamp. Kept results are never recomputed against today's items, wording or key on load; a missing item reads as absent. Support (a guided step or the stuck ladder) is a separate flag per kept item, never merged with an independent attempt. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the corner. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. `cafe` and `story` are never read or written here.
+
+**Before-response context:** authored teaching, guided steps, worked examples and hints shown for a task are support even when the learner never opens the stuck ladder. Capture that context before showing the steps and before enabling a response; retain it with the kept answer. Folding/closing a card or revisiting must not erase it. For Boolean support fields, guided exposure sets the same flag true. For numeric ladder-depth fields, retain that actual depth and a separate `guided` Boolean; never invent a ladder request. New known guided items keep `guided:true` even at depth0. Missing older exposure metadata remains exact and context-unassessed, never assumed false or independent. A graded bench without captured context is supplied/context-unassessed. The selected runtime commission must pin its pre-response capture/persistence seam; this proposal does not supply an implemented exposure writer. No result is labeled independent merely because a ladder flag is false/zero.
+
+Only task-local authored help/guided context is covered here; this adds no book/page, reread, listening, reading-aloud or personal-writing log.
+
+**Authored content identity:** each response/bench version fixes its original card/choice meanings and order; changing wording or meaning requires a new authored version. Restore through that retained immutable version, never today’s key. When original wording is unavailable, show a generic earlier-card receipt with the literal kept codes/outcome instead of reconstructing old text from today’s catalog. Missing older version/context fields remain raw and readable as retained earlier work; never rewrite or regrade them. A selected runtime must choose its bounded archived-version lookup or source snapshot before claiming exact-wording replay.
 
 ## Curriculum fit
 
