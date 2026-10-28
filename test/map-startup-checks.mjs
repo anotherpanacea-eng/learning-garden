@@ -2,6 +2,10 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import {freshState} from '../dist/core.mjs';
+import {areas} from '../dist/broad-content.mjs';
+import {ensureBroad,beginTrail,trailQuestion,recordTrail,makeBroadObservation,suggestActivity} from '../dist/broad-core.mjs';
+import {broadHome,activityLibrary,checkinHub,trailSummary} from '../dist/broad-ui.mjs';
 const source=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');
 const start=source.indexOf('// Optional map data must never hold'),end=source.indexOf("let screen=''",start);
 assert.ok(start>=0&&end>start,'actual optional-map loader seam exists');
@@ -38,5 +42,22 @@ for(const kind of ['fetch-reject','non-ok','bad-json','bad-shape','empty-topics'
 }
 {
  const f=fixture({hasMapPanel:false}),before=structuredClone(f.state),p=f.probe.load();await flush();f.calls[0].resolve({ok:true,json:async()=>realMap});await p;same(f.probe.view().graph,realMap);eq(f.rendered(),0,'an absent map panel does not trigger rendering elsewhere');eq(f.state,before);
+}
+// A pending reference keeps ordinary first views neutral and all choices open.
+const catalog=areas.flatMap(a=>a.activities.map(q=>q.id)).sort();
+for(const mode of ['fresh','supported','independent']){
+ const s=freshState();ensureBroad(s);
+ if(mode!=='fresh')for(const a of areas){beginTrail(s,a.id);for(let i=0;i<2;i++){const q=trailQuestion(s,a.id);recordTrail(s,makeBroadObservation(q,{attempts:[q.answer],method:mode==='supported'?'together':'worked'},'checkin'));}}
+ const before=structuredClone(s),homeNull=broadHome(s,null,()=>''),homeMap=broadHome(s,realMap,()=>''),hub=checkinHub(s);
+ eq(homeNull,homeMap,mode+' Number Garden has the same seven open patches without map data');eq((homeNull.match(/class="area-card"/g)||[]).length,7);eq((hub.match(/data-trail="/g)||[]).length,7);ok(!/map is unavailable|map data is unavailable/i.test(homeNull+hub),'ordinary first views do not claim map failure');
+ const libraryNull=activityLibrary(s,null),libraryMap=activityLibrary(s,realMap);
+ for(const html of [libraryNull,libraryMap]){eq((html.match(/class="adventure-card"/g)||[]).length,catalog.length,mode+' all adventures stay available');eq([...new Set([...html.matchAll(/data-adventure="([^"]+)"/g)].map(x=>x[1]))].sort(),catalog,'suggestion refinement never removes a catalog choice');ok(!/map is unavailable|map data is unavailable/i.test(html));}
+ for(const a of areas){
+  const neutral=suggestActivity(s,a.id,null),ready=suggestActivity(s,a.id,realMap);eq(neutral.item.id,a.activities[mode==='fresh'?1:mode==='supported'?0:2].id,mode+' neutral same-area suggestion');ok(catalog.includes(ready.item.id),'loaded map suggestion is still an open catalog activity');
+  const childReason=mode==='fresh'?'A new place to explore. Try this one.':mode==='supported'?'Next, try a smaller idea with Pip.':'Ready for something new? Try this one.';eq(neutral.childReason,childReason,'fallback child reason describes an invitation, not a map failure');
+  const summaryNull=trailSummary(s,a.id,null),summaryMap=trailSummary(s,a.id,realMap);
+  eq((summaryNull.match(/<p><strong>/g)||[]).length,mode==='fresh'?0:2,'summary shows only the existing two observations');eq((summaryNull.match(/<p><strong>/g)||[]).length,(summaryMap.match(/<p><strong>/g)||[]).length,'loading reference fabricates no summary observations');ok(summaryNull.includes('Choose any adventure')&&summaryMap.includes('Choose any adventure'),'every summary retains the open alternative');ok(!/map is unavailable|map data is unavailable/i.test(summaryNull+summaryMap));
+ }
+ eq(s,before,'null/ready views and recommendations do not fabricate or rewrite observations');
 }
 console.log(`Optional map startup: ${n} real-loader success, failure, retry, timeout and preservation checks passed.`);

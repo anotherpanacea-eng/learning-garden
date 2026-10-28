@@ -40,8 +40,13 @@ def map_metadata(p):
 
 
 def main():
-    seed = json.loads(subprocess.check_output(['node', '--input-type=module', '-e',
-                       "import {rhythmFixtures} from './test/rhythm-checks.mjs';console.log(JSON.stringify(rhythmFixtures().base));"], cwd=ROOT, text=True))
+    fixtures = json.loads(subprocess.check_output(['node', '--input-type=module', '-e',
+        "import {rhythmFixtures} from './test/rhythm-checks.mjs';"
+        "import {beginTrail,trailQuestion,recordTrail,makeBroadObservation} from './dist/broad-core.mjs';"
+        "const base=rhythmFixtures().base,home=structuredClone(base);beginTrail(home,'number');"
+        "for(let i=0;i<2;i++){const q=trailQuestion(home,'number');recordTrail(home,makeBroadObservation(q,{attempts:[q.answer],method:'together'},'checkin'));}"
+        "console.log(JSON.stringify({base,home}));"], cwd=ROOT, text=True))
+    seed = fixtures['base']
 
     class Quiet(http.server.SimpleHTTPRequestHandler):
         def log_message(self, *args):
@@ -128,6 +133,52 @@ def main():
                 h.ok(h.book(p) == partial, 'explicit Show also leaves saved work exact')
                 screenshot(p, f'map-retry-open-{width}')
                 cases.append({'width': width, 'case': 'intentional404 then explicit retry/show', 'checks': h.checks - n})
+                c.close()
+
+                # A real first Home visit and the older math views remain usable
+                # before any curriculum-reference response has arrived.
+                n = h.checks
+                c, p = h.setup(browser, width, fixtures['home'], f'neutral-views-{width}')
+                pending_home = []
+                c.route('**/marble-map.json', lambda route: pending_home.append(route))
+                h.go(p, base, '#home', 'main h1')
+                p.locator('dialog.welcome-film[open]').wait_for()
+                h.ok(len(pending_home) == 1 and p.locator('main h1').count() > 0, 'Home and its real introductory film render while map is held')
+                h.click(p, '[data-film-skip]')
+                p.locator('dialog.welcome-film').wait_for(state='detached')
+                h.ok(h.book(p)['garden']['welcomeFilmSeen'] is True, 'real film Skip keeps its ordinary seen flag')
+                observations = copy.deepcopy(h.book(p)['broad']['observations'])
+                h.go(p, base, '#numbers', '.area-grid')
+                h.ok(p.locator('.area-grid .area-card').count() == 7, 'all seven Number Garden patches remain open without the map')
+                h.ok(p.locator('[data-trail]').evaluate_all('xs=>xs.every(x=>!x.disabled)'), 'all Number Garden walks remain enabled')
+                h.go(p, base, '#activities', '.adventure-grid >> nth=0')
+                h.ok(p.locator('.adventure-card').count() == 21, 'all twenty-one older adventures remain available without the map')
+                h.ok(p.locator('[data-adventure]').evaluate_all('xs=>xs.every(x=>!x.disabled)'), 'reference loading locks no adventure')
+                h.ok('Next, try a smaller idea with Pip.' in p.locator('.suggestion-reason').first.inner_text(), 'supported work receives a neutral child-facing invitation')
+                h.go(p, base, '#checkin', '#begin-journey')
+                h.ok(p.locator('[data-trail]').count() == 7 and p.locator('[data-trail]').evaluate_all('xs=>xs.every(x=>!x.disabled)'), 'all seven check-in entry paths remain open')
+                h.go(p, base, '#checkin/number', '.summary-callout')
+                h.ok(p.locator('.summary-callout p').count() == 2, 'completed Number trail shows exactly its two existing observations')
+                h.ok(p.locator('[data-revisit="number"]').is_enabled(), 'completed trail can still be revisited')
+                h.ok('Next, try a smaller idea with Pip.' in p.locator('.notes-grid').inner_text(), 'completed trail keeps its neutral same-area next invitation')
+                h.ok('map is unavailable' not in p.locator('main').inner_text().lower(), 'ordinary views never misreport a pending map as a failure')
+                h.ok(h.book(p)['broad']['observations'] == observations, 'viewing older routes fabricates no task observations')
+                screenshot(p, f'neutral-number-summary-{width}')
+                h.go(p, base, '#map', '[data-map-load-status]')
+                h.ok(p.locator('[data-map-refresh]').is_disabled() and 'loading' in p.locator('[data-map-load-status]').inner_text().lower(), 'first held Map view shows loading with its button disabled')
+                p.evaluate("window.__firstMapNotice=document.querySelector('[data-map-load-status]')")
+                before_ready = h.book(p)
+                with p.expect_response(lambda response: response.url.endswith('/marble-map.json')) as response:
+                    pending_home.pop().fulfill(status=200, content_type='application/json', body=MAP_BYTES)
+                h.ok(response.value.body() == MAP_BYTES, 'first Map receives actual reference bytes')
+                p.locator('[data-map-refresh]').filter(has_text='Show the map').wait_for()
+                h.ok(p.evaluate("window.__firstMapNotice===document.querySelector('[data-map-load-status]')") and not p.locator('.map-focus').count(), 'first Map completion updates status in place and waits for Show')
+                h.ok(h.book(p) == before_ready, 'first Map completion preserves all saved work')
+                h.click(p, '[data-map-refresh]')
+                map_metadata(p)
+                h.ok(h.book(p) == before_ready, 'explicit first Map reveal preserves all saved work')
+                screenshot(p, f'first-map-explicit-show-{width}')
+                cases.append({'width': width, 'case': 'Home film and older math neutral views while first map held', 'checks': h.checks - n})
                 c.close()
 
             expected_http = [x for x in h.http_failures if x['case'].startswith('failed-map-') and x['url'].endswith('/marble-map.json') and x['status'] == 404]
