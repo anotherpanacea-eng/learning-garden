@@ -28,7 +28,7 @@ Deduplicated original result: **0P1 /2P2**, both resolved in the candidate. No a
 
 The source audit attributes institutional source reads, exact finite arithmetic, all eight reachable goal constructions, and the actual endpoint RGB probe. In the proposed display rule, different ratios can share RGB pixels: white:blue1:11 and2:23 both display `[64,103,154]`. Matching therefore uses ordered ingredient identity, nonempty counts and exact cross-products, never pixel similarity. These are candidate mathematics checks, not execution of a future app.
 
-Subject/content and final independent specification adjudication are pending at this record's creation. Runtime implementation may begin only after their material findings are resolved. Subsequent implementation still requires independent Claude clearance on its exact candidate, proportionate actual browser/progress tests, expected-head merge and hosted release verification. No human-expert approval, physical iPad/Safari certification or learning-effectiveness claim follows.
+Subject/content and final independent specification adjudication were pending at this record’s creation; their completed results are recorded below. Runtime implementation may begin only after their material findings are resolved. Subsequent implementation still requires independent Claude clearance on its exact candidate, proportionate actual browser/progress tests, expected-head merge and hosted release verification. No human-expert approval, physical iPad/Safari certification or learning-effectiveness claim follows.
 
 ## Final adjudication round1 and repairs
 
@@ -41,4 +41,10 @@ Claude Opus independently read exact candidate `af778b2e99a0a1d82e086dbb31ff7bfd
 
 Closely related optional clarifications define nonempty retained stripes, explicit Paint of a supplied nonempty start, the full no-op tuple including teaching, unreadable section/teaching behavior, unsupported-model read-only helpers, half-up picture rounding, source notice/origin mapping, and the exact visible text requested by Hear. Full counts and patterns remain available; no new teaching bench, save migration or generalized machinery was added.
 
-The independent subject/content reader separately passed all eight cases on the initial candidate; the changed teaching wording is receiving a bounded follow-up. Final repaired-candidate adjudication remains pending. No runtime is cleared by this record.
+The independent subject/content reader separately passed all eight cases on the initial candidate; the changed teaching wording also passed a bounded follow-up. Final repaired-candidate adjudication was pending at that checkpoint; its result is below. No runtime is cleared by this record.
+
+## Final specification clearance
+
+Claude Opus re-adjudicated exact repaired candidate `b7652cef4160c86c2a59c4b41a1d834c3b189801`: **BUILD-READY,0P1 /0P2**. All four additional P2 findings were resolved without a new bench or broader claim. The independent subject reader also cleared the changed equal-addition teaching and supplied-context wording; no further research was claimed. Claude read the supplied public documents and spot-checked arithmetic, but ran no code/tests and opened no external source.
+
+Root folded two nonblocking clarifications: compare no-op Paints against the most recent record, and include the always-visible guided lines in Hear's explicitly visible-only scope. Band wording now matches the finite caption. These clarify existing behavior and do not reopen the six-lens review. This is the build freeze; actual implementation and its separate exact-head review, browser/progress checks and release gates remain outstanding.
