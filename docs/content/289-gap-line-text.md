@@ -22,7 +22,7 @@ Construction caption: **Ruler end: {C}**.
 
 Length caption: **Your ruler's length: {length} units.** Singular **Your ruler's length: 1 unit.** Zero **Your ruler's length: 0 units.** This is the unsigned length of the actual construction from Start to the ruler end. It is never the distance to Finish unless the construction actually has that length.
 
-Initial caption: **Your ruler begins at Start. Its length is 0. You can compare it now or move its end.** A zero-length construction is complete enough to compare; there is no missing-work message.
+Initial caption, only when the retained supplied endpoint equals Start: **Your ruler begins at Start. Its length is 0. You can compare it now or move its end.** Otherwise: **Supplied ruler end: {initial C}. You can change this ruler or compare it.** Derive the actual supported-model length from that retained initial. A zero-length construction is complete enough to compare; there is no missing-work message.
 
 Piece legend: **Equal ruler pieces**. Whole-unit source: **Each piece is 1 unit long.** Half-unit source: **Each piece is ½ unit long.** Ruler pieces have no arrowheads. Draw only the actual constructed span from A to C. Zero span has no nonzero piece.
 
@@ -232,7 +232,7 @@ Own-case Notes labels: **Across zero example opened for this invitation's own ma
 
 Unknown overlap: **Earlier opened-example details are unavailable. Whether it used this invitation's own marks is unknown.** Unknown is not absence of answer support.
 
-Supplied-context Notes: **Supplied ruler end: {A}** · **Supplied Split at zero: off** · **Supplied Show the move: off** · **Guided example supplied with this invitation** when guided lines are present. For reverse also show **This invitation reverses the two places used in the supplied Across zero guidance.** For coincident also show **The supplied zero-length ruler already fits this invitation.** These facts stay visible regardless of optional help flags.
+Supplied-context Notes derive actual retained initial values: **Supplied ruler end: {initial C}** · **Supplied Split at zero: {on/off}** · **Supplied Show the move: {on/off}** · **Guided example supplied with this invitation** when guided lines are present. For a supported model, show **This invitation reverses the two places used in the supplied {guided title} guidance.** only when a different retained guided case actually has the distinct endpoints swapped; do not infer it from a case id. Show **The supplied zero-length ruler already fits this invitation.** only when the actual initial endpoint, Start and Finish all coincide. A nonzero supplied initial that meets Finish instead uses **The supplied ruler end already meets Finish.** Otherwise omit any already-fits claim. No current-model deduction is generated for an unsupported model. These source-derived facts stay visible regardless of optional help flags.
 
 False support flag: **Not recorded before this comparison**. Do not translate it as no real-life help, independent work, or no prior exposure.
 
