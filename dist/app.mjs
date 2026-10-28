@@ -28,6 +28,7 @@ import {pricePage,priceEntry,priceRefusal,bindPrice} from './slope-equation-ui.m
 import {preparePriceDisplay} from './slope-equation-core.mjs';
 import {keeperPages,parcelHome,keeperInvitation,bindKeeperStory,refreshKeeperVisibility} from './keeper-story-ui.mjs';
 import {captureFirstSupper} from './keeper-story-core.mjs';
+import {actTwoPage,actTwoReturn,bindActTwo} from './act-two-ui.mjs';
 import {deskPage,deskEntry,bindDesk} from './keepers-desk-ui.mjs';
 import {rowsPage,rowsNotes,bindRows,resetRowsVisit} from './ribbon-rows-ui.mjs';
 import {offerHowto,keepOfferingHowto} from './drawn-howto.mjs';
@@ -367,6 +368,7 @@ function render(){
     else if(root==='learn'&&slug==='science')content=motionPage(state,detail);
     else if(root==='learn'&&slug==='french')content=frenchRoomsPage(state,detail);
     else content=pathwayPage(state,slug||'math')+(slug==='science'?timingEntry()+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+codesEntry()+waterEntry():slug==='english'?riverEntry()+hatsEntry():(!slug||slug==='math')?timingEntry()+ledgerEntry()+equalityEntry():'');
+    if(!choosingExplorer&&root==='learn'&&slug==='science'&&detail==='records')content+=actTwoReturn(state,'garden');
     main.innerHTML=content;updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{
       $('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());
@@ -419,7 +421,7 @@ function render(){
   else if(bridgesBench)html=bridgesPage(explorerStore.active.id);
   else if(root==='desk'&&slug==='linear'){const v=preparePriceDisplay(state,priceOptions());html=v.ok?pricePage(state):priceRefusal();if(v.changed)save();}
   else if(root==='desk')html='<details class="panel river-casebook"><summary>Choose another investigation</summary>'+timingEntry('desk')+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+priceEntry()+'</details>'+deskPage(state);
-  else if(root==='almanac')html=keeperPages(state,{blocked:keeperFilmBlocked()});
+  else if(root==='almanac')html=['town','celebration','flood-ledger','upstream-letter'].includes(slug)?actTwoPage(state,{part:slug,chapter:detail,blocked:keeperFilmBlocked()}):keeperPages(state,{blocked:keeperFilmBlocked()});
   else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id);
   else if(bellBench)html=bellStudioPage(state);
   else if(labelBench)html=labelPage(state,detail,explorerStore.active.id);
@@ -519,12 +521,13 @@ function render(){
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context)html+=learningInvitations(context);}
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
+  if(!choosingExplorer){const townChapter=root==='workshop'&&slug==='coins'?'market':root==='cafe'&&slug==='batches'?'birthday':root==='loft'&&!slug?'show':null;if(townChapter)html+=actTwoReturn(state,townChapter);}
   if(!choosingExplorer&&root==='cafe'&&!slug)html+=keeperInvitation(state,{blocked:keeperFilmBlocked()});
   main.innerHTML=(state.broad?.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;if(!choosingExplorer)offerHowto(main,location.hash);
   bindEgyptPhotoFallback(main);
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
   updateStorageNotice();bind();
-  if(!choosingExplorer&&['home','almanac'].includes(root)&&!filmSeen('welcome')){const openingOwner=explorerStore.active.id;queueMicrotask(()=>{if(!choosingExplorer&&explorerStore.active.id===openingOwner&&['#home','#almanac','#almanac/keepers',''].includes(location.hash))playFilm('welcome');});}
+  if(!choosingExplorer&&['home','almanac'].includes(root)&&!filmSeen('welcome')){const openingOwner=explorerStore.active.id;queueMicrotask(()=>{if(!choosingExplorer&&explorerStore.active.id===openingOwner&&(['#home',''].includes(location.hash)||location.hash==='#almanac'||location.hash.startsWith('#almanac/')))playFilm('welcome');});}
   const film=endingFilm();if(film)queueMicrotask(()=>{if(endingFilm()===film)playFilm(film);});
 }
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
@@ -596,6 +599,7 @@ function priceOptions(){return {canExport:candidate=>prepareProgressImport(JSON.
 function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
 function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function bind(){
+ bindActTwo(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindKeeperStory(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindOrdered(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,downloadNotes:()=>downloadText(JSON.stringify(notesReport(state),null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindPairs(state,{save,render,focus:focusElement,...priceOptions(),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
