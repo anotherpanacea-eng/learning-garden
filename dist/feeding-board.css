@@ -1,0 +1,121 @@
+/* A small sorting table: one animal, food evidence and three touch baskets. */
+[data-feeding-board-view]{max-width:1040px;margin:auto;color:#183f39;min-width:0}
+body:has([data-feeding-board-view]) .header nav,body:has([data-feeding-board-view])>footer{display:none}
+body:has([data-feeding-board-view]) .header{padding:8px 20px;gap:12px}
+body:has([data-feeding-board-view]) main{padding-top:8px}
+[data-feeding-board-view] [hidden]{display:none!important}
+[data-feeding-board-view] h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(28px,4vw,40px);line-height:1.15;letter-spacing:-.035em;margin:.35rem 0}
+[data-feeding-board-view] h2{font-family:Georgia,serif;font-weight:400;font-size:26px;line-height:1.2;letter-spacing:-.02em;margin:.3rem 0 .6rem}
+[data-feeding-board-view] h3{font-size:18px;line-height:1.35;margin:.4rem 0}
+[data-feeding-board-view] p,[data-feeding-board-view] li,[data-feeding-board-view] label,[data-feeding-board-view] summary,[data-feeding-board-view] small{font-size:16px;line-height:1.45}
+[data-feeding-board-view] p{margin:.5rem 0;overflow-wrap:anywhere}
+[data-feeding-board-view] button,[data-feeding-board-view] a,[data-feeding-board-view] summary{min-height:44px;min-width:44px;font-size:16px;touch-action:manipulation;white-space:normal;overflow-wrap:anywhere}
+[data-feeding-board-view] a{display:inline-flex;align-items:center;padding:.4rem}
+[data-feeding-board-view] :focus-visible{outline:3px solid #9b462f;outline-offset:4px}
+[data-feeding-board-view] fieldset{border:0;padding:0;margin:0;min-width:0}
+[data-feeding-board-view] legend{font-size:20px;font-weight:bold;line-height:1.3;margin-bottom:12px}
+[data-feeding-board-view] button{max-width:100%}
+[data-feeding-board-view] input[type=radio]{width:24px;height:24px;min-width:24px;accent-color:#397958;flex-shrink:0}
+.fb-heading,.fb-topline{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap}
+.fb-heading p{flex-basis:100%;margin:0 0 8px}
+.fb-tabs{display:flex;gap:10px;margin:12px 0;flex-wrap:wrap}
+.fb-tabs button{padding:10px 18px;background:#fffef9;border:2px solid #90b9ae;border-radius:22px;color:#183f39}
+.fb-tabs button[aria-selected=true],.fb-tabs button[aria-pressed=true]{background:#183f39;border-color:#183f39;color:#fffef9}
+.fb-stage{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.3fr);gap:24px;background:#eaf4ef;border:1px solid #b8d4c3;border-bottom:6px solid #b99b74;border-radius:18px 18px 10px 10px;padding:18px;min-width:0;align-items:start}
+.fb-stage>*{min-width:0}
+.fb-evidence{background:#fffef9;border:1px solid #cbbf9f;border-radius:10px 20px 10px 10px;padding:14px;text-align:center;min-width:0}
+.fb-evidence h2{font-size:27px;margin:0 0 8px}
+.fb-art{display:inline-block;vertical-align:middle;max-width:100%}
+.fb-art svg{display:block;width:100%;height:auto;max-width:100%}
+.fb-animal-picture{display:flex;align-items:center;justify-content:center;min-height:160px;margin:4px 0}
+.fb-animal-picture>.fb-art{width:160px;height:160px}
+.fb-food-plate{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:12px 6px;border:3px solid #cbdcd3;border-radius:26px;background:#faf8ef;margin:10px 0}
+.fb-food-plate figure{display:flex;flex-direction:column;align-items:center;gap:3px;flex:0 1 95px;min-width:0;margin:0}
+.fb-food-art>.fb-art,.fb-food-art.fb-art{width:44px;height:44px}
+.fb-food-plate figcaption{font-size:16px;line-height:1.25;overflow-wrap:anywhere}
+.fb-usual-diet{text-align:left;border-top:1px solid #d8dfd5;padding-top:10px}
+.fb-qualifier,.fb-scale{font-size:16px;color:#52675e}
+.fb-choice-panel{min-width:0;padding:4px 0}
+.fb-baskets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fb-basket{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;padding:12px 8px;min-width:0;min-height:155px;background:#fbf3dd;border:2px solid #b99b74;border-top:8px solid #b99b74;border-radius:8px 8px 24px 24px;box-shadow:0 4px 0 #d8c9ab;color:#183f39;cursor:pointer;text-align:center}
+.fb-basket:has(input:checked){border-color:#183f39;background:#e1eee4;box-shadow:0 4px 0 #90b9ae}
+.fb-basket:has(input:focus-visible){outline:3px solid #9b462f;outline-offset:4px}
+.fb-basket strong,.fb-basket span{overflow-wrap:anywhere}
+.fb-basket .fb-art{width:52px;height:52px}
+.fb-trying{font-size:16px;font-weight:bold;min-width:0}
+.fb-trying .fb-art{animation:fb-settle .15s ease-out}
+.fb-checked-marker{font-size:16px;border:2px dashed #52675e;border-radius:8px;padding:5px}
+.fb-choices{display:grid;gap:10px}
+.fb-choices label,.fb-idea-option{display:flex;align-items:flex-start;gap:10px;padding:14px;border:2px solid #90b9ae;border-radius:10px;background:#fffef9;cursor:pointer}
+.fb-choices label:has(input:checked),.fb-idea-option:has(input:checked){background:#e1eee4;border-color:#183f39}
+.fb-choices label:has(input:focus-visible),.fb-idea-option:has(input:focus-visible){outline:3px solid #9b462f;outline-offset:4px}
+.fb-check{margin:14px 0 10px;min-height:48px;padding:12px 22px;border-radius:24px;background:#183f39;color:#fffef9;box-shadow:0 3px 0 #0e2d26}
+.fb-choice-panel .primary{min-height:48px;margin:14px 0 10px;border-radius:24px;box-shadow:0 3px 0 #0e2d26}
+.fb-feedback,.fb-status{background:#fffef9;border-left:4px solid #6a5680;border-radius:4px 10px 10px 4px;padding:12px 14px;margin:12px 0;line-height:1.45;overflow-wrap:anywhere;font-size:16px}
+.fb-status:empty{padding:0;border:0;margin:0}
+.fb-feedback h2,.fb-feedback h3{font-size:20px}
+.fb-feedback p{margin:.35rem 0}
+.fb-guided{border-left:3px solid #e9b84a;padding:8px 12px;background:#fbf3dd;text-align:left;margin:10px 0}
+.fb-toolbar,.fb-navigation,.fb-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0}
+.fb-toolbar button,.fb-navigation button,.fb-actions button{padding:10px 14px}
+.fb-navigation{justify-content:space-between}
+.fb-helper{padding:18px;background:#fffef9;border:2px solid #90b9ae;border-radius:12px;margin:16px 0;min-width:0}
+.fb-helper .fb-animal-picture>.fb-art{width:160px;height:160px}
+.fb-helper p{max-width:75ch}
+.fb-helper .fb-food-plate{max-width:450px}
+.fb-helper .fb-art{max-width:100%}
+.fb-helper .fb-art-description,.fb-art-fallback{font-size:16px;line-height:1.45;overflow-wrap:anywhere}
+.fb-rail{margin:18px 0;min-width:0}
+.fb-rail>summary{cursor:pointer;padding:10px 0;font-weight:bold}
+.fb-rail-group{margin:12px 0;padding:12px;background:#f3f1e8;border-top:3px solid #b99b74;border-radius:6px;min-width:0}
+.fb-rail-group h3{margin:0 0 10px}
+.fb-rail-group>div,.fb-thumbnails{display:flex;gap:8px;flex-wrap:wrap}
+.fb-animal-button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:88px;flex:0 1 118px;padding:10px 7px;border:1px solid #90b9ae;border-radius:9px;background:#fffef9;text-align:center;color:#183f39}
+.fb-animal-button[aria-current=true]{border:3px solid #183f39;padding:8px 5px;background:#e1eee4}
+.fb-animal-button .fb-art{width:44px;height:44px}
+.fb-animal-button span,.fb-animal-button small{font-size:16px;line-height:1.25;overflow-wrap:anywhere}
+.fb-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fb-comparison .fb-evidence{padding:10px}
+.fb-comparison .fb-animal-picture>.fb-art{width:160px;height:160px}
+.fb-entry{display:flex;align-items:center;justify-content:space-between;gap:14px;border-left:4px solid #397958;background:#edf3e8;padding:14px 18px;margin:16px 0}
+.fb-entry p{font-size:16px;line-height:1.45;margin:4px 0}
+.fb-entry a{display:inline-flex;align-items:center;min-height:44px;font-size:16px;flex-shrink:0}
+.fb-notes pre{max-height:440px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:16px}
+@keyframes fb-settle{from{transform:translateY(-4px) scale(.96)}to{transform:translateY(0) scale(1)}}
+@media(max-width:700px){.fb-stage{display:block;padding:12px}.fb-choice-panel{margin-top:14px}.fb-baskets{display:grid;grid-template-columns:1fr;gap:10px}.fb-basket{min-height:72px;flex-direction:row;justify-content:flex-start;border-top-width:2px;border-left-width:7px;border-radius:8px 18px 18px 8px;padding:10px;gap:10px;text-align:left}.fb-basket .fb-art{width:44px;height:44px}.fb-animal-picture{min-height:112px}.fb-animal-picture>.fb-art{width:112px;height:112px}.fb-comparison{display:block}.fb-comparison .fb-evidence{margin:10px 0}.fb-comparison .fb-animal-picture>.fb-art{width:112px;height:112px}.fb-heading h1{flex-basis:100%}.fb-entry{display:block}.fb-entry a{margin-top:8px}.fb-food-plate figure{flex-basis:80px}.fb-rail-group{padding:10px}.fb-animal-button{flex-basis:100px;min-width:76px}.fb-navigation button{flex:1 1 auto}}
+@media(prefers-reduced-motion:reduce){[data-feeding-board-view] *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Match the concrete wrappers without letting descriptions turn the board into cards of prose. */
+.fb-animal-picture>.fb-art{width:240px;height:auto}
+.fb-animal-picture>.fb-art>svg{height:160px}
+.fb-animal-picture .fb-art-description,.fb-food-art>.fb-art-description{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.fb-helper .fb-art-description{position:static;width:auto;height:auto;margin:4px 0;overflow:visible;clip:auto;white-space:normal;display:block;font-size:16px;line-height:1.4}
+.fb-food-plate{display:block}
+.fb-foods{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+.fb-foods figure{flex:0 1 90px}
+.fb-food-art.fb-art{width:44px;height:auto}
+.fb-food-art.fb-art>svg{height:44px}
+.fb-stage>.fb-evidence>h3{display:none}
+.fb-stage .fb-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-width:0}
+.fb-pair .fb-animal-picture>.fb-art{width:180px;max-width:100%}
+.fb-pair .fb-animal-picture>.fb-art>svg{height:160px}
+.fb-pair .fb-evidence{padding:10px}
+.fb-pair .fb-foods figure{flex-basis:60px}
+.fb-ideas{display:grid;gap:10px}
+.fb-idea{display:flex;align-items:flex-start;gap:10px;background:#fffef9;border:2px solid #90b9ae;padding:12px;border-radius:10px;cursor:pointer}
+.fb-idea:has(input:checked){background:#e1eee4;border-color:#183f39}
+.fb-idea:has(input:focus-visible){outline:3px solid #9b462f;outline-offset:4px}
+.fb-tabs button[aria-current=page]{background:#183f39;color:#fffef9;border-color:#183f39}
+.fb-rail-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.fb-rail-group{display:flex;flex-wrap:wrap;align-content:flex-start;gap:8px;margin:0}
+.fb-rail-group>h3{flex-basis:100%;margin:0}
+.fb-rail-group:last-child{grid-column:1/-1}
+.fb-earlier-marker{font-size:16px!important;border:1px dashed #52675e;padding:5px;flex-basis:100%}
+.fb-art-small>svg{height:44px}
+.fb-trying{display:flex;align-items:center;flex-direction:column;gap:4px}
+.fb-checked{font-size:16px;border:1px dashed #52675e;padding:4px;border-radius:4px}
+.fb-worked-placement{display:flex;gap:12px;align-items:center;padding:10px;background:#e1eee4}
+.fb-worked-placement>.fb-art-small{width:56px}
+@media(max-width:700px){.fb-animal-picture>.fb-art{width:190px}.fb-animal-picture>.fb-art>svg{height:112px}.fb-stage .fb-pair{display:block}.fb-pair .fb-evidence{margin-bottom:10px}.fb-pair .fb-animal-picture>.fb-art>svg{height:112px}.fb-rail-groups{display:block}.fb-rail-group{margin-bottom:10px}.fb-trying{flex-direction:row;gap:6px}.fb-basket strong{flex:1}.fb-basket .fb-trying span{max-width:100px}}
+[data-feeding-board-view]>.page-heading{max-width:none;margin:0 0 12px;display:flex;align-items:center;justify-content:space-between;gap:6px 16px;flex-wrap:wrap}
+[data-feeding-board-view]>.page-heading>.back{margin:0}
+[data-feeding-board-view]>.page-heading>p{flex-basis:100%;margin:0}
