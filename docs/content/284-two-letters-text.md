@@ -19,7 +19,7 @@ Recall link: **Change a letter for its reader** → `#post/letters`.
 Nuria reader label: **Nuria, a friend in Vadoalto**.
 Nuria purpose: **Thank Nuria for the seeds and ask her to find out about the readings. Use a friendly note.**
 Council reader label: **Members of Vadoalto's town council**.
-Council purpose: **Thank the council, request the readings and ask where the courier should enter. Use a formal letter.**
+Council purpose: **Thank the council, request the readings and ask which door the courier should use. Use a formal letter.**
 
 ## Letter templates and eight gaps
 
@@ -29,7 +29,7 @@ The part order and text below are exact; render chosen words literally. `[n1]` e
 
 > [n1]
 >
-> The reed seeds got here fine. [n2] Pip tried one. He says not tasty.
+> The reed seeds got here fine. [n2] Pip tried one. He says they are not tasty.
 >
 > Could you [n3] if your council will send the flood post readings from the storm? We want to see when the water got to you.
 >
@@ -90,7 +90,7 @@ Prompt: **Which formal word keeps the asking meaning?**
 
 1. `ask-for`: **ask for** — alternative, informal-for-formal. **That asks clearly too. Request is the more formal choice for this brief.**
 2. `request`: **request** — fits, suits-brief. **Request means ask for. The letter is asking for a copy.**
-3. `require`: **require** — other, changed-meaning. **Here require says the copy is necessary. The original line asks for it.**
+3. `require`: **require** — other, changed-meaning. **Here require says the copy is necessary. This letter is asking for a copy.**
 
 Hint: **Look at card 3. Asking for something, or saying it is necessary?**
 Explanation: **Request keeps the asking meaning. Require changes what this line says.**
@@ -124,8 +124,8 @@ Guided steps: empty.
 
 ### a4
 
-Line: **The council letter needs an ending.**
-Prompt: **Which ending suits this formal council letter?**
+Line: **Dot ended her council letter with a formal closing.**
+Prompt: **Which ending suits a formal letter like this one?**
 
 1. `friendly-close`: **Thanks again!** — alternative, informal-for-formal. **That can close this letter too. This brief practices the conventional formal closing Sincerely.**
 2. `dear-members`: **Dear Members,** — other, opening-for-closing. **That begins a letter. This question asks for an ending.**
@@ -137,7 +137,7 @@ Guided steps: empty.
 
 ### a5
 
-Line: **Choose a line for the formal council letter.**
+Line: **Here is another way Dot could thank the council.**
 Prompt: **Which line suits this reader and this job?**
 
 1. `hey-council`: **Hey council, thanks! The reed seeds got here safely.** — alternative, informal-for-formal. **That thanks the council and keeps the arrival news in a chatty style. This brief asks for a formal line.**
@@ -152,7 +152,7 @@ Guided steps: empty.
 
 ### card1 · Formal and informal
 
-**Formal and informal language suit different situations. Think about the reader and the job. Neither is better, and a formal letter need not use long words.**
+**Formal and informal language suit different situations. Register means language choices for a situation. Think about the reader and the job. Neither is better, and a formal letter need not use long words.**
 
 Worked steps:
 
@@ -166,7 +166,7 @@ Worked steps:
 
 Worked steps:
 
-1. **We'd like to ask for a copy.**
+1. **We would like to ask for a copy.**
 2. **For this formal letter, try request in place of ask for.**
 3. **We would like to request a copy. The letter is still asking.**
 
@@ -195,8 +195,8 @@ Close: **Back to my choice**
 
 Help title: **Try an example**
 Hint control: **I'm stuck**
-Hint next: **Try an easier greeting**
-Source helpExample: **For a friendly note to Puff, Hi Puff! fits the brief. Dear Members of the Council, greets different readers. Now check who reads your letter.**
+Hint next: **Try a greeting example**
+Source helpExample: **For a friendly note to Puff, “Hi Puff!” fits the brief. “Dear Members of the Council,” greets different readers. Now check who reads your letter and what it asks.**
 Third step: **Skip for now. You can come back.**
 Teaching trigger: **Read the three teaching cards**
 Optional application: **If you like, tell a grown-up another way to ask for a copy. Or write it on paper. These words stay offscreen; nothing is recorded or marked.**
@@ -224,3 +224,5 @@ Grown-up note: **Supplied choices show choices for these briefs. They do not sho
 - **A new page could not be started. Your earlier pages stay as they were.**
 - Notes heading **Two Letters**; raw disclosure **Original Two Letters notes, including retained unreadable values**.
 - Entry/footer destinations **Post Office** → `#post`; **Change a letter** → `#post/letters`; **Grown-up notes** → `#notes`.
+
+Set A introduction: **The letter is here as a model. These short challenges do not change your letter choices.** Notes on later packets: **Same authored letters revisited.** Together reported button: **Working together reported**. Literal saved afterFeedback: **Feedback available on revisit: Yes/No**; No does not mean independent, unseen or unaided.

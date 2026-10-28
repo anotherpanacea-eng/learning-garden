@@ -10,3 +10,5 @@ Six separate reviewer contexts read the finite spec/text and relevant actual rep
 - Mechanizability: state/export/identity properties are deterministic checks; semantic meaning and cue fairness need substantive independent content review, which is retained.
 
 Verdict after folds: BUILD-READY, subject to final focused independent adjudication of these folds and complete finite child text. The owning PR records that adjudication and eventual exact-head implementation/release evidence. No learning-effect or physical Safari claim.
+
+Focused Claude candidate106fbaf review found no P1 and two P2s: latest-answer replacement hid feedback/retry provenance, and Set A could contradict a visibly complete model letter. Added literal own afterFeedback boolean with identity-noop precedence and exact first/changed response rules; made the source rendering explicit and a4/a5 truthful recognition prompts. Additional small clarity folds define register, literal paragraph breaks, existing-choice preselection, support-action flags, ID exhaustion and repeated-material labels. Final focused adjudication follows these folds.
