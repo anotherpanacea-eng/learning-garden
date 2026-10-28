@@ -154,6 +154,7 @@ def helper(p,key):
     click(p,f'[data-rb-helper="{key}"]')
 
 def guard_controls(p,transition):
+    ok(p.locator('[data-rb-compare]').count()>0 and p.locator('[data-rb-adjust]').count()>0,'capture actual active controls before transition')
     p.evaluate("window.oldRatioControls=[document.querySelector('[data-rb-compare]'),document.querySelector('[data-rb-adjust]'),document.querySelector('[data-rb-helper]'),document.querySelector('[data-ratio-bars-view] [data-speak]')]")
     transition()
     before=book(p);speech=p.evaluate('ratioSpeechRequests.length')
@@ -335,7 +336,7 @@ def main():
                 exported=download(p,base,f'notes-{width}')
                 ok(exported['ratioBars']==first_root and len(exported['syntheticOther']['payload'])>=500*1024,'actual pretty Notes download full owner and500KiB sibling')
                 text=semantic(p);ok('guided' in text.lower() and 'Supplied' in text,'semantic Notes identifies supplied guided work');snap(p,f'notes-{width}')
-                guard_controls(p,lambda:bring(p,base,exported));ok(active(p) not in [first_id,second_id],'real import creates separate explorer');go(p,base);ok(owner(p)==first_root,'import/reload retains first/latest/draft')
+                go(p,base);guard_controls(p,lambda:bring(p,base,exported));ok(active(p) not in [first_id,second_id],'real import creates separate explorer');go(p,base);ok(owner(p)==first_root,'import/reload retains first/latest/draft')
                 redownload=download(p,base,f'redownload-{width}');ok(redownload['ratioBars']==first_root and redownload['syntheticOther']==exported['syntheticOther'],'real redownload exact owner and sibling')
                 click(p,'#explorer-switch');click(p,f'[data-select-explorer="{second_id}"]');go(p,base);ok(owner(p)==second_root,'second explorer unchanged')
                 go(p,base,'#notes','#reset');click(p,'#reset');click(p,'#confirm-reset')
