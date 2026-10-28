@@ -1,0 +1,21 @@
+# Two Letters284 · bounded source study
+
+2026-10-28. Scope: original/adapted English Two Letters, eight gaps, five supplied items and three cards from proposal271 at [PR194](https://github.com/anotherpanacea-eng/learning-garden/pull/194), head `7c100a314484c683b812eddc37098c3df78b6fd1`. This is a finite register/meaning activity, not the proposed six-bench pack.
+
+## Primary language sources read
+
+- [Department for Education, English programmes of study](https://www.gov.uk/government/publications/national-curriculum-in-england-english-programmes-of-study/national-curriculum-in-england-english-programmes-of-study): writing sections describe audience, purpose, context and revision. The [primary programme PDF](https://assets.publishing.service.gov.uk/media/5a7de93840f0b62305b7f8ee/PRIMARY_national_curriculum_-_English_220714.pdf), Appendix2 printed p68, supplies the formal vocabulary examples find out/discover, ask for/request, go in/enter. The glossary printed p83 distinguishes register by use from dialect by users. This supports selecting for a stated situation, not ranking speakers or claiming all formal words are longer. DfE material is under the Open Government Licence; this activity uses original contextual examples/teaching text, with those short conventional vocabulary pairs.
+- [Oxford Advanced American Dictionary, require](https://www.oxfordlearnersdictionaries.com/definition/american_english/require): direct page read distinguishes need/depend from making something necessary under rules. This slice uses a stated local contrast: Willowbank asks for a copy; saying it is necessary changes that request. It does not equate require with rudeness or deny other senses.
+- [Oxford Advanced American Dictionary, request](https://www.oxfordlearnersdictionaries.com/definition/american_english/request_2): primary dictionary page read as a reference for asking. Dictionary definitions/examples are not copied into the activity. Earlier Cambridge direct requests returned403; those failed requests are not evidence of direct reading.
+
+## Authored content decisions
+
+Formal/informal are contextual tendencies. Clearly meaningful alternatives receive distinct feedback from wrong-reader, changed-meaning or letter-position choices. The two letters share seed-arrival news and an interest in storm readings but differ in who is asked and the courier-entrance question; comparison explicitly states this instead of claiming identical messages. Spanish, public-domain literature, speech recording and dialect exercises are excluded, so their proposed checks do not silently commission those benches. Own-word application is optional human/offscreen discussion, never machine-graded or stored. All story people, places and records are fictional.
+
+## Current Jane and Marble study
+
+Jane `e88f81a00553fb87818ef84c77a8800f0dcb33e4`: LESSONS.md, LICENSING.md, LICENSE, src/engine.js and src/stuck.js read. Optional worked/guided/practice separation informs original examples; v0.7.2's carry-over repair motivates guarding stale submissions by current packet and question. No new Jane code/prose is incorporated. Source app code is MIT; lesson/docs content has separate CC BY-SA terms, so any future copying must inspect the actual path license.
+
+Marble `5afaba06166207eb87d9ac7d74419d5a2253c15e`: data/topics.json, data/dependencies.json, LICENSE-CONTENT and same-pin teaching research studied. Selected records: mt_v5DyOEpbbr (audience/purpose/form/tone), mt_86DyHo9zO3 (formal/informal), mt_h3vmvQW5Wa (formal vocabulary), mt_82KKv0Fca3 (craft vocabulary). Direct prerequisites and three neighbors were read. No teaching-research records were found for those seven selected/neighbor IDs; this is not a claim about every English topic at every pin. These are design references, not incorporated prose, new graph edges, a taxonomy re-pin or a coverage declaration. Marble database/content retain ODbL1.0/CC BY-SA4.0 terms; existing attribution stays.
+
+Supplied choices observe only these contextual choices. Independent composition, speaking, transfer, general vocabulary proficiency and learning gains remain unverified. Independent content review must read each option and explanation; a structural script cannot establish teaching validity.
