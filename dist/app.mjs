@@ -79,6 +79,7 @@ import {createBellPlayer} from './bell-studio-audio.mjs';
 import {rhythmPage,rhythmEntry,bindRhythm,resetRhythmVisit} from './rhythm-ui.mjs';
 import {createRhythmPlayer} from './rhythm-audio.mjs';
 import {weatherPage,talliesPage,bindWeatherTally,resetWeatherTallyVisit,weatherEntry} from './weather-tally-ui.mjs';
+import {pairedPage,bindPairedPoints,resetPairedVisit,pairedEntry} from './paired-points-ui.mjs';
 import {travelersArchivePage,travelersArchiveEntry,bindTravelersArchive} from './travelers-archive-ui.mjs';
 import {travelersArchive,noteArchiveSources} from './travelers-archive-core.mjs';
 import {measuringRecipesPage,measuringRecipesEntry,bindMeasuringRecipes} from './measuring-recipes-ui.mjs';
@@ -311,6 +312,7 @@ function exposeRain(exposure){noteRainDisplayExposure(state,exposure);exposeStor
 function render(){
   stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
+  if(hash!=='#learn/math/paired'||choosingExplorer)resetPairedVisit();
   if(!['#almanac/weather','#almanac/tallies'].includes(hash)||choosingExplorer)resetWeatherTallyVisit();
   if(hash!=='#studio/rhythm'||choosingExplorer)resetRhythmVisit();
   const scaleBench=hash==='#workshop/scale';
@@ -340,6 +342,13 @@ function render(){
   const clockWalkBench=root==='post'&&slug==='clock-walk',pavingBench=root==='numbers'&&slug==='paving';
   const collectionBench=root==='living'&&slug==='collection',lanternBench=root==='numbers'&&slug==='lanterns',noticeBench=root==='loft'&&slug==='printer';
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',measureBench=root==='science'&&slug==='measure',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',doubleBench=root==='post'&&slug==='double-check',batchBench=root==='cafe'&&slug==='batches',labelBench=root==='archive'&&slug==='labels',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
+  if(hash==='#learn/math/paired'){
+    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
+    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):pairedPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindPairedPoints(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell});bindSpeech();}return;
+  }
   if(['#almanac/weather','#almanac/tallies'].includes(hash)){
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
@@ -504,7 +513,7 @@ function render(){
   else if(rainBench){syncRainNotebookExposure(state,{view:'known',rootExposer:exposeRain});html=rainPathsPage(state)+fieldKitEntry('weather')+weatherEntry('field');}
   else if(sharingBench){exposeStoryFacts({facts:sharingDisplayedFactPairs(state)});save();html=sharingCounterPage(state);}
   else if(rainNotebookBench)html=rainNotebookPage(state);
-  else if(collectionBench)html=collectionPage(state);
+  else if(collectionBench)html=collectionPage(state)+pairedEntry();
   else if(fieldBench){syncFieldPlantExposure('notebook');save();html=fieldNotebookPage(state)+collectionEntry();}
   else if(plantBench){syncFieldPlantExposure();const ps=plantStudy(state);if(ps){setPlantDay(state,ps.day);save();}html=plantStudyPage(state)+fieldKitEntry('cress');}
   else if(instructionBench)html=renderInstructions(state,root).html;
@@ -589,7 +598,7 @@ function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
 function cancelProgressImport(){importRead++;progressImport={candidate:null,message:'',reading:false};}
 function useExplorer(next,destination='#home'){
- if(!next)return;resetWeatherTallyVisit();resetRhythmVisit();resetStartingFlow();resetArrivalVisit();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)||['#cafe/units','#begin','#arrive'].includes(destination)||['pathways','learn'].includes(destination.slice(1).split('/')[0]);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
+ if(!next)return;resetPairedVisit();resetWeatherTallyVisit();resetRhythmVisit();resetStartingFlow();resetArrivalVisit();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)||['#cafe/units','#begin','#arrive'].includes(destination)||['pathways','learn'].includes(destination.slice(1).split('/')[0]);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
  if(destination!=='#notes'&&destination!=='#begin'&&destination!=='#arrive'&&destination!=='#cafe/units'&&!['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)&&!['pathways','learn'].includes(destination.slice(1).split('/')[0]))requestAutomaticFilm('welcome');
 }
