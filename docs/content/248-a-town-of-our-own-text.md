@@ -88,7 +88,7 @@ Original label **Water-stained original · story**. Heading **The flood ledger**
 
 The table and optional separated storm annotation are visible with any reading amount; never imply reading Original is necessary for an older learner. No interpretation is graded. Guide: “{guide}: A record can give us a new question. What would you want to ask the town upstream?”
 
-Storm invitation: “The miller has a fresh mark from the storm:160 centimeters above the brook's stated ordinary level.” Button **Add the storm to this story ledger**. Result **The storm ·160 cm · year not given**. Prose: “The later storm is listed separately. These pages do not give it a year of keeping.” This never adds a dated measurement or changes another investigation.
+Storm invitation: “The miller has a fresh mark from the storm: 160 centimeters above the brook's stated ordinary level.” Button **Add the storm to this story ledger**. Result **The storm · 160 cm · year not given**. Prose: “The later storm is listed separately. These pages do not give it a year of keeping.” This never adds a dated measurement or changes another investigation.
 
 Glossary: **ledger** “a book of records”; **flood post** “a marked post used here to record how high the brook rose”; **upstream** “toward where the brook comes from”; **cm** “centimeters, units of length”. Existing marsh/brook definitions remain. Button **A letter from upstream** opens the sealed letter offer, not an activity reply.
 

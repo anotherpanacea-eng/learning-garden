@@ -111,7 +111,7 @@ def setup(browser, width, seed, label):
         body = response.text()
         needle = 'let graph=null;'
         assert needle in body, 'read-only notebook observation seam changed'
-        body = body.replace(needle, 'window.__actTwoRead=()=>structuredClone(state);window.__actTwoExplorer=()=>explorerStore.active.id;' + needle, 1)
+        body = body.replace(needle, 'window.__actTwoRead=()=>structuredClone(state);window.__actTwoExplorer=()=>explorerStore.active.id;window.__actTwoReport=candidate=>notesReport(candidate);' + needle, 1)
         route.fulfill(response=response, body=body)
 
     c.route('**/app.mjs', app)
@@ -181,6 +181,28 @@ def download(p, base, label):
     destination = OUT / (label + '.json')
     result.value.save_as(destination)
     return json.loads(destination.read_text())
+
+
+def verify_notes(p, base, receipts):
+    go(p, base, '#notes')
+    panel = p.locator('[data-act-two-notes]')
+    panel.wait_for(state='attached')
+    if not panel.evaluate('x=>x.open'):
+        panel.locator('summary').first.click()
+    text = panel.inner_text()
+    for chapter, receipt in receipts.items():
+        ref = receipt['ref']
+        if chapter == 'market':
+            expected = ['Coin Counter', f"Coin idea {ref['roundId']}", ref['request']]
+        elif chapter == 'garden':
+            expected = ['Town Record', f"Record plan {ref['visitId']}", ref['edition'] + ' kept', ref['sourceId']]
+        elif chapter == 'birthday':
+            expected = ['Whole-batch gathering trays', f"Tray idea {ref['caseId']}",
+                        'kept plan' if ref['edition'] == 'kept' else 'offered tray', ref['sourceId']]
+        else:
+            expected = ['Story Loft', f"Show {ref['showId']}", 'shared ' + ref['edition']]
+        ok(all(x in text for x in expected), 'Notes identify frozen activity/address/edition: ' + chapter)
+    ok(panel.locator('[data-synthetic-injection],script,iframe,pre').count() == 0, 'Notes escape reference text and do not expand activity bodies')
 
 
 def bring(p, base, value):
@@ -383,6 +405,7 @@ def main():
                 original = active(p)
                 first = download(p, base, f'completed-original-{width}')
                 first_story, first_hosts = copy.deepcopy(first['story']), host_roots(first)
+                verify_notes(p, base, first_story['acts']['II']['contributions'])
                 partial = copy.deepcopy(fixtures['partial'])
                 bring(p, base, partial)
                 second = active(p)
@@ -415,6 +438,23 @@ def main():
                     ok(story(q)['acts']['II']['ended'], 'explicit alternate ending')
 
                 # Direct future routes, no work, malformed preferences and standalone reached outcomes.
+                for fixture in ['unreadParcel', 'unrevealedPage']:
+                    _, locked = setup(browser, width, fixtures[fixture], f'before-page1-{width}-{fixture}')
+                    original_story = copy.deepcopy(fixtures[fixture]['story'])
+                    for destination in ['#almanac/town', '#almanac/town/garden']:
+                        go(locked, base, destination)
+                        panel = locked.locator('[data-act-two-root]')
+                        ok(panel.locator('[data-act-two-read],[data-act-two-frame-amount],[data-speak],[data-act-two-start]').count() == 0, 'before Page1 no opening, frame preference, Hear or Start')
+                        ok(panel.locator('a[href="#almanac/keepers"]').count() > 0, 'actual Keeper prerequisite link remains usable')
+                        ok('could not be kept safely' not in panel.inner_text(), 'eligibility guidance never describes false storage failure')
+                        ok(story(locked) == original_story, 'unread parcel/unrevealed Page1 navigation writes nothing')
+                    reload(locked)
+                    ok(story(locked) == original_story, 'before Page1 reload remains pure')
+                    snapshot(locked, f'before-page1-{width}-{fixture}')
+                _, frozen_notes = setup(browser, width, fixtures['notesIdentity'], f'notes-identities-{width}')
+                verify_notes(frozen_notes, base, fixtures['notesIdentity']['story']['acts']['II']['contributions'])
+                ok(story(frozen_notes) == fixtures['notesIdentity']['story'], 'Notes rendering never rewrites frozen imported receipts')
+                snapshot(frozen_notes, f'notes-identities-{width}')
                 _, q = setup(browser, width, fixtures['ready'], f'future-routes-{width}')
                 for route in ['#almanac/celebration', '#almanac/flood-ledger', '#almanac/upstream-letter']:
                     raw = story(q) if q.url != 'about:blank' else copy.deepcopy(fixtures['ready']['story'])
@@ -497,6 +537,23 @@ def main():
                 # Actual pretty-report byte refusal; no fake canExport callback in the browser.
                 _, q = setup(browser, width, fixtures['refusal'], f'preflight-refusal-{width}')
                 go(q, base, '#almanac/town');raw = book(q)
+                diagnostic = q.evaluate(r"""async()=>{
+                  const before=window.__actTwoRead(),candidate=structuredClone(before);
+                  const {startActTwo}=await import('./act-two-core.mjs');
+                  const {recoveryFitsProgressLimits,MAX_IMPORT_BYTES}=await import('./progress-limits.mjs');
+                  const {prepareProgressImport}=await import('./progress-transfer.mjs');
+                  const rawStarted=startActTwo(candidate);
+                  const rawBytes=new TextEncoder().encode(JSON.stringify(candidate,null,2)).length;
+                  const report=JSON.stringify(window.__actTwoReport(candidate),null,2);
+                  return {rawStarted,rawFits:recoveryFitsProgressLimits(candidate),rawBytes,
+                    rawMargin:MAX_IMPORT_BYTES-rawBytes,reportBytes:new TextEncoder().encode(report).length,
+                    reportAccepted:prepareProgressImport(report).ok,
+                    originalUnchanged:JSON.stringify(window.__actTwoRead())===JSON.stringify(before)};
+                }""")
+                (OUT / f'preflight-proof-{width}.json').write_text(json.dumps(diagnostic, indent=2))
+                ok(diagnostic['rawStarted'] and diagnostic['rawFits'] and diagnostic['rawMargin'] >= 0, 'ACTUAL browser normalized notebook fits raw post-Start limits')
+                ok(not diagnostic['reportAccepted'] and diagnostic['reportBytes'] > 5 * 1024 * 1024, 'ACTUAL pretty notesReport envelope alone causes refusal')
+                ok(diagnostic['originalUnchanged'] and book(q) == raw, 'independent probe never mutates real notebook')
                 click(q, '[data-act-two-start]')
                 ok(book(q) == raw, 'actual report-byte refusal leaves all roots exact')
                 ok(q.locator('#act-two-status').inner_text().strip(), 'preflight refusal explained')

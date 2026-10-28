@@ -44,8 +44,16 @@ export function makeFixtures(){
  // A waiting, unshared show and an edited draft beside the independently kept plan.
  assert.ok(Loft.startShow(partial,'delivery'));assert.ok(Batches.setBatchCopies(partial,0));
  const noWork=clone(ready);const future=clone(ready);future.story.acts.II={started:true,ended:true,contributions:{},season:'future-season'};
+ const unreadParcel=clone(ready);unreadParcel.story.seenScenes=[];
+ const unrevealedPage=clone(ready);unrevealedPage.story.seenScenes=['parcel-found'];
+ const notesIdentity=clone(partial);notesIdentity.story.acts.II.contributions={
+  market:{kind:'act-two-offer',version:1,chapter:'market',activity:'coin-counter',artifactKind:'coin-idea',ref:{roundId:19,request:'stall<&>'}},
+  garden:{kind:'act-two-offer',version:1,chapter:'garden',activity:'town-record',artifactKind:'record-plan',ref:{visitId:'visit<b data-synthetic-injection>kept</b>&',edition:'latest',sourceId:'record-source<&>'}},
+  birthday:{kind:'act-two-offer',version:1,chapter:'birthday',activity:'whole-batches',artifactKind:'tray-idea',ref:{caseId:'tray<&>',edition:'offered',sourceId:'tray<&>'}},
+  show:{kind:'act-two-offer',version:1,chapter:'show',activity:'story-loft',artifactKind:'shared-show',ref:{edition:'shelf',showId:29}}
+ };
  const unreadable=clone(work);unreadable.story.acts.II={started:true,ended:'future',contributions:{market:{kind:'future'}},season:{raw:'Synthetic future'}};
- return {near,ready,work,partial,noWork,future,unreadable};
+ return {near,ready,work,partial,noWork,future,unreadable,unreadParcel,unrevealedPage,notesIdentity};
 }
 
 export function runChecks(){
@@ -56,6 +64,9 @@ export function runChecks(){
  const offer=(s,c)=>{const x=A.actTwoCandidates(s,c)[0];ok(x,'actual host yields candidate '+c);ok(A.offerActTwo(s,c,x.key));return x;};
  const full=()=>{const s=start();chapters.forEach(c=>offer(s,c));return s;};
  eq(A.actTwoChapters,chapters);
+ for(const s of [makeFixtures().unreadParcel,makeFixtures().unrevealedPage]){const prior=clone(s);eq(A.actTwoView(s).pageOneVisible,false);unchanged(s,()=>A.startActTwo(s),'before Page1 explicit start refused');unchanged(s,()=>A.setActTwoFrameAmount(s,'longer'),'before Page1 frame preference refused');eq(s,prior);}
+ eq(A.actTwoView(pageOne()).pageOneVisible,true);
+ for(const [chapter,receipt] of Object.entries(makeFixtures().notesIdentity.story.acts.II.contributions))ok(A.validActTwoOffer(receipt,chapter),'synthetic frozen Notes identity remains a valid receipt');
  // Receipt validation examines its own frozen address, never contemporary host work.
  {
   const receipts={market:{roundId:19,request:'synthetic-retired'},garden:{visitId:'synthetic-visit',edition:'latest',sourceId:'synthetic-source'},birthday:{caseId:'synthetic-case',edition:'offered',sourceId:'synthetic-case'},show:{edition:'shelf',showId:29}};
