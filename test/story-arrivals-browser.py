@@ -139,6 +139,12 @@ def inspect_reads(p, base, choice):
         season = story(p)['acts']['II']['season']
         ok(season in season_lines and season_lines[season] in p.locator('[data-act-two-root]').inner_text(), 'own celebration shows the actual saved season line')
         snapshot(p, f'own-celebration-{p.viewport_size["width"]}')
+        go(p, base, '#almanac/flood-ledger')
+        ok(p.locator('[data-act-two-root] [data-arrival-context]').count() > 0, 'ledger remains inherited history after an own earned gathering')
+        discovery = "The second page peels away on its own, the way a leaf comes off a puddle. It's a table of numbers."
+        ok(discovery not in p.locator('[data-act-two-root]').inner_text(), 'own gathering never reattributes the already inherited ledger discovery')
+        ok('inherited-ledger-read' in story(p)['seenScenes'] and 'flood-ledger-revealed' not in story(p)['seenScenes'], 'actual inherited ledger read ID stays authoritative after own gathering')
+        snapshot(p, f'inherited-ledger-after-own-gathering-{p.viewport_size["width"]}')
 
 
 def main():
