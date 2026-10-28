@@ -126,6 +126,8 @@ Panel **About examples and records** / “Audio requested does not establish tha
 
 Notes title **Rhythm Studio · bars and examples**. “Current and kept bars, frozen source versions and earlier comparisons stay separate. Earlier outcomes are shown as recorded. Supplied examples and support do not change another activity's records.”
 
+Support labels apply to the record context: a kept snapshot says “before this version was kept,” a current version says “in this version,” and a comparison says “before this check in this version.” Own bars have no reference/target labels.
+
 Labels **Reference sound requested in this version** · **My bar sound requested in this version** · **Example shown in this version** · **Worked lengths opened in this version** · **Earlier feedback seen in this version** · **Earlier comparison on this version** · **No reference sound requested in this version** · **Target picture not shown before this check in this version** · **Target picture shown before this check in this version** · **Recorded match** · **Recorded different rhythm** · **Bar facts only** · **Kept version** · **Earlier unreadable record retained**.
 
 Off-screen invitation: “If you like, clap your bar for someone. Which sounds are long, and where is it quiet?” No recording, upload, result entry or completion flag.

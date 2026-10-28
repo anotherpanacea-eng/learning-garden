@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get('RHYTHM_ARTIFACTS', tempfile.mkdtemp(prefix='rhythm-browser-')))
 OUT.mkdir(parents=True, exist_ok=True)
 checks, contexts, pages, errors = 0, [], [], []
+console_errors, request_failures, http_failures, navigation_aborts = [], [], [], []
 
 
 def ok(value, message):
@@ -67,6 +68,18 @@ def setup(browser, width, seed, label, no_audio=False):
     p.set_default_timeout(12000)
     p.set_default_navigation_timeout(30000)
     p.on('pageerror', lambda e: errors.append({'case': label, 'error': str(e)}))
+    p.on('console', lambda message: console_errors.append({'case': label, 'text': message.text, 'location': message.location}) if message.type == 'error' else None)
+
+    def request_failed(request):
+        entry = {'case': label, 'url': request.url, 'failure': request.failure,
+                 'navigationRequest': request.is_navigation_request()}
+        if 'ERR_ABORTED' in (request.failure or ''):
+            navigation_aborts.append(entry)
+        else:
+            request_failures.append(entry)
+
+    p.on('requestfailed', request_failed)
+    p.on('response', lambda response: http_failures.append({'case': label, 'url': response.url, 'status': response.status}) if response.status >= 400 else None)
     return c, p
 
 
@@ -230,6 +243,10 @@ def main():
                 click(p, '[data-rhythm-check]')
                 ok(current(p)['checks'][-1]['outcome'] is None, 'own bar checks facts, not musical quality')
                 keep(p)
+                ok(p.locator('#rhythm-status').inner_text().startswith('Kept.'), 'Keep announces its result')
+                own_support = p.locator('.rhythm-kept').inner_text()
+                ok('Reference sound' not in own_support and 'Target picture' not in own_support, 'own-bar kept support does not describe a nonexistent reference target')
+                ok('My bar sound requested in this version' in own_support, 'own-bar kept support shows its actual response sound request')
                 kept = copy.deepcopy(current(p)['kept'])
                 ok(kept['sequence'] == ['h', 'q', 'q'], 'full composition kept')
                 first_version = book(p)['rhythm']['current']
@@ -267,6 +284,7 @@ def main():
                 ok('by ear' not in p.locator('#rhythm-feedback').inner_text().lower(), 'match does not claim proven hearing')
                 click(p, '[data-rhythm-show]')
                 p.locator('[data-rhythm-target]').wait_for()
+                ok('Two quarter notes, then one half note.' in p.locator('[data-rhythm-target]').inner_text(), 'deliberate Show supplies the positive frozen echo description')
                 ok(current(p)['support']['exampleShown'], 'explicit Show recorded')
                 click(p, '[data-rhythm-hide]')
                 ok(not p.locator('[data-rhythm-target]').count(), 'example can be hidden again')
@@ -275,12 +293,16 @@ def main():
                 ok(current(p)['checks'][-1]['supportBefore']['exampleShown'] and current(p)['checks'][-1]['familiar'], 'second check retains shown/familiar distinction')
                 ok(current(p)['checks'][0] == first, 'later support preserves first recorded response')
                 keep(p)
+                ok('before this version was kept' in p.locator('.rhythm-kept').inner_text() and 'before this check' not in p.locator('.rhythm-kept').inner_text(), 'kept echo labels describe the kept snapshot, not a check')
+                click(p, '.rhythm-records summary')
+                ok('before this check in this version' in p.locator('.rhythm-records').inner_text(), 'recorded echo comparisons retain check-qualified support labels')
                 snap(p, f'echo-kept-{width}')
                 bounds(p)
-                for source, sequence in [('echo-2', ['h', 'q', 'q']), ('echo-5', ['q', 'rq', 'q', 'q'])]:
+                for source, sequence, description in [('echo-2', ['h', 'q', 'q'], 'One half note, then two quarter notes.'), ('echo-5', ['q', 'rq', 'q', 'q'], 'One quarter note, one quarter rest, then two quarter notes.')]:
                     click(p, '[data-rhythm-choose]')
                     choose(p, source)
                     click(p, '[data-rhythm-show]')
+                    ok(description in p.locator('[data-rhythm-target]').inner_text(), source + ' positive frozen example description')
                     add(p, *sequence)
                     click(p, '[data-rhythm-check]')
                     ok(current(p)['checks'][-1]['outcome'] == 'match', source + ' exact finite echo')
@@ -348,7 +370,12 @@ def main():
                 snap(u, f'unavailable-picture-{width}')
                 bounds(u)
             ok(not errors, 'no page errors: ' + json.dumps(errors))
+            ok(not console_errors, 'no console errors: ' + json.dumps(console_errors))
+            ok(not request_failures, 'no failed non-aborted requests: ' + json.dumps(request_failures))
+            ok(not http_failures, 'no HTTP failures: ' + json.dumps(http_failures))
             receipt = {'status': 'passed', 'checks': checks, 'base': base, 'pageErrors': errors,
+                       'consoleErrors': console_errors, 'requestFailures': request_failures,
+                       'httpFailures': http_failures, 'navigationAborts': navigation_aborts,
                        'scope': 'actual persistent controls, two-explorer transfer, separate unavailable-API cases',
                        'transport': 'Chrome, QUIC disabled, no app interception/tracing'}
             (OUT / 'receipt.json').write_text(json.dumps(receipt, indent=2))
@@ -356,6 +383,7 @@ def main():
         except Exception:
             (OUT / 'failure.txt').write_text(traceback.format_exc())
             (OUT / 'page-errors.json').write_text(json.dumps(errors, indent=2))
+            (OUT / 'browser-faults.json').write_text(json.dumps({'consoleErrors': console_errors, 'requestFailures': request_failures, 'httpFailures': http_failures, 'navigationAborts': navigation_aborts}, indent=2))
             for p, label in pages:
                 if not p.is_closed():
                     try:

@@ -82,6 +82,23 @@ export async function runRhythmChecks(){
   ok(r.chooseRhythm(s,'own-bar',{...options,newVersion:true}),'new version bypasses but retains malformed earlier draft');eq(Object.values(s.rhythm.visits)[0],frozen.rhythm.visits[frozen.rhythm.current]);
  }
  {
+  const s=fresh('echo-1');put(s,['q','q','h']);ok(r.checkRhythm(s,options));ok(r.keepRhythm(s,options));const w=current(s);
+  for(const source of [w.source,w.checks[0].source,w.kept.source])Object.assign(source.model,{frequency:440,peakGain:.01,attack:.02,release:.04,gap:.08});
+  w.checks[0].outcome='different';const oldAttempt=copy(w.checks[0]),oldKept=copy(w.kept),saved=copy(s);
+  ok(r.readableSource(w.source),'unused historical tuning metadata does not invalidate source');ok(r.readableAttempt(w.checks[0]));ok(r.readableKeep(w.kept));ok(r.rhythmView(s).editable);eq(s,saved,'reading leaves earlier metadata/outcomes exact');
+  ok(r.editRhythm(s,'remove',2,options));ok(r.editRhythm(s,'append','h',options));eq(current(s).checks[0],oldAttempt,'editing never regrades earlier tuning-era outcome');eq(current(s).kept,oldKept,'editing retains earlier tuning-era kept source');ok(r.checkRhythm(s,options));eq(current(s).checks.at(-1).outcome,'match');eq(current(s).checks[0],oldAttempt);
+  const e=environment();await e.player.play(current(s).sequence);eq(e.nodes.map(x=>x.frequency.calls[0][1]),[330,330,330],'player uses current safe constant, not imported source frequency');eq(e.gains.map(x=>x.gain.calls[1][1]),[.025*2/3,.025*2/3,.025*2/3],'old source gain does not configure actual player');close(e.nodes[0].stops[0]-e.nodes[0].starts[0],.44,'old source gap does not configure actual player');e.player.stop();
+ }
+ {
+  const s=fresh();delete current(s).checks;delete current(s).kept;const before=copy(s);eq(r.rhythmView(s).readableChecks,[]);eq(r.rhythmView(s).kept,null);eq(s,before,'missing optional history is absent on read');
+  ok(r.checkRhythm(s,options),'explicit Check creates missing check list');eq(current(s).checks.length,1);eq(current(s).checks[0].familiar,false);ok(!Object.hasOwn(current(s),'kept'),'checking does not initialize missing kept sibling');
+  ok(r.keepRhythm(s,options),'explicit Keep creates missing kept snapshot');eq(current(s).kept.sequence,[],'unfinished empty work is keepable');
+  current(s).checks=null;current(s).kept={version:99,raw:'Synthetic present malformed kept'};unchanged(s,()=>r.checkRhythm(s,options),'present malformed check list retained');unchanged(s,()=>r.keepRhythm(s,{...options,replace:true}),'present malformed kept retained');
+ }
+ {
+  const s=fresh();s.rhythm.next=1000000000;ok(r.chooseRhythm(s,'echo-1',{...options,newVersion:true}),'last safe ID remains allocatable');eq(s.rhythm.current,'rhythm-1000000000');eq(s.rhythm.next,1000000000,'last allocation retains canonical cap sentinel');const last=copy(current(s));unchanged(s,()=>r.chooseRhythm(s,'echo-2',{...options,newVersion:true}),'exhausted last-ID collision refuses without changing current');eq(current(s),last);
+ }
+ {
   const s=fresh('echo-2');put(s,['h']);const w=current(s);w.checks.push({version:99,raw:'Synthetic unknown check'});w.kept={version:99,raw:'Synthetic unknown kept'};const raw=copy(w.kept);ok(r.checkRhythm(s,options),'bad attempt sibling does not poison new valid attempt');eq(current(s).checks[0],{version:99,raw:'Synthetic unknown check'});unchanged(s,()=>r.keepRhythm(s,{...options,replace:true}),'unreadable kept value cannot be overwritten');eq(current(s).kept,raw);
   for(let i=current(s).checks.length;i<24;i++)ok(r.checkRhythm(s,options));const before=copy(current(s).checks);unchanged(s,()=>r.checkRhythm(s,options),'attempt cap refuses without eviction');eq(current(s).checks,before);
  }

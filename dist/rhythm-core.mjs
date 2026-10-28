@@ -9,7 +9,10 @@ const MAX_ID=1e9;
 const visitId=id=>typeof id==='string'&&/^rhythm-[1-9]\d{0,9}$/.test(id)&&Number(id.slice(7))<=MAX_ID;
 const array=(a,max)=>Array.isArray(a)&&a.length<=max&&Object.keys(a).length===a.length;
 const text=(s,max=500)=>typeof s==='string'&&s.length>0&&s.length<=max;
-const model=m=>object(m)&&Object.entries(RHYTHM_MODEL).every(([k,v])=>own(m,k)&&m[k]===v);
+// Only these stable v1 semantics are consumed from a saved model. Playback
+// uses the current bounded sound settings, so unused historic audio metadata
+// cannot make an otherwise readable source or kept version disappear.
+const model=m=>object(m)&&m.id==='rhythm-four-beat-v1'&&m.beats===4&&m.beatSeconds===.5;
 export const validRhythmSequence=s=>array(s,4)&&Array.from(s).every(id=>!!rhythmNoteById(id))&&s.reduce((n,id)=>n+rhythmNoteById(id).beats,0)<=4;
 export const readableSupport=s=>object(s)&&SUPPORT.every(k=>own(s,k)&&typeof s[k]==='boolean');
 export function readableSource(s){return object(s)&&s.version===1&&text(s.id,160)&&text(s.title)&&text(s.prompt)&&model(s.model)&&(['own','echo'].includes(s.kind))&&(s.kind==='own'?s.target===null:validRhythmSequence(s.target)&&rhythmFacts(s.target).usedBeats===4);}
@@ -28,8 +31,8 @@ const currentId=r=>rootReady(r)&&visitId(r.current)&&own(r.visits,r.current)?r.c
 const editable=w=>object(w)&&readableSource(w.source)&&validRhythmSequence(w.sequence)&&readableSupport(w.support);
 function allocation(r){
  if(!rootReady(r)||!Number.isSafeInteger(r.next)||r.next<1||r.next>MAX_ID||Object.keys(r.visits).length>=24)return null;
- let n=r.next;while(n<MAX_ID&&own(r.visits,`rhythm-${n}`))n++;
- return n<MAX_ID?n:null;
+ let n=r.next;while(n<=MAX_ID&&own(r.visits,`rhythm-${n}`))n++;
+ return n<=MAX_ID?n:null;
 }
 export function rhythmView(state){
  const present=object(state)&&own(state,'rhythm'),root=present?state.rhythm:null;
@@ -67,7 +70,7 @@ export function chooseRhythm(state,id,options={}){
    if(previous){r.current=previous[0];return true;}
   }
   const n=allocation(r);if(n===null)return false;
-  const key=`rhythm-${n}`;r.visits[key]={source:clone(source),sequence:[],support:freshSupport(),checks:[],kept:null};r.current=key;r.next=n+1;return true;
+  const key=`rhythm-${n}`;r.visits[key]={source:clone(source),sequence:[],support:freshSupport(),checks:[],kept:null};r.current=key;r.next=Math.min(n+1,MAX_ID);return true;
  },options);
 }
 export function selectRhythmVisit(state,id,options={}){return change(state,c=>{const r=c.rhythm;if(!rootReady(r)||!visitId(id)||!own(r.visits,id))return false;r.current=id;return true;},options);}
@@ -101,6 +104,7 @@ export function useRhythmSupport(state,key,options={}){
 }
 export function checkRhythm(state,options={}){
  return workChange(state,w=>{
+  if(!own(w,'checks'))w.checks=[];
   if(!array(w.checks,24)||w.checks.length>=24)return false;
   const attempt={version:1,source:clone(w.source),sequence:[...w.sequence],facts:rhythmFacts(w.sequence),outcome:w.source.kind==='echo'?(same(w.sequence,w.source.target)?'match':'different'):null,supportBefore:clone(w.support),familiar:w.checks.some(readableAttempt)};
   w.checks.push(attempt);w.support.feedbackSeen=true;return true;
@@ -108,7 +112,7 @@ export function checkRhythm(state,options={}){
 }
 export function keepRhythm(state,options={}){
  return workChange(state,w=>{
-  if(!own(w,'kept'))return false;
+  if(!own(w,'kept'))w.kept=null;
   if(w.kept!==null&&(!readableKeep(w.kept)||options.replace!==true))return false;
   const kept={version:1,source:clone(w.source),sequence:[...w.sequence],supportBefore:clone(w.support)};
   if(same(w.kept,kept))return true;w.kept=kept;return true;
