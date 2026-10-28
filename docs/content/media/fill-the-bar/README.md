@@ -1,13 +1,13 @@
 # "Fill the Bar": provisional recording
 
-The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studio.md)), written in [films and songs, section 1](../../films-and-songs-2026-10-24.md#1-the-fractions-song-fill-the-bar). Recorded 2026-10-25, ahead of the Rhythm Studio runtime build. **The owner listened to the finished mix and confirmed the ElevenLabs plan covers distribution (2026-10-28). Studio integration review remains pending.** Nothing in `dist/` plays it yet. The proposed **Hear the song** button and the exposure rules in section 1 still belong to the reviewed studio build.
+The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studio.md)), written in [films and songs, section 1](../../films-and-songs-2026-10-24.md#1-the-fractions-song-fill-the-bar). Recorded 2026-10-25, before the first Rhythm Studio release. The bounded [spec280](../../../specs/280-rhythm-first-bar.md) studio is now live; this recording remains outside its runtime, with song integration separately reviewed. **The owner listened to the finished mix and confirmed the ElevenLabs plan covers distribution (2026-10-28). Studio integration review remains pending.** Nothing in `dist/` plays it yet. The proposed **Hear the song** button and the exposure rules in section 1 still belong to the reviewed studio build.
 
 | File | What it is |
 | --- | --- |
 | `fill-the-bar.mp4` | 125 s, 1280×720, 30 fps. The bar strip fills on the beat with the lyrics underneath; English captions muxed as a subtitle track. |
 | `fill-the-bar.mp3` | The soundtrack alone (the same mix as the video). |
 | `fill-the-bar.srt` | Line-timed captions (the same cues as the MP4's embedded track). |
-| `fill-the-bar.vtt` | The same captions as WebVTT for a browser `<track>`. Browsers do not expose the MP4's embedded mov_text track, so a player must load this file. |
+| `fill-the-bar.vtt` | The same captions as WebVTT for a browser `<track>`. The tested Chrome browser does not expose the MP4's embedded mov_text track, so a player must load this file. |
 | `fill-the-bar-transcript.txt` | The lyrics as recorded, one caption per line, for a readable transcript. |
 
 ## Timing
@@ -41,7 +41,7 @@ The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studi
 - Fraction labels start with verse 2, not "from the second line" of every verse. Verse 1 shows "whole note" without "1 whole", and the chorus whole-note block reads "1".
 - The song runs 125 s, against the brief's provisional 90 s.
 
-The runtime build still owns the read-aloud fraction text ("one half", "one quarter") and the accessible labels.
+A future reviewed song-player increment still owns the read-aloud fraction text ("one half", "one quarter") and the accessible labels.
 
 ## Review scope, 2026-10-25
 

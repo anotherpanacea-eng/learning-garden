@@ -16,7 +16,7 @@ Three more rules apply to every piece:
 
 **When to produce it:** these lyrics can be reviewed now. Record it during the reviewed Rhythm Studio runtime build, after a music-content check, so the picture matches the built bar. A proposed **Hear the song** button would play it in the studio and is never needed to play a card.
 
-**Provisional recording (2026-10-25):** [`media/fill-the-bar/`](media/fill-the-bar/README.md) holds a recorded song, captions and an animated bar strip, made ahead of the runtime build. The lyric sheet below preserves the written verse, with the omitted recording lines clearly separated; the SRT is the as-recorded transcript. Its README lists how it was made and where it differs from this brief. When the studio's bar is built, check the picture against it before wiring up **Hear the song**.
+**Provisional recording (2026-10-25):** [`media/fill-the-bar/`](media/fill-the-bar/README.md) holds a recorded song, captions and an animated bar strip, made before the first Rhythm Studio release. The bounded spec280 studio is now live; this recording remains authoring material outside its runtime. The lyric sheet below preserves the written verse, with the omitted recording lines clearly separated; the SRT is the as-recorded transcript. Its README lists how it was made and where it differs from this brief. A separately reviewed song-player increment must compare it with the built bar and keep its broader eighth-note content distinct before wiring up **Hear the song**.
 
 ### Production sheet
 
@@ -42,7 +42,7 @@ Three more rules apply to every piece:
 
 *Written ending omitted from the provisional recording:* “One whole note fills the bar. Just one.”
 
-*Performance: the count is whispered, one word per beat, over one held bell note. (The recording dropped the last two lines.)*
+*Performance: the count is whispered, one word per beat, over one held bell note. (The recording includes the count and “and then it’s done”; only the written ending noted above is omitted.)*
 
 *Picture: one block, the whole bar wide, labeled "whole note". From the second line: "1 whole".*
 
@@ -96,13 +96,15 @@ Three more rules apply to every piece:
 
 *Performance: the taps fall on beats one to three, with silence on beat four.*
 
-*Picture: three quarter notes and one quarter rest. The rest is hatched and labeled "rest". On the rest, the music drops out and only the tick plays. (In the provisional recording only the picture and the bell rest; the band keeps playing.)*
+*Picture: three quarter notes and one quarter rest. The rest is hatched and labeled "rest". Only the modeled picture and bell rest on that beat in the provisional recording; the band and singing follow their own rhythm. Use the studio’s isolated tones/rests for the timing comparison.*
 
 **Verse 5: mix them up**
 > Now a half, and then a quarter,
 > then two eighths to fill the last.
 > Long, then shorter, then the shortest:
 > one whole bar, from slow to fast.
+
+*Recording note: the tempo remains 120 BPM. “Slow to fast” is a lyric about changing note lengths; it does not announce a tempo change.*
 
 *Picture: half note, quarter note, two eighth notes, filling the bar in order.*
 
@@ -125,9 +127,9 @@ Three more rules apply to every piece:
 
 ### Before release
 
-- A music check of the lyrics against the notes as sung. Where the singer holds a syllable, the picture's block must match what is heard. *2026-10-25: the sung melody never holds a whole bar, so the provisional recording adds a bell that plays each pictured pattern. 2026-10-28: the owner listened to the finished mix.*
+- A music/content check of the modeled bell notes against the pictured blocks. Name singing/accompaniment as separate parts, whose rhythms need not match those blocks; they do not supply the studio’s isolated duration/rest comparison. *2026-10-25: the sung melody never holds a whole bar, so the provisional recording adds a bell that plays each pictured pattern. 2026-10-28: the owner listened to the finished mix.*
 - Rights and credits for the generated audio, recorded as for any other asset. Keep the lyric sheet and prompts so the song can be made again on another tool. *2026-10-25: tools, voices and the style prompt are in the [recording's README](media/fill-the-bar/README.md). 2026-10-28: the owner confirmed the ElevenLabs plan covers distribution.*
-- Captions with the lyrics, and a transcript. The song must make sense with the sound off, through the picture and captions. *2026-10-25: [`fill-the-bar.srt`](media/fill-the-bar/fill-the-bar.srt) serves as both.*
+- Captions with the lyrics, and a transcript. The song must make sense with the sound off, through the picture and captions. *The authoring pack now also includes browser [WebVTT captions](media/fill-the-bar/fill-the-bar.vtt) and a [readable transcript](media/fill-the-bar/fill-the-bar-transcript.txt); the future player must use them, because embedded MP4 captions alone are not exposed by the tested Chrome browser.*
 
 ## 2. Concept art brief: *Both Ways Across Willow Bridge*
 
