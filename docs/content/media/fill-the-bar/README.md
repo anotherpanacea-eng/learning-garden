@@ -6,7 +6,9 @@ The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studi
 | --- | --- |
 | `fill-the-bar.mp4` | 125 s, 1280×720, 30 fps. The bar strip fills on the beat with the lyrics underneath; English captions muxed as a subtitle track. |
 | `fill-the-bar.mp3` | The soundtrack alone (the same mix as the video). |
-| `fill-the-bar.srt` | Line-timed captions, which double as the transcript. |
+| `fill-the-bar.srt` | Line-timed captions (the same cues as the MP4's embedded track). |
+| `fill-the-bar.vtt` | The same captions as WebVTT for a browser `<track>`. Browsers do not expose the MP4's embedded mov_text track, so a player must load this file. |
+| `fill-the-bar-transcript.txt` | The lyrics as recorded, one caption per line, for a readable transcript. |
 
 ## Timing
 
@@ -28,7 +30,7 @@ The fractions song for Rhythm Studio ([spec 115](../../../specs/115-rhythm-studi
 
 - **Song:** ElevenLabs Music v2.5, custom lyrics, 122 s, generated on the owner's ElevenLabs account. Style prompt: *Bright, warm acoustic folk-pop children's learning song at exactly 120 BPM in 4/4, with a steady soft woodblock tick on every beat from start to finish. Ukulele, upright bass, soft glockenspiel, light hand percussion and a small bell. One friendly adult female lead vocal with clear, unhurried diction; a small group of adult voices joins on the choruses. Each lyric line takes exactly one bar. The bridge drops to only the tick and a soft voice, then the full band returns. Bracketed tags in the lyrics are performance directions and are never sung.* The lyrics sent are the as-recorded lyrics in section 1, with `[Section]` tags and bracketed performance notes.
 - **Spoken intro and tag:** ElevenLabs speech (Eleven v4) with stock adult library voices, "Jesse" for Pip and "Maisy" for Dot. The music model drops spoken lines, so these were mixed in afterwards, one count word per beat.
-- **Bell layer:** the music model never holds a note for a whole bar (its longest sung note in verse 1 is about 0.8 s), so a synthesized handbell plays exactly the pattern on screen, including a four-beat whole note, and stays silent on the rest. Each bell note takes a tone of the chord under it.
+- **Bell layer:** the music model never holds a note for a whole bar (its longest sung note in verse 1 is about 0.8 s), so a synthesized handbell plays exactly the pattern on screen, including a four-beat whole note, and stays silent on the rest. Each bell note takes a tone of the chord under it. Only the picture and the bell model the bar: the singing and the band follow their own rhythm and keep playing through the rest, so the studio's isolated tones and rests stay the teaching comparison.
 - **Picture:** Claude Motion, from a written brief and a reference render that set the beat grid, patterns, labels and palette.
 - No child's face, voice or other information was used. All voices are adult stock voices.
 

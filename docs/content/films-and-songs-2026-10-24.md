@@ -96,7 +96,7 @@ Three more rules apply to every piece:
 
 *Performance: the taps fall on beats one to three, with silence on beat four.*
 
-*Picture: three quarter notes and one quarter rest. The rest is hatched and labeled "rest". On the rest, the music drops out and only the tick plays.*
+*Picture: three quarter notes and one quarter rest. The rest is hatched and labeled "rest". On the rest, the music drops out and only the tick plays. (In the provisional recording only the picture and the bell rest; the band keeps playing.)*
 
 **Verse 5: mix them up**
 > Now a half, and then a quarter,
