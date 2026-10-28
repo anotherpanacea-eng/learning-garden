@@ -125,8 +125,8 @@ Three more rules apply to every piece:
 
 ### Before release
 
-- A music check of the lyrics against the notes as sung. Where the singer holds a syllable, the picture's block must match what is heard. *2026-10-25: the sung melody never holds a whole bar, so the provisional recording adds a bell that plays each pictured pattern.*
-- Rights and credits for the generated audio, recorded as for any other asset. Keep the lyric sheet and prompts so the song can be made again on another tool. *2026-10-25: tools, voices and the style prompt are in the [recording's README](media/fill-the-bar/README.md).*
+- A music check of the lyrics against the notes as sung. Where the singer holds a syllable, the picture's block must match what is heard. *2026-10-25: the sung melody never holds a whole bar, so the provisional recording adds a bell that plays each pictured pattern. 2026-10-28: the owner listened to the finished mix.*
+- Rights and credits for the generated audio, recorded as for any other asset. Keep the lyric sheet and prompts so the song can be made again on another tool. *2026-10-25: tools, voices and the style prompt are in the [recording's README](media/fill-the-bar/README.md). 2026-10-28: the owner confirmed the ElevenLabs plan covers distribution.*
 - Captions with the lyrics, and a transcript. The song must make sense with the sound off, through the picture and captions. *2026-10-25: [`fill-the-bar.srt`](media/fill-the-bar/fill-the-bar.srt) serves as both.*
 
 ## 2. Concept art brief: *Both Ways Across Willow Bridge*
