@@ -55,3 +55,5 @@ body:has([data-mixing-table-view]) main{padding-top:6px}
 @media(max-width:900px){.mt-workbench{grid-template-columns:minmax(0,1fr) minmax(0,1.45fr)}.mt-jars{grid-column:2;grid-row:1/3}.mt-pot{grid-column:1;grid-row:2}.mt-painted{grid-column:1/3;grid-row:3;display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}.mt-painted h3{grid-column:1/3}.mt-painted details{grid-column:1/3}.mt-guided{display:block}.mt-guided ol{display:block}.mt-pot-art{max-height:125px}}
 @media(max-width:520px){[data-mixing-table-view] h1{font-size:29px}.mt-workbench{display:flex;flex-direction:column;padding:10px}.mt-workbench>*{width:100%}.mt-sample{transform:none}.mt-jars{order:1}.mt-pot{order:2}.mt-painted{order:3;display:block}.mt-jar-art{height:100px}.mt-pot-art{max-height:180px}.mt-guided ol{display:block}.mt-help button,.mt-navigation button{flex:1 1 140px}.mt-invitations button{width:100%}}
 @media(prefers-reduced-motion:reduce){[data-mixing-table-view] *{animation:none!important;transition:none!important}}
+
+.mt-family{display:flex;gap:12px;flex-wrap:wrap}.mt-family a{border-bottom:2px solid #627e91}.mt-family [aria-current=page]{font-weight:700}
