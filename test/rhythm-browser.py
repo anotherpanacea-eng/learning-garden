@@ -121,6 +121,7 @@ def add(p, *sequence):
 
 def clear(p):
     click(p, '[data-rhythm-clear]')
+    ok(p.locator('[data-rhythm-confirm]').inner_text() == 'Yes, clear this bar', 'clear confirmation names the action')
     click(p, '[data-rhythm-confirm]')
 
 
@@ -161,7 +162,10 @@ def main():
         class Quiet(http.server.SimpleHTTPRequestHandler):
             def log_message(self, *args):
                 pass
-        server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), functools.partial(Quiet, directory=str(ROOT / 'dist')))
+        class Server(http.server.ThreadingHTTPServer):
+            request_queue_size = 128
+            daemon_threads = True
+        server = Server(('127.0.0.1', 0), functools.partial(Quiet, directory=str(ROOT / 'dist')))
         threading.Thread(target=server.serve_forever, daemon=True).start()
         base = f'http://127.0.0.1:{server.server_port}/'
     base = base.rstrip('/') + '/'
@@ -183,6 +187,8 @@ def main():
                 choose(p, 'own-bar')
                 ok(unrelated(book(p)) == unrelated(before), 'source choice changes only rhythm')
                 ok(current(p)['sequence'] == [], 'empty new version')
+                ok(not p.locator('[data-rhythm-move],[data-rhythm-remove],[data-rhythm-replace]').count(), 'editing controls wait for an explicit block selection')
+                ok(p.locator('[data-rhythm-clear]').is_visible(), 'Clear remains a visible bar action')
                 click(p, '[data-rhythm-play="current"]')
                 ok(not current(p)['support']['responseRequested'], 'empty Play is not a sound request')
                 p.locator('[data-rhythm-play-status="current"]').filter(has_text='nothing to play').wait_for()
@@ -198,6 +204,10 @@ def main():
                 ok(current(p)['sequence'] == [], 'worked lengths never replace child draft')
                 add(p, 'h', 'q')
                 ok(current(p)['sequence'] == ['h', 'q'], 'partial bar composed by touch')
+                ok(not p.locator('[data-rhythm-move],[data-rhythm-remove],[data-rhythm-replace]').count(), 'appending does not implicitly select a block or expand edit controls')
+                labels = [' '.join(x.split()) for x in p.locator('[data-rhythm-slot]').all_text_contents()]
+                ok(labels == ['2 beats1/2 bar', '1 beat1/4 bar'] or labels == ['2 beats 1/2 bar', '1 beat 1/4 bar'], 'compact blocks preserve visible beat counts and bar fractions: ' + str(labels))
+                ok(p.locator('[data-rhythm-slot]').evaluate_all("xs=>xs.map(x=>x.getAttribute('aria-label'))") == ['Half note, 2 beats, one half of this bar', 'Quarter note, 1 beat, one quarter of this bar'], 'compact blocks retain full spoken note and fraction names')
                 before_refusal = copy.deepcopy(book(p))
                 click(p, '[data-rhythm-add="h"]')
                 ok(book(p) == before_refusal, 'overfull append refuses without changing notebook')
@@ -212,6 +222,8 @@ def main():
                 click(p, '[data-rhythm-add="q"]')
                 click(p, '[data-rhythm-add="q"]')
                 ok(current(p)['sequence'] == ['h', 'q', 'q'], 'three blocks fill four beats')
+                snap(p, f'compose-before-keep-{width}')
+                bounds(p)
                 click(p, '[data-rhythm-play="current"]')
                 ok(current(p)['support']['responseRequested'], 'sounding Play records only a request')
                 click(p, '[data-rhythm-stop]')
@@ -234,6 +246,8 @@ def main():
                 ok(current(p)['kept']['sequence'] == ['rq', 'rq'], 'kept replacement requires explicit confirmation')
                 click(p, '[data-rhythm-choose]')
                 choose(p, 'echo-1')
+                ok(p.locator('[data-rhythm-play="reference"]').evaluate("x=>!!(x.compareDocumentPosition(document.querySelector('[data-rhythm-play=\"current\"]'))&Node.DOCUMENT_POSITION_FOLLOWING)"), 'reference Play precedes the child bar controls')
+                ok(p.locator('[data-rhythm-show]').evaluate("x=>!!(x.compareDocumentPosition(document.querySelector('[data-rhythm-add=\"q\"]'))&Node.DOCUMENT_POSITION_FOLLOWING)"), 'Show example precedes the editor palette')
                 ok(not p.locator('[data-rhythm-target]').count(), 'echo target initially hidden')
                 invitation = p.locator('[data-rhythm-root]').inner_text()
                 ok('Two quarter notes, then one half note.' not in invitation, 'hidden target order absent from visible prose')

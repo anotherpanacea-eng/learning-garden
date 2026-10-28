@@ -44,7 +44,7 @@ Palette heading **Notes and a quiet beat**. Native palette labels:
 - **Quarter note · one beat · one quarter of this bar**
 - **Quarter rest · one quiet beat · one quarter of this bar**
 
-Block labels: **Whole note** / **Half note** / **Quarter note** / **Quarter rest**, with the corresponding fraction of this bar. Rest carries hatching and **rest**; empty area carries **Unfilled**.
+Palette and spoken block labels: **Whole note** / **Half note** / **Quarter note** / **Quarter rest**, with the corresponding fraction of this bar. In the narrow strip, use compact visible beat counts and **1 bar**, **1/2 bar**, **1/4 bar** beside the note symbol; full word labels remain in each block’s accessible name and the palette. Rest carries hatching and **rest**; empty area says **Space**, with the full accessible label **{n} beats unfilled**.
 
 Beat-strip prose: “Four beats: one, two, three, four.” Moving marker speech/status if supplied: **Beat {n} of four**. Hidden reference playback uses that same generic pulse; no code/attack/rest name is disclosed through it.
 
