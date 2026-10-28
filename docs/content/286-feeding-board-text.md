@@ -219,7 +219,7 @@ Bridge control: **Take this food clue to Food Links**
 
 Bridge heading: **One food clue, another question**
 
-Bridge text with a readable frozen ladybird-ID card (always display its literal stored name, foods and art description without inferring species/stage): **Your board's food clue is shown here. Food Links pictures a seven-spot ladybird larva, a young stage. It asks who can feed whom. One possible feeding link does not describe an animal's whole diet. Here we group animals using food records. There we can look at a feeding link.**
+Bridge text with a readable frozen ladybird-ID card (always display its literal stored name, food labels, usual-diet note and art description without inferring species/stage): **Your board's food clue is shown here. Food Links pictures a seven-spot ladybird larva, a young stage. It asks who can feed whom. One possible feeding link does not describe an animal's whole diet. Here we group animals using food records. There we can look at a feeding link.**
 
 Missing bridge card: **This board has no readable ladybird card. Food Links is still open.**
 
