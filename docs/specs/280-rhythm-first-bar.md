@@ -1,6 +1,6 @@
 # Spec280 · Rhythm Studio: one bar, different lengths
 
-**Status: proposed finite commission; independent specification/content review required before build.** This bounded first slice supersedes [spec115](115-rhythm-studio.md) only for its selected room/model/content/state. The full115, provisional song, three-beat bars, eighth-note palette, dots, syllable setting, simultaneous bells and story contributions remain deferred. Exact child text: [one-bar content](../content/280-rhythm-first-bar-text.md).
+**Status: BUILD-READY finite commission after [independent six-lens/content review](../reviews/280-rhythm-first-bar-spec.md); implementation review and release remain ahead.** This bounded first slice supersedes [spec115](115-rhythm-studio.md) only for its selected room/model/content/state. The full115, provisional song, three-beat bars, eighth-note palette, dots, syllable setting, simultaneous bells and story contributions remain deferred. Exact child text: [one-bar content](../content/280-rhythm-first-bar-text.md).
 
 ## Outcome and teaching
 
@@ -34,7 +34,7 @@ rhythm:{version:1,current:null|visitId,next:positiveSafeInt,
                     checks:[frozenAttempt,...],kept:null|frozenKeep}}}
 ```
 
-Visit IDs `rhythm-N`,N positive safe≤1e9; root next positive≤1e9. Allocate through own saved keys without overwriting a colliding known/unknown entry; refuse unsafe/exhausted next. Up to24 newly allocated visits, counted by all own entries; no eviction. Resume accepts own saved visit ID. Unknown root fields/visit keys retained. Unsupported root version or malformed `visits`/`next` makes new allocation read-only; valid readable visits remain viewable, and supported mutations of an existing readable visit do not repair unrelated root fields. A malformed current field selects no implicit visit; show explicit saved choices.
+Visit IDs `rhythm-N`,N positive safe≤1e9; root next positive≤1e9. Allocate through own saved keys without overwriting a colliding known/unknown entry; refuse unsafe/exhausted next. Up to24 newly allocated visits, counted by all own entries; no eviction. Resume accepts own saved visit ID. Unknown root fields/visit keys retained. Unsupported root version or malformed `visits` makes the whole root read-only and retains its original in Notes. Within a supported-version visits object, malformed `next` prevents allocation while valid readable visits remain viewable; supported mutations of an existing readable visit do not repair unrelated root fields. A malformed current field selects no implicit visit; show explicit saved choices.
 
 Frozen source `{version:1,id,title,kind:'own'|'echo',prompt,model:{id:'rhythm-four-beat-v1',beats:4,beatSeconds:.5,frequency:330,waveform:'sine',peakGain:.025*2/3,attack:.015,release:.035,gap:.06},target:null|[code,...]}`. Strings bounded≤500 (IDs≤160,nonempty), target full4beats for echo/null for own. Source contains no modern catalog reference requirement: unknown saved source ID/title/prompt remain readable if this version/model/shape is supported. Model/version semantics define the four codes, not today's card membership. New visits copy current authored source; existing source/target never replaced when current copy changes. Source model constraints protect playback; unsupported model retained read-only.
 

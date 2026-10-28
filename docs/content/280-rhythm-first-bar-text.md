@@ -1,6 +1,6 @@
 # Spec280 · finite child text
 
-Original authored content for [spec280](../specs/280-rhythm-first-bar.md); independent review remains ahead. Only `{guide}`, bounded quantities and block names are interpolated safely. Fractions in visible controls use words in narration. Hidden target-order text is never narrated before Show. All text English.
+Original authored content for [spec280](../specs/280-rhythm-first-bar.md); bounded content review is recorded in the [specification review](../reviews/280-rhythm-first-bar-spec.md). Only `{guide}`, bounded quantities and block names are interpolated safely. Fractions in visible controls use words in narration. Hidden target-order text is never narrated before Show. All text English.
 
 ## Entry
 
