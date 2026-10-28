@@ -27,8 +27,8 @@ def setup(browser,width,seed=None,failed=False):
  init="""({seed,failed})=>{if(!localStorage.getItem('linear-fixture')){localStorage.setItem('number-garden-v1',JSON.stringify(seed));localStorage.setItem('linear-fixture','1');}if(failed)Storage.prototype.setItem=function(){throw Error('Synthetic storage failure');};}"""
  c.add_init_script('('+init+')('+json.dumps({'seed':seed or copy.deepcopy(fixture),'failed':failed})+')')
  def app(route):
-  response=route.fetch();body=response.text();assert 'let graph=null;' in body
-  body=body.replace('let graph=null;','window.__linearRead=()=>structuredClone(state);let graph=null;',1).replace('bindLinear(state,options)','bindLinear(state,{...options,canExport:c=>!window.__linearRefuse&&options.canExport(c)})');route.fulfill(response=response,body=body)
+  response=route.fetch();body=response.text();assert 'let graph=null,' in body
+  body=body.replace('let graph=null,','window.__linearRead=()=>structuredClone(state);let graph=null,',1).replace('bindLinear(state,options)','bindLinear(state,{...options,canExport:c=>!window.__linearRefuse&&options.canExport(c)})');route.fulfill(response=response,body=body)
  c.route('**/app.mjs',app)
  p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)));return c,p
 def create(p,kind):

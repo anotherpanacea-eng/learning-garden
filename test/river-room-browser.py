@@ -89,8 +89,8 @@ def setup(browser,width,seed,refuse=False):
     def app(route):
         response=route.fetch()
         body=response.text()
-        assert 'let graph=null;' in body,'actual app state seam changed'
-        body=body.replace('let graph=null;','window.__riverRead=()=>structuredClone(state);let graph=null;',1)
+        assert 'let graph=null,' in body,'actual app state seam changed'
+        body=body.replace('let graph=null,','window.__riverRead=()=>structuredClone(state);let graph=null,',1)
         needle='function priceOptions(){return {canExport:candidate=>'
         assert needle in body,'actual shared preflight seam changed'
         body=body.replace(needle,'function priceOptions(){return {canExport:candidate=>!window.__riverRefuse&&',1)

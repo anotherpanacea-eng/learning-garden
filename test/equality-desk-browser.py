@@ -152,9 +152,9 @@ def setup(browser, width, seed):
     def app(route):
         response = route.fetch()
         body = response.text()
-        assert 'let graph=null;' in body, 'host read seam changed'
-        body = body.replace('let graph=null;',
-                            'window.__equalityRead=()=>structuredClone(state);let graph=null;', 1)
+        assert 'let graph=null,' in body, 'host read seam changed'
+        body = body.replace('let graph=null,',
+                            'window.__equalityRead=()=>structuredClone(state);let graph=null,', 1)
         needle = 'function priceOptions(){return {canExport:candidate=>'
         assert needle in body, 'host export-preflight seam changed'
         body = body.replace(needle,

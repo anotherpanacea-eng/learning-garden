@@ -134,9 +134,9 @@ def setup(browser, width, seed=None):
     def app(route):
         response = route.fetch()
         body = response.text()
-        assert 'let graph=null;' in body, 'host read seam changed'
-        body = body.replace('let graph=null;',
-                            'window.__hatsRead=()=>structuredClone(state);let graph=null;', 1)
+        assert 'let graph=null,' in body, 'host read seam changed'
+        body = body.replace('let graph=null,',
+                            'window.__hatsRead=()=>structuredClone(state);let graph=null,', 1)
         needle = 'bindHats(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,'
         assert needle in body, 'host preflight seam changed'
         body = body.replace(needle,

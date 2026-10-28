@@ -18,8 +18,8 @@ def setup(browser,width):
  c=browser.new_context(viewport={'width':width,'height':1000},accept_downloads=True)
  c.add_init_script("localStorage.setItem('number-garden-v1',"+json.dumps(json.dumps(seed))+");")
  def app(route):
-  r=route.fetch();body=r.text();assert 'let graph=null;' in body
-  body=body.replace('let graph=null;','window.__pathRead=()=>structuredClone(state);let graph=null;',1)
+  r=route.fetch();body=r.text();assert 'let graph=null,' in body
+  body=body.replace('let graph=null,','window.__pathRead=()=>structuredClone(state);let graph=null,',1)
   marker='bindMotion(state,options);';assert marker in body
   body=body.replace(marker,marker+"document.querySelector('[data-motion-root]')?.setAttribute('data-test-motion-route',location.hash);",1)
   body=body.replace('function notesReport(notebook){return {',"function notesReport(notebook){if(window.__pathRefuse)throw Error('Synthetic preflight refusal');return {",1)
