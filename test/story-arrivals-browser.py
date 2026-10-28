@@ -221,6 +221,23 @@ def main():
                 go(p, base, '#begin');ok(p.locator('[data-start-choice="keep"]').get_attribute('aria-pressed') == 'true', 'independent3-field preference draft unchanged')
                 go(p, base, '#pathways');ok(book(p)['learningRoutes'] == fixtures['base']['learningRoutes'], 'subject entry goals unchanged')
 
+                # The independent chooser must survive the actual explorer picker lifecycle.
+                _, p = h.setup(browser, width, fixtures['base'], f'arrival-picker-{width}')
+                go(p, base, '#arrive');original_id = active(p);original = book(p)
+                select(p, 'letter')
+                click(p, '#explorer-switch');click(p, '#explorer-new');click(p, '#explorer-create')
+                p.locator('[data-arrival-root]').wait_for()
+                ok(p.url.endswith('#arrive'), 'new explorer from arrival picker stays on exact independent chooser')
+                ok(p.locator('[data-arrival-choice]').count() == 3 and p.locator('[data-arrival-join]').is_disabled(), 'fresh explorer has three choices and disabled Join')
+                fresh = book(p)
+                ok(fresh['story']['acts'] == {} and fresh['story']['seenScenes'] == [] and fresh['story'].get('arrivalChosen') is not True, 'new explorer consumes no arrival/story progress')
+                ok(fresh.get('garden', {}).get('welcomeFilmSeen') is not True and p.locator('dialog.welcome-film[open]').count() == 0, 'chooser creation neither launches nor credits historical welcome')
+                click(p, '#explorer-switch');click(p, f'[data-select-explorer="{original_id}"]')
+                p.locator('[data-arrival-root]').wait_for()
+                ok(p.url.endswith('#arrive') and book(p) == original, 'selecting original from chooser keeps route and exact notebook')
+                ok(p.locator('[data-arrival-preview]').count() == 0 and p.locator('[data-arrival-join]').is_disabled(), 'picker replacement discards uncommitted old preview')
+                snapshot(p, f'arrival-picker-{width}')
+
                 # Real legacy supper and retained/malformed children at actual UI routes.
                 _, unsupported = h.setup(browser, width, fixtures['unsupported'], f'unsupported-notes-{width}')
                 go(unsupported, base, '#arrive');go(unsupported, base, '#notes')
