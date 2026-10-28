@@ -1,10 +1,13 @@
 # 116. Field Guide Almanac: look outside, come back tomorrow
 
+
+The bounded first shared weather writer and categorical tally builder are commissioned in [spec281](281-weather-tallies.md). It uses exact `#almanac/weather` and `#almanac/tallies` subroutes, preserving Keeper’s Pages at `#almanac`. For this slice, append capacity replaces proposed rolling deletion: no weather notes are automatically evicted, and future town controls must share this writer. The broader proposal remains unbuilt beyond separately released work.
+
 Status: **proposed; awaiting independent spec review and a science-content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Adopts the weather log proposed in [spec 33](33-rebuilding-the-town.md) and hosts the Keeper's Pages from [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127). Every child-facing line is in [the companion text](../content/116-field-guide-almanac-text.md); this spec holds the model and rules. Code and art are for the implementation pass.
 
 ## Purpose
 
-Every destination today is finished in one sitting. The almanac is the first that grows across **real days**: the child looks at the real sky, weather and minibeasts outside, notes what they saw, and later counts, sorts and graphs it. Dot keeps the book.
+Many destinations already retain work across visits. This almanac proposal adds observations across **real device dates**: the child looks at the real sky, weather and minibeasts outside, notes what they saw, and later counts, sorts and graphs it. Dot keeps the book.
 
 Four pages belong to this spec:
 
@@ -114,7 +117,7 @@ Four, in the companion text. Nothing is recorded.
 Per explorer, each root is absent until its first explicit choice, note or constructed sheet. The local hemisphere setting is optional (`north | south`) and writes only on explicit choice:
 
 ```
-weather:  [ { date: 'YYYY-MM-DD', weather: code, temp?: { value, unit: 'C'|'F' } } ] // latest 1,098 readable notes (at least three years)
+weather:  [ { date: 'YYYY-MM-DD', weather: code, temp?: { value, unit: 'C'|'F' } } ] // 281: append cap 1,098 readable notes; retain all existing/raw entries
 sky:      [ { date, shape: code } ]                                                  // latest 1,098 readable notes (at least three years)
 finds:    [ { date, group: code, place: code, label?: string } ]                      // up to 500
 dataDesk: [ { id, source: { month, practice, version, categories, days },
@@ -125,10 +128,11 @@ keyBuilds: [ { cards: [code], tree: node, at } ]                                
 // up to 3 question nodes, 4 group leaves; unfinished branches may be null
 ```
 
-- If spec 33 ships first, both specs read and write one `weather` array with the same rolling latest-1,098-readable-notes policy. During the Almanac build, update the existing writer to this shared limit; this proposal does not implement either writer. Optional `temp` is additive; spec 33 ignores it.
+- Spec281's shared `dataDesk` entries use its additive `kind:'weather-tally',version:1` format with a frozen source, placements, support, checks and kept snapshot. Its24-entry cap counts all raw sibling entries; the broader proposed shape above is not a second writer or a substitute format for that slice.
+- Spec281 establishes one shared `weather` array/writer for this first slice. At1,098 readable entries it refuses a new append; no existing entry is automatically deleted. Future33 controls must share it. Optional `temp` is retained unchanged; this slice does not enter or interpret it.
 - Validate dates, codes and bounded numbers in read-only views. An unknown code, malformed entry or missing temperature unit makes only that item/temperature unavailable to current displays; preserve the original JSON value unchanged and exportable. A new known group list never deletes a prior find.
 - For `weather` and `sky`, display at most one readable entry per date, using the last readable entry in stored array order. Preserve every duplicate in raw storage. View/import does not deduplicate or rewrite. An explicit change to today's note changes only the selected readable entry, preserving other raw entries.
-- All saves follow an explicit action and preflight the whole candidate using `dist/progress-limits.mjs` and the existing export-size limit before mutation. For weather and sky, an explicit new note rolls the oldest readable note once 1,098 are retained; never trim on load or evict unreadable entries. At other array/sheet capacities or an export limit, refuse the addition with no data change; explain export/explicit deletion options. Never silently trim older or unreadable work. Labels are at most 120 characters, each sheet source at most 31 days and five categories, counts 0–31, half-picture counts 0–62, and each sheet retains at most eight frozen checks. At a check limit, refuse the new check without losing the sheet; keep editing available.
+- All saves follow an explicit action and preflight the whole candidate using `dist/progress-limits.mjs` and the existing export-size limit before mutation. For the281 weather slice, new-note capacity refuses without deleting anything; existing today-note revisions remain possible. The proposed Sky retention policy is not commissioned by281 and still requires its own review. Never trim on load or evict unreadable entries. At other array/sheet capacities or an export limit, refuse the addition with no data change; explain export/explicit deletion options. Never silently trim older or unreadable work. Labels are at most 120 characters, each sheet source at most 31 days and five categories, counts 0–31, half-picture counts 0–62, and each sheet retains at most eight frozen checks. At a check limit, refuse the new check without losing the sheet; keep editing available.
 - Never check a find against today's key. A group code no longer in the key shows as a group from an older field guide.
 - Data desk sheets retain their frozen source, scales, constructed counts and recorded outcomes. Checks compare with that sheet's own source, never today's log or rules, and never regrade recorded outcomes on load. Live month summaries may be computed separately and must be labeled as current summaries; future Storm Day adapters do not rewrite sheets.
 - Notes export, import, reset and explorer switching include all of these. The hemisphere is a setting, never a location.
