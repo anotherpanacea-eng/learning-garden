@@ -1,0 +1,4 @@
+// Original equal-value patterned blocks. Width never depends on the ingredient or count.
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function ratioBlocks(ingredient,count){const pattern=['dots','stripes','crosshatch','chevrons'].includes(ingredient.pattern)?ingredient.pattern:'dots';return `<div class="rb-blocks" role="img" aria-label="${esc(ingredient.label)}: ${count} ${count===1?'block':'blocks'}">${Array.from({length:count},()=>`<span class="rb-block rb-pattern-${pattern}" aria-hidden="true"></span>`).join('')}</div>`;}
+export function ratioBrace(label,count=null,caption='Your reference marker'){return `<div class="rb-brace"${Number.isInteger(count)?` style="--rb-count:${count}"`:""}><span>${esc(caption)}: ${esc(label)}.</span></div>`;}
