@@ -17,7 +17,8 @@ function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
  ensureGarden(state);state.garden.welcomeFilmSeen=welcomeSeen;
  const listeners=new Set(),dialogs=[],exposures=[],lifecycle=[];let focused=0,saves=0,stopped=0;
  const focus={isConnected:true,focus(){focused++;}},main={focus(){focused++;}};
- const context={state,explorerStore:{active:{id:'synthetic-explorer'}},refreshKeeperVisibility(){},keeperFilmBlocked:()=>dialogs.some(d=>d.open),choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
+ // Map loading has its own source/browser suite; this fixture owns only films.
+ const context={loadCurriculumMap(){},state,explorerStore:{active:{id:'synthetic-explorer'}},refreshKeeperVisibility(){},keeperFilmBlocked:()=>dialogs.some(d=>d.open),choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
  currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,arrivalSkipsWelcome,
  save(){saves++;},stopBell(reason){lifecycle.push(['bell-stop',reason]);},stopSpeech(){stopped++;lifecycle.push(['speech-stop']);},esc:x=>String(x),exposeStoryFacts:x=>exposures.push(x),
  document:{activeElement:focus,querySelector:()=>dialogs.find(d=>d.open)||null,body:{append:d=>dialogs.push(d)},createElement(){
