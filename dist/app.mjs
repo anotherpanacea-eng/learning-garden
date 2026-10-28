@@ -168,8 +168,25 @@ keepOfferingHowto(main,()=>choosingExplorer?'':location.hash);
 let needsExplorerInitialization=['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm'].includes(location.hash)||['pathways','learn'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
-let graph=null;
-try {const response=await fetch('./marble-map.json');if(response.ok)graph=await response.json();}catch{}
+// Optional map data must never hold the first playable screen behind a download.
+let graph=null,graphLoading=true,graphLoad=null;
+function updateMapLoadNotice(){
+ const notice=document.querySelector('[data-map-load-status]'),button=document.querySelector('[data-map-refresh]');
+ if(!notice||!button)return;
+ notice.textContent=graph?'The map is ready. Choose Show the map when you want to open it.':graphLoading?'The map data is loading. All the games are open while you wait.':'The map data is unavailable right now. You can try again or keep exploring.';
+ button.disabled=graphLoading;button.textContent=graph?'Show the map':graphLoading?'Loading map data…':'Try loading the map again';
+}
+function loadCurriculumMap(){
+ if(graphLoad)return graphLoad;
+ graphLoading=true;updateMapLoadNotice();
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
+ graphLoad=Promise.resolve().then(async()=>{
+  try{const response=await fetch('./marble-map.json',{signal:controller.signal});if(response.ok){const value=await response.json();if(Array.isArray(value?.topics)&&value.topics.length&&Array.isArray(value.dependencies))graph=value;}}
+  catch{}finally{clearTimeout(timer);graphLoading=false;graphLoad=null;updateMapLoadNotice();}
+ });
+ return graphLoad;
+}
+
 let screen='',activity=null,active=null,practiceSession=null,routeChoice='auto',puzzleLevel=null,lastAdventure=null;
 const blank=()=>({attempts:[],hinted:false,revealed:false,method:null,choice:null,input:'',error:'',exposed:false});
 function storageWarning(){return explorerStore.warning||(!storageOK?'This browser cannot save progress right now. You can still explore; download notes before leaving.':'');}
@@ -533,7 +550,7 @@ function render(){
   else if(screen==='practice-end')html=practiceEnd();
   else if(root==='checkin')html=checkinHub(state);
   else if(root==='activities')html=activityLibrary(state,graph,areaById(slug)?slug:'all')+openTaskLibrary(slug);
-  else if(root==='map')html=learningMap(state,graph,slug);
+  else if(root==='map')html=graph?learningMap(state,graph,slug):`${heading('The learning connections','The optional map can load while the games stay open.')}<section class="panel"><p data-map-load-status role="status">${graphLoading?'The map data is loading. All the games are open while you wait.':'The map data is unavailable right now. You can try again or keep exploring.'}</p><button type="button" class="secondary" data-map-refresh ${graphLoading?'disabled':''}>${graphLoading?'Loading map data…':'Try loading the map again'}</button><p><a href="#explore">Keep exploring</a></p></section>`;
   else if(root==='multiplication')html=checkinIntro();
   else if(root==='practice')html=practiceIntro();
   else if(root==='puzzles')html=puzzlePage();
@@ -622,6 +639,7 @@ function priceOptions(){return {canExport:candidate=>prepareProgressImport(JSON.
 function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
 function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&!arrivalSkipsWelcome(state)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function bind(){
+ $('[data-map-refresh]')?.addEventListener('click',()=>{if(graph){render();main.focus();}else void loadCurriculumMap();});
  bindActTwo(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindKeeperStory(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindOrdered(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,downloadNotes:()=>downloadText(JSON.stringify(notesReport(state),null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`),explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
@@ -860,3 +878,6 @@ function endingFilm(){
  return null;
 }
 if(!choosingExplorer&&!['pathways','learn'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#arrive'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale'&&!['#post/codes','#post/descriptions','#science/water-shares','#studio/rhythm'].includes(location.hash))requestAutomaticFilm('welcome');
+
+// Loading this optional reference never re-renders an activity or changes a notebook.
+void loadCurriculumMap();
