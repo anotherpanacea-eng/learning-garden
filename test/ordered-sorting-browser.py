@@ -60,7 +60,7 @@ def setup(browser, width, seed, failed=False):
     def app(route):
         response = route.fetch()
         code = response.text()
-        anchor = 'let graph=null;'
+        anchor = 'let graph=null,'
         assert anchor in code, 'app read-only closure anchor missing'
         route.fulfill(response=response, body=code.replace(anchor,
             'window.__orderedRead=()=>structuredClone(state);'

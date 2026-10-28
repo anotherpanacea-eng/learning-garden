@@ -109,7 +109,7 @@ def setup(browser, width, seed, label):
     def app(route):
         response = route.fetch()
         body = response.text()
-        needle = 'let graph=null;'
+        needle = 'let graph=null,'
         assert needle in body, 'read-only notebook observation seam changed'
         body = body.replace(needle, 'window.__actTwoRead=()=>structuredClone(state);window.__actTwoExplorer=()=>explorerStore.active.id;window.__actTwoReport=candidate=>notesReport(candidate);' + needle, 1)
         route.fulfill(response=response, body=body)

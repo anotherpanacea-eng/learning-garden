@@ -38,7 +38,7 @@ def setup(browser,width,seed=None,failed=False):
  init="""({seed,failed})=>{if(!localStorage.getItem('price-fixture')){localStorage.setItem('number-garden-v1',JSON.stringify(seed));localStorage.setItem('price-fixture','1');}if(failed)Storage.prototype.setItem=function(){throw Error('Synthetic storage failure');};}"""
  c.add_init_script('('+init+')('+json.dumps({'seed':s,'failed':failed})+')')
  def app(route):
-  response=route.fetch();body=response.text();needle='let graph=null;'
+  response=route.fetch();body=response.text();needle='let graph=null,'
   if needle not in body:raise AssertionError('app closure reader insertion anchor missing')
   route.fulfill(response=response,body=body.replace(needle,'window.__priceRead=()=>structuredClone(state);'+needle,1))
  c.route('**/app.mjs',app)

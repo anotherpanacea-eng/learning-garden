@@ -97,8 +97,8 @@ def setup(browser, width, seed, refuse=False):
     }"""+')('+json.dumps({'seed':seed,'refuse':refuse})+')')
     def app(route):
         response=route.fetch();body=response.text()
-        assert 'let graph=null;' in body,'actual app state seam changed'
-        body=body.replace('let graph=null;','window.__ledgerRead=()=>structuredClone(state);let graph=null;',1)
+        assert 'let graph=null,' in body,'actual app state seam changed'
+        body=body.replace('let graph=null,','window.__ledgerRead=()=>structuredClone(state);let graph=null,',1)
         needle='function priceOptions(){return {canExport:candidate=>'
         assert needle in body,'actual shared export preflight seam changed'
         body=body.replace(needle,'function priceOptions(){return {canExport:candidate=>!window.__ledgerRefuse&&',1)
