@@ -1,0 +1,88 @@
+# Spec289 · Between the Marks (Gap Line)
+
+**Draft finite construction specification, 2026-10-28. Not build-cleared.** Companion: [finite original copy](../content/289-gap-line-text.md). Evidence and reuse: [source audit](../source-audits/289-gap-line.md). Fleet1215 owns this slice. Independent specification and mathematics/content reviews precede runtime implementation.
+
+## One missing operation, rather than another below-zero lesson
+
+At exact `#desk/gaps`, construct an equal-unit ruler from a fixed signed Start to a movable ruler end, against a separately fixed Finish. Compare where the construction ends and how long it is. This distinguishes a signed position, an unsigned interval length and a directed change. Existing linear units already teach integer and half-unit zero crossing, signed starts and rates; their adaptive returns already ask for missing inputs. Those are acknowledged prerequisites/overlap, not newly delivered lessons. Lantern Line places fractions within0..1; Fraction Trail constructs positive intervals. None of those built tools constructs and measures the interval between two independently stated signed positions.
+
+Select only proposal189's Gap Line operation. No flood-post simulation, thermometer, historical number-system account, signed-rod tray, sign-rule course, general absolute-value course, new taxonomy pin, story adapter or generic learning engine. The measuring rail is invented mathematical material, not a calibrated physical ruler. It can be used in any story act. Standalone entry remains open without a completed lesson or act. Discovery is the existing Number Garden and Keeper's Desk investigation list. A return link to `#pathways/math` invites revisiting signed marker/rate work; no numbers, answers or evidence are copied to that owner.
+
+## The actual material operation
+
+Source Start A and Finish B never move or change their meaning. A third, clearly named ruler end C begins at A. Native **Move ruler end left/right** buttons move C by the case's one-unit or half-unit piece. The unheaded ruler consists of the actual equal pieces between A and C; it must not draw the unconstructed remainder to B as completed material. Counts refer to gaps/pieces, not tick marks. At C=A there are no nonzero pieces and the length is0, while all source/current markers remain visible.
+
+Show Start, Finish and the current ruler end as separate named readings. Draw distinguishable source/current shapes in separate lanes if positions coincide. A and B remain visible even when C is wrong. Zero is a position/boundary, never a piece or extra step. Keep one fixed whole-unit reference across the six invitations: half-unit pieces are half the width of whole-unit pieces, not normalized to the same size. The main ruler is unheaded. The optional **Show the move** presentation adds a separately labelled A-to-C arrow and signed-change readout; a zero move has no invented directional arrow. The unsigned length remains separately labelled. This is not another input card followed by a decorative number line.
+
+The fixed displayed domain is−10..+10. Major labels and task/readout text are at least16px; noninteractive ticks/pieces may be smaller. Every action is at least44px. Native buttons suffice; no dragging, typing or speech capture is required. Left/right controls stop at the finite board edge with the companion's explanation, rather than clipping or silently truncating a construction. A bounded picture is not a claim that numbers stop there. Preserve the direction of controls across zero: moving C left always decreases its coordinate, even if the ruler length increases.
+
+**Split the ruler at zero** is a presentation request. If zero lies strictly inside the actual A-to-C span, show its two unheaded parts and their actual lengths. Their sum is the actual ruler length. If zero is outside or at an end, retain one part and explain why; if A=C, retain zero length. Do not detour a same-side interval through zero. A requested split never creates the missing segment to Finish. The request may stay on as C moves; record the request, not a claim that a two-part picture was necessarily visible.
+
+The optional move presentation computes C−A for the constructed ruler only, with direction and unit explicit. It does not automatically reveal B−A as an answer to a different construction. Displaying such arithmetic consequences is supported material exploration, not evidence of an independently computed difference. Both presentation requests are part of the draft/checked context, not mastery flags.
+
+## Six finite invitations and mathematics
+
+The companion supplies exact titles, prompts, clues, guidance, explanations and initial values. Store coordinates as integer half-unit ticks, not binary-decimal quantities. `stepHalf=2` means one whole-unit piece; `stepHalf=1` means a half-unit piece. All initial ruler ends equal A; `split=false`, `showMove=false`.
+
+| caseId | A | B | stepHalf | Fitting unsigned length | Signed change at B |
+|---|---:|---:|---:|---:|---:|
+| guided-cross |−4|+9|2|13|+13|
+| same-below |−2|−8|2|6|−6|
+| reverse |+9|−4|2|13|−13|
+| positive |+3|+8|2|5|+5|
+| coincident |−3|−3|2|0|0|
+| halves |−1½|+2|1|3½|+3½|
+
+Given integer half-ticks a,b,c, the constructed piece count is `abs(c−a)/stepHalf`, unsigned length is `abs(c−a)/2`, and signed change is `(c−a)/2`. The known given gap is `abs(b−a)/2`. **Compare** stores two separate predicates: endpoint `c===b`; length `abs(c−a)===abs(b−a)`. A fitting endpoint implies the matching length, but a matching length need not mean the endpoint meets Finish: same-below with C=+4 has length6, yet ends in the wrong direction. Do not collapse these results into a grade or infer a particular misconception from a wrong construction.
+
+A zero span is a real complete comparison, not missing work. Its two results fit in coincident and differ when the given marks are distinct. No direction selection or nonempty-material prerequisite is introduced. All six jobs are open. The first's visible guidance supplies13; reverse revisits the same two positions, and coincident's supplied initial ruler already fits. Notes must disclose these supplied contexts even with all optional flags false. None is certified independent new use.
+
+Each check leaves the ruler editable. Show the checked construction separately from the changed draft, with a changed-since-comparison label. Decode its two literal stored results using the companion's four frozen status templates; separately show the actual checked model's computed endpoint/length and, when requested, signed change. Never turn a retained status into a new numerical equality. Example hostile record: guided-cross, c=−8 ticks (C=−4; length0), literal meets/matches. Preserve those statuses and the actual zero-length readout without claiming0=13 or that the current ruler end was+9.
+
+## Teaching, return and support
+
+Three optional worked helpers have the companion's three step plans each: `crossing`, `sameBelow`, `halves`. Each uses the invitation's frozen source with an **Example ruler** caption, leaves the actual draft unchanged, and returns exactly to it. Opening starts at step1; Previous/Next are visit-local. The source step caseIds identify whether an opened helper uses the current invitation's own situation. Notes say it may supply part or all of a fitting construction; opening does not prove which steps were viewed. Do not grade a historical helper's partial plan to decide whether it supplied an answer. Missing/malformed opened-helper details mean overlap unknown. No new step-view log.
+
+Case support is `clue`, `narration`, `together`; explorer teaching context is the three helper flags. Commit each first-time flag before clue/helper exposure or native speech request through the real whole-report gate below. Reopening an already recorded flag is a no-op. The flag means opened/requested/reported, not read/heard/understood. Supplied guidance, the initial zero ruler and reverse's shared endpoints remain derived source context, not invented independent evidence.
+
+The native Hear text is limited to visible core source goal/readings, guidance, constructed endpoint/piece count/length, requested visible split/move readouts, and compact literal checked results with the changed-draft label. Exclude hidden clue, worked steps and supplied-after-check explanations. Use intelligible spoken names for half-unit values (for example, negative one and a half), not an assumption that Unicode fraction glyphs will be pronounced correctly. A speech request is not an audibility check. Refusal prevents exposure/speech. Spoken reasons remain human conversation only. The open math-pathway return provides another purpose for distinguishing signed movement from distance; no compulsory linked quiz or outcome-transfer layer.
+
+## One owner and bounded frozen source
+
+Optional root `gapLine`, absent until **Open Gap Line**:
+
+```
+{kind:'signed-gap-ruler',version:1,source,
+ drafts:[],observations:[],support:[],
+ teaching:{crossing:false,sameBelow:false,halves:false}}
+```
+
+Source `{id,version,title,origin,notice,model,cases,feedback,helpers?}`. Printable nonempty ASCII ids1..80 exclude prototype keys; positive safe source version; title/origin<=160, notice<=1800. New id `between-the-marks`; model `{id:'signed-gap-ruler-v1',minHalf:-20,maxHalf:20}`. Structurally readable alternate model ids or integer bounds within−20..20, `minHalf<0<maxHalf`, are unsupported unless the complete signature matches. They retain plain source text, raw model/construction values and literal results, with no current-model arithmetic/picture/mutation/support exposure. Do not substitute a new source/model.
+
+Cases dense1..6, unique ids, each `{id,title,fromHalf,toHalf,stepHalf,initial,prompt,clue,guided,explanation,reasonPrompt}`. Coordinates integer−20..20; stepHalf1 or2; both source coordinates and initial endpoint divisible by stepHalf. Initial is a plan `{endHalf,split,showMove}`: endHalf integer−20..20 divisible by stepHalf; flags boolean. title<=160; prompt/reason<=1000, clue<=600, guided dense0..3 plain strings<=600, explanation<=1400. All displayed numbers come from the frozen case and actual plan; target-distance authoring arithmetic is not another saved answer key. Smaller coherent sources and reordered/missing cases remain usable.
+
+Feedback has four required own strings `endMeets,endDifferent,lengthMatches,lengthDifferent`, plain<=1200; unknown extra fields retained. Helpers optional own members crossing/sameBelow/halves: `{title,steps}` title<=160, dense1..3 steps `{caseId,plan,text}`, resolving a source case with its structurally valid plan, text<=1000. A partial historical step may have no useful final answer; no current-answer check on read. Missing/malformed helper isolates only that helper, with its original retained. The source itself is atomic: malformed case/source definition isolates this tool, not a partial-source recovery engine.
+
+Drafts are unique `{caseId,endHalf,split,showMove}`. A missing case draft renders its frozen initial without writing. A present unreadable draft stays raw and cannot be replaced silently. Support entries are unique `{caseId,clue,narration,together}` booleans; missing means not recorded, malformed means unknown. Observations unique `{caseId,compareCount,first,latest?}`, count1..1e9, latest iff count>1. Snapshot `{endHalf,split,showMove,endResult:'meets'|'different',lengthResult:'matches'|'different',supportBefore:{clue,narration,together},teachingBefore:{crossing,sameBelow,halves},afterFeedback}`. Plan bounds apply; first afterFeedback=false, latest=true. The schema validates enum/shape/count structure, not agreement between stored outcomes and current/source arithmetic. No catalogue completeness or current key requirement.
+
+First is immutable; latest is replaced only on an actual changed comparison. No-op compares the most recent endHalf/split/showMove plus all support-before and teaching-before flags, excluding afterFeedback. No event or view log. New latest contains only known snapshot fields rather than carrying older latest metadata into another response. Preserve unknown fields on untouched source/owner/first and continuing draft/wrapper objects. The companion discloses that intermediate retries are not retained. Fresh helper/source flags do not retroactively relabel earlier checked context.
+
+Use the existing missing/readable/retained-unreadable boundaries: attributed malformed mutable work isolates dependent writes for its case while neighbors remain open; nonarray sections are unknown rather than empty. An unreadable observation is never a “no comparison” fallback in the board, Hear, Notes or a return fold. A readable draft can remain editable when only its observation is bad. Missing/nonobject/partial teaching blocks Compare's complete snapshot, while readable individual helper flags permit their own helpers. Avoid contradictory “editable” copy for an unsupported model or unreadable draft. Original raw data always remains exportable within existing recovery limits.
+
+## Integration and execution boundaries
+
+Before every actual owner mutation, clone the proposed owner into the actual whole notebook and require the app seam `prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok`, together with existing recovery bounds. Missing/throwing gate refuses atomically. No new quota, migration, telemetry or account. Use existing save-off/storage-warning/in-memory Download, actual import and confirmed scoped reset behavior. Include presence-only transfer destination `gapLine` and a nonthrowing Notes section without initializing it. Notes derives supplied starts/guidance, records draft and first/latest separately, decodes literal results, reports support/teaching/presentation context, and retains originals. Notes/return pictures must have local geometry variables, no duplicated main focus ids or live-status floods.
+
+Dispatch exact `#desk/gaps` before generic Desk; defer legacy initialization and automatic films consistently across initial route, explorer selection/import/useExplorer, bindExplorers, startup and deferred film predicates. Existing ExplorerStore avatar/profile normalization is the baseline; entering a tool does not initialize other lessons. Add discovery entries at Number Garden and Desk without changing existing owners. Keep `docs/roadmap.md` untouched while separately reserved; the proposal queue records this slice.
+
+Guard controls by notebook identity, explorer, source, case, render/helper and actual hash; stale/detached controls and pending speech callbacks cannot write another context. On Hear, record before native propagation without rerendering away the request, updating any bound-root identity. Route departure/import/explorer change clears local helper/focus state; no action queue. Preserve focus through each endpoint edit, take the enabled counterpart at a board edge, focus compact checked status after Compare, helper heading/return trigger and refusal status. Source markers and the actual material stay stable.
+
+At820portrait and1024landscape, the first viewport contains the goal, given marks, actual ruler, move controls and Compare, including the half-unit case. At320 allow vertical scrolling without page overflow. Probe744/768 and950 for physical material/action overlaps, not only page width. Use rendered inspection of coincident markers, negative-side ruler, reversed direction, half-unit reference, split/no-split and checked-versus-draft pictures. No forced quiz, splash film, modal or paragraph wall replaces the board.
+
+## Verification and delivery
+
+Independently check all six finite calculations and helpers; count gaps rather than marks and keep zero a boundary. Enumerate the146 permitted case/endpoint combinations and four presentation choices to check both predicates, including equal-length wrong-end cases (+4 for same-below,−2 for positive,−5 for halves), reversal, nonnegative length, zero span and half pieces. An observation with contradictory literal results remains unchanged and is not a fresh numerical equality. Unknown models must not compute amounts, changes or pictures.
+
+Exercise real native taps for construction/repair of all six jobs and representative keyboard activation/focus. Label emulation/select/navigation limits honestly. Test first/latest/no-op/support-before, visible guidance despite false optional flags, own-helper partial/unknown overlap, smaller/malformed sources and sections, stale controls across route/case/explorer/import, actual whole pretty-report-only refusal, >=500KiB unrelated retained work, actual Download→import→reload→redownload, two explorers, save-off/storage failure and selected reset. Negative unknown-history tests must actually open any bridge control and inspect the affected Notes case, without skipped conditional assertions or wrong absence strings. Readonly render cannot write. Actual unsupported-source/malformed-owner refusal is not a substitute for real saved-work recovery.
+
+Apply the six-lens specification review and separate finite math/content review before runtime. Independent exact-candidate implementation clearance, proportionate local checks, expected-head merge, merged asset verification and canonical hosted interaction checks follow. Report actual execution separately from source/AI review. No physical iPad/Safari, human subject/language, audibility or learning-outcome claim follows from Chrome/AI checks.
