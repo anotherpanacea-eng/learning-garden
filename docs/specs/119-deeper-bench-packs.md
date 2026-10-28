@@ -23,7 +23,7 @@ The new companion text is a draft with representative help/replies, not proof th
 | Balance | Per-pan counts of equal-mass parcels, bags/opening, paired parcel removal and a ledger; spec 64 v1 has exactly one fixed parcel. Define finite counts/masses and atomic moves. Bramble's no/every-mass labels below are a separately deferred extension. |
 | Seed | A distinct two-draw-without-replacement model and 15-trial sets; spec 87 v1 returns each seed and permits six draws per run. Keep old run shapes intact. |
 | Sorting | Size and square-stamp features, three baskets, two ordered tests and NOT; spec 84 v1 has two baskets and one stamp/wrap if/else. Define the new trace and saved source/program shape. |
-| Count Collection | A numeric-observation dataset and paired observations for mean/median/scatter; spec 86 v1 stores categorical imaginary-button counts 0–12. Define units, numerical ranges, chart actions and the precise frozen source/results; do not relabel the old button dataset. |
+| Count Collection | Mean/median remains proposed here; the first paired-point/scatter slice is handed to spec283 as a separate bench. A numeric-observation dataset is needed; spec 86 v1 stores categorical imaginary-button counts 0–12. Define units, numerical ranges, chart actions and the precise frozen source/results; do not relabel the old button dataset. |
 | Sentence Bridges | A new finite transient scene/conjunction catalog and complete meaning notes; spec 109's current route/session, no-save/no-learning-record behavior stays unchanged. No per-question saved pack or independent-attempt record is added here. A persisted extension would need a separate commission. |
 | Cartographer / Scale | A bounded map/physical-unit scale-selection and conversion model for the new questions; current map-grid routes and spec 111's fixed 2/4 m-per-edge drawings cannot supply centimetre measurements. Keep existing routes/transient behavior and old saved maps unchanged. |
 
@@ -155,18 +155,20 @@ Bench: [My Count Collection, spec 86](86-count-collection.md). This pack supplie
 >
 > The mean shares everything out evenly. The median is the one in the middle when you line them up. One very large value pulls the mean towards it; the median barely notices.
 
-**Second dataset (association, not cause):** eight weeks of the courier's records.
+**First scatter-slice handoff:** [spec283](283-paired-points.md) owns the bounded paired-points build, with original invented datasets and a separate root. Mean/median remains deferred in this section. The rain/delay table below is historical proposal material, not a second build commission; broader negative/no-association, best-fit and prediction lessons still need their own contracts.
+
+**Deferred association dataset:** eight invented weeks of courier records.
 
 | Week | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Rain (mm) | 5 | 12 | 20 | 8 | 30 | 25 | 2 | 15 |
 | Days delayed | 0 | 1 | 2 | 0 | 3 | 3 | 0 | 1 |
 
-Plot the points; describe the pattern in words first (wetter weeks had more delays), then name it as a positive correlation. Then a contrast card: "The same weeks also had the most market stalls, because market weeks happened to be wet. Can we tell from this table whether rain or markets caused the delays?" The fitting reply: not from this table alone; both rose together. Following the Marble research for Scatter Graphs & Correlation, the learn card names four explanations for a pattern like this: rain causes delays; something else (market weeks) causes both; delays cause rain (here, plainly not); or chance. A second card shows two scatters with lines of the same steepness, one tight and one loose, because the steepness of a line is often mistaken for the strength of a correlation.
+Plot the points; describe the pattern in words first (wetter weeks had more delays), then name it as a positive correlation. A causal-reasoning card must stay within this invented table: "Wetter weeks have more recorded delays here. Does that show what caused the delays?" The fitting explanation is that the table shows association, while records about conditions and how the observations were collected are absent. A possible unrecorded factor is a hypothesis, not supplied evidence. Do not assert that market weeks cause rain, invent market counts absent from the table, or present a physically incoherent reverse-cause story as an equally plausible explanation. This draft still needs its finite causal text and subject/model review before build; naming four generic explanations does not establish any of them for these records. A second card shows two scatters with lines of the same steepness, one tight and one loose, because the steepness of a line is often mistaken for the strength of a correlation.
 
 **Hard prerequisites:** Coordinates (age 11+) and Comparing measurements have no declared reference; plotting in the first quadrant does. Eight whole-number points need only first-quadrant plotting, so this is a documented narrowing. No line of best fit is drawn in this pack.
 
-**Candidate topics:** `mt_Cg8VPguS_V` Calculating the Mean; `mt_8atyuvPUZc` Scatter Graphs & Correlation. Supplied example data, never a survey of real people.
+**Candidate topics:** `mt_Cg8VPguS_V` Calculating the Mean remains here; the first `mt_8atyuvPUZc` Scatter Graphs & Correlation foothold is scoped in283, without claiming the complete topic. Supplied example data, never a survey of real people.
 
 ## 6. Sentence Bridges: joining words that change the weight
 
@@ -225,6 +227,6 @@ The research for this topic recommends practising both directions, map to real a
 Refreshed 2026-10-23: Jane at `1927912b8d9cd4f7df6e7fbe8416521194743060` (`LESSONS.md` and its bundled Marble teaching research, `data/marble/teaching-research.json`, os-taxonomy `a871973`). The app's vendored Marble pin and the topic IDs above are unchanged.
 
 - **Jane conventions adopted as design:** teach, guided, then independent; the stuck ladder; misconception-tagged wrong choices with short replies; second person and short prompts. Its bosses, medals, review gates and mastery inference are not adopted. No Jane code or prose is copied.
-- **Marble research records used:** Solving Linear Equations (section 2), Tree diagrams and Experimental vs Theoretical (section 3), Calculating the Mean and Scatter Graphs & Correlation (section 5), Scale and similar shapes, age 11+ (section 7). Their representations and misconceptions are paraphrased as design notes. The research text (CC BY-SA 4.0, © Generative Spark, Inc.) is not reproduced.
+- **Marble research records used:** Solving Linear Equations (section 2), Tree diagrams and Experimental vs Theoretical (section 3), Calculating the Mean (section5); Scatter Graphs & Correlation informed this historical proposal, with its bounded first runtime slice now handed to283, Scale and similar shapes, age 11+ (section 7). Their representations and misconceptions are paraphrased as design notes. The research text (CC BY-SA 4.0, © Generative Spark, Inc.) is not reproduced.
 - **No research record consulted** for the Sorting Desk and Sentence Bridges packs. Those rest on the earlier benches' own reviewed sources and need a subject reviewer.
 - **Hard prerequisites:** each pack names the hard prerequisites from `curriculum/marble/dependencies.json` that the app does not yet reference, and how the pack supports them or why it narrows them, as spec 49 section 8 requires.
