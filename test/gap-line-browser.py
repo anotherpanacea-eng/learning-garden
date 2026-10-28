@@ -337,6 +337,50 @@ def retained(browser,base,f):
     p.locator('[data-gap-presentation="split"]').click();ok(p.locator('[data-gap-presentation="split"]').is_checked() and book(p)==before,'refused native checkbox restored')
     ok(p.evaluate('gapSpeechRequests.length')==0 and p.locator('[data-gap-close]').count()==0,'refusal precedes helper/speech exposure');snap(p,'pretty-refusal')
 
+def review_repair_fixtures(browser,base,f):
+    for key in ['unknownDiffering','unreadableDraftContext']:
+        p=setup(browser,820,1180,f[key],key);go(p,base);select_case(p,'guided-cross');before=copy.deepcopy(owner(p))
+        ok(before==f[key]['gapLine'],'read-only render retains original owner '+key)
+        more=view(p).get_by_text('More ideas',exact=True);ok(more.count()==1,'actual More ideas section exists');more.click()
+        text=view(p).inner_text()
+        ok('Your ruler changed since this comparison' not in text and 'Compare when you want to keep this version' not in text,'read-only or unreadable current ruler gets no editable comparison invitation '+key)
+        checked=p.locator('.gap-checked');ok(checked.count()==1,'actual readable checked snapshot exists '+key)
+        latest=before['observations'][0]['latest'];feedback=before['source']['feedback']
+        ok(feedback['endMeets' if latest['endResult']=='meets' else 'endDifferent'] in checked.inner_text() and feedback['lengthMatches' if latest['lengthResult']=='matches' else 'lengthDifferent'] in checked.inner_text(),'checked literal outcomes remain visible '+key)
+        if key=='unknownDiffering':
+            ok(before['drafts'][0]['endHalf']==14 and latest['endHalf']==16,'unsupported fixture has genuinely differing raw draft and checked endpoints')
+            ok('Choose Working together' not in text,'unsupported More ideas never suggests reporting new help')
+            ok(p.locator('.gap-axis,.gap-readouts,.gap-move').count()==0,'unsupported differing states generate no current-model arithmetic or pictures')
+        else:
+            ok('Some earlier work for this invitation cannot be read here.' in text,'unreadable current draft has its precise retained notice')
+            compare_control=p.locator('[data-gap-compare]');ok(compare_control.count()==0 or compare_control.is_disabled(),'unreadable draft offers no active Compare')
+            ok(p.locator(VIEW+' [data-speak]').count()==0 or p.locator(VIEW+' [data-speak]').is_disabled(),'unreadable current draft cannot narrate invented state')
+        guide=p.locator('.gap-grownup');ok(guide.count()==1,'actual grown-up guide exists');guide.locator('summary').click()
+        for case in before['source']['cases']:
+            section=guide.locator('[data-gap-guide-case="'+case['id']+'"]');ok(section.count()==1,'guide context attributed by case '+case['id'])
+            ok(section.locator('h3').inner_text()==case['title'],'guide context names its frozen source title '+case['id'])
+        snap(p,key+'-board')
+        report=download(p,base,key+'-notes');semantic(p);case=p.locator('.gap-notes [data-gap-notes-case="guided-cross"]');ok(case.count()==1,'affected retained Notes case exists '+key)
+        ok('Current editable ruler' not in case.inner_text(),'retained current state never mislabeled editable '+key)
+        if key=='unknownDiffering':ok('"endHalf": 14' in case.inner_text() and '"endHalf": 16' in case.inner_text(),'Notes visibly separates unsupported raw draft and checked endpoints')
+        ok(case.locator('.gap-checked').count()==2,'Notes retains readable first and latest snapshots '+key)
+        ok(report['gapLine']==before and owner(p)==before,'raw owner and original draft/check data retained exactly '+key)
+        case.screenshot(path=str(OUT/(key+'-notes-case.png')))
+    p=setup(browser,820,1180,f['unattributed'],'unattributed-notes');go(p,base);before=copy.deepcopy(owner(p));report=download(p,base,'unattributed-notes');text=semantic(p)
+    ok('Some retained entries cannot be read or matched to an invitation. Their originals stay in your notes.' in text,'Notes discloses an unmatched retained entry')
+    ok(report['gapLine']==before,'unmatched original remains in actual downloaded owner')
+    p=setup(browser,820,1180,f['unreadableSupport'],'unreadable-support');go(p,base);select_case(p,'guided-cross');before=copy.deepcopy(owner(p))
+    ok(p.locator('.gap-support').count()>0,'actual support section exists for unreadable-support fixture')
+    hear=p.locator(VIEW+' [data-speak]');ok(hear.count()==0 or hear.is_disabled(),'Hear unavailable before unreadable support could refuse an apparently active request')
+    ok(owner(p)==before,'unreadable support render preserves original data')
+    p=setup(browser,820,1180,f['partial'],'stale-checkbox');go(p,base);select_case(p,'guided-cross')
+    checkbox=p.locator('[data-gap-presentation="split"]');ok(checkbox.count()==1 and checkbox.is_checked(),'real checked presentation control exists before departure')
+    before=book(p)
+    state=p.evaluate("""()=>{const box=document.querySelector('[data-gap-presentation="split"]');const initial=box.defaultChecked;location.hash='#notes';const connected=box.isConnected;box.click();return {connected,initial,checked:box.checked,defaultChecked:box.defaultChecked};}""")
+    ok(state['connected'] and state['initial'] and state['checked']==state['defaultChecked'],'connected stale checkbox restores its actual original visual state')
+    ok(book(p)==before,'stale checkbox event does not mutate the whole notebook')
+    p.locator('#download').wait_for()
+
 def unsupported_semantics(browser,base,f):
     p=setup(browser,820,1180,f['unknown'],'unsupported-raw-labels');go(p,base);select_case(p,'guided-cross')
     before=copy.deepcopy(owner(p));text=view(p).inner_text()
@@ -393,7 +437,7 @@ def main():
         browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
         try:
             for width,height in [(820,1180),(1024,768),(320,800)]:basic_journey(browser,base,fixtures,width,height)
-            inputs_and_geometry(browser,base,fixtures);retained(browser,base,fixtures);unsupported_semantics(browser,base,fixtures);speech_tokens(browser,base,fixtures);saving(browser,base,fixtures)
+            inputs_and_geometry(browser,base,fixtures);retained(browser,base,fixtures);review_repair_fixtures(browser,base,fixtures);unsupported_semantics(browser,base,fixtures);speech_tokens(browser,base,fixtures);saving(browser,base,fixtures)
             ok(not errors,'no page errors '+json.dumps(errors));ok(not faults,'no browser faults '+json.dumps(faults))
             receipt={'status':'passed','checks':checks,'base':base,'viewports':[[820,1180],[1024,768],[320,800],[744,1024],[768,1024],[950,768]],'inputCoverage':'Actual native Chrome tap events construct/check/repair all six invitations; native keyboard Enter/Space representative positive invitation; clicks elsewhere. Tab order is not exhaustively traversed.','pageErrors':errors,'faults':faults,'scope':'Synthetic profiles only. Actual whole Notes Download/import/reload/redownload and retained500KiB sibling; two explorers/reset, refusal, save-off, storage fault. Native speech request observation only. No Safari or physical-device testing, audible quality, human math approval or learning efficacy claim.'}
             (OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(f'Gap Line browser: {checks} assertions passed; artifacts {OUT}')

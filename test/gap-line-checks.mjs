@@ -19,6 +19,10 @@ export function gapFixtures(){
  const partial=clone(base);assert.ok(m.createGapLine(partial,gapCanExport).ok);setGapPlan(partial,'guided-cross',18,true,true);m.compareGapLine(partial,'guided-cross',allow);m.moveGapEnd(partial,'guided-cross',-1,allow);m.compareGapLine(partial,'guided-cross',allow);m.moveGapEnd(partial,'guided-cross',-1,allow);
  const contradictory=clone(partial),r=contradictory.gapLine.observations[0];r.first={...r.first,endHalf:-8,endResult:'meets',lengthResult:'matches'};r.latest=clone(r.first);r.latest.afterFeedback=true;contradictory.gapLine.drafts[0]={caseId:'guided-cross',endHalf:-8,split:true,showMove:true};
  const unknown=clone(contradictory);unknown.gapLine.source.model.id='synthetic-future-model';
+ const unknownDiffering=clone(partial);unknownDiffering.gapLine.source.model.id='synthetic-future-model';
+ const unreadableDraftContext=clone(partial);unreadableDraftContext.gapLine.drafts[0].endHalf='Synthetic retained future endpoint';unreadableDraftContext.gapLine.support=[{caseId:'guided-cross',clue:true,narration:false,together:false}];
+ const unattributed=clone(partial);unattributed.gapLine.observations.push({caseId:'synthetic-unmatched-case',raw:'Synthetic retained unmatched comparison'});
+ const unreadableSupport=clone(partial);unreadableSupport.gapLine.support=[{caseId:'guided-cross',clue:'Synthetic unreadable support',narration:false,together:false}];
  const historical=clone(contradictory);historical.gapLine.source.model.maxHalf=18;
  const metadata=clone(partial);metadata.gapLine.source.model.future={retained:true};
  const damaged=clone(partial);damaged.gapLine.observations.push({caseId:'same-below',future:'Synthetic unreadable comparison'});damaged.gapLine.drafts.push({caseId:'positive',endHalf:'future'});
@@ -31,7 +35,7 @@ export function gapFixtures(){
  const supplied=clone(partial);supplied.gapLine.source.cases.find(x=>x.id==='positive').initial={endHalf:16,split:true,showMove:true};supplied.gapLine.source.cases.find(x=>x.id==='coincident').toHalf=-4;supplied.gapLine.source.cases.find(x=>x.id==='reverse').fromHalf=16;
  const partialTeaching=clone(partial);partialTeaching.gapLine.teaching.sameBelow='Synthetic unknown flag';
  const refusal=clone(partial);refusal.syntheticOther.payload='';const proposed=clone(refusal);m.noteGapSupport(proposed,'guided-cross','clue',allow);refusal.syntheticOther.payload='x'.repeat(MAX_IMPORT_BYTES-Buffer.byteLength(JSON.stringify(proposed,null,2))-8);
- return {base,uninitialized,partial,contradictory,unknown,historical,metadata,damaged,unreadableRecord,unreadableSection,smaller,partialHelper,unknownHelper,speechTokens,supplied,partialTeaching,refusal};
+ return {base,uninitialized,partial,contradictory,unknown,unknownDiffering,unreadableDraftContext,unattributed,unreadableSupport,historical,metadata,damaged,unreadableRecord,unreadableSection,smaller,partialHelper,unknownHelper,speechTokens,supplied,partialTeaching,refusal};
 }
 export function runGapChecks(){
  let n=0;const ok=(x,msg)=>{assert.ok(x,msg);n++;},eq=(a,b,msg)=>{assert.deepEqual(a,b,msg);n++;};
