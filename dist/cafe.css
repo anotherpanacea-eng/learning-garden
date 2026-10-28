@@ -97,7 +97,7 @@ body:has([data-cafe-touch]) main{padding-top:8px}
 .cafe-touch .cafe-touch-jars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0}
 .cafe-touch .cafe-touch-jar{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;min-width:0;padding:12px 8px 10px;margin:0;text-align:center;border:2px solid #90b9ae;border-top:7px solid #b99b74;border-radius:8px 8px 16px 16px;background:#edf3e8;box-shadow:0 3px 0 #d8dfd5;color:#183f39}
 .cafe-touch button.cafe-touch-jar:not(:disabled):active,.cafe-touch button.cafe-slot:active{transform:translateY(2px);box-shadow:none}
-.cafe-touch .cafe-touch-jar>.food-art{width:44px;height:44px;max-width:100%;margin:0}
+.cafe-touch .cafe-touch-jar>.food-art{width:60px;height:60px;max-width:100%;margin:0}
 .cafe-touch .cafe-touch-jar strong{font-size:17px;line-height:1.25}
 .cafe-touch .cafe-jar-details{display:flex;flex-direction:column;gap:4px;align-items:center}
 .cafe-touch .cafe-jar-details,.cafe-touch .cafe-jar-chosen{font-size:16px;line-height:1.35}
@@ -139,3 +139,9 @@ body:has([data-cafe-touch]) main{padding-top:8px}
 @media(min-width:900px){.cafe-touch-counter:has(>.cafe-touch-plate):not(:has(>[data-cafe-action="check"])){display:block}}
 @media(max-width:620px){.cafe-touch .cafe-heading h1{order:-1;flex-basis:100%;text-align:left}.cafe-touch .cafe-heading{gap:4px 8px}}
 .cafe-touch .cafe-jar-stock,.cafe-touch .repair-food strong,.cafe-touch .cafe-gather-list p,.cafe-touch .gather-needed>span:nth-child(2),.cafe-touch .gather-needed span span{font-size:16px}
+/* Existing help styles are deliberately denser elsewhere; keep café reading size. */
+.cafe-touch .cafe-help button,.cafe-touch .cafe-stage-skip button,.cafe-touch .cafe-work p,.cafe-touch .cafe-work p.cafe-eyebrow,.cafe-touch .cafe-gap-list li,.cafe-touch .cafe-model-readout{font-size:16px!important}
+.cafe-touch .cafe-help p.tiny,.cafe-touch .cafe-rule,.cafe-touch small{font-size:16px}
+.cafe-touch .dh-controls button,.cafe-touch .dh-count{font-size:16px}
+.cafe-touch .eg-entry p,.cafe-touch .eg-entry p span,.cafe-touch .invitation-links small{font-size:16px}
+.cafe-touch .eg-entry>a{font-size:16px}

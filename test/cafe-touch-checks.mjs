@@ -15,7 +15,8 @@ export function cafeTouchFixtures(){
  const total=structuredClone(base);C.adjustBite(total,'moon-crunch',1);C.adjustBite(total,'moon-crunch',1);C.checkPlate(total);total.cafe.current.total.input='9';C.submitCafeNumber(total,9);C.supportCafe(total);
  const expanded=structuredClone(base);expanded.cafe.current.params.guests=12;expanded.cafe.current.params.bites=12;
  const completed=structuredClone(base);completed.cafe.served=6;
- return {base,discovered,overfull,total,expanded,completed};
+ const legacy=structuredClone(base);delete legacy.cafe.current.params;
+ return {base,discovered,overfull,total,expanded,completed,legacy};
 }
 // A genuinely finished ribbon task offers 4 groups of 3, distinct from the visible 2 by 2 table.
 export async function cafeOfferFixture(){

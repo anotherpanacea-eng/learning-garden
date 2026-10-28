@@ -46,6 +46,8 @@ def bounds(p):
  h.ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal page overflow')
  bad=p.locator('[data-cafe-touch] button,[data-cafe-touch] summary,[data-cafe-touch] a').evaluate_all('xs=>xs.filter(x=>x.checkVisibility()&&(x.getBoundingClientRect().width<44||x.getBoundingClientRect().height<44)).map(x=>x.textContent.trim())')
  h.ok(not bad,'visible native touch targets >=44px '+str(bad))
+ small=p.locator('[data-cafe-touch] *').evaluate_all("xs=>xs.filter(x=>!x.closest('svg')&&x.checkVisibility()&&(x.matches('input,button,select,textarea,summary')||[...x.childNodes].some(n=>n.nodeType===3&&n.textContent.trim()))&&parseFloat(getComputedStyle(x).fontSize)<16).map(x=>({text:x.textContent.trim().slice(0,100),font:getComputedStyle(x).fontSize}))")
+ h.ok(not small,'visible reading text and controls >=16px '+str(small))
 def ax(p,selector):
  c=p.context.new_cdp_session(p);root=c.send('DOM.getDocument')['root']['nodeId'];node=c.send('DOM.querySelector',{'nodeId':root,'selector':selector})['nodeId'];rows=c.send('Accessibility.getPartialAXTree',{'nodeId':node,'fetchRelatives':False})['nodes'];c.detach();return rows[0]
 def traverse(p,expected,size):
@@ -74,10 +76,10 @@ def ordinary(browser,base,f,width,height=1000):
  remove(p,'moon-crunch');h.ok(current(p)['recipe']['moon-crunch']==1,'repeated slot removes one ingredient unit')
  stable=h.book(p);p.evaluate('window.__oldJar.click();window.__oldCheck.click()');h.ok(h.book(p)==stable,'detached jar/check are inert')
  click(p,'check');h.ok(current(p)['stage']=='plate' and len(current(p)['plateAttempts'])==1,'explicit failed count check retains plate');h.ok(p.locator('[data-cafe-plate-remove]').count()==1 and p.locator(JAR).count()>0,'repair retains live editor')
- recipe=copy.deepcopy(current(p)['recipe']);p.locator('[data-cafe-repair="1"]').click();h.ok(current(p)['recipe']==recipe,'correct repair answer does not repair plate');h.ok(len(current(p)['repair']['attempts'])==1,'repair response recorded separately')
+ bounds(p);recipe=copy.deepcopy(current(p)['recipe']);p.locator('[data-cafe-repair="1"]').click();h.ok(current(p)['recipe']==recipe,'correct repair answer does not repair plate');h.ok(len(current(p)['repair']['attempts'])==1,'repair response recorded separately')
  jar(p,'moon-crunch').click();h.ok(len(current(p)['plateAttempts'])==1,'editing after repair does not check');click(p,'check');h.ok(current(p)['stage']=='total','valid explicit check enters total')
  p.locator('#cafe-answer').fill('9');p.locator('[data-cafe-number-form]').evaluate('x=>{window.__oldForm=x;window.__oldInput=x.querySelector("input")}');p.locator('[data-cafe-number-form] button[type="submit"]').click()
- old=copy.deepcopy(current(p));h.ok(old['total']['attempts']==[9] and old['total']['supported'],'wrong total retains attempt and opens support')
+ bounds(p);old=copy.deepcopy(current(p));h.ok(old['total']['attempts']==[9] and old['total']['supported'],'wrong total retains attempt and opens support')
  click(p,'revise-plate');h.ok(current(p)['params']==old['params'] and current(p)['total']==old['total'],'revision preserves frozen order and arithmetic work')
  safe=h.book(p);p.evaluate('window.__oldInput.value="4";window.__oldInput.dispatchEvent(new Event("input",{bubbles:true}));window.__oldForm.dispatchEvent(new Event("submit",{bubbles:true,cancelable:true}))');h.ok(h.book(p)==safe,'detached number input/submit are inert')
  remove(p,'moon-crunch');jar(p,'moon-crunch').click();click(p,'check');h.ok(current(p)['total']==old['total'],'explicit revised check preserves prior total work');reload(p);h.ok(current(p)['total']==old['total'],'reload preserves total input/attempt/support');click(p,'revise-plate')
@@ -108,7 +110,7 @@ def shortage_and_service(browser,base,f):
  p.locator('#cafe-answer').fill('4');p.locator('[data-cafe-number-form] button[type="submit"]').click()
  h.ok(current(p)['stage']=='stock' and not p.locator('[data-cafe-plate-remove]').count() and not p.locator(action('revise-plate')).count(),'stock has no revision controls')
  plan=copy.deepcopy(current(p)['cupboardPlan']);h.ok(plan['missing']==1,'known one-bite shortage')
- p.locator('#cafe-answer').fill('9');p.locator('[data-cafe-number-form] button[type="submit"]').click();click(p,'skip-stage')
+ p.locator('#cafe-answer').fill('9');p.locator('[data-cafe-number-form] button[type="submit"]').click();bounds(p);click(p,'skip-stage')
  before=copy.deepcopy(current(p));h.ok(h.book(p)['cafe']['stock']['moon-crunch']==3 and not p.locator(action('serve')).count(),'skip never fills the cupboard')
  h.click(p,'.cafe-gather-list a[href="#orchard/gather/moon-crunch"]');h.click(p,'[data-forage-start="moon-crunch"]');h.click(p,'[data-forage-action="map-help"]');h.click(p,'.hunt-plot.clue-intersection');h.click(p,'[data-forage-action="pack-help"]');h.click(p,'a.primary[href="#cafe"]');p.locator('[data-cafe-touch]').wait_for()
  h.ok(current(p)['cupboardPlan']==plan and current(p)['shortfall']==before['shortfall'],'real gathering preserves original shortfall work/plan');h.ok(h.book(p)['cafe']['stock']['moon-crunch']>=4,'native harvest fills actual stock')
@@ -118,6 +120,60 @@ def shortage_and_service(browser,base,f):
  p.evaluate('window.__oldNext=document.querySelector("[data-cafe-action=next]")');click(p,'next');waiting=h.book(p);p.evaluate('window.__oldNext.click()');h.ok(h.book(p)==waiting,'retained Next cannot advance twice')
  # A live counter captured before route exit must also be inert.
  p.evaluate('window.__routeJar=document.querySelector("[data-cafe-bite]");location.hash="#home"');p.locator('[data-cafe-touch]').wait_for(state='detached');safe=h.book(p);p.evaluate('window.__routeJar.click()');h.ok(h.book(p)==safe,'route-exited native jar is inert')
+
+def notes(p):
+ if p.locator('dialog.welcome-film[open]').count():h.click(p,'[data-film-skip]')
+ p.evaluate('location.hash="#notes"');p.locator('#download').wait_for()
+def download(p,label):
+ notes(p)
+ with p.expect_download() as d:h.click(p,'#download')
+ path=OUT/(label+'.json');d.value.save_as(path);return json.loads(path.read_text())
+def import_notes(p,report):
+ notes(p);p.locator('#progress-file').set_input_files({'name':'synthetic-cafe.json','mimeType':'application/json','buffer':json.dumps(report).encode()});h.click(p,'#progress-import-confirm');p.locator('#progress-import-confirm').wait_for(state='detached')
+def cafe(p):
+ if p.locator('dialog.welcome-film[open]').count():h.click(p,'[data-film-skip]')
+ p.evaluate('location.hash="#cafe"');p.locator('[data-cafe-touch]').wait_for()
+def new_explorer(p):
+ h.click(p,'#explorer-switch');h.click(p,'#explorer-new');h.click(p,'#explorer-create');cafe(p)
+def switch(p,owner):
+ h.click(p,'#explorer-switch');h.click(p,f'[data-select-explorer="{owner}"]');cafe(p)
+def retain_counter(p):
+ p.evaluate("window.__retained=[...document.querySelectorAll('[data-cafe-action],[data-cafe-bite],[data-cafe-plate-remove],[data-cafe-range],[data-cafe-page],#cafe-answer,[data-cafe-number-form]')]")
+def dispatch_counter(p):
+ p.evaluate("()=>{for(const x of window.__retained){if(x.tagName==='FORM')x.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));else if(x.tagName==='INPUT'){x.value='7';x.dispatchEvent(new Event('input',{bubbles:true}));}else x.click();}}")
+def boundaries_and_transfers(browser,base,f):
+ for key in ['legacy','expanded']:
+  p=setup(browser,f[key],820,'transfer-'+key);go(p,base);before=h.book(p);h.ok('params' in before['cafe']['current'],'legacy params normalized through actual app')
+  retain_counter(p);report=download(p,'transfer-'+key);h.ok(h.raw_report(report)==before,'actual '+key+' Notes preserves normalized full notebook');owner=h.active(p);import_notes(p,report);safe=h.book(p);dispatch_counter(p);h.ok(h.book(p)==safe,'all captured café controls inert after '+key+' import');cafe(p);reload(p)
+  again=download(p,'redownload-'+key);h.ok(h.raw_report(again)==before,'actual '+key+' import/reload/redownload preserves all roots');h.ok(h.active(p)!=owner,'transfer gets separate explorer')
+ p=setup(browser,f['total'],820,'saveoff-reset');go(p,base);original=h.active(p);new_explorer(p);click(p,'next');jar(p,'moon-crunch').click();other=h.active(p);other_report=download(p,'other-before-reset');cafe(p);switch(p,original);retain_counter(p);notes(p);p.locator('#remember').uncheck();h.ok('lasts only while this page stays open' in p.locator('[data-saving-status]').inner_text(),'actual persistence switch off')
+ cafe(p);click(p,'revise-plate');remove(p,'moon-crunch');report=download(p,'saveoff');h.ok(report['cafe']['current']['recipe']['moon-crunch']==1,'save-off actual download retains session work');h.ok(p.evaluate("()=>Object.keys(localStorage).every(k=>!k.startsWith('number-garden-v1:'))"),'save-off clears persisted explorer records')
+ cafe(p);retain_counter(p);notes(p);h.click(p,'#reset');h.click(p,'#confirm-reset');p.locator('#confirm-reset').wait_for(state='detached');safe=download(p,'reset');dispatch_counter(p);h.ok(h.raw_report(download(p,'reset-after-stale'))==h.raw_report(safe),'captured controls inert after real reset');h.ok(safe['cafe']['current'] is None and 'syntheticOther' not in safe,'reset clears only active notebook work')
+ # Resume saving through the real checkbox; save-off is not an artificial Storage fault.
+ p.locator('#remember').check();h.ok(p.locator('#remember').is_checked(),'saving can be restored');cafe(p);switch(p,other);h.ok(h.raw_report(download(p,'other-after-reset'))==h.raw_report(other_report),'reset/save-off preserve other explorer session work')
+
+def zero_and_rotation(browser,base,f):
+ seed=copy.deepcopy(f['base']);seed['cafe']['stock']['moon-crunch']=20
+ p=setup(browser,seed,390,'zero-rotation');go(p,base);jar(p,'moon-crunch').click();jar(p,'moon-crunch').click();click(p,'check');p.locator('#cafe-answer').fill('4');before=current(p)
+ p.evaluate('window.__rotationRoot=document.querySelector("[data-cafe-touch]")');p.set_viewport_size({'width':844,'height':390});p.wait_for_function('document.querySelector("[data-cafe-touch]")!==window.__rotationRoot');p.wait_for_function('document.activeElement?.id==="cafe-answer"')
+ h.ok(p.locator('#cafe-touch-tools').get_attribute('open') is None,'rotation keeps tools closed');h.ok(current(p)==before and p.locator('#cafe-answer').input_value()=='4','rotation preserves total input/work/focus');bounds(p)
+ p.locator('[data-cafe-number-form] button[type="submit"]').click();h.ok(current(p)['cupboardPlan']['missing']==0,'zero-shortfall original plan');click(p,'help');bounds(p);p.locator('#cafe-answer').fill('0');p.locator('[data-cafe-number-form] button[type="submit"]').click();h.ok(p.locator(action('serve')).is_visible(),'zero shortfall accepts actual zero');stock=h.book(p)['cafe']['stock']['moon-crunch'];click(p,'serve');h.ok(h.book(p)['cafe']['stock']['moon-crunch']==stock-4,'zero-shortfall service spends only actual recipe')
+
+def supper_and_routes(browser,base,f):
+ p=setup(browser,f['completed'],820,'supper-continuation');go(p,base);cafe(p);owner=h.active(p);before=h.book(p);new_explorer(p);switch(p,owner);h.ok(h.book(p)==before,'complete supper survives native explorer switch');h.ok(p.locator(action('new-game-plus')).is_visible() and p.locator(action('continue-cafe')).is_visible(),'complete actions remain visible after switch')
+ # Completed with a waiting order: neither continuation may replace that order or spend stock.
+ jar(p,'moon-crunch').click();waiting=current(p);stock=h.book(p)['cafe']['stock'];baseline=h.book(p)['cafe']['supper'];p.evaluate('window.__oldKeep=document.querySelector("[data-cafe-action=continue-cafe]")');click(p,'continue-cafe');safe=h.book(p);p.evaluate('window.__oldKeep.click()');h.ok(h.book(p)==safe and current(p)==waiting and safe['cafe']['stock']==stock and safe['cafe']['supper']==baseline,'Keep serving/duplicate preserves waiting work stock baseline')
+ p.evaluate('window.__oldPlus=document.querySelector("[data-cafe-action=new-game-plus]")');click(p,'new-game-plus');after=h.book(p);p.evaluate('window.__oldPlus.click()');h.ok(h.book(p)==after and current(p)==waiting and after['cafe']['stock']==stock,'Plan another gathering/duplicate preserves waiting order stock');h.ok(after['cafe']['supper']=={'round':2,'startedAtServed':6},'new gathering advances baseline exactly once')
+ h.click(p,'#cafe-touch-tools>summary');h.click(p,'#cafe-range-choices>summary');h.click(p,'[data-cafe-range="all"]');h.ok(current(p)==waiting and h.book(p)['cafe']['range']=='all','range change affects future orders only');click(p,'skip-guest');h.ok(current(p)['orderIndex']!=waiting['orderIndex'] and 1<=current(p)['params']['guests']<=12,'next actual guest uses selected full range')
+ # Tools/story and moved activities remain reachable through visible native controls.
+ if p.locator('#cafe-touch-tools').get_attribute('open') is None:h.click(p,'#cafe-touch-tools>summary')
+ h.click(p,'drawn-howto[data-how="cafe-order"] .dh-open');p.locator('drawn-howto[data-how="cafe-order"] .dh-panel').wait_for();bounds(p);h.click(p,'drawn-howto[data-how="cafe-order"] [data-dh="close"]');h.ok(p.locator('drawn-howto[data-how="cafe-order"] .dh-open').evaluate('x=>document.activeElement===x'),'guide close returns focus to visible tools trigger');bounds(p);h.click(p,'[data-start-path="cafe"]');p.wait_for_function('location.hash!=="#cafe"');p.locator('[data-cafe-touch]').wait_for(state='detached');h.ok(not p.locator('[data-cafe-touch]').count(),'introductory café story reachable');cafe(p)
+ h.ok(p.locator('#explorer-switch').is_visible() and p.locator('[data-cafe-touch] a[href="#notes"]').is_visible(),'picker and Notes visibly reachable');h.click(p,'#cafe-more-activities>summary');bounds(p)
+ links=p.locator('#cafe-more-activities a[href^="#cafe/"]').evaluate_all('xs=>[...new Set(xs.filter(x=>x.checkVisibility()).map(x=>x.getAttribute("href")))]');h.ok(len(links)>=4,'moved café benches offered')
+ for route in links:
+  h.click(p,f'#cafe-more-activities a[href="{route}"]');p.wait_for_function('(r)=>location.hash===r',arg=route);p.locator('[data-cafe-touch]').wait_for(state='detached');h.ok(not p.locator('[data-cafe-touch]').count(),'adjacent bench keeps own frame '+route);cafe(p)
+  if p.locator('#cafe-more-activities').get_attribute('open') is None:h.click(p,'#cafe-more-activities>summary')
+ h.click(p,'[data-cafe-touch] a[href="#home"]');p.wait_for_function('location.hash==="#home"');p.locator('[data-cafe-touch]').wait_for(state='detached');h.ok(not p.locator('[data-cafe-touch]').count(),'visible exit reaches home')
 
 def offer_exposure(browser,base,f):
  p=setup(browser,f['offer'],820,'offer-exposure');go(p,base)
@@ -129,6 +185,16 @@ def offer_exposure(browser,base,f):
  go(p,base);h.click(p,'#cafe-more-activities>summary');p.wait_for_function('()=>JSON.parse(localStorage.getItem("number-garden-v1:explorer-1")).baseline.draft.exposed')
  seen=h.book(p);h.ok('4x3' in seen['exposures'],'actual opening marks displayed offer');h.ok(seen['baseline']['draft']['exposed'],'actual opening qualifies pending check-in');h.click(p,'#cafe-more-activities>summary');h.click(p,'#cafe-more-activities>summary');h.ok(h.book(p)==seen,'reopening idempotent no attempts')
  jar(p,'moon-crunch').click();h.ok(p.locator('#cafe-more-activities').get_attribute('open') is not None,'actual opened drawer survives same-order redraw');h.ok(not current(p)['plateAttempts'],'drawer/jar never checks plate')
+
+ # Capture unexposed offer callbacks, then leave owner via the real picker/import.
+ for boundary in ['switch','import']:
+  q=setup(browser,f['offer'],820,'offer-stale-'+boundary);go(q,base);q.evaluate('window.__oldDrawer=document.querySelector("#cafe-more-activities");window.__oldConnection=document.querySelector("[data-connection-start]")');owner=h.active(q)
+  if boundary=='switch':new_explorer(q)
+  else:import_notes(q,download(q,'offer-import'))
+  safe=h.book(q);q.evaluate('window.__oldDrawer.open=true;window.__oldDrawer.dispatchEvent(new Event("toggle"));window.__oldConnection?.click()');h.ok(h.book(q)==safe,'stale offer toggle/start inert after '+boundary)
+  if boundary=='switch':
+   switch(q,owner);h.ok(not h.book(q)['baseline']['draft']['exposed'] and '4x3' not in h.book(q)['exposures'],'stale switch callback leaves old owner pending unexposed')
+  else:h.ok(not h.book(q)['baseline']['draft']['exposed'],'stale import callback leaves imported pending unexposed')
 
 def main():
  f=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {cafeTouchFixtures,cafeOfferFixture} from './test/cafe-touch-checks.mjs';console.log(JSON.stringify({...cafeTouchFixtures(),offer:await cafeOfferFixture()}));"],cwd=ROOT,text=True));server=None;base=os.environ.get('CAFE_TOUCH_TEST_URL')
@@ -142,7 +208,7 @@ def main():
   browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
   try:
    for w,height in [(320,1000),(820,1000),(1024,768)]:ordinary(browser,base,f,w,height)
-   additional(browser,base,f);shortage_and_service(browser,base,f);h.ok(not h.errors,'no page errors '+str(h.errors));h.ok(not h.console_errors,'no console errors '+str(h.console_errors));h.ok(not h.request_failures,'no failed requests '+str(h.request_failures));h.ok(not h.http_failures,'no HTTP failures '+str(h.http_failures))
+   additional(browser,base,f);shortage_and_service(browser,base,f);offer_exposure(browser,base,f);boundaries_and_transfers(browser,base,f);zero_and_rotation(browser,base,f);supper_and_routes(browser,base,f);h.ok(not h.errors,'no page errors '+str(h.errors));h.ok(not h.console_errors,'no console errors '+str(h.console_errors));h.ok(not h.request_failures,'no failed requests '+str(h.request_failures));h.ok(not h.http_failures,'no HTTP failures '+str(h.http_failures))
    (OUT/'receipt.json').write_text(json.dumps({'status':'passed','checks':h.checks,'base':base,'scope':'native Chrome320/820/1024, real notebook downloads/import, two explorers, computed accessibility, paging, overflow, explicit repairs, total revision and stale controls','limits':['Physical Safari untested','Speech audibility untested','Learning gain untested']},indent=2));print(f'Café touch browser: {h.checks} assertions passed; artifacts {OUT}')
   except Exception:
    (OUT/'failure.txt').write_text(traceback.format_exc())
