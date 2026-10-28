@@ -1,6 +1,6 @@
 # Spec281 · Dot's weather notes and tallies
 
-**Status: BUILD-READY finite commission after [six independent review lenses and a bounded content check](../reviews/281-weather-tallies-spec.md).** Implementation waits for the verified Rhythm Studio release. This narrows [116](116-field-guide-almanac.md)/[33](33-rebuilding-the-town.md) to one shared weather writer and one tally builder; the rest of either proposal remains uncommissioned. Exact text: [weather and tallies](../content/281-weather-tallies-text.md). Public examples and tests are synthetic. No personal learner records are incorporated.
+**Status: BUILD-READY finite commission after [six independent review lenses and a bounded content check](../reviews/281-weather-tallies-spec.md).** The Rhythm Studio release and startup qualification gates are fulfilled through PR210/211. The bounded implementation is under independent review; merge and canonical verification remain release gates. This narrows [116](116-field-guide-almanac.md)/[33](33-rebuilding-the-town.md) to one shared weather writer and one tally builder; the rest of either proposal remains uncommissioned. Exact text: [weather and tallies](../content/281-weather-tallies-text.md). Public examples and tests are synthetic. No personal learner records are incorporated.
 
 ## Teaching and boundary
 
