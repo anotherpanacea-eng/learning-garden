@@ -250,7 +250,7 @@ Worked example, *unfolded*: 1. Take off un: folded. 2. Take off ed: fold. 3. un 
 **Card 9. One letter or two?** Hopping has two p's: the root is hop. Hoping has one p: the root is hope, with its e taken off. One letter or two is a clue.
 Worked example, *Pip is hoping. The frog is hopping.*: 1. hoping: one p. Root: hope. 2. hopping: two p's. Root: hop. 3. Pip hopes for a book. The frog hops.
 
-**Card 10. Listen to word beats and vowel sounds.** Long words have beats, called syllables. Listen for the vowel sounds as we clap these word beats. In print, each chunk usually has a vowel letter: a, e, i, o, u, or y.
+**Card 10. Listen to word beats and vowel sounds.** Long words have beats, called syllables. Clap the beats and listen for vowel sounds. In print, each chunk usually has a vowel letter: a, e, i, o, u, or y.
 Worked example, *basket*: 1. Clap it with a grown-up: bas, ket. Two beats. 2. bas has a. ket has e. 3. b alone has no vowel letter. It is not a chunk here.
 
 **Card 11. Chunk, read, blend.** Two consonants between vowels? You can usually split between them. Read each chunk. Then run the chunks together.
