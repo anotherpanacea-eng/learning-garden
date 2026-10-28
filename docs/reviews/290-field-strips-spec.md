@@ -4,7 +4,7 @@
 
 ## Six-lens synthesis after repairs
 
-**BUILD-READY within the six reviewed lenses:0 P1 /0 remaining P2.** Three distinct P2 findings were repaired before build. An additional independent Claude adjudication of the exact repaired candidate is pending; runtime implementation has not begun.
+**BUILD-READY within the six reviewed lenses:0 P1 /0 remaining P2.** Three distinct P2 findings were repaired before build. Independent Claude adjudication of candidate829422ca1f1c17869e4869d53d59dfc83a4b19c2 also returned BUILD-READY with0P1/0P2 and six nonblocking P3 groups; runtime implementation has not begun.
 
 Each lens used a separate context, read the actual commission/content and relevant runtime, and returned its own findings. Root authored the commission and synthesized the independent reports; root did not substitute a checklist for those reviews.
 
@@ -29,3 +29,7 @@ The important contrast is `(2,3)` versus requested `(3,2)` on the twelve-cell fi
 The original whole, first amount and taken amount must remain visually distinct in actual rendered work. Runtime checks must exercise the real whole-report gate, native controls, hostile imported text, preservation and transfer, not only a small feature validator. Saved literal outcomes are not regraded. The supplied grid/explanations do not establish independent partitioning, explanation, general multiplication fluency, placement or mastery.
 
 Independent exact-candidate implementation review and repairs, expected-head merge, merged-tree verification, canonical deployment and hosted asset/browser proof remain required. Neither this receipt nor the broader draft PR158 authoring reviews clears that parent pack, an Act adapter or a film.
+
+## Nonblocking adjudication folds
+
+Before build, root clarified all-six-groups without changing case mathematics, owner schema, result predicates or scope: a supplied start fits only if both construction selections match; zero/one and one-cell wording is finite; a feature-local composed speech script protects decimal/slash values without changing the shared resolver; malformed feature fixtures must leave Notes/import and sibling gated saves usable; all six lifecycle route sites are named; unknown model bounds stay raw, unreadable helper flags disable their own action, change notices have precedence, and the title reads “Another way to a half.” These clarify the already commissioned behavior. A focused independent check of the folds precedes build; no full six-lens restart is required.

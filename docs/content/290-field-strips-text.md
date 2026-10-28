@@ -54,7 +54,7 @@ Explanation: **One fitting plan has two first strips and two taken rows. Four of
 
 Reason prompt: **Why do nine equal cells belong in the whole-field count? What would 2/3 of the original field look like instead?**
 
-### half-a-field · Another way to half
+### half-a-field · Another way to a half
 
 Prompt: **Shade 3/4 of the original field. Then take 2/3 of that first amount. How much of the original field is taken?**
 
@@ -132,14 +132,14 @@ Helper chrome: **Example field**, **Step {current} of {total}**, **Previous step
 - **Original whole field** (permanent frame label).
 - **First amount: {x}/{b} of the original field.**
 - **Take: {y}/{d} of that first amount.**
-- **Taken cells: {cells} of {total} equal cells in the original field.**
+- **Taken cells: {cells} of {total} equal cells in the original field.** For total1: **Taken cells: {cells} of the one cell in the original field.**
 - **Taken amount: {cells}/{total} of the original field.**
-- When a different reduced name exists: **Also named {reduced} of the original field.** This is a supplied equivalent name.
+- When a different reduced name exists and lies strictly between0 and1: **Also named {reduced} of the original field.** This is a supplied equivalent name. At zero use **This takes none of the original field.** At one use **This takes the whole original field.** Do not add the awkward “0 of” or “1 of” line.
 - **Each small cell is 1/{total} of the original field.** For total1: **The one cell is the original whole.**
 - **The current taken amount is smaller than the first amount.** Or **The current taken amount equals the first amount.** This is a computed current observation, not a saved prediction.
 - **The first amount is empty. The chosen second fraction is still {y}/{d}; taking it selects no cells.** Only when actual `x=0`.
 - **The equal cuts are supplied; the selected counts are yours to change.**
-- Source initial context in Notes/guide, per titled case: **Supplied first amount: {initialX}/{b}. Supplied fraction taken: {initialY}/{d}.** If a supplied initial already fits: **This supplied starting field already fits the request. It is not a learner-made comparison.**
+- Source initial context in Notes/guide, per titled case: **Supplied first amount: {initialX}/{b}. Supplied fraction taken: {initialY}/{d}.** If both supplied initial selections match their requests (not merely the final product): **This supplied starting field already fits the request. It is not a learner-made comparison.**
 
 Keep whole/cell/fraction text as HTML alongside diagrams; do not shrink essential readouts into SVG. The equation, if displayed: **{y}/{d} of {x}/{b} = {cells}/{total} of the original field.** Do not display a purported learner equation answer.
 
@@ -148,6 +148,8 @@ Keep whole/cell/fraction text as HTML alongside diagrams; do not shrink essentia
 Controls: **Remove first strip**, **Add first strip**, **Remove taken row**, **Add taken row**, **Compare**, **Clue**, **Hear**, **Working together**, **Working together reported**, **Previous invitation**, **Next invitation**, **Choose an invitation**, **More ideas**, **Grown-up guide**, **Download our notes**, **Grown-up notes**, **Keeper's Desk**, **Number explorations**, **Math pathways**, **Equal parts and the whole**, **Take a part of the first amount**, **One amount, two names**.
 
 Group headings: **Choose the first amount**, **Take part of that amount**, **Our field**, **Your checked field**, **A supplied field and a reason to discuss**. Checked work says **These are recorded comparisons, not a new check.** Numeric derived fields are prefixed **Computed from this checked plan:**; stored result text is prefixed **Recorded result:**. First/current/latest do not share an unlabelled picture.
+
+Use one task-level change notice at a time: a just-completed edit status takes precedence over the static plan/context-change banner. The checked section may separately label itself as older. Refusal/save notices retain their existing priority.
 
 Other finite lines:
 
@@ -164,6 +166,16 @@ Other finite lines:
 Notes headings: **Field Strips**, **Source invitation**, **Supplied starting field**, **Current editable field**, **First comparison**, **Latest retry**, **Original saved Field Strips data**. Show current editable heading only for readable supported drafts. Count: **1 comparison** / **{count} comparisons**.
 
 Support labels: **Clue opened**, **Hear requested**, **Working together reported**, and the three helper titles. Values: **Recorded before this comparison** / **Not recorded before this comparison** for snapshots; **Recorded here** / **Not recorded here** for current case; **Recorded for this explorer** / **Not recorded for this explorer** for global helper flags. **Earlier comparison feedback available: yes/no.** These are action flags, not help seen/comprehension/independence. Original guided text remains labelled supplied.
+
+## Finite Hear script
+
+Only for a supported readable current plan with recordable narration support. Request text in this order:
+
+1. The frozen invitation prompt. If guided steps exist, say **Guided example.** then those steps.
+2. The current **First amount**, **Take**, **Taken cells**, **Taken amount**, supplied equivalent/none/whole line and cell-size line above, using actual selections. Include the actual empty-first explanation when applicable.
+3. If history is unreadable, its finite history notice. If absent, the finite no-comparison line. Otherwise say **Your checked field.** then **This comparison used…**, followed by **Computed from this checked plan:** and its cell fraction of the original field. Read **Recorded result:** before each of the three frozen feedback lines for the latest-or-first snapshot; read **Earlier comparison feedback available: yes/no.**
+
+No current calculations are attributed to the saved enums. Feature-local speech preprocessing uses complete fraction tokens, expands integer numerator/denominator words, and reads decimal/slash expressions with “slash” rather than allowing the shared formatter to consume a trailing integer fragment. Tests inspect the actual final shared `spoken()` output/request, including `130`, `v2`, `3.5`, `1.5/2` and a normal `3/8`. Visible frozen text remains literal. No new shared speech mode or module change.
 
 ## Unavailable/preservation notices
 
