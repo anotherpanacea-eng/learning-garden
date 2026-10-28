@@ -8,7 +8,19 @@ const clone=v=>structuredClone(v);
 export function freshStory(){return {version:1,opening:'fresh',arrival:'storm',acts:{},seenScenes:[]};}
 function returningStory(){return {version:1,opening:'returning',acts:{},seenScenes:[]};}
 function supportedStory(s){
- return object(s)&&s.version===1&&['fresh','returning'].includes(s.opening)&&(!own(s,'arrival')||s.arrival==='storm')&&object(s.acts)&&Array.isArray(s.seenScenes)&&s.seenScenes.length<=10000&&s.seenScenes.every(code);
+ return object(s)&&s.version===1&&['fresh','returning'].includes(s.opening)&&(!own(s,'arrival')||['storm','mended','letter'].includes(s.arrival))&&object(s.acts)&&Array.isArray(s.seenScenes)&&s.seenScenes.length<=10000&&s.seenScenes.every(code);
+}
+// Context belongs to an explicit choice, never the default structural storm.
+// This helper deliberately reads no activity root and does not call storyView.
+export function storyArrivalContext(state){
+ const present=object(state)&&own(state,'story'),s=present?state.story:null;
+ const base={status:'missing',decisionStatus:'missing',choice:null,canChoose:true,reason:'eligible',hasStoryProgress:false,inheritedActI:false,inheritedActII:false,inheritedPageOne:false,inheritedPageTwo:false,inheritedLetter:false};
+ if(!present)return base;
+ if(!supportedStory(s))return {...base,status:'unavailable',decisionStatus:'unreadable',canChoose:false,reason:'unavailable'};
+ const hasStoryProgress=Object.keys(s.acts).length>0||s.seenScenes.length>0,common={...base,status:'ready',hasStoryProgress};
+ if(s.arrivalChosen===true&&own(s,'arrival')){const later=s.arrival!=='storm',letter=s.arrival==='letter';return {...common,decisionStatus:'chosen',choice:s.arrival,canChoose:false,reason:'chosen',inheritedActI:later,inheritedActII:letter,inheritedPageOne:later,inheritedPageTwo:letter,inheritedLetter:letter};}
+ if(own(s,'arrivalChosen')&&s.arrivalChosen!==false||own(s,'arrival')&&s.arrival!=='storm')return {...common,decisionStatus:'unreadable',canChoose:false,reason:'unreadable'};
+ return {...common,decisionStatus:'undecided',canChoose:!hasStoryProgress,reason:hasStoryProgress?'progress':'eligible'};
 }
 function validSupper(s,served){return object(s)&&Number.isSafeInteger(s.round)&&s.round>=1&&s.round<=166666667&&safeCount(s.startedAtServed)&&s.startedAtServed<=served;}
 function readableReceipt(r){return object(r)&&r.kind==='cafe-first-supper'&&r.version===1&&safeCount(r.served)&&(!own(r,'supper')||validSupper(r.supper,r.served));}
@@ -20,13 +32,13 @@ export function firstSupperReceipt(state){
  return receipt;
 }
 export function storyView(state){
- const present=object(state)&&own(state,'story'),record=present?state.story:null,receipt=firstSupperReceipt(state);
- const base={record,opening:'returning',parcelFound:false,oldMapRevealed:false,actIStatus:'missing',actI:null,receiptStatus:'missing',ended:false,receipt,eligible:receipt!==null,pageReady:false,pageVisible:false,pageAmount:'short'};
+ const present=object(state)&&own(state,'story'),record=present?state.story:null,receipt=firstSupperReceipt(state),arrival=storyArrivalContext(state);
+ const base={record,opening:'returning',parcelFound:false,parcelAvailable:false,oldMapRevealed:false,actIStatus:'missing',actI:null,receiptStatus:'missing',ended:false,receipt,eligible:receipt!==null,pageReady:false,pageVisible:false,pageAmount:'short',inheritedActI:arrival.inheritedActI,inheritedActII:arrival.inheritedActII,inheritedPageOne:arrival.inheritedPageOne,inheritedPageTwo:arrival.inheritedPageTwo,inheritedLetter:arrival.inheritedLetter};
  if(!present)return {status:'missing',...base};
  if(!supportedStory(record))return {status:'unavailable',...base};
  const hasAct=own(record.acts,'I'),act=hasAct?record.acts.I:null,known=object(act)&&typeof act.ended==='boolean';
- const ended=known&&act.ended===true,parcelFound=record.seenScenes.includes('parcel-found'),oldMapRevealed=record.seenScenes.includes('old-map-revealed'),eligible=ended||receipt!==null;
- return {status:'ready',...base,opening:record.opening,parcelFound,oldMapRevealed,actIStatus:hasAct?known?'ready':'unreadable':'missing',actI:act,receiptStatus:known&&own(act,'receipt')?readableReceipt(act.receipt)?'ready':'unreadable':'missing',ended,eligible,pageReady:parcelFound&&eligible,pageVisible:parcelFound&&eligible&&oldMapRevealed,pageAmount:keeperPageAmounts.includes(record.pageAmount)?record.pageAmount:'short'};
+ const ended=known&&act.ended===true,parcelFound=record.seenScenes.includes('parcel-found'),oldMapRevealed=record.seenScenes.includes('old-map-revealed')||record.seenScenes.includes('inherited-map-read'),eligible=ended||receipt!==null,pageReady=arrival.inheritedPageOne||parcelFound&&eligible;
+ return {status:'ready',...base,opening:record.opening,parcelFound,parcelAvailable:parcelFound||arrival.inheritedPageOne,oldMapRevealed,actIStatus:hasAct?known?'ready':'unreadable':'missing',actI:act,receiptStatus:known&&own(act,'receipt')?readableReceipt(act.receipt)?'ready':'unreadable':'missing',ended,eligible,pageReady,pageVisible:pageReady&&oldMapRevealed,pageAmount:keeperPageAmounts.includes(record.pageAmount)?record.pageAmount:'short'};
 }
 function canChange(state){return ['missing','ready'].includes(storyView(state).status);}
 function mutate(state,options,fn){
@@ -52,7 +64,7 @@ export function captureFirstSupper(state,options={}){
 }
 export function keepParcel(state,options={}){
  const v=storyView(state);if(v.status==='unavailable')return false;
- if(v.parcelFound)return true;
+ if(v.parcelAvailable)return true;
  return mutate(state,options,candidate=>{
   candidate.story.seenScenes.push('parcel-found');
   const current=storyView(candidate);if(current.receipt&&current.actIStatus!=='unreadable')captureInto(candidate);
@@ -62,6 +74,7 @@ export function keepParcel(state,options={}){
 export function revealOldMap(state,options={}){
  const v=storyView(state);if(v.status!=='ready'||!v.pageReady)return false;
  if(v.oldMapRevealed)return true;
+ if(v.inheritedPageOne)return mutate(state,options,candidate=>{candidate.story.seenScenes.push('inherited-map-read');});
  return mutate(state,options,candidate=>{
   candidate.story.seenScenes.push('old-map-revealed');
   const current=storyView(candidate);if(current.receipt&&current.actIStatus!=='unreadable')captureInto(candidate);

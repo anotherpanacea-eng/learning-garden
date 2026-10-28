@@ -1,5 +1,8 @@
 # 115. Rhythm Studio: fill the bar
 
+
+The bounded first runtime commission is [spec280](280-rhythm-first-bar.md). Its selected four-beat model, source-owned retention and finite content take precedence for that slice. This broader proposal does not commission the remaining cards or provisional song.
+
 Status: **proposed; awaiting independent spec review and a music-content check.** Part of the [new kinds of play proposal](../new-game-kinds.md). Builds on [Bell Studio, spec 48](48-bell-studio.md), which is merged. Every child-facing line is in [the companion text](../content/115-rhythm-studio-text.md); this spec holds the model and rules. Code, audio scheduling and art are for the implementation pass.
 
 ## Purpose
