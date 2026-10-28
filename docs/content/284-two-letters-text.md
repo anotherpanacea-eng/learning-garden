@@ -19,7 +19,7 @@ Recall link: **Change a letter for its reader** → `#post/letters`.
 Nuria reader label: **Nuria, a friend in Vadoalto**.
 Nuria purpose: **Thank Nuria for the seeds and ask her to find out about the readings. Use a friendly note.**
 Council reader label: **Members of Vadoalto's town council**.
-Council purpose: **Thank the council, request the readings and ask which door the courier should use. Use a formal letter.**
+Council purpose: **Thank the council, request the readings and ask whether the courier should enter by the front door. Use a formal letter.**
 
 ## Letter templates and eight gaps
 
@@ -111,7 +111,7 @@ Guided steps: empty.
 
 ### a3
 
-Line: **The seeds got here fine. ___**
+Line: **The reed seeds got here fine. ___**
 Prompt: **Which sounds most like this note to a friend?**
 
 1. `formal-thanks`: **We are most grateful.** — alternative, formal-for-friend. **That thanks Nuria too. It is more formal than this friendly note asks for.**
@@ -184,7 +184,7 @@ Worked steps:
 
 Heading: **Two readers, two letters**
 Shared: **Both letters say the seeds arrived. Both mention Willowbank's wish for the storm readings.**
-Differences: **Nuria is asked to find out whether her council will send the readings. The council is asked directly for them. Only the council letter asks where the courier should enter. The messages overlap, but they are not identical.**
+Differences: **Nuria is asked to find out whether her council will send the readings. The council is asked directly for them. Only the council letter asks whether the courier should enter by the front door. The messages overlap, but they are not identical.**
 Before label: **The supplied letter, with gaps**
 After label: **Your chosen words**
 Unanswered gap: **Words waiting**
@@ -208,7 +208,7 @@ Grown-up note: **Supplied choices show choices for these briefs. They do not sho
 - **Previous choice**; **Next choice**; **Read both**; **Keep this page**; **Revise as a new page**; **Choose a page**.
 - **Earlier pages**; **Previous pages**; **Next pages**; **Earlier choices**.
 - **Your words: {selected text}**
-- Outcome labels: fits **Suits this brief**; alternative **A different register**; other **Check this reader, meaning or letter part**. Always follow with the option's specific feedback.
+- Outcome labels: fits **Suits this brief**; alternative **A different register**; other **Check this reader, meaning, word form or letter part**. Always follow with the option's specific feedback.
 - **Choice {n} of {total}**; **{n} of {total} choices made**.
 - **Working together**; **Hear these words**.
 - Support labels: **Help opened**; **Read both opened**; **Narration requested**; **Working together reported**. Values **Yes** / **No**. **Support before this choice** labels the answer snapshot. **Guided steps supplied** labels a question with intrinsic worked steps. **Feedback available on revisit** labels revisiting an already answered question; no independent-attempt claim.
@@ -225,4 +225,4 @@ Grown-up note: **Supplied choices show choices for these briefs. They do not sho
 - Notes heading **Two Letters**; raw disclosure **Original Two Letters notes, including retained unreadable values**.
 - Entry/footer destinations **Post Office** → `#post`; **Change a letter** → `#post/letters`; **Grown-up notes** → `#notes`.
 
-Set A introduction: **The letter is here as a model. These short challenges do not change your letter choices.** Notes on later packets: **Same authored letters revisited.** Together reported button: **Working together reported**. Literal saved afterFeedback: **Feedback available on revisit: Yes/No**; No does not mean independent, unseen or unaided.
+Set A introduction: **Your letter is here to look back at, with the words you chose. These short challenges do not change your letter choices.** Notes on later packets: **Same authored letters revisited.** Together reported button: **Working together reported**. Literal saved afterFeedback: **Feedback available on revisit: Yes/No**; No does not mean independent, unseen or unaided.
