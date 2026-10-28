@@ -374,7 +374,7 @@ def journey(browser, width, base):
         p.goto(base+'#notes');click(p,'#reset');click(p,'#confirm-reset');go(p,base)
         ok('waterShares' not in book(p), 'notebook reset clears active water work')
         ok(p.evaluate("id=>Object.fromEntries(Object.entries(localStorage).filter(([k])=>k.startsWith('number-garden-v1:')&&k!=='number-garden-v1:'+id))",imported) == others, 'notebook reset preserves other explorers')
-        p.goto(base+'#notes');p.locator('#remember').uncheck();go(p,base);start(p);turn(p,'build');quantity(p,'fresh',1)
+        p.goto(base+'#notes');p.locator('dialog.welcome-film[open]').wait_for();click(p,'[data-film-skip]');p.locator('dialog.welcome-film').wait_for(state='detached');p.locator('#remember').uncheck();go(p,base);start(p);turn(p,'build');quantity(p,'fresh',1)
         ok(work(p)['bars']['all']['fresh'] == 2, 'save-off still supports the in-memory water activity')
         ok(p.evaluate("!Object.keys(localStorage).some(k=>k.startsWith('number-garden-v1:'))"), 'save-off retains no explorer notebook storage')
     finally:
