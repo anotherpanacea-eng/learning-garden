@@ -9,6 +9,7 @@ import functools
 import http.server
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import tempfile
@@ -41,14 +42,17 @@ def entry(p, section, case):
 def raw_report(s):
     return {k: v for k, v in s.items() if k not in ['title', 'exportedAt', 'note', 'explorer', 'recommendation']}
 
-def setup(browser, width, height, seed, label):
+def setup(browser, width, height, seed, label, second_seed=None):
     c = browser.new_context(viewport={'width': width, 'height': height}, has_touch=True,
                             reduced_motion='reduce', accept_downloads=True)
     contexts.append(c)
-    c.add_init_script('(seed=>{if(!localStorage.getItem("mixing-fixture")){' +
-                      'localStorage.setItem("number-garden-v1:explorer-1",JSON.stringify(seed));' +
-                      'localStorage.setItem("learning-garden-explorers",JSON.stringify({version:1,activeId:"explorer-1",explorers:[{id:"explorer-1",avatar:"sky",color:"blue",symbol:"leaf",createdAt:"2026-10-28T12:00:00.000Z"}]}));' +
-                      'localStorage.setItem("mixing-fixture","1");}})(' + json.dumps(seed) + ')')
+    profiles=[{'id':'explorer-1','avatar':'sky','color':'blue','symbol':'leaf','createdAt':'2026-10-28T12:00:00.000Z'}]
+    seeds={'explorer-1':seed}
+    if second_seed is not None:
+        profiles.append({'id':'explorer-2','avatar':'fern','color':'gold','symbol':'acorn','createdAt':'2026-10-28T12:00:00.000Z'})
+        seeds['explorer-2']=second_seed
+    fixture={'registry':{'version':1,'activeId':'explorer-1','explorers':profiles},'seeds':seeds}
+    c.add_init_script('(fixture=>{if(!localStorage.getItem("mixing-fixture")){for(const [id,seed] of Object.entries(fixture.seeds))localStorage.setItem("number-garden-v1:"+id,JSON.stringify(seed));localStorage.setItem("learning-garden-explorers",JSON.stringify(fixture.registry));localStorage.setItem("mixing-fixture","1");}})('+json.dumps(fixture)+')')
     c.add_init_script('window.mixingSpeechRequests=[];if(window.speechSynthesis){const native=window.speechSynthesis.speak.bind(window.speechSynthesis);window.speechSynthesis.speak=u=>{window.mixingSpeechRequests.push(u.text);return native(u);};}')
     p = c.new_page()
     pages.append((p, label))
@@ -147,6 +151,78 @@ def same_block_exit(p, base):
     ok(owner(p)==before,'actual Notes render keeps owner unchanged')
     go(p,base)
 
+def review_regressions(browser, base, fixtures):
+    # Actual never-initialized notebook, including its route-local picker path.
+    p=setup(browser,820,1180,fixtures['uninitialized'],'uninitialized-route')
+    go(p,base)
+    ok(book(p)==fixtures['uninitialized'],'initial exact route preserves raw freshState on disk')
+    # ExplorerStore always supplies garden.avatar on read, independently of routes.
+    # Seed that intrinsic profile field so exact picker comparisons isolate routing.
+    first_seed={**copy.deepcopy(fixtures['uninitialized']),'garden':{'avatar':'sky'}}
+    second_seed={**copy.deepcopy(fixtures['uninitialized']),'garden':{'avatar':'fern'}}
+    p=setup(browser,820,1180,first_seed,'uninitialized-picker',second_seed)
+    go(p,base)
+    ok(book(p)==first_seed,'initial exact route preserves avatar-only uninitialized notebook')
+    legacy=set(fixtures['base'])-set(first_seed)-{'syntheticOther'}
+    ok(not legacy.intersection(book(p)),'entry manufactures no legacy activity roots')
+    first_id=active(p)
+    click(p,'#explorer-switch');click(p,'[data-select-explorer="explorer-2"]')
+    ok(book(p)==second_seed,'picker switch preserves second uninitialized notebook exactly')
+    click(p,'#explorer-switch');click(p,f'[data-select-explorer="{first_id}"]')
+    ok(book(p)==first_seed,'switching back preserves first uninitialized notebook exactly')
+    button(p,'Open the table')
+    ok({k:v for k,v in book(p).items() if k!='mixingTable'}==first_seed,'Open adds only mixing owner beyond intrinsic avatar baseline')
+    snap(p,'uninitialized-route-picker')
+    # The current known model with a historical subset and unrecognized case ID.
+    p=setup(browser,820,1180,fixtures['smaller'],'supported-historical-subset');go(p,base)
+    before=copy.deepcopy(owner(p));select_case(p,'earlier-cloud')
+    ok(p.locator('#mt-focus').inner_text()=='Earlier cloud invitation' and 'Earlier frozen cloud goal.' in p.locator(VIEW).inner_text(),'unknown historical case displays frozen title/prompt')
+    set_pot(p,4,6);button(p,'Clue')
+    ok('Earlier frozen clue.' in p.locator('#mt-helper-focus').locator('..').inner_text(),'historical clue remains source-owned')
+    click(p,'[data-mt-close]');button(p,'Paint a stripe')
+    ok(observation(p,'earlier-cloud')['paintCount']==before['observations'][0]['paintCount']+1,'known-model smaller source remains editable and paintable')
+    p.locator('[data-mt-stripe] summary').click()
+    ok('Earlier retained matching response.' in p.locator('[data-mt-stripe]').inner_text(),'new historical Paint decodes own frozen feedback')
+    ok(owner(p)['source']==before['source'],'historical mutation preserves all frozen strings')
+    painted=copy.deepcopy(owner(p));report=download(p,base,'supported-subset-notes')
+    bring(p,base,report);go(p,base)
+    ok(owner(p)==painted,'supported subset survives actual import and reload')
+    # Exact finite grown-up model/evidence note, inspected through its native fold.
+    p=setup(browser,820,1180,fixtures['partial'],'grownup-and-bridge');go(p,base)
+    p.locator('.mt-grownup > summary').click()
+    section=(ROOT/'docs/content/287-mixing-table-text.md').read_text().split('## Grown-up model and evidence note')[1]
+    paragraphs=re.findall(r'^\*\*(.*?)\*\*$',section,re.M)
+    actual=p.locator('.mt-grownup > p').all_inner_texts()
+    ok(len(paragraphs)==6 and all(text in actual for text in paragraphs),'all six finite grown-up paragraphs are present verbatim')
+    select_case(p,'repair-sky');draft=copy.deepcopy(owner(p)['drafts'])
+    button(p,'Take this group to Whole Batches')
+    p.get_by_role('link',name='Return to the Mixing Table',exact=True).click()
+    ok(p.url.endswith('#studio/mixing') and not p.locator('[data-mt-close]').count(),'bridge Return stays at table and closes helper')
+    ok(p.locator('#mt-focus').evaluate('x=>document.activeElement===x'),'bridge Return keeps intentional pot heading focus')
+    ok(owner(p)['drafts']==draft,'bridge Return preserves exact saved pot')
+    snap(p,'grownup-bridge-return')
+    # Retained unreadable paint is unknown evidence, never a never-painted claim.
+    for key in ['unreadablePaint','unreadablePaintSection']:
+        p=setup(browser,820,1180,fixtures[key],key);go(p,base);select_case(p,'repair-sky')
+        before=copy.deepcopy(owner(p))
+        text=p.locator(VIEW).inner_text()
+        speak=p.locator(VIEW+' [data-speak]')
+        spoken=speak.get_attribute('data-speak') if speak.count() else ''
+        ok('No stripe painted' not in text and 'unpainted' not in text.lower(),'unreadable painted history is not described as absent in main view '+key)
+        ok('No stripe painted' not in (spoken or '') and 'unpainted' not in (spoken or '').lower(),'unreadable paint has no false unpainted Hear text '+key)
+        ok(not p.locator('[data-mt-helper="bridge"]').count(),'unreadable painted history cannot offer unpainted bridge '+key)
+        if speak.count():
+            click(p,VIEW+' [data-speak]')
+            ok(all('No stripe painted' not in x and 'unpainted' not in x.lower() for x in p.evaluate('mixingSpeechRequests')),'actual Hear request preserves unknown painted status '+key)
+        set_pot(p,6,6)
+        ok(owner(p)['observations']==before['observations'],'ungraded editing retains unreadable painted raw values '+key)
+        report=download(p,base,key+'-notes')
+        ok(report['mixingTable']['observations']==before['observations'],'actual download keeps unreadable observation/section raw '+key)
+        p.locator('.mt-notes > summary').click()
+        semantic=p.locator('.mt-notes > section').filter(has=p.get_by_role('heading',name='Repair the sky pot',exact=True)).inner_text()
+        ok('No paint recorded' not in semantic and 'No stripe painted' not in semantic,'semantic Notes retains unknown status '+key)
+        snap(p,key+'-semantic-notes')
+
 def main():
     fixtures=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {mixingFixtures} from './test/mixing-table-checks.mjs';console.log(JSON.stringify(mixingFixtures()));"],cwd=ROOT,text=True))
     server=None;base=os.environ.get('MIXING_TEST_URL')
@@ -167,6 +243,7 @@ def main():
         if os.environ.get('CHROME_PATH'): launch['executable_path']=os.environ['CHROME_PATH']
         browser=pw.chromium.launch(**launch)
         try:
+            review_regressions(browser,base,fixtures)
             for width,height in sizes:
                 p=setup(browser,width,height,fixtures['base'],f'mixing-{width}');go(p,base)
                 before=book(p)
@@ -264,7 +341,7 @@ def main():
             ok('Saving is off' in p.locator(VIEW).inner_text(),'save-off session disclosed')
             report=download(p,base,'save-off-notes');ok(next(x for x in report['mixingTable']['observations'] if x['caseId']=='equal-green')['first']['goal']=='fits','save-off memory downloadable')
             ok(not errors,'no page errors '+json.dumps(errors));ok(not faults,'no browser faults '+json.dumps(faults))
-            receipt={'status':'passed','checks':checks,'base':base,'viewports':sizes,'pageErrors':errors,'faults':faults,'scope':'actual app native controls and downloads; synthetic fictional explorers; speech requests only; physical iPad unverified'}
+            receipt={'status':'passed','checks':checks,'base':base,'viewports':sizes,'pageErrors':errors,'faults':faults,'scope':'actual app native controls and downloads; raw freshState initial-route disk retention; pre-existing uninitialized explorer switches preserve exact avatar-only baseline; ExplorerStore read supplies avatar and new creation supplies avatar/story independently of route initialization; synthetic fictional explorers; speech requests only; physical iPad unverified'}
             (OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(f'Mixing browser: {checks} assertions passed; artifacts {OUT}')
         except Exception:
             (OUT/'failure.txt').write_text(traceback.format_exc())
