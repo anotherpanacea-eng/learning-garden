@@ -163,7 +163,7 @@ Other finite lines:
 
 Notes headings: **Field Strips**, **Source invitation**, **Supplied starting field**, **Current editable field**, **First comparison**, **Latest retry**, **Original saved Field Strips data**. Show current editable heading only for readable supported drafts. Count: **1 comparison** / **{count} comparisons**.
 
-Support labels: **Clue opened**, **Hear requested**, **Working together reported**, and the three helper titles. Values: **Recorded before this comparison** / **Not recorded before this comparison** for snapshots; **Recorded here** / **Not recorded here** for current case; **Recorded for this explorer** / **Not recorded for this explorer** for global helper flags. **Feedback available before this comparison: yes/no.** These are action flags, not help seen/comprehension/independence. Original guided text remains labelled supplied.
+Support labels: **Clue opened**, **Hear requested**, **Working together reported**, and the three helper titles. Values: **Recorded before this comparison** / **Not recorded before this comparison** for snapshots; **Recorded here** / **Not recorded here** for current case; **Recorded for this explorer** / **Not recorded for this explorer** for global helper flags. **Earlier comparison feedback available: yes/no.** These are action flags, not help seen/comprehension/independence. Original guided text remains labelled supplied.
 
 ## Unavailable/preservation notices
 
