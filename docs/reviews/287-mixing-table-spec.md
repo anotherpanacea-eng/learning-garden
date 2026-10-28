@@ -29,3 +29,16 @@ Deduplicated original result: **0P1 /2P2**, both resolved in the candidate. No a
 The source audit attributes institutional source reads, exact finite arithmetic, all eight reachable goal constructions, and the actual endpoint RGB probe. In the proposed display rule, different ratios can share RGB pixels: white:blue1:11 and2:23 both display `[64,103,154]`. Matching therefore uses ordered ingredient identity, nonempty counts and exact cross-products, never pixel similarity. These are candidate mathematics checks, not execution of a future app.
 
 Subject/content and final independent specification adjudication are pending at this record's creation. Runtime implementation may begin only after their material findings are resolved. Subsequent implementation still requires independent Claude clearance on its exact candidate, proportionate actual browser/progress tests, expected-head merge and hosted release verification. No human-expert approval, physical iPad/Safari certification or learning-effectiveness claim follows.
+
+## Final adjudication round1 and repairs
+
+Claude Opus independently read exact candidate `af778b2e99a0a1d82e086dbb31ff7bfd55d76dfb` and returned **not build-ready:0P1 /4P2**. It did not execute code, browse sources or claim human expertise. These were additional findings beyond the six-lens draft reviews, not a retroactive clear verdict.
+
+- Make the unequal2:3equal-addition encounter explicit instead of referring to a supposed earlier encounter. Repair-sky and teaching now show2:3+2:2=4:5, and equal-green independently contrasts2:3+1:1=3:4; no visit order is assumed.
+- Notes must derive/display guided lines and supplied initial counts from the frozen case even when optional flags are false. Finite labels and a guided-heron regression requirement are specified; no redundant stored guidance flag was added.
+- Stored comparison/goal/feedbackCode must agree internally, and the code must be an own frozen feedback key. This validates agreement between recorded fields without regrading counts or goals against any key.
+- Align display labels and amount feedback. Same/Different proportions and Empty pot now have finite strings; same-miss points to the visible requested amounts instead of requiring invented per-case copy.
+
+Closely related optional clarifications define nonempty retained stripes, explicit Paint of a supplied nonempty start, the full no-op tuple including teaching, unreadable section/teaching behavior, unsupported-model read-only helpers, half-up picture rounding, source notice/origin mapping, and the exact visible text requested by Hear. Full counts and patterns remain available; no new teaching bench, save migration or generalized machinery was added.
+
+The independent subject/content reader separately passed all eight cases on the initial candidate; the changed teaching wording is receiving a bounded follow-up. Final repaired-candidate adjudication remains pending. No runtime is cleared by this record.

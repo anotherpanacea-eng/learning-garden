@@ -6,6 +6,8 @@ Companion to spec287. Original wording adapted from proposal201's first Shade Ta
 
 Title: **The Mixing Table**
 
+Source origin: **Original pretend recipes and equal-scoop picture model.**
+
 Invitation: **Scoop, change, and paint a stripe. Can a bigger pot keep the same recipe?**
 
 Opening action: **Open the table**
@@ -33,6 +35,8 @@ Total: **{n} scoops in all**; singular **1 scoop in all**.
 Ingredient controls: **Add one white** · **Take one white back** · **Add one blue** · **Take one blue back** · **Add one yellow** · **Take one yellow back** · **Add one red** · **Take one red back**. Show only the two source-owned ingredients for this invitation.
 
 Primary action: **Paint a stripe**
+
+Empty pot label: **Empty pot**
 
 Empty instruction: **Add a scoop before painting. An empty pot has no recipe to compare.**
 
@@ -66,10 +70,10 @@ Each source's initial pot is explicitly labelled **Supplied starting pot** until
 | --- | --- | --- | --- | --- |
 | guided-heron / **A bigger heron blue** | White:blue2:3; pot0:6 | **Keep 6 blue. Make the same proportions as 2 white for every 3 blue.** | **Six blue can make two groups of three.** | **Two groups of 3 blue need two groups of 2 white: 4 white and 6 blue.** / **Point to one group. What goes with its three blue?** |
 | more-heron / **Nine blue** | White:blue2:3; pot0:0 | **Make the same proportions, using 9 blue scoops.** | **How many groups of 3 blue fit into 9?** | **Three groups of 3 blue go with three groups of 2 white: 6 white and 9 blue.** / **How do the white groups match the blue groups?** |
-| repair-sky / **Repair the sky pot** | White:blue2:3; pot4:5 | **Keep 4 white. Repair this pot to match the sample's proportions.** | **Four white makes two groups of two. What blue goes with those groups?** | **4 white and 5 blue do not keep 2 for every 3. One more blue makes 4 white and 6 blue, two whole sample groups. You can repair a pot without emptying it.** / **Which scoop would you change, and why?** |
+| repair-sky / **Repair the sky pot** | White:blue2:3; pot4:5 | **Keep 4 white. Repair this pot to match the sample's proportions.** | **Four white makes two groups of two. What blue goes with those groups?** | **Adding 2 to both parts of 2 white and 3 blue makes 4 white and 5 blue, a different recipe. One more blue makes 4 white and 6 blue, two whole sample groups. You can repair a pot without emptying it.** / **Which scoop would you change, and why?** |
 | one-two / **Three little groups** | White:blue1:2; pot0:0 | **Make the same proportions, using 3 white scoops.** | **For each white scoop, find two blue.** | **Three groups of 1 white and 2 blue make 3 white and 6 blue. More paint can keep the same proportions.** / **How many blue go with each white?** |
 | white-change / **Change just the white** | White:blue1:2; pot1:2 | **Make 2 white and 2 blue. Compare its proportions with the 1 white, 2 blue sample.** | **Keep the two blue and add one white.** | **The sample has twice as many blue as white. A pot with 2 white and 2 blue has equal amounts. Adding only white changed this recipe.** / **What changed? What stayed the same?** |
-| equal-green / **The equal-parts return** | Yellow:blue1:1; pot1:1 | **Make 2 yellow and 2 blue. Does the equal-parts recipe stay the same?** | **Give each yellow one blue. Are any left over?** | **1 yellow for every 1 blue and 2 yellow for every 2 blue have the same proportions. Adding one to both keeps this equal-parts recipe. That was not true for the unequal 2 white, 3 blue recipe.** / **Why does adding one to each work for this recipe?** |
+| equal-green / **The equal-parts return** | Yellow:blue1:1; pot1:1 | **Make 2 yellow and 2 blue. Does the equal-parts recipe stay the same?** | **Give each yellow one blue. Are any left over?** | **1 yellow for every 1 blue and 2 yellow for every 2 blue have the same proportions. Adding one to both keeps this equal-parts recipe. For 2 white and 3 blue, adding one to both makes 3 white and 4 blue, a different recipe.** / **Why does adding one to each work for this recipe?** |
 | orange-difference / **One more yellow** | Red:yellow1:2; pot1:2 | **Make 3 red and 4 yellow. Compare its proportions with the 1 red, 2 yellow sample.** | **Both recipes have one more yellow than red. Does that make the groups the same?** | **Both have one more yellow than red. But three copies of 1 red and 2 yellow would need 3 red and 6 yellow, not 4 yellow. Same difference, different proportions.** / **Which comparison tells us the difference? Which tells us the recipe?** |
 | one-group / **Back to one group** | White:blue2:3; pot6:9 | **Change this pot to 2 white and 3 blue. Keep the same proportions.** | **The starting pot has three whole sample groups. Leave one group.** | **6 white and 9 blue can be split into three equal groups of 2 white and 3 blue. Taking away two complete groups leaves the same proportions. Taking the same number from both is not the rule.** / **What did you take away together?** |
 
@@ -106,7 +110,7 @@ Paint-count labels in Notes: **First paint** · **Latest retry** · **{n} paints
 
 Local familiarity labels: **No paint recorded here** · **First paint here** · **Painted before here**. No unseen/learned/mastered label.
 
-Composition-band caption: **{a} of {total} scoops are {first ingredient}; {b} of {total} are {second ingredient}. The patterns name the ingredients.**
+Composition-band caption: **Total scoops: {total}. {first ingredient}: {a}; {second ingredient}: {b}. The patterns name the ingredients.**
 
 ## Optional teaching and support
 
@@ -115,8 +119,8 @@ Controls: **Try one group** · **Clue** · **Another example** · **Show groups*
 Teaching heading: **Repeat the whole group**
 
 1. Supplied2white/3blue picture: **One group has 2 white and 3 blue.**
-2. Supplied4white/6blue picture in two outlines: **Two whole groups have 4 white and 6 blue. More paint, same proportions.**
-3. Side-by-side4:5/4:6: **4 white and 5 blue misses one blue from those two groups. It is a different recipe. Add one blue to repair it.**
+2. Supplied4white/6blue picture in two outlines: **Two whole groups have 4 white and 6 blue. Repeating the whole group makes more paint with the same proportions.**
+3. Side-by-side4:5/4:6: **Adding 2 to both parts of 2 white and 3 blue makes 4 white and 5 blue, a different recipe. One more blue repairs it to 4 white and 6 blue.**
 
 Teaching footer: **This worked example leaves your own pot unchanged. You can return at any step.**
 
@@ -151,6 +155,8 @@ Row labels: **Sample** · **Two groups** · **Three groups** · **Four groups** 
 Table footer: **The supplied rows repeat the whole recipe. Your pot's row shows what you made; it may differ.**
 
 For wb2:3 supplied rows, optional rule strip: **Blue is 3/2 of white, or 1.5 times white, in these sample rows. White : blue stays 2 : 3.**
+
+Current-pot ratio line, when its first ingredient is positive: **{second ingredient} divided by {first ingredient}: {b}/{a}. This row describes your pot.**
 
 For a current pot with first ingredient0: **Division by zero is not defined. Use the ordered counts and the picture instead.**
 
@@ -194,13 +200,17 @@ Save-off: **Saving is off. This table stays in this session. Download your notes
 
 Storage failure: **This table is in this session, but it could not be saved on this device. Download your notes.**
 
+Notes supplied-context labels (derived from the frozen case for every recorded Paint): **Guided example shown with this invitation** when guided lines are present; **Supplied starting pot: {a} {first ingredient} and {b} {second ingredient}** for a nonempty start; **Supplied start: an empty pot** for a zero start. These remain visible even when every optional support flag is false. They describe supplied context, not a claim that the initial counts were the learner’s own construction.
+
+Unreadable section: **Some retained entries cannot be read or matched to an invitation. Their originals stay in your notes.**
+
 Notes labels: **Ungraded pot** · **Recorded stripe counts** · **Recorded comparison** · **Invitation fit** · **Clue opened** · **Worked example opened** · **Groups shown** · **Table shown** · **Hear requested** · **Working together reported** · **Teaching opened** · **Feedback available for this paint**. False optional support: **Not recorded before this paint**, not no help in real life.
 
 Reset explanation: **The game's confirmed reset removes this explorer's table records from this device. It does not remove another explorer's work or files already downloaded.**
 
 ## Grown-up model and evidence note
 
-**This is an invented mathematical display toy. Each scoop is one exact model unit. Real paint does not obey this screen rule, and taking a scoop back edits a picture rather than unmixing paint. There are no real volume, mass or pigment-strength measurements here.**
+**This is an invented mathematical display toy. Each scoop is one exact model unit. This screen rule does not predict real paint behavior, and taking a scoop back edits a picture rather than unmixing paint. There are no real volume, mass or pigment-strength measurements here.**
 
 **The toy display averages the ingredient colors by scoop count. Same proportions give the same screen color under that rule. The converse does not hold: rounding can make different proportions look the same. Matching uses the ordered ingredient amounts, not pixel color. Counts, patterns and comparison text remain available.**
 
