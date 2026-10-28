@@ -37,3 +37,9 @@ Claude Opus adjudicated exact candidate `2143ab6448fefb6acd37a55b497ea39bf9af52f
 The remaining P2 was unauthored visible piece-count and split-part-length readouts. The companion now supplies exact0/1/n piece-count strings, each part's ordinary/1/½-unit forms, strict-interior-only part visibility and the exact ordered Hear sequence over visible content. Zero parts are not invented. Related bounded clarifications define sign/half formatting, source-order/nonempty-guidance reversal detection, Notes-only derived context, presentation values without personal-request attribution, plan-only changed headings, the minimum axis label set, explicit supplied example plan and extra-model-field retention. No case, outcome predicate, owner schema or mathematical scope changes.
 
 Focused exact-candidate repair adjudication is pending. No runtime build clearance is yet claimed.
+
+## Final specification clearance
+
+Claude Opus adjudicated exact repaired candidate `9cf5d267e1aea7a34b6972d1a59bc2cd482720ba`: **BUILD-READY,0 P1/0 P2**. It read the supplied complete spec/copy/review and exact repair diff, hand-checked the readouts and nine helpers, and executed nothing. The readout/visible-Hear P2 is closed; no case, schema, predicate or scope changed.
+
+Root folded nonblocking implementation-wording clarifications: the most recent check means latest-or-first; current-draft presentation labels stay separate from comparison labels; half-unit singular agrees; checked piece count and current context status have explicit Hear positions; bounded number tokens in visible frozen prose receive spoken formatting as do substitutions. These alter no mathematics or stored shape. The implementation review must inspect the actual final source/runtime together. This is the build freeze, not implementation, hosted, physical-device or efficacy clearance.

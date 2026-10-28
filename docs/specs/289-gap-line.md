@@ -1,6 +1,6 @@
 # Spec289 · Between the Marks (Gap Line)
 
-**Draft finite construction specification, 2026-10-28. Not build-cleared.** Companion: [finite original copy](../content/289-gap-line-text.md). Evidence and reuse: [source audit](../source-audits/289-gap-line.md). Fleet1215 owns this slice. Independent specification and mathematics/content reviews precede runtime implementation.
+**Finite construction specification, build-ready after independent review, 2026-10-28. Runtime remains unbuilt.** Companion: [finite original copy](../content/289-gap-line-text.md). Evidence and reuse: [source audit](../source-audits/289-gap-line.md). Fleet1215 owns this slice. Independent specification and mathematics/content reviews precede runtime implementation.
 
 ## One missing operation, rather than another below-zero lesson
 
