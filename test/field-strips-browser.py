@@ -195,6 +195,7 @@ def journey(browser,base,f,width,height):
     p.locator('[data-field-start]').focus();p.keyboard.press('Enter')
     ok(owner(p)['drafts']==[] and owner(p)['observations']==[],'Open only freezes source')
     ok({k:v for k,v in book(p).items() if k!='fieldStrips'}==before,'Open leaves all sibling roots unchanged')
+    ok(p.locator('.field-measure').get_by_text('The equal cuts are supplied; the selected counts are yours to change.',exact=True).is_visible(),'supplied-cuts disclosure remains beside actual material')
     bounds(p,width in [820,1024]);art(p,f'entry-{width}')
     first_speech(p)
     for c in owner(p)['source']['cases']:
@@ -244,10 +245,10 @@ def journey(browser,base,f,width,height):
 
 
 def geometry_keyboard(browser,base,f):
-    for width,height in [(744,1024),(768,1024),(950,768),(880,900)]:
+    for width,height in [(820,1180),(1024,768),(744,1024),(768,1024),(950,768),(880,900)]:
         p=setup(browser,width,height,f['base'],'geometry-'+str(width));go(p,base);click(p,'[data-field-start]')
         for case,x,y in [('half-three-quarters',0,0),('half-three-quarters',4,2),('keep-it-all',2,3),('empty-first',0,1)]:
-            select_case(p,case);set_plan(p,case,x,y);bounds(p);art(p,f'geometry-{width}-{case}-{x}-{y}')
+            select_case(p,case);set_plan(p,case,x,y);bounds(p,width in [820,1024]);art(p,f'geometry-{width}-{case}-{x}-{y}')
     p=setup(browser,820,1180,f['base'],'keyboard');go(p,base);p.locator('[data-field-start]').focus();p.keyboard.press('Enter')
     for key,count in [('columnsTaken',3),('rowsTaken',1)]:
         for _ in range(count):p.locator(f'[data-field-move="{key}"][data-delta="1"]').focus();p.keyboard.press('Space')
@@ -278,12 +279,23 @@ def retained(browser,base,f):
             ok('Compare when you want to keep this version' not in text,'unavailable Compare no keep invitation')
         if key in ['unreadableDraft','unreadableSupport']:
             hear=p.locator(VIEW+' [data-speak]');ok(hear.count()==0 or hear.is_disabled(),'unrecordable/unreadable Hear disabled')
+        if key=='unreadableSupport':
+            more=view(p).get_by_text('More ideas',exact=True);more.click();text=view(p).inner_text()
+            ok("Part of this invitation's saved work cannot be read here." in text,'unreadable support gets per-invitation main notice')
+            ok('Choose Working together' not in text,'unreadable support never invites unrecordable help')
+            for control in ['[data-field-together]','[data-field-helper="clue"]']:
+                ok(p.locator(control).is_disabled(),'unreadable support action disabled '+control)
+            ok(owner(p)==before,'unreadable support disclosure and folds preserve exact raw owner')
         if key=='unreadableRecord':ok('Earlier comparisons are retained but cannot be read here.' in text and 'No comparison recorded here yet' not in text,'unknown history never absent')
         if key=='partialTeaching':helper(p,'nested');click(p,'[data-field-close]');ok(owner(p)['teaching']['equivalent']=='unknown','readable helper preserves unknown neighbor')
         report=download(p,base,key);notes=semantic(p)
         expected=owner(p);ok(report['fieldStrips']==expected,'retained raw owner actual download '+key)
         if key not in ['partialTeaching']:ok(expected==before,'read-only render/download never alters raw owner '+key)
         if key=='unattributed':ok('Some earlier Field Strips data cannot be read here.' in notes,'Notes discloses unattributed retained section entries')
+        if key=='unreadableSupport':
+            affected=p.locator('[data-field-notes-case="half-three-quarters"]')
+            ok("Part of this invitation's saved work cannot be read here." in affected.inner_text(),'unreadable support gets per-invitation Notes notice')
+            ok('Working together reported: Not recorded here' not in affected.inner_text(),'unreadable support never reported as known absent')
         if key=='unknownHelper':ok('unknown' in notes.lower(),'missing opened-helper details remain unknown')
         if key in ['unknown','bounds','unreadableDraft']:
             case=p.locator('[data-field-notes-case="half-three-quarters"]');ok(case.count()==1 and 'Current editable field' not in case.inner_text(),'unsupported/unreadable draft never labelled editable in Notes')
@@ -311,7 +323,7 @@ def speech_and_saving(browser,base,f):
     p=setup(browser,820,1180,f['speechTokens'],'speech-tokens');go(p,base);first_speech(p)
     if p.evaluate('fieldSpeechRequests.length'):
         text=p.evaluate('fieldSpeechRequests[0]');(OUT/'speech-tokens.txt').write_text(text)
-        ok('Keep 130, v2, 3.5, 1.5 slash 2, 1 slash 2.5, one over one, four over nine and three over eight literal.' in text,'actual final shared speech preserves full numeric and prose tokens')
+        ok('Keep 130, v2, 3.5, 1.5 slash 2, 1 slash 2.5, one over one, four over nine and three over eight literal. take one over two. three over eight. 1.5 slash 2. 1 slash 2.5. 130 v2 3.5' in text,'actual final shared speech preserves full numeric and prose tokens')
     # An unavailable-voice runtime is a separate explicit fixture, not a claim about installed voices.
     p=setup(browser,820,1180,f['base'],'no-local-voice');p.context.add_init_script('Object.defineProperty(window.speechSynthesis,"getVoices",{value:()=>[]});');go(p,base);click(p,'[data-field-start]');first_speech(p)
     p=setup(browser,820,1180,f['partial'],'storage-failure');go(p,base);select_case(p,'two-thirds-twice');p.evaluate("()=>{window.originalFieldSet=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw new DOMException('Synthetic storage failure','QuotaExceededError')}}")

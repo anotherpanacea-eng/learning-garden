@@ -153,6 +153,9 @@ Use one task-level change notice at a time: a just-completed edit status takes p
 
 Other finite lines:
 
+- **Field changed.** A neutral status for an edit returning to the already-kept plan/context.
+- **This field and help context already match the kept comparison.** A no-op Compare acknowledgement.
+
 - **Before trying the rows, what do you expect: less, the same, or more than the first amount? Tell each other if you like. Nothing spoken is recorded or marked.**
 - **This comparison used {checkedX}/{b} of the original field, then {checkedY}/{d} of that first amount.**
 - **Your field changed since this comparison.** Only with supported model and readable draft/history and a real known-plan difference.
@@ -172,7 +175,7 @@ Support labels: **Clue opened**, **Hear requested**, **Working together reported
 Only for a supported readable current plan with recordable narration support. Request text in this order:
 
 1. The frozen invitation prompt. If guided steps exist, say **Guided example.** then those steps.
-2. The current **First amount**, **Take**, **Taken cells**, **Taken amount**, supplied equivalent/none/whole line and cell-size line above, using actual selections. Include the actual empty-first explanation when applicable.
+2. The current **First amount**, **Take**, **Taken cells**, **Taken amount**, supplied equivalent/none/whole line, cell-size line and current size-relation line above, using actual selections. Include the actual empty-first explanation when applicable.
 3. If history is unreadable, its finite history notice. If absent, the finite no-comparison line. Otherwise say **Your checked field.** then **This comparison used…**, followed by **Computed from this checked plan:** and its cell fraction of the original field. Read **Recorded result:** before each of the three frozen feedback lines for the latest-or-first snapshot; read **Earlier comparison feedback available: yes/no.**
 
 No current calculations are attributed to the saved enums. Feature-local speech preprocessing reads complete standalone integer fractions as “{n words} over {d words}”, with English cardinal words 0…36 and complete numeric literals for larger integers; there is no ordinal/singular/plural rule. Other digit/slash expressions use “slash”, including decimal numerator or denominator and numeric fragments adjacent to word characters, so the shared formatter cannot consume a trailing integer fragment. Tests inspect the actual final shared `spoken()` output/request, including `130`, `v2`, `3.5`, `1.5/2`, `1/2.5`, `1/1`, `4/9` and a normal `3/8`. Visible frozen text remains literal. No new shared speech mode or module change.
