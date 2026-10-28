@@ -43,3 +43,9 @@ Claude Opus reviewed exact candidate `4ec1b7652ca2f94129f26c4cb2547a4f82c99fd8`:
 Related optional clarifications state missing/nonobject teaching handling, the exact deferred-film/Notes/map seams, always-open family links and fresh known fields for a new latest snapshot rather than transplanting older snapshot metadata. The prior latest is intentionally unretained under the disclosed first/latest rule; this does not discard untouched source/owner/first data. No new model, engine, quota, migration or curricular scope is introduced.
 
 Repaired-candidate independent adjudication remains pending. No runtime has been built or cleared by this record.
+
+## Final specification clearance
+
+Claude Opus re-adjudicated exact repaired candidate `1b8dd8272fdb94f2a03af06f6633d2a41fcbb92d`: **BUILD-READY, 0 P1 / 0 P2**. Both P2s are resolved. A separate bounded subject reread also cleared the revised feedback and neutral historical-helper wording. Claude read the supplied public documents and hand-checked the sixteen-plan arithmetic, but executed nothing, rendered nothing and claimed no human expertise. Existing app seams had already been verified by the dependency reviewer; this re-adjudication did not independently inspect those files.
+
+Root folded nonblocking wording clarifications: remove an outdated bold display label; keep evaluation jargon out of the child helper notice while retaining the full Notes disclosure; treat absent opened-helper details as unknown overlap; and preserve unknown fields on continuing draft/wrapper objects. These change no grading predicate, source case, owner, helper or mathematical scope. This is the build freeze. Runtime implementation, its independent exact-head review and all execution/merge/deploy gates remain outstanding.

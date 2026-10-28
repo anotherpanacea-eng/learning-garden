@@ -158,7 +158,7 @@ Three-part helper title: **Count all three parts**
 
 Every helper footer: **This is a supplied worked example. Your own bars stay unchanged. Return at any step.**
 
-Own-invitation helper notice, when its frozen steps refer to the current case: **This example uses this invitation’s own recipe and given amount. It may supply part or all of a fitting plan. A later fit has this example as support; it is not fresh new-use evidence.** Opening does not establish that every step was viewed.
+Own-invitation helper notice, when its frozen steps refer to the current case: **This example uses this invitation’s own recipe and given amount. It may supply part or all of a fitting plan. Your own bars stay yours to change.** Opening does not establish that every step was viewed.
 
 Together: **Choose Working together if a grown-up is helping with this invitation. It is your report, not a test.**
 
@@ -176,7 +176,7 @@ Discovery: **Equal Blocks** / **Build equal blocks to share a whole, then try a 
 
 Notes: **Ungraded bars** · **First comparison** · **Latest retry** · **{n} comparisons**; singular **1 comparison** · **Recorded proportions** · **Recorded reference** · **Recorded given amount** · **Block counts** · **Scoops in every block** · **Reference marker** · **Clue opened** · **Hear requested** · **Working together reported** · **Whole example opened** · **Share example opened** · **Three-part example opened** · **Feedback available for this comparison**.
 
-Notes helper-overlap labels, derived from frozen helper steps when the corresponding teaching-before flag is true: **Whole example opened for this invitation’s own recipe and given amount** · **Share example opened for this invitation’s own recipe and given amount** · **Three-part example opened for this invitation’s own recipe and given amount**. Follow each with **The example may supply part or all of a fitting plan; opening does not show which steps were viewed.** If an opened helper’s details are unreadable: **Earlier opened-example details are unavailable; overlap with this invitation is unknown.** Do not treat unknown overlap as no answer support.
+Notes helper-overlap labels, derived from frozen helper steps when the corresponding teaching-before flag is true: **Whole example opened for this invitation’s own recipe and given amount** · **Share example opened for this invitation’s own recipe and given amount** · **Three-part example opened for this invitation’s own recipe and given amount**. Follow each with **The example may supply part or all of a fitting plan; opening does not show which steps were viewed.** If an opened helper’s details are missing or unreadable: **Earlier opened-example details are unavailable; overlap with this invitation is unknown.** Do not treat unknown overlap as no answer support.
 
 Notes supplied context: **Supplied starting blocks: {ordered named counts}** · **Supplied value: {u} scoops in every block** or **Supplied value: not chosen** · **Supplied reference: {reference}** or **Supplied reference: not placed** · **Guided example shown with this invitation** when guided lines present. Show this context for every recorded case even if optional flags false. False flag: **Not recorded before this comparison**, not no help in real life.
 
