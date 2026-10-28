@@ -50,6 +50,8 @@ Beat-strip prose: “Four beats: one, two, three, four.” Moving marker speech/
 
 Controls **Play my bar** · **Stop** · **How full is this bar?** · **Move left** · **Move right** · **Swap for…** · **Remove** · **Clear this bar** · **Keep this rhythm** · **Keep the bar facts** · **Choose another rhythm** · **Start another version**.
 
+After adding: “Added a {block}. {n} of four beats filled.” Keep keyboard focus on the same palette control without expanding the edit tools. After Clear: “Bar cleared. All four beats are unfilled.”
+
 Selection: “Choose a block to move, swap or remove.” Selected: “Selected: {block}, position {n}.”
 
 Clear confirmation: **Clear the current bar?** / “Your earlier checks and kept version stay.” / **Yes, clear this bar** · **Keep this bar**.
@@ -125,6 +127,8 @@ Panel **About these sounds** / “These are simple330Hz computer tones, not reco
 Panel **About examples and records** / “Audio requested does not establish that sound played, was heard or was copied by ear. Shown examples, worked teaching and earlier feedback are retained separately. An exact code match is an arrangement fact, not a musical-quality, reading or fraction-mastery judgment. Clapping or performing away from the screen is not observed here.”
 
 Notes title **Rhythm Studio · bars and examples**. “Current and kept bars, frozen source versions and earlier comparisons stay separate. Earlier outcomes are shown as recorded. Supplied examples and support do not change another activity's records.”
+
+Current labels also include **My bar sound not requested in this version** and **Example not shown in this version**. Kept echo labels include **Target picture shown before this version was kept in this version** and the corresponding **not shown** wording.
 
 Support labels apply to the record context: a kept snapshot says “before this version was kept,” a current version says “in this version,” and a comparison says “before this check in this version.” Own bars have no reference/target labels.
 

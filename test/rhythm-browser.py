@@ -136,6 +136,8 @@ def clear(p):
     click(p, '[data-rhythm-clear]')
     ok(p.locator('[data-rhythm-confirm]').inner_text() == 'Yes, clear this bar', 'clear confirmation names the action')
     click(p, '[data-rhythm-confirm]')
+    ok(p.locator('[data-rhythm-add="q"]').evaluate('x=>document.activeElement===x'), 'clearing returns keyboard focus to the quarter-note palette control')
+    ok(p.locator('#rhythm-status').inner_text() == 'Bar cleared. All four beats are unfilled.', 'clearing announces the unchanged four-beat frame')
 
 
 def keep(p):
@@ -205,8 +207,10 @@ def main():
                 click(p, '[data-rhythm-play="current"]')
                 ok(not current(p)['support']['responseRequested'], 'empty Play is not a sound request')
                 p.locator('[data-rhythm-play-status="current"]').filter(has_text='nothing to play').wait_for()
+                ok('unfilled end' not in p.locator('[data-rhythm-play-status="current"]').inner_text(), 'empty Play does not describe a running incomplete bar')
                 click(p, '[data-rhythm-teach]')
                 ok(current(p)['support']['teachingShown'], 'teaching exposure saved before worked picture')
+                ok(not p.get_by_text('Support in this saved version', exact=True).count(), 'teaching view omits the working-response support summary')
                 ok('One whole note' in p.locator('[data-rhythm-root]').inner_text(), 'whole-note explanation appears')
                 click(p, '[data-rhythm-teach-step="1"]')
                 ok('Two half notes' in p.locator('[data-rhythm-root]').inner_text(), 'manual step compares two halves')
@@ -220,7 +224,7 @@ def main():
                 ok(not p.locator('[data-rhythm-move],[data-rhythm-remove],[data-rhythm-replace]').count(), 'appending does not implicitly select a block or expand edit controls')
                 labels = [' '.join(x.split()) for x in p.locator('[data-rhythm-slot]').all_text_contents()]
                 ok(labels == ['2 beats1/2 bar', '1 beat1/4 bar'] or labels == ['2 beats 1/2 bar', '1 beat 1/4 bar'], 'compact blocks preserve visible beat counts and bar fractions: ' + str(labels))
-                ok(p.locator('[data-rhythm-slot]').evaluate_all("xs=>xs.map(x=>x.getAttribute('aria-label'))") == ['Half note, 2 beats, one half of this bar', 'Quarter note, 1 beat, one quarter of this bar'], 'compact blocks retain full spoken note and fraction names')
+                ok(p.locator('[data-rhythm-slot]').evaluate_all("xs=>xs.map(x=>x.getAttribute('aria-label'))") == ['Half note, two beats, one half of this bar', 'Quarter note, one beat, one quarter of this bar'], 'compact blocks retain full spoken note and fraction names')
                 before_refusal = copy.deepcopy(book(p))
                 click(p, '[data-rhythm-add="h"]')
                 ok(book(p) == before_refusal, 'overfull append refuses without changing notebook')
@@ -262,6 +266,7 @@ def main():
                 click(p, '[data-rhythm-confirm]')
                 ok(current(p)['kept']['sequence'] == ['rq', 'rq'], 'kept replacement requires explicit confirmation')
                 click(p, '[data-rhythm-choose]')
+                ok(not p.get_by_text('Support in this saved version', exact=True).count(), 'chooser omits the earlier working-response support summary')
                 choose(p, 'echo-1')
                 ok(p.locator('[data-rhythm-play="reference"]').evaluate("x=>!!(x.compareDocumentPosition(document.querySelector('[data-rhythm-play=\"current\"]'))&Node.DOCUMENT_POSITION_FOLLOWING)"), 'reference Play precedes the child bar controls')
                 ok(p.locator('[data-rhythm-show]').evaluate("x=>!!(x.compareDocumentPosition(document.querySelector('[data-rhythm-add=\"q\"]'))&Node.DOCUMENT_POSITION_FOLLOWING)"), 'Show example precedes the editor palette')
@@ -309,6 +314,16 @@ def main():
                     keep(p)
                 click(p, '[data-rhythm-version]')
                 ok(current(p)['sequence'] == [] and not current(p)['support']['exampleShown'], 'another version retains a separate blank response')
+                p.locator('[data-rhythm-add="q"]').focus()
+                p.keyboard.press('Enter')
+                ok(current(p)['sequence'] == ['q'], 'keyboard Enter appends one quarter note')
+                ok(p.locator('[data-rhythm-add="q"]').evaluate('x=>document.activeElement===x'), 'append retains focus on the same palette control')
+                p.keyboard.press('Enter')
+                ok(current(p)['sequence'] == ['q', 'q'], 'second Enter on the same focused button appends again')
+                ok(p.locator('[data-rhythm-add="q"]').evaluate('x=>document.activeElement===x'), 'repeated append retains palette focus')
+                ok(p.locator('#rhythm-status').inner_text() == 'Added a quarter note. Two of four beats filled.', 'append announces the note and current filled beats without stealing focus')
+                ok(not p.locator('[data-rhythm-move],[data-rhythm-remove],[data-rhythm-replace]').count(), 'keyboard append keeps editing controls closed until selection')
+                clear(p)
                 add(p, 'q')
                 partial_version = book(p)['rhythm']['current']
                 # Native keyboard activates the same palette action as touch.
