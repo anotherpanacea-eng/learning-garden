@@ -157,7 +157,7 @@ Other finite lines:
 - **This comparison used {checkedX}/{b} of the original field, then {checkedY}/{d} of that first amount.**
 - **Your field changed since this comparison.** Only with supported model and readable draft/history and a real known-plan difference.
 - **Your field or help context changed. Compare when you want to keep this version.** Only while Compare is available and a known plan/context difference exists.
-- **Field changed. Compare when you want to keep this version.** Only while Compare is available after editing; otherwise **Field changed. Comparing is unavailable while part of the saved comparison context cannot be read.**
+- **Field changed. Compare when you want to keep this version.** Only while Compare is available and a known plan/context difference remains after editing; an edit returning to the kept version shows no “keep this version” invitation. Otherwise, if Compare is unavailable, **Field changed. Comparing is unavailable while part of the saved comparison context cannot be read.**
 - **No comparison recorded here yet. Your field is ready to change.** Only if draft readable and supported model.
 - **Choose Working together if a grown-up is helping with this invitation. This records your report.** Only for supported model/readable support.
 - **Tell a grown-up, or point to the cells. Nothing spoken is recorded or marked.**
@@ -175,7 +175,7 @@ Only for a supported readable current plan with recordable narration support. Re
 2. The current **First amount**, **Take**, **Taken cells**, **Taken amount**, supplied equivalent/none/whole line and cell-size line above, using actual selections. Include the actual empty-first explanation when applicable.
 3. If history is unreadable, its finite history notice. If absent, the finite no-comparison line. Otherwise say **Your checked field.** then **This comparison used…**, followed by **Computed from this checked plan:** and its cell fraction of the original field. Read **Recorded result:** before each of the three frozen feedback lines for the latest-or-first snapshot; read **Earlier comparison feedback available: yes/no.**
 
-No current calculations are attributed to the saved enums. Feature-local speech preprocessing uses complete fraction tokens, expands integer numerator/denominator words, and reads decimal/slash expressions with “slash” rather than allowing the shared formatter to consume a trailing integer fragment. Tests inspect the actual final shared `spoken()` output/request, including `130`, `v2`, `3.5`, `1.5/2` and a normal `3/8`. Visible frozen text remains literal. No new shared speech mode or module change.
+No current calculations are attributed to the saved enums. Feature-local speech preprocessing reads complete standalone integer fractions as “{n words} over {d words}”, with English cardinal words 0…36 and complete numeric literals for larger integers; there is no ordinal/singular/plural rule. Other digit/slash expressions use “slash”, including decimal numerator or denominator and numeric fragments adjacent to word characters, so the shared formatter cannot consume a trailing integer fragment. Tests inspect the actual final shared `spoken()` output/request, including `130`, `v2`, `3.5`, `1.5/2`, `1/2.5`, `1/1`, `4/9` and a normal `3/8`. Visible frozen text remains literal. No new shared speech mode or module change.
 
 ## Unavailable/preservation notices
 
