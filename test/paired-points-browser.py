@@ -164,7 +164,7 @@ def main():
                 snap(t,f'historical-ticks-{width}')
                 # Separate native Storage write-fault context; normal journeys keep real writes.
                 _,quota=setup(browser,width,fixtures['base'],f'device-write-fault-{width}');go(quota,base);disk_before=h.book(quota)
-                quota.evaluate('window.__ppNativeSetItem=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k.startsWith("number-garden-v1:"))throw new DOMException("Synthetic device quota fault","QuotaExceededError");return window.__ppNativeSetItem.call(this,k,v)}')
+                quota.evaluate('()=>{window.__ppNativeSetItem=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(String(k).startsWith("number-garden-v1:"))throw new DOMException("Synthetic device quota fault","QuotaExceededError");return window.__ppNativeSetItem.call(this,k,v)}}')
                 h.click(quota,'[data-pp-source="a"]');h.click(quota,'[data-pp-start]');place(quota,1,2);h.click(quota,'[data-pp-keep]');kept(quota)
                 h.ok(h.book(quota)==disk_before,'native write failure leaves persisted notebook exact');h.ok('in this session' in quota.locator('#pp-status').inner_text() and 'Chart kept.' not in quota.locator('#pp-status').inner_text(),'failed Keep reports session work without disk-success toast');h.ok(quota.locator('[data-save-warning]').is_visible(),'ordinary app storage warning remains visible');snap(quota,f'device-write-fault-{width}')
                 quota_export=memory_download(quota,f'device-write-fault-{width}');qp=quota_export['pairedPoints'][-1];h.ok(qp['kept']['placements']==[{'x':1,'y':2}],'actual Notes download retains logically kept in-memory work after device failure')
