@@ -36,7 +36,8 @@ export function arrivalFixtures(){
  const malformed=copy(base);malformed.story.arrival='letter';malformed.story.arrivalChosen='future';malformed.story.acts.II={started:true,contributions:{},ended:false};
  const inheritedBad=copy(base);assert.ok(chooseStoryArrival(inheritedBad,'letter'));inheritedBad.story.acts.I={ended:'future'};inheritedBad.story.acts.II={contributions:'future',ended:'future'};
  const transfer=copy(base);transfer.syntheticOther.payload='x'.repeat(500*1024);
- return {base,legacy,later,completed,retained,malformed,inheritedBad,transfer};
+ const unsupported=copy(base);unsupported.story={version:99,raw:'Synthetic future whole story'};
+ return {base,legacy,later,completed,retained,malformed,inheritedBad,transfer,unsupported};
 }
 
 export function runChecks(){

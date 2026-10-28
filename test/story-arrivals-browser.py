@@ -52,10 +52,17 @@ def select(p, choice):
     p.locator('[data-arrival-preview]').wait_for()
 
 
+def joined_status(p):
+    status = p.locator('#arrival-status')
+    ok('Your arrival is kept for this explorer' in status.inner_text(), 'Join announces the kept notice')
+    ok(status.evaluate('x=>document.activeElement===x'), 'Join focuses its kept status for announcement')
+
+
 def join(p, choice):
     select(p, choice)
     before = book(p)
     click(p, '[data-arrival-join]')
+    joined_status(p)
     ok(story(p)['arrival'] == choice and story(p)['arrivalChosen'] is True, 'explicit selected Join')
     ok(protected(book(p)) == protected(before), 'Join preserves ALL non-story roots exactly')
     earlier_story = before.get('story', {'version': 1, 'opening': 'returning', 'acts': {}, 'seenScenes': []})
@@ -89,6 +96,7 @@ def inspect_reads(p, base, choice):
     ok(p.locator('dialog.welcome-film[open]').count() == 0, 'later arrival suppresses automatic historical welcome')
     ok(book(p)['garden'].get('welcomeFilmSeen') is False, 'suppression writes no fake film seen flag')
     ok(p.locator('[data-keeper-keep]').count() == 0, 'inherited parcel never presented as new wet discovery')
+    ok(p.get_by_role('link', name='Read your arrival recap again', exact=True).count() == 1, 'Home has one clear arrival recap link')
     if choice == 'letter':
         # Direct sealed invitation is allowed without compulsory Page1/Page2 reads.
         go(p, base, '#almanac/upstream-letter')
@@ -119,8 +127,18 @@ def inspect_reads(p, base, choice):
             h.return_from_host(p, chapter)
             h.offer(p, chapter)
         go(p, base, '#almanac/town');click(p, '[data-act-two-celebrate]')
+        p.wait_for_url('**/#almanac/celebration')
+        p.locator('a[href="#almanac/flood-ledger"]').first.wait_for()
         ok(story(p)['acts']['II']['ended'] and len(story(p)['acts']['II']['contributions']) == 3, 'letter arrival can later earn own gathering through actual hosts')
         ok(story(p)['arrival'] == 'letter' and story(p)['arrivalChosen'] is True, 'real later work preserves inherited context')
+        ok(p.locator('[data-act-two-root] [data-arrival-context]').count() == 0, 'own earned celebration is not labelled Before you came')
+        season_lines = {'spring': 'Blossom keeps landing in the lemonade. Nobody minds.',
+                        'summer': 'The party goes on so late that the stars come out over the green.',
+                        'autumn': 'The lanterns are strung through the apple trees by the orchard gate.',
+                        'winter': 'Lanterns, snow, a fire in the middle of the green, and everyone in two scarves.'}
+        season = story(p)['acts']['II']['season']
+        ok(season in season_lines and season_lines[season] in p.locator('[data-act-two-root]').inner_text(), 'own celebration shows the actual saved season line')
+        snapshot(p, f'own-celebration-{p.viewport_size["width"]}')
 
 
 def main():
@@ -164,6 +182,7 @@ def main():
                     bounds(p)
                     snapshot(p, f'preview-{choice}-{width}')
                     click(p, '[data-arrival-join]')
+                    joined_status(p)
                     ok(protected(book(p)) == protected(initial), 'Join preserves different prefs, subjects, Cafe and English/French frozen visits')
                     ok(story(p) == dict(initial['story'], arrival=choice, arrivalChosen=True), 'only explicit arrival fields committed')
                     ok(story(p)['acts'] == {} and story(p)['seenScenes'] == [], 'Join fabricates no activity, acts, reads, films')
@@ -197,6 +216,14 @@ def main():
                 go(p, base, '#pathways');ok(book(p)['learningRoutes'] == fixtures['base']['learningRoutes'], 'subject entry goals unchanged')
 
                 # Real legacy supper and retained/malformed children at actual UI routes.
+                _, unsupported = h.setup(browser, width, fixtures['unsupported'], f'unsupported-notes-{width}')
+                go(unsupported, base, '#arrive');go(unsupported, base, '#notes')
+                panel = unsupported.locator('[data-arrival-notes]');panel.wait_for(state='attached');panel.locator('summary').click()
+                note_text = panel.inner_text()
+                ok('Your earlier story is safe' in note_text and 'This version cannot continue that saved story.' in note_text, 'unsupported Notes explain the whole-story format problem')
+                ok('Earlier arrival choice retained, unreadable' not in note_text, 'unsupported root is not mislabelled as one arrival decision')
+                ok(story(unsupported) == fixtures['unsupported']['story'], 'whole unsupported root stays exact in Notes')
+                snapshot(unsupported, f'unsupported-notes-{width}')
                 _, p = h.setup(browser, width, fixtures['legacy'], f'legacy-six-{width}')
                 go(p, base, '#arrive');join(p, 'mended')
                 cafe = copy.deepcopy(book(p)['cafe']);go(p, base, '#almanac/keepers')
