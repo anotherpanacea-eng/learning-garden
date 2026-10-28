@@ -29,3 +29,11 @@ This was AI source/content review plus a temporary exact mathematical enumeratio
 2. **Reproducible layout criterion:** First-viewport checks now name820×1180 portrait and1024×768 landscape, zoom100% and default text scale100%. The320×800 scroll and744×1024,768×1024,950×768 overlap probes are separate requirements. No physical-device guarantee is inferred.
 
 These clarify accepted-source display and verification settings; they do not change the six cases, grading predicates, owner schema or mathematical scope. Focused repair checks and final independent adjudication remain pending. **No runtime build clearance is yet claimed.**
+
+## Final adjudication round1 and finite-readout repair
+
+Claude Opus adjudicated exact candidate `2143ab6448fefb6acd37a55b497ea39bf9af52fc`: **not build-ready,0 P1/1 P2**. It read the supplied public documents and adjacent gate/app excerpts, hand-checked all six cases and nine helper steps, but executed nothing and claimed no human or physical-device validation. The previously identified retained-initial and viewport findings were resolved. A separate focused completeness reread cleared the source-derived context repair with0 P1/P2.
+
+The remaining P2 was unauthored visible piece-count and split-part-length readouts. The companion now supplies exact0/1/n piece-count strings, each part's ordinary/1/½-unit forms, strict-interior-only part visibility and the exact ordered Hear sequence over visible content. Zero parts are not invented. Related bounded clarifications define sign/half formatting, source-order/nonempty-guidance reversal detection, Notes-only derived context, presentation values without personal-request attribution, plan-only changed headings, the minimum axis label set, explicit supplied example plan and extra-model-field retention. No case, outcome predicate, owner schema or mathematical scope changes.
+
+Focused exact-candidate repair adjudication is pending. No runtime build clearance is yet claimed.

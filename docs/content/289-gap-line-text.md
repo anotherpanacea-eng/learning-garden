@@ -20,9 +20,11 @@ Construction heading: **Your ruler**.
 
 Construction caption: **Ruler end: {C}**.
 
-Length caption: **Your ruler's length: {length} units.** Singular **Your ruler's length: 1 unit.** Zero **Your ruler's length: 0 units.** This is the unsigned length of the actual construction from Start to the ruler end. It is never the distance to Finish unless the construction actually has that length.
+Length caption: **Your ruler's length: {length} units.** Singular **Your ruler's length: 1 unit.** Half **Your ruler's length: ½ unit.** Zero **Your ruler's length: 0 units.** This is the unsigned length of the actual construction from Start to the ruler end. It is never the distance to Finish unless the construction actually has that length.
 
 Initial caption, only when the retained supplied endpoint equals Start: **Your ruler begins at Start. Its length is 0. You can compare it now or move its end.** Otherwise: **Supplied ruler end: {initial C}. You can change this ruler or compare it.** Derive the actual supported-model length from that retained initial. A zero-length construction is complete enough to compare; there is no missing-work message.
+
+Visible piece count, in the actual ruler panel and again within a checked-ruler panel: **0 pieces** · **1 equal piece** · **{n} equal pieces** for n≥2. Count the actual equal pieces from Start to the constructed end, not boundary marks. This count stays distinct from the length: seven half-unit pieces have length3½ units.
 
 Piece legend: **Equal ruler pieces**. Whole-unit source: **Each piece is 1 unit long.** Half-unit source: **Each piece is ½ unit long.** Ruler pieces have no arrowheads. Draw only the actual constructed span from A to C. Zero span has no nonzero piece.
 
@@ -33,6 +35,13 @@ Presentation controls: **Split the ruler at zero** · **Show the move**. These a
 Split explanation: **Zero can be a boundary between two parts of your ruler. It is a mark, not an extra step.**
 
 Split when zero lies strictly inside A-to-C: **Two parts meet at zero. Their lengths add to your ruler's length.**
+
+Split-part readouts, only when zero is strictly inside the actual constructed span:
+
+- **Part from {A} to 0: {x} units.** / **Part from {A} to 0: 1 unit.** / **Part from {A} to 0: ½ unit.**
+- **Part from 0 to {C}: {y} units.** / **Part from 0 to {C}: 1 unit.** / **Part from 0 to {C}: ½ unit.**
+
+Here x=|A| and y=|C|, with no sign on a length. The labels follow the logical Start-to-end path even when Start is on the right; the picture must associate each actual part correctly rather than always assigning x to the left. Zero-length parts are not displayed or spoken: strict-interior splitting gives two positive lengths; zero at an end uses the one-part notice below.
 
 Split when zero is outside or at an end of A-to-C: **Zero is not inside your ruler's span. The ruler stays in one part.** A zero span remains zero; do not invent a piece. Splitting never constructs the missing part to Finish.
 
@@ -48,7 +57,7 @@ Open navigation: **Choose an invitation** · **Previous invitation** · **Next i
 
 Boundary left: **The ruler end is at −10. Move right to change it.**
 
-Boundary right: **The ruler end is at 10. Move left to change it.**
+Boundary right: **The ruler end is at +10. Move left to change it.**
 
 Draft status: **Your ruler or help context changed. Compare when you want to keep this version.**
 
@@ -164,11 +173,11 @@ The following four templates are exact bare literal status messages. They contai
 
 Never generate a numeric equality from these stored statuses. Do not reinterpret earlier results using today's rules or content.
 
-Separate supported-model labels: **Computed endpoint for this checked ruler: {C}.** · **Computed unsigned length for this checked ruler: {length} units.** · **Computed signed change for this checked ruler: {change} units.** Use singular unit where the magnitude is 1. Signed change is shown only in its requested Show the move fold. These computations use that checked model's own retained source and endpoint. They do not alter its literal recorded results.
+Separate supported-model labels: **Computed endpoint for this checked ruler: {C}.** · **Computed unsigned length for this checked ruler: {length} units.** · **Computed signed change for this checked ruler: {change} units.** Use singular unit where the magnitude is1 or½. Signed change is shown only in its requested Show the move fold. These computations use that checked model's own retained source and endpoint. They do not alter its literal recorded results.
 
 Unknown-model notice: **This earlier ruler's model is not supported here. Its raw source, construction and recorded results stay in your notes. No picture or calculation is supplied for it.** Show raw retained data only; do not attach current-model formulas or pictures to it.
 
-Explanation fold: **A supplied example and a reason to discuss**.
+Explanation fold: **A supplied example and a reason to discuss**. If a supported-model example picture is drawn, its plan is exactly C=B, Split at zero on, Show the move on; strict-interior split and zero-change rules still apply. It is a supplied example, never the learner's current construction.
 
 Example caption: **Example ruler**.
 
@@ -226,19 +235,19 @@ Links, with no automatic copying of answers: **Keeper's Desk** (`#desk`) · **Nu
 
 Notes destination: **Gap Line**.
 
-Notes labels: **Current editable ruler** · **First comparison** · **Latest retry** · **{n} comparisons**; singular **1 comparison** · **Source Start** · **Source Finish** · **Source unit size** · **Supplied ruler end** · **Ruler end used** · **Split at zero requested** · **Show the move requested** · **Recorded endpoint result** · **Recorded length result** · **Clue opened** · **Hear requested** · **Working together reported** · **Across zero example opened** · **Below zero example opened** · **Half-unit example opened** · **Feedback available for this comparison**.
+Notes labels: **Current editable ruler** · **First comparison** · **Latest retry** · **{n} comparisons**; singular **1 comparison** · **Source Start** · **Source Finish** · **Source unit size** · **Supplied ruler end** · **Ruler end used** · **Split at zero in this comparison** · **Show the move in this comparison** · **Recorded endpoint result** · **Recorded length result** · **Clue opened** · **Hear requested** · **Working together reported** · **Across zero example opened** · **Below zero example opened** · **Half-unit example opened** · **Feedback available for this comparison**.
 
 Own-case Notes labels: **Across zero example opened for this invitation's own marks** · **Below zero example opened for this invitation's own marks** · **Half-unit example opened for this invitation's own marks**. Follow each with **This example may supply part or all of a fitting construction. Opening does not show which steps were viewed.** Derive own-case overlap from retained helper caseIds and the corresponding opened-before flag, not from today's helper list.
 
 Unknown overlap: **Earlier opened-example details are unavailable. Whether it used this invitation's own marks is unknown.** Unknown is not absence of answer support.
 
-Supplied-context Notes derive actual retained initial values: **Supplied ruler end: {initial C}** · **Supplied Split at zero: {on/off}** · **Supplied Show the move: {on/off}** · **Guided example supplied with this invitation** when guided lines are present. For a supported model, show **This invitation reverses the two places used in the supplied {guided title} guidance.** only when a different retained guided case actually has the distinct endpoints swapped; do not infer it from a case id. Show **The supplied zero-length ruler already fits this invitation.** only when the actual initial endpoint, Start and Finish all coincide. A nonzero supplied initial that meets Finish instead uses **The supplied ruler end already meets Finish.** Otherwise omit any already-fits claim. No current-model deduction is generated for an unsupported model. These source-derived facts stay visible regardless of optional help flags.
+Supplied-context Notes derive actual retained initial values: **Supplied ruler end: {initial C}** · **Supplied Split at zero: {on/off}** · **Supplied Show the move: {on/off}** · **Guided example supplied with this invitation** when guided lines are present. For a supported model, show **This invitation reverses the two places used in the supplied {guided title} guidance.** only when a different retained guided case actually has the distinct endpoints swapped; do not infer it from a case id. Show **The supplied zero-length ruler already fits this invitation.** only when the actual initial endpoint, Start and Finish all coincide. A nonzero supplied initial that meets Finish instead uses **The supplied ruler end already meets Finish.** Otherwise omit any already-fits claim. No current-model deduction is generated for an unsupported model. These source-derived notices appear only in Notes and grown-up context, not as new before-check answers or hidden-clue disclosures on the board. They remain available there regardless of optional help flags.
 
 False support flag: **Not recorded before this comparison**. Do not translate it as no real-life help, independent work, or no prior exposure.
 
 History introduction: **These are retained records, not a new comparison.**
 
-History policy copy: **Notes keep the whole current draft, the first comparison, the latest retry, their help context, and the comparison count. The first comparison stays unchanged. Middle retries are not all retained.** Presentation flags belong to the draft and each recorded context; toggling a presentation does not establish mastery.
+History policy copy: **Notes keep the whole current draft, the first comparison, the latest retry, their help context, and the comparison count. The first comparison stays unchanged. Middle retries are not all retained.** Presentation flags belong to the draft and each recorded context; their on/off values may come from the supplied initial and do not prove that the learner requested them. Toggling a presentation does not establish mastery.
 
 Unsupported root: **Earlier Gap Line data are retained in your notes. This format cannot be edited here. Other places are still open.**
 
@@ -277,3 +286,23 @@ Reset note: **The game's confirmed reset removes this explorer's ruler records f
 **This tool does not certify an independent method, explanation or mastery. All invitations stay open. There is no timer, score, gate, typed answer, microphone, voice recording, upload or automatic sharing. Only the supplied source, local construction drafts, first/latest comparison records, counts and support reports are stored for this explorer. Existing notes download, transfer and confirmed reset apply.**
 
 Presentation note for implementation: use the app's friendly plain child text at 16px or larger. Keep literal minus signs, zero marks, piece boundaries and source/construction labels legible without relying on color. No real child or family data belongs in this content or its examples.
+
+## Number formatting and exact Hear sequence
+
+Positive positions and signed changes use an explicit +; negative values use −; zero is **0** with no sign. Lengths have no sign. Integer values use ordinary digits; a half is **½**, and a mixed half is **1½**, **2½**, and so on, with the sign preceding the whole mixed value. Thus **−1½** means negative one and a half. Piece counts are integers0..40. Coordinates remain within−10..+10; a constructed length or change can have magnitude up to20. Do not introduce a decimal-reading prerequisite. The boundary caption uses+10 consistently.
+
+For speech, name the same visible bounded numbers in words: negative/positive for signed readings, no sign for lengths, **zero**, **half a unit**, **one and a half units**, etc. Reading a symbol in words adds no hidden mathematical information. Do not assume a Unicode fraction glyph or minus sign will be spoken intelligibly by the device. Native voice quality/audibility is not guaranteed.
+
+The Hear request uses this ordered set of currently visible core content, with bounded numeric substitutions spoken equivalently:
+
+1. The current frozen case prompt.
+2. **Start: {spoken A}. Finish: {spoken B}.**
+3. The guided lines, only when actually displayed.
+4. **Ruler end: {spoken C}.**
+5. The visible piece-size legend and the exact0/1/n piece-count line above.
+6. The visible unsigned ruler-length line above, using its singular form where applicable.
+7. If Split is on, the visible two-part or one-part message. Only for a strict interior split, the two visible part-length lines above, with A/C and lengths spoken equivalently.
+8. If Show the move is on, its visible introduction, then **Your move: from {spoken A} to {spoken C}. Signed change: {spoken change} units.** Use **unit** for a change of magnitude1 and **half a unit** for magnitude½; follow with the visible right/left/no-change line. This reads the displayed C−A equation in words.
+9. If a readable latest comparison exists: **Your checked ruler**, the changed-ruler heading only if its end/split/showMove differs, its checked-summary line (recorded C and on/off values), its separately computed checked endpoint/length, and its two literal recorded-status lines. Its signed change is included only if that checked record's Show the move is on. These are the checked construction's values, not a status for a changed current ruler. If the comparison is unreadable, read the retained-comparison notice instead; only known absence permits the no-comparison line.
+
+Do not include a hidden clue, helper step, supplied-after-check explanation, Notes or grown-up text. The checked panel can be read without reading its closed explanation fold. A help-only context change uses the existing draft-status line, not a claim that the ruler itself moved. **Your ruler changed since this comparison** is reserved for an actual end/split/showMove difference.
