@@ -90,10 +90,12 @@ summerShow: {
   stage: { light: lightId, set: [pieceId], places: { [actorId]: placeId }, bear: { shown: [optionId], choice: optionId }, at },
   pictureShow: { shown: [pictureId], pictures: { [stanzaId]: pictureId }, wash: { [stanzaId]: washId }, at },
   marks: { [textId]: { [lineId]: [markId] }, at },
-  travelling: { first: { order: [actId], light: lightId }, note: noteId, changed: { order: [actId], light: lightId } | { kept: reasonId }, limit: limitId, at },
+  travelling: { first: { order: [actId], light: lightId }, note: noteId, changed: { order: [actId], light: lightId, changeCardId: changeCardId } | { kept: reasonId }, limit: limitId, at },
   answers: { [itemId]: { shown: [choiceId], choice: choiceId | number | ['A'..'Z'] | { [cardId]: binId }, outcome: 'fits' | 'not-yet', support: bool, at } }
 }
 ```
+
+The changed Traveling Show version keeps exactly one offered adaptation code: `introduce-dot`, `big-picture-cards` or `spanish-sign`, beside its order/light. Restore the first plan and the chosen change card side by side; the first plan has no added adaptation. Keeping the original instead uses the separate `{kept:reasonId}` branch. Adaptation codes keep immutable authored meanings; an older/unreadable code stays retained as an earlier adaptation without substituting today’s deck. A missing `changeCardId` on an older changed entry means the adaptation was not recorded, never that no adaptation occurred; retain that entry without rewriting it.
 
 Codes only. No voice, no recitation progress and no free text: the child's poem stays on paper and "say why" is spoken. `outcome` is `'fits' | 'not-yet'`; graded bench responses (a shelf kind, a rhyme hunt, a Three Ways placement) keep theirs, and the shelf's clue is the child's reason, kept but not graded. `shown` (and the shelf's `clues`) is the order offered; for counts it is empty. The ending chooser is not kept. Each saved item keeps the choice ids in their shown order and its kept outcome code, so it restores without today's content; support is a separate flag, never merged with an independent attempt. Kept results are never recomputed on load. Validate only the ids, counts and codes the save holds, against structural bounds and the save's own entries; never against today's catalog sizes, item lists, wording or answer key. A missing item reads as absent. An unknown `v` or unreadable entry stays exact and exportable, only that bench turns read-only, and one bad item never closes the page. Export, import, reset and save-off follow the shared store and `prepareProgressImport` limits. The `loft` root (specs 36, 37) is untouched. No field holds anything about the child.
 

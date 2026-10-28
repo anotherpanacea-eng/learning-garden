@@ -598,7 +598,8 @@ Worked example: *My hat!*
 - "Some of us read only Spanish."
 
 **Change:** Change one thing, or keep it and say why.
-- Change cards: add "This is Dot. She loves this hat." · use the big picture cards · add the Spanish sign
+- Change cards (stable authoring codes): `introduce-dot` — add "This is Dot. She loves this hat." · `big-picture-cards` — use the big picture cards · `spanish-sign` — add the Spanish sign
+- Keep the selected change-card code with the changed plan; show that adaptation beside the restored first version. The code is not a new running-order act or a light.
 
 **Limit cards (from spec 120):** "Some jokes only work in Willowbank." · "We didn't know all the Spanish words." · "Only one town has seen it so far."
 
