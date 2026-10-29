@@ -1,3 +1,4 @@
+import {stopTownFilm} from './town-film.mjs';
 import {ferryPage,bindFerry,resetFerryVisit,ferryEntry} from './ferry-ui.mjs';
 import {hingePage,bindHinge,resetHingeVisit} from './hinge-ui.mjs';
 import {mapReadingPage,bindMapReading,resetMapReading,guardMapReadingNavigation} from './map-reading-ui.mjs';
@@ -324,6 +325,7 @@ function syncFieldPlantExposure(view=null){
 }
 function exposeRain(exposure){noteRainDisplayExposure(state,exposure);exposeStoryFacts({facts:exposure.facts});save();}
 function render(){
+  stopTownFilm();
   stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   let cafeOfferPairs=null;

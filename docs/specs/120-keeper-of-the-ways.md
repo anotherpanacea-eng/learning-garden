@@ -415,3 +415,7 @@ The bounded [spec249](249-story-arrivals.md) and [finite recaps](../content/249-
 ## 19. Selected English question-and-reply commission291
 
 [Upstream Post291](291-upstream-question.md) commissions one finite original English question/postbag/reply visit after the first letter is explicitly opened, including a fictional marked-post illustration. Its own [finite copy](../content/291-upstream-question-text.md), retained-source grammar and source audit govern it. A specific request can receive an approximate answer: about240cm above Vadoalto's own fixed reference, not an exact measurement inferred from50cm marks. Selecting supplied wording is story participation, not original composition evidence. This does not commission the full ActIII adapter, Page3, Hollis reveal, later-act ending, translated letters or unreviewed draft prose. Earlier248/249 arrival and provenance distinctions remain intact.
+
+## Optional ActII film amendment · 299, 2026-10-29
+
+[Spec299](299-town-film.md) commissions the owner-selected take2 of A Town of Our Own as an optional inline native film at the already-built celebration. This supersedes the earlier no-asset statement in§17. The existing literal ending or explicit inherited ActII context controls availability; the inherited Before-you-came label remains above it. Viewing adds no scene/read record, contribution or earned ending. Still/text, explicit ledger and letter actions remain complete. Asset availability is not a release claim;299 owns the reviewed media delivery and caption contract.
