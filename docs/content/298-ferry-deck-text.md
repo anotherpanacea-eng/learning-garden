@@ -6,7 +6,7 @@ Companion to [spec298](../specs/298-ferry-deck.md). These are invented model cro
 
 **Title:** Ferry Deck
 
-**Opening:** The same crossing can look different from another place. Step the clock, then watch from the ferry or the other boat. What moves compared with you?
+**Opening:** The same crossing can look different when you compare it with something else. Step the clock, then watch from the ferry or the other boat. What moves compared with you?
 
 **Model notice:** A made-up model: straight, steady motions for six seconds. The boats are in separate lanes. This is not a picture of water currents or a plan for a real crossing.
 
@@ -18,7 +18,7 @@ Companion to [spec298](../specs/298-ferry-deck.md). These are invented model cro
 
 **Courier position:** Courier: {signed q} m from {observer}.
 
-**Courier velocity:** {signed u} m/s compared with {observer}: {right / left / same position in this view}.
+**Courier velocity:** {signed u} m/s compared with {observer}: {right / left / staying at the same position in this view}.
 
 **Same-moment view change:** Same clock moment. We changed what we compare the motion with.
 
@@ -34,7 +34,7 @@ Companion to [spec298](../specs/298-ferry-deck.md). These are invented model cro
 
 **Explanation arithmetic:** Courier relative to {observer}: courier relative to bank ({signed vC} m/s) minus {observer} relative to bank ({signed vA} m/s) = {signed uC} m/s. Parenthesize a negative operand. This combines signed velocities, not a rule to subtract unsigned speeds in every situation.
 
-**Shared explanation:** The objects have not changed their motions because we changed views. We described the same crossing from another moving origin. A number to the right of zero can still be moving left in this view.
+**Shared explanation:** Changing views did not change what happens. Each position and velocity is now measured from {observer}. A number to the right of zero can still be moving left in this view.
 
 ## Six case requests and explanations
 
@@ -44,8 +44,8 @@ Companion to [spec298](../specs/298-ferry-deck.md). These are invented model cro
 | with-ferry | The courier walks toward the ferry's front. What changes when you watch from the other boat? | The courier moves right1m/s relative to a ferry moving right2m/s relative to the bank. That is right3m/s relative to the bank. The other boat moves left1m/s relative to the bank, so courier relative to it is3−(−1)=+4m/s. |
 | against-ferry | The courier walks toward the back. Can leftward walking on the ferry go with rightward motion past the bank? | The courier moves left1m/s relative to the ferry, while the ferry moves right2m/s relative to the bank. Courier relative to bank is still right1m/s. The other boat also moves right1m/s relative to bank, so its position relative to the courier stays the same. |
 | side-by-side | Both boats travel together. Watch from either boat, then return to the bank view. | Both boats move right2m/s relative to bank. Their velocity relative to each other is0m/s, although their marked origins are not at the same position. The courier is riding without walking. |
-| opposite-boats | The boats pass in opposite directions. How quickly does the ferry's position change compared with the other boat? | Ferry-bank is+1m/s and other-boat-bank is−2m/s. Ferry relative to other boat is1−(−2)=+3m/s. Their relative speed is3m/s; direction still needs the named observer. |
-| hold-bank | The ferry moves left while the courier walks right on its deck. Try watching from the bank and the ferry. | The two changes cancel for courier relative to bank:−1+1=0m/s. The courier still moves right1m/s relative to ferry. The bank marker and other boat are at rest relative to one another here; their different origins shift positions without changing relative velocities. |
+| opposite-boats | The boats pass in opposite directions. How quickly does the ferry's position change compared with the other boat? | Ferry-bank is+1m/s and other-boat-bank is−2m/s. Ferry relative to other boat is1−(−2)=+3m/s. Their relative speed is3m/s. The other boat relative to the ferry is−3m/s, the opposite direction. |
+| hold-bank | The ferry moves left while the courier walks right on its deck. Try watching from the bank and the ferry. | The ferry’s−1m/s and the courier’s+1m/s walking add to0m/s relative to bank. The courier still moves right1m/s relative to ferry. The bank marker and other boat are at rest relative to one another here; their different origins shift positions without changing relative velocities. |
 
 ## Four exact worked frames
 
