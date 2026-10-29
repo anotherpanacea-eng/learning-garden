@@ -25,7 +25,9 @@ class Quiet(http.server.SimpleHTTPRequestHandler):
     if start<0 or start>end:raise ValueError()
    except ValueError:self.send_error(416);return
    self.send_response(206);self.send_header('Content-Type','video/mp4');self.send_header('Accept-Ranges','bytes');self.send_header('Content-Range',f'bytes {start}-{end}/{size}');self.send_header('Content-Length',str(end-start+1));self.end_headers()
-   with path.open('rb') as f:f.seek(start);self.wfile.write(f.read(end-start+1))
+   try:
+    with path.open('rb') as f:f.seek(start);self.wfile.write(f.read(end-start+1))
+   except (BrokenPipeError,ConnectionResetError):pass  # Browser abandoned a range on seek/departure.
   else:super().do_GET()
  def log_message(self,*args):pass
 class Server(http.server.ThreadingHTTPServer):request_queue_size=128
@@ -68,10 +70,12 @@ with sync_playwright() as pw:
    except Exception:
     print(p.locator('video').evaluate('(v)=>({time:v.currentTime,duration:v.duration,ready:v.readyState,caption:document.querySelector("[data-town-caption]").textContent,cues:Array.from(v.textTracks[0]?.cues||[]).map(c=>[c.startTime,c.endTime,c.text])})'));raise
    p.locator('[data-town-hide]').click();ok(paused(p),'hide pauses');ok(p.locator('[data-town-watch]').evaluate('(e)=>e===document.activeElement'),'hide returns focus');watch(p);p.wait_for_function('()=>!document.querySelector("video").paused');ok(time(p)>=20,'reopen preserves position')
-   p.locator('[data-town-replay]').click();ok(time(p)<2,'only replay rewinds')
+   p.locator('[data-town-replay]').click();ok(time(p)<2,'replay rewinds unfinished film')
    p.locator('video').evaluate('(v)=>{v.pause();v.currentTime=51.9;v.dispatchEvent(new Event("ended"));}')
    # A real ended state (rather than a synthetic flag) holds the final readable cue.
    p.locator('[data-town-play]').click();p.wait_for_function('()=>document.querySelector("video").ended');ok('more than one way' in p.locator('[data-town-caption]').inner_text(),'final caption held')
+   p.locator('[data-town-play]').click();p.wait_for_function('()=>!document.querySelector("video").paused');ok(time(p)<2,'standard Play restarts a finished film')
+   p.locator('[data-town-play]').press('Escape');ok(p.locator('[data-town-picture]').is_hidden() and paused(p),'Escape hides and pauses');ok(p.locator('[data-town-watch]').evaluate('(e)=>e===document.activeElement'),'Escape returns focus')
    ok(disk(p)==before and p.evaluate('window.__writes')==writes,'all movie actions make zero notebook writes')
    ok(p.locator('[data-act-two-reveal-page]').count()==1,'film did not reveal Page2')
    ok(p.evaluate('()=>document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal scroll')
@@ -97,9 +101,11 @@ with sync_playwright() as pw:
    p.locator('video').evaluate('(v)=>v.dispatchEvent(new Event("timeupdate"))')
    ok('transcript' in p.locator(selector).inner_text(),'actual missing asset keeps fallback: '+asset);c.close()
   c,p=setup(browser,820,F['future']);watch(p);p.wait_for_function('()=>!document.querySelector("video").paused');p.evaluate('window.__oldVideo=document.querySelector("video")');p.locator('#explorer-switch').click();ok(p.evaluate('window.__oldVideo.paused'),'explorer chooser pauses old movie');c.close()
-  # Deferred play completion cannot undo Hide, route or hidden-document pause.
-  c,p=setup(browser,820,F['future']);p.evaluate('()=>{HTMLMediaElement.prototype.play=function(){return new Promise(r=>window.__finishPlay=r)};}');watch(p);p.locator('[data-town-hide]').click();p.evaluate('window.__finishPlay()');p.wait_for_timeout(100);ok(paused(p),'deferred play cannot undo hide')
-  watch(p);p.evaluate('Object.defineProperty(document,"hidden",{configurable:true,value:true});document.dispatchEvent(new Event("visibilitychange"));Object.defineProperty(document,"hidden",{configurable:true,value:false});window.__finishPlay()');p.wait_for_timeout(100);ok(paused(p),'hidden return does not resume');c.close()
+  # Native loading cancellation is not a failure; delayed real playback cannot undo pause.
+  c,p=setup(browser,820,F['future']);p.evaluate('()=>{HTMLMediaElement.prototype.play=function(){return new Promise((r,j)=>window.__cancelPlay=j)};}');watch(p);p.locator('video').evaluate('(v)=>v.dispatchEvent(new Event("pause"))');p.evaluate('window.__cancelPlay(new DOMException("cancelled", "AbortError"))');p.wait_for_timeout(100);ok(p.locator('[data-town-status]').inner_text()=='','native loading pause is not a failure');ok(p.locator('[data-town-play]').inner_text()=='Play','native pause leaves Play label');c.close()
+  c,p=setup(browser,820,F['future']);p.evaluate('()=>{const native=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(){window.__finishPlay=null;return new Promise((resolve,reject)=>native.call(this).then(()=>window.__finishPlay=resolve,reject));};}')
+  watch(p);p.wait_for_function('()=>typeof window.__finishPlay==="function"&&!document.querySelector("video").paused');p.locator('[data-town-hide]').click();p.evaluate('window.__finishPlay()');p.wait_for_timeout(100);ok(paused(p) and p.locator('[data-town-play]').inner_text()=='Play','delayed real play cannot undo Hide')
+  watch(p);p.wait_for_function('()=>typeof window.__finishPlay==="function"&&!document.querySelector("video").paused');p.evaluate('Object.defineProperty(document,"hidden",{configurable:true,value:true});document.dispatchEvent(new Event("visibilitychange"));Object.defineProperty(document,"hidden",{configurable:true,value:false});window.__finishPlay()');p.wait_for_timeout(100);ok(paused(p) and p.locator('[data-town-play]').inner_text()=='Play','hidden return does not resume');c.close()
  finally:browser.close()
 if server:server.shutdown()
 print(json.dumps({'checks':checks,'base':base,'artifacts':str(OUT),'physicalSafari':False}))

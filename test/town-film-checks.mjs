@@ -13,6 +13,7 @@ const markup=townFilm();assert(markup.includes('preload="none"'));assert(markup.
 const packet=fs.readFileSync(new URL('../docs/content/299-town-film-text.md',import.meta.url),'utf8');
 const vtt=fs.readFileSync(new URL('../dist/assets/town-film-take2.vtt',import.meta.url),'utf8');
 assert(vtt.startsWith('WEBVTT\n'));const rows=[...packet.matchAll(/\| (\d+\.\d+) \| (\d+\.\d+) \| (.+) \|/g)];assert.equal(rows.length,8);
+const cues=vtt.trim().split(/\n\s*\n/).slice(1).map(block=>{const lines=block.split('\n');const at=lines.findIndex(x=>x.includes(' --> '));const seconds=x=>x.split(':').reduce((n,v)=>n*60+Number(v),0);return [...lines[at].split(' --> ').map(seconds),lines.slice(at+1).join('\n')];});assert.deepEqual(cues,rows.map(([,a,b,text])=>[+a,+b,text]));
 let end=0;for(const [,start,finish,text] of rows){assert(+start>=end);assert(+finish>+start);end=+finish;assert(vtt.includes(text));assert(markup.includes(text));}assert.equal(end,52);
 const module=fs.readFileSync(new URL('../dist/town-film.mjs',import.meta.url),'utf8');assert(!/localStorage|\.save\(|markFilmSeen|postMessage/.test(module));
 const app=fs.readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');assert(app.includes('function render(){\n  stopTownFilm();'));

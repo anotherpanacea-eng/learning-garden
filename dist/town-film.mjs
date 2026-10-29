@@ -32,7 +32,7 @@ export function bindTownFilm(root,live){
  const updateCaption=()=>{if(!current())return;if(trackFailed){caption.textContent='Live captions are unavailable. Read the full transcript below.';return;}const cues=track?.track.cues;const cue=cues&&Array.from(cues).find(c=>video.currentTime>=c.startTime&&video.currentTime<c.endTime);caption.textContent=video.ended?captions.at(-1):cue?.text||'\u00a0';};
  const requestPlay=()=>{
   if(!active())return;wanted=true;const ticket=++serial;status.textContent='';
-  try{Promise.resolve(video.play()).then(()=>{if(!active()||!wanted){video.pause();return;}if(ticket===serial)play.textContent='Pause';}).catch(()=>{if(ticket===serial&&active()){wanted=false;play.textContent='Play';failure();}});}catch{wanted=false;failure();}
+  try{Promise.resolve(video.play()).then(()=>{if(!active()||!wanted){video.pause();return;}if(ticket===serial)play.textContent='Pause';}).catch(error=>{if(error?.name==='AbortError')return;if(ticket===serial&&active()){wanted=false;play.textContent='Play';failure();}});}catch{wanted=false;failure();}
  };
  const load=()=>{if(loaded)return;loaded=true;track=document.createElement('track');track.kind='captions';track.srclang='en';track.label='English';track.src='./assets/town-film-take2.vtt';track.default=true;video.append(track);track.track.mode='hidden';on(track,'load',()=>{if(current()){track.track.mode='hidden';updateCaption();}});on(track,'error',()=>{trackFailed=true;updateCaption();});video.src='./assets/town-film-take2.mp4';};
  const hide=()=>{if(!current())return;pause();panel.hidden=true;watch.setAttribute('aria-expanded','false');watch.focus();};
@@ -40,7 +40,7 @@ export function bindTownFilm(root,live){
  on(play,'click',()=>{if(!active())return;if(!video.paused)pause();else requestPlay();});
  on(host.querySelector('[data-town-replay]'),'click',()=>{if(!active())return;video.currentTime=0;requestPlay();});
  on(host.querySelector('[data-town-hide]'),'click',hide);
- on(host,'keydown',e=>{if(e.key==='Escape'&&!panel.hidden&&current()){e.preventDefault();hide();}});
+ on(panel,'keydown',e=>{if(e.key==='Escape'&&!panel.hidden&&current()){e.preventDefault();hide();}});
  on(host.querySelector('[data-town-transcript]'),'toggle',()=>{if(current()&&host.querySelector('[data-town-transcript]').open)pause();});
  on(video,'play',()=>{if(!active()){pause();return;}play.textContent='Pause';});
  on(video,'pause',()=>{if(current())play.textContent='Play';});
