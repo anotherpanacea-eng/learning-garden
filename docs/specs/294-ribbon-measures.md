@@ -1,6 +1,6 @@
 # Ribbon Measures · 294
 
-Status: finite specification reviewed and root-adjudicated BUILD-READY; implementation/release gates still apply. [Child copy](../content/294-ribbon-measures-text.md), [source audit](../source-audits/294-ribbon-measures.md) and [review](../reviews/294-ribbon-measures-spec.md). The finite material board is implemented locally; independent implementation review, merge and hosted release verification remain pending.
+Status: delivered through [PR231](https://github.com/anotherpanacea-eng/learning-garden/pull/231#issuecomment-6488435397) after independent specification/content and exact-candidate implementation clearance, merge, canonical deployment and hosted verification. The release receipt records the bounded evidence and limits.  [Child copy](../content/294-ribbon-measures-text.md), [source audit](../source-audits/294-ribbon-measures.md) and [review](../reviews/294-ribbon-measures-spec.md).
 
 ## Bounded advanced job
 

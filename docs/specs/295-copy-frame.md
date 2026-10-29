@@ -1,6 +1,6 @@
 # Copy Frame · 295
 
-Status: finite specification independently reviewed and root-adjudicated BUILD-READY; implementation and release gates remain. [Review](../reviews/295-copy-frame-spec.md). [Child copy](../content/295-copy-frame-text.md), [source audit](../source-audits/295-copy-frame.md). The finite board is implemented locally; independent implementation review and verified publication remain pending.
+Status: delivered through [PR232](https://github.com/anotherpanacea-eng/learning-garden/pull/232#issuecomment-6489369453) after independent specification/content and exact-candidate implementation clearance, merge, canonical deployment and hosted verification. The release receipt records the bounded evidence and limits. [Review](../reviews/295-copy-frame-spec.md), [child copy](../content/295-copy-frame-text.md) and [source audit](../source-audits/295-copy-frame.md).
 
 ## The missing operation
 
