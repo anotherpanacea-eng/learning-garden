@@ -1,6 +1,6 @@
 # Ferry Deck298 · actual source and overlap audit
 
-2026-10-29. Owns the bounded [spec298](../specs/298-ferry-deck.md) and [original text](../content/298-ferry-deck-text.md), not full178. Runtime/content review remains required. All crossings, values, copy and forthcoming SVG/code are original.
+2026-10-29. Owns the bounded [spec298](../specs/298-ferry-deck.md) and [original text](../content/298-ferry-deck-text.md), not full178. Independent physics/content clearance is recorded in the [review synthesis](../reviews/298-ferry-deck-spec.md); runtime implementation review remains required. All crossings, values, copy and forthcoming SVG/code are original.
 
 ## Actual repository overlap
 

@@ -1,6 +1,6 @@
 # Ferry Deck298 · finite original teaching text
 
-Companion to [spec298](../specs/298-ferry-deck.md). These are invented model crossings, not real travel advice or a completed story chapter. Physics/content review pending. No historical text or upstream lesson prose is reproduced.
+Companion to [spec298](../specs/298-ferry-deck.md). These are invented model crossings, not real travel advice or a completed story chapter. Independent physics/content review is recorded in the [review synthesis](../reviews/298-ferry-deck-spec.md). No historical text or upstream lesson prose is reproduced.
 
 ## Shared child copy
 
