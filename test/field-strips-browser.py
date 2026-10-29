@@ -243,12 +243,15 @@ def journey(browser,base,f,width,height):
     go(p,base,'#notes','#reset');click(p,'#reset');click(p,'#confirm-reset')
     # Reset deliberately visits Home, which opens its expected welcome film.
     # Finish that native Home interaction before testing the Field route itself.
-    p.wait_for_url('**/#home')
+    p.wait_for_function("location.hash==='#home'")
     film=p.locator('dialog.welcome-film[open]');film.wait_for(state='visible')
     ok(p.evaluate('location.hash')=='#home','reset welcome belongs to the expected Home route')
     dialog=film.element_handle()
     film.locator('[data-film-skip]').click()
     p.wait_for_function('dialog=>!dialog.isConnected',arg=dialog)
+    ok(book(p)['garden']['welcomeFilmSeen'] is True,'expected Home welcome is recorded before returning to Field')
+    # This checks the closed Home-film handoff; unseen-welcome route exclusion
+    # is separately exercised on fresh load, explorer switch and import landing.
     go(p,base);no_film(p,'reset destination');ok('fieldStrips' not in book(p),'confirmed full reset clears selected owner')
     click(p,'#explorer-switch');click(p,f'[data-select-explorer="{first_id}"]');go(p,base);ok(owner(p)==first,'reset preserves other explorer')
 
