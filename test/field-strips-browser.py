@@ -240,7 +240,16 @@ def journey(browser,base,f,width,height):
     snap(p,'notes-'+str(width));go(p,base);guard(p,lambda:bring(p,base,report));imported_id=active(p);ok(imported_id not in [first_id,'explorer-2'],'actual import creates fresh explorer')
     go(p,base);no_film(p,'import destination');ok(owner(p)==first,'import reload exact owner');again=download(p,base,'redownload-'+str(width));ok(again['fieldStrips']==first and again['syntheticOther']==report['syntheticOther'],'actual redownload exact owner and sibling')
     click(p,'#explorer-switch');click(p,'[data-select-explorer="explorer-2"]');go(p,base);ok(owner(p)==second,'transfer leaves second unchanged')
-    go(p,base,'#notes','#reset');click(p,'#reset');click(p,'#confirm-reset');go(p,base);no_film(p,'reset destination');ok('fieldStrips' not in book(p),'confirmed full reset clears selected owner')
+    go(p,base,'#notes','#reset');click(p,'#reset');click(p,'#confirm-reset')
+    # Reset deliberately visits Home, which opens its expected welcome film.
+    # Finish that native Home interaction before testing the Field route itself.
+    p.wait_for_url('**/#home')
+    film=p.locator('dialog.welcome-film[open]');film.wait_for(state='visible')
+    ok(p.evaluate('location.hash')=='#home','reset welcome belongs to the expected Home route')
+    dialog=film.element_handle()
+    film.locator('[data-film-skip]').click()
+    p.wait_for_function('dialog=>!dialog.isConnected',arg=dialog)
+    go(p,base);no_film(p,'reset destination');ok('fieldStrips' not in book(p),'confirmed full reset clears selected owner')
     click(p,'#explorer-switch');click(p,f'[data-select-explorer="{first_id}"]');go(p,base);ok(owner(p)==first,'reset preserves other explorer')
 
 
