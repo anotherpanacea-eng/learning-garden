@@ -343,3 +343,9 @@ Two Letters284 is delivered through [PR215](https://github.com/anotherpanacea-en
 ### The Switch Table302
 
 [302](specs/302-switch-table.md) is the next media-paired investigation under review: open/close switches, move one switch while retaining its state, compare one versus two switches in series, and map connection sketches to circuit symbols. The new exact route is `#workshop/switch-table`; broader163's route/persistence remain proposed. A distinct edited circuit excerpt omits actual burned-caption/state mismatches in the original export. Independent finite-model and edited-picture gates precede implementation. Current spec/media authoring is not delivery or a full electricity curriculum.
+
+### Sound Window303 · independent parameters and a held comparison
+
+[303](specs/303-sound-window.md) is the next finite sound-physics build: change frequency separately from relative signal size, hold one setting, compare equal-scale pictures, and optionally request short computer tones. A manual marker distinguishes a value at one instant from a whole waveform. The newly corrected36s source film connects visible vibration to transmission through air; it is schematic, not measured audio or a hearing test. Corrected-picture/content review precedes implementation. Broader146 remains proposed.
+
+The preceding [Switch Table302 release](https://github.com/anotherpanacea-eng/learning-garden/pull/245#issuecomment-6499613216) is live, with its edited film,673 matching hosted files and1953 native assertions. Earlier302 “under review” wording above is historical authoring context.
