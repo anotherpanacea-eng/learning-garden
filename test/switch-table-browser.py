@@ -43,7 +43,7 @@ def inspect(p,layout,a,b,trace):
  for g in data['contacts']:
   closed=a if g['id']=='A' else b;dist=((g['to'][0]-g['tip'][0])**2+(g['to'][1]-g['tip'][1])**2)**.5
   ok((dist<.01) if closed else (dist>20),'actual blade meets second contact only when closed');ok(g['gap']==(trace and not closed),'every actual open gap highlighted only when requested')
-  want=([420,175],[420,125]) if g['id']=='B' or layout=='lamp' else ([110,260],[160,260]) if layout=='cell' else ([60,125],[60,175]);ok(g['from']==want[0] and g['to']==want[1],'actual switch contacts at chosen position')
+  want=([420,175],[420,125]) if g['id']=='B' else ([320,70],[370,70]) if layout=='lamp' else ([110,260],[160,260]) if layout=='cell' else ([60,125],[60,175]);ok(g['from']==want[0] and g['to']==want[1],'actual switch contacts at chosen position')
  ok(all(e['trace']==(trace and expected) for e in edges),'whole cycle highlighted together; no partial current path');ok(('on.' in data['title'])==expected,'SVG alternative names lamp state')
  if p.locator('[data-switch-connections]').is_visible():ok(p.locator('[data-switch-connections] tbody tr').count()==len(edges),'equivalent table uses same component edges')
 def movie_ready(p):p.wait_for_function("document.querySelector('video')?.readyState>=2");p.wait_for_function("!document.querySelector('[data-switch-action=play]').disabled")

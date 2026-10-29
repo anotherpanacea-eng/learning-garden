@@ -14,6 +14,7 @@ for(const layout of switchLayouts)for(const a of [false,true])for(const b of [fa
  if(layout.id!=='two')for(const target of ['lamp','cell','left'])ok(switchTableModel(changeSwitchTable(s,'layout',target)).on===m.on,'moving switch preserves its state and result');
  ok(changeSwitchTable(s,'layout','lamp').b===b,'hidden B retained without changing one-switch rule');
 }
+for(const layout of ['lamp','cell','left']){const m=switchTableModel({...freshSwitchTable(),layout});ok(m.edges.some(e=>e.kind==='wire'&&e.from==='BR'&&e.to==='TR'),'one-switch layout has plain wire where B was');}
 ok(!validSwitchTable({...freshSwitchTable(),a:1}),'nonboolean rejected');ok(!switchTableModel({layout:'future'}),'unsupported state isolated');ok(changeSwitchTable(freshSwitchTable(),'b',true)===null,'unused B cannot be edited');ok(changeSwitchTable(freshSwitchTable(),'layout','future')===null,'invalid layout rejected');assert.deepEqual(changeSwitchTable({...freshSwitchTable(),a:true},'reset'),freshSwitchTable());n++;
 for(const layout of switchLayouts)for(const a of [false,true])for(const b of [false,true])for(const representation of ['sketch','symbols']){
  const state={layout:layout.id,a,b,representation,trace:true},m=switchTableModel(state),html=switchTableDrawing(state);
