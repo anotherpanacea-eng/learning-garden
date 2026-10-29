@@ -2,6 +2,7 @@
 No learner data. Native Chrome geometry/request proof is not physical iPad or audibility.
 """
 import copy
+import re
 import functools
 import http.server
 import json
@@ -82,6 +83,21 @@ def stale(p,label):
 def no_film(p):
     ok(p.locator('dialog.welcome-film[open]').count()==0, 'no automatic welcome on exchange')
 
+def contrast(a,b):
+    def lum(c):
+        xs=[float(x)/255 for x in re.findall(r'[0-9.]+',c)[:3]]
+        xs=[x/12.92 if x<=.04045 else ((x+.055)/1.055)**2.4 for x in xs]
+        return sum(x*w for x,w in zip(xs,[.2126,.7152,.0722]))
+    x,y=sorted([lum(a),lum(b)])
+    return (y+.05)/(x+.05)
+
+def pressed_contrast(p):
+    el=p.locator('[data-upstream-highlight][aria-pressed="true"]');ok(el.count()==1,'one pressed highlight')
+    c=el.evaluate("e=>{const s=getComputedStyle(e),counter=getComputedStyle(e.closest('.upstream-counter')),other=getComputedStyle(document.querySelector('[data-upstream-highlight][aria-pressed=false]'));return {bg:s.backgroundColor,fg:s.color,outline:s.outlineColor,counter:counter.backgroundColor,other:other.backgroundColor}}")
+    ok(contrast(c['bg'],c['fg'])>=4.5,'pressed text rendered contrast')
+    ok(contrast(c['outline'],c['counter'])>=3,'pressed ring rendered contrast on counter')
+    ok(contrast(c['bg'],c['other'])>=3,'pressed fill remains distinguishable without focus')
+
 def bounds(p):
     ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal page overflow')
     for b in p.locator(VIEW+' button').all():
@@ -128,7 +144,8 @@ def journey(browser,base,f,w,h):
         for fmt in ['longer','short']:
             click(p,'[data-upstream-format="'+fmt+'"]');ok('about 240' in p.locator(VIEW).inner_text(),'both reply amounts retain estimate')
         before=copy.deepcopy(owner(p))
-        for mark in ['reference','marks','estimate']:click(p,'[data-upstream-highlight="'+mark+'"]')
+        for mark in ['reference','marks','estimate']:
+            click(p,'[data-upstream-highlight="'+mark+'"]');p.locator('[data-upstream-format="short"]').focus();pressed_contrast(p)
         ok(owner(p)==before,'drawing highlights do not change notebook')
         click(p,'[data-upstream-back]')
     ok(book(p)['story']['acts']==saved_story['acts'] and book(p)['story']['seenScenes']==saved_story['seenScenes'],'no later-act ending or historical credit')
