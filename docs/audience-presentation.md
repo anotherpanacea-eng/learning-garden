@@ -1,6 +1,6 @@
 # Audience presentation: one world, several ways to see it
 
-Proposed bounded design, 2026-10-25; no runtime style selector exists. Companion to the [course routes](course-routes.md) and [media inventory](story-milestones-and-films.md#joined-media-inventory). This proposal commissions no new cast, voice recordings or wholesale art replacement.
+Proposed bounded design, 2026-10-25; no runtime style selector exists. Companion to the [course routes](course-routes.md) and [media inventory](story-milestones-and-films.md#joined-media-inventory). This proposal commissions no new cast, voice recordings or wholesale art replacement. [Spec 244](specs/244-presentation-styles.md) develops this contract in depth (style profiles, layer rules, interactions and build phases). It recommends keeping spec 120 story text identical across styles, so the parcel hooks in the table below remain concept examples only.
 
 ## Choice without sorting children
 
