@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {groundCases} from '../dist/same-ground-content.mjs';
+import {sameGroundPage,resetSameGround} from '../dist/same-ground-ui.mjs';
 import {createGroundPlot,groundModel,outsideEdges,setGroundWidth,layGroundRow,liftGroundRow,returnGroundTiles,walkGroundEdge,restartGroundWalk,revealGroundEdges,keepGroundPicture,clearGroundPicture,groundComparison,groundShortcut} from '../dist/same-ground-core.mjs';
 
 let checks=0,states=0,pairs=0;
@@ -49,4 +50,15 @@ eq(groundModel(built('twenty-four',3,8)).budget,{within:false,allUsed:true});eq(
 const turn={...built('turn',3,4),kept:{width:4,rows:3}};ok(groundComparison(turn).includes('the same number of length units'));
 for(const invalid of [null,{},createGroundPlot('missing'),{...createGroundPlot('four'),width:0},{...createGroundPlot('four'),width:13},{...createGroundPlot('four'),rows:5},{...createGroundPlot('four'),walked:1},{...createGroundPlot('four'),kept:{width:1,rows:0}}])eq(groundModel(invalid),null);
 eq(outsideEdges(0,2),null);eq(outsideEdges(2,-1),null);eq(setGroundWidth(createGroundPlot('four'),1.5),null);eq(revealGroundEdges(createGroundPlot('four'),'yes'),null);
+// Render a source-neutral page against a notebook that refuses any property read.
+// A transient drawing has no reason to inspect or normalize saved learner fields.
+const unreadableNotebook=new Proxy({}, {get(){throw new Error('Unexpected notebook read');},set(){throw new Error('Unexpected notebook write');}});
+const html=sameGroundPage(unreadableNotebook,'synthetic-owner');
+ok(html.includes('data-ground-root'));ok(html.includes('1 square unit')&&html.includes('1 length unit'));
+ok(!html.includes('Walked 0 of 0'),'empty rendering offers no fictitious walk');
+eq((html.match(/<option value="(?:four|six|twelve|turn|sixteen|twenty-four)"/g)||[]).length,6,'all encounters openly offered');
+ok(html.includes('aria-live="polite" aria-atomic="true"></p>'),'announcement target starts empty for a connected update');
+ok(html.includes('it is not saved in Notes'),'transient retention is disclosed');
+const other={sameGround:{version:77,width:'unreadable'},unrelated:{keep:'synthetic'}};const prior=JSON.stringify(other);
+sameGroundPage(other,'second-owner');eq(JSON.stringify(other),prior,'another owner and unknown fields remain untouched');resetSameGround();
 console.log(`Same Ground: ${checks} checks; ${states} constructions, ${pairs} live/picture pairs.`);

@@ -14,7 +14,7 @@ export const groundCopy=Object.freeze({
  widthLock:'Return the tiles first to change how many squares are in each row.',
  picture:'A picture of your earlier arrangement; these are not extra tiles.',
  shared:'Two square tiles meet along one edge. Together they cover 2 square units. Their outside has 6 one-unit edges. The shared line is inside, so we do not count it as fence.',
- grownup:'This model links square-unit covering to a traced length boundary, conserving a finite tile stock. Computed labels and pictures are supplied support, not evidence of independent arithmetic, explanation or mastery. Rotation and equal-area contrasts are finite examples, not an optimization proof. Try the same job with paper squares and string if useful. No answer, attempt or support record is saved by this board.'
+ grownup:'This model links square-unit covering to a traced length boundary, conserving a finite tile stock. Computed labels and pictures are supplied support, not evidence of independent arithmetic, explanation or mastery. Rotation and equal-area contrasts are finite examples, not an optimization proof. Try the same job with paper squares and string if useful. No off-screen construction, safety or real fencing claim is made. No answer, attempt or support record is saved by this board.'
 });
 export const groundCase=id=>groundCases.find(c=>c.id===id)||null;
 export const units=(n,name)=>`${n} ${name}${n===1?'':'s'}`;
