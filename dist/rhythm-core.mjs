@@ -107,7 +107,7 @@ export function useRhythmSupport(state,key,options={}){
 // eligibility separately ensures the retained source actually describes this file.
 export function readableRhythmSong(note){
  const source=note?.source;
- return object(note)&&note.version===1&&note.offered===true&&typeof note.soundRequested==='boolean'&&object(source)&&text(source.id,160)&&text(source.title)&&object(source.model)&&source.model.id==='song-four-beat-eighths-v1'&&source.model.beats===4&&source.model.beatSeconds===.5&&array(source.examples,16)&&source.examples.length>0&&source.examples.every(e=>object(e)&&text(e.id,160)&&array(e.pattern,8)&&e.pattern.length>0&&e.pattern.every(c=>own(SONG_UNITS,c))&&e.pattern.reduce((n,c)=>n+SONG_UNITS[c],0)===8);
+ return object(note)&&note.version===1&&note.offered===true&&typeof note.soundRequested==='boolean'&&object(source)&&text(source.id,160)&&text(source.title)&&object(source.model)&&source.model.id==='song-four-beat-eighths-v1'&&source.model.beats===4&&source.model.beatSeconds===.5&&array(source.examples,16)&&source.examples.length>0&&source.examples.every(e=>object(e)&&text(e.id,160)&&array(e.pattern,8)&&e.pattern.length>0&&e.pattern.every(c=>typeof c==='string'&&own(SONG_UNITS,c))&&e.pattern.reduce((n,c)=>n+SONG_UNITS[c],0)===8);
 }
 export function compatibleRhythmSong(note){return readableRhythmSong(note)&&note.source.id===RHYTHM_SONG_SOURCE.id&&same(note.source.examples.map(e=>e.pattern),RHYTHM_SONG_SOURCE.examples.map(e=>e.pattern));}
 export function rhythmSongView(state){

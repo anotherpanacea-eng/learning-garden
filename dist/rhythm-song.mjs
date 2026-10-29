@@ -28,7 +28,7 @@ export function stopRhythmSong(){cleanup?.();cleanup=null;pauseCurrent=null;}
 export function bindRhythmSong(state,ctx,{autoplay=false}={}){
  stopRhythmSong();const root=document.querySelector('[data-rhythm-root]'),host=root?.querySelector('[data-rhythm-song]');if(!host)return;
  const owner=ctx.explorerId(),video=host.querySelector('video'),play=host.querySelector('[data-song-play]'),sound=host.querySelector('[data-song-sound]'),retry=host.querySelector('[data-song-retry]'),seek=host.querySelector('[data-song-seek]'),status=host.querySelector('[data-song-status]'),soundStatus=host.querySelector('[data-song-sound-status]'),lyric=host.querySelector('[data-song-lyric]'),clock=host.querySelector('[data-song-time]');
- let disposed=false,loading=null,controller=null,url=null,track=null,trackFailed=false,wanted=false,serial=0;
+ let disposed=false,loading=null,controller=null,url=null,track=null,trackFailed=false,wanted=false,serial=0,soundAllowed=false;
  const listeners=[],on=(el,type,fn)=>{el.addEventListener(type,fn);listeners.push(()=>el.removeEventListener(type,fn));};
  const current=()=>!disposed&&root.isConnected&&document.querySelector('[data-rhythm-root]')===root&&location.hash==='#studio/rhythm'&&ctx.notebook()===state&&ctx.explorerId()===owner&&ctx.isActive?.()!==false&&ctx.activeTurn();
  const active=()=>current()&&!document.hidden&&!root.hidden&&!document.querySelector('dialog.welcome-film[open]');
@@ -50,13 +50,14 @@ export function bindRhythmSong(state,ctx,{autoplay=false}={}){
  on(video,'loadedmetadata',()=>{if(!current())return;host.querySelectorAll('[data-song-play],[data-song-replay],[data-song-sound],[data-song-seek]').forEach(e=>e.disabled=false);seek.max=String(video.duration);status.textContent='';updateTime();});
  on(play,'click',()=>{if(!active())return;if(video.paused)playNow();else pause();});
  on(host.querySelector('[data-song-replay]'),'click',()=>{if(active()){video.currentTime=0;playNow();}});
- on(sound,'click',()=>{if(!active())return;if(video.muted){const before=state.rhythm;if(!requestRhythmSongSound(state,{canExport:ctx.canExport})){soundStatus.textContent=C.refusal;return;}if(state.rhythm!==before)ctx.save();if(!active())return;try{if(navigator.audioSession)navigator.audioSession.type='playback';}catch{}video.muted=false;soundStatus.textContent=video.paused?'Sound will join when the song plays.':'';}else{video.muted=true;soundStatus.textContent='';}updateSound();});
+ on(sound,'click',()=>{if(!active())return;if(video.muted){const before=state.rhythm;if(!requestRhythmSongSound(state,{canExport:ctx.canExport})){soundStatus.textContent=C.refusal;return;}if(state.rhythm!==before)ctx.save();if(!active())return;try{if(navigator.audioSession)navigator.audioSession.type='playback';}catch{}soundAllowed=true;video.muted=false;soundStatus.textContent=video.paused?'Sound will join when the song plays.':'';}else{soundAllowed=false;video.muted=true;soundStatus.textContent='';}updateSound();});
  on(seek,'input',()=>{if(!active()||!Number.isFinite(video.duration))return;pause();video.currentTime=Math.max(0,Math.min(video.duration,Number(seek.value)));updateTime();});
- on(retry,'click',()=>{if(!active())return;pause();controller?.abort();detachSource();loading=null;video.muted=true;updateSound();host.querySelectorAll('[data-song-play],[data-song-replay],[data-song-sound],[data-song-seek]').forEach(e=>e.disabled=true);void load();});
+ on(retry,'click',()=>{if(!active())return;pause();controller?.abort();detachSource();loading=null;soundAllowed=false;video.muted=true;updateSound();host.querySelectorAll('[data-song-play],[data-song-replay],[data-song-sound],[data-song-seek]').forEach(e=>e.disabled=true);void load();});
  on(host.querySelector('[data-song-return]'),'click',()=>{if(current())ctx.onReturn();});
  on(host,'keydown',e=>{if(!current())return;if(e.key==='Escape'){e.preventDefault();ctx.onReturn();}else if(e.code==='Space'&&e.target===video){e.preventDefault();if(video.paused)playNow();else pause();}});
  on(host.querySelector('[data-song-words]'),'toggle',()=>{if(current()&&host.querySelector('[data-song-words]').open)pause();});
- on(video,'play',()=>{if(!active()){pause();return;}play.textContent='Pause';});on(video,'pause',()=>{if(current())play.textContent='Play';});on(video,'timeupdate',updateTime);on(video,'seeked',updateTime);on(video,'ended',()=>{wanted=false;updateTime();});on(video,'error',fail);
+ on(video,'volumechange',()=>{if(!current())return;if(video.muted)soundAllowed=false;else if(!soundAllowed)video.muted=true;updateSound();});
+ on(video,'play',()=>{if(!active()){pause();return;}ctx.stopTones?.();ctx.stopSpeech?.();play.textContent='Pause';});on(video,'pause',()=>{if(current())play.textContent='Play';});on(video,'timeupdate',updateTime);on(video,'seeked',updateTime);on(video,'ended',()=>{wanted=false;updateTime();});on(video,'error',fail);
  on(document,'visibilitychange',()=>{if(document.hidden)pause();});on(window,'pagehide',pause);on(window,'hashchange',()=>{if(!current())pause();});
  cleanup=()=>{disposed=true;pause();controller?.abort();listeners.forEach(off=>off());detachSource();};
  video.muted=true;video.volume=.5;updateSound();const ticket=++serial;wanted=autoplay;void load().then(ready=>{if(ready&&ticket===serial&&wanted&&active())playNow();});
