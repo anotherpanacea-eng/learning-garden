@@ -25,3 +25,10 @@ The reviewer identified full-resolution checks at9s and21–23s as sampling gaps
 Claude Opus cleared candidate `e5cdaa549939fd398453e344bdcbc0aa71c06b2a` with no P1/P2, conditional on the native rerun and later hosted release checks. Root completed436 native Sound Window assertions and1953 existing Switch Table native assertions.225 model,62 injected audio,557 Bell core,348 Bell UI,222 Bell audio,3698 Rhythm,106 song and452 Water source assertions passed. Native checks include actual film decode/play/seek and native tone scheduling, not human hearing, physicaliPad/Safari, screen-reader speech or learning effects.
 
 Four P3 folds: marker spoken wording moves from a disallowed paragraph aria-label to a visually hidden text span beside an aria-hidden visual value; marker uses one stable toggle label; complete opening/pause/length-to-frequency caveats are visible; VTT cue times are parsed and checked against all13 reviewed windows and the current-caption array. The implementation diff/final exact-head recheck and final native replay remain necessary after these folds; publication stays separate.
+
+
+## Release and hosted acceptance
+
+The [PR246 release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/246#issuecomment-6501170392) records exact-head Claude Sonnet clearance on `20aa2f62904f4c050940917191ae84e244cf8ef8`, final local436native assertions, expected-head merge `a5a570b0b098e774e7f3b0c701d4b39fbfb6ba8c`, and canonical publication. All679 hosted files matched before the full436 hosted assertions. The live game is delivered, superseding the earlier pending gate language above.
+
+The first hosted geometry check caught a test readiness race after redraw. The diagnostic observed unloaded component styles; waiting for every current button’s computed44px minimum height before measuring the unchanged touch targets allowed the same436 checks to pass. The public test preserves that observable readiness condition, without arbitrary sleep or relaxed dimensions. No game code/assets changed for this repair. PhysicaliPad/Safari, human hearing, screen-reader speech and learning outcomes remain unproven.
