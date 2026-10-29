@@ -2,7 +2,7 @@
 
 **The Sound Window** · Pip is planning a gathering call. Can you change its pitch without changing the signal size? Every picture can be explored without sound.
 
-Controls: Lower pitch / Higher pitch; Smaller signal / Bigger signal; Hold this setting / Replace held setting; Clear held setting; Play current sound / Play held sound; Stop sound; Start again; Show time marker / Hide time marker; Earlier sample / Later sample; Watch the vibration film / Return to the Sound Window.
+Controls: Lower pitch / Higher pitch; Smaller signal / Bigger signal; Hold this setting / Replace held setting; Clear held setting; Play current sound / Play held sound; Stop sound; Start again; Time marker (pressed means shown); Earlier sample / Later sample; Watch the vibration film / Return to the Sound Window.
 
 Figure titles: Current setting / Held setting. Captions: “220 Hz · relative signal size 1”, “220 Hz · relative signal size 2”, “440 Hz · relative signal size 1”, “440 Hz · relative signal size 2”. Same short time window. Relative signal, not measured sound level. Two cycles / Four cycles. SVG title: “{Current or Held} computer signal: {frequency} hertz, relative amplitude {1 or 2}, {2 or 4} complete cycles in the same time window.” Description: “Steady part of a sine signal over one second divided by one hundred and ten. Fixed labelled signal ticks minus two, zero and plus two, with drawing headroom beyond them. This is not air moving up and down.”
 
@@ -18,7 +18,7 @@ Optional marker: “{Current or Held} setting at time marker {tick} of 32 interv
 
 **Watch the vibration film** · This silent film shows a slowed, exaggerated model. The pen follows the ruler tip; its newest mark is at the right-hand dot. The graph and ending squiggle are not air moving up and down. The tray vibrates and passes changes through the air to the drum. Our computer-tone numbers do not measure that ruler or drum.
 
-The shorter part is the free overhang, not a cut ruler. Compare louder/softer with the same source and setup. The first ruler can also make sound; extra sound arcs are an illustration in the bigger-swing example. No real equipment is needed. You can pause or read the whole transcript.
+The shorter part is the free overhang, not a cut ruler. Compare louder/softer with the same source and setup. The first ruler can also make sound; extra sound arcs are an illustration in the bigger-swing example. These slowed drawings do not give a rule for calculating a ruler’s frequency from its length. No real equipment is needed. You can pause or read the whole transcript.
 
 Corrected 13-cue transcript stays in the delivered VTT and transcript, using the reviewed source times. Two corrected sentences: “A shorter free end vibrates faster.” / “Air makes the drum skin vibrate, so the rice jumps.” The original misleading amplitude arrow is removed; the relocated “bigger swings” label is descriptive, not a numerical measurement.
 
