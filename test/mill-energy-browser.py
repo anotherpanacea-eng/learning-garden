@@ -13,6 +13,9 @@ def ok(value,message):
  checks+=1
 def button(p,action,value=None):return p.locator(f'[data-energy-action="{action}"]'+(f'[data-energy-value="{value}"]' if value is not None else ''))
 def act(p,action,value=None):button(p,action,value).tap()
+def focused(p,action,value=None):
+ e=p.evaluate("({a:document.activeElement.dataset.energyAction,v:document.activeElement.dataset.energyValue})");ok(e['a']==action and (value is None or e['v']==str(value)),'native focus on '+str((action,value)))
+def heading(p):ok(p.evaluate('document.activeElement.id')=='energy-request-title','new request heading has focus')
 def counts(p):return [int(p.locator(f'[data-energy-count="{k}"]').text_content()) for k in ['waiting','moving','thermal','total']]
 def ready(p):
  p.wait_for_selector('[data-energy-root],[data-select-explorer]')
@@ -55,13 +58,14 @@ def journey(b,base,seed,width):
   ok(counts(p)==[8,0,0,8],'fresh visit ledger');ok(not p.locator('video').count() and not any('.mp4' in r for r in requests),'quiet cold entry does not start storm film');layout(p)
   if width>=820:
    p.evaluate('scrollTo(0,0)');ok(p.locator('[data-energy-scene]').bounding_box()['y']<1000 and button(p,'gate').bounding_box()['y']+button(p,'gate').bounding_box()['height']<1000,'picture and four primary actions in initial tablet viewport')
-  act(p,'pour');ok(counts(p)==[6,2,0,8],'actual Pour');ok(p.locator('[data-energy-water-place=high]').count()==3 and p.locator('[data-energy-water-place=low]').count()==1,'poured matter stays in lower race')
-  stale=button(p,'pour').element_handle();act(p,'grind');stale.evaluate('x=>x.click()');ok(counts(p)==[6,1,1,8],'detached control cannot mutate replacement DOM');act(p,'rub');ok(counts(p)==[6,0,2,8],'actual Rub')
+  act(p,'pour');focused(p,'pour');ok(counts(p)==[6,2,0,8],'actual Pour');ok(p.locator('[data-energy-water-place=high]').count()==3 and p.locator('[data-energy-water-place=low]').count()==1,'poured matter stays in lower race')
+  stale=button(p,'pour').element_handle();act(p,'grind');focused(p,'grind');stale.evaluate('x=>x.click()');ok(counts(p)==[6,1,1,8],'detached control cannot mutate replacement DOM');act(p,'rub');ok(counts(p)==[6,0,2,8],'actual Rub')
   ok(p.evaluate('document.activeElement.dataset.energyAction')=='pour','disabled final Rub places focus on available Pour')
+  act(p,'gate');focused(p,'gate');ok(p.locator('[data-energy-gate-status]').text_content()=='Gate closed','visible closed gate readout');act(p,'gate');focused(p,'gate');ok(p.locator('[data-energy-gate-status]').text_content()=='Gate open','visible open gate readout')
   for key in ['example','model','why']:p.locator(f'[data-energy-details="{key}"] summary').tap()
-  act(p,'keep');act(p,'view','book');layout(p);ok(p.locator('[data-energy-book=current] [data-energy-chip]').count()==8,'all chips conserved in visible book')
-  p.locator('[data-energy-details=held] summary').tap();saved=pose(p);act(p,'jobs');act(p,'return');ok(pose(p)==saved,'chooser roundtrip retains drawing/counts/details/held/last feedback')
-  act(p,'size',16);ok(counts(p)==[16,0,0,16],'size has own picture');layout(p);ok(p.locator('[data-energy-book=held] [data-energy-chip]').count()==8,'kept reference retains separate batch')
+  act(p,'keep');focused(p,'keep');act(p,'view','book');focused(p,'view','book');layout(p);ok(p.locator('[data-energy-book=current] [data-energy-chip]').count()==8,'all chips conserved in visible book')
+  p.locator('[data-energy-details=held] summary').tap();saved=pose(p);act(p,'jobs');focused(p,'job',0);act(p,'return');focused(p,'jobs');ok(pose(p)==saved,'chooser roundtrip retains drawing/counts/details/held/last feedback')
+  act(p,'size',16);heading(p);ok(counts(p)==[16,0,0,16],'size has own picture');layout(p);ok(p.locator('[data-energy-book=held] [data-energy-chip]').count()==8,'kept reference retains separate batch')
   ok(p.locator('[data-energy-chip]').evaluate_all('xs=>xs.every(x=>x.getAttribute("width")==="18"&&x.getAttribute("height")==="18")'),'same square scale current/held')
   act(p,'pour');act(p,'size',8);ok(pose(p)==saved,'size roundtrip preserves exact previous picture');act(p,'view','scene');layout(p)
   p.locator('[data-energy-root]').screenshot(path=str(OUT/f'mill-scene-{width}.png'))
@@ -70,13 +74,17 @@ def journey(b,base,seed,width):
   for N in [8,12,16]:
    act(p,'size',N)
    for job in range(6):
-    act(p,'jobs');act(p,'job',job);act(p,'restart');goal(p,N,job)
+    current_job=p.locator('#energy-request-title').text_content();act(p,'jobs');ok(p.evaluate('document.activeElement.textContent').startswith(current_job),'chooser focuses current request');act(p,'job',job);heading(p);act(p,'restart');focused(p,'pour');goal(p,N,job)
+    if job==1:act(p,'grind');focused(p,'gate')
+    if job==2:focused(p,'next')
+    if job==5:
+     old_counts=counts(p);act(p,'gate');focused(p,'gate');ok(counts(p)==old_counts and 'met earlier' in p.locator('.me-status').text_content(),'opening gate after leave success keeps historical success but invalidates current target');act(p,'gate');ok('This picture meets' in p.locator('.me-status').text_content(),'closing last meets leave target without energy transfer')
     ledger=counts(p);ok(sum(ledger[:3])==N and ledger[3]==N,'visible total conserved')
    ok(p.locator('.me-complete').count()==1,'six met milestone for size '+str(N))
   # A past nonmonotone success is distinct from what the present picture meets.
   act(p,'size',8);act(p,'jobs');act(p,'job',3);act(p,'pour');act(p,'grind');ok('met earlier' in p.locator('.me-status').text_content(),'past Rub success not false current success')
-  act(p,'size',12);act(p,'fresh-six');ok(not p.locator('.me-complete').count() and counts(p)==[12,0,0,12],'fresh six clears only selected size')
-  act(p,'size',16);ok(p.locator('.me-complete').count()==1,'other size milestone preserved');act(p,'clear');ok(not p.locator('.me-kept').count(),'clear only kept reference')
+  act(p,'size',12);act(p,'fresh-six');heading(p);ok(not p.locator('.me-complete').count() and counts(p)==[12,0,0,12],'fresh six clears only selected size')
+  act(p,'size',16);ok(p.locator('.me-complete').count()==1,'other size milestone preserved');act(p,'clear');focused(p,'keep');ok(not p.locator('.me-kept').count(),'clear only kept reference')
   ok(p.evaluate('millWrites')==writes and p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')")==raw and p.evaluate("localStorage.getItem('number-garden-v1:explorer-2')")==sibling,'all actions preserve byte-exact owner/sibling future notebooks')
   old=button(p,'pour').element_handle();p.locator('#explorer-switch').tap();p.locator('[data-select-explorer=explorer-2]').tap();ready(p);old.evaluate('x=>x.click()');ok(counts(p)==[8,0,0,8],'owner switch resets and old owner control cannot mutate')
   act(p,'pour');p.reload(wait_until='networkidle');ready(p);ok(counts(p)==[8,0,0,8],'reload is a fresh visit')
@@ -93,16 +101,17 @@ def asynchronous(b,base,seed):
   p.evaluate('document.querySelector("[data-energy-action=rub]").click()');a2=float(p.locator('[data-energy-wheel]').get_attribute('data-energy-angle'));ok(a2>=a,'rapid replacement begins from displayed pose')
   p.evaluate("document.dispatchEvent(new CustomEvent('garden-speak-request',{detail:{text:'Synthetic narration request',language:'en'}}))");ok(not p.locator('[data-energy-moving]').count(),'narration stops visual motion');ok(float(p.locator('[data-energy-wheel]').get_attribute('data-energy-angle'))==60,'cancel settles final pose')
   p.evaluate('document.querySelector("[data-energy-action=pour]").click();Object.defineProperty(document,"hidden",{configurable:true,value:true});document.dispatchEvent(new Event("visibilitychange"))');p.wait_for_timeout(220);ok(not p.locator('[data-energy-moving]').count(),'hidden page settles and stops');p.evaluate('Object.defineProperty(document,"hidden",{configurable:true,value:false})')
+  p.evaluate('document.querySelector("[data-energy-action=pour]").click()');before=counts(p);p.evaluate('dispatchEvent(new Event("pagehide"))');ok(not p.locator('[data-energy-moving]').count() and counts(p)==before,'pagehide cancels finite motion without changing counts')
   for missing in ['matchMedia','requestAnimationFrame']:
    p.evaluate(f'window.{missing}=undefined');act(p,'grind');ok(not p.locator('[data-energy-moving]').count(),'missing '+missing+' gives immediate picture')
  finally:c.close()
 
 def transfer_and_entry(b,base):
- script="""import {freshState} from './dist/core.mjs';import {startWorkshop,releaseWorkshop,stepWorkshop,finishWorkshop} from './dist/workshop-core.mjs';const s=freshState();s.garden={avatar:'sky',welcomeFilmSeen:true};startWorkshop(s);releaseWorkshop(s);stepWorkshop(s);stepWorkshop(s);finishWorkshop(s);s.syntheticOther={payload:'x'.repeat(550000)};console.log(JSON.stringify(s));"""
+ script="""import {freshState} from './dist/core.mjs';import {startWorkshop,releaseWorkshop,stepWorkshop,finishWorkshop} from './dist/workshop-core.mjs';import {startCircuit,setCircuitPage,setCircuitLink,keepCircuit} from './dist/lantern-circuit-core.mjs';const s=freshState();s.garden={avatar:'sky',welcomeFilmSeen:true};startWorkshop(s);releaseWorkshop(s);stepWorkshop(s);stepWorkshop(s);finishWorkshop(s);startCircuit(s,'one-lead');setCircuitLink(s,'nt',true);keepCircuit(s);setCircuitPage(s,'connect');s.syntheticOther={payload:'x'.repeat(550000)};console.log(JSON.stringify(s));"""
  seed=json.loads(subprocess.check_output(['node','--input-type=module','-e',script],cwd=ROOT,text=True));c,p,_=setup(b,base,seed)
  try:
   p.evaluate('location.hash="#workshop"');p.locator('.workshop-page').wait_for();before=json.loads(p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')"));p.locator('.workshop-page a[href="#mill/energy"]').tap();ready(p);act(p,'pour');p.locator('.me-room header a').tap();p.locator('.workshop-page').wait_for();after=json.loads(p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')"));ok(before['workshop']==after['workshop'] and before['syntheticOther']==after['syntheticOther'],'Workshop entry and return preserve actual old work')
-  p.evaluate('location.hash="#workshop/lantern"');p.locator('[data-lc-root]').wait_for();p.locator('a[href="#mill/energy"]').tap();ready(p);ok(counts(p)==[8,0,0,8],'Lantern entry reaches fresh table');act(p,'pour');old=button(p,'grind').element_handle()
+  p.evaluate('location.hash="#workshop/lantern"');p.locator('[data-lc-root]').wait_for();circuit=json.loads(p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')"))['lanternCircuits'];ok(p.locator('[data-lc-board] svg').get_attribute('data-lc-mask')=='9','healthy saved circuit arrangement shown');p.locator('a[href="#mill/energy"]').tap();ready(p);ok(counts(p)==[8,0,0,8],'Lantern entry reaches fresh table');act(p,'pour');p.locator('.me-related a[href="#workshop/lantern"]').tap();p.locator('[data-lc-root]').wait_for();ok(json.loads(p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')"))['lanternCircuits']==circuit and p.locator('[data-lc-board] svg').get_attribute('data-lc-mask')=='9','Circuit roundtrip preserves pending arrangement, kept comparison and page');p.locator('a[href="#mill/energy"]').tap();ready(p);act(p,'pour');old=button(p,'grind').element_handle()
   p.evaluate('location.hash="#notes"');p.locator('#download').wait_for()
   with p.expect_download() as download:p.locator('#download').tap()
   file=OUT/'synthetic-notes.json';download.value.save_as(str(file));ok(file.stat().st_size>550000,'real Notes export contains large unrelated work');p.locator('#progress-file').set_input_files(str(file));p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').tap();p.wait_for_function("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId!=='explorer-1'")
