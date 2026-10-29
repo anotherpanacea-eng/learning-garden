@@ -212,11 +212,11 @@ Worked example: 1. Door: 1 m by 2 m, 2 m². 2. Top: half a circle, radius ½ m: 
 Worked example: 1. Top 3, bottom 7, height 4. 2. Two copies: a plank 10 long, 4 tall: 40. 3. Half: 20 squares.
 
 **T15. Prisms** (A true thing about math; Keeper's Desk)
-> A prism is the same shape all along. Find the end's area. Times the length. That is its volume, in cubic units.
+> A right prism has matching polygon ends joined by rectangles. Its volume is end area × perpendicular length, measured square to the ends, in cubic units.
 Worked example: 1. Crate end: 4 × 3 = 12. 2. Length: 5. 3. 12 × 5 = 60 cubic units, like the crate layers.
 
-**T16. A cylinder is a prism** (A true thing about math; Keeper's Desk)
-> A cylinder's end is a circle. Find the circle's area. Times the length or thickness.
+**T16. The same volume rule for a cylinder** (A true thing about math; Keeper's Desk)
+> A right cylinder has matching circle ends and a curved side. Its volume follows the same rule: circle area × perpendicular length or thickness.
 Worked example: 1. Radius 1 m: 3.14 × 1 × 1 = 3.14 m². 2. Length 2 m. 3. 3.14 × 2 = 6.28 m³.
 
 ## Real-world and history cards
@@ -645,7 +645,7 @@ Answer: 6 cubic feet (6 ft³).
 Worked steps: 1. End: 2 × 1 ÷ 2 = 1 ft². 2. Times the length: 1 × 6. 3. 6 ft³.
 Tests: 12 (forgetting to halve the triangle); 9 (adding 2, 1 and 6).
 Hint: Find the triangle's area first. Then times the length.
-Explanation: Any prism: end area × length.
+Explanation: This right prism: end area × perpendicular length.
 
 **F4 (Keeper's Desk, 3-choice)**
 Prompt: The seed crate is 4 by 3, and 5 long. Which works as a prism?
@@ -663,7 +663,7 @@ Prompt: The millstone is 1.4 m across, 0.5 m thick. Volume? Use 22/7.
 Answer: 0.77 m³.
 Worked steps: 1. Radius: 0.7 m. 2. Face: 22/7 × 0.7 × 0.7 = 1.54 m². 3. 1.54 × 0.5 = 0.77 m³.
 Tests: 3.08 (1.4 used as the radius); 2.2 (the circumference times the thickness).
-Hint: A cylinder is a prism. Find the circle face first.
+Hint: Find the circle face area. Times the thickness, square to the face.
 Explanation: Circle area × thickness. Volume is in cubic meters.
 
 **F6 (Keeper's Desk, 3-choice)**
@@ -711,7 +711,10 @@ Step 3: **Skip for now.** You can come back any time.
 - **setat**: an old Egyptian area unit.
 - **sector**: a pie slice of a circle.
 - **trapezoid**: a four-sided shape with one pair of parallel sides (UK: trapezium).
-- **prism**: a solid that is the same shape all along its length.
+- **polygon**: a closed flat shape with straight sides.
+- **prism**: a solid with matching parallel polygon ends joined by flat faces.
+- **right prism**: a prism whose length meets its ends at right angles; its side faces are rectangles.
+- **cylinder**: a solid with matching parallel circle ends and a curved side. Here its length meets the ends at right angles.
 - **volume**: how much space a solid fills, in cubic units (m³, ft³).
 
 ## Off-screen invitation (optional, grown-up-led)
