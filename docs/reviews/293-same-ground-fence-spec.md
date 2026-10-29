@@ -1,0 +1,18 @@
+# Same Ground293 · independent specification review
+
+Baseline main e312859; finite spec, original child copy and source/overlap audit reviewed before runtime implementation. Six focused independent lens passes, followed by root adjudication. Reviewers checked actual app/Workshop/Common Cuts lifecycle seams and adjacent River/Number Garden/Paving work. Future implementation files were not treated as missing specification deliverables.
+
+| Lens | Result | Evidence and boundary |
+| --- | --- | --- |
+| Completeness | OneP2, repaired | Native rerender could disable/remove the triggering button. Spec now gives explicit enabled-control focus fallbacks for final Lay/Lift/Walk and picture actions. Finite stock, boundary, picture and comparison behavior otherwise buildable. |
+| Dependency/integration | NoP1/P2 | Common Cuts early return, normalization/film exclusions, chooser/reset/hashchange hooks, explorer/visit guards, local Hear and import preservation seams exist.293 must invalidate on every import attempt; copying only a subset of old hooks is insufficient. |
+| Scope/overlap | NoP1/P2 | Adds conserved tile construction plus paced outside-edge count; existing area/fence questions and retained River/planting plans explicitly acknowledged. No whole185pack, historical content, broad assessment/save owner or geometry completion claim. |
+| Firewall | NoP1/P2 | Main risk: transient work accidentally entering legacy normalization/save or stale explorer callbacks. Planned early return, no-save API, local visit state, ownership guards and literal export checks defend it mechanically; implementation remains to prove them. |
+| Mechanizability | NoP1/P2 | Independent cell-edge cancellation can test the boundary; native browser measurements must prove physical drawing scale, focus, target size and actual lifecycle/export behavior. Source checks alone do not establish those properties. |
+| Adversarial | OneP2, repaired | The nonempty perimeter shortcut would report2w for a zero-row plot. Spec/copy now require no-plot/no-boundary text until a row exists. Partial/full stock, rotation, budget and bounds have no further unresolvedP1/P2. |
+
+Nonblocking overlap clarification also folded: Number Garden already keeps24-space plans and River retains rectangle comparisons. The novelty is the conserved square-stock plus unit-edge construction, not the mere presence of a retained picture.
+
+Six-lens verdict: **BUILD-READY after the twoP2 repairs**. Zero unresolvedP1/P2. Separate Claude Opus mathematical/content review verified the six cases, legal bounds, outside-edge walk, rotation control and standards interpretation. It found two additionalP2s: final-budget copy needed an empty-state guard, and the tray template used totalN instead of remainingT. Both are repaired explicitly in spec/copy and the verification list. Minor singular/unit/partial-message/ghost-tile/date clarifications also folded. A separate independent finite mathematical pass then enumerated266legal constructions and8,074ordered nonempty live/picture pairs using cell-edge cancellation, confirmed allsix examples and the repairs, and returned CLEAR with noP1/P2. Final spec verdict: BUILD-READY for this finite scope. No runtime, browser, physical-device, audibility or learning-effect clearance is implied.
+
+Post-build visual fold: the first screenshots exposed excessive blank space under short plots. Both diagrams now crop the same unused lower space, with fixed216-unit width and16-unit squares; their common height follows the taller live/picture arrangement. Unit scale stays constant; browser geometry checks must continue comparing actual square sizes. Narrow independent verification of this presentation fold remains required before release.
