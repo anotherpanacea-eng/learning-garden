@@ -351,3 +351,8 @@ Two Letters284 is delivered through [PR215](https://github.com/anotherpanacea-en
 Independent physics/corrected-media, six-lens specification and exact-head Claude implementation gates cleared.679 matching hosted files preceded436 canonical native assertions. The hosted test now waits for each redraw’s actual stylesheet-ready state before measuring touch controls. This does not establish physicaliPad/Safari, audible quality, screen-reader speech or learning outcomes.
 
 The preceding [Switch Table302 release](https://github.com/anotherpanacea-eng/learning-garden/pull/245#issuecomment-6499613216) is live, with its edited film,673 matching hosted files and1953 native assertions. Earlier302 “under review” wording above is historical authoring context.
+
+
+### Same water, different arrangements304 · next media-backed operation
+
+[304](specs/304-water-film.md) extends delivered301 with one optional full corrected35-second film, not another phase model or a full168pack. Return keeps the current model stage and followed particle. The film's36molecule symbols and table's12 are explicitly different drawings. Six independent specification lenses cleared the bounded operation; actual corrected-media/content clearance and implementation remain pending. Rejecting overlapping or discontinuous footage is part of the work, not a disclaimer to waive. Existing303Sound Window is already delivered through[PR246](https://github.com/anotherpanacea-eng/learning-garden/pull/246#issuecomment-6501170392).

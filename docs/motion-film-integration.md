@@ -25,7 +25,7 @@ All files are in the owner's Dropbox, not in this repository:
 | The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) | Proposed spec only | 32 s |
 | The water cycle at the weather station | Process clip | [140](specs/140-weather-station.md) | Proposed spec only | 37 s |
 | Closed and open circuit | Process clip | [163](specs/163-sparks-and-switches.md) | Proposed spec only | 35 s |
-| Particles as ice melts | Process clip | [168](specs/168-little-drawers.md) | Proposed spec only | 35 s |
+| Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Corrected asset under independent review; not shipped | 35 s |
 | Ramp and lever | Process clip | [154](specs/154-ramps-levers-hoist.md) | Proposed spec only | 38 s |
 
 ## What is ready now
@@ -76,3 +76,8 @@ Actual take2 durations verified from exports:52,50,49,52,61seconds for ActsII–
 
 
 [Sound Window303](specs/303-sound-window.md) is delivered through [PR246](https://github.com/anotherpanacea-eng/learning-garden/pull/246#issuecomment-6501170392):679 matching hosted files preceded436 canonical native assertions. The complete corrected36s derivative is independently picture-reviewed and decoded in Chrome, with all13 corrected captions and transcript; the rejected original remains unshipped. The preceding “proposes” paragraph records authoring intent, superseded by this delivery receipt. No human listening or physical-device result is claimed.
+
+
+## Same water, different arrangements304 · actual film repair in progress
+
+[304](specs/304-water-film.md) commissions the finite optional full35s corrected film beside301's existing manual model, preserving its stage/selected particle across a separate movie turn. Broader168 remains proposed. Original overlapping footage and a first discontinuous nonoverlap repair stay rejected. A continuous corrected source candidate must clear actual frame geometry, temporal and independent scientific/picture gates before integration. Different36film/12table symbols have no shared individual identity. No movie is live by this authoring note.
