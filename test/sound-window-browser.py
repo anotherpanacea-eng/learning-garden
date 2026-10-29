@@ -26,6 +26,8 @@ def setup(b,base,seed,width,reduce=True):
 def pose(p):return p.evaluate("[...document.querySelectorAll('[data-sound-action][aria-pressed=true]')].map(x=>x.dataset.soundAction)")
 def movie_ready(p):p.wait_for_function("document.querySelector('video')?.readyState>=2&&document.querySelector('video').duration>35.9");ok(p.locator('video').evaluate('v=>v.currentSrc.startsWith("blob:")&&v.muted'),'native movie decodes from local Blob, muted')
 def layout(p):
+ # Each redraw inserts its component stylesheet; wait for actual styles before geometry.
+ p.wait_for_function("[...document.querySelectorAll('[data-sound-root] button')].every(b=>getComputedStyle(b).minHeight==='44px')")
  ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth'),'no sideways scroll')
  for box in p.locator('[data-sound-root] button').all():
   r=box.bounding_box();ok(r is not None and r['height']>=43.9 and r['width']>=43.9,'every current control has a 44px touch area')
