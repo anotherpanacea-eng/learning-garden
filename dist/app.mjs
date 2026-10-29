@@ -1,3 +1,4 @@
+import {pauseLiftFilm,stopLiftFilm} from './lift-film.mjs';
 import {liftYardPage,bindLiftYard,resetLiftYard,stopLiftMotion} from './lift-yard.mjs';
 import {pauseWaterFilm,stopWaterFilm} from './water-phase-film.mjs';
 import {soundWindowPage,bindSoundWindow,resetSoundWindow,pauseSoundFilm,stopSoundFilm,stopSoundTone} from './sound-window.mjs';
@@ -177,9 +178,9 @@ import {checkin,puzzles,skills} from './content.mjs';
 const $=s=>document.querySelector(s), main=$('#main');
 let bellPlayer=null,rhythmPlayer=null;
 const stopTones=(reason='page-change')=>{bellPlayer?.stop(reason);rhythmPlayer?.stop(reason);};
-const stopBell=(reason='page-change')=>{stopLiftMotion();pauseWaterFilm();stopTones(reason);stopSoundTone(reason);pauseSoundFilm();pauseRhythmSong();pauseSwitchFilm();};
-const bellPlayback={play:(sequence,callbacks)=>{pauseWaterFilm();stopSoundTone('other-studio');pauseSoundFilm();pauseSwitchFilm();pauseRhythmSong();rhythmPlayer?.stop('other-studio');return (bellPlayer??=createBellPlayer()).play(sequence,callbacks);},stop:stopBell};
-const rhythmPlayback={play:(sequence,callbacks)=>{pauseWaterFilm();stopSoundTone('other-studio');pauseSoundFilm();pauseSwitchFilm();pauseRhythmSong();bellPlayer?.stop('other-studio');return (rhythmPlayer??=createRhythmPlayer()).play(sequence,callbacks);},stop:stopBell};
+const stopBell=(reason='page-change')=>{stopLiftMotion();pauseLiftFilm();pauseWaterFilm();stopTones(reason);stopSoundTone(reason);pauseSoundFilm();pauseRhythmSong();pauseSwitchFilm();};
+const bellPlayback={play:(sequence,callbacks)=>{pauseLiftFilm();pauseWaterFilm();stopSoundTone('other-studio');pauseSoundFilm();pauseSwitchFilm();pauseRhythmSong();rhythmPlayer?.stop('other-studio');return (bellPlayer??=createBellPlayer()).play(sequence,callbacks);},stop:stopBell};
+const rhythmPlayback={play:(sequence,callbacks)=>{pauseLiftFilm();pauseWaterFilm();stopSoundTone('other-studio');pauseSoundFilm();pauseSwitchFilm();pauseRhythmSong();bellPlayer?.stop('other-studio');return (rhythmPlayer??=createRhythmPlayer()).play(sequence,callbacks);},stop:stopBell};
 document.addEventListener('click',e=>{if(e.target.closest('[data-speak],[data-preview-voice],a[href^="#"]'))stopBell('speech-or-navigation');},true);
 document.addEventListener('garden-speak-request',()=>stopBell('narration-request'),true);
 window.addEventListener('pagehide',()=>{stopBell('pagehide');stopSpeech();});
@@ -334,6 +335,7 @@ function syncFieldPlantExposure(view=null){
 function exposeRain(exposure){noteRainDisplayExposure(state,exposure);exposeStoryFacts({facts:exposure.facts});save();}
 function render(){
   stopTownFilm();
+  stopLiftFilm();
   stopWaterFilm();
   stopSoundFilm();
   stopSwitchFilm();
@@ -402,28 +404,28 @@ function render(){
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):liftYardPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindLiftYard(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/lift',render,stopSpeech,stopSound:stopBell});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindLiftYard(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/lift',render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{stopLiftMotion();pauseWaterFilm();stopTones('lift-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('lift-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#studio/sound-window'){
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#home'?'page':'false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):soundWindowPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSoundWindow(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#studio/sound-window',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforeTone:()=>{pauseWaterFilm();stopTones('sound-window');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSpeech();},beforeMovie:()=>{pauseWaterFilm();stopTones('sound-film');pauseRhythmSong();pauseSwitchFilm();stopSoundTone('sound-film');stopSpeech();}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSoundWindow(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#studio/sound-window',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforeTone:()=>{pauseLiftFilm();pauseWaterFilm();stopTones('sound-window');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSpeech();},beforeMovie:()=>{pauseLiftFilm();pauseWaterFilm();stopTones('sound-film');pauseRhythmSong();pauseSwitchFilm();stopSoundTone('sound-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#workshop/switch-table'){
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):switchTablePage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSwitchTable(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/switch-table',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforePlay:()=>{pauseWaterFilm();stopSoundTone('switch-film');pauseSoundFilm();stopTones('switch-film');pauseRhythmSong();stopSpeech();}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSwitchTable(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/switch-table',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforePlay:()=>{pauseLiftFilm();pauseWaterFilm();stopSoundTone('switch-film');pauseSoundFilm();stopTones('switch-film');pauseRhythmSong();stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#science/ice'){
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#science'?'page':'false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):waterPhasePage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWaterPhase(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#science/ice',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforeMovie:()=>{stopTones('water-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('water-film');stopSpeech();}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWaterPhase(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#science/ice',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforeMovie:()=>{pauseLiftFilm();stopTones('water-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('water-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#post/ferry'){
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
@@ -535,7 +537,7 @@ function render(){
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):rhythmPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRhythm(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,player:rhythmPlayback,stopSpeech,stopTones:()=>{pauseWaterFilm();stopSoundTone('rhythm-song');pauseSoundFilm();pauseSwitchFilm();stopTones('rhythm-song');}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRhythm(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,player:rhythmPlayback,stopSpeech,stopTones:()=>{pauseLiftFilm();pauseWaterFilm();stopSoundTone('rhythm-song');pauseSoundFilm();pauseSwitchFilm();stopTones('rhythm-song');}});bindSpeech();}return;
   }
   if(hash==='#science/water-shares'){
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
