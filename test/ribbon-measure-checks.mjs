@@ -25,7 +25,8 @@ for(const [id,an,ad,bn,bd,target] of inputs){
   eq(point,m.covered);eq(m.segments.length,path.length);
   const laid=layRibbonPiece(state);
   if(m.canLay){ok(laid);eq(laid.pieces,[...path,q]);eq(laid.cuts,cuts);eq(ribbonMeasureModel(laid).covered*12,(covered+12/q)*m.group);}
-  else{eq(laid,null);ok(ribbonLayAdvice(state).length>0,'disabled Lay gets a reason');}
+  else{eq(laid,null);const advice=ribbonLayAdvice(state),remaining=target-covered;ok(advice.includes(remaining===0?'fully measured':remaining===1?'smaller than any piece':q===4?'Undo last split':'Try splitting'),'independent remaining-group units select the honest advice branch');}
+  const reverse={...state,pieces:[...path].reverse()},other=ribbonMeasureModel(reverse);eq(other.covered,m.covered,'ordered histories with same sum retain covered length');eq(other.groupCount,m.groupCount);eq(ribbonPieceTally(reverse),ribbonPieceTally(state));
   for(const factor of [2,3]){
    const split=splitRibbonMeasure(state,factor);
    if(q*factor<=6){ok(split);eq(split.pieces,path);eq(split.cuts,[...cuts,factor]);eq(ribbonMeasureModel(split).covered,m.covered,'template cuts never alter laid lengths');eq(undoRibbonSplit(split),state);}
@@ -44,7 +45,7 @@ for(const [id,an,ad,bn,bd,target] of inputs){
 eq(states,1020);
 // Mixed pieces need their own sizes after both directions of template change.
 const mixed={caseId:'partial-group',cuts:[2,3],pieces:[4,4,6]};eq(ribbonMeasureModel(mixed).complete,true);eq(ribbonMeasureModel(mixed).groupCount,{n:2,d:3});eq(ribbonPieceTally(mixed),'2 quarter-group pieces; 1 sixth-group piece');ok(ribbonReading(mixed).includes('2/3 of one measuring group'));ok(!ribbonReading(mixed).includes('2/3 of one length unit'));
-eq(ribbonMeasureModel({...mixed,pieces:[3,3]}).complete,true);eq(ribbonMeasureModel({...mixed,pieces:[6,6,6,6]}).complete,true);
+eq(ribbonMeasureModel({...mixed,pieces:[4,6,4]}).complete,true);eq(ribbonMeasureModel({...mixed,pieces:[3,3]}).complete,true);eq(ribbonMeasureModel({...mixed,pieces:[6,6,6,6]}).complete,true);
 const tiny={caseId:'partial-group',cuts:[2,2],pieces:[3,4]};ok(ribbonLayAdvice(tiny).includes('smaller than any piece'));
 const undoFirst={caseId:'partial-group',cuts:[2,2],pieces:[2]};ok(ribbonLayAdvice(undoFirst).includes('Undo last split'));eq(ribbonMeasureModel(undoFirst).gap*6,ribbonMeasureModel(undoFirst).group);
 const changed=splitRibbonMeasure(undoRibbonSplit(undoFirst),3);eq(ribbonMeasureModel(layRibbonPiece(changed)).complete,true);

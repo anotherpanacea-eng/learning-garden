@@ -161,7 +161,11 @@ def interfaces(browser,base,seed):
     ok(qs(p)==[1,1],'native Enter and Space lay real pieces')
     action(p,'read');hear=p.locator('[data-rmeasure-root] [data-speak]');hear.tap();spoken=hear.get_attribute('data-speak')
     ok('2 measuring groups' in spoken and 'not fully measured' in spoken,'first Hear includes current partial measurement')
-    ok(spoken.count('Lay measuring pieces end to end.')==1,'task narrated once')
+    ok(spoken.count('Lay measuring pieces end to end.')==1 and spoken.count('How many measuring groups cover this ribbon?')==1,'main task and invitation narrated once')
+    ok(spoken.count('not fully measured')==1,'partial qualifier narrated once')
+    voices=p.evaluate('speechSynthesis.getVoices().filter(v=>v.localService&&/^en(?:[-_]|$)/i.test(v.lang)).length')
+    if voices:p.wait_for_function('ribbonSpeech.length===1');ok('2 measuring groups' in p.evaluate('ribbonSpeech[0]'),'native local request includes current measurement')
+    else:ok(p.evaluate('ribbonSpeech.length')==0,'no remote voice requested without a local English voice')
     ok('Worked example, picture' not in spoken,'hidden example absent from live Hear')
     action(p,'example');stash(p);action(p,'next');invoke_old(p);ok('picture 2 of 4' in p.locator('[data-rmeasure-view="example"]').inner_text(),'old frame controls are inert')
     action(p,'next');hear=p.locator('[data-rmeasure-root] [data-speak]');hear.tap();spoken=hear.get_attribute('data-speak')
@@ -201,6 +205,42 @@ def interfaces(browser,base,seed):
     if now.get('garden')=={} and 'garden' not in expected:now.pop('garden')
     ok(now==expected,'direct entry initializes no unrelated game');action(q,'lay');ok('workshop' not in saved(q),'material action initializes no Workshop record');ok(q.locator('dialog.welcome-film[open]').count()==0,'uninitialized direct entry plays no film')
 
+def review_repairs(browser,base,seed):
+    p=release_setup(browser,base,seed,'review-repairs')
+    cdp=p.context.new_cdp_session(p);node=cdp.send('Runtime.evaluate',{'expression':'document.querySelector(".rmeasure-status")'})['result']['objectId']
+    ax=cdp.send('Accessibility.getPartialAXTree',{'objectId':node,'fetchRelatives':False})['nodes'][0]
+    ok(not ax['ignored'] and ax['role']['value']=='status','empty action status is already in Chrome accessibility tree')
+    ok(p.locator('.rmeasure-status').evaluate('e=>getComputedStyle(e).display!=="none"&&getComputedStyle(e).visibility!=="hidden"'),'empty status is never display-hidden')
+    ok('0 measuring groups' not in p.locator('[data-rmeasure-root]').inner_text(),'empty board has no zero quotient')
+    action(p,'lay');action(p,'read');p.locator('[data-rmeasure-case]').select_option('three-quarters');p.locator('[data-rmeasure-case]').select_option('unit-quarter');ok(p.locator('.rmeasure-reading').count()==1,'case return keeps open readout')
+    for edit in ['lift','return','undo']:
+        if edit=='lift':action(p,'read')
+        if edit=='return':action(p,'lay');action(p,'read')
+        if edit=='undo':split(p,2);action(p,'read')
+        action(p,edit);ok(p.locator('.rmeasure-reading').count()==0,edit+' closes supplied readout')
+    ok(p.locator('[data-rmeasure-split="2"]').evaluate('e=>e===document.activeElement'),'final Undo keeps usable focus')
+    action(p,'example');action(p,'next');action(p,'previous');ok(p.locator('[data-rmeasure-action="next"]').evaluate('e=>e===document.activeElement'),'first example bound focuses Next')
+    action(p,'next');action(p,'close');ok(p.locator('[data-rmeasure-action="example"]').evaluate('e=>e===document.activeElement'),'example close focuses its opener');action(p,'example');ok('picture 1 of 4' in p.locator('[data-rmeasure-view="example"]').inner_text(),'reopened example starts at first picture')
+    p.locator('[data-rmeasure-case]').select_option('partial-group');ok(p.locator('[data-rmeasure-view="live"]').count()==1,'case selector closes worked example');ok('Try splitting' in p.locator('.rmeasure-reason').inner_text() and 'Lift' not in p.locator('.rmeasure-reason').inner_text(),'empty overshoot invites available split without unavailable Lift')
+    ok(p.locator('[data-rmeasure-action="lay"]').get_attribute('aria-describedby')=='rmeasure-lay-reason','disabled Lay programmatically linked to reason')
+    split(p,3);action(p,'lay');action(p,'undo');ok('Or use Lift' in p.locator('.rmeasure-reason').inner_text(),'partial overshoot includes optional Lift');split(p,2);split(p,3);ok('whole-group, half-group' in p.locator('.rmeasure-limit').inner_text(),'finite tool limits explained')
+    # Same-tick speech must be inert before a route event clears material.
+    stash(p);prior=p.evaluate('ribbonSpeech.length');p.evaluate('()=>{location.hash="#notes";ribbonOld.forEach(e=>e.click());}');p.locator('#download').wait_for();ok(p.evaluate('ribbonSpeech.length')==prior,'same-tick departed Hear cannot request speech')
+    # Every finite case has a tiny but real gap, including the narrowest one.
+    c,q=setup(browser,base,320,800,seed)
+    for case,path in [('unit-quarter',[1,1,1,3,3,4]),('three-quarters',[1,1,3,3,4]),('eighth-group',[1,3,3,4]),('partial-group',[3,4]),('mixed-groups',[1,1,4,6]),('beyond-one',[1,3,3,4])]:
+        q.locator('[data-rmeasure-case]').select_option(case)
+        for part in path:
+            while q.locator('[data-rmeasure-action="undo"]').is_enabled():action(q,'undo')
+            for factor in {1:[],2:[2],3:[3],4:[2,2],6:[2,3]}[part]:split(q,factor)
+            action(q,'lay')
+        ok('smaller than any piece' in q.locator('.rmeasure-reason').inner_text(),'tiny gap honestly described for '+case)
+        ok(q.locator('[data-rmeasure-gap]').bounding_box()['width']>0,'tiny gap remains drawn for '+case)
+        ok(q.locator('.rmeasure-complete').count()==0,'tiny gap is not rounded to completion')
+        q.locator('.rmeasure-status').filter(has_text='smaller than any piece').wait_for();ok(q.evaluate('document.documentElement.scrollWidth<=innerWidth'),'tiny gap text has no narrow overflow')
+        if case=='unit-quarter':q.screenshot(path=str(OUT/'narrowest-gap.png'),full_page=True)
+    c.close()
+
 def main():
     js="import {freshState} from './dist/core.mjs';import {initializeExplorerState} from './dist/progress-transfer.mjs';const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;s.ribbonMeasure={version:77,cuts:'unreadable future field'};s.sentinel={note:'Synthetic retained work'};console.log(JSON.stringify(s));"
     seed=json.loads(subprocess.check_output(['node','--input-type=module','-e',js],cwd=ROOT,text=True))
@@ -213,15 +253,21 @@ def main():
     with sync_playwright() as pw:
         browser=pw.chromium.launch(headless=True,executable_path='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args=['--disable-quic'])
         try:
-            parts=set(os.environ.get('RMEASURE_TEST_PARTS','material,lifecycle,interfaces').split(','))
+            parts=set(os.environ.get('RMEASURE_TEST_PARTS','material,lifecycle,interfaces,repairs').split(','))
             if 'material' in parts:
                 for width,height in [(820,1180),(1024,768),(320,800)]:journey(browser,base,seed,width,height)
             if 'lifecycle' in parts:lifecycle(browser,base,seed)
             if 'interfaces' in parts:interfaces(browser,base,seed)
+            if 'repairs' in parts:review_repairs(browser,base,seed)
             ok(not FAULTS,'no release page/http/console faults: '+json.dumps(FAULTS))
-            ok(not errors,'no page/console errors');result={'status':'passed','checks':checks,'parts':sorted(parts),'scope':'native material, lifecycle, keyboard, speech requests, statuses, fixed-coordinate taps, first-screen layout and storage isolation; no physical iPad/Safari or audible speech proof'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
+            ok(not errors,'no page/console errors');result={'status':'passed','checks':checks,'parts':sorted(parts),'scope':[{
+                'material':'six material cases at three viewports, geometry, mixed pieces, finite-gap recovery, example frames and notebook isolation',
+                'lifecycle':'stale controls, route/chooser/two explorers, real Notes import/export/cancel/failure/reset/reload; import/reset follow actual Notes route departure, not isolated hooks',
+                'interfaces':'native keyboard, Hear composition and local speech request when available, connected consumed status, fixed-coordinate touch actions, first-screen tablet and storage off/failure',
+                'repairs':'empty Chrome accessibility-tree status, explicit disabled reason, readout/focus/view transitions, same-tick departed Hear and all six narrow-screen tiny gaps'
+            }[part] for part in sorted(parts)],'limits':'No physical iPad/Safari, audible speech, screen-reader announcement or learning-effect proof'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
         except Exception:
-            for p,label in pages:
+            for p,label in pages+PAGES:
                 try:p.screenshot(path=str(OUT/f'failure-{label}.png'),full_page=True)
                 except Exception:pass
             raise

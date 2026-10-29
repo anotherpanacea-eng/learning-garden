@@ -32,13 +32,13 @@ The separately labelled ribbon and whole-group quantities always remain visible 
 
 ## Current construction and disabled reasons
 
-- Empty: No pieces laid yet. [If the currently selected B/q piece fits: Lay a piece to begin.] [Otherwise: Try splitting the measuring group into smaller equal pieces.]
+- Empty: No pieces laid yet. [If the currently selected B/q piece fits: Lay a piece to begin.] [Otherwise the adjacent disabled-Lay reason supplies the current repair invitation.]
 - Material: Covered:[covered-length-phrase]. Remaining length:[gap-length-phrase].
 - Incomplete: The ribbon is not fully measured yet.
 - Full: This measures all of the ribbon ([A-length-phrase]). Together these pieces make[total-group-phrase]. Each whole measuring group is[B-length-phrase].
-- Fully covered Lay reason: The ribbon is fully measured. Lift or return a piece to try another way.
+- Fully covered Lay reason: The ribbon is fully measured. Use Lift last piece or Return all pieces to try another way.
 - Gap smaller than every offered piece (0<gap<B/6): The gap is[gap-group-phrase], smaller than any piece this board offers. Use Lift last piece to try another way.
-- Overshoot, fitting finer piece reachable by further splits: This piece reaches beyond the ribbon’s end. Try splitting the measuring group. [Add “Or lift a piece” only if pieces are laid.]
+- Overshoot, fitting finer piece reachable by further splits: This piece reaches beyond the ribbon’s end. Try splitting the measuring group. [Add “Or use Lift last piece.” only if pieces are laid.]
 - Overshoot, fitting smaller offered piece requires Undo: A smaller offered piece fits. Use Undo last split to change the template, or Lift last piece.
 - These are finite-tool limits and repair invitations, never a wrong-answer judgment or a promise that every smaller piece completes the ribbon.
 - Finite split reason: This board offers whole-group, half-group, third-group, quarter-group and sixth-group pieces. [If another split is enabled: The other split is still available.] [If both splits are disabled: Use Undo last split to try another path.]
@@ -46,7 +46,7 @@ The separately labelled ribbon and whole-group quantities always remain visible 
 Read the measurement, empty: invite Lay only if the selected piece fits. Otherwise use the applicable splitting/repair guidance above; do not tell the child to press a disabled Lay.
 Read the measurement, nonempty: [tally grouped by each laid piece’s own q]. Together:[current-group-phrase]. Check:[current-group-phrase] times[B-length-phrase] per measuring group measures[covered-length-phrase]. [If incomplete, repeat that the ribbon is not fully measured yet.]
 
-Never replace a fractional quotient with just its number of whole groups, count pieces as groups, or call a 1/q-group piece 1/q of the original unit. Tally examples: “2 third-group pieces” (2/3 of one measuring group); “2 whole-group pieces and 1 half-group piece” (2 1/2 measuring groups, or 5/2 groups); “24 sixth-group pieces” (4 measuring groups). All valid mixed histories get their own literal tally; no canonical path preference.
+Never replace a fractional quotient with just its number of whole groups, count pieces as groups, or call a 1/q-group piece 1/q of the original unit. Tally examples: “2 third-group pieces” (2/3 of one measuring group); “2 whole-group pieces; 1 half-group piece” (2 1/2 measuring groups, or 5/2 groups); “24 sixth-group pieces” (4 measuring groups). Separate nonzero tally categories with semicolons. All valid mixed histories get their own literal tally; no canonical path preference.
 
 ## Worked example, separate from my ribbon
 
@@ -73,3 +73,5 @@ These announce actual actions once through a guarded connected region. Rerenderi
 ## Grown-up boundary
 
 This is a finite visual measurement model: the quotient counts groups whose size is the divisor. Fractional final groups and mixed piece sizes connect the operation to multiplication as an inverse check. It does not teach the full reciprocal algorithm, general real-world problem reading, fluent arithmetic, independent explanation or mastery. Simplified labels and equations are supplied support. Work is temporary; there is no new assessment or Notes record. The measuring strip is an abstract reusable reference, not instructions for physical cutting or a promise that partial real objects meet an order.
+
+Implementation review clarifications: the main task question and finite split-limit explanation join Hear. With Read open, the supplied readout carries the incomplete qualifier once. Tiny-gap action status adds the same finite-tool repair invitation. Brackets are labelled in the diagram and described in its caption. The status region stays present while empty.

@@ -20,3 +20,11 @@ Opus mathematical repair review confirmed the gap/advice, empty-hint and frame-i
 **Root verdict: BUILD-READY for this finite scope; zero unresolvedP1/P2.** Implementation and independent exact-candidate release review remain required. No source/browser/physical-device/audibility/learning-effect clearance is implied by these specification results.
 
 A final narrow independent fold check confirmed the chooser, tiny-gap/Undo and tally repairs. It identified the last wording qualifier: the improper-fraction alias applies only to noninteger group counts greater than1. Root inserted that qualifier, matching both the copy’s rule and the intended formatter; sub-unit counts remain “a/b of one measuring group”. No operational or mathematical scope changed.
+
+## Implementation review and repairs
+
+Independent Opus review of candidate ce4a1c4 found noP1 and oneP2: `display:none` on the empty action status could prevent assistive technology from observing the later live update. Root removed that hiding rule and reserved a small rendered status line. A native Chrome accessibility-tree probe now verifies the initially empty status is exposed; this does not prove any screen reader speaks it.
+
+Useful P3 notes were folded without changing the finite mathematical operation: both brackets carry drawn labels; the q=1 diagram title says whole group; disabled Lay is linked to its reason; tiny-gap action status includes repair guidance; Hear includes the main question and finite tool limits without repeating the incomplete qualifier. Copy/spec now settle semicolon tally categories and the explicit-Read boundary for tally/inverse check. Native tests add readout/focus/view transitions, all six tiny-gap geometries at320px and same-tick departed Hear. Core checks independently select the advisory branch and compare reversed equal-sum histories. Notes import/reset tests follow the real Notes route and cannot isolate those hooks from route-departure invalidation. Physical iPad/Safari, audibility, screen-reader announcement and learning effects remain unverified.
+
+The repair candidate still requires independent exact-candidate clearance before merge.
