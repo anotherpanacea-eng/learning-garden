@@ -22,11 +22,11 @@ All files are in the owner's Dropbox, not in this repository:
 | A Question of Our Own | Act V ending | spec 120 | Not built | 52 s |
 | The Opening of the Ways | Act VI ending | spec 120 | Not built | 61 s |
 | Sound as a wave | Process clip | [146](specs/146-bell-and-drum.md) | Proposed spec only | 36 s |
-| The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) | Proposed spec only | 32 s |
+| The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) |308energy operation built; independent implementation/release gates pending; original full film held for tracking/caption/pour repairs | 32 s |
 | The water cycle at the weather station | Process clip | [140](specs/140-weather-station.md) | Proposed spec only | 37 s |
 | Closed and open circuit | Process clip | [163](specs/163-sparks-and-switches.md) | Proposed spec only | 35 s |
 | Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Delivered through PR248; corrected full film | 35 s |
-| Ramp and lever | Process clip | [305 ramp-first operation](specs/305-lift-yard.md); broader[154](specs/154-ramps-levers-hoist.md) |305/306operations delivered;307full corrected film built locally, final review/release pending | 38 s |
+| Ramp and lever | Process clip | [305 ramp-first operation](specs/305-lift-yard.md); broader[154](specs/154-ramps-levers-hoist.md) |305/306operations delivered;307full corrected film live through PR251 | 38 s |
 
 ## What is ready now
 
@@ -98,4 +98,9 @@ Actual editable lever source/captions were read. Its fixed-horizontal endpoint c
 
 ## Full lifting film ·307 commission
 
-[306/PR250](https://github.com/anotherpanacea-eng/learning-garden/pull/250#issuecomment-6507025098) is now live with both machines:687asset matches before5,365Lever/10,212Ramp hosted native assertions. Its proper rigid lever operation provides the second teaching home. [307](specs/307-lift-yard-film.md) now commissions the whole38s original film as a separately framed optional turn, not an excerpt. Actual original pictures received independent sampled review; fourP2s were repaired in a private derivative and rechecked on actual stills/captions. Encoded-film/framing and six independent spec reviews now clear. Integration is built locally; the initial code review found no applicationP1/P2 but required real input evidence, now exercised in519native assertions. Final exact-head recheck, existing regressions, release and hosted acceptance remain pending. Original source concerns remain relevant to preventing copied kinematics, not grounds for claiming an unseen export was defective. No watch gate, saved evidence, new broader154coverage or authoring runtime is introduced.
+[306/PR250](https://github.com/anotherpanacea-eng/learning-garden/pull/250#issuecomment-6507025098) is now live with both machines:687asset matches before5,365Lever/10,212Ramp hosted native assertions. Its proper rigid lever operation provides the second teaching home. [307](specs/307-lift-yard-film.md) now commissions the whole38s original film as a separately framed optional turn, not an excerpt. Actual original pictures received independent sampled review; fourP2s were repaired in a private derivative and rechecked on actual stills/captions. Encoded-film/framing and six independent spec reviews now clear. Integration is built locally; the initial code review found no applicationP1/P2 but required real input evidence, now exercised in519native assertions. Final exact-head recheck and existing regressions cleared; [PR251release](https://github.com/anotherpanacea-eng/learning-garden/pull/251#issuecomment-6507775311) accepted691matching files before519hosted native assertions. The full38sfilm is live. Original source concerns remain relevant to preventing copied kinematics, not grounds for claiming an unseen export was defective. No watch gate, saved evidence, new broader154coverage or authoring runtime is introduced.
+
+
+## Mill film and its teaching home ·308 commission
+
+[308](specs/308-mill-energy-book.md) now supplies the paused single-batch energy book; implementation/release gates are pending. The existing32s take2 has been decoded/sampled and independently reviewed, not presumed usable: a red bucket refills while its jars follow the earlier bucketful; the boundary needs a visible label, the water's exit needs a pour, and the Sun caption needs the water cycle. Keep all32seconds/four scenes in a future repaired derivative, independently review the actual corrected pictures, then add its optional turn separately. Ongoing film buckets and the finite game's tracked batch must be distinguished. No broader147 pack or Motion runtime is a prerequisite or included.
