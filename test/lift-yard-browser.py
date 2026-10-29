@@ -28,7 +28,7 @@ def setup(b,base,seed,width,reduce=True):
  p=c.new_page();p.set_default_timeout(15000);p.on('pageerror',lambda e:errors.append(str(e)));p.goto(base+'#workshop/lift',wait_until='networkidle');ready(p);return c,p
 
 def equipment(p):
- m=re.search(r'Load (\d+) N · winch limit (\d+) N · boards ([\d, ]+) m',p.locator('.ly-tag').inner_text());return int(m[1]),int(m[2]),[int(n) for n in m[3].split(',')]
+ m=re.search(r'Load weight: (\d+) N · Winch can pull up to (\d+) N · Boards available: ([\d, ]+) m',p.locator('.ly-tag').inner_text());return int(m[1]),int(m[2]),[int(n) for n in m[3].split(',')]
 def layout(p):
  css(p);ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth'),'no horizontal overflow')
  for r in p.locator('[data-lift-root] button').evaluate_all('xs=>xs.map(b=>{const r=b.getBoundingClientRect();return [r.width,r.height]})'):ok(min(r)>=43.9,'current controls44px')
@@ -72,7 +72,7 @@ def journey(b,base,seed,width):
 def motion(b,base,seed):
  c,p=setup(b,base,seed,820,False)
  try:
-  click(p,'start');p.evaluate('document.querySelector("[data-lift-action=pull]").click()');p.wait_for_selector('[data-lift-moving]');a=p.locator('[data-lift-drum]').get_attribute('transform');p.wait_for_timeout(55);bpose=p.locator('[data-lift-drum]').get_attribute('transform');ok(a!=bpose,'actual finite user-triggered movement');p.evaluate('document.querySelector("[data-lift-action=pull]").click()');p.wait_for_function("!document.querySelector('[data-lift-moving]')");geom(p,2,2,12);ok(p.locator('[data-lift-distance]').inner_text()=='2 of 2 m','rapid pull reaches correct checkpoint without delayed model writes');click(p,'bottom');ok(not p.locator('[data-lift-moving]').count(),'return to bottom immediate');p.evaluate('document.querySelector("[data-lift-action=pull]").click();document.dispatchEvent(new Event("garden-speak-request"))');ok(not p.locator('[data-lift-moving]').count(),'narration cancels and settles UI motion');geom(p,2,1,12)
+  click(p,'start');p.evaluate('document.querySelector("[data-lift-action=pull]").click()');p.wait_for_selector('[data-lift-moving]');a=p.locator('[data-lift-drum]').get_attribute('transform');p.wait_for_timeout(55);bpose=p.locator('[data-lift-drum]').get_attribute('transform');ok(a!=bpose,'actual finite user-triggered movement');p.evaluate('document.querySelector("[data-lift-action=pull]").click()');p.wait_for_function("!document.querySelector('[data-lift-moving]')");geom(p,2,2,12);ok(p.locator('[data-lift-distance]').inner_text()=='2 of 2 m','rapid pull reaches correct checkpoint without delayed model writes');click(p,'bottom');ok(not p.locator('[data-lift-moving]').count(),'return to bottom immediate');p.evaluate('document.querySelector("[data-lift-action=pull]").click();document.dispatchEvent(new CustomEvent("garden-speak-request",{detail:{text:"",language:"en"}}))');ok(not p.locator('[data-lift-moving]').count(),'narration cancels and settles UI motion');geom(p,2,1,12)
   click(p,'bottom');p.evaluate('document.querySelector("[data-lift-action=pull]").click();window.dispatchEvent(new Event("pagehide"))');ok(not p.locator('[data-lift-moving]').count(),'pagehide cancels finite movement');geom(p,2,1,12)
   p.evaluate('location.hash="#science/ice"');p.locator('[data-water-phase-root]').wait_for();p.wait_for_timeout(220);ok(not p.locator('[data-lift-root]').count(),'old motion cannot redraw another room');p.evaluate('location.hash="#workshop/lift"');ready(p);ok(p.locator('[data-lift-distance]').inner_text()=='0 of 2 m','leaving exact route resets yard')
  finally:c.close()
@@ -83,14 +83,23 @@ def transfer(b,base):
  try:
   for route,selector in [('#workshop','.workshop-page'),('#workshop/fair','.fair-page')]:
    p.evaluate('(r)=>location.hash=r',route);p.locator(selector).wait_for();before=json.loads(p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')"));p.locator(f'{selector} a[href="#workshop/lift"]').click();ready(p);click(p,'start');click(p,'pull');p.locator('.ly-room header a' if route=='#workshop' else '.ly-exit').click();p.locator(selector).wait_for();after=json.loads(p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')"));ok(after['workshop']==before['workshop'] and after['fairTests']==before['fairTests'],'actual old Workshop/Fair source work and page preserved on entry/return');ok(after['syntheticOther']==before['syntheticOther'],'large sibling survives real legacy navigation')
-  p.evaluate('location.hash="#notes"');p.locator('#progress-file').wait_for();export=p.locator('#download');
+  p.evaluate('location.hash="#workshop/lift"');ready(p);click(p,'start');click(p,'pull');p.evaluate('window.preImportLift=document.querySelector("[data-lift-action=pull]")');p.evaluate('location.hash="#notes"');p.locator('#progress-file').wait_for();export=p.locator('#download');
   with p.expect_download() as download:export.click()
   file=OUT/'synthetic-notes.json';download.value.save_as(str(file));data=json.loads(file.read_text());ok(file.stat().st_size>550000,'real Notes export contains large sibling')
-  p.locator('#progress-file').set_input_files(str(file));p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').click();p.wait_for_function("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId!=='explorer-1'");owner=p.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId");after=json.loads(p.evaluate("id=>localStorage.getItem('number-garden-v1:'+id)",owner));ok(after['workshop']==seed['workshop'] and after['fairTests']==seed['fairTests'] and after['syntheticOther']==seed['syntheticOther'],'real Notes import preserves healthy historical work and large sibling');p.evaluate('location.hash="#workshop/lift"');ready(p,owner);ok(p.locator('[data-lift-distance]').inner_text()=='0 of 2 m','import starts fresh yard')
+  p.locator('#progress-file').set_input_files(str(file));p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').click();p.wait_for_function("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId!=='explorer-1'");owner=p.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId");after=json.loads(p.evaluate("id=>localStorage.getItem('number-garden-v1:'+id)",owner));ok(after['workshop']==seed['workshop'] and after['fairTests']==seed['fairTests'] and after['syntheticOther']==seed['syntheticOther'],'real Notes import preserves healthy historical work and large sibling');p.evaluate('location.hash="#workshop/lift"');ready(p,owner);p.evaluate('preImportLift.click()');ok(p.locator('[data-lift-distance]').inner_text()=='0 of 2 m' and p.locator('[data-lift-action=start]').count()==1,'import starts fresh yard and rejects old control')
+ finally:c.close()
+
+def reset_flow(b,base,seed):
+ c,p=setup(b,base,seed,820)
+ try:
+  click(p,'start');click(p,'pull');p.evaluate('window.preResetLift=document.querySelector("[data-lift-action=pull]")');other=p.evaluate("localStorage.getItem('number-garden-v1:explorer-2')")
+  p.evaluate('location.hash="#notes"');p.locator('#reset').click();p.locator('#confirm-reset').click()
+  if p.locator('[data-film-skip]').count():p.locator('[data-film-skip]').click()
+  p.evaluate('location.hash="#workshop/lift"');ready(p);p.evaluate('preResetLift.click()');ok(p.locator('[data-lift-distance]').inner_text()=='0 of 2 m' and p.locator('[data-lift-action=start]').count()==1,'global reset invalidates old trip/control');ok(p.evaluate("localStorage.getItem('number-garden-v1:explorer-2')")==other,'explicit active reset leaves other explorer unchanged')
  finally:c.close()
 
 def main():
- seed=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {freshState} from './dist/core.mjs';const s=freshState();s.garden={avatar:'sky',welcomeFilmSeen:true};s.workshop={version:99,opaque:'retained'};s.fairTests={version:99,opaque:'retained'};s.science={version:99,opaque:'retained'};s.syntheticOther={payload:'z'.repeat(550000)};console.log(JSON.stringify(s));"],cwd=ROOT,text=True))
+ seed=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {freshState} from './dist/core.mjs';const s=freshState();s.garden={avatar:'sky',welcomeFilmSeen:true};s.workshop={version:99,opaque:'retained'};s.fairTests={version:99,opaque:'retained'};s.science={version:99,opaque:'retained'};s.bellStudio={version:99,opaque:'retained'};s.rhythm={version:99,opaque:'retained'};s.syntheticOther={payload:'z'.repeat(550000)};console.log(JSON.stringify(s));"],cwd=ROOT,text=True))
  class Quiet(http.server.SimpleHTTPRequestHandler):
   def log_message(self,*args):pass
  class Server(http.server.ThreadingHTTPServer):request_queue_size=128;daemon_threads=True
@@ -100,7 +109,7 @@ def main():
    b=pw.chromium.launch(headless=True,executable_path='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args=['--disable-quic'])
    try:
     for width in [320,820,1024]:journey(b,base,seed,width);print('catalogue width',width,'passed',flush=True)
-    motion(b,base,seed);transfer(b,base);ok(not errors,'no page errors '+str(errors));print(checks,'Lift Yard native assertions passed; no physical-device/learning claim',flush=True)
+    motion(b,base,seed);transfer(b,base);reset_flow(b,base,seed);ok(not errors,'no page errors '+str(errors));print(checks,'Lift Yard native assertions passed; no physical-device/learning claim',flush=True)
    finally:b.close()
  finally:server.shutdown();server.server_close()
 if __name__=='__main__':main()

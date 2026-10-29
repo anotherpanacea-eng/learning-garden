@@ -6,6 +6,11 @@ equal(liftCases.length,28);equal(new Set(liftCases.map(j=>JSON.stringify(j))).si
 const attribute=(s,k)=>{const v=s.match(new RegExp(`${k}="([^"]+)"`));assert.ok(v,k);return v[1];};
 const tag=(s,attr)=>s.match(new RegExp(`<[^>]+ ${attr}(?:=\"[^\"]*\")?[^>]*>`))[0];
 const circleRect=(c,r)=>Math.hypot(c.x-Math.max(r.x,Math.min(c.x,r.x+r.w)),c.y-Math.max(r.y,Math.min(c.y,r.y+r.h)))-18;
+const circlePolygon=(c,points)=>{
+ const p=points.trim().split(/\s+/).map(s=>s.split(',').map(Number));let min=Infinity;
+ for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length],dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((c.x-a[0])*dx+(c.y-a[1])*dy)/(dx*dx+dy*dy)));min=Math.min(min,Math.hypot(c.x-a[0]-t*dx,c.y-a[1]-t*dy));}
+ return min-18;
+};
 for(let index=0;index<28;index++){
  const base={...freshLiftYard(),offset:index},job=liftJob(base);ok(liftLengths.some(L=>L<=job.board&&job.weight/L<=job.capacity),'every case solvable');
  for(const L of liftLengths){
@@ -30,6 +35,7 @@ for(let index=0;index<28;index++){
    const transform=attribute(tag(picture,'data-lift-drum'),'transform').match(/[+-]?(?:\d*\.)?\d+(?:e[+-]?\d+)?/gi).map(Number),c={x:transform[0],y:transform[1]},ux=(tx-fx)/(80*L),uy=(ty-fy)/(80*L),nx=uy,ny=-ux;
    near(c.x-18*nx,fx+80*d*ux);near(c.y-18*ny,fy+80*d*uy);near((fy+18*ny)-c.y,80*d/L);
    const rope=tag(picture,'data-lift-rope'),a={x:+attribute(rope,'x1'),y:+attribute(rope,'y1')},b={x:+attribute(rope,'x2'),y:+attribute(rope,'y2')};near(Math.hypot(a.x-c.x,a.y-c.y),18);near((b.x-a.x)*uy-(b.y-a.y)*ux,0);near(Math.hypot(b.x-c.x,b.y-c.y),80*(L-d)+64);ok(286-c.y-18>13,'ground clear');ok(circleRect(c,{x:610,y:200,w:110,h:12})>12,'platform clear');ok(Math.hypot(b.x-c.x,b.y-c.y)-26>=38-1e-8,'winch clear');
+   for(const id of ['data-lift-foot-support','data-lift-top-support'])ok(circlePolygon(c,attribute(tag(picture,id),'points'))>=8-1e-8,'actual drum clears support polygon');
    const post=tag(picture,'data-lift-winch-post');ok(+attribute(post,'y')-b.y<8,'winch touches post');near(+attribute(post,'y')+Number(attribute(post,'height')),200);equal((picture.match(/data-lift-metre=/g)||[]).length,L+1);
    const grid=liftWorkDrawing({...v,job,length:L,distance:d,force:job.weight/L,energy:job.weight*d/L,planned:true},{weight:24,length:6}),cells=[...grid.matchAll(/<rect data-lift-cell="current"[^>]*>/g)].map(m=>m[0]);equal(cells.length,job.weight);equal(cells.filter(c=>attribute(c,'data-filled')==='true').length,job.weight/L*d);ok(cells.every(c=>attribute(c,'width')==='18'&&attribute(c,'height')==='18'),'fixed cell sizes');ok(grid.includes('not square metres'),'work not physical area');
   }
