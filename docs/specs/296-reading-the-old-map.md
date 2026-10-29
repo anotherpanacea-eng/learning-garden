@@ -1,6 +1,8 @@
 # Spec 296 · Reading the old map
 
-**Finite authoring specification · independently reviewed and cleared · 2026-10-29.** Narrows proposed [Desk Case 6](../content/118-hollis-pages-case.md) to the actual first Keeper's Page. [Exact teaching copy](../content/296-reading-the-old-map-text.md) and [source audit](../source-audits/296-reading-the-old-map.md) are part of this specification. [Independent review](../reviews/296-reading-the-old-map-spec-review.md) records all six lenses, four teaching repairs and focused repair clearance. Implementation remains subject to its separate review.
+**Finite authoring specification · independently reviewed and cleared · 2026-10-29.** Narrows proposed [Desk Case 6](../content/118-hollis-pages-case.md) to the actual first Keeper's Page. [Exact teaching copy](../content/296-reading-the-old-map-text.md) and [source audit](../source-audits/296-reading-the-old-map.md) are part of this specification. [Independent review](../reviews/296-reading-the-old-map-spec-review.md) records all six lenses, four teaching repairs and focused repair clearance. Implementation clearance and canonical verification are recorded in the publication receipt below.
+
+**Publication:** Delivered through [PR234](https://github.com/anotherpanacea-eng/learning-garden/pull/234#issuecomment-6490667780), after exact-candidate independent implementation clearance.651 hosted static files matched before219 affected hosted native Chrome assertions passed; 199 affected source/core checks and all 203 source suites also passed. This is only the finite first-page slice described below, not full Case6 or a physical-device/learning-effect qualification.
 
 ## Purpose and ownership
 
