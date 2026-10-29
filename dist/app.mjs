@@ -1,3 +1,4 @@
+import {pauseRhythmSong,stopRhythmSong} from './rhythm-song.mjs';
 import {stopTownFilm} from './town-film.mjs';
 import {ferryPage,bindFerry,resetFerryVisit,ferryEntry} from './ferry-ui.mjs';
 import {hingePage,bindHinge,resetHingeVisit} from './hinge-ui.mjs';
@@ -170,10 +171,12 @@ import {observation,recommendations,makePractice,methodLabel,describe,numericAns
 import {checkin,puzzles,skills} from './content.mjs';
 const $=s=>document.querySelector(s), main=$('#main');
 let bellPlayer=null,rhythmPlayer=null;
-const stopBell=(reason='page-change')=>{bellPlayer?.stop(reason);rhythmPlayer?.stop(reason);};
-const bellPlayback={play:(sequence,callbacks)=>{rhythmPlayer?.stop('other-studio');return (bellPlayer??=createBellPlayer()).play(sequence,callbacks);},stop:stopBell};
-const rhythmPlayback={play:(sequence,callbacks)=>{bellPlayer?.stop('other-studio');return (rhythmPlayer??=createRhythmPlayer()).play(sequence,callbacks);},stop:stopBell};
+const stopTones=(reason='page-change')=>{bellPlayer?.stop(reason);rhythmPlayer?.stop(reason);};
+const stopBell=(reason='page-change')=>{stopTones(reason);pauseRhythmSong();};
+const bellPlayback={play:(sequence,callbacks)=>{pauseRhythmSong();rhythmPlayer?.stop('other-studio');return (bellPlayer??=createBellPlayer()).play(sequence,callbacks);},stop:stopBell};
+const rhythmPlayback={play:(sequence,callbacks)=>{pauseRhythmSong();bellPlayer?.stop('other-studio');return (rhythmPlayer??=createRhythmPlayer()).play(sequence,callbacks);},stop:stopBell};
 document.addEventListener('click',e=>{if(e.target.closest('[data-speak],[data-preview-voice],a[href^="#"]'))stopBell('speech-or-navigation');},true);
+document.addEventListener('garden-speak-request',()=>stopBell('narration-request'),true);
 window.addEventListener('pagehide',()=>{stopBell('pagehide');stopSpeech();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){stopBell('hidden');stopSpeech();}});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -326,6 +329,7 @@ function syncFieldPlantExposure(view=null){
 function exposeRain(exposure){noteRainDisplayExposure(state,exposure);exposeStoryFacts({facts:exposure.facts});save();}
 function render(){
   stopTownFilm();
+  stopRhythmSong();
   stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   let cafeOfferPairs=null;
@@ -491,7 +495,7 @@ function render(){
     const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
     document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):rhythmPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRhythm(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,player:rhythmPlayback,stopSpeech});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRhythm(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,player:rhythmPlayback,stopSpeech,stopTones});bindSpeech();}return;
   }
   if(hash==='#science/water-shares'){
     let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);

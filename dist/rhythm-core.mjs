@@ -1,3 +1,4 @@
+import {RHYTHM_SONG_SOURCE,SONG_UNITS} from './rhythm-song-content.mjs';
 import {RHYTHM_MODEL,rhythmNoteById,rhythmSourceById} from './rhythm-content.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
@@ -102,19 +103,44 @@ export function useRhythmSupport(state,key,options={}){
   w.support[key]=true;return true;
  },options);
 }
+// Historical readers are independent of the current clip catalog. New presentation
+// eligibility separately ensures the retained source actually describes this file.
+export function readableRhythmSong(note){
+ const source=note?.source;
+ return object(note)&&note.version===1&&note.offered===true&&typeof note.soundRequested==='boolean'&&object(source)&&text(source.id,160)&&text(source.title)&&object(source.model)&&source.model.id==='song-four-beat-eighths-v1'&&source.model.beats===4&&source.model.beatSeconds===.5&&array(source.examples,16)&&source.examples.length>0&&source.examples.every(e=>object(e)&&text(e.id,160)&&array(e.pattern,8)&&e.pattern.length>0&&e.pattern.every(c=>own(SONG_UNITS,c))&&e.pattern.reduce((n,c)=>n+SONG_UNITS[c],0)===8);
+}
+export function compatibleRhythmSong(note){return readableRhythmSong(note)&&note.source.id===RHYTHM_SONG_SOURCE.id&&same(note.source.examples.map(e=>e.pattern),RHYTHM_SONG_SOURCE.examples.map(e=>e.pattern));}
+export function rhythmSongView(state){
+ const r=state?.rhythm,note=r?.song;
+ return {status:!object(state)||own(state,'rhythm')&&!rootReady(r)?'unsupported':!own(r||{},'song')?'absent':readableRhythmSong(note)?'ready':'unreadable',note:readableRhythmSong(note)?note:null,compatible:compatibleRhythmSong(note)};
+}
+export function rhythmSongSnapshot(note){
+ if(!readableRhythmSong(note))return null;
+ return {version:1,source:{id:note.source.id,title:note.source.title,model:{id:note.source.model.id,beats:note.source.model.beats,beatSeconds:note.source.model.beatSeconds},examples:note.source.examples.map(e=>({id:e.id,pattern:[...e.pattern]}))},offered:true,soundRequested:note.soundRequested};
+}
+export function offerRhythmSong(state,options={}){
+ return change(state,c=>{
+  if(!own(c,'rhythm'))c.rhythm=fresh();const r=c.rhythm;if(!rootReady(r))return false;
+  if(own(r,'song'))return compatibleRhythmSong(r.song);
+  r.song={version:1,source:clone(RHYTHM_SONG_SOURCE),offered:true,soundRequested:false};return true;
+ },options);
+}
+export function requestRhythmSongSound(state,options={}){
+ return change(state,c=>{const r=c.rhythm;if(!rootReady(r)||!compatibleRhythmSong(r.song))return false;r.song.soundRequested=true;return true;},options);
+}
 export function checkRhythm(state,options={}){
- return workChange(state,w=>{
+ return workChange(state,(w,r)=>{
   if(!own(w,'checks'))w.checks=[];
   if(!array(w.checks,24)||w.checks.length>=24)return false;
-  const attempt={version:1,source:clone(w.source),sequence:[...w.sequence],facts:rhythmFacts(w.sequence),outcome:w.source.kind==='echo'?(same(w.sequence,w.source.target)?'match':'different'):null,supportBefore:clone(w.support),familiar:w.checks.some(readableAttempt)};
+  const attempt={version:1,source:clone(w.source),sequence:[...w.sequence],facts:rhythmFacts(w.sequence),outcome:w.source.kind==='echo'?(same(w.sequence,w.source.target)?'match':'different'):null,supportBefore:clone(w.support),familiar:w.checks.some(readableAttempt),songBefore:rhythmSongSnapshot(r.song)};
   w.checks.push(attempt);w.support.feedbackSeen=true;return true;
  },options);
 }
 export function keepRhythm(state,options={}){
- return workChange(state,w=>{
+ return workChange(state,(w,r)=>{
   if(!own(w,'kept'))w.kept=null;
   if(w.kept!==null&&(!readableKeep(w.kept)||options.replace!==true))return false;
-  const kept={version:1,source:clone(w.source),sequence:[...w.sequence],supportBefore:clone(w.support)};
+  const kept={version:1,source:clone(w.source),sequence:[...w.sequence],supportBefore:clone(w.support),songBefore:rhythmSongSnapshot(r.song)};
   if(same(w.kept,kept))return true;w.kept=kept;return true;
  },options);
 }
