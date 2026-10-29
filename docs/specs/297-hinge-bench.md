@@ -1,6 +1,6 @@
 # Spec 297 · Hinge Bench
 
-**Finite specification · independently reviewed and cleared for implementation · 2026-10-29.** Selects only the changing-opening/arm-length operation from proposed [Turning Tower181](181-turning-tower.md), with [original finite copy](../content/297-hinge-bench-text.md) and [actual source audit](../source-audits/297-hinge-bench.md). [Independent review](../reviews/297-hinge-bench-spec.md) records all six lenses, mathematical findings and focused repair clearance. Implementation still requires its own independent review.
+**Delivered finite slice · 2026-10-29.** Selects only the changing-opening/arm-length operation from proposed [Turning Tower181](181-turning-tower.md), with [original finite copy](../content/297-hinge-bench-text.md) and [actual source audit](../source-audits/297-hinge-bench.md). [Independent review](../reviews/297-hinge-bench-spec.md) records all six lenses, mathematical findings and focused repair clearance. Independent Claude implementation full-plus-repair clearance and the [canonical release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/236#issuecomment-6492289538) record delivery through PR236: 654 matching hosted assets, then 3,592 affected hosted native Chrome assertions. The boundaries below still apply; physical-device behavior and learning effects are not established.
 
 ## Need and boundary
 
