@@ -63,115 +63,10 @@ Open http://127.0.0.1:4173. Learning records remain browser-local. They do not s
 With Node.js installed:
 
 ```sh
-node test/borrowed-sorter-checks.mjs
-node test/town-record-checks.mjs
-node test/equality-desk-checks.mjs
-node test/keeper-story-checks.mjs
-node test/keepers-desk-checks.mjs
-node test/field-kit-checks.mjs
-node test/riddles-checks.mjs
-node test/field-kit-integration-checks.mjs
-node test/field-notebook-checks.mjs
-node test/field-notebook-integration-checks.mjs
-node test/count-collection-checks.mjs
-node test/lantern-line-checks.mjs
-node test/sharing-counter-checks.mjs
-node test/sharing-counter-integration-checks.mjs
-node test/fraction-trail-checks.mjs
-node test/fraction-trail-integration-checks.mjs
-node test/bundle-exchange-checks.mjs
-node test/bundle-exposure-checks.mjs
-node test/bundle-exchange-integration-checks.mjs
-node test/returning-orders-checks.mjs
-node test/instruction-checks.mjs
-node test/instruction-integration-checks.mjs
-node test/rain-paths-checks.mjs
-node test/rain-paths-integration-checks.mjs
-node test/measuring-recipes-checks.mjs
-node test/measuring-recipes-integration-checks.mjs
-node test/whole-batches-checks.mjs
-node test/whole-batches-integration-checks.mjs
-node test/travelers-archive-checks.mjs
-node test/travelers-archive-ui-checks.mjs
-node test/drawn-howtos-checks.mjs
-node test/travelers-archive-integration-checks.mjs
-node test/plant-study-checks.mjs
-node test/plant-study-integration-checks.mjs
-node test/letter-trail-checks.mjs
-node test/letter-trail-integration-checks.mjs
-node test/message-checks.mjs
-node test/message-integration-checks.mjs
-node test/loft-checks.mjs
-node test/loft-growing-checks.mjs
-node test/progress-transfer-checks.mjs
-node test/recovery-boundaries-checks.mjs
-node test/word-garden-checks.mjs
-node test/core-checks.mjs
-node test/broad-checks.mjs
-node test/broad-variants-checks.mjs
-node test/paused-draft-checks.mjs
-node test/broad-help-checks.mjs
-node test/broad-model-checks.mjs
-node test/explorer-storage-checks.mjs
-node test/plantings-and-speech-checks.mjs
-node test/subject-pathway-exposure-checks.mjs
-node test/adaptive-linear-checks.mjs
-node test/adaptive-evidence-checks.mjs
-node test/adaptive-motion-checks.mjs
-node test/adaptive-french-checks.mjs
-node test/pathway-entry-checks.mjs
-node test/linear-pathway-checks.mjs
-node test/evidence-voice-checks.mjs
-node test/motion-evidence-checks.mjs
-node test/french-rooms-checks.mjs
-node test/mobile-quality-checks.mjs
-node test/number-garden-story-checks.mjs
-node test/living-garden-checks.mjs
-node test/living-spiral-checks.mjs
-node test/living-adaptive-checks.mjs
-node test/garden-turn-checks.mjs
-node test/story-checks.mjs
-node test/help-checks.mjs
-node test/cafe-checks.mjs
-node test/cafe-start-checks.mjs
-node test/tenths-checks.mjs
-node test/hundredths-checks.mjs
-node test/science-checks.mjs
-node test/water-evidence-checks.mjs
-node test/workshop-checks.mjs
-node test/route-scale-checks.mjs
-node test/post-office-checks.mjs
-node test/post-office-ui-checks.mjs
-node test/post-pagination-checks.mjs
-node test/post-rival-checks.mjs
-node test/post-rival-adaptive-checks.mjs
-node test/post-rival-adaptive-ui-checks.mjs
-node test/parcel-packing-checks.mjs
-node test/parcel-packing-integration-checks.mjs
-node test/courier-rival-ui-checks.mjs
-node test/learning-invitation-checks.mjs
-node test/learning-connections-checks.mjs
-node test/cafe-expedition-checks.mjs
-node test/cafe-supper-checks.mjs
-node test/facts-checks.mjs
-node test/forage-checks.mjs
-node test/paris-checks.mjs
-node test/paris-exploration-checks.mjs
-node test/paris-saved-source-checks.mjs
-node test/town-remembers-checks.mjs
-node test/town-remembers-integration-checks.mjs
-node test/story-pack-checks.mjs
-node test/library-flood-almanac-checks.mjs
-node test/order-story-checks.mjs
-node test/french-and-revision-checks.mjs
-node test/french-exploration-checks.mjs
-node test/french-saved-source-checks.mjs
-node test/storm-film-checks.mjs
-node test/ending-film-checks.mjs
-node test/equal-groups-checks.mjs
-node test/equal-groups-integration-checks.mjs
-node scripts/check-story-packs.mjs
+node scripts/run-checks.mjs
 ```
+
+The runner checks the offline atlas and story packs, then discovers and runs every `test/*checks*.mjs` source suite in filename order. It stops at the first failure. Browser journeys remain separate and are described with their activities below.
 
 These checks use synthetic observations. They check the application logic; they do not validate the assessment as an educational instrument.
 
@@ -607,3 +502,15 @@ Run `node test/which-hat-checks.mjs` and, with Python Playwright and Chrome, `py
 **Hundred Cups** (`#science/water-shares`) is a source-based water-distribution workshop. Build a graph, zoom between all water and freshwater-only wholes, and answer a changing visitor request. Eight families have 100/200-cup versions; any of the sixteen settings stays open. Original diagrams, first/latest replies and recorded support remain separate and frozen. See [spec240](docs/specs/240-hundred-cups.md). The model does not test drinking safety or certify independent graph construction.
 
 Run `node test/water-shares-checks.mjs`. With Python Playwright and installed Chrome, `python3 test/water-shares-browser.py` starts a temporary static server unless `H2O_TEST_URL` is set; `H2O_ARTIFACTS` selects synthetic screenshots. The browser journey covers nested wholes, both source scales, graph edits, pending-input navigation protection, keep-time fulfillment, support before speech, separate explorers and actual notebook transfer. These are interaction/model checks, not physical iPad/Safari verification or evidence of learning gains.
+
+### The message and the water
+
+Open `#learn/math/timing-desk` from the Keeper’s Desk or Math/Science paths. Four freely available parts connect 24-hour clock and day labels, invented constant-rate journeys, five selected undated records, and a provisional note. Manual journey lines and rate steps, optional teaching and original first/latest responses remain separate from ungraded claim discussions and both writing versions. The supplied case does not predict floods, establish a future minimum, change the town’s warning rule or advance the story. See [spec247](docs/specs/247-message-and-water.md), its [complete authored text](docs/content/247-message-and-water-text.md) and [specification review](docs/reviews/247-message-and-water-spec.md). The source runner includes `test/timing-desk-checks.mjs`; `python3 test/timing-desk-browser.py` exercises the actual local app with installed Playwright/Chrome. `TIMING_TEST_URL` selects a served site and `TIMING_ARTIFACTS` selects a private synthetic output directory. Publication status belongs to the [roadmap](docs/roadmap.md).
+
+### A Town of Our Own
+
+The bounded Act II story in [spec248](docs/specs/248-a-town-of-our-own.md) connects explicit offers from Coin Counter, the Town Record, Whole-batch gathering trays and Story Loft. Three different contributions enable an optional illustrated celebration; supported and unfinished work counts alike, with no skill inference. The second Keeper’s Page contains seven fictional flood entries and an undated storm annotation, followed by a separately opened English letter. Short/Longer story and letter choices are independent of the page’s reading amount. See the [authored text](docs/content/248-a-town-of-our-own-text.md) and [independent specification review](docs/reviews/248-a-town-of-our-own-spec.md). The source runner includes `test/act-two-checks.mjs`. `python3 test/act-two-browser.py` exercises the actual app and host activities; `ACT_TWO_TEST_URL`, `ACT_TWO_ARTIFACTS` and `CHROME_PATH` select the served site, private synthetic evidence directory and installed browser. Publication status belongs to the [roadmap](docs/roadmap.md). No Act II video asset or foreign-language letter is supplied.
+
+### Optional story arrivals
+
+The optional `#arrive` flow commissioned by [spec249](docs/specs/249-story-arrivals.md) previews three beginnings and saves one explicit story choice. After-mending and upstream-letter arrivals supply earlier context labelled Before you came, separate from actual services, offers, endings and reading actions. Café/English/French choices and direct subject entry stay independent. The [finite recaps](docs/content/249-story-arrivals-text.md) and [six-lens review](docs/reviews/249-story-arrivals-spec.md) define the bounded slice. The source runner includes `test/story-arrivals-checks.mjs`; `python3 test/story-arrivals-browser.py` exercises the actual app, with `ARRIVAL_TEST_URL`, `ARRIVAL_ARTIFACTS` and `CHROME_PATH` selecting site, private synthetic artifacts and browser. Publication status belongs to the [roadmap](docs/roadmap.md); no full ActIII, foreign letter, film or date system is supplied.

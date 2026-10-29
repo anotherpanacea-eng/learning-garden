@@ -35,7 +35,7 @@ def setup(browser,width,seed='base',failed=False):
  init="""({seed,failed})=>{if(seed&&!localStorage.getItem('keeper-fixture')){localStorage.setItem('number-garden-v1',JSON.stringify(seed));localStorage.setItem('keeper-fixture','1');}window.__keeperSpeech=[];window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[{name:'Synthetic English',voiceURI:'synthetic-en',lang:'en-US',localService:true,default:true},{name:'Synthetic French',voiceURI:'synthetic-fr',lang:'fr-FR',localService:true}],cancel(){},addEventListener(){},removeEventListener(){},speak(u){__keeperSpeech.push({text:u.text,lang:u.lang,voice:u.voice?.lang});}}});if(failed)Storage.prototype.setItem=function(){throw Error('Synthetic storage failure');};}"""
  c.add_init_script('('+init+')('+json.dumps({'seed':payload,'failed':failed})+')')
  def app(route):
-  response=route.fetch();body=response.text().replace('let graph=null;','window.__keeperRead=()=>structuredClone(state);let graph=null;');route.fulfill(response=response,body=body)
+  response=route.fetch();body=response.text().replace('let graph=null,','window.__keeperRead=()=>structuredClone(state);let graph=null,');route.fulfill(response=response,body=body)
  c.route('**/app.mjs',app)
  p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)));return c,p
 

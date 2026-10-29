@@ -20,8 +20,8 @@ def setup(browser,width,seed=None,refuse=False):
  c=browser.new_context(viewport={'width':width,'height':1000},has_touch=True,accept_downloads=True)
  c.add_init_script('('+"""seed=>{if(!localStorage.getItem('pathway-fixture')){localStorage.setItem('number-garden-v1',JSON.stringify(seed));localStorage.setItem('pathway-fixture','1');}}"""+')('+json.dumps(seed or fixture)+')')
  def app(route):
-  response=route.fetch();body=response.text();assert 'let graph=null;' in body
-  body=body.replace('let graph=null;','window.__pathwayRead=()=>structuredClone(state);let graph=null;',1)
+  response=route.fetch();body=response.text();assert 'let graph=null,' in body
+  body=body.replace('let graph=null,','window.__pathwayRead=()=>structuredClone(state);let graph=null,',1)
   if refuse:body=body.replace('bindPathways(state,options);','bindPathways(state,{...options,canExport:()=>false});',1)
   route.fulfill(response=response,body=body)
  c.route('**/app.mjs',app);p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)));return c,p

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {freshState} from '../dist/core.mjs';
+import {arrivalSkipsWelcome,chooseStoryArrival} from '../dist/story-arrivals-core.mjs';
 import {ensureGarden,startVisit,currentVisit,entranceById,finishStoryNode} from '../dist/garden-core.mjs';
 import {storyEnding,gardenHome} from '../dist/garden-ui.mjs';
 import {cafeSupper} from '../dist/cafe-core.mjs';
@@ -16,14 +17,15 @@ function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
  ensureGarden(state);state.garden.welcomeFilmSeen=welcomeSeen;
  const listeners=new Set(),dialogs=[],exposures=[],lifecycle=[];let focused=0,saves=0,stopped=0;
  const focus={isConnected:true,focus(){focused++;}},main={focus(){focused++;}};
- const context={state,explorerStore:{active:{id:'synthetic-explorer'}},refreshKeeperVisibility(){},keeperFilmBlocked:()=>dialogs.some(d=>d.open),choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
- currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,
+ // Map loading has its own source/browser suite; this fixture owns only films.
+ const context={loadCurriculumMap(){},state,explorerStore:{active:{id:'synthetic-explorer'}},refreshKeeperVisibility(){},keeperFilmBlocked:()=>dialogs.some(d=>d.open),choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
+ currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,arrivalSkipsWelcome,
  save(){saves++;},stopBell(reason){lifecycle.push(['bell-stop',reason]);},stopSpeech(){stopped++;lifecycle.push(['speech-stop']);},esc:x=>String(x),exposeStoryFacts:x=>exposures.push(x),
  document:{activeElement:focus,querySelector:()=>dialogs.find(d=>d.open)||null,body:{append:d=>dialogs.push(d)},createElement(){
   lifecycle.push(['film-dialog-created']);
-  const frame={contentWindow:{},remove(){this.removed=true;}},skip={},events={};
-  return {open:false,frame,skip,setAttribute(){},querySelector:q=>q==='iframe'?frame:skip,addEventListener:(k,f)=>events[k]=f,
-   showModal(){this.open=true;},close(){this.open=false;events.close();},remove(){this.removed=true;}};
+  const frame={contentWindow:{},remove(){this.removed=true;}},skip={},events=new Map();
+  return {open:false,frame,skip,setAttribute(){},querySelector:q=>q==='iframe'?frame:skip,addEventListener(k,f,o={}){const list=events.get(k)||[];list.push({fn:f,once:o.once});events.set(k,list);},
+   showModal(){this.open=true;},close(){this.open=false;for(const e of [...(events.get('close')||[])]){if(e.once)events.set('close',(events.get('close')||[]).filter(x=>x!==e));e.fn();}},remove(){this.removed=true;}};
  }},window:{addEventListener:(k,f)=>listeners.add(f),removeEventListener:(k,f)=>listeners.delete(f)}};
  vm.createContext(context);vm.runInContext(controller,context);
  return {state,context,dialogs,listeners,exposures,lifecycle,read:code=>vm.runInContext(code,context),get saves(){return saves;},get focused(){return focused;},get stopped(){return stopped;},message(data,origin=context.location.origin,source=dialogs.at(-1).frame.contentWindow){for(const f of [...listeners])f({data,origin,source});}};
@@ -31,9 +33,9 @@ function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
 {
  const picker=fixture(freshState(),{choosing:true,welcomeSeen:false});eq(picker.dialogs.length,0,'chooser does not consume another explorer’s welcome');eq(picker.state.garden.welcomeFilmSeen,false,'welcome remains available');
  const active=fixture(freshState(),{welcomeSeen:false});eq(active.dialogs.length,1,'active explorer gets first-visit film');active.dialogs[0].skip.onclick();
- const switchedWelcome=app.slice(app.indexOf('function useExplorer('),app.indexOf('function useExplorer(')+1800).match(/if\((destination[^\n]+)\)playFilm\('welcome'\);/);
+ const switchedWelcome=app.slice(app.indexOf('function useExplorer('),app.indexOf('\nfunction freshExplorerChoice(',app.indexOf('function useExplorer('))).match(/if\((destination[^\n]+)\)requestAutomaticFilm\('welcome'\);/);
  eq(Boolean(switchedWelcome),true,'extract the actual explorer-switch welcome condition');
- for(const [destination,expected] of [['#notes',false],['#cafe/units',false],['#home',true],['#cafe',true]])eq(vm.runInNewContext(switchedWelcome[1],{destination}),expected,`explorer-switch welcome at ${destination}`);
+ for(const [destination,expected] of [['#almanac/upstream-reply',false],['#notes',false],['#cafe/units',false],['#begin',false],['#arrive',false],['#home',true],['#cafe',true]])eq(vm.runInNewContext(switchedWelcome[1],{destination}),expected,`explorer-switch welcome at ${destination}`);
 }
 // Completed real routes, including legacy English/French, are eligible only at their ending.
 for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall',variant:1}],['french',{destination:'bookstall',variant:1}],...frenchLessons.map(l=>[l.id,undefined])]){
@@ -80,9 +82,18 @@ for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall'
 }
 // If the storm film was pending, the earned café film follows its close before the page invitation.
 {
- const f=fixture(freshState(),{welcomeSeen:false});f.context.location.hash='#cafe';f.state.cafe={served:6,supper:{round:1,startedAtServed:0}};f.dialogs[0].skip.onclick();eq(f.dialogs.length,2,'earned supper film follows welcome close');eq(f.dialogs[1].open,true,'supper film is open');eq(f.state.garden.filmsSeen.cafe,true,'supper once flag belongs to this explorer');f.dialogs[1].close();
+ const f=fixture(freshState(),{welcomeSeen:false});f.context.location.hash='#cafe';f.state.cafe={served:6,supper:{round:1,startedAtServed:0}};f.read('requestAutomaticFilm("cafe")');f.dialogs[0].skip.onclick();eq(f.dialogs.length,2,'earned supper film follows welcome close');eq(f.dialogs[1].open,true,'supper film is open');eq(f.state.garden.filmsSeen.cafe,true,'supper once flag belongs to this explorer');f.dialogs[1].close();
 }
-eq(app.includes('if(endingFilm()===film)playFilm(film)'),true,'queued auto-play rechecks current ending');
+// Closing another route/owner's film cannot focus or expose examples there.
+{
+ const f=fixture();f.read('playFilm("bramble")');f.context.location.hash='#arrive';f.message('garden-film-example');eq(f.exposures.length,0,'late example cannot write after route departure');f.dialogs.at(-1).close();eq(f.focused,0,'departed film cannot steal current-route focus');
+ const other=fixture();other.read('playFilm("welcome",{replay:true})');other.context.explorerStore.active.id='synthetic-other';other.dialogs.at(-1).close();eq(other.focused,0,'departed film cannot focus a different owner');
+}
+{
+ const s=freshState();eq(chooseStoryArrival(s,'letter'),true,'explicit later context fixture');const f=fixture(s,{welcomeSeen:false});eq(f.dialogs.length,0,'later arrival suppresses automatic welcome without faking seen');eq(f.state.garden.welcomeFilmSeen,false,'historical intro remains unviewed');eq(f.read('playFilm("welcome",{replay:true})'),true,'explicit historical replay remains available');f.dialogs.at(-1).close();
+ const pure=fixture();delete pure.state.garden;eq(pure.read('playFilm("welcome",{replay:true})'),true,'explicit recap film works from an independent legacy route without garden initialization');eq(pure.state.garden.welcomeFilmSeen,true,'only actual opened presentation records seen');pure.dialogs.at(-1).close();
+}
+eq(app.includes('if(endingFilm()===film)requestAutomaticFilm(film)'),true,'queued auto-play rechecks current ending');
 for(const file of ['garden-ui.mjs','cafe-ui.mjs','post-office-ui.mjs']){
  const source=fs.readFileSync(new URL(`../dist/${file}`,import.meta.url),'utf8');eq(/href="\.\/(?:storm-intro|paris-film|cafe-film|bramble-film)\.html/.test(source),false,'no destructive same-tab replay');
 }

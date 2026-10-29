@@ -1,0 +1,9 @@
+// Original ribbon drawings; every row shares this fixed 0-to-1 scale.
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export function commonRibbonArt(model,side,id='live'){
+ const x=12,width=576,y=22,height=36,point=p=>x+width*p/72,end=point(model.endpoint),letter=side==='left'?'A':'B',pattern=`common-pattern-${id}-${letter}`;
+ const cuts=model.boundaries.map(p=>`<path data-common-cut="${model.newBoundaries.includes(p)?'new':'old'}" data-position="${p}" d="M${point(p)} ${y}v${height}" class="common-${model.newBoundaries.includes(p)?'new':'old'}-cut"/>`).join('');
+ const mark=side==='left'?'<path d="M-2 2l4-4M0 10L10 0M8 12l4-4"/>':'<circle cx="3" cy="3" r="1.7"/><circle cx="8" cy="8" r="1.7"/>';
+ const label=`Ribbon ${letter}: ${model.coloredCount} of ${model.denominator} equal pieces coloured. Whole from 0 to 1. The coloured end stays at ${model.originalNumerator}/${model.originalDenominator}.`;
+ return `<svg class="common-diagram" viewBox="0 0 600 78" role="img" aria-label="${esc(label)}" data-common-row="${side}" data-denominator="${model.denominator}" data-endpoint="${model.endpoint}" data-whole="72"><defs><pattern id="${pattern}" width="10" height="10" patternUnits="userSpaceOnUse" class="common-pattern common-pattern-${letter}">${mark}</pattern></defs><rect class="common-whole" data-common-whole x="${x}" y="${y}" width="${width}" height="${height}"/><rect class="common-shade common-shade-${letter}" data-common-shade x="${x}" y="${y}" width="${end-x}" height="${height}"/><rect x="${x}" y="${y}" width="${end-x}" height="${height}" fill="url(#${pattern})"/><rect class="common-outline" x="${x}" y="${y}" width="${width}" height="${height}"/>${cuts}<path data-common-flag class="common-endpoint" d="M${end} 10v54"/><path class="common-flag" d="M${end} 5l11 5-11 5Z"/><text x="${x}" y="75">0</text><text x="${x+width}" y="75" text-anchor="end">1</text></svg>`;
+}

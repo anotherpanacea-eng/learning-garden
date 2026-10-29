@@ -19,6 +19,7 @@ export function qualityIcons(properties){return properties.map(p=>`<span class="
 export function hearButton(text,label='Hear it',language='en'){return `<button type="button" class="hear-button secondary" data-speak-lang="${language==='fr'?'fr':'en'}" data-speak="${esc(text)}"><span aria-hidden="true">◖))</span> <span${language==='fr'?' lang="fr"':''}>${esc(label)}</span></button>`;}
 let activeSpeech=null, selectedVoice='', speakingRate=1, removeVoiceListener=()=>{};
 let removeSpeechRequestListener=()=>{};
+let speechBindingGeneration=0;
 const fractionWords={2:['half','halves'],3:['third','thirds'],4:['quarter','quarters'],5:['fifth','fifths'],6:['sixth','sixths'],8:['eighth','eighths'],10:['tenth','tenths'],12:['twelfth','twelfths']};
 export function spoken(text,language='en'){
  if(language==='fr')return String(text);
@@ -49,6 +50,7 @@ export function stopSpeech(){
 }
 export function resetSpeechPreferences(){stopSpeech();selectedVoice='';speakingRate=1;}
 export function bindSpeech(){
+ const generation=++speechBindingGeneration,route=window.location.hash;
  removeVoiceListener();removeVoiceListener=()=>{};
  removeSpeechRequestListener();removeSpeechRequestListener=()=>{};
  const buttons=[...document.querySelectorAll('[data-speak]')];if(!buttons.length)return;
@@ -57,6 +59,7 @@ export function bindSpeech(){
   controls.innerHTML=`<button type="button" class="text-button" data-stop-speech>Stop voice</button><span role="status" data-speech-status></span><details class="voice-settings"><summary>Voice &amp; speed</summary><label>Reading voice<select data-reading-voice aria-describedby="voice-availability"></select></label><p id="voice-availability" class="tiny" role="status" data-voice-availability></p><label>Reading speed<select data-reading-speed><option value="0.8">Slower</option><option value="1">Natural pace</option><option value="1.15">A little faster</option></select></label><button type="button" class="secondary" data-preview-voice>Try this voice</button><button type="button" class="text-button" data-refresh-voices>Refresh voice list</button><p class="tiny">Only voices this browser identifies as local for this passage’s language appear. Voice and speed belong to this explorer. Changing a system voice does not choose it here. If the browser plays a different sound from the named voice, stop and try another preview, or read together.</p><details><summary>Grown-ups: find and preview device voices</summary><ol class="tiny"><li>On Mac, open System Settings → Accessibility → Read &amp; Speak (Spoken Content on older versions) → System voice. On iPhone or iPad, open Settings → Accessibility → Read &amp; Speak (or Spoken Content) → Voices, then English or French.</li><li>Preview voices in those settings. If a free enhanced or premium download is offered, let it finish while online. You can also keep an installed voice; no purchase is needed.</li><li>Return here and choose Refresh voice list. If needed, reopen the browser or reload after saving or downloading your notes. Choose an available local voice above and tap Try this voice before reading.</li></ol><p class="tiny">Siri, Speak Screen and each browser may offer different voices. A downloaded system voice is not guaranteed to appear here. An unavailable saved choice stays selected until you choose another local voice or Automatic. Automatic names the local voice it will use; voice quality labels are not a guarantee. Without a local voice, read together. All activities work without audio.</p></details></details>`;
   document.querySelector('main').append(controls);
  }
+ const live=()=>generation===speechBindingGeneration&&controls.isConnected&&window.location.hash===route;
  let activeLanguage='en';
  const languageName=()=>activeLanguage==='fr'?'French':'English';
  const speech=window.speechSynthesis,status=controls.querySelector('[data-speech-status]'),availability=controls.querySelector('[data-voice-availability]'),voiceSelect=controls.querySelector('[data-reading-voice]'),speedSelect=controls.querySelector('[data-reading-speed]');
@@ -73,29 +76,31 @@ export function bindSpeech(){
   return chosen;
  }
  function stopped(message){stopSpeech();controls.classList.remove('speech-playing');status.textContent=message;}
- controls.querySelector('[data-stop-speech]').onclick=()=>stopped('Voice stopped.');
- voiceSelect.onchange=()=>{selectedVoice=voiceSelect.value;changedPreference();stopped('Voice selected. Tap Try this voice to listen.');refreshVoices();};
- speedSelect.value=String(speakingRate);speedSelect.onchange=()=>{speakingRate=Number(speedSelect.value);changedPreference();stopped('Speed selected. Tap Try this voice to listen.');};
- controls.querySelector('[data-refresh-voices]').onclick=()=>{stopped('Voice list refreshed. Tap Try this voice to listen.');refreshVoices();};
+ controls.querySelector('[data-stop-speech]').onclick=()=>{if(live())stopped('Voice stopped.');};
+ voiceSelect.onchange=()=>{if(!live())return;selectedVoice=voiceSelect.value;changedPreference();stopped('Voice selected. Tap Try this voice to listen.');refreshVoices();};
+ speedSelect.value=String(speakingRate);speedSelect.onchange=()=>{if(!live())return;speakingRate=Number(speedSelect.value);changedPreference();stopped('Speed selected. Tap Try this voice to listen.');};
+ controls.querySelector('[data-refresh-voices]').onclick=()=>{if(!live())return;stopped('Voice list refreshed. Tap Try this voice to listen.');refreshVoices();};
  function speak(text,language=activeLanguage,origin=null){
+  if(!live()||origin&&!origin.isConnected)return false;
   activeLanguage=language==='fr'?'fr':'en';
   stopped('');const voice=refreshVoices();
   if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return false;}
   const utterance=new window.SpeechSynthesisUtterance(spoken(text,activeLanguage));utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
-  utterance.onstart=()=>{if(activeSpeech===utterance&&origin?.isConnected)origin.dispatchEvent(new CustomEvent('garden-speech-start',{bubbles:true}));};
+  utterance.onstart=()=>{if(live()&&activeSpeech===utterance&&origin?.isConnected)origin.dispatchEvent(new CustomEvent('garden-speech-start',{bubbles:true}));};
   utterance.onend=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='Finished reading.';};
   utterance.onerror=()=>{if(activeSpeech!==utterance)return;activeSpeech=null;controls.classList.remove('speech-playing');status.textContent='This local voice could not play. Try another voice, or read together.';};
   activeSpeech=utterance;controls.classList.add('speech-playing');status.textContent=`${selectedVoice&&voiceKey(voice)!==selectedVoice?'Your saved choice is for the other language. ':''}Requested local voice: ${voice.name}. You can stop whenever you like.`;
   try{speech.speak(utterance);return true;}catch{utterance.onerror();return false;}
  }
- const requested=e=>{e.detail.accepted=speak(e.detail?.text||'',e.detail?.language||'en');};
+ const requested=e=>{if(!live())return;e.detail.accepted=speak(e.detail?.text||'',e.detail?.language||'en');};
  document.addEventListener('garden-speak-request',requested);
  removeSpeechRequestListener=()=>document.removeEventListener('garden-speak-request',requested);
  controls.querySelector('[data-preview-voice]').onclick=()=>speak(activeLanguage==='fr'?'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?':'Welcome to the garden. What shall we discover together today?');
  refreshVoices();
- const voicesChanged=()=>{const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap a Hear button or Try this voice to listen.':availability.textContent;};
+ const voicesChanged=()=>{if(!live())return;const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap a Hear button or Try this voice to listen.':availability.textContent;};
  if(speech?.addEventListener){speech.addEventListener('voiceschanged',voicesChanged);removeVoiceListener=()=>speech.removeEventListener('voiceschanged',voicesChanged);}
  for(const button of buttons)button.addEventListener('click',()=>{
+  if(!live()||!button.isConnected)return;
   controls.hidden=false;button.insertAdjacentElement('afterend',controls);speak(button.dataset.speak,button.dataset.speakLang||'en',button);
  });
 }

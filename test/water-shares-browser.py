@@ -153,9 +153,9 @@ def setup(browser, width, seed=None):
     def app(route):
         response = route.fetch()
         body = response.text()
-        assert 'let graph=null;' in body, 'host read seam changed'
-        body = body.replace('let graph=null;',
-                            'window.__waterRead=()=>structuredClone(state);let graph=null;', 1)
+        assert 'let graph=null,' in body, 'host read seam changed'
+        body = body.replace('let graph=null,',
+                            'window.__waterRead=()=>structuredClone(state);let graph=null,', 1)
         needle = 'bindWater(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,'
         assert needle in body, 'host preflight seam changed'
         body = body.replace(needle,
@@ -371,7 +371,7 @@ def journey(browser, width, base):
         ok(root(p) == changed, 'separate explorer retains its own quantity draft')
         bounds(p)
         others=p.evaluate("id=>Object.fromEntries(Object.entries(localStorage).filter(([k])=>k.startsWith('number-garden-v1:')&&k!=='number-garden-v1:'+id))",imported)
-        p.goto(base+'#notes');click(p,'#reset');click(p,'#confirm-reset');go(p,base)
+        p.goto(base+'#notes');click(p,'#reset');click(p,'#confirm-reset');p.locator('dialog.welcome-film[open]').wait_for();click(p,'[data-film-skip]');p.locator('dialog.welcome-film').wait_for(state='detached');go(p,base)
         ok('waterShares' not in book(p), 'notebook reset clears active water work')
         ok(p.evaluate("id=>Object.fromEntries(Object.entries(localStorage).filter(([k])=>k.startsWith('number-garden-v1:')&&k!=='number-garden-v1:'+id))",imported) == others, 'notebook reset preserves other explorers')
         p.goto(base+'#notes');p.locator('#remember').uncheck();go(p,base);start(p);turn(p,'build');quantity(p,'fresh',1)

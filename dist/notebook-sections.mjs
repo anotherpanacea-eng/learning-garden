@@ -1,3 +1,18 @@
+import {upstreamNotes} from './upstream-exchange-ui.mjs';
+import {fieldStripsNotes} from './field-strips-ui.mjs';
+import {gapLineNotes} from './gap-line-ui.mjs';
+import {ratioBarsNotes} from './ratio-bars-ui.mjs';
+import {mixingTableNotes} from './mixing-table-ui.mjs';
+import {feedingBoardNotes} from './feeding-board-ui.mjs';
+import {twoLettersNotes} from './two-letters-ui.mjs';
+import {pairedNotes} from './paired-points-ui.mjs';
+import {weatherTallyNotes} from './weather-tally-ui.mjs';
+import {rhythmNotes} from './rhythm-ui.mjs';
+import {arrivalNotes} from './story-arrivals-ui.mjs';
+import {actTwoNotes} from './act-two-ui.mjs';
+import {timingNotes} from './timing-desk-ui.mjs';
+import {ledgerNotes} from './ledger-gauge-ui.mjs';
+import {riverNotes} from './river-room-ui.mjs';
 import {sorterNotes} from './borrowed-sorter-ui.mjs';
 import {recordNotes} from './town-record-ui.mjs';
 import {equalityNotes} from './equality-desk-ui.mjs';
@@ -66,4 +81,4 @@ import {forageNotes} from './forage-ui.mjs';
 import {broadNotes} from './broad-ui.mjs';
 
 // Also used on a detached import before it can become the active explorer.
-export function destinationNotes(state,graph=null){return sorterNotes(state)+recordNotes(state)+equalityNotes(state)+waterNotes(state)+hatsNotes(state)+codesNotes(state)+pathwayNotes(state)+linearNotes(state)+evidenceVoiceNotes(state)+motionNotes(state)+frenchRoomsNotes(state)+orderedNotes(state)+pairsNotes(state)+bothNotes(state)+priceNotes(state)+keeperNotes(state)+deskNotes(state)+circuitNotes(state)+pavingNotes(state)+clockWalkNotes(state)+noticeNotes(state)+labelNotes(state)+seedNotes(state)+lanternNotes(state)+collectionNotes(state)+hundredthsNotes(state)+sortingNotes(state)+doubleCheckNotes(state)+tenthsNotes(state)+willowNotes(state)+townNotes(state)+fieldKitNotes(state)+measuringDeskNotes(state)+instructionNotes(state)+bundleExchangeNotes(state)+joiningOrdersNotes(state)+returningOrdersNotes(state)+comparisonNotes(state)+fractionTrailNotes(state)+parcelPackingNotes(state)+wholeBatchesNotes(state)+bellStudioNotes(state)+travelersArchiveNotes(state)+measuringRecipesNotes(state)+rainPathsNotes(state)+sharingCounterNotes(state)+fieldNotebookNotes(state)+rainNotebookNotes(state)+plantStudyNotes(state)+letterNotes(state)+messageNotes(state)+equalGroupsNotes(state)+loftNotes(state)+wordGardenNotes(state)+riddlesNotes(state)+gardenNotes(state)+scienceNotes(state)+livingNotes(state)+adaptiveNotes(state)+connectionNotes(state)+workshopNotes(state)+postOfficeNotes(state)+factsNotes(state)+cafeNotes(state)+forageNotes(state)+broadNotes(state,graph);}
+export function destinationNotes(state,graph=null){return upstreamNotes(state)+fieldStripsNotes(state)+gapLineNotes(state)+ratioBarsNotes(state)+mixingTableNotes(state)+feedingBoardNotes(state)+twoLettersNotes(state)+pairedNotes(state)+weatherTallyNotes(state)+rhythmNotes(state)+arrivalNotes(state)+actTwoNotes(state)+timingNotes(state)+ledgerNotes(state)+riverNotes(state)+sorterNotes(state)+recordNotes(state)+equalityNotes(state)+waterNotes(state)+hatsNotes(state)+codesNotes(state)+pathwayNotes(state)+linearNotes(state)+evidenceVoiceNotes(state)+motionNotes(state)+frenchRoomsNotes(state)+orderedNotes(state)+pairsNotes(state)+bothNotes(state)+priceNotes(state)+keeperNotes(state)+deskNotes(state)+circuitNotes(state)+pavingNotes(state)+clockWalkNotes(state)+noticeNotes(state)+labelNotes(state)+seedNotes(state)+lanternNotes(state)+collectionNotes(state)+hundredthsNotes(state)+sortingNotes(state)+doubleCheckNotes(state)+tenthsNotes(state)+willowNotes(state)+townNotes(state)+fieldKitNotes(state)+measuringDeskNotes(state)+instructionNotes(state)+bundleExchangeNotes(state)+joiningOrdersNotes(state)+returningOrdersNotes(state)+comparisonNotes(state)+fractionTrailNotes(state)+parcelPackingNotes(state)+wholeBatchesNotes(state)+bellStudioNotes(state)+travelersArchiveNotes(state)+measuringRecipesNotes(state)+rainPathsNotes(state)+sharingCounterNotes(state)+fieldNotebookNotes(state)+rainNotebookNotes(state)+plantStudyNotes(state)+letterNotes(state)+messageNotes(state)+equalGroupsNotes(state)+loftNotes(state)+wordGardenNotes(state)+riddlesNotes(state)+gardenNotes(state)+scienceNotes(state)+livingNotes(state)+adaptiveNotes(state)+connectionNotes(state)+workshopNotes(state)+postOfficeNotes(state)+factsNotes(state)+cafeNotes(state)+forageNotes(state)+broadNotes(state,graph);}

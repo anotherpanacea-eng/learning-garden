@@ -75,7 +75,7 @@ def setup(browser, width, seed='waiting', failed=False):
     def app(route):
         response = route.fetch()
         body = response.text()
-        anchor = 'let graph=null;'
+        anchor = 'let graph=null,'
         if anchor not in body:
             raise AssertionError('app closure reader insertion anchor missing')
         route.fulfill(response=response, body=body.replace(

@@ -18,8 +18,8 @@ def setup(browser,width):
  c=browser.new_context(viewport={'width':width,'height':1000},accept_downloads=True)
  c.add_init_script("localStorage.setItem('number-garden-v1',"+json.dumps(json.dumps(seed))+");")
  def app(route):
-  r=route.fetch();body=r.text();assert 'let graph=null;' in body
-  body=body.replace('let graph=null;','window.__pathRead=()=>structuredClone(state);let graph=null;',1)
+  r=route.fetch();body=r.text();assert 'let graph=null,' in body
+  body=body.replace('let graph=null,','window.__pathRead=()=>structuredClone(state);let graph=null,',1)
   body=body.replace('function notesReport(notebook){return {',"function notesReport(notebook){if(window.__pathRefuse)throw Error('Synthetic preflight refusal');return {",1)
   route.fulfill(response=r,body=body)
  c.route('**/app.mjs',app);p=c.new_page();p.on('pageerror',lambda e:errors.append(str(e)));return c,p

@@ -1,10 +1,10 @@
 # 279 · Route registry for the app host
 
-Commissioned 2026-10-26 by the owner after the [outside review triage](../reviews/2026-10-26-outside-review-fixes.md). This is a maintenance spec. It changes how `dist/app.mjs` finds and runs a route. It changes no route, screen, text, save record or learning content.
+Proposed maintenance sequence following the owner’s 2026-10-26 [outside review triage](../reviews/2026-10-26-outside-review-fixes.md). The narrow header helper is candidate M3; the larger refactor remains optional and needs independent specification review before implementation. It is not a prerequisite for new learning activities. This is a maintenance proposal. It changes how `dist/app.mjs` finds and runs a route. It changes no route, screen, text, save record or learning content.
 
 ## Problem
 
-`dist/app.mjs` is 816 lines. Its `render()` (lines 281–525 at `b441107`) does four jobs in one function:
+Historical snapshot: at `b441107`, `dist/app.mjs` was 816 lines and its `render()` (lines 281–525) did four jobs in one function. The counts and route list below describe that snapshot; inventory the current host before implementing each step:
 
 1. Fifteen `if(… ||choosingExplorer)reset…()` lines reset every bench's in-memory visit on each render.
 2. Eight early-return blocks (`#science/water-shares`, `#post/descriptions`, `#post/codes`, `#begin`, `pathways`/`learn`, `#cafe/units`, `#loft/shadows`, `#workshop/scale`) each copy the explorer chip, guide link, nav highlight, chooser branch and binders. Two copies had drifted before PR186: the guide link was missing on two routes, and one route let the chooser fall through to the host normalizers.
@@ -48,9 +48,9 @@ These are the behaviors tests already protect. A step that breaks one is wrong.
 
 Each step is one PR. Each must leave all `test/*checks*.mjs` suites and the browser journeys for the routes it touches passing.
 
-1. **Header helper.** One `routeHeader(nav)` function replaces the eight copied chip, guide-link and nav blocks. No other change. This is also maintenance item M3 in the roadmap.
+1. **Header helper.** Inventory the current early-return routes, then let one `routeHeader(nav)` function replace their copied chip, guide-link and nav blocks. No other change. This is also maintenance item M3 in the roadmap.
 2. **Host core.** Extract the host helpers (`notesReport`, `exposeStoryFacts`, `endingFilm`, route matching) into `dist/host-core.mjs` only after making their dependencies explicit. `notesReport` needs the notebook, explorer metadata and time it uses; `endingFilm` needs the route and story/garden state it reads. `exposeStoryFacts` intentionally mutates its notebook target: require that target explicitly and preserve its return value, normalization option and pending-Bramble qualification. It is not a pure function. Keep small host wrappers where needed rather than silently changing which state is read or written. The module has no top-level DOM access. Tests that slice these helpers out of `app.mjs` as text switch to importing them. Do not keep a text-slicing test for a helper that can now be imported.
-3. **Early-return routes into the table.** Move the eight early-return routes into `routes.mjs` with `independent` set where it applies. Delete `needsExplorerInitialization`'s hash list and `useExplorer`'s matching list once every entry carries the flag.
+3. **Early-return routes into the table.** Move the current early-return routes, inventoried at implementation, into `routes.mjs` with `independent` set where it applies. Delete `needsExplorerInitialization`'s hash list and `useExplorer`'s matching list once every entry carries the flag.
 4. **The main chain, one place at a time.** Move the `if/else` branches into entries, one hub and its benches per PR (Post Office, Café, Number Garden, Workshop, Living Garden, Water Lab, the rest). The route's `bind` moves with it, so `bind()` stops calling that place's binders on other routes.
 5. **Shared panels.** Replace the two 39-term guards with each entry's `shared` field, once every route is an entry.
 
@@ -59,7 +59,7 @@ Steps 1 and 2 are independent. Step 3 needs step 1. Steps 4 and 5 need step 3.
 ## Tests
 
 - Each step proves it changed no behavior with the existing browser journeys for the routes it moves. If a moved route has no browser journey covering direct load, chooser open and cancel, and one ordinary action, add one in that step.
-- Add one check over the table itself: every hash linked from `dist/` resolves to exactly one entry, and the first-match order has no entry that can never win.
+- Add one check over the table itself: every supported hash linked from `dist/` selects its intended first-match entry, exact routes precede overlapping prefix families, and no entry is unreachable. A route may match both an exact entry and a fallback family; ordered selection must remain unambiguous.
 - Do not add tests that compare the table to a hand-written copy of itself.
 
 ## Not in scope

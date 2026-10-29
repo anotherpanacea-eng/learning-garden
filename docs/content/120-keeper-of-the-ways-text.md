@@ -172,21 +172,7 @@ Shown once, when an explorer with no story progress chooses an arrival in the st
 | Arrive after the mending | The welcome-back supper is over. There's a mystery in Pip's satchel. |
 | Arrive with the letter from upstream | Walk in with the courier, carrying a letter from a town up the river. |
 
-**Recap: Arrive after the mending**
-> A storm came through Willowbank. It knocked down the footbridge, jammed the mill wheel and scattered the library books. The neighbors have been mending ever since, and they had a supper to celebrate. There's still plenty to fix, if you'd like to help.
->
-> The morning after the storm, Pip found a wet parcel addressed to *the Keeper of the Ways*. Nobody knows who that is. One page has dried: an old map with a marsh called the Sponge where the orchard is now.
->
-> "You missed the mending," says Pip. "But you're just in time for everything else."
-
-**Recap: Arrive with the letter from upstream**
-> You've walked a long way down the river with {courier}, who is carrying a letter to Willowbank from a town called Vadoalto.
->
-> At the bridge, a fox is waiting with a satchel. "You must be new," says Pip. "Good. We need new." He shows you a parcel that washed up after a storm, addressed to *the Keeper of the Ways*, and two dry pages: an old map with a marsh that isn't there anymore, and a list of floods that keep getting worse. The last line says *Ask upstream.*
->
-> "And here you are," says Pip, "from upstream."
->
-> {guide} points out the library on the way into town. "There's a desk in there that nobody has used in years. It might be yours, if you want it."
+The bounded runtime arrival recaps are superseded by [spec249's complete finite text](249-story-arrivals-text.md), under the source-owner amendment in spec120 §18. Its explicit preview/Join distinction and contextual page grants do not credit earlier activity work. The older worsening-flood/unused-desk wording is not a runtime source. Storm Day remains a separate deferred commission.
 
 **Almanac note for earlier acts:** *Before you came.* (Earlier places stay open; the note says only that the explorer arrived later.)
 
