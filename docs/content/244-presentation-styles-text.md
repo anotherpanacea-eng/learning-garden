@@ -25,7 +25,7 @@ Guest arrival and thank-you lines are frame copy. The guest, their wish, ingredi
 
 | Guest | Storybook (shipped) | Field Journal (draft) | Mystery & Adventure (concept) |
 | --- | --- | --- | --- |
-| Cloud-dragon, arrival | A little cloud-dragon curls around the counter. “My umbrella is mostly decorative.” | A cloud-dragon settles at the counter, umbrella furled. “It is mostly decorative,” she admits. | A cloud-dragon slips in out of the drizzle. “Nobody followed me. Except the drizzle.” |
+| Cloud-dragon, arrival | A little cloud-dragon curls around the counter. “My umbrella is mostly decorative.” | A cloud-dragon settles at the counter, umbrella furled. “It is mostly decorative,” Puff admits. | A cloud-dragon slips in out of the drizzle. “Nobody followed me. Except the drizzle.” |
 | Cloud-dragon, thanks | “Thank you! A fine plate for a cloud-sized afternoon.” | “Thank you. That suits a cloudy afternoon.” | “Thank you. A plate worth crossing the valley for.” |
 | Pebble-troll, arrival | A pebble-troll takes a seat. The seat looks mildly surprised. | A pebble-troll takes a seat. It creaks once, then holds. | A pebble-troll takes the corner seat, the one facing the door. |
 | Pebble-troll, thanks | “A splendid pretend picnic. I brought my own mountain.” | “A good meal. I'll tell the mountain.” | “Splendid. I'll remember this café.” |
