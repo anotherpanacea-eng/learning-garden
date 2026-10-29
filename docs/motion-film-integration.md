@@ -26,7 +26,7 @@ All files are in the owner's Dropbox, not in this repository:
 | The water cycle at the weather station | Process clip | [140](specs/140-weather-station.md) | Proposed spec only | 37 s |
 | Closed and open circuit | Process clip | [163](specs/163-sparks-and-switches.md) | Proposed spec only | 35 s |
 | Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Delivered through PR248; corrected full film | 35 s |
-| Ramp and lever | Process clip | [305 ramp-first operation](specs/305-lift-yard.md); broader[154](specs/154-ramps-levers-hoist.md) |305ramp delivered;306lever in specification; full-film review follows | 38 s |
+| Ramp and lever | Process clip | [305 ramp-first operation](specs/305-lift-yard.md); broader[154](specs/154-ramps-levers-hoist.md) |305/306operations delivered;307full corrected film built locally, final review/release pending | 38 s |
 
 ## What is ready now
 
@@ -95,3 +95,7 @@ Actual take2 durations verified from exports:52,50,49,52,61seconds for ActsII–
 [305/PR249](https://github.com/anotherpanacea-eng/learning-garden/pull/249#issuecomment-6504661303) is live:685 matching hosted files before9,486 native assertions. [306](specs/306-lever-deliveries.md) now specifies the lever operation within the same yard, retaining both sets of partial jobs and one shared force-by-distance reference. This advances the existing ramp/lever film's teaching home; the film remains unshipped.
 
 Actual editable lever source/captions were read. Its fixed-horizontal endpoint construction must not be used as a rigid-pole model, and its generic path wording needs a force-direction review. These are source-study concerns, not a decoded-export picture verdict.306uses original rigid geometry with vertical force and vertical displacement. After it is built, review the whole existing38s movie's actual pictures/temporal sequences, repair source/captions as needed, then separately integrate the full result.
+
+## Full lifting film ·307 commission
+
+[306/PR250](https://github.com/anotherpanacea-eng/learning-garden/pull/250#issuecomment-6507025098) is now live with both machines:687asset matches before5,365Lever/10,212Ramp hosted native assertions. Its proper rigid lever operation provides the second teaching home. [307](specs/307-lift-yard-film.md) now commissions the whole38s original film as a separately framed optional turn, not an excerpt. Actual original pictures received independent sampled review; fourP2s were repaired in a private derivative and rechecked on actual stills/captions. Encoded-film/framing and six independent spec reviews now clear. Integration is built locally; the initial code review found no applicationP1/P2 but required real input evidence, now exercised in519native assertions. Final exact-head recheck, existing regressions, release and hosted acceptance remain pending. Original source concerns remain relevant to preventing copied kinematics, not grounds for claiming an unseen export was defective. No watch gate, saved evidence, new broader154coverage or authoring runtime is introduced.
