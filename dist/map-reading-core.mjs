@@ -11,6 +11,7 @@ const unique=a=>new Set(a).size===a.length;
 const FLAGS=['example','comparison','narration','together'];
 const freshSupport=()=>Object.fromEntries(FLAGS.map(k=>[k,false]));
 const supports=x=>object(x)&&FLAGS.every(k=>own(x,k)&&typeof x[k]==='boolean');
+const sameSupport=(a,b)=>FLAGS.every(k=>a[k]===b[k]);
 const packetId=x=>typeof x==='string'&&/^map-reading-[1-9]\d{0,9}$/.test(x)&&Number(x.slice(12))<=1e9;
 const namedList=(a,max,check)=>dense(a,max)&&unique(a.map(x=>x?.id))&&a.every(x=>object(x)&&code(x.id)&&check(x));
 
@@ -98,20 +99,25 @@ function mutable(state,id,change,options){
 export function keepMapLine(state,id,lineId,value,options={}){
  return mutable(state,id,(p,d)=>{
   if(!d.source.lines.some(l=>l.id===lineId)||!text(value,4000,true))return fail('Choose a source sentence and keep your copy to 4,000 characters. Your visible words are still here.');
-  const a={lineId,text:value,supportBefore:clone(p.support)},i=p.lines.findIndex(x=>x.lineId===lineId);
+  const i=p.lines.findIndex(x=>x.lineId===lineId),old=p.lines[i];
+  if(old&&old.text===value&&sameSupport(old.supportBefore,p.support))return ok();
+  const a={lineId,text:value,supportBefore:clone(p.support)};
   if(i<0)p.lines.push(a);else p.lines[i]={...p.lines[i],...a};return ok();
  },options);
 }
 export function keepMapGap(state,id,gapId,proposal,reason,options={}){
  return mutable(state,id,(p,d)=>{
   if(!d.source.gaps.some(g=>g.id===gapId)||!text(proposal,4000,true)||!text(reason,4000,true))return fail('Choose a gap and keep each field to 4,000 characters. Your visible words are still here.');
-  const a={gapId,proposal,reason,supportBefore:clone(p.support)},i=p.gaps.findIndex(x=>x.gapId===gapId);
+  const i=p.gaps.findIndex(x=>x.gapId===gapId),old=p.gaps[i];
+  if(old&&old.proposal===proposal&&old.reason===reason&&sameSupport(old.supportBefore,p.support))return ok();
+  const a={gapId,proposal,reason,supportBefore:clone(p.support)};
   if(i<0)p.gaps.push(a);else p.gaps[i]={...p.gaps[i],...a};return ok();
  },options);
 }
 export function keepMapText(state,id,key,value,options={}){
  return mutable(state,id,p=>{
   if(!['comparison','note'].includes(key)||!text(value,4000,true))return fail('Keep this field to 4,000 characters. Your visible words are still here.');
+  if(p[key]&&p[key].text===value&&sameSupport(p[key].supportBefore,p.support))return ok();
   p[key]={...(object(p[key])?p[key]:{}),text:value,supportBefore:clone(p.support)};return ok();
  },options);
 }

@@ -49,6 +49,17 @@ export function runMapChecks(){
  const r0=s.mapReading,p0=packet(s,id),note0=p0.note;
  const noOp=M.keepMapText(s,id,'note',note0.text,options);ok(noOp.ok&&!noOp.changed,'identical writing no-op');assert.equal(s.mapReading,r0);assert.equal(packet(s,id),p0);assert.equal(packet(s,id).note,note0);checks+=3;
  const supportNoOp=M.supportMapReading(s,id,'example',options);ok(supportNoOp.ok&&!supportNoOp.changed);assert.equal(s.mapReading,r0);checks++;
+ // Object member order is not response meaning. Coherent imported snapshots
+ // retain their exact objects and unknown metadata on identical submission.
+ const reordered=clone(s),rp=packet(reordered,id);
+ for(const a of [...rp.lines,...rp.gaps,rp.comparison,rp.note])a.supportBefore={futureNote:{retained:true},...Object.fromEntries(Object.entries(rp.support).reverse())};
+ const unchanged=reordered.mapReading,oldRefs=refs(reordered),oldBytes=clone(reordered);
+ const noOps=[()=>M.keepMapLine(reordered,id,'valley',rp.lines[0].text,options),()=>M.keepMapGap(reordered,id,'water-release',rp.gaps[0].proposal,rp.gaps[0].reason,options),()=>M.keepMapText(reordered,id,'comparison',rp.comparison.text,options),()=>M.keepMapText(reordered,id,'note',rp.note.text,options)];
+ for(const fn of noOps){const r=fn();ok(r.ok&&!r.changed,'identical writing/support values ignore member order');assert.equal(reordered.mapReading,unchanged);checks++;}
+ eq(reordered,oldBytes,'no-op preserves unknown metadata and original field order');
+ for(const [parent,k,value] of oldRefs)assert.equal(parent[k],value,'all original response references retained');checks++;
+ ok(M.supportMapReading(reordered,id,'narration',options).ok,'a real support change');
+ ok(M.keepMapLine(reordered,id,'valley',rp.lines[0].text,options).changed,'same words after actual support change are a new explicit submission');
  refuse(s,()=>M.keepMapLine(s,id,'valley','x'.repeat(4001),options),'bounded line');
  refuse(s,()=>M.keepMapGap(s,id,'missing','x','y',options),'own gap ID required');
  refuse(s,()=>M.keepMapText(s,id,'source','not a writing field',options),'source write refused');

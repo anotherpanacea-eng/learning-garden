@@ -41,13 +41,13 @@ export function bindMapReading(notebook,ctx){
  const focus=selector=>{const el=document.querySelector(selector);if(el){el.focus({preventScroll:true});const box=el.getBoundingClientRect();if(box.top<0||box.bottom>innerHeight)el.scrollIntoView({block:'nearest'});}};
  const refresh=(selector='#map-heading')=>{ctx.render();focus(selector);};
  const say=(message,take=true)=>{s.notice=message;const el=root.querySelector('#map-status');if(el){el.textContent=message;el.classList.remove('sr-only');if(take)el.focus();}};
- const mutate=(fn,{message='Writing kept. It has not been marked.',render=true,after=null}={})=>{
+ const mutate=(fn,{message='Writing kept. It has not been marked.',render=true,after=null,sessionOK=false}={})=>{
   if(!live())return false;const r=fn();if(!r?.ok){say(r?.error||'This change could not be kept. Your earlier writing is unchanged.');return false;}
   let status=null;if(r.changed)status=ctx.save?.();if(after)after(r);
   const failed=status?.ok===false;
   if(r.changed)s.notice=failed?'This writing is in this session, but it could not be saved on this device. Download your notes.':status?.enabled===false?'Saving is off. This writing lasts for this session. Download your notes to keep a copy.':message;
   if(render&&(r.changed||after))refresh('#map-status');else if(r.changed)say(s.notice,false);
-  return !failed;
+  return !failed||sessionOK;
  };
  const local=(fn,selector='#map-heading')=>{if(!live())return;stop();fn();refresh(selector);};
  const submitted=(field,result)=>{if(result?.ok)s.pending.delete(key(s,field));return result;};
@@ -91,8 +91,8 @@ export function bindMapReading(notebook,ctx){
  all('confirm',()=>mutate(()=>keepMapEdition(notebook,id,options),{message:'Edition kept. It records your writing, not a passed lesson.',after:()=>{s.confirm=false;for(const [k] of s.pending)if(k.startsWith(`${id}/`))s.pending.delete(k);}}));
  all('revise',()=>mutate(()=>reviseMapEdition(notebook,id,options),{message:'New edition started from this saved source. Earlier writing is preserved; this is a revisit.',after:r=>open(r.id)}));
  root.querySelectorAll('[data-map-field]').forEach(input=>input.addEventListener('input',()=>{if(!live())return;s.pending.set(key(s,input.dataset.mapField),input.value);const n=root.querySelector('[data-map-unsent]');if(n)n.textContent=dirty(s,view()).length?'These words are not yet kept.':'Only kept writing is included in downloads.';const proposal=root.querySelector('[data-map-hypothesis]');if(proposal){const g=view().source.gaps[gap],p=value(s,view(),`gap/${g.id}/proposal`);proposal.textContent=p?`Possible reading: [${p}?]`:'No reading proposed';}const side=root.querySelector('[data-map-side-copy]');if(side)side.textContent=value(s,view(),`line/${view().source.lines[line].id}`)||'Not written';}));
- root.addEventListener('click',e=>{const b=e.target.closest?.('[data-speak]');if(!b||!root.contains(b))return;if(!live()||!mutate(()=>supportMapReading(notebook,id,'narration',options),{render:false,message:'Narration requested.'})){e.preventDefault();e.stopImmediatePropagation();return;}b.dataset.speak=[...root.querySelectorAll('[data-map-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden').map(x=>x.innerText).join(' ').replaceAll('[smudged word]','a smudged word');},{capture:true});
- const clickGuard=e=>{if(allowDeparture||!live()||!dirty(s,view()).length)return;const target=e.target.closest?.('a,button,input,select');if(!target||root.contains(target)&&!target.matches('a')||target.closest('.map-leave'))return;e.preventDefault();e.stopImmediatePropagation();askLeave(()=>target.click());};
+ root.addEventListener('click',e=>{const b=e.target.closest?.('[data-speak]');if(!b||!root.contains(b))return;if(!live()||!mutate(()=>supportMapReading(notebook,id,'narration',options),{render:false,sessionOK:true,message:'Narration requested.'})){e.preventDefault();e.stopImmediatePropagation();return;}b.dataset.speak=[...root.querySelectorAll('[data-map-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden'&&!x.closest('details:not([open])')).map(x=>x.innerText).join(' ').replaceAll('[smudged word]','a smudged word');},{capture:true});
+ const clickGuard=e=>{if(allowDeparture||!live()||!dirty(s,view()).length)return;const target=e.target.closest?.('a,button,input,select');if(!target||root.contains(target)&&!target.matches('a')||target.closest('.map-leave,#about-dialog')||target.id==='privacy-button')return;e.preventDefault();e.stopImmediatePropagation();askLeave(()=>target.click());};
  document.addEventListener('click',clickGuard,true);
  pendingNavigation=()=>{if(!root.isConnected||visit!==s||ctx.explorerId()!==owner||!dirty(s,view()).length)return false;const next=location.hash;if(next===route)return false;history.replaceState(null,'',route);askLeave(()=>{location.hash=next;});return true;};
  removeGuards=()=>{document.removeEventListener('click',clickGuard,true);dialog?.close();dialog?.remove();pendingNavigation=()=>false;};
