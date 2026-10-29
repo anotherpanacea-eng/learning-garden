@@ -41,12 +41,12 @@ export function bindTownFilm(root,live){
    const response=await fetch('./assets/town-film-take2.mp4',{signal:controller.signal});
    if(!response.ok)throw new Error('Film unavailable');
    const blob=await response.blob();
-   if(!current())return false;
-   sourceURL=URL.createObjectURL(blob.type?blob:new Blob([blob],{type:'video/mp4'}));
+   if(!current()){if(!disposed){loading=null;status.textContent='';}return false;}
+   sourceURL=URL.createObjectURL(new Blob([blob],{type:'video/mp4'}));
    track=document.createElement('track');track.kind='captions';track.srclang='en';track.label='English';track.src='./assets/town-film-take2.vtt';track.default=true;video.append(track);track.track.mode='hidden';
    on(track,'load',()=>{if(current()){track.track.mode='hidden';updateCaption();}});on(track,'error',()=>{trackFailed=true;updateCaption();});
    video.src=sourceURL;play.disabled=false;replay.disabled=false;status.textContent='';return true;
-  })().catch(error=>{loading=null;if(!disposed&&error?.name!=='AbortError')failure();return false;});
+  })().catch(error=>{loading=null;if(!disposed){status.textContent='';if(error?.name!=='AbortError')failure();}return false;});
   return loading;
  };
  const hide=()=>{if(!current())return;pause();panel.hidden=true;watch.setAttribute('aria-expanded','false');watch.focus();};

@@ -15,20 +15,7 @@ def ok(value,message):
  checks+=1
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
- # Native media seeking needs byte ranges; SimpleHTTPRequestHandler omits them.
- def do_GET(self):
-  path=Path(self.translate_path(self.path));header=self.headers.get('Range')
-  if header and path.suffix=='.mp4' and path.is_file():
-   size=path.stat().st_size
-   try:
-    a,b=header.removeprefix('bytes=').split('-');start=int(a) if a else max(0,size-int(b));end=min(int(b) if a and b else size-1,size-1)
-    if start<0 or start>end:raise ValueError()
-   except ValueError:self.send_error(416);return
-   self.send_response(206);self.send_header('Content-Type','video/mp4');self.send_header('Accept-Ranges','bytes');self.send_header('Content-Range',f'bytes {start}-{end}/{size}');self.send_header('Content-Length',str(end-start+1));self.end_headers()
-   try:
-    with path.open('rb') as f:f.seek(start);self.wfile.write(f.read(end-start+1))
-   except (BrokenPipeError,ConnectionResetError):pass  # Browser abandoned a range on seek/departure.
-  else:super().do_GET()
+ # Match the deployed static host: full200responses, no byte-range support.
  def log_message(self,*args):pass
 class Server(http.server.ThreadingHTTPServer):request_queue_size=128
 server=None;base=os.environ.get('TOWN_FILM_URL')
@@ -114,6 +101,11 @@ with sync_playwright() as pw:
    if len(attempts)==1:route.fulfill(status=503,body='synthetic unavailable')
    else:route.fulfill(status=200,content_type='video/mp4',body=(ROOT/'dist/assets/town-film-take2.mp4').read_bytes())
   c.route('**/town-film-take2.mp4',fail_once);watch(p);p.wait_for_function('()=>document.querySelector("[data-town-status]").textContent.includes("could not play")');watch(p);p.wait_for_function('()=>!document.querySelector("video").paused');ok(len(attempts)==2,'failed download can retry via Watch');c.close()
+  c,p=setup(browser,820,F['future']);held=[]
+  def held_once(route):
+   held.append(route)
+   if len(held)>1:route.fulfill(status=200,content_type='application/octet-stream',body=(ROOT/'dist/assets/town-film-take2.mp4').read_bytes())
+  c.route('**/town-film-take2.mp4',held_once);watch(p);p.wait_for_timeout(150);p.locator('[data-act-two-root]').evaluate('(r)=>r.hidden=true');held[0].fulfill(status=200,content_type='video/mp4',body=(ROOT/'dist/assets/town-film-take2.mp4').read_bytes());p.wait_for_function('()=>!document.querySelector("[data-town-status]").textContent.includes("Loading")');p.locator('[data-act-two-root]').evaluate('(r)=>r.hidden=false');watch(p);p.wait_for_function('()=>!document.querySelector("video").paused');ok(len(held)==2,'temporarily inactive owner can retry without wedged load');c.close()
   # Native loading cancellation is not a failure; delayed real playback cannot undo pause.
   c,p=setup(browser,820,F['future']);p.evaluate('()=>{HTMLMediaElement.prototype.play=function(){return new Promise((r,j)=>window.__cancelPlay=j)};}');watch(p);p.wait_for_function('()=>typeof window.__cancelPlay==="function"');p.locator('video').evaluate('(v)=>v.dispatchEvent(new Event("pause"))');p.evaluate('window.__cancelPlay(new DOMException("cancelled", "AbortError"))');p.wait_for_timeout(100);ok(p.locator('[data-town-status]').inner_text()=='','native loading pause is not a failure');ok(p.locator('[data-town-play]').inner_text()=='Play','native pause leaves Play label');c.close()
   c,p=setup(browser,820,F['future']);p.evaluate('()=>{const native=HTMLMediaElement.prototype.play;HTMLMediaElement.prototype.play=function(){window.__finishPlay=null;return new Promise((resolve,reject)=>native.call(this).then(()=>window.__finishPlay=resolve,reject));};}')

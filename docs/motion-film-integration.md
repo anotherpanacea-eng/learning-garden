@@ -30,7 +30,7 @@ All files are in the owner's Dropbox, not in this repository:
 
 ## What is ready now
 
-**A Town of Our Own** has an already-built story ending. [299](specs/299-town-film.md) commissions its optional inline native video, retaining the complete still/text ending. The source is inventoried, not yet a released runtime asset.
+**A Town of Our Own** has an already-built story ending. [299](specs/299-town-film.md) commissions its optional inline native video, retaining the complete still/text ending. The native player is implemented through PR240, with the hosted transport repair in PR241; their release receipts record reviewed canonical acceptance separately from source availability.
 
 Several science clips also have partial homes already: Water Lab includes melting and evaporation; Lantern Circuit teaches complete/open paths; Bell Studio includes pitch. Review a finite extension and its model, captions and shown examples before attaching a clip. Whole proposed science packs are not prerequisites for these smaller integrations. Ramp Fair Test does not yet teach the ramp/lever film's force–distance trade-off; that needs a new simple-machines operation. Mill energy likewise needs an energy-transfer model. Later story films still wait for actual chapter contracts and story actions.
 
@@ -52,7 +52,7 @@ These restate the contract in the films brief as it applies to these files.
 
 ## Owner-requested media integration turn · 2026-10-29
 
-1. [299 · Town film](specs/299-town-film.md): owner-selected take2 at the built ActII celebration. Silent, explicit tap, readable transcript, complete still/text fallback; no new completion record.
+1. [299 · Town film](specs/299-town-film.md), implemented through PR240/241 (see release receipts): owner-selected take2 at the built ActII celebration. Silent, explicit tap, readable transcript, complete still/text fallback; no new completion record.
 2. Fill the Bar in Rhythm Studio: inspect the handdrawn working picture with its actual soundtrack and caption timing; compare against the approved mix. Build a controllable song player, with exact example familiarity separated from independent attempts and sound joining at the current position.
 3. Bounded process-clip integrations: melting/evaporation in Water Lab, complete/open paths in Lantern Circuit, amplitude/frequency in Bell Studio. Each gets a content/model and exposure review. None is already cleared by having an exported MP4.
 4. Simple machines force–distance investigation for ramp/lever, then energy transfer for the mill. Make the animation explain something the learner can vary and inspect.
