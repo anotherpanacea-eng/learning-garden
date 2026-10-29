@@ -31,6 +31,8 @@ def setup(b,base,seed,width=820,reduce=True):
  return c,p,requests
 
 def layout(p):
+ # A view render replaces its stylesheet link; wait for the actual style before measuring.
+ p.wait_for_function("[...document.querySelectorAll('[data-energy-root] button,[data-energy-root] a,[data-energy-root] summary')].every(x=>getComputedStyle(x).minHeight==='44px')")
  ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal overflow')
  for el in p.locator('[data-energy-root] button,[data-energy-root] summary,[data-energy-root] a').all():
   if el.is_visible():
