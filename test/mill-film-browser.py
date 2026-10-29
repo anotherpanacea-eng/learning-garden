@@ -59,7 +59,7 @@ def roundtrip(p,escape=False):
  else:click(p,'return')
  current=pose(p)
  if current!=saved:(OUT/'preservation-mismatch.json').write_text(json.dumps({'before':saved,'after':current},indent=2))
- ok(current==saved,'Return restores exact mill page/counts/feedback/drawing/details/held reference');ok(p.evaluate('document.activeElement.dataset.energyAction')=='watch','Return restores Watch focus')
+ ok(current==saved,'Return restores exact mill page/counts/feedback/drawing/details/held reference');ok(p.evaluate('document.activeElement.dataset.energyAction')=='watch','Return restores Watch focus');r=p.locator('[data-energy-action=watch]').bounding_box();ok(r['y']>=0 and r['y']+r['height']<=1000,'restored Watch focus is visible')
 def journey(b,base,seed,width):
  c,p,requests=setup(b,base,seed,width)
  try:
@@ -75,6 +75,12 @@ def journey(b,base,seed,width):
   click(p,'play');p.wait_for_function("!document.querySelector('video').paused");p.locator('[data-mill-film-transcript] summary').click();p.wait_for_function("document.querySelector('video').paused");ok(True,'opening complete transcript pauses film');p.locator('[data-mill-film-transcript] summary').click()
   click(p,'play');p.evaluate("document.dispatchEvent(new CustomEvent('garden-speak-request',{detail:{text:'Synthetic narration request',language:'en'}}))");p.wait_for_function("document.querySelector('video').paused");ok(True,'real narration event with detail pauses film')
   r=p.locator('[data-mill-film-return]').bounding_box();ok(r['y']>=0 and r['y']+r['height']<=1000,'Return visible above movie '+str(r));p.screenshot(path=str(OUT/f'mill-film-{width}.png'),full_page=True);p.keyboard.press('Escape');ok(pose(p)==saved,'seek/play/narration preserve initial table')
+  if width==320:
+   for escape in [False,True]:
+    before=pose(p);click(p,'watch');movie_ready(p);p.locator('[data-mill-film-transcript] summary').tap();p.locator('.me-film-credit').scroll_into_view_if_needed();ok(p.evaluate('scrollY')>300,'deep transcript return starts below original toolbar')
+    if escape:p.keyboard.press('Escape')
+    else:click(p,'return')
+    r=p.locator('[data-energy-action=watch]').bounding_box();ok(pose(p)==before and p.evaluate('document.activeElement.dataset.energyAction')=='watch' and r['y']>=0 and r['y']+r['height']<=1000,'deep transcript Return/Escape preserve picture and restore visible Watch focus')
   # Native UI creates eighteen independently pending pictures; retain all snapshots.
   pending={}
   for N in [8,12,16]:
