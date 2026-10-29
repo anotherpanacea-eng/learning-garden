@@ -1,14 +1,18 @@
 # 304 · Same water, different arrangements · exact copy
 
-**Watch ice change** · Optional silent film ·35seconds.
+**Watch ice change** · Optional silent film · 35 seconds.
 
-Before Watch: The film has36molecule symbols; our table has12. These are two different explanatory drawings. The film's ring follows its own molecule, not the particle you selected here. Your water model will wait.
+Before Watch: The film has 36 molecule symbols; our table has 12. These are two different explanatory drawings. In the film, a ring marks one molecule symbol so you can follow it through each particle picture. It is not the particle you selected here. Your water model will wait.
 
 **Same water, different arrangements**
 
-This is a simplified model, not a view through a real microscope or a filmed experiment. Each particle symbol stands for one water molecule. Ice molecules still vibrate; liquid molecules move past neighbors. Their drawn paths, sizes and speeds are not measurements. Real molecules do not have to retrace these paths or return to their old places when water freezes.
+Always-visible film introduction: This is a model of pure water at ordinary pressure, changing slowly. The icicle drips water away; the jar keeps its water. The night particle picture follows the jar. Its 0 °C thermometer is the water sample, not outdoor air.
 
-The icicle loses water as it drips. The jar is a different example that keeps its water inside; energy can still cross. The night picture shows the jar's water losing energy to colder surroundings. Its thermometer represents the water sample, not outdoor air. The0°C example assumes pure water at ordinary pressure, changing slowly; it does not show our table's colder or warmer endpoint stages. The film is a thought model, not a measured mass or a prediction for a sealed apparatus. No new substance is made.
+Expandable “About these drawings” text, readable without playing:
+
+This is a simplified model, not a view through a real microscope or a filmed experiment. Each particle symbol stands for one water molecule. Ice molecules still vibrate; liquid molecules move past neighbors. Their drawn paths, sizes, spacing and speeds are not measurements. Real molecules do not have to retrace these paths or return to their old places when water freezes.
+
+The icicle loses water as it drips. The jar is a different example that keeps its water inside; energy can still cross. The night particle picture shows the jar's water losing energy to colder surroundings. It reuses the film's molecule symbols for the jar's water; it does not mean water from the icicle went into the jar. Its thermometer represents the water sample, not outdoor air. The 0 °C example assumes pure water at ordinary pressure, changing slowly; it does not show our table's colder or warmer endpoint stages. The jar and balance are an idea, not a weighing we did: no water gets in or out, so the mass stays the same. A real jar and balance can show small changes, for example when water from the air collects on a cold jar. No new substance is made.
 
 You can pause or read the whole transcript. Return at any time; your stage, followed particle and open table notes stay where you left them.
 
@@ -18,7 +22,7 @@ Status: Loading the water film… / The film could not play here. Read the trans
 
 Transcript heading: Read the complete film transcript.
 
-Credit: Corrected derivative of the original After the Storm film made with Claude Motion. Andika lettering rendered in the picture, SIL Open Font License1.1. No authoring player or font files included.
+Credit: Corrected derivative of the original After the Storm film made with Claude Motion. Andika lettering rendered in the picture, SIL Open Font License 1.1. No authoring player or font files included.
 
 ## Complete corrected six-cue transcript
 
