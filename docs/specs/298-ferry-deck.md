@@ -1,6 +1,6 @@
 # Spec 298 · Ferry Deck
 
-**Finite commission · independently reviewed and cleared for implementation · 2026-10-29.** Selects only the observer-changing operation from [How Fast, Which Way178](178-how-fast-which-way.md), with [original finite copy](../content/298-ferry-deck-text.md) and [actual source/overlap audit](../source-audits/298-ferry-deck.md). [Independent six-lens and physics/content reviews](../reviews/298-ferry-deck-spec.md) preceded runtime code; implementation still requires its own independent clearance. No full178 or later story adapter is commissioned.
+**Delivered finite slice · 2026-10-29.** Selects only the observer-changing operation from [How Fast, Which Way178](178-how-fast-which-way.md), with [original finite copy](../content/298-ferry-deck-text.md) and [actual source/overlap audit](../source-audits/298-ferry-deck.md). [Independent six-lens and physics/content reviews](../reviews/298-ferry-deck-spec.md) preceded runtime code; independent Claude implementation full-plus-repair clearance and the [canonical release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/238#issuecomment-6493876999) record delivery through PR238: 657 matching hosted assets, then 11,896 affected hosted native Chrome assertions. The finite scope and evidence limits below still apply. No full178 or later story adapter is commissioned.
 
 ## Need, operation and boundary
 
