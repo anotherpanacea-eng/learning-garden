@@ -12,7 +12,7 @@ Toolbar: **8 chips**, **12 chips**, **16 chips** (group: **Tracked batch size**)
 
 Primary actions: **Pour one portion** · **Grind one step** · **Let it rub** · **Close the gate** / **Open the gate**. Pour explanation: **One portion transfers 2 chips from high water to the wheel.**
 
-Store labels: **Waiting · gravitational**; **Moving · kinetic**; **Warmth added · thermal**; **Tracked total**. The expanded waiting label is **High water and Earth**. Warmth's tags are **While grinding: {G}** and **Without grinding: {A}**; **Warmth added: {G} + {A} = {T}**. Gate readout: **Gate open** / **Gate closed**. Separate water labels: **High portions: {W/2}**, **Lower portions: {(N−W)/2}**, **Same {N/2} water portions**. These count water portions, not energy chips. Energy-book counts are chips, not joules.
+Store labels: **Waiting · gravitational**; **Moving · kinetic**; **Warmth added · thermal**; **Tracked total**. The expanded waiting label is **High water and Earth**. Warmth's tags are **While grinding: {G}** and **Without grinding: {A}**; **Warmth added: {G} + {A} = {T}**. Gate readout: **Gate open** / **Gate closed**. Separate water labels: **High portions: {W/2}**, **Lower portions: {(N−W)/2}**, **Same {N/2} water portions**. These count water portions, not energy chips. Energy-book counts are chips, not joules. Scale legend: **One filled square = one energy chip · same scale throughout**.
 
 Controls: **Next request** · **Start this picture again** · **Keep this picture** / **Replace kept picture** · **Clear kept picture** · **Back to this picture** · **Start six fresh requests** · **Hear this turn**.
 
@@ -84,4 +84,4 @@ Summary: **Try one separate example**. **This example starts with 8 chips. Your 
 
 **Supplied teaching, not a physical experiment, measurement or assessment. A request met on this table does not establish independent explanation or curriculum mastery. No actions, support requests, reading, hearing, exposure or results are added to the notebook.**
 
-Source links: OpenStax **Conservation of energy**; EIA **Hydropower and the water cycle**; OpenStax **Photosynthesis and food energy**. Related invitations: **Compare force and work in the Lift Yard** (`#workshop/lift`); **Explore water and energy** (`#science/play`). The full mill film is not part of this increment.
+Source links: OpenStax **Conservation of energy**; EIA **Hydropower and the water cycle**; OpenStax **Photosynthesis and food energy**. Related invitations: **Compare force and work in the Lift Yard** (`#workshop/lift`); **Explore water and energy** (`#science/play`).
