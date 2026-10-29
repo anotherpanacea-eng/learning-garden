@@ -9,7 +9,7 @@ Controls: Split each piece in 2 / Split each piece in 3 / Undo last cut / Compar
 Case chooser: Choose another pair. Your cuts for each pair stay while you are at this table.
 Pair requests: For each pair in the specification table, show its title and exact original A/B fractions, then: Give both ribbons the same-sized pieces without moving either coloured end.
 Original readout: Ribbon {A|B} started as {a}/{d} of its whole.
-Compact readout: Still {a}/{d}; {count} of {denominator} equal pieces coloured. Each piece is 1/{denominator} of this whole.
+Compact readout: Still {a}/{d}; {count} of {denominator} equal pieces coloured. Each piece is 1/{denominator} of the whole.
 Full optional explanation: Now {count} of {denominator} equal pieces are coloured: {count}/{denominator}. The coloured end is still at {a}/{d}.
 Unit: Each current piece is 1/{denominator} of this same-sized whole.
 Split: Each old piece became {factor} smaller equal pieces. Both counts changed; the amount did not. Dashed marks are the cuts just added.
@@ -35,3 +35,7 @@ Example actions: Previous picture / Next picture / Back to our ribbons.
 Hear: Hear this picture. Read only the current visible invitation, common-whole reference, original/current fractions, counts, actual change and open comparison; the example uses its visible frame instead. Do not read closed help.
 
 Presentation: Keep original/current names and the compact count/unit readout beside each ribbon. Full change explanations can sit together under How the cuts work. Hear reads only the currently visible material or opened explanation.
+
+Supporting labels: Ribbon {A|B} started as {a}/{d}; Now {count}/{denominator}. Dashed marks: new cuts. Solid marks: surviving boundaries. Brass flags: fixed coloured ends. Nearby tables: Ribbon Recut / Lantern Line / Join the Portions. Recut invitation: Give two ribbons common cuts.
+Picture alternative: Ribbon {A|B}: {count} of {denominator} equal pieces coloured. Whole from 0 to 1. The coloured end stays at {a}/{d}.
+An opened How the cuts work explanation stays open while changing the ribbons.

@@ -179,6 +179,17 @@ def speech_and_input(browser,base,f):
     if voices:p.wait_for_function('commonSpeechRequests.length===1')
     else:ok(p.evaluate('commonSpeechRequests.length')==0,'no unavailable/remote speech substitute')
     ok(book(p)==before,'Hear creates no support/assessment record')
+    ok('Each old piece became' not in script,'closed cut explanation excluded from actual requested script')
+    styles=p.locator('[data-common-view="case"] svg[data-common-row="left"] [data-common-cut]').evaluate_all('xs=>xs.map(e=>({kind:e.dataset.commonCut,dash:getComputedStyle(e).strokeDasharray}))')
+    ok(sum(x['kind']=='new' for x in styles)==8 and all((x['dash']!='none')==(x['kind']=='new') for x in styles),'actual latest split has eight dashed new boundaries and solid survivors')
+    p.locator('[data-common-cut-help] summary').tap();hear.tap();ok('Each old piece became' in hear.get_attribute('data-speak'),'open explanation included in actual requested script')
+    undo(p,'left');ok(p.locator('[data-common-cut-help]').evaluate('e=>e.open'),'opened explanation survives a cut change')
+    material(p,next(c for c in f['cases'] if c['id']=='quarter-third'))
+    styles=p.locator('[data-common-view="case"] svg[data-common-row="left"] [data-common-cut]').evaluate_all('xs=>xs.map(e=>({kind:e.dataset.commonCut,dash:getComputedStyle(e).strokeDasharray}))')
+    ok(len(styles)==3 and all(x['kind']=='old' and x['dash']=='none' for x in styles),'actual Undo removes only inserted cuts and leaves solid larger-piece boundaries')
+    p.evaluate("window.dispatchEvent(new Event('hashchange'))");p.locator('[data-common-view="case"]').wait_for();ok(d(p,'left')==4 and d(p,'right')==12,'synthetic navigation notification is harmless')
+    ok(book(p)==before,'explanation and synthetic navigation create no notebook record')
+
     # A genuinely unseen/uninitialized direct entry must not initialize unrelated games.
     p=setup(browser,820,1180,f['uninitialized'],'unseen');go(p,base);no_film(p);now=book(p);expected=copy.deepcopy(f['uninitialized']);now.get('garden',{}).pop('avatar',None);expected.get('garden',{}).pop('avatar',None)
     if now.get('garden')=={} and 'garden' not in expected:now.pop('garden')

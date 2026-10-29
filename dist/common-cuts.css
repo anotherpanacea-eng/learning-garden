@@ -21,7 +21,7 @@
 .common-actions,.common-board-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
 .common-page button{min-height:44px;max-width:100%;padding:8px 12px;white-space:normal;font:inherit;font-weight:650;color:#183f39;background:#fffdf7;border:2px solid #456957;border-radius:7px;cursor:pointer;box-shadow:none}
 .common-page button:hover:not(:disabled){background:#dce9db}.common-page button:disabled{color:#526157;border-color:#87978b;background:#e4ebe1;cursor:default;opacity:1}
-.common-page button[aria-pressed=true]{color:#fffdf7;background:#21594b;border-color:#183f39;box-shadow:inset 0 0 0 2px #fffdf7}
+.common-page button[aria-current=true]{color:#fffdf7;background:#21594b;border-color:#183f39;box-shadow:inset 0 0 0 2px #fffdf7}
 .common-page :is(button,a,summary):focus-visible,.common-page [tabindex="-1"]:focus{outline:3px solid #7c4810;outline-offset:3px}
 .common-catalog{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.common-catalog button{flex:1 1 280px;text-align:left}
 .common-comparison{padding:12px;border-left:5px solid #21594b;background:#fffdf7}

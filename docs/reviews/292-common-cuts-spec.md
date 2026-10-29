@@ -1,4 +1,4 @@
-#292 · Independent specification and finite-mathematics review
+# 292 · Independent specification and finite-mathematics review
 
 2026-10-28, baseline1c9c96a. **BUILD-READY.** Six separate fresh reviewer contexts inspected the actual finite specification/copy and consumed repository modules. No absent lenses and no P1/P2/P3 findings. Internal transient field names remain implementation choices, not a new artifact schema.
 
