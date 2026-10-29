@@ -30,17 +30,19 @@ All files are in the owner's Dropbox, not in this repository:
 
 ## What is ready now
 
-Only **A Town of Our Own** has a built place to go. Spec 248 already delivers its ending as an illustrated still/text sequence and says a future film enhances that same ending and never replaces it. The other ten films wait on their owning slices. Until then they stay in Dropbox as provisional work, as the roadmap timing table allows.
+**A Town of Our Own** has an already-built story ending. [299](specs/299-town-film.md) commissions its optional inline native video, retaining the complete still/text ending. The source is inventoried, not yet a released runtime asset.
+
+Several science clips also have partial homes already: Water Lab includes melting and evaporation; Lantern Circuit teaches complete/open paths; Bell Studio includes pitch. Review a finite extension and its model, captions and shown examples before attaching a clip. Whole proposed science packs are not prerequisites for these smaller integrations. Ramp Fair Test does not yet teach the ramp/lever film's force–distance trade-off; that needs a new simple-machines operation. Mill energy likewise needs an energy-transfer model. Later story films still wait for actual chapter contracts and story actions.
 
 ## Integration requirements for any of these films
 
 These restate the contract in the films brief as it applies to these files.
 
-1. **Optional presentation.** The film is never a prerequisite. The existing still/text ending stays complete, and Skip, Escape, reduced motion and a missing file all leave the full ending readable. Watching records nothing beyond the current player's opened/skipped distinction; it is not evidence of reading or understanding.
+1. **Optional presentation.** The film is never a prerequisite. The existing still/text ending stays complete, and Skip, Escape, reduced motion and a missing file all leave the full ending readable. The existing iframe player records opened/skipped presentation separately from story; the299 inline pilot writes no viewing record at all. Neither is evidence of reading or understanding.
 2. **Delivery format needs a decision.** The game's player (`FILMS` in `dist/app.mjs`) opens a same-origin, self-contained HTML page in an iframe and listens for `garden-film-finished`. These films do not fit that as delivered:
    - The **MP4s** need the separately reviewed media adapter the brief already calls for. An MP4 cannot simply replace an HTML iframe source.
    - The **Motion source** renders in the Motion player, but that player loads its Google fonts over the network, which the no-runtime-fetch rule forbids. A self-contained HTML route would need the bundled font files wired into each film's `scenes.json` (untried), plus a rights check on the player code itself.
-   Recommendation: an MP4 adapter, since the MP4s are the final exported picture and there is only one film to integrate now.
+   Chosen for299: a small inline native MP4 adapter inside the existing celebration. It does not alter the four HTML iframe films, global filmSeen records or automatic opening behavior.
 3. **Captions and text alternative.** The captions are burned into the picture, so the SRT supplies the transcript. The adapter or page must offer that transcript as readable text and must not rely on the burned-in captions as the only route.
 4. **Poster still.** None was exported. Take one representative frame per film from the MP4, or reuse the slice's existing illustration.
 5. **No sound.** All films are silent, so the sound-joining rules do not apply until a separately approved score or narration exists.
@@ -48,8 +50,12 @@ These restate the contract in the films brief as it applies to these files.
 7. **Exposure.** The process clips show worked examples. Each owning slice must count the exact examples a clip shows before any later task is called unfamiliar.
 8. **Checks before acceptance.** Silent, reduced-motion and transcript routes; keyboard and touch; pause, replay and skip; old-save behavior; 320/820 widths; and a real iPad/Safari check before any device claim.
 
-## Suggested order
+## Owner-requested media integration turn · 2026-10-29
 
-1. Decide the delivery format (item 2).
-2. Commission the A Town of Our Own integration as a small runtime slice under spec 248, using take 2.
-3. Attach each later film to its owning slice when that slice is commissioned. Do not build them ahead of it.
+1. [299 · Town film](specs/299-town-film.md): owner-selected take2 at the built ActII celebration. Silent, explicit tap, readable transcript, complete still/text fallback; no new completion record.
+2. Fill the Bar in Rhythm Studio: inspect the handdrawn working picture with its actual soundtrack and caption timing; compare against the approved mix. Build a controllable song player, with exact example familiarity separated from independent attempts and sound joining at the current position.
+3. Bounded process-clip integrations: melting/evaporation in Water Lab, complete/open paths in Lantern Circuit, amplitude/frequency in Bell Studio. Each gets a content/model and exposure review. None is already cleared by having an exported MP4.
+4. Simple machines force–distance investigation for ramp/lever, then energy transfer for the mill. Make the animation explain something the learner can vary and inspect.
+5. ActIII reciprocal exchange/return to earn Both Ways Across Willow Bridge; later IV–VI endings follow their real chapter actions. Preserve the ActVI runner reveal; no general future-film gallery.
+
+Actual take2 durations verified from exports:52,50,49,52,61seconds for ActsII–VI;36sound,32mill,37water cycle,35circuit,35melting,38ramp/lever. All are silent1280×720 H264. Both Fill the Bar pictures are about125seconds and have audio. Caption reading and sampled-frame inspection are not a full continuous viewing or listening review.
