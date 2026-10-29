@@ -1,0 +1,37 @@
+.common-page{max-width:960px;margin:auto;color:#183f39;font-size:16px;overflow-wrap:anywhere}
+.common-page *{box-sizing:border-box}
+.common-heading{background:#eff5ee;border-radius:12px 12px 0 0;padding:10px 16px}.common-heading h1{font-size:clamp(2rem,4vw,2.8rem);margin:.15em 0}.common-heading p{max-width:65ch}
+.common-heading nav{display:flex;flex-wrap:wrap;gap:4px 20px}
+.common-page a{color:#194f62;text-decoration:underline;text-underline-offset:3px;font-weight:650}
+.common-heading a{display:inline-flex;align-items:center;min-height:44px}
+.common-worktop{background:#eff5ee;border:2px solid #6d8778;border-radius:12px;padding:clamp(12px,2.2vw,22px)}
+.common-page h2{font-size:1.45rem;margin:0 0 6px}.common-page p{margin:7px 0;line-height:1.4}
+.common-request{font-weight:650}.common-whole-note{border-bottom:1px solid #91a698;padding-bottom:9px}
+.common-row{padding:10px 0;border-bottom:1px solid #91a698}
+.common-row h3{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 10px;font-size:1.08rem;margin:0}
+.common-row h3 span{font-size:1rem;font-weight:400}.common-row h3 strong{margin-left:auto;font-size:1.25rem}
+.common-diagram{display:block;width:100%;height:auto;max-height:84px;margin:1px 0}
+.common-diagram text{font-family:inherit;font-size:16px;font-weight:700;fill:#183f39}
+.common-whole{fill:#fffdf7}.common-shade-A{fill:#a9cbb2}.common-shade-B{fill:#b8d3e8}
+.common-pattern-A{stroke:#21594b;stroke-width:1.7;fill:none}.common-pattern-B{fill:#285c85}
+.common-outline,.common-old-cut{fill:none;stroke:#183f39;stroke-width:2}
+.common-new-cut{fill:none;stroke:#183f39;stroke-width:2;stroke-dasharray:4 3}
+.common-endpoint{stroke:#97651c;stroke-width:3;fill:none}.common-flag{fill:#97651c;stroke:#49300d;stroke-width:1}
+.common-readout,.common-change{font-size:1rem}.common-readout span{white-space:normal}.common-change{color:#344f43}
+.common-actions,.common-board-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.common-page button{min-height:44px;max-width:100%;padding:8px 12px;white-space:normal;font:inherit;font-weight:650;color:#183f39;background:#fffdf7;border:2px solid #456957;border-radius:7px;cursor:pointer;box-shadow:none}
+.common-page button:hover:not(:disabled){background:#dce9db}.common-page button:disabled{color:#526157;border-color:#87978b;background:#e4ebe1;cursor:default;opacity:1}
+.common-page button[aria-current=true]{color:#fffdf7;background:#21594b;border-color:#183f39;box-shadow:inset 0 0 0 2px #fffdf7}
+.common-page :is(button,a,summary):focus-visible,.common-page [tabindex="-1"]:focus{outline:3px solid #7c4810;outline-offset:3px}
+.common-catalog{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.common-catalog button{flex:1 1 280px;text-align:left}
+.common-comparison{padding:12px;border-left:5px solid #21594b;background:#fffdf7}
+.common-page details{margin-top:9px}.common-page summary{min-height:44px;padding:10px 2px;cursor:pointer;font-weight:650;color:#183f39}
+.common-visit{color:#344f43}.common-bound{font-size:1rem}.common-grownup{border-top:1px solid #91a698}
+@media(min-width:700px){.common-actions button{flex:1 1 0}.common-row{padding:7px 0}.common-diagram{max-height:60px}.common-page .common-change{margin:5px 0}.common-board-actions{margin-top:12px}}
+@media(max-width:430px){.common-heading nav{gap:2px 12px}.common-row h3 strong{margin-left:0}.common-actions button{flex:1 1 100%}.common-board-actions button{width:100%}.common-diagram{min-height:55px}.common-worktop{padding:12px}.common-page h2{font-size:1.25rem}}
+
+.common-page .common-cut-key{margin:8px 0;font-size:1rem;color:#344f43}.common-page [data-common-cut-help] h3{margin:8px 0 3px}.common-page [data-common-cut-help] p{margin:3px 0 10px}
+[data-common-link]{display:inline-flex;align-items:center;min-height:44px;color:#194f62;font-weight:650;text-decoration:underline;text-underline-offset:3px}
+[data-common-link]:focus-visible{outline:3px solid #7c4810;outline-offset:3px}
+.recut-page [data-common-link]{display:inline-flex;align-items:center;min-height:44px;padding:8px 2px}
+@media(min-width:700px){.common-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.common-heading h1{order:-1;flex:none}.common-heading nav{justify-content:flex-end;gap:4px 14px}.common-heading p{flex-basis:100%}.common-heading:has(p){flex-wrap:wrap}}
