@@ -16,6 +16,7 @@ os.environ['RHYTHM_ARTIFACTS']=str(OUT)
 spec=importlib.util.spec_from_file_location('native_helpers',ROOT/'test/rhythm-browser.py');h=importlib.util.module_from_spec(spec);spec.loader.exec_module(h)
 ROUTE='#workshop/hinge'
 ORACLES=[('same-turn',[60,2,2,0],[60,1,3,0]),('tips-trick',[110,1,1,0],[45,3,3,0]),('tilted-square',[90,2,3,0],[110,3,1,60]),('near-right',[85,2,2,0],[95,2,2,0]),('straight',[180,2,2,15],[150,3,3,15]),('long-way',[270,2,2,0],[90,2,2,0]),('full-turn',[360,2,2,0],[0,1,3,0])]
+COINCIDENT='Gold and blue point along the same ray. The marked sweep tells us whether this is no turn or one full turn.'
 FRAMES=[([60,1,1,0],[60,1,1,0]),([60,1,1,0],[60,3,3,0]),([110,1,1,0],[45,3,3,0]),([60,2,2,0],[60,2,2,120]),([0,2,3,0],[360,2,3,0])]
 def sel(a):return f'[data-hinge-action="{a}"]'
 def click(p,a):h.click(p,sel(a))
@@ -52,6 +53,8 @@ def geometry(p,expected,identity='working',layer='main'):
     if layer=='main':
         h.ok(str(opening)+'°' in f.locator('.hinge-measure').inner_text(),'textual measure matches actual drawing')
         h.ok('No turn' in f.locator('.hinge-sweep-label').inner_text() if opening==0 else 'One full turn' in f.locator('.hinge-sweep-label').inner_text() if opening==360 else True,'coincident ray sweep label explicit')
+    if layer=='main' and opening in [0,360]:
+        h.ok(COINCIDENT in f.locator('figcaption').inner_text() and COINCIDENT in s.locator('title').text_content(),'plain same-ray explanation in caption and SVG accessible title')
     return rays
 def bounds(p):
     h.ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal page overflow')
@@ -74,7 +77,7 @@ def download(p,label):
 def journey(browser,base,seed,width,height):
     c,p=setup(browser,base,seed,width,f'journey-{width}',height);before=h.book(p);h.ok(before==seed,'direct entry leaves every notebook root unchanged')
     for identity,ref,start in ORACLES:
-        choose(p,identity);geometry(p,ref,'reference');geometry(p,start);bounds(p);click(p,'card');h.ok(figure(p).locator('[data-hinge-card]').count()==1,'quarter card offered before type comparison');click(p,'compare');geometry(p,[ref[0],ref[1],ref[2],start[3]],layer='overlay');h.ok(p.locator('#hinge-comparison').evaluate('x=>document.activeElement===x'),'Compare focuses interpretation');
+        choose(p,identity);geometry(p,ref,'reference');geometry(p,start);bounds(p);click(p,'card');h.ok(figure(p).locator('[data-hinge-card]').count()==1,'quarter card offered before type comparison');click(p,'compare');geometry(p,[ref[0],ref[1],ref[2],start[3]],layer='overlay');h.ok(p.locator('#hinge-comparison').evaluate('x=>document.activeElement===x'),'Compare focuses interpretation heading');h.ok(p.locator('#hinge-comparison').evaluate('x=>x.tagName')=='H3','comparison focus is semantic heading');text=p.locator('.hinge-comparison').inner_text();h.ok(('Same selected turn' if start[0]==ref[0] else 'My selected turn is '+('smaller' if start[0]<ref[0] else 'larger')) in text,'comparison states actual selected-degree relation');
         h.ok(h.book(p)==before,'geometry/help/compare writes no notebook data')
         if identity=='tips-trick':
             for tail in [False,True]:
@@ -82,10 +85,14 @@ def journey(browser,base,seed,width,height):
                 h.ok(gap('working')>gap('reference'),'actual solid and arrowhead tip-gap contrast');
             p.screenshot(path=str(OUT/f'tip-gap-{width}.png'),full_page=True);p.screenshot(path=str(OUT/f'tip-gap-viewport-{width}.png'))
         if identity=='full-turn':
+            p.locator('[data-hinge-root] [data-speak]').click();h.ok(p.locator('[data-hinge-root] [data-speak]').get_attribute('data-speak').count(COINCIDENT)==2,'Hear includes same-ray explanation for both zero and full figures');
             styles=figure(p).locator('[data-hinge-main] [data-hinge-solid]').evaluate_all('xs=>xs.map(x=>({width:parseFloat(getComputedStyle(x).strokeWidth),dash:getComputedStyle(x).strokeDasharray}))');h.ok(styles[0]['width']>styles[1]['width'] and styles[1]['dash']!='none','coincident arms remain distinct by width and line style');p.screenshot(path=str(OUT/f'zero-full-{width}.png'),full_page=True)
     # Every type boundary uses actual buttons, not injected module state.
     for target in [5,85,90,95,175,180,185,270,355,360,0]:
-        opening(p,target);geometry(p,[target,1,3,0]);h.ok(p.locator(sel('more')).is_disabled()==(target==360),'upper endpoint native state');h.ok(p.locator(sel('back')).is_disabled()==(target==0),'lower endpoint native state');h.ok(p.locator(sel('quarter-more')).is_disabled()==(target>270),'quarter overshoot is unavailable');h.ok(p.locator(sel('quarter-back')).is_disabled()==(target<90),'quarter back underflow unavailable')
+        opening(p,target);geometry(p,[target,1,3,0]);
+        if target in [0,360]:
+            p.locator('[data-hinge-root] [data-speak]').click();h.ok(COINCIDENT in p.locator('[data-hinge-root] [data-speak]').get_attribute('data-speak'),'edited zero/full Hear has same-ray explanation');
+        click(p,'compare');classification='Zero turn' if target==0 else 'Acute' if target<90 else 'Right angle' if target==90 else 'Obtuse' if target<180 else 'Straight angle' if target==180 else 'Reflex' if target<360 else 'Full turn';h.ok(f'My hinge: {target}°. {classification}' in p.locator('.hinge-comparison').inner_text(),'interpreted type matches independently classified degree');h.ok(p.locator(sel('more')).is_disabled()==(target==360),'upper endpoint native state');h.ok(p.locator(sel('back')).is_disabled()==(target==0),'lower endpoint native state');h.ok(p.locator(sel('quarter-more')).is_disabled()==(target>270),'quarter overshoot is unavailable');h.ok(p.locator(sel('quarter-back')).is_disabled()==(target<90),'quarter back underflow unavailable')
     choose(p,'same-turn');opening(p,75);tool(p,'arms');click(p,'gold-more');click(p,'gold-more');click(p,'blue-less');click(p,'blue-less');h.ok(pose(p)==[75,3,1,0],'independent lengths preserve turn');tool(p,'picture');
     for _ in range(3):click(p,'turn')
     h.ok(pose(p)==[75,3,1,45],'whole picture preserves selected turn');
@@ -94,6 +101,9 @@ def journey(browser,base,seed,width,height):
     click(p,'example');
     for i,(ref,work) in enumerate(FRAMES):
         geometry(p,ref,'example-reference');geometry(p,work,'example-working');h.ok('Worked example, not your hinge' in p.locator('.hinge-example-label').inner_text(),'example ownership each frame');p.locator('[data-hinge-root] [data-speak]').click();words=p.locator('[data-hinge-root] [data-speak]').get_attribute('data-speak');h.ok('Worked example, not your hinge' in words and 'Example reference' in words and 'Example working hinge' in words,'narration ownership matches figures');
+        if i==2:
+            for tail in [False,True]:h.ok(distance(line(p,'gold','example-working',tail=tail)[2:],line(p,'blue','example-working',tail=tail)[2:])>distance(line(p,'gold','example-reference',tail=tail)[2:],line(p,'blue','example-reference',tail=tail)[2:]),'worked part3 solid and arrowhead tip contrast')
+        if i==4:h.ok(words.count(COINCIDENT)==2,'worked part5 Hear explains same-ray zero and full')
         if i<4:click(p,'next')
     click(p,'close');h.ok(pose(p)==expected,'example leaves working material intact');h.ok(p.locator(sel('example')).evaluate('x=>document.activeElement===x'),'example returns focus to trigger');h.ok(h.book(p)==before,'all finite cases and examples preserve notebook');bounds(p)
     tool(p,'picture');click(p,'reset');h.ok(pose(p)==[60,1,3,0],'explicit reset own authored material');h.ok(figure(p).locator('[data-hinge-card]').count()==0 and p.locator('#hinge-comparison').count()==0,'reset clears helper views');
