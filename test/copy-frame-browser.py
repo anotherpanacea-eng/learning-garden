@@ -80,7 +80,7 @@ def journey(browser,base,seed,width,height):
         action(p,'turn');geometry(p,a,b,h,w,True);ok(p.locator('.cframe-comparison').count()==0,'turn closes supplied interpretation')
         action(p,'compare');text=p.locator('.cframe-comparison').inner_text();ok('requested factor' in text,'turned copy equally valid')
         ok(('The copy is turned.' in text)==(a!=b),'turned correspondence explicit for non-square targets')
-        row=p.locator('.cframe-comparison tbody tr').first;ok(row.locator('th').inner_text()==('width to height' if a!=b else 'width to width'),'table names actual corresponding sides')
+        row=p.locator('.cframe-comparison tbody tr').first;ok(row.locator('th').inner_text()==('Original width to copy height' if a!=b else 'Original width to copy width'),'table names actual corresponding sides')
         values=row.locator('td').all_inner_texts();ok(values[0].startswith(str(a)+' length') and values[1].startswith(str(w)+' length') and values[2]=='×'+str(Fraction(w,a)),'table uses original-to-copy factor in turned and direct modes')
         if a==b:ok('added or taken away' in text,'square note does not assume addition history')
         ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth'),'no case overflow')
@@ -206,6 +206,31 @@ def interfaces(browser,base,seed):
     if now.get('garden')=={} and 'garden' not in expected:now.pop('garden')
     ok(now==expected,'uninitialized entry creates no unrelated game');action(q,'width-more');ok('workshop' not in saved(q),'explicit material action creates no Workshop owner');ok(q.locator('dialog.welcome-film[open]').count()==0,'uninitialized direct entry plays no film')
 
+def review_repairs(browser,base,seed):
+    p=release_setup(browser,base,seed,'review-repairs');before=saved(p);setdims(p,6,4);action(p,'compare');action(p,'example');action(p,'next')
+    ok(p.locator('.cframe-refs p').nth(0).inner_text().startswith('Example original:'),'worked original explicitly labelled example')
+    ok(p.locator('.cframe-refs p').nth(1).inner_text().startswith('Example copy:'),'worked copy never labelled child’s own material')
+    ok('my copy' not in p.locator('.cframe-figure figcaption').inner_text().lower(),'worked legend does not claim live ownership')
+    p.locator('[data-cframe-root] [data-speak]').tap();text=p.locator('[data-cframe-root] [data-speak]').get_attribute('data-speak');ok('This is another example. Your copy stays as you left it.' in text,'example reassurance included in first Hear');ok('Example copy: width 2 length units; height 6 length units.' in text,'example Hear describes supplied material');ok('My copy:' not in text,'example Hear contains no live-copy dimension label');ok(dims(p)==[2,6],'supplied worked geometry still matches labelled values')
+    action(p,'close');ok(dims(p)==[6,4],'return restores actual child copy after example Hear');ok(p.locator('.cframe-refs p').nth(1).inner_text().startswith('My copy:'),'live ownership label restored')
+    p.locator('[data-cframe-case]').select_option('half-panel');setdims(p,2,3);action(p,'compare');p.locator('[data-cframe-root] [data-speak]').tap();text=p.locator('[data-cframe-root] [data-speak]').get_attribute('data-speak')
+    ok('Compare these panels Measure' in text and 'Factor Original width to copy width' in text,'block and table boundaries keep spoken word separators')
+    ok('×1/4 Same shape, smaller copy.' in text,'fraction at table end has a word boundary')
+    prepared=p.evaluate('async text=>(await import("./play-media.mjs")).spoken(text)',text);ok('1 quarter Same shape, smaller copy.' in prepared,'actual shared speech preparation converts quarter at table boundary')
+    ok(saved(p)==before,'example and prepared speech preserve actual notebook')
+    for width,height in [(320,800),(820,1180)]:
+        c,q=setup(browser,base,seed,width,height)
+        for w in range(1,6):
+            setdims(q,w,12)
+            axis=q.locator('.cframe-figure svg text').filter(has_text='12').all()
+            axis=[e for e in axis if e.text_content()=='12'][0].bounding_box();label=q.locator('.cframe-figure svg text').filter(has_text=f'Width {w}').bounding_box()
+            overlap=min(axis['x']+axis['width'],label['x']+label['width'])>max(axis['x'],label['x']) and min(axis['y']+axis['height'],label['y']+label['height'])>max(axis['y'],label['y'])
+            ok(not overlap,'width and vertical-axis labels do not overlap at maximum height')
+            ok(q.locator('[data-cframe-angle]').count()==4,'all four copy corners have right-angle marks')
+        q.screenshot(path=str(OUT/f'tall-labels-{width}.png'),full_page=True)
+        action(q,'compare');session=c.new_cdp_session(q);obj=session.send('Runtime.evaluate',{'expression':'document.querySelector(".cframe-comparison table")'})['result']['objectId'];ax=session.send('Accessibility.getPartialAXTree',{'objectId':obj,'fetchRelatives':False})['nodes'][0];ok(not ax['ignored'] and ax['role']['value']=='table','responsive comparison retains Chrome table role')
+        ok(q.evaluate('document.documentElement.scrollWidth<=innerWidth'),'repaired labels and responsive comparison do not overflow');c.close()
+
 def main():
     js="import {freshState} from './dist/core.mjs';import {initializeExplorerState} from './dist/progress-transfer.mjs';const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;s.copyFrame={version:77,panels:'Unreadable future field'};s.sentinel={note:'Synthetic retained work'};console.log(JSON.stringify(s));"
     seed=json.loads(subprocess.check_output(['node','--input-type=module','-e',js],cwd=ROOT,text=True))
@@ -218,13 +243,14 @@ def main():
     with sync_playwright() as pw:
         browser=pw.chromium.launch(headless=True,executable_path='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args=['--disable-quic'])
         try:
-            parts=set(os.environ.get('CFRAME_TEST_PARTS','material,lifecycle,interfaces').split(','))
+            parts=set(os.environ.get('CFRAME_TEST_PARTS','material,lifecycle,interfaces,repairs').split(','))
             if 'material' in parts:
                 for width,height in [(820,1180),(1024,768),(320,800)]:journey(browser,base,seed,width,height)
             if 'lifecycle' in parts:lifecycle(browser,base,seed)
             if 'interfaces' in parts:interfaces(browser,base,seed)
+            if 'repairs' in parts:review_repairs(browser,base,seed)
             ok(not FAULTS,'no release page/http/console errors: '+json.dumps(FAULTS))
-            ok(not errors,'no page/console errors: '+json.dumps(errors));result={'status':'passed','checks':checks,'parts':sorted(parts),'scope':[{'material':'six-case drawn material and units, turns/squares/addition,144cells, exact four-panel cover and all worked frames','lifecycle':'stale controls, synchronous departed controls, route/chooser/two explorers and actual Notes import/export/reset/reload; Notes departure is not isolated import-hook proof','interfaces':'native keyboard/focus, first Hear composition and local request when available, empty Chrome AX status, connected announcements, fixed-coordinate taps, storage off/failure and uninitialized entry'}[part] for part in sorted(parts)],'limits':'No physical iPad/Safari, audible output, screen-reader announcement or learning-effect proof'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
+            ok(not errors,'no page/console errors: '+json.dumps(errors));result={'status':'passed','checks':checks,'parts':sorted(parts),'scope':[{'material':'six-case drawn material and units, turns/squares/addition,144cells, exact four-panel cover and all worked frames','lifecycle':'stale controls, synchronous departed controls, route/chooser/two explorers and actual Notes import/export/reset/reload; Notes departure is not isolated import-hook proof','interfaces':'native keyboard/focus, first Hear composition and local request when available, empty Chrome AX status, connected announcements, fixed-coordinate taps, storage off/failure and uninitialized entry','repairs':'worked-example ownership and reassurance, actual shared speech preparation at table boundaries, tall-label separation, four right-angle marks and responsive Chrome table role'}[part] for part in sorted(parts)],'limits':'No physical iPad/Safari, audible output, screen-reader announcement or learning-effect proof'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
         except Exception:
             for p,label in pages+PAGES:
                 try:p.screenshot(path=str(OUT/f'failure-{label}.png'),full_page=True)

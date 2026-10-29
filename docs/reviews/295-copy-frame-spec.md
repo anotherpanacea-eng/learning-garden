@@ -18,3 +18,11 @@ Root repairs make worked picture2 be2×6 (factors1 and2), while picture4 remains
 An independent focused confirmation re-read the repaired files, confirmed all targeted folds, and reported no unresolvedP1/P2. Exact rational authoring checks and the adversarial review independently agree on all864 states and the50/10 counts. These are specification/authoring results, not runtime observations.
 
 **Root verdict: BUILD-READY for this finite rectangle scope; zero unresolvedP1/P2.** No full206pack, historical/physical/coordinate curriculum, runtime behavior, exact-candidate implementation or release clearance is implied. Independent implementation review and actual native/hosted proof remain required.
+
+## Implementation review and repairs
+
+Independent Opus full review of candidate e6cca5e found noP1 and oneP2: the separate worked example reused live My copy labels, including in Hear, despite preserving the actual live material. Root separated example-original/example-copy references and its legend, and included the reassurance notice in example narration. Focused native tests verify example geometry2×6, the example-only labels/notice, absence of My copy dimensions in its narration, and restoration of the actual6×4 live copy.
+
+UsefulP3 fixes add real whitespace at comparison block/table boundaries so the shared speech formatter recognizes a trailing1/4; use explicit Original width to copy height row labels; separate the maximum-height width/axis labels; and draw four right-angle marks plus visible material-role keys. Tests exercise actual shared speech preparation, exact k×k equations for every similar state, tall labels at narrow/tablet widths, and Chrome's responsive table role. Root inspected the repaired tall-board image. This does not establish physical WebKit/iPad, audible speech or screen-reader output; the narrow table's broader platform risk remains an unverified portability limit, not a confirmed product defect. Math, live-case model, app integration and saved-data ownership are unchanged.
+
+Independent exact repair-candidate clearance remains required before merge.

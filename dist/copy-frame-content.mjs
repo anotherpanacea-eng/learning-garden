@@ -13,6 +13,7 @@ export const copyFrameCopy=Object.freeze({
  teaching:'Multiply every matching length by the same factor to keep a rectangle’s shape. Its four corners stay right angles.',
  limit:'This board offers whole-unit widths and heights from 1 to 12. Other lengths, including parts of a unit, are possible off this board.',
  legend:'Dashed outline: original panel. Filled panel: my copy. Both use the same length unit; the original outline stays on top so it remains visible.',
+ exampleLegend:'Dashed outline: example original. Filled panel: example copy. Both use the same length unit; the original outline stays on top so it remains visible.',
  turn:'Turn swaps the width and height, then lines the corner up again. The area stays the same.',
  visit:'Your copies stay while you explore this board. Leaving or reloading clears them; they are not saved in Notes.',
  boundary:'This comparison is for rectangles, including squares, whose opposite sides are equal and whose corners are all right angles. It is not a test for every kind of shape.',

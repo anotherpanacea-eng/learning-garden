@@ -72,7 +72,9 @@ Requested-match and other-factor interpretation appear only after Compare measur
 
 Heading: Worked example: one side, both sides, or adding
 
-Notice: This is another example. Your copy stays as you left it.
+Notice (also included in Hear): This is another example. Your copy stays as you left it.
+
+Example references say Example original and Example copy, never My copy for the supplied material. Example legend: Dashed outline: example original. Filled panel: example copy. Both use the same length unit; the original outline stays on top so it remains visible.
 
 Controls: Previous picture / Next picture / Return to my copy / Hear this example.
 

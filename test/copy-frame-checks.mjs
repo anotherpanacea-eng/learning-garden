@@ -7,6 +7,7 @@ const eq=(a,b,m)=>{checks++;assert.deepEqual(a,b,m);};
 const ok=(v,m)=>{checks++;assert.ok(v,m);};
 // Independent oracle: sort rectangle sides before comparing aspect ratios.
 const shape=(w,h,a,b)=>Math.min(w,h)*Math.max(a,b)===Math.max(w,h)*Math.min(a,b);
+const independentFraction=(n,d)=>{for(let q=Math.min(n,d);q>1;q--)if(n%q===0&&d%q===0){n/=q;d/=q;break;}return d===1?String(n):`${n}/${d}`;};
 const cases=[['small-panel',2,3,2,1,8,2],['long-panel',3,5,2,1,4,2],['half-panel',4,6,1,2,8,2],['square-panel',3,3,2,1,12,1],['small-square',6,6,1,2,12,1],['triple-panel',3,4,3,1,6,2]];
 eq(copyFrameCases.map(c=>c.id),cases.map(c=>c[0]));
 let similarTotal=0,requestedTotal=0;
@@ -19,7 +20,7 @@ for(const [id,a,b,tn,td,similarCount,goalCount] of cases){
   const expectedCorrespondence=fits?(Math.sign(w-h)===Math.sign(a-b)?'direct':'turned'):null;
   eq(m.matching,expectedCorrespondence,'independent shorter/longer role determines correspondence');
   const expectedGoal=fits&&Math.min(w,h)*td===Math.min(a,b)*tn;eq(m.goal,expectedGoal);
-  if(fits){similar++;similarTotal++;eq(m.scale.n*Math.min(a,b),Math.min(w,h)*m.scale.d);eq(m.areaFactor.n*m.scale.d*m.scale.d,m.areaFactor.d*m.scale.n*m.scale.n);if(w*h===a*b)sameSize++;}
+  if(fits){similar++;similarTotal++;eq(m.scale.n*Math.min(a,b),Math.min(w,h)*m.scale.d);eq(m.areaFactor.n*m.scale.d*m.scale.d,m.areaFactor.d*m.scale.n*m.scale.n);if(w*h===a*b)sameSize++;const k=independentFraction(Math.min(w,h),Math.min(a,b)),area=independentFraction(w*h,a*b);ok(copyFrameReading(state).includes(`The area factor is ${k} × ${k} = ${area}.`),'every similar pair receives its exact length-squared area equation');}
   else eq(m.scale,null);
   if(expectedGoal){goals++;requestedTotal++;ok(copyFrameReading(state).includes('requested factor'));}
   eq(m.cells.length,w*h);const occupied=new Set();
