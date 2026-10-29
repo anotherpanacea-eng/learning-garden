@@ -22,7 +22,7 @@ All files are in the owner's Dropbox, not in this repository:
 | A Question of Our Own | Act V ending | spec 120 | Not built | 52 s |
 | The Opening of the Ways | Act VI ending | spec 120 | Not built | 61 s |
 | Sound as a wave | Process clip | [146](specs/146-bell-and-drum.md) | Proposed spec only | 36 s |
-| The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) |308operation live through PR252/253;309full-film repair/specification in progress for tracking/caption/pour repairs | 32 s |
+| The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) |308operation live through PR252/253;309whole-film repair/pictures clear; local integration under review for tracking/caption/pour repairs | 32 s |
 | The water cycle at the weather station | Process clip | [140](specs/140-weather-station.md) | Proposed spec only | 37 s |
 | Closed and open circuit | Process clip | [163](specs/163-sparks-and-switches.md) | Proposed spec only | 35 s |
 | Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Delivered through PR248; corrected full film | 35 s |
@@ -108,4 +108,4 @@ Actual editable lever source/captions were read. Its fixed-horizontal endpoint c
 
 ## Full mill film ·309 commission
 
-[309](specs/309-mill-film.md) commissions the full32s derivative and separate film turn. Original tracking/pour/Sun issues remain held until actual repaired pictures and encoded samples clear independent review. The operation and movie deliberately differ: the table follows a finite batch; the continuously supplied film isolates one bucketful’s energy contribution while other water keeps its wheel moving. A visible jar boundary and ended marker are required. No excerpt or external authoring player ships. Current309specification is not media/implementation/release clearance.
+[309](specs/309-mill-film.md) commissions the full32s derivative and separate film turn. Original tracking/pour/Sun issues remain held until actual repaired pictures and encoded samples clear independent review. The operation and movie deliberately differ: the table follows a finite batch; the continuously supplied film isolates one bucketful’s energy contribution while other water keeps its wheel moving. A visible jar boundary and ended marker are required. No excerpt or external authoring player ships. The full repaired encoded film has sampled scientific/readability clearance and full codec decode; local integration passed652native checks. Exact-head code review and neighboring-media regressions precede its PR checkpoint.309is not merged or deployed.

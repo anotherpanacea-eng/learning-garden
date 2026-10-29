@@ -20,3 +20,16 @@ Independent Opus read public309spec/text/audit and relevant308/307/147context: *
 
 
 Targeted independent Sonnet recheck: **CLEAR for building**, all three physics/copy repairs. It read current public documents, checked the normalized curve math and marker/background timing, and made no actual-picture/runtime claim. Root folded small spacing, screen-axis/phase and pre-pour fill clarifications. A960-sample paper preflight also passed; its earlier failure compared the13.5speak with a pre-peak frame, not the required post-peak interval. Design gates are now clear; corrected-media, encoded-picture, implementation and release gates remain separate.
+
+
+## Actual encoded-picture review
+
+Independent Opus opened19full decoded images, overview, dense pour/refill/late strips, corrected SRT and public framing. It found the tracking/pour/Sun repairs scientifically clear in those samples, with no observed science P1/P2, but held missing decoded evidence for cues1/3/11, a stronger cue9 sample and the exact final frame. Root supplied those and observed the conditional readability concern: a faint heat wisp crosses the waiting label on the held final frame. A bounded private-source fade before x860 keeps wisps out of jar labels; full32s candidate is being re-rendered/encoded and the missing-cue/final-frame samples get a targeted recheck. No integration or media clearance is claimed yet.
+
+
+Targeted independent Sonnet actual-picture recheck: **CLEAR**, no remainingP1/P2 in six refreshed decoded samples (cues1/3/9/11/12 and frame959). Missing burned-in wording is exact and legible; the held final jar labels are clean after the bounded wisp fade. Combined with the prior19-frame/dense-transition pass, this clears the corrected-picture gate. Root probed the full encoded candidate:32.000s,960frames,1280×720H26430fps/yuv420p/no audio; full decode succeeded. Neither sampled review nor codec checks establish continuous human viewing, implementation correctness, physical Safari/iPad behavior or learning outcomes.
+
+
+## Build evidence before PR
+
+Local implementation now supplies the whole corrected film as a separate optional turn. Root executed652native Chrome assertions at320/820/1024: all18pending pictures and three milestones survive movie return, real notebook transfer/reset and raw future roots remain intact, transport/fault/cancellation paths pass. A stronger viewport check caught an offscreen Return after transcript reading; a sticky heading/Return bar fixed it.83film source assertions and52,787existing energy source assertions passed; the discovered runner passed all217source suites. Physical iPad/Safari, continuous human viewing and learning outcomes remain unverified. Neighboring media regressions and independent exact-head implementation review remain pending before the owner-requested PR pause.
