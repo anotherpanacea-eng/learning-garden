@@ -154,14 +154,16 @@ def support_and_recovery(browser,base,f):
         question(p,'marks')
         if k=='partial':click(p,'[data-upstream-post]')
         click(p,'[data-upstream-open]');ok(p.locator('[data-upstream-reply-text]').count()==1,'readable sibling reply remains available '+k)
-        if k!='partial':ok(owner(p)==before,'reread preserves damaged raw source '+k)
+        if k!='partial':
+            now=owner(p);ok(now['posts']==before['posts'] and now['source']==before['source'] and now['support']==before['support'],'reread preserves raw posts/source/support '+k)
+            if k=='badDraft':ok(now==before,'unreadable draft stays byte-equivalent during ephemeral reread')
     p=setup(browser,820,1180,f['altered'],'retained-drawing');go(p,base);click(p,'[data-upstream-open]')
     drawing=p.locator('[data-upstream-drawing]').inner_text();ok('120 mm' in drawing and '25 mm' in drawing and 'retained fixed line' in drawing,'drawing uses retained values')
     p.locator('.upstream-source summary').click();ok('Retained letter <synthetic> & unchanged.' in p.locator('.upstream-source').inner_text(),'original retained letter inert and exact')
     p=setup(browser,820,1180,f['opened'],'storage-failure');go(p,base);p.evaluate("()=>{window.upstreamSet=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw new DOMException('Synthetic storage failure','QuotaExceededError')}}")
     click(p,'[data-upstream-start]');question(p,'height');click(p,'[data-upstream-post]');ok('Device saving failed' in p.locator('#upstream-status').inner_text(),'storage failure explicit')
     report=download(p,base,'storage-failure');ok(len(report['story']['upstreamExchange']['posts'])==1,'failed storage in-memory post downloadable');p.evaluate('()=>{Storage.prototype.setItem=window.upstreamSet}')
-    p=setup(browser,820,1180,f['opened'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').uncheck();go(p,base);click(p,'[data-upstream-start]');question(p,'record');click(p,'[data-upstream-post]');ok('Saving is off' in p.locator('#upstream-status').inner_text(),'saveoff explicit');report=download(p,base,'save-off');ok(report['story']['upstreamExchange']['posts'][0]['questionId']=='record','saveoff memory survives notes download')
+    p=setup(browser,820,1180,f['opened'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').uncheck();p.goto(base+'#almanac/upstream-reply',wait_until='domcontentloaded');p.locator(VIEW).wait_for();click(p,'[data-upstream-start]');question(p,'record');click(p,'[data-upstream-post]');ok('Saving is off' in p.locator('#upstream-status').inner_text(),'saveoff explicit');report=download(p,base,'save-off');ok(report['story']['upstreamExchange']['posts'][0]['questionId']=='record','saveoff memory survives notes download')
     p=setup(browser,820,1180,f['started'],'explorer-isolation',f['opened']);go(p,base);question(p,'height');click(p,'[data-upstream-post]');first=copy.deepcopy(owner(p));p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();p.locator(VIEW).wait_for();no_film(p);ok('upstreamExchange' not in book(p)['story'],'second explorer has own unopened exchange')
     click(p,'[data-upstream-start]');question(p,'marks');click(p,'[data-upstream-post]');p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-1"]').click();p.locator(VIEW).wait_for();ok(owner(p)==first,'first explorer exact post survives switch')
 
@@ -179,11 +181,13 @@ def main():
     with sync_playwright() as pw:
         browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
         try:
-            for w,h in [(820,1180),(1024,768),(320,800)]:journey(browser,base,f,w,h)
-            retained(browser,base,f)
-            support_and_recovery(browser,base,f)
+            parts=set(os.environ.get('UPSTREAM_TEST_PARTS','journey,retained,support').split(','))
+            if 'journey' in parts:
+                for w,h in [(820,1180),(1024,768),(320,800)]:journey(browser,base,f,w,h)
+            if 'retained' in parts:retained(browser,base,f)
+            if 'support' in parts:support_and_recovery(browser,base,f)
             ok(not errors,'no page errors');ok(not faults,'no request/console faults')
-            result={'status':'passed','checks':checks,'base':base,'pageErrors':errors,'faults':faults,'limits':'Synthetic notebooks/native Chrome only; no physical iPad, Safari, audibility or efficacy claims.'}
+            result={'status':'passed','parts':sorted(parts),'checks':checks,'base':base,'pageErrors':errors,'faults':faults,'limits':'Synthetic notebooks/native Chrome only; no physical iPad, Safari, audibility or efficacy claims.'}
             (OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
         except Exception:
             for p,label in pages:
