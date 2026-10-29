@@ -15,12 +15,12 @@ def ok(v,m):
  checks+=1
 def click(p,a,value=None,machine='lift'):
  sel='[data-lift-film-return]' if a=='return' else f'[data-lift-film-action="{a}"]' if a in ['play','replay','retry'] else f'[data-{machine}-action="{a}"]'+(f'[data-{machine}-value="{value}"]' if value is not None else '')
- p.locator(sel).click()
+ p.locator(sel).tap() if p.viewport_size['width']==320 else p.locator(sel).click()
 def ready(p,owner='explorer-1'):
  p.wait_for_selector('[data-lift-root],[data-select-explorer]')
  if p.locator(f'[data-select-explorer="{owner}"]').count():p.locator(f'[data-select-explorer="{owner}"]').click()
  p.locator('[data-lift-root]').wait_for();p.wait_for_function("[...document.querySelectorAll('[data-lift-root] button')].every(b=>getComputedStyle(b).minHeight==='44px')")
- # Initial preservation snapshots include rendered line breaks; wait for the actual yard styles/fonts.
+ # Layout assertions wait for actual yard styles/fonts; state snapshots use DOM words, not layout-added line breaks.
  p.wait_for_function("[...document.styleSheets].some(s=>s.href?.endsWith('/lift-yard.css')&&s.cssRules.length>0)");p.evaluate('async()=>{await document.fonts.ready;return true}')
 def setup(b,base,seed,width,reduce=True):
  c=b.new_context(viewport={'width':width,'height':1000},has_touch=True,reduced_motion='reduce' if reduce else 'no-preference')
@@ -29,7 +29,7 @@ def setup(b,base,seed,width,reduce=True):
  p=c.new_page();p.set_default_timeout(15000);p.on('pageerror',lambda e:errors.append(str(e)));requests=[];p.on('request',lambda r:requests.append(r.url));p.goto(base+'#workshop/lift',wait_until='networkidle');ready(p);return c,p,requests
 
 
-def pose(p):return p.locator('[data-lift-root]').evaluate("r=>({text:r.innerText,pictures:[...r.querySelectorAll('svg')].map(e=>e.outerHTML),pressed:[...r.querySelectorAll('[aria-pressed]')].map(e=>[e.dataset.liftAction||e.dataset.leverAction,e.dataset.liftValue||e.dataset.leverValue,e.getAttribute('aria-pressed')]),details:[...r.querySelectorAll('[data-lift-details],[data-lever-details]')].map(e=>[e.dataset.liftDetails||e.dataset.leverDetails,e.open]),buttons:[...r.querySelectorAll('button')].map(e=>[e.textContent,e.disabled])})")
+def pose(p):return p.locator('[data-lift-root]').evaluate("r=>({text:r.textContent,pictures:[...r.querySelectorAll('svg')].map(e=>e.outerHTML),pressed:[...r.querySelectorAll('[aria-pressed]')].map(e=>[e.dataset.liftAction||e.dataset.leverAction,e.dataset.liftValue||e.dataset.leverValue,e.getAttribute('aria-pressed')]),details:[...r.querySelectorAll('[data-lift-details],[data-lever-details]')].map(e=>[e.dataset.liftDetails||e.dataset.leverDetails,e.open]),buttons:[...r.querySelectorAll('button')].map(e=>[e.textContent,e.disabled])})")
 def movie_ready(p):p.wait_for_function("document.querySelector('video')?.readyState>=2&&document.querySelector('video').duration>37.9");ok(p.locator('video').evaluate('v=>v.currentSrc.startsWith("blob:")&&v.muted'),'actual complete movie decodes from muted Blob')
 def layout(p):
  p.wait_for_function("[...document.querySelectorAll('[data-lift-root] button')].every(b=>getComputedStyle(b).minHeight==='44px')")
@@ -43,7 +43,9 @@ def roundtrip(p,escape=False):
  ok(p.evaluate('document.activeElement.hasAttribute("data-lift-film-return")'),'Watch focuses Return')
  if escape:p.keyboard.press('Escape')
  else:click(p,'return')
- ok(pose(p)==saved,'Return restores exact mode/page/plan/notice/facts/drawing/details/held reference');ok(p.evaluate('document.activeElement.dataset.liftAction')=='watch','Return restores Watch focus')
+ current=pose(p)
+ if current!=saved:(OUT/'preservation-mismatch.json').write_text(json.dumps({'before':saved,'after':current},indent=2))
+ ok(current==saved,'Return restores exact mode/page/plan/notice/facts/drawing/details/held reference');ok(p.evaluate('document.activeElement.dataset.liftAction')=='watch','Return restores Watch focus')
 def journey(b,base,seed,width):
  c,p,requests=setup(b,base,seed,width)
  try:
@@ -118,6 +120,19 @@ def transfer_and_entry(b,base):
   if p.locator('[data-film-skip]').count():p.locator('[data-film-skip]').click()
   p.evaluate('location.hash="#workshop/lift"');ready(p,owner);p.evaluate('preResetReturn.click()');ok(not p.locator('video').count() and p.locator('[data-lift-distance]').inner_text()=='0 of 2 m','actual reset invalidates old film Return')
  finally:c.close()
+def input_methods(b,base,seed):
+ c,p,_=setup(b,base,seed,320)
+ try:
+  saved=pose(p);watch=p.locator('[data-lift-action=watch]');watch.focus();p.keyboard.press('Enter');movie_ready(p);ok(p.locator('video').evaluate('v=>v.paused'),'Enter on Watch opens a reduced-motion still')
+  ok(p.locator('track').evaluate('e=>e.track.mode')=='hidden','native caption track starts hidden; readable alternatives remain')
+  video=p.locator('video');video.focus();ok(video.evaluate('v=>document.activeElement===v'),'native video receives keyboard focus');video.evaluate('v=>v.currentTime=5');p.wait_for_function("Math.abs(document.querySelector('video').currentTime-5)<.1");p.keyboard.press('ArrowRight');p.wait_for_function("document.querySelector('video').currentTime>5.1");ok(True,'ArrowRight actually seeks the native video')
+  p.keyboard.press('Space');p.wait_for_function("!document.querySelector('video').paused");p.keyboard.press('Space');p.wait_for_function("document.querySelector('video').paused");ok(True,'native video Space toggles actual playback')
+  p.locator('[data-lift-film-return]').focus();p.keyboard.press('Space');ok(pose(p)==saved,'Space on Return restores exact delivery')
+  click(p,'watch');movie_ready(p);click(p,'play');p.wait_for_function("!document.querySelector('video').paused");click(p,'play');p.wait_for_function("document.querySelector('video').paused");ok(True,'actual touch taps Play and Pause')
+  video=p.locator('video');video.evaluate('v=>v.currentTime=37.8');click(p,'play');p.wait_for_function("document.querySelector('video').ended");ok(p.locator('[data-lift-film-caption]').inner_text().endswith('more push than this.'),'actual end retains final caption')
+  click(p,'replay');p.wait_for_function("document.querySelector('video').currentTime<1&&!document.querySelector('video').paused");ok(True,'actual touch Replay rewinds and plays');click(p,'retry');movie_ready(p);ok(p.locator('video').evaluate('v=>v.paused'),'actual touch Retry reloads without autoplay');click(p,'return');ok(pose(p)==saved,'actual touch Return restores exact delivery')
+  ok(p.evaluate('filmCreated.length===filmRevoked.length&&new Set(filmRevoked).size===filmRevoked.length'),'input-method journeys revoke each movie source once')
+ finally:c.close()
 def missing_motion(b,base,seed):
  c,p,_=setup(b,base,seed,820)
  try:
@@ -134,6 +149,6 @@ def main():
   try:
    for width in [320,820,1024]:
     journey(b,base,seed,width);print('film width',width,'passed',flush=True)
-   missing_motion(b,base,seed);faults(b,base,seed);asynchronous(b,base,seed);transfer_and_entry(b,base);ok(not errors,'no page errors '+str(errors));r={'status':'passed','checks':checks,'base':base,'limits':'nativeChrome and labelled faults; no physicaliPad/Safari, screen-reader speech, human continuous viewing, physical experiment or learning outcomes'};(OUT/'receipt.json').write_text(json.dumps(r,indent=2));print(json.dumps(r))
+   input_methods(b,base,seed);missing_motion(b,base,seed);faults(b,base,seed);asynchronous(b,base,seed);transfer_and_entry(b,base);ok(not errors,'no page errors '+str(errors));r={'status':'passed','checks':checks,'base':base,'limits':'nativeChrome and labelled faults; no physicaliPad/Safari, screen-reader speech, human continuous viewing, physical experiment or learning outcomes'};(OUT/'receipt.json').write_text(json.dumps(r,indent=2));print(json.dumps(r))
   finally:b.close();server.shutdown()
 if __name__=='__main__':main()
