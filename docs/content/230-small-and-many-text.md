@@ -497,7 +497,7 @@ Prompt: Bramble says the stick insect turned into a twig. What really happened?
 - B. It was born twig-shaped, like its parents. *(right)*
 - C. It wished hard to look like a twig. *(misconception: wanted-to-hide)*
 Hint: What did its mother look like?
-Feedback: A: One insect can't change its shape. B: Yes. Born that way. C: Wishing doesn't change a body.
+Feedback: A: It did not choose its twig shape. B: Yes. Born that way. C: Wishing doesn't change a body.
 Explanation: Stick insects are born twig-shaped. Their young are too.
 
 **5.2 (Sapling, 3-choice)**
@@ -515,8 +515,8 @@ Prompt: In the hedge bench, what changes each generation?
 - B. Nothing at all changes in the hedge *(misconception: nothing-changes)*
 - C. How many of each shape there are *(right)*
 Hint: Follow one tagged insect. Then look at the mix bar.
-Feedback: A: The tagged insect never changed. B: Look at the mix bar. C: Yes. The mix changes.
-Explanation: No insect changes. The share of twiggy ones grows.
+Feedback: A: Its inherited twiggy/plain trait stays fixed in this model. B: Look at the mix bar. C: Yes. The mix changes.
+Explanation: In this model, each insect keeps its inherited twiggy/plain trait. The share of twiggy ones grows.
 
 **5.4 (Keeper's Desk, number with steps)**
 Given: 24 twiggy and 8 plain. Birds find 1 in 4 twiggy and 3 in 4 plain.
@@ -654,7 +654,7 @@ Explanation: Helping pollinators works, but it takes seasons.
 
 ## Grown-up panel
 
-**What this teaches:** that minibeasts live in small places that suit their needs, and are looked at gently and put back, for real reasons; insects as one group among minibeasts, with more kinds than any other animal group, and why; insect records as records for their size; insect parts shaped for their jobs, and molting; how a population's mix of shapes changes over generations while no insect changes itself; and, at the Keeper's Desk, why losing pollinators would cost food variety and harvest, not all food.
+**What this teaches:** that minibeasts live in small places that suit their needs, and are looked at gently and put back, for real reasons; insects as one group among minibeasts, with more kinds than any other animal group, and why; insect records as records for their size; insect parts shaped for their jobs, and molting; how a population's mix of inherited twiggy/plain traits changes over generations while each insect keeps its category in this model; and, at the Keeper's Desk, why losing pollinators would cost food variety and harvest, not all food.
 
 **What it does not claim:** the benches are made-up models with stated rules. The flea's size, the dragonfly's length, the twig-insect numbers and the orchard's apples are simplified pictures, not measurements. The peppered moth (the real, measured case of natural selection) is told in the Like and Unlike pack. Hand pollination in some Sichuan pear and apple orchards is real, but people disagree about why it started and why it continues.
 
