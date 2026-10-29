@@ -56,7 +56,7 @@ def goal(p,N,job):
 def journey(b,base,seed,width):
  c,p,requests=setup(b,base,seed,width)
  try:
-  raw=p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')");sibling=p.evaluate("localStorage.getItem('number-garden-v1:explorer-2')");writes=p.evaluate('millWrites')
+  style=p.locator('head link[href="./mill-energy.css"]').element_handle();ok(style is not None and not p.locator('[data-energy-root] link[rel=stylesheet]').count(),'page-level style is not recreated within a turn');raw=p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')");sibling=p.evaluate("localStorage.getItem('number-garden-v1:explorer-2')");writes=p.evaluate('millWrites')
   ok(counts(p)==[8,0,0,8],'fresh visit ledger');ok(not p.locator('video').count() and not any('.mp4' in r for r in requests),'quiet cold entry does not start storm film');layout(p)
   if width>=820:
    p.evaluate('scrollTo(0,0)');ok(p.locator('[data-energy-scene]').bounding_box()['y']<1000 and button(p,'gate').bounding_box()['y']+button(p,'gate').bounding_box()['height']<1000,'picture and four primary actions in initial tablet viewport')
@@ -87,7 +87,7 @@ def journey(b,base,seed,width):
   act(p,'size',8);act(p,'jobs');act(p,'job',3);act(p,'pour');act(p,'grind');ok('met earlier' in p.locator('.me-status').text_content(),'past Rub success not false current success')
   act(p,'size',12);act(p,'fresh-six');heading(p);ok(not p.locator('.me-complete').count() and counts(p)==[12,0,0,12],'fresh six clears only selected size')
   act(p,'size',16);ok(p.locator('.me-complete').count()==1,'other size milestone preserved');act(p,'clear');focused(p,'keep');ok(not p.locator('.me-kept').count(),'clear only kept reference')
-  ok(p.evaluate('millWrites')==writes and p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')")==raw and p.evaluate("localStorage.getItem('number-garden-v1:explorer-2')")==sibling,'all actions preserve byte-exact owner/sibling future notebooks')
+  ok(style.evaluate('x=>x.isConnected&&x.parentElement.tagName==="HEAD"'),'same actual stylesheet node persists across all turns and representations');ok(p.evaluate('millWrites')==writes and p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')")==raw and p.evaluate("localStorage.getItem('number-garden-v1:explorer-2')")==sibling,'all actions preserve byte-exact owner/sibling future notebooks')
   old=button(p,'pour').element_handle();p.locator('#explorer-switch').tap();p.locator('[data-select-explorer=explorer-2]').tap();ready(p);old.evaluate('x=>x.click()');ok(counts(p)==[8,0,0,8],'owner switch resets and old owner control cannot mutate')
   act(p,'pour');p.reload(wait_until='networkidle');ready(p);ok(counts(p)==[8,0,0,8],'reload is a fresh visit')
  finally:c.close()
