@@ -91,7 +91,7 @@ def asynchronous(b,base,seed):
   p.evaluate('document.querySelector("[data-energy-action=pour]").click()');ok(p.locator('[data-energy-moving]').count()==1,'optional motion starts');p.wait_for_timeout(60)
   a=float(p.locator('[data-energy-wheel]').get_attribute('data-energy-angle'));ok(30<a<45,'wheel has intermediate actual displayed angle')
   p.evaluate('document.querySelector("[data-energy-action=rub]").click()');a2=float(p.locator('[data-energy-wheel]').get_attribute('data-energy-angle'));ok(a2>=a,'rapid replacement begins from displayed pose')
-  p.evaluate("document.dispatchEvent(new Event('garden-speak-request'))");ok(not p.locator('[data-energy-moving]').count(),'narration stops visual motion');ok(float(p.locator('[data-energy-wheel]').get_attribute('data-energy-angle'))==60,'cancel settles final pose')
+  p.evaluate("document.dispatchEvent(new CustomEvent('garden-speak-request',{detail:{text:'Synthetic narration request',language:'en'}}))");ok(not p.locator('[data-energy-moving]').count(),'narration stops visual motion');ok(float(p.locator('[data-energy-wheel]').get_attribute('data-energy-angle'))==60,'cancel settles final pose')
   p.evaluate('document.querySelector("[data-energy-action=pour]").click();Object.defineProperty(document,"hidden",{configurable:true,value:true});document.dispatchEvent(new Event("visibilitychange"))');p.wait_for_timeout(220);ok(not p.locator('[data-energy-moving]').count(),'hidden page settles and stops');p.evaluate('Object.defineProperty(document,"hidden",{configurable:true,value:false})')
   for missing in ['matchMedia','requestAnimationFrame']:
    p.evaluate(f'window.{missing}=undefined');act(p,'grind');ok(not p.locator('[data-energy-moving]').count(),'missing '+missing+' gives immediate picture')
