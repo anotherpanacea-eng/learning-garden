@@ -12,3 +12,5 @@
 | Adversarial | Clear: hostile retained damage, parent prerequisites, support/receipt boundaries, stale callbacks and finite science/story claims checked. |
 
 The actual whole-notebook importer still owns global safety. Source shape tests do not certify scientific truth, fluent translations, reading ability, independent writing or practical measuring technique. The English/science copy receives a separate independent content pass; exact candidate implementation and browser proof remain required before release. No physical iPad or audibility claims follow from Chrome geometry.
+
+Independent Claude finite-content pass found and resolved a story-knowledge defect: Nuria had not received Willowbank’s measurement, so she cannot quote it. The comparison reply now asks generically for its unit/reference. The finite copy also supplies an eye-estimate method, spaced mark lists, generic courier wording and explicit approximate language. A separate Claude repair pass returned CLEAR. This is English/science content clearance, not runtime clearance.

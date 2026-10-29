@@ -63,7 +63,7 @@ def go(p, base, route='#almanac/upstream-reply', selector=VIEW):
     p.locator(selector).wait_for()
 
 def click(p, selector):
-    p.locator(selector).first.click()
+    p.locator(selector).first.tap()
 
 def snap(p, name):
     p.screenshot(path=str(OUT / (name + '.png')), full_page=True)
@@ -137,6 +137,34 @@ def retained(browser,base,f):
     ok(r['connected'] and r['speech']==0 and book(p)==before,'same-block stale controls inert')
 
 
+def support_and_recovery(browser,base,f):
+    p=setup(browser,820,1180,f['opened'],'support');go(p,base);click(p,'[data-upstream-start]');question(p,'marks')
+    hear=p.locator(VIEW+' [data-speak]');ok(hear.count()==1,'one actual native Hear')
+    voices=p.evaluate('speechSynthesis.getVoices().filter(v=>v.localService&&/^en(?:[-_]|$)/i.test(v.lang)).length')
+    hear.click();ok(next(x for x in owner(p)['support'] if x['questionId']=='marks')['narration'] is True,'first Hear recorded before delegation')
+    if voices:
+        p.wait_for_function('upstreamSpeechRequests.length===1');ok('Nuria' in p.evaluate('upstreamSpeechRequests[0]'),'first actual native request current question once')
+    else:ok(p.evaluate('upstreamSpeechRequests.length')==0,'missing local voice makes no remote/request substitute')
+    click(p,'[data-upstream-help]');ok(p.locator('[data-upstream-close-help]').count()==1,'explicit helper exposed');click(p,'[data-upstream-close-help]');click(p,'[data-upstream-together]');click(p,'[data-upstream-post]')
+    r=owner(p)['posts'][0]['posted'];ok(all(r['supportBefore'][k] for k in ['help','narration','together']),'posting freezes separate support flags')
+    click(p,'[data-upstream-open]');click(p,'[data-upstream-format="longer"]');ok('50, 100, 150, 200' in p.locator('[data-upstream-reply-text]').inner_text(),'number list visually separated')
+    for k in ['mismatch','partial','badDraft','badSupport']:
+        p=setup(browser,820,1180,f[k],'recovery-'+k);go(p,base);before=copy.deepcopy(owner(p))
+        if k in ['mismatch','badSupport']:click(p,'[data-upstream-back]')
+        question(p,'marks')
+        if k=='partial':click(p,'[data-upstream-post]')
+        click(p,'[data-upstream-open]');ok(p.locator('[data-upstream-reply-text]').count()==1,'readable sibling reply remains available '+k)
+        if k!='partial':ok(owner(p)==before,'reread preserves damaged raw source '+k)
+    p=setup(browser,820,1180,f['altered'],'retained-drawing');go(p,base);click(p,'[data-upstream-open]')
+    drawing=p.locator('[data-upstream-drawing]').inner_text();ok('120 mm' in drawing and '25 mm' in drawing and 'retained fixed line' in drawing,'drawing uses retained values')
+    p.locator('.upstream-source summary').click();ok('Retained letter <synthetic> & unchanged.' in p.locator('.upstream-source').inner_text(),'original retained letter inert and exact')
+    p=setup(browser,820,1180,f['opened'],'storage-failure');go(p,base);p.evaluate("()=>{window.upstreamSet=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw new DOMException('Synthetic storage failure','QuotaExceededError')}}")
+    click(p,'[data-upstream-start]');question(p,'height');click(p,'[data-upstream-post]');ok('Device saving failed' in p.locator('#upstream-status').inner_text(),'storage failure explicit')
+    report=download(p,base,'storage-failure');ok(len(report['story']['upstreamExchange']['posts'])==1,'failed storage in-memory post downloadable');p.evaluate('()=>{Storage.prototype.setItem=window.upstreamSet}')
+    p=setup(browser,820,1180,f['opened'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').uncheck();go(p,base);click(p,'[data-upstream-start]');question(p,'record');click(p,'[data-upstream-post]');ok('Saving is off' in p.locator('#upstream-status').inner_text(),'saveoff explicit');report=download(p,base,'save-off');ok(report['story']['upstreamExchange']['posts'][0]['questionId']=='record','saveoff memory survives notes download')
+    p=setup(browser,820,1180,f['started'],'explorer-isolation',f['opened']);go(p,base);question(p,'height');click(p,'[data-upstream-post]');first=copy.deepcopy(owner(p));p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();p.locator(VIEW).wait_for();no_film(p);ok('upstreamExchange' not in book(p)['story'],'second explorer has own unopened exchange')
+    click(p,'[data-upstream-start]');question(p,'marks');click(p,'[data-upstream-post]');p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-1"]').click();p.locator(VIEW).wait_for();ok(owner(p)==first,'first explorer exact post survives switch')
+
 def main():
     f=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {upstreamFixtures} from './test/upstream-exchange-checks.mjs';console.log(JSON.stringify(upstreamFixtures()));"],cwd=ROOT,text=True))
     server=None;base=os.environ.get('UPSTREAM_TEST_URL')
@@ -153,6 +181,7 @@ def main():
         try:
             for w,h in [(820,1180),(1024,768),(320,800)]:journey(browser,base,f,w,h)
             retained(browser,base,f)
+            support_and_recovery(browser,base,f)
             ok(not errors,'no page errors');ok(not faults,'no request/console faults')
             result={'status':'passed','checks':checks,'base':base,'pageErrors':errors,'faults':faults,'limits':'Synthetic notebooks/native Chrome only; no physical iPad, Safari, audibility or efficacy claims.'}
             (OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))

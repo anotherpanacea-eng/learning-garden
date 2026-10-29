@@ -33,9 +33,9 @@ function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
 {
  const picker=fixture(freshState(),{choosing:true,welcomeSeen:false});eq(picker.dialogs.length,0,'chooser does not consume another explorer’s welcome');eq(picker.state.garden.welcomeFilmSeen,false,'welcome remains available');
  const active=fixture(freshState(),{welcomeSeen:false});eq(active.dialogs.length,1,'active explorer gets first-visit film');active.dialogs[0].skip.onclick();
- const switchedWelcome=app.slice(app.indexOf('function useExplorer('),app.indexOf('function useExplorer(')+1800).match(/if\((destination[^\n]+)\)requestAutomaticFilm\('welcome'\);/);
+ const switchedWelcome=app.slice(app.indexOf('function useExplorer('),app.indexOf('\nfunction freshExplorerChoice(',app.indexOf('function useExplorer('))).match(/if\((destination[^\n]+)\)requestAutomaticFilm\('welcome'\);/);
  eq(Boolean(switchedWelcome),true,'extract the actual explorer-switch welcome condition');
- for(const [destination,expected] of [['#notes',false],['#cafe/units',false],['#begin',false],['#arrive',false],['#home',true],['#cafe',true]])eq(vm.runInNewContext(switchedWelcome[1],{destination}),expected,`explorer-switch welcome at ${destination}`);
+ for(const [destination,expected] of [['#almanac/upstream-reply',false],['#notes',false],['#cafe/units',false],['#begin',false],['#arrive',false],['#home',true],['#cafe',true]])eq(vm.runInNewContext(switchedWelcome[1],{destination}),expected,`explorer-switch welcome at ${destination}`);
 }
 // Completed real routes, including legacy English/French, are eligible only at their ending.
 for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall',variant:1}],['french',{destination:'bookstall',variant:1}],...frenchLessons.map(l=>[l.id,undefined])]){
