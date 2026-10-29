@@ -65,7 +65,7 @@ export const ferryCopy = {
   "title": "Ferry Deck",
   "opening": "The same crossing can look different when you compare it with something else. Step the clock, then watch from the ferry or the other boat. What moves compared with you?",
   "notice": "A made-up model: straight, steady motions for six seconds. The boats are in separate lanes. This is not a picture of water currents or a plan for a real crossing.",
-  "viewCaption": "Watching from {observer} · clock {t} seconds. Right is positive. Zero is the marked point you are watching from.",
+  "viewCaption": "Watching from {observer} · clock {clock}. Right is positive. Zero is the marked point you are watching from.",
   "axisCaption": "Position in meters from {observer}. A position tells where something is now; it does not tell which way it is moving.",
   "velocityLegend": "The arrow shows the courier's velocity compared with {observer}, in meters per second. Its length uses a different scale from the position ruler. It is not a trail the courier has already traveled.",
   "position": "Courier: {signed q} m from {observer}.",

@@ -10,7 +10,7 @@ Companion to [spec298](../specs/298-ferry-deck.md). These are invented model cro
 
 **Model notice:** A made-up model: straight, steady motions for six seconds. The boats are in separate lanes. This is not a picture of water currents or a plan for a real crossing.
 
-**View caption:** Watching from {observer} · clock {t} seconds. Right is positive. Zero is the marked point you are watching from.
+**View caption:** Watching from {observer} · clock {clock}. Right is positive. Zero is the marked point you are watching from.
 
 **Axis caption:** Position in meters from {observer}. A position tells where something is now; it does not tell which way it is moving.
 
