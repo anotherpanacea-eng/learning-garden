@@ -1,0 +1,9 @@
+# 299 · Source and overlap audit
+
+2026-10-29. This increment presents an already-owned fictional ending; it introduces no new teaching capability or assessed example. Study existing spec248, act-two-ui/core/content, play-media and the four HTML film lifecycles. Reuse the existing celebrationAvailable gate and current-root/owner predicate; do not graft MP4 onto an HTML iframe or introduce a second story owner.
+
+Jane and Marble are curriculum references, not sources for this original film. The current pinned opportunities in upstream-opportunities and the298 audit were checked: Jane's lesson/optional-help patterns and Marble's topic graph do not supply this delivery adapter. No upstream code, text, media or taxonomy subset is incorporated; their existing attribution is unchanged. An optional cinematic ending must not become mastery evidence or a content unlock.
+
+Actual archive inventory: eleven take2 H264 1280×720 silent films, paired take1 alternates and SRT captions, plus handdrawn and earlier flat Fill the Bar exports. All eleven take2 caption files read; six representative frames per film inspected, not continuous frame-by-frame viewing or review of take1. Town delivery reencode probed: H264/yuv420p,30fps,52seconds,5192287bytes. Review delivery images and actual native playback before release. Owner selected take2, both takes usable; editable Motion scenes/fonts remain archived and are not runtime dependencies. No real-person images, identifying learner content or family records are used.
+
+Science clips are not cleared by this inventory: review each model, assumptions, captions and exact worked examples alongside its finite owning activity. In particular warm-cloud droplets versus ice, pure-water melting assumptions, circuit propagation/current simplifications and ideal lever work need content review. These are bounded integration tasks, not a requirement to build whole proposed packs first.

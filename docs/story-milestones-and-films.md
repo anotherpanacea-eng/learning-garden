@@ -53,6 +53,10 @@ Built means a verified existing local action/ending. Proposed means the story cl
 | Town repair, seasons, weather/almanac, minibeast classification | **Proposed:** town repair belongs to Act I; repaired places persist and are never damaged again. Re-specify the old session-count repair proposal as an explicit contribution before commissioning. Later seasons/weather/almanac/nature work keeps a chosen artifact under its own spec. | One shared garden/season vignette may be useful; no separate clip for every repaired place, weather entry or classification. | The town persists. Calendar changes never remove progress or require daily attendance. |
 | Market Day, Cartographer's Table, planning bench, council/dossier, specialist expeditions | **Proposed:** keep a plan/source interpretation, try an exchange/design, or present a chosen contribution. | Reuse Acts II–VI anchors where the chapter genuinely belongs. Commission a separate clip only when a specified event has a distinct visual payoff. | Teach the needed intermediate concepts in those activity specs; a cinematic cameo cannot fill a curriculum gap. |
 
+## Existing exports: integrate before commissioning duplicates
+
+The [Motion inventory and current integration order](motion-film-integration.md) records eleven exported silent films with owner-selected take2 defaults. [299](specs/299-town-film.md) commissions the first native-video integration at the already-built ActII celebration; source availability is not deployment. Fill the Bar follows, then bounded science pairings with existing activities. Whole science proposals are not a gate where a smaller reviewed extension supplies the actual lesson. ActsIII–VI remain dependent on their real chapter contracts, not merely on export readiness.
+
 ## Film briefs a producer can use
 
 All titles and shot suggestions are original proposals. Existing character art is in `dist/`; use the actual game designs rather than an unrelated visual franchise. The world grows from recovery into belonging, reciprocity, disagreement, authorship and shared agency.
