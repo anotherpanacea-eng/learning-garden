@@ -26,6 +26,8 @@ def ready(p,owner):
  p.wait_for_selector('[data-water-phase-root],[data-select-explorer]')
  if p.locator(f'[data-select-explorer="{owner}"]').count():p.locator(f'[data-select-explorer="{owner}"]').click()
  p.locator('[data-water-phase-root]').wait_for()
+ # Explorer selection renders this route after the initial navigation has settled.
+ p.wait_for_function("getComputedStyle(document.querySelector('[data-phase-action=in]')).minHeight==='44px'")
 def inspect(p,index):
  ds=pose(p);liquid=[0,0,4,8,12,12][index];ok(len(ds)==12 and len({d[0] for d in ds})==12,'twelve stable identities');ok([d[0] for d in ds if d[1]=='liquid']==list(range(1,liquid+1)),'nested liquid set matches actual drawing');ok(all(d[4]==7 for d in ds),'actual fixed radius');ok(p.locator('.phase-count').inner_text()==f'{12-liquid} in ice · {liquid} in liquid','count matches drawing');ok(p.locator('.phase-trace circle.selected').get_attribute('data-phase-trace')==str(index),'categorical trace highlights correct point');ok(p.locator('.phase-temperature .sr-only').inner_text()==['minus five degrees Celsius','zero degrees Celsius','zero degrees Celsius','zero degrees Celsius','zero degrees Celsius','plus five degrees Celsius'][index],'accessible temperature');
  for a,d in enumerate(ds):
