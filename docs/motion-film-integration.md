@@ -26,7 +26,7 @@ All files are in the owner's Dropbox, not in this repository:
 | The water cycle at the weather station | Process clip | [140](specs/140-weather-station.md) | Proposed spec only | 37 s |
 | Closed and open circuit | Process clip | [163](specs/163-sparks-and-switches.md) | Proposed spec only | 35 s |
 | Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Delivered through PR248; corrected full film | 35 s |
-| Ramp and lever | Process clip | [305 ramp-first operation](specs/305-lift-yard.md); broader[154](specs/154-ramps-levers-hoist.md) | Ramp operation being specified; lever and full-film review follow | 38 s |
+| Ramp and lever | Process clip | [305 ramp-first operation](specs/305-lift-yard.md); broader[154](specs/154-ramps-levers-hoist.md) |305ramp delivered;306lever in specification; full-film review follows | 38 s |
 
 ## What is ready now
 
@@ -88,3 +88,10 @@ Actual take2 durations verified from exports:52,50,49,52,61seconds for ActsII–
 [304](specs/304-water-film.md) is delivered through [PR248](https://github.com/anotherpanacea-eng/learning-garden/pull/248#issuecomment-6502887833): the full corrected35s film,683 matching hosted files before296 native browser assertions. Its authoring paragraph above is historical; rejected overlapping/discontinuous candidates stay unshipped. Root geometry/full-decode checks and independent sampled-picture/physics review are distinct evidence, not continuous human viewing.
 
 [305 Lift Yard](specs/305-lift-yard.md) is the next new game loop: ramp deliveries, fixed rise, adjustable required pull and rope-distance/work comparisons. It contains no movie. Next commission a lever extension in the same repeatable delivery pattern, then independently review the actual full38s ramp/lever pictures, captions and source before integration. In particular, lever work must distinguish vertical displacement with vertical force from curved path length. This sequence makes a real place for the existing film; it does not waive its gate or replace it with an excerpt. Broader154/147 remain proposed.
+
+
+## Lift Yard delivery and lever continuation · 2026-10-29
+
+[305/PR249](https://github.com/anotherpanacea-eng/learning-garden/pull/249#issuecomment-6504661303) is live:685 matching hosted files before9,486 native assertions. [306](specs/306-lever-deliveries.md) now specifies the lever operation within the same yard, retaining both sets of partial jobs and one shared force-by-distance reference. This advances the existing ramp/lever film's teaching home; the film remains unshipped.
+
+Actual editable lever source/captions were read. Its fixed-horizontal endpoint construction must not be used as a rigid-pole model, and its generic path wording needs a force-direction review. These are source-study concerns, not a decoded-export picture verdict.306uses original rigid geometry with vertical force and vertical displacement. After it is built, review the whole existing38s movie's actual pictures/temporal sequences, repair source/captions as needed, then separately integrate the full result.
