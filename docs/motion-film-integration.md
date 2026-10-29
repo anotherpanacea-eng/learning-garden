@@ -67,3 +67,9 @@ Actual take2 durations verified from exports:52,50,49,52,61seconds for ActsII–
 ## Switch Table302 · edited excerpt under review
 
 [302](specs/302-switch-table.md) proposes a finite one-/two-switch series-loop table and a19.6-second **edited excerpt** from the supplied circuit film. Actual review found the original35s export says “Closed” while its switch is open around7–9s. The derivative omits mismatched transitions and ambiguous diagram scenes, repeats settled open/closed examples for reading, and is independently reviewed as a distinct cut. The original full export remains uncleared. Different switch positions, two-switch AND behavior and sketch/symbol equivalence belong to the new original interactive model, not to omitted movie scenes. This is neither full163 nor a live302 release claim.
+
+## Sound Window303 · full corrected film under review
+
+[303](specs/303-sound-window.md) proposes a fixed-scale two-parameter computer-signal comparison beside Bell Studio, with an optional full36-second corrected **Sound as a wave** film. Actual source review found an oversized amplitude bracket and overlapping label in original take2. A private offline re-render removes that bracket, moves labels and corrects “shorter free end” and air acting on the drum. All scenes/cue times remain; only the separately reviewed derivative may ship. Runtime contains no Motion player/font binaries. This is not the full proposed146 pack or a live303 claim.
+
+[Switch Table302](specs/302-switch-table.md) is delivered through [PR245](https://github.com/anotherpanacea-eng/learning-garden/pull/245#issuecomment-6499613216):673 matching deployed files preceded1953 canonical native checks. Its19.6s circuit cut remains explicitly an excerpt; the original full35s export is unshipped.
