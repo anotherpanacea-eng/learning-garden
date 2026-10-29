@@ -59,3 +59,7 @@ These restate the contract in the films brief as it applies to these files.
 5. ActIII reciprocal exchange/return to earn Both Ways Across Willow Bridge; later IV–VI endings follow their real chapter actions. Preserve the ActVI runner reveal; no general future-film gallery.
 
 Actual take2 durations verified from exports:52,50,49,52,61seconds for ActsII–VI;36sound,32mill,37water cycle,35circuit,35melting,38ramp/lever. All are silent1280×720 H264. Both Fill the Bar pictures are about125seconds and have audio. Caption reading and sampled-frame inspection are not a full continuous viewing or listening review.
+
+## Ice and warmth301 · model first, film repair required
+
+[301](specs/301-water-phase.md) commissions a six-stage manual pure-water model beside the built melt explanation: energy transfer, melting/freezing, temperature plateau, stable particle identities and a closed-water boundary. It is visit-local supplied teaching, with no assessment or saved outcome. The silent melting take2 is **withheld** after actual sampled-picture review found overlapping liquid particles and an unclear return to ordered ice. Before integration, repair those pictures, retain count/identity/size and review the actual corrected frames/captions independently. The original export's existence and optional framing are not clearance. No film/MP4/player is shipped by301; its runtime release remains a separate gate. Other media queue order remains unchanged.
