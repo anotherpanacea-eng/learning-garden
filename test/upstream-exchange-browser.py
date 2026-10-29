@@ -68,6 +68,17 @@ def click(p, selector):
 def snap(p, name):
     p.screenshot(path=str(OUT / (name + '.png')), full_page=True)
 
+def stash(p):
+    n=p.evaluate("()=>{window.oldUpstream=[...document.querySelectorAll('[data-upstream-back],[data-upstream-post],[data-upstream-open],[data-upstream-format],[data-speak]')];return oldUpstream.length}")
+    ok(n>=2,'actual controls retained for stale-handler probe')
+
+def stale(p,label):
+    before=book(p);n=p.evaluate('upstreamSpeechRequests.length')
+    connected=p.evaluate('oldUpstream.some(e=>e.isConnected)');ok(not connected,'previous root detached '+label)
+    p.evaluate('oldUpstream.forEach(e=>e.click())')
+    ok(book(p)==before and p.evaluate('upstreamSpeechRequests.length')==n,'old handlers inert '+label)
+
+
 def no_film(p):
     ok(p.locator('dialog.welcome-film[open]').count()==0, 'no automatic welcome on exchange')
 
@@ -108,7 +119,7 @@ def journey(browser,base,f,w,h):
     source=owner(p)['source'];ok(len(source['questions'])==4,'four useful supplied questions')
     for q in source['questions']:
         question(p,q['id']);ok(q['question'] in p.locator(VIEW).inner_text(),'exact question preview')
-        click(p,'[data-upstream-post]');post=next(x for x in owner(p)['posts'] if x['questionId']==q['id'])
+        stash(p);click(p,'[data-upstream-post]');stale(p,'phase redraw');post=next(x for x in owner(p)['posts'] if x['questionId']==q['id'])
         ok(post['posted']['questionId']==q['id'] and not post.get('replyOpened',False),'post and opening separate')
         ok(q['question'] in p.locator(VIEW).inner_text(),'exact question stays on envelope')
         click(p,'[data-upstream-open]');ok(next(x for x in owner(p)['posts'] if x['questionId']==q['id'])['replyOpened'] is True,'explicit reply opening recorded')
@@ -123,10 +134,14 @@ def journey(browser,base,f,w,h):
     ok(book(p)['story']['acts']==saved_story['acts'] and book(p)['story']['seenScenes']==saved_story['seenScenes'],'no later-act ending or historical credit')
     question(p,'height');click(p,'[data-upstream-open]');kept=copy.deepcopy(owner(p));p.reload();p.locator(VIEW).wait_for();ok(owner(p)==kept,'reload preserves exact frozen exchange');no_film(p)
     click(p,'[data-upstream-back]');question(p,'height');click(p,'[data-upstream-open]')
-    report=download(p,base,'journey-'+str(w));ok(report['story']['upstreamExchange']==kept,'actual notes download retains exact owner')
-    bring(p,base,report);go(p,base);ok(owner(p)==kept,'actual whole-notebook import retains exact owner');no_film(p)
+    stash(p);report=download(p,base,'journey-'+str(w));ok(report['story']['upstreamExchange']==kept,'actual notes download retains exact owner')
+    bring(p,base,report);go(p,base);ok(owner(p)==kept,'actual whole-notebook import retains exact owner');no_film(p);stale(p,'confirmed import')
 
 def retained(browser,base,f):
+    p=setup(browser,820,1180,f['missing'],'unseen-preview');go(p,base);no_film(p)
+    now=book(p);expected=copy.deepcopy(f['missing'])
+    now.get('garden',{}).pop('avatar',None);expected.get('garden',{}).pop('avatar',None)
+    ok(now==expected,'unseen direct preview initializes no unrelated activity or story')
     p=setup(browser,820,1180,f['unopened'],'unopened');go(p,base);before=book(p)
     ok(p.locator('[data-upstream-start]').count()==0 or p.locator('[data-upstream-start]').is_disabled(),'sealed letter does not start exchange');no_film(p);ok(book(p)==before,'pure preview leaves notebook unchanged')
     for key in ['mismatch','badSupport','badDraft','badPosts','future']:
@@ -164,8 +179,13 @@ def support_and_recovery(browser,base,f):
     click(p,'[data-upstream-start]');question(p,'height');click(p,'[data-upstream-post]');ok('Device saving failed' in p.locator('#upstream-status').inner_text(),'storage failure explicit')
     report=download(p,base,'storage-failure');ok(len(report['story']['upstreamExchange']['posts'])==1,'failed storage in-memory post downloadable');p.evaluate('()=>{Storage.prototype.setItem=window.upstreamSet}')
     p=setup(browser,820,1180,f['opened'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').uncheck();p.goto(base+'#almanac/upstream-reply',wait_until='domcontentloaded');p.locator(VIEW).wait_for();click(p,'[data-upstream-start]');question(p,'record');click(p,'[data-upstream-post]');ok('Saving is off' in p.locator('#upstream-status').inner_text(),'saveoff explicit');report=download(p,base,'save-off');ok(report['story']['upstreamExchange']['posts'][0]['questionId']=='record','saveoff memory survives notes download')
-    p=setup(browser,820,1180,f['started'],'explorer-isolation',f['opened']);go(p,base);question(p,'height');click(p,'[data-upstream-post]');first=copy.deepcopy(owner(p));p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();p.locator(VIEW).wait_for();no_film(p);ok('upstreamExchange' not in book(p)['story'],'second explorer has own unopened exchange')
+    p=setup(browser,820,1180,f['started'],'explorer-isolation',f['opened']);go(p,base);question(p,'height');click(p,'[data-upstream-post]');first=copy.deepcopy(owner(p));stash(p);p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();p.locator(VIEW).wait_for();no_film(p);ok('upstreamExchange' not in book(p)['story'],'second explorer has own unopened exchange');stale(p,'explorer swap')
     click(p,'[data-upstream-start]');question(p,'marks');click(p,'[data-upstream-post]');p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-1"]').click();p.locator(VIEW).wait_for();ok(owner(p)==first,'first explorer exact post survives switch')
+    click(p,VIEW+' a[href="#notes"]');p.locator('#reset').wait_for();click(p,'#reset');click(p,'#confirm-reset')
+    p.wait_for_function("location.hash==='#home'");film=p.locator('dialog.welcome-film[open]');film.wait_for(state='visible');film.locator('[data-film-skip]').tap();film.wait_for(state='detached')
+    ok(book(p)['garden']['welcomeFilmSeen'] is True,'reset welcome completed on Home')
+    go(p,base);no_film(p);ok('upstreamExchange' not in book(p).get('story',{}),'confirmed reset clears this explorer exchange')
+
 
 def main():
     f=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {upstreamFixtures} from './test/upstream-exchange-checks.mjs';console.log(JSON.stringify(upstreamFixtures()));"],cwd=ROOT,text=True))

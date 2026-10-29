@@ -26,7 +26,7 @@ Notes disclaimer: These are local story actions with supplied questions and repl
 
 Question: Nuria, how high did the brook reach at Vadoalto during this storm, which units did you use, and where did you start measuring?
 
-Shorter: Hello again! At Vadoalto, my estimate is about 240 cm above our fixed line labelled ordinary level. That is our own starting line. I have drawn the post so you can see what I mean. —Nuria
+Shorter: Hello again! For this storm's highest mark at Vadoalto, my estimate is about 240 cm above our fixed line labelled ordinary level. That is our own starting line. I have drawn the post so you can see what I mean. —Nuria
 
 More detail: Hello again! I mean this storm at our Vadoalto post. My estimate is about 240 cm above a fixed line we label ordinary level. The unit is centimetres, written cm. That line is our own reference, not today's water surface. My sketch shows the marks and the reported estimate. It does not show the brook's depth or the town's height above the sea. —Nuria
 

@@ -1,6 +1,6 @@
 # 291 · Upstream Post
 
-Bounded English story commission, 2026-10-28. Status: independently BUILD-READY after narrow fixes; implementation pending. [Review](../reviews/291-upstream-question-spec.md). Existing admitted LG-1; finite continuation of120,248,249. Source baseline33ac574. [Finite copy](../content/291-upstream-question-text.md); [source audit](../source-audits/291-upstream-question.md).
+Bounded English story commission, 2026-10-28. Status: independently BUILD-READY after narrow fixes; implementation built; independent implementation review repairs and release checks in progress. [Review](../reviews/291-upstream-question-spec.md). Existing admitted LG-1; finite continuation of120,248,249. Source baseline33ac574. [Finite copy](../content/291-upstream-question-text.md); [source audit](../source-audits/291-upstream-question.md).
 
 ## Problem and operation
 
