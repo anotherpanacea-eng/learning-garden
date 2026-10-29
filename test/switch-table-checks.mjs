@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import {switchLayouts,freshSwitchTable,validSwitchTable,changeSwitchTable,switchTableModel} from '../dist/switch-table.mjs';
+import {readFileSync} from 'node:fs';
+import {switchLayouts,freshSwitchTable,validSwitchTable,changeSwitchTable,switchTableModel,switchTableDrawing,switchTablePage,switchCaptions,resetSwitchTable} from '../dist/switch-table.mjs';
 let n=0;const ok=(v,m)=>{assert.ok(v,m);n++;};
 // Independently resolve electrical continuity from active rendered component edges,
 // excluding the cell's internal link, rather than echoing the model's on flag.
@@ -14,4 +15,10 @@ for(const layout of switchLayouts)for(const a of [false,true])for(const b of [fa
  ok(changeSwitchTable(s,'layout','lamp').b===b,'hidden B retained without changing one-switch rule');
 }
 ok(!validSwitchTable({...freshSwitchTable(),a:1}),'nonboolean rejected');ok(!switchTableModel({layout:'future'}),'unsupported state isolated');ok(changeSwitchTable(freshSwitchTable(),'b',true)===null,'unused B cannot be edited');ok(changeSwitchTable(freshSwitchTable(),'layout','future')===null,'invalid layout rejected');assert.deepEqual(changeSwitchTable({...freshSwitchTable(),a:true},'reset'),freshSwitchTable());n++;
-console.log(`${n} Switch Table model assertions passed; UI/media gates remain separate`);
+for(const layout of switchLayouts)for(const a of [false,true])for(const b of [false,true])for(const representation of ['sketch','symbols']){
+ const state={layout:layout.id,a,b,representation,trace:true},m=switchTableModel(state),html=switchTableDrawing(state);
+ ok((html.match(/data-switch-edge=/g)||[]).length===m.edges.length,'render uses every actual graph component exactly once');ok((html.match(/data-switch-gap=/g)||[]).length===m.open.length,'every actual open gap rendered at once');ok(!/marker-end|animateMotion/.test(html),'no sequential or directional current trace');
+}
+const notebook={lanternCircuits:{version:99,opaque:'kept'},science:{version:88,unknown:true},other:'x'.repeat(550000)},snapshot=JSON.stringify(notebook),html=switchTablePage(notebook,'synthetic-owner');ok(snapshot===JSON.stringify(notebook),'page reads no owned notebook fields or normalizes records');ok(!/<video|\.mp4/.test(html),'entry never embeds movie or download');resetSwitchTable();
+const vtt=readFileSync(new URL('../dist/assets/switch-excerpt.vtt',import.meta.url),'utf8');ok(switchCaptions.length===4&&switchCaptions.every((c,i)=>c.start>=0&&c.end>c.start&&c.end<=19.6&&(!i||c.start>=switchCaptions[i-1].end)),'bounded nonoverlapping captions');ok(switchCaptions.every(c=>vtt.includes(c.text)),'external captions retain complete reviewed words');ok(readFileSync(new URL('../dist/assets/switch-excerpt.mp4',import.meta.url)).length===751868,'selected derivative byte size; native codec/decoding separate');
+console.log(`${n} Switch Table source assertions passed; native/media/physical gates remain separate`);
