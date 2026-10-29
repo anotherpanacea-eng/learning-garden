@@ -25,8 +25,8 @@ All files are in the owner's Dropbox, not in this repository:
 | The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) | Proposed spec only | 32 s |
 | The water cycle at the weather station | Process clip | [140](specs/140-weather-station.md) | Proposed spec only | 37 s |
 | Closed and open circuit | Process clip | [163](specs/163-sparks-and-switches.md) | Proposed spec only | 35 s |
-| Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Corrected asset under independent review; not shipped | 35 s |
-| Ramp and lever | Process clip | [154](specs/154-ramps-levers-hoist.md) | Proposed spec only | 38 s |
+| Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Delivered through PR248; corrected full film | 35 s |
+| Ramp and lever | Process clip | [305 ramp-first operation](specs/305-lift-yard.md); broader[154](specs/154-ramps-levers-hoist.md) | Ramp operation being specified; lever and full-film review follow | 38 s |
 
 ## What is ready now
 
@@ -81,3 +81,10 @@ Actual take2 durations verified from exports:52,50,49,52,61seconds for ActsII–
 ## Same water, different arrangements304 · actual film repair in progress
 
 [304](specs/304-water-film.md) commissions the finite optional full35s corrected film beside301's existing manual model, preserving its stage/selected particle across a separate movie turn. Broader168 remains proposed. Original overlapping footage and a first discontinuous nonoverlap repair stay rejected. A continuous corrected source candidate must clear actual frame geometry, temporal and independent scientific/picture gates before integration. Different36film/12table symbols have no shared individual identity. No movie is live by this authoring note.
+
+
+## Updated release and next operation · 2026-10-29
+
+[304](specs/304-water-film.md) is delivered through [PR248](https://github.com/anotherpanacea-eng/learning-garden/pull/248#issuecomment-6502887833): the full corrected35s film,683 matching hosted files before296 native browser assertions. Its authoring paragraph above is historical; rejected overlapping/discontinuous candidates stay unshipped. Root geometry/full-decode checks and independent sampled-picture/physics review are distinct evidence, not continuous human viewing.
+
+[305 Lift Yard](specs/305-lift-yard.md) is the next new game loop: ramp deliveries, fixed rise, adjustable required pull and rope-distance/work comparisons. It contains no movie. Next commission a lever extension in the same repeatable delivery pattern, then independently review the actual full38s ramp/lever pictures, captions and source before integration. In particular, lever work must distinguish vertical displacement with vertical force from curved path length. This sequence makes a real place for the existing film; it does not waive its gate or replace it with an excerpt. Broader154/147 remain proposed.
