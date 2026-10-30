@@ -45,6 +45,9 @@ def journey(b,base,seeds,width,height):
     ok(p.locator('[data-journey-heading]').evaluate('e=>e===document.activeElement'),'deliberate step focuses heading')
     ok(p.locator(f'[data-journey-stop="{step}"]').get_attribute('aria-pressed')=='true','all stops open and selected')
     layout(p)
+    if choice=='twelve' and step in [2,3]:
+     boxes=p.locator('.journey-pair .journey-tiles i').evaluate_all('xs=>xs.map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height}))')
+     ok(len(boxes)==24 and all(abs(x['w']-boxes[0]['w'])<.1 and abs(x['w']-x['h'])<.1 for x in boxes),'comparison keeps the same square unit on both plots')
    p.screenshot(path=str(OUT/f'{choice}-{width}.png'),full_page=True)
   # Explicit preview keeps the actual waiting linear work.
   p.locator('.journey-sheet a[href="#learn/math/zero"]').tap();p.locator('[data-linear-root]').wait_for();ok(book(p)['linearPathway']==expected['linearPathway'],'lesson preview preserves current answers and draft')
