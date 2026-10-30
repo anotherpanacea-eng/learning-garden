@@ -4,14 +4,18 @@ import {readFileSync,readdirSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 
-const joined=/[A-Za-z’:][+−]?\d+(?:\.\d+)? ?m\/s|\d(?:m\/s)\b/g;
+const joined=/[\p{L}\u2019':][+\u2212-]?\d+(?:\.\d+)?\s*m\/s\b|\d(?:\.\d+)?m\/s\b/gu;
 export function joinedReadings(text,path='fixture'){
   return [...text.matchAll(joined)].map(m=>`${path}:${text.slice(0,m.index).split('\n').length}: ${m[0]}`);
 }
 
-assert.equal(joinedReadings('both move right at2m/s').length,1,'word and number run together');
-assert.equal(joinedReadings('the ferry’s−1m/s').length,1,'signed number runs into the unit');
-assert.deepEqual(joinedReadings('right at 2 m/s; the ferry’s −1 m/s; (${v} m/s)'),[],'spaced readings pass');
+for(const text of ['right at2m/s', 'ferry\u2019s\u22121m/s', 'right2 m/s', 'left-1 m/s',
+  "ferry's+1 m/s", 'position:0 m/s', '2m/s', '\u22121.5m/s', '2m/s; 3m/s']) {
+  assert.equal(joinedReadings(text).length,text.includes(';')?2:1,`joined reading detected: ${text}`);
+}
+assert.deepEqual(joinedReadings('right at 2 m/s; the ferry\u2019s \u22121 m/s; (${v} m/s); 1.5 m/s; \u22122 m/s; +3 m/s'),[], 'spaced readings pass');
+assert.equal(joinedReadings('2m/s\n3m/s','fixture.mjs')[1], 'fixture.mjs:2: 3m/s', 'diagnostics preserve path and line');
+assert.equal(joinedReadings('2m/s').length,1,'repeated scans do not retain regex state');
 
 const dist=fileURLToPath(new URL('../dist/',import.meta.url));
 const flags=readdirSync(dist).filter(f=>f.endsWith('.mjs')).flatMap(f=>joinedReadings(readFileSync(dist+f,'utf8'),f));

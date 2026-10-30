@@ -13,7 +13,6 @@ export const copyScopes = [
     {start:'export function linearNotes(', end:'\nexport function bindLinear(', reason:'Only used in the adult Notes destination.'},
   ], quotations:[]},
   {path:'dist/paired-points-ui.mjs', adultBlocks:[
-    {start:'function supportText(', end:'\nexport function pairedEntry(', reason:'Support history, raw-note fallback and raw notes shown only in Grown-up details and notes.'},
     {start:'export function pairedNotes(', end:'\n }catch{return `<section class="pp-notes">', reason:'Only used in the adult Notes destination.'},
   ], quotations:[]},
   {path:'dist/paired-points-content.mjs', adultBlocks:[
@@ -58,7 +57,7 @@ export function inspectChildCopy(root=fileURLToPath(new URL('../',import.meta.ur
     try { flags.push(...scanCopySource(readFileSync(resolve(root,scope.path),'utf8'),scope)); }
     catch(error) { configurationErrors.push({path:scope.path,message:error.message}); }
   }
-  return {ok:!flags.length&&!configurationErrors.length,scope:'Named renderers only; not a runtime or whole-app readability proof.',
+  return {ok:!flags.length&&!configurationErrors.length,scope:'Named source files only; not a runtime or whole-app readability proof.',
     files:copyScopes.map(x=>x.path),flags,configurationErrors};
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===realpathSync(resolve(process.argv[1]))) {
@@ -67,7 +66,7 @@ if(process.argv[1]&&fileURLToPath(import.meta.url)===realpathSync(resolve(proces
   else {
     for(const issue of result.configurationErrors)console.error(`${issue.path}: ${issue.message}`);
     for(const flag of result.flags)console.log(`${flag.path}:${flag.line}: ${flag.term}: ${flag.excerpt}`);
-    console.log(`Child-copy source check: ${result.files.length} renderers, ${result.flags.length} review candidates. ${result.scope}`);
+    console.log(`Child-copy source check: ${result.files.length} source files, ${result.flags.length} review candidates. ${result.scope}`);
   }
   process.exitCode=result.ok?0:1;
 }

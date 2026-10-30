@@ -31,6 +31,17 @@ for(const exception of [
  {quote:'"The visitor supplied the blankets."',reason:''},
 ]) {assert.throws(()=>scanCopySource(quoted,{quotations:[exception]}));checks++;}
 equal(scanCopySource('provenance',{path:'scene.mjs'})[0].path,'scene.mjs','diagnostic identifies source file');
+// These helpers also appear in child-visible earlier comparisons; do not exempt them.
+const pairedScope=copyScopes.find(scope=>scope.path==='dist/paired-points-ui.mjs');
+const pairedText=readFileSync(new URL('../dist/paired-points-ui.mjs',import.meta.url),'utf8');
+for(const marker of ['Example pattern comparison opened:', 'Earlier value retained in the notebook.']) {
+  const changed=pairedText.replace(marker,'supplied '+marker);
+  equal(scanCopySource(changed,pairedScope).map(x=>x.term),['supplied'],'shared helpers remain inside child-copy scope');
+}
+const contentScope=copyScopes.find(scope=>scope.path==='dist/paired-points-content.mjs');
+const contentText=readFileSync(new URL('../dist/paired-points-content.mjs',import.meta.url),'utf8');
+equal(scanCopySource(contentText.replace("instruction:'", "instruction:'supplied "),contentScope).map(x=>x.term),['supplied'],'content before adult note remains checked');
+equal(scanCopySource(contentText.replace("origin:'", "origin:'supplied "),contentScope).map(x=>x.term),['supplied'],'source content after adult note remains checked');
 const result=inspectChildCopy();ok(result.ok,'actual pilot source contains no unallowed candidate or stale scope marker');
 equal(result.files.length,copyScopes.length,'scoped result does not claim the whole app');
 const script=fileURLToPath(new URL('../scripts/check-child-copy.mjs',import.meta.url));
