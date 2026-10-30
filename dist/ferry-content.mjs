@@ -63,6 +63,7 @@ export const ferryCases = [
 ];
 export const ferryCopy = {
   "title": "Ferry Deck",
+  "reason": "Léon, who keeps the ferry at Les Saules, has a puzzle for the Post Office: his courier and the people on the bank describe the same crossing differently. Why?",
   "opening": "The same crossing can look different when you compare it with something else. Step the clock, then watch from the ferry or the other boat. What moves compared with you?",
   "notice": "A made-up model: straight, steady motions for six seconds. The boats are in separate lanes. This is not a picture of water currents or a plan for a real crossing.",
   "viewCaption": "Watching from {observer} · clock {clock}. Right is positive. Zero is the marked point you are watching from.",
