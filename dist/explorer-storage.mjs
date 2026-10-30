@@ -142,7 +142,7 @@ export class ExplorerStore{
   if(this.importUncertain||this._conflict)return false;
   if(!this.registry)this.load();if(!this.checkForUpdates(true))return false;if(currentState)this.memory.set(this.active.id,currentState);
   if(!enabled){for(const p of this.explorers)this._readState(p);this._persist=false;let ok=this._write(SAVE_KEY,'off');try{for(const k of this._keys().filter(managed)){try{this.storage.removeItem(k);if(this._get(k)!==null)ok=false;}catch{ok=false;}}}catch{ok=false;}try{for(const k of this._observed.keys())if(k!==SAVE_KEY)this._observed.set(k,this._get(k));}catch{ok=false;}if(!ok)this._warn('Some saved copies could not be removed. Saving is off for this session; check browser storage before sharing this device.');return ok;}
-  this._persist=true;this._writeBlocked=false;if(!this._write(SAVE_KEY,'on'))return false;for(const [key,raw] of this.importCopies)if(!this._write(key,raw)){this._writeBlocked=true;return false;}for(const p of this.explorers){const s=this.memory.get(p.id)||this._readState(p);if(!this._writeState(p,s)){this._writeBlocked=true;return false;}}return this._commitRegistry();
+  this._persist=true;this._writeBlocked=false;if(!this._write(SAVE_KEY,'on')){this._writeBlocked=true;return false;}for(const [key,raw] of this.importCopies)if(!this._write(key,raw)){this._writeBlocked=true;return false;}for(const p of this.explorers){const s=this.memory.get(p.id)||this._readState(p);if(!this._writeState(p,s)){this._writeBlocked=true;return false;}}return this._commitRegistry();
  }
  clearActive(){
   if(this.importUncertain)return this.load();

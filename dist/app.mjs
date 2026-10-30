@@ -225,6 +225,7 @@ function updateStorageNotice(){
  if(notice){notice.replaceChildren(document.createTextNode(message));if(explorerStore.conflict){const link=document.createElement('a');link.href='#notes';link.textContent=' Open Grown-up notes to download this tab’s work.';notice.append(link);}notice.hidden=!message;}
  if(explorerStore.conflict)document.querySelectorAll('#remember,#reset,#clear-all-explorers,[data-remove-copy]').forEach(el=>el.disabled=true);
  const status=main.querySelector('[data-saving-status]');if(status)status.textContent=savingStatus();
+ const homeStatus=main.querySelector('.home-save-note');if(homeStatus&&(explorerStore.conflict||!storageOK))homeStatus.textContent=savingStatus()+' Every place is open; there is no hurry.';
 }
 window.addEventListener('storage',event=>{if(event.storageArea!==localStorage)return;if(!explorerStore.checkForUpdates())storageOK=false;updateStorageNotice();});
 function save(){storageOK=explorerStore.save(state);persist=explorerStore.persist;updateStorageNotice();}

@@ -152,3 +152,11 @@ console.log(`${checks} explorer storage checks including selection-time conflict
  check(!b.save(current),'temporary explorer continues to report unsaved work');equal(b.load().syntheticWork,{from:'temporary chooser work'},'temporary work remains downloadable');
 }
 console.log(`${checks} explorer storage checks including denied-write chooser passed.`);
+
+{
+ const disk=new Storage(),a=store(disk),s=a.load();a.setPersistence(false,s);
+ disk.fail=(op,k)=>op==='set'&&k===SAVE_KEY;check(!a.setPersistence(true,s),'failed on-preference is reported');disk.fail=()=>false;const before=[...disk.data];s.syntheticWork={from:'keep temporary work'};
+ check(!a.save(s),'failed on-preference blocks later notebook writes');equal([...disk.data],before,'no notebooks written underneath stored off preference');equal(a.load().syntheticWork,{from:'keep temporary work'},'failed on-preference keeps temporary work for download');
+ check(a.setPersistence(true,s),'explicit retry can enable and persist intact work');equal(store(disk).load().syntheticWork,{from:'keep temporary work'},'explicit retry saves recoverable work');
+}
+console.log(`${checks} explorer storage checks including preference-write failure passed.`);
