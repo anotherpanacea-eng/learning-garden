@@ -24,8 +24,6 @@ assert.deepEqual(spokenGlyphs('<a class="back"><span aria-hidden="true">←</spa
 assert.deepEqual(spokenGlyphs('<text x="55">← 4 N</text><p>food → eater</p>'),[],'arrows in drawings and prose are left alone');
 
 const dist=fileURLToPath(new URL('../dist/',import.meta.url));
-// app.mjs is held by the Seed Exchange build (fleet custody #1207); its one back link follows once that lands.
-let pending=1;
-const flags=readdirSync(dist).filter(f=>f.endsWith('.mjs')).flatMap(f=>spokenGlyphs(readFileSync(dist+f,'utf8'),f)).filter(x=>!(pending&&/^app\.mjs:\d+: <a href="#home" class="back">←$/.test(x)&&pending--));
+const flags=readdirSync(dist).filter(f=>f.endsWith('.mjs')).flatMap(f=>spokenGlyphs(readFileSync(dist+f,'utf8'),f));
 assert.deepEqual(flags,[],'glyphs read aloud in labels:\n'+flags.join('\n'));
 console.log('read-aloud symbol checks passed');
