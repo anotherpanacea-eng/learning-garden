@@ -82,7 +82,7 @@ Companion to [316](../specs/316-seed-exchange-table.md). New English fiction/mod
 
 **Heading:** On this exchange card:
 
-Fragment bullets use the current construction, never a guessed success: Apples to send / Reed to send / Bundles coming back / Baskets coming back / Baskets or bundles staying home; or Seedlings for Vadoalto / Seedlings for Willowbank / Seedlings still to share. For a shortage use Goods still needed rather than negative physical stock. The generated list is not the child's writing.
+Fragment bullets use the current construction, never a guessed success: Apples to send / Reed to send / Bundles coming back / Baskets coming back / Baskets or bundles staying home; or Seedlings for Vadoalto / Seedlings for Willowbank / Seedlings still to share. For a shortage use Goods still needed for trade or Seedlings still needed for the nursery, rather than negative physical stock. The generated list is not the child's writing.
 
 **Statuses:** Still working · These groups fit this card · These parts fit this card · A familiar card
 

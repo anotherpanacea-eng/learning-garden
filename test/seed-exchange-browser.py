@@ -84,7 +84,7 @@ def journey(browser,base,seed,width,height):
 def refusal(browser,base,seed):
  c,p=setup(browser,base,seed,820,1000,fault=True)
  try:
-  create(p,'apples',3);drawer(p,'note');accepted='Accepted earlier words.';p.locator('[data-seed-note]').fill(accepted);before=book(p);writes=p.evaluate('seedWrites')
+  create(p,'apples',3);drawer(p,'help');before_example=book(p);p.evaluate('window.seedRefuse=true');action(p,'example');ok(book(p)==before_example and p.locator('#seed-task').inner_text()=='Apples for reed','example respects full app preflight without adopting help or entering example');p.evaluate('window.seedRefuse=false');drawer(p,'note');accepted='Accepted earlier words.';p.locator('[data-seed-note]').fill(accepted);before=book(p);writes=p.evaluate('seedWrites')
   p.locator('[data-seed-note]').evaluate('n=>window.seedInput=n');p.evaluate('window.seedRefuse=true');words='\nVisible <refused> words & a second line.\nKeep these exactly.';p.locator('[data-seed-note]').fill(words)
   def held():
    ok(p.locator('[data-seed-note]').input_value()==words and p.locator('[data-seed-note]').evaluate('n=>n===window.seedInput'),'refusal keeps exact actual textarea')
@@ -138,6 +138,16 @@ def persistence(browser,base,seed):
    report=export_notes(p,'storage-'+mode);r=report['seedExchange'];ok(r['visits'][r['currentId']]['ownNote']==words,'actual Notes retains in-memory words for '+mode)
   finally:c.close()
  print('persistence journeys passed',flush=True)
+
+def bound_focus(browser,base,seed):
+ c,p=setup(browser,base,seed,820,1000)
+ try:
+  create(p,'apples',3)
+  for _ in range(12):action(p,'more')
+  ok(p.evaluate('document.activeElement.dataset.seedAction')=='less' and '12 whole groups' in p.locator('.seed-limit').inner_text(),'upper bound explains limit and keeps focus on usable control')
+  for _ in range(12):action(p,'less')
+  ok(p.evaluate('document.activeElement.dataset.seedAction')=='more' and 'no groups' in p.locator('.seed-limit').inner_text(),'empty bound keeps focus on Add and explains disabled lift')
+ finally:c.close()
 
 def fixture(code):
  js="import {freshState} from './dist/core.mjs';import {initializeExplorerState} from './dist/progress-transfer.mjs';import * as exchange from './dist/seed-exchange-core.mjs';const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;s.syntheticOther={held:'exact'};"+code+";console.log(JSON.stringify(s));"
@@ -202,6 +212,7 @@ if __name__=='__main__':
     lifecycle(browser,base,seed)
     persistence(browser,base,seed)
     edges(browser,base)
+    bound_focus(browser,base,seed)
     ok(not errors,'no page, console or HTTP errors '+str(errors))
     result={'checks':checks,'status':'passed','base':base,'scope':'Model/notes and real transfer journeys; refused drafts, route/explorer lifecycle and persistence included; historical and bounded-record edge cases included; reset included; hosted acceptance pending.'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
    finally:browser.close()

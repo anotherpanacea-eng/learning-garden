@@ -42,8 +42,8 @@ export const validSeedWork=w=>object(w)&&validSeedSource(w.source)&&!!seedModel(
 const list=l=>Array.isArray(l)&&l.length<=5&&l.every(x=>object(x)&&text(x.label,120)&&int(x.value,0,288)&&['baskets','bundles','seedlings'].includes(x.unit));
 export const validSeedSnapshot=k=>object(k)&&k.format===1&&validSeedWork(k)&&list(k.list)&&['working','fits'].includes(k.status);
 const work=(r,key)=>rootShape(r)&&serial(key)&&own(r.visits,key)&&validSeedWork(r.visits[key])?r.visits[key]:null;
-const sameConstruction=(s,a,b)=>s.family==='nursery'?a.partValue===b.partValue:a.groups===b.groups;
-export function seedReady(w){if(!validSeedWork(w)||w.ready!==true)return false;const last=w.checks.at(-1);return !!last&&last.outcome==='match'&&sameConstruction(w.source,w.draft,last.draft);}
+export const sameSeedConstruction=(s,a,b)=>s.family==='nursery'?a.partValue===b.partValue:a.groups===b.groups;
+export function seedReady(w){if(!validSeedWork(w)||w.ready!==true)return false;const last=w.checks.at(-1);return !!last&&last.outcome==='match'&&sameSeedConstruction(w.source,w.draft,last.draft);}
 export function seedCourierList(s,draft){
  const m=seedModel(s,draft);if(!m||!object(s.labels))return [];
  const unit=s.family==='nursery'?'seedlings':m.sendUnit,tail={label:m.shortage?s.labels.shortage:s.family==='nursery'?s.labels.seedLeft:s.labels.left,value:m.shortage||m.left,unit};
@@ -68,7 +68,7 @@ export function seedExchangeView(state){
  const r=state.seedExchange;
  if(!rootShape(r))return {status:'unsupported',work:null,visits:[],canCreate:false,reason:'unavailable',familiar:false};
  const visits=Object.entries(r.visits).map(([key,w])=>({id:key,readable:!!serial(key)&&validSeedWork(w),source:serial(key)&&validSeedWork(w)?w.source:null})),w=work(r,r.currentId);
- const reason=typeof r.currentId!=='string'?'unavailable':Object.keys(r.visits).length>=12?'visit-cap':!int(r.nextSerial,1,999999998)?'counter':own(r.visits,`exchange-${r.nextSerial}`)?'collision':'';
+ const reason=typeof r.currentId!=='string'?'unavailable':Object.keys(r.visits).length>=12?'visit-cap':!int(r.nextSerial,1,999999998)?'counter':own(r.visits,`exchange-${r.nextSerial}`)?'collision':r.nextSerial<=Math.max(0,...Object.keys(r.visits).map(k=>serial(k)||0))?'counter':'';
  return {status:'ready',work:w,visits,canCreate:!reason,reason,familiar:!!w&&visits.some(v=>v.readable&&serial(v.id)<serial(r.currentId)&&seedFingerprint(v.source)===seedFingerprint(w.source))};
 }
 const fail=error=>({ok:false,error});
