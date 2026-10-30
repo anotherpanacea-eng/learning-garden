@@ -28,7 +28,7 @@ export function parcelPicture(source) {
 const request = (s, label) => `Please send ${s.count} <strong data-parcel-preview>${label ? esc(label) : '<span aria-hidden="true">___</span><span class="sr-only">choose an ending</span>'}</strong> to ${destination(s)}.`;
 function keptVersion(k, name) {
   if (!validParcelSnapshot(k)) return `<p>${esc(name)} is retained in a format this version cannot show. Download Notes to keep the original.</p>`;
-  return `<section><h3>${esc(name)}</h3><p>${request(k.source,k.label)}</p><p class="parcel-own-text">${esc(k.ownMessage) || 'No original message kept.'}</p><p>${parcelReady(k)?'Kept label: ready when checked.':'Kept draft; no current matching check.'} ${k.checks.length} supported checks retained in this version.</p></section>`;
+  return `<section><h3>${esc(name)}</h3><p>${request(k.source,k.label)}</p><p class="parcel-own-text">${esc(k.ownMessage) || 'No original message kept.'}</p><p>${parcelReady(k)?'Kept label: it matched its check.':'Kept draft; no current matching check.'} ${k.checks.length} supported ${k.checks.length===1?'check':'checks'} retained in this version.</p></section>`;
 }
 function choices(v, currentId) {
   const word = v.work;
@@ -88,7 +88,7 @@ export function bindParcelLabels(state, ctx = {}) {
   const act = (el, fn, message, target, forceMore=false) => {
     if(!live(el))return;if(dirty){unsaved();return;}
     const result=fn();if(!result.ok){say(errors[result.error]||'This change was not kept.',true);return;}
-    const saved=result.changed===false?'':persistence();redraw(`${result.changed===false?'No change was needed.':message} ${saved}`,target,forceMore);
+    const saved=result.changed===false?'':persistence();redraw(`${result.changed===false?(el.hasAttribute('data-parcel-help')?'Spelling help is already shown.':'No change was needed.'):message} ${saved}`,target,forceMore);
   };
   const on = (selector, fn) => root.querySelectorAll(selector).forEach(el=>el.addEventListener('click',()=>{if(live(el))fn(el);}));
   const options = {canExport:ctx.canExport};
@@ -102,7 +102,7 @@ export function bindParcelLabels(state, ctx = {}) {
   on('[data-parcel-remove]',el=>{
     if(dirty){unsaved();return;}const key=root.querySelector('[data-parcel-remove-choice]').value,w=state.parcelLabels?.visits?.[key];
     if(!validParcelWork(w)){say('Choose a readable saved parcel to remove.',true);return;}
-    if(!window.confirm(`Remove ${key} (${w.source.base})? This removes its source, message, ${w.checks.length} checks and all first/latest kept versions. Download Notes first to keep a copy.`))return;
+    if(!window.confirm(`Remove ${key} (${w.source.base})? This removes its source, message, ${w.checks.length} ${w.checks.length===1?'check':'checks'} and all first/latest kept versions. Download Notes first to keep a copy.`))return;
     act(el,()=>removeParcel(state,key,true,options),'Only the selected parcel was removed.','#parcel-heading',true);
   });
   const input=root.querySelector('[data-parcel-message]');
