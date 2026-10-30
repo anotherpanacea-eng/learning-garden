@@ -54,8 +54,8 @@ export function compareCommonPair(pair){
  const {left:a,right:b}=m,matched=a.denominator===b.denominator;
  const relation=Math.sign(a.originalNumerator*b.originalDenominator-b.originalNumerator*a.originalDenominator);
  const symbol=relation>0?'>':relation<0?'<':'=';
- const meaning=relation>0?'A reaches farther':relation<0?'B reaches farther':'The coloured ends match';
- const text=matched?`Both ribbons now use ${a.denominator} equal pieces for the same-sized whole. A has ${a.numerator} of those pieces coloured; B has ${b.numerator}. ${a.numerator}/${a.denominator} ${symbol} ${b.numerator}/${b.denominator}. ${meaning}. The amounts did not change when the pieces got smaller.`:`A uses ${a.denominator} pieces in its whole; B uses ${b.denominator}. Those pieces have different sizes. Comparing just the coloured-piece counts will not settle the amount. Try matching the piece sizes, or compare the fixed ends.`;
+ const meaning=relation>0?'A reaches farther':relation<0?'B reaches farther':'The colored ends match';
+ const text=matched?`Both ribbons now use ${a.denominator} equal pieces for the same-sized whole. A has ${a.numerator} of those pieces colored; B has ${b.numerator}. ${a.numerator}/${a.denominator} ${symbol} ${b.numerator}/${b.denominator}. ${meaning}. The amounts did not change when the pieces got smaller.`:`A uses ${a.denominator} pieces in its whole; B uses ${b.denominator}. Those pieces have different sizes. Comparing just the colored-piece counts will not settle the amount. Try matching the piece sizes, or compare the fixed ends.`;
  return {matched,text,relation,symbol,meaning,left:a,right:b};
 }
 // The separate example has no live case ID and cannot be passed to pair actions.

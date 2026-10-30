@@ -48,7 +48,7 @@ export const evidenceStories = [evidenceVoiceSource, ...[
         "paragraphs": [
           {
             "id": "c3-p1",
-            "text": "While looking for tape, Ada found a pencilled floor plan pinned behind the cupboard door. A wide rectangle near the back entrance was labelled CLEAR SPACE. Beside it was last week’s date and the singer’s name. It showed that the space had been requested before Ada arranged the chairs. It did not show whether anyone had told her. In the margin someone had written, “Check door swing.” The words were underlined twice, but the plan gave no measurement."
+            "text": "While looking for tape, Ada found a penciled floor plan pinned behind the cupboard door. A wide rectangle near the back entrance was labeled CLEAR SPACE. Beside it was last week’s date and the singer’s name. It showed that the space had been requested before Ada arranged the chairs. It did not show whether anyone had told her. In the margin someone had written, “Check door swing.” The words were underlined twice, but the plan gave no measurement."
           },
           {
             "id": "c3-p2",
@@ -81,7 +81,7 @@ export const evidenceStories = [evidenceVoiceSource, ...[
           },
           {
             "id": "c1-p3",
-            "text": "I pencilled the path onto a spare copy, making the line neat and confident. I remembered every turn, or thought I did. At the trough the path forked: one branch reached the beach and the other ended at a locked orchard gate. I could not remember which fork the gate stood beyond. I put a question mark there, then rubbed it out. It spoiled the map’s clean look. When Leena returned for her measuring case, I slid my copy under the till."
+            "text": "I penciled the path onto a spare copy, making the line neat and confident. I remembered every turn, or thought I did. At the trough the path forked: one branch reached the beach and the other ended at a locked orchard gate. I could not remember which fork the gate stood beyond. I put a question mark there, then rubbed it out. It spoiled the map’s clean look. When Leena returned for her measuring case, I slid my copy under the till."
           }
         ]
       },
@@ -95,7 +95,7 @@ export const evidenceStories = [evidenceVoiceSource, ...[
           },
           {
             "id": "c2-p2",
-            "text": "I said there would be a notice because I had written one that morning. I should have asked whether it had arrived. Instead, I measured the doorway, finished the delivery survey and carried my case away. A task can feel urgent merely because its instructions are in your own pocket. The assistant had no reason to know those instructions. I saw his pencilled map later, when he lifted the till to find a receipt. The line was lovely. It went directly through the old gate."
+            "text": "I said there would be a notice because I had written one that morning. I should have asked whether it had arrived. Instead, I measured the doorway, finished the delivery survey and carried my case away. A task can feel urgent merely because its instructions are in your own pocket. The assistant had no reason to know those instructions. I saw his penciled map later, when he lifted the till to find a receipt. The line was lovely. It went directly through the old gate."
           },
           {
             "id": "c2-p3",
@@ -238,7 +238,7 @@ const storyContrasts={
   }
 };
 const teaching={
- 1:{learn:'Separate an observed action from an inferred motive. A later detail can change your interpretation without answering every question.',guided:'Read c1-p2 and c1-p3 for an action and the first narrator’s interpretation. Compare the second account in chapter 2. Ask which later detail supports a narrower claim.',hint:'Look for the difference between what someone does and why another person thinks they did it.',example:'Different example: a neighbour closes a curtain. You infer annoyance, but the neighbour says bright sunlight hid the screen. The action is visible; annoyance is one possible motive.'},
+ 1:{learn:'Separate an observed action from an inferred motive. A later detail can change your interpretation without answering every question.',guided:'Read c1-p2 and c1-p3 for an action and the first narrator’s interpretation. Compare the second account in chapter 2. Ask which later detail supports a narrower claim.',hint:'Look for the difference between what someone does and why another person thinks they did it.',example:'Different example: a neighbor closes a curtain. You infer annoyance, but the neighbor says bright sunlight hid the screen. The action is visible; annoyance is one possible motive.'},
  2:{learn:'Two accounts can agree on an event and differ in access to motives. A document may corroborate part of an account without settling the whole dispute.',guided:'Compare the shared encounter in c1-p2 and c2-p1. Then connect the dated material in c3-p1 with the earlier interpretation. Name both a supported point and an unanswered question.',hint:'Agreement about an event is not automatically agreement about its purpose. What does the document actually record?',example:'Different example: two people hear a crash. One describes a dropped tray; a log records a delivery at that time. The log supports timing, but does not identify who dropped anything.'},
  3:{learn:'Test a claim against a plausible alternative and a fair objection. A useful revision may narrow the claim while preserving what its evidence really supports.',guided:'Set the earlier interpretation beside c3-p1. Consider the second account as an alternative, not a verdict. Ask which uncertainty matters to your selected reader and explain why a revised claim survives it.',hint:'A fair objection targets a real gap. Does your revision answer that gap, or just repeat the original claim?',example:'Different example: muddy shoes suggest a visitor used the garden path. The objection is that mud could come from elsewhere. A revision can say the shoes fit the path theory, while a matching footprint would strengthen it.'}
 };

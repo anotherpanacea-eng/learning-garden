@@ -243,7 +243,7 @@ export const fieldStripsCopy = {
     "Field Strips keeps one original whole visible while taking part of a fractional amount. The supplied cuts make equal cells. A drawing here is not evidence that a child can independently make equal partitions or use a model elsewhere.",
     "Compare records the first construction, second construction and final amount separately. Matching the final amount alone does not show the requested two steps. The field remains editable.",
     "The first invitation supplies an answer. Examples, clues, requested narration, working-together reports, retries and unobserved explanation are not independent achievements. This tool assigns no grade, placement or mastery.",
-    "The current draft and first/latest comparisons are different records. Results are shown as recorded; they are not regraded against today's catalogue. Later opened help does not rewrite earlier support context. Original data remains in downloaded notes.",
+    "The current draft and first/latest comparisons are different records. Results are shown as recorded; they are not regraded against today's catalog. Later opened help does not rewrite earlier support context. Original data remains in downloaded notes.",
     "Explain together if you like: what is the original whole, what is the first amount, and which part of that amount has been taken? A returned explanation is a conversation, not an automatically marked response."
   ]
 };

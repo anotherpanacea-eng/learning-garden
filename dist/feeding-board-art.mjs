@@ -1,4 +1,4 @@
-// Original labelled schematics, drawn for the Feeding Board. No external artwork.
+// Original labeled schematics, drawn for the Feeding Board. No external artwork.
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const eye=(x,y)=>`<circle cx="${x}" cy="${y}" r="2.4" fill="#27342e"/>`;
 const legs=(x=80)=>`<path d="M${x} 119v32h15v-29m55-2v31h15v-34"/>`;
