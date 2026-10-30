@@ -82,3 +82,81 @@ for(const failKeep of [false,true]){
 }
 equal(EXPLORER_COLORS.length,6,'six colors');equal(EXPLORER_SYMBOLS.length,6,'six symbols');
 console.log(`${checks} explorer storage checks passed.`);
+
+// Two independent loaded tabs share one synthetic browser store.
+for(const operation of ['save','clearActive','clearAll','off','on','add','select','import','remove']){
+ const disk=new Storage(),a=store(disk),sa=a.load(),b=store(disk),sb=b.load();
+ sa.syntheticWork={from:'tab A'};check(a.save(sa),'winning tab saves '+operation);
+ sb.syntheticWork={from:'tab B'};const before=[...disk.data],local=JSON.stringify(sb);
+ const actions={save:()=>b.save(sb),clearActive:()=>b.clearActive(),clearAll:()=>b.clearAll(),off:()=>b.setPersistence(false,sb),on:()=>b.setPersistence(true,sb),add:()=>b.add({},sb),select:()=>b.select(b.active.id,sb),import:()=>b.importState({ok:true,raw:JSON.stringify(freshState()),state:freshState()}),remove:()=>b.removeCopy(STORAGE_KEY)};
+ actions[operation]();equal([...disk.data],before,'stale '+operation+' leaves every saved byte intact');check(b.conflict,'stale '+operation+' has conflict');check(b.warning.includes('Download this tab’s notes'),'conflict offers recovery');equal(JSON.stringify(b.load()),local,'local unsaved notebook preserved '+operation);check(!b.save(sb),'conflict is sticky');check(!b.setPersistence(true,sb),'cannot toggle through conflict');equal(store(disk).load().syntheticWork,{from:'tab A'},'fresh reload sees winning work');
+}
+{
+ const disk=new Storage(),a=store(disk),sa=a.load();a.add({},sa);a.select('explorer-1');
+ const b=store(disk);b.load();const sb=b.select('explorer-2');
+ sa.syntheticWork={from:'one'};check(a.save(sa),'other tab active selection does not block first explorer');
+ sb.syntheticWork={from:'two'};check(b.save(sb),'different explorers can save independently');
+ const fresh=store(disk);equal(fresh.load().syntheticWork,{from:'two'},'second explorer saved');equal(fresh.select('explorer-1').syntheticWork,{from:'one'},'first explorer saved');
+ // Clearing all or turning saving off must also check inactive notebooks.
+ const c=store(disk),sc=c.load();sc.syntheticWork={from:'newer one'};c.save(sc);
+ const before=[...disk.data];check(!b.setPersistence(false,sb),'inactive changed notebook prevents deleting all saves');equal([...disk.data],before,'other explorer save retained on stale off');
+}
+for(const operation of ['clear','off','add','import']){
+ const disk=new Storage(),a=store(disk),sa=a.load();sa.sessions=1;a.save(sa);const b=store(disk),sb=b.load();
+ if(operation==='clear')a.clearActive();
+ if(operation==='off')a.setPersistence(false,sa);
+ if(operation==='add')a.add({},sa);
+ if(operation==='import')a.importState({ok:true,raw:JSON.stringify(freshState()),state:freshState()});
+ const before=[...disk.data];sb.sessions=22;check(!b.save(sb),'stale tab cannot resurrect after '+operation);equal([...disk.data],before,'newer '+operation+' remains intact');
+}
+{
+ const disk=new Storage(),a=store(disk),sa=a.load(),b=store(disk);b.load();
+ sa.sessions=3;a.save(sa);check(!b.checkForUpdates(),'notification check detects external change without writing');const before=[...disk.data];check(!b.checkForUpdates(),'repeat notification remains blocked');equal([...disk.data],before,'notification check never writes');
+}
+console.log(`${checks} explorer storage checks including two-tab recovery passed.`);
+{
+ const disk=new Storage(),a=store(disk),sa=a.load();a.setPersistence(false,sa);const b=store(disk),sb=b.load();
+ a.setPersistence(true,sa);sa.sessions=9;a.save(sa);const before=[...disk.data];
+ check(!b.setPersistence(true,sb),'tab opened with saving off cannot overwrite later persistent work');equal([...disk.data],before,'off-start stale enable leaves disk untouched');
+}
+{
+ const disk=new Storage({[STORAGE_KEY]:raw}),get=disk.getItem.bind(disk);let armed=true,winner;
+ disk.getItem=k=>{if(armed&&k===STORAGE_KEY){armed=false;const a=store(disk);winner=a.load();winner.sessions=17;a.save(winner);}return get(k);};
+ const b=store(disk);b.load();check(b.conflict,'migration notices registry changed after its initial read');const before=[...disk.data];check(!b.save(b.load()),'second migration cannot replace newer registry');equal([...disk.data],before,'raced migration leaves winning copy untouched');equal(store(disk).load().sessions,17,'winning migration progress retained');
+}
+console.log(`${checks} explorer storage checks including initialization races passed.`);
+
+for(const saving of [false,true]){
+ const disk=new Storage(),a=store(disk),first=a.load();first.syntheticWork={from:'local first'};a.save(first);const second=a.add({},first),other=a.active.id;second.syntheticWork={from:'local second'};a.save(second);
+ if(!saving)a.setPersistence(false,second);a.select('explorer-1',second);const b=store(disk),remote=b.load();b.setPersistence(true,remote);remote.syntheticWork={from:'remote'};b.save(remote);
+ check(!a.checkForUpdates(),'sibling change pauses '+saving+' saving session');const before=[...disk.data];
+ equal(a.select(other,first).syntheticWork,{from:'local second'},'other in-memory notebook remains available for export');equal(a.select('explorer-1',second).syntheticWork,{from:'local first'},'first local notebook remains available for export');equal([...disk.data],before,'recovery switching never writes saved data');check(!a.save(first),'switching does not lift pause');
+}
+console.log(`${checks} explorer storage checks including multi-notebook recovery passed.`);
+
+// Detect a changed cached destination during selection, even when the current notebook is unchanged.
+{
+ const disk=new Storage(),a=store(disk),first=a.load();a.save(first);const second=a.add({},first);a.save(second);a.select('explorer-1',second);
+ const b=store(disk);b.load();const remote=b.select('explorer-2');remote.syntheticWork={from:'newer destination'};b.save(remote);
+ first.syntheticWork={from:'local current'};const result=a.select('explorer-2',first);
+ check(a.conflict,'selection detects stale cached destination');equal(result,second,'selection exposes cached destination for recovery');
+ const before=[...disk.data];equal(a.select('explorer-1',second).syntheticWork,{from:'local current'},'recovery returns locally edited first notebook');equal([...disk.data],before,'recovery after selection conflict never writes');
+ equal(store(disk).load().syntheticWork,{from:'newer destination'},'newer destination survives conflict recovery');
+}
+console.log(`${checks} explorer storage checks including selection-time conflict passed.`);
+
+{
+ const disk=new Storage(),a=store(disk),first=a.load();a.save(first);a.add({},first);
+ const b=store(disk),current=b.load(),id=b.active.id;current.syntheticWork={from:'temporary chooser work'};disk.fail=op=>op==='set';const before=[...disk.data];
+ equal(b.select(id,current),current,'storage failure still opens currently loaded explorer');check(!b.needsChooser,'denied write does not trap initial chooser');equal([...disk.data],before,'denied-write selection changes no disk bytes');
+ check(!b.save(current),'temporary explorer continues to report unsaved work');equal(b.load().syntheticWork,{from:'temporary chooser work'},'temporary work remains downloadable');
+}
+console.log(`${checks} explorer storage checks including denied-write chooser passed.`);
+
+{
+ const disk=new Storage(),a=store(disk),s=a.load();a.setPersistence(false,s);
+ disk.fail=(op,k)=>op==='set'&&k===SAVE_KEY;check(!a.setPersistence(true,s),'failed on-preference is reported');disk.fail=()=>false;const before=[...disk.data];s.syntheticWork={from:'keep temporary work'};
+ check(!a.save(s),'failed on-preference blocks later notebook writes');equal([...disk.data],before,'no notebooks written underneath stored off preference');equal(a.load().syntheticWork,{from:'keep temporary work'},'failed on-preference keeps temporary work for download');
+ check(a.setPersistence(true,s),'explicit retry can enable and persist intact work');equal(store(disk).load().syntheticWork,{from:'keep temporary work'},'explicit retry saves recoverable work');
+}
+console.log(`${checks} explorer storage checks including preference-write failure passed.`);
