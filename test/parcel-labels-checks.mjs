@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {freshState} from '../dist/core.mjs';
 import {prepareProgressImport} from '../dist/progress-transfer.mjs';
 import {makeParcelSource} from '../dist/parcel-labels-content.mjs';
+import {parcelLabelsPage, parcelLabelsNotes, parcelPicture} from '../dist/parcel-labels-ui.mjs';
 import {parcelLabelsView, parcelLabel, parcelReady, validParcelSource, validParcelWork, startParcel,
   openParcel, setParcelPiece, setParcelMessage, showParcelHelp, checkParcel, keepParcel, removeParcel} from '../dist/parcel-labels-core.mjs';
 
@@ -126,4 +127,18 @@ for(const root of [{version:99,raw:['future']},{version:1,currentId:'',nextSeria
 }
 const odd=clone(s);odd.parcelLabels.nextSerial='future';const oddRaw=json(odd);parcelLabelsView(odd);equal(json(odd),oddRaw,'malformed selector read is pure');
 ok(setParcelMessage(odd,'Still readable.',options).ok,'malformed creation counter leaves current writing open');equal(startParcel(odd,{},options).error,'counter','malformed counter never normalized');
+for (const model of [freshState(), s, mixed, odd, {...freshState(),parcelLabels:{version:99,raw:'exact'}}]) {
+  const held=json(model), page=parcelLabelsPage(model), notes=parcelLabelsNotes(model);
+  ok(typeof page==='string' && typeof notes==='string','page and Notes read every retained scope');
+  equal(json(model),held,'rendering and Notes never normalize saved work');
+}
+const escaped=clone(s);work(escaped).ownMessage='<tag> & "quoted"';keepParcel(escaped,options);
+ok(parcelLabelsPage(escaped).includes('&lt;tag&gt; &amp; &quot;quoted&quot;'),'own writing escaped in play surface');
+ok(parcelLabelsNotes(escaped).includes('&lt;tag&gt; &amp; &quot;quoted&quot;'),'own writing escaped in Notes');
+for (let serial=1;serial<=60;serial++) {
+  const src=makeParcelSource(serial),picture=parcelPicture(src);
+  equal((picture.match(/data-parcel-object/g)||[]).length,src.count,'picture explicitly repeats exactly the requested count');
+  ok(picture.includes(src.count===1?'1 pictured object; it is called':'pictured objects; one is called'),'picture uses grammatical singular/plural accessible text');
+  ok(!picture.includes(src.plural),'picture does not announce the target plural');
+}
 console.log(`Parcel labels: ${checks} source/model checks passed; native UI, art and hosted acceptance remain separate.`);

@@ -26,7 +26,7 @@ function validWorking(w) {
     Array.isArray(w.checks) && w.checks.length <= 24 && w.checks.every(validCheck);
 }
 export const validParcelWork = validWorking;
-const validSnapshot = k => object(k) && k.format === 1 && validWorking(k) && text(k.label, 100);
+export const validParcelSnapshot = k => object(k) && k.format === 1 && validWorking(k) && text(k.label, 100);
 const readableVisit = (r, key) => id(key) && own(r.visits, key) && validWorking(r.visits[key]) ? r.visits[key] : null;
 
 export function parcelLabel(w) {
@@ -135,7 +135,7 @@ export function checkParcel(state, options = {}) {
 export function keepParcel(state, options = {}) {
   return workingChange(state, w => {
     if (!validPieces(w.draft, w.source, true)) return fail('choose-ending');
-    if (['firstKept', 'latestKept'].some(key => own(w, key) && !validSnapshot(w[key]))) return fail('kept-unavailable');
+    if (['firstKept', 'latestKept'].some(key => own(w, key) && !validParcelSnapshot(w[key]))) return fail('kept-unavailable');
     const snapshot = {format: 1, source: clone(w.source), draft: clone(w.draft), label: parcelLabel(w), ownMessage: w.ownMessage,
       help: w.help, ready: parcelReady(w), checks: clone(w.checks)};
     if (!own(w, 'firstKept')) w.firstKept = clone(snapshot);

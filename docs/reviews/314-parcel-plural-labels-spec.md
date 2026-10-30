@@ -16,3 +16,6 @@ Six-lens verdict after folds: **BUILD-READY**, no unresolved P1/P2 in these lens
 ## Separate English content review
 
 The full vocabulary/teaching read checked all12 singular/plural pairs and four different worked words. Content folds use pot/pots rather than the optionally unchanged plural seed, keep every parcel item a supply, and acknowledge real-word constructions to/toes/dais/daises as discoveries with a different referent. Exact instantiated feedback still needs review with the implementation, as do the original SVG pictures. The independent recheck resolves the material findings with no P1/P2. Its two remaining P3s (singular picture wording and naming Keep {base} in a singular-y correction) are folded. No implementation is cleared by this record.
+
+
+Implementation note: the author inspected all twelve original SVG pictures and corrected the cherry silhouette to show one fruit per counted object. Local model/reader and native tests are separate from the independent review; no hosted or physical-device claim follows from this note.
