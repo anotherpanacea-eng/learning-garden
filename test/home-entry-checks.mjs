@@ -49,7 +49,7 @@ const mixed=structuredClone(book);mixed.linearPathway={version:99,privateDraft:'
 const injected=structuredClone(book);injected.learningRoutes={version:1,subjects:{math:{goal:{id:'test',title:'<script>not rendered</script>',purpose:'synthetic',route:'javascript:alert(1)'}}}};delete injected.linearPathway;ok(!homeContinuations(injected).some(x=>x.id==='math'),'unsafe saved route excluded');
 for(const s of [freshState(),book,joined.mended,joined.letter,malformed]){
  const before=JSON.stringify(s),html=gardenHome(freeze(structuredClone(s)),false,'','synthetic-owner');eq(JSON.stringify(s),before,'render does not mutate source');
- for(const route of ['#cafe','#loft','#post','#workshop','#living','#numbers','#facts','#words','#paris','#french','#science','#orchard/games','#desk','#town','#riddles','#archive','#studio/bells','#studio/rhythm','#explore','#storm','#pathways','#begin','#arrive','#companions','#notes'])ok(html.includes(`href="${route}"`),'retained actual destination '+route);
+ for(const route of ['#cafe','#loft','#post','#workshop','#living','#numbers','#facts','#words','#paris','#french','#science','#orchard/games','#desk','#town/remembers','#riddles','#archive','#studio/bells','#studio/rhythm','#explore','#storm','#pathways','#begin','#arrive','#companions','#notes'])ok(html.includes(`href="${route}"`),'retained actual destination '+route);
  ok(html.includes('data-film-replay="welcome"'),'optional welcome replay retained');ok(!html.includes('First Morning in the Learning Garden'),'no unconditional first-day label');
  for(const match of html.matchAll(/src="\.\/(icons\/[^\"]+)"/g))ok(existsSync(new URL('../dist/'+match[1],import.meta.url)),'existing icon asset '+match[1]);
 }

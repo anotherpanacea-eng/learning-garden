@@ -66,6 +66,7 @@ def journey(b,base,seeds,width,height):
   p.locator('.home-returns a[href="#learn/french"]').tap();p.locator('[data-rooms-root]').wait_for();home(p);retained(p,expected)
   p.locator('.home-returns a[href="#cafe"]').tap();p.locator('[data-cafe-view]').wait_for();home(p);retained(p,expected)
   panel(p,'town');ok(p.locator('.home-places a[href="#post"]').count()==1 and p.locator('.home-places a[href="#workshop"]').count()==1,'previously omitted destinations remain explicit')
+  p.locator('.home-places a[href="#town/remembers"]').tap();p.locator('.town-page h1').wait_for();ok(p.locator('.town-page h1').text_content()=='The Town Remembers','Town stories opens actual town scene');home(p);panel(p,'town');
   p.locator('.home-places a[href="#french"]').tap();p.locator('h1').first.wait_for();home(p);retained(p,expected)
   # Native keyboard activation and hidden links staying outside the active panel.
   p.locator('[data-home-choice=questions]').focus();p.keyboard.press('Enter');ok(p.locator('#home-title-questions').evaluate('e=>e===document.activeElement'),'Enter activates panel with focus');p.locator('[data-home-choice=continue]').focus();p.keyboard.press('Space');ok(p.locator('#home-title-continue').evaluate('e=>e===document.activeElement'),'Space activates panel with focus')
