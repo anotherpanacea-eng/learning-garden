@@ -30,16 +30,6 @@ assert.deepEqual(spokenGlyphs('<a class="back"><span aria-hidden="true">←</spa
 assert.deepEqual(spokenGlyphs('<text x="55">← 4 N</text><p>food → eater</p>'),[],'arrows in drawings and prose are left alone');
 
 const dist=fileURLToPath(new URL('../dist/',import.meta.url));
-// The sole protected exception is this complete link, not any label sharing its prefix.
-const allowed='<a href="#home" class="back">\u2190 Back to the garden</a>';
-export function auditSources(sources){
-  let pending=0;
-  const flags=Object.entries(sources).flatMap(([path,text])=>spokenGlyphs(text,path)).filter(x=>{
-    if(new RegExp(`^app\\.mjs:\\d+: ${allowed}$`).test(x)&&pending++===0)return false;
-    return true;
-  });
-  return {flags,pending};
-}
 for(const label of [' <span>\u2190 Back</span>','<span>Back \u2192 </span>','<svg aria-hidden="true"></svg>\u2190 Back','<span>\u2713 Chosen</span>'])
   assert.equal(spokenGlyphs(`<button>${label}</button>`).length,1,'nested or spaced bare glyph is flagged');
 assert.deepEqual(spokenGlyphs('<button><span aria-hidden="true">\u2713</span> Chosen</button>'),[]);
@@ -47,14 +37,8 @@ assert.deepEqual(spokenGlyphs('<button><svg><text>\u2190 4 N</text></svg>Model</
 assert.equal(spokenGlyphs('<button><svg><text>\u2190 4 N</text></svg>\u2190 Back</button>').length,1,'drawing does not exempt the label');
 assert.deepEqual(spokenGlyphs('<button>food \u2192 eater</button>'),[],'meaningful internal arrow remains');
 assert.equal(spokenGlyphs('button("out","\u2190 energy out")').length,1,'double quoted lowercase helper');
-assert.deepEqual(auditSources({'app.mjs':allowed}),{flags:[],pending:1});
-assert.equal(auditSources({'app.mjs':allowed+allowed}).flags.length,1,'second identical exception fails');
-assert.equal(auditSources({'app.mjs':allowed.replace('Back to the garden','Different label')}).flags.length,1,'changed exception label fails');
-assert.equal(auditSources({'other.mjs':allowed}).flags.length,1,'exception belongs only to app');
-assert.equal(auditSources({}).pending,0,'missing exception is visible');
-const result=auditSources(Object.fromEntries(readdirSync(dist).filter(f=>f.endsWith('.mjs')).map(f=>[f,readFileSync(dist+f,'utf8')])));
-assert.equal(result.pending,1,'exactly one protected app link remains');
-assert.deepEqual(result.flags,[],'glyphs read aloud in labels:\n'+result.flags.join('\n'));
+const flags=readdirSync(dist).filter(f=>f.endsWith('.mjs')).flatMap(f=>spokenGlyphs(readFileSync(dist+f,'utf8'),f));
+assert.deepEqual(flags,[],'glyphs read aloud in labels:\n'+flags.join('\n'));
 
 // Exercise shared visit renderers: French titles must not lend their language
 // to surrounding English controls, headings, or the saved notebook itself.
