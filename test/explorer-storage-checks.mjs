@@ -82,3 +82,46 @@ for(const failKeep of [false,true]){
 }
 equal(EXPLORER_COLORS.length,6,'six colors');equal(EXPLORER_SYMBOLS.length,6,'six symbols');
 console.log(`${checks} explorer storage checks passed.`);
+
+// Two independent loaded tabs share one synthetic browser store.
+for(const operation of ['save','clearActive','clearAll','off','on','add','select','import','remove']){
+ const disk=new Storage(),a=store(disk),sa=a.load(),b=store(disk),sb=b.load();
+ sa.syntheticWork={from:'tab A'};check(a.save(sa),'winning tab saves '+operation);
+ sb.syntheticWork={from:'tab B'};const before=[...disk.data],local=JSON.stringify(sb);
+ const actions={save:()=>b.save(sb),clearActive:()=>b.clearActive(),clearAll:()=>b.clearAll(),off:()=>b.setPersistence(false,sb),on:()=>b.setPersistence(true,sb),add:()=>b.add({},sb),select:()=>b.select(b.active.id,sb),import:()=>b.importState({ok:true,raw:JSON.stringify(freshState()),state:freshState()}),remove:()=>b.removeCopy(STORAGE_KEY)};
+ actions[operation]();equal([...disk.data],before,'stale '+operation+' leaves every saved byte intact');check(b.conflict,'stale '+operation+' has conflict');check(b.warning.includes('Download this tab’s notes'),'conflict offers recovery');equal(JSON.stringify(b.load()),local,'local unsaved notebook preserved '+operation);check(!b.save(sb),'conflict is sticky');check(!b.setPersistence(true,sb),'cannot toggle through conflict');equal(store(disk).load().syntheticWork,{from:'tab A'},'fresh reload sees winning work');
+}
+{
+ const disk=new Storage(),a=store(disk),sa=a.load();a.add({},sa);a.select('explorer-1');
+ const b=store(disk);b.load();const sb=b.select('explorer-2');
+ sa.syntheticWork={from:'one'};check(a.save(sa),'other tab active selection does not block first explorer');
+ sb.syntheticWork={from:'two'};check(b.save(sb),'different explorers can save independently');
+ const fresh=store(disk);equal(fresh.load().syntheticWork,{from:'two'},'second explorer saved');equal(fresh.select('explorer-1').syntheticWork,{from:'one'},'first explorer saved');
+ // Clearing all or turning saving off must also check inactive notebooks.
+ const c=store(disk),sc=c.load();sc.syntheticWork={from:'newer one'};c.save(sc);
+ const before=[...disk.data];check(!b.setPersistence(false,sb),'inactive changed notebook prevents deleting all saves');equal([...disk.data],before,'other explorer save retained on stale off');
+}
+for(const operation of ['clear','off','add','import']){
+ const disk=new Storage(),a=store(disk),sa=a.load();sa.sessions=1;a.save(sa);const b=store(disk),sb=b.load();
+ if(operation==='clear')a.clearActive();
+ if(operation==='off')a.setPersistence(false,sa);
+ if(operation==='add')a.add({},sa);
+ if(operation==='import')a.importState({ok:true,raw:JSON.stringify(freshState()),state:freshState()});
+ const before=[...disk.data];sb.sessions=22;check(!b.save(sb),'stale tab cannot resurrect after '+operation);equal([...disk.data],before,'newer '+operation+' remains intact');
+}
+{
+ const disk=new Storage(),a=store(disk),sa=a.load(),b=store(disk);b.load();
+ sa.sessions=3;a.save(sa);check(!b.checkForUpdates(),'notification check detects external change without writing');const before=[...disk.data];check(!b.checkForUpdates(),'repeat notification remains blocked');equal([...disk.data],before,'notification check never writes');
+}
+console.log(`${checks} explorer storage checks including two-tab recovery passed.`);
+{
+ const disk=new Storage(),a=store(disk),sa=a.load();a.setPersistence(false,sa);const b=store(disk),sb=b.load();
+ a.setPersistence(true,sa);sa.sessions=9;a.save(sa);const before=[...disk.data];
+ check(!b.setPersistence(true,sb),'tab opened with saving off cannot overwrite later persistent work');equal([...disk.data],before,'off-start stale enable leaves disk untouched');
+}
+{
+ const disk=new Storage({[STORAGE_KEY]:raw}),get=disk.getItem.bind(disk);let armed=true,winner;
+ disk.getItem=k=>{if(armed&&k===STORAGE_KEY){armed=false;const a=store(disk);winner=a.load();winner.sessions=17;a.save(winner);}return get(k);};
+ const b=store(disk);b.load();check(b.conflict,'migration notices registry changed after its initial read');const before=[...disk.data];check(!b.save(b.load()),'second migration cannot replace newer registry');equal([...disk.data],before,'raced migration leaves winning copy untouched');equal(store(disk).load().sessions,17,'winning migration progress retained');
+}
+console.log(`${checks} explorer storage checks including initialization races passed.`);
