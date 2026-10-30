@@ -1,8 +1,10 @@
 # Hinge Bench · finite teaching copy
 
-Original prose for [spec297](../specs/297-hinge-bench.md). Draft for independent mathematical/content review, 2026-10-29. No story scene, historical anecdote or later Keeper reveal is commissioned.
+Original prose for [spec297](../specs/297-hinge-bench.md). Draft for independent mathematical/content review, 2026-10-29. The header invitation below adds a Willowbank reason under [roadmap lane B](../roadmap.md#next-consolidation-lanes--2026-10-30). No story scene, historical anecdote, chapter contribution or later Keeper reveal is commissioned.
 
 **Title:** Hinge Bench
+
+**Header invitation:** The miller is planning a turning sign. Explore different turns with this made-up pointer model.
 
 **Opening:** Turn the blue arm around the pin with the buttons. Change an arm’s length, then change the turn. What changes? What stays the same?
 
