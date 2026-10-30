@@ -3,3 +3,5 @@
 .journey-picture svg{display:block;width:100%;height:auto;max-height:230px}
 
 .journey-picture{--journey-unit:clamp(20px,4vw,42px)}.journey-tiles{grid-template-columns:repeat(var(--columns),var(--journey-unit));width:max-content}.journey-tiles i{width:var(--journey-unit)}
+
+.journey-pair .journey-tiles{gap:0;outline:2px solid #183f39}.journey-pair .journey-tiles i{border-radius:0}
