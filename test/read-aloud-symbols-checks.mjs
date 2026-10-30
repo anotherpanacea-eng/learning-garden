@@ -5,15 +5,21 @@ import {readFileSync,readdirSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 
-const glyph='[←→↗✓]';
-const leading=new RegExp(`<(a|button)\\b[^<>]*>${glyph}`,'g');
-const trailing=new RegExp(` ${glyph}</(a|button)>`,'g');
-const helper=new RegExp(`['\`]${glyph} [A-Z]|[a-z] ${glyph}['\`]|'${glyph} Chosen'|<span>${glyph} Selected`,'g');
-
+const glyph='[\u2190\u2192\u2197\u2713]';
+// Inspect complete controls, including nested label spans. Do not skip a whole
+// control merely because it contains an unrelated hidden drawing or icon.
+const controls=/<(a|button)\b[^<>]*>[\s\S]*?<\/\1>/g;
+const hidden=/<span\b[^>]*\baria-hidden=["']true["'][^>]*>[\s\S]*?<\/span>/g;
+const edge=new RegExp(`^\\s*${glyph}|${glyph}\\s*$|\\u2713`);
+const helper=new RegExp('\\bbutton\\([^,\\n]*,\\s*([\'"`])([^\\n]*?)\\1','g');
 export function spokenGlyphs(text,path='fixture'){
   const flags=[];
-  for(const re of [leading,trailing,helper])for(const m of text.matchAll(re))
-    flags.push(`${path}:${text.slice(0,m.index).split('\n').length}: ${m[0]}`);
+  const flag=m=>flags.push(`${path}:${text.slice(0,m.index).split('\n').length}: ${m[0]}`);
+  for(const m of text.matchAll(controls)){
+    const label=m[0].replace(/^<[^>]+>|<\/[^>]+>$/g,'').replace(hidden,'').replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/g,'').replace(/<[^>]*>/g,'');
+    if(edge.test(label))flag(m);
+  }
+  for(const m of text.matchAll(helper))if(edge.test(m[2].replace(hidden,'').replace(/<[^>]*>/g,'')))flag(m);
   return flags;
 }
 
@@ -24,8 +30,50 @@ assert.deepEqual(spokenGlyphs('<a class="back"><span aria-hidden="true">←</spa
 assert.deepEqual(spokenGlyphs('<text x="55">← 4 N</text><p>food → eater</p>'),[],'arrows in drawings and prose are left alone');
 
 const dist=fileURLToPath(new URL('../dist/',import.meta.url));
-// app.mjs is held by the Seed Exchange build (fleet custody #1207); its one back link follows once that lands.
-let pending=1;
-const flags=readdirSync(dist).filter(f=>f.endsWith('.mjs')).flatMap(f=>spokenGlyphs(readFileSync(dist+f,'utf8'),f)).filter(x=>!(pending&&/^app\.mjs:\d+: <a href="#home" class="back">←$/.test(x)&&pending--));
-assert.deepEqual(flags,[],'glyphs read aloud in labels:\n'+flags.join('\n'));
-console.log('read-aloud symbol checks passed');
+// The sole protected exception is this complete link, not any label sharing its prefix.
+const allowed='<a href="#home" class="back">\u2190 Back to the garden</a>';
+export function auditSources(sources){
+  let pending=0;
+  const flags=Object.entries(sources).flatMap(([path,text])=>spokenGlyphs(text,path)).filter(x=>{
+    if(new RegExp(`^app\\.mjs:\\d+: ${allowed}$`).test(x)&&pending++===0)return false;
+    return true;
+  });
+  return {flags,pending};
+}
+for(const label of [' <span>\u2190 Back</span>','<span>Back \u2192 </span>','<svg aria-hidden="true"></svg>\u2190 Back','<span>\u2713 Chosen</span>'])
+  assert.equal(spokenGlyphs(`<button>${label}</button>`).length,1,'nested or spaced bare glyph is flagged');
+assert.deepEqual(spokenGlyphs('<button><span aria-hidden="true">\u2713</span> Chosen</button>'),[]);
+assert.deepEqual(spokenGlyphs('<button><svg><text>\u2190 4 N</text></svg>Model</button>'),[],'meaningful drawing is preserved');
+assert.equal(spokenGlyphs('<button><svg><text>\u2190 4 N</text></svg>\u2190 Back</button>').length,1,'drawing does not exempt the label');
+assert.deepEqual(spokenGlyphs('<button>food \u2192 eater</button>'),[],'meaningful internal arrow remains');
+assert.equal(spokenGlyphs('button("out","\u2190 energy out")').length,1,'double quoted lowercase helper');
+assert.deepEqual(auditSources({'app.mjs':allowed}),{flags:[],pending:1});
+assert.equal(auditSources({'app.mjs':allowed+allowed}).flags.length,1,'second identical exception fails');
+assert.equal(auditSources({'app.mjs':allowed.replace('Back to the garden','Different label')}).flags.length,1,'changed exception label fails');
+assert.equal(auditSources({'other.mjs':allowed}).flags.length,1,'exception belongs only to app');
+assert.equal(auditSources({}).pending,0,'missing exception is visible');
+const result=auditSources(Object.fromEntries(readdirSync(dist).filter(f=>f.endsWith('.mjs')).map(f=>[f,readFileSync(dist+f,'utf8')])));
+assert.equal(result.pending,1,'exactly one protected app link remains');
+assert.deepEqual(result.flags,[],'glyphs read aloud in labels:\n'+result.flags.join('\n'));
+
+// Exercise shared visit renderers: French titles must not lend their language
+// to surrounding English controls, headings, or the saved notebook itself.
+const {freshState}=await import('../dist/core.mjs');
+const {ensureGarden,startVisit,storyDraft,currentVisit,finishStoryNode}=await import('../dist/garden-core.mjs');
+const {storyHub,storyPage,storyEnding,frenchLanding}=await import('../dist/garden-ui.mjs');
+const state=freshState();ensureGarden(state);startVisit(state,'french-bookstall');
+storyDraft(state);let saved=JSON.stringify(state);
+assert.match(storyHub(state),/<strong><span lang="fr">Paris en fran[^<]+<\/span><\/strong>/);
+assert.match(storyHub(state),/<h2>Explore <span lang="fr">Paris en fran[^<]+<\/span><\/h2>/);
+assert.match(storyPage(state,storyDraft(state)),/<h1 lang="fr">Paris en fran[^<]+<\/h1>/);
+assert.match(storyPage(state,storyDraft(state)),/<p><span lang="fr">Paris en fran[^<]+<\/span><\/p>/);
+assert.match(storyPage(state,storyDraft(state)),/<h2>Find the bag<\/h2>/,'English task title stays English');
+assert.match(frenchLanding(state),/Continue <span lang="fr">Paris en fran[^<]+<\/span><\/button>/);
+assert.equal(JSON.stringify(state),saved,'language rendering does not rewrite saved work');
+finishStoryNode(state,true);finishStoryNode(state,true);
+assert.match(storyPage(state,storyDraft(state)),/<h2 lang="fr">Une carte pour le jardin<\/h2>/);
+finishStoryNode(state);saved=JSON.stringify(state);
+assert.ok(currentVisit(state).finished);
+assert.match(storyEnding(state),/<h2 lang="fr">Une petite pause [^<]+<\/h2>/);
+assert.equal(JSON.stringify(state),saved,'ending language rendering preserves saved work');
+console.log('read-aloud symbol and French language checks passed');
