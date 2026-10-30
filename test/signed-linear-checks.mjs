@@ -36,8 +36,13 @@ const state=clone(imported.state),frozen=clone(state.linearPathway.lessons);
 for(const [key,w] of Object.entries(frozen)){
  ok(p.startLinear(state,key,o),'historical visit opens');eq(p.linearView(state).work.source,w.source,'old source not regenerated');eq(p.linearView(state).work.firstChecks,w.firstChecks,'old first check exact');eq(p.linearView(state).work.firstKept,w.firstKept,'old first kept version exact');eq(p.linearView(state).work.kept,w.kept,'old latest kept version exact');
 }
+// An old visit can still accept draft edits without changing its frozen assessment/prose history.
+const oldKey='investigation-0';ok(p.startLinear(state,oldKey,o),'resume old visit for editing');const oldWork=clone(p.linearView(state).work),oldField=oldWork.source.items.find(i=>i.id==='own').fields[0].id;
+ok(p.setLinearField(state,'own',oldField,'999',o),'successful old-visit field edit');const edited=p.linearView(state).work;
+for(const key of ['source','checks','firstChecks','help','firstKept','kept'])eq(edited[key],oldWork[key],'old field edit preserves '+key);
+eq(edited.drafts.own[oldField],'999','new draft value retained');ok(p.setLinearField(state,'own',oldField,oldWork.drafts.own[oldField],o),'restore synthetic draft through public edit API');
 const untouched=clone(state);linearPage(state);linearNotes(state);p.linearSuggestion(state);eq(state,untouched,'all read paths retain historical content');
-const created=p.createLinearInvestigation(state,'revisit',o);ok(created,'new visit after historical catalog');eq(state.linearPathway.lessons['investigation-47'],frozen['investigation-47'],'new generation leaves old positive comparison intact');eq(state.syntheticFuture,old.syntheticFuture,'additive sibling retained');
+const created=p.createLinearInvestigation(state,'revisit',o);ok(created,'new visit after historical catalog');for(const [key,w]of Object.entries(frozen))eq(state.linearPathway.lessons[key],w,'new generation preserves entire old visit '+key);eq(state.syntheticFuture,old.syntheticFuture,'additive sibling retained');
 for(const bad of [()=>p.createLinearInvestigation(state,'unknown',{canExport:()=>false}),()=>p.setLinearField(state,'own','height','999',{canExport:()=>false})]){const before=clone(state);ok(!bad(),'refused action returns false');eq(state,before,'refusal atomic');}
 const createAt=(s,serial,kind)=>{if(s.linearPathway)s.linearPathway.exploration.nextSerial=serial;else s.linearPathway={version:1,currentId:'',lessons:{},exploration:{version:1,nextSerial:serial}};return p.createLinearInvestigation(s,kind,o);};
 const solve=s=>{const item=p.linearView(s).work.source.items.find(i=>i.id==='own');for(const f of item.fields)ok(p.setLinearField(s,'own',f.id,f.answer,o),'synthetic fitting response');ok(p.checkLinear(s,'own',o),'supported own check');};
