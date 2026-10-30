@@ -6,7 +6,7 @@ Planning baseline, 2026-10-25. This is an authored course framework, not a compl
 
 The tables below remain a course framework, not a completion claim. Runtime footholds have grown since the baseline: six-case Café/Bramble three-unknown work; SameGround square covering versus traced boundary; Price, signed/fractional Linear and Equality Desk; original English paragraph/revision work; French Rooms and motion/evidence units; device-dated reported weather and tallies. Their supplied examples and display support remain supported practice, and fictional model data remains distinct from physical observations.
 
-[Two optional journeys](specs/311-learning-journeys.md) connect existing quantities/area and rate/start activities. They do not close A1/B1 or any of the26strands. Systematic decoding/spelling, sustained research and composition, learner-designed physical investigations, broader science/history knowledge, general arithmetic/algebra and reviewed listening/production remain substantial authoring needs. The historical strand map has a matching dated reconciliation. No topic-count coverage percentage is asserted.
+[Two optional journeys](specs/311-learning-journeys.md) connect existing quantities/area and rate/start activities. They do not close A1/B1 or any of the 26 strands. Systematic decoding/spelling, sustained research and composition, learner-designed physical investigations, broader science/history knowledge, general arithmetic/algebra and reviewed listening/production remain substantial authoring needs. The historical strand map has a matching dated reconciliation. No topic-count coverage percentage is asserted.
 
 ## What a complete course will mean
 
