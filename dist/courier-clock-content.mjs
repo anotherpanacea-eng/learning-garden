@@ -8,7 +8,7 @@ export const walkCopy={
  help:'Keep the departure where it is. Count forward in five-minute spaces. At the next hour, the minute display returns to 00, but elapsed minutes keep increasing. Sixty minutes make one hour. Moving back revises this model. It does not change the fixed departure or the card’s arrival.',
  endpointBlank:'No definite arrival model was proposed.',endpointFits:'Our proposed model reaches the requested arrival.',endpointDifferent:'Our proposed model is at a different time. It stays open to revise.',
  durationBlank:'No definite number of minutes was proposed.',durationFits:'The proposed minutes fit the card’s departure-to-arrival interval.',durationDifferent:'The proposed minutes differ from the card’s departure-to-arrival interval. They stay open to revise.',
- ending:'The labelled line and coupled hands are supplied practice. These two responses describe different things.',
+ ending:'The labeled line and coupled hands are supplied practice. These two responses describe different things.',
  reference:'Departure {departureLabel}. Requested arrival {arrivalLabel}.',model:'Our model {modelLabel}, {offset} elapsed minutes.',
  mathematical:'From {departureLabel} to {arrivalLabel}: {duration} minutes. Our current model is {modelLabel}, {offset} minutes from departure.'
 };
