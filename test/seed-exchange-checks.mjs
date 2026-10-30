@@ -1,3 +1,4 @@
+import {seedExchangePage,seedExchangeNotes} from '../dist/seed-exchange-ui.mjs';
 import assert from 'node:assert/strict';
 import {makeSeedSource} from '../dist/seed-exchange-content.mjs';
 import {validSeedSource,validSeedModel,seedModel,seedFingerprint,validSeedWork,validSeedSnapshot,seedReady,seedCourierList,seedExchangeView,seedSuggestion,startSeedExchange,openSeedExchange,setSeedMaterial,setSeedNote,showSeedHelp,checkSeedExchange,keepSeedExchange,removeSeedExchange} from '../dist/seed-exchange-core.mjs';
@@ -116,4 +117,23 @@ equal(seedSuggestion(helped,'apples'),{size:3,reason:'smaller',count:1},'first o
 const identity={};startSeedExchange(identity,{size:3});const original=identity.seedExchange.visits['exchange-1'];identity.seedExchange.visits['exchange-4']=clone(original);identity.seedExchange.currentId='exchange-4';identity.seedExchange.nextSerial=5;
 ok(seedExchangeView(identity).familiar,'retained earlier matching source is familiar');removeSeedExchange(identity,'exchange-1',true);ok(!seedExchangeView(identity).familiar,'no lifetime novelty claim after removal');
 const oldList=seedCourierList(old,{groups:6});equal(oldList.map(x=>x.value),[24,42,2],'restored rules drive current courier quantities');
-console.log(`Seed exchange source/model/notebook: ${checks} checks passed. Browser and implementation review remain pending.`);
+
+for(const family of ['apples','reed','nursery']){
+ const state={};startSeedExchange(state,{family,size:3});setSeedNote(state,'\n<literal> & own words');showSeedHelp(state,'hint');keepSeedExchange(state);const before=JSON.stringify(state),html=seedExchangePage(state,'synthetic');
+ ok(html.includes('&lt;literal&gt; &amp; own words')&&!html.includes('<literal>'),'original writing is escaped, never interpreted');
+ ok(html.includes('data-seed-action=')&&html.includes('Your courier note'),'model and optional writing rendered');
+ ok(seedExchangeNotes(state).includes('First kept version'),'adult reader retains kept versions');
+ equal(JSON.stringify(state),before,'render and Notes do not alter notebook');
+}
+const restored=clone(old);restored.prompt='Earlier authored card: 26 baskets, four baskets for seven bundles.';restored.rule='Four baskets for seven bundles';restored.hint='Earlier hint: group four baskets.';restored.feedback.match='Earlier fitting result: 24 baskets, 42 bundles, two baskets left.';restored.example.basketRate=4;restored.example.reedRate=7;restored.example.stock=4*restored.example.size;restored.example.steps=['Earlier authored example with four baskets for seven bundles.'];
+const oldState={};startSeedExchange(oldState,{size:6});oldState.seedExchange.visits['exchange-1'].source=restored;setSeedMaterial(oldState,6);showSeedHelp(oldState,'hint');checkSeedExchange(oldState);keepSeedExchange(oldState);
+const frozenBefore=JSON.stringify(oldState),html=seedExchangePage(oldState,'synthetic');
+const figure=html.slice(html.indexOf("<figure class='seed-trade'>"),html.indexOf('</figure>')+9);
+ok((figure.match(/<svg /g)||[]).length===11&&figure.includes('4 baskets for 7 bundles'),'old rule controls actual figure count');
+ok(html.includes('Earlier authored card')&&html.includes('Earlier hint')&&html.includes('42 bundles'),'old prose, help and courier quantities visible');
+ok(seedExchangeNotes(oldState).includes('Earlier fitting result'),'old frozen feedback preserved in Notes');
+equal(JSON.stringify(oldState),frozenBefore,'historical rendering never rewrites source/check/snapshots');
+const oldNursery={};startSeedExchange(oldNursery,{family:'nursery',size:10});const ns=oldNursery.seedExchange.visits['exchange-1'].source;ns.parts=[2,1];ns.total=30;ns.rule='Two parts for Vadoalto and one part for Willowbank';ns.prompt='Earlier thirty-seedling card';ns.example.parts=[2,1];ns.example.total=3*ns.example.size;ns.example.steps=['Earlier three-part example'];setSeedMaterial(oldNursery,10);
+const nhtml=seedExchangePage(oldNursery,'synthetic');ok((nhtml.match(/class='seed-part'/g)||[]).length===3,'old nursery renders its own three boxes, not eight');ok(nhtml.includes('20 seedlings')&&nhtml.includes('10 seedlings'),'old nursery shares retained');
+const broken={seedExchange:{version:99,raw:'<exact retained>'}};const raw=JSON.stringify(broken);ok(seedExchangePage(broken).includes('kept unchanged')&&seedExchangeNotes(broken).includes('&lt;exact retained&gt;'),'unknown roots remain downloadable, escaped and unavailable');equal(JSON.stringify(broken),raw,'unknown root never normalized');
+console.log(`Seed exchange source/model/notebook/rendering: ${checks} checks passed. Browser and implementation review remain pending.`);
