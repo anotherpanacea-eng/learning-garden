@@ -5,7 +5,7 @@ import {pip,dot,areaScene,objectSymbols,itemGlyph,countingGarden} from './broad-
 import {areaById,areaEvidence,broadDescribe,suggestActivity} from './broad-core.mjs';
 export const escapeHtml = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const e=escapeHtml;
-const title=(h,p)=>`<div class="page-heading"><a href="#home" class="back">← Back to the garden</a><h1>${h}</h1><p>${p}</p></div>`;
+const title=(h,p)=>`<div class="page-heading"><a href="#home" class="back"><span aria-hidden="true">←</span> Back to the garden</a><h1>${h}</h1><p>${p}</p></div>`;
 const faces=`<span class="friends" aria-hidden="true">${pip()}${dot()}</span>`;
 const trailCount=s=>areas.filter(a=>s.broad.trails[a.id]?.complete).length;
 
