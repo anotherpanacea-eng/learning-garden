@@ -4,7 +4,7 @@ import {dot} from './broad-art.mjs';
 import {hearButton} from './play-media.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const intro='The storm blew the library’s riddle cards into the hedge. Dot is pulling them out one at a time. Read a riddle, then pick the answer you think fits.';
-const header=`<div class="page-heading"><a class="back" href="#home">← Back to the garden</a><h1>Riddles in the Hedge</h1><p>${esc(intro)}</p>${hearButton(intro,'Hear how to play')}</div>`;
+const header=`<div class="page-heading"><a class="back" href="#home"><span aria-hidden="true">←</span> Back to the garden</a><h1>Riddles in the Hedge</h1><p>${esc(intro)}</p>${hearButton(intro,'Hear how to play')}</div>`;
 function sizePicker(r){
  return `<fieldset class="riddle-sizes"><legend>Which riddle cards?</legend><div class="riddle-size-grid">${riddleSizes.map(s=>`<button type="button" class="riddle-size ${r.size===s.id?'selected':''}" data-riddle-size="${s.id}" aria-pressed="${r.size===s.id}">${esc(s.label)}</button>`).join('')}</div><p class="tiny">Every riddle is open. Change this any time. The card you have out stays as it is.</p></fieldset>`;
 }

@@ -4,7 +4,7 @@ import {hearButton} from './play-media.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const methodLabels={recalled:'Reported recall',worked:'Worked it out',counting:'Counted',together:'Worked together'};
 const action=(id,label,style='secondary',extra='')=>`<button type="button" class="${style}" data-facts-action="${id}" ${extra}>${label}</button>`;
-const title=(heading,body)=>`<header class="facts-heading"><a href="#home" class="back">← Take a break</a><p class="facts-eyebrow">Every patch is open</p><h1>${heading}</h1><p>${body}</p></header>`;
+const title=(heading,body)=>`<header class="facts-heading"><a href="#home" class="back"><span aria-hidden="true">←</span> Take a break</a><p class="facts-eyebrow">Every patch is open</p><h1>${heading}</h1><p>${body}</p></header>`;
 const triedLabel=r=>!r?'not tried yet':r.status!=='recorded'?'skipped for now':r.reportedRecall?'remembered it':r.correct===true?(r.supported?'tried with help':'tried'):'tried, worth another look';
 const resultLabel=r=>!r?'No retained answer observation':r.status!=='recorded'?'Left for now; no recall claim':r.reportedRecall?'Reported recall on this visit':r.correct===true?(r.supported?'Found an answer with support':r.method?methodLabels[r.method]:'Correct answer; method not observed'):'An attempt to explore again';
 function factButton(a,b,summary){
