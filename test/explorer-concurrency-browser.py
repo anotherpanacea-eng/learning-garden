@@ -71,7 +71,7 @@ def main():
      # Refresh all notebooks before an intentional operation that deletes every explorer.
      second.reload(wait_until='networkidle');second.locator('[data-select-explorer="explorer-2"]').tap();second.wait_for_url('**/#home')
      # Save-off in one page must prevent the other from recreating removed data.
-     notes(second,base);ok(second.locator('#remember').is_enabled(),'second explorer remains writable: '+str(second.locator('[data-save-warning]').all_text_contents())+' registry '+str(second.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers'))")));second.locator('#remember').uncheck();third.locator('[data-save-warning]').wait_for();off=disk(second);guide(third,1)
+     notes(second,base);ok(second.locator('#remember').is_enabled(),'second explorer remains writable: '+str(second.locator('[data-save-warning]').all_text_contents())+' registry '+str(second.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers'))")));second.locator('#remember').uncheck();third.locator('[data-save-warning]').wait_for();off=disk(second);after_conflict=guide(third,1)
      ok(disk(third)==off and off.get('number-garden-save')=='off','real save-off cannot be undone by stale game controls')
      ok(not any(k.startswith('number-garden-v1:') for k in off),'off removes saved notebooks')
      # This conflicted page had both notebooks open: each remains downloadable.
@@ -83,7 +83,7 @@ def main():
      third.locator('#notes-switch-explorer').tap();third.locator('[data-select-explorer="explorer-1"]').tap();third.wait_for_url('**/#home');notes(third,base)
      with third.expect_download() as first_recovered:third.locator('#download').tap()
      first_local=json.loads(Path(first_recovered.value.path()).read_text())
-     ok(first_local['garden']['guide']==local,'switching back retains the first notebook edit made after conflict')
+     ok(first_local['garden']['guide']==after_conflict,'switching back retains the first notebook edit made after conflict')
      ok(disk(third)==off,'recovering both notebooks leaves saving off and stored bytes untouched')
      c.close();print('two-page touch recovery width',width,'passed',flush=True)
     ok(not errors,'no page errors '+str(errors));print(json.dumps({'checks':checks,'status':'passed','limits':'Synthetic Chrome pages and touch emulation; not simultaneous atomic transactions, physical iPad/Safari or cross-device sync.'}))
