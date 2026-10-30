@@ -165,3 +165,10 @@ The next curriculum decision should follow a trial of these connected units: whe
 ## Signed-rate return bridge · 2026-10-30
 
 [312](specs/312-signed-linear-returns.md) supplies a bounded repeatable B1/B2 return after the existing fixed negative/fractional introductions: rate versus balance, steady versus zero total, signed inverse operations with nonzero rate, and ordering/intersection for two falling or steady/falling accounts. Sources stay frozen per visit; first-response suggestions remain supported practice, not sign-specific mastery. This does not supply a general signed/rational arithmetic course, learner-constructed rules, inequalities or unrestricted domains. The existing three question families and destination remain the owner.
+
+
+## Narrow literacy return ·314 · delivered2026-10-30
+
+[Parcel Labels314](specs/314-parcel-plural-labels.md) is live through [PR261’s receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/261#issuecomment-6526098557). Twelve original supply nouns at count1–5 contrast one/more than one, s/es and consonant-y/vowel-y spellings in a short café/garden request. Supplied pieces, optional help, first/latest labels and human-read messages remain distinct from independent decoding/writing. A paper-note return invites human observation without recording completion. This adds a bounded E1/E2 foothold to the first route, not a whole spelling progression or a change to the topic-coverage ledger.
+
+Rooms221/226 already provide bounded original and revised French messages. Broader sustained correspondence, oral interaction and sound–spelling still need separate teaching and the adopted language/audio review method.

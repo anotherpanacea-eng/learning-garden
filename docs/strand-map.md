@@ -153,9 +153,12 @@ Evidence for the gap: [Word Garden](../dist/word-garden-content.mjs) teaches mea
 | Concept | Status | Contrast to explore | Home | Revisit with a changed demand |
 | --- | --- | --- | --- | --- |
 | Base and affix change meaning; authored spelling notes | **Built** finite constructions | Sound unit versus meaning unit; un- as reversal versus negation | Word Garden | Read the same part in a Paris note, then use it in a puppet line |
+| Conventional singular/plural labels in a short request | **Built, bounded** twelve nouns at counts1–5; supplied pieces and optional human-read messages | One versus more than one; s/es and consonant-y versus vowel-y | [Parcel Labels314](specs/314-parcel-plural-labels.md), `#words/endings` | Change noun/quantity, then try a paper café/garden note with a person; no decoding or independent-spelling inference |
 | Multiple parts and unexpected combinations | **Built** finite examples/open invention | Conventional word/spelling versus a new word with an explained meaning | Word Garden → Loft invitation | Keep an invented meaning consistent in another scene; do not mark invention as a spelling mistake |
 | Meaning from context and from word parts | **Built** selected questions | Sentence clue versus morphological clue | Paris | Keep a passage fixed and ask which clue supports this meaning |
 | Broader vocabulary, spelling/word-class changes and multiple meanings | **Missing** systematic sequence | Same word/different context; same affix/different job | Candidate Word Garden/Paris packs | Contrast two uses, then meet the word in an unfamiliar meaningful text |
+
+[PR261’s release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/261#issuecomment-6526098557) records delivery of the original [plural sources](../dist/parcel-labels-content.mjs) and [supported construction](../dist/parcel-labels-core.mjs), with preserved first/latest versions. This is a narrow E1/E2 opportunity, not a systematic phonics, fluency, handwriting or broad spelling sequence.
 
 Evidence: [Word Garden](../dist/word-garden-content.mjs), `roots`/`parts`/`blooms`/`extras`; [Paris questions](../dist/paris-content.mjs), [library](../dist/paris-library.mjs). Anchors: `mt_zBUcAPDRPM`, `mt_HrgDjxcWvf`. Current meaning choices are narrower than those topics’ reading-aloud/spelling expectations.
 
@@ -188,8 +191,10 @@ Evidence: [Post runner](../dist/post-office-core.mjs), `stepPostRoute`/`editPost
 | --- | --- | --- | --- | --- |
 | Details and context in optional amounts of French text | **Built** reviewed finite story variants | Language complexity versus the reader’s age/interests | French Paris | A new story using a familiar language function; keep English meaning support visible as support |
 | Sequence/inference with separate French observations | **Built** selected questions/helpers | Connected clues versus a single translated word | French Paris | Offer more connected French optionally, then a different context without assuming proficiency |
-| Write a purposeful short French message/dialogue | **Missing** authored sequence; an off-screen postcard invitation exists | Understanding a supplied sentence versus composing one | Candidate French Post / Loft adaptation | Keep the communicative purpose, vary the recipient, use separately reviewed French language/support |
+| Write a purposeful short French message/dialogue | **Built, bounded** human-read original/revised messages in Rooms221/226; broader correspondence/dialogue sequence remains missing | Understanding a supplied sentence versus composing one | French Rooms; future Post / Loft adaptation | Keep first/latest messages for a reader; vary recipient/purpose with separately reviewed language and support |
 | Systematic grammar, sound–spelling and oral interaction | **Missing** sequences | Recognizing a form versus producing it; written versus spoken comprehension | Candidate French language packs/conversation with a person | Revisit the same language function through another mode, without recording child speech |
+
+[Rooms221](specs/221-french-rooms-plans.md) and [changing errands226](specs/226-changing-french-errands.md) add finite preposition, clarification and recent-past/near-future teaching with original/revised text fields. [The core](../dist/french-rooms-core.mjs) retains first/latest work; these do not supply evaluated original prose, spontaneous conversation or a complete grammar sequence.
 
 Evidence: [French stories](../dist/french-story-data.mjs), [library](../dist/french-library.mjs), [separate suggestions](../dist/french-core.mjs). French is an explicit extension outside Marble’s English organization; English topic IDs are not French proficiency mappings.
 
