@@ -28,7 +28,7 @@ def notes(p,base):
 def main():
  seed=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {freshState} from './dist/core.mjs';const s=freshState();s.garden={avatar:'sky',welcomeFilmSeen:true};s.syntheticOther={payload:'retain unknown data'};console.log(JSON.stringify(s));"],cwd=ROOT,text=True))
  server=Server(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT/'dist')))
- threading.Thread(target=server.serve_forever,daemon=True).start();base=f'http://127.0.0.1:{server.server_port}/'
+ threading.Thread(target=server.serve_forever,daemon=True).start();base=os.environ.get('CONCURRENCY_TEST_URL',f'http://127.0.0.1:{server.server_port}/')
  try:
   with sync_playwright() as pw:
    b=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
@@ -80,6 +80,11 @@ def main():
      other=json.loads(Path(recovered.value.path()).read_text())
      ok(other['garden']['guide']==other_local,'conflicted tab can export its other locally open notebook')
      ok(disk(third)==off,'recovery-only switching and download never recreate removed saves')
+     third.locator('#notes-switch-explorer').tap();third.locator('[data-select-explorer="explorer-1"]').tap();third.wait_for_url('**/#home');notes(third,base)
+     with third.expect_download() as first_recovered:third.locator('#download').tap()
+     first_local=json.loads(Path(first_recovered.value.path()).read_text())
+     ok(first_local['garden']['guide']==local,'switching back retains the first notebook edit made after conflict')
+     ok(disk(third)==off,'recovering both notebooks leaves saving off and stored bytes untouched')
      c.close();print('two-page touch recovery width',width,'passed',flush=True)
     ok(not errors,'no page errors '+str(errors));print(json.dumps({'checks':checks,'status':'passed','limits':'Synthetic Chrome pages and touch emulation; not simultaneous atomic transactions, physical iPad/Safari or cross-device sync.'}))
    finally:b.close()

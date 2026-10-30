@@ -133,3 +133,14 @@ for(const saving of [false,true]){
  equal(a.select(other,first).syntheticWork,{from:'local second'},'other in-memory notebook remains available for export');equal(a.select('explorer-1',second).syntheticWork,{from:'local first'},'first local notebook remains available for export');equal([...disk.data],before,'recovery switching never writes saved data');check(!a.save(first),'switching does not lift pause');
 }
 console.log(`${checks} explorer storage checks including multi-notebook recovery passed.`);
+
+// Detect a changed cached destination during selection, even when the current notebook is unchanged.
+{
+ const disk=new Storage(),a=store(disk),first=a.load();a.save(first);const second=a.add({},first);a.save(second);a.select('explorer-1',second);
+ const b=store(disk);b.load();const remote=b.select('explorer-2');remote.syntheticWork={from:'newer destination'};b.save(remote);
+ first.syntheticWork={from:'local current'};const result=a.select('explorer-2',first);
+ check(a.conflict,'selection detects stale cached destination');equal(result,second,'selection exposes cached destination for recovery');
+ const before=[...disk.data];equal(a.select('explorer-1',second).syntheticWork,{from:'local current'},'recovery returns locally edited first notebook');equal([...disk.data],before,'recovery after selection conflict never writes');
+ equal(store(disk).load().syntheticWork,{from:'newer destination'},'newer destination survives conflict recovery');
+}
+console.log(`${checks} explorer storage checks including selection-time conflict passed.`);
