@@ -29,6 +29,7 @@ export function makeSeedSource(serial,{family='apples',size=1}={}){
  const m=model(family,size,serial),example=model(family,size%12+1,serial,true),nursery=family==='nursery',apples=family==='apples';
  const send=apples?'baskets':'bundles',receive=apples?'bundles':'baskets',cost=apples?m.basketRate:m.reedRate,gain=apples?m.reedRate:m.basketRate;
  return freeze({...m,format:1,id:`exchange-card-${serial}`,title:seedCopy.families[family],notice:seedCopy.notice,
+  labels:{send:apples?'Baskets to send':'Bundles to send',receive:apples?'Bundles coming back':'Baskets coming back',left:apples?'Baskets staying home':'Bundles staying home',shortage:'Goods still needed',towns:['Vadoalto','Willowbank'],seedLeft:'Seedlings still to share'},
   prompt:nursery?`The nursery has ${seedQuantity(m.total,'seedlings')}. Vadoalto gets ${m.parts[0]} equal parts and Willowbank gets ${m.parts[1]} equal parts. Put the same number in every part. How many seedlings go to each town?`:
    `You have ${seedQuantity(m.stock,send)} of ${apples?'apples':'reed'}. Use as many whole trade groups as you can. How many ${receive} of ${apples?'reed':'apples'} come back? Keep any extra ${send} at home.`,
   rule:nursery?`${m.parts[0]} parts for Vadoalto and ${m.parts[1]} parts for Willowbank: ${m.parts[0]+m.parts[1]} equal parts altogether`:
