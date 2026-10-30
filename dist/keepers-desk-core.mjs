@@ -43,8 +43,8 @@ export function checkDeskValue(source,taskId,value){
  else return result('uncheckable','This saved numerical question has no checker.','missing');
  if(n===answer)return result('match','This answer matches the supplied model.');
  let reply=mismatch;
- if(t.id==='1a'||t.id==='1b'){const a=t.id==='1a'?m.bridge:m.causeway;if(n===a.rate*a.length)reply='That is the per-metre part. Include the setup once.';else if(n===a.setup+a.rate)reply='That is one metre. Compare it with this crossing’s length.';else if(n===(a.setup+a.rate)*a.length)reply='The setup is paid once, not for every metre.';}
- if(t.id==='1d'){if(n===m.bridge.setup-m.causeway.setup)reply='That is the difference in setup costs. How many extra metres use it up?';else if(n===m.causeway.rate-m.bridge.rate)reply='That is the extra cost per metre. Compare it with the setup difference.';else if(n===m.bridge.setup+m.bridge.rate*answer)reply='That is a shared cost. The question asks for the length.';}
+ if(t.id==='1a'||t.id==='1b'){const a=t.id==='1a'?m.bridge:m.causeway;if(n===a.rate*a.length)reply='That is the per-meter part. Include the setup once.';else if(n===a.setup+a.rate)reply='That is one meter. Compare it with this crossing’s length.';else if(n===(a.setup+a.rate)*a.length)reply='The setup is paid once, not for every meter.';}
+ if(t.id==='1d'){if(n===m.bridge.setup-m.causeway.setup)reply='That is the difference in setup costs. How many extra meters use it up?';else if(n===m.causeway.rate-m.bridge.rate)reply='That is the extra cost per meter. Compare it with the setup difference.';else if(n===m.bridge.setup+m.bridge.rate*answer)reply='That is a shared cost. The question asks for the length.';}
  return result('different',reply);
  }
  if(t.kind==='budget'){
@@ -52,7 +52,7 @@ export function checkDeskValue(source,taskId,value){
  const a=m.bridge.setup+m.bridge.rate*m.bridge.length,b=m.causeway.setup+m.causeway.rate*m.causeway.length,expected={bridge:a<=m.fund?'fits':'not',causeway:b<=m.fund?'fits':'not',both:a+b<=m.fund?'fits':'not'},matches=Object.fromEntries(Object.keys(expected).map(k=>[k,value[k]===expected[k]]));
  return {...result(Object.values(matches).every(Boolean)?'match':'different',Object.entries(matches).map(([k,match])=>`${k==='both'?'Both together':k==='bridge'?'Footbridge':'Causeway'}: ${match?'matches the fund comparison':'compare this total with the fund'}.`).join(' ')),comparisons:matches};
  }
- if(t.kind==='rule'){const v=parseAffine(value);if(!v.ok)return result('uncheckable',v.error,'format');const plan=m[t.plan];return v.coefficient===plan.rate&&v.constant===plan.setup?result('match','This answer matches the supplied model.'):result('different',mismatch+' The fixed part is paid once; the coefficient is how much one extra metre adds.');}
+ if(t.kind==='rule'){const v=parseAffine(value);if(!v.ok)return result('uncheckable',v.error,'format');const plan=m[t.plan];return v.coefficient===plan.rate&&v.constant===plan.setup?result('match','This answer matches the supplied model.'):result('different',mismatch+' The fixed part is paid once; the coefficient is how much one extra meter adds.');}
  if(t.kind==='ratio'){
  const v=parseRatio(value);if(!v||v.a===0n&&v.b===0n)return result('uncheckable',format.ratio,'format');const day=m[t.day],a=BigInt(day.carts),b=BigInt(day.walkers),g=gcd(a,b);
  if(v.a===a/g&&v.b===b/g)return result('match','This answer matches the supplied model.');

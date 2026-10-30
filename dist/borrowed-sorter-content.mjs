@@ -73,11 +73,11 @@ export function createSorterSource(serial = 1) {
     '4/40 = 1/10 = 10%. The same four Hill examples can support perfect routing on this supplied batch when road alone is selected.', 'Four out of forty is one out of ten. Express one tenth as a share out of 100.', 'Different example: 2 of 20 cards is 1/10, or 10%.', original, 'training');
   choice('3b', 2, 'Which feature distinguishes the actual destinations throughout these supplied tables?', 'road', [
     option('size', 'Parcel size', 'This week has large parcels for both Town and Hill, so size cannot distinguish them.'),
-    option('wrap', 'Wrapping colour', 'Brown parcels go to both destinations. Wrap cannot distinguish those parcels.'),
+    option('wrap', 'Wrapping color', 'Brown parcels go to both destinations. Wrap cannot distinguish those parcels.'),
     option('road', 'The road on the label', 'Yes. In these invented tables, valley road corresponds to Town and hill track to Hill farms. This does not cover every possible future label.')
   ], 'Road distinguishes these destinations in the supplied data. A human chose whether the model could use that feature.',
     'Compare the actual destinations in the tables. Does the same size or wrapping occur at both places? Which feature separates them here?',
-    'Different labelled set: if both a red packet and a blue packet are for the same street, colour alone does not tell a sorter which street to use. Look for the feature that distinguishes the actual destinations.');
+    'Different labeled set: if both a red packet and a blue packet are for the same street, color alone does not tell a sorter which street to use. Look for the feature that distinguishes the actual destinations.');
   for (const [id, prompt, key, denominator, feedback, p] of [
     ['4a-hill', 'More examples profile: size+wrap, plus ten Hill examples. Of this week’s 10 Hill parcels, how many are correct?', 0, 10, 'Hill: 0/10. Small brown still votes 12 Town to 8 Hill; large brown votes 8 Town to 6 Hill.', extra],
     ['4a-overall', 'More examples profile: size+wrap, plus ten Hill examples. How many of this week’s 40 parcels are correct overall?', 30, 40, 'Overall: 30/40, or 75%. Adding these examples does not fix the ignored-road problem.', extra],

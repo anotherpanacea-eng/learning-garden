@@ -56,7 +56,7 @@ export function bindFerry(notebook,ctx){
   if(!exampleOpen&&a==='view'){edit(setFerryFrame(material,b.dataset.ferryFrame),a,`[data-ferry-frame="${b.dataset.ferryFrame}"]`);return;}
   if(!exampleOpen&&a==='reset'){edit(resetFerry(material),a,selector);return;}
   if(!exampleOpen&&a==='readings'){stop();e.readings=!e.readings;v.pending=e.readings?'Readings shown for this clock moment and observer.':'Readings hidden.';redraw(selector);return;}
-  if(!exampleOpen&&a==='explain'){stop();e.explanation=!e.explanation;v.pending=e.explanation?'A supplied explanation of this view is shown.':'Explanation hidden.';redraw(e.explanation?'#ferry-explanation-title':selector);return;}
+  if(!exampleOpen&&a==='explain'){stop();e.explanation=!e.explanation;v.pending=e.explanation?'An explanation of this view is shown.':'Explanation hidden.';redraw(e.explanation?'#ferry-explanation-title':selector);return;}
   if(!exampleOpen&&a==='example'){stop();v.example=true;v.part=0;v.pending='Worked example, not your crossing. Part 1 of 4.';redraw();return;}
   if(exampleOpen&&a==='example-close'){stop();v.example=false;v.pending='Your crossing restored with the same clock, view and settings.';redraw('[data-ferry-action="example"]');return;}
   if(exampleOpen&&['example-back','example-next'].includes(a)){const next=part+(a==='example-next'?1:-1);if(!ferryExample(next))return;stop();v.part=next;v.pending=`Worked example, not your crossing. Part ${next+1} of 4.`;redraw();}

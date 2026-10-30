@@ -9,7 +9,7 @@ const phrase=(text,key,values)=>willowText(text[key],values);
 const symbol=token=>token==='leaf'?'<svg viewBox="0 0 28 28" aria-hidden="true"><path d="M4 22C5 9 16 3 24 4c0 12-9 20-20 18Z" fill="#397958" stroke="#173f37" stroke-width="2"/><path d="M5 22 20 8" stroke="#fff9df" stroke-width="2"/></svg>':'<svg viewBox="0 0 28 28" aria-hidden="true"><path d="M7 11h14l-2 12H9Z" fill="#e9b84a" stroke="#173f37" stroke-width="2"/><path d="M9 11 12 5h4l3 6M13 2h2" fill="none" stroke="#173f37" stroke-width="2"/><circle cx="14" cy="17" r="3" fill="#fff9df"/></svg>';
 const marker=(token,text)=>`<span class="willow-token willow-${token}" data-token="${token}" aria-label="${esc(tokenName(text,token))}">${symbol(token)}</span>`;
 const modePicker=text=>`<fieldset class="willow-modes" data-willow-mode><legend>${esc(text.modeTip)}</legend><label><input type="radio" name="willow-mode" value="two" checked> ${esc(text.modeTwo)}</label><label><input type="radio" name="willow-mode" value="solo"> ${esc(text.modeSolo)}</label></fieldset>`;
-const header=text=>`<header class="willow-heading"><a class="back" href="#numbers">← Number Garden</a><h1>${esc(text.title)}</h1><p>${esc(text.invitation)}</p></header>`;
+const header=text=>`<header class="willow-heading"><a class="back" href="#numbers"><span aria-hidden="true">←</span> Number Garden</a><h1>${esc(text.title)}</h1><p>${esc(text.invitation)}</p></header>`;
 function board(walk){const {source,positions,turn,spin,done}=walk,t=source.text,n=source.squares,active=tokenName(t,turn);
  const at=(token,p)=>p===n?null:p===0?phrase(t,'atGate',{token:tokenName(t,token)}):phrase(t,'atStone',{token:tokenName(t,token),square:p});
  const arrival=positions.leaf===n&&!done?t.leafArrives:positions.lantern===n&&!done?t.lanternArrives:'';

@@ -1189,7 +1189,7 @@ export const feedingBoardCopy = {
   "save failure": "This board is in this session, but it could not be saved on this device. Download your notes.",
   "reset explanation in grown up help": "The game's confirmed reset removes this explorer's board records from this device. It does not remove another explorer's work or files you already downloaded.",
   "qualifier": "These pictures show examples of foods these animals eat, not one meal or every food. The groups describe their diets.",
-  "artCredit": "Original labelled drawing for this board.",
+  "artCredit": "Original labeled drawing for this board.",
   "scale": "Pictures are not to scale.",
   "beforeStart": "Notes keep your first check, your latest retry, and how many checks you made. They do not keep every try. Your first check stays in your notes when you try again.",
   "instruction": "Look at the animal's foods. Choose a basket. Then check.",
@@ -1212,7 +1212,7 @@ export const feedingBoardCopy = {
     "This is a supplied-evidence science board. The animal names and foods are given. The first rabbit is guided; optional teaching, help, source-note opening, requested narration, working together, feedback and familiar cases are recorded separately. A fitting basket or idea is a response to this task. It does not show independent reading, animal identification, dietary expertise, an explanation in the child's own words, or mastery.",
     "Invite a reason: “Which foods helped you decide?” Listen for plants, animals or both, using a food on the card. For an omnivore, invite a plant food and an animal food. Speaking, pointing, a grown-up reading, and leaving the question open are all welcome. Spoken words are not recorded, scored or automatically interpreted.",
     "These three groups simplify usual diets. The cards do not list every food, show one observed meal, give equal portions or claim that an animal never eats anything else. The seven-spot ladybird hunts aphids and can also eat pollen; the source does not measure how often wild ladybirds eat pollen. Bones are animal remains. Carnivore does not mean the animal must hunt.",
-    "The drawings are labelled examples, not a field-identification test. This board does not teach food energy, complete food chains, habitat engineering, teeth functions or family nutrition. It never asks what your child eats and gives no animal-care or feeding instructions.",
+    "The drawings are labeled examples, not a field-identification test. This board does not teach food energy, complete food chains, habitat engineering, teeth functions or family nutrition. It never asks what your child eats and gives no animal-care or feeding instructions.",
     "Work stays in the current explorer's local notebook. There is no typed answer, child recording, upload or automatic sharing. Downloaded notes contain saved ungraded basket and idea choices, actual first checks, latest retries, check counts, supplied sources and support reports, not every intermediate try. Existing reset and transfer controls apply."
   ]
 };

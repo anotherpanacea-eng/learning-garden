@@ -28,7 +28,7 @@ const authored={
       "learn": [
         {
           "id": "records-learn-1",
-          "text": "The bottom line marks Hollis's years. A gap of ten years takes the same space wherever it appears. Each bar is one recorded flood, placed at its year. The height scale is in centimeters above the stated ordinary level. Read the labelled scale to compare bar heights.",
+          "text": "The bottom line marks Hollis's years. A gap of ten years takes the same space wherever it appears. Each bar is one recorded flood, placed at its year. The height scale is in centimeters above the stated ordinary level. Read the labeled scale to compare bar heights.",
           "facts": []
         },
         {
@@ -38,7 +38,7 @@ const authored={
         },
         {
           "id": "records-learn-3",
-          "text": "The later 160 cm storm has its own labelled place beside the plot. It has no supplied Hollis year, so it does not sit on the year line.",
+          "text": "The later 160 cm storm has its own labeled place beside the plot. It has no supplied Hollis year, so it does not sit on the year line.",
           "facts": []
         },
         {
@@ -635,7 +635,7 @@ const authored={
         {
           "id": "unwritten-years-3",
           "text": "Use the nearest written year's height.",
-          "reply": "A neighbouring entry does not measure this year. No interpolation rule or observation supplies its height."
+          "reply": "A neighboring entry does not measure this year. No interpolation rule or observation supplies its height."
         }
       ]
     },
@@ -1185,7 +1185,7 @@ const authored={
         {
           "id": "next-record-1",
           "label": "Next record A",
-          "text": "I would ask for a future water-height record with a stated rule for every event, including small ones, at the same labelled post and reference level. Each entry should give its date and measuring method, with any changes noted. That would make later comparisons clearer, but it could not recover every flood Hollis left unwritten or separate the two old changes by itself."
+          "text": "I would ask for a future water-height record with a stated rule for every event, including small ones, at the same labeled post and reference level. Each entry should give its date and measuring method, with any changes noted. That would make later comparisons clearer, but it could not recover every flood Hollis left unwritten or separate the two old changes by itself."
         },
         {
           "id": "next-record-2",
@@ -1680,7 +1680,7 @@ const authored={
     {
       "id": "river",
       "title": "Open Room for the River",
-      "text": "These Willowbank records are fictional. Room for the River uses documented Dutch history and separately labelled invented geometry. What changes when you ask who made a real source and what it can establish?",
+      "text": "These Willowbank records are fictional. Room for the River uses documented Dutch history and separately labeled invented geometry. What changes when you ask who made a real source and what it can establish?",
       "href": "#learn/history/river-room"
     }
   ]

@@ -37,7 +37,7 @@ for(const [id,an,ad,bn,bd] of sources){
   paired++;const p=pairAt(id,a,b),m=commonPairModel(p),comparison=compareCommonPair(p),aDen=ad*product(a),bDen=bd*product(b);
   eq(comparison.matched,aDen===bDen);eq(comparison.relation,Math.sign(an*bd-bn*ad));eq(comparison.symbol,an*bd>bn*ad?'>':an*bd<bn*ad?'<':'=');eq(m.left.whole,m.right.whole);
   if(aDen===bDen){matched++;ok(comparison.text.includes(`${an*product(a)}/${aDen} ${comparison.symbol} ${bn*product(b)}/${bDen}`));eq(Math.sign(m.left.numerator-m.right.numerator),Math.sign(an*bd-bn*ad));}
-  else ok(comparison.text.includes('Comparing just the coloured-piece counts will not settle the amount.'));
+  else ok(comparison.text.includes('Comparing just the colored-piece counts will not settle the amount.'));
  }
 }
 eq(paired,62);eq(matched,8);eq(rowStates,35);eq(edges,25);

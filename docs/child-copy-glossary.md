@@ -28,6 +28,6 @@ Do not assign presentation or intellectual ambition by age or gender. A learner 
 
 ## First source check
 
-[Spec315](specs/315-child-copy-first-pass.md) scopes the first pass to Parcel Labels and Linear. Run `node scripts/check-child-copy.mjs` (or add `--json`) to flag a small set of source-vocabulary candidates in those renderers, excluding explicitly reviewed adult blocks and exact quotation exceptions. It is not a parser of all runtime strings, a review of translations/user writing, or a whole-app readability judgement. Its explicit adult block and quotation exceptions are human-reviewed source classifications; stale boundaries or exceptions fail the check.
+[Spec315](specs/315-child-copy-first-pass.md) scopes the first pass to Parcel Labels and Linear; the lane A board sweep adds Paired Points. Run `node scripts/check-child-copy.mjs` (or add `--json`) to flag a small set of source-vocabulary candidates in those renderers and Paired Points content, excluding explicitly reviewed adult blocks and exact quotation exceptions. It is not a parser of all runtime strings, a review of translations/user writing, or a whole-app readability judgement. Its explicit adult block and quotation exceptions are human-reviewed source classifications; stale boundaries or exceptions fail the check.
 
 Further sweeps follow the roadmap’s named text-review areas and recent boards. Check the current screen, its frozen sources and its purpose before applying a general substitution. No automatic rewriting of saved work.

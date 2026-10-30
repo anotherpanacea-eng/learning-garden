@@ -77,7 +77,7 @@ const authored=[
    ['Choose a<br>joining word','Join the two sentences with and, because or but.'],
    ['Swap the order','Swap which sentence comes first.'],
    ['Hear and talk','Hear the new sentence. What does it ask the reader to connect?']]},
- {id:'loft-shadows',at:['loft/shadows'],title:'How Shadow Theatre works',
+ {id:'loft-shadows',at:['loft/shadows'],title:'How Shadow Theater works',
   chain:[['Card in the middle','The card stands between a lamp and a screen.'],
    ['Move it toward<br>the lamp','Move it toward the lamp. Its shadow grows bigger.'],
    ['Move it toward<br>the screen','Move it toward the screen. Its shadow gets smaller.'],
