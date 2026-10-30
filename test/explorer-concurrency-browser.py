@@ -62,13 +62,15 @@ def main():
      ok(second.locator(f'[data-guide="{winner}"]').get_attribute('aria-pressed')=='true','reload reads winning saved guide')
      guide(second,2);ok(json.loads(disk(second)['number-garden-v1:explorer-1'])['garden']['guide']==local,'after reload actual controls save again')
      # A second explorer works in another real page without pausing the first.
-     notes(second,base);second.locator('#notes-add-explorer').tap();second.locator('#explorer-create').tap();second.locator('[data-select-explorer]').count()
+     notes(second,base);second.locator('#notes-add-explorer').tap();second.locator('#explorer-create').tap();second.wait_for_function("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId==='explorer-2'");second.wait_for_url('**/#home')
      second.evaluate("location.hash='#companions'");second.locator('[data-guide]').first.wait_for()
-     third=c.new_page();third.on('pageerror',lambda e:errors.append(str(e)));third.goto(base+'#companions',wait_until='networkidle');third.locator('[data-select-explorer="explorer-1"]').tap();third.locator('[data-guide]').first.wait_for()
+     third=c.new_page();third.on('pageerror',lambda e:errors.append(str(e)));third.goto(base+'#companions',wait_until='networkidle');third.locator('[data-select-explorer="explorer-1"]').tap();third.evaluate("location.hash='#companions'");third.locator('[data-guide]').first.wait_for()
      guide(second,1);guide(third,0)
      ok(not second.locator('[data-save-warning]').count() and not third.locator('[data-save-warning]').count(),'separate explorers keep saving in real pages')
+     # Refresh all notebooks before an intentional operation that deletes every explorer.
+     second.reload(wait_until='networkidle');second.locator('[data-select-explorer="explorer-2"]').tap();second.wait_for_url('**/#home')
      # Save-off in one page must prevent the other from recreating removed data.
-     notes(second,base);second.locator('#remember').uncheck();third.locator('[data-save-warning]').wait_for();off=disk(second);guide(third,1)
+     notes(second,base);ok(second.locator('#remember').is_enabled(),'second explorer remains writable: '+str(second.locator('[data-save-warning]').all_text_contents())+' registry '+str(second.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers'))")));second.locator('#remember').uncheck();third.locator('[data-save-warning]').wait_for();off=disk(second);guide(third,1)
      ok(disk(third)==off and off.get('number-garden-save')=='off','real save-off cannot be undone by stale game controls')
      ok(not any(k.startswith('number-garden-v1:') for k in off),'off removes saved notebooks')
      c.close();print('two-page touch recovery width',width,'passed',flush=True)
