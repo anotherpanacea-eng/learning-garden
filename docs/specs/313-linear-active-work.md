@@ -28,7 +28,7 @@ Pure `linearPage` and `linearNotes` readers stay pure, including unsupported/add
 
 ## Layout and scope
 
-Use the existing palette, type family and restrained surfaces. Reduce header scale/spacing within the Linear scene only; no global header/menu or new audience theme. The task and graph should be the dominant content. At820×1000 and1024×768 in a synthetic notebook with at least12saved visits, active page and reference headings must be visible on initial active entry without scrolling. At320×600, page controls and jump buttons bring the relevant heading into view with no horizontal overflow; do not claim everything fits on one phone screen. Native touch/keyboard, reduced motion and browser larger-text checks are required. Physical iPad keyboard/Safari/VoiceOver remain unqualified.
+Use the existing palette, type family and restrained surfaces. Reduce header scale/spacing within the Linear scene only; no global header/menu or new audience theme. The task and graph should be the dominant content. At820×1000 and1024×768 in a synthetic notebook with at least12saved visits, active page and reference headings must be visible on initial active entry without scrolling. At320×600, page controls and jump buttons bring the relevant heading into view with no horizontal overflow; do not claim everything fits on one phone screen. Native touch/keyboard, reduced motion and a browser rendering check at150%root font size are required. This is a text-size stand-in, not browser text zoom. Physical iPad keyboard/Safari/VoiceOver remain unqualified.
 
 This is a UI repair, not a new learning capability. Existing Jane/Marble-derived boundaries, original teaching and licenses from312/223 are unchanged; no upstream code/content/graph or learner evidence rule is adopted.
 
