@@ -2,10 +2,12 @@
 
 The owning 294 spec defines exact materials and action limits. Counts are supplied observations of the construction, never a child’s submitted answer. Original-unit amounts:0 length units; a/b of one length unit below 1;1 length unit; mixed-form length units above 1 (1 1/2 length units). Group counts: a/b of one measuring group below 1;1 measuring group; mixed-form measuring groups above 1 with the equivalent improper fraction in parentheses. No zero quotient for an empty construction. At q=1 name one whole measuring group, never 1/1. Tally terms are N whole-group/half-group/third-group/quarter-group/sixth-group pieces, ordered by q=1,2,3,4,6, with singular piece for N=1 and zero terms omitted. Every quantity placeholder below expands to a complete formatted phrase including its own unit noun; never append a second fixed unit noun. Numeric placeholders q and displayIndex are counts, not quantity phrases. All references say which unit is being counted.
 
+The Bramble invitation adds a Willowbank reason under [roadmap lane B](../roadmap.md#next-consolidation-lanes--2026-10-30). It adds no scene, chapter contribution or saved state.
+
 ## Main job
 
 - Title: Ribbon Measures
-- Opening: How many measuring groups cover this ribbon? Part of a group can fit, too.
+- Opening: Bramble is measuring ribbons for Willowbank’s next gathering. How many measuring groups cover this ribbon? Part of a group can fit, too.
 - Reference: One length unit stays the same size. The measuring strip is a reusable ruler, not a supply of ribbon.
 - Ribbon-case selector: Choose a ribbon
 - Ribbon label: Ribbon to measure: [A-length-phrase]
