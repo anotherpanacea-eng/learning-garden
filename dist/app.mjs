@@ -1,3 +1,4 @@
+import {bindHomeEntry,ownHomeAction} from './home-entry.mjs';
 import {millEnergyPage,bindMillEnergy,resetMillEnergy,stopMillEnergyMotion} from './mill-energy.mjs';
 import {pauseLiftFilm,stopLiftFilm} from './lift-film.mjs';
 import {liftYardPage,bindLiftYard,resetLiftYard,stopLiftMotion} from './lift-yard.mjs';
@@ -243,7 +244,7 @@ function gardenArt(){let flowers='';for(let r=0;r<3;r++)for(let c=0;c<4;c++)flow
 function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back">← Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
 function noteInstructionArrival(){if(choosingExplorer)return;const [desk,page]=(location.hash||'').slice(1).split('/');if(page==='instructions'&&['post','loft'].includes(desk)&&noteInstructionEntry(state,desk))save();}
 function navigate(hash){stopBell('navigation');if(location.hash===hash){noteInstructionArrival();render();}else location.hash=hash;}
-function home(){return pathwayInvitation()+startingInvitation()+arrivalInvitation(state)+deskEntry()+gardenHome(state,persist,parcelHome(state,{blocked:keeperFilmBlocked()}))+pileEntry()+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
+function home(){return gardenHome(state,persist,parcelHome(state,{blocked:keeperFilmBlocked()}),explorerStore.active.id)+townInvitation(state);}
 function startCheckin(){if(state.baseline.complete){navigate('#summary');return;}const q=checkin[state.baseline.index];activity={mode:'checkin',q};const draft=state.baseline.draft;active=draft?.questionId===q.id?{...blank(),...draft}:blank();
   if(draft?.questionId!==q.id&&(state.exposures?.includes(`${q.a}x${q.b}`)||state.exposures?.includes(`${q.b}x${q.a}`)))active.exposed=true;
   screen='activity';render();focusActivity();}
@@ -765,7 +766,7 @@ function render(){
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry()+bridgesEntry()+shadowEntry();
-  else html=home()+travelersArchiveEntry()+bellStudioEntry()+rhythmEntry();
+  else html=home();
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context&&hash!=='#cafe')html+=learningInvitations(context);}
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&hash!=='#cafe'&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
@@ -861,6 +862,7 @@ function priceOptions(){return {canExport:candidate=>prepareProgressImport(JSON.
 function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
 function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&!arrivalSkipsWelcome(state)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function bind(){
+ bindHomeEntry(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  $('[data-map-refresh]')?.addEventListener('click',()=>{if(graph){render();main.focus();}else void loadCurriculumMap();});
  bindActTwo(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindKeeperStory(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
@@ -920,7 +922,7 @@ function bind(){
  if(egSlug==='letters'&&['post','loft'].includes(egRoot))bindLetterTrail(state,egRoot,{save,render,navigate,focus:focusElement});
  if(egSlug==='messages'&&['post','loft'].includes(egRoot))bindMessages(state,egRoot,{save,render,navigate,focus:focusElement});
  if(egSlug==='groups'&&['cafe','post'].includes(egRoot))bindEqualGroups(state,egRoot==='cafe'?'cafe':'bramble',{save,render,navigate,focus:focusElement});
- document.querySelectorAll('[data-film-replay]').forEach(button=>button.addEventListener('click',()=>playFilm(button.dataset.filmReplay,{replay:true})));
+ document.querySelectorAll('[data-film-replay]').forEach(button=>button.addEventListener('click',ownHomeAction(button,()=>playFilm(button.dataset.filmReplay,{replay:true}),{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer})));
  $('#dismiss-draft-notice')?.addEventListener('click',()=>{state.broad.draftNotice=false;save();render();main.focus();});
  bindExplorers();bindBroadExtras();bindPlantings(state,{save,render,navigate,focus:focusElement});
  bindStory();
@@ -998,7 +1000,7 @@ function finishStory(skip=false){
  save();render();main.focus();window.scrollTo(0,0);
 }
 function bindStory(){
- document.querySelectorAll('[data-start-path]').forEach(b=>b.onclick=()=>requestPath(b.dataset.startPath));
+ document.querySelectorAll('[data-start-path]').forEach(b=>b.onclick=ownHomeAction(b,()=>requestPath(b.dataset.startPath),{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer}));
  document.querySelectorAll('[data-french-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.frenchDestination,value=$(`#french-length-${place}`).value,story=$(`#french-story-${place}`).value;requestFrench(place,value==='auto'?'auto':Number(value),story==='auto'?null:story);});
  document.querySelectorAll('[data-paris-pack-story]').forEach(b=>b.onclick=()=>{const story=b.dataset.parisPackStory,value=$(`#paris-pack-length-${story}`).value;requestParis(b.dataset.parisPackPlace,value==='auto'?'auto':Number(value),story);});
  document.querySelectorAll('[data-paris-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.parisDestination,value=$(`#paris-length-${place}`).value;requestParis(place,value==='auto'?'auto':Number(value));});
