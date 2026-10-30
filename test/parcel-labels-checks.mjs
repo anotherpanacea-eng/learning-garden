@@ -42,6 +42,8 @@ for (let serial = 1; serial <= 60; serial++) {
     if (source.count === 1 && stem === 'trim') ok(r.record.feedback.includes(`Keep ${source.base}`), 'singular-y correction names the real stem control');
     if (source.base === 'daisy' && ['dais','daises'].includes(literal)) ok(r.record.feedback.includes('raised platform'), 'dais/daises are meaningful words, not fragments');
     if (source.base === 'toy' && literal === 'toes') ok(r.record.feedback.includes('real word for parts of a foot'), 'toes is a different meaningful word');
+    if (source.count === 1 && source.base === 'toy' && literal === 'toes') ok(r.record.feedback.includes('about one toy.'), 'discovery respects a singular request');
+    if (source.count === 1 && source.base === 'daisy' && ['dais','daises'].includes(literal)) ok(r.record.feedback.includes('about one cut flower.'), 'flower discovery respects a singular request');
     if (source.count > 1 && r.record.outcome === 'match' && source.family === 'ies') ok(r.record.feedback.includes('change y to i and add es'), 'chunk connects to the spelling transformation');
   }
 }
@@ -135,6 +137,7 @@ for (const model of [freshState(), s, mixed, odd, {...freshState(),parcelLabels:
 const escaped=clone(s);work(escaped).ownMessage='<tag> & "quoted"';keepParcel(escaped,options);
 ok(parcelLabelsPage(escaped).includes('&lt;tag&gt; &amp; &quot;quoted&quot;'),'own writing escaped in play surface');
 ok(parcelLabelsNotes(escaped).includes('&lt;tag&gt; &amp; &quot;quoted&quot;'),'own writing escaped in Notes');
+ok(parcelLabelsPage(s).includes('Kept draft; no current matching check.'),'a differing first-kept label is explicitly a draft');
 for (let serial=1;serial<=60;serial++) {
   const src=makeParcelSource(serial),picture=parcelPicture(src);
   equal((picture.match(/data-parcel-object/g)||[]).length,src.count,'picture explicitly repeats exactly the requested count');

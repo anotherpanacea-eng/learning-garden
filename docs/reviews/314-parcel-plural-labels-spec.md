@@ -19,3 +19,10 @@ The full vocabulary/teaching read checked all12 singular/plural pairs and four d
 
 
 Implementation note: the author inspected all twelve original SVG pictures and corrected the cherry silhouette to show one fruit per counted object. Local model/reader and native tests are separate from the independent review; no hosted or physical-device claim follows from this note.
+
+
+## Implementation review folds
+
+Claude Opus cleared0200a9c4af56016bdf16fce4c936d81299ee6b5d by source reading with noP1/P2. Bounded P3 repairs capitalize/quote spelling clues, keep discoveries consistent with one/more-than-one requests, identify kept drafts, give the blank real screen-reader text, avoid announcing an unchanged selection as a change, and request native browser confirmation for refused-text closure. Keyboard piece/Check/Keep and visible cap/collision/counter checks were added; the232-check native run includes an actual cancelled beforeunload dialog. Browser policy may suppress this on other devices.
+
+The preview intentionally stays blank until an ending is selected, as specified. Explicitly opening a readable visit may replace a malformed current pointer; loading never does. Unreadable/non-id keys remain protected raw material and can consume slots. The picture’s toy house is a toy example, with its supplied singular noun; no identity-recognition test is claimed. Full feedback meaning is independently reviewed rather than assigned an automated prose-quality grade. Exact final-head recheck still owns clearance of these folds.

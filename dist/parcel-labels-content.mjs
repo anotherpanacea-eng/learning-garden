@@ -24,10 +24,11 @@ export const parcelEndings = [['none', 'No ending'], ['s', 's'], ['es', 'es'], [
 const exampleWords = {s: ['map', 'maps'], es: ['fox', 'foxes'], ies: ['puppy', 'puppies'], 'keep-y': ['day', 'days']};
 
 function explain(base, plural, family) {
+  const title = base[0].toUpperCase() + base.slice(1);
   if (family === 's') return `For more than one ${base}, keep ${base} and add s: ${base} + s = ${plural}.`;
-  if (family === 'es') return `${base} ends in ${base.endsWith('x') ? 'x' : 'sh'}. For more than one, keep ${base} and add es: ${base} + es = ${plural}.`;
-  if (family === 'ies') return `For more than one ${base}, take off y and add ies: ${base.slice(0, -1)} + ies = ${plural}. Another way to describe the same spelling is to change y to i and add es. The letter before y is ${base.at(-2)}, a consonant letter.`;
-  return `The letter before y is ${base.at(-2)}, a vowel letter. Keep y and add s: ${base} + s = ${plural}.`;
+  if (family === 'es') return `${title} ends in “${base.endsWith('x') ? 'x' : 'sh'}”. For more than one, keep ${base} and add es: ${base} + es = ${plural}.`;
+  if (family === 'ies') return `For more than one ${base}, take off y and add ies: ${base.slice(0, -1)} + ies = ${plural}. Another way to describe the same spelling is to change y to i and add es. The letter before y is “${base.at(-2)}”, a consonant letter.`;
+  return `The letter before y is “${base.at(-2)}”, a vowel letter. Keep y and add s: ${base} + s = ${plural}.`;
 }
 
 export function makeParcelSource(serial, {family = 'mixed', quantity = 'mix'} = {}) {
@@ -39,10 +40,10 @@ export function makeParcelSource(serial, {family = 'mixed', quantity = 'mix'} = 
   const explanation = explain(base, plural, pattern), [example, examples] = exampleWords[pattern];
   const discoveries = base === 'toy' ? {
     to: 'To is a real word, but it does not name a pictured supply here.',
-    toes: 'Toes is a real word for parts of a foot. This request is about toys.',
+    toes: `Toes is a real word for parts of a foot. This request is about ${count === 1 ? 'one toy' : 'toys'}.`,
   } : base === 'daisy' ? {
-    dais: 'Dais is a real word for a raised platform. This request is about flowers.',
-    daises: 'Daises names more than one raised platform. This request is about flowers.',
+    dais: `Dais is a real word for a raised platform. This request is about ${count === 1 ? 'one cut flower' : 'cut flowers'}.`,
+    daises: `Daises names more than one raised platform. This request is about ${count === 1 ? 'one cut flower' : 'cut flowers'}.`,
   } : {};
   return {
     format: 1, id: `parcel-${serial}`, base, plural, count, destination,
@@ -51,7 +52,7 @@ export function makeParcelSource(serial, {family = 'mixed', quantity = 'mix'} = 
     patternName: parcelFamilies.find(([id]) => id === pattern)[1], explanation,
     workedExample: count === 1 ? `For one ${base}, the label is the whole word: ${base}.` : `${explain(example, examples, pattern)} Now try this request. ${explanation}`,
     messages: {
-      match: count === 1 ? `${base} names one, so the whole word is the label. No ending is needed.` : explanation,
+      match: count === 1 ? `${base[0].toUpperCase() + base.slice(1)} names one, so the whole word is the label. No ending is needed.` : explanation,
       one: `For one ${base}, keep the whole word: ${base}. ${base.endsWith('y') ? `Choose Keep ${base} and No ending.` : 'Choose No ending.'}`,
       noEnding: `There is more than one. In this request, ${base} names one. The usual label for these supplies is ${plural}.`,
       trimmedNoEnding: `The usual label for these supplies is ${plural}.`,
