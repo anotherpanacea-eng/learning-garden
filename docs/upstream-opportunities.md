@@ -167,3 +167,8 @@ Specs222–226 refresh Jane `286300f822944b8c039d5ea8d483a6cb52759f51` (LESSONS,
 ## Signed/zero Linear returns · 2026-10-30
 
 [312](specs/312-signed-linear-returns.md) refreshes Jane `e88f81a00553fb87818ef84c77a8800f0dcb33e4` lesson/learn-example conventions and layered licensing, and Marble `a0b6b577b2d1b124d9f8d6df501cca8e62133451` linear-graph/plotting/equation topic descriptions. These inform explicit teach/action/return and bounded signed-rate contrasts. No mastery/review gates, remote records, new taxonomy edges or upstream code/prose/art are incorporated. The original223controller, frozen-source saves and graph/table/parser remain authoritative;312 changes newly created teaching sources only.
+
+
+## Parcel plural labels ·314 · 2026-10-30
+
+Jane `e88f81a00553fb87818ef84c77a8800f0dcb33e4` (`LESSONS.md`) was freshly read for stable current-item and explicit supported-teaching design. Marble `a0b6b577b2d1b124d9f8d6df501cca8e62133451` (`data/topics.json`) was freshly read for Regular Plural Nouns `mt_18qkgxr_-T`, Suffixes `mt_FYK8m6eHQm` and Root Words & Inflections `mt_UEe3MC5RZc`. Original parcel labels narrow these broader oral/written/sound-based capabilities to pictured supplied-form construction; no new full-topic or decoding claim, source edge, vendored pin or license change. No Jane/Marble code, teaching prose or art is incorporated. The primary DfE spelling appendix and exact scope are linked in314; the whole proposed254 pack and55 audio/player are not cleared by this slice.
