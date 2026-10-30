@@ -32,7 +32,7 @@ for(const exception of [
 ]) {assert.throws(()=>scanCopySource(quoted,{quotations:[exception]}));checks++;}
 equal(scanCopySource('provenance',{path:'scene.mjs'})[0].path,'scene.mjs','diagnostic identifies source file');
 const result=inspectChildCopy();ok(result.ok,'actual pilot source contains no unallowed candidate or stale scope marker');
-equal(result.files.length,2,'scoped result does not claim the whole app');
+equal(result.files.length,copyScopes.length,'scoped result does not claim the whole app');
 const script=fileURLToPath(new URL('../scripts/check-child-copy.mjs',import.meta.url));
 const cli=spawnSync(process.execPath,[script,'--json'],{encoding:'utf8'});
 equal(cli.status,0,'real CLI passes actual scoped source');

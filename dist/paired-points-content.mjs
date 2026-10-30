@@ -1,7 +1,7 @@
 // Original, explicitly invented records. Upstream work was studied as design reference only.
 export const PAIRED_TEXT=Object.freeze({
  title:'Paired points',invitation:'Two numbers, one delivery.',
- introduction:'Put each pair on a graph. Then look at what a pattern can—and cannot—tell us.',
+ introduction:'Put each pair on a graph. Then ask what a pattern can tell us, and what it can’t.',
  instruction:'Keep these two values together. Choose X across first, then Y up.',
  chooseBoth:'Choose both values before placing a point.',
  complete:'Every record has a point. Compare, keep, or look at the patterns.',
@@ -9,7 +9,7 @@ export const PAIRED_TEXT=Object.freeze({
  compareExplanation:'Each square shows the pair from that record. Your circles stay where you placed them.',
  matching:'All placed pairs agree with their record cards.',
  differences:'Your points stay where you put them. Back can help you revisit a record.',
- comparisonLimit:'This compares your plotted pairs with the supplied table. It does not test real measurement or certify a skill.',
+ comparisonLimit:'This compares your points with the record table. It is a check, not a test.',
  keepExplanation:'An unfinished chart is welcome too. Keep its records and points together.',
  kept:'Chart kept. Its records and points stay together in this notebook.',
  readOnly:'Read-only kept chart. Revise as a new chart to move points, compare, or use help.',
@@ -17,10 +17,10 @@ export const PAIRED_TEXT=Object.freeze({
  safety:'This change could not be kept safely. Your earlier work is unchanged. Download your notes or keep exploring.',
  capacity:'This notebook has all the charts it can hold. Earlier charts stay in your notebook, including unfinished ones. You can still open an earlier chart. Ask a grown-up to download your notes.',
  checkCapacity:'This chart has kept all the comparisons it can hold. You can still move points or keep it.',
- unsupported:'Earlier paired-point notes are retained. This format cannot be edited here. Its original stays in your notes. Other places are still open.',
- unreadable:'Earlier chart retained. Its original stays in your notes. Other readable charts remain open.',
- malformedChecks:'Earlier comparisons are retained. This list cannot be changed here; its original stays in your notes. You can still move points or keep the chart.',
- helperUnavailable:'This earlier example is retained in your notes; plotting is still open.',
+ unsupported:'Your earlier paired-point notes are kept, but they can’t be changed here. The original stays in your notes. Other places are still open.',
+ unreadable:'This earlier chart is kept in your notes, but it can’t open here. Your other charts still open.',
+ malformedChecks:'Your earlier comparisons are kept in your notes, but this list can’t be changed here. You can still move points or keep the chart.',
+ helperUnavailable:'This earlier example is kept in your notes. You can still place points.',
  overlapping:'Several records can share a position. The table keeps each record separately.',
  saveFailure:'This chart is in this session, but it could not be saved on this device. Download your notes.',
  grownUp:'This is supplied representation practice with explicitly invented courier records. It records plotted pairs, optional model examples, table comparisons and support requests. It does not verify measurement, independent coordinate proficiency, prediction skill, statistical inference or causal explanation. Historical records keep their own source wording and axes.'
