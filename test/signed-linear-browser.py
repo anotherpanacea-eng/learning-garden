@@ -18,8 +18,11 @@ def book(p,id='explorer-1'):return p.evaluate('(id)=>JSON.parse(localStorage.get
 def work(p):
  r=book(p)['linearPathway'];return r['lessons'][r['currentId']]
 def go(p,route):p.evaluate('(r)=>location.hash=r',route);p.locator('[data-linear-root]').wait_for()
+def choices(p):
+ d=p.locator('[data-linear-choices]')
+ if d.count() and d.get_attribute('open') is None:d.locator('summary').tap()
 def create(p,kind):
- before=book(p)['linearPathway']['currentId'];p.locator('[data-linear-challenge]').select_option(kind);p.locator('[data-linear-create]').focus();p.keyboard.press('Enter');p.wait_for_function('(id)=>{const k=JSON.parse(localStorage.getItem("number-garden-v1:explorer-1")).linearPathway.currentId;return k!==id&&location.hash==="#learn/math/"+k&&document.activeElement?.id==="linear-turn"}',arg=before);p.locator('#linear-turn').wait_for();return work(p)
+ choices(p);before=book(p)['linearPathway']['currentId'];p.locator('[data-linear-challenge]').select_option(kind);p.locator('[data-linear-create]').focus();p.keyboard.press('Enter');p.wait_for_function('(id)=>{const k=JSON.parse(localStorage.getItem("number-garden-v1:explorer-1")).linearPathway.currentId;return k!==id&&location.hash==="#learn/math/"+k&&document.activeElement?.id==="linear-turn"}',arg=before);p.locator('#linear-turn').wait_for();return work(p)
 def page(p,n):p.locator(f'[data-linear-page="{n}"]').first.tap()
 def field(p,key,value):p.locator(f'[data-linear-item=own][data-linear-field="{key}"]').fill(value)
 def check(p):p.locator('[data-linear-check=own]').tap();p.locator('#linear-feedback-own').wait_for();ok(work(p)['checks'][-1]['outcome']=='match','independent expected signed answer fits');ok(work(p)['checks'][-1]['supported'] is True,'still supported practice')
@@ -54,7 +57,7 @@ def single(browser,base,width,height):
   p.evaluate("location.hash='#notes'");p.locator('#notes-add-explorer').tap();p.locator('#explorer-create').tap();p.wait_for_function("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId==='explorer-3'");p.evaluate("location.hash='#learn/math'");p.locator('[data-linear-root]').wait_for();ok('linearPathway' not in book(p,'explorer-3'),'new explorer inherits no signed work');
   if p.locator('[data-film-skip]').count():p.locator('[data-film-skip]').tap()
   p.locator('#explorer-switch').tap();p.locator('[data-select-explorer=explorer-1]').tap();p.evaluate("location.hash='#learn/math'");p.locator('[data-linear-root]').wait_for();ok(book(p)['linearPathway']==held,'return to original explorer preserves waiting work')
-  p.evaluate("location.hash='#notes'");p.locator('#remember').uncheck();p.evaluate("location.hash='#learn/math'");p.locator('[data-linear-root]').wait_for();p.locator('[data-linear-challenge]').select_option('contrast');p.locator('[data-linear-create]').tap();ok(not p.evaluate("Object.keys(localStorage).some(k=>k.startsWith('number-garden-v1:'))"),'saving-off signed generation does not recreate notebooks');print('signed single',width,'passed',flush=True)
+  p.evaluate("location.hash='#notes'");p.locator('#remember').uncheck();p.evaluate("location.hash='#learn/math'");p.locator('[data-linear-root]').wait_for();choices(p);p.locator('[data-linear-challenge]').select_option('contrast');p.locator('[data-linear-create]').tap();ok(not p.evaluate("Object.keys(localStorage).some(k=>k.startsWith('number-garden-v1:'))"),'saving-off signed generation does not recreate notebooks');print('signed single',width,'passed',flush=True)
  finally:c.close()
 
 def comparison(browser,base,width,height):
