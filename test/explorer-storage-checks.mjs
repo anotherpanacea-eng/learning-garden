@@ -144,3 +144,11 @@ console.log(`${checks} explorer storage checks including multi-notebook recovery
  equal(store(disk).load().syntheticWork,{from:'newer destination'},'newer destination survives conflict recovery');
 }
 console.log(`${checks} explorer storage checks including selection-time conflict passed.`);
+
+{
+ const disk=new Storage(),a=store(disk),first=a.load();a.save(first);a.add({},first);
+ const b=store(disk),current=b.load(),id=b.active.id;current.syntheticWork={from:'temporary chooser work'};disk.fail=op=>op==='set';const before=[...disk.data];
+ equal(b.select(id,current),current,'storage failure still opens currently loaded explorer');check(!b.needsChooser,'denied write does not trap initial chooser');equal([...disk.data],before,'denied-write selection changes no disk bytes');
+ check(!b.save(current),'temporary explorer continues to report unsaved work');equal(b.load().syntheticWork,{from:'temporary chooser work'},'temporary work remains downloadable');
+}
+console.log(`${checks} explorer storage checks including denied-write chooser passed.`);

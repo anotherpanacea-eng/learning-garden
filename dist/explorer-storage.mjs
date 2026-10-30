@@ -133,11 +133,10 @@ export class ExplorerStore{
  }
  select(id,currentState){
   if(!this.registry)this.load();if(!this.explorers.some(p=>p.id===id))return null;
-  if(!this.checkForUpdates()){
-   // Recovery must leave every locally open notebook reachable without disk writes.
-   if(!this._conflict||!this.memory.has(id))return null;if(currentState)this.memory.set(this.active.id,currentState);this.registry.activeId=id;this._needsChooser=false;return this.memory.get(id);
-  }
-  if(currentState&&!this.save(currentState))return null;try{if(this.memory.has(id)&&!this._matches(stateKey(id))){this._changed();return this.select(id,currentState);}}catch{this._warn();return null;}this.registry.activeId=id;this._needsChooser=false;const s=this._readState(this.active);if(this._persist&&!this._writeBlocked)this._commitRegistry();return s;
+  // Failed storage must not trap the chooser or make locally open work unreachable.
+  const local=()=>{if(!this.memory.has(id))return null;if(currentState)this.memory.set(this.active.id,currentState);this.registry.activeId=id;this._needsChooser=false;return this.memory.get(id);};
+  if(!this.checkForUpdates())return local();
+  if(currentState&&!this.save(currentState))return local();try{if(this.memory.has(id)&&!this._matches(stateKey(id))){this._changed();return this.select(id,currentState);}}catch{this._warn();return null;}this.registry.activeId=id;this._needsChooser=false;const s=this._readState(this.active);if(this._persist&&!this._writeBlocked)this._commitRegistry();return s;
  }
  setPersistence(enabled,currentState){
   if(this.importUncertain||this._conflict)return false;
