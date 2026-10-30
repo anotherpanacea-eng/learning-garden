@@ -19,7 +19,7 @@ def stable(p):
  ok(p.locator('main link[rel=stylesheet]').count()==0,'no turn owns a removable stylesheet')
 def visible_focus(p,selector):
  ok(p.locator(selector).evaluate('e=>e===document.activeElement'),'focus on '+selector)
- ok(p.locator(selector).evaluate('e=>{const r=e.getBoundingClientRect();return r.top>=-1&&r.bottom<=innerHeight+1&&r.left>=-1&&r.right<=innerWidth+1}'),'focused control is fully in actual viewport '+selector)
+ ok(p.locator(selector).evaluate('e=>{const r=e.getBoundingClientRect();return r.top>=-1&&r.bottom<=innerHeight+1&&r.left>=-1&&r.right<=innerWidth+1}'),'focused control is fully in actual viewport '+selector+' '+str(p.locator(selector).bounding_box())+' '+str(p.viewport_size))
 def layout(p,root):
  ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth'),'no sideways overflow')
  for b in p.locator(root+' button:visible').all():
@@ -44,12 +44,13 @@ def journey(b,base,seed,width,height):
    if prefix=='lift':
     action(p,'lift','board',2);action(p,'lift','start');action(p,'lift','pull');action(p,'lift','plan')
    elif prefix=='phase':action(p,prefix,'in');action(p,prefix,'in');action(p,prefix,'follow')
-   elif prefix=='sound':action(p,prefix,'hold');action(p,prefix,'high');action(p,prefix,'size2');action(p,prefix,'later')
-   else:action(p,prefix,'hold');action(p,prefix,'a');action(p,prefix,'trace')
+   elif prefix=='sound':action(p,prefix,'hold');action(p,prefix,'high');action(p,prefix,'size2');action(p,prefix,'marker');action(p,prefix,'later')
+   else:action(p,prefix,'a');action(p,prefix,'trace');action(p,prefix,'symbols')
    stable(p)
    # Keep one help panel open and verify all material survives each film return.
    details=p.locator(root+' details').first
    if not details.evaluate('e=>e.open'):details.locator('summary').tap()
+   if prefix=='switch':p.wait_for_function("document.querySelector('[data-switch-details=connections] summary').textContent==='Hide the connections and switch table'")
    before=pose(p,root)
    for escape in [True,False]:
     watch=f'[data-{prefix}-action="watch"]';p.locator(watch).tap();p.locator(root+' video').wait_for();stable(p)
@@ -61,7 +62,7 @@ def journey(b,base,seed,width,height):
       if not detail.evaluate('e=>e.open'):detail.locator('summary').tap()
      p.evaluate('scrollTo(0,document.documentElement.scrollHeight)');p.keyboard.press('Escape')
     else:p.locator(back).tap()
-    ready(p,root);stable(p);visible_focus(p,watch);ok(pose(p,root)==before,'film return preserves model, held reference, text and open help '+prefix);layout(p,root)
+    ready(p,root);stable(p);visible_focus(p,watch);after=pose(p,root);ok(after==before,'film return preserves model, held reference, text and open help '+prefix+' changed: '+str({k:[str(before[k])[:900],str(after[k])[:900]] for k in before if before[k]!=after[k]}));layout(p,root)
    if prefix=='lift':
     action(p,'lift','mode','lever');ready(p,root);stable(p);visible_focus(p,'[data-lift-action=mode][data-lift-value=lever]');layout(p,root)
     snapshot=pose(p,root);p.locator('[data-lift-action=watch]').tap();p.locator('[data-lift-film-return]').wait_for();p.evaluate('scrollTo(0,document.documentElement.scrollHeight)');p.keyboard.press('Escape');ready(p,root);stable(p);visible_focus(p,'[data-lift-action=watch]');ok(pose(p,root)==snapshot,'lever material survives film return');layout(p,root)
