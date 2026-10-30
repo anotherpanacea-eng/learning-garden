@@ -65,6 +65,7 @@ def main():
      notes(second,base);second.locator('#notes-add-explorer').tap();second.locator('#explorer-create').tap();second.wait_for_function("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId==='explorer-2'");second.wait_for_url('**/#home')
      second.evaluate("location.hash='#companions'");second.locator('[data-guide]').first.wait_for()
      third=c.new_page();third.on('pageerror',lambda e:errors.append(str(e)));third.goto(base+'#companions',wait_until='networkidle');third.locator('[data-select-explorer="explorer-1"]').tap();third.evaluate("location.hash='#companions'");third.locator('[data-guide]').first.wait_for()
+     other_local=json.loads(disk(third)['number-garden-v1:explorer-2'])['garden']['guide']
      guide(second,1);guide(third,0)
      ok(not second.locator('[data-save-warning]').count() and not third.locator('[data-save-warning]').count(),'separate explorers keep saving in real pages')
      # Refresh all notebooks before an intentional operation that deletes every explorer.
@@ -73,6 +74,12 @@ def main():
      notes(second,base);ok(second.locator('#remember').is_enabled(),'second explorer remains writable: '+str(second.locator('[data-save-warning]').all_text_contents())+' registry '+str(second.evaluate("JSON.parse(localStorage.getItem('learning-garden-explorers'))")));second.locator('#remember').uncheck();third.locator('[data-save-warning]').wait_for();off=disk(second);guide(third,1)
      ok(disk(third)==off and off.get('number-garden-save')=='off','real save-off cannot be undone by stale game controls')
      ok(not any(k.startswith('number-garden-v1:') for k in off),'off removes saved notebooks')
+     # This conflicted page had both notebooks open: each remains downloadable.
+     notes(third,base);third.locator('#notes-switch-explorer').tap();third.locator('[data-select-explorer="explorer-2"]').tap();third.wait_for_url('**/#home');notes(third,base)
+     with third.expect_download() as recovered:third.locator('#download').tap()
+     other=json.loads(Path(recovered.value.path()).read_text())
+     ok(other['garden']['guide']==other_local,'conflicted tab can export its other locally open notebook')
+     ok(disk(third)==off,'recovery-only switching and download never recreate removed saves')
      c.close();print('two-page touch recovery width',width,'passed',flush=True)
     ok(not errors,'no page errors '+str(errors));print(json.dumps({'checks':checks,'status':'passed','limits':'Synthetic Chrome pages and touch emulation; not simultaneous atomic transactions, physical iPad/Safari or cross-device sync.'}))
    finally:b.close()

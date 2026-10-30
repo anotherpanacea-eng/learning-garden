@@ -125,3 +125,11 @@ console.log(`${checks} explorer storage checks including two-tab recovery passed
  const b=store(disk);b.load();check(b.conflict,'migration notices registry changed after its initial read');const before=[...disk.data];check(!b.save(b.load()),'second migration cannot replace newer registry');equal([...disk.data],before,'raced migration leaves winning copy untouched');equal(store(disk).load().sessions,17,'winning migration progress retained');
 }
 console.log(`${checks} explorer storage checks including initialization races passed.`);
+
+for(const saving of [false,true]){
+ const disk=new Storage(),a=store(disk),first=a.load();first.syntheticWork={from:'local first'};a.save(first);const second=a.add({},first),other=a.active.id;second.syntheticWork={from:'local second'};a.save(second);
+ if(!saving)a.setPersistence(false,second);a.select('explorer-1',second);const b=store(disk),remote=b.load();b.setPersistence(true,remote);remote.syntheticWork={from:'remote'};b.save(remote);
+ check(!a.checkForUpdates(),'sibling change pauses '+saving+' saving session');const before=[...disk.data];
+ equal(a.select(other,first).syntheticWork,{from:'local second'},'other in-memory notebook remains available for export');equal(a.select('explorer-1',second).syntheticWork,{from:'local first'},'first local notebook remains available for export');equal([...disk.data],before,'recovery switching never writes saved data');check(!a.save(first),'switching does not lift pause');
+}
+console.log(`${checks} explorer storage checks including multi-notebook recovery passed.`);
