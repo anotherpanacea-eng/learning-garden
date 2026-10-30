@@ -1,6 +1,6 @@
 # 117. The River Market: Spanish errands from *La Garza*
 
-Status: **proposed; awaiting independent spec review and a fluent Spanish content review.** Part of the [new kinds of play proposal](../new-game-kinds.md). Reuses the French Paris design ([specs 13](13-french-paris-and-plate-return.md), [14](14-french-exploration.md), [83](83-french-saved-visit-source.md)) for narration, meaning support and saved passages. Fits the valley and towns of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127). Every child-facing line, in English and Spanish, is in [the companion text](../content/117-river-market-text.md); this spec holds the model and rules. Code and art are for the implementation pass.
+Status: **proposed; awaiting independent spec review and a Spanish content review by the model panel described under [Review asks](#review-asks) (owner decision, 2026-10-30).** Part of the [new kinds of play proposal](../new-game-kinds.md). Reuses the French Paris design ([specs 13](13-french-paris-and-plate-return.md), [14](14-french-exploration.md), [83](83-french-saved-visit-source.md)) for narration, meaning support and saved passages. Fits the valley and towns of [spec 120](https://github.com/anotherpanacea-eng/learning-garden/pull/127). Every child-facing line, in English and Spanish, is in [the companion text](../content/117-river-market-text.md); this spec holds the model and rules. Code and art are for the implementation pass.
 
 ## Purpose
 
@@ -116,5 +116,16 @@ Refreshed 2026-10-23: Marble `f186a79a9525c189e2d423e31613c62b6805416f`, Jane `1
 
 ## Review asks
 
-- **Fluent Spanish review before build**, of every passage, gloss, reply, nudge and tile. The companion lists specific questions.
+- **Spanish review before build**, of every passage, gloss, reply, nudge and tile, by the model panel below. The companion lists specific questions.
 - Is the longer note's load right for a beginner who reads well in English?
+
+### Language review method · owner decision 2026-10-30
+
+No fluent human reviewer is available to the project, and the owner chose a model panel without a paid human pass. This replaces the earlier fluent-reviewer requirement for this spec; the same method applies to French content unless a later spec says otherwise.
+
+1. **Independent panel.** At least three current frontier models from different providers each review the complete companion text and the questions above separately, without seeing each other's answers. Each reports grammar or spelling errors in Spain's Spanish, unnatural or regionally wrong wording, glosses that mislead, beginner-load problems and answer giveaways, and states its confidence.
+2. **Resolution.** Apply fixes all reviewers agree on. Where they disagree, prefer the simplest standard wording that every reviewer accepts, or drop the line. Never keep a line any reviewer marks as an error without a stated reason. The panel must address the owner's deliberate *ustedes* choice (formal in Spain, where *vosotros* is the everyday plural) and either confirm it is acceptable as written or propose a framing.
+3. **Audio, when any exists.** Recorded or synthesized Spanish is transcribed back by a Spanish speech-recognition model and compared with the exact script; a mismatch blocks the asset. Browser speech remains the default until then. No children's voices, voice cloning or impersonation.
+4. **Record.** Store the prompts, each reviewer's report, the resolution of every flagged line and the reviewed text revision in `docs/reviews/`. The review binds to that text revision; changed lines need a new panel pass.
+
+Known limit: a model panel can miss wording that is correct but sounds odd to a native speaker. That residual risk is accepted for beginner-level content and can be revisited if a fluent reader becomes available.
