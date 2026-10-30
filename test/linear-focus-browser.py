@@ -40,7 +40,7 @@ def setup(browser,base,seed,width,height,route='#learn/math'):
 def active(browser,base,seed,width,height):
  c,p=setup(browser,base,seed,width,height)
  try:
-  ok(p.locator('[data-linear-choices]').get_attribute('open') is None,'active chooser initially closed');ok(p.get_by_role('button',name='Choose another lesson or investigation',exact=True).count()==1,'summary accessible name excludes decorative marker');ok(len(book(p)['linearPathway']['lessons'])>=12,'substantial saved catalog fixture')
+  ok(p.locator('[data-linear-choices]').get_attribute('open') is None,'active chooser initially closed');accessible=p.locator('[data-linear-choices] summary').aria_snapshot();ok('Choose another lesson or investigation' in accessible and '＋' not in accessible and '−' not in accessible,'native summary accessible text excludes decorative marker');ok(len(book(p)['linearPathway']['lessons'])>=12,'substantial saved catalog fixture')
   if width>=820:ok(heading_visible(p,'#linear-turn') and heading_visible(p,'#linear-reference'),'active page and reference initially visible on iPad-sized viewport')
   layout(p);p.screenshot(path=str(OUT/f'active-{width}.png'),full_page=True)
   if width==820:
