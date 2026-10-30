@@ -18,7 +18,7 @@ Companion to [316](../specs/316-seed-exchange-table.md). New English fiction/mod
 
 **Chooser explanation:** Choose any card. Earlier cards stay in your notes. A familiar card can come round again.
 
-**Grown-up qualification:** These are supported constructions with visible quantity readouts. Optional help is recorded separately. A fitting model does not establish independent calculation, reading, writing or a level. Original courier notes are human-read. Local suggestions use a few first checks from distinct cards; all choices stay open.
+**Grown-up qualification:** These are supported constructions with visible quantity readouts. Optional help is recorded separately. A fitting model does not establish independent calculation, reading, writing or a level. Original courier notes are human-read. Local suggestions use the latest supported construction for this job, including retries and help; all choices stay open.
 
 ## Apples for reed
 

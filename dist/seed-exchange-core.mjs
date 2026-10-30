@@ -50,18 +50,18 @@ export function seedCourierList(s,draft){
  return s.family==='nursery'?[...m.shares.map((value,i)=>({label:`Seedlings for ${s.labels.towns[i]}`,value,unit})),tail]:[{label:s.labels.send,value:m.used,unit:m.sendUnit},{label:s.labels.receive,value:m.received,unit:m.receiveUnit},tail];
 }
 export function seedSuggestion(state,selectedFamily){
- const r=state?.seedExchange,groups=new Map();
- if(rootShape(r))for(const [key,w]of Object.entries(r.visits)){
-  const n=serial(key);if(!n||!validSeedWork(w)||w.source.family!==selectedFamily||!w.checks.length)continue;
-  const fp=seedFingerprint(w.source),g=groups.get(fp);
-  if(!g)groups.set(fp,{newest:n,earliest:n,w});else{g.newest=Math.max(g.newest,n);if(n<g.earliest){g.earliest=n;g.w=w;}}
+ const r=state?.seedExchange;if(!rootShape(r))return {size:1,reason:'new'};
+ const eligible=[];
+ for(const [id,w]of Object.entries(r.visits)){
+  const n=serial(id);if(!n||!validSeedWork(w)||w.source.family!==selectedFamily)continue;
+  const field=w.source.family==='nursery'?'partValue':'groups';let latest=null;
+  for(let i=w.checks.length-1;i>=0;i--)if(int(w.checks[i].draft[field],0,12)){latest=w.checks[i];break;}
+  if(latest)eligible.push({id,n,w,latest});
  }
- const recent=[...groups.values()].sort((a,b)=>b.newest-a.newest).slice(0,3);
- if(!recent.length)return {size:1,reason:'new',count:0};
- const first=g=>g.w.checks[0],assisted=c=>c.helpBefore.hint||c.helpBefore.example,last=recent[0].w.source.size;
- if(first(recent[0]).outcome==='different'||assisted(first(recent[0])))return {size:Math.max(1,last-1),reason:'smaller',count:recent.length};
- if(recent.length===3&&recent.every(g=>first(g).outcome==='match'&&!assisted(first(g))))return {size:Math.min(12,last+1),reason:'more',count:3};
- return {size:last,reason:'same',count:recent.length};
+ const chosen=eligible.find(x=>x.id===r.currentId)||eligible.sort((a,b)=>b.n-a.n)[0];
+ if(!chosen)return {size:1,reason:'new'};
+ const current=chosen.w.source.size,fit=chosen.latest.outcome==='match',size=Math.max(1,Math.min(12,current+(fit?1:-1)));
+ return {size,reason:size===current?'same':fit?'more':'smaller'};
 }
 export function seedExchangeView(state){
  if(!own(state,'seedExchange'))return {status:'new',work:null,visits:[],canCreate:true,reason:'',familiar:false};

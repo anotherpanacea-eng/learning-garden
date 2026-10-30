@@ -5,7 +5,7 @@ export const seedCopy = freeze({
  title:'The seed exchange table',
  invitation:'The orchard keeper needs a clear card for the courier. Willowbank and Vadoalto are exchanging goods and young plants. Build a trade or share the seedlings, then keep a note for the journey.',
  notice:'A made-up exchange. The pictures and numbers are a model, not real stock or a measured harvest.',
- grownup:'These are supported constructions with visible quantity readouts. Optional help is recorded separately. A fitting model does not establish independent calculation, reading, writing or a level. Original courier notes are human-read. Local suggestions use a few first checks from distinct cards; all choices stay open.',
+ grownup:'These are supported constructions with visible quantity readouts. Optional help is recorded separately. A fitting model does not establish independent calculation, reading, writing or a level. Original courier notes are human-read. Local suggestions use the latest retained supported construction for this job, including retries and help. All choices stay open.',
  families:{apples:'Apples for reed',reed:'Reed for apples',nursery:'Share the seedlings'},
  note:'What should the courier know? A person can read your note; the game does not mark it. Your words stay as you wrote them when the model changes.',
 });

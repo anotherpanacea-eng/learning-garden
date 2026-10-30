@@ -84,7 +84,7 @@ def journey(browser,base,seed,width,height):
 def refusal(browser,base,seed):
  c,p=setup(browser,base,seed,820,1000,fault=True)
  try:
-  create(p,'apples',3);drawer(p,'help');before_example=book(p);p.evaluate('window.seedRefuse=true');action(p,'example');ok(book(p)==before_example and p.locator('#seed-task').inner_text()=='Apples for reed','example respects full app preflight without adopting help or entering example');p.evaluate('window.seedRefuse=false');drawer(p,'note');accepted='Accepted earlier words.';p.locator('[data-seed-note]').fill(accepted);before=book(p);writes=p.evaluate('seedWrites')
+  create(p,'apples',3);drawer(p,'help');before_example=book(p);p.evaluate('window.seedRefuse=true');action(p,'example');ok(book(p)==before_example and p.locator('#seed-task').inner_text()=='Apples for reed','example respects full app preflight without adopting help or entering example');p.evaluate('window.seedRefuse=false');action(p,'check');ok(work(p)['checks'][-1]['helpBefore']['example'] is False,'refused example does not leak in-memory support into the next check');drawer(p,'note');accepted='Accepted earlier words.';p.locator('[data-seed-note]').fill(accepted);before=book(p);writes=p.evaluate('seedWrites')
   p.locator('[data-seed-note]').evaluate('n=>window.seedInput=n');p.evaluate('window.seedRefuse=true');words='\nVisible <refused> words & a second line.\nKeep these exactly.';p.locator('[data-seed-note]').fill(words)
   def held():
    ok(p.locator('[data-seed-note]').input_value()==words and p.locator('[data-seed-note]').evaluate('n=>n===window.seedInput'),'refusal keeps exact actual textarea')
@@ -148,6 +148,24 @@ def bound_focus(browser,base,seed):
   for _ in range(12):action(p,'less')
   ok(p.evaluate('document.activeElement.dataset.seedAction')=='more' and 'no groups' in p.locator('.seed-limit').inner_text(),'empty bound keeps focus on Add and explains disabled lift')
  finally:c.close()
+
+def suggested_growth(browser,base,seed):
+ for family in ['apples','reed','nursery']:
+  c,p=setup(browser,base,seed,820,1000)
+  try:
+   create(p,family,1)
+   for size in range(1,7):
+    ok(work(p)['source']['size']==size,'actual next-card workflow grows '+family)
+    for _ in range(size):action(p,'more')
+    action(p,'check');drawer(p,'choose');ok(p.locator('[data-seed-size]').input_value()==str(size+1),'next quantity selector refreshes after supported fit '+family)
+    if size<6:action(p,'start')
+  finally:c.close()
+ c,p=setup(browser,base,seed,820,1000)
+ try:
+  create(p,'apples',1);action(p,'check');original=work(p)['checks'][0];drawer(p,'help');action(p,'hint');action(p,'more');action(p,'check');drawer(p,'choose');ok(p.locator('[data-seed-size]').input_value()=='2','helped retry can invite a larger supported card');ok(work(p)['checks'][0]==original and work(p)['checks'][-1]['helpBefore']['hint'] and all(x['supported'] for x in work(p)['checks']),'growth retains original response and support distinctions')
+  p.locator('[data-seed-size]').select_option('12');action(p,'check');drawer(p,'choose');ok(p.locator('[data-seed-size]').input_value()=='12','pending manual size survives rechecking current card');action(p,'start');ok(work(p)['source']['size']==12,'manual size overrides invitation in actual app')
+ finally:c.close()
+ print('suggested growth journeys passed',flush=True)
 
 def fixture(code):
  js="import {freshState} from './dist/core.mjs';import {initializeExplorerState} from './dist/progress-transfer.mjs';import * as exchange from './dist/seed-exchange-core.mjs';const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;s.syntheticOther={held:'exact'};"+code+";console.log(JSON.stringify(s));"
@@ -213,7 +231,8 @@ if __name__=='__main__':
     persistence(browser,base,seed)
     edges(browser,base)
     bound_focus(browser,base,seed)
+    suggested_growth(browser,base,seed)
     ok(not errors,'no page, console or HTTP errors '+str(errors))
-    result={'checks':checks,'status':'passed','base':base,'scope':'Model/notes and real transfer journeys; refused drafts, route/explorer lifecycle and persistence included; historical and bounded-record edge cases included; reset included; hosted acceptance pending.'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
+    result={'checks':checks,'status':'passed','base':base,'scope':'Model/notes and real transfer journeys; refused drafts, route/explorer lifecycle and persistence included; historical and bounded-record edge cases included; reset and six-card actual suggested growth in all families included; hosted acceptance pending.'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
    finally:browser.close()
  finally:server.shutdown()

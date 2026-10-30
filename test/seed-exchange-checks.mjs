@@ -103,17 +103,25 @@ const huge={other:'x'.repeat(5*1024*1024)};before=JSON.stringify(huge);ok(startS
 function visit(size,serialValue,match=true,hint=false){const state={};startSeedExchange(state,{size});const w=clone(working(state));w.source=clone(makeSeedSource(serialValue,{size}));w.help.hint=hint;w.draft.groups=match?size:0;const recorded={seedExchange:{version:1,currentId:'exchange-1',nextSerial:2,visits:{'exchange-1':w}}};checkSeedExchange(recorded);return working(recorded);}
 // Use actual mutations to record each first response, not a fabricated success count.
 const a=visit(6,1,false),b=visit(4,2),c=visit(5,3),history={seedExchange:{version:1,currentId:'exchange-3',nextSerial:4,visits:{'exchange-1':a,'exchange-2':b,'exchange-3':c}}};
-equal(seedSuggestion(history,'apples'),{size:5,reason:'same',count:3},'older mismatch blocks increase but not access');
+equal(seedSuggestion(history,'apples'),{size:6,reason:'more'},'latest fitting current construction invites one larger quantity');
 const duplicate=clone(a);duplicate.checks=[];duplicate.draft.groups=6;const dstate={seedExchange:{version:1,currentId:'exchange-9',nextSerial:10,visits:{'exchange-9':duplicate}}};checkSeedExchange(dstate);history.seedExchange.visits['exchange-9']=working(dstate);history.seedExchange.nextSerial=10;
-equal(seedSuggestion(history,'apples'),{size:5,reason:'smaller',count:3},'new duplicate uses oldest retained first check');
+equal(seedSuggestion(history,'apples'),{size:6,reason:'more'},'current checked card takes precedence over newer sibling');
 ok(openSeedExchange(history,'exchange-1').ok,'old visit can reopen');
-equal(seedSuggestion(history,'apples'),{size:5,reason:'smaller',count:3},'reopen does not reorder creation history');
-ok(removeSeedExchange(history,'exchange-1',true).ok,'explicit deletion changes retained history');
-equal(seedSuggestion(history,'apples'),{size:7,reason:'more',count:3},'only retained checked representatives inform suggestion');
-equal(seedSuggestion(history,'nursery'),{size:1,reason:'new',count:0},'other families never inherit a level');
-const suggested=seedSuggestion(history,'apples');ok(startSeedExchange(history,{family:'apples',size:12}).ok&&working(history).source.size===12&&suggested.size!==12,'manual size overrides suggestion');
-const helped={seedExchange:{version:1,currentId:'exchange-1',nextSerial:2,visits:{'exchange-1':visit(4,1,true,true)}}};
-equal(seedSuggestion(helped,'apples'),{size:3,reason:'smaller',count:1},'first optional help suggests smaller supported work');
+equal(seedSuggestion(history,'apples'),{size:5,reason:'smaller'},'current older checked card can invite smaller quantities');
+const originalFirst=clone(working(history).checks[0]);setSeedMaterial(history,6);showSeedHelp(history,'hint');checkSeedExchange(history);
+equal(seedSuggestion(history,'apples'),{size:7,reason:'more'},'helped fitting retry can guide supported practice');equal(working(history).checks[0],originalFirst,'supported retry never reclassifies original mismatch');
+for(let i=0;i<4;i++)checkSeedExchange(history);
+equal(seedSuggestion(history,'apples'),{size:7,reason:'more'},'repeated checks never accumulate size increases');
+setSeedMaterial(history,0);equal(seedSuggestion(history,'apples'),{size:7,reason:'more'},'unchecked material does not invent a result');
+ok(removeSeedExchange(history,'exchange-1',true).ok,'explicit deletion changes retained fallback');
+equal(seedSuggestion(history,'apples'),{size:7,reason:'more'},'highest numeric retained checked sibling is fallback');
+equal(seedSuggestion(history,'nursery'),{size:1,reason:'new'},'other families never inherit a level');
+history.seedExchange.visits['exchange-10']=visit(4,10);history.seedExchange.nextSerial=11;equal(seedSuggestion(history,'apples'),{size:5,reason:'more'},'fallback sorts creation serial10 after9 numerically');
+const suggested=seedSuggestion(history,'apples');ok(startSeedExchange(history,{family:'apples',size:12}).ok&&working(history).source.size===12&&suggested.size!==12,'manual size overrides invitation');
+for(const family of ['apples','reed','nursery']){const state={},sizes=[];for(let i=0;i<6;i++){const k=seedSuggestion(state,family).size;sizes.push(k);startSeedExchange(state,{family,size:k});setSeedMaterial(state,k);checkSeedExchange(state);}equal(sizes,[1,2,3,4,5,6],'every family progresses through six suggested successes');equal(seedSuggestion(state,family),{size:7,reason:'more'},'every family has a reachable next invitation');}
+const ceiling={};startSeedExchange(ceiling,{family:'nursery',size:12});setSeedMaterial(ceiling,12);checkSeedExchange(ceiling);equal(seedSuggestion(ceiling,'nursery'),{size:12,reason:'same'},'upper boundary does not promise a larger unavailable size');
+const floor={};startSeedExchange(floor);checkSeedExchange(floor);equal(seedSuggestion(floor,'apples'),{size:1,reason:'same'},'lower boundary remains open');
+
 const identity={};startSeedExchange(identity,{size:3});const original=identity.seedExchange.visits['exchange-1'];identity.seedExchange.visits['exchange-4']=clone(original);identity.seedExchange.currentId='exchange-4';identity.seedExchange.nextSerial=5;
 ok(seedExchangeView(identity).familiar,'retained earlier matching source is familiar');removeSeedExchange(identity,'exchange-1',true);ok(!seedExchangeView(identity).familiar,'no lifetime novelty claim after removal');
 const oldList=seedCourierList(old,{groups:6});equal(oldList.map(x=>x.value),[24,42,2],'restored rules drive current courier quantities');
