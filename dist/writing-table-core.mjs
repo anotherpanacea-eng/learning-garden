@@ -2,6 +2,7 @@ import {taskSource,writingTasks} from './writing-table-content.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const own=(x,k)=>Object.hasOwn(x,k),clone=x=>structuredClone(x);
+const placed=(w,k)=>own(w.placements,k)?w.placements[k]:null;
 const id=x=>typeof x==='string'&&/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}$/.test(x);
 const text=x=>typeof x==='string'&&Array.from(x).length<=4000;
 const integer=(n,a,b)=>Number.isSafeInteger(n)&&n>=a&&n<=b;
@@ -26,7 +27,7 @@ export function validWritingWork(s,w){
  return s.kind==='break'?(w.boundary===null||p.slice(1).includes(w.boundary)):(w.choice===null||s.choices.some(x=>x.id===w.choice));
 }
 const help=h=>object(h)&&['hint','example','narration','together'].every(k=>typeof h[k]==='boolean');
-const validCheck=(s,c)=>object(c)&&validWritingWork(s,c.work)&&help(c.help)&&['fit','different','incomplete'].includes(c.outcome)&&c.supported===true&&c.guided===true&&Array.isArray(c.feedback)&&c.feedback.length<=13&&c.feedback.every(x=>typeof x==='string'&&Array.from(x).length<=16000);
+const validCheck=(s,c)=>object(c)&&validWritingWork(s,c.work)&&help(c.help)&&['fit','different','incomplete'].includes(c.outcome)&&c.supported===true&&c.guided===true&&Array.isArray(c.feedback)&&c.feedback.length<=14&&c.feedback.every(x=>typeof x==='string'&&Array.from(x).length<=16000);
 export const validWritingRecord=r=>object(r)&&validWritingSource(r.source)&&validWritingWork(r.source,r.work)&&help(r.help)&&Array.isArray(r.checks)&&r.checks.length<=24&&r.checks.every(c=>validCheck(r.source,c))&&integer(r.count,r.checks.length,1000000);
 export const validWritingSnapshot=(s,k)=>object(k)&&validWritingWork(s,k.work)&&help(k.help)&&(k.check===null||validCheck(s,k.check)&&sameWritingWork(k.work,k.check.work));
 const rootShape=r=>object(r)&&r.v===1&&object(r.records)&&Object.keys(r.records).length<=64&&typeof r.currentId==='string';
@@ -34,7 +35,7 @@ export function writingView(state){
  const r=state?.writingDesk;
  if(!state||!own(state,'writingDesk'))return {status:'new',record:null,records:[],familiar:false};
  if(!rootShape(r))return {status:'unsupported',record:null,records:[],familiar:false};
- const records=Object.entries(r.records).map(([key,value])=>({id:key,readable:validWritingRecord(value),title:validWritingRecord(value)?value.source.title:null}));
+ const records=Object.entries(r.records).map(([key,value])=>({id:key,readable:id(key)&&validWritingRecord(value),title:validWritingRecord(value)?value.source.title:null}));
  const record=own(r.records,r.currentId)&&validWritingRecord(r.records[r.currentId])?r.records[r.currentId]:null;
  const familiar=!!record&&Object.entries(r.records).some(([key,x])=>key!==r.currentId&&validWritingRecord(x)&&x.source.family===record.source.family);
  return {status:'ready',record,records,familiar};
@@ -70,7 +71,7 @@ export function setWritingMaterial(state,action,options){return edit(state,r=>{
  const s=r.source,w=r.work;if(!object(action))return fail('material');
  if(s.kind==='sort'){
   if(!s.parts.some(x=>x.id===action.strip)||action.heading!==null&&!s.choices.some(x=>x.id===action.heading))return fail('material');
-  if((w.placements[action.strip]??null)===action.heading)return {ok:true,changed:false};
+  if(placed(w,action.strip)===action.heading)return {ok:true,changed:false};
   w.placements[action.strip]=action.heading;
  }else if(s.kind==='order'){
   const at=w.order.indexOf(action.part),to=at+action.direction;
@@ -93,12 +94,14 @@ export function writingResult(s,w){
  if(!validWritingWork(s,w))return null;
  let outcome='different',feedback=[];
  if(s.kind==='sort'){
-  const pending=s.parts.filter(x=>!w.placements[x.id]);
-  outcome=pending.length?'incomplete':s.parts.every(x=>w.placements[x.id]===s.key[x.id])?'fit':'different';
-  for(const part of s.parts){const selected=w.placements[part.id];if(selected&&selected!==s.key[part.id])feedback.push(`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
+  const pending=s.parts.filter(x=>!placed(w,x.id));
+  outcome=pending.length?'incomplete':s.parts.every(x=>placed(w,x.id)===s.key[x.id])?'fit':'different';
+  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&selected!==s.key[part.id])feedback.push(`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
  }else if(s.kind==='order')outcome=same(w.order,s.key)?'fit':'different';
  else{const picked=s.kind==='break'?w.boundary:w.choice;outcome=picked===null?'incomplete':picked===s.key?'fit':'different';if(outcome==='different'&&own(s.feedback.different,picked))feedback.push(s.feedback.different[picked]);}
- feedback.unshift(outcome==='fit'?s.feedback.fit:outcome==='incomplete'?'Some parts are still waiting. You can keep this version or keep arranging.':s.feedback.general);
+ if(outcome==='fit')feedback.unshift(s.feedback.fit);
+ else if(outcome==='incomplete')feedback.unshift('Some parts are still waiting. You can keep this version or keep arranging.');
+ else{feedback.push(s.feedback.general);if(s.feedback.general!=='Your draft is still here. You can change it.')feedback.push('Your draft is still here. You can change it.');}
  return {outcome,feedback};
 }
 export function checkWritingTask(state,options){return edit(state,r=>{
@@ -113,7 +116,7 @@ export function keepWritingTask(state,options){return edit(state,r=>{
  },options);}
 export function sameWritingWork(a,b){
  if(!object(a)||!object(b))return false;
- if(own(a,'placements')||own(b,'placements'))return object(a.placements)&&object(b.placements)&&[...new Set([...Object.keys(a.placements),...Object.keys(b.placements)])].every(k=>(a.placements[k]??null)===(b.placements[k]??null));
+ if(own(a,'placements')||own(b,'placements'))return object(a.placements)&&object(b.placements)&&[...new Set([...Object.keys(a.placements),...Object.keys(b.placements)])].every(k=>placed(a,k)===placed(b,k));
  if(own(a,'order')||own(b,'order'))return Array.isArray(a.order)&&Array.isArray(b.order)&&same(a.order,b.order);
  if(own(a,'boundary')||own(b,'boundary'))return own(a,'boundary')&&own(b,'boundary')&&a.boundary===b.boundary;
  return own(a,'choice')&&own(b,'choice')&&a.choice===b.choice;
@@ -121,7 +124,7 @@ export function sameWritingWork(a,b){
 // No grading in previews: this always describes the exact supplied arrangement, including mistakes.
 export function writingPreview(s,w){
  if(!validWritingWork(s,w))return [];
- if(s.kind==='sort')return [...s.choices.map(h=>({heading:h.text,text:s.parts.filter(p=>w.placements[p.id]===h.id).map(p=>p.text).join(' ')})),{heading:'Waiting strips',text:s.parts.filter(p=>!w.placements[p.id]).map(p=>p.text).join(' ')}];
+ if(s.kind==='sort')return [...s.choices.map(h=>({heading:h.text,text:s.parts.filter(p=>placed(w,p.id)===h.id).map(p=>p.text).join(' ')})),{heading:'Waiting strips',text:s.parts.filter(p=>!placed(w,p.id)).map(p=>p.text).join(' ')}];
  if(s.kind==='order')return w.order.map(k=>({heading:'',text:s.parts.find(p=>p.id===k).text}));
  if(s.kind==='break'){
   const at=w.boundary===null?-1:s.parts.findIndex(p=>p.id===w.boundary);

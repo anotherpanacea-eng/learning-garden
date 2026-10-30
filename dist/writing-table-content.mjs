@@ -80,19 +80,19 @@ const questions=[
   family:'bakery',reader:'For visitors to Willowbank',choices:headings,prompt:'Which heading does this strip belong under?',hint:'Is it about what, when, or where?',steps:['Read the three headings.','Read the strip.','Which heading is it about?'],
   feedback:{fit:'Shut on Sundays tells you when to come. It goes with opening times.',different:{sale:"It doesn't say what you can buy.",finding:"It doesn't say where the bakery is."},general:'Read the heading. Is this sentence about that?'}}),
  task('a-break','choice','Where does the paragraph change?',noon,'four',{
-  family:'noon',prompt:'Where should a new paragraph start?',choices:[part('two','Before sentence 2'),part('three','Before sentence 3'),part('four','Before sentence 4')],hint:'Find where the time or the place changes.',
+  family:'noon',numbered:true,prompt:'Where should a new paragraph start?',choices:[part('two','Before sentence 2'),part('three','Before sentence 3'),part('four','Before sentence 4')],hint:'Find where the time or the place changes.',
   feedback:{fit:'“By noon” and “the square” change both time and place. New paragraph.',different:{two:'Still the post office, still dawn.',three:"Pip comes in, but it's the same place and time."},general:'Find where the time or the place changes.'}}),
  task('a-speaker','choice','Why start a new paragraph?',dialogue,'speaker',{
   family:'speaker',prompt:"Why does the baker's line start a new paragraph?",changes:'Both lines happen at the bakery counter, one after the other.',choices:[part('speaker','Someone new speaks'),part('time','The time has changed'),part('place','The place has changed')],hint:'Who says each line?',
   feedback:{fit:"It's a writing custom: in a story, each new speaker usually gets a new paragraph.",different:{time:'No time jumps. One line follows the other.',place:'Both are at the bakery counter.'},general:'Who says each line?'}}),
- task('b-time','choice','Which opener tells both?',[part('first','Dot sorts letters in the morning.'),part('next','Paragraph 2 happens at the same time, at the mill.')],'meanwhile',{
-  family:'same-time',prompt:'Which opener should start paragraph 2?',choices:opener1,hint:'Same time, new place. Which opener says both?',steps:['When does paragraph 2 happen?','Where?','Pick the opener that says both.'],
+ task('b-time','choice','Which opener tells both?',[part('first','Dot sorts letters in the morning.')],'meanwhile',{
+  family:'same-time',changes:'Paragraph 2 happens at the same time, at the mill.',prompt:'Which opener should start paragraph 2?',choices:opener1,hint:'Same time, new place. Which opener says both?',steps:['When does paragraph 2 happen?','Where?','Pick the opener that says both.'],
   feedback:{fit:'“Meanwhile” means at the same time. “At the mill” gives the new place.',different:{later:"It's the same morning, not later.",first:"That counts points. It doesn't tell time."},general:'Read when and where the next paragraph happens.'}}),
- task('b-place','choice','Which opener names the place?',[part('first','Pip ran onto Willow Bridge.'),part('next','Paragraph 2 is on the far side of the bridge.')],'place',{
-  family:'bridge',prompt:'Which opener moves the reader to the new place?',choices:opener2,hint:'Which opener names a place?',
+ task('b-place','choice','Which opener names the place?',[part('first','Pip ran onto Willow Bridge.')],'place',{
+  family:'bridge',changes:'Paragraph 2 is on the far side of the bridge.',prompt:'Which opener moves the reader to the new place?',choices:opener2,hint:'Which opener names a place?',
   feedback:{fit:'“Beyond the bridge” takes the reader across. It’s a place signpost.',different:{addition:"That adds a point. It doesn't say where.",contrast:"That's for a contrast, not a place."},general:'Which opener names a place?'}}),
- task('b-second','choice','Which opener counts the reasons?',[part('report',"Dot's report gives three reasons to visit the market. Paragraph 2 gives the second reason.")],'second',{
-  family:'second-reason',prompt:'Which opener starts paragraph 2?',choices:opener3,hint:'Which word counts?',
+ task('b-second','choice','Which opener counts the reasons?',[part('report',"Dot's report gives three reasons to visit the market.")],'second',{
+  family:'second-reason',changes:'Paragraph 2 gives the second reason.',prompt:'Which opener starts paragraph 2?',choices:opener3,hint:'Which word counts?',
   feedback:{fit:'“Secondly” tells the reader this is reason number two.',different:{place:"That's a place. The report is counting reasons.",time:"That's a time. The report is counting reasons."},general:'Which word counts?' }})
 ];
 const catalog=[bakery,day,...breaks,...joins,...questions];
