@@ -380,3 +380,11 @@ Future[154](specs/154-ramps-levers-hoist.md) must reuse/extend both305ramp and30
 ## The mill energy loop ·308 commission
 
 [308](specs/308-mill-energy-book.md) selects a bounded original operation from147: pour, grind, close the gate and follow rubbing into thermal accounting, with18open requests across8/12/16-chip batches, kept/current pictures and no stored learner result. Specification and physics review cleared; the original controllable table is now built with eighteen requests, pending independent implementation review and release. Actual32sfilm review found a tracking-marker/boundaryP1 plus caption/pourP2s; its whole-film correction/integration follows this operation and cannot be waived by the film's availability.147's four activities,29items, efficiency/source classification and save pack remain proposed, and must extend this route/controller where appropriate.123programming remains separate.
+
+## Consolidation stability repair · 2026-10-30
+
+The owner resumed building through November 2. The separate drafts PR254 (whole mill film) and PR255 (two-tab save safety and consolidation order) remain held pending an explicit decision to merge/deploy them. This maintenance slice branches from shipped main, without their runtime changes.
+
+Keep Lift Yard/lever, Ice and warmth, Sound Window and Switch Table styles in the document head across turns and film views, following the existing mill repair. Let native focus bring a restored control into view. A synthetic Chrome probe reproduced the Lift film problem: after opening the transcript, scrolling down and pressing Escape, Watch regained focus above the viewport at both 320 and 820 widths. This repair must retain the exact visit model, held comparisons and open disclosures across film return, with no notebook writes. Check styles, touch targets, Escape/Return focus, owner switches and surrounding layouts. Physical iPad Files, audio, VoiceOver, larger text and background/return remain a separate qualification task.
+
+Next ready consolidation work is the clearer Home entry hierarchy; short curriculum journeys and deeper existing loops follow the roadmap proposed in PR255. These are bounded commissions, not evidence of a completed curriculum.
