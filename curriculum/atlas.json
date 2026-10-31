@@ -930,6 +930,17 @@
         "build"
       ],
       "scope": "Sort twelve pictured objects by what each is and what it is made of, with a guided first card, ordered Check lines and a stuck ladder; predict, try and let go of squash, bend, twist and stretch on six authored samples. Simplified authored pictures; no real materials, measurements or particle explanations."
+    },
+    {
+      "id": "lost-found-board",
+      "name": "The Lost and Found Board",
+      "status": "built-local",
+      "route": "#post/lost-and-found",
+      "patterns": [
+        "search",
+        "read"
+      ],
+      "scope": "One logic-grid mystery, Who borrowed what?: sort what witnesses saw from what they think, mark a 3 by 3 grid or list from ordered clues, say whether the clues decide yet, and check an answer that names the first broken clue. Authored sentences and clues; no open-ended inquiry."
     }
   ],
   "manualReferences": [
@@ -1828,6 +1839,13 @@
       "kind": "scoped-practice",
       "source": "dist/mending-shed-content.mjs",
       "scope": "A predicted test on authored pictures: choose a sample and an action, predict springs back, keeps the new shape or hardly changes, then see the authored result. Real materials, measurement, property vocabulary and grouping are not observed."
+    },
+    {
+      "game": "lost-found-board",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "scoped-practice",
+      "source": "dist/lost-found-content.mjs",
+      "scope": "A supported sort of authored witness sentences into what was seen and what is thought, with Why? and a sort-for-me option. The child's own observations and field inquiry are not observed."
     }
   ],
   "increments": [

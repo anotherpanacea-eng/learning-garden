@@ -6,7 +6,7 @@ import {initializeExplorerState} from '../dist/progress-transfer.mjs';
 const url=process.env.ROUTE_HEADER_TEST_URL;
 if(!url)throw new Error('Serve dist locally and set ROUTE_HEADER_TEST_URL.');
 // Route and the nav destination it highlights; null highlights none. Inventory: docs/reviews/route-inventory-2026-10-31.md.
-const routes=[['#library/word-list',null],['#workshop/mending','#workshop'],['#library/copy',null],['#library/endings',null],['#library/spellings',null],['#almanac/beyond','#storm'],['#almanac/beyond/seeds','#storm'],['#almanac/both-ways','#storm'],['#almanac/the-ways','#storm'],['#desk/writing',null],['#desk/exchange',null],['#words/endings',null],['#words/props',null],['#journeys',null],
+const routes=[['#post/lost-and-found','#post'],['#library/word-list',null],['#workshop/mending','#workshop'],['#library/copy',null],['#library/endings',null],['#library/spellings',null],['#almanac/beyond','#storm'],['#almanac/beyond/seeds','#storm'],['#almanac/both-ways','#storm'],['#almanac/the-ways','#storm'],['#desk/writing',null],['#desk/exchange',null],['#words/endings',null],['#words/props',null],['#journeys',null],
  ['#workshop/old-map','#workshop'],['#mill/energy','#workshop'],['#workshop/lift','#workshop'],['#studio/sound-window',null],
  ['#workshop/switch-table','#workshop'],['#science/ice','#science'],['#post/ferry','#post'],['#post/manifest','#post'],['#workshop/hinge','#workshop'],
  ['#workshop/copy-frame','#workshop'],['#workshop/ribbon-measures','#workshop'],['#workshop/same-ground','#workshop'],
