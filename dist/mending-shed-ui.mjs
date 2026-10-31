@@ -56,7 +56,7 @@ function pileBench(v,l,readOnly){
  const list=`<div class="ms-cards" role="group" aria-label="${esc(T.pileEntry)}">${v.cards.filter(x=>x.content||x.record||x.status==='unreadable').map(x=>button('card',`${cardPicture(x.content,'')}<span>${esc(x.label)}</span>`,`data-ms-card="${esc(x.id)}" aria-pressed="${x.id===c.id}"`,false,'ms-card')).join('')}</div>`;
  let body;
  if(c.status==='unreadable')body=p(T.unreadable,'ms-unavailable');
- else if(readOnly||!c.editable)body=`${cardPicture(c.content,c.label)}${keptRows(c)}`;
+ else if(readOnly||!c.editable)body=`${cardPicture(c.content,c.label)}${c.record?`<ul class="ms-kept-tray">${c.record.tray.map(x=>`<li>${esc(x.label)}</li>`).join('')}</ul>`:''}${keptRows(c)}`;
  else{
   const w=workOf(l,c.id),byId=Object.fromEntries(c.tray.map(x=>[x.id,x])),placed=new Set([w.object,...w.materials].filter(Boolean));
   const placedChip=(id,row)=>button('lift',esc(byId[id].label),`data-ms-chip="${esc(id)}" aria-label="${esc(T.placed.replace('{chip}',byId[id].label).replace('{row}',row))}"`);
@@ -70,10 +70,12 @@ function pileBench(v,l,readOnly){
 function shapesBench(v,l,readOnly){
  const s=samples.find(x=>x.id===l.sample),a=actions.find(x=>x.id===l.action),pick=(kind,list,cur)=>`<div class="ms-choices" role="group" aria-label="${esc(kind)}">${list.map(x=>button(kind,esc(x.label),`data-ms-id="${esc(x.id)}" aria-pressed="${x.id===cur}"`,readOnly)).join('')}</div>`;
  const row=v.samples.find(x=>x.id===l.sample),cell=row?.cells[l.action],editable=!readOnly&&!!cell?.editable;
- const stage=l.shown?l.shown.shown.id==='snaps'?'snaps':l.shown.shown.id==='keeps'?l.action:'rest':l.tried?l.action:'rest';
- const shownText=l.shown?`<div class="ms-result" id="ms-result" tabindex="-1">${p(l.shown.result)}${p(l.shown.prediction)}</div>`:'';
+ const seen=l.shown??(l.tried?null:cell?.record?.latest),stage=l.tried?l.action:seen?seen.shown.id==='snaps'?'snaps':seen.shown.id==='keeps'?l.action:'rest':'rest';
+ const lastTry=l.shown??(l.tried?null:cell?.record?.latest),shownText=lastTry?`<div class="ms-result" id="ms-result" tabindex="-1">${p(lastTry.result)}${p(lastTry.prediction)}</div>`:'';
  const grid=`<div class="ms-grid-wrap" tabindex="0" role="region" aria-label="${esc(T.shapesEntry)}"><table class="ms-grid"><thead><tr><th scope="col"></th>${v.actions.map(x=>`<th scope="col">${esc(x.label)}</th>`).join('')}</tr></thead><tbody>${v.samples.filter(x=>x.content||Object.values(x.cells).some(c=>c.record||c.status==='unreadable')).map(x=>`<tr><th scope="row">${esc(x.label)}</th>${v.actions.map(a=>{const c=x.cells[a.id];return `<td>${c.status==='unreadable'?esc(T.unreadable):esc(c.record?.latest?.shown?.label??'')}</td>`;}).join('')}</tr>`).join('')}</tbody></table></div>`;
- return `<section class="ms-bench" data-ms-bench-view="shapes"><h2 id="ms-task" tabindex="-1">${esc(T.shapesEntry)}</h2>${p(T.shapesPrompt)}${pick('sample',samples,l.sample)}${l.sample==='willow-rod'?p(T.willowNote,'ms-note'):''}${pick('action',actions,l.action)}${pick('predict',predictChips,l.predict)}${cell?.status==='unreadable'?p(T.unreadable,'ms-unavailable'):''}<div class="ms-stage">${samplePicture(s,stage,s?.label??'')}</div><div class="ms-actions">${button('try',esc(T.tryIt),'',!editable||!l.predict||l.tried,'primary')}${button('let-go',esc(T.letGo),'',!editable||!l.tried,'primary')}</div>${shownText}${ladder('shapes',`${l.sample}/${l.action}`,l,!editable)}${grid}</section>`;
+ const gone=v.samples.flatMap(x=>v.actions.map(a=>({x,a,c:x.cells[a.id]}))).filter(({x,a,c})=>c.record?.latest&&(!x.content||!a.content));
+ const goneList=gone.length?`<ul class="ms-kept-tries">${gone.map(({x,a,c})=>`<li><strong>${esc(x.label)} · ${esc(a.label)}</strong>: ${esc(c.record.latest.result)} ${esc(c.record.latest.prediction)}</li>`).join('')}</ul>`:'';
+ return `<section class="ms-bench" data-ms-bench-view="shapes"><h2 id="ms-task" tabindex="-1">${esc(T.shapesEntry)}</h2>${p(T.shapesPrompt)}${pick('sample',samples,l.sample)}${l.sample==='willow-rod'?p(T.willowNote,'ms-note'):''}${pick('action',actions,l.action)}${pick('predict',predictChips,l.predict)}${cell?.status==='unreadable'?p(T.unreadable,'ms-unavailable'):''}<div class="ms-stage">${samplePicture(s,stage,s?.label??'')}</div><div class="ms-actions">${button('try',esc(T.tryIt),'',!editable||!l.predict||l.tried,'primary')}${button('let-go',esc(T.letGo),'',!editable||!l.tried,'primary')}</div>${shownText}${ladder('shapes',`${l.sample}/${l.action}`,l,!editable)}${grid}${goneList}</section>`;
 }
 export const mendingShedEntry=()=>`<a href="${ROUTE}">${esc(T.title)}</a>`;
 export function mendingShedPage(state,owner=''){

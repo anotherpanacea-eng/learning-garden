@@ -40,3 +40,4 @@
 .ms-shed .back{display:inline-flex;align-items:center;min-height:44px}
 .ms-shed summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
 .ms-notice a{display:inline-flex;align-items:center;min-height:44px}
+.ms-kept-tray{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0}.ms-kept-tray li{border:1px solid #8a7b5c;border-radius:6px;padding:4px 8px}

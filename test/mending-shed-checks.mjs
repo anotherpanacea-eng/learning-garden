@@ -1,6 +1,8 @@
 // Spec 332: Mending Shed rules, saved evidence, drift, validation and real Notes preflight.
 import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
+import {readFileSync} from 'node:fs';
+import {MAX_IMPORT_BYTES} from '../dist/progress-limits.mjs';
 import {freshState} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
 import * as K from '../dist/mending-shed-content.mjs';
@@ -113,6 +115,33 @@ export function runChecks(){
  const y=fresh();y.mendingShed={v:1,pile:'x'};eq(M.mendingShedView(y).pileStatus,'unreadable');refused(y,()=>M.checkMendingCard(y,'spoon',{object:'spoon',materials:['wood']},options));yes(M.letGoMendingShape(y,'rope','bend','keeps',options));eq(y.mendingShed.pile,'x');
  // Preflight: refusal is atomic and covers support writes.
  const z=fresh();const no={canExport:()=>false};refused(z,()=>M.checkMendingCard(z,'spoon',{object:'spoon',materials:['wood']},no));refused(z,()=>M.supportMending(z,{bench:'pile',card:'spoon'},no));refused(z,()=>M.startMendingBench(z,'shapes',no));ok(!Object.hasOwn(z,'mendingShed'));
+
+ // Every shipped line is on the 332 copy sheet; every line the sheet marks 167 is in 167's companion.
+ const flat=f=>readFileSync(new URL(f,import.meta.url),'utf8').replace(/\*/g,'');const sheet332=flat('../docs/content/332-mending-shed-first-slice-text.md'),sheet167=flat('../docs/content/167-mending-shed-text.md');
+ const T=K.mendingCopy,strings=[...Object.entries(T).filter(([k])=>k!=='grownUpLine').flatMap(([,x])=>Array.isArray(x)?x:[x]),...Object.values(K.teachCards).flatMap(c=>[c.text,c.example,...c.steps]),...Object.values(K.ladderExamples).flatMap(e=>[e.title,e.body,e.start]),...Object.values(K.checkLines),...Object.values(K.resultLines),...Object.values(K.chips).map(c=>c.label),...K.samples.map(x=>x.label),...K.actions.map(x=>x.label),...K.predictChips.map(x=>x.label),...K.pileCards.map(c=>c.label)];
+ for(const line of strings)ok(sheet332.includes(line)||T.guidedSteps.join(' ')===line,'332 copy sheet: '+line);
+ ok(sheet332.includes('Mending Shed: {n} of 12 things sorted; {m} of 24 shape tests tried{, with help}.'),'grown-up line on the sheet');
+ for(const line of [...T.firstVisit,T.laterVisit,T.simplified,K.teachCards.pile.text,...K.teachCards.pile.steps,K.teachCards.shapes.text,...K.teachCards.shapes.steps,T.pilePrompt,T.rowObject,T.rowMaterials,T.multiNote,K.checkLines.materialInObject,K.checkLines.missingMaterial,'"Bucket" is what it is. What is it made of?',T.shapesPrompt,...K.predictChips.map(x=>x.label),T.matched,T.surprise,T.willowNote,...K.samples.map(x=>x.label),K.resultLines.snaps,...Object.values(K.ladderExamples).flatMap(e=>[e.title,e.body,e.start])])ok(sheet167.includes(line),'167 companion: '+line);
+ // Precedence when several conditions apply, and {Object} on every object chip.
+ const pc=(card,object,materials)=>{const c=K.pileCards.find(x=>x.id===card);return M.mendingCheck(c,c.tray.map(k=>({id:k,label:K.chips[k].label})),{object,materials}).line.id;};
+ eq(pc('metal-bucket','metal',['bucket']),'object-in-materials');eq(pc('metal-bucket','wood',[]),'material-in-object');eq(pc('metal-bucket','spoon',['wood']),'wrong-object');eq(pc('metal-bucket',null,['glass']),'object-empty');
+ eq(pc('lantern','lantern',['plastic']),'wrong-material');eq(pc('lantern','lantern',['plastic','metal','glass','cotton']),'wrong-material');eq(pc('wooden-bucket','bucket',['metal']),'missing-material');
+ for(const c of K.pileCards){const tray=c.tray.map(k=>({id:k,label:K.chips[k].label}));eq(M.mendingCheck(c,tray,{object:null,materials:[c.object]}).line.text,`"${K.chips[c.object].label[0].toUpperCase()+K.chips[c.object].label.slice(1)}" is what it is. What is it made of?`);}
+ eq(M.mendingCheck(K.pileCards.find(c=>c.id==='mailbag'),K.pileCards.find(c=>c.id==='mailbag').tray.map(k=>({id:k,label:K.chips[k].label})),{object:null,materials:['mailbag']}).line.text,`"Dot's mailbag" is what it is. What is it made of?`);
+ // Refusals: Let go, the real capacity limit and an existing notebook.
+ const q=fresh();check(q,'spoon','spoon',['wood']);yes(M.letGoMendingShape(q,'rope','bend','keeps',options));const no2={canExport:()=>false};
+ refused(q,()=>M.letGoMendingShape(q,'rope','bend','keeps',no2));refused(q,()=>M.checkMendingCard(q,'spoon',{object:'spoon',materials:['wood']},no2));refused(q,()=>M.supportMending(q,{bench:'shapes',sample:'rope',action:'bend'},no2));
+ q.filler='x'.repeat(MAX_IMPORT_BYTES);refused(q,()=>M.checkMendingCard(q,'spoon',{object:'spoon',materials:['wood']},options));eq(M.checkMendingCard(q,'spoon',{object:'spoon',materials:['wood']},options).error,'capacity');refused(q,()=>M.letGoMendingShape(q,'rope','bend','keeps',options));
+ // Saturation updates at and keeps first on a shape cell.
+ const sat=fresh();yes(M.letGoMendingShape(sat,'sponge','squash','keeps',options));const cellS=sat.mendingShed.shapes.sponge.actions.squash,firstS=clone(cellS.first);cellS.tries=9999;cellS.at='2000-01-01T00:00:00.000Z';yes(M.letGoMendingShape(sat,'sponge','squash','springs',options));
+ eq([sat.mendingShed.shapes.sponge.actions.squash.tries,sat.mendingShed.shapes.sponge.actions.squash.first],[9999,firstS]);ok(sat.mendingShed.shapes.sponge.actions.squash.at!=='2000-01-01T00:00:00.000Z','at moves at the cap');
+ const satP=fresh();check(satP,'rope','rope',['metal']);satP.mendingShed.pile.rope.checks=9999;satP.mendingShed.pile.rope.at='2000-01-01T00:00:00.000Z';check(satP,'rope','rope',['metal']);ok(satP.mendingShed.pile.rope.at!=='2000-01-01T00:00:00.000Z');eq(satP.mendingShed.pile.rope.sortedCheck,null);
+ // Saved keys outside [a-z0-9-]{1,40} are unreadable and kept raw.
+ const bad=fresh();check(bad,'spoon','spoon',['wood']);bad.mendingShed.pile.SPOON=clone(bad.mendingShed.pile.spoon);bad.mendingShed.shapes={INVALID:{sample:'Clay',actions:{squash:{action:'Squash',first:null,latest:null,tries:0,supported:false,at:'x'}}},clay:{sample:'Clay',actions:{'Bad Key':{action:'Odd',first:null,latest:null,tries:0,supported:false,at:'x'}}}};
+ const badRaw=clone(bad.mendingShed);v=M.mendingShedView(bad);eq(v.cards.find(x=>x.id==='SPOON').status,'unreadable');eq(v.samples.find(x=>x.id==='INVALID').status,'unreadable');eq(v.samples.find(x=>x.id==='INVALID').cells.squash.status,'unreadable');eq(v.samples.find(x=>x.id==='clay').cells['Bad Key'].status,'unreadable');
+ yes(M.letGoMendingShape(bad,'clay','squash','keeps',options));eq(bad.mendingShed.pile.SPOON,badRaw.pile.SPOON);eq(bad.mendingShed.shapes.INVALID,badRaw.shapes.INVALID);eq(bad.mendingShed.shapes.clay.actions['Bad Key'],badRaw.shapes.clay.actions['Bad Key']);
+ // Export and import carry the root exactly, with unreadable entries and unknown siblings.
+ d.mendingShed.extra={later:[1,2]};const imported=prepareProgressImport(JSON.stringify(report(d),null,2));ok(imported.ok);eq(imported.state.mendingShed,d.mendingShed,'import keeps the root exactly');
  // The root travels through the real Notes import.
  const back=prepareProgressImport(JSON.stringify(report(s),null,2));ok(back.ok);
  return n;

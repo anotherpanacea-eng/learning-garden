@@ -44,7 +44,7 @@ export function mendingShedView(state){
  const cardIds=[...pileCards.map(c=>c.id),...Object.keys(pile).filter(k=>!pileCards.some(c=>c.id===k))];
  const cards=cardIds.map(key=>{
   const content=pileCards.find(c=>c.id===key)??null,kept=own(pile,key),raw=kept?pile[key]:null;
-  const status=pileStatus!=='ready'?'unreadable':!kept?'new':validPileRecord(raw)?'ready':'unreadable',record=status==='ready'?raw:null;
+  const status=pileStatus!=='ready'||!id(key)?'unreadable':!kept?'new':validPileRecord(raw)?'ready':'unreadable',record=status==='ready'?raw:null;
   const editable=pileStatus==='ready'&&status!=='unreadable'&&checkable(content,record);
   return {id:key,content,status,record,raw,label:record?record.card:content?.label??key,tray:record?record.tray:content?contentTray(content):[],editable,sorted:!!record?.sortedCheck,guided:key==='metal-bucket'};
  });
@@ -53,12 +53,12 @@ export function mendingShedView(state){
  for(const k of sampleIds){const s=shapes[k];if(validSample(s))for(const a of Object.keys(s.actions))if(!actionIds.includes(a))actionIds.push(a);}
  const cellOf=(sid,aid)=>{
   const content=samples.find(s=>s.id===sid)&&actions.find(a=>a.id===aid),sr=own(shapes,sid)?shapes[sid]:undefined;
-  if(sr!==undefined&&!validSample(sr))return {status:'unreadable',record:null,editable:false};
+  if(sr!==undefined&&(!validSample(sr)||!id(sid))||!id(aid))return {status:'unreadable',record:null,editable:false};
   const kept=sr!==undefined&&own(sr.actions,aid),raw=kept?sr.actions[aid]:null,status=shapesStatus!=='ready'?'unreadable':!kept?'new':validShapeCell(raw)?'ready':'unreadable';
   return {status,record:status==='ready'?raw:null,editable:shapesStatus==='ready'&&status!=='unreadable'&&!!content,actionLabel:status==='ready'?raw.action:null};
  };
  const sampleRows=sampleIds.map(sid=>{const content=samples.find(s=>s.id===sid)??null,sr=shapes[sid],kept=validSample(sr);
-  return {id:sid,content,label:kept?sr.sample:content?.label??sid,status:own(shapes,sid)&&!kept?'unreadable':'ready',cells:Object.fromEntries(actionIds.map(a=>[a,cellOf(sid,a)]))};});
+  return {id:sid,content,label:kept?sr.sample:content?.label??sid,status:own(shapes,sid)&&(!kept||!id(sid))?'unreadable':'ready',cells:Object.fromEntries(actionIds.map(a=>[a,cellOf(sid,a)]))};});
  const actionRows=actionIds.map(aid=>{const content=actions.find(a=>a.id===aid)??null;let kept=null;for(const s of sampleRows)if(s.cells[aid].actionLabel){kept=s.cells[aid].actionLabel;break;}return {id:aid,content,label:kept??content?.label??aid};});
  const sorted=cards.filter(c=>c.content&&c.sorted).length;
  const tried=sampleRows.filter(s=>s.content).reduce((n,s)=>n+actions.filter(a=>s.cells[a.id].record?.tries>0).length,0);
