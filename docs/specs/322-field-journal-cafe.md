@@ -60,7 +60,9 @@ As spec 244 §7, confirmed:
 
 ## 6. Home parcel area
 
-No markup or text change. Under `:root[data-style="field-journal"]`, `.keeper-home` and `.keeper-invitation` get a ruled left margin, two tape strips (CSS pseudo-elements, decorative) and a paper luggage tag on the existing parcel art, drawn by CSS or a decorative inline SVG with `aria-hidden="true"`. The parcel scene, **Keep it safe**, the reminder and Keeper's Pages text stay identical. The tag carries no words.
+No markup or text change. Under `:root[data-style="field-journal"]`, `.keeper-home` and `.keeper-invitation` get a ruled left margin, two tape strips and a paper luggage tag on the existing parcel art. All three are CSS only: pseudo-elements and a decorative CSS background image, so no element is added and nothing reaches assistive technology. The parcel scene, **Keep it safe**, the reminder and Keeper's Pages text stay identical. The tag carries no words.
+
+The Keeper invitation that `app.mjs` appends below the Café hub uses the same `.keeper-invitation` rules, so it takes the same chrome wherever it appears. That is intended: it is the parcel's own invitation, and one rule per class keeps upkeep small. Act II invitations and every other Keeper's Pages or almanac surface keep Storybook chrome until their surface joins Field Journal in phase 3.
 
 ## 7. The choice in Grown-up notes
 
