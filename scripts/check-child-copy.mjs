@@ -47,6 +47,14 @@ export const copyScopes = [
     {start:" visit:'", end:" widthLock:'", reason:'Shown only in the For grown-ups panel.'},
     {start:" grownup:'", end:'export const groundCase=', reason:'Shown only in the For grown-ups panel.'},
   ], quotations:[]},
+  {path:'dist/copy-frame-content.mjs', adultBlocks:[
+    {start:" grownup:'", end:'});', reason:'Shown only in the For grown-ups panel.'},
+  ], quotations:[]},
+  {path:'dist/copy-frame-ui.mjs', adultBlocks:[], quotations:[]},
+  {path:'dist/ferry-content.mjs', adultBlocks:[
+    {start:'"parent": "', end:'"table": "', reason:'Shown only in the For grown-ups panel.'},
+  ], quotations:[]},
+  {path:'dist/ferry-ui.mjs', adultBlocks:[], quotations:[]},
   {path:'dist/common-cuts-ui.mjs', adultBlocks:[], quotations:[]},
   {path:'dist/common-cuts-content.mjs', adultBlocks:[
     {start:"grownUp:'", end:' exampleLabel:', reason:'Shown only in the For grown-ups panel.'},
