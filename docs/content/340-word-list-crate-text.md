@@ -108,7 +108,7 @@ Zero-based authored marked indices: separate4,5,6; business0,1,2; island2,3,4,5;
 
 ## D1–D4 market notices
 
-Every job: kind choice, contextLabel **A story from Willowbank**, no root tag. Each has stored hint/example/teach/pictureId/pictureAlt, explanation and per-choice feedback. Correct choices use the explanation. Distractor tags are internal descriptions, not diagnoses. All supplied choices stay in their stored order. Each job's easier example: **Try this one first: eight and weight share eigh. Read the letters slowly with someone. Now look for a clue in your notice.**
+Every job: kind choice, contextLabel **A story from Willowbank**, no root tag. Each has stored hint/example/teach/pictureId/pictureAlt, explanation and per-choice feedback. Correct choices use the explanation. Distractor tags are internal descriptions, not diagnoses. All supplied choices stay in their stored order. Each job stores its own easier example, listed below. The examples are optional support, not a second assessment.
 
 | Id / Title | Prompt | Choices in order (key marked) | Picture / text alternative | Hint | Explanation | Teach |
 | --- | --- | --- | --- | --- | --- | --- |
