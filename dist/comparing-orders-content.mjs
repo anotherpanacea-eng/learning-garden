@@ -18,7 +18,7 @@ const text=Object.freeze({
  compareBoth:'All counters in both crates together',compareExtra:"Pip's extra counters compared with Dot's crate",compareRemaining:'Counters left after Pip returned some',
  returnExtra:"The gap between Pip's and Dot's separate crates",returnStart:'All counters Pip started with',returnRemaining:"Counters still on Pip's table after the return",
  syntax:'Enter a whole number from 0 to 99 using digits, then choose what it counts. You can revise or keep a draft.',
- numberMatch:'Your number matches the supplied result: 23 − 11 = 12.',numberDifferent:'Your number differs from the supplied result: 23 − 11 = 12. You can revise or keep it.',
+ numberMatch:'Your number matches: 23 − 11 = 12.',numberDifferent:'Your number is different from 23 − 11 = 12. You can revise or keep it.',
  compareMeaning:"Here, 12 counts Pip's extra counters compared with Dot's crate. Matching did not take any counters away.",
  returnMeaning:"Here, 12 counts the counters still on Pip's table after 11 moved to the store tray.",
  meaningMatch:'Your chosen meaning fits this story.',meaningDifferent:'Your chosen meaning describes a different story.',
