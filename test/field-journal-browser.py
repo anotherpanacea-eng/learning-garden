@@ -63,7 +63,7 @@ def cafe_record(p):
     return h.book(p).get('cafe')
 
 
-HELP = ".cafe-game .hear-button,.cafe-game .cafe-help button,.cafe-game .cafe-help summary,.cafe-game .cafe-stage-skip button"
+HELP = ".cafe-game .hear-button,.cafe-game [data-cafe-action=\"help\"],.cafe-game .cafe-help button,.cafe-game .cafe-help summary,.cafe-game .cafe-stage-skip button"
 
 
 def help_controls(p):
@@ -133,7 +133,7 @@ def main():
     # The base revision's own build, for spec 322 §8 browser item 1.
     main_base = os.environ.get('FIELD_JOURNAL_MAIN_URL')
     if not main_base:
-        rev = os.environ.get('FIELD_JOURNAL_MAIN_REV') or subprocess.check_output(['git', 'merge-base', 'HEAD', 'origin/main'], cwd=ROOT, text=True).strip()
+        rev = os.environ.get('FIELD_JOURNAL_MAIN_REV') or 'origin/main'
         tmp = Path(tempfile.mkdtemp(prefix='field-journal-main-'))
         archive = subprocess.run(['git', 'archive', rev, 'dist'], cwd=ROOT, check=True, capture_output=True).stdout
         subprocess.run(['tar', '-x', '-C', str(tmp)], input=archive, check=True)
@@ -221,6 +221,23 @@ def main():
                 ok(all(x['h'] >= 44 for x in fj_help), 'help controls stay 44 px')
                 ok(overlaps(fj_help) is None, 'help controls do not overlap: ' + str(overlaps(fj_help)))
                 ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), 'no horizontal overflow in the café')
+                # 9, continued: before any attempt the help trigger shows; compare it, then the support it opens, in both looks.
+                looks = {}
+                for look in ['storybook', 'field-journal']:
+                    ctx, q = h.setup(browser, width, dict(seeds['total'], garden=dict(seeds['total']['garden'], style=look)), f'help-{look}-{width}')
+                    go(q, base, '#cafe', '[data-cafe-view]')
+                    closed = help_controls(q)
+                    h.click(q, '[data-cafe-action="help"]')
+                    q.wait_for_function("!document.querySelector('[data-cafe-action=\"help\"]')")
+                    looks[look] = (closed, help_controls(q))
+                    ctx.close()
+                shape = lambda xs: [(x['text'], x['w'], x['h'], x['color'], x['bg']) for x in xs]
+                ok('Count the plates together' in [x['text'] for x in looks['field-journal'][0]], 'the help trigger is compared')
+                ok(shape(looks['field-journal'][0]) == shape(looks['storybook'][0]), 'help trigger and its neighbours match in both looks')
+                ok(shape(looks['field-journal'][1]) == shape(looks['storybook'][1]), 'opened support matches in both looks: ' + str([x['text'] for x in looks['field-journal'][1]]))
+                for look, (closed, opened) in looks.items():
+                    ok(all(x['h'] >= 44 for x in closed + opened), f'help controls stay 44 px in {look}')
+                    ok(overlaps(closed) is None and overlaps(opened) is None, f'help controls do not overlap in {look}')
 
                 # 4. Serve a real order in Field Journal: the variant thanks and the still stamp.
                 ready_ctx, q = h.setup(browser, width, dict(seeds['ready'], garden=dict(seeds['ready']['garden'], style='field-journal')), f'serve-{width}')
@@ -245,10 +262,22 @@ def main():
                     h.click(p, '#progress-import-confirm')
                     p.locator('#progress-import-status').wait_for()
                     ok('separate explorer' in p.locator('#progress-import-status').inner_text(), 'import is a separate explorer')
+                # Reset first, as §8 item 6 asks: the cleared explorer shows Storybook.
+                go(p, base, '#notes', '#reset')
+                h.click(p, '#reset')
+                p.locator('dialog[open] #confirm-reset').click()
+                # A cleared explorer sees the welcome film again; skip it with its own control.
+                p.locator('[data-film-skip]').first.wait_for()
+                p.locator('[data-film-skip]').first.click()
+                p.wait_for_function("!document.querySelector('dialog[open]')")
+                go(p, base, '#cafe', '[data-cafe-view]')
+                ok(root_style(p) is None and (h.book(p).get('garden') or {}).get('style') is None, 'reset clears the look')
                 bring(exported, 'synthetic-fj.json')
                 ok(h.active(p) != first, 'the imported explorer is active')
                 go(p, base, '#cafe', '[data-cafe-view]')
-                ok(root_style(p) == 'field-journal', 'the imported explorer keeps the look')
+                ok(root_style(p) == 'field-journal', 'the look returns with the import')
+                # The cleared explorer no longer holds the look, so the switching checks follow the imported one.
+                first = h.active(p)
                 mystery = dict(exported)
                 mystery['garden'] = dict(exported['garden'], style='mystery')
                 bring(mystery, 'synthetic-mystery.json')
