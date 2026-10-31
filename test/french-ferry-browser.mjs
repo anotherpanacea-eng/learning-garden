@@ -57,6 +57,21 @@ try{
   await p.goto(url+'#bac/extra');await p.waitForTimeout(200);ok(await p.locator('[data-bac-root]').count()===0,'a suffixed hash is not the crossing');
   // The older Ferry Deck keeps its own root and styles.
   await p.goto(url+'#post/ferry');await p.locator('[data-ferry-root]').first().waitFor();ok(await p.locator('[data-bac-root]').count()===0,'Ferry Deck page is separate');await c.close();}
+ // With a local French voice: Hear records a listen, speech start records speechStarted, and later writes still save.
+ {const c=await browser.newContext({viewport:{width:820,height:1000}});
+  await c.addInitScript(()=>{const voice={name:'Stub français',lang:'fr-FR',localService:true,voiceURI:'stub-fr',default:false};
+   window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};
+   const synth={speaking:false,pending:false,paused:false,onvoiceschanged:null,getVoices:()=>[voice],cancel(){},pause(){},resume(){},addEventListener(){},removeEventListener(){},speak(u){window.__spoken=(window.__spoken||0)+1;setTimeout(()=>u.onstart?.(),0);}};
+   Object.defineProperty(window,'speechSynthesis',{configurable:true,get:()=>synth});});
+  const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto(url+'#bac');await p.locator('[data-bac-root]').waitFor();
+  await act(p,'open-morning').click();await p.locator('#bac-crossing-title').waitFor();
+  ok(await p.locator('.bac-crossing .bac-novoice').count()===0,'voice: no no-voice notice');ok(await p.locator('.bac-crossing .bac-hidden').count()===1,'voice: her words start hidden');
+  await p.locator('[data-bac-her="0"]').click();await p.waitForFunction(()=>window.__spoken>=1);
+  await p.waitForFunction(()=>{const id=JSON.parse(localStorage.getItem('learning-garden-explorers')||'{}').activeId||'explorer-1';const b=JSON.parse(localStorage.getItem('number-garden-v1:'+id)||'{}');return b.frenchFerry?.crossings?.morning?.steps?.[0]?.speechStarted===true;});
+  let s=(await book(p)).frenchFerry.crossings.morning.steps[0];ok(s.listens>=1,'voice: Hear records a listen');ok(s.speechStarted===true,'voice: speech start recorded with her words hidden');
+  await act(p,'meaning').click();await p.locator('.bac-crossing .bac-gloss').first().waitFor();s=(await book(p)).frenchFerry.crossings.morning.steps[0];ok(s.meaning===true&&s.speechStarted===true,'voice: a later support write still saves after speech start');
+  await p.locator(`[data-bac-card="${morning.steps[0].fit}"]`).click();await p.locator('.bac-fit').waitFor();ok((await book(p)).frenchFerry.crossings.morning.steps[0].fitted,'voice: the answer after speech start saves');
+  ok(errors.length===0,`voice: no page errors (${errors.join('; ')})`);await c.close();}
  // Unknown version: read-only page, nothing written.
  {const seed=freshState();seed.frenchFerry={v:9,later:true};const c=await browser.newContext();await c.addInitScript(s=>{if(!localStorage.getItem('learning-garden-explorers'))localStorage.setItem('number-garden-v1',JSON.stringify(s));},seed);const p=await c.newPage();await p.goto(url+'#bac');await p.locator('[data-bac-root]').waitFor();
   ok(await p.locator('[data-bac-action^="open-"]').count()===0,'no crossing controls for an unknown version');eq((await book(p)).frenchFerry,{v:9,later:true},'unknown root kept exactly');await c.close();}
