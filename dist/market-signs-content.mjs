@@ -2035,3 +2035,602 @@ export const marketPatternCopy=Object.freeze({
   "keptItemLabel": "{title} + {family} + {letters}"
 });
 export function marketPatternCollection(){return structuredClone(patternInitial);}
+
+// Spec340: original visible-letter collection, not phonics or recall assessment.
+const crateInitial=Object.freeze({
+  "v": 1,
+  "id": "market-word-list-crate",
+  "title": "The Word-List Crate",
+  "copy": {
+    "incomplete": "Some words are not in a crate yet. Keep this arrangement or try another clue.",
+    "discussion": "Some choices have another story. Talk about your clues, or try another arrangement.",
+    "listedSummary": "Each placed word follows a printed clue in this collection. You can still find another arrangement.",
+    "partialIncomplete": "In the readable part, some words are not in a crate yet. Earlier material stays in Notes.",
+    "partialDiscussion": "In the readable part, some choices have another story. Earlier material stays in Notes.",
+    "partialListed": "The readable placements follow printed clues. Earlier material stays in Notes.",
+    "partial": "This shows the readable part of your earlier collection. Nothing has been removed from Notes.",
+    "listed": "A listed letter clue.",
+    "discuss": "This crate has a different clue. What connection did you notice?",
+    "unplaced": "This word is not in a crate yet."
+  },
+  "trays": [
+    {
+      "id": "eigh",
+      "label": "eigh",
+      "description": "Find e, i, g, h together."
+    },
+    {
+      "id": "ough",
+      "label": "ough",
+      "description": "Find o, u, g, h together."
+    },
+    {
+      "id": "ear",
+      "label": "ear",
+      "description": "Find e, a, r together."
+    },
+    {
+      "id": "double",
+      "label": "Double letters",
+      "description": "Find the same letter twice side by side."
+    }
+  ],
+  "words": [
+    {
+      "id": "eight",
+      "text": "eight",
+      "sentence": "Eight jars wait on the stall.",
+      "clues": [
+        {
+          "trayId": "eigh",
+          "note": "Eight has eigh."
+        }
+      ]
+    },
+    {
+      "id": "eighth",
+      "text": "eighth",
+      "sentence": "This is the eighth jar.",
+      "clues": [
+        {
+          "trayId": "eigh",
+          "note": "Eighth has eigh before t and h."
+        }
+      ]
+    },
+    {
+      "id": "weight",
+      "text": "weight",
+      "sentence": "Guess the pumpkin's weight.",
+      "clues": [
+        {
+          "trayId": "eigh",
+          "note": "Weight has eigh between w and t."
+        }
+      ]
+    },
+    {
+      "id": "height",
+      "text": "height",
+      "sentence": "Measure the stall's height.",
+      "clues": [
+        {
+          "trayId": "eigh",
+          "note": "Height has eigh between h and t."
+        }
+      ]
+    },
+    {
+      "id": "enough",
+      "text": "enough",
+      "sentence": "There is enough bread for everyone.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Enough ends in ough."
+        }
+      ]
+    },
+    {
+      "id": "though",
+      "text": "though",
+      "sentence": "The stall is open, though it is raining.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Though ends in ough."
+        }
+      ]
+    },
+    {
+      "id": "although",
+      "text": "although",
+      "sentence": "Although it rained, the market opened.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Although ends in ough."
+        }
+      ]
+    },
+    {
+      "id": "thought",
+      "text": "thought",
+      "sentence": "I thought the stall was closed.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Thought has ough before t."
+        }
+      ]
+    },
+    {
+      "id": "through",
+      "text": "through",
+      "sentence": "Walk through the market gate.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Through ends in ough."
+        }
+      ]
+    },
+    {
+      "id": "early",
+      "text": "early",
+      "sentence": "The baker arrives early.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Early begins with ear."
+        }
+      ]
+    },
+    {
+      "id": "earth",
+      "text": "earth",
+      "sentence": "Brush the earth from the carrots.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Earth begins with ear."
+        }
+      ]
+    },
+    {
+      "id": "heard",
+      "text": "heard",
+      "sentence": "We heard the market bell.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Heard has ear between h and d."
+        }
+      ]
+    },
+    {
+      "id": "learn",
+      "text": "learn",
+      "sentence": "We can learn a new word.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Learn has ear between l and n."
+        }
+      ]
+    },
+    {
+      "id": "address",
+      "text": "address",
+      "sentence": "Write the stall's address.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Address has dd and ss."
+        }
+      ]
+    },
+    {
+      "id": "appear",
+      "text": "appear",
+      "sentence": "New stalls appear each week.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Appear ends in ear."
+        },
+        {
+          "trayId": "double",
+          "note": "Appear has pp."
+        }
+      ]
+    },
+    {
+      "id": "different",
+      "text": "different",
+      "sentence": "This cheese is different.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Different has ff."
+        }
+      ]
+    },
+    {
+      "id": "difficult",
+      "text": "difficult",
+      "sentence": "The puzzle is difficult.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Difficult has ff."
+        }
+      ]
+    },
+    {
+      "id": "possible",
+      "text": "possible",
+      "sentence": "A new route is possible.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Possible has ss."
+        }
+      ]
+    },
+    {
+      "id": "opposite",
+      "text": "opposite",
+      "sentence": "The baker is opposite the miller.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Opposite has pp."
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "card15",
+      "title": "Look for shared letters",
+      "text": "Try grouping a word list by letters you can see. Eight, weight and height share eigh. Enough, though and through share ough. Early, earth and learn share ear.",
+      "example": "SOLD BY W_____",
+      "steps": [
+        "Weight shares letters with eight.",
+        "Those letters are eigh.",
+        "w, eigh, t: weight."
+      ]
+    },
+    {
+      "id": "card16",
+      "title": "Find a letter helper",
+      "text": "Choose letters you want to remember. A letter helper might help: separate has rat in the middle, and business starts with bus.",
+      "example": "A different cheese",
+      "steps": [
+        "Notice the double f in different.",
+        "Try these letter chunks: dif, fer, ent.",
+        "Different. Two f's, one r."
+      ]
+    }
+  ],
+  "helpers": [
+    {
+      "id": "helper-separate",
+      "word": "separate",
+      "note": "Find rat inside separate: sep, a, rat, e. This is a letter helper.",
+      "pieces": [
+        {
+          "text": "sep",
+          "marked": false
+        },
+        {
+          "text": "a",
+          "marked": false
+        },
+        {
+          "text": "rat",
+          "marked": true
+        },
+        {
+          "text": "e",
+          "marked": false
+        }
+      ]
+    },
+    {
+      "id": "helper-business",
+      "word": "business",
+      "note": "Business starts with bus. Use those three letters as a memory trick.",
+      "pieces": [
+        {
+          "text": "bus",
+          "marked": true
+        },
+        {
+          "text": "iness",
+          "marked": false
+        }
+      ]
+    },
+    {
+      "id": "helper-island",
+      "word": "island",
+      "note": "Try the letter chunks is and land to remember island. This is a letter trick, not its history.",
+      "pieces": [
+        {
+          "text": "is",
+          "marked": false
+        },
+        {
+          "text": "land",
+          "marked": true
+        }
+      ]
+    },
+    {
+      "id": "helper-believe",
+      "word": "believe",
+      "note": "Believe has lie inside it. This is a letter trick, not what believe means.",
+      "pieces": [
+        {
+          "text": "be",
+          "marked": false
+        },
+        {
+          "text": "lie",
+          "marked": true
+        },
+        {
+          "text": "ve",
+          "marked": false
+        }
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "v": 1,
+      "id": "D1",
+      "title": "Bramble's pumpkin",
+      "kind": "choice",
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "pumpkin",
+      "pictureAlt": "A pumpkin sits on a scale beside Bramble's notice.",
+      "prompt": "Bramble's sign: guess its ___.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "wieght"
+        },
+        {
+          "id": "b",
+          "text": "wayt"
+        },
+        {
+          "id": "c",
+          "text": "weight"
+        }
+      ],
+      "key": "c",
+      "hint": "Look at eight. Weight is w, then eight.",
+      "example": "Try this one first: eight and weight share eigh. Read the letters slowly with someone. Now look for a clue in your notice.",
+      "explanation": "Eight, weight and height share eigh.",
+      "different": {
+        "a": "The e comes first: eigh, like eight.",
+        "b": "Weight shares eigh with eight."
+      },
+      "steps": [
+        "Weight shares letters with eight.",
+        "Those letters are eigh."
+      ],
+      "teach": [
+        {
+          "id": "card15",
+          "title": "Look for shared letters",
+          "text": "Try grouping a word list by letters you can see. Eight, weight and height share eigh. Enough, though and through share ough. Early, earth and learn share ear.",
+          "example": "SOLD BY W_____",
+          "steps": [
+            "Weight shares letters with eight.",
+            "Those letters are eigh.",
+            "w, eigh, t: weight."
+          ]
+        }
+      ]
+    },
+    {
+      "v": 1,
+      "id": "D2",
+      "title": "Bread for everyone",
+      "kind": "choice",
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "bread",
+      "pictureAlt": "Several loaves wait on the bread stall.",
+      "prompt": "Is there ___ bread for everyone?",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "enogh"
+        },
+        {
+          "id": "b",
+          "text": "enouhg"
+        },
+        {
+          "id": "c",
+          "text": "enough"
+        }
+      ],
+      "key": "c",
+      "hint": "Enough shares ough with though and through.",
+      "example": "Try this one first: though ends in ough: t, h, ough. Now look for those letters in your notice.",
+      "explanation": "Enough ends in ough, like though and through.",
+      "different": {
+        "a": "Keep the u. The letters are o, u, g, h.",
+        "b": "The letters go o, u, g, h."
+      },
+      "steps": [],
+      "teach": [
+        {
+          "id": "card15",
+          "title": "Look for shared letters",
+          "text": "Try grouping a word list by letters you can see. Eight, weight and height share eigh. Enough, though and through share ough. Early, earth and learn share ear.",
+          "example": "SOLD BY W_____",
+          "steps": [
+            "Weight shares letters with eight.",
+            "Those letters are eigh.",
+            "w, eigh, t: weight."
+          ]
+        }
+      ]
+    },
+    {
+      "v": 1,
+      "id": "D3",
+      "title": "A new cheese",
+      "kind": "choice",
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "cheese",
+      "pictureAlt": "A round cheese and a square cheese wait on the cheese stall.",
+      "prompt": "Every week the cheese trader brings a ___ cheese.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "different"
+        },
+        {
+          "id": "b",
+          "text": "diffrent"
+        },
+        {
+          "id": "c",
+          "text": "differrent"
+        }
+      ],
+      "key": "a",
+      "hint": "Try three letter chunks: dif, fer, ent.",
+      "example": "Try this one first: difficult has a double f: d, i, ff, i, c, u, l, t. Now look for double letters in your notice.",
+      "explanation": "Dif, fer, ent: different, with two f's and one r.",
+      "different": {
+        "b": "Find all three letter chunks: dif, fer, ent.",
+        "c": "Only the f doubles. One r."
+      },
+      "steps": [],
+      "teach": [
+        {
+          "id": "card16",
+          "title": "Find a letter helper",
+          "text": "Choose letters you want to remember. A letter helper might help: separate has rat in the middle, and business starts with bus.",
+          "example": "A different cheese",
+          "steps": [
+            "Notice the double f in different.",
+            "Try these letter chunks: dif, fer, ent.",
+            "Different. Two f's, one r."
+          ]
+        }
+      ]
+    },
+    {
+      "v": 1,
+      "id": "D4",
+      "title": "Eggs and apples",
+      "kind": "choice",
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "eggs-apples",
+      "pictureAlt": "Eggs sit in one basket and apples in another.",
+      "prompt": "Keep the eggs and the apples ___.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "seperate"
+        },
+        {
+          "id": "b",
+          "text": "separate"
+        },
+        {
+          "id": "c",
+          "text": "seprate"
+        }
+      ],
+      "key": "b",
+      "hint": "Find rat inside the word.",
+      "example": "Try this one first: business starts with bus. A small word can help you remember letters. Now try the rat clue in your notice.",
+      "explanation": "Separate has rat inside it: sep, a, rat, e.",
+      "different": {
+        "a": "Find rat inside separate: sep, a, rat, e.",
+        "c": "Keep the a before rat: sep, a, rat, e."
+      },
+      "steps": [],
+      "teach": [
+        {
+          "id": "card16",
+          "title": "Find a letter helper",
+          "text": "Choose letters you want to remember. A letter helper might help: separate has rat in the middle, and business starts with bus.",
+          "example": "A different cheese",
+          "steps": [
+            "Notice the double f in different.",
+            "Try these letter chunks: dif, fer, ent.",
+            "Different. Two f's, one r."
+          ]
+        }
+      ]
+    }
+  ],
+  "story": {
+    "hook": "Bramble brings a pumpkin to the returning market. The guessing notice needs one word.",
+    "short": "Bramble set a pumpkin on the scale. “Guess its weight!” she called. The notice had room for the word weight. Pip spotted eigh, just as in eight. Bramble painted the letters and opened her stall.",
+    "longer": "The weekly market was filling again. Bread was warm, cheese was ready, and Bramble had brought a pumpkin almost as wide as her basket. “Visitors can guess its weight,” she said. Pip looked at the waiting notice. “Weight shares eigh with eight.” Dot found the same letters in height, although the words did not sound the same. Bramble finished the notice. Then she set the eggs and apples in separate baskets. The stalls were ready for their first visitors.",
+    "note": "A story from Willowbank. These are visible letter connections; a shared group of letters is not always a shared sound."
+  },
+  "offscreen": {
+    "text": "Make a paper notice for an imaginary market. Choose a word you want to remember. Mark its letters, try a letter helper, and read the notice with someone. A dictionary can help check its spelling."
+  },
+  "grownup": "This collection offers printed spelling patterns and optional letter-memory tricks. All cards and choices are supplied, and adult reading is welcome. Sorting or choosing a supplied spelling is not spelling it from memory. There is no timing, dictation, original-writing assessment or claim of complete word-list attainment. Marks are the reader's choices, not right-or-wrong answers. The library shelf offers a later printed collection, not a passed-level reward."
+});
+export const marketCrateCopy=Object.freeze({
+  "arrival": "Visit the Word-List Crate",
+  "title": "The Word-List Crate",
+  "header": "Sort these printed words by letters you can see. Mark any letters you want to remember. A word can fit more than one crate.",
+  "every": "These crates share letters. They do not always share sounds.",
+  "chooser": "Choose a word",
+  "previous": "Previous word",
+  "next": "Next word",
+  "marksLabel": "Letters I want to remember",
+  "clearMarks": "Clear this word's marks",
+  "traysLabel": "Choose a crate",
+  "unplaced": "Not in a crate yet",
+  "check": "Check this arrangement",
+  "keep": "Keep this arrangement",
+  "firstLabel": "First kept arrangement",
+  "latestLabel": "Latest kept arrangement",
+  "restore": "Use these placements",
+  "restoreNote": "This changes the crates only. Your marks and help stay as they are.",
+  "kept": "Your arrangement is kept. You can try another.",
+  "arrangementLabel": "All the word cards",
+  "resultLabel": "Clues for this arrangement",
+  "cardsLabel": "Two ways to remember",
+  "helpersLabel": "Letter helpers",
+  "helperDisclaimer": "These are tricks for remembering letters, not explanations of where words came from.",
+  "jobsLabel": "Word-list sign jobs",
+  "storyLabel": "Bramble's pumpkin notice",
+  "back": "Back to Market Signs",
+  "libraryInvitation": "Try another word collection",
+  "libraryLabel": "Visit the library word shelf",
+  "sectionUnavailable": "These earlier crate pages stay in Notes. Other Market Signs benches are open.",
+  "benchUnavailable": "These earlier word cards stay in Notes. You can still choose a readable sign job or another bench.",
+  "pointerInvitation": "Choose a word to return to. Your earlier arrangement is still here.",
+  "placementUnavailable": "This earlier crate choice stays in Notes. Other cards are ready to move.",
+  "marksUnavailable": "These earlier marks stay in Notes. You can still read and sort this word.",
+  "longWord": "This word is ready to read and sort. Its letters cannot be marked here.",
+  "checksUnavailable": "These earlier checks stay in Notes. You can still arrange cards and keep unchecked placements.",
+  "keepUnavailable": "This earlier kept arrangement stays in Notes. You can still arrange and check your cards.",
+  "keptMarksUnavailable": "These earlier marks stay in Notes. The readable placements are shown here.",
+  "materialUnavailable": "This earlier reading card stays in Notes but cannot be shown here.",
+  "noPlayable": "These crate choices stay in Notes. Try another bench or a readable sign job."
+});
+export function marketCrateCollection(){return structuredClone(crateInitial);}

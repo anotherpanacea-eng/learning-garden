@@ -44,7 +44,7 @@ def setup(browser,base,seed,w=820,hgt=1000,fault=False):
 def action(p,name):p.locator('[data-ms-action="'+name+'"]:visible').first.tap()
 def bench(p,name):
  p.locator('[data-ms-bench="'+name+'"]').tap()
- task=p.locator('#ms-task').bounding_box();bar=p.locator('.ms-ways').bounding_box();h.ok(task['y']>=bar['y']+bar['height']-1,'new turn heading visible below sticky bench tabs')
+ task=p.locator('#ms-crate-word-title' if name=='crates' and p.locator('#ms-crate-word-title').count() else '#ms-task').bounding_box();bar=p.locator('.ms-ways').bounding_box();h.ok(task['y']>=bar['y']+bar['height']-1,'new turn heading visible below sticky bench tabs')
 def drawer(p,name,opened=True):
  d=p.locator('[data-ms-panel="'+name+'"]')
  if (d.get_attribute('open') is not None)!=opened:d.locator('summary').tap()
@@ -336,6 +336,129 @@ def patterns_edges(browser,base):
   p.evaluate('window.oldPattern=document.querySelector("[data-ms-family=after-w]")');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();ready(p);before=copy.deepcopy(h.book(p));p.evaluate('oldPattern.click()');h.ok(h.book(p)==before and 'patterns' in state(p) and pattern_state(p)['drafts']['warm']['familyId'] is None,'stale native pattern button cannot write another explorer');p.evaluate('location.hash="#notes"');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.wait_for_function('location.hash==="#home"');p.evaluate('location.hash="#words/signs"');ready(p);p.evaluate('oldPattern.click()');h.ok('signs' not in h.book(p),'reset-era native pattern button cannot resurrect work')
  finally:c.close()
 
+def crate_fixture(name='base'):
+ code="import {signsSeed,fullCrateSignsNotebook} from './test/market-signs-checks.mjs';import * as c from './dist/market-signs-core.mjs';const o={canExport:()=>true};let s=signsSeed();"
+ if name=='full':code+='s=fullCrateSignsNotebook();'
+ else:
+  code+="c.openMarketBench(s,'crates',o);const q=s.signs.crates;"
+  damage={
+   'complete':"for(const w of q.source.words)q.shelf.placements[w.id]=w.clues[0].trayId;",
+   'missing-pointer':"delete q.currentWordId;",'dangling-pointer':"q.currentWordId='earlier-word';",
+   'bad-marks-row':"q.shelf.marks.eight={earlier:['marks']};",'bad-marks':"q.shelf.marks=['earlier marks'];",
+   'bad-checks':"q.shelf.checks={earlier:['checks']};",'bad-first':"q.shelf.firstKept={earlier:['keep']};",'bad-latest':"q.shelf.latestKept={earlier:['keep']};",
+   'opaque-placement':"q.shelf.placements.eight={earlier:['tray']};",
+   'bad-help':"q.shelf.help={earlier:['help']};",'bad-helper':"q.source.helpers[0].note=99;",
+   'bad-word':"q.source.words[0].sentence=99;",'bad-source':"q.source.trays={earlier:['trays']};",
+   'bad-section':"s.signs.crates={v:99,earlier:['crate pages']};",
+   'job-first':"delete q.shelf;q.currentWordId=null;c.openMarketCrateJob(s,'D1',o);"
+  }
+  code+=damage.get(name,'')
+  if name.startswith('collision-'):
+   ident=name.removeprefix('collision-');code+="const j=q.source.jobs.find(x=>x.id==='D1');j.id="+json.dumps(ident)+";c.openMarketCrateJob(s,"+json.dumps(ident)+",o);"
+ return json.loads(subprocess.check_output(['node','--input-type=module','-e',code+'console.log(JSON.stringify(s));'],cwd=ROOT,text=True))
+def crate_state(p):return state(p)['crates']
+def crate_record(p):
+ q=crate_state(p);return q['records'][q['currentId']]
+def crate_heading(p):
+ title=p.locator('#ms-crate-word-title');box=title.bounding_box();bar=p.locator('.ms-ways').bounding_box();h.ok(box and bar and box['y']>=bar['y']+bar['height']-1 and box['y']+box['height']<=p.viewport_size['height'],'crate current word visible below measured sticky nav');h.ok(p.evaluate('document.activeElement.id')=='ms-crate-word-title','crate word receives focus after explicit turn')
+def crate_word(p,word):p.locator('[data-ms-word]').select_option(word);crate_heading(p)
+def crate_place(p,tray,keyboard=False):
+ e=p.locator('[data-ms-action=crate-tray][data-ms-tray="'+tray+'"]')
+ if keyboard:e.focus();p.keyboard.press('Enter')
+ else:e.tap()
+def crate_mark(p,index,keyboard=False):
+ e=p.locator('[data-ms-action=crate-mark][data-ms-index="'+str(index)+'"]')
+ if keyboard:e.focus();p.keyboard.press('Enter')
+ else:e.tap()
+def crates_play(browser,base,w,hgt):
+ c,p=setup(browser,base,fixture(),w,hgt)
+ try:
+  h.ok('signs' not in h.book(p),'crate arrival allocates no source');choose(p,'D1');h.ok('shelf' not in crate_state(p),'D job allocates collection without shelf');h.ok(p.locator('.ms-guided li').all_text_contents()==['Weight shares letters with eight.','Those letters are eigh.'],'D1 printed guidance precedes choice')
+  choose(p,'B1');choose(p,'C1');choose(p,'A1');choose(p,'D1');pointers=(state(p)['currentId'],state(p)['endings']['currentId'],state(p)['patterns']['currentId'],crate_state(p)['currentId']);h.ok(pointers==('B1','C1','A1','D1'),'four independent practice pointers')
+  bench(p,'crates');h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['placements']=={} and crate_state(p)['shelf']['marks']=={},'explicit bench opens absent shelf at first readable word without default work');crate_heading(p);layout(p);viewport_shot(p,'crate-initial',w)
+  turn=p.locator('[data-ms-action=crate-tray][data-ms-tray=eigh]').bounding_box();nav=p.locator('.ms-ways').bounding_box();h.ok(turn and turn['y']>=nav['y']+nav['height']-1 and turn['y']+turn['height']<=hgt,'initial crate marking and placing fit measured viewport')
+  crate_mark(p,0,True);h.ok(crate_state(p)['shelf']['marks']['eight']==[0] and p.locator('[data-ms-index="0"]').get_attribute('aria-pressed')=='true','native keyboard mark toggles saved letter');crate_mark(p,0);h.ok(crate_state(p)['shelf']['marks']['eight']==[],'touch toggles same marker off');crate_mark(p,1);crate_place(p,'eigh',True);h.ok(crate_state(p)['currentWordId']=='eight' and p.locator('#ms-crate-feedback').count()==0,'placing does not advance or check');h.ok(p.evaluate('document.activeElement.dataset.msTray')=='eigh','native keyboard tray retains focus')
+  action(p,'crate-word-next');crate_heading(p);h.ok(crate_state(p)['currentWordId']=='eighth','Next explicit retained-word turn');action(p,'crate-word-prev');crate_heading(p);h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['marks']['eight']==[1],'Previous retains markers and placement');p.reload(wait_until='networkidle');ready(p);h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['marks']['eight']==[1],'reload resumes selected word and markers')
+  action(p,'crate-check');h.ok(crate_state(p)['shelf']['checks'][-1]['status']=='incomplete','arrangement check explicitly incomplete');action(p,'crate-keep');first=copy.deepcopy(crate_state(p)['shelf']['firstKept']);h.ok(first['check']['status']=='incomplete','incomplete arrangement can be kept')
+  crate_word(p,'appear');crate_place(p,'ear');action(p,'crate-check');h.ok(next(r for r in crate_state(p)['shelf']['checks'][-1]['rows'] if r['id']=='appear')['outcome']=='listed','appear ear is a listed clue');crate_place(p,'double');action(p,'crate-check');h.ok(next(r for r in crate_state(p)['shelf']['checks'][-1]['rows'] if r['id']=='appear')['outcome']=='listed','appear double is also a listed clue')
+  crate_word(p,'address')
+  for index in [1,2,5,6]:crate_mark(p,index)
+  readout=p.locator('[data-market-signs-root]').inner_text();h.ok(all(x in readout for x in ['d (2)','d (3)','s (6)','s (7)']),'address repeated letters have position readout');h.ok(p.get_by_role('button',name='Letter d, position 2',exact=True).get_attribute('aria-pressed')=='true','repeated letter button has distinct accessible position');crate_place(p,'eigh');action(p,'crate-check');h.ok(next(r for r in crate_state(p)['shelf']['checks'][-1]['rows'] if r['id']=='address')['outcome']=='discuss','unlisted placement invites discussion');h.ok(p.evaluate('document.activeElement.id')=='ms-crate-feedback','Check focuses arrangement feedback');wordbox=p.locator('#ms-crate-word-title').bounding_box();navbox=p.locator('.ms-ways').bounding_box();h.ok(wordbox['y']>=navbox['y']+navbox['height']-1 and wordbox['y']+wordbox['height']<=hgt,'Check keeps printed word visible below sticky nav');viewport_shot(p,'crate-feedback',w);action(p,'crate-keep');h.ok(crate_state(p)['shelf']['firstKept']==first,'later arrangement preserves first keep');crate_word(p,'address');layout(p);viewport_shot(p,'crate-marked-word',w);p.screenshot(path=str(OUT/f'crate-marked-{w}-full.png'),full_page=True)
+  drawer(p,'crate-cards');help_button=p.locator('[data-ms-action=crate-help]').first;helpid=help_button.get_attribute('data-ms-help');help_button.tap();h.ok(helpid in crate_state(p)['shelf']['help'] and p.locator('#ms-crate-help-'+helpid).is_visible(),'reading support recorded before helper/card disclosure');before_reading=copy.deepcopy(h.book(p));writes=p.evaluate('marketWrites');p.locator('[data-ms-action=crate-step-next][data-ms-help='+helpid+']').tap();drawer(p,'crate-story');action(p,'longer');drawer(p,'crate-paper');h.ok(h.book(p)==before_reading and p.evaluate('marketWrites')==writes,'later teaching steps and story/paper reading are presentation only');drawer(p,'crate-helpers')
+  for helper,word,marked in [('helper-separate','separate','rat'),('helper-business','business','bus'),('helper-island','island','land'),('helper-believe','believe','lie')]:
+   p.locator('[data-ms-action=crate-help][data-ms-help='+helper+']').tap();body=p.locator('#ms-crate-help-'+helper);h.ok(body.locator('.ms-crate-helper-word').inner_text()==word and body.locator('mark').all_text_contents()==[marked] and 'not explanations of where words came from' in body.inner_text(),'helper shows visible letter trick and limit '+helper);h.ok(helper in crate_state(p)['shelf']['help'],'own helper support id recorded '+helper)
+  marks=copy.deepcopy(crate_state(p)['shelf']['marks']);helpids=copy.deepcopy(crate_state(p)['shelf']['help']);drawer(p,'crate-first');p.locator('[data-ms-action=crate-restore][data-ms-edition=first]').tap();h.ok(crate_state(p)['shelf']['marks']==marks and crate_state(p)['shelf']['help']==helpids and crate_state(p)['currentWordId']=='address','Use these placements leaves raw marks help and pointer exact');restored=copy.deepcopy(crate_state(p)['shelf']['placements']);h.ok(all(restored.get(word['id'])==first['placements'].get(word['id']) for word in crate_state(p)['source']['words']),'Use these placements copies readable placements')
+  action(p,'crate-clear-marks');h.ok(crate_state(p)['shelf']['marks']['address']==[] and crate_state(p)['shelf']['placements']==restored,'clear marks leaves trays exact');bench(p,'prefix');bench(p,'crates');h.ok(crate_state(p)['currentWordId']=='address','bench visit retains word pointer');bench(p,'practice');h.ok(crate_state(p)['currentId']=='D1' and (state(p)['currentId'],state(p)['endings']['currentId'],state(p)['patterns']['currentId'],crate_state(p)['currentId'])==pointers,'practice resumes crate group without changing four pointers')
+  for ident,key in {'D1':'c','D2':'c','D3':'a','D4':'b'}.items():
+   choose(p,ident);p.locator('[data-ms-choice='+key+']').focus();p.keyboard.press('Enter');action(p,'check-job');h.ok(crate_record(p)['checks'][-1]['outcome']=='fit','crate own supplied answer '+ident);action(p,'keep-version');drawer(p,'help');action(p,'hint');action(p,'example');h.ok(all(crate_record(p)['help'][k] for k in ['hint','example']),'D supports captured '+ident)
+  action(p,'next-job');h.ok(state(p)['practiceGroup']=='prefix' and state(p)['currentId']=='B1','last D wraps combined retained sources to prefix');bench(p,'crates');p.evaluate('window.departedCrate=document.querySelector("[data-ms-action=crate-mark]")');held=copy.deepcopy(state(p));report=h.export_notes(p,'crate-'+str(w));h.ok(report['signs']==held,'actual Notes download retains all four Market Signs groups');p.evaluate('departedCrate.click()');h.ok(state(p)==held,'departed crate control inert');import_notes(p,report);p.evaluate('departedCrate.click()');h.ok(state(p)==held,'pre-import crate callback inert')
+ finally:c.close()
+def crates_edges(browser,base):
+ c,p=setup(browser,base,crate_fixture('full'))
+ try:
+  held=copy.deepcopy(state(p));q=held['crates'];h.ok(len(q['shelf']['placements'])==19 and len(q['shelf']['checks'])==16 and len(q['records'])==4,'max crate fixture has nineteen placements sixteen arrangement checks four jobs');h.ok(all(r['count']==16 and len(r['checks'])==12 and 'firstKept' in r and 'latestKept' in r and all(r['help'][k] for k in ['hint','example']) for r in q['records'].values()),'max crate fixture sixteen attempts twelve retained checks both versions and supports');report=h.export_notes(p,'maximum-crate-signs');h.ok(report['signs']==held,'actual pretty Notes full crate download exact');import_notes(p,report);p.reload(wait_until='networkidle');ready(p);h.ok(state(p)==held,'actual maximum Notes import and reload exact')
+ finally:c.close()
+ c,p=setup(browser,base,crate_fixture('complete'))
+ try:
+  action(p,'crate-check');h.ok(crate_state(p)['shelf']['checks'][-1]['status']=='listed','complete authored placements listed');crate_place(p,'ear');action(p,'crate-check');h.ok(crate_state(p)['shelf']['checks'][-1]['status']=='discussion','complete arrangement can invite discussion');action(p,'crate-keep');h.ok(crate_state(p)['shelf']['firstKept']['check']['status']=='discussion','discussion arrangement can be kept')
+ finally:c.close()
+ for kind in ['missing-pointer','dangling-pointer','bad-marks-row','bad-marks','bad-checks','bad-first','bad-latest','opaque-placement','bad-help','bad-helper','bad-word','bad-source','bad-section']:
+  c,p=setup(browser,base,crate_fixture(kind))
+  try:
+   raw=copy.deepcopy(crate_state(p));h.ok(raw==crate_fixture(kind)['signs']['crates'],'passive crate rendering preserves raw source '+kind)
+   if kind in ['missing-pointer','dangling-pointer']:
+    h.ok(p.locator('[data-ms-action=crate-mark]').count()==0,'unresolved own word pointer offers picker '+kind);crate_word(p,'address');h.ok(crate_state(p)['currentWordId']=='address','explicit picker repairs only pointer '+kind)
+   elif kind in ['bad-marks-row','bad-marks']:
+    h.ok(p.locator('[data-ms-action=crate-mark]:enabled').count()==0,'unreadable current marks disable marking '+kind);crate_place(p,'eigh');h.ok(crate_state(p)['shelf']['marks']==raw['shelf']['marks'],'unreadable marks stay raw beside editable tray '+kind)
+   elif kind=='opaque-placement':
+    h.ok(p.locator('[data-ms-action=crate-tray]:enabled').count()==0,'opaque current placement has no tray writer');crate_mark(p,0);action(p,'crate-word-next');crate_heading(p);h.ok(crate_state(p)['shelf']['placements']['eight']==raw['shelf']['placements']['eight'],'opaque placement survives marking and paging')
+   elif kind=='bad-checks':
+    h.ok(p.locator('[data-ms-action=crate-check]').is_disabled(),'bad checks disables Check');crate_place(p,'eigh');action(p,'crate-keep');h.ok(crate_state(p)['shelf']['firstKept']['check'] is None and crate_state(p)['shelf']['checks']==raw['shelf']['checks'],'bad checks permits unchecked Keep without repairing checks')
+   elif kind=='bad-first':
+    crate_place(p,'eigh');action(p,'crate-check');action(p,'crate-keep');h.ok(crate_state(p)['shelf']['firstKept']==raw['shelf']['firstKept'] and 'latestKept' in crate_state(p)['shelf'],'bad first preserved beside valid new latest')
+   elif kind=='bad-latest':
+    h.ok(p.locator('[data-ms-action=crate-keep]').is_disabled(),'bad latest disables Keep');crate_place(p,'eigh');action(p,'crate-check');h.ok(crate_state(p)['shelf']['latestKept']==raw['shelf']['latestKept'],'bad latest preserved beside arranging and checking')
+   elif kind=='bad-help':
+    before=copy.deepcopy(h.book(p));drawer(p,'crate-cards');h.ok(p.locator('[data-ms-action=crate-help]').first.is_disabled() and p.locator('[id^=ms-crate-help-]').count()==0 and h.book(p)==before,'bad help cannot disclose unrecorded content or mutate')
+   elif kind=='bad-source':
+    h.ok(p.locator('[data-ms-action=crate-mark]').count()==0,'unavailable tray source cannot open marking bench')
+   choose(p,'B1');p.locator('[data-ms-choice=a]').tap();action(p,'check-job');h.ok(record(p)['checks'][-1]['outcome']=='fit','prefix job remains open beside isolated '+kind);report=h.export_notes(p,'crate-'+kind);h.ok(report['signs']['crates']==crate_state(p),'Notes retains raw isolated crate material '+kind)
+  finally:c.close()
+ for fail in [False,True]:
+  c,p=setup(browser,base,crate_fixture())
+  try:
+   if fail:p.evaluate('window.marketFailStorage=true')
+   else:p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#words/signs"');ready(p)
+   crate_mark(p,0);crate_place(p,'eigh');action(p,'crate-keep');h.ok('session' in p.locator('#ms-status').inner_text(),'crate saving off/failure status truthful');report=h.export_notes(p,'crate-memory-'+str(fail));h.ok(report['signs']['crates']['shelf']['marks']['eight']==[0] and report['signs']['crates']['shelf']['placements']['eight']=='eigh','actual RAM Notes retains unsaved crate work')
+  finally:c.close()
+ c,p=setup(browser,base,fixture(),fault=True)
+ try:
+  before=copy.deepcopy(h.book(p));p.evaluate('window.marketRefuse=true');p.locator('[data-ms-bench=crates]').tap();report=h.export_notes(p,'crate-refused-allocation');h.ok(report.get('signs')==before.get('signs'),'atomic refused crate allocation stays absent from RAM Notes')
+ finally:c.close()
+ c,p=setup(browser,base,crate_fixture(),fault=True)
+ try:
+  before=copy.deepcopy(h.book(p));p.evaluate('window.marketRefuse=true');crate_mark(p,0);h.ok(h.book(p)==before and p.locator('[data-ms-index="0"]').get_attribute('aria-pressed')=='false','refused marker restores native view');drawer(p,'crate-cards');p.locator('[data-ms-action=crate-help]').first.tap();h.ok(h.book(p)==before and p.locator('[id^=ms-crate-help-]').count()==0,'refused support opening leaves shelf exact without disclosure');report=h.export_notes(p,'crate-refused-work');h.ok(report['signs']==before['signs'],'RAM Notes verifies refusal exact')
+ finally:c.close()
+ for alteration in ['source','word','hidden','inert','film']:
+  c,p=setup(browser,base,crate_fixture(),fault=True)
+  try:
+   before=copy.deepcopy(h.book(p));writes=p.evaluate('marketWrites')
+   if alteration=='source':p.evaluate('window.marketState.signs.crates.source=structuredClone(window.marketState.signs.crates.source)')
+   if alteration=='word':p.evaluate('window.marketState.signs.crates.currentWordId="appear"')
+   if alteration=='hidden':p.evaluate('document.querySelector("[data-market-signs-root]").style.display="none"')
+   if alteration=='inert':p.evaluate('document.querySelector("[data-market-signs-root]").inert=true')
+   if alteration=='film':p.evaluate('const d=document.createElement("dialog");d.className="welcome-film";d.open=true;document.body.append(d)')
+   p.evaluate('document.querySelector("[data-ms-action=crate-mark]").click()');h.ok(h.book(p)==before and p.evaluate('marketWrites')==writes,'connected crate marker inert after '+alteration)
+  finally:c.close()
+ for ident in ['E1','E3','E4']:
+  c,p=setup(browser,base,crate_fixture('collision-'+ident))
+  try:h.ok(p.locator('[data-ms-book=practice]').count()==0 and p.locator('.ms-book-paper').count()==0,'crate historical '+ident+' never activates prefix dictionary')
+  finally:c.close()
+ c,p=setup(browser,base,crate_fixture())
+ try:
+  p.evaluate('window.oldCrate=document.querySelector("[data-ms-action=crate-mark]")');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();ready(p);held=copy.deepcopy(h.book(p));p.evaluate('oldCrate.click()');h.ok(h.book(p)==held and crate_state(p)['shelf']['marks']=={},'stale crate marker cannot write another explorer');p.evaluate('location.hash="#notes"');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.wait_for_function('location.hash==="#home"');p.evaluate('location.hash="#words/signs"');ready(p);p.evaluate('oldCrate.click()');h.ok('signs' not in h.book(p),'reset-era crate marker cannot resurrect work')
+ finally:c.close()
+
 class Quiet(http.server.SimpleHTTPRequestHandler):
  protocol_version='HTTP/1.1'
  def log_message(self,*args):pass
@@ -354,7 +477,9 @@ def main():
     for w,hgt in [(320,600),(820,1000),(1024,768)]:endings_play(b,base,w,hgt);print('Ending Signs viewport',w,'passed',flush=True)
     endings_edges(b,base)
     for w,hgt in [(320,600),(820,1000),(1024,768)]:patterns_play(b,base,w,hgt);print('Pattern Stall viewport',w,'passed',flush=True)
-    patterns_edges(b,base);h.ok(not h.errors,'no browser errors '+str(h.errors));result={'status':'passed','checks':h.checks};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(result)
+    patterns_edges(b,base)
+    for w,hgt in [(320,600),(820,1000),(1024,768)]:crates_play(b,base,w,hgt);print('Word-List Crate viewport',w,'passed',flush=True)
+    crates_edges(b,base);h.ok(not h.errors,'no browser errors '+str(h.errors));result={'status':'passed','checks':h.checks};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(result)
    finally:b.close()
  finally:server.shutdown();server.server_close()
 if __name__=='__main__':main()
