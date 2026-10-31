@@ -1,0 +1,42 @@
+/* Spec 332: the Mending Shed. */
+.ms-shed{max-width:1000px;margin:0 auto;padding:0 12px 32px}
+.ms-shed button{min-height:44px;min-width:44px}
+.ms-shed button:focus-visible,.ms-grid-wrap:focus-visible{outline:3px solid #1f5fa8;outline-offset:2px}
+.ms-simplified{font-style:italic}
+.ms-entries{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
+.ms-entries p{margin:4px 0 0}
+.ms-actions,.ms-choices{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.ms-teach,.ms-board,.ms-current,.ms-ladder,.ms-result{border:2px solid #b7a98a;border-radius:10px;padding:10px 12px;margin:12px 0;background:#fffaf0}
+.ms-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.ms-card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;border:2px solid #8a7b5c;border-radius:10px;background:#fff}
+.ms-card[aria-pressed="true"]{border-color:#1f5fa8;background:#eaf2fb}
+.ms-card svg{width:56px;height:56px}
+.ms-picture{width:110px;height:110px;flex:none}
+.ms-work{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.ms-rows{flex:1 1 220px;min-width:0}
+.ms-row{border:2px dashed #8a7b5c;border-radius:8px;padding:6px 8px;margin:6px 0}
+.ms-row h4{margin:0 0 4px}
+.ms-row-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.ms-tray{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.ms-tray button[aria-pressed="true"],.ms-choices button[aria-pressed="true"]{border:3px solid #1f5fa8;background:#eaf2fb}
+.ms-picked{font-size:.85em;font-weight:700}
+.ms-guided{margin:0 0 6px;padding-left:22px}
+.ms-line:empty,.ms-status:empty{display:none}
+.ms-announce{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ms-choices button,.ms-actions button,.ms-tray button,.ms-row-chips button,.ms-entries button{flex:0 0 auto;width:auto}
+.ms-line{font-weight:600}
+.ms-stage svg{width:180px;height:140px}
+.ms-stage rect,.ms-stage path,.ms-stage g{transition:all .4s ease}
+.ms-grid-wrap{overflow-x:auto;max-width:100%;margin:12px 0}
+.ms-grid{border-collapse:collapse;min-width:560px}
+.ms-grid th,.ms-grid td{border:1px solid #b7a98a;padding:6px;text-align:left}
+.ms-kept{display:grid;gap:4px}
+.ms-kept dt{font-weight:700}
+.ms-kept dd{margin:0 0 4px}
+.ms-notice{border:2px solid #a35a2a;border-radius:8px;padding:8px 12px;margin:12px 0}
+@media (prefers-reduced-motion:reduce){.ms-stage rect,.ms-stage path,.ms-stage g{transition:none}}
+.ms-shed .ms-choices,.ms-shed .ms-tray,.ms-shed .ms-actions{display:flex;flex-wrap:wrap}
+.ms-shed .ms-cards{display:grid}
+.ms-shed .back{display:inline-flex;align-items:center;min-height:44px}
+.ms-shed summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
+.ms-notice a{display:inline-flex;align-items:center;min-height:44px}

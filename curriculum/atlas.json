@@ -919,6 +919,17 @@
         "build"
       ],
       "scope": "Supplied silent-letter tiles, written history sorting and seven family clues with teaching and five supported jobs. Revisable first/latest work; no independent spelling, pronunciation or historical-knowledge assessment. No topic coverage claim."
+    },
+    {
+      "id": "mending-shed",
+      "name": "The Mending Shed",
+      "status": "built-local",
+      "route": "#workshop/mending",
+      "patterns": [
+        "experiment",
+        "build"
+      ],
+      "scope": "Sort twelve pictured objects by what each is and what it is made of, with a guided first card, ordered Check lines and a stuck ladder; predict, try and let go of squash, bend, twist and stretch on six authored samples. Simplified authored pictures; no real materials, measurements or particle explanations."
     }
   ],
   "manualReferences": [
@@ -1803,6 +1814,20 @@
       "kind": "explanation",
       "source": "dist/shadow-theatre-ui.mjs",
       "scope": "Supplied point-source blocking and relative-size explanation: move the same opaque card through three positions, remove/return it and inspect selected limiting paths on one fixed screen. No independent prediction/explanation, physical investigation, recorded measurements, daily sunlight pattern or broader material classification."
+    },
+    {
+      "game": "mending-shed",
+      "topicId": "mt_5r47Pvstyn",
+      "kind": "scoped-practice",
+      "source": "dist/mending-shed-content.mjs",
+      "scope": "A supported sort of twelve pictured objects into the object and the material it is made of, from a supplied chip tray with ordered Check lines. Unaided naming, real materials, property vocabulary and grouping are not observed."
+    },
+    {
+      "game": "mending-shed",
+      "topicId": "mt_wf-SJhZ1kC",
+      "kind": "scoped-practice",
+      "source": "dist/mending-shed-content.mjs",
+      "scope": "A predicted test on authored pictures: choose a sample and an action, predict springs back, keeps the new shape or hardly changes, then see the authored result. Real materials, measurement, property vocabulary and grouping are not observed."
     }
   ],
   "increments": [
