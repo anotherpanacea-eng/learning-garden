@@ -4,7 +4,7 @@ Backlog card LG-36, 2026-10-31. The 83 drawn how-tos (proposal: [drawn how-tos](
 
 **Rule used.** A bench **needs one** when play has an order of moves the page does not show at a glance, or when the idea is the picture (a sweep, a nested part, a shared inside line). **Text is enough** when the page states the whole turn in a line or two, or the bench already has its own film.
 
-**Not checked here:** the River Market (`#mercado`, 324 and 328) and Le bac (`#bac`, 327) are not on main yet; check them when #298, #314 and #302 land. The Endings Shelf (331) is not built. Older routes without one, outside this card's range: `#numbers/seeds/pairs`, `#science/water-shares`, `#post/descriptions`, `#post/sorting/order`.
+**Not checked here:** the River Market (`#mercado`, 324 and 328) and Le bac (`#bac`, 327) are not on main yet; check them when #298, #314 and #302 land. The Endings Shelf (331) is outside this 280 to 330 audit. Older routes without one, outside this card's range: `#numbers/seeds/pairs`, `#science/water-shares`, `#post/descriptions`, `#post/sorting/order`.
 
 ## Needs one (14)
 
@@ -272,7 +272,9 @@ flowchart TD
   s3 --> s4
 ```
 
-### Lantern Codes (`#post/codes`, spec 319)
+### Lantern Codes (`#post/codes`, spec 238)
+
+An older bench outside the 280 to 330 range, included as a supplement because it has no how-to either. It counts among the 14.
 
 1. Press 'Start a code', read, then choose 'Make your code'.
 2. Use 'Add short' or 'Add long' to build each message's pattern.
