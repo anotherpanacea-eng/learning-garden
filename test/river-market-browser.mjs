@@ -45,6 +45,21 @@ try{
   await p.locator('[data-river-grammar="articles"] summary').click();ok((await p.locator('[data-river-grammar="articles"]').innerText()).includes('Synthetic earlier article note.'),'Mi cuaderno shows the frozen grammar text');
   await p.goto(url+'#notes');ok((await p.locator('details:has-text("The River Market (Spanish)")').first().innerText()).length>0,'Notes section');
   await p.goto(url+'#home');ok(await p.locator('a[href="#mercado"]').count()>=1,'Home links the market');await c.close();}
+ // With a local Spanish voice: Hear records narration first, and Try this voice replays the saved note, not a fixed sentence.
+ {const c=await browser.newContext({viewport:{width:820,height:1000}});
+  await c.addInitScript(()=>{const voice={name:'Stub español',lang:'es-ES',localService:true,voiceURI:'stub-es',default:false};window.__texts=[];
+   window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};
+   const synth={speaking:false,pending:false,paused:false,onvoiceschanged:null,getVoices:()=>[voice],cancel(){},pause(){},resume(){},addEventListener(){},removeEventListener(){},speak(u){const id=JSON.parse(localStorage.getItem('learning-garden-explorers')||'{}').activeId||'explorer-1',b=JSON.parse(localStorage.getItem('number-garden-v1:'+id)||'{}');window.__texts.push({text:u.text,narration:b.spanish?.errands?.carga?.support?.narration===true});}};
+   Object.defineProperty(window,'speechSynthesis',{configurable:true,get:()=>synth});});
+  const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto(url+'#mercado');await p.locator('[data-river-root]').waitFor();
+  await act(p,'amount-longer').click();await act(p,'open').click();await p.locator('.river-note').waitFor();
+  await p.evaluate(()=>{const id=JSON.parse(localStorage.getItem('learning-garden-explorers')||'{}').activeId||'explorer-1',key='number-garden-v1:'+id,b=JSON.parse(localStorage.getItem(key));b.spanish.errands.carga.source.sentences[0].es='Una línea de una nota anterior.';localStorage.setItem(key,JSON.stringify(b));});
+  await p.reload();await p.locator('.river-note').waitFor();
+  await p.locator('.river-note [data-speak-lang="es"]').first().click();await p.waitForFunction(()=>window.__texts.length>=1);
+  const heard=await p.evaluate(()=>window.__texts[0]);ok(heard.narration&&heard.text.startsWith('Una línea de una nota anterior.')&&heard.text.includes('Venimos de Vadoalto'),'voice: Hear reads the saved longer note, with narration recorded first');
+  await p.locator('.speech-controls .voice-settings > summary').first().click();await p.locator('.speech-controls [data-preview-voice]').click();await p.waitForFunction(()=>window.__texts.length>=2);
+  const preview=await p.evaluate(()=>window.__texts[1].text);ok(preview===heard.text&&!preview.startsWith('¡Hola! Somos de Vadoalto.'),'voice: Try this voice previews the saved note');
+  ok(errors.length===0,`voice: no page errors (${errors.join('; ')})`);await c.close();}
  // Unknown version: read-only page, nothing written.
  {const seed=freshState();seed.spanish={v:9,later:true};const c=await browser.newContext();await c.addInitScript(s=>{if(!localStorage.getItem('learning-garden-explorers'))localStorage.setItem('number-garden-v1',JSON.stringify(s));},seed);const p=await c.newPage();await p.goto(url+'#mercado');await p.locator('[data-river-root]').waitFor();
   ok(await p.locator('[data-river-action="open"]').count()===0,'no errand controls for an unknown version');ok(await p.locator('[data-river-root] a[href="#notes"]').count()===1,'Notes link offered');eq((await book(p)).spanish,{v:9,later:true},'unknown root kept exactly');await c.close();}

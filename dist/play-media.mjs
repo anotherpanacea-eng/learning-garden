@@ -84,9 +84,11 @@ export function bindSpeech(){
  voiceSelect.onchange=()=>{if(!live())return;selectedVoice=voiceSelect.value;changedPreference();stopped('Voice selected. Tap Try this voice to listen.');refreshVoices();};
  speedSelect.value=String(speakingRate);speedSelect.onchange=()=>{if(!live())return;speakingRate=Number(speedSelect.value);changedPreference();stopped('Speed selected. Tap Try this voice to listen.');};
  controls.querySelector('[data-refresh-voices]').onclick=()=>{if(!live())return;stopped('Voice list refreshed. Tap Try this voice to listen.');refreshVoices();};
- function speak(text,language=activeLanguage,origin=null){
+ // The last passage requested in each language; Spanish Try this voice replays it instead of a fixed sentence (spec 324).
+ const lastPassage={};
+ function speak(text,language=activeLanguage,origin=null,remember=true){
   if(!live()||origin&&!origin.isConnected)return false;
-  activeLanguage=speechLanguage(language);
+  activeLanguage=speechLanguage(language);if(remember)lastPassage[activeLanguage]=text;
   stopped('');const voice=refreshVoices();
   if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return false;}
   const utterance=new window.SpeechSynthesisUtterance(spoken(text,activeLanguage));utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
@@ -99,7 +101,7 @@ export function bindSpeech(){
  const requested=e=>{if(!live())return;e.detail.accepted=speak(e.detail?.text||'',e.detail?.language||'en');};
  document.addEventListener('garden-speak-request',requested);
  removeSpeechRequestListener=()=>document.removeEventListener('garden-speak-request',requested);
- controls.querySelector('[data-preview-voice]').onclick=()=>speak(({fr:'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?',es:'¡Hola! Somos de Vadoalto.'})[activeLanguage]||'Welcome to the garden. What shall we discover together today?');
+ controls.querySelector('[data-preview-voice]').onclick=()=>activeLanguage==='es'?lastPassage.es&&speak(lastPassage.es,'es',null,false):speak(activeLanguage==='fr'?'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?':'Welcome to the garden. What shall we discover together today?',activeLanguage,null,false);
  refreshVoices();
  const voicesChanged=()=>{if(!live())return;const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap a Hear button or Try this voice to listen.':availability.textContent;};
  if(speech?.addEventListener){speech.addEventListener('voiceschanged',voicesChanged);removeVoiceListener=()=>speech.removeEventListener('voiceschanged',voicesChanged);}
