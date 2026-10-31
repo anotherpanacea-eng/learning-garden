@@ -67,7 +67,7 @@ All have the card14 teaching statement plus their own example below. Job ids d1�
 
 **D1.** Prompt: The baker ___ the dough by pressing and folding it.
 - Choices: needs · kneeds · **kneads**.
-- Guided steps before answers: 1. Pressing and folding dough is kneading. 2. Kneading has a silent k. 3. Choose the one with k.
+- Guided steps before answers: 1. Pressing and folding dough is kneading. 2. Kneading has a silent k. 3. Choose the one with k and ea.
 - Different: needs: Needs means must have. Here the baker is pressing the dough. · kneeds: The k is right. The vowels are ea.
 - Hint: Which word means press and fold?
 - Explanation: Knead means press and fold. Need means must have.
@@ -83,7 +83,7 @@ All have the card14 teaching statement plus their own example below. Job ids d1�
 **D3.** Prompt: The storm had a big ___ on the orchard.
 - Choices: affect · **effect** · efect.
 - Different: affect: Affect is usually a verb. Here the sentence names a result. · efect: Effect has two f's.
-- Hint: Here the sentence names a result of the rain.
+- Hint: Here the sentence names a result of the storm.
 - Explanation: Here effect names a result. Affect usually names an action. They do not always sound alike.
 - Example **Rain and a result**: 1. Rain can affect apples: it can change them. 2. A change caused by the rain is an effect. 3. An effect is the result in this sentence.
 
