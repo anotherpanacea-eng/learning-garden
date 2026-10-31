@@ -94,7 +94,7 @@ export function manifestView(state){
  if(!own(state,'exchangeManifest'))return {status:'absent',cardsSeen:false,lists:{},items:{},joins:{}};
  const r=state.exchangeManifest;
  if(plain(r)&&own(r,'v')&&r.v!==1)return {status:'unknown',root:r,lists:{},items:{},joins:{}};
- // Items allow 278's whole catalogue (25); joins are optional and hold at most 8 notes.
+ // Items allow 278's whole catalog (25); joins are optional and hold at most 8 notes.
  if(!plain(r)||r.v!==1||typeof r.cardsSeen!=='boolean'||!plain(r.lists)||!plain(r.items)||Object.keys(r.lists).length>4||Object.keys(r.items).length>25||own(r,'joins')&&(!plain(r.joins)||Object.keys(r.joins).length>8))return {status:'malformed',root:r,lists:{},items:{},joins:{}};
  const lists={},items={},joins={};
  for(const [k,e] of Object.entries(r.lists))lists[k]={shape:own(LINE_SLOTS,k)?lineShape(k,e):'unreadable',entry:e};
