@@ -1,0 +1,97 @@
+// Spec 334: every child-facing line for the first Design Table slice, from docs/content/334-design-table-first-slice-text.md.
+const freeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
+export const designTableCopy=freeze({
+ title:'The Design Table',
+ firstVisit:'A long table covered in brown paper. A tin of shape tiles. A watering can in the corner. "Let\'s make something work better," says {guide}.',
+ laterVisit:'New sketches on the paper. Which station today?',
+ stations:{bags:'Two bags, one test',brief:'Write the brief'},
+ progress:{bags:'{n} of 8 tried',brief:'{n} of 4 tried'},
+ showMe:'Show me',start:'Start',reopen:'What is this station for?',
+ pickedUp:'picked up',placedName:'{tile}, in {slot}',check:'Check',fieldLabel:'Your answer',practice:'Practice',
+ stuck:"I'm stuck",example:'Show me an example',skip:'Skip for now',whyHeading:'Why it works',
+ keyTerms:'Key terms',maryButton:'Read about Mary Anderson',
+ unreadable:"This one can't be shown here. It is still kept in your notes download. Everything else is open.",
+ unknownVersion:'This Design Table notebook uses a format this version cannot read. Your work is kept in your notes download. The rest of the garden is open.',
+ notesLink:'Download your notes',
+ capacity:"There isn't room to save this change yet. Your work is unchanged. Ask a grown-up to export it or choose older work to delete.",
+ labels:{history:'A true thing from history',science:'A true thing from science',model:'A made-up model'},
+ teach:{
+  bags:{text:'To compare two designs, test them **the same way**. Write down every result. Then let the results decide.',steps:['Same letters, same can, same time. Only the bag changes.',"Add the satchel's damp letters: 0 + 1 + 0 = 1.","Add the basket's: 3 + 4 + 2 = 9.",'The satchel kept letters drier. The basket carries more.']},
+  brief:{text:"Before building, write a **brief**: the need, who it's for, the **musts** (criteria) and the **limits** (constraints). Every must should be checkable.",steps:['"A good crate." Good at what? We can\'t check that.','"Keeps letters dry." Better. How many, for how long?','"Keeps 12 letters dry in the rain test." Now we can check it.','Musts say what success looks like. Limits say what you must work within.']}
+ },
+ rain:{caption:'Rain test: damp letters after each try',headers:['Try','Satchel: damp letters (of 10)','Basket: damp letters (of 10)'],tries:[[1,0,3],[2,1,4],[3,0,2]],total:['Total','1 of 30','9 of 30'],
+  run:'Run the rain test',totals:'Show totals',done:'All three tries are done.',carry:'**Carry test:** satchel holds 6 parcels; basket holds 10.'},
+ frameText:'Better for ___ because the data showed ___.',
+ unfairScene:'Bramble watered the basket two minutes, the satchel one. "See? The basket\'s worse!"',
+ briefSlots:'Need · Who it\'s for · Musts · Limits',
+ checkBrief:'Check my brief',flip:'Can we check it?',
+ yourBrief:'Your brief',
+ briefCard:{need:{label:'Need:',end:'.'},who:{label:"Who it's for:",end:'.'},musts:{label:'Musts (criteria):',end:''},limits:{label:'Limits (constraints):',end:''}},
+ mary:['On a snowy day in New York, soon after 1900 (the exact year isn\'t known), Mary Anderson saw a streetcar driver lean out to clear the window. She designed a lever inside that swung a rubber blade across the glass, patented in 1903.','One way to read her story: the need was a driver who could see in snow without leaving the seat.'],
+ terms:[['Brief',"the need, who it's for, the musts and the limits."],['Criteria (musts)','what a design must do to count as a success.'],['Constraints (limits)','what you must work within, like coins, time or materials.'],['Trade-off','getting more of one good thing by having less of another.']],
+ grown:{
+  teachesLabel:'What this teaches',teaches:'comparing two designs fairly from the same test, naming each one\'s strengths and weaknesses, recommending from the data, and writing a brief with checkable musts and real limits. It builds on the Fair Test Bench.',
+  claimsLabel:"What it doesn't claim",claims:"that your explorer can design, build or test a real object alone, or write a brief unaided. The brief here is assembled from tiles; nothing typed is stored. All bag and crate numbers are made up.",
+  historyLabel:'The real history, in brief',history:'Mary Anderson patented a window wiper in 1903. "Criteria and constraints" come from US science standards (NGSS). Full list in the source audit.',
+  line:'Design Table: Two bags, {n} of 8 tried; Write the brief, {m} of 4 tried{help}.',withHelp:', with help'
+ }
+});
+const o=(id,label)=>({id,label});
+// Each item's rev changes whenever anything that grades it changes.
+export const designItems=freeze([
+ {id:'bags-guided',station:'bags',kind:'choice',rev:'r1',guided:true,prompt:'Which bag kept more letters dry?',step:'Totals: satchel 1 damp, basket 9 damp.',explanation:null,
+  options:[o('satchel','The satchel'),o('basket','The basket'),o('same','About the same')],right:'satchel',
+  lines:{satchel:'Yes. Fewer damp letters means drier.',basket:'Look at the totals. Which bag has fewer damp letters?',same:'1 and 9 are far apart. Which is fewer?'}},
+ {id:'bags-tags',station:'bags',kind:'tags',rev:'r1',prompt:'Strength and weakness tags',explanation:null,
+  options:[o('holds-10','holds 10 parcels'),o('best','best at everything'),o('keeps-dry','keeps letters dry'),o('lets-rain','lets rain in'),o('holds-6','holds only 6 parcels')],
+  slots:[o('satchel-strength','Satchel: strength'),o('satchel-weakness','Satchel: weakness'),o('basket-strength','Basket: strength'),o('basket-weakness','Basket: weakness')],
+  key:{'keeps-dry':'satchel-strength','holds-6':'satchel-weakness','holds-10':'basket-strength','lets-rain':'basket-weakness'},single:'best',
+  lines:{'single-winner':'Check the carry test. Does one bag win both?',empty:'Each bag needs a strength and a weakness.',wrong:'Look at the table again. Is that true of this bag?',right:'Yes. Each bag is better at something.'}},
+ {id:'bags-frame',station:'bags',kind:'frame',rev:'r1',prompt:'Recommendation frame',explanation:null,
+  options:[o('dry','dry letters'),o('lots','lots of parcels'),o('damp','1 damp, not 9'),o('parcels','10 parcels, not 6')],
+  slots:[o('for','Better for'),o('data','because the data showed')],gaps:{for:['dry','lots'],data:['damp','parcels']},pairs:{dry:'damp',lots:'parcels'},
+  lines:{empty:'Choose a chip for each gap.',mismatch:'Does that number show it? Look at the table.'},
+  readBack:{dry:'Better for dry letters because the data showed 1 damp, not 9.',lots:'Better for lots of parcels because the data showed 10 parcels, not 6.'}},
+ {id:'bags-improve',station:'bags',kind:'choice',rev:'r1',prompt:'Improve it',explanation:null,
+  options:[o('paint','Paint the basket green.'),o('stop','Stop testing; use the satchel.'),o('line','Line the basket with oilcloth.')],right:'line',
+  lines:{paint:'Would paint stop rain?',stop:"It's small. Could a change help?",line:'That might keep the space and stop the rain. Test it to find out.'}},
+ {id:'bags-unfair',station:'bags',kind:'choice',rev:'r1',prompt:'Can that test tell which bag is better?',explanation:null,
+  options:[o('not-fairly','Not fairly'),o('yes','Yes, the basket is worse')],right:'not-fairly',
+  lines:{'not-fairly':'Not fairly. The basket got more water. Test them the same way.',yes:'Look again. Did both bags get the same water?'}},
+ {id:'a4',station:'bags',kind:'choice',rev:'r1',ladder:true,model:true,prompt:'Satchel: 1 damp letter. Basket: 9 damp. Which kept letters drier?',explanation:'The results decide: fewer letters got damp in the satchel.',
+  options:[o('satchel','The satchel'),o('baker','The basket, because the baker made it'),o('parcels','The basket, because it holds more parcels')],right:'satchel',
+  lines:{satchel:'Yes. Fewer damp letters.',baker:"Who made it doesn't change the results.",parcels:'True, but this question is about dry letters.'},
+  hint:'Fewer damp letters means drier.',stuckLine:'One cup spilled 1 drop, another spilled 9. Which spilled less? Now try.'},
+ {id:'a5',station:'bags',kind:'number',rev:'r1',ladder:true,model:true,prompt:'Damp letters: satchel 0, 1, 0; basket 3, 4, 2. How many more for the basket?',explanation:'The basket let in 8 more damp letters over three tries.',
+  options:[],answer:8,steps:'Satchel 0 + 1 + 0 = 1. Basket 3 + 4 + 2 = 9. 9 − 1 = 8.',
+  lines:{right:'Yes. 9 take away 1 is 8.','total-not-difference':"That's the basket's total. Take away the satchel's.",'one-try-only':'Use all three tries for each bag.',other:'Not quite. Add each bag\'s tries, then take away.',whole:'Type a whole number from 0 to 99.'},
+  notes:{9:'total-not-difference',3:'one-try-only'},
+  hint:"Add each bag's tries, then take away.",stuckLine:'2, 2 makes 4; 1, 0 makes 1; 4 − 1 = 3. Now try.'},
+ {id:'a6',station:'bags',kind:'choice',rev:'r1',ladder:true,prompt:'Bramble watered the basket twice as long. Can that test pick the better bag?',explanation:"If two things change, you can't tell which one caused the result.",
+  options:[o('worse',"Yes. The basket got wetter, so it's worse."),o('same-water','No. Both bags need the same water.'),o('once-more','Yes, if she tries it just once more.')],right:'same-water',
+  lines:{worse:'It got more water. That alone could explain it.','same-water':'Right. Test them the same way.','once-more':'Another unfair try is still unfair.'},
+  hint:'What changed besides the bag?',stuckLine:'Two plants, one given twice the water. Fair? Now decide.'},
+ {id:'brief-guided',station:'brief',kind:'choice',rev:'r1',guided:true,prompt:'Is "costs 10 coins or less" a must or a limit?',step:'Does it say what success looks like, or what you work within?',explanation:null,
+  options:[o('must','Must'),o('limit','Limit')],right:'limit',
+  lines:{limit:"Yes. It limits your choices. It doesn't say what the crate does.",must:'Does this say what the crate does, or what limits you?'}},
+ {id:'a7',station:'brief',kind:'sort',rev:'r1',ladder:true,prompt:'Sort into Musts or Limits.',explanation:'Criteria say what success looks like. Constraints limit how you get there.',
+  options:[o('jars','Carries 6 jars'),o('coins','Costs 10 coins or less'),o('dry','Keeps 12 letters dry'),o('shed','Shed materials only')],
+  slots:[o('musts','Musts'),o('limits','Limits')],key:{jars:'musts',coins:'limits',dry:'musts',shed:'limits'},
+  lines:{unsorted:'Sort every card first. Which one is left?',wrong:'Does this say what the crate does, or what limits you?',right:'Yes. Two musts and two limits.'},
+  hint:'Musts are about the crate working. Limits are about making it.',stuckLine:'"Holds hot tea" is a must for a cup. "Made of clay" is a limit. Now sort.'},
+ {id:'a8',station:'brief',kind:'choice',rev:'r1',ladder:true,prompt:'Which must can you actually check?',explanation:'A checkable must lets anyone tell whether a design worked.',
+  options:[o('strong','The crate is strong enough for anything'),o('nice','Nuria thinks it looks nice'),o('jars','It carries 6 jars in the bump test')],right:'jars',
+  lines:{strong:"Strong enough for what? We can't test that yet.",nice:"Taste isn't a test. Try a must with a number.",jars:'Yes. You can test that and see.'},
+  hint:'Could you test it and get a clear yes or no?',stuckLine:'"A good cup" is vague. "Holds 200 ml without leaking" is checkable. Now pick.'}
+]);
+export const designBrief=freeze({
+ id:'ways-crate',station:'brief',rev:'r1',
+ tray:[o('shed','Shed materials only'),{id:'strong',label:'Really strong',flip:o('bump','Carries 6 jars through the bump test')},o('courier','The courier, walking'),o('keeps-dry','Keeps 12 letters dry in the rain test'),o('oak','Use the oak chest'),o('coins','10 coins or less'),{id:'nice',label:'Nice',flip:{line:'Nice for whom? Try a must you can test.'}},o('need','Carry letters and honey jars along the river path'),{id:'heavy',label:'Not too heavy',flip:o('weighs','Weighs 5 kg or less, empty')},o('days','Ready in 3 days')],
+ slots:[o('need','Need'),o('who',"Who it's for"),o('musts','Musts'),o('limits','Limits')],
+ room:{need:1,who:1,musts:3,limits:3},
+ belongs:{need:'need',courier:'who','keeps-dry':'musts',bump:'musts',weighs:'musts',shed:'limits',coins:'limits',days:'limits'},
+ solution:'oak',vague:['strong','nice','heavy'],
+ cardOrder:['need','courier','keeps-dry','bump','weighs','shed','coins','days'],
+ lines:{solution:'Maybe. First, what must any answer do?',swap:'Does this say what the crate does, or what limits you?',wrong:'Look again. Which slot does this one belong in?',room:'Every slot needs its tiles. Which one still has room?',strong:'"Really strong" → "Carries 6 jars through the bump test"',heavy:'"Not too heavy" → "Weighs 5 kg or less, empty"',nice:'Nice for whom? Try a must you can test.',right:'Your brief'}
+});
+export const itemIds=freeze(designItems.map(x=>x.id));

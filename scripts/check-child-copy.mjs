@@ -10,6 +10,8 @@ export const copyScopes = [
   {path:'dist/word-list-shelf-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/mending-shed-ui.mjs',adultBlocks:[{start:'export function mendingShedNotes(',end:'\nexport function bindMendingShed(',reason:'Only used in Grown-up notes.'}],quotations:[]},
   {path:'dist/mending-shed-content.mjs',adultBlocks:[{start:" teaches:'",end:'export const teachCards',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
+  {path:'dist/design-table-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/design-table-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/pips-copy-ui.mjs',adultBlocks:[{start:'export function pipsCopyNotes(',end:'\nexport function bindPipsCopy(',reason:'Only used in Grown-up notes.'}],quotations:[]},
   {path:'dist/pips-copy-content.mjs',adultBlocks:[{start:'    "adultLine":',end:'    "unavailableSelection":',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
   {path:'dist/endings-shelf-ui.mjs',adultBlocks:[{start:'export function endingsShelfNotes(',end:'\nexport function bindEndingsShelf(',reason:'Only used in Grown-up notes.'}],quotations:[]},
