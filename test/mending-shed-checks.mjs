@@ -142,6 +142,13 @@ export function runChecks(){
  yes(M.letGoMendingShape(bad,'clay','squash','keeps',options));eq(bad.mendingShed.pile.SPOON,badRaw.pile.SPOON);eq(bad.mendingShed.shapes.INVALID,badRaw.shapes.INVALID);eq(bad.mendingShed.shapes.clay.actions['Bad Key'],badRaw.shapes.clay.actions['Bad Key']);
  // Export and import carry the root exactly, with unreadable entries and unknown siblings.
  d.mendingShed.extra={later:[1,2]};const imported=prepareProgressImport(JSON.stringify(report(d),null,2));ok(imported.ok);eq(imported.state.mendingShed,d.mendingShed,'import keeps the root exactly');
+ // A write whose generated line would break the reader is refused; accepted retained work stays readable.
+ {const lb=initializeExplorerState(freshState());yes(M.supportMending(lb,{bench:'pile',card:'metal-bucket'},options));
+  const kept=lb.mendingShed.pile['metal-bucket'];kept.first=null;kept.latest=null;kept.sortedCheck=null;kept.checks=0;kept.tray.find(c=>c.id==='bucket').label='b'.repeat(190);
+  const imported=prepareProgressImport(JSON.stringify(report(lb),null,2));ok(imported.ok,'long retained labels import');const st=imported.state;
+  const card=()=>M.mendingShedView(st).cards.find(c=>c.id==='metal-bucket');eq(card().status,'ready');ok(card().editable);
+  const before=clone(st);const res=M.checkMendingCard(st,'metal-bucket',{object:'bucket',materials:['metal']},options);eq(res,{ok:false,error:'unavailable'});eq(st,before,'the refusal leaves it unchanged');eq(card().status,'ready','still readable');
+  yes(M.checkMendingCard(st,'metal-bucket',{object:'bucket',materials:[]},options));eq(card().status,'ready','a short line still saves');eq(st.mendingShed.pile['metal-bucket'].tray.find(c=>c.id==='bucket').label,'b'.repeat(190),'labels kept');}
  // The root travels through the real Notes import.
  const back=prepareProgressImport(JSON.stringify(report(s),null,2));ok(back.ok);
  return n;

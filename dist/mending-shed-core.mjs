@@ -66,10 +66,13 @@ export function mendingShedView(state){
  return {status:r?'ready':'new',root:r,taught,taughtStatus,pileStatus,shapesStatus,cards,samples:sampleRows,actions:actionRows,sorted,tried,helped};
 }
 const failure=error=>({ok:false,error});
+// Every unreadable part of a view, so a write can prove it leaves readable work readable.
+function unreadable(v){const out=new Set();if(v.status==='unsupported')out.add('root');if(v.taughtStatus!=='ready')out.add('taught');for(const c of v.cards)if(c.status==='unreadable')out.add('card:'+c.id);for(const s of v.samples){if(s.status==='unreadable')out.add('sample:'+s.id);for(const [a,c] of Object.entries(s.cells))if(c.status==='unreadable')out.add(`cell:${s.id}:${a}`);}return out;}
 function mutate(state,fn,options={}){
  if(!object(state)||typeof options.canExport!=='function')return failure('capacity');
  try{const candidate=clone(state);if(!own(candidate,'mendingShed'))candidate.mendingShed={v:1,taught:{pile:false,shapes:false},pile:{},shapes:{}};
   const r=candidate.mendingShed;if(!object(r)||r.v!==1)return failure('unavailable');const result=fn(r,candidate);if(!result.ok||result.changed===false)return result;
+  const before=unreadable(mendingShedView(state));for(const k of unreadable(mendingShedView(candidate)))if(!before.has(k))return failure('unavailable');
   if(!recoveryFitsProgressLimits(candidate))return failure('capacity');const proposal=clone(r);if(options.canExport(candidate)!==true)return failure('capacity');state.mendingShed=proposal;return result;
  }catch{return failure('capacity');}
 }
