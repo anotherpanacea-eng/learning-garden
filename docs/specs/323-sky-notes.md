@@ -1,6 +1,6 @@
 # 323 · Dot's sky notes
 
-Status: proposed, 2026-10-31. A bounded slice of [spec 116](116-field-guide-almanac.md) §2 (Sky) built on [spec 281](281-weather-tallies.md)'s real-date writer rules. Copy: [323-sky-notes-text.md](../content/323-sky-notes-text.md). Backlog card LG-24, lane D. Commissions one build after independent spec review and the science check in §8.
+Status: build in progress, 2026-10-31. The sky modules, Grown-up notes, transfer names, links and both test suites are in the LG-24 build PR. The `#almanac/sky` route in `app.mjs`, the stylesheet link in `index.html` and the `check-child-copy` scopes follow in the same PR once those files are free. A bounded slice of [spec 116](116-field-guide-almanac.md) §2 (Sky) built on [spec 281](281-weather-tallies.md)'s real-date writer rules. Copy: [323-sky-notes-text.md](../content/323-sky-notes-text.md). Backlog card LG-24, lane D. Commissions one build after independent spec review and the science check in §8.
 
 ## 1. Teaching and boundary
 

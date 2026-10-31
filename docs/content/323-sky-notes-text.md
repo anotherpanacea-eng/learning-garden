@@ -13,7 +13,7 @@ Companion to [spec 323](../specs/323-sky-notes.md). First drafts for content and
 | Date line | Today on this device: {weekday}, {month} {day} |
 | Save | Save today's note |
 | Saved | Saved. Dot drew today's moon in the strip. |
-| Change prompt (today already saved) | You noted {shape label} today. Choose another shape and save to change it. |
+| Change prompt (today already saved) | You noted {shape label, lowercase} today. Choose another shape and save to change it. For `not-seen`: You noted that you couldn't see the moon today. Choose another shape and save to change it. |
 | Same choice | That is already today's note. |
 | No choice yet | Choose a shape first. |
 | Date changed | The date on this device changed. Refresh to see today. Nothing was saved. |
