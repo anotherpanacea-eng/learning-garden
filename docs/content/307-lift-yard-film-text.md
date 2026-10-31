@@ -16,7 +16,7 @@ Transcript heading: **Read the complete film transcript**. Drawing heading: **Ab
 
 Drawing paragraphs:
 
-- **These are supplied examples, not a filmed experiment or a real lifting plan. In the lever scenes, the film's “lift” is the upward force at one end of the fallen beam. The beam turns around its other end; that lift force is not the whole weight of the beam. Our yard lifts a hanging load and uses its own numbers.**
+- **These are drawn examples, not a filmed experiment or a real lifting plan. In the lever scenes, the film's “lift” is the upward force at one end of the fallen beam. The beam turns around its other end; that lift force is not the whole weight of the beam. Our yard lifts a hanging load and uses its own numbers.**
 - **These models imagine slow, steady movement and ignore friction and other losses. For the same load and rise, less force needs a longer movement; whole-trip input work stays the same. For the lever's downward push, count the distance moved down, not the curved path of the handle. In the work rectangles, a sideways distance arrow stands for the distance pushed down. The ramp's 4 m guide follows its slope, not the ground.**
 - **The film is an approximate explanatory drawing. Its pole, arrows and paths are not measurements or a construction plan. The yard's rigid pole is a separate model; do not measure the film's pictures to choose its arms or steps. Real friction requires more push than the ideal model.**
 
