@@ -87,7 +87,7 @@ for(const order of ['shelf-first','siblings-first']){const v=fresh();if(order===
 const max=makeWordListShelfSource();max.words=Array.from({length:64},(_,i)=>({...clone(max.words[0]),id:'w'+i}));const ms=C.wordListShelfSource(max);ok(ms);eq(C.wordListShelfResult(ms,{placements:Object.fromEntries(ms.words.map(w=>[w.id,'double'])),help:[]}).rows.length,64);
 const htmlState=fresh(),htmlBefore=clone(htmlState);ok(wordListShelfPage(htmlState).includes('data-word-list-shelf-root'));eq(wordListShelfNotes(htmlState),'');eq(htmlState,htmlBefore,'rendering and Notes allocate nothing');
 const ui=start();yes(C.checkWordListShelf(ui,options));yes(C.keepWordListShelf(ui,options));matchAll(ui);yes(C.checkWordListShelf(ui,options));yes(C.keepWordListShelf(ui,options));
-ok(wordListShelfPage(ui).includes('id="wls-feedback"'));ok(wordListShelfNotes(ui).includes('First kept'));ok(wordListShelfNotes(ui).includes('Latest kept'));
+ok(wordListShelfPage(ui).includes('id="wls-feedback"'));for(const tray of makeWordListShelfSource().trays)ok(wordListShelfPage(ui).includes(tray.description),'every retained tray description is available beside its label');ok(wordListShelfNotes(ui).includes('First kept'));ok(wordListShelfNotes(ui).includes('Latest kept'));
 yes(C.placeWordListCard(ui,'yacht','double',options));ok(!wordListShelfPage(ui).includes('id="wls-feedback"'),'stale current verdict is not rendered');
 const uiBefore=clone(ui);wordListShelfPage(ui);wordListShelfNotes(ui);eq(ui,uiBefore,'viewing keeps/history never rewrites records');
 eq(wordListShelfSpeech(ui,'sentence','yacht'),'The yacht is moored beside the ferry.');eq(wordListShelfSpeech(ui,'contrast'),'');eq(wordListShelfSpeech(ui,'example'),'');
