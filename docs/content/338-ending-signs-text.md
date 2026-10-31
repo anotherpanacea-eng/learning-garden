@@ -4,7 +4,8 @@ Original town text selected from [263](263-market-signs-text.md), with the bound
 
 ## Exact exceptions and assignments
 
-- The word on the bench is called a **root word**, as in 263's glossary. Every bench root is a whole English word (dramatic and basic included), so the label is honest here. The no-root shelf keeps 263's own line.
+- The word on the bench is called a **root word**, as in 263's glossary. Every bench root is a whole English word (dramatic and basic included), so the label is honest here.
+- Exception to exact 263 reuse: card 12's last sentence, the shelf label and the shelf line say **no obvious root word here**, not 263's categorical "no root word". This is the teaching distinction (DfE: "no obvious root word"), not a claim about word origins.
 - The four tools from 263 keep their names: **just add**, **drop the e**, **y to i**, **le to ly**. The Keeper's Desk tool **ic to ically** is offered from arrival under a plain **A harder tool** label. There is no age, depth or story gate.
 - Bench tool rules are literal: **just add** writes root + ending; **drop the e** needs a root that ends in e and takes that e off first; **y to i** needs a root that ends in y and writes i in its place; **le to ly** works with -ly only and swaps the root's final le for ly; **ic to ically** works with -ly only and adds ally after the root's final ic. When a tool cannot work, its button stays visible with the finite reason below. It is never hidden.
 - 263's four authored hint lines are used exactly. For the other authored pair and tool mismatches, use the finite templates under **Bench feedback**. No other feedback is generated.
@@ -26,7 +27,7 @@ Tools, in this order: **just add / drop the e / y to i / le to ly / ic to ically
 
 Missing selection: **Choose a root word, an ending and a tool first.** Paused older note: **This older sign note does not match its own tool. It is kept as it was.** Kept: **Your sign is kept. You can make another.** Already kept: **This sign is already on your shelf.** Cleared: **Your waiting sign is clear. Your kept signs are still here.**
 
-Shelves: **Odd ones / No root word**. Practice: the existing 325 controls plus **Ending sign jobs** as the group heading. Job titles: **Fresh bread / A happy painter / Handle gently / Famous honey / Your invitation / Learned spellings / A dramatic bow**.
+Shelves: **Odd ones / No obvious root word here**. Practice: the existing 325 controls plus **Ending sign jobs** as the group heading. Job titles: **Fresh bread / A happy painter / Handle gently / Famous honey / Your invitation / Learned spellings / A dramatic bow**.
 
 Manual teaching and panels reuse 325's labels. New panel: **The bakery board story**.
 
@@ -110,7 +111,7 @@ Worked example: *usual + -ly*. 1. Usual ends in l. 2. -ly starts with l. Nothing
 Worked example: *simple + -ly*. 1. Simple ends in p, then le. 2. Swap le for ly. 3. Simply.
 
 **Card 12. -ous**
-> -ous makes a describing word: danger, dangerous. A final e usually drops: fame, famous. Y after a consonant usually becomes i: glory, glorious. Some have no root word.
+> -ous makes a describing word: danger, dangerous. A final e usually drops: fame, famous. Y after a consonant usually becomes i: glory, glorious. Some have no obvious root word here.
 
 Worked example: *glory + -ous*. 1. Glory ends in r, then y. 2. Change y to i. 3. Glorious.
 
@@ -164,7 +165,7 @@ Worked example: *basic + -ly*. 1. Basic ends in -ic. 2. Add -ally. 3. Basically.
 
 Endings, in this order: **-ly / -ous / -ation**.
 
-**No root word shelf:** enormous, jealous. Line: **These -ous words have no root word to find.**
+**No obvious root word shelf:** enormous, jealous. Line: **These -ous words have no obvious root word here to find.**
 
 **Odd ones shelf:** truly: **true drops its e.** · publicly: **just -ly.** · courageous: **courage keeps its e.** Shelf line: **Spelling rules usually work. These words keep their own way. A dictionary has the last word.**
 

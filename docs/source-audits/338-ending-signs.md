@@ -8,7 +8,9 @@ Checked 2026-10-31. Original teaching, fiction and items are selected from [263]
 - [Common Core Language 3](https://www.thecorestandards.org/ELA-Literacy/L/3/) L.3.2e (suffixes on base words) and L.3.2f (spelling patterns and generalizations); [RF.3.3a](https://www.thecorestandards.org/ELA-Literacy/RF/3/) (common derivational suffixes). These motivate the tasks; they do not validate them as assessments.
 - 263's word table records Wiktionary status for every C1-C5 and C7 distractor (freshley, freshlee, happyly, happly, gentlely, gentley, fameous, famus, inviteation, invitasion, dramaticly, drammatically: no entry), checked 2026-10-26.
 
-**Refresh limit, stated plainly:** this session could not reach Wiktionary or Merriam-Webster (network refused). No headword was re-fetched here. The independent subject reviewer must re-check all 24 keyed joins, the three odd ones, the two no-root words, the six C6 words and the twelve distractors against a primary dictionary before runtime is commissioned. This audit makes no new lexical claim beyond 263's record.
+**Later refresh (Codex, on PR338):** all 35 target headwords (24 joins, three odd ones, enormous, jealous, six C6 words) refreshed at Merriam-Webster and supported; the English Wiktionary query API returned missing entries for all 12 authored distractors (an entry-status observation, not proof a string never occurs); the DfE appendix was refreshed at its current GOV.UK link, and its "no obvious root word" wording is now used on screen.
+
+**Original refresh limit, stated plainly:** this session could not reach Wiktionary or Merriam-Webster (network refused). No headword was re-fetched here. The independent subject reviewer must re-check all 24 keyed joins, the three odd ones, the two no-root words, the six C6 words and the twelve distractors against a primary dictionary before runtime is commissioned. This audit makes no new lexical claim beyond 263's record.
 
 ## Mechanical checks run for this slice
 
