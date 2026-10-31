@@ -75,14 +75,16 @@ let controller;
 export function bindRiverMarket(state,ctx={}){
  controller?.abort();controller=new AbortController();const signal=controller.signal;
  const root=document.querySelector('[data-river-root]');if(!root)return;
- const owner=ctx.explorerId?.()??'',route='#mercado',v=local(state,owner),ownedRoot=state.spanish;
+ const owner=ctx.explorerId?.()??'',route='#mercado',v=local(state,owner);
+ // The root this binding expects: advanced after its own writes, so an outside replacement is still refused.
+ let ownedRoot=state.spanish;
  const owned=()=>root.isConnected&&document.querySelector('[data-river-root]')===root&&(!ctx.notebook||ctx.notebook()===state)&&(ctx.explorerId?.()??'')===owner&&(!ctx.isActive||ctx.isActive())&&state.spanish===ownedRoot;
  const live=el=>owned()&&location.hash===route&&el.isConnected&&root.contains(el);
  const options={canExport:ctx.canExport};
  const say=message=>{const n=document.querySelector('#river-status');if(n)n.textContent=message;};
  const stop=()=>ctx.stopSpeech?.();
  function redraw(target,message=''){ctx.render?.();const next=document.querySelector('[data-river-root]');if(!next||location.hash!==route)return;say(message);const f=next.querySelector(target)||next.querySelector('#river-title');f?.focus({preventScroll:true});}
- function write(fn){const result=fn();if(!result.ok){say(result.error==='unavailable'?T.unavailable:T.capacity);return null;}if(result.changed!==false)ctx.save?.();return result;}
+ function write(fn){const result=fn();if(!result.ok){say(result.error==='unavailable'?T.unavailable:T.capacity);return null;}if(result.changed!==false){ownedRoot=state.spanish;ctx.save?.();}return result;}
  try{if(!localVoices(window.speechSynthesis?.getVoices?.()||[],'es').length)root.querySelector('[data-river-novoice]')?.removeAttribute('hidden');}catch{}
  // Narration is recorded as support before speech starts; a refused write stops it.
  root.addEventListener('click',ev=>{const b=ev.target.closest?.('[data-speak-lang="es"]');if(!b||!live(b))return;if(!core.riverMarketView(state).carga)return;if(!write(()=>core.useRiverSupport(state,'narration',options)))ev.stopPropagation();},{capture:true,signal});
