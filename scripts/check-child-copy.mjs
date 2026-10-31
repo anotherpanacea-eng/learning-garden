@@ -39,7 +39,7 @@ export const copyScopes = [
   {path:'dist/lift-film.mjs', adultBlocks:[], quotations:[]},
   {path:'dist/common-cuts-ui.mjs', adultBlocks:[], quotations:[]},
   {path:'dist/common-cuts-content.mjs', adultBlocks:[
-    {start:"grownUp:'", end:'\n exampleLabel:', reason:'Shown only in the For grown-ups panel.'},
+    {start:"grownUp:'", end:' exampleLabel:', reason:'Shown only in the For grown-ups panel.'},
   ], quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
