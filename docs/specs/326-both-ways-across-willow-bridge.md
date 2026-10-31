@@ -45,12 +45,14 @@ Each reader is pure and follows 248's rules:
 
 | Chapter | Host and what counts | Ref |
 | --- | --- | --- |
-| `market` | The River Market's *La carga* ([324](324-river-market-cargo.md)). Requires `spanish.v:1`, read from `errands.carga` and each entry of `earlier`. An errand counts when its frozen source is readable, its `tryId` is a unique positive integer, and `taskEvidence.firstSubmission` is not null. A try that is still sorting counts. | `{tryId, amount}` |
-| `seeds` | The seed exchange table ([316](316-seed-exchange-table.md)). Requires `seedExchange.version:1`. A visit key matches `exchange-N`, and each of its `firstKept` and `latestKept` is independently accepted by the exported `validSeedSnapshot`. Working plans count. | `{visitId, edition:'first'\|'latest', sourceId}` |
-| `route` | Courier Clock Walk. `clockWalkView(state)` lists readable cases, and a case with a readable `kept` counts, whether or not it has a check. | `{caseId, sourceId}` |
-| `letters` | The upstream post ([291](291-upstream-question.md)). `upstreamView(state)` must be ready, and each post whose `posted` is `{kind:'local-postbag-question', version:1}` counts. An opened reply is not required. | `{questionId, sourceId, sourceVersion}` |
+| `market` | The River Market's *La carga* ([324](324-river-market-cargo.md)). Requires `spanish.v:1`, read from `errands.carga` and each entry of `earlier`. An errand counts when its frozen source is readable, its `tryId` is a unique positive integer, and `taskEvidence.firstSubmission` is a present object. A try that is still sorting counts. `amount` is the errand's frozen `source.amount`, never the root's current preference, and `nextTry` is not consulted. | `{tryId, amount}` |
+| `seeds` | The seed exchange table ([316](316-seed-exchange-table.md)). Requires `seedExchange.version:1`. A visit key matches `exchange-N`, and each of its `firstKept` and `latestKept` is independently accepted by the exported `validSeedSnapshot`, without requiring a readable current draft or the other edition. Working plans count. `sourceId` is the snapshot's frozen source id. | `{visitId, edition:'first'\|'latest', sourceId}` |
+| `route` | Courier Clock Walk. Requires `courierClockWalk.version:1` and an object `cases`. For each case key, `kept` is read independently of the case's current page, draft, checks, counter and feedback: it counts when it holds a `snapshot` object whose frozen `source` passes the exported `validWalkSource`, whether or not it has a check. `caseId` is the case key, `sourceId` is `kept.snapshot.source.id` and the label uses `kept.snapshot.source.title`. `clockWalkView` is not the eligibility gate, since it drops a case whose current work is unreadable. | `{caseId, sourceId}` |
+| `letters` | The upstream post ([291](291-upstream-question.md)). `upstreamView(state)` must be ready. Each entry of its `questions` whose `postStatus` is `'ready'` counts, so the host's own receipt and duplicate checks apply. The ref comes from that entry's `post.posted` and the label from `source.label`. Raw posts are never enumerated by kind and version alone. An opened reply is not required. | `{questionId, sourceId, sourceVersion}` |
 
-Activities are named `river-market`, `seed-exchange`, `courier-clock-walk` and `upstream-post`; artifact kinds are `cargo-errand`, `exchange-plan`, `kept-walk` and `posted-question`. A chapter whose host root is missing or unsupported shows the companion's "nothing ready yet" line and its Visit link. That includes `market` until 324 is built, and nothing else is blocked by it.
+Identities: a market try is its `tryId` across `errands.carga` and `earlier` together, counted before unreadable entries are filtered; a seed plan is its visit id plus edition, so first and latest stay separate even when they share a source id; a walk is its case key; a letter is its question id within its frozen source id and version. Candidate keys are deterministic serialized address tuples, as in 248. Labels show only the friendly kind and saved identity from the companion, never an outcome.
+
+Activities are named `river-market`, `seed-exchange`, `courier-clock-walk` and `upstream-post`; artifact kinds are `cargo-errand`, `exchange-plan`, `kept-walk` and `posted-question`. Their friendly names are in the companion. A chapter whose host root is missing or unsupported shows the companion's "nothing ready yet" line and its Visit link. That includes `market` until 324 is built, and nothing else is blocked by it.
 
 ## State
 
@@ -60,7 +62,7 @@ The story stays at version 1. Add an optional `acts.III` object, with known fiel
 - **Send the seedlings up the river** needs three distinct valid receipts and a started act. It records `ended:true` and the season once, using 248's `seasonForMonth`.
 - A readable `ended:true` stays reached whatever happens to the receipts or hosts later.
 
-New scenes are `both-ways-sent`, recorded with the first ending, and `ways-page-revealed`, recorded by **Read the third page** before Page 3 shows. Pages remain derived, as 120 §12 requires. Page 3 is available after a readable ended Act III, and visible after its reveal scene. It uses the existing `story.pageAmount`: Short, Longer, or the original as Hollis wrote it. The opening, chapters and ending share `story.frameAmount`. No new preference, root or transfer membership is added.
+New scenes are `both-ways-sent`, recorded with the first ending, and `ways-page-revealed`, recorded by **Read the third page** before Page 3 shows. Pages remain derived, as 120 §12 requires. Page 3 is available after a readable ended Act III, and visible after its reveal scene. It uses the existing `story.pageAmount`: Short, Longer, or the original as Hollis wrote it. The opening, chapters and ending share `story.frameAmount`. No new preference, root or transfer membership is added. The existing setters' eligibility extends to Act III reached on its own: frame controls work once Act III can start or is started or ended, and page controls once Page 3 is visible, even when an earlier act is unreadable. A malformed preference stays raw, as in 248, and changing an amount never starts, ends or reveals anything.
 
 Mutators take the options-last `{canExport}` convention:
 - `startActThree`
@@ -108,6 +110,13 @@ Pure checks:
 - Malformed `acts.III` fields behave per 248's matrix.
 - Real-transfer refusal is atomic.
 - Renders and Notes make no write.
+- A kept walk or kept seed edition still counts when the current work or the other edition is unreadable.
+- A host save alone creates no receipt, and every story action leaves host roots unchanged.
+- An unstarted act can't end, a route or scene alone can't start, end or reveal Act III, and Page 3 needs a readable `ended:true` as well as its reveal scene.
+- Each scene is recorded only by its own explicit action. The season is stored once, and an existing malformed season stays exactly as it was.
+- Act III reached on its own survives damage to Act I or II, and its page and frame preferences stay separate and usable there.
+- An invalid chapter route falls back to the hub without a write.
+- Every shipped string and placeholder matches the companion or its named source, with labels read from the frozen fields above.
 
 Browser journeys at 320 and 820:
 - Open the first letter, then start Act III.
@@ -115,6 +124,7 @@ Browser journeys at 320 and 820:
 - Offer three chapters.
 - Send the seedlings, reload, replay, read Page 3 at each amount, and check that Pages 1 and 2 stay readable.
 - The letter-arrival path from 249.
-- Stale controls, reset, saving off, a forced preflight refusal, and a Notes download and import of a partial Act III beside a complete one.
+- Stale controls, reset, saving off, a forced preflight refusal, and a Notes download and import of a partial Act III beside a complete one, with reload, explorer switch and download again leaving both unchanged.
+- Focus, target size, no overflow, the welcome-film guards, and read-aloud stopping on navigation.
 
 Physical iPad, VoiceOver and learning effects remain unqualified until checked. This is followed by exact-head implementation review and the repository's landing procedure.
