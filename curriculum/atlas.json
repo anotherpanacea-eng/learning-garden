@@ -430,6 +430,16 @@
       "scope": "Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization."
     },
     {
+      "id": "french-ferry",
+      "name": "The ferry crossing (French)",
+      "status": "built-local",
+      "patterns": [
+        "read"
+      ],
+      "route": "#bac",
+      "scope": "Spec 327's Le bac: a morning and an afternoon crossing with Madame Roux, hearing her French lines and answering aloud or by picking, with word and meaning help, local French speech and two short teaching cards. Supported practice, not a French assessment; French is outside Marble's English organization and no topic coverage is claimed."
+    },
+    {
       "id": "words",
       "name": "Word Garden",
       "status": "live",

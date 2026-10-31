@@ -13,7 +13,7 @@ const choices=[['continue','Continue something'],['questions','Follow a question
 const places=[
  ['#cafe','Almost-Right Café','cafe'],['#loft','Story Loft','loft'],['#post','Willow Post Office','post'],['#workshop','Storm Workshop','workshop'],
  ['#living','Living Garden','living'],['#numbers','Number Garden','numbers'],['#facts','Facts through 12 × 12','numbers'],['#words','Word Garden','words'],
- ['#paris','Paris stories in English','paris'],['#french','Paris stories in French','paris'],['#science','Water Lab','science'],['#orchard/games','Games Table','games'],
+ ['#paris','Paris stories in English','paris'],['#french','Paris stories in French','paris'],['#bac','The ferry crossing (French)','paris'],['#science','Water Lab','science'],['#orchard/games','Games Table','games'],
  ['#desk','Keeper’s Desk','desk'],['#town/remembers','Town stories','town'],['#riddles','Riddles in the hedge','riddles'],['#archive','Travelers’ Archive','paris'],
  ['#studio/bells','Bell Studio','bells'],['#studio/rhythm','Rhythm Studio','rhythm'],['#explore','Choose a curiosity','explore'],['#storm','Story paths','story'],
  ['#pathways','Subject starting points','notes']
