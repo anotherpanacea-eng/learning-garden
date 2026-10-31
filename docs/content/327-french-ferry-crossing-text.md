@@ -136,12 +136,11 @@ Shown after a pick that doesn't fit. The card stays picked, and the explorer can
 | --- | --- |
 | Start again | Start again |
 | After Start again | A fresh copy of this crossing is ready. Your earlier one is kept in your notes. |
-| Too many earlier crossings | This crossing has been tried many times. Download your notes to keep them all, then start again. |
 | An unreadable saved crossing | This saved crossing can't be read in this version. It stays in your notes. |
 | A refused write | This couldn't be kept. Your work is unchanged. Download your notes. |
 
 ## Grown-up notes
 
-**Line:** The ferry crossing (French): {Le bac du matin / Le bac de l'après-midi} {crossed / started / not started}{, words shown / , no French voice}; said aloud {n} of 5 (the explorer's own choice of button).
+**Line:** The ferry crossing (French): {Le bac du matin / Le bac de l'après-midi} {crossed / started / not started}{, words shown / , no French voice}; French speech started with her words hidden on {n} of 5; said aloud {n} of 5 (the explorer's own choice of button).
 
-**Details:** This is listening and speaking practice in a supplied situation, not a French assessment. The game hears nothing: there is no microphone and no speech recognition. **I said it** records only that the explorer chose that button. Listening is observed only when Madame Roux's words stayed hidden and a French voice spoke them. The voice is the device's own French speech, not a recording of a French speaker. It can't show how well anyone speaks or understands French, and it doesn't change the French reading activities.
+**Details:** This is listening and speaking practice in a supplied situation, not a French assessment. The game hears nothing: there is no microphone and no speech recognition. **I said it** records only that the explorer chose that button. The notes can say that French speech started while Madame Roux's words were hidden. They can't show that anyone heard, understood or finished listening. The voice is the device's own French speech, not a recording of a French speaker. It can't show how well anyone speaks or understands French, and it doesn't change the French reading activities.
