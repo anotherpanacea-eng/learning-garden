@@ -48,9 +48,17 @@ Open [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#
 
 The complete game, including Word Garden, is published on Cloudflare Static Assets. The earlier Sites address retains its earlier release. Browser-local notebooks belong to their address: existing progress stays at the old address; it is not automatically copied to Cloudflare. Use Grown-up notes → Bring progress from another site to import the old notes JSON file locally as a separate explorer; existing explorers are preserved. Move one explorer at a time and keep the original file until you have checked the import.
 
+### Post Office: The Exchange Manifest (market list)
+
+From the Post Office, **The Exchange Manifest** (`#post/manifest`) asks where a colon opens a list and where semicolons split big items. Place a mark in each gap of four market lines and tap **Load it**: Pip loads one crate per piece, reading only the marks. Practice set A, teach cards and an "I'm stuck" ladder sit beside it; support is saved before it shows, and nothing is scored. It is the first slice of spec 278 ([spec 319](docs/specs/319-market-list-marks.md)).
+
+Check the model with `node test/manifest-checks.mjs`. The browser journeys run with a local server and `MANIFEST_TEST_URL=http://127.0.0.1:PORT/ node test/manifest-browser.mjs` (set `PLAYWRIGHT_MODULE` when Playwright lives elsewhere, and `MANIFEST_ARTIFACTS` for screenshots).
+
 ### Word Workshop: The Prop Box
 
 From Word Garden, **Visit the Prop Box** (`#words/props`) to label twelve pictured props and read three short scenes together. Letter tiles, a different worked example and word comparisons preserve each waiting draft. Any amount of adult help is welcome. This first room uses adult-read demonstrations, with no recorded phonics, speech synthesis or independent-reading score. Grown-up notes downloads retain the source material, drafts and labels with each explorer. [Spec 320](docs/specs/320-word-room.md).
+
+**Market Signs** (`#words/signs`) adds a painted prefix bench and a five-page model dictionary. Keep familiar or unexpected combinations, compare letters at joins, look between guide words and try ten open sign jobs. Each waiting sign, page and supplied draft remains separate; first/latest versions and frozen sources travel through Notes. This is guided written-word practice, with adult shared reading and no sound samples or independent spelling assessment. See [spec325](docs/specs/325-prefix-signs-and-dictionary.md). Run `node test/market-signs-checks.mjs` and `python3 test/market-signs-browser.py`; `MARKET_SIGNS_ARTIFACTS` selects a private synthetic screenshot directory.
 
 Check the logic with `node test/word-room-checks.mjs` and the touch, keyboard and Notes-transfer journeys with `python3 test/word-room-browser.py`. The browser suite uses installed Chrome on macOS, `CHROME_PATH` when supplied, or Playwright Chromium elsewhere. `WORD_ROOM_ARTIFACTS` selects a private output directory for synthetic screenshots and receipts.
 
