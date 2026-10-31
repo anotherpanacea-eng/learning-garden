@@ -63,6 +63,7 @@ try{
  // A control left over from another explorer cannot write.
  {const {c,p}=await fresh(820,1000);await act(p,'open-morning').click();await p.locator('#bac-crossing-title').waitFor();const stale=await p.evaluateHandle(fit=>document.querySelector(`[data-bac-card="${fit}"]`),morning.steps[0].fit);
   await p.locator('#explorer-switch').click();await p.locator('#explorer-new').click();await p.locator('#explorer-create').click();await p.locator('[data-bac-root]').waitFor();
-  await stale.evaluate(b=>b.click());ok(!Object.hasOwn(await book(p),'frenchFerry'),'detached control writes to neither explorer');ok(p.url().endsWith('#bac'),'switch stays on the page');await c.close();}
+  const snapshot=()=>p.evaluate(()=>Object.fromEntries(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)])));const before=await snapshot();
+  await stale.evaluate(b=>b.click());eq(await snapshot(),before,'a detached writing control changes neither explorer');ok(!Object.hasOwn(await book(p),'frenchFerry'),'the new explorer has no ferry save');ok(p.url().endsWith('#bac'),'switch stays on the page');await c.close();}
 }finally{await browser.close();}
 console.log(`French ferry browser checks: ${n} assertions passed.`);
