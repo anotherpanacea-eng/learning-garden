@@ -6,7 +6,7 @@
 
 Delivery tags: Café pantry / Library supplies / Garden stores / Lantern supplies / Post Office stores / Mill stores. Each shows “Load weight: {w} N”, “Winch can pull up to {c} N”, “Boards available: {listed lengths} m”, “Top mark: 1 m above the start”. Newtons (N) measure force. These are model equipment limits, not a real lifting plan.
 
-Plan instruction: “Find a ramp that fits this delivery. Sometimes more than one works.” Keys: 2 m / 3 m / 4 m / 6 m. Preview: “{L} m ramp · needs {F} N of steady rope pull”. When unavailable: “Planned board—not supplied for this delivery.” Stock refusal: “This delivery has boards up to {b} m. Choose a supplied board.” Add “Your current trip is still waiting.” only if started. Force refusal: “This ramp needs {F} N. This winch can pull up to {c} N. Try a longer supplied ramp.” If both fail, explain stock first.
+Plan instruction: “Find a ramp that fits this delivery. Sometimes more than one works.” Keys: 2 m / 3 m / 4 m / 6 m. Preview: “{L} m ramp · needs {F} N of steady rope pull”. When unavailable: “Planned board—not available for this delivery.” Stock refusal: “This delivery has boards up to {b} m. Choose an available board.” Add “Your current trip is still waiting.” only if started. Force refusal: “This ramp needs {F} N. This winch can pull up to {c} N. Try a longer available ramp.” If both fail, explain stock first.
 
 Actions: **Start this ramp** / **Continue this trip** / **Start this ramp from the bottom** / **Keep current trip** / **Change plan**. Different draft, only if started: “Your {activeL} m trip waits at {d} m of rope pulled. This preview starts at the bottom.” Before replacing a started trip, only for a valid startable draft: “Starting this ramp ends your waiting {activeL} m trip.” Starting a different ramp keeps the job's previous delivery, if any; the new trip starts at zero.
 
@@ -42,6 +42,6 @@ Jobs chooser: "Six deliveries · {count} reached the top". "Every job is open. Y
 
 Model note: "Newtons (N) measure force, not mass. The winch adjusts its pull; its maximum is a limit, not the force used on every ramp. These are model equipment limits, not a real lifting plan." Heading: "Grown-ups: sources and limits". Notice: "Supplied teaching, not an assessment or physical experiment. No steps, support requests, reading or hearing results are added to notes." Links: "OpenStax: inclined planes", "simple machines", "work and energy".
 
-Hear this turn: "{destination}. {Current planned ramp / Current ramp}. Load weight {w} newtons. Winch limit {c} newtons. {instruction} {L} meter ramp, required pull {F} newtons. Rope pulled {d} of {L} meters. Height gained {reduced d/L} meter. Rope work so far {F*d} joules." Append a space and held text when held.
+Hear this turn: "The shops need dry stores after the storm. {destination}. {Current planned ramp / Current ramp}. Load weight {w} newtons. Winch limit {c} newtons. {instruction} {L} meter ramp, required pull {F} newtons. Rope pulled {d} of {L} meters. Height gained {reduced d/L} meter. Rope work so far {F*d} joules." Append a space and held text when held.
 
 Shared groups: "Machine", "View"; buttons: **Ramp / Lever**. The film header here uses "Willowbank · a lifting idea" and "The Lift Yard"; imported film content is outside these sheets.
