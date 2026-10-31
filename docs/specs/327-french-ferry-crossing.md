@@ -21,17 +21,17 @@ This is supported listening and speaking practice, not a French assessment. It m
 Route `#bac`. Link it from Home beside the French entrances, labeled **The ferry crossing (French)**, and from the `#learn/french` page. It is open from the start.
 
 1. **Arrival.** The companion's opening. Then the **Crossings** list with two entries, each with its label: *Le bac du matin* and *Le bac de l'après-midi*. Both are open, in any order.
-2. **Teaching.** The **Question words** card shows before the first crossing on a first visit. It has a link to itself and to **Numbers that sound alike** at all times. Every French line on both cards has **Hear it**.
+2. **Teaching.** The **Question words** card shows before the first crossing on a first visit. It has a link to itself and to **Numbers that sound alike** at all times. Every French line on both cards has **Hear it**. On the sounds card each linked phrase (*dix heures*, *trois euros* and so on) is its own button, and the *Où* and *D'où* buttons speak their whole questions. Speech never gets guillemets or a middle-dot list, and shipped French uses a no-break space inside « » and a narrow no-break space before ? and !.
 3. **A crossing**, one step at a time, with Dot's note in English visible throughout. Steps 1 to 4 each go like this:
    - **Listen.** **Hear Madame Roux** speaks her question. Her words stay hidden, with the companion's "Listen first" note and a **Show her words** control. **Hear her again** replays it as often as wanted.
-   - **Answer.** Six answer cards, in the companion's fixed order. The same six stay on screen for all four steps, and none is removed after use, so the last step isn't given away. A pick that doesn't fit shows the companion's feedback line for its case, stays picked, and the explorer can pick again. One feedback line shows per pick: the *À*-for-*D'où* or *De*-for-*Où* line first, then the wrong-kind line, then the right-kind-wrong-detail line. In the wrong-kind line, {question word} and its meaning come from the step's frozen kind (*où*: where you are going; *d'où*: where you are coming from; *combien*: a number; *à quelle heure*: a time). In the right-kind line, the detail is how many for *combien*, the time for *à quelle heure* and the place for *où* or *d'où*. Step 5 uses only the sounds-alike line. Listen, Answer and Say it name the flow here; they aren't extra interface labels, and any visible step heading needs an exact companion entry first.
+   - **Answer.** Eight answer cards, two of each kind, in the companion's fixed order. The same eight stay on screen for all four steps, and none is removed after use. Every step needs Dot's note, because each kind has a card with the wrong detail. A pick that doesn't fit shows the companion's feedback line for its case, stays picked, and the explorer can pick again. One feedback line shows per pick: the *À*-for-*D'où* or *De*-for-*Où* line first, then the wrong-kind line, then the right-kind-wrong-detail line. The wrong-kind line names what the **picked card** tells (how many, the time, where you are going or where you are coming from), never the question word, so it doesn't give the question away. In the right-kind line, the detail is how many for *combien*, the time for *à quelle heure* and the place for *où* or *d'où*. Step 5 uses only the sounds-alike line. Listen, Answer and Say it name the flow here; they aren't extra interface labels, and any visible step heading needs an exact companion entry first.
    - **Say it.** After a fitting pick, the saying step shows the card with **Hear how it sounds**, then **I said it** and **Not this time**. Either button moves on. Neither is required for the crossing to count as crossed.
 4. **Step 5, your turn to ask.** The prompt and the question to say, with **Hear how it sounds**, **I said it** and **Not this time**. Then **Hear her answer** speaks Madame Roux's reply, with her words hidden as in steps 1 to 4. Three choices follow, with numbers that sound alike, using the companion's exact labels and order: clock faces with the time in text in the morning crossing, and euro amounts in the afternoon. A pick that doesn't fit shows the sounds-alike line.
 5. **Ending.** Madame Roux's closing line. The crossing is **Crossed** when steps 1 to 5 each have a fitting latest pick. **Start again** is offered then, and at any time from a started crossing.
 
 **Support**, recorded as support:
 - **Show her words** reveals the French text of the current line. It is marked on that step before the text shows.
-- **What does it mean?** shows the English for the current line and the six cards. It is marked before any English shows.
+- **What does it mean?** shows the English for the current line and the eight cards. It is marked before any English shows.
 - **Hear her again** and **Hear how it sounds** are counted but are not support. Listening again is part of listening.
 
 **No French voice.** French speech uses `hearButton`, `localVoices` and `chooseLocalVoice` in `play-media.mjs` for `fr`, with a local French voice only and never an English fallback. A saved voice choice that is unavailable counts as no voice, as the host already does; it never switches silently. Availability is checked when the page renders and again when the voice list changes. With no usable French voice, every listen control is replaced by the companion's no-voice line, and Madame Roux's words show without marking `wordsShown`, since the explorer didn't ask for them. The crossing still works as a reading task.
@@ -67,7 +67,7 @@ Crossing: {
 }
 ```
 
-Opening a crossing freezes its whole source, following spec 83: version, Dot's note, the six cards with ids, order, English and kind, each step's French, English, kind and fitting card or choice, every feedback line with its id, and the ending. Every action, check and display resolves from the source, including on resume. Never look up today's content. A content change affects only a newly opened crossing.
+Opening a crossing freezes its whole source, following spec 83: version, Dot's note, the eight cards with ids, order, English and kind, each step's French, English, kind and fitting card or choice, every feedback line with its id, and the ending. Every action, check and display resolves from the source, including on resume. Never look up today's content. A content change affects only a newly opened crossing.
 
 Otherwise the rules are 324's, with these names: try ids from `nextTry` and never reused; **Start again** moves the crossing unchanged to the end of `earlier` and opens a fresh frozen source, and no earlier crossing or pick is ever dropped to make room; validation without regrading; unreadable or unknown-version records kept raw and exportable; and every explicit write preflighted against `dist/progress-limits.mjs` and the real Notes export. A refusal leaves the previous save unchanged. Notes export, import, reset and explorer switching carry `frenchFerry` through the existing transfer. Add `frenchFerry: 'The ferry crossing (French)'` to `progress-transfer.mjs`'s destination names.
 
@@ -82,7 +82,7 @@ New modules `dist/french-ferry-content.mjs`, `-core.mjs`, `-ui.mjs` and `french-
 At 320×600, 820×1000 and 1024×768, the rules are:
 - no horizontal page scroll;
 - 44 px targets and visible keyboard focus;
-- Dot's note and the six cards visible together during steps 1 to 4 at 820×1000, once scrolled to;
+- Dot's note and the eight cards visible together during steps 1 to 4 at 820×1000, once scrolled to;
 - step changes move focus to the step heading;
 - feedback is announced in a polite status region;
 - French text carries `lang="fr"`, and speech stops on navigation and on step change;
@@ -109,12 +109,12 @@ At 320×600, 820×1000 and 1024×768, the rules are:
 
 Before build:
 1. An independent spec review of this spec and its companion.
-2. The three-provider panel on the companion's French, under 117's method, with Madame Roux's *vous* and the number-sound notes named as questions.
+2. The three-provider panel on the companion's French, under 117's method ([resolution](../reviews/327-french-panel/resolution.md)), and its confirmation pass on the changed lines.
 
 Pure checks:
 - Both crossings complete, each with its own facts and order.
 - Every feedback case, in companion order, for each wrong card on each step.
-- All six cards stay offered on every step.
+- All eight cards stay offered on every step, and each step has a right-kind card with the wrong detail.
 - Support is marked before the words or the English show, including after resume.
 - No step reports French speech started unless the host's `garden-speech-start` event arrived for it with her words hidden: never-pressed Hear, an accepted request that never starts, missing speech support, a playback error, an unavailable saved voice, non-local French voices and a voice appearing or disappearing mid-try all leave it false.
 - **I said it** and **Not this time** never affect Crossed.

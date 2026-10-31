@@ -1,6 +1,6 @@
 # 327 · Le bac: finite text
 
-Companion to [spec 327](../specs/327-french-ferry-crossing.md). Proposed runtime text, not shipped. Every French line has the English beside it. The French is bound to the [327 panel](../reviews/327-french-panel/resolution.md) once that review is recorded, and any changed line needs a new pass.
+Companion to [spec 327](../specs/327-french-ferry-crossing.md). Proposed runtime text, not shipped. Every French line has the English beside it. The French is bound to the [327 panel](../reviews/327-french-panel/resolution.md), as resolved there, and any changed line needs a new pass. Shipped French puts a no-break space inside « » and a narrow no-break space before ? and !. Speech gets the French without the guillemets.
 
 The ferry keeper, Madame Roux, speaks to the explorer and Dot together, so she uses *vous*. The explorer's answers are short and need no verb forms beyond *nous sommes*.
 
@@ -19,35 +19,39 @@ The ferry keeper, Madame Roux, speaks to the explorer and Dot together, so she u
 
 ## Question words (the teaching card)
 
-Shown before the first crossing, and from its link at any time. Each French line has a **Hear it** button.
+Shown before the first crossing, and from its link at any time. Each French line has a **Hear it** button. The *Où ?* and *D'où ?* buttons speak the whole questions, *Où allez-vous ?* and *D'où venez-vous ?*.
 
 | French | English | Note |
 | --- | --- | --- |
-| Où ? | Where? | It asks where you are going. The answer starts with *À*: *À la poste.* |
-| D'où ? | Where from? | The *d'* at the start means *from*. The answer starts with *De*: *De la poste.* |
-| Combien ? | How many? | The answer has a number: *Nous sommes deux.* |
-| À quelle heure ? | At what time? | The answer has a time: *À cinq heures.* |
+| Où ? | Where? | Here, *Où allez-vous ?* asks where you are going. In this game, the place answer starts with *À*: *À la gare.* |
+| D'où ? | Where from? | The *d'* is a short form of *de*, meaning *from* here. *D'où venez-vous ?* asks where you are coming from. In this game, the place answer starts with *De*: *De la gare.* |
+| Combien ? | How many? / How much? | For people or things, it asks how many: *Nous sommes quatre.* In *Combien coûte… ?*, it asks how much something costs. |
+| À quelle heure ? | At what time? | The answer has a time: *À huit heures.* |
 
 **Listen for the difference.** *Où allez-vous ?* asks where you are going. *D'où venez-vous ?* asks where you are coming from. One small sound, *d'*, changes the question.
 
-**Dot shows you first.** Madame Roux: «Combien de colis avez-vous ?» How many parcels do you have? Dot: «Trois colis.» Three parcels. Dot: "She asked *combien*, so I gave her a number."
+**Dot shows you first.** Madame Roux: « Combien de colis avez-vous ? » How many parcels do you have? Dot: « Trois colis. » Three parcels. Dot: "She asked *combien*, so I gave her a number."
 
 ## Numbers that sound alike (the sounds card)
 
-Each French line has a **Hear it** button.
+Each phrase has its own **Hear it** button.
 
 | French | English |
 | --- | --- |
-| deux · dix · douze | two · ten · twelve |
-| trois · treize · trente | three · thirteen · thirty |
+| deux heures | two o'clock |
+| dix heures | ten o'clock |
+| douze heures | twelve o'clock |
+| trois euros | three euros |
+| treize euros | thirteen euros |
+| trente euros | thirty euros |
 
-**Listen for the vowel.** In Madame Roux's answers these numbers come before *heures* or *euros*, and each one links to that word with a "z" or "t" sound: *dix heures* sounds like "dee-zur". So the ending won't tell them apart, but the vowel will. *Deux* has an "uh" sound, *dix* an "ee" sound and *douze* an "oo" sound. *Trois* has a "wah" sound, *treize* an "eh" sound and *trente* a nasal "ahn" sound.
+**Listen for the differences.** Hear these phrases: *deux heures, dix heures, douze heures*; *trois euros, treize euros, trente euros*. Each group has different vowel sounds. Listen to the whole phrase, too: *trente euros* has a "t" sound where *trois euros* and *treize euros* have a "z" sound. Hear them again and compare.
 
 ## Crossing 1 · Le bac du matin
 
 **Dot's note** (English, visible throughout): Two of us, you and me. We're taking the parcels to the bakery. We've come from the post office. We'll come back at five o'clock.
 
-**Answer cards**, in this order: «Nous sommes deux.» · «Nous sommes trois.» · «À la boulangerie.» · «À la poste.» · «De la poste.» · «À cinq heures.»
+**Answer cards**, two of each kind, in this order: « Nous sommes deux. » · « Nous sommes trois. » · « À la boulangerie. » · « À la poste. » · « De la poste. » · « De la boulangerie. » · « À cinq heures. » · « À six heures. »
 
 | Card | English |
 | --- | --- |
@@ -56,7 +60,9 @@ Each French line has a **Hear it** button.
 | À la boulangerie. | To the bakery. |
 | À la poste. | To the post office. |
 | De la poste. | From the post office. |
+| De la boulangerie. | From the bakery. |
 | À cinq heures. | At five o'clock. |
+| À six heures. | At six o'clock. |
 
 | Step | Madame Roux says | English | Fitting card |
 | --- | --- | --- | --- |
@@ -65,15 +71,15 @@ Each French line has a **Hear it** button.
 | 3 | D'où venez-vous ? | Where are you coming from? | De la poste. |
 | 4 | À quelle heure revenez-vous ? | What time are you coming back? | À cinq heures. |
 
-**Step 5, your turn to ask.** Prompt: Ask Madame Roux when the ferry leaves. Say: «À quelle heure part le bac ?» (What time does the ferry leave?) Then **Hear her answer**: «Le bac part à dix heures.» (The ferry leaves at ten o'clock.) Choices, as clock faces with text: 2 o'clock · 10 o'clock · 12 o'clock. Fitting: 10 o'clock.
+**Step 5, your turn to ask.** Prompt: Ask Madame Roux when the ferry leaves. Say: « À quelle heure part le bac ? » (What time does the ferry leave?) Then **Hear her answer**: « Le bac part à dix heures. » (The ferry leaves at ten o'clock.) Choices, as clock faces with text: 2 o'clock · 10 o'clock · 12 o'clock. Fitting: 10 o'clock.
 
-**Ending:** Madame Roux: «Merci. Montez, s'il vous plaît !» Thank you. Climb aboard, please!
+**Ending:** Madame Roux: « Merci. Montez, s'il vous plaît. » Thank you. Come aboard, please.
 
 ## Crossing 2 · Le bac de l'après-midi
 
 **Dot's note:** Three of us this time: you, me and Pip. We're going to the town hall. We've come from the bakery. We'll come back at six o'clock.
 
-**Answer cards**, in this order: «Nous sommes deux.» · «Nous sommes trois.» · «À la mairie.» · «De la mairie.» · «De la boulangerie.» · «À six heures.»
+**Answer cards**, two of each kind, in this order: « Nous sommes deux. » · « Nous sommes trois. » · « À la mairie. » · « À la boulangerie. » · « De la mairie. » · « De la boulangerie. » · « À cinq heures. » · « À six heures. »
 
 | Card | English |
 | --- | --- |
@@ -82,7 +88,7 @@ Each French line has a **Hear it** button.
 | De la boulangerie. | From the bakery. |
 | À six heures. | At six o'clock. |
 
-The two *Nous sommes* cards use the English above.
+The *Nous sommes* cards, *À la boulangerie.*, *De la boulangerie.* and both time cards use the English from crossing 1.
 
 | Step | Madame Roux says | English | Fitting card |
 | --- | --- | --- | --- |
@@ -91,9 +97,9 @@ The two *Nous sommes* cards use the English above.
 | 3 | Combien êtes-vous ? | How many of you are there? | Nous sommes trois. |
 | 4 | D'où venez-vous ? | Where are you coming from? | De la boulangerie. |
 
-**Step 5, your turn to ask.** Prompt: Ask Madame Roux how much the crossing costs. Say: «Combien coûte la traversée ?» (How much does the crossing cost?) Then **Hear her answer**: «La traversée coûte trois euros.» (The crossing costs three euros.) Choices: 3 euros · 13 euros · 30 euros. Fitting: 3 euros.
+**Step 5, your turn to ask.** Prompt: Ask Madame Roux how much the crossing costs. Say: « Combien coûte la traversée ? » (How much does the crossing cost?) Then **Hear her answer**: « La traversée coûte trois euros. » (The crossing costs three euros.) Choices: 3 euros · 13 euros · 30 euros. Fitting: 3 euros.
 
-**Ending:** Madame Roux: «Merci. C'est parti !» Thank you. Off we go!
+**Ending:** Madame Roux: « Merci. C'est parti ! » Thank you. Off we go!
 
 ## Feedback
 
@@ -101,15 +107,15 @@ Shown after a pick that doesn't fit. The card stays picked, and the explorer can
 
 | Case | Line |
 | --- | --- |
-| A card of the wrong kind | Madame Roux asked *{question word}*. That asks for {a number / a time / where you are going / where you are coming from}. Listen again. |
+| A card of the wrong kind | That card tells {how many / the time / where you are going / where you are coming from}. Listen again to the start of Madame Roux's question. |
 | The right kind, the wrong detail | That's the right kind of answer. Check Dot's note for {how many / the time / the place}. |
-| *À* for a *D'où* question | Listen for *d'* at the start. *D'où* asks where you are coming from, so the answer starts with *De*. |
-| *De* for an *Où* question | *Où* asks where you are going, so the answer starts with *À*. |
-| Step 5, a number that sounds alike | Close. Those numbers sound alike. Hear her again and listen for the vowel. |
+| *À* for a *D'où* question | Listen for *d'* at the start. *D'où venez-vous ?* asks where you are coming from. Look for a place starting with *De*. |
+| *De* for an *Où* question | *Où allez-vous ?* asks where you are going. Look for a place starting with *À*. |
+| Step 5, a number that sounds alike | Those numbers can sound similar. Hear her again and compare the whole number. |
 
 | After a fitting pick | Line |
 | --- | --- |
-| Steps 1 to 4 | That's what she asked. Now say it to her. |
+| Steps 1 to 4 | That answer fits. Now say it to her. |
 | Step 5 | That's what she said. |
 
 ## Listening and speaking controls
