@@ -4,12 +4,12 @@ export const frenchStoryData = [
     id: 'fr-bookstall-envelope', destination: 'bookstall', title: 'L’enveloppe bleue',
     invitation: 'A message disappears among the maps. Follow the clues at the bookstall.',
     passages: {
-      1: ['Inès cherche une enveloppe bleue.', 'Elle regarde sous un grand livre.', 'L’enveloppe est là, sous le livre.', 'Un dessin de bateau est dans l’enveloppe.'],
+      1: ['Inès cherche une enveloppe bleue.', 'Elle regarde sous un grand livre.', 'L’enveloppe est là, sous le livre.', 'Dans l’enveloppe, il y a un dessin de bateau.'],
       2: ['Inès cherche une enveloppe bleue au marché.', 'Sur la table, elle voit un grand livre et une petite carte.', 'Elle regarde sous le grand livre.', 'L’enveloppe bleue est là.', 'Dans l’enveloppe, elle trouve un dessin de bateau.'],
       3: ['Inès cherche une enveloppe bleue au marché.', 'Elle voit une petite carte sur la table, mais ce n’est pas son message.', 'Un grand livre cache une partie de la table.', 'Inès regarde donc sous le livre.', 'L’enveloppe bleue est là, avec un dessin de bateau à l’intérieur.', 'Le dessin est un premier indice pour une nouvelle aventure.']
     },
     meanings: {
-      1: 'Inès is looking for a blue envelope. She looks under a big book. The envelope is there, under the book. A drawing of a boat is in the envelope.',
+      1: 'Inès is looking for a blue envelope. She looks under a big book. The envelope is there, under the book. In the envelope, there is a drawing of a boat.',
       2: 'Inès is looking for a blue envelope at the market. On the table, she sees a big book and a small map. She looks under the big book. The blue envelope is there. In the envelope, she finds a drawing of a boat.',
       3: 'Inès is looking for a blue envelope at the market. She sees a small map on the table, but it is not her message. A big book hides part of the table. So Inès looks under the book. The blue envelope is there, with a drawing of a boat inside. The drawing is a first clue for a new adventure.'
     },
@@ -24,14 +24,14 @@ export const frenchStoryData = [
     id: 'fr-bookstall-poster', destination: 'bookstall', title: 'L’affiche déchirée',
     invitation: 'Restore a torn concert poster and work out the order of the repair.',
     passages: {
-      1: ['Une affiche est en deux morceaux.', 'D’abord, Sami rapproche les morceaux.', 'Ensuite, il colle les morceaux.', 'Enfin, il accroche l’affiche sur le mur.'],
+      1: ['Une affiche est déchirée en deux morceaux.', 'D’abord, Sami rapproche les morceaux.', 'Ensuite, il colle les morceaux.', 'Enfin, il accroche l’affiche sur le mur.'],
       2: ['Sami trouve une affiche de concert en deux morceaux.', 'Les morceaux sont sur la table.', 'D’abord, il rapproche les morceaux pour voir le dessin.', 'Ensuite, il colle les morceaux.', 'Enfin, il accroche l’affiche sur le mur.'],
-      3: ['Sami trouve une affiche de concert en deux morceaux.', 'Il voit une guitare sur un morceau et une chanteuse sur l’autre.', 'D’abord, il rapproche les morceaux pour retrouver le dessin complet.', 'Ensuite, il colle les morceaux avec soin.', 'Enfin, il accroche l’affiche sur le mur, car les passants peuvent la lire ici.', 'Le concert a maintenant une belle affiche.']
+      3: ['Sami trouve une affiche de concert en deux morceaux.', 'Il voit une guitare sur un morceau et une chanteuse sur l’autre.', 'D’abord, il rapproche les morceaux pour retrouver le dessin complet.', 'Ensuite, il colle les morceaux avec soin.', 'Enfin, il accroche l’affiche sur le mur, où les passants peuvent la lire.', 'Le concert a maintenant une belle affiche.']
     },
     meanings: {
-      1: 'A poster is in two pieces. First, Sami brings the pieces together. Next, he glues the pieces together. Finally, he hangs the poster on the wall.',
+      1: 'A poster is torn into two pieces. First, Sami brings the pieces together. Next, he glues the pieces together. Finally, he hangs the poster on the wall.',
       2: 'Sami finds a concert poster in two pieces. The pieces are on the table. First, he brings the pieces together to see the picture. Next, he glues the pieces together. Finally, he hangs the poster on the wall.',
-      3: 'Sami finds a concert poster in two pieces. He sees a guitar on one piece and a singer on the other. First, he brings the pieces together to recover the complete picture. Next, he carefully glues the pieces together. Finally, he hangs the poster on the wall, because passersby can read it here. The concert now has a beautiful poster.'
+      3: 'Sami finds a concert poster in two pieces. He sees a guitar on one piece and a singer on the other. First, he brings the pieces together to recover the complete picture. Next, he carefully glues the pieces together. Finally, he hangs the poster on the wall, where passersby can read it. The concert now has a beautiful poster.'
     },
     words: 'une affiche = a poster; un morceau = a piece; rapproche = brings together; colle = glues; accroche = hangs; d’abord = first; ensuite = next; enfin = finally.',
     questions: [
@@ -46,32 +46,32 @@ export const frenchStoryData = [
     passages: {
       1: ['Nora apporte un livre au jardin.', 'La première porte du jardin est fermée.', 'Elle prend le chemin près de la rivière.', 'Ce chemin mène à une autre porte, ouverte.'],
       2: ['Nora apporte un livre au jardin.', 'Mais la première porte du jardin est fermée.', 'Elle regarde sa carte pour trouver un autre chemin.', 'Elle prend le chemin près de la rivière.', 'Ce chemin mène à une autre porte, qui est ouverte.'],
-      3: ['Nora apporte un livre au jardin pour le club de lecture.', 'La première porte est fermée, alors elle ne peut pas entrer ici.', 'Elle regarde sa carte et cherche une autre entrée.', 'Elle choisit le chemin près de la rivière.', 'Ce chemin mène à une autre porte, qui est ouverte.', 'Grâce à ce détour, Nora peut apporter le livre au club.']
+      3: ['Nora apporte un livre au jardin pour le club de lecture.', 'La première porte est fermée, alors elle ne peut pas entrer par là.', 'Elle regarde sa carte et cherche une autre entrée.', 'Elle choisit le chemin près de la rivière.', 'Ce chemin mène à une autre porte, qui est ouverte.', 'Grâce à ce détour, Nora peut apporter le livre au club.']
     },
     meanings: {
       1: 'Nora brings a book to the garden. The first garden gate is closed. She takes the path near the river. This path leads to another gate, which is open.',
       2: 'Nora brings a book to the garden. But the first garden gate is closed. She looks at her map to find another path. She takes the path near the river. This path leads to another gate, which is open.',
-      3: 'Nora brings a book to the garden for the reading club. The first gate is closed, so she cannot enter here. She looks at her map and searches for another entrance. She chooses the path near the river. This path leads to another gate, which is open. Thanks to this detour, Nora can bring the book to the club.'
+      3: 'Nora brings a book to the garden for the reading club. The first gate is closed, so she cannot go in that way. She looks at her map and searches for another entrance. She chooses the path near the river. This path leads to another gate, which is open. Thanks to this detour, Nora can bring the book to the club.'
     },
     words: 'apporte = brings; fermée = closed; ouverte = open; un chemin = a path; près de = near; une entrée = an entrance; un détour = a detour.',
     questions: [
       { type: 'mc', title: 'Why change the route?', skill: 'Find a simple reason in a French passage', prompt: 'Pourquoi Nora prend-elle un autre chemin ?', choices: ['Le livre est trop lourd.', 'La première porte est fermée.', 'Elle cherche son bateau.'], answer: 1, hint: 'Read what stops Nora at the first gate.', explanation: '« La première porte … est fermée » means the first gate is closed. This gives Nora a reason to use another path.', helper: 'inference' },
-      { type: 'mc', title: 'An open way in', skill: 'Understand a French word through a contrast', prompt: 'Une porte « ouverte » permet à Nora de…', choices: ['Entrer dans le jardin.', 'Fermer le livre.', 'Dessiner la rivière.'], answer: 0, hint: 'Compare « fermée » with « ouverte ». Which gate lets her through?', explanation: '« Ouverte » means open. Unlike the closed gate, the open gate lets Nora enter: « entrer ».', helper: 'context' }
+      { type: 'mc', title: 'An open way in', skill: 'Understand a French word through a contrast', prompt: 'Grâce à la porte « ouverte », Nora peut…', choices: ['Entrer dans le jardin.', 'Fermer le livre.', 'Dessiner la rivière.'], answer: 0, hint: 'Compare « fermée » with « ouverte ». Which gate lets her through?', explanation: '« Ouverte » means open. Unlike the closed gate, the open gate lets Nora enter: « entrer ».', helper: 'context' }
     ],
     postcard: 'Draw two routes or give directions with « Le chemin mène à… »'
   },
   {
-    id: 'fr-river-scarf', destination: 'river', title: 'L’écharpe du banc',
+    id: 'fr-river-scarf', destination: 'river', title: 'L’écharpe sur le banc',
     invitation: 'Someone leaves a scarf beside the river. Whose scarf is it? Look for a name.',
     passages: {
       1: ['Mila trouve une écharpe verte sur un banc.', 'Une étiquette porte le nom « Léa ».', 'Léa est près du pont.', 'Mila lui rend l’écharpe.'],
       2: ['Mila trouve une écharpe verte sur un banc près de la rivière.', 'Elle regarde l’étiquette dans l’écharpe.', 'L’étiquette porte le nom « Léa ».', 'Mila voit Léa près du pont.', 'Elle lui rend l’écharpe verte.'],
-      3: ['Mila trouve une écharpe verte sur un banc près de la rivière.', 'Elle ne sait pas à qui elle appartient.', 'Elle regarde donc l’étiquette dans l’écharpe et lit le nom « Léa ».', 'Mila voit Léa près du pont et lui montre le nom.', 'Comme le nom est le sien, Léa reconnaît son écharpe.', 'Mila la lui rend, et Léa la remercie.']
+      3: ['Mila trouve une écharpe verte sur un banc près de la rivière.', 'Elle ne sait pas à qui elle appartient.', 'Elle regarde donc l’étiquette dans l’écharpe et lit le nom « Léa ».', 'Mila voit Léa près du pont et lui montre le nom.', 'Léa voit son nom et reconnaît son écharpe.', 'Mila la lui rend, et Léa la remercie.']
     },
     meanings: {
       1: 'Mila finds a green scarf on a bench. A label has the name “Léa” on it. Léa is near the bridge. Mila gives her the scarf back.',
       2: 'Mila finds a green scarf on a bench near the river. She looks at the label inside the scarf. The label has the name “Léa” on it. Mila sees Léa near the bridge. She gives her the green scarf back.',
-      3: 'Mila finds a green scarf on a bench near the river. She does not know whom it belongs to. So she looks at the label inside the scarf and reads the name “Léa”. Mila sees Léa near the bridge and shows her the name. Since the name is hers, Léa recognizes her scarf. Mila gives it back to her, and Léa thanks her.'
+      3: 'Mila finds a green scarf on a bench near the river. She does not know whom it belongs to. So she looks at the label inside the scarf and reads the name “Léa”. Mila sees Léa near the bridge and shows her the name. Léa sees her name and recognizes her scarf. Mila gives it back to her, and Léa thanks her.'
     },
     words: 'une écharpe = a scarf; une étiquette = a label; un banc = a bench; un pont = a bridge; rend = gives back; appartient à = belongs to.',
     questions: [
@@ -124,7 +124,7 @@ export const frenchStoryData = [
     id: 'fr-rooftops-banner', destination: 'rooftops', title: 'La banderole au vent',
     invitation: 'Keep a rooftop welcome banner in place when the wind picks up.',
     passages: {
-      1: ['Une banderole est sur la terrasse.', 'Le vent soulève un coin.', 'Émile attache ce coin avec une corde.', 'La banderole reste en place.'],
+      1: ['Il y a une banderole sur la terrasse.', 'Le vent soulève un coin.', 'Émile attache ce coin avec une corde.', 'La banderole reste en place.'],
       2: ['Émile installe une banderole sur la terrasse.', 'Elle porte le mot « Bienvenue ».', 'Le vent soulève un coin de la banderole.', 'Émile attache ce coin avec une corde.', 'La banderole reste alors en place.'],
       3: ['Émile installe une banderole sur la terrasse pour accueillir les voisins.', 'Il écrit le mot « Bienvenue » en grandes lettres.', 'Mais le vent soulève un coin et les lettres bougent.', 'Émile attache ce coin avec une corde, car il veut garder la banderole en place.', 'La corde retient le coin, et le message reste visible.', 'Les voisins peuvent maintenant lire la banderole.']
     },
@@ -175,7 +175,7 @@ export const frenchStoryData = [
     },
     words: 'dessine = draws; un toit = a roof; le soleil = the sun; à l’ombre = in the shade; un parasol = a sun umbrella; protège = protects; agréable = pleasant.',
     questions: [
-      { type: 'mc', title: 'Use the surrounding words', skill: 'Understand a French phrase in context', prompt: '« À l’ombre », Noé est…', choices: ['Dans la rivière.', 'Protégé du soleil par le parasol.', 'Dans une boîte fermée.'], answer: 1, hint: 'The sentence about the parasol explains what « à l’ombre » does for Noé.', explanation: '« À l’ombre » means in the shade. The parasol protects Noé from the strong sun: « protégé du soleil ».', helper: 'context' },
+      { type: 'mc', title: 'Use the surrounding words', skill: 'Understand a French phrase in context', prompt: '« À l’ombre », Noé est…', choices: ['Protégé de la pluie.', 'Protégé du soleil.', 'Caché derrière le mur.'], answer: 1, hint: 'The sentence about the parasol explains what « à l’ombre » does for Noé.', explanation: '« À l’ombre » means in the shade. The parasol protects Noé from the strong sun: « protégé du soleil ».', helper: 'context' },
       { type: 'mc', title: 'Why move the chair?', skill: 'Connect an action to a simple French reason', prompt: 'Pourquoi Noé place-t-il sa chaise sous le parasol ?', choices: ['Il cherche une écharpe.', 'Le dessin est dans le parasol.', 'Le soleil est très fort.'], answer: 2, hint: 'Find the problem described just before he changes places.', explanation: '« Le soleil est très fort » means the sun is very strong. This explains why Noé chooses the shade.', helper: 'inference' }
     ],
     postcard: 'Imagine a comfortable drawing spot: « Je dessine… sous… » or show it in a picture.'
