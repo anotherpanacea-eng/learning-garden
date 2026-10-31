@@ -76,6 +76,25 @@ def journey(browser,base,seed,width,height):
    p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();p.locator('[data-writing-root]').wait_for();ok('writingDesk' not in book(p),'second explorer keeps separate initial table');action(p,'start');p.evaluate('window.writingSecondOld=[...document.querySelectorAll("[data-writing-root] button")]');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-1"]').tap();p.locator('[data-writing-root]').wait_for();ok(book(p)['writingDesk']==current,'original explorer resumes complete table');p.evaluate('writingSecondOld.forEach(e=>e.click())');ok(book(p)['writingDesk']==current,'second explorer stale nodes cannot mutate original')
   print('Writing Table journeys at',width,'passed',flush=True)
  finally:ctx.close()
+def accessible_controls(browser,base,seed):
+ ctx,p=setup(browser,base,seed)
+ try:
+  action(p,'start');p.locator('[data-writing-strip=bread]').tap();p.locator('[data-writing-destination=sale]').tap()
+  selected=p.locator('[data-writing-strip=bread]');selected.focus();p.keyboard.press('Tab');p.keyboard.press('Shift+Tab')
+  ok(selected.evaluate('e=>e===document.activeElement&&e.matches(":focus-visible")'),'selected strip has keyboard focus')
+  focused=selected.evaluate('e=>({style:getComputedStyle(e).outlineStyle,width:getComputedStyle(e).outlineWidth,shadow:getComputedStyle(e).boxShadow})')
+  p.locator('#writing-task-title').focus();unfocused=selected.evaluate('e=>({style:getComputedStyle(e).outlineStyle,width:getComputedStyle(e).outlineWidth,shadow:getComputedStyle(e).boxShadow})')
+  ok(focused['style']=='solid' and focused['width']=='3px' and (focused['style'],focused['width'])!=(unfocused['style'],unfocused['width']),'selected strip focus outline differs from unfocused selection')
+  ok('inset' in unfocused['shadow'] and selected.get_attribute('aria-pressed')=='true','selection remains visible after keyboard focus moves')
+  drawer(p,'help');action(p,'hint');ok(p.evaluate('document.activeElement.id==="writing-hint"'),'new hint receives focus');ok('A hint is below.' in p.locator('#writing-status').inner_text(),'hint announcement')
+  action(p,'example');ok(p.evaluate('document.activeElement.id==="writing-example"'),'new example receives focus');ok('A separate example is below.' in p.locator('#writing-status').inner_text(),'example announcement')
+  for id in ['market-day','break-noon','b-time']:
+   choose(p,id);source=work(p)['source'];p.locator('[data-speak]').tap();spoken=p.locator('[data-speak]').get_attribute('data-speak')
+   for part in source['parts']:ok(spoken.count(part['text'])==1,'Hear reads each source paragraph once: '+id)
+   if source['kind']=='choice':
+    for option in source['choices']:ok(option['text'] in spoken,'Hear includes visible answer option')
+  ok(work(p)['help']['narration'],'Hear still records supplied narration support')
+ finally:ctx.close()
 def refusal(browser,base,seed):
  ctx,p=setup(browser,base,seed,fault=True)
  try:
@@ -131,6 +150,6 @@ def main():
   chrome=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');browser=pw.chromium.launch(headless=True,executable_path=chrome if Path(chrome).exists() else None,args=['--disable-quic'])
   try:
    for width,height in [(320,600),(820,1000),(1024,768)]:journey(browser,base,seed,width,height)
-   entries(browser,base);refusal(browser,base,seed);storage(browser,base,seed);two_tabs(browser,base,seed);retained(browser,base);ok(not errors,'no page/console/HTTP errors '+str(errors));result={'status':'passed','checks':checks,'base':base,'scope':'real app controls, Notes transfer, storage, stale actions, retained history and fault-only preflight interception; no physical Apple or audible qualification'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
+   entries(browser,base);accessible_controls(browser,base,seed);refusal(browser,base,seed);storage(browser,base,seed);two_tabs(browser,base,seed);retained(browser,base);ok(not errors,'no page/console/HTTP errors '+str(errors));result={'status':'passed','checks':checks,'base':base,'scope':'real app controls, Notes transfer, storage, stale actions, retained history and fault-only preflight interception; no physical Apple or audible qualification'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
   finally:browser.close();server.shutdown()
 if __name__=='__main__':main()

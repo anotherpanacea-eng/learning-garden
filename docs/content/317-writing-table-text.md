@@ -40,3 +40,5 @@ Grown-ups: **This table uses drafts we wrote. All checks are practice with suppl
 The numbered paragraph-break card shows its sentence numbers alongside the source, matching “Before sentence” choices. Linking question contexts appear under **What changes** in B1–B3 as well as the joins. Sort feedback can expand **Look at the strip notes**; the main reminder is **Compare each strip with its heading.** These are presentation clarifications, not new keys or writing judgments.
 
 Arrival uses **Open the bakery draft** for a new or readable saved bakery draft. An unreadable saved bakery draft offers **Choose another draft**, which opens the shelf and keeps the older record exact. The preview heading for a supplied question is **Text to read**.
+
+Help announcements: **A hint is below.** · **A separate example is below.** · **Read this draft together.** Hear includes the visible answer options, reads the source once, then reads the current assembled result where it adds information. Selection has an inset border; keyboard focus has a separate outer outline.

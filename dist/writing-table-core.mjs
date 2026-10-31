@@ -36,7 +36,7 @@ export function writingView(state){
  if(!state||!own(state,'writingDesk'))return {status:'new',record:null,records:[],familiar:false};
  if(!rootShape(r))return {status:'unsupported',record:null,records:[],familiar:false};
  const records=Object.entries(r.records).map(([key,value])=>({id:key,readable:id(key)&&validWritingRecord(value),title:validWritingRecord(value)?value.source.title:null}));
- const record=own(r.records,r.currentId)&&validWritingRecord(r.records[r.currentId])?r.records[r.currentId]:null;
+ const record=id(r.currentId)&&own(r.records,r.currentId)&&validWritingRecord(r.records[r.currentId])?r.records[r.currentId]:null;
  const familiar=!!record&&Object.entries(r.records).some(([key,x])=>key!==r.currentId&&validWritingRecord(x)&&x.source.family===record.source.family);
  return {status:'ready',record,records,familiar};
 }
