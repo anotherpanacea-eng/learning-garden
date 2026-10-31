@@ -79,9 +79,9 @@ export const mendingShedEntry=()=>`<a href="${ROUTE}">${esc(T.title)}</a>`;
 export function mendingShedPage(state,owner=''){
  const v=C.mendingShedView(state),l=local(state,owner),sum=C.mendingShedSummary(v),readOnly=v.status==='unsupported';
  const intro=v.status==='new'?T.firstVisit.map(x=>p(x)).join(''):p(T.laterVisit);
- const entries=`<nav class="ms-entries" aria-label="${esc(T.title)}">${['pile','shapes'].map(b=>`<div>${button('bench',esc(b==='pile'?T.pileEntry:T.shapesEntry),`data-ms-bench="${b}" aria-pressed="${l.bench===b}"`)}${readOnly?'':p(b==='pile'?sum.pile:sum.shapes,'tiny')}</div>`).join('')}</nav>`;
+ const entries=`<nav class="ms-entries" aria-label="${esc(T.title)}">${['pile','shapes'].map(b=>`<div>${button('bench',esc(b==='pile'?T.pileEntry:T.shapesEntry),`data-ms-bench="${b}" aria-pressed="${l.bench===b}"`,readOnly)}${readOnly?'':p(b==='pile'?sum.pile:sum.shapes,'tiny')}</div>`).join('')}</nav>`;
  let body='';
- if(l.bench){
+ if(l.bench&&!readOnly){
   const b=l.bench,taught=v.taught[b],showTeach=!readOnly&&(l.teach[b]||!taught);
   body=`${showTeach?teachCard(b,l):''}${!readOnly&&taught&&!l.teach[b]?button('teach',esc(T.whatFor),`data-ms-bench="${b}"`):''}${b==='pile'?pileBench(v,l,readOnly):shapesBench(v,l,readOnly)}`;
  }
