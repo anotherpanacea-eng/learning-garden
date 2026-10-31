@@ -124,8 +124,8 @@ export function openMarketJob(state,jobId,options){return mutate(state,r=>{
  if(r.currentId===jobId&&r.view==='practice')return {ok:true,changed:false};r.currentId=jobId;r.view='practice';return {ok:true};
  },options);}
 export function nextMarketJob(state,options){
- const v=marketSignsView(state),jobs=v.root?ownJobs(v.root):marketSignsCollection().jobs;
- const usable=jobs.filter(s=>!v.root?.records||!own(v.root.records,s.id)||validMarketRecord(v.root.records[s.id])&&v.root.records[s.id].source.id===s.id);if(!usable.length)return failure('selection');
+ const v=marketSignsView(state);if(v.status==='unsupported')return failure('unavailable');const jobs=v.root?ownJobs(v.root):marketSignsCollection().jobs;
+ const usable=jobs.filter(s=>!v.root?.records||!own(v.root.records,s.id)||validMarketRecord(v.root.records[s.id])&&v.root.records[s.id].source.id===s.id);if(!usable.length)return mutate(state,r=>{r.currentId=null;r.view='practice';return {ok:true};},options);
  const at=usable.findIndex(s=>s.id===v.root?.currentId);return openMarketJob(state,usable[(at+1)%usable.length].id,options);
 }
 function editJob(state,fn,options){return mutate(state,(r,next)=>{const record=marketSignsView(next).record;if(!record)return failure('unavailable');const out=fn(record);return out.ok&&validMarketRecord(record)?out:out.ok?failure('unavailable'):out;},options);}

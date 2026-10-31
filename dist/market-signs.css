@@ -3,3 +3,5 @@
 
 .ms-ways{position:sticky;top:0;z-index:4;background:#fbfdf9;padding:.4rem 0;border-bottom:1px solid #b6cbc2}.ms-room #ms-task{scroll-margin-top:82px}.ms-painted>span{max-width:100%;overflow-wrap:anywhere}@media(max-width:650px){.ms-room #ms-task{scroll-margin-top:128px}}
 .ms-room button[aria-pressed=true]{text-decoration:underline;text-underline-offset:4px}
+
+.ms-abc{margin:.7rem 0}
