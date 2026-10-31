@@ -87,6 +87,19 @@ ok(makeCaminoSource('medium')===null,'unknown amount makes no source');
  answerCamino(saved,'cafe',yes);ok(cam(saved).state==='done','the frozen fit decides');
 }
 
+// An opened El camino keeps its own off-screen invitation; reading never substitutes today's copy.
+{
+ const st=doneCarga(opened());cam(st).source.invitation='Earlier directions invitation.';const before=bytes(st);
+ const page=riverMarketPage(st,'frozen-invitation');
+ ok(page.includes('Earlier directions invitation.'),'the opened errand displays its frozen invitation');
+ ok(!page.includes(riverMarketText.invitations.camino),'the current module invitation does not replace the opened source');
+ ok(bytes(st)===before,'rendering the frozen invitation preserves the entire notebook');
+ const damaged=doneCarga(opened());cam(damaged).task.at='cafe';const raw=bytes(damaged);
+ ok(!riverMarketPage(damaged,'damaged-invitation').includes(riverMarketText.invitations.camino),'an unreadable opened errand does not invent a current invitation');
+ ok(bytes(damaged)===raw,'the unreadable opened errand remains exact');
+ ok(riverMarketPage({},'new-invitation').includes(riverMarketText.invitations.carga),'the unopened arrival retains its existing invitation');
+}
+
 // An unreadable El camino record and an unknown errand record leave La carga open and stay exact.
 {
  const st=opened();cam(st).task.at='cafe';st.spanish.errands.receta={tryId:99,future:true};st.spanish.earlier.push({tryId:98,errand:'tiempo'});

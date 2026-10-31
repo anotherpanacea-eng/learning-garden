@@ -95,6 +95,7 @@ export function riverMarketPage(state,owner=''){
  if(view.status==='unsupported'||view.status==='unavailable')return `<section class='river-page' data-river-root>${head}<p>${esc(view.status==='unsupported'?T.unknownVersion:T.unavailable)}</p><a href='#notes'>${esc(T.notesLink)}</a>${status}</section>`;
  if(v.cuaderno)return `<section class='river-page' data-river-root>${head}${cuaderno(view)}${status}</section>`;
  const k=shownOf(view,v),w=v.per[k],e=view.carga,c=view.camino,arrival=`<p class='river-arrival'>${rich(view.status==='new'?T.opening:T.later)}</p>`;
+ const invitation=k==='camino'?(c?c.source.invitation:view.caminoPresent?'':T.invitations.camino):T.invitations.carga;
  const row=(id,action,title,x,label)=>`<div class='river-entry'>${button(action,`<i>${title}</i>`,` aria-current='${k===id}'`)}<span class='river-label'>${esc(labelText(label))}</span>${x?.support.meaning?`<span class='river-helped'>${esc(T.helped)}</span>`:''}</div>`;
  const entry=`<section class='river-errands' aria-labelledby='river-errands-title'><h2 id='river-errands-title'>${esc(T.errands)}</h2>${row('carga','open','La carga',e,view.label)}${row('camino','open-camino','El camino',c,view.caminoLabel)}</section>`;
  let errand='';
@@ -109,7 +110,7 @@ export function riverMarketPage(state,owner=''){
   ${e.state==='done'?`${v.boat?`<p class='river-line'>${es(`«${boatLine(e).es}»`)}${e.support.meaning?`<span class='river-gloss'>${rich(boatLine(e).en)}</span>`:''}</p>`:''}`:''}
   ${w.again?`<p>${esc(T.startedAgain)}</p>`:''}${view.canStartAgain?button('again',T.startAgain):''}</div>`;
  }
- return `<section class='river-page' data-river-root>${head}${arrival}${amountControl(view,k)}${entry}${errand}<p>${button('cuaderno',T.phrasebookLink)}</p><aside class='river-invitation'><p>${rich(T.invitations[k])}</p></aside>${status}</section>`;
+ return `<section class='river-page' data-river-root>${head}${arrival}${amountControl(view,k)}${entry}${errand}<p>${button('cuaderno',T.phrasebookLink)}</p>${invitation?`<aside class='river-invitation'><p>${rich(invitation)}</p></aside>`:''}${status}</section>`;
 }
 export function riverMarketNotes(state){
  let view;try{view=core.riverMarketView(state);}catch{return '';}
