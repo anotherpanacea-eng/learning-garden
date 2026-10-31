@@ -37,11 +37,12 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
   await p.evaluate(()=>{window.howtoUnexpectedMotion=false;window.howtoMotionTimer=setInterval(()=>{if(document.getAnimations().some(a=>a.playState==='running'))window.howtoUnexpectedMotion=true;},10);});
   await p.locator('[data-dh="toggle"]').click();await p.waitForFunction(()=>!document.querySelector('drawn-howto .dh-all').hidden);ok(await p.evaluate(()=>{clearInterval(window.howtoMotionTimer);return !window.howtoUnexpectedMotion;}),`${id} reduced: Play advances without stroke animation`);await p.close();}
   // Every other activity page offers its how-to just after the heading; it opens, steps to the end and saves nothing.
+  // A page that keeps its how-to in a folded toolbar (the café's Café tools, spec 285) is unfolded first, as a child would.
   const sample={'orchard/gather/*':'orchard/gather/dew-drop','field/*':'field/walk','checkin/*':'checkin/number','wonder/*':'wonder/many-rectangles'};
   for(const h of drawnHowtos.filter(h=>h.at)){const page=sample[h.at[0]]||h.at[0],label=`${h.id} on #${page}`,p=await setup(320,'#'+page,'reduce');
    eq(await p.locator('drawn-howto').count(),1,`${label}: one how-to`);
    ok(await p.evaluate(()=>{const t=document.querySelector('main h1'),e=document.querySelector('drawn-howto');return !!(t.compareDocumentPosition(e)&Node.DOCUMENT_POSITION_FOLLOWING);}),`${label}: placed after the page title`);
-   const before=await notebook(p);await p.locator('.dh-open').click();await p.locator('.dh-picture').waitFor();
+   const before=await notebook(p);await p.evaluate(()=>{const fold=document.querySelector('drawn-howto').closest('details:not([open])');if(fold)fold.querySelector(':scope > summary').click();});await p.locator('.dh-open').click();await p.locator('.dh-picture').waitFor();
    for(let i=1;i<h.steps.length;i++)await p.locator('[data-dh="next"]').click();
    eq(await p.locator('.dh-all li').allTextContents(),h.steps.map(s=>s.caption),`${label}: every caption listed at the end`);
    ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${label}: no horizontal overflow`);
