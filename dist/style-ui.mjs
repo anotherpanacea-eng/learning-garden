@@ -1,5 +1,5 @@
 // Spec 322 §7: the look choice in Grown-up notes. It shares no form or button with the café starting amounts.
-import {styleOf,chooseStyle,styleRefusal} from './style-core.mjs';
+import {styleOf,chooseStyle} from './style-core.mjs';
 import {fieldJournalCafe} from './style-frames.mjs';
 import {guests} from './cafe-content.mjs';
 export const STYLE_COPY=Object.freeze({
@@ -14,6 +14,7 @@ export const STYLE_COPY=Object.freeze({
  saved:'Look changed for this explorer.',
  same:'This explorer already uses this look.',
  unreadable:'This look can’t be saved for this explorer.',
+ 'report-safety':'This look can’t be saved because the notes would be too large to import. Nothing changed. Download your notes or use a separate explorer.',
 });
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function previewCard(code,name){
@@ -24,16 +25,13 @@ export function stylePanel(state){
  const current=styleOf(state);
  return `<section class="panel style-panel" aria-labelledby="style-panel-title"><h2 id="style-panel-title">${STYLE_COPY.heading}</h2><p>${STYLE_COPY.explanation}</p><form id="style-form"><fieldset><legend class="sr-only">${STYLE_COPY.heading}</legend>${STYLE_COPY.options.map(o=>`<label class="style-option"><input type="radio" name="style" value="${o.code}"${current===o.code?' checked':''}><span><strong>${o.name}</strong> · ${o.description}</span></label>`).join('')}</fieldset><button type="submit" class="secondary">${STYLE_COPY.button}</button></form><p id="style-status" role="status" tabindex="-1"></p><div class="style-preview" role="group" aria-label="${STYLE_COPY.caption}"><p class="tiny">${STYLE_COPY.caption}</p><div class="style-preview-pair">${STYLE_COPY.options.map(o=>previewCard(o.code,o.name)).join('')}</div></div></section>`;
 }
-// Returns the status line shown after a submit; the caller saves and re-renders only on 'saved'.
-export function submitStyle(state,style){
- if(chooseStyle(state,style))return 'saved';
- return styleRefusal(state,style);
-}
-export function bindStylePanel(state,{save,render,focus}){
+// Returns the status code shown after a submit; the caller saves and re-renders only on 'saved'.
+export function submitStyle(state,style,canExport){return chooseStyle(state,style,canExport);}
+export function bindStylePanel(state,{save,render,focus,canExport}){
  document.querySelector('#style-form')?.addEventListener('submit',event=>{
   event.preventDefault();
   const value=document.querySelector('#style-form input[name="style"]:checked')?.value;
-  const result=submitStyle(state,value);
+  const result=submitStyle(state,value,canExport);
   if(result==='saved'){save();render();}
   const status=document.querySelector('#style-status');if(status)status.textContent=STYLE_COPY[result];
   focus('#style-status');

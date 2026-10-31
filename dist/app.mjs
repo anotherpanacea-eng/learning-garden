@@ -890,7 +890,7 @@ function bind(){
  bindSorting(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindDoubleCheck(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindCafeStart(state,{save,render,focus:focusElement});
- bindStylePanel(state,{save,render,focus:focusElement});
+ bindStylePanel(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindWillowPath(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindBellStudio(state,{save,render,navigate,focus:focusElement,player:bellPlayback,stopSpeech});
  bindFieldKit(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});

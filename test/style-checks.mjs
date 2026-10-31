@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import {freshState,restoreState} from '../dist/core.mjs';
-import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
+import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from '../dist/progress-transfer.mjs';
 import {ensureGarden} from '../dist/garden-core.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
 import {styleOf,chooseStyle} from '../dist/style-core.mjs';
@@ -14,6 +14,9 @@ import {nextGuest,orderFor,adjustBite,checkPlate,skipCafeStage,currentRecipe,ser
 import {scanCopySource} from '../scripts/check-child-copy.mjs';
 let count=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);count++;},ok=(x,m)=>{assert.ok(x,m);count++;};
 const seed=()=>initializeExplorerState(freshState());
+// The app's own Notes check: the notebook as it would be downloaded must import again.
+const report=c=>({title:'After the Storm: observations',exportedAt:'2026-10-31T00:00:00.000Z',note:'A small informal sample, not a grade or mastery assessment.',...c});
+const real=c=>prepareProgressImport(JSON.stringify(report(c),null,2)).ok;
 
 // 1. styleOf reads Field Journal only for the exact code.
 for(const garden of [undefined,{},{style:'mystery'},{style:''},{style:null},{style:'Field-Journal'},{style:['field-journal']}])ok(styleOf({garden})==='storybook',JSON.stringify(garden));
@@ -23,15 +26,37 @@ eq(styleOf({garden:{style:'field-journal'}}),'field-journal');eq(styleOf(null),'
 // 2. chooseStyle writes only garden.style, and a no-op or refusal writes nothing.
 {
  const s=seed();s.garden.future={kept:true};const before=structuredClone(s);
- ok(chooseStyle(s,'field-journal'));const want=structuredClone(before);want.garden.style='field-journal';eq(s,want,'only garden.style changed');
- const same=structuredClone(s);ok(!chooseStyle(s,'field-journal'));eq(s,same,'same look writes nothing');eq(submitStyle(s,'field-journal'),'same');
- for(const bad of ['mystery','',null,undefined,'Storybook'])ok(!chooseStyle(s,bad),String(bad));eq(s,same,'refused codes write nothing');
- ok(chooseStyle(s,'storybook'));eq(s.garden.style,'storybook');eq(submitStyle(s,'field-journal'),'saved');
+ eq(chooseStyle(s,'field-journal',real),'saved');const want=structuredClone(before);want.garden.style='field-journal';eq(s,want,'only garden.style changed');
+ const same=structuredClone(s);ok(chooseStyle(s,'field-journal',real)!=='saved');eq(s,same,'same look writes nothing');eq(submitStyle(s,'field-journal',real),'same');
+ for(const bad of ['mystery','',null,undefined,'Storybook'])ok(chooseStyle(s,bad,real)!=='saved',String(bad));eq(s,same,'refused codes write nothing');
+ eq(chooseStyle(s,'storybook',real),'saved');eq(s.garden.style,'storybook');eq(submitStyle(s,'field-journal',real),'saved');
 }
-for(const bad of [null,[],'text',4]){const s={garden:bad,cafe:{}};const b=structuredClone(s);ok(!chooseStyle(s,'field-journal'));eq(s,b,'unreadable garden declined');eq(submitStyle(s,'field-journal'),'unreadable');}
-{const s={};ok(chooseStyle(s,'field-journal'));eq(s,{garden:{style:'field-journal'}},'absent garden is created');}
-{const s=seed();s.garden.style='mystery';ok(chooseStyle(s,'storybook'),'explicit Storybook replaces an unknown value');eq(s.garden.style,'storybook');}
+for(const bad of [null,[],'text',4]){const s={garden:bad,cafe:{}};const b=structuredClone(s);ok(chooseStyle(s,'field-journal',real)!=='saved');eq(s,b,'unreadable garden declined');eq(submitStyle(s,'field-journal',real),'unreadable');}
+{const s=seed();delete s.garden;const b=structuredClone(s);eq(chooseStyle(s,'field-journal',real),'saved');eq(s,{...b,garden:{style:'field-journal'}},'absent garden is created');}
+{const s=seed();s.garden.style='mystery';eq(chooseStyle(s,'storybook',real),'saved','explicit Storybook replaces an unknown value');eq(s.garden.style,'storybook');}
 
+// 2b. The choice runs the Notes check on a whole copy first, and a refusal writes nothing.
+{
+ const s=seed(),before=structuredClone(s);
+ for(const check of [undefined,null,'yes',()=>false,()=>1,()=>'true',()=>undefined,()=>{throw new Error('boom');}]){
+  eq(chooseStyle(s,'field-journal',check),'report-safety',`refused: ${String(check)}`);eq(s,before,'a refused check writes nothing');
+  eq(submitStyle(s,'field-journal',check),'report-safety');eq(s,before,'a refused submit writes nothing');
+ }
+ ok(STYLE_COPY['report-safety'].includes('Nothing changed'),'the refusal says nothing changed');
+ // A check that edits its copy cannot change what is saved.
+ let seen=null;const poison=c=>{seen=c;c.garden.style='mystery';c.garden.extra=true;c.cafe=null;return true;};
+ eq(chooseStyle(s,'field-journal',poison),'saved');ok(seen!==s&&seen.garden!==s.garden,'the check gets a copy');
+ const want=structuredClone(before);want.garden.style='field-journal';eq(s,want,'only the proposed look is saved');
+ // A no-op never calls the check.
+ let calls=0;eq(chooseStyle(s,'field-journal',()=>{calls++;return true;}),'same');eq(calls,0,'no check for the same look');
+}
+// A notebook that exports at exactly the import limit stays importable: choosing a look would push it over, so it is refused.
+{
+ const s=seed();s.garden.future='';const size=c=>new TextEncoder().encode(JSON.stringify(report(c),null,2)).length;
+ s.garden.future='x'.repeat(MAX_IMPORT_BYTES-size(s));eq(size(s),MAX_IMPORT_BYTES,'exactly at the limit');ok(real(s),'importable at the limit');
+ const before=structuredClone(s);eq(chooseStyle(s,'field-journal',real),'report-safety','over the limit is refused');eq(s,before,'the notebook is unchanged');ok(real(s),'still importable');
+ s.garden.future='';s.garden.future='x'.repeat(MAX_IMPORT_BYTES-size(s)-64);eq(chooseStyle(s,'field-journal',real),'saved','room for the look');ok(real(s),'importable after the change');
+}
 // 3. An unknown stored value survives ensureGarden, save, export and import byte for byte.
 {
  const s=seed();s.garden.style='mystery';ensureGarden(s);eq(s.garden.style,'mystery');
@@ -44,7 +69,7 @@ for(const bad of [null,[],'text',4]){const s={garden:bad,cafe:{}};const b=struct
 // Explorers keep their own look.
 {
  class Storage{constructor(){this.data=new Map();}get length(){return this.data.size;}key(i){return [...this.data.keys()][i]??null;}getItem(k){return this.data.get(k)??null;}setItem(k,v){this.data.set(k,v);}removeItem(k){this.data.delete(k);}}
- const disk=new Storage(),store=new ExplorerStore(disk),a=initializeExplorerState(store.load()),aId=store.active.id;ok(chooseStyle(a,'field-journal'));ok(store.save(a));
+ const disk=new Storage(),store=new ExplorerStore(disk),a=initializeExplorerState(store.load()),aId=store.active.id;eq(chooseStyle(a,'field-journal',real),'saved');ok(store.save(a));
  const b=initializeExplorerState(store.add({},a));eq(styleOf(b),'storybook','a new explorer does not copy the look');
  eq(styleOf(new ExplorerStore(disk).select(aId)),'field-journal','reload keeps the look');
 }
@@ -81,7 +106,7 @@ eq(frameText({garden:{style:'field-journal'}},'A','B'),'B');eq(frameText({garden
  const s=seed();ok(nextGuest(s));const o=orderFor(s.cafe),g=o.guest;
  const story=renderCafe(s),storyTouch=renderCafe(s,{touch:true});
  ok(story.includes(g.greeting.replace(/“/g,'“'))||story.includes(g.greeting.slice(0,20)),'Storybook arrival');ok(story.includes('Our café goal'));
- const before=structuredClone(s);ok(chooseStyle(s,'field-journal'));const fj=renderCafe(s),fjTouch=renderCafe(s,{touch:true});
+ const before=structuredClone(s);eq(chooseStyle(s,'field-journal',real),'saved');const fj=renderCafe(s),fjTouch=renderCafe(s,{touch:true});
  const want=structuredClone(before);want.garden.style='field-journal';eq(s,want,'rendering writes nothing');
  const fg=fieldJournalCafe[g.id].greeting;
  if(fg){const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');ok(fj.includes(esc(fg))||fj.includes(fg),'variant arrival');ok(fjTouch.includes(esc(fg))||fjTouch.includes(fg),'variant arrival in Café tools');}
@@ -96,7 +121,7 @@ eq(frameText({garden:{style:'field-journal'}},'A','B'),'B');eq(frameText({garden
   ok(served.includes('<span class="cafe-stamp" aria-hidden="true">Served</span>')&&servedTouch.includes('cafe-stamp'),'stamp on a served card');
   const thanks=fieldJournalCafe[g.id].thanks;ok(served.includes(thanks.slice(1,25)),'variant thanks');
   s.cafe.current.recovered=true;ok(!renderCafe(s).includes('cafe-stamp'),'no stamp on a recovered visit');delete s.cafe.current.recovered;
-  ok(chooseStyle(s,'storybook'));ok(!renderCafe(s).includes('cafe-stamp'),'Storybook has no stamp');
+  eq(chooseStyle(s,'storybook',real),'saved');ok(!renderCafe(s).includes('cafe-stamp'),'Storybook has no stamp');
  }
 }
 

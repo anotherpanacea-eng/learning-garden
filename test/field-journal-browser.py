@@ -312,6 +312,33 @@ def main():
                 last = h.raw_report(h.download(p, base, f'storybook-{width}'))
                 ok(last['garden'].pop('style') == 'storybook' and before['garden'].pop('style') == 'field-journal' and last == before, 'only garden.style differs')
                 ok(root_style(p) is None, 'Storybook clears the root look')
+
+                # 9. A notebook that exports at exactly the 5 MB import limit stays importable: the look is refused, natively.
+                if width == 820:
+                    limit = 5 * 1024 * 1024
+                    big = json.loads(json.dumps(seeds['total']))
+                    big['garden'] = dict(big.get('garden') or {}, future='')
+                    probe_ctx, r = h.setup(browser, width, big, 'limit-probe')
+                    h.download(r, base, 'limit-probe')
+                    size = (OUT / 'limit-probe.json').stat().st_size
+                    explorers = r.evaluate("localStorage.getItem('learning-garden-explorers')")
+                    identity = h.active(r)
+                    probe_ctx.close()
+                    big['garden']['future'] = 'x' * (limit - size)
+                    # Seed the explorer's own key directly: a second 5 MB legacy copy would not fit in browser storage.
+                    limit_ctx = browser.new_context(viewport={'width': width, 'height': 1000}, has_touch=True, reduced_motion='reduce', accept_downloads=True)
+                    limit_ctx.add_init_script('((e,i,s)=>{if(!localStorage.getItem("limit-fixture")){localStorage.setItem("learning-garden-explorers",e);localStorage.setItem("number-garden-v1:"+i,s);localStorage.setItem("limit-fixture","1");}})(' + json.dumps(explorers) + ',' + json.dumps(identity) + ',' + json.dumps(json.dumps(big)) + ')')
+                    r = limit_ctx.new_page()
+                    h.pages.append((r, 'limit-exact'))
+                    r.on('pageerror', lambda e: h.errors.append({'case': 'limit-exact', 'error': str(e)}))
+                    stored = h.raw_report(h.download(r, base, 'limit-exact'))
+                    ok((OUT / 'limit-exact.json').stat().st_size == limit, 'the notebook exports at exactly the limit')
+                    status = choose(r, base, 'field-journal')
+                    ok(status.startswith('This look can’t be saved because the notes would be too large to import.'), 'refusal announced: ' + status)
+                    ok(root_style(r) is None and 'style' not in (h.book(r).get('garden') or {}), 'the refused look writes nothing')
+                    again = h.download(r, base, 'limit-after')
+                    ok((OUT / 'limit-after.json').stat().st_size == limit and h.raw_report(again) == stored, 'the notes still export at the limit, unchanged')
+                    limit_ctx.close()
             ok(not h.errors, 'no page errors: ' + json.dumps(h.errors[:3]))
         except Exception:
             for page, label in h.pages:
