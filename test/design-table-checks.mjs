@@ -105,6 +105,7 @@ export function runChecks(){
  {const mb=clone(brief(b));delete mb.rightBrief.placed[0].item.label;ok(!C.validBrief(mb),'a placed entry without its label is unreadable');
   const mb2=clone(brief(b));mb2.rightBrief.placed[0].item.label='Not the kept label';ok(!C.validBrief(mb2),'a placed label must match the kept list');
   const z=clone(b);z.designTable.briefs['ways-crate']=mb;eq(C.designView(z).brief.status,'unreadable');resetDesignTableView();ok(designTablePage(z,'e').length);refused(z,()=>C.checkBrief(z,RIGHT_BOARD,['strong','heavy'],options));
+  {const ko=fresh();yes(C.checkBrief(ko,{strong:'musts'},[],options));const kb=brief(ko);for(const k of ['first','latest']){const e=kb[k].placed[0].item;e.flip={label:e.flip.label,id:e.flip.id};}ok(C.validBrief(kb),'flip key order does not matter');}
   const zi=fresh();yes(C.answerItem(zi,'a4','satchel',options));delete rec(zi,'a4').latest.choice.label;eq(C.designView(zi).items.a4.status,'unreadable');}
  // A kept brief renders after the content module rewrites a flip side.
  brief(b).tray.find(t=>t.id==='heavy').flip.label='An older flip side';brief(b).rightBrief.placed.find(e=>e.item.id==='weighs').item.label='An older flip side';

@@ -12,8 +12,9 @@ export const itemById=k=>designItems.find(x=>x.id===k)||null;
 const optOk=(x,flips=false)=>object(x)&&id(x.id)&&text(x.label)&&(!own(x,'flip')||flips&&(object(x.flip)&&(id(x.flip.id)&&text(x.flip.label)&&Object.keys(x.flip).length===2||text(x.flip.line)&&Object.keys(x.flip).length===1)));
 const listOk=(l,flips=false)=>Array.isArray(l)&&l.length<=12&&l.every(x=>optOk(x,flips))&&new Set(l.map(x=>x.id)).size===l.length;
 const lineOk=x=>object(x)&&id(x.id)&&text(x.text);
+const sameFlip=(a,b)=>a===undefined||b===undefined?a===b:a.id===b.id&&a.label===b.label&&a.line===b.line;
 // A chosen or placed entry must be a well-formed copy of an entry in the record's own list.
-const has=(list,x)=>optOk(x,true)&&list.some(y=>y.id===x.id&&y.label===x.label&&JSON.stringify(y.flip)===JSON.stringify(x.flip));
+const has=(list,x)=>optOk(x,true)&&list.some(y=>y.id===x.id&&y.label===x.label&&sameFlip(y.flip,x.flip));
 const placedOk=(p,items,slots)=>Array.isArray(p)&&p.length<=12&&p.every(e=>object(e)&&has(items,e.item)&&has(slots,e.slot));
 function answerOk(a,r){
  if(!object(a)||!lineOk(a.line))return false;
