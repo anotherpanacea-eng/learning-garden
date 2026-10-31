@@ -7,7 +7,7 @@ Author guide for lane A. This is the first glossary, not a claim that every curr
 | Use | Meaning and boundary |
 | --- | --- |
 | After the Storm | The app/story title. Willowbank is the fictional town, not a second app name. |
-| Café, Water Lab, Workshop, Post Office, Number Garden, Word Garden, Story Loft | Existing destinations. Use the visible destination name when sending someone there; do not substitute module names or internal routes in child copy. |
+| Café, Water Lab, Workshop, Post Office, Number Garden, Word Garden, Story Loft | Existing destinations. Use the visible destination name when sending someone there; do not substitute module names or internal routes in child copy. Back links use the short name (Workshop, Café, Post Office); the home tile keeps the full title (Storm Workshop). |
 | Grown-up notes | The existing place for records, downloads, restore and adult interpretation. Keep this label consistent. |
 | Check this… | Compare the current response with this task. A match is not a grade, placement, mastery or finished curriculum. |
 | Keep this… | Keep a notebook version of this parcel, visit or artifact. Device persistence depends on saving preferences and the actual write result; do not promise saved-on-device if it is only in memory. |
