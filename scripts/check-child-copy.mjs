@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 export const copyScopes = [
+  {path:'dist/long-word-workshop-ui.mjs',adultBlocks:[{start:'export function longWordNotes(',end:'\nexport const longWordEntry',reason:'Only used in Grown-up notes.'}],quotations:[]},
+  {path:'dist/long-word-workshop-content.mjs',adultBlocks:[{start:'export const LONG_WORD_GROWN_UP',end:'\n]);',reason:'Grown-up interpretation and limits, used only in Notes.'}],quotations:[]},
   {path:'dist/word-list-shelf-ui.mjs',adultBlocks:[{start:'function notesKeeps(',end:'\nexport const wordListShelfEntry',reason:'Only used in Grown-up notes.'}],quotations:[]},
   {path:'dist/word-list-shelf-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/mending-shed-ui.mjs',adultBlocks:[{start:'export function mendingShedNotes(',end:'\nexport function bindMendingShed(',reason:'Only used in Grown-up notes.'}],quotations:[]},
