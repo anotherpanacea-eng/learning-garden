@@ -27,6 +27,9 @@ def fixture(name='fresh'):
   code+=damage.get(name,'')
  if name=='future':code+="s.beatBench={v:99,raw:['retained']};"
  if name=='wall-opaque':code+="c.openBeatBench(s,'wall',o);s.beatBench.wall.placements.dough={opaque:['retained']};"
+ if name in ['wall-help','wall-map','wall-null']:
+  code+="c.openBeatBench(s,'wall',o);c.placeBeatWallCard(s,'though','though',o);c.placeBeatWallCard(s,'dough','cough',o);"
+  code+={'wall-help':"s.beatBench.wall.help={opaque:['retained']};",'wall-map':"s.beatBench.wall.placements=['earlier','opaque','placements'];",'wall-null':"s.beatBench.wall=null;"}[name]
  return json.loads(subprocess.check_output(['node','--input-type=module','-e',code+'console.log(JSON.stringify(s));'],cwd=ROOT,text=True))
 def state(p):return p.evaluate('window.__beatRead()')
 def root(p):return state(p).get('beatBench')
@@ -184,6 +187,24 @@ def edges(browser,base):
    elif name=='collision':drawer(p,'teaching-hasOwnProperty');drawer(p,'teach-hasOwnProperty-card11');buttons=p.locator('[data-bb-action=step]');ok(buttons.count()>0,'own-property source id retains teaching controls');buttons.first.tap();eq(root(p)['currentFerId'],'hasOwnProperty','own-property view lookup safe')
    elif name=='wall-opaque':p.locator('[data-bb-word-picker]').select_option('though');tap(p,'place','[data-bb-tray=though]');eq(root(p)['wall']['placements']['dough'],{'opaque':['retained']},'opaque wall placement isolated')
    held=copy.deepcopy(root(p));report=download(p,'retained-'+name);eq(report['beatBench'],held,'actual raw recovery export '+name);notes=p.locator('[data-beat-bench-notes]');ok(notes.count()==1,'human Notes exists beside malformed sibling '+name)
+  finally:c.close()
+ # Malformed wall fields do not fabricate placements or hide readable siblings.
+ for name in ['wall-help','wall-map','wall-null']:
+  initial=fixture(name);c,p=setup(browser,base,initial)
+  try:
+   wall_before=copy.deepcopy(initial['beatBench']['wall'])
+   ok('Other cards are ready to move.'not in p.locator('main').inner_text(),'unreadable wall does not advertise movable cards '+name)
+   ok(p.locator('[data-bb-action=place]:enabled').count()==0,'unreadable wall editing paused '+name)
+   if name=='wall-map':
+    drawer(p,'wall-overview');eq(p.locator('[data-bb-panel=wall-overview] .bb-record dd').count(),0,'bad placement array does not fabricate nine unplaced cards')
+   bench(p,'fer');choose(p,'fer-reference');tap(p,'answer','[data-bb-choice=a]');eq(root(p)['records']['fer-reference']['work']['choice'],'a','another bench remains usable '+name);eq(root(p)['wall'],wall_before,'another bench preserves malformed wall '+name)
+   report=download(p,'retained-'+name);eq(report['beatBench'],root(p),'raw actual Notes export exact '+name);eq(report['beatBench']['wall'],wall_before,'raw malformed wall export exact '+name)
+   notes=p.locator('[data-bb-notes-wall]');ok(notes.count()==1,'wall has a human-readable recovery section '+name)
+   if name=='wall-help':
+    eq(notes.locator('.bb-record dt').all_text_contents(),[w for w,_ in WALL],'readable placements survive bad help in human Notes')
+    values=notes.locator('.bb-record dd').all_text_contents();eq(values[:2],['Like though','Like cough'],'human Notes retains both listed and unexpected placement despite bad help');ok('Earlier help details stay in the full retained work.'in notes.text_content(),'bad help has its own notice')
+   else:
+    eq(notes.locator('.bb-record dd').count(),0,'malformed wall map has no fabricated unplaced readout '+name);ok('stay in' in notes.text_content(),'malformed wall has a local recovery notice '+name)
   finally:c.close()
  # A stale tab must not overwrite the newer persisted notebook.
  c,p=setup(browser,base,fixture('case'))
