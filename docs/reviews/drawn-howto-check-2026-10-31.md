@@ -6,7 +6,7 @@ Backlog card LG-36, 2026-10-31. The 83 drawn how-tos (proposal: [drawn how-tos](
 
 **Not checked here:** the River Market (`#mercado`, 324 and 328) and Le bac (`#bac`, 327) are not on main yet; check them when #298, #314 and #302 land. The Endings Shelf (331) is not built. Older routes without one, outside this card's range: `#numbers/seeds/pairs`, `#science/water-shares`, `#post/descriptions`, `#post/sorting/order`.
 
-## Needs one (18)
+## Needs one (14)
 
 ### Rhythm Studio (`#studio/rhythm`, spec 280, 300)
 
@@ -310,14 +310,7 @@ flowchart TD
   s2 --> s3
 ```
 
-### Needs one, chain drafted at build (4)
-
-These have an order of play the first screen does not show; LG-37 drafts each chain from the live page.
-
-| Bench | Spec | Order to draw |
-| --- | --- | --- |
-
-## Text is enough (13)
+## Text is enough (17)
 
 | Bench | Spec | Why |
 | --- | --- | --- |
