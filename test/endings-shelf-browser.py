@@ -51,13 +51,14 @@ def run(browser,base):
     p.locator('[data-es-pair-picker]').select_option(front);tap(p,'turn');eq(p.locator('.es-pair-card>span').first.inner_text(),back,'pair flips');layout(p,'pair');eq(book(p),held,'pair turn creates no assessment or persistence')
    p.locator('[data-es-panel=visible-fact] summary').tap();p.evaluate('window.esSpoken=[]');p.locator('[data-es-speak=prompt]').tap();spoken=' '.join(p.evaluate('window.esSpoken'));ok('Spanish' not in spoken and 'French' not in spoken,'foreign fact excluded from narration');p.screenshot(path=str(OUT/f'pairs-{width}.png'),full_page=True)
    table(p,'letter');eq(book(p)['endingsShelf']['letter']['work']['placements'],KEY,'waiting letter preserved');table(p,'pairs');eq(p.locator('.es-pair-card>span').first.inner_text(),'visibly','pair side survives table return')
-   table(p,'letter');p.locator('[data-es-panel=teach-card-5] summary').tap();tap(p,'step','[data-es-card=card-5]');tap(p,'step-back','[data-es-card=card-5]');eq(p.locator('[data-es-panel=teach-card-5] li').count(),0,'global example at step zero');table(p,'practice')
+   table(p,'letter');p.locator('[data-es-panel=teach-card-5] summary').tap();tap(p,'step','[data-es-card=card-5]');p.keyboard.press('Enter');eq(p.locator('[data-es-panel=teach-card-5] li').count(),2,'repeated Enter advances teaching instead of closing it');p.keyboard.press('Enter');ok(p.locator('[data-es-panel=teach-card-5] .es-teaching').evaluate('e=>e===document.activeElement'),'global last-step focus');tap(p,'step-back','[data-es-card=card-5]');p.keyboard.press('Enter');p.keyboard.press('Enter');eq(p.locator('[data-es-panel=teach-card-5] li').count(),0,'global example at step zero');ok(p.locator('[data-es-panel=teach-card-5] .es-teaching').evaluate('e=>e===document.activeElement'),'global step-zero focus');table(p,'practice')
    for job,choice in JOBS.items():
-    tap(p,'job','[data-es-job='+job+']');layout(p,job)
+    tap(p,'job','[data-es-job='+job+']');layout(p,job);eq(p.locator('[data-es-panel^=teach-]').count(),0,'job teaching is available through requested example only')
     if job=='b4':ok('The c in this word sounds soft, as in city.' in p.locator('.es-room').inner_text(),'B4 premise visible')
     if job=='b1':ok('The root is space.' in p.locator('.es-room').inner_text(),'guided steps before answer')
     tap(p,'hint');tap(p,'example');eq(p.locator('.es-worked li').count(),1,'new job example starts at its own first worked step')
-    if job=='b2':ok('Ambition is in the word family.' in p.locator('.es-worked').inner_text(),'B2 gets tious worked branch')
+    if job=='b2':ok('Ambition is in the word family.' in p.locator('.es-worked').inner_text(),'B2 gets tious worked branch');eq(p.locator('.es-worked h3').inner_text(),'The -tious family clue','B2 example title visible')
+    if job=='b6':eq(p.locator('.es-worked h3').inner_text(),'From -able/-ible to -ably/-ibly','B6 amended title visible')
     tap(p,'step');tap(p,'step');ok(p.locator('.es-worked').evaluate('e=>e===document.activeElement'),'last step focus');tap(p,'step-back');tap(p,'step-back');tap(p,'step-back');ok(p.locator('.es-worked').evaluate('e=>e===document.activeElement'),'step zero focus')
     tap(p,'answer','[data-es-choice='+choice+']');ok(p.locator('[data-es-action=answer][data-es-choice='+choice+']').evaluate('e=>e===document.activeElement'),'answer focus');tap(p,'check');eq(book(p)['endingsShelf']['items'][job]['checks'][-1]['outcome'],'fit',job+' fit');tap(p,'keep');tap(p,'put-back');ok(p.locator('[data-es-action=answer]').first.evaluate('e=>e===document.activeElement'),'choice clear exact focus')
    p.screenshot(path=str(OUT/f'job-{width}.png'),full_page=True);tap(p,'skip');eq(book(p)['endingsShelf']['currentId'],'b1','skip wraps')
@@ -77,6 +78,22 @@ def run(browser,base):
  c,p=setup(browser,base,fixture("E.openEndingsTable(s,'letter',o);s.endingsShelf.source.letter.gaps=s.endingsShelf.source.letter.gaps.slice(0,2).reverse();s.endingsShelf.source.letter.segments=[{text:'Synthetic retained letter '},{gapId:'official'},{text:' / '},{gapId:'precious'}];s.endingsShelf.source.copy.empty='[old gap]';s.endingsShelf.source.copy.instruction='Synthetic retained instruction.'"))
  try:
   ok('Synthetic retained instruction.' in p.locator('.es-room').inner_text(),'source-owned older instruction');eq(p.locator('[data-es-picker] option').all_text_contents(),['offi[old gap]','pre[old gap]'],'retained source order and marker');tap(p,'place','[data-es-choice=cial]');ok('official' in p.locator('.es-letter').inner_text(),'old letter remains playable');p.locator('[data-es-panel=teach-card-5] summary').tap();tap(p,'step','[data-es-card=card-5]');ok('The root is grace.' in p.locator('[data-es-panel=teach-card-5]').inner_text(),'optional worked teaching opens one step')
+ finally:c.close()
+ # Omitted source rows and unreadable check histories are always explained.
+ c,p=setup(browser,base,fixture("E.openEndingsTable(s,'practice',o);s.endingsShelf.source.jobs[2].prompt=17;s.endingsShelf.source.pairs[1].spoken=null;s.endingsShelf.source.cards[0].text=17"))
+ try:
+  eq(p.locator('[data-es-job]').count(),5,'unreadable offered job omitted');ok(p.locator('.es-notice').count()>0,'omitted jobs notice');table(p,'pairs');eq(p.locator('[data-es-pair-picker] option').count(),3,'unreadable pair omitted');ok(p.locator('.es-notice').count()>0,'omitted pairs/cards notice');table(p,'letter');eq(p.locator('[data-es-panel^=teach-]').count(),5,'unreadable global card omitted');ok(p.locator('.es-notice').count()>0,'omitted teaching card notice')
+ finally:c.close()
+ c,p=setup(browser,base,fixture("E.openEndingsJob(s,'b1',o);s.endingsShelf.items.b1.checks=[{}]"))
+ try:
+  notices=' '.join(p.locator('.es-notice').all_text_contents());ok('earlier table' in notices and 'earlier letter' not in notices,'job check warning names the table, not letter')
+ finally:c.close()
+ c,p=setup(browser,base,fixture("E.openEndingsTable(s,'practice',o);s.endingsShelf.items='Synthetic unreadable container'"))
+ try:ok(p.locator('.es-notice').count()>0,'unreadable job container explained');ok(p.locator('[data-es-job]:enabled').count()==0,'unreadable job container stays read-only')
+ finally:c.close()
+ c,p=setup(browser,base,fixture('s=freshState()'))
+ try:
+  before=book(p);table(p,'letter');after=book(p);eq(set(after)-set(before),{'endingsShelf'},'minimal first entry adds only activity root');eq({k:v for k,v in after.items() if k!='endingsShelf'},before,'activity preserves host-initialized avatar and base notebook');tap(p,'place','[data-es-choice=cious]');eq(book(p)['endingsShelf']['letter']['work']['placements']['precious'],'cious','minimal notebook uses actual host preflight')
  finally:c.close()
  # Source recovery, hidden/stale/film guards and real export-refusal seam.
  c,p=setup(browser,base,fixture("E.openEndingsTable(s,'letter',o)"))

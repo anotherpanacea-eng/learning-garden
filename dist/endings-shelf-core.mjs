@@ -39,7 +39,7 @@ function entry(source,record,present){
  if(status!=='ready')return {status,source,record:present?record:null,draftStatus:'missing',helpStatus:'missing',checksStatus:'missing',firstStatus:'missing',latestStatus:'missing',last:null,earlier:false,partial:false};
  const draftStatus=field(record,'work',w=>validWork(source,w)),helpStatus=source.kind==='letter'?'missing':field(record,'help',help),checksStatus=field(record,'checks',Array.isArray);
  const checks=checksStatus==='ready'?record.checks.filter(c=>validCheck(source,c)):[],last=checks.at(-1)??null;
- return {status,source,record,draftStatus,helpStatus,checksStatus,firstStatus:field(record,'firstKept',k=>k===null||validEndingsKeep(source,k)),latestStatus:field(record,'latestKept',k=>k===null||validEndingsKeep(source,k)),last,earlier:!!last&&draftStatus==='ready'&&!sameWork(source,last.work,record.work),partial:checksStatus==='ready'&&checks.length!==record.checks.length};
+ return {status,source,record,draftStatus,helpStatus,checksStatus,firstStatus:field(record,'firstKept',k=>k===null||validEndingsKeep(source,k)),latestStatus:field(record,'latestKept',k=>k===null||validEndingsKeep(source,k)),last,earlier:!!last&&draftStatus==='ready'&&!sameWork(source,last.work,record.work),partial:checksStatus==='unreadable'||checksStatus==='ready'&&checks.length!==record.checks.length};
 }
 export function endingsShelfView(state){
  if(!object(state)||!own(state,'endingsShelf'))return {status:'new',root:null,source:null,view:'choose',letter:null,pairs:[],cards:[],jobs:[],current:null};
@@ -48,7 +48,8 @@ export function endingsShelfView(state){
  const source=sourceBase(r.source)?r.source:null,offered=source?stainedMapRows(source.jobs,validEndingsJob):[],keys=offered.map(j=>j.id);
  if(object(r.items))for(const key of Object.keys(r.items))if(id(key)&&!keys.includes(key))keys.push(key);
  const jobs=keys.map(key=>{const present=object(r.items)&&own(r.items,key),raw=present?r.items[key]:null,s=present?(object(raw)&&validEndingsJob(raw.source)&&raw.source.id===key?raw.source:null):offered.find(j=>j.id===key),view=entry(s,raw,present);if(own(r,'items')&&!object(r.items))view.status='unreadable';return {id:key,...view};});
- return {status:'ready',root:r,source,view:endingsViews.includes(r.view)?r.view:'choose',letter:entry(endingsLetterSource(source),r.letter,own(r,'letter')),pairs:endingsPairs(source),cards:endingsCards(source),jobs,current:jobs.find(j=>j.id===r.currentId)??null};
+ const pairs=endingsPairs(source),cards=endingsCards(source),dropped=(raw,filtered)=>!list(raw)||raw.length!==filtered.length;
+ return {status:'ready',root:r,source,view:endingsViews.includes(r.view)?r.view:'choose',letter:entry(endingsLetterSource(source),r.letter,own(r,'letter')),pairs,cards,jobs,current:jobs.find(j=>j.id===r.currentId)??null,pairsPartial:dropped(source?.pairs,pairs),cardsPartial:dropped(source?.cards,cards),jobsPartial:dropped(source?.jobs,offered)||own(r,'items')&&!object(r.items)||jobs.some(j=>['unavailable','unreadable'].includes(j.status))};
 }
 const failure=error=>({ok:false,error});
 function mutate(state,fn,options={}){
@@ -104,7 +105,7 @@ function keep(state,kind,key,options){return edit(state,kind,key,(r,s)=>{
 function restore(state,kind,key,edition,options){return edit(state,kind,key,(r,s)=>{
  if(!['first','latest'].includes(edition))return failure('selection');const keep=r[edition+'Kept'];if(!validEndingsKeep(s,keep))return failure('unavailable');
  if(kind==='letter')for(const g of s.parts)r.work.placements[g.id]=clone(pick(keep.work,g.id)??null);
- else{r.work=clone(keep.work);for(const flag of ['hint','example'])r.help[flag] ||= keep.help[flag];}return {ok:true};
+ else{r.work.choice=clone(keep.work.choice);for(const flag of ['hint','example'])r.help[flag] ||= keep.help[flag];}return {ok:true};
  },options);}
 export function useEndingsHelp(state,key,flag,options){return edit(state,'job',key,r=>{
  if(!['hint','example'].includes(flag))return failure('selection');if(r.help[flag])return {ok:true,changed:false};r.help[flag]=true;return {ok:true};

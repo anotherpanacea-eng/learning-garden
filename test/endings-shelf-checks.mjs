@@ -7,6 +7,7 @@ import {MAX_IMPORT_BYTES} from '../dist/progress-limits.mjs';
 import {makeEndingsShelfSource} from '../dist/endings-shelf-content.mjs';
 import * as E from '../dist/endings-shelf-core.mjs';
 import * as S from '../dist/stained-map-core.mjs';
+import {endingsShelfPage} from '../dist/endings-shelf-ui.mjs';
 const clone=structuredClone;
 const key={precious:'cious',official:'cial',essential:'tial',significant:'ant',possible:'ible',cautious:'tious',comfortable:'able'};
 const jobKey={b1:'spacious',b2:'cautious',b3:'partial',b4:'magnificent',b5:'dependable',b6:'terribly'};
@@ -35,6 +36,7 @@ export function runChecks(){
  eq(source.cards.find(c=>c.id==='card-10').text,'For these -able and -ible words, change the final e to y: comfortable becomes comfortably; terrible becomes terribly.');
 
  eq(source.jobs.map(j=>j.choices.findIndex(c=>c.id===j.key)),[1,0,2,1,0,2]);
+ for(const j of source.jobs)eq(j.copy,{incomplete:copy.jobIncomplete,partDifferent:copy.neutral});
  eq(source.jobs.map(j=>j.teach[0].id),['card-5','card-5-tious','card-6','card-7','card-8','card-10']);
  eq(source.jobs[3].parts.map(p=>p.text),['The c in this word sounds soft, as in city.']);
  eq(source.jobs[0].steps,['The root is space.','It ends in -ce.','Swap -ce for -cious.']);
@@ -119,6 +121,18 @@ export function runChecks(){
  }
  {
   const s=open();s.endingsShelf.source.letter.gaps=[{...source.letter.gaps[0],prefix:'x'.repeat(4000),different:'y'.repeat(4000)}];s.endingsShelf.source.letter.segments=[{gapId:'precious'}];s.endingsShelf.letter.work={placements:{precious:'tious'}};yes(E.checkEndingsLetter(s,options));ok(E.endingsShelfView(s).letter.last.feedback[1].length>4000);yes(E.keepEndingsLetter(s,options));eq(E.endingsShelfView(s).letter.latestStatus,'ready');
+ }
+ {
+  const s=fresh();yes(E.openEndingsTable(s,'practice',options));s.endingsShelf.source.jobs[2].prompt=17;s.endingsShelf.source.pairs[1].spoken=null;s.endingsShelf.source.cards[0].text=17;
+  const before=clone(s),v=E.endingsShelfView(s);eq([v.jobs.length,v.pairs.length,v.cards.length],[5,3,5]);eq([v.jobsPartial,v.pairsPartial,v.cardsPartial],[true,true,true]);eq(s,before,'partial-list notice lookups remain pure');
+  s.endingsShelf.items='Synthetic unreadable container';eq(E.endingsShelfView(s).jobsPartial,true);s.endingsShelf.items={};yes(E.openEndingsJob(s,'b1',options));s.endingsShelf.items.b1.checks={future:true};eq(E.endingsShelfView(s).current.partial,true,'non-array checks get a notice');
+ }
+ {
+  const s=fresh();yes(E.openEndingsJob(s,'b1',options));yes(E.keepEndingsJob(s,'b1',options));const first=clone(s.endingsShelf.items.b1.firstKept),future={raw:'Synthetic later-format work'};s.endingsShelf.items.b1.work.futureField=clone(future);yes(E.answerEndingsJob(s,'b1','spacious',options));yes(E.restoreEndingsJob(s,'b1','first',options));eq(s.endingsShelf.items.b1.work.futureField,future,'restoring a known choice preserves unknown current work');eq(s.endingsShelf.items.b1.firstKept,first,'older snapshot remains unchanged');
+  s.endingsShelf.items.b1.source.different={};yes(E.answerEndingsJob(s,'b1','spaceous',options));yes(E.checkEndingsJob(s,'b1',options));eq(s.endingsShelf.items.b1.checks.at(-1).feedback[0],'Have another look at this one.');s.endingsShelf.items.b1.source.choices.push({id:'hasOwnProperty',text:'Synthetic older response'});yes(E.answerEndingsJob(s,'b1','hasOwnProperty',options));yes(E.checkEndingsJob(s,'b1',options));eq(s.endingsShelf.items.b1.checks.at(-1).feedback[0],'Have another look at this one.','inherited feedback is never prose');
+ }
+ {
+  const s=open();s.endingsShelf.source.letter.trays[0].choices[0].text='$&';yes(E.placeEndingsWord(s,'precious','cious',options));const html=endingsShelfPage(s);ok(html.includes('Chosen: $&amp;'),'saved choice text is a literal replacement value');ok(!html.includes('Chosen: {ending}'));
  }
  return n;
 }
