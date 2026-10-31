@@ -930,6 +930,36 @@
         "build"
       ],
       "scope": "Sort twelve pictured objects by what each is and what it is made of, with a guided first card, ordered Check lines and a stuck ladder; predict, try and let go of squash, bend, twist and stretch on six authored samples. Simplified authored pictures; no real materials, measurements or particle explanations."
+    },
+    {
+      "id": "seed-pile",
+      "name": "Seed Pile",
+      "status": "live",
+      "route": "#orchard/games",
+      "patterns": [
+        "experiment"
+      ],
+      "scope": "Take 1 to 3 (or 1 to 2) seeds from one pile of 5 to 30 against Bramble, whose play style the child sets; last seed wins or loses by the chosen rule. Supplied explanations and an in-memory practice board stay separate from moves. Game results are not a math level; no independent strategy, subtraction fluency or topic claim."
+    },
+    {
+      "id": "shutters",
+      "name": "Shutters",
+      "status": "live",
+      "route": "#orchard/games/shutters",
+      "patterns": [
+        "allocate"
+      ],
+      "scope": "Solo six- or nine-shutter box: roll one or two dice, then close open shutters whose numbers make the roll. Supplied combinations and explanations are recorded as support, separate from choices. Dice outcomes are not a math level; no independent addition, number-bond fluency, probability or topic claim."
+    },
+    {
+      "id": "ribbon-rows",
+      "name": "Ribbon Rows",
+      "status": "live",
+      "route": "#orchard/games/rows",
+      "patterns": [
+        "experiment"
+      ],
+      "scope": "Take ribbons from one of two or three rows of 1 to 7 against Bramble's chosen play style. Supplied pictured explanations of matching rows and paired bundles stay separate from moves and practice. Who takes the last ribbon is not a math level; no independent strategy, subtraction, binary or topic claim."
     }
   ],
   "manualReferences": [
