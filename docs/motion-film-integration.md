@@ -22,7 +22,7 @@ All files are in the owner's Dropbox, not in this repository:
 | A Question of Our Own | Act V ending | spec 120 | Not built | 52 s |
 | The Opening of the Ways | Act VI ending | spec 120 | Not built | 61 s |
 | Sound as a wave | Process clip | [146](specs/146-bell-and-drum.md) | Proposed spec only | 36 s |
-| The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) |308energy operation built; independent implementation/release gates pending; original full film held for tracking/caption/pour repairs | 32 s |
+| The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) |308operation live through PR252/253;309whole-film repair/pictures clear; local integration under review for tracking/caption/pour repairs | 32 s |
 | The water cycle at the weather station | Process clip | [140](specs/140-weather-station.md) | Proposed spec only | 37 s |
 | Closed and open circuit | Process clip | [163](specs/163-sparks-and-switches.md) | Proposed spec only | 35 s |
 | Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Delivered through PR248; corrected full film | 35 s |
@@ -103,4 +103,9 @@ Actual editable lever source/captions were read. Its fixed-horizontal endpoint c
 
 ## Mill film and its teaching home ·308 commission
 
-[308](specs/308-mill-energy-book.md) now supplies the paused single-batch energy book; implementation/release gates are pending. The existing32s take2 has been decoded/sampled and independently reviewed, not presumed usable: a red bucket refills while its jars follow the earlier bucketful; the boundary needs a visible label, the water's exit needs a pour, and the Sun caption needs the water cycle. Keep all32seconds/four scenes in a future repaired derivative, independently review the actual corrected pictures, then add its optional turn separately. Ongoing film buckets and the finite game's tracked batch must be distinguished. No broader147 pack or Motion runtime is a prerequisite or included.
+[308](specs/308-mill-energy-book.md) now supplies the live paused single-batch energy book through [PR252/253](https://github.com/anotherpanacea-eng/learning-garden/pull/252#issuecomment-6509496279):693matching files before764canonical native assertions. The existing32s take2 has been decoded/sampled and independently reviewed, not presumed usable: a red bucket refills while its jars follow the earlier bucketful; the boundary needs a visible label, the water's exit needs a pour, and the Sun caption needs the water cycle. Keep all32seconds/four scenes in a future repaired derivative, independently review the actual corrected pictures, then add its optional turn separately. Ongoing film buckets and the finite game's tracked batch must be distinguished. No broader147 pack or Motion runtime is a prerequisite or included.
+
+
+## Full mill film ·309 commission
+
+[309](specs/309-mill-film.md) commissions the full32s derivative and separate film turn. Original tracking/pour/Sun issues remain held until actual repaired pictures and encoded samples clear independent review. The operation and movie deliberately differ: the table follows a finite batch; the continuously supplied film isolates one bucketful’s energy contribution while other water keeps its wheel moving. A visible jar boundary and ended marker are required. No excerpt or external authoring player ships. The full repaired encoded film has sampled scientific/readability clearance and full codec decode; repaired local integration passed677native checks and all neighboring-media regressions. Final source rerun and targeted exact-head focus recheck precede its PR checkpoint.309is not merged or deployed.
