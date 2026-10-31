@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 190 explicit current references across 107 unique source topics: authored question references, scoped practice or supplied explanations. The other 1483 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 192 explicit current references across 109 unique source topics: authored question references, scoped practice or supplied explanations. The other 1481 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -23,7 +23,7 @@ There are 190 explicit current references across 107 unique source topics: autho
 | Life Skills | 37 | 1 | 36 |
 | Mathematics | 503 | 68 | 435 |
 | Personal & Social Development | 88 | 0 | 88 |
-| Science | 547 | 20 | 527 |
+| Science | 547 | 22 | 525 |
 
 Mathematics currently has the broadest authored task collection. Science and English have narrow guided investigations/comprehension references. History, life skills, personal/social development and learning-to-learn require explicit content/evidence design; fictional settings, friendly characters, help use and game completion do not establish those abilities. The source’s Computing topics are grouped under “Artificial Intelligence,” including step-by-step instructions; preserve that source organization without mistaking it for a complete computing curriculum.
 
@@ -117,6 +117,7 @@ These are source-code encounters. Historical `live` labels in the declarations d
 | Shutters (`#orchard/games/shutters`) | allocate | Solo six- or nine-shutter box: roll one or two dice, then close open shutters whose numbers make the roll. Supplied combinations and explanations are recorded as support, separate from choices. Dice outcomes are not a math level; no independent addition, number-bond fluency, probability or topic claim. |
 | Ribbon Rows (`#orchard/games/rows`) | experiment | Take ribbons from one of two or three rows of 1 to 7 against Bramble's chosen play style. Supplied pictured explanations of matching rows and paired bundles stay separate from moves and practice. Who takes the last ribbon is not a math level; no independent strategy, subtraction, binary or topic claim. |
 | The Lost and Found Board (`#post/lost-and-found`) | search, read | One logic-grid mystery, Who borrowed what?: sort what witnesses saw from what they think, mark a 3 by 3 grid or list from ordered clues, say whether the clues decide yet, and check an answer that names the first broken clue. Authored sentences and clues; no open-ended inquiry. |
+| The Design Table (`#workshop/design`) | experiment, build | Two stations: compare two made-up bags from a supplied same-way rain test, tag each one's strength and weakness and recommend from the data; then build a crate brief from tiles, turning vague wishes into checkable musts and sorting musts from limits. Made-up numbers; no real testing, sketching or building. |
 
 The implemented **Carry an idea here** connection transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -206,7 +207,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Science / Organisms & Life Processes | 63 | 1 | Search · inspect · compare; Read · infer · support |
 | Science / Polar Regions | 25 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Rainforests | 25 | 0 | Search · inspect · compare; Read · infer · support |
-| Science / Scientific Inquiry | 30 | 4 | Change · measure · explain; Build · transform · relate |
+| Science / Scientific Inquiry | 30 | 6 | Change · measure · explain; Build · transform · relate |
 | Science / Space Exploration | 26 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Space Systems & Earth's History | 16 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / The Human Body | 25 | 0 | Search · inspect · compare; Read · infer · support |
@@ -410,6 +411,8 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Objects vs Materials](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_5r47Pvstyn) | scoped-practice / The Mending Shed (local build) / [source](../dist/mending-shed-content.mjs) | A supported sort of twelve pictured objects into the object and the material it is made of, from a supplied chip tray with ordered Check lines. Unaided naming, real materials, property vocabulary and grouping are not observed. |
 | [Changing Shapes of Solids](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_wf-SJhZ1kC) | scoped-practice / The Mending Shed (local build) / [source](../dist/mending-shed-content.mjs) | A predicted test on authored pictures: choose a sample and an action, predict springs back, keeps the new shape or hardly changes, then see the authored result. Real materials, measurement, property vocabulary and grouping are not observed. |
 | [Observation vs Interpretation](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Hw70LI5xza) | scoped-practice / The Lost and Found Board (local build) / [source](../dist/lost-found-content.mjs) | A supported sort of authored witness sentences into what was seen and what is thought, with Why? and a sort-for-me option. The child's own observations and field inquiry are not observed. |
+| [Comparing Design Solutions](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_nNYo5A-7Bl) | scoped-practice / The Design Table (local build) / [source](../dist/design-table-content.mjs) | Choices and tag placements on a supplied made-up model: read a filled same-way rain table, tag each bag's strength and weakness, recommend from the data and pick an improvement to test. Running a test, recording data, sketching or modelling and building are not observed. |
+| [Simple Design Problems](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Z5-fSCOBep) | scoped-practice / The Design Table (local build) / [source](../dist/design-table-content.mjs) | Tile placements on a supplied made-up brief: place the need, user, musts and limits, flip vague wishes to checkable musts and sort musts from limits. Writing a brief unaided, testing and building are not observed. |
 
 ## Sources, licensing and maintenance
 
