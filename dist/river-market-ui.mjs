@@ -75,12 +75,14 @@ function caminoMap(e){
 function teo(l,meaning){return `<p class='river-line'>${es(`«${l.es}»`)}${meaning?`<span class='river-gloss'>${rich(l.en)}</span>`:''}</p>`;}
 function caminoTask(e,w){
  const s=e.source,k=e.task,f=s.feedback,meaning=e.support.meaning,place=s.map.find(n=>n.id===k.at).label;
+ // The latest move's own feedback shows first; the place's line is the fallback, and the post office keeps its hint.
  let lines='';
- if(k.at===s.goal)lines=teo(f.panaderia,meaning);
- else if(k.at===s.wrong)lines=`${teo(f.correos,meaning)}<p class='river-hint'>${rich(f.correos.hint)}</p>`;
- else if(w.line==='nothing')lines=`<p class='river-line'>${esc(f.nothing.lead)} ${es(`«${f.nothing.es}»`)}${meaning?` <span class='river-gloss'>${rich(f.nothing.en)}</span>`:''} ${esc(f.nothing.tail)}</p>`;
+ if(w.line==='nothing')lines=`<p class='river-line'>${esc(f.nothing.lead)} ${es(`«${f.nothing.es}»`)}${meaning?` <span class='river-gloss'>${rich(f.nothing.en)}</span>`:''} ${esc(f.nothing.tail)}</p>`;
  else if(w.line==='stays')lines=`<p class='river-line'>${esc(f.stays.text)}</p>`;
+ else if(k.at===s.goal)lines=teo(f.panaderia,meaning);
+ else if(k.at===s.wrong)lines=teo(f.correos,meaning);
  else if(k.moveCount===0)lines=teo(f.start,meaning);
+ if(k.at===s.wrong)lines+=`<p class='river-hint'>${rich(f.correos.hint)}</p>`;
  const moves=k.at===s.goal?'':`<div class='river-moves' role='group' aria-label='${esc(s.group)}'>${s.buttons.map(b=>`<button type='button' data-river-move='${b.id}' lang='es'>${esc(b.es)} <span aria-hidden='true'>${esc(b.arrow)}</span></button>`).join('')}</div>${k.at===s.back.from?button('back',s.back.label):''}`;
  return `<section class='river-task river-camino' aria-labelledby='river-task-title'><h3 id='river-task-title' tabindex='-1'>${esc(s.prompt)}</h3>
  <div class='river-walk'>${caminoMap(e)}<p class='river-teo-place' id='river-teo-place' tabindex='-1'>${rich(s.place.replace('{place}',`<i>${place}</i>`)).replace('<i>','<i lang=\'es\'>')}</p></div>
@@ -144,7 +146,8 @@ export function bindRiverMarket(state,ctx={}){
   if(el.dataset.riverMove||el.dataset.riverAction==='back'){const b=el.dataset.riverMove||'back';stop();const r=write(()=>core.moveTeo(state,b,options));if(!r)return;w.line=r.line;
    const now=core.riverMarketView(state).camino,f=now.source.feedback,place=now.source.map.find(n=>n.id===now.task.at).label;
    const heard=r.line==='nothing'?`${f.nothing.lead} «${f.nothing.es}» ${f.nothing.tail}`:r.line==='stays'?f.stays.text:r.line?`«${f[r.line].es}»`:'';
-   return redraw(b==='back'?"[data-river-move='izquierda']":now.task.at===now.source.goal?'#river-teo-place':now.task.at===now.source.back.from?"[data-river-action='back']":`[data-river-move='${b}']`,`${now.source.place.replace('{place}',place)} ${heard}`.trim());}
+   // A move keeps focus on the pressed button; when that button is gone (Back, or the bakery) focus goes to Teo's place.
+   return redraw(b!=='back'&&now.task.at!==now.source.goal?`[data-river-move='${b}']`:'#river-teo-place',`${now.source.place.replace('{place}',place)} ${heard}`.trim());}
   if(el.dataset.riverChoice&&k==='camino'){stop();if(!write(()=>core.answerCamino(state,el.dataset.riverChoice,options)))return;
    const nudge=core.riverMarketView(state).camino.source.question.choices.find(c=>c.id===el.dataset.riverChoice)?.nudge;
    return redraw(`[data-river-choice='${el.dataset.riverChoice}']`,plain(nudge));}

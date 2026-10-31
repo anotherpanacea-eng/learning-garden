@@ -30,8 +30,8 @@ ok(makeCaminoSource('medium')===null,'unknown amount makes no source');
 {
  const to={muelle:[],puente:['recto'],plaza:['recto','cruza'],correos:['recto','cruza','derecha']};
  const table={muelle:{recto:'puente',cruza:'nothing',izquierda:'stays',derecha:'stays'},puente:{recto:'stays',cruza:'plaza',izquierda:'stays',derecha:'stays'},plaza:{recto:'stays',cruza:'nothing',izquierda:'panaderia',derecha:'correos'},correos:{recto:'stays',cruza:'nothing',izquierda:'stays',derecha:'stays'}};
- for(const [node,row] of Object.entries(table))for(const [b,cell] of Object.entries(row)){
-  const st=opened();walk(st,to[node]);const before=cam(st).task.moveCount,r=moveTeo(st,b,yes),e=cam(st);
+ for(const amount of ['short','longer'])for(const [node,row] of Object.entries(table))for(const [b,cell] of Object.entries(row)){
+  const st=opened(amount);ok(cam(st).source.amount===amount,'the walk uses its amount');walk(st,to[node]);const before=cam(st).task.moveCount,r=moveTeo(st,b,yes),e=cam(st);
   const where=['nothing','stays'].includes(cell)?node:cell;
   ok(r.ok&&e.task.at===where,`${node} + ${b} -> ${where}`);
   ok(e.task.moveCount===before+1,`${node} + ${b} counts one move, staying or not`);
@@ -73,6 +73,29 @@ ok(makeCaminoSource('medium')===null,'unknown amount makes no source');
  ok(moveTeo(big,'recto',yes).error==='capacity'&&bytes(big)===b,'a move past 9999 refuses without changing the save');
  const resumed=JSON.parse(bytes(opened()));walk(resumed,['recto']);const copy=JSON.parse(bytes(resumed));
  ok(moveTeo(copy,'cruza',yes).at==='plaza','a resumed walk continues from the saved node');
+}
+
+// A frozen source resumes unchanged when the content module's map, labels, wording and order change.
+{
+ const st=opened();walk(st,['recto','cruza']);const saved=JSON.parse(bytes(st)),s=saved.spanish.errands.camino.source;
+ s.map[2].label='la plazuela';s.moves.plaza.izquierda='correos';s.moves.plaza.derecha='panaderia';s.feedback.panaderia.es='¡Por fin, la panadería!';s.question.choices.reverse();s.sentences[3].es='En la plazuela, gira a la derecha.';
+ ok(validCaminoErrand(saved.spanish.errands.camino),'an older frozen source stays readable');
+ const page=riverMarketPage(doneCarga(saved));ok(page.includes('la plazuela')&&page.includes('En la plazuela, gira a la derecha.'),'the frozen labels and sentences render');
+ const r=moveTeo(saved,'derecha',yes);ok(r.at==='panaderia'&&cam(saved).source.feedback.panaderia.es==='¡Por fin, la panadería!','moves resolve from the frozen table, not the module');
+ const order=cam(saved).source.question.choices.map(c=>c.id).join();ok(order==='muelle,puente,cafe','the frozen choice order is kept');
+ ok(riverMarketPage(saved).indexOf("data-river-choice='muelle'")<riverMarketPage(saved).indexOf("data-river-choice='cafe'"),'the question renders in the frozen order');
+ answerCamino(saved,'cafe',yes);ok(cam(saved).state==='done','the frozen fit decides');
+}
+
+// An unreadable El camino record and an unknown errand record leave La carga open and stay exact.
+{
+ const st=opened();cam(st).task.at='cafe';st.spanish.errands.receta={tryId:99,future:true};st.spanish.earlier.push({tryId:98,errand:'tiempo'});
+ const keep=bytes({camino:cam(st),receta:st.spanish.errands.receta,earlier:st.spanish.earlier});
+ ok(openCarga(st,yes).ok&&st.spanish.errands.carga.tryId===2,'La carga opens beside them');
+ const e=st.spanish.errands.carga;for(const i of e.source.items)placeItem(st,i.id,e.source.targets[i.kind],yes);submitCarga(st,yes);
+ ok(bytes({camino:cam(st),receta:st.spanish.errands.receta,earlier:st.spanish.earlier.slice(0,1)})===keep,'the unreadable and unknown records are kept exactly');
+ ok(riverMarketNotes(st).includes('&quot;future&quot;: true')&&riverMarketNotes(st).includes('&quot;tiempo&quot;'),'and reach the saved-data export section');
+ ok(riverMarketView(st).earlier[0].readable===false&&riverMarketView(st).earlier[0].kind===null,'an unknown earlier record is listed as unreadable');
 }
 
 // Evidence shape: arrival is never reconstructed; damaged records are unreadable, not repaired.
