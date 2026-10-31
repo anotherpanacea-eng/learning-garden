@@ -12,7 +12,8 @@ export const itemById=k=>designItems.find(x=>x.id===k)||null;
 const optOk=(x,flips=false)=>object(x)&&id(x.id)&&text(x.label)&&(!own(x,'flip')||flips&&(object(x.flip)&&(id(x.flip.id)&&text(x.flip.label)&&Object.keys(x.flip).length===2||text(x.flip.line)&&Object.keys(x.flip).length===1)));
 const listOk=(l,flips=false)=>Array.isArray(l)&&l.length<=12&&l.every(x=>optOk(x,flips))&&new Set(l.map(x=>x.id)).size===l.length;
 const lineOk=x=>object(x)&&id(x.id)&&text(x.text);
-const has=(list,x)=>object(x)&&list.some(y=>y.id===x.id);
+// A chosen or placed entry must be a well-formed copy of an entry in the record's own list.
+const has=(list,x)=>optOk(x,true)&&list.some(y=>y.id===x.id&&y.label===x.label&&JSON.stringify(y.flip)===JSON.stringify(x.flip));
 const placedOk=(p,items,slots)=>Array.isArray(p)&&p.length<=12&&p.every(e=>object(e)&&has(items,e.item)&&has(slots,e.slot));
 function answerOk(a,r){
  if(!object(a)||!lineOk(a.line))return false;
@@ -98,9 +99,10 @@ export const sideOf=(tile,flipped)=>flipped.includes(tile.id)&&object(tile.flip)
 export function gradeBrief(board,flipped){
  const b=designBrief,placed=b.tray.filter(t=>own(board,t.id)).map(t=>({tile:t,side:sideOf(t,flipped),slot:board[t.id]}));
  const l=(k,extra={})=>({right:k==='right',line:{id:k,text:b.lines[k]},...extra});
- if(placed.some(p=>p.side.id===b.solution))return l('solution');
- const vague=placed.filter(p=>b.vague.includes(p.side.id));
- if(vague.length)return l(vague[0].side.id,{flip:vague.map(p=>p.tile.id)});
+ // Every placed vague tile flips after the check, whichever line wins.
+ const vague=placed.filter(p=>b.vague.includes(p.side.id)),flip=vague.map(p=>p.tile.id);
+ if(placed.some(p=>p.side.id===b.solution))return l('solution',{flip});
+ if(vague.length)return l(vague[0].side.id,{flip});
  if(placed.some(p=>b.belongs[p.side.id]==='musts'&&p.slot==='limits'||b.belongs[p.side.id]==='limits'&&p.slot==='musts'))return l('swap');
  if(placed.some(p=>b.belongs[p.side.id]!==p.slot))return l('wrong');
  const used=s=>placed.filter(p=>p.slot===s).length;

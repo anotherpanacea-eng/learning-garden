@@ -98,6 +98,14 @@ export function runChecks(){
  const sheet=readFileSync(new URL('../docs/content/334-design-table-first-slice-text.md',import.meta.url),'utf8');
  for(const x of card)ok(sheet.includes(`- **${x.label}** ${x.text}`),'the companion brief card exactly: '+x.label);
  yes(C.checkBrief(b,{oak:'need'},[],options));eq(brief(b).rightBrief.placed.length,8,'a later wrong check keeps the right brief');eq(brief(b).checks,4);
+ // The solution line wins, and placed vague tiles still flip after the check.
+ eq(C.gradeBrief({oak:'need',strong:'musts'},[]),{right:false,line:{id:'solution',text:'Maybe. First, what must any answer do?'},flip:['strong']});
+ {const sv=fresh();const out=yes(C.checkBrief(sv,{oak:'need',strong:'musts'},[],options));eq(out.returned,['strong']);eq(out.flipped,['strong']);eq(brief(sv).latest.placed.map(e=>e.item.id),['oak','strong'],'submitted as placed');eq(brief(sv).latest.flipped,['strong']);eq(brief(sv).latest.line.id,'solution');}
+ // A placed or chosen entry must be a well-formed copy from the record's own list.
+ {const mb=clone(brief(b));delete mb.rightBrief.placed[0].item.label;ok(!C.validBrief(mb),'a placed entry without its label is unreadable');
+  const mb2=clone(brief(b));mb2.rightBrief.placed[0].item.label='Not the kept label';ok(!C.validBrief(mb2),'a placed label must match the kept list');
+  const z=clone(b);z.designTable.briefs['ways-crate']=mb;eq(C.designView(z).brief.status,'unreadable');resetDesignTableView();ok(designTablePage(z,'e').length);refused(z,()=>C.checkBrief(z,RIGHT_BOARD,['strong','heavy'],options));
+  const zi=fresh();yes(C.answerItem(zi,'a4','satchel',options));delete rec(zi,'a4').latest.choice.label;eq(C.designView(zi).items.a4.status,'unreadable');}
  // A kept brief renders after the content module rewrites a flip side.
  brief(b).tray.find(t=>t.id==='heavy').flip.label='An older flip side';brief(b).rightBrief.placed.find(e=>e.item.id==='weighs').item.label='An older flip side';
  ok(C.validBrief(brief(b)));ok(C.briefCurrent(brief(b)),'labels alone keep the record current');eq(C.briefReadBack(brief(b),T.briefCard)[2].text.includes('an older flip side'),true);
@@ -108,7 +116,7 @@ export function runChecks(){
  const d=fresh();yes(C.answerItem(d,'a6','worse',options));yes(C.answerItem(d,'a6','same-water',options));
  const keep=clone(d.designTable);rec(d,'a6').rev='r0';eq(C.designView(d).items.a6.writable,false);refused(d,()=>C.answerItem(d,'a6','same-water',options));
  rec(d,'a6').rev='r1';rec(d,'a6').options.pop();eq(C.designView(d).items.a6.writable,false);d.designTable=clone(keep);
- rec(d,'a6').prompt='An older question?';rec(d,'a6').options[0].label='An older choice';rec(d,'a6').explanation='An older explanation.';ok(C.designView(d).items.a6.writable,'labels alone keep it writable');
+ rec(d,'a6').prompt='An older question?';rec(d,'a6').options[0].label='An older choice';rec(d,'a6').first.choice.label='An older choice';rec(d,'a6').explanation='An older explanation.';ok(C.designView(d).items.a6.writable,'labels alone keep it writable');
  rec(d,'a6').options[0].id='gone';rec(d,'a6').first.choice.id='gone';eq(C.designView(d).items.a6.status,'kept');eq(C.designView(d).items.a6.writable,false);
  resetDesignTableView();ok(designTablePage(d,'e').length);
  // Unreadable: count and presence disagree; preserved raw; the rest of the table open.

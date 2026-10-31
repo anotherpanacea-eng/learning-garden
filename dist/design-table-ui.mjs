@@ -73,7 +73,7 @@ function itemSection(state,v,id,l){
 function boardView(vb,l){
  if(l.board)return;const latest=vb.record?.latest;l.board={};l.flipped=latest?[...latest.flipped]:[];
  if(!latest)return;
- for(const e of latest.placed){const t=designBrief.tray.find(x=>x.id===e.item.id||own(x.flip,'id')&&x.flip.id===e.item.id);if(!t)continue;const returned=designBrief.vague.includes(t.id)&&e.item.id===t.id&&l.flipped.includes(t.id);if(!returned)l.board[t.id]=e.slot.id;}
+ for(const e of latest.placed){const t=vb.record.tray.find(x=>x.id===e.item.id||own(x.flip,'id')&&x.flip.id===e.item.id);if(!t)continue;const returned=designBrief.vague.includes(t.id)&&e.item.id===t.id&&l.flipped.includes(t.id);if(!returned)l.board[t.id]=e.slot.id;}
 }
 function readBack(r){const rows=C.briefReadBack(r,T.briefCard);return rows?`<section class="dt-brief-card" id="dt-brief-card" tabindex="-1"><h3>${esc(T.yourBrief)}</h3><dl>${rows.map(x=>`<dt>${esc(x.label)}</dt><dd>${esc(x.text)}</dd>`).join('')}</dl></section>`:'';}
 const mary=()=>`<section class="dt-mary" id="dt-mary" tabindex="-1">${label('history')}${T.mary.map(x=>p(x)).join('')}</section>`;
@@ -83,13 +83,15 @@ function briefSection(v,l){
  if(vb.kept&&!vb.writable){const r=vb.record,latest=r.latest;
   return `<section class="dt-brief dt-readonly"><ul class="dt-kept">${(latest?.placed||[]).map(e=>`<li>${esc(T.placedName.replace('{tile}',e.item.label).replace('{slot}',e.slot.label))}</li>`).join('')}</ul>${latest?p(latest.line.text,'dt-line'):''}${readBack(r)}</section>`;}
  boardView(vb,l);const r=vb.record,pick=l.pick.brief,board=l.board,flipped=l.flipped;
+ // A kept brief shows its own tray, slots, flip sides and order; the module only grades.
+ const trayList=r?r.tray:b.tray,slotList=r?r.slots:b.slots;
  const tile=(t,placedIn)=>{const side=C.sideOf(t,flipped),niceFlipped=t.id==='nice'&&flipped.includes('nice');
-  const name=placedIn?T.placedName.replace('{tile}',side.label).replace('{slot}',b.slots.find(s=>s.id===placedIn).label):side.label;
+  const name=placedIn?T.placedName.replace('{tile}',side.label).replace('{slot}',slotList.find(s=>s.id===placedIn).label):side.label;
   const main=placedIn?btn('unplace',esc(side.label),`data-dt-item="brief" data-dt-opt="${t.id}" aria-label="${esc(name)}"`,{cls:'dt-tile dt-placed'}):btn('pick',`${esc(side.label)}${pick===t.id?` <span class="dt-picked">(${esc(T.pickedUp)})</span>`:''}`,`data-dt-item="brief" data-dt-opt="${t.id}" aria-pressed="${pick===t.id}"`,{cls:'dt-tile',disabled:niceFlipped});
   const flip=b.vague.includes(t.id)&&!flipped.includes(t.id)?btn('flip',esc(T.flip),`data-dt-opt="${t.id}"`,{cls:'dt-flip'}):'';
   return `<li class="dt-tile-row${niceFlipped?' dt-nice':''}">${main}${flip}${niceFlipped?p(t.flip.line,'dt-flip-line'):''}</li>`;};
- const tray=b.tray.filter(t=>!own(board,t.id)).map(t=>tile(t,null)).join('');
- const slots=b.slots.map(s=>{const here=b.tray.filter(t=>board[t.id]===s.id),full=here.length>=b.room[s.id];
+ const tray=trayList.filter(t=>!own(board,t.id)).map(t=>tile(t,null)).join('');
+ const slots=slotList.map(s=>{const here=trayList.filter(t=>board[t.id]===s.id),full=here.length>=b.room[s.id];
   return `<li class="dt-slot" data-dt-brief-slot="${s.id}"><span class="dt-slot-name">${esc(s.label)}</span><ul>${here.map(t=>tile(t,s.id)).join('')}</ul>${btn('place',esc(s.label),`data-dt-item="brief" data-dt-slot="${s.id}"`,{disabled:!pick||full,cls:'dt-slot-button'})}</li>`;}).join('');
  const line=l.briefLine||(r?.latest?{id:r.latest.line.id,text:r.latest.line.text}:null);
  return `<section class="dt-brief"><ul class="dt-slots dt-board">${slots}</ul><ul class="dt-tray">${tray}</ul><div class="dt-actions">${btn('check-brief',esc(T.checkBrief),'',{cls:'primary'})}</div><p class="dt-line" id="dt-line-brief" tabindex="-1">${line&&line.id!=='right'?esc(line.text):''}</p>${r?.rightBrief?readBack(r)+mary():''}</section>`;

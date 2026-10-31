@@ -96,6 +96,16 @@ try{
  {const s=initializeExplorerState(freshState());const {c:c0,p:p0}=await open(820,1000);await station(p0,'bags');await A(p0,'choose','[data-dt-item="a4"][data-dt-choice="baker"]').click();const seed=await book(p0);await c0.close();
   seed.designTable.items.a4.rev='r0';seed.designTable.items.a4.prompt='An older question?';
   const {c,p}=await open(820,1000,{'explorer-1':seed});await station(p,'bags');const before=await book(p);ok((await p.locator('[data-dt-item-root="a4"]').innerText()).includes('An older question?'),'kept prompt');eq(await A(p,'choose','[data-dt-item="a4"]').count(),0,'read-only');eq(await book(p),before,'kept exact');await c.close();}
+ // A writable kept brief renders its own tray order, slot labels and flip sides.
+ {const {c:c0,p:p0}=await open(820,1000);await station(p0,'brief');await A(p0,'pick','[data-dt-opt="need"]').click();await A(p0,'place','[data-dt-slot="need"]').click();await A(p0,'check-brief').click();const seed=await book(p0);await c0.close();
+  const r=seed.designTable.briefs['ways-crate'];r.tray.reverse();r.slots.find(x=>x.id==='musts').label='Musts, kept';r.tray.find(t=>t.id==='heavy').flip.label='Kept flip side';
+  r.first.placed[0].slot=r.slots.find(x=>x.id==='need');r.latest.placed[0].slot=r.slots.find(x=>x.id==='need');
+  const {c,p}=await open(820,1000,{'explorer-1':seed});await station(p,'brief');
+  eq(await p.locator('.dt-brief > .dt-tray [data-dt-action="pick"]').evaluateAll(xs=>xs.map(x=>x.dataset.dtOpt)),['days','heavy','nice','coins','oak','keeps-dry','courier','strong','shed'],'kept tray order');
+  ok((await p.locator('[data-dt-brief-slot="musts"] .dt-slot-name').innerText())==='Musts, kept','kept slot label');
+  await A(p,'flip','[data-dt-opt="heavy"]').click();ok((await A(p,'pick','[data-dt-opt="heavy"]').innerText()).includes('Kept flip side'),'kept flip side');
+  await A(p,'pick','[data-dt-opt="heavy"]').click();await A(p,'place','[data-dt-slot="musts"]').click();eq(await A(p,'unplace','[data-dt-opt="heavy"]').getAttribute('aria-label'),'Kept flip side, in Musts, kept','placed name from kept copy');
+  await A(p,'check-brief').click();eq((await dt(p)).briefs['ways-crate'].latest.placed.find(e=>e.item.id==='weighs').item.label,'Kept flip side','a check keeps the shown labels');eq(p.errors,[],'no errors');await c.close();}
  {const s=initializeExplorerState(freshState());s.designTable={v:9,later:[1]};const {c,p}=await open(820,1000,{'explorer-1':s});ok((await p.locator('aside.dt-notice').innerText()).includes('uses a format this version cannot read'),'unknown version line');eq(await p.locator('aside.dt-notice a[href="#notes"]').count(),1,'Notes link');eq(await A(p,'station').count(),0,'no stations');eq((await book(p)).designTable,{v:9,later:[1]},'raw');await c.close();}
  // Notes download and import, reset, two explorers, stale controls, the Workshop link.
  {const {c,p}=await open(820,1000,{'explorer-1':initializeExplorerState(freshState()),'explorer-2':initializeExplorerState(freshState())});await station(p,'bags');await A(p,'choose','[data-dt-item="a4"][data-dt-choice="satchel"]').click();const held=(await book(p)).designTable;
