@@ -116,7 +116,6 @@ function mutate(state,fn,options={}){
  if(!object(state)||typeof options.canExport!=='function')return failure('capacity');
  try{const candidate=clone(state);if(!own(candidate,'designTable'))candidate.designTable={v:1,taught:{bags:false,brief:false},items:{},briefs:{}};
   const root=candidate.designTable;if(!object(root)||root.v!==1)return failure('unavailable');
-  for(const k of ['items','briefs'])if(!own(root,k))root[k]={};else if(!object(root[k]))return failure('unavailable');
   const result=fn(root);if(!result.ok||result.changed===false)return result;
   if(!recoveryFitsProgressLimits(candidate))return failure('capacity');const proposal=clone(root);if(options.canExport(candidate)!==true)return failure('capacity');state.designTable=proposal;return result;
  }catch{return failure('capacity');}
@@ -134,6 +133,7 @@ const newRecord=item=>({prompt:item.prompt,explanation:item.explanation,options:
 function itemWrite(state,itemId,fn,options){
  const item=itemById(itemId);if(!item)return failure('selection');
  return mutate(state,root=>{
+  if(!own(root,'items'))root.items={};else if(!object(root.items))return failure('unavailable');
   if(own(root.items,itemId)){const r=root.items[itemId];if(!validItem(r)||!itemCurrent(r,item))return failure('unavailable');return fn(r,item);}
   const r=newRecord(item),res=fn(r,item);if(res.ok&&res.changed!==false)root.items[itemId]=r;return res;
  },options);
@@ -172,6 +172,7 @@ export function checkBrief(state,board,flipped,options){
  for(const s of b.slots)if(Object.values(board).filter(x=>x===s.id).length>b.room[s.id])return failure('selection');
  if(flipped.includes('nice')&&own(board,'nice'))return failure('selection');
  return mutate(state,root=>{
+  if(!own(root,'briefs'))root.briefs={};else if(!object(root.briefs))return failure('unavailable');
   let r=root.briefs[b.id];const fresh=!own(root.briefs,b.id);
   if(fresh)r={tray:clone(b.tray),slots:clone(b.slots),rev:b.rev,first:null,latest:null,rightBrief:null,checks:0,at:now()};
   else if(!validBrief(r)||!briefCurrent(r))return failure('unavailable');

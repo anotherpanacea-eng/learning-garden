@@ -136,6 +136,17 @@ export function runChecks(){
  for(const value of [null,0,'x',[],{v:1,items:[]},{v:1,items:{a4:7}},{v:1,taught:'yes'},{v:1,briefs:{'ways-crate':null}}]){const y=fresh();y.designTable=value;ok(typeof designTableNotes(y)==='string');resetDesignTableView();ok(typeof designTablePage(y,'e')==='string');}
  const bt=fresh();bt.designTable={v:1,taught:'yes'};refused(bt,()=>C.startStation(bt,'bags',options));yes(C.answerItem(bt,'a4','satchel',options));eq(bt.designTable.taught,'yes');
  const bi=fresh();bi.designTable={v:1,items:[1]};eq(C.designView(bi).items.a4.status,'unreadable');refused(bi,()=>C.answerItem(bi,'a4','satchel',options));
+ // A malformed sibling container pauses its station only, preserving its raw value.
+ for(const raw of [[],null,'earlier pages']){
+  const bags=fresh();bags.designTable={v:1,taught:{},items:{},briefs:clone(raw)};
+  ok(C.designView(bags).items.a4.writable);yes(C.answerItem(bags,'a4','satchel',options));eq(bags.designTable.briefs,raw);
+  yes(C.openRung(bags,'a8',1,options));eq(bags.designTable.briefs,raw);refused(bags,()=>C.checkBrief(bags,{},[],options));
+  const briefOnly=fresh();briefOnly.designTable={v:1,taught:{},items:clone(raw),briefs:{}};
+  ok(C.designView(briefOnly).brief.writable);yes(C.checkBrief(briefOnly,{need:'need'},[],options));eq(briefOnly.designTable.items,raw);refused(briefOnly,()=>C.answerItem(briefOnly,'a4','satchel',options));
+  yes(C.startStation(briefOnly,'brief',options));eq(briefOnly.designTable.items,raw);
+  eq(prepareProgressImport(JSON.stringify(report(bags),null,2)).state.designTable,bags.designTable,'bad briefs carry through actual Notes unchanged');
+  eq(prepareProgressImport(JSON.stringify(report(briefOnly),null,2)).state.designTable,briefOnly.designTable,'bad items carry through actual Notes unchanged');
+ }
  // Real preflight refusal at the capacity limit.
  const q=fresh();q.filler='x'.repeat(MAX_IMPORT_BYTES);refused(q,()=>C.startStation(q,'bags',options));refused(q,()=>C.answerItem(q,'a4','satchel',options));refused(q,()=>C.openRung(q,'a4',1,options));refused(q,()=>C.checkBrief(q,{need:'need'},[],options));
  eq(C.answerItem(q,'a4','satchel',options).error,'capacity');eq(C.answerItem(fresh(),'a4','satchel',{}).ok,false,'no export check, no write');
