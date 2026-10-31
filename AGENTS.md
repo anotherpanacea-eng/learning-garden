@@ -93,8 +93,9 @@ new commits. The author fixes findings on the same branch.
 `test/*checks*.mjs` suite (about three minutes). Run it before marking a PR
 ready. For UI changes also run the touched activity's browser suite,
 `python test/<activity>-browser.py` (Python Playwright and Chromium). There is
-no hosted CI here: these commands are the gate, so say in the PR which ones
-you ran and at which head.
+one hosted check, a gitleaks secret scan on every PR and `main` push; the
+commands above are the gate, so say in the PR which ones you ran and at which
+head.
 
 Browser suites are Chromium emulation. They don't qualify a physical iPad,
 Safari, audible speech or VoiceOver, and no check here measures learning.
@@ -122,13 +123,19 @@ this way:
    Deploy only `dist/`, never the repository root or CLI setup folders. Keep
    credentials and account configuration out of the repository.
 5. **Verify live.** Every tracked `dist/` file must match the bytes served at
-   https://after-the-storm-learning.anotherpanacea.workers.dev/, then run the
-   affected browser journeys against the hosted site. If either fails,
-   redeploy the previous release and report.
+   https://after-the-storm-learning.anotherpanacea.workers.dev/. The site is
+   static, so matching bytes mean the hosted game is the tested one: load the
+   home page and one touched route as a smoke check rather than re-running
+   the browser suites against the host. If either fails, redeploy the
+   previous release and report.
 6. **Receipt.** Post one PR comment: tested tree, merge SHA, Cloudflare
    version id, the asset match, the suites run with results, and any harness
    caveat. Docs-only PRs (no `dist/` change) need no deploy and no receipt
-   beyond the merge.
+   beyond the merge. The PR comment is the record: link it from the roadmap
+   once, and don't copy its counts into the roadmap, README, build queue or
+   other docs. Review clearances also go in PR comments; `docs/reviews/` is
+   for content reviews meant to be read later, such as the 2026-10-22 text
+   review.
 7. **Fleet card.** Move the linked card (`python3 -m tools.backlog_state
    move`): `done` when its `done_when` is met, otherwise leave it in `build`
    and say what is left in its note.
