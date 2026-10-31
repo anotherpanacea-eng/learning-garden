@@ -52,6 +52,8 @@ The complete game, including Word Garden, is published on Cloudflare Static Asse
 
 From Word Garden, **Visit the Prop Box** (`#words/props`) to label twelve pictured props and read three short scenes together. Letter tiles, a different worked example and word comparisons preserve each waiting draft. Any amount of adult help is welcome. This first room uses adult-read demonstrations, with no recorded phonics, speech synthesis or independent-reading score. Grown-up notes downloads retain the source material, drafts and labels with each explorer. [Spec 320](docs/specs/320-word-room.md).
 
+**Market Signs** (`#words/signs`) adds a painted prefix bench and a five-page model dictionary. Keep familiar or unexpected combinations, compare letters at joins, look between guide words and try ten open sign jobs. Each waiting sign, page and supplied draft remains separate; first/latest versions and frozen sources travel through Notes. This is guided written-word practice, with adult shared reading and no sound samples or independent spelling assessment. See [spec325](docs/specs/325-prefix-signs-and-dictionary.md). Run `node test/market-signs-checks.mjs` and `python3 test/market-signs-browser.py`; `MARKET_SIGNS_ARTIFACTS` selects a private synthetic screenshot directory.
+
 Check the logic with `node test/word-room-checks.mjs` and the touch, keyboard and Notes-transfer journeys with `python3 test/word-room-browser.py`. The browser suite uses installed Chrome on macOS, `CHROME_PATH` when supplied, or Playwright Chromium elsewhere. `WORD_ROOM_ARTIFACTS` selects a private output directory for synthetic screenshots and receipts.
 
 ## Run locally
