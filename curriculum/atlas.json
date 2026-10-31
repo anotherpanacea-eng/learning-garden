@@ -930,6 +930,17 @@
         "build"
       ],
       "scope": "Sort twelve pictured objects by what each is and what it is made of, with a guided first card, ordered Check lines and a stuck ladder; predict, try and let go of squash, bend, twist and stretch on six authored samples. Simplified authored pictures; no real materials, measurements or particle explanations."
+    },
+    {
+      "id": "design-table",
+      "name": "The Design Table",
+      "status": "built-local",
+      "route": "#workshop/design",
+      "patterns": [
+        "experiment",
+        "build"
+      ],
+      "scope": "Two stations: compare two made-up bags from a supplied same-way rain test, tag each one's strength and weakness and recommend from the data; then build a crate brief from tiles, turning vague wishes into checkable musts and sorting musts from limits. Made-up numbers; no real testing, sketching or building."
     }
   ],
   "manualReferences": [
@@ -1828,6 +1839,20 @@
       "kind": "scoped-practice",
       "source": "dist/mending-shed-content.mjs",
       "scope": "A predicted test on authored pictures: choose a sample and an action, predict springs back, keeps the new shape or hardly changes, then see the authored result. Real materials, measurement, property vocabulary and grouping are not observed."
+    },
+    {
+      "game": "design-table",
+      "topicId": "mt_nNYo5A-7Bl",
+      "kind": "scoped-practice",
+      "source": "dist/design-table-content.mjs",
+      "scope": "Choices and tag placements on a supplied made-up model: read a filled same-way rain table, tag each bag's strength and weakness, recommend from the data and pick an improvement to test. Running a test, recording data, sketching or modelling and building are not observed."
+    },
+    {
+      "game": "design-table",
+      "topicId": "mt_Z5-fSCOBep",
+      "kind": "scoped-practice",
+      "source": "dist/design-table-content.mjs",
+      "scope": "Tile placements on a supplied made-up brief: place the need, user, musts and limits, flip vague wishes to checkable musts and sort musts from limits. Writing a brief unaided, testing and building are not observed."
     }
   ],
   "increments": [
