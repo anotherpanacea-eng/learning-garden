@@ -113,6 +113,14 @@ def retained(browser,base):
    else:ok(p.locator('[data-writing-choice]').first.get_attribute('data-writing-choice')=='first','historical option order kept');ok('An earlier exact report.' in p.locator('.wt-source').inner_text(),'historical text kept');p.locator('[data-writing-choice=meanwhile]').tap();action(p,'check');ok(work(p)['checks'][-1]['outcome']=='fit','historical task checked by own rule')
    current=book(p)['writingDesk'];ok(export_notes(p,name)['writingDesk']==current,'actual Notes keeps retained '+name)
   finally:ctx.close()
+def entries(browser,base):
+ seed=fixture("const {drawLetter}=await import('./dist/letter-trail-core.mjs');drawLetter(s,'post','detail');c.openWritingTask(s,'a-strip')")
+ ctx,p=setup(browser,base,seed)
+ try:
+  writing=book(p)['writingDesk'];p.evaluate('location.hash="#desk"');p.locator('[data-desk-root]').wait_for();p.locator('[data-desk-start=take]').tap();p.locator('.desk-tabs [data-desk-step=cost]').tap();p.locator('[data-desk-answer]').fill('1440');p.locator('[data-desk-keep]').tap();desk=book(p).get('desk');p.locator('.writing-entry a[href="#desk/writing"]').tap();p.locator('[data-writing-root]').wait_for();ok(book(p)['writingDesk']==writing,'Desk entry resumes exact writing draft');ok(book(p).get('desk')==desk,'Desk entry does not change investigation')
+  for place in ['post','loft']:
+   p.evaluate('(place)=>location.hash="#"+place+"/letters"',place);link=p.locator('.msg-heading a[href="#desk/writing"]');link.wait_for();letters=book(p)['letterTrail'];link.tap();p.locator('[data-writing-root]').wait_for();ok(book(p)['letterTrail']==letters,'entry preserves '+place+' letter drafts');ok(book(p)['writingDesk']==writing,'letter entry resumes exact writing draft')
+ finally:ctx.close()
 def main():
  seed=fixture('');seed['syntheticOther']={'v':77,'exact':'other-game'}
  class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -123,6 +131,6 @@ def main():
   chrome=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');browser=pw.chromium.launch(headless=True,executable_path=chrome if Path(chrome).exists() else None,args=['--disable-quic'])
   try:
    for width,height in [(320,600),(820,1000),(1024,768)]:journey(browser,base,seed,width,height)
-   refusal(browser,base,seed);storage(browser,base,seed);two_tabs(browser,base,seed);retained(browser,base);ok(not errors,'no page/console/HTTP errors '+str(errors));result={'status':'passed','checks':checks,'base':base,'scope':'real app controls, Notes transfer, storage, stale actions, retained history and fault-only preflight interception; no physical Apple or audible qualification'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
+   entries(browser,base);refusal(browser,base,seed);storage(browser,base,seed);two_tabs(browser,base,seed);retained(browser,base);ok(not errors,'no page/console/HTTP errors '+str(errors));result={'status':'passed','checks':checks,'base':base,'scope':'real app controls, Notes transfer, storage, stale actions, retained history and fault-only preflight interception; no physical Apple or audible qualification'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
   finally:browser.close();server.shutdown()
 if __name__=='__main__':main()
