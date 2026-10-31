@@ -3,7 +3,10 @@ import {pathToFileURL} from 'node:url';
 import {readFileSync} from 'node:fs';
 import {freshState} from '../dist/core.mjs';
 import {chooseStoryArrival} from '../dist/story-arrivals-core.mjs';
-import {openUpstreamLetter,setActTwoFrameAmount,setActTwoPageAmount} from '../dist/act-two-core.mjs';
+import {revealOldMap,setPageAmount,storyView} from '../dist/keeper-story-core.mjs';
+import {keeperPages} from '../dist/keeper-story-ui.mjs';
+import {actTwoPage} from '../dist/act-two-ui.mjs';
+import {openUpstreamLetter,revealFloodLedger,actTwoView,setActTwoFrameAmount,setActTwoPageAmount} from '../dist/act-two-core.mjs';
 import {startSeedExchange,keepSeedExchange} from '../dist/seed-exchange-core.mjs';
 import {startClockWalk,keepClockWalk} from '../dist/courier-clock-core.mjs';
 import {walkCases} from '../dist/courier-clock-content.mjs';
@@ -76,6 +79,11 @@ export function runChecks(){
   ok(A.actThreeView(state).started);ok(A.actThreeView(state).ended,'later ending survives unreadable prior acts and receipts');ok(A.revealWaysPage(state,options));eq(A.actThreeView(state).season,null);eq(state.story.acts.III.season,{kept:true});
   ok(setActTwoFrameAmount(state,'longer',options),'reached Act III keeps frame choice available');ok(setActTwoPageAmount(state,'original',options),'Page 3 choice survives unreadable earlier acts');eq(A.actThreeView(state).frameAmount,'longer');eq(A.actThreeView(state).pageAmount,'original');
   for(const [key,setter] of [['frameAmount',setActTwoFrameAmount],['pageAmount',setActTwoPageAmount]]){state.story[key]={earlier:'kept'};unchanged(state,()=>setter(state,'short',options),'malformed Act III reading choice');eq(A.actThreeView(state)[key],'short');}
+ }
+ {
+  const state=actThreeSeed();state.story.acts.III={started:true,ended:true,contributions:{}};ok(A.revealWaysPage(state,options));ok(revealOldMap(state,options));ok(revealFloodLedger(state,options));state.story.pageAmount={retained:'future reading format'};const before=clone(state);
+  ok(storyView(state).pageAmountLocked,'third page makes preservation consistent on the earlier map');eq(actTwoView(state).pageAmountStatus,'unreadable','Page 2 advertises its actual write refusal');unchanged(state,()=>setPageAmount(state,'longer',options),'Page 1 cannot overwrite the third-page retained choice');unchanged(state,()=>setActTwoPageAmount(state,'longer',options),'Page 2 cannot overwrite the third-page retained choice');
+  ok(/data-keeper-amount="longer"[^>]*disabled/.test(keeperPages(state)),'Page 1 disables the unavailable preference');ok(/data-act-two-page-amount="longer"[^>]*disabled/.test(actTwoPage(state,{part:'flood-ledger'})),'Page 2 disables the unavailable preference');eq(state,before,'all three page readers retain the raw preference');
  }
  for(const mode of ['missing','false','throw']){
   const state=actThreeHosts(),o=mode==='missing'?{}:{canExport:mode==='false'?()=>false:()=>{throw Error('synthetic refusal');}};

@@ -100,7 +100,8 @@ def run(base,browser):
   c,p,seed=setup(browser,base,mode);go(p,'#almanac/the-ways');ok(p.locator('[data-a3-page-leaf]').count()==1,mode+' keeps reached page');before=book(p)
   if mode=='bad-preference':ok(p.locator('[data-a3-page-amount="longer"]').is_disabled(),'unreadable preference cannot be overwritten')
   else:p.locator('[data-a3-page-amount="longer"]').tap();ok('Nuria puts her paw' in p.locator('[data-a3-page-leaf]').inner_text(),mode+' page amount works')
-  if mode=='bad-preference':equal(book(p),before,'bad preference stays exact')
+  if mode=='bad-preference':
+   equal(book(p),before,'bad preference stays exact');p.goto(base+'#almanac/keepers');p.locator('[data-keeper-reveal]').tap();p.locator('.keeper-page-words').wait_for();ok(p.locator('[data-keeper-amount="longer"]').is_disabled(),'Page 1 keeps the retained preference');p.goto(base+'#almanac/flood-ledger');p.locator('[data-act-two-reveal-page]').tap();p.locator('.act-two-ledger').wait_for();ok(p.locator('[data-act-two-page-amount="longer"]').is_disabled(),'Page 2 keeps the retained preference');equal(book(p)['story']['pageAmount'],before['story']['pageAmount'],'earlier-page controls preserve the raw third-page preference')
   c.close()
  c,p,seed=setup(browser,base,'no-garden');ok(not p.locator('dialog.welcome-film[open]').count(),'direct Act III entry excludes automatic film');ok('III' not in book(p)['story']['acts'],'direct entry does not start');c.close()
  c,p,seed=setup(browser,base,'first-letter');ok(not p.locator('[data-a3-start]').count(),'unopened letter does not start Act III');p.locator('a[href="#almanac/upstream-letter"]').tap();p.locator('[data-act-two-open-letter]').tap();p.locator('.a3-invitation a[href="#almanac/beyond"]').tap();p.locator('[data-a3-start]').wait_for();c.close()
