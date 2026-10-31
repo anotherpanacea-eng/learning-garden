@@ -1,4 +1,4 @@
-// Spec 319: the market list slice of spec 278. Child text is the 278 companion's after its print rule
+// Specs 319 and 329: the market list slices of spec 278. Child text is the 278 companion's after its print rule
 // (typographic quotes, *italics*, **bold**); the few other strings are the spec's exact exceptions.
 const freeze=x=>{if(x&&typeof x==='object'){Object.values(x).forEach(freeze);Object.freeze(x);}return x;};
 const slot=id=>({slot:id}),word=t=>({t}),COMMA={fixed:','},AND={and:true};
@@ -32,18 +32,31 @@ export const MANIFEST_TEXT=freeze({
  setTitle:'Practice: colons and lists',
  check:'Check',tryAgain:'Try again',stuck:'I’m stuck',skip:'Skip for now',
  ladderStep3:'Skip for now. You can come back any time.',
- ladderStep2:{colon:'Try this one first: We need two things: bread and jam. Now cover your list.',semicolon:'Try this one first: Paris, France; Rome, Italy. Two places, one semicolon. Now count yours.'},
+ ladderStep2:{colon:'Try this one first: We need two things: bread and jam. Now cover your list.',semicolon:'Try this one first: Paris, France; Rome, Italy. Two places, one semicolon. Now count yours.',join:'Try this one first: cover one side with your hand. Can the other stand alone?'},
  glossaryTitle:'Key terms',
- glossary:[['Manifest','a list of everything a cart or boat carries.'],['Colon ( : )','two dots. It opens a list or an explanation.'],['Semicolon ( ; )','a dot over a comma. It joins two whole sentences or splits big list items.'],['Whole sentence','words that make sense standing alone, with a subject and a verb.'],['Lead-in','the words before a list that tell what the list is.']],
+ glossary:[['Manifest','a list of everything a cart or boat carries.'],['Colon ( : )','two dots. It opens a list or an explanation.'],['Semicolon ( ; )','a dot over a comma. It joins two whole sentences or splits big list items.'],['Dash ( – )','a short line between words. Here, one dash joins two whole sentences.'],['Whole sentence','words that make sense standing alone, with a subject and a verb.'],['Lead-in','the words before a list that tell what the list is.']],
  offScreenLabel:'with a grown-up',
  offScreen:'Make a packing list for a pretend trip up a river. Write it once as bullets and once as a sentence with a colon. Which is easier to read?',
  offScreenGrownUp:'Nothing is recorded. Keep it pretend; there’s no need to list real belongings.',
  grownUpTitle:'Grown-up panel',
- grownUp:['**What this teaches:** a colon to introduce a list after a whole sentence; semicolons between list items that contain commas.','**Terms:** England’s national curriculum teaches these in Year 6 and calls a period a full stop; the child text uses American terms. In the Common Core, colons and semicolons for lists and clauses appear in grades 9 to 10, so this pack runs ahead of the US grade order for some children.','**What it does not claim:** style guides differ. The colon is keyed only in running sentences: Chicago leaves it out after *We need*, but some house styles (Microsoft’s, for one) allow a colon after a short lead-in such as “You can:” above a bulleted list. The comma before “and” in a list (the serial comma) is a choice and is never marked.'],
+ grownUp:['**What this teaches:** a colon to introduce a list after a whole sentence; semicolons between list items that contain commas; semicolons, colons and dashes between independent clauses.','**Terms:** England’s national curriculum teaches these in Year 6 and calls a period a full stop; the child text uses American terms. In the Common Core, colons and semicolons for lists and clauses appear in grades 9 to 10, so this pack runs ahead of the US grade order for some children.','**What it does not claim:** style guides differ. The colon is keyed only in running sentences: Chicago leaves it out after *We need*, but some house styles (Microsoft’s, for one) allow a colon after a short lead-in such as “You can:” above a bulleted list. The comma before “and” in a list (the serial comma) is a choice and is never marked. American books usually print a long dash with no spaces; this pack shows a spaced short dash. Where two marks both work, both are accepted.'],
  unreadable:'This saved work can’t be opened here. It is kept as it is, and you can still download it from Grown-up notes.',
  unknownVersion:'This saved work is from a different version. It is kept as it is, and you can still download it from Grown-up notes.',
  refused:'That didn’t save, so nothing changed. Your marks are still here.',
- notesHeading:'Market list marks'
+ notesHeading:'Market list marks',
+ // Spec 329: bench (b) and set C.
+ joinCards:[
+  {id:'card7',title:'Card 7. A semicolon between sentences',text:'A semicolon can join two whole sentences that belong together. Each side must make sense on its own. A comma alone can’t do this job.',example:'*The river path is fast; the bridge road is dry.*',steps:['Cover the right side. “The river path is fast.” A whole sentence.','Cover the left side. “The bridge road is dry.” A whole sentence.','Both stand alone, and they belong together. A semicolon can join them.']},
+  {id:'card8',title:'Card 8. A colon between sentences',text:'A colon can join two whole sentences when the second one explains the first. Read the colon as “here’s why” or “here’s what.”',example:'*The bridge is closed: the miller is painting it.*',steps:['“The bridge is closed.” Why?','“The miller is painting it.” That’s why.','The second explains the first, so a colon fits.']},
+  {id:'card9',title:'Card 9. A dash for a sharp break',text:'A dash ( – ) can join two whole sentences too. It makes a sharper break, so the second part lands harder. Dashes feel less formal.',example:'*We packed two honey cakes – Pip ate one.*',steps:['Two whole sentences: “We packed two honey cakes.” “Pip ate one.”','The dash makes a sudden stop before the surprise.','A period or semicolon would also be correct. The dash adds the jolt.']}
+ ],
+ joinTitle:'Joining Dot’s Notes',
+ joinHeader:'Dot’s notes join two sentences. Choose a mark for the gap. Then tap **Read it**.',
+ readButton:'Read it',
+ joinTiles:{period:'period ( . )',semicolon:'semicolon ( ; )',colon:'colon ( : )',dash:'dash ( – )',comma:'comma ( , )',nothing:'nothing'},
+ read:{'because-alone':'“Because the river path floods” can’t stand alone. A comma fits here.','because-usually':'A “because” part that comes first usually takes a comma. It helps a reader.','because-comma':'A comma fits here. It shows where the “because” part ends.','comma-alone':'A comma alone can’t join two whole sentences. Try a stronger mark.',crash:'The sentences crash together. A reader can’t tell where one ends.',explain:'A colon promises “here’s why.” Does the second part explain the first?',period:'Two separate sentences, a clean stop between them.',semicolon:'Two equal ideas, closely linked.',colon:'Here’s why, or here’s what.',dash:'A sudden break. The second part lands hard.'},
+ setCTitle:'Practice: joining two sentences',
+ joinNotesHeading:'Joining Dot’s notes'
 });
 // Each line is a lead-in, slot 1 and the list. `kind` picks the What fits bullets.
 export const MANIFEST_LINES=freeze([
@@ -59,4 +72,20 @@ export const MANIFEST_ITEMS=freeze([
  {id:'A2',kind:'choice',ladder:'colon',card:'',prompt:'Which sentence uses its colon correctly?',choices:[choice('a','We need: apples, letters and seeds.','“We need” isn’t a whole sentence. Leave the colon out.'),choice('b','We need three things: apples, letters and seeds.'),choice('c','We need three: things, apples, letters and seeds.','“Things” belongs before the colon, not in the list.')],fits:'b',hint:'Cover each list. Which leaves a whole sentence?',explanation:'“We need three things” stands alone. The colon then opens the list.'},
  {id:'A3',kind:'tiles',ladder:'semicolon',tiles:['colon','semicolon','comma'],lead:'The cart carries three loads',parts:[slot('s1'),word('apples'),COMMA,word('six baskets'),slot('s2'),word('honey cake'),COMMA,word('two boxes'),slot('s3'),AND,word('seeds'),COMMA,word('one tin')],prompt:'Put a mark in each gap.',answer:{s1:'colon',s2:'semicolon',s3:'semicolon'},commaFeedback:{s2:'Now “six baskets” and “honey cake” run together. Try a semicolon.',s3:'Now “two boxes” and “seeds” run together. Try a semicolon.'},hint:'Each load has a comma inside it already.',explanation:'A colon opens the list. Semicolons split the three loads.'},
  {id:'A4',kind:'choice',ladder:'semicolon',card:'*These come down the river: reed, four bundles; honey, two jars; and letters, one bag.*',prompt:'How many loads does this list name?',choices:[choice('a','6','That counts every bit between commas. Look at the semicolons.'),choice('b','2','Two semicolons split the list into three parts.'),choice('c','3')],fits:'c',hint:'Read between the semicolons. Each part is one load.',explanation:'Reed, honey and letters: three loads, each with its amount.'}
+]);
+// Spec 329's notes: a first part, one gap and a second part. `because` marks note 4's fronted clause.
+export const JOIN_NOTES=freeze([
+ {id:'n1',first:'The river path is fast',second:'the bridge road is dry.',fits:['period','semicolon','dash'],explain:false},
+ {id:'n2',first:'The bridge is closed',second:'the miller is painting it.',fits:['period','semicolon','colon','dash'],explain:true},
+ {id:'n3',first:'We packed two honey cakes',second:'Pip ate one.',fits:['period','semicolon','dash'],explain:false},
+ {id:'n4',first:'Because the river path floods',second:'we take the bridge road.',fits:['comma','nothing'],because:true},
+ {id:'n5',first:'Dot has one rule',second:'letters always go first.',fits:['period','semicolon','colon','dash'],explain:true}
+]);
+// Set C, in the companion's order: the fitting choice is second in C1, third in C2, first in C3 and second in C4.
+export const JOIN_ITEMS=freeze([
+ {id:'C1',kind:'choice',ladder:'join',guided:true,steps:['Cover the right side.','Cover the left side.','Do both stand alone?'],card:'*The river path is fast ___ the bridge road is dry.*',prompt:'Which mark can join these two whole sentences?',choices:[choice('a','A comma','A comma alone can’t join two whole sentences.'),choice('b','A semicolon'),choice('c','Nothing between them','The sentences crash together.')],fits:'b',hint:'Which mark is stronger than a comma?',explanation:'Both sides stand alone and belong together. A semicolon joins them.'},
+ {id:'C2',kind:'choice',ladder:'join',card:'',prompt:'Which sentence uses its semicolon correctly?',choices:[choice('a','Because the path floods; we take the bridge road.','“Because the path floods” can’t stand alone.'),choice('b','We take; the bridge road on wet days.','“We take” can’t stand alone either.'),choice('c','The river path is fast; the bridge road is slow.')],fits:'c',hint:'Cover each side. Both must stand alone.',explanation:'“The river path is fast.” “The bridge road is slow.” Both stand alone.'},
+ {id:'C3',kind:'choice',ladder:'join',card:'*The bridge is closed ___ the miller is painting it.*',prompt:'The second part explains the first. Which mark shows that?',choices:[choice('a','A colon'),choice('b','A comma','A comma alone can’t join two whole sentences.'),choice('c','No mark at all','The two sentences run together.')],fits:'a',hint:'Which mark means “here’s why”?',explanation:'The painting is why the bridge is closed. A colon says “here’s why.”'},
+ {id:'C4',kind:'choice',ladder:'join',card:'*We packed two honey cakes. Pip ate one.*',prompt:'Join them with a dash. Which is right?',choices:[choice('a','We packed two – honey cakes Pip ate one.','The dash splits “two honey cakes” apart.'),choice('b','We packed two honey cakes – Pip ate one.'),choice('c','We packed – two honey cakes – Pip ate one.','Paired dashes hold extra information. Here we join two sentences.')],fits:'b',hint:'Where does the first sentence end?',explanation:'The dash sits where the first sentence ends. Then Pip’s part lands hard.'},
+ {id:'C5',kind:'tiles',ladder:'join',tiles:['period','semicolon','colon','dash','comma'],card:'*The bridge road is slow, it is always dry.*',first:'The bridge road is slow',second:'it is always dry.',prompt:'Swap the comma for a mark that works between two whole sentences.',accept:['semicolon','dash','period'],tileFeedback:{comma:'That’s the comma we’re fixing. Try a stronger mark.',colon:'A colon promises “here’s why.” Dry doesn’t explain slow.'},hint:'Which marks can join two whole sentences?',explanation:'Two whole sentences need a stronger join than a comma.'}
 ]);
