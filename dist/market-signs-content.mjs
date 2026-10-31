@@ -1260,3 +1260,778 @@ export const marketEndingCopy=Object.freeze({
   }
 });
 export function marketEndingCollection(){return structuredClone(endingInitial);}
+
+// Spec339: original finite written-pattern and meaning material; no sound samples.
+const patternInitial=Object.freeze({
+  "v": 1,
+  "families": [
+    {
+      "id": "ball",
+      "label": "The ball family",
+      "words": [
+        "all",
+        "ball",
+        "call",
+        "small",
+        "stall",
+        "wall",
+        "walk",
+        "talk",
+        "chalk"
+      ]
+    },
+    {
+      "id": "monday",
+      "label": "The Monday family",
+      "words": [
+        "Monday",
+        "money",
+        "honey",
+        "nothing",
+        "other"
+      ]
+    },
+    {
+      "id": "key",
+      "label": "The key family",
+      "words": [
+        "key",
+        "valley",
+        "donkey",
+        "honey",
+        "money"
+      ]
+    },
+    {
+      "id": "after-w",
+      "label": "The after-w families",
+      "words": [
+        "watch",
+        "want",
+        "swan",
+        "war",
+        "warm",
+        "swarm",
+        "word",
+        "work",
+        "world",
+        "worm"
+      ]
+    },
+    {
+      "id": "tion",
+      "label": "The -tion chunk",
+      "words": [
+        "station",
+        "section",
+        "motion",
+        "fiction"
+      ]
+    }
+  ],
+  "letters": [
+    {
+      "id": "a",
+      "text": "A"
+    },
+    {
+      "id": "o",
+      "text": "O"
+    },
+    {
+      "id": "ar",
+      "text": "AR"
+    },
+    {
+      "id": "or",
+      "text": "OR"
+    },
+    {
+      "id": "ey",
+      "text": "EY"
+    },
+    {
+      "id": "tion",
+      "text": "TION"
+    }
+  ],
+  "cases": [
+    {
+      "id": "small",
+      "title": "Small apples",
+      "prefix": "SM",
+      "suffix": "LL APPLES",
+      "targetLettersId": "a",
+      "targetLine": "SMALL APPLES",
+      "familyIds": [
+        "ball"
+      ],
+      "clue": "The apples are small.",
+      "familyNote": "Small belongs with ball, talk and walk.",
+      "letterNote": "Small has a before l.",
+      "pictureId": "apples",
+      "pictureAlt": "A basket of small apples."
+    },
+    {
+      "id": "monday",
+      "title": "Open Monday",
+      "prefix": "OPEN M",
+      "suffix": "NDAY",
+      "targetLettersId": "o",
+      "targetLine": "OPEN MONDAY",
+      "familyIds": [
+        "monday"
+      ],
+      "clue": "The stall opens on Monday.",
+      "familyNote": "Monday belongs with money and honey.",
+      "letterNote": "Monday has o.",
+      "pictureId": "calendar",
+      "pictureAlt": "A market calendar marked Monday."
+    },
+    {
+      "id": "money",
+      "title": "Money here",
+      "prefix": "M",
+      "suffix": "NEY HERE",
+      "targetLettersId": "o",
+      "targetLine": "MONEY HERE",
+      "familyIds": [
+        "monday",
+        "key"
+      ],
+      "clue": "Put the money in this box.",
+      "familyNote": "Money has the o of Monday and ends in -ey, like key. Both families fit.",
+      "letterNote": "This gap takes o. The -ey is already on the board.",
+      "pictureId": "pay-box",
+      "pictureAlt": "A payment box beside a market stall."
+    },
+    {
+      "id": "watch",
+      "title": "Watch your step",
+      "prefix": "W",
+      "suffix": "TCH YOUR STEP",
+      "targetLettersId": "a",
+      "targetLine": "WATCH YOUR STEP",
+      "familyIds": [
+        "after-w"
+      ],
+      "clue": "The path has a loose stone. Watch your step.",
+      "familyNote": "Watch belongs with want in the after-w families.",
+      "letterNote": "Watch has a after w.",
+      "pictureId": "steps",
+      "pictureAlt": "Feet beside a loose paving stone."
+    },
+    {
+      "id": "warm",
+      "title": "Warm bread",
+      "prefix": "W",
+      "suffix": "M BREAD",
+      "targetLettersId": "ar",
+      "targetLine": "WARM BREAD",
+      "familyIds": [
+        "after-w"
+      ],
+      "clue": "The baker means bread that is warm.",
+      "familyNote": "Warm belongs with war in the after-w families.",
+      "letterNote": "Warm has ar. Worm has or and names a wriggly animal.",
+      "pictureId": "bread",
+      "pictureAlt": "Steam rises from freshly baked bread."
+    },
+    {
+      "id": "work",
+      "title": "Work in progress",
+      "prefix": "W",
+      "suffix": "K IN PROGRESS",
+      "targetLettersId": "or",
+      "targetLine": "WORK IN PROGRESS",
+      "familyIds": [
+        "after-w"
+      ],
+      "clue": "The stall is being repaired. Work is in progress.",
+      "familyNote": "Work belongs with word in the after-w families.",
+      "letterNote": "Work has or after w.",
+      "pictureId": "tools",
+      "pictureAlt": "Tools beside a partly repaired stall."
+    },
+    {
+      "id": "key",
+      "title": "Key",
+      "prefix": "K",
+      "suffix": "",
+      "targetLettersId": "ey",
+      "targetLine": "KEY",
+      "familyIds": [
+        "key"
+      ],
+      "clue": "This key opens the store.",
+      "familyNote": "Key belongs with valley and donkey.",
+      "letterNote": "Key ends in -ey.",
+      "pictureId": "key",
+      "pictureAlt": "A key beside the store door."
+    },
+    {
+      "id": "donkey",
+      "title": "Donkey",
+      "prefix": "DONK",
+      "suffix": "",
+      "targetLettersId": "ey",
+      "targetLine": "DONKEY",
+      "familyIds": [
+        "key"
+      ],
+      "clue": "A donkey carries the baskets.",
+      "familyNote": "Donkey belongs with key and valley.",
+      "letterNote": "Donkey ends in -ey.",
+      "pictureId": "donkey",
+      "pictureAlt": "A donkey carries two empty baskets."
+    },
+    {
+      "id": "section",
+      "title": "Section B",
+      "prefix": "SEC",
+      "suffix": " B",
+      "targetLettersId": "tion",
+      "targetLine": "SECTION B",
+      "familyIds": [
+        "tion"
+      ],
+      "clue": "Find section B of the market.",
+      "familyNote": "Section belongs with station, motion and fiction.",
+      "letterNote": "Section ends in -tion.",
+      "pictureId": "section",
+      "pictureAlt": "An apple stall marked as section B."
+    },
+    {
+      "id": "station",
+      "title": "Station",
+      "prefix": "STA",
+      "suffix": "",
+      "targetLettersId": "tion",
+      "targetLine": "STATION",
+      "familyIds": [
+        "tion"
+      ],
+      "clue": "This is the station.",
+      "familyNote": "Station belongs with section, motion and fiction.",
+      "letterNote": "Station ends in -tion.",
+      "pictureId": "station",
+      "pictureAlt": "A station platform and its sign."
+    },
+    {
+      "id": "honey",
+      "title": "Honey",
+      "prefix": "H",
+      "suffix": "NEY",
+      "targetLettersId": "o",
+      "targetLine": "HONEY",
+      "familyIds": [
+        "monday",
+        "key"
+      ],
+      "clue": "The jar is full of honey.",
+      "familyNote": "Honey has the o of Monday and ends in -ey, like key. Both families fit.",
+      "letterNote": "This gap takes o. The -ey is already on the board.",
+      "pictureId": "honey",
+      "pictureAlt": "A honey jar beside a bee."
+    }
+  ],
+  "cards": [
+    {
+      "id": "pattern-card-1",
+      "title": "A before l",
+      "text": "Ball, small, walk and talk all have a before l. If a word is in this family, spell it with a.",
+      "example": "SM_LL APPLES",
+      "steps": [
+        "Small is in the ball family.",
+        "The family has a before l.",
+        "Small apples."
+      ]
+    },
+    {
+      "id": "pattern-card-2",
+      "title": "The Monday family, and -ey",
+      "text": "Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey and money belong to both.",
+      "example": "The h____ stall",
+      "steps": [
+        "Honey is in the Monday family: o.",
+        "It ends like key: -ey.",
+        "h, o, n, e, y."
+      ]
+    },
+    {
+      "id": "pattern-card-3",
+      "title": "After w",
+      "text": "After w, look out. Watch and want have a. Warm and war have ar. Word and work have or.",
+      "example": "W__M BREAD",
+      "steps": [
+        "The baker means warm.",
+        "Warm is in the war family: ar.",
+        "Warm, not worm."
+      ]
+    },
+    {
+      "id": "pattern-card-4",
+      "title": "A -tion chunk",
+      "text": "Station, section, motion and fiction all end in -tion. Many words do. Learn those four letters as one chunk.",
+      "example": "APPLES IN SEC____ B",
+      "steps": [
+        "The word is section.",
+        "It ends with the -tion chunk.",
+        "Section."
+      ]
+    },
+    {
+      "id": "pattern-card-5",
+      "title": "Two words, two spellings",
+      "text": "Here and hear are different words. Here means this place. Hear means to listen. Read the whole sign, then choose.",
+      "example": "PAY H___",
+      "steps": [
+        "The sign tells you where to pay.",
+        "Where means a place.",
+        "Here."
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "v": 1,
+      "id": "A1",
+      "kind": "choice",
+      "title": "The honey sign",
+      "prompt": "Which spelling goes on the honey sign?",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "hunney",
+          "tag": "o-family-missed"
+        },
+        {
+          "id": "b",
+          "text": "honey"
+        },
+        {
+          "id": "c",
+          "text": "honny",
+          "tag": "ey-missed"
+        }
+      ],
+      "steps": [
+        "Honey is in the Monday family: o.",
+        "It ends like key: -ey."
+      ],
+      "hint": "Think of money. Honey is in its family.",
+      "example": "Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.",
+      "explanation": "Honey has the o of Monday and the -ey of key.",
+      "different": {
+        "a": "Honey is in the Monday family. It has an o.",
+        "c": "Honey ends in -ey, like key and valley."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "honey",
+      "pictureAlt": "A honey jar beside a bee.",
+      "teach": [
+        {
+          "id": "pattern-card-2",
+          "title": "The Monday family, and -ey",
+          "text": "Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey and money belong to both.",
+          "example": "The h____ stall",
+          "steps": [
+            "Honey is in the Monday family: o.",
+            "It ends like key: -ey.",
+            "h, o, n, e, y."
+          ]
+        }
+      ],
+      "key": "b"
+    },
+    {
+      "v": 1,
+      "id": "A2",
+      "kind": "choice",
+      "title": "Walk this way",
+      "prompt": "Pip's sign: ___ this way.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "walk"
+        },
+        {
+          "id": "b",
+          "text": "wawk",
+          "tag": "before-l-letters-mixed"
+        },
+        {
+          "id": "c",
+          "text": "wolk",
+          "tag": "before-l-letters-mixed"
+        }
+      ],
+      "steps": [],
+      "hint": "Walk is spelled like talk.",
+      "example": "Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.",
+      "explanation": "Walk, talk, chalk: a before l.",
+      "different": {
+        "b": "Walk is in the talk family: a, then l.",
+        "c": "Walk is spelled like talk and chalk: a, l, k."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "arrow",
+      "pictureAlt": "An arrow shows the walking path.",
+      "teach": [
+        {
+          "id": "pattern-card-1",
+          "title": "A before l",
+          "text": "Ball, small, walk and talk all have a before l. If a word is in this family, spell it with a.",
+          "example": "SM_LL APPLES",
+          "steps": [
+            "Small is in the ball family.",
+            "The family has a before l.",
+            "Small apples."
+          ]
+        }
+      ],
+      "key": "a"
+    },
+    {
+      "v": 1,
+      "id": "A3",
+      "kind": "choice",
+      "title": "The bread sign",
+      "prompt": "The baker's sign: ___ bread.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "worm",
+          "tag": "w-family-mixed"
+        },
+        {
+          "id": "b",
+          "text": "wurm",
+          "tag": "after-w-letters-mixed"
+        },
+        {
+          "id": "c",
+          "text": "warm"
+        }
+      ],
+      "steps": [],
+      "hint": "Warm is in the war family.",
+      "example": "Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.",
+      "explanation": "After w, warm has ar. Worm has or.",
+      "different": {
+        "a": "Worm is a real word, for a wriggly animal. Bread is warm, with ar.",
+        "b": "After w, warm has ar, like war."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "bread",
+      "pictureAlt": "Steam rises from freshly baked bread.",
+      "teach": [
+        {
+          "id": "pattern-card-3",
+          "title": "After w",
+          "text": "After w, look out. Watch and want have a. Warm and war have ar. Word and work have or.",
+          "example": "W__M BREAD",
+          "steps": [
+            "The baker means warm.",
+            "Warm is in the war family: ar.",
+            "Warm, not worm."
+          ]
+        }
+      ],
+      "key": "c"
+    },
+    {
+      "v": 1,
+      "id": "A4",
+      "kind": "choice",
+      "title": "The pay sign",
+      "prompt": "The miller's sign: pay ___.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "hear",
+          "tag": "homophone-mixed"
+        },
+        {
+          "id": "b",
+          "text": "here"
+        },
+        {
+          "id": "c",
+          "text": "hiar",
+          "tag": "ere-missed"
+        }
+      ],
+      "steps": [],
+      "hint": "The sign tells you where to pay.",
+      "example": "Try this one first: I hear the bell. Hear is for listening. Now read your whole sign: is it about a place?",
+      "explanation": "Here means this place. Hear means to listen.",
+      "different": {
+        "a": "Hear is a real word, for listening. This sign means this place.",
+        "c": "This place is spelled here, like there and where."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "pay-box",
+      "pictureAlt": "A payment box beside a market stall.",
+      "teach": [
+        {
+          "id": "pattern-card-5",
+          "title": "Two words, two spellings",
+          "text": "Here and hear are different words. Here means this place. Hear means to listen. Read the whole sign, then choose.",
+          "example": "PAY H___",
+          "steps": [
+            "The sign tells you where to pay.",
+            "Where means a place.",
+            "Here."
+          ]
+        }
+      ],
+      "key": "b"
+    },
+    {
+      "v": 1,
+      "id": "A5",
+      "kind": "match",
+      "title": "Six waiting signs",
+      "prompt": "Fill each gap with one of these: a · o · ar · or.",
+      "parts": [
+        {
+          "id": "small",
+          "text": "SM_LL APPLES"
+        },
+        {
+          "id": "monday",
+          "text": "OPEN M_NDAY"
+        },
+        {
+          "id": "money",
+          "text": "M_NEY HERE"
+        },
+        {
+          "id": "watch",
+          "text": "W_TCH YOUR STEP"
+        },
+        {
+          "id": "warm",
+          "text": "W__M BREAD"
+        },
+        {
+          "id": "work",
+          "text": "W__K IN PROGRESS"
+        }
+      ],
+      "choices": [
+        {
+          "id": "a",
+          "text": "a"
+        },
+        {
+          "id": "o",
+          "text": "o"
+        },
+        {
+          "id": "ar",
+          "text": "ar"
+        },
+        {
+          "id": "or",
+          "text": "or"
+        }
+      ],
+      "steps": [],
+      "hint": "Find each word's family first.",
+      "example": "Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.",
+      "explanation": "Each gap comes from a family: ball, Monday, watch, war or word.",
+      "different": {
+        "general": "Read each sign. Find its spelling family, then try the gap again."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "signs",
+      "pictureAlt": "Six unfinished signs wait at the market.",
+      "teach": [
+        {
+          "id": "pattern-card-1",
+          "title": "A before l",
+          "text": "Ball, small, walk and talk all have a before l. If a word is in this family, spell it with a.",
+          "example": "SM_LL APPLES",
+          "steps": [
+            "Small is in the ball family.",
+            "The family has a before l.",
+            "Small apples."
+          ]
+        },
+        {
+          "id": "pattern-card-2",
+          "title": "The Monday family, and -ey",
+          "text": "Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey and money belong to both.",
+          "example": "The h____ stall",
+          "steps": [
+            "Honey is in the Monday family: o.",
+            "It ends like key: -ey.",
+            "h, o, n, e, y."
+          ]
+        },
+        {
+          "id": "pattern-card-3",
+          "title": "After w",
+          "text": "After w, look out. Watch and want have a. Warm and war have ar. Word and work have or.",
+          "example": "W__M BREAD",
+          "steps": [
+            "The baker means warm.",
+            "Warm is in the war family: ar.",
+            "Warm, not worm."
+          ]
+        }
+      ],
+      "key": {
+        "small": "a",
+        "monday": "o",
+        "money": "o",
+        "watch": "a",
+        "warm": "ar",
+        "work": "or"
+      },
+      "matchCopy": {
+        "instruction": "Choose a gapped sign, then the letters that fill it.",
+        "destinationPrompt": "Choose letters.",
+        "destinationLabel": "Letters"
+      }
+    }
+  ],
+  "meanings": [
+    {
+      "id": "here",
+      "word": "here",
+      "sentence": "Pay here.",
+      "pictureId": "place",
+      "pictureAlt": "An arrow points to the payment box."
+    },
+    {
+      "id": "hear",
+      "word": "hear",
+      "sentence": "I hear the bell.",
+      "pictureId": "listener",
+      "pictureAlt": "A listener turns toward a ringing bell."
+    },
+    {
+      "id": "two",
+      "word": "two",
+      "sentence": "Two pies.",
+      "pictureId": "pies",
+      "pictureAlt": "Two pies sit side by side."
+    },
+    {
+      "id": "too",
+      "word": "too",
+      "sentence": "Me too.",
+      "pictureId": "shared",
+      "pictureAlt": "One person holds a pie. A friend raises a hand to ask for one as well."
+    },
+    {
+      "id": "to",
+      "word": "to",
+      "sentence": "Go to the stall.",
+      "pictureId": "path",
+      "pictureAlt": "A path arrow points from a person to a stall."
+    },
+    {
+      "id": "bee",
+      "word": "bee",
+      "sentence": "A bee in the hive.",
+      "pictureId": "hive",
+      "pictureAlt": "A bee enters a hive."
+    },
+    {
+      "id": "be",
+      "word": "be",
+      "sentence": "Be careful.",
+      "pictureId": "caution",
+      "pictureAlt": "A person steps around a loose stone."
+    },
+    {
+      "id": "blue",
+      "word": "blue",
+      "sentence": "A blue sign.",
+      "pictureId": "blue-sign",
+      "pictureAlt": "A sign painted blue."
+    },
+    {
+      "id": "blew",
+      "word": "blew",
+      "sentence": "The wind blew.",
+      "pictureId": "wind",
+      "pictureAlt": "Wind bends a ribbon on a sign."
+    }
+  ],
+  "story": {
+    "hook": "The stalls are coming back. Pip offered to paint the signs. He finished every one before breakfast.",
+    "short": "Pip's signs say HUNNY, WOLK THIS WAY, PAY HEAR and WORM BREAD. Dot checks the dictionary. They become honey, walk, here and warm.",
+    "longer": "The baker reads his new sign. \"Worm bread?\"\n\n\"Warm,\" says Pip. \"Warm bread.\"\n\n\"It says worm,\" says the baker. \"Nobody wants worm bread.\"\n\nDot walks along the row with the dictionary. HUNNY. WOLK THIS WAY. PAY HEAR.\n\n\"Honey has an o, like Monday and money,\" she says. \"Walk is spelled like talk. And here means this place. Hear means listening.\"\n\n\"And warm?\"\n\n\"Warm has ar. Worm has or. Both are real words. Only one belongs on bread.\"\n\nPip fetches the paint. \"How did you know all that?\"\n\n\"I didn't,\" says Dot. \"I looked them up.\"\n\nThe baker props up the fixed sign: WARM BREAD. He keeps the worm one for the compost heap.",
+    "note": "English often spells one part of a word in more than one way. Writers learn words in families, like walk, talk and chalk, or Monday, money and honey. When they are unsure, they check a dictionary.",
+    "dictionaryNote": "Dot uses a bigger dictionary. The small Stall Dictionary has only selected pages."
+  },
+  "glossary": [
+    {
+      "term": "spelling family",
+      "text": "A group of words with a shared spelling clue. A word can belong to more than one."
+    },
+    {
+      "term": "meaning",
+      "text": "What a word or sentence tells us."
+    },
+    {
+      "term": "gap",
+      "text": "A place waiting for one or more letters."
+    },
+    {
+      "term": "dictionary",
+      "text": "A book or tool to check words and spellings. Our small Stall Dictionary has only selected pages."
+    }
+  ],
+  "offscreen": {
+    "text": "Make a sign for an imaginary stall on paper. Read it with a grown-up. Check any spelling you wonder about in a dictionary."
+  },
+  "grownup": "This is guided written-pattern and sentence-meaning practice with supplied words, not independent spelling or reading assessment. All five family cards are finite examples, not universal rules or a claim about every English accent. The curriculum groups these examples by sound; this page shows their letters and meanings. Honey and money each belong to two groups. The after-w group includes several different letter patterns. An unexpected fill can be kept without being called a conventional spelling. Here/hear, to/too/two, bee/be and blue/blew can be discussed as homophones, but no sounds are played or tested. These whole words and sentences are suitable for shared adult reading; phonics samples have a separate recording and listening review. Your child's own sign stays on paper, read by a person. No photograph, voice or original writing is captured. First/latest practice versions and retained checks travel through Notes. No story chapter is unlocked."
+});
+export const marketPatternCopy=Object.freeze({
+  "arrival": "Visit the Pattern Stall",
+  "title": "The Pattern Stall",
+  "header": "Each sign has a gap. Pick a family, then fill the gap. The gap can hold more than one letter.",
+  "every": "Spelling rules usually work. A dictionary has the last word.",
+  "chooser": "Choose a sign",
+  "familyLabel": "A spelling family",
+  "lettersLabel": "Letters for the gap",
+  "lettersPartLabel": "Letters you painted",
+  "next": "Another sign",
+  "back": "Back to Market Signs",
+  "keep": "Keep this sign",
+  "clear": "Clear this sign",
+  "keptLabel": "Kept pattern signs",
+  "reopen": "Reopen this sign",
+  "jobsLabel": "Pattern sign jobs",
+  "storyLabel": "The worm bread story",
+  "meaningLabel": "Words with different meanings",
+  "meaningInvitation": "Read the whole sentence. It shows what this word means.",
+  "missingFamily": "Choose a family clue. A word can belong to more than one.",
+  "missingLetters": "Choose the letters you want to paint.",
+  "familyFit": "{family}: a fitting clue. {familyNote}",
+  "familyDifferent": "{family}: a different clue. {familyNote}",
+  "lettersFit": "{targetLine}. {letterNote}",
+  "lettersDifferent": "This sign makes {made}. It could tell another story. The market note says {targetLine}. {letterNote}",
+  "kept": "Your sign is kept. You can make another.",
+  "alreadyKept": "This sign is already in your shelf.",
+  "cleared": "This waiting sign is clear. Your kept signs are still here.",
+  "noKept": "Your first kept sign will wait here.",
+  "sectionUnavailable": "These earlier Pattern Stall pages are kept as they were. Other Market Signs benches are open. You can download them in Notes.",
+  "benchUnavailable": "This earlier set of family or letter cards is kept as it was. Its sign jobs and the other benches are still open. You can download it in Notes.",
+  "caseUnavailable": "This earlier sign cannot be painted here. It stays in Notes. Choose another sign or a job.",
+  "keptUnavailable": "These earlier kept signs stay in Notes. You can still paint a sign or try a job.",
+  "keptRowUnavailable": "This earlier kept sign stays in Notes but cannot be opened here.",
+  "materialUnavailable": "This earlier reading card stays in Notes but cannot be shown here.",
+  "keptItemLabel": "{title} + {family} + {letters}"
+});
+export function marketPatternCollection(){return structuredClone(patternInitial);}

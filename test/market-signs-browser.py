@@ -212,6 +212,130 @@ def endings_edges(browser,base):
  try:
   bench(p,'endings');ending_pair(p,'fresh','ly','just-add');p.evaluate('window.oldEnding=document.querySelector("[data-ms-action=keep-ending]")');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();ready(p);before=copy.deepcopy(h.book(p));p.evaluate('oldEnding.click()');h.ok(h.book(p)==before and 'signs' not in before,'old ending callback cannot write to another explorer');p.evaluate('location.hash="#notes"');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.wait_for_function('location.hash==="#home"');p.evaluate('location.hash="#words/signs"');ready(p);p.evaluate('oldEnding.click()');h.ok('signs' not in h.book(p),'reset cannot resurrect ending work')
  finally:c.close()
+def pattern_fixture(name='base'):
+ code="import {signsSeed,fullPatternSignsNotebook} from './test/market-signs-checks.mjs';import * as c from './dist/market-signs-core.mjs';const o={canExport:()=>true};let s=signsSeed();"
+ if name=='full':code+='s=fullPatternSignsNotebook();'
+ else:
+  code+="c.openMarketBench(s,'patterns',o);c.setMarketPattern(s,{caseId:'warm'},o);"
+  damage={
+   'bad-row':"s.signs.patterns.kept=[{caseId:'missing',familyId:'ball',lettersId:'a',opaque:['keep']}];",
+   'bad-kept':"s.signs.patterns.kept={opaque:['keep']};",
+   'bad-draft':"s.signs.patterns.drafts.warm={familyId:'missing',lettersId:'ar',opaque:['keep']};",
+   'bad-case':"s.signs.patterns.source.cases.find(x=>x.id==='warm').targetLine='OTHER';",
+   'bad-copy':"s.signs.patterns.source.story.dictionaryNote=99;s.signs.patterns.source.jobs.find(x=>x.id==='A2').pictureAlt=99;",
+   'bad-family':"s.signs.patterns.source.families[0].words=12;",
+   'bad-reading':"s.signs.patterns.source.cards[0].text=12;s.signs.patterns.source.meanings[0].sentence=12;s.signs.patterns.source.glossary[0].text=12;",
+   'own-copy':"s.signs.patterns.source.story.dictionaryNote='An earlier dictionary note.';s.signs.patterns.source.cases.find(x=>x.id==='warm').pictureId='earlier-picture';s.signs.patterns.source.cases.find(x=>x.id==='warm').pictureAlt='An earlier warm sign picture.';",
+   'seven':"for(const l of ['a','o','ar','or','ey','tion']){c.setMarketPattern(s,{familyId:'after-w'},o);c.setMarketPattern(s,{lettersId:l},o);c.keepMarketPatternSign(s,o);}c.setMarketPattern(s,{familyId:'ball'},o);c.keepMarketPatternSign(s,o);"
+  }
+  code+=damage.get(name,'')
+  if name.startswith('collision-'):
+   id=name.removeprefix('collision-');code+="const job=s.signs.patterns.source.jobs.find(x=>x.id==='A1');job.id="+json.dumps(id)+";c.openMarketPatternJob(s,"+json.dumps(id)+",o);"
+ return json.loads(subprocess.check_output(['node','--input-type=module','-e',code+'console.log(JSON.stringify(s));'],cwd=ROOT,text=True))
+def pattern_state(p):return state(p)['patterns']
+def pattern_record(p):
+ s=pattern_state(p);return s['records'][s['currentId']]
+def pattern_heading(p):
+ title=p.locator('#ms-pattern-case-title');box=title.bounding_box();bar=p.locator('.ms-ways').bounding_box();h.ok(box and bar and box['y']>=bar['y']+bar['height']-1 and box['y']+box['height']<=p.viewport_size['height'],'selected case heading visible below measured sticky nav');h.ok(p.evaluate('document.activeElement.id')=='ms-pattern-case-title','selected case heading receives focus')
+def pattern_case(p,id):
+ drawer(p,'pattern-chooser');p.locator('[data-ms-case="'+id+'"]').tap();pattern_heading(p)
+def pattern_button(p,kind,id,keyboard=False):
+ e=p.locator('[data-ms-'+kind+'="'+id+'"]')
+ if keyboard:e.focus();p.keyboard.press('Enter')
+ else:e.tap()
+def pattern_pair(p,id,family,letters):
+ pattern_case(p,id);pattern_button(p,'family',family);pattern_button(p,'letters',letters)
+def viewport_shot(p,name,w):
+ p.screenshot(path=str(OUT/f'{name}-{w}-viewport.png'))
+def patterns_play(browser,base,w,hgt):
+ c,p=setup(browser,base,fixture(),w,hgt)
+ try:
+  h.ok('signs' not in h.book(p),'Pattern visit allocates nothing');choose(p,'E4');action(p,'next-job');h.ok(state(p)['currentId']=='B1' and 'patterns' not in state(p),'old Next does not allocate Pattern section')
+  choose(p,'A1');h.ok(state(p)['practiceGroup']=='patterns' and pattern_state(p)['currentId']=='A1','named A1 first opening selects pattern practice');h.ok([x.inner_text() for x in p.locator('.ms-guided li').all()]==['Honey is in the Monday family: o.','It ends like key: -ey.'],'both A1 supported steps shown first');choose(p,'C1');choose(p,'B1');choose(p,'A1');pointers=(state(p)['currentId'],state(p)['endings']['currentId'],pattern_state(p)['currentId']);h.ok(pointers==('B1','C1','A1'),'three independent practice pointers')
+  bench(p,'patterns');h.ok(pattern_state(p)['currentCaseId'] is None and pattern_state(p)['drafts']=={},'bench has no default case or draft');drawer(p,'pattern-chooser');layout(p);viewport_shot(p,'pattern-chooser',w);h.ok(p.locator('[data-ms-case] figure').count()==0,'chooser buttons contain valid phrasing content');h.ok(p.get_by_role('button',name='Steam rises from freshly baked bread. Warm bread',exact=True).count()==1,'picture caption names chooser once without duplicated SVG alternative')
+  pattern_case(p,'warm');h.ok(p.get_by_role('img',name='gap',exact=True).is_visible(),'uniform gap has a semantic accessible name');h.ok(p.locator('[data-ms-action=pattern-keep]').is_disabled() and p.locator('[data-ms-family][aria-pressed=true]').count()==0 and p.locator('[data-ms-letters][aria-pressed=true]').count()==0,'case has no default family or letters');pattern_button(p,'letters','ar',True);h.ok(p.locator('.ms-pattern-board .ms-painted').inner_text()=='WARM BREAD' and 'a fitting clue' not in p.locator('#ms-pattern-feedback').inner_text(),'letters alone paint literal board without premature fit lines');h.ok(p.evaluate('document.activeElement.dataset.msLetters')=='ar','native letter Enter retains focus');pattern_button(p,'family','after-w',True);h.ok(p.evaluate('document.activeElement.dataset.msFamily')=='after-w','native family Enter retains focus');h.ok(p.locator('.ms-family-words li').all_text_contents()==['watch','want','swan','war','warm','swarm','word','work','world','worm'],'after-w examples remain flat and ordered')
+  action(p,'pattern-keep');pattern_button(p,'letters','or');h.ok(p.locator('.ms-pattern-board .ms-painted').inner_text()=='WORM BREAD' and 'wriggly animal' in p.locator('#ms-pattern-feedback').inner_text(),'warm/worm retains own finite comparison');pattern_button(p,'letters','ey');feedback=p.locator('#ms-pattern-feedback').inner_text();h.ok(p.locator('.ms-pattern-board .ms-painted').inner_text()=='WEYM BREAD' and 'It could tell another story.' in feedback and 'not a word' not in feedback.lower(),'unexpected literal fill has neutral discovery note');action(p,'pattern-keep');kept=copy.deepcopy(pattern_state(p)['kept']);action(p,'pattern-keep');h.ok(pattern_state(p)['kept']==kept and 'already' in p.locator('#ms-status').inner_text(),'unexpected triple kept once');layout(p);viewport_shot(p,'pattern-warm',w);p.screenshot(path=str(OUT/f'pattern-warm-{w}-full.png'),full_page=True)
+  action(p,'pattern-next');pattern_heading(p);h.ok(pattern_state(p)['currentCaseId']=='work','Another advances retained cases');pattern_button(p,'family','after-w');pattern_button(p,'letters','or');drafts=copy.deepcopy(pattern_state(p)['drafts']);bench(p,'prefix');bench(p,'patterns');p.reload(wait_until='networkidle');ready(p);h.ok(pattern_state(p)['drafts']==drafts and pattern_state(p)['currentCaseId']=='work','bench switch and reload preserve per-case pending selections');pattern_case(p,'warm');h.ok(p.locator('.ms-pattern-board .ms-painted').inner_text()=='WEYM BREAD','chooser resumes own pending sign');action(p,'pattern-clear');h.ok(pattern_state(p)['kept']==kept and pattern_state(p)['drafts']['warm']=={'familyId':None,'lettersId':None},'clear only current draft');drawer(p,'pattern-kept');p.locator('[data-ms-action=pattern-reopen][data-ms-kept="1"]').tap();pattern_heading(p);h.ok(p.locator('.ms-pattern-board .ms-painted').inner_text()=='WEYM BREAD','shelf reopens literal discovery')
+  for id in ['honey','money']:
+   for family in ['monday','key']:
+    pattern_pair(p,id,family,'o');h.ok('a fitting clue' in p.locator('#ms-pattern-feedback').inner_text(),id+' accepts '+family)
+  before=copy.deepcopy(h.book(p));writes=p.evaluate('marketWrites');drawer(p,'pattern-meanings');sentences=['Pay here.','I hear the bell.','Two pies.','Me too.','Go to the stall.','A bee in the hive.','Be careful.','A blue sign.','The wind blew.']
+  for i,sentence in enumerate(sentences):
+   h.ok(sentence in p.locator('#ms-meaning-card').inner_text() and p.locator('#ms-meaning-card figcaption').inner_text(),'meaning sentence and own text alternative '+str(i))
+   if i<8:action(p,'meaning-next')
+  h.ok(p.locator('[data-ms-action=meaning-next]').is_disabled() and p.locator('[data-ms-action=meaning-prev]').is_enabled(),'meaning last boundary remains usable');layout(p);p.screenshot(path=str(OUT/f'pattern-meaning-{w}-viewport.png'));action(p,'meaning-prev');drawer(p,'pattern-story');action(p,'longer');drawer(p,'teaching');p.locator('[data-ms-action=step-next][data-ms-card="0"]').tap();h.ok(h.book(p)==before and p.evaluate('marketWrites')==writes,'meaning/story/manual teaching presentation writes nothing');drawer(p,'teaching',False);bench(p,'practice');h.ok(pattern_state(p)['currentId']=='A1' and (state(p)['currentId'],state(p)['endings']['currentId'],pattern_state(p)['currentId'])==pointers,'practice resumes active pattern pointer without touching others')
+  for id,key in {'A1':'b','A2':'a','A3':'c','A4':'b'}.items():
+   choose(p,id);p.locator('[data-ms-choice='+key+']').focus();p.keyboard.press('Enter');action(p,'check-job');h.ok(pattern_record(p)['checks'][-1]['outcome']=='fit','pattern supplied answer '+id);action(p,'keep-version')
+  for old,part in [('B5','un'),('C6','trea')]:
+   choose(p,old);p.locator('[data-ms-match='+part+']').tap();choose(p,'A5');h.ok(p.locator('[data-ms-destination=a]').is_disabled() and 'gapped sign' in p.locator('#ms-match-instruction').inner_text(),'group change clears matching selection from '+old)
+  for part,dest in {'small':'a','monday':'o','money':'o','watch':'a','warm':'ar','work':'or'}.items():p.locator('[data-ms-match='+part+']').tap();p.locator('[data-ms-destination='+dest+']').tap()
+  action(p,'check-job');h.ok(pattern_record(p)['checks'][-1]['outcome']=='fit','all six reusable A5 destinations accepted');action(p,'keep-version');first=copy.deepcopy(pattern_record(p)['firstKept']);p.locator('[data-ms-match=warm]').tap();p.locator('[data-ms-destination=o]').tap();action(p,'check-job');action(p,'keep-version');h.ok(pattern_record(p)['checks'][-1]['outcome']=='different' and pattern_record(p)['firstKept']==first,'A5 revisions retain first kept work');drawer(p,'help');action(p,'hint');action(p,'example');h.ok(all(pattern_record(p)['help'][k] for k in ['hint','example']),'pattern supports captured');layout(p);viewport_shot(p,'pattern-job',w);action(p,'next-job');h.ok(state(p)['practiceGroup']=='prefix' and state(p)['currentId']=='B1','A5 wraps combined retained collection to B1')
+  bench(p,'patterns');pattern_case(p,'warm');p.evaluate('window.departedPattern=document.querySelector("[data-ms-action=pattern-keep]")');held=copy.deepcopy(state(p));report=h.export_notes(p,'patterns-'+str(w));h.ok(report['signs']==held,'actual Notes exact for three groups and all pending cases');p.evaluate('departedPattern.click()');h.ok(state(p)==held,'departed pattern callback inert');import_notes(p,report);p.evaluate('departedPattern.click()');h.ok(state(p)==held,'pre-import pattern callback inert')
+ finally:c.close()
+def patterns_edges(browser,base):
+ c,p=setup(browser,base,pattern_fixture('full'))
+ try:
+  held=copy.deepcopy(state(p));h.ok(len(held['patterns']['kept'])==330 and len(held['patterns']['records'])==5 and all(len(r['checks'])==12 and r['count']==16 and all(r['help'][k] for k in ['hint','example']) and 'firstKept' in r and 'latestKept' in r for r in held['patterns']['records'].values()),'max fixture has330triples +5jobs16attempts with12retainedchecks and both supports/versions');report=h.export_notes(p,'maximum-pattern-signs');h.ok(report['signs']==held,'actual pretty Notes maximal raw download exact');import_notes(p,report);h.ok(state(p)==held,'actual maximal Notes import retains prefix/endings/pattern histories')
+ finally:c.close()
+ for kind in ['bad-row','bad-kept','bad-draft','bad-case','bad-copy','bad-family','bad-reading','own-copy']:
+  c,p=setup(browser,base,pattern_fixture(kind))
+  try:
+   raw=copy.deepcopy(pattern_state(p));
+   if kind=='bad-row':
+    pattern_button(p,'family','after-w');pattern_button(p,'letters','ar');action(p,'pattern-keep');drawer(p,'pattern-kept');h.ok('cannot be opened here' in p.locator('[data-ms-panel=pattern-kept]').inner_text() and pattern_state(p)['kept'][0]==raw['kept'][0] and len(pattern_state(p)['kept'])==2,'raw bad kept row survives beside editable and keepable case')
+   elif kind=='bad-kept':
+    pattern_button(p,'family','after-w');pattern_button(p,'letters','ar');h.ok(p.locator('[data-ms-action=pattern-keep]').is_disabled() and p.locator('.ms-pattern-board .ms-painted').inner_text()=='WARM BREAD','bad kept container disables Keep, allows painting');action(p,'pattern-clear');h.ok(pattern_state(p)['kept']==raw['kept'],'bad kept container preserved through Clear')
+   elif kind in ['bad-draft','bad-case']:
+    h.ok(p.locator('[data-ms-action=pattern-keep]:enabled').count()==0,'paused own case cannot Keep '+kind);pattern_pair(p,'honey','key','o');action(p,'pattern-keep');h.ok(pattern_state(p)['drafts'].get('warm')==raw['drafts'].get('warm') and pattern_state(p)['source']==raw['source'],'paused case/draft preserved beside editable honey '+kind)
+   elif kind=='bad-family':
+    drawer(p,'pattern-meanings');h.ok('Pay here.' in p.locator('#ms-meaning-card').inner_text(),'meaning shelf open beside paused family bench');action(p,'meaning-next');h.ok('I hear the bell.' in p.locator('#ms-meaning-card').inner_text(),'meaning cards remain usable without bench edits');h.ok(pattern_state(p)['source']==raw['source'],'paused families remain exact')
+   elif kind=='bad-reading':
+    h.ok('This earlier reading card stays in Notes' in p.locator('[data-market-signs-root]').inner_text(),'paused reading cards have visible notice');drawer(p,'pattern-glossary');h.ok('What a word or sentence tells us.' in p.locator('[data-ms-panel=pattern-glossary]').inner_text(),'readable glossary siblings displayed');drawer(p,'pattern-meanings');h.ok('I hear the bell.' in p.locator('#ms-meaning-card').inner_text(),'readable meaning sibling displayed');h.ok(pattern_state(p)['source']==raw['source'],'bad reading rows not repaired')
+   elif kind=='bad-copy':
+    pattern_pair(p,'honey','key','o');action(p,'pattern-keep');bench(p,'practice');h.ok(p.locator('[data-ms-action=open-pattern-job][data-ms-job=A1]').count()==1,'readable A1 visible beside broken job');h.ok('A2' not in [x.get_attribute('data-ms-job') for x in p.locator('[data-ms-action=open-pattern-job]').all()],'broken owned job omitted rather than repaired');h.ok(pattern_state(p)['source']==raw['source'],'bad story and job copy preserved')
+   else:
+    h.ok(p.locator('.ms-pattern-case .ms-pattern-picture figcaption').inner_text()=='An earlier warm sign picture.' and p.locator('.ms-pattern-case .ms-pattern-picture svg').count()==0,'unknown picture uses own visible alt without catalogue repair');drawer(p,'pattern-story');h.ok('An earlier dictionary note.' in p.locator('[data-ms-panel=pattern-story]').inner_text(),'story shows own retained dictionary note')
+   choose(p,'A1');p.locator('[data-ms-choice=b]').tap();action(p,'check-job');h.ok(pattern_record(p)['checks'][-1]['outcome']=='fit','A1 remains open beside '+kind);report=h.export_notes(p,'pattern-'+kind);h.ok(report['signs']['patterns']==pattern_state(p),'Notes preserves raw hostile pattern material '+kind)
+  finally:c.close()
+ for id in ['E1','E3','E4']:
+  c,p=setup(browser,base,pattern_fixture('collision-'+id))
+  try:h.ok(p.locator('[data-ms-book=practice]').count()==0 and p.locator('.ms-book-paper').count()==0 and p.locator('.ms-guided li').count()==2,'pattern '+id+' cannot activate prefix dictionary')
+  finally:c.close()
+ c,p=setup(browser,base,pattern_fixture('seven'))
+ try:
+  before=copy.deepcopy(h.book(p));writes=p.evaluate('marketWrites');drawer(p,'pattern-kept');action(p,'kept-next');h.ok(p.evaluate('document.activeElement.dataset.msAction')=='kept-prev','pattern shelf last boundary focus');action(p,'kept-prev');h.ok(p.evaluate('document.activeElement.dataset.msAction')=='kept-next','pattern shelf first boundary focus');h.ok(h.book(p)==before and p.evaluate('marketWrites')==writes,'pattern shelf paging presentation only')
+ finally:c.close()
+ for fail in [False,True]:
+  c,p=setup(browser,base,fixture())
+  try:
+   bench(p,'patterns');pattern_case(p,'warm')
+   if fail:p.evaluate('window.marketFailStorage=true')
+   else:p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#words/signs"');ready(p)
+   pattern_button(p,'family','after-w');pattern_button(p,'letters','ey');action(p,'pattern-keep');h.ok('session' in p.locator('#ms-status').inner_text(),'pattern save-off/failure truthful status');report=h.export_notes(p,'pattern-memory-'+str(fail));h.ok(report['signs']['patterns']['drafts']['warm']=={'familyId':'after-w','lettersId':'ey'} and len(report['signs']['patterns']['kept'])==1,'actual RAM export holds unsaved pattern discovery')
+  finally:c.close()
+ c,p=setup(browser,base,fixture(),fault=True)
+ try:
+  before=copy.deepcopy(h.book(p));p.evaluate('window.marketRefuse=true');p.locator('[data-ms-bench=patterns]').tap();report=h.export_notes(p,'pattern-refused-allocation');h.ok(report['signs']==before.get('signs') if 'signs' in before else 'signs' not in report,'preflight refusal leaves first allocation absent in RAM')
+ finally:c.close()
+ c,p=setup(browser,base,pattern_fixture(),fault=True)
+ try:
+  before=copy.deepcopy(h.book(p));p.evaluate('window.marketRefuse=true');pattern_button(p,'family','after-w');h.ok(h.book(p)==before and p.locator('[data-ms-family][aria-pressed=true]').count()==0,'refused native family restores state and view');report=h.export_notes(p,'pattern-refused-selection');h.ok(report['signs']==before['signs'],'RAM Notes confirms refused pattern selection exact')
+ finally:c.close()
+ for alteration in ['source','case','hidden','film']:
+  c,p=setup(browser,base,pattern_fixture(),fault=True)
+  try:
+   before=copy.deepcopy(h.book(p));writes=p.evaluate('marketWrites')
+   if alteration=='source':p.evaluate('window.marketState.signs.patterns.source=structuredClone(window.marketState.signs.patterns.source)')
+   if alteration=='case':p.evaluate('window.marketState.signs.patterns.currentCaseId="honey"')
+   if alteration=='hidden':p.evaluate('document.querySelector("[data-market-signs-root]").style.display="none"')
+   if alteration=='film':p.evaluate('const d=document.createElement("dialog");d.className="welcome-film";d.open=true;document.body.append(d)')
+   p.evaluate('document.querySelector("[data-ms-family=after-w]").click()');h.ok(h.book(p)==before and p.evaluate('marketWrites')==writes,'connected native pattern button inert after '+alteration)
+  finally:c.close()
+ c,p=setup(browser,base,pattern_fixture())
+ try:
+  p.evaluate('window.oldPattern=document.querySelector("[data-ms-family=after-w]")');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();ready(p);before=copy.deepcopy(h.book(p));p.evaluate('oldPattern.click()');h.ok(h.book(p)==before and 'patterns' in state(p) and pattern_state(p)['drafts']['warm']['familyId'] is None,'stale native pattern button cannot write another explorer');p.evaluate('location.hash="#notes"');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.wait_for_function('location.hash==="#home"');p.evaluate('location.hash="#words/signs"');ready(p);p.evaluate('oldPattern.click()');h.ok('signs' not in h.book(p),'reset-era native pattern button cannot resurrect work')
+ finally:c.close()
+
 class Quiet(http.server.SimpleHTTPRequestHandler):
  protocol_version='HTTP/1.1'
  def log_message(self,*args):pass
@@ -228,7 +352,9 @@ def main():
     for w,hgt in [(320,600),(820,1000),(1024,768)]:play(b,base,seed,w,hgt);print('Market Signs viewport',w,'passed',flush=True)
     edges(b,base)
     for w,hgt in [(320,600),(820,1000),(1024,768)]:endings_play(b,base,w,hgt);print('Ending Signs viewport',w,'passed',flush=True)
-    endings_edges(b,base);h.ok(not h.errors,'no browser errors '+str(h.errors));result={'status':'passed','checks':h.checks};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(result)
+    endings_edges(b,base)
+    for w,hgt in [(320,600),(820,1000),(1024,768)]:patterns_play(b,base,w,hgt);print('Pattern Stall viewport',w,'passed',flush=True)
+    patterns_edges(b,base);h.ok(not h.errors,'no browser errors '+str(h.errors));result={'status':'passed','checks':h.checks};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(result)
    finally:b.close()
  finally:server.shutdown();server.server_close()
 if __name__=='__main__':main()

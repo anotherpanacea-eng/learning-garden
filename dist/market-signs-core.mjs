@@ -1,4 +1,4 @@
-import {marketSignsCollection,marketSignsCopy as T,marketEndingCollection} from './market-signs-content.mjs';
+import {marketSignsCollection,marketSignsCopy as T,marketEndingCollection,marketPatternCollection} from './market-signs-content.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 const own=(o,k)=>Object.hasOwn(o,k),copy=structuredClone;
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
@@ -63,14 +63,14 @@ function ownJobs(r){
  return a.filter(s=>validMarketJob(s)&&counts.get(s.id)===1);
 }
 export function marketSignsView(state){
- if(!own(state,'signs'))return {status:'new',root:null,record:null,records:[],jobs:[],practiceGroup:'prefix',endings:marketEndingView(state)};
- const r=state.signs;if(!rootOK(r))return {status:'unsupported',root:r,record:null,records:[],jobs:[],practiceGroup:'prefix',endings:marketEndingView(state)};
+ if(!own(state,'signs'))return {status:'new',root:null,record:null,records:[],jobs:[],practiceGroup:'prefix',endings:marketEndingView(state),patterns:marketPatternView(state)};
+ const r=state.signs;if(!rootOK(r))return {status:'unsupported',root:r,record:null,records:[],jobs:[],practiceGroup:'prefix',endings:marketEndingView(state),patterns:marketPatternView(state)};
  const records=object(r.records)&&Object.keys(r.records).length<=64?Object.entries(r.records).map(([key,value])=>({id:key,readable:id(key)&&validMarketRecord(value)&&value.source.id===key,record:value})):[];
- const practiceGroup=r.practiceGroup==='endings'?'endings':'prefix',endings=marketEndingView(state);
+ const practiceGroup=['endings','patterns'].includes(r.practiceGroup)?r.practiceGroup:'prefix',endings=marketEndingView(state),patterns=marketPatternView(state);
  const current=records.find(x=>x.id===r.currentId&&x.readable),prefixSource=validMarketPrefix(r.source.prefix)?r.source.prefix:null,book=marketBook(r.source.dictionary);
  const prefixDraft=prefixSource?(own(r,'prefix')?validMarketPrefixDraft(prefixSource,r.prefix)?r.prefix:null:emptyPrefix()):null;
  const dictionaryDraft=book?(own(r,'dictionary')?validBookDraft(book,r.dictionary)?r.dictionary:null:defaultBook(book)):null;
- return {status:'ready',root:r,record:practiceGroup==='endings'?endings.record:current?.record??null,practiceGroup,endings,records,jobs:ownJobs(r),prefixSource,prefixDraft,book,dictionaryDraft,view:['prefix','dictionary','practice','endings'].includes(r.view)?r.view:'choose'};
+ return {status:'ready',root:r,record:practiceGroup==='patterns'?patterns.record:practiceGroup==='endings'?endings.record:current?.record??null,practiceGroup,endings,patterns,records,jobs:ownJobs(r),prefixSource,prefixDraft,book,dictionaryDraft,view:['prefix','dictionary','practice','endings','patterns'].includes(r.view)?r.view:'choose'};
 }
 const failure=error=>({ok:false,error});
 function mutate(state,fn,options={}){
@@ -84,6 +84,7 @@ function mutate(state,fn,options={}){
  }catch{return failure('unexportable');}
 }
 export function openMarketBench(state,view,options){if(view==='choose'&&object(state)&&!own(state,'signs'))return {ok:true,changed:false};return mutate(state,r=>{
+ if(view==='patterns'){const created=!own(r,'patterns');ensurePatterns(r);if(r.view==='patterns'&&!created)return {ok:true,changed:false};r.view='patterns';return {ok:true};}
  if(view==='endings'){const created=!own(r,'endings');ensureEndings(r);if(r.view==='endings'&&!created)return {ok:true,changed:false};r.view='endings';return {ok:true};}
  if(!['choose','prefix','dictionary','practice'].includes(view))return failure('selection');let created=false;
  if(view==='prefix'){if(!validMarketPrefix(r.source.prefix))return failure('unavailable');if(!own(r,'prefix')){r.prefix=emptyPrefix();created=true;}if(!validMarketPrefixDraft(r.source.prefix,r.prefix))return failure('unavailable');}
@@ -123,18 +124,19 @@ export function openMarketJob(state,jobId,options){return mutate(state,r=>{
  if(!id(jobId))return failure('selection');if(!own(r,'records'))r.records={};if(!object(r.records)||Object.keys(r.records).length>64)return failure('unavailable');
  if(own(r.records,jobId)){if(!validMarketRecord(r.records[jobId])||r.records[jobId].source.id!==jobId)return failure('unavailable');}
  else{if(Object.keys(r.records).length>=64)return failure('full');const source=ownJobs(r).find(s=>s.id===jobId);if(!source)return failure('selection');r.records[jobId]={source:copy(source),work:initialWork(source),help:{hint:false,example:false},checks:[],count:0};}
- if(r.currentId===jobId&&r.view==='practice'&&r.practiceGroup!=='endings')return {ok:true,changed:false};r.currentId=jobId;if(own(r,'practiceGroup'))r.practiceGroup='prefix';r.view='practice';return {ok:true};
+ if(r.currentId===jobId&&r.view==='practice'&&!['endings','patterns'].includes(r.practiceGroup))return {ok:true,changed:false};r.currentId=jobId;if(own(r,'practiceGroup'))r.practiceGroup='prefix';r.view='practice';return {ok:true};
  },options);}
 export function nextMarketJob(state,options){
  const v=marketSignsView(state);if(v.status==='unsupported')return failure('unavailable');
  const root=v.root,jobs=root?ownJobs(root):marketSignsCollection().jobs;
  const prefix=jobs.filter(s=>!root?.records||!own(root.records,s.id)||validMarketRecord(root.records[s.id])&&root.records[s.id].source.id===s.id).map(s=>({group:'prefix',id:s.id}));
  const e=marketEndingView(state),ending=e.jobs.filter(s=>!e.root?.records||!own(e.root.records,s.id)||validMarketEndingRecord(e.root.records[s.id])&&e.root.records[s.id].source.id===s.id).map(s=>({group:'endings',id:s.id}));
- const all=[...prefix,...ending];if(!all.length)return mutate(state,r=>{if(r.practiceGroup==='endings'&&endingRootOK(r.endings))r.endings.currentId=null;else r.currentId=null;r.view='practice';return {ok:true};},options);
- const group=v.practiceGroup??'prefix',current=group==='endings'?e.root?.currentId:root?.currentId,at=all.findIndex(x=>x.group===group&&x.id===current),next=all[(at+1)%all.length];
- return next.group==='endings'?openMarketEndingJob(state,next.id,options):openMarketJob(state,next.id,options);
+ const p=marketPatternView(state),pattern=p.jobs.filter(s=>(!own(p.root,'records')||boundedObject(p.root.records,32))&&(!p.root.records||!own(p.root.records,s.id)||validMarketPatternRecord(p.root.records[s.id])&&p.root.records[s.id].source.id===s.id)).map(s=>({group:'patterns',id:s.id}));
+ const all=[...prefix,...ending,...pattern];if(!all.length)return mutate(state,r=>{if(r.practiceGroup==='patterns'&&patternRootOK(r.patterns))r.patterns.currentId=null;else if(r.practiceGroup==='endings'&&endingRootOK(r.endings))r.endings.currentId=null;else r.currentId=null;r.view='practice';return {ok:true};},options);
+ const group=v.practiceGroup??'prefix',current=group==='patterns'?p.root?.currentId:group==='endings'?e.root?.currentId:root?.currentId,at=all.findIndex(x=>x.group===group&&x.id===current),next=all[(at+1)%all.length];
+ return next.group==='patterns'?openMarketPatternJob(state,next.id,options):next.group==='endings'?openMarketEndingJob(state,next.id,options):openMarketJob(state,next.id,options);
 }
-function editJob(state,fn,options){return mutate(state,(r,next)=>{const record=marketSignsView(next).record;if(!record)return failure('unavailable');const out=fn(record);return out.ok&&(r.practiceGroup==='endings'?validMarketEndingRecord(record):validMarketRecord(record))?out:out.ok?failure('unavailable'):out;},options);}
+function editJob(state,fn,options){return mutate(state,(r,next)=>{const record=marketSignsView(next).record;if(!record)return failure('unavailable');const out=fn(record);return out.ok&&(r.practiceGroup==='patterns'?validMarketPatternRecord(record):r.practiceGroup==='endings'?validMarketEndingRecord(record):validMarketRecord(record))?out:out.ok?failure('unavailable'):out;},options);}
 export function setMarketWork(state,action,options){return editJob(state,r=>{
  const s=r.source,w=r.work;
  if(s.kind==='choice'){if(action.choice!==null&&!s.choices.some(c=>c.id===action.choice))return failure('selection');w.choice=action.choice;}
@@ -235,4 +237,86 @@ export function openMarketEndingJob(state,jobId,options){return mutate(state,r=>
  if(own(e.records,jobId)){if(!validMarketEndingRecord(e.records[jobId])||e.records[jobId].source.id!==jobId)return failure('unavailable');}
  else{if(Object.keys(e.records).length>=32)return failure('full');const source=endingJobs(e).find(s=>s.id===jobId);if(!source)return failure('selection');e.records[jobId]={source:copy(source),work:initialWork(source),help:{hint:false,example:false},checks:[],count:0};}
  if(e.currentId===jobId&&r.practiceGroup==='endings'&&r.view==='practice')return {ok:true,changed:false};e.currentId=jobId;r.practiceGroup='endings';r.view='practice';return {ok:true};
+ },options);}
+
+// Pattern cases, drafts, kept rows and jobs have independent recovery boundaries.
+const patternRootOK=r=>object(r)&&r.v===1&&object(r.source)&&r.source.v===1;
+const boundedObject=(x,max)=>object(x)&&Object.keys(x).length<=max;
+function uniquePatternRows(a,max,valid){
+ if(!Array.isArray(a)||a.length>max)return [];
+ const counts=new Map();for(const row of a)if(object(row)&&id(row.id))counts.set(row.id,(counts.get(row.id)||0)+1);
+ return a.filter(row=>valid(row)&&counts.get(row.id)===1);
+}
+function patternLists(s){
+ return object(s)&&s.v===1&&Array.isArray(s.families)&&s.families.length<=16&&s.families.every(f=>object(f)&&id(f.id)&&nonempty(f.label)&&Array.isArray(f.words)&&f.words.length<=32&&f.words.every(nonempty))&&new Set(s.families.map(f=>f.id)).size===s.families.length&&rows(s.letters,16)&&s.letters.every(l=>nonempty(l.text));
+}
+export function validMarketPatternCase(s,row){
+ if(!patternLists(s)||!object(row)||!id(row.id)||!['title','targetLine','clue','familyNote','letterNote','pictureAlt'].every(k=>nonempty(row[k]))||!text(row.prefix)||!text(row.suffix)||!id(row.pictureId)||!id(row.targetLettersId)||!ids(row.familyIds)||!row.familyIds.length||row.familyIds.length>16||!row.familyIds.every(k=>s.families.some(f=>f.id===k)))return false;
+ const letters=s.letters.find(l=>l.id===row.targetLettersId);return !!letters&&row.targetLine===row.prefix+letters.text+row.suffix;
+}
+export function validMarketPatternJob(s){
+ return validMarketEndingJob(s)&&['title','prompt','hint','example','explanation'].every(k=>nonempty(s[k]))&&s.parts.every(p=>nonempty(p.text))&&s.choices.every(c=>nonempty(c.text))&&s.steps.every(nonempty)&&s.teach.every(patternCard)&&Object.values(s.different).every(nonempty)&&(!own(s,'tag')||nonempty(s.tag))&&id(s.pictureId)&&nonempty(s.pictureAlt);
+}
+export const validMarketPatternRecord=r=>validMarketRecord(r)&&validMarketPatternJob(r.source);
+const patternJobs=r=>uniquePatternRows(r.source.jobs,32,validMarketPatternJob);
+const emptyPatternDraft=()=>({familyId:null,lettersId:null});
+function patternDraft(s,d){return patternLists(s)&&object(d)&&(d.familyId===null||s.families.some(f=>f.id===d.familyId))&&(d.lettersId===null||s.letters.some(l=>l.id===d.lettersId));}
+const patternCard=c=>card(c)&&['title','text','example'].every(k=>nonempty(c[k]))&&c.steps.every(nonempty);
+const patternMeaning=m=>object(m)&&id(m.id)&&id(m.pictureId)&&['word','sentence','pictureAlt'].every(k=>nonempty(m[k]));
+export function marketPatternView(state){
+ const r=state?.signs?.patterns,base={root:r??null,source:null,benchSource:null,cases:[],current:null,draft:null,benchDraft:null,caseReadable:false,benchReadable:false,keepReadable:false,keptRows:[],jobs:[],records:[],record:null,cards:[],meanings:[],story:null,glossary:[],offscreen:null,grownup:null,materialUnavailable:false};
+ if(!state?.signs||!own(state.signs,'patterns'))return {status:'new',...base};
+ if(!patternRootOK(r))return {status:'unsupported',...base,root:r};
+ const s=r.source,benchSource=patternLists(s)&&Array.isArray(s.cases)&&s.cases.length<=64?s:null;
+ const validCases=benchSource?uniquePatternRows(s.cases,64,c=>validMarketPatternCase(s,c)):[],cases=benchSource?s.cases.map(row=>({id:id(row?.id)?row.id:null,readable:validCases.includes(row),source:row})):[];
+ const current=cases.find(c=>c.id===r.currentCaseId&&c.readable)?.source??null,benchReadable=!!benchSource&&boundedObject(r.drafts,64);
+ const draft=benchReadable&&current?(own(r.drafts,current.id)?patternDraft(s,r.drafts[current.id])?r.drafts[current.id]:null:emptyPatternDraft()):null;
+ const keepReadable=Array.isArray(r.kept)&&r.kept.length<=512;
+ const keptRows=Array.isArray(r.kept)?r.kept.map((k,index)=>{
+  const c=object(k)?validCases.find(c=>c.id===k.caseId):null,f=object(k)&&benchSource?s.families.find(f=>f.id===k.familyId):null,l=object(k)&&benchSource?s.letters.find(l=>l.id===k.lettersId):null,readable=!!c&&!!f&&!!l;
+  const reopenable=readable&&keepReadable&&benchReadable&&(!own(r.drafts,c.id)||patternDraft(s,r.drafts[c.id]));
+  return {index,readable,reopenable,caseId:readable?c.id:null,title:readable?c.title:null,familyLabel:readable?f.label:null,lettersText:readable?l.text:null};
+ }):[];
+ const records=boundedObject(r.records,32)?Object.entries(r.records).map(([key,value])=>({id:key,readable:id(key)&&validMarketPatternRecord(value)&&value.source.id===key,record:value})):[];
+ const cards=uniquePatternRows(s.cards,16,patternCard),meanings=uniquePatternRows(s.meanings,32,patternMeaning);
+ const story=object(s.story)&&['hook','short','longer','note','dictionaryNote'].every(k=>nonempty(s.story[k]))?s.story:null;
+ const glossary=Array.isArray(s.glossary)&&s.glossary.length<=32?s.glossary.filter(g=>object(g)&&nonempty(g.term)&&nonempty(g.text)):[];
+ const offscreen=object(s.offscreen)&&nonempty(s.offscreen.text)?s.offscreen:null,grownup=nonempty(s.grownup)?s.grownup:null;
+ const materialUnavailable=!story||!Array.isArray(s.cards)||s.cards.length!==cards.length||!Array.isArray(s.meanings)||s.meanings.length!==meanings.length||!Array.isArray(s.glossary)||s.glossary.length!==glossary.length||!offscreen||!grownup;
+ return {status:'ready',...base,root:r,source:s,benchSource,cases,current,draft,benchDraft:draft,caseReadable:!!current&&!!draft,benchReadable,keepReadable,keptRows,jobs:patternJobs(r),records,record:records.find(x=>x.id===r.currentId&&x.readable)?.record??null,cards,meanings,story,glossary,offscreen,grownup,materialUnavailable};
+}
+export function marketPatternResult(source,caseId,draft){
+ const c=uniquePatternRows(source?.cases,64,row=>validMarketPatternCase(source,row)).find(row=>row.id===caseId);
+ if(!c||!patternDraft(source,draft))return {kind:'unavailable',made:null,familyFits:null,lettersFit:null};
+ const family=source.families.find(f=>f.id===draft.familyId)??null,letters=source.letters.find(l=>l.id===draft.lettersId)??null,both=!!family&&!!letters;
+ return {kind:both?'ready':'incomplete',made:letters?c.prefix+letters.text+c.suffix:null,case:c,family,letters,familyFits:both?c.familyIds.includes(family.id):null,lettersFit:both?c.targetLettersId===letters.id:null};
+}
+function ensurePatterns(r){if(!own(r,'patterns'))r.patterns={v:1,source:marketPatternCollection(),currentCaseId:null,drafts:{},kept:[],currentId:null,records:{}};}
+export function setMarketPattern(state,change,options){return mutate(state,(r,next)=>{
+ ensurePatterns(r);const v=marketPatternView(next);if(!v.benchReadable)return failure('unavailable');const p=r.patterns,s=v.benchSource;
+ let caseId=p.currentCaseId,reopen=null;
+ if(own(change,'caseId')){if(!v.cases.some(c=>c.readable&&c.id===change.caseId))return failure('selection');caseId=change.caseId;}
+ else if(change.next===true){const cases=v.cases.filter(c=>c.readable);if(!cases.length)return failure('unavailable');caseId=cases[(cases.findIndex(c=>c.id===caseId)+1)%cases.length].id;}
+ else if(own(change,'reopen')){if(!Number.isSafeInteger(change.reopen)||!v.keptRows[change.reopen]?.reopenable)return failure('selection');reopen=p.kept[change.reopen];caseId=reopen.caseId;}
+ else if(!v.caseReadable)return failure('unavailable');
+ if(!v.cases.some(c=>c.readable&&c.id===caseId))return failure('unavailable');
+ if(!own(p.drafts,caseId)){if(Object.keys(p.drafts).length>=64)return failure('full');p.drafts[caseId]=emptyPatternDraft();}
+ const d=p.drafts[caseId];
+ // Selecting a paused case may expose it read-only; no action repairs its draft.
+ if(own(change,'caseId')||change.next===true){p.currentCaseId=caseId;r.view='patterns';return {ok:true};}
+ if(!patternDraft(s,d))return failure('unavailable');
+ if(reopen){d.familyId=reopen.familyId;d.lettersId=reopen.lettersId;}
+ else if(change.clear===true){d.familyId=null;d.lettersId=null;}
+ else{const key=['familyId','lettersId'].find(k=>own(change,k));if(!key)return failure('selection');const value=change[key],offered=key==='familyId'?s.families:s.letters;if(value!==null&&!offered.some(row=>row.id===value))return failure('selection');d[key]=value;}
+ p.currentCaseId=caseId;r.view='patterns';return {ok:true};
+ },options);}
+export function keepMarketPatternSign(state,options){return mutate(state,(r,next)=>{
+ const v=marketPatternView(next);if(!v.caseReadable||!v.keepReadable)return failure('unavailable');const result=marketPatternResult(v.source,v.current.id,v.draft);if(result.kind==='incomplete')return failure('incomplete');if(result.kind!=='ready')return failure('unavailable');
+ const p=r.patterns,d=v.draft;if(p.kept.some(k=>object(k)&&k.caseId===v.current.id&&k.familyId===d.familyId&&k.lettersId===d.lettersId))return {ok:true,changed:false};if(p.kept.length>=512)return failure('full');p.kept.push({caseId:v.current.id,familyId:d.familyId,lettersId:d.lettersId});return {ok:true};
+ },options);}
+export function openMarketPatternJob(state,jobId,options){return mutate(state,r=>{
+ if(!id(jobId))return failure('selection');ensurePatterns(r);const p=r.patterns;if(!patternRootOK(p))return failure('unavailable');if(!own(p,'records'))p.records={};if(!boundedObject(p.records,32))return failure('unavailable');
+ if(own(p.records,jobId)){if(!validMarketPatternRecord(p.records[jobId])||p.records[jobId].source.id!==jobId)return failure('unavailable');}
+ else{if(Object.keys(p.records).length>=32)return failure('full');const source=patternJobs(p).find(s=>s.id===jobId);if(!source)return failure('selection');p.records[jobId]={source:copy(source),work:initialWork(source),help:{hint:false,example:false},checks:[],count:0};}
+ if(p.currentId===jobId&&r.practiceGroup==='patterns'&&r.view==='practice')return {ok:true,changed:false};p.currentId=jobId;r.practiceGroup='patterns';r.view='practice';return {ok:true};
  },options);}
