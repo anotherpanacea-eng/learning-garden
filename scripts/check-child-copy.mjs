@@ -18,8 +18,11 @@ export const copyScopes = [
   {path:'dist/stained-map-content.mjs',adultBlocks:[{start:'    "adultLine":',end:'});',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
   {path:'dist/act-three-ui.mjs',adultBlocks:[{start:'export function actThreeNotes(',end:'\nexport function bindActThree(',reason:'Only used inside Grown-up Keeper notes.'}],quotations:[]},
   {path:'dist/act-three-content.mjs',adultBlocks:[{start:'  "notes": {',end:'\n};',reason:'Only used in Grown-up Keeper notes.'}],quotations:[]},
-  {path:'dist/market-signs-ui.mjs', adultBlocks:[{start:'export function marketSignsNotes(',end:'\nexport function bindMarketSigns(',reason:'Only used in Grown-up notes.'}],quotations:[]},
-  {path:'dist/market-signs-content.mjs', adultBlocks:[{start:' "grownup":',end:'\n "glossary":',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
+  {path:'dist/market-signs-ui.mjs', adultBlocks:[{start:'function endingNotes(',end:'\nexport function bindMarketSigns(',reason:'Only used in Grown-up notes.'}],quotations:[]},
+  {path:'dist/market-signs-content.mjs', adultBlocks:[
+    {start:' "grownup": "This room explores',end:'\n "glossary":',reason:'Shown only in For grown-ups and Notes.'},
+    {start:'  "grownup": "This bench explores',end:'export const marketEndingCopy=Object.freeze({',reason:'Shown only in the ending For grown-ups panel.'},
+  ],quotations:[]},
   {path:'dist/parcel-labels-ui.mjs', adultBlocks:[
     {start:'function parcelGrownUpNote(', end:'\nexport function parcelLabelsPage(', reason:'Labelled Grown-up practice notes.'},
     {start:'export function parcelLabelsNotes(', end:'\nconst errors =', reason:'Only used in the adult Notes destination.'},

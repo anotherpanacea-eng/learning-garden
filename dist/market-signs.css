@@ -5,3 +5,6 @@
 .ms-room button[aria-pressed=true]{text-decoration:underline;text-underline-offset:4px}
 
 .ms-abc{margin:.7rem 0}
+
+.ms-tools{max-width:660px;margin:1rem 0;padding:.6rem .7rem .8rem;border:1px solid #b6cbc2;display:flex;flex-wrap:wrap;gap:.55rem;min-width:0}.ms-tools legend{font-weight:700;padding:0 .3rem}.ms-harder{flex-basis:100%;margin:.3rem 0 0;font-weight:700}.ms-room .ms-bakery{margin:1rem 0;max-width:660px}.ms-bakery-board{position:relative}.ms-bakery .ms-painted{inset:22% 15% 28% 8%}.ms-bakery figcaption{display:flex;flex-wrap:wrap;gap:.4rem 1.3rem;font-size:1rem;line-height:1.5;margin:.5rem 0}.ms-root-letters{color:#183f39}.ms-ending-letters{color:#624b7b}.ms-bakery figcaption span{border-bottom:3px solid currentColor;overflow-wrap:anywhere}.ms-room .ms-ending-bench .ms-feedback{max-width:76ch}.ms-room fieldset button{flex:0 1 auto}.ms-room .ms-page-tabs button,.ms-room .ms-found-label,.ms-room .ms-fiction{font-size:1rem}.ms-room{min-width:0;overflow-wrap:anywhere}.ms-room .ms-job-shelf{grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr))}
+@media(max-width:650px){.ms-tools{gap:.5rem}.ms-room .ms-tools button{flex:1 1 100px}.ms-bakery .ms-painted{font-size:clamp(1.3rem,6.5vw,2.6rem)}.ms-room #ms-task{scroll-margin-top:180px}.ms-selects{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
