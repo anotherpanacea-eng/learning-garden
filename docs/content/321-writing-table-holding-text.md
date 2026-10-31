@@ -6,6 +6,8 @@ Proposed runtime slice, not shipped. Selected original town drafts and teaching 
 
 Bench button: **Holding It Together**. Bench header (277): **Make the writing hold together, so the reader can follow.**
 
+Tap words' accessible names: the word plus its sentence, **{word}, sentence {n}**, for example **package, sentence 2**.
+
 Shelf labels, in order: **One parcel, four words** · **Which word is unclear?** · **Fix the unclear word** · **The other side** · **Because of the rain** · **One more thing to enjoy** · **Leave it out** · **Where are you going?** · **What could "it" mean?**
 
 Reader lines: tasks 1 to 3, 7, 8 and C1: **For someone reading this story**. Tasks 4 to 6: **For someone reading this report**.
@@ -39,6 +41,8 @@ Key: it. Fit: **"It" could be the bun or the plate. That's the word to fix.** Fe
 - plate: **The plate is named. Look for a word that points back.**
 - table: **The table is named. Nothing else could be the table.**
 
+Missing line: **The unclear word is not tapped yet.**
+
 Hint: **Which word points back to something already named?**
 
 ## Choice tasks
@@ -67,8 +71,8 @@ Task 8 prompt: **Which shorter answer keeps the meaning?** Fit: **The reader fil
 
 ## Help
 
-Hints are each task's own. **Try a separate example** uses 277's "Holding items" line for tasks 1 to 3 and C1. Commission additions for the others:
-- Joins (tasks 4 to 6): **Try this one first: "Dot was tired. As a consequence, she went to bed early." Bed came because she was tired. Now read your two paragraphs.**
+Hints are each task's own. **Try a separate example** uses 277's "Holding items" line for tasks 1 to 3 and C1, with one commission correction: its middle sentence "Only one thing can be red." is replaced by **"It" points back to the hat.**, because Dot could be red too. The line reads: **Try this one first: "Dot has a hat. It is red." "It" points back to the hat. Now check yours.** Commission additions for the others:
+- Joins (tasks 4 to 6): **Try this one first: "Dot was tired. As a consequence, she went to bed early." She went to bed early because she was tired. Now read your two paragraphs.**
 - Shorter versions (tasks 7, 8): **Try this one first: "Pip can whistle, and Dot can too." The reader fills in "whistle." Now check yours.**
 
 ## Familiar practice and invitation
