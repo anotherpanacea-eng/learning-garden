@@ -8,11 +8,11 @@ Title: The Word List Shelf
 
 Short: The town is writing new notices. The librarian has gathered words that can trip a writer up. Find a clue worth keeping beside each word.
 
-Longer: Rain left the old noticeboard blank. Now there are invitations, boat timetables and plans for the garden. “A useful spelling clue is a little tool,” says the librarian. “Some words can use two. Let's give each word a place, and change our minds whenever we want.”
+Longer: Rain left the old noticeboard blank. Now there are invitations, boat timetables and plans for the garden. “A useful spelling clue is a little tool,” says the librarian. “Some words can use more than one. Let's give each word a place, and change our minds whenever we want.”
 
 Instruction: Pick a word. Read its clue. Choose a tray that helps you remember its spelling.
 
-Controls: Sort the shelf; Try a job; Previous word; Next word; Choose a word; Put back; See my shelf; Check my clues; Keep this shelf; First kept; Latest kept; Use these placements; Read the short story; Read this sentence; Compare two words; Show an example; Next step; Previous step; Hint; Check; Keep this job; Skip; Grown-up notes.
+Controls: Sort the shelf; Try a job; Previous word; Next word; Choose a word; Put back; See my shelf; Check my clues; Keep this shelf; First kept; Latest kept; Use these placements; Read the short story; Read this sentence; Read the instruction; Read this question; Compare two words; Show an example; Next step; Previous step; Hint; Check; Keep this job; Skip; Grown-up notes.
 
 Footer: Rules usually work. A dictionary has the last word.
 
@@ -52,16 +52,16 @@ Each table row is one card, id=word. Semicolon-separated tray/note pairs are ind
 
 Contrast: Embarrass has two r's. Harass has one. Both have two s's. Harass means to keep bothering someone; embarrass can mean to make someone feel awkward. Different words need different clues.
 
-Example title: Two useful clues
+Example title: More than one useful clue
 1. Look at sufficient: it has ff.
 2. It also ends in -cient.
-3. It also has ie. Double letters, These endings or ie or ei can help. Choose one.
+3. It also has ie. “Double letters”, “These endings” and “ie or ei” can all help. Choose one.
 
 Spoken invitation, displayed only: Pick a tricky word. With a grown-up, make up a silly sentence or picture to help you remember it. We won't record it.
 
 ## Narration allowlist
 
-Only these controls/fields may be spoken: Read the short story → retained story.short; Read this sentence → selected readable word.sentence; Read the instruction → retained copy.instruction; Read this question → current job.prompt (with its blank described as “blank”). Add those last two exact control labels. Longer story, tray names, clue notes, displayed spellings/choices/trials, hints, examples/steps, contrast and outcomes are not spoken by this slice. A missing/unreadable field disables only its read control. Sentence speech is ordinary context, not a phonics recording or a claim of validated pronunciation. Use the existing owner/visibility/stale/film guards.
+Only these controls/fields may be spoken: Read the short story → retained story.short; Read this sentence → selected readable word.sentence; Read the instruction → retained copy.instruction; Read this question → current job.prompt (with its blank described as “blank”). Longer story, tray names, clue notes, displayed spellings/choices/trials, hints, examples/steps, contrast and outcomes are not spoken by this slice. A missing/unreadable field disables only its read control. Sentence speech is ordinary context, not a phonics recording or a claim of validated pronunciation. Use the existing owner/visibility/stale/film guards.
 
 ## Shelf feedback and notices
 
@@ -96,8 +96,6 @@ Unavailable: This saved shelf cannot be edited here. Its work is still in your n
 Refusal: This change could not be kept safely. Your earlier work is unchanged. Open your notes to keep a copy.
 
 Job incomplete: Choose a spelling first. You can also leave this job for later.
-
-Job fit: That spelling fits this job.
 
 Job kept: This job is kept. You can return and try again.
 
