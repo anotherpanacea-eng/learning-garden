@@ -17,7 +17,7 @@ Out of scope: every other surface (phase 3), character art (phase 4), Mystery & 
 
 Spec 244 §9 gates P1 on this reviewed spec and on the involved strings having passed their Push C pass. Checked on main at e0cc273 against the [2026-10-22 café review](../reviews/text-review-2026-10-22/cafe-kitchen.md):
 
-- The review names the guest greetings and thanks among the café's strongest writing and flags none of them. Its "Lines worth keeping" list quotes three greetings. Field Journal revoices those three in a quieter key, as 244's companion drafted; the content review in §9 should check that each joke survives.
+- The review names the guest greetings and thanks among the café's strongest writing and flags none of them. Its "Lines worth keeping" list quotes three greetings (Brolly, Tangle and Pebble). 244's companion drafted Field Journal lines for Puff, Pebble, Wisp and Fern; this spec's companion revoices all twelve guests. No flag is evidence the Storybook lines passed, not that the variants keep each joke, so the content review in §9 checks that each joke survives.
 - It calls the welcome-back invitation "the bar" for the other supper invitations. It flags no problem with the eyebrow, progress line or ending.
 - The one flagged frame item near this surface, the "New Game Plus" eyebrow, is already fixed on main ("Gathering {n}").
 - The parcel area's text is spec 120 story text and is not varied here.
@@ -30,14 +30,14 @@ As spec 244 §7, confirmed:
 
 - `garden.style`: `'storybook'` or `'field-journal'`. Missing means Storybook.
 - Any other value (a later `'mystery'`, a typo, a non-string) is kept verbatim, displayed as Storybook, and never rewritten on load, view, `ensureGarden`, export or import.
-- **Only one writer:** `chooseStyle(state, style)` in a new `dist/style-core.mjs`. It returns `false` and writes nothing when `style` is not one of the two codes, when `state.garden` is present but not a plain object, or when the stored value already equals `style`. Otherwise it sets `state.garden.style` and returns `true`. It touches no other field. It follows `applyCafeStart`'s rule for an unreadable `garden`: decline, never replace.
+- **Only one writer:** `chooseStyle(state, style)` in a new `dist/style-core.mjs`. It returns `false` and writes nothing when `style` is not one of the two codes, when `state.garden` is present but not a plain object, or when the stored value already equals `style`. Otherwise it creates `state.garden={}` only when `garden` is absent, sets `state.garden.style` and returns `true`. Explicitly choosing Storybook replaces an unknown stored value; merely reading or displaying Storybook never does. It touches no other field. It follows `applyCafeStart`'s rule for an unreadable `garden`: decline, never replace.
 - `styleOf(state)` returns `'field-journal'` only when `state.garden` is a plain object whose `style` is exactly `'field-journal'`, otherwise `'storybook'`. Every reader goes through it.
 - The field travels in the explorer's ordinary save and notes export, and an import restores it as saved. Switching explorers never copies it. With saving off, a choice lasts for the session, under the existing storage-failure notice.
 - **No other code reads it.** Evidence, support, familiarity, exposure, story, pathway, suggestion, band and reading-amount code never reads `garden.style` or `styleOf`. A source check enforces this (§8).
 
 ## 4. Root attribute and tokens
 
-- `render()` sets `document.documentElement.dataset.style='field-journal'` when an explorer is active and `styleOf(state)` is Field Journal. It removes the attribute otherwise, including while the explorer picker is open. One call, beside `explorerHeader()`.
+- `render()` sets `document.documentElement.dataset.style='field-journal'` when an explorer is active and `styleOf(state)` is Field Journal. It removes the attribute otherwise, including while the explorer picker is open. One call near the start of `render()`, before any route's early return, so every route gets the current value.
 - Tokens: only the selectors the two surfaces use (the `.cafe-supper*`, `.cafe-guest*`, `.cafe-counter-scene`, `.cafe-response` and `.cafe-ticket*` rules in `cafe.css`, and the `.keeper-home` and `.keeper-invitation` rules in `keeper-story.css`) move their colors to custom properties. They keep their current values as defaults, so Storybook renders identically. One `:root[data-style="field-journal"]` block overrides them. No other stylesheet changes.
 - The Field Journal palette, from spec 244 §4.2, with contrast on paper `#fffdf6` measured for this spec:
 
@@ -56,7 +56,7 @@ As spec 244 §7, confirmed:
 - One helper, `frameText(state, storybook, variant)`: it returns `variant` when `styleOf(state)` is Field Journal and `variant` is a non-empty string, otherwise `storybook`.
 - `cafe-ui.mjs` calls it at each place it now prints `o.guest.greeting`, `o.guest.thanks`, the round-1 eyebrow, `goal.theme.invitation` and `goal.theme.ending`, in both the touch and the wide layouts. The **Hear our café goal** narration and every Hear text built from these strings use the same call, so speech always matches the screen.
 - Unchanged in both looks: the title, the progress line, "Plan another gathering", gatherings 2 and later, the Grown-up notes café summary, and every task string (wishes, dishes, properties, numbers, plate, cupboard, stages, repair, help, how-tos).
-- **Served stamp:** Field Journal only, on the served card: `<span class="cafe-stamp" aria-hidden="true">Served</span>`. The thank-you line already says the order is done. Under `prefers-reduced-motion` it appears with no motion. Otherwise it may settle in at most 300 ms. Storybook gets nothing new.
+- **Served stamp:** Field Journal only, on a served card that is not a recovered closed visit (`served && !x.recovered`; recovered cards keep "This saved visit is closed" and get no stamp): `<span class="cafe-stamp" aria-hidden="true">Served</span>`. The thank-you line already says the order is done. Under `prefers-reduced-motion` it appears with no motion. Otherwise it may settle in at most 300 ms. Storybook gets nothing new.
 
 ## 6. Home parcel area
 
@@ -66,7 +66,7 @@ No markup or text change. Under `:root[data-style="field-journal"]`, `.keeper-ho
 
 - A new `stylePanel(state)` in `dist/style-ui.mjs` renders after `cafeStartPanel(state)` in `notes()`. It shows heading **How the town looks**, the explanation, two radio inputs (**Storybook**, **Field Journal**) with their descriptions, and the **Use this look** button. It keeps clear of the café starting-amounts panel, with no shared form or button (spec 244 §2).
 - The preview: one static café card drawn twice, side by side at 820 px and stacked at 320 px. It shows Puff's arrival line in each look, inside the café card markup, scoped so it never changes the page's own `data-style`. Caption: "One café order, shown both ways."
-- Submitting calls `chooseStyle`. On `true`: save, set the root attribute, re-render, and announce "Look changed for this explorer." in the panel's status region. On `false` with the same value: announce "This explorer already uses this look." and do not save. Storage failure: the existing storage notice.
+- Submitting calls `chooseStyle`. On `true`: save, set the root attribute, re-render, and announce "Look changed for this explorer." in the panel's status region. On `false` with the same value: announce "This explorer already uses this look." and do not save. On `false` because `garden` is unreadable: announce "This look can't be saved for this explorer." and change nothing. The radios start on `styleOf(state)`, so a missing or unknown value shows Storybook selected. Storage failure: the existing storage notice.
 - No Home prompt, no `#begin` step, no suggestion anywhere to switch, and none of spec 244 §6's forbidden words.
 
 ## 8. Acceptance
@@ -76,9 +76,9 @@ Source checks (new `test/style-checks.mjs`, picked up by `run-checks`):
 1. `styleOf` returns Storybook for missing, `'mystery'`, `''`, `null`, an array `garden` and a non-object `garden`, and Field Journal only for the exact code.
 2. `chooseStyle` writes only `garden.style`: a deep copy of a synthetic full notebook differs in that one path after a successful choice, and not at all after a no-op or a refusal. An unreadable `garden` is declined and left as it was.
 3. A saved `'mystery'` survives `ensureGarden`, export and import byte-for-byte.
-4. `fieldJournalCafe` has exactly the twelve guest ids on main, minus Ember's greeting. Every string passes `check-child-copy`, the US spelling check and the read-aloud symbol check. None contains an em-dash, "!", a dish name, a property word from `cafe-content.mjs`, a digit, or a spec 244 §6 forbidden word.
+4. `fieldJournalCafe` has the twelve guest ids on main (Ember with thanks only) plus the gathering-1 supper entry. A test runs `scanCopySource` from `scripts/check-child-copy.mjs` over every variant string, and the US spelling and read-aloud symbol checks over them; these are bounded checks alongside the §9 human review, not proof of readability. None contains an em-dash, "!", a dish name, a property word from `cafe-content.mjs`, or a spec 244 §6 forbidden word; any number a variant keeps must also be in its Storybook twin.
 5. The supper invitation variant still contains "Serve six tables".
-6. No file other than `style-core.mjs`, `style-ui.mjs`, `style-frames.mjs`, `cafe-ui.mjs`, `keeper-story-ui.mjs` (if it needs a hook) and `app.mjs` mentions `garden.style`, `styleOf` or `frameText`.
+6. No production module under `dist/` other than `style-core.mjs`, `style-ui.mjs`, `style-frames.mjs`, `cafe-ui.mjs`, `keeper-story-ui.mjs` (if it needs a hook) and `app.mjs` mentions `garden.style`, `styleOf` or `frameText`.
 
 Browser suite (new `test/field-journal-browser.py`, Chrome, 320 and 820 widths, backlog-128 local server):
 
@@ -90,7 +90,7 @@ Browser suite (new `test/field-journal-browser.py`, Chrome, 320 and 820 widths, 
 6. Export notes, reset, import: the look returns. Import a synthetic save holding `'mystery'`: it shows Storybook and exports `'mystery'` again.
 7. Keyboard only: reach and use the radio inputs and button, and the status line is announced. Touch: 44 px targets in the panel.
 8. Before and after records: a synthetic notebook exported before a run of style switches and after differs only in `garden.style`.
-9. Help controls in the café have the same bounding boxes in both looks at both widths.
+9. Help controls in the café stay equally visible in both looks at both widths: same target size and contrast, same order relative to the task, and not overlapped. Their page position may shift with greeting length.
 
 ## 9. Reviews before release
 
