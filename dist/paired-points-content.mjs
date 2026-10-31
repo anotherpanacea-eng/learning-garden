@@ -1,6 +1,6 @@
 // Original, explicitly invented records. Upstream work was studied as design reference only.
 export const PAIRED_TEXT=Object.freeze({
- title:'Paired points',invitation:'Two numbers, one delivery.',
+ title:'Paired points',invitation:'Two numbers, one delivery. Dot, the postmaster, has kept a record of each courier trip and wants to know what the records show.',
  introduction:'Put each pair on a graph. Then ask what a pattern can tell us, and what it can’t.',
  instruction:'Keep these two values together. Choose X across first, then Y up.',
  chooseBoth:'Choose both values before placing a point.',
