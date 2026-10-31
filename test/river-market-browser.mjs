@@ -44,8 +44,9 @@ try{
  {const seed=freshState();seed.spanish={v:9,later:true};const c=await browser.newContext();await c.addInitScript(s=>{if(!localStorage.getItem('learning-garden-explorers'))localStorage.setItem('number-garden-v1',JSON.stringify(s));},seed);const p=await c.newPage();await p.goto(url+'#mercado');await p.locator('[data-river-root]').waitFor();
   ok(await p.locator('[data-river-action="open"]').count()===0,'no errand controls for an unknown version');ok(await p.locator('[data-river-root] a[href="#notes"]').count()===1,'Notes link offered');eq((await book(p)).spanish,{v:9,later:true},'unknown root kept exactly');await c.close();}
  // A control left over from another explorer cannot write.
- {const {c,p}=await fresh(820,1000);await act(p,'open').click();await p.locator('.river-note').waitFor();const stale=await p.evaluateHandle(()=>document.querySelector('[data-river-item="miel-1"]'));
+ {const {c,p}=await fresh(820,1000);await act(p,'open').click();await p.locator('.river-note').waitFor();const stale=await p.evaluateHandle(()=>document.querySelector('[data-river-action="meaning"]'));
   await p.locator('#explorer-switch').click();await p.locator('#explorer-new').click();await p.locator('#explorer-create').click();await p.locator('[data-river-root]').waitFor();
-  await stale.evaluate(b=>b.click());ok(!Object.hasOwn(await book(p),'spanish'),'detached control writes to neither explorer');ok(p.url().endsWith('#mercado'),'switch stays on the page');await c.close();}
+  const snapshot=()=>p.evaluate(()=>Object.fromEntries(Object.keys(localStorage).sort().map(k=>[k,localStorage.getItem(k)])));const before=await snapshot();
+  await stale.evaluate(b=>b.click());eq(await snapshot(),before,'a detached writing control changes neither explorer');ok(!Object.hasOwn(await book(p),'spanish'),'the new explorer has no market save');ok(p.url().endsWith('#mercado'),'switch stays on the page');await c.close();}
 }finally{await browser.close();}
 console.log(`River Market browser checks: ${n} assertions passed.`);
