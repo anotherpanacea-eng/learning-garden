@@ -23,10 +23,10 @@ Shown before the first crossing, and from its link at any time. Each French line
 
 | French | English | Note |
 | --- | --- | --- |
-| Où ? | Where? | Here, *Où allez-vous ?* asks where you are going. In this game, the place answer starts with *À*: *À la gare.* |
-| D'où ? | Where from? | The *d'* is a short form of *de*, meaning *from* here. *D'où venez-vous ?* asks where you are coming from. In this game, the place answer starts with *De*: *De la gare.* |
-| Combien ? | How many? / How much? | For people or things, it asks how many: *Nous sommes quatre.* In *Combien coûte… ?*, it asks how much something costs. |
-| À quelle heure ? | At what time? | The answer has a time: *À huit heures.* |
+| Où ? | Where? | Here, *Où allez-vous ?* asks where you are going. In this game, the place answer starts with *À*: *À la gare.* (To the station.) |
+| D'où ? | Where from? | Here, *d'* is a short form of *de*, meaning "from". *D'où venez-vous ?* asks where you are coming from. In this game, the place answer starts with *De*: *De la gare.* (From the station.) |
+| Combien ? | How many? / How much? | For people or things, it asks how many, and the answer gives a number: *Nous sommes quatre.* (There are four of us.) In *Combien coûte… ?*, it asks how much something costs. |
+| À quelle heure ? | At what time? | The answer has a time: *À huit heures.* (At eight o'clock.) |
 
 **Listen for the difference.** *Où allez-vous ?* asks where you are going. *D'où venez-vous ?* asks where you are coming from. One small sound, *d'*, changes the question.
 
@@ -45,13 +45,13 @@ Each phrase has its own **Hear it** button.
 | treize euros | thirteen euros |
 | trente euros | thirty euros |
 
-**Listen for the differences.** Hear these phrases: *deux heures, dix heures, douze heures*; *trois euros, treize euros, trente euros*. Each group has different vowel sounds. Listen to the whole phrase, too: *trente euros* has a "t" sound where *trois euros* and *treize euros* have a "z" sound. Hear them again and compare.
+**Listen for the differences.** Hear these phrases: *deux heures, dix heures, douze heures*; *trois euros, treize euros, trente euros*. Each group has different vowel sounds. Listen to the whole phrase, too: *trente euros* links with a "t" sound before *euros*, where *trois euros* and *treize euros* link with a "z" sound. Hear them again and compare.
 
 ## Crossing 1 · Le bac du matin
 
 **Dot's note** (English, visible throughout): Two of us, you and me. We're taking the parcels to the bakery. We've come from the post office. We'll come back at five o'clock.
 
-**Answer cards**, two of each kind, in this order: « Nous sommes deux. » · « Nous sommes trois. » · « À la boulangerie. » · « À la poste. » · « De la poste. » · « De la boulangerie. » · « À cinq heures. » · « À six heures. »
+**Answer cards**, two of each kind, in this order: « Nous sommes deux. » · « Nous sommes trois. » · « À la boulangerie. » · « À la poste. » · « De la boulangerie. » · « De la poste. » · « À cinq heures. » · « À six heures. »
 
 | Card | English |
 | --- | --- |
@@ -59,8 +59,8 @@ Each phrase has its own **Hear it** button.
 | Nous sommes trois. | There are three of us. |
 | À la boulangerie. | To the bakery. |
 | À la poste. | To the post office. |
-| De la poste. | From the post office. |
 | De la boulangerie. | From the bakery. |
+| De la poste. | From the post office. |
 | À cinq heures. | At five o'clock. |
 | À six heures. | At six o'clock. |
 
@@ -85,8 +85,6 @@ Each phrase has its own **Hear it** button.
 | --- | --- |
 | À la mairie. | To the town hall. |
 | De la mairie. | From the town hall. |
-| De la boulangerie. | From the bakery. |
-| À six heures. | At six o'clock. |
 
 The *Nous sommes* cards, *À la boulangerie.*, *De la boulangerie.* and both time cards use the English from crossing 1.
 
@@ -107,11 +105,11 @@ Shown after a pick that doesn't fit. The card stays picked, and the explorer can
 
 | Case | Line |
 | --- | --- |
-| A card of the wrong kind | That card tells {how many / the time / where you are going / where you are coming from}. Listen again to the start of Madame Roux's question. |
+| A card of the wrong kind | That card tells {how many of you there are / the time / where you are going / where you are coming from}. Listen again to the start of Madame Roux's question. |
 | The right kind, the wrong detail | That's the right kind of answer. Check Dot's note for {how many / the time / the place}. |
-| *À* for a *D'où* question | Listen for *d'* at the start. *D'où venez-vous ?* asks where you are coming from. Look for a place starting with *De*. |
-| *De* for an *Où* question | *Où allez-vous ?* asks where you are going. Look for a place starting with *À*. |
-| Step 5, a number that sounds alike | Those numbers can sound similar. Hear her again and compare the whole number. |
+| *À* for a *D'où* question | That card tells where you are going. Listen again to Madame Roux's question. |
+| *De* for an *Où* question | That card tells where you are coming from. Listen again to Madame Roux's question. |
+| Step 5, a number that sounds alike | Those numbers can sound similar. Hear her again and compare the whole phrase. |
 
 | After a fitting pick | Line |
 | --- | --- |

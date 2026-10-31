@@ -34,7 +34,14 @@ Reports: [Claude](claude.md), [OpenAI](openai.md), [Google](google.md), all 2026
 
 ## Confirmation pass
 
-Changes 1, 6, 7 and 13 alter shipped French lines, so under 117's method they need a new pass. The confirmation pass records its result here before build.
+Changes 1, 6, 7 and 13 altered shipped French, so OpenAI and Google reviewed the changed lines again at `78d16bd`, alone and from one package ([OpenAI](openai-confirm.md), [Google](google-confirm.md)). Both said "confirmed with the listed fixes". Applied:
+
+- **The *À*/*D'où* and *De*/*Où* feedback** still named and translated her hidden question (both, high). OpenAI's lines are used: "That card tells where you are going. Listen again to Madame Roux's question." and the same for "coming from".
+- **Teaching-card examples** get inline English (Google, high), and the *Combien* note says "and the answer gives a number". The *D'où* note starts with "Here," so it can't read as "from here".
+- **Crossing 1's card order** put the fitting card first in every pair (Google, high). The *De* pair now follows the *À* pair's place order. Crossing 2's table loses two leftover rows that its note already covers.
+- **Smaller wording** (Google, medium): the sounds note says the "t" and "z" link before *euros*, "how many of you there are", and step 5's feedback says "compare the whole phrase", which fits the sounds card.
+
+No new French line came out of this pass, so no further pass is needed.
 
 ## Known limit
 
