@@ -19,7 +19,7 @@ function riddleCard(open){
  <div class="riddle-choices" role="group" aria-label="Choose an answer">${choices.map(ch=>{const tried=c.picks.includes(ch.code),fits=ch.code===card.answer;return `<button type="button" class="riddle-choice ${tried?'tried':''} ${done&&fits?'fits':''}" data-riddle-choice="${ch.code}" ${done||tried?'disabled':''}>${esc(ch.text)}${tried&&!fits?'<span class="riddle-tag"> (not this one)</span>':''}</button>`;}).join('')}</div>
  ${status}
  ${done?'':`<div class="riddle-help">${c.clue?`<div class="riddle-clue" tabindex="-1"><strong>Dot’s clue</strong><p>${esc(card.clue)}</p>${hearButton(card.clue,'Hear the clue')}</div>`:'<button type="button" class="secondary" data-riddle-clue>Ask Dot for a clue</button>'}<button type="button" class="text-button" data-riddle-show>Show the answer</button><button type="button" class="secondary" data-riddle-put-back>Put this card back</button></div>`}
- ${done?`<div class="riddle-after"><button type="button" class="primary" data-riddle-next>Pull out another riddle</button>${place?`<a class="secondary" href="${place.href}">${esc(place.label)}</a>`:''}</div>`:''}
+ ${done?`<div class="riddle-after"><button type="button" class="primary" data-riddle-next>Pull out another riddle</button>${place?`<a class="secondary" href="${place.href}">${esc(place.label)}</a>`:''}${card.strand==='spanish'?'<a class="secondary" href="#mercado">The River Market (Spanish)</a>':''}</div>`:''}
  </section>`;
 }
 export function riddlesPage(state){

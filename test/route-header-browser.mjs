@@ -6,13 +6,13 @@ import {initializeExplorerState} from '../dist/progress-transfer.mjs';
 const url=process.env.ROUTE_HEADER_TEST_URL;
 if(!url)throw new Error('Serve dist locally and set ROUTE_HEADER_TEST_URL.');
 // Route and the nav destination it highlights; null highlights none. Inventory: docs/reviews/route-inventory-2026-10-31.md.
-const routes=[['#library/long-words',null],['#library/word-list',null],['#workshop/mending','#workshop'],['#library/copy',null],['#library/endings',null],['#library/spellings',null],['#almanac/beyond','#storm'],['#almanac/beyond/seeds','#storm'],['#almanac/both-ways','#storm'],['#almanac/the-ways','#storm'],['#desk/writing',null],['#desk/exchange',null],['#words/endings',null],['#words/props',null],['#journeys',null],
+const routes=[['#workshop/design','#workshop'],['#post/lost-and-found','#post'],['#library/long-words',null],['#library/word-list',null],['#workshop/mending','#workshop'],['#library/copy',null],['#library/endings',null],['#library/spellings',null],['#almanac/beyond','#storm'],['#almanac/beyond/seeds','#storm'],['#almanac/both-ways','#storm'],['#almanac/the-ways','#storm'],['#desk/writing',null],['#desk/exchange',null],['#words/endings',null],['#words/props',null],['#journeys',null],
  ['#workshop/old-map','#workshop'],['#mill/energy','#workshop'],['#workshop/lift','#workshop'],['#studio/sound-window',null],
  ['#workshop/switch-table','#workshop'],['#science/ice','#science'],['#post/ferry','#post'],['#post/manifest','#post'],['#workshop/hinge','#workshop'],
  ['#workshop/copy-frame','#workshop'],['#workshop/ribbon-measures','#workshop'],['#workshop/same-ground','#workshop'],
  ['#workshop/common-cuts',null],['#almanac/upstream-reply',null],['#studio/field-strips',null],['#desk/gaps',null],
  ['#studio/mixing/bars',null],['#studio/mixing',null],['#living/who-eats',null],['#post/register',null],['#learn/math/paired',null],
- ['#almanac/weather',null],['#almanac/tallies',null],['#studio/rhythm',null],['#science/water-shares','#science'],
+ ['#almanac/weather',null],['#almanac/tallies',null],['#almanac/sky',null],['#studio/rhythm',null],['#science/water-shares','#science'],
  ['#post/descriptions','#post'],['#post/codes','#post'],['#arrive',null],['#begin',null],['#learn/math',null],['#pathways/science',null],
  ['#cafe/units','#cafe'],['#loft/shadows',null],['#workshop/scale','#workshop']];
 const seed=initializeExplorerState(freshState());seed.garden.welcomeFilmSeen=true;seed.garden.guide='ari';
