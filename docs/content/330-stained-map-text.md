@@ -11,7 +11,23 @@ Draft companion to [spec330](../specs/330-stained-map.md). **Not yet independent
 - Bench(a): header; the exact eight-tile row; all eight stained labels, restored labels and notes; restore feedback; all eight history cards and both destination labels; the seven supplied family pairs and the signing feedback.
 - Jobs A1–A5 in full: their visible steps, prompts, written notes, choices/order, feedback, hints and explanations. A5's three statements are independent responses; no missing statement becomes false.
 
-A word-history claim in this list is commissioned only once the audit gate clears it. No isolated sound, new foreign phrase, other268 item, page3 quote or Hollis name is included. No response tile/choice is passed to narration.
+Apply the source-check corrections below before freezing the selected material. A word-history claim in this list is commissioned only once the audit gate clears it. No isolated sound, new foreign phrase, other268 item, page3 quote or Hollis name is included. No response tile/choice is passed to narration.
+
+## Source-check corrections to268
+
+These original amendments replace only the named lines; all other selected lines stay as commissioned above. The writer's later addition to a spelling is directly supported; a categorical claim about every English utterance is unnecessary.
+
+| Where | Replacement |
+| --- | --- |
+| Scene1, librarian's final spoken line | Its s came later. Writers added it to the spelling. |
+| Scene1, Keeper's note | Island was once written iland. Later, its spelling picked up an s from isle. The two words have different histories. |
+| A2, island under Once said feedback | Iland had no s. Writers added that letter later. |
+| A3 prompt | Which word's note says writers added a letter? |
+| A3 explanation | Island was once written iland. Its s was added later. |
+| A5, first statement | All these silent letters stayed after a spoken sound disappeared. |
+| A5, first-statement feedback | The s in island was added to the spelling. |
+
+A3's island answer, its other two choices and their order stay unchanged. A5's first response is Not true; its other statements and keys stay unchanged. No prompt dates a word or asks the child to prove that nobody ever pronounced a letter. The story still contrasts the guide's first explanation with Bramble's correction, then the dictionary check.
 
 ## New interface text
 
