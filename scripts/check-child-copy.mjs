@@ -22,7 +22,7 @@ export const copyScopes = [
     {start:'<details class="hinge-about hinge-grownups">', end:'</details></section>', reason:'For grown-ups panel.'},
   ], quotations:[]},
   {path:'dist/hinge-content.mjs', adultBlocks:[
-    {start:'"visit":', end:'\n};\nexport const hingeFrames', reason:'Shown only in the For grown-ups panel.'},
+    {start:'"visit":', end:'export const hingeFrames', reason:'Shown only in the For grown-ups panel.'},
   ], quotations:[]},
   {path:'dist/ribbon-measure-ui.mjs', adultBlocks:[
     {start:'<details><summary>For grown-ups</summary>', end:'</details></section>', reason:'For grown-ups panel.'},

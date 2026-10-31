@@ -54,6 +54,14 @@ for(const [path,child,adult] of [
   equal(scanCopySource(plant(child),scope).map(x=>x.term),['supplied'],`${path}: child-visible copy remains checked`);
   equal(scanCopySource(plant(adult),scope).length,0,`${path}: For grown-ups text is exempt`);
 }
+// Exact scope boundaries must work in both Git LF sources and Windows CRLF checkouts.
+for(const scope of copyScopes) {
+  const lf=readFileSync(new URL('../'+scope.path,import.meta.url),'utf8').replace(/\r\n/g,'\n');
+  for(const text of [lf,lf.replace(/\n/g,'\r\n')]) {
+    equal(scanCopySource(text,scope),[],scope.path+': scope accepts LF and CRLF');
+    equal(scanCopySource(text+'\n"supplied"',scope).map(x=>x.term),['supplied'],scope.path+': copy after adult boundary stays checked');
+  }
+}
 const result=inspectChildCopy();ok(result.ok,'actual pilot source contains no unallowed candidate or stale scope marker');
 equal(result.files.length,copyScopes.length,'scoped result does not claim the whole app');
 const script=fileURLToPath(new URL('../scripts/check-child-copy.mjs',import.meta.url));
