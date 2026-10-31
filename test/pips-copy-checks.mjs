@@ -1,6 +1,8 @@
 // Spec335 finite meanings and retained work, using the actual Notes import gate.
 import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
+import {MAX_IMPORT_BYTES} from '../dist/progress-limits.mjs';
+import {pipsCopyPage,pipsCopyNotes} from '../dist/pips-copy-ui.mjs';
 import {freshState} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
 import {makePipsCopySource,pipsCopyCopy} from '../dist/pips-copy-content.mjs';
@@ -56,6 +58,11 @@ export function runChecks(){
  const unknown=fresh();unknown.pipsCopy={v:99,future:['raw']};refusal(unknown,()=>P.openPipsTable(unknown,'postcard',options));yes(E.openEndingsTable(unknown,'letter',options));eq(unknown.pipsCopy,{v:99,future:['raw']});
  const badChecks=start();badChecks.pipsCopy.postcard.checks={future:true};refusal(badChecks,()=>P.checkPipsPostcard(badChecks,options));yes(P.placePipsWord(badChecks,'high','high',options));yes(P.keepPipsPostcard(badChecks,options));eq(badChecks.pipsCopy.postcard.latestKept.check,null);eq(badChecks.pipsCopy.postcard.checks,{future:true});
  const max=makePipsCopySource(),base=max.postcard.slots[0];max.postcard.slots=Array.from({length:64},(_,i)=>({...clone(base),id:'slot-'+i}));max.postcard.segments=max.postcard.slots.map(x=>({slotId:x.id}));const mp=P.pipsPostcardSource(max);ok(mp&&mp.parts.length===64);const mr=P.pipsPostcardResult(mp,{placements:Object.fromEntries(mp.parts.map(x=>[x.id,'hi']))});eq(mr.feedback.length,65);
+ const capacity=start();let low=0,high=MAX_IMPORT_BYTES;while(low<high){const mid=Math.floor((low+high+1)/2);capacity.syntheticPadding='x'.repeat(mid);if(canExportPips(capacity))low=mid;else high=mid-1;}capacity.syntheticPadding='x'.repeat(low);ok(canExportPips(capacity));refusal(capacity,()=>P.checkPipsPostcard(capacity,options));
+ const inherited=start();inherited.pipsCopy.source.postcard.slots[0].choices.push({id:'hasOwnProperty',text:'Synthetic older response'});inherited.pipsCopy.source.postcard.slots[0].different={};yes(P.placePipsWord(inherited,'high','hasOwnProperty',options));yes(P.checkPipsPostcard(inherited,options));eq(inherited.pipsCopy.postcard.checks.at(-1).feedback[1],'The river: '+source.copy.neutral);
+ for(const value of [null,[],3,'future',{v:99}]){const v={pipsCopy:value};ok(typeof pipsCopyNotes(v)==='string');ok(typeof pipsCopyPage(v)==='string');}
+ const revised=start();for(const [id,key] of Object.entries(keys))yes(P.placePipsWord(revised,id,key,options));yes(P.checkPipsPostcard(revised,options));yes(P.placePipsWord(revised,'high','hi',options));ok(!pipsCopyPage(revised).includes(source.copy.fit),'an earlier fit is not presented as feedback for revised work');ok(!pipsCopyNotes(revised).split('<details><summary>Full retained')[0].includes(source.copy.fit),'Notes summary does not pair current work with a different check');
+ const html=pipsCopyPage(start());ok(html.includes('high · Not chosen yet'));ok(html.includes('data-pc-panel="original"'));ok(!html.includes('undefined'));
  console.log(`Pip's Copy core: ${n} checks passed.`);return n;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runChecks();
