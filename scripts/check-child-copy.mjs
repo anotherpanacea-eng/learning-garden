@@ -37,6 +37,16 @@ export const copyScopes = [
     {start:'<summary>Grown-ups: sources and limits</summary>', end:'</details>`;}', reason:'Grown-ups sources and limits panel.'},
   ], quotations:[]},
   {path:'dist/lift-film.mjs', adultBlocks:[], quotations:[]},
+  {path:'dist/mill-energy.mjs', adultBlocks:[
+    {start:'<summary>Grown-ups: sources and limits</summary>', end:'</details>`;}', reason:'Grown-ups sources and limits panel.'},
+  ], quotations:[]},
+  {path:'dist/same-ground-ui.mjs', adultBlocks:[
+    {start:'<details class="ground-grownups">', end:'</details></section>', reason:'For grown-ups panel.'},
+  ], quotations:[]},
+  {path:'dist/same-ground-content.mjs', adultBlocks:[
+    {start:" visit:'", end:" widthLock:'", reason:'Shown only in the For grown-ups panel.'},
+    {start:" grownup:'", end:'export const groundCase=', reason:'Shown only in the For grown-ups panel.'},
+  ], quotations:[]},
   {path:'dist/common-cuts-ui.mjs', adultBlocks:[], quotations:[]},
   {path:'dist/common-cuts-content.mjs', adultBlocks:[
     {start:"grownUp:'", end:' exampleLabel:', reason:'Shown only in the For grown-ups panel.'},
