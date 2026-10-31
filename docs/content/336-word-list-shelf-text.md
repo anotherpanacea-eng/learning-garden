@@ -19,7 +19,7 @@ Footer: Rules usually work. A dictionary has the last word.
 Trays (id; label; description):
 - double; Double letters; Look for two matching letters side by side.
 - quiet; Quiet letters; Notice a written letter that adds no separate sound here.
-- family; Family word; Compare the letters with the supplied family word.
+- family; Family word; Compare the letters with the family word on the card.
 - ending; These endings; Look for -cious, -cient, -ant, -ence or -able.
 - ie; ie or ei; Look closely at the order of i and e.
 
@@ -67,7 +67,7 @@ Only these controls/fields may be spoken: Read the short story → retained stor
 
 Listed: This matches a printed clue. [Repeat that clue exactly.]
 
-Discuss: The card has not supplied that clue. You may have noticed something else. Explain it together, or compare the printed clues. Your placement can stay.
+Discuss: That clue is not printed on this card. You may have noticed something else. Explain it together, or compare the printed clues. Your placement can stay.
 
 Unplaced: This word is still on the table.
 

@@ -12,7 +12,7 @@ const source = freeze({
     "instruction": "Pick a word. Read its clue. Choose a tray that helps you remember its spelling.",
     "footer": "Rules usually work. A dictionary has the last word.",
     "listed": "This matches a printed clue.",
-    "discuss": "The card has not supplied that clue. You may have noticed something else. Explain it together, or compare the printed clues. Your placement can stay.",
+    "discuss": "That clue is not printed on this card. You may have noticed something else. Explain it together, or compare the printed clues. Your placement can stay.",
     "unplaced": "This word is still on the table.",
     "incomplete": "Some words are still on the table. You can keep this shelf or carry on.",
     "discussion": "Some placements have a different idea to discuss. You can keep them or change them.",
@@ -84,7 +84,7 @@ const source = freeze({
     {
       "id": "family",
       "label": "Family word",
-      "description": "Compare the letters with the supplied family word."
+      "description": "Compare the letters with the family word on the card."
     },
     {
       "id": "ending",
