@@ -10,6 +10,7 @@ import {walkCases} from '../dist/courier-clock-content.mjs';
 import {startUpstream,postUpstreamQuestion,upstreamView} from '../dist/upstream-exchange-core.mjs';
 import {canExport} from './act-two-checks.mjs';
 import * as A from '../dist/act-three-core.mjs';
+import {MAX_IMPORT_BYTES} from '../dist/progress-limits.mjs';
 import {actThreeContent as C} from '../dist/act-three-content.mjs';
 import {actThreeRoute,actThreePage,actThreeNotes,resetActThreeView} from '../dist/act-three-ui.mjs';
 
@@ -80,6 +81,11 @@ export function runChecks(){
   const before=clone(state);state.story.seenScenes.push('ways-page-revealed');eq(A.actThreeView(state).pageVisible,false,'a scene does not imply the ending');state.story=before.story;
  }
  {
+  const state=actThreeSeed();let low=0,high=MAX_IMPORT_BYTES;
+  while(low<high){const mid=Math.floor((low+high+1)/2);state.syntheticPadding='x'.repeat(mid);if(canExport(state))low=mid;else high=mid-1;}
+  state.syntheticPadding='x'.repeat(low);ok(canExport(state),'preimage fits the actual shared import limit');unchanged(state,()=>A.startActThree(state,options),'story growth at the shared export limit');
+ }
+ {
   const state=actThreeHosts(),before=clone(state);resetActThreeView();
   for(const mode of [{part:'hub'},{part:'chapter',chapter:'route'},{part:'ending'},{part:'page'}]){const html=actThreePage(state,mode);ok(!html.includes('Hollis'),'unreached Page 3 identity is not rendered');}
   eq(state,before,'render and Notes do not start a story');actThreeNotes(state);eq(state,before);
@@ -93,6 +99,7 @@ export function runChecks(){
   html=actThreePage(state,{part:'page'});ok(html.includes('data-a3-reveal'));ok(!html.includes('Hollis'));ok(A.revealWaysPage(state,options));html=actThreePage(state,{part:'page'});ok(html.includes("Hollis&#39;s page"));ok(html.includes('Hollis taught me'));ok(html.includes('data-a3-page-leaf'));
   const visible=clone(state);actThreePage(state,{part:'page'});actThreeNotes(state);eq(state,visible,'all reached readers remain pure');
   const walk=state.courierClockWalk.cases[walkCases[0].id];walk.kept.snapshot.source.title='<img src=x onerror=alert(1)>';delete state.story.acts.III.contributions.route;html=actThreePage(state,{part:'chapter',chapter:'route'});ok(html.includes('&lt;img src=x onerror=alert(1)&gt;'),'frozen labels render as text');ok(!html.includes('<img src=x'));
+  state.story.acts.III.ended=false;state.story.acts.III.contributions='retained';html=actThreePage(state,{part:'hub'});ok(!html.includes('0 of 4 chapters'),'unreadable contribution map is not counted as zero');ok(html.includes(C.messages.unreadableAct.replaceAll("'","&#39;")));ok(!actThreeNotes(state).includes('started, 0 of 4'),'Notes do not invent an empty count');
  }
  for(const [hash,expected] of [['#almanac/beyond',{part:'hub'}],['#almanac/beyond/seeds',{part:'chapter',chapter:'seeds'}],['#almanac/beyond/unknown',{part:'hub'}],['#almanac/beyond/route/extra',{part:'hub'}],['#almanac/both-ways',{part:'ending'}],['#almanac/the-ways',{part:'page'}],['#almanac/beyond-ish',null],['#almanac/both-ways/extra',null]])eq(actThreeRoute(hash),expected,'bounded route '+hash);
  {
