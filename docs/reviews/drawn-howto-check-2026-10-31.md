@@ -1,20 +1,20 @@
 # Drawn how-to check for benches from specs 280 to 330
 
-Backlog card LG-36, 2026-10-31. The 83 drawn how-tos (proposal: [drawn how-tos](../specs/proposed/drawn-how-to-animations.md)) predate the benches below. Each bench was opened on main at `36c1552` in a browser at 1024 px, and its heading, opening lines and visible buttons were read; `howtoForPage` returns none for every route listed. Captions use the buttons as they read on each bench's first screens; steps further in (for example plotting in Paired points) are drafted from the spec. None gives away an answer.
+Backlog card LG-36, 2026-10-31. The 83 drawn how-tos (proposal: [drawn how-tos](../specs/proposed/drawn-how-to-animations.md)) predate the benches below. Each bench was opened on main at `36c1552` in a browser at 1024 px, and an independent review re-opened all 31 on main at `f794a2e`, checking every caption against the page and the bench source, and its heading, opening lines and visible buttons were read; `howtoForPage` returns none for every route listed. Captions use the buttons as they read on each bench's first screens; steps further in (for example plotting in Paired points) are drafted from the spec. None gives away an answer.
 
 **Rule used.** A bench **needs one** when play has an order of moves the page does not show at a glance, or when the idea is the picture (a sweep, a nested part, a shared inside line). **Text is enough** when the page states the whole turn in a line or two, or the bench already has its own film.
 
 **Not checked here:** the River Market (`#mercado`, 324 and 328) and Le bac (`#bac`, 327) are not on main yet; check them when #298, #314 and #302 land. The Endings Shelf (331) is not built. Older routes without one, outside this card's range: `#numbers/seeds/pairs`, `#science/water-shares`, `#post/descriptions`, `#post/sorting/order`.
 
-## Needs one (15)
+## Needs one (18)
 
 ### Rhythm Studio (`#studio/rhythm`, spec 280, 300)
 
 1. Choose a rhythm to work on. The others stay open.
-2. Press Play the example to hear the rhythm you are matching.
+2. For an echo rhythm, press 'Play the example' to hear it.
 3. Tap note and rest buttons to fill one bar of four beats.
 4. Press Play my bar to hear what you built.
-5. Press Compare with the example, then keep it or revise it.
+5. Compare if matching an example; choose 'Keep or revise', then 'Keep this rhythm'.
 - Side box *Bar too full?*: A bar holds four beats. Clear it, or choose shorter notes.
 
 ```mermaid
@@ -55,12 +55,12 @@ flowchart TD
 
 ### Two Letters (`#post/register`, spec 284)
 
-1. Choose a letter: to Nuria, or to the council.
+1. Press 'Start a page', then choose a letter.
 2. Read who the reader is and what the letter must do.
-3. Use Previous choice and Next choice, then Use these words.
-4. Keep this page when the words suit this reader.
-5. Write the other letter, then Read both to compare them.
-- Side box *Not sure?*: Press I'm stuck to read the three teaching cards.
+3. Select some words, press 'Use these words', then move with 'Next choice'.
+4. Choose words for both readers before keeping; you can also keep an unfinished page.
+5. Open 'Letter tools'; choose 'Read both' to compare, then 'Keep this page'.
+- Side box *Not sure?*: Open 'Letter tools', then press 'Read the three teaching cards'.
 
 ```mermaid
 flowchart TD
@@ -79,8 +79,8 @@ flowchart TD
 
 ### The Mixing Table (`#studio/mixing`, spec 287)
 
-1. Choose an invitation. Read the sample recipe.
-2. Add or take back white and blue scoops.
+1. Press 'Open the table'. Choose an invitation and read its sample recipe.
+2. Add or take back scoops of the invitation's two colors.
 3. Press Paint a stripe to see the color you made.
 4. Compare your stripe with the sample. Same proportions, same color.
 5. Change the scoops and paint again. Your first stripe stays in notes.
@@ -103,10 +103,10 @@ flowchart TD
 
 ### Equal Blocks (`#studio/mixing/bars`, spec 288)
 
-1. Choose an invitation. Read the total and the recipe.
+1. Press 'Open the blocks'. Choose an invitation; read its given amount and recipe.
 2. Add or take back blocks for each color, in recipe order.
 3. Choose how many scoops every block stands for.
-4. Press Compare. Do the bars make the whole amount?
+4. Place the brace over the named amount, then press 'Compare' to check your model.
 5. Change a bar or the block value, then compare again.
 
 ```mermaid
@@ -124,7 +124,7 @@ flowchart TD
 
 ### Field Strips (`#studio/field-strips`, spec 290)
 
-1. Open a field plan. The frame is always one whole field.
+1. Press 'Open Field Strips'. The frame always shows one whole field.
 2. Add or remove strips to shade the first amount.
 3. Add or remove rows to take part of that first amount.
 4. Count the taken cells out of the whole field's cells.
@@ -141,24 +141,6 @@ flowchart TD
   s1 --> s2
   s2 --> s3
   s3 --> s4
-```
-
-### Common Cuts (`#workshop/common-cuts`, spec 292)
-
-1. Choose a pair of ribbons. Both use the same whole.
-2. Change each ribbon's equal pieces. The colored ends stay still.
-3. Keep changing until both ribbons have the same size pieces.
-4. Now count each colored amount in the matching pieces.
-
-```mermaid
-flowchart TD
-  s0[Choose two ribbons]
-  s1[Change the cuts]
-  s2[Match the pieces]
-  s3[Read both names]
-  s0 --> s1
-  s1 --> s2
-  s2 --> s3
 ```
 
 ### Same ground, different fence (`#workshop/same-ground`, spec 293)
@@ -189,9 +171,9 @@ flowchart TD
 
 1. Choose a ribbon to measure.
 2. Lay measuring pieces end to end along the ribbon.
-3. If a piece is too long, split each piece in 2 or 3.
+3. If needed, press 'Split each piece in 2' or 'Split each piece in 3'; continue.
 4. Press Read the measurement to see how many groups cover it.
-- Side box *Too far?*: Lift last piece, or Return all pieces, and try again.
+- Side box *Piece won't fit?*: Split the measuring group, or press 'Lift last piece' to try another arrangement.
 
 ```mermaid
 flowchart TD
@@ -202,15 +184,15 @@ flowchart TD
   s0 --> s1
   s1 --> s2
   s2 --> s3
-  x0([Too far?])
+  x0([Piece won't fit?])
   s1 -.-> x0
 ```
 
 ### Hinge Bench (`#workshop/hinge`, spec 297)
 
 1. Choose a hinge case.
-2. Turn more or turn back. Watch the marked sweep.
-3. Change an arm's length. The turn stays the same.
+2. Press 'Turn more +5°' or 'Turn back −5°'. Watch the marked sweep.
+3. Choose 'Arm lengths', then 'Gold shorter' or 'Gold longer'. Watch the sweep.
 4. Press Compare turns. The turn is the sweep, not the arm length.
 
 ```mermaid
@@ -228,7 +210,7 @@ flowchart TD
 
 1. Choose a crossing to watch.
 2. Press Forward one second, or Back one second.
-3. Watch from bank, from ferry, or from the other boat.
+3. Choose 'Watch from bank', 'Watch from ferry', or 'Watch from other boat'.
 4. Show readings to see each position from where you watch.
 5. Press Explain this view. Same crossing, different starting point.
 
@@ -272,9 +254,9 @@ flowchart TD
 ### The seed exchange table (`#desk/exchange`, spec 316)
 
 1. Choose a card and press Start this card.
-2. Add or lift whole trade groups.
-3. Press Check these groups. Extra baskets stay at home.
-4. Write what the courier should know.
+2. Build whole trade groups, or change how many seedlings go in every part.
+3. Press 'Check these groups' for trades, or 'Check these parts' for seedlings.
+4. If you like, open 'Your courier note (optional)' and write your words.
 5. Keep this card for the journey.
 
 ```mermaid
@@ -292,10 +274,10 @@ flowchart TD
 
 ### Lantern Codes (`#post/codes`, spec 319)
 
-1. Read about the lantern: a message and its pattern.
-2. Make a short and long pattern for each message.
-3. Send a message. See what Dot reads.
-4. Compare codes. Which survives pretend rain?
+1. Press 'Start a code', read, then choose 'Make your code'.
+2. Use 'Add short' or 'Add long' to build each message's pattern.
+3. Press 'Give Dot this card', then 'Send a message' and 'Send this message'.
+4. Choose 'Compare for the job', 'Pretend rain', then 'Test all messages with Dot'.
 
 ```mermaid
 flowchart TD
@@ -308,34 +290,41 @@ flowchart TD
   s2 --> s3
 ```
 
-### Market Signs (`#words/signs`, spec 325)
+### Market Signs: the dictionary lookup (`#words/signs`, spec 325)
 
-1. Make a sign from a word and a prefix.
-2. Open the dictionary to check your spelling.
-3. Look at the guide words to find the right page.
-4. Press Check this page.
-5. Try a sign job with what you found.
+Make a sign and Try a sign job are separate benches that state their own moves; only the dictionary lookup needs a drawing.
+
+1. Choose 'Open the dictionary', then select a 'Word to find'.
+2. Look at the guide words at the top of each page.
+3. Turn to the page whose guide words your word fits between.
+4. Press 'Check this page'.
 
 ```mermaid
 flowchart TD
-  s0[Make a sign]
-  s1[Open the<br>dictionary]
-  s2[Use guide words]
+  s0[Open the<br>dictionary]
+  s1[Read the<br>guide words]
+  s2[Turn to the<br>right page]
   s3[Check this page]
-  s4[Try a sign job]
   s0 --> s1
   s1 --> s2
   s2 --> s3
-  s3 --> s4
 ```
 
-## Text is enough (16)
+### Needs one, chain drafted at build (4)
+
+These have an order of play the first screen does not show; LG-37 drafts each chain from the live page.
+
+| Bench | Spec | Order to draw |
+| --- | --- | --- |
+
+## Text is enough (13)
 
 | Bench | Spec | Why |
 | --- | --- | --- |
 | Dot's weather notes (`#almanac/weather`) | 281 | One choice and Save today's note; the page says it in two lines. |
 | Weather tallies (`#almanac/tallies`) | 281 | The opening line already says one mark per report, then count each row. |
 | The Feeding Board (`#living/who-eats`) | 286 | The page's first line is the whole turn: look, choose a basket, check. |
+| Common Cuts (`#workshop/common-cuts`) | 292 | The opening states the whole procedure, and the bench already has a worked picture sequence. |
 | Between the Marks (`#desk/gaps`) | 289 | Two buttons and Compare; each invitation states its Start and Finish. |
 | Upstream Post (`#almanac/upstream-reply`) | 291 | Open the letter, choose a question; no ordered play. |
 | Copy Frame (`#workshop/copy-frame`) | 295 | Labeled width and height buttons and one stated rule; Show another example covers it. |
