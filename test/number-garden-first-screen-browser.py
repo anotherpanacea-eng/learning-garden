@@ -32,6 +32,7 @@ try:
      p.goto(BASE+'#adventure/'+id);p.locator('.broad-activity .question').wait_for()
      r=p.evaluate("()=>{const q=document.querySelector('.broad-activity .question').getBoundingClientRect();return {top:q.top,bottom:q.bottom,open:document.querySelector('#broad-example')?.open??false,over:document.documentElement.scrollWidth>innerWidth+1}}")
      ok(not r['open'],f'{id} {w}x{h}: Pip’s example starts closed')
+     ok(r['top']>=0 and r['bottom']>r['top'],f'{id} {w}x{h}: question is laid out below the page top')
      ok(r[edge]<=h,f'{id} {w}x{h}: question {edge} {r[edge]:.0f} is on the first screen')
      ok(not r['over'],f'{id} {w}x{h}: no horizontal overflow')
     # Opening the example is still one tap, and the choice survives a redraw.
