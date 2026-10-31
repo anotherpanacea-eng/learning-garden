@@ -75,18 +75,27 @@ ok(makeCargaSource('medium')===null,'unknown amount makes no source');
  ok(useRiverSupport(st,'meaning',yes).changed===false&&useRiverSupport(st,'bogus',yes).ok===false,'repeat is a no-op, unknown support refused');
 }
 
-// Start again: exact move to earlier, bound of 8 refused, familiar set.
+// Start again: exact move to earlier, only real capacity refuses, familiar set.
 {
  const st=fresh();openCarga(st,yes);placeAll(st);submitCarga(st,yes);answerCarga(st,'tres',yes);
  seeBoatLine(st,yes);ok(st.spanish.boatLineSeen&&!riverMarketView(st).boatLinePending,'boat line once');
  const done=bytes(st.spanish.errands.carga);
  ok(startCargaAgain(st,yes).ok&&bytes(st.spanish.earlier[0])===done,'moves the errand unchanged');
  ok(st.spanish.errands.carga.tryId===2&&st.spanish.errands.carga.familiar&&st.spanish.errands.carga.state==='started','fresh try is familiar');
- for(let n=0;n<7;n++)startCargaAgain(st,yes);
- ok(st.spanish.earlier.length===8,'eight earlier tries');
- const full=bytes(st);ok(startCargaAgain(st,yes).error==='capacity'&&bytes(st)===full,'ninth refused, unchanged');
- ok(new Set([st.spanish.errands.carga,...st.spanish.earlier].map(e=>e.tryId)).size===9,'ids never reused');
+ for(let n=0;n<9;n++)startCargaAgain(st,yes);
+ ok(st.spanish.earlier.length===10,'no fixed cap below capacity');
+ const full=bytes(st);ok(startCargaAgain(st,{canExport:()=>false}).error==='capacity'&&bytes(st)===full,'a capacity refusal changes nothing');
+ ok(new Set([st.spanish.errands.carga,...st.spanish.earlier].map(e=>e.tryId)).size===11,'ids never reused');
  ok(riverMarketView(st).label==='started'&&riverMarketView(st).familiar,'label and familiarity');
+}
+
+// Restarting an unfinished, supported errand keeps it exactly and marks the fresh one familiar at the current amount.
+{
+ const st=fresh();openCarga(st,yes);useRiverSupport(st,'meaning',yes);placeItem(st,'miel-1','cafe',yes);
+ const kept=bytes(st.spanish.errands.carga);setRiverAmount(st,'longer',yes);
+ ok(startCargaAgain(st,yes).ok&&bytes(st.spanish.earlier[0])===kept,'unfinished try kept exactly');
+ const e=st.spanish.errands.carga;ok(e.familiar&&e.source.amount==='longer'&&!e.support.meaning,'fresh try is familiar, longer and unsupported');
+ ok(riverMarketView(st).label==='started','an unfinished earlier try is not Done before');
 }
 
 // A frozen source resumes unchanged after content keys, wording and order change.
@@ -138,7 +147,7 @@ ok(makeCargaSource('medium')===null,'unknown amount makes no source');
  shipped.push(riverMarketText.homeLink,riverMarketText.opening,riverMarketText.later,riverMarketText.noVoice,riverMarketText.helped,riverMarketText.boatLine.es,riverMarketText.boatLine.en,riverMarketText.capacity,riverMarketText.unavailable,riverMarketText.invitation,riverMarketText.notesDetails,...Object.values(riverMarketText.grammar).map(g=>g.text));
  for(const line of shipped)ok(companion.includes(plain(line)),`in the companion: ${plain(line).slice(0,60)}`);
  const spec=readFileSync(new URL('../docs/specs/324-river-market-cargo.md',import.meta.url),'utf8');
- for(const line of [riverMarketText.stillOnLanding,riverMarketText.amountLocked,riverMarketText.startedAgain,riverMarketText.phrasebookEmpty,riverMarketText.phrasebookBack,riverMarketText.wordByWord,riverMarketText.nextSentence,riverMarketText.pickedUp])ok(spec.includes(line),`in the 324 table: ${line}`);
+ for(const line of [riverMarketText.stillOnLanding,riverMarketText.amountLocked,riverMarketText.startedAgain,riverMarketText.phrasebookEmpty,riverMarketText.phrasebookBack,riverMarketText.wordByWord,riverMarketText.nextSentence,riverMarketText.pickedUp,riverMarketText.unknownVersion,riverMarketText.notesLink])ok(spec.includes(line),`in the 324 table: ${line}`);
  const all=bytes(riverMarketText)+bytes(makeCargaSource('longer'))+bytes(makeCargaSource('short'));
  ok(!all.includes('—'),'no em-dash in shipped text');
  ok(!/junco/.test(all),'the panel replaced junco');

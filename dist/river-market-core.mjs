@@ -7,7 +7,7 @@ const text=(x,max)=>typeof x==='string'&&x.length>0&&x.length<=max;
 const bool=x=>typeof x==='boolean';
 const own=(x,k)=>Object.hasOwn(x,k),clone=x=>structuredClone(x);
 const id=x=>typeof x==='string'&&/^[a-z][a-z0-9-]{0,39}$/.test(x);
-const AMOUNTS=['short','longer'],MAX_EARLIER=8,MAX_PICKS=12,MAX_SOURCE=48*1024;
+const AMOUNTS=['short','longer'],MAX_PICKS=12,MAX_SOURCE=48*1024;
 const unique=list=>new Set(list).size===list.length;
 const pair=(x,max)=>object(x)&&text(x.es,max)&&text(x.en,max);
 export function validCargaSource(s){
@@ -56,9 +56,11 @@ export function cargaOutcome(s,p){
  return {all:lines.length===0,lines};
 }
 const rootShape=r=>object(r)&&r.v===1;
-const rootReadable=r=>rootShape(r)&&AMOUNTS.includes(r.amount)&&object(r.errands)&&Array.isArray(r.earlier)&&r.earlier.length<=MAX_EARLIER&&int(r.nextTry,1,Number.MAX_SAFE_INTEGER)&&bool(r.boatLineSeen);
+const rootReadable=r=>rootShape(r)&&AMOUNTS.includes(r.amount)&&object(r.errands)&&Array.isArray(r.earlier)&&int(r.nextTry,1,Number.MAX_SAFE_INTEGER)&&bool(r.boatLineSeen);
 const tries=r=>[...(own(r.errands,'carga')?[r.errands.carga]:[]),...r.earlier];
 const doneBefore=r=>r.earlier.some(e=>validErrand(e)&&e.state==='done');
+// Any retained try had its note opened, finished or not.
+const seenBefore=r=>r.earlier.some(validErrand);
 export function riverMarketView(state){
  if(!object(state)||!own(state,'spanish'))return {status:'new',amount:'short',carga:null,cargaReadable:false,label:'none',earlier:[],familiar:false,boatLinePending:false,canStartAgain:false};
  const r=state.spanish;
@@ -68,7 +70,7 @@ export function riverMarketView(state){
  const earlier=r.earlier.map(x=>({readable:validErrand(x),errand:validErrand(x)?x:null}));
  const before=doneBefore(r),label=readable?(e.state==='done'?'done':'started'):before?'before':present?'started':'none';
  const anyDone=(readable&&e.state==='done')||before;
- return {status:'ready',amount:r.amount,carga:readable?e:null,cargaReadable:readable,cargaPresent:present,label,earlier,familiar:readable?e.familiar:before,boatLinePending:anyDone&&!r.boatLineSeen,canStartAgain:present&&r.earlier.length<MAX_EARLIER};
+ return {status:'ready',amount:r.amount,carga:readable?e:null,cargaReadable:readable,cargaPresent:present,label,earlier,familiar:readable?e.familiar:seenBefore(r),boatLinePending:anyDone&&!r.boatLineSeen,canStartAgain:present};
 }
 // A duplicated tryId makes every record sharing it ineligible for a story receipt, while each stays readable here.
 export function riverMarketTries(state){
@@ -89,7 +91,7 @@ const ensure=next=>{if(!own(next,'spanish'))next.spanish={v:1,amount:'short',err
 function freezeErrand(r){
  const source=makeCargaSource(r.amount);if(!validCargaSource(source))return null;
  if(tries(r).some(e=>object(e)&&e.tryId===r.nextTry))return null;
- const e={tryId:r.nextTry,source:clone(source),task:{placements:Object.fromEntries(source.items.map(i=>[i.id,null]))},taskEvidence:{firstSubmission:null,submissions:0,hints:[]},answer:null,support:{meaning:false,narration:false,oneAtATime:false},state:'started',familiar:doneBefore(r),at:now()};
+ const e={tryId:r.nextTry,source:clone(source),task:{placements:Object.fromEntries(source.items.map(i=>[i.id,null]))},taskEvidence:{firstSubmission:null,submissions:0,hints:[]},answer:null,support:{meaning:false,narration:false,oneAtATime:false},state:'started',familiar:seenBefore(r),at:now()};
  r.nextTry++;return e;
 }
 function edit(state,fn,options){return change(state,next=>{
@@ -141,7 +143,6 @@ export function useRiverSupport(state,kind,options){return edit(state,e=>{
 },options);}
 export function startCargaAgain(state,options){return change(state,next=>{
  const r=ensure(next);if(!r)return fail('unavailable');if(!own(r.errands,'carga'))return fail('unavailable');
- if(r.earlier.length>=MAX_EARLIER)return fail('capacity');
  r.earlier.push(r.errands.carga);delete r.errands.carga;
  const e=freezeErrand(r);if(!e)return fail('unavailable');r.errands.carga=e;return {ok:true};
 },options);}

@@ -50,7 +50,7 @@ export function riverMarketPage(state,owner=''){
  const view=core.riverMarketView(state),v=local(state,owner);
  const head=`<header class='river-heading'><h1 id='river-title' tabindex='-1'>${esc(T.homeLink)}</h1></header>`;
  const status=`<p class='river-status' id='river-status' role='status' aria-live='polite'></p>`;
- if(view.status==='unsupported'||view.status==='unavailable')return `<section class='river-page' data-river-root>${head}<p>${esc(T.unavailable)}</p><a href='#notes'>Download your notes</a>${status}</section>`;
+ if(view.status==='unsupported'||view.status==='unavailable')return `<section class='river-page' data-river-root>${head}<p>${esc(view.status==='unsupported'?T.unknownVersion:T.unavailable)}</p><a href='#notes'>${esc(T.notesLink)}</a>${status}</section>`;
  if(v.cuaderno)return `<section class='river-page' data-river-root>${head}${cuaderno(view)}${status}</section>`;
  const e=view.carga,arrival=`<p class='river-arrival'>${rich(view.status==='new'?T.opening:T.later)}</p>`;
  const entry=`<section class='river-errands' aria-labelledby='river-errands-title'><h2 id='river-errands-title'>${esc(T.errands)}</h2><div class='river-entry'>${button('open',`<i>La carga</i>`)}<span class='river-label'>${esc(labelText(view.label))}</span>${e?.support.meaning?`<span class='river-helped'>${esc(T.helped)}</span>`:''}</div></section>`;
@@ -108,7 +108,8 @@ export function bindRiverMarket(state,ctx={}){
    if(core.riverMarketView(state).carga?.state==='done'&&core.riverMarketView(state).boatLinePending&&write(()=>core.seeBoatLine(state,options)))v.boat=true;
    return redraw('#river-q-title',lines);}
   if(a==='again'){stop();if(!write(()=>core.startCargaAgain(state,options)))return;const nv=local(state,owner);nv.again=true;return redraw('#river-note-title');}
-  if(a==='cuaderno'||a.startsWith('note-')){stop();v.cuaderno=true;ctx.render?.();const next=document.querySelector('[data-river-root]');const key=a.slice(5);const d=key&&next?.querySelector(`[data-river-grammar='${key}']`);if(d)d.open=true;(d?.querySelector('summary')||next?.querySelector('#river-cuaderno-title'))?.focus({preventScroll:true});return;}
+  // Mi cuaderno and its Details notes show English, so meaning support is recorded first.
+  if(a==='cuaderno'||a.startsWith('note-')){stop();if(e&&!e.support.meaning&&!write(()=>core.useRiverSupport(state,'meaning',options)))return;v.cuaderno=true;ctx.render?.();const next=document.querySelector('[data-river-root]');const key=a.slice(5);const d=key&&next?.querySelector(`[data-river-grammar='${key}']`);if(d)d.open=true;(d?.querySelector('summary')||next?.querySelector('#river-cuaderno-title'))?.focus({preventScroll:true});return;}
   if(a==='cuaderno-close'){v.cuaderno=false;return redraw('#river-note-title');}
  },{signal});
 }

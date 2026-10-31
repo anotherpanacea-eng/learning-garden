@@ -17,6 +17,7 @@ export const riverMarketText=freeze({
  pickedUp:'picked up',landing:'On the landing',
  capacity:'There isn\'t room to save this change yet. Your work is unchanged. Ask a grown-up to export it or choose older work to delete.',
  unavailable:'This older errand can\'t be displayed here. It is still kept in your export. Other errands are open.',
+ unknownVersion:'This River Market notebook uses a format this version cannot read. Your work is kept in your notes download. The rest of the garden is open.',notesLink:'Download your notes',
  invitation:'Find three things at home you could name in Spanish. Make labels for them.',
  notesDetails:'The market practices reading short Spanish notes and acting on them. It doesn\'t assess Spanish ability. Errands marked \"Read with English help\" used the English meanings. A longer note is optional stretch reading, meant to be read with the English help; short sentences are the default. When a line speaks to more than one person, the game uses <i>ustedes</i>. In Spain, friends usually say <i>vosotros</i>; <i>ustedes</i> is also correct, and it keeps the verb forms simpler. If you speak Spanish, reading the notes aloud together helps more than anything the game can do.',
  grammar:{
