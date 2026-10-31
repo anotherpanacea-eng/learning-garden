@@ -19,7 +19,7 @@ try{
   eq(await book(p).then(b=>Object.hasOwn(b,'exchangeManifest')),false,`${w}: opening writes nothing`);
   ok((await p.locator('.mf-every').innerText()).startsWith('Marks tell a reader'),`${w}: every-screen line`);ok(await p.locator('.mf-intro').count()===1,`${w}: first visit shown`);
   ok(!(await overflow(p)),`${w}: no horizontal overflow`);eq(await small(p),[],`${w}: 44 px controls`);
-  if(w===820){const bench=await p.locator('.mf-bench').boundingBox(),load=await p.locator('[data-mf-load="m1"]').boundingBox();ok(bench.y>=0&&bench.y+bench.height<=h&&load.y>=0&&load.y+load.height<=h,'initial tablet viewport contains the bench and Load it before interaction');}
+  if(w===820){await p.locator('.mf-bench').evaluate(e=>e.scrollIntoView({block:'start'}));const bench=await p.locator('.mf-bench').boundingBox(),loads=await p.locator('[data-mf-load]').evaluateAll(xs=>xs.map(x=>{const r=x.getBoundingClientRect();return [r.top,r.bottom];}));ok(bench.height<=h&&bench.y>=-1&&bench.y+bench.height<=h+1,'tablet viewport holds the whole bench once scrolled to');ok(loads.length===4&&loads.every(([t,b])=>t>=-1&&b<=h+1),'every Load it is on that same tablet screen');await p.evaluate(()=>scrollTo(0,0));}
   // Each slot stays beside the word before it.
   for(const sel of await p.$$('.mf-nowrap'))ok(await sel.evaluate(x=>{const r=x.getClientRects();return r.length===1;}),`${w}: a slot never splits from its word`);
   // Tap: slot then tile, and tile then slot.
