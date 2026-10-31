@@ -31,6 +31,8 @@ Films stay attached to built endings: the mill film draft (PR254), then the Act 
 
 [Joining Dot’s Notes329](specs/329-joining-dots-notes.md) is delivered at `#post/manifest` ([release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/304#issuecomment-6545344052)): five revisable two-part notes and supported practice with periods, semicolons, colons, dashes and a fronted *because* clause. The list and clause benches are built; the remaining278 benches, story adapters and broader writing progression remain open.
 
+**Illustrated instructions:** Rhythm Studio, Mixing Table, Equal Blocks, Field Strips and Ribbon Measures now offer optional drawn how-tos ([release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/322#issuecomment-6545596524)). Play them or move one step at a time; reduced motion shows complete still steps with captions. Watching changes no notebook work. The [repaired guide audit](reviews/drawn-howto-check-2026-10-31.md) identifies the remaining selected guides; LG-37 continues in further batches. These are instructions for existing games, not new curriculum coverage.
+
 ## Course completion and audience plan
 
 The [two course routes](course-routes.md) turn the activity catalog into a first-year framework: **Make, notice and explain** and **Model, interpret and make a case**. Each has six blocks, first-block teaching order, all 26 strand endpoints, explicit missing bridges and human/off-screen work, plus an independently chosen French strand. They are mixable subject routes, not age placements, finished lessons or a promise to finish six story acts in one year. No personal learner information is part of the public plan.
