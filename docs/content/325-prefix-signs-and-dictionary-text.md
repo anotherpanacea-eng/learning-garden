@@ -5,11 +5,14 @@ Original town text selected from [263](263-market-signs-text.md), with the bound
 ## Exact exceptions and assignments
 
 - B3’s supplied part tag is **spells**, replacing263’s **spell**. The sentence needs *misspells*, and joining mis + spells keeps the two parts unchanged. This teaches no new suffix rule.
-- On the prefix bench, the control is **Word part**, not **word**, because graph is a meaningful part here, not the word for a chart. Child glossary addition: **Word part: a piece that helps build a word. In autograph, graph means writing.**
+- On the prefix bench, the control is **Word part**, not **word**, because graph is a meaningful part here, not the word for a chart. Child glossary addition: **Word part: a piece that helps build a word, like graph in autograph.**
 - The example’s literal labelled split is **mis + spell**, **un + named** or **un + noticed**, without dropping, adding or hiding either equal boundary letter. Use the selected spelling exactly; no glow/motion is necessary.
+- B5 merges the two overlapping negative meanings into one **not** destination, shared by un- and dis-. The seven destinations and their order are in the spec; matching is many-to-one. Its feedback now includes unsold and dislike.
+- Initial prefix source text is bare letters, such as **mis**; its separate standalone label is **mis-**. The hyphen is not joined into misspell. Double-letter markers and “Both {letter} letters stay” appear only for supplied joins, never discoveries.
+- The noun glosses below clarify antifreeze/autopilot and remove story-specific “yet” from unnamed; these are commission exceptions to263.
 - The first arrival retains263’s fictional scene, but no never-shipped scene, sibling destination or chapter contribution is linked.
 - The letter-order strip is exactly **a b c d e f g h i j k l m n o p q r s t u v w x y z**. Page comparison ignores only ASCII capital case; preserve the display capital in February.
-- The story’s dictionary is a larger book. Beside our bench, add **Dot uses a bigger dictionary in the story. This tiny book has only five pages.** This is a limit of the model, not a lexical verdict.
+- The story’s dictionary is a larger book. Beside our bench, add **Dot uses a bigger dictionary in the story. This tiny book has only selected pages.** This is a limit of the model, not a lexical verdict.
 - No Hear control or speech request is commissioned in this slice. A grown-up may read prompts, stories and cards together. Ordinary accessibility reading of text remains available; it is not reviewed phonics audio.
 
 ## Navigation and bench controls
@@ -18,7 +21,7 @@ Original town text selected from [263](263-market-signs-text.md), with the bound
 
 Prefix bench: **Prefix / Word part / Choose a prefix / Choose a word part / Keep this sign / Clear my sign / Kept signs / Reopen this sign**. Missing selection: **Choose both parts before keeping this sign.** Equal boundary: **Both {letter} letters stay.** Kept: **Your sign is kept. You can make another.** Already kept: **This sign is already in your shelf.** Cleared: **Your waiting sign is clear. Your kept signs are still here.**
 
-For an unlisted pair use263’s exact discovery line, then **This tiny book has no page for this combination. Try a bigger dictionary together.** The same bigger-book invitation remains available for the19 supplied joins, labelled **Check in a bigger dictionary**. No external link or dictionary verdict is implied.
+For an unlisted pair use263’s exact discovery line, then **This tiny book has only selected words. Try a bigger dictionary together.** The same bigger-book invitation remains available for the19 supplied joins, labelled **Check in a bigger dictionary**. No external link or dictionary verdict is implied.
 
 Book: **The Stall Dictionary / A made-up model / Word to find / Choose a word / Check this page / Page {n} of {total} / Guide words / ABC order**. Fit: **You found the page. Read down to {word}.** Different: **Keep looking. Compare your word with the guide words, one letter at a time.** No readable chosen target: **This earlier word cannot be checked here. Choose another word. It stays in your Notes.** Earlier check label: **Checked before your last change**.
 
@@ -159,7 +162,7 @@ Worked example: *The word for covering bread in paper*
 
 **Prefixes:** re-, pre-, un-, dis-, mis-, anti-, auto-, super-.
 
-**Joins on the sign board, with their meanings:** reopen, open again · reuse, use again · preheat, heat before · prepay, pay before · preview, a look before · unsold, not sold · unwrapped, not wrapped · unnamed, with no name yet · unnoticed, not noticed · dislike, not like · disobey, not obey · misprint, a mistake in printing · mislabel, label wrongly · misspell, spell wrongly · antifreeze, works against freezing · autograph, your own name, written by you · autopilot, flies a plane by itself · superstar, a very famous star · supermarket, a very big food store.
+**Joins on the sign board, with their meanings:** reopen, open again · reuse, use again · preheat, heat before · prepay, pay before · preview, a look before · unsold, not sold · unwrapped, not wrapped · unnamed, with no name · unnoticed, not noticed · dislike, not like · disobey, not obey · misprint, a mistake in printing · mislabel, label wrongly · misspell, spell wrongly · antifreeze, a liquid that helps stop freezing · autograph, your own name, written by you · autopilot, a device that steers a plane automatically · superstar, a very famous star · supermarket, a very big food store.
 
 **The join:** each join shows prefix and word in two colors. Where a letter doubles, both letters glow: mi**s s**pell, u**n n**amed, u**n n**oticed.
 
@@ -243,7 +246,7 @@ Worked example: *The word for covering bread in paper*
 - Hint: Which prefix means before?
 - Explanation: Pre- means before: preheat.
 
-**B3 (Seedling; root tag: spell).**
+**B3 (Seedling; root tag: spells).**
 - Prompt: When Pip rushes, he spells words wrong. He ___ them.
 - Choices: mispells (`double-letter-dropped`) · misspells ✔ · missspells (`extra-letter`)
 - Feedback: Mispells: A common slip. Mis plus spells keeps every letter: two s's. · Missspells: Mis has one s, and spells starts with one. That's two.
@@ -257,9 +260,9 @@ Worked example: *The word for covering bread in paper*
 - Hint: Is the name wrong, or not there yet?
 - Explanation: Un + named = unnamed: not named, with two n's.
 
-**B5 (Sapling, match).** Match each prefix to its meaning.
-- Pairs: re- → again or back · pre- → before · un- → not · dis- → not, or the opposite · mis- → wrongly · anti- → against · auto- → self · super- → above or more
-- Feedback for a wrong pair (`prefix-meaning-mixed`): Try it in a word you know: reopen, preheat, misspell, autograph.
+**B5 (Sapling, match).** Match each prefix to its usual meaning.
+- Pairs: re- → again or back · pre- → before · un- → not · dis- → not · mis- → wrongly · anti- → against · auto- → self · super- → above or more. Both un- and dis- share the not destination
+- Feedback for a wrong pair (`prefix-meaning-mixed`): Try a sign word: reopen, preheat, unsold, dislike, misspell, autograph.
 - Hint: Say a sign word that uses the prefix.
 - Explanation: Each prefix adds its meaning to the front of a word.
 
