@@ -970,6 +970,17 @@
         "experiment"
       ],
       "scope": "Take ribbons from one of two or three rows of 1 to 7 against Bramble's chosen play style. Supplied pictured explanations of matching rows and paired bundles stay separate from moves and practice. Who takes the last ribbon is not a math level; no independent strategy, subtraction, binary or topic claim."
+    },
+    {
+      "id": "lost-found-board",
+      "name": "The Lost and Found Board",
+      "status": "built-local",
+      "route": "#post/lost-and-found",
+      "patterns": [
+        "search",
+        "read"
+      ],
+      "scope": "One logic-grid mystery, Who borrowed what?: sort what witnesses saw from what they think, mark a 3 by 3 grid or list from ordered clues, say whether the clues decide yet, and check an answer that names the first broken clue. Authored sentences and clues; no open-ended inquiry."
     }
   ],
   "manualReferences": [
@@ -1868,6 +1879,13 @@
       "kind": "scoped-practice",
       "source": "dist/mending-shed-content.mjs",
       "scope": "A predicted test on authored pictures: choose a sample and an action, predict springs back, keeps the new shape or hardly changes, then see the authored result. Real materials, measurement, property vocabulary and grouping are not observed."
+    },
+    {
+      "game": "lost-found-board",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "scoped-practice",
+      "source": "dist/lost-found-content.mjs",
+      "scope": "A supported sort of authored witness sentences into what was seen and what is thought, with Why? and a sort-for-me option. The child's own observations and field inquiry are not observed."
     }
   ],
   "increments": [
