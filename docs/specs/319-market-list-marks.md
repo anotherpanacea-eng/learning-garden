@@ -24,9 +24,28 @@ All child-facing text comes verbatim from [the 278 companion](../content/278-exc
 | Stuck ladder | Step 1 (the item's hint); step 2's "Colon items" line for A1 and A2 and its "Semicolon list items" line for A3 and A4; step 3 | Other step-2 lines belong to later sets. |
 | Glossary | Manifest, Colon, Semicolon, Whole sentence, Lead-in | In a native disclosure. |
 | Off-screen card | The adult-led packing-list card and its grown-up line | Optional; nothing recorded. |
-| Grown-up panel | "What this teaches", "Terms" and "What it does not claim", trimmed to the colon, list commas and list semicolons | Drop sentences about bullets, clauses, titles, layout, Keeper's Desk and Spanish. Keep the *We need* style note and the serial-comma note. |
+| Grown-up panel | Trimmed from "What this teaches", "Terms" and "What it does not claim" | Exact text below. |
 
-New wording outside the companion is limited to these controls and readouts: **Read the market story again**, **Check** (A3), the crate text equivalent "Pip loads {n} crates: {labels}", the read-only notice for an unreadable saved line or item, and the Notes heading "Market list marks". They follow the child-copy glossary and get the same copy read as the companion lines.
+**Grown-up panel, exact text** (companion sentences, cut to this slice; nothing reworded):
+
+> **What this teaches:** a colon to introduce a list after a whole sentence; semicolons between list items that contain commas.
+>
+> **Terms:** England's national curriculum teaches these in Year 6 and calls a period a full stop; the child text uses American terms. In the Common Core, colons and semicolons for lists and clauses appear in grades 9 to 10, so this pack runs ahead of the US grade order for some children.
+>
+> **What it does not claim:** style guides differ. The colon is keyed only in running sentences: Chicago leaves it out after *We need*, but some house styles (Microsoft's, for one) allow a colon after a short lead-in such as "You can:" above a bulleted list. The comma before "and" in a list (the serial comma) is a choice and is never marked.
+
+**Wording outside the companion (exceptions, exact).** These follow the child-copy glossary and get the same copy read as the companion lines:
+
+| Where | Exact text |
+| --- | --- |
+| Back link | ← Post Office |
+| Story control | Read the market story again |
+| A3 button | Check |
+| Crate picture text equivalent | Pip loads {n} crates: {labels}. (Labels joined with " · "; with no crates: "Pip loads no crates.") |
+| Unreadable saved line or item | This saved work can't be opened here. It is kept as it is, and you can still download it from Notes. |
+| Unknown save version | This saved work is from a different version. It is kept as it is, and you can still download it from Notes. |
+| Save refused | That didn't save, so nothing changed. Your marks are still here. |
+| Notes heading | Market list marks |
 
 Before build, a script confirms that every shipped string appears in the companion (after the print rule), that no shipped string names Vadoalto, Nuria, Hollis, the high ford or a page, and that no shipped line has an em-dash. Card 3 and items A3 and A4 use river and cart goods (apples, honey cake, seeds, reed, letters). 278's review left them shared because they name no place beyond the town, river and bridge road; this slice keeps that reading.
 
@@ -81,22 +100,27 @@ One optional per-explorer root, the 278 shape trimmed to what this slice writes:
 ```
 exchangeManifest: {
   v: 1,
+  cardsSeen: bool,
   lists: { [lineId]: { variant: 'market', shown: [tileId], slots: { [slotId]: tileId },
-                       load: loadCode, supported: bool, at } },
+                       load: loadCode, text: string, crates: [string], said: string,
+                       supported: bool, at } },
   items: { [itemId]: { shown: [choiceId | tileId], answer: choiceId | { [slotId]: tileId },
+                       prompt: string, offered: [string], answerText: string, said: [string],
                        outcome: 'fits' | 'other', supported: bool, guided: bool, at } }
 }
 ```
 
 The root is absent until the first Load it, item answer or support exposure described below. Opening the page, reading the story or a card without its worked example, and choosing tiles write nothing; support exposure writes its flag before display. `lineId` is `m1` to `m4`, `slotId` is `s1` to `s3`, and `tileId` is `colon`, `semicolon`, `comma` or `empty`. Item choice ids are `a`, `b` and `c` in the order shown. A1, A2 and A4 store choice ids in `shown`; A3 stores its tile ids in the displayed order (`colon`, `semicolon`, `comma`). `at` is an ISO time written by the host clock, as elsewhere in the notebook; no field holds anything about the child, and there is no typed text.
 
-Each Load it replaces that line's entry with the current slots, the shown tile order, the code from the table and the time. `load` and `outcome` are the codes produced at that moment and are never recomputed when the notebook loads. Each item answer replaces that item's entry the same way.
+Each Load it replaces that line's entry with the current slots, the shown tile order, the code from the table and the time, **plus a frozen copy of what was shown**: `text` is the line as punctuated by the learner's tiles (empty slots leave no mark), `crates` the crate labels Pip drew, and `said` the Load it line shown. Each item answer replaces that item's entry the same way, freezing `prompt` (the item's card and prompt as shown), `offered` (the shown choice texts, or for A3 the tile names in shown order), `answerText` (the chosen choice text, or A3's card punctuated by the chosen tiles) and `said` (the feedback lines and explanation shown). `load`, `outcome` and every frozen string are written at that moment and never recomputed or compared with today's content. Notes and any later display read only these saved strings, so a future wording change never rewrites old work. Each frozen string is at most 400 characters and each array at most 8 entries.
 
-**Support is captured before it is shown.** `supported` becomes true, and is saved before the support appears, when the learner opens a teach card's worked example, opens any stuck-ladder step for that item, or has already seen feedback or a What fits panel for that line or item. A1 always records `guided: true` and `supported: true`, captured before its steps render, even with no ladder use. Once true, a flag stays true for that line or item. A false flag means no recorded support, not an independent attempt, and nothing is labeled independent. Opening support before any answer creates a minimal pending entry (`{ supported: true }` for a line, `{ supported: true, guided }` for an item) so the flag survives reload; this is the only write that precedes an answer.
+**Support is captured before it is shown.** `supported` becomes true for a line or item, and is saved before the support appears, when the learner opens any stuck-ladder step for that item, or has already seen feedback or a What fits panel for that line or item. Teach cards are page-level: opening any card's worked example first writes `cardsSeen: true` on the root, and every line or item answered after that copies `supported: true` into its entry. Set A sits in a native disclosure, **Practice: colons and lists**, closed by default; opening it is what displays A1, so that open event writes A1's pending entry before A1's steps render. A1 always records `guided: true` and `supported: true`, captured before its steps render, even with no ladder use. Once true, a flag stays true for that line or item. A false flag means no recorded support, not an independent attempt, and nothing is labeled independent. Opening support before any answer creates a minimal pending entry so the flag survives reload; this, and `cardsSeen`, are the only writes that precede an answer.
 
-**Validation is structural.** Check the ids, codes and counts the save holds against bounds (at most 4 lines, 3 slots per line, 4 shown tiles, 8 items, 3 shown choices), never against today's lines, answer key or wording. An unknown `v` or an unreadable entry stays exact and exportable; only the affected line or item turns read-only, with a line saying so and links to Notes and the Post Office. Additive fields written by a future 278 bench stay exact; no loader normalization, default injection, deletion or migration. Other `#post/*` roots, the story root and every other extension stay untouched.
+**Entry shapes.** A *pending* line is exactly `{ supported: true }`; a pending item is exactly `{ supported: true, guided: bool }`. A *completed* line has all of `variant`, `shown` (4 tile ids), `slots` (one tile id for every slot the line has: 3 for m1 to m3, 1 for m4), `load`, `text`, `crates`, `said`, `supported` and `at`. A completed item has all of `shown`, `answer`, `prompt`, `offered`, `answerText`, `said`, `outcome`, `supported`, `guided` and `at`, with `answer` a choice id for A1, A2 and A4 and a full three-slot map for A3. Any other mix, for example `{ supported: true, load: 'fits' }` with no slots, is unreadable: it stays exact and that line or item turns read-only.
 
-Every mutation clones a candidate, changes only `exchangeManifest`, passes its local shape check and the host's `canExport(candidate)` (the actual Notes JSON/import preflight), then commits. A refusal changes nothing and says so. Readers (render, Notes) write nothing. Notes gains a "Market list marks" section showing each kept line as punctuated text with its Load it code and support flag, and each answered item with its outcome and flags. Verify the actual export, `prepareProgressImport`, explorer import and reopen.
+**Validation is structural.** Check the ids, codes and counts the save holds against bounds (at most 4 lines, 3 slots per line, 4 shown tiles, 8 items, 3 shown choices), never against today's lines, answer key or wording. An unknown `v` keeps the whole root exact and makes the whole page read-only, with the unknown-version notice and links to Notes and the Post Office. In a `v: 1` root, an unreadable entry stays exact and exportable, and only that line or item turns read-only, with the unreadable notice. Additive fields written by a future 278 bench stay exact; no loader normalization, default injection, deletion or migration. Other `#post/*` roots, the story root and every other extension stay untouched.
+
+Every mutation clones a candidate, changes only `exchangeManifest`, passes its local shape check and the host's `canExport(candidate)` (the actual Notes JSON/import preflight), then commits. A refusal changes nothing and says so. Readers (render, Notes) write nothing. Notes gains a "Market list marks" section showing, from the saved strings only, each kept line's `text`, crates and `said` with its support flag, and each answered item's `prompt`, `answerText`, `said`, outcome and flags. Verify the actual export, `prepareProgressImport`, explorer import and reopen.
 
 ## Host and interaction safety
 
@@ -110,7 +134,7 @@ Before any callback acts, verify the connected root and control, the hash is exa
 
 Independent spec review before build, including a separate subject and copy read of the shipped subset. The defaults 278 proposed for its review asks hold for this slice under the owner's 2026-10-31 guidance to take recommended defaults: no colon after *We need* is keyed, with "in most school writing" on card 1; the serial comma is a choice and never keyed; first slice is The Manifest List. The title, clause, dash, bracket, headings and Spanish asks do not arise here.
 
-Source tests cover all 64 tile patterns for each of m1 to m3 and all 4 for m4: crate count and labels under the read rule, the Load it code by the order table, and What fits selection; every A1 to A4 choice and every A3 pattern; first-answer and replacement saves; support captured before display and surviving reload and import; structural validation of unknown, partial and additive roots; refused preflight; and pure readers. A content check confirms the shipped-string and page-free rules above.
+Source tests cover all 64 tile patterns for each of m1 to m3 and all 4 for m4: crate count and labels under the read rule, the Load it code by the order table, and What fits selection; every A1 to A4 choice and every A3 pattern; first-answer and replacement saves; support captured before display and surviving reload and import; structural validation of unknown, partial, pending-versus-completed and additive roots; frozen strings that Notes renders unchanged after the catalog wording is edited in a test copy; refused preflight; and pure readers. A content check confirms the shipped-string and page-free rules above.
 
 Native isolated Chrome at 320×600, 820×1000 and 1024×768: tap and keyboard tile placement; a market line never splits a slot from its neighboring word; the bench and Load it fit the initial tablet viewport; 44 px controls; focus visible; no horizontal page overflow; a 150% root-font stand-in; real Notes download, import and reload; saving-off; two explorers; stale controls. Render screenshots of each Load it outcome and inspect the crate labels. Physical iPad Safari, VoiceOver, text zoom and learning effects remain unqualified by Chrome.
 
