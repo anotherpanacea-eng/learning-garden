@@ -82,3 +82,5 @@ Tasks 2, 3 and C1 use card 6's worked example; task 1 extends card 5's; C2 is ca
 Invitation: **Write two sentences about something you found. Call it something new the second time. Read them to someone.** Nothing a child says or writes is captured.
 
 Grown-ups, added before 317's paragraph: **This bench practices holding writing together: words that mean the same thing, a clear "it", openers that show how paragraphs connect, and leaving out words a reader can fill in. Ellipsis here means leaving words out, not the three dots.**
+
+Manual teaching controls: **Worked example / Previous example part / Next example part**. Selection readout: **Tapped words / No words tapped yet.** Clearing message: **Your taps are cleared.** The existing frozen `teach` array stores the card text, worked-example title, then its three steps for this bench; reveal steps manually. Other benches retain their existing presentation.
