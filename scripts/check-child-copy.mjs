@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 export const copyScopes = [
+  {path:'dist/stained-map-ui.mjs',adultBlocks:[{start:'export function stainedMapNotes(',end:'\nexport function bindStainedMap(',reason:'Only used in Grown-up notes.'}],quotations:[]},
+  {path:'dist/stained-map-content.mjs',adultBlocks:[{start:'    "adultLine":',end:'});',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
   {path:'dist/act-three-ui.mjs',adultBlocks:[{start:'export function actThreeNotes(',end:'\nexport function bindActThree(',reason:'Only used inside Grown-up Keeper notes.'}],quotations:[]},
   {path:'dist/act-three-content.mjs',adultBlocks:[{start:'  "notes": {',end:'\n};',reason:'Only used in Grown-up Keeper notes.'}],quotations:[]},
   {path:'dist/market-signs-ui.mjs', adultBlocks:[{start:'export function marketSignsNotes(',end:'\nexport function bindMarketSigns(',reason:'Only used in Grown-up notes.'}],quotations:[]},
