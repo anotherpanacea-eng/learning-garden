@@ -3,10 +3,10 @@ export const frenchRoomsLessons = [
   {
     "id": "plan",
     "title": "Lire le plan",
-    "intro": "Voici le plan de la maison. Le salon est à gauche de la cuisine. La chambre est sous le salon sur le plan. Dans le salon, il y a une table et une chaise.",
-    "teach": "Une pièce fait partie de la maison. « Dans le salon » indique une pièce. « Sous le salon sur le plan » décrit la position sur la page.",
-    "meaning": "Here is the house plan. The living room is to the left of the kitchen. The bedroom is below the living room on the plan. In the living room there is a table and a chair.",
-    "teachMeaning": "A room is part of the house. “In the living room” identifies a room. “Below the living room on the plan” describes a position on the page.",
+    "intro": "Voici le plan de la maison. Le salon est à gauche de la cuisine. Sur le plan, la chambre est en dessous du salon. Dans le salon, il y a une table et une chaise.",
+    "teach": "Une pièce fait partie de la maison. « Dans le salon » indique une pièce. « En dessous du salon » décrit la position sur la page.",
+    "meaning": "Here is the house plan. The living room is to the left of the kitchen. On the plan, the bedroom is below the living room. In the living room there is a table and a chair.",
+    "teachMeaning": "A room is part of the house. “In the living room” identifies a room. “Below the living room” describes a position on the page.",
     "items": [
       {
         "id": "lit",
@@ -297,10 +297,10 @@ export const frenchRoomsLessons = [
             "feedback": "L’heure ne précise pas quelle table utiliser."
           }
         ],
-        "guided": "Quelle table : celle du salon ou celle de la cuisine ?",
+        "guided": "Un message dit : « Pose le sac sur le lit. » S’il y a deux chambres, tu demandes : « Dans quelle chambre ? »",
         "hint": "Il faut préciser la pièce, pas la couleur.",
         "example": "Près de quelle porte ?",
-        "guidedMeaning": "Which table: the one in the living room or the one in the kitchen?",
+        "guidedMeaning": "A message says: “Put the bag on the bed.” If there are two bedrooms, you ask: “In which bedroom?”",
         "hintMeaning": "You need to specify the room, rather than the color.",
         "exampleMeaning": "Near which door?"
       },
@@ -416,9 +416,9 @@ export const frenchRoomsLessons = [
     "id": "return",
     "title": "Un retour et un projet",
     "intro": "Je viens de rentrer. Je viens de poser le carnet sur la table du salon. Je vais chercher le sac dans la chambre. Ensuite, je vais revenir dans le salon.",
-    "teach": "Passé récent : venir de + infinitif. Ici : je viens de rentrer. Futur proche : aller + infinitif. Ici : je vais chercher. Devant une voyelle, de devient d' : Je viens d'arriver.",
+    "teach": "« Je viens de rentrer » indique une action très récente. « Je vais chercher » indique une action à venir. Devant une voyelle, « de » devient « d’ » : « Je viens d’arriver. »",
     "meaning": "I have just come home. I have just put the notebook on the living-room table. I am going to get the bag in the bedroom. Then I am going to return to the living room.",
-    "teachMeaning": "Recent past: venir de plus an infinitive; here, je viens de rentrer. Near future: aller plus an infinitive; here, je vais chercher. Before a vowel, de becomes d’: Je viens d’arriver means I have just arrived.",
+    "teachMeaning": "“I have just come home” describes a very recent action. “I am going to get” describes a coming action. Before a vowel, “de” becomes “d’”: “Je viens d’arriver” means I have just arrived.",
     "items": [
       {
         "id": "plan",

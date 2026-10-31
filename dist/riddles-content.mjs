@@ -131,16 +131,16 @@ export const riddles=[
   ['hola','hola','Hola means hello.'],
   ['gracias','gracias',null],
   ['adios','adiós','Adiós means goodbye.']
- ],'I sound a little like grateful.','Gracias means thank you. Someone might answer de nada, which means you are welcome.',null),
+ ],'I start with gra, like grateful.','Gracias means thank you. Someone might answer de nada, which means you are welcome.',null),
  card('perro','sapling','spanish','In Spanish, I am el perro. I wag my tail, and I say guau. What am I?','dog',[
   ['cat','A cat','A cat is el gato, and it says miau.'],
   ['horse','A horse','A horse is el caballo, and it neighs. It never says guau.'],
   ['dog','A dog',null]
- ],'Say guau out loud. What animal sounds like that?','Perro means dog. In Spanish, dogs say guau, the way English dogs say woof.',null),
+ ],'Say guau out loud. It rhymes with wow. What animal sounds like that?','Perro means dog. In Spanish, dogs say guau, the way English dogs say woof.',null),
  card('libreria','sapling','spanish','In Spanish, la librería looks like library, but you buy your books there. What is it?','bookshop',[
   ['bookshop','A bookshop',null],
-  ['library','A library','Here the clue is buying books. A lending library is usually called la biblioteca.'],
+  ['library','A library','La librería looks like library, but a library where you borrow books is la biblioteca.'],
   ['bakery','A bakery','A bakery is la panadería. You buy bread there, not books.']
- ],'Where do you pay for a new book?','In this riddle, la librería means a bookshop: the buying clue tells us. Biblioteca is the usual word for a library; words can have more than one meaning.',null)
+ ],'Where do you pay for a new book?','La librería looks like the English word library, but in Spanish it means a bookshop. A library where you borrow books is la biblioteca.',null)
 ];
 export const ownRiddle='Make up your own riddle. Pick something in the garden. Give one clue about how it looks and one about what it does. Then ask: what am I?';
