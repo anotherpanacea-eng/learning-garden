@@ -1,13 +1,13 @@
 # Early-return route inventory (spec 279 step 1)
 
-2026-10-31. `render()` in `dist/app.mjs` had 35 early-return blocks that each copied the explorer chip, the guide link and the nav highlight. Spec 279 counted eight on 2026-10-26; the rest were added since, which is the pattern the spec warns about. Each block now calls one `routeHeader(nav)`. The chooser branch and the binders stay in each block for now (spec 279 step 3 moves them into the route table).
+2026-10-31. `render()` in `dist/app.mjs` had 35 early-return blocks (36 with `#words/props`, which main gained from #286 while this was in review) that each copied the explorer chip, the guide link and the nav highlight. Spec 279 counted eight on 2026-10-26; the rest were added since, which is the pattern the spec warns about. Each block now calls one `routeHeader(nav)`. The chooser branch and the binders stay in each block for now (spec 279 step 3 moves them into the route table).
 
 `routeHeader(nav)` marks the nav link whose `href` is `nav` as the current page and every other link as not current. With no `nav` it marks none. The guide link names the explorer's chosen guide, with the first guide as the fallback. The shared route at the end of `render()` keeps its own guide and nav code and uses only the chip helper, `explorerHeader()`.
 
 | Route | Nav highlight |
 |---|---|
 | `#desk/writing`, `#desk/exchange`, `#desk/gaps` | none |
-| `#words/endings` | none |
+| `#words/endings`, `#words/props` | none |
 | `#journeys` (whole root) | none |
 | `#workshop/old-map`, `#workshop/lift`, `#workshop/switch-table`, `#workshop/hinge`, `#workshop/copy-frame`, `#workshop/ribbon-measures`, `#workshop/same-ground`, `#workshop/scale` | Workshop |
 | `#workshop/common-cuts` | none |
