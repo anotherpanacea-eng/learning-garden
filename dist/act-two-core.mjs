@@ -76,6 +76,7 @@ export const revealFloodLedger=(state,options={})=>{const v=actTwoView(state);if
 export const openUpstreamLetter=(state,options={})=>scene(state,'vadoalto-letter-one-read','letterReady',options);
 export const addStormMark=(state,options={})=>scene(state,'storm-mark-added','pageVisible',options);
 function preference(state,key,value,allowed,eligible,preserveBad,options){const v=actTwoView(state);if(!eligible(v)||!allowed.includes(value)||storyView(state).status!=='ready')return false;if(preserveBad&&own(state.story,key)&&!allowed.includes(state.story[key]))return false;if(state.story[key]===value)return true;return mutate(state,options,c=>{c.story[key]=value;});}
-export const setActTwoPageAmount=(state,value,options={})=>preference(state,'pageAmount',value,['short','longer','original'],v=>v.pageVisible,false,options);
-export const setActTwoFrameAmount=(state,value,options={})=>preference(state,'frameAmount',value,['short','longer'],v=>v.started||v.inheritedActII||storyView(state).pageVisible,true,options);
+function actThreeReading(state){const v=storyView(state),act=v.status==='ready'?v.record.acts.III:null;return {started:obj(act)&&(act.started===true||act.ended===true),pageVisible:obj(act)&&act.ended===true&&v.record.seenScenes.includes('ways-page-revealed')};}
+export const setActTwoPageAmount=(state,value,options={})=>preference(state,'pageAmount',value,['short','longer','original'],v=>v.pageVisible||actThreeReading(state).pageVisible,actThreeReading(state).pageVisible,options);
+export const setActTwoFrameAmount=(state,value,options={})=>preference(state,'frameAmount',value,['short','longer'],v=>v.started||v.inheritedActII||v.letterVisible||storyView(state).pageVisible||actThreeReading(state).started,true,options);
 export const setLetterAmount=(state,value,options={})=>preference(state,'letterAmount',value,['short','longer'],v=>v.letterVisible,true,options);

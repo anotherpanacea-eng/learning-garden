@@ -1,14 +1,17 @@
 import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
+import {readFileSync} from 'node:fs';
 import {freshState} from '../dist/core.mjs';
 import {chooseStoryArrival} from '../dist/story-arrivals-core.mjs';
-import {openUpstreamLetter} from '../dist/act-two-core.mjs';
+import {openUpstreamLetter,setActTwoFrameAmount,setActTwoPageAmount} from '../dist/act-two-core.mjs';
 import {startSeedExchange,keepSeedExchange} from '../dist/seed-exchange-core.mjs';
 import {startClockWalk,keepClockWalk} from '../dist/courier-clock-core.mjs';
 import {walkCases} from '../dist/courier-clock-content.mjs';
 import {startUpstream,postUpstreamQuestion,upstreamView} from '../dist/upstream-exchange-core.mjs';
 import {canExport} from './act-two-checks.mjs';
 import * as A from '../dist/act-three-core.mjs';
+import {actThreeContent as C} from '../dist/act-three-content.mjs';
+import {actThreeRoute,actThreePage,actThreeNotes,resetActThreeView} from '../dist/act-three-ui.mjs';
 
 const options={canExport},clone=structuredClone;
 export function actThreeSeed(){const state=freshState();assert.ok(chooseStoryArrival(state,'letter',options));assert.ok(openUpstreamLetter(state,options));return state;}
@@ -62,6 +65,8 @@ export function runChecks(){
  {
   const state=actThreeSeed();state.story.acts.III={started:true,ended:true,contributions:'broken',season:{kept:true}};state.story.acts.I='unreadable';state.story.acts.II=null;
   ok(A.actThreeView(state).started);ok(A.actThreeView(state).ended,'later ending survives unreadable prior acts and receipts');ok(A.revealWaysPage(state,options));eq(A.actThreeView(state).season,null);eq(state.story.acts.III.season,{kept:true});
+  ok(setActTwoFrameAmount(state,'longer',options),'reached Act III keeps frame choice available');ok(setActTwoPageAmount(state,'original',options),'Page 3 choice survives unreadable earlier acts');eq(A.actThreeView(state).frameAmount,'longer');eq(A.actThreeView(state).pageAmount,'original');
+  for(const [key,setter] of [['frameAmount',setActTwoFrameAmount],['pageAmount',setActTwoPageAmount]]){state.story[key]={earlier:'kept'};unchanged(state,()=>setter(state,'short',options),'malformed Act III reading choice');eq(A.actThreeView(state)[key],'short');}
  }
  for(const mode of ['missing','false','throw']){
   const state=actThreeHosts(),o=mode==='missing'?{}:{canExport:mode==='false'?()=>false:()=>{throw Error('synthetic refusal');}};
@@ -74,6 +79,28 @@ export function runChecks(){
   const state=actThreeSeed();ok(A.startActThree(state,{canExport:c=>{c.story={discarded:true};return true;}}));ok(A.actThreeView(state).started,'only the proposal before preflight is committed');
   const before=clone(state);state.story.seenScenes.push('ways-page-revealed');eq(A.actThreeView(state).pageVisible,false,'a scene does not imply the ending');state.story=before.story;
  }
- console.log(`Act III foundation: ${n} source-owner, receipt, preservation and preflight assertions passed; market reader and presentation remain in progress.`);
+ {
+  const state=actThreeHosts(),before=clone(state);resetActThreeView();
+  for(const mode of [{part:'hub'},{part:'chapter',chapter:'route'},{part:'ending'},{part:'page'}]){const html=actThreePage(state,mode);ok(!html.includes('Hollis'),'unreached Page 3 identity is not rendered');}
+  eq(state,before,'render and Notes do not start a story');actThreeNotes(state);eq(state,before);
+  ok(A.startActThree(state,options));let html=actThreePage(state,{part:'hub'});eq((html.match(/class="a3-stop /g)||[]).length,4,'four chapter entrances');ok(html.includes('0 of 4 chapters have work in this story.'));ok(!html.includes('data-a3-send'),'no disabled ending button before three contributions');
+  ok(setActTwoFrameAmount(state,'longer',options));html=actThreePage(state,{part:'chapter',chapter:'market'});ok(html.includes('<span lang="es">¡Pan, cestas, miel!</span>'),'reviewed market phrase carries its language');ok(!html.includes('¡Gracias!'),'uncommissioned chapter jobs are absent');
+  html=actThreePage(state,{part:'chapter',chapter:'seeds'});ok(html.includes('<span lang="es">Carrizo</span>'));ok(!html.includes('check:')&&!html.includes('can slow water'),'unsettled ecological claim is absent');
+  html=actThreePage(state,{part:'chapter',chapter:'letters'});ok(!html.includes("<summary>Keeper's note</summary>"),'unreviewed cross-language note is absent');
+  for(const chapter of ['seeds','route','letters'])ok(A.offerActThree(state,chapter,A.actThreeCandidates(state,chapter)[0].key,options));
+  html=actThreePage(state,{part:'hub'});ok(html.includes('data-a3-send'),'explicit ending action after three contributions');ok(!html.includes('Hollis'));
+  ok(A.sendActThree(state,8,options));html=actThreePage(state,{part:'ending'});ok(html.includes('act-three-ending.svg'));ok(html.includes(C.ending.alt));ok(!html.includes('Hollis'),'the ending does not reveal Page 3 itself');
+  html=actThreePage(state,{part:'page'});ok(html.includes('data-a3-reveal'));ok(!html.includes('Hollis'));ok(A.revealWaysPage(state,options));html=actThreePage(state,{part:'page'});ok(html.includes("Hollis&#39;s page"));ok(html.includes('Hollis taught me'));ok(html.includes('data-a3-page-leaf'));
+  const visible=clone(state);actThreePage(state,{part:'page'});actThreeNotes(state);eq(state,visible,'all reached readers remain pure');
+  const walk=state.courierClockWalk.cases[walkCases[0].id];walk.kept.snapshot.source.title='<img src=x onerror=alert(1)>';delete state.story.acts.III.contributions.route;html=actThreePage(state,{part:'chapter',chapter:'route'});ok(html.includes('&lt;img src=x onerror=alert(1)&gt;'),'frozen labels render as text');ok(!html.includes('<img src=x'));
+ }
+ for(const [hash,expected] of [['#almanac/beyond',{part:'hub'}],['#almanac/beyond/seeds',{part:'chapter',chapter:'seeds'}],['#almanac/beyond/unknown',{part:'hub'}],['#almanac/beyond/route/extra',{part:'hub'}],['#almanac/both-ways',{part:'ending'}],['#almanac/the-ways',{part:'page'}],['#almanac/beyond-ish',null],['#almanac/both-ways/extra',null]])eq(actThreeRoute(hash),expected,'bounded route '+hash);
+ {
+  const sources=['../docs/content/326-both-ways-across-willow-bridge-text.md','../docs/content/120-story/act-3.md','../docs/content/120-keeper-of-the-ways-text.md'].map(p=>readFileSync(new URL(p,import.meta.url),'utf8')).join('\n');
+  const plain=s=>s.replace(/\*/g,'');const allowedTemplates=new Set(Object.values(C.candidate).concat([C.notes.line]));
+  const leafs=x=>Array.isArray(x)?x.flatMap(leafs):x&&typeof x==='object'?Object.values(x).flatMap(leafs):typeof x==='string'?[x]:[];
+  for(const text of leafs(C)){if(text.startsWith('#')||allowedTemplates.has(text))continue;ok(plain(sources).includes(plain(text)),'finite authored string traces to a named reviewed source: '+text);}
+ }
+ console.log(`Act III: ${n} source-owner, receipt, preservation, finite-text and presentation assertions passed; market reader and host wiring remain in progress.`);
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runChecks();
