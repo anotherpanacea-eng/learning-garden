@@ -70,16 +70,17 @@ export function bindManifest(state,ctx){
  const local=(change,target)=>{if(!live())return;change();redraw(target);};
  // A write that must land before something is shown: refusal shows nothing new.
  const write=(fn,then,target)=>{if(!live())return;const r=fn();if(r===false){s.notice=T.refused;redraw('#mf-status');return;}if(r!=='noop')ctx.save?.();s.notice='';then?.(r);redraw(target);};
- const on=(sel,fn)=>root.querySelectorAll(sel).forEach(el=>el.addEventListener('click',e=>{if(!live()||el.disabled||!el.isConnected||!root.contains(el)||el.closest('details:not([open])'))return;fn(el,e);}));
+ const usable=el=>{if(!live()||el.disabled||!el.isConnected||!root.contains(el))return false;const scope=el.matches('summary')?el.parentElement?.parentElement:el;return !scope?.closest('details:not([open])');};
+ const on=(sel,fn)=>root.querySelectorAll(sel).forEach(el=>el.addEventListener('click',e=>{if(!usable(el))return;fn(el,e);}));
  on('[data-mf-intro]',()=>local(()=>{s.intro=true;},'.mf-intro'));
  on('[data-mf-length]',b=>local(()=>{s.longer=b.dataset.mfLength==='longer';},`[data-mf-length="${b.dataset.mfLength}"]`));
- root.querySelectorAll('[data-mf-worked] > summary').forEach(sum=>sum.addEventListener('click',e=>{e.preventDefault();if(!live())return;const id=sum.parentElement.dataset.mfWorked;if(s.worked[id]){local(()=>{s.worked[id]=0;},`[data-mf-worked="${id}"] > summary`);return;}write(()=>markCardsSeen(state,options),()=>{s.worked[id]=1;},`#mf-steps-${id}`);}));
+ root.querySelectorAll('[data-mf-worked] > summary').forEach(sum=>sum.addEventListener('click',e=>{e.preventDefault();if(!usable(sum))return;const id=sum.parentElement.dataset.mfWorked;if(s.worked[id]){local(()=>{s.worked[id]=0;},`[data-mf-worked="${id}"] > summary`);return;}write(()=>markCardsSeen(state,options),()=>{s.worked[id]=1;},`#mf-steps-${id}`);}));
  on('[data-mf-next]',b=>local(()=>{s.worked[b.dataset.mfNext]++;},`#mf-steps-${b.dataset.mfNext}`));
  const place=(owner,slot,tile)=>{s.drafts[owner][slot]=tile;s.tile=null;s.slot=null;if(owner!=='A3'){s.hidden[owner]=true;s.loaded[owner]=false;}};
  on('[data-mf-tile]',b=>local(()=>{const group=b.dataset.mfTray,t=b.dataset.mfTile,[o,sl]=(s.slot||'').split(':');if(s.slot&&(group==='A3')===(o==='A3'))place(o,sl,t);else{s.slot=null;s.tile=s.tile===`${group}:${t}`?null:`${group}:${t}`;}},`[data-mf-tray="${b.dataset.mfTray}"][data-mf-tile="${b.dataset.mfTile}"]`));
  on('[data-mf-slot]',b=>local(()=>{const [o,sl]=b.dataset.mfSlot.split(':'),[g,t]=(s.tile||'').split(':');if(s.tile&&(g==='A3')===(o==='A3'))place(o,sl,t);else{s.tile=null;s.slot=s.slot===b.dataset.mfSlot?null:b.dataset.mfSlot;}},`[data-mf-slot="${b.dataset.mfSlot}"]`));
  on('[data-mf-load]',b=>{const id=b.dataset.mfLoad;write(()=>loadLine(state,s.lines[id],s.drafts[id],options),()=>{s.hidden[id]=false;s.loaded[id]=true;},`#mf-result-${id}`);});
- root.querySelector('[data-mf-set] > summary')?.addEventListener('click',e=>{e.preventDefault();if(!live())return;if(s.setOpen){local(()=>{s.setOpen=false;},'[data-mf-set] > summary');return;}
+ root.querySelector('[data-mf-set] > summary')?.addEventListener('click',e=>{e.preventDefault();if(!usable(e.currentTarget))return;if(s.setOpen){local(()=>{s.setOpen=false;},'[data-mf-set] > summary');return;}
   const a1=manifestView(state).items.A1;if(a1?.shape==='unreadable'){local(()=>{s.setOpen=true;},'#mf-item-A1');return;}
   write(()=>markSupport(state,'items','A1',options,{guided:true}),()=>{s.setOpen=true;},'#mf-item-A1');});
  on('[data-mf-stuck]',b=>{const id=b.dataset.mfStuck;write(()=>markSupport(state,'items',id,options,{guided:id==='A1'}),()=>{s.ladder[id]=(s.ladder[id]||0)+1;},`#mf-ladder-${id}`);});

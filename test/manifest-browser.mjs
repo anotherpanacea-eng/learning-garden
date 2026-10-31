@@ -74,6 +74,15 @@ try{
   const before=(await book(p)).exchangeManifest;
   await p.evaluate(mode=>{const b=document.querySelector('[data-mf-choice="A2:b"]');if(mode==='detached')b.remove();else if(mode==='outside')document.body.append(b);else b.closest('details').open=false;b.click();},mode);
   eq((await book(p)).exchangeManifest,before,mode+' control cannot submit');await c.close();}
+ // A summary may open its own closed disclosure, but not act after removal,
+ // relocation outside the visit, or concealment inside a closed ancestor.
+ for(const selector of ['[data-mf-worked] > summary','[data-mf-set] > summary'])for(const mode of ['detached','outside','closed']){
+  const {c,p}=await fresh(820,1000),before=await book(p);
+  await p.evaluate(({selector,mode})=>{const sum=document.querySelector(selector);if(mode==='detached')sum.remove();else if(mode==='outside')document.body.append(sum);else{const wrapper=document.createElement('details');sum.parentElement.before(wrapper);wrapper.append(sum.parentElement);}sum.click();},{selector,mode});
+  eq(await book(p),before,`${selector}: ${mode} summary cannot save support`);
+  ok(!await p.locator('[data-mf-worked] ol,[data-mf-item]').count(),`${selector}: ${mode} summary reveals no support`);
+  eq(p.errors,[],`${selector}: ${mode} summary causes no page error`);await c.close();
+ }
  // Notes download, reset-free import as a new explorer, reload.
  {const {c,p}=await fresh(820,1000);await place(p,'m1','s1','colon');await place(p,'m1','s2','comma');await place(p,'m1','s3','comma');await p.locator('[data-mf-load="m1"]').click();const before=(await book(p)).exchangeManifest;
   await p.goto(url+'#notes');ok((await p.locator('details:has-text("Market list marks")').innerText()).length>0,'Notes section');
