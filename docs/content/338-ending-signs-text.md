@@ -132,7 +132,9 @@ Worked example: *basic + -ly*. 1. Basic ends in -ic. 2. Add -ally. 3. Basically.
 
 ### The Ending Signs bench (c)
 
-**Header:** Pick a word and an ending. Then pick a tool: just add, drop the e, y to i, or le to ly. For -ic words there is a harder tool: ic to ically. (263's header plus its Keeper's Desk tool, named because this slice offers it from arrival.)
+**Header:** Pick a word and an ending. Then pick a tool: just add, drop the e, y to i, or le to ly. For -ic words there is a harder tool: ic to ically.
+
+Author note (not child copy): this extends 263’s header with its Keeper’s Desk tool, named because this slice offers it from arrival.
 
 **Roots, in this order, each with its one authored ending, tool and word:**
 
