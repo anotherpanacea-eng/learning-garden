@@ -30,6 +30,17 @@ export const copyScopes = [
   {path:'dist/ribbon-measure-content.mjs', adultBlocks:[
     {start:" grownup:'", end:'\n});', reason:'Shown only in the For grown-ups panel.'},
   ], quotations:[]},
+  {path:'dist/lift-yard.mjs', adultBlocks:[
+    {start:'<summary>Grown-ups: sources and limits</summary>', end:'</details>`;}', reason:'Grown-ups sources and limits panel.'},
+  ], quotations:[]},
+  {path:'dist/lift-lever.mjs', adultBlocks:[
+    {start:'<summary>Grown-ups: sources and limits</summary>', end:'</details>`;}', reason:'Grown-ups sources and limits panel.'},
+  ], quotations:[]},
+  {path:'dist/lift-film.mjs', adultBlocks:[], quotations:[]},
+  {path:'dist/common-cuts-ui.mjs', adultBlocks:[], quotations:[]},
+  {path:'dist/common-cuts-content.mjs', adultBlocks:[
+    {start:"grownUp:'", end:'\n exampleLabel:', reason:'Shown only in the For grown-ups panel.'},
+  ], quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
