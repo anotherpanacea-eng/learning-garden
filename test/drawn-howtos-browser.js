@@ -42,7 +42,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
   for(const h of drawnHowtos.filter(h=>h.at)){const page=sample[h.at[0]]||h.at[0],label=`${h.id} on #${page}`,p=await setup(320,'#'+page,'reduce');
    eq(await p.locator('drawn-howto').count(),1,`${label}: one how-to`);
    ok(await p.evaluate(()=>{const t=document.querySelector('main h1'),e=document.querySelector('drawn-howto');return !!(t.compareDocumentPosition(e)&Node.DOCUMENT_POSITION_FOLLOWING);}),`${label}: placed after the page title`);
-   const before=await notebook(p);await p.evaluate(()=>{const fold=document.querySelector('drawn-howto').closest('details:not([open])');if(fold)fold.querySelector('summary').click();});await p.locator('.dh-open').click();await p.locator('.dh-picture').waitFor();
+   const before=await notebook(p);await p.evaluate(()=>{const fold=document.querySelector('drawn-howto').closest('details:not([open])');if(fold)fold.querySelector(':scope > summary').click();});await p.locator('.dh-open').click();await p.locator('.dh-picture').waitFor();
    for(let i=1;i<h.steps.length;i++)await p.locator('[data-dh="next"]').click();
    eq(await p.locator('.dh-all li').allTextContents(),h.steps.map(s=>s.caption),`${label}: every caption listed at the end`);
    ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${label}: no horizontal overflow`);
