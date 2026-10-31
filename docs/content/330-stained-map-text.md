@@ -1,6 +1,6 @@
 # 330 · The Stained Map: finite text commission
 
-Draft companion to [spec330](../specs/330-stained-map.md). **Not yet independently cleared.** Reuse project-owned [268 text](268-old-keepers-spellings-text.md) by the exact sections named below; do not copy external dictionary prose. The bounded audit must clear their word-history statements before build.
+Draft companion to [spec330](../specs/330-stained-map.md). **Finite commission; the owning PR records exact-head independent clearance. This file alone is not release proof.** Reuse project-owned [268 text](268-old-keepers-spellings-text.md) by the exact sections named below; do not copy external dictionary prose. The bounded audit must clear their word-history statements before build.
 
 ## Included from268
 

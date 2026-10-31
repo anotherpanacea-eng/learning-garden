@@ -1,6 +1,6 @@
 # 330 · The Stained Map
 
-Draft 2026-10-31, based on main `9cf48d17d958d0b8decd866bee597c81578d2875`. **Specification in preparation, not build or release clearance.** Bounded first text-based slice of [268](268-old-keepers-spellings.md), serving admitted LG-10 / LG-G1. [Finite text](../content/330-stained-map-text.md); [source audit](../source-audits/330-stained-map.md).
+Draft 2026-10-31, based on main `9cf48d17d958d0b8decd866bee597c81578d2875`. **Bounded specification; the owning PR records exact-head review clearance. This document is not implementation or release proof.** Bounded first text-based slice of [268](268-old-keepers-spellings.md), serving admitted LG-10 / LG-G1. [Finite text](../content/330-stained-map-text.md); [source audit](../source-audits/330-stained-map.md).
 
 ## Purpose and boundary
 

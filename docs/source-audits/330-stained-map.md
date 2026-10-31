@@ -1,6 +1,6 @@
 # Source audit · 330, The Stained Map
 
-Source pass2026-10-31. **Sources checked; independent specification/content review remains open.** This audits the bounded first slice, not [268](../specs/268-old-keepers-spellings.md)'s six-bench proposal. Its first pass left dictionary access/checks open; those limits have been revisited here.
+Source pass2026-10-31. **Source checks recorded here; the owning PR records independent specification/content clearance.** This audits the bounded first slice, not [268](../specs/268-old-keepers-spellings.md)'s six-bench proposal. Its first pass left dictionary access/checks open; those limits have been revisited here.
 
 ## Refreshed upstreams and curriculum disposition
 
