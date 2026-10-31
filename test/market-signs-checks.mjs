@@ -4,6 +4,7 @@ import {freshState,recommendations} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
 import {marketSignsCollection} from '../dist/market-signs-content.mjs';
 import * as c from '../dist/market-signs-core.mjs';
+import {marketSignsPage,marketSignsNotes} from '../dist/market-signs-ui.mjs';
 const copy=structuredClone;
 export function signsSeed(){const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;s.syntheticOther={exact:['retained',false]};return s;}
 export const signsReport=s=>({title:'After the Storm: observations',exportedAt:'2026-10-31T12:00:00.000Z',note:'Synthetic supplied sign practice.',explorer:{avatar:'sky',color:'blue',symbol:'leaf'},recommendation:recommendations(s),...s});
@@ -48,6 +49,9 @@ export function runMarketSignsChecks(){
  for(const action of [x=>c.openMarketBench(x,'prefix',{canExport:()=>false}),x=>c.openMarketJob(x,'E2',{canExport:()=>{throw Error('synthetic refusal');}})]){const x=signsSeed(),before=copy(x);ok(!action(x).ok);eq(x,before,'failed preflight keeps full state');}
  const unknown=signsSeed();unknown.signs={v:99,opaque:['keep']};const unknownBefore=copy(unknown);ok(!c.openMarketBench(unknown,'prefix',options).ok);eq(unknown,unknownBefore,'unknown root never reset');
  const full=fullSignsNotebook();eq(full.signs.prefix.kept.length,152);eq(Object.keys(full.signs.records).length,10);ok(Object.values(full.signs.records).every(r=>r.checks.length===12&&r.count===16&&r.firstKept&&r.latestKept));const imported=prepareProgressImport(JSON.stringify(signsReport(full),null,2));ok(imported.ok,'maximum authored history imports through actual Notes format');eq(imported.state.signs,full.signs,'full frozen collection, drafts, histories and keeps transfer exact');
+ for(const x of [signsSeed(),s,historical,absentDraft,damaged,unknown,full]){const unchanged=copy(x);const page=marketSignsPage(x,'synthetic'),notes=marketSignsNotes(x);ok(page.includes('Market Signs'),'real page renders each retained shape');ok(typeof notes==='string');eq(x,unchanged,'page and Notes readers preserve every root');}
+ const altered=copy(historical);altered.signs.currentId='B1';altered.signs.view='practice';ok(marketSignsPage(altered,'synthetic').includes(oldSource.prompt),'real reader uses retained prompt, not current question');
+ const partial=signsSeed();c.openMarketJob(partial,'B2',options);partial.signs.records.B2.firstKept={opaque:['earlier version']};const opaque=copy(partial.signs.records.B2.firstKept);ok(marketSignsPage(partial).includes('This earlier version stays in Notes'),'bad kept version contained');ok(c.setMarketWork(partial,{choice:'c'},options).ok,'current job editable beside bad version');eq(partial.signs.records.B2.firstKept,opaque,'bad version stays exact');
  const refused=copy(full),before=copy(refused);ok(!c.setMarketPrefix(refused,{clear:true},{canExport:()=>false}).ok);eq(refused,before,'refused real edit preserves maximum notebook');
  console.log(`Market Signs: ${n} checks passed (152 joins,170 page cases,56 matching placements,24 orders, saved sources and full Notes transfer).`);return n;
 }
