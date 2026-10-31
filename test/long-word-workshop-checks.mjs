@@ -96,6 +96,11 @@ const help=start(),helpBefore=longWordPage(help);refuse(help,()=>C.useLongWordHe
 const oversized=start();const big=root(oversized).source.words[0];big.text='synthetic';big.pieces=Array.from({length:64},(_,i)=>({id:'p'+i,text:'x'.repeat(64)}));big.example.order=['p0'];word(oversized).order=big.pieces.map(p=>p.id);eq(C.longWordText(big,word(oversized).order).length,4096);ok(canExport(oversized));refuse(oversized,()=>C.checkLongWord(oversized,'catchment',options));
 const limit=start();let lo=0,hi=MAX_IMPORT_BYTES;while(lo<hi){const mid=Math.floor((lo+hi+1)/2);limit.syntheticPadding='x'.repeat(mid);if(canExport(limit))lo=mid;else hi=mid-1;}limit.syntheticPadding='x'.repeat(lo);ok(canExport(limit));refuse(limit,()=>C.checkLongWord(limit,'catchment',options));
 
+// Explicitly absent options refuse rather than throwing; a new full comparison
+// replaces the known partial notice while retaining unknown check extensions.
+for(const op of operations){const s=clone(base);refuse(s,()=>op(s,null));}
+const renewed=start('glossary');root(renewed).glossary.picks.g1={future:'opaque'};yes(C.checkLongGlossary(renewed,options));ok(Object.hasOwn(root(renewed).glossary.check,'notice'));root(renewed).glossary.check.future='held';root(renewed).glossary.picks.g1='a';yes(C.checkLongGlossary(renewed,options));eq(root(renewed).glossary.check.coverage,'full');ok(!Object.hasOwn(root(renewed).glossary.check,'notice'));eq(root(renewed).glossary.check.future,'held');
+
 // Pure readers/speech never create an activity or mark help; no choices are narrated.
 const passive=fresh(),passiveBefore=clone(passive);resetLongWordView();ok(longWordPage(passive).includes('data-long-word-root'));eq(longWordNotes(passive),'');C.longWordView(passive);longWordSpeech(passive,'story');longWordSpeech(passive,'instruction');eq(passive,passiveBefore);
 for(const id of targets){const s=start();yes(C.openLongWord(s,id,options));const before=clone(s);eq(longWordSpeech(s,'sentence'),root(s).source.words.find(w=>w.id===id).sentence);for(const kind of ['pieces','choices','clue','example','feedback','trial','prompt'])eq(longWordSpeech(s,kind),'');longWordPage(s);longWordNotes(s);eq(s,before);}
