@@ -112,10 +112,17 @@ Every job: kind choice, contextLabel **A story from Willowbank**, no root tag. E
 
 | Id / Title | Prompt | Choices in order (key marked) | Picture / text alternative | Hint | Explanation | Teach |
 | --- | --- | --- | --- | --- | --- | --- |
-| D1 / Bramble's pumpkin | Bramble's sign: guess its ___. | a: wieght; b: wayt; c: weight [key] | pumpkin / A pumpkin rests on a weighing scale beside Bramble's notice. | Spell eight. Weight has the same middle. | Eight, weight and height share eigh. | card15 |
+| D1 / Bramble's pumpkin | Bramble's sign: guess its ___. | a: wieght; b: wayt; c: weight [key] | pumpkin / A pumpkin sits on a scale beside Bramble's notice. | Look at eight. Weight is w, then eight. | Eight, weight and height share eigh. | card15 |
 | D2 / Bread for everyone | Is there ___ bread for everyone? | a: enogh; b: enouhg; c: enough [key] | bread / Several loaves wait on the bread stall. | Enough shares ough with though and through. | Enough ends in ough, like though and through. | card15 |
-| D3 / A new cheese | Every week the cheese trader brings a ___ cheese. | a: different [key]; b: diffrent; c: differrent | cheese / Two differently shaped cheeses wait on the cheese stall. | Try three letter chunks: dif, fer, ent. | Dif, fer, ent: different, with two f's and one r. | card16 |
-| D4 / Eggs and apples | Keep the eggs and the apples ___. | a: seperate; b: separate [key]; c: seprate | eggs-apples / Eggs and apples wait in separate baskets. | Find rat inside the word. | Separate has rat inside it: sep, a, rat, e. | card16 |
+| D3 / A new cheese | Every week the cheese trader brings a ___ cheese. | a: different [key]; b: diffrent; c: differrent | cheese / A round cheese and a square cheese wait on the cheese stall. | Try three letter chunks: dif, fer, ent. | Dif, fer, ent: different, with two f's and one r. | card16 |
+| D4 / Eggs and apples | Keep the eggs and the apples ___. | a: seperate; b: separate [key]; c: seprate | eggs-apples / Eggs sit in one basket and apples in another. | Find rat inside the word. | Separate has rat inside it: sep, a, rat, e. | card16 |
+
+Optional easier examples, stored separately in each job:
+
+- D1: **Try this one first: eight and weight share eigh. Read the letters slowly with someone. Now look for a clue in your notice.**
+- D2: **Try this one first: though ends in ough: t, h, ough. Now look for those letters in your notice.**
+- D3: **Try this one first: difficult has a double f: d, i, ff, i, c, u, l, t. Now look for double letters in your notice.**
+- D4: **Try this one first: business starts with bus. A small word can help you remember letters. Now try the rat clue in your notice.**
 
 D1 guided steps shown before choices: **Weight shares letters with eight.** / **Those letters are eigh.** Others have no guided steps.
 
