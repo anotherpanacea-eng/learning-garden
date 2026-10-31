@@ -430,6 +430,16 @@
       "scope": "Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization."
     },
     {
+      "id": "river-market",
+      "name": "The River Market (Spanish)",
+      "status": "built-local",
+      "patterns": [
+        "read"
+      ],
+      "route": "#mercado",
+      "scope": "Spec 324's first errand, La carga: read a short Spanish note, unload the barge to the buildings it names, then answer one question, with glosses, local Spanish speech and Mi cuaderno. Supported reading practice, not a Spanish assessment; Spanish is outside Marble's organization and no topic coverage is claimed."
+    },
+    {
       "id": "words",
       "name": "Word Garden",
       "status": "live",

@@ -1,0 +1,33 @@
+/* The River Market (spec 324). */
+.river-page{max-width:68rem;margin:0 auto;padding:0 1rem 2rem}
+.river-page button{min-height:44px;min-width:44px;font-size:1rem}
+.river-page button:focus-visible,.river-page summary:focus-visible{outline:3px solid #183f39;outline-offset:2px}
+.river-page [lang=es]{font-style:normal}
+.river-amount,.river-support,.river-choices,.river-notes-links{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.river-amount p{flex-basis:100%;margin:.25rem 0}
+.river-page [aria-pressed=true]{background:#183f39;color:#fff;border-color:#183f39}
+.river-locked,.river-label,.river-helped{font-size:.95rem}
+.river-helped{border:1px solid currentColor;border-radius:1rem;padding:.1rem .6rem;margin-left:.5rem}
+.river-entry{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.river-errand{display:grid;gap:1rem}
+@media (min-width:820px){.river-errand{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}.river-errand>.river-replies,.river-errand>.river-question,.river-errand>p,.river-errand>button{grid-column:1/-1}}
+.river-note{background:#fbf7ec;border:1px solid #c9b98f;border-radius:.6rem;padding:1rem}
+.river-sentence{font-size:1.1rem;margin:.4rem 0;padding:.15rem .3rem;border-radius:.3rem}
+.river-current{background:#fff0b8;outline:2px solid #8a6d1d}
+.river-gloss{display:block;font-size:.95rem;color:#3f4f4b}
+.river-words{columns:2 12rem;padding-left:1.2rem}
+.river-scene{display:grid;gap:.75rem}
+.river-art{width:100%;max-height:6rem}
+.river-water{fill:#cfe5ea}.river-boat{fill:#8a5a32}.river-sail{fill:#f6efe0;stroke:#5c4630}.river-dock{fill:#a98457}
+.river-places{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.5rem}
+.river-place{border:2px solid #c9b98f;border-radius:.6rem;padding:.5rem;display:grid;gap:.4rem;align-content:start}
+.river-building{font-weight:700}
+.river-placed,.river-landing{display:flex;flex-wrap:wrap;gap:.4rem}
+.river-landing{border:2px dashed #7c8f8a;border-radius:.6rem;padding:.5rem;min-height:3.5rem}
+.river-item{background:#fff;border:2px solid #7c8f8a;border-radius:.5rem}
+.river-marker{font-weight:700;text-decoration:underline}
+.river-line{margin:.4rem 0;font-size:1.05rem}
+.river-nudge{border-left:4px solid #8a6d1d;padding-left:.6rem}
+.river-grammar{margin:.5rem 0}
+.river-invitation{border-top:1px solid #c9b98f;margin-top:1.5rem;padding-top:.75rem}
+@media (prefers-reduced-motion:reduce){.river-page *{transition:none!important;animation:none!important}}
