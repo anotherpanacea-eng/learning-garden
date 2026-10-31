@@ -79,7 +79,7 @@ Twenty accepted pairs,76 possible single placements. Shared written letters need
 
 ## Two teaching cards
 
-Each body at most30 words. Steps revealed manually, one at a time; opening records only the card id as support, not success. D1 shows the first two card15 steps as guided work independently of support-panel opening.
+Each body at most30 words. Steps revealed manually, one at a time; opening a bench card records only the card id as support, not success. Embedded job teaching remains existing presentation-only supported material. D1 shows the first two card15 steps as guided work independently of support-panel opening.
 
 **card15 / Look for shared letters**
 
