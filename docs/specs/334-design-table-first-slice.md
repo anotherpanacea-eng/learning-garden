@@ -30,7 +30,7 @@ Route `#workshop/design`, open from the start. Link it from the Storm Workshop's
    - The **guided item** (must or limit) and the **Mary Anderson card** (A true thing from history), shown after the brief or from a button on the station.
    - **Practice:** A7 (sort four cards into Musts or Limits) and A8.
    - Authoring is tile assembly, not writing, and the spec claims no more.
-5. **Answers and feedback.** A choice item answers on one tap. A5 takes a whole number from 0 to 99 in a labeled numeric field with **Check**. A7 uses the same tap-then-tap placement. Each answer shows its authored feedback line; the item's explanation shows after its first right answer and stays available after that. A wrong answer can be changed and tried again.
+5. **Answers and feedback.** A choice item answers on one tap. A5 takes a whole number from 0 to 99 in a labeled numeric field with **Check**. A7 uses the same tap-then-tap placement and a **Check** that shows the first line in the copy sheet's A7 order; it is right only when all four cards are sorted correctly. Each answer shows its authored feedback line. On A4 to A8, the item's explanation shows after its first right answer and stays available after that; the guided items, the tags, the frame, Improve it and the side door have feedback lines only. A wrong answer can be changed and tried again.
 6. **"I'm stuck"** on A4 to A8: rung 1, the item's hint; rung 2, the item's I'm stuck line (an easier example and how to start); rung 3, **Skip for now**, which leaves the item untried and records nothing. Opening rung 1 or rung 2 is an explicit write: the item's support rises, through preflight, before the rung's text shows. If preflight refuses, the capacity line shows and the rung stays closed. Guided items show their steps from the start and have no ladder.
 7. **Key terms** for this slice (brief, criteria, constraints, trade-off) sit in a **Key terms** panel on both stations.
 8. **Grown-up notes.** The companion's grown-up panel, trimmed as the copy sheet sets out, and the grown-up line from the copy sheet.
@@ -47,6 +47,7 @@ designTable: {
   taught: { bags: bool, brief: bool },
   items: { [itemId]: {
     prompt: text,                        // as first shown, kept once
+    explanation: text | null,            // A4 to A8 only, as first shown, kept once
     options: [Opt],                      // choices, tiles or cards in their shown order, kept once; [] for A5
     slots: [Opt],                        // placement slots as shown, kept once; [] otherwise
     first: Answer | null,                // the first answer, kept once
@@ -123,11 +124,11 @@ Hard edges are authoring context, never locks. `topic-coverage.csv` stays unchan
    - The rain table's shipped data gives damp totals 1 and 9 of 30 (difference 8) and parcels 6 and 10; A5's answer is 8, and 9 and 3 give their tagged notes.
    - Every Check line on the tags, the frame and the brief, in the copy sheet's order, including the solution tile, each vague tile (placed and in the tray), a swapped must or limit, a need or user tile in the wrong slot, a short slot, a mismatched frame pair, the "best at everything" tag, an empty slot and right.
    - Both right frames are accepted; a right brief reads back as the companion's brief card exactly.
-   - Every choice item's right answer and every tagged wrong answer give the copy sheet's lines; the explanation appears only after the first right answer.
+   - Every choice item's right answer and every tagged wrong answer give the copy sheet's lines; A7's Check follows its order and is right only with all four cards sorted; on A4 to A8 the kept explanation appears only after the first right answer.
    - First answer and first brief check are kept once; `latest`, `right`, counts and `support` change without rewriting `first`; `right` never turns off; a skipped item stays unobserved; an answer at a count of 9999 updates `latest` and leaves the count at 9999.
    - Opening rung 1 or 2 writes support through preflight before its text shows, including a support-only record on an untried item that stays unobserved; a refused support write keeps the rung closed and the notebook unchanged.
    - Rendering, teach cards, reveals, placements, a pre-check flip, the Mary Anderson card and key terms make no write; the root stays absent until the first Start, answer, check or rung.
-   - Kept prompts, options, slots and lines render as saved after the content module's labels, lines and order change, and after an item or option id is removed (those records read-only).
+   - Kept prompts, explanations, options, slots and lines render as saved after the content module's labels, lines and order change, and after an item or option id is removed (those records read-only).
    - Unreadable entries, unknown sibling keys and an unknown `v` stay exact in the export, and the rest of the table stays open (or read-only for an unknown `v`).
    - A real-transfer refusal leaves the whole notebook unchanged.
    - Choice positions: across the slice's choice items the fitting choice is not always in one position (copy sheet table).

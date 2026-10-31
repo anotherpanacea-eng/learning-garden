@@ -176,6 +176,14 @@ Flip button on each vague tile: Can we check it? (176)
 
 **Practice (176):** A7 and A8 exactly as in 176's *Set A*. A7's bins are Musts and Limits, cards in 176's order.
 
+A7 Check lines, first that applies:
+
+| # | When | Line | Source |
+| --- | --- | --- | --- |
+| 1 | A card is still unsorted | Sort every card first. Which one is left? | new |
+| 2 | A card is in the wrong bin | Does this say what the crate does, or what limits you? | 176 (A7) |
+| 3 | Right | Yes. Two musts and two limits. | new |
+
 ## Choice positions (new)
 
 | Item | Fitting choice |
