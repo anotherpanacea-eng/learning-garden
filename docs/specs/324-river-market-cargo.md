@@ -25,7 +25,7 @@ Order on the page:
 
 **Support**, available throughout and recorded as support:
 
-- **What does it mean?** opens the English gloss under each sentence. A second control, **Word by word**, opens the companion's word list for this note. Using either marks the errand's task and question as supported, before any gloss shows.
+- **What does it mean?** opens the English gloss under each sentence. A second control, **Word by word**, opens the companion's word list for this note. Using either marks the errand's task and question as supported, before any gloss shows. So does every other path to English for this errand: feedback English on request, *Mi cuaderno* and the grown-up Details notes. Support and hint exposure only ever turn on within an errand, and later help does not rewrite the support kept with its first submission. Narration is recorded as requested support, not verified listening; sentence-at-a-time use is recorded separately.
 - **Hear it** reads the note with a local Spanish browser voice (`es-*` with `localService === true`), never an English fallback. With none, show the companion's no-voice line. **Stop** stops it. Extend `play-media.mjs` so that `language: 'es'` works like `'fr'` in `hearButton`, `spoken`, `localVoices`, `chooseLocalVoice` and the voice settings list, without changing English or French behavior.
 - **Read one sentence at a time** highlights one sentence in turn, with **Next sentence** (exceptions table) and Stop.
 
@@ -54,8 +54,11 @@ All Spanish, glosses, nudges, Marisol's lines, words and notes are the 117 compa
 | Picked-up item marker | picked up |
 | Placed item, accessible name | {item}, at {place} |
 | Grown-up line | River Market (Spanish): La carga {done / started / not started}{, with English help}. |
+| Mi cuaderno English for phrasebook words the word list doesn't gloss | el café: café · la panadería: bakery · el jardín: garden · dos: two · tres: three |
+| Unknown Spanish root version | This River Market notebook uses a format this version cannot read. Your work is kept in your notes download. The rest of the garden is open. |
+| Unknown-version Notes link | Download your notes |
 
-A source check confirms that every shipped Spanish line and gloss matches the resolved companion exactly, every English string is in the companion or this table, and no shipped line has an em-dash.
+A source check confirms that every newly authored River Market Spanish line and gloss matches the resolved companion exactly, every newly authored English string is in the companion or this table, and none of that copy has an em-dash. Unchanged shared explorer, navigation, Notes and speech-control copy stays owned by its existing module. Spanish speech labels and status messages reuse the existing speech templates with the language name "Spanish". This slice adds no Spanish preview passage; Try this voice previews the current frozen note.
 
 ## Saved work
 
@@ -65,8 +68,8 @@ Optional root `spanish` per explorer, using 117's shape for the one errand. It s
 spanish: {
   v: 1,
   amount: 'short' | 'longer',
-  errands: { carga: Errand },
-  earlier: [Errand],          // at most 8, newest last
+  errands: { carga?: Errand },  // {} after an amount choice; carga appears when its note opens
+  earlier: [Errand],          // newest last; bounded by the whole-notebook limits
   nextTry: n,                 // next try id, from 1
   boatLineSeen: bool
 }
@@ -81,11 +84,11 @@ Errand: {
 }
 ```
 
-- **Frozen source.** Opening the note freezes the whole errand at the current amount, following spec 83: version, amount, passage sentences with glosses, word list, items (ids, kinds, labels), places, the target place of each kind, every feedback line with its id and English, the question, choices with ids, order and fitting id, nudges, and the check rules. Resolve every action, check and display from this source, including on resume. Never look up today's content or key. An id or version alone is not a source. A content change affects only a newly started errand.
-- **Evidence.** The first submission (placements, outcome and support at that moment) is kept once; later submissions change the working placements and the count. `hints` is the bounded set of feedback ids exposed, set before the line is shown, never cleared on resume, and limited to ids in the frozen source. The question keeps each pick in order (at most 12) and whether the latest fits. Task and question outcomes stay separate, with no single correctness flag. A task never submitted is unobserved.
+- **Frozen source.** Opening the note freezes the whole errand at the current amount, following spec 83: version, amount, passage sentences with glosses, word list, items (ids, kinds, labels), places, the target place of each kind, every feedback line with its id and English, the question, choices with ids, order and fitting id, nudges, and the check rules. The source also holds the phrasebook membership and its bilingual entries, the three Details titles and texts, and the boat-name line in both languages. Resolve every action, check and display from this source, including on resume; shared navigation and control chrome stays current interface copy. Never look up today's content or key. An id or version alone is not a source. A content change affects only a newly started errand.
+- **Evidence.** The first submission (placements, outcome and support at that moment) is kept once; later submissions change the working placements and the count. `hints` is the bounded set of feedback ids exposed, set before the line is shown, never cleared on resume, and limited to ids in the frozen source. The question keeps each pick in order and whether the latest fits. Task and question outcomes stay separate, with no single correctness flag. A task never submitted is unobserved.
 - **Try ids.** Each newly opened errand takes `tryId` from `nextTry`, which then increases; ids are never reused, so a later story receipt can name one try without an array index. Validation does not renumber or repair ids. A duplicated `tryId` makes both records ineligible for such a receipt while they stay readable here.
-- **Start again** moves the current errand, unchanged, to the end of `earlier`, and freezes a fresh source at the current amount, so a child who started with short sentences can read the longer note. `familiar` is true when `earlier` holds a done *La carga*. When `earlier` already holds 8, refuse with the companion's capacity line and change nothing.
-- **Validation and preservation.** Validate ids, bounded shapes and stored outcomes, without regrading history. An unreadable errand shows the companion's unavailable line and stays raw and exportable, and the rest of the page stays open. An unknown root version stays raw, with an explanation and a Notes link. Preflight every explicit write, cloning the notebook and checking it against `dist/progress-limits.mjs` and the real Notes export, before committing. A refusal shows the capacity line and leaves the previous save unchanged.
+- **Start again** moves the current errand, unchanged, to the end of `earlier`, and freezes a fresh source at the current amount, so a child who started with short sentences can read the longer note. `familiar` is true when any retained earlier *La carga* has an opened note, finished or not; decide it when the fresh errand starts and never rewrite it on load. "Done before" still means an earlier finished try. A fresh errand after Start again is a new practice attempt, not evidence of a first independent encounter. Start again and every question pick are preflighted against the whole-notebook and real Notes-export limits like any other write; a refusal leaves the notebook unchanged, and no earlier try or pick is dropped to make room.
+- **Validation and preservation.** Validate ids, bounded shapes and stored outcomes, without regrading history. An unreadable errand shows the companion's unavailable line and stays raw and exportable, and the rest of the page stays open. An unknown root version stays raw, with the exceptions table's explanation and Notes link. Preflight every explicit write, cloning the notebook and checking it against `dist/progress-limits.mjs` and the real Notes export, before committing. A refusal shows the capacity line and leaves the previous save unchanged.
 - Notes export, import, reset and explorer switching carry `spanish` through the existing transfer. Add `spanish: 'The River Market (Spanish)'` to `progress-transfer.mjs`'s destination names.
 
 ## Integration
@@ -103,12 +106,17 @@ At 320×600, 820×1000 and 1024×768: no horizontal page scroll; 44 px targets; 
    - The fitting choice is second, and every nudge is shown.
    - Meaning support marks the task and question as supported, including after resume.
    - First submission and hints stay separate from the final fit; an untouched task stays unobserved.
-   - Start again moves the errand to `earlier` exactly, the bound of 8 is refused, and `familiar` is set.
+   - Start again moves the errand to `earlier` exactly; earlier tries and question picks are never truncated, and a real capacity refusal changes nothing. Restarting an unfinished, supported errand keeps it exactly, marks the fresh one familiar and uses the currently selected amount.
    - A frozen source resumes unchanged after the content module's keys, wording and order change.
    - Unreadable and unknown-version records stay exact.
    - A real-transfer refusal leaves the whole notebook unchanged.
    - Rendering and Notes make no write.
    - The source check described under Text.
+   - Absent and amount-only roots: no write from arrival or an unopened *Mi cuaderno*; the amount alone is saved and resumed, with `errands.carga` absent until the note opens.
+   - Support is set before every English-help display; narration and sentence-at-a-time use persist; the first submission's support never changes; hint ids are set before the line shows.
+   - Latest placements and latest question pick change independently, and Done needs both to fit; the boat-name line shows once.
+   - Removing or changing current content ids, quantities, keys and phrasebook membership leaves retained work on its own source; one unreadable errand leaves readable siblings open.
+   - Spanish records leave English and French suggestions and evidence unchanged.
 2. Native browser journeys at the three viewports:
    - Real taps and the keyboard place, move and submit.
    - The pressed marker is visible, along with 44 px targets and no overflow.
@@ -118,6 +126,9 @@ At 320×600, 820×1000 and 1024×768: no horizontal page scroll; 44 px targets; 
    - Hear selects only `es-*` voices, with a stub voice list for no voice, one Spanish voice, and only English voices.
    - Save, reload, Notes download and import, reset, saving off, two explorers, stale controls after navigation, and a forced preflight refusal.
    - Inspect rendered screenshots of the scene, not only the source.
+   - Home and all six Spanish-riddle answer links, exact-route entry, explorer selection, import and reset navigation, and the welcome-film exclusion; a suffixed route is not the market route.
+   - A non-fitting pick stays selected and can change; every help path; the unknown-version explanation and Notes link; focus after page, view and placement changes; polite feedback announcements; reduced motion.
+   - Hear rejects a nonlocal Spanish voice as well as English-only voice lists.
 3. The existing riddles, French, Paris and speech regressions stay green, and the source runner passes. This is followed by independent review of the exact candidate and the repository's landing procedure. Physical iPad, VoiceOver and audible Spanish speech stay unqualified until checked.
 
 Later slices, separately commissioned: *El camino* (with the directions note), *La receta* (with the two tortillas), *El tiempo* (with *va a* and *mañana*), *Una postal* and its reply, and the remaining grammar notes. Each reuses this root and route, and its Spanish stays bound to the panel-reviewed text revision. Any changed line needs a new panel pass.
