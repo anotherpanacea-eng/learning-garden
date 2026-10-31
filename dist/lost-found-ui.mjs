@@ -34,8 +34,9 @@ function grid(r,s,kind,l,live){
 }
 function tellYet(r,s,live){
  if(!C.roundSorted(r,1))return '';
- const ans=r.tellYet,way=ans==='yes'?C.anotherWay(s,r.answer):null;
- return `<section class="lf-tell"><h3>${esc(T.tellQuestion)}</h3><div class="lf-actions">${button('tell',esc(T.tellYes),`data-lf-choice="yes" aria-pressed="${ans==='yes'}"`,!live||ans!==null)}${button('tell',esc(T.tellNot),`data-lf-choice="not-yet" aria-pressed="${ans==='not-yet'}"`,!live||ans!==null)}</div>${ans==='not-yet'?p(T.tellNotLine):''}${ans==='yes'?p(T.tellYesLine.replace('{arrangement}',C.arrangementText(s,way))):''}${ans&&r.round===1?button('next-clue',esc(T.nextClue),'',!live,'primary'):''}</section>`;
+ const ans=r.tellYet,way=ans==='yes'?C.anotherWay(s,r.answer):null,proof=ans==='yes'?C.arrangementText(s,way):null;
+ if(ans==='yes'&&proof===null)return notice(T.unreadable);
+ return `<section class="lf-tell"><h3>${esc(T.tellQuestion)}</h3><div class="lf-actions">${button('tell',esc(T.tellYes),`data-lf-choice="yes" aria-pressed="${ans==='yes'}"`,!live||ans!==null)}${button('tell',esc(T.tellNot),`data-lf-choice="not-yet" aria-pressed="${ans==='not-yet'}"`,!live||ans!==null)}</div>${ans==='not-yet'?p(T.tellNotLine):''}${ans==='yes'?p(T.tellYesLine.replace('{arrangement}',proof)):''}${ans&&r.round===1?button('next-clue',esc(T.nextClue),'',!live,'primary'):''}</section>`;
 }
 function answer(r,s,l,live){
  if(!C.roundSorted(r,r.round))return '';

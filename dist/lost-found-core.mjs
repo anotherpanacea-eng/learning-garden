@@ -51,8 +51,9 @@ export function checkAnswer(s,round,answer){
  // Only the declared rows are checked; preserved unknown rows stay untouched.
  const declared=Object.fromEntries(rows.map(r=>[r,answer[r]]));const broken=activeClues(s,round).find(c=>!holds(c.pred,declared));return broken?{result:broken.id,clue:broken}:{result:'fits'};
 }
-export function anotherWay(s,answer){const ways=fitting(s,activeClues(s,1));return ways.find(a=>!sameArrangement(a,answer))??ways[0]??null;}
+export function anotherWay(s,answer){const ways=fitting(s,activeClues(s,1));return ways.find(a=>!sameArrangement(a,answer))??null;}
 export function arrangementText(s,a){
+ if(!object(a)||!s.rows.every(r=>Array.isArray(a[r.id])&&a[r.id].length===2&&s.things.some(t=>t.id===a[r.id][0])&&s.places.some(p=>p.id===a[r.id][1])))return null;
  const label=(list,k)=>list.find(x=>x.id===k)?.label??k;
  return s.rows.map(r=>`${r.label} had the ${label(s.things,a[r.id][0])} at ${label(s.places,a[r.id][1])}`).join('; ');
 }
@@ -73,7 +74,10 @@ export function validCase(r){
 export function caseWritable(r){
  if(!validCase(r))return false;
  if(own(r,'setAside')&&!(Array.isArray(r.setAside)&&r.setAside.length===0))return false;
- return ROUNDS.includes(r.round)&&r.source.clues.every(c=>ROUNDS.includes(c.round))&&r.source.sentences.every(x=>ROUNDS.includes(x.round));
+ if(!ROUNDS.includes(r.round)||!r.source.clues.every(c=>ROUNDS.includes(c.round))||!r.source.sentences.every(x=>ROUNDS.includes(x.round)))return false;
+ // This two-round explanation needs a real alternative first, then one conclusion.
+ // Unsupported frozen clues remain readable and exportable, without a false proof.
+ return fitting(r.source,activeClues(r.source,1)).length>=2&&fitting(r.source,activeClues(r.source,2)).length===1;
 }
 export function lostFoundView(state){
  const present=object(state)&&own(state,'mysteries'),root=present?state.mysteries:null;

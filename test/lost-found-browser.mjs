@@ -70,6 +70,17 @@ try{
  {const s=initializeExplorerState(freshState()),o={canExport:()=>true};C.startLadder(s,o);for(const [k,v] of Object.entries(SORT))C.sortSentence(s,k,v,o);C.checkLadder(s,o);s.mysteries.cases.ladder.setAside=['ladder-roof'];s.mysteries.cases.ladder.source.title='An older title';
   const {c,p}=await open(820,1000,{'explorer-1':s});const before=await book(p);ok((await act(p,'open').innerText()).includes('An older title'),'frozen source title');await act(p,'open').click();ok((await p.locator('.lf-mystery').innerText()).includes("This mystery can't be shown here."),'setAside case read-only');eq(await act(p,'check').count(),0,'no check on a read-only case');eq(await book(p),before,'kept exact');eq(p.errors,[],'no errors');await c.close();}
  {const s=initializeExplorerState(freshState());s.mysteries={v:9,later:[1]};const {c,p}=await open(820,1000,{'explorer-1':s});ok((await p.locator('aside.lf-notice').innerText()).includes('uses a format this version cannot read'),'unknown version line');eq(await p.locator('aside.lf-notice a[href="#notes"]').count(),1,'Notes link');eq(await act(p,'open').count(),0,'no board for an unknown version');eq((await book(p)).mysteries,{v:9,later:[1]},'raw');await c.close();}
+ // Unsupported frozen clues stay readable as raw work without a fabricated proof or render error.
+ for(const damage of ['contradiction','decided-first','ambiguous-final']){
+  const s=initializeExplorerState(freshState()),o={canExport:()=>true};C.startLadder(s,o);C.sortForMe(s,o);C.checkLadder(s,o);const r=s.mysteries.cases.ladder;
+  if(damage==='contradiction')r.source.clues[1].pred={kind:'place',row:'miller',place:'orchard'};
+  if(damage==='decided-first')r.source.clues[3].round=1;
+  if(damage==='ambiguous-final')r.source.clues[3].pred={kind:'place',row:'miller',place:'mill-roof'};
+  r.skipped=[1];r.tellYet='yes';const {c,p}=await open(820,1000,{'explorer-1':s});const before=await book(p);
+  await act(p,'open').click();ok((await p.locator('.lf-mystery').innerText()).includes("This mystery can't be shown here."),damage+': source-local recovery notice');
+  eq(await act(p,'check').count(),0,damage+': no unsupported check');eq(await act(p,'tell').count(),0,damage+': no invented alternative proof');eq(await book(p),before,damage+': raw case unchanged');
+  await p.goto(url+'#notes');const dl=p.waitForEvent('download');await p.locator('#download').click();const text=readFileSync(await(await dl).path(),'utf8');eq(JSON.parse(text).mysteries,s.mysteries,damage+': actual Notes retains source and history');eq(p.errors,[],damage+': no page error');await c.close();
+ }
  // Notes download and import, reset, two explorers, stale controls.
  {const {c,p}=await open(820,1000,{'explorer-1':initializeExplorerState(freshState()),'explorer-2':initializeExplorerState(freshState())});await act(p,'open').click();for(let i=0;i<3;i++)await act(p,'step').click();await act(p,'start').click();await act(p,'sort','[data-lf-sentence="miller-roof"][data-lf-choice="saw"]').click();await act(p,'mark','[data-lf-cell="t:pip:ladder"]').click();const held=(await book(p)).mysteries;
   ok(!Object.hasOwn(await book(p,'explorer-2'),'mysteries'),'other explorer untouched');

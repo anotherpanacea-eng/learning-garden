@@ -57,6 +57,20 @@ export function runChecks(){
  const g=fresh();eq(lostFoundSummary(C.lostFoundView(g)),'Lost and Found Board: Who borrowed what? not started.');
  // The Why? on a first sort is recorded before it shows; a refused sort shows nothing and writes nothing.
  const w=fresh();yes(C.startLadder(w,options));refused(w,()=>C.sortSentence(w,'miller-roof','saw',{canExport:()=>false}));refused(w,()=>C.openWhy(w,'miller-roof',{canExport:()=>false}));
+ // A retained source with no alternative or no unique final conclusion cannot supply this explanation.
+ for(const damage of ['contradiction','decided-first','ambiguous-final']){
+  const damaged=fresh();yes(C.startLadder(damaged,options));yes(C.sortForMe(damaged,options));yes(C.checkLadder(damaged,options));const dr=damaged.mysteries.cases.ladder;
+  if(damage==='contradiction')dr.source.clues[1].pred={kind:'place',row:'miller',place:'orchard'};
+  if(damage==='decided-first')dr.source.clues[3].round=1;
+  if(damage==='ambiguous-final')dr.source.clues[3].pred={kind:'place',row:'miller',place:'mill-roof'};
+  dr.skipped=[1];dr.tellYet='yes';const saved=clone(damaged.mysteries);
+  ok(C.validCase(dr),'the original frozen source remains structurally readable: '+damage);
+  ok(!C.caseWritable(dr),'unsupported explanation is read-only: '+damage);
+  refused(damaged,()=>C.checkLadder(damaged,options));eq(damaged.mysteries,saved);eq(C.lostFoundView(damaged).cases[0].record.firstCheck,saved.cases.ladder.firstCheck,'historical check stays readable and is not regraded');
+  eq(prepareProgressImport(JSON.stringify(report(damaged),null,2)).state.mysteries,saved,'raw damaged source survives actual Notes transfer');
+ }
+ eq(C.arrangementText(src,null),null,'no arrangement is not formatted as a proof');
+ const decided=clone(src);decided.clues[3].round=1;eq(C.anotherWay(decided,ANSWER),null,'the same complete answer is not another way');
  // A frozen source resumes unchanged after content changes.
  const f=fresh();yes(C.startLadder(f,options));const fs=f.mysteries.cases.ladder.source;fs.title='An older title';fs.clues[0].text='The miller stayed up top.';fs.rows[2].label='Mill keeper';
  eq(C.lostFoundView(f).cases[0].source.title,'An older title');ok(C.lostFoundView(f).cases[0].writable);
