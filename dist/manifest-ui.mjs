@@ -34,7 +34,7 @@ function sentence(s,owner,snap,draft,disabled){
 }
 function tray(s,ids,group){return `<div class="mf-tiles" role="group" aria-label="${esc(group)}">${ids.map(t=>btn(`data-mf-tile="${t}" data-mf-tray="${esc(group)}"`,NAMES[t],{pressed:s.tile===`${group}:${t}`})).join('')}</div>`;}
 // One of Dot's notes, or C5's line: the gap stays on the same line as the word before it.
-function joinSentence(s,owner,first,second,tile,disabled){const cut=first.lastIndexOf(' ');return `${esc(first.slice(0,cut+1))}<span class="mf-nowrap">${esc(first.slice(cut+1))}${slotButton(s,owner,'s1',0,tile,disabled)}</span> ${esc(second)}`;}
+function joinSentence(s,owner,first,second,tile,disabled){const cut=first.lastIndexOf(' ');if(tile==='period')second=second.charAt(0).toUpperCase()+second.slice(1);return `${esc(first.slice(0,cut+1))}<span class="mf-nowrap">${esc(first.slice(cut+1))}${slotButton(s,owner,'s1',0,tile,disabled)}</span> ${esc(second)}`;}
 function noteView(s,v,note){
  const x=v.joins[note.id],snap=s.notes[note.id],draft=s.drafts[note.id],unreadable=x?.shape==='unreadable';
  const result=x?.shape==='completed'&&!s.hidden[note.id]?`<div class="mf-result" id="mf-result-${note.id}" tabindex="-1"><p class="mf-joined mf-frozen">${esc(x.entry.text)}</p><p class="mf-said mf-frozen">${esc(x.entry.said)}</p></div>`:'';

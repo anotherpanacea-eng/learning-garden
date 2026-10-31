@@ -105,7 +105,7 @@ try{
   if(w===820){await p.locator('.mf-join').evaluate(e=>e.scrollIntoView({block:'start'}));const box=await p.locator('.mf-join .mf-lines').boundingBox(),reads=await p.locator('[data-mf-read]').evaluateAll(xs=>xs.map(x=>x.getBoundingClientRect().bottom));ok(box.y>=0&&Math.max(...reads)<=1000,'820: the five notes and every Read it fit in one screen once scrolled to');}
   for(const sel of await p.$$('.mf-join .mf-nowrap'))ok(await sel.evaluate(x=>x.getClientRects().length===1),`${w}: a gap never splits from its word`);
   // Tap gap then tile, and tile then gap.
-  await note(p,'n4','period');await p.locator('[data-mf-tray="notes"][data-mf-tile="comma"]').click();await p.locator('[data-mf-slot="n1:s1"]').click();
+  await note(p,'n4','period');ok((await p.locator('[data-mf-note="n4"] .mf-sentence').innerText()).includes(' We take the bridge road.'),`${w}: period capital in the editable note`);await p.locator('[data-mf-tray="notes"][data-mf-tile="comma"]').click();await p.locator('[data-mf-slot="n1:s1"]').click();
   ok((await p.locator('[data-mf-slot="n1:s1"]').getAttribute('aria-label'))==='Gap, comma ( , )',`${w}: gap names its tile`);
   await p.locator('[data-mf-read="n1"]').click();await p.locator('#mf-result-n1').waitFor();
   eq(await p.locator('#mf-result-n1 .mf-joined').innerText(),'The river path is fast, the bridge road is dry.',`${w}: punctuated note`);
