@@ -109,7 +109,7 @@ Right pairs: *dry letters* with *1 damp, not 9*; *lots of parcels* with *10 parc
 - Feedback (not fairly, 176): "Not fairly. The basket got more water. Test them the same way."
 - Feedback (yes, new): "Look again. Did both bags get the same water?"
 
-**Practice (176):** A4, A5 and A6 exactly as in 176's *Set A*, with their choices, tags, feedback, answer, steps, wrong-answer notes, hint, I'm stuck line and explanation. A5's other wrong numbers (new): "Not quite. Add each bag's tries, then take away."
+**Practice (176):** A4, A5 and A6 exactly as in 176's *Set A*, with their choices, tags, feedback, answer, steps, wrong-answer notes, hint, I'm stuck line and explanation, except A4's explanation (below). A4's explanation (adapted from 176, whose line says "drops" though the table counts damp letters): "The results decide: fewer letters got damp in the satchel." A5's right line (new): "Yes. 9 take away 1 is 8." A5's whole-number line (new): "Type a whole number from 0 to 99." A5's steps show with its explanation after the first right answer. A5's other wrong numbers (new): "Not quite. Add each bag's tries, then take away."
 
 ## Station 3: Write the brief (A made-up model)
 
