@@ -93,3 +93,7 @@ For grown-ups: “This room has no recorded phonics demonstrations. Model the wo
 Sense notes and picture requirements are those in brief55, including the sporting bat, badge pin, metal tin, toy fish's fin, storage bin, spinning top, sat before/after, puppet hop and bubble pop. No action requires handling a pin or physically hopping. All target pronunciations remain adult-provided; do not run these labels or the shared texts through browser speech as a phonics demonstration.
 
 Recovery/refusal copy follows the existing Parcel Labels pattern, using ordinary language: earlier work is kept, the affected card cannot be opened here, other choices remain available, and Notes can be downloaded. No “unsupported schema”, “exportable”, “provenance” or “recorded as support” appears in child instructions.
+
+Persistence status when browser saving fails: “Kept in this tab, but browser saving failed. Download Grown-up notes before leaving.”
+
+Saving-off status: “Kept in this tab; browser saving is off. Download Grown-up notes before leaving.” Navigation buttons: “Back to the prop box”, “Back: meet the prop”, “Next: make a label”, “Next: read together”.

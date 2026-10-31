@@ -143,4 +143,15 @@ try {
   eq(book.wordRoom.source.words.mat.meaning,'A different current catalog sentence.');
 } finally { rmSync(tmp,{recursive:true,force:true}); }
 
+// The ordinary Notes hook must tolerate every retained JSON shape without
+// traversing or rewriting an opaque recovery payload.
+const {wordRoomNotes,wordRoomPage}=await import('../dist/word-room-ui.mjs');
+for(const raw of [null,false,17,'future',[],{}, {version:99}, {version:1,recovered:{deep:['opaque']}}]) {
+  const book={wordRoom:raw},before=JSON.stringify(book);
+  ok(typeof wordRoomNotes(book)==='string','Notes total for arbitrary JSON');
+  ok(wordRoomPage(book,'synthetic').includes('data-word-room-root'),'unsupported box still has a room');
+  eq(JSON.stringify(book),before,'render and Notes never repair raw values');
+}
+eq(wordRoomNotes({}),'','no extra summary without a room');
+
 console.log(`Prop Box core: ${checks} checks passed (finite labels, drafts, frozen sources, partial readability, recovery and real preflight).`);
