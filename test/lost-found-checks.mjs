@@ -75,6 +75,12 @@ export function runChecks(){
  a.mysteries.cases.ladder.setAside=['ladder-roof'];const ab=clone(a.mysteries);ok(!C.lostFoundView(a).cases[0].writable);refused(a,()=>C.checkLadder(a,options));eq(a.mysteries,ab);
  const imported=prepareProgressImport(JSON.stringify(report(a),null,2));ok(imported.ok);refused(imported.state,()=>C.checkLadder(imported.state,options));eq(imported.state.mysteries,ab);
  a.mysteries.cases.ladder.setAside=[];ok(C.lostFoundView(a).cases[0].writable);yes(C.checkLadder(a,options));
+ // Inert I HEARD sorts and unknown answer rows: kept exactly, the case stays writable, and Check reads only the declared rows.
+ const h=fresh();yes(C.startLadder(h,options));for(const x of h.mysteries.cases.ladder.source.sentences.filter(x=>x.round===1))yes(C.sortSentence(h,x.id,x.sort,options));
+ h.mysteries.cases.ladder.sort.future='heard';h.mysteries.cases.ladder.answer={future:{kept:true},pip:['bucket','orchard'],bramble:['rope','footbridge'],miller:['ladder','mill-roof']};
+ const hi=prepareProgressImport(JSON.stringify(report(h),null,2));ok(hi.ok);eq(hi.state.mysteries,h.mysteries,'I HEARD and unknown rows import exactly');ok(C.lostFoundView(hi.state).cases[0].writable,'I HEARD leaves the case writable');
+ yes(C.checkLadder(hi.state,options));eq(hi.state.mysteries.cases.ladder.firstCheck.result,'fits','unknown rows are not checked');eq(hi.state.mysteries.cases.ladder.answer.future,{kept:true});eq(hi.state.mysteries.cases.ladder.sort.future,'heard');
+ eq(C.checkAnswer(h.mysteries.cases.ladder.source,2,{future:{kept:true},pip:['ladder','orchard'],bramble:['rope','footbridge'],miller:['bucket','mill-roof']}).result,'ladder-roof');
  const k=fresh();yes(C.startLadder(k,options));k.mysteries.cases.ladder.source.clues[3].round=3;ok(C.lostFoundView(k).cases[0].status==='started'&&!C.lostFoundView(k).cases[0].writable);refused(k,()=>C.sortSentence(k,'miller-roof','saw',options));
  // Real preflight refusal: the capacity limit, on an existing notebook.
  const q=fresh();yes(C.startLadder(q,options));q.filler='x'.repeat(MAX_IMPORT_BYTES);refused(q,()=>C.sortSentence(q,'miller-roof','saw',options));eq(C.sortSentence(q,'miller-roof','saw',options).error,'capacity');

@@ -48,7 +48,8 @@ export function checkAnswer(s,round,answer){
  const rows=s.rows.map(r=>r.id);if(!object(answer)||rows.some(r=>!Array.isArray(answer[r])||answer[r][0]==null||answer[r][1]==null))return {result:'missing'};
  const things=rows.map(r=>answer[r][0]),places=rows.map(r=>answer[r][1]);
  if(new Set(things).size!==3||new Set(places).size!==3)return {result:'duplicate'};
- const broken=activeClues(s,round).find(c=>!holds(c.pred,answer));return broken?{result:broken.id,clue:broken}:{result:'fits'};
+ // Only the declared rows are checked; preserved unknown rows stay untouched.
+ const declared=Object.fromEntries(rows.map(r=>[r,answer[r]]));const broken=activeClues(s,round).find(c=>!holds(c.pred,declared));return broken?{result:broken.id,clue:broken}:{result:'fits'};
 }
 export function anotherWay(s,answer){const ways=fitting(s,activeClues(s,1));return ways.find(a=>!sameArrangement(a,answer))??ways[0]??null;}
 export function arrangementText(s,a){
@@ -60,7 +61,7 @@ const validAnswer=(a,s)=>a===null||object(a)&&Object.entries(a).every(([r,v])=>!
 const validCheck=(c,s)=>object(c)&&ROUNDS.includes(c.round)&&validAnswer(c.answer,s)&&typeof c.result==='string'&&(['fits','missing','duplicate'].includes(c.result)||id(c.result))&&object(c.support)&&typeof c.support.why==='boolean'&&typeof c.support.skipped==='boolean';
 export function validCase(r){
  if(!object(r)||!validSource(r.source))return false;const s=r.source;
- if(!object(r.sort)||!Object.values(r.sort).every(v=>v==='saw'||v==='think'))return false;
+ if(!object(r.sort)||!Object.values(r.sort).every(v=>v==='saw'||v==='think'||v==='heard'))return false;
  if(!Array.isArray(r.skipped)||!r.skipped.every(x=>Number.isInteger(x))||!Array.isArray(r.why)||!r.why.every(x=>typeof x==='string'))return false;
  if(!object(r.marks)||!Object.values(r.marks).every(v=>v==='yes'||v==='no'))return false;
  if(!Number.isInteger(r.round)||![null,'yes','not-yet'].includes(r.tellYet)||!validAnswer(r.answer,s))return false;
