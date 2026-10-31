@@ -33,7 +33,7 @@ function grid(r,s,kind,l,live){
  return `<div class="lf-grid-block">${l.list?list:`<div class="lf-grid-wrap">${table}</div>`}<div class="lf-actions">${button('clear',esc(T.clear),`data-lf-grid="${kind}"`,!live)}</div>${confirm}</div>`;
 }
 function tellYet(r,s,live){
- if(!C.roundSorted(r,1))return '';
+ if(r.round!==1||!C.roundSorted(r,1))return '';
  const ans=r.tellYet,way=ans==='yes'?C.anotherWay(s,r.answer):null,proof=ans==='yes'?C.arrangementText(s,way):null;
  if(ans==='yes'&&proof===null)return notice(T.unreadable);
  return `<section class="lf-tell"><h3>${esc(T.tellQuestion)}</h3><div class="lf-actions">${button('tell',esc(T.tellYes),`data-lf-choice="yes" aria-pressed="${ans==='yes'}"`,!live||ans!==null)}${button('tell',esc(T.tellNot),`data-lf-choice="not-yet" aria-pressed="${ans==='not-yet'}"`,!live||ans!==null)}</div>${ans==='not-yet'?p(T.tellNotLine):''}${ans==='yes'?p(T.tellYesLine.replace('{arrangement}',proof)):''}${ans&&r.round===1?button('next-clue',esc(T.nextClue),'',!live,'primary'):''}</section>`;
