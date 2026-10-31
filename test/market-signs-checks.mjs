@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
 import {freshState,recommendations} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
-import {marketSignsCollection,marketEndingCollection,marketEndingCopy} from '../dist/market-signs-content.mjs';
+import {marketSignsCollection,marketEndingCollection,marketEndingCopy,marketPatternCollection,marketPatternCopy} from '../dist/market-signs-content.mjs';
 import {MAX_IMPORT_BYTES} from '../dist/progress-limits.mjs';
 import * as c from '../dist/market-signs-core.mjs';
 import {marketSignsPage,marketSignsNotes} from '../dist/market-signs-ui.mjs';
@@ -168,4 +168,164 @@ export function runMarketEndingChecks(){
  const maxBefore=copy(full);ok(!c.setMarketEnding(full,{clear:true},{canExport:()=>false}).ok);eq(full,maxBefore,'full notebook refused edit preserves every field');
  console.log(`Ending Signs: ${n} checks passed (360 tool cases: 24 fits,19 mismatches,78 discoveries,239 cannot; 24 C6 placements and full/incomplete mappings; 121 kept triples and combined Notes transfer).`);return n;
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){runMarketSignsChecks();runMarketEndingChecks();}
+
+
+// Independently transcribed from specification 339's finite-text tables.
+// Expected letters and family membership never come from the runtime catalog.
+const patternRows=[
+ ['small','SM','LL APPLES','a',['ball']],['monday','OPEN M','NDAY','o',['monday']],['money','M','NEY HERE','o',['monday','key']],
+ ['watch','W','TCH YOUR STEP','a',['after-w']],['warm','W','M BREAD','ar',['after-w']],['work','W','K IN PROGRESS','or',['after-w']],
+ ['key','K','','ey',['key']],['donkey','DONK','','ey',['key']],['section','SEC',' B','tion',['tion']],['station','STA','','tion',['tion']],['honey','H','NEY','o',['monday','key']]
+];
+const patternFamilies=[
+ ['ball','The ball family',['all','ball','call','small','stall','wall','walk','talk','chalk']],
+ ['monday','The Monday family',['Monday','money','honey','nothing','other']],
+ ['key','The key family',['key','valley','donkey','honey','money']],
+ ['after-w','The after-w families',['watch','want','swan','war','warm','swarm','word','work','world','worm']],
+ ['tion','The -tion chunk',['station','section','motion','fiction']]
+];
+const patternLetters=[['a','A'],['o','O'],['ar','AR'],['or','OR'],['ey','EY'],['tion','TION']];
+const patternNotes=[
+ ['Small belongs with ball, talk and walk.','Small has a before l.'],['Monday belongs with money and honey.','Monday has o.'],
+ ['Money has the o of Monday and ends in -ey, like key. Both families fit.','This gap takes o. The -ey is already on the board.'],
+ ['Watch belongs with want in the after-w families.','Watch has a after w.'],['Warm belongs with war in the after-w families.','Warm has ar. Worm has or and names a wriggly animal.'],
+ ['Work belongs with word in the after-w families.','Work has or after w.'],['Key belongs with valley and donkey.','Key ends in -ey.'],['Donkey belongs with key and valley.','Donkey ends in -ey.'],
+ ['Section belongs with station, motion and fiction.','Section ends in -tion.'],['Station belongs with section, motion and fiction.','Station ends in -tion.'],
+ ['Honey has the o of Monday and ends in -ey, like key. Both families fit.','This gap takes o. The -ey is already on the board.']
+];
+const patternKeys={A1:'b',A2:'a',A3:'c',A4:'b'};
+const patternMapping={small:'a',monday:'o',money:'o',watch:'a',warm:'ar',work:'or'};
+const patternWork=job=>job.kind==='match'?{placements:copy(patternMapping)}:{choice:patternKeys[job.id]};
+const patternLight={canExport:()=>true};
+function patternSelect(state,caseId,familyId,lettersId){for(const change of [{caseId},{familyId},{lettersId}])assert.ok(c.setMarketPattern(state,change,patternLight).ok);}
+export function fullPatternSignsNotebook(){
+ const full=fullEndingSignsNotebook();assert.ok(c.openMarketBench(full,'patterns',patternLight).ok);
+ for(const [caseId] of patternRows)for(const [familyId] of patternFamilies)for(const [lettersId] of patternLetters){patternSelect(full,caseId,familyId,lettersId);assert.ok(c.keepMarketPatternSign(full,patternLight).ok);}
+ for(const id of ['A1','A2','A3','A4','A5']){
+  assert.ok(c.openMarketPatternJob(full,id,patternLight).ok);full.signs.patterns.records[id].work=patternWork(full.signs.patterns.records[id].source);
+  for(let i=0;i<16;i++)assert.ok(c.checkMarketJob(full,patternLight).ok);
+  assert.ok(c.keepMarketVersion(full,patternLight).ok);assert.ok(c.showMarketHelp(full,'hint',patternLight).ok);assert.ok(c.showMarketHelp(full,'example',patternLight).ok);assert.ok(c.keepMarketVersion(full,patternLight).ok);
+ }
+ return full;
+}
+export function runMarketPatternChecks(){
+ let n=0;const ok=(v,m)=>{assert.ok(v,m);n++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;};
+ const source=marketPatternCollection(),light=patternLight;
+ const seed=()=>{const s=signsSeed();assert.ok(c.openMarketBench(s,'patterns',light).ok);return s;};
+ const pure=s=>{const before=copy(s);c.marketPatternView(s);c.marketSignsView(s);marketSignsPage(s,'synthetic');marketSignsNotes(s);eq(s,before,'pattern readers preserve all raw fields');};
+ const select=(s,id,f,l)=>{for(const change of [{caseId:id},{familyId:f},{lettersId:l}])ok(c.setMarketPattern(s,change,light).ok,'explicit pattern selection');};
+ eq(source.families.map(f=>[f.id,f.label,f.words]),patternFamilies,'independent 33 memberships');
+ const words=source.families.flatMap(f=>f.words);eq(words.length,33);eq(new Set(words).size,31);eq(source.letters.map(l=>[l.id,l.text]),patternLetters);
+ eq(source.cases.map(r=>[r.id,r.prefix,r.suffix,r.targetLettersId,r.familyIds]),patternRows,'eleven independent literal cases');
+ eq(source.cases.map(r=>[r.familyNote,r.letterNote]),patternNotes,'independent finite case notes');
+ eq(source.cases.map(r=>[r.title,r.clue,r.pictureId,r.pictureAlt]),[
+  ['Small apples','The apples are small.','apples','A basket of small apples.'],['Open Monday','The stall opens on Monday.','calendar','A market calendar marked Monday.'],['Money here','Put the money in this box.','pay-box','A payment box beside a market stall.'],
+  ['Watch your step','The path has a loose stone. Watch your step.','steps','Feet beside a loose paving stone.'],['Warm bread','The baker means bread that is warm.','bread','Steam rises from freshly baked bread.'],['Work in progress','The stall is being repaired. Work is in progress.','tools','Tools beside a partly repaired stall.'],
+  ['Key','This key opens the store.','key','A key beside the store door.'],['Donkey','A donkey carries the baskets.','donkey','A donkey carries two empty baskets.'],['Section B','Find section B of the market.','section','An apple stall marked as section B.'],['Station','This is the station.','station','A station platform and its sign.'],['Honey','The jar is full of honey.','honey','A honey jar beside a bee.']
+ ],'independent pictured clues');
+
+ eq(source.cases.map(r=>r.targetLine),['SMALL APPLES','OPEN MONDAY','MONEY HERE','WATCH YOUR STEP','WARM BREAD','WORK IN PROGRESS','KEY','DONKEY','SECTION B','STATION','HONEY']);
+ const meanings=[['here','here','Pay here.','place','An arrow points to the payment box.'],['hear','hear','I hear the bell.','listener','A listener turns toward a ringing bell.'],['two','two','Two pies.','pies','Two pies sit side by side.'],['too','too','Me too.','shared','One person holds a pie. A friend raises a hand to ask for one as well.'],['to','to','Go to the stall.','path','A path arrow points from a person to a stall.'],['bee','bee','A bee in the hive.','hive','A bee enters a hive.'],['be','be','Be careful.','caution','A person steps around a loose stone.'],['blue','blue','A blue sign.','blue-sign','A sign painted blue.'],['blew','blew','The wind blew.','wind','Wind bends a ribbon on a sign.']];
+ eq(source.meanings.map(m=>[m.id,m.word,m.sentence,m.pictureId,m.pictureAlt]),meanings,'nine independent sentence and picture meanings');
+ const cardRows=[
+  ['A before l','Ball, small, walk and talk all have a before l. If a word is in this family, spell it with a.','SM_LL APPLES',['Small is in the ball family.','The family has a before l.','Small apples.']],
+  ['The Monday family, and -ey','Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey and money belong to both.','The h____ stall',['Honey is in the Monday family: o.','It ends like key: -ey.','h, o, n, e, y.']],
+  ['After w','After w, look out. Watch and want have a. Warm and war have ar. Word and work have or.','W__M BREAD',['The baker means warm.','Warm is in the war family: ar.','Warm, not worm.']],
+  ['A -tion chunk','Station, section, motion and fiction all end in -tion. Many words do. Learn those four letters as one chunk.','APPLES IN SEC____ B',['The word is section.','It ends with the -tion chunk.','Section.']],
+  ['Two words, two spellings','Here and hear are different words. Here means this place. Hear means to listen. Read the whole sign, then choose.','PAY H___',['The sign tells you where to pay.','Where means a place.','Here.']]
+ ];
+ eq(source.cards.map(r=>[r.title,r.text,r.example,r.steps]),cardRows);eq(source.cards.map(r=>r.id),[1,2,3,4,5].map(i=>'pattern-card-'+i));ok(source.cards.every(r=>r.text.split(/\s+/).length<=30));
+ eq(source.story.dictionaryNote,'Dot uses a bigger dictionary. The small Stall Dictionary has only selected pages.');
+ eq(source.story.hook,'The stalls are coming back. Pip offered to paint the signs. He finished every one before breakfast.');
+ eq(source.story.short,"Pip's signs say HUNNY, WOLK THIS WAY, PAY HEAR and WORM BREAD. Dot checks the dictionary. They become honey, walk, here and warm.");
+ eq(source.offscreen.text,'Make a sign for an imaginary stall on paper. Read it with a grown-up. Check any spelling you wonder about in a dictionary.');
+ const bench=seed();eq(bench.signs.patterns.currentCaseId,null);eq(bench.signs.patterns.drafts,{});ok(!c.keepMarketPatternSign(bench,light).ok);
+ const partition={both:0,family:0,letters:0,neither:0};
+ for(const [id,prefix,suffix,target,families] of patternRows){
+  ok(c.validMarketPatternCase(source,source.cases.find(r=>r.id===id)));
+  for(const [familyId,familyLabel] of patternFamilies)for(const [lettersId,tile] of patternLetters){
+   const draft={familyId,lettersId},made=prefix+tile+suffix,ff=families.includes(familyId),lf=target===lettersId;
+   const result=c.marketPatternResult(source,id,draft);eq([result.kind,result.made,result.familyFits,result.lettersFit],['ready',made,ff,lf],id+'/'+familyId+'/'+lettersId);
+   partition[ff?lf?'both':'family':lf?'letters':'neither']++;
+   select(bench,id,familyId,lettersId);const text=htmlText(marketSignsPage(bench,'synthetic')),row=source.cases.find(r=>r.id===id);
+   ok(text.includes(`${familyLabel}: ${ff?'a fitting clue.':'a different clue.'} ${patternNotes[patternRows.findIndex(r=>r[0]===id)][0]}`),'independent family feedback');
+   const [,op,os,ot]=patternRows.find(r=>r[0]===id),targetLine=op+patternLetters.find(r=>r[0]===ot)[1]+os,letterNote=patternNotes[patternRows.findIndex(r=>r[0]===id)][1];
+   const line=lf?`${targetLine}. ${letterNote}`:`This sign makes ${made}. It could tell another story. The market note says ${targetLine}. ${letterNote}`;
+   ok(text.includes(line),'independent letter feedback and neutral unexpected spelling');ok(c.keepMarketPatternSign(bench,light).ok,'every combination keepable');
+  }
+  for(const draft of [{familyId:null,lettersId:null},{familyId:families[0],lettersId:null},{familyId:null,lettersId:target}]){
+   bench.signs.patterns.drafts[id]=copy(draft);bench.signs.patterns.currentCaseId=id;const r=c.marketPatternResult(source,id,draft),text=htmlText(marketSignsPage(bench));eq(r.kind,'incomplete');eq([r.familyFits,r.lettersFit],[null,null]);eq(r.made,draft.lettersId?prefix+patternLetters.find(l=>l[0]===target)[1]+suffix:null);
+   ok(!text.includes(': a fitting clue.')&&!text.includes(': a different clue.'),'no fit lines until both chosen');if(!draft.familyId)ok(text.includes(marketPatternCopy.missingFamily));if(!draft.lettersId)ok(text.includes(marketPatternCopy.missingLetters));ok(!c.keepMarketPatternSign(bench,light).ok);
+  }
+ }
+ eq(partition,{both:13,family:65,letters:42,neither:210});eq(bench.signs.patterns.kept.length,330);const kept=copy(bench.signs.patterns.kept);select(bench,'warm','after-w','ey');ok(c.keepMarketPatternSign(bench,light).ok);eq(bench.signs.patterns.kept,kept,'deduplicated exact triple');ok(htmlText(marketSignsPage(bench)).includes('This sign makes WEYM BREAD. It could tell another story.'));
+ const choices={A1:['hunney','honey','honny'],A2:['walk','wawk','wolk'],A3:['worm','wurm','warm'],A4:['hear','here','hiar']};
+ const wrong={A1:{a:'Honey is in the Monday family. It has an o.',c:'Honey ends in -ey, like key and valley.'},A2:{b:'Walk is in the talk family: a, then l.',c:'Walk is spelled like talk and chalk: a, l, k.'},A3:{a:'Worm is a real word, for a wriggly animal. Bread is warm, with ar.',b:'After w, warm has ar, like war.'},A4:{a:'Hear is a real word, for listening. This sign means this place.',c:'This place is spelled here, like there and where.'}};
+ eq(source.jobs.map(j=>j.id),['A1','A2','A3','A4','A5']);
+ for(const job of source.jobs){
+  ok(c.validMarketPatternJob(job));eq(job.contextLabel,'A story from Willowbank');ok(!Object.hasOwn(job,'tag'),'no injected root tag');
+  eq(job.example,job.id==='A4'?'Try this one first: I hear the bell. Hear is for listening. Now read your whole sign: is it about a place?':"Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.");
+  eq(job.steps,job.id==='A1'?['Honey is in the Monday family: o.','It ends like key: -ey.']:[]);
+  if(job.kind==='choice'){
+   eq(job.key,patternKeys[job.id]);eq(job.choices.map(r=>r.text),choices[job.id]);eq(job.different,wrong[job.id]);const right=job.choices.find(r=>r.id===patternKeys[job.id]);ok(job.choices.some(r=>r.id!==right.id&&r.text.length>=right.text.length),'correct choice never single longest');
+   for(const choice of job.choices){const r=c.marketJobResult(job,{choice:choice.id});eq(r.outcome,choice.id===patternKeys[job.id]?'fit':'different');if(r.outcome==='different')ok(r.feedback.includes(wrong[job.id][choice.id]));}eq(c.marketJobResult(job,{choice:null}).outcome,'incomplete');
+  }
+  const s=seed();ok(c.openMarketPatternJob(s,job.id,light).ok);if(job.kind==='match'){for(const [partId,destinationId] of Object.entries(patternMapping))ok(c.setMarketWork(s,{partId,destinationId},light).ok);}else ok(c.setMarketWork(s,patternWork(job),light).ok);ok(c.checkMarketJob(s,light).ok);const check=c.marketSignsView(s).record.checks.at(-1);eq(check.outcome,'fit');ok(check.supported&&check.guided);ok(c.keepMarketVersion(s,light).ok);const first=copy(c.marketSignsView(s).record.firstKept);ok(c.showMarketHelp(s,'hint',light).ok);ok(c.showMarketHelp(s,'example',light).ok);ok(c.keepMarketVersion(s,light).ok);eq(c.marketSignsView(s).record.firstKept,first);pure(s);
+ }
+ const match=source.jobs[4];eq(match.key,patternMapping);eq(match.parts.map(r=>[r.id,r.text]),[['small','SM_LL APPLES'],['monday','OPEN M_NDAY'],['money','M_NEY HERE'],['watch','W_TCH YOUR STEP'],['warm','W__M BREAD'],['work','W__K IN PROGRESS']]);eq(match.choices.map(r=>[r.id,r.text]),[['a','a'],['o','o'],['ar','ar'],['or','or']]);eq(match.matchCopy,{instruction:'Choose a gapped sign, then the letters that fill it.',destinationPrompt:'Choose letters.',destinationLabel:'Letters'});eq(match.different,{general:'Read each sign. Find its spelling family, then try the gap again.'});
+ const matchCounts={fit:0,different:0};for(const part of Object.keys(patternMapping))for(const dest of ['a','o','ar','or']){const r=c.marketJobResult(match,{placements:{...patternMapping,[part]:dest}});const expected=dest===patternMapping[part]?'fit':'different';eq(r.outcome,expected,'24 single-part assignments around complete map');matchCounts[expected]++;if(expected==='different')ok(r.feedback.includes('Read each sign. Find its spelling family, then try the gap again.'));}eq(matchCounts,{fit:6,different:18});
+ for(const missing of Object.keys(patternMapping)){const partial=copy(patternMapping);delete partial[missing];eq(c.marketJobResult(match,{placements:partial}).outcome,'incomplete');}eq(c.marketJobResult(match,{placements:copy(patternMapping)}).outcome,'fit','reused destinations are valid');
+ // The three job pointers and each case draft survive independent navigation.
+ const untouched=signsSeed(),beforeArrival=copy(untouched);pure(untouched);eq(untouched,beforeArrival);ok(!Object.hasOwn(untouched,'signs'));
+ c.openMarketJob(untouched,'E4',light);c.nextMarketJob(untouched,light);eq(untouched.signs.currentId,'B1');ok(!Object.hasOwn(untouched.signs,'patterns'));ok(!Object.hasOwn(untouched.signs,'endings'));
+ c.openMarketEndingJob(untouched,'C7',light);c.nextMarketJob(untouched,light);eq([untouched.signs.practiceGroup,untouched.signs.currentId],['prefix','B1']);ok(!Object.hasOwn(untouched.signs,'patterns'),'Next never allocates pattern pages');
+ const nav=seed();c.openMarketJob(nav,'B5',light);c.openMarketEndingJob(nav,'C6',light);c.openMarketPatternJob(nav,'A5',light);eq([nav.signs.currentId,nav.signs.endings.currentId,nav.signs.patterns.currentId],['B5','C6','A5']);
+ for(const view of ['patterns','prefix','endings','dictionary','choose','practice']){c.openMarketBench(nav,view,light);eq([nav.signs.currentId,nav.signs.endings.currentId,nav.signs.patterns.currentId],['B5','C6','A5'],'bench preserves all job pointers');}
+ c.openMarketEndingJob(nav,'C7',light);c.nextMarketJob(nav,light);eq([nav.signs.practiceGroup,nav.signs.patterns.currentId],['patterns','A1']);c.openMarketPatternJob(nav,'A5',light);c.nextMarketJob(nav,light);eq([nav.signs.practiceGroup,nav.signs.currentId],['prefix','B1']);
+ for(const [id,, ,target,families] of patternRows){c.setMarketPattern(nav,{caseId:id},light);c.setMarketPattern(nav,{familyId:families[0]},light);c.setMarketPattern(nav,{lettersId:target},light);}
+ const drafts=copy(nav.signs.patterns.drafts);for(let i=0;i<11;i++)c.setMarketPattern(nav,{next:true},light);eq(nav.signs.patterns.currentCaseId,'honey','Another sign wraps');eq(nav.signs.patterns.drafts,drafts);c.setMarketPattern(nav,{caseId:'warm'},light);c.setMarketPattern(nav,{clear:true},light);eq(nav.signs.patterns.drafts.warm,{familyId:null,lettersId:null});for(const id of Object.keys(drafts).filter(id=>id!=='warm'))eq(nav.signs.patterns.drafts[id],drafts[id]);
+ nav.signs.patterns.currentId='absent';nav.signs.practiceGroup='patterns';c.openMarketBench(nav,'practice',light);eq(c.marketSignsView(nav).record,null);ok(marketSignsPage(nav).includes('Choose a job'));pure(nav);nav.signs.practiceGroup='future';eq(c.marketSignsView(nav).practiceGroup,'prefix');eq(c.marketSignsView(nav).record.source.id,'B1');
+ const historical=seed();c.openMarketPatternJob(historical,'A1',light);let r=historical.signs.patterns.records.A1;r.source.key='a';r.source.prompt='Earlier supplied pattern question.';r.source.different.b='An earlier retained comparison.';r.source.extra={opaque:['retain',false]};r.work.choice='a';historical.signs.patterns.source.jobs=[];historical.signs.patterns.source.cards=[];historical.signs.patterns.source.future={catalogue:false};const frozen=copy(r.source),retained=copy(historical.signs.patterns.source);
+ ok(c.checkMarketJob(historical,light).ok);eq(c.marketSignsView(historical).record.checks.at(-1).outcome,'fit','own historical key wins');c.setMarketWork(historical,{choice:'b'},light);c.checkMarketJob(historical,light);ok(c.marketSignsView(historical).record.checks.at(-1).feedback.includes('An earlier retained comparison.'));eq(c.marketSignsView(historical).record.source,frozen);eq(historical.signs.patterns.source,retained,'no current catalog repair');pure(historical);
+ for(const id of ['E1','E3','E4']){const x=seed();x.signs.patterns.source.jobs[0].id=id;c.openMarketPatternJob(x,id,light);ok(c.marketSignsView(x).record);const page=marketSignsPage(x);ok(!page.includes('data-ms-book="practice"'),'pattern '+id+' never opens prefix dictionary');ok(!page.includes('Word part:'));eq(x.signs.patterns.currentId,id);ok(c.openMarketJob(x,id,light).ok);eq(c.marketSignsView(x).practiceGroup,'prefix');eq(x.signs.patterns.currentId,id);pure(x);}
+ const omitted=seed();omitted.signs.patterns.source.cases=omitted.signs.patterns.source.cases.filter(r=>r.id==='warm');omitted.signs.patterns.source.families=omitted.signs.patterns.source.families.filter(r=>r.id==='after-w');omitted.signs.patterns.source.letters=omitted.signs.patterns.source.letters.filter(r=>['ar','ey'].includes(r.id));omitted.signs.patterns.source.families[0].words=['Earlier','flat','list'];omitted.signs.patterns.source.future={opaque:['own']};const own=copy(omitted.signs.patterns.source);select(omitted,'warm','after-w','ey');eq(c.marketPatternResult(own,'warm',{familyId:'after-w',lettersId:'ey'}).made,'WEYM BREAD');eq([...marketSignsPage(omitted).matchAll(/data-ms-letters="([^"]+)"/g)].map(m=>m[1]),['ar','ey']);ok(htmlText(marketSignsPage(omitted)).includes('Earlier'));ok(!marketSignsPage(omitted).includes('data-ms-family="ball"'));ok(!c.setMarketPattern(omitted,{caseId:'honey'},light).ok);eq(omitted.signs.patterns.source,own);pure(omitted);
+ // Unknown picture codes retain owned alternatives; only the text is required.
+ const picture=seed();picture.signs.patterns.source.cases[0].pictureId='future-picture';picture.signs.patterns.source.cases[0].pictureAlt='Earlier stored picture alternative.';select(picture,'small','ball','a');ok(htmlText(marketSignsPage(picture)).includes('Earlier stored picture alternative.'));picture.signs.patterns.source.jobs[0].pictureId='future-job-picture';picture.signs.patterns.source.jobs[0].pictureAlt='Earlier job alternative.';c.openMarketPatternJob(picture,'A1',light);ok(htmlText(marketSignsPage(picture)).includes('Earlier job alternative.'));pure(picture);
+ // Malformed owned material is preserved and isolated to its documented boundary.
+ for(const damage of [p=>p.v=99,p=>p.source.v=99,p=>p.source=null]){const x=seed();damage(x.signs.patterns);const raw=copy(x.signs.patterns);eq(c.marketPatternView(x).status,'unsupported');ok(!c.setMarketPattern(x,{caseId:'small'},light).ok);ok(!c.openMarketPatternJob(x,'A1',light).ok);ok(c.openMarketJob(x,'B1',light).ok);ok(c.openMarketEndingJob(x,'C1',light).ok);eq(x.signs.patterns,raw);pure(x);}
+ for(const [label,damage] of [['family duplicate',p=>p.source.families.push(copy(p.source.families[0]))],['family words',p=>p.source.families[0].words=['']],['letter duplicate',p=>p.source.letters.push(copy(p.source.letters[0]))],['letter text',p=>p.source.letters[0].text=77],['draft container',p=>p.drafts=[]],['draft bound',p=>p.drafts=Object.fromEntries(Array.from({length:65},(_,i)=>['draft-'+i,{}]))]]){
+  const x=seed();damage(x.signs.patterns);const raw=copy(x.signs.patterns);eq(c.marketPatternView(x).benchReadable,false,label);ok(!c.setMarketPattern(x,{caseId:'small'},light).ok);ok(c.openMarketPatternJob(x,'A1',light).ok,'job available beside '+label);ok(c.checkMarketJob(x,light).ok);eq(x.signs.patterns.source,raw.source);eq(x.signs.patterns.drafts,raw.drafts);pure(x);
+ }
+ for(const [label,damage] of [['target disagreement',p=>p.source.cases[0].targetLine='EARLIER SMALL'],['case prefix',p=>p.source.cases[0].prefix=77],['case family',p=>p.source.cases[0].familyIds=['absent']],['duplicate case',p=>p.source.cases.push(copy(p.source.cases[0]))]]){
+  const x=seed();damage(x.signs.patterns);const raw=copy(x.signs.patterns.source.cases);ok(c.marketPatternView(x).benchReadable,label);ok(!c.setMarketPattern(x,{caseId:'small'},light).ok);select(x,'warm','after-w','ar');ok(c.keepMarketPatternSign(x,light).ok);ok(c.openMarketPatternJob(x,'A1',light).ok);eq(x.signs.patterns.source.cases,raw);pure(x);
+ }
+ for(const bad of [null,{}, {familyId:'missing',lettersId:'a'},{familyId:'ball',lettersId:'missing'}]){
+  const x=seed();x.signs.patterns.drafts.small=copy(bad);x.signs.patterns.kept=[{caseId:'small',familyId:'ball',lettersId:'a'}];ok(c.setMarketPattern(x,{caseId:'small'},light).ok,'bad draft may be inspected');eq(c.marketPatternView(x).caseReadable,false);ok(c.marketPatternView(x).keptRows[0].readable);ok(!c.marketPatternView(x).keptRows[0].reopenable);const before=copy(x);for(const change of [{familyId:'ball'},{lettersId:'a'},{clear:true},{reopen:0}]){ok(!c.setMarketPattern(x,change,light).ok);eq(x,before,'bad draft never repaired by edit/clear/reopen');}select(x,'warm','after-w','ar');ok(c.keepMarketPatternSign(x,light).ok);eq(x.signs.patterns.drafts.small,bad);pure(x);
+ }
+ for(const bad of [null,{},Array.from({length:513},()=>({opaque:true}))]){const x=seed();select(x,'small','ball','a');x.signs.patterns.kept=copy(bad);eq(c.marketPatternView(x).keepReadable,false);ok(!c.keepMarketPatternSign(x,light).ok);ok(!c.setMarketPattern(x,{reopen:0},light).ok);ok(c.setMarketPattern(x,{lettersId:'o'},light).ok);ok(c.setMarketPattern(x,{clear:true},light).ok);ok(c.openMarketPatternJob(x,'A1',light).ok);eq(x.signs.patterns.kept,bad);pure(x);}
+ const rawRows=seed(),badRow={caseId:'absent',familyId:'ball',lettersId:'a',future:{raw:true}},validRow={caseId:'small',familyId:'ball',lettersId:'a'};rawRows.signs.patterns.kept=[copy(badRow),copy(validRow),copy(validRow)];select(rawRows,'warm','after-w','ar');ok(c.keepMarketPatternSign(rawRows,light).ok);eq(rawRows.signs.patterns.kept.slice(0,3),[badRow,validRow,validRow],'raw bad row and imported duplicates exact');eq(c.marketPatternView(rawRows).keptRows.map(r=>r.readable),[false,true,true,true]);ok(c.setMarketPattern(rawRows,{reopen:1},light).ok);eq(rawRows.signs.patterns.drafts.small,{familyId:'ball',lettersId:'a'});pure(rawRows);
+ const capacity=seed();capacity.signs.patterns.kept=Array.from({length:512},()=>({opaque:true}));select(capacity,'small','ball','a');const capacityBefore=copy(capacity);ok(!c.keepMarketPatternSign(capacity,light).ok);eq(capacity,capacityBefore,'every raw row counts at 512; nothing evicted');
+ for(const [label,damage,missing] of [['card',p=>p.source.cards[0].text=12,'cards'],['duplicate card',p=>p.source.cards.push(copy(p.source.cards[0])),'cards'],['meaning',p=>p.source.meanings[0].sentence=12,'meanings'],['duplicate meaning',p=>p.source.meanings.push(copy(p.source.meanings[0])),'meanings'],['story',p=>p.source.story.dictionaryNote='', 'story'],['glossary',p=>p.source.glossary[0].text=12,'glossary'],['adult',p=>p.source.grownup=12,'grownup']]){
+  const x=seed();damage(x.signs.patterns);const raw=copy(x.signs.patterns.source),v=c.marketPatternView(x);ok(v.materialUnavailable,label+' independently unavailable');if(['cards','meanings','glossary'].includes(missing))ok(v[missing].length<raw[missing].length);else eq(v[missing],null);select(x,'small','ball','a');ok(c.keepMarketPatternSign(x,light).ok);ok(c.openMarketPatternJob(x,'A1',light).ok);eq(x.signs.patterns.source,raw);pure(x);
+ }
+ for(const field of ['contextLabel','pictureId','pictureAlt','tagLabel'])for(const bad of [undefined,'',12,'x'.repeat(4001)]){
+  const job=copy(source.jobs[0]);if(field==='tagLabel')job.tag='Earlier tag';job[field]=bad;ok(!c.validMarketPatternJob(job),'owned bounded '+field);
+ }
+ for(const field of ['instruction','destinationPrompt','destinationLabel'])for(const bad of [undefined,'',12,'x'.repeat(4001)]){
+  const x=seed();c.openMarketPatternJob(x,'A5',light);x.signs.patterns.records.A5.source.matchCopy[field]=bad;x.signs.patterns.source.jobs[4].matchCopy[field]=bad;const paused=copy(x.signs.patterns.records.A5);eq(c.marketPatternView(x).record,null);ok(!c.openMarketPatternJob(x,'A5',light).ok);ok(c.openMarketPatternJob(x,'A1',light).ok);eq(x.signs.patterns.records.A5,paused);select(x,'small','ball','a');pure(x);
+ }
+ const jobsBad=seed();jobsBad.signs.patterns.source.jobs.push(copy(jobsBad.signs.patterns.source.jobs[0]));ok(!c.marketPatternView(jobsBad).jobs.some(j=>j.id==='A1'));ok(c.openMarketPatternJob(jobsBad,'A2',light).ok);jobsBad.signs.patterns.records.wrong={...copy(jobsBad.signs.patterns.records.A2)};jobsBad.signs.patterns.currentId='wrong';eq(c.marketPatternView(jobsBad).record,null,'record map key owns source id');jobsBad.signs.patterns.records.future={v:99,opaque:['keep']};const foreign=copy(jobsBad.signs.patterns.records.future);ok(c.openMarketPatternJob(jobsBad,'A3',light).ok);eq(jobsBad.signs.patterns.records.future,foreign);pure(jobsBad);
+ const earlier=seed();c.openMarketPatternJob(earlier,'A1',light);earlier.signs.patterns.records.A1.firstKept={opaque:['earlier keep']};const firstBad=copy(earlier.signs.patterns.records.A1.firstKept);ok(marketSignsPage(earlier).includes('This earlier version stays in Notes'));ok(c.setMarketWork(earlier,{choice:'b'},light).ok);ok(c.checkMarketJob(earlier,light).ok);eq(earlier.signs.patterns.records.A1.firstKept,firstBad);pure(earlier);
+ for(const preflight of [{},{canExport:()=>false},{canExport:()=>{throw Error('synthetic refusal');}}])for(const action of [s=>c.openMarketBench(s,'patterns',preflight),s=>c.openMarketPatternJob(s,'A1',preflight),s=>c.setMarketPattern(s,{caseId:'small'},preflight)]){const x=signsSeed(),before=copy(x);ok(!action(x).ok);eq(x,before,'first allocation preflight refusal is atomic');}
+ const trace=seed();c.openMarketPatternJob(trace,'A1',light);const chronological=[];
+ for(let i=0;i<16;i++){if(i===1)c.showMarketHelp(trace,'hint',light);c.setMarketWork(trace,{choice:['a','b','c'][i%3]},light);trace.signs.patterns.records.A1.work.syntheticIteration=i;c.checkMarketJob(trace,light);chronological.push(copy(trace.signs.patterns.records.A1.checks.at(-1)));}
+ eq(trace.signs.patterns.records.A1.checks,[chronological[0],...chronological.slice(-11)],'first plus eleven latest checks retain exact prior evidence');pure(trace);
+ const full=fullPatternSignsNotebook(),old=fullEndingSignsNotebook();eq(full.signs.prefix,old.signs.prefix);eq(full.signs.source,old.signs.source);eq(full.signs.records,old.signs.records);eq(full.signs.endings,old.signs.endings);eq(full.syntheticOther,old.syntheticOther);eq(full.signs.patterns.kept.length,330);eq(Object.keys(full.signs.patterns.records),['A1','A2','A3','A4','A5']);
+ for(const record of Object.values(full.signs.patterns.records)){eq(record.count,16);eq(record.checks.length,12);ok(record.checks.every(k=>k.supported&&k.guided));eq(record.help,{hint:true,example:true});ok(record.firstKept&&record.latestKept);eq(record.firstKept.help,{hint:false,example:false});eq(record.latestKept.help,{hint:true,example:true});}
+ const raw=JSON.stringify(signsReport(full),null,2),bytes=new TextEncoder().encode(raw).length;ok(bytes<MAX_IMPORT_BYTES,'actual pretty Notes maximum fixture bytes');const imported=prepareProgressImport(raw);ok(imported.ok,'actual importer accepts full prefix+ending+pattern notebook');eq(imported.state.signs,full.signs);eq(imported.state.syntheticOther,full.syntheticOther);pure(imported.state);
+ const beforeFull=copy(full);for(const action of [s=>c.setMarketPattern(s,{clear:true},{canExport:()=>false}),s=>c.setMarketWork(s,{partId:'small',destinationId:'o'},{canExport:()=>false})]){ok(!action(full).ok);eq(full,beforeFull,'refused populated notebook mutation is atomic');}
+ const refusedKeep=copy(full);refusedKeep.signs.patterns.kept.pop();const keepBefore=copy(refusedKeep);ok(!c.keepMarketPatternSign(refusedKeep,{canExport:()=>false}).ok);eq(refusedKeep,keepBefore,'refused new keep is atomic');
+ const oversized=seed();select(oversized,'small','ball','a');oversized.syntheticPadding='x'.repeat(MAX_IMPORT_BYTES);const tooBig=copy(oversized);ok(!c.setMarketPattern(oversized,{lettersId:'o'},options).ok);eq(oversized,tooBig,'actual Notes size preflight preserves every field');ok(!prepareProgressImport(JSON.stringify(signsReport(oversized),null,2)).ok);
+ console.log(`Pattern Stall: ${n} checks passed (330 triples:13 both/65 family/42 letters/210 neither;24 A5 assignments;full combined Notes ${bytes} bytes).`);return n;
+}
+if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){runMarketSignsChecks();runMarketEndingChecks();runMarketPatternChecks();}
