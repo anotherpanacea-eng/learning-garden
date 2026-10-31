@@ -24,8 +24,8 @@ def revision(p):return work(p)['revision']
 def tap(p,selector):p.locator(selector).tap()
 def tab(p,name):tap(p,'.ledger-revision-tabs [data-ledger-revision-tab="'+name+'"]')
 def ready(p):
- p.locator('#explorer-header').wait_for();chosen=p.evaluate('JSON.parse(localStorage.getItem("learning-garden-explorers")).activeId')
- if p.locator('[data-select-explorer="'+chosen+'"]').count():tap(p,'[data-select-explorer="'+chosen+'"]')
+ p.locator('#explorer-header').wait_for();chosen=p.evaluate('JSON.parse(localStorage.getItem("learning-garden-explorers"))?.activeId')
+ if chosen and p.locator('[data-select-explorer="'+chosen+'"]').count():tap(p,'[data-select-explorer="'+chosen+'"]')
  p.locator('[data-ledger-root]').wait_for()
 def setup(browser,base,seed,width=820,height=1000,fault=False):
  ctx=browser.new_context(viewport={'width':width,'height':height},has_touch=True,reduced_motion='reduce',accept_downloads=True)
