@@ -13,7 +13,7 @@ Compact readout: Still {a}/{d}; {count} of {denominator} equal pieces colored. E
 Full optional explanation: Now {count} of {denominator} equal pieces are colored: {count}/{denominator}. The colored end is still at {a}/{d}.
 Unit: Each current piece is 1/{denominator} of this same-sized whole.
 Split: Each old piece became {factor} smaller equal pieces. Both counts changed; the amount did not. Dashed marks are the cuts just added.
-Undo: The last cut marks were removed. The colored end stayed still, and the earlier marks are still there.
+Undo: The last cut marks were removed. The colored end stayed still. The earlier marks still show the larger pieces.
 No split: These are the starting equal pieces. Count spaces, not dividing marks.
 Bound: This table shows at most 12 equal pieces in a whole. You can undo a cut and try another way.
 
@@ -29,7 +29,7 @@ Grown-up note: All labels and explanations here are supplied model readouts. But
 Label: A separate example: half and quarter.
 Notice: These are different ribbons. Example controls do not change your chosen pair.
 Picture 1: A has 1/2 colored and B has 1/4. Each has one colored piece, but those pieces are different sizes. One piece each does not mean equal amounts.
-Picture 2: Split each of A's halves in 2. A is now 2/4 and B is 1/4. Both count quarter-size pieces of the same-sized whole;2/4 is greater than 1/4. Neither colored end moved.
+Picture 2: Split each of A’s halves in 2. A is now 2/4 and B is 1/4. Both count quarter-size pieces of the same-sized whole; 2/4 is greater than 1/4. Neither colored end moved.
 Picture 3: Undo that split. A has 1/2 again and B still has 1/4. We changed the dividing marks, not the amounts.
 Example actions: Previous picture / Next picture / Back to our ribbons.
 Hear: Hear this picture. Read only the current visible invitation, common-whole reference, original/current fractions, counts, actual change and open comparison; the example uses its visible frame instead. Do not read closed help.
