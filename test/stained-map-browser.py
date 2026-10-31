@@ -42,7 +42,7 @@ def run(browser,base):
    eq(book(p),seed,'entry preserves all roots');eq(p.locator('dialog.welcome-film[open]').count(),0,'direct route has optional arrival');layout(p,'arrival')
    table(p,'map');layout(p,'map');eq(p.locator('.sm-name').inner_text(),'Hi▢▢ Ford','first label stained')
    tap(p,'place','[data-sm-choice=k]');ok(p.locator('[data-sm-choice=k]').evaluate('e=>e===document.activeElement'),'tile keeps keyboard focus');eq(p.locator('.sm-name').inner_text(),'Hik Ford','literal wrong tile');tap(p,'check');ok('Hi▢▢ Ford:' in p.locator('.sm-feedback').inner_text(),'whole-map original-label feedback')
-   tap(p,'place','[data-sm-choice=gh]');eq(p.locator('.sm-name').inner_text(),'High Ford','two-letter tile');tap(p,'keep');first=copy.deepcopy(book(p)['spellings']['benches']['map']['firstKept'])
+   tap(p,'place','[data-sm-choice=gh]');eq(p.locator('.sm-name').inner_text(),'High Ford','two-letter tile');ok(p.locator('[data-sm-action=select][data-sm-part=high]').get_attribute('aria-label').startswith('High Ford'),'restored accessible name matches visible label');tap(p,'put-back');ok(p.locator('[data-sm-picker]').evaluate('e=>e===document.activeElement'),'bench Put back focus');tap(p,'place','[data-sm-choice=gh]');tap(p,'keep');first=copy.deepcopy(book(p)['spellings']['benches']['map']['firstKept'])
    p.locator('[data-sm-picker]').select_option('knoll');eq(p.locator('.sm-name').inner_text(),'▢noll Wood','next label retains untouched stain');ok('Once written cnoll.' in p.locator('.sm-written-note').inner_text(),'written source visible')
    tap(p,'place','[data-sm-choice=gh]');eq(p.locator('.sm-name').inner_text(),'Ghnoll Wood','only first letter capitalized');tap(p,'place','[data-sm-choice=k]')
    for label,tile in [('writing','w'),('gnat','g'),('lamb','b'),('thistle','t'),('island','s'),('sponge','none')]:
@@ -54,12 +54,17 @@ def run(browser,base):
    table(p,'practice')
    for job,key in [('a1','gh'),('a2',{'knife':'once','write':'once','island':'added','debt':'added'}),('a3','island'),('a4','signal'),('a5',{'statement-1':'false','statement-2':'true','statement-3':'true'})]:
     tap(p,'job','[data-sm-job='+job+']');layout(p,job);tap(p,'hint');tap(p,'example');ok(p.locator('.sm-worked li').count()>=1,job+' example includes worked steps');
+    if job=='a1':
+     for _ in range(2):tap(p,'step')
+     ok(p.locator('.sm-worked').evaluate('e=>e===document.activeElement'),'last worked step focus fallback');
+     for _ in range(3):tap(p,'step-back')
+     ok(p.locator('.sm-worked').evaluate('e=>e===document.activeElement'),'step zero focus fallback')
     if job=='a3':ok('writers added the s later' in p.locator('.sm-job-notes').inner_text(),'A3 written notes visible')
     if isinstance(key,dict):
      for part,choice in key.items():
       tap(p,'select-job','[data-sm-part='+part+']');ok(p.locator('[data-sm-action=select-job][data-sm-part='+part+']').evaluate('e=>e===document.activeElement'),'part focus retained');tap(p,'answer','[data-sm-choice='+choice+']');ok(p.locator('[data-sm-action=answer][data-sm-choice='+choice+']').evaluate('e=>e===document.activeElement'),'answer focus retained')
     else:tap(p,'answer','[data-sm-choice='+key+']')
-    tap(p,'check');eq(book(p)['spellings']['items'][job]['checks'][-1]['outcome'],'fit',job+' fit');tap(p,'keep')
+    tap(p,'check');eq(book(p)['spellings']['items'][job]['checks'][-1]['outcome'],'fit',job+' fit');tap(p,'keep');tap(p,'put-back');ok(p.evaluate('document.activeElement!==document.body'),'practice Put back preserves focus')
    p.screenshot(path=str(OUT/f'job-{width}.png'),full_page=True)
    tap(p,'skip');eq(book(p)['spellings']['currentId'],'a1','skip wraps without losing work')
    # Explicit visible prose narration excludes offered responses.
