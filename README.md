@@ -140,6 +140,10 @@ The next story at a place favors fewer displayed encounters. French practice acr
 
 Full passages, sentence focus, English meaning/vocabulary help, and skill-matched smaller examples remain available. Translation support follows both questions on a passage, including after reload. Local French narration never falls back to English. Frozen routes preserve partially arranged cards and paused stories. French records and suggestions stay separate from English Paris and legacy French work. This is a finite, reviewed library, not generated stories or a full language curriculum. Anonymous explorer slots now keep each notebook separate; earlier shared play remains together in its original slot. See [spec 14](docs/specs/14-french-exploration.md) and the [initial French increment](docs/specs/13-french-paris-and-plate-return.md).
 
+## The River Market (Spanish)
+
+Open `#mercado`, from Home or from a Spanish riddle card's answer. The barge *La Garza* has come down from Vadoalto with cargo. The first errand, *La carga*, gives a short Spanish note (or an optional longer one): unload the honey, flour and seeds to the buildings it names, then answer one question. *What does it mean?*, *Word by word*, local Spanish speech and one-sentence reading are always available and recorded as support. *Mi cuaderno* lists the words met with three grammar and sound notes. Started errands keep a frozen copy of their note, and Start again keeps every earlier try. The Spanish is bound to a three-provider model-panel review. This is supported reading practice, not a Spanish assessment. See [spec 324](docs/specs/324-river-market-cargo.md) and [spec 117](docs/specs/117-spanish-river-market.md).
+
 ## Privacy and contributions
 
 This repository contains generic source and curriculum content. Do not commit real learner profiles, names, ages or grades tied to a child, school or location details, family anecdotes, responses, progress, personalized packs, recordings, screenshots, exports, or credentials. Use clearly synthetic examples in tests and review commit metadata and attachments as well as files. See [CONTRIBUTING.md](CONTRIBUTING.md).
