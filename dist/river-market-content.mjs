@@ -19,6 +19,8 @@ export const riverMarketText=freeze({
  unavailable:'This older errand can\'t be displayed here. It is still kept in your export. Other errands are open.',
  unknownVersion:'This River Market notebook uses a format this version cannot read. Your work is kept in your notes download. The rest of the garden is open.',notesLink:'Download your notes',
  invitation:'Find three things at home you could name in Spanish. Make labels for them.',
+ caminoGrammar:{directions:{title:'Directions to a friend',text:'<i>Sal</i>, <i>sigue</i>, <i>gira</i> and <i>cruza</i> are friendly commands, the way you\'d tell one friend what to do.'}},
+ invitations:{carga:'Find three things at home you could name in Spanish. Make labels for them.',camino:'Give a grown-up directions to another room using <i>recto</i>, <i>izquierda</i> and <i>derecha</i>.'},
  notesDetails:'The market practices reading short Spanish notes and acting on them. It doesn\'t assess Spanish ability. Errands marked \"Read with English help\" used the English meanings. A longer note is optional stretch reading, meant to be read with the English help; short sentences are the default. When a line speaks to more than one person, the game uses <i>ustedes</i>. In Spain, friends usually say <i>vosotros</i>; <i>ustedes</i> is also correct, and it keeps the verb forms simpler. If you speak Spanish, reading the notes aloud together helps more than anything the game can do.',
  grammar:{
   articles:{title:'El, la, los, las',text:'Spanish nouns have a grammatical gender: masculine or feminine. Learn each noun with its article: <i>el saco</i>, <i>la caja</i>. For more than one: <i>los sacos</i>, <i>las cajas</i>.'},
@@ -55,5 +57,45 @@ export function makeCargaSource(amount){
   grammar:JSON.parse(JSON.stringify(riverMarketText.grammar)),
   boatLine:{es:riverMarketText.boatLine.es,en:riverMarketText.boatLine.en},
   question:{es:'¿Cuántos tarros de miel hay?',en:'How many jars of honey are there?',choices:[{id:'dos',es:'dos',nudge:'<i>Dos</i> is how many <i>sacos de harina</i> there are. Look for the number before <i>tarros de miel</i>.'},{id:'tres',es:'tres',nudge:'Yes: <i>tres tarros de miel</i>, three jars of honey.'},{id:'cuatro',es:'cuatro',nudge:'<i>Cuatro</i> means four. Look for the number before <i>tarros de miel</i>.'}],fit:'tres'}
+ });
+}
+
+// El camino (spec 328): the companion's second errand, as amended by the panel resolution.
+const caminoSentences={
+ short:[['Teo, sal del muelle.','Teo, leave the landing.'],['Sigue recto hasta el puente.','Keep going straight as far as the bridge.'],['Cruza el puente.','Cross the bridge.'],['En la plaza, gira a la izquierda.','At the square, turn left.'],['La panadería está al lado del café.','The bakery is next to the café.']],
+ longer:[['Teo, la panadería no está lejos.','Teo, the bakery isn\'t far.'],['Sal del muelle y sigue recto hasta el puente.','Leave the landing and keep going straight as far as the bridge.'],['Cruza el puente con cuidado, porque todavía hay tablas sueltas después de la tormenta.','Cross the bridge carefully, because there are still loose planks after the storm.'],['En la plaza, gira a la izquierda.','At the square, turn left.'],['La panadería está al lado del café, enfrente de la oficina de correos.','The bakery is next to the café, across from the post office.']]
+};
+const caminoWords=[['sal','leave, go out'],['el muelle','landing, dock'],['sigue recto','keep going straight'],['hasta','as far as'],['el puente','bridge'],['cruza','cross'],['la plaza','square'],['gira','turn'],['a la izquierda','to the left'],['a la derecha','to the right'],['al lado de','next to'],['no está lejos','isn\'t far'],['con cuidado','carefully'],['todavía hay','there are still'],['las tablas sueltas','loose planks'],['la tormenta','storm'],['enfrente de','across from'],['la oficina de correos','post office']];
+const caminoPhrasebook=['sigue recto','cruza','gira','a la izquierda','a la derecha','al lado de','enfrente de','el puente','el muelle','la plaza','la oficina de correos','la tormenta'];
+const caminoQuestions={
+ short:{es:'¿Dónde está la panadería?',en:'Where is the bakery?',choices:[{id:'cafe',es:'al lado del café',nudge:'Yes: <i>al lado del café</i>, next to the café.'},{id:'puente',es:'al lado del puente',nudge:'Teo crossed the <i>puente</i> before he reached the plaza. Look at the last sentence.'},{id:'muelle',es:'en el muelle',nudge:'The <i>muelle</i> is where Teo started.'}],fit:'cafe'},
+ longer:{es:'¿Qué está enfrente de la panadería?',en:'What is across from the bakery?',choices:[{id:'cafe',es:'el café',nudge:'The café is <i>al lado</i>, next to the bakery. <i>Enfrente</i> means across from it.'},{id:'puente',es:'el puente',nudge:'The <i>puente</i> is on the way, before the plaza.'},{id:'correos',es:'la oficina de correos',nudge:'Yes: <i>enfrente de la oficina de correos</i>, across from the post office.'}],fit:'correos'}
+};
+export const CAMINO_BUTTONS=Object.freeze(['recto','cruza','izquierda','derecha']);
+export function makeCaminoSource(amount){
+ if(!['short','longer'].includes(amount))return null;
+ return freeze({
+  format:1,errand:'camino',title:'El camino',titleEn:'the way',amount,
+  sentences:caminoSentences[amount].map(([es,en],i)=>({id:`s${i+1}`,es,en})),
+  words:caminoWords.map(([es,en])=>({es,en})),
+  phrasebook:caminoPhrasebook.map(es=>({es,en:caminoWords.find(w=>w[0]===es)[1]})),
+  prompt:'Read Marisol\'s note and move Teo to the bakery.',
+  map:[{id:'muelle',label:'el muelle',en:'the landing'},{id:'puente',label:'el puente',en:'the bridge'},{id:'plaza',label:'la plaza',en:'the square'},{id:'panaderia',label:'la panadería',en:'the bakery'},{id:'cafe',label:'el café',en:'the café'},{id:'correos',label:'la oficina de correos',en:'the post office'}],
+  buttons:[{id:'recto',es:'recto',arrow:'↑'},{id:'cruza',es:'cruza',arrow:'⤳'},{id:'izquierda',es:'a la izquierda',arrow:'←'},{id:'derecha',es:'a la derecha',arrow:'→'}],
+  start:'muelle',goal:'panaderia',wrong:'correos',
+  // Each cell: a node id, 'nothing' (nothing to cross) or 'stays'.
+  moves:{muelle:{recto:'puente',cruza:'nothing',izquierda:'stays',derecha:'stays'},puente:{recto:'stays',cruza:'plaza',izquierda:'stays',derecha:'stays'},plaza:{recto:'stays',cruza:'nothing',izquierda:'panaderia',derecha:'correos'},correos:{recto:'stays',cruza:'nothing',izquierda:'stays',derecha:'stays'}},
+  back:{from:'correos',to:'plaza',label:'Back to the plaza'},
+  feedback:{
+   start:{id:'start',es:'¿Por dónde voy? Siempre me pierdo.',en:'Which way do I go? I always get lost.'},
+   nothing:{id:'nothing',lead:'Teo looks around.',es:'Aquí no hay nada que cruzar.',en:'There\'s nothing to cross here.',tail:'Teo stays put.'},
+   stays:{id:'stays',text:'Teo looks around. That way doesn\'t go anywhere from here. Teo stays put.'},
+   correos:{id:'correos',es:'Esta es la oficina de correos. ¿Dónde está la panadería?',en:'This is the post office. Where\'s the bakery?',hint:'Read the line about <i>la plaza</i> again.'},
+   panaderia:{id:'panaderia',es:'¡La panadería! Huele a pan. ¡Gracias!',en:'The bakery! It smells of bread. Thank you!'}
+  },
+  place:'Teo is at {place}.',group:'Move Teo',
+  question:caminoQuestions[amount],
+  grammar:JSON.parse(JSON.stringify(riverMarketText.caminoGrammar)),
+  invitation:riverMarketText.invitations.camino
  });
 }
