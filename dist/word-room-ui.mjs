@@ -21,21 +21,21 @@ const cat = '<path d="M153 159q63 25 48-29" fill="none" stroke="#cf9561" stroke-
 const drawings = {
   cat: `<path d="M218 122h80v54h-80Z" fill="#ba865e"/><path d="m218 122 12-16h65l3 16m-80 27h80m-40-27v54" fill="none"/>${cat}`,
   mat: '<path d="m38 86 227 0 25 70H18Z" fill="#8eb7a3"/><path d="m43 96 215 0m-220 12h225m-230 13h234m-239 13h243m-250 13h257M54 89l-16 61m52-61-9 61m46-61-3 61m43-61 4 61m37-61 11 61m30-61 18 61" stroke="#eaf4ef" stroke-width="2"/><path d="m23 156-6 10m25-10-5 10m25-10-4 10m25-10-3 10m25-10-2 10m25-10v10m25-10 2 10m25-10 3 10m25-10 4 10m25-10 5 10m25-10 6 10"/>',
-  sat: `<path d="M18 163h125m31 0h127M235 125h45v7h-45Zm4 7v29m35-29v29" fill="#ba865e"/><text x="45" y="23">Before</text><text x="215" y="23">After</text>${puppet(19,35)}${puppet(179,35,true)}`,
+  sat: `<path d="M18 163h125m31 0h127M235 125h45v7h-45Zm4 7v29m35-29v29" fill="#ba865e"/><text x="45" y="23" stroke="none">Before</text><text x="215" y="23" stroke="none">After</text>${puppet(19,35)}${puppet(179,35,true)}`,
   bat: '<path d="m83 148 19 13 29-44q37-42 83-89l-24-16q-40 53-75 96Z" fill="#d7ae70"/><path d="m78 153 23 15m14-57 14 10" fill="none"/><circle cx="239" cy="143" r="25" fill="#fffdf3"/><path d="M223 125q20 18 0 36m31-36q-20 18 0 36" fill="none" stroke="#b93e2c" stroke-width="2"/>',
   pin: '<circle cx="99" cy="102" r="57" fill="#e9b84a"/><path d="M64 101q35-54 70 0-35 54-70 0Z" fill="#fffdf3"/><circle cx="99" cy="101" r="13" fill="#b4a6c8"/><ellipse cx="239" cy="104" rx="38" ry="51" fill="#b8c7ca"/><path d="m215 83 41 42m-39-40q17-13 31-2m10 42-8 7-8-12" fill="none"/>',
   tin: '<path d="M71 74h178v78q-89 32-178 0Z" fill="#b7c9ca"/><ellipse cx="160" cy="75" rx="89" ry="24" fill="#dfe7e5"/><ellipse cx="160" cy="70" rx="91" ry="23" fill="#cedbdb"/><path d="M85 101v42m14-37v35m-20-54q81 22 162 0" fill="none" stroke="#f7fbf7" stroke-width="5"/>',
   fin: '<path d="m221 105 58-46v92Z" fill="#88b6c1"/><ellipse cx="147" cy="105" rx="91" ry="50" fill="#b6d7d7"/><path d="m120 62 31-40 38 43Z" fill="#e9b84a" stroke-width="5"/><circle cx="85" cy="96" r="5"/><path d="m69 116 15 3M224 18 166 42m3-13-3 13 13-1" fill="none"/>',
   bin: '<path d="m53 69 211 0-17 97H71Z" fill="#b48d65"/><ellipse cx="158" cy="69" rx="105" ry="24" fill="#6c6551"/><path d="m144 50 56 8-12 35-59-6Z" fill="#b4a6c8"/><circle cx="104" cy="58" r="24" fill="#e9b84a"/><path d="M82 112h32m87 0h32m-161 29h172" fill="none"/>',
-  hop: `<text x="45" y="23">Before</text><text x="215" y="23">After</text><path d="M18 173h125m31 0h127m-82-20-5 9m72-9 5 9" fill="none"/>${puppet(19,46)}${puppet(179,27)}`,
+  hop: `<text x="45" y="23" stroke="none">Before</text><text x="215" y="23" stroke="none">After</text><path d="M18 173h125m31 0h127m-82-20-5 9m72-9 5 9" fill="none"/>${puppet(19,46)}${puppet(179,27)}`,
   mop: '<path d="m167 22-9 104" stroke="#ba865e" stroke-width="11"/><path d="M132 122h51v12h-51Z" fill="#719a8b"/><path d="m133 132-18 38m27-38-9 42m20-42-1 43m12-43 10 42m-1-42 19 38" fill="none" stroke="#bccfce" stroke-width="10"/>',
   top: '<path d="M150 35h18v36h-18Z" fill="#ba865e"/><path d="m96 95 64-43 65 43-65 73Z" fill="#b4a6c8"/><ellipse cx="160" cy="94" rx="64" ry="15" fill="#e9b84a"/><path d="M155 165h10l-5 12Z" fill="#ba865e"/><path d="M85 105q-35 14 4 28m148-28q35 14-4 28" fill="none"/>',
-  pop: '<text x="45" y="23">Before</text><text x="215" y="23">After</text><circle cx="80" cy="105" r="46" fill="#d9e9ed"/><path d="M57 84q10-15 23-14" fill="none" stroke="#fff" stroke-width="7"/><path d="m235 56 7 22m-44-3 19 15m-28 20 26-1m-14 41 20-22m19 28 2-24m32 15-15-24m34-14-26-5m9-29-19 15" fill="none" stroke="#88b6c1" stroke-width="5"/>',
+  pop: '<text x="45" y="23" stroke="none">Before</text><text x="215" y="23" stroke="none">After</text><circle cx="80" cy="105" r="46" fill="#d9e9ed"/><path d="M57 84q10-15 23-14" fill="none" stroke="#fff" stroke-width="7"/><path d="m235 56 7 22m-44-3 19 15m-28 20 26-1m-14 41 20-22m19 28 2-24m32 15-15-24m34-14-26-5m9-29-19 15" fill="none" stroke="#88b6c1" stroke-width="5"/>',
 };
 const sceneDrawings = {
   'scene-props-v1': `<g transform="translate(-18 28) scale(.8)">${drawings.mat}</g><g transform="translate(-10 15) scale(.8)">${cat}</g><g transform="translate(140 52) scale(.55)">${drawings.bat}</g>`,
   'scene-box-v1': '<path d="m227 79 79 0-8 88h-63Z" fill="#b48d65"/><ellipse cx="266" cy="79" rx="39" ry="12" fill="#6c6551"/><path d="M23 109h94v48q-47 19-94 0Z" fill="#b7c9ca"/><ellipse cx="70" cy="109" rx="47" ry="13" fill="#e7eeee"/><circle cx="68" cy="96" r="17" fill="#e9b84a"/><path d="m62 90 10 10m-10-10 8-2" fill="none"/><path d="m204 128 24-19v38Z" fill="#88b6c1"/><ellipse cx="171" cy="127" rx="43" ry="25" fill="#b6d7d7"/><path d="m158 106 14-21 17 20Z" fill="#e9b84a"/><circle cx="143" cy="123" r="3"/>',
-  'scene-puppet-v1': `<g transform="translate(-18 26) scale(.8)">${puppet(55,9)}</g><g transform="translate(-22 45) scale(.62)">${drawings.mop}</g><g transform="translate(160 85) scale(.48)">${drawings.top}</g><g transform="translate(100 4) scale(.6)"><path d="m235 25 7 22m-44-3 19 15m-28 20 26-1m-14 41 20-22m19 28 2-24m32 15-15-24m34-14-26-5m9-29-19 15" fill="none" stroke="#88b6c1" stroke-width="5"/></g>`,
+  'scene-puppet-v1': `<g transform="translate(-18 26) scale(.8)">${puppet(55,9)}</g><g transform="translate(50 62) scale(.62)">${drawings.mop}</g><g transform="translate(160 85) scale(.48)">${drawings.top}</g><g transform="translate(100 4) scale(.6)"><path d="m235 25 7 22m-44-3 19 15m-28 20 26-1m-14 41 20-22m19 28 2-24m32 15-15-24m34-14-26-5m9-29-19 15" fill="none" stroke="#88b6c1" stroke-width="5"/></g>`,
 };
 function scenePicture(text) {
   if(!Object.hasOwn(sceneDrawings,text.art)||typeof text.alt!=='string'||!text.alt||text.alt.length>500)return '';
@@ -56,9 +56,9 @@ function view(book, owner) {
   return v;
 }
 export function resetWordRoomView() {controller?.abort();views=new WeakMap();}
-function choices(v) {
+function choices(v, primary = true) {
   const suggest = ['mat','sat'].every(id=>wordRoomWord(v.source,id) && (!Object.hasOwn(v.root?.drafts||{},id) || validWordRoomDraft(v.root.drafts[id],v.source.alphabet)));
-  return `<section class="wr-chooser"><h2 id="wr-task" tabindex="-1">Choose a card or a scene</h2><p>Choose a prop or a little scene. They are all open.</p>${suggest?'<p class="wr-suggestion">Try <strong>mat</strong>, then <strong>sat</strong>. What changes at the start?</p>':''}<div class="wr-shelf">${v.words.map(x=>x.word?`<button type="button" data-wr-word="${esc(x.id)}" class="wr-card">${wordRoomPicture(x.word,true)}<span>${esc(x.word.label)}</span></button>`:`<p class="wr-card-paused">${esc(x.id)}: ${unavailable}</p>`).join('')}</div><div class="wr-scene-choices">${v.texts.map(x=>x.text?button('text',x.text.title,`data-wr-value="${esc(x.id)}"`):`<p>${unavailable}</p>`).join('')}</div></section>`;
+  return `<section class="wr-chooser"><h2 id="${primary?'wr-task':'wr-choices'}" tabindex="-1">Choose a card or a scene</h2><p>Choose a prop or a little scene. They are all open.</p>${suggest?'<p class="wr-suggestion">Try <strong>mat</strong>, then <strong>sat</strong>. What changes at the start?</p>':''}<div class="wr-shelf">${v.words.map(x=>x.word?`<button type="button" data-wr-word="${esc(x.id)}" class="wr-card">${wordRoomPicture(x.word,true)}<span>${esc(x.word.label)}</span></button>`:`<p class="wr-card-paused">${esc(x.id)}: ${unavailable}</p>`).join('')}</div><div class="wr-scene-choices">${v.texts.map(x=>x.text?button('text',x.text.title,`data-wr-value="${esc(x.id)}"`):`<p>${unavailable}</p>`).join('')}</div></section>`;
 }
 function comparisonButtons(v) {
   const siblings=wordRoomSiblings(v.source,v.word.id);
@@ -76,7 +76,7 @@ function result(v, local) {
 function work(v, local) {
   const w=v.word,d=v.draft;
   if(!w)return choices(v);
-  if(!d)return `<h2 id="wr-task" tabindex="-1">${esc(w.label)}</h2>${wordRoomPicture(w)}<p>${v.hasDraft?unavailable:'This card has no label draft yet.'}</p>${!v.hasDraft?button('start','Start this label','class="wr-primary"'):''}${button('choose','Choose another prop')}`;
+  if(!d)return `<h2 id="wr-task" tabindex="-1">${esc(w.label)}</h2>${wordRoomPicture(w)}<p>${v.hasDraft?unavailable:'This card has no label draft yet.'}</p>${!v.hasDraft?button('start','Start this label','class="wr-primary"'):''}${choices(v,false)}`;
   if(local.mode==='example') {
     const e=wordRoomWord(v.source,local.exampleId),part=local.frame;
     if(!e)return `<h2 id="wr-task" tabindex="-1">Show a different example</h2><p>This prop box has no different example to show. We can still make our label together.</p>${button('local-back','Back to my label')}`;
@@ -107,10 +107,10 @@ export function wordRoomPage(book, owner) {
   const v=wordRoomView(book),local=view(book,owner),header='<header class="wr-header"><a href="#words">Word Garden</a><div><h1>Word Workshop</h1><span>The Prop Box</span></div></header>';
   if(v.status==='unsupported')return `<section class="wr-room" data-word-room-root>${header}<h2 id="wr-task" tabindex="-1">The Prop Box</h2><p>This earlier prop box cannot open here. It is kept in Grown-up notes. The rest of Word Garden is open.</p>${button('recover','Start a fresh prop box')}<a href="#notes">Grown-up notes</a><p id="wr-status" role="status" tabindex="-1"></p>${recoveryDialog(local)}</section>`;
   const choose=v.page==='choose',target=v.word?`<p class="wr-waiting">Our prop: <strong>${esc(v.word.label)}</strong>.</p>`:'';
-  const ready=v.complete?'<section class="wr-ready"><p>The prop box has all its labels. What scene shall we make?</p><a href="#loft">Make another scene</a></section>':'';
+  const ready=v.complete?`<section class="wr-ready"><p>The prop box has all its labels. What scene shall we make?</p><div class="wr-actions">${v.texts.some(x=>x.text)?button('scenes','Read a little scene'):''}${button('revisit','Visit a label again')}<a href="#loft">Make another scene</a></div></section>`:'';
   const latest=makeWordRoomSource(),upgrade=v.root&&v.source.id===latest.id&&v.source.revision<latest.revision;
-  const nav=v.word?`<nav class="wr-steps" aria-label="Word Workshop pages">${[['meet','Meet the prop'],['build','Make a label'],['read','Read together']].map(([key,label])=>button(key,label,`aria-current="${v.page===key?'step':'false'}"`)).join('')}</nav>`:'';
-  return `<section class="wr-room" data-word-room-root data-wr-page="${v.page}">${header}${choose?`<p class="wr-opening">${opening}</p><p>${entry}</p>`:''}${target}${nav}${ready}${v.page==='read'?reading(v):choose?choices(v):work(v,local)}<p id="wr-status" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></p>${!choose?`<div class="wr-bottom">${local.mode==='main'&&['meet','build'].includes(v.page)?`${button(v.page==='meet'?'choose':'meet',v.page==='meet'?'Back to the prop box':'Back: meet the prop')}${button(v.page==='meet'?'build':'read',v.page==='meet'?'Next: make a label':'Next: read together')}`:''}${button('choose','Choose another prop')}${button('choose','Choose a little scene')}</div>`:''}<details class="wr-gallery"><summary>Our labels</summary><p>Labels we have put with props. We can visit any one again.</p><div>${v.gallery.map(id=>`<button type="button" data-wr-word="${esc(id)}">${esc(wordRoomWord(v.source,id).label)}</button>`).join('')}</div></details><details class="wr-grownups"><summary>For grown-ups</summary><p>${grownup}</p>${v.word?`<p>${esc(v.word.guidance)}</p>`:''}${v.words.some(x=>!x.word)?'<p>An earlier prop card cannot open here, so we cannot call this whole box finished. The other props and scenes are still open.</p>':''}${v.root?button('recover',upgrade?'Open the newer prop box':'Start a fresh prop box'):''}<a href="#notes">Grown-up notes</a></details>${recoveryDialog(local)}</section>`;
+  const nav=v.word?`<nav class="wr-steps" aria-label="Word Workshop pages">${[['meet','Meet the prop'],['build','Make a label'],['read','Read together']].filter(([key])=>key!=='build'||v.draft).map(([key,label])=>button(key,label,`aria-current="${v.page===key?'step':'false'}"`)).join('')}</nav>`:'';
+  return `<section class="wr-room" data-word-room-root data-wr-page="${v.page}">${header}${choose?`<p class="wr-opening">${opening}</p><p>${entry}</p>`:''}${target}${nav}${ready}${v.page==='read'?reading(v):choose?choices(v):work(v,local)}<p id="wr-status" role="status" aria-live="polite" aria-atomic="true" tabindex="-1"></p>${!choose?`<div class="wr-bottom">${local.mode==='main'&&v.draft&&['meet','build'].includes(v.page)?`${button(v.page==='meet'?'choose':'meet',v.page==='meet'?'Back to the prop box':'Back: meet the prop')}${button(v.page==='meet'?'build':'read',v.page==='meet'?'Next: make a label':'Next: read together')}`:''}${button('choose','Choose another prop')}${button('choose','Choose a little scene')}</div>`:''}<details class="wr-gallery"><summary>Our labels</summary><p>Labels we have put with props. We can visit any one again.</p><div>${v.gallery.map(id=>`<button type="button" data-wr-word="${esc(id)}">${esc(wordRoomWord(v.source,id).label)}</button>`).join('')}</div></details><details class="wr-grownups"><summary>For grown-ups</summary><p>${grownup}</p>${v.word?`<p>${esc(v.word.guidance)}</p>`:''}${v.words.some(x=>!x.word)?'<p>An earlier prop card cannot open here, so we cannot call this whole box finished. The other props and scenes are still open.</p>':''}${v.root?button('recover',upgrade?'Open the newer prop box':'Start a fresh prop box'):''}<a href="#notes">Grown-up notes</a></details>${recoveryDialog(local)}</section>`;
 }
 function recoveryDialog(local) {
   return local.dialog?`<dialog class="wr-dialog" aria-labelledby="wr-confirm-title"><h2 id="wr-confirm-title">Start a fresh prop box</h2><p>Start with this version's prop box? Its drafts and labels will start fresh. Your earlier box will be kept in the Grown-up notes download.</p><div class="wr-actions">${button('cancel','Cancel')}${button('confirm','Open a fresh prop box','class="wr-primary"')}</div></dialog>`:'';
@@ -143,7 +143,7 @@ export function bindWordRoom(book, ctx) {
   const act=(el,fn,{message='',focus='#wr-task',mode='main'}={})=>{
     if(!live(el))return;
     const r=fn(options(el));
-    if(!r.ok){if(r.error!=='stale')say(r.error==='capacity'?refusal:unavailable);return;}
+    if(!r.ok){if(r.error!=='stale'){const message=r.error==='capacity'?refusal:unavailable;if(local.dialog){local.dialog=null;redraw(message,'#wr-status');}else say(message);}return;}
     local.root=book.wordRoom;local.checked=null;local.mode=mode;local.dialog=null;
     const persisted=r.changed===false?null:ctx.save();
     if(!owned())return;
@@ -156,6 +156,7 @@ export function bindWordRoom(book, ctx) {
     if(!live(el))return;
     const a=el.dataset.wrAction,v=wordRoomView(book),d=v.draft;
     if(a==='text')return act(el,o=>chooseWordRoomText(book,el.dataset.wrValue,o));
+    if(a==='scenes'||a==='revisit')return act(el,o=>setWordRoomPage(book,'choose',o),{focus:a==='scenes'?'.wr-scene-choices button':'.wr-shelf button'});
     if(['choose','meet','build','read','back'].includes(a))return act(el,o=>setWordRoomPage(book,a,o));
     if(a==='start')return act(el,o=>chooseWordRoomWord(book,v.word.id,o));
     if(['letter','clear-place','clear','model'].includes(a)) {

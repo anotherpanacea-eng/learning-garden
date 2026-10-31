@@ -96,6 +96,37 @@ def edges(browser,base):
   tap(p,'recover');p.evaluate('window.__wrLate=document.querySelector("[data-wr-action=confirm]")');p.goto(base+'#notes');p.locator('#download').wait_for();held=copy.deepcopy(book(p));p.evaluate('window.__wrLate.click()');ok(book(p)==held,'late recovery confirmation after navigation inert');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for();ok('wordRoom' not in book(p),'explicit explorer reset starts a preview without overwriting another explorer')
  finally:c.close()
 
+ seed=fixture("chooseWordRoomWord(s,'mat',o)");c,p=setup(browser,base,seed)
+ try:
+  p.locator('.wr-grownups summary').tap();tap(p,'recover');held=copy.deepcopy(book(p));p.evaluate('window.__wrRefuse=true');tap(p,'confirm');ok(book(p)==held and p.locator('.wr-dialog').count()==0,'normal grown-up recovery refusal preserves box and exits modal');ok(p.locator('#wr-status').evaluate('e=>e===document.activeElement'),'normal recovery refusal focuses connected status');ok(p.locator('.wr-grownups[open] a[href="#notes"]').is_visible(),'normal recovery refusal leaves Notes link available')
+ finally:c.close()
+ # Review regressions: modal failure must be visible/focusable, even at the
+ # actual report-byte boundary; paused drafts stay intact with an open shelf.
+ seed=fixture();seed['wordRoom']={'version':99,'raw':['retained']};c,p=setup(browser,base,seed)
+ try:
+  p.evaluate('window.__wrPad(0);const n=new TextEncoder().encode(JSON.stringify(window.__wrReport(),null,2)).length;window.__wrPad(5*1024*1024-n-2)');ok(p.evaluate('window.__wrFits(window.__wrReport())'),'pre-recovery actual export fits');held=copy.deepcopy(book(p));tap(p,'recover');tap(p,'confirm');ok(book(p)==held,'recovery refused at actual report boundary without mutation');ok(p.locator('.wr-dialog').count()==0,'refusal dismisses modal rather than hiding status behind it');ok(p.locator('#wr-status').is_visible() and p.locator('#wr-status').evaluate('e=>e===document.activeElement'),'modal failure explanation visible and focused');ok("couldn't keep" in p.locator('#wr-status').inner_text(),'modal failure tells what happened');ok(p.locator('.wr-room a[href="#notes"]').is_visible(),'Notes offered after refused recovery')
+ finally:c.close()
+ for missing in [False,True]:
+  seed=fixture("chooseWordRoomWord(s,'mat',o)")
+  if missing:del seed['wordRoom']['drafts']['mat']
+  else:seed['wordRoom']['drafts']['mat']={'future':'draft'}
+  c,p=setup(browser,base,seed)
+  try:
+   ok(p.locator('.wr-chooser').is_visible(),'missing or unreadable draft has an open chooser');ok(p.locator('[data-wr-action=build]').count()==0,'no ineffective Make step without readable draft');ok(p.locator('#wr-task').count()==1,'one current task heading')
+   if missing:tap(p,'start');ok(room(p)['drafts']['mat']['slots']==[None,None,None],'explicit missing draft start works')
+   else:card(p,'sat');ok(room(p)['drafts']['mat']=={'future':'draft'},'other card selection retains unreadable draft exactly')
+  finally:c.close()
+ seed=fixture("chooseWordRoomWord(s,'mat',o);s.wordRoom.page='read';s.wordRoom.textId='missing-scene'");c,p=setup(browser,base,seed)
+ try:
+  ok(p.locator('.wr-chooser').is_visible(),'bad selected scene offers the shelf');tap(p,'read');ok(room(p)['textId']=='props' and p.locator('.wr-passage').is_visible(),'Read opens readable linked scene from a retained broken read pointer')
+ finally:c.close()
+ seed=fixture("chooseWordRoomWord(s,'mat',o);s.wordRoom.gallery=Object.keys(s.wordRoom.source.words)");c,p=setup(browser,base,seed)
+ try:
+  ok(p.locator('.wr-ready').is_visible(),'complete retained collection shows milestone');tap(p,'scenes');ok(p.locator('.wr-scene-choices button').first.evaluate('e=>e===document.activeElement'),'finished box Read focuses retained scene choices');tap(p,'revisit');ok(p.locator('.wr-shelf button').first.evaluate('e=>e===document.activeElement'),'finished box Revisit focuses the retained picture shelf')
+  for key in ['props','box','puppet']:
+   p.locator('[data-wr-action=text][data-wr-value="'+key+'"]').tap();ok(p.locator('.wr-scene-picture').count()==1,'shared '+key+' scene drawn');p.screenshot(path=str(OUT/('scene-'+key+'.png')),full_page=True);tap(p,'choose')
+ finally:c.close()
+
 class Quiet(http.server.SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 class Server(http.server.ThreadingHTTPServer):request_queue_size=128;daemon_threads=True

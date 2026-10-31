@@ -122,7 +122,7 @@ export function setWordRoomPage(book, requested, options) {
     const d = w && own(r.drafts, w.id) && validWordRoomDraft(r.drafts[w.id], r.source.alphabet);
     let target = requested === 'back' ? w && d ? 'build' : 'choose' : requested;
     let textId = r.textId, notice = '';
-    if (target === 'read' && r.page !== 'read') {
+    if (target === 'read' && (r.page !== 'read' || !wordRoomText(r.source, r.textId))) {
       if (w && wordRoomText(r.source, w.textId)) textId = w.textId;
       else { target = 'choose'; notice = 'text-unavailable'; }
     }

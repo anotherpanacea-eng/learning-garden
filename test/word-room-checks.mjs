@@ -154,4 +154,17 @@ for(const raw of [null,false,17,'future',[],{}, {version:99}, {version:1,recover
 }
 eq(wordRoomNotes({}),'','no extra summary without a room');
 
+const brokenReading={};ok(w.chooseWordRoomWord(brokenReading,'mat',options).ok);
+brokenReading.wordRoom.page='read';brokenReading.wordRoom.textId='missing-scene';
+ok(w.setWordRoomPage(brokenReading,'read',options).ok,'explicit Read repairs only the selected scene pointer');
+eq(brokenReading.wordRoom.textId,'props','readable linked miniature selected instead of ineffective read-page no-op');
+const paused={};w.chooseWordRoomWord(paused,'mat',options);paused.wordRoom.drafts.mat={future:'draft'};
+const pausedHtml=wordRoomPage(paused,'synthetic');
+ok(pausedHtml.includes('class="wr-chooser"'),'paused card includes open chooser');
+ok(!pausedHtml.includes('data-wr-action="build"'),'paused card has no ineffective Make button');
+eq((pausedHtml.match(/id="wr-task"/g)||[]).length,1,'paused choice shelf has a separate heading id');
+
+const oldBox={};w.chooseWordRoomWord(oldBox,'mat',options);oldBox.wordRoom.source.texts={};oldBox.wordRoom.gallery=Object.keys(oldBox.wordRoom.source.words);
+ok(!wordRoomPage(oldBox,'synthetic').includes('data-wr-action="scenes"'),'completed older box with no readable scene offers no empty Read action');
+
 console.log(`Prop Box core: ${checks} checks passed (finite labels, drafts, frozen sources, partial readability, recovery and real preflight).`);
