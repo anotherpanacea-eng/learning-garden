@@ -15,6 +15,7 @@ Original text adapting268(f)/F. This is the complete commission, not a shipped p
 - Word empty: Your rail is empty. Choose a piece, or keep this empty version for later.
 - Word different: This differs from the printed word. Look along both versions. Your pieces can stay while you discuss them.
 - Word matches: Your pieces make the printed word. Which clue helps you remember it?
+- Unchecked keep: Not compared
 - Keep acknowledgment: This version is kept. You can keep working.
 - Glossary incomplete: Some sentences are waiting for a choice. You can keep an unfinished glossary.
 - Glossary discussion: Some choices differ from the checked glossary. Keep them to discuss, or try another choice.
@@ -38,11 +39,11 @@ Pieces are offered in the listed order. A piece's id is its lower-case text. Spa
 
 | id / printed word | Context sentence | Short meaning | Printed clue | Offered pieces | Example order |
 | --- | --- | --- | --- | --- | --- |
-| catchment | We are drawing the river's catchment on our map. | Here, land whose water drains toward the same outlet. | Catch stays whole before the ending -ment. Our meaning note tells us which kind of catchment this is. | ment, catch | catch, ment |
-| embankment | A raised embankment runs beside the road. | A raised bank, used to carry a road or hold water back. | Bank is inside embank. The word finishes with -ment. You can check embank as one piece or look at its letters in two pieces. | ment, bank, em, embank | embank, ment |
+| catchment | We are drawing the river's catchment on our map. | Here, land whose water drains toward a common outlet. | Catch stays whole before the ending -ment. Our meaning note tells us which kind of catchment this is. | ment, catch | catch, ment |
+| embankment | A raised embankment runs beside the road. | A raised bank, used to carry a road or hold water back. | Bank is inside embank. The word finishes with -ment. You can check embank as one piece or look at em and bank separately. | ment, bank, em, embank | embank, ment |
 | permeable | Water can pass through this permeable layer. | It lets liquid or gas pass through. | Permeation and permeable share perme. The ending here is -able. Perme is a letter group here, not a word you need to use alone. | able, perme | perme, able |
 | precipitation | The weather notebook records precipitation. | In this weather note, water falling from clouds, such as rain or snow. | Look for the ending -ation. Precipit is a letter group for checking this spelling, not a little word with its own meaning here. | ation, precipit | precipit, ation |
-| photosynthesis | The plant label uses the word photosynthesis. | A process in which plants use light to help make sugars. | Photo- relates to light; synthesis relates to putting together. This spelling has ph and y. You may check synthesis whole or look at syn and thesis as smaller letter pieces. | synthesis, thesis, photo, syn | photo, synthesis |
+| photosynthesis | The plant label uses the word photosynthesis. | A process in which plants use light to help make sugars. | Photo- relates to light; synthesis relates to putting together. Older Greek syn means together, and thesis relates to putting or placing. This spelling has ph and y. You may check synthesis whole or check syn and thesis separately. | synthesis, thesis, photo, syn | photo, synthesis |
 | algorithm | Dot follows an algorithm to sort the pretend parcels. | An ordered method of steps for doing a job. | This word's history starts with al-Khwarizmi's name. Its spelling changed as it travelled between languages. Later it was made to look like a Greek word for number. Keep the whole word together here. | algorithm | algorithm |
 
 The builder also accepts em + bank + ment and photo + syn + thesis because they form the same printed words. It does not grade a claim that each tile is a meaning-unit.
@@ -57,16 +58,18 @@ Algorithm has its own steps instead: 1. Look at the name in its history note. 2.
 ## F4 · supplied glossary
 
 Header: **Words for the water and garden tables**
+
+Every choice button shows only its literal word, with identical styling: g1 `which` / `witch` / `wich`; g2 `permeible` / `permeable` / `permiable`; g3 `affect` / `efect` / `effect`. No secondary original/correct label or badge appears on any button. Shared visible instruction: **Choose the printed word again if you want to leave it as it is.** This is the exact implementation of spec337’s “Leave as printed” behavior; that phrase is not an extra button or displayed label.
 Instruction: Read one sentence. Choose a spelling. Then read your version. Your other sentences will wait.
 Prompt: Find three slips on this glossary. You can revise, compare or keep it unfinished.
 
 ### g1 · Catchment
 
-Original: **Catchment: the land wich drains toward the same river outlet.**
-Flagged word: wich. Frame: `Catchment: the land ` + choice + ` drains toward the same river outlet.`
-Choices, in order: `which` (a, matches) · `witch` (b) · `wich` (c, Leave as printed).
+Original: **Catchment: the land wich drains toward a common river outlet.**
+Flagged word: wich. Frame: `Catchment: the land ` + choice + ` drains toward a common river outlet.`
+Choices, in order: `which` (a, matches) · `witch` (b) · `wich` (c, original choice).
 Feedback a: Which fits this sentence. It points to the land being described.
-Feedback b: Witch names a character. Here the sentence needs which to describe the land.
+Feedback b: Witch names a kind of person, often in a story. Here the sentence needs which to describe the land.
 Feedback c: This glossary uses which here. Compare the letters in your version with which.
 Hint: Which word links land to the words describing it?
 Example steps: Look at “the path which floods.” Which links path to its description. Now look at the land in this sentence.
@@ -75,7 +78,7 @@ Example steps: Look at “the path which floods.” Which links path to its desc
 
 Original: **Permeable: lets water pass through. Our garden path is permiable.**
 Flagged word: permiable. Frame: `Permeable: lets water pass through. Our garden path is ` + choice + `.`
-Choices: `permeible` (a) · `permeable` (b, matches) · `permiable` (c, Leave as printed).
+Choices: `permeible` (a) · `permeable` (b, matches) · `permiable` (c, original choice).
 Feedback a: This word uses -able. The family word permeation is a clue, not a rule for every word.
 Feedback b: Permeable matches the checked spelling. Permeation helps us notice perme.
 Feedback c: Compare permeation and permeable: both keep perme before the ending.
@@ -86,7 +89,7 @@ Example steps: Find perme in permeation. Find able on the word card. Put the let
 
 Original: **Embankment: a raised bank. It has an affect on where floods go.**
 Flagged word: affect. Frame: `Embankment: a raised bank. It has an ` + choice + ` on where floods go.`
-Choices: `affect` (a, Leave as printed) · `efect` (b) · `effect` (c, matches).
+Choices: `affect` (a, original choice) · `efect` (b) · `effect` (c, matches).
 Feedback a: Here “an effect” names a result. Affect is usually a verb in sentences like “Floods affect the road.”
 Feedback b: The noun effect has two f's. Compare it with the checked word.
 Feedback c: Effect names the result here: an effect on where floods go.
@@ -97,7 +100,7 @@ Glossary help ids `g1-example`, `g2-example`, `g3-example` reveal these steps on
 
 ## F1–F3 · supplied jobs
 
-Each job has three choices in this order. Compare outcome: unchosen=`incomplete`, fitting=`fit`, otherwise=`different`; no automatic next job. The printed teaching lead appears with the job. The optional example has its own title and all steps below. A correct answer gets the explanation; other choices get their own feedback then the explanation. Shared incomplete line: Choose a word, or skip for now. Shared different line: Look at the clue and your choice. You can revise or keep this version.
+Job ids are F1/F2/F3; teach ids are F1-example/F2-example/F3-example. Example titles below are their exact teach titles; Teaching lead fills teach[0].text and is always rendered with the job. Each job has three choices in this order. Compare outcome: unchosen=`incomplete`, fitting=`fit`, otherwise=`different`; no automatic next job. The printed teaching lead appears with the job. The optional example has its own title and all steps below. A correct answer gets the explanation; other choices get their own feedback then the explanation. Shared incomplete line: Choose a word, or skip for now. Shared different line: Look at the clue and your choice. You can revise or keep this version.
 
 ### F1 · A family clue (guided)
 
