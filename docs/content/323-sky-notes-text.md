@@ -19,8 +19,11 @@ Companion to [spec 323](../specs/323-sky-notes.md). First drafts for content and
 | Date changed | The date on this device changed. Refresh to see today. Nothing was saved. |
 | Refresh | Refresh |
 | At capacity | Dot's sky book is full on this device. Today's note can still be changed. Grown-ups can download the notes from Grown-up notes. |
+| Change not kept (preflight refusal, either root) | This change could not be kept safely. Your earlier work is unchanged. Download your notes or keep exploring. |
+| Device date unavailable | This device date cannot be used here. Earlier notes are still kept. |
+| Hear | Hear this page |
 | Unavailable | Sky notes can't be saved for this explorer right now. The rest of the almanac is open. |
-| Links | **Weather notes** · **Back to the almanac** |
+| Links | **Weather notes** · **Keeper’s Pages** |
 
 ## The eight choices
 
