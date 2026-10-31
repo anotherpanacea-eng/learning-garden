@@ -5,10 +5,11 @@ from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
 class Quiet(http.server.SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
+class Server(http.server.ThreadingHTTPServer):request_queue_size=128;daemon_threads=True
 server=None
 BASE=os.environ.get('NUMBER_GARDEN_TEST_URL')
 if not BASE:
- server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT/'dist')))
+ server=Server(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT/'dist')))
  threading.Thread(target=server.serve_forever,daemon=True).start();BASE=f'http://127.0.0.1:{server.server_port}/'
 IDS=[f'{a}-{s}' for a in ['number','operations','fractions','patterns','geometry','measurement','reasoning'] for s in ['support','explore','stretch-activity']]
 # Spec 19 asks for the question to begin on a 375px phone's first screen; wider screens show it whole.
