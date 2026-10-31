@@ -22,7 +22,7 @@ export const actThreeContent={
       ],
       "intro": "Marisol's barge is unloading at the landing. Help with the cargo, then bring that errand here.",
       "hostLabel": "Visit the River Market",
-      "hostHref": "#mercado",
+      "hostHref": null,
       "offer": "Offer this unloading",
       "kept": "Marisol ticks the cargo off her list and waves from the barge.",
       "keeperNote": "Trade between towns needs a rate everyone agrees on: how much of one thing is worth how much of another. A fair rate isn't always one-for-one."

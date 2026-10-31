@@ -61,6 +61,14 @@ export function runChecks(){
   const state=actThreeHosts(),questions=upstreamView(state).questions;ok(postUpstreamQuestion(state,questions[1].id,options));state.story.upstreamExchange.posts.push(clone(state.story.upstreamExchange.posts[0]));
   const before=clone(state);eq(A.actThreeCandidates(state,'letters').map(c=>c.ref.questionId),[questions[1].id],'all duplicated identities omitted, other question survives');eq(state,before,'duplicate history retained');
  }
+ {
+  for(const chapter of ['seeds','letters']){const state=actThreeHosts();(chapter==='seeds'?state.seedExchange:state.story.upstreamExchange).version=99;const before=clone(state);eq(A.actThreeCandidates(state,chapter),[],'unsupported '+chapter+' source is not guessed');eq(state,before,'unsupported source remains exact');}
+  const state=actThreeHosts();ok(A.startActThree(state,options));let html=actThreePage(state,{part:'chapter',chapter:'route'});ok(html.includes('The courier sets off'),'courier starts a sentence with a capital');ok(setActTwoFrameAmount(state,'longer',options));html=actThreePage(state,{part:'chapter',chapter:'route'});ok(html.includes('The courier sets off with a map'),'courier after a full stop is capitalized');
+  const kept=state.courierClockWalk.cases[walkCases[0].id].kept.snapshot;kept.source.title='Route $& $`';html=actThreePage(state,{part:'chapter',chapter:'route'});ok(html.includes('Route $&amp; $`'),'frozen label replacement metacharacters remain literal');
+  state.story.upstreamExchange.support=[{questionId:upstreamView(state).questions[0].id,help:'future'}];eq(A.actThreeCandidates(state,'letters').length,1,'unreadable support does not hide a readable post');eq(A.actThreeView(state).sources.letters.retainedUnreadable,false,'support-only damage is not a claim of unreadable posted work');
+  html=actThreePage(state,{part:'chapter',chapter:'market'});ok(!html.includes('href="#mercado"'),'unbuilt market route is not offered as a destination');
+  state.story.acts.III={started:'later',ended:false};html=actThreePage(state,{part:'hub'});ok(html.includes(C.messages.unreadableAct.replaceAll("'","&#39;")),'unreadable start gets recovery guidance');ok(!html.includes('href="#almanac/upstream-letter"'),'no false unopened-letter recovery for unreadable start');
+ }
  for(const raw of [null,4,[],false,'future']){const state=actThreeSeed();state.story.acts.III=clone(raw);unchanged(state,()=>A.startActThree(state,options),'unreadable act');}
  for(const chapter of A.actThreeChapters){const state=actThreeHosts();ok(A.startActThree(state,options));state.story.acts.III.contributions[chapter]={kind:'earlier-format'};const before=clone(state);eq(A.actThreeView(state).chapterStatus[chapter],'unreadable');unchanged(state,()=>A.offerActThree(state,chapter,'anything',options),'bad receipt retained');eq(state,before);}
  {
@@ -108,6 +116,6 @@ export function runChecks(){
   const leafs=x=>Array.isArray(x)?x.flatMap(leafs):x&&typeof x==='object'?Object.values(x).flatMap(leafs):typeof x==='string'?[x]:[];
   for(const text of leafs(C)){if(text.startsWith('#')||allowedTemplates.has(text))continue;ok(plain(sources).includes(plain(text)),'finite authored string traces to a named reviewed source: '+text);}
  }
- console.log(`Act III: ${n} source-owner, receipt, preservation, finite-text and presentation assertions passed; market reader and host wiring remain in progress.`);
+ console.log(`Act III: ${n} source-owner, receipt, preservation, finite-text and presentation assertions passed; the market reader waits for the separately commissioned runtime.`);
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runChecks();

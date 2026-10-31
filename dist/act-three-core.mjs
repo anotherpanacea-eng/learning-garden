@@ -35,7 +35,7 @@ function sourceView(state,chapter){
  if(chapter==='market')return result;
  if(chapter==='letters'){
   const v=upstreamView(state);if(v.status!=='ready')return {...result,status:v.status==='missing'?'missing':'unreadable',retainedUnreadable:v.status==='unavailable'};
-  result.status='ready';result.retainedUnreadable=v.sectionNotice===true;
+  result.status='ready';result.retainedUnreadable=v.postsStatus==='unavailable';
   for(const q of v.questions){if(q.postStatus==='unavailable')result.retainedUnreadable=true;if(q.postStatus!=='ready')continue;
    const p=q.post.posted,ref={questionId:p.questionId,sourceId:p.sourceId,sourceVersion:p.sourceVersion};
    if(reference(chapter,ref)&&id(q.source.label))add(ref,q.source.label,[ref.sourceId,ref.sourceVersion,ref.questionId]);else result.retainedUnreadable=true;
