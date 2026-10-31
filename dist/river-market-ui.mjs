@@ -72,6 +72,7 @@ export function riverMarketNotes(state){
  return `<details class='panel'><summary>The River Market (Spanish)</summary><p>River Market (Spanish): La carga ${esc(word)}${e?.support.meaning?', with English help':''}.</p><p>${rich(T.notesDetails)}</p><details><summary>Saved data</summary><pre>${esc(raw)}</pre></details></details>`;
 }
 let controller;
+export function resetRiverMarketView(){views=new WeakMap();controller?.abort();controller=undefined;}
 export function bindRiverMarket(state,ctx={}){
  controller?.abort();controller=new AbortController();const signal=controller.signal;
  const root=document.querySelector('[data-river-root]');if(!root)return;
