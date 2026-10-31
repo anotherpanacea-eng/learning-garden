@@ -114,7 +114,7 @@ Shown after a pick that doesn't fit. The card stays picked, and the explorer can
 | After a fitting pick | Line |
 | --- | --- |
 | Steps 1 to 4 | That answer fits. Now say it to her. |
-| Step 5 | That's what she said. |
+| Step 5 | You heard her right. |
 
 ## Listening and speaking controls
 
