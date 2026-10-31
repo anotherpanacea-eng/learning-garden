@@ -1232,7 +1232,6 @@ export const marketEndingCopy=Object.freeze({
   "fit": "{word}. {rule}",
   "rootPartLabel": "Root letters",
   "endingPartLabel": "Ending letters",
-  "skip": "Skip for now. You can come back any time.",
   "cannot": {
     "drop-e": "{root} does not end in e.",
     "y-to-i": "{root} does not end in y.",

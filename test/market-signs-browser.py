@@ -142,6 +142,9 @@ def endings_play(browser,base,w,hgt):
   bench(p,'practice');h.ok('endings' not in state(p),'practice preview does not allocate ending material')
   choose(p,'B1');p.locator('[data-ms-choice=a]').tap();earlier=copy.deepcopy(record(p));choose(p,'C1');h.ok(state(p)['practiceGroup']=='endings' and state(p)['records']['B1']==earlier,'named ending task preserves earlier group')
   bench(p,'endings');h.ok(p.locator('[data-ms-action=keep-ending]').is_disabled(),'no guessed default tool or letters')
+  for selector,key,value,typed in [('[data-ms-root]','rootId','fresh','f'),('[data-ms-ending]','endingId','ly','-')]:
+   p.locator(selector).focus();p.keyboard.type(typed);h.ok(state(p)['endings']['draft'][key]==value,'native keyboard select saves '+key);h.ok(p.locator(selector).evaluate('el=>document.activeElement===el'),'keyboard select retains focus '+key)
+  p.locator('[data-ms-tool=just-add]').focus();p.keyboard.press('Enter');h.ok(p.locator('[data-ms-tool=just-add]').get_attribute('aria-pressed')=='true' and p.locator('[data-ms-tool=just-add]').evaluate('el=>document.activeElement===el'),'keyboard tool activation saves selection and returns focus');h.ok(p.locator('.ms-bakery .ms-painted').inner_text()=='freshly','keyboard selects and tool produce visible board');action(p,'clear-ending')
   cases=[('fresh','ly','just-add','freshly',True),('happy','ly','just-add','happyly',True),('fresh','ly','drop-e',None,False),('fresh','ous','just-add','freshous',True),('gentle','ly','le-to-ly','gently',True),('dramatic','ly','ic-to-ically','dramatically',True)]
   for root,end,tool,made,keep in cases:
    ending_pair(p,root,end,tool)

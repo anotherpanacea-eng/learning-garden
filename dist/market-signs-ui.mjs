@@ -10,7 +10,7 @@ export function resetMarketSignsView(){views=new WeakMap();}
 function local(state,owner){
  let v=views.get(state);const root=state.signs,group=root?.practiceGroup==='endings'?'endings':'prefix',holder=group==='endings'?root?.endings:root,job=holder?.currentId??null,view=root?.view??'choose',recordSource=holder?.records?.[job]?.source;
  if(!v||v.owner!==owner||v.rootRef!==root||v.sourceRef!==root?.source||v.recordSourceRef!==recordSource){v={owner,rootRef:root,sourceRef:root?.source,recordSourceRef:recordSource,group,job,view,selected:null,panels:[],steps:{},practicePages:{},keptPage:0,longer:false};views.set(state,v);}
- if(v.group!==group||v.job!==job||v.view!==view){v.group=group;v.job=job;v.view=view;v.selected=null;v.steps={};v.panels=[];}
+ if(v.group!==group||v.job!==job||v.view!==view){v.group=group;v.job=job;v.view=view;v.selected=null;v.steps={};v.panels=[];v.keptPage=0;}
  return v;
 }
 const panel=(v,id,label,body)=>`<details data-ms-panel="${id}"${v.panels.includes(id)?' open':''}><summary>${esc(label)}</summary>${body}</details>`;
@@ -28,7 +28,7 @@ function prefixBench(v,l){
 }
 const fill=(text,values)=>String(text??'').replace(/\{(\w+)\}/g,(all,key)=>values[key]??all);
 const toolLabel=id=>own(E.toolLabels,id)?E.toolLabels[id]:E.unavailableTool;
-const keptEndingLabel=row=>`${row.rootText} + ${row.endingText} + ${toolLabel(row.toolId)}`;
+const keptEndingLabel=row=>`${row.rootText} + ${row.endingLabel} + ${toolLabel(row.toolId)}`;
 function endingArt(){return `<svg class="ms-sign-art" viewBox="0 0 660 250" aria-hidden="true"><path d="M84 221V14m446 207V14" stroke="#836442" stroke-width="9"/><path d="m28 39 550-7 10 176-552 5Z" fill="#fffdf5" stroke="#836442" stroke-width="7"/><path d="m49 55 510-6M49 195l515-6" fill="none" stroke="#e4caa4" stroke-width="3"/><circle cx="84" cy="58" r="5" fill="#836442"/><circle cx="530" cy="52" r="5" fill="#836442"/><path d="m593 176 7 57h42l7-57" fill="#b4a6c8" stroke="#665080" stroke-width="4"/><ellipse cx="621" cy="176" rx="28" ry="8" fill="#624b7b" stroke="#665080" stroke-width="3"/><path d="m615 174 22-77" stroke="#836442" stroke-width="7"/><path d="m634 106 5-19 10 3-6 19Z" fill="#624b7b"/></svg>`;}
 function endingFeedback(result){
  const values={root:result.root?.text,ending:result.ending?.label,made:result.made,word:result.join?.word,tool:toolLabel(result.join?.toolId),rule:E.rules[result.toolId]};
@@ -48,7 +48,7 @@ function endingBench(v,l){
  const back=button('bench',E.back,'data-ms-bench="choose"');
  if(!s||!d||!v.benchReadable)return `<section><h2 id="ms-task" tabindex="-1">The Ending Signs</h2>${back}${disabledNotice(E.benchUnavailable)}${endingKept(v,l)}</section>`;
  const result=c.marketEndingResult(s,d),ready=typeof result.made==='string',keep=['fit','mismatch','discovery'].includes(result.kind);
- const tool=id=>`${id==='ic-to-ically'?`<p class="ms-harder">${esc(E.harderLabel)}</p>`:''}${button('ending-tool',toolLabel(id),`data-ms-tool="${esc(id)}" aria-pressed="${d.toolId===id}"`)}`;
+ const tool=id=>`${id==='ic-to-ically'?`<p class="ms-harder" id="ms-harder-tool">${esc(E.harderLabel)}</p>`:''}${button('ending-tool',toolLabel(id),`data-ms-tool="${esc(id)}" aria-pressed="${d.toolId===id}"${id==='ic-to-ically'?' aria-describedby="ms-harder-tool"':''}`)}`;
  const shelves=panel(l,'ending-no-root',E.noRootLabel,`${p(E.noRootLine)}<dl>${s.shelves.noRoot.map(row=>`<dt>${esc(row.word)}</dt><dd>${esc(row.note)}</dd>`).join('')}</dl>`)+panel(l,'ending-odd',E.oddLabel,`${p(E.oddLine)}<dl>${s.shelves.odd.map(row=>`<dt>${esc(row.word)}</dt><dd>${esc(row.note)}</dd>`).join('')}</dl>`);
  return `<section class="ms-ending-bench"><h2 id="ms-task" tabindex="-1">The Ending Signs</h2>${p(E.header)}<div class="ms-selects"><label>${esc(E.rootLabel)}<select data-ms-root><option value=""${d.rootId===null?' selected':''}>${esc(E.rootPlaceholder)}</option>${s.roots.map(row=>`<option value="${esc(row.id)}"${row.id===d.rootId?' selected':''}>${esc(row.text)}</option>`).join('')}</select></label><label>${esc(E.endingLabel)}<select data-ms-ending><option value=""${d.endingId===null?' selected':''}>${esc(E.endingPlaceholder)}</option>${s.endings.map(row=>`<option value="${esc(row.id)}"${row.id===d.endingId?' selected':''}>${esc(row.label)}</option>`).join('')}</select></label></div><fieldset class="ms-tools"><legend>${esc(E.toolsLabel)}</legend>${s.tools.map(tool).join('')}</fieldset><figure class="ms-sign ms-bakery" aria-label="Bakery board and paint pot"><div class="ms-bakery-board">${endingArt()}<div class="ms-painted"><span>${ready?`<span class="ms-root-letters">${esc(result.base)}</span><span class="ms-ending-letters">${esc(result.added)}</span>`:'<span class="ms-blank">?</span>'}</span></div></div><figcaption>${ready?`<span class="ms-root-letters">${esc(E.rootPartLabel)}: ${esc(result.base)}</span><span class="ms-ending-letters">${esc(E.endingPartLabel)}: ${esc(result.added)}</span>`:''}</figcaption></figure>${ready?p(E.changes[result.change]):''}<div class="ms-feedback" id="ms-ending-feedback" aria-live="polite">${p(endingFeedback(result))}</div><div class="ms-actions">${button('keep-ending',E.keep,'',!keep)}${button('clear-ending',E.clear,'',d.rootId===null&&d.endingId===null&&d.toolId===null)}${back}</div>${v.story?p(v.story.hook):''}${endingKept(v,l)}${shelves}</section>`;
 }
@@ -61,7 +61,7 @@ function endingExtras(v,l){
  const source=v.source;if(!source)return '';
  const glossary=Array.isArray(source.glossary)&&source.glossary.length<=32&&source.glossary.every(row=>row&&readableText(row.term)&&readableText(row.text));
  const offscreen=source.offscreen&&readableText(source.offscreen.text)&&readableText(source.offscreen.grownup);
- return `${glossary?panel(l,'ending-glossary','Helpful words',`<dl>${source.glossary.map(row=>`<dt>${esc(row.term)}</dt><dd>${esc(row.text)}</dd>`).join('')}</dl>`):p(E.materialUnavailable)}${offscreen?panel(l,'ending-offscreen','On paper with a grown-up',`${p(source.offscreen.text)}${p(source.offscreen.grownup)}`):p(E.materialUnavailable)}${readableText(source.grownup)?panel(l,'ending-grownup','For grown-ups',`${p(source.grownup)}<a href="#notes">Notes and downloads</a>`):p(E.materialUnavailable)}`;
+ return `${glossary?panel(l,'ending-glossary','Helpful words',`<dl>${source.glossary.map(row=>`<dt>${esc(row.term)}</dt><dd>${esc(row.text)}</dd>`).join('')}</dl>`):p(E.materialUnavailable)}${offscreen?`${p(source.offscreen.text)}${p(source.offscreen.grownup)}`:p(E.materialUnavailable)}${readableText(source.grownup)?panel(l,'ending-grownup','For grown-ups',`${p(source.grownup)}<a href="#notes">Notes and downloads</a>`):p(E.materialUnavailable)}`;
 }
 
 const guideWords=page=>page.entries.length?`${page.entries[0].word} to ${page.entries.at(-1).word}`:null;
