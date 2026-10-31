@@ -8,7 +8,7 @@ const count=x=>Number.isInteger(x)&&x>=0&&x<=9999;
 const SUPPORT=['none','hint','example'];
 export const STATIONS=Object.freeze(['bags','brief']);
 export const itemById=k=>designItems.find(x=>x.id===k)||null;
-// Shape validation: never against today's catalogue.
+// Shape validation: never against today's catalog.
 const optOk=(x,flips=false)=>object(x)&&id(x.id)&&text(x.label)&&(!own(x,'flip')||flips&&(object(x.flip)&&(id(x.flip.id)&&text(x.flip.label)&&Object.keys(x.flip).length===2||text(x.flip.line)&&Object.keys(x.flip).length===1)));
 const listOk=(l,flips=false)=>Array.isArray(l)&&l.length<=12&&l.every(x=>optOk(x,flips))&&new Set(l.map(x=>x.id)).size===l.length;
 const lineOk=x=>object(x)&&id(x.id)&&text(x.text);
