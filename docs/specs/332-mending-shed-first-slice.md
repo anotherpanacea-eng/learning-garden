@@ -101,7 +101,7 @@ Hard edges are authoring context, never locks. `topic-coverage.csv` stays unchan
 | Supported practice | The guided metal bucket; misconception-specific lines on Check; predict-then-try; the stuck ladder. |
 | New application | The multi-material cards (lantern, mailbag, wooden bucket); the soaked willow rod and the willow note. |
 | Purposeful revisit | Deferred to later 167 slices (the Job Board reuses the kept materials). The kept board and grid reload exactly. |
-| Data boundary | Codes only, local, as above. No question about the child's home, clothes or belongings. |
+| Data boundary | Codes plus the authored display copy kept with each record, local, as above. 167 sketches a codes-only root; this slice also keeps what was shown so saved work survives content changes. Nothing typed is stored. No question about the child's home, clothes or belongings. |
 
 ## Acceptance
 
