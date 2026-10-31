@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 export const copyScopes = [
+  {path:'dist/market-signs-ui.mjs', adultBlocks:[{start:'export function marketSignsNotes(',end:'\nexport function bindMarketSigns(',reason:'Only used in Grown-up notes.'}],quotations:[]},
+  {path:'dist/market-signs-content.mjs', adultBlocks:[{start:' "grownup":',end:'\n "glossary":',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
   {path:'dist/parcel-labels-ui.mjs', adultBlocks:[
     {start:'function parcelGrownUpNote(', end:'\nexport function parcelLabelsPage(', reason:'Labelled Grown-up practice notes.'},
     {start:'export function parcelLabelsNotes(', end:'\nconst errors =', reason:'Only used in the adult Notes destination.'},

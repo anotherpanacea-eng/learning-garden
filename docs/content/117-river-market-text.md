@@ -1,6 +1,6 @@
 # The River Market: all child-facing text
 
-Companion to [spec 117](../specs/117-spanish-river-market.md). Use as written, after the same independent review **and a fluent Spanish reader's review**. Interface text is in English; notes, questions, replies and tiles are in Spanish with English glosses. The Spanish uses *ustedes* for plural "you" and *tú* for one person, per spec 120. Food words follow Spain (*patatas*). Willow Brook is *el arroyo*, matching Nuria's letters in spec 120. `{guide}` is the explorer's companion. Nothing here is scored.
+Companion to [spec 117](../specs/117-spanish-river-market.md). Use as written. The Spanish was reviewed by the [model panel](../reviews/117-spanish-panel/resolution.md) at blob `634c0ddd` and amended by its resolution; any later change to a Spanish line needs a new panel pass. Interface text is in English; notes, questions, replies and tiles are in Spanish with English glosses. The Spanish uses *ustedes* for plural "you" and *tú* for one person, per spec 120. Food words follow Spain (*patatas*). Willow Brook is *el arroyo*, matching Nuria's letters in spec 120. `{guide}` is the explorer's companion. Nothing here is scored.
 
 ## Arriving
 
@@ -24,8 +24,8 @@ Companion to [spec 117](../specs/117-spanish-river-market.md). Use as written, a
 **Phrasebook link:** Mi cuaderno · Words you've met
 
 **Optional line from Marisol about the boat's name** (shown once, after the first errand; the story thread may keep or cut it):
-> *Spanish:* «Se llama *La Garza*. Dicen que antes una garza vieja cuidaba los caminos del río.»
-> *English:* "She's called *La Garza*, the Heron. They say an old heron used to look after the river paths."
+> *Spanish:* «Se llama *La Garza*. Dicen que una garza vieja cuida el arroyo.»
+> *English:* "She's called *La Garza*, the Heron. They say an old heron looks after the brook."
 
 ---
 
@@ -41,7 +41,7 @@ Companion to [spec 117](../specs/117-spanish-river-market.md). Use as written, a
 
 ### Note, a longer note
 
-> ¡Hola, vecinos! Me llamo Marisol y soy la capitana de *La Garza*. Venimos de Vadoalto, más arriba en el valle. Hoy traemos tres tarros de miel, dos sacos de harina y una caja pequeña de semillas de junco. La miel es para el café, la harina es para la panadería y las semillas son para el jardín. El junco crece bien en la tierra mojada. ¿Nos ayudas a descargar?
+> ¡Hola, vecinos! Me llamo Marisol y soy la capitana de *La Garza*. Venimos de Vadoalto, más arriba en el valle. Hoy traemos tres tarros de miel, dos sacos de harina y una caja pequeña de semillas de carrizo. La miel es para el café, la harina es para la panadería y las semillas son para el jardín. El carrizo crece bien en la tierra mojada. ¿Nos ayudas a descargar?
 
 ### Sentence meanings
 
@@ -54,14 +54,14 @@ Companion to [spec 117](../specs/117-spanish-river-market.md). Use as written, a
 | La harina es para la panadería. | The flour is for the bakery. |
 | ¡Hola, vecinos! Me llamo Marisol y soy la capitana de *La Garza*. | Hello, neighbors! My name is Marisol and I'm the captain of *La Garza*. |
 | Venimos de Vadoalto, más arriba en el valle. | We come from Vadoalto, farther up the valley. |
-| Hoy traemos tres tarros de miel, dos sacos de harina y una caja pequeña de semillas de junco. | Today we're bringing three jars of honey, two sacks of flour and a small box of reed seeds. |
+| Hoy traemos tres tarros de miel, dos sacos de harina y una caja pequeña de semillas de carrizo. | Today we're bringing three jars of honey, two sacks of flour and a small box of reed seeds. |
 | La miel es para el café, la harina es para la panadería y las semillas son para el jardín. | The honey is for the café, the flour is for the bakery and the seeds are for the garden. |
-| El junco crece bien en la tierra mojada. | Reeds grow well in wet ground. |
+| El carrizo crece bien en la tierra mojada. | Reeds grow well in wet ground. |
 | ¿Nos ayudas a descargar? | Will you help us unload? |
 
 ### Words
 
-*hola* hello · *somos* we are · *traemos* we bring · *el tarro* jar · *la miel* honey · *el saco* sack · *la harina* flour · *para* for · *los vecinos* neighbors · *me llamo* my name is · *la capitana* captain · *venimos de* we come from · *más arriba* farther up · *el valle* valley · *la caja* box · *pequeña* small · *las semillas* seeds · *el junco* reed · *crece* grows · *la tierra mojada* wet ground · *descargar* to unload
+*hola* hello · *somos* we are · *traemos* we bring · *el tarro* jar · *la miel* honey · *el saco* sack · *la harina* flour · *para* for · *los vecinos* neighbors · *me llamo* my name is · *la capitana* captain · *venimos de* we come from · *más arriba* farther up · *el valle* valley · *la caja* box · *pequeña* small · *las semillas* seeds · *el carrizo* reed · *crece* grows · *la tierra mojada* wet ground · *descargar* to unload
 
 ### Task
 
@@ -85,7 +85,7 @@ Companion to [spec 117](../specs/117-spanish-river-market.md). Use as written, a
 > «La harina está en el jardín. ¿Es para el jardín?»
 > «Las semillas están en la panadería. ¿Son para la panadería?»
 
-English under each, on request: "The {item} is in the {place}. Is it for the {place}?"
+English under each, on request: "The {item} is in the {place}. Is it for the {place}?" For the seeds: "The seeds are in the {place}. Are they for the {place}?"
 
 ### Question
 
@@ -99,7 +99,7 @@ English under each, on request: "The {item} is in the {place}. Is it for the {pl
 
 ### Phrasebook
 
-hola · somos · traemos · el tarro · la miel · el saco · la harina · las semillas · el junco · el café · la panadería · el jardín · dos · tres
+hola · somos · traemos · el tarro · la miel · el saco · la harina · las semillas · el carrizo · el café · la panadería · el jardín · dos · tres
 
 ---
 
@@ -115,7 +115,7 @@ hola · somos · traemos · el tarro · la miel · el saco · la harina · las s
 
 ### Note, a longer note
 
-> Teo, la panadería no está lejos. Sal del muelle y sigue recto hasta el puente. Cruza el puente con cuidado, porque todavía hay tablas sueltas después de la tormenta. En la plaza, gira a la izquierda. La panadería está al lado del café, enfrente de la oficina de correos. ¡No te pierdas!
+> Teo, la panadería no está lejos. Sal del muelle y sigue recto hasta el puente. Cruza el puente con cuidado, porque todavía hay tablas sueltas después de la tormenta. En la plaza, gira a la izquierda. La panadería está al lado del café, enfrente de la oficina de correos.
 
 ### Sentence meanings
 
@@ -127,13 +127,13 @@ hola · somos · traemos · el tarro · la miel · el saco · la harina · las s
 | En la plaza, gira a la izquierda. | At the square, turn left. |
 | La panadería está al lado del café. | The bakery is next to the café. |
 | Teo, la panadería no está lejos. | Teo, the bakery isn't far. |
+| Sal del muelle y sigue recto hasta el puente. | Leave the landing and keep going straight as far as the bridge. |
 | Cruza el puente con cuidado, porque todavía hay tablas sueltas después de la tormenta. | Cross the bridge carefully, because there are still loose planks after the storm. |
 | La panadería está al lado del café, enfrente de la oficina de correos. | The bakery is next to the café, across from the post office. |
-| ¡No te pierdas! | Don't get lost! |
 
 ### Words
 
-*sal* leave, go out · *el muelle* landing, dock · *sigue recto* keep going straight · *hasta* as far as · *el puente* bridge · *cruza* cross · *la plaza* square · *gira* turn · *a la izquierda* to the left · *a la derecha* to the right · *al lado de* next to · *no está lejos* isn't far · *con cuidado* carefully · *todavía hay* there are still · *las tablas sueltas* loose planks · *la tormenta* storm · *enfrente de* across from · *la oficina de correos* post office · *¡No te pierdas!* Don't get lost!
+*sal* leave, go out · *el muelle* landing, dock · *sigue recto* keep going straight · *hasta* as far as · *el puente* bridge · *cruza* cross · *la plaza* square · *gira* turn · *a la izquierda* to the left · *a la derecha* to the right · *al lado de* next to · *no está lejos* isn't far · *con cuidado* carefully · *todavía hay* there are still · *las tablas sueltas* loose planks · *la tormenta* storm · *enfrente de* across from · *la oficina de correos* post office
 
 ### Task
 
@@ -192,11 +192,11 @@ sigue recto · cruza · gira · a la izquierda · a la derecha · al lado de · 
 > Necesitamos dos patatas y una cebolla.
 > Primero, corta las patatas.
 > Después, fríe las patatas con la cebolla.
-> Al final, añade los huevos.
+> Al final, añade los huevos y cocina la tortilla por los dos lados.
 
 ### Note, a longer note
 
-> Esta noche hay cena en el mercado y yo preparo una tortilla de patatas. Necesitamos seis huevos, tres patatas, una cebolla, aceite de oliva y un poco de sal. Primero, pela y corta las patatas. Después, fríe las patatas y la cebolla en el aceite, despacio, hasta que estén blandas. Luego, bate los huevos y mézclalo todo. Al final, cocina la tortilla por los dos lados. ¡Cuidado al darle la vuelta!
+> Esta noche hay cena en el mercado y yo preparo una tortilla de patatas. Necesitamos seis huevos, tres patatas, una cebolla, aceite de oliva y un poco de sal. Primero, pela y corta las patatas. Después, fríe las patatas y la cebolla en el aceite a fuego lento. Luego, bate los huevos y mézclalo todo. Al final, cocina la tortilla por los dos lados. ¡Cuidado al darle la vuelta!
 
 ### Sentence meanings
 
@@ -206,18 +206,18 @@ sigue recto · cruza · gira · a la izquierda · a la derecha · al lado de · 
 | Necesitamos dos patatas y una cebolla. | We need two potatoes and an onion. |
 | Primero, corta las patatas. | First, cut the potatoes. |
 | Después, fríe las patatas con la cebolla. | Afterwards, fry the potatoes with the onion. |
-| Al final, añade los huevos. | At the end, add the eggs. |
+| Al final, añade los huevos y cocina la tortilla por los dos lados. | At the end, add the eggs and cook the tortilla on both sides. |
 | Esta noche hay cena en el mercado y yo preparo una tortilla de patatas. | Tonight there's a dinner at the market and I'm making a potato tortilla. |
 | Necesitamos seis huevos, tres patatas, una cebolla, aceite de oliva y un poco de sal. | We need six eggs, three potatoes, an onion, olive oil and a little salt. |
 | Primero, pela y corta las patatas. | First, peel and cut the potatoes. |
-| Después, fríe las patatas y la cebolla en el aceite, despacio, hasta que estén blandas. | Afterwards, fry the potatoes and the onion in the oil, slowly, until they're soft. |
+| Después, fríe las patatas y la cebolla en el aceite a fuego lento. | Afterwards, fry the potatoes and the onion in the oil over low heat. |
 | Luego, bate los huevos y mézclalo todo. | Then beat the eggs and mix it all together. |
 | Al final, cocina la tortilla por los dos lados. | At the end, cook the tortilla on both sides. |
 | ¡Cuidado al darle la vuelta! | Careful when you flip it! |
 
 ### Words
 
-*necesitamos* we need · *los huevos* eggs · *las patatas* potatoes · *la cebolla* onion · *primero* first · *corta* cut · *después* afterwards · *fríe* fry · *al final* at the end · *añade* add · *esta noche* tonight · *la cena* dinner · *el mercado* market · *preparo* I make · *el aceite de oliva* olive oil · *un poco de sal* a little salt · *pela* peel · *despacio* slowly · *hasta que estén blandas* until they're soft · *luego* then · *bate* beat · *mézclalo todo* mix it all · *por los dos lados* on both sides · *darle la vuelta* to flip it
+*necesitamos* we need · *los huevos* eggs · *las patatas* potatoes · *la cebolla* onion · *primero* first · *corta* cut · *después* afterwards · *fríe* fry · *al final* at the end · *añade* add · *esta noche* tonight · *la cena* dinner · *el mercado* market · *preparo* I make · *el aceite de oliva* olive oil · *un poco de sal* a little salt · *pela* peel · *a fuego lento* over low heat · *luego* then · *bate* beat · *mézclalo todo* mix it all · *cocina* cook · *por los dos lados* on both sides · *cuidado* careful · *darle la vuelta* to flip it
 
 ### Task, part 1: the pantry
 
@@ -231,8 +231,8 @@ sigue recto · cruza · gira · a la izquierda · a la derecha · al lado de · 
 
 **Teo, something differs** (one line per difference):
 > «¿Cuántos huevos? Mira la nota otra vez.» *How many eggs? Look at the note again.*
-> «¿Cuántas patatas? Mira la nota otra vez.» *How many potatoes?*
-> «¿Y la cebolla?» *And the onion?*
+> «¿Cuántas patatas? Mira la nota otra vez.» *How many potatoes? Look at the note again.*
+> «¿Cuántas cebollas? Mira la nota otra vez.» *How many onions? Look at the note again.*
 > «¿Tomates? No los necesito para esta receta.» *Tomatoes? I don't need them for this recipe.*
 > «¿Pan? Hoy no.» *Bread? Not today.*
 > «¿Leche? En mi tortilla, no.» *Milk? Not in my tortilla.*
@@ -242,11 +242,11 @@ sigue recto · cruza · gira · a la izquierda · a la derecha · al lado de · 
 
 **Prompt:** Put Teo's steps in order. Look for *primero*, *después*, *luego* and *al final*.
 
-**Short cards:** corta las patatas · fríe las patatas con la cebolla · añade los huevos
+**Short cards:** corta las patatas · fríe las patatas con la cebolla · añade los huevos y cocina la tortilla por los dos lados
 
 **Longer cards:** pela y corta las patatas · fríe las patatas y la cebolla · bate los huevos · mézclalo todo · cocina la tortilla por los dos lados
 
-**Saved shuffle, short:** añade los huevos · corta las patatas · fríe las patatas con la cebolla
+**Saved shuffle, short:** añade los huevos y cocina la tortilla por los dos lados · corta las patatas · fríe las patatas con la cebolla
 
 **Saved shuffle, longer:** bate los huevos · cocina la tortilla por los dos lados · pela y corta las patatas · mézclalo todo · fríe las patatas y la cebolla
 
@@ -275,7 +275,7 @@ A longer note:
 | Choice | Nudge |
 | --- | --- |
 | **Pelas y cortas las patatas.** | *(fits)* Yes: *primero, pela y corta las patatas*. |
-| Bates los huevos. | *Luego* means then. The eggs come after the potatoes are soft. |
+| Bates los huevos. | *Luego* means then. The eggs come after the frying. |
 | Fríes la cebolla. | *Después* means afterwards. Something comes before the frying. |
 
 ### Two tortillas (Details)
@@ -299,7 +299,7 @@ necesitamos · los huevos · las patatas · la cebolla · primero · después ·
 
 ### Note, a longer note
 
-> El parte del tiempo para el valle. Mañana por la mañana va a llover mucho, sobre todo en las montañas. Por la tarde las nubes se van y va a hacer sol, pero va a hacer fresco. Por la noche va a hacer mucho viento. El arroyo va a subir un poco, así que las barcas deben amarrarse bien en el muelle. No hay peligro para el pueblo.
+> El parte del tiempo para el valle. Mañana por la mañana va a llover mucho, sobre todo en las montañas. Por la tarde las nubes se van y va a hacer sol, pero va a hacer fresco. Por la noche va a hacer mucho viento. El arroyo va a subir un poco, así que hay que amarrar bien las barcas en el muelle. No hay peligro para el pueblo.
 
 ### Sentence meanings
 
@@ -312,12 +312,12 @@ necesitamos · los huevos · las patatas · la cebolla · primero · después ·
 | El parte del tiempo para el valle. | The weather report for the valley. |
 | Mañana por la mañana va a llover mucho, sobre todo en las montañas. | Tomorrow morning it's going to rain a lot, especially in the mountains. |
 | Por la tarde las nubes se van y va a hacer sol, pero va a hacer fresco. | In the afternoon the clouds go away and it's going to be sunny, but cool. |
-| El arroyo va a subir un poco, así que las barcas deben amarrarse bien en el muelle. | The brook is going to rise a little, so boats should be tied up well at the landing. |
+| El arroyo va a subir un poco, así que hay que amarrar bien las barcas en el muelle. | The brook is going to rise a little, so the boats need to be tied up well at the landing. |
 | No hay peligro para el pueblo. | There's no danger for the town. |
 
 ### Words
 
-*mañana* tomorrow · *por la mañana* in the morning · *va a llover* it's going to rain · *por la tarde* in the afternoon · *va a hacer sol* it's going to be sunny · *por la noche* at night · *mucho viento* a lot of wind · *el arroyo* brook · *subir* to rise · *bajar* to go down · *un poco* a little · *el parte del tiempo* weather report · *sobre todo* especially · *las montañas* mountains · *las nubes se van* the clouds go away · *fresco* cool · *así que* so · *las barcas* boats · *amarrarse* to be tied up · *no hay peligro* there's no danger · *el pueblo* town
+*mañana* tomorrow · *por la mañana* in the morning · *va a llover* it's going to rain · *por la tarde* in the afternoon · *va a hacer sol* it's going to be sunny · *por la noche* at night · *mucho viento* a lot of wind · *el arroyo* brook · *subir* to rise · *bajar* to go down · *un poco* a little · *el parte del tiempo* weather report · *sobre todo* especially · *las montañas* mountains · *las nubes se van* the clouds go away · *fresco* cool · *así que* so · *las barcas* boats · *hay que* we need to · *amarrar* to tie up · *no hay peligro* there's no danger · *el pueblo* town
 
 **Mañana and mañana (Details):** *Mañana* means "tomorrow", and *la mañana* means "the morning". So *mañana por la mañana* is "tomorrow morning".
 
@@ -347,7 +347,7 @@ necesitamos · los huevos · las patatas · la cebolla · primero · después ·
 
 | Choice | Nudge |
 | --- | --- |
-| No va a cambiar. | Look at the sentence with *el arroyo*. *Subir* means to rise. |
+| No va a cambiar. | *Cambiar* means to change. Look at the sentence with *el arroyo* to see what it's going to do. |
 | Va a bajar. | *Bajar* means to go down. The note uses a different verb. |
 | **Va a subir un poco.** | *(fits)* Yes: *va a subir un poco*, it's going to rise a little. |
 
@@ -368,10 +368,12 @@ mañana · por la mañana · por la tarde · por la noche · va a llover · va a
 | To | Querida Marisol: · Querida Nuria: · Hola, Teo: · Hola, Nube: |
 | Weather | Hoy hace sol. · Hoy llueve. · Hoy hace viento. · Hoy hace frío. |
 | The town | Me gusta el mercado. · Me gusta la miel. · Me gustan las manzanas. · Mi lugar favorito es el jardín. · Mi lugar favorito es el puente. · Mi lugar favorito es la biblioteca. · Mi lugar favorito es el molino. |
-| Questions | ¿Cómo está Nube? · ¿Cuándo vuelven? · ¿Me escribes? |
+| Questions | ¿Cómo está Nube? · ¿Cuándo vuelve *La Garza*? · ¿Me escribes? |
 | Goodbye | Un abrazo, · Hasta pronto, |
 
-**Tile meanings:** Dear Marisol · Dear Nuria · Hi, Teo · Hi, Nube · Today it's sunny · Today it's raining · Today it's windy · Today it's cold · I like the market · I like the honey · I like the apples · My favorite place is the garden / the bridge / the library / the mill · How is Nube? · When are you all coming back? · Will you write to me? · A hug, · See you soon,
+**Not offered together:** when the card starts **Hola, Nube:**, the tile *¿Cómo está Nube?* is not offered.
+
+**Tile meanings:** Dear Marisol · Dear Nuria · Hi, Teo · Hi, Nube · Today it's sunny · Today it's raining · Today it's windy · Today it's cold · I like the market · I like the honey · I like the apples · My favorite place is the garden / the bridge / the library / the mill · How is Nube? · When is *La Garza* coming back? · Will you write to me? · A hug, · See you soon,
 
 **Your own words:** Add your own words (Spanish, English or both). Optional.
 
@@ -387,9 +389,9 @@ mañana · por la mañana · por la tarde · por la noche · va a llover · va a
 > *Hello! Thank you for your postcard. Nube is very well; she sleeps all day on top of the sacks. In Vadoalto it's sunny and the brook is calm. We'll be back at the market soon with more honey. A hug, Marisol.*
 
 **Reply, if addressed to Nuria** (the story thread may replace this with its own letter):
-> ¡Hola! Marisol me dio tu postal. ¡Gracias! Aquí el poste de crecidas marca poca agua, y eso es bueno. Escríbeme otra vez pronto. Un abrazo, Nuria.
+> ¡Hola! Tengo tu postal. ¡Gracias! Aquí el nivel del agua está bajo, y eso es bueno. Escríbeme otra vez pronto. Un abrazo, Nuria.
 >
-> *Hello! Marisol gave me your postcard. Thank you! Here the flood post shows only a little water, and that's good. Write to me again soon. A hug, Nuria.*
+> *Hello! I have your postcard. Thank you! Here the water level is low, and that's good. Write to me again soon. A hug, Nuria.*
 
 ---
 
@@ -401,17 +403,17 @@ mañana · por la mañana · por la tarde · por la noche · va a llover · va a
 
 ## Mi cuaderno: grammar and sound notes
 
-**El, la, los, las.** Every Spanish noun is masculine or feminine, and the little word in front shows which: *el saco*, *la caja*. For more than one: *los sacos*, *las cajas*.
+**El, la, los, las.** Spanish nouns have a grammatical gender: masculine or feminine. Learn each noun with its article: *el saco*, *la caja*. For more than one: *los sacos*, *las cajas*.
 
 **Hay.** *Hay* means there is or there are. *Hay tres tarros*: there are three jars. It doesn't change for one or many.
 
-**Going to: *va a*.** *Va a* plus a verb means going to. *Va a llover*: it's going to rain. *Voy a cocinar*: I'm going to cook.
+**Going to: *va a*.** Use a form of *ir* + *a* + an infinitive to say what is going to happen. *Va a llover*: it's going to rain. *Voy a cocinar*: I'm going to cook.
 
-**Directions to a friend.** *Sigue*, *gira* and *cruza* are friendly commands, the way you'd tell one friend what to do.
+**Directions to a friend.** *Sal*, *sigue*, *gira* and *cruza* are friendly commands, the way you'd tell one friend what to do.
 
 **Me gusta and me gustan.** *Me gusta la miel* for one thing; *me gustan las manzanas* for more than one.
 
-**Sounds.** *H* is silent: *harina* sounds like "ah-REE-nah". *J* is a breathy sound from the back of the throat: *junco*. *Ñ* sounds like the "ny" in canyon: *mañana*. *Ll* in *llover* sounds like the "y" in yes in most places.
+**Sounds.** *H* is silent: *harina* sounds like "ah-REE-nah". *J* is a raspy sound made at the back of the mouth: *jardín*. *Ñ* sounds like the "ny" in canyon: *mañana*. *Ll* in *llover* sounds like the "y" in yes in most places.
 
 ## Off-screen invitations
 
@@ -424,14 +426,8 @@ mañana · por la mañana · por la tarde · por la noche · va a llover · va a
 
 **Line:** River Market (Spanish): {n} of 4 errands done, {m} with English help. Postcard: kept / not yet.
 
-**Details:** The market practices reading short Spanish notes and acting on them. It doesn't assess Spanish ability. Errands marked "Read with English help" used the English meanings. If you speak Spanish, reading the notes aloud together helps more than anything the game can do.
+**Details:** The market practices reading short Spanish notes and acting on them. It doesn't assess Spanish ability. Errands marked "Read with English help" used the English meanings. A longer note is optional stretch reading, meant to be read with the English help; short sentences are the default. When a line speaks to more than one person, the game uses *ustedes*. In Spain, friends usually say *vosotros*; *ustedes* is also correct, and it keeps the verb forms simpler. If you speak Spanish, reading the notes aloud together helps more than anything the game can do.
 
 ## Questions for the fluent reader
 
-1. Is *más arriba en el valle* natural for "farther up the valley", or would *valle arriba* be better?
-2. *El muelle* for a small village landing on a brook: would *el embarcadero* fit better? (Léon's French uses *embarcadère*.)
-3. Are *barca* and *amarrarse* the right words for a small river boat and tying it up?
-4. Is *El parte del tiempo* natural in northern Spain, or would *el pronóstico del tiempo* read better to learners?
-5. The recipe: is the order and wording of a *tortilla de patatas* right, including *mézclalo todo*?
-6. Teo's lines and Marisol's replies: do they sound like real people, and are the nudges' Spanish quotations exact?
-7. Are any tiles awkward together (for example *¿Cuándo vuelven?* to one person)? It is plural on purpose, asking the crew.
+Answered by the model panel. See [the resolution](../reviews/117-spanish-panel/resolution.md) for each answer and the line it settled.
