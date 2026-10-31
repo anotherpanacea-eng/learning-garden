@@ -7,7 +7,7 @@ Original prose for the bounded293model. Dynamic counts come only from the actual
 - Title: Same ground, different fence
 - Job: Plan a growing plot after the storm. Lay square tiles, then walk the outside edge. Can the same tiles need a different amount of fence?
 - Units: One tile covers1 square unit. Each edge is1 length unit. These are model units, not metres.
-- Visit notice: This work stays while you explore this board. Leaving or reloading clears it; it is not saved in Notes.
+- Visit notice (inside **For grown-ups**): This work stays while you explore this board. Leaving or reloading clears it; it is not saved in Notes.
 - Encounter: Choose some tiles
 - Width: Squares in each row
 - Actions: Lay one row / Lift last row / Return all tiles
