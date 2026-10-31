@@ -129,7 +129,8 @@ eq(frameText({garden:{style:'field-journal'}},'A','B'),'B');eq(frameText({garden
 const allowed=new Set(['style-core.mjs','style-ui.mjs','style-frames.mjs','cafe-ui.mjs','keeper-story-ui.mjs','app.mjs']);
 for(const f of readdirSync(new URL('../dist/',import.meta.url)).filter(f=>f.endsWith('.mjs')&&!allowed.has(f))){
  const text=readFileSync(new URL(`../dist/${f}`,import.meta.url),'utf8');
- ok(!/garden\??\.style\b|garden\[['"]style['"]\]|\bstyleOf\b|\bframeText\b/.test(text),`${f} must not read the look`);
+ // frameText as a call or import; Design Table has an unrelated content key of the same name.
+ ok(!/garden\??\.style\b|garden\[['"]style['"]\]|\bstyleOf\b|\bframeText\s*\(|import[^;]*\bframeText\b/.test(text),`${f} must not read the look`);
 }
 // The panel copy.
 {const html=stylePanel(seed());for(const t of [STYLE_COPY.heading,STYLE_COPY.explanation,STYLE_COPY.button,STYLE_COPY.caption,'Bright pictures and playful lines.','Notebook pages, maps and quieter lines.'])ok(html.includes(t.replace(/’/g,'’')),t);ok(/value="storybook" checked/.test(html));ok(!/data-style=/.test(html),'the preview never sets the page look');}
