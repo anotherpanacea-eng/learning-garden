@@ -18,6 +18,18 @@ export const copyScopes = [
   {path:'dist/paired-points-content.mjs', adultBlocks:[
     {start:"grownUp:'", end:'\n});', reason:'Shown only in Grown-up details and notes.'},
   ], quotations:[]},
+  {path:'dist/hinge-ui.mjs', adultBlocks:[
+    {start:'<details class="hinge-about hinge-grownups">', end:'</details></section>', reason:'For grown-ups panel.'},
+  ], quotations:[]},
+  {path:'dist/hinge-content.mjs', adultBlocks:[
+    {start:'"visit":', end:'export const hingeFrames', reason:'Shown only in the For grown-ups panel.'},
+  ], quotations:[]},
+  {path:'dist/ribbon-measure-ui.mjs', adultBlocks:[
+    {start:'<details><summary>For grown-ups</summary>', end:'</details></section>', reason:'For grown-ups panel.'},
+  ], quotations:[]},
+  {path:'dist/ribbon-measure-content.mjs', adultBlocks:[
+    {start:" grownup:'", end:'\n});', reason:'Shown only in the For grown-ups panel.'},
+  ], quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');

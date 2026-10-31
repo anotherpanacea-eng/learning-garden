@@ -22,16 +22,16 @@ Original prose for [spec297](../specs/297-hinge-bench.md). Draft for independent
 
 **Overlay:** Dashed reference: its pin and starting direction are lined up with yours. Turning the whole reference to align it does not change its selected turn.
 
-**Visit:** Settings last for this visit. They are not added to your notes. Trying another case revisits this small collection; it is not a new assessment.
+**Visit (For grown-ups):** Settings last for this visit. They are not added to your notes. Trying another hinge revisits this small collection; it is not a new assessment.
 
 ## Seven prompts and comparison explanations
 
 | Case | Request | Explanation on Compare |
 | --- | --- | --- |
 | Same turn, different arms | Keep the same selected turn while changing either visible arm length. | The drawn ends can move farther apart or closer together while the directions stay fixed. When only lengths change and their directions stay fixed, the selected turn stays the same. |
-| The far-apart tips | Which model has the bigger turn? Press Compare to line them up instead of comparing the distance between their tips. | In this starting pair the long arms have farther-apart tips, but their 45° turn is smaller than the short arms’ 110° turn. If you change the working hinge, compare its current turn instead. |
+| The far-apart tips | Which model has the bigger turn? Press Compare turns to line them up instead of comparing the distance between their tips. | In this starting pair the long arms have farther-apart tips, but their 45° turn is smaller than the short arms’ 110° turn. If you change the working hinge, compare its current turn instead. |
 | A tilted square corner | Make the selected turn match the reference. Try the quarter-turn card, even when the picture is tilted. | A quarter turn stays a right angle when the whole picture turns. Longer arms do not make it a larger angle. |
-| Either side of a quarter turn | Compare these almost-square openings. Use the card on your hinge. Compare lines the reference up so the card can check it too. | 85° is a little less than a quarter turn; 95° is a little more. Only exactly 90° is a right angle. Use the current measured settings if you change the hinge. |
+| Either side of a quarter turn | Compare these almost-square openings. Show the quarter-turn card on your hinge, then press Compare turns to line the reference up so the card can check it too. | 85° is a little less than a quarter turn; 95° is a little more. Only exactly 90° is a right angle. Use the current measured settings if you change the hinge. |
 | A half turn | Move the blue arm until the marked sweep is a half turn. Leave the lengths alone if you like. | A 180° half turn puts the rays in opposite directions along one straight line. The amount of turn does not depend on the drawn lengths. |
 | Beyond a half turn | Follow the whole marked sweep. Match it without replacing it with the shorter route between the rays. | The reference marks 270°: three quarter turns. That selected turn is reflex. The other way between these rays is 90° going clockwise; it is not the marked reference sweep. |
 | Back to the starting direction | Compare no turn with one full turn. The rays can end in the same direction; what does the sweep tell us? | In the starting pair, 0° has made no turn. 360° has gone once all the way round. Matching final directions does not make these selected turns equal. |
@@ -60,4 +60,4 @@ Persistent visible and spoken label: **Worked example, not your hinge**. Label t
 4. **Turn the whole picture.** Rotate both arms of a 60° example together by 120°. Its direction on the page changes; the turn from its starting ray to its moving ray stays 60°.
 5. **Same direction, different sweep.** In one example the moving ray has not turned: 0°. In the other it has gone once all the way round: 360°. The final rays point the same way, but the marked sweeps differ.
 
-**Parent prompt:** Ask what would change if only one arm became longer, and what would change if the blue arm turned while both lengths stayed fixed. A spoken explanation is welcome; this bench does not record or grade it. Paper-and-card turning can be explored together offscreen; the screen does not establish real-tool skill.
+**Parent prompt (For grown-ups):** Ask what would change if only one arm became longer, and what would change if the blue arm turned while both lengths stayed fixed. A spoken explanation is welcome; this bench does not record or grade it. Paper-and-card turning can be explored together offscreen; the screen does not establish real-tool skill.
