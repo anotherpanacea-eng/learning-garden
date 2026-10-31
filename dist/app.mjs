@@ -524,9 +524,7 @@ function render(){
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindFeedingBoard(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#living/who-eats',save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,download:()=>downloadText(JSON.stringify(notesReport(state),null,2),'after-the-storm-notes.json'),stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#post/manifest'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#post'?'page':'false'));
+    routeHeader('#post');
     if(choosingExplorer)resetManifestView();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):manifestPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindManifest(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});}return;
