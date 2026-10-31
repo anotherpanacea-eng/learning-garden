@@ -908,6 +908,17 @@
         "create"
       ],
       "scope": "Move or remove one opaque card between a fixed point lamp and screen, compare relative shadow sizes in coherent side/front views, reveal selected light paths and undo. A temporary qualitative ideal model; no physical observation, measured data, independent prediction/explanation or saved show scene."
+    },
+    {
+      "id": "stained-map",
+      "name": "The Stained Map",
+      "status": "built-local",
+      "route": "#library/spellings",
+      "patterns": [
+        "read",
+        "build"
+      ],
+      "scope": "Supplied silent-letter tiles, written history sorting and seven family clues with teaching and five supported jobs. Revisable first/latest work; no independent spelling, pronunciation or historical-knowledge assessment. No topic coverage claim."
     }
   ],
   "manualReferences": [
