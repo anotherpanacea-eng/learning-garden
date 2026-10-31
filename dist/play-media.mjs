@@ -16,19 +16,23 @@ const shapes={
 export function foodArt(id,label='',phase=0){return `<svg class="food-art food-phase-${phase}" viewBox="0 0 100 105" ${label?`role="img" aria-label="${esc(label)}"`:'aria-hidden="true"'}><ellipse cx="50" cy="96" rx="35" ry="5" fill="#183f39" opacity=".1"/><g stroke="#183f39" stroke-width="1.5" stroke-linejoin="round">${shapes[id]||shapes['cloud-puff']}</g></svg>`;}
 const symbols={warm:'☀',cold:'❄',crunchy:'ϟ',soft:'☁',sweet:'✿',tangy:'✧'};
 export function qualityIcons(properties){return properties.map(p=>`<span class="quality-symbol"><span aria-hidden="true">${symbols[p]||'•'}</span> ${esc(p)}</span>`).join('');}
-export function hearButton(text,label='Hear it',language='en'){return `<button type="button" class="hear-button secondary" data-speak-lang="${language==='fr'?'fr':'en'}" data-speak="${esc(text)}"><span aria-hidden="true">◖))</span> <span${language==='fr'?' lang="fr"':''}>${esc(label)}</span></button>`;}
+// Passage languages with local speech; anything else is read as English.
+const speechLanguage=x=>x==='fr'||x==='es'?x:'en';
+const otherLanguages=language=>['en','fr','es'].filter(x=>x!==language);
+export function hearButton(text,label='Hear it',language='en'){const lang=speechLanguage(language);return `<button type="button" class="hear-button secondary" data-speak-lang="${lang}" data-speak="${esc(text)}"><span aria-hidden="true">◖))</span> <span${lang!=='en'?` lang="${lang}"`:''}>${esc(label)}</span></button>`;}
 let activeSpeech=null, selectedVoice='', speakingRate=1, removeVoiceListener=()=>{};
 let removeSpeechRequestListener=()=>{};
 let speechBindingGeneration=0;
 const fractionWords={2:['half','halves'],3:['third','thirds'],4:['quarter','quarters'],5:['fifth','fifths'],6:['sixth','sixths'],8:['eighth','eighths'],10:['tenth','tenths'],12:['twelfth','twelfths']};
 export function spoken(text,language='en'){
- if(language==='fr')return String(text);
+ if(speechLanguage(language)!=='en')return String(text);
  return String(text).replace(/__/g,' blank ').replace(/×/g,' times ').replace(/÷/g,' divided by ').replace(/−/g,' minus ').replace(/=/g,' equals ').replace(/(\d+(?:\.\d+)?)\s*cm\b/g,(_,n)=>`${n} centimeter${Number(n)===1?'':'s'}`).replace(/(\d+(?:\.\d+)?)\s*m\b/g,(_,n)=>`${n} meter${Number(n)===1?'':'s'}`).replace(/(\d+)-by-(\d+)/g,'$1 by $2').replace(/\b(\d+)\/(\d+)\b/g,(x,top,bottom)=>{const name=fractionWords[bottom];return name?`${top} ${name[top==='1'?0:1]}`:`${top} over ${bottom}`;}).replace(/ {2,}/g,' ').trim();
 }
 export const speechPreferences=()=>({voice:selectedVoice,rate:speakingRate});
 export function setSpeechPreferences(p){stopSpeech();selectedVoice=typeof p?.voice==='string'?p.voice:'';speakingRate=[0.8,1,1.15].includes(p?.rate)?p.rate:1;}
 function changedPreference(){document.dispatchEvent(new CustomEvent('garden-speech-preference',{detail:speechPreferences()}));}
-export const localVoices=(voices,language='en')=>voices.filter(v=>v.localService===true&&(language==='fr'?/^fr(?:[-_]|$)/i:/^en(?:[-_]|$)/i).test(v.lang));
+const voicePatterns={en:/^en(?:[-_]|$)/i,fr:/^fr(?:[-_]|$)/i,es:/^es(?:[-_]|$)/i};
+export const localVoices=(voices,language='en')=>voices.filter(v=>v.localService===true&&voicePatterns[speechLanguage(language)].test(v.lang));
 export const localEnglishVoices=voices=>localVoices(voices,'en');
 const voiceKey=v=>v.voiceURI||`${v.name}|${v.lang}`;
 export function chooseLocalVoice(voices,preferred='',language='en'){
@@ -37,7 +41,7 @@ export function chooseLocalVoice(voices,preferred='',language='en'){
   const chosen=local.find(v=>voiceKey(v)===preferred);if(chosen)return chosen;
   // A known choice for the other passage language does not replace its voice.
   // An absent or nonlocal choice must never silently become a different voice.
-  if(!localVoices(voices,language==='fr'?'en':'fr').some(v=>voiceKey(v)===preferred))return null;
+  if(!otherLanguages(speechLanguage(language)).some(other=>localVoices(voices,other).some(v=>voiceKey(v)===preferred)))return null;
  }
  const score=v=>(/premium|enhanced|natural|neural/i.test(v.name)?4:0)+(v.default?2:0);
  return local.reduce((best,v)=>!best||score(v)>score(best)?v:best,null);
@@ -61,11 +65,11 @@ export function bindSpeech(){
  }
  const live=()=>generation===speechBindingGeneration&&controls.isConnected&&window.location.hash===route;
  let activeLanguage='en';
- const languageName=()=>activeLanguage==='fr'?'French':'English';
+ const languageName=()=>({fr:'French',es:'Spanish'})[activeLanguage]||'English';
  const speech=window.speechSynthesis,status=controls.querySelector('[data-speech-status]'),availability=controls.querySelector('[data-voice-availability]'),voiceSelect=controls.querySelector('[data-reading-voice]'),speedSelect=controls.querySelector('[data-reading-speed]');
  const voices=()=>{try{return speech?.getVoices?.()||[];}catch{return [];}};
  function refreshVoices(){
-  const all=voices(),available=localVoices(all,activeLanguage),chosen=chooseLocalVoice(all,selectedVoice,activeLanguage),automaticVoice=chooseLocalVoice(all,'',activeLanguage),exact=available.some(v=>voiceKey(v)===selectedVoice),otherLanguage=!exact&&localVoices(all,activeLanguage==='fr'?'en':'fr').some(v=>voiceKey(v)===selectedVoice),missing=!!selectedVoice&&!exact&&!otherLanguage;
+  const all=voices(),available=localVoices(all,activeLanguage),chosen=chooseLocalVoice(all,selectedVoice,activeLanguage),automaticVoice=chooseLocalVoice(all,'',activeLanguage),exact=available.some(v=>voiceKey(v)===selectedVoice),otherLanguage=!exact&&otherLanguages(activeLanguage).some(other=>localVoices(all,other).some(v=>voiceKey(v)===selectedVoice)),missing=!!selectedVoice&&!exact&&!otherLanguage;
   voiceSelect.replaceChildren();
   const automatic=document.createElement('option');automatic.value='';automatic.textContent=`Automatic local ${languageName()}${automaticVoice?`: ${automaticVoice.name}`:''}`;voiceSelect.append(automatic);
   if(missing){const option=document.createElement('option');option.value=selectedVoice;option.textContent='Saved voice (unavailable in this browser)';voiceSelect.append(option);}
@@ -82,7 +86,7 @@ export function bindSpeech(){
  controls.querySelector('[data-refresh-voices]').onclick=()=>{if(!live())return;stopped('Voice list refreshed. Tap Try this voice to listen.');refreshVoices();};
  function speak(text,language=activeLanguage,origin=null){
   if(!live()||origin&&!origin.isConnected)return false;
-  activeLanguage=language==='fr'?'fr':'en';
+  activeLanguage=speechLanguage(language);
   stopped('');const voice=refreshVoices();
   if(!voice||!window.SpeechSynthesisUtterance){status.textContent=!voice?availability.textContent:'This browser cannot play local narration. Read together instead.';return false;}
   const utterance=new window.SpeechSynthesisUtterance(spoken(text,activeLanguage));utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=speakingRate;
@@ -95,7 +99,7 @@ export function bindSpeech(){
  const requested=e=>{if(!live())return;e.detail.accepted=speak(e.detail?.text||'',e.detail?.language||'en');};
  document.addEventListener('garden-speak-request',requested);
  removeSpeechRequestListener=()=>document.removeEventListener('garden-speak-request',requested);
- controls.querySelector('[data-preview-voice]').onclick=()=>speak(activeLanguage==='fr'?'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?':'Welcome to the garden. What shall we discover together today?');
+ controls.querySelector('[data-preview-voice]').onclick=()=>speak(({fr:'Bienvenue à Paris. Que découvrons-nous aujourd’hui ?',es:'¡Hola! Somos de Vadoalto.'})[activeLanguage]||'Welcome to the garden. What shall we discover together today?');
  refreshVoices();
  const voicesChanged=()=>{if(!live())return;const voice=refreshVoices();if(!activeSpeech&&!controls.hidden)status.textContent=voice?'Voice list updated. Tap a Hear button or Try this voice to listen.':availability.textContent;};
  if(speech?.addEventListener){speech.addEventListener('voiceschanged',voicesChanged);removeVoiceListener=()=>speech.removeEventListener('voiceschanged',voicesChanged);}

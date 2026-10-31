@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {makeCargaSource,riverMarketText} from '../dist/river-market-content.mjs';
 import {validCargaSource,validErrand,cargaOutcome,allInPlace,riverMarketView,riverMarketTries,setRiverAmount,openCarga,placeItem,submitCarga,answerCarga,useRiverSupport,startCargaAgain,seeBoatLine,cargaLines} from '../dist/river-market-core.mjs';
+import {hearButton,spoken,localVoices,chooseLocalVoice} from '../dist/play-media.mjs';
+import {riverMarketPage,riverMarketNotes} from '../dist/river-market-ui.mjs';
 let checks=0;const ok=(value,label)=>{assert.ok(value,label);checks++;};
 const yes={canExport:()=>true},bytes=s=>JSON.stringify(s);
 const fresh=()=>({});
@@ -140,5 +142,35 @@ ok(makeCargaSource('medium')===null,'unknown amount makes no source');
  const all=bytes(riverMarketText)+bytes(makeCargaSource('longer'))+bytes(makeCargaSource('short'));
  ok(!all.includes('—'),'no em-dash in shipped text');
  ok(!/junco/.test(all),'the panel replaced junco');
+}
+
+// Local Spanish speech works like French and never falls back to another language.
+{
+ const v=(name,lang,local=true,extra={})=>({name,lang,localService:local,voiceURI:name,...extra});
+ const list=[v('Ana','es-ES'),v('Remote','es-ES',false),v('Amélie','fr-FR'),v('Alex','en-US')];
+ ok(localVoices(list,'es').map(x=>x.name).join()==='Ana','only local es-* voices');
+ ok(localVoices(list,'fr').map(x=>x.name).join()==='Amélie'&&localVoices(list,'en').map(x=>x.name).join()==='Alex','French and English lists unchanged');
+ ok(chooseLocalVoice(list,'','es').name==='Ana','automatic Spanish voice');
+ ok(chooseLocalVoice([v('Alex','en-US')],'','es')===null,'only English voices: no Spanish voice, no fallback');
+ ok(chooseLocalVoice(list,'Alex','es').name==='Ana','a saved English choice does not replace the Spanish voice');
+ ok(chooseLocalVoice(list,'Ana','fr').name==='Amélie'&&chooseLocalVoice(list,'Gone','es')===null,'other-language choices and absent choices keep their rules');
+ const b=hearButton('¡Hola!','Hear it','es');ok(b.includes('data-speak-lang="es"')&&b.includes('lang="es"'),'hear button marks Spanish');
+ ok(hearButton('Bonjour','Hear it','fr').includes('data-speak-lang="fr"')&&hearButton('Hi').includes('data-speak-lang="en"')&&!hearButton('Hi').includes(' lang='),'French and English buttons unchanged');
+ ok(spoken('3/4 = ½','es')==='3/4 = ½'&&spoken('3/4','en')==='3 quarters','Spanish text is spoken as written');
+}
+
+// Renders and Notes make no write, for any JSON value at spanish.
+{
+ const states=[{},{spanish:null},{spanish:[]},{spanish:'x'},{spanish:{v:2}},{spanish:{v:1}}];
+ const st=fresh();openCarga(st,yes);placeAll(st,{'miel-1':'jardin'});submitCarga(st,yes);useRiverSupport(st,'meaning',yes);states.push(st);
+ const done=fresh();openCarga(done,yes);placeAll(done);submitCarga(done,yes);answerCarga(done,'tres',yes);states.push(done);
+ for(const x of states){const b=bytes(x);const page=riverMarketPage(x),notes=riverMarketNotes(x);ok(typeof page==='string'&&typeof notes==='string'&&bytes(x)===b,'render and notes are pure');}
+ const page=riverMarketPage(st);
+ ok(page.includes("lang='es'")&&page.includes('data-speak-lang="es"'),'Spanish is marked and spoken as Spanish');
+ ok(page.includes('The honey is in the garden. Is it for the garden?')===false,'Marisol lines appear only after Done in this session');
+ ok(page.includes('How many jars of honey are there?')&&page.includes('Reeds grow well')===false,'question shows after submission; short note has no reed line');
+ ok(!riverMarketPage(done).includes('data-river-action=\'done\''),'no Done unloading once done');
+ ok(riverMarketNotes(st).includes('La carga started, with English help.')&&riverMarketNotes(done).includes('La carga done.'),'grown-up line');
+ ok(riverMarketNotes({})==='','no root, no notes section');
 }
 console.log(`${checks} river market checks passed.`);
