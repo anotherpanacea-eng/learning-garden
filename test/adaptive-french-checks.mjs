@@ -32,7 +32,7 @@ s=fresh();id=createFrenchMission(s,kinds[2],o);q=w(s).source.items[0];ok(showFre
 // Real import/report boundary is stricter than raw notebook serialization.
 s=fresh();id=createFrenchMission(s,kinds[0],o);s.syntheticPadding='';let trial=structuredClone(s);ok(createFrenchMission(trial,kinds[1],o));const bytes=x=>new TextEncoder().encode(JSON.stringify(x,null,2)).length;s.syntheticPadding='x'.repeat(MAX_IMPORT_BYTES-bytes(report(trial))+1);ok(o.canExport(s),'earlier state fits report');b=structuredClone(s);eq(createFrenchMission(s,kinds[1],o),false);eq(s,b,'one-byte report overflow never evicts history');ok(removeFrenchMission(s,id,true,o),'explicit selected removal can free capacity');
 console.log(`${count} adaptive french source/persistence/report checks passed`);
-const roomNames={salon:'le salon',cuisine:'la cuisine',chambre:'la chambre',entree:"l'entrée"};
+const roomNames={salon:'le salon',cuisine:'la cuisine',chambre:'la chambre',entree:"l’entrée"};
 for(let n=1;n<=6;n++)for(const kind of kinds){
  const src=frenchMission(kind,n),object=['sac','livre','tasse'][(n-1)%3];
  for(const key of ['intro','teach'])ok(src[key]&&src[key==='intro'?'meaning':'teachMeaning'],'complete phrase and meaning');
