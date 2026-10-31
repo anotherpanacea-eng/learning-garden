@@ -30,6 +30,7 @@ export function runChecks(){
  eq(C.checkAnswer(src,1,ladderPip).result,'fits','round 1 ignores the round-2 clue');eq(C.checkAnswer(src,2,ladderPip).result,'ladder-roof');eq(C.checkAnswer(src,2,ANSWER).result,'fits');
  // Another way that fits every round-1 clue and differs from the child's answer.
  for(const a of [null,ANSWER,ladderPip,{pip:['rope',null]}]){const w=C.anotherWay(src,a);ok(C.activeClues(src,1).every(c=>C.holds(c.pred,w)));if(a&&a.pip?.[1])ok(JSON.stringify(w)!==JSON.stringify(a));}
+ const earlierProof=C.anotherWay(src,ANSWER);eq(earlierProof,ladderPip,'the first-round alternate is the ladder-at-orchard arrangement');eq(C.checkAnswer(src,2,earlierProof).result,'ladder-roof','that earlier proof fails the newly revealed clue');
  eq(C.arrangementText(src,ladderPip),'Pip had the ladder at the orchard; Bramble had the rope at the footbridge; the miller had the bucket at the mill roof');
  // Rendering makes no write; Start sorting creates the root.
  const s=fresh(),before=clone(s);lostFoundPage(s);lostFoundNotes(s);C.lostFoundView(s);eq(s,before);ok(!Object.hasOwn(s,'mysteries'));
