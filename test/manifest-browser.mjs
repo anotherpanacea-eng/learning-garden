@@ -19,6 +19,7 @@ try{
   eq(await book(p).then(b=>Object.hasOwn(b,'exchangeManifest')),false,`${w}: opening writes nothing`);
   ok((await p.locator('.mf-every').innerText()).startsWith('Marks tell a reader'),`${w}: every-screen line`);ok(await p.locator('.mf-intro').count()===1,`${w}: first visit shown`);
   ok(!(await overflow(p)),`${w}: no horizontal overflow`);eq(await small(p),[],`${w}: 44 px controls`);
+  if(w===820){const bench=await p.locator('.mf-bench').boundingBox(),load=await p.locator('[data-mf-load="m1"]').boundingBox();ok(bench.y>=0&&bench.y+bench.height<=h&&load.y>=0&&load.y+load.height<=h,'initial tablet viewport contains the bench and Load it before interaction');}
   // Each slot stays beside the word before it.
   for(const sel of await p.$$('.mf-nowrap'))ok(await sel.evaluate(x=>{const r=x.getClientRects();return r.length===1;}),`${w}: a slot never splits from its word`);
   // Tap: slot then tile, and tile then slot.
@@ -38,8 +39,6 @@ try{
   ok((await p.locator('#mf-result-m4 .mf-said').innerText()).includes('The colon cut the sentence in half.'),`${w}: keyboard placement and colon cut`);ok((await p.locator('#mf-result-m4 figcaption').innerText())==='Pip loads no crates.',`${w}: no crates`);
   await place(p,'m4','s1','semicolon');await p.locator('[data-mf-load="m4"]').click();ok((await p.locator('#mf-result-m4 .mf-said').innerText()).startsWith('A semicolon joins'),`${w}: semicolon lead`);
   for(const [s1,code] of [['empty','lead-merged']]){await place(p,'m1','s1',s1);await place(p,'m1','s2','comma');await place(p,'m1','s3','empty');await p.locator('[data-mf-load="m1"]').click();eq((await book(p)).exchangeManifest.lists.m1.load,code);if(out)await p.screenshot({path:`${out}/manifest-${code}-${w}.png`,fullPage:true});}
-  // The bench line and its Load it fit one tablet viewport.
-  if(w===820){const box=await p.locator('.mf-bench h2').boundingBox(),load=await p.locator('[data-mf-load="m1"]').boundingBox();ok(load.y+load.height-box.y<=h,'bench heading through the first Load it fits the tablet viewport');}
   // Worked example: cardsSeen is saved before the steps show.
   await p.locator('[data-mf-worked="card3"] > summary').click();await p.locator('#mf-steps-card3').waitFor();eq((await book(p)).exchangeManifest.cardsSeen,true,`${w}: cardsSeen before display`);
   eq(await p.locator('#mf-steps-card3 li').count(),1,`${w}: one step at a time`);await p.locator('[data-mf-next="card3"]').click();eq(await p.locator('#mf-steps-card3 li').count(),2);
@@ -60,6 +59,21 @@ try{
   await p.addStyleTag({content:'html{font-size:150%}'});ok(!(await overflow(p)),`${w}: 150% root font has no overflow`);
   ok(p.errors.length===0,`${w}: no page errors ${p.errors}`);await c.close();
  }
+ // Saving off uses the host's normal switch and keeps both kinds of work in-session.
+ {const {c,p}=await fresh(320,600);await p.goto(url+'#notes');await p.locator('#remember').uncheck();
+  const storage=await p.evaluate(()=>({...localStorage}));
+  await p.goto(url+'#post/manifest');await p.locator('[data-mf-root]').waitFor();await place(p,'m4','s1','empty');await p.locator('[data-mf-load="m4"]').click();
+  ok(await p.locator('#mf-result-m4').count()===1,'saving off: Load it works');
+  await p.locator('[data-mf-set] > summary').click();await p.locator('[data-mf-choice="A2:b"]').click();ok(await p.locator('#mf-feedback-A2').count()===1,'saving off: item answer works');
+  await p.goto(url+'#notes');ok((await p.locator('[data-saving-status]').innerText()).includes('Progress lasts only while this page stays open. Download notes before leaving.'),'saving off: normal host notice');
+  const [dl]=await Promise.all([p.waitForEvent('download'),p.locator('#download').click()]);const data=JSON.parse((await import('node:fs')).readFileSync(await dl.path(),'utf8'));
+  eq(data.exchangeManifest.lists.m4.load,'fits','saving off: line retained in session');eq(data.exchangeManifest.items.A2.answer,'b','saving off: answer retained in session');
+  eq(await p.evaluate(()=>({...localStorage})),storage,'saving off: interactions write nothing to storage');ok(!Object.keys(storage).some(k=>k.startsWith('number-garden-v1')),'saving off: no persisted notebooks');await c.close();}
+ // A detached, moved-outside-root, or closed-disclosure control cannot act in a live visit.
+ for(const mode of ['detached','outside','closed']){const {c,p}=await fresh(820,1000);await p.locator('[data-mf-set] > summary').click();
+  const before=(await book(p)).exchangeManifest;
+  await p.evaluate(mode=>{const b=document.querySelector('[data-mf-choice="A2:b"]');if(mode==='detached')b.remove();else if(mode==='outside')document.body.append(b);else b.closest('details').open=false;b.click();},mode);
+  eq((await book(p)).exchangeManifest,before,mode+' control cannot submit');await c.close();}
  // Notes download, reset-free import as a new explorer, reload.
  {const {c,p}=await fresh(820,1000);await place(p,'m1','s1','colon');await place(p,'m1','s2','comma');await place(p,'m1','s3','comma');await p.locator('[data-mf-load="m1"]').click();const before=(await book(p)).exchangeManifest;
   await p.goto(url+'#notes');ok((await p.locator('details:has-text("Market list marks")').innerText()).length>0,'Notes section');

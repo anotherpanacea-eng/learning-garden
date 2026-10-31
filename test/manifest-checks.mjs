@@ -3,8 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {MANIFEST_TEXT as T,MANIFEST_LINES,MANIFEST_ITEMS} from '../dist/manifest-content.mjs';
 import {TILE_IDS,readLine,loadCode,punctuate,whatFits,itemFeedback,manifestView,markSupport,markCardsSeen,loadLine,answerItem} from '../dist/manifest-core.mjs';
-import {manifestNotes} from '../dist/manifest-ui.mjs';
+import {manifestNotes,manifestPage,resetManifestView} from '../dist/manifest-ui.mjs';
 import {scanCopySource} from '../scripts/check-child-copy.mjs';
+const readText=url=>readFileSync(new URL(url,import.meta.url),'utf8').replace(/\r\n/g,'\n');
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;};
 const L=Object.fromEntries(MANIFEST_LINES.map(l=>[l.id,l])),I=Object.fromEntries(MANIFEST_ITEMS.map(i=>[i.id,i]));
 const lineSnap=l=>structuredClone({...l,said:{...T.load}}),itemSnap=i=>structuredClone({...i,tileNames:{...T.tiles}});
@@ -56,6 +57,14 @@ const fresh=()=>({garden:{},other:{kept:true}});
  eq(answerItem(s,itemSnap(I.A2),'a',options).supported,false,'no support before a first answer');eq(markSupport(s,'items','A4',options),true);eq(answerItem(s,itemSnap(I.A4),'c',options).supported,true,'ladder before answering is recorded');
  const a3=answerItem(s,itemSnap(I.A3),{s1:'colon',s2:'comma',s3:'semicolon',extra:'x'},options);eq(a3.answer,{s1:'colon',s2:'comma',s3:'semicolon'});eq(a3.answerText,'The cart carries three loads: apples, six baskets, honey cake, two boxes; and seeds, one tin.');eq(a3.offered,['colon ( : )','semicolon ( ; )','comma ( , )']);eq(a3.shown,['colon','semicolon','comma']);
  ok(answerItem(s,itemSnap(I.A2),'z',options)===false,'unknown choice refused');}
+// Reopening completed A1 upgrades flags only; unreadable A1 stays exact.
+{const state=fresh();answerItem(state,itemSnap(I.A1),'c',options);
+ const e=state.exchangeManifest.items.A1;e.supported=false;e.guided=false;e.prompt='Earlier\nquestion';e.said=['Earlier\nfeedback'];e.future={kept:true};const before=structuredClone(e);
+ eq(markSupport(state,'items','A1',options,{guided:true}),true);
+ eq(state.exchangeManifest.items.A1,{...before,supported:true,guided:true},'completed A1 preserves answer and frozen strings');
+ eq(markSupport(state,'items','A1',options,{guided:true}),'noop');
+ state.exchangeManifest.items.A1={opaque:'unreadable'};const bad=structuredClone(state);
+ eq(markSupport(state,'items','A1',options,{guided:true}),false);eq(state,bad,'unreadable A1 untouched');}
 // A changed answer rule with the same choice ids: the saved outcome stays; Try again scores today's snapshot.
 {const s=fresh(),old=itemSnap(I.A2);answerItem(s,old,'b',options);const saved=structuredClone(s.exchangeManifest.items.A2),today=itemSnap(I.A2);today.fits='c';today.prompt='Today’s wording.';today.choices[1].feedback='Today’s feedback.';
  eq(manifestView(s).items.A2.entry,saved);eq(s.exchangeManifest.items.A2.outcome,'fits','earlier outcome never rescored');
@@ -81,20 +90,38 @@ for(const canExport of [()=>false,()=>{throw Error('preflight');},undefined]){co
  for(const w of [()=>loadLine(s,lineSnap(L.m4),{s1:'empty'},{canExport}),()=>markCardsSeen(s,{canExport}),()=>markSupport(s,'items','A1',{canExport},{guided:true}),()=>answerItem(s,itemSnap(I.A1),'a',{canExport})])ok(w()===false,'refused preflight');eq(s,before);ok(s.exchangeManifest===ref,'refusal keeps the same root');}
 {const s={exchangeManifest:complete()},before=structuredClone(s);manifestView(s);manifestNotes(s);eq(s,before,'Notes and view are pure');}
 
+// Every saved readout retains newlines as displayed text.
+{const state={exchangeManifest:complete()},r=state.exchangeManifest;
+ r.lists.m1.text='Saved\nline';r.lists.m1.crates=['Saved\ncrate'];r.lists.m1.said='Saved\nload';
+ for(const e of Object.values(r.items)){e.prompt='Saved\nprompt';e.offered=e.offered.map(()=> 'Saved\nchoice');e.answerText='Saved\nanswer';e.said=['Saved\nfeedback'];}
+ resetManifestView();const notes=manifestNotes(state),page=manifestPage(state,'newlines');
+ for(const html of [notes,page])for(const m of html.matchAll(/<([a-z]+)([^>]*)>(Saved\n[^<]*)<\/\1>/g))ok(m[2].includes('mf-frozen'),'saved text has newline-preserving class: '+m[3]);
+ ok(notes.includes('Saved\nline')&&notes.includes('Saved\nanswer'),'Notes keeps frozen line breaks');
+ ok(page.includes('Saved\nload'),'resumed line keeps frozen feedback');
+ ok(/\.mf-frozen\s*\{[^}]*white-space:\s*pre-line/.test(readText('../dist/manifest.css')),'frozen class preserves line breaks');
+ const ui=readText('../dist/manifest-ui.mjs');ok(ui.includes('class="mf-prompt mf-frozen"')&&ui.includes('class="mf-chosen mf-frozen"')&&ui.includes('class="mf-said mf-frozen"'),'resumed item frozen fields preserve line breaks');}
+
 // Copy: every shipped string comes from the companion (print rule), the spec's exact exceptions or the trimmed panel.
-const companion=readFileSync(new URL('../docs/content/278-exchange-manifest-text.md',import.meta.url),'utf8'),spec=readFileSync(new URL('../docs/specs/319-market-list-marks.md',import.meta.url),'utf8');
+const companion=readText('../docs/content/278-exchange-manifest-text.md'),spec=readText('../docs/specs/319-market-list-marks.md');
 const straight=x=>x.replace(/[“”]/g,'"').replace(/[‘’]/g,"'"),flat=x=>straight(x).replace(/\s+/g,' ');
 const exceptionRows=[...spec.slice(spec.indexOf('**Wording outside the companion'),spec.indexOf('Before build, a script')).matchAll(/^\| [^|]+ \| (.+) \|$/gm)].map(m=>m[1]).filter(x=>x!=='Exact text'&&!/^-+$/.test(x));
+const slotException=exceptionRows.find(r=>r.startsWith('Gap {n}'));
+ eq(slotException,`Gap {n} (n is 1 to 3), followed by ", " and the chosen tile's name once chosen`,'slot exception defines the actual separator');
+// Audit labels generated by the real renderer, before and after each possible tile.
+for(const tile of [null,...TILE_IDS]){
+ const state=fresh();if(tile)loadLine(state,lineSnap(L.m1),{s1:tile,s2:tile,s3:tile},options);
+ resetManifestView();const html=manifestPage(state,'copy-audit');
+ const labels=[...html.matchAll(/data-mf-slot="([^"]+)" aria-label="([^"]+)"/g)];eq(labels.length,10,'every generated bench slot label audited');
+ for(const [,id,label] of labels){const [owner,slot]=id.split(':'),number=Number(slot.slice(1));const expected=slotException.split(' (n is')[0].replace('{n}',number)+(owner==='m1'&&tile?`, ${T.tiles[tile]}`:'');eq(label,expected,'generated slot label expands spec exception: '+id);}
+}
 const panel=spec.slice(spec.indexOf('**Grown-up panel, exact text**'),spec.indexOf('**Wording outside')).split('\n').filter(x=>x.startsWith('> ')&&x.length>2).map(x=>x.slice(2));
-// Shared app control labels that the spec does not list; they get the same copy read.
-const appLabels=['Next step'];
 const companionFlat=flat(companion.replace(/^> /gm,''));
 const fromCompanion=x=>companionFlat.includes(flat(x))||companionFlat.includes(flat(x).replace(/\*/g,''));
 const strings=[];const walk=v=>{if(typeof v==='string')strings.push(v);else if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==='object')Object.values(v).forEach(walk);};
 walk(Object.fromEntries(Object.entries(T).filter(([k])=>!['crates','grownUp','cards'].includes(k))));
 const cardStrings=[];T.cards.forEach(c=>{cardStrings.push(c.title.replace(/^Card \d\. /,''),c.text,c.example,...c.steps);});
 const itemStrings=[];MANIFEST_ITEMS.forEach(i=>{for(const k of ['card','prompt','hint','explanation'])if(i[k])itemStrings.push(i[k]);(i.steps||[]).forEach(x=>itemStrings.push(x));(i.choices||[]).forEach(c=>{itemStrings.push(c.text);if(c.feedback)itemStrings.push(c.feedback);});Object.values(i.commaFeedback||{}).forEach(x=>itemStrings.push(x));});
-const exception=x=>exceptionRows.some(r=>straight(r)===straight(x))||appLabels.includes(x);
+const exception=x=>exceptionRows.some(r=>straight(r)===straight(x));
 for(const x of [...strings,...cardStrings,...itemStrings].filter(Boolean)){if(['m1','m2','m3','m4'].includes(x))continue;ok(fromCompanion(x)||exception(x),'shipped string has a source: '+x);ok(!/["']/.test(x),'print rule applied: '+x);}
 eq(T.grownUp.map(flat),panel.map(flat),'grown-up panel is the spec’s exact trimmed text');
 for(const l of MANIFEST_LINES){let i=0;const template=`${l.lead}${l.parts.map(p=>p.slot?` [${++i}]`:p.fixed?p.fixed:p.and?' and':' '+p.t).join('')}.`;ok(companionFlat.includes(template),'line template is the companion’s: '+template);}

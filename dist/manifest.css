@@ -7,3 +7,5 @@
 .mf-choices{display:grid;gap:.5rem;margin:.75rem 0}.mf-choices button{justify-content:flex-start;text-align:left}.mf-steps,.mf-ladder{background:#fbf3dd;border-radius:8px;padding:.6rem .6rem .6rem 2rem}.mf-prompt{white-space:pre-line}.mf-offered .mf-chosen,.mf-earlier p.mf-chosen{font-weight:700;text-decoration:underline;text-underline-offset:4px}.mf-earlier{margin-bottom:.75rem}
 .mf-links{display:flex;gap:1rem;flex-wrap:wrap}.mf-glossary dt{font-weight:700}.mf-glossary dd{margin:0 0 .5rem}.mf-entry{margin-top:1rem}
 @media(max-width:700px){.mf-sentence,.mf-card{font-size:1.05rem}.mf-crate{width:6rem}}
+
+.mf-frozen{white-space:pre-line}

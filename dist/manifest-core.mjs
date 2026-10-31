@@ -97,8 +97,8 @@ const ready=(state,kind,id)=>{const v=manifestView(state),x=v[kind][id];return x
 export function markSupport(state,kind,id,options,{guided=false}={}){
  const x=ready(state,kind,id);if(x===false)return false;
  const v=manifestView(state);if(v.status==='unknown'||v.status==='malformed')return false;
- if(x?.shape==='completed'||x?.shape==='pending'&&(kind==='lists'||!guided||x.entry.guided===true))return 'noop';
- return commit(state,root=>{const map=root[kind];if(own(map,id))map[id].guided=true;else map[id]=kind==='lists'?{supported:true}:{supported:true,guided};return {touched:[[kind,id]]};},options);
+ if(x?.shape==='completed'&&!(kind==='items'&&id==='A1'&&guided)||x&&x.entry.supported===true&&(kind==='lists'||!guided||x.entry.guided===true))return 'noop';
+ return commit(state,root=>{const map=root[kind];if(own(map,id)){map[id].supported=true;if(kind==='items'&&guided)map[id].guided=true;}else map[id]=kind==='lists'?{supported:true}:{supported:true,guided};return {touched:[[kind,id]]};},options);
 }
 export function markCardsSeen(state,options){
  const v=manifestView(state);if(v.status==='unknown'||v.status==='malformed')return false;if(v.cardsSeen)return 'noop';

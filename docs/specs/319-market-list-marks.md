@@ -43,6 +43,8 @@ All child-facing text comes verbatim from [the 278 companion](../content/278-exc
 | A3 button | Check |
 | Resumed completed item button | Try again |
 | Set A disclosure | Practice: colons and lists |
+| Worked-example step button | Next step |
+| Slot accessible name | Gap {n} (n is 1 to 3), followed by ", " and the chosen tile's name once chosen |
 | Crate picture text equivalent | Pip loads {n} crates: {labels}. (Labels joined with " · "; with no crates: "Pip loads no crates.") |
 | Unreadable saved line or item | This saved work can't be opened here. It is kept as it is, and you can still download it from Grown-up notes. |
 | Unknown save version | This saved work is from a different version. It is kept as it is, and you can still download it from Grown-up notes. |
