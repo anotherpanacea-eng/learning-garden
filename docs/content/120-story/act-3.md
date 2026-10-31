@@ -18,7 +18,7 @@
 
 **Short:** Boats come down from Vadoalto with reed baskets and big round loaves. Everyone wants to trade. Nobody agrees on sizes.
 
-**Longer:** One morning there are boats at the landing: flat, wide boats from Vadoalto, loaded with reed baskets, round loaves as big as cartwheels, and jars of dark honey. The traders call out prices in Spanish and English. *"¡Pan, cestas, miel!"* Bread, baskets, honey. Pip tries to trade one apple for one loaf. The baker from Vadoalto laughs so hard she has to sit down. "One of your apples," she says, "for one of my loaves? We'll need to talk about sizes."
+**Longer:** One morning there are boats at the landing: flat, wide boats from Vadoalto, loaded with reed baskets, round loaves as big as cartwheels, and jars of dark honey. The traders call out their wares in Spanish and English. *"¡Pan, cestas, miel!"* Bread, baskets, honey. Pip tries to trade one apple for one loaf. The baker from Vadoalto laughs so hard she has to sit down. "One of your apples," she says, "for one of my loaves? We'll need to talk about sizes."
 
 **Keeper's note:** Trade between towns needs a rate everyone agrees on: how much of one thing is worth how much of another. A fair rate isn't always one-for-one.
 

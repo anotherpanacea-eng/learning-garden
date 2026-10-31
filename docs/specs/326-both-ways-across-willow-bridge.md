@@ -1,0 +1,155 @@
+# 326 · Both Ways Across Willow Bridge
+
+Proposed 2026-10-31. Base inspected: `2457a2b`. This is the bounded Act III commission from [spec 120](120-keeper-of-the-ways.md) §§5, 7 and 12, and the roadmap's lane B step 5. **Specification, not implementation or release clearance.** The complete finite text is in [the 326 companion](../content/326-both-ways-across-willow-bridge-text.md). It follows [248](248-a-town-of-our-own.md)'s contribution, state and recovery contract wherever this spec does not say otherwise, and it does not restate those rules.
+
+## Purpose and boundary
+
+Act III gets its story path:
+1. The opening.
+2. Four chapters, each reading one built activity.
+3. The ending, *Both Ways Across Willow Bridge*, on an explicit action once any three chapters hold a contribution.
+4. Page 3, *The Ways*, with Nuria recognising Hollis's handwriting.
+
+As in 248, the explorer explicitly brings retained work back to the story. The story never checks or scores it, and every activity stays open throughout.
+
+Out of scope:
+- The chapter jobs in [act-3.md](../content/120-story/act-3.md) (a reed-for-apples rate, word-card replies) and the Keeper's Desk case ideas.
+- Léon's French letters, further letters, the Valencia teaser and Act IV.
+- The anchor film. The still/text ending is the complete delivery; a future film (card LG-28) enhances this same ending and never decides eligibility.
+- Any change to a host activity's saved work.
+
+The ending is reached by story contribution. It is not a curriculum milestone or a learning measure.
+
+## Start and routes
+
+All routes stay inside the existing `almanac` family, beside 248's:
+
+| Route | View |
+| --- | --- |
+| `#almanac/beyond` | The opening and the four chapter buttons |
+| `#almanac/beyond/<chapter>` | One chapter at a time: `market`, `seeds`, `route` or `letters`. An invalid chapter falls back to the hub without a write. |
+| `#almanac/both-ways` | The ending, after it is reached, with replay |
+| `#almanac/the-ways` | The Page 3 reveal, then rereading |
+
+Act III may start once `actTwoView(state).letterVisible` is true, meaning the explorer has explicitly opened the first upstream letter. That covers an explorer who ended Act II and one who arrived with the letter under [249](249-story-arrivals.md); the story text's "Continue the story after the Act II celebration" follows from it. The companion's invitation appears under the opened letter and on the Keeper's Pages. **Start** is explicit and records `acts.III.started:true`. A readable `acts.III.started` or `ended` stays reached even if the letter scene or an earlier act later becomes unreadable, as 248 does for Act II.
+
+## The four chapter readers
+
+Each reader is pure and follows 248's rules:
+- it never initializes a host;
+- it consumes only the identity fields named here;
+- it does not judge correctness or compare against today's catalog;
+- an unreadable sibling is omitted from the list and kept raw;
+- a duplicated identity omits every entry that shares it;
+- labels are escaped and taken from the frozen source.
+
+| Chapter | Host and what counts | Ref |
+| --- | --- | --- |
+| `market` | The River Market's *La carga* ([324](324-river-market-cargo.md)). Requires `spanish.v:1`, read from `errands.carga` and each entry of `earlier`. An errand counts when its frozen source is readable, its `tryId` is a unique positive integer, and `taskEvidence.firstSubmission` is a present object. A try that is still sorting counts. `amount` is the errand's frozen `source.amount`, never the root's current preference, and `nextTry` is not consulted. | `{tryId, amount}` |
+| `seeds` | The seed exchange table ([316](316-seed-exchange-table.md)). Requires `seedExchange.version:1`. A visit key matches `exchange-N`, and each of its `firstKept` and `latestKept` is independently accepted by the exported `validSeedSnapshot`, without requiring a readable current draft or the other edition. Working plans count. `sourceId` is the snapshot's frozen source id. | `{visitId, edition:'first'\|'latest', sourceId}` |
+| `route` | Courier Clock Walk. Requires `courierClockWalk.version:1` and an object `cases`. For each case key, `kept` is read independently of the case's current page, draft, checks, counter and feedback: it counts when it holds a `snapshot` object whose frozen `source` passes the exported `validWalkSource`, whether or not it has a check. `caseId` is the case key, `sourceId` is `kept.snapshot.source.id` and the label uses `kept.snapshot.source.title`. `clockWalkView` is not the eligibility gate, since it drops a case whose current work is unreadable. | `{caseId, sourceId}` |
+| `letters` | The upstream post ([291](291-upstream-question.md)). `upstreamView(state)` must be ready. Each entry of its `questions` whose `postStatus` is `'ready'` counts, so the host's own receipt and duplicate checks apply. The ref comes from that entry's `post.posted` and the label from `source.label`. Raw posts are never enumerated by kind and version alone. An opened reply is not required. | `{questionId, sourceId, sourceVersion}` |
+
+Identities: a market try is its `tryId` across `errands.carga` and `earlier` together, counted before unreadable entries are filtered; a seed plan is its visit id plus edition, so first and latest stay separate even when they share a source id; a walk is its case key; a letter is its question id within its frozen source id and version. Candidate keys are deterministic serialized address tuples, as in 248. Labels show only the friendly kind and saved identity from the companion, never an outcome.
+
+Activities are named `river-market`, `seed-exchange`, `courier-clock-walk` and `upstream-post`; artifact kinds are `cargo-errand`, `exchange-plan`, `kept-walk` and `posted-question`. Their friendly names are in the companion. A chapter whose host root is missing or unsupported shows the companion's "nothing ready yet" line and its Visit link. That includes `market` until 324 is built, and nothing else is blocked by it.
+
+## State
+
+The story stays at version 1. Add an optional `acts.III` object, with known fields `started`, `contributions`, `ended` and `season`, using 248's per-field readability and its preservation of unknown keys. A receipt is `{kind:'act-three-offer', version:1, chapter, activity, artifactKind, ref}`. Its ref fields are shape-checked against its own activity and never against current host data. Act III follows 248 in four ways:
+- The first valid receipt per chapter counts once, and offering again is a no-op.
+- An unreadable known receipt can't be replaced, but the other chapters stay open.
+- **Send the seedlings up the river** needs three distinct valid receipts and a started act. It records `ended:true` and the season once, using 248's `seasonForMonth`.
+- A readable `ended:true` stays reached whatever happens to the receipts or hosts later.
+
+New scenes are `both-ways-sent`, recorded with the first ending, and `ways-page-revealed`, recorded by **Read the third page** before Page 3 shows. Pages remain derived, as 120 §12 requires. Page 3 is available after a readable ended Act III, and visible after its reveal scene. It uses the existing `story.pageAmount`: Short, Longer, or the original as Hollis wrote it. The opening, chapters and ending share `story.frameAmount`. No new preference, root or transfer membership is added. The existing setters' eligibility extends to Act III reached on its own: frame controls work once Act III can start or is started or ended, and page controls once Page 3 is visible, even when an earlier act is unreadable. A malformed preference stays raw, as in 248, and changing an amount never starts, ends or reveals anything.
+
+Mutators take the options-last `{canExport}` convention:
+- `startActThree`
+- `offerActThree(chapter, key)`
+- `sendActThree(month)`
+- `revealWaysPage`
+
+Pure views:
+- `actThreeView`
+- `actThreeCandidates(state, chapter)`
+- `validActThreeOffer`
+
+Every growing write follows 248's whole-notebook clone, `recoveryFitsProgressLimits` and real Notes preflight before committing only `state.story`. A refusal leaves every byte unchanged.
+
+## Presentation and integration
+
+The new modules are `act-three-content.mjs`, `act-three-core.mjs`, `act-three-ui.mjs` and scoped CSS, using the Keeper palette. The ending's memorable element is one original still: seedlings going up the river path, a barge coming down, and Nuria at the flood post. Its prose equivalent and alt text are in the companion. `{guide}` and `{courier}` resolve read-only as in 248. Each host page gets a small **Bring work to Beyond Willow Bridge** link once Act III has started. That link changes nothing in the host.
+
+Integration points:
+- Thread the four routes through the almanac renderer, and through 248's welcome-film and stale-owner guards.
+- Add Act III to the Keeper Notes section, keeping receipts separate from learning evidence.
+- Add the README line.
+- Make no atlas or coverage change.
+
+The layout rules are those of 248:
+- 44 px targets, 16 px text and visible focus;
+- one chapter or stage at a time;
+- read-aloud of visible prose only, with speech stopped on navigation;
+- checks at 320 and 820.
+
+## Upstream study and curriculum place
+
+**Jane**, refreshed at `e88f81a00553fb87818ef84c77a8800f0dcb33e4`, studied only. The quest structure in its `LESSONS.md` has a story hook, a path of stages, a finale and a reveal. This commission keeps the shape: a hook, four finite chapters, one explicit ending and a page reveal, with a reached beat that stays reached. It does not adopt review gates between stages, a boss finale, quest medals, or age or mastery locks. No Jane code, prose or assets are copied.
+
+**Marble**, refreshed at `5e23196fa60050433f1440057f65a978d39e63fc`. These are candidates, not coverage claims, and there is no new atlas mapping:
+
+| Topic | Strand | Why it is near |
+| --- | --- | --- |
+| Story Sequence and Central Message `mt_VEwM7ClYYE` | E3 | Act III's chapters lead to an ending that answers the carried question. Reading a story ending does not perform this topic. |
+| Asking Questions `mt_f8n4txtLej` | E5 | Chapter 4 reads a question the child posted. The upstream post (291) owns any teaching of it. |
+| Plants and animals in their habitats `mt_e6PP4ip39V` | S3 | Chapter 2's Keeper's note says reeds are wetland plants. One sentence is a fact, not a lesson. |
+
+**Spec 49.** This is Act III, *Beyond Willow Bridge*: connection and transfer. Its ending follows 49's: an exchange completed and a friendship with Nuria, with the between-acts line pointing to another page. In 49's teaching contract (§5), 326 adds no lesson of its own. It serves as the purposeful revisit (step 6) for four host activities, carrying their kept work instead of awarding an answer. Each host's own spec owns its teaching encounter, contrast and practice: 324, 316, [93](93-courier-clock-walk.md) and 291. On the data boundary (step 7), 326 adds no free-text field. Receipts hold only ids, versions and codes, and copy no free text.
+
+**Hard-prerequisite crosswalk** against `curriculum/marble/dependencies.json`. Every hard prerequisite is *not yet mapped* in `curriculum/topic-coverage.csv`. They are:
+- Reading between the lines `mt_E5KC4AnRLW` and Characters, settings, and events `mt_sSQlLOnAow`, for `mt_VEwM7ClYYE`;
+- Question Words `mt_6lHBTwQPrS` and Listening and responding `mt_mB7DVai-Uf`, for `mt_f8n4txtLej`;
+- What Living Things Need `mt_L1469gt34A`, for `mt_e6PP4ip39V`.
+
+326 claims none of these topics, so none of them gates it. A later lesson that claims one must teach or check its hard prerequisites.
+
+**Spec 120.** Page 3's place in the run of pages (§5), Act III's story path, letters and ending (§7), and the state sketch (§12). The chapter jobs stay out of scope, as above.
+
+Existing ODbL and CC BY-SA attribution stays. All new prose, art and code are original project material.
+
+## Gates and acceptance
+
+Before build:
+1. An independent spec review of this spec and its companion.
+2. A spec 117 model-panel pass on the companion's two Spanish phrases. Met 2026-10-31: all three providers kept both as written ([326 panel](../reviews/326-spanish-panel/resolution.md)).
+
+The build itself waits on 324 being built (card LG-29) only for the `market` reader's real-host tests. The other three readers can be built and tested first, with `market` showing its empty line.
+
+Pure checks:
+- Each reader's positive case comes from the real host API, as in 248's example. That covers a submitted but unsorted *La carga* try, a working seed plan, a kept walk without a check, and a posted question with no reply.
+- Each reader skips a missing host, an unsupported version, a duplicated identity and an unreadable sibling, while the raw entries stay.
+- Every three-of-four combination qualifies; zero, one or two do not.
+- Repeated offers keep the first receipt.
+- Host removal or later edits never revoke a receipt or an ending.
+- Malformed `acts.III` fields behave per 248's matrix.
+- Real-transfer refusal is atomic.
+- Renders and Notes make no write.
+- A kept walk or kept seed edition still counts when the current work or the other edition is unreadable.
+- A host save alone creates no receipt, and every story action leaves host roots unchanged.
+- An unstarted act can't end, a route or scene alone can't start, end or reveal Act III, and Page 3 needs a readable `ended:true` as well as its reveal scene.
+- Each scene is recorded only by its own explicit action. The season is stored once, and an existing malformed season stays exactly as it was.
+- Act III reached on its own survives damage to Act I or II, and its page and frame preferences stay separate and usable there.
+- An invalid chapter route falls back to the hub without a write.
+- Every shipped string and placeholder matches the companion or its named source, with labels read from the frozen fields above.
+
+Browser journeys at 320 and 820:
+- Open the first letter, then start Act III.
+- Visit three hosts and return through **Bring work to Beyond Willow Bridge**.
+- Offer three chapters.
+- Send the seedlings, reload, replay, read Page 3 at each amount, and check that Pages 1 and 2 stay readable.
+- The letter-arrival path from 249.
+- Stale controls, reset, saving off, a forced preflight refusal, and a Notes download and import of a partial Act III beside a complete one, with reload, explorer switch and download again leaving both unchanged.
+- Focus, target size, no overflow, the welcome-film guards, and read-aloud stopping on navigation.
+
+Physical iPad, VoiceOver and learning effects remain unqualified until checked. This is followed by exact-head implementation review and the repository's landing procedure.

@@ -6,7 +6,7 @@ import {initializeExplorerState} from '../dist/progress-transfer.mjs';
 const url=process.env.ROUTE_HEADER_TEST_URL;
 if(!url)throw new Error('Serve dist locally and set ROUTE_HEADER_TEST_URL.');
 // Route and the nav destination it highlights; null highlights none. Inventory: docs/reviews/route-inventory-2026-10-31.md.
-const routes=[['#desk/writing',null],['#desk/exchange',null],['#words/endings',null],['#words/props',null],['#journeys',null],
+const routes=[['#library/spellings',null],['#almanac/beyond','#storm'],['#almanac/beyond/seeds','#storm'],['#almanac/both-ways','#storm'],['#almanac/the-ways','#storm'],['#desk/writing',null],['#desk/exchange',null],['#words/endings',null],['#words/props',null],['#journeys',null],
  ['#workshop/old-map','#workshop'],['#mill/energy','#workshop'],['#workshop/lift','#workshop'],['#studio/sound-window',null],
  ['#workshop/switch-table','#workshop'],['#science/ice','#science'],['#post/ferry','#post'],['#post/manifest','#post'],['#workshop/hinge','#workshop'],
  ['#workshop/copy-frame','#workshop'],['#workshop/ribbon-measures','#workshop'],['#workshop/same-ground','#workshop'],
@@ -24,7 +24,7 @@ try{
  // #storm, highlighted by no inventoried route, sets the nav first, so every route below has to replace it.
  for(const [hash,nav] of routes){
   await page.goto(url+'#storm');await page.locator('.header nav a[href="#storm"][aria-current="page"]').waitFor();
-  await page.goto(url+hash);await page.waitForFunction(()=>document.querySelector('.header nav a[href="#storm"]').getAttribute('aria-current')==='false'&&document.querySelector('#explorer-header')?.childElementCount>0);
+  await page.goto(url+hash);await page.waitForFunction(nav=>document.querySelector('.header nav a[href="#storm"]').getAttribute('aria-current')===(nav==='#storm'?'page':'false')&&document.querySelector('#explorer-header')?.childElementCount>0,nav);
   ok(await page.evaluate(()=>location.hash),hash,hash+' stays on its route');
   ok((await page.locator('#explorer-header').innerText()).trim().length>0,true,hash+' explorer chip');
   ok((await page.locator('#companion-link').textContent()).trim(),'With Ari',hash+' guide link names the chosen guide');
