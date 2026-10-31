@@ -6,14 +6,14 @@ Companion to [335](../specs/335-pips-copy.md). Based on268 scene3, deck1, card14
 
 Title: **Pip's Copy**. Fiction label: **A story from Willowbank**.
 
-Hook: Pip has a postcard for Léon. Read for meaning. Some words need changing. One can stay.
+Hook: Pip has a postcard for Léon. Read for meaning. Some words need changing. One can stay: choose its leave-it form.
 
 Short: Pip writes to Léon fast. Some words are mixed up with words that sound alike, or nearly alike. Meaning tells you which to choose.
 
 Longer:
 > Pip's postcard says: Dear Léon, the river is high. Dot gave me some advise: write small. The rain had a big affect on the apples. Yesterday the baker lead us to the mill.
 >
-> "It all sounds right in my head," says Pip.
+> "I wrote that in a hurry," says Pip.
 >
 > "Say advice and advise out loud," says Dot. "One ends with a hiss. One ends with a buzz. Advice is the guidance I gave you. Advise is what I do."
 >
@@ -31,7 +31,16 @@ The slot addresses above name ids, **not initial rendered answers**. Use each sl
 | high / The river | high | This sentence describes how far up the river has risen. | hi · **high (leave it)** · hie |
 | advice / Dot's guidance | advise | Dot gave guidance. Choose the word for the guidance, not the action of giving it. | **advice** · advize · advise (leave it) |
 | effect / The rain | affect | The sentence names a result the rain had on the apples. | affect (leave it) · **effect** · efect |
-| led / Yesterday | lead | The baker guided them yesterday. Choose the past of lead. | leed · lead (leave it) · **led** |
+| led / The mill visit | lead | The baker guided Pip's group yesterday. Choose the past of lead. | leed · lead (leave it) · **led** |
+
+Retained selected-sentence contexts (literal spaces included; insert the current bare word between before and after):
+
+| Slot | Before | After |
+| --- | --- | --- |
+| high | `The river is ` | `.` |
+| advice | `Dot gave me some ` | `: write small.` |
+| effect | `The rain had a big ` | ` on the apples.` |
+| led | `Yesterday the baker ` | ` us to the mill.` |
 
 Different-choice feedback:
 - high: hi: Hi is a greeting. This sentence describes the river's height. · hie: Hie means hurry. This sentence describes the river's height.
@@ -54,7 +63,7 @@ The words may be said with a grown-up. The app does not record or score a voice.
 
 ## Five supported jobs
 
-All have the card14 teaching statement plus their own example below. Job ids d1–d5; titles D1–D5. Choice ids are bare words; display punctuation belongs to prose, not ids. All parts lists are empty. Explanations follow either answered outcome once.
+All have the card14 teaching statement plus their own example below. Job ids d1–d5; titles D1–D5. Choice ids are lowercase bare words; display punctuation belongs to prose, not ids. D5 displays Witch, Wich and Which with initial capitals for the sentence-initial blank, with lowercase ids witch, wich and which. All parts lists are empty. Explanations follow either answered outcome once.
 
 **D1.** Prompt: The baker ___ the dough by pressing and folding it.
 - Choices: needs · kneeds · **kneads**.
@@ -71,7 +80,7 @@ All have the card14 teaching statement plus their own example below. Job ids d1�
 - Explanation: Advice, with c and an s sound, is the noun. Advise, with a z sound, is the verb.
 - Example **Advice or advise?**: the three card14 steps above, not only its title.
 
-**D3.** Prompt: The rain had a big ___ on the apples.
+**D3.** Prompt: The storm had a big ___ on the orchard.
 - Choices: affect · **effect** · efect.
 - Different: affect: Affect is usually a verb. Here the sentence names a result. · efect: Effect has two f's.
 - Hint: Here the sentence names a result of the rain.
@@ -86,11 +95,23 @@ All have the card14 teaching statement plus their own example below. Job ids d1�
 - Example **Today and yesterday**: 1. Today, I lead the way. 2. Yesterday, I led the way. 3. Led is the past form here.
 
 **D5.** Prompt: "___ path is safest in winter?" asks Pip.
-- Choices: witch · wich · **which**.
+- Choices: Witch · Wich · **Which**.
 - Different: witch: A witch is a person, like Bramble. Pip is asking a question. · wich: The question word keeps an h: wh.
 - Hint: Question words often start with wh.
 - Explanation: Which asks a question here. Witch names a person. Some speakers say them alike; some do not.
-- Example **Bramble's question**: 1. Bramble is a witch. 2. Which path? asks about a choice of paths. 3. The question needs which.
+- Example **Which or witch?**: 1. Bramble is a witch. 2. Which path? asks about a choice of paths. 3. The question needs which.
+
+Designated retained example cards:
+
+| Job | teach[0].id | Card title and example title | Steps |
+| --- | --- | --- | --- |
+| d1 | card14-flour | Flour and dough | D1 example above |
+| d2 | card14 | Homophones, and pairs that get mixed up / Advice or advise? | The global card14 steps above |
+| d3 | card14-rain | Rain and a result | D3 example above |
+| d4 | card14-today | Today and yesterday | D4 example above |
+| d5 | card14-which | Which or witch? | D5 example above |
+
+For each variant, `text` is the full global card14 teaching statement, `title` and `example` are the table's title, and `steps` are the corresponding three example lines. D2 retains the global card unchanged. Job `steps` is D1's three guided steps or an empty list for the other jobs; it never substitutes for a worked example. Job `example` is that card's example title.
 
 ## Shared strings
 
@@ -102,12 +123,13 @@ All have the card14 teaching statement plus their own example below. Job ids d1�
 | chosen / unchosen / putBack | Chosen: {word} / Not chosen yet / Put back |
 | check / keep / reopen | Check this version / Keep this version / Reopen this version |
 | first / latest / unchecked | First kept version / Latest kept version / Not checked in this version |
-| incomplete | Choose a form for each marked word. You can leave a fitting word as it is. |
-| different | Read the sentence clues again. Some choices mean something different. |
+| incomplete | Choose a form for each marked word. To keep a fitting word, choose its (leave it) form. |
+| different | Some choices do not fit this postcard yet. Read the word notes for help. |
 | fit | This version fits the sentence clues. You can keep it, or try another. |
 | partialFit | These readable choices fit their sentence clues. Some of the earlier postcard is unavailable. |
 | partial | Some of this earlier postcard cannot be shown. The readable words are still open; the original is kept in your notes. |
 | unavailableWord | [earlier word unavailable] |
+| contextUnavailable | This earlier word has no separate sentence view. Read it in the postcard. |
 | jobIncomplete | Choose a word, or keep this job for later. |
 | neutral | Read for the meaning this sentence needs. |
 | hint / example / skip | A hint / Show an example / Skip for now |
