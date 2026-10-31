@@ -1,4 +1,5 @@
-import {marketSignsCollection,marketSignsCopy as T,marketEndingCollection,marketPatternCollection} from './market-signs-content.mjs';
+import {marketSignsCollection,marketSignsCopy as T,marketEndingCollection,marketPatternCollection,marketCrateCollection} from './market-signs-content.mjs';
+import {wordListShelfSource,wordListShelfResult,sameWordListPlacements,validWordListCheck,validWordListKeep} from './word-list-shelf-core.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 const own=(o,k)=>Object.hasOwn(o,k),copy=structuredClone;
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
@@ -63,14 +64,14 @@ function ownJobs(r){
  return a.filter(s=>validMarketJob(s)&&counts.get(s.id)===1);
 }
 export function marketSignsView(state){
- if(!own(state,'signs'))return {status:'new',root:null,record:null,records:[],jobs:[],practiceGroup:'prefix',endings:marketEndingView(state),patterns:marketPatternView(state)};
- const r=state.signs;if(!rootOK(r))return {status:'unsupported',root:r,record:null,records:[],jobs:[],practiceGroup:'prefix',endings:marketEndingView(state),patterns:marketPatternView(state)};
+ if(!own(state,'signs'))return {status:'new',root:null,record:null,records:[],jobs:[],practiceGroup:'prefix',endings:marketEndingView(state),patterns:marketPatternView(state),crates:marketCrateView(state)};
+ const r=state.signs;if(!rootOK(r))return {status:'unsupported',root:r,record:null,records:[],jobs:[],practiceGroup:'prefix',endings:marketEndingView(state),patterns:marketPatternView(state),crates:marketCrateView(state)};
  const records=object(r.records)&&Object.keys(r.records).length<=64?Object.entries(r.records).map(([key,value])=>({id:key,readable:id(key)&&validMarketRecord(value)&&value.source.id===key,record:value})):[];
- const practiceGroup=['endings','patterns'].includes(r.practiceGroup)?r.practiceGroup:'prefix',endings=marketEndingView(state),patterns=marketPatternView(state);
+ const practiceGroup=['endings','patterns','crates'].includes(r.practiceGroup)?r.practiceGroup:'prefix',endings=marketEndingView(state),patterns=marketPatternView(state),crates=marketCrateView(state);
  const current=records.find(x=>x.id===r.currentId&&x.readable),prefixSource=validMarketPrefix(r.source.prefix)?r.source.prefix:null,book=marketBook(r.source.dictionary);
  const prefixDraft=prefixSource?(own(r,'prefix')?validMarketPrefixDraft(prefixSource,r.prefix)?r.prefix:null:emptyPrefix()):null;
  const dictionaryDraft=book?(own(r,'dictionary')?validBookDraft(book,r.dictionary)?r.dictionary:null:defaultBook(book)):null;
- return {status:'ready',root:r,record:practiceGroup==='patterns'?patterns.record:practiceGroup==='endings'?endings.record:current?.record??null,practiceGroup,endings,patterns,records,jobs:ownJobs(r),prefixSource,prefixDraft,book,dictionaryDraft,view:['prefix','dictionary','practice','endings','patterns'].includes(r.view)?r.view:'choose'};
+ return {status:'ready',root:r,record:practiceGroup==='crates'?crates.record:practiceGroup==='patterns'?patterns.record:practiceGroup==='endings'?endings.record:current?.record??null,practiceGroup,endings,patterns,crates,records,jobs:ownJobs(r),prefixSource,prefixDraft,book,dictionaryDraft,view:['prefix','dictionary','practice','endings','patterns','crates'].includes(r.view)?r.view:'choose'};
 }
 const failure=error=>({ok:false,error});
 function mutate(state,fn,options={}){
@@ -79,11 +80,14 @@ function mutate(state,fn,options={}){
   const next=copy(state);if(!own(next,'signs'))next.signs={v:1,source:marketSignsCollection(),view:'choose',currentId:null,records:{}};
   if(!rootOK(next.signs))return failure('unavailable');
   const result=fn(next.signs,next);if(!result.ok||result.changed===false)return result;
-  if(!recoveryFitsProgressLimits(next)||!options.canExport(next))return failure('unexportable');
-  state.signs=next.signs;return result;
+  if(!recoveryFitsProgressLimits(next))return failure('unexportable');
+  const proposal=copy(next.signs);
+  if(options.canExport(next)!==true)return failure('unexportable');
+  state.signs=proposal;return result;
  }catch{return failure('unexportable');}
 }
-export function openMarketBench(state,view,options){if(view==='choose'&&object(state)&&!own(state,'signs'))return {ok:true,changed:false};return mutate(state,r=>{
+export function openMarketBench(state,view,options){if(view==='choose'&&object(state)&&!own(state,'signs'))return {ok:true,changed:false};return mutate(state,(r,next)=>{
+ if(view==='crates')return openCrateBench(r,next);
  if(view==='patterns'){const created=!own(r,'patterns');ensurePatterns(r);if(r.view==='patterns'&&!created)return {ok:true,changed:false};r.view='patterns';return {ok:true};}
  if(view==='endings'){const created=!own(r,'endings');ensureEndings(r);if(r.view==='endings'&&!created)return {ok:true,changed:false};r.view='endings';return {ok:true};}
  if(!['choose','prefix','dictionary','practice'].includes(view))return failure('selection');let created=false;
@@ -124,7 +128,7 @@ export function openMarketJob(state,jobId,options){return mutate(state,r=>{
  if(!id(jobId))return failure('selection');if(!own(r,'records'))r.records={};if(!object(r.records)||Object.keys(r.records).length>64)return failure('unavailable');
  if(own(r.records,jobId)){if(!validMarketRecord(r.records[jobId])||r.records[jobId].source.id!==jobId)return failure('unavailable');}
  else{if(Object.keys(r.records).length>=64)return failure('full');const source=ownJobs(r).find(s=>s.id===jobId);if(!source)return failure('selection');r.records[jobId]={source:copy(source),work:initialWork(source),help:{hint:false,example:false},checks:[],count:0};}
- if(r.currentId===jobId&&r.view==='practice'&&!['endings','patterns'].includes(r.practiceGroup))return {ok:true,changed:false};r.currentId=jobId;if(own(r,'practiceGroup'))r.practiceGroup='prefix';r.view='practice';return {ok:true};
+ if(r.currentId===jobId&&r.view==='practice'&&!['endings','patterns','crates'].includes(r.practiceGroup))return {ok:true,changed:false};r.currentId=jobId;if(own(r,'practiceGroup'))r.practiceGroup='prefix';r.view='practice';return {ok:true};
  },options);}
 export function nextMarketJob(state,options){
  const v=marketSignsView(state);if(v.status==='unsupported')return failure('unavailable');
@@ -132,11 +136,12 @@ export function nextMarketJob(state,options){
  const prefix=jobs.filter(s=>!root?.records||!own(root.records,s.id)||validMarketRecord(root.records[s.id])&&root.records[s.id].source.id===s.id).map(s=>({group:'prefix',id:s.id}));
  const e=marketEndingView(state),ending=e.jobs.filter(s=>!e.root?.records||!own(e.root.records,s.id)||validMarketEndingRecord(e.root.records[s.id])&&e.root.records[s.id].source.id===s.id).map(s=>({group:'endings',id:s.id}));
  const p=marketPatternView(state),pattern=p.jobs.filter(s=>(!own(p.root,'records')||boundedObject(p.root.records,32))&&(!p.root.records||!own(p.root.records,s.id)||validMarketPatternRecord(p.root.records[s.id])&&p.root.records[s.id].source.id===s.id)).map(s=>({group:'patterns',id:s.id}));
- const all=[...prefix,...ending,...pattern];if(!all.length)return mutate(state,r=>{if(r.practiceGroup==='patterns'&&patternRootOK(r.patterns))r.patterns.currentId=null;else if(r.practiceGroup==='endings'&&endingRootOK(r.endings))r.endings.currentId=null;else r.currentId=null;r.view='practice';return {ok:true};},options);
- const group=v.practiceGroup??'prefix',current=group==='patterns'?p.root?.currentId:group==='endings'?e.root?.currentId:root?.currentId,at=all.findIndex(x=>x.group===group&&x.id===current),next=all[(at+1)%all.length];
- return next.group==='patterns'?openMarketPatternJob(state,next.id,options):next.group==='endings'?openMarketEndingJob(state,next.id,options):openMarketJob(state,next.id,options);
+ const q=marketCrateView(state),crate=q.jobs.filter(s=>(!own(q.root,'records')||boundedObject(q.root.records,32))&&(!q.root.records||!own(q.root.records,s.id)||validMarketCrateRecord(q.root.records[s.id])&&q.root.records[s.id].source.id===s.id)).map(s=>({group:'crates',id:s.id}));
+ const all=[...prefix,...ending,...pattern,...crate];if(!all.length)return mutate(state,r=>{if(r.practiceGroup==='crates'&&crateRootOK(r.crates))r.crates.currentId=null;else if(r.practiceGroup==='patterns'&&patternRootOK(r.patterns))r.patterns.currentId=null;else if(r.practiceGroup==='endings'&&endingRootOK(r.endings))r.endings.currentId=null;else r.currentId=null;r.view='practice';return {ok:true};},options);
+ const group=v.practiceGroup??'prefix',current=group==='crates'?q.root?.currentId:group==='patterns'?p.root?.currentId:group==='endings'?e.root?.currentId:root?.currentId,at=all.findIndex(x=>x.group===group&&x.id===current),next=all[(at+1)%all.length];
+ return next.group==='crates'?openMarketCrateJob(state,next.id,options):next.group==='patterns'?openMarketPatternJob(state,next.id,options):next.group==='endings'?openMarketEndingJob(state,next.id,options):openMarketJob(state,next.id,options);
 }
-function editJob(state,fn,options){return mutate(state,(r,next)=>{const record=marketSignsView(next).record;if(!record)return failure('unavailable');const out=fn(record);return out.ok&&(r.practiceGroup==='patterns'?validMarketPatternRecord(record):r.practiceGroup==='endings'?validMarketEndingRecord(record):validMarketRecord(record))?out:out.ok?failure('unavailable'):out;},options);}
+function editJob(state,fn,options){return mutate(state,(r,next)=>{const record=marketSignsView(next).record;if(!record)return failure('unavailable');const out=fn(record);return out.ok&&(r.practiceGroup==='crates'?validMarketCrateRecord(record):r.practiceGroup==='patterns'?validMarketPatternRecord(record):r.practiceGroup==='endings'?validMarketEndingRecord(record):validMarketRecord(record))?out:out.ok?failure('unavailable'):out;},options);}
 export function setMarketWork(state,action,options){return editJob(state,r=>{
  const s=r.source,w=r.work;
  if(s.kind==='choice'){if(action.choice!==null&&!s.choices.some(c=>c.id===action.choice))return failure('selection');w.choice=action.choice;}
@@ -319,4 +324,112 @@ export function openMarketPatternJob(state,jobId,options){return mutate(state,r=
  if(own(p.records,jobId)){if(!validMarketPatternRecord(p.records[jobId])||p.records[jobId].source.id!==jobId)return failure('unavailable');}
  else{if(Object.keys(p.records).length>=32)return failure('full');const source=patternJobs(p).find(s=>s.id===jobId);if(!source)return failure('selection');p.records[jobId]={source:copy(source),work:initialWork(source),help:{hint:false,example:false},checks:[],count:0};}
  if(p.currentId===jobId&&r.practiceGroup==='patterns'&&r.view==='practice')return {ok:true,changed:false};p.currentId=jobId;r.practiceGroup='patterns';r.view='practice';return {ok:true};
+ },options);}
+
+// Spec340: reuse336's pure visible-clue results, never its root-mutating APIs.
+const crateId=x=>id(x)&&!['constructor','prototype','toString','valueOf'].includes(x);
+const crateText=x=>text(x)&&x.trim().length>0;
+const crateRootOK=r=>object(r)&&r.v===1&&object(r.source)&&r.source.v===1;
+const crateHelp=h=>Array.isArray(h)&&h.length<=64&&h.every(crateId)&&new Set(h).size===h.length;
+const crateSummaryKeys=['incomplete','discussion','listedSummary','partialIncomplete','partialDiscussion','partialListed','partial','listed','discuss','unplaced'];
+export function marketCrateSource(raw){
+ const s=wordListShelfSource(raw);if(!s||!crateSummaryKeys.every(k=>crateText(s.copy[k])))return null;
+ const trays=s.trays.filter(t=>crateText(t.label)&&crateText(t.description));let partial=s.partial||trays.length!==s.trays.length;
+ const words=s.words.flatMap(w=>{
+  const clues=w.clues.filter(c=>crateText(c.note)&&trays.some(t=>t.id===c.trayId));
+  partial ||= clues.length!==w.clues.length;
+  return crateText(w.text)&&clues.length?[{...w,clues}]:[];
+ });
+ partial ||= words.length!==s.words.length;
+ return words.length&&trays.length?{...s,trays,words,partial}:null;
+}
+export function marketCrateMarks(record,word){
+ const empty={status:'unreadable',indices:[]};if(!object(record)||!word||!crateText(word.text))return empty;
+ const letters=[...word.text];if(letters.length>40)return {status:'long',indices:[]};
+ if(!own(record,'marks'))return {status:'ready',indices:[]};
+ const map=record.marks;if(!boundedObject(map,64))return empty;
+ if(!own(map,word.id))return {status:'ready',indices:[]};
+ const row=map[word.id];
+ return Array.isArray(row)&&row.length<=40&&new Set(row).size===row.length&&row.every(i=>Number.isInteger(i)&&i>=0&&i<letters.length)?{status:'ready',indices:row}:empty;
+}
+const crateField=(r,k,valid)=>!own(r,k)?'missing':valid(r[k])?'ready':'unreadable';
+function crateShelf(source,r,present){
+ const status=!source?'unavailable':!present?'missing':!object(r)?'unreadable':'ready';
+ const base={status,record:present?r:null,source,editable:false,helpReadable:false,playable:[],opaque:[],last:null,earlier:false,draftStatus:'unreadable',checksStatus:'missing',firstStatus:'missing',latestStatus:'missing',coverage:source?.partial?'partial':'full'};
+ if(status!=='ready')return base;
+ const editable=object(r.placements)&&crateHelp(r.help),playable=editable?source.words.filter(w=>!own(r.placements,w.id)||r.placements[w.id]===null||source.trays.some(t=>t.id===r.placements[w.id])):[];
+ const opaque=editable?source.words.filter(w=>!playable.includes(w)):[],coverage=source.partial||opaque.length?'partial':'full';
+ const checksStatus=crateField(r,'checks',a=>Array.isArray(a)&&a.every(validWordListCheck)),last=checksStatus==='ready'?r.checks.at(-1)??null:null;
+ const sameRows=!!last&&last.rows.length===playable.length&&playable.every(w=>last.rows.filter(row=>row.id===w.id).length===1);
+ return {...base,editable,helpReadable:crateHelp(r.help),draftStatus:editable?'ready':'unreadable',playable,opaque,coverage,checksStatus,last,
+  earlier:!!last&&(!playable.length||!sameRows||coverage!==last.coverage||!sameWordListPlacements(source,r.placements,last.placements)),
+  firstStatus:crateField(r,'firstKept',k=>k===null||validWordListKeep(k)),latestStatus:crateField(r,'latestKept',k=>k===null||validWordListKeep(k))};
+}
+const crateHelper=h=>object(h)&&crateId(h.id)&&crateText(h.word)&&crateText(h.note)&&Array.isArray(h.pieces)&&h.pieces.length>0&&h.pieces.length<=40&&h.pieces.every(p=>object(p)&&crateText(p.text)&&typeof p.marked==='boolean')&&h.pieces.map(p=>p.text).join('')===h.word;
+export const validMarketCrateJob=s=>validMarketPatternJob(s)&&s.kind==='choice'&&crateId(s.id);
+export const validMarketCrateRecord=r=>validMarketRecord(r)&&validMarketCrateJob(r.source);
+const crateJobs=r=>uniquePatternRows(r.source.jobs,32,validMarketCrateJob);
+export function marketCrateView(state){
+ const r=state?.signs?.crates,base={root:r??null,source:null,benchSource:null,currentWord:null,shelf:null,jobs:[],records:[],record:null,cards:[],helpers:[],story:null,offscreen:null,grownup:null,materialUnavailable:false,benchReadable:false};
+ if(!state?.signs||!own(state.signs,'crates'))return {status:'new',...base};
+ if(!crateRootOK(r))return {status:'unsupported',...base};
+ const s=r.source,benchSource=marketCrateSource(s),shelf=crateShelf(benchSource,r.shelf,own(r,'shelf'));
+ const records=boundedObject(r.records,32)?Object.entries(r.records).map(([key,value])=>({id:key,readable:crateId(key)&&validMarketCrateRecord(value)&&value.source.id===key,record:value})):[];
+ const cards=uniquePatternRows(s.cards,16,row=>patternCard(row)&&crateId(row.id)),helpers=uniquePatternRows(s.helpers,16,crateHelper);
+ const story=object(s.story)&&['hook','short','longer','note'].every(k=>crateText(s.story[k]))?s.story:null;
+ const offscreen=object(s.offscreen)&&crateText(s.offscreen.text)?s.offscreen:null,grownup=crateText(s.grownup)?s.grownup:null;
+ return {status:'ready',...base,root:r,source:s,benchSource,benchReadable:!!benchSource,shelf,currentWord:benchSource?.words.find(w=>w.id===r.currentWordId)??null,jobs:crateJobs(r),records,record:records.find(x=>x.id===r.currentId&&x.readable)?.record??null,cards,helpers,story,offscreen,grownup,
+  materialUnavailable:!Array.isArray(s.cards)||cards.length!==s.cards.length||!Array.isArray(s.helpers)||helpers.length!==s.helpers.length||!story||!offscreen||!grownup};
+}
+function ensureCrates(r){if(!own(r,'crates'))r.crates={v:1,source:marketCrateCollection(),currentWordId:null,currentId:null,records:{}};}
+function openCrateBench(r,next){
+ ensureCrates(r);const v=marketCrateView(next);if(!v.benchSource)return failure('unavailable');
+ const q=r.crates;if(!own(q,'shelf')){q.shelf={placements:{},marks:{},help:[],checks:[]};q.currentWordId=v.benchSource.words[0].id;}
+ if(r.view==='crates'&&v.shelf?.status==='ready')return {ok:true,changed:false};r.view='crates';return {ok:true};
+}
+export function setMarketCrate(state,change,options){return mutate(state,(r,next)=>{
+ const v=marketCrateView(next),q=v.root;if(v.status!=='ready'||!v.benchSource)return failure('unavailable');
+ if(own(change,'wordId')||own(change,'direction')){
+  let word;if(own(change,'wordId'))word=v.benchSource.words.find(w=>w.id===change.wordId);
+  else{if(![-1,1].includes(change.direction))return failure('selection');const words=v.benchSource.words,at=words.findIndex(w=>w.id===q.currentWordId);word=words[(at<0?change.direction===1?0:words.length-1:(at+change.direction+words.length)%words.length)];}
+  if(!word)return failure('selection');q.currentWordId=word.id;r.view='crates';return {ok:true};
+ }
+ const word=v.currentWord,e=v.shelf;if(!word||!e?.editable)return failure('unavailable');const shelf=e.record;
+ if(own(change,'trayId')){
+  if(!e.playable.some(w=>w.id===word.id)||change.trayId!==null&&!v.benchSource.trays.some(t=>t.id===change.trayId))return failure('selection');shelf.placements[word.id]=change.trayId;
+ }else if(own(change,'markIndex')||change.clearMarks===true){
+  const m=marketCrateMarks(shelf,word);if(m.status!=='ready')return failure('unavailable');
+  if(!own(shelf,'marks'))shelf.marks={};
+  if(!own(shelf.marks,word.id)&&Object.keys(shelf.marks).length>=64)return failure('full');
+  if(change.clearMarks===true)shelf.marks[word.id]=[];
+  else{const index=change.markIndex;if(!Number.isInteger(index)||index<0||index>=[...word.text].length)return failure('selection');shelf.marks[word.id]=m.indices.includes(index)?m.indices.filter(i=>i!==index):[...m.indices,index];}
+ }else return failure('selection');
+ return {ok:true};
+ },options);}
+export function showMarketCrateHelp(state,key,options){return mutate(state,(r,next)=>{
+ const v=marketCrateView(next);if(!crateId(key)||!v.shelf?.editable||![...v.cards,...v.helpers].some(h=>h.id===key))return failure('unavailable');
+ const help=v.shelf.record.help;if(help.includes(key))return {ok:true,changed:false};if(help.length>=64)return failure('full');help.push(key);return {ok:true};
+ },options);}
+export function checkMarketCrate(state,options){return mutate(state,(r,next)=>{
+ const v=marketCrateView(next),e=v.shelf;if(!e?.editable||e.checksStatus==='unreadable'||!e.playable.length)return failure('unavailable');
+ const result=wordListShelfResult(v.benchSource,e.record);if(!result)return failure('unavailable');
+ e.record.checks??=[];e.record.checks.push(result);return {ok:true,...result};
+ },options);}
+export function keepMarketCrate(state,options){return mutate(state,(r,next)=>{
+ const e=marketCrateView(next).shelf;if(!e?.editable||!e.playable.length||e.latestStatus==='unreadable')return failure('unavailable');
+ const k={placements:copy(e.record.placements),...(own(e.record,'marks')?{marks:copy(e.record.marks)}:{}),helpBefore:copy(e.record.help),check:e.last&&!e.earlier?copy(e.last):null};
+ if(!own(e.record,'firstKept')||e.record.firstKept===null)e.record.firstKept=copy(k);e.record.latestKept=k;return {ok:true};
+ },options);}
+export function restoreMarketCrate(state,edition,options){return mutate(state,(r,next)=>{
+ const v=marketCrateView(next),e=v.shelf;if(!['first','latest'].includes(edition))return failure('selection');
+ if(!e?.editable||!e.playable.length)return failure('unavailable');const k=e.record[edition+'Kept'];if(!validWordListKeep(k))return failure('unavailable');
+ for(const w of e.playable){const selected=own(k.placements,w.id)?k.placements[w.id]:null;if(selected===null||v.benchSource.trays.some(t=>t.id===selected))e.record.placements[w.id]=copy(selected);}
+ return {ok:true};
+ },options);}
+export function openMarketCrateJob(state,jobId,options){return mutate(state,r=>{
+ if(!crateId(jobId))return failure('selection');ensureCrates(r);const q=r.crates;if(!crateRootOK(q))return failure('unavailable');
+ if(!own(q,'records'))q.records={};if(!boundedObject(q.records,32))return failure('unavailable');
+ if(own(q.records,jobId)){if(!validMarketCrateRecord(q.records[jobId])||q.records[jobId].source.id!==jobId)return failure('unavailable');}
+ else{if(Object.keys(q.records).length>=32)return failure('full');const source=crateJobs(q).find(s=>s.id===jobId);if(!source)return failure('selection');q.records[jobId]={source:copy(source),work:initialWork(source),help:{hint:false,example:false},checks:[],count:0};}
+ if(q.currentId===jobId&&r.practiceGroup==='crates'&&r.view==='practice')return {ok:true,changed:false};q.currentId=jobId;r.practiceGroup='crates';r.view='practice';return {ok:true};
  },options);}
