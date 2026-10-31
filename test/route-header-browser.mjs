@@ -12,7 +12,7 @@ const routes=[['#almanac/beyond','#storm'],['#almanac/beyond/seeds','#storm'],['
  ['#workshop/copy-frame','#workshop'],['#workshop/ribbon-measures','#workshop'],['#workshop/same-ground','#workshop'],
  ['#workshop/common-cuts',null],['#almanac/upstream-reply',null],['#studio/field-strips',null],['#desk/gaps',null],
  ['#studio/mixing/bars',null],['#studio/mixing',null],['#living/who-eats',null],['#post/register',null],['#learn/math/paired',null],
- ['#almanac/weather',null],['#almanac/tallies',null],['#studio/rhythm',null],['#science/water-shares','#science'],
+ ['#almanac/weather',null],['#almanac/tallies',null],['#almanac/sky',null],['#studio/rhythm',null],['#science/water-shares','#science'],
  ['#post/descriptions','#post'],['#post/codes','#post'],['#arrive',null],['#begin',null],['#learn/math',null],['#pathways/science',null],
  ['#cafe/units','#cafe'],['#loft/shadows',null],['#workshop/scale','#workshop']];
 const seed=initializeExplorerState(freshState());seed.garden.welcomeFilmSeen=true;seed.garden.guide='ari';
