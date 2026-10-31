@@ -74,7 +74,7 @@ The title uses the typographic apostrophe shown above. Exact shared-text bodies 
 - Notes draft: “Waiting label: {target}. Letters: {three places, with empty for a null place}.”
 - Notes unavailable: “Earlier material is kept in the download but cannot be shown here.”
 - Notes recovery: “Earlier prop boxes are kept unchanged in this download.”
-- Notes link: **Open Word Workshop**.
+- Notes link: **Open Word Workshop**, to `#words/props`.
 - Word Garden entry link, in both legacy branches: **Visit the Prop Box**.
 - **Make another scene** and **Make a scene in Story Loft** both link to `#loft`, without writing or transferring work there.
 
