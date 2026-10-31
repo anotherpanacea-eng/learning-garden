@@ -229,7 +229,10 @@ def main():
                     closed = help_controls(q)
                     h.click(q, '[data-cafe-action="help"]')
                     q.wait_for_function("!document.querySelector('[data-cafe-action=\"help\"]')")
-                    looks[look] = (closed, help_controls(q))
+                    opened = help_controls(q)
+                    texts = [x['text'] for x in opened]
+                    ok(all(t in texts for t in ['Count the next plate', 'Count again', 'Show the equal-groups explanation']), f'the support opened in {look}: ' + str(texts))
+                    looks[look] = (closed, opened)
                     ctx.close()
                 shape = lambda xs: [(x['text'], x['w'], x['h'], x['color'], x['bg']) for x in xs]
                 ok('Count the plates together' in [x['text'] for x in looks['field-journal'][0]], 'the help trigger is compared')
