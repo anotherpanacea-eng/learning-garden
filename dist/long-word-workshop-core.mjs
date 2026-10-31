@@ -32,7 +32,7 @@ function wordsSource(s){return base(s)&&list(s.words)?stainedMapRows(s.words,w=>
 function glossarySource(s){
  if(!base(s)||!list(s.glossary)||!['glossaryIncomplete','glossaryDiscussion','glossaryMatching','partialMatching','partialNotice'].every(k=>text(s.copy[k])))return null;
  const lines=stainedMapRows(s.glossary,g=>['title','before','flagged','hint'].every(k=>text(g[k]))&&list(g.frame)&&g.frame.length===2&&g.frame.every(text)&&list(g.choices)&&id(g.fits)&&obj(g.feedback)&&list(g.example)&&g.example.every(text)).flatMap(g=>{
-  const choices=stainedMapRows(g.choices,c=>small(c.text)&&text(g.feedback[c.id]));
+  const choices=stainedMapRows(g.choices,c=>small(c.text)&&feedback(g.feedback[c.id]));
   return choices.some(c=>c.id===g.fits)?[{...g,choices,partial:choices.length!==g.choices.length}]:[];
  });
  return {lines,copy:s.copy,partial:lines.length!==s.glossary.length||lines.some(g=>g.partial)};

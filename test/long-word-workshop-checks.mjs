@@ -101,6 +101,11 @@ const limit=start();let lo=0,hi=MAX_IMPORT_BYTES;while(lo<hi){const mid=Math.flo
 for(const op of operations){const s=clone(base);refuse(s,()=>op(s,null));}
 const renewed=start('glossary');root(renewed).glossary.picks.g1={future:'opaque'};yes(C.checkLongGlossary(renewed,options));ok(Object.hasOwn(root(renewed).glossary.check,'notice'));root(renewed).glossary.check.future='held';root(renewed).glossary.picks.g1='a';yes(C.checkLongGlossary(renewed,options));eq(root(renewed).glossary.check.coverage,'full');ok(!Object.hasOwn(root(renewed).glossary.check,'notice'));eq(root(renewed).glossary.check.future,'held');
 
+// Recovery copy names an unknown format; accepted feedback uses its declared
+// 16000-character bound rather than the 4000-character ordinary-source bound.
+const unknownPage=longWordPage({longWordWorkshop:{v:99}});ok(unknownPage.includes(source.copy.unknownVersion));
+const longFeedback=start('glossary');root(longFeedback).source.glossary[0].feedback.a='x'.repeat(5000);ok(C.longWordView(longFeedback).glossary.source.lines.some(g=>g.id==='g1'));yes(C.setLongGlossaryChoice(longFeedback,'g1','a',options));yes(C.checkLongGlossary(longFeedback,options));eq(root(longFeedback).glossary.check.rows.find(g=>g.id==='g1').feedback.length,5000);
+
 // Pure readers/speech never create an activity or mark help; no choices are narrated.
 const passive=fresh(),passiveBefore=clone(passive);resetLongWordView();ok(longWordPage(passive).includes('data-long-word-root'));eq(longWordNotes(passive),'');C.longWordView(passive);longWordSpeech(passive,'story');longWordSpeech(passive,'instruction');eq(passive,passiveBefore);
 for(const id of targets){const s=start();yes(C.openLongWord(s,id,options));const before=clone(s);eq(longWordSpeech(s,'sentence'),root(s).source.words.find(w=>w.id===id).sentence);for(const kind of ['pieces','choices','clue','example','feedback','trial','prompt'])eq(longWordSpeech(s,kind),'');longWordPage(s);longWordNotes(s);eq(s,before);}

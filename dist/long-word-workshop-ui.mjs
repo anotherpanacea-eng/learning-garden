@@ -6,7 +6,7 @@ const p=x=>`<p>${esc(text(x))}</p>`;
 const json=x=>{try{return JSON.stringify(x,null,2);}catch{return '';}};
 const button=(action,label,attrs='',disabled=false)=>`<button type="button" data-lww-action="${action}" ${attrs}${disabled?' disabled':''}>${esc(label)}</button>`;
 const read=(kind,label)=>`<button type="button" class="lww-read" data-lww-read="${kind}" data-speak="">${esc(label)}</button>`;
-const notice=(c,key='unavailable')=>`<aside class="lww-notice">${p(c[key]||LONG_WORD_SOURCE.copy.unavailable)}<a href="#notes">${esc(c.notes||LONG_WORD_SOURCE.copy.notes)}</a></aside>`;
+const notice=(c,key='unavailable')=>`<aside class="lww-notice">${p(c[key]||LONG_WORD_SOURCE.copy[key]||LONG_WORD_SOURCE.copy.unavailable)}<a href="#notes">${esc(c.notes||LONG_WORD_SOURCE.copy.notes)}</a></aside>`;
 let locals=new WeakMap();
 export function resetLongWordView(){locals=new WeakMap();}
 function local(state,owner=''){

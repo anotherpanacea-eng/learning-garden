@@ -77,7 +77,7 @@ def start(browser, width, height=1000, first=None):
     c = browser.new_context(viewport={'width':width,'height':height}, has_touch=True, accept_downloads=True, reduced_motion='reduce')
     registry = {'version':1,'activeId':'explorer-1','explorers':[{'id':key,'avatar':'sky','color':'blue','symbol':'leaf','createdAt':'2026-10-31T14:00:00.000Z'} for key in ['explorer-1','explorer-2']]}
     fixture = {'registry':registry, 'books':{'explorer-1':first if first is not None else seed(), 'explorer-2':seed()}}
-    c.add_init_script('(d=>{if(!localStorage.getItem("lww-fixture")){localStorage.setItem("learning-garden-explorers",JSON.stringify(d.registry));for(const [id,s]of Object.entries(d.books))localStorage.setItem("number-garden-v1:"+id,JSON.stringify(s));localStorage.setItem("lww-fixture","yes");}window.__lwwSpoken=[];speechSynthesis.speak=u=>{window.__lwwSpoken.push(u.text);setTimeout(()=>u.onend?.(),0);};})('+json.dumps(fixture)+')')
+    c.add_init_script('(d=>{if(!localStorage.getItem("lww-fixture")){localStorage.setItem("learning-garden-explorers",JSON.stringify(d.registry));for(const [id,s]of Object.entries(d.books))localStorage.setItem("number-garden-v1:"+id,JSON.stringify(s));localStorage.setItem("lww-fixture","yes");}window.__lwwSpoken=[];window.__lwwNoVoice=false;window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};speechSynthesis.getVoices=()=>window.__lwwNoVoice?[]:[{name:"Synthetic local English",voiceURI:"synthetic-local-en",lang:"en-US",localService:true,default:true}];speechSynthesis.cancel=()=>{};speechSynthesis.speak=u=>{window.__lwwSpoken.push(u.text);setTimeout(()=>u.onend?.(),0);};})('+json.dumps(fixture)+')')
     def app(route):
         response = route.fetch()
         body = response.text()
@@ -121,8 +121,10 @@ def example(p, action_name, key, expected, help_value, expected_title=None):
     p.evaluate('window.__lwwObserver.disconnect()')
     eq(p.evaluate('window.__lwwSpoken'), spoken_before, 'teaching/example controls never narrate excluded material')
 def speech(p, kind, expected):
+    before = p.evaluate('window.__lwwSpoken.length')
     p.locator('[data-lww-read="'+kind+'"]').tap()
-    p.wait_for_function('window.__lwwSpoken.length>0')
+    p.wait_for_function('(before)=>window.__lwwSpoken.length>before', arg=before)
+    eq(p.evaluate('window.__lwwSpoken.length'), before+1, 'one new speech request per Hear action')
     eq(p.evaluate('window.__lwwSpoken.at(-1)'), ' '.join(expected.split()), 'only allowed '+kind+' narrated')
 
 def main():
@@ -240,6 +242,18 @@ def main():
 
 
 def boundaries(b):
+    # No voice is also deterministic: qualify the host fallback and requested
+    # text routing only, never audible playback or installed system voices.
+    c,p=start(b,390);p.evaluate('window.__lwwNoVoice=true')
+    p.locator('[data-lww-panel=story]>summary').tap()
+    p.locator('[data-lww-read=story]').tap()
+    eq(p.locator('[data-speech-status]').inner_text(),
+       'No local English voices are available yet. Refresh after voices load, or read together.',
+       'Hear offers the host read-together fallback without a local voice')
+    eq(p.evaluate('window.__lwwSpoken'),[],'no speech request without a local voice')
+    ok(root(p) is None,'unavailable narration does not allocate workshop work')
+    tap(p,'words');tap(p,'append','[data-lww-piece=catch]')
+    eq(word(p)['order'],['catch'],'workshop remains playable without a local voice');c.close()
     c,p=start(b,820);tap(p,'words');tap(p,'append','[data-lww-piece=catch]');owner1=root(p)
     old=p.evaluate_handle('document.querySelector("[data-lww-action=append][data-lww-piece=ment]")')
     p.locator('#explorer-switch').tap();p.locator('[data-select-explorer=explorer-2]').tap();arrive(p)
