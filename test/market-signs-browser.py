@@ -343,6 +343,7 @@ def crate_fixture(name='base'):
   code+="c.openMarketBench(s,'crates',o);const q=s.signs.crates;"
   damage={
    'complete':"for(const w of q.source.words)q.shelf.placements[w.id]=w.clues[0].trayId;",
+   'prototype-card':"q.source.cards[0].id='hasOwnProperty';",
    'missing-pointer':"delete q.currentWordId;",'dangling-pointer':"q.currentWordId='earlier-word';",
    'bad-marks-row':"q.shelf.marks.eight={earlier:['marks']};",'bad-marks':"q.shelf.marks=['earlier marks'];",
    'bad-checks':"q.shelf.checks={earlier:['checks']};",'bad-first':"q.shelf.firstKept={earlier:['keep']};",'bad-latest':"q.shelf.latestKept={earlier:['keep']};",
@@ -379,7 +380,7 @@ def crates_play(browser,base,w,hgt):
   h.ok('signs' not in h.book(p),'crate arrival allocates no source');choose(p,'D1');h.ok('shelf' not in crate_state(p),'D job allocates collection without shelf');h.ok(p.locator('.ms-guided li').all_text_contents()==['Weight shares letters with eight.','Those letters are eigh.'],'D1 printed guidance precedes choice')
   choose(p,'B1');choose(p,'C1');choose(p,'A1');choose(p,'D1');pointers=(state(p)['currentId'],state(p)['endings']['currentId'],state(p)['patterns']['currentId'],crate_state(p)['currentId']);h.ok(pointers==('B1','C1','A1','D1'),'four independent practice pointers')
   bench(p,'crates');h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['placements']=={} and crate_state(p)['shelf']['marks']=={},'explicit bench opens absent shelf at first readable word without default work');crate_heading(p);layout(p);viewport_shot(p,'crate-initial',w)
-  h.ok(p.locator('[data-ms-word] option[value=""]').is_disabled(),'selected word picker disables its placeholder');before_empty=copy.deepcopy(h.book(p));empty_status=p.locator('#ms-status').inner_text();p.evaluate('const picker=document.querySelector("[data-ms-word]");picker.value="";picker.dispatchEvent(new Event("change",{bubbles:true}))');h.ok(h.book(p)==before_empty and p.locator('#ms-status').inner_text()==empty_status,'empty native picker change leaves work and status exact')
+  h.ok(p.locator('[data-ms-word] option[value=""]').evaluate('(el)=>el.disabled&&el.matches(":disabled")'),'selected word picker natively disables its placeholder');before_empty=copy.deepcopy(h.book(p));empty_status=p.locator('#ms-status').inner_text();p.evaluate('const picker=document.querySelector("[data-ms-word]");picker.value="";picker.dispatchEvent(new Event("change",{bubbles:true}))');h.ok(h.book(p)==before_empty and p.locator('#ms-status').inner_text()==empty_status,'empty native picker change leaves work and status exact')
   turn=p.locator('[data-ms-action=crate-tray][data-ms-tray=eigh]').bounding_box();nav=p.locator('.ms-ways').bounding_box();h.ok(turn and turn['y']>=nav['y']+nav['height']-1 and turn['y']+turn['height']<=hgt,'initial crate marking and placing fit measured viewport')
   crate_mark(p,0,True);h.ok(crate_state(p)['shelf']['marks']['eight']==[0] and p.locator('[data-ms-index="0"]').get_attribute('aria-pressed')=='true','native keyboard mark toggles saved letter');crate_mark(p,0);h.ok(crate_state(p)['shelf']['marks']['eight']==[],'touch toggles same marker off');crate_mark(p,1);crate_place(p,'eigh',True);h.ok(crate_state(p)['currentWordId']=='eight' and p.locator('#ms-crate-feedback').count()==0,'placing does not advance or check');h.ok(p.evaluate('document.activeElement.dataset.msTray')=='eigh','native keyboard tray retains focus')
   action(p,'crate-word-next');crate_heading(p);h.ok(crate_state(p)['currentWordId']=='eighth','Next explicit retained-word turn');action(p,'crate-word-prev');crate_heading(p);h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['marks']['eight']==[1],'Previous retains markers and placement');p.reload(wait_until='networkidle');ready(p);h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['marks']['eight']==[1],'reload resumes selected word and markers')
@@ -398,6 +399,13 @@ def crates_play(browser,base,w,hgt):
   action(p,'next-job');h.ok(state(p)['practiceGroup']=='prefix' and state(p)['currentId']=='B1','last D wraps combined retained sources to prefix');bench(p,'crates');p.evaluate('window.departedCrate=document.querySelector("[data-ms-action=crate-mark]")');held=copy.deepcopy(state(p));report=h.export_notes(p,'crate-'+str(w));h.ok(report['signs']==held,'actual Notes download retains all four Market Signs groups');p.evaluate('departedCrate.click()');h.ok(state(p)==held,'departed crate control inert');import_notes(p,report);p.evaluate('departedCrate.click()');h.ok(state(p)==held,'pre-import crate callback inert')
  finally:c.close()
 def crates_edges(browser,base):
+ c,p=setup(browser,base,crate_fixture('prototype-card'))
+ try:
+  drawer(p,'crate-cards');p.locator('[data-ms-action=crate-help][data-ms-help=hasOwnProperty]').tap()
+  for n,step in enumerate(['Weight shares letters with eight.','Those letters are eigh.','w, eigh, t: weight.'],1):
+   p.locator('[data-ms-action=crate-step-next][data-ms-help=hasOwnProperty]').tap();h.ok(p.locator('#ms-crate-help-hasOwnProperty .ms-steps li').all_text_contents()[-1]==step,'own source card steps use own presentation index '+str(n))
+  h.ok(crate_state(p)['shelf']['help']==['hasOwnProperty'],'own-source step paging retains one support id')
+ finally:c.close()
  for kind in ['notes-bad-help','notes-bad-placements']:
   seed=crate_fixture(kind);c,p=setup(browser,base,seed)
   try:

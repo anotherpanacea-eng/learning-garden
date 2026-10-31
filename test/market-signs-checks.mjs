@@ -448,6 +448,7 @@ export function runMarketCrateChecks(){
  for(const field of ['help','placements']){
   const s=notesSeed();s.signs.crates.shelf[field]=null;const before=copy(s),text=readableNotes(s);
   ok(text.includes('Marked letters: g (3).'),'current markers readable beside bad '+field);ok(text.includes('Current retained check survives a paused draft.'),'saved checks readable beside bad '+field);
+  ok(text.includes('Marked letters: i (2).'),'kept markers distinct from current beside bad '+field);ok(text.includes('Earlier readable check survives a paused draft.'),'kept check distinct from current beside bad '+field);
   ok(text.includes(marketCrateCopy.firstLabel)&&text.includes(marketCrateCopy.latestLabel),'keeps readable beside bad '+field);eq(s,before,'Notes never repairs bad '+field);
   // A frozen keep has its own raw marks reader, independent of the draft.
   s.signs.crates.shelf.firstKept.marks.eight={earlier:'raw marks'};const badMarksBefore=copy(s);ok(readableNotes(s).includes(marketCrateCopy.keptMarksUnavailable),'kept bad marks notice beside bad '+field);eq(s,badMarksBefore);pure(s);
