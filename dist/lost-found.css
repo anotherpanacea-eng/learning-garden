@@ -1,0 +1,38 @@
+/* Spec 333: the Lost and Found Board. */
+.lf-board{max-width:1000px;margin:0 auto;padding:0 12px 32px}
+.lf-board button,.lf-board select,.lf-board summary,.lf-board .back,.lf-notice a{min-height:44px;min-width:44px}
+.lf-board .back,.lf-notice a{display:inline-flex;align-items:center}
+.lf-board summary{display:flex;align-items:center;cursor:pointer}
+.lf-board button:focus-visible,.lf-board select:focus-visible,.lf-board input:focus-visible{outline:3px solid #1f5fa8;outline-offset:2px}
+.lf-board .lf-actions{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.lf-board .lf-actions button{flex:0 0 auto;width:auto}
+.lf-note-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px 16px;border:2px solid #8a6a3a;border-radius:10px;background:#fff8e6;text-align:left}
+.lf-status{font-size:.9em}
+.lf-mystery,.lf-clues,.lf-tell,.lf-answer,.lf-steps,.lf-worked,.lf-reveal{border:2px solid #c9b88f;border-radius:10px;padding:10px 12px;margin:12px 0;background:#fffcf3}
+.lf-shed{width:220px;max-width:100%;height:auto}
+.lf-sentences{list-style:none;padding:0}
+.lf-sentence{border-bottom:1px solid #e1d6b8;padding:6px 0}
+.lf-sentence button[aria-pressed="true"],.lf-tell button[aria-pressed="true"],.lf-reveal button[aria-pressed="true"]{border:3px solid #1f5fa8;background:#eaf2fb}
+.lf-why{font-style:italic}
+.lf-grid-wrap{overflow-x:auto;max-width:100%}
+.lf-grid{border-collapse:collapse;margin:8px 0}
+.lf-grid th,.lf-grid td{border:1px solid #b7a98a;padding:2px;text-align:center}
+.lf-grid th{padding:4px;font-size:.9em}
+.lf-cell{width:56px;min-height:44px;font-weight:700}
+.lf-list fieldset{border:1px solid #c9b88f;border-radius:6px;margin:6px 0}
+.lf-list label{display:inline-flex;align-items:center;min-height:44px;margin-right:12px}
+.lf-answer-row{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.lf-answer-row label{display:flex;flex-direction:column;gap:2px}
+.lf-line:empty,.lf-status:empty{display:none}
+.lf-line{font-weight:600}
+.lf-notice{border:2px solid #a35a2a;border-radius:8px;padding:8px 12px;margin:12px 0}
+.lf-announce,.lf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.lf-reveal blockquote{margin:6px 0 6px 12px}
+@media (prefers-reduced-motion:reduce){.lf-board *{transition:none;animation:none}}
+.lf-board button{white-space:normal;max-width:100%}
+.lf-mystery{padding:8px}
+.lf-mystery .lf-clues,.lf-mystery .lf-tell,.lf-mystery .lf-answer,.lf-mystery .lf-steps,.lf-mystery .lf-worked,.lf-mystery .lf-reveal{padding:8px;margin:10px 0}
+.lf-grid{width:100%;table-layout:fixed}
+.lf-grid th{font-size:.8em;overflow-wrap:anywhere;hyphens:auto}
+.lf-grid thead th:first-child,.lf-grid tbody th{width:28%}
+.lf-cell{width:100%;min-width:44px;padding:0}
