@@ -91,12 +91,12 @@ export function wordListShelfView(state) {
   const s=present?(obj(record)&&validWordListJob(record.source)&&record.source.id===key?record.source:null):offered.find(j=>j.id===key);
   const e=jobEntry(s,record,present);
   if(own(r,'jobs')&&!obj(r.jobs))e.status='unreadable';
-  return {id:key,...e};
+  return {id:key,stored:present,...e};
  });
  const shelf=shelfEntry(wordListShelfSource(source),r.shelf,own(r,'shelf'));
  return {status:'ready',root:r,source,view:['shelf','jobs'].includes(r.view)||jobs.some(j=>j.id===r.view)?r.view:'arrival',shelf,jobs,
   current:jobs.find(j=>j.id===r.view)??null,
-  jobsPartial:!list(source?.jobs)||source.jobs.length!==offered.length||own(r,'jobs')&&!obj(r.jobs)||jobs.some(j=>['unavailable','unreadable'].includes(j.status))};
+  jobsPartial:!list(source?.jobs)||source.jobs.length!==offered.length||own(r,'jobs')&&(!obj(r.jobs)||Object.keys(r.jobs).some(k=>!jobId(k)))||jobs.some(j=>['unavailable','unreadable'].includes(j.status))};
 }
 
 const failure=error=>({ok:false,error});

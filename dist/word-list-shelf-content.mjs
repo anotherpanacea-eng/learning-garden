@@ -346,8 +346,8 @@ const source = freeze({
       "example": "A committee card",
       "explanation": "Accommodate has double c and double m.",
       "steps": [
-        "Find the double letters",
-        "Two c's",
+        "Find the double letters.",
+        "Two c's.",
         "Two m's."
       ],
       "teach": [

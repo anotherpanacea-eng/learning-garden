@@ -34,6 +34,8 @@ def geometry(p):
  ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no page overflow')
  bad=p.locator('.wls-room :is(button,select,summary,a):visible').evaluate_all('xs=>xs.filter(e=>e.getBoundingClientRect().height<44).map(e=>e.textContent)')
  ok(not bad,'44px targets: '+str(bad))
+ dims=p.locator('.wls-trays>button:visible').evaluate_all('xs=>xs.map(e=>({w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height}))')
+ if len(dims)==5:ok(max(d['w'] for d in dims)-min(d['w'] for d in dims)<=1 and max(d['h'] for d in dims)-min(d['h'] for d in dims)<=1,'five equally sized tray buttons')
 def start(browser,width,height=1000,first=None):
  c=browser.new_context(viewport={'width':width,'height':height},has_touch=True,accept_downloads=True,reduced_motion='reduce')
  registry={'version':1,'activeId':'explorer-1','explorers':[{'id':id,'avatar':'sky','color':'blue','symbol':'leaf','createdAt':'2026-10-31T14:00:00.000Z'} for id in ['explorer-1','explorer-2']]}
@@ -85,7 +87,7 @@ with sync_playwright() as pw:
    eq(p.locator('#wls-feedback').count(),0,'editing hides earlier current verdict')
    tap(p,'check-shelf');eq(root(p)['shelf']['checks'][-1]['status'],'discussion','unexpected clue invites discussion')
    ok('Your placement can stay' in p.locator('.wls-word-feedback').inner_text(),'other idea is not called an error')
-   p.locator('[data-wls-panel=shelf-latest]>summary').tap();tap(p,'restore-shelf','[data-wls-edition=latest]')
+   p.locator('[data-wls-panel=shelf-latest]>summary').tap();eq(p.locator('[data-wls-panel=shelf-latest] .wls-kept-feedback strong').first.inner_text(),latest['check']['rows'][0]['word'],'kept comments carry their literal word labels');tap(p,'restore-shelf','[data-wls-edition=latest]')
    eq(root(p)['shelf']['placements'],latest['placements'],'restore keeps all cards')
    tap(p,'shelf-example');eq(p.locator('[data-wls-example=shelf] li').count(),1,'example starts at first step')
    tap(p,'step','[data-wls-example-key=shelf]');tap(p,'step','[data-wls-example-key=shelf]')
@@ -99,13 +101,14 @@ with sync_playwright() as pw:
     p.locator('.wls-pocket [data-wls-word=accommodate]').tap();eq(p.locator('[data-wls-picker]').input_value(),'accommodate','live pocket returns to its card')
    geometry(p);p.screenshot(path=str(OUT/f'shelf-{width}.png'),full_page=True)
    for key in ['e1','e2','e3']:
-    tap(p,'jobs');tap(p,'job','[data-wls-job='+key+']');j=root(p)['jobs'][key]['source']
+    if key=='e1':tap(p,'keep-shelf')
+    tap(p,'jobs');eq(p.locator('.wls-stamp').count(),0,'shelf stamp does not carry into jobs');tap(p,'job','[data-wls-job='+key+']');j=root(p)['jobs'][key]['source']
     eq(p.locator('.wls-job .wls-paper>ol>li').count(),3 if key=='e1' else 0,'only first job has automatic guidance')
     wrong=next(x['id'] for x in j['choices'] if x['id']!=j['key'])
     tap(p,'answer','[data-wls-choice='+wrong+']');tap(p,'check-job')
     eq(root(p)['jobs'][key]['checks'][-1]['outcome'],'different','finite job feedback')
     if key=='e1':ok("two m's" in p.locator('#wls-feedback').inner_text(),'missing-m diagnosis')
-    tap(p,'hint');tap(p,'job-example');eq(p.locator('[data-wls-example] li').count(),1,'requested example starts at first step')
+    tap(p,'hint');tap(p,'job-example');eq(p.locator('[data-wls-example] li').count(),1,'requested example starts at first step');ok(j['teach'][0]['text'] in p.locator('[data-wls-example]').inner_text(),'designated teaching line is visible')
     cardkey='job-'+key+'-'+j['teach'][0]['id']
     tap(p,'step','[data-wls-example-key="'+cardkey+'"]');tap(p,'step','[data-wls-example-key="'+cardkey+'"]')
     eq(p.locator('[data-wls-example] li').count(),3,'complete designated example')
@@ -138,7 +141,7 @@ with sync_playwright() as pw:
 
   # Save-off and a storage failure still allow memory work and an actual copy.
   c,p=start(b,390);p.goto(BASE+'#notes');p.locator('#remember').uncheck();p.goto(BASE+'#library/word-list');tap(p,'shelf');tap(p,'place','[data-wls-tray=double]');ok(bool(p.locator('[data-wls-saving]').inner_text()),'save-off message remains local');eq(json.loads(download(p))['wordListShelf'],root(p),'save-off actual download retains memory work');c.close()
-  c,p=start(b,390);tap(p,'shelf');p.evaluate('() => {Storage.prototype.setItem=function(){throw new Error("Synthetic storage failure")};}');tap(p,'place','[data-wls-tray=double]');eq(root(p)['shelf']['placements']['accommodate'],'double','storage failure retains memory work');ok(bool(p.locator('[data-wls-saving]').inner_text()),'storage failure message remains local');c.close()
+  c,p=start(b,390);tap(p,'shelf');p.evaluate('() => {Storage.prototype.setItem=function(){throw new Error("Synthetic storage failure")};}');tap(p,'place','[data-wls-tray=double]');eq(root(p)['shelf']['placements']['accommodate'],'double','storage failure retains memory work');ok(bool(p.locator('[data-wls-saving]').inner_text()),'storage failure message remains local');held=root(p);eq(json.loads(download(p))['wordListShelf'],held,'storage-failure actual download preserves memory work');c.close()
 
   oldseed=seed(True);r=oldseed['wordListShelf'];r['source']['words'].append({'id':'foreign','text':3,'clues':[]});r['shelf']['placements']['foreign']={'raw':'kept'};r['shelf']['placements']['sufficient']='retired-tray'
   c,p=start(b,820,first=oldseed);tap(p,'shelf');choose(p,'sufficient');ok(action(p,'place','[data-wls-tray=double]').is_disabled(),'opaque placement remains read-only');tap(p,'check-shelf');eq(root(p)['shelf']['checks'][-1]['coverage'],'partial','partial check explicitly labelled');tap(p,'keep-shelf');eq(root(p)['shelf']['placements']['foreign'],{'raw':'kept'},'omitted duplicate placement retained');raw=download(p);eq(json.loads(raw)['wordListShelf'],root(p),'partial actual download exact');c.close()
