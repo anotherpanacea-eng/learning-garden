@@ -41,7 +41,7 @@ def run(browser,base):
   try:
    eq(book(p),seed,'entry preserves all roots');eq(p.locator('dialog.welcome-film[open]').count(),0,'direct route has optional arrival');layout(p,'arrival')
    table(p,'map');layout(p,'map');eq(p.locator('.sm-name').inner_text(),'Hi▢▢ Ford','first label stained')
-   tap(p,'place','[data-sm-choice=k]');eq(p.locator('.sm-name').inner_text(),'Hik Ford','literal wrong tile');tap(p,'check');ok('Hi▢▢ Ford:' in p.locator('.sm-feedback').inner_text(),'whole-map original-label feedback')
+   tap(p,'place','[data-sm-choice=k]');ok(p.locator('[data-sm-choice=k]').evaluate('e=>e===document.activeElement'),'tile keeps keyboard focus');eq(p.locator('.sm-name').inner_text(),'Hik Ford','literal wrong tile');tap(p,'check');ok('Hi▢▢ Ford:' in p.locator('.sm-feedback').inner_text(),'whole-map original-label feedback')
    tap(p,'place','[data-sm-choice=gh]');eq(p.locator('.sm-name').inner_text(),'High Ford','two-letter tile');tap(p,'keep');first=copy.deepcopy(book(p)['spellings']['benches']['map']['firstKept'])
    p.locator('[data-sm-picker]').select_option('knoll');eq(p.locator('.sm-name').inner_text(),'▢noll Wood','next label retains untouched stain');ok('Once written cnoll.' in p.locator('.sm-written-note').inner_text(),'written source visible')
    tap(p,'place','[data-sm-choice=gh]');eq(p.locator('.sm-name').inner_text(),'Ghnoll Wood','only first letter capitalized');tap(p,'place','[data-sm-choice=k]')
@@ -50,12 +50,14 @@ def run(browser,base):
    tap(p,'check');eq(book(p)['spellings']['benches']['map']['checks'][-1]['outcome'],'fit','whole map fit');tap(p,'keep');eq(book(p)['spellings']['benches']['map']['firstKept'],first,'immutable first keep')
    p.screenshot(path=str(OUT/f'map-{width}.png'),full_page=True)
    p.locator('[data-sm-panel=keep-first] summary').tap();tap(p,'inspect','[data-sm-edition=first]');ok('Not chosen yet' in p.locator('[data-sm-panel=keep-first]').inner_text(),'inspect incomplete version');tap(p,'restore','[data-sm-edition=first]');eq(book(p)['spellings']['benches']['map']['work'],first['work'],'reopen copy')
-   table(p,'histories');layout(p,'histories');p.locator('[data-sm-picker]').select_option('island');tap(p,'place','[data-sm-choice=added]');tap(p,'keep');table(p,'families');layout(p,'families');p.locator('[data-sm-panel=family-sign] summary').tap();ok('sign → signal' in p.locator('.sm-written-note').inner_text(),'family teaching stays beside work');tap(p,'place','[data-sm-choice=signal]');tap(p,'check');tap(p,'keep')
+   table(p,'histories');layout(p,'histories');p.locator('[data-sm-picker]').select_option('island');tap(p,'place','[data-sm-choice=added]');ok('island — Added by writers' in p.locator('.sm-placements').inner_text(),'every history placement remains visible');tap(p,'keep');table(p,'families');layout(p,'families');p.locator('[data-sm-panel=family-sign] summary').tap();ok('sign → signal' in p.locator('.sm-written-note').inner_text(),'family teaching stays beside work');p.locator('[data-speak]').tap();family_spoken=' '.join(p.evaluate('window.smSpoken'));ok('→' not in family_spoken and 'signal' not in family_spoken,'family response note excluded from narration');tap(p,'place','[data-sm-choice=signal]');tap(p,'check');tap(p,'keep')
    table(p,'practice')
    for job,key in [('a1','gh'),('a2',{'knife':'once','write':'once','island':'added','debt':'added'}),('a3','island'),('a4','signal'),('a5',{'statement-1':'false','statement-2':'true','statement-3':'true'})]:
-    tap(p,'job','[data-sm-job='+job+']');layout(p,job);tap(p,'hint');tap(p,'example')
+    tap(p,'job','[data-sm-job='+job+']');layout(p,job);tap(p,'hint');tap(p,'example');ok(p.locator('.sm-worked li').count()>=1,job+' example includes worked steps');
+    if job=='a3':ok('writers added the s later' in p.locator('.sm-job-notes').inner_text(),'A3 written notes visible')
     if isinstance(key,dict):
-     for part,choice in key.items():tap(p,'select-job','[data-sm-part='+part+']');tap(p,'answer','[data-sm-choice='+choice+']')
+     for part,choice in key.items():
+      tap(p,'select-job','[data-sm-part='+part+']');ok(p.locator('[data-sm-action=select-job][data-sm-part='+part+']').evaluate('e=>e===document.activeElement'),'part focus retained');tap(p,'answer','[data-sm-choice='+choice+']');ok(p.locator('[data-sm-action=answer][data-sm-choice='+choice+']').evaluate('e=>e===document.activeElement'),'answer focus retained')
     else:tap(p,'answer','[data-sm-choice='+key+']')
     tap(p,'check');eq(book(p)['spellings']['items'][job]['checks'][-1]['outcome'],'fit',job+' fit');tap(p,'keep')
    p.screenshot(path=str(OUT/f'job-{width}.png'),full_page=True)
@@ -72,7 +74,7 @@ def run(browser,base):
  c,p=setup(browser,base,fixture("S.openStainedTable(s,'map',o);s.spellings.source.labels=s.spellings.source.labels.slice(0,2).reverse();s.spellings.source.labels[0].before='Synthetic ';s.spellings.source.labels[0].note='A retained written note.';s.spellings.benches.map.work={placements:{knoll:null,high:null}}"))
  try:
   eq(p.locator('[data-sm-picker] option').all_text_contents(),['Synthetic ▢noll Wood','Hi▢▢ Ford'],'retained source order and wording');ok('retained written note' in p.locator('.sm-written-note').inner_text(),'retained note')
-  p.locator('[data-sm-choice=k]').focus();p.keyboard.press('Enter');eq(book(p)['spellings']['benches']['map']['work']['placements']['knoll'],'k','keyboard tile')
+  p.locator('[data-sm-choice=k]').focus();p.keyboard.press('Enter');ok(p.locator('[data-sm-choice=k]').evaluate('e=>e===document.activeElement'),'keyboard focus remains at tile');eq(book(p)['spellings']['benches']['map']['work']['placements']['knoll'],'k','keyboard tile')
   tap(p,'check');last=copy.deepcopy(book(p)['spellings']['benches']['map']['checks']);p.locator('[data-sm-picker]').select_option('high');eq(book(p)['spellings']['benches']['map']['checks'],last,'selection-only navigation preserves check');ok('earlier version' not in p.locator('.sm-feedback').inner_text(),'selection does not mark earlier check')
   table(p,'practice');tap(p,'job','[data-sm-job=a1]');held=book(p);p.evaluate('document.querySelector("[data-sm-action=step]").click()');eq(book(p),held,'closed teaching button inert')
  finally:c.close()
@@ -93,7 +95,7 @@ def run(browser,base):
  # Capacity, stale controls and film guards apply to every writer via the common binder.
  c,p=setup(browser,base,fixture("S.openStainedTable(s,'map',o)"))
  try:
-  before=book(p);p.evaluate('window.smRefuse=true');tap(p,'place','[data-sm-choice=gh]');eq(book(p),before,'actual preflight refusal atomic');ok('unchanged' in p.locator('#sm-status').inner_text(),'refusal visible');p.evaluate('window.smRefuse=false')
+  before=book(p);p.evaluate('window.smRefuse=true');tap(p,'place','[data-sm-choice=gh]');eq(book(p),before,'actual preflight refusal atomic');ok('unchanged' in p.locator('#sm-status').inner_text(),'refusal visible');p.evaluate('window.smRefuse=false');held=book(p);p.evaluate('const b=document.querySelector("[data-sm-choice=gh]");b.style.display="none";b.click()');eq(book(p),held,'CSS-hidden control inert');p.evaluate('document.querySelector("[data-sm-choice=gh]").style.display=""')
   p.evaluate('window.smStale=document.querySelector("[data-sm-choice=gh]")');tap(p,'place','[data-sm-choice=k]');held=book(p);p.evaluate('window.smStale.click()');eq(book(p),held,'detached callback inert')
   p.evaluate('const d=document.createElement("dialog");d.className="welcome-film";document.body.append(d);d.showModal();document.querySelector("[data-sm-choice=gh]").click()');eq(book(p),held,'open film blocks writer');p.evaluate('document.querySelector("dialog.welcome-film").remove()')
   p.locator('[data-sm-panel=teach-card-1] summary').tap();tap(p,'step');ok('Say knoll.' in p.locator('[data-sm-panel=teach-card-1]').inner_text(),'first worked step');tap(p,'step');ok('Once written cnoll.' in p.locator('[data-sm-panel=teach-card-1]').inner_text(),'second worked step')
@@ -105,9 +107,13 @@ def run(browser,base):
    held=book(p);ok(notice in p.locator('.sm-room').inner_text(),'unreadable notice');eq(book(p),held,'read-only malformed work');
    if held['spellings']['v']==1:table(p,'histories');ok(p.locator('[data-sm-picker]').count()==1,'readable sibling stays open')
   finally:c.close()
+ c,p=setup(browser,base,fixture("S.openStainedJob(s,'a1',o);s.spellings.items.a2={source:null};s.spellings.source.labels.push({...s.spellings.source.labels[0],note:17})"))
+ try:
+  tap(p,'skip');eq(book(p)['spellings']['currentId'],'a3','skip goes to next readable job');table(p,'map');ok('not available here' in p.locator('.sm-notice').inner_text(),'partial source omission flagged')
+ finally:c.close()
  c,p=setup(browser,base,fixture('s=pageOne()'))
  try:
-  before=book(p);ok('annotated' not in p.locator('.sm-arrival').inner_text(),'no invented narrative');ok('librarian wrote these place-name labels' in p.locator('.sm-arrival').inner_text(),'tracing caption after real Page1');eq(book(p),before,'story read never changes page')
+  before=book(p);ok('annotated' not in p.locator('.sm-arrival').inner_text(),'no invented narrative');ok('librarian wrote these place-name labels' in p.locator('.sm-arrival').inner_text(),'tracing caption after real Page1');eq(book(p),before,'story read never changes page');table(p,'map');ok('librarian wrote these place-name labels' in p.locator('.sm-room').inner_text(),'tracing caption stays on map table')
  finally:c.close()
  eq(errors,[],'no page errors')
 if __name__=='__main__':

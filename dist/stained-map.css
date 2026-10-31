@@ -3,3 +3,5 @@
 @media(prefers-reduced-motion:reduce){.sm-room *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 
 .sm-room a{display:inline-flex;align-items:center;min-height:44px;min-width:44px}
+
+.sm-placements{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.sm-placements button{flex:1 1 200px}.sm-worked{padding:12px 18px;border-left:4px solid #547250;background:#edf4ef;margin:16px 0}.sm-map-labels button{font-size:16px;padding:8px}

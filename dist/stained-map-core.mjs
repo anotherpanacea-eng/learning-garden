@@ -34,6 +34,7 @@ export function validStainedJob(s){
  if(p.length!==s.parts.length||c.length!==s.choices.length||!c.length||stainedMapRows(s.teach,card).length!==s.teach.length)return false;
  return s.kind==='choice'?c.some(x=>x.id===s.key):p.length>0&&object(s.key)&&p.every(x=>own(s.key,x.id)&&c.some(y=>y.id===s.key[x.id]));
 }
+const pick=(w,k)=>own(w.placements,k)?w.placements[k]:null;
 const emptyWork=s=>s.kind==='choice'?{choice:null}:{placements:Object.fromEntries(s.parts.map(p=>[p.id,null]))};
 export function validStainedWork(s,w){
  if(!s||!object(w))return false;
@@ -44,7 +45,7 @@ export function sameStainedWork(a,b){
  if(!object(a)||!object(b))return false;
  if(own(a,'choice')||own(b,'choice'))return own(a,'choice')&&own(b,'choice')&&a.choice===b.choice;
  if(!object(a.placements)||!object(b.placements))return false;
- return [...new Set([...Object.keys(a.placements),...Object.keys(b.placements)])].every(k=>(a.placements[k]??null)===(b.placements[k]??null));
+ return [...new Set([...Object.keys(a.placements),...Object.keys(b.placements)])].every(k=>(pick(a,k)??null)===(pick(b,k)??null));
 }
 const validCheck=(s,c)=>object(c)&&validStainedWork(s,c.work)&&['incomplete','different','fit'].includes(c.outcome)&&feedbackLines(c.feedback)&&c.supported===true&&c.guided===true&&(!s.v||help(c.help));
 export const validStainedSnapshot=(s,k)=>object(k)&&validStainedWork(s,k.work)&&(!s.v||help(k.help))&&(k.check===null||validCheck(s,k.check)&&sameStainedWork(k.work,k.check.work));
@@ -111,10 +112,10 @@ export function stainedLabel(label,tile){
  if(!tile||tile.kind==='none')return label.before+'▢'.repeat(label.stains)+label.after;
  const letters=label.capitalStart?tile.text.charAt(0).toUpperCase()+tile.text.slice(1):tile.text;return label.before+letters+label.after;
 }
-function mappingOutcome(s,w){const missing=s.parts.some(p=>(w.placements[p.id]??null)===null),different=s.parts.some(p=>(w.placements[p.id]??null)!==null&&w.placements[p.id]!==p.key);return missing?'incomplete':different?'different':'fit';}
+function mappingOutcome(s,w){const missing=s.parts.some(p=>(pick(w,p.id)??null)===null),different=s.parts.some(p=>(pick(w,p.id)??null)!==null&&pick(w,p.id)!==p.key);return missing?'incomplete':different?'different':'fit';}
 export function stainedBenchResult(s,w){
  if(!s||!validStainedWork(s,w))return null;const outcome=mappingOutcome(s,w),c=s.copy,feedback=outcome==='incomplete'?[c.incomplete]:[];
- for(const part of s.parts){const selected=w.placements[part.id]??null;if(selected===null)continue;let line;
+ for(const part of s.parts){const selected=pick(w,part.id)??null;if(selected===null)continue;let line;
   if(s.kind==='map'){const tile=s.choices.find(t=>t.id===selected),fit=selected===part.key;
    line=!part.stains?(fit?c.mapNoneFit:c.mapNoneDifferent):fit?(part.stains===2?c.mapFitTwo:c.mapFitOne):tile.kind==='none'?(part.stains===2?c.mapMissingTwo:c.mapMissingOne):c.mapDifferent;
    feedback.push(stainedLabel(part,null)+': '+line);
@@ -125,11 +126,11 @@ export function stainedBenchResult(s,w){
 }
 export function stainedJobResult(s,w){
  if(!validStainedJob(s)||!validStainedWork(s,w)||!object(s.copy)||!text(s.copy.incomplete)||!text(s.copy.partDifferent))return null;
- const outcome=s.kind==='choice'?(w.choice===null?'incomplete':w.choice===s.key?'fit':'different'):s.parts.some(p=>(w.placements[p.id]??null)===null)?'incomplete':s.parts.some(p=>w.placements[p.id]!==s.key[p.id])?'different':'fit';
+ const outcome=s.kind==='choice'?(w.choice===null?'incomplete':w.choice===s.key?'fit':'different'):s.parts.some(p=>(pick(w,p.id)??null)===null)?'incomplete':s.parts.some(p=>pick(w,p.id)!==s.key[p.id])?'different':'fit';
  const feedback=outcome==='incomplete'?[s.copy.incomplete]:[];
- if(s.kind==='choice'){if(outcome==='different')feedback.push(s.different[w.choice]??s.copy.partDifferent);}
- else for(const p of s.parts){const pick=w.placements[p.id]??null;if(pick!==null&&pick!==s.key[p.id])feedback.push(p.text+': '+(s.different[p.id]??s.copy.partDifferent));}
- feedback.push(s.explanation);return {outcome,feedback};
+ if(s.kind==='choice'){if(outcome==='different')feedback.push(own(s.different,w.choice)?s.different[w.choice]:s.copy.partDifferent);}
+ else for(const p of s.parts){const selected=pick(w,p.id)??null;if(selected!==null&&selected!==s.key[p.id])feedback.push(p.text+': '+(own(s.different,p.id)?s.different[p.id]:s.copy.partDifferent));}
+ if(s.kind==='match'||outcome!=='incomplete')feedback.push(s.explanation);return {outcome,feedback};
 }
 function checkRecord(state,kind,key,options){return editRecord(state,kind,key,(r,s)=>{
  if(own(r,'checks')&&!Array.isArray(r.checks))return failure('unavailable');const result=kind==='job'?stainedJobResult(s,r.work):stainedBenchResult(s,r.work);if(!result)return failure('unavailable');
@@ -139,7 +140,7 @@ export const checkStainedTable=(state,table,options)=>checkRecord(state,'bench',
 export const checkStainedJob=(state,key,options)=>checkRecord(state,'job',key,options);
 function keepRecord(state,kind,key,options){return editRecord(state,kind,key,(r,s)=>{
  if(own(r,'latestKept')&&r.latestKept!==null&&!validStainedSnapshot(s,r.latestKept))return failure('unavailable');
- const last=Array.isArray(r.checks)?r.checks.at(-1):null,snapshot={work:clone(r.work),...(kind==='job'?{help:clone(r.help)}:{}),check:validCheck(s,last)&&sameStainedWork(last.work,r.work)?clone(last):null};
+ const last=Array.isArray(r.checks)?r.checks.filter(c=>validCheck(s,c)).at(-1):null,snapshot={work:clone(r.work),...(kind==='job'?{help:clone(r.help)}:{}),check:validCheck(s,last)&&sameStainedWork(last.work,r.work)?clone(last):null};
  if(!own(r,'firstKept')||r.firstKept===null)r.firstKept=clone(snapshot);r.latestKept=snapshot;return {ok:true};
  },options);}
 export const keepStainedTable=(state,table,options)=>keepRecord(state,'bench',table,options);

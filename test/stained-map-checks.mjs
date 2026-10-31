@@ -43,7 +43,11 @@ export function runChecks(){
    eq(S.stainedLabel(part,tile),expected);
    const s=open('map');accepted(S.placeStainedCard(s,'map',part.id,tile?.id??null,options));
    const result=S.checkStainedTable(s,'map',options);accepted(result);eq(result.outcome,'incomplete');
-   if(tile){eq(result.feedback.length,2);ok(result.feedback[1].startsWith(part.before+'▢'.repeat(part.stains)+part.after+': '));}
+   if(tile){
+    const fit=tile.id===mapKey[part.id];
+    const line=part.id==='sponge'?(fit?'The Sponge is complete. Nothing was missing.':'Nothing is missing here. No letters were stained out or lost.'):fit?(part.id==='high'?'Restored. Those letters are written, not said.':'Restored. That letter is written, not said.'):tile.id==='none'?(part.id==='high'?"The stain hides two letters. Which ones aren't heard?":"The stain hides a letter. Which one isn't heard?"):'Check the written note. Which letters belong in this name?';
+    eq(result.feedback,[source.copy.incomplete,part.before+'▢'.repeat(part.stains)+part.after+': '+line]);
+   }
    else eq(result.feedback,[source.copy.incomplete]);
   }
   eq(S.stainedLabel(part,source.tiles.find(t=>t.id===mapKey[part.id])),restored[part.id]);
@@ -62,7 +66,7 @@ export function runChecks(){
   accepted(S.restoreStainedTable(s,kind,'first',options));ok(Object.values(s.spellings.benches[kind].work.placements).every(x=>x===null));
  }
  for(const job of source.jobs){
-  const s=fresh();accepted(S.openStainedJob(s,job.id,options));accepted(S.checkStainedJob(s,job.id,options));let record=s.spellings.items[job.id];eq(record.checks[0].outcome,'incomplete');eq(record.checks[0].feedback.at(-1),job.explanation);
+  const s=fresh();accepted(S.openStainedJob(s,job.id,options));accepted(S.checkStainedJob(s,job.id,options));let record=s.spellings.items[job.id];eq(record.checks[0].outcome,'incomplete');eq(record.checks[0].feedback,job.kind==='match'?[source.copy.incomplete,job.explanation]:[source.copy.incomplete]);
   accepted(S.keepStainedJob(s,job.id,options));const first=clone(s.spellings.items[job.id].firstKept);
   if(job.kind==='choice')accepted(S.answerStainedJob(s,job.id,null,jobKey[job.id],options));
   else for(const [part,pick] of Object.entries(jobKey[job.id]))accepted(S.answerStainedJob(s,job.id,part,pick,options));
@@ -123,6 +127,12 @@ export function runChecks(){
  {
   const s=open('map');s.spellings.source.labels=[{...source.labels[0],before:'x'.repeat(4000),after:'y'.repeat(4000)}];s.spellings.benches.map.work={placements:{high:'gh'}};
   accepted(S.checkStainedTable(s,'map',options));ok(S.stainedMapView(s).tables.map.last.feedback[0].length>4000);accepted(S.keepStainedTable(s,'map',options));eq(S.stainedMapView(s).tables.map.latestStatus,'ready');
+ }
+ {
+  const s=open('map');s.spellings.source.labels=[{...source.labels[0],id:'hasOwnProperty'}];s.spellings.benches.map.work={placements:{}};
+  accepted(S.checkStainedTable(s,'map',options));eq(S.stainedMapView(s).tables.map.last.outcome,'incomplete','inherited properties are not responses');
+  accepted(S.openStainedJob(s,'a1',options));const r=s.spellings.items.a1;r.source.choices.push({id:'hasOwnProperty',text:'Synthetic choice'});accepted(S.answerStainedJob(s,'a1',null,'hasOwnProperty',options));accepted(S.checkStainedJob(s,'a1',options));eq(s.spellings.items.a1.checks.at(-1).feedback[0],source.copy.partDifferent,'inherited feedback method is not prose');
+  s.spellings.items.a1.checks.push({future:true});accepted(S.keepStainedJob(s,'a1',options));eq(s.spellings.items.a1.latestKept.check,s.spellings.items.a1.checks.at(-2),'keep and display use same latest readable check');
  }
  return count;
 }
