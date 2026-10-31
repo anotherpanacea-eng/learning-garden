@@ -16,7 +16,7 @@ export function validWritingSource(s){
  if(!object(s.feedback)||!text(s.feedback.fit)||!text(s.feedback.general)||!object(s.feedback.different)||Object.values(s.feedback.different).some(x=>!text(x)))return false;
  const p=s.parts.map(x=>x.id),c=s.choices.map(x=>x.id);
  if(s.kind==='choice'&&own(s,'preview')&&(own(s,'after')||!object(s.preview)||Object.keys(s.preview).length!==c.length||!c.every(k=>own(s.preview,k)&&text(s.preview[k]))))return false;
- if(s.kind==='tap'){const taps=s.parts.filter(p=>p.tap===true).map(p=>p.id);return c.length===0&&taps.length>0&&taps.length<=12&&s.parts.every(p=>!own(p,'tap')||typeof p.tap==='boolean')&&ids(s.key)&&s.key.length>0&&s.key.every(k=>taps.includes(k))&&text(s.feedback.missing);}
+ if(s.kind==='tap'){const taps=s.parts.filter(p=>p.tap===true).map(p=>p.id);return taps.length>0&&taps.length<=12&&ids(s.key)&&s.key.length>0&&s.key.every(k=>taps.includes(k))&&text(s.feedback.missing);}
  if(s.kind==='sort')return c.length>0&&object(s.key)&&p.every(k=>own(s.key,k)&&c.includes(s.key[k]));
  if(s.kind==='order')return ids(s.key)&&s.key.length===p.length&&s.key.every(k=>p.includes(k));
  return typeof s.key==='string'&&(s.kind==='break'?p.slice(1):c).includes(s.key);
@@ -110,7 +110,7 @@ export function writingResult(s,w){
  }else if(s.kind==='order')outcome=same(w.order,s.key)?'fit':'different';
  else{const picked=s.kind==='break'?w.boundary:w.choice;outcome=picked===null?'incomplete':picked===s.key?'fit':'different';if(outcome==='different'&&own(s.feedback.different,picked))feedback.push(s.feedback.different[picked]);}
  if(outcome==='fit')feedback.unshift(s.feedback.fit);
- else if(outcome==='incomplete')feedback.unshift('Some parts are still waiting. You can keep this version or keep arranging.');
+ else if(outcome==='incomplete')feedback.unshift(s.kind==='tap'?'No words are tapped yet. You can keep this version or tap some words.':'Some parts are still waiting. You can keep this version or keep arranging.');
  else{feedback.push(s.feedback.general);if(s.feedback.general!=='Your draft is still here. You can change it.')feedback.push('Your draft is still here. You can change it.');}
  if(s.bench==='holding'&&feedback.at(-1)!=='Your draft is still here. You can change it.')feedback.push('Your draft is still here. You can change it.');
  return {outcome,feedback};

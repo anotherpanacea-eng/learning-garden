@@ -84,3 +84,5 @@ Invitation: **Write two sentences about something you found. Call it something n
 Grown-ups, added before 317's paragraph: **This bench practices holding writing together: words that mean the same thing, a clear "it", openers that show how paragraphs connect, and leaving out words a reader can fill in. Ellipsis here means leaving words out, not the three dots.**
 
 Manual teaching controls: **Worked example / Previous example part / Next example part**. Selection readout: **Tapped words / No words tapped yet.** Clearing message: **Your taps are cleared.** The existing frozen `teach` array stores the card text, worked-example title, then its three steps for this bench; reveal steps manually. Other benches retain their existing presentation.
+
+Replacement tasks keep **Original draft** visible above their choices and show the chosen wording under the existing **Your page** preview. Empty tap check: **No words are tapped yet. You can keep this version or tap some words.**
