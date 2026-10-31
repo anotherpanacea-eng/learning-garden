@@ -25,13 +25,21 @@ assert.equal(longestGiveaway(sized(20,31),1),false,'11 extra characters passes e
 assert.equal(longestGiveaway(sized(20,32),1),true,'12 extra characters flags above 25%');
 assert.equal(longestGiveaway(['x'.repeat(60),'y'.repeat(60),'z'],0),false,'a tied longest answer passes');
 const fixture=id=>({id,kind:'choice',choices:sized(20,40),answer:1,readingSkill:'Find a sentence that supports an idea'});
-for(const id of ['new-evidence-question','paris-explore-seed-envelopes-1-1','paris-explore-seed-envelopes-1-2'])
+const reviewedIds=['seed-envelopes','windy-sign','puppet-post'].flatMap(story=>
+  [1,2,3].map(variant=>`paris-explore-${story}-${variant}-1`));
+for(const id of ['new-evidence-question',...reviewedIds,'paris-explore-seed-envelopes-1-2'])
   assert.deepEqual(answerLengthFlags([fixture(id)]),[id],'no question id is exempt; two-choice sets are scanned');
 assert.deepEqual(answerLengthFlags([{...fixture('three-choices'),choices:[...sized(20,40),'short']}]),['three-choices'],'three-choice sets are scanned');
 
 // storyNodes includes the Paris library and imported story packs, as well as
 // the original story choices. Check that coverage explicitly so it cannot drift.
 for(const [id,node] of Object.entries(parisLibraryNodes))assert.deepEqual(storyNodes[id],node,`Paris choice coverage: ${id}`);
+// These sentence-selection tasks must quote actual sentences at every length.
+for(const id of reviewedIds){
+  const node=storyNodes[id];
+  assert.ok(node,`reviewed question exists: ${id}`);
+  for(const choice of node.choices)assert.ok(node.readingText.includes(choice),`evidence choice occurs as a complete sentence: ${id}: ${choice}`);
+}
 const flags=answerLengthFlags(storyNodes);
 assert.deepEqual(flags,[],'fitting choice is noticeably the longest:\n'+flags.join('\n'));
 console.log('answer length checks passed');
