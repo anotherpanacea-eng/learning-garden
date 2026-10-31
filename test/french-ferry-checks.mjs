@@ -153,6 +153,22 @@ ok(feedbackLine(makeCrossingSource('morning'),'a-for-dou')==="That card tells wh
  ok(frenchFerryNotes({frenchFerry:'garbage'})!==undefined&&frenchFerryNotes({frenchFerry:null})!==undefined,'Notes survive any JSON value');
 }
 
+// Unknown saved crossing keys are opaque siblings, not a reason to close known crossings.
+{
+ const st={};openCrossing(st,'morning',voice,yes);
+ st.frenchFerry.crossings.older={tryId:50,source:{format:2},raw:['retained older crossing']};
+ const older=bytes(st.frenchFerry.crossings.older),before=bytes(st);
+ const view=frenchFerryView(st);
+ ok(view.status==='ready'&&view.crossings.morning.readable&&!view.crossings.afternoon.present,'unknown crossing leaves known and absent siblings readable');
+ frenchFerryPage(st,'',[fr]);frenchFerryNotes(st);
+ ok(bytes(st)===before,'reading unknown crossing does not normalize the notebook');
+ ok(pickAnswer(st,'morning',cross(st,'morning').source.steps[0].fit,yes).fitted,'known crossing remains playable beside unknown key');
+ ok(openCrossing(st,'afternoon',voice,yes).ok&&bytes(st.frenchFerry.crossings.older)===older,'opening another crossing preserves unknown raw sibling');
+ st.frenchFerry.crossings.older.tryId=st.frenchFerry.nextTry;const collision=bytes(st);
+ ok(startCrossingAgain(st,'morning',voice,yes).ok===false&&bytes(st)===collision,'try id held by unknown current crossing is never reused');
+ ok(frenchFerryNotes(st).includes('retained older crossing'),'unknown crossing remains in Notes export');
+}
+
 // Source check: shipped text matches the panel-resolved companion, with French spacing, and no em-dash.
 {
  const companion=readFileSync(new URL('../docs/content/327-french-ferry-crossing-text.md',import.meta.url),'utf8').replace(/\*/g,'');

@@ -74,7 +74,7 @@ export function currentStep(c){
  return {index:5,phase:'end'};
 }
 const rootShape=r=>object(r)&&r.v===1;
-const rootReadable=r=>rootShape(r)&&object(r.crossings)&&Object.keys(r.crossings).every(k=>crossingIds.includes(k))&&Array.isArray(r.earlier)&&int(r.nextTry,1,Number.MAX_SAFE_INTEGER)&&bool(r.taughtSeen);
+const rootReadable=r=>rootShape(r)&&object(r.crossings)&&Array.isArray(r.earlier)&&int(r.nextTry,1,Number.MAX_SAFE_INTEGER)&&bool(r.taughtSeen);
 const records=r=>[...Object.values(r.crossings),...r.earlier];
 const blank={status:'new',crossings:{},taughtSeen:false};
 export function frenchFerryView(state){
