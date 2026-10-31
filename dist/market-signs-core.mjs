@@ -361,7 +361,7 @@ function crateShelf(source,r,present){
  const opaque=editable?source.words.filter(w=>!playable.includes(w)):[],coverage=source.partial||opaque.length?'partial':'full';
  const checksStatus=crateField(r,'checks',a=>Array.isArray(a)&&a.every(validWordListCheck)),last=checksStatus==='ready'?r.checks.at(-1)??null:null;
  const sameRows=!!last&&last.rows.length===playable.length&&playable.every(w=>last.rows.filter(row=>row.id===w.id).length===1);
- return {...base,editable,helpReadable:editable,draftStatus:editable?'ready':'unreadable',playable,opaque,coverage,checksStatus,last,
+ return {...base,editable,helpReadable:crateHelp(r.help),draftStatus:editable?'ready':'unreadable',playable,opaque,coverage,checksStatus,last,
   earlier:!!last&&(!playable.length||!sameRows||coverage!==last.coverage||!sameWordListPlacements(source,r.placements,last.placements)),
   firstStatus:crateField(r,'firstKept',k=>k===null||validWordListKeep(k)),latestStatus:crateField(r,'latestKept',k=>k===null||validWordListKeep(k))};
 }
@@ -375,7 +375,7 @@ export function marketCrateView(state){
  if(!crateRootOK(r))return {status:'unsupported',...base};
  const s=r.source,benchSource=marketCrateSource(s),shelf=crateShelf(benchSource,r.shelf,own(r,'shelf'));
  const records=boundedObject(r.records,32)?Object.entries(r.records).map(([key,value])=>({id:key,readable:crateId(key)&&validMarketCrateRecord(value)&&value.source.id===key,record:value})):[];
- const cards=uniquePatternRows(s.cards,16,patternCard),helpers=uniquePatternRows(s.helpers,16,crateHelper);
+ const cards=uniquePatternRows(s.cards,16,row=>patternCard(row)&&crateId(row.id)),helpers=uniquePatternRows(s.helpers,16,crateHelper);
  const story=object(s.story)&&['hook','short','longer','note'].every(k=>crateText(s.story[k]))?s.story:null;
  const offscreen=object(s.offscreen)&&crateText(s.offscreen.text)?s.offscreen:null,grownup=crateText(s.grownup)?s.grownup:null;
  return {status:'ready',...base,root:r,source:s,benchSource,benchReadable:!!benchSource,shelf,currentWord:benchSource?.words.find(w=>w.id===r.currentWordId)??null,jobs:crateJobs(r),records,record:records.find(x=>x.id===r.currentId&&x.readable)?.record??null,cards,helpers,story,offscreen,grownup,
@@ -407,7 +407,7 @@ export function setMarketCrate(state,change,options){return mutate(state,(r,next
  return {ok:true};
  },options);}
 export function showMarketCrateHelp(state,key,options){return mutate(state,(r,next)=>{
- const v=marketCrateView(next);if(!v.shelf?.editable||![...v.cards,...v.helpers].some(h=>h.id===key))return failure('unavailable');
+ const v=marketCrateView(next);if(!crateId(key)||!v.shelf?.editable||![...v.cards,...v.helpers].some(h=>h.id===key))return failure('unavailable');
  const help=v.shelf.record.help;if(help.includes(key))return {ok:true,changed:false};if(help.length>=64)return failure('full');help.push(key);return {ok:true};
  },options);}
 export function checkMarketCrate(state,options){return mutate(state,(r,next)=>{

@@ -352,6 +352,9 @@ def crate_fixture(name='base'):
    'bad-section':"s.signs.crates={v:99,earlier:['crate pages']};",
    'job-first':"delete q.shelf;q.currentWordId=null;c.openMarketCrateJob(s,'D1',o);"
   }
+  if name in ['notes-bad-help','notes-bad-placements']:
+   code+="c.setMarketCrate(s,{markIndex:1},o);c.setMarketCrate(s,{trayId:'eigh'},o);c.checkMarketCrate(s,o);c.keepMarketCrate(s,o);"
+   code+="s.signs.crates.shelf.help={earlier:['help']};" if name=='notes-bad-help' else "s.signs.crates.shelf.placements=['earlier placements'];"
   code+=damage.get(name,'')
   if name.startswith('collision-'):
    ident=name.removeprefix('collision-');code+="const j=q.source.jobs.find(x=>x.id==='D1');j.id="+json.dumps(ident)+";c.openMarketCrateJob(s,"+json.dumps(ident)+",o);"
@@ -376,6 +379,7 @@ def crates_play(browser,base,w,hgt):
   h.ok('signs' not in h.book(p),'crate arrival allocates no source');choose(p,'D1');h.ok('shelf' not in crate_state(p),'D job allocates collection without shelf');h.ok(p.locator('.ms-guided li').all_text_contents()==['Weight shares letters with eight.','Those letters are eigh.'],'D1 printed guidance precedes choice')
   choose(p,'B1');choose(p,'C1');choose(p,'A1');choose(p,'D1');pointers=(state(p)['currentId'],state(p)['endings']['currentId'],state(p)['patterns']['currentId'],crate_state(p)['currentId']);h.ok(pointers==('B1','C1','A1','D1'),'four independent practice pointers')
   bench(p,'crates');h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['placements']=={} and crate_state(p)['shelf']['marks']=={},'explicit bench opens absent shelf at first readable word without default work');crate_heading(p);layout(p);viewport_shot(p,'crate-initial',w)
+  h.ok(p.locator('[data-ms-word] option[value=""]').is_disabled(),'selected word picker disables its placeholder');before_empty=copy.deepcopy(h.book(p));empty_status=p.locator('#ms-status').inner_text();p.evaluate('const picker=document.querySelector("[data-ms-word]");picker.value="";picker.dispatchEvent(new Event("change",{bubbles:true}))');h.ok(h.book(p)==before_empty and p.locator('#ms-status').inner_text()==empty_status,'empty native picker change leaves work and status exact')
   turn=p.locator('[data-ms-action=crate-tray][data-ms-tray=eigh]').bounding_box();nav=p.locator('.ms-ways').bounding_box();h.ok(turn and turn['y']>=nav['y']+nav['height']-1 and turn['y']+turn['height']<=hgt,'initial crate marking and placing fit measured viewport')
   crate_mark(p,0,True);h.ok(crate_state(p)['shelf']['marks']['eight']==[0] and p.locator('[data-ms-index="0"]').get_attribute('aria-pressed')=='true','native keyboard mark toggles saved letter');crate_mark(p,0);h.ok(crate_state(p)['shelf']['marks']['eight']==[],'touch toggles same marker off');crate_mark(p,1);crate_place(p,'eigh',True);h.ok(crate_state(p)['currentWordId']=='eight' and p.locator('#ms-crate-feedback').count()==0,'placing does not advance or check');h.ok(p.evaluate('document.activeElement.dataset.msTray')=='eigh','native keyboard tray retains focus')
   action(p,'crate-word-next');crate_heading(p);h.ok(crate_state(p)['currentWordId']=='eighth','Next explicit retained-word turn');action(p,'crate-word-prev');crate_heading(p);h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['marks']['eight']==[1],'Previous retains markers and placement');p.reload(wait_until='networkidle');ready(p);h.ok(crate_state(p)['currentWordId']=='eight' and crate_state(p)['shelf']['marks']['eight']==[1],'reload resumes selected word and markers')
@@ -394,6 +398,17 @@ def crates_play(browser,base,w,hgt):
   action(p,'next-job');h.ok(state(p)['practiceGroup']=='prefix' and state(p)['currentId']=='B1','last D wraps combined retained sources to prefix');bench(p,'crates');p.evaluate('window.departedCrate=document.querySelector("[data-ms-action=crate-mark]")');held=copy.deepcopy(state(p));report=h.export_notes(p,'crate-'+str(w));h.ok(report['signs']==held,'actual Notes download retains all four Market Signs groups');p.evaluate('departedCrate.click()');h.ok(state(p)==held,'departed crate control inert');import_notes(p,report);p.evaluate('departedCrate.click()');h.ok(state(p)==held,'pre-import crate callback inert')
  finally:c.close()
 def crates_edges(browser,base):
+ for kind in ['notes-bad-help','notes-bad-placements']:
+  seed=crate_fixture(kind);c,p=setup(browser,base,seed)
+  try:
+   before=copy.deepcopy(h.book(p));p.evaluate('location.hash="#notes"');p.locator('#download').wait_for();notes=p.locator('details.panel').filter(has=p.get_by_text('Market Signs: supplied words and kept work',exact=True)).first;notes.locator(':scope > summary').tap();readout=notes.locator('.ms-crate-readout').first;h.ok('Marked letters: i (2).' in readout.inner_text(),'Notes shows readable current markers beside '+kind)
+   if kind=='notes-bad-help':h.ok('eigh' in readout.locator('dd').first.inner_text(),'Notes shows readable current placement beside malformed help')
+   else:h.ok('This earlier crate choice stays in Notes.' in readout.locator('dd').first.inner_text(),'Notes identifies unavailable current placement beside readable markers')
+   summary=seed['signs']['crates']['shelf']['checks'][0]['summary'];h.ok(notes.locator(':scope > p').filter(has_text=summary).count()>0 and notes.locator(':scope > p').filter(has_text='Eight has eigh.').count()>0,'Notes displays readable literal check outside raw JSON beside '+kind)
+   for edition in ['first','latest']:
+    kept=notes.locator('[data-ms-panel=crate-'+edition+']');kept.locator(':scope > summary').tap();h.ok(kept.is_visible() and 'Marked letters: i (2).' in kept.locator('.ms-crate-readout').inner_text() and kept.locator('p').filter(has_text='Eight has eigh.').count()>0,'Notes displays readable '+edition+' markers and checked placement beside '+kind)
+   h.ok(h.book(p)==before,'Notes inspection preserves malformed crate fields '+kind)
+  finally:c.close()
  c,p=setup(browser,base,crate_fixture('full'))
  try:
   held=copy.deepcopy(state(p));q=held['crates'];h.ok(len(q['shelf']['placements'])==19 and len(q['shelf']['checks'])==16 and len(q['records'])==4,'max crate fixture has nineteen placements sixteen arrangement checks four jobs');h.ok(all(r['count']==16 and len(r['checks'])==12 and 'firstKept' in r and 'latestKept' in r and all(r['help'][k] for k in ['hint','example']) for r in q['records'].values()),'max crate fixture sixteen attempts twelve retained checks both versions and supports');report=h.export_notes(p,'maximum-crate-signs');h.ok(report['signs']==held,'actual pretty Notes full crate download exact');import_notes(p,report);p.reload(wait_until='networkidle');ready(p);h.ok(state(p)==held,'actual maximum Notes import and reload exact')

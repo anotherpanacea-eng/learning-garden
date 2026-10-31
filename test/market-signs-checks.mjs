@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
 import {freshState,recommendations} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
-import {marketSignsCollection,marketEndingCollection,marketEndingCopy,marketPatternCollection,marketPatternCopy,marketCrateCollection} from '../dist/market-signs-content.mjs';
+import {marketSignsCollection,marketEndingCollection,marketEndingCopy,marketPatternCollection,marketPatternCopy,marketCrateCollection,marketCrateCopy} from '../dist/market-signs-content.mjs';
 import {MAX_IMPORT_BYTES} from '../dist/progress-limits.mjs';
 import * as c from '../dist/market-signs-core.mjs';
 import * as shelfCore from '../dist/word-list-shelf-core.mjs';
@@ -436,6 +436,29 @@ export function runMarketCrateChecks(){
  for(const field of ['contextLabel','pictureId','pictureAlt'])for(const bad of [undefined,'',12,'x'.repeat(4001)]){const job=copy(source.jobs[0]);job[field]=bad;ok(!c.validMarketCrateJob(job),'D owned field bounds '+field);}
  for(const field of Object.keys(source.copy))for(const bad of [' ',undefined,12,'x'.repeat(4001)]){const own=copy(source);own.copy[field]=bad;eq(c.marketCrateSource(own),null,'functional copy bound '+field);}
  for(const damage of [s=>s.words.push(...Array.from({length:46},(_,i)=>({...copy(s.words[0]),id:'extra'+i}))),s=>s.trays.push(...Array.from({length:61},(_,i)=>({...copy(s.trays[0]),id:'extra'+i}))),s=>s.words[0].clues=Array.from({length:65},()=>copy(s.words[0].clues[0])),s=>s.future='x'.repeat(96*1024)]){const own=copy(source);damage(own);const adapted=c.marketCrateSource(own);ok(adapted===null||adapted.partial,'source bounds pause whole envelope or offending row');}
+ // Review regressions: safe disclosure ids and independent recovery readouts.
+ for(const reserved of ['constructor','prototype','toString','valueOf']){
+  const s=seed();s.signs.crates.source.cards[0].id=reserved;const raw=copy(s.signs.crates.source),v=c.marketCrateView(s);
+  ok(!v.cards.some(card=>card.id===reserved),'reserved card id unavailable '+reserved);ok(v.materialUnavailable,'unreadable card notice '+reserved);
+  refuse(s,x=>c.showMarketCrateHelp(x,reserved,light),'reserved card support refused '+reserved);eq(s.signs.crates.source,raw,'reserved source preserved');
+  ok(c.showMarketCrateHelp(s,'card16',light).ok,'readable sibling card');ok(c.showMarketCrateHelp(s,'helper-business',light).ok,'readable sibling helper');ok(c.setMarketCrate(s,{trayId:'eigh'},light).ok,'shelf beside reserved card');pure(s);
+ }
+ const notesSeed=()=>{const s=seed();c.setMarketCrate(s,{markIndex:1},light);c.setMarketCrate(s,{trayId:'eigh'},light);c.checkMarketCrate(s,light);s.signs.crates.shelf.checks[0].rows[0].feedback='Earlier readable check survives a paused draft.';c.keepMarketCrate(s,light);s.signs.crates.shelf.marks.eight=[2];s.signs.crates.shelf.checks[0].rows[0].feedback='Current retained check survives a paused draft.';return s;};
+ const readableNotes=s=>htmlText(marketSignsNotes(s).split('<details><summary>Full retained material and checks</summary>')[0]);
+ for(const field of ['help','placements']){
+  const s=notesSeed();s.signs.crates.shelf[field]=null;const before=copy(s),text=readableNotes(s);
+  ok(text.includes('Marked letters: g (3).'),'current markers readable beside bad '+field);ok(text.includes('Current retained check survives a paused draft.'),'saved checks readable beside bad '+field);
+  ok(text.includes(marketCrateCopy.firstLabel)&&text.includes(marketCrateCopy.latestLabel),'keeps readable beside bad '+field);eq(s,before,'Notes never repairs bad '+field);
+  // A frozen keep has its own raw marks reader, independent of the draft.
+  s.signs.crates.shelf.firstKept.marks.eight={earlier:'raw marks'};const badMarksBefore=copy(s);ok(readableNotes(s).includes(marketCrateCopy.keptMarksUnavailable),'kept bad marks notice beside bad '+field);eq(s,badMarksBefore);pure(s);
+ }
+ const nonarray=notesSeed();nonarray.signs.crates.shelf.checks={earlier:['raw checks']};const checksBefore=copy(nonarray),checksText=readableNotes(nonarray);
+ ok(checksText.includes(marketCrateCopy.checksUnavailable),'nonarray checks have visible Notes notice');ok(checksText.includes('Marked letters: g (3).'),'nonarray checks do not hide markers');ok(checksText.includes(marketCrateCopy.firstLabel),'nonarray checks do not hide keeps');eq(nonarray,checksBefore);pure(nonarray);
+ const inherited=seed();inherited.signs.crates.source.words[0].id='hasOwnProperty';inherited.signs.crates.source.words[0].text='hasOwnProperty';select(inherited,'hasOwnProperty');const inheritedBefore=copy(inherited);
+ const inheritedView=c.marketCrateView(inherited);ok(inheritedView.shelf.playable.some(w=>w.id==='hasOwnProperty'),'absent own placement playable');ok(!inheritedView.shelf.opaque.some(w=>w.id==='hasOwnProperty'),'inherited method is not an opaque own placement');
+ const inheritedPage=marketSignsPage(inherited),inheritedNotes=marketSignsNotes(inherited).split('<details><summary>Full retained material and checks</summary>')[0];
+ ok(/data-ms-tray="" aria-pressed="true"/.test(inheritedPage),'absent hasOwnProperty placement pressed unplaced');
+ const ownReadout=inheritedNotes.split('<dt>hasOwnProperty</dt>')[1]?.split('</dd>')[0]??'';ok(ownReadout.includes(marketCrateCopy.unplaced),'Notes absent own placement reads unplaced');ok(!ownReadout.includes(marketCrateCopy.placementUnavailable),'Notes never reads Object prototype as placement');eq(inherited,inheritedBefore,'inherited-id rendering never normalizes save');pure(inherited);
  // Proposal capture and strict callback contract protect every existing group too.
  // Keep callbacks outside the cloned notebook (functions are not serializable).
  const groups=[(s,o)=>c.openMarketJob(s,'B1',o),(s,o)=>c.openMarketEndingJob(s,'C1',o),(s,o)=>c.openMarketPatternJob(s,'A1',o),(s,o)=>c.openMarketCrateJob(s,'D1',o),(s,o)=>c.openMarketBench(s,'crates',o)];
