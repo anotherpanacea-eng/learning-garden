@@ -120,7 +120,7 @@ ok(feedbackLine(makeCrossingSource('morning'),'a-for-dou')==="That card tells wh
  const st={};openCrossing(st,'morning',{voice:false},yes);
  const page=frenchFerryPage(st,'',[en]);
  ok(page.includes('This device has no French voice.')&&page.includes('Bonjour')&&!page.includes('data-speak')&&!cross(st,'morning').steps[0].wordsShown,'no voice: her words show unmarked and no listen control');
- const withVoice=shown(st,[fr]);ok(withVoice.includes('data-ferry-her')&&!withVoice.includes('Bonjour'),'the device decides the controls; the stored flag stays');
+ const withVoice=shown(st,[fr]);ok(withVoice.includes('data-bac-her')&&!withVoice.includes('Bonjour'),'the device decides the controls; the stored flag stays');
  ok(cross(st,'morning').voice===false,'stored voice unchanged');
 }
 

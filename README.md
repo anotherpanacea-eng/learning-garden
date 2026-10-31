@@ -148,6 +148,10 @@ The next story at a place favors fewer displayed encounters. French practice acr
 
 Full passages, sentence focus, English meaning/vocabulary help, and skill-matched smaller examples remain available. Translation support follows both questions on a passage, including after reload. Local French narration never falls back to English. Frozen routes preserve partially arranged cards and paused stories. French records and suggestions stay separate from English Paris and legacy French work. This is a finite, reviewed library, not generated stories or a full language curriculum. Anonymous explorer slots now keep each notebook separate; earlier shared play remains together in its original slot. See [spec 14](docs/specs/14-french-exploration.md) and the [initial French increment](docs/specs/13-french-paris-and-plate-return.md).
 
+## Le bac (the ferry crossing in French)
+
+Open `#bac`, or choose The ferry crossing (French) from Home or the French learning page. Madame Roux runs a small rope ferry. There are two crossings, morning and afternoon. On each, the child hears her French lines and answers aloud or by picking a written answer, with word-by-word and English meaning help, local French speech only, and two short teaching cards. Help is recorded before it shows, and speaking aloud is recorded only as "started", never scored. This is supported practice, not a French assessment. See [spec 327](docs/specs/327-french-ferry-crossing.md).
+
 ## Privacy and contributions
 
 This repository contains generic source and curriculum content. Do not commit real learner profiles, names, ages or grades tied to a child, school or location details, family anecdotes, responses, progress, personalized packs, recordings, screenshots, exports, or credentials. Use clearly synthetic examples in tests and review commit metadata and attachments as well as files. See [CONTRIBUTING.md](CONTRIBUTING.md).
