@@ -49,9 +49,9 @@ Tiles in fixed order: **colon ( : )**, **semicolon ( ; )**, **comma ( , )**, **l
 2. Colon in slot 1 on m4: no crates. Pip stops after "We need."
 3. Otherwise, choose the split rule. If slot 2 or slot 3 holds a semicolon, Pip splits **only at semicolons**. If not, he splits at **every comma, placed or fixed, and at "and"**.
 4. Slot 1: a colon starts the list. On a lead-in line, an empty slot 1 joins the lead-in to the first piece. A comma in slot 1 is a split point under the comma rule, so the lead-in becomes its own crate, and is ignored under the semicolon rule, so the lead-in joins the first piece. On m4, an empty slot 1 starts the list after "We need".
-5. A leading "and" is dropped from a crate label. Crate labels are lowercase words exactly as split, for example "eggs, one dozen" or "one dozen".
+5. A leading "and" is dropped from a crate label. Trim surrounding whitespace and the final sentence period; discard empty pieces (including the piece between a comma and the following "and"). Lowercase the remaining labels, for example "eggs, one dozen" or "one dozen".
 
-Examples a test table must include: m2 with all fits gives three crates; m2 with commas in slots 2 and 3 gives six (flour · two sacks · eggs · one dozen · butter · one block), which is the scene's "one dozen" joke; m2 with a semicolon in slot 2 and slot 3 empty gives two crates, the second reading "eggs, one dozen and butter, one block"; m1 with slot 3 empty gives three crates; m4 empty gives three. At most seven crates are ever drawn. The picture is original inline SVG, each crate with a text label, and the figure has a text equivalent ("Pip loads {n} crates: {labels}"). Its alt text never states which marks fit.
+Examples a test table must include (all slots not explicitly changed hold fitting tiles): m2 with all fits gives three crates; m2 with commas in slots 2 and 3 gives six (flour · two sacks · eggs · one dozen · butter · one block), which is the scene's "one dozen" joke; m2 with a semicolon in slot 2 and slot 3 empty gives two crates, the second reading "eggs, one dozen and butter, one block"; m1 with slot 3 empty gives three crates; m4 empty gives three. At most seven crates are ever drawn. The picture is original inline SVG, each crate with a text label, and the figure has a text equivalent ("Pip loads {n} crates: {labels}"). Its alt text never states which marks fit.
 
 **Load it line (one shown, first that applies):**
 
@@ -72,7 +72,7 @@ Choices appear in the companion's order, so the fitting choice is first in A1, s
 
 Feedback is the companion's per-choice line, then its explanation. For A3, a comma in slot 2 gives the slot-2 line, then a comma in slot 3 gives the slot-3 line, and both may show. Any other non-fitting A3 pattern shows the item's hint ("Each load has a comma inside it already.") rather than an invented line. A fitting answer shows the explanation. A learner may answer again after feedback; nothing locks, and there is no automatic next item.
 
-Every item has the "I'm stuck" ladder from the table above. Step 3, **Skip for now**, leaves the item unanswered, saves nothing and moves focus to the next item heading.
+Every item has the "I'm stuck" ladder from the table above. Step 3, **Skip for now**, leaves the item unanswered, records no answer and moves focus to the next item heading. The support flag required below is still captured before the step appears.
 
 ## Saved work
 
@@ -83,16 +83,16 @@ exchangeManifest: {
   v: 1,
   lists: { [lineId]: { variant: 'market', shown: [tileId], slots: { [slotId]: tileId },
                        load: loadCode, supported: bool, at } },
-  items: { [itemId]: { shown: [choiceId], answer: choiceId | { [slotId]: tileId },
+  items: { [itemId]: { shown: [choiceId | tileId], answer: choiceId | { [slotId]: tileId },
                        outcome: 'fits' | 'other', supported: bool, guided: bool, at } }
 }
 ```
 
-The root is absent until the first Load it or the first item answer; opening the page, reading the story or a card, choosing tiles and opening help write nothing. `lineId` is `m1` to `m4`, `slotId` is `s1` to `s3`, and `tileId` is `colon`, `semicolon`, `comma` or `empty`. Item choice ids are `a`, `b` and `c` in the order shown. `at` is an ISO time written by the host clock, as elsewhere in the notebook; no field holds anything about the child, and there is no typed text.
+The root is absent until the first Load it, item answer or support exposure described below. Opening the page, reading the story or a card without its worked example, and choosing tiles write nothing; support exposure writes its flag before display. `lineId` is `m1` to `m4`, `slotId` is `s1` to `s3`, and `tileId` is `colon`, `semicolon`, `comma` or `empty`. Item choice ids are `a`, `b` and `c` in the order shown. A1, A2 and A4 store choice ids in `shown`; A3 stores its tile ids in the displayed order (`colon`, `semicolon`, `comma`). `at` is an ISO time written by the host clock, as elsewhere in the notebook; no field holds anything about the child, and there is no typed text.
 
 Each Load it replaces that line's entry with the current slots, the shown tile order, the code from the table and the time. `load` and `outcome` are the codes produced at that moment and are never recomputed when the notebook loads. Each item answer replaces that item's entry the same way.
 
-**Support is captured before it is shown.** `supported` becomes true, and is saved before the support appears, when the learner opens a teach card's worked example, opens any stuck-ladder step for that item, or has already seen feedback or a What fits panel for that line or item. A1 always records `guided: true`, captured before its steps render, even with no ladder use. Once true, a flag stays true for that line or item. A false flag means no recorded support, not an independent attempt, and nothing is labeled independent. Opening support before any answer creates a minimal pending entry (`{ supported: true }` for a line, `{ supported: true, guided }` for an item) so the flag survives reload; this is the only write that precedes an answer.
+**Support is captured before it is shown.** `supported` becomes true, and is saved before the support appears, when the learner opens a teach card's worked example, opens any stuck-ladder step for that item, or has already seen feedback or a What fits panel for that line or item. A1 always records `guided: true` and `supported: true`, captured before its steps render, even with no ladder use. Once true, a flag stays true for that line or item. A false flag means no recorded support, not an independent attempt, and nothing is labeled independent. Opening support before any answer creates a minimal pending entry (`{ supported: true }` for a line, `{ supported: true, guided }` for an item) so the flag survives reload; this is the only write that precedes an answer.
 
 **Validation is structural.** Check the ids, codes and counts the save holds against bounds (at most 4 lines, 3 slots per line, 4 shown tiles, 8 items, 3 shown choices), never against today's lines, answer key or wording. An unknown `v` or an unreadable entry stays exact and exportable; only the affected line or item turns read-only, with a line saying so and links to Notes and the Post Office. Additive fields written by a future 278 bench stay exact; no loader normalization, default injection, deletion or migration. Other `#post/*` roots, the story root and every other extension stay untouched.
 
@@ -102,7 +102,7 @@ Every mutation clones a candidate, changes only `exchangeManifest`, passes its l
 
 Use the existing app save and render, Notes, explorer boundary, optional persistence and two-tab handling. Saving-off is explicit in-memory play with Notes export; describe the actual host persistence result, never browser durability from candidate preflight alone.
 
-Dispatch `#post/manifest` as an exact early render/bind branch, like `#post/codes`, and add it to the startup `needsExplorerInitialization` exemption so fresh direct entry does not initialize unrelated destinations. Load the scene's CSS once into the document head, following the persistent scene-style convention. Export `manifestEntry()` and append it to the Post Office hub's entry cards in `app.mjs` (after `twoLettersEntry()`), with the place title and the companion's market hook. Add `manifest` to the reserved `#post/*` slug list that keeps Post Office view routing off named sub-pages.
+Dispatch `#post/manifest` as an exact early render/bind branch, like `#post/codes`, and add it to the startup `needsExplorerInitialization` exemption so fresh direct entry does not initialize unrelated destinations. Also include the exact route in the explorer-switch `needsExplorerInitialization` destination list, `explorerDestination()`, and the destination/route welcome-film exclusion lists; direct entry and explorer switching must both stay on this page without initializing unrelated destinations. Load the scene's CSS once into the document head, following the persistent scene-style convention. Export `manifestEntry()` and append it to the Post Office hub's entry cards in `app.mjs` (after `twoLettersEntry()`), with the place title and the companion's market hook. Add `manifest` to the reserved `#post/*` slug list that keeps Post Office view routing off named sub-pages.
 
 Before any callback acts, verify the connected root and control, the hash is exactly `#post/manifest`, and the notebook object, explorer and host are the same ones that rendered it. Controls inside a closed disclosure are inert, and retained or detached controls cannot change an old or new explorer. Redraw after a tile, Load it, answer or help action keeps focus on the acted control or the resulting feedback heading, and does not close open disclosures. No animation is required; Pip's crates are static and reduced-motion safe.
 
