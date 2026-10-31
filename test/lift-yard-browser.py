@@ -41,6 +41,7 @@ def journey(b,base,seed,width):
  c,p=setup(b,base,seed,width)
  try:
   raw=p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')");writes=p.evaluate('liftWrites');ok(json.loads(raw)==seed,'direct entry preserves all unknown owners');ok(not p.locator('video,audio,dialog.welcome-film[open]').count(),'no movie or automatic welcome');layout(p)
+  spoken=p.locator('[data-speak]').get_attribute('data-speak');ok(spoken.startswith('The shops need dry stores after the storm. ') and spoken.count('The shops need dry stores after the storm.')==1,'ramp Hear text gives the Willowbank reason once (text only, not audibility)')
   if width==820:
    r=p.locator('[data-lift-action=start]').bounding_box();ok(r['y']+r['height']<=1000,'scene instruction and primary plan action visible together on tablet')
   p.screenshot(path=str(OUT/f'lift-start-{width}.png'),full_page=True)

@@ -42,6 +42,6 @@ Jobs chooser: "Six deliveries · {count} reached the top". "Every job is open. Y
 
 Model note: "Newtons (N) measure force, not mass. The winch adjusts its pull; its maximum is a limit, not the force used on every ramp. These are model equipment limits, not a real lifting plan." Heading: "Grown-ups: sources and limits". Notice: "Supplied teaching, not an assessment or physical experiment. No steps, support requests, reading or hearing results are added to notes." Links: "OpenStax: inclined planes", "simple machines", "work and energy".
 
-Hear this turn: "{destination}. {Current planned ramp / Current ramp}. Load weight {w} newtons. Winch limit {c} newtons. {instruction} {L} meter ramp, required pull {F} newtons. Rope pulled {d} of {L} meters. Height gained {reduced d/L} meter. Rope work so far {F*d} joules." Append a space and held text when held.
+Hear this turn: "The shops need dry stores after the storm. {destination}. {Current planned ramp / Current ramp}. Load weight {w} newtons. Winch limit {c} newtons. {instruction} {L} meter ramp, required pull {F} newtons. Rope pulled {d} of {L} meters. Height gained {reduced d/L} meter. Rope work so far {F*d} joules." Append a space and held text when held.
 
 Shared groups: "Machine", "View"; buttons: **Ramp / Lever**. The film header here uses "Willowbank · a lifting idea" and "The Lift Yard"; imported film content is outside these sheets.

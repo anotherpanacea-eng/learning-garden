@@ -75,9 +75,13 @@ def geometry(p,points,xmax=10,ymax=20):
     circles=p.locator('[data-pp-own-plot] .pp-own-point').evaluate_all('xs=>xs.map(x=>[+x.getAttribute("cx"),+x.getAttribute("cy")])')
     h.ok(len(circles)==len(points),'each record retains its own SVG marker, including overlaps')
     for actual,point in zip(circles,points):h.ok(abs(actual[0]-(72+384*point['x']/xmax))<.001 and abs(actual[1]-(320-296*point['y']/ymax))<.001,'actual SVG uses independent source-axis mapping')
+def hear(p,invitation,source,view):
+    # Rendered narration text only; this does not establish audibility.
+    text=p.locator('[data-pp-hear]').get_attribute('data-speak')
+    h.ok(text.count(invitation)==1 and text.startswith(f"Willowbank story. {invitation} Chart source. {source['title']} {source['origin']} {source['notice']} {source['context']} X: {source['axes']['x']['label']}. Y: {source['axes']['y']['label']}."),f'{view} Hear tells the story once, then this chart’s own source')
 
 def main():
-    fixtures=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {pairedFixtures} from './test/paired-points-checks.mjs';console.log(JSON.stringify(pairedFixtures()));"],cwd=ROOT,text=True))
+    fixtures=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {pairedFixtures} from './test/paired-points-checks.mjs';import {PAIRED_TEXT} from './dist/paired-points-content.mjs';console.log(JSON.stringify({...pairedFixtures(),invitation:PAIRED_TEXT.invitation}));"],cwd=ROOT,text=True))
     server=None;base=os.environ.get('PAIRED_TEST_URL')
     if not base:
         class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -100,7 +104,7 @@ def main():
                     h.ok(p.locator('[data-pp-compare]').is_disabled() and p.locator('[data-pp-undo]').is_disabled(),'zero Compare/Back disabled')
                     h.ok(p.locator('[data-pp-place]').is_disabled(),'blank selects disable Place');p.locator('[data-pp-x]').select_option('1');h.ok(p.locator('[data-pp-place]').is_disabled(),'one value still disables Place')
                     h.ok(p.locator('[data-pp-x] option').count()==12 and p.locator('[data-pp-y] option').count()==22,'native blank plus every integer axis choice')
-                    h.click(p,'[data-pp-worked]');h.ok(packet(p,identity)['support']['worked'],'example support saved before exposure')
+                    h.click(p,'[data-pp-worked]');h.ok(packet(p,identity)['support']['worked'],'example support saved before exposure');hear(p,fixtures['invitation'],source,'worked')
                     for step in range(3):
                         h.ok(p.locator('[data-pp-example]').count()==1,'worked example separate from own plot')
                         label=p.locator('[data-pp-example] svg').get_attribute('aria-label');h.ok(['origin','across','point'][step] in label and ('2' in label if step else '0' in label),'worked accessible SVG names actual stage and coordinate')
@@ -109,7 +113,7 @@ def main():
                     h.ok(p.locator('[data-pp-worked-step="1"]').is_disabled(),'worked Next disabled at final step');h.click(p,'[data-pp-worked-close]')
                     h.ok(p.locator('[data-pp-worked]').evaluate('x=>document.activeElement===x'),'closing helper restores trigger focus')
                     h.click(p,'[data-pp-patterns]');h.ok(p.locator('[data-pp-pattern-plot]').count()==3,'three supplied patterns use shared source')
-                    h.ok('Steeper does not mean stronger association' in p.locator('[data-pp-root]').inner_text(),'pattern contrasts remain explicit')
+                    h.ok('Steeper does not mean stronger association' in p.locator('[data-pp-root]').inner_text(),'pattern contrasts remain explicit');hear(p,fixtures['invitation'],source,'pattern')
                     for case_id,values in [('a',[2,3,4,5,6,7,8,9]),('b',[3,5,7,9,11,13,15,17]),('c',[4,1,2,7,8,5,6,11])]:
                         coords=p.locator(f'[data-pp-pattern-plot][data-case="{case_id}"] .pp-source-point').evaluate_all('xs=>xs.map(x=>[+x.getAttribute("x")+12,+x.getAttribute("y")+12])')
                         h.ok(len(coords)==8,'each supplied pattern renders all eight records')
@@ -125,7 +129,7 @@ def main():
                             geometry(p,[{'x':r['x'],'y':20}]);h.ok(p.locator('[data-pp-own-plot] .pp-source-point').count()==8,'overlay shows supplied pairs beside untouched own point')
                             h.click(p,'[data-pp-undo]');h.ok(not p.locator('[data-pp-own-plot] .pp-source-point').count(),'Back clears transient overlay');place(p,r['x'],r['y']);h.ok(packet(p,identity)['checks'][0]==check,'earlier check stays literal')
                     geometry(p,[{'x':r['x'],'y':r['y']} for r in rows]);h.ok(p.locator('[data-pp-own-table] tbody tr').count()==8,'ordered table retains all eight placed records');h.click(p,'[data-pp-compare]');h.ok(packet(p,identity)['checks'][-1]['matches']==[True]*8,'all eight actual native pairs compare')
-                    h.click(p,'[data-pp-hear]');h.ok(packet(p,identity)['support']['narration'],'native Hear records request without claiming audibility');h.ok(p.locator('[data-pp-together]').get_attribute('aria-pressed') is None,'working together is a report action without toggle semantics');h.click(p,'[data-pp-together]');h.ok('reported' in p.locator('[data-pp-together]').inner_text().lower() and p.locator('[data-pp-together]').get_attribute('aria-pressed') is None,'reported together remains plain action');h.click(p,'[data-pp-keep]');kept(p);old=copy.deepcopy(packet(p,identity));h.click(p,'[data-pp-revise]');revision=h.book(p)['pairedPoints'][-1]['id'];h.click(p,'[data-pp-undo]');h.click(p,'[data-pp-keep]');kept(p)
+                    hear(p,fixtures['invitation'],source,'card');h.click(p,'[data-pp-hear]');h.ok(packet(p,identity)['support']['narration'],'native Hear records request without claiming audibility');h.ok(p.locator('[data-pp-together]').get_attribute('aria-pressed') is None,'working together is a report action without toggle semantics');h.click(p,'[data-pp-together]');h.ok('reported' in p.locator('[data-pp-together]').inner_text().lower() and p.locator('[data-pp-together]').get_attribute('aria-pressed') is None,'reported together remains plain action');h.click(p,'[data-pp-keep]');kept(p);old=copy.deepcopy(packet(p,identity));h.click(p,'[data-pp-revise]');revision=h.book(p)['pairedPoints'][-1]['id'];h.click(p,'[data-pp-undo]');h.click(p,'[data-pp-keep]');kept(p)
                     h.ok(packet(p,identity)==old,'revision leaves entire old kept packet exact');h.click(p,'[data-pp-revise]');draft=h.book(p)['pairedPoints'][-1]['id'];h.ok(len(packet(p,draft)['placements'])==7,'unfinished kept chart revises as a separate draft')
                     bounds(p);snap(p,f'{case}-revision-{width}')
                 waiting=h.book(p);reload(p);h.ok(p.locator('[data-pp-start]').count()==1,'reload opens chooser without automatic selection');reopen(p,draft);h.ok(h.book(p)==waiting,'reload and explicit Open preserve partial/kept/check work')
@@ -140,8 +144,9 @@ def main():
                     h.go(p,base,'#learn/math','[data-linear-root]');h.ok(p.locator('[data-linear-root] footer a[href="#learn/math/paired"]').count()==1,'advanced math footer has one paired invitation')
                     h.ok(p.locator('[data-linear-start]').count()>=6,'adjacent six open linear lessons remain present')
                 _,old=setup(browser,width,fixtures['historical'],f'historical-{width}');go(old,base);reopen(old,fixtures['historicalId']);h.ok('Earlier <horizontal> units' in old.locator('[data-pp-root]').inner_text(),'historical labels escaped and literal');h.ok(old.locator('[data-pp-x] option').count()==6 and old.locator('[data-pp-y] option').count()==8,'historical smaller maxima govern controls')
+                old_source=next(x for x in fixtures['historical']['pairedPoints'] if x.get('id')==fixtures['historicalId'])['source'];hear(old,fixtures['invitation'],old_source,'historical card');h.click(old,'[data-pp-hear]');h.ok(packet(old,fixtures['historicalId'])['source']==old_source,'historical Hear keeps its own source unrewritten')
                 for x,y in [(0,0),(4,6),(4,6)]:place(old,x,y)
-                geometry(old,[{'x':0,'y':0},{'x':4,'y':6},{'x':4,'y':6}],4,6);h.click(old,'[data-pp-patterns]');h.ok('Earlier supplied pattern stays literal.' in old.locator('[data-pp-root]').inner_text(),'historical helper uses own source text');h.click(old,'[data-pp-patterns-close]');bounds(old);snap(old,f'historical-{width}')
+                geometry(old,[{'x':0,'y':0},{'x':4,'y':6},{'x':4,'y':6}],4,6);h.click(old,'[data-pp-patterns]');h.ok('Earlier supplied pattern stays literal.' in old.locator('[data-pp-root]').inner_text(),'historical helper uses own source text');hear(old,fixtures['invitation'],old_source,'historical pattern');h.click(old,'[data-pp-patterns-close]');bounds(old);snap(old,f'historical-{width}')
                 _,bad=setup(browser,width,fixtures['malformedHelper'],f'bad-helper-{width}');go(bad,base);reopen(bad,fixtures['historicalId']);h.ok(not bad.locator('[data-pp-worked],[data-pp-patterns]').count(),'unreadable helper hidden independently');place(bad,0,0);h.ok(len(packet(bad,fixtures['historicalId'])['placements'])==1,'bad helper leaves plotting open')
                 unsupported=copy.deepcopy(fixtures['base']);unsupported['pairedPoints']={'version':99,'raw':'Synthetic raw paired notes'};_,u=setup(browser,width,unsupported,f'unsupported-{width}');go(u,base);h.ok(h.book(u)['pairedPoints']==unsupported['pairedPoints'],'unsupported root retained');raw_export=download(u,base,f'unsupported-{width}');h.ok(raw_export['pairedPoints']==unsupported['pairedPoints'],'Notes is nonthrowing and downloads unsupported owner')
                 cap=copy.deepcopy(fixtures['partial']);cap['pairedPoints'] += [None]*(24-len(cap['pairedPoints']));_,c=setup(browser,width,cap,f'cap-{width}');go(c,base);h.click(c,'[data-pp-source="a"]');h.ok(c.locator('[data-pp-source="a"]').get_attribute('aria-pressed')=='true','capacity test explicitly selects a source');h.ok(c.locator('[data-pp-start]').is_disabled() and 'all the charts it can hold' in c.locator('[data-pp-root]').inner_text(),'24raw packets block selected-source creation with capacity notice');reopen(c,fixtures['revisedId']);h.ok(c.locator('[data-pp-place]').count()==1,'existing healthy packet remains open at cap')
