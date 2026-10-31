@@ -68,6 +68,14 @@ Claude and Google judged the longer note right for a beginner who reads well in 
 
 No Spanish recording or synthesis exists, so step 3 of the method does not apply yet. Browser speech stays the default.
 
+## Second pass: *junco* becomes *carrizo*
+
+Spec 326's panel ([326 panel](../326-spanish-panel/resolution.md)) asked the same three providers about this text's *junco*, since Act III calls the same Vadoalto plant *carrizo*. All three said to change it. *Junco* is the rush, a shorter plant, and the "reed" gloss hid the difference. Using two names would also teach two words for one plant. The applied changes are:
+
+- «...una caja pequeña de semillas de carrizo.» and «El carrizo crece bien en la tierra mojada.» Their English glosses are unchanged.
+- *el carrizo* reed in the glossed word list, and *el carrizo* in the phrasebook list.
+- The sounds note uses *jardín* as its J example, since that word is already in the note. It says "*J* is a raspy sound made at the back of the mouth". OpenAI pointed out that "breathy" can suggest an English H. The raspy sound is the usual one in northern Spain, where Vadoalto sits. Google kept the old wording and did not mark it as an error.
+
 ## Known limit
 
 As spec 117 says, a model panel can miss wording that is correct but sounds odd to a native speaker. This residual risk is accepted for beginner content.

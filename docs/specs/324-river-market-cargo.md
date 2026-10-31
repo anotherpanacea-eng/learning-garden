@@ -31,7 +31,7 @@ Order on the page:
 
 The small label **Read with English help** appears on the errand once meaning support was used.
 
-***Mi cuaderno · Words you've met*** is a view on the same route, opened from a button and closed with **Back to the errand**. It lists the companion's *La carga* phrasebook words, grouped under the errand's name, each with its article and English from the word list. Its title claims only that the words were met. It holds three Details notes, each linked from the errand: **El, la, los, las**, **Hay** (linked from the question) and **Sounds** (linked from the note, for *harina* and *junco*). The words appear once the note has been opened; before that the view says so (exceptions table).
+***Mi cuaderno · Words you've met*** is a view on the same route, opened from a button and closed with **Back to the errand**. It lists the companion's *La carga* phrasebook words, grouped under the errand's name, each with its article and English from the word list. Its title claims only that the words were met. It holds three Details notes, each linked from the errand: **El, la, los, las**, **Hay** (linked from the question) and **Sounds** (linked from the note, for *harina* and *jardín*). The words appear once the note has been opened; before that the view says so (exceptions table).
 
 The off-screen invitation is the companion's first one (labels for three things at home). The grown-up notes use the companion's Details paragraph and the line in the exceptions table.
 

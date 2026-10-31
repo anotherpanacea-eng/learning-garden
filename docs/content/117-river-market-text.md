@@ -41,7 +41,7 @@ Companion to [spec 117](../specs/117-spanish-river-market.md). Use as written. T
 
 ### Note, a longer note
 
-> ¡Hola, vecinos! Me llamo Marisol y soy la capitana de *La Garza*. Venimos de Vadoalto, más arriba en el valle. Hoy traemos tres tarros de miel, dos sacos de harina y una caja pequeña de semillas de junco. La miel es para el café, la harina es para la panadería y las semillas son para el jardín. El junco crece bien en la tierra mojada. ¿Nos ayudas a descargar?
+> ¡Hola, vecinos! Me llamo Marisol y soy la capitana de *La Garza*. Venimos de Vadoalto, más arriba en el valle. Hoy traemos tres tarros de miel, dos sacos de harina y una caja pequeña de semillas de carrizo. La miel es para el café, la harina es para la panadería y las semillas son para el jardín. El carrizo crece bien en la tierra mojada. ¿Nos ayudas a descargar?
 
 ### Sentence meanings
 
@@ -54,14 +54,14 @@ Companion to [spec 117](../specs/117-spanish-river-market.md). Use as written. T
 | La harina es para la panadería. | The flour is for the bakery. |
 | ¡Hola, vecinos! Me llamo Marisol y soy la capitana de *La Garza*. | Hello, neighbors! My name is Marisol and I'm the captain of *La Garza*. |
 | Venimos de Vadoalto, más arriba en el valle. | We come from Vadoalto, farther up the valley. |
-| Hoy traemos tres tarros de miel, dos sacos de harina y una caja pequeña de semillas de junco. | Today we're bringing three jars of honey, two sacks of flour and a small box of reed seeds. |
+| Hoy traemos tres tarros de miel, dos sacos de harina y una caja pequeña de semillas de carrizo. | Today we're bringing three jars of honey, two sacks of flour and a small box of reed seeds. |
 | La miel es para el café, la harina es para la panadería y las semillas son para el jardín. | The honey is for the café, the flour is for the bakery and the seeds are for the garden. |
-| El junco crece bien en la tierra mojada. | Reeds grow well in wet ground. |
+| El carrizo crece bien en la tierra mojada. | Reeds grow well in wet ground. |
 | ¿Nos ayudas a descargar? | Will you help us unload? |
 
 ### Words
 
-*hola* hello · *somos* we are · *traemos* we bring · *el tarro* jar · *la miel* honey · *el saco* sack · *la harina* flour · *para* for · *los vecinos* neighbors · *me llamo* my name is · *la capitana* captain · *venimos de* we come from · *más arriba* farther up · *el valle* valley · *la caja* box · *pequeña* small · *las semillas* seeds · *el junco* reed · *crece* grows · *la tierra mojada* wet ground · *descargar* to unload
+*hola* hello · *somos* we are · *traemos* we bring · *el tarro* jar · *la miel* honey · *el saco* sack · *la harina* flour · *para* for · *los vecinos* neighbors · *me llamo* my name is · *la capitana* captain · *venimos de* we come from · *más arriba* farther up · *el valle* valley · *la caja* box · *pequeña* small · *las semillas* seeds · *el carrizo* reed · *crece* grows · *la tierra mojada* wet ground · *descargar* to unload
 
 ### Task
 
@@ -99,7 +99,7 @@ English under each, on request: "The {item} is in the {place}. Is it for the {pl
 
 ### Phrasebook
 
-hola · somos · traemos · el tarro · la miel · el saco · la harina · las semillas · el junco · el café · la panadería · el jardín · dos · tres
+hola · somos · traemos · el tarro · la miel · el saco · la harina · las semillas · el carrizo · el café · la panadería · el jardín · dos · tres
 
 ---
 
@@ -413,7 +413,7 @@ mañana · por la mañana · por la tarde · por la noche · va a llover · va a
 
 **Me gusta and me gustan.** *Me gusta la miel* for one thing; *me gustan las manzanas* for more than one.
 
-**Sounds.** *H* is silent: *harina* sounds like "ah-REE-nah". *J* is a breathy sound from the back of the throat: *junco*. *Ñ* sounds like the "ny" in canyon: *mañana*. *Ll* in *llover* sounds like the "y" in yes in most places.
+**Sounds.** *H* is silent: *harina* sounds like "ah-REE-nah". *J* is a raspy sound made at the back of the mouth: *jardín*. *Ñ* sounds like the "ny" in canyon: *mañana*. *Ll* in *llover* sounds like the "y" in yes in most places.
 
 ## Off-screen invitations
 
