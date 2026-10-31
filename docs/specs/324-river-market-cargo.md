@@ -67,9 +67,11 @@ spanish: {
   amount: 'short' | 'longer',
   errands: { carga: Errand },
   earlier: [Errand],          // at most 8, newest last
+  nextTry: n,                 // next try id, from 1
   boatLineSeen: bool
 }
 Errand: {
+  tryId: n,                   // positive integer, unique within this root
   source,                     // complete frozen errand source, ≤ 48 KiB
   task: { placements: { [itemId]: placeId | null } },
   taskEvidence: { firstSubmission: { placements, outcome, support } | null, submissions: n, hints: [feedbackId] },
@@ -81,6 +83,7 @@ Errand: {
 
 - **Frozen source.** Opening the note freezes the whole errand at the current amount, following spec 83: version, amount, passage sentences with glosses, word list, items (ids, kinds, labels), places, the target place of each kind, every feedback line with its id and English, the question, choices with ids, order and fitting id, nudges, and the check rules. Resolve every action, check and display from this source, including on resume. Never look up today's content or key. An id or version alone is not a source. A content change affects only a newly started errand.
 - **Evidence.** The first submission (placements, outcome and support at that moment) is kept once; later submissions change the working placements and the count. `hints` is the bounded set of feedback ids exposed, set before the line is shown, never cleared on resume, and limited to ids in the frozen source. The question keeps each pick in order (at most 12) and whether the latest fits. Task and question outcomes stay separate, with no single correctness flag. A task never submitted is unobserved.
+- **Try ids.** Each newly opened errand takes `tryId` from `nextTry`, which then increases; ids are never reused, so a later story receipt can name one try without an array index. Validation does not renumber or repair ids. A duplicated `tryId` makes both records ineligible for such a receipt while they stay readable here.
 - **Start again** moves the current errand, unchanged, to the end of `earlier`, and freezes a fresh source at the current amount, so a child who started with short sentences can read the longer note. `familiar` is true when `earlier` holds a done *La carga*. When `earlier` already holds 8, refuse with the companion's capacity line and change nothing.
 - **Validation and preservation.** Validate ids, bounded shapes and stored outcomes, without regrading history. An unreadable errand shows the companion's unavailable line and stays raw and exportable, and the rest of the page stays open. An unknown root version stays raw, with an explanation and a Notes link. Preflight every explicit write, cloning the notebook and checking it against `dist/progress-limits.mjs` and the real Notes export, before committing. A refusal shows the capacity line and leaves the previous save unchanged.
 - Notes export, import, reset and explorer switching carry `spanish` through the existing transfer. Add `spanish: 'The River Market (Spanish)'` to `progress-transfer.mjs`'s destination names.
