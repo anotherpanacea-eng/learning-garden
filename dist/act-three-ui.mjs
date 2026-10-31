@@ -11,6 +11,7 @@ const button=(attrs,text,primary=false)=>`<button type="button" class="${primary
 const link=(href,text,primary=false)=>`<a class="${primary?'primary':'secondary'}" href="${esc(href)}">${esc(text)}</a>`;
 const heading=text=>`<h1 id="act-three-heading" tabindex="-1">${esc(text)}</h1>`;
 const back=()=>link('#almanac/beyond',C.ui.back);
+const pageKey=({part,chapter})=>part+':'+(chapter||'');
 const hear=()=>hearButton('',C.ui.hear,'en');
 let visits=new WeakMap();
 export function resetActThreeView(){visits=new WeakMap();}
@@ -55,12 +56,12 @@ function waysPage(state,v){
 export function actThreeInvitation(state,{blocked=false}={}){const v=actThreeView(state);return v.canStart||v.started?`<aside class="a3-invitation" data-keeper-story${blocked?' hidden':''}><div class="a3-controls">${link('#almanac/beyond',C.ui.start,true)}${v.ended?link('#almanac/both-ways',C.ui.replay):''}${v.pageReady?link('#almanac/the-ways',C.ui.reveal):''}</div></aside>`:'';}
 export function actThreeReturn(state,chapter){return actThreeView(state).started&&actThreeChapters.includes(chapter)?`<aside class="a3-return">${link('#almanac/beyond/'+chapter,C.ui.return)}</aside>`:'';}
 export function actThreePage(state,{part='hub',chapter=null,owner=null,blocked=false}={}){
- const v=actThreeView(state),s=visit(state,owner);let body;
+ const v=actThreeView(state),s=visit(state,owner),notice=s.noticePage===pageKey({part,chapter})?s.notice:'';let body;
  if(['unavailable','unreadable'].includes(v.status))body=`${heading(C.title)}<p>${esc(C.messages.unreadableAct)}</p>`;
  else if(part==='ending')body=endingPage(state,v);
  else if(part==='page')body=waysPage(state,v);
  else body=part==='chapter'&&actThreeChapters.includes(chapter)&&v.started?chapterPage(state,v,chapter,s):hub(state,v);
- return `<div class="act-three-page" data-act-three-root data-keeper-story lang="en"${blocked?' hidden':''}><p id="act-three-status" class="a3-status" role="status" aria-live="polite" tabindex="-1">${esc(s.notice)}</p>${body}<footer class="a3-controls">${part!=='hub'?back():''}${link('#almanac/keepers',C.ui.keepers)}${link('#explore',C.ui.explore)}</footer></div>`;
+ return `<div class="act-three-page" data-act-three-root data-keeper-story lang="en"${blocked?' hidden':''}><p id="act-three-status" class="a3-status" role="status" aria-live="polite" tabindex="-1">${esc(notice)}</p>${body}<footer class="a3-controls">${part!=='hub'?back():''}${link('#almanac/keepers',C.ui.keepers)}${link('#explore',C.ui.explore)}</footer></div>`;
 }
 export function actThreeNotes(state){
  const v=actThreeView(state);if(v.status==='missing'&&!v.canStart)return '';
@@ -73,8 +74,8 @@ export function bindActThree(state,ctx){
  const root=document.querySelector('[data-act-three-root]');if(!root)return;const owner=ctx.explorerId?.(),s=visit(state,owner),record=state.story,route=location.hash;
  const live=el=>root.isConnected&&document.querySelector('[data-act-three-root]')===root&&el.isConnected&&root.contains(el)&&!el.disabled&&!el.closest('[hidden],details:not([open])')&&visits.get(state)===s&&state.story===record&&(!ctx.notebook||ctx.notebook()===state)&&ctx.explorerId?.()===owner&&ctx.isActive?.()!==false&&location.hash===route&&!!actThreeRoute(route)&&!document.querySelector('dialog.welcome-film[open]');
  const focus=selector=>{if(ctx.focus)ctx.focus(selector);else document.querySelector(selector)?.focus();};
- const status=text=>{s.notice=text;const el=root.querySelector('#act-three-status');el.textContent=text;focus('#act-three-status');};
- const redraw=(destination,target)=>{stopSpeech();const result=ctx.save?.();s.notice=result?.enabled===false||result?.ok===false?result.message||'':'';const next=s.notice?'#act-three-status':target||'#act-three-heading';
+ const status=text=>{s.notice=text;s.noticePage=pageKey(actThreeRoute(route));const el=root.querySelector('#act-three-status');el.textContent=text;focus('#act-three-status');};
+ const redraw=(destination,target)=>{stopSpeech();const result=ctx.save?.();s.notice=result?.enabled===false||result?.ok===false?result.message||'':'';s.noticePage=pageKey(actThreeRoute(destination||route));const next=s.notice?'#act-three-status':target||'#act-three-heading';
   if(destination&&destination!==location.hash){window.addEventListener('hashchange',()=>{if(ctx.explorerId?.()===owner&&ctx.isActive?.()!==false&&location.hash===destination)focus(next);},{once:true});location.hash=destination;}
   else{ctx.render();focus(next);}
  };

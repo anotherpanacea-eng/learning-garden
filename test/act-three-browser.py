@@ -109,7 +109,9 @@ def run(base,browser):
   c,p,seed=setup(browser,base,mode);go(p,'#almanac/beyond/'+('seeds' if mode=='broken-host' else 'route'));p.locator('[data-a3-candidate]').wait_for();layout(p,mode);equal(book(p),seed,mode+' retained history stays exact');c.close()
  # Refused writes never expose an ending or page, or replace the notebook.
  for mode,route,control in [('unstarted','#almanac/beyond','[data-a3-start]'),('open','#almanac/beyond/seeds','[data-a3-offer]'),('three','#almanac/beyond','[data-a3-send]'),('ended','#almanac/both-ways','[data-a3-reveal]')]:
-  c,p,seed=setup(browser,base,mode,fault=True);go(p,route);before=book(p);p.evaluate('window.actThreeRefuse=true');p.locator(control).tap();equal(book(p),before,mode+' refused write is atomic');ok('couldn\'t be kept' in p.locator('#act-three-status').inner_text(),mode+' refusal visible');equal(p.evaluate('document.activeElement.id'),'act-three-status',mode+' refusal focus');c.close()
+  c,p,seed=setup(browser,base,mode,fault=True);go(p,route);before=book(p);p.evaluate('window.actThreeRefuse=true');p.locator(control).tap();equal(book(p),before,mode+' refused write is atomic');ok('couldn\'t be kept' in p.locator('#act-three-status').inner_text(),mode+' refusal visible');equal(p.evaluate('document.activeElement.id'),'act-three-status',mode+' refusal focus')
+  if mode=='open':go(p,'#almanac/beyond');equal(p.locator('#act-three-status').inner_text(),'','chapter refusal does not follow to a different page');go(p,'#almanac/beyond/seeds');ok("couldn't be kept" in p.locator('#act-three-status').inner_text(),'chapter refusal stays with its original page')
+  c.close()
  # A connected old control whose story record was replaced is inert.
  c,p,seed=setup(browser,base,'three',fault=True);before=book(p);p.evaluate('window.actThreeNotebook.story=structuredClone(window.actThreeNotebook.story)');p.locator('[data-a3-send]').tap();equal(book(p),before,'stale story callback cannot write');c.close()
  # Saving off keeps the story in memory and in a real notes download.
