@@ -33,12 +33,13 @@ export function firstSupperReceipt(state){
 }
 export function storyView(state){
  const present=object(state)&&own(state,'story'),record=present?state.story:null,receipt=firstSupperReceipt(state),arrival=storyArrivalContext(state);
- const base={record,opening:'returning',parcelFound:false,parcelAvailable:false,oldMapRevealed:false,actIStatus:'missing',actI:null,receiptStatus:'missing',ended:false,receipt,eligible:receipt!==null,pageReady:false,pageVisible:false,pageAmount:'short',inheritedActI:arrival.inheritedActI,inheritedActII:arrival.inheritedActII,inheritedPageOne:arrival.inheritedPageOne,inheritedPageTwo:arrival.inheritedPageTwo,inheritedLetter:arrival.inheritedLetter};
+ const base={record,opening:'returning',parcelFound:false,parcelAvailable:false,oldMapRevealed:false,actIStatus:'missing',actI:null,receiptStatus:'missing',ended:false,receipt,eligible:receipt!==null,pageReady:false,pageVisible:false,pageAmount:'short',pageAmountLocked:false,inheritedActI:arrival.inheritedActI,inheritedActII:arrival.inheritedActII,inheritedPageOne:arrival.inheritedPageOne,inheritedPageTwo:arrival.inheritedPageTwo,inheritedLetter:arrival.inheritedLetter};
  if(!present)return {status:'missing',...base};
  if(!supportedStory(record))return {status:'unavailable',...base};
  const hasAct=own(record.acts,'I'),act=hasAct?record.acts.I:null,known=object(act)&&typeof act.ended==='boolean';
+ const pageAmountLocked=object(record.acts.III)&&record.acts.III.ended===true&&record.seenScenes.includes('ways-page-revealed')&&own(record,'pageAmount')&&!keeperPageAmounts.includes(record.pageAmount);
  const ended=known&&act.ended===true,parcelFound=record.seenScenes.includes('parcel-found'),oldMapRevealed=record.seenScenes.includes('old-map-revealed')||record.seenScenes.includes('inherited-map-read'),eligible=ended||receipt!==null,pageReady=arrival.inheritedPageOne||parcelFound&&eligible;
- return {status:'ready',...base,opening:record.opening,parcelFound,parcelAvailable:parcelFound||arrival.inheritedPageOne,oldMapRevealed,actIStatus:hasAct?known?'ready':'unreadable':'missing',actI:act,receiptStatus:known&&own(act,'receipt')?readableReceipt(act.receipt)?'ready':'unreadable':'missing',ended,eligible,pageReady,pageVisible:pageReady&&oldMapRevealed,pageAmount:keeperPageAmounts.includes(record.pageAmount)?record.pageAmount:'short'};
+ return {status:'ready',...base,opening:record.opening,parcelFound,parcelAvailable:parcelFound||arrival.inheritedPageOne,oldMapRevealed,actIStatus:hasAct?known?'ready':'unreadable':'missing',actI:act,receiptStatus:known&&own(act,'receipt')?readableReceipt(act.receipt)?'ready':'unreadable':'missing',ended,eligible,pageReady,pageVisible:pageReady&&oldMapRevealed,pageAmount:keeperPageAmounts.includes(record.pageAmount)?record.pageAmount:'short',pageAmountLocked};
 }
 function canChange(state){return ['missing','ready'].includes(storyView(state).status);}
 function mutate(state,options,fn){
@@ -82,7 +83,7 @@ export function revealOldMap(state,options={}){
  });
 }
 export function setPageAmount(state,amount,options={}){
- const v=storyView(state);if(v.status!=='ready'||!v.pageVisible||!keeperPageAmounts.includes(amount))return false;
+ const v=storyView(state);if(v.status!=='ready'||!v.pageVisible||v.pageAmountLocked||!keeperPageAmounts.includes(amount))return false;
  if(v.record.pageAmount===amount)return true;
  return mutate(state,options,candidate=>{candidate.story.pageAmount=amount;return true;});
 }
