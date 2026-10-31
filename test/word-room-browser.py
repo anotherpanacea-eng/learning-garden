@@ -127,6 +127,24 @@ def edges(browser,base):
    p.locator('[data-wr-action=text][data-wr-value="'+key+'"]').tap();ok(p.locator('.wr-scene-picture').count()==1,'shared '+key+' scene drawn');p.screenshot(path=str(OUT/('scene-'+key+'.png')),full_page=True);tap(p,'choose')
  finally:c.close()
 
+ for failure in [True,False]:
+  seed=fixture("chooseWordRoomWord(s,'mat',o);s.wordRoom.source.words.mat.textId=null");c,p=setup(browser,base,seed)
+  try:
+   if failure:p.evaluate('window.__wrStorageFail=true')
+   else:p.goto(base+'#notes');p.locator('#remember').uncheck();p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for()
+   tap(p,'read');status=p.locator('#wr-status').inner_text();ok('earlier scene cannot open' in status,'unavailable linked scene explains return to chooser');ok(('browser saving failed' if failure else 'browser saving is off') in status,'unavailable scene notice retains persistence warning')
+  finally:c.close()
+ seed=fixture("chooseWordRoomWord(s,'mat',o);s.wordRoom.gallery=Object.keys(s.wordRoom.source.words);s.wordRoom.page='build'")
+ for width,height in [(320,900),(820,1000),(1024,768)]:
+  c,p=setup(browser,base,seed,width,height)
+  try:
+   r=p.locator('[data-wr-action=try]').bounding_box();ok(r['y']>=0 and r['y']+r['height']<=height,'finished-box celebration does not displace label action');tap(p,'read');r=p.locator('[data-wr-action=back]').bounding_box();ok(r['y']>=0 and r['y']+r['height']<=height,'finished-box reading return remains in the viewport');layout(p);p.screenshot(path=str(OUT/('complete-read-'+str(width)+'.png')),full_page=True)
+  finally:c.close()
+ seed=fixture("chooseWordRoomWord(s,'mat',o);s.wordRoom.gallery=Object.keys(s.wordRoom.source.words).filter(x=>x!=='mat');s.wordRoom.page='build'");c,p=setup(browser,base,seed)
+ try:
+  label(p,'mat');tap(p,'try');tap(p,'keep');ok(p.locator('.wr-ready').evaluate('e=>e===document.activeElement'),'last kept label focuses the reachable celebration');ok(p.locator('.wr-ready [data-wr-action=scenes]').is_visible(),'celebration reading action remains available')
+ finally:c.close()
+
 class Quiet(http.server.SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 class Server(http.server.ThreadingHTTPServer):request_queue_size=128;daemon_threads=True

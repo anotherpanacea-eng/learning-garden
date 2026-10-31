@@ -7,3 +7,5 @@
 @media(min-width:681px) and (max-height:820px){.wr-header{margin:0 0 5px}.wr-room h1{font-size:1.7rem}.wr-header>div>span{font-size:1rem}.wr-room .wr-waiting{margin:4px 0}.wr-steps{margin:5px 0}.wr-room h2{font-size:1.3rem;margin:6px 0}.wr-work{padding:10px;gap:16px}.wr-work p{margin:3px 0 6px;font-size:1rem}.wr-places{margin:5px 0;gap:8px}.wr-places>button{min-height:67px}.wr-places>button>strong{font-size:2rem}.wr-bank{gap:5px;margin:7px 0}.wr-bank button{min-height:44px;font-size:1.4rem;padding:3px}.wr-model .wr-word-piece{min-height:23px;font-size:1.1rem}.wr-help,.wr-edit{margin:7px 0}.wr-work .wr-picture{max-height:190px}}
 
 @media(max-width:680px){body:has([data-word-room-root]) .header nav{display:none}body:has([data-word-room-root]) main{padding-top:10px}.wr-header h1{font-size:1.5rem}}
+
+@media(min-width:681px) and (max-height:820px){.wr-reading-board{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;align-items:center}.wr-room .wr-reading-copy .wr-passage{font-size:1.25rem;line-height:1.65;margin:8px 0}.wr-room .wr-reading-copy .wr-discuss{margin:8px 0 0;padding:8px;font-size:1rem}}
