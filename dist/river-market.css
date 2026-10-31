@@ -30,4 +30,17 @@
 .river-nudge{border-left:4px solid #8a6d1d;padding-left:.6rem}
 .river-grammar{margin:.5rem 0}
 .river-invitation{border-top:1px solid #c9b98f;margin-top:1.5rem;padding-top:.75rem}
+/* El camino (spec 328). */
+.river-walk{display:grid;gap:.4rem}
+.river-map{width:100%;max-width:26rem;height:auto;background:#eef3e6;border:2px solid #c9b98f;border-radius:.6rem}
+.river-map text{font:600 13px system-ui,sans-serif;fill:#1d2b28}
+.river-bridge{fill:#a98457}.river-map-bridge-label{fill:#fff!important}
+.river-map-plaza{fill:#e4d9bd;stroke:#8a7a55}.river-map-building{fill:#fbf7ec;stroke:#5c4630;stroke-width:1.5}
+.river-teo circle{fill:#183f39;r:13px}.river-teo text{fill:#fff!important;font-size:10px!important}
+.river-teo-place{font-weight:700;margin:0}
+.river-moves{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin:.5rem 0}
+@media (min-width:820px){.river-moves{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.river-hint{border-left:4px solid #8a6d1d;padding-left:.6rem}
+.river-entry+.river-entry{margin-top:.5rem}
+.river-entry [aria-current=true]{font-weight:700;text-decoration:underline}
 @media (prefers-reduced-motion:reduce){.river-page *{transition:none!important;animation:none!important}}
