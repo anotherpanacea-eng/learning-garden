@@ -1,6 +1,6 @@
 # 339 · Pattern Stall: finite text and picture directions
 
-Companion to [spec339](../specs/339-pattern-stall.md). Original selected/adapted263 text. Fiction is labelled **A story from Willowbank**; teaching and meaning notes **A true thing about language**. `{guide}` is never gendered. Pip and the baker he/him; Dot she/her. No device narration or pronunciation sample. Adult shared reading; no private learner data.
+Companion to [spec339](../specs/339-pattern-stall.md). Original selected/adapted263 text. Fiction is labelled **A story from Willowbank**; teaching and meaning notes **A true thing about language**. `{guide}` is never gendered. Pip and the baker he/him; Dot and the miller she/her. No device narration or pronunciation sample. Adult shared reading; no private learner data.
 
 ## Bench copy
 
@@ -21,11 +21,11 @@ Companion to [spec339](../specs/339-pattern-stall.md). Original selected/adapted
 - Jobs: **Pattern sign jobs**
 - Story panel: **The worm bread story**
 - Meaning shelf: **Words with different meanings**
-- Meaning invitation: **Read the whole sentence. Which meaning fits?**
+- Meaning invitation: **Read the whole sentence. It shows what this word means.**
 - Family missing: **Choose a family clue. A word can belong to more than one.**
 - Letters missing: **Choose the letters you want to paint.**
-- Family fits: **{family} is one of this word's families. {familyNote}**
-- Family differs: **{family} is a different clue. {familyNote}**
+- Family fits: **{family}: a fitting clue. {familyNote}**
+- Family differs: **{family}: a different clue. {familyNote}**
 - Letters fit: **{targetLine}. {letterNote}**
 - Other letters: **This sign makes {made}. It could tell another story. The market note says {targetLine}. {letterNote}**
 - Keep notice: **Your sign is kept. You can make another.**
@@ -49,10 +49,10 @@ Dynamic values come only from the retained source/triple and are escaped. Kept l
 | ball | The ball family | all, ball, call, small, stall, wall, walk, talk, chalk |
 | monday | The Monday family | Monday, money, honey, nothing, other |
 | key | The key family | key, valley, donkey, honey, money |
-| after-w | The after-w families | watch, want, swan; war, warm, swarm; word, work, world, worm |
+| after-w | The after-w families | watch, want, swan, war, warm, swarm, word, work, world, worm |
 | tion | The -tion chunk | station, section, motion, fiction |
 
-Store the after-w examples as ten separate words in that order; punctuation is presentation only. Honey and money are in both groups, matching263 card2 (its shorter bench list omitted money from key). Membership is a useful printed clue, not a claim about one pronunciation or shared origin. Tiles in order: `a:A`, `o:O`, `ar:AR`, `or:OR`, `ey:EY`, `tion:TION`.
+Store and show the after-w examples as one flat list of ten separate words in that order. Do not reconstruct subgroups from today's catalogue. Card3 and the sign notes carry the a/ar/or contrast. Honey and money are in both groups, matching263 card2 (its shorter bench list omitted money from key). Membership is a useful printed clue, not a claim about one pronunciation or shared origin. Tiles in order: `a:A`, `o:O`, `ar:AR`, `or:OR`, `ey:EY`, `tion:TION`.
 
 ## Eleven sign cases
 
@@ -101,7 +101,7 @@ Show one card at a time, with existing Previous/Next controls and a sentence/tex
 | here / here | Pay here. | place / An arrow points to the payment box. |
 | hear / hear | I hear the bell. | listener / A listener turns toward a ringing bell. |
 | two / two | Two pies. | pies / Two pies sit side by side. |
-| too / too | Me too. | shared / A second person joins someone carrying a pie. |
+| too / too | Me too. | shared / One person holds a pie. A friend raises a hand to ask for one as well. |
 | to / to | Go to the stall. | path / A path arrow points from a person to a stall. |
 | bee / bee | A bee in the hive. | hive / A bee enters a hive. |
 | be / be | Be careful. | caution / A person steps around a loose stone. |
@@ -129,7 +129,7 @@ All cards use **A true thing about language**, with examples labelled **A story 
 
 Every job contextLabel: **A story from Willowbank**. No root tag; no prefix/ending glossary injected into a job. Each source stores its exact pictureId/pictureAlt as below, as well as the original325 work/check fields. Display the job's own picture and text alternative; unknown picture code falls back to text. Wrong-choice tags are authored metadata only, never a learner diagnosis.
 
-Common easier example: **Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.** Existing editable/help/Skip notices stay unchanged.
+Easier example for A1, A2, A3 and A5: **Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.** A4 has its own easier example: **Try this one first: I hear the bell. Hear is for listening. Now read your whole sign: is it about a place?** Store each job's own example field. Existing editable/help/Skip notices stay unchanged.
 
 | job / title | Prompt | Choices in stored order (key marked) | Picture | Hint | Explanation | Teach |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -143,11 +143,11 @@ A1 steps shown first: **Honey is in the Monday family: o.** / **It ends like key
 Wrong-choice feedback and tags:
 
 - A1a `o-family-missed`: **Honey is in the Monday family. It has an o.** A1c `ey-missed`: **Honey ends in -ey, like key and valley.**
-- A2b `spell-as-heard-aw`: **Walk is in the talk family: a, then l.** A2c `spell-as-heard-o`: **Walk is spelled like talk and chalk: a, l, k.**
-- A3a `w-family-mixed`: **Worm is a real word, for a wriggly animal. Bread is warm, with ar.** A3b `spell-as-heard-ur`: **After w, warm has ar, like war.**
+- A2b `before-l-letters-mixed`: **Walk is in the talk family: a, then l.** A2c `before-l-letters-mixed`: **Walk is spelled like talk and chalk: a, l, k.**
+- A3a `w-family-mixed`: **Worm is a real word, for a wriggly animal. Bread is warm, with ar.** A3b `after-w-letters-mixed`: **After w, warm has ar, like war.**
 - A4a `homophone-mixed`: **Hear is a real word, for listening. This sign means this place.** A4c `ere-missed`: **This place is spelled here, like there and where.**
 
-**A5 / Six waiting signs** (kind match): **Fill each gap with a, o, ar or or.** Parts in order: `small:SM_LL APPLES`, `monday:OPEN M_NDAY`, `money:M_NEY HERE`, `watch:W_TCH YOUR STEP`, `warm:W__M BREAD`, `work:W__K IN PROGRESS`. Choices in order: `a:a`, `o:o`, `ar:ar`, `or:or`. Key mapping: small→a, monday→o, money→o, watch→a, warm→ar, work→or. Picture: `signs / Six unfinished signs wait at the market.` No guided steps. Teach cards1,2,3. Hint: **Find each word's family first.** Explanation: **Each gap comes from a family: ball, Monday, watch, war or word.** Nonfitting general feedback: **Read each sign. Find its spelling family, then try the gap again.** The263 u-feedback is not adopted because u is not an offered A5 choice. No per-gap diagnosis. `matchCopy`: instruction **Choose a gapped sign, then the letters that fill it.**; destinationPrompt **Choose letters.**; destinationLabel **Letters**.
+**A5 / Six waiting signs** (kind match): **Fill each gap with one of these: a · o · ar · or.** Parts in order: `small:SM_LL APPLES`, `monday:OPEN M_NDAY`, `money:M_NEY HERE`, `watch:W_TCH YOUR STEP`, `warm:W__M BREAD`, `work:W__K IN PROGRESS`. Choices in order: `a:a`, `o:o`, `ar:ar`, `or:or`. Key mapping: small→a, monday→o, money→o, watch→a, warm→ar, work→or. Picture: `signs / Six unfinished signs wait at the market.` No guided steps. Teach cards1,2,3. Hint: **Find each word's family first.** Explanation: **Each gap comes from a family: ball, Monday, watch, war or word.** Nonfitting general feedback: **Read each sign. Find its spelling family, then try the gap again.** The263 u-feedback is not adopted because u is not an offered A5 choice. No per-gap diagnosis. `matchCopy`: instruction **Choose a gapped sign, then the letters that fill it.**; destinationPrompt **Choose letters.**; destinationLabel **Letters**.
 
 ## Story and ancillary text
 
@@ -179,7 +179,7 @@ Longer:
 
 Keeper's note (A true thing about language): **English often spells one part of a word in more than one way. Writers learn words in families, like walk, talk and chalk, or Monday, money and honey. When they are unsure, they check a dictionary.**
 
-Dictionary note: **Dot uses a bigger dictionary. The small Stall Dictionary has only selected pages.**
+Dictionary note (freeze in story.dictionaryNote; show below the story and Keeper note): **Dot uses a bigger dictionary. The small Stall Dictionary has only selected pages.**
 
 Helpful words:
 
@@ -190,4 +190,4 @@ Helpful words:
 
 Paper invitation: **Make a sign for an imaginary stall on paper. Read it with a grown-up. Check any spelling you wonder about in a dictionary.**
 
-For grown-ups: **This is guided written-pattern and sentence-meaning practice with supplied words, not independent spelling or reading assessment. All five family cards are finite examples, not universal rules or a claim about every English accent. Honey and money each belong to two groups. The after-w group includes several different letter patterns. An unexpected fill can be kept without being called a conventional spelling. Here/hear, to/too/two, bee/be and blue/blew can be discussed as homophones, but no sounds are played or tested. These whole words and sentences are suitable for shared adult reading; phonics samples have a separate recording and listening review. Your child's own sign stays on paper, read by a person. No photograph, voice or original writing is captured. First/latest practice versions and retained checks travel through Notes. No story chapter is unlocked.**
+For grown-ups: **This is guided written-pattern and sentence-meaning practice with supplied words, not independent spelling or reading assessment. All five family cards are finite examples, not universal rules or a claim about every English accent. The curriculum groups these examples by sound; this page shows their letters and meanings. Honey and money each belong to two groups. The after-w group includes several different letter patterns. An unexpected fill can be kept without being called a conventional spelling. Here/hear, to/too/two, bee/be and blue/blew can be discussed as homophones, but no sounds are played or tested. These whole words and sentences are suitable for shared adult reading; phonics samples have a separate recording and listening review. Your child's own sign stays on paper, read by a person. No photograph, voice or original writing is captured. First/latest practice versions and retained checks travel through Notes. No story chapter is unlocked.**
