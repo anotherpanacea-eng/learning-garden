@@ -41,6 +41,7 @@ All child-facing text comes verbatim from [the 278 companion](../content/278-exc
 | Back link | ← Post Office |
 | Story control | Read the market story again |
 | A3 button | Check |
+| Resumed completed item button | Try again |
 | Set A disclosure | Practice: colons and lists |
 | Crate picture text equivalent | Pip loads {n} crates: {labels}. (Labels joined with " · "; with no crates: "Pip loads no crates.") |
 | Unreadable saved line or item | This saved work can't be opened here. It is kept as it is, and you can still download it from Grown-up notes. |
