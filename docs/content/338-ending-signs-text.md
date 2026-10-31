@@ -21,11 +21,11 @@ Original town text selected from [263](263-market-signs-text.md), with the bound
 
 Market Signs gains one arrival action: **Make an ending sign**. The existing three stay as they are. From the ending bench: **Back to Market Signs / Word Garden / The Prop Box**.
 
-Ending bench: **Root word / Ending / Tool / Choose a root word / Choose an ending / Choose a tool / Keep this sign / Clear my sign / Kept ending signs / Reopen this sign**.
+Ending bench: **Root word / Ending / Choose a root word / Choose an ending / Keep this sign / Clear my sign / Kept ending signs / Reopen this sign**.
 
 Tools, in this order: **just add / drop the e / y to i / le to ly / ic to ically**. Tool group label: **Tools**. Harder tool label: **A harder tool**.
 
-Missing selection: **Choose a root word, an ending and a tool first.** Paused older note: **This older sign note does not match its own tool. It is kept as it was.** Kept: **Your sign is kept. You can make another.** Already kept: **This sign is already on your shelf.** Cleared: **Your waiting sign is clear. Your kept signs are still here.**
+Missing selection: **Choose a root word, an ending and a tool first.** Paused older note: **This older sign note does not match its own tool. It is kept as it was.** Unavailable bench: **This earlier ending bench cannot be played here. Its original stays in Notes. Other jobs and benches are still open.** Unavailable tool: **This earlier tool is not available here. Its original stays in Notes.** Unavailable material: **Some earlier material cannot be opened here. Its original stays in Notes.** Kept: **Your sign is kept. You can make another.** Already kept: **This sign is already on your shelf.** Cleared: **Your waiting sign is clear. Your kept signs are still here.**
 
 Shelves: **Odd ones / No obvious root word here**. Practice: the existing 325 controls plus **Ending sign jobs** as the group heading. Job titles: **Fresh bread / A happy painter / Handle gently / Famous honey / Your invitation / Learned spellings / A dramatic bow**.
 
@@ -92,7 +92,8 @@ Exactly as 263, including its label **A story from Willowbank**:
 >
 > The board goes up: FRESHLY BAKED. WRAPPED IN PAPER. The baker hands Pip a roll. It is warm, not worm.
 
-**Keeper's note (A true thing about language):** exactly as 263.
+**Keeper's note (A true thing about language):**
+> Wrap, write, wren and wrong all start with wr. Knock, knot and knife start with kn. If a word isn't where you first look, try another way to spell its start, then look again.
 
 Beside the scene: **Dot uses a bigger dictionary in the story. The tiny book here has only selected pages.**
 
@@ -236,6 +237,6 @@ Glossary entries exactly as 263: **Suffix**, **Root word**, **Doing word**, **Na
 
 ## Off-screen invitation and grown-ups
 
-Off-screen card (with a grown-up, on paper): **The grown-up reads out four sign words: freshly, gently, famous, invitation. You write them. Check them together in a dictionary.** Grown-up line: **Paper only. Nothing is photographed, scored or saved.** (A bounded selection from 263's card 1, keeping only this slice's words.)
+Off-screen card (with a grown-up, on paper): **The grown-up reads out four sign words: freshly, gently, famous, invitation. You write them. Check them together in a dictionary.** Grown-up line: **Paper only. Nothing is photographed, scored or saved.** (An adaptation of 263's card 1, keeping only this slice's words.)
 
-Grown-up text: **This bench explores three endings, -ly, -ous and -ation, and the small changes a root word can make when one is added: dropping an e before a vowel letter, changing y to i after a consonant, swapping le for ly, and -ic adding -ally. It also shows a few spellings that are learned in families (-sure, -ture, ou, y). These are usual patterns, not laws, and the odd-ones shelf shows words that keep their own way. All checks are guided practice with supplied words, not independent spelling assessment. An unexpected combination may still be a real word; check a bigger dictionary together. No sound samples play here. The English curriculum also names -sion (television, division); it is told apart from -tion by sound, so it is not taught on screen here. British spelling writes humour, which drops its u before -ous (humorous); US humor needs no change. No story chapter is unlocked.**
+Grown-up text: **This bench explores three endings, -ly, -ous and -ation, and the small changes a root word can make when one is added: dropping an e before a vowel letter, changing y to i after a consonant, swapping le for ly, and -ic adding -ally. It also shows a few spellings that are learned in families (-sure, -ture, ou, y). These are usual patterns, not laws, and the odd-ones shelf shows words that keep their own way. All checks are guided practice with supplied words, not independent spelling assessment. An unexpected combination may still be a real word; check a bigger dictionary together. No sound samples play here. The printed -sure/-ture groups also have sound contrasts; this slice does not teach or test those contrasts. The English curriculum also names -sion (television, division); it is told apart from -tion by sound, so it is not taught on screen here. British spelling writes humour, which drops its u before -ous (humorous); US humor needs no change. No story chapter is unlocked.**
