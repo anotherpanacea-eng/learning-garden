@@ -1,4 +1,4 @@
-// Original supplied drafts selected from277;317 commissions only these first two benches.
+// Original supplied drafts selected from277;317 supplies the first two benches and321 adds Holding It Together.
 // taskSource returns the complete words/key/order to freeze when a task is opened.
 const paragraphTeaching=[
  'A paragraph is a group of sentences about one main thing. Writers usually start a new paragraph when the topic, the time, the place or the speaker changes.',
@@ -95,11 +95,65 @@ const questions=[
   family:'second-reason',changes:'Paragraph 2 gives the second reason.',prompt:'Which opener starts paragraph 2?',choices:opener3,hint:'Which word counts?',
   feedback:{fit:'“Secondly” tells the reader this is reason number two.',different:{place:"That's a place. The report is counting reasons.",time:"That's a time. The report is counting reasons."},general:'Which word counts?' }})
 ];
-const catalog=[bakery,day,...breaks,...joins,...questions];
+const holdingTeach={
+ parcel:['Writing holds together when the reader can tell how the parts connect. Repeat a key word, or use a word that means the same thing.','The parcel.','“Pip found a parcel by the bridge.”','“The package was wet.”','“The package” means the same parcel. “The” tells us it’s the one we know.'],
+ bun:['Words like it, she and they point back to someone or something. If two things could fit, the reader gets lost. Name the thing instead.','The bun and the plate.','“Pip set the bun on the plate. Then it slid off the table.”','“It” could be the bun or the plate.','Fix: “Then the bun slid off the table.”'],
+ join:['Some openers show how two paragraphs connect: “On the other hand” for a contrast, “As a consequence” for a result, “In addition” for one more point.','The market roof.','Paragraph 1: the new roof keeps the stalls dry.','Paragraph 2: it cost more than the town planned.','A downside after a good point: “On the other hand, ...”'],
+ short:['If the reader can fill in the missing words, you can leave them out. This is called ellipsis. It saves repeating yourself.','Pip and Dot.','“Pip wanted to see the show, and Dot wanted to see the show too.”','The reader can fill in “wanted to see the show.”','“Pip wanted to see the show, and Dot did too.”']
+};
+const holdingExample='Try this one first: “Dot has a hat. It is red.” “It” points back to the hat. Now check yours.';
+const meaningExample='Try this one first: “Dot was tired. As a consequence, she went to bed early.” She went to bed early because she was tired. Now read your two paragraphs.';
+const shorterExample='Try this one first: “Pip can whistle, and Dot can too.” The reader fills in “whistle.” Now check yours.';
+const holdingTask=(id,kind,title,parts,key,card,extra)=>task(id,kind,title,parts,key,{
+ bench:'holding',reader:'For someone reading this story',teach:holdingTeach[card],example:card==='join'?meaningExample:card==='short'?shorterExample:holdingExample,...extra
+});
+const tapPart=(id,text)=>({...part(id,text),tap:true});
+const bunParts=[part('draft','Pip set the bun on the plate. Then it slid off the table.')];
+const bunFixes=[part('edge','Then it slid off the edge of the table.'),part('that','Then that one slid off the table.'),part('bun','Then the bun slid off the table.')];
+const shortVersions=[part('short','Pip wanted to see the show, and Dot did too.'),part('cut','Pip wanted to see the show, and Dot.'),part('changed','Pip wanted to see, and Dot wanted the show too.')];
+const holding=[
+ holdingTask('holding-parcel','tap','One parcel, four words',[
+  tapPart('pip','Pip'),part('p1',' found a '),tapPart('parcel','parcel'),part('p2',' by the '),tapPart('bridge','bridge'),part('p3','. The '),tapPart('package','package'),part('p4',' was wet. '),tapPart('he','He'),part('p5',' carried '),tapPart('it','it'),part('p6',' to the '),tapPart('bakery','bakery'),part('p7',', and the '),tapPart('baker','baker'),part('p8',' dried the '),tapPart('bundle','bundle'),part('p9',' on the '),tapPart('windowsill','windowsill'),part('p10','.')
+ ],['parcel','package','it','bundle'],'parcel',{
+  family:'parcel',prompt:'Tap every word that means the parcel.',hint:'Find the parcel. Then look for other words that mean the same thing.',
+  feedback:{fit:'Four words, one parcel. The reader never loses it.',different:{pip:'Pip is the one who found it.',bridge:'The bridge is where Pip found it.',he:'“He” points back to Pip.',bakery:'The bakery is where Pip took it.',baker:'The baker is the one who dried it.',windowsill:'The windowsill is where it dried.'},missing:'Some words that mean the parcel are not tapped yet.',general:'Your draft is still here. You can change it.'}}),
+ holdingTask('holding-unclear','tap','Which word is unclear?',[
+  tapPart('pip','Pip'),part('p1',' set the '),tapPart('bun','bun'),part('p2',' on the '),tapPart('plate','plate'),part('p3','. Then '),tapPart('it','it'),part('p4',' slid off the '),tapPart('table','table'),part('p5','.')
+ ],['it'],'bun',{
+  family:'bun',prompt:'Tap the word the reader could mix up.',hint:'Which word points back to something already named?',
+  feedback:{fit:'“It” could be the bun or the plate. That’s the word to fix.',different:{pip:'Pip is named. There is only one Pip.',bun:'The bun is named. Look for a word that points back.',plate:'The plate is named. Look for a word that points back.',table:'The table is named. Nothing else could be the table.'},missing:'The unclear word is not tapped yet.',general:'Your draft is still here. You can change it.'}}),
+ holdingTask('holding-fix','choice','Fix the unclear word',bunParts,'bun','bun',{
+  family:'bun',prompt:'Choose a fix.',choices:bunFixes,hint:'Try each fix. Can you still read it two ways?',
+  preview:{edge:'Pip set the bun on the plate. Then it slid off the edge of the table.',that:'Pip set the bun on the plate. Then that one slid off the table.',bun:'Pip set the bun on the plate. Then the bun slid off the table.'},
+  feedback:{fit:'Now the reader knows the bun slid.',different:{edge:'The reader still can’t tell which one slid.',that:'The reader still can’t tell which one slid.'},general:'Your draft is still here. You can change it.'}}),
+ holdingTask('holding-roof','choice','The other side',[part('first','The new market roof keeps the stalls dry, even in a storm.')],'contrast','join',{
+  family:'roof',reader:'For someone reading this report',prompt:'Which opener signals that paragraph 2 is the other side?',changes:'Paragraph 2 gives a downside.',choices:[part('result','As a result of this,'),part('contrast','On the other hand,'),part('addition','In addition to this,')],after:'the roof cost more than the town had planned.',hint:'Is paragraph 2 more of the same, a result, or the other side?',
+  feedback:{fit:'A downside after a good point is a contrast: “On the other hand.”',different:{result:'Dry stalls didn’t cause the cost.',addition:'It adds a fact, but doesn’t signal the other side.'},general:'Your draft is still here. You can change it.'}}),
+ holdingTask('holding-rain','choice','Because of the rain',[part('first','Rain fell on Willowbank for three days.')],'result','join',{
+  family:'rain',reader:'For someone reading this report',prompt:'Which opener starts paragraph 2?',changes:'Paragraph 2 tells what the rain caused.',choices:[part('result','As a consequence,'),part('contrast','On the other hand,'),part('place','Nearby,')],after:'the brook rose over the stepping stones.',hint:'Paragraph 2 is what the rain caused. Which opener means “because of that”?',
+  feedback:{fit:'“As a consequence” tells the reader paragraph 2 happened because of paragraph 1.',different:{contrast:'Nothing is being contrasted.',place:'The link is cause, not place.'},general:'Your draft is still here. You can change it.'}}),
+ holdingTask('holding-show','choice','One more thing to enjoy',[part('first','The show has a juggling dragon.')],'addition','join',{
+  family:'show',reader:'For someone reading this report',prompt:'Pick the opener for paragraph 2.',changes:'Paragraph 2 gives one more thing to enjoy.',choices:[part('result','As a consequence,'),part('contrast','On the other hand,'),part('addition','In addition,')],after:'there is a singing fox.',hint:'Is paragraph 2 more of the same, a result, or the other side?',
+  feedback:{fit:'“In addition” tells the reader here comes one more thing.',different:{result:'The dragon doesn’t cause the fox.',contrast:'The fox is one more good thing, not the other side.'},general:'Your draft is still here. You can change it.'}}),
+ holdingTask('holding-short','choice','Leave it out',[part('first','Pip wanted to see the show, and Dot wanted to see the show too.')],'short','short',{
+  family:'show-trip',prompt:'Which shorter version keeps the same meaning?',choices:shortVersions,preview:Object.fromEntries(shortVersions.map(x=>[x.id,x.text])),hint:'Which words can the reader fill in for themselves?',
+  feedback:{fit:'“Did too” lets the reader fill in “wanted to see the show.” That’s ellipsis.',different:{cut:'The reader can’t tell what Dot did.',changed:'That changes the meaning.'},general:'Your draft is still here. You can change it.'}}),
+ holdingTask('holding-mill','choice','Where are you going?',[part('first','“Where are you going?” “I’m going to the mill.”')],'mill','short',{
+  family:'mill',prompt:'Which shorter answer keeps the meaning?',choices:[part('mill','“To the mill.”'),part('there','“I’m going there.”'),part('going','“Going.”')],preview:{mill:'“Where are you going?” “To the mill.”',there:'“Where are you going?” “I’m going there.”',going:'“Where are you going?” “Going.”'},hint:'What does the question ask for?',
+  feedback:{fit:'The reader fills in “I’m going.” Only the new part is said.',different:{there:'“There” doesn’t say where. The reader still needs the place.',going:'The reader can’t fill that gap. Put a word back.'},general:'Your draft is still here. You can change it.'}}),
+ holdingTask('holding-either','choice','What could “it” mean?',bunParts,'either','bun',{
+  family:'bun',prompt:'What could “it” mean here?',steps:['Find “it.”','List what “it” could point back to.','Can the reader tell which?'],choices:[part('bun','The bun, because it comes first'),part('plate','The plate, because it is the nearest one'),part('either','Either one: the reader can’t tell')],hint:'Try “the bun” in place of “it.” Now try “the plate.”',
+  feedback:{fit:'Both fit, so the reader can’t tell. Name the thing: “Then the bun slid off the table.”',different:{bun:'Maybe. The plate fits too.',plate:'Maybe. The bun fits too.'},general:'Your draft is still here. You can change it.'}})
+];
+
+const catalog=[bakery,day,...breaks,...joins,...questions,...holding];
 export const writingTasks=Object.freeze(catalog.map(({id,title,bench})=>Object.freeze({id,title,bench})));
 export function taskSource(id){const source=catalog.find(s=>s.id===id);return source?structuredClone(source):null;}
 export const writingCopy=Object.freeze({
  title:'The Writing Table',
+ holdingHeader:'Make the writing hold together, so the reader can follow.',
+ holdingInvitation:'Write two sentences about something you found. Call it something new the second time. Read them to someone.',
+ holdingGrownup:'This bench practices holding writing together: words that mean the same thing, a clear “it”, openers that show how paragraphs connect, and leaving out words a reader can fill in. Ellipsis here means leaving words out, not the three dots.',
  intro:"The librarian has a tray of drafts from all over town. Visitors need to find the bakery's opening times. Can you make the page easier to use?",
  invitation:'Which part helps the visitor? Try a short report on paper, then ask someone to read it.',
  incomplete:'Some parts are still waiting. You can keep this version or keep arranging.',
