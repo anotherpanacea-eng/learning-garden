@@ -35,6 +35,10 @@ The high/loch comparison is a broad historical analogy, not a modern accent pres
 
 The load-bearing saved-work risk is a later catalog change regrading history. The specification defends it through retained source/order, recorded outcomes, immutable first keeps, partial unreadable-section isolation and real whole-notebook Notes preflight. Those are implementation obligations that still need code and independent runtime review. The documented Greek/French/Latin prerequisite remains a gap; no topic coverage or independent spelling claim is added.
 
+## Narrow follow-up
+
+At `18e4a612b70fcefd5aa146ee93e791c8dd088219`, the affected completeness, project-commitment and scope reviewers independently found no remaining P1/P2. Claude's substantive follow-up found one remaining P2: card1's worked step had dropped the historical was said wording from its claimed quote. That step is folded to quote the actual authored note exactly. Its three optional clarifications are also folded: wrote rather than added on the tracing caption, explicitly included table instructions and fitting-family feedback, and first-character-only capitalization for a two-letter trial tile. Final exact-head clearance is recorded in the owning PR, not inferred from this historical review record.
+
 ## Before implementation
 
 Complete the narrow recheck of the folds and publish independent exact-head specification/content clearance in the PR. Then implement only the reviewed three worktables, four teaching cards and A1–A5; the other268 benches, chapter adapters and audio assets remain separate commissions. The existing optional parent-guided entry and no-personal-data boundaries remain.

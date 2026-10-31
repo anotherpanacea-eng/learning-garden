@@ -8,7 +8,7 @@ Draft companion to [spec330](../specs/330-stained-map.md). **Finite commission; 
 - Scene1 hook, Short/Longer and Keeper's note, with Before/After page1 variants. No other scene.
 - Labels **A story from Willowbank**, **A true thing about language**, and the every-bench dictionary reminder. Omit the broad What you already know recall card.
 - Teach cards1–4, their titles/statements, worked examples and three steps each.
-- Bench(a): header; the exact eight-tile row; all eight stained labels, restored labels and notes; restore feedback; all eight history cards and both destination labels; the seven supplied family pairs. The signing feedback is commissioned only within A4, where that option exists.
+- Bench(a): header; the exact eight-tile row; all eight stained labels, restored labels and notes; restore feedback; all eight history cards and both destination labels; the instruction **Sort by the note on each card: Once said or Added by writers**; the seven supplied family pairs. Its instruction is **Tap the family word that says the silent letter.** The signing feedback is commissioned only within A4, where that option exists.
 - Jobs A1–A5 in full: their visible steps, prompts, written notes, choices/order, feedback, hints and explanations. A5's three statements are independent responses; no missing statement becomes false.
 
 Apply the source-check corrections below before freezing the selected material. A word-history claim in this list is commissioned only once the audit gate clears it. No isolated sound, new foreign phrase, other268 item, page3 quote or Hollis name is included. No response tile/choice is passed to narration.
@@ -23,7 +23,7 @@ These original amendments replace only the named lines; all other selected lines
 | Scene1, Keeper's note | Island was once written iland. Later, its spelling picked up an s from isle. The two words have different histories. |
 | A2, island under Once said feedback | Iland had no s. Writers added that letter later. |
 | Knoll map/history note | Once written cnoll. Its first sound, now spelled k, was said. |
-| Card1, worked step2 | The note says: once written cnoll. Its first sound is now spelled k. |
+| Card1, worked step2 | The note says: Once written cnoll. Its first sound, now spelled k, was said. |
 | Card3 statement | Some silent letters were added by writers to look like another word. Island, debt and doubt got letters this way. |
 | A2 hint | Does the note describe an old sound, or an added letter? |
 | A3 island note | Island: once written iland; writers added the s later. |
@@ -34,9 +34,9 @@ These original amendments replace only the named lines; all other selected lines
 
 The cnoll note describes a historical sound, not a claim that the old spelling literally contained k. The A2 hint refers to the note's meaning rather than the presence of an identical old letter. A3's island answer, its other two choices and their order stay unchanged. A5's first response is Not true; its other statements and keys stay unchanged. No prompt dates a word or asks the child to prove that nobody ever pronounced a letter. The story still contrasts the guide's first explanation with Bramble's correction, then the dictionary check.
 
-After page1 only, put this caption beside the annotated tracing: **The librarian added these place-name labels to their copy.** The Keeper's page itself is unchanged. The worktable claims no approval to add those labels to the canonical page.
+After page1 only, put this caption beside the annotated tracing: **The librarian wrote these place-name labels on their copy.** Some names already appear on the original map; the caption credits the librarian's writing without claiming the original had none. The Keeper's page itself is unchanged. The worktable claims no approval to add those labels to the canonical page.
 
-Family cards show the exact following letter clues: sign—g; muscle—c; bomb—b; solemn—n; autumn—n; doubt—b; debt—b. **Read the family note** opens that card's existing base→family-word pair from the seven commissioned pairs, without additional destinations.
+A complete fitting family board uses **These cards fit their notes.** Family cards show the exact following letter clues: sign—g; muscle—c; bomb—b; solemn—n; autumn—n; doubt—b; debt—b. **Read the family note** opens that card's existing base→family-word pair from the seven commissioned pairs, without additional destinations.
 
 ## Map check case table
 
@@ -53,7 +53,7 @@ Check covers the whole map. Incomplete outranks different, which outranks fit. F
 | No stains / nothing missing | The Sponge is complete. Nothing was missing. | The Sponge stays unchanged |
 | No stains / any letter tile | Nothing is missing here. No letters were stained out or lost. | The Sponge stays unchanged; selected tile is shown separately |
 
-This table supersedes overlapping268 restore-feedback labels. The **No letter chosen** line in268 refers here to an actual nothing-missing response, never an unanswered null. After every label fits, **The labels are ready to travel.** follows the local feedback; it awards no story receipt.
+At a word-start, capitalise only the first letter of a chosen tile: a wrong gh on Knoll is Gh, not GH. Preserve all other characters. This table supersedes overlapping268 restore-feedback labels. The **No letter chosen** line in268 refers here to an actual nothing-missing response, never an unanswered null. After every label fits, **The labels are ready to travel.** follows the local feedback; it awards no story receipt.
 
 ## New interface text
 
