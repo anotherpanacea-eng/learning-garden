@@ -131,5 +131,5 @@ export function writingPreview(s,w){
   return (at<0?[s.parts]:[s.parts.slice(0,at),s.parts.slice(at)]).map(ps=>({heading:'',text:ps.map(p=>p.text).join(' ')}));
  }
  if(s.after){const opener=s.choices.find(c=>c.id===w.choice)?.text;return [{heading:'First paragraph',text:s.parts.map(p=>p.text).join(' ')},{heading:'Next paragraph',text:opener?`${opener} ${s.after}`:`[Choose an opener] ${s.after}`}];}
- return [{heading:'Supplied text',text:s.parts.map(p=>p.text).join(' ')},{heading:'Your choice',text:s.choices.find(c=>c.id===w.choice)?.text||'No choice yet'}];
+ return [{heading:'Text to read',text:s.parts.map(p=>p.text).join(' ')},{heading:'Your choice',text:s.choices.find(c=>c.id===w.choice)?.text||'No choice yet'}];
 }

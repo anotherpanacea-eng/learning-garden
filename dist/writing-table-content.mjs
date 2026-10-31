@@ -103,5 +103,5 @@ export const writingCopy=Object.freeze({
  intro:"The librarian has a tray of drafts from all over town. Visitors need to find the bakery's opening times. Can you make the page easier to use?",
  invitation:'Which part helps the visitor? Try a short report on paper, then ask someone to read it.',
  incomplete:'Some parts are still waiting. You can keep this version or keep arranging.',
- grownup:"This table uses drafts we wrote. All checks are practice with supplied material and teaching, not independent writing or reading assessments. Talk, point, read together or leave a draft unfinished. Your child's own report stays on paper or aloud, read by a person. First and latest kept versions show changes; checks keep the first and up to23 recent checks per task, not every try. The table does not certify paragraph writing or unlock a story chapter."
+ grownup:"This table uses drafts we wrote. All checks are practice with supplied material and teaching, not independent writing or reading assessments. Talk, point, read together or leave a draft unfinished. Your child's own report stays on paper or aloud, read by a person. First and latest kept versions show changes; checks keep the first and up to 23 recent checks per task, not every try. The table does not certify paragraph writing or unlock a story chapter."
 });
