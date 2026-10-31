@@ -1,0 +1,37 @@
+:root{--sky-ink:#183f39;--sky-panel:#fffdf5;--sky-line:#a8bfcb;--sky-disk:#1f3358;--sky-lit:#f6e7a1;--sky-edge:#486783;--sky-pressed:#486783}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky-edge:#c9d6e8}}
+:root[data-theme="dark"]{--sky-edge:#c9d6e8}
+.sky-page{max-width:980px;margin:auto;color:var(--sky-ink)}
+.sky-header{max-width:72ch}.sky-header h1{font-size:clamp(2rem,4vw,3rem);line-height:1.12;margin:.4rem 0 .65rem}
+.sky-eyebrow{margin:.6rem 0 0;font-size:16px;letter-spacing:.02em}
+.sky-page p{line-height:1.5;max-width:76ch}
+.sky-page button,.sky-page a,.sky-entry a{min-height:44px;min-width:44px;font-size:16px}
+.sky-page a{display:inline-flex;align-items:center;padding:.35rem .25rem}
+.sky-page button{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.sky-page :focus-visible,.sky-entry :focus-visible{outline:3px solid #9b651e;outline-offset:3px}
+.sky-today,.sky-strip,.sky-hemisphere{background:var(--sky-panel);border:2px solid var(--sky-line);border-radius:10px;padding:clamp(.8rem,2vw,1.4rem);margin:1rem 0}
+.sky-date{font-size:1.1rem}
+.sky-choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem;margin:1rem 0}
+.sky-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.45rem;min-height:112px;padding:.6rem;color:var(--sky-ink);background:#edf5f8;border-color:#7899ad;text-align:center}
+.sky-page button[aria-pressed=true]{outline:3px solid var(--sky-pressed);outline-offset:2px;background:#dfeaf1}
+.sky-moon{width:56px;height:56px;flex-shrink:0}
+.sky-moon-dark{fill:var(--sky-disk)}.sky-moon-lit{fill:var(--sky-lit)}.sky-moon-edge,.sky-moon-unseen{stroke:var(--sky-edge)}
+.sky-actions{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem;margin:1rem 0}
+.sky-status{background:#eaf3f8;border-left:4px solid #486783;padding:.7rem 1rem;scroll-margin-top:1rem}
+.sky-status:empty{display:none}
+.sky-days{list-style:none;padding:0;margin:1rem 0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.35rem}
+.sky-day{display:flex;flex-direction:column;align-items:center;gap:.15rem;padding:.3rem 0;border:1px dashed #9db4bf;border-radius:5px;background:#f3f7f8;font-size:16px}
+.sky-day-noted{border-style:solid;background:#e9eef6}
+.sky-day-moon{width:28px;height:28px}
+.sky-day-empty{display:block;width:28px;height:28px}
+.sky-panels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem;margin:1rem 0}
+.sky-panel{display:flex;gap:.7rem;align-items:flex-start;padding:.8rem;border-left:4px solid #9b8b50;background:#faf3df;border-radius:6px}
+.sky-panel h3{margin:.1rem 0 .3rem;font-size:1.1rem}.sky-panel p{margin:0}
+.sky-panel-moon{width:40px;height:40px;flex-shrink:0}
+.sky-hemisphere legend{font-weight:700;padding:0 .3rem}
+.sky-links{display:flex;flex-wrap:wrap;gap:1rem;margin:1.2rem 0}
+.sky-unavailable{padding:.7rem 1rem;border-left:4px solid #9b651e;background:#f8f1df}
+.sky-notes pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;max-height:450px;overflow:auto;font-size:16px}
+.sky-page .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(max-width:650px){.sky-choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}.sky-panels{grid-template-columns:1fr}.sky-days{gap:.2rem}.sky-day-moon,.sky-day-empty{width:22px;height:22px}.sky-actions button{flex:1 1 auto}}
+@media(prefers-reduced-motion:reduce){.sky-page *{animation:none!important;transition:none!important}}

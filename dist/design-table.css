@@ -1,0 +1,53 @@
+/* Spec 334: the Design Table, first slice. */
+.dt-room{max-width:1000px;margin:0 auto;padding:0 12px 32px}
+.dt-room button,.dt-room summary,.dt-room .back,.dt-notice a,.dt-room input{min-height:44px;min-width:44px}
+.dt-room .back,.dt-notice a{display:inline-flex;align-items:center}
+.dt-room summary{display:flex;align-items:center;cursor:pointer}
+.dt-room button:focus-visible,.dt-room input:focus-visible,.dt-room summary:focus-visible,.dt-table-box:focus-visible{outline:3px solid #1f5fa8;outline-offset:2px}
+.dt-room button{white-space:normal;max-width:100%}
+.dt-room .dt-actions,.dt-room .dt-choices,.dt-room .dt-entries{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.dt-room .dt-actions button,.dt-room .dt-choices button,.dt-room .dt-entries button{flex:0 1 auto;width:auto}
+.dt-entry{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:10px 14px;border:2px solid #8a6a3a;border-radius:10px;background:#fff8e6;text-align:left}
+.dt-entry[aria-pressed="true"]{border-color:#1f5fa8;background:#eaf2fb}
+.dt-progress{font-size:.9em}
+.dt-label{display:inline-block;font-size:.85em;font-weight:700;border:1px solid #8a6a3a;border-radius:999px;padding:2px 10px;margin:4px 0}
+.dt-station,.dt-teach,.dt-item,.dt-rain,.dt-brief,.dt-mary,.dt-brief-card{border:2px solid #c9b88f;border-radius:10px;padding:8px 10px;margin:12px 0;background:#fffcf3}
+.dt-station{padding:8px}
+.dt-bags{width:240px;max-width:100%;height:auto}
+.dt-table-box{overflow-x:auto;max-width:100%}
+.dt-rain table{border-collapse:collapse;margin:6px 0}
+.dt-rain caption{text-align:left;font-weight:700;padding:4px 0}
+.dt-rain th,.dt-rain td{border:1px solid #b7a98a;padding:6px 8px;text-align:center}
+.dt-total{font-weight:700;background:#f4ecd6}
+.dt-choices button[aria-pressed="true"],.dt-chip[aria-pressed="true"],.dt-tile[aria-pressed="true"]{border:3px solid #1f5fa8;background:#eaf2fb}
+.dt-picked{font-weight:700}
+.dt-tray,.dt-slots,.dt-slot ul,.dt-kept{list-style:none;padding:0;margin:6px 0}
+.dt-tray{display:flex;flex-wrap:wrap;gap:6px}
+.dt-tray>li{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.dt-slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.dt-slot{border:2px dashed #8a6a3a;border-radius:8px;padding:6px;display:flex;flex-direction:column;gap:4px}
+.dt-slot ul{display:flex;flex-direction:column;gap:4px;margin:0}
+.dt-slot-name{font-weight:700}
+.dt-room .dt-tile,.dt-room .dt-slot-button,.dt-room .dt-flip,.dt-room .dt-chip{width:auto;flex:0 1 auto;text-align:left}
+.dt-placed{border-style:solid;background:#f1f7ec}
+.dt-slot-button{font-size:.9em;border-style:dashed}
+.dt-gap{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0}
+.dt-gap-name{font-weight:700;width:100%}
+.dt-number{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dt-number label{width:100%}
+.dt-number input{width:7em;font-size:1.1em}
+.dt-number button{width:auto}
+.dt-line:empty,.dt-notice:empty{display:none}
+.dt-line{font-weight:600}
+.dt-step,.dt-scene,.dt-hint{font-style:italic}
+.dt-why{border-top:1px solid #e1d6b8;margin-top:6px}
+.dt-nice .dt-tile{text-decoration:line-through}
+.dt-flip-line{margin:0;width:100%}
+.dt-brief-card dl,.dt-terms dl{margin:6px 0}
+.dt-brief-card dt,.dt-terms dt{font-weight:700}
+.dt-brief-card dd,.dt-terms dd{margin:0 0 6px 12px}
+.dt-notice{border:2px solid #a35a2a;border-radius:8px;padding:8px 12px;margin:12px 0}
+.dt-announce{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.dt-chosen{font-weight:700}
+.dt-chosen::before{content:"✓ "}
+@media (prefers-reduced-motion:reduce){.dt-room *{transition:none;animation:none}}

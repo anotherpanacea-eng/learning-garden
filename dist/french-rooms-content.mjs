@@ -3,10 +3,10 @@ export const frenchRoomsLessons = [
   {
     "id": "plan",
     "title": "Lire le plan",
-    "intro": "Voici le plan de la maison. Le salon est à gauche de la cuisine. La chambre est sous le salon sur le plan. Dans le salon, il y a une table et une chaise.",
-    "teach": "Une pièce fait partie de la maison. « Dans le salon » indique une pièce. « Sous le salon sur le plan » décrit la position sur la page.",
-    "meaning": "Here is the house plan. The living room is to the left of the kitchen. The bedroom is below the living room on the plan. In the living room there is a table and a chair.",
-    "teachMeaning": "A room is part of the house. “In the living room” identifies a room. “Below the living room on the plan” describes a position on the page.",
+    "intro": "Voici le plan de la maison. Le salon est à gauche de la cuisine. Sur le plan, la chambre est en dessous du salon. Dans le salon, il y a une table et une chaise.",
+    "teach": "Une pièce fait partie de la maison. « Dans le salon » indique une pièce. « En dessous du salon » décrit la position sur la page.",
+    "meaning": "Here is the house plan. The living room is to the left of the kitchen. On the plan, the bedroom is below the living room. In the living room there is a table and a chair.",
+    "teachMeaning": "A room is part of the house. “In the living room” identifies a room. “Below the living room” describes a position on the page.",
     "items": [
       {
         "id": "lit",
@@ -35,9 +35,9 @@ export const frenchRoomsLessons = [
             "feedback": "Relis le texte et regarde le plan. Tu peux demander de l’aide."
           }
         ],
-        "guided": "Où est la tasse ? Elle est dans la cuisine.",
+        "guided": "Où est la tasse ? Elle est dans la cuisine.",
         "hint": "Cherche le meuble pour dormir.",
-        "example": "La porte est dans l'entrée.",
+        "example": "La porte est dans l’entrée.",
         "guidedMeaning": "Where is the cup? It is in the kitchen.",
         "hintMeaning": "Look for the piece of furniture for sleeping.",
         "exampleMeaning": "The door is in the entrance hall."
@@ -72,11 +72,11 @@ export const frenchRoomsLessons = [
         "objects": [
           [
             "etagere",
-            "l'étagère"
+            "l’étagère"
           ],
           [
             "tasse",
-            "la tasse · sur l'étagère"
+            "la tasse · sur l’étagère"
           ],
           [
             "petite-table",
@@ -100,7 +100,7 @@ export const frenchRoomsLessons = [
       },
       {
         "id": "entree",
-        "name": "l'entrée",
+        "name": "l’entrée",
         "objects": [
           [
             "porte",
@@ -118,13 +118,13 @@ export const frenchRoomsLessons = [
     "id": "positions",
     "title": "Donner une position précise",
     "intro": "La lampe est sur la table du salon. Le livre est sous cette table. Le sac est à côté du lit. Le manteau est derrière la porte.",
-    "teach": "Sur la table : la lampe. Sous la table : le livre. À côté du lit : le sac. Derrière la porte : le manteau. Pour le trajet, gauche et au-dessus sont les directions sur la page du plan.",
+    "teach": "Sur la table : la lampe. Sous la table : le livre. À côté du lit : le sac. Derrière la porte : le manteau. Pour le trajet, gauche et au-dessus sont les directions sur la page du plan.",
     "meaning": "The lamp is on the living-room table. The book is under that table. The bag is beside the bed. The coat is behind the door.",
     "teachMeaning": "On the table: the lamp. Under the table: the book. Beside the bed: the bag. Behind the door: the coat. For the route, left and above refer to directions on the plan page.",
     "items": [
       {
         "id": "lampe",
-        "prompt": "Dans le salon, choisis l'objet qui est sur la table.",
+        "prompt": "Dans le salon, choisis l’objet qui est sur la table.",
         "meaning": "In the living room, choose the object that is on the table.",
         "choices": [
           {
@@ -150,15 +150,15 @@ export const frenchRoomsLessons = [
           }
         ],
         "guided": "Entre dans le salon. Cherche sous la table. Tu trouves le livre.",
-        "hint": "« Sur » n’est pas « sous » : cherche ce qui est posé sur la table.",
-        "example": "La tasse est sur l'étagère, dans la cuisine.",
+        "hint": "« Sur » n’est pas « sous » : cherche ce qui est posé sur la table.",
+        "example": "La tasse est sur l’étagère, dans la cuisine.",
         "guidedMeaning": "Enter the living room. Look under the table. You find the book.",
         "hintMeaning": "“On” is not “under”: look for what is resting on the table.",
         "exampleMeaning": "The cup is on the shelf, in the kitchen."
       },
       {
         "id": "route",
-        "prompt": "Pars de l'entrée. Va dans la pièce à gauche sur le plan, puis dans la pièce juste au-dessus. Où arrives-tu ?",
+        "prompt": "Pars de l’entrée. Va dans la pièce à gauche sur le plan, puis dans la pièce juste au-dessus. Où arrives-tu ?",
         "meaning": "Start in the entrance hall. Go into the room to the left on the plan, then the room just above. Where do you arrive?",
         "choices": [
           {
@@ -183,9 +183,9 @@ export const frenchRoomsLessons = [
             "feedback": "Ce choix correspond au message et au plan."
           }
         ],
-        "guided": "Sur le plan : entrée → chambre → salon.",
+        "guided": "Sur le plan : entrée → chambre → salon.",
         "hint": "Suis une direction à la fois sur la page.",
-        "example": "Autre trajet : cuisine → salon → chambre.",
+        "example": "Autre trajet : cuisine → salon → chambre.",
         "guidedMeaning": "On the plan: entrance hall → bedroom → living room.",
         "hintMeaning": "Follow one direction at a time on the page.",
         "exampleMeaning": "Another route: kitchen → living room → bedroom."
@@ -220,11 +220,11 @@ export const frenchRoomsLessons = [
         "objects": [
           [
             "etagere",
-            "l'étagère"
+            "l’étagère"
           ],
           [
             "tasse",
-            "la tasse · sur l'étagère"
+            "la tasse · sur l’étagère"
           ],
           [
             "petite-table",
@@ -248,7 +248,7 @@ export const frenchRoomsLessons = [
       },
       {
         "id": "entree",
-        "name": "l'entrée",
+        "name": "l’entrée",
         "objects": [
           [
             "porte",
@@ -265,8 +265,8 @@ export const frenchRoomsLessons = [
   {
     "id": "clarify",
     "title": "Demander une précision",
-    "intro": "Un message dit : « Pose le carnet sur la table. » Mais il y a deux tables : une dans le salon et une dans la cuisine. Tu peux demander une précision avant de choisir.",
-    "teach": "Une instruction peut manquer de précision. Demander « quelle table ? » aide à trouver le bon endroit.",
+    "intro": "Un message dit : « Pose le carnet sur la table. » Mais il y a deux tables : une dans le salon et une dans la cuisine. Tu peux demander une précision avant de choisir.",
+    "teach": "Une instruction peut manquer de précision. Demander « quelle table ? » aide à trouver le bon endroit.",
     "meaning": "A message says: “Put the notebook on the table.” But there are two tables: one in the living room and one in the kitchen. You can ask for clarification before choosing.",
     "teachMeaning": "An instruction can lack precision. Asking “which table?” helps find the right place.",
     "items": [
@@ -277,36 +277,36 @@ export const frenchRoomsLessons = [
         "choices": [
           {
             "id": "choice-1",
-            "text": "De quelle couleur est le carnet ?",
+            "text": "De quelle couleur est le carnet ?",
             "meaning": "What color is the notebook?",
             "outcome": "different",
             "feedback": "La couleur ne précise pas quelle table utiliser."
           },
           {
             "id": "choice-2",
-            "text": "Quelle table : celle du salon ou celle de la cuisine ?",
+            "text": "Quelle table : celle du salon ou celle de la cuisine ?",
             "meaning": "Which table: the one in the living room or the one in the kitchen?",
             "outcome": "match",
             "feedback": "Cette question distingue les deux tables par leur pièce."
           },
           {
             "id": "choice-3",
-            "text": "À quelle heure faut-il poser le carnet ?",
+            "text": "À quelle heure faut-il poser le carnet ?",
             "meaning": "At what time should the notebook be put down?",
             "outcome": "different",
             "feedback": "L’heure ne précise pas quelle table utiliser."
           }
         ],
-        "guided": "Quelle table : celle du salon ou celle de la cuisine ?",
+        "guided": "Un message dit : « Pose le sac sur le lit. » S’il y a deux chambres, tu demandes : « Dans quelle chambre ? »",
         "hint": "Il faut préciser la pièce, pas la couleur.",
-        "example": "Près de quelle porte ?",
-        "guidedMeaning": "Which table: the one in the living room or the one in the kitchen?",
+        "example": "Près de quelle porte ?",
+        "guidedMeaning": "A message says: “Put the bag on the bed.” If there are two bedrooms, you ask: “In which bedroom?”",
         "hintMeaning": "You need to specify the room, rather than the color.",
         "exampleMeaning": "Near which door?"
       },
       {
         "id": "place",
-        "prompt": "Après la précision, où faut-il poser le carnet ?",
+        "prompt": "Après la précision, où faut-il poser le carnet ?",
         "meaning": "After the clarification, where should the notebook be put?",
         "choices": [
           {
@@ -332,8 +332,8 @@ export const frenchRoomsLessons = [
           }
         ],
         "guided": "La réponse précise une table et une pièce.",
-        "hint": "Lis la précision : quelle pièce est nommée ?",
-        "example": "Autre précision : sur la petite table de la cuisine.",
+        "hint": "Lis la précision : quelle pièce est nommée ?",
+        "example": "Autre précision : sur la petite table de la cuisine.",
         "guidedMeaning": "The reply specifies a table and a room.",
         "hintMeaning": "Read the clarification: which room is named?",
         "exampleMeaning": "Another clarification: on the small kitchen table."
@@ -368,11 +368,11 @@ export const frenchRoomsLessons = [
         "objects": [
           [
             "etagere",
-            "l'étagère"
+            "l’étagère"
           ],
           [
             "tasse",
-            "la tasse · sur l'étagère"
+            "la tasse · sur l’étagère"
           ],
           [
             "petite-table",
@@ -396,7 +396,7 @@ export const frenchRoomsLessons = [
       },
       {
         "id": "entree",
-        "name": "l'entrée",
+        "name": "l’entrée",
         "objects": [
           [
             "porte",
@@ -416,13 +416,13 @@ export const frenchRoomsLessons = [
     "id": "return",
     "title": "Un retour et un projet",
     "intro": "Je viens de rentrer. Je viens de poser le carnet sur la table du salon. Je vais chercher le sac dans la chambre. Ensuite, je vais revenir dans le salon.",
-    "teach": "Passé récent : venir de + infinitif. Ici : je viens de rentrer. Futur proche : aller + infinitif. Ici : je vais chercher. Devant une voyelle, de devient d' : Je viens d'arriver.",
+    "teach": "« Je viens de rentrer » indique une action très récente. « Je vais chercher » indique une action à venir. Devant une voyelle, « de » devient « d’ » : « Je viens d’arriver. »",
     "meaning": "I have just come home. I have just put the notebook on the living-room table. I am going to get the bag in the bedroom. Then I am going to return to the living room.",
-    "teachMeaning": "Recent past: venir de plus an infinitive; here, je viens de rentrer. Near future: aller plus an infinitive; here, je vais chercher. Before a vowel, de becomes d’: Je viens d’arriver means I have just arrived.",
+    "teachMeaning": "“I have just come home” describes a very recent action. “I am going to get” describes a coming action. Before a vowel, “de” becomes “d’”: “Je viens d’arriver” means I have just arrived.",
     "items": [
       {
         "id": "plan",
-        "prompt": "Quelle action est prévue ?",
+        "prompt": "Quelle action est prévue ?",
         "meaning": "Which action is planned?",
         "choices": [
           {
@@ -447,8 +447,8 @@ export const frenchRoomsLessons = [
             "feedback": "Ce choix correspond au message et au plan."
           }
         ],
-        "guided": "Je viens de rentrer : juste avant maintenant. Je vais chercher : un projet.",
-        "hint": "Cherche les mots « je vais ».",
+        "guided": "Je viens de rentrer : juste avant maintenant. Je vais chercher : un projet.",
+        "hint": "Cherche les mots « je vais ».",
         "example": "Je viens de lire le message. Je vais répondre.",
         "guidedMeaning": "I have just come home: just before now. I am going to get something: a plan.",
         "hintMeaning": "Look for the words “je vais”.",
@@ -456,12 +456,12 @@ export const frenchRoomsLessons = [
       },
       {
         "id": "new-place",
-        "prompt": "Où vas-tu chercher le sac maintenant ?",
+        "prompt": "Où vas-tu chercher le sac maintenant ?",
         "meaning": "Where are you going to look for the bag now?",
         "choices": [
           {
             "id": "choice-1",
-            "text": "dans l'entrée",
+            "text": "dans l’entrée",
             "meaning": "in the entrance hall",
             "outcome": "match",
             "feedback": "Ce choix correspond au message et au plan."
@@ -518,11 +518,11 @@ export const frenchRoomsLessons = [
         "objects": [
           [
             "etagere",
-            "l'étagère"
+            "l’étagère"
           ],
           [
             "tasse",
-            "la tasse · sur l'étagère"
+            "la tasse · sur l’étagère"
           ],
           [
             "petite-table",
@@ -546,7 +546,7 @@ export const frenchRoomsLessons = [
       },
       {
         "id": "entree",
-        "name": "l'entrée",
+        "name": "l’entrée",
         "objects": [
           [
             "porte",
@@ -559,8 +559,8 @@ export const frenchRoomsLessons = [
         ]
       }
     ],
-    "newMessage": "Le sac n'est plus à côté du lit. Je viens de le mettre dans l'entrée, derrière la porte.",
+    "newMessage": "Le sac n’est plus à côté du lit. Je viens de le mettre dans l’entrée, derrière la porte.",
     "newMeaning": "The bag is no longer beside the bed. I have just put it in the entrance hall, behind the door.",
-    "writing": "Écris un court message : une action récente et un projet. Tes mots sont lus par une personne, sans note automatique."
+    "writing": "Écris un court message : une action récente et un projet. Tes mots sont lus par une personne, sans note automatique."
   }
 ];

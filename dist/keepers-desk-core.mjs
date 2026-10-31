@@ -8,7 +8,7 @@ const mechanical=['number','budget','rule','ratio','share'];
 const outcomes=['match','different','interpretation','uncheckable','skipped'];
 const format={number:'Enter a whole number, such as 130.',ratio:'Use two whole numbers separated by a colon, such as 1:3.',share:'Use a fraction, decimal or percent, such as 1/4, 0.25 or 25%.',rule:'Use whole numbers, L, +, −, × and brackets to write a linear rule.'};
 const large='That expression is too large to check here. Use a shorter linear rule with whole numbers.';
-const mismatch='This answer does not match the supplied model yet. Compare the quantities or open a hint.';
+const mismatch='This answer does not match the model yet. Compare the quantities or open a hint.';
 const id=x=>text(x,80)&&/^[a-zA-Z0-9][a-zA-Z0-9-]*$/.test(x);
 const safePair=p=>p.every(n=>n<=BigInt(Number.MAX_SAFE_INTEGER)&&n>=-BigInt(Number.MAX_SAFE_INTEGER));
 function groupedNumber(s){return /^(?:\d+|\d{1,3}(?:,\d{3})+)$/.test(s)?s.replaceAll(',',''):null;}
@@ -41,7 +41,7 @@ export function checkDeskValue(source,taskId,value){
  else if(t.id==='1b')answer=m.causeway.setup+m.causeway.rate*m.causeway.length;
  else if(t.id==='1d'){const rate=m.causeway.rate-m.bridge.rate;if(rate===0)return result('uncheckable','These saved rules do not have one crossing length.','model');answer=(m.bridge.setup-m.causeway.setup)/rate;}
  else return result('uncheckable','This saved numerical question has no checker.','missing');
- if(n===answer)return result('match','This answer matches the supplied model.');
+ if(n===answer)return result('match','This answer matches the model.');
  let reply=mismatch;
  if(t.id==='1a'||t.id==='1b'){const a=t.id==='1a'?m.bridge:m.causeway;if(n===a.rate*a.length)reply='That is the per-meter part. Include the setup once.';else if(n===a.setup+a.rate)reply='That is one meter. Compare it with this crossing’s length.';else if(n===(a.setup+a.rate)*a.length)reply='The setup is paid once, not for every meter.';}
  if(t.id==='1d'){if(n===m.bridge.setup-m.causeway.setup)reply='That is the difference in setup costs. How many extra meters use it up?';else if(n===m.causeway.rate-m.bridge.rate)reply='That is the extra cost per meter. Compare it with the setup difference.';else if(n===m.bridge.setup+m.bridge.rate*answer)reply='That is a shared cost. The question asks for the length.';}
@@ -52,16 +52,16 @@ export function checkDeskValue(source,taskId,value){
  const a=m.bridge.setup+m.bridge.rate*m.bridge.length,b=m.causeway.setup+m.causeway.rate*m.causeway.length,expected={bridge:a<=m.fund?'fits':'not',causeway:b<=m.fund?'fits':'not',both:a+b<=m.fund?'fits':'not'},matches=Object.fromEntries(Object.keys(expected).map(k=>[k,value[k]===expected[k]]));
  return {...result(Object.values(matches).every(Boolean)?'match':'different',Object.entries(matches).map(([k,match])=>`${k==='both'?'Both together':k==='bridge'?'Footbridge':'Causeway'}: ${match?'matches the fund comparison':'compare this total with the fund'}.`).join(' ')),comparisons:matches};
  }
- if(t.kind==='rule'){const v=parseAffine(value);if(!v.ok)return result('uncheckable',v.error,'format');const plan=m[t.plan];return v.coefficient===plan.rate&&v.constant===plan.setup?result('match','This answer matches the supplied model.'):result('different',mismatch+' The fixed part is paid once; the coefficient is how much one extra meter adds.');}
+ if(t.kind==='rule'){const v=parseAffine(value);if(!v.ok)return result('uncheckable',v.error,'format');const plan=m[t.plan];return v.coefficient===plan.rate&&v.constant===plan.setup?result('match','This answer matches the model.'):result('different',mismatch+' The fixed part is paid once; the coefficient is how much one extra meter adds.');}
  if(t.kind==='ratio'){
  const v=parseRatio(value);if(!v||v.a===0n&&v.b===0n)return result('uncheckable',format.ratio,'format');const day=m[t.day],a=BigInt(day.carts),b=BigInt(day.walkers),g=gcd(a,b);
- if(v.a===a/g&&v.b===b/g)return result('match','This answer matches the supplied model.');
+ if(v.a===a/g&&v.b===b/g)return result('match','This answer matches the model.');
  if(v.a*b===v.b*a)return result('different','Those parts give an equivalent ratio. Can both still be divided by the same common factor?');
  if(v.a*a===v.b*b)return result('different','Farm carts were asked for first, so farm carts go first: carts to walkers.');
  if(a-v.a>0n&&a-v.a===b-v.b)return result('different','Taking the same amount off both parts changes the comparison. Divide both parts by the same number instead.');
  return result('different',mismatch);
  }
- if(t.kind==='share'){const v=parseShare(value);if(!v.ok)return result('uncheckable',v.error,'format');const day=m[t.day],a=BigInt(day.carts),b=BigInt(day.walkers);if(v.numerator*(a+b)===v.denominator*a)return result('match','This answer matches the supplied model.');if(v.numerator*b===v.denominator*a)return result('different','That compares carts with walkers. Which count includes everyone?');return result('different',mismatch);}
+ if(t.kind==='share'){const v=parseShare(value);if(!v.ok)return result('uncheckable',v.error,'format');const day=m[t.day],a=BigInt(day.carts),b=BigInt(day.walkers);if(v.numerator*(a+b)===v.denominator*a)return result('match','This answer matches the model.');if(v.numerator*b===v.denominator*a)return result('different','That compares carts with walkers. Which count includes everyone?');return result('different',mismatch);}
  if(t.kind==='choice'){const c=t.choices.find(c=>c.id===value);return c?result('interpretation',c.reply||'Your reading is kept.'):result('uncheckable','Choose one reading to keep.','format');}
  if(t.kind==='multi'){if(!Array.isArray(value)||value.some(x=>!t.choices.some(c=>c.id===x)))return result('uncheckable','Choose any of these questions, or keep none for now.','format');return result('interpretation',value.length?value.map(x=>t.choices.find(c=>c.id===x).reply).join(' '):'No questions chosen yet; you can add one later.');}
  if(t.kind==='source'){

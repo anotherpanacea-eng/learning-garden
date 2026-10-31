@@ -344,3 +344,2293 @@ export const marketSignsCopy=Object.freeze({
  ]
 });
 export function marketSignsCollection(){return structuredClone(initial);}
+
+// Spec338: original selected263 ending material, frozen per notebook on first use.
+const endingInitial={
+  "v": 1,
+  "story": {
+    "hook": "The baker wants a second board, saying how his bread is sold. Pip paints it fast. Dot brings the dictionary again.",
+    "short": "Pip paints FRESHLEY BAKED and RAPPED IN PAPER. Fresh just adds -ly. And the baker wrapped his bread. That word starts with wr.",
+    "longer": "The baker wants a second board, to say how his bread is sold. Pip paints it in big letters.\n\nFRESHLEY BAKED. RAPPED IN PAPER.\n\n\"Fresh, freshly,\" says {guide}. \"Usually you just add -ly. No e.\"\n\nPip fixes it. Then the baker frowns at the second line. \"I didn't rap it. I don't knock on my bread. I wrapped it.\"\n\n\"Same word,\" says Pip.\n\n\"Different word,\" says the baker. \"Look it up.\"\n\nPip opens the dictionary at ra. Rap: to knock quickly and sharply. \"That's not it.\"\n\n\"Try wr,\" says Dot. \"Like write.\"\n\nPip turns to the w pages. Wrap: to cover something with paper or cloth.\n\n\"It was hiding under w the whole time,\" he says.\n\nThe board goes up: FRESHLY BAKED. WRAPPED IN PAPER. The baker hands Pip a roll. It is warm, not worm.",
+    "note": "Wrap, write, wren and wrong all start with wr. Knock, knot and knife start with kn. If a word isn't where you first look, try another way to spell its start, then look again."
+  },
+  "roots": [
+    {
+      "id": "fresh",
+      "text": "fresh"
+    },
+    {
+      "id": "neat",
+      "text": "neat"
+    },
+    {
+      "id": "usual",
+      "text": "usual"
+    },
+    {
+      "id": "complete",
+      "text": "complete"
+    },
+    {
+      "id": "happy",
+      "text": "happy"
+    },
+    {
+      "id": "easy",
+      "text": "easy"
+    },
+    {
+      "id": "busy",
+      "text": "busy"
+    },
+    {
+      "id": "gentle",
+      "text": "gentle"
+    },
+    {
+      "id": "simple",
+      "text": "simple"
+    },
+    {
+      "id": "danger",
+      "text": "danger"
+    },
+    {
+      "id": "poison",
+      "text": "poison"
+    },
+    {
+      "id": "mountain",
+      "text": "mountain"
+    },
+    {
+      "id": "fame",
+      "text": "fame"
+    },
+    {
+      "id": "glory",
+      "text": "glory"
+    },
+    {
+      "id": "vary",
+      "text": "vary"
+    },
+    {
+      "id": "joy",
+      "text": "joy"
+    },
+    {
+      "id": "inform",
+      "text": "inform"
+    },
+    {
+      "id": "prepare",
+      "text": "prepare"
+    },
+    {
+      "id": "admire",
+      "text": "admire"
+    },
+    {
+      "id": "invite",
+      "text": "invite"
+    },
+    {
+      "id": "imagine",
+      "text": "imagine"
+    },
+    {
+      "id": "explore",
+      "text": "explore"
+    },
+    {
+      "id": "dramatic",
+      "text": "dramatic"
+    },
+    {
+      "id": "basic",
+      "text": "basic"
+    }
+  ],
+  "endings": [
+    {
+      "id": "ly",
+      "text": "ly",
+      "label": "-ly"
+    },
+    {
+      "id": "ous",
+      "text": "ous",
+      "label": "-ous"
+    },
+    {
+      "id": "ation",
+      "text": "ation",
+      "label": "-ation"
+    }
+  ],
+  "tools": [
+    "just-add",
+    "drop-e",
+    "y-to-i",
+    "le-to-ly",
+    "ic-to-ically"
+  ],
+  "joins": [
+    {
+      "id": "fresh-ly",
+      "rootId": "fresh",
+      "endingId": "ly",
+      "toolId": "just-add",
+      "word": "freshly"
+    },
+    {
+      "id": "neat-ly",
+      "rootId": "neat",
+      "endingId": "ly",
+      "toolId": "just-add",
+      "word": "neatly"
+    },
+    {
+      "id": "usual-ly",
+      "rootId": "usual",
+      "endingId": "ly",
+      "toolId": "just-add",
+      "word": "usually"
+    },
+    {
+      "id": "complete-ly",
+      "rootId": "complete",
+      "endingId": "ly",
+      "toolId": "just-add",
+      "word": "completely"
+    },
+    {
+      "id": "happy-ly",
+      "rootId": "happy",
+      "endingId": "ly",
+      "toolId": "y-to-i",
+      "word": "happily"
+    },
+    {
+      "id": "easy-ly",
+      "rootId": "easy",
+      "endingId": "ly",
+      "toolId": "y-to-i",
+      "word": "easily"
+    },
+    {
+      "id": "busy-ly",
+      "rootId": "busy",
+      "endingId": "ly",
+      "toolId": "y-to-i",
+      "word": "busily"
+    },
+    {
+      "id": "gentle-ly",
+      "rootId": "gentle",
+      "endingId": "ly",
+      "toolId": "le-to-ly",
+      "word": "gently"
+    },
+    {
+      "id": "simple-ly",
+      "rootId": "simple",
+      "endingId": "ly",
+      "toolId": "le-to-ly",
+      "word": "simply"
+    },
+    {
+      "id": "danger-ous",
+      "rootId": "danger",
+      "endingId": "ous",
+      "toolId": "just-add",
+      "word": "dangerous"
+    },
+    {
+      "id": "poison-ous",
+      "rootId": "poison",
+      "endingId": "ous",
+      "toolId": "just-add",
+      "word": "poisonous"
+    },
+    {
+      "id": "mountain-ous",
+      "rootId": "mountain",
+      "endingId": "ous",
+      "toolId": "just-add",
+      "word": "mountainous"
+    },
+    {
+      "id": "fame-ous",
+      "rootId": "fame",
+      "endingId": "ous",
+      "toolId": "drop-e",
+      "word": "famous"
+    },
+    {
+      "id": "glory-ous",
+      "rootId": "glory",
+      "endingId": "ous",
+      "toolId": "y-to-i",
+      "word": "glorious"
+    },
+    {
+      "id": "vary-ous",
+      "rootId": "vary",
+      "endingId": "ous",
+      "toolId": "y-to-i",
+      "word": "various"
+    },
+    {
+      "id": "joy-ous",
+      "rootId": "joy",
+      "endingId": "ous",
+      "toolId": "just-add",
+      "word": "joyous"
+    },
+    {
+      "id": "inform-ation",
+      "rootId": "inform",
+      "endingId": "ation",
+      "toolId": "just-add",
+      "word": "information"
+    },
+    {
+      "id": "prepare-ation",
+      "rootId": "prepare",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "preparation"
+    },
+    {
+      "id": "admire-ation",
+      "rootId": "admire",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "admiration"
+    },
+    {
+      "id": "invite-ation",
+      "rootId": "invite",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "invitation"
+    },
+    {
+      "id": "imagine-ation",
+      "rootId": "imagine",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "imagination"
+    },
+    {
+      "id": "explore-ation",
+      "rootId": "explore",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "exploration"
+    },
+    {
+      "id": "dramatic-ly",
+      "rootId": "dramatic",
+      "endingId": "ly",
+      "toolId": "ic-to-ically",
+      "word": "dramatically"
+    },
+    {
+      "id": "basic-ly",
+      "rootId": "basic",
+      "endingId": "ly",
+      "toolId": "ic-to-ically",
+      "word": "basically"
+    }
+  ],
+  "shelves": {
+    "noRoot": [
+      {
+        "id": "enormous",
+        "word": "enormous",
+        "note": "These -ous words have no obvious root word here to find."
+      },
+      {
+        "id": "jealous",
+        "word": "jealous",
+        "note": "These -ous words have no obvious root word here to find."
+      }
+    ],
+    "odd": [
+      {
+        "id": "truly",
+        "word": "truly",
+        "note": "true drops its e."
+      },
+      {
+        "id": "publicly",
+        "word": "publicly",
+        "note": "just -ly."
+      },
+      {
+        "id": "courageous",
+        "word": "courageous",
+        "note": "courage keeps its e."
+      }
+    ]
+  },
+  "hints": [
+    {
+      "rootId": "complete",
+      "toolId": "drop-e",
+      "text": "Drop the e before -ly: -ly starts with a consonant. Keep the e: completely."
+    },
+    {
+      "rootId": "happy",
+      "toolId": "just-add",
+      "text": "Just add on happy: Happy ends in a consonant, then y. Try y to i."
+    },
+    {
+      "rootId": "joy",
+      "toolId": "y-to-i",
+      "text": "y to i on joy: A vowel comes before this y. Keep it: joyous."
+    },
+    {
+      "rootId": "gentle",
+      "toolId": "just-add",
+      "text": "Just add on gentle: Gentle ends in a consonant, then le. Try le to ly."
+    }
+  ],
+  "cards": [
+    {
+      "id": "card-10",
+      "title": "-ly tells how",
+      "text": "-ly turns a describing word into a word that tells how or how often: fresh, freshly; neat, neatly. It starts with a consonant, so usually just add it.",
+      "example": "usual + -ly",
+      "steps": [
+        "Usual ends in l.",
+        "-ly starts with l. Nothing changes.",
+        "Usually, with two l's."
+      ]
+    },
+    {
+      "id": "card-11",
+      "title": "When -ly changes the word",
+      "text": "A word ending in a consonant and y usually changes y to i: happy, happily. A word ending in a consonant and le usually swaps le for ly: gentle, gently.",
+      "example": "simple + -ly",
+      "steps": [
+        "Simple ends in p, then le.",
+        "Swap le for ly.",
+        "Simply."
+      ]
+    },
+    {
+      "id": "card-12",
+      "title": "-ous",
+      "text": "-ous makes a describing word: danger, dangerous. A final e usually drops: fame, famous. Y after a consonant usually becomes i: glory, glorious. Some have no obvious root word here.",
+      "example": "glory + -ous",
+      "steps": [
+        "Glory ends in r, then y.",
+        "Change y to i.",
+        "Glorious."
+      ]
+    },
+    {
+      "id": "card-13",
+      "title": "-ation",
+      "text": "-ation turns a doing word into a naming word: inform, information. It starts with a vowel letter, so a final e usually drops first: invite, invitation.",
+      "example": "prepare + -ation",
+      "steps": [
+        "Prepare ends in r, then e.",
+        "-ation starts with a vowel letter. Drop the e.",
+        "Preparation."
+      ]
+    },
+    {
+      "id": "card-14",
+      "title": "Spellings to learn",
+      "text": "Some spellings are just learned. Gym and myth have y. Young and touch have ou. Treasure and measure end -sure. Picture and nature end -ture.",
+      "example": "BURIED TREA____",
+      "steps": [
+        "Treasure is in the measure family.",
+        "That family ends -sure.",
+        "Treasure."
+      ]
+    },
+    {
+      "id": "card-21",
+      "title": "-ic words",
+      "text": "Words ending in -ic usually add -ally, not just -ly: dramatic, dramatically; basic, basically. Publicly is the odd one out.",
+      "example": "basic + -ly",
+      "steps": [
+        "Basic ends in -ic.",
+        "Add -ally.",
+        "Basically."
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "v": 1,
+      "id": "C1",
+      "kind": "choice",
+      "title": "Fresh bread",
+      "prompt": "The baker's board: bread, ___ baked.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "freshly"
+        },
+        {
+          "id": "b",
+          "text": "freshley",
+          "tag": "ly-spelled-ley"
+        },
+        {
+          "id": "c",
+          "text": "freshlee",
+          "tag": "ly-spelled-lee"
+        }
+      ],
+      "steps": [
+        "Fresh ends in sh.",
+        "-ly starts with a consonant.",
+        "Just add it."
+      ],
+      "hint": "Write fresh. Then add the two letters of -ly.",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Fresh + -ly = freshly. Nothing changes.",
+      "different": {
+        "b": "The ending is -ly. No e.",
+        "c": "The ending is -ly: l, then y."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-10",
+          "title": "-ly tells how",
+          "text": "-ly turns a describing word into a word that tells how or how often: fresh, freshly; neat, neatly. It starts with a consonant, so usually just add it.",
+          "example": "usual + -ly",
+          "steps": [
+            "Usual ends in l.",
+            "-ly starts with l. Nothing changes.",
+            "Usually, with two l's."
+          ]
+        }
+      ],
+      "tag": "fresh",
+      "tagLabel": "Root word",
+      "key": "a"
+    },
+    {
+      "v": 1,
+      "id": "C2",
+      "kind": "choice",
+      "title": "A happy painter",
+      "prompt": "Pip ___ paints the last sign.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "happyly",
+          "tag": "y-not-changed"
+        },
+        {
+          "id": "b",
+          "text": "happily"
+        },
+        {
+          "id": "c",
+          "text": "happly",
+          "tag": "letter-dropped"
+        }
+      ],
+      "steps": [],
+      "hint": "What letter comes just before the y in happy?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Consonant, then y: change y to i. Happily.",
+      "different": {
+        "a": "Happy ends in a consonant, then y. Change y to i.",
+        "c": "Don't lose the letter. Change y to i, then add -ly."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-11",
+          "title": "When -ly changes the word",
+          "text": "A word ending in a consonant and y usually changes y to i: happy, happily. A word ending in a consonant and le usually swaps le for ly: gentle, gently.",
+          "example": "simple + -ly",
+          "steps": [
+            "Simple ends in p, then le.",
+            "Swap le for ly.",
+            "Simply."
+          ]
+        }
+      ],
+      "tag": "happy",
+      "tagLabel": "Root word",
+      "key": "b"
+    },
+    {
+      "v": 1,
+      "id": "C3",
+      "kind": "choice",
+      "title": "Handle gently",
+      "prompt": "The sign at the egg stall: handle ___.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "gentlely",
+          "tag": "le-kept"
+        },
+        {
+          "id": "b",
+          "text": "gentley",
+          "tag": "le-kept"
+        },
+        {
+          "id": "c",
+          "text": "gently"
+        }
+      ],
+      "steps": [],
+      "hint": "How does gentle end?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Gentle ends in t, then le. Swap le for ly: gently.",
+      "different": {
+        "a": "Gentle ends in a consonant, then le. Swap le for ly.",
+        "b": "Swap le for ly, with no e."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-11",
+          "title": "When -ly changes the word",
+          "text": "A word ending in a consonant and y usually changes y to i: happy, happily. A word ending in a consonant and le usually swaps le for ly: gentle, gently.",
+          "example": "simple + -ly",
+          "steps": [
+            "Simple ends in p, then le.",
+            "Swap le for ly.",
+            "Simply."
+          ]
+        }
+      ],
+      "tag": "gentle",
+      "tagLabel": "Root word",
+      "key": "c"
+    },
+    {
+      "v": 1,
+      "id": "C4",
+      "kind": "choice",
+      "title": "Famous honey",
+      "prompt": "The honey sign: ___ Willowbank Honey.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "Fameous",
+          "tag": "e-kept"
+        },
+        {
+          "id": "b",
+          "text": "Famous"
+        },
+        {
+          "id": "c",
+          "text": "Famus",
+          "tag": "ous-spelled-us"
+        }
+      ],
+      "steps": [],
+      "hint": "Does -ous start with a vowel letter?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Fame drops its e before -ous: famous.",
+      "different": {
+        "a": "-ous starts with a vowel letter, so fame drops its e.",
+        "c": "The ending is -ous: o, u, s."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-12",
+          "title": "-ous",
+          "text": "-ous makes a describing word: danger, dangerous. A final e usually drops: fame, famous. Y after a consonant usually becomes i: glory, glorious. Some have no obvious root word here.",
+          "example": "glory + -ous",
+          "steps": [
+            "Glory ends in r, then y.",
+            "Change y to i.",
+            "Glorious."
+          ]
+        }
+      ],
+      "tag": "fame",
+      "tagLabel": "Root word",
+      "key": "b"
+    },
+    {
+      "v": 1,
+      "id": "C5",
+      "kind": "choice",
+      "title": "Your invitation",
+      "prompt": "You have an ___ to the Market Fair.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "invitation"
+        },
+        {
+          "id": "b",
+          "text": "inviteation",
+          "tag": "e-kept"
+        },
+        {
+          "id": "c",
+          "text": "invitasion",
+          "tag": "tion-spelled-sion"
+        }
+      ],
+      "steps": [],
+      "hint": "What happens to a final e before a vowel letter?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Invite drops its e, then adds -ation: invitation.",
+      "different": {
+        "b": "-ation starts with a vowel letter. Invite drops its e first.",
+        "c": "This ending is -ation: a, t, i, o, n."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-13",
+          "title": "-ation",
+          "text": "-ation turns a doing word into a naming word: inform, information. It starts with a vowel letter, so a final e usually drops first: invite, invitation.",
+          "example": "prepare + -ation",
+          "steps": [
+            "Prepare ends in r, then e.",
+            "-ation starts with a vowel letter. Drop the e.",
+            "Preparation."
+          ]
+        }
+      ],
+      "tag": "invite",
+      "tagLabel": "Root word",
+      "key": "a"
+    },
+    {
+      "v": 1,
+      "id": "C6",
+      "kind": "match",
+      "title": "Learned spellings",
+      "prompt": "Fill each gap with -sure, -ture, ou or y.",
+      "parts": [
+        {
+          "id": "trea",
+          "text": "trea___"
+        },
+        {
+          "id": "mea",
+          "text": "mea___"
+        },
+        {
+          "id": "pic",
+          "text": "pic___"
+        },
+        {
+          "id": "na",
+          "text": "na___"
+        },
+        {
+          "id": "young",
+          "text": "y__ng"
+        },
+        {
+          "id": "gym",
+          "text": "g_m"
+        }
+      ],
+      "choices": [
+        {
+          "id": "sure",
+          "text": "-sure"
+        },
+        {
+          "id": "ture",
+          "text": "-ture"
+        },
+        {
+          "id": "ou",
+          "text": "ou"
+        },
+        {
+          "id": "y",
+          "text": "y"
+        }
+      ],
+      "steps": [],
+      "hint": "Which family is the word in?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "These spellings are learned in families: measure, picture, young, gym.",
+      "different": {
+        "general": "Treasure is in the measure family: -sure. Young has ou, like touch."
+      },
+      "contextLabel": "A true thing about language",
+      "teach": [
+        {
+          "id": "card-14",
+          "title": "Spellings to learn",
+          "text": "Some spellings are just learned. Gym and myth have y. Young and touch have ou. Treasure and measure end -sure. Picture and nature end -ture.",
+          "example": "BURIED TREA____",
+          "steps": [
+            "Treasure is in the measure family.",
+            "That family ends -sure.",
+            "Treasure."
+          ]
+        }
+      ],
+      "key": {
+        "trea": "sure",
+        "mea": "sure",
+        "pic": "ture",
+        "na": "ture",
+        "young": "ou",
+        "gym": "y"
+      },
+      "matchCopy": {
+        "instruction": "Choose a word part, then the spelling that fills its gap.",
+        "destinationPrompt": "Choose a spelling.",
+        "destinationLabel": "Spellings"
+      }
+    },
+    {
+      "v": 1,
+      "id": "C7",
+      "kind": "choice",
+      "title": "A dramatic bow",
+      "prompt": "Bramble bows ___ at the end of the Show.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "dramaticly",
+          "tag": "ic-just-ly"
+        },
+        {
+          "id": "b",
+          "text": "dramatically"
+        },
+        {
+          "id": "c",
+          "text": "drammatically",
+          "tag": "extra-letter"
+        }
+      ],
+      "steps": [],
+      "hint": "Dramatic ends in -ic. What do -ic words add?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "-ic words usually add -ally: dramatically. Publicly is the odd one out.",
+      "different": {
+        "a": "Words ending in -ic usually add -ally.",
+        "c": "Dramatic has one m. Keep the root as it is."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-21",
+          "title": "-ic words",
+          "text": "Words ending in -ic usually add -ally, not just -ly: dramatic, dramatically; basic, basically. Publicly is the odd one out.",
+          "example": "basic + -ly",
+          "steps": [
+            "Basic ends in -ic.",
+            "Add -ally.",
+            "Basically."
+          ]
+        }
+      ],
+      "tag": "dramatic",
+      "tagLabel": "Root word",
+      "key": "b"
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Suffix",
+      "text": "letters added at the end of a word, like -ly in freshly. Also called an ending."
+    },
+    {
+      "term": "Root word",
+      "text": "a word before any prefix or suffix is added, like spell in misspell."
+    },
+    {
+      "term": "Doing word",
+      "text": "a word for an action, like invite. Also called a verb."
+    },
+    {
+      "term": "Naming word",
+      "text": "a word for a thing or an idea, like invitation. Also called a noun."
+    },
+    {
+      "term": "Describing word",
+      "text": "a word that tells what something is like, like famous. Also called an adjective."
+    },
+    {
+      "term": "Vowels",
+      "text": "the letters a, e, i, o and u."
+    },
+    {
+      "term": "Consonants",
+      "text": "the other letters."
+    },
+    {
+      "term": "Tool",
+      "text": "one way to join a root word and an ending, like drop the e."
+    }
+  ],
+  "offscreen": {
+    "text": "The grown-up reads out four sign words: freshly, gently, famous, invitation. You write them. Check them together in a dictionary.",
+    "grownup": "Paper only. Nothing is photographed, scored or saved."
+  },
+  "grownup": "This bench explores three endings, -ly, -ous and -ation, and the small changes a root word can make when one is added: dropping an e before a vowel letter, changing y to i after a consonant, swapping le for ly, and -ic adding -ally. It also shows a few spellings that are learned in families (-sure, -ture, ou, y). These are usual patterns, not laws, and the odd-ones shelf shows words that keep their own way. All checks are guided practice with supplied words, not independent spelling assessment. An unexpected combination may still be a real word; check a bigger dictionary together. No sound samples play here. The printed -sure/-ture groups also have sound contrasts; this slice does not teach or test those contrasts. The English curriculum also names -sion (television, division); it is told apart from -tion by sound, so it is not taught on screen here. British spelling writes humour, which drops its u before -ous (humorous); US humor needs no change. No story chapter is unlocked."
+};
+export const marketEndingCopy=Object.freeze({
+  "arrival": "Make an ending sign",
+  "header": "Pick a word and an ending. Then pick a tool: just add, drop the e, y to i, or le to ly. For -ic words there is a harder tool: ic to ically.",
+  "rootLabel": "Root word",
+  "endingLabel": "Ending",
+  "rootPlaceholder": "Choose a root word",
+  "endingPlaceholder": "Choose an ending",
+  "toolsLabel": "Tools",
+  "harderLabel": "A harder tool",
+  "keep": "Keep this sign",
+  "clear": "Clear my sign",
+  "keptLabel": "Kept ending signs",
+  "reopen": "Reopen this sign",
+  "jobsLabel": "Ending sign jobs",
+  "storyLabel": "The bakery board story",
+  "storyContextLabel": "A story from Willowbank",
+  "noteLabel": "A true thing about language",
+  "storyBook": "Dot uses a bigger dictionary in the story. The tiny book here has only selected pages.",
+  "back": "Back to Market Signs",
+  "wordGarden": "Word Garden",
+  "propBox": "The Prop Box",
+  "incomplete": "Choose a root word, an ending and a tool first.",
+  "paused": "This older sign note does not match its own tool. It is kept as it was.",
+  "benchUnavailable": "This earlier ending bench cannot be played here. Its original stays in Notes. Other jobs and benches are still open.",
+  "unavailableTool": "This earlier tool is not available here. Its original stays in Notes.",
+  "materialUnavailable": "Some earlier material cannot be opened here. Its original stays in Notes.",
+  "kept": "Your sign is kept. You can make another.",
+  "alreadyKept": "This sign is already on your shelf.",
+  "cleared": "Your waiting sign is clear. Your kept signs are still here.",
+  "oddLabel": "Odd ones",
+  "noRootLabel": "No obvious root word here",
+  "noRootLine": "These -ous words have no obvious root word here to find.",
+  "oddLine": "Spelling rules usually work. These words keep their own way. A dictionary has the last word.",
+  "every": "Spelling rules usually work. A dictionary has the last word.",
+  "made": "This tool makes {made}.",
+  "mismatch": "Look at how {root} ends, and the first letter of the ending. Then try {tool}.",
+  "discovery": "This tool makes {made}. This bench has no note for {root} with {ending}. It could be a word to wonder about. Check a bigger dictionary together.",
+  "fit": "{word}. {rule}",
+  "rootPartLabel": "Root letters",
+  "endingPartLabel": "Ending letters",
+  "cannot": {
+    "drop-e": "{root} does not end in e.",
+    "y-to-i": "{root} does not end in y.",
+    "le-to-ly": "This tool is for -ly, with a root that ends in le.",
+    "ic-to-ically": "This tool is for -ly, with a root that ends in ic."
+  },
+  "rules": {
+    "just-add": "Nothing changes.",
+    "drop-e": "The e drops before a vowel letter.",
+    "y-to-i": "A consonant comes before the y, so y changes to i.",
+    "le-to-ly": "Swap le for ly.",
+    "ic-to-ically": "-ic words usually add -ally."
+  },
+  "changes": {
+    "drop-e": "The e came off.",
+    "y-to-i": "The y became i.",
+    "le-to-ly": "The le became ly.",
+    "none": "The root keeps every letter."
+  },
+  "toolLabels": {
+    "just-add": "just add",
+    "drop-e": "drop the e",
+    "y-to-i": "y to i",
+    "le-to-ly": "le to ly",
+    "ic-to-ically": "ic to ically"
+  }
+});
+export function marketEndingCollection(){return structuredClone(endingInitial);}
+
+// Spec339: original finite written-pattern and meaning material; no sound samples.
+const patternInitial=Object.freeze({
+  "v": 1,
+  "families": [
+    {
+      "id": "ball",
+      "label": "The ball family",
+      "words": [
+        "all",
+        "ball",
+        "call",
+        "small",
+        "stall",
+        "wall",
+        "walk",
+        "talk",
+        "chalk"
+      ]
+    },
+    {
+      "id": "monday",
+      "label": "The Monday family",
+      "words": [
+        "Monday",
+        "money",
+        "honey",
+        "nothing",
+        "other"
+      ]
+    },
+    {
+      "id": "key",
+      "label": "The key family",
+      "words": [
+        "key",
+        "valley",
+        "donkey",
+        "honey",
+        "money"
+      ]
+    },
+    {
+      "id": "after-w",
+      "label": "The after-w families",
+      "words": [
+        "watch",
+        "want",
+        "swan",
+        "war",
+        "warm",
+        "swarm",
+        "word",
+        "work",
+        "world",
+        "worm"
+      ]
+    },
+    {
+      "id": "tion",
+      "label": "The -tion chunk",
+      "words": [
+        "station",
+        "section",
+        "motion",
+        "fiction"
+      ]
+    }
+  ],
+  "letters": [
+    {
+      "id": "a",
+      "text": "A"
+    },
+    {
+      "id": "o",
+      "text": "O"
+    },
+    {
+      "id": "ar",
+      "text": "AR"
+    },
+    {
+      "id": "or",
+      "text": "OR"
+    },
+    {
+      "id": "ey",
+      "text": "EY"
+    },
+    {
+      "id": "tion",
+      "text": "TION"
+    }
+  ],
+  "cases": [
+    {
+      "id": "small",
+      "title": "Small apples",
+      "prefix": "SM",
+      "suffix": "LL APPLES",
+      "targetLettersId": "a",
+      "targetLine": "SMALL APPLES",
+      "familyIds": [
+        "ball"
+      ],
+      "clue": "The apples are small.",
+      "familyNote": "Small belongs with ball, talk and walk.",
+      "letterNote": "Small has a before l.",
+      "pictureId": "apples",
+      "pictureAlt": "A basket of small apples."
+    },
+    {
+      "id": "monday",
+      "title": "Open Monday",
+      "prefix": "OPEN M",
+      "suffix": "NDAY",
+      "targetLettersId": "o",
+      "targetLine": "OPEN MONDAY",
+      "familyIds": [
+        "monday"
+      ],
+      "clue": "The stall opens on Monday.",
+      "familyNote": "Monday belongs with money and honey.",
+      "letterNote": "Monday has o.",
+      "pictureId": "calendar",
+      "pictureAlt": "A market calendar marked Monday."
+    },
+    {
+      "id": "money",
+      "title": "Money here",
+      "prefix": "M",
+      "suffix": "NEY HERE",
+      "targetLettersId": "o",
+      "targetLine": "MONEY HERE",
+      "familyIds": [
+        "monday",
+        "key"
+      ],
+      "clue": "Put the money in this box.",
+      "familyNote": "Money has the o of Monday and ends in -ey, like key. Both families fit.",
+      "letterNote": "This gap takes o. The -ey is already on the board.",
+      "pictureId": "pay-box",
+      "pictureAlt": "A payment box beside a market stall."
+    },
+    {
+      "id": "watch",
+      "title": "Watch your step",
+      "prefix": "W",
+      "suffix": "TCH YOUR STEP",
+      "targetLettersId": "a",
+      "targetLine": "WATCH YOUR STEP",
+      "familyIds": [
+        "after-w"
+      ],
+      "clue": "The path has a loose stone. Watch your step.",
+      "familyNote": "Watch belongs with want in the after-w families.",
+      "letterNote": "Watch has a after w.",
+      "pictureId": "steps",
+      "pictureAlt": "Feet beside a loose paving stone."
+    },
+    {
+      "id": "warm",
+      "title": "Warm bread",
+      "prefix": "W",
+      "suffix": "M BREAD",
+      "targetLettersId": "ar",
+      "targetLine": "WARM BREAD",
+      "familyIds": [
+        "after-w"
+      ],
+      "clue": "The baker means bread that is warm.",
+      "familyNote": "Warm belongs with war in the after-w families.",
+      "letterNote": "Warm has ar. Worm has or and names a wriggly animal.",
+      "pictureId": "bread",
+      "pictureAlt": "Steam rises from freshly baked bread."
+    },
+    {
+      "id": "work",
+      "title": "Work in progress",
+      "prefix": "W",
+      "suffix": "K IN PROGRESS",
+      "targetLettersId": "or",
+      "targetLine": "WORK IN PROGRESS",
+      "familyIds": [
+        "after-w"
+      ],
+      "clue": "The stall is being repaired. Work is in progress.",
+      "familyNote": "Work belongs with word in the after-w families.",
+      "letterNote": "Work has or after w.",
+      "pictureId": "tools",
+      "pictureAlt": "Tools beside a partly repaired stall."
+    },
+    {
+      "id": "key",
+      "title": "Key",
+      "prefix": "K",
+      "suffix": "",
+      "targetLettersId": "ey",
+      "targetLine": "KEY",
+      "familyIds": [
+        "key"
+      ],
+      "clue": "This key opens the store.",
+      "familyNote": "Key belongs with valley and donkey.",
+      "letterNote": "Key ends in -ey.",
+      "pictureId": "key",
+      "pictureAlt": "A key beside the store door."
+    },
+    {
+      "id": "donkey",
+      "title": "Donkey",
+      "prefix": "DONK",
+      "suffix": "",
+      "targetLettersId": "ey",
+      "targetLine": "DONKEY",
+      "familyIds": [
+        "key"
+      ],
+      "clue": "A donkey carries the baskets.",
+      "familyNote": "Donkey belongs with key and valley.",
+      "letterNote": "Donkey ends in -ey.",
+      "pictureId": "donkey",
+      "pictureAlt": "A donkey carries two empty baskets."
+    },
+    {
+      "id": "section",
+      "title": "Section B",
+      "prefix": "SEC",
+      "suffix": " B",
+      "targetLettersId": "tion",
+      "targetLine": "SECTION B",
+      "familyIds": [
+        "tion"
+      ],
+      "clue": "Find section B of the market.",
+      "familyNote": "Section belongs with station, motion and fiction.",
+      "letterNote": "Section ends in -tion.",
+      "pictureId": "section",
+      "pictureAlt": "An apple stall marked as section B."
+    },
+    {
+      "id": "station",
+      "title": "Station",
+      "prefix": "STA",
+      "suffix": "",
+      "targetLettersId": "tion",
+      "targetLine": "STATION",
+      "familyIds": [
+        "tion"
+      ],
+      "clue": "This is the station.",
+      "familyNote": "Station belongs with section, motion and fiction.",
+      "letterNote": "Station ends in -tion.",
+      "pictureId": "station",
+      "pictureAlt": "A station platform and its sign."
+    },
+    {
+      "id": "honey",
+      "title": "Honey",
+      "prefix": "H",
+      "suffix": "NEY",
+      "targetLettersId": "o",
+      "targetLine": "HONEY",
+      "familyIds": [
+        "monday",
+        "key"
+      ],
+      "clue": "The jar is full of honey.",
+      "familyNote": "Honey has the o of Monday and ends in -ey, like key. Both families fit.",
+      "letterNote": "This gap takes o. The -ey is already on the board.",
+      "pictureId": "honey",
+      "pictureAlt": "A honey jar beside a bee."
+    }
+  ],
+  "cards": [
+    {
+      "id": "pattern-card-1",
+      "title": "A before l",
+      "text": "Ball, small, walk and talk all have a before l. If a word is in this family, spell it with a.",
+      "example": "SM_LL APPLES",
+      "steps": [
+        "Small is in the ball family.",
+        "The family has a before l.",
+        "Small apples."
+      ]
+    },
+    {
+      "id": "pattern-card-2",
+      "title": "The Monday family, and -ey",
+      "text": "Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey and money belong to both.",
+      "example": "The h____ stall",
+      "steps": [
+        "Honey is in the Monday family: o.",
+        "It ends like key: -ey.",
+        "h, o, n, e, y."
+      ]
+    },
+    {
+      "id": "pattern-card-3",
+      "title": "After w",
+      "text": "After w, look out. Watch and want have a. Warm and war have ar. Word and work have or.",
+      "example": "W__M BREAD",
+      "steps": [
+        "The baker means warm.",
+        "Warm is in the war family: ar.",
+        "Warm, not worm."
+      ]
+    },
+    {
+      "id": "pattern-card-4",
+      "title": "A -tion chunk",
+      "text": "Station, section, motion and fiction all end in -tion. Many words do. Learn those four letters as one chunk.",
+      "example": "APPLES IN SEC____ B",
+      "steps": [
+        "The word is section.",
+        "It ends with the -tion chunk.",
+        "Section."
+      ]
+    },
+    {
+      "id": "pattern-card-5",
+      "title": "Two words, two spellings",
+      "text": "Here and hear are different words. Here means this place. Hear means to listen. Read the whole sign, then choose.",
+      "example": "PAY H___",
+      "steps": [
+        "The sign tells you where to pay.",
+        "Where means a place.",
+        "Here."
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "v": 1,
+      "id": "A1",
+      "kind": "choice",
+      "title": "The honey sign",
+      "prompt": "Which spelling goes on the honey sign?",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "hunney",
+          "tag": "o-family-missed"
+        },
+        {
+          "id": "b",
+          "text": "honey"
+        },
+        {
+          "id": "c",
+          "text": "honny",
+          "tag": "ey-missed"
+        }
+      ],
+      "steps": [
+        "Honey is in the Monday family: o.",
+        "It ends like key: -ey."
+      ],
+      "hint": "Think of money. Honey is in its family.",
+      "example": "Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.",
+      "explanation": "Honey has the o of Monday and the -ey of key.",
+      "different": {
+        "a": "Honey is in the Monday family. It has an o.",
+        "c": "Honey ends in -ey, like key and valley."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "honey",
+      "pictureAlt": "A honey jar beside a bee.",
+      "teach": [
+        {
+          "id": "pattern-card-2",
+          "title": "The Monday family, and -ey",
+          "text": "Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey and money belong to both.",
+          "example": "The h____ stall",
+          "steps": [
+            "Honey is in the Monday family: o.",
+            "It ends like key: -ey.",
+            "h, o, n, e, y."
+          ]
+        }
+      ],
+      "key": "b"
+    },
+    {
+      "v": 1,
+      "id": "A2",
+      "kind": "choice",
+      "title": "Walk this way",
+      "prompt": "Pip's sign: ___ this way.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "walk"
+        },
+        {
+          "id": "b",
+          "text": "wawk",
+          "tag": "before-l-letters-mixed"
+        },
+        {
+          "id": "c",
+          "text": "wolk",
+          "tag": "before-l-letters-mixed"
+        }
+      ],
+      "steps": [],
+      "hint": "Walk is spelled like talk.",
+      "example": "Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.",
+      "explanation": "Walk, talk, chalk: a before l.",
+      "different": {
+        "b": "Walk is in the talk family: a, then l.",
+        "c": "Walk is spelled like talk and chalk: a, l, k."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "arrow",
+      "pictureAlt": "An arrow shows the walking path.",
+      "teach": [
+        {
+          "id": "pattern-card-1",
+          "title": "A before l",
+          "text": "Ball, small, walk and talk all have a before l. If a word is in this family, spell it with a.",
+          "example": "SM_LL APPLES",
+          "steps": [
+            "Small is in the ball family.",
+            "The family has a before l.",
+            "Small apples."
+          ]
+        }
+      ],
+      "key": "a"
+    },
+    {
+      "v": 1,
+      "id": "A3",
+      "kind": "choice",
+      "title": "The bread sign",
+      "prompt": "The baker's sign: ___ bread.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "worm",
+          "tag": "w-family-mixed"
+        },
+        {
+          "id": "b",
+          "text": "wurm",
+          "tag": "after-w-letters-mixed"
+        },
+        {
+          "id": "c",
+          "text": "warm"
+        }
+      ],
+      "steps": [],
+      "hint": "Warm is in the war family.",
+      "example": "Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.",
+      "explanation": "After w, warm has ar. Worm has or.",
+      "different": {
+        "a": "Worm is a real word, for a wriggly animal. Bread is warm, with ar.",
+        "b": "After w, warm has ar, like war."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "bread",
+      "pictureAlt": "Steam rises from freshly baked bread.",
+      "teach": [
+        {
+          "id": "pattern-card-3",
+          "title": "After w",
+          "text": "After w, look out. Watch and want have a. Warm and war have ar. Word and work have or.",
+          "example": "W__M BREAD",
+          "steps": [
+            "The baker means warm.",
+            "Warm is in the war family: ar.",
+            "Warm, not worm."
+          ]
+        }
+      ],
+      "key": "c"
+    },
+    {
+      "v": 1,
+      "id": "A4",
+      "kind": "choice",
+      "title": "The pay sign",
+      "prompt": "The miller's sign: pay ___.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "hear",
+          "tag": "homophone-mixed"
+        },
+        {
+          "id": "b",
+          "text": "here"
+        },
+        {
+          "id": "c",
+          "text": "hiar",
+          "tag": "ere-missed"
+        }
+      ],
+      "steps": [],
+      "hint": "The sign tells you where to pay.",
+      "example": "Try this one first: I hear the bell. Hear is for listening. Now read your whole sign: is it about a place?",
+      "explanation": "Here means this place. Hear means to listen.",
+      "different": {
+        "a": "Hear is a real word, for listening. This sign means this place.",
+        "c": "This place is spelled here, like there and where."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "pay-box",
+      "pictureAlt": "A payment box beside a market stall.",
+      "teach": [
+        {
+          "id": "pattern-card-5",
+          "title": "Two words, two spellings",
+          "text": "Here and hear are different words. Here means this place. Hear means to listen. Read the whole sign, then choose.",
+          "example": "PAY H___",
+          "steps": [
+            "The sign tells you where to pay.",
+            "Where means a place.",
+            "Here."
+          ]
+        }
+      ],
+      "key": "b"
+    },
+    {
+      "v": 1,
+      "id": "A5",
+      "kind": "match",
+      "title": "Six waiting signs",
+      "prompt": "Fill each gap with one of these: a · o · ar · or.",
+      "parts": [
+        {
+          "id": "small",
+          "text": "SM_LL APPLES"
+        },
+        {
+          "id": "monday",
+          "text": "OPEN M_NDAY"
+        },
+        {
+          "id": "money",
+          "text": "M_NEY HERE"
+        },
+        {
+          "id": "watch",
+          "text": "W_TCH YOUR STEP"
+        },
+        {
+          "id": "warm",
+          "text": "W__M BREAD"
+        },
+        {
+          "id": "work",
+          "text": "W__K IN PROGRESS"
+        }
+      ],
+      "choices": [
+        {
+          "id": "a",
+          "text": "a"
+        },
+        {
+          "id": "o",
+          "text": "o"
+        },
+        {
+          "id": "ar",
+          "text": "ar"
+        },
+        {
+          "id": "or",
+          "text": "or"
+        }
+      ],
+      "steps": [],
+      "hint": "Find each word's family first.",
+      "example": "Try this one first: SM_LL APPLES. Small is in the ball family, with a before l. Now find your sign's family.",
+      "explanation": "Each gap comes from a family: ball, Monday, watch, war or word.",
+      "different": {
+        "general": "Read each sign. Find its spelling family, then try the gap again."
+      },
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "signs",
+      "pictureAlt": "Six unfinished signs wait at the market.",
+      "teach": [
+        {
+          "id": "pattern-card-1",
+          "title": "A before l",
+          "text": "Ball, small, walk and talk all have a before l. If a word is in this family, spell it with a.",
+          "example": "SM_LL APPLES",
+          "steps": [
+            "Small is in the ball family.",
+            "The family has a before l.",
+            "Small apples."
+          ]
+        },
+        {
+          "id": "pattern-card-2",
+          "title": "The Monday family, and -ey",
+          "text": "Monday, money, honey and nothing are spelled with o. Key, valley and donkey end in -ey. Honey and money belong to both.",
+          "example": "The h____ stall",
+          "steps": [
+            "Honey is in the Monday family: o.",
+            "It ends like key: -ey.",
+            "h, o, n, e, y."
+          ]
+        },
+        {
+          "id": "pattern-card-3",
+          "title": "After w",
+          "text": "After w, look out. Watch and want have a. Warm and war have ar. Word and work have or.",
+          "example": "W__M BREAD",
+          "steps": [
+            "The baker means warm.",
+            "Warm is in the war family: ar.",
+            "Warm, not worm."
+          ]
+        }
+      ],
+      "key": {
+        "small": "a",
+        "monday": "o",
+        "money": "o",
+        "watch": "a",
+        "warm": "ar",
+        "work": "or"
+      },
+      "matchCopy": {
+        "instruction": "Choose a gapped sign, then the letters that fill it.",
+        "destinationPrompt": "Choose letters.",
+        "destinationLabel": "Letters"
+      }
+    }
+  ],
+  "meanings": [
+    {
+      "id": "here",
+      "word": "here",
+      "sentence": "Pay here.",
+      "pictureId": "place",
+      "pictureAlt": "An arrow points to the payment box."
+    },
+    {
+      "id": "hear",
+      "word": "hear",
+      "sentence": "I hear the bell.",
+      "pictureId": "listener",
+      "pictureAlt": "A listener turns toward a ringing bell."
+    },
+    {
+      "id": "two",
+      "word": "two",
+      "sentence": "Two pies.",
+      "pictureId": "pies",
+      "pictureAlt": "Two pies sit side by side."
+    },
+    {
+      "id": "too",
+      "word": "too",
+      "sentence": "Me too.",
+      "pictureId": "shared",
+      "pictureAlt": "One person holds a pie. A friend raises a hand to ask for one as well."
+    },
+    {
+      "id": "to",
+      "word": "to",
+      "sentence": "Go to the stall.",
+      "pictureId": "path",
+      "pictureAlt": "A path arrow points from a person to a stall."
+    },
+    {
+      "id": "bee",
+      "word": "bee",
+      "sentence": "A bee in the hive.",
+      "pictureId": "hive",
+      "pictureAlt": "A bee enters a hive."
+    },
+    {
+      "id": "be",
+      "word": "be",
+      "sentence": "Be careful.",
+      "pictureId": "caution",
+      "pictureAlt": "A person steps around a loose stone."
+    },
+    {
+      "id": "blue",
+      "word": "blue",
+      "sentence": "A blue sign.",
+      "pictureId": "blue-sign",
+      "pictureAlt": "A sign painted blue."
+    },
+    {
+      "id": "blew",
+      "word": "blew",
+      "sentence": "The wind blew.",
+      "pictureId": "wind",
+      "pictureAlt": "Wind bends a ribbon on a sign."
+    }
+  ],
+  "story": {
+    "hook": "The stalls are coming back. Pip offered to paint the signs. He finished every one before breakfast.",
+    "short": "Pip's signs say HUNNY, WOLK THIS WAY, PAY HEAR and WORM BREAD. Dot checks the dictionary. They become honey, walk, here and warm.",
+    "longer": "The baker reads his new sign. \"Worm bread?\"\n\n\"Warm,\" says Pip. \"Warm bread.\"\n\n\"It says worm,\" says the baker. \"Nobody wants worm bread.\"\n\nDot walks along the row with the dictionary. HUNNY. WOLK THIS WAY. PAY HEAR.\n\n\"Honey has an o, like Monday and money,\" she says. \"Walk is spelled like talk. And here means this place. Hear means listening.\"\n\n\"And warm?\"\n\n\"Warm has ar. Worm has or. Both are real words. Only one belongs on bread.\"\n\nPip fetches the paint. \"How did you know all that?\"\n\n\"I didn't,\" says Dot. \"I looked them up.\"\n\nThe baker props up the fixed sign: WARM BREAD. He keeps the worm one for the compost heap.",
+    "note": "English often spells one part of a word in more than one way. Writers learn words in families, like walk, talk and chalk, or Monday, money and honey. When they are unsure, they check a dictionary.",
+    "dictionaryNote": "Dot uses a bigger dictionary. The small Stall Dictionary has only selected pages."
+  },
+  "glossary": [
+    {
+      "term": "spelling family",
+      "text": "A group of words with a shared spelling clue. A word can belong to more than one."
+    },
+    {
+      "term": "meaning",
+      "text": "What a word or sentence tells us."
+    },
+    {
+      "term": "gap",
+      "text": "A place waiting for one or more letters."
+    },
+    {
+      "term": "dictionary",
+      "text": "A book or tool to check words and spellings. Our small Stall Dictionary has only selected pages."
+    }
+  ],
+  "offscreen": {
+    "text": "Make a sign for an imaginary stall on paper. Read it with a grown-up. Check any spelling you wonder about in a dictionary."
+  },
+  "grownup": "This is guided written-pattern and sentence-meaning practice with supplied words, not independent spelling or reading assessment. All five family cards are finite examples, not universal rules or a claim about every English accent. The curriculum groups these examples by sound; this page shows their letters and meanings. Honey and money each belong to two groups. The after-w group includes several different letter patterns. An unexpected fill can be kept without being called a conventional spelling. Here/hear, to/too/two, bee/be and blue/blew can be discussed as homophones, but no sounds are played or tested. These whole words and sentences are suitable for shared adult reading; phonics samples have a separate recording and listening review. Your child's own sign stays on paper, read by a person. No photograph, voice or original writing is captured. First/latest practice versions and retained checks travel through Notes. No story chapter is unlocked."
+});
+export const marketPatternCopy=Object.freeze({
+  "arrival": "Visit the Pattern Stall",
+  "title": "The Pattern Stall",
+  "header": "Each sign has a gap. Pick a family, then fill the gap. The gap can hold more than one letter.",
+  "every": "Spelling rules usually work. A dictionary has the last word.",
+  "chooser": "Choose a sign",
+  "familyLabel": "A spelling family",
+  "lettersLabel": "Letters for the gap",
+  "lettersPartLabel": "Letters you painted",
+  "next": "Another sign",
+  "back": "Back to Market Signs",
+  "keep": "Keep this sign",
+  "clear": "Clear this sign",
+  "keptLabel": "Kept pattern signs",
+  "reopen": "Reopen this sign",
+  "jobsLabel": "Pattern sign jobs",
+  "storyLabel": "The worm bread story",
+  "meaningLabel": "Words with different meanings",
+  "meaningInvitation": "Read the whole sentence. It shows what this word means.",
+  "missingFamily": "Choose a family clue. A word can belong to more than one.",
+  "missingLetters": "Choose the letters you want to paint.",
+  "familyFit": "{family}: a fitting clue. {familyNote}",
+  "familyDifferent": "{family}: a different clue. {familyNote}",
+  "lettersFit": "{targetLine}. {letterNote}",
+  "lettersDifferent": "This sign makes {made}. It could tell another story. The market note says {targetLine}. {letterNote}",
+  "kept": "Your sign is kept. You can make another.",
+  "alreadyKept": "This sign is already in your shelf.",
+  "cleared": "This waiting sign is clear. Your kept signs are still here.",
+  "noKept": "Your first kept sign will wait here.",
+  "sectionUnavailable": "These earlier Pattern Stall pages are kept as they were. Other Market Signs benches are open. You can download them in Notes.",
+  "benchUnavailable": "This earlier set of family or letter cards is kept as it was. Its sign jobs and the other benches are still open. You can download it in Notes.",
+  "caseUnavailable": "This earlier sign cannot be painted here. It stays in Notes. Choose another sign or a job.",
+  "keptUnavailable": "These earlier kept signs stay in Notes. You can still paint a sign or try a job.",
+  "keptRowUnavailable": "This earlier kept sign stays in Notes but cannot be opened here.",
+  "materialUnavailable": "This earlier reading card stays in Notes but cannot be shown here.",
+  "keptItemLabel": "{title} + {family} + {letters}"
+});
+export function marketPatternCollection(){return structuredClone(patternInitial);}
+
+// Spec340: original visible-letter collection, not phonics or recall assessment.
+const crateInitial=Object.freeze({
+  "v": 1,
+  "id": "market-word-list-crate",
+  "title": "The Word-List Crate",
+  "copy": {
+    "incomplete": "Some words are not in a crate yet. Keep this arrangement or try another clue.",
+    "discussion": "Some choices have another story. Talk about your clues, or try another arrangement.",
+    "listedSummary": "Each placed word follows a printed clue in this collection. You can still find another arrangement.",
+    "partialIncomplete": "In the readable part, some words are not in a crate yet. Earlier material stays in Notes.",
+    "partialDiscussion": "In the readable part, some choices have another story. Earlier material stays in Notes.",
+    "partialListed": "The readable placements follow printed clues. Earlier material stays in Notes.",
+    "partial": "This shows the readable part of your earlier collection. Nothing has been removed from Notes.",
+    "listed": "A listed letter clue.",
+    "discuss": "This crate has a different clue. What connection did you notice?",
+    "unplaced": "This word is not in a crate yet."
+  },
+  "trays": [
+    {
+      "id": "eigh",
+      "label": "eigh",
+      "description": "Find e, i, g, h together."
+    },
+    {
+      "id": "ough",
+      "label": "ough",
+      "description": "Find o, u, g, h together."
+    },
+    {
+      "id": "ear",
+      "label": "ear",
+      "description": "Find e, a, r together."
+    },
+    {
+      "id": "double",
+      "label": "Double letters",
+      "description": "Find the same letter twice side by side."
+    }
+  ],
+  "words": [
+    {
+      "id": "eight",
+      "text": "eight",
+      "sentence": "Eight jars wait on the stall.",
+      "clues": [
+        {
+          "trayId": "eigh",
+          "note": "Eight has eigh."
+        }
+      ]
+    },
+    {
+      "id": "eighth",
+      "text": "eighth",
+      "sentence": "This is the eighth jar.",
+      "clues": [
+        {
+          "trayId": "eigh",
+          "note": "Eighth has eigh before t and h."
+        }
+      ]
+    },
+    {
+      "id": "weight",
+      "text": "weight",
+      "sentence": "Guess the pumpkin's weight.",
+      "clues": [
+        {
+          "trayId": "eigh",
+          "note": "Weight has eigh between w and t."
+        }
+      ]
+    },
+    {
+      "id": "height",
+      "text": "height",
+      "sentence": "Measure the stall's height.",
+      "clues": [
+        {
+          "trayId": "eigh",
+          "note": "Height has eigh between h and t."
+        }
+      ]
+    },
+    {
+      "id": "enough",
+      "text": "enough",
+      "sentence": "There is enough bread for everyone.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Enough ends in ough."
+        }
+      ]
+    },
+    {
+      "id": "though",
+      "text": "though",
+      "sentence": "The stall is open, though it is raining.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Though ends in ough."
+        }
+      ]
+    },
+    {
+      "id": "although",
+      "text": "although",
+      "sentence": "Although it rained, the market opened.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Although ends in ough."
+        }
+      ]
+    },
+    {
+      "id": "thought",
+      "text": "thought",
+      "sentence": "I thought the stall was closed.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Thought has ough before t."
+        }
+      ]
+    },
+    {
+      "id": "through",
+      "text": "through",
+      "sentence": "Walk through the market gate.",
+      "clues": [
+        {
+          "trayId": "ough",
+          "note": "Through ends in ough."
+        }
+      ]
+    },
+    {
+      "id": "early",
+      "text": "early",
+      "sentence": "The baker arrives early.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Early begins with ear."
+        }
+      ]
+    },
+    {
+      "id": "earth",
+      "text": "earth",
+      "sentence": "Brush the earth from the carrots.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Earth begins with ear."
+        }
+      ]
+    },
+    {
+      "id": "heard",
+      "text": "heard",
+      "sentence": "We heard the market bell.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Heard has ear between h and d."
+        }
+      ]
+    },
+    {
+      "id": "learn",
+      "text": "learn",
+      "sentence": "We can learn a new word.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Learn has ear between l and n."
+        }
+      ]
+    },
+    {
+      "id": "address",
+      "text": "address",
+      "sentence": "Write the stall's address.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Address has dd and ss."
+        }
+      ]
+    },
+    {
+      "id": "appear",
+      "text": "appear",
+      "sentence": "New stalls appear each week.",
+      "clues": [
+        {
+          "trayId": "ear",
+          "note": "Appear ends in ear."
+        },
+        {
+          "trayId": "double",
+          "note": "Appear has pp."
+        }
+      ]
+    },
+    {
+      "id": "different",
+      "text": "different",
+      "sentence": "This cheese is different.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Different has ff."
+        }
+      ]
+    },
+    {
+      "id": "difficult",
+      "text": "difficult",
+      "sentence": "The puzzle is difficult.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Difficult has ff."
+        }
+      ]
+    },
+    {
+      "id": "possible",
+      "text": "possible",
+      "sentence": "A new route is possible.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Possible has ss."
+        }
+      ]
+    },
+    {
+      "id": "opposite",
+      "text": "opposite",
+      "sentence": "The baker is opposite the miller.",
+      "clues": [
+        {
+          "trayId": "double",
+          "note": "Opposite has pp."
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "card15",
+      "title": "Look for shared letters",
+      "text": "Try grouping a word list by letters you can see. Eight, weight and height share eigh. Enough, though and through share ough. Early, earth and learn share ear.",
+      "example": "SOLD BY W_____",
+      "steps": [
+        "Weight shares letters with eight.",
+        "Those letters are eigh.",
+        "w, eigh, t: weight."
+      ]
+    },
+    {
+      "id": "card16",
+      "title": "Find a letter helper",
+      "text": "Choose letters you want to remember. A letter helper might help: separate has rat in the middle, and business starts with bus.",
+      "example": "A different cheese",
+      "steps": [
+        "Notice the double f in different.",
+        "Try these letter chunks: dif, fer, ent.",
+        "Different. Two f's, one r."
+      ]
+    }
+  ],
+  "helpers": [
+    {
+      "id": "helper-separate",
+      "word": "separate",
+      "note": "Find rat inside separate: sep, a, rat, e. This is a letter helper.",
+      "pieces": [
+        {
+          "text": "sep",
+          "marked": false
+        },
+        {
+          "text": "a",
+          "marked": false
+        },
+        {
+          "text": "rat",
+          "marked": true
+        },
+        {
+          "text": "e",
+          "marked": false
+        }
+      ]
+    },
+    {
+      "id": "helper-business",
+      "word": "business",
+      "note": "Business starts with bus. Use those three letters as a memory trick.",
+      "pieces": [
+        {
+          "text": "bus",
+          "marked": true
+        },
+        {
+          "text": "iness",
+          "marked": false
+        }
+      ]
+    },
+    {
+      "id": "helper-island",
+      "word": "island",
+      "note": "Try the letter chunks is and land to remember island. This is a letter trick, not its history.",
+      "pieces": [
+        {
+          "text": "is",
+          "marked": false
+        },
+        {
+          "text": "land",
+          "marked": true
+        }
+      ]
+    },
+    {
+      "id": "helper-believe",
+      "word": "believe",
+      "note": "Believe has lie inside it. This is a letter trick, not what believe means.",
+      "pieces": [
+        {
+          "text": "be",
+          "marked": false
+        },
+        {
+          "text": "lie",
+          "marked": true
+        },
+        {
+          "text": "ve",
+          "marked": false
+        }
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "v": 1,
+      "id": "D1",
+      "title": "Bramble's pumpkin",
+      "kind": "choice",
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "pumpkin",
+      "pictureAlt": "A pumpkin sits on a scale beside Bramble's notice.",
+      "prompt": "Bramble's sign: guess its ___.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "wieght"
+        },
+        {
+          "id": "b",
+          "text": "wayt"
+        },
+        {
+          "id": "c",
+          "text": "weight"
+        }
+      ],
+      "key": "c",
+      "hint": "Look at eight. Weight is w, then eight.",
+      "example": "Try this one first: eight and weight share eigh. Read the letters slowly with someone. Now look for a clue in your notice.",
+      "explanation": "Eight, weight and height share eigh.",
+      "different": {
+        "a": "The e comes first: eigh, like eight.",
+        "b": "Weight shares eigh with eight."
+      },
+      "steps": [
+        "Weight shares letters with eight.",
+        "Those letters are eigh."
+      ],
+      "teach": [
+        {
+          "id": "card15",
+          "title": "Look for shared letters",
+          "text": "Try grouping a word list by letters you can see. Eight, weight and height share eigh. Enough, though and through share ough. Early, earth and learn share ear.",
+          "example": "SOLD BY W_____",
+          "steps": [
+            "Weight shares letters with eight.",
+            "Those letters are eigh.",
+            "w, eigh, t: weight."
+          ]
+        }
+      ]
+    },
+    {
+      "v": 1,
+      "id": "D2",
+      "title": "Bread for everyone",
+      "kind": "choice",
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "bread",
+      "pictureAlt": "Several loaves wait on the bread stall.",
+      "prompt": "Is there ___ bread for everyone?",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "enogh"
+        },
+        {
+          "id": "b",
+          "text": "enouhg"
+        },
+        {
+          "id": "c",
+          "text": "enough"
+        }
+      ],
+      "key": "c",
+      "hint": "Enough shares ough with though and through.",
+      "example": "Try this one first: though ends in ough: t, h, ough. Now look for those letters in your notice.",
+      "explanation": "Enough ends in ough, like though and through.",
+      "different": {
+        "a": "Keep the u. The letters are o, u, g, h.",
+        "b": "The letters go o, u, g, h."
+      },
+      "steps": [],
+      "teach": [
+        {
+          "id": "card15",
+          "title": "Look for shared letters",
+          "text": "Try grouping a word list by letters you can see. Eight, weight and height share eigh. Enough, though and through share ough. Early, earth and learn share ear.",
+          "example": "SOLD BY W_____",
+          "steps": [
+            "Weight shares letters with eight.",
+            "Those letters are eigh.",
+            "w, eigh, t: weight."
+          ]
+        }
+      ]
+    },
+    {
+      "v": 1,
+      "id": "D3",
+      "title": "A new cheese",
+      "kind": "choice",
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "cheese",
+      "pictureAlt": "A round cheese and a square cheese wait on the cheese stall.",
+      "prompt": "Every week the cheese trader brings a ___ cheese.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "different"
+        },
+        {
+          "id": "b",
+          "text": "diffrent"
+        },
+        {
+          "id": "c",
+          "text": "differrent"
+        }
+      ],
+      "key": "a",
+      "hint": "Try three letter chunks: dif, fer, ent.",
+      "example": "Try this one first: difficult has a double f: d, i, ff, i, c, u, l, t. Now look for double letters in your notice.",
+      "explanation": "Dif, fer, ent: different, with two f's and one r.",
+      "different": {
+        "b": "Find all three letter chunks: dif, fer, ent.",
+        "c": "Only the f doubles. One r."
+      },
+      "steps": [],
+      "teach": [
+        {
+          "id": "card16",
+          "title": "Find a letter helper",
+          "text": "Choose letters you want to remember. A letter helper might help: separate has rat in the middle, and business starts with bus.",
+          "example": "A different cheese",
+          "steps": [
+            "Notice the double f in different.",
+            "Try these letter chunks: dif, fer, ent.",
+            "Different. Two f's, one r."
+          ]
+        }
+      ]
+    },
+    {
+      "v": 1,
+      "id": "D4",
+      "title": "Eggs and apples",
+      "kind": "choice",
+      "contextLabel": "A story from Willowbank",
+      "pictureId": "eggs-apples",
+      "pictureAlt": "Eggs sit in one basket and apples in another.",
+      "prompt": "Keep the eggs and the apples ___.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "seperate"
+        },
+        {
+          "id": "b",
+          "text": "separate"
+        },
+        {
+          "id": "c",
+          "text": "seprate"
+        }
+      ],
+      "key": "b",
+      "hint": "Find rat inside the word.",
+      "example": "Try this one first: business starts with bus. A small word can help you remember letters. Now try the rat clue in your notice.",
+      "explanation": "Separate has rat inside it: sep, a, rat, e.",
+      "different": {
+        "a": "Find rat inside separate: sep, a, rat, e.",
+        "c": "Keep the a before rat: sep, a, rat, e."
+      },
+      "steps": [],
+      "teach": [
+        {
+          "id": "card16",
+          "title": "Find a letter helper",
+          "text": "Choose letters you want to remember. A letter helper might help: separate has rat in the middle, and business starts with bus.",
+          "example": "A different cheese",
+          "steps": [
+            "Notice the double f in different.",
+            "Try these letter chunks: dif, fer, ent.",
+            "Different. Two f's, one r."
+          ]
+        }
+      ]
+    }
+  ],
+  "story": {
+    "hook": "Bramble brings a pumpkin to the returning market. The guessing notice needs one word.",
+    "short": "Bramble set a pumpkin on the scale. “Guess its weight!” she called. The notice had room for the word weight. Pip spotted eigh, just as in eight. Bramble painted the letters and opened her stall.",
+    "longer": "The weekly market was filling again. Bread was warm, cheese was ready, and Bramble had brought a pumpkin almost as wide as her basket. “Visitors can guess its weight,” she said. Pip looked at the waiting notice. “Weight shares eigh with eight.” Dot found the same letters in height, although the words did not sound the same. Bramble finished the notice. Then she set the eggs and apples in separate baskets. The stalls were ready for their first visitors.",
+    "note": "A story from Willowbank. These are visible letter connections; a shared group of letters is not always a shared sound."
+  },
+  "offscreen": {
+    "text": "Make a paper notice for an imaginary market. Choose a word you want to remember. Mark its letters, try a letter helper, and read the notice with someone. A dictionary can help check its spelling."
+  },
+  "grownup": "This collection offers printed spelling patterns and optional letter-memory tricks. All cards and choices are supplied, and adult reading is welcome. Sorting or choosing a supplied spelling is not spelling it from memory. There is no timing, dictation, original-writing assessment or claim of complete word-list attainment. Marks are the reader's choices, not right-or-wrong answers. The library shelf offers a later printed collection, not a passed-level reward."
+});
+export const marketCrateCopy=Object.freeze({
+  "arrival": "Visit the Word-List Crate",
+  "title": "The Word-List Crate",
+  "header": "Sort these printed words by letters you can see. Mark any letters you want to remember. A word can fit more than one crate.",
+  "every": "These crates share letters. They do not always share sounds.",
+  "chooser": "Choose a word",
+  "previous": "Previous word",
+  "next": "Next word",
+  "marksLabel": "Letters I want to remember",
+  "clearMarks": "Clear this word's marks",
+  "traysLabel": "Choose a crate",
+  "unplaced": "Not in a crate yet",
+  "check": "Check this arrangement",
+  "keep": "Keep this arrangement",
+  "firstLabel": "First kept arrangement",
+  "latestLabel": "Latest kept arrangement",
+  "restore": "Use these placements",
+  "restoreNote": "This changes the crates only. Your marks and help stay as they are.",
+  "kept": "Your arrangement is kept. You can try another.",
+  "arrangementLabel": "All the word cards",
+  "resultLabel": "Clues for this arrangement",
+  "cardsLabel": "Two ways to remember",
+  "helpersLabel": "Letter helpers",
+  "helperDisclaimer": "These are tricks for remembering letters, not explanations of where words came from.",
+  "jobsLabel": "Word-list sign jobs",
+  "storyLabel": "Bramble's pumpkin notice",
+  "back": "Back to Market Signs",
+  "libraryInvitation": "Try another word collection",
+  "libraryLabel": "Visit the library word shelf",
+  "sectionUnavailable": "These earlier crate pages stay in Notes. Other Market Signs benches are open.",
+  "benchUnavailable": "These earlier word cards stay in Notes. You can still choose a readable sign job or another bench.",
+  "pointerInvitation": "Choose a word to return to. Your earlier arrangement is still here.",
+  "placementUnavailable": "This earlier crate choice stays in Notes. Other cards are ready to move.",
+  "marksUnavailable": "These earlier marks stay in Notes. You can still read and sort this word.",
+  "longWord": "This word is ready to read and sort. Its letters cannot be marked here.",
+  "checksUnavailable": "These earlier checks stay in Notes. You can still arrange cards and keep unchecked placements.",
+  "keepUnavailable": "This earlier kept arrangement stays in Notes. You can still arrange and check your cards.",
+  "keptMarksUnavailable": "These earlier marks stay in Notes. The readable placements are shown here.",
+  "materialUnavailable": "This earlier reading card stays in Notes but cannot be shown here.",
+  "noPlayable": "These crate choices stay in Notes. Try another bench or a readable sign job."
+});
+export function marketCrateCollection(){return structuredClone(crateInitial);}

@@ -430,6 +430,26 @@
       "scope": "Separate French stories and reading suggestions. No transfer of English decoding or proficiency labels; French is outside Marble’s English organization."
     },
     {
+      "id": "french-ferry",
+      "name": "The ferry crossing (French)",
+      "status": "built-local",
+      "patterns": [
+        "read"
+      ],
+      "route": "#bac",
+      "scope": "Spec 327's Le bac: a morning and an afternoon crossing with Madame Roux, hearing her French lines and answering aloud or by picking, with word and meaning help, local French speech and two short teaching cards. Supported practice, not a French assessment; French is outside Marble's English organization and no topic coverage is claimed."
+    },
+    {
+      "id": "river-market",
+      "name": "The River Market (Spanish)",
+      "status": "built-local",
+      "patterns": [
+        "read"
+      ],
+      "route": "#mercado",
+      "scope": "Spec 324's first errand, La carga: read a short Spanish note, unload the barge to the buildings it names, then answer one question, with glosses, local Spanish speech and Mi cuaderno. Supported reading practice, not a Spanish assessment; Spanish is outside Marble's organization and no topic coverage is claimed."
+    },
+    {
       "id": "words",
       "name": "Word Garden",
       "status": "live",
@@ -919,6 +939,69 @@
         "build"
       ],
       "scope": "Supplied silent-letter tiles, written history sorting and seven family clues with teaching and five supported jobs. Revisable first/latest work; no independent spelling, pronunciation or historical-knowledge assessment. No topic coverage claim."
+    },
+    {
+      "id": "mending-shed",
+      "name": "The Mending Shed",
+      "status": "built-local",
+      "route": "#workshop/mending",
+      "patterns": [
+        "experiment",
+        "build"
+      ],
+      "scope": "Sort twelve pictured objects by what each is and what it is made of, with a guided first card, ordered Check lines and a stuck ladder; predict, try and let go of squash, bend, twist and stretch on six authored samples. Simplified authored pictures; no real materials, measurements or particle explanations."
+    },
+    {
+      "id": "seed-pile",
+      "name": "Seed Pile",
+      "status": "live",
+      "route": "#orchard/games",
+      "patterns": [
+        "experiment"
+      ],
+      "scope": "Take 1 to 3 (or 1 to 2) seeds from one pile of 5 to 30 against Bramble, whose play style the child sets; last seed wins or loses by the chosen rule. Supplied explanations and an in-memory practice board stay separate from moves. Game results are not a math level; no independent strategy, subtraction fluency or topic claim."
+    },
+    {
+      "id": "shutters",
+      "name": "Shutters",
+      "status": "live",
+      "route": "#orchard/games/shutters",
+      "patterns": [
+        "allocate"
+      ],
+      "scope": "Solo six- or nine-shutter box: roll one or two dice, then close open shutters whose numbers make the roll. Supplied combinations and explanations are recorded as support, separate from choices. Dice outcomes are not a math level; no independent addition, number-bond fluency, probability or topic claim."
+    },
+    {
+      "id": "ribbon-rows",
+      "name": "Ribbon Rows",
+      "status": "live",
+      "route": "#orchard/games/rows",
+      "patterns": [
+        "experiment"
+      ],
+      "scope": "Take ribbons from one of two or three rows of 1 to 7 against Bramble's chosen play style. Supplied pictured explanations of matching rows and paired bundles stay separate from moves and practice. Who takes the last ribbon is not a math level; no independent strategy, subtraction, binary or topic claim."
+    },
+    {
+      "id": "lost-found-board",
+      "name": "The Lost and Found Board",
+      "status": "built-local",
+      "route": "#post/lost-and-found",
+      "patterns": [
+        "search",
+        "read"
+      ],
+      "scope": "One logic-grid mystery, Who borrowed what?: sort what witnesses saw from what they think, mark a 3 by 3 grid or list from ordered clues, say whether the clues decide yet, and check an answer that names the first broken clue. Authored sentences and clues; no open-ended inquiry."
+    },
+    {
+      "id": "design-table",
+      "name": "The Design Table",
+      "status": "built-local",
+      "route": "#workshop/design",
+      "patterns": [
+        "experiment",
+        "build"
+      ],
+      "scope": "Two stations: compare two made-up bags from a supplied same-way rain test, tag each one's strength and weakness and recommend from the data; then build a crate brief from tiles, turning vague wishes into checkable musts and sorting musts from limits. Made-up numbers; no real testing, sketching or building."
     }
   ],
   "manualReferences": [
@@ -1803,6 +1886,41 @@
       "kind": "explanation",
       "source": "dist/shadow-theatre-ui.mjs",
       "scope": "Supplied point-source blocking and relative-size explanation: move the same opaque card through three positions, remove/return it and inspect selected limiting paths on one fixed screen. No independent prediction/explanation, physical investigation, recorded measurements, daily sunlight pattern or broader material classification."
+    },
+    {
+      "game": "mending-shed",
+      "topicId": "mt_5r47Pvstyn",
+      "kind": "scoped-practice",
+      "source": "dist/mending-shed-content.mjs",
+      "scope": "A supported sort of twelve pictured objects into the object and the material it is made of, from a supplied chip tray with ordered Check lines. Unaided naming, real materials, property vocabulary and grouping are not observed."
+    },
+    {
+      "game": "mending-shed",
+      "topicId": "mt_wf-SJhZ1kC",
+      "kind": "scoped-practice",
+      "source": "dist/mending-shed-content.mjs",
+      "scope": "A predicted test on authored pictures: choose a sample and an action, predict springs back, keeps the new shape or hardly changes, then see the authored result. Real materials, measurement, property vocabulary and grouping are not observed."
+    },
+    {
+      "game": "lost-found-board",
+      "topicId": "mt_Hw70LI5xza",
+      "kind": "scoped-practice",
+      "source": "dist/lost-found-content.mjs",
+      "scope": "A supported sort of authored witness sentences into what was seen and what is thought, with Why? and a sort-for-me option. The child's own observations and field inquiry are not observed."
+    },
+    {
+      "game": "design-table",
+      "topicId": "mt_nNYo5A-7Bl",
+      "kind": "scoped-practice",
+      "source": "dist/design-table-content.mjs",
+      "scope": "Choices and tag placements on a supplied made-up model: read a filled same-way rain table, tag each bag's strength and weakness, recommend from the data and pick an improvement to test. Running a test, recording data, sketching or modelling and building are not observed."
+    },
+    {
+      "game": "design-table",
+      "topicId": "mt_Z5-fSCOBep",
+      "kind": "scoped-practice",
+      "source": "dist/design-table-content.mjs",
+      "scope": "Tile placements on a supplied made-up brief: place the need, user, musts and limits, flip vague wishes to checkable musts and sort musts from limits. Writing a brief unaided, testing and building are not observed."
     }
   ],
   "increments": [
