@@ -144,6 +144,8 @@ Three more rules apply to every piece:
 - **What the film must not answer.** 324 asks how many jars of honey *La Garza* brings, and 328 asks where the bakery is from the landing. 316's tasks use trade groups and nursery shares. So no countable jars, sacks, baskets, bundles or seedlings in groups that match those tasks, and no landing-to-bakery route on screen. Do not show or name cargo destinations either: no honey delivered to the café, flour to the bakery, or reed seeds to the garden. Keep unloading within an unlabeled landing area, with no destination labels or directional cues.
 - **[PR202](https://github.com/anotherpanacea-eng/learning-garden/pull/202)'s landing study** is an input to pieces 2, 6 and 8: its landing, mill wheel and unnumbered flood post fit. Its boat is a small rowboat, where *La Garza* is a flat, wide barge, and its open basket and crate counts would need the rule above. Its Blender reopen and implementation clearance are still open; this brief neither clears nor closes it.
 
+**Environment study:** the [Willowbank landing concept](../../design/concepts/willowbank-landing/README.md) includes a preview, editable Blender scene and reproducible builder for the mill-side landing and exchange props. It remains provisional environment art, not a final film shot or runtime integration.
+
 **Style:** match the existing game art in `dist/` and the three existing films (`dist/bramble-film.html`, `dist/cafe-film.html`, `dist/paris-film.html`). Use the established designs for Pip, Dot and Bramble. No copied characters or styles from other films or games.
 
 ### The pieces
