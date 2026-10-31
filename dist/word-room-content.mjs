@@ -266,7 +266,9 @@ const collection = {
           "role": "target"
         }
       ],
-      "prompt": "Where is the bat?"
+      "prompt": "Where is the bat?",
+      "art": "scene-props-v1",
+      "alt": "A cat sits on a mat. A toy sporting bat is beside the mat."
     },
     "box": {
       "id": "box",
@@ -400,7 +402,9 @@ const collection = {
           "role": "target"
         }
       ],
-      "prompt": "What is in the tin?"
+      "prompt": "What is in the tin?",
+      "art": "scene-box-v1",
+      "alt": "A badge pin is in an open tin. A toy fish and the tin sit beside a storage bin."
     },
     "puppet": {
       "id": "puppet",
@@ -510,7 +514,9 @@ const collection = {
           "role": "target"
         }
       ],
-      "prompt": "What can the puppet do?"
+      "prompt": "What can the puppet do?",
+      "art": "scene-puppet-v1",
+      "alt": "A puppet makes a little hop. A mop and a spinning top stand by the stage. A bubble bursts nearby."
     }
   }
 };

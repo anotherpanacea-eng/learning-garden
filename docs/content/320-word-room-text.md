@@ -61,6 +61,16 @@ Authored collection id: `theater-props`; revision: `1`. Authored word key order:
 
 The title uses the typographic apostrophe shown above. Exact shared-text bodies and token spans remain the original strings in `docs/content/phonics/shared-texts.json`; these titles and discussion prompts are the explicit room projection. “Can” in the puppet prompt follows the actual miniature's ability statement; it does not assume the text reports a completed hop.
 
+Optional scene picture codes/alternatives, stored with each initial text:
+
+| Text | Art code | Exact picture alternative |
+| --- | --- | --- |
+| props | scene-props-v1 | A cat sits on a mat. A toy sporting bat is beside the mat. |
+| box | scene-box-v1 | A badge pin is in an open tin. A toy fish and the tin sit beside a storage bin. |
+| puppet | scene-puppet-v1 | A puppet makes a little hop. A mop and a spinning top stand by the stage. A bubble bursts nearby. |
+
+Earlier texts without a known picture code and bounded alternative remain readable; show their own word-card pictures instead. These optional picture fields do not affect text validity or collection completion.
+
 ## Recovery and Notes copy
 
 - Recovery offer: **Start a fresh prop box**, relabeled **Open the newer prop box** only for a known lower revision. Confirmation actions: **Cancel / Open a fresh prop box**.
