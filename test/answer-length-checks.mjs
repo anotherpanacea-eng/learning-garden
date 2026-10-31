@@ -10,14 +10,9 @@ export function longestGiveaway(choices,answer){
   return right>longestOther*1.25&&right-longestOther>=12;
 }
 
-// These three authored questions quote passage sentences. Each has three
-// reading-length variants; this is not an exemption for the whole reading skill.
-const evidenceIds=new Set(['seed-envelopes','windy-sign','puppet-post'].flatMap(story=>
-  [1,2,3].map(variant=>`paris-explore-${story}-${variant}-1`)));
 export function answerLengthFlags(nodes){
   return Object.values(nodes)
     .filter(n=>n.kind==='choice'&&Array.isArray(n.choices)&&n.choices.length>=2&&Number.isInteger(n.answer))
-    .filter(n=>!evidenceIds.has(n.id))
     .filter(n=>longestGiveaway(n.choices,n.answer)).map(n=>n.id);
 }
 
@@ -30,9 +25,8 @@ assert.equal(longestGiveaway(sized(20,31),1),false,'11 extra characters passes e
 assert.equal(longestGiveaway(sized(20,32),1),true,'12 extra characters flags above 25%');
 assert.equal(longestGiveaway(['x'.repeat(60),'y'.repeat(60),'z'],0),false,'a tied longest answer passes');
 const fixture=id=>({id,kind:'choice',choices:sized(20,40),answer:1,readingSkill:'Find a sentence that supports an idea'});
-for(const id of evidenceIds)assert.deepEqual(answerLengthFlags([fixture(id)]),[],'each reviewed variant is exempt');
-for(const id of ['new-evidence-question','paris-explore-seed-envelopes-4-1','paris-explore-seed-envelopes-1-2'])
-  assert.deepEqual(answerLengthFlags([fixture(id)]),[id],'same skill, new variant or other task is not exempt; two-choice sets are scanned');
+for(const id of ['new-evidence-question','paris-explore-seed-envelopes-1-1','paris-explore-seed-envelopes-1-2'])
+  assert.deepEqual(answerLengthFlags([fixture(id)]),[id],'no question id is exempt; two-choice sets are scanned');
 assert.deepEqual(answerLengthFlags([{...fixture('three-choices'),choices:[...sized(20,40),'short']}]),['three-choices'],'three-choice sets are scanned');
 
 // storyNodes includes the Paris library and imported story packs, as well as
