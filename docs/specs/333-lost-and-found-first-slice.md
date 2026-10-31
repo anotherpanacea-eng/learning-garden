@@ -68,7 +68,7 @@ mysteries: {
 - **Preflight.** Every explicit write is cloned and checked against `dist/progress-limits.mjs` and the real Notes export before it commits. A refusal shows the capacity line and leaves the save and the view unchanged.
 - Notes export, import, reset and explorer switching carry `mysteries` through the existing transfer. Add `mysteries: 'The Lost and Found Board'` to `progress-transfer.mjs`'s destination names.
 
-Later slices add cases, `setAside`, I HEARD sorts and `written` beside these keys under `v: 1`; this slice accepts and preserves them exactly.
+Later slices add cases, `setAside`, I HEARD sorts and `written` beside these keys under `v: 1`; this slice accepts and preserves them exactly. Extensions that would change how this slice checks an answer are kept raw and make that case read-only: a nonempty `setAside` (which removes clues from the active set) or a clue round this slice does not know. Its prior results stay exact and no new check runs. Empty or inert extension fields (an empty `setAside`, I HEARD sorts, `written`) leave the case writable.
 
 ## Integration
 
@@ -94,7 +94,7 @@ At 320×600, 820×1000 and 1024×768: no horizontal page scroll; 44 px targets; 
 | Observation vs Interpretation | none (soft: Feeling of not understanding `mt_klyw-tdlhP`) | n/a |
 | Inference vs Explicit Meaning | Monitoring Comprehension (`mt_GugVunb2lI`), *not yet mapped* | Partly supported inline: *Can we tell yet?* asks the child to notice that the clues don't decide yet. No topic claim. |
 
-Hard edges are authoring context, never locks. `curriculum/topic-coverage.csv` is unchanged. Observation vs Interpretation already has a scoped-practice reference from the plant study, so the atlas adds one more `scoped-practice` reference for it here, with scope text that says what is observed (a supported sort of authored sentences) and what is not (the child's own observations, field inquiry).
+Hard edges are authoring context, never locks. This docs PR changes no atlas file. The build PR adds the reference below to `curriculum/atlas.json` and regenerates both derived outputs, `docs/learning-atlas.md` and `curriculum/topic-coverage.csv`, with `scripts/build-learning-atlas.mjs`; the pinned Marble data stays unchanged. Observation vs Interpretation already has a scoped-practice reference from the plant study, so its row keeps that status and lists one more `scoped-practice` reference here, a scoped declaration and not full-topic coverage, with scope text that says what is observed (a supported sort of authored sentences) and what is not (the child's own observations, field inquiry).
 
 **Strands and acts.** E3-I (explicit detail versus inference), E3-IV (sufficient evidence: *Can we tell yet?*), S1-I (observation versus interpretation) and M7-II (check and revise: **Does it fit?**, another way that fits). It serves 122's Act II, chapter 1 (the weekly market) as setting only; it issues no chapter offer or receipt and changes no act state. Standalone entry stays open regardless of story position.
 
@@ -121,6 +121,7 @@ Hard edges are authoring context, never locks. `curriculum/topic-coverage.csv` i
    - Rendering and reading the teaching steps make no write; the root stays absent until Start sorting.
    - A frozen source resumes unchanged after the content module's labels, wording, clue order and choices change.
    - Unknown ids and fields, an unreadable case and an unknown `v` stay exact in the export.
+   - Importing a case with a nonempty `setAside` (for example `["ladder-roof"]`) makes it read-only: an attempted check does nothing and its prior results stay exact. An empty `setAside` leaves it writable.
    - A real-transfer refusal leaves the whole notebook unchanged.
    - Source check: every child-facing string is in the copy sheet, the copy sheet's companion lines match 122's companion exactly, and none has an em-dash.
 2. Native browser journeys at the three viewports: real taps and the keyboard through teaching, sort (and Sort them for me), marks in grid and list mode, *Can we tell yet?* both ways, round 2, a missing, a duplicate and a broken-clue check, the fit, the reveal and Looking back; reload mid-mystery; Notes download and import; reset; two explorers; stale controls after navigation; and a forced preflight refusal. Inspect rendered screenshots of the grid at 320 and 820.
