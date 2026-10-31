@@ -91,8 +91,11 @@ new commits. The author fixes findings on the same branch.
 
 `node scripts/run-checks.mjs` runs the atlas, the story packs and every
 `test/*checks*.mjs` suite (about three minutes). Run it before marking a PR
-ready. For UI changes also run the touched activity's browser suite,
-`python test/<activity>-browser.py` (Python Playwright and Chromium). There is
+ready. For UI changes also run the touched activity's browser suite:
+`python test/<activity>-browser.py` (Python Playwright) or
+`node test/<activity>-browser.js` (Node Playwright), both on Chromium. Some
+Node suites need `dist/` served and a URL variable; use the command the README
+gives next to that activity. There is
 one hosted check, a gitleaks secret scan on every PR and `main` push; the
 commands above are the gate, so say in the PR which ones you ran and at which
 head.
