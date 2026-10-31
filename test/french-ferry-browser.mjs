@@ -11,7 +11,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 const book=p=>p.evaluate(()=>{const id=JSON.parse(localStorage.getItem('learning-garden-explorers')||'{}').activeId||'explorer-1';return JSON.parse(localStorage.getItem('number-garden-v1:'+id)||'{}');});
 const act=(p,a)=>p.locator(`[data-bac-action="${a}"]`).first();
 const morning=makeCrossingSource('morning');
-async function fresh(width,height){const c=await browser.newContext({viewport:{width,height},acceptDownloads:true});const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));p.errors=errors;await p.goto(url+'#bac');await p.locator('[data-bac-root]').waitFor();return {c,p};}
+async function fresh(width,height){const c=await browser.newContext({viewport:{width,height},acceptDownloads:true});await c.addInitScript(()=>{speechSynthesis.getVoices=()=>[];});const p=await c.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));p.errors=errors;await p.goto(url+'#bac');await p.locator('[data-bac-root]').waitFor();return {c,p};}
 const overflow=p=>p.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+1);
 const small=p=>p.$$eval('.bac-page button,.bac-page summary,.bac-page a',xs=>xs.filter(x=>x.offsetParent).filter(x=>{const r=x.getBoundingClientRect();return r.width<44-0.5||r.height<44-0.5;}).map(x=>x.outerHTML.slice(0,80)));
 const step=p=>p.locator('[data-bac-step]').getAttribute('data-bac-step');
