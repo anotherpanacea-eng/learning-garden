@@ -111,9 +111,9 @@ Hard edges are authoring context, never locks. `topic-coverage.csv` stays unchan
    - The wooden bucket is sorted with wood alone and with wood and metal; the lantern needs all three.
    - Every one of the 24 shape cells shows the companion's outcome; rubber and sponge never stay squashed; clay never springs back; slate's bend shows the snap line.
    - A prediction is required before Try it; matched and not-matched lines follow the kept prediction.
-   - First check and first Let go are kept once; `latest`, counts and `supported` change without rewriting `first`; a skipped item stays unobserved; a check or try at a count of 9999 updates `latest` and leaves the count at 9999.
+   - First check and first Let go are kept once; `latest`, counts and `supported` change without rewriting `first`; a never-checked card or never-tried cell that is skipped stays unobserved; a check or try at a count of 9999 updates `latest` and leaves the count at 9999.
    - Wrong, then right, then wrong: the card stays sorted and the board shows the right check's chips.
-   - A revisit of a sorted card or a tried cell, then the ladder, then Skip leaves its record, counts and sorted state unchanged.
+   - A revisit of a sorted card or a tried cell, then the ladder, then Skip: Skip itself leaves the record exactly as it was immediately before Skip, after any support write has committed (observations, counts and sorted state kept).
    - A content drift that adds a needed chip to a kept card makes that card read-only with its kept checks and order intact.
    - Count 0 with any non-null check, and a positive count with a null `first` or `latest`, are unreadable and preserved raw.
    - Opening a rung writes support through preflight before its text shows, including a support-only record on an unchecked item that stays unobserved; a refused support write keeps the rung closed and the notebook unchanged.
