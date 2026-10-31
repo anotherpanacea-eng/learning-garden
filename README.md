@@ -156,6 +156,10 @@ Full passages, sentence focus, English meaning/vocabulary help, and skill-matche
 
 Open `#bac`, or choose The ferry crossing (French) from Home or the French learning page. Madame Roux runs a small rope ferry. There are two crossings, morning and afternoon. On each, the child hears her French lines and answers aloud or by picking a written answer, with word-by-word and English meaning help, local French speech only, and two short teaching cards. Help is recorded before it shows, and speaking aloud is recorded only as "started", never scored. This is supported practice, not a French assessment. See [spec 327](docs/specs/327-french-ferry-crossing.md).
 
+## The River Market (Spanish)
+
+Open `#mercado`, from Home or from a Spanish riddle card's answer. The barge *La Garza* has come down from Vadoalto with cargo. The first errand, *La carga*, gives a short Spanish note (or an optional longer one): unload the honey, flour and seeds to the buildings it names, then answer one question. *What does it mean?*, *Word by word*, local Spanish speech and one-sentence reading are always available and recorded as support. *Mi cuaderno* lists the words met with three grammar and sound notes. Started errands keep a frozen copy of their note, and Start again keeps every earlier try. The Spanish is bound to a three-provider model-panel review. This is supported reading practice, not a Spanish assessment. See [spec 324](docs/specs/324-river-market-cargo.md) and [spec 117](docs/specs/117-spanish-river-market.md).
+
 ## Privacy and contributions
 
 This repository contains generic source and curriculum content. Do not commit real learner profiles, names, ages or grades tied to a child, school or location details, family anecdotes, responses, progress, personalized packs, recordings, screenshots, exports, or credentials. Use clearly synthetic examples in tests and review commit metadata and attachments as well as files. See [CONTRIBUTING.md](CONTRIBUTING.md).
