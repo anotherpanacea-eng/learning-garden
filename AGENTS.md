@@ -29,6 +29,109 @@ here finishes or moves a card's work, move the card
 (`python3 -m tools.backlog_state move`) or say so in the PR. A card's stage
 never reserves files; a Fleet custody checkout still does.
 
-## Delivery default
+The roadmap's goal IDs, LG-G1 to LG-G5 in
+[docs/roadmap.md](docs/roadmap.md#owner-priorities-in-order), are the cards'
+`goal` field, and the lowest-numbered goal with ready work goes next. Lanes A to
+D of the next consolidation lanes serve LG-G3, LG-G2, LG-G1 and LG-G4. A new
+card names its goal; a card without one is maintenance.
 
-For requested After the Storm implementation work, the user's default is **build → independent review → resolve findings → merge → deploy** to the existing canonical live game. Obtain independent Claude clearance on the exact candidate and verify the merged static assets before deployment. Keep credentials and account configuration out of the repository. Stop at a concrete unresolved review, authorization or deployment blocker and report it clearly.
+## Who does what
+
+Codex, on the owner's machine, lands work here: it merges and deploys. Claude
+sessions write specs and code, review, and fix on their own branches. Claude
+opens PRs as drafts, never merges one, and never deploys. Any other seat
+follows the Claude rules unless the owner says otherwise.
+
+## Fleet custody
+
+Before editing, take a Fleet custody checkout from a fleet-coordination
+checkout ([spec](https://github.com/anotherpanacea-eng/fleet-coordination/blob/main/specs/custody-state-cas.md)):
+
+```sh
+python3 -m tools.custody_state checkout --issue N --session <stable session id> \
+    --target anotherpanacea-eng/learning-garden --branch B --path P [--path ...]
+```
+
+Start only on a `grant`. `busy` names the blocking Fleet issue; don't touch
+those paths. A `plan` result means the proxy refused the write: send its
+`write` as given (GitHub connector `create_or_update_file`) and the grant holds
+once it lands. Each branch needs its own Fleet issue, a grant holds at most 64
+paths, and a grant covers only the paths it lists, so take a new checkout
+before widening scope. When your candidate is final, mark the PR ready and
+release (`python3 -m tools.custody_state release`). Codex waits for that
+release before landing, so a draft or a held grant means "not yet".
+
+## Specs and review
+
+Every new capability gets a spec under `docs/specs/` and an independent spec
+review before code. A spec records:
+
+- the Jane and Marble study above: refreshed upstream commits, what was reused,
+  adapted or only studied, and the Marble topic ids and six-act strand
+  families ([six-act-strands](docs/six-act-strands.md)) it touches, as
+  candidates, not coverage claims;
+- spec 49's teaching encounter (§5: teaching, contrast, supported practice, new
+  use, return) and its hard-prerequisite crosswalk (§8) against
+  `curriculum/marble/dependencies.json`;
+- where it sits in the six acts of [spec 49](docs/specs/49-six-act-curriculum.md)
+  and the story of [spec 120](docs/specs/120-keeper-of-the-ways.md), and the
+  act or chapter job it fills.
+
+Paraphrase upstream research rather than copying it (the teaching research
+text is CC BY-SA), and don't adopt bosses, medals, gates or mastery labels. Going
+beyond Jane and Marble is fine when the spec says why.
+
+Each spec and each build gets an independent review from the other vendor: a
+Claude-authored PR is reviewed by Codex, and Codex's own work needs independent
+Claude clearance. An author's own checks never count as the review. Clearance
+names the exact head SHA it covers; a later push needs a fresh look at the
+new commits. The author fixes findings on the same branch.
+
+## Checks
+
+`node scripts/run-checks.mjs` runs the atlas, the story packs and every
+`test/*checks*.mjs` suite (about three minutes). Run it before marking a PR
+ready. For UI changes also run the touched activity's browser suite,
+`python test/<activity>-browser.py` (Python Playwright and Chromium). There is
+no hosted CI here: these commands are the gate, so say in the PR which ones
+you ran and at which head.
+
+Browser suites are Chromium emulation. They don't qualify a physical iPad,
+Safari, audible speech or VoiceOver, and no check here measures learning.
+That limit is standing; receipts mention only departures from it.
+
+## Landing: Codex's merge and deploy procedure
+
+For requested After the Storm work, the default is build, independent review,
+resolve findings, merge, deploy to the canonical live game. Codex lands a PR
+this way:
+
+1. **Preconditions.** The PR is ready, the author's custody is released,
+   independent clearance names the current head SHA, and no review thread is
+   unresolved. Stop and report if any is missing.
+2. **Test the release tree.** Merge the candidate (and anything landing with
+   it) onto current `main` locally. On that tree, run
+   `node scripts/run-checks.mjs` and the browser suites for the activities
+   the release touches.
+3. **Merge** with a merge commit, never squash. Confirm the merged `main` has
+   the same tree as the tested one (`git diff --quiet <tested> origin/main`).
+   If `main` moved, go back to step 2.
+4. **Deploy only when `dist/` changed.** From the authorized Cloudflare
+   account (check the account; never assume the CLI default), run
+   `npx wrangler deploy --assets ./dist --name after-the-storm-learning`.
+   Deploy only `dist/`, never the repository root or CLI setup folders. Keep
+   credentials and account configuration out of the repository.
+5. **Verify live.** Every tracked `dist/` file must match the bytes served at
+   https://after-the-storm-learning.anotherpanacea.workers.dev/, then run the
+   affected browser journeys against the hosted site. If either fails,
+   redeploy the previous release and report.
+6. **Receipt.** Post one PR comment: tested tree, merge SHA, Cloudflare
+   version id, the asset match, the suites run with results, and any harness
+   caveat. Docs-only PRs (no `dist/` change) need no deploy and no receipt
+   beyond the merge.
+7. **Fleet card.** Move the linked card (`python3 -m tools.backlog_state
+   move`): `done` when its `done_when` is met, otherwise leave it in `build`
+   and say what is left in its note.
+
+Stop at a concrete unresolved review, authorization or deployment blocker and
+report it.
