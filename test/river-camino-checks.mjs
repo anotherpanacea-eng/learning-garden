@@ -94,7 +94,12 @@ ok(makeCaminoSource('medium')===null,'unknown amount makes no source');
  ok(openCarga(st,yes).ok&&st.spanish.errands.carga.tryId===2,'La carga opens beside them');
  const e=st.spanish.errands.carga;for(const i of e.source.items)placeItem(st,i.id,e.source.targets[i.kind],yes);submitCarga(st,yes);
  ok(bytes({camino:cam(st),receta:st.spanish.errands.receta,earlier:st.spanish.earlier.slice(0,1)})===keep,'the unreadable and unknown records are kept exactly');
- ok(riverMarketNotes(st).includes('&quot;future&quot;: true')&&riverMarketNotes(st).includes('&quot;tiempo&quot;'),'and reach the saved-data export section');
+ // Decode the saved-data section and compare every retained record with its original.
+ const pre=riverMarketNotes(st).match(/<pre>([\s\S]*)<\/pre>/)[1].replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&amp;/g,'&');
+ const exported=JSON.parse(pre),original=JSON.parse(keep);
+ assert.deepEqual(exported.errands.camino,original.camino);assert.deepEqual(exported.errands.receta,original.receta);assert.deepEqual(exported.earlier,original.earlier);
+ ok(true,'the saved-data section carries the unreadable camino, the unknown errand and the unknown earlier record exactly');
+ assert.deepEqual(exported,JSON.parse(bytes(st.spanish)));ok(true,'and the whole spanish root exactly');
  ok(riverMarketView(st).earlier[0].readable===false&&riverMarketView(st).earlier[0].kind===null,'an unknown earlier record is listed as unreadable');
 }
 

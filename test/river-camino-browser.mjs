@@ -107,19 +107,30 @@ try{
   await act(p,'note-directions').click();ok(await p.locator('#river-cuaderno-title').count()===0,'refused Details note stays closed');
   eq(await snap(),before,'refusals change no saved data');eq(await p.evaluate(()=>JSON.stringify(__read().spanish)),live,'nor the live notebook');
   ok(p.errors.length===0,`refusal: no page errors (${p.errors.join('; ')})`);await c.close();}
- // Support before English through the UI: meaning is saved before any gloss renders.
- {const {c,p}=await fresh(320,600);await act(p,'open-camino').click();await p.locator('.river-map').waitFor();
-  await p.evaluate(()=>{window.__seen=[];new MutationObserver(()=>{if(document.querySelector('.river-gloss,.river-words')){const id=JSON.parse(localStorage.getItem('learning-garden-explorers')||'{}').activeId||'explorer-1';window.__seen.push(JSON.parse(localStorage.getItem('number-garden-v1:'+id)).spanish.errands.camino.support.meaning);}}).observe(document.body,{subtree:true,childList:true});});
-  await act(p,'words').click();await p.locator('.river-words').waitFor();
-  ok((await p.evaluate(()=>window.__seen)).every(Boolean)&&(await p.evaluate(()=>window.__seen.length))>0,'Word by word: meaning saved before English rendered');await c.close();}
+ // Support before English through the UI: every HTML write that would show English is checked synchronously against the saved support.
+ for(const path of ['meaning','words','cuaderno','note-directions']){const {c,p}=await fresh(320,600);
+  await p.evaluate(()=>{window.__early=[];window.__english=0;const saved=()=>{const id=JSON.parse(localStorage.getItem('learning-garden-explorers')||'{}').activeId||'explorer-1';return JSON.parse(localStorage.getItem('number-garden-v1:'+id)||'{}').spanish?.errands?.camino?.support?.meaning===true;};
+   const check=html=>{if(typeof html==='string'&&/river-gloss|river-words|river-cuaderno/.test(html)){window.__english++;if(!saved())window.__early.push(html.slice(0,80));}};
+   const d=Object.getOwnPropertyDescriptor(Element.prototype,'innerHTML');Object.defineProperty(Element.prototype,'innerHTML',{configurable:true,get:d.get,set(v){check(v);d.set.call(this,v);}});
+   const o=Object.getOwnPropertyDescriptor(Element.prototype,'outerHTML');Object.defineProperty(Element.prototype,'outerHTML',{configurable:true,get:o.get,set(v){check(v);o.set.call(this,v);}});
+   const ia=Element.prototype.insertAdjacentHTML;Element.prototype.insertAdjacentHTML=function(w,v){check(v);return ia.call(this,w,v);};});
+  await act(p,'open-camino').click();await p.locator('.river-map').waitFor();
+  await act(p,path).click();await p.locator(path==='meaning'?'.river-gloss':path==='words'?'.river-words':'#river-cuaderno-title').first().waitFor();
+  const r=await p.evaluate(()=>({early:window.__early,english:window.__english}));
+  ok(r.english>0&&r.early.length===0,`${path}: meaning saved before any English HTML was written (${r.early.join(' | ')})`);await c.close();}
  // Switching explorers writes nothing to either explorer's market.
  {const {c,p}=await fresh(820,1000);await act(p,'open-camino').click();await p.locator('.river-map').waitFor();await mv(p,'recto').click();
   const first=await p.evaluate(()=>JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId),key='number-garden-v1:'+first;
   const mine=await p.evaluate(k=>JSON.parse(localStorage.getItem(k)).spanish,key);
   await p.locator('#explorer-switch').click();await p.locator('#explorer-new').click();await p.locator('#explorer-create').click();await p.locator('[data-river-root]').waitFor();
   ok(!Object.hasOwn(await book(p),'spanish'),'the new explorer starts with no market save');
-  await p.locator('#explorer-switch').click();await p.locator(`[data-explorer-choose="${first}"], [data-explorer-id="${first}"]`).first().click().catch(()=>{});
-  eq(await p.evaluate(k=>JSON.parse(localStorage.getItem(k)).spanish,key),mine,'switching explorers leaves the first market exact');await c.close();}
+  const second=await p.evaluate(()=>JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId);ok(second!==first,'a second explorer is active');
+  const theirs=await p.evaluate(()=>{const id=JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId;return localStorage.getItem('number-garden-v1:'+id);});
+  await p.locator('#explorer-switch').click();await p.locator(`[data-select-explorer="${first}"]`).click();await p.locator('[data-river-root]').waitFor();
+  eq(await p.evaluate(()=>JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId),first,'switched back to the first explorer');
+  await act(p,'open-camino').click();await p.locator('.river-map').waitFor();ok((await p.locator('#river-teo-place').innerText())==='Teo is at el puente.','the first explorer resumes at the bridge');
+  eq(await p.evaluate(k=>JSON.parse(localStorage.getItem(k)).spanish,key),mine,'switching explorers leaves the first market exact');
+  eq(await p.evaluate(id=>localStorage.getItem('number-garden-v1:'+id),second),theirs,'and the second explorer\'s save exact');await c.close();}
 }finally{await browser.close();}
 console.log(`Screenshots for inspection: ${out}`);
 console.log(`El camino browser checks: ${n} assertions passed.`);
