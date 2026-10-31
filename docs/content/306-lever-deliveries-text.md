@@ -2,9 +2,9 @@
 
 Shared title: **The Lift Yard**. Controls: **Ramp / Lever**; **Yard / Numbers**; **Other lever deliveries**. Switching machines keeps both sets of waiting jobs, your view and one held completed trip. Leaving the yard or reloading starts fresh. Nothing here changes saved learning notes.
 
-Lever introduction: “Try a lever for the upper storeroom. Push one end down to lift the other. Where will you put the pivot?”
+Lever introduction: “The shops need dry stores after the storm. Try a lever. Push down to lift the load. Where will its pivot go?” The ramp introduction opens with the same reason sentence.
 
-**Plan:** “Find a pivot place that fits this delivery. Sometimes more than one works.” **Push:** “Push down one metre at a time. Watch the load rise.” **Top:** “Delivery reached the top mark.”
+**Plan:** “Find a pivot place that fits this delivery. Sometimes more than one works.” **Push:** “Push down one meter at a time. Watch the load rise.” **Top:** “Delivery reached the top mark.”
 
 Equipment tag: “Load weight: {w} N · Push unit can provide up to {c} N · Space from the pivot for the push side: {s} m · Pole: 12 m · Target rise: 1 m”. Newtons measure force, not mass. The push unit adjusts to the required force; its maximum is a limit.
 
@@ -22,7 +22,7 @@ Facts begin “Planned trip ·” during Plan, “Current trip ·” during Push
 
 Scene title: “A rigid lever lifting a delivery”. Description names both arms, the fixed pivot, current vertical drop, load rise and calculated vertical force. Caption: “Bar: required push {F} N · line: limit {c} N. Dotted curve: end path. Left bracket: vertical drop used for work. The pictures have different scales; compare work in Numbers. The space guide marks a starting span, not a wall.”
 
-Numbers title: “A picture of input work”. Each cell represents one joule. Axis for a lever: **Vertical push drop (m)**; for a ramp: **Rope distance (m)**. Vertical axis: **Required force (N)**. Current planned/current trip work-so-far and held completed full work are separately labelled. Same fixed cell size in both figures and both machines; rectangles represent force × distance, not square metres or real apparatus dimensions.
+Numbers title: “A picture of input work”. Each cell represents one joule. Axis for a lever: **Vertical push drop (m)**; for a ramp: **Rope distance (m)**. Vertical axis: **Required force (N)**. Current planned/current trip work-so-far and held completed full work are separately labelled. Same fixed cell size in both figures and both machines; rectangles represent force × distance, not square meters or real apparatus dimensions.
 
 Held lever: “Held completed lever trip · {w} N load · push/load arms {b}/{a} m · {F} N downwards through {r} m · {F*r} J whole-trip work”. Held ramp: “Held completed ramp trip · {w} N load · {L} m ramp · {F} N along {L} m of rope · {F*L} J whole-trip work”. Holding never proves equipment fits today's job.
 
@@ -43,9 +43,9 @@ Grown-ups: “This is a supplied quasi-static model, not a dynamic speed simulat
 **Hear this turn** reads the visible job, selected arms, turn instruction and quantities. No perception result is inferred. The optional explanations remain available without completing a shift. No film control appears in306.
 
 
-Ramp Plan prompt superseding305: “Find a ramp that fits this delivery. Sometimes more than one works.” Ramp Another shift note: “Your lever jobs, view and held trip stay; these six ramp jobs start fresh.” Each machine shows only its own shift milestone. The header introduction changes with the selected machine. Both Numbers views now use “A picture of input work” and “Required force (N)”; distance axes retain their own directions.
+Each machine shows only its own shift milestone. The header introduction changes with the selected machine. Both Numbers views now use “A picture of input work” and “Required force (N)”; distance axes retain their own directions.
 
-Lever jobs chooser: “Six lever deliveries · {count} reached the top.” “Every lever job is open. Waiting trips stay where you left them.” Each tag: “{destination} · {w} N · push unit {c} N · space {s} m”, plus “delivery complete” when delivered and “current trip {d} of {r} m pushed down” when started; both may appear. **Return to current lever job**. Space means initial horizontal push-arm centreline span from the pivot, not an operator/body clearance prediction.
+Lever jobs chooser: “Six lever deliveries · {count} reached the top.” “Every lever job is open. Waiting trips stay where you left them.” Each tag: “{destination} · {w} N · push unit {c} N · space {s} m”, plus “delivery complete” when delivered and “current trip {d} of {r} m pushed down” when started; both may appear. **Return to current lever job**. Space means initial horizontal push-arm centerline span from the pivot, not an operator/body clearance prediction.
 
 Grown-up source links: **OpenStax: simple machines** (https://openstax.org/books/physics/pages/9-3-simple-machines); **work** (https://openstax.org/books/physics/pages/9-1-work-power-and-the-work-energy-theorem); **torque** (https://openstax.org/books/university-physics-volume-1/pages/10-6-torque); **static equilibrium** (https://openstax.org/books/university-physics-volume-1/pages/12-1-conditions-for-static-equilibrium).
 
