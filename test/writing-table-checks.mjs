@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import {freshState} from '../dist/core.mjs';
 import {prepareProgressImport} from '../dist/progress-transfer.mjs';
-import {taskSource,writingTasks} from '../dist/writing-table-content.mjs';
+import {taskSource,writingTasks as allWritingTasks} from '../dist/writing-table-content.mjs';
+// This suite regresses317's original fifteen tasks;321 has its own suite.
+const writingTasks=allWritingTasks.filter(x=>['paragraphs','linking'].includes(x.bench));
 import * as c from '../dist/writing-table-core.mjs';
 import {writingPage,writingNotes} from '../dist/writing-table-ui.mjs';
 let checks=0;
@@ -40,7 +42,7 @@ const unfamiliar=copy(s);unfamiliar.writingDesk.records.future={v:77,arbitrary:'
 const unsupported=freshState();unsupported.writingDesk={v:77,records:'original'};const held=json(unsupported);ok(!c.openWritingTask(unsupported,'bakery',options).ok,'unknown root read-only');eq(json(unsupported),held,'unknown root exact');
 const cap=copy(s);for(let n=0;n<40;n++)ok(c.checkWritingTask(cap,options).ok,'repeat remains practice');eq(record(cap).checks.length,24,'first plus recent23 retained');eq(record(cap).count,41,'total check count retained');eq(record(cap).checks[0],record(s).checks[0],'first survives bound');
 const kept=copy(s);c.keepWritingTask(kept,options);const firstK=copy(record(kept).firstKept);c.setWritingMaterial(kept,{strip:'bread',heading:'sale'},options);c.keepWritingTask(kept,options);eq(record(kept).latestKept.check,null,'changed version has no borrowed check');eq(record(kept).firstKept,firstK,'first remains');record(kept).latestKept={future:true};const exact=json(kept);eq(c.keepWritingTask(kept,options).error,'kept-unavailable','unknown snapshot cannot be overwritten');eq(json(kept),exact,'unknown snapshot preserved');ok(c.setWritingMaterial(kept,{strip:'bread',heading:null},options).ok,'unknown snapshot does not freeze working material');
-const cycle=freshState();for(const t of writingTasks){ok(c.nextWritingTask(cycle,options).ok,'next always open');eq(cycle.writingDesk.currentId,t.id,'next follows authored order');}c.nextWritingTask(cycle,options);eq(cycle.writingDesk.currentId,'bakery','wrap to earlier draft');eq(Object.keys(cycle.writingDesk.records).length,15,'all fifteen preserved');
+const cycle=freshState();for(const t of writingTasks){ok(c.nextWritingTask(cycle,options).ok,'next always open');eq(cycle.writingDesk.currentId,t.id,'next follows authored order');}const afterLegacy=copy(cycle);c.nextWritingTask(afterLegacy,options);eq(afterLegacy.writingDesk.currentId,'holding-parcel','Next reaches the new bench after the original fifteen');eq(Object.keys(cycle.writingDesk.records).length,15,'all fifteen preserved');
 const growing=freshState();c.openWritingTask(growing,'a-strip',options);c.openWritingTask(growing,'bakery',options);eq(c.writingView(growing).familiar,true,'shared family marks repeated supplied text');
 const frozen=taskSource('b-time');frozen.choices.reverse();eq(taskSource('b-time').choices[0].id,'meanwhile','catalog copies independent');
 const reordered={placements:{b:'h',a:null}},equivalent={placements:{a:null,b:'h'}};ok(c.sameWritingWork(reordered,equivalent),'object key ordering is not a revision');
