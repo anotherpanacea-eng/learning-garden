@@ -94,6 +94,15 @@ ok(feedbackLine(makeCrossingSource('morning'),'a-for-dou')==="That card tells wh
  ok(markSpeechStarted(c,'morning',0,yes).ok===false&&!cross(c,'morning').steps[0].speechStarted,'the saying step is not her line');
 }
 
+// Picks are limited only by real capacity: a long run of wrong picks still continues.
+{
+ const st={};openCrossing(st,'morning',voice,yes);
+ for(let n=0;n<1000;n++)pickAnswer(st,'morning','trois',yes);
+ ok(cross(st,'morning').steps[0].picks.length===1000&&validCrossing(cross(st,'morning')),'1,000 picks stay readable');
+ ok(pickAnswer(st,'morning','deux',yes).fitted,'a fitting pick still lands after 1,000');
+ const kept=bytes(st);ok(sayAnswer(st,'morning','said',no).ok===false&&bytes(st)===kept,'a capacity refusal changes nothing');
+}
+
 // Notes: speech started counts only with words hidden; said counts only I said it.
 {
  const st={};openCrossing(st,'morning',voice,yes);markSpeechStarted(st,'morning',0,yes);finish(st,'morning');

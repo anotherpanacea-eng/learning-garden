@@ -100,7 +100,9 @@ let controller;
 export function bindFrenchFerry(state,ctx={}){
  controller?.abort();controller=new AbortController();const signal=controller.signal;
  const root=document.querySelector('[data-ferry-root]');if(!root)return;
- const owner=ctx.explorerId?.()??'',route='#bac',v=local(state,owner),ownedRoot=state.frenchFerry;
+ const owner=ctx.explorerId?.()??'',route='#bac',v=local(state,owner);
+ // The root this binding expects: advanced after its own writes, so an outside replacement is still refused.
+ let ownedRoot=state.frenchFerry;
  const owned=()=>root.isConnected&&document.querySelector('[data-ferry-root]')===root&&(!ctx.notebook||ctx.notebook()===state)&&(ctx.explorerId?.()??'')===owner&&(!ctx.isActive||ctx.isActive())&&state.frenchFerry===ownedRoot;
  const live=el=>owned()&&location.hash===route&&el.isConnected&&root.contains(el);
  const options={canExport:ctx.canExport};
@@ -108,16 +110,22 @@ export function bindFrenchFerry(state,ctx={}){
  const stop=()=>ctx.stopSpeech?.();
  const voiceNow=()=>frenchVoiceAvailable(deviceVoices());
  function redraw(target,message=''){ctx.render?.();const next=document.querySelector('[data-ferry-root]');if(!next||location.hash!==route)return;say(message);const f=next.querySelector(target)||next.querySelector('#ferry-title');f?.focus({preventScroll:true});}
- function write(fn){const result=fn();if(!result.ok){say(result.error==='unavailable'?T.exceptions.unreadable:T.exceptions.refused);return null;}if(result.changed!==false)ctx.save?.();return result;}
+ function write(fn){const result=fn();if(!result.ok){say(result.error==='unavailable'?T.exceptions.unreadable:T.exceptions.refused);return null;}if(result.changed!==false){ownedRoot=state.frenchFerry;ctx.save?.();}return result;}
+ // The try and step a Hear tap came from, so a late start event can't mark another try.
+ let heard=null;
  // Controls follow the device's voices; the stored voice flag never changes.
  const rendered=voiceNow();
  try{window.speechSynthesis?.addEventListener?.('voiceschanged',()=>{if(owned()&&location.hash===route&&voiceNow()!==rendered)redraw('[data-ferry-focus]');},{signal});}catch{}
  // Listens are counted before speech; a refused count doesn't block listening.
  root.addEventListener('click',ev=>{const b=ev.target.closest?.('[data-speak-lang="fr"]');if(!b||!live(b)||!v.open)return;
   const c=core.frenchFerryView(state).crossings[v.open]?.crossing;if(!c)return;
-  const kind=b.hasAttribute('data-ferry-her')?'listen':b.hasAttribute('data-ferry-model')?'model':null;if(kind)write(()=>core.countListen(state,v.open,kind,options));},{capture:true,signal});
+  const kind=b.hasAttribute('data-ferry-her')?'listen':b.hasAttribute('data-ferry-model')?'model':null;
+  if(kind==='listen')heard={key:v.open,tryId:c.tryId,step:Number(b.dataset.ferryHer)};
+  if(kind)write(()=>core.countListen(state,v.open,kind,options));},{capture:true,signal});
  root.addEventListener('garden-speech-start',ev=>{const b=ev.target.closest?.('[data-ferry-her]');if(!b||!live(b)||!v.open)return;
-  write(()=>core.markSpeechStarted(state,v.open,Number(b.dataset.ferryHer),options));},{signal});
+  const step=Number(b.dataset.ferryHer),c=core.frenchFerryView(state).crossings[v.open]?.crossing;
+  if(!c||!heard||heard.key!==v.open||heard.tryId!==c.tryId||heard.step!==step)return;
+  write(()=>core.markSpeechStarted(state,v.open,step,options));},{signal});
  root.addEventListener('click',ev=>{
   const el=ev.target.closest?.('[data-ferry-action],[data-ferry-card]');if(!el||!live(el))return;
   const key=v.open;

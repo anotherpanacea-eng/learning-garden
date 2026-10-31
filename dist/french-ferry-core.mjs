@@ -9,7 +9,7 @@ const own=(x,k)=>Object.hasOwn(x,k),clone=x=>structuredClone(x);
 const id=x=>typeof x==='string'&&/^[a-z][a-z0-9-]{0,39}$/.test(x);
 const unique=list=>new Set(list).size===list.length;
 const pair=(x,a,b,max)=>object(x)&&text(x[a],max)&&text(x[b],max);
-const KINDS=['count','to','from','time'],MAX_SOURCE=32*1024,MAX_COUNT=99,MAX_PICKS=999;
+const KINDS=['count','to','from','time'],MAX_SOURCE=32*1024,MAX_COUNT=99;
 const DETAIL={count:'count',time:'time',to:'place',from:'place'};
 export function validCrossingSource(s){
  try{
@@ -49,7 +49,7 @@ export function feedbackLine(s,fid){
 const choiceIds=(s,i)=>i===4?s.steps[4].choices.map(c=>c.id):s.cards.map(c=>c.id);
 const fits=(s,i,pick)=>pick===s.steps[i].fit;
 function validStep(s,i,x){
- if(!object(x)||!Array.isArray(x.picks)||x.picks.length>MAX_PICKS||!x.picks.every(p=>choiceIds(s,i).includes(p)))return false;
+ if(!object(x)||!Array.isArray(x.picks)||!x.picks.every(p=>choiceIds(s,i).includes(p)))return false;
  if(!bool(x.fitted)||x.fitted!==(x.picks.length>0&&fits(s,i,x.picks.at(-1))))return false;
  if(!bool(x.wordsShown)||!bool(x.meaning)||!int(x.listens,0,MAX_COUNT)||!int(x.modelListens,0,MAX_COUNT)||!bool(x.speechStarted))return false;
  if(![null,'said','not-now'].includes(x.said))return false;
@@ -124,7 +124,6 @@ function edit(state,key,fn,options){return change(state,next=>{
 export function pickAnswer(state,key,choiceId,options){return edit(state,key,c=>{
  const at=currentStep(c);if(at.phase!=='answer')return fail('not-now');
  const s=c.source,x=c.steps[at.index];if(!choiceIds(s,at.index).includes(choiceId))return fail('selection');
- if(x.picks.length>=MAX_PICKS)return fail('capacity');
  x.picks.push(choiceId);x.fitted=fits(s,at.index,choiceId);
  if(c.steps.every(y=>y.fitted))c.state='crossed';
  return {ok:true,step:at.index,fitted:x.fitted,feedback:feedbackFor(s,at.index,choiceId)};
