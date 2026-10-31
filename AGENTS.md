@@ -96,7 +96,9 @@ ready. For UI changes also run the touched activity's browser suite:
 `node test/<activity>-browser.js` (Node Playwright), both on Chromium. Some
 Node suites need `dist/` served and a URL variable; use the command the README
 gives next to that activity. There is
-one hosted check, a gitleaks secret scan on every PR and `main` push; the
+one hosted check, a gitleaks credential-pattern scan on every PR and `main`
+push. It finds credential-shaped strings, not account IDs or private
+information, so still inspect the staged diff for those before pushing. The
 commands above are the gate, so say in the PR which ones you ran and at which
 head.
 
