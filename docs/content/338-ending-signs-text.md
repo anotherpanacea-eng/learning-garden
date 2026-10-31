@@ -10,6 +10,7 @@ Original town text selected from [263](263-market-signs-text.md), with the bound
 - 263's four authored hint lines are used exactly. For the other authored pair and tool mismatches, use the finite templates under **Bench feedback**. No other feedback is generated.
 - An unauthored root and ending pair (for example fresh + -ous) gets the discovery line, never a lexical verdict. Some unauthored pairs make real words (vary + -ation with y to i gives variation). The line says only that this tiny bench has no note for it.
 - The odd-ones shelf and the no-root shelf are read-only cards. They are not bench pairs and are not tools.
+- C6 has its own instructions, not B5's prefix wording: list prompt **Choose a word part, then the spelling that fills its gap.** Destination prompt **Choose a spelling.** Destination group label **Spellings**. B5's existing copy is unchanged.
 - C6 is a placement job: six gapped word parts go to four ending destinations, in this fixed order: **-sure / -ture / ou / y**. Destinations are reused. The key is the full mapping.
 - Scene 4 (the Vadoalto trader, Spanish) is not commissioned. Its Spanish lines wait for the language panel; this slice teaches no Spanish to English rule.
 - Scene 2's story dictionary is the bigger book from 325. The selected scene does not say the word is in the five-page model.
@@ -23,7 +24,7 @@ Ending bench: **Root word / Ending / Tool / Choose a root word / Choose an endin
 
 Tools, in this order: **just add / drop the e / y to i / le to ly / ic to ically**. Tool group label: **Tools**. Harder tool label: **A harder tool**.
 
-Missing selection: **Choose a root word, an ending and a tool first.** Kept: **Your sign is kept. You can make another.** Already kept: **This sign is already on your shelf.** Cleared: **Your waiting sign is clear. Your kept signs are still here.**
+Missing selection: **Choose a root word, an ending and a tool first.** Paused older note: **This older sign note does not match its own tool. It is kept as it was.** Kept: **Your sign is kept. You can make another.** Already kept: **This sign is already on your shelf.** Cleared: **Your waiting sign is clear. Your kept signs are still here.**
 
 Shelves: **Odd ones / No root word**. Practice: the existing 325 controls plus **Ending sign jobs** as the group heading. Job titles: **Fresh bread / A happy painter / Handle gently / Famous honey / Your invitation / Learned spellings / A dramatic bow**.
 
@@ -130,7 +131,7 @@ Worked example: *basic + -ly*. 1. Basic ends in -ic. 2. Add -ally. 3. Basically.
 
 ### The Ending Signs bench (c)
 
-**Header:** Pick a word and an ending. Then pick a tool: just add, drop the e, y to i, or le to ly.
+**Header:** Pick a word and an ending. Then pick a tool: just add, drop the e, y to i, or le to ly. For -ic words there is a harder tool: ic to ically. (263's header plus its Keeper's Desk tool, named because this slice offers it from arrival.)
 
 **Roots, in this order, each with its one authored ending, tool and word:**
 

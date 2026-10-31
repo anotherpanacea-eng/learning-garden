@@ -16,8 +16,8 @@ Checked 2026-10-31. Original teaching, fiction and items are selected from [263]
 
 - All 24 authored joins reproduce exactly from their root, ending and the one authored tool, under the literal tool rules in the spec.
 - For every authored pair, no other tool produces the same word, so a fit names exactly one tool.
-- truly is produced only by drop the e before -ly, which card 10 says does not usually happen; publicly is produced only by just add on an -ic root, which card 21 says is the odd one; courageous is not produced by any tool (drop the e gives couragous). The odd-ones shelf is therefore honest: no bench tool reaches those words by its stated rule.
-- 24 roots x 3 endings x 5 tools = 360 combinations; 121 have an applicable tool; 24 are authored fits. Every other applicable combination gets the finite discovery line.
+- The odd ones are exceptions to the cards' generalizations, not spellings the tools cannot make: drop the e on true + -ly writes truly (card 10 says a consonant ending usually just adds), just add on public + -ly writes publicly (card 21 says -ic usually adds -ally), and just add on courage + -ous writes courageous (card 12 says a final e usually drops). true, public and courage are therefore not bench roots and have no authored join; the three words sit only on the read-only shelf. (Corrected after Codex spec review of 188e7e3, which found the earlier "unreachable" claim false.)
+- 24 roots x 3 endings x 5 tools = 360 combinations: 24 authored fits, 19 authored mismatches (the root's own ending with another working tool; these get 263's four exact hints or the template, never the discovery line), 78 discoveries (an unauthored ending with a working tool) and 239 cannot-work cases; 121 working in all.
 - The six three-choice items key A 2 / B 3 / C 1; none has the right answer as the single longest choice (C2's happily ties happyly).
 - C6's six parts fill to treasure, measure, picture, nature, young, gym; 4^6 = 4,096 complete mappings, of which one fits.
 
@@ -37,4 +37,4 @@ Marble HEAD freshly resolved at `5e23196fa60050433f1440057f65a978d39e63fc`; `dat
 
 ## Subject and content review still required
 
-Independently verify every keyed form, the four tool rules and their "usually" wording, the odd ones and their one-line reasons, C1-C7 keys, cues and feedback, and the C6 families. This audit is not implementation clearance.
+Independently verify every keyed form, the five tool rules and their "usually" wording, the odd ones and their one-line reasons, C1-C7 keys, cues and feedback, and the C6 families. This audit is not implementation clearance.
