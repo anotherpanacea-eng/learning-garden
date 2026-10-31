@@ -120,7 +120,7 @@ Worked example: *Clay and a rubber strip.*
 | hardly | It hardly changes. Still {sample}. |
 | snaps | Still slate. Now in two pieces. (167) |
 
-`{sample}` is the sample's name in lower case, without "Soaked" (*Still willow.*, *Still rubber.*).
+`{sample}` is the sample's material name: clay · willow · rubber · sponge · slate · rope (for Clay, Soaked willow rod, Rubber strip, Sponge, Slate, Rope), as in *Still willow.* and *Still rubber.*
 
 **Stuck ladder (167):** rung 1 is card 3's text; rung 2 is the companion's shape-changes example, *A sponge.* Squeeze, let go, it springs back. Start: think of letting go.; rung 3 is Skip for now.
 
