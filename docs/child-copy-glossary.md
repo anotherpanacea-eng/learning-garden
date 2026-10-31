@@ -13,6 +13,7 @@ Author guide for lane A. This is the first glossary, not a claim that every curr
 | Keep this… | Keep a notebook version of this parcel, visit or artifact. Device persistence depends on saving preferences and the actual write result; do not promise saved-on-device if it is only in memory. |
 | Another parcel / another investigation | Explicitly choose or create the next task. Preserve earlier work; say when a finite case is familiar. Do not use Next to disguise a destructive reset. |
 | Hint / Different example | Optional help for the current idea. Explain how to use it; keep its support history separate in the records. |
+| Ready-made sentence / ready-made words | A sentence the activity offers for the player to use or edit, in place of "supplied" in play directions. Its use stays in the support record and Grown-up notes. Keeper's Desk uses it first. |
 | English meaning | Optional meaning support for French/Spanish text. It is not a claim that someone independently understood the other language. |
 | Grown-up practice notes | Optional explanation of what a task/check/kept record can and cannot establish. Never hide necessary model instructions here. |
 
