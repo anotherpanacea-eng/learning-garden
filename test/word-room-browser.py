@@ -93,7 +93,7 @@ def edges(browser,base):
  finally:c.close()
  seed=fixture();seed['wordRoom']={'version':99,'raw':['retained']};c,p=setup(browser,base,seed)
  try:
-  tap(p,'recover');p.evaluate('window.__wrLate=document.querySelector("[data-wr-action=confirm]")');p.goto(base+'#notes');p.locator('#download').wait_for();held=copy.deepcopy(book(p));p.evaluate('window.__wrLate.click()');ok(book(p)==held,'late recovery confirmation after navigation inert');p.locator('#reset').tap();p.locator('[data-confirm-do]').tap();p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for();ok('wordRoom' not in book(p),'explicit explorer reset starts a preview without overwriting another explorer')
+  tap(p,'recover');p.evaluate('window.__wrLate=document.querySelector("[data-wr-action=confirm]")');p.goto(base+'#notes');p.locator('#download').wait_for();held=copy.deepcopy(book(p));p.evaluate('window.__wrLate.click()');ok(book(p)==held,'late recovery confirmation after navigation inert');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for();ok('wordRoom' not in book(p),'explicit explorer reset starts a preview without overwriting another explorer')
  finally:c.close()
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
