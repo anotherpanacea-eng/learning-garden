@@ -10,7 +10,7 @@
 
 The original edge points from a topic to a prerequisite: `topicId` depends on `prerequisiteId`. Hard/soft source edges and their reasons are retained. An app invitation, a candidate pattern, or a route between games is a different relation; none is added to the source prerequisite graph. Upstream age ranges and age suffixes remain reference metadata, never placement or access rules. The taxonomy is a useful map, not a validated assessment or a complete model of human learning. Some evidence entries are empty or bibliographic rather than usable child-response criteria; authoring must examine them.
 
-There are 187 explicit current references across 105 unique source topics: authored question references, scoped practice or supplied explanations. The other 1485 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
+There are 189 explicit current references across 107 unique source topics: authored question references, scoped practice or supplied explanations. The other 1483 topics are **not yet mapped**. These counts describe our declarations, not topic coverage, learning gains or mastery; a live game can contain useful material not yet assigned a topic ID. Background prerequisites in the small map do not count as teaching.
 
 ## Eight subjects, with the gaps visible
 
@@ -23,7 +23,7 @@ There are 187 explicit current references across 105 unique source topics: autho
 | Life Skills | 37 | 1 | 36 |
 | Mathematics | 503 | 68 | 435 |
 | Personal & Social Development | 88 | 0 | 88 |
-| Science | 547 | 18 | 529 |
+| Science | 547 | 20 | 527 |
 
 Mathematics currently has the broadest authored task collection. Science and English have narrow guided investigations/comprehension references. History, life skills, personal/social development and learning-to-learn require explicit content/evidence design; fictional settings, friendly characters, help use and game completion do not establish those abilities. The source’s Computing topics are grouped under “Artificial Intelligence,” including step-by-step instructions; preserve that source organization without mistaking it for a complete computing curriculum.
 
@@ -111,6 +111,7 @@ These are source-code encounters. Historical `live` labels in the declarations d
 | Same route, different scale (`#workshop/scale`) | build | Compare equal-pitch drawings of one invented 8-meter east plus 4-meter north route using 2 or 4 meters per edge. Toggle comparison and undo while the represented journey stays fixed. Supplied relations only; no physical measurement, chosen scale, unit conversion, independent calculation or general ratio evidence. |
 | Shadow Theatre (`#loft/shadows`) | experiment, create | Move or remove one opaque card between a fixed point lamp and screen, compare relative shadow sizes in coherent side/front views, reveal selected light paths and undo. A temporary qualitative ideal model; no physical observation, measured data, independent prediction/explanation or saved show scene. |
 | The Stained Map (`#library/spellings`) | read, build | Supplied silent-letter tiles, written history sorting and seven family clues with teaching and five supported jobs. Revisable first/latest work; no independent spelling, pronunciation or historical-knowledge assessment. No topic coverage claim. |
+| The Mending Shed (`#workshop/mending`) | experiment, build | Sort twelve pictured objects by what each is and what it is made of, with a guided first card, ordered Check lines and a stuck ladder; predict, try and let go of squash, bend, twist and stretch on six authored samples. Simplified authored pictures; no real materials, measurements or particle explanations. |
 
 The implemented **Carry an idea here** connection transfers a numerical practice invitation among Living Garden, café and Bramble. It starts a real destination task and preserves source relation/support/familiarity without copying answers. It does not provide shared science or literacy assessment. The café’s nature/reading conversations are unscored; French suggestions remain separate from English.
 
@@ -195,7 +196,7 @@ Additional subject plans outside the Marble v1 organization; related concepts ma
 | Science / Energy | 28 | 1 | Change · measure · explain; Build · transform · relate |
 | Science / Forces & Motion | 27 | 1 | Change · measure · explain; Build · transform · relate |
 | Science / Insects & Minibeasts | 22 | 5 | Search · inspect · compare; Read · infer · support |
-| Science / Matter & Materials | 40 | 1 | Change · measure · explain; Build · transform · relate |
+| Science / Matter & Materials | 40 | 3 | Change · measure · explain; Build · transform · relate |
 | Science / Ocean Life | 27 | 0 | Search · inspect · compare; Read · infer · support |
 | Science / Organisms & Life Processes | 63 | 1 | Search · inspect · compare; Read · infer · support |
 | Science / Polar Regions | 25 | 0 | Search · inspect · compare; Read · infer · support |
@@ -401,6 +402,8 @@ Every row below has an actual question or a narrow current declaration. The CSV 
 | [Subordinate clauses](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_wq-1OJ_8s5) | explanation / Sentence Bridges (local build) / [source](../dist/sentence-bridges-ui.mjs) | Explore supplied because/and/but clause relations and reversed order against a fixed scene, with exact reason/contrast meaning notes. No when/if/that/or range, independent composition, sentence-type transformation, punctuation editing or observed human listening. |
 | [Scale and similar shapes (age 11+)](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_1badik7iKJ) | explanation / Same route, different scale (local build) / [source](../dist/route-scale.mjs) | Supplied redraws of the same 12-meter invented route at 2 or 4 meters per grid edge, with complete leg/total readouts and equal drawing pitch. No learner-chosen scale, physical map measurement, unit conversion, unknown-distance calculation, area or full similar-shape competence. |
 | [How Shadows Form](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_Oru08pKlxd) | explanation / Shadow Theatre (local build) / [source](../dist/shadow-theatre-ui.mjs) | Supplied point-source blocking and relative-size explanation: move the same opaque card through three positions, remove/return it and inspect selected limiting paths on one fixed screen. No independent prediction/explanation, physical investigation, recorded measurements, daily sunlight pattern or broader material classification. |
+| [Objects vs Materials](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_5r47Pvstyn) | scoped-practice / The Mending Shed (local build) / [source](../dist/mending-shed-content.mjs) | A supported sort of twelve pictured objects into the object and the material it is made of, from a supplied chip tray with ordered Check lines. Unaided naming, real materials, property vocabulary and grouping are not observed. |
+| [Changing Shapes of Solids](https://github.com/withmarbleapp/os-taxonomy/blob/96a7933754af672e1bfdbf7ecb05c325860c6e0d/data/topics.json) (mt_wf-SJhZ1kC) | scoped-practice / The Mending Shed (local build) / [source](../dist/mending-shed-content.mjs) | A predicted test on authored pictures: choose a sample and an action, predict springs back, keeps the new shape or hardly changes, then see the authored result. Real materials, measurement, property vocabulary and grouping are not observed. |
 
 ## Sources, licensing and maintenance
 
