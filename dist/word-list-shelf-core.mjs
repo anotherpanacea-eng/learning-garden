@@ -53,10 +53,12 @@ function shelfEntry(source,record,present) {
  const last=checksStatus==='ready'?record.checks.at(-1)??null:null;
  const words=draftStatus==='ready'?playable(source,record.placements):[];
  const opaque=draftStatus==='ready'?source.words.filter(w=>!words.includes(w)):[];
+ const coverage=source.partial||opaque.length?'partial':'full';
+ const sameRows=!!last&&last.rows.length===words.length&&words.every(w=>last.rows.filter(row=>row.id===w.id).length===1);
  return {status,source,record,draftStatus,checksStatus,playable:words,opaque,
   firstStatus:readyField(record,'firstKept',k=>k===null||validWordListKeep(k)),
   latestStatus:readyField(record,'latestKept',k=>k===null||validWordListKeep(k)),
-  last,earlier:!!last&&(!words.length||!sameWordListPlacements(source,record.placements,last.placements)),
+  last,earlier:!!last&&(!words.length||!sameRows||coverage!==last.coverage||!sameWordListPlacements(source,record.placements,last.placements)),
   partial:source.partial||opaque.length>0||checksStatus==='unreadable'};
 }
 
