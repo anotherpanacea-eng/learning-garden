@@ -135,7 +135,14 @@ Three more rules apply to every piece:
 
 **What it is:** the Act III ending film, 40 to 55 seconds. Seedlings go up the river, reeds and honey come down, Nuria visits Willowbank and recognizes Hollis's handwriting on the flood post's records. Two towns each give something; neither rescues the other.
 
-**When to produce it:** provisional concept art may start from this brief. Final production waits for the reviewed Act III ending and River Market (spec 117) runtime build and fluent-language review, because route geometry and trade amounts may change.
+**When to produce it:** provisional concept art may start from this brief. Final production waits for the built Act III ending ([326](../specs/326-both-ways-across-willow-bridge.md)) and the River Market's built errands ([324](../specs/324-river-market-cargo.md) onward), because the market scene and the ending still may change in their builds. The Spanish no longer waits on a human reader: the owner's 2026-10-30 decision replaced that with the model panel, and the [117 panel](../reviews/117-spanish-panel/resolution.md) and [326 panel](../reviews/326-spanish-panel/resolution.md) have resolved the lines this film could show.
+
+**Reconciled 2026-10-31** with the reviewed Act III specs (card LG-28):
+
+- **Where it plays.** 326 delivers the ending as a still picture and text at `#almanac/both-ways`, after **Send the seedlings up the river**. The film is optional and enhances that same ending. It never decides eligibility, and it ends before **Read the third page**: Page 3 and Nuria's recognition of Hollis's handwriting stay in the game.
+- **The goods.** The film shows what 326's still shows: seedlings in a crate going up the river path, and a barge coming down with reeds and a honey jar. The barge is *La Garza*, Vadoalto's flat, wide barge from 117, whose cargo in 324 is honey, flour and a box of reed seeds. 316's seed exchange trades apple baskets for reed bundles at an agreed rate and shares a nursery of seedlings 5 to 3.
+- **What the film must not answer.** 324 asks how many jars of honey *La Garza* brings, and 328 asks where the bakery is from the landing. 316's tasks use trade groups and nursery shares. So no countable jars, sacks, baskets, bundles or seedlings in groups that match those tasks, and no landing-to-bakery route on screen.
+- **[PR202](https://github.com/anotherpanacea-eng/learning-garden/pull/202)'s landing study** is an input to pieces 2, 6 and 8: its landing, mill wheel and unnumbered flood post fit. Its boat is a small rowboat, where *La Garza* is a flat, wide barge, and its open basket and crate counts would need the rule above. Its Blender reopen and implementation clearance are still open; this brief neither clears nor closes it.
 
 **Style:** match the existing game art in `dist/` and the three existing films (`dist/bramble-film.html`, `dist/cafe-film.html`, `dist/paris-film.html`). Use the established designs for Pip, Dot and Bramble. No copied characters or styles from other films or games.
 
@@ -148,20 +155,20 @@ Three more rules apply to every piece:
 | 3 | **Nuria** | Character sheet: an otter, she/her, the apprentice keeper of Vadoalto's flood post. Carrying a bundle of green reeds taller than she is. A satchel of letters. | Front, side and back views, three expressions (curious, laughing, reading carefully). She is a peer and a friend, never a guide who knows more than everyone. |
 | 4 | **Léon** | Character sheet: a kingfisher, he/him, the ferry keeper at Les Saules. Fast, cheerful, always slightly damp. | He appears in Act III's letters and in Act VI. One sheet now saves redrawing later. |
 | 5 | **The high ford path** | An old path along the river, with fence posts tied with faded ribbons in neat knots: blue at one fork, gold at another. Halfway along, a newer straight path cuts across the old one, with no ribbon on it. | The knots match the bow Bramble ties on the parcel in Act II. |
-| 6 | **The boats arrive** | Vadoalto's boats at Willowbank's landing: round loaves as big as cartwheels, jars of dark honey, reed baskets. Willowbank people come down to meet them with apples. | Busy and friendly. No coins counted on screen and no prices shown, so no market task is answered. |
-| 7 | **Both ways** | One frame split by the river: a parcel of apple seedlings going up the river path, and a bundle of reeds with a jar of honey coming down. | The key frame for the film. Each town is shown giving, not only receiving. The courier, if shown, is seen from far behind. |
+| 6 | **The boats arrive** | Vadoalto's boats at Willowbank's landing, *La Garza* among them: round loaves as big as cartwheels, dark honey, flour sacks, reed baskets. Willowbank people come down to meet them with apples. Marisol, Teo and Nube the grey cat (117) can be background figures. | Busy and friendly. No coins counted on screen and no prices shown, and goods in heaps rather than countable rows, so no market task is answered. *La Garza* may carry its name on the hull: it is panel-resolved text. |
+| 7 | **Both ways** | One frame split by the river: a crate of apple seedlings going up the river path, and *La Garza* coming down with reeds and a jar of honey. | The key frame for the film, and the same composition as 326's still, so the film and the still deliver one ending. Each town is shown giving, not only receiving. The courier, if shown, is seen from far behind. |
 | 8 | **Nuria at the flood post** | Nuria in front of the mill's flood post in Willowbank, reading the marks for a long time. On the bakery windowsill behind, the parcel's pages are drying. | The emotional close. The page itself stays unreadable in the art: the handwriting moment belongs to the in-game ending. |
 
 ### Things to avoid
 
-- Spanish or French words on signs, boats or labels until a fluent reader has reviewed them. Leave signs blank or use pictures.
+- Spanish or French words on signs, boats or labels unless the model panel has resolved them. Today that allows *La Garza* and the traders' «¡Pan, cestas, miel!»; leave other signs blank or use pictures.
 - A guide's or courier's face.
 - Any number, price, timetable or flood height that an Act III task asks about.
 - Vadoalto shown as needing to be saved, or Willowbank shown as the hero.
 
 ## 3. Storyboards for the act films
 
-These are provisional candidate refinements to the shot suggestions in [story milestones and films](../story-milestones-and-films.md#film-briefs-a-producer-can-use) for these four films, with spec 120's cast and events added. They replace no approved brief until their source and story reviews clear. The rest of that document stands. Times are approximate. Each storyboard ends with the still picture and text that deliver the same ending when the film is skipped or unavailable.
+These are provisional candidate refinements to the shot suggestions in [story milestones and films](../story-milestones-and-films.md#film-briefs-a-producer-can-use) for these five films, with spec 120's cast and events added. They replace no approved brief until their source and story reviews clear. The rest of that document stands. Times are approximate. Each storyboard ends with the still picture and text that deliver the same ending when the film is skipped or unavailable.
 
 ### A Town of Our Own (Act II ending)
 
@@ -180,6 +187,23 @@ These are provisional candidate refinements to the shot suggestions in [story mi
 **Final line (optional):** "There is more than one way to make a place your own."
 **Still and text:** the lantern-lit town at the celebration, with the letter on the post office counter. Text: "Willowbank has a celebration, and this time it isn't about mending anything. As the evening ends, a letter arrives from upstream."
 **Avoid:** a "you saved the town" message, a scene showing every game, or any particular contribution the explorer must have made.
+
+### Both Ways Across Willow Bridge (Act III ending)
+
+**Length:** 40 to 55 seconds. **Produce:** provisional storyboard now; final production during the built Act III ending (326) and River Market, with the trigger checked against 326 before final cut. It plays after **Send the seedlings up the river** and stops before **Read the third page**.
+
+| Time | Shot |
+| --- | --- |
+| 0–6 s | Morning at Willowbank's landing. *La Garza* ties up, low in the water. Nube watches from the cargo. |
+| 6–14 s | The market: Vadoalto's traders call «¡Pan, cestas, miel!» Loaves, honey and reed baskets go up the landing in heaps; Willowbank people come down with apples. |
+| 14–22 s | The orchard keeper packs a crate of apple seedlings. Bramble ties the bow from the Act II parcel on it, the same knot as the old ribbons on the fence posts. |
+| 22–32 s | The key frame: the river splits the screen. The seedlings go up the river path; *La Garza* comes down with reeds and a honey jar. Hold. |
+| 32–42 s | Nuria steps off the barge with the reeds and walks up to the mill. She stops at the flood post. |
+| 42–52 s | Nuria reading the marks for a long time. Behind her, on the bakery windowsill, the parcel's pages are drying. One lifts in the breeze. Cut before it comes free. |
+
+**Final line (optional):** none. 326's text carries Nuria's "Ours has marks like this" in the game.
+**Still and text:** 326's still, with its companion text and alt text: seedlings in a crate go up the river path while a barge comes down with reeds and a honey jar; Nuria stands at the Willowbank flood post, reading the marks.
+**Avoid:** the third page, its handwriting or Hollis; any count or route an Act III task asks about; which chapters the explorer brought work from; Vadoalto rescued or Willowbank the hero; the explorer's guide or courier's face.
 
 ### The Map We Changed (Act IV ending)
 
