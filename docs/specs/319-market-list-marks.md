@@ -18,7 +18,7 @@ All child-facing text comes verbatim from [the 278 companion](../content/278-exc
 | First visit | Arriving: **market list version** | Shown on first open and from a "Read the market story again" control. The manifest-version first visit is not shipped. |
 | Every-screen line | "Marks tell a reader where one thing ends and the next begins. Try any mark. Nothing here is scored." | Always visible above the bench. |
 | Story | Scene 0, The market list: hook, Short and Longer | Short is the default reading; Longer is one tap. Labeled "A story from Willowbank". |
-| Teach cards | Cards 1, 2 and 3 | Card 1 uses its **market list** worked example (*The miller sells three things: flour, oats and bran.*). The companion gives no market version of Card 1's step 1, so that step uses the exact exception below instead of the manifest-version lead-in; steps 2 and 3 are the companion's authored steps, verbatim. Each worked-example step appears one tap at a time. Labeled "A true thing about language". |
+| Teach cards | Cards 1, 2 and 3 | Card 1 uses its **market list** worked example (*The miller sells three things: flour, oats and bran.*), with the market step 1 from the exceptions table below so the quoted lead-in matches the visible sentence. Each worked-example step appears one tap at a time. Labeled "A true thing about language". |
 | Bench | (a) The Manifest List: header, tiles, the four **market list lines**, What fits, Load it | Manifest lines 1 to 6 and the Spanish line are not shipped. |
 | Items | Set A: A1, A2, A3, A4 | A5 is manifest-only and not shipped. |
 | Stuck ladder | Step 1 (the item's hint); step 2's "Colon items" line for A1 and A2 and its "Semicolon list items" line for A3 and A4; step 3 | Other step-2 lines belong to later sets. |
@@ -48,9 +48,9 @@ All child-facing text comes verbatim from [the 278 companion](../content/278-exc
 | Unknown save version | This saved work is from a different version. It is kept as it is, and you can still download it from Grown-up notes. |
 | Save refused | That didn't save, so nothing changed. Your marks are still here. |
 | Notes heading | Market list marks |
-| Card 1 worked-example step 1 (market) | Cover the list. Read what's left: "The miller sells three things." |
+| Card 1, market step 1 (replaces the companion's step 1, which quotes the river sentence; print rule applies; steps 2 and 3 stay as authored) | Cover the list. Read what's left: "The miller sells three things." |
 
-Before build, a script confirms that every shipped string appears in the companion (after the print rule), in the exact exceptions table (expanding its stated placeholders, and applying the print rule to the Card 1 step 1 row), or in the exact trimmed grown-up panel above, that no shipped string names Vadoalto, Nuria, Hollis, the high ford or a page, and that no shipped line has an em-dash. Card 3 and items A3 and A4 use river and cart goods (apples, honey cake, seeds, reed, letters). 278's review left them shared because they name no place beyond the town, river and bridge road; this slice keeps that reading.
+Before build, a script confirms that every shipped string appears in the companion (after the print rule), in the exact exceptions table (expanding its stated placeholders), or in the exact trimmed grown-up panel above, that no shipped string names Vadoalto, Nuria, Hollis, the high ford or a page, and that no shipped line has an em-dash. Card 3 and items A3 and A4 use river and cart goods (apples, honey cake, seeds, reed, letters). 278's review left them shared because they name no place beyond the town, river and bridge road; this slice keeps that reading.
 
 ## The bench: exact model
 
