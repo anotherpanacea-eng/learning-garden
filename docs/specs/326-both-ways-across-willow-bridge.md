@@ -93,11 +93,36 @@ The layout rules are those of 248:
 - read-aloud of visible prose only, with speech stopped on navigation;
 - checks at 320 and 820.
 
+## Upstream study and curriculum place
+
+**Jane**, refreshed at `e88f81a00553fb87818ef84c77a8800f0dcb33e4`, studied only. The quest structure in its `LESSONS.md` has a story hook, a path of stages, a finale and a reveal. This commission keeps the shape: a hook, four finite chapters, one explicit ending and a page reveal, with a reached beat that stays reached. It does not adopt review gates between stages, a boss finale, quest medals, or age or mastery locks. No Jane code, prose or assets are copied.
+
+**Marble**, refreshed at `5e23196fa60050433f1440057f65a978d39e63fc`. These are candidates, not coverage claims, and there is no new atlas mapping:
+
+| Topic | Strand | Why it is near |
+| --- | --- | --- |
+| Story Sequence and Central Message `mt_VEwM7ClYYE` | E3 | Act III's chapters lead to an ending that answers the carried question. Reading a story ending does not perform this topic. |
+| Asking Questions `mt_f8n4txtLej` | E5 | Chapter 4 reads a question the child posted. The upstream post (291) owns any teaching of it. |
+| Plants and animals in their habitats `mt_e6PP4ip39V` | S3 | Chapter 2's Keeper's note says reeds are wetland plants. One sentence is a fact, not a lesson. |
+
+**Spec 49.** This is Act III, *Beyond Willow Bridge*: connection and transfer. Its ending follows 49's: an exchange completed and a friendship with Nuria, with the between-acts line pointing to another page. In 49's teaching contract (§5), 326 adds no lesson of its own. It serves as the purposeful revisit (step 6) for four host activities, carrying their kept work instead of awarding an answer. Each host's own spec owns its teaching encounter, contrast and practice: 324, 316, [93](93-courier-clock-walk.md) and 291. On the data boundary (step 7), 326 adds no free-text field. Receipts hold ids only.
+
+**Hard-prerequisite crosswalk** against `curriculum/marble/dependencies.json`. Every hard prerequisite is *not yet mapped* in `curriculum/topic-coverage.csv`. They are:
+- Reading between the lines `mt_E5KC4AnRLW` and Characters, settings, and events `mt_sSQlLOnAow`, for `mt_VEwM7ClYYE`;
+- Question Words `mt_6lHBTwQPrS` and Listening and responding `mt_mB7DVai-Uf`, for `mt_f8n4txtLej`;
+- What Living Things Need `mt_L1469gt34A`, for `mt_e6PP4ip39V`.
+
+326 claims none of these topics, so none of them gates it. A later lesson that claims one must teach or check its hard prerequisites.
+
+**Spec 120.** Act III's story path (§5), its letters (§7) and Page 3 (§12). The chapter jobs stay out of scope, as above.
+
+Existing ODbL and CC BY-SA attribution stays. All new prose, art and code are original project material.
+
 ## Gates and acceptance
 
 Before build:
 1. An independent spec review of this spec and its companion.
-2. A spec 117 model-panel pass on the companion's two Spanish phrases, recorded beside [the 117 panel](../reviews/117-spanish-panel/resolution.md).
+2. A spec 117 model-panel pass on the companion's two Spanish phrases. Met 2026-10-31: all three providers kept both as written ([326 panel](../reviews/326-spanish-panel/resolution.md)).
 
 The build itself waits on 324 being built (card LG-29) only for the `market` reader's real-host tests. The other three readers can be built and tested first, with `market` showing its empty line.
 

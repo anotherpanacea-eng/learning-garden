@@ -23,7 +23,7 @@ Act III's chapter jobs are not used here. This slice reads one built activity pe
 
 **Chapter 4 Keeper's note.** It is not shipped. Its Spanish and French word pairs belong with Léon's letters, which are out of scope.
 
-**Foreign-language text.** With those two changes, the only non-English text that ships is two Spanish phrases: *"¡Pan, cestas, miel!"* (chapter 1, Longer) and *"Carrizo"* (chapter 2, Longer). They need a pass by the spec 117 model panel before build (spec 326, gates). If a reviewer marks either one as an error, drop it, along with its English gloss.
+**Foreign-language text.** With those two changes, the only non-English text that ships is two Spanish phrases: *"¡Pan, cestas, miel!"* (chapter 1, Longer) and *"Carrizo"* (chapter 2, Longer). The spec 117 model panel passed both as written ([326 panel](../reviews/326-spanish-panel/resolution.md)). A later change to either phrase needs a new panel pass.
 
 ## The act hub
 
