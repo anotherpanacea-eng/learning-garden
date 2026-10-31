@@ -6,7 +6,7 @@ import {freshState,recommendations} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
 import {SKY_SHAPES,SKY_CODES,SKY_COPY,SKY_PANELS,changePrompt} from '../dist/sky-notes-content.mjs';
 import * as k from '../dist/sky-notes-core.mjs';
-import {skyNotesNotes} from '../dist/sky-notes-ui.mjs';
+import {skyNotesNotes,skyNotesPage} from '../dist/sky-notes-ui.mjs';
 const copy=structuredClone,root=fileURLToPath(new URL('../',import.meta.url));
 const report=s=>({title:'After the Storm: observations',exportedAt:'2026-10-31T12:00:00.000Z',note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:'sky',color:'blue',symbol:'leaf'},recommendation:recommendations(s),...s});
 export const skyCanExport=s=>prepareProgressImport(JSON.stringify(report(s),null,2)).ok;
@@ -82,6 +82,7 @@ export function runSkyChecks(){
  {const s=fresh();s.syntheticOther.payload='y'.repeat(512*1024);s.sky=[{date:'2026-10-01',shape:'full'},{date:'2026-10-01',shape:'full',dup:true},{date:'bad',shape:'full'},7];s.hemisphere='east';
   const imported=prepareProgressImport(JSON.stringify(report(s),null,2));ok(imported.ok,'transfer accepts sky roots');eq(imported.state.sky,s.sky,'sky raw entries round trip');same(imported.state.hemisphere,'east','unknown hemisphere round trips');same(imported.state.syntheticOther.payload.length,512*1024,'unrelated work preserved');ok(imported.summary.destinations.includes('Sky notes')&&imported.summary.destinations.includes('Moon picture setting'),'transfer names the destinations');
   const html=skyNotesNotes(s);ok(html.includes('Sky notes')&&html.includes('2026-10-01: Full'),'Notes lists readable notes');ok(html.includes('Unavailable entries: 2'),'Notes counts unavailable entries');ok(html.includes('waxing crescent'),'astronomy names in Grown-up notes only');same(skyNotesNotes(fresh()),'','no section without the roots');}
+ for(const h of ['north','south']){const s=freshState();s.hemisphere=h;const html=skyNotesPage(s,'panel-check'),panels=html.slice(html.indexOf('sky-panels'));for(const p of SKY_PANELS)ok(panels.includes(k.moonArt(p.code,h,'sky-panel-moon')),`${p.code} panel follows the ${h} setting`);}
  console.log(`Sky notes: ${n} civil-date, preservation, capacity, hemisphere, atomic, reader and picture checks passed.`);return n;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runSkyChecks();

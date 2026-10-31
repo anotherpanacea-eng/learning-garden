@@ -23,6 +23,7 @@ Companion to [spec 323](../specs/323-sky-notes.md). First drafts for content and
 | Device date unavailable | This device date cannot be used here. Earlier notes are still kept. |
 | Hear | Hear this page |
 | Unavailable | Sky notes can't be saved for this explorer right now. The rest of the almanac is open. |
+| Almanac entry | Look at the moon tonight. Note the shape you see. |
 | Links | **Weather notes** · **Keeper’s Pages** |
 
 ## The eight choices
@@ -67,12 +68,12 @@ Accessible name for each picture button: its label, for example "Thin and growin
 
 Shown as three short panels below the strip, always open to read and never required.
 
-1. **It's the same moon.** Thin, half or full, it's the same moon every night. Only the part we can see changes.
-2. **At new moon, it's still there.** For a few days each month we can't see the moon at all. It hasn't gone anywhere. It's up in the daytime sky, close to the sun, where it's too hard to see. On other nights, clouds can hide it.
+1. **It's the same moon.** Thin, half or full, it's the same moon every night. The bright shape we see changes.
+2. **At new moon, it's still there.** Around new moon, the moon can be too hard to see. It hasn't gone anywhere. It's up in the daytime sky, close to the sun. At other times, clouds can hide it.
 3. **The pattern comes back.** From one full moon to the next is about 29 and a half days. That's about a month.
 
 ## Grown-up notes
 
 "Sky notes: one moon shape per date, chosen by the explorer after looking. These are the explorer's own observations. The game does not check them against the real moon and does not grade them. Moon pictures follow the northern or southern setting chosen here; the game stores no location." Followed by the count of readable notes, the date range, and raw unreadable entries listed as unavailable.
 
-Child label to astronomy name, for grown-ups only: thin and growing = waxing crescent; half and growing = first quarter; nearly full and growing = waxing gibbous; full = full moon; nearly full and shrinking = waning gibbous; half and shrinking = last quarter; thin and shrinking = waning crescent. "A half moon is called a quarter moon because the moon is a quarter of the way around its orbit."
+Child label to astronomy name, for grown-ups only: thin and growing = waxing crescent; half and growing = first quarter; nearly full and growing = waxing gibbous; full = full moon; nearly full and shrinking = waning gibbous; half and shrinking = last quarter; thin and shrinking = waning crescent. "First quarter is about one-quarter of the way through the cycle from new moon to new moon. Last quarter is about three-quarters of the way through. At both, the moon's disk looks half lit."

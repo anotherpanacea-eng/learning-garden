@@ -45,13 +45,13 @@ export const SKY_COPY=Object.freeze({
 // The label reads mid-sentence, so it starts lowercase; not-seen reads as a clause.
 export const changePrompt=label=>`You noted ${label==='I couldn\u2019t see the moon'?'that you couldn\u2019t see the moon':label.charAt(0).toLowerCase()+label.slice(1)} today. Choose another shape and save to change it.`;
 export const SKY_PANELS=Object.freeze([
- Object.freeze({code:'full',title:'It’s the same moon.',body:'Thin, half or full, it’s the same moon every night. Only the part we can see changes.'}),
- Object.freeze({code:'not-seen',title:'At new moon, it’s still there.',body:'For a few days each month we can’t see the moon at all. It hasn’t gone anywhere. It’s up in the daytime sky, close to the sun, where it’s too hard to see. On other nights, clouds can hide it.'}),
+ Object.freeze({code:'full',title:'It’s the same moon.',body:'Thin, half or full, it’s the same moon every night. The bright shape we see changes.'}),
+ Object.freeze({code:'not-seen',title:'At new moon, it’s still there.',body:'Around new moon, the moon can be too hard to see. It hasn’t gone anywhere. It’s up in the daytime sky, close to the sun. At other times, clouds can hide it.'}),
  Object.freeze({code:'thin-growing',title:'The pattern comes back.',body:'From one full moon to the next is about 29 and a half days. That’s about a month.'}),
 ]);
 export const SKY_GROWNUP=Object.freeze({
  about:'Sky notes: one moon shape per date, chosen by the explorer after looking. These are the explorer’s own observations. The game does not check them against the real moon and does not grade them. Moon pictures follow the northern or southern setting chosen here; the game stores no location.',
  names:'Child label to astronomy name, for grown-ups only: thin and growing = waxing crescent; half and growing = first quarter; nearly full and growing = waxing gibbous; full = full moon; nearly full and shrinking = waning gibbous; half and shrinking = last quarter; thin and shrinking = waning crescent.',
- quarter:'A half moon is called a quarter moon because the moon is a quarter of the way around its orbit.',
+ quarter:'First quarter is about one-quarter of the way through the cycle from new moon to new moon. Last quarter is about three-quarters of the way through. At both, the moon’s disk looks half lit.',
 });
 // End of the grown-up copy.
