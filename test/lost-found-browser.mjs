@@ -62,6 +62,17 @@ try{
   ok((await act(p,'open').innerText()).includes('Solved'),`${w}: Solved`);ok(!(await overflow(p)),`${w}: no overflow at the end`);eq(await small(p),[],`${w}: 44 px at the end`);
   if(out)await p.screenshot({path:`${out}/reveal-${w}.png`,fullPage:true});eq(p.errors,[],`${w}: no page errors`);await c.close();
  }
+ // A first-round alternate is historical, not proof against a newly revealed clue.
+ {const s=initializeExplorerState(freshState()),o={canExport:()=>true};C.startLadder(s,o);C.sortForMe(s,o);
+  const fitting={pip:['bucket','orchard'],bramble:['rope','footbridge'],miller:['ladder','mill-roof']};
+  for(const [row,[thing,place]] of Object.entries(fitting)){C.setAnswer(s,row,0,thing,o);C.setAnswer(s,row,1,place,o);}C.checkLadder(s,o);C.answerTellYet(s,'yes',o);
+  const first=structuredClone(s.mysteries.cases.ladder.firstCheck),alternate=C.anotherWay(s.mysteries.cases.ladder.source,fitting),proof=C.arrangementText(s.mysteries.cases.ladder.source,alternate);
+  eq(C.checkAnswer(s.mysteries.cases.ladder.source,2,alternate).result,'ladder-roof','the displayed first-round alternate breaks the new clue');
+  const {c,p}=await open(820,1000,{'explorer-1':s});await act(p,'open').click();ok((await p.locator('.lf-tell').innerText()).includes(proof),'first-round counterexample is initially visible');
+  await act(p,'next-clue').click();eq((await lc(p)).round,2,'the new clue is revealed');eq(await p.locator('.lf-tell').count(),0,'current round has no stale Can we tell yet proof');ok(!(await p.locator('.lf-mystery').innerText()).includes(proof),'the old alternate is not presented as fitting every current clue');
+  eq((await lc(p)).tellYet,'yes','the original Can we tell yet response stays saved');eq((await lc(p)).firstCheck,first,'the prior first-round check stays exact');
+  await p.reload();await p.locator('[data-lost-found-root]').waitFor();await act(p,'open').click();eq(await p.locator('.lf-tell').count(),0,'reload does not restore the stale proof');
+  await p.goto(url+'#notes');const dl=p.waitForEvent('download');await p.locator('#download').click();const kept=JSON.parse(readFileSync(await(await dl).path(),'utf8')).mysteries.cases.ladder;eq(kept.tellYet,'yes','Notes preserves the historical response');eq(kept.firstCheck,first,'Notes preserves the historical check');eq(p.errors,[],'no counterexample journey errors');await c.close();}
  // Forced preflight refusal.
  {const {c,p}=await open(820,1000);await act(p,'open').click();for(let i=0;i<3;i++)await act(p,'step').click();await act(p,'start').click();const before=await book(p);await p.evaluate(()=>{window.lfRefuse=true;});
   await act(p,'sort','[data-lf-sentence="miller-roof"][data-lf-choice="saw"]').click();eq(await book(p),before,'refused sort writes nothing');eq(await p.locator('#lf-why-miller-roof').count(),0,'refused sort shows no Why?');ok((await p.locator('#lf-status').innerText()).startsWith("There isn't room"),'capacity line');
