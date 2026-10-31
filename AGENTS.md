@@ -120,8 +120,10 @@ this way:
 3. **Merge** with a merge commit, never squash. Confirm the merged `main` has
    the same tree as the tested one (`git diff --quiet <tested> origin/main`).
    If `main` moved, go back to step 2.
-4. **Deploy only when `dist/` changed.** From the authorized Cloudflare
-   account (check the account; never assume the CLI default), run
+4. **Deploy only when `dist/` changed.** From a clean checkout of the merged
+   `main` (the step 5 match covers only tracked files, so an untracked file in
+   `dist/` would ship unseen), signed in to the authorized Cloudflare account
+   (check the account; never assume the CLI default), run
    `npx wrangler deploy --assets ./dist --name after-the-storm-learning`.
    Deploy only `dist/`, never the repository root or CLI setup folders. Keep
    credentials and account configuration out of the repository.
