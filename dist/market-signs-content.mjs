@@ -344,3 +344,920 @@ export const marketSignsCopy=Object.freeze({
  ]
 });
 export function marketSignsCollection(){return structuredClone(initial);}
+
+// Spec338: original selected263 ending material, frozen per notebook on first use.
+const endingInitial={
+  "v": 1,
+  "story": {
+    "hook": "The baker wants a second board, saying how his bread is sold. Pip paints it fast. Dot brings the dictionary again.",
+    "short": "Pip paints FRESHLEY BAKED and RAPPED IN PAPER. Fresh just adds -ly. And the baker wrapped his bread. That word starts with wr.",
+    "longer": "The baker wants a second board, to say how his bread is sold. Pip paints it in big letters.\n\nFRESHLEY BAKED. RAPPED IN PAPER.\n\n\"Fresh, freshly,\" says {guide}. \"Usually you just add -ly. No e.\"\n\nPip fixes it. Then the baker frowns at the second line. \"I didn't rap it. I don't knock on my bread. I wrapped it.\"\n\n\"Same word,\" says Pip.\n\n\"Different word,\" says the baker. \"Look it up.\"\n\nPip opens the dictionary at ra. Rap: to knock quickly and sharply. \"That's not it.\"\n\n\"Try wr,\" says Dot. \"Like write.\"\n\nPip turns to the w pages. Wrap: to cover something with paper or cloth.\n\n\"It was hiding under w the whole time,\" he says.\n\nThe board goes up: FRESHLY BAKED. WRAPPED IN PAPER. The baker hands Pip a roll. It is warm, not worm.",
+    "note": "Wrap, write, wren and wrong all start with wr. Knock, knot and knife start with kn. If a word isn't where you first look, try another way to spell its start, then look again."
+  },
+  "roots": [
+    {
+      "id": "fresh",
+      "text": "fresh"
+    },
+    {
+      "id": "neat",
+      "text": "neat"
+    },
+    {
+      "id": "usual",
+      "text": "usual"
+    },
+    {
+      "id": "complete",
+      "text": "complete"
+    },
+    {
+      "id": "happy",
+      "text": "happy"
+    },
+    {
+      "id": "easy",
+      "text": "easy"
+    },
+    {
+      "id": "busy",
+      "text": "busy"
+    },
+    {
+      "id": "gentle",
+      "text": "gentle"
+    },
+    {
+      "id": "simple",
+      "text": "simple"
+    },
+    {
+      "id": "danger",
+      "text": "danger"
+    },
+    {
+      "id": "poison",
+      "text": "poison"
+    },
+    {
+      "id": "mountain",
+      "text": "mountain"
+    },
+    {
+      "id": "fame",
+      "text": "fame"
+    },
+    {
+      "id": "glory",
+      "text": "glory"
+    },
+    {
+      "id": "vary",
+      "text": "vary"
+    },
+    {
+      "id": "joy",
+      "text": "joy"
+    },
+    {
+      "id": "inform",
+      "text": "inform"
+    },
+    {
+      "id": "prepare",
+      "text": "prepare"
+    },
+    {
+      "id": "admire",
+      "text": "admire"
+    },
+    {
+      "id": "invite",
+      "text": "invite"
+    },
+    {
+      "id": "imagine",
+      "text": "imagine"
+    },
+    {
+      "id": "explore",
+      "text": "explore"
+    },
+    {
+      "id": "dramatic",
+      "text": "dramatic"
+    },
+    {
+      "id": "basic",
+      "text": "basic"
+    }
+  ],
+  "endings": [
+    {
+      "id": "ly",
+      "text": "ly",
+      "label": "-ly"
+    },
+    {
+      "id": "ous",
+      "text": "ous",
+      "label": "-ous"
+    },
+    {
+      "id": "ation",
+      "text": "ation",
+      "label": "-ation"
+    }
+  ],
+  "tools": [
+    "just-add",
+    "drop-e",
+    "y-to-i",
+    "le-to-ly",
+    "ic-to-ically"
+  ],
+  "joins": [
+    {
+      "id": "fresh-ly",
+      "rootId": "fresh",
+      "endingId": "ly",
+      "toolId": "just-add",
+      "word": "freshly"
+    },
+    {
+      "id": "neat-ly",
+      "rootId": "neat",
+      "endingId": "ly",
+      "toolId": "just-add",
+      "word": "neatly"
+    },
+    {
+      "id": "usual-ly",
+      "rootId": "usual",
+      "endingId": "ly",
+      "toolId": "just-add",
+      "word": "usually"
+    },
+    {
+      "id": "complete-ly",
+      "rootId": "complete",
+      "endingId": "ly",
+      "toolId": "just-add",
+      "word": "completely"
+    },
+    {
+      "id": "happy-ly",
+      "rootId": "happy",
+      "endingId": "ly",
+      "toolId": "y-to-i",
+      "word": "happily"
+    },
+    {
+      "id": "easy-ly",
+      "rootId": "easy",
+      "endingId": "ly",
+      "toolId": "y-to-i",
+      "word": "easily"
+    },
+    {
+      "id": "busy-ly",
+      "rootId": "busy",
+      "endingId": "ly",
+      "toolId": "y-to-i",
+      "word": "busily"
+    },
+    {
+      "id": "gentle-ly",
+      "rootId": "gentle",
+      "endingId": "ly",
+      "toolId": "le-to-ly",
+      "word": "gently"
+    },
+    {
+      "id": "simple-ly",
+      "rootId": "simple",
+      "endingId": "ly",
+      "toolId": "le-to-ly",
+      "word": "simply"
+    },
+    {
+      "id": "danger-ous",
+      "rootId": "danger",
+      "endingId": "ous",
+      "toolId": "just-add",
+      "word": "dangerous"
+    },
+    {
+      "id": "poison-ous",
+      "rootId": "poison",
+      "endingId": "ous",
+      "toolId": "just-add",
+      "word": "poisonous"
+    },
+    {
+      "id": "mountain-ous",
+      "rootId": "mountain",
+      "endingId": "ous",
+      "toolId": "just-add",
+      "word": "mountainous"
+    },
+    {
+      "id": "fame-ous",
+      "rootId": "fame",
+      "endingId": "ous",
+      "toolId": "drop-e",
+      "word": "famous"
+    },
+    {
+      "id": "glory-ous",
+      "rootId": "glory",
+      "endingId": "ous",
+      "toolId": "y-to-i",
+      "word": "glorious"
+    },
+    {
+      "id": "vary-ous",
+      "rootId": "vary",
+      "endingId": "ous",
+      "toolId": "y-to-i",
+      "word": "various"
+    },
+    {
+      "id": "joy-ous",
+      "rootId": "joy",
+      "endingId": "ous",
+      "toolId": "just-add",
+      "word": "joyous"
+    },
+    {
+      "id": "inform-ation",
+      "rootId": "inform",
+      "endingId": "ation",
+      "toolId": "just-add",
+      "word": "information"
+    },
+    {
+      "id": "prepare-ation",
+      "rootId": "prepare",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "preparation"
+    },
+    {
+      "id": "admire-ation",
+      "rootId": "admire",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "admiration"
+    },
+    {
+      "id": "invite-ation",
+      "rootId": "invite",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "invitation"
+    },
+    {
+      "id": "imagine-ation",
+      "rootId": "imagine",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "imagination"
+    },
+    {
+      "id": "explore-ation",
+      "rootId": "explore",
+      "endingId": "ation",
+      "toolId": "drop-e",
+      "word": "exploration"
+    },
+    {
+      "id": "dramatic-ly",
+      "rootId": "dramatic",
+      "endingId": "ly",
+      "toolId": "ic-to-ically",
+      "word": "dramatically"
+    },
+    {
+      "id": "basic-ly",
+      "rootId": "basic",
+      "endingId": "ly",
+      "toolId": "ic-to-ically",
+      "word": "basically"
+    }
+  ],
+  "shelves": {
+    "noRoot": [
+      {
+        "id": "enormous",
+        "word": "enormous",
+        "note": "These -ous words have no obvious root word here to find."
+      },
+      {
+        "id": "jealous",
+        "word": "jealous",
+        "note": "These -ous words have no obvious root word here to find."
+      }
+    ],
+    "odd": [
+      {
+        "id": "truly",
+        "word": "truly",
+        "note": "true drops its e."
+      },
+      {
+        "id": "publicly",
+        "word": "publicly",
+        "note": "just -ly."
+      },
+      {
+        "id": "courageous",
+        "word": "courageous",
+        "note": "courage keeps its e."
+      }
+    ]
+  },
+  "hints": [
+    {
+      "rootId": "complete",
+      "toolId": "drop-e",
+      "text": "Drop the e before -ly: -ly starts with a consonant. Keep the e: completely."
+    },
+    {
+      "rootId": "happy",
+      "toolId": "just-add",
+      "text": "Just add on happy: Happy ends in a consonant, then y. Try y to i."
+    },
+    {
+      "rootId": "joy",
+      "toolId": "y-to-i",
+      "text": "y to i on joy: A vowel comes before this y. Keep it: joyous."
+    },
+    {
+      "rootId": "gentle",
+      "toolId": "just-add",
+      "text": "Just add on gentle: Gentle ends in a consonant, then le. Try le to ly."
+    }
+  ],
+  "cards": [
+    {
+      "id": "card-10",
+      "title": "-ly tells how",
+      "text": "-ly turns a describing word into a word that tells how or how often: fresh, freshly; neat, neatly. It starts with a consonant, so usually just add it.",
+      "example": "usual + -ly",
+      "steps": [
+        "Usual ends in l.",
+        "-ly starts with l. Nothing changes.",
+        "Usually, with two l's."
+      ]
+    },
+    {
+      "id": "card-11",
+      "title": "When -ly changes the word",
+      "text": "A word ending in a consonant and y usually changes y to i: happy, happily. A word ending in a consonant and le usually swaps le for ly: gentle, gently.",
+      "example": "simple + -ly",
+      "steps": [
+        "Simple ends in p, then le.",
+        "Swap le for ly.",
+        "Simply."
+      ]
+    },
+    {
+      "id": "card-12",
+      "title": "-ous",
+      "text": "-ous makes a describing word: danger, dangerous. A final e usually drops: fame, famous. Y after a consonant usually becomes i: glory, glorious. Some have no obvious root word here.",
+      "example": "glory + -ous",
+      "steps": [
+        "Glory ends in r, then y.",
+        "Change y to i.",
+        "Glorious."
+      ]
+    },
+    {
+      "id": "card-13",
+      "title": "-ation",
+      "text": "-ation turns a doing word into a naming word: inform, information. It starts with a vowel letter, so a final e usually drops first: invite, invitation.",
+      "example": "prepare + -ation",
+      "steps": [
+        "Prepare ends in r, then e.",
+        "-ation starts with a vowel letter. Drop the e.",
+        "Preparation."
+      ]
+    },
+    {
+      "id": "card-14",
+      "title": "Spellings to learn",
+      "text": "Some spellings are just learned. Gym and myth have y. Young and touch have ou. Treasure and measure end -sure. Picture and nature end -ture.",
+      "example": "BURIED TREA____",
+      "steps": [
+        "Treasure is in the measure family.",
+        "That family ends -sure.",
+        "Treasure."
+      ]
+    },
+    {
+      "id": "card-21",
+      "title": "-ic words",
+      "text": "Words ending in -ic usually add -ally, not just -ly: dramatic, dramatically; basic, basically. Publicly is the odd one out.",
+      "example": "basic + -ly",
+      "steps": [
+        "Basic ends in -ic.",
+        "Add -ally.",
+        "Basically."
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "v": 1,
+      "id": "C1",
+      "kind": "choice",
+      "title": "Fresh bread",
+      "prompt": "The baker's board: bread, ___ baked.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "freshly"
+        },
+        {
+          "id": "b",
+          "text": "freshley",
+          "tag": "ly-spelled-ley"
+        },
+        {
+          "id": "c",
+          "text": "freshlee",
+          "tag": "ly-spelled-lee"
+        }
+      ],
+      "steps": [
+        "Fresh ends in sh.",
+        "-ly starts with a consonant.",
+        "Just add it."
+      ],
+      "hint": "Write fresh. Then add the two letters of -ly.",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Fresh + -ly = freshly. Nothing changes.",
+      "different": {
+        "b": "The ending is -ly. No e.",
+        "c": "The ending is -ly: l, then y."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-10",
+          "title": "-ly tells how",
+          "text": "-ly turns a describing word into a word that tells how or how often: fresh, freshly; neat, neatly. It starts with a consonant, so usually just add it.",
+          "example": "usual + -ly",
+          "steps": [
+            "Usual ends in l.",
+            "-ly starts with l. Nothing changes.",
+            "Usually, with two l's."
+          ]
+        }
+      ],
+      "tag": "fresh",
+      "tagLabel": "Root word",
+      "key": "a"
+    },
+    {
+      "v": 1,
+      "id": "C2",
+      "kind": "choice",
+      "title": "A happy painter",
+      "prompt": "Pip ___ paints the last sign.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "happyly",
+          "tag": "y-not-changed"
+        },
+        {
+          "id": "b",
+          "text": "happily"
+        },
+        {
+          "id": "c",
+          "text": "happly",
+          "tag": "letter-dropped"
+        }
+      ],
+      "steps": [],
+      "hint": "What letter comes just before the y in happy?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Consonant, then y: change y to i. Happily.",
+      "different": {
+        "a": "Happy ends in a consonant, then y. Change y to i.",
+        "c": "Don't lose the letter. Change y to i, then add -ly."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-11",
+          "title": "When -ly changes the word",
+          "text": "A word ending in a consonant and y usually changes y to i: happy, happily. A word ending in a consonant and le usually swaps le for ly: gentle, gently.",
+          "example": "simple + -ly",
+          "steps": [
+            "Simple ends in p, then le.",
+            "Swap le for ly.",
+            "Simply."
+          ]
+        }
+      ],
+      "tag": "happy",
+      "tagLabel": "Root word",
+      "key": "b"
+    },
+    {
+      "v": 1,
+      "id": "C3",
+      "kind": "choice",
+      "title": "Handle gently",
+      "prompt": "The sign at the egg stall: handle ___.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "gentlely",
+          "tag": "le-kept"
+        },
+        {
+          "id": "b",
+          "text": "gentley",
+          "tag": "le-kept"
+        },
+        {
+          "id": "c",
+          "text": "gently"
+        }
+      ],
+      "steps": [],
+      "hint": "How does gentle end?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Gentle ends in t, then le. Swap le for ly: gently.",
+      "different": {
+        "a": "Gentle ends in a consonant, then le. Swap le for ly.",
+        "b": "Swap le for ly, with no e."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-11",
+          "title": "When -ly changes the word",
+          "text": "A word ending in a consonant and y usually changes y to i: happy, happily. A word ending in a consonant and le usually swaps le for ly: gentle, gently.",
+          "example": "simple + -ly",
+          "steps": [
+            "Simple ends in p, then le.",
+            "Swap le for ly.",
+            "Simply."
+          ]
+        }
+      ],
+      "tag": "gentle",
+      "tagLabel": "Root word",
+      "key": "c"
+    },
+    {
+      "v": 1,
+      "id": "C4",
+      "kind": "choice",
+      "title": "Famous honey",
+      "prompt": "The honey sign: ___ Willowbank Honey.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "Fameous",
+          "tag": "e-kept"
+        },
+        {
+          "id": "b",
+          "text": "Famous"
+        },
+        {
+          "id": "c",
+          "text": "Famus",
+          "tag": "ous-spelled-us"
+        }
+      ],
+      "steps": [],
+      "hint": "Does -ous start with a vowel letter?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Fame drops its e before -ous: famous.",
+      "different": {
+        "a": "-ous starts with a vowel letter, so fame drops its e.",
+        "c": "The ending is -ous: o, u, s."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-12",
+          "title": "-ous",
+          "text": "-ous makes a describing word: danger, dangerous. A final e usually drops: fame, famous. Y after a consonant usually becomes i: glory, glorious. Some have no obvious root word here.",
+          "example": "glory + -ous",
+          "steps": [
+            "Glory ends in r, then y.",
+            "Change y to i.",
+            "Glorious."
+          ]
+        }
+      ],
+      "tag": "fame",
+      "tagLabel": "Root word",
+      "key": "b"
+    },
+    {
+      "v": 1,
+      "id": "C5",
+      "kind": "choice",
+      "title": "Your invitation",
+      "prompt": "You have an ___ to the Market Fair.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "invitation"
+        },
+        {
+          "id": "b",
+          "text": "inviteation",
+          "tag": "e-kept"
+        },
+        {
+          "id": "c",
+          "text": "invitasion",
+          "tag": "tion-spelled-sion"
+        }
+      ],
+      "steps": [],
+      "hint": "What happens to a final e before a vowel letter?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "Invite drops its e, then adds -ation: invitation.",
+      "different": {
+        "b": "-ation starts with a vowel letter. Invite drops its e first.",
+        "c": "This ending is -ation: a, t, i, o, n."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-13",
+          "title": "-ation",
+          "text": "-ation turns a doing word into a naming word: inform, information. It starts with a vowel letter, so a final e usually drops first: invite, invitation.",
+          "example": "prepare + -ation",
+          "steps": [
+            "Prepare ends in r, then e.",
+            "-ation starts with a vowel letter. Drop the e.",
+            "Preparation."
+          ]
+        }
+      ],
+      "tag": "invite",
+      "tagLabel": "Root word",
+      "key": "a"
+    },
+    {
+      "v": 1,
+      "id": "C6",
+      "kind": "match",
+      "title": "Learned spellings",
+      "prompt": "Fill each gap with -sure, -ture, ou or y.",
+      "parts": [
+        {
+          "id": "trea",
+          "text": "trea___"
+        },
+        {
+          "id": "mea",
+          "text": "mea___"
+        },
+        {
+          "id": "pic",
+          "text": "pic___"
+        },
+        {
+          "id": "na",
+          "text": "na___"
+        },
+        {
+          "id": "young",
+          "text": "y__ng"
+        },
+        {
+          "id": "gym",
+          "text": "g_m"
+        }
+      ],
+      "choices": [
+        {
+          "id": "sure",
+          "text": "-sure"
+        },
+        {
+          "id": "ture",
+          "text": "-ture"
+        },
+        {
+          "id": "ou",
+          "text": "ou"
+        },
+        {
+          "id": "y",
+          "text": "y"
+        }
+      ],
+      "steps": [],
+      "hint": "Which family is the word in?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "These spellings are learned in families: measure, picture, young, gym.",
+      "different": {
+        "general": "Treasure is in the measure family: -sure. Young has ou, like touch."
+      },
+      "contextLabel": "A true thing about language",
+      "teach": [
+        {
+          "id": "card-14",
+          "title": "Spellings to learn",
+          "text": "Some spellings are just learned. Gym and myth have y. Young and touch have ou. Treasure and measure end -sure. Picture and nature end -ture.",
+          "example": "BURIED TREA____",
+          "steps": [
+            "Treasure is in the measure family.",
+            "That family ends -sure.",
+            "Treasure."
+          ]
+        }
+      ],
+      "key": {
+        "trea": "sure",
+        "mea": "sure",
+        "pic": "ture",
+        "na": "ture",
+        "young": "ou",
+        "gym": "y"
+      },
+      "matchCopy": {
+        "instruction": "Choose a word part, then the spelling that fills its gap.",
+        "destinationPrompt": "Choose a spelling.",
+        "destinationLabel": "Spellings"
+      }
+    },
+    {
+      "v": 1,
+      "id": "C7",
+      "kind": "choice",
+      "title": "A dramatic bow",
+      "prompt": "Bramble bows ___ at the end of the Show.",
+      "parts": [],
+      "choices": [
+        {
+          "id": "a",
+          "text": "dramaticly",
+          "tag": "ic-just-ly"
+        },
+        {
+          "id": "b",
+          "text": "dramatically"
+        },
+        {
+          "id": "c",
+          "text": "drammatically",
+          "tag": "extra-letter"
+        }
+      ],
+      "steps": [],
+      "hint": "Dramatic ends in -ic. What do -ic words add?",
+      "example": "Try this one first: neat + -ly = neatly. Nothing changes. Now look at how your root ends.",
+      "explanation": "-ic words usually add -ally: dramatically. Publicly is the odd one out.",
+      "different": {
+        "a": "Words ending in -ic usually add -ally.",
+        "c": "Dramatic has one m. Keep the root as it is."
+      },
+      "contextLabel": "A story from Willowbank",
+      "teach": [
+        {
+          "id": "card-21",
+          "title": "-ic words",
+          "text": "Words ending in -ic usually add -ally, not just -ly: dramatic, dramatically; basic, basically. Publicly is the odd one out.",
+          "example": "basic + -ly",
+          "steps": [
+            "Basic ends in -ic.",
+            "Add -ally.",
+            "Basically."
+          ]
+        }
+      ],
+      "tag": "dramatic",
+      "tagLabel": "Root word",
+      "key": "b"
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Suffix",
+      "text": "letters added at the end of a word, like -ly in freshly. Also called an ending."
+    },
+    {
+      "term": "Root word",
+      "text": "a word before any prefix or suffix is added, like spell in misspell."
+    },
+    {
+      "term": "Doing word",
+      "text": "a word for an action, like invite. Also called a verb."
+    },
+    {
+      "term": "Naming word",
+      "text": "a word for a thing or an idea, like invitation. Also called a noun."
+    },
+    {
+      "term": "Describing word",
+      "text": "a word that tells what something is like, like famous. Also called an adjective."
+    },
+    {
+      "term": "Vowels",
+      "text": "the letters a, e, i, o and u."
+    },
+    {
+      "term": "Consonants",
+      "text": "the other letters."
+    },
+    {
+      "term": "Tool",
+      "text": "one way to join a root word and an ending, like drop the e."
+    }
+  ],
+  "offscreen": {
+    "text": "The grown-up reads out four sign words: freshly, gently, famous, invitation. You write them. Check them together in a dictionary.",
+    "grownup": "Paper only. Nothing is photographed, scored or saved."
+  },
+  "grownup": "This bench explores three endings, -ly, -ous and -ation, and the small changes a root word can make when one is added: dropping an e before a vowel letter, changing y to i after a consonant, swapping le for ly, and -ic adding -ally. It also shows a few spellings that are learned in families (-sure, -ture, ou, y). These are usual patterns, not laws, and the odd-ones shelf shows words that keep their own way. All checks are guided practice with supplied words, not independent spelling assessment. An unexpected combination may still be a real word; check a bigger dictionary together. No sound samples play here. The printed -sure/-ture groups also have sound contrasts; this slice does not teach or test those contrasts. The English curriculum also names -sion (television, division); it is told apart from -tion by sound, so it is not taught on screen here. British spelling writes humour, which drops its u before -ous (humorous); US humor needs no change. No story chapter is unlocked."
+};
+export const marketEndingCopy=Object.freeze({
+  "arrival": "Make an ending sign",
+  "header": "Pick a word and an ending. Then pick a tool: just add, drop the e, y to i, or le to ly. For -ic words there is a harder tool: ic to ically.",
+  "rootLabel": "Root word",
+  "endingLabel": "Ending",
+  "rootPlaceholder": "Choose a root word",
+  "endingPlaceholder": "Choose an ending",
+  "toolsLabel": "Tools",
+  "harderLabel": "A harder tool",
+  "keep": "Keep this sign",
+  "clear": "Clear my sign",
+  "keptLabel": "Kept ending signs",
+  "reopen": "Reopen this sign",
+  "jobsLabel": "Ending sign jobs",
+  "storyLabel": "The bakery board story",
+  "storyContextLabel": "A story from Willowbank",
+  "noteLabel": "A true thing about language",
+  "storyBook": "Dot uses a bigger dictionary in the story. The tiny book here has only selected pages.",
+  "back": "Back to Market Signs",
+  "wordGarden": "Word Garden",
+  "propBox": "The Prop Box",
+  "incomplete": "Choose a root word, an ending and a tool first.",
+  "paused": "This older sign note does not match its own tool. It is kept as it was.",
+  "benchUnavailable": "This earlier ending bench cannot be played here. Its original stays in Notes. Other jobs and benches are still open.",
+  "unavailableTool": "This earlier tool is not available here. Its original stays in Notes.",
+  "materialUnavailable": "Some earlier material cannot be opened here. Its original stays in Notes.",
+  "kept": "Your sign is kept. You can make another.",
+  "alreadyKept": "This sign is already on your shelf.",
+  "cleared": "Your waiting sign is clear. Your kept signs are still here.",
+  "oddLabel": "Odd ones",
+  "noRootLabel": "No obvious root word here",
+  "noRootLine": "These -ous words have no obvious root word here to find.",
+  "oddLine": "Spelling rules usually work. These words keep their own way. A dictionary has the last word.",
+  "every": "Spelling rules usually work. A dictionary has the last word.",
+  "made": "This tool makes {made}.",
+  "mismatch": "Look at how {root} ends, and the first letter of the ending. Then try {tool}.",
+  "discovery": "This tool makes {made}. This bench has no note for {root} with {ending}. It could be a word to wonder about. Check a bigger dictionary together.",
+  "fit": "{word}. {rule}",
+  "rootPartLabel": "Root letters",
+  "endingPartLabel": "Ending letters",
+  "skip": "Skip for now. You can come back any time.",
+  "cannot": {
+    "drop-e": "{root} does not end in e.",
+    "y-to-i": "{root} does not end in y.",
+    "le-to-ly": "This tool is for -ly, with a root that ends in le.",
+    "ic-to-ically": "This tool is for -ly, with a root that ends in ic."
+  },
+  "rules": {
+    "just-add": "Nothing changes.",
+    "drop-e": "The e drops before a vowel letter.",
+    "y-to-i": "A consonant comes before the y, so y changes to i.",
+    "le-to-ly": "Swap le for ly.",
+    "ic-to-ically": "-ic words usually add -ally."
+  },
+  "changes": {
+    "drop-e": "The e came off.",
+    "y-to-i": "The y became i.",
+    "le-to-ly": "The le became ly.",
+    "none": "The root keeps every letter."
+  },
+  "toolLabels": {
+    "just-add": "just add",
+    "drop-e": "drop the e",
+    "y-to-i": "y to i",
+    "le-to-ly": "le to ly",
+    "ic-to-ically": "ic to ically"
+  }
+});
+export function marketEndingCollection(){return structuredClone(endingInitial);}
