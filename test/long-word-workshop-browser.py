@@ -147,6 +147,12 @@ def main():
                 p.goto(BASE+'#notes');p.locator('#download').wait_for();ok(root(p) is None, 'Notes does not allocate workshop')
                 p.goto(BASE+'#words');p.locator('a[href="#library/long-words"]').click();arrive(p)
                 action(p,'words').focus();p.keyboard.press('Enter');p.locator('[data-lww-word-picker]').wait_for()
+                tap(p,'arrival')
+                eq(p.locator('.lww-arrival li').all_text_contents(), [
+                    'Look at catchment on its card. Find catch and ment.',
+                    'Put catch before ment. Check the whole word against the card.',
+                    'The pieces help us check letters. We still need the meaning note.'], 'Back to workshop repeats complete arrival teaching')
+                tap(p,'words')
                 eq(p.locator('[data-lww-word-picker] option').all_text_contents(), ['catchment','embankment','permeable','precipitation','photosynthesis','algorithm'], 'six literal checked cards')
                 geometry(p)
                 tap(p,'keep-word');ok(p.locator('.lww-stamp').is_visible(),'keep shows acknowledgment')
@@ -156,7 +162,10 @@ def main():
                 tap(p,'check-word');eq(word(p)['check']['status'],'empty','empty comparison')
                 tap(p,'append','[data-lww-piece=ment]');tap(p,'append','[data-lww-piece=catch]')
                 tap(p,'check-word');eq(word(p)['check']['status'],'different','different construction accepted')
-                tap(p,'select-piece','[data-lww-piece=catch]');tap(p,'left')
+                tap(p,'select-piece','[data-lww-piece=catch]')
+                selected=p.locator('[data-lww-selected-piece]').inner_text()
+                ok('Selected piece' in selected and 'catch' in selected,'visible selected-piece label names the selected piece')
+                tap(p,'left')
                 eq(word(p)['order'],['catch','ment'],'move left');eq(p.locator('#lww-feedback').count(),0,'edit hides stale check')
                 tap(p,'right');eq(word(p)['order'],['ment','catch'],'move right');tap(p,'remove');eq(word(p)['order'],['ment'],'put back piece')
                 tap(p,'append','[data-lww-piece=catch]');tap(p,'left');eq(word(p)['order'],['catch','ment'],'piece can be put back and reused')
@@ -205,7 +214,7 @@ def main():
                 tap(p,'keep-glossary');latest=root(p)['glossary']['latestKept']
                 line(p,'g1');tap(p,'glossary-choice','[data-lww-choice=b]');eq(p.locator('#lww-feedback').count(),0,'glossary edit hides stale comparison')
                 tap(p,'check-glossary');eq(root(p)['glossary']['check']['status'],'discussion','complete differing glossary')
-                p.locator('[data-lww-panel=glossary-undefined-latest]>summary').tap();tap(p,'restore-glossary','[data-lww-edition=latest]')
+                p.locator('[data-lww-panel=glossary-work-latest]>summary').tap();tap(p,'restore-glossary','[data-lww-edition=latest]')
                 eq(root(p)['glossary']['picks'],latest['picks'],'restore glossary latest');eq(root(p)['glossary']['firstKept'],gfirst,'first glossary preserved')
                 held=root(p)['glossary'];tap(p,'jobs');tap(p,'glossary');eq(root(p)['glossary'],held,'F4 uses same glossary')
                 eq(p.locator('[data-lww-read]').evaluate_all('xs=>xs.filter(e=>!e.closest("details:not([open])")).map(e=>e.dataset.lwwRead)'),['instruction'],'glossary speech excludes alternatives and readbacks')
@@ -283,14 +292,53 @@ def boundaries(b):
     eq(word(p)['order'],['catch'],'failed storage retains memory work');ok(bool(p.locator('[data-lww-saving]').inner_text()),'storage failure local message');held=root(p);eq(json.loads(download(p))['longWordWorkshop'],held,'storage failure actual download');c.close()
 
     earlier=seed(True);r=earlier['longWordWorkshop'];r['words']['catchment']['order']={'future':['raw']};r['opaqueSibling']={'future':['retained']}
-    c,p=start(b,820,first=earlier);ok('cannot be played' in p.locator('main').inner_text(),'opaque word explains unavailable work');choose(p,'permeable');tap(p,'append','[data-lww-piece=perme]')
+    c,p=start(b,820,first=earlier);ok('cannot be played' in p.locator('main').inner_text(),'opaque word explains unavailable work');tap(p,'glossary');tap(p,'words')
+    ok(p.locator('[data-lww-word-picker]').is_visible(),'opaque active draft still offers word picker after changing sections');choose(p,'permeable');tap(p,'append','[data-lww-piece=perme]')
     eq(root(p)['words']['catchment'],r['words']['catchment'],'opaque sibling unchanged');eq(root(p)['opaqueSibling'],r['opaqueSibling'],'unknown root fields retained');geometry(p)
     held=root(p);eq(json.loads(download(p))['longWordWorkshop'],held,'opaque data actual export exact');c.close()
+    kept_boundaries(b)
     earlier=seed(True);r=earlier['longWordWorkshop'];r['view']='glossary';r['glossary']={'picks':{'g1':{'future':'raw'}},'help':[],'activeLine':'g1'}
     c,p=start(b,820,first=earlier);ok(action(p,'glossary-choice').is_disabled(),'opaque glossary choice read-only');line(p,'g2');tap(p,'glossary-choice','[data-lww-choice=b]');tap(p,'check-glossary')
     eq(root(p)['glossary']['check']['coverage'],'partial','readable glossary comparison explicitly partial');eq(root(p)['glossary']['picks']['g1'],{'future':'raw'},'opaque glossary selection retained');geometry(p);c.close()
     future=seed();future['longWordWorkshop']={'v':99,'future':['raw']};c,p=start(b,390,first=future)
     ok('format we cannot open' in p.locator('main').inner_text(),'future root notice');eq(root(p),future['longWordWorkshop'],'future root unchanged');eq(json.loads(download(p))['longWordWorkshop'],future['longWordWorkshop'],'future root exported exact')
     p.goto(BASE+'#words');ok(p.locator('a[href="#library/long-words"]').count()>0,'other Word Garden destinations remain available');c.close()
+
+
+def kept_boundaries(b):
+    c,p=start(b,820);tap(p,'words');choose(p,'embankment')
+    for piece in ['em','bank','ment']:tap(p,'append','[data-lww-piece='+piece+']')
+    tap(p,'check-word');tap(p,'keep-word');tap(p,'clear-word')
+    for piece in ['embank','ment']:tap(p,'append','[data-lww-piece='+piece+']')
+    tap(p,'check-word');tap(p,'keep-word')
+    for edition,expected in [('first','em + bank + ment'),('latest','embank + ment')]:
+        panel=p.locator('[data-lww-panel=word-embankment-'+edition+']')
+        panel.locator('summary').tap()
+        eq(panel.locator('[data-lww-kept-pieces]').inner_text(),expected,'kept grouping remains visibly distinct '+edition)
+        eq(panel.locator('[data-lww-check-pieces]').inner_text(),expected,'kept check preserves visible piece boundaries '+edition)
+    held=root(p);raw=download(p)
+    notes=p.locator('[data-long-word-notes]')
+    notes.evaluate('e=>{e.open=true;e.querySelectorAll("details").forEach(d=>d.open=true)}')
+    for selector in ['[data-lww-kept-pieces]:visible','[data-lww-check-pieces]:visible']:
+        visible=notes.locator(selector).all_text_contents()
+        ok('em + bank + ment' in visible and 'embank + ment' in visible,'Notes visibly distinguishes both retained groupings '+selector)
+    eq(json.loads(raw)['longWordWorkshop'],held,'boundary readouts do not change retained records');c.close()
+
+    earlier=seed(True);r=earlier['longWordWorkshop']
+    r['words']['catchment']['firstKept']={'order':['retired-piece'],'helpBefore':[],'check':None}
+    c,p=start(b,820,first=earlier)
+    panel=p.locator('[data-lww-panel=word-catchment-first]');panel.locator('summary').tap()
+    ok(panel.locator('.lww-notice').is_visible(),'missing-piece historical keep shows recovery notice')
+    eq(panel.locator('[data-lww-action=restore-word]:enabled').count(),0,'missing-piece historical keep has no enabled restore')
+    eq(root(p)['words']['catchment']['firstKept'],r['words']['catchment']['firstKept'],'unplayable historical keep retained exactly');c.close()
+
+    earlier=seed(True);r=earlier['longWordWorkshop'];r['view']='jobs'
+    r['jobs']['F4']={'future':['opaque-F4']};r['jobs']['retired']={'future':['opaque-retired']}
+    c,p=start(b,820,first=earlier)
+    eq(p.locator('[data-lww-action=job]').evaluate_all('xs=>xs.map(e=>e.dataset.lwwJob)'),['F1','F2','F3'],'opaque F4 and retired job records are not playable buttons')
+    tap(p,'glossary');held=root(p)['glossary'];tap(p,'jobs');tap(p,'glossary')
+    eq(root(p)['glossary'],held,'F4 glossary entry still opens the same glossary record')
+    eq(root(p)['jobs'],r['jobs'],'opaque F4 and retired job records preserved after glossary navigation')
+    held=root(p);eq(json.loads(download(p))['longWordWorkshop'],held,'opaque jobs preserved in actual Notes download');c.close()
 
 if __name__ == '__main__': main()

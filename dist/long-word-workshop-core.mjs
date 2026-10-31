@@ -140,7 +140,10 @@ function openGlossary(r,candidate){
 export function openLongWordSection(state,section,options){return mutate(state,(r,candidate)=>{
  if(section==='words'){
   const v=longWordView(candidate),key=v.words.find(w=>w.id===r.activeWord&&w.source)?.id??v.words.find(w=>w.source)?.id;
-  return key?openWord(r,candidate,key):fail('unavailable');
+  if(!key)return fail('unavailable');
+  const entry=v.words.find(w=>w.id===key);
+  if(entry.status!=='missing'&&(entry.status!=='ready'||entry.draftStatus!=='ready'||entry.helpStatus!=='ready')){r.view='words';r.activeWord=key;return {ok:true};}
+  return openWord(r,candidate,key);
  }
  if(section==='glossary')return openGlossary(r,candidate);
  if(section!=='jobs'||!longWordView(candidate).jobs.length)return fail('unavailable');r.view='jobs';r.activeJob=null;return {ok:true};
@@ -170,7 +173,7 @@ export function useLongWordHelp(state,key,options){return editWord(state,key,r=>
  if(r.help.includes('example'))return {ok:true,changed:false};r.help.push('example');return {ok:true};
 },options);}
 export function checkLongWord(state,key,options){return editWord(state,key,(r,s,e)=>{
- if(e.checkStatus==='unreadable')return fail('unavailable');const value=longWordText(s,r.order),status=!r.order.length?'empty':value===s.text?'matches':'different';
+ if(e.checkStatus==='unreadable'||!['wordEmpty','wordDifferent','wordMatches','uncheckedKeep'].every(k=>feedback(state.longWordWorkshop.source.copy[k])))return fail('unavailable');const value=longWordText(s,r.order),status=!r.order.length?'empty':value===s.text?'matches':'different';
  const c={...(obj(r.check)?r.check:{}),order:clone(r.order),status,target:s.text,text:value,feedback:longWordView(state).source.copy['word'+status[0].toUpperCase()+status.slice(1)],helpBefore:clone(r.help)};
  if(!validLongWordCheck(c))return fail('capacity');r.check=c;return {ok:true,...c};
 },options);}
@@ -195,7 +198,7 @@ export function checkLongGlossary(state,options){return editGlossary(state,(r,s,
  if(e.checkStatus==='unreadable'||!e.playable.length)return fail('unavailable');
  const rows=e.playable.map(g=>{const value=normalized(r.picks,g.id),c=g.choices.find(c=>c.id===value);return {id:g.id,before:g.flagged,chosen:c?.text??null,status:value===null?'unchosen':value===g.fits?'matches':'different',feedback:c?g.feedback[c.id]:s.copy.glossaryIncomplete};});
  const status=rows.some(r=>r.status==='unchosen')?'incomplete':rows.some(r=>r.status==='different')?'discussion':'matching',coverage=e.partial?'partial':'full';
- const summary=coverage==='partial'?(status==='matching'?s.copy.partialMatching:s.copy.partialNotice+' '+s.copy['glossary'+status[0].toUpperCase()+status.slice(1)]):s.copy['glossary'+status[0].toUpperCase()+status.slice(1)];
+ const summary=coverage==='partial'?(status==='matching'?s.copy.partialMatching:s.copy['glossary'+status[0].toUpperCase()+status.slice(1)]):s.copy['glossary'+status[0].toUpperCase()+status.slice(1)];
  const c={...(obj(r.check)?r.check:{}),picks:clone(r.picks),rows,status,coverage,helpBefore:clone(r.help),summary,...(coverage==='partial'?{notice:s.copy.partialNotice}:{})};
  if(coverage==='full')delete c.notice;
  if(!validLongGlossaryCheck(c))return fail('capacity');r.check=c;return {ok:true,...c};
