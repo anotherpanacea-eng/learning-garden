@@ -9,7 +9,7 @@ export const ribbonMeasureCases=Object.freeze([
 export const ribbonMeasureCase=id=>ribbonMeasureCases.find(c=>c.id===id)||null;
 export const ribbonMeasureCopy=Object.freeze({
  title:'Ribbon Measures',
- job:'How many measuring groups cover this ribbon? Part of a group can fit, too.',
+ job:'Bramble is measuring ribbons for Willowbank’s next gathering. How many measuring groups cover this ribbon? Part of a group can fit, too.',
  reference:'One length unit stays the same size. The measuring strip is a reusable ruler, not a supply of ribbon.',
  unchanged:'Changing the measuring strip’s cuts does not change pieces you already laid.',
  visit:'These ribbons stay while you explore this board. Leaving or reloading clears them; they are not saved in Notes.',

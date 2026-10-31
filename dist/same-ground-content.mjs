@@ -8,8 +8,8 @@ export const groundCases=Object.freeze([
 ].map(([id,title,stock,width,prompt])=>Object.freeze({id,title,stock,width,prompt})));
 export const groundCopy=Object.freeze({
  title:'Same ground, different fence',
- job:'Plan a growing plot after the storm. Lay square tiles, then walk the outside edge. Can the same tiles need a different amount of fence?',
- units:'One tile covers 1 square unit. Each edge is 1 length unit. These are model units, not metres.',
+ job:'The orchard keeper needs a plot, but fence wire is short. Lay square tiles, then walk the outside edge. Can the same tiles need a different amount of fence?',
+ units:'One tile covers 1 square unit. Each edge is 1 length unit. These are model units, not meters.',
  visit:'This work stays while you explore this board. Leaving or reloading clears it; it is not saved in Notes.',
  widthLock:'Return the tiles first to change how many squares are in each row.',
  picture:'A picture of your earlier arrangement; these are not extra tiles.',

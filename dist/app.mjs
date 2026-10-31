@@ -1,4 +1,18 @@
 import {pauseMillFilm,stopMillFilm} from './mill-film.mjs';
+import {beatBenchPage,beatBenchEntry,beatBenchNotes,bindBeatBench,resetBeatBenchView} from './beat-bench-ui.mjs';
+import {longWordPage,longWordEntry,longWordNotes,bindLongWord,resetLongWordView} from './long-word-workshop-ui.mjs';
+import {wordListShelfPage,wordListShelfEntry,wordListShelfNotes,bindWordListShelf,resetWordListShelfView} from './word-list-shelf-ui.mjs';
+import {pipsCopyPage,pipsCopyEntry,pipsCopyNotes,bindPipsCopy,resetPipsCopyView} from './pips-copy-ui.mjs';
+import {endingsShelfPage,endingsShelfEntry,endingsShelfNotes,bindEndingsShelf,resetEndingsShelfView} from './endings-shelf-ui.mjs';
+import {stainedMapPage,stainedMapEntry,stainedMapNotes,bindStainedMap,resetStainedMapView} from './stained-map-ui.mjs';
+import {marketSignsPage,bindMarketSigns,marketSignsNotes,resetMarketSignsView} from './market-signs-ui.mjs';
+import {writingPage,bindWriting,writingNotes,writingEntry} from './writing-table-ui.mjs';
+import {puzzleArt} from './puzzle-art.mjs';
+import {seedExchangePage,bindSeedExchange,seedExchangeNotes,seedExchangeEntry,guardSeedExchangeNavigation} from './seed-exchange-ui.mjs';
+import {wordRoomPage,bindWordRoom,wordRoomNotes,resetWordRoomView} from './word-room-ui.mjs';
+import {parcelLabelsPage,bindParcelLabels,parcelLabelsNotes,guardParcelLabelsNavigation} from './parcel-labels-ui.mjs';
+import {learningJourneysPage,bindLearningJourneys,prepareJourneyDisplay} from './learning-journeys.mjs';
+import {bindHomeEntry,ownHomeAction} from './home-entry.mjs';
 import {millEnergyPage,bindMillEnergy,resetMillEnergy,stopMillEnergyMotion} from './mill-energy.mjs';
 import {pauseLiftFilm,stopLiftFilm} from './lift-film.mjs';
 import {liftYardPage,bindLiftYard,resetLiftYard,stopLiftMotion} from './lift-yard.mjs';
@@ -44,6 +58,7 @@ import {captureFirstSupper} from './keeper-story-core.mjs';
 import {arrivalSkipsWelcome} from './story-arrivals-core.mjs';
 import {arrivalPage,arrivalInvitation,bindArrival,resetArrivalVisit} from './story-arrivals-ui.mjs';
 import {actTwoPage,actTwoReturn,bindActTwo} from './act-two-ui.mjs';
+import {actThreeRoute,actThreePage,bindActThree,actThreeInvitation,actThreeReturn,resetActThreeView} from './act-three-ui.mjs';
 import {deskPage,deskEntry,bindDesk} from './keepers-desk-ui.mjs';
 import {rowsPage,rowsNotes,bindRows,resetRowsVisit} from './ribbon-rows-ui.mjs';
 import {offerHowto,keepOfferingHowto} from './drawn-howto.mjs';
@@ -103,6 +118,7 @@ import {ratioBarsPage,bindRatioBars,resetRatioBarsView,ratioBarsEntry} from './r
 import {mixingTablePage,bindMixingTable,resetMixingTableView,mixingTableEntry} from './mixing-table-ui.mjs';
 import {feedingBoardPage,bindFeedingBoard,resetFeedingBoardView,feedingBoardEntry} from './feeding-board-ui.mjs';
 import {twoLettersPage,bindTwoLetters,resetTwoLettersVisit,twoLettersEntry} from './two-letters-ui.mjs';
+import {manifestPage,bindManifest,manifestNotes,manifestEntry,resetManifestView} from './manifest-ui.mjs';
 import {pairedPage,bindPairedPoints,resetPairedVisit,pairedEntry} from './paired-points-ui.mjs';
 import {travelersArchivePage,travelersArchiveEntry,bindTravelersArchive} from './travelers-archive-ui.mjs';
 import {travelersArchive,noteArchiveSources} from './travelers-archive-core.mjs';
@@ -177,6 +193,7 @@ import {ensureBroad,areaById,itemById,beginTrail,trailQuestion,familiarity,noteB
 import {broadHome,checkinHub,activityLibrary,trailSummary,learningMap,renderModel,adjustModel} from './broad-ui.mjs';
 import {observation,recommendations,makePractice,methodLabel,describe,numericAnswer} from './core.mjs';
 import {checkin,puzzles,skills} from './content.mjs';
+import {mendingShedPage,mendingShedNotes,bindMendingShed,resetMendingShedView} from './mending-shed-ui.mjs';
 const $=s=>document.querySelector(s), main=$('#main');
 let bellPlayer=null,rhythmPlayer=null;
 const stopTones=(reason='page-change')=>{bellPlayer?.stop(reason);rhythmPlayer?.stop(reason);};
@@ -193,7 +210,7 @@ const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
 keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'?'':location.hash);
-let needsExplorerInitialization=['#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer);
+let needsExplorerInitialization=(location.hash||'').split('/')[0]==='#journeys'||['#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer)||!!actThreeRoute(location.hash);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
 // Optional map data must never hold the first playable screen behind a download.
@@ -218,13 +235,16 @@ function loadCurriculumMap(){
 let screen='',activity=null,active=null,practiceSession=null,routeChoice='auto',puzzleLevel=null,lastAdventure=null;
 const blank=()=>({attempts:[],hinted:false,revealed:false,method:null,choice:null,input:'',error:'',exposed:false});
 function storageWarning(){return explorerStore.warning||(!storageOK?'This browser cannot save progress right now. You can still explore; download notes before leaving.':'');}
-function savingStatus(){return !persist?'Progress lasts only while this page stays open. Download notes before leaving.':!storageOK?'Progress could not be saved reliably. This session is still available; download notes before leaving.':'Progress is saved on this device.';}
+function savingStatus(){return explorerStore.conflict?storageWarning():!persist?'Progress lasts only while this page stays open. Download notes before leaving.':!storageOK?'Progress could not be saved reliably. This session is still available; download notes before leaving.':'Progress is saved on this device.';}
 function updateStorageNotice(){
  const message=storageWarning();let notice=main.querySelector('[data-save-warning]');
  if(message&&!notice){notice=document.createElement('p');notice.className='storage-warning';notice.dataset.saveWarning='';notice.setAttribute('role','status');main.prepend(notice);}
- if(notice){notice.textContent=message;notice.hidden=!message;}
+ if(notice){notice.replaceChildren(document.createTextNode(message));if(explorerStore.conflict){const link=document.createElement('a');link.href='#notes';link.textContent=' Open Grown-up notes to download this tab’s work.';notice.append(link);}notice.hidden=!message;}
+ if(explorerStore.conflict)document.querySelectorAll('#remember,#reset,#clear-all-explorers,[data-remove-copy]').forEach(el=>el.disabled=true);
  const status=main.querySelector('[data-saving-status]');if(status)status.textContent=savingStatus();
+ const homeStatus=main.querySelector('.home-save-note');if(homeStatus&&(explorerStore.conflict||!storageOK))homeStatus.textContent=savingStatus()+' Every place is open; there is no hurry.';
 }
+window.addEventListener('storage',event=>{if(event.storageArea!==localStorage)return;if(!explorerStore.checkForUpdates())storageOK=false;updateStorageNotice();});
 function save(){storageOK=explorerStore.save(state);persist=explorerStore.persist;updateStorageNotice();}
 document.addEventListener('garden-speech-preference',e=>{
   if(Object.hasOwn(state,'garden')&&(!state.garden||typeof state.garden!=='object'||Array.isArray(state.garden)))return;
@@ -241,10 +261,10 @@ function array(a,b,split=false,label=`${a} rows with ${b} seeds in each row`){re
 function picture(q){if(q.id==='fence')return `<svg viewBox="0 0 300 190" class="fence-picture" role="img" aria-label="A rectangle with top and bottom sides labeled 6 meters, and left and right sides labeled 4 meters"><rect x="65" y="35" width="170" height="115" rx="2" fill="#eaf4ef" stroke="#397958" stroke-width="4" stroke-dasharray="9 5"/><g fill="#183430" font-size="17" text-anchor="middle"><text x="150" y="22">6 m</text><text x="150" y="177">6 m</text><text x="31" y="99">4 m</text><text x="270" y="99">4 m</text></g></svg>`;const noun={mystery:'carrots',patchwork:'flowers',inverse:'bulbs',application:'plants',picnic:'berries'}[q.id]||'seeds';const shown=q.id==='mystery'?`Rows of ${q.b} carrots`:q.id==='patchwork'?`5 rows of yellow flowers and 2 rows of pink flowers, ${q.b} in each row`:`${q.a} rows, ${q.b} in each row`;return `${array(q.a,q.b,q.a>5,q.id==='mystery'?`${q.a} rows of ${q.b} carrots`:q.id==='patchwork'?shown:`${q.a} rows with ${q.b} ${noun} in each row`)}<p class="array-label">${shown}</p>`;}
 function flower(x,y,c,n=6){let petals='';for(let k=0;k<n;k++){const t=k*2*Math.PI/n;petals+=`<circle cx="${x+Math.cos(t)*11}" cy="${y+Math.sin(t)*11}" r="8" fill="${c}"/>`;}return `<path d="M${x} ${y+6}V270" stroke="#397958" stroke-width="3"/><path d="M${x} ${y+55}q-26 -29 -28 -7q8 19 28 7M${x} ${y+35}q23 -29 27 -9q-5 19 -27 9" fill="#5b8d68"/>${petals}<circle cx="${x}" cy="${y}" r="6" fill="#183f39"/>`;}
 function gardenArt(){let flowers='';for(let r=0;r<3;r++)for(let c=0;c<4;c++)flowers+=flower(98+c*69,74+r*65,['#e9b84a','#da8d8d','#abc4da'][r]);return `<div class="hero-art"><svg viewBox="0 0 440 310" aria-label="A garden of flowers arranged in three rows of four" role="img"><path d="M45 274Q220 251 395 274" fill="none" stroke="#a3bcaa" stroke-width="2"/>${flowers}<path d="M51 276h340" stroke="#183f39" stroke-width="2"/><circle cx="357" cy="41" r="19" fill="#fff" opacity=".8"/><path d="M43 169q-9 -9 -14 2q12 11 14 -2q9 -15 15 -3q-6 13 -15 3" fill="#e9b84a"/></svg><span class="art-note">What do you notice in the garden?</span></div>`;}
-function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back">← Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
+function heading(title,body,back=true){return `<div class="page-heading">${back?'<a href="#home" class="back"><span aria-hidden="true">←</span> Back to the garden</a>':''}<h1>${title}</h1><p>${body}</p></div>`;}
 function noteInstructionArrival(){if(choosingExplorer)return;const [desk,page]=(location.hash||'').slice(1).split('/');if(page==='instructions'&&['post','loft'].includes(desk)&&noteInstructionEntry(state,desk))save();}
 function navigate(hash){stopBell('navigation');if(location.hash===hash){noteInstructionArrival();render();}else location.hash=hash;}
-function home(){return pathwayInvitation()+startingInvitation()+arrivalInvitation(state)+deskEntry()+gardenHome(state,persist,parcelHome(state,{blocked:keeperFilmBlocked()}))+pileEntry()+townInvitation(state)+'<section class="word-home-invite"><h2>Behind the library, words are growing.</h2><p>Choose a word plant, add a cutting, and discover what their parts could mean. Familiar words and surprising ideas both belong.</p><a class="primary" href="#words">Explore Word Garden</a></section>'+riddlesEntry();}
+function home(){return gardenHome(state,persist,parcelHome(state,{blocked:keeperFilmBlocked()}),explorerStore.active.id)+townInvitation(state);}
 function startCheckin(){if(state.baseline.complete){navigate('#summary');return;}const q=checkin[state.baseline.index];activity={mode:'checkin',q};const draft=state.baseline.draft;active=draft?.questionId===q.id?{...blank(),...draft}:blank();
   if(draft?.questionId!==q.id&&(state.exposures?.includes(`${q.a}x${q.b}`)||state.exposures?.includes(`${q.b}x${q.a}`)))active.exposed=true;
   screen='activity';render();focusActivity();}
@@ -276,9 +296,9 @@ function record(skip=false){
 function noteRows(){return skills.map(([skill,label])=>{const obs=state.baseline.observations.filter(o=>o.skill===skill);return `<div class="skill-row"><strong>${label}</strong>${obs.length?obs.map(o=>`<p>${esc(o.label)}: ${esc(describe(o))}${o.exposed?' (a related example was seen earlier)':''}.</p>`).join(''):'<p>Not explored yet.</p>'}</div>`;}).join('');}
 function summary(){const r=recommendations(state);return `${heading('Here’s what we noticed.','A few observations to help us choose what to try next.')}<section class="summary-callout"><h2>There’s room to grow and explore.</h2><p>${esc(r.reason)}</p><div class="summary-links"><a class="primary" href="#practice">Try a little practice</a><a class="secondary" href="#puzzles">Choose an interesting problem</a></div></section><div class="notes-grid"><section class="panel"><h2>Our check-in observations</h2>${noteRows()}</section><section class="panel"><h2>For your next little session</h2><ul class="plain-list"><li>Pick a small practice set, then choose a puzzle that looks interesting.</li><li>Ask “How did you work that out?” and give time for an explanation.</li><li>Try a fresh example on another day to see what stayed with you.</li></ul><p class="tiny">Only six tasks were sampled. A correct answer can come from different methods. Skips mean “not explored,” and one tricky task is not a verdict about a skill.</p><a href="#notes">See the details in Grown-up notes</a></section></div>`;}
 function practiceEnd(){const obs=practiceSession?.observations||[];return `${heading('A little practice, planted.','You tried six problems. That is a good place to pause.')}<div class="summary-callout"><h2>What did you notice?</h2><p>Was there a fact you could connect to something you already knew? Talk about one idea you want to keep.</p><div class="summary-links"><a href="#puzzles" class="primary">Find something to wonder</a><a href="#practice" class="secondary">Choose another practice set</a><a href="#home" class="text-button">Take a break</a></div></div><details class="panel"><summary>See this practice session together</summary>${obs.map(o=>`<div class="evidence-item"><strong>${esc(o.label)}</strong><p>${esc(describe(o))}</p></div>`).join('')}</details>`;}
-function puzzlePage(){const rec=recommendations(state);const level=puzzleLevel||rec.suggestion;const opts=[['gentle','Small wonders'],['curious','Curious connections'],['stretch','A bigger stretch']];const icons={picnic:'✦ ✦ ✦',paths:'● ● ●',outfits:'♧ ◇ ♧',mystery:'▦ ?',fence:'▱',patchwork:'▦ ▦'};return `${heading('Something to wonder.','Interesting problems belong here from the start. Choose whichever catches your eye.')}<p class="tiny">${puzzleLevel?'Your chosen path':`Suggested starting path: ${opts.find(([id])=>id===level)[1]}`}. Every path is open.</p><div class="level-options" role="group" aria-label="Choose puzzles">${opts.map(([id,label])=>`<button class="level-choice ${id===level?'selected':''}" data-level="${id}" aria-pressed="${id===level}">${label}</button>`).join('')}</div><div class="puzzle-grid">${puzzles.filter(q=>q.level===level).map(q=>`<article class="puzzle-card"><div class="puzzle-art" aria-hidden="true">${icons[q.id]}</div><span class="tag">${q.tag}</span><h2>${q.title}</h2><p>${q.prompt}</p><button class="secondary" data-puzzle="${q.id}">Explore this one</button></article>`).join('')}</div>`;}
+function puzzlePage(){const rec=recommendations(state);const level=puzzleLevel||rec.suggestion;const opts=[['gentle','Small wonders'],['curious','Curious connections'],['stretch','A bigger stretch']];return `${heading('Something to wonder.','Interesting problems belong here from the start. Choose whichever catches your eye.')}<p class="tiny">${puzzleLevel?'Your chosen path':`Suggested starting path: ${opts.find(([id])=>id===level)[1]}`}. Every path is open.</p><div class="level-options" role="group" aria-label="Choose puzzles">${opts.map(([id,label])=>`<button class="level-choice ${id===level?'selected':''}" data-level="${id}" aria-pressed="${id===level}">${label}</button>`).join('')}</div><div class="puzzle-grid">${puzzles.filter(q=>q.level===level).map(q=>`<article class="puzzle-card"><div class="puzzle-art" aria-hidden="true">${puzzleArt(q.id)}</div><span class="tag">${q.tag}</span><h2>${q.title}</h2><p>${q.prompt}</p><button class="secondary" data-puzzle="${q.id}">Explore this one</button></article>`).join('')}</div>`;}
 function evidence(o){return `<div class="evidence-item"><strong>${esc(o.label||o.questionId)}: ${esc(describe(o))}</strong><p>${esc(o.prompt)}</p><p>${o.status==='skipped'?'Skipped without an answer.':`Answers tried: ${o.attempts.map(a=>esc(o.questionId==='strategy'?checkin[1].choices[a]??a:a)).join(', ')||'None'}.`}${o.method?` Method: ${esc(methodLabel[o.method]||o.method)}.`:''}${o.hinted?' Hint or picture used.':''}${o.revealed?' Worked example opened.':''}${o.exposed?' Related example seen earlier.':''}</p></div>`;}
-function notes(){const rec=recommendations(state);return `${heading('Grown-up notes','A record of individual tasks across the garden. All observations stay in this browser.')}${explorerNotes(explorerStore)}${pileNotes(state)}${shuttersNotes(state)}${rowsNotes(state)}${startingNotesLink()}${cafeStartPanel(state)}${progressTransferPanel(progressImport,persist)}${destinationNotes(state,graph)}<div class="warning">${state.baseline.complete?'The original multiplication check-in is complete.':state.baseline.index?`The check-in is partly complete (${state.baseline.index} of 6 recorded).`:'The original multiplication check-in has not started.'} This small, untimed sample cannot establish a grade level or class readiness. “Worked it out” is positive evidence of reasoning; it is different from recalling a fact.</div><div class="notes-grid"><section class="panel"><h2>Original multiplication snapshot</h2>${noteRows()}${!state.baseline.complete?'<p class="status-note"><a href="#multiplication">Start or continue the check-in</a></p>':''}</section><section class="panel"><h2>What to try next</h2><p>${esc(rec.reason)}</p><p>Use a small practice set and keep an interesting problem alongside it. Ask which part felt comfortable and which part you would like to understand better.</p><p>For another session, use different examples. A single independent answer is an observation, not a mastery label.</p><div class="summary-links"><a href="#practice" class="secondary">Choose practice</a><a href="#puzzles" class="secondary">Choose a puzzle</a></div></section></div><details class="panel"><summary>Check-in details (${state.baseline.observations.length} recorded)</summary>${state.baseline.observations.length?state.baseline.observations.map(evidence).join(''):'<p>No answers have been recorded. Begin with a few questions together.</p>'}</details><details class="panel"><summary>Practice details (${state.practice.length} recorded)</summary><p class="tiny">These are learning attempts, kept separate from the check-in.</p>${state.practice.length?state.practice.map(evidence).join(''):'<p>No practice yet. A fresh mix is available even without a check-in.</p>'}</details><details class="panel"><summary>Puzzle details (${state.puzzles.length} recorded)</summary>${state.puzzles.length?state.puzzles.map(evidence).join(''):'<p>No puzzles recorded yet. Every puzzle path is open.</p>'}</details><section class="panel" style="margin-top:24px"><h2>Keep our place?</h2><label class="remember-label"><input type="checkbox" id="remember" ${persist?'checked':''}> Remember progress in this browser</label><p class="tiny status-note"><span data-saving-status>${esc(savingStatus())}</span> Switching this off removes all explorer saves, earlier shared saves, and kept copies from this device. Current sessions stay open in memory; download anything you want to keep first.</p></section><div class="notes-actions"><button class="secondary" id="download">Download our notes</button><button class="text-button" id="reset">Clear this explorer’s progress</button></div><p class="status-note">A download contains these observations, not a child’s name. Clearing this explorer leaves the other explorers in place. It cannot remove a file you already downloaded.</p>`;}
+function notes(){const rec=recommendations(state);return `${heading('Grown-up notes','A record of individual tasks across the garden. All observations stay in this browser.')}${explorerNotes(explorerStore)}${writingNotes(state)}${seedExchangeNotes(state)}${parcelLabelsNotes(state)}${manifestNotes(state)}${marketSignsNotes(state)}${stainedMapNotes(state)}${endingsShelfNotes(state)}${mendingShedNotes(state)}${pipsCopyNotes(state)}${wordListShelfNotes(state)}${longWordNotes(state)}${beatBenchNotes(state)}${wordRoomNotes(state)}${pileNotes(state)}${shuttersNotes(state)}${rowsNotes(state)}${startingNotesLink()}${cafeStartPanel(state)}${progressTransferPanel(progressImport,persist)}${destinationNotes(state,graph)}<div class="warning">${state.baseline.complete?'The original multiplication check-in is complete.':state.baseline.index?`The check-in is partly complete (${state.baseline.index} of 6 recorded).`:'The original multiplication check-in has not started.'} This small, untimed sample cannot establish a grade level or class readiness. “Worked it out” is positive evidence of reasoning; it is different from recalling a fact.</div><div class="notes-grid"><section class="panel"><h2>Original multiplication snapshot</h2>${noteRows()}${!state.baseline.complete?'<p class="status-note"><a href="#multiplication">Start or continue the check-in</a></p>':''}</section><section class="panel"><h2>What to try next</h2><p>${esc(rec.reason)}</p><p>Use a small practice set and keep an interesting problem alongside it. Ask which part felt comfortable and which part you would like to understand better.</p><p>For another session, use different examples. A single independent answer is an observation, not a mastery label.</p><div class="summary-links"><a href="#practice" class="secondary">Choose practice</a><a href="#puzzles" class="secondary">Choose a puzzle</a></div></section></div><details class="panel"><summary>Check-in details (${state.baseline.observations.length} recorded)</summary>${state.baseline.observations.length?state.baseline.observations.map(evidence).join(''):'<p>No answers have been recorded. Begin with a few questions together.</p>'}</details><details class="panel"><summary>Practice details (${state.practice.length} recorded)</summary><p class="tiny">These are learning attempts, kept separate from the check-in.</p>${state.practice.length?state.practice.map(evidence).join(''):'<p>No practice yet. A fresh mix is available even without a check-in.</p>'}</details><details class="panel"><summary>Puzzle details (${state.puzzles.length} recorded)</summary>${state.puzzles.length?state.puzzles.map(evidence).join(''):'<p>No puzzles recorded yet. Every puzzle path is open.</p>'}</details><section class="panel" style="margin-top:24px"><h2>Keep our place?</h2><label class="remember-label"><input type="checkbox" id="remember" ${persist?'checked':''}> Remember progress in this browser</label><p class="tiny status-note"><span data-saving-status>${esc(savingStatus())}</span> Switching this off removes all explorer saves, earlier shared saves, and kept copies from this device. Current sessions stay open in memory; download anything you want to keep first.</p></section><div class="notes-actions"><button class="secondary" id="download">Download our notes</button><button class="text-button" id="reset">Clear this explorer’s progress</button></div><p class="status-note">A download contains these observations, not a child’s name. Clearing this explorer leaves the other explorers in place. It cannot remove a file you already downloaded.</p>`;}
 function markExposure(){
   if(!activity?.q)return;
   const q=activity.q;
@@ -318,7 +338,7 @@ function broadActivityPage(){
  if(active.helper?.open)return renderBroadHelp(q,active);
  const hear=(text,label='Hear it')=>hearButton(text,label),feedback=active.attempts.length?broadFeedback(q,active.attempts.at(-1)).message:'';
  const childLesson=q.childLesson||'Try Pip’s example together. Then bring your own idea to a new question.';
- const exampleOpen=active.exampleOpen??window.innerWidth>=700;
+ const exampleOpen=active.exampleOpen??false;
  const model=learning?`<details class="broad-example" id="broad-example" ${exampleOpen?'open':''}><summary>Pip’s example · tap to explore</summary>${renderModel(q,active,true,{mode:'activity'})}</details>`:q.showModel||active.showArray?renderModel(q,active,!!active.showArray,{mode:'checkin'}):'';
  return `<div class="activity-layout"><section class="activity broad-activity" aria-label="Math activity"><div class="activity-top"><span>${learning?'An adventure together':`Garden walk · ${trail.index+1} of 2`}</span><span class="broad-friends" aria-hidden="true">${pip('wave')}${dot(correct?'cheer':active.attempts.length?'puzzled':'think')}</span></div><h2>${esc(q.title)}</h2>${learning?`<p class="broad-lesson-summary">${esc(childLesson)}</p><details class="broad-idea"><summary>Read Pip’s idea</summary><p>${esc(childLesson)}</p>${hear(childLesson,'Hear Pip’s idea')}<details class="lesson"><summary>For grown-ups</summary><p>${esc(q.lesson)}</p>${hear(q.lesson,'Hear the teaching idea')}</details></details>`:''}${learning?model:''}<div class="broad-question-group">${learning?'<h3>Your turn</h3>':''}<p class="question">${esc(q.prompt)}</p>${hear(q.say||q.prompt,'Hear the question')}</div>${learning?'':model}
  ${!correct?`<form id="answer-form" novalidate>${q.kind==='choice'?`<div class="choices" role="group" aria-label="Choose an answer">${q.choices.map((c,i)=>`<button type="button" class="choice ${active.choice===i?'selected':''}" data-choice="${i}" aria-pressed="${active.choice===i}">${esc(c)}</button>`).join('')}</div><button class="primary" type="submit">Try this idea</button>`:`<label class="answer-label" for="answer">Your answer</label><div class="answer-line"><input id="answer" name="answer" type="text" inputmode="numeric" autocomplete="off" value="${esc(active.input)}" aria-describedby="answer-error"><button class="primary" type="submit">Try my answer</button></div>`}<span id="answer-error" role="alert" class="tiny">${esc(active.error)}</span></form>`:''}
@@ -346,6 +366,7 @@ function render(){
   stopBell('render');stopSpeech();
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   let cafeOfferPairs=null;
+  if(hash!=='#words/signs'||choosingExplorer)resetMarketSignsView();
   if(choosingExplorer)resetCafeTouchView();
   if(hash!=='#workshop/old-map'||choosingExplorer)resetMapReading();
   if(hash!=='#mill/energy'||choosingExplorer)resetMillEnergy();
@@ -357,6 +378,7 @@ function render(){
   if(hash!=='#workshop/hinge'||choosingExplorer)resetHingeVisit();
   if(hash!=='#workshop/copy-frame'||choosingExplorer)resetCopyFrame();
   if(hash!=='#workshop/ribbon-measures'||choosingExplorer)resetRibbonMeasures();
+  if(hash!=='#workshop/mending'||choosingExplorer)resetMendingShedView();
   if(hash!=='#workshop/same-ground'||choosingExplorer)resetSameGround();
   if(hash!=='#workshop/common-cuts'||choosingExplorer)resetCommonCuts();
   if(hash!=='#almanac/upstream-reply'||choosingExplorer)resetUpstreamView();
@@ -366,6 +388,7 @@ function render(){
   if(hash!=='#studio/mixing'||choosingExplorer)resetMixingTableView();
   if(hash!=='#living/who-eats'||choosingExplorer)resetFeedingBoardView();
   if(hash!=='#post/register'||choosingExplorer)resetTwoLettersVisit();
+  if(hash!=='#post/manifest'||choosingExplorer)resetManifestView();
   if(hash!=='#learn/math/paired'||choosingExplorer)resetPairedVisit();
   if(!['#almanac/weather','#almanac/tallies'].includes(hash)||choosingExplorer)resetWeatherTallyVisit();
   if(hash!=='#studio/rhythm'||choosingExplorer)resetRhythmVisit();
@@ -395,198 +418,222 @@ function render(){
   const fossilBench=root==='living'&&slug==='fossils',portionsBench=root==='cafe'&&slug==='portions',fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return'&&!remainsBench,joiningBench=root==='numbers'&&slug==='join'&&detail!=='ledger',joiningLedgerBench=root==='numbers'&&slug==='join'&&detail==='ledger',comparisonBench=root==='numbers'&&slug==='compare',tenthsBench=root==='numbers'&&slug==='tenths',hundredthsBench=root==='numbers'&&slug==='hundredths',seedBench=root==='numbers'&&slug==='seeds';
   const clockWalkBench=root==='post'&&slug==='clock-walk',pavingBench=root==='numbers'&&slug==='paving';
   const collectionBench=root==='living'&&slug==='collection',lanternBench=root==='numbers'&&slug==='lanterns',noticeBench=root==='loft'&&slug==='printer';
+  const thirdRoute=actThreeRoute(hash);
+  if(thirdRoute){
+    routeHeader('#storm');if(choosingExplorer)resetActThreeView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):actThreePage(state,{...thirdRoute,owner:explorerStore.active.id,blocked:keeperFilmBlocked()});updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindActThree(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}return;
+  }
+  if(hash==='#desk/writing'){
+    routeHeader();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):writingPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWriting(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,stopSpeech,stopSound:stopBell,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}return;
+  }
+  if(hash==='#desk/exchange'){
+    routeHeader();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):seedExchangePage(state,explorerStore.active.id)+actThreeReturn(state,'seeds');updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSeedExchange(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,stopSpeech,stopSound:stopBell,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}return;
+  }
+  if(hash==='#library/beat'){
+    routeHeader();if(choosingExplorer)resetBeatBenchView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):beatBenchPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindBeatBench(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});const notice=main.querySelector('[data-bb-saving]');if(notice&&(!persist||!storageOK||explorerStore.conflict))notice.textContent=savingStatus();}return;
+  }
+  if(hash==='#library/long-words'){
+    routeHeader();if(choosingExplorer)resetLongWordView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):longWordPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindLongWord(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});const notice=main.querySelector('[data-lww-saving]');if(notice&&(!persist||!storageOK||explorerStore.conflict))notice.textContent=savingStatus();bindSpeech();}return;
+  }
+  if(hash==='#library/word-list'){
+    routeHeader();if(choosingExplorer)resetWordListShelfView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):wordListShelfPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWordListShelf(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});const notice=main.querySelector('[data-wls-saving]');if(notice&&(!persist||!storageOK||explorerStore.conflict))notice.textContent=savingStatus();bindSpeech();}return;
+  }
+  if(hash==='#library/copy'){
+    routeHeader();if(choosingExplorer)resetPipsCopyView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):pipsCopyPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindPipsCopy(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});const notice=main.querySelector('[data-pc-saving]');if(notice&&(!persist||!storageOK||explorerStore.conflict))notice.textContent=savingStatus();bindSpeech();}return;
+  }
+  if(hash==='#library/endings'){
+    routeHeader();if(choosingExplorer)resetEndingsShelfView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):endingsShelfPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindEndingsShelf(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});const notice=main.querySelector('[data-es-saving]');if(notice&&(!persist||!storageOK||explorerStore.conflict))notice.textContent=savingStatus();bindSpeech();}return;
+  }
+  if(hash==='#library/spellings'){
+    routeHeader();if(choosingExplorer)resetStainedMapView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):stainedMapPage(state,explorerStore.active.id,(guides.find(g=>g.id===state.garden?.guide)||guides[0]).name);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindStainedMap(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});const notice=main.querySelector('[data-sm-saving]');if(notice&&(!persist||!storageOK||explorerStore.conflict))notice.textContent=savingStatus();bindSpeech();}return;
+  }
+  if(hash==='#words/signs'){
+    routeHeader();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):marketSignsPage(state,explorerStore.active.id,(guides.find(g=>g.id===state.garden?.guide)||guides[0]).name);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMarketSigns(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});}return;
+  }
+  if(hash==='#words/props'){
+    routeHeader();
+    if(choosingExplorer)resetWordRoomView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):wordRoomPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWordRoom(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});}return;
+  }
+  if(hash==='#words/endings'){
+    routeHeader();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):parcelLabelsPage(state);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindParcelLabels(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}return;
+  }
+  if(root==='journeys'){
+    routeHeader();
+    const ready=choosingExplorer?{ok:false,changed:false}:prepareJourneyDisplay(state,explorerStore.active.id,{canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});
+    if(ready.changed)save();main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):learningJourneysPage(state,explorerStore.active.id,{ready:ready.ok});updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindLearningJourneys(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,render});bindSpeech();}return;
+  }
   const plantBench=root==='living'&&slug==='plants',fieldBench=root==='living'&&slug==='notebook'&&detail!=='rain',rainNotebookBench=root==='living'&&slug==='notebook'&&detail==='rain',sharingBench=root==='cafe'&&slug==='sharing',rainBench=root==='science'&&slug==='rain',measureBench=root==='science'&&slug==='measure',recipeBench=root==='cafe'&&slug==='recipes',packingBench=root==='post'&&slug==='packing',sortingBench=root==='post'&&slug==='sorting',doubleBench=root==='post'&&slug==='double-check',batchBench=root==='cafe'&&slug==='batches',labelBench=root==='archive'&&slug==='labels',archiveBench=root==='archive',bellBench=root==='studio'&&slug==='bells';
   if(hash==='#workshop/old-map'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+    routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):mapReadingPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMapReading(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/old-map',save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#mill/energy'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+    routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):millEnergyPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMillEnergy(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#mill/energy',render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{stopMillEnergyMotion();stopLiftMotion();pauseLiftFilm();pauseWaterFilm();stopTones('mill-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('mill-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#workshop/lift'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+    routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):liftYardPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindLiftYard(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/lift',render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{pauseMillFilm();stopMillEnergyMotion();stopLiftMotion();pauseWaterFilm();stopTones('lift-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('lift-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#studio/sound-window'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#home'?'page':'false'));
+    routeHeader('#home');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):soundWindowPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSoundWindow(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#studio/sound-window',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforeTone:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopTones('sound-window');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSpeech();},beforeMovie:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopTones('sound-film');pauseRhythmSong();pauseSwitchFilm();stopSoundTone('sound-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#workshop/switch-table'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+    routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):switchTablePage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSwitchTable(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/switch-table',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforePlay:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopSoundTone('switch-film');pauseSoundFilm();stopTones('switch-film');pauseRhythmSong();stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#science/ice'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#science'?'page':'false'));
+    routeHeader('#science');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):waterPhasePage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWaterPhase(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#science/ice',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforeMovie:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();stopTones('water-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('water-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#post/ferry'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#post'?'page':'false'));
+    routeHeader('#post');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):ferryPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindFerry(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#post/ferry',render,focus:focusElement,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#workshop/hinge'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+    routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):hingePage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindHinge(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/hinge',render,focus:focusElement,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#workshop/copy-frame'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+    routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):copyFramePage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindCopyFrame(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/copy-frame',render,focus:focusElement,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
+  if(hash==='#workshop/mending'){
+    routeHeader('#workshop');
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):mendingShedPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMendingShed(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/mending',save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,stopSpeech,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}return;
+  }
   if(hash==='#workshop/ribbon-measures'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+    routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):ribbonMeasurePage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRibbonMeasures(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/ribbon-measures',render,focus:focusElement,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#workshop/same-ground'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+    routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):sameGroundPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSameGround(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/same-ground',render,focus:focusElement,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#workshop/common-cuts'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):commonCutsPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindCommonCuts(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/common-cuts',render,focus:focusElement,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#almanac/upstream-reply'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
-    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):upstreamPage(state,explorerStore.active.id);updateStorageNotice();
+    routeHeader();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):upstreamPage(state,explorerStore.active.id)+actThreeReturn(state,'letters');updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindUpstream(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#almanac/upstream-reply',save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,download:()=>downloadText(JSON.stringify(notesReport(state),null,2),'after-the-storm-notes.json'),stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#studio/field-strips'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):fieldStripsPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindFieldStrips(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#studio/field-strips',save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,download:()=>downloadText(JSON.stringify(notesReport(state),null,2),'after-the-storm-notes.json'),stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#desk/gaps'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):gapLinePage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindGapLine(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#desk/gaps',save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,download:()=>downloadText(JSON.stringify(notesReport(state),null,2),'after-the-storm-notes.json'),stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#studio/mixing/bars'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):ratioBarsPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRatioBars(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#studio/mixing/bars',save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,download:()=>downloadText(JSON.stringify(notesReport(state),null,2),'after-the-storm-notes.json'),stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#studio/mixing'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):mixingTablePage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMixingTable(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#studio/mixing',save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,download:()=>downloadText(JSON.stringify(notesReport(state),null,2),'after-the-storm-notes.json'),stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#living/who-eats'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):feedingBoardPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindFeedingBoard(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#living/who-eats',save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,download:()=>downloadText(JSON.stringify(notesReport(state),null,2),'after-the-storm-notes.json'),stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
+  if(hash==='#post/manifest'){
+    routeHeader('#post');
+    if(choosingExplorer)resetManifestView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):manifestPage(state,explorerStore.active.id);updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindManifest(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});}return;
+  }
   if(hash==='#post/register'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):twoLettersPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindTwoLetters(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#learn/math/paired'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):pairedPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindPairedPoints(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(['#almanac/weather','#almanac/tallies'].includes(hash)){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):(hash==='#almanac/weather'?weatherPage(state,explorerStore.active.id):talliesPage(state,explorerStore.active.id));updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWeatherTally(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell});bindSpeech();}return;
   }
   if(hash==='#studio/rhythm'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):rhythmPage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRhythm(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,player:rhythmPlayback,stopSpeech,stopTones:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopSoundTone('rhythm-song');pauseSoundFilm();pauseSwitchFilm();stopTones('rhythm-song');}});bindSpeech();}return;
   }
   if(hash==='#science/water-shares'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#science'?'page':'false'));
+    routeHeader('#science');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):waterPage(state);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWater(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});bindSpeech();}return;
   }
   if(hash==='#post/descriptions'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#post'?'page':'false'));
+    routeHeader('#post');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):hatsPage(state);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindHats(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});bindSpeech();}return;
   }
   if(hash==='#post/codes'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#post'?'page':'false'));
+    routeHeader('#post');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):codesPage(state);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindCodes(state,{save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});bindSpeech();}return;
   }
   if(hash==='#arrive'){
     resetStartingFlow();
     if(choosingExplorer)resetArrivalVisit();
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):arrivalPage(state,explorerStore.active.id,{blocked:!!document.querySelector('dialog.welcome-film[open]')});updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindArrival({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,replayWelcome:()=>playFilm('welcome',{replay:true})});bindSpeech();}return;
   }
   resetArrivalVisit();
   if(hash==='#begin'){
     if(choosingExplorer)resetStartingFlow();
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
-    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):startingFlowPage(state,explorerStore.active.id);if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindStartingFlow({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}
@@ -595,10 +642,7 @@ function render(){
   resetStartingFlow();
   // Subject entry and unit visits do not normalize or advance other activities.
   if(root==='pathways'||root==='learn'){
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
-    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current','false'));
+    routeHeader();
     const options={save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,entryLesson:detail};
     let content;
     if(choosingExplorer)content=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
@@ -623,20 +667,14 @@ function render(){
   }
   if(hash==='#cafe/units'){
     if(choosingExplorer)resetUnits();
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
-    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#cafe'?'page':'false'));
+    routeHeader('#cafe');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):unitsPage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindUnits({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,focus:focusElement,...pavingOptions()});bindSpeech();}return;
   }
   resetUnits();
   if(hash==='#loft/shadows'){
     if(choosingExplorer)resetShadow();
-    let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-    const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
-    $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-    document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#loft'?'page':'false'));
+    routeHeader('#loft');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):shadowPage(explorerStore.active.id,state);if(!choosingExplorer)offerHowto(main,location.hash);
     updateStorageNotice();
     if(choosingExplorer)bindExplorers();else {$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindShadow({explorerId:()=>explorerStore.active.id,notebookState:()=>state,focus:focusElement});bindSpeech();}
@@ -645,10 +683,7 @@ function render(){
   resetShadow();
   // This independent scene must reach its atomic exposure check before normalizers/binders.
   if(scaleBench){
-   let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
-   const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];
-   $('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});
-   document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')==='#workshop'?'page':'false'));
+   routeHeader('#workshop');
    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):scalePage(state,explorerStore.active.id,{...pavingOptions(),save});if(!choosingExplorer)offerHowto(main,location.hash);
    updateStorageNotice();bindExplorers();if(choosingExplorer)return;
    bindScale({notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,...pavingOptions()});
@@ -656,7 +691,7 @@ function render(){
   }
   if(needsExplorerInitialization){initializeExplorerState(state);needsExplorerInitialization=false;}
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
-  let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);
+  explorerHeader();
   const navRoot=['paris','french','archive'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
   $('#companion-link').innerHTML=companionLink(state);
   document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===`#${navRoot}`?'page':'false'));
@@ -665,8 +700,8 @@ function render(){
   if(choosingExplorer)html=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
   else if(bridgesBench)html=bridgesPage(explorerStore.active.id);
   else if(root==='desk'&&slug==='linear'){const v=preparePriceDisplay(state,priceOptions());html=v.ok?pricePage(state):priceRefusal();if(v.changed)save();}
-  else if(root==='desk')html='<details class="panel river-casebook"><summary>Choose another investigation</summary>'+ferryEntry()+timingEntry('desk')+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+priceEntry()+mixingTableEntry()+ratioBarsEntry()+gapLineEntry()+fieldStripsEntry()+'</details>'+deskPage(state);
-  else if(root==='almanac')html=['town','celebration','flood-ledger','upstream-letter'].includes(slug)?actTwoPage(state,{part:slug,chapter:detail,blocked:keeperFilmBlocked()}):keeperPages(state,{blocked:keeperFilmBlocked()})+weatherEntry();
+  else if(root==='desk')html=writingEntry()+seedExchangeEntry()+'<details class="panel river-casebook"><summary>Choose another investigation</summary>'+ferryEntry()+timingEntry('desk')+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+priceEntry()+mixingTableEntry()+ratioBarsEntry()+gapLineEntry()+fieldStripsEntry()+'</details>'+deskPage(state);
+  else if(root==='almanac'){html=['town','celebration','flood-ledger','upstream-letter'].includes(slug)?actTwoPage(state,{part:slug,chapter:detail,blocked:keeperFilmBlocked()}):keeperPages(state,{blocked:keeperFilmBlocked()})+weatherEntry();if(!slug||['keepers','upstream-letter'].includes(slug))html+=actThreeInvitation(state,{blocked:keeperFilmBlocked()});}
   else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id)+weatherEntry('field');
   else if(bellBench)html=bellStudioPage(state)+rhythmEntry();
   else if(labelBench)html=labelPage(state,detail,explorerStore.active.id);
@@ -679,7 +714,7 @@ function render(){
   else if(root==='numbers'&&slug==='path')html=willowPathPage(state);
   else if(tenthsBench)html=tenthsPage(state)+unitsEntry();
   else if(pavingBench){const fits=preflightPavingDisplay(state,pavingOptions());html=fits?pavingPage(state):pavingRefusalPage();if(fits)save();}
-  else if(clockWalkBench)html=clockWalkPage(state);
+  else if(clockWalkBench)html=clockWalkPage(state)+actThreeReturn(state,'route');
   else if(hash==='#post/sorting/order'){const ready=prepareOrderedDisplay(state,candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok);html=ready.ok?orderedPage(state)+sorterEntry():orderedRefusal();if(ready.changed)save();}
   else if(sortingBench)html=orderedEntry()+sortingPage(state);
   else if(doubleBench)html=orderedEntry()+doublePage(state,detail);
@@ -711,7 +746,7 @@ function render(){
   else if(root==='wonder'){html=openNumberTaskPage(state,slug);save();}
   else if(root==='french')html=frenchLanding(state);
   else if(root==='paris')html=parisLanding(state)+travelersArchiveEntry();
-  else if(root==='words')html=wordGardenPage(state);
+  else if(root==='words')html=wordGardenPage(state)+stainedMapEntry()+endingsShelfEntry()+pipsCopyEntry()+wordListShelfEntry()+longWordEntry()+beatBenchEntry();
   else if(root==='riddles')html=riddlesPage(state);
   else if(root==='facts')html=factsPage(state,slug);
   else if(root==='orchard'){
@@ -722,7 +757,7 @@ function render(){
     else html=orchardPage(state,slug)+(!slug?pileEntry():'');
   }
   else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=(!slug||slug==='food'?feedingBoardEntry():'')+plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:otherLiving;}
-  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry()+bridgesEntry()+twoLettersEntry();
+  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry()+bridgesEntry()+twoLettersEntry()+manifestEntry();
   else if(root==='workshop'&&slug==='balance'&&detail==='both'){const ready=prepareBothDisplay(state,priceOptions());html=ready.ok?bothPage(state):bothRefusal();if(ready.changed)save();}
   else if(root==='workshop')html=slug==='recut'||slug==='budget'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph,slug);
@@ -767,7 +802,7 @@ function render(){
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry()+bridgesEntry()+shadowEntry();
-  else html=home()+travelersArchiveEntry()+bellStudioEntry()+rhythmEntry();
+  else html=home();
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context&&hash!=='#cafe')html+=learningInvitations(context);}
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&hash!=='#cafe'&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
@@ -795,18 +830,21 @@ function bindCafeOfferExposure(pairs){
  drawer.addEventListener('toggle',record);record();
 }
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
+function explorerHeader(){let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);}
+// Every early-return route shares this header: explorer chip, guide link and nav highlight (spec 279 step 1).
+function routeHeader(nav){explorerHeader();const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',nav&&a.getAttribute('href')===nav?'page':'false'));}
 function focusElement(selector){const element=$(selector);if(element){if(!element.matches('a[href],button,input,select,textarea,summary,[tabindex]'))element.tabIndex=-1;element.focus();}}
-function focusExploreStart(){if(!choosingExplorer&&location.hash==='#arrive'){focusElement('#arrival-title');return true;}if(!choosingExplorer&&location.hash==='#begin'){focusElement('#starting-title');return true;}if(!choosingExplorer&&location.hash==='#cafe/units'){focusElement(document.querySelector('[data-units-root]')?'#units-title':'#units-status');return true;}if(!choosingExplorer&&location.hash==='#loft/shadows'){focusElement('#shadow-title');return true;}if(!choosingExplorer&&(location.hash||'').slice(1).split('/')[0]==='explore'){focusElement('#explore-title');return true;}return false;}
+function focusExploreStart(){if(!choosingExplorer&&location.hash==='#library/beat'){focusElement(document.querySelector('#bb-task')?'#bb-task':'[data-beat-bench-root] h1');return true;}if(!choosingExplorer&&location.hash==='#library/long-words'){focusElement('#lww-task');return true;}if(!choosingExplorer&&location.hash==='#library/word-list'){focusElement(document.querySelector('#wls-task')?'#wls-task':'[data-word-list-shelf-root] h1');return true;}if(!choosingExplorer&&location.hash==='#library/copy'){focusElement('#pc-task');return true;}if(!choosingExplorer&&location.hash==='#library/endings'){focusElement('#es-task');return true;}if(!choosingExplorer&&location.hash==='#library/spellings'){focusElement('#sm-task');return true;}if(!choosingExplorer&&actThreeRoute(location.hash)){focusElement('#act-three-heading');return true;}if(!choosingExplorer&&location.hash==='#desk/writing'){focusElement('#writing-task-title');return true;}if(!choosingExplorer&&location.hash==='#desk/exchange'){focusElement(document.querySelector('#seed-task')?'#seed-task':'#seed-title');return true;}if(!choosingExplorer&&location.hash==='#arrive'){focusElement('#arrival-title');return true;}if(!choosingExplorer&&location.hash==='#begin'){focusElement('#starting-title');return true;}if(!choosingExplorer&&location.hash==='#cafe/units'){focusElement(document.querySelector('[data-units-root]')?'#units-title':'#units-status');return true;}if(!choosingExplorer&&location.hash==='#loft/shadows'){focusElement('#shadow-title');return true;}if(!choosingExplorer&&(location.hash||'').slice(1).split('/')[0]==='explore'){focusElement('#explore-title');return true;}return false;}
 function rerenderActivity(){const input=$('#answer');if(input)active.input=input.value;syncDraft();render();}
 function openTaskLibrary(selected){return `<section class="panel broad-open-invites"><h2>Questions with room for your ideas</h2><p>Wonder, estimate, invent, and explain together. These invitations have no scored answer.</p><div class="open-task-links">${openTasks().filter(t=>!areaById(selected)||t.area===selected).map(t=>`<a class="secondary" href="#wonder/${t.id}">${esc(t.title)}</a>`).join('')}</div></section>`;}
 function notesReport(notebook){return {title:'After the Storm: observations',exportedAt:new Date().toISOString(),note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:explorerStore.active.avatar,color:explorerStore.active.color,symbol:explorerStore.active.symbol},recommendation:recommendations(notebook),...notebook};}
 function downloadText(text,name){const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function confirmGardenAction(title,explanation,action){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>${esc(title)}</h2><p>${esc(explanation)}</p><div class="dialog-actions"><button class="secondary" data-confirm-cancel>Keep it</button><button class="primary danger" data-confirm-do>Remove it</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('[data-confirm-cancel]').onclick=()=>d.close();d.querySelector('[data-confirm-do]').onclick=()=>{stopBell('confirmed-action');action();d.close();render();};d.addEventListener('close',()=>d.remove());}
-function cancelProgressImport(){resetMillEnergy();resetLiftYard();resetSoundWindow();resetSwitchTable();resetWaterPhase();resetFerryVisit();resetHingeVisit();resetMapReading();resetCopyFrame();resetRibbonMeasures();resetSameGround();importRead++;progressImport={candidate:null,message:'',reading:false};}
+function cancelProgressImport(resetStory=true){if(resetStory){resetBeatBenchView();resetActThreeView();resetStainedMapView();resetEndingsShelfView();resetMendingShedView();resetPipsCopyView();resetWordListShelfView();resetLongWordView();}resetMarketSignsView();resetMillEnergy();resetLiftYard();resetSoundWindow();resetSwitchTable();resetWaterPhase();resetFerryVisit();resetHingeVisit();resetMapReading();resetCopyFrame();resetRibbonMeasures();resetSameGround();importRead++;progressImport={candidate:null,message:'',reading:false};}
 function useExplorer(next,destination='#home'){
- if(!next)return;resetMillEnergy();resetLiftYard();resetSoundWindow();resetSwitchTable();resetWaterPhase();resetFerryVisit();resetHingeVisit();resetMapReading();resetCopyFrame();resetRibbonMeasures();resetSameGround();resetCommonCuts();resetUpstreamView();resetFieldStripsView();resetGapLineView();resetRatioBarsView();resetMixingTableView();resetFeedingBoardView();resetCafeTouchView();resetTwoLettersVisit();resetPairedVisit();resetWeatherTallyVisit();resetRhythmVisit();resetStartingFlow();resetArrivalVisit();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=['#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)||['#cafe/units','#begin','#arrive'].includes(destination)||['pathways','learn'].includes(destination.slice(1).split('/')[0]);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
+ if(!next){updateStorageNotice();return;}resetMillEnergy();resetLiftYard();resetSoundWindow();resetSwitchTable();resetWaterPhase();resetFerryVisit();resetHingeVisit();resetMapReading();resetCopyFrame();resetRibbonMeasures();resetSameGround();resetCommonCuts();resetUpstreamView();resetFieldStripsView();resetGapLineView();resetRatioBarsView();resetMixingTableView();resetFeedingBoardView();resetCafeTouchView();resetTwoLettersVisit();resetPairedVisit();resetWeatherTallyVisit();resetRhythmVisit();resetStartingFlow();resetArrivalVisit();resetUnits();stopBell('explorer-or-import');cancelProgressImport();resetWillowVoice();resetEvidenceShelf();resetSeedTurn();resetRecutSession();resetGatheringBudget();resetPortionsSession();resetFossilSession();resetScaleSession();state=next;needsExplorerInitialization=destination.split('/')[0]==='#journeys'||['#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)||['#cafe/units','#begin','#arrive'].includes(destination)||['pathways','learn','journeys'].includes(destination.slice(1).split('/')[0])||!!actThreeRoute(destination);if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
  activity=null;active=null;practiceSession=null;screen='';lastAdventure=null;routeChoice='auto';puzzleLevel=null;gardenSelection={selected:[],group:''};choosingExplorer=false;creatingExplorer=false;persist=explorerStore.persist;save();navigate(destination);
- if(destination!=='#notes'&&destination!=='#begin'&&destination!=='#arrive'&&destination!=='#cafe/units'&&!['#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)&&!['pathways','learn'].includes(destination.slice(1).split('/')[0]))requestAutomaticFilm('welcome');
+ if(destination!=='#notes'&&destination!=='#begin'&&destination!=='#arrive'&&destination!=='#cafe/units'&&!['#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(destination)&&!['pathways','learn','journeys'].includes(destination.slice(1).split('/')[0])&&!actThreeRoute(destination))requestAutomaticFilm('welcome');
 }
 function freshExplorerChoice(){for(const avatar of ['sky','fern','reed'])for(const color of EXPLORER_COLORS)for(const symbol of EXPLORER_SYMBOLS)if(!explorerStore.explorers.some(p=>p.avatar===avatar&&p.color===color&&p.symbol===symbol))return {avatar,color,symbol};return explorerDraft;}
 function chooseExplorer(create=false){resetStartingFlow();resetArrivalVisit();cancelProgressImport();if(create)explorerDraft=freshExplorerChoice();if(activity)syncDraft();choosingExplorer=true;creatingExplorer=create;stopSpeech();render();main.focus();window.scrollTo(0,0);}
@@ -836,7 +874,7 @@ function bindExplorers(){
  $('#explorer-new')?.addEventListener('click',()=>{explorerDraft=freshExplorerChoice();creatingExplorer=true;render();});
  $('#explorer-back')?.addEventListener('click',()=>{creatingExplorer=false;render();});
  $('#explorer-cancel')?.addEventListener('click',e=>{e.preventDefault();choosingExplorer=false;creatingExplorer=false;noteInstructionArrival();render();});
- const explorerDestination=()=>['#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#living/who-eats','#science/water-shares','#arrive','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)?location.hash:['pathways','learn'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
+ const explorerDestination=()=>actThreeRoute(location.hash)?location.hash:['#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#arrive','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)?location.hash:['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
  document.querySelectorAll('[data-select-explorer]').forEach(b=>b.onclick=()=>useExplorer(explorerStore.select(b.dataset.selectExplorer,state),explorerDestination()));
  for(const field of ['avatar','color','symbol'])document.querySelectorAll(`[data-explorer-${field}]`).forEach(b=>b.onclick=()=>{explorerDraft[field]=b.dataset[`explorer${field[0].toUpperCase()+field.slice(1)}`];render();$(`[data-explorer-${field}="${explorerDraft[field]}"]`)?.focus();});
  $('#explorer-create')?.addEventListener('click',()=>useExplorer(explorerStore.add(explorerDraft,state),explorerDestination()));
@@ -861,8 +899,9 @@ function bindBroadExtras(){
 }
 function priceOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
 function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
-function keeperFilmBlocked(){const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&!arrivalSkipsWelcome(state)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
+function keeperFilmBlocked(){if(actThreeRoute(location.hash))return !!document.querySelector('dialog.welcome-film[open]');const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&!arrivalSkipsWelcome(state)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function bind(){
+ bindHomeEntry(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  $('[data-map-refresh]')?.addEventListener('click',()=>{if(graph){render();main.focus();}else void loadCurriculumMap();});
  bindActTwo(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  bindKeeperStory(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
@@ -922,7 +961,7 @@ function bind(){
  if(egSlug==='letters'&&['post','loft'].includes(egRoot))bindLetterTrail(state,egRoot,{save,render,navigate,focus:focusElement});
  if(egSlug==='messages'&&['post','loft'].includes(egRoot))bindMessages(state,egRoot,{save,render,navigate,focus:focusElement});
  if(egSlug==='groups'&&['cafe','post'].includes(egRoot))bindEqualGroups(state,egRoot==='cafe'?'cafe':'bramble',{save,render,navigate,focus:focusElement});
- document.querySelectorAll('[data-film-replay]').forEach(button=>button.addEventListener('click',()=>playFilm(button.dataset.filmReplay,{replay:true})));
+ document.querySelectorAll('[data-film-replay]').forEach(button=>button.addEventListener('click',ownHomeAction(button,()=>playFilm(button.dataset.filmReplay,{replay:true}),{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer})));
  $('#dismiss-draft-notice')?.addEventListener('click',()=>{state.broad.draftNotice=false;save();render();main.focus();});
  bindExplorers();bindBroadExtras();bindPlantings(state,{save,render,navigate,focus:focusElement});
  bindStory();
@@ -1000,7 +1039,7 @@ function finishStory(skip=false){
  save();render();main.focus();window.scrollTo(0,0);
 }
 function bindStory(){
- document.querySelectorAll('[data-start-path]').forEach(b=>b.onclick=()=>requestPath(b.dataset.startPath));
+ document.querySelectorAll('[data-start-path]').forEach(b=>b.onclick=ownHomeAction(b,()=>requestPath(b.dataset.startPath),{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer}));
  document.querySelectorAll('[data-french-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.frenchDestination,value=$(`#french-length-${place}`).value,story=$(`#french-story-${place}`).value;requestFrench(place,value==='auto'?'auto':Number(value),story==='auto'?null:story);});
  document.querySelectorAll('[data-paris-pack-story]').forEach(b=>b.onclick=()=>{const story=b.dataset.parisPackStory,value=$(`#paris-pack-length-${story}`).value;requestParis(b.dataset.parisPackPlace,value==='auto'?'auto':Number(value),story);});
  document.querySelectorAll('[data-paris-destination]').forEach(b=>b.onclick=()=>{const place=b.dataset.parisDestination,value=$(`#paris-length-${place}`).value;requestParis(place,value==='auto'?'auto':Number(value));});
@@ -1048,7 +1087,7 @@ function bindStory(){
 function renderPuzzleEnd(q,o){main.innerHTML=`${heading('An idea to keep.','You made room for a little wondering.')}<section class="summary-callout"><h2>${esc(q.title)}</h2><p>${esc(describe(o))}. ${o.status==='skipped'?'You can return to this puzzle whenever you like.':esc(q.talk)}</p><div class="summary-links"><a href="#puzzles" class="primary">Choose another puzzle</a><a href="#home" class="secondary">Back to the garden</a></div></section>`;main.focus();}
  function showReset(){const d=document.createElement('dialog');d.innerHTML=`<div class="dialog-content"><h2>Start with a fresh page?</h2><p>This clears this explorer’s garden, café, stories, practice, guide and character choices, and notes. Other explorers stay in place. Earlier shared copies can be removed separately from notes. Download your notes first if you want to keep them.</p><div class="dialog-actions"><button class="secondary" id="cancel-reset">Keep our progress</button><button class="primary danger" id="confirm-reset">Clear progress</button></div></div>`;document.body.append(d);d.showModal();d.querySelector('#cancel-reset').onclick=()=>d.close();d.querySelector('#confirm-reset').onclick=()=>{stopBell('reset');resetMillEnergy();resetLiftYard();resetSoundWindow();resetSwitchTable();resetWaterPhase();resetFerryVisit();resetHingeVisit();resetMapReading();resetCopyFrame();resetRibbonMeasures();resetSameGround();resetCommonCuts();resetUpstreamView();resetFieldStripsView();resetGapLineView();resetRatioBarsView();resetMixingTableView();resetFeedingBoardView();resetCafeTouchView();resetSpeechPreferences();resetEvidenceShelf();resetGatheringBudget();resetPortionsSession();resetFossilSession();state=explorerStore.clearActive();ensurePlantings(state);ensureBroad(state);ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);practiceSession=null;activity=null;active=null;screen='';save();d.close();navigate('#home');};d.addEventListener('close',()=>d.remove());}
  document.addEventListener('click',event=>{const a=event.target.closest('a[href^="#"]');if(a?.getAttribute('href')==='#main'){event.preventDefault();main.focus();return;}if(a&&a.getAttribute('href')===location.hash){event.preventDefault();if(location.hash==='#numbers/return/ledger')resetRemains();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);}});
- window.addEventListener('hashchange',event=>{if(guardMapReadingNavigation())return;if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#science/ice'&&new URL(event.newURL).hash!=='#science/ice')resetWaterPhase();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#post/ferry'&&new URL(event.newURL).hash!=='#post/ferry')resetFerryVisit();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/hinge'&&new URL(event.newURL).hash!=='#workshop/hinge')resetHingeVisit();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/old-map'&&new URL(event.newURL).hash!=='#workshop/old-map')resetMapReading();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/copy-frame'&&new URL(event.newURL).hash!=='#workshop/copy-frame')resetCopyFrame();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/ribbon-measures'&&new URL(event.newURL).hash!=='#workshop/ribbon-measures')resetRibbonMeasures();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/same-ground'&&new URL(event.newURL).hash!=='#workshop/same-ground')resetSameGround();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/common-cuts'&&new URL(event.newURL).hash!=='#workshop/common-cuts')resetCommonCuts();if(guardTimingNavigation()||guardLedgerNavigation()||guardRiverNavigation()||guardSorterNavigation()||guardRecordNavigation()||guardEqualityNavigation()||guardWaterNavigation())return;if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#arrive'&&new URL(event.newURL).hash!=='#arrive')resetArrivalVisit();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#begin'&&new URL(event.newURL).hash!=='#begin')resetStartingFlow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#cafe/units'&&new URL(event.newURL).hash!=='#cafe/units')resetUnits();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#loft/shadows'&&new URL(event.newURL).hash!=='#loft/shadows')resetShadow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/scale'&&new URL(event.newURL).hash!=='#workshop/scale')resetScaleSession();cancelProgressImport();if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);});
+ window.addEventListener('hashchange',event=>{if(guardSeedExchangeNavigation()||guardParcelLabelsNavigation()||guardMapReadingNavigation())return;if(event.oldURL&&new URL(event.oldURL).hash==='#library/beat'&&location.hash!=='#library/beat')resetBeatBenchView();if(event.oldURL&&new URL(event.oldURL).hash==='#library/long-words'&&location.hash!=='#library/long-words')resetLongWordView();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#science/ice'&&new URL(event.newURL).hash!=='#science/ice')resetWaterPhase();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#post/ferry'&&new URL(event.newURL).hash!=='#post/ferry')resetFerryVisit();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/hinge'&&new URL(event.newURL).hash!=='#workshop/hinge')resetHingeVisit();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/old-map'&&new URL(event.newURL).hash!=='#workshop/old-map')resetMapReading();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/copy-frame'&&new URL(event.newURL).hash!=='#workshop/copy-frame')resetCopyFrame();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/ribbon-measures'&&new URL(event.newURL).hash!=='#workshop/ribbon-measures')resetRibbonMeasures();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/same-ground'&&new URL(event.newURL).hash!=='#workshop/same-ground')resetSameGround();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/common-cuts'&&new URL(event.newURL).hash!=='#workshop/common-cuts')resetCommonCuts();if(guardTimingNavigation()||guardLedgerNavigation()||guardRiverNavigation()||guardSorterNavigation()||guardRecordNavigation()||guardEqualityNavigation()||guardWaterNavigation())return;if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#arrive'&&new URL(event.newURL).hash!=='#arrive')resetArrivalVisit();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#begin'&&new URL(event.newURL).hash!=='#begin')resetStartingFlow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#cafe/units'&&new URL(event.newURL).hash!=='#cafe/units')resetUnits();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#loft/shadows'&&new URL(event.newURL).hash!=='#loft/shadows')resetShadow();if(event.oldURL&&event.newURL&&new URL(event.oldURL).hash==='#workshop/scale'&&new URL(event.newURL).hash!=='#workshop/scale')resetScaleSession();cancelProgressImport(false);if(activity)syncDraft();screen='';activity=null;active=null;noteInstructionArrival();render();if(!focusExploreStart())main.focus();window.scrollTo(0,0);});
  $('#privacy-button').onclick=()=>$('#about-dialog').showModal();
 noteInstructionArrival();
  render();
@@ -1088,7 +1127,7 @@ function playFilm(id,{replay=false}={}){
 // an unseen introduction hidden or move focus/credits to an unrelated owner.
 function requestAutomaticFilm(id){
  const owner=explorerStore.active.id,book=state,route=location.hash;
- const eligible=()=>!choosingExplorer&&state===book&&explorerStore.active.id===owner&&location.hash===route&&!filmSeen(id)&&(id==='welcome'?route!=='#arrive'&&!['#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#living/who-eats','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(route)&&!arrivalSkipsWelcome(state):endingFilm()===id);
+ const eligible=()=>!choosingExplorer&&state===book&&explorerStore.active.id===owner&&location.hash===route&&!filmSeen(id)&&(id==='welcome'?route!=='#arrive'&&!['#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#living/who-eats','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(route)&&!arrivalSkipsWelcome(state):endingFilm()===id);
  if(!eligible())return false;
  const modal=document.querySelector('dialog[open]');if(modal){modal.addEventListener('close',()=>{if(eligible())requestAutomaticFilm(id);},{once:true});return false;}
  return playFilm(id);
@@ -1099,10 +1138,10 @@ function endingFilm(){
  const [root,slug]=(location.hash||'#home').slice(1).split('/');
  if(root==='storm'&&['end','play'].includes(slug)){const v=currentVisit(state);if(v?.finished&&(v.entrance==='paris'||entranceById(v.entrance)?.language==='fr'))return 'paris';}
  if(root==='cafe'&&!['groups','sharing','recipes','batches','fractions','units'].includes(slug)){const goal=cafeSupper(state.cafe);if(goal.complete&&goal.round===1)return 'cafe';}
- if(root==='post'&&!['choose','groups','messages','letters','instructions','packing','codes','descriptions','register','ferry'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
+ if(root==='post'&&!['choose','groups','messages','letters','instructions','packing','codes','descriptions','register','ferry','manifest'].includes(slug)){const v=currentPostOffice(state);if(v&&!v.closed&&postOfficeView(v)==='bramble'&&['resolved','continued'].includes(v.rival?.phase))return 'bramble';}
  return null;
 }
-if(!choosingExplorer&&!['pathways','learn'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#arrive'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale'&&!['#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash))requestAutomaticFilm('welcome');
+if(!choosingExplorer&&!['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])&&location.hash!=='#begin'&&location.hash!=='#arrive'&&location.hash!=='#cafe/units'&&location.hash!=='#loft/shadows'&&location.hash!=='#workshop/scale'&&!['#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)&&!actThreeRoute(location.hash))requestAutomaticFilm('welcome');
 
 // Loading this optional reference never re-renders an activity or changes a notebook.
 void loadCurriculumMap();

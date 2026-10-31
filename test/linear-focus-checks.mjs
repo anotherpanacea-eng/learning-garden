@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {freshState} from '../dist/core.mjs';
+import {linearPage,linearNotes} from '../dist/linear-pathway-ui.mjs';
+import {startLinear,createLinearInvestigation,setLinearPage,setLinearField,setLinearNote,keepLinear} from '../dist/linear-pathway-core.mjs';
+import {prepareProgressImport} from '../dist/progress-transfer.mjs';
+let checks=0;const ok=(v,m)=>{assert.ok(v,m);checks++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);checks++;},clone=x=>structuredClone(x);
+const freeze=x=>{if(x&&typeof x==='object'){Object.freeze(x);Object.values(x).forEach(freeze);}return x;};
+const o={canExport:s=>prepareProgressImport(JSON.stringify(s)).ok};
+const empty=freshState(),emptyHtml=linearPage(freeze(clone(empty)));ok(/data-linear-choices open/.test(emptyHtml),'empty chooser defaults open');ok(emptyHtml.includes('Choose any lesson to begin'),'empty invitation');ok(!emptyHtml.includes('data-linear-see-model'),'no nonexistent model jump');
+const book=freshState();book.syntheticFuture={version:99,payload:['keep',false]};startLinear(book,'views',o);
+for(let i=0;i<12;i++)ok(createLinearInvestigation(book,['revisit','unknown','contrast'][i%3],o),'twelve saved visits');
+setLinearPage(book,2,o);setLinearField(book,'own','x','3',o);setLinearNote(book,'Synthetic words stay exact',o);keepLinear(book,o);
+const before=clone(book),html=linearPage(freeze(clone(book)));
+ok(/data-linear-choices >/.test(html),'active chooser defaults closed');ok(html.indexOf('class="linear-layout"')<html.indexOf('data-linear-choices'),'active model/task precede catalog');ok(html.indexOf('class="linear-pages"')<html.indexOf('data-linear-choices'),'current page controls precede catalog');
+ok(html.includes('data-linear-see-model aria-controls="linear-reference"'),'model jump targets actual reference');ok(html.includes('id="linear-reference" tabindex="-1"'),'focusable reference heading');ok(html.includes('data-linear-back-to-page aria-controls="linear-turn"'),'return jump targets current page');
+for(const id of ['zero','halves','views','equal','plans','carry',...Object.keys(book.linearPathway.lessons)])ok(html.includes(`data-linear-start="${id}"`),'all fixed/saved choices retained '+id);
+for(const selector of ['data-linear-challenge','data-linear-create','data-linear-remove-choice','data-linear-remove'])ok(html.includes(selector),'creation/removal control retained');
+const preview=linearPage(freeze(clone(book)),'halves');ok(/data-linear-choices >/.test(preview),'preview chooser closed');ok(preview.includes('Start or continue this lesson'),'explicit start outside chooser');ok(preview.indexOf('Start or continue this lesson')<preview.indexOf('data-linear-choices'),'preview first');ok(!preview.includes('data-linear-x'),'preview does not expose prior model');
+for(const root of [{version:99,raw:'future'},[],null]){const s={...clone(book),linearPathway:root},raw=JSON.stringify(s),page=linearPage(freeze(s));ok(page.includes('Your earlier format is retained'),'unsupported root readable');ok(!page.includes('data-linear-choices'),'unsupported root has no new mutating choices');eq(JSON.stringify(s),raw,'unsupported original exact');}
+linearNotes(freeze(clone(book)));eq(book,before,'readers preserve original book');
+console.log(`${checks} Linear active-layout/purity/choice checks passed.`);

@@ -20,17 +20,38 @@ function cleanRegistry(raw){
 
 // All learner data remains in this browser. A failed preservation write blocks replacement.
 export class ExplorerStore{
- constructor(storage,options={}){this.storage=storage;this.now=options.now||(()=>new Date());this.memory=new Map();this.importCopies=new Map();this.registry=null;this._persist=true;this._warning='';this._writeBlocked=false;this._needsChooser=false;}
+ constructor(storage,options={}){this.storage=storage;this.now=options.now||(()=>new Date());this.memory=new Map();this.importCopies=new Map();this.registry=null;this._persist=true;this._warning='';this._writeBlocked=false;this._needsChooser=false;this._observed=new Map();this._conflict=false;}
  get active(){return this.registry?.explorers.find(p=>p.id===this.registry.activeId)||null;}
  get explorers(){return this.registry?.explorers||[];}
  get persist(){return this._persist;}
  get warning(){return this._warning;}
  get needsChooser(){return this._needsChooser;}
+ get conflict(){return this._conflict;}
  get importUncertain(){return this._importUncertain===true;}
- _warn(text='Progress could not be saved. This session is still available; download notes before leaving.'){this._warning=text;}
+ _warn(text='Progress could not be saved. This session is still available; download notes before leaving.'){if(!this._conflict)this._warning=text;}
  _get(key){return this.storage.getItem(key);}
  _keys(){return Array.from({length:this.storage.length},(_,i)=>this.storage.key(i)).filter(k=>typeof k==='string');}
- _write(key,raw){try{this.storage.setItem(key,raw);if(this._get(key)!==raw)throw new Error('Write did not persist');return true;}catch{this._warn();return false;}}
+ _write(key,raw){try{this.storage.setItem(key,raw);if(this._get(key)!==raw)throw new Error('Write did not persist');if(key===REGISTRY_KEY||key===SAVE_KEY||key.startsWith(`${STORAGE_KEY}:`))this._observed.set(key,raw);if(key===REGISTRY_KEY)this._lastActive=cleanRegistry(raw)?.activeId;return true;}catch{this._warn();return false;}}
+ // Optimistic stale-copy protection, not a cross-tab transaction or a merge.
+ _changed(){this._conflict=true;this._writeBlocked=true;this._warning='Newer progress or explorer settings were saved in another tab. Saving is paused here. Download this tab’s notes from Grown-up notes; switch explorers there to keep each open notebook. Then reload to use the saved copy. Keep just one tab open for each explorer.';return false;}
+ _matches(key){return this._get(key)===(this._observed.get(key)??null);}
+ _checkRegistry(){
+  const raw=this._get(REGISTRY_KEY),before=this._observed.get(REGISTRY_KEY)??null;
+  if(raw===before)return true;
+  const a=cleanRegistry(before),b=cleanRegistry(raw);
+  // Selecting another explorer in a sibling tab is not a notebook conflict.
+  if(a&&b&&JSON.stringify(a.explorers)===JSON.stringify(b.explorers)){this._observed.set(REGISTRY_KEY,raw);return true;}
+  return this._changed();
+ }
+ checkForUpdates(all=false){
+  if(this._conflict)return false;if(!this.registry)return true;
+  try{
+   if(!this._matches(SAVE_KEY)||!this._checkRegistry())return this._changed();
+   const ids=all?this.explorers.map(p=>p.id):[this.active.id];
+   for(const id of ids)if(!this._matches(stateKey(id)))return this._changed();
+   return true;
+  }catch{this._warn();return false;}
+ }
  _stamp(){return this.now().toISOString().replace(/[:.]/g,'-');}
  _copy(raw,kind,id){
   try{const prefix=`number-garden-${kind}-${id}-`,keys=this._keys();if(keys.some(k=>k.startsWith(prefix)&&this._get(k)===raw))return true;let key=`${prefix}${this._stamp()}`,n=1;while(keys.includes(key))key=`${prefix}${this._stamp()}-${n++}`;if(!this._write(key,raw))return false;
@@ -52,20 +73,21 @@ export class ExplorerStore{
   this._warn('All explorer pictures are in use. Choose an existing explorer to keep playing.');return null;
  }
  _fresh(profile){return {...freshState(),story:freshStory(),garden:{avatar:profile.avatar}};}
- _commitRegistry(){if(!this._persist||this._writeBlocked)return false;try{const raw=this._get(REGISTRY_KEY);if(raw!==null&&!cleanRegistry(raw)&&!this._copy(raw,'kept','registry'))return false;return this._write(REGISTRY_KEY,JSON.stringify(this.registry));}catch{this._warn();return false;}}
+ _commitRegistry(){if(!this._persist||this._writeBlocked)return false;try{if(!this._checkRegistry())return false;const raw=this._get(REGISTRY_KEY);if(raw!==null&&!cleanRegistry(raw)&&!this._copy(raw,'kept','registry'))return false;const saved=cleanRegistry(raw);if(saved&&this._lastActive===this.registry.activeId&&JSON.stringify(saved.explorers)===JSON.stringify(this.explorers))return true;return this._write(REGISTRY_KEY,JSON.stringify(this.registry));}catch{this._warn();return false;}}
  _avatar(state,profile){if(!state.garden||typeof state.garden!=='object'||Array.isArray(state.garden))state.garden={};if(!avatarIds.includes(state.garden.avatar))state.garden.avatar=profile.avatar;return state;}
  _readState(profile){
   if(this.memory.has(profile.id))return this.memory.get(profile.id);
-  let state;try{const raw=this._get(stateKey(profile.id));if(raw===null){state=this._fresh(profile);this._warn('A saved explorer had no readable progress copy. This session starts with a fresh notebook.');}else{const result=restoreStateResult(raw);state=result.state;if(result.reason){const kept=this._copy(raw,'kept',profile.id);this._warn(kept?'We couldn’t open some saved progress. We kept a copy, so nothing is lost.':'Some saved progress could not be read or copied safely. The original is unchanged; this session is temporary.');}}}catch{this._writeBlocked=true;this._warn();state=this._fresh(profile);}
+  let state;try{const raw=this._get(stateKey(profile.id));this._observed.set(stateKey(profile.id),raw);if(raw===null){state=this._fresh(profile);this._warn('A saved explorer had no readable progress copy. This session starts with a fresh notebook.');}else{const result=restoreStateResult(raw);state=result.state;if(result.reason){const kept=this._copy(raw,'kept',profile.id);this._warn(kept?'We couldn’t open some saved progress. We kept a copy, so nothing is lost.':'Some saved progress could not be read or copied safely. The original is unchanged; this session is temporary.');}}}catch{this._writeBlocked=true;this._warn();state=this._fresh(profile);}
   this._avatar(state,profile);this.memory.set(profile.id,state);return state;
  }
  load(){
   if(this.registry)return this.memory.get(this.registry.activeId)||this._readState(this.active);
-  try{this._persist=this._get(SAVE_KEY)!=='off';if(!this._persist){const p=this._newProfile();this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._fresh(p);this.memory.set(p.id,s);return s;}
-   const rawRegistry=this._get(REGISTRY_KEY);
-   if(rawRegistry!==null){const registry=cleanRegistry(rawRegistry);if(registry){this.registry=registry;this._needsChooser=registry.explorers.length>1;return this._readState(this.active);}if(!this._copy(rawRegistry,'kept','registry'))this._writeBlocked=true;this._warn(this._writeBlocked?'The explorer list could not be read or copied safely. The original is unchanged; this session is temporary.':'The explorer list could not be read. Its original copy has been kept.');}
+  try{const preference=this._get(SAVE_KEY);this._observed.set(SAVE_KEY,preference);this._persist=preference!=='off';if(!this._persist){this._observed.set(REGISTRY_KEY,this._get(REGISTRY_KEY));const p=this._newProfile();this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._fresh(p);this.memory.set(p.id,s);return s;}
+   const rawRegistry=this._get(REGISTRY_KEY);this._observed.set(REGISTRY_KEY,rawRegistry);
+   if(rawRegistry!==null){const registry=cleanRegistry(rawRegistry);if(registry){this.registry=registry;this._lastActive=registry.activeId;for(const p of registry.explorers)this._observed.set(stateKey(p.id),this._get(stateKey(p.id)));this._needsChooser=registry.explorers.length>1;return this._readState(this.active);}if(!this._copy(rawRegistry,'kept','registry'))this._writeBlocked=true;this._warn(this._writeBlocked?'The explorer list could not be read or copied safely. The original is unchanged; this session is temporary.':'The explorer list could not be read. Its original copy has been kept.');}
    const legacy=this._get(STORAGE_KEY),restored=legacy===null?null:restoreStateResult(legacy),p=this._newProfile({avatar:restored?.state.garden?.avatar});this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._avatar(restored?.state||this._fresh(p),p);this.memory.set(p.id,s);
    if(this._writeBlocked)return s;
+   if(!this.checkForUpdates())return s;
    if(legacy!==null){if(!this._copy(legacy,'backup',p.id)||!this._write(stateKey(p.id),legacy)){this._writeBlocked=true;return s;}if(restored.reason){if(!this._copy(legacy,'kept',p.id))this._writeBlocked=true;this._warn(this._writeBlocked?'Some saved progress could not be copied safely. The original is unchanged; this session is temporary.':'We couldn’t open some saved progress. We kept a copy, so nothing is lost.');}}
    else if(!this._write(stateKey(p.id),JSON.stringify(s))){this._writeBlocked=true;return s;}
    if(!this._writeBlocked&&!this._commitRegistry())this._writeBlocked=true;
@@ -73,13 +95,13 @@ export class ExplorerStore{
   }catch{this._writeBlocked=true;this._warn();if(!this.registry){const p={id:'explorer-1',avatar:'sky',color:'gold',symbol:'leaf',createdAt:this.now().toISOString()};this.registry={version:1,activeId:p.id,explorers:[p]};this.memory.set(p.id,this._fresh(p));}return this.memory.get(this.registry.activeId)||this._fresh(this.active);}
  }
  _writeState(profile,state){
-  const key=stateKey(profile.id);try{const raw=this._get(key);if(raw!==null){const restored=restoreStateResult(raw);if(restored.reason&&!this._copy(raw,'kept',profile.id))return false;}
+  const key=stateKey(profile.id);try{if(!this._matches(key))return this._changed();const raw=this._get(key);if(raw!==null){const restored=restoreStateResult(raw);if(restored.reason&&!this._copy(raw,'kept',profile.id))return false;}
    if(!this._write(key,JSON.stringify(state)))return false;if(avatarIds.includes(state.garden?.avatar))profile.avatar=state.garden.avatar;return true;
   }catch{this._warn();return false;}
  }
- save(state){if(!this.registry)this.load();this.memory.set(this.active.id,state);if(!this._persist)return true;if(this._writeBlocked)return false;return this._writeState(this.active,state)&&this._commitRegistry();}
+ save(state){if(!this.registry)this.load();this.memory.set(this.active.id,state);if(this._conflict)return false;if(!this._persist)return true;if(this._writeBlocked||!this.checkForUpdates())return false;return this._writeState(this.active,state)&&this._commitRegistry();}
  add(choice={},currentState){
-  if(!this.registry)this.load();if(currentState)this.save(currentState);const p=this._newProfile(choice);if(!p)return null;const s=this._fresh(p);this.registry.explorers.push(p);this.registry.activeId=p.id;this.memory.set(p.id,s);this._needsChooser=false;
+  if(!this.registry)this.load();if(!this.checkForUpdates()||(currentState&&!this.save(currentState)))return null;const p=this._newProfile(choice);if(!p)return null;const s=this._fresh(p);this.registry.explorers.push(p);this.registry.activeId=p.id;this.memory.set(p.id,s);this._needsChooser=false;
   if(this._persist&&!this._writeBlocked){if(!this._write(stateKey(p.id),JSON.stringify(s))||!this._commitRegistry())this._writeBlocked=true;}return s;
  }
  importState(prepared){
@@ -87,13 +109,14 @@ export class ExplorerStore{
   const halt=message=>{this._writeBlocked=true;this._importUncertain=true;this._warn(message);return fail(message);};
   if(!this.registry)this.load();
   if(!prepared?.ok||typeof prepared.raw!=='string'||restoreStateResult(JSON.stringify(prepared.state)).reason)return fail('Choose and preview a supported notebook first.');
+  if(this._conflict||!this.checkForUpdates())return fail(this.warning);
   if(this._persist&&this._writeBlocked)return fail('Saving is unavailable. Download your current notes and keep the import file, then reload before trying again.');
   const profile=this._newProfile(prepared.choice);if(!profile)return fail('No explorer slot is available.');
   const state=structuredClone(prepared.state);this._avatar(state,profile);state.garden.avatar=profile.avatar;
   const next={version:1,activeId:profile.id,explorers:[...this.explorers,profile]},rawNext=JSON.stringify(next),key=stateKey(profile.id),recovery=`number-garden-kept-${profile.id}-${this._stamp()}`;
   if(this._persist){
    let before;
-   try{before=this._get(REGISTRY_KEY);if(JSON.stringify(cleanRegistry(before))!==JSON.stringify(this.registry))return halt('The explorer list changed in another tab. Saving is paused here; reload before importing.');if(this._get(key)!==null||this._get(recovery)!==null)return halt('This explorer slot is already saved. Saving is paused here; reload before importing.');}catch{return halt('Saved progress could not be checked. Saving is paused here; keep your file and reload before importing.');}
+   try{before=this._get(REGISTRY_KEY);if(JSON.stringify(cleanRegistry(before)?.explorers)!==JSON.stringify(this.explorers))return halt('The explorer list changed in another tab. Saving is paused here; reload before importing.');if(this._get(key)!==null||this._get(recovery)!==null)return halt('This explorer slot is already saved. Saving is paused here; reload before importing.');}catch{return halt('Saved progress could not be checked. Saving is paused here; keep your file and reload before importing.');}
    const rawState=JSON.stringify(state);
    const cleanup=()=>{try{if(this._get(REGISTRY_KEY)!==before)return false;for(const [k,value] of [[key,rawState],[recovery,prepared.raw]])if(this._get(k)===value)this.storage.removeItem(k);return true;}catch{return false;/* Uncertain new keys remain recoverable; existing keys are never removed. */}};
    if(!this._write(recovery,prepared.raw)||!this._write(key,rawState)){if(!cleanup())return halt('The import could not be checked safely. Its new copies have been kept and saving is paused here. Keep your file and reload.');return fail('The notebook could not be saved, possibly because this browser is full. Existing explorer files were not replaced. Keep your file and reload before trying again.');}
@@ -109,23 +132,28 @@ export class ExplorerStore{
   return {ok:true,state,temporary:!this._persist};
  }
  select(id,currentState){
-  if(!this.registry)this.load();if(!this.explorers.some(p=>p.id===id))return null;if(currentState)this.save(currentState);this.registry.activeId=id;this._needsChooser=false;const s=this._readState(this.active);if(this._persist&&!this._writeBlocked)this._commitRegistry();return s;
+  if(!this.registry)this.load();if(!this.explorers.some(p=>p.id===id))return null;
+  // Failed storage must not trap the chooser or make locally open work unreachable.
+  const local=()=>{if(!this.memory.has(id))return null;if(currentState)this.memory.set(this.active.id,currentState);this.registry.activeId=id;this._needsChooser=false;return this.memory.get(id);};
+  if(!this.checkForUpdates())return local();
+  if(currentState&&!this.save(currentState))return local();try{if(this.memory.has(id)&&!this._matches(stateKey(id))){this._changed();return this.select(id,currentState);}}catch{this._warn();return null;}this.registry.activeId=id;this._needsChooser=false;const s=this._readState(this.active);if(this._persist&&!this._writeBlocked)this._commitRegistry();return s;
  }
  setPersistence(enabled,currentState){
-  if(this.importUncertain)return false;
-  if(!this.registry)this.load();if(currentState)this.memory.set(this.active.id,currentState);
-  if(!enabled){for(const p of this.explorers)this._readState(p);this._persist=false;let ok=this._write(SAVE_KEY,'off');try{for(const k of this._keys().filter(managed)){try{this.storage.removeItem(k);if(this._get(k)!==null)ok=false;}catch{ok=false;}}}catch{ok=false;}if(!ok)this._warn('Some saved copies could not be removed. Saving is off for this session; check browser storage before sharing this device.');return ok;}
-  this._persist=true;this._writeBlocked=false;if(!this._write(SAVE_KEY,'on'))return false;for(const [key,raw] of this.importCopies)if(!this._write(key,raw)){this._writeBlocked=true;return false;}for(const p of this.explorers){const s=this.memory.get(p.id)||this._readState(p);if(!this._writeState(p,s)){this._writeBlocked=true;return false;}}return this._commitRegistry();
+  if(this.importUncertain||this._conflict)return false;
+  if(!this.registry)this.load();if(!this.checkForUpdates(true))return false;if(currentState)this.memory.set(this.active.id,currentState);
+  if(!enabled){for(const p of this.explorers)this._readState(p);this._persist=false;let ok=this._write(SAVE_KEY,'off');try{for(const k of this._keys().filter(managed)){try{this.storage.removeItem(k);if(this._get(k)!==null)ok=false;}catch{ok=false;}}}catch{ok=false;}try{for(const k of this._observed.keys())if(k!==SAVE_KEY)this._observed.set(k,this._get(k));}catch{ok=false;}if(!ok)this._warn('Some saved copies could not be removed. Saving is off for this session; check browser storage before sharing this device.');return ok;}
+  this._persist=true;this._writeBlocked=false;if(!this._write(SAVE_KEY,'on')){this._writeBlocked=true;return false;}for(const [key,raw] of this.importCopies)if(!this._write(key,raw)){this._writeBlocked=true;return false;}for(const p of this.explorers){const s=this.memory.get(p.id)||this._readState(p);if(!this._writeState(p,s)){this._writeBlocked=true;return false;}}return this._commitRegistry();
  }
  clearActive(){
   if(this.importUncertain)return this.load();
-  if(!this.registry)this.load();const id=this.active.id,s=this._fresh(this.active);this.memory.set(id,s);for(const k of this.importCopies.keys())if(k.startsWith(`number-garden-kept-${id}-`))this.importCopies.delete(k);try{if(this._persist){for(const k of this._keys())if(k===stateKey(id)||k.startsWith(`number-garden-backup-${id}-`)||k.startsWith(`number-garden-kept-${id}-`))this.storage.removeItem(k);this.save(s);}}catch{this._warn();}return s;
+  if(!this.registry)this.load();if(!this.checkForUpdates())return this.load();const id=this.active.id,s=this._fresh(this.active);this.memory.set(id,s);for(const k of this.importCopies.keys())if(k.startsWith(`number-garden-kept-${id}-`))this.importCopies.delete(k);try{if(this._persist){for(const k of this._keys())if(k===stateKey(id)||k.startsWith(`number-garden-backup-${id}-`)||k.startsWith(`number-garden-kept-${id}-`))this.storage.removeItem(k);this._observed.set(stateKey(id),null);this.save(s);}}catch{this._warn();}return s;
  }
  clearAll(){
   if(this.importUncertain)return this.load();
+  if(!this.registry)this.load();if(!this.checkForUpdates(true))return this.load();
   try{for(const k of this._keys().filter(managed))this.storage.removeItem(k);}catch{this._warn();this._writeBlocked=true;}
-  this.memory.clear();this.importCopies.clear();this.registry={version:1,activeId:null,explorers:[]};const p=this._newProfile();this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._fresh(p);this.memory.set(p.id,s);this._needsChooser=false;if(this._persist&&!this._writeBlocked)this.save(s);return s;
+  this._observed.set(REGISTRY_KEY,null);for(const k of this._observed.keys())if(k.startsWith(`${STORAGE_KEY}:`))this._observed.set(k,null);this.memory.clear();this.importCopies.clear();this.registry={version:1,activeId:null,explorers:[]};const p=this._newProfile();this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._fresh(p);this.memory.set(p.id,s);this._needsChooser=false;if(this._persist&&!this._writeBlocked)this.save(s);return s;
  }
  keptCopies(){let copies=new Map(this.importCopies);try{for(const key of this._keys().filter(k=>copyKey(k)||k===STORAGE_KEY))copies.set(key,this._get(key));}catch{this._warn();}return [...copies].map(([key,raw])=>({key,raw,label:key===STORAGE_KEY?'Earlier shared progress':key.startsWith('number-garden-kept-')?'Kept original progress':'Progress backup'}));}
- removeCopy(key){if(this.importUncertain||!(key===STORAGE_KEY||copyKey(key)))return false;this.importCopies.delete(key);try{this.storage.removeItem(key);return this._get(key)===null;}catch{this._warn();return false;}}
+ removeCopy(key){if(this.importUncertain||!this.checkForUpdates(true)||!(key===STORAGE_KEY||copyKey(key)))return false;this.importCopies.delete(key);try{this.storage.removeItem(key);return this._get(key)===null;}catch{this._warn();return false;}}
 }

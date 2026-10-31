@@ -163,3 +163,12 @@ Specs222–226 refresh Jane `286300f822944b8c039d5ea8d483a6cb52759f51` (LESSONS,
 ## Lantern Codes · 2026-10-25
 
 [Spec238](specs/238-lantern-codes.md) adapts the selected original Signal Tower model from draft PR179/spec236(a). Jane LESSONS/engine/stuck/licensing were refreshed at `286300f822944b8c039d5ea8d483a6cb52759f51`; complete relevant Marble topics/direct edges and research were refreshed at `7bd8b6794cb78d9ca18216adb935f3cfd59cf5ac`. Stable work, separate examples and purposeful design/test contrasts are design references only. Patterns & Codes for Information informs generation/comparison, while its physically built communication-device predecessor remains unobserved. No new external code, lesson prose or art is incorporated; graph pin, mappings and license notices remain unchanged. The framed deletion channel is original screen-model code, not an actual rain/optics or Morse protocol. Circuit Bench and Lantern Line keep their distinct models.
+
+## Signed/zero Linear returns · 2026-10-30
+
+[312](specs/312-signed-linear-returns.md) refreshes Jane `e88f81a00553fb87818ef84c77a8800f0dcb33e4` lesson/learn-example conventions and layered licensing, and Marble `a0b6b577b2d1b124d9f8d6df501cca8e62133451` linear-graph/plotting/equation topic descriptions. These inform explicit teach/action/return and bounded signed-rate contrasts. No mastery/review gates, remote records, new taxonomy edges or upstream code/prose/art are incorporated. The original223controller, frozen-source saves and graph/table/parser remain authoritative;312 changes newly created teaching sources only.
+
+
+## Parcel plural labels ·314 · 2026-10-30
+
+Jane `e88f81a00553fb87818ef84c77a8800f0dcb33e4` (`LESSONS.md`) was freshly read for stable current-item and explicit supported-teaching design. Marble `a0b6b577b2d1b124d9f8d6df501cca8e62133451` (`data/topics.json`) was freshly read for Regular Plural Nouns `mt_18qkgxr_-T`, Suffixes `mt_FYK8m6eHQm` and Root Words & Inflections `mt_UEe3MC5RZc`. Original parcel labels narrow these broader oral/written/sound-based capabilities to pictured supplied-form construction; no new full-topic or decoding claim, source edge, vendored pin or license change. No Jane/Marble code, teaching prose or art is incorporated. The primary DfE spelling appendix and exact scope are linked in314; the whole proposed254 pack and55 audio/player are not cleared by this slice.

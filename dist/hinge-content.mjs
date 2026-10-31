@@ -21,7 +21,7 @@ export const hingeCases = [
   {
     "id": "tips-trick",
     "title": "The far-apart tips",
-    "request": "Which model has the bigger turn? Press Compare to line them up instead of comparing the distance between their tips.",
+    "request": "Which model has the bigger turn? Press Compare turns to line them up instead of comparing the distance between their tips.",
     "explanation": "In this starting pair the long arms have farther-apart tips, but their 45° turn is smaller than the short arms’ 110° turn. If you change the working hinge, compare its current turn instead.",
     "reference": {
       "opening": 110,
@@ -57,7 +57,7 @@ export const hingeCases = [
   {
     "id": "near-right",
     "title": "Either side of a quarter turn",
-    "request": "Compare these almost-square openings. Use the card on your hinge. Compare lines the reference up so the card can check it too.",
+    "request": "Compare these almost-square openings. Show the quarter-turn card on your hinge, then press Compare turns to line the reference up so the card can check it too.",
     "explanation": "85° is a little less than a quarter turn; 95° is a little more. Only exactly 90° is a right angle. Use the current measured settings if you change the hinge.",
     "reference": {
       "opening": 85,
@@ -137,7 +137,7 @@ export const hingeCopy = {
   "lengths": "Short / Medium / Long · visible arm length, not angle size",
   "card": "This card shows one 90° quarter turn from the starting arm. Compare the whole marked sweep with it. A bigger sweep can contain a quarter turn without being a right angle.",
   "overlay": "Dashed reference: its pin and starting direction are lined up with yours. Turning the whole reference to align it does not change its selected turn.",
-  "visit": "Settings last for this visit. They are not added to your notes. Trying another case revisits this small collection; it is not a new assessment.",
+  "visit": "Settings last for this visit. They are not added to your notes. Trying another hinge revisits this small collection; it is not a new assessment.",
   "parent": "Ask what would change if only one arm became longer, and what would change if the blue arm turned while both lengths stayed fixed. A spoken explanation is welcome; this bench does not record or grade it. Paper-and-card turning can be explored together offscreen; the screen does not establish real-tool skill."
 };
 export const hingeFrames = [

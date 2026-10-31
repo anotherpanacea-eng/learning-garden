@@ -20,6 +20,9 @@ def bounds(p):
  ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no page overflow')
  bad=p.locator('.linear-page button,.linear-page input,.linear-page select,.linear-page textarea,.linear-page a').evaluate_all('xs=>xs.filter(x=>x.getClientRects().length&&x.getBoundingClientRect().height<44).map(x=>x.textContent)')
  ok(not bad,'44px controls '+str(bad))
+def choices(p):
+ d=p.locator('[data-linear-choices]')
+ if d.count() and d.get_attribute('open') is None:d.locator('summary').tap()
 def turn(p,n):p.locator('[data-linear-page="'+str(n)+'"]').first.click()
 def fill(p,item,k,v):p.locator('[data-linear-item="'+item+'"][data-linear-field="'+k+'"]').fill(v)
 def setup(browser,width,seed=None,failed=False):
@@ -36,9 +39,9 @@ with sync_playwright() as pw:
  try:
   for width in [320,820]:
    c,p=setup(browser,width);go(p,'#learn/math/plans');ok('linearPathway' not in book(p),'pure targeted preview');ok('Start or continue' in p.locator('main').inner_text(),'explicit requested start');bounds(p)
-   p.locator('[data-linear-start="plans"]').last.click();ok(work(p)['source']['id']=='plans','requested start selects fee lesson');
+   p.locator('.linear-turn [data-linear-start="plans"]').click();ok(work(p)['source']['id']=='plans','requested start selects fee lesson');
    for key,sets in answers.items():
-    p.locator('[data-linear-start="'+key+'"]').first.click();ok(work(p)['source']['id']==key,'switch remains playable on specific route '+key);p.wait_for_function("document.activeElement?.id==='linear-turn'");ok(p.locator('#linear-turn').evaluate('x=>document.activeElement===x'),'lesson switch focuses after hashchange render')
+    choices(p);p.locator('[data-linear-start="'+key+'"]').first.click();ok(work(p)['source']['id']==key,'switch remains playable on specific route '+key);p.wait_for_function("document.activeElement?.id==='linear-turn'");ok(p.locator('#linear-turn').evaluate('x=>document.activeElement===x'),'lesson switch focuses after hashchange render')
     turn(p,0);bounds(p);ok(p.locator('svg[role="img"]').count()>=1,'reference graph');ok(p.locator('table tbody tr').count()==7,'seven exact rows');p.locator('[data-linear-x]').select_option('4');ok(work(p)['x']==4,'model input persisted')
     p.locator('[data-linear-delta="1"]').focus();p.keyboard.press('Enter');ok(work(p)['x']==5,'keyboard stepper');ok(p.locator('[data-linear-delta="1"]').evaluate('x=>document.activeElement===x'),'stepper focus restored')
     if key=='zero':ok('−' not in p.locator('.linear-value').inner_text() or '-4' in p.locator('.linear-value').inner_text(),'negative output available')
@@ -67,10 +70,10 @@ with sync_playwright() as pw:
    p.goto(BASE+'#notes');p.locator('#download').wait_for();ok('Signed rates and linear equations' in p.locator('main').inner_text(),'notes visible')
    with p.expect_download() as d:p.locator('#download').click()
    exported=json.loads(Path(d.value.path()).read_text());ok('linearPathway' in json.dumps(exported),'actual download retains unit')
-   p.locator('#progress-file').set_input_files({'name':'synthetic-linear.json','mimeType':'application/json','buffer':json.dumps(exported).encode()});p.locator('#progress-import-confirm').click();ok('Notebook brought' in p.locator('#progress-import-status').inner_text(),'actual notes import');go(p,'#learn/math/zero');p.locator('[data-linear-start="zero"]').first.click();ok(p.locator('[data-linear-note]').input_value()=='\nSynthetic explanation <script> & exact punctuation.','imported leading newline preserved in textarea')
+   p.locator('#progress-file').set_input_files({'name':'synthetic-linear.json','mimeType':'application/json','buffer':json.dumps(exported).encode()});p.locator('#progress-import-confirm').click();ok('Notebook brought' in p.locator('#progress-import-status').inner_text(),'actual notes import');go(p,'#learn/math/zero');choices(p);p.locator('[data-linear-start="zero"]').first.click();ok(p.locator('[data-linear-note]').input_value()=='\nSynthetic explanation <script> & exact punctuation.','imported leading newline preserved in textarea')
    c.close()
   for bad in [{'b':'3'},'x']:
-   seed=copy.deepcopy(fixture);seed['linearPathway']=copy.deepcopy(exported['linearPathway']);seed['linearPathway']['currentId']='equal';seed['linearPathway']['lessons']['equal']['source']['model']['comparison']=bad;held=copy.deepcopy(seed['linearPathway']['lessons']['equal']);c,p=setup(browser,820,seed);go(p,'#learn/math/equal');ok('cannot be edited here' in p.locator('main').inner_text(),'malformed comparison shown as retained child');p.locator('[data-linear-start="views"]').click();ok(work(p)['source']['id']=='views','sibling remains playable after malformed comparison');ok(book(p)['linearPathway']['lessons']['equal']==held,'malformed comparison remains exact');c.close()
+   seed=copy.deepcopy(fixture);seed['linearPathway']=copy.deepcopy(exported['linearPathway']);seed['linearPathway']['currentId']='equal';seed['linearPathway']['lessons']['equal']['source']['model']['comparison']=bad;held=copy.deepcopy(seed['linearPathway']['lessons']['equal']);c,p=setup(browser,820,seed);go(p,'#learn/math/equal');ok('cannot be edited here' in p.locator('main').inner_text(),'malformed comparison shown as retained child');choices(p);p.locator('[data-linear-start="views"]').click();ok(work(p)['source']['id']=='views','sibling remains playable after malformed comparison');ok(book(p)['linearPathway']['lessons']['equal']==held,'malformed comparison remains exact');c.close()
   seed=copy.deepcopy(fixture);seed['linearPathway']=copy.deepcopy(exported['linearPathway']);seed['linearPathway']['currentId']='carry';seed['linearPathway']['lessons']['carry']['recommendation']='retired-step';c,p=setup(browser,820,seed);go(p,'#learn/math/carry');ok(p.locator('[data-linear-recommendation]').input_value()=='retired-step','unknown saved recommendation stays selected');ok('Saved choice: retired-step' in p.locator('[data-linear-recommendation]').inner_text(),'unknown choice visibly explained');p.locator('[data-linear-recommendation]').select_option('fractions');ok(work(p)['recommendation']=='fractions','current choice can replace saved unknown choice');c.close()
   ok(not errors,'no page errors '+str(errors));print(f'Linear browser: {checks} checks passed; screenshots {OUT}')
  finally:browser.close()
