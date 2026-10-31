@@ -48,6 +48,12 @@ Open [Word Garden](https://after-the-storm-learning.anotherpanacea.workers.dev/#
 
 The complete game, including Word Garden, is published on Cloudflare Static Assets. The earlier Sites address retains its earlier release. Browser-local notebooks belong to their address: existing progress stays at the old address; it is not automatically copied to Cloudflare. Use Grown-up notes → Bring progress from another site to import the old notes JSON file locally as a separate explorer; existing explorers are preserved. Move one explorer at a time and keep the original file until you have checked the import.
 
+### Word Workshop: The Prop Box
+
+From Word Garden, **Visit the Prop Box** (`#words/props`) to label twelve pictured props and read three short scenes together. Letter tiles, a different worked example and word comparisons preserve each waiting draft. Any amount of adult help is welcome. This first room uses adult-read demonstrations, with no recorded phonics, speech synthesis or independent-reading score. Grown-up notes downloads retain the source material, drafts and labels with each explorer. [Spec 320](docs/specs/320-word-room.md).
+
+Check the logic with `node test/word-room-checks.mjs` and the touch, keyboard and Notes-transfer journeys with `python3 test/word-room-browser.py`. The browser suite uses installed Chrome on macOS, `CHROME_PATH` when supplied, or Playwright Chromium elsewhere. `WORD_ROOM_ARTIFACTS` selects a private output directory for synthetic screenshots and receipts.
+
 ## Run locally
 
 No installation or build step is needed. From this repository:
