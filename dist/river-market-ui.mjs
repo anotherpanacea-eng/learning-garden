@@ -21,7 +21,7 @@ function note(e,v){
  <div class='river-support'>${button('meaning',T.meaning,` aria-pressed='${meaning}'`)}${button('words',T.wordByWord,` aria-pressed='${v.words}'`)}${hearButton(s.sentences.map(x=>plain(x.es)).join(' '),T.hear,'es')}${v.sentence<0?button('one',T.oneAtATime):`${v.sentence<s.sentences.length-1?button('next',T.nextSentence):''}${button('stop-one',T.stop)}`}</div>
  <p class='river-novoice' data-river-novoice hidden>${esc(T.noVoice)}</p>
  ${v.words?`<ul class='river-words'>${s.words.map(w=>`<li>${es(w.es)} ${esc(w.en)}</li>`).join('')}</ul>`:''}
- <p class='river-notes-links'>${button('note-sounds',T.grammar.sounds.title)}${button('note-articles',T.grammar.articles.title)}</p></section>`;
+ <p class='river-notes-links'>${button('note-sounds',teaching(e).sounds.title)}${button('note-articles',teaching(e).articles.title)}</p></section>`;
 }
 function scene(e,v){
  const s=e.source,p=e.task.placements,on=s.items.filter(i=>p[i.id]===null),picked=v.picked;
@@ -37,14 +37,16 @@ function landingArt(){return `<svg class='river-art' viewBox='0 0 320 90' aria-h
 function marisol(e,ids,meaning){return core.cargaLines(e,ids).map(l=>`<p class='river-line'>${es(`«${l.es}»`)}${meaning?`<span class='river-gloss'>${rich(l.en)}</span>`:''}</p>`).join('');}
 function question(e,v){
  const q=e.source.question,a=e.answer,last=a?.picks.at(-1),meaning=e.support.meaning,nudge=last?q.choices.find(c=>c.id===last)?.nudge:'';
- return `<section class='river-question' aria-labelledby='river-q-title'><h3 id='river-q-title' tabindex='-1'>${es(q.es)}</h3>${meaning?`<p class='river-gloss'>${esc(q.en)}</p>`:''}<p class='river-notes-links'>${button('note-hay',T.grammar.hay.title)}</p>
+ return `<section class='river-question' aria-labelledby='river-q-title'><h3 id='river-q-title' tabindex='-1'>${es(q.es)}</h3>${meaning?`<p class='river-gloss'>${esc(q.en)}</p>`:''}<p class='river-notes-links'>${button('note-hay',teaching(e).hay.title)}</p>
  <div class='river-choices'>${q.choices.map(c=>`<button type='button' data-river-choice='${c.id}' aria-pressed='${last===c.id}' lang='es'${e.state==='done'?' disabled':''}>${esc(c.es)}</button>`).join('')}</div>${nudge?`<p class='river-nudge'>${rich(nudge)}</p>`:''}</section>`;
 }
-function grammarNote(key){const g=T.grammar[key];return `<details class='river-grammar' data-river-grammar='${key}'><summary>${esc(g.title)}</summary><p>${rich(g.text)}</p></details>`;}
+// The errand's frozen notes; an older source without them falls back to the current copy.
+const teaching=e=>e?.source?.grammar??T.grammar,boatLine=e=>e?.source?.boatLine??T.boatLine;
+function grammarNote(key,e){const g=teaching(e)[key];return `<details class='river-grammar' data-river-grammar='${key}'><summary>${esc(g.title)}</summary><p>${rich(g.text)}</p></details>`;}
 function cuaderno(view){
  const e=view.carga;
  const body=e?`<h3>${es(e.source.title)}</h3><ul class='river-words'>${e.source.phrasebook.map(w=>`<li>${es(w.es)} ${esc(w.en)}</li>`).join('')}</ul>`:`<p>${esc(T.phrasebookEmpty)}</p>`;
- return `<section class='river-cuaderno'><h2 id='river-cuaderno-title' tabindex='-1'>${esc(T.phrasebookLink)}</h2>${body}${['articles','hay','sounds'].map(grammarNote).join('')}${button('cuaderno-close',T.phrasebookBack)}</section>`;
+ return `<section class='river-cuaderno'><h2 id='river-cuaderno-title' tabindex='-1'>${esc(T.phrasebookLink)}</h2>${body}${['articles','hay','sounds'].map(k=>grammarNote(k,e)).join('')}${button('cuaderno-close',T.phrasebookBack)}</section>`;
 }
 export function riverMarketPage(state,owner=''){
  const view=core.riverMarketView(state),v=local(state,owner);
@@ -59,7 +61,7 @@ export function riverMarketPage(state,owner=''){
  else if(e){
   const submitted=e.taskEvidence.firstSubmission!==null,lines=v.lines;
   errand=`<div class='river-errand'>${note(e,v)}${scene(e,v)}<div class='river-replies'>${lines?marisol(e,lines,e.support.meaning):''}</div>${submitted?question(e,v):''}
-  ${e.state==='done'?`${v.boat?`<p class='river-line'>${es(`«${T.boatLine.es}»`)}${e.support.meaning?`<span class='river-gloss'>${rich(T.boatLine.en)}</span>`:''}</p>`:''}`:''}
+  ${e.state==='done'?`${v.boat?`<p class='river-line'>${es(`«${boatLine(e).es}»`)}${e.support.meaning?`<span class='river-gloss'>${rich(boatLine(e).en)}</span>`:''}</p>`:''}`:''}
   ${v.again?`<p>${esc(T.startedAgain)}</p>`:''}${view.canStartAgain?button('again',T.startAgain):''}</div>`;
  }
  return `<section class='river-page' data-river-root>${head}${arrival}${amountControl(view)}${entry}${errand}<p>${button('cuaderno',T.phrasebookLink)}</p><aside class='river-invitation'><p>${esc(T.invitation)}</p></aside>${status}</section>`;

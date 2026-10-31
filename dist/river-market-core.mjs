@@ -7,7 +7,7 @@ const text=(x,max)=>typeof x==='string'&&x.length>0&&x.length<=max;
 const bool=x=>typeof x==='boolean';
 const own=(x,k)=>Object.hasOwn(x,k),clone=x=>structuredClone(x);
 const id=x=>typeof x==='string'&&/^[a-z][a-z0-9-]{0,39}$/.test(x);
-const AMOUNTS=['short','longer'],MAX_PICKS=12,MAX_SOURCE=48*1024;
+const AMOUNTS=['short','longer'],GRAMMAR=['articles','hay','sounds'],MAX_PICKS=12,MAX_SOURCE=48*1024;
 const unique=list=>new Set(list).size===list.length;
 const pair=(x,max)=>object(x)&&text(x.es,max)&&text(x.en,max);
 export function validCargaSource(s){
@@ -26,6 +26,9 @@ export function validCargaSource(s){
   if(!f.wrong.every(w=>pair(w,400)&&id(w.id)&&kinds.includes(w.kind)&&places.has(w.place)&&w.place!==s.targets[w.kind])||!unique(f.wrong.map(w=>w.id))||!unique(f.wrong.map(w=>w.kind+'|'+w.place)))return false;
   // Every possible misplacement has its own line.
   if(!kinds.every(k=>[...places].filter(p=>p!==s.targets[k]).every(p=>f.wrong.some(w=>w.kind===k&&w.place===p))))return false;
+  // Grammar notes and the boat line were added to the frozen source later; an older source without them stays readable.
+  if(own(s,'grammar')&&!(object(s.grammar)&&Object.keys(s.grammar).length===GRAMMAR.length&&GRAMMAR.every(k=>own(s.grammar,k)&&object(s.grammar[k])&&text(s.grammar[k].title,80)&&text(s.grammar[k].text,1000))))return false;
+  if(own(s,'boatLine')&&!pair(s.boatLine,400))return false;
   const q=s.question;if(!pair(q,400)||!Array.isArray(q.choices)||q.choices.length<2||q.choices.length>6)return false;
   if(!q.choices.every(c=>object(c)&&id(c.id)&&text(c.es,80)&&text(c.nudge,600))||!unique(q.choices.map(c=>c.id))||!q.choices.some(c=>c.id===q.fit))return false;
   return true;
@@ -75,9 +78,10 @@ export function riverMarketView(state){
 // A duplicated tryId makes every record sharing it ineligible for a story receipt, while each stays readable here.
 export function riverMarketTries(state){
  const v=riverMarketView(state);if(v.status!=='ready')return [];
- const r=state.spanish,all=tries(r).filter(validErrand),count=new Map();
- for(const e of all)count.set(e.tryId,(count.get(e.tryId)||0)+1);
- return all.filter(e=>count.get(e.tryId)===1);
+ // Count every shape-readable tryId, readable body or not, before filtering, so an unreadable copy still makes the address ambiguous.
+ const r=state.spanish,count=new Map();
+ for(const e of tries(r))if(object(e)&&int(e.tryId,1,Number.MAX_SAFE_INTEGER))count.set(e.tryId,(count.get(e.tryId)||0)+1);
+ return tries(r).filter(validErrand).filter(e=>count.get(e.tryId)===1);
 }
 const fail=error=>({ok:false,error});
 const now=()=>new Date().toISOString();

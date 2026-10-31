@@ -115,6 +115,24 @@ ok(makeCargaSource('medium')===null,'unknown amount makes no source');
  ok(riverMarketTries(st).length===0&&riverMarketView(st).cargaReadable,'shared id: neither eligible, both readable');
 }
 
+// An unreadable copy with the same tryId still makes the address ambiguous; nothing is rewritten.
+{
+ const st=fresh();openCarga(st,yes);st.spanish.earlier.push({tryId:1,source:{futureFormat:2}});const before=bytes(st);
+ ok(riverMarketTries(st).length===0,'readable try 1 beside an unreadable try 1: neither eligible');
+ ok(riverMarketView(st).cargaReadable&&bytes(st)===before,'current try still readable; records unchanged');
+ st.spanish.earlier[0]={note:'Synthetic record without a try id'};ok(riverMarketTries(st).length===1,'a record with no try id does not block');
+}
+
+// The errand freezes its own grammar notes and boat line; an older source without them stays readable and unrewritten.
+{
+ const st=fresh();openCarga(st,yes);const e=st.spanish.errands.carga;
+ ok(e.source.grammar?.hay?.title==='Hay'&&e.source.grammar.articles&&e.source.grammar.sounds&&e.source.boatLine?.es.includes('La Garza'),'grammar notes and boat line frozen into the source');
+ const older=structuredClone(st);delete older.spanish.errands.carga.source.grammar;delete older.spanish.errands.carga.source.boatLine;const kept=bytes(older);
+ ok(validErrand(older.spanish.errands.carga)&&riverMarketView(older).cargaReadable&&bytes(older)===kept,'older source without the new fields stays readable and unchanged');
+ const bad=structuredClone(st);delete bad.spanish.errands.carga.source.grammar.hay;ok(!validErrand(bad.spanish.errands.carga),'a partial grammar block is unreadable');
+ const bad2=structuredClone(st);bad2.spanish.errands.carga.source.boatLine={es:'x'};ok(!validErrand(bad2.spanish.errands.carga),'a malformed boat line is unreadable');
+}
+
 // Unreadable and unknown-version records stay exact.
 {
  const raw={spanish:{v:2,anything:[1,2,3]}},before=bytes(raw);

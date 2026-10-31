@@ -51,6 +51,9 @@ export function makeCargaSource(amount){
   places:places.map(([id,label,en])=>({id,label,en})),
   items,targets:Object.fromEntries([...used].map(k=>[k,kinds[k].target])),
   feedback:{all:{id:'all',es:'¡Gracias! Todo está en su sitio.',en:'Thank you! Everything is in its place.'},wrong:wrong.filter(([kind])=>used.has(kind)).map(([kind,place,es,en])=>({id:`${kind}-${place}`,kind,place,es,en}))},
+  // The errand's own teaching text: Mi cuaderno's notes and the boat-name line read from this frozen copy.
+  grammar:JSON.parse(JSON.stringify(riverMarketText.grammar)),
+  boatLine:{es:riverMarketText.boatLine.es,en:riverMarketText.boatLine.en},
   question:{es:'¿Cuántos tarros de miel hay?',en:'How many jars of honey are there?',choices:[{id:'dos',es:'dos',nudge:'<i>Dos</i> is how many <i>sacos de harina</i> there are. Look for the number before <i>tarros de miel</i>.'},{id:'tres',es:'tres',nudge:'Yes: <i>tres tarros de miel</i>, three jars of honey.'},{id:'cuatro',es:'cuatro',nudge:'<i>Cuatro</i> means four. Look for the number before <i>tarros de miel</i>.'}],fit:'tres'}
  });
 }

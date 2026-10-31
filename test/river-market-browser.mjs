@@ -38,6 +38,11 @@ try{
   await act(p,'meaning').click();await p.locator('.river-gloss').first().waitFor();ok((await book(p)).spanish.errands.carga.support.meaning===true,'meaning support saved');
   await p.reload();await p.locator('[data-river-root]').waitFor();ok((await p.locator('.river-arrival').innerText()).includes('still at the landing'),'later arrival line after reload');ok(await p.locator('.river-helped').count()===1,'English help label shown');
   await act(p,'cuaderno').click();await p.locator('#river-cuaderno-title').waitFor();ok((await p.locator('.river-cuaderno').innerText()).includes('la panadería'),'Mi cuaderno lists the errand words');
+  // An already-open errand keeps its own grammar notes after the content changes.
+  await p.evaluate(()=>{const id=JSON.parse(localStorage.getItem('learning-garden-explorers')||'{}').activeId||'explorer-1',key='number-garden-v1:'+id,b=JSON.parse(localStorage.getItem(key));const g=b.spanish.errands.carga.source.grammar;g.hay.title='Hay, from the earlier note';g.articles.text='Synthetic earlier article note.';localStorage.setItem(key,JSON.stringify(b));});
+  await p.reload();await p.locator('[data-river-root]').waitFor();await act(p,'cuaderno').click();await p.locator('#river-cuaderno-title').waitFor();
+  const notes=await p.locator('.river-cuaderno').innerText();ok(notes.includes('Hay, from the earlier note'),'Mi cuaderno shows the frozen grammar title');
+  await p.locator('[data-river-grammar="articles"] summary').click();ok((await p.locator('[data-river-grammar="articles"]').innerText()).includes('Synthetic earlier article note.'),'Mi cuaderno shows the frozen grammar text');
   await p.goto(url+'#notes');ok((await p.locator('details:has-text("The River Market (Spanish)")').first().innerText()).length>0,'Notes section');
   await p.goto(url+'#home');ok(await p.locator('a[href="#mercado"]').count()>=1,'Home links the market');await c.close();}
  // Unknown version: read-only page, nothing written.
