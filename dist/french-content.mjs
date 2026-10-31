@@ -2,8 +2,8 @@
 export const frenchLessons=[
  {id:'french-bookstall',title:'Le colis de Lucie',place:'At the bookstall',symbol:'📚',
   invitation:'Help Lucie find a story parcel. Read about colors, objects, and places.',
-  text:['Lucie prépare un colis pour le jardin.','Elle met un livre bleu dans le sac.','Le sac est sous la table.','Un petit chat dort sur la chaise.'],
-  meaning:'Lucie is preparing a parcel for the garden. She puts a blue book in the bag. The bag is under the table. A little cat is sleeping on the chair.',
+  text:['Lucie prépare un colis pour le jardin.','Elle met un livre bleu dans un sac.','Le sac est sous la table.','Un petit chat dort sur la chaise.'],
+  meaning:'Lucie is preparing a parcel for the garden. She puts a blue book in a bag. The bag is under the table. A little cat is sleeping on the chair.',
   words:'un colis = a parcel; un livre = a book; un sac = a bag; sous = under; sur = on.',
   questions:[
    {title:'Find the bag',prompt:'Où est le sac ?',choices:['Sur la chaise.','Sous la table.','Dans le jardin.'],answer:1,skill:'Locate a place in a short French passage',hint:'Find the sentence beginning « Le sac ».',explanation:'« Le sac est sous la table. » The bag is under the table.'},
@@ -17,7 +17,7 @@ export const frenchLessons=[
   questions:[
    {title:'A tiny passenger',prompt:'Qu’est-ce qui tombe dans le bateau ?',choices:['Une feuille.','Un livre.','Un chat.'],answer:0,skill:'Find an action and its subject in French',hint:'Find the sentence with « tombe » (falls).',explanation:'« Une feuille tombe dans le bateau. » A leaf falls into the boat.'},
    {title:'Where does it float?',prompt:'Où Pip met-il le bateau ?',choices:['Sur la table.','Dans un petit bassin.','Sous une chaise.'],answer:1,skill:'Understand a French place phrase',hint:'Look at the sentence beginning « Il met » (He puts).',explanation:'Pip puts the boat « dans un petit bassin », in a small pool.'}
-  ],postcard:'Imagine a new passenger. Try « Une feuille est dans le bateau. » Draw or describe a different passenger together; there is no marked answer.'},
+  ],postcard:'Imagine a new passenger. Try « Il y a une feuille dans le bateau. » Draw or describe a different passenger together; there is no marked answer.'},
  {id:'french-rooftops',title:'Le jardin sur le toit',place:'In the rooftop garden',symbol:'🌱',
   invitation:'Help with the rooftop garden and follow what happens first and next.',
   text:['D’abord, Lucie remplit un arrosoir.','Ensuite, elle arrose les fleurs.','Enfin, elle pose l’arrosoir près de la porte.','Les fleurs sont jaunes et rouges.'],
