@@ -18,6 +18,8 @@ export const copyScopes = [
   {path:'dist/endings-shelf-content.mjs',adultBlocks:[{start:'    "adultLine":',end:'    "fiction":',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
   {path:'dist/stained-map-ui.mjs',adultBlocks:[{start:'export function stainedMapNotes(',end:'\nexport function bindStainedMap(',reason:'Only used in Grown-up notes.'}],quotations:[]},
   {path:'dist/stained-map-content.mjs',adultBlocks:[{start:'    "adultLine":',end:'});',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
+  {path:'dist/sky-notes-ui.mjs', adultBlocks:[{start:'export function skyNotesNotes(',end:'// End of the Grown-up notes section.',reason:'Only used in Grown-up notes.'}],quotations:[]},
+  {path:'dist/sky-notes-content.mjs', adultBlocks:[{start:'export const SKY_GROWNUP=',end:'// End of the grown-up copy.',reason:'Shown only in Grown-up notes.'}],quotations:[]},
   {path:'dist/act-three-ui.mjs',adultBlocks:[{start:'export function actThreeNotes(',end:'\nexport function bindActThree(',reason:'Only used inside Grown-up Keeper notes.'}],quotations:[]},
   {path:'dist/act-three-content.mjs',adultBlocks:[{start:'  "notes": {',end:'\n};',reason:'Only used in Grown-up Keeper notes.'}],quotations:[]},
   {path:'dist/market-signs-ui.mjs', adultBlocks:[
