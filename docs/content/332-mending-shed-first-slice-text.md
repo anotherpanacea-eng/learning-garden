@@ -1,6 +1,6 @@
 # The Mending Shed, first slice: copy sheet
 
-Companion to [spec 332](../specs/332-mending-shed-first-slice.md). Lines marked **167** are copied unchanged from [167's companion](167-mending-shed-text.md) and must match it exactly. Lines marked **new** are this slice's commission additions. Nothing else ships. Nothing here is scored, timed or locked. `{guide}` is not used in this slice.
+Companion to [spec 332](../specs/332-mending-shed-first-slice.md). Lines marked **167** are copied unchanged from [167's companion](167-mending-shed-text.md) and must match it exactly. Lines marked **adapted from 167** fill a slot in a 167 line and say which. Lines marked **new** are this slice's commission additions. Nothing else ships. Nothing here is scored, timed or locked. `{guide}` is not used in this slice.
 
 ## Arriving (167)
 
@@ -58,28 +58,28 @@ Worked example: *Clay and a rubber strip.*
 
 **167:** Prompt: Tap a thing from the heap. · Rows: What is it? · What is it made of? · Multi-material note: Some things are made of more than one material. Choose them all.
 
-**Cards, trays and materials (new authoring of 167's table).** Chip labels are the companion's words. "Needs" must all be in the material row; "also fine" may be added; anything else is a wrong material. The first card offered is the metal bucket.
+**Cards, trays and materials (new authoring of 167's table).** Chip labels are the companion's words. "Needs" must all be in the material row; "also fine" may be added; anything else is a wrong material. The first card offered is the metal bucket. Positions vary on purpose: the card's object chip comes first on six trays and second on six, and the first needed material sits in each of the four material positions. Each kept card keeps its tray order.
 
 | Card | Object chip | Needs | Also fine | Tray, in order |
 | --- | --- | --- | --- | --- |
-| wooden bucket | bucket | wood | metal | bucket · sack · wood · metal · plastic · glass |
-| metal bucket | bucket | metal | | bucket · spoon · metal · wood · plastic · glass |
-| plastic bucket | bucket | plastic | | bucket · basket · plastic · metal · wood · cloth |
-| lantern | lantern | metal, glass, cotton | | lantern · window pane · metal · glass · cotton · plastic · wood |
-| sack | sack | sacking (jute) | | sack · Dot's mailbag · sacking (jute) · plastic · leather · glass |
-| Dot's mailbag | Dot's mailbag | cloth, leather | | Dot's mailbag · sack · cloth · leather · metal · glass |
-| window pane | window pane | glass | | window pane · lantern · glass · plastic · slate (a stone) · wood |
-| rope | rope | rope fiber (hemp) | | rope · basket · rope fiber (hemp) · plastic · metal · willow |
-| basket | basket | willow | | basket · bucket · willow · plastic · metal · cloth |
-| roof slate | roof slate | slate (a stone) | | roof slate · window pane · slate (a stone) · wood · glass · plastic |
-| gate hinge | gate hinge | iron | | gate hinge · spoon · iron · wood · plastic · glass |
-| spoon | spoon | wood | | spoon · bucket · wood · metal · plastic · glass |
+| wooden bucket | bucket | wood | metal | sack · bucket · wood · plastic · metal · glass |
+| metal bucket | bucket | metal | | bucket · spoon · wood · plastic · metal · glass |
+| plastic bucket | bucket | plastic | | basket · bucket · metal · plastic · wood · cloth |
+| lantern | lantern | metal, glass, cotton | | lantern · window pane · plastic · metal · wood · glass · cotton |
+| sack | sack | sacking (jute) | | Dot's mailbag · sack · plastic · leather · sacking (jute) · glass |
+| Dot's mailbag | Dot's mailbag | cloth, leather | | Dot's mailbag · sack · metal · cloth · glass · leather |
+| window pane | window pane | glass | | lantern · window pane · plastic · slate (a stone) · wood · glass |
+| rope | rope | rope fiber (hemp) | | rope · basket · plastic · metal · willow · rope fiber (hemp) |
+| basket | basket | willow | | bucket · basket · willow · plastic · metal · cloth |
+| roof slate | roof slate | slate (a stone) | | roof slate · window pane · wood · glass · slate (a stone) · plastic |
+| gate hinge | gate hinge | iron | | spoon · gate hinge · wood · iron · plastic · glass |
+| spoon | spoon | wood | | spoon · bucket · metal · plastic · glass · wood |
 
 **Check lines, first that applies, in this order:**
 
 | # | When | Line | Source |
 | --- | --- | --- | --- |
-| 1 | An object chip is in the material row | "{Object}" is what it is. What is it made of? | 167, with the card's object in place of "Bucket" |
+| 1 | An object chip is in the material row | "{Object}" is what it is. What is it made of? | adapted from 167 (167's line is the bucket case: "Bucket" is what it is. What is it made of?) |
 | 2 | A material chip is in the object row | That's what it's made of. What is the thing called? | 167 |
 | 3 | The object row is empty | What is it? Choose the thing's name. | new |
 | 4 | The object row holds the wrong object | Look again. What is this thing called? | new |

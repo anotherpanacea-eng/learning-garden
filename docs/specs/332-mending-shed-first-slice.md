@@ -18,35 +18,46 @@ Route `#workshop/mending`, open from the start. Link it from the Storm Workshop 
 2. **Teach first, once per bench.** Opening a bench the first time shows its teach card (card 1 for the pile, card 3 for the shape bench) with **Show me**, which reveals the worked example one step per tap, and **Start**. Start is available at once; the card never gates play. A **What is this bench for?** button reopens the card later. Opening and closing a card makes no write until **Start** is pressed the first time, which records `taught` for that bench.
 3. **The Mending Pile.** Twelve object cards from the companion, as native buttons with text labels and a drawn picture. Tap a card to work on it. Two labeled rows appear, **What is it?** and **What is it made of?**, with the card's chip tray from the copy sheet. Tap a chip, then a row, to place it (the same pick-then-place pattern as 324, with a visible "picked up" marker). Tapping a placed chip lifts it back to the tray. **Check** shows one line, the first that applies in the copy sheet's order. A card is **sorted** once a check comes back right. The first card offered is the metal bucket, and it is **guided**: the two questions show as numbered steps beside the rows. The board (heading **Object · made of**) lists each sorted card with its kept chips.
 4. **The Shape Bench.** Six samples and four actions from the companion. Choose a sample and an action, then **predict** with one of the three chips. Only then does **Try it** run the action, and **Let go** shows the authored result picture, its result line and the prediction line (matched or not). Slate's bend shows the companion's snap line. The willow note shows whenever the willow rod is chosen. A results grid (sample by action, 6 × 4) fills with each kept outcome as text, never color alone, and scrolls inside its own box at 320 px.
-5. **"I'm stuck"** on both benches: rung 1, the bench's teach-card text; rung 2, the companion's worked example for that set, with "how to start this one"; rung 3, **Skip for now**, which leaves the item unsorted and records nothing as a miss. Opening any rung marks the current item as supported before the rung's text shows.
+5. **"I'm stuck"** on both benches: rung 1, the bench's teach-card text; rung 2, the companion's worked example for that set, with "how to start this one"; rung 3, **Skip for now**, which leaves the item unsorted and records nothing as a miss. Opening a rung is an explicit write: the current item is marked supported, through preflight, before the rung's text shows. If preflight refuses, the capacity line shows and the rung stays closed.
 6. **Grown-up notes.** The companion's *What this teaches* and *What it does not claim* paragraphs, trimmed to this slice as the copy sheet sets out, and the grown-up line from the copy sheet.
 
 No score, timer, lock, mastery label or unlock. Every action has a keyboard path; nothing uses drag.
 
 ## Saved work
 
-Optional root `mendingShed` per explorer, the first part of 167's root. It stays absent until the first explicit write (a Start, a check or a Let go). Rendering, opening a teach card, choosing a card or a sample, placing chips and predicting make no write; the working rows and the open prediction are view state.
+Optional root `mendingShed` per explorer, the first part of 167's root. It stays absent until the first explicit write: a Start, a check, a Let go or opening a stuck-ladder rung. Rendering, opening a teach card, choosing a card or a sample, placing chips and predicting make no write; the working rows and the open prediction are view state.
 
 ```
 mendingShed: {
   v: 1,
   taught: { pile: bool, shapes: bool },
   pile: { [cardId]: {
-    first: { object: chipId | null, materials: [chipId], line: lineId } | null,   // the first check, kept once
-    latest: { object: chipId | null, materials: [chipId], line: lineId },
+    card: label,                          // as first shown, kept once
+    tray: [Chip],                         // order and labels as first shown, kept once
+    first: Check | null,                  // the first check, kept once
+    latest: Check | null,
     checks: n, sorted: bool, supported: bool, at
   } },
-  shapes: { [sampleId]: { [actionId]: {
-    first: { predicted: outcomeId, shown: outcomeId },     // kept once
-    latest: { predicted: outcomeId, shown: outcomeId },
-    tries: n, supported: bool, at
-  } } }
+  shapes: { [sampleId]: {
+    sample: label,                        // kept once
+    actions: { [actionId]: {
+      action: label,                      // kept once
+      first: Try | null,                  // the first Let go, kept once
+      latest: Try | null,
+      tries: n, supported: bool, at
+    } }
+  } }
 }
+Chip  = { id: chipId, label }
+Check = { object: Chip | null, materials: [Chip], line: { id: lineId, text } }
+Try   = { predicted: { id: outcomeId, label }, shown: { id: outcomeId, label },
+          result: text, prediction: text }
 ```
 
-- **Codes only.** Ids come from the content module; no typed text, name, photo or audio. `shown` is the outcome displayed at that moment and is never recomputed on load, so a later content change renders kept results as saved.
-- **Evidence.** The first check and the first prediction are kept once. Later checks and tries change `latest` and the count. `supported` only turns on, and it records whether any ladder rung was opened for that item before or after the first check, without rewriting `first`. A card skipped or never checked is unobserved.
-- **Validation and preservation.** Validate ids against the content module, bounded counts (0 to 9999) and the shapes above. An unreadable entry stays raw and exportable, its item shows the copy sheet's unavailable line and is read-only, and the rest of the shed stays open. An unknown `v` keeps the whole root raw, shows the copy sheet's version line and a Notes link, and makes the benches read-only.
+- **Codes plus what was shown.** Each record keeps its ids and the authored labels and lines exactly as displayed at that moment: the card's tray in its order, the chips placed, the Check line, the shape outcome, its result line and the prediction line. Nothing typed, no name, photo or audio. Nothing is recomputed on load, so kept work renders as saved after the content module's labels, outcomes, lines or order change, or after an id leaves it.
+- **Evidence.** The first check and the first Let go are kept once. Later checks and tries change `latest` and the count. Counts saturate at 9999: a later check or try at the cap still updates `latest`, `sorted` and `at` and leaves the count at 9999. `supported` only turns on, and it records whether any ladder rung was opened for that item before or after the first check, without rewriting `first`. Opening a rung on an item never checked or tried writes a support-only record (`first` and `latest` null, count 0), which stays unobserved. A card skipped or never checked is unobserved.
+- **Resuming.** Reopening a kept card shows its kept tray, in its kept order and with its kept labels. A new check uses the current module's rules; if the card or any kept chip id is no longer in the module, the card shows on the board from its kept labels and is read-only. A kept shape cell whose sample or action has left the module stays in the grid from its kept labels and is read-only.
+- **Validation and preservation.** Validate shape, not catalogue membership: ids are strings of 1 to 40 characters from `a-z`, `0-9` and `-`; labels and lines are strings of 1 to 200 characters; a tray holds 2 to 12 chips with distinct ids, and placed chips come from the record's own tray; counts are integers 0 to 9999; `first` is null exactly when the count is 0. An unreadable entry stays raw and exportable, its item shows the copy sheet's unavailable line and is read-only, and the rest of the shed stays open. An unknown `v` keeps the whole root raw, shows the copy sheet's version line and a Notes link, and makes the benches read-only.
 - **Preflight.** Every explicit write is cloned and checked against `dist/progress-limits.mjs` and the real Notes export before it commits. A refusal shows the capacity line and leaves the save and the view unchanged.
 - Notes export, import, reset and explorer switching carry `mendingShed` through the existing transfer. Add `mendingShed: 'The Mending Shed'` to `progress-transfer.mjs`'s destination names.
 
@@ -99,13 +110,14 @@ Hard edges are authoring context, never locks. `topic-coverage.csv` stays unchan
    - The wooden bucket is sorted with wood alone and with wood and metal; the lantern needs all three.
    - Every one of the 24 shape cells shows the companion's outcome; rubber and sponge never stay squashed; clay never springs back; slate's bend shows the snap line.
    - A prediction is required before Try it; matched and not-matched lines follow the kept prediction.
-   - First check and first prediction are kept once; `latest`, counts and `supported` change without rewriting `first`; a skipped item stays unobserved.
-   - Support is set before any ladder rung's text shows, and it persists.
-   - Rendering, opening teach cards, choosing, placing and predicting make no write; the root stays absent until the first Start, check or Let go.
-   - Kept results render as saved after the content module's labels, outcomes and order change.
+   - First check and first Let go are kept once; `latest`, counts and `supported` change without rewriting `first`; a skipped item stays unobserved; a check or try at a count of 9999 updates `latest` and leaves the count at 9999.
+   - Opening a rung writes support through preflight before its text shows, including a support-only record on an unchecked item that stays unobserved; a refused support write keeps the rung closed and the notebook unchanged.
+   - Rendering, opening teach cards, choosing, placing and predicting make no write; the root stays absent until the first Start, check, Let go or rung.
+   - Kept results, trays and orders render as saved after the content module's labels, outcomes, lines and order change, and after a card, chip, sample or action id is removed from it (those items read-only).
+   - No tray puts its card's object chip, or a needed material, in the same position on every card.
    - Unreadable entries, unknown sibling keys and an unknown `v` stay exact in the export, and the rest of the shed stays open (or read-only for an unknown `v`).
    - A real-transfer refusal leaves the whole notebook unchanged.
-   - Source check: every child-facing string is in the copy sheet, the copy sheet's companion lines match 167's companion exactly, and none has an em-dash.
+   - Source check: every child-facing string is in the copy sheet, the copy sheet's lines marked 167 match 167's companion exactly, the adapted Check line renders the metal bucket's bucket case as 167's line, and none has an em-dash.
 2. Native browser journeys at the three viewports: real taps and the keyboard sort the guided bucket, a multi-material card and a wrong row; run the shape bench through a match, a surprise and slate's snap; the stuck ladder to Skip; the board and grid after reload; Notes download and import; reset; two explorers; stale controls after navigation; and a forced preflight refusal. Inspect rendered screenshots of both benches.
 3. The Storm Workshop, Fair Test Bench and existing suites stay green, and the source runner passes. Independent review of the exact candidate and the repository's landing procedure follow. Physical iPad and VoiceOver stay unqualified until checked.
 
