@@ -13,7 +13,12 @@ IDS=['B1','B2','B3','B4','B5','B6','E1','E2','E3','E4']
 CHOICES={'B1':'a','B2':'c','B3':'b','B4':'c','B6':'a','E1':'a','E3':'c','E4':'b'}
 MATCH={'re':'again','pre':'before','un':'not','dis':'not','mis':'wrongly','anti':'against','auto':'self','super':'more'}
 def fixture(name='fresh'):
- code="import {signsSeed,fullSignsNotebook} from './test/market-signs-checks.mjs';import * as c from './dist/market-signs-core.mjs';const o={canExport:()=>true};let s=signsSeed();"
+ code="import {signsSeed,fullSignsNotebook,fullEndingSignsNotebook} from './test/market-signs-checks.mjs';import * as c from './dist/market-signs-core.mjs';const o={canExport:()=>true};let s=signsSeed();"
+ if name=='ending-full':code+='s=fullEndingSignsNotebook();'
+ if name.startswith('ending-bad-'):
+  code+="c.openMarketEndingJob(s,'C1',o);c.openMarketBench(s,'endings',o);"
+  damage={'hint':"s.signs.endings.source.hints[0].text=99;",'draft':"s.signs.endings.draft.rootId='missing';",'kept':"s.signs.endings.kept=[{rootId:'missing',endingId:'ly',toolId:'just-add'}];",'section':"s.signs.endings={v:99,opaque:['keep']};",'join':"s.signs.endings.source.joins[0].word='freshley';"}
+  code+=damage[name.removeprefix('ending-bad-')]
  if name=='full':code+='s=fullSignsNotebook();'
  if name=='seven':code+="c.openMarketBench(s,'prefix',o);c.setMarketPrefix(s,{prefixId:'re'},o);for(const part of s.signs.source.prefix.parts.slice(0,7)){c.setMarketPrefix(s,{partId:part.id},o);c.keepMarketSign(s,o);}"
  if name=='earlier-only':code+="c.openMarketJob(s,'B1',o);s.signs.source.jobs=[];"
@@ -53,6 +58,7 @@ def layout(p):
  h.ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal overflow')
  for e in p.locator('.ms-room button:visible,.ms-room select:visible,.ms-room summary:visible,.ms-room a:visible').all():
   box=e.bounding_box();h.ok(box and box['height']>=43.9,'44px target '+e.inner_text()[:35])
+  h.ok(e.evaluate('el=>parseFloat(getComputedStyle(el).fontSize)>=16'),'readable control type at least 16px')
 def play(browser,base,seed,w,hgt):
  c,p=setup(browser,base,seed,w,hgt)
  try:
@@ -121,7 +127,90 @@ def edges(browser,base):
  try:
   bench(p,'prefix');p.locator('[data-ms-prefix]').select_option('mis');p.evaluate('window.switchMarket=document.querySelector("[data-ms-part]")');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();ready(p);held=copy.deepcopy(h.book(p));p.evaluate('switchMarket.value="spell";switchMarket.dispatchEvent(new Event("change"))');h.ok(h.book(p)==held and 'signs' not in held,'other explorer and stale native select isolated');p.evaluate('location.hash="#notes"');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.wait_for_function('location.hash==="#home"');p.evaluate('location.hash="#words/signs"');ready(p);p.evaluate('switchMarket.dispatchEvent(new Event("change"))');h.ok('signs' not in h.book(p),'reset-era callback cannot resurrect work')
  finally:c.close()
+def ending_record(p):
+ e=state(p)['endings'];return e['records'][e['currentId']]
+def ending_pair(p,root,ending,tool):
+ p.locator('[data-ms-root]').select_option(root);p.locator('[data-ms-ending]').select_option(ending)
+ p.locator('[data-ms-tool="'+tool+'"]').tap()
+def import_notes(p,report):
+ p.locator('#progress-file').set_input_files({'name':'synthetic-ending-signs.json','mimeType':'application/json','buffer':json.dumps(report).encode()})
+ p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').tap();p.locator('#progress-import-status').filter(has_text='Notebook brought').wait_for()
+ p.evaluate('location.hash="#words/signs"');ready(p)
+def endings_play(browser,base,w,hgt):
+ c,p=setup(browser,base,fixture(),w,hgt)
+ try:
+  bench(p,'practice');h.ok('endings' not in state(p),'practice preview does not allocate ending material')
+  choose(p,'B1');p.locator('[data-ms-choice=a]').tap();earlier=copy.deepcopy(record(p));choose(p,'C1');h.ok(state(p)['practiceGroup']=='endings' and state(p)['records']['B1']==earlier,'named ending task preserves earlier group')
+  bench(p,'endings');h.ok(p.locator('[data-ms-action=keep-ending]').is_disabled(),'no guessed default tool or letters')
+  cases=[('fresh','ly','just-add','freshly',True),('happy','ly','just-add','happyly',True),('fresh','ly','drop-e',None,False),('fresh','ous','just-add','freshous',True),('gentle','ly','le-to-ly','gently',True),('dramatic','ly','ic-to-ically','dramatically',True)]
+  for root,end,tool,made,keep in cases:
+   ending_pair(p,root,end,tool)
+   h.ok(p.locator('[data-ms-action=keep-ending]').is_enabled()==keep,'literal tool availability '+root+tool)
+   h.ok(p.locator('.ms-bakery .ms-painted').inner_text()==(made or '?'),'visible literal board '+str(made))
+   if keep:action(p,'keep-ending')
+  h.ok(p.locator('.ms-root-letters').first.inner_text()=='dramatic' and p.locator('.ms-ending-letters').first.inner_text()=='ally','harder tool keeps root and displays all added letters')
+  p.screenshot(path=str(OUT/f'ending-board-{w}.png'),full_page=True);kept=copy.deepcopy(state(p)['endings']['kept']);action(p,'keep-ending');h.ok(len(state(p)['endings']['kept'])==len(kept) and 'already' in p.locator('#ms-status').inner_text(),'duplicate triple explained without duplicate evidence')
+  action(p,'clear-ending');h.ok(state(p)['endings']['kept']==kept and state(p)['endings']['draft']=={'rootId':None,'endingId':None,'toolId':None},'clear preserves all discoveries')
+  drawer(p,'ending-kept');p.locator('[data-ms-action=reopen-ending][data-ms-kept="1"]').tap();h.ok(p.locator('.ms-bakery .ms-painted').inner_text()=='happyly','reopening mismatch retains actual tool rather than correcting it')
+  for panel in ['ending-no-root','ending-odd']:
+   drawer(p,panel);h.ok(p.locator('[data-ms-panel='+panel+'] dt').count()>0,'read-only exception shelf '+panel)
+  held=copy.deepcopy(h.book(p));writes=p.evaluate('marketWrites');drawer(p,'ending-story');action(p,'longer');drawer(p,'teaching');p.locator('[data-ms-action=step-next][data-ms-card="0"]').tap();h.ok(h.book(p)==held and p.evaluate('marketWrites')==writes,'story and worked steps produce no evidence')
+  layout(p);h.ok(p.locator('[data-speak]').count()==0,'ending practice has no uncommissioned sound');p.screenshot(path=str(OUT/f'endings-{w}.png'),full_page=True)
+  p.locator('[data-ms-bench=choose]').tap();h.ok(p.locator('.ms-arrival').is_visible(),'Back opens arrival without erasing ending draft');bench(p,'endings');p.reload(wait_until='networkidle');ready(p);h.ok(state(p)['view']=='endings' and p.locator('.ms-bakery .ms-painted').inner_text()=='happyly','reload preserves bench and literal mismatch')
+  bench(p,'practice');h.ok(state(p)['endings']['currentId']=='C1' and p.locator('.ms-guided li').count()==3,'practice resumes C1 with guided steps');h.ok(state(p)['records']['B1']==earlier,'prefix record unchanged through bench and reload')
+  for id,key in {'C1':'a','C2':'b','C3':'c','C4':'b','C5':'a','C7':'b'}.items():
+   choose(p,id);p.locator('[data-ms-choice='+key+']').focus();p.keyboard.press('Enter');action(p,'check-job');h.ok(ending_record(p)['checks'][-1]['outcome']=='fit','ending supplied answer '+id);action(p,'keep-version')
+  choose(p,'B5');p.locator('[data-ms-match=un]').tap();choose(p,'C6');h.ok('prefix' not in p.locator('#ms-match-instruction').inner_text().lower() and p.locator('[data-ms-destination=sure]').is_disabled(),'group change clears selected part and uses ending-specific instruction')
+  for part,dest in {'trea':'sure','mea':'sure','pic':'ture','na':'ture','young':'ou','gym':'y'}.items():
+   p.locator('[data-ms-match='+part+']').tap();p.locator('[data-ms-destination='+dest+']').tap()
+  action(p,'check-job');h.ok(ending_record(p)['checks'][-1]['outcome']=='fit','reusable spelling-family destinations fit complete map');action(p,'keep-version');first=copy.deepcopy(ending_record(p)['firstKept']);p.locator('[data-ms-match=trea]').tap();p.locator('[data-ms-destination=y]').tap();action(p,'check-job');action(p,'keep-version');h.ok(ending_record(p)['checks'][-1]['outcome']=='different' and ending_record(p)['firstKept']==first,'revision keeps original fitting version separately')
+  drawer(p,'help');action(p,'hint');h.ok(ending_record(p)['help']['hint'] and p.locator('#ms-hint').is_visible(),'ending hint records support before display');layout(p);p.screenshot(path=str(OUT/f'ending-job-{w}.png'),full_page=True)
+  choose(p,'C7');action(p,'next-job');h.ok(state(p)['practiceGroup']=='prefix' and state(p)['currentId']=='B1','combined order wraps to original group');choose(p,'C6');pending=copy.deepcopy(state(p));p.evaluate('window.departedEnding=document.querySelector("[data-ms-action=check-job]")');report=h.export_notes(p,'endings-'+str(w));h.ok(report['signs']==pending,'actual Notes carries both practice groups and waiting bench');p.evaluate('departedEnding.click()');h.ok(h.book(p)['signs']==pending,'departed ending button inert');import_notes(p,report);h.ok(state(p)==pending,'actual import preserves both groups and source histories');p.evaluate('departedEnding.click()');h.ok(state(p)==pending,'pre-import ending button remains inert')
+ finally:c.close()
+def endings_edges(browser,base):
+ c,p=setup(browser,base,fixture('ending-full'))
+ try:
+  held=copy.deepcopy(state(p));h.ok(len(held['endings']['kept'])==121 and len(held['endings']['records'])==7,'maximum combined authored fixture installed');report=h.export_notes(p,'maximum-ending-signs');h.ok(report['signs']==held,'actual pretty Notes download holds full combined history');import_notes(p,report);h.ok(state(p)==held,'maximum combined history imports without trimming')
+ finally:c.close()
+ for kind in ['hint','draft','kept','section','join']:
+  c,p=setup(browser,base,fixture('ending-bad-'+kind))
+  try:
+   raw=copy.deepcopy(state(p)['endings'])
+   if kind!='join':h.ok(p.locator('[data-ms-root]').count()==0,'malformed bench unavailable '+kind)
+   else:
+    ending_pair(p,'fresh','ly','just-add');h.ok(p.locator('[data-ms-action=keep-ending]').is_disabled() and 'does not match its own tool' in p.locator('#ms-ending-feedback').inner_text(),'retained join disagreement pauses pair instead of displaying two words');raw=copy.deepcopy(state(p)['endings'])
+   if kind!='section':choose(p,'C1');p.locator('[data-ms-choice=a]').tap();action(p,'check-job');h.ok(ending_record(p)['checks'][-1]['outcome']=='fit','readable C1 works beside malformed bench '+kind)
+   else:choose(p,'B1');p.locator('[data-ms-choice=a]').tap();action(p,'check-job');h.ok(record(p)['checks'][-1]['outcome']=='fit','original group open beside unsupported section')
+   if kind!='section':h.ok(state(p)['endings']['source']==raw['source'] and state(p)['endings']['draft']==raw['draft'] and state(p)['endings']['kept']==raw['kept'],'raw malformed material preserved '+kind)
+   else:h.ok(state(p)['endings']==raw,'opaque ending section exact after sibling edit')
+  finally:c.close()
+ for fail in [False,True]:
+  c,p=setup(browser,base,fixture())
+  try:
+   bench(p,'endings')
+   if fail:p.evaluate('window.marketFailStorage=true')
+   else:p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#words/signs"');ready(p)
+   ending_pair(p,'happy','ly','y-to-i');action(p,'keep-ending');h.ok('session' in p.locator('#ms-status').inner_text(),'ending save-off/failure status truthful');report=h.export_notes(p,'ending-memory-'+str(fail));h.ok(report['signs']['endings']['draft']['rootId']=='happy' and len(report['signs']['endings']['kept'])==1,'RAM Notes includes unsaved ending draft and keep')
+  finally:c.close()
+ c,p=setup(browser,base,fixture(),fault=True)
+ try:
+  bench(p,'endings');before=copy.deepcopy(h.book(p));p.evaluate('window.marketRefuse=true');p.locator('[data-ms-root]').select_option('happy');h.ok(h.book(p)==before and p.locator('[data-ms-root]').input_value()=='','refused ending edit restores native selection and leaves state exact')
+ finally:c.close()
+ for alteration in ['source','hidden','film']:
+  c,p=setup(browser,base,fixture(),fault=True)
+  try:
+   bench(p,'endings');before=copy.deepcopy(h.book(p));writes=p.evaluate('marketWrites')
+   if alteration=='source':p.evaluate('window.marketState.signs.endings.source=structuredClone(window.marketState.signs.endings.source)')
+   if alteration=='hidden':p.evaluate('document.querySelector("[data-market-signs-root]").style.display="none"')
+   if alteration=='film':p.evaluate('const d=document.createElement("dialog");d.className="welcome-film";d.open=true;document.body.append(d)')
+   p.evaluate('const s=document.querySelector("[data-ms-root]");s.value="happy";s.dispatchEvent(new Event("change"))');h.ok(h.book(p)==before and p.evaluate('marketWrites')==writes,'ending callback inert after '+alteration)
+  finally:c.close()
+ c,p=setup(browser,base,fixture())
+ try:
+  bench(p,'endings');ending_pair(p,'fresh','ly','just-add');p.evaluate('window.oldEnding=document.querySelector("[data-ms-action=keep-ending]")');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();ready(p);before=copy.deepcopy(h.book(p));p.evaluate('oldEnding.click()');h.ok(h.book(p)==before and 'signs' not in before,'old ending callback cannot write to another explorer');p.evaluate('location.hash="#notes"');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.wait_for_function('location.hash==="#home"');p.evaluate('location.hash="#words/signs"');ready(p);p.evaluate('oldEnding.click()');h.ok('signs' not in h.book(p),'reset cannot resurrect ending work')
+ finally:c.close()
 class Quiet(http.server.SimpleHTTPRequestHandler):
+ protocol_version='HTTP/1.1'
  def log_message(self,*args):pass
 class Server(http.server.ThreadingHTTPServer):request_queue_size=128;daemon_threads=True
 def main():
@@ -134,7 +223,9 @@ def main():
    try:
     seed=fixture()
     for w,hgt in [(320,600),(820,1000),(1024,768)]:play(b,base,seed,w,hgt);print('Market Signs viewport',w,'passed',flush=True)
-    edges(b,base);h.ok(not h.errors,'no browser errors '+str(h.errors));result={'status':'passed','checks':h.checks};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(result)
+    edges(b,base)
+    for w,hgt in [(320,600),(820,1000),(1024,768)]:endings_play(b,base,w,hgt);print('Ending Signs viewport',w,'passed',flush=True)
+    endings_edges(b,base);h.ok(not h.errors,'no browser errors '+str(h.errors));result={'status':'passed','checks':h.checks};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(result)
    finally:b.close()
  finally:server.shutdown();server.server_close()
 if __name__=='__main__':main()
