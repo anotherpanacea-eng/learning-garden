@@ -10,7 +10,7 @@ Tabs: **Word beats**, **Meaning flips**, **Letter clues**, **The ough wall**, **
 
 Always: **Rules usually work. A dictionary has the last word.** Word-beat header: **Read the whole word together. Try both letter cards. The bold part is a written guide to stress.** Meaning header: **Read this spelling and its picture. Which meaning does it show most clearly here?**
 
-Comparison labels: **Your chosen letters: {text}.** / **This matches our printed form. {explanation}** / **These letters differ from our printed form. {explanation}** / **Choose a letter card to compare.** The whole-word guide remains visible before choosing. A different letter sample remains keepable, with no claim it is a conventional word. Keep: **This version is in your Notes. You can try another.** Earlier check: **Compared before your last change.** Missing pointer: **Choose a card to return to. Your earlier work is still here.**
+Word-beat display labels, derived from the saved choice text and outcome and kept separate from stored feedback: **Your chosen letters: {text}.** / **This matches our printed form.** / **These letters differ from our printed form.** The stored feedback lines follow below the label. Incomplete copy is defined in the case-default table below. The whole-word guide remains visible before choosing. A different letter sample remains keepable, with no claim it is a conventional word. Keep: **This version is in your Notes. You can try another.** Earlier check: **Compared before your last change.** Missing pointer: **Choose a card to return to. Your earlier work is still here.**
 
 Recovery: **This earlier card stays in Notes. Choose another card or bench.** / **These earlier choices stay in Notes. Other benches are open.** / **This earlier reading card stays in Notes but cannot be shown here.** / **This earlier kept version stays in Notes. You can still try another choice.** / **These earlier comparisons stay in Notes. You can still keep an unchecked choice.** Root unavailable: **These earlier Beat Bench pages stay in Notes. Other Word Garden rooms are open.**
 
@@ -29,14 +29,14 @@ Each source has section fer, kind choice, contextLabel **A true thing about lang
 | fer-conferred / Confer and -ed | confer + ed | conferred | [3,6), fer | a: confered; b: conferred [match] | The librarians conferred about the letter. / The strong part stays on fer. The r at the join doubles. |
 | fer-referee / Refer and -ee | refer + ee | referee | [5,7), final ee | a: referee [match]; b: referree | The referee watched the match. / The strongest part is the final ee. The r before ee stays single. |
 
-Each fer source prompt is its sentence followed by **Try a letter card.** Its guide and stress.note are the table note; its explanation is **Our printed form is {word}. {note}**. Parts and guided steps are empty, and both alternatives use the same printed-form comparison note.
+Each fer source prompt is its sentence followed by **Try a letter card.** Its guide and stress.note are the table note; its explanation is **Our printed form is {word}. {note}**. Parts and guided steps are empty, and both alternatives keep the same printed-form explanation.
 
-Ranges mark printed letters, never syllable boundaries. Render the exact lowercase whole word; bold and underline the range without adding characters. Display base + ending as a construction cue, never naïvely concatenate it as a conventional result. All six: hint **Look at the written stress guide. Is the strong part on fer or somewhere else?**; example **In referring, fer stays strong and the r at the join doubles. In reference, the strong part is at the start.**; teach card11. Their guide note is the explanation and different-choice note; Compare adds the chosen literal form and printed target. No card claims total r counts.
+Ranges mark printed letters, never syllable boundaries. Render the exact lowercase whole word; bold and underline the range without adding characters. Display base + ending as a construction cue, never naïvely concatenate it as a conventional result. All six: hint **Look at the written stress guide. Is the strong part on fer or somewhere else?**; example **In referring, fer stays strong and the r at the join doubles. In reference, the strong part is at the start.**; teach card11. Their explanation is exactly the printed-form template defined above. Different-choice feedback is defined below; the reused result appends the explanation once. The chosen literal form and outcome labels are separate display readouts. No card claims total r counts.
 
 Read-only look-alikes:
 
-- **offer / offering:** The strong part is at the start. The final r stays single in offering; the ff in offer stays.
-- **suffer / suffering:** The strong part is at the start. The final r stays single in suffering; the ff in suffer stays.
+- **offering** (id), **offer** (word) / **offering** (form): The strong part is at the start. The r at the join stays single in offering; the ff in offer stays.
+- **suffering** (id), **suffer** (word) / **suffering** (form): The strong part is at the start. The r at the join stays single in suffering; the ff in suffer stays.
 
 ## Three meaning pairs, six responses
 
@@ -51,7 +51,33 @@ Each source: section meanings, kind choice, contextLabel **A story from Willowba
 | meaning-coop / coop | a: a house for a hen; b: a shop we all own | a | hen-house / Hens stand beside a small wooden house. | A coop can be a home for hens. |
 | meaning-co-op / co-op | a: a house for a hen; b: a shop we all own | b | shared-shop / The members stand outside the shop they own together. | This co-op is a shop its members own together. |
 
-Title/prompt: **{word}: which meaning is clearest here?** Another choice feedback: **That meaning belongs with the other spelling in this pair. {explanation}**. This is a finite contextual comparison, not a claim that every meaning or spelling variant is modeled. Hint **Look at the hyphen and read the picture note.** Example **Re-sign has re- for again. Resign usually means leave a job.** Each printed form remains visible alongside its picture. The pair's other form is offered through an explicit next-card/picker action.
+Title/prompt: **{word}: which meaning is clearest here?** Wrong-choice feedback is the literal per-case line below; the reused result then appends that case's explanation once. This is a finite contextual comparison, not a claim that every meaning or spelling variant is modeled. Hint **Look at the hyphen and read the picture note.** Example **Re-sign has re- for again. Resign usually means leave a job.** Each printed form remains visible alongside its picture. The pair's other form is offered through an explicit next-card/picker action. Meaning display labels are **Your chosen meaning: {text}.** / **This matches the meaning in our picture.** / **This suggests another reading.** They are separate UI labels, not stored feedback lines.
+
+## Complete defaults and feedback for the twelve comparison cases
+
+Every fer and meanings case has **parts:[]** and **steps:[]**. Each case owns a cloned copy of its group defaults below; no current global copy is used to reconstruct an opened case. Both fields are required by the reused result function.
+
+| All cases in section | copy.incomplete | copy.partDifferent |
+| --- | --- | --- |
+| fer | Choose a letter card to compare. You can keep this turn unfinished. | Look at the printed word and the letters at the join. |
+| meanings | Choose a meaning to compare. You can keep this turn unfinished. | Read the picture note and try the other meaning. |
+
+Each **different** object contains exactly the authored wrong-choice entry below. Its line does not embed the explanation, which stainedJobResult appends. A fitting comparison stores the explanation alone; incomplete stores copy.incomplete. The display label and chosen-letter readout are additional UI, not extra stored feedback. This defines all twelve cases without a builder inventing text.
+
+| Case id | different key | Literal different value |
+| --- | --- | --- |
+| fer-referring | a | Look at the r before ing. |
+| fer-reference | b | Look at the r before ence. |
+| fer-preferred | b | Look at the r before ed. |
+| fer-preference | a | Look at the r before ence. |
+| fer-conferred | a | Look at the r before ed. |
+| fer-referee | b | Look at the r before ee. |
+| meaning-recover | b | That meaning is clearer with re-cover. |
+| meaning-re-cover | a | That meaning is clearer with recover. |
+| meaning-resign | a | That meaning is clearer with re-sign. |
+| meaning-re-sign | b | That meaning is clearer with resign. |
+| meaning-coop | b | That meaning is clearer with co-op. |
+| meaning-co-op | a | That meaning is clearer with coop. |
 
 ## Eight read-only letter cards
 
@@ -109,9 +135,9 @@ Each body at most30 words; one worked step per tap. Always distinguish **A true 
 
 **card11 / When fer stays strong**
 
-Body: **Read the whole word together. When fer stays strong, r usually doubles at the ending. When the strong part moves, the r at the join stays single.**
+Body: **Read the whole word together. When fer stays strong, r usually doubles at the join. When the strong part moves, the r at the join stays single.**
 
-Example **Refer, referring, reference.** Steps: **In referring, the strong part is fer.** / **The r at the ending doubles: referring.** / **In reference, the strong part is at the start. The r at the join stays single.**
+Example **Refer, referring, reference.** Steps: **In referring, the strong part is fer.** / **The r at the join doubles: referring.** / **In reference, the strong part is at the start. The r at the join stays single.**
 
 **card12 / A hyphen can help a reader**
 
@@ -155,11 +181,11 @@ Easier examples: C1/C2 **Read referring and reference together. The written guid
 
 **C5 / Three spelling ideas**: kind match. Prompt **Read each idea. Is it true or not true in these printed examples?** Guide **The ei-after-c clue here is for ee. Use the letter cards and word families as clues. You can read the words with someone.** Context **A true thing about language**. Picture **word-cards / Three printed ideas wait beside a book.** Parts in order:
 
-- science: **Science breaks the ee-after-c clue.** → not-true; feedback **Science does not have the ee sound in this clue, so it is outside that clue.**
-- seize: **Seize has ei, though no c comes before it.** → true; feedback **Seize is one of the words to remember separately.**
-- rhyme: **Though, through and thought all rhyme.** → not-true; feedback **These printed words belong to different ending families.**
+- science: **Science breaks the ee-after-c clue** → not-true; feedback **Science does not have the ee sound in this clue, so it is outside that clue.**
+- seize: **Seize has ei, though no c comes before it** → true; feedback **Seize is one of the words to remember separately.**
+- rhyme: **Though, through and thought all rhyme** → not-true; feedback **These printed words belong to different ending families.**
 
-Choices in stored order **true:True**, **not-true:Not true**. Hint **Read the ee condition, then look at the printed word families.** Example **Ceiling fits the ee-after-c clue; science is outside its sound condition.** Explanation **The ee condition matters. Seize needs its own memory, and ough appears in several word families.** Teach card13/card15; no guided steps. Three independent placements; True/Not true may be reused. Every nonmatching answered statement gets its own feedback, plus the explanation. An unfinished statement remains incomplete and keepable.
+Choices in stored order **true:True**, **not-true:Not true**. Hint **Read the ee condition, then look at the printed word families.** Example **Ceiling fits the ee-after-c clue; science is outside its sound condition.** Explanation **The ee condition matters. Seize needs its own memory, and ough appears in several word families.** Teach card13/card15; no guided steps. Store the statement text without terminal periods, exactly as printed above. Preserve stainedJobResult's literal **part.text + colon + space + different[part.id]** output; do not clean punctuation in an older retained source or historical feedback. Three independent placements; True/Not true may be reused. Every nonmatching answered statement gets its own feedback, plus the explanation. An unfinished statement remains incomplete and keepable.
 
 ## New story and paper return
 
