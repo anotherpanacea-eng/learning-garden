@@ -105,7 +105,7 @@ The layout rules are those of 248:
 | Asking Questions `mt_f8n4txtLej` | E5 | Chapter 4 reads a question the child posted. The upstream post (291) owns any teaching of it. |
 | Plants and animals in their habitats `mt_e6PP4ip39V` | S3 | Chapter 2's Keeper's note says reeds are wetland plants. One sentence is a fact, not a lesson. |
 
-**Spec 49.** This is Act III, *Beyond Willow Bridge*: connection and transfer. Its ending follows 49's: an exchange completed and a friendship with Nuria, with the between-acts line pointing to another page. In 49's teaching contract (§5), 326 adds no lesson of its own. It serves as the purposeful revisit (step 6) for four host activities, carrying their kept work instead of awarding an answer. Each host's own spec owns its teaching encounter, contrast and practice: 324, 316, [93](93-courier-clock-walk.md) and 291. On the data boundary (step 7), 326 adds no free-text field. Receipts hold ids only.
+**Spec 49.** This is Act III, *Beyond Willow Bridge*: connection and transfer. Its ending follows 49's: an exchange completed and a friendship with Nuria, with the between-acts line pointing to another page. In 49's teaching contract (§5), 326 adds no lesson of its own. It serves as the purposeful revisit (step 6) for four host activities, carrying their kept work instead of awarding an answer. Each host's own spec owns its teaching encounter, contrast and practice: 324, 316, [93](93-courier-clock-walk.md) and 291. On the data boundary (step 7), 326 adds no free-text field. Receipts hold only ids, versions and codes, and copy no free text.
 
 **Hard-prerequisite crosswalk** against `curriculum/marble/dependencies.json`. Every hard prerequisite is *not yet mapped* in `curriculum/topic-coverage.csv`. They are:
 - Reading between the lines `mt_E5KC4AnRLW` and Characters, settings, and events `mt_sSQlLOnAow`, for `mt_VEwM7ClYYE`;
@@ -114,7 +114,7 @@ The layout rules are those of 248:
 
 326 claims none of these topics, so none of them gates it. A later lesson that claims one must teach or check its hard prerequisites.
 
-**Spec 120.** Act III's story path (§5), its letters (§7) and Page 3 (§12). The chapter jobs stay out of scope, as above.
+**Spec 120.** Page 3's place in the run of pages (§5), Act III's story path, letters and ending (§7), and the state sketch (§12). The chapter jobs stay out of scope, as above.
 
 Existing ODbL and CC BY-SA attribution stays. All new prose, art and code are original project material.
 
