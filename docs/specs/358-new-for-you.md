@@ -30,13 +30,13 @@ A browser check visits each listed page for a fresh explorer, collects its room 
 
 ## What "new for you" means
 
-Each explorer gets one small record, stored beside the notebook in its own key, `number-garden-v1:<explorer id>:rooms`:
+Each explorer gets one small record, stored in its own key outside the notebook prefix, `learning-garden-rooms-v1:<explorer id>`:
 
 ```js
 {explorer:'<profile createdAt>', opened:{'#workshop/design':'2026-11-01', ...}, since:'2026-10-31', lastDay:'2026-11-01'}
 ```
 
-The record is not part of the notebook. Existing journeys require that entering a room leaves every notebook root unchanged, and this record changes on nearly every visit. (The first build put it in the notebook; thirteen existing browser suites caught it.) Because the key shares the notebook prefix, clearing every explorer or turning saving off removes it with the notebooks. While saving is off it lives in memory only. The app's other-tab conflict check watches only the registry and notebook keys, so writing this record never reads as another tab's change. `explorer` is the profile's `createdAt`, so an explorer id that is reused after a deletion starts fresh instead of inheriting an old record. Downloads do not carry it.
+The record is not part of the notebook. Existing journeys require that entering a room leaves every notebook root unchanged, and this record changes on nearly every visit. (The first build put it in the notebook; thirteen existing browser suites caught it. The second put it under the notebook prefix, `number-garden-v1:<id>:rooms`; about fifty suites count every write under that prefix as a notebook write on entry, and the Ferry Deck suite caught it.) Each render removes any rooms record whose explorer's notebook key is gone, so clearing every explorer, removing one, or turning saving off removes the record on the next render without changing the explorer storage module. While saving is off it lives in memory only. The app's other-tab conflict check watches only the registry and notebook keys, so writing this record never reads as another tab's change. `explorer` is the profile's `createdAt`, so an explorer id that is reused after a deletion starts fresh instead of inheriting an old record. Downloads do not carry it.
 
 Known limit, accepted: turning saving off removes every explorer's record along with the notebooks. When saving returns, the active explorer's record is written again from memory, but other explorers' records are not, so rooms they had opened can show New again until reopened. Nothing in a notebook is lost, the case is rare, and it recovers by itself. Fixing it would mean changing the explorer storage module for a cosmetic effect.
 

@@ -10,12 +10,14 @@ export function addDays(day,n){const [y,m,d]=day.split('-').map(Number);return l
 const byRoute=new Map(rooms.map(r=>[r.route,r]));
 export const roomFor=route=>byRoute.get(route)||null;
 
-// The record lives beside the notebook, never in it: entering a room must leave every notebook root unchanged.
+// The record lives outside the notebook and its key prefix: entering a room must leave every notebook root unchanged,
+// and existing suites count every write under the notebook prefix as a notebook write.
 // Shape only, never registry membership: a removed or newer room's opened date is kept (spec 358, Restore).
 export function validRooms(v){
  return object(v)&&typeof v.explorer==='string'&&object(v.opened)&&Object.entries(v.opened).every(([k,d])=>/^#[^\s#]+$/.test(k)&&validDay(d))&&validDay(v.since)&&validDay(v.lastDay)&&v.since<=v.lastDay;
 }
-export const roomsKey=id=>`number-garden-v1:${id}:rooms`;
+export const roomsPrefix='learning-garden-rooms-v1:';
+export const roomsKey=id=>`${roomsPrefix}${id}`;
 const fresh=(explorer,today)=>({explorer,opened:{},since:addDays(today,-3),lastDay:today});
 // explorer is the profile's createdAt, so a reused explorer id never inherits an old record.
 export function readRooms(raw,explorer){try{const v=JSON.parse(raw);return validRooms(v)&&v.explorer===explorer?v:null;}catch{return null;}}

@@ -37,7 +37,7 @@ equal(a.opened,{},'the earlier record is not mutated');
 equal(touchRooms(opened,room.route,E,tuesday).opened[room.route],monday,'an opened date is never moved');
 ok(!newRooms(opened,monday).some(r=>r.route===room.route),'an opened room is not new');
 equal(touchRooms(opened,'#home','2026-10-25T09:00:00.000Z',monday).opened,{},'a reused explorer id with another profile starts fresh');
-equal(roomsKey('explorer-2'),'number-garden-v1:explorer-2:rooms','record key beside the notebook');
+equal(roomsKey('explorer-2'),'learning-garden-rooms-v1:explorer-2','record key outside the notebook prefix');
 equal(readRooms(JSON.stringify(opened),E),opened,'reads its own record');
 equal(readRooms(JSON.stringify(opened),'other'),null,'ignores another profile’s record');
 equal(readRooms('{not json',E),null,'ignores unreadable storage');
