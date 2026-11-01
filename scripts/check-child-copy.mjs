@@ -6,6 +6,12 @@ import {resolve} from 'node:path';
 export const copyScopes = [
   {path:'dist/beat-bench-ui.mjs',adultBlocks:[{start:'function notesCases(',end:'\nexport const beatBenchEntry',reason:'Only used in Grown-up notes; child helpers remain in scope.'}],quotations:[]},
   {path:'dist/beat-bench-content.mjs',adultBlocks:[{start:'  "grownup":',end:'\n});',reason:'Only displayed in Grown-up notes.'}],quotations:[]},
+  {path:'dist/ribbon-matches-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/ribbon-matches-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/ribbon-matches-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/ribbon-matches-ui.mjs',adultBlocks:[
+    {start:'export function ribbonMatchesNotes(',end:'\nexport function bindRibbonMatches(',reason:'Only used in Grown-up notes; child explanations and feedback remain in scope.'},
+  ],quotations:[]},
   {path:'dist/word-room-sounds-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/word-room-sounds-content.mjs',adultBlocks:[],quotations:[
     {quote:"'adult-supplied'",reason:'Stored passage-token role code, not child-facing copy; the passage displays its word, not this code.'},
