@@ -1,6 +1,6 @@
 # 342 · Source study and content questions
 
-Author study2026-10-31; independent subject/specification review is pending. No audio production. Base main `8c0113f1cb1a1b542b6bbf3a02304e75e7ed2eb5` includes the reviewed [literacy gap audit](../literacy-next-steps.md). The existing [320 source study](320-word-room.md) and [brief55 written panel](../reviews/55-phonics-content-2026-10-30.md) support an adult-read foundation; they do not themselves clear new cot/cap/map material.
+Author study2026-10-31; independent written subject/specification and implementation reviews are complete, recorded in [PR361](https://github.com/anotherpanacea-eng/learning-garden/pull/361). No audio production or accepted recordings. Base main `8c0113f1cb1a1b542b6bbf3a02304e75e7ed2eb5` includes the reviewed [literacy gap audit](../literacy-next-steps.md). The existing [320 source study](320-word-room.md) and [brief55 written panel](../reviews/55-phonics-content-2026-10-30.md) support an adult-read foundation; they do not themselves clear new cot/cap/map material.
 
 ## New word study
 

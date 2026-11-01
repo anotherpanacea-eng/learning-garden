@@ -1,6 +1,6 @@
 # 342 · Prop Box: change a sound, carry a message
 
-Specification against main `8c0113f1cb1a1b542b6bbf3a02304e75e7ed2eb5`, 2026-10-31. LG-10 / LG-G1. **Proposed; independent specification and content review precede code.** [Finite text](../content/342-prop-box-sound-messages-text.md); [source study](../source-audits/342-prop-box-sound-messages.md); [prioritized gap audit](../literacy-next-steps.md).
+Specification against main `8c0113f1cb1a1b542b6bbf3a02304e75e7ed2eb5`, 2026-10-31. LG-10 / LG-G1. **Implemented and released through [PR361](https://github.com/anotherpanacea-eng/learning-garden/pull/361), after independent specification/content and implementation review. The roadmap links the canonical release receipt.** [Finite text](../content/342-prop-box-sound-messages-text.md); [source study](../source-audits/342-prop-box-sound-messages.md); [prioritized gap audit](../literacy-next-steps.md).
 
 ## Teaching and story job
 
