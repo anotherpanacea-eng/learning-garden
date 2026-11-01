@@ -17,7 +17,9 @@ const wordOrder=['fig','flour','fresh','fudge'];
 const supplied=['reopen','reuse','preheat','prepay','preview','unsold','unwrapped','unnamed','unnoticed','dislike','disobey','misprint','mislabel','misspell','antifreeze','autograph','autopilot','superstar','supermarket'];
 const workFor=s=>s.kind==='choice'?{choice:choiceKeys[s.id]}:s.kind==='match'?{placements:copy(matchKey)}:{order:copy(wordOrder)};
 export function fullSignsNotebook(){
- const s=signsSeed();c.openMarketBench(s,'prefix',options);
+ // Build history without re-importing the entire growing Notes report per action.
+ // Real import, size-limit and atomic-refusal assertions remain in the suites below.
+ const s=signsSeed(),options={canExport:()=>true};c.openMarketBench(s,'prefix',options);
  for(const p of s.signs.source.prefix.prefixes)for(const b of s.signs.source.prefix.parts){c.setMarketPrefix(s,{prefixId:p.id},options);c.setMarketPrefix(s,{partId:b.id},options);c.keepMarketSign(s,options);}
  for(const id of [...Object.keys(choiceKeys),'B5','E2']){c.openMarketJob(s,id,options);const r=c.marketSignsView(s).record;r.work=workFor(r.source);for(let i=0;i<16;i++)c.checkMarketJob(s,options);c.keepMarketVersion(s,options);}
  return s;
@@ -347,7 +349,7 @@ const crateKeys={D1:'c',D2:'c',D3:'a',D4:'b'};
 const crateLight={canExport:()=>true};
 const crateSelect=(s,wordId,opts=crateLight)=>c.setMarketCrate(s,{wordId},opts);
 export function fullCrateSignsNotebook(){
- const s=fullPatternSignsNotebook();
+ const s=fullPatternSignsNotebook(),options=crateLight;
  // A real older shelf remains an independent populated root throughout.
  assert.ok(shelfCore.openWordListShelf(s,options).ok);
  for(const w of shelfCore.wordListShelfView(s).shelf.playable)assert.ok(shelfCore.placeWordListCard(s,w.id,w.clues[0].trayId,options).ok);

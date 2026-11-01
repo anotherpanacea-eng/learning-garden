@@ -152,3 +152,39 @@ Keep the existing runner. No test registry, selector, coverage dashboard or new
 validation framework is needed. During editing run affected suites; run the
 full source set once for the integrated candidate. Counts are diagnostics,
 not evidence of educational effectiveness or a delivery quota.
+
+
+## Measured fixture follow-up (main cdb790a4)
+
+Fresh inventory: 257 source suites, 20,064 physical lines before this patch,
+79 file-reading suites and 144 browser entry files. Assertion totals include
+loop iterations; Balance Both alone reports over five million assertions.
+The prior cuts removed 657 redundant assertions. This follow-up removes
+repeated setup work without removing any assertions.
+
+Prefix, Crate and Beat Bench fixture builders now use an accepting setup gate,
+as Ending and Pattern setup already did. This avoids repeatedly importing the
+entire growing Notes report, including when downstream fixtures rebuild the
+prefix fixture. Production actions still build the notebooks; there is no
+hand-built replacement save, cache, new runner or production change.
+
+Real import remains in ordinary behavior tests, maximum-notebook round trips,
+capacity rejection and atomic-refusal tests. Those assertions are unchanged.
+A temporary baseline/candidate comparison held the unrelated initial Cafe
+random choice fixed and required deep equality of the complete output from
+all five builders. All five passed. Exported interfaces and browser consumers
+are unchanged; no temporary benchmark modules enter the repository.
+
+Observed suite times: Market Signs 32.78s before / 29.17s after; Beat Bench
+15.42s before / 10.66s after. Both retained all assertions (8,154 across the
+four Market Signs groups; 671 in Beat Bench). The after runs overlapped the
+fixture comparison: these are indicative single-host observations, not a
+controlled overall speedup benchmark.
+
+The priorities above still stand. Word-List Shelf, Market Signs and Beat Bench
+also repeat full browser catalogues at three widths; these are candidates for
+one full catalogue plus deliberate narrow/wide edge samples. Negative source
+rules such as “no held app edit needed” encode obsolete authoring constraints
+and can go where native routing already covers behavior. Keep actual transfer,
+recovery, independent subject oracles and accessibility checks. This remains
+a targeted semantic audit, not a line-by-line justification of 20,000 lines.
