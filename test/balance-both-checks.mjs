@@ -99,7 +99,6 @@ for(const s of bothCases){const state=make(s.id);const original=copy(work(state)
 {
  const s=copy(bothCases[0]);for(const mutate of [x=>x.parcelMass=0,x=>x.parcelMass=13,x=>x.bagUnits=5,x=>x.start.left.parcels=6,x=>x.start.left.bags=4,x=>x.start.left.units=21,x=>{x.start.left.parcels=5;x.start.left.bags=1;},x=>{x.start.left.units=20;x.start.left.bags=1;},x=>x.learn[0].facts=[[2,-1]]]){const source=copy(s);mutate(source);ok(!B.validBothSource(source));}
  eq(bothCases.map(s=>s.example.flatMap(l=>l.facts)),[[[2,4]],[[3,3]],[[3,4]],[[2,5]]]);
- const equations=[[2,4,2,1,6,10],[1,3,6,3,0,9],[3,4,2,1,10,14]];for(const [a,p,u,b,v,total] of equations){eq(a*p+u,total);eq(b*p+v,total);}eq(2*(4+1),4+6);eq(2*4+3,4+7);
  eq(B.bothSubstitution(bothCases[0],4),{left:'3 × 4 + 4',right:'4 + 12',model:{left:16,right:16,relation:'equal'}});
  eq(B.bothSubstitution(bothCases[3],4),{left:'3 × (4 + 2)',right:'4 + 14',model:{left:18,right:18,relation:'equal'}});
  const state=make('both-sides-2');ok(B.setBothGroups(state,5,options));eq(work(state).groups,5);const saved=copy(work(state));ok(B.startBoth(state,'both-sides-3',options));ok(B.startBoth(state,'both-sides-2',options));eq(work(state),saved);ok(!B.setBothGroups(state,6,options));

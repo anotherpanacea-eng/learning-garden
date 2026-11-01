@@ -101,3 +101,54 @@ failed to load Notes with a default Python HTTP server; the established
 `git diff --check` passed. Mill Energy's existing failure remains explicitly
 unresolved and outside the changed suites.
 No deployment is needed because `dist/` is unchanged.
+
+## Follow-up inventory and cuts (main 0cc828fc)
+
+The current runner discovers **257 source suites, 19,959 physical lines**.
+79 suites read files; that is a review queue, not 79 bad suites. For example,
+Equal Groups extracts a real app function and executes it to check exposure;
+that is materially stronger than its separate `app.includes` routing assertion.
+Rendered text, frozen historical source, independent subject oracles, and source
+spelling must not be lumped together just because all involve strings.
+
+This bounded second pass removes eleven constant-only assertions: eight
+hard-coded arithmetic equalities in Balance Both and three assertions about
+Copy Frame's test-local shape oracle/constants. None calls production code.
+The actual authored Copy Frame examples are still compared through production
+helpers. Lift Yard's identical unstarted rendering moves out of its 28-job ×
+four-length loop: one assertion replaces 112 copies. Its exhaustive model,
+drawing geometry, in-flight preservation and native lifecycle coverage remain.
+These are maintenance cuts, not a claimed material source-run speedup.
+
+### Prioritized further simplification
+
+1. **Cumulative fixture construction.** `fullSignsNotebook` runs actual pretty
+   Notes import preflight for each setup action. Ending, Pattern and Crate
+   fixtures rebuild that base, and Beat Bench builds the combined fixture
+   again. Imports are guarded, so this is repeated fixture work rather than
+   accidental execution of whole imported suites. Use a cheap accepting gate
+   for fixture construction, with explicit real-import/size/refusal tests at
+   the integration boundary. Before changing it, compare resulting fixture
+   values and demonstrate that real-gate refusal and historical transfer remain
+   covered. This is the strongest concrete runtime candidate from this pass;
+   it is not yet changed or benchmarked.
+2. **Repeated browser catalogues.** Copy Frame still runs its journey at three
+   widths. Retain one full catalogue and representative longest/edge-state
+   responsive cases, as with Lift Yard. Mill Energy needs its existing layout
+   failure resolved before making the same reduction; a failing check is not
+   ceremony merely because it is inconvenient.
+3. **Source-spelling checks.** Remove remaining app substring/route-order and
+   literal stylesheet-tag checks when actual route/navigation/style-lifecycle
+   tests cover the behavior. Keep executable host-function tests and narrow
+   content identity checks until their particular contract has a replacement.
+4. **Large arithmetic grids.** Balance Both currently exercises 1,579,152
+   independent action cases. Its unary operations could potentially be checked
+   against every single pan plus a small set of opposite-pan boundaries;
+   paired sharing/removal needs separate joint-state coverage. Do not replace
+   the Cartesian grid with arbitrary random sampling or delete it solely to
+   lower the assertion total. Establish equivalent fault detection first.
+
+Keep the existing runner. No test registry, selector, coverage dashboard or new
+validation framework is needed. During editing run affected suites; run the
+full source set once for the integrated candidate. Counts are diagnostics,
+not evidence of educational effectiveness or a delivery quota.

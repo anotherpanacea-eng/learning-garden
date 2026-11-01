@@ -38,7 +38,6 @@ for(const [id,a,b,tn,td,similarCount,goalCount] of cases){
 eq(states,864);eq(similarTotal,50);eq(requestedTotal,10);
 // Turned equal shape, same-area different shape, and the square exception.
 ok(copyFrameModel({caseId:'small-panel',width:3,height:2}).matching==='turned');ok(copyFrameReading({caseId:'small-panel',width:3,height:2}).includes('Same shape and same size'));
-ok(!shape(2,6,3,4));eq(2*6,3*4);ok(shape(4,3,3,4));
 for(const side of [1,2,3,4,6,12]){const m=copyFrameModel({caseId:'square-panel',width:side,height:side});ok(m.matching);ok(copyFrameReading({caseId:'square-panel',width:side,height:side}).includes('added or taken away'));}
 ok(!copyFrameModel({caseId:'long-panel',width:6,height:8}).matching,'equal addition to non-square is not scaling');
 for(let i=0;i<4;i++){const m=copyFrameExample(i);eq([m.width,m.height],[[2,3],[2,6],[4,6],[3,4]][i]);eq([m.originalWidth,m.originalHeight],[2,3]);eq(m.displayIndex,i+1);eq(changeCopySide(m,'width',1),null);eq(turnCopyFrame(m),null);eq(resetCopyMaterial(m),null);}

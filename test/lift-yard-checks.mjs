@@ -11,11 +11,12 @@ const circlePolygon=(c,points)=>{
  for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length],dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((c.x-a[0])*dx+(c.y-a[1])*dy)/(dx*dx+dy*dy)));min=Math.min(min,Math.hypot(c.x-a[0]-t*dx,c.y-a[1]-t*dy));}
  return min-18;
 };
+// The unstarted host view is identical across jobs; exercise it once.
+const freshHTML=(()=>{const b={};resetLiftYard();return liftYardPage(b,'synthetic');})();ok(!freshHTML.includes('trip waits at')&&!freshHTML.includes('Keep current trip'),'unstarted has no waiting trip');
 for(let index=0;index<28;index++){
  const base={...freshLiftYard(),offset:index},job=liftJob(base);ok(liftLengths.some(L=>L<=job.board&&job.weight/L<=job.capacity),'every case solvable');
  for(const L of liftLengths){
   let s=changeLift(base,'board',L),v=liftView(s);equal(v.length,L);equal(v.force,job.weight/L);equal(v.fullWork,job.weight*1);ok(Number.isInteger(v.force),'integer force');equal(v.distance,0);equal(v.stock,L<=job.board);equal(v.capacity,job.weight/L<=job.capacity);
-  const freshHTML=(()=>{const b={};resetLiftYard();return liftYardPage(b,'synthetic');})();ok(!freshHTML.includes('trip waits at')&&!freshHTML.includes('Keep current trip'),'unstarted has no waiting trip');
   const before=JSON.stringify(s);let started=changeLift(s,'start');equal(JSON.stringify(s),before,'immutable transition');
   if(!v.stock||!v.capacity){equal(started.works[0].notice,!v.stock?'stock':'force');equal(started.works[0].started,false);equal(started.works[0].distance,0);ok(!v.stock?v.capacity:true,'unavailable board always passes capacity');}
   else{
