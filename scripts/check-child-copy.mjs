@@ -106,6 +106,9 @@ export const copyScopes = [
   ],quotations:[
     {quote:'Retries, recorded support or a previously supplied result invite the same relationship',reason:'Inside the Grown-ups: how the connection is chosen panel.'},
   ]},
+  {path:'dist/learning-journeys.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/index.html',adultBlocks:[],quotations:[]},
+  {path:'dist/storm-intro.html',adultBlocks:[],quotations:[]},
   {path:'dist/learning-invitations.mjs',adultBlocks:[],quotations:[
     {quote:'Some English Paris tasks select a sentence supporting a supplied idea; independent composition is unobserved.',reason:'A topic scope note, shown only in Grown-ups learning connections and the parent-facing explore map.'},
   ]},
