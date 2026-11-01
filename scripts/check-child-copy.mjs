@@ -6,6 +6,10 @@ import {resolve} from 'node:path';
 export const copyScopes = [
   {path:'dist/beat-bench-ui.mjs',adultBlocks:[{start:'function notesCases(',end:'\nexport const beatBenchEntry',reason:'Only used in Grown-up notes; child helpers remain in scope.'}],quotations:[]},
   {path:'dist/beat-bench-content.mjs',adultBlocks:[{start:'  "grownup":',end:'\n});',reason:'Only displayed in Grown-up notes.'}],quotations:[]},
+  {path:'dist/word-room-sounds-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/word-room-sounds-content.mjs',adultBlocks:[],quotations:[
+    {quote:"'adult-supplied'",reason:'Stored passage-token role code, not child-facing copy; the passage displays its word, not this code.'},
+  ]},
   {path:'dist/long-word-workshop-ui.mjs',adultBlocks:[{start:'export function longWordNotes(',end:'\nexport const longWordEntry',reason:'Only used in Grown-up notes.'}],quotations:[]},
   {path:'dist/long-word-workshop-content.mjs',adultBlocks:[{start:'export const LONG_WORD_GROWN_UP',end:'\n]);',reason:'Grown-up interpretation and limits, used only in Notes.'}],quotations:[]},
   {path:'dist/word-list-shelf-ui.mjs',adultBlocks:[{start:'function notesKeeps(',end:'\nexport const wordListShelfEntry',reason:'Only used in Grown-up notes.'}],quotations:[]},
@@ -175,27 +179,14 @@ export const copyScopes = [
   {path:'dist/broad-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/broad-variants.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/equal-groups-content.mjs',adultBlocks:[],quotations:[]},
-  {path:'dist/equal-groups-core.mjs',adultBlocks:[],quotations:[
-    {quote:'(w.provenance===null||object(w.provenance)&&PLACES.includes(w.provenance.source)&&GROUP_UNKNOWNS.includes(w.provenance.unknown)&&object(w.provenance.case)&&w.provenance.case.id===c.id&&[\'groups\',\'each\',\'total\'].every(k=>w.provenance.case[k]===c[k])&&modelValid(c,w.provenance.model)&&supportValid(w.provenance.support))',reason:'A saved-record validator; code identifiers, not copy.'},
-    {quote:'familiar:false,provenance:null',reason:'A code identifier, not copy.'},
-    {quote:'if(w.provenance){familiar=true;support=mergeSupport(support,w.provenance.support);}',reason:'A code identifier, not copy.'},
-    {quote:'w.provenance={source,unknown:x.unknown,case:clone(x.case),model:clone(x.model',reason:'A code identifier, not copy.'},
-    {quote:'priorSupport:clone(w.provenance.support)',reason:'A code identifier, not copy.'},
-  ]},
-  {path:'dist/equal-groups-ui.mjs',adultBlocks:[],quotations:[
-    {quote:'${work.provenance?`',reason:'A code identifier, not copy.'},
-    {quote:'${work.provenance.source===',reason:'A code identifier, not copy.'},
-    {quote:'${w.provenance?`<p>Carried from ${esc(w.provenance.source)}; source question: ${esc(w.provenance.unknown)}.',reason:'Inside equalGroupsNotes, used only in Grown-up notes.'},
-  ]},
+  {path:'dist/equal-groups-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/equal-groups-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/facts-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/facts-ui.mjs',adultBlocks:[],quotations:[
     {quote:'Opening the picture is recorded as support, even if it is closed or counted again.',reason:'Inside the For grown-ups panel.'},
     {quote:'The shown answer and explanation stay recorded as support.',reason:'Inside the For grown-ups panel.'},
   ]},
-  {path:'dist/forage-core.mjs',adultBlocks:[],quotations:[
-    {quote:'...(collected?{supplied:raw.baskets*raw.bites}:{})',reason:'A code identifier, not copy.'},
-    {quote:'trip.supplied=trip.total',reason:'A code identifier, not copy.'},
-  ]},
+  {path:'dist/forage-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/forage-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/bramble-film.html',adultBlocks:[],quotations:[]},
   // Café and kitchen renderers (text review 2026-10-22, cafe-kitchen area), including art and core modules.
@@ -232,6 +223,12 @@ function uniqueAt(text, fragment, label) {
   if(at<0||text.indexOf(fragment,at+1)>=0)throw Error(`${label}: marker is missing or ambiguous`);
   return at;
 }
+// A code property access (`w.provenance`, `w?.provenance`) or a bare object key (`{supplied:`, `,provenance:`)
+// is an identifier, not copy. Lexical only: prose candidates with a space before or no colon after stay flagged.
+function codeIdentifier(text, at, length) {
+  if(/\??\.$/.test(text.slice(Math.max(0,at-2),at)))return true;
+  return /[{,]\s*$/.test(text.slice(Math.max(0,at-40),at))&&/^\s*:/.test(text.slice(at+length,at+length+8));
+}
 export function scanCopySource(text, {path='fixture',adultBlocks=[],quotations=[]}={}) {
   let visible=text;
   for(const [i,block] of adultBlocks.entries()) {
@@ -250,8 +247,11 @@ export function scanCopySource(text, {path='fixture',adultBlocks=[],quotations=[
   const flags=[];
   for(const term of terms) {
     const pattern=new RegExp(`(?<![\\p{L}\\p{N}_])${term.split(' ').map(escape).join('\\s+')}(?![\\p{L}\\p{N}_])`,'giu');
-    for(const match of visible.matchAll(pattern))flags.push({path,line:text.slice(0,match.index).split('\n').length,term,
+    for(const match of visible.matchAll(pattern)) {
+      if(codeIdentifier(visible,match.index,match[0].length))continue;
+      flags.push({path,line:text.slice(0,match.index).split('\n').length,term,
       excerpt:text.slice(Math.max(0,match.index-45),match.index+match[0].length+65).replace(/\s+/g,' ')});
+    }
   }
   return flags.sort((a,b)=>a.line-b.line||a.term.localeCompare(b.term));
 }

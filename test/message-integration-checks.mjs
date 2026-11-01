@@ -6,6 +6,7 @@ import {ExplorerStore} from '../dist/explorer-storage.mjs';
 import {MESSAGE_CASES} from '../dist/message-content.mjs';
 import {messageState,currentMessage,chooseMessageCase,setMessagePage,setMessageText,setMessageCard,setMessageClue,testMessageCard,useMessageSupport,carryMessage,recoverMessages} from '../dist/message-core.mjs';
 import {messagePage,messageNotes,messageEntry,bindMessages} from '../dist/message-ui.mjs';
+import {createSpellingMessage,setPostMessageOriginal,keepSpellingMessage,noteSpellingHelp,spellingView} from '../dist/message-spelling-core.mjs';
 import {destinationNotes} from '../dist/notebook-sections.mjs';
 import {startPostOffice} from '../dist/post-office-core.mjs';
 import {deliveries} from '../dist/post-office-content.mjs';
@@ -75,4 +76,18 @@ ok(endingSource,'host endingFilm function extracted');
 const endingAt=hash=>new Function('location','choosingExplorer','state','currentPostOffice','postOfficeView',endingSource+';return endingFilm();')({hash},false,{},()=>({closed:false,rival:{phase:'resolved'}}),()=> 'bramble');
 for(const route of ['messages','letters','instructions','packing'])eq(endingAt('#post/'+route),null,'focused task does not trigger Bramble ending');
 eq(endingAt('#post/play'),'bramble','ordinary resolved rival still triggers its ending');ok(app.includes('!groupBench&&!messageBench'),'unrelated invitations suppressed on focused task');
+{
+ const report=s=>({title:'After the Storm: observations',note:'Synthetic reader message.',exportedAt:'2026-11-01T03:00:00.000Z',explorer:{avatar:'sky',color:'gold',symbol:'leaf'},recommendation:{reason:'Synthetic report'},...s});
+ const options={canExport:s=>prepareProgressImport(JSON.stringify(report(s),null,2)).ok};
+ const storage=new Storage(),store=new ExplorerStore(storage);let s=initializeExplorerState(store.load());const id=store.active.id;
+ chooseMessageCase(s,'post','basket');setMessageText(s,'post','original','Earlier fictional draft.');
+ ok(createSpellingMessage(s,'basket',null,options).ok,'bridge creation passes real whole-notebook importer');eq(currentMessage(s,'post').work.original,'Earlier fictional draft.','electing the writing mode never overwrites earlier ordinary prose');
+ ok(keepSpellingMessage(s,'basket',options).ok,'first elective version fits report');
+ ok(setPostMessageOriginal(s,'A different fictional revision.',options).ok,'guarded shared text edit passes whole-notebook gate');noteSpellingHelp(s,'basket','teaching',options);keepSpellingMessage(s,'basket',options);
+ const imported=prepareProgressImport(JSON.stringify(report(s),null,2));ok(imported.ok,'download report imports');eq(imported.state.messages,s.messages,'frozen source, literal versions and help survive complete report import');
+ store.save(s);eq(new ExplorerStore(storage).load().messages,s.messages,'elected versions reload from explorer storage');
+ const other=store.add({},s);ok(!other.messages,'another explorer starts without bridge prose');s=store.select(id,other);eq(spellingView(s,'basket').latest.text,'A different fictional revision.','returning explorer keeps its own latest version');
+ s.messages.cases.basket.post.spelling.help='unreadable historical support';const raw=structuredClone(s.messages);eq(prepareProgressImport(JSON.stringify(report(s))).state.messages,raw,'unknown optional bridge support stays raw in a real import');
+ store.setPersistence(false,s);store.save(s);ok(!new ExplorerStore(storage).load().messages,'saving off leaves no persistent original prose or bridge');
+}
 console.log(`Message-reader UI/storage integration: ${checks} passed.`);

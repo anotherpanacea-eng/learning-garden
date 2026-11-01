@@ -23,7 +23,7 @@ All files are in the owner's Dropbox, not in this repository:
 | The Opening of the Ways | Act VI ending | spec 120 | Not built | 61 s |
 | Sound as a wave | Process clip | [146](specs/146-bell-and-drum.md) | Proposed spec only | 36 s |
 | The mill wheel: where the energy goes | Process clip | [147](specs/147-mills-energy.md) |308operation live through PR252/253;309whole-film repair/pictures clear; local integration under review for tracking/caption/pour repairs | 32 s |
-| The water cycle at the weather station | Process clip | [140](specs/140-weather-station.md) | Proposed spec only | 37 s |
+| The water cycle at the weather station | Process clip | [346](specs/346-water-cycle-ring.md) finite ring at the 281 weather page; broader [140](specs/140-weather-station.md) | Spec 346 proposed; picture and caption gate open | 37 s |
 | Closed and open circuit | Process clip | [163](specs/163-sparks-and-switches.md) | Proposed spec only | 35 s |
 | Particles as ice melts | Process clip | [304 finite integration](specs/304-water-film.md); broader[168](specs/168-little-drawers.md) | Delivered through PR248; corrected full film | 35 s |
 | Ramp and lever | Process clip | [305 ramp-first operation](specs/305-lift-yard.md); broader[154](specs/154-ramps-levers-hoist.md) |305/306operations delivered;307full corrected film live through PR251 | 38 s |

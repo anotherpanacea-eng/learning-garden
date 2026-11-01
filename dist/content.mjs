@@ -5,7 +5,7 @@ export const checkin = [
   solution:'There are 4 groups of 3. You can add 3 + 3 + 3 + 3, or use 4 × 3. There are 12 seeds.',
   talk:'What does one row stand for? Can you show where the 4 and the 3 appear in the picture?'},
  {id:'strategy',skill:'strategy',label:'Using a known fact',title:'Something you already know',kind:'choice',
-  prompt:'You know that 5 × 7 = 35. Which expression would help you find 6 × 7?',answer:1,
+  prompt:'You know that 5 × 7 = 35. Which number sentence would help you find 6 × 7?',answer:1,
   choices:['35 + 1','35 + 7','6 + 7'],a:6,b:7,
   hint:'Six groups of seven is one more group of seven than five groups.',
   solution:'35 + 7 works. Five groups of 7 make 35; one more group of 7 makes 42. So 6 × 7 = 42.',

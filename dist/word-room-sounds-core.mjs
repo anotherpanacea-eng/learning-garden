@@ -40,9 +40,11 @@ export function validSoundMessages(r){
     map(r.records)&&(r.selectedId===null||code(r.selectedId))&&['choose','case','message','letters'].includes(r.page)&&
     (!own(r,'letterId')||r.letterId===null||code(r.letterId))&&(!own(r.sharedHelp,'letters')||typeof r.sharedHelp.letters==='boolean');
 }
-const packetField=pack=>pack==='show'?'soundMessages':pack==='market'?'marketSoundMessages':null;
-export const activeSoundPacket=book=>validSoundMessages(book?.wordRoom?.marketSoundMessages)&&book.wordRoom.marketSoundMessages.active?'market':'show';
-const fresh=pack=>({v:1,active:true,source:makeSoundMessageSource(pack),sharedHelp:pack==='market'?{message:false,letters:false}:{message:false},selectedId:null,records:{},page:'choose',...(pack==='market'?{letterId:null}:{})});
+export const soundPackets=Object.freeze(['show','market','garden']);
+export const soundPacketField=pack=>pack==='show'?'soundMessages':pack==='market'?'marketSoundMessages':pack==='garden'?'gardenSoundMessages':null;
+const packetField=soundPacketField;
+export const activeSoundPacket=book=>[...soundPackets].reverse().find(pack=>{const r=book?.wordRoom?.[packetField(pack)];return validSoundMessages(r)&&r.active;})||'show';
+const fresh=pack=>({v:1,active:true,source:makeSoundMessageSource(pack),sharedHelp:pack!=='show'?{message:false,letters:false}:{message:false},selectedId:null,records:{},page:'choose',...(pack!=='show'?{letterId:null}:{})});
 export function soundLetterSource(s,id){
  const a=Array.isArray(s?.word?.letters)?[...new Set(s.word.letters)]:[];
  return obj(s)&&/^[a-z]$/.test(id)&&s.id===id&&s.glyph===id&&alphabet(a)&&word(s.word,a)&&
@@ -95,11 +97,11 @@ function mutate(book,fn,options={},create=false){
   }catch{return fail('capacity');}
 }
 export const enterSoundMessages=(book,options={},pack='show')=>mutate(book,(r,candidate)=>{
- r.active=true;const other=candidate.wordRoom[packetField(pack==='show'?'market':'show')];if(validSoundMessages(other))other.active=false;
+ r.active=true;for(const otherPack of soundPackets){const other=candidate.wordRoom[packetField(otherPack)];if(otherPack!==pack&&validSoundMessages(other))other.active=false;}
  return{ok:true};
 },{...options,pack},true);
 export const leaveSoundMessages=(book,options)=>mutate(book,(r,candidate)=>{
- r.active=false;for(const key of ['soundMessages','marketSoundMessages'])if(validSoundMessages(candidate.wordRoom[key]))candidate.wordRoom[key].active=false;
+ r.active=false;for(const key of soundPackets.map(packetField))if(validSoundMessages(candidate.wordRoom[key]))candidate.wordRoom[key].active=false;
  return{ok:true};
 },options);
 export function chooseSoundCase(book,id,mode,options){
