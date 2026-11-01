@@ -32,11 +32,11 @@ Oral checking plan: **If a spelling feels uncertain, tell someone how you could 
 ## References and carry
 
 - Source action: **Use this clue in a message**.
-- Pip's optional preview action: **Show Pip's supplied example**. Preview label: **Pip's supplied example, not your answer**.
+- Pip's optional preview action: **Show Pip's example**. Preview label: **Pip's example, not your answer**.
 - Reference heading: **A clue beside my message**.
 - Reference label: **{word} · {label}**. Body: **{clue}**.
 - Reference reminder: **This word may not belong in your message. Its clue shows one way to check a word you do use.**
-- Confirmation: **This carries one supplied word and its clue. Your answers and checks stay here. The clue will be kept with that message in this explorer's notes and downloads.**
+- Confirmation: **This carries one example word and its clue. Your answers and checks stay here. The clue will be kept with that message in this explorer's notes and downloads.**
 - Choice: **Choose a reader for this clue**.
 - Pending notice: **This clue is waiting for you to choose a reader. Closing or reloading leaves it behind. Your word-study work stays.**
 - Commit: **Bring this clue**. Cancel: **Back to word study**.
@@ -73,3 +73,7 @@ Heading: **Spelling for a reader**.
 Meaning: **The child chose a purpose and could compose, consult a spelling reference and revise for a reader. These are exact elected versions, not marks or levels. A copied word does not show spelling from memory.**
 Support: **The reader question was supplied. Opened teaching, displayed references and read-aloud are recorded where readable. Human help, dictionary use, paper work and device spelling suggestions are not tracked. Missing help flags do not mean independent work.**
 History: **The first and latest explicitly kept versions are shown. Intermediate drafts and spoken or paper responses are not recorded. The current typed draft is separate. Original words are included in Notes downloads.**
+
+## Turn and reference navigation labels
+
+The four turn labels are **Plan**, **Write or tell**, **Read together**, **Revise**, with **Back**, **Next** and a literal position **{n} of 4** (1–4). Other headings/navigation: **My message**, **Revise for this reader**, **My kept versions**, **Back to the note cards**, **Look at the scene and note**. A reload without a pending reference says **This pending clue is no longer here. Your word-study work stays.** The reader's existing purpose/title stays visible; no generated reader response is implied.

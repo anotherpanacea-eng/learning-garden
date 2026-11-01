@@ -19,7 +19,7 @@ export const spellingCopy=Object.freeze({
  checking:'If a spelling feels uncertain, tell someone how you could check it. Then try that plan together.',
  referenceTitle:'A clue beside my message',
  referenceReminder:'This word may not belong in your message. Its clue shows one way to check a word you do use.',
- confirmation:'This carries one supplied word and its clue. Your answers and checks stay here. The clue will be kept with that message in this explorer\'s notes and downloads.',
+ confirmation:'This carries one example word and its clue. Your answers and checks stay here. The clue will be kept with that message in this explorer\'s notes and downloads.',
  pending:'This clue is waiting for you to choose a reader. Closing or reloading leaves it behind. Your word-study work stays.',
  waiting:'A message is already waiting for this reader. You can open it as you left it, or go back.',
  noReference:'You can use your own clue, a dictionary or a person\'s help. You don\'t have to bring a word.',
