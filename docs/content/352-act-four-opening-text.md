@@ -9,9 +9,8 @@ These are copied exactly, and not re-quoted here:
   - the carried question and the hook;
   - the opening, Short and Longer;
   - chapter 1's title and Short;
-  - chapter 1's Longer, except for the one adapted line below;
+  - chapter 1's Longer, except for the adapted line below;
   - chapter 1's Keeper's note;
-  - the Sapling job's Kept line, used on purpose as this slice's Kept line.
 - From [the Keeper of the Ways text](120-keeper-of-the-ways-text.md) §3: Page 4's edge word, the "When it comes free" line, Short, Longer and Hollis's page.
 - From [the 326 companion](326-both-ways-across-willow-bridge-text.md): Act III's between-acts line stays where it is, above the new invitation.
 
@@ -19,7 +18,7 @@ These are copied exactly, and not re-quoted here:
 
 Not shipped from act-4.md in this slice: chapters 2 to 4, the chapter 1 job lines (Sprout, Seedling, Sapling and their prompts), the Keeper's Desk case idea, the meeting, the plans and worries, the ending, the season lines, the almanac line and Act IV's between-acts line.
 
-**The one adapted line.** Page 4's Longer reading already gives Bramble's hat-and-boots line, and chapter 1's Longer repeats it a moment later. So that the repeat sounds meant, chapter 1's Longer ships with one sentence changed. In act-4.md it reads:
+**Two adapted lines.** The first is in chapter 1's Longer. Page 4's Longer reading already gives Bramble's hat-and-boots line, and chapter 1's Longer repeats it a moment later. So that the repeat sounds meant, chapter 1's Longer ships with one sentence changed. In act-4.md it reads:
 
 > "Five years apart. My hat and my boots both got wet that year too. That doesn't mean my hat did it."
 
@@ -28,6 +27,8 @@ This slice ships:
 > "Five years apart. My hat and my boots both got wet that year too, and I'll keep saying it: that doesn't mean my hat did it."
 
 Everything else in that paragraph is unchanged. "I'll keep saying it" fits both readers: one who heard the line on Page 4's Longer reading, and one who chose Short and hears it here first.
+
+The second is the Kept line. act-4.md's Sapling job (My Count Collection) has "The chart goes up on the library wall. People stand in front of it and argue more quietly than before." This slice accepts an evidence note, which may be unfinished and need not contain a chart, so the Kept line names the note instead. Its second sentence is kept exactly.
 
 ## Starting the act
 
@@ -62,7 +63,7 @@ The chapter shows its reused title, Short or Longer, and Keeper's note. Then com
 - Visit link: Visit the ledger and the rain gauge
 - Candidate label: Evidence note {n}, {first kept / latest kept}, where {n} is the number in the visit's saved id
 - Offer: **Offer this evidence note**
-- Kept (the Sapling Kept line from act-4.md): The chart goes up on the library wall. People stand in front of it and argue more quietly than before.
+- Kept (adapted from act-4.md's Sapling Kept line, see above): Your evidence note goes up on the library wall. People stand in front of it and argue more quietly than before.
 
 | Situation | Text |
 | --- | --- |
