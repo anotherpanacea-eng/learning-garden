@@ -26,7 +26,7 @@ One new entry in `drawn-howtos-content.mjs`, `{version:1, id:'water-ring', ...}`
 
 **Vapor is invisible.** The vapor stage is drawn as a faint dotted outline with its label, and never as a white puff, steam or a cloud, so that the picture does not teach that vapor is visible. The cloud stage is the first visible water above the ground and shows tiny drops with a few ice crystals. The rain stage shows raindrops and a few flakes, so snow is in the picture as well as in the words. Snow is drawn growing from ice crystals, never from a liquid drop.
 
-The entry is hand-placed, like `life-ring`: it has no `at` route, so the page heading never offers it a second time, and the how-to check's list of hand-placed ids gains `water-ring`. Its picture is at most 500 wide and its play-through lasts at most 15 s, the player's existing limits. The ring is laid out on the authored ellipse, as `life-ring` is, so it reads as a loop rather than a line with a return arrow. The authoring script renders it from that frozen data with a fixed seed, and its existing check confirms that the output matches the source. The ring needs no new player, layout engine or runtime dependency.
+The entry is hand-placed, like `life-ring`: it has no `at` route, so the page heading never offers it a second time, and the how-to check's list of hand-placed ids gains `water-ring`. Its picture is at most 500 wide and its play-through lasts at most 15 s, the player's existing limits. The ring is laid out on the authored ellipse, as `life-ring` is, so it reads as a loop rather than a line with a return arrow. The authoring script renders it from that frozen data with a fixed seed, and its existing check confirms that the output matches the source. The authoring script's ring builder (`ring()` in `scripts/drawn-howtos/build.mjs`) draws every stage as a generic stadium with its label through `nodeParts`, so a content entry alone cannot supply these pictures. The build makes one bounded authoring-stroke extension there: optional marks on a ring stage in the frozen data (a dotted outline for vapor, small drop and ice-crystal strokes for cloud, raindrop and flake strokes for rain). They are drawn with the script's existing pencil and dash helpers into that stage's own part, so each stage is still drawn exactly once. The output format, the player and the ellipse layout stay as they are. The ring needs no new player, layout engine or runtime dependency.
 
 The player's existing behavior applies unchanged. Steps play once, then Back and Next revisit them, and the finished picture stays with every caption listed beneath it. Watch again restarts it, and Close returns focus to the button. Reduced motion opens on complete strokes. The picture is `role="img"`, its label is the alt text, and captions go to the player's polite live region. Nothing it does is recorded as support, familiarity or viewing.
 
@@ -99,6 +99,24 @@ These are checked during the focused content review before build:
 They support the four stages, vapor being invisible, clouds being tiny drops or ice, and the loop having many more real paths. No source prose, art or audio is incorporated.
 
 The Marble topic `mt_Qkewo5M3_c` (Evaporation & the Water Cycle) is already mapped in the atlas to Cold Window. This demonstration adds no coverage claim and no new atlas mapping. The Jane LESSONS.md worked-example rule (one idea, with its steps revealed one at a time) is the design reference, as in the drawn how-to proposal. Nothing from Jane is incorporated.
+
+## Curriculum and story placement
+
+**Upstream refresh.** Refreshed on 2026-11-01 from Code-PC, read-only: Jane at `e88f81a00553fb87818ef84c77a8800f0dcb33e4` and Marble os-taxonomy at `5e23196fa60050433f1440057f65a978d39e63fc`. Jane `LESSONS.md` stays a design reference only (the worked example above). Upstream Marble has grown since the app's pinned slice, but the target's three direct prerequisite edges, their reasons and the four topics' names and descriptions match the pinned slice exactly. Upstream changes only the target's age range end (10, against 9 locally), adds Australian curriculum standard codes to the target and to Heating & Cooling Changes, and recomputes centrality. None of that changes the crosswalk, so the slice is not re-pinned here. The pinned Marble slice in `curriculum/marble/` is the crosswalk source below.
+
+**Marble target and prerequisite crosswalk (spec 49 §8).** The candidate target is `mt_Qkewo5M3_c` (Evaporation & the Water Cycle), as a candidate, not a coverage claim. Its direct prerequisites in `curriculum/marble/dependencies.json`:
+
+| Prerequisite | Strength | What this demonstration supplies | What stays elsewhere or unfinished |
+| --- | --- | --- | --- |
+| `mt_ahSqW_kK1b` Changes & Separation Vocabulary | hard | The words evaporate and condense used once each, on the arrow where the change happens, beside the picture of the change. | Teaching the process vocabulary as such, with its contrasts and practice. This ring only uses the words in context. |
+| `mt_Pl-nsjYGZ3` Heating & Cooling Changes | hard | A worked picture of warming (the Sun on the brook) and cooling (rising air) beside the change each one causes. | The state-change investigations themselves: Water Lab's evaporation mission pictures and Cold Window's condensation and evaporation encounter. Melting, freezing and controlled heating stay with those owners. |
+| `mt_fhqVdj4BYr` The Water Cycle | soft | The same four-stage loop, as a picture. | Any curriculum water-cycle lesson beyond this one picture. |
+
+Nothing here locks or unlocks another activity, and the atlas keeps its current Water Lab and Cold Window scopes: the full water cycle stays untaught there, and this demonstration does not change that claim.
+
+**Spec 49 teaching encounter (§5).** The ring supplies only the teaching encounter: one idea at a time, revealed step by step, with Back, Next and replay under the learner's control. It supplies no contrast case, supported practice, new application or purposeful revisit. Those belong to the deferred part of spec 140 bench (b) (the drag-onto-the-ring task) and to later weather and Rain Paths work, and they stay uncommissioned here.
+
+**Six acts and story.** The six-act strand family is S7-II (water cycle; temperature, instruments and local records, [six-act strands](../six-act-strands.md)). In spec 120's story it sits at Dot's weather station, whose job is the town's own weather record. The ring answers the page's question of where rain comes from, beside the records the station already keeps. It changes no story chronology, page reveal or act ending, and it gives no Act IV or Act VI flood answer.
 
 ## Acceptance
 
