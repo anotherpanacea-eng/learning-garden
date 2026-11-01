@@ -34,7 +34,7 @@ const collection = {
     prompt:'Where is the pretend map? Tell your partner how you know.',
     art:'show-message342',alt:'A theater prop corner. A cat sits on a mat. A cap rests on a folding bed. A rolled pretend map sticks out of a tin.'},
 };
-export const makeSoundMessageSource = (pack='show') => pack==='show'?structuredClone(collection):pack==='market'?structuredClone(marketCollection):pack==='garden'?structuredClone(gardenCollection):null;
+export const makeSoundMessageSource = (pack='show') => pack==='show'?structuredClone(collection):pack==='market'?structuredClone(marketCollection):pack==='garden'?structuredClone(gardenCollection):pack==='delivery'?structuredClone(deliveryCollection):null;
 export const soundMessageCopy = {
   title:'Labels for the show',story:'Dot is getting the library show ready. Some prop labels got wet. Can you and your reading partner make new ones?',
   entry:'Try a sound-changing label',chooser:'Choose a label game. You can try any one.',
@@ -320,4 +320,47 @@ export const gardenSoundCopy={
   "noteIntro": "Underlined words are our prop labels. Your partner can read any words with you.",
   "noteName": "garden-show note",
   "grownup": "This packet offers r, l, w and y in selected words. We keep the letters you arrange and the help opened here. Earlier teaching, pictures or other games may already have made a word familiar. A sound comparison can also give a word's meaning. This does not show how a child read, spoke or spelled it. Read the note together; your partner supplies the other words."
+};
+
+// Original348: delivery props, action meanings and a shared note. Adult-led, no oral grading.
+const deliveryAlphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "v", "w", "y", "z"];
+const deliveryWords={
+ pet:{...word("pet","A pet is an animal someone cares for at home.","reference-only348","Use the animal noun, not the action of stroking."),alt:"A toy cat sits beside its little home basket."},
+ jet:{...word("jet","A jet is a kind of aircraft. This one is a toy.","jet348","Use the aircraft meaning, not a stream of liquid. The first sound stays together."),alt:"A toy jet aircraft has swept wings and a jet engine."},
+ sit:{...word("sit","To sit is to rest on a seat.","reference-only348","Use the action, not the earlier-action word sat. Model or explain it."),alt:"Two pictures: a puppet stands by a stool, then sits on it."},
+ kit:{...word("kit","A kit is a set of things for a job. This one holds puppet-repair tools.","kit348","Name the repair-tool set, not a baby animal. Here k has the first sound heard in cat."),alt:"An open box with a handle holds a spool, a patch and blunt pretend repair tools."},
+ fan:{...word("fan","A fan moves air. This one is a pretend hand fan.","reference-only348","Use the air-moving object, not someone who likes a performer."),alt:"A folded hand fan opens beside a puppet."},
+ van:{...word("van","A van carries people or things. This one is a toy delivery van.","van348","Use the vehicle meaning. Model v naturally without adding uh."),alt:"A toy delivery van has a box-shaped cargo space and two visible wheels."},
+ sip:{...word("sip","To sip is to take a small drink.","reference-only348","Use the action, not a still cup alone."),alt:"Two pictures: a puppet lifts a cup, then takes a small drink."},
+ zip:{...word("zip","To zip a bag is to close it with a zipper.","zip348","Here zip means closing with a zipper, not moving fast or a computer file. Model the action or explain it."),alt:"Two pictures: a costume bag is open, then its zipper is closed."},
+ jot:{...word("jot","To jot is to write a quick note.","jot348","Use the writing action. If you show the picture, its marks are pretend, not readable Keeper writing. Local vowel differences are not errors."),alt:"Two pictures: a card is blank, then a pencil leaves a few short marks on it."},
+ vat:{...word("vat","A vat is a large container. This one is a pretend stage prop.","vat348","Name the container before working if needed. This is not the abbreviation VAT. No real handling task is required."),alt:"A large open toy vat stands on a low stage platform."},
+};
+const deliveryCase=(id,title,left,right,position,frames)=>structuredClone({id,title,alphabet:deliveryAlphabet,left:deliveryWords[left],right:deliveryWords[right],position,frames,example});
+const deliveryText="I can jot a note. A jet is in a van. A kit is by a vat. I can zip a bag.";
+const deliveryTargets=new Set(["jot", "jet", "van", "kit", "vat", "zip", "bag"]);
+const deliveryCollection={id:"delivery-labels",revision:1,
+ cases:{
+  "first-1":deliveryCase("first-1","First sound 1","pet","jet",0,["Say pet, an animal cared for at home.", "Say jet, a kind of aircraft. Listen to the first sound.", "The first sound changed. The middle and last stayed the same."]),
+  "first-2":deliveryCase("first-2","First sound 2","sit","kit",0,["Say sit: rest on a seat.", "Say kit, a set of repair tools. Listen to the first sound.", "The first sound changed. The middle and last stayed the same."]),
+  "first-3":deliveryCase("first-3","First sound 3","fan","van",0,["Say fan, the object that moves air.", "Say van, a delivery vehicle. Listen to the first sound.", "The first sound changed. The middle and last stayed the same."]),
+  "first-4":deliveryCase("first-4","First sound 4","sip","zip",0,["Say sip: take a small drink.", "Say zip: close a bag with its zipper. Listen to the first sound.", "The first sound changed. The middle and last stayed the same."]),
+  "middle":deliveryCase("middle","Middle sound","jet","jot",1,["Say jet, a kind of aircraft.", "Say jot: write a quick note. Listen to the middle sound.", "The middle sound changed. The first and last stayed the same."]),
+  "last":deliveryCase("last","Last sound","van","vat",2,["Say van, a delivery vehicle.", "Say vat, the large container. Listen to the last sound.", "The last sound changed. The first and middle stayed the same."]),
+ },
+ teaching:{
+  j:{id:"j",glyph:"j",word:deliveryWords.jet,position:0,guidance:"Say jet naturally. Point to j and model its first sound, not the letter name. Keep that sound together; do not add uh."},
+  k:{id:"k",glyph:"k",word:deliveryWords.kit,position:0,guidance:"Say kit naturally. Point to k and model its first sound, not the letter name. Keep it short; do not add uh. Here it is the same first sound as c in cat."},
+  v:{id:"v",glyph:"v",word:deliveryWords.van,position:0,guidance:"Say van naturally. Point to v and model its first sound, not the letter name. Let it flow into the vowel without adding uh."},
+  z:{id:"z",glyph:"z",word:deliveryWords.zip,position:0,guidance:"Say zip naturally. Point to z and model its first sound, not the letter name. Let it flow into the vowel without adding uh."},
+ },
+ message:{id:'delivery-note',title:"Pip's delivery note",text:deliveryText,
+  tokens:[...deliveryText.matchAll(/[A-Za-z]+/g)].map(m=>({text:m[0],start:m.index,end:m.index+m[0].length,role:deliveryTargets.has(m[0])?'target':adultRole})),
+  prompt:'What is in the van? Read together, then show or tell your partner.',art:'delivery-message348',
+  alt:'A toy jet sits inside a delivery van. A repair-kit box is beside a toy vat. Pip holds a pencil over a marked card. A costume bag has its zipper closed.'},
+};
+export const deliverySoundCopy={
+ title:'Delivery labels',story:'Dot is packing pretend delivery props for our puppet show. Pip wrote a note about them. Make labels and read his note together.',
+ noteButton:"Read Pip's delivery note",noteHeading:'The delivery note',noteIntro:'Underlined words are our prop labels. Your partner can read any words with you.',noteName:'delivery note',
+ grownup:"This packet offers j, k, v and z in selected words. We keep the letters you arrange and the help opened here. Earlier teaching, pictures or other games may already have made a word familiar. A sound comparison can also give a word's meaning. This does not show how a child read, spoke or spelled it. Read Pip's note together; your partner supplies the other words."
 };
