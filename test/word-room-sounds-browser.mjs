@@ -58,7 +58,7 @@ async function marketJourneys(){
  const open=async p=>p.locator('[data-wrs-action=enter][data-wrs-pack=market]').tap();
  for(const [width,height]of [[820,1000],[320,600],[1024,768]]){
   const seed=fixture();if(width===820)seed.syntheticOther={payload:'m'.repeat(300000)};
-  if(width===320){enterSoundMessages(seed,{canExport:()=>true},'market');seed.wordRoom.marketSoundMessages.active=false;seed.wordRoom.marketSoundMessages.source.cases['e-middle'].title='X'.repeat(160);}
+  if(width===320){enterSoundMessages(seed,{canExport:()=>true},'market');seed.wordRoom.marketSoundMessages.active=false;seed.wordRoom.marketSoundMessages.source.cases['e-middle'].title='X'.repeat(160);seed.wordRoom.marketSoundMessages.source.teaching['Y'.repeat(160)]={opaque:true};}
   const{c,p}=await setup(width,height,seed);
   try{
    await open(p);eq(await p.locator('[data-wrs-case]').count(),12,'six Market cards in two modes');await layout(p);
