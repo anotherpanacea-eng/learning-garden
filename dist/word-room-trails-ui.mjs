@@ -6,6 +6,11 @@ const button=(action,text,value=null,{disabled=false,pressed=null}={})=>'<button
 const display=w=>w.displayLabel||w.label;
 const context=w=>w.context?'<p class="wrt-context">'+esc(w.context)+'</p>':'';
 const drawings={
+ tub356:"<path d=\"M18 153h284M210 43h82v84h-82Z\" fill=\"none\" stroke=\"#ba865e\" stroke-width=\"6\"/><path d=\"M35 83h148l-12 58H47Z\" fill=\"#ba865e\"/><ellipse cx=\"109\" cy=\"83\" rx=\"74\" ry=\"22\" fill=\"#a4d6dc\"/><path d=\"M51 82q15-8 30 0t30 0 30 0 28 0\" fill=\"none\" stroke=\"#69a7ab\"/><path d=\"m213 47 17 0-8 63-9 9Zm76 0h-17l8 63 9 9Z\" fill=\"#b75249\"/>",
+ tube356:"<path d=\"M234 32h29v32q0 15-14 15t-15-15Z\" fill=\"#f9e9ba\"/><path d=\"M263 40q23-1 11 20h-11\" fill=\"none\"/><path d=\"M249 82h52l-6 23h-40Z\" fill=\"#ba865e\"/><ellipse cx=\"275\" cy=\"82\" rx=\"26\" ry=\"7\" fill=\"#a4d6dc\"/><path d=\"M245 73C132 52 6 130 66 156S231 152 275 86\" stroke=\"#8eb7a3\" stroke-width=\"38\" fill=\"none\"/><path d=\"M245 73C132 52 6 130 66 156S231 152 275 86\" stroke=\"#eaf4ef\" stroke-width=\"23\" fill=\"none\"/><ellipse cx=\"275\" cy=\"86\" rx=\"16\" ry=\"10\" fill=\"#34514b\"/><path d=\"M245 73C132 52 6 130 66 156S231 152 275 86\" fill=\"none\" stroke=\"#69a7ab\" stroke-width=\"8\"/><path d=\"m14 173 28 0-3 10H17Z\" fill=\"#a4d6dc\"/>",
+ cube356:"<path d=\"m82 50 78-45 78 45-78 45Z\" fill=\"#e4b77d\"/><path d=\"m82 50 78 45v90l-78-45Z\" fill=\"#ba865e\"/><path d=\"m160 95 78-45v90l-78 45Z\" fill=\"#a57545\"/><path d=\"M31 187h258\" stroke=\"#8eb7a3\" fill=\"none\"/>",
+ cut356:"<path d=\"M160 20v155\" stroke=\"#8eb7a3\" stroke-dasharray=\"5 6\"/><path d=\"M28 44h96v110H28Z\" fill=\"#fffdf3\"/><path d=\"M197 43h104v112H197v-33l43-24-43-24Z\" fill=\"#fffdf3\"/><path d=\"m181 74 43 24-43 24Z\" fill=\"#f9e9ba\"/><path d=\"M179 73v82\" stroke=\"#ba865e\" stroke-width=\"4\"/><circle cx=\"53\" cy=\"172\" r=\"9\" fill=\"#8eb7a3\"/><circle cx=\"80\" cy=\"172\" r=\"9\" fill=\"#8eb7a3\"/><path d=\"m59 165 33-28m-19 28-30-28\" fill=\"none\"/><path d=\"M139 93h12m-5-5 5 5-5 5\" stroke=\"#397958\" fill=\"none\"/>",
+
  "not355":"<path d=\"M15 170h125m35 0h130m-15-116L181 158m0-104 109 104\" fill=\"none\" stroke=\"#ba865e\" stroke-width=\"5\"/><g transform=\"translate(75 85) scale(1)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#e6b581\"/><path d=\"m-11 17-8 45h38l-8-45Z\" fill=\"#b4a6c8\"/><path d=\"m-11 30-17 14m39-14 17 14m-18 18-3 17m-14-17-3 17\" fill=\"none\" stroke-width=\"5\"/><circle cx=\"-4\" cy=\"-1\" r=\"1\"/><circle cx=\"5\" cy=\"-1\" r=\"1\"/><path d=\"M-4 7q4 3 8 0\" fill=\"none\"/></g><g transform=\"translate(235 58) scale(1)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#e6b581\"/><path d=\"m-11 17-8 45h38l-8-45Z\" fill=\"#b4a6c8\"/><path d=\"m-11 30-17 14m39-14 17 14m-18 18-3 17m-14-17-3 17\" fill=\"none\" stroke-width=\"5\"/><circle cx=\"-4\" cy=\"-1\" r=\"1\"/><circle cx=\"5\" cy=\"-1\" r=\"1\"/><path d=\"M-4 7q4 3 8 0\" fill=\"none\"/></g><path d=\"M181 35 289 159m0-124L181 159\" stroke=\"#b75249\" stroke-width=\"8\" fill=\"none\"/>",
  "note355":"<g transform=\"translate(62 65) scale(1)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#e6b581\"/><path d=\"m-11 17-8 45h38l-8-45Z\" fill=\"#b4a6c8\"/><path d=\"m-11 30-17 14m39-14 17 14m-18 18-3 17m-14-17-3 17\" fill=\"none\" stroke-width=\"5\"/><circle cx=\"-4\" cy=\"-1\" r=\"1\"/><circle cx=\"5\" cy=\"-1\" r=\"1\"/><path d=\"M-4 7q4 3 8 0\" fill=\"none\"/></g><g transform=\"translate(253 65) scale(1)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#e6b581\"/><path d=\"m-11 17-8 45h38l-8-45Z\" fill=\"#69a7ab\"/><path d=\"m-11 30-17 14m39-14 17 14m-18 18-3 17m-14-17-3 17\" fill=\"none\" stroke-width=\"5\"/><circle cx=\"-4\" cy=\"-1\" r=\"1\"/><circle cx=\"5\" cy=\"-1\" r=\"1\"/><path d=\"M-4 7q4 3 8 0\" fill=\"none\"/></g><path d=\"m100 80 73 7-5 66-74-7Z\" fill=\"#fffdf3\"/><path d=\"m108 98 50 4m-51 11 50 4m-51 12 42 3\" stroke=\"#8eb7a3\" fill=\"none\"/><path d=\"M182 111h34m-8-8 8 8-8 8\" stroke=\"#397958\" fill=\"none\" stroke-width=\"4\"/>",
  "hope355":"<g transform=\"translate(46 95) scale(0.85)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#e6b581\"/><path d=\"m-11 17-8 45h38l-8-45Z\" fill=\"#b4a6c8\"/><path d=\"m-11 30-17 14m39-14 17 14m-18 18-3 17m-14-17-3 17\" fill=\"none\" stroke-width=\"5\"/><circle cx=\"-4\" cy=\"-1\" r=\"1\"/><circle cx=\"5\" cy=\"-1\" r=\"1\"/><path d=\"M-4 7q4 3 8 0\" fill=\"none\"/></g><g transform=\"translate(100 95) scale(0.85)\"><circle cx=\"0\" cy=\"0\" r=\"14\" fill=\"#e6b581\"/><path d=\"m-11 17-8 45h38l-8-45Z\" fill=\"#69a7ab\"/><path d=\"m-11 30-17 14m39-14 17 14m-18 18-3 17m-14-17-3 17\" fill=\"none\" stroke-width=\"5\"/><circle cx=\"-4\" cy=\"-1\" r=\"1\"/><circle cx=\"5\" cy=\"-1\" r=\"1\"/><path d=\"M-4 7q4 3 8 0\" fill=\"none\"/></g><path d=\"M141 34q-3-27 30-22 21-20 43-4 32-12 46 12 35 0 33 30 21 29-7 43H155q-29-4-17-29-18-19 3-30Z\" fill=\"#eaf4ef\"/><circle cx=\"131\" cy=\"103\" r=\"7\" fill=\"#eaf4ef\"/><circle cx=\"118\" cy=\"116\" r=\"4\" fill=\"#eaf4ef\"/><path d=\"M166 28h104v39H166Z\" fill=\"#f9e9ba\"/><path d=\"m167 29 20 0-8 30-12 7Zm102 0h-20l8 30 12 7Z\" fill=\"#b75249\"/><path d=\"M165 68h107\" stroke=\"#ba865e\" stroke-width=\"5\"/><g fill=\"#e9b84a\"><circle cx=\"185\" cy=\"83\" r=\"6\"/><circle cx=\"217\" cy=\"83\" r=\"6\"/><circle cx=\"249\" cy=\"83\" r=\"6\"/></g>",
@@ -30,7 +35,7 @@ const drawings={
 };
 function picture(w,c,originalPicture){
  if(['pin','hop'].includes(w.art)&&originalPicture)return originalPicture(w);
- if(['kit348','cap342'].includes(w.art))return soundWordPicture(w)||'<p>'+esc(c.pictureFallback)+'</p>';
+ if(['kit348','cap342','cub343'].includes(w.art))return soundWordPicture(w)||'<p>'+esc(c.pictureFallback)+'</p>';
  if(!Object.hasOwn(drawings,w.art))return '<p>'+esc(c.pictureFallback)+'</p>';
  return '<svg class="wrt-picture" viewBox="0 0 320 190" role="img" aria-label="'+esc(w.alt)+'"><g stroke="#183430" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">'+drawings[w.art]+'</g></svg>';
 }
@@ -38,7 +43,20 @@ function connector(w,g){
  const names=g.sounds.map(n=>'Sound '+(n+1)).join(' and ');
  return (g.letters.length===1?'Letter '+w.letters[g.letters[0]]+' goes with ':'Letters '+g.letters.map(n=>w.letters[n]).join(' and ')+' go with ')+names+'.';
 }
+function spelling(v,id,frame){
+ const w=v.source.words[id],x=i=>160+(i-(w.letters.length-1)/2)*54;
+ const active=frame===4?w.spellingGroups:frame>0?[w.spellingGroups[frame-1]]:[];
+ const selected=active.flat();let svg='';
+ for(const group of w.spellingGroups){
+  const d=group.length===1?'M'+x(group[0])+' 63v18':'M'+x(group[0])+' 63v35H'+x(group.at(-1))+'V63';
+  svg+='<path class="wrt-link'+(active.includes(group)?' wrt-linked':'')+'" d="'+d+'"/>';
+ }
+ for(const[i,l]of w.letters.entries())svg+='<g role="img" aria-label="Letter '+esc(l)+'"><rect class="wrt-print'+(selected.includes(i)?' wrt-selected':'')+'" x="'+(x(i)-22)+'" y="12" width="44" height="48" rx="4"/><text x="'+x(i)+'" y="47" aria-hidden="true" class="wrt-glyph">'+esc(l)+'</text></g>';
+ const description=w.letters.length===3?'Letter u has no final e with it in this spelling.':'Letters u and e go together in this spelling pattern.';
+ return '<figure class="wrt-model"><figcaption>'+esc(v.source.copy.model)+'</figcaption><svg class="wrt-map" viewBox="0 0 320 170" role="group" aria-label="'+esc(display(w)+': '+v.source.copy.model)+'" aria-describedby="wrt-map-'+id+'"><desc id="wrt-map-'+id+'">'+esc(description)+'</desc>'+svg+'</svg></figure>';
+}
 function model(v,id=v.selected,frame=v.work[id].frame){
+ if(v.source.kind==='spellings')return spelling(v,id,frame);
  const r=soundTrailReference(v,id,frame),w=r.word,letterX=i=>160+(i-(w.letters.length-1)/2)*54,dotX=i=>160+(i-(w.phonemes.length-1)/2)*60;
  let svg='',splitLinks='';
  for(const g of w.groups){
@@ -72,9 +90,9 @@ export function soundTrailPage(v,originalPicture=null){
   }else mat=model(v)+'<p id="wrt-step" tabindex="-1" class="wrt-prompt">'+esc(w.frames[a.frame])+'</p><div class="wrt-actions">'+button('step',c.prev,-1,{disabled:a.frame===0})+button('step',c.next,1,{disabled:a.frame===4})+button('try',c.try)+'</div>';
   task='<h2 id="wr-task" tabindex="-1">'+esc(display(w))+'</h2>'+context(w)+'<div class="wrt-work">'+figures+'<section class="wrt-mat">'+mat+'</section></div>'+(pair?'<div class="wrt-actions">'+button('compare',c.compare[w.id])+'</div>':'');
  }
- const set=v.source.id==='long-o'?'long-o':v.source.id==='sentences'?'sentences':v.source.id==='final-e'?'vowels':'sounds';
- const sets='<nav class="wrt-sets" aria-label="Choose word set">'+button('set','x and qu','sounds',{pressed:set==='sounds'})+button('set','A final e','vowels',{pressed:set==='vowels'})+button('set','Words in sentences','sentences',{pressed:set==='sentences'})+button('set','o and final e','long-o',{pressed:set==='long-o'})+'</nav>';
- const note=v.source.note?'<details class="wrt-note'+(set==='long-o'?' wrt-o-note':set==='sentences'?' wrt-sentence-note':'')+'" data-wrt-note><summary>'+esc(v.source.note.title)+'</summary>'+v.source.note.text.split('\n\n').map(p=>'<p>'+esc(p)+'</p>').join('')+'<p>'+esc(v.source.note.guide)+'</p></details>':'';
+ const set=v.source.id==='long-u'?'long-u':v.source.id==='long-o'?'long-o':v.source.id==='sentences'?'sentences':v.source.id==='final-e'?'vowels':'sounds';
+ const sets='<nav class="wrt-sets" aria-label="Choose word set">'+button('set','x and qu','sounds',{pressed:set==='sounds'})+button('set','A final e','vowels',{pressed:set==='vowels'})+button('set','Words in sentences','sentences',{pressed:set==='sentences'})+button('set','o and final e','long-o',{pressed:set==='long-o'})+button('set','u and final e','long-u',{pressed:set==='long-u'})+'</nav>';
+ const note=v.source.note?'<details class="wrt-note'+(set==='long-u'?' wrt-u-note':set==='long-o'?' wrt-o-note':set==='sentences'?' wrt-sentence-note':'')+'" data-wrt-note><summary>'+esc(v.source.note.title)+'</summary>'+v.source.note.text.split('\n\n').map(p=>'<p>'+esc(p)+'</p>').join('')+'<p>'+esc(v.source.note.guide)+'</p></details>':'';
  const choices='<nav class="wrt-words" aria-label="Choose a word">'+Object.keys(v.source.words).map(id=>button('word',display(v.source.words[id]),id,{pressed:v.selected===id})).join('')+'</nav>';
  return '<section class="wr-room wrt-room" data-word-room-root data-wrt-root data-wrt-word="'+v.selected+'"><header class="wr-header">'+button('leave',c.back)+'<div><h1>'+esc(c.title)+'</h1></div></header><p class="wrt-opening">'+esc(c.opening)+'</p>'+sets+choices+'<div class="wrt-task">'+task+'</div><p id="wr-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p><p class="wrt-visit">'+esc(c.visit)+'</p>'+note+'<details class="wrt-grownups"><summary>'+esc(c.grownupTitle)+'</summary><p>'+esc(v.source.grownup)+'</p>'+(v.source.extraGrownup?'<p>'+esc(v.source.extraGrownup)+'</p>':'')+(v.source.guide[w.id]?'<p>'+esc(v.source.guide[w.id])+'</p>':'')+'<p>'+esc(w.reference)+'</p></details></section>';
 }

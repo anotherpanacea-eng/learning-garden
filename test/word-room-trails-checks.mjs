@@ -149,3 +149,37 @@ assert.deepEqual(longO,longOBefore);const longOCopy=createSoundTrails('long-o');
 assert.deepEqual(createSoundTrails(),original);assert.deepEqual(createSoundTrails('vowels'),vowelBefore);assert.deepEqual(createSoundTrails('sentences'),sentenceBefore);
 assert.deepEqual(longO.source.note.text.match(/[A-Za-z]+/g).map(x=>x.toLowerCase()),['do','not','hop','by','the','rod','a','note','says','we','rode','home','we','hope','to','rest']);
 console.log('Long o: six reference maps, thirty rendered frames, vowel comparisons, independent rod/rode work, source copies and shared-note word sequence passed.');
+
+// Spec356: independently enumerated printed positions, with no supplied phoneme count.
+const uGroups={tub:[[0],[1],[2]],tube:[[0],[1,3],[2]],cub:[[0],[1],[2]],cube:[[0],[1,3],[2]],cut:[[0],[1],[2]],cute:[[0],[1,3],[2]]};
+const longU=createSoundTrails('long-u'),uBefore=structuredClone(longU);
+assert.equal(longU.source.kind,'spellings');assert.equal(longU.selected,'tub');assert.deepEqual(Object.keys(longU.work),Object.keys(uGroups));
+for(const[id,groups]of Object.entries(uGroups)){
+ const w=longU.source.words[id];assert.deepEqual(w.letters,[...id]);assert.deepEqual(w.spellingGroups,groups);
+ assert.equal(Object.hasOwn(w,'phonemes'),false);assert.equal(Object.hasOwn(w,'groups'),false);assert.equal(w.frames.length,5);
+ assert.equal(longU.work[id].tool,['cut','cute'].includes(id)?'try':'model');
+ let state=changeSoundTrail(changeSoundTrail(longU,'word',id),'model');
+ for(let frame=0;frame<5;frame++){
+  assert.equal(soundTrailReference(state,id,frame),null,'spelling view never supplies a zero-sound reference');
+  const h=soundTrailPage(state),active=frame===4?groups:frame?[groups[frame-1]]:[];
+  assert.deepEqual(selectedMap(h),{letters:active.flat().sort((a,b)=>a-b).map(i=>id[i]),sounds:[]});
+  assert.ok(h.includes('aria-label="'+id+': Our spelling pattern"'));assert.ok(!h.includes('aria-label="Sound '));
+  assert.ok(h.includes(id.length===3?'Letter u has no final e with it in this spelling.':'Letters u and e go together in this spelling pattern.'));
+  if(frame<4)state=changeSoundTrail(state,'step',1);
+ }
+ state=changeSoundTrail(state,'try');for(let n=0;n<6;n++)state=changeSoundTrail(state,'counter',1);
+ assert.equal(changeSoundTrail(state,'counter',1),null);assert.deepEqual(changeSoundTrail(changeSoundTrail(state,'compare'),'back'),state);
+ assert.equal(changeSoundTrail(state,'model').work[id].count,6);
+}
+for(const[a,b]of[['tub','tube'],['cub','cube'],['cut','cute']]){
+ const state=changeSoundTrail(changeSoundTrail(longU,'word',a),'compare'),pair=Object.values(longU.source.pairs).find(p=>p.ids[0]===a);
+ assert.deepEqual(pair.ids,[a,b]);assert.deepEqual(pair.highlight,{[a]:1,[b]:1});
+ assert.deepEqual(selectedMap(soundTrailPage(state)),{letters:['u','u','e'],sounds:[]});
+}
+const uTokens=longU.source.note.text.match(/[A-Za-z]+/g).map(x=>x.toLowerCase());assert.equal(uTokens.length,20);
+for(const word of Object.keys(uGroups))assert.equal(uTokens.filter(t=>t===word).length,1);
+assert.deepEqual(uTokens.filter(t=>!Object.hasOwn(uGroups,t)).sort(),['put','a','by','the','our','looks','out','a','paper','flag','a','can','carry','water'].sort());
+assert.equal(longU.source.words.cub.art,longU.source.words.cute.art);assert.notEqual(longU.source.words.cub.alt,longU.source.words.cute.alt);
+const uCopy=createSoundTrails('long-u');uCopy.source.words.cube.spellingGroups[1].push(2);assert.deepEqual(longU,uBefore);
+assert.deepEqual(createSoundTrails(),original);assert.deepEqual(createSoundTrails('vowels'),vowelBefore);assert.deepEqual(createSoundTrails('sentences'),sentenceBefore);assert.deepEqual(createSoundTrails('long-o'),longOBefore);
+console.log('u/final e: six independent spelling groups, thirty rendered frames without reference sound counts, three comparisons, counters, source isolation and supported-note partition passed.');
