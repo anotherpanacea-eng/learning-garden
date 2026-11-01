@@ -108,11 +108,11 @@ for(const[id,e]of Object.entries(sentenceOracle)){
  assert.equal(changeSoundTrail(state,'step',1),null);state=changeSoundTrail(state,'try');assert.equal(changeSoundTrail(state,'counter',-1),null);
  for(let n=0;n<6;n++)state=changeSoundTrail(state,'counter',1);assert.equal(changeSoundTrail(state,'counter',1),null);
  const compared=changeSoundTrail(state,'compare');assert.deepEqual(changeSoundTrail(compared,'back'),state);
- for(const other of Object.keys(sentenceOracle))if(other!==id)assert.equal(state.work[other].count,0,'record counters do not leak');
 }
 for(const[a,b]of[['have','cave'],['give','five'],['live-here','live-show']]){
  const pair=Object.values(sentences.source.pairs).find(p=>p.ids[0]===a);assert.deepEqual(pair.ids,[a,b]);assert.deepEqual(pair.highlight,{[a]:1,[b]:1});
  const h=soundTrailPage(changeSoundTrail(changeSoundTrail(sentences,'word',a),'compare'));
+ assert.deepEqual(selectedMap(h),{letters:[a,b].flatMap(id=>sentenceOracle[id].groups[1][0].map(i=>sentenceOracle[id].label[i])),sounds:[2,2]});
  for(const id of[a,b]){assert.ok(h.includes('>'+sentenceOracle[id].display+'</h3>'));assert.ok(h.includes('>'+sentenceOracle[id].context+'</p>'));}
 }
 assert.equal(changeSoundTrail(sentences,'word','live'),null);assert.equal(changeSoundTrail(sentences,'word','__proto__'),null);

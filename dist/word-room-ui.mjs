@@ -145,6 +145,9 @@ export function bindWordRoom(book, ctx) {
     for(const d of next.querySelectorAll('details'))d.open=disclosures.includes(d.className);
     const status=next.querySelector('#wr-status');if(status)status.textContent=message;
     const focus=next.querySelector(selector)||next.querySelector('#wr-task');if(focus&&!focus.closest('details:not([open])'))focus.focus();
+    // Keep a whole work mat in view when it fits; smaller screens retain normal focused-control scrolling.
+    const task=local.mode==='trails'&&next.querySelector('.wrt-task');
+    if(task){const r=task.getBoundingClientRect();if(r.height<=innerHeight&&(r.top<0||r.bottom>innerHeight))task.scrollIntoView({block:'center'});}
   };
   window.addEventListener('hashchange',()=>{if(location.hash!==route){views.delete(book);events.abort();}},{signal:events.signal});
   root.querySelectorAll('[data-wrt-action]').forEach(el=>el.addEventListener('click',()=>{

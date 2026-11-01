@@ -58,11 +58,11 @@ async function vowelJourney(p,width){
 }
 
 async function sentenceJourney(p,width){
- await tap(p,'set','sentences');eq(await p.locator('#wr-task').innerText(),'have','new sentence set starts with have');
+ await tap(p,'set','sentences');eq(await p.locator('#wr-task').innerText(),'have','new sentence set starts with have');eq(await p.locator('[data-wrt-note]').evaluate(e=>e.open),false,'new show note waits for its own request');
  const records={have:['have','We have a cape.'],cave:['cave','The puppet waits by a cave.'],give:['give','Please give the puppet a cape.'],five:['five','There are five stars.'],'live-here':['live here','The puppets live here by the river.'],'live-show':['live show','We are watching a live show.']};
  for(const id of width===820?Object.keys(records):['live-here','live-show']){
   await tap(p,'word',id);eq(await p.locator('#wr-task').innerText(),records[id][0]);eq(await p.locator('.wrt-task > .wrt-context').innerText(),records[id][1]);
-  if(id.startsWith('live-')){eq(await p.locator('.wrt-map').count(),0,'live starts in Try');await tap(p,'counter',1);await tap(p,'model');}
+  if(id.startsWith('live-')){if(width===820)ok(await p.locator('.wrt-task').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'tablet opening live Try fits with its context and controls');eq(await p.locator('.wrt-map').count(),0,'live starts in Try');await tap(p,'counter',1);await tap(p,'model');}
   eq(await p.locator('.wrt-print').count(),4);eq(await p.locator('.wrt-sound').count(),3);
   await tap(p,'step',1);await tap(p,'step',1);
   const vowel=['have','cave'].includes(id)?'a':'i',split=['cave','five','live-show'].includes(id);
@@ -72,7 +72,7 @@ async function sentenceJourney(p,width){
   if(width===820){
    ok(await p.locator('.wrt-task').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'tablet current word, context, work mat and primary actions fit together');
    for(let frame=2;frame<4;frame++)await tap(p,'step',1);
-   eq(await p.locator('.wrt-sound.wrt-selected').count(),3);
+   eq(await p.locator('.wrt-sound.wrt-selected').count(),3);ok(await p.locator('.wrt-task').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'tablet final explanation and all primary controls fit together');
    await p.screenshot({path:out+'/sentences-'+id+'.png',fullPage:true});
   }
   if(['cave','five','live-show'].includes(id)){
@@ -92,7 +92,7 @@ async function sentenceJourney(p,width){
  await tap(p,'word','live-here');await tap(p,'try');await tap(p,'counter',1);eq(await p.locator('.wrt-counter').count(),2);
  await tap(p,'word','live-show');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),1,'identical printed live has independent work');
  ok(!/live-here|live-show/.test(await p.locator('[data-wrt-root]').innerText()),'internal ids absent from visible text');
- await p.locator('[data-wrt-note] summary').tap();eq(await p.locator('[data-wrt-note] > p').allTextContents(),['We have five stars. Please give them to the puppets.','They live by the cave. Tonight is a live show.','Read both notes together. The sentence helps us choose what live means. Your partner can supply any word.']);
+ await p.locator('[data-wrt-note] summary').tap();eq(await p.locator('[data-wrt-note]').evaluate(e=>e.open),true,'own show note opened by its control');eq(await p.locator('[data-wrt-note] > p').allTextContents(),['We have five stars. Please give them to the puppets.','They live by the cave. Tonight is a live show.','Read both notes together. The sentence helps us choose what live means. Your partner can supply any word.']);
  await tap(p,'set','sounds');eq(await p.locator('.wrt-counter').count(),2,'original kit retains its work across all three sets');
  await tap(p,'set','vowels');eq(await p.locator('.wrt-counter').count(),1,'vowel kit retains its own work');
  await tap(p,'set','sentences');eq(await p.locator('.wrt-counter').count(),1,'sentence visit restored');
