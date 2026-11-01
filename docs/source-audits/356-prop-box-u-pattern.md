@@ -1,0 +1,31 @@
+# 356 source study · word reading without a supplied count
+
+Proposed2026-11-01 for LG-10 / LG-G1. Text-only adult-led reference exploration; no audio, oral result or educational-effect claim.
+
+## Upstream and current seams
+
+Jane HEAD `e88f81a00553fb87818ef84c77a8800f0dcb33e4` and Marble HEAD `5e23196fa60050433f1440057f65a978d39e63fc` were refreshed again2026-11-01, unchanged. Actual [Jane LESSONS](https://github.com/kentlangley/Jane/blob/e88f81a00553fb87818ef84c77a8800f0dcb33e4/LESSONS.md) and Marble [topics](https://github.com/withmarbleapp/os-taxonomy/blob/5e23196fa60050433f1440057f65a978d39e63fc/data/topics.json)/[dependencies](https://github.com/withmarbleapp/os-taxonomy/blob/5e23196fa60050433f1440057f65a978d39e63fc/data/dependencies.json) remain the inspected references. Reuse teaching before practice, explicit contrast, optional help and return as design references, not Jane prose/code, mastery, gates, medals, remote state or diagnostics. Keep the bundled Marble pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d` and existing NOTICE/licenses.
+
+350 supplies loose counters and selected many-to-many sound maps;353/355 supply final-e spelling contrasts;354 supplies context/exception revisits. The actual current nonadjacent branch in word-room-trails-ui links only to a group's first sound. Existing nonadjacent sources have one sound per group, so they are not presently misdrawn. A future /ju/ two-output reference would require new geometry and a qualified review; this slice instead explicitly renders a spelling picture, not a false three-dot substitute or zero-sound map.
+
+## Candidate target and Spec49 §8 crosswalk
+
+Candidate Split Digraphs and Magic E `mt_C7abt7pRr6`, E1-I/II: selected u_e reading, not all a/e/i/o/u examples, spelling from memory or a complete phonemic-segmentation encounter. Bundled hard closure remains five nodes/four edges; refreshed upstream four/three:
+
+Split Digraphs → Vowel Digraphs `mt_BtMbZibZUj` → Single Letter Sounds `mt_F978c32kDr` → Knowing all letters `mt_frDIaXzWbx` → Understanding print `mt_1KCwbGvm1F`. Only the final edge is soft upstream. No new entry lock or coverage claim.
+
+Actual local help:343's u/cup models /ʌ/, not /u/; its cup/cub contrast and cub343 art already exist.347's y/yam supplies the consonant represented by IPA/j/, not the j/jet sound. This slice explicitly introduces the vowel heard in tube through adult whole-word modeling, including on direct entry to cube/cute and their counter view. Earlier print/letter support and words remain open. These supports do not certify broad prerequisite topics, adjacent digraphs, automatic recognition or a child's pronunciation.
+
+## Primary study and disagreement
+
+[UFLI's54–62 index](https://ufli.education.ufl.edu/foundations/toolbox/54-62/) names both u_e readings in lesson58. Its actual [home-practice sheet](https://ufli.education.ufl.edu/wp-content/uploads/2022/08/58_HomePractice_UFLI-Foundations.pdf) practices these spellings/words without prescribing a phoneme count. Study the count-free teaching action; incorporate none of its chains, script, passage, layout, art or recordings. This is not the whole UFLI sequence or an equivalent program.
+
+Merriam-Webster's [tube](https://www.merriam-webster.com/dictionary/tube) lists versions with and without a y-like element; [cube](https://www.merriam-webster.com/dictionary/cube) and [cute](https://www.merriam-webster.com/dictionary/cute) include that element. Its actual [pronunciation guide](https://www.merriam-webster.com/assets/mw/static/pdf/help/guide-to-pronunciation.pdf), page5, distinguishes the symbols corresponding to IPA/j/ and/u/. [Tub](https://www.merriam-webster.com/dictionary/tub), [cub](https://www.merriam-webster.com/dictionary/cub) and [cut](https://www.merriam-webster.com/dictionary/cut) supply the selected other senses/citation forms. All companion meanings, sentences and scene briefs are original, not copied definitions/examples. Cube's six square faces describe the selected solid, not a count from a perspective picture.
+
+The actual [Indiana DOE word list](https://www.in.gov/doe/files/10-words-phonological-awareness-instruction.pdf), updated2/21, puts cube/fuse/mute in its three-phoneme list on page3 and few in a two-phoneme list on page2. It does not explain that classification's theoretical rationale. This is instructional disagreement, not evidence that all speakers omit /j/, nor proof that it is merely an accent difference. A four-segment analysis is defensible and matches the prior proposal250 technical convention; number of IPA symbols alone does not settle a phoneme count. We do not turn either analysis into a child-visible numeric reference here.
+
+Two independent problem-framing reviews recommended preserving both readings while deferring a supplied four-dot visual for a bounded qualified phonics review. That is a product-design judgment about possible classroom confusion, not observed harm or a finding that four-part analysis is wrong. A label such as "one way to listen" would still show four dots. The chosen design instead names its actual object: a written spelling pattern. Optional own counters remain ungraded. No child is told their classroom or natural speech is wrong. The deferred visual's future review must examine its actual diagram, adult wording and transition from prior maps; another model vote or a computational pronunciation lexicon alone does not resolve the instructional question.
+
+##250/55 boundary
+
+250's pending /ju/ request row misleadingly calls the sequence the vowel part of cube. Repair that adult review note to name the /j/–/u/ sequence and leave its counting convention uncommissioned; its pending status is unchanged. This slice builds no250 pack, audio or player and waives none of55's recording/rights/owner-listening gates. Later End-e work must reconcile the a/i/o/u selected encounters and354 exceptions. No private record, likeness or audition is read, copied, played or published. Full vowel patterns, adjacent teams, dictated spelling, automatic reading and the supplied u_e segmentation map remain unfinished.
