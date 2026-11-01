@@ -4,7 +4,7 @@ Proposed 2026-11-01. This is the third bounded slice of [278](278-exchange-manif
 
 ## Why this slice
 
-No built game teaches how to show the title of a work. 319 and 329 cover marks inside and between sentences. 278's companion already writes every line for this bench, card 10 and set D. Only six new strings are needed (below): three feedback lines for cases the companion's lines do not cover, the underline tile name, and the disclosure and Notes labels. The slice is small and self-contained: one bench, one teach card and four items.
+No built game teaches how to show the title of a work. 319 and 329 cover marks inside and between sentences. 278's companion already writes every line for this bench, card 10 and set D. Only seven new strings are needed (below): three feedback lines for cases the companion's lines do not cover, the underline tile name, an accessible-name template, and the disclosure and Notes labels. The slice is small and self-contained: one bench, one teach card and four items.
 
 This slice extends 319's page, controller, CSS and `exchangeManifest` root. It adds no new route, page, story scene, unlock, chapter contribution, page reveal, audio or mutation of another root. Scene 3, *The book crate*, is manifest-only and is not shipped. The Spanish crate line belongs to that scene and to the manifest version, so it does not ship either.
 
@@ -41,17 +41,19 @@ Each title's note in the companion (author and year, or "its first chapter") is 
 | Feedback, a whole work underlined (Hand mode) | By hand, a whole work is underlined. |
 | Feedback, a part underlined (Hand mode) | This one lives inside a bigger work. Try quotation marks. |
 | Hand mode tile | underline |
+| Accessible name of a title shown underlined | {title}, underlined |
 
-319's and 329's exceptions apply unchanged: Try again, Next step, the unreadable, unknown-version and save-refused lines, and the back link. The companion's line for a whole book in quotation marks says "This is a whole book", which is wrong for the *Gazette*, so the newspaper gets its own line. The companion gives no feedback for underlining, which only Hand mode offers. The whole-work line is new. The part line reuses the companion's italics-for-a-part line word for word. The tile name follows the companion's "swaps italics for underline". None of the six names a place or has a dash.
+319's and 329's exceptions apply unchanged: Try again, Next step, the unreadable, unknown-version and save-refused lines, and the back link. The companion's line for a whole book in quotation marks says "This is a whole book", which is wrong for the *Gazette*, so the newspaper gets its own line. The companion gives no feedback for underlining, which only Hand mode offers. The whole-work line is new. The part line reuses the companion's italics-for-a-part line word for word. The tile name follows the companion's "swaps italics for underline". The accessible-name template gives screen readers the underline that sighted readers see. None of the seven names a place or has a dash.
 
-The content check from 319 extends to the new strings:
-- Every shipped string appears in the companion (after the print rule), in an exceptions table (319's, 329's or this one), or in the grown-up panel above.
-- No shipped string names Vadoalto, Nuria, Hollis, the high ford, the Ways or a page.
-- No shipped line has an em-dash.
+This slice does not extend 319's whole-prose companion-membership check to the new strings: exact identity of every line with the companion protects against no failure the finite checks below miss, and it would force a table entry for every reviewed wording repair. The new strings instead get:
+- the subject and copy read named under the review gates;
+- finite checks on the eight titles, their notes (author and year), their kinds, the fits table, the D1 to D4 keys and positions, and the not-single-longest rule;
+- the market-version limits: no shipped string names Vadoalto, Nuria, Hollis, the high ford, the Ways or a page, and no shipped line has an em-dash.
+319's and 329's existing checks on their own strings are unchanged.
 
 ## The bench: exact model
 
-Each title row shows the title in plain letters, its note, and three tiles in fixed order: **italics**, **quotation marks**, **plain**. The row starts unchosen. Tapping a tile chooses it and shows the title drawn with that mark, plus the feedback line. Tiles are buttons of at least 44 px, and keyboard activation works the same as a tap. **Hand mode** is a toggle above the rows, labeled with the companion's "Writing it by hand?". When it is on, the italics tile reads **underline**, and a chosen italics shows as underline. Hand mode changes only the display and the feedback for that tile; it never changes which answers fit.
+The eight rows are grouped as four whole-and-part pairs (t1 with t2, t3 with t4, t5 with t6, t7 with t8), one pair per card: one column at 320 px, two columns from 820 px, so the bench adds four cards rather than eight full-width rows. Each title row shows the title in plain letters, its note, and three tiles in fixed order: **italics**, **quotation marks**, **plain**. The row starts unchosen. Tapping a tile chooses it and shows the title drawn with that mark, plus the feedback line. Tiles are buttons of at least 44 px, and keyboard activation works the same as a tap. **Hand mode** is a toggle above the rows, labeled with the companion's "Writing it by hand?". When it is on, the italics tiles read **underline**, and the next italics choice is drawn and answered as underline. Hand mode never changes which answers fit, and it never redraws a result already shown: a row's shown result is always its committed `text` and `said`, until another tile choice on that row replaces them. Toggling changes only the tile labels and the choices made after it.
 
 | Title | Kind | Fits |
 | --- | --- | --- |
@@ -109,7 +111,7 @@ exchangeManifest: {
 - **When `crate` appears.** It is absent until the first choice. An existing root without it reads as an empty map, and no other write adds it.
 - **What a choice saves.** Each choice replaces that title's entry. The entry holds `shown` (the three tile ids in shown order), `mark`, `hand`, and the frozen `text` and `said`. `text` is the marked title as shown, with single-asterisk markers for italics and `_` markers for underline, rendered only through the page's existing `rich()`-style escaping. `said` is the feedback line shown. The entry also holds `outcome` from the fits table, `supported` and `at`.
 - **Freezing.** The title row is frozen in the active view when first rendered. `text` and `said` are computed from that snapshot in the submit candidate and revealed only after the commit. `outcome` and the frozen strings are never recomputed or compared with today's content.
-- **Hand mode itself.** The toggle is not saved. It is a page view setting that starts off on each render.
+- **Hand mode itself.** The toggle is not saved in the learner's work. It is a view setting held by the page's visit session: off when a new visit, explorer or owner opens the page, and kept across ordinary redraws, tile choices, answers and help actions within that visit.
 
 Set D items use 319's item entry shape and rules unchanged:
 - They freeze `prompt`, `offered`, `answerText` and `said`, and `answer` is a choice id.
@@ -125,7 +127,7 @@ Set D items use 319's item entry shape and rules unchanged:
 - **Complete entry.** A completed crate entry has all of `shown` (3 distinct crate tile ids), `mark` (one of them), `hand` (a boolean), `text`, `said`, `outcome`, `supported` and `at`. The frozen strings are at most 400 code points.
 - **Invalid entry.** Any incomplete or invalid mix of recognized fields is unreadable and stays exact, and only that title turns read-only.
 - **Unknown fields.** Unknown additive fields are ignored for shape classification and kept unchanged, including when that title's recognized fields are replaced.
-- **The map itself.** A present `crate` must be a plain object of at most 8 entries. Otherwise the page is read-only as a malformed root.
+- **The map itself.** A present `crate` that is not a plain object of at most 8 entries makes only the crate region unavailable: its rows are read-only, its raw value is kept exact and exported, and the lists, joins and items stay readable, usable and exportable. Every mutation of another region clones and keeps that raw `crate` sibling unchanged; nothing normalizes or replaces it. (On today's 329 build, an unknown `crate` of any shape is already preserved and the page stays ready, so 349 must not turn it into a whole-page lock.)
 - **Items.** The item bound stays at 25 entries, and the known item ids become A1 to A4, C1 to C5 and D1 to D4. An unknown item id stays exact and unreadable, as before.
 - **Older builds.** A 329 build that meets a root with a `crate` map ignores it and keeps it exact and exportable. That build treats D entries as unknown and unreadable while keeping the A and C entries available. Its page and Notes omit D entries and the crate from their normal readouts but keep them raw.
 - Nothing is migrated, defaulted, deleted or normalized.
@@ -147,7 +149,7 @@ Every callback keeps 319's guards:
 
 A redraw after a tile, toggle, answer or help action keeps focus on the acted control or the resulting feedback, and does not close open disclosures. Nothing animates.
 
-The underline is the only new visual. It has a distinct decoration from links (for example, a solid underline with no link color or pointer), and the row's accessible name says "underlined" when Hand mode shows it.
+The underline is the only new visual. It has a distinct decoration from links (for example, a solid underline with no link color or pointer), and a title drawn underlined has the accessible name "{title}, underlined" from the exceptions table.
 
 ## Acceptance and review gates
 
@@ -155,8 +157,8 @@ Independent spec review comes before build, including a separate subject and cop
 
 - **Subject:** the song (t8) is a short work, not a part. Default: give it the companion's "a part, or a short work" line both when it fits and when it is wrong. Do not give it the "lives inside a bigger work" line.
 - **Subject:** the newspaper. Default: italics fits, as the companion says. Quotation marks get the newspaper line, which says "most school writing" and does not call quotation marks wrong, matching 278's hedge that newspapers often use quotation marks.
-- **Subject:** Hand mode changes display and feedback only. Default: as written, and the toggle is not saved.
-- **Copy:** the three new feedback lines, the disclosure and Notes labels, and the "underline" tile name. Default: as written above.
+- **Subject:** Hand mode affects only tile labels and later choices, lasts for the visit and is not saved. Default: as written.
+- **Copy:** the three new feedback lines, the disclosure and Notes labels, the "underline" tile name and the accessible-name template. Default: as written above.
 
 Source tests cover:
 - all 3 tiles on each of the 8 titles, with Hand mode both off and on: the marked text, the feedback code from the order table, and the outcome;
@@ -165,20 +167,22 @@ Source tests cover:
 - support captured before display and surviving reload and import;
 - structural validation of the crate: missing recognized fields, wrong-type recognized fields (including a non-boolean `hand`), unknown additive fields kept unchanged on read and replacement, repeated or unknown tile ids, over-limit strings, and more than 8 entries;
 - a 329-shaped root with no `crate` reading as before;
+- a mixed root with a malformed `crate` (for example an array, or 9 entries) beside readable lists, joins and items: the crate rows are read-only, the other benches stay usable, a list, join or item write keeps the raw `crate` exactly, and export carries it;
+- Hand mode kept across a tile choice, an answer and a help redraw, off again on a new visit, and never changing a committed row's shown text;
 - frozen crate strings that Notes renders unchanged after the catalog wording is edited in a test copy;
 - refused Set D pre-display saves, refused preflight, and pure readers;
-- the 319 content check extended to the new strings, the right-answer positions and the not-single-longest rule.
+- the finite title, note, kind, fits, key, position and not-single-longest checks, and the market-version limits on the new strings.
 
-Native testing runs in isolated Chrome at 320×600, 820×1000 and 1024×768:
+Native testing runs in isolated Chrome as one full journey at 820×1000 (card 10, all eight titles, Hand mode on and off, D1 to D4, Notes), plus representative cases at 320×600 and 1024×768. Source tests, not screenshots, cover all 48 title, mark and mode combinations. The native checks are:
 - tap and keyboard tile choice;
-- the Hand mode toggle;
+- the Hand mode toggle, kept across redraws;
 - the underline, italics and quotes visibly distinct, with underline not styled as a link;
 - 44 px controls and visible focus;
 - no horizontal page overflow;
 - a 150% root-font stand-in;
 - real Notes download, import and reload with crate entries and D items;
 - saving off, two explorers, and stale controls;
-- a screenshot of every feedback line.
+- screenshots of the journey's feedback lines and of the pair cards at each width.
 
 Physical iPad Safari, VoiceOver, text zoom and learning effects remain unqualified by Chrome.
 
