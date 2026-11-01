@@ -292,6 +292,22 @@ export const copyScopes = [
   {path:'dist/word-garden-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/word-garden-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/word-garden-ui.mjs',adultBlocks:[],quotations:[]},
+  // LG-2b batch 1 (fleet #1393).
+  {path:'dist/act-two-content.mjs',adultBlocks:[],quotations:[{quote:'Supplied, supported and unfinished contributions count alike.',reason:'Grown-up Keeper notes description of what the contribution records mean.'}]},
+  {path:'dist/balance-both-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/balance-stall-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/balance-stall-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/body-clues-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/body-clues-ui.mjs',adultBlocks:[],quotations:[{quote:'Original teaching diagrams and supplied picture keys.',reason:'Grown-up notes panel summary of what the records establish.'}]},
+  {path:'dist/capacity-units.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/coin-counter-ui.mjs',adultBlocks:[],quotations:[{quote:'Names and values are supplied. Support',reason:'Grown-up notes panel on what the rounds do and do not measure.'}]},
+  {path:'dist/courier-clock-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/equality-desk-ui.mjs',adultBlocks:[],quotations:[{quote:'All of this is supported practice.',reason:'For grown-ups panel on what the practice shows.'}]},
+  {path:'dist/evidence-voice-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/evidence-voice-stories.mjs',adultBlocks:[],quotations:[{quote:'Reverse walking layer not supplied on this batch',reason:'In-story printer’s notebook entry quoted as evidence; period wording the child reads as a source.'}]},
+  {path:'dist/fair-test-apprentice-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/field-kit-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/food-fork-ui.mjs',adultBlocks:[],quotations:[{quote:'A result is practice with supplied evidence',reason:'Grown-up notes panel on what a check can establish.'}]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
