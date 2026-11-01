@@ -1,6 +1,6 @@
-# Spec 345 text · The water cycle ring
+# Spec 346 text · The water cycle ring
 
-Exact child-facing text for [spec 345](../specs/345-water-cycle-ring.md). US spelling, no exclamation marks, no em-dashes. Every ring caption is 15 words or fewer, the drawn how-to check's limit.
+Exact child-facing text for [spec 346](../specs/346-water-cycle-ring.md). US spelling, no exclamation marks, no em-dashes. Every ring caption is 15 words or fewer, the drawn how-to check's limit.
 
 ## Weather page section
 

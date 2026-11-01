@@ -1,6 +1,6 @@
-# Spec 345 · The water cycle ring at Dot's weather station
+# Spec 346 · The water cycle ring at Dot's weather station
 
-**Status: proposed finite commission (card LG-38), awaiting independent spec review.** It adds one drawn, stepped water-cycle ring to the existing [281](281-weather-tallies.md) weather page, then attaches the existing water-cycle process clip beside it under the film rules in [motion-film-integration.md](../motion-film-integration.md). Model first, film second: the ring is the teaching, and the clip is an optional retelling of a picture the learner has already been able to step through. Exact text: [water cycle ring](../content/345-water-cycle-ring-text.md). Nothing here saves anything.
+**Status: proposed finite commission (card LG-38), awaiting independent spec review.** It adds one drawn, stepped water-cycle ring to the existing [281](281-weather-tallies.md) weather page, then attaches the existing water-cycle process clip beside it under the film rules in [motion-film-integration.md](../motion-film-integration.md). Model first, film second: the ring is the teaching, and the clip is an optional retelling of a picture the learner has already been able to step through. Exact text: [water cycle ring](../content/346-water-cycle-ring-text.md). Nothing here saves anything.
 
 This narrows [140](140-weather-station.md) bench (b) to a demonstration only. 140's drag-onto-the-ring ordering task, its clouds card, its Roof-or-field card and the rest of the Old Weather Station stay proposed and uncommissioned.
 
