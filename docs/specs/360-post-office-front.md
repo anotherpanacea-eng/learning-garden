@@ -47,7 +47,8 @@ Nothing is removed. Every link on today's front page is still on it, once each.
   - The shelf has 13 entries on the front page and 8 during a delivery, and every expected link is present once.
   - A fresh explorer sees the courier picker open. An explorer with one kept visit sees it folded; opening the fold and pressing another courier selects that courier, and the fold stays open.
   - "Where could this take us?" is inside a closed fold and its links are unchanged.
-  - The set of `href`s on the front page is the same as on `2765e157`.
+  - Each of the five side rooms is linked once on the shelf and not in the page body.
+- Once, at build time: the front page's `href`s, counted with repeats, are the same as on `2765e157` for a fresh explorer. The receipt goes in the build PR; it is not a standing test, because it needs the old tree.
   - No sideways scroll. For an explorer with a kept visit at 820 px, the page is at least 15% shorter than at `2765e157` (measured: about 5,300 px before).
-- `test/room-shelves-browser.py` expects 13 Post Office entries on the front page.
+- `test/room-shelves-browser.py` expects 13 Post Office entries on the front page. Its first-entry check moves from Exchange Manifest to Ferry Deck: on the test's fixed date both are new, and Ferry Deck now comes first in the stable new-first order (Codex spec review).
 - The existing suites that use the Post Office front page still pass: act-two, ferry, which-hat, sorting-desk, willow-double, lost-found, post-flight-button, parcel-packing (allowing for its timeout on main), courier-clock, two-letters, room-shelves, new-for-you. `node scripts/run-checks.mjs` passes.
