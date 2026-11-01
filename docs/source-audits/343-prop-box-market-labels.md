@@ -1,6 +1,6 @@
 # 343 source study — Market labels
 
-Author study2026-11-01; independent written specification/linguistic review pending. Base main `a583ac3531cdd60badc16d5a788b13ea6c4f1cbd`. [Spec343](../specs/343-prop-box-market-labels.md) and [finite text](../content/343-prop-box-market-labels-text.md) are proposed. No recording, accepted audio or phoneme-recognition result exists for this material.
+Author study2026-11-01 (UTC); independent Claude written specification/linguistic review BUILD-READY at `190db4117d6eb59b82450cc8e51e9aa026865740`, before runtime edits. Base main `a583ac3531cdd60badc16d5a788b13ea6c4f1cbd`. [Spec343](../specs/343-prop-box-market-labels.md) and [finite text](../content/343-prop-box-market-labels-text.md) were independently reviewed. No recording, accepted audio or phoneme-recognition result exists for this material.
 
 ## Words and meanings
 

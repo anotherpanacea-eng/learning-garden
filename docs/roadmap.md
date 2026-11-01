@@ -10,6 +10,9 @@ The bounded Field Journal P1 comparison is now merged and live through its [rele
 
 [Labels for the Show342](specs/342-prop-box-sound-messages.md) is also merged and live; its [canonical receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/361#issuecomment-6551357906) owns release verification. Four cases in the existing Prop Box offer adult-spoken letter construction, print-before-picture reading, supplied starting words, manual sound comparisons, retained first/latest labels and a shared theater note. Unexpected or unfinished arrangements can be kept. This is adult-supported material, not automatic oral assessment, phonics playback or complete correspondence coverage.
 
+
+**Prop Box foundation follow-on:** [Market Labels343](specs/343-prop-box-market-labels.md), tracked in [PR365](https://github.com/anotherpanacea-eng/learning-garden/pull/365), adds a separate six-card packet, adult-led e/u/d/g cards and a shared market note in the existing room. Both packets keep their own sources, drafts and first/latest labels. Its PR owns independent review and publication evidence. This is selected-word, adult-supported material; remaining consonants, uppercase recognition, long vowels and accepted phonics audio remain separate commissions.
+
 ## Consolidation priorities · current order
 
 Owner-approved order after the 2026-10-29 app review. This section supersedes the older “next” ordering below for the next bounded work. On 2026-10-30 the owner lifted PR255’s hold and authorized current-main integration, review repairs, merge and deployment, then resumed building through November 2. Release verification remains required; this authorization is not a release receipt. [PR254](https://github.com/anotherpanacea-eng/learning-garden/pull/254), the whole mill film, has its hold lifted. It is now merged and live; the release record above owns acceptance.

@@ -2,6 +2,10 @@
 
 Audit of main `b3883ad12c6c7358a9335e58132bf9e147664043`, 2026-10-31, for admitted LG-10 / LG-G1. This is a source-grounded build recommendation, not a placement assessment, complete course or permission to produce phonics recordings. The roadmap’s canonical release receipt establishes publication separately from this audit.
 
+## Follow-on status, 2026-11-01 (UTC)
+
+The base inventory below records `b3883ad`. [Labels for the Show342](specs/342-prop-box-sound-messages.md) subsequently shipped, adding the adult-spoken/print-first action and middle/final substitutions recommended in priority1. [Market Labels343](specs/343-prop-box-market-labels.md), tracked in [PR365](https://github.com/anotherpanacea-eng/learning-garden/pull/365), is the next foundation build: six contrasts and explicit adult-led e/u/d/g cards, retained in a second packet without replacing342. The PR owns its independent review and release evidence. These are selected contexts, not completed single-letter, blending, segmenting or all-correspondence topics. Remaining r/l/w/y, j/k/v/z, q/qu, x, uppercase and long-vowel commissions are named in343; accepted audio still follows55. Productive writing priority2 remains open.
+
 ## What exists, and what it does
 
 The omnibus proposals describe their original starting point. Their “nothing on main” passages are not current inventories. The bounded implementation specifications and actual content factories give the following picture:

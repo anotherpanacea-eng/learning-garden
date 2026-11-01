@@ -1,6 +1,6 @@
 # 343 — Market Labels: short e/u and the next consonants
 
-Status: proposed bounded follow-on to [342](342-prop-box-sound-messages.md), for admitted LG-10 / LG-G1. Independent specification and finite-content review required before code. No phonics audio is commissioned. Base `a583ac3531cdd60badc16d5a788b13ea6c4f1cbd`.
+Status: independently reviewed specification; implementation in progress. Bounded follow-on to [342](342-prop-box-sound-messages.md), for admitted LG-10 / LG-G1. Claude independently cleared specification and finite content at `190db4117d6eb59b82450cc8e51e9aa026865740` before runtime edits. No phonics audio is commissioned. Base `a583ac3531cdd60badc16d5a788b13ea6c4f1cbd`.
 
 ## Purpose and encounter
 
@@ -10,7 +10,7 @@ The familiar loop stays: choose a packet and card, hear an adult or try print fi
 
 Spec49 §5 encounter:
 
-1. **Teaching:** “Meet four letter sounds” opens one tactile card at a time for e/u/d/g, with a large glyph, a three-letter contextual word, its relevant position and short adult guidance. The adult supplies actual sounds. Four direct letter buttons plus Back retain the selected card. This is available before card work and at any later turn, not an entry test.
+1. **Teaching:** “Meet letter sounds” opens one tactile card at a time for e/u/d/g, with a large glyph, a three-letter contextual word, its relevant position and short adult guidance. The adult supplies actual sounds. Four direct letter buttons plus Back retain the selected card. This is available before card work and at any later turn, not an entry test.
 2. **Contrast:** six literal pairs in the finite text. Different vowels can occupy the middle while the start/end remain; later e/u words revisit first/last changes. The g is hard in bug/bag, not every g-word. Three letters happen to represent three phonemes in these selected words; this is not a universal rule.
 3. **Supported practice:** reuse342's adult partner card, starting word, picture, manual changed-position comparison and worked example; retain disclosed help cumulatively and return to the exact arrangement. Letter teaching is a source-level disclosure, not an independent attempt.
 4. **New use:** read Dot's short shared note with an adult and place/keep a useful label for the pretend market. Its fixed target tokens are named in the finite text; all other tokens are adult-supplied. No text-comprehension or oral-reading score.
@@ -24,7 +24,7 @@ The [finite text](../content/343-prop-box-market-labels-text.md) and [source stu
 
 General American was already chosen by the owner. /ɛ/ and /ʌ/ are adult written reference symbols, not child prompts or accepted recordings. An adult uses natural sounds without adding a vowel to d/g, explains meanings and may model blending/segmenting. The app neither hears nor grades any response or accent. Regional raising in bag or other vowel realizations are not mistakes. If an adult cannot make a proposed contrast useful, they can choose another card or read together; never score the child against the author reference.
 
-Default presentation prioritizes the current instruction, material and action. “Meet four letter sounds” is the first invitation on the Market chooser, with all six cases freely available beside it. Fold grown-up caveats. New original SVG props depict a pan, ink pen, drinking cup, miniature bed, plant bud, cloth bag, toy beetle (six legs), hen and bear cub. Reuse342's cap and320's mat only in their existing senses. The note illustration literally matches bug on bud, ink pen in cup and cub on mat. The word bug uses its ordinary broad sense; the picture is not a true-bug identification lesson. Picture/meaning help is a disclosure; it is absent from the hidden-word work surface until requested. Unknown art gives a neutral unavailable-picture response while retaining meaning only on disclosed surfaces.
+Default presentation prioritizes the current instruction, material and action. “Meet letter sounds” is the first invitation on the Market chooser, with all six cases freely available beside it. Fold grown-up caveats. New original SVG props depict a pan, ink pen, drinking cup, miniature bed, plant bud, cloth bag, toy beetle (six legs), hen and bear cub. Reuse342's cap and320's mat only in their existing senses. The note illustration literally matches bug on bud, ink pen in cup and cub on mat. The word bug uses its ordinary broad sense; the picture is not a true-bug identification lesson. Picture/meaning help is a disclosure; it is absent from the hidden-word work surface until requested. Unknown art gives a neutral unavailable-picture response while retaining meaning only on disclosed surfaces.
 
 ## Two packets, existing engine
 
@@ -48,7 +48,7 @@ Case help retains342's six booleans. Market's source-level letters/message flags
 
 Entry: two clearly named packet buttons in the Prop Box chooser. Each packet has a persistent “Back to the prop box,” its own chooser, case navigation and shared note. Child copy names the packet where needed; Keep still serves the show's labels. Prop Box originals and both packet notes appear in the existing real Notes report; include each packet only if its root exists. Never truncate sources/history to make the report fit or fabricate empty packets on export.
 
-Retain v1's 96KiB per-packet bound, ≤64 keyed cases/records/teaching entries,26 distinct lowercase bank letters, three slots and existing bounded source strings. Accept saved ids/words/order supported by their own frozen source even when today's lists differ. Root/record validators must not require every installed item. Treat a bad teaching entry as local, not corruption of the entire root. No changes to unrelated recommendation, baseline, assessment, transfer schemas, global learning graph or analytics.
+Retain v1's 96KiB collection/source-envelope bound, ≤64 keyed cases/records/teaching entries,26 distinct lowercase bank letters, three slots and existing bounded source strings. Accept saved ids/words/order supported by their own frozen source even when today's lists differ. Root/record validators must not require every installed item. Within the existing version, source-envelope and whole-export bounds, treat a bad teaching entry as local, not corruption of the entire root. An oversized source envelope or unsupported version remains retained and unavailable under the existing boundary. No changes to unrelated recommendation, baseline, assessment, transfer schemas, global learning graph or analytics.
 
 At320×600,820×1000 and1024×768: 44px touch controls,16px copy, visible keyboard focus, no horizontal overflow, current prompt/material preceding folded teaching. A long custom historical title must wrap. Manual teaching/pair frames have reduced-motion parity and preserve exact drafts/keeps after Back. No target art or answer text preloaded into hidden DOM in Listen mode. Native keyboard and touch must work without dragging or a mouse.
 

@@ -6,12 +6,12 @@ Original proposed text for independent review with [spec343](../specs/343-prop-b
 
 - Entry/title: **Market labels**.
 - Story: “Dot is setting up the toy market for our show. Help make labels so the puppets can find their props.”
-- Teaching invitation: “Meet four letter sounds”.
+- Teaching invitation: “Meet letter sounds”.
 - Teaching introduction: “Read this card with your partner. Your partner can say the sounds. You can point, join in, or listen.”
 - Teaching Back: “Back to my labels”.
 - Note title: “Dot's market note”.
 - Note prompt: “Where did Dot put the pen? Read the note together and show your partner.”
-- Case cards, in order: Middle sound1, Middle sound2, Middle sound3, Middle sound4, First sound, Last sound. These generic titles and abstract three-place art do not disclose target words.
+- Case cards, in order: Middle sound 1, Middle sound 2, Middle sound 3, Middle sound 4, First sound, Last sound. These generic titles and abstract three-place art do not disclose target words.
 - Use342's mode, help, comparison, Keep, recovery and notes language; change only references that otherwise misname the packet.
 
 ## Literal word sources
@@ -38,10 +38,10 @@ Bank (exact): `a b c d e f g h i m n o p s t u`.
 
 | Id | Generic title | Starting word → target | Changed place (0-based) | Three manual contrast frames |
 | --- | --- | --- | --- | --- |
-| e-middle | Middle sound1 | pan → pen | 1 | Say pan together. / Listen to the middle sound. / Say pen. What stayed the same? |
-| u-middle | Middle sound2 | cap → cup | 1 | Say cap together. / Listen to the middle sound. / Say cup. What stayed the same? |
-| two-vowels | Middle sound3 | bed → bud | 1 | Say bed together. / Listen to the middle sound. / Say bud. What stayed the same? |
-| g-word | Middle sound4 | bag → bug | 1 | Say bag together. / Listen to the middle sound. / Say bug. What stayed the same? |
+| e-middle | Middle sound 1 | pan → pen | 1 | Say pan together. / Listen to the middle sound. / Say pen. What stayed the same? |
+| u-middle | Middle sound 2 | cap → cup | 1 | Say cap together. / Listen to the middle sound. / Say cup. What stayed the same? |
+| two-vowels | Middle sound 3 | bed → bud | 1 | Say bed together. / Listen to the middle sound. / Say bud. What stayed the same? |
+| g-word | Middle sound 4 | bag → bug | 1 | Say bag together. / Listen to the middle sound. / Say bug. What stayed the same? |
 | e-start | First sound | hen → pen | 0 | Say hen together. / Listen to the first sound. / Say pen. What stayed the same? |
 | u-end | Last sound | cup → cub | 2 | Say cup together. / Listen to the last sound. / Say cub. What stayed the same? |
 
@@ -68,4 +68,4 @@ Target tokens (case-sensitive exact occurrences in the lowercase words): `bug`, 
 
 Illustration: a toy beetle resting on a closed model flower bud; an ink pen sticking out of an empty handled cup; a bear cub puppet sitting on a woven mat. This is one invented stage arrangement, not a field observation or a real instruction to place animals in containers.
 
-Grown-up addition: “We have looked at e, u, d and g in selected words. We keep the letters you arrange and the help opened here. Earlier teaching, pictures or other games may already have made a word familiar. This does not show how a child read or spelled it. The note is shared reading; your partner supplies the other words.”
+Grown-up addition: “This packet offers e, u, d and g in selected words. We keep the letters you arrange and the help opened here. Earlier teaching, pictures or other games may already have made a word familiar. This does not show how a child read or spelled it. The note is shared reading; your partner supplies the other words.”
