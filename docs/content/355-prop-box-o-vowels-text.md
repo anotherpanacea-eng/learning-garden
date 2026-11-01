@@ -4,7 +4,8 @@ Companion to [355](../specs/355-prop-box-o-vowels.md), proposed, not shipped. Al
 
 ## Shared copy
 
-- Set code/title: **long-o** / **o and final e**.
+- Set code: **long-o**.
+- Set button/title: **o and final e**.
 - Opening: **Dot has more words for the puppet show. Read each word with your partner. What changes when o and final e go together?**
 - New-use prompt for rod/rode: **Read this word in its sentence with your partner. Try counters for its sounds, then show the model whenever you want.**
 - Note summary: **A note after the show**.
@@ -22,12 +23,12 @@ Indices zero-based. Each final-e map has one nonadjacent vowel group; all six ha
 | --- | --- | --- | --- | --- | --- |
 | not | /nɑt/ · n,ɑ,t | [0]→[0];[1]→[1];[2]→[2] | The puppet will not hop. | Not can say that something does not happen. This puppet will not hop. | not355 / A puppet stands still beside a second, crossed-out picture of it hopping. |
 | note | /noʊt/ · n,oʊ,t | [0]→[0];[1,3]→[1];[2]→[2] | Dot sends a note. | A note can be a short written message. This note is for the puppets. | note355 / One puppet hands another a small sheet of paper with three wavy lines. |
-| hop | /hɑp/ · h,ɑ,p | [0]→[0];[1]→[1];[2]→[2] | The puppet can hop. | To hop is to make a small jump. This puppet jumps on one foot. | hop355 / Two pictures: a puppet stands on one foot, then springs up with that foot above the floor. |
+| hop | /hɑp/ · h,ɑ,p | [0]→[0];[1]→[1];[2]→[2] | The puppet can hop. | To hop is to make a small jump. | hop / Before: a puppet stands on the floor. After: it is just above the floor. |
 | hope | /hoʊp/ · h,oʊ,p | [0]→[0];[1,3]→[1];[2]→[2] | We hope to see the show. | To hope is to want something to happen and think it might. The puppets hope to see the show. | hope355 / Two puppets wait outside the theater; a thought bubble shows the stage and an audience. |
 | rod | /rɑd/ · r,ɑ,d | [0]→[0];[1]→[1];[2]→[2] | A rod is by the stage. | A rod is a long, thin, straight piece of material. This one is a pretend stage prop. | rod355 / A long, straight wooden stage rod rests beside a small puppet stage. |
 | rode | /roʊd/ · r,oʊ,d | [0]→[0];[1,3]→[1];[2]→[2] | The puppets rode home. | Rode tells about a ride that already happened. The puppets traveled on their cart. | rode355 / Two pictures: puppets travel on a wheeled cart, then stand with the cart outside their paper house. |
 
-Use the selected meanings only: note is a message, not a musical sound; rod is a prop, not a measurement or punishment; rode is an earlier ride, not the homophone road. The abstract/temporal meanings are supplied by sentence and adult explanation, never inferred from the picture. No art contains printed target words. For not, the second image has a clear diagonal cross; the sentence explains its meaning. Natural local vowels and connected speech can differ from the citation reference without correction. /oʊ/ is one phoneme, not two counters or two syllables.
+Reuse the existing Prop Box hop picture through the original-picture callback; its Before/After labels may remain. The five other scenes are new. Use the selected meanings only: not is negation, not a rope knot; note is a message, not a musical sound; rod is a prop, not a measurement or punishment; rode is an earlier ride, not the homophone road. The abstract/temporal meanings are supplied by sentence and adult explanation, never inferred from the picture. No art contains printed target words. For not, the second image has a clear diagonal cross; the sentence explains its meaning. Natural local vowels and connected speech can differ from the citation reference without correction. /oʊ/ is one phoneme, not two counters or two syllables.
 
 ## Thirty manual frames
 
@@ -83,4 +84,4 @@ Frames0–4. Frame0 none,1 first group,2 vowel group,3 last group,4 whole map. T
 | Compare hop and hope | hop and hope | hop,hope / `{hop:1,hope:1}` | Hop is a jump; hope is about something we want to happen. Listen to the different vowels. In hope, o and final e share one sound dot. |
 | Compare rod and rode | rod and rode | rod,rode / `{rod:1,rode:1}` | A rod is a thing; rode tells about an earlier ride. Both words have three speech sounds. Listen to the vowel that changes. |
 
-Compare includes each label, its exact sentence and its model. Labels equal ids here;354's display-label fallback remains. Reuse350's literal connector templates, including **Letters o and e go with Sound 2.** First selected word not; first four start Model, rod/rode Try. New guide is empty with no empty paragraph. This is adult-supported reference exploration, not a check of a child's pronunciation or unaided decoding.
+Compare includes each label, its exact sentence and its model. Labels equal ids here;354's display-label fallback remains. Reuse350's literal connector templates, including **Letters o and e go with Sound 2.** First selected word **not**; first four start Model, rod/rode Try. New guide is empty with no empty paragraph. This is adult-supported reference exploration, not a check of a child's pronunciation or unaided decoding.

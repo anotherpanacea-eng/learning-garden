@@ -17,7 +17,7 @@ Candidate Split Digraphs and Magic E `mt_C7abt7pRr6`, strand E1-I/II, includes a
 3. Single Letter Sounds → Knowing all letters `mt_frDIaXzWbx`.
 4. Knowing all letters → Understanding print `mt_1KCwbGvm1F` is hard bundled, soft upstream.
 
-Local supports: the printed word and left-to-right grouping, earlier printed words containing n/h/r/t/p/d/o, adult whole-word and constituent models, supplied meanings and open earlier sets. Letterpress351 supplies letter-case comparison, not certified naming;353 supplies selected a_e/i_e,354 supplies counterexamples. Broader adjacent vowel digraphs, other vowel patterns and automatic recognition remain unfinished. No child needs to pass an entry lock, and no supported turn marks those prerequisites complete.
+Local supports: the printed word and left-to-right grouping, earlier printed words containing n/h/r/t/p/d/o (including the existing Prop Box hop word and reused two-frame hop art), adult whole-word and constituent models, supplied meanings and open earlier sets. Letterpress351 supplies letter-case comparison, not certified naming;353 supplies selected a_e/i_e,354 supplies counterexamples. Broader adjacent vowel digraphs, other vowel patterns and automatic recognition remain unfinished. No child needs to pass an entry lock, and no supported turn marks those prerequisites complete.
 
 ## Primary material actually read
 
