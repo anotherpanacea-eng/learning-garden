@@ -127,6 +127,46 @@ export const copyScopes = [
   {path:'dist/living-adaptive-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/play-media.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/progress-transfer-ui.mjs',adultBlocks:[],quotations:[]},
+  // Science renderers (text review 2026-10-22, science area). Art, audio and core modules carry captions, feedback and status text too; only living-core, living-spiral-core, plant-study-core and science-core hold no copy.
+  {path:'dist/bell-studio-ui.mjs',adultBlocks:[],quotations:[
+    {quote:'This is practice with a supplied model, not a hearing test.',reason:'Inside the For grown-ups panel.'},
+  ]},
+  {path:'dist/field-notebook-ui.mjs',adultBlocks:[],quotations:[
+    {quote:"?'kept-in-plant-study':'supplied-model'",reason:'A stored origin code. Children see Model row; the raw code shows only in Grown-up notes.'},
+  ]},
+  {path:'dist/plant-study-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-notebook-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-paths-ui.mjs',adultBlocks:[],quotations:[
+    {quote:"'Supplied-control practice'",reason:'Inside the For grown-ups panel.'},
+  ]},
+  {path:'dist/science-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/workshop-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/notebook-sections.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/bell-studio-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/field-notebook-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/living-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/living-spiral-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/living-adaptive-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/plant-study-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-notebook-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-paths-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/science-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/bell-studio-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/bell-studio-audio.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/bell-studio-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/field-notebook-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/field-notebook-core.mjs',adultBlocks:[],quotations:[
+    {quote:"ORIGINS=['kept-in-plant-study','supplied-model']",reason:'Stored origin codes, not copy.'},
+    {quote:"origin='supplied-model'",reason:'A stored origin code default, not copy.'},
+  ]},
+  {path:'dist/living-adaptive-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/plant-study-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-notebook-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-notebook-bridge.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-notebook-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-paths-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rain-paths-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/workshop-core.mjs',adultBlocks:[],quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
