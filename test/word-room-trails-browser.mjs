@@ -29,6 +29,33 @@ async function layout(p){
  const undersized=await p.locator('[data-wrt-root]').evaluate(root=>[...root.querySelectorAll('*')].filter(el=>el.namespaceURI!=='http://www.w3.org/2000/svg'&&el.getClientRects().length&&[...el.childNodes].some(n=>n.nodeType===3&&n.textContent.trim())&&parseFloat(getComputedStyle(el).fontSize)<16).map(el=>({tag:el.tagName,class:el.className,size:getComputedStyle(el).fontSize,text:el.textContent.slice(0,80)})));eq(undersized,[],'visible non-SVG text is at least 16px');
  ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no sideways scrolling');for(const el of await p.locator('[data-wrt-root] button:visible,[data-wrt-root] summary:visible').all()){const r=await el.boundingBox();ok(r.width>=43.9&&r.height>=43.9,'44px target: '+await el.innerText());}}
 async function counters(p,n){await tap(p,'try');for(let i=0;i<n;i++)await tap(p,'counter',1);eq(await p.locator('#wrt-count').innerText(),'You placed '+n+(n===1?' counter.':' counters.'));}
+async function vowelJourney(p,width){
+ await tap(p,'word','kit');await counters(p,2);
+ await tap(p,'set','vowels');eq(await p.locator('#wr-task').innerText(),'cap','new set starts on cap');
+ for(const id of width===820?['cap','cape','kit','kite','pin','pine']:['pine']){
+  await tap(p,'word',id);
+  if(['pin','pine'].includes(id)){eq(await p.locator('.wrt-map').count(),0,'new use starts in Try');await tap(p,'counter',1);await tap(p,'model');}
+  eq(await p.locator('.wrt-print').count(),id.length);eq(await p.locator('.wrt-sound').count(),3);
+  await tap(p,'step',1);await tap(p,'step',1);
+  eq(await p.locator('.wrt-print.wrt-selected').evaluateAll(xs=>xs.map(x=>x.parentElement.getAttribute('aria-label'))),id.length===4?['Letter '+id[1],'Letter e']:['Letter '+id[1]],'only the vowel letters highlight');
+  eq(await p.locator('.wrt-sound.wrt-selected').count(),1,'the vowel is one phoneme');
+  if(width===820&&id==='cape'){
+   const cdp=await p.context().newCDPSession(p),{nodes}=await cdp.send('Accessibility.getFullAXTree');
+   const map=nodes.find(n=>n.role?.value==='group'&&n.name?.value==='cape: Our sound model');
+   ok(map?.description?.value.includes('Letters a and e go with Sound 2.')&&map.description.value.includes('Letter p goes with Sound 3.'),'actual accessibility tree keeps split vowel and consonant separate');await cdp.detach();
+   await p.screenshot({path:out+'/cape-vowel-frame.png',fullPage:true});
+  }
+  await layout(p);
+  if(id.length===4){await tap(p,'step',1);await tap(p,'step',1);eq(await p.locator('.wrt-sound.wrt-selected').count(),3);if(width===820)await p.screenshot({path:out+'/final-e-'+id+'.png',fullPage:true});await tap(p,'compare');eq(await p.locator('.wrt-map').count(),2);await layout(p);await tap(p,'back');}
+ }
+ await p.locator('[data-wrt-note] summary').tap();await p.locator('[data-wrt-note]').evaluate(e=>new Promise(r=>setTimeout(r,0)));
+ ok((await p.locator('[data-wrt-note]').innerText()).includes('A cap and a cape. A kit and a kite. A pin by a pine.'));
+ await tap(p,'word','kit');await counters(p,1);eq(await p.locator('[data-wrt-note]').evaluate(e=>e.open),true,'note stays available through word changes');
+ await tap(p,'set','sounds');eq(await p.locator('.wrt-counter').count(),2,'original kit work retained');
+ await tap(p,'set','vowels');eq(await p.locator('.wrt-counter').count(),1,'vowel kit is independent');await tap(p,'compare');await tap(p,'set','sounds');await tap(p,'set','vowels');eq(await p.locator('#wr-task').innerText(),'kit and kite','set restores Compare view');await tap(p,'back');
+ await tap(p,'leave');await tap(p,'enter');eq(await p.locator('.wrt-counter').count(),1,'re-entry resumes last set');
+ await p.screenshot({path:out+'/final-e-return-'+width+'.png',fullPage:true});
+}
 try{
  for(const[width,height]of[[820,1000],[320,600],[1024,768]]){
   const{c,p}=await setup(fixture(),width,height);
@@ -48,10 +75,11 @@ try{
    for(let i=0;i<6;i++)await tap(p,'counter',-1);eq(await p.evaluate(()=>document.activeElement.id),'wrt-count');
    await tap(p,'counter',1);eq(await p.locator('#wr-status').innerText(),'You placed 1 counter.','counter announcement filled after redraw');
    await p.evaluate(()=>window.__trailRedrawLate=document.querySelector('[data-wrt-action=counter][data-wrt-value="1"]'));await tap(p,'counter',1);await p.evaluate(()=>window.__trailRedrawLate.click());eq(await p.locator('.wrt-counter').count(),2,'detached control cannot mutate the same visit');await tap(p,'counter',-1);await tap(p,'leave');await tap(p,'enter');eq(await p.locator('.wrt-counter').count(),1,'same visit resumes');
+   await vowelJourney(p,width);
    eq(await read(p),before,'pure journey preserves full notebook');eq(await disk(p),saved,'pure journey performs no storage write');eq(await p.evaluate(()=>window.__trailSpeak),0,'no speech playback');
    await p.screenshot({path:out+'/counters-'+width+'.png',fullPage:true});
    await p.evaluate(()=>window.__trailLate=document.querySelector('[data-wrt-action=counter][data-wrt-value="1"]'));
-   await p.goto(base+'#words');await p.locator('[data-wrt-root]').waitFor({state:'detached'});await p.goto(base+'#words/props');await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'route exit ends visit');await p.evaluate(()=>window.__trailLate.click());eq(await p.locator('.wrt-counter').count(),0,'detached control inert');
+   await p.goto(base+'#words');await p.locator('[data-wrt-root]').waitFor({state:'detached'});await p.goto(base+'#words/props');await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'route exit ends visit');await p.evaluate(()=>window.__trailLate.click());eq(await p.locator('.wrt-counter').count(),0,'detached control inert');await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'route exit clears vowel work too');
   }finally{await c.close();}
  }
  // All four historical packets remain exactly intact while the overlay is open.
@@ -70,17 +98,17 @@ try{
    const text=await p.locator('#wr-task').innerText(),material=await p.locator('.wr-work,.wr-contrast').innerText(),before=await read(p);await p.evaluate(()=>window.__trailRefuse=true);await tap(p,'enter');await counters(p,1);await tap(p,'leave');eq(await p.locator('#wr-task').innerText(),text,'exact '+mode+' return');eq(await p.locator('.wr-work,.wr-contrast').innerText(),material,'exact '+mode+' material and frame');eq(await read(p),before);
   }finally{await c.close();}
  }
- const unsupported=fixture();unsupported.wordRoom={version:999,privateFuture:'keep verbatim'};const{c,p}=await setup(unsupported);try{const before=await read(p);await tap(p,'enter');await counters(p,1);await tap(p,'leave');eq(await read(p),before);ok(await p.locator('[data-wr-action=recover]').isVisible(),'unsupported old work remains recoverable');}finally{await c.close();}
+ const unsupported=fixture();unsupported.wordRoom={version:999,privateFuture:'keep verbatim'};const{c,p}=await setup(unsupported);try{const before=await read(p);await tap(p,'enter');await counters(p,1);await tap(p,'set','vowels');await counters(p,2);await tap(p,'leave');eq(await read(p),before);ok(await p.locator('[data-wr-action=recover]').isVisible(),'unsupported old work remains recoverable');}finally{await c.close();}
 
  // Recovery clears counters after a successful commit, never after a refused one.
  {const seed=fixture();seed.wordRoom={version:999,future:'keep'};const{c,p}=await setup(seed);try{
-  await tap(p,'enter');await counters(p,2);await tap(p,'leave');await p.locator('[data-wr-action=recover]').tap();await p.evaluate(()=>window.__trailRefuse=true);await p.locator('[data-wr-action=confirm]').tap();await tap(p,'enter');eq(await p.locator('.wrt-counter').count(),2,'refused recovery keeps visit');await tap(p,'leave');
-  await p.evaluate(()=>window.__trailRefuse=false);await p.locator('[data-wr-action=recover]').tap();await p.locator('[data-wr-action=confirm]').tap();await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery ends visit');
+  await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'leave');await p.locator('[data-wr-action=recover]').tap();await p.evaluate(()=>window.__trailRefuse=true);await p.locator('[data-wr-action=confirm]').tap();await tap(p,'enter');eq(await p.locator('.wrt-counter').count(),3,'refused recovery keeps vowel visit');await tap(p,'set','sounds');eq(await p.locator('.wrt-counter').count(),2,'refused recovery keeps original visit');await tap(p,'leave');
+  await p.evaluate(()=>window.__trailRefuse=false);await p.locator('[data-wr-action=recover]').tap();await p.locator('[data-wr-action=confirm]').tap();await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery ends original visit');eq(await p.locator('[data-wrt-action=set][data-wrt-value=sounds]').getAttribute('aria-pressed'),'true','successful recovery resets set');await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery clears vowel visit');
  }finally{await c.close();}}
  async function ready(p){await p.locator('[data-word-room-root],[data-select-explorer]').first().waitFor();if(await p.locator('[data-select-explorer]').count()){const id=await p.evaluate(()=>JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId);await p.locator('[data-select-explorer="'+id+'"]').tap();}await p.locator('[data-word-room-root]').waitFor();}
  for(const event of['owner','import','reset','reload']){
   const{c,p}=await setup();try{
-   await tap(p,'enter');await counters(p,2);await p.evaluate(()=>window.__trailEventLate=document.querySelector('[data-wrt-action=counter][data-wrt-value="1"]'));
+   await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await p.evaluate(()=>window.__trailEventLate=document.querySelector('[data-wrt-action=counter][data-wrt-value="1"]'));
    if(event==='owner'){await p.locator('#explorer-switch').tap();await p.locator('#explorer-new').tap();await p.locator('#explorer-create').tap();}
    else if(event==='reload')await p.reload();
    else{
@@ -90,9 +118,10 @@ try{
     await p.goto(base+'#words/props');
    }
    await ready(p);await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' starts a fresh visit');
+   await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' clears vowel work too');
    if(event!=='reload'){await p.evaluate(()=>window.__trailEventLate.click());eq(await p.locator('.wrt-counter').count(),0,event+' invalidates previous controls');}
   }finally{await c.close();}
  }
- {const{c,p}=await setup();try{await p.goto(base+'#notes');await p.locator('#remember').uncheck();await p.goto(base+'#words/props');const saved=await disk(p);await tap(p,'enter');await counters(p,2);eq(await disk(p),saved,'saving off does not block counters or write storage');}finally{await c.close();}}
+ {const{c,p}=await setup();try{await p.goto(base+'#notes');await p.locator('#remember').uncheck();await p.goto(base+'#words/props');const saved=await disk(p);await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);eq(await disk(p),saved,'saving off does not block counters or write storage');}finally{await c.close();}}
  eq(errors,[],'no browser errors');console.log('Sound trails native: '+assertions+' assertions passed. Artifacts: '+out);
 }finally{await browser.close();await new Promise(r=>server.close(r));}

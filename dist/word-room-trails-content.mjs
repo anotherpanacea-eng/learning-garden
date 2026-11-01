@@ -14,9 +14,369 @@ const source={words:{
  guide:{"fox": "At the end, x represents /k/ followed by /s/ in this word. Model both without adding a vowel. These are two phonemes, not one sound called the letter name.", "mix": "At the end, x represents /k/ followed by /s/ in this word. Model both without adding a vowel. These are two phonemes, not one sound called the letter name.", "fog": "Use the local natural vowel in fog. It may differ from fox. Model three sounds without demanding a released final g.", "kit": "Use the tool-set meaning. Model three sounds. The child may have seen this printed word before.", "quit": "In this word, qu writes /k/ followed by /w/. Keep two sound dots even though the two letters are highlighted together. This u is not the middle vowel sound in cup. Say the whole word naturally rather than the letter names.", "quiz": "In this word, qu writes /k/ followed by /w/. Keep two sound dots even though the two letters are highlighted together. This u is not the middle vowel sound in cup. Say the whole word naturally rather than the letter names."}};
 source.grownup=TRAIL_GROWNUP;
 
-export function createSoundTrails(){
- return {source:structuredClone(source),selected:'fox',compare:false,
-  work:Object.fromEntries(Object.keys(source.words).map(id=>[id,{count:0,frame:0,tool:['mix','quiz'].includes(id)?'try':'model'}]))};
+
+// Original353 extends the same visit-only material; the original350 source stays exact.
+const vowelSource={id:'final-e',words:{
+ "cap": {
+  "id": "cap",
+  "label": "cap",
+  "letters": [
+   "c",
+   "a",
+   "p"
+  ],
+  "reference": "/kæp/",
+  "phonemes": [
+   "k",
+   "æ",
+   "p"
+  ],
+  "groups": [
+   {
+    "letters": [
+     0
+    ],
+    "sounds": [
+     0
+    ]
+   },
+   {
+    "letters": [
+     1
+    ],
+    "sounds": [
+     1
+    ]
+   },
+   {
+    "letters": [
+     2
+    ],
+    "sounds": [
+     2
+    ]
+   }
+  ],
+  "meaning": "A cap is a hat. This one is a costume prop.",
+  "alt": "A soft costume cap with a short visor rests on a peg.",
+  "art": "cap342",
+  "frames": [
+   "Read cap together. Your partner says the whole word.",
+   "Point to c. Your partner says the first sound.",
+   "Point to a. Your partner says the vowel sound.",
+   "Point to p. Your partner says the last sound.",
+   "Three letters, three sounds in our model of cap."
+  ]
+ },
+ "cape": {
+  "id": "cape",
+  "label": "cape",
+  "letters": [
+   "c",
+   "a",
+   "p",
+   "e"
+  ],
+  "reference": "/keɪp/",
+  "phonemes": [
+   "k",
+   "eɪ",
+   "p"
+  ],
+  "groups": [
+   {
+    "letters": [
+     0
+    ],
+    "sounds": [
+     0
+    ]
+   },
+   {
+    "letters": [
+     1,
+     3
+    ],
+    "sounds": [
+     1
+    ]
+   },
+   {
+    "letters": [
+     2
+    ],
+    "sounds": [
+     2
+    ]
+   }
+  ],
+  "meaning": "A cape is a loose piece of clothing worn from the shoulders. This one is a costume prop.",
+  "alt": "A loose red costume cape hangs from two shoulder ties on a peg.",
+  "art": "cape353",
+  "frames": [
+   "Read cape together. Your partner says the whole word.",
+   "Point to c. Your partner says the first sound.",
+   "Point to a and the final e. Together they help write the vowel sound in cape. Your partner says the vowel sound.",
+   "Point to p. Your partner says the last sound.",
+   "Four letters, three sounds. In cape, a and the final e help write one vowel sound."
+  ]
+ },
+ "kit": {
+  "id": "kit",
+  "label": "kit",
+  "letters": [
+   "k",
+   "i",
+   "t"
+  ],
+  "reference": "/kɪt/",
+  "phonemes": [
+   "k",
+   "ɪ",
+   "t"
+  ],
+  "groups": [
+   {
+    "letters": [
+     0
+    ],
+    "sounds": [
+     0
+    ]
+   },
+   {
+    "letters": [
+     1
+    ],
+    "sounds": [
+     1
+    ]
+   },
+   {
+    "letters": [
+     2
+    ],
+    "sounds": [
+     2
+    ]
+   }
+  ],
+  "meaning": "A kit is a set of things for a job. This one holds puppet-repair tools.",
+  "alt": "An open box with a handle holds a spool, a patch and blunt pretend repair tools.",
+  "art": "kit348",
+  "frames": [
+   "Read kit together. Your partner says the whole word.",
+   "Point to k. Your partner says the first sound.",
+   "Point to i. Your partner says the vowel sound.",
+   "Point to t. Your partner says the last sound.",
+   "Three letters, three sounds in our model of kit."
+  ]
+ },
+ "kite": {
+  "id": "kite",
+  "label": "kite",
+  "letters": [
+   "k",
+   "i",
+   "t",
+   "e"
+  ],
+  "reference": "/kaɪt/",
+  "phonemes": [
+   "k",
+   "aɪ",
+   "t"
+  ],
+  "groups": [
+   {
+    "letters": [
+     0
+    ],
+    "sounds": [
+     0
+    ]
+   },
+   {
+    "letters": [
+     1,
+     3
+    ],
+    "sounds": [
+     1
+    ]
+   },
+   {
+    "letters": [
+     2
+    ],
+    "sounds": [
+     2
+    ]
+   }
+  ],
+  "meaning": "A kite is a light frame covered with cloth or paper. It can fly in the wind on a string.",
+  "alt": "A diamond-shaped toy kite has crossed sticks, a tail and a string wound on a handle.",
+  "art": "kite353",
+  "frames": [
+   "Read kite together. Your partner says the whole word.",
+   "Point to k. Your partner says the first sound.",
+   "Point to i and the final e. Together they help write the vowel sound in kite. Your partner says the vowel sound.",
+   "Point to t. Your partner says the last sound.",
+   "Four letters, three sounds. In kite, i and the final e help write one vowel sound."
+  ]
+ },
+ "pin": {
+  "id": "pin",
+  "label": "pin",
+  "letters": [
+   "p",
+   "i",
+   "n"
+  ],
+  "reference": "/pɪn/",
+  "phonemes": [
+   "p",
+   "ɪ",
+   "n"
+  ],
+  "groups": [
+   {
+    "letters": [
+     0
+    ],
+    "sounds": [
+     0
+    ]
+   },
+   {
+    "letters": [
+     1
+    ],
+    "sounds": [
+     1
+    ]
+   },
+   {
+    "letters": [
+     2
+    ],
+    "sounds": [
+     2
+    ]
+   }
+  ],
+  "meaning": "A badge pin is a pretend theater prop.",
+  "alt": "A round badge has a pin fitting shown beside its back.",
+  "art": "pin",
+  "frames": [
+   "Read pin together. Your partner says the whole word.",
+   "Point to p. Your partner says the first sound.",
+   "Point to i. Your partner says the vowel sound.",
+   "Point to n. Your partner says the last sound.",
+   "Three letters, three sounds in our model of pin."
+  ]
+ },
+ "pine": {
+  "id": "pine",
+  "label": "pine",
+  "letters": [
+   "p",
+   "i",
+   "n",
+   "e"
+  ],
+  "reference": "/paɪn/",
+  "phonemes": [
+   "p",
+   "aɪ",
+   "n"
+  ],
+  "groups": [
+   {
+    "letters": [
+     0
+    ],
+    "sounds": [
+     0
+    ]
+   },
+   {
+    "letters": [
+     1,
+     3
+    ],
+    "sounds": [
+     1
+    ]
+   },
+   {
+    "letters": [
+     2
+    ],
+    "sounds": [
+     2
+    ]
+   }
+  ],
+  "meaning": "A pine is a tree with needles instead of broad leaves.",
+  "alt": "A small pine tree has bundles of long thin needles and two cones.",
+  "art": "pine353",
+  "frames": [
+   "Read pine together. Your partner says the whole word.",
+   "Point to p. Your partner says the first sound.",
+   "Point to i and the final e. Together they help write the vowel sound in pine. Your partner says the vowel sound.",
+   "Point to n. Your partner says the last sound.",
+   "Four letters, three sounds. In pine, i and the final e help write one vowel sound."
+  ]
+ }
+},
+ pairs:{
+ "cap": {
+  "ids": [
+   "cap",
+   "cape"
+  ],
+  "title": "cap and cape",
+  "text": "In our model, cap and cape each have three sounds. The word cape has one more letter. The vowel changes; first and last sounds stay.",
+  "highlight": {
+   "cap": 1,
+   "cape": 1
+  }
+ },
+ "kit": {
+  "ids": [
+   "kit",
+   "kite"
+  ],
+  "title": "kit and kite",
+  "text": "In our model, kit and kite each have three sounds. The word kite has one more letter. The vowel changes; first and last sounds stay.",
+  "highlight": {
+   "kit": 1,
+   "kite": 1
+  }
+ },
+ "pin": {
+  "ids": [
+   "pin",
+   "pine"
+  ],
+  "title": "pin and pine",
+  "text": "In our model, pin and pine each have three sounds. The word pine has one more letter. The vowel changes; first and last sounds stay.",
+  "highlight": {
+   "pin": 1,
+   "pine": 1
+  }
+ }
+},
+ copy:{...source.copy,title:'A final e',opening:'Dot is sorting props for the show. Read these words together. What changes when a final e joins these words?',newUse:{pin:'Read pin together. Try counters for its sounds. Then explore pine and compare the words.',pine:'Read pine together. Try counters for its sounds. Show the model whenever you want.'},compare:{"cap": "Compare cap and cape", "cape": "Compare cap and cape", "kit": "Compare kit and kite", "kite": "Compare kit and kite", "pin": "Compare pin and pine", "pine": "Compare pin and pine"}},
+ guide:{},grownup:TRAIL_GROWNUP,extraGrownup:"Long a and long i each count as one vowel sound here. The final e has no extra sound or syllable in these words. Other words ending in e can work differently.",
+ note:{title:'A note for the show',text:'A cap and a cape. A kit and a kite. A pin by a pine.',guide:'Read this note together. Your partner can supply any word. The picture with each word helps tell what it means.'}};
+
+export function createSoundTrails(set='sounds'){
+ if(!['sounds','vowels'].includes(set))return null;
+ const material=set==='vowels'?vowelSource:source,tryWords=set==='vowels'?['pin','pine']:['mix','quiz'];
+ return {source:structuredClone(material),selected:set==='vowels'?'cap':'fox',compare:false,
+  work:Object.fromEntries(Object.keys(material.words).map(id=>[id,{count:0,frame:0,tool:tryWords.includes(id)?'try':'model'}]))};
 }
 export function soundTrailPair(v){
  return Object.values(v.source.pairs).find(p=>p.ids.includes(v.selected))||null;
