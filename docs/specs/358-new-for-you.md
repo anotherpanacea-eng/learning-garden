@@ -38,6 +38,8 @@ Each explorer gets one small record, stored beside the notebook in its own key, 
 
 The record is not part of the notebook. Existing journeys require that entering a room leaves every notebook root unchanged, and this record changes on nearly every visit. (The first build put it in the notebook; thirteen existing browser suites caught it.) Because the key shares the notebook prefix, clearing every explorer or turning saving off removes it with the notebooks. While saving is off it lives in memory only. The app's other-tab conflict check watches only the registry and notebook keys, so writing this record never reads as another tab's change. `explorer` is the profile's `createdAt`, so an explorer id that is reused after a deletion starts fresh instead of inheriting an old record. Downloads do not carry it.
 
+Known limit, accepted: turning saving off removes every explorer's record along with the notebooks. When saving returns, the active explorer's record is written again from memory, but other explorers' records are not, so rooms they had opened can show New again until reopened. Nothing in a notebook is lost, the case is rare, and it recovers by itself. Fixing it would mean changing the explorer storage module for a cosmetic effect.
+
 All dates are local calendar dates, `YYYY-MM-DD`.
 
 - **Only the chosen explorer.** All bookkeeping below (first use, visits and opening) runs only on a render for the chosen explorer, never while the explorer picker is showing. The app loads the previous explorer's notebook before the picker appears, so updating there would move the wrong explorer's dates.
