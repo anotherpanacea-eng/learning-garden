@@ -1,6 +1,6 @@
 # 350 source study · letters and sound counters
 
-Author study2026-11-01 for [spec350](../specs/350-prop-box-sound-trails.md) and [finite material](../content/350-prop-box-sound-trails-text.md). Pending independent written linguistic/content review, not an acoustic or learning qualification.
+Author study2026-11-01 for [spec350](../specs/350-prop-box-sound-trails.md) and [finite material](../content/350-prop-box-sound-trails-text.md). Independent written linguistic/content review cleared the finite material in [PR384](https://github.com/anotherpanacea-eng/learning-garden/pull/384#issuecomment-6554837307). This is not an acoustic or learning qualification; runtime has since shipped after independent implementation review. The [roadmap](../roadmap.md) links the canonical runtime release receipt.
 
 Jane refreshed at e88f81a00553fb87818ef84c77a8800f0dcb33e4; actual [LESSONS.md](https://github.com/kentlangley/Jane/blob/e88f81a00553fb87818ef84c77a8800f0dcb33e4/LESSONS.md) reread for teaching, worked steps and optional support before practice. Design study only, no copied code/prose. Do not adopt its mastery, points, bosses, review gates or remote records. Its code and documentation licenses remain separate.
 

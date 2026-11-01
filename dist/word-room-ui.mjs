@@ -1,3 +1,5 @@
+import {createSoundTrails,changeSoundTrail,soundTrailCounterLine,SOUND_TRAIL_ENTRY} from './word-room-trails-content.mjs';
+import {soundTrailPage} from './word-room-trails-ui.mjs';
 import {soundMessagesPage,soundMessagesEntry,soundMessagesNotes,bindSoundMessages} from './word-room-sounds-ui.mjs';
 import {soundMessagesView} from './word-room-sounds-core.mjs';
 import {makeWordRoomSource} from './word-room-content.mjs';
@@ -106,8 +108,10 @@ function reading(v) {
   return `<h2 id="wr-task" tabindex="-1">${esc(t.title)}</h2><p>Underlined words are our prop words. Your grown-up supplies the other words.</p><div class="wr-reading-board"><div class="wr-reading-pictures" role="group" aria-label="${esc(t.title)}">${scenePicture(t)||cards.map(w=>wordRoomPicture(w,true)).join('')}</div><div class="wr-reading-copy"><p class="wr-passage">${passage}</p><p class="wr-discuss">${esc(t.prompt)}</p></div></div><div class="wr-actions">${button('back','Back')}${button('choose','Choose a little scene')}<a href="#loft">Make a scene in Story Loft</a></div>`;
 }
 export function wordRoomPage(book, owner) {
+  const local=view(book,owner);
+  if(local.mode==='trails')return soundTrailPage(local.trails);
   if(soundMessagesView(book).active)return soundMessagesPage(book,wordRoomPicture);
-  const v=wordRoomView(book),local=view(book,owner),header='<header class="wr-header"><a href="#words">Word Garden</a><div><h1>Word Workshop</h1><span>The Prop Box</span></div></header>';
+  const v=wordRoomView(book),header='<header class="wr-header"><a href="#words">Word Garden</a><div><h1>Word Workshop</h1><span>The Prop Box</span></div><button type="button" data-wrt-action="enter">'+esc(SOUND_TRAIL_ENTRY)+'</button></header>';
   if(v.status==='unsupported')return `<section class="wr-room" data-word-room-root>${header}<h2 id="wr-task" tabindex="-1">The Prop Box</h2><p>This earlier prop box cannot open here. It is kept in Grown-up notes. The rest of Word Garden is open.</p>${button('recover','Start a fresh prop box')}<a href="#notes">Grown-up notes</a><p id="wr-status" role="status" tabindex="-1"></p>${recoveryDialog(local)}</section>`;
   const choose=v.page==='choose',target=v.word?`<p class="wr-waiting">Our prop: <strong>${esc(v.word.label)}</strong>.</p>`:'';
   const ready=v.complete?`<section class="wr-ready" tabindex="-1" aria-label="The prop box is ready"><p>The prop box has all its labels. What scene shall we make?</p><div class="wr-actions">${v.texts.some(x=>x.text)?button('scenes','Read a little scene'):''}${button('revisit','Visit a label again')}<a href="#loft">Make another scene</a></div></section>`:'';
@@ -129,8 +133,6 @@ export function wordRoomNotes(book) {
 export function bindWordRoom(book, ctx) {
   controller?.abort();const events=new AbortController();controller=events;
   const root=document.querySelector('[data-word-room-root]');if(!root)return;
-  bindSoundMessages(book,ctx,root,events);
-  if(soundMessagesView(book).active)return;
   const owner=ctx.explorerId(),local=view(book,owner),initialRoot=book.wordRoom;
   const owned=()=>root.isConnected&&document.querySelector('[data-word-room-root]')===root&&ctx.notebook()===book&&ctx.explorerId()===owner&&ctx.isActive()&&location.hash===route;
   const live=el=>owned()&&book.wordRoom===initialRoot&&el.isConnected&&root.contains(el)&&!el.closest('details:not([open])')&&(!root.querySelector('dialog[open]')||!!el.closest('dialog[open]'));
@@ -144,6 +146,27 @@ export function bindWordRoom(book, ctx) {
     const status=next.querySelector('#wr-status');if(status)status.textContent=message;
     const focus=next.querySelector(selector)||next.querySelector('#wr-task');if(focus&&!focus.closest('details:not([open])'))focus.focus();
   };
+  window.addEventListener('hashchange',()=>{if(location.hash!==route){views.delete(book);events.abort();}},{signal:events.signal});
+  root.querySelectorAll('[data-wrt-action]').forEach(el=>el.addEventListener('click',()=>{
+    if(!live(el)||el.disabled)return;
+    const action=el.dataset.wrtAction;
+    if(action==='enter'){
+      if(local.mode==='trails')return;
+      local.trailsReturnMode=local.mode;
+      local.trails??=createSoundTrails();local.mode='trails';return redraw();
+    }
+    if(local.mode!=='trails')return;
+    if(action==='leave'){local.mode=local.trailsReturnMode||'main';return redraw();}
+    const value=['counter','step'].includes(action)?Number(el.dataset.wrtValue):el.dataset.wrtValue;
+    const next=changeSoundTrail(local.trails,action,value);if(!next)return;
+    local.trails=next;
+    const count=next.work[next.selected].count;
+    const focus=action==='counter'?(count===0||count===6?'#wrt-count':'[data-wrt-action="counter"][data-wrt-value="'+value+'"]'):action==='step'?'#wrt-step':'#wr-task';
+    redraw(action==='counter'&&focus!=='#wrt-count'?soundTrailCounterLine(count):'',focus);
+  },{signal:events.signal}));
+  if(local.mode==='trails'){ctx.stopSpeech?.();return;}
+  bindSoundMessages(book,{...ctx,onRootCommitted:()=>{if(owned())local.root=book.wordRoom;}},root,events);
+  if(soundMessagesView(book).active)return;
   const options=el=>({canExport:ctx.canExport,isCurrent:()=>live(el)});
   const act=(el,fn,{message='',focus='#wr-task',mode='main'}={})=>{
     if(!live(el))return;
@@ -189,11 +212,10 @@ export function bindWordRoom(book, ctx) {
     if(a==='cancel'){local.dialog=null;return redraw('','[data-wr-action="recover"]');}
     if(a==='confirm') {
       if(!local.dialog||local.dialog.root!==book.wordRoom)return;
-      return act(el,o=>recoverWordRoom(book,true,o));
+      return act(el,o=>{const r=recoverWordRoom(book,true,o);if(r.ok)local.trails=null;return r;});
     }
   }));
   const dialog=root.querySelector('dialog');
   if(dialog){dialog.showModal();dialog.addEventListener('cancel',e=>{e.preventDefault();if(live(dialog)){local.dialog=null;redraw('','[data-wr-action="recover"]');}});}
-  window.addEventListener('hashchange',()=>{if(location.hash!==route){views.delete(book);events.abort();}},{signal:events.signal});
   ctx.stopSpeech?.();
 }
