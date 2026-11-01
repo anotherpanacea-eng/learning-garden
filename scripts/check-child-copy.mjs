@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 export const copyScopes = [
+  {path:'dist/letterpress-content.mjs',adultBlocks:[{start:'export const LETTERPRESS_GROWNUP=',end:'// End of the letterpress grown-up interpretation.',reason:'Only displayed in the folded grown-up interpretation; all child copy remains in scope.'}],quotations:[]},
+  {path:'dist/letterpress-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/word-room-trails-content.mjs',adultBlocks:[{start:'export const TRAIL_GROWNUP=',end:'// End of the grown-up interpretation.',reason:'Shown only inside the folded grown-up interpretation; all child material remains in scope.'}],quotations:[]},
   {path:'dist/word-room-trails-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/beat-bench-ui.mjs',adultBlocks:[{start:'function notesCases(',end:'\nexport const beatBenchEntry',reason:'Only used in Grown-up notes; child helpers remain in scope.'}],quotations:[]},
