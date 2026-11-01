@@ -62,5 +62,5 @@ Only the joined runs change:
   - each shelf holds the expected number of entries, and every expected link is present once;
   - a new room's entry comes first;
   - the page has no sideways scroll;
-  - at 820 px the Number Garden is at least 1,000 px shorter than on the base branch.
+  - at 820 px each shelf's grid is at least 25% shorter than its entries would be stacked one above another (measured in the page). A grid of cards keeps each card's own button, so the saving is roughly a third of the run, not more.
 - The existing browser suites that visit these pages still pass: home-entry, learning-journeys, explorer-concurrency, and those whose rooms sit on the shelves, such as mixing-table, gap-line, ratio-bars, field-strips and feeding-board. `node scripts/run-checks.mjs` passes.

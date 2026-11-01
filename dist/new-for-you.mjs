@@ -78,3 +78,14 @@ export function markNewRooms(doc,record=active,today=localDay()){
   else if(!on&&dot)a.querySelectorAll(':scope > .nfy-place').forEach(x=>x.remove());
  }
 }
+
+// Spec 359: a place page's run of room entry cards as one labeled grid. Entries are kept byte for byte; an entry
+// with any link to a new room moves to the front, in stable order. Empty entries are dropped.
+let shelfCount=0;
+export function roomShelf(title,entries,record=active,today=localDay()){
+ const list=entries.filter(e=>typeof e==='string'&&e.trim());
+ if(!list.length)return '';
+ const fresh=new Set(newRooms(record,today).map(r=>r.route)),isNew=e=>[...e.matchAll(/href="(#[^"]+)"/g)].some(m=>fresh.has(m[1]));
+ const id=`room-shelf-${++shelfCount}`;
+ return `<section class="room-shelf" aria-labelledby="${id}"><h2 id="${id}">${esc(title)}</h2><div class="room-shelf-grid">${[...list.filter(isNew),...list.filter(e=>!isNew(e))].join('')}</div></section>`;
+}
