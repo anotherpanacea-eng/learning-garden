@@ -236,6 +236,61 @@ export const copyScopes = [
   {path:'dist/travelers-archive-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/travelers-archive-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/packs/puppet-post.mjs',adultBlocks:[],quotations:[]},
+  // Words, letters, stories, post office and loft (text review 2026-10-22, words-stories area). Flagged lines are adult panels or stored codes.
+  {path:'dist/letter-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/letter-trail-core.mjs',adultBlocks:[],quotations:[
+    {quote:"!['supplied','human'].includes(x.mode)",reason:'Stored keep-mode codes, not copy.'},
+    {quote:"keepLetter(state,place,mode='supplied'){",reason:'A stored keep-mode code default, not copy.'},
+    {quote:"if(!['supplied','human'].includes(mode))",reason:'Stored keep-mode codes, not copy.'},
+    {quote:"const card=mode==='supplied'?messageCard(x.case,x.work.cardId):null,clue=mode==='supplied'?",reason:'Stored keep-mode codes, not copy.'},
+    {quote:"qualifies:mode==='supplied'&&",reason:'A stored keep-mode code, not copy.'},
+    {quote:"if(mode==='supplied'&&snapshot.fits",reason:'A stored keep-mode code, not copy.'},
+  ]},
+  {path:'dist/letter-trail-ui.mjs',adultBlocks:[
+    {start:'export function letterNotes(',end:"(state.letterTrail,null,2))}</pre>`}</details>`;}",reason:'Only used in Grown-up notes.'},
+  ],quotations:[
+    {quote:"data-letter-keep=\"${human?'human':'supplied'}\"",reason:'A stored keep-mode code in a data attribute, not copy.'},
+  ]},
+  {path:'dist/loft-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/loft-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/loft-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/loft-ui.mjs',adultBlocks:[
+    {start:'<details class="loft-grownups">',end:'<a href="#notes">Open Grown-up notes</a></details></div>`;',reason:'Grown-ups: what this little stage practices panel.'},
+    {start:'export function loftNotes(',end:'\nexport function bindLoft(',reason:'Only used in Grown-up notes.'},
+  ],quotations:[]},
+  {path:'dist/message-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/message-core.mjs',adultBlocks:[],quotations:[
+    {quote:",'provenance'],['spelling'])",reason:'A saved-record key list, not copy.'},
+  ]},
+  {path:'dist/message-spelling-content.mjs',adultBlocks:[],quotations:[
+    {quote:"notesSupport:'The reader question was supplied.",reason:'Shown only in the Spelling for a reader section of Grown-up notes.'},
+  ]},
+  {path:'dist/message-spelling-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/message-ui.mjs',adultBlocks:[
+    {start:'<details class="msg-grownups"><summary>For grown-ups</summary><p>${options.roundRoute',end:'<a href="#notes">Open Grown-up notes</a></details></div>`;}',reason:'For grown-ups panel.'},
+    {start:'\nfunction spellingNote(',end:'(s.recovered,null,2))}</pre>`:\'\'}</details>`;}',reason:'Only used in Grown-up notes.'},
+  ],quotations:[
+    {quote:"supplied=phase?c.reason:",reason:'A local variable name, not copy.'},
+    {quote:"<p>${esc(supplied)}</p>",reason:'A local variable name; the shown text is the case idea.'},
+    {quote:"const supplied=frozen??",reason:'A local variable name, not copy.'},
+    {quote:"const helpHTML=supplied?",reason:'A local variable name, not copy.'},
+    {quote:"${supplied?`<strong>",reason:'A local variable name, not copy.'},
+    {quote:'<p class="msg-supplied-dialogue"',reason:'A CSS class name, not copy.'},
+    {quote:"document.querySelector('.msg-supplied-dialogue')",reason:'A CSS class name, not copy.'},
+  ]},
+  {path:'dist/post-office-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/post-office-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/post-office-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/post-rival-generator.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/post-rival.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/story-arrivals-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/story-arrivals-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/story-arrivals-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/story-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/story-order-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/word-garden-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/word-garden-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/word-garden-ui.mjs',adultBlocks:[],quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -246,10 +301,12 @@ function uniqueAt(text, fragment, label) {
   if(at<0||text.indexOf(fragment,at+1)>=0)throw Error(`${label}: marker is missing or ambiguous`);
   return at;
 }
-// A code property access (`w.provenance`, `w?.provenance`) or a bare object key (`{supplied:`, `,provenance:`)
+// A code property access (`w.provenance`, `w?.provenance`), its receiver (`supplied.question`, `supplied?.teaching`)
+// or a bare object key (`{supplied:`, `,provenance:`)
 // is an identifier, not copy. Lexical only: prose candidates with a space before or no colon after stay flagged.
 function codeIdentifier(text, at, length) {
   if(/\??\.$/.test(text.slice(Math.max(0,at-2),at)))return true;
+  if(/^\??\.[\p{L}_$]/u.test(text.slice(at+length,at+length+3)))return true;
   return /[{,]\s*$/.test(text.slice(Math.max(0,at-40),at))&&/^\s*:/.test(text.slice(at+length,at+length+8));
 }
 export function scanCopySource(text, {path='fixture',adultBlocks=[],quotations=[]}={}) {
