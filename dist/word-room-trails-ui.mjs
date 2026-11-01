@@ -32,7 +32,7 @@ function model(v,id=v.selected,frame=v.work[id].frame){
  for(let i=0;i<w.phonemes.length;i++)svg+='<g role="img" aria-label="Sound '+(i+1)+'"><circle class="wrt-sound'+(r.sounds.includes(i)?' wrt-selected':'')+'" cx="'+dotX(i)+'" cy="137" r="18"/><text x="'+dotX(i)+'" y="143" class="wrt-number" aria-hidden="true">'+(i+1)+'</text></g>';
  return '<figure class="wrt-model"><figcaption>'+esc(v.source.copy.model)+'</figcaption><svg class="wrt-map" viewBox="0 0 320 170" role="group" aria-label="'+esc(w.label+': '+v.source.copy.model)+'" aria-describedby="wrt-map-'+id+'"><desc id="wrt-map-'+id+'">'+esc(w.groups.map(g=>connector(w,g)).join(' '))+'</desc>'+svg+'</svg></figure>';
 }
-function printed(w){return '<div class="wrt-print-only" aria-label="'+esc(w.label)+'">'+w.letters.map(l=>'<span>'+esc(l)+'</span>').join('')+'</div>';}
+function printed(w){return '<div class="wrt-print-only" role="group" aria-label="'+esc(w.label)+'">'+w.letters.map(l=>'<span>'+esc(l)+'</span>').join('')+'</div>';}
 export function soundTrailPage(v){
  const c=v.source.copy,w=v.source.words[v.selected],a=v.work[v.selected],pair=soundTrailPair(v);
  let task;
@@ -43,10 +43,10 @@ export function soundTrailPage(v){
   let mat;
   if(a.tool==='try'){
    const counters=Array.from({length:a.count},(_,i)=>'<span class="wrt-counter" role="img" aria-label="Counter '+(i+1)+'"><i aria-hidden="true">'+(i+1)+'</i></span>').join('');
-   mat='<h3>'+esc(c.own)+'</h3>'+printed(w)+'<p class="wrt-prompt">'+esc(c.newUse[w.id]||c.tryPrompt)+'</p><div class="wrt-counters" role="group" aria-label="'+esc(c.own)+'">'+counters+'</div><p id="wrt-count" tabindex="-1" role="status" aria-live="polite" aria-atomic="true">'+esc(soundTrailCounterLine(a.count))+'</p><div class="wrt-counter-actions">'+button('counter',c.add,1,{disabled:a.count===6})+button('counter',c.take,-1,{disabled:a.count===0})+'</div><div class="wrt-actions">'+button('model',c.show)+'</div>';
+   mat='<h3>'+esc(c.own)+'</h3>'+printed(w)+'<p class="wrt-prompt">'+esc(c.newUse[w.id]||c.tryPrompt)+'</p><div class="wrt-counters" role="group" aria-label="'+esc(c.own)+'">'+counters+'</div><p id="wrt-count" tabindex="-1">'+esc(soundTrailCounterLine(a.count))+'</p><div class="wrt-counter-actions">'+button('counter',c.add,1,{disabled:a.count===6})+button('counter',c.take,-1,{disabled:a.count===0})+'</div><div class="wrt-actions">'+button('model',c.show)+'</div>';
   }else mat=model(v)+'<p id="wrt-step" tabindex="-1" class="wrt-prompt">'+esc(w.frames[a.frame])+'</p><div class="wrt-actions">'+button('step',c.prev,-1,{disabled:a.frame===0})+button('step',c.next,1,{disabled:a.frame===4})+button('try',c.try)+'</div>';
   task='<h2 id="wr-task" tabindex="-1">'+esc(w.label)+'</h2><div class="wrt-work">'+figures+'<section class="wrt-mat">'+mat+'</section></div>'+(pair?'<div class="wrt-actions">'+button('compare',c.compare[w.id])+'</div>':'');
  }
  const choices='<nav class="wrt-words" aria-label="Choose a word">'+Object.keys(v.source.words).map(id=>button('word',id,id,{pressed:v.selected===id})).join('')+'</nav>';
- return '<section class="wr-room wrt-room" data-word-room-root data-wrt-root data-wrt-word="'+v.selected+'"><header class="wr-header">'+button('leave',c.back)+'<div><h1>'+esc(c.title)+'</h1></div></header><p class="wrt-opening">'+esc(c.opening)+'</p>'+choices+'<div class="wrt-task">'+task+'</div><p class="wrt-visit">'+esc(c.visit)+'</p><details class="wrt-grownups"><summary>'+esc(c.grownupTitle)+'</summary><p>'+esc(v.source.grownup)+'</p><p>'+esc(v.source.guide[w.id])+'</p><p>'+esc(w.reference)+'</p></details></section>';
+ return '<section class="wr-room wrt-room" data-word-room-root data-wrt-root data-wrt-word="'+v.selected+'"><header class="wr-header">'+button('leave',c.back)+'<div><h1>'+esc(c.title)+'</h1></div></header><p class="wrt-opening">'+esc(c.opening)+'</p>'+choices+'<div class="wrt-task">'+task+'</div><p id="wr-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p><p class="wrt-visit">'+esc(c.visit)+'</p><details class="wrt-grownups"><summary>'+esc(c.grownupTitle)+'</summary><p>'+esc(v.source.grownup)+'</p><p>'+esc(v.source.guide[w.id])+'</p><p>'+esc(w.reference)+'</p></details></section>';
 }

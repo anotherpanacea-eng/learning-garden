@@ -1,4 +1,4 @@
-import {createSoundTrails,changeSoundTrail,SOUND_TRAIL_ENTRY} from './word-room-trails-content.mjs';
+import {createSoundTrails,changeSoundTrail,soundTrailCounterLine,SOUND_TRAIL_ENTRY} from './word-room-trails-content.mjs';
 import {soundTrailPage} from './word-room-trails-ui.mjs';
 import {soundMessagesPage,soundMessagesEntry,soundMessagesNotes,bindSoundMessages} from './word-room-sounds-ui.mjs';
 import {soundMessagesView} from './word-room-sounds-core.mjs';
@@ -162,7 +162,7 @@ export function bindWordRoom(book, ctx) {
     local.trails=next;
     const count=next.work[next.selected].count;
     const focus=action==='counter'?(count===0||count===6?'#wrt-count':'[data-wrt-action="counter"][data-wrt-value="'+value+'"]'):action==='step'?'#wrt-step':'#wr-task';
-    redraw('',focus);
+    redraw(action==='counter'&&focus!=='#wrt-count'?soundTrailCounterLine(count):'',focus);
   },{signal:events.signal}));
   if(local.mode==='trails'){ctx.stopSpeech?.();return;}
   bindSoundMessages(book,{...ctx,onRootCommitted:()=>{if(owned())local.root=book.wordRoom;}},root,events);

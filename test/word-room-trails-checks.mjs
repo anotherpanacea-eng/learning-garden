@@ -29,4 +29,20 @@ v=changeSoundTrail(v,'word','mix');assert.equal(changeSoundTrail(v,'compare'),nu
 v=changeSoundTrail(v,'counter',1);v=changeSoundTrail(v,'word','fox');assert.equal(v.work.fox.count,6);v=changeSoundTrail(v,'word','mix');assert.equal(v.work.mix.count,1);
 assert.equal(changeSoundTrail(v,'word','unknown'),null);assert.equal(changeSoundTrail(v,'counter',2),null);
 assert.equal(soundTrailCounterLine(1),'You placed 1 counter.');assert.equal(soundTrailCounterLine(0),'You placed 0 counters.');
+// These inspect rendered semantics, not the renderer's source spelling.
+const selectedMap=html=>({letters:[...html.matchAll(/<g role="img" aria-label="Letter ([^"]+)"><rect class="wrt-print wrt-selected"/g)].map(m=>m[1]),sounds:[...html.matchAll(/<g role="img" aria-label="Sound (\d)"><circle class="wrt-sound wrt-selected"/g)].map(m=>Number(m[1]))});
+for(const[id,frames]of Object.entries({fox:[{letters:['f'],sounds:[1]},{letters:['o'],sounds:[2]},{letters:['x'],sounds:[3,4]}],quit:[{letters:['q','u'],sounds:[1,2]},{letters:['i'],sounds:[3]},{letters:['t'],sounds:[4]}]})){
+ let t=changeSoundTrail(createSoundTrails(),'word',id);
+ for(const e of frames){t=changeSoundTrail(t,'step',1);assert.deepEqual(selectedMap(soundTrailPage(t)),e);}
+}
+for(const[id,desc]of Object.entries({fox:'Letter f goes with Sound 1. Letter o goes with Sound 2. Letter x goes with Sound 3 and Sound 4.',quit:'Letters q and u go with Sound 1 and Sound 2. Letter i goes with Sound 3. Letter t goes with Sound 4.',quiz:'Letters q and u go with Sound 1 and Sound 2. Letter i goes with Sound 3. Letter z goes with Sound 4.'})){
+ let t=changeSoundTrail(createSoundTrails(),'word',id);t=changeSoundTrail(t,'model');const html=soundTrailPage(t);assert.ok(html.includes('>'+desc+'</desc>'));
+ const visible=html.slice(0,html.indexOf('<details class="wrt-grownups"'));assert.ok(!/[ɑɪɔ]|\/kw|\/fɑ/.test(visible));
+}
+for(const[id,expected]of Object.entries({fox:{letters:['x','f','o','g'],sounds:[3,4,1,2,3]},quit:{letters:['k','i','t','q','u'],sounds:[1,2,3,1,2]}})){
+ let t=changeSoundTrail(createSoundTrails(),'word',id);t=changeSoundTrail(t,'compare');assert.deepEqual(selectedMap(soundTrailPage(t)),expected);
+}
+let t=changeSoundTrail(createSoundTrails(),'try');t=changeSoundTrail(t,'counter',1);const html=soundTrailPage(t);
+assert.ok(html.includes('class="wrt-counter" role="img" aria-label="Counter 1"'));assert.ok(!html.includes('aria-label="Sound '));
+assert.match(html,/<p id="wr-status"[^>]*><\/p>/,'announcement region starts empty so host can fill it after redraw');
 console.log('Sound trails: finite mapping, rendering, counter/model boundaries and visit-state isolation passed.');
