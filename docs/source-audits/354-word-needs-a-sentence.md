@@ -1,0 +1,27 @@
+# 354 source study · spelling clues and sentence context
+
+Draft2026-11-01 for admitted LG-10 / LG-G1. This records sources and a proposed model, not accepted audio, broad topic coverage or implementation clearance.
+
+## Refreshed upstream and existing work
+
+Jane HEAD `e88f81a00553fb87818ef84c77a8800f0dcb33e4` and Marble HEAD `5e23196fa60050433f1440057f65a978d39e63fc` were refreshed again2026-11-01 and remain unchanged. Actual Jane [LESSONS.md](https://github.com/kentlangley/Jane/blob/e88f81a00553fb87818ef84c77a8800f0dcb33e4/LESSONS.md) and Marble [data/topics.json](https://github.com/withmarbleapp/os-taxonomy/blob/5e23196fa60050433f1440057f65a978d39e63fc/data/topics.json)/[data/dependencies.json](https://github.com/withmarbleapp/os-taxonomy/blob/5e23196fa60050433f1440057f65a978d39e63fc/data/dependencies.json) are the same inspected files used by353. Keep Jane's explicit model, contrast, supported use and return as a design reference, without mastery, bosses, penalties, remote records or copied lesson prose/code. Keep the bundled Marble pin unchanged and its existing NOTICE attribution/licenses for paraphrased topic relations.
+
+The implemented350/353 room already has three/four printed letters, explicit group-to-sound maps, independent own counters, five manual reference frames and a visit lifecycle. This slice adds sentence context and deliberately different readings of the same printed word. It does not build250's benches, reuse its pending audio or clear its recording/player/rights gates. The proposed End-e exception shelf in250 must later reconcile and revisit these selected words rather than present them as never taught. Slices263/268 and the Stained Map own other spelling/history work; none of their source keys, histories or scoring is changed here.
+
+## Candidate concepts and hard prerequisites
+
+Candidate Split Digraphs and Magic E `mt_C7abt7pRr6` is limited here to checking the scope of selected a_e/i_e patterns. Candidate Reading High-Frequency Words by Sight `mt_YKkCM63fSC` includes unusual correspondences, automatic recognition and20–30 words in connected text. We offer selected exception/context modeling only; no automatic-recognition, timing or complete-topic claim. E1-I/II remains the candidate strand family, with no atlas expansion or child entry lock.
+
+The split-digraph hard closure remains353's four bundled/three upstream edges: Split Digraphs → Vowel Digraphs `mt_BtMbZibZUj` → Single Letter Sounds `mt_F978c32kDr` → Knowing all letters `mt_frDIaXzWbx` → Understanding print `mt_1KCwbGvm1F`. Only the final edge is soft upstream. Broader vowel-team and digraph teaching stays unfinished; this slice does not close it.
+
+The high-frequency-word closure has two bundled/one upstream hard edges: Reading High-Frequency Words by Sight → Knowing all letters → Understanding print, with the same softened final edge upstream. Printed words, left-to-right pointing and adult constituent models supply local help rather than presume the child has passed those topics. Earlier cards for h/c/g/f/l/v and short a/i remain open;353 supplies selected long a/i examples. Six displayed records cannot certify either broad topic. No chronological or phonics claim follows merely from selecting a set.
+
+## Primary references actually read
+
+[UFLI VCe resources, lessons54–62](https://ufli.education.ufl.edu/foundations/toolbox/54-62/) distinguish the ordinary a_e/i_e patterns from a later exception lesson. Its actual [lesson62 reference word sheet](https://ufli.education.ufl.edu/wp-content/uploads/2022/08/62_RollRead_UFLI-Foundations.pdf) includes have, give and live among examples. Study the need for counterexamples; do not incorporate the worksheet, arrangement, dice game, passages, artwork or audio. Their larger sequence also teaches other patterns before its exception lesson; our open selected-word encounter is not that complete sequence or a claim of equivalence.
+
+[Merriam-Webster's live entries](https://www.merriam-webster.com/dictionary/live) distinguish the verb's short vowel and home/dwelling sense from the adjective's long vowel and performance-with-an-audience sense. Our sentences, definitions and puppet scenes are original; none of the dictionary's examples or recordings is incorporated. [Its have entry](https://www.merriam-webster.com/dictionary/have) lists strong and reduced forms. The chart deliberately uses the strong separate-word reference /hæv/; a real sentence may contain a reduced vowel or other reduction. No visible diagram is claimed to be a transcription of a speaker.
+
+The ve→/v/ grouping is this design's explicit reference spelling convention for have/give/live-here, not a claim that the sources endorse this exact diagram, that e causes a short vowel, or that English has no words ending in v. The selected words retain e without adding a phoneme. Independent linguistic review must decide whether the convention is clear and defensible before runtime. Long-vowel cave/five/live-show retain the prior nonadjacent vowel/e model. Diphthongal vowels remain one phoneme each. Dictionary meanings, picture context and the adult's word model work together; this is not a picture-guessing strategy for unknown print.
+
+All new child text, story notes and art are original. No private learner record, target recording or whole-word audition is copied, played or published. Brief55 still owns accepted sound models, speaker/rights review and the eventual player. Source relevance does not establish educational effectiveness or qualification on a physical device.
