@@ -16,7 +16,7 @@ Proposed companion to [353](../specs/353-prop-box-long-vowels.md), not shipped. 
 - Visit reminder, picture fallback, Model/Try/Compare/Back, count announcements and bounds use350's existing literal copy. Pair buttons below replace its two pair buttons for this set.
 - For grown-ups: keep350's `TRAIL_GROWNUP` exactly. Add this folded set-specific paragraph: **Long a and long i each count as one vowel sound here. The final e has no extra sound or syllable in these words. Other words ending in e can work differently.** No additional per-word guide lines; `guide:{}` renders no empty paragraph.
 
-The shared note's target tokens are cap, cape, kit, kite, pin, pine (one occurrence each). Adult-supplied tokens are A/a (six occurrences), and (two), by (one); punctuation is not a token. This is a supplied shared note, not an independent-reading check. Its label words may be inspected with their pictures; no response to the note is scored or stored.
+The shared note's target tokens are cap, cape, kit, kite, pin, pine (one occurrence each). Adult-supplied tokens are A/a (six occurrences), and (two), by (one); punctuation is not a token. This is a supplied shared note, not an independent-reading check. Its target words may be inspected with their pictures through the word buttons; no response to the note is scored or stored.
 
 ## Six literal words and maps
 
@@ -82,7 +82,7 @@ Each line is one frame, numbered0–4. The selected group's indices determine hi
 ## Three comparisons
 
 | Button | Heading | Pair / group indices highlighted | Exact explanation |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | Compare cap and cape | cap and cape | cap/cape; `{cap:1,cape:1}` | In our model, cap and cape each have three sounds. The word cape has one more letter. The vowel changes; first and last sounds stay. |
 | Compare kit and kite | kit and kite | kit/kite; `{kit:1,kite:1}` | In our model, kit and kite each have three sounds. The word kite has one more letter. The vowel changes; first and last sounds stay. |
 | Compare pin and pine | pin and pine | pin/pine; `{pin:1,pine:1}` | In our model, pin and pine each have three sounds. The word pine has one more letter. The vowel changes; first and last sounds stay. |

@@ -1,6 +1,6 @@
 # 353 · A final e in the Prop Box
 
-Bounded foundation design for admitted LG-10 / LG-G1, 2026-11-01. Base main `39c7d3567db00723f76df3f0daa1f9b57ad91bcb`. Proposed, awaiting independent six-lens specification and complete finite linguistic review. [Finite material](../content/353-prop-box-long-vowels-text.md); [source study](../source-audits/353-prop-box-long-vowels.md).
+Bounded foundation design for admitted LG-10 / LG-G1, 2026-11-01. Base main `39c7d3567db00723f76df3f0daa1f9b57ad91bcb`. Specification and complete finite material received independent six-lens and linguistic review; [review clearance](https://github.com/anotherpanacea-eng/learning-garden/pull/394#issuecomment-6556207768) records the reviewed head. Runtime has not begun and needs its own clearance. [Finite material](../content/353-prop-box-long-vowels-text.md); [source study](../source-audits/353-prop-box-long-vowels.md).
 
 ## Learning action
 
