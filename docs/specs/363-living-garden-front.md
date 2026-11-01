@@ -28,4 +28,5 @@ No text, link or CSS changes. Every link on today's `#living` is still there, on
   - no sideways scroll, and nothing spills out of a shelf card;
   - on `#living/visit` with no visit waiting, the four strips are still in the page.
 - `test/room-shelves-browser.py` expects 11 Living Garden entries.
+- The body-clues, food-links and life-stages integration checks asserted each strip's link inside `adaptivePage(s)`. They now assert it in `livingHubRooms()`, because on bare `#living` the app puts the strips on the shelf.
 - The existing Living suites that use the front page still pass: fossil-close, feeding-board, room-shelves, new-for-you and learning-journeys. `node scripts/run-checks.mjs` passes.

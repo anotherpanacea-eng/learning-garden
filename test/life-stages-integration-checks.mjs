@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {livingHubRooms} from '../dist/living-spiral-ui.mjs';
 import {readFileSync} from 'node:fs';
 import {freshState,restoreStateResult,STORAGE_KEY} from '../dist/core.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
@@ -37,5 +38,5 @@ for(const payload of [null,'<script>not executable</script>',{version:77,raw:'<i
 {
  const offDisk=new Storage();offDisk.setItem('number-garden-save','off');const off=new ExplorerStore(offDisk),state=initializeExplorerState(off.load());startLife(state,'adult-before');chooseLifeNeighbor(state,'pupa');off.save(state);eq(offDisk.getItem(`${STORAGE_KEY}:${off.active.id}`),null);eq(off.load().lifeStages,state.lifeStages);
 }
-const app=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.includes('spiralPage(state,slug)'),'existing root delegatesactualslug');ok(!app.includes("from './life-stages"),'noheldappeditneeded');ok(readFileSync(new URL('../dist/index.html',import.meta.url),'utf8').includes('life-stages.css'));ok(adaptivePage(s).includes('href="#living/stages"'),'Gardenentrypresent');
+const app=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.includes('spiralPage(state,slug)'),'existing root delegatesactualslug');ok(!app.includes("from './life-stages"),'noheldappeditneeded');ok(readFileSync(new URL('../dist/index.html',import.meta.url),'utf8').includes('life-stages.css'));ok(livingHubRooms().join('').includes('href="#living/stages"'),'Gardenentrypresent');
 console.log(`Life stages integration: ${n} assertions passed.`);
