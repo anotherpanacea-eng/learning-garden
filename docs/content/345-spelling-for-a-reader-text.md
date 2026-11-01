@@ -6,8 +6,10 @@ Original project-owned additions. Existing base-case scene/request/question stri
 
 - Entry: **My own message**.
 - Intro: **A message can help someone know what to do. Choose a reader, then tell or write it.**
+- Readers: basket = **A helper at the Post Office who can see two baskets**; seed-packet = **Pip, who needs to know where to take the seeds**; flags = **Dot, who needs to know what to do with the flags**.
+- Supplied-note label in this mode: **A note that left a question**.
 - Modes: **Tell it or use paper** / **Write on this device**.
-- Oral/paper: **Tell your message to someone, or write it on paper. Nothing from this turn is recorded.**
+- Oral/paper: **Tell your message to someone, or write it on paper. Your spoken or paper words are not recorded.**
 - Typed choice: **Your words stay in this explorer's notebook under your save settings. Notes downloads include them. Use pretend names.**
 - Existing prose: **Your earlier words are waiting. Opening this turn does not replace them.**
 - Plan action: **I'm ready to write**. Oral equivalent: **I'm ready to tell it**.
@@ -30,13 +32,15 @@ Oral checking plan: **If a spelling feels uncertain, tell someone how you could 
 ## References and carry
 
 - Source action: **Use this clue in a message**.
+- Pip's optional preview action: **Show Pip's supplied example**. Preview label: **Pip's supplied example, not your answer**.
 - Reference heading: **A clue beside my message**.
 - Reference label: **{word} · {label}**. Body: **{clue}**.
-- Confirmation: **This carries one word and its clue. Your answers and checks stay here.**
+- Reference reminder: **This word may not belong in your message. Its clue shows one way to check a word you do use.**
+- Confirmation: **This carries one supplied word and its clue. Your answers and checks stay here. The clue will be kept with that message in this explorer's notes and downloads.**
 - Choice: **Choose a reader for this clue**.
 - Pending notice: **This clue is waiting for you to choose a reader. Closing or reloading leaves it behind. Your word-study work stays.**
 - Commit: **Bring this clue**. Cancel: **Back to word study**.
-- Existing destination: **A message is already waiting for this reader. You can open it with its own clue, or go back.**
+- Existing destination: **A message is already waiting for this reader. You can open it as you left it, or go back.**
 - Reopen: **Open my waiting message**. Alternative: **Cancel**.
 - Direct entry without reference: **You can use your own clue, a dictionary or a person's help. You don't have to bring a word.**
 
@@ -59,6 +63,8 @@ Oral revision prompt: **Tell it another way, or change it on your paper.**
 - Incomplete: **You can leave this message unfinished and come back.**
 - Unreadable: **This earlier message record cannot be changed here. Its original data stays in your notes download. Your other message tools remain open.**
 - Refusal: **This change could not be kept safely. Your earlier work is unchanged. Open Notes to keep a copy.**
+- Dirty typing: **These new words are not saved. Try changing them, or discard the unsaved typing before leaving. Your earlier saved words are unchanged.**
+- Dirty typing action: **Discard unsaved typing**.
 - Notes link: **Open Grown-up notes**.
 
 ## Grown-up notes
