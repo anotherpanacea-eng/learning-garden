@@ -8,7 +8,7 @@ export const upstreamCopy=freeze({
   "postbag": "To Nuria · Vadoalto. The courier will carry this question in our story.",
   "openReply": "Open Nuria's reply at the next post round.",
   "rereadReply": "Reread Nuria's reply.",
-  "ownWords": "You can say or write a question in your own words with someone beside you. The postbag here keeps the supplied sentence you choose.",
+  "ownWords": "You can say or write a question in your own words with someone beside you. The postbag here keeps the ready-made sentence you choose.",
   "help": "A useful question tells your reader which event or place you mean, and what information you need. A careful answer can still be an estimate.",
   "together": "We are exploring together.",
   "notesDisclaimer": "These are local story actions with supplied questions and replies. Posting and opening do not establish independent writing, comprehension or measurement skill. Support at posting is kept separately from later help. No actual message was sent.",

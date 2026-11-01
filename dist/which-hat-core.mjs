@@ -48,7 +48,7 @@ const result=(ok,error)=>error?{ok,error}:{ok};
 function change(state,fn,o={}){try{
  if(hatView(state).status==='unavailable')return result(false,'This earlier format is retained. Download notes; other activities stay open.');
  const candidate=copy(state),r=fn(candidate);if(!r?.ok)return r||result(false,'This change is unavailable.');
- if(!recoveryFitsProgressLimits(candidate)||typeof o.canExport!=='function'||o.canExport(candidate)!==true)return result(false,'This change could not be kept while keeping your notebook exportable. Your earlier work and choices are unchanged.');
+ if(!recoveryFitsProgressLimits(candidate)||typeof o.canExport!=='function'||o.canExport(candidate)!==true)return result(false,'This change could not be kept and still leave your notebook ready to download. Your earlier work and choices are unchanged.');
  state.descriptions=candidate.descriptions;return r;
  }catch{return result(false,'This change could not be kept safely. Earlier work is unchanged.');}}
 const workChange=(s,fn,o)=>change(s,c=>{const w=hatView(c).work;return w?fn(w):result(false,'Open a readable hat visit first.');},o);

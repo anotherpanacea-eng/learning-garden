@@ -32,7 +32,7 @@ export function addTrailSupport(state,code){const r=active(state);if(!r||!codes.
 export function evaluateTrail(source,proposed){
  if(!validTrailSource(source)||!input(source,proposed))return null;
  const outcome=proposed.answer===null||proposed.answer==='unsure'?null:proposed.answer===source.answerId,selectedLabel=proposed.answer===null?null:source.choices.find(c=>c.id===proposed.answer).label;
- const prefix=outcome===null?'No definite response is recorded. ':outcome?'This supplied choice fits the declared source trail. ':'This choice differs from the declared source trail and can be revised. ';
+ const prefix=outcome===null?'No definite response is recorded. ':outcome?'This choice fits the declared source trail. ':'This choice differs from the declared source trail and can be revised. ';
  return {source:structuredClone(source),input:{answer:proposed.answer,support:[...proposed.support]},outcome,selectedLabel,feedback:prefix+source.feedback};
 }
 export function checkTrail(state){const r=active(state);if(!r)return null;const c=evaluateTrail(r.source,r);if(!c)return null;r.checks.push(c);r.checks=r.checks.slice(-8);state.sourceTrail.page='kept';return c;}

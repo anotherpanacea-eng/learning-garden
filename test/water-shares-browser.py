@@ -322,7 +322,7 @@ def journey(browser, width, base):
         p.evaluate('window.__waterRefuse=true');snapshot=book(p)
         quantity(p,'fresh',4.5)
         ok(book(p) == snapshot and p.locator('[data-water-quantity="fresh"]').input_value() == '4.5', 'refused typed value remains visibly pending')
-        ok('exportable' in p.locator('#water-status').inner_text(), 'refusal explains notebook preservation')
+        ok('ready to download' in p.locator('#water-status').inner_text(), 'refusal explains notebook preservation')
         for selector in ['[data-water-keep]','[data-water-check]','[data-water-view="fresh"]','[data-water-page="reader"]','#explorer-switch']:
             click(p,selector)
             ok(book(p) == snapshot and p.locator('[data-water-quantity="fresh"]').input_value() == '4.5', 'pending input survives refused action: '+selector)

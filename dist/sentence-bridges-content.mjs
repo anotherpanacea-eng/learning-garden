@@ -15,7 +15,7 @@ export const bridgeScenes=[
    },
    "AB:because": {
     "trial": "The helpers moved supper indoors because rain was falling.",
-    "meaning": "This says rain was the reason the helpers moved supper. That reason is supplied in our scene."
+    "meaning": "This says rain was the reason the helpers moved supper. That reason is given in our scene."
    },
    "AB:but": {
     "trial": "The helpers moved supper indoors, but rain was falling.",
@@ -101,7 +101,7 @@ export const bridgeScenes=[
    },
    "BA:but": {
     "trial": "Dot packed the cups, but Pip folded the banner.",
-    "meaning": "This contrasts Dot’s job with Pip’s. Both jobs are supplied; the speaker chooses to make the difference stand out."
+    "meaning": "This contrasts Dot’s job with Pip’s. Both jobs are given in the scene; the speaker chooses to make the difference stand out."
    }
   }
  }

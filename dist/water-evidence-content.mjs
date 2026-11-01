@@ -31,10 +31,10 @@ export const evidenceCards=[
   options:[
    'The line is lower. Since vapor is unseen, we cannot even suggest evaporation here.',
    'The line is lower. The picture proves exactly how much water became vapor.',
-   'The line is lower. In this supplied scene, evaporation fits, though we cannot see vapor.'
+   'The line is lower. In this scene, evaporation fits, though we cannot see vapor.'
   ],fit:2,
   clue:'Visible clue: the later waterline is lower. The no-pour, no-spill, and no-drain conditions come from the story, not the drawing.',
-  feedback:'A lower line plus the supplied conditions makes evaporation a reasonable explanation. Evaporation changes liquid water to water vapor; the vapor is not directly seen here. The still pictures are neither a measurement nor proof of a unique cause or quantity.',
+  feedback:'A lower line plus the conditions given here makes evaporation a reasonable explanation. Evaporation changes liquid water to water vapor; the vapor is not directly seen here. The still pictures are neither a measurement nor proof of a unique cause or quantity.',
   reasons:['An unseen process can still be a supported possibility.','No amount was measured.',''],
   talk:'Which part did the picture show? Which part did the story tell us? What remains unseen?',
   before:'An open level dish on a table, with a higher blue waterline.',after:'The same open level dish on the same table, with a lower blue waterline. No vapor is pictured.'
