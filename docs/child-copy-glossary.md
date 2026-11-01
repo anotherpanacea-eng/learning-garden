@@ -33,6 +33,8 @@ Do not assign presentation or intellectual ambition by age or gender. A learner 
 
 The café sweep adds every café, recipe, sharing-counter, whole-batches and parcel-packing module and the café film page from the [café review](reviews/text-review-2026-10-22/cafe-kitchen.md).
 
+LG-2b registers the remaining dist modules in batches of 15 to 25. Batch 1 adds Act II, both Balance pages, Body Clues, Capacity Units, Coin Counter, Courier Clock, Equality Desk, Evidence and Voice, Fair Test, Field Kit and Food Fork.
+
 The Paris sweep adds the Paris, French story and Travelers' Archive modules, the compiled puppet-post pack, and the Paris film and scene from the [Paris archive review](reviews/text-review-2026-10-22/paris-archive.md). The words-stories sweep adds the post office, letter, Letter Trail, message, word garden, story and Story Loft modules from the [words-stories review](reviews/text-review-2026-10-22/words-stories.md). Their flagged lines are Grown-up panels and notes, stored keep-mode codes and a CSS class; Messages' local variables were renamed, and no shown copy changes.
 
 The later Ribbon Matches pass adds its content, core, art and UI modules. Only its Grown-up notes renderer is excluded; child explanations, feedback and unavailable-picture text remain in scope.
