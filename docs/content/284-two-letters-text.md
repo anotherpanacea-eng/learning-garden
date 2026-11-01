@@ -185,7 +185,7 @@ Worked steps:
 Heading: **Two readers, two letters**
 Shared: **Both letters say the seeds arrived. Both mention Willowbank's wish for the storm readings.**
 Differences: **Nuria is asked to find out whether her council will send the readings. The council is asked directly for them. Only the council letter asks whether the courier should enter by the front door. The messages overlap, but they are not identical.**
-Before label: **The supplied letter, with gaps**
+Before label: **The starting letter, with gaps**
 After label: **Your chosen words**
 Unanswered gap: **Words waiting**
 No answers yet: **No words chosen here yet.**

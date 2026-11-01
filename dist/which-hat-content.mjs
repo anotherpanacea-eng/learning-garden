@@ -24,7 +24,7 @@ export const hatSource={
  copy:{
   welcome:'The storm is over, and neighbors have been gathering at the café. Dot brought six hats left at the café to the pegs beside the Post Office. Describe one so its owner can find it.',
   job:'An owner points to a peg. Choose words that fit that hat. Can your description pick it out from all six?',
-  limit:'A made-up rack: size and age are supplied labels. Lovely is an opinion; in this model it rules no hat out. Pictures and printed clues tell the same story.',
+  limit:'A made-up rack: size and age are labels given in the game. Lovely is an opinion; in this model it rules no hat out. Pictures and printed clues tell the same story.',
   hint:'Start with a word that fits the requested hat. Look at the hats that still match. What detail would separate them?',
   example:'A different shelf has a small red cup and a big red cup. Red cup fits both. Small red cup fits one. Small blue cup fits neither.',
   guided:'For Dot on peg 1, try blue: four fit. Add small: two fit. Add old: only Dot’s fits. Adding gold ribbon would leave none.',

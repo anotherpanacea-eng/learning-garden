@@ -11,7 +11,7 @@ Question action: Put in the postbag.
 Postbag: To Nuria · Vadoalto. The courier will carry this question in our story.
 Reply action: Open Nuria's reply at the next post round.
 Replay action: Reread Nuria's reply.
-Original wording invitation: You can say or write a question in your own words with someone beside you. The postbag here keeps the supplied sentence you choose.
+Original wording invitation: You can say or write a question in your own words with someone beside you. The postbag here keeps the ready-made sentence you choose.
 Help: A useful question tells your reader which event or place you mean, and what information you need. A careful answer can still be an estimate.
 Together: We are exploring together.
 Formats: Shorter / More detail.
