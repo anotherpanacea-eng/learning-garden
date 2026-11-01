@@ -35,10 +35,10 @@ def setup(browser, width, height, books, active='explorer-1', when=TODAY, record
     c = browser.new_context(viewport={'width': width, 'height': height}, has_touch=True, reduced_motion='reduce')
     seed = {'registry': {'version': 1, 'activeId': active, 'explorers': [explorer(i + 1) for i in range(len(books))]},
             'books': {f'explorer-{i + 1}': b for i, b in enumerate(books)}}
-    for k, v in (records or {}).items():
-        seed['books'][f'{k}:rooms'] = v
+    seed['rooms'] = records or {}
     c.add_init_script('(s=>{if(localStorage.getItem("nfy-fixture"))return;localStorage.setItem("learning-garden-explorers",JSON.stringify(s.registry));' +
                       'for(const [k,v] of Object.entries(s.books))localStorage.setItem("number-garden-v1:"+k,JSON.stringify(v));' +
+                      'for(const [k,v] of Object.entries(s.rooms))localStorage.setItem("learning-garden-rooms-v1:"+k,JSON.stringify(v));' +
                       'localStorage.setItem("nfy-fixture","1");})(' + json.dumps(seed) + ')')
     p = c.new_page()
     p.clock.set_fixed_time(when)
@@ -63,7 +63,7 @@ def book(p, n=1):
     return p.evaluate(f"()=>JSON.parse(localStorage.getItem('number-garden-v1:explorer-{n}'))")
 
 def rooms(p, n=1):
-    return p.evaluate(f"()=>JSON.parse(localStorage.getItem('number-garden-v1:explorer-{n}:rooms'))")
+    return p.evaluate(f"()=>JSON.parse(localStorage.getItem('learning-garden-rooms-v1:explorer-{n}'))")
 
 def main():
     server = None
@@ -97,6 +97,7 @@ def main():
                 record = rooms(p)
                 ok(record == {'explorer': CREATED, 'opened': {}, 'since': '2026-10-29', 'lastDay': '2026-11-01'}, f'{width}: first use starts three days back: {record}')
                 ok('rooms' not in book(p), f'{width}: no rooms root in the notebook')
+                ok(not p.evaluate("Object.keys(localStorage).filter(k=>k.startsWith('number-garden-v1')&&k.endsWith(':rooms'))"), f'{width}: nothing written under the notebook prefix')
                 expected = sorted({pl for r in registry if r['added'] >= '2026-10-29' for pl in r['places']})
                 dotted = p.eval_on_selector_all('.header nav a', 'as=>as.filter(a=>a.querySelector(".nfy-place")).map(a=>a.getAttribute("href"))')
                 nav = p.eval_on_selector_all('.header nav a', 'as=>as.map(a=>a.getAttribute("href"))')
