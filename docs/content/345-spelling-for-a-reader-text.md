@@ -47,7 +47,7 @@ Oral checking plan: **If a spelling feels uncertain, tell someone how you could 
 ## Human reader and revision
 
 Heading: **What does the reader need?**
-Always reuse the selected base-case question as an authored question, visibly labeled **A question to try together**. Questions remain Rabbit's “Which basket should I bring: the blankets or the seed packets?”, Pip's “Where should I take the seed packet: the garden bed or the footbridge?”, Dot's “Should I hang the flags or fold them at the footbridge?” They are supplied questions, not responses generated from the child's writing.
+Always reuse the selected base-case question as an authored question, visibly labeled **A question to try together**. Questions remain the basket helper's “Which basket should I bring: the blankets or the seed packets?”, Pip's “Where should I take the seed packet: the garden bed or the footbridge?”, Dot's “Should I hang the flags or fold them at the footbridge?” They are supplied questions, not responses generated from the child's writing.
 
 Second question: **Is there a word you want to check? Show me how you could check it.**
 Human-reader note: **A person reads or hears your message. The game does not decide what your own words mean. You can keep an unexpected idea.**
