@@ -33,6 +33,8 @@ Do not assign presentation or intellectual ambition by age or gender. A learner 
 
 The café sweep adds every café, recipe, sharing-counter, whole-batches and parcel-packing module and the café film page from the [café review](reviews/text-review-2026-10-22/cafe-kitchen.md).
 
+The Paris sweep adds the Paris, French story and Travelers' Archive modules, the compiled puppet-post pack, and the Paris film and scene from the [Paris archive review](reviews/text-review-2026-10-22/paris-archive.md).
+
 Run `node scripts/check-child-copy.mjs` (or add `--json`) to flag a small set of source-vocabulary candidates in those renderers and their content files, excluding explicitly reviewed adult blocks and exact quotation exceptions. It is not a parser of all runtime strings, a review of translations/user writing, or a whole-app readability judgement. Its explicit adult block and quotation exceptions are human-reviewed source classifications; stale boundaries or exceptions fail the check.
 
 Further sweeps follow the roadmap’s named text-review areas and recent boards. Check the current screen, its frozen sources and its purpose before applying a general substitution. No automatic rewriting of saved work.
