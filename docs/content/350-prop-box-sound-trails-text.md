@@ -9,6 +9,8 @@ Original material for [spec350](../specs/350-prop-box-sound-trails.md). Adult re
 - Word choices, in order: **fox**, **fog**, **kit**, **quit**, **mix**, **quiz**.
 - Back: **Back to my prop box**.
 - Try prompt: **Your partner says the word. Put down a counter for each sound you hear. You can change your idea.**
+- New-use Try prompt for mix: **Look at x in mix. Your partner says the word. Use counters for the sounds, then show the model if you want.**
+- New-use Try prompt for quiz: **Look at q and u in quiz. Your partner says the word. Use counters for the sounds, then show the model if you want.**
 - Own strip label: **My counters**; count line: **You placed {n} counters.** Use **You placed 1 counter.** at1.
 - Own controls: **Add a counter**, **Take one away**, **Show the model**.
 - Model strip label: **Our sound model**.
@@ -18,7 +20,7 @@ Original material for [spec350](../specs/350-prop-box-sound-trails.md). Adult re
 - Picture fallback: **Picture unavailable. Read the word's meaning together.**
 - Folded summary: **For grown-ups**.
 - No score/feedback banner, congratulations, mismatch sentence or next-level control.
-- Each word choice focuses the current heading; model-step changes focus the frame text; counter changes retain focus on the acted button and announce only the counter-count line; Model/Try/Compare/Back focus their current heading. Controls at boundaries stay disabled without moving the other material.
+- Each word choice focuses the current heading; model-step changes focus the frame text; counter changes retain focus on the acted button unless it becomes disabled, then focus the count line (tabindex=-1); announce only that count line; Model/Try/Compare/Back focus their current heading. Controls at boundaries stay disabled without moving the other material.
 
 ## Six words and literal maps
 
@@ -27,10 +29,10 @@ Letters are individual printed characters. Phonemes below are broad reference sp
 | id / label | Adult reference | Phonemes | Model groups: letters → sound dots | Exact meaning | Picture / exact alt |
 | --- | --- | --- | --- | --- | --- |
 | fox | /fɑks/ | f, ɑ, k, s | [0]→[0]; [1]→[1]; [2]→[2,3] | A fox is an animal with pointed ears and a bushy tail. This one is a puppet. | A fox puppet has pointed ears and a bushy tail. |
-| fog | /fɑg/ or /fɔg/ | f, ɑ or ɔ, g | [0]→[0]; [1]→[1]; [2]→[2] | Fog is made of tiny drops of water in the air near the ground. | Pale fog lies low among small stage trees. |
+| fog | /fɑg/ or /fɔg/ | f, ɑ or ɔ, g | [0]→[0]; [1]→[1]; [2]→[2] | Fog is made of tiny drops of water in the air near the ground. | Pale fog lies low among small trees. |
 | kit | /kɪt/ | k, ɪ, t | [0]→[0]; [1]→[1]; [2]→[2] | A kit is a set of things for a job. This one holds puppet-repair tools. | An open box with a handle holds a spool, a patch and blunt pretend repair tools. |
 | quit | /kwɪt/ | k, w, ɪ, t | [0,1]→[0,1]; [2]→[2]; [3]→[3] | To quit is to stop doing something. | Two pictures: a puppet stacks blocks, then leaves the blocks and stops stacking. |
-| mix | /mɪks/ | m, ɪ, k, s | [0]→[0]; [1]→[1]; [2]→[2,3] | To mix is to put things together. | Two pictures: red and blue toy beads are in separate bowls, then both colors are together in one bowl. |
+| mix | /mɪks/ | m, ɪ, k, s | [0]→[0]; [1]→[1]; [2]→[2,3] | To mix is to put things together so they are jumbled up. | Two pictures: red and blue toy beads are in separate bowls, then the red and blue beads are stirred together, jumbled in one bowl. |
 | quiz | /kwɪz/ | k, w, ɪ, z | [0,1]→[0,1]; [2]→[2]; [3]→[3] | A quiz is a short set of questions. This one is a pretend prop. | A puppet holds a card with three question marks. |
 
 Art ids are fox350, fog350, quit350, mix350, quiz350; kit348 reuses the selected tool-set sense and original artwork if practical. A kit is not a young animal here. The quiz has no questions to answer in this activity. The mixing picture does not blend the beads into one new color. No real ingredients or physical props are required.
@@ -45,7 +47,7 @@ Each row below gives frame0 (whole word), frames1/2/3 (the three mapped groups i
 0. Read fox together. Your partner says the whole word.
 1. Point to f. Your partner says the first sound.
 2. Point to o. Your partner says the vowel sound.
-3. Point to x. Listen for two sounds at the end.
+3. Point to x. Your partner says the last two sounds.
 4. Three letters, four sounds. In fox, x helps write two sounds.
 
 ### fog
@@ -73,7 +75,7 @@ Each row below gives frame0 (whole word), frames1/2/3 (the three mapped groups i
 0. Read mix together. Your partner says the whole word.
 1. Point to m. Your partner says the first sound.
 2. Point to i. Your partner says the vowel sound.
-3. Point to x. Listen for two sounds at the end.
+3. Point to x. Your partner says the last two sounds.
 4. Three letters, four sounds. In mix, x helps write two sounds.
 
 ### quiz
@@ -87,6 +89,7 @@ Each row below gives frame0 (whole word), frames1/2/3 (the three mapped groups i
 
 - Heading **fox and fog**. Text: **Both words have three letters. Our model has four sounds in fox and three in fog. One letter can help write more than one sound.**
 - Heading **kit and quit**. Text: **Our model has three sounds in kit and four in quit. Listen with your partner. The start of quit has two sounds.**
+- Own counter names: **Counter {n}**. Reference dot names: **Sound {n}**. Reference connector templates: **Letter {letter} goes with Sound {n}.** / **Letter {letter} goes with Sound {n} and Sound {m}.** / **Letters {first} and {second} go with Sound {n} and Sound {m}.** These describe the reference only, never the child's counter strip.
 - Both diagrams say **Our sound model**. Highlight fox's x/two end dots and quit's qu/two start dots; keep their two separate sound dots individually outlined. The other word remains a complete reference map, not the child's attempt.
 
 ## Folded adult guidance
