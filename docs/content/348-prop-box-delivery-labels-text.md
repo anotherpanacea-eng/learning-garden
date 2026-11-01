@@ -36,12 +36,12 @@ Only right-hand targets jet/kit/van/zip/jot/vat need new word art; their alt tex
 | pet | /pɛt/ | A pet is an animal someone cares for at home. | A toy cat sits beside its little home basket. | Use the animal noun, not the action of stroking. |
 | jet | /dʒɛt/ | A jet is a kind of aircraft. This one is a toy. | A toy jet aircraft has swept wings and a jet engine. | Use the aircraft meaning, not a stream of liquid. The first sound stays together. |
 | sit | /sɪt/ | To sit is to rest on a seat. | Two pictures: a puppet stands by a stool, then sits on it. | Use the action, not the earlier-action word sat. Model or explain it. |
-| kit | /kɪt/ | A kit is a set of things for a job. This one holds puppet-repair tools. | An open bag holds a spool, a patch and blunt pretend repair tools. | Name the repair-tool set, not a baby animal. Here k has the first sound heard in cat. |
+| kit | /kɪt/ | A kit is a set of things for a job. This one holds puppet-repair tools. | An open box with a handle holds a spool, a patch and blunt pretend repair tools. | Name the repair-tool set, not a baby animal. Here k has the first sound heard in cat. |
 | fan | /fæn/ | A fan moves air. This one is a pretend hand fan. | A folded hand fan opens beside a puppet. | Use the air-moving object, not someone who likes a performer. |
 | van | /væn/ | A van carries people or things. This one is a toy delivery van. | A toy delivery van has a box-shaped cargo space and two visible wheels. | Use the vehicle meaning. Model v naturally without adding uh. |
 | sip | /sɪp/ | To sip is to take a small drink. | Two pictures: a puppet lifts a cup, then takes a small drink. | Use the action, not a still cup alone. |
-| zip | /zɪp/ | To zip a bag is to close it with a zipper. | Two pictures: a costume bag is open, then its zipper is closed. | This shows closing with a zipper, not moving fast or a computer file. Model the action or explain it. |
-| jot | /dʒɑt/ | To jot is to write a quick note. | Two pictures: a card is blank, then a pencil leaves a few short marks on it. | Use the writing action. The marks are pretend, not readable Keeper writing. Local vowel differences are not errors. |
+| zip | /zɪp/ | To zip a bag is to close it with a zipper. | Two pictures: a costume bag is open, then its zipper is closed. | Here zip means closing with a zipper, not moving fast or a computer file. Model the action or explain it. |
+| jot | /dʒɑt/ | To jot is to write a quick note. | Two pictures: a card is blank, then a pencil leaves a few short marks on it. | Use the writing action. If you show the picture, its marks are pretend, not readable Keeper writing. Local vowel differences are not errors. |
 | vat | /væt/ | A vat is a large container. This one is a pretend stage prop. | A large open toy vat stands on a low stage platform. | Name the container before working if needed. This is not the abbreviation VAT. No real handling task is required. |
 
 ## Six taught comparisons
@@ -76,7 +76,7 @@ Prompt: **What is in the van? Read together, then show or tell your partner.**
 
 Target lexical tokens, exact lowercase occurrences: `jot`, `jet`, `van`, `kit`, `vat`, `zip`, `bag`. Every other lexical token is adult-supplied: `I`, `can`, `a`, `note`, `A`, `is`, `in`, `by` (distinct tokens in first-occurrence order). The target set has seven occurrences; all other15 of22 tokens are adult-supplied. Preserve spacing and punctuation. In particular, note is adult-supplied, not an offered short-vowel model. I refers to Pip through the title/story, never to the learner. Bag reuses343's meaning; this remains shared reading, not an independently decodable text.
 
-Picture: a toy jet is visibly inside the open cargo space of a toy delivery van. An open repair kit is beside a large toy vat. Pip holds a pencil over a card with a few short marks. A costume bag near him has a closed zipper. All objects rest on the floor or a visible support. No labels, readable note or new chapter writing. Alt: **A toy jet sits inside a delivery van. A repair kit is beside a toy vat. Pip holds a pencil over a marked card. A costume bag has its zipper closed.**
+Picture: a toy jet is visibly inside the open cargo space of a toy delivery van. An open repair-kit box is beside a large toy vat. Pip holds a pencil over a card with a few short marks. A costume bag near him has a closed zipper. All objects rest on the floor or a visible support. No labels, readable note or new chapter writing. Alt: **A toy jet sits inside a delivery van. A repair-kit box is beside a toy vat. Pip holds a pencil over a marked card. A costume bag has its zipper closed.**
 
 The question is oral and ungraded; no response capture or real props required.
 
