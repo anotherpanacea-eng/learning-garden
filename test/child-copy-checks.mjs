@@ -34,6 +34,7 @@ for(const exception of [
 // while a nearby quoted child-facing use of the same term stays a candidate.
 const code='if(w.provenance&&w?.provenance.support)ok();\nconst rec={supplied:1,provenance:null};\ntrip.supplied=trip.total;\nerror("No basket was supplied.");\nconst note=`Picture provenance: kept`;';
 equal(scanCopySource(code).map(x=>[x.line,x.term]),[[4,'supplied'],[5,'provenance']],'property accesses and object keys are skipped; quoted copy stays flagged');
+equal(scanCopySource('"It was supplied.The end"\nshow(supplied.question)').map(x=>x.line),[1,2],'a term before a dot is not skipped, in prose or code');
 equal(scanCopySource('"Bring this. supplied: two"').map(x=>x.term),['supplied'],'a prose colon after a space-separated word is not an object key');
 equal(scanCopySource('provenance',{path:'scene.mjs'})[0].path,'scene.mjs','diagnostic identifies source file');
 // These helpers also appear in child-visible earlier comparisons; do not exempt them.
