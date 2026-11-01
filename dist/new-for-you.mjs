@@ -29,6 +29,15 @@ export function touchRooms(record,route,explorer,today=localDay()){
  return r;
 }
 
+// Two copies of one explorer's record (this page's memory and storage another tab may have written): keep every
+// opened room at its earliest date, and the visit days of whichever copy saw the later day.
+export function mergeRooms(a,b){
+ const ok=x=>validRooms(x);if(!ok(a))return ok(b)?b:null;if(!ok(b))return a;if(a.explorer!==b.explorer)return b;
+ const opened={...b.opened};for(const [k,d] of Object.entries(a.opened))if(!opened[k]||d<opened[k])opened[k]=d;
+ const late=a.lastDay===b.lastDay?(a.since<=b.since?a:b):a.lastDay>b.lastDay?a:b;
+ return {explorer:a.explorer,opened,since:late.since,lastDay:late.lastDay};
+}
+
 // The chosen explorer's record, set by the app after each touch; null while the picker shows.
 let active=null;
 export function setActiveRooms(record){active=validRooms(record)?record:null;}

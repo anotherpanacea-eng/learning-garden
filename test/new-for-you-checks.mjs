@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {rooms} from '../dist/room-registry.mjs';
-import {localDay,addDays,validRooms,touchRooms,newRooms,newShelf,newRoomsPage,placeNames,roomsKey,readRooms,setActiveRooms} from '../dist/new-for-you.mjs';
+import {localDay,addDays,validRooms,touchRooms,newRooms,newShelf,newRoomsPage,placeNames,roomsKey,readRooms,setActiveRooms,mergeRooms} from '../dist/new-for-you.mjs';
 
 let checks=0;
 const equal=(a,b,label)=>{assert.deepEqual(a,b,label);checks++;};
@@ -64,6 +64,15 @@ for(const bad of [null,[],'x',{explorer:E,opened:[],since:monday,lastDay:monday}
 const kept={explorer:E,opened:{'#gone/room':monday,'#workshop/design':monday},since:monday,lastDay:monday};
 ok(validRooms(kept),'unknown well-formed routes are valid');
 equal(touchRooms(kept,'#home',E,tuesday).opened['#gone/room'],monday,'a removed or newer room’s opened date is kept');
+
+// Two copies of one record (this page and another tab): opened rooms are never lost.
+const tabA={explorer:E,opened:{'#words/letterpress':'2026-11-01'},since:'2026-10-29',lastDay:'2026-11-01'};
+const tabB={explorer:E,opened:{'#library/beat':'2026-11-01','#words/letterpress':'2026-10-31'},since:'2026-10-29',lastDay:'2026-11-01'};
+equal(mergeRooms(tabA,tabB).opened,{'#words/letterpress':'2026-10-31','#library/beat':'2026-11-01'},'union of opened rooms at their earliest date');
+equal(mergeRooms(tabA,{...tabB,since:'2026-10-30',lastDay:'2026-11-02'}).lastDay,'2026-11-02','the later visit day wins');
+equal(mergeRooms(tabA,{...tabB,since:'2026-10-30',lastDay:'2026-11-02'}).since,'2026-10-30','with its since');
+equal(mergeRooms(null,tabB),tabB,'storage alone');equal(mergeRooms(tabA,null),tabA,'memory alone');
+equal(mergeRooms({...tabA,explorer:'old profile'},tabB),tabB,'a stale profile copy never wins over storage');
 
 // Shelf and #new page.
 const all=Object.fromEntries(rooms.map(r=>[r.route,'2026-11-01']));
