@@ -32,7 +32,7 @@ Short: “The garden keeps changing. Dot wants the town to keep records, so ther
 
 Longer: “‘Let's write down what we notice,’ says the librarian. ‘And what we didn't get to notice,’ says Dot. She leaves room on the page. At the mill, someone is wondering what a useful record of the brook would need.”
 
-Job: “Keep a plan at the Town Record. Supplied words, your own words, and a question left open are all welcome.” Link **Visit the Town Record**. Selector **Choose a kept record plan**; options **Record plan {visitId} · first kept** / **Record plan {visitId} · latest kept**. Offer **Offer this record plan**. After: “The town has a place for your record plan. A question can stay open beside it.” No-work: “Keep a plan at the Town Record, then bring it back. It can be unfinished.” This is not a real weather log or forecast.
+Job: “Keep a plan at the Town Record. Ready-made words, your own words, and a question left open are all welcome.” Link **Visit the Town Record**. Selector **Choose a kept record plan**; options **Record plan {visitId} · first kept** / **Record plan {visitId} · latest kept**. Offer **Offer this record plan**. After: “The town has a place for your record plan. A question can stay open beside it.” No-work: “Keep a plan at the Town Record, then bring it back. It can be unfinished.” This is not a real weather log or forecast.
 
 ### Birthday
 
@@ -48,7 +48,7 @@ Short: “The Story Loft is getting a show ready. Dot says the town will need so
 
 Longer: “There are puppets, a painted backdrop of the footbridge, and a part for a heron that nobody can quite explain. ‘It felt like the story needed one,’ says the librarian. Dot is arranging chairs. The ducks are trying to look invited.”
 
-Job: “Share a show with its audience in Story Loft, then bring it here. A supplied scene is welcome too.” Link **Visit Story Loft**. Selector **Choose a shared show**; options **Show {id} · shared draft** / **Show {id} · shared shelf**. Offer **Offer this shared show**. After: “Your shared show is on the gathering's bill. The ducks are taking their seats.” No-work: “Play a show through to Meet the audience in Story Loft, then bring the shared show back.” Editing, speaking or adding dialogue is never required for story credit.
+Job: “Share a show with its audience in Story Loft, then bring it here. A ready-made scene is welcome too.” Link **Visit Story Loft**. Selector **Choose a shared show**; options **Show {id} · shared draft** / **Show {id} · shared shelf**. Offer **Offer this shared show**. After: “Your shared show is on the gathering's bill. The ducks are taking their seats.” No-work: “Play a show through to Meet the audience in Story Loft, then bring the shared show back.” Editing, speaking or adding dialogue is never required for story credit.
 
 ## Retained work, refusals and support labels
 
