@@ -44,7 +44,7 @@ export const validWordRoomDraft = (d, letters) => alphabet(letters) && object(d)
   Number.isInteger(d.place) && d.place >= 0 && d.place <= 2 && typeof d.modelShown === 'boolean' &&
   (d.point === null || Number.isInteger(d.point) && d.point >= 0 && d.point <= 3);
 const freshDraft = () => ({slots: [null, null, null], place: 0, modelShown: true, point: null});
-const freshRoom = () => ({version: 1, source: makeWordRoomSource(), selectedId: null, textId: null, page: 'choose', drafts: {}, gallery: []});
+export const freshWordRoom = () => ({version: 1, source: makeWordRoomSource(), selectedId: null, textId: null, page: 'choose', drafts: {}, gallery: []});
 
 export function wordRoomView(book) {
   const present = own(book, 'wordRoom'), r = present ? book.wordRoom : null;
@@ -92,7 +92,7 @@ function change(book, fn, options = {}) {
   } catch { return fail('capacity'); }
 }
 function room(next, create = false) {
-  if (!own(next, 'wordRoom') && create) next.wordRoom = freshRoom();
+  if (!own(next, 'wordRoom') && create) next.wordRoom = freshWordRoom();
   return validWordRoomRoot(next.wordRoom) ? next.wordRoom : null;
 }
 export function chooseWordRoomWord(book, id, options) {
@@ -189,7 +189,7 @@ export function recoverWordRoom(book, confirmed, options) {
   if (confirmed !== true) return fail('confirmation');
   return change(book, next => {
     const previous = own(next, 'wordRoom') ? clone(next.wordRoom) : undefined;
-    next.wordRoom = freshRoom();
+    next.wordRoom = freshWordRoom();
     if (own(book, 'wordRoom')) next.wordRoom.recovered = previous;
     return {ok: true};
   }, options);
