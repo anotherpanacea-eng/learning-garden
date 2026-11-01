@@ -7,6 +7,7 @@ import {motionView} from './motion-evidence-core.mjs';
 import {frenchRoomsView} from './french-rooms-core.mjs';
 import {loftState} from './loft-core.mjs';
 import {pathwayView,safePathwayRoute} from './pathway-entry-core.mjs';
+import {newShelf} from './new-for-you.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const choices=[['continue','Continue something'],['questions','Follow a question'],['town','Explore town']];
@@ -49,6 +50,7 @@ const link=(route,label,art='')=>`<a href="${esc(route)}">${art}${esc(label)}</a
 export function homeEntryPage(book,persist,parcel='',owner=''){
  const v=current(book,owner),welcome=homeWelcome(book),guide=guides.find(g=>g.id===book.garden?.guide)||guides[0],avatar=avatars.find(a=>a.id===book.garden?.avatar)||avatars.find(a=>a.id==='sky'),resumes=homeContinuations(book),arrival=arrivalView(book);
  return `<div class="home-entry" data-home-entry><header class="home-welcome"><div><h1>${esc(welcome.title)}</h1><p>${esc(welcome.body)}</p><div class="home-companion">${portrait(guide.id,true)}<span>With ${esc(guide.name)}</span>${portrait(avatar.id,true)}</div>${hearButton(`${welcome.title} ${welcome.body}`,'Hear about Willowbank')}</div><div class="home-scene" aria-hidden="true">${gardenScene()}</div></header>
+ ${newShelf(book)}
  <nav class="home-ways" aria-label="Ways to explore">${choices.map(([id,label])=>`<button type="button" data-home-choice="${id}" aria-pressed="${v.choice===id}" aria-controls="home-panel-${id}">${esc(label)}</button>`).join('')}</nav>
  <section class="home-panel" data-home-panel="continue" id="home-panel-continue" aria-labelledby="home-title-continue" ${v.choice!=='continue'?'hidden':''}><h2 id="home-title-continue" tabindex="-1">Pick up an idea</h2>${resumes.length?`<p>These places are open in your notebook. Choose one to return.</p><div class="home-returns">${resumes.map(r=>link(r.route,r.label)).join('')}</div>`:'<p>No place is open here yet. Follow a question, or explore town.</p>'}</section>
  <section class="home-panel" data-home-panel="questions" id="home-panel-questions" aria-labelledby="home-title-questions" ${v.choice!=='questions'?'hidden':''}><h2 id="home-title-questions" tabindex="-1">What are you wondering?</h2><p>Choose a question. You can ask for help or try another.</p><a href="#journeys">Follow an idea through town</a><div class="home-questions"><button type="button" data-start-path="creature">${icon('living')}What does a tiny neighbor need?</button><button type="button" data-start-path="message">${icon('post')}Can a note help someone find the way?</button><button type="button" data-start-path="shelter">${icon('workshop')}What makes a good hideaway?</button>${link('#science/ice','What changes when ice melts?',icon('science'))}</div></section>
