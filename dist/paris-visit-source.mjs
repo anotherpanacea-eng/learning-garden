@@ -42,7 +42,7 @@ export function captureParisSource(route,plan=null,entranceId='paris'){
    examples[id]=copy(helper);
   }
  }
- const ending=plan&&!french?{title:'A small errand, a story to share',body:'Your Paris errand has reached a place to pause. There is room to talk about what happened, imagine a postcard, or wander somewhere else.',projectTitle:entrance.ending.projectTitle,project:entrance.ending.project}:copy(entrance.ending);
+ const ending=plan&&!french?{title:'A small errand, a story to share',body:'Your Paris errand is done for now. You could talk about what happened, draw a postcard, or wander somewhere else.',projectTitle:entrance.ending.projectTitle,project:entrance.ending.project}:copy(entrance.ending);
  const source={version:1,route:[...route],nodes,helpers:examples,title:story?.title||entrance.title,chapter:entrance.chapter||'First Morning',ending,connections:copy(story?.connections||[])};
  return new TextEncoder().encode(JSON.stringify(source)).length<=PARIS_SOURCE_LIMIT&&validSourceShape(source,entranceId)?source:null;
 }
