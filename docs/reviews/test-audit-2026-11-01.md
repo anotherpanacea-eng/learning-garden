@@ -25,7 +25,7 @@ No production code, learner records or curriculum content changes.
 | Style | A six-module allowlist and regex scan banning other modules from mentioning style access | Actual style selection, explorer isolation, saving, rendering and transfer behavior |
 | Fossil Close-Look | Purity assertion on an object never passed to the renderer; app branch spelling/order checks | Finite selection/pinning model, bounded photographs, actual native route and host interactions |
 | Science view stability | Exact stylesheet tag spelling/count/head-position and renderer substring checks | Notebook purity; native checks that original loaded stylesheet nodes survive real turns |
-| Shadow Theatre | Prose-must-occur-in-spec synchronization and lexical ban on persistence/network calls | Independent geometry, visible rendering, narration, Undo and native notebook/exposure preservation |
+| Shadow Theatre | Prose-must-occur-in-spec synchronization | Independent geometry, visible rendering, narration, Undo and native notebook/exposure preservation |
 | Learning Journeys | Constant-only arithmetic and app/Home source substring checks | Actual content model values, exposure refusal/atomicity, rendering, native navigation and persistence |
 | Sound Window | Exact MP4 byte length | Caption/physics checks and unchanged native media decoding/seek/retry coverage |
 | Lift Yard browser | Full five-shift catalogue at all three widths | Full catalogue at 820px; native 320/1024px samples with longest board, partial/completed trip, held grid, chooser, touch targets and both representations. Existing motion, owner, import/reset, detached-control and legacy-return tests unchanged |
@@ -34,6 +34,10 @@ The deleted source rules were not reliable security boundaries: aliases could
 bypass them, while comments or harmless refactoring could fail them. Native
 behavior checks and independent expected values carry the useful contract.
 Deliberate reviewed-content identity contracts elsewhere are unchanged.
+Claude identified a gap in the proposed Shadow Theatre lexical-guard removal:
+notebook preservation alone would miss a write to another localStorage key.
+That guard is retained for now. Replacing it with a full storage/network behavior
+probe is a possible later improvement, not a prerequisite for the other cuts.
 
 ## Workflow reduction
 
@@ -85,8 +89,8 @@ Lift Yard baseline: **82.4s / 10,578 assertions**, passed. Reduced journey:
 **33.7s / 3,758 assertions**, passed — about **59% less time**, while preserving
 one complete catalogue and the safety/lifecycle paths described above.
 
-The six edited source suites retain 1,173 assertions, down from 1,709
-(**536 removed**). All 253 source suites plus atlas/story packs passed after
+The six edited source suites retain 1,174 assertions, down from 1,709
+(**535 removed**). All 253 source suites plus atlas/story packs passed after
 changes, **185.2s**. Concurrent browser/review work and single-run noise make
 this unsuitable for claiming a source speedup; none is claimed.
 

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {positions,initialShadow,changeShadow,shadowGeometry,shadowCaption,shadowHeading,waiting,pathNote,pathExplanation,shadowNarration,shadowAnnouncement} from '../dist/shadow-theatre-core.mjs';
 import {shadowPictures,shadowPage,resetShadow} from '../dist/shadow-theatre-ui.mjs';
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(a,m)=>{assert.ok(a,m);n++;};
@@ -12,4 +13,5 @@ for(const p of positions)for(const present of [true,false])for(const paths of [t
  eq(changeShadow(s,'undo'),null);eq(changeShadow(s,'bad'),null);
 }
 resetShadow();const book={};eq(shadowPage('synthetic',book),shadowPage('synthetic',book),'ordinary render retains state');ok(shadowPage('synthetic',book).includes('id="shadow-status" role="status" aria-live="polite"></p>'),'persistent polite status outside updated view');
+const ui=fs.readFileSync(new URL('../dist/shadow-theatre-ui.mjs',import.meta.url),'utf8');ok(!/\bsave\(|localStorage|fetch\(|note.*Display\(/.test(ui),'feature has no persistence/exposure/network path');
 console.log(`Shadow Theatre: ${n} finite science/content/Undo assertions passed.`);
