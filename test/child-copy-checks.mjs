@@ -30,6 +30,11 @@ for(const exception of [
  {quote:'supplied',reason:'ambiguous short fragment'},
  {quote:'"The visitor supplied the blankets."',reason:''},
 ]) {assert.throws(()=>scanCopySource(quoted,{quotations:[exception]}));checks++;}
+// Code identifiers are not copy: a refactor of a validator must not need a source-spelling exception,
+// while a nearby quoted child-facing use of the same term stays a candidate.
+const code='if(w.provenance&&w?.provenance.support)ok();\nconst rec={supplied:1,provenance:null};\ntrip.supplied=trip.total;\nerror("No basket was supplied.");\nconst note=`Picture provenance: kept`;';
+equal(scanCopySource(code).map(x=>[x.line,x.term]),[[4,'supplied'],[5,'provenance']],'property accesses and object keys are skipped; quoted copy stays flagged');
+equal(scanCopySource('"Bring this. supplied: two"').map(x=>x.term),['supplied'],'a prose colon after a space-separated word is not an object key');
 equal(scanCopySource('provenance',{path:'scene.mjs'})[0].path,'scene.mjs','diagnostic identifies source file');
 // These helpers also appear in child-visible earlier comparisons; do not exempt them.
 const pairedScope=copyScopes.find(scope=>scope.path==='dist/paired-points-ui.mjs');
