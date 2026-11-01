@@ -167,6 +167,37 @@ export const copyScopes = [
   {path:'dist/rain-paths-art.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rain-paths-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/workshop-core.mjs',adultBlocks:[],quotations:[]},
+  // Math-games renderers (text review 2026-10-22, math-games area), including art and core modules that carry copy.
+  {path:'dist/broad-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-help.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-variants.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/equal-groups-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/equal-groups-core.mjs',adultBlocks:[],quotations:[
+    {quote:'(w.provenance===null||object(w.provenance)&&PLACES.includes(w.provenance.source)&&GROUP_UNKNOWNS.includes(w.provenance.unknown)&&object(w.provenance.case)&&w.provenance.case.id===c.id&&[\'groups\',\'each\',\'total\'].every(k=>w.provenance.case[k]===c[k])&&modelValid(c,w.provenance.model)&&supportValid(w.provenance.support))',reason:'A saved-record validator; code identifiers, not copy.'},
+    {quote:'familiar:false,provenance:null',reason:'A code identifier, not copy.'},
+    {quote:'if(w.provenance){familiar=true;support=mergeSupport(support,w.provenance.support);}',reason:'A code identifier, not copy.'},
+    {quote:'w.provenance={source,unknown:x.unknown,case:clone(x.case),model:clone(x.model',reason:'A code identifier, not copy.'},
+    {quote:'priorSupport:clone(w.provenance.support)',reason:'A code identifier, not copy.'},
+  ]},
+  {path:'dist/equal-groups-ui.mjs',adultBlocks:[],quotations:[
+    {quote:'${work.provenance?`',reason:'A code identifier, not copy.'},
+    {quote:'${work.provenance.source===',reason:'A code identifier, not copy.'},
+    {quote:'${w.provenance?`<p>Carried from ${esc(w.provenance.source)}; source question: ${esc(w.provenance.unknown)}.',reason:'Inside equalGroupsNotes, used only in Grown-up notes.'},
+  ]},
+  {path:'dist/facts-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/facts-ui.mjs',adultBlocks:[],quotations:[
+    {quote:'Opening the picture is recorded as support, even if it is closed or counted again.',reason:'Inside the For grown-ups panel.'},
+    {quote:'The shown answer and explanation stay recorded as support.',reason:'Inside the For grown-ups panel.'},
+  ]},
+  {path:'dist/forage-core.mjs',adultBlocks:[],quotations:[
+    {quote:'...(collected?{supplied:raw.baskets*raw.bites}:{})',reason:'A code identifier, not copy.'},
+    {quote:'trip.supplied=trip.total',reason:'A code identifier, not copy.'},
+  ]},
+  {path:'dist/forage-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/bramble-film.html',adultBlocks:[],quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
