@@ -1,6 +1,6 @@
 # 322 · Field Journal comparison: the parcel and one café turn (CR1)
 
-Status: proposed, 2026-10-31. Implementation spec for [spec 244](244-presentation-styles.md) phase 1, course route CR1 in [course routes](../course-routes.md). Copy: [322-field-journal-cafe-text.md](../content/322-field-journal-cafe-text.md). Backlog card LG-25. This is owner priority 4 work. It commissions one reversible build after independent review of this spec. It changes no story, task or record text, and no default.
+Status: built, 2026-10-31 (P1, behind the Grown-up notes choice). Implementation spec for [spec 244](244-presentation-styles.md) phase 1, course route CR1 in [course routes](../course-routes.md). Copy: [322-field-journal-cafe-text.md](../content/322-field-journal-cafe-text.md). Backlog card LG-25. This is owner priority 4 work. It commissions one reversible build after independent review of this spec. It changes no story, task or record text, and no default.
 
 ## 1. What ships
 

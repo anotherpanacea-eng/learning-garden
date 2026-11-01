@@ -39,7 +39,7 @@ Two lines are new:
 | wisp, lantern-sprite | arrival | A lantern-sprite floats in. “A table by the window, please. I enjoy looking out.” | A lantern-sprite drifts to the window table. “I like to watch the road.” |
 | | thanks | “Thank you! The view and the plate are both quite delightful.” | “Thank you. A good view and a good plate.” |
 | bobble, little-comet | arrival | A little comet parks its tail outside. It takes up two imaginary bicycle spaces. | A little comet leaves its tail outside, across two imaginary bicycle spaces. |
-| | thanks | “Lovely! I have time for a very small orbit before tea.” | “Thank you. Time for one small orbit before tea.” |
+| | thanks | “Lovely! I have time for a very small orbit before tea.” | “Thank you. Time for a small orbit before tea.” |
 | fern, teacup-sprite | arrival | A teacup-sprite arrives wearing a saucer as a hat. “It keeps the thoughts in.” | A teacup-sprite arrives, saucer worn as a hat. “It keeps the thoughts in.” |
 | | thanks | “Thank you! I shall tell my hat all about it.” | “Thank you. My hat will want the details.” |
 | nib, star-sprite | arrival | A star-sprite peers over the counter. “I usually order by constellation.” | A star-sprite looks over the counter. “I usually order by constellation.” |
@@ -47,7 +47,7 @@ Two lines are new:
 | clover, bunny | arrival | A bunny hops onto a cushion. “A table for me and my ears, please.” | A bunny settles on a cushion. “A table for me and my ears, please.” |
 | | thanks | “Hop, hop, hooray! That was a very good pretend picnic.” | “Hop, hop. Thank you. A very good pretend picnic.” |
 | ember, pocket-dragon | arrival | A little dragon folds her wings beside the counter. “Only the waffles should be crispy.” | **Storybook line kept.** “Crispy” sits next to an order whose dish may be crunchy, so revoicing it risks changing a hint (spec 244 §3 rule 1). |
-| | thanks | “Delicious! That deserves a very small victory puff.” | “Thank you. That earns one small victory puff.” |
+| | thanks | “Delicious! That deserves a very small victory puff.” | “Thank you. That earns a small victory puff.” |
 | purl, kitten | arrival | A gray kitten peeks over the counter. “A table for me and my invisible ball of yarn, please.” | A gray kitten looks over the counter. “A table for me and my invisible yarn, please.” |
 | | thanks | “Purr-fect! My invisible yarn would like the recipe.” | “Purr-fect. My invisible yarn would like the recipe.” |
 | biscuit, kitten | arrival | A ginger kitten settles on a cushion and starts kneading. “I am helping with the pretend dough.” | A ginger kitten settles on a cushion, kneading. “I'm helping with the pretend dough.” |
