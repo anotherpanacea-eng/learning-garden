@@ -24,9 +24,9 @@ A new module, `dist/room-registry.mjs`, exports a frozen list of rooms:
 - `places` lists every place page whose own room list links the route.
 - `added` is the date the route first shipped on main, taken once from git history (`git log --reverse -S'"<route>"' -- dist`). It is written as a literal date and is never computed at runtime.
 
-The registry covers every `#place/room` link on these place pages: Café, Water Lab, Workshop, Post Office, Number Garden, Word Garden, Keeper's Desk, Living Garden, Story Loft, Cloud Orchard, Field Kit, Keeper's Pages, Travelers' Archive and Choose a starting point. Links that open another place page (for example `#activities/fractions`, `#pathways/math` or `#wonder/...`) and the orchard's per-fruit gathering links are not rooms, and the registry leaves them out.
+The registry covers every `#place/room` link on these place pages: Café, Water Lab, Workshop, Post Office, Number Garden, Word Garden, Keeper's Desk, Living Garden, Story Loft, Cloud Orchard, Field Kit, Keeper's Pages, Travelers' Archive, Choose a starting point, and all four subject pages (`#pathways/math`, `#pathways/english`, `#pathways/science`, `#pathways/french`), which list different rooms. Links that open another place page (for example `#activities/fractions`, the `#pathways/...` pages themselves or `#wonder/...`) and the orchard's per-fruit gathering links are not rooms, and the registry leaves them out.
 
-A browser check visits each listed place page and fails if a room link there is missing from the registry or has no date. This check is how a newly built room gets its New marker: without it, the next room would silently miss the signal this spec exists for.
+A browser check visits each listed page for a fresh explorer, collects its room links independently of the registry, and fails if one is missing from the registry or if the registry's `places` for it disagree. A room link that appears only after story progress (for example the Keeper's Pages link to `#workshop/old-map`) is covered when the same route is also linked from an always-visible place, as that one is. Story-gated room lists are not fixtures for this check. This check is how a newly built room gets its New marker: without it, the next room would silently miss the signal this spec exists for.
 
 ## What "new for you" means
 
@@ -38,11 +38,12 @@ rooms:{opened:{'#workshop/design':'2026-11-01', ...}, since:'2026-10-31', lastDa
 
 All dates are local calendar dates, `YYYY-MM-DD`.
 
-- **Opening.** When a registry route renders for the active explorer (not while the explorer picker is showing), `opened[route]` is set to today if it is absent. The notebook is saved only when this record actually changes.
+- **Only the chosen explorer.** All bookkeeping below (first use, visits and opening) runs only on a render for the chosen explorer, never while the explorer picker is showing. The app loads the previous explorer's notebook before the picker appears, so updating there would move the wrong explorer's dates.
+- **Opening.** When a registry route renders for the chosen explorer, `opened[route]` is set to today if it is absent. The notebook is saved only when this record actually changes.
 - **Visits.** On the first render of a new local day, `since` becomes the previous `lastDay` and `lastDay` becomes today. So `since` is the day of the explorer's previous visit, and it stays fixed for the rest of the day.
 - **First use.** A notebook with no `rooms` object starts with `since` set three days before today and `lastDay` set to today, with nothing opened. Three days is short enough that an explorer who has used the app all week sees a handful of rooms, not all of them.
 - **New for you.** A room is new for this explorer when `added >= since` and the explorer has not opened it.
-- **Restore.** A `rooms` value that is not this shape (non-object, an unknown route key, a malformed date, `since` after `lastDay`) is replaced with a fresh first-use object, and the rest of the notebook is kept unchanged. Routes in `opened` that are no longer in the registry are kept as written, because they might return. Downloads and restores carry the object like any other notebook key.
+- **Restore.** Restore checks the shape only, never registry membership. A `rooms` value that is not this shape (non-object, an `opened` key that is not a `#`-route string, a malformed or impossible date, `since` after `lastDay`) is replaced with a fresh first-use object, and the rest of the notebook is kept unchanged. Routes in `opened` that the current registry does not list (a removed room, or a notebook from a newer release) are kept as written, because they might return. Downloads and restores carry the object like any other notebook key.
 
 Grown-up notes show nothing new. The record is about which links to highlight, not about learning.
 
@@ -71,8 +72,9 @@ Within each group, links that are new for this explorer come first, then the res
 
 - A source suite, `test/new-for-you-checks.mjs`, covers:
   - registry shape, unique routes and literal dates;
-  - the opened, visit and first-use rules, including a day rollover and an explorer switch;
-  - restore of malformed `rooms` values without touching other notebook keys;
+  - the opened, visit and first-use rules, including a day rollover;
+  - a shared device: explorer A last visits on Monday, B chooses themselves on Tuesday, and A returns on Wednesday with `since` still Monday;
+  - restore of malformed `rooms` values without touching other notebook keys, and of unknown but well-formed routes, which are kept;
   - shelf ordering and the four-room limit;
   - Workshop grouping, where every current table is in exactly one group and links are unchanged.
 - A browser suite, `test/new-for-you-browser.py`, runs against the real app at tablet and phone widths. It checks that:
