@@ -88,3 +88,6 @@
 /* Final-e set uses the same work mat; crossing paths do not form a junction. */
 .wrt-sets{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.wrt-sets button{flex:1 1 120px}.wrt-sets button[aria-pressed=true]{background:#183430;color:#fffdf3}.wrt-crossing-gap{fill:none;stroke:#fffdf3;stroke-width:9}.wrt-note{padding:8px 12px;border:2px solid #8eb7a3;background:#fffdf3}.wrt-note p,.wrt-note>summary{font-size:1rem}.wrt-prop>.wr-picture{width:100%;max-height:190px}
 @media(max-width:680px){.wrt-prop>.wr-picture{width:38%;max-height:100px;flex:none}}
+
+/* Sentence context stays beside the current word and its reference model. */
+.wrt-context{font-size:1rem;margin:6px 0 12px;padding:8px 12px;border-left:4px solid #397958;background:#fffdf3}.wrt-pair .wrt-context{padding:6px;margin:6px 0}
