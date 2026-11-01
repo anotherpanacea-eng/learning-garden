@@ -21,7 +21,7 @@ No new CSS. The shelf uses `room-shelves.css` and the fold uses `number-garden-f
 ## Verification
 
 - `test/water-lab-front-browser.py`, against the real app at 375 and 820 px:
-  - one "More rooms at the Water Lab" shelf with three entries, linking `#science/cups`, `#science/rain-paths` and `#science/measure`, each once;
+  - one "More rooms at the Water Lab" shelf with three entries, linking `#science/water-shares`, `#science/rain` and `#science/measure`, each once;
   - no entry outside the shelf, no sideways scroll, and nothing spills out of a card;
   - the invitations sit in a closed `details.place-onward` on `#science`; opening it shows the links;
   - `#science/window` shows no shelf;
