@@ -1,0 +1,31 @@
+# 355 · o and final e
+
+Proposed2026-11-01 under admitted LG-10 / LG-G1, on main `9942ff5d46d0febb97b3dd78c6cb2353ec76fe03`. Independent specification and full finite linguistic review precede runtime. [Finite material](../content/355-prop-box-o-vowels-text.md); [source study and hard-prerequisite crosswalk](../source-audits/355-prop-box-o-vowels.md). The owning PR records exact-head clearance.
+
+## New learning and story job
+
+Revisit the built353 a_e/i_e encounter with another vowel: not/note, hop/hope and rod/rode. In these selected General American references, each pair keeps its first and last consonants and changes one vowel, from /ɑ/ to /oʊ/. The final e joins o in the spelling map without adding a sound. Return to354's exceptions so this never becomes a promise about every final-e word. Rode also supplies a past-ride meaning; this is vocabulary in context, not a past-tense lesson or spelling-rule derivation.
+
+Dot and Pip are preparing a small puppet show, then sending a note about their trip home. The six original scenes and shared note give a reason to read. This is an open E1-I/II foundation revisit within120's theater/market purpose, not a chapter contribution, Keeper's Page or ending. An older arrival can choose it directly. Neither the selected words nor their pictures are presumed unfamiliar.
+
+Spec49 §5 encounter: teach not/note and hop/hope with adult word/context modeling and the manual maps; contrast each pair's vowel while keeping the other reference sounds; support with picture, meaning, sentence and optional model throughout; new use is rod/rode initially in Try; return to all four sets without replacing waiting work. No result establishes independent reading, heard pronunciation, blending or dictated spelling.
+
+## Bounded extension
+
+Add a fourth closed set, code `long-o`, titled **o and final e**, in the existing sound-counter room at `#words/props`. First selection is not in Model. First four records start Model; rod/rode start Try. Add one fixed visit field beside the current three, extending their existing selection, reducer, clearing paths and source-copy behavior. The field's name is an implementation choice. No new destination, registry, save format, response parser, speech/player, microphone, network or completion record.
+
+Use the companion's six records,30 manual frames, three comparisons, exact contexts and one short note. Original350,353 and354 factory outputs remain unchanged for this slice. All records have three phonemes: short words have three printed letters, their final-e partners four. Frame0 highlights none,1–3 the corresponding group,4 all groups. Keep the literal350 connector descriptions, counter range0–6, frame bounds0–4 and `TRAIL_GROWNUP` unchanged. New guide is empty with no empty paragraph; append only the set-specific adult paragraph.
+
+Reuse353's nonadjacent o/e paths and overpass; consonants must not acquire the vowel's highlight or connector. Reuse354's visible sentence/display-label seams, escaping, task centering and source-specific note disclosure behavior. The new note starts closed rather than inheriting another set's open note, and stays available across turns within its set. Model/Try/Compare/Back preserve context and each record's own counters/frame/tool. Set roundtrips retain each set's Compare view; Back/re-entry resumes the last set. Route exit, owner change, import/reset/reload and successful fresh-Prop-Box recovery clear all four sets; refused recovery clears none. Old learner roots, sources and reports are unchanged.
+
+Six original small SVG scenes illustrate the selected meanings. Not and hope require the explicit adult meaning/sentence; an image alone is not evidence of negation, a mental state or decoding. Show rode as an earlier trip with a two-frame cart scene, not as the object's name. No copied worksheet, dictionary prose, artwork or audio. All teaching and controls work with touch and keyboard.
+
+## Proportionate verification and release
+
+Independent finite review covers all six senses/citation forms, six maps,30 frames, three comparisons and the16-token shared note before code. Source checks use independent phoneme/index expectations and rendered group highlights, including Compare. Check bounds, actual state preservation and isolated source copies; do not freeze source spelling or duplicate prose into spec-sync assertions.
+
+Extend the existing native journey: one full820×1000 o-set encounter, narrow/wide samples on the longest frame/Try and a pair, actual AX connector descriptions, and a visual inspection of the new scenes. Current word, context, mat and primary controls fit together where the task fits the viewport; otherwise controls remain reachable with modest scrolling. Maintain16px text,44px controls and no sideways overflow. Check all four sets' roundtrips and extend the real Notes/owner/import/reset/reload/refusal/recovery/save-off/stale-control boundaries with fourth-set work. Retain actual notebook/storage equality. One full source run per integrated candidate, affected checks after narrow repairs, independent implementation review, merge/deploy/served-byte verification follow AGENTS. Physical iPad, audio and learning effects remain unqualified.
+
+## Relationship to250 and remaining work
+
+This continues the existing adult-read350/353/354 pattern; it does not commission250's pack, benches, audio or player or clear55's listening/rights/recording gates. A later250 End-e slice must reconcile and revisit these examples, not claim to introduce them for the first time. e_e/u_e, adjacent vowel/consonant teams, spelling from memory and broad word recognition remain unfinished. The source study names the hard-prerequisite supports and missing broader work; no atlas coverage or placement changes.
