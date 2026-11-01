@@ -224,6 +224,28 @@ These are provisional candidate refinements to the shot suggestions in [story mi
 **Still and text:** the three plan sheets on the library wall, with a note pinned beside them. Text: "The town met about the low fields. Nobody had to agree about everything. Someone changed their mind, and said why."
 **Avoid:** a winning plan, a villain, Bramble shown as wrong or redeemed, or the explorer's kept plan.
 
+#### Story check of take 2 · 2026-11-01
+
+Checked against spec 120, the [act 4 script](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story/act-4.md) and integration note 6 in [motion-film integration](../motion-film-integration.md). The check reads the take's scene code and SRT; nobody has watched it in the real player yet. Take 2 runs 49 s in 7 shots, inside the 35 to 50 s budget. Its only words are the seven captions: the plan sheets have no labels, and the ledger shows marks with no readable numbers, so nothing answers chapter 1's ledger count.
+
+Re-cut fixes (each needs a new render, because the captions are burned in):
+
+1. **Who changes their mind.** The script decides who changes their mind from the explorer's kept work: the orchard keeper, the miller, Pip or, as the fallback, the librarian. The film fixes it as the miller at the ledger (caption 3, "The miller has changed her mind."). For most explorers that contradicts the line the game gives them, and in the script the ledger evidence is Pip's line, not the miller's. Make shot 3 unnamed. Keep the ledger and the rose line, show only a paw on the line, and change caption 3 to "Someone has changed their mind, and shows everyone why." That matches the still text ("Someone changed their mind, and said why."). The miller and the orchard keeper can stay in shot 4, where they only point at the water.
+2. **Plan name.** Caption 2 reads "the wall". The plan is called the Wall everywhere else, so the caption should read "Bramble speaks up for the Wall, and for the orchard families."
+3. **The note shot (integration note 6).** Pinning the note beside all three sheets is right: it matches the still ("a note pinned beside them") and the script's question mark on the meeting board. Two parts of the staging still undercut it:
+   - The shot opens at 2.6× zoom on the note, with only the right edge of Some of Each in frame. For its first three seconds the note reads as attached to that plan. Open on the note alone, or on the whole board.
+   - The pinning arm reaches in from the bottom right, below the camera, with no body. That reads as the viewer's own arm, which puts the explorer in the film. Draw the librarian (they/them, the blue owl from the Act V film) pinning it from the side, as the producer README already describes. Or bring the arm in from the side of the frame.
+4. **Stakes shot.** The mallet in shot 6 taps the stakes with no one holding it, which reads as the viewer again. Give it to Pip or the far neighbour, or show it held by a neighbour seen from behind.
+
+Brief fix: in the 30 to 38 s row, change "Someone adds a note to one of them" to "Someone pins a note beside them", so the brief matches the still and the take.
+
+Checked with no change needed:
+- Bramble argues and the listeners nod; she is not shown as wrong.
+- No sheet is highlighted, and nothing shows which plan the explorer kept.
+- The orchard keeper and miller point at different things in shot 4.
+- Dot, Hollis and the explorer's guide do not appear.
+- The orchard keeper (green hare) and the miller (blue bear) are invented designs. Spec 120 has no character sheets, so keep these designs for later films.
+
 ### A Question of Our Own (Act V ending)
 
 **Length:** 35 to 50 seconds. **Produce:** provisional storyboard now; final production during the reviewed Act V project-path and ending-adapter runtime build.
@@ -240,6 +262,27 @@ These are provisional candidate refinements to the shot suggestions in [story mi
 **Final line (optional):** "A first try, a second look, and a question still worth asking."
 **Still and text:** the Gazette pinned outside the library, with its note at the bottom. Text: "A question became a first version, and then a better one. One more page is bound into the Keeper's Pages."
 **Avoid:** anything that looks like the explorer's own project, online publishing, or applause standing in for a grade.
+
+#### Story check of take 2 · 2026-11-01
+
+Checked against spec 120, the [act 5 script](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story/act-5.md) and integration note 6, from the take's scene code and SRT. Take 2 runs 52 s in 7 shots. The only on-screen words are the captions, the book heading *For the next Keeper*, the title *Willowbank Gazette* and one question mark. Every other line of writing is a squiggle.
+
+Re-cut fixes:
+
+1. **"First" Gazette.** Caption 2 reads "The librarian pins up the first Willowbank Gazette." But in act 4 the librarian already edits the Gazette and made one for the meeting, and act 5's path 2 opens with "Now everyone wants another one." Change caption 2 to "The librarian pins up the next Willowbank Gazette." The picture can stay.
+2. **Length.** At 52 s the take runs over the 35 to 50 s budget. Take 1 s each from shots 2 and 5 (9 s to 8 s), then shift the later cues and re-export the SRT. Or, if story review prefers, widen the budget for this film to 52 s. Do one of the two, so the brief and the film agree.
+3. **Apostrophes.** The burned-in captions 4 and 6 use curly apostrophes ("doesn’t", "Keeper’s"), but the SRT uses straight ones. The transcript and VTT must match the picture exactly, so make them match before shipping.
+4. **The mistake (optional).** Pip points at the page in shot 3, but nothing on the page looks wrong. A small crossed or circled squiggle where Pip points would let a non-reader see the mistake without reading.
+
+Story-review call, recommended as kept: the Gazette is also act 5's path 2, so one explorer's project resembles this film's fixed example. The film keeps the librarian as the clear maker, and it never shows the explorer's page: the page bound in shot 6 is blank-edged, with its contents unseen. That keeps it within "anything that looks like the explorer's own project". If story review disagrees, re-cut shots 2 to 5 around the librarian's own question instead, keeping the first-try, second-look shape.
+
+Checked with no change needed:
+- Page 5's heading opens the film, which fits the act's reveal order.
+- Hollis does not appear.
+- Nobody applauds: the caption reads "Everyone listens".
+- Nothing is published online.
+- The librarian has no pronoun in any caption.
+- The blue owl with spectacles and a gold scarf is the invented librarian design. Reuse it for the Act IV note fix.
 
 ### The Opening of the Ways (Act VI ending, the finale)
 
@@ -258,6 +301,30 @@ These are provisional candidate refinements to the shot suggestions in [story mi
 **Final line (optional):** "There will always be another question. This time, someone new has come to ask it with you."
 **Still and text:** the bridge with ribbons on each Way and the newcomer holding the parcel, Dot beside them. Text: "The Ways are open. Hollis is home. And someone new has arrived with a parcel of their own."
 **Avoid:** the town damaged again, which Act IV plan was kept, Hollis's letter readable on screen (the page 6 text belongs to the game), or the explorer's guide or courier shown.
+
+#### Story check of take 2 · 2026-11-01
+
+Checked against spec 120, the [act 6 script](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story/act-6.md) and integration note 6, from the take's scene code and SRT. Take 2 runs 61 s in 9 shots, inside the 50 to 75 s budget. Its only words are the nine captions. The warning card, the post and the parcel carry no writing, and the captions never name the runner, Vadoalto, Nuria or Léon. Nothing of Hollis's letter is shown.
+
+Re-cut fixes:
+
+1. **The runner from behind (integration note 6).** Keep it. The runner is drawn only from behind, with no face, label or name, which keeps the [town film's](299-town-film-text.md) rule that the films never identify the later runner. The staging needs one fix: the back-view figure slides sideways across the frame, which reads as a cut-out. Have the runner set off away from the camera down the river path, getting smaller, or keep the runner small and far off for the whole move.
+2. **Who carries the warning on.** The runner is drawn in the same tan as the post bag. The bag appears at the bridge just as the runner's card disappears, so the runner seems to carry the bag on to Les Saules. In the script, Willowbank sends the warning on with the explorer's courier. Give the post bag its own colour, and let a beat pass between the runner stopping at the bridge and the bag setting off.
+3. **Ribbon colours.** The script ties blue for the river path, gold for the bridge road and red for the high ford. The take uses rose for the high ford, in shots 6, 8 and 9. Use the red so the film matches the game's ending text and season lines.
+
+Canon note for story review: the newcomer is drawn as a young hedgehog, but neither spec 120 nor spec 49 gives the apprentice a species. If this take ships, the apprentice is a hedgehog from then on, and later text about "the apprentice's questions" should agree. No caption gives the newcomer a pronoun, so leave that open until it is decided.
+
+Checked with no change needed:
+- The warning chain runs Nuria, the runner, the post bag, then Léon reading on his ferry.
+- The first exchange (apples and rolled drawings) goes upstream before Hollis comes home, in the script's order.
+- Hollis is a grey heron, reads unnumbered marks, and has no pronoun in any caption.
+- Supper shows Pip, Dot, Ember and Hollis.
+- Bramble ties the three Ways.
+- Dot reaches the newcomer first.
+- The open place on the bridge stays empty for the explorer.
+- Nothing shows which Act IV plan was kept: the town has no wall or wet meadow drawn.
+- Nothing was damaged again.
+- The guide and courier never appear.
 
 ## Review
 
