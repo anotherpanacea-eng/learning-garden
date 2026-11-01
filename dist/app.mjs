@@ -1,5 +1,5 @@
 import {pauseMillFilm,stopMillFilm} from './mill-film.mjs';
-import {touchRooms,newRoomsPage,markNewRooms,setActiveRooms,readRooms,roomsKey,mergeRooms,roomShelf} from './new-for-you.mjs';
+import {touchRooms,newRoomsPage,markNewRooms,setActiveRooms,readRooms,roomsKey,roomsPrefix,mergeRooms,roomShelf} from './new-for-you.mjs';
 import {beatBenchPage,beatBenchEntry,beatBenchNotes,bindBeatBench,resetBeatBenchView} from './beat-bench-ui.mjs';
 import {longWordPage,longWordEntry,longWordNotes,bindLongWord,resetLongWordView} from './long-word-workshop-ui.mjs';
 import {wordListShelfPage,wordListShelfEntry,wordListShelfNotes,bindWordListShelf,resetWordListShelfView} from './word-list-shelf-ui.mjs';
@@ -222,10 +222,13 @@ let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerD
 // Spec 358: New marks follow every render and in-page re-render of main, and the top bar with them.
 // The observer runs as a microtask, so marks are in place before anything reads the new page. Marking twice changes nothing.
 new MutationObserver(()=>markNewRooms(document)).observe(main,{childList:true,subtree:true});
-// The chosen explorer's rooms record sits in its own key beside the notebook (memory only while saving is off),
-// so entering a room never changes a notebook root. Clearing every explorer removes it with the notebooks.
+// The chosen explorer's rooms record sits in its own key, outside the notebook prefix (memory only while saving is off),
+// so entering a room never changes a notebook root. A record whose notebook is gone (saving off, an explorer removed,
+// everything cleared) is removed on the next render.
 const roomRecords=new Map();
+function sweepRooms(){try{for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k?.startsWith(roomsPrefix)&&localStorage.getItem(`number-garden-v1:${k.slice(roomsPrefix.length)}`)===null)localStorage.removeItem(k);}}catch{}}
 function touchActiveRooms(route){
+ sweepRooms();
  const p=explorerStore.active,key=roomsKey(p.id);
  // Read storage on every render and merge it with this page's copy, so another tab's opened rooms are kept
  // and a record held in memory while saving was off is written once saving is back on.
