@@ -20,6 +20,8 @@ export const copyScopes = [
   {path:'dist/long-word-workshop-content.mjs',adultBlocks:[{start:'export const LONG_WORD_GROWN_UP',end:'\n]);',reason:'Grown-up interpretation and limits, used only in Notes.'}],quotations:[]},
   {path:'dist/word-list-shelf-ui.mjs',adultBlocks:[{start:'function notesKeeps(',end:'\nexport const wordListShelfEntry',reason:'Only used in Grown-up notes.'}],quotations:[]},
   {path:'dist/word-list-shelf-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rod-tray-ui.mjs',adultBlocks:[{start:'const flag=x=>',end:'\nexport function bindRodTray(',reason:'Only used in Grown-up notes.'}],quotations:[]},
+  {path:'dist/rod-tray-content.mjs',adultBlocks:[{start:" notesHeading:'The Rod Tray',",end:" refused:'",reason:'Shown only in Grown-up notes.'}],quotations:[]},
   {path:'dist/mending-shed-ui.mjs',adultBlocks:[{start:'export function mendingShedNotes(',end:'\nexport function bindMendingShed(',reason:'Only used in Grown-up notes.'}],quotations:[]},
   {path:'dist/mending-shed-content.mjs',adultBlocks:[{start:" teaches:'",end:'export const teachCards',reason:'Shown only in For grown-ups and Notes.'}],quotations:[]},
   {path:'dist/lost-found-ui.mjs',adultBlocks:[],quotations:[]},
