@@ -86,7 +86,7 @@ def main():
             launch['executable_path'] = os.environ['CHROME_PATH']
         browser = pw.chromium.launch(**launch)
         try:
-            for width, height in [(375, 812), (820, 1180)]:
+            for width, height in [(375, 812), (820, 1180), (920, 900), (1280, 900)]:
                 c, p = setup(browser, width, height, [notebook()])
                 go(p, base, '#home')
                 for place, (title, count, newest) in shelves.items():
@@ -100,6 +100,8 @@ def main():
                         hrefs = cards.first.evaluate('e=>[...e.querySelectorAll("a[href^=\'#\']")].map(a=>a.getAttribute("href"))')
                         ok(newest in hrefs, f'{width} {place}: a new room first: {hrefs}')
                     ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth'), f'{width} {place}: no sideways scroll')
+                    spill = p.evaluate("()=>[...document.querySelectorAll('.room-shelf-grid > *')].flatMap(card=>{const r=card.getBoundingClientRect();return [...card.querySelectorAll('*')].filter(e=>{const q=e.getBoundingClientRect();return q.width&&(q.right>r.right+1||q.left<r.left-1);}).map(e=>card.className+' > '+e.tagName+'.'+e.className)})")
+                    ok(not spill, f'{width} {place}: nothing spills out of a card: {spill[:5]}')
                     if width == 820:
                         grid, stacked = p.evaluate("()=>{const g=document.querySelector('.room-shelf-grid');const kids=[...g.children];return [g.getBoundingClientRect().height,kids.reduce((s,k)=>s+k.getBoundingClientRect().height,0)+14*(kids.length-1)];}")
                         ok(grid <= 0.75 * stacked, f'{place}: grid {grid:.0f}px is at least 25% shorter than stacked {stacked:.0f}px')
