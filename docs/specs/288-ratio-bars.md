@@ -28,7 +28,7 @@ Editing changes and saves only an ungraded draft. The earlier checked model rema
 
 ## Six finite invitations and exact mathematics
 
-Ingredient order is frozen per case; all ratio terms positive. Counts in the table are ordered blocks, `u` is scoops in each equal block, and reference is null/whole/an ingredient ID. All starts are labelled supplied. No supplied start already fits all three criteria.
+Ingredient order is frozen per case; all ratio terms positive. Counts in the table are ordered blocks, `u` is scoops in each equal block, and reference is null/whole/an ingredient ID. All starts are labelled as ready-made starting blocks on the board; Notes keep the supplied-start wording. No supplied start already fits all three criteria.
 
 | ID / title | Ordered recipe; given fact | Supplied start (blocks; u; reference) | One fitting example (blocks; u; amounts) | Intrinsic support |
 | --- | --- | --- | --- | --- |

@@ -393,7 +393,7 @@ export function checkSorter(state, taskId, options = {}) {
     if (!/^\d+$/.test(raw.trim()) || !integer(Number(raw.trim()), 10000)) return {recorded:false, feedback:'Enter a whole number from 0 to 10000. Leave off the percent sign; a blank is not zero.'};
     answer = String(Number(raw.trim()));
   } else {
-    if (!task.choices.some(c => c.id === raw)) return {recorded:false, feedback:'Choose one of this question’s supplied answers before checking.'};
+    if (!task.choices.some(c => c.id === raw)) return {recorded:false, feedback:'Choose one of this question’s answers before checking.'};
     answer = raw;
   }
   return workChange(state, current => {

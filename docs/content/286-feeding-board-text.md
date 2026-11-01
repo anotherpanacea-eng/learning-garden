@@ -10,7 +10,7 @@ Invitation: **Who eats plants? Who eats animals? Who eats both? Make a board fro
 
 Boundary: **This board is about what animals eat. It never asks what you eat.**
 
-Source label: **Supplied science examples**
+Source label: **Food facts from science sources**
 
 Persistent qualifier: **These pictures show examples of foods these animals eat, not one meal or every food. The groups describe their diets.**
 
@@ -56,7 +56,7 @@ Check heading: **Your basket and the food clue**
 
 Idea feedback heading: **Your idea and the food clues**
 
-Recorded choice: **You chose: {literal supplied basket or idea text}**
+Recorded choice: **You chose: {literal basket or idea text}**
 
 Outcome labels: fits → **Fits this food clue**; other → **Look again at the food clue**. These are task outcomes, not a grade.
 
@@ -97,7 +97,7 @@ Display short names below on the board; scientific names and source notes are in
 | boar / **Wild boar** / *Sus scrofa* | **Acorns · Roots · Earthworms** | **Wild boar eat plant and animal foods. Acorns, roots and earthworms are examples.** Omnivore. | **Wild boar with a bristly body, a long snout and short tusks.** |
 | magpie / **Eurasian magpie** / *Pica pica* | **Seeds · Fruit · Beetles** | **Eurasian magpies eat plant and animal foods. Seeds, fruit and beetles are examples.** Omnivore. | **Eurasian magpie with black-and-white feathers and a long tail.** |
 
-The usual-diet note is visible beside the food pictures while choosing. Source repeats that literal note followed by **These are supplied species facts, not an observation made in this game.** References use the exact title/publisher/URL recorded in audit286 for that row; no external source prose or artwork is reproduced. Source link label: **Grown-up source: {title} · {publisher}**. Art credit: **Original labelled drawing for this board.**
+The usual-diet note is visible beside the food pictures while choosing. Source repeats that literal note followed by **These facts come from science sources, not from something seen in this game.** References use the exact title/publisher/URL recorded in audit286 for that row; no external source prose or artwork is reproduced. Source link label: **Grown-up source: {title} · {publisher}**. Art credit: **Original labelled drawing for this board.**
 
 Every plant-food icon is a simple labelled sketch of that plant material; pollen is **Pollen grains from a flower**, not seeds or loose yellow sweets. Every animal-food icon shows a recognizable whole schematic or silhouette with no gore; earthworm is **Earthworm**, aphid is **Tiny aphid insect**, beetle is **Beetle**, generic insects are **Small insects**. Bones are an unattached schematic labelled **Bones of dead animals**, no corpse. These icon descriptions accompany the literal food label; they supply identification rather than testing it.
 
@@ -136,7 +136,7 @@ Prompt: **What do these food clues tell us?**
 
 - a / fits: **The elephant eats plant foods; the shrew eats animals. Food decides their groups.** Feedback: **Leaves, grass and bark are plant foods. Beetles and earthworms are animals. The big one is a herbivore; the tiny one is a carnivore.**
 - b / other, appearance: **The big elephant is a carnivore; the tiny shrew is a herbivore. Size decides their groups.** Feedback: **Size gives the opposite answer here. Use the elephant's plants and the shrew's animal foods.**
-- c / other, underclaim: **We cannot group either animal until we watch one of its meals.** Feedback: **We have supplied information about their diets already. We can use that source here; we are not pretending we watched a meal.**
+- c / other, underclaim: **We cannot group either animal until we watch one of its meals.** Feedback: **We already have information about their diets. We can use that source here; we are not pretending we watched a meal.**
 
 Clue: **Which statement uses leaves, grass, bark, beetles and earthworms?**
 
@@ -147,7 +147,7 @@ Animals: Eurasian beaver / Grey heron.
 Prompt: **Which reason fits these food clues?**
 
 - a / other, appearance: **The beaver has big teeth, so it belongs with the animal-eating heron.** Feedback: **The beaver's bark, twigs and water plants are plant foods. Big teeth do not put it with an animal-eater.**
-- b / other, underclaim: **We cannot group the beaver until we inspect all of its teeth.** Feedback: **The supplied diet note already describes plant foods. We can use the foods without a tooth inspection.**
+- b / other, underclaim: **We cannot group the beaver until we inspect all of its teeth.** Feedback: **The diet note already describes plant foods. We can use the foods without a tooth inspection.**
 - c / fits: **The beaver eats plant foods; the heron eats animals. Their foods give different groups.** Feedback: **Bark, twigs and water plants support herbivore for the beaver. Fish and frogs support carnivore for the heron.**
 
 Clue: **Compare bark and twigs with fish and frogs.**
@@ -184,9 +184,9 @@ Together explanation: **Choose Working together if a grown-up is helping with th
 
 Teaching title: **Food decides the group**
 
-1. Rabbit/clover picture, basket supplied: **The rabbit eats plant foods, so the rabbit goes in Herbivore.**
-2. Barn owl/mouse picture, basket supplied: **The barn owl eats animal foods, so the barn owl goes in Carnivore.**
-3. Red fox/berries and mouse picture, basket supplied: **The red fox eats plant and animal foods, so the red fox goes in Omnivore.**
+1. Rabbit/clover picture, basket shown: **The rabbit eats plant foods, so the rabbit goes in Herbivore.**
+2. Barn owl/mouse picture, basket shown: **The barn owl eats animal foods, so the barn owl goes in Carnivore.**
+3. Red fox/berries and mouse picture, basket shown: **The red fox eats plant and animal foods, so the red fox goes in Omnivore.**
 
 Teaching footer: **These are worked examples. You can return to your own choice at any step.**
 

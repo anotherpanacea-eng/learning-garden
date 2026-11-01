@@ -42,9 +42,9 @@ export function createSorterSource(serial = 1) {
   ], 'It goes to Town, although the label calls for Hill farms. The selected features ignore that difference.', traceHint, traceExample);
   choice('1c', 0, 'Could the original size-and-wrap card route any of these parcel kinds to Hill farms?', 'no', [
     option('yes', 'Yes, any parcel with a hill-track label.', 'That uses a feature the original card ignores. Each size/wrap combination has more Town examples.'),
-    option('unknown', 'We cannot check any of the combinations.', 'We can check all four supplied size/wrap combinations in the example table.'),
-    option('no', 'No, every supplied size/wrap group votes Town.', 'Yes. Small brown votes 12 to 4; small blue 10 to 0; large brown 8 to 0; large blue 6 to 0.')
-  ], 'All four supplied size/wrap combinations vote Town. This is about these feature values and examples, not every possible machine.', traceHint, traceExample);
+    option('unknown', 'We cannot check any of the combinations.', 'We can check all four size/wrap combinations in the example table.'),
+    option('no', 'No, every size/wrap group in the table votes Town.', 'Yes. Small brown votes 12 to 4; small blue 10 to 0; large brown 8 to 0; large blue 6 to 0.')
+  ], 'All four size/wrap combinations in the table vote Town. This is about these feature values and examples, not every possible machine.', traceHint, traceExample);
   choice('1d', 0, 'Bramble says, “A funnel must be broken.” What do these traces show?', 'design', [
     option('funnel', 'The errors prove a brass funnel is faulty.', 'The traced outputs follow every instruction. We have no evidence of a faulty funnel.'),
     option('design', 'It follows its card, but the design fails Hill deliveries.', 'Yes. Following a procedure correctly does not mean that procedure meets the post office’s needs.'),
@@ -53,7 +53,7 @@ export function createSorterSource(serial = 1) {
   number('2a', 1, 'Original card, this week’s 40 parcels: how many reach the correct basket overall?', 30, 40,
     '30 out of 40 are correct overall: all 30 Town parcels, but none of the 10 Hill parcels. That is 75%.', countHint, countExample);
   number('2a-percent', 1, 'Original card, this week: 30 correct out of 40. What percentage is correct overall? Enter the number without %.', 75, 40,
-    '30/40 = 3/4 = 75%. Percent means out of 100. This is the share correct in this supplied batch, not a guarantee about another batch.', 'Thirty out of forty is three quarters. Think of each quarter as 25 out of 100.', countExample);
+    '30/40 = 3/4 = 75%. Percent means out of 100. This is the share correct in this week’s batch, not a guarantee about another batch.', 'Thirty out of forty is three quarters. Think of each quarter as 25 out of 100.', countExample);
   number('2b-town', 1, 'Original card, this week: of the 30 parcels actually for Town, how many are correct?', 30, 30,
     'Town: 30 correct out of 30, or 100%. The denominator is Town parcels, not the whole batch.', countHint, countExample);
   number('2b-hill', 1, 'Original card, this week: of the 10 parcels actually for Hill farms, how many are correct?', 0, 10,
@@ -65,24 +65,24 @@ export function createSorterSource(serial = 1) {
   choice('2d', 1, 'The postmaster says, “75% is mostly helping.” Which reply uses the destination counts?', 'groups', [
     option('fine', 'Three quarters overall is enough; no more checks are needed.', 'That ignores the ten Hill parcels, all misrouted.'),
     option('groups', 'Town gets all its parcels right; Hill gets every one wrong.', 'Yes. Compare 30/30 Town with 0/10 Hill, as well as 30/40 overall.'),
-    option('no-info', 'No useful conclusion can be drawn from these parcels.', 'We can conclude what happened to this supplied batch, while leaving future performance unknown.')
-  ], 'An overall result cannot stand in for every group’s experience. The supplied counts show a complete Hill delivery failure.', countHint, countExample);
+    option('no-info', 'No useful conclusion can be drawn from these parcels.', 'We can conclude what happened to this week’s batch, while leaving future performance unknown.')
+  ], 'An overall result cannot stand in for every group’s experience. The counts in the table show a complete Hill delivery failure.', countHint, countExample);
   number('3a', 2, 'Last year’s 40 examples: how many were for Hill farms?', 4, 40,
     'Only 4 of the 40 examples were for Hill farms: 1/10, or 10%. Rarity alone does not explain every error; the selected features also matter.', 'Read the Hill column of the last-year examples and add its counts.', 'Different example: 2 green cards in a set of 20 make 2/20 = 1/10 = 10%.', original, 'training');
   number('3a-percent', 2, 'Last year’s examples: 4 of 40 were for Hill farms. What percentage is that? Enter the number without %.', 10, 40,
-    '4/40 = 1/10 = 10%. The same four Hill examples can support perfect routing on this supplied batch when road alone is selected.', 'Four out of forty is one out of ten. Express one tenth as a share out of 100.', 'Different example: 2 of 20 cards is 1/10, or 10%.', original, 'training');
-  choice('3b', 2, 'Which feature distinguishes the actual destinations throughout these supplied tables?', 'road', [
+    '4/40 = 1/10 = 10%. The same four Hill examples can support perfect routing on this week’s batch when road alone is selected.', 'Four out of forty is one out of ten. Express one tenth as a share out of 100.', 'Different example: 2 of 20 cards is 1/10, or 10%.', original, 'training');
+  choice('3b', 2, 'Which feature distinguishes the actual destinations throughout these tables?', 'road', [
     option('size', 'Parcel size', 'This week has large parcels for both Town and Hill, so size cannot distinguish them.'),
     option('wrap', 'Wrapping color', 'Brown parcels go to both destinations. Wrap cannot distinguish those parcels.'),
     option('road', 'The road on the label', 'Yes. In these invented tables, valley road corresponds to Town and hill track to Hill farms. This does not cover every possible future label.')
-  ], 'Road distinguishes these destinations in the supplied data. A human chose whether the model could use that feature.',
+  ], 'Road distinguishes these destinations in these tables. A human chose whether the model could use that feature.',
     'Compare the actual destinations in the tables. Does the same size or wrapping occur at both places? Which feature separates them here?',
     'Different labeled set: if both a red packet and a blue packet are for the same street, color alone does not tell a sorter which street to use. Look for the feature that distinguishes the actual destinations.');
   for (const [id, prompt, key, denominator, feedback, p] of [
     ['4a-hill', 'More examples profile: size+wrap, plus ten Hill examples. Of this week’s 10 Hill parcels, how many are correct?', 0, 10, 'Hill: 0/10. Small brown still votes 12 Town to 8 Hill; large brown votes 8 Town to 6 Hill.', extra],
     ['4a-overall', 'More examples profile: size+wrap, plus ten Hill examples. How many of this week’s 40 parcels are correct overall?', 30, 40, 'Overall: 30/40, or 75%. Adding these examples does not fix the ignored-road problem.', extra],
-    ['4b-overall', 'Road-only profile, last year’s examples: how many of this week’s 40 parcels are correct overall?', 40, 40, 'Overall: 40/40 on this supplied batch. Valley examples vote Town; hill-track examples vote Hill. Another batch is not tested here.', road],
-    ['4b-hill', 'Road-only profile, last year’s examples: how many of this week’s 10 Hill parcels are correct?', 10, 10, 'Hill: 10/10 on this supplied batch. The four baseline Hill examples suffice when road is the only feature selected.', road],
+    ['4b-overall', 'Road-only profile, last year’s examples: how many of this week’s 40 parcels are correct overall?', 40, 40, 'Overall: 40/40 on this week’s batch. Valley examples vote Town; hill-track examples vote Hill. Another batch is not tested here.', road],
+    ['4b-hill', 'Road-only profile, last year’s examples: how many of this week’s 10 Hill parcels are correct?', 10, 10, 'Hill: 10/10 on this week’s batch. The four baseline Hill examples suffice when road is the only feature selected.', road],
     ['4c-overall', 'All-features profile, last year’s examples: how many of this week’s 40 parcels are correct overall?', 34, 40, 'Overall: 34/40, or 85%. The six large Hill parcels have no exact example match, so the whole-corpus fallback routes them to Town.', all],
     ['4c-hill', 'All-features profile, last year’s examples: how many of this week’s 10 Hill parcels are correct?', 4, 10, 'Hill: 4/10, or 40%. The four small Hill parcels match examples; the six large Hill parcels fall back to Town.', all]
   ]) number(id, 3, prompt, key, denominator, feedback, fixHint, fixExample, p);
@@ -93,7 +93,7 @@ export function createSorterSource(serial = 1) {
   ], 'All-features requires a large, brown, hill-track example. None exists in baseline, so its fallback uses the whole corpus’s Town majority.', fixHint, fixExample, all);
   choice('4e', 3, 'Why did adding the ten Hill examples fail with size and wrap selected?', 'ignored', [
     option('ignored', 'It still cannot distinguish the different roads.', 'Yes. More examples do not reveal an ignored feature; the Town votes still win each pooled group.'),
-    option('never', 'More examples can never help a model.', 'They can help here: adding the large Hill examples fixes the all-features profile on this supplied batch.'),
+    option('never', 'More examples can never help a model.', 'They can help here: adding the large Hill examples fixes the all-features profile on this week’s batch.'),
     option('enough', 'Just add enough Hill examples and every destination must improve.', 'More Hill examples could tip a pooled group, but then Town parcels with the same size/wrap would be sent to Hill. The selected features cannot separate them.')
   ], 'Size and wrap pool parcels with different destinations. Adding examples can change a vote without making that view able to distinguish the roads.', fixHint, fixExample, extra);
 
@@ -138,23 +138,23 @@ export function createSorterSource(serial = 1) {
         'A missing large Hill example explains a fallback under all-features. Under the original size/wrap card, even small Hill parcels with examples are outvoted.'
       ],example:'Different view: if a model sees only wrapping, a brown Town parcel and a brown Hill parcel look identical to it. No amount of looking at the same wrapping alone reveals the road.'},
       {title:'Try a change',teaching:[
-        'Change features or the fixed example set, then run the same supplied batch. Keep earlier results to compare the effects.',
+        'Change features or the fixed example set, then run this week’s batch again. Keep earlier results to compare the effects.',
         'More features can make an exact-match group empty. More examples can change votes, but cannot reveal a feature that was left out.',
-        'These repeated results help develop this model. They do not test unseen parcels. The augmented set even adds ten parcels from the same supplied test batch.'
+        'These repeated results help develop this model. They do not test unseen parcels. The augmented set even adds ten parcels from this week’s batch, the test batch.'
       ],example:fixExample},
       {title:'Advise the postmaster',teaching:[
         'A recommendation can name a plan, its evidence, an objection and how people will check the service.',
-        'Write your own words or choose supplied words. An unfinished letter is worth keeping. None of this open writing is graded.',
+        'Write your own words or choose ready-made words. An unfinished letter is worth keeping. None of this open writing is graded.',
         'People setting up and using the sorter should check it before use and monitor mistakes. A way for recipients to report errors is additional support, not a transfer of that duty.'
-      ],example:'A different service plan might say: “Try this on a small supplied batch, have a person check unfamiliar labels, and record mistakes separately by destination.” That still needs evidence in its actual setting.'}
+      ],example:'A different service plan might say: “Try this on a small trial batch first, have a person check unfamiliar labels, and record mistakes separately by destination.” That still needs evidence in its actual setting.'}
     ],
     tasks,
     discussions:[
       {id:'causes',page:2,prompt:'Which explanation would you investigate? These are discussion starters, not marked answers.',options:[
         option('ignored-road','It was not told to look at road.','That matters in the original card: Town and Hill parcels with the same size/wrap are pooled into one vote.'),
-        option('rare-hill','Hill examples were rare.','They are outvoted in the original size/wrap groups. Rarity alone is not enough to explain failure: road-only succeeds on this supplied batch with the same four Hill examples.'),
+        option('rare-hill','Hill examples were rare.','They are outvoted in the original size/wrap groups. Rarity alone is not enough to explain failure: road-only succeeds on this week’s batch with the same four Hill examples.'),
         option('missing-large','It had never seen a large Hill parcel.','That becomes decisive with all features selected: large Hill has no exact match and falls back to Town. It does not explain why familiar SMALL Hill parcels fail under size/wrap.'),
-        option('labels','Perhaps the farmers wrote bad labels.','The supplied labels clearly say hill track. The original card ignores that feature. Nothing here blames the label writers.')
+        option('labels','Perhaps the farmers wrote bad labels.','The parcel labels clearly say hill track. The original card ignores that feature. Nothing here blames the label writers.')
       ]},
       {id:'responsibility',page:2,prompt:'Who should help notice errors? Talk about the different responsibilities.',options:[
         option('setup','People choosing the procedure and examples.','They should test the design against the service’s needs, including each destination. Correctly recorded examples are only part of that responsibility.'),
@@ -164,13 +164,13 @@ export function createSorterSource(serial = 1) {
     ],
     parts:[
       part('plan','What should the post office do?',[
-        'Use road-only for these supplied parcels, with a person checking unfamiliar labels before delivery.',
+        'Use road-only for these parcels, with a person checking unfamiliar labels before delivery.',
         'Have a person check every Hill-track parcel while the post office investigates the sorter.',
         'Return the borrowed machine and sort by hand for now.'
       ]),
       part('reason','Your strongest reason',[
         'The original card got 30/40 right overall but 0/10 right for Hill farms.',
-        'Road-only got all 40 supplied parcels right. That does not establish how it will handle new labels.',
+        'Road-only got all 40 of this week’s parcels right. That does not establish how it will handle new labels.',
         'A person can read the road directly; the post office should compare the work and errors each approach creates.'
       ]),
       part('objection','An objection and your response',[
@@ -191,17 +191,17 @@ export function createSorterSource(serial = 1) {
       {id:'all-features',label:'All features',...structuredClone(all)}
     ],
     labels:{
-      testBatch:'This week’s supplied parcels',trainingBatch:'Last year’s example parcels',
+      testBatch:'This week’s parcels',trainingBatch:'Last year’s example parcels',
       augmentedBatch:'Last year plus this week’s ten Hill examples, once',
       extraBatch:'The ten extra Hill examples, added once',
       modelBoundary:'Invented postal data · one exact-match lookup model, not live AI',
-      development:'Results on the same supplied batch are development checks. They do not establish performance on unseen parcels or comprehensive fairness.',
-      augmentedWarning:'This model’s examples include ten Hill parcels taken from this same supplied batch. This is not an independent test.',
+      development:'Results on this same batch are development checks. They do not establish performance on unseen parcels or comprehensive fairness.',
+      augmentedWarning:'This model’s examples include ten Hill parcels taken from this week’s batch. This is not an independent test.',
       noMajority:'No majority in this model',noParcels:'No parcels in this group',
       closing:'The postmaster reads your page. “We need to check what it does, for each destination, and keep asking when the setting changes. I’ll write to Léon. First I’ll help our visitor find somewhere comfortable for the goat.” You can keep experimenting and revise this advice.',
-      traceSupport:'A supplied trace was opened. It shows the model’s calculation; it does not show an independent calculation by the explorer.',
-      runSupport:'A supplied model run was opened. Its counts are computer-model results, not independent performance evidence.',
-      practice:'Supported practice with the supplied tables. Open writing and discussion are ungraded.'
+      traceSupport:'You opened a step-by-step trace. It shows the model’s calculation, not one you worked out yourself.',
+      runSupport:'You opened a model run. Its counts come from the computer model, not from your own work.',
+      practice:'Practice with the parcel tables. Open writing and discussion are not graded.'
     }
   };
 }

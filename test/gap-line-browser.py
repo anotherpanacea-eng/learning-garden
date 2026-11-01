@@ -312,7 +312,7 @@ def retained(browser,base,f):
         p=setup(browser,820,1180,f[key],key);go(p,base);id='earlier-gap' if key=='smaller' else 'positive';select_case(p,id)
         if key=='supplied':
             ok(p.locator('[data-gap-presentation="split"]').is_checked() and p.locator('[data-gap-presentation="showMove"]').is_checked(),'retained supplied presentations on')
-            ok('Supplied ruler end' in view(p).inner_text(),'nonzero initial uses supplied-end caption')
+            ok('Starting ruler end' in view(p).inner_text(),'nonzero initial uses starting-end caption')
         click(p,'[data-gap-move="-1"]');compare(p);ok(observation(p,id) is not None,'supported retained source remains editable '+key)
         download(p,base,key+'-notes');text=semantic(p)
         if key=='supplied':

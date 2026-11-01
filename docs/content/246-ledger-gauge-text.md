@@ -92,7 +92,7 @@ Persistent short notice beside the source drawer:
 
 **Label:** Later added measurement · fictional source
 
-> A town note added after Hollis's keeping records the later storm at 160 cm above the stated ordinary level. No Hollis-year coordinate is supplied for it.
+> A town note added after Hollis's keeping records the later storm at 160 cm above the stated ordinary level. No Hollis-year coordinate is given for it.
 
 **Limit to carry with it:**
 
@@ -100,7 +100,7 @@ Persistent short notice beside the source drawer:
 
 **Chart label:**
 
-> Later storm: 160 cm · outside Hollis's keeping · year coordinate not supplied.
+> Later storm: 160 cm · outside Hollis's keeping · year coordinate not given.
 
 ### Source P: Three fictional proposals
 
@@ -128,7 +128,7 @@ Persistent short notice beside the source drawer:
 >
 > The year 22 marker shows when the two changes were recorded. A year without a bar means no flood was entered here. It does not mean the water height was zero.
 >
-> The later 160 cm storm has its own labelled place beside the plot. It has no supplied Hollis year, so it does not sit on the year line.
+> The later 160 cm storm has its own labelled place beside the plot. The records give it no Hollis year, so it does not sit on the year line.
 
 ### Mean and range
 
@@ -318,7 +318,7 @@ Author direction: records cannot tell.
 
 **Records count against:**
 
-> Neither Hollis's seven entries nor the separate 160 cm note says what next year will bring. They do not promise a repeat, but they do not show a repeat is impossible. This prediction remains beyond the supplied records.
+> Neither Hollis's seven entries nor the separate 160 cm note says what next year will bring. They do not promise a repeat, but they do not show a repeat is impossible. This prediction goes beyond these records.
 
 **Records cannot tell:**
 
@@ -408,7 +408,7 @@ Plan selector labels: **The Wall** · **The Sponge** · **Some of Each** · **Le
 
 Instruction beneath selector:
 
-> Changing the provisional plan leaves your writing and supplied choices in place. You can revise them. Earlier plan-specific words keep their label instead of changing themselves.
+> Changing the provisional plan leaves your writing and ready-made choices in place. You can revise them. Earlier plan-specific words keep their label instead of changing themselves.
 
 Nine complete supplied reasons, three per plan:
 
@@ -591,9 +591,9 @@ The specification supplies the numeric fields, expected values, hint and differe
 | ranges | The earlier range is 60 − 40 = 20 cm. The later range is 140 − 80 = 60 cm. These describe the two recorded groups. | Use highest minus lowest within each group. Earlier: 60 − 40. Later: 140 − 80. A maximum alone is not a range. |
 | mean-difference | The two recorded means are 112 and 50 cm. Their difference is 112 − 50 = 62 cm; this is not a measured causal effect. | Subtract the earlier mean 50 from the later mean 112. Reporting either mean alone does not give the difference. |
 | period-one | Year 4 is the only entry in years 1–10. This group has 1 recorded entry and maximum 40 cm. | Use only years 1–10. The ledger entry at year 4 has height 40 cm. Unwritten years add no known heights. |
-| period-two | Year 15 is the only entry in years 11–20. This group has 1 recorded entry and maximum 60 cm. | Use only years 11–20. Year 15 belongs here; year 4 and year 27 do not. The one supplied height is 60 cm. |
+| period-two | Year 15 is the only entry in years 11–20. This group has 1 recorded entry and maximum 60 cm. | Use only years 11–20. Year 15 belongs here; year 4 and year 27 do not. The one height given is 60 cm. |
 | period-three | Year 27 is the only entry in years 21–30. This group has 1 recorded entry and maximum 120 cm. The interval straddles year 22. | Use all of 21–30, not just the years before 22. The only written flood here is year 27 at 120 cm. |
-| period-four | Years 31, 34, 36, 38 give 4 entries. Their heights 80, 120, 140, 100 cm have maximum 140 cm. | Count 31, 34, 36, 38 and compare 80, 120, 140, 100 cm. Year 27 belongs to the preceding interval, and the separate storm has no supplied Hollis year. |
+| period-four | Years 31, 34, 36, 38 give 4 entries. Their heights 80, 120, 140, 100 cm have maximum 140 cm. | Count 31, 34, 36, 38 and compare 80, 120, 140, 100 cm. Year 27 belongs to the preceding interval, and the separate storm has no Hollis year given. |
 
 For after-mean 120, an additional reply may say: “120 is the middle and most frequent later height. Including the separate 160 cm storm would also give a different six-entry mean of 120. We cannot tell how you found it. The question uses five dated ledger entries.” For 140: “140 is the largest later height. The mean shares the total across all five entries.” For 560: “560 is the total of the five heights. Divide that total by five to find their mean.” These are possible numerical explanations, not diagnoses of the learner's method.
 

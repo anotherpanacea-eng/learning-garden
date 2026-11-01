@@ -34,7 +34,7 @@ Fact for share: **Given: {amount} {ingredient} model scoops.**
 
 Heading: **Your bars**
 
-Supplied context: **Supplied starting blocks** · **Supplied value: not chosen** · **Supplied reference: not placed** · **Supplied reference: {reference}**. Retain a supplied-start caption until the first edit; Notes always retains the source's starting context, including a supplied wrong marker.
+Starting context: **Ready-made starting blocks** · **Starting value: not chosen** · **Starting marker: not placed** · **Starting marker: {reference}**. Retain a supplied-start caption until the first edit; Notes always retains the source's starting context, including a supplied wrong marker.
 
 Each bar: **{ingredient}: {n} blocks**; singular **1 block**.
 
@@ -122,9 +122,9 @@ Use **whole** for a whole reference, otherwise its frozen ingredient label. The 
 
 Separate arithmetic labels for a supported checked model: **Computed shares for this checked model: {ordered named amounts}.** · **Computed whole for this checked model: {total} scoops.** These use its own recorded counts and unit and do not alter a recorded result. For an unsupported model: **Amounts are not recomputed for this earlier model. Its recorded counts, value, marker and results stay here.** No current-model formula is assumed for it.
 
-Longer fold: **A supplied example and a reason to discuss**
+Longer fold: **A ready-made example and a reason to discuss**
 
-Before case explanation: **Supplied fitting example** / **Here is one model that fits. It is an example, not a description of your bars. Other equal-block models can fit too.**
+Before case explanation: **One example that fits** / **Here is one model that fits. It is an example, not a description of your bars. Other equal-block models can fit too.**
 
 After explanation: **Tell a grown-up in your own words or point to the blocks. Nothing spoken is recorded or marked.** Then the case's reason prompt.
 
@@ -140,7 +140,7 @@ Controls: **Try a worked example** · **A share is given** · **Three parts** ·
 
 Whole helper title: **Share a whole across equal blocks**
 
-1. Picture guided-twenty2:3/u null/reference whole: **This supplied recipe has 2 white blocks and 3 blue blocks. The given 20 is the whole.**
+1. Picture guided-twenty2:3/u null/reference whole: **This recipe has 2 white blocks and 3 blue blocks. The given 20 is the whole.**
 2. Picture2:3/u4/reference whole: **Five blocks share 20 scoops equally. 20 ÷ 5 = 4 scoops in every block.**
 3. Picture2:3/u4/reference whole: **White is 2 × 4 = 8. Blue is 3 × 4 = 12. Together they make 20.**
 
@@ -156,7 +156,7 @@ Three-part helper title: **Count all three parts**
 2. Picture1:2:3/u10/reference whole: **60 ÷ 6 = 10 scoops in every block.**
 3. Picture1:2:3/u10/reference whole: **Red is 10, blue is 20, and white is 30. All three shares sum to 60.**
 
-Every helper footer: **This is a supplied worked example. Your own bars stay unchanged. Return at any step.**
+Every helper footer: **This is a ready-made worked example. Your own bars stay unchanged. Return at any step.**
 
 Own-invitation helper notice, when its frozen steps refer to the current case: **This example uses this invitation’s own recipe and given amount. It may supply part or all of a fitting plan. Your own bars stay yours to change.** Opening does not establish that every step was viewed.
 
