@@ -222,6 +222,23 @@ export const copyScopes = [
   {path:'dist/whole-batches-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/whole-batches-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/whole-batches-ui.mjs',adultBlocks:[],quotations:[]},
+  // Paris archive renderers (text review 2026-10-22, paris-archive area), including the compiled puppet-post pack, film and scene.
+  {path:'dist/french-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/french-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/french-library.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/french-story-data.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-film.html',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-library.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-pack-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-scene.svg',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-visit-source.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/travelers-archive-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/travelers-archive-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/travelers-archive-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/travelers-archive-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/packs/puppet-post.mjs',adultBlocks:[],quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
