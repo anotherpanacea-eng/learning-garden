@@ -9,3 +9,6 @@
 @media(max-width:700px){.mf-sentence,.mf-card{font-size:1.05rem}.mf-crate{width:6rem}}
 
 .mf-frozen{white-space:pre-line}
+/* Spec 349: the Book Crate pair cards and the hand-drawn underline (never a link style). */
+.mf-pairs{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;margin-top:.75rem}.mf-pair{list-style:none;margin:0;padding:1rem;background:#fff;border:1px solid #cbdcd3;border-radius:8px;min-width:0}.mf-title{padding:.5rem 0 1rem}.mf-title+.mf-title{border-top:1px solid #e1ebe5;padding-top:1rem}.mf-title .mf-sentence{margin:0;line-height:1.5}.mf-note{color:#52675e;margin:.2rem 0 0}.mf-crate-bench [data-mf-hand][aria-pressed=true]{background:#183f39;color:#fff;border-color:#183f39}.mf-marked{font-size:1.25rem;margin:.25rem 0}.mf-underline{text-decoration:underline solid #183430 2px;text-underline-offset:4px;color:inherit;cursor:auto}
+@media(min-width:820px){.mf-pairs{grid-template-columns:repeat(2,minmax(0,1fr))}}

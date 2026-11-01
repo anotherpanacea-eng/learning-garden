@@ -1,9 +1,13 @@
-import {MANIFEST_TEXT as T,MANIFEST_LINES,MANIFEST_ITEMS,JOIN_NOTES,JOIN_ITEMS} from './manifest-content.mjs';
-import {TILE_IDS,JOIN_TILE_IDS,lineSlots,filled,whatFits,manifestView,markSupport,markCardsSeen,loadLine,answerItem,readNote} from './manifest-core.mjs';
-const ALL_ITEMS=[...MANIFEST_ITEMS,...JOIN_ITEMS],SETS={A:MANIFEST_ITEMS,C:JOIN_ITEMS};
+import {MANIFEST_TEXT as T,MANIFEST_LINES,MANIFEST_ITEMS,JOIN_NOTES,JOIN_ITEMS,CRATE_TEXT as K,CRATE_TITLES,TITLE_ITEMS} from './manifest-content.mjs';
+import {TILE_IDS,JOIN_TILE_IDS,lineSlots,filled,whatFits,manifestView,markSupport,markCardsSeen,loadLine,answerItem,readNote,CRATE_TILE_IDS,GUIDED_ITEM_IDS,chooseTitle} from './manifest-core.mjs';
+const ALL_ITEMS=[...MANIFEST_ITEMS,...JOIN_ITEMS,...TITLE_ITEMS],SETS={A:MANIFEST_ITEMS,C:JOIN_ITEMS,D:TITLE_ITEMS},SET_TITLES={A:T.setTitle,C:T.setCTitle,D:K.setTitle};
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 // Companion markup: **bold** and *italics*; everything else is escaped text.
 const rich=x=>esc(x).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');
+// Set D's saved strings keep their title marks (spec 349); A and C strings stay plain text as before.
+const itemText=(id,x)=>id[0]==='D'?rich(x):esc(x);
+// A crate title as saved: *italics* or _underline_ markers on escaped text. The underline carries its accessible name.
+const titleHtml=x=>{const m=/^_(.+)_$/s.exec(x);if(m)return `<span class="mf-underline" aria-hidden="true">${esc(m[1])}</span><span class="sr-only">${esc(K.underlined(m[1]))}</span>`;return rich(x);};
 const MARK={colon:':',semicolon:';',comma:',',empty:'',period:'.',dash:'–',nothing:''};
 const NAMES={...T.tiles,...T.joinTiles};
 // Which tray serves a gap's owner: the four lines share one, Dot's notes share another, A3 and C5 have their own.
@@ -13,10 +17,12 @@ const btn=(attrs,text,{disabled=false,primary=false,pressed=null}={})=>`<button 
 const lineSnap=line=>structuredClone({...line,said:{...T.load}});
 const itemSnap=item=>structuredClone({...item,tileNames:{...NAMES}});
 const noteSnap=note=>structuredClone({...note,said:{...T.read}});
+const titleSnap=title=>structuredClone({...title,said:{...K.said}});
 let visit=null;
+const own=(o,k)=>Object.hasOwn(o,k);
 export function resetManifestView(){visit=null;}
 function session(state,owner){
- if(!visit||visit.state!==state||visit.owner!==owner){const v=manifestView(state);visit={state,owner,intro:v.status==='absent',longer:false,worked:{},drafts:{},tile:null,slot:null,hidden:{},loaded:{},setOpen:{A:false,C:false},ladder:{},retry:{},notice:'',lines:Object.fromEntries(MANIFEST_LINES.map(l=>[l.id,lineSnap(l)])),notes:Object.fromEntries(JOIN_NOTES.map(n=>[n.id,noteSnap(n)])),items:Object.fromEntries(ALL_ITEMS.map(i=>[i.id,itemSnap(i)]))};for(const l of MANIFEST_LINES){const x=v.lists[l.id];visit.drafts[l.id]=x?.shape==='completed'?{...x.entry.slots}:{};}for(const n of JOIN_NOTES){const x=v.joins[n.id];visit.drafts[n.id]=x?.shape==='completed'?{s1:x.entry.mark}:{};}visit.drafts.A3={};visit.drafts.C5={};}
+ if(!visit||visit.state!==state||visit.owner!==owner){const v=manifestView(state);visit={state,owner,intro:v.status==='absent',longer:false,worked:{},drafts:{},tile:null,slot:null,hidden:{},loaded:{},setOpen:{A:false,C:false,D:false},hand:false,ladder:{},retry:{},notice:'',lines:Object.fromEntries(MANIFEST_LINES.map(l=>[l.id,lineSnap(l)])),notes:Object.fromEntries(JOIN_NOTES.map(n=>[n.id,noteSnap(n)])),titles:Object.fromEntries(CRATE_TITLES.map(t=>[t.id,titleSnap(t)])),items:Object.fromEntries(ALL_ITEMS.map(i=>[i.id,itemSnap(i)]))};for(const l of MANIFEST_LINES){const x=v.lists[l.id];visit.drafts[l.id]=x?.shape==='completed'?{...x.entry.slots}:{};}for(const n of JOIN_NOTES){const x=v.joins[n.id];visit.drafts[n.id]=x?.shape==='completed'?{s1:x.entry.mark}:{};}visit.drafts.A3={};visit.drafts.C5={};}
  return visit;
 }
 const crateSvg='<svg viewBox="0 0 48 36" aria-hidden="true" focusable="false"><rect x="3" y="6" width="42" height="27" rx="3" fill="#c99a5b" stroke="#6b4a24" stroke-width="2"/><path d="M3 15h42M3 24h42M16 6v27M32 6v27" stroke="#6b4a24" stroke-width="1.5"/></svg>';
@@ -40,18 +46,31 @@ function noteView(s,v,note){
  const result=x?.shape==='completed'&&!s.hidden[note.id]?`<div class="mf-result" id="mf-result-${note.id}" tabindex="-1"><p class="mf-joined mf-frozen">${esc(x.entry.text)}</p><p class="mf-said mf-frozen">${esc(x.entry.said)}</p></div>`:'';
  return `<li class="mf-line" data-mf-note="${note.id}"><p class="mf-sentence">${joinSentence(s,note.id,snap.first,snap.second,draft.s1,unreadable)}</p>${unreadable?`<p class="mf-notice">${esc(T.unreadable)}</p>`:btn(`data-mf-read="${note.id}"`,T.readButton,{primary:true,disabled:!JOIN_TILE_IDS.includes(draft.s1)})}${result}</li>`;
 }
+// One crate title: plain title, its note, three tiles, then the committed result only.
+function titleView(s,v,title){
+ const x=v.crate[title.id],snap=s.titles[title.id],closed=v.crateStatus!=='ready'||x?.shape==='unreadable',done=x?.shape==='completed';
+ const label=snap.story?T.storyLabel:K.historyLabel,names={...K.tiles,italics:s.hand?K.tiles.underline:K.tiles.italics};
+ const tiles=closed?`<p class="mf-notice">${esc(T.unreadable)}</p>`:`<div class="mf-tiles" role="group" aria-label="${esc(snap.title)}">${CRATE_TILE_IDS.map(t=>btn(`data-mf-title="${title.id}:${t}"`,names[t],{pressed:done&&x.entry.mark===t})).join('')}</div>`;
+ const result=done?`<div class="mf-result" id="mf-crate-${title.id}" tabindex="-1"><p class="mf-marked mf-frozen">${titleHtml(x.entry.text)}</p><p class="mf-said mf-frozen">${esc(x.entry.said)}</p></div>`:'';
+ return `<li class="mf-title" data-mf-crate="${title.id}"><p class="mf-label">${esc(label)}</p><p class="mf-sentence">${esc(snap.title)}</p><p class="mf-note">${esc(snap.note)}</p>${tiles}${result}</li>`;
+}
+function crateBench(s,v){
+ const pairs=[0,2,4,6].map(i=>`<ul class="mf-pair">${CRATE_TITLES.slice(i,i+2).map(t=>titleView(s,v,t)).join('')}</ul>`).join('');
+ const toggle=v.crateStatus==='ready'?btn('data-mf-hand',K.hand,{pressed:s.hand}):'';
+ return `<div class="mf-cards">${card(s,K.card)}</div><section class="mf-bench mf-crate-bench"><h2>${esc(K.benchTitle)}</h2><p class="mf-label">${esc(T.storyLabel)}</p><p>${esc(K.header)}</p>${toggle}<div class="mf-pairs">${pairs}</div></section>`;
+}
 function lineView(s,v,line){
  const x=v.lists[line.id],snap=s.lines[line.id],draft=s.drafts[line.id],unreadable=x?.shape==='unreadable';
  const result=x?.shape==='completed'&&!s.hidden[line.id]?`<div class="mf-result" id="mf-result-${line.id}" tabindex="-1">${crates(x.entry.crates)}<p class="mf-said mf-frozen">${esc(x.entry.said)}</p>${s.loaded[line.id]?`<div class="mf-fits"><h4>${esc(T.whatFitsTitle)}</h4><ul>${whatFits(snap).map(k=>`<li>${rich(T.whatFits[k])}</li>`).join('')}</ul></div>`:''}</div>`:'';
  return `<li class="mf-line" data-mf-line="${line.id}"><p class="mf-sentence">${sentence(s,line.id,snap,draft,unreadable)}</p>${unreadable?`<p class="mf-notice">${esc(T.unreadable)}</p>`:btn(`data-mf-load="${line.id}"`,T.loadButton,{primary:true,disabled:!filled(snap,draft)})}${result}</li>`;
 }
 function ladder(s,item){const n=s.ladder[item.id]||0;const steps=[item.hint,T.ladderStep2[item.ladder],T.ladderStep3].slice(0,n);return `${steps.length?`<ol class="mf-ladder" id="mf-ladder-${item.id}" tabindex="-1">${steps.map((t,i)=>`<li>${esc(t)}${i===2?` ${btn(`data-mf-skip="${item.id}"`,T.skip)}`:''}</li>`).join('')}</ol>`:''}${n<3?btn(`data-mf-stuck="${item.id}"`,T.stuck):''}`;}
-function earlier(item,e){const tiles=item.kind==='tiles';return `<div class="mf-earlier" id="mf-feedback-${item.id}" tabindex="-1"><p class="mf-prompt mf-frozen">${esc(e.prompt)}</p><ol class="mf-offered">${e.offered.map((o,i)=>`<li${(tiles?false:e.shown[i]===e.answer)?' aria-current="true" class="mf-chosen mf-frozen"':' class="mf-frozen"'}>${esc(o)}</li>`).join('')}</ol>${tiles?`<p class="mf-chosen mf-frozen">${esc(e.answerText)}</p>`:''}${e.said.map(t=>`<p class="mf-said mf-frozen">${esc(t)}</p>`).join('')}</div>`;}
+function earlier(item,e){const tiles=item.kind==='tiles';return `<div class="mf-earlier" id="mf-feedback-${item.id}" tabindex="-1"><p class="mf-prompt mf-frozen">${esc(e.prompt)}</p><ol class="mf-offered">${e.offered.map((o,i)=>`<li${(tiles?false:e.shown[i]===e.answer)?' aria-current="true" class="mf-chosen mf-frozen"':' class="mf-frozen"'}>${itemText(item.id,o)}</li>`).join('')}</ol>${tiles?`<p class="mf-chosen mf-frozen">${esc(e.answerText)}</p>`:''}${e.said.map(t=>`<p class="mf-said mf-frozen">${itemText(item.id,t)}</p>`).join('')}</div>`;}
 function question(s,item){
  const snap=s.items[item.id],head=`${snap.card?`<p class="mf-card">${rich(snap.card)}</p>`:''}`;
  if(snap.kind==='tiles'&&snap.accept){const draft=s.drafts[item.id];return `<p class="mf-card">${rich(snap.card)}</p><p class="mf-card"><em>${joinSentence(s,item.id,snap.first,snap.second,draft.s1,false)}</em></p><p>${esc(snap.prompt)}</p>${tray(s,snap.tiles,item.id)}${btn(`data-mf-check="${item.id}"`,T.check,{primary:true,disabled:!draft.s1})}`;}
  if(snap.kind==='tiles'){const draft=s.drafts.A3;return `<p class="mf-card"><em>${sentence(s,'A3',snap,draft,false)}</em></p><p>${esc(snap.prompt)}</p>${tray(s,snap.tiles,'A3')}${btn('data-mf-check="A3"',T.check,{primary:true,disabled:!['s1','s2','s3'].every(k=>draft[k])})}`;}
- return `${snap.guided?`<ol class="mf-steps">${snap.steps.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:''}${head}<p>${esc(snap.prompt)}</p><div class="mf-choices">${snap.choices.map(c=>btn(`data-mf-choice="${item.id}:${c.id}"`,c.text)).join('')}</div>`;
+ return `${snap.guided?`<ol class="mf-steps">${snap.steps.map(t=>`<li>${esc(t)}</li>`).join('')}</ol>`:''}${head}<p>${esc(snap.prompt)}</p><div class="mf-choices">${snap.choices.map(c=>item.id[0]==='D'?`<button type="button" class="secondary" data-mf-choice="${item.id}:${c.id}">${rich(c.text)}</button>`:btn(`data-mf-choice="${item.id}:${c.id}"`,c.text)).join('')}</div>`;
 }
 function itemView(s,v,item){
  const x=v.items[item.id];let body;
@@ -59,7 +78,7 @@ function itemView(s,v,item){
  else{const done=x?.shape==='completed';body=`${done?earlier(item,x.entry):''}${!done||s.retry[item.id]?`${question(s,item)}${ladder(s,item)}`:btn(`data-mf-retry="${item.id}"`,T.tryAgain)}`;}
  return `<section class="mf-item" data-mf-item="${item.id}"><h3 id="mf-item-${item.id}" tabindex="-1">${item.id}</h3>${body}</section>`;
 }
-function card(s,c){const n=s.worked[c.id]||0;return `<section class="mf-teach"><p class="mf-label">${esc(T.languageLabel)}</p><h3>${esc(c.title)}</h3><p>${rich(c.text)}</p><details class="mf-worked" data-mf-worked="${c.id}"${n?' open':''}><summary>${esc(T.workedLabel)}</summary>${n?`<p>${rich(c.example)}</p><ol id="mf-steps-${c.id}" tabindex="-1">${c.steps.slice(0,n).map(t=>`<li>${esc(t)}</li>`).join('')}</ol>${n<c.steps.length?btn(`data-mf-next="${c.id}"`,T.nextStep):''}`:''}</details></section>`;}
+function card(s,c){const n=s.worked[c.id]||0;return `<section class="mf-teach"><p class="mf-label">${esc(T.languageLabel)}</p><h3>${esc(c.title)}</h3><p>${rich(c.text)}</p><details class="mf-worked" data-mf-worked="${c.id}"${n?' open':''}><summary>${esc(T.workedLabel)}</summary>${n?`<p>${rich(c.example)}</p><ol id="mf-steps-${c.id}" tabindex="-1">${c.steps.slice(0,n).map(t=>`<li>${rich(t)}</li>`).join('')}</ol>${n<c.steps.length?btn(`data-mf-next="${c.id}"`,T.nextStep):''}`:''}</details></section>`;}
 export function manifestEntry(){return `<aside class="mf-entry"><h2>${esc(T.title)}</h2><p>${esc(T.hook)}</p><a class="secondary" href="#post/manifest">${esc(T.title)}</a></aside>`;}
 export function manifestPage(state,owner){
  const s=session(state,owner),v=manifestView(state);
@@ -68,12 +87,12 @@ export function manifestPage(state,owner){
  const intro=s.intro?`<section class="mf-intro"><p class="mf-label">${esc(T.storyLabel)}</p>${T.firstVisit.map(p=>`<p>${esc(p)}</p>`).join('')}</section>`:btn('data-mf-intro',T.storyAgain);
  const story=`<section class="mf-story"><p class="mf-label">${esc(T.storyLabel)}</p><p><strong>${esc(T.hook)}</strong></p><div class="mf-length" role="group">${btn('data-mf-length="short"',T.shortLabel,{pressed:!s.longer})}${btn('data-mf-length="longer"',T.longerLabel,{pressed:s.longer})}</div>${s.longer?T.longer.map(p=>`<p>${rich(p)}</p>`).join(''):`<p>${esc(T.short)}</p>`}</section>`;
  const bench=`<section class="mf-bench"><h2>${esc(T.benchTitle)}</h2><p class="mf-label">${esc(T.storyLabel)}</p><p>${rich(T.header)}</p>${tray(s,TILE_IDS,'lines')}<ol class="mf-lines">${MANIFEST_LINES.map(l=>lineView(s,v,l)).join('')}</ol></section>`;
- const set=k=>`<details class="mf-set" data-mf-set="${k}"${s.setOpen[k]?' open':''}><summary>${esc(k==='A'?T.setTitle:T.setCTitle)}</summary>${s.setOpen[k]?SETS[k].map(i=>itemView(s,v,i)).join(''):''}</details>`;
+ const set=k=>`<details class="mf-set" data-mf-set="${k}"${s.setOpen[k]?' open':''}><summary>${esc(SET_TITLES[k])}</summary>${s.setOpen[k]?SETS[k].map(i=>itemView(s,v,i)).join(''):''}</details>`;
  const joinBench=`<div class="mf-cards">${T.joinCards.map(c=>card(s,c)).join('')}</div><section class="mf-bench mf-join"><h2>${esc(T.joinTitle)}</h2><p class="mf-label">${esc(T.storyLabel)}</p><p>${rich(T.joinHeader)}</p>${tray(s,JOIN_TILE_IDS,'notes')}<ol class="mf-lines">${JOIN_NOTES.map(n=>noteView(s,v,n)).join('')}</ol></section>`;
- const glossary=`<details class="mf-glossary"><summary>${esc(T.glossaryTitle)}</summary><dl>${T.glossary.map(([t,d])=>`<dt>${esc(t)}</dt><dd>${esc(d)}</dd>`).join('')}</dl></details>`;
+ const glossary=`<details class="mf-glossary"><summary>${esc(T.glossaryTitle)}</summary><dl>${T.glossary.map(([t,d])=>`<dt>${esc(t)}</dt><dd>${rich(d)}</dd>`).join('')}</dl></details>`;
  const offscreen=`<aside class="mf-offscreen"><p class="mf-label">${esc(T.offScreenLabel)}</p><p>${esc(T.offScreen)}</p><p class="tiny">${esc(T.offScreenGrownUp)}</p></aside>`;
  const grown=`<details class="mf-grownup"><summary>${esc(T.grownUpTitle)}</summary>${T.grownUp.map(p=>`<p>${rich(p)}</p>`).join('')}</details>`;
- return `<div class="mf-page" data-mf-root="open">${top}${intro}${story}<div class="mf-cards">${T.cards.map(c=>card(s,c)).join('')}</div>${bench}${set('A')}${joinBench}${set('C')}${glossary}${offscreen}${grown}</div>`;
+ return `<div class="mf-page" data-mf-root="open">${top}${intro}${story}<div class="mf-cards">${T.cards.map(c=>card(s,c)).join('')}</div>${bench}${set('A')}${joinBench}${set('C')}${crateBench(s,v)}${set('D')}${glossary}${offscreen}${grown}</div>`;
 }
 export function bindManifest(state,ctx){
  const root=document.querySelector('[data-mf-root="open"]');if(!root)return;
@@ -94,12 +113,14 @@ export function bindManifest(state,ctx){
  on('[data-mf-tile]',b=>local(()=>{const group=b.dataset.mfTray,t=b.dataset.mfTile,[o,sl]=(s.slot||'').split(':');if(s.slot&&trayOf(o)===group)place(o,sl,t);else{s.slot=null;s.tile=s.tile===`${group}:${t}`?null:`${group}:${t}`;}},`[data-mf-tray="${b.dataset.mfTray}"][data-mf-tile="${b.dataset.mfTile}"]`));
  on('[data-mf-slot]',b=>local(()=>{const [o,sl]=b.dataset.mfSlot.split(':'),[g,t]=(s.tile||'').split(':');if(s.tile&&trayOf(o)===g)place(o,sl,t);else{s.tile=null;s.slot=s.slot===b.dataset.mfSlot?null:b.dataset.mfSlot;}},`[data-mf-slot="${b.dataset.mfSlot}"]`));
  on('[data-mf-load]',b=>{const id=b.dataset.mfLoad;write(()=>loadLine(state,s.lines[id],s.drafts[id],options),()=>{s.hidden[id]=false;s.loaded[id]=true;},`#mf-result-${id}`);});
+ on('[data-mf-hand]',()=>local(()=>{s.hand=!s.hand;},'[data-mf-hand]'));
+ on('[data-mf-title]',b=>{const [id,t]=b.dataset.mfTitle.split(':');write(()=>chooseTitle(state,s.titles[id],t,s.hand,options),null,`#mf-crate-${id}`);});
  on('[data-mf-read]',b=>{const id=b.dataset.mfRead;write(()=>readNote(state,s.notes[id],s.drafts[id].s1,options),()=>{s.hidden[id]=false;},`#mf-result-${id}`);});
  // Opening a set saves its guided first item's support before its steps render.
  root.querySelectorAll('[data-mf-set] > summary').forEach(sum=>sum.addEventListener('click',e=>{e.preventDefault();if(!usable(e.currentTarget))return;const k=sum.parentElement.dataset.mfSet,first=SETS[k][0].id,self=`[data-mf-set="${k}"] > summary`;if(s.setOpen[k]){local(()=>{s.setOpen[k]=false;},self);return;}
   const x=manifestView(state).items[first];if(x?.shape==='unreadable'){local(()=>{s.setOpen[k]=true;},`#mf-item-${first}`);return;}
   write(()=>markSupport(state,'items',first,options,{guided:true}),()=>{s.setOpen[k]=true;},`#mf-item-${first}`);}));
- on('[data-mf-stuck]',b=>{const id=b.dataset.mfStuck;write(()=>markSupport(state,'items',id,options,{guided:id==='A1'||id==='C1'}),()=>{s.ladder[id]=(s.ladder[id]||0)+1;},`#mf-ladder-${id}`);});
+ on('[data-mf-stuck]',b=>{const id=b.dataset.mfStuck;write(()=>markSupport(state,'items',id,options,{guided:GUIDED_ITEM_IDS.includes(id)}),()=>{s.ladder[id]=(s.ladder[id]||0)+1;},`#mf-ladder-${id}`);});
  on('[data-mf-skip]',b=>{const id=b.dataset.mfSkip,list=SETS[id[0]],next=list[list.findIndex(x=>x.id===id)+1];local(()=>{s.ladder[id]=0;},next?`#mf-item-${next.id}`:`[data-mf-set="${id[0]}"] > summary`);});
  const answered=id=>{s.retry[id]=false;s.ladder[id]=0;if(id==='A3'||id==='C5')s.drafts[id]={};};
  on('[data-mf-choice]',b=>{const [id,c]=b.dataset.mfChoice.split(':');write(()=>answerItem(state,s.items[id],c,options),()=>answered(id),`#mf-feedback-${id}`);});
@@ -113,7 +134,9 @@ export function manifestNotes(state){
  if(v.status!=='ready')return `<details class="panel"><summary>${esc(T.notesHeading)}</summary><p>${esc(v.status==='unknown'?T.unknownVersion:T.unreadable)}</p><pre>${raw()}</pre></details>`;
  const flag=b=>b?'yes':'no',rows=[];
  for(const l of MANIFEST_LINES){const x=v.lists[l.id];if(!x)continue;rows.push(x.shape==='completed'?`<li><p class="mf-frozen">${esc(x.entry.text)}</p><p class="mf-frozen">${esc(T.crates(x.entry.crates.length,x.entry.crates))}</p><p class="mf-frozen">${esc(x.entry.said)}</p><p>Support before this: ${flag(x.entry.supported)}</p></li>`:x.shape==='pending'?`<li><p>${l.id}: support opened before an answer: yes</p></li>`:`<li><p>${l.id}: ${esc(T.unreadable)}</p></li>`);}
- for(const i of ALL_ITEMS){const x=v.items[i.id];if(!x)continue;const e=x.entry;rows.push(x.shape==='completed'?`<li><p class="mf-prompt mf-frozen">${esc(e.prompt)}</p><p class="mf-frozen">${esc(e.answerText)}</p>${e.said.map(t=>`<p class="mf-frozen">${esc(t)}</p>`).join('')}<p>Outcome: ${esc(e.outcome)}. Support before this: ${flag(e.supported)}. Guided: ${flag(e.guided)}.</p></li>`:x.shape==='pending'?`<li><p>${i.id}: support opened before an answer: yes. Guided: ${flag(e.guided)}.</p></li>`:`<li><p>${i.id}: ${esc(T.unreadable)}</p></li>`);}
+ for(const i of ALL_ITEMS){const x=v.items[i.id];if(!x)continue;const e=x.entry;rows.push(x.shape==='completed'?`<li><p class="mf-prompt mf-frozen">${esc(e.prompt)}</p><p class="mf-frozen">${itemText(i.id,e.answerText)}</p>${e.said.map(t=>`<p class="mf-frozen">${itemText(i.id,t)}</p>`).join('')}<p>Outcome: ${esc(e.outcome)}. Support before this: ${flag(e.supported)}. Guided: ${flag(e.guided)}.</p></li>`:x.shape==='pending'?`<li><p>${i.id}: support opened before an answer: yes. Guided: ${flag(e.guided)}.</p></li>`:`<li><p>${i.id}: ${esc(T.unreadable)}</p></li>`);}
+ const titles=[];if(v.crateStatus==='ready')for(const t of CRATE_TITLES){const x=v.crate[t.id];if(!x)continue;const e=x.entry;titles.push(x.shape==='completed'?`<li><p class="mf-frozen">${titleHtml(e.text)}</p><p class="mf-frozen">${esc(e.said)}</p><p>Outcome: ${esc(e.outcome)}. By hand: ${flag(e.hand)}. Support before this: ${flag(e.supported)}</p></li>`:`<li><p>${t.id}: ${esc(T.unreadable)}</p></li>`);}
+ const crate=v.crateStatus==='ready'?(titles.length?`<h4>${esc(K.notesHeading)}</h4><ul>${titles.join('')}</ul>`:''):own(v.root,'crate')?`<h4>${esc(K.notesHeading)}</h4><p>${esc(T.unreadable)}</p>`:'';
  const joins=[];for(const n of JOIN_NOTES){const x=v.joins[n.id];if(!x)continue;joins.push(x.shape==='completed'?`<li><p class="mf-frozen">${esc(x.entry.text)}</p><p class="mf-frozen">${esc(x.entry.said)}</p><p>Outcome: ${esc(x.entry.outcome)}. Support before this: ${flag(x.entry.supported)}</p></li>`:`<li><p>${n.id}: ${esc(T.unreadable)}</p></li>`);}
- return `<details class="panel"><summary>${esc(T.notesHeading)}</summary><p>Teach card worked examples opened: ${flag(v.cardsSeen)}. A false support flag means no recorded support, not an independent attempt.</p><ul>${rows.join('')}</ul>${joins.length?`<h4>${esc(T.joinNotesHeading)}</h4><ul>${joins.join('')}</ul>`:''}<a href="#post/manifest">${esc(T.title)}</a></details>`;
+ return `<details class="panel"><summary>${esc(T.notesHeading)}</summary><p>Teach card worked examples opened: ${flag(v.cardsSeen)}. A false support flag means no recorded support, not an independent attempt.</p><ul>${rows.join('')}</ul>${joins.length?`<h4>${esc(T.joinNotesHeading)}</h4><ul>${joins.join('')}</ul>`:''}${crate}<a href="#post/manifest">${esc(T.title)}</a></details>`;
 }
