@@ -99,6 +99,54 @@ async function marketJourneys(){
   await p.evaluate(()=>window.__soundsRefuse=false);await tap(p,'letters');await p.evaluate(()=>window.__soundsRefuse=true);await p.locator('[data-wrs-action=teachingLetter][data-wrs-value=g]').tap();eq((await packet(p)).letterId,'e','refused selection stays on e');ok(!(await p.locator('.wrs-letter-card').innerText()).includes('bug'));
  }finally{await c.close();}
 }
+async function gardenJourneys(){
+ const packet=async p=>(await read(p)).wordRoom.gardenSoundMessages;
+ const work=async p=>{const r=await packet(p);return r.records[r.selectedId];};
+ const open=async p=>p.locator('[data-wrs-action=enter][data-wrs-pack=garden]').tap();
+ const pairs=[['first-1','ram'],['first-2','lip'],['first-3','wet'],['first-4','yam'],['middle','rod'],['last','wet']];
+ for(const[width,height]of[[820,1000],[320,600],[1024,768]]){
+  const seed=fixture(),gate={canExport:()=>true};chooseWordRoomWord(seed,'mat',gate);
+  for(const[pack,id]of[['show','end'],['market','u-end']]){enterSoundMessages(seed,gate,pack);chooseSoundCase(seed,id,'listen',gate);actSoundCase(seed,'partner',null,gate);actSoundCase(seed,'hidePartner',null,gate);actSoundCase(seed,'letter','b',gate);actSoundCase(seed,'keep',null,gate);}
+  seed.wordRoom.soundMessages.active=false;seed.wordRoom.marketSoundMessages.active=false;seed.wordRoom.page='choose';
+  if(width===820)seed.syntheticGarden={payload:'g'.repeat(512000)};
+  const{c,p}=await setup(width,height,seed);
+  try{
+   await open(p);eq(await p.locator('.wrs-room h1').innerText(),'Garden-stage labels');eq(await p.locator('[data-wrs-case]').count(),12);await layout(p);
+   await control(p,'letters').focus();await p.keyboard.press('Enter');eq((await packet(p)).sharedHelp.letters,true);
+   for(const id of width===820?['r','l','w','y']:['y']){await p.locator(`[data-wrs-action=teachingLetter][data-wrs-value="${id}"]`).tap();eq((await packet(p)).letterId,id);await layout(p);if(width===820)await p.screenshot({path:`${out}/garden-letter-${id}.png`,fullPage:true});}
+   await p.reload();await p.locator('.wrs-letter-card').waitFor();eq((await packet(p)).letterId,'y');await tap(p,'caseBack');
+   for(const[id,target]of width===820?pairs:[width===320?pairs[1]:pairs[0]]){
+    await choose(p,id,'listen');await hidden(p,target);await tap(p,'partner');eq(await p.locator('[data-wrs-word]').innerText(),target);await tap(p,'hidePartner');await hidden(p,target);
+    eq(await p.locator('.wrs-bank button').count(),20);if(id==='first-1'||width!==820)await layout(p);
+    await p.locator('[data-wrs-action=letter][data-wrs-value=b]').tap();await tap(p,'keep');const first=structuredClone((await work(p)).firstKept);
+    await tap(p,'clear');await letters(p,target);await tap(p,'compare');eq((await work(p)).comparison.result,'match');await tap(p,'back');await tap(p,'keep');eq((await work(p)).firstKept,first);eq((await work(p)).latestKept.slots,[...target]);
+    await tap(p,'contrast');const frames=(await work(p)).source.frames;for(let i=0;i<3;i++){eq(await p.locator('[data-wrs-step]').innerText(),frames[i]);if(i<2)await tap(p,'next');}await tap(p,'back');
+    await tap(p,'letters');await tap(p,'caseBack');eq((await work(p)).slots,[...target]);
+    await tap(p,'choose');await choose(p,id,'read');eq(await p.locator('.wrs-stage figure').count(),0);await tap(p,'picture');eq(await p.locator('.wrs-stage svg[role=img]').getAttribute('aria-label'),(await work(p)).source.right.alt);await p.screenshot({path:`${out}/garden-${id}-${width}.png`,fullPage:true});
+    if(width!==820)await layout(p);await tap(p,'choose');
+   }
+   await tap(p,'message');eq(await p.locator('[data-wrs-token=target]').allTextContents(),['yam','mat','ram','red','rod','cup','wet']);eq(await p.locator('[data-wrs-token=adult-supplied]').allTextContents(),['Put','the','on','the','The','has','a','The','is']);await layout(p);await p.screenshot({path:`${out}/garden-note-${width}.png`,fullPage:true});
+   eq(await p.evaluate(()=>window.__soundsSpeech),0,'Garden has no phonics playback');
+   if(width!==820)continue;
+   eq((await read(p)).wordRoom.soundMessages,seed.wordRoom.soundMessages,'show packet exact');eq((await read(p)).wordRoom.marketSoundMessages,seed.wordRoom.marketSoundMessages,'market packet exact');eq((await read(p)).wordRoom.source,seed.wordRoom.source,'original labels exact');
+   await tap(p,'leave');for(const pack of['show','market']){await p.locator(`[data-wrs-action=enter][data-wrs-pack=${pack}]`).tap();await tap(p,'leave');}await open(p);
+   const before=await read(p);await p.evaluate(()=>window.__gardenLate=document.querySelector('[data-wrs-action=caseBack]'));
+   await p.goto(base+'#notes');await p.locator('#download').waitFor();await p.getByText('Word Workshop: Prop Box',{exact:true}).tap();await p.getByText('Garden-stage labels',{exact:true}).tap();ok((await p.locator('main').innerText()).includes('Shared garden-show note: opened'));ok((await p.locator('main').innerText()).includes('Letter cards: opened here'));
+   const d=await Promise.all([p.waitForEvent('download'),p.locator('#download').tap()]).then(x=>x[0]);const file=`${out}/garden-three-packets.json`;await d.saveAs(file);const saved=JSON.parse(readFileSync(file,'utf8'));eq(saved.wordRoom,before.wordRoom);eq(saved.syntheticGarden,before.syntheticGarden);
+   await p.locator('#progress-file').setInputFiles(file);await p.locator('#progress-import-confirm').tap();await p.goto(base+'#words/props');await p.locator('[data-wrs-packet=garden]').waitFor();eq((await read(p)).wordRoom,before.wordRoom);const after=await read(p);await p.evaluate(()=>window.__gardenLate.click());eq(await read(p),after,'detached pre-import Garden control inert');
+   // Change the INSTALLED source, not the saved source, then reload the old work.
+   await c.route('**/word-room-sounds-content.mjs',route=>route.fulfill({status:200,contentType:'text/javascript',body:readFileSync(new URL('../dist/word-room-sounds-content.mjs',import.meta.url),'utf8')+`\ngardenCollection.cases['first-1'].right.label='yam';gardenCollection.cases['first-1'].right.letters=[...'yam'];gardenCollection.cases['first-1'].alphabet.reverse();gardenCollection.message.text='Changed installed note';`}));
+   await p.reload();await p.locator('[data-word-room-root],[data-select-explorer]').first().waitFor();if(await p.locator('[data-select-explorer]').count()){const id=await p.evaluate(()=>JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId);await p.locator(`[data-select-explorer=${id}]`).tap();}await p.locator('[data-wrs-packet=garden]').waitFor();eq((await read(p)).wordRoom,before.wordRoom,'installed source change never refreshes retained packets');eq(await p.locator('.wr-passage').innerText(),before.wordRoom.gardenSoundMessages.source.message.text);
+   const active=await p.evaluate(()=>JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId),other=active==='explorer-1'?'explorer-2':'explorer-1';await p.locator('#explorer-switch').tap();await p.locator(`[data-select-explorer=${other}]`).tap();await p.locator('[data-word-room-root]').waitFor();if(!await p.locator('[data-wrs-packet=garden]').count()){if(await p.locator('[data-wr-sounds-active]').count())await tap(p,'leave');await open(p);}await tap(p,'choose');await choose(p,'first-1','listen');await tap(p,'partner');await tap(p,'hidePartner');await tap(p,'clear');await p.locator('[data-wrs-action=letter][data-wrs-value=l]').tap();await tap(p,'keep');await p.locator('#explorer-switch').tap();await p.locator(`[data-select-explorer=${active}]`).tap();await p.locator('[data-wrs-packet=garden]').waitFor();eq((await read(p)).wordRoom,before.wordRoom);
+  }finally{await c.close();}
+ }
+ // Actual import with all three active chooses Garden without normalizing flags; leave closes all.
+ const all=fixture();for(const pack of['show','market','garden'])enterSoundMessages(all,{canExport:()=>true},pack);for(const k of['soundMessages','marketSoundMessages','gardenSoundMessages'])all.wordRoom[k].active=true;
+ let{c,p}=await setup(820,1000,all);try{await p.locator('[data-wrs-packet=garden]').waitFor();eq((await read(p)).wordRoom,all.wordRoom);await tap(p,'leave');for(const k of['soundMessages','marketSoundMessages','gardenSoundMessages'])all.wordRoom[k].active=false;eq((await read(p)).wordRoom,all.wordRoom);}finally{await c.close();}
+ const blocked=fixture();enterSoundMessages(blocked,{canExport:()=>true},'garden');chooseSoundCase(blocked,'first-1','listen',{canExport:()=>true});actSoundCase(blocked,'partner',null,{canExport:()=>true});actSoundCase(blocked,'hidePartner',null,{canExport:()=>true});
+ ({c,p}=await setup(820,1000,blocked));try{const before=await read(p);await p.evaluate(()=>window.__soundsRefuse=true);await tap(p,'letters');eq(await read(p),before);eq(await p.locator('.wrs-letter-card').count(),0);await hidden(p,'ram');await p.evaluate(()=>window.__soundsRefuse=false);await p.goto(base+'#notes');await p.locator('#remember').uncheck();await p.goto(base+'#words/props');await p.locator('[data-wrs-packet=garden]').waitFor();await tap(p,'keep');ok((await p.locator('#wr-status').innerText()).includes('saving is off'));await p.goto(base+'#notes');await p.locator('#reset').tap();await p.locator('#confirm-reset').tap();await p.goto(base+'#words/props');await p.locator('[data-word-room-root]').waitFor();ok(!Object.hasOwn(await read(p),'wordRoom'));}finally{await c.close();}
+}
+
 try{
  for(const [width,height]of[[320,600],[820,1000],[1024,768]]){
   const{c,p}=await setup(width,height);
@@ -198,5 +246,6 @@ try{
  const unknown=fixture();enterSoundMessages(unknown,{canExport:()=>true});unknown.wordRoom.soundMessages.v=9;const raw=structuredClone(unknown.wordRoom.soundMessages);
  ({c,p}=await setup(820,1000,unknown));try{ok(await p.locator('[data-wr-word=mat]').isVisible(),'unknown child does not hide old labels');await tap(p,'enter');eq((await read(p)).wordRoom.soundMessages,raw,'unknown child not replaced');}finally{await c.close();}
  await marketJourneys();
+ await gardenJourneys();
  eq(errors,[],'no page errors');console.log(`Sound-changing Prop Box browser: ${n} assertions passed. Artifacts: ${out}`);
 }finally{await b.close();}
