@@ -68,3 +68,9 @@
 .wrs-room .wrs-kept-feedback{padding:10px 12px;border-left:5px solid #397958;background:#fffdf3;font-size:1rem;margin:8px 0 12px;scroll-margin-top:180px}.wrs-kept-feedback strong{display:inline-block;overflow-wrap:anywhere}
 
 .wrs-icon.wrs-show-label{border:2px dashed #8f7237;border-radius:0 12px 12px 0;background:#fffdf3;padding:10px;margin-bottom:4px}
+
+/*343: one letter encounter at a time, using the existing room's controls. */
+.wrs-letter-nav{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.wrs-letter-nav button{min-width:52px;font-size:1.4rem}.wrs-letter-card{padding:12px;border:2px solid #8eb7a3;background:#eaf4ef;border-radius:16px;text-align:center;max-width:600px;margin:12px auto}.wrs-glyph{display:block;font-size:4rem;line-height:1.1}.wrs-letter-card .wrs-picture{max-height:130px}.wrs-letter-card p{max-width:48ch;margin:12px auto}.wrs-letter-card .wrs-changed{outline:3px solid #397958;background:#f9e9ba}
+@media(max-width:680px){.wrs-letter-card{padding:9px}.wrs-letter-card .wrs-picture{max-height:95px}.wrs-glyph{font-size:3rem}}
+
+.wrs-room{overflow-wrap:anywhere}

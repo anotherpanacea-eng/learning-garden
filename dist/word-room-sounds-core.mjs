@@ -37,14 +37,24 @@ export function soundRecord(r,id){
 export function validSoundMessages(r){
   return obj(r)&&r.v===1&&typeof r.active==='boolean'&&obj(r.sharedHelp)&&typeof r.sharedHelp.message==='boolean'&&
     sized(r.source)&&code(r.source.id)&&Number.isSafeInteger(r.source.revision)&&r.source.revision>0&&map(r.source.cases)&&
-    map(r.records)&&(r.selectedId===null||code(r.selectedId))&&['choose','case','message'].includes(r.page);
+    map(r.records)&&(r.selectedId===null||code(r.selectedId))&&['choose','case','message','letters'].includes(r.page)&&
+    (!own(r,'letterId')||r.letterId===null||code(r.letterId))&&(!own(r.sharedHelp,'letters')||typeof r.sharedHelp.letters==='boolean');
 }
-const fresh=()=>({v:1,active:true,source:makeSoundMessageSource(),sharedHelp:{message:false},selectedId:null,records:{},page:'choose'});
-export function soundMessagesView(book){
-  if(own(book,'wordRoom')&&!validWordRoomRoot(book.wordRoom))return{status:'parent-unavailable',active:false};
-  const r=book?.wordRoom?.soundMessages;
-  if(!own(book?.wordRoom,'soundMessages'))return{status:'new',active:false};
-  if(!validSoundMessages(r))return{status:'unsupported',active:false,root:r};
+const packetField=pack=>pack==='show'?'soundMessages':pack==='market'?'marketSoundMessages':null;
+export const activeSoundPacket=book=>validSoundMessages(book?.wordRoom?.marketSoundMessages)&&book.wordRoom.marketSoundMessages.active?'market':'show';
+const fresh=pack=>({v:1,active:true,source:makeSoundMessageSource(pack),sharedHelp:pack==='market'?{message:false,letters:false}:{message:false},selectedId:null,records:{},page:'choose',...(pack==='market'?{letterId:null}:{})});
+export function soundLetterSource(s,id){
+ const a=Array.isArray(s?.word?.letters)?[...new Set(s.word.letters)]:[];
+ return obj(s)&&/^[a-z]$/.test(id)&&s.id===id&&s.glyph===id&&alphabet(a)&&word(s.word,a)&&
+  Number.isInteger(s.position)&&s.position>=0&&s.position<3&&s.word.letters[s.position]===id&&text(s.guidance)?s:null;
+}
+const lettersOf=r=>map(r.source.teaching)?Object.keys(r.source.teaching).map(id=>({id,source:soundLetterSource(r.source.teaching[id],id)})):[];
+export function soundMessagesView(book,pack=activeSoundPacket(book)){
+  if(own(book,'wordRoom')&&!validWordRoomRoot(book.wordRoom))return{status:'parent-unavailable',active:false,pack};
+  const key=packetField(pack);if(!key)return{status:'unsupported',active:false,pack};
+  const r=book?.wordRoom?.[key];
+  if(!own(book?.wordRoom,key))return{status:'new',active:false,pack};
+  if(!validSoundMessages(r))return{status:'unsupported',active:false,root:r,pack};
   const ids=[...new Set([...Object.keys(r.source.cases),...Object.keys(r.records)])];
   const cases=ids.map(id=>{
     const present=own(r.records,id),record=present?soundRecord(r.records[id],id):null;
@@ -57,22 +67,24 @@ export function soundMessagesView(book){
   const complete=offered.length>0&&offered.every(id=>{
     const row=cases.find(x=>x.id===id);return row?.source&&row.record&&soundKeep(row.record.firstKept);
   });
-  return{status:'ready',active:r.active,root:r,cases,current:current?.record?current:null,
+  const teaching=lettersOf(r);
+  return{status:'ready',active:r.active,root:r,cases,pack,teaching,letter:teaching.find(x=>x.id===r.letterId)||null,current:current?.record?current:null,
     selected:current,message:readableMessage,page:r.page,complete};
 }
 const fail=error=>({ok:false,error});
 function mutate(book,fn,options={},create=false){
   if(!obj(book)||typeof options.canExport!=='function')return fail('capacity');
   try{
+    const pack=options.pack??activeSoundPacket(book),key=packetField(pack);if(!key)return fail('selection');
     const original=book.wordRoom;
     if(options.isCurrent&&options.isCurrent()!==true)return fail('stale');
     const candidate=clone(book);
     if(!own(candidate,'wordRoom')){if(!create)return fail('unavailable');candidate.wordRoom=freshWordRoom();}
     if(!validWordRoomRoot(candidate.wordRoom))return fail('unavailable');
-    if(!own(candidate.wordRoom,'soundMessages')){if(!create)return fail('unavailable');candidate.wordRoom.soundMessages=fresh();}
-    const r=candidate.wordRoom.soundMessages;
+    if(!own(candidate.wordRoom,key)){if(!create)return fail('unavailable');candidate.wordRoom[key]=fresh(pack);}
+    const r=candidate.wordRoom[key];
     if(!validSoundMessages(r))return fail('unavailable');
-    const result=fn(r);
+    const result=fn(r,candidate);
     if(!result.ok||result.changed===false)return result;
     if(!validSoundMessages(r)||!recoveryFitsProgressLimits(candidate))return fail('capacity');
     const proposal=clone(candidate.wordRoom);
@@ -82,8 +94,14 @@ function mutate(book,fn,options={},create=false){
     return result;
   }catch{return fail('capacity');}
 }
-export const enterSoundMessages=(book,options)=>mutate(book,r=>{r.active=true;return{ok:true};},options,true);
-export const leaveSoundMessages=(book,options)=>mutate(book,r=>{r.active=false;return{ok:true};},options);
+export const enterSoundMessages=(book,options={},pack='show')=>mutate(book,(r,candidate)=>{
+ r.active=true;const other=candidate.wordRoom[packetField(pack==='show'?'market':'show')];if(validSoundMessages(other))other.active=false;
+ return{ok:true};
+},{...options,pack},true);
+export const leaveSoundMessages=(book,options)=>mutate(book,(r,candidate)=>{
+ r.active=false;for(const key of ['soundMessages','marketSoundMessages'])if(validSoundMessages(candidate.wordRoom[key]))candidate.wordRoom[key].active=false;
+ return{ok:true};
+},options);
 export function chooseSoundCase(book,id,mode,options){
   return mutate(book,r=>{
     if(!code(id)||!modes.includes(mode))return fail('selection');
@@ -109,6 +127,11 @@ export function currentComparison(w){
 export function actSoundCase(book,action,value,options){
   return mutate(book,r=>{
     if(action==='choose'){r.page='choose';return{ok:true};}
+    if(action==='letters'||action==='teachingLetter'){
+      const entries=lettersOf(r),picked=action==='teachingLetter'?entries.find(x=>x.id===value&&x.source):entries.find(x=>x.id===r.letterId&&x.source)||entries.find(x=>x.source);
+      if(!picked||(action==='teachingLetter'&&r.page!=='letters'))return fail('unavailable');
+      r.sharedHelp.letters=true;r.letterId=picked.id;r.page='letters';return{ok:true};
+    }
     if(action==='message'){
       const m=r.source.message;
       if(!code(m?.id)||!wordRoomText({texts:{[m.id]:m}},m.id))return fail('unavailable');
