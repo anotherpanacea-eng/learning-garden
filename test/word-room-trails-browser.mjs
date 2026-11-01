@@ -134,6 +134,41 @@ async function longOJourney(p,width){
  await tap(p,'leave');await tap(p,'enter');eq(await p.locator('#wr-task').innerText(),'rode');eq(await p.locator('.wrt-counter').count(),1,'re-entry resumes fourth set');
 }
 
+async function longUJourney(p,width){
+ if(!await p.locator('[data-wrt-note]').evaluate(e=>e.open))await p.locator('[data-wrt-note] summary').tap();
+ eq(await p.locator('[data-wrt-note]').evaluate(e=>e.open),true,'earlier o-note is open before set change');
+ await tap(p,'set','long-u');eq(await p.locator('#wr-task').innerText(),'tub');eq(await p.locator('[data-wrt-note]').evaluate(e=>e.open),false,'u-note does not inherit o-note');
+ for(const id of width===820?['tub','tube','cub','cube','cut','cute']:['cute','cube']){
+  await tap(p,'word',id);eq(await p.locator('#wr-task').innerText(),id);
+  if(['cut','cute'].includes(id)){
+   eq(await p.locator('.wrt-map').count(),0,'cut/cute start with own counters');
+   if(width===820)ok(await p.locator('.wrt-task').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'u-set opening counter task fits tablet');
+   await tap(p,'counter',1);
+  }
+  if(['cut','cute'].includes(id))await tap(p,'model');
+  eq(await p.locator('.wrt-model figcaption').innerText(),'Our spelling pattern');
+  eq(await p.locator('.wrt-sound').count(),0,'no supplied sound dots');eq(await p.getByRole('img',{name:/^Sound [0-9]/}).count(),0,'no numbered sound targets');
+  await tap(p,'step',1);await tap(p,'step',1);
+  eq(await p.locator('.wrt-print.wrt-selected').evaluateAll(xs=>xs.map(x=>x.parentElement.getAttribute('aria-label'))),id.length===4?['Letter u','Letter e']:['Letter u']);
+  if(width===820){await tap(p,'step',1);await tap(p,'step',1);ok(await p.locator('.wrt-task').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),'long final spelling frame fits tablet');await p.screenshot({path:out+'/long-u-'+id+'.png',fullPage:true});}
+  await layout(p);
+  if(id.length===4){
+   await tap(p,'compare');eq(await p.locator('.wrt-map').count(),2);eq(await p.locator('.wrt-pair .wrt-context').count(),2);
+   if(id==='cube'){
+    const cdp=await p.context().newCDPSession(p),{nodes}=await cdp.send('Accessibility.getFullAXTree');
+    const pattern=nodes.find(n=>n.role?.value==='group'&&n.name?.value==='cube: Our spelling pattern');ok(pattern?.description?.value==='Letters u and e go together in this spelling pattern.','actual AX group describes spelling, not a count');await cdp.detach();
+    await p.screenshot({path:out+'/long-u-compare-'+width+'.png',fullPage:true});
+   }
+   await tap(p,'back');
+  }
+ }
+ await tap(p,'word','cute');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),1,'cute counters survive spelling and Compare');await tap(p,'compare');
+ for(const[set,label,count]of[['sounds','kit',2],['vowels','kit',1],['sentences','live show',1],['long-o','rode',1]]){await tap(p,'set',set);eq(await p.locator('#wr-task').innerText(),label);eq(await p.locator('.wrt-counter').count(),count,'earlier set waiting work retained');}
+ await tap(p,'set','long-u');eq(await p.locator('#wr-task').innerText(),'cut and cute','fifth set restores Compare');await tap(p,'back');eq(await p.locator('.wrt-counter').count(),1);
+ await p.locator('[data-wrt-note] summary').tap();ok((await p.locator('[data-wrt-note]').innerText()).includes('Props for the show'));await tap(p,'model');eq(await p.locator('[data-wrt-note]').evaluate(e=>e.open),true,'same-set turn preserves requested note');await tap(p,'try');
+ await tap(p,'leave');await tap(p,'enter');eq(await p.locator('#wr-task').innerText(),'cute');eq(await p.locator('.wrt-counter').count(),1,'re-entry resumes fifth set');
+}
+
 try{
  for(const[width,height]of[[820,1000],[320,600],[1024,768]]){
   const{c,p}=await setup(fixture(),width,height);
@@ -153,11 +188,11 @@ try{
    for(let i=0;i<6;i++)await tap(p,'counter',-1);eq(await p.evaluate(()=>document.activeElement.id),'wrt-count');
    await tap(p,'counter',1);eq(await p.locator('#wr-status').innerText(),'You placed 1 counter.','counter announcement filled after redraw');
    await p.evaluate(()=>window.__trailRedrawLate=document.querySelector('[data-wrt-action=counter][data-wrt-value="1"]'));await tap(p,'counter',1);await p.evaluate(()=>window.__trailRedrawLate.click());eq(await p.locator('.wrt-counter').count(),2,'detached control cannot mutate the same visit');await tap(p,'counter',-1);await tap(p,'leave');await tap(p,'enter');eq(await p.locator('.wrt-counter').count(),1,'same visit resumes');
-   await vowelJourney(p,width);await sentenceJourney(p,width);await longOJourney(p,width);
+   await vowelJourney(p,width);await sentenceJourney(p,width);await longOJourney(p,width);await longUJourney(p,width);
    eq(await read(p),before,'pure journey preserves full notebook');eq(await disk(p),saved,'pure journey performs no storage write');eq(await p.evaluate(()=>window.__trailSpeak),0,'no speech playback');
    await p.screenshot({path:out+'/counters-'+width+'.png',fullPage:true});
    await p.evaluate(()=>window.__trailLate=document.querySelector('[data-wrt-action=counter][data-wrt-value="1"]'));
-   await p.goto(base+'#words');await p.locator('[data-wrt-root]').waitFor({state:'detached'});await p.goto(base+'#words/props');await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'route exit ends visit');await p.evaluate(()=>window.__trailLate.click());eq(await p.locator('.wrt-counter').count(),0,'detached control inert');await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'route exit clears vowel work too');await tap(p,'set','sentences');await tap(p,'word','live-here');eq(await p.locator('.wrt-counter').count(),0,'route exit clears sentence work too');await tap(p,'set','long-o');await tap(p,'word','rod');eq(await p.locator('.wrt-counter').count(),0,'route exit clears o work too');
+   await p.goto(base+'#words');await p.locator('[data-wrt-root]').waitFor({state:'detached'});await p.goto(base+'#words/props');await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'route exit ends visit');await p.evaluate(()=>window.__trailLate.click());eq(await p.locator('.wrt-counter').count(),0,'detached control inert');await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'route exit clears vowel work too');await tap(p,'set','sentences');await tap(p,'word','live-here');eq(await p.locator('.wrt-counter').count(),0,'route exit clears sentence work too');await tap(p,'set','long-o');await tap(p,'word','rod');eq(await p.locator('.wrt-counter').count(),0,'route exit clears o work too');await tap(p,'set','long-u');await tap(p,'word','cute');eq(await p.locator('.wrt-counter').count(),0,'route exit clears u work too');
   }finally{await c.close();}
  }
  // All four historical packets remain exactly intact while the overlay is open.
@@ -176,17 +211,17 @@ try{
    const text=await p.locator('#wr-task').innerText(),material=await p.locator('.wr-work,.wr-contrast').innerText(),before=await read(p);await p.evaluate(()=>window.__trailRefuse=true);await tap(p,'enter');await counters(p,1);await tap(p,'leave');eq(await p.locator('#wr-task').innerText(),text,'exact '+mode+' return');eq(await p.locator('.wr-work,.wr-contrast').innerText(),material,'exact '+mode+' material and frame');eq(await read(p),before);
   }finally{await c.close();}
  }
- const unsupported=fixture();unsupported.wordRoom={version:999,privateFuture:'keep verbatim'};const{c,p}=await setup(unsupported);try{const before=await read(p);await tap(p,'enter');await counters(p,1);await tap(p,'set','vowels');await counters(p,2);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await tap(p,'leave');eq(await read(p),before);ok(await p.locator('[data-wr-action=recover]').isVisible(),'unsupported old work remains recoverable');}finally{await c.close();}
+ const unsupported=fixture();unsupported.wordRoom={version:999,privateFuture:'keep verbatim'};const{c,p}=await setup(unsupported);try{const before=await read(p);await tap(p,'enter');await counters(p,1);await tap(p,'set','vowels');await counters(p,2);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await tap(p,'set','long-u');await counters(p,1);await tap(p,'leave');eq(await read(p),before);ok(await p.locator('[data-wr-action=recover]').isVisible(),'unsupported old work remains recoverable');}finally{await c.close();}
 
  // Recovery clears counters after a successful commit, never after a refused one.
  {const seed=fixture();seed.wordRoom={version:999,future:'keep'};const{c,p}=await setup(seed);try{
-  await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await tap(p,'leave');await p.locator('[data-wr-action=recover]').tap();await p.evaluate(()=>window.__trailRefuse=true);await p.locator('[data-wr-action=confirm]').tap();await tap(p,'enter');eq(await p.locator('.wrt-counter').count(),5,'refused recovery keeps o visit');await tap(p,'set','sentences');eq(await p.locator('.wrt-counter').count(),4,'refused recovery keeps sentence visit');await tap(p,'set','vowels');eq(await p.locator('.wrt-counter').count(),3,'refused recovery keeps vowel visit');await tap(p,'set','sounds');eq(await p.locator('.wrt-counter').count(),2,'refused recovery keeps original visit');await tap(p,'leave');
-  await p.evaluate(()=>window.__trailRefuse=false);await p.locator('[data-wr-action=recover]').tap();await p.locator('[data-wr-action=confirm]').tap();await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery ends original visit');eq(await p.locator('[data-wrt-action=set][data-wrt-value=sounds]').getAttribute('aria-pressed'),'true','successful recovery resets set');await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery clears vowel visit');await tap(p,'set','sentences');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery clears sentence visit');await tap(p,'set','long-o');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery clears o visit');
+  await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await tap(p,'set','long-u');await counters(p,1);await tap(p,'leave');await p.locator('[data-wr-action=recover]').tap();await p.evaluate(()=>window.__trailRefuse=true);await p.locator('[data-wr-action=confirm]').tap();await tap(p,'enter');eq(await p.locator('.wrt-counter').count(),1,'refused recovery keeps u visit');await tap(p,'set','long-o');eq(await p.locator('.wrt-counter').count(),5,'refused recovery keeps o visit');await tap(p,'set','sentences');eq(await p.locator('.wrt-counter').count(),4,'refused recovery keeps sentence visit');await tap(p,'set','vowels');eq(await p.locator('.wrt-counter').count(),3,'refused recovery keeps vowel visit');await tap(p,'set','sounds');eq(await p.locator('.wrt-counter').count(),2,'refused recovery keeps original visit');await tap(p,'leave');
+  await p.evaluate(()=>window.__trailRefuse=false);await p.locator('[data-wr-action=recover]').tap();await p.locator('[data-wr-action=confirm]').tap();await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery ends original visit');eq(await p.locator('[data-wrt-action=set][data-wrt-value=sounds]').getAttribute('aria-pressed'),'true','successful recovery resets set');await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery clears vowel visit');await tap(p,'set','sentences');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery clears sentence visit');await tap(p,'set','long-o');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery clears o visit');await tap(p,'set','long-u');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,'successful recovery clears u visit');
  }finally{await c.close();}}
  async function ready(p){await p.locator('[data-word-room-root],[data-select-explorer]').first().waitFor();if(await p.locator('[data-select-explorer]').count()){const id=await p.evaluate(()=>JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId);await p.locator('[data-select-explorer="'+id+'"]').tap();}await p.locator('[data-word-room-root]').waitFor();}
  for(const event of['owner','import','reset','reload']){
   const{c,p}=await setup();try{
-   await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await p.evaluate(()=>window.__trailEventLate=document.querySelector('[data-wrt-action=counter][data-wrt-value="1"]'));
+   await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await tap(p,'set','long-u');await counters(p,1);await p.evaluate(()=>window.__trailEventLate=document.querySelector('[data-wrt-action=counter][data-wrt-value="1"]'));
    if(event==='owner'){await p.locator('#explorer-switch').tap();await p.locator('#explorer-new').tap();await p.locator('#explorer-create').tap();}
    else if(event==='reload')await p.reload();
    else{
@@ -196,10 +231,10 @@ try{
     await p.goto(base+'#words/props');
    }
    await ready(p);await tap(p,'enter');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' starts a fresh visit');
-   await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' clears vowel work too');await tap(p,'set','sentences');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' clears sentence work too');await tap(p,'set','long-o');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' clears o work too');
+   await tap(p,'set','vowels');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' clears vowel work too');await tap(p,'set','sentences');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' clears sentence work too');await tap(p,'set','long-o');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' clears o work too');await tap(p,'set','long-u');await tap(p,'try');eq(await p.locator('.wrt-counter').count(),0,event+' clears u work too');
    if(event!=='reload'){await p.evaluate(()=>window.__trailEventLate.click());eq(await p.locator('.wrt-counter').count(),0,event+' invalidates previous controls');}
   }finally{await c.close();}
  }
- {const{c,p}=await setup();try{await p.goto(base+'#notes');await p.locator('#remember').uncheck();await p.goto(base+'#words/props');const saved=await disk(p);await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);eq(await disk(p),saved,'saving off does not block counters or write storage');}finally{await c.close();}}
+ {const{c,p}=await setup();try{await p.goto(base+'#notes');await p.locator('#remember').uncheck();await p.goto(base+'#words/props');const saved=await disk(p);await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await tap(p,'set','long-u');await counters(p,1);eq(await disk(p),saved,'saving off does not block counters or write storage');}finally{await c.close();}}
  eq(errors,[],'no browser errors');console.log('Sound trails native: '+assertions+' assertions passed. Artifacts: '+out);
 }finally{await browser.close();await new Promise(r=>server.close(r));}
