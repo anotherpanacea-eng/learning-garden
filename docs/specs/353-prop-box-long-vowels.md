@@ -1,0 +1,41 @@
+# 353 · A final e in the Prop Box
+
+Bounded foundation design for admitted LG-10 / LG-G1, 2026-11-01. Base main `39c7d3567db00723f76df3f0daa1f9b57ad91bcb`. Proposed, awaiting independent six-lens specification and complete finite linguistic review. [Finite material](../content/353-prop-box-long-vowels-text.md); [source study](../source-audits/353-prop-box-long-vowels.md).
+
+## Learning action
+
+Extend **Letters and sound counters** inside the existing Prop Box, `#words/props`, with a second finite set, **A final e**. Dot sorts costume and repair props for the returning puppet show. An adult names and models six openly printed words. Partners compare cap/cape and kit/kite, put down their own sound counters, open a stepwise reference map and apply the pattern to pin/pine. No new destination or recorded result.
+
+Teach the contextual a_e and i_e spellings, not a rule that every final e changes a vowel. Both words in each pair have three reference phonemes. The final e is part of the vowel spelling and has no extra sound or syllable here. Long a /eɪ/ and long i /aɪ/ each count as one vowel phoneme, despite changing articulation. The reference is General American, already chosen by the owner. Adults may model natural regional speech; the app never grades it.
+
+Spec49 §5: teach cap/cape with stepwise whole-word/first/vowel/last/whole-map frames; contrast three versus four letters but three sounds, and the unchanged first/last sounds; support kit/kite with the same adult model; new use pin/pine initially opens at Try with no model selected; return to any word or the original x/qu set with its own counters and reference frame intact. Print, pictures and meanings are supplied throughout. No hidden-answer, independent decoding, unfamiliar-word or mastery claim. An adult can read all of it. The companion's short show note is shared reading, not a decodable passage.
+
+## Existing seam, with no new save format
+
+Use the real 350 modules `word-room-trails-content.mjs` and `word-room-trails-ui.mjs`, hosted in `word-room-ui.mjs`. Their finite model already supports variable printed-letter counts and groups mapping letter indices to sound indices; the old 342 three-letter case validator does not. Do not weaken that validator or add a retained packet/root to fit these words.
+
+Keep the current source and default `createSoundTrails()` unchanged. Add a closed optional set choice `sounds` / `vowels`, default `sounds`. The vowel source has six words, three pairs and the same five model frames, per-word counters 0–6 and Model/Try/Compare/Back transitions. Existing source factory/reducer/reference helpers remain the implementation; no general plugin system or new registry. The host keeps two fixed visit-local fields, original trails and vowel trails, and a selected-set code. Allocate each only when chosen. The old set's material, counters and histories are unchanged by selecting the new one.
+
+A two-button set switch appears inside the sound-counter room: **x and qu** / **A final e**, with the current button pressed. The new set starts on cap in Model; cap/cape/kit/kite initially use Model and pin/pine initially use Try. Changing sets restores that set's selected word, tool, counters, frame and Compare state; no extra step, speech or animation is started. Back to my prop box keeps both sets during this same visit, as 350 already keeps its counters. Route departure, owner change, import/reset/reload clear both through the existing Word Room visit lifecycle. The route and all original saved packet flags/sources stay untouched. Saving off, unsupported parent roots and capacity refusal do not prevent this pure play. No callback to a save/exposure gate, localStorage, Notes record, microphone or network is added.
+
+The new source is selected independently; new words must not silently appear among the original six. The default 350 source remains identical. Finite source creation returns independent copies, so modifying a visit never edits the installed reference.
+
+## Representation and interaction
+
+Reuse existing Model/Try/Compare structure, manual five-frame controls, separate own/model counters and the empty-then-populated count announcement. A word choice changes only selection and Compare state; its own counters/frame/tool remain. A Compare view shows the vowel group in both words, with the companion's literal pair explanation, then Back returns to the selected word without overwriting it. All six words and both sets stay open.
+
+For cape/kite/pine, map the first letter to sound1, the nonadjacent vowel letter and final e together to sound2, and the intervening consonant to sound3. Highlight only the two vowel letters and their one sound dot in the vowel frame. A line must not imply that the intervening p/t/n belongs to this group. Adapt the existing diagram only for nonadjacent groups: separate paths from the two selected letter positions converge on the same vowel dot; the independent consonant path remains. No extra e sound dot, fourth counter in the model or invented blank phoneme. Keep original contiguous x/qu diagrams unchanged. Accessible descriptions name actual letters and numbered sounds; do not rely on color, a generic span's aria-label, or IPA being spoken correctly.
+
+Reuse original cap342, kit348 and original320 pin badge pictures with the companion's literal senses. Draw new original cape, kite and pine SVGs in the same palette; no label printed into the art and no copied external worksheet. A pine is a tree, a kit is repair tools, and a pin is a badge pin, never a young animal or bowling pin. Fallback shows the supplied meaning. No film/audio/new character art is commissioned.
+
+One current task fits the existing tablet work mat. At 820×1000 keep word, current prompt, counter/model and primary controls together; word/set chooser and shared note can fold. At 320 and1024 widths check readable16px text,44px controls, no overflow and current focus. Changing set/word/tool focuses the current task heading. Model steps focus their own frame text; counters retain their action control unless disabled, then focus/announce the count. Reduced motion changes no information. Adult reference and interpretation are folded separately. No new Hear button or synthesized phonics pronunciation. Brief55 still owns accepted recordings and player qualification.
+
+## Acceptance and boundaries
+
+Before runtime: independent specification review and a separate content/linguistic read of every word/sense, both vowel phonemes, all six literal maps and thirty model frames, three contrasts, new-use prompts and the shared-note token classification. Read the rendered nonadjacent map before claiming it shows the intended group.
+
+Source checks use a literal independent six-word oracle: printed labels, phonemes, indices, pair identities and vowel-only change. Check all five frames and all counter boundaries; selection/tool/Compare/Back/set roundtrips preserve their own material. Reference reveal never replaces own counters. Default 350 source deep equality stays; separate visits own separate copies. No test of source spelling or prose-must-appear-in-this-spec is required.
+
+One complete tablet browser journey covers cap/cape teaching, kit/kite supported use and pin/pine Try→model→Compare→Back, each set switch with waiting counters, folded shared note, original set return, actual accessible map text and one rendered nonadjacent map. Narrow/wide samples use the longest comparison and four-letter model. Reuse the host's real owner/route/detached/import/reset journey while explicitly checking both local sets clear; one actual Notes export/import proves no new root and unchanged unrelated work. Pure-play state/storage preservation includes saving off and an unsupported parent root. Do not repeat whole catalogues at each width.
+
+No atlas or topic coverage change. This is narrow E1-I/II foundation support, not all long vowels, vowel teams, spelling from dictation, handwriting or independent reading. o_e/e_e/u_e, adjacent vowel teams and exception contrasts need later reviewed slices. Spec120 provides the act-agnostic theater purpose without Page, chapter or ending credit. Existing malformed/historical saves remain exact. Full source run, independent exact-head implementation review, merge and live verification follow the repository's existing procedure.
