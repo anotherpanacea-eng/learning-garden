@@ -8,3 +8,4 @@
 .room-shelf .room-shelf-grid>* a,.room-shelf .room-shelf-grid>* button{white-space:normal;flex-shrink:1}
 .room-shelf .room-shelf-grid h2,.room-shelf .room-shelf-grid h3{font-size:1.15rem;line-height:1.3;margin:0 0 6px;letter-spacing:-.01em}
 .room-shelf .room-shelf-grid p{font-size:.95rem;line-height:1.5;margin:0 0 10px}
+.room-shelf .instruction-entry-art{display:block;width:72px!important;margin:0 0 8px}
