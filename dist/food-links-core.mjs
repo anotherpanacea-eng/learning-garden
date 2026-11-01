@@ -41,15 +41,15 @@ export function evaluateFood(source,input){
  const neighborMatch=input.neighbor===null||input.neighbor==='unsure'?null:input.neighbor===source.expected.neighbor;
  const meaningMatch=neighborMatch===true&&meaning(input.meaning)?input.meaning===source.expected.meaning:null;
  let feedback;
- if(neighborMatch===null)feedback='This blank or uncertain neighbor stays unobserved. The pictures and supplied facts remain open. '+(input.meaning===null?'No meaning has been chosen yet.':'The meaning choice is kept but not assessed yet.');
+ if(neighborMatch===null)feedback='This blank or uncertain neighbor stays unobserved. The pictures and facts are still here to look at. '+(input.meaning===null?'No meaning has been chosen yet.':'The meaning choice is kept but not assessed yet.');
  else if(!neighborMatch)feedback='This proposed pair is not the feeding link requested by this question. It is not a confirmed diet. The meaning response is kept but not assessed for a different pair; either choice can be revised.';
  else{
   const from=source.role==='eater'?input.neighbor:source.reference,to=source.role==='eater'?source.reference:input.neighbor;
   const fact=source.links.find(x=>x.from===from&&x.to===to)?.text;
-  feedback='That neighbor fits this supplied question. '+(fact?fact+' ':'')+'The kept legend says: '+source.legend+' ';
+  feedback='That neighbor fits this question. '+(fact?fact+' ':'')+'The kept legend says: '+source.legend+' ';
   const answerLabel=source.meanings.find(x=>x.id===source.expected.meaning).label,otherLabels=source.meanings.filter(x=>meaning(x.id)&&x.id!==source.expected.meaning).map(x=>x.label);
-  feedback+='The supplied meaning is “'+answerLabel+'” rather than “'+otherLabels.join('” or “')+'”. ';
-  feedback+=meaningMatch===null?'No definite meaning response is recorded yet.':meaningMatch?'The selected meaning fits the supplied answer.':'The selected meaning differs from the supplied answer; it can be revised.';
+  feedback+='The meaning here is “'+answerLabel+'” rather than “'+otherLabels.join('” or “')+'”. ';
+  feedback+=meaningMatch===null?'No definite meaning response is recorded yet.':meaningMatch?'The selected meaning fits the game’s answer.':'The selected meaning differs from the game’s answer; it can be revised.';
  }
  return {source:structuredClone(source),input:{neighbor:input.neighbor,meaning:input.meaning,support:[...input.support]},neighborMatch,meaningMatch,feedback};
 }

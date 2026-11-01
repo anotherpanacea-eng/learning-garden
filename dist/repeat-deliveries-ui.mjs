@@ -40,7 +40,7 @@ export function bindRepeatDeliveries(state,{save,render,focus}){
  bind('[data-repeat-begin]',()=>{const ok=beginRepeat(state);show(ok?'The courier is at the start. Next: repetition 1, arrow 1.':'Choose both arrows and a count before Begin.',ok?'[data-repeat-step]':'[data-repeat-begin]');});
  bind('[data-repeat-step]',()=>{const ok=stepRepeat(state),r=repeatView(state).current,p=repeatProgress(r.source,r.block,r.count,r.run);show(ok?pointer(r,p).label:'No arrow was attempted. Begin a complete plan or revise a stopped plan.',['blocked','finished'].includes(p.status)?'[data-repeat-begin]':'[data-repeat-step]');});
  bind('[data-repeat-check]',()=>{const c=checkRepeat(state);if(c)setRepeatPage(state,'kept');show(c?'The actual program and attempted prefix are kept.':'This check could not be kept.',c?'.repeat-record':'#repeat-status');});
- bind('[data-repeat-together]',()=>{saveSupport('together');show('Thinking together recorded as support.','[data-repeat-together]');});
+ bind('[data-repeat-together]',()=>{saveSupport('together');show('Noted: you thought about this together.','[data-repeat-together]');});
  for(const [id,code]of [['repeat-help','help'],['repeat-expansion','expansion']]){const fold=document.getElementById(id);fold?.addEventListener('toggle',()=>{if(fold.open&&sameVisit(fold)&&Number(fold.dataset.round)===boundId)saveSupport(code);});}
  document.querySelectorAll('.repeat-sheet [data-speak]').forEach(b=>b.addEventListener('click',()=>{if(sameVisit(b))saveSupport('audio');}));
 }

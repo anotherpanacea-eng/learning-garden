@@ -152,7 +152,7 @@ Column labels: **{first ingredient} scoops** · **{second ingredient} scoops** �
 
 Row labels: **Sample** · **Two groups** · **Three groups** · **Four groups** · **Your pot now**. Only supplied rows within this table's scoop capacity are shown; current pot is labelled separately and never silently counted as an equivalent example.
 
-Table footer: **The supplied rows repeat the whole recipe. Your pot's row shows what you made; it may differ.**
+Table footer: **The printed rows repeat the whole recipe. Your pot's row shows what you made; it may differ.**
 
 For wb2:3 supplied rows, optional rule strip: **Blue is 3/2 of white, or 1.5 times white, in these sample rows. White : blue stays 2 : 3.**
 

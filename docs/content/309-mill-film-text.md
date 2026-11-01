@@ -33,7 +33,7 @@ Burned-in tracking labels: **Energy from our bucketful**; **Other water keeps th
 
 Summary: **About these drawings**.
 
-**This is a supplied explanatory sketch, not a measured experiment or a mill construction plan. Our followed bucket tips to show its water pouring into the lower channel; the other drawn buckets are simplified. The water flows on; it does not turn into energy.**
+**This is a drawn explanatory sketch, not a measured experiment or a mill construction plan. Our followed bucket tips to show its water pouring into the lower channel; the other drawn buckets are simplified. The water flows on; it does not turn into energy.**
 
 **The jars follow an energy contribution from one bucketful, not the whole mill. Energy has no labels, so we cannot point to “our” energy inside the wheel. The jars show an amount equal to what our bucketful transfers. While the mill runs steadily, the wheel’s speed and its kinetic store stay about the same: energy passes through the moving wheel to the stones about as fast as buckets supply it. The jars stretch these steps out so we can follow them. Their heights are an invented account, not measured amounts, water levels, wheel speed or efficiency. Other water keeps supplying the wheel after our moving column empties. Your table instead follows a separate finite batch and stops its wheel when that batch's moving store empties. Neither drawing counts all the energy already in the room or Earth.**
 
