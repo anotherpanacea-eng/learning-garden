@@ -1,6 +1,6 @@
 # The Rod Tray · finite original English copy
 
-Companion to [spec 344](../specs/344-rod-tray.md). Tool name **Rod Tray**; page title **The Rod Tray**; route `#desk/rods`. All lines below are original. Freeze them with the source. Only the bounded numbers named in braces may be filled in. Use a true minus sign (−) everywhere and give it the accessible name "negative" or "take away" as marked. Limits: prompts at most 15 words, hints and feedback at most 20, teach cards at most 30, explanations at most 25. No em-dashes.
+Companion to [spec 344](../specs/344-rod-tray.md). Tool name **Rod Tray**; page title **The Rod Tray**; route `#desk/rods`. All lines below are original. Freeze them with the source. Only the bounded numbers named in braces may be filled in. A saved tray keeps its own copy of these lines (spec 344, Retained source). Use a true minus sign (−) everywhere and give it the accessible name "negative" or "take away" as marked. Limits: prompts at most 15 words, hints and feedback at most 20, teach cards at most 30, explanations at most 25. No em-dashes.
 
 ## Discovery and intro
 
@@ -62,7 +62,7 @@ Worked example: 1. 0 − (−2). 2. The tray is empty. 3. Add 2 zero pairs. 4. T
 
 **T4. Two jobs for one sign**
 > A minus sign can mean "below zero", as in −3. It can mean "take away". Brackets keep them apart.
-Worked example: 1. 5 − (−3). 2. The first minus means take away. 3. The second means below zero. 4. Take away 3 black rods.
+Worked example: 1. 5 − (−3): take away negative three. 2. Put out 5 red. 3. Add 3 zero pairs. 4. Take away 3 black. 5. 8 red: 8.
 
 ## Cases
 
@@ -91,7 +91,7 @@ Prompt: **The baker owes $6. Then he takes in $10. What is his account now?**
 Sentence shown: **−6 + 10**
 Hint: **Six black rods for what he owes. Add ten red. Pair them off.**
 Explanation: **−6 + 10 = 4. Six dollars clear the debt. Four dollars are left over.**
-Feedback for −16: **Taking in money makes a debt smaller, not bigger.**
+Feedback for 10: **That is what he took in. Part of it pays off the $6 first.**
 Feedback for −4: **Right size. After paying off $6, is he still below zero?**
 
 ### 4. take-black · Take away what isn't there

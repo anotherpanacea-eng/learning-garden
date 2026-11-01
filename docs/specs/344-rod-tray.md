@@ -4,7 +4,7 @@
 
 ## One missing operation
 
-Learners can already place signed positions and measure the unsigned gap between them ([Gap Line 289](289-gap-line.md), `#desk/gaps`), and the generated Linear families use signed rates and balances ([312](312-signed-linear-returns.md)). Nothing built lets a learner *operate* on signed numbers with a concrete model: add a negative, take away more than is there, or take away a negative and see why the result goes up. The roadmap's consolidation row 4 names "negative/zero and richer linear relationships" as a gap, and 312 already tells learners that "subtracting a negative adds its opposite" without a model that shows it.
+Learners can already place signed positions and measure the unsigned gap between them ([Gap Line 289](289-gap-line.md), `#desk/gaps`), and the generated Linear families use signed rates and balances ([312](312-signed-linear-returns.md)). Those tools already represent signed numbers, but none offers a manipulable zero-pair model for adding and removing signed quantities: add a negative, take away more than is there, or take away a negative and see why the result goes up. The roadmap's consolidation row 4 names "negative/zero and richer linear relationships" as a gap, and 312 already tells learners that "subtracting a negative adds its opposite" without a model that shows it.
 
 Select only proposal [189](189-below-zero.md)'s **Rod Tray** bench, narrowed to whole-number addition and subtraction from −12 to +12. No flood post, thermometer, sign rules for multiplication, absolute-value course, Dry-Spell Log, history bench, story adapter or generic integer engine. The 189 proposal and its five benches stay proposals; this slice does not commission the others.
 
@@ -75,14 +75,24 @@ Optional root `rodTray`, absent until the learner first changes a tray, answer o
 
 ```
 rodTray: {
-  kind: 'rod-tray', version: 1, source,               // frozen copy of the case set
-  drafts: [{ caseId, red: 0..12, black: 0..12, answer: -12..12 | null }],
-  checks: [{ caseId, first, latest, count }],          // first immutable; latest replaced on a changed check
-  support: [{ caseId, hint, helper, line }]            // booleans: opened, not "understood"
+  kind: 'rod-tray', version: 1, source,               // retained copy of the whole case set, see below
+  drafts:   [{ caseId, red: 0..12, black: 0..12, answer: -12..12 | null }],
+  checks:   [{ caseId, first, latest, count }],
+  support:  [{ caseId, hint, helper, line }],          // booleans: opened or requested, never "understood"
+  teaching: { T1, T2, T3, T4 }                         // booleans: teach card opened
 }
 ```
 
-A check snapshot is `{answer, matches, red, black, hintBefore, helperBefore, lineBefore}`: the learner's chosen value, the literal match result at that time, the tray as it stood, and which help had been opened before checking. Codes and integers only; no free text, timing or location. `source` freezes the six cases (sentence parts, result and copy ids) so a later copy edit never re-marks an old check. Never recompute or rewrite a saved `matches` on load. An unreadable entry stays raw and exportable while the rest of the tray stays usable.
+**Retained source.** `source` is `{id, version, cases, helpers, teach, lines}` and holds the actual strings, not ids into today's catalogue: each case's sentence parts, result, prompt, guided steps, hint, explanation, the two targeted feedback values with their lines, and the general non-match line; the three helpers' steps; the four teach cards. Notes and every return view interpret saved work only through this retained source. An id resolves within the retained source and nowhere else. A later wording change ships as a new source version for new notebooks; an existing owner keeps its own source and is never silently re-read through the current copy. Build test: save, change a current case string and a feedback value, reload, and confirm Notes shows the old wording and the old literal `matches`.
+
+**Check transitions** (following Gap Line 289's first/latest pattern). A check snapshot is `{answer, matches, red, black, helpBefore}`, where `helpBefore` is `{guided, hint, helper, line, teach}`: `guided` is true when the retained case has guided steps (they are shown before answering, so case 1 always carries it); `hint`, `helper` and `line` copy that case's support flags; `teach` lists the teach cards opened by this explorer. Pressing **Check my answer**:
+
+- with no check yet for the case: writes `first` and `latest` as the same snapshot, `count: 1`;
+- when `answer`, `red`, `black` or any `helpBefore` field differs from `latest`: replaces `latest`, `count + 1`; `first` never changes;
+- when all of those equal `latest`: no write and no count change (a repeat press is a no-op);
+- with `answer: null`: disabled, so no check is written.
+
+Each support or teach flag is committed through the write gate before its help is shown; a refused write shows the refusal and not the help. Flags mean opened or requested; they do not show the help was read, and a false flag is never evidence of an unaided answer. Guided steps are disclosed in Notes as help shown by design. A support or teaching entry that cannot be read stays **unknown** in Notes and in later snapshots, never false. Codes, integers and booleans only; no free text, timing or location. Never recompute or rewrite a saved `matches` on load. An unreadable entry stays raw and exportable while the rest of the tray stays usable.
 
 Use the existing whole-notebook gate before every write (`prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok`, as in 289), the existing save-off, Download, import, explorer switching and scoped reset behavior, and a presence-only transfer destination `rodTray`. Grown-up notes list each case's first and latest check, check count and help opened, and say plainly that intermediate attempts are not kept.
 
@@ -95,9 +105,9 @@ Accessibility: every rod has a text equivalent ("4 red rods, 7 black rods"); scr
 ## Verification and delivery
 
 - **Numbers (2026-11-01):** scratch `check344.py` (run with `python3 -I`, not in the repo) simulated all six cases and three helpers on the tray: each reaches its stated result, the zero pairs needed are 0, 0, 0, 3, 2, 4, no color exceeds 12, every start and result lies in −12..12, zero-pair invariance holds over all 169 tray states, and helper answers (−1, 6, −4) differ from every case answer (−3, −8, +4, −2). The independent math review should rerun this with its own script.
-- **Copy:** run `node scripts/check-child-copy.mjs` over the new renderer once built; companion lines obey the style limits stated there (US spelling, no em-dashes, prompts at most 15 words, hints and feedback at most 20).
-- **Build checks:** every tray control at both limits; Pair them off from mixed, single-color and empty trays; the stepper at both ends; first/latest/no-op checks; help-before flags; unreadable draft or check isolation; Download → import → reload → re-download; two explorers; save-off; scoped reset; reduced motion; viewport probes above.
-- **Review order:** six-lens specification review and a separate math/content review before runtime; Codex implements, reviews and lands; release verification as usual. No physical iPad, audio or learning-outcome claim follows from Chrome checks.
+- **Copy:** `scripts/check-child-copy.mjs` is a terminology scan for spec vocabulary in child-facing strings. Register the new `dist/rod-tray-ui.mjs` and `dist/rod-tray-content.mjs` in its `copyScopes` (Notes blocks as adult blocks) and keep it passing. The companion's word limits, punctuation and US spelling are checked with a temporary script at build time plus human review; no new permanent validation framework.
+- **Build checks:** every tray control at both limits; Pair them off from mixed, single-color and empty trays; the stepper at both ends; first/latest/count/no-op transitions, including a change in help alone; unknown support or teaching entries; the retained-source test above; unreadable draft or check isolation; Download → import → reload → re-download; two explorers; save-off; scoped reset; reduced motion; viewport probes above.
+- **Review order:** six-lens specification review and a separate math/content review before runtime; after implementation, independent Claude implementation clearance on the exact final head before Codex lands it (AGENTS.md); release verification as usual. No physical iPad, audio or learning-outcome claim follows from Chrome checks.
 
 ## Later, not commissioned here
 
