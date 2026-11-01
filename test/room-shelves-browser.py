@@ -79,7 +79,7 @@ def main():
         threading.Thread(target=server.serve_forever, daemon=True).start()
         base = f'http://127.0.0.1:{server.server_port}/'
     base = base.rstrip('/') + '/'
-    shelves = {'#numbers': ('More rooms in the Number Garden', 15, '#desk/rods'), '#post': ('More rooms at the Post Office', 13, '#post/ferry'), '#living': ('More Living Garden rooms', 7, None)}
+    shelves = {'#numbers': ('More rooms in the Number Garden', 15, '#desk/rods'), '#post': ('More rooms at the Post Office', 13, '#post/ferry'), '#living': ('More Living Garden rooms', 11, None)}
     with sync_playwright() as pw:
         launch = {'headless': True, 'args': ['--disable-quic']}
         if os.environ.get('CHROME_PATH'):
