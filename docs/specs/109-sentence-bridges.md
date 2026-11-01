@@ -47,7 +47,7 @@ The output label is always **“Sentence we are trying”**, never “What happe
 | Scene | Order / bridge | Sentence we are trying | Meaning to notice (verbatim) |
 | --- | --- | --- | --- |
 | `supper` | AB / **and** | The helpers moved supper indoors, and rain was falling. | This adds the two facts. It does not say why supper moved. Our scene gives that reason. |
-| `supper` | AB / **because** | The helpers moved supper indoors because rain was falling. | This says rain was the reason the helpers moved supper. That reason is supplied in our scene. |
+| `supper` | AB / **because** | The helpers moved supper indoors because rain was falling. | This says rain was the reason the helpers moved supper. That reason is given in our scene. |
 | `supper` | AB / **but** | The helpers moved supper indoors, but rain was falling. | This offers a contrast between moving indoors and rain falling. Our scene uses rain as the reason for moving. What expectation would make this contrast useful? |
 | `supper` | BA / **and** | Rain was falling, and the helpers moved supper indoors. | This adds the same two facts in another order. The word and does not itself promise a reason or a time order. |
 | `supper` | BA / **because** | Rain was falling because the helpers moved supper indoors. | This would make moving supper the reason rain fell. Our scene says moving supper did not change the weather. You can try the sentence, then change it. |
@@ -63,7 +63,7 @@ The output label is always **“Sentence we are trying”**, never “What happe
 | `jobs` | AB / **but** | Pip folded the banner, but Dot packed the cups. | This makes their different jobs stand out. A speaker can choose that contrast; our note gives no reason to expect them to do the same job. |
 | `jobs` | BA / **and** | Dot packed the cups, and Pip folded the banner. | This adds both jobs with Dot first. Changing the sentence order does not change the scene’s timing. |
 | `jobs` | BA / **because** | Dot packed the cups because Pip folded the banner. | This would make Pip’s folding the reason Dot packed the cups. Our scene says neither job caused the other. |
-| `jobs` | BA / **but** | Dot packed the cups, but Pip folded the banner. | This contrasts Dot’s job with Pip’s. Both jobs are supplied; the speaker chooses to make the difference stand out. |
+| `jobs` | BA / **but** | Dot packed the cups, but Pip folded the banner. | This contrasts Dot’s job with Pip’s. Both jobs are given in the scene; the speaker chooses to make the difference stand out. |
 
 ## Teaching and exact controls
 

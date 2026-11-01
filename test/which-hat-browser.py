@@ -249,7 +249,7 @@ def journey(browser, width, base):
             click(p, selector);ok(book(p) == snapshot, 'preflight refusal retains whole notebook: '+selector)
         count=p.evaluate('window.__hatsSpoken.length');click(p, '[data-speak]')
         ok(p.evaluate('window.__hatsSpoken.length') == count and book(p) == snapshot, 'refused reading support never reaches playback or changes work')
-        ok('exportable' in p.locator('#hat-status').inner_text(), 'refusal explains notebook preservation')
+        ok('ready to download' in p.locator('#hat-status').inner_text(), 'refusal explains notebook preservation')
         p.evaluate('window.__hatsRefuse=false');turn(p, 'build')
         p.evaluate('window.__hatsRefuse=true');snapshot=book(p)
         for selector in ['[data-hat-tile="red"]','[data-hat-keep]','[data-hat-help="readback"]','[data-hat-clear]','[data-hat-target="peg-3"]']:

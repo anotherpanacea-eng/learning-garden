@@ -60,11 +60,11 @@ The first panel of each card is labeled **Before**; the second is **Later**, wit
 
 1. “The line is lower. Since vapor is unseen, we cannot even suggest evaporation here.”
 2. “The line is lower. The picture proves exactly how much water became vapor.”
-3. **Fits:** “The line is lower. In this supplied scene, evaporation fits, though we cannot see vapor.”
+3. **Fits:** “The line is lower. In this scene, evaporation fits, though we cannot see vapor.”
 
 **Show a clue:** “Visible clue: the later waterline is lower. The no-pour, no-spill, and no-drain conditions come from the story, not the drawing.”
 
-**Feedback after a choice:** “A lower line plus the supplied conditions makes evaporation a reasonable explanation. Evaporation changes liquid water to water vapor; the vapor is not directly seen here. The still pictures are neither a measurement nor proof of a unique cause or quantity.” For option 1 add, “An unseen process can still be a supported possibility.” For option 2 add, “No amount was measured.”
+**Feedback after a choice:** “A lower line plus the conditions given here makes evaporation a reasonable explanation. Evaporation changes liquid water to water vapor; the vapor is not directly seen here. The still pictures are neither a measurement nor proof of a unique cause or quantity.” For option 1 add, “An unseen process can still be a supported possibility.” For option 2 add, “No amount was measured.”
 
 **Talk together:** “Which part did the picture show? Which part did the story tell us? What remains unseen?”
 
