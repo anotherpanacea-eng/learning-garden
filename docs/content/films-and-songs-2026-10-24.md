@@ -226,18 +226,21 @@ These are provisional candidate refinements to the shot suggestions in [story mi
 
 #### Story check of take 2 · 2026-11-01
 
-Checked against spec 120, the [act 4 script](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story/act-4.md) and integration note 6 in [motion-film integration](../motion-film-integration.md). The check reads the take's scene code and SRT; nobody has watched it in the real player yet. Take 2 runs 49 s in 7 shots, inside the 35 to 50 s budget. Its only words are the seven captions: the plan sheets have no labels, and the ledger shows marks with no readable numbers, so nothing answers chapter 1's ledger count.
+Checked against spec 120, the [act 4 script](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story/act-4.md) and integration note 6 in [motion-film integration](../motion-film-integration.md). The check reads the take's scene code and SRT. The producer README reports that nobody has watched the takes in the real player yet. Take 2 runs 49 s in 7 shots, inside the 35 to 50 s budget. Its only words are the seven captions: the plan sheets have no labels, and the ledger shows marks with no readable numbers, so nothing answers chapter 1's ledger count.
 
 Re-cut fixes (each needs a new render, because the captions are burned in):
 
-1. **Who changes their mind.** The script decides who changes their mind from the explorer's kept work: the orchard keeper, the miller, Pip or, as the fallback, the librarian. The film fixes it as the miller at the ledger (caption 3, "The miller has changed her mind."). For most explorers that contradicts the line the game gives them, and in the script the ledger evidence is Pip's line, not the miller's. Make shot 3 unnamed. Keep the ledger and the rose line, show only a paw on the line, and change caption 3 to "Someone has changed their mind, and shows everyone why." That matches the still text ("Someone changed their mind, and said why."). The miller and the orchard keeper can stay in shot 4, where they only point at the water.
+1. **Who changes their mind.** The script decides who changes their mind from the explorer's kept work: the orchard keeper, the miller, Pip or, as the fallback, the librarian. The film fixes it as the miller at the ledger (caption 3, "The miller has changed her mind."). That can contradict the matching ending line the game gives the explorer, and in the script the ledger evidence is Pip's line, not the miller's. Make shot 3 unnamed. Keep the ledger and the rose line, show only a paw on the line, and change caption 3 to "Someone has changed their mind, and shows everyone why." That matches the still text ("Someone changed their mind, and said why."). The miller and the orchard keeper can stay in shot 4, where they only point at the water.
 2. **Plan name.** Caption 2 reads "the wall". The plan is called the Wall everywhere else, so the caption should read "Bramble speaks up for the Wall, and for the orchard families."
 3. **The note shot (integration note 6).** Pinning the note beside all three sheets is right: it matches the still ("a note pinned beside them") and the script's question mark on the meeting board. Two parts of the staging still undercut it:
-   - The shot opens at 2.6× zoom on the note, with only the right edge of Some of Each in frame. For its first three seconds the note reads as attached to that plan. Open on the note alone, or on the whole board.
-   - The pinning arm reaches in from the bottom right, below the camera, with no body. That reads as the viewer's own arm, which puts the explorer in the film. Draw the librarian (they/them, the blue owl from the Act V film) pinning it from the side, as the producer README already describes. Or bring the arm in from the side of the frame.
-4. **Stakes shot.** The mallet in shot 6 taps the stakes with no one holding it, which reads as the viewer again. Give it to Pip or the far neighbour, or show it held by a neighbour seen from behind.
+   - The shot opens at 2.6× zoom on the note, with only the right edge of Some of Each in frame. For its first three seconds the note could read as attached to that plan. Open on the note alone, or on the whole board.
+   - The pinning arm reaches in from the bottom right, below the camera, with no body. That could read as the viewer's own arm, which would put the explorer in the film. Draw the librarian (they/them, the blue owl from the Act V film) pinning it from the side, as the producer README already describes. Or bring the arm in from the side of the frame.
+4. **Stakes shot.** The mallet in shot 6 taps the stakes with no one holding it, which could read as the viewer again. Give it to Pip or the far neighbour, or show it held by a neighbour seen from behind.
+5. **The low corner.** Shot 4 draws five young saplings standing in water, with no reeds, and caption 4 says "young trees". In act 4, chapter 2, three of the oldest apple trees stand in the puddle, with reeds nobody planted coming up between them: "as if the Sponge is trying to come back." Draw old apple trees with reeds between them, and change caption 4 to "At the low corner, water stands around the old apple trees."
 
-Brief fix: in the 30 to 38 s row, change "Someone adds a note to one of them" to "Someone pins a note beside them", so the brief matches the still and the take.
+Brief fixes:
+- In the 22 to 30 s row, change "the youngest trees" to "the oldest apple trees, with reeds coming up between them".
+- In the 30 to 38 s row, change "Someone adds a note to one of them" to "Someone pins a note beside them", so the brief matches the still and the take.
 
 Checked with no change needed:
 - Bramble argues and the listeners nod; she is not shown as wrong.
@@ -265,12 +268,12 @@ Checked with no change needed:
 
 #### Story check of take 2 · 2026-11-01
 
-Checked against spec 120, the [act 5 script](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story/act-5.md) and integration note 6, from the take's scene code and SRT. Take 2 runs 52 s in 7 shots. The only on-screen words are the captions, the book heading *For the next Keeper*, the title *Willowbank Gazette* and one question mark. Every other line of writing is a squiggle.
+Checked against spec 120, the [act 5 script](https://github.com/anotherpanacea-eng/learning-garden/blob/be78fd55a26b4fa716521765a5819e5d3b938392/docs/content/120-story/act-5.md) and integration note 6, from the take's scene code and SRT. Take 2 runs 52 s in 7 shots. The only on-screen words are the captions, the book heading *For the next Keeper*, the title *Willowbank Gazette* and one question mark. All remaining page marks are unreadable.
 
 Re-cut fixes:
 
 1. **"First" Gazette.** Caption 2 reads "The librarian pins up the first Willowbank Gazette." But in act 4 the librarian already edits the Gazette and made one for the meeting, and act 5's path 2 opens with "Now everyone wants another one." Change caption 2 to "The librarian pins up the next Willowbank Gazette." The picture can stay.
-2. **Length.** At 52 s the take runs over the 35 to 50 s budget. Take 1 s each from shots 2 and 5 (9 s to 8 s), then shift the later cues and re-export the SRT. Or, if story review prefers, widen the budget for this film to 52 s. Do one of the two, so the brief and the film agree.
+2. **Length.** At 52 s the take runs over the 35 to 50 s budget. Take 1 s each from shots 2 and 5 (9 s to 8 s). That means retiming each shot's own animation, then shifting the later cues and re-exporting the SRT. Or, if story review prefers, widen the budget for this film to 52 s. Do one of the two, so the brief and the film agree.
 3. **Apostrophes.** The burned-in captions 4 and 6 use curly apostrophes ("doesn’t", "Keeper’s"), but the SRT uses straight ones. The transcript and VTT must match the picture exactly, so make them match before shipping.
 4. **The mistake (optional).** Pip points at the page in shot 3, but nothing on the page looks wrong. A small crossed or circled squiggle where Pip points would let a non-reader see the mistake without reading.
 
@@ -308,7 +311,7 @@ Checked against spec 120, the [act 6 script](https://github.com/anotherpanacea-e
 
 Re-cut fixes:
 
-1. **The runner from behind (integration note 6).** Keep it. The runner is drawn only from behind, with no face, label or name, which keeps the [town film's](299-town-film-text.md) rule that the films never identify the later runner. The staging needs one fix: the back-view figure slides sideways across the frame, which reads as a cut-out. Have the runner set off away from the camera down the river path, getting smaller, or keep the runner small and far off for the whole move.
+1. **The runner from behind (integration note 6).** Keep it. The runner is drawn only from behind, with no face, label or name, which keeps the [town film's](299-town-film-text.md) rule that the films never identify the later runner. The staging needs one fix: the back-view figure slides sideways across the frame, which could read as a cut-out. Have the runner set off away from the camera down the river path, getting smaller, or keep the runner small and far off for the whole move.
 2. **Who carries the warning on.** The runner is drawn in the same tan as the post bag. The bag appears at the bridge just as the runner's card disappears, so the runner seems to carry the bag on to Les Saules. In the script, Willowbank sends the warning on with the explorer's courier. Give the post bag its own colour, and let a beat pass between the runner stopping at the bridge and the bag setting off.
 3. **Ribbon colours.** The script ties blue for the river path, gold for the bridge road and red for the high ford. The take uses rose for the high ford, in shots 6, 8 and 9. Use the red so the film matches the game's ending text and season lines.
 
