@@ -29,7 +29,7 @@ export const FIELD_MISSIONS=Object.freeze([
    'Tell each other what you notice. You do not need to measure, photograph or report it here.'
   ],
   safety:'Use untreated seed. Seeds and these experiment plants are not for eating. An adult keeps the seed packet. If mold appears, an adult throws the bed away. Wash hands after handling seed or growing material.',
-  contrast:"The game's plant lengths are supplied; your two pots may grow in ways the game cannot predict.",
+  contrast:"The game sets the plant lengths; your two pots may grow in ways the game cannot predict.",
   missing:'Read or talk about the game plants. Choose Not today for real sowing.',
   replies:{
    done:'The garden keeper makes room on the sill. ‘You tried the real-pot activity. You can watch any plants at your own pace.’',
@@ -47,7 +47,7 @@ export const FIELD_MISSIONS=Object.freeze([
    'Ask what the reader understands. You may change one word if you want.'
   ],
   safety:'Use ordinary paper and a pencil or crayon. An adult chooses a comfortable place to work.',
-  contrast:'The game arranges supplied screen words; this paper is your own mark-making for a reader.',
+  contrast:'The game arranges ready-made screen words; this paper is your own mark-making for a reader.',
   missing:'Talk about what a café notice might say. Choose Not today for the paper mission.',
   replies:{
    done:'The café cook clears a place on the imaginary notice board. ‘You tried making a paper notice. Keep it with you if you like.’',

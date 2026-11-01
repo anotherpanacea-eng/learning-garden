@@ -1,6 +1,6 @@
 // Original ideal equal-arm model. Unit masses are fictional, not calibrated grams.
 export const balancePages=['balance','kept'];
-const help='Equals means the same value. Our matched pans compare model mass. Every small weight is one model mass unit. The sealed parcel means the whole parcel, wrapping included; it is not one unit just because it is one object. Add or remove the same available unit on both sides to keep their existing difference. That keeps a level balance level, but cannot repair a difference already there. You may change one side, change it back, or reset. These are supplied model results, not physical measurements.';
+const help='Equals means the same value. Our matched pans compare model mass. Every small weight is one model mass unit. The sealed parcel means the whole parcel, wrapping included; it is not one unit just because it is one object. Add or remove the same available unit on both sides to keep their existing difference. That keeps a level balance level, but cannot repair a difference already there. You may change one side, change it back, or reset. These are results from the game’s model, not real measurements.';
 const make=(id,title,start,parcelSide=null,parcelMass=null)=>({version:1,id,title,question:parcelSide?'What is the model mass of this whole sealed parcel?':'What can change while both sides keep the same mass?',help,kind:parcelSide?'parcel':'known',parcelSide,parcelMass,start});
 export const balanceCases=[
  make('two-arrangements','Two ways to arrange five',{left:[3,2],right:[4,1]}),

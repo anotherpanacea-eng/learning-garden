@@ -48,7 +48,7 @@ export function evaluateBody(source,input){
  let feedback;
  if(stop==='unclear')feedback='We kept an uncertain trail. A clearer look can help us choose a branch; an unclear clue is not an absent feature.';
  else if(stop==='outside')feedback=`This chosen trail stops outside our ${source.key.length}-picture key. That does not tell us a different animal is in the picture. Look again at the walking-leg detail and body clue.`;
- else if(compared.legs&&compared.body)feedback=`These two chosen clues fit this supplied adult picture. Our key names ${named.label}.`;
+ else if(compared.legs&&compared.body)feedback=`These two chosen clues fit this picture of an adult animal. Our key names ${named.label}.`;
  else feedback=`This chosen trail names ${named.label}. Compare it with our picture: ${source.inspection} Change a clue or take another look whenever you like.`;
  return {source:structuredClone(source),input:{legs:input.legs,feature:input.feature},named,stop,features:compared,feedback};
 }

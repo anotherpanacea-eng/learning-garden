@@ -21,7 +21,7 @@ export const actTwoContent={
   garden:{title:'Keeping a record',
    short:['The garden keeps changing. Dot wants the town to keep records, so there is something to compare next time.'],
    longer:["‘Let's write down what we notice,’ says the librarian. ‘And what we didn't get to notice,’ says Dot. She leaves room on the page. At the mill, someone is wondering what a useful record of the brook would need."],
-   job:'Keep a plan at the Town Record. Supplied words, your own words, and a question left open are all welcome.',hostLabel:'Visit the Town Record',hostHref:'#learn/science/records',selector:'Choose a kept record plan',offer:'Offer this record plan',after:'The town has a place for your record plan. A question can stay open beside it.',noWork:'Keep a plan at the Town Record, then bring it back. It can be unfinished.'},
+   job:'Keep a plan at the Town Record. Ready-made words, your own words, and a question left open are all welcome.',hostLabel:'Visit the Town Record',hostHref:'#learn/science/records',selector:'Choose a kept record plan',offer:'Offer this record plan',after:'The town has a place for your record plan. A question can stay open beside it.',noWork:'Keep a plan at the Town Record, then bring it back. It can be unfinished.'},
   birthday:{title:"Ember's birthday",
    short:["It's nearly Ember's birthday. The café has room for a tray idea. Bramble brings ribbons, and a secret."],
    longer:["Ember has mentioned her birthday eleven times this week, always by accident. Bramble arrives with ribbons and starts tying them on chairs, lanterns and Pip. ‘My grandmother taught me,’ she says. ‘She tied them on the old paths, so nobody got lost. Blue for one way, gold for another.’ She ties a bow on the parcel. ‘Mostly I like the colors.’"],
@@ -29,7 +29,7 @@ export const actTwoContent={
   show:{title:'The first show',
    short:['The Story Loft is getting a show ready. Dot says the town will need somewhere for everyone to sit.'],
    longer:["There are puppets, a painted backdrop of the footbridge, and a part for a heron that nobody can quite explain. ‘It felt like the story needed one,’ says the librarian. Dot is arranging chairs. The ducks are trying to look invited."],
-   job:'Share a show with its audience in Story Loft, then bring it here. A supplied scene is welcome too.',hostLabel:'Visit Story Loft',hostHref:'#loft',selector:'Choose a shared show',offer:'Offer this shared show',after:"Your shared show is on the gathering's bill. The ducks are taking their seats.",noWork:'Play a show through to Meet the audience in Story Loft, then bring the shared show back.'}
+   job:'Share a show with its audience in Story Loft, then bring it here. A ready-made scene is welcome too.',hostLabel:'Visit Story Loft',hostHref:'#loft',selector:'Choose a shared show',offer:'Offer this shared show',after:"Your shared show is on the gathering's bill. The ducks are taking their seats.",noWork:'Play a show through to Meet the audience in Story Loft, then bring the shared show back.'}
  },
  messages:{
   alreadyOffered:'Your idea is already part of this gathering. Keep exploring or revisit the game whenever you like.',
