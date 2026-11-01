@@ -31,7 +31,7 @@ try{
   const {c,p}=await open(w,h);
   ok(!Object.hasOwn(await book(p),'rodTray'),`${w}: opening writes nothing`);eq(await trayText(p),'The tray is empty.',`${w}: empty tray`);
   ok((await p.locator('.rt-reason').innerText()).startsWith('The baker sells bread'),`${w}: Willowbank reason`);ok((await p.locator('.rt-model').innerText()).startsWith('A made-up model.'),`${w}: model line`);
-  ok((await p.locator('.rt-sentence').ariaSnapshot()).includes('4 plus negative 7')&&!(await p.locator('.rt-sentence').ariaSnapshot()).includes('−'),`${w}: accessibility tree reads the sentence with negative`);
+  {const t=await p.locator('.rt-legend').ariaSnapshot();ok(t.includes('the minus sign')&&t.includes('the plus sign')&&!t.includes('(−)'),`${w}: legend names its signs`);}ok((await p.locator('.rt-sentence').ariaSnapshot()).includes('4 plus negative 7')&&!(await p.locator('.rt-sentence').ariaSnapshot()).includes('−'),`${w}: accessibility tree reads the sentence with negative`);
   ok(!(await overflow(p)),`${w}: no horizontal overflow`);eq(await small(p),[],`${w}: 44 px controls`);
   if(w>=820)for(const sel of ['.rt-sentence','.rt-tray','.rt-controls','.rt-stepper','[data-rt-check]'])ok(await bottom(p,sel)<=h,`${w}: ${sel} fits the first viewport`);
   // Guided case 1 by tap: 4 red, 7 black, pair off, count.
@@ -50,7 +50,7 @@ try{
   // The help ladder in order, then a changed answer gets a targeted line.
   await p.locator('[data-rt-help="hint"]').click();await p.locator('#rt-hint-focus').waitFor();ok((await p.locator('#rt-hint-focus').innerText()).includes('How many steps reach zero?'),`${w}: hint`);eq((await book(p)).rodTray.support[0].hint,true,`${w}: hint saved before display`);
   await p.locator('[data-rt-help="helper"]').click();await p.locator('#rt-helper-focus').waitFor();ok((await p.locator('#rt-helper-focus').innerText()).includes('Example tray. Your own tray is waiting.'),`${w}: helper caption`);
-  await p.locator('[data-rt-step="1"]').click();await p.locator('[data-rt-step="1"]').click();ok((await seen(p.locator('#rt-helper-focus'))).includes('One black rod is left: −1.'),`${w}: helper last step`);ok(await p.locator('[data-rt-step="1"]').isDisabled(),`${w}: Next stops at the end`);
+  await p.locator('[data-rt-step="1"]').click();await p.locator('[data-rt-step="1"]').click();ok((await seen(p.locator('#rt-helper-focus'))).includes('One black rod is left: −1.'),`${w}: helper last step`);ok(await p.locator('[data-rt-step="1"]').isDisabled(),`${w}: Next stops at the end`);{const t=await p.locator('#rt-helper-focus').ariaSnapshot();ok(t.includes('negative 1')&&!/−\d/.test(t),`${w}: helper step read with negative`);}
   await p.locator('[data-rt-back]').click();eq(await trayText(p),'0 red rods, 3 black rods.',`${w}: own tray untouched`);
   await p.locator('[data-rt-help="line"]').click();await p.locator('#rt-line-focus').waitFor();ok((await p.locator('.rt-arrow-caption').innerText())==='Adding negative 7 moves 7 to the left. It goes straight through zero.',`${w}: arrow caption`);
   saved=(await book(p)).rodTray;eq(saved.support[0],{caseId:'cross-down',hint:true,helper:true,line:true},`${w}: help flags saved`);
@@ -60,8 +60,11 @@ try{
   await p.locator('[data-rt-case="take-black"]').click();ok((await p.locator('.rt-contrast').innerText()).includes('Same numbers, one sign changed.'),`${w}: contrast caption`);eq(await trayText(p),'The tray is empty.',`${w}: each case has its own tray`);
   await act(p,'addRed').click();ok(await act(p,'takeBlack').isDisabled(),`${w}: no automatic pairs`);for(let i=0;i<3;i++)await act(p,'addPair').click();for(let i=0;i<3;i++)await act(p,'takeBlack').click();eq(await trayText(p),'4 red rods, 0 black rods.',`${w}: 1 − (−3) on the tray`);
   // Teach card: saved before its steps show.
-  await p.locator('[data-rt-teach="T3"] > summary').click();await p.locator('#rt-teach-T3').waitFor();eq((await book(p)).rodTray.teaching.T3,true,`${w}: teach exposure saved first`);eq(await p.locator('#rt-teach-T3 li').count(),1,`${w}: one step at a time`);
+  await p.locator('[data-rt-teach="T3"] > summary').click();await p.locator('#rt-teach-T3').waitFor();eq((await book(p)).rodTray.teaching.T3,true,`${w}: teach exposure saved first`);eq(await p.locator('#rt-teach-T3 li').count(),1,`${w}: one step at a time`);{const t=await p.locator('#rt-teach-T3').ariaSnapshot();ok(t.includes('take away')&&t.includes('negative 2')&&!/−\d/.test(t),`${w}: teach step read with take away and negative`);}
   await p.locator('[data-rt-teach="T3"] > summary').click();eq(await p.locator('[data-rt-teach="T3"]').evaluate(d=>d.open),false,`${w}: closing a teach card closes it`);eq(await p.locator('#rt-teach-T3').count(),0,`${w}: closed card shows no steps`);
+  await p.locator('[data-rt-teach="T1"] > summary').click();await p.locator('#rt-teach-T1').waitFor();await p.locator('[data-rt-teach="T2"] > summary').focus();await p.keyboard.press('Enter');await p.locator('#rt-teach-T2').waitFor();
+  await p.locator('[data-rt-teach="T2"] > summary').focus();await p.keyboard.press('Enter');eq(await p.locator('[data-rt-teach="T2"]').evaluate(d=>d.open),false,`${w}: keyboard closes a teach card`);
+  ok(await p.locator('[data-rt-teach="T2"] > summary').evaluate(e=>e===document.activeElement),`${w}: focus stays on the closed card`);ok(await p.locator('[data-rt-teach="T1"]').evaluate(d=>d.open)&&await p.locator('#rt-teach-T1').count()===1,`${w}: another open card stays open`);
   ok(!(await overflow(p)),`${w}: no overflow after play`);eq(await small(p),[],`${w}: 44 px after play`);
   if(out)await p.screenshot({path:`${out}/rod-tray-${w}.png`,fullPage:true});
   await p.addStyleTag({content:'html{font-size:150%}'});ok(!(await overflow(p)),`${w}: 150% root font has no overflow`);

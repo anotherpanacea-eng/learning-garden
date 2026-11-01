@@ -55,11 +55,13 @@ function work(v,u){
  const ladder=`<div class="rt-ladder">${o.hint?`<div class="rt-help" id="rt-hint-focus" tabindex="-1"><h3>${esc(K.ladder.hint)}</h3>${p(c.hint)}</div>`:''}${o.helper?helperPanel(v,u,c):''}${o.line?numberLine(c):''}<div class="rt-actions">${o.hint?'':btn(K.ladder.hint,'data-rt-help="hint"')}${!o.helper&&helpOpen.hint?btn(K.ladder.helper,'data-rt-help="helper"'):''}${!o.line&&helpOpen.helper?btn(K.ladder.line,'data-rt-help="line"'):''}</div></div>`;
  return `${head}<div class="rt-work"><div class="rt-left">${trayPicture(t)}${paired}${controls}</div><div class="rt-right">${guided}${answer}${feedback(v,c,view)}</div></div>${ladder}`;
 }
+// The legend names each sign; screen readers hear the sign's name.
+const legendText=t=>esc(t).replace(/\((−|\+)\)/g,(m,g)=>hid(m,`(the ${g==='+'?'plus':'minus'} sign)`));
 export function rodTrayPage(state,explorerId=''){
  const v=core.readRodTray(state),u=visit(state,explorerId);
  const top=`<h1 id="rt-heading" tabindex="-1">${esc(K.title)}</h1>${p(K.reason,' class="rt-reason"')}<p id="rt-status" class="rt-status${u.notice?'':' sr-only'}" role="status" tabindex="-1">${esc(u.notice)}</p>`;
  if(v.status!=='ready'&&v.status!=='missing')return `<div class="rt-page" data-rod-tray-view data-rt-closed>${top}${p(v.status==='unsupported'?K.unknownVersion:K.unreadable,' class="rt-notice"')}<p><a href="#notes">Grown-up notes</a></p></div>`;
- const legend=`<p class="rt-model">${esc(K.model)}</p><ul class="rt-legend"><li><span class="rt-rod rt-red" aria-hidden="true">+</span>${esc(K.legendRed)}</li><li><span class="rt-rod rt-black" aria-hidden="true">−</span>${esc(K.legendBlack)}</li></ul>`;
+ const legend=`<p class="rt-model">${esc(K.model)}</p><ul class="rt-legend"><li><span class="rt-rod rt-red" aria-hidden="true">+</span>${legendText(K.legendRed)}</li><li><span class="rt-rod rt-black" aria-hidden="true">−</span>${legendText(K.legendBlack)}</li></ul>`;
  return `<div class="rt-page" data-rod-tray-view>${top}<section class="rt-bench">${work(v,u)}${legend}</section>${caseButtons(v,u)}${teachCards(v,u)}<aside class="rt-offscreen"><p class="rt-label">with a grown-up</p>${p(K.offScreen)}</aside></div>`;
 }
 const flag=x=>x===true?'yes':x===false?'no':'unknown';
