@@ -84,3 +84,7 @@
 @media(max-width:680px){.wrt-work{grid-template-columns:1fr;gap:8px;padding:9px}.wrt-prop{display:flex;align-items:center;gap:8px}.wrt-prop .wrt-picture,.wrt-prop .wrs-picture{width:38%;max-height:100px;flex:none}.wrt-prop figcaption{font-size:1rem;padding:0}.wrt-mat{padding:8px}.wrt-map{max-width:300px}.wrt-words{gap:6px}.wrt-words button{min-width:64px;padding:7px}.wrt-pair{gap:8px;padding:8px}.wrt-pair .wrt-model figcaption{font-size:1rem}.wrt-room .wr-header>div{flex-basis:160px}}
 @media(max-width:380px){.wrt-pair{grid-template-columns:1fr}.wrt-pair .wrt-map{max-width:240px}.wrt-counter-actions button{flex-basis:100px}}
 .wrt-grownups>summary{font-size:1rem}
+
+/* Final-e set uses the same work mat; crossing paths do not form a junction. */
+.wrt-sets{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.wrt-sets button{flex:1 1 120px}.wrt-sets button[aria-pressed=true]{background:#183430;color:#fffdf3}.wrt-crossing-gap{fill:none;stroke:#fffdf3;stroke-width:9}.wrt-note{padding:8px 12px;border:2px solid #8eb7a3;background:#fffdf3}.wrt-note p,.wrt-note>summary{font-size:1rem}.wrt-prop>.wr-picture{width:100%;max-height:190px}
+@media(max-width:680px){.wrt-prop>.wr-picture{width:38%;max-height:100px;flex:none}}
