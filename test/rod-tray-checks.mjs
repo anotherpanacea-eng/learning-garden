@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {rodTraySource as S,ROD_COPY as K} from '../dist/rod-tray-content.mjs';
 import * as R from '../dist/rod-tray-core.mjs';
-import {rodTrayPage,rodTrayNotes,resetRodTrayView,rodSentenceSpoken,spokenText,trayText} from '../dist/rod-tray-ui.mjs';
+import {rodTrayPage,rodTrayNotes,resetRodTrayView,rodSentenceSpoken,spokenText,trayText,say} from '../dist/rod-tray-ui.mjs';
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;};
 const yes=()=>true,C=Object.fromEntries(S.cases.map(c=>[c.id,c]));
 const tray=(state,id)=>R.rodCaseView(state,id).draft;
@@ -95,12 +95,16 @@ for(const gate of [()=>false,()=>{throw Error('x');},undefined]){const s={},b=st
  const t={};act(t,'cross-down','answerUp');const tb=structuredClone(t);eq(R.rodCheck(t,'cross-down',gate).code,'report-safety');eq(t,tb);}
 {const s={};act(s,'cross-down','addBlack',2);act(s,'cross-down','answerDown');R.rodCheck(s,'cross-down',yes);const b=structuredClone(s);R.readRodTray(s);rodTrayNotes(s);resetRodTrayView();rodTrayPage(s,'pure');eq(s,b,'view and Notes write nothing');}
 {const s={};resetRodTrayView();const html=rodTrayPage(s,'fresh');ok(!Object.hasOwn(s,'rodTray'),'opening writes nothing');eq(rodTrayNotes(s),'','no Notes before any work');
- ok(html.includes('4 + (−7)')&&html.includes('aria-label="4 plus negative 7"'),'sentence drawn and read aloud');for(const t of Object.values(K.buttons))ok(html.includes(t),'control: '+t);ok(html.includes(K.contrast),'contrast caption');
+ ok(html.includes('4 + (−7)')&&html.includes('<span class="sr-only">4 plus negative 7</span>'),'sentence drawn and read aloud');for(const t of Object.values(K.buttons))ok(html.includes(t),'control: '+t);ok(html.includes(K.contrast),'contrast caption');
  eq([...html.matchAll(/data-rt-case="([^"]+)"/g)].map(m=>m[1]),['cross-down','two-below','pay-off','take-black','take-red','remove-charge'],'all six open');ok(/data-rt-check[^>]*disabled/.test(html),'Check waits for an answer');}
+// Screen readers hear "take away" for the operation and "negative" for a value, money included.
+{const heard=t=>say(t).replace(/<span aria-hidden="true">[^<]*<\/span>/g,'').replace(/<[^>]+>/g,'');
+ eq(heard('1 − (−3) = 4.'),'1 take away (negative 3) = 4.');eq(heard('The account shows −$2.'),'The account shows negative 2 dollars.');eq(heard('4 + (−7) = −3.'),'4 + (negative 7) = negative 3.');
+ const s={};resetRodTrayView();const html=rodTrayPage(s,'heard');ok(!/>[^<]*−\d/.test(html.replace(/<span aria-hidden="true">[^<]*<\/span>/g,'').replace(/<[^>]*aria-hidden="true"[^>]*>[\s\S]*?<\/(p|span)>/g,'')),'no bare negative number left for a screen reader');}
 // Copy: the companion's lines with a true minus sign and no em-dash.
 {const companion=readFileSync(new URL('../docs/content/344-rod-tray-text.md',import.meta.url),'utf8').replace(/[“”]/g,'"').replace(/[‘’]/g,"'");
  const strings=[];const walk=v=>{if(typeof v==='string')strings.push(v);else if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==='object')Object.values(v).forEach(walk);};
  walk(S.cases.map(c=>[c.title,c.prompt,c.guided,c.hint,c.explanation,c.feedback.map(f=>f.line)]));walk(Object.values(S.helpers).map(h=>h.steps.map(s=>s.text)));walk(Object.values(S.teach).map(t=>[t.title,t.text,t.steps]));walk(S.lines);
- walk(Object.entries(K).filter(([k,v])=>typeof v==='string'&&!['refused','unreadable','unknownVersion','nextStep'].includes(k)).map(([,v])=>v));walk(K.buttons);walk(K.ladder);
+ walk(Object.entries(K).filter(([k,v])=>typeof v==='string').map(([,v])=>v));walk(K.buttons);walk(K.ladder);
  for(const x of strings){ok(companion.includes(x.replace(/[“”]/g,'"').replace(/[‘’]/g,"'")),'from the companion: '+x);ok(!x.includes('—')&&!/(^|[ (])-\d/.test(x),'true minus, no em-dash: '+x);}}
 console.log(`Rod Tray: ${n} checks passed (6 cases on the tray, ${states} zero-pair states).`);

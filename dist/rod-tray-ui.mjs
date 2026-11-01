@@ -3,12 +3,15 @@ import {ROD_COPY as K} from './rod-tray-content.mjs';
 import * as core from './rod-tray-core.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const json=x=>{try{return JSON.stringify(x,null,2);}catch{return '';}};
-const p=(t,a='')=>`<p${a}>${esc(t)}</p>`;
+// Child text on screen keeps its minus signs; screen readers hear "take away" for the operation and "negative" for a value.
+export const say=t=>esc(t).replace(/ − |−\$(\d+)|−(\d+)/g,(m,d,n)=>d?hid(m,`negative ${d} dollars`):n?hid(m,`negative ${n}`):` ${hid('−','take away')} `);
+const p=(t,a='')=>`<p${a}>${say(t)}</p>`;
 const btn=(t,a='',{primary=false,disabled=false,pressed=null}={})=>`<button type="button" class="${primary?'primary':'secondary'}" ${a}${pressed===null?'':` aria-pressed="${pressed}"`}${disabled?' disabled':''}>${esc(t)}</button>`;
+const hid=(seen,said)=>`<span aria-hidden="true">${seen}</span><span class="sr-only">${said}</span>`;
 // A true minus sign on screen; screen readers hear "negative".
 export const rodNumber=n=>n<0?`−${-n}`:`${n}`;
 export const rodSpoken=n=>n<0?`negative ${-n}`:`${n}`;
-const num=n=>`<span aria-label="${esc(rodSpoken(n))}">${rodNumber(n)}</span>`;
+const num=n=>n<0?hid(rodNumber(n),rodSpoken(n)):`${n}`;
 // The sentence read aloud with the two minus jobs named: "1 take away negative 3".
 export const rodSentenceSpoken=c=>`${rodSpoken(c.start)} ${c.op==='add'?'plus':'take away'} ${rodSpoken(c.operand)}`;
 // A written sentence such as 2 − (−4) read with both minus jobs named.
@@ -29,20 +32,20 @@ function numberLine(c){
  const svg=`<svg class="rt-line" viewBox="0 0 520 70" role="img" aria-label="${esc(`Number line from negative 12 to 12. Start at ${rodSpoken(m.from)}. Arrow to ${rodSpoken(m.to)}.`)}"><line x1="20" y1="${y}" x2="500" y2="${y}" class="rt-axis"/>${ticks.map(n=>`<line x1="${x(n)}" y1="${y-(n%5?4:8)}" x2="${x(n)}" y2="${y+(n%5?4:8)}" class="rt-tick"/>`).join('')}${[-10,-5,0,5,10].map(n=>`<text x="${x(n)}" y="${y+24}" text-anchor="middle">${rodNumber(n)}</text>`).join('')}<circle cx="${x(m.from)}" cy="${y}" r="6" class="rt-start"/><line x1="${x(m.from)}" y1="${y-16}" x2="${x(m.to)+(m.delta>0?-6:6)}" y2="${y-16}" class="rt-arrow"/><path d="M${x(m.to)} ${y-16} l${m.delta>0?-9:9} -6 v12 z" class="rt-head"/></svg>`;
  return `<section class="rt-help rt-numberline" id="rt-line-focus" tabindex="-1"><h3>${esc(K.ladder.line)}</h3>${p(K.lineCaption)}${svg}${p([caption,m.through?K.arrows.throughZero:''].filter(Boolean).join(' '),' class="rt-arrow-caption"')}</section>`;
 }
-function helperPanel(v,u,c){const h=v.source.helpers[c.helper],i=Math.min(u.helperStep,h.steps.length-1),s=h.steps[i];return `<section class="rt-help rt-helper" id="rt-helper-focus" tabindex="-1"><h3>${esc(K.ladder.helper)}: <span aria-label="${esc(spokenText(h.sentence))}">${esc(h.sentence)}</span></h3>${p(K.helperCaption,' class="rt-caption"')}${trayPicture(s,'rt-helper-tray')}<ol start="${i+1}"><li>${esc(s.text)}</li></ol><div class="rt-actions">${btn(K.previous,'data-rt-step="-1"',{disabled:i===0})}${btn(K.next,'data-rt-step="1"',{disabled:i===h.steps.length-1})}${btn(K.backToTray,'data-rt-back')}</div></section>`;}
+function helperPanel(v,u,c){const h=v.source.helpers[c.helper],i=Math.min(u.helperStep,h.steps.length-1),s=h.steps[i];return `<section class="rt-help rt-helper" id="rt-helper-focus" tabindex="-1"><h3>${esc(K.ladder.helper)}: ${hid(esc(h.sentence),esc(spokenText(h.sentence)))}</h3>${p(K.helperCaption,' class="rt-caption"')}${trayPicture(s,'rt-helper-tray')}<ol start="${i+1}"><li>${say(s.text)}</li></ol><div class="rt-actions">${btn(K.previous,'data-rt-step="-1"',{disabled:i===0})}${btn(K.next,'data-rt-step="1"',{disabled:i===h.steps.length-1})}${btn(K.backToTray,'data-rt-back')}</div></section>`;}
 function feedback(v,c,view){const k=view.check;if(!k||!view.draft)return p(K.beforeCheck,' class="rt-before"');const l=k.latest,d=view.draft;if(l.answer!==d.answer||l.red!==d.red||l.black!==d.black)return p(K.beforeCheck,' class="rt-before"');return `<div class="rt-feedback" id="rt-feedback" tabindex="-1">${p(core.rodSavedFeedback(v.source,c,l),' class="rt-said"')}${p(K.tellWhy,' class="rt-why"')}</div>`;}
 function caseButtons(v,u){
  const b=c=>btn(c.title,`data-rt-case="${c.id}"`,{pressed:u.id===c.id});
  const cs=v.source.cases,pair=['take-black','take-red'];
  return `<nav class="rt-cases" aria-label="Rod Tray invitations">${cs.filter(c=>!pair.includes(c.id)).slice(0,3).map(b).join('')}${cs.some(c=>pair.includes(c.id))?`<div class="rt-contrast">${p(K.contrast,' class="rt-caption"')}<div class="rt-pair">${cs.filter(c=>pair.includes(c.id)).map(b).join('')}</div></div>`:''}${cs.filter(c=>!pair.includes(c.id)).slice(3).map(b).join('')}</nav>`;
 }
-function teachCards(v,u){return `<section class="rt-teach-list"><h2>Teach cards</h2>${core.TEACH_IDS.map(k=>{const t=v.source.teach[k],n=u.teach[k]||0;return `<details class="rt-teach" data-rt-teach="${k}"${n?' open':''}><summary>${esc(`${k}. ${t.title}`)}</summary>${n?`${p(t.text)}<p class="rt-label">${esc(K.workedLabel)}</p><ol id="rt-teach-${k}" tabindex="-1">${t.steps.slice(0,n).map(s=>`<li>${esc(s)}</li>`).join('')}</ol>${n<t.steps.length?btn(K.nextStep,`data-rt-teach-next="${k}"`):''}`:''}</details>`;}).join('')}</section>`;}
+function teachCards(v,u){return `<section class="rt-teach-list"><h2>Teach cards</h2>${core.TEACH_IDS.map(k=>{const t=v.source.teach[k],n=u.teach[k]||0;return `<details class="rt-teach" data-rt-teach="${k}"${n?' open':''}><summary>${esc(`${k}. ${t.title}`)}</summary>${n?`${p(t.text)}<p class="rt-label">${esc(K.workedLabel)}</p><ol id="rt-teach-${k}" tabindex="-1">${t.steps.slice(0,n).map(s=>`<li>${say(s)}</li>`).join('')}</ol>${n<t.steps.length?btn(K.nextStep,`data-rt-teach-next="${k}"`):''}`:''}</details>`;}).join('')}</section>`;}
 function work(v,u){
  const view=core.rodCaseView(v,u.id),c=view.case;if(!c)return p(K.unreadable);
  const o=opened(u,c.id),t=view.draft,read=view.draftReadable;
  const operand=c.operand<0?rods(-c.operand,'black'):rods(c.operand,'red');
- const head=`<h2 id="rt-focus" tabindex="-1">${esc(c.title)}</h2>${p(c.prompt)}<p class="rt-sentence" aria-label="${esc(rodSentenceSpoken(c))}"><span aria-hidden="true">${esc(c.sentence)}</span><span class="rt-operand" aria-hidden="true">${operand}</span></p>`;
- const guided=c.guided.length?`<ol class="rt-guided">${c.guided.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`:'';
+ const head=`<h2 id="rt-focus" tabindex="-1">${esc(c.title)}</h2>${p(c.prompt)}<p class="rt-sentence">${hid(esc(c.sentence),esc(rodSentenceSpoken(c)))}<span class="rt-operand" aria-hidden="true">${operand}</span></p>`;
+ const guided=c.guided.length?`<ol class="rt-guided">${c.guided.map(s=>`<li>${say(s)}</li>`).join('')}</ol>`:'';
  if(!read)return `${head}${guided}${p(K.unreadable,' class="rt-notice"')}`;
  const B=K.buttons,full=t.red>=12||t.black>=12,limits=[full?K.full:'',t.red===0&&t.black>0?K.noRed:'',t.black===0&&t.red>0?K.noBlack:''].filter(Boolean);
  const paired=u.paired&&u.paired.id===c.id?`<div class="rt-paired" role="status">${u.paired.n?`<span class="rt-zeros" aria-hidden="true">${Array.from({length:u.paired.n},()=>'<span class="rt-zero">0</span>').join('')}</span>${p(K.paired,' class="rt-motion"')}${p(K.pairedStill(u.paired.n),' class="rt-still"')}`:p(K.noPairs)}</div>`:'';
@@ -78,7 +81,7 @@ export function bindRodTray(state,{notebook=()=>state,explorerId=()=>'',isActive
  const u=visit(state,explorerId()),bound=explorerId();
  const live=el=>el.isConnected&&host.isConnected&&host.contains(el)&&!el.disabled&&notebook()===state&&explorerId()===bound&&isActive()&&location.hash==='#desk/rods'&&visits.get(state)===u;
  const usable=el=>{if(!live(el))return false;const scope=el.matches('summary')?el.parentElement?.parentElement:el;return !scope?.closest('details:not([open])');};
- const redraw=(target,write=false)=>{if(write)try{save?.();}catch{}stopSpeech?.();render?.();const next=document.querySelector('[data-rod-tray-view]');if(!next)return;let el=next.querySelector(target);if(!el||el.disabled)el=next.querySelector('#rt-tray-text')||next.querySelector('#rt-focus');for(let a=el?.parentElement;a&&a!==next;a=a.parentElement)if(a.tagName==='DETAILS')a.open=true;if(focus&&el?.id)focus('#'+el.id);else el?.focus();};
+ const redraw=(target,write=false)=>{if(write)try{save?.();}catch{}stopSpeech?.();render?.();const next=document.querySelector('[data-rod-tray-view]');if(!next)return;let el=next.querySelector(target);if(!el||el.disabled)el=next.querySelector('#rt-tray-text')||next.querySelector('#rt-focus');for(let a=el?.matches('summary')?el.parentElement?.parentElement:el?.parentElement;a&&a!==next;a=a.parentElement)if(a.tagName==='DETAILS')a.open=true;if(focus&&el?.id)focus('#'+el.id);else el?.focus();};
  const refuse=r=>{u.notice=r.code==='report-safety'?K.refused:K.unreadable;redraw('#rt-status');};
  const on=(sel,fn)=>host.querySelectorAll(sel).forEach(el=>el.addEventListener('click',e=>{if(!usable(el)){e.preventDefault();e.stopImmediatePropagation();return;}fn(el,e);}));
  on('[data-rt-case]',el=>{u.id=el.dataset.rtCase;u.paired=null;u.helperStep=0;u.notice='';redraw('#rt-focus');});
