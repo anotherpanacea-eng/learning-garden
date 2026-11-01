@@ -108,9 +108,10 @@ export function pipsSpellingReference(state,slotId){
 // Pending carries/turns are memory only, never Web Storage or notebook fields.
 let sessions=new WeakMap();
 export function resetSpellingMessageView(){sessions=new WeakMap();}
-export function spellingSession(state,explorerId){
+export function spellingSession(state,explorerId,caseId){
  let s=sessions.get(state);
- if(!s||s.explorerId!==explorerId){s={explorerId,pending:null,turn:'plan',typed:false,step:0,dirty:false,notice:''};sessions.set(state,s);}
+ if(!s||s.explorerId!==explorerId){s={explorerId,pending:null,caseId:null,turn:'plan',typed:false,step:0,dirty:false,notice:''};sessions.set(state,s);}
+ if(caseId!==undefined&&s.caseId!==caseId){Object.assign(s,{caseId,turn:'plan',typed:false,step:0,teachOpen:false,choosing:false,dirty:false,notice:''});}
  return s;
 }
 export function stageSpellingReference(state,explorerId,reference){

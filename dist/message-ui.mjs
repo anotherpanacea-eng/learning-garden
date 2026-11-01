@@ -34,7 +34,8 @@ function help(c,w){return `<details class="msg-help" ${w.support.help||w.support
 function reading(w){return `<details class="msg-reading grownup-note"><summary>For grown-ups</summary><p>How are we reading? Optional. Choose together. Listening and help stay in the notebook separately.</p><div class="msg-actions" role="group" aria-label="Reading report">${[['unknown','Leave unreported'],['self','I read the words myself'],['together','We read together']].map(([id,label])=>`<button type="button" class="secondary" data-msg-reading="${id}" aria-pressed="${w.reading===id}">${label}</button>`).join('')}</div></details>`;}
 function inspect(c,w){return `<h2 id="msg-title" tabindex="-1">${esc(c.question)}</h2><p>${c.originalActionable?'The note gives an action. This reader needs more context to understand the plan.':'The note leaves something open. Two readers could picture different things.'}</p><h3>${['pair','reader'].includes(c.kind)?'Which clue answers the whole question?':'Which scene clue helps this reader?'}</h3><div class="msg-choices" role="group" aria-label="Choose a scene clue">${c.clues.map(clue=>`<button type="button" class="secondary" data-msg-clue="${clue.id}" aria-pressed="${w.clueId===clue.id}">${esc(clue.text)}</button>`).join('')}</div><p class="tiny">You can pick a different clue.</p><div class="msg-actions">${button('revise','Try clearer words')}</div>`;}
 function writingNote(){return '<p id="msg-writing-note" class="tiny">Optional. A person reads these words with you. Use pretend names if you plan to share a download.</p>';}
-function originalField(w,withNote=true){return `<label for="msg-original">My message for a person to read</label><textarea id="msg-original" data-msg-text="original" maxlength="600" rows="3" aria-describedby="msg-writing-note">${esc(w.original)}</textarea>${withNote?writingNote():''}`;}
+function originalField(w,withNote=true){return `<label for="msg-original">My message for a person to read</label><textarea id="msg-original" data-msg-text="original" maxlength="600" rows="3" aria-describedby="msg-writing-note">
+${esc(w.original)}</textarea>${withNote?writingNote():''}`;}
 function originalEditor(w){return `<details class="msg-own-words" ${w.original?'open':''}><summary>Or write a message in my own words</summary>${originalField(w)}${button('human','Read my words together')}</details>`;}
 function feedback(c,w){if(!w.feedback)return '';const card=c.cards.find(v=>v.id===w.feedback.cardId),clue=c.clues.find(v=>v.id===w.feedback.clueId);return `<section class="msg-feedback" id="msg-feedback" tabindex="-1" role="status"><h3>What that sentence tells the reader</h3><p>Note card: “${esc(card.text)}”</p><p>${esc(card.outcome)}</p><p>${esc(card.reply)}</p><hr><p><strong>The scene clue:</strong> ${clue?esc(clue.feedback):'No clue chosen. You can go back and look for one.'}</p></section>`;}
 function revise(c,w,place){return `<h2 id="msg-title" tabindex="-1">${c.kind==='reader'?'Help this reader understand the plan':'Give the reader the missing detail'}</h2><p>${esc(c.question)}</p><div class="msg-choices" role="group" aria-label="Pick a note card">${c.cards.map(card=>`<button type="button" class="secondary" data-msg-card="${card.id}" aria-pressed="${w.cardId===card.id}">${esc(card.text)}</button>`).join('')}</div><p id="msg-selected">${cardFor(c,w)?`The puppet will follow this card: “${esc(cardFor(c,w).text)}”`:'Pick a note card to try it.'}</p><div class="msg-actions">${button('test','Try this card',w.cardId?'':'disabled')}${button('inspect','Look at the clues again')}</div>${feedback(c,w)}${originalEditor(w)}<div class="msg-actions">${button('play','Compare before and after',w.cardId?'':'disabled')}${place==='loft'?button('story','Give the puppet a reason and reply'):''}${button('carry',place==='post'?'Take this note to the reader’s stage':'Bring this note to the Post Office')}</div>`;}
@@ -58,7 +59,7 @@ function spellingChooser(state,session,carrying){
  }).join('')}</div><div class="msg-actions"><a class="secondary" href="${carrying&&ref?Spelling.spellingReferenceBack(ref):'#post/messages'}">${carrying?'Back to word study':'Back to the note cards'}</a></div></section></div>`;
 }
 function spellingPage(state,detail,options){
- const session=Spelling.spellingSession(state,options.owner??''),x=currentMessage(state,'post');
+ const x=currentMessage(state,'post'),session=Spelling.spellingSession(state,options.owner??'',x?.case.id??null);
  if(detail==='carry'||session.choosing||!x||!spellingCaseIds.includes(x.case.id))return spellingChooser(state,session,detail==='carry');
  const c=x.case,w=x.work,v=Spelling.spellingView(state,c.id),frozen=v.source,unreadable=v.status==='unreadable';
  const supplied=frozen??(v.status==='missing'?{reader:spellingReaders[c.id],purpose:c.request,question:c.question,checkQuestion:ST.question,teaching:{text:ST.teaching,steps:ST.steps},contrast:ST.contrast}:null);
@@ -83,7 +84,7 @@ export function bindMessages(state,place,ctx){
  messageController?.abort();messageController=new AbortController();pendingMessageNavigation=()=>false;
  const guarded=place==='post'&&typeof ctx.canExport==='function',owner=ctx.explorerId?.()??'',pageRoute=typeof location==='undefined'?'':location.hash;
  const root=document.querySelector('.msg-workspace')||document.querySelector('.msg-chooser')||document.querySelector('#msg-title')?.closest?.('section');
- const ownMode=!!root?.hasAttribute?.('data-own-workspace'),session=Spelling.spellingSession(state,owner),options={canExport:ctx.canExport};let ownedMessages=state.messages;
+ const ownMode=!!root?.hasAttribute?.('data-own-workspace'),session=Spelling.spellingSession(state,owner,currentMessage(state,'post')?.case.id??null),options={canExport:ctx.canExport};let ownedMessages=state.messages;
  const identity=()=>!guarded||(!ctx.notebook||ctx.notebook()===state)&&(!ctx.isActive||ctx.isActive())&&(ctx.explorerId?.()??'')===owner;
  const owned=()=>identity()&&(!guarded||root?.isConnected&&state.messages===ownedMessages);
  const live=el=>!guarded||owned()&&location.hash===pageRoute&&el.isConnected&&root.contains(el)&&!el.disabled&&!el.closest('details:not([open]),[hidden]')&&el.getClientRects().length>0&&getComputedStyle(el).visibility!=='hidden'&&!document.querySelector('dialog[open]');
@@ -165,11 +166,13 @@ export function bindMessages(state,place,ctx){
   if(a.startsWith('turn-')){session.turn=a.slice(5);session.notice='';refresh(session.typed&&['write','revise'].includes(session.turn)?'#msg-original':'#msg-title',false);return;}
   if(a==='keep'){accepted(Spelling.keepSpellingMessage(state,id,options),ST.kept,'[data-own-action="keep"]');return;}
   if(a.startsWith('restore-')){const r=Spelling.restoreSpellingMessage(state,id,a.slice(8),options);if(r.ok){session.typed=true;session.turn='revise';}accepted(r,'','#msg-original');return;}
-  if(a==='step-next'||a==='step-back'){session.step=Math.max(0,session.step+(a==='step-next'?1:-1));session.teachOpen=true;refresh(`[data-own-action="${a}"]`,false);}
+  if(a==='step-next'||a==='step-back'){let changed=false;if(v.status==='ready'){const r=Spelling.noteSpellingHelp(state,id,'teaching',options);if(!r.ok){status(ST.refused);return;}changed=r.changed!==false;}session.step=Math.max(0,session.step+(a==='step-next'?1:-1));session.teachOpen=true;refresh(`[data-own-action="${a}"]`,changed);}
  });
  root.querySelector('[data-own-teach]')?.addEventListener('toggle',event=>{
   const d=event.currentTarget;if(!owned()||location.hash!==pageRoute||!d.isConnected||!root.contains(d))return;
+  const wasOpen=!!session.teachOpen;
   if(!d.open){session.teachOpen=false;return;}
+  if(wasOpen)return; // An already-open panel inserted by a redraw is not a new exposure.
   if(!live(d))return;
   if(session.dirty){d.open=false;status(ST.dirty);return;}
   session.teachOpen=d.open;if(!d.open)return;
