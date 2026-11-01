@@ -32,7 +32,8 @@ export const practiceOracle=[['C1',['prefering','preferring','preffering'],'b'],
 const matchOracle={science:'not-true',seize:'true',rhyme:'not-true'};
 function fillCase(s,id,o=light){const r=s.beatBench.records[id];if(r.source.kind==='choice')assert.ok(c.answerBeatCase(s,id,r.source.key,null,o).ok);else for(const [part,choice]of Object.entries(matchOracle))assert.ok(c.answerBeatCase(s,id,choice,part,o).ok);}
 export function fullBeatBenchNotebook(input){
- const s=input??fullCrateSignsNotebook();
+ // Fixture setup uses the accepting gate; the maximum report is really imported below.
+ const s=input??fullCrateSignsNotebook(),options=light;
  for(const id of [...ferOracle.map(x=>x[0]),...meaningOracle.map(x=>x[0]),...practiceOracle.map(x=>x[0]),'C5']){
   assert.ok(c.openBeatCase(s,id,options).ok);assert.ok(c.keepBeatCase(s,id,options).ok);
   for(const flag of ['hint','example'])assert.ok(c.useBeatHelp(s,id,flag,options).ok);
