@@ -40,13 +40,13 @@ export function evaluateLife(source,input){
  const neighborMatch=input.neighbor===null||input.neighbor==='unsure'?null:input.neighbor===source.expected.neighbor;
  const meaningMatch=neighborMatch===true&&meaning(input.meaning)?input.meaning===source.expected.meaning:null;
  let feedback;
- if(neighborMatch===null)feedback='This blank or uncertain neighbor stays unobserved. Our stage pictures and supplied words are open for another look. '+(input.meaning===null?'No meaning has been chosen yet.':'The meaning choice is kept but not assessed yet.');
+ if(neighborMatch===null)feedback='This blank or uncertain neighbor stays unobserved. Our stage pictures and words are open for another look. '+(input.meaning===null?'No meaning has been chosen yet.':'The meaning choice is kept but not assessed yet.');
  else if(!neighborMatch)feedback='This proposed pair is not the chart neighbor requested by this question. The meaning response is kept but is not assessed for a different pair. Look again, or revise either choice.';
  else{
-  feedback='That neighbor fits this supplied chart question. ';
+  feedback='That neighbor fits this chart question. ';
   if(source.expected.meaning==='offspring')feedback+='This forward link crosses generations: adult females can lay eggs that begin offspring. The adult does not turn back into an egg. ';
   else feedback+='The correct forward link can show the same individual growing or changing stage. ';
-  feedback+=meaningMatch===null?'No definite meaning response is recorded yet.':meaningMatch?'The selected meaning fits this supplied link.':'The selected meaning differs from this supplied link; it can be revised.';
+  feedback+=meaningMatch===null?'No definite meaning response is recorded yet.':meaningMatch?'The selected meaning fits this chart’s link.':'The selected meaning differs from this chart’s link; it can be revised.';
  }
  return {source:structuredClone(source),input:{neighbor:input.neighbor,meaning:input.meaning,support:[...input.support]},neighborMatch,meaningMatch,feedback};
 }

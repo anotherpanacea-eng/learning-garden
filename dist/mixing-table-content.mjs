@@ -442,7 +442,7 @@ export const mixingTableCopy = {
   "Grouping limit": "This view makes whole sample groups. Leftovers are kept, not rounded or removed.",
   "Table heading": "Same recipe, several amounts",
   "Column labels": "{first ingredient} scoops** · **{second ingredient} scoops** · **Recipe row",
-  "Table footer": "The supplied rows repeat the whole recipe. Your pot's row shows what you made; it may differ.",
+  "Table footer": "The printed rows repeat the whole recipe. Your pot's row shows what you made; it may differ.",
   "Current-pot ratio line, when its first ingredient is positive": "{second ingredient} divided by {first ingredient}: {b}/{a}. This row describes your pot.",
   "For a current pot with first ingredient0": "Division by zero is not defined. Use the ordered counts and the picture instead.",
   "Together explanation": "Choose Working together if a grown-up is helping with this invitation. It is your report, not a test.",

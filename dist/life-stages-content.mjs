@@ -15,7 +15,7 @@ const links=[
  {from:'adult',to:'egg',meaning:'offspring',text:'Adult females can lay eggs; offspring begin another generation.'},
 ];
 const overview='Our pictures show a possible life story. Egg, caterpillar, chrysalis and adult are different stages. The caterpillar, chrysalis and emerging adult can be the same individual. An adult female’s eggs begin offspring: another generation.';
-const help=overview+' Looking back through a chart is not growing backward. For a before-question, put the earlier chosen stage before our reference picture in the forward biological link. Offspring are a new generation; the adult does not turn into an egg. Our original diagrams and supplied words are not observations of a tracked animal. This is the small white, also called cabbage white, Pieris rapae; other butterflies can have other host plants.';
+const help=overview+' Looking back through a chart is not growing backward. For a before-question, put the earlier chosen stage before our reference picture in the forward biological link. Offspring are a new generation; the adult does not turn into an egg. Our original diagrams and words are not observations of a tracked animal. This is the small white, also called cabbage white, Pieris rapae; other butterflies can have other host plants.';
 const rows=[
  ['egg-next','After the egg','Which stage comes next after the egg on this chart?','egg','next','larva','same',0],
  ['larva-next','After the caterpillar','Which stage comes next after the caterpillar on this chart?','larva','next','pupa','same',3],

@@ -37,7 +37,7 @@ export function addClockSupport(state,code){const r=active(state);if(!r||!codes.
 export function evaluateClock(source,proposed){
  if(!validClockSource(source)||!input(source,proposed))return null;
  const readingMatch=proposed.reading===null||proposed.reading==='unsure'?null:proposed.reading===source.preparationSlot,settingMatch=proposed.settingChoice!=='clock'?null:proposed.position===source.departureSlot;
- const read=readingLabel(source,proposed.reading),model=clockLabel(proposed.position),readPicture=source.pictureText,modelPicture=source.drawingVersion===1?clockPictureText(proposed.position):`Supplied numeric model position: ${model}. This saved drawing version is unavailable.`;
+ const read=readingLabel(source,proposed.reading),model=clockLabel(proposed.position),readPicture=source.pictureText,modelPicture=source.drawingVersion===1?clockPictureText(proposed.position):`Model clock position: ${model}. This saved drawing version is unavailable.`;
  let feedback=readingMatch===null?'No definite reading was proposed. ':readingMatch?'The reading fits the fixed preparation clock. ':'The reading differs from the fixed preparation clock and can be revised. ';
  feedback+=`The preparation clock shows ${readingLabel(source,source.preparationSlot)}. ${readPicture} `;
  feedback+=settingMatch===null?'No definite model departure was proposed. ':settingMatch?'The proposed model fits the requested departure. ':'The proposed model differs from the requested departure and can be revised. ';
