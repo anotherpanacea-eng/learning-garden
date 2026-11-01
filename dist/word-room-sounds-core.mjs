@@ -89,7 +89,7 @@ export function chooseSoundCase(book,id,mode,options){
     if(!code(id)||!modes.includes(mode))return fail('selection');
     if(own(r.records,id)){
       const work=soundRecord(r.records[id],id);if(!work)return fail('unavailable');
-      if(work.mode!==mode){work.mode=mode;work.page=mode==='listen'?'setup':'work';if(mode==='read')work.help.word=true;}
+      work.mode=mode;work.page=mode==='listen'?'setup':'work';if(mode==='read')work.help.word=true;
     }else{
       const source=own(r.source.cases,id)&&soundCaseSource(r.source.cases[id],id);if(!source)return fail('unavailable');
       r.records[id]={source:clone(source),mode,slots:[null,null,null],place:0,page:mode==='listen'?'setup':'work',frame:0,help:emptyHelp()};

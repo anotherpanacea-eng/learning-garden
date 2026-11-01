@@ -64,3 +64,7 @@
  .wrs-room .wrs-instruction{margin-bottom:8px}.wrs-icon{gap:6px;padding:8px 0}.wrs-icon>span{width:35px;min-height:44px}
  .wrs-message .wrs-message-picture{max-height:190px}
 }
+
+.wrs-room .wrs-kept-feedback{padding:10px 12px;border-left:5px solid #397958;background:#fffdf3;font-size:1rem;margin:8px 0 12px;scroll-margin-top:180px}.wrs-kept-feedback strong{display:inline-block;overflow-wrap:anywhere}
+
+.wrs-icon.wrs-show-label{border:2px dashed #8f7237;border-radius:0 12px 12px 0;background:#fffdf3;padding:10px;margin-bottom:4px}

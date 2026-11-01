@@ -48,14 +48,15 @@ for(const [id,,right]of expected){
  ok(action('hidePartner').ok);eq(current().page,'work');
  ok(action('base').ok);eq(current().slots,current().source.left.letters);ok(current().help.base);
  const nonempty=copy(b);eq(action('base').ok,false);eq(b,nonempty,'base never erases nonempty work');
- ok(action('clear').ok);ok(action('keep').ok);eq(current().firstKept.slots,[null,null,null]);
+ ok(action('clear').ok);ok(action('compare').ok);eq(current().comparison.result,'incomplete');ok(action('back').ok);ok(action('keep').ok);eq(current().firstKept.slots,[null,null,null]);eq(current().firstKept.comparison.result,'incomplete');
  for(const letter of right)ok(action('letter',letter).ok);
  ok(action('compare').ok);eq(core.currentComparison(current()).result,'match');ok(current().help.word);
  ok(action('back').ok);ok(action('keep').ok);eq(current().firstKept.slots,[null,null,null]);eq(current().latestKept.slots,[...right]);
  ok(action('restoreFirst').ok);eq(current().slots,[null,null,null]);ok(current().help.word,'restoring never erases disclosed help');
  ok(action('restoreLatest').ok);eq(current().slots,[...right]);
- ok(action('contrast').ok);eq(current().page,'contrast');ok(action('next').ok);eq(current().frame,1);
+ ok(action('contrast').ok);eq(current().page,'contrast');ok(action('prev').ok);eq(current().frame,0);ok(action('next').ok);eq(current().frame,1);
  const restored=JSON.parse(JSON.stringify(b));eq(core.soundMessagesView(restored).current.record.page,'contrast');eq(core.soundMessagesView(restored).current.record.frame,1);
+ for(let i=0;i<4;i++)ok(action('next').ok);eq(current().frame,2,'manual steps clamp at their final frame');
  ok(action('back').ok);ok(action('example').ok);eq(current().page,'example');ok(current().help.example);
  ok(action('back').ok);ok(core.chooseSoundCase(b,id,'read',yes).ok);eq(current().page,'work');ok(current().help.word);
  ok(action('picture').ok);ok(action('build').ok);eq(current().mode,'listen');ok(current().help.picture);
@@ -74,6 +75,18 @@ b.wordRoom.soundMessages.records.end={opaque:['retain',null]};
 ok(core.chooseSoundCase(b,'middle','read',yes).ok,'bad sibling does not block another case');
 eq(b.wordRoom.soundMessages.records.end,{opaque:['retain',null]});
 const beforeBad=copy(b);eq(core.chooseSoundCase(b,'end','read',yes).ok,false);eq(b,beforeBad,'bad record never replaced from offered source');
+const changedSource=copy(oldRoot),legacyComparison=copy(changedSource.wordRoom.soundMessages.records.show.comparison);
+changedSource.wordRoom.soundMessages.source.cases.show.right.label='catalogue-edit';
+ok(core.actSoundCase(changedSource,'clear',null,yes).ok);
+eq(changedSource.wordRoom.soundMessages.records.show.comparison,legacyComparison,'editing after offered-source change does not regrade or drop saved comparison');
+const ownWork=changedSource.wordRoom.soundMessages.records.show;ownWork.source.right.label='man';ownWork.source.right.letters=[...'man'];
+ok(core.soundRecord(ownWork,'show'));eq(core.currentComparison(ownWork),null,'old comparison context stays historical after own target changes');
+ok(core.actSoundCase(changedSource,'word',null,yes).ok);eq(changedSource.wordRoom.soundMessages.records.show.comparison,legacyComparison);
+for(const broken of[null,{version:99,earlier:['raw']},{version:1,source:null}]){
+ const parent=freshState();parent.wordRoom=broken;const before=copy(parent);eq(core.enterSoundMessages(parent,yes).error,'unavailable');eq(parent,before,'malformed parent never replaced');
+}
+const handoff=copy(oldRoot);ok(core.chooseSoundCase(handoff,'show','listen',yes).ok);eq(handoff.wordRoom.soundMessages.records.show.page,'setup');
+ok(core.actSoundCase(handoff,'partner',null,yes).ok);ok(core.chooseSoundCase(handoff,'show','listen',yes).ok);eq(handoff.wordRoom.soundMessages.records.show.page,'setup','same-mode choice restores partner hand-off');
 for(const cb of[undefined,()=>false,()=>1,()=>({}),()=>{throw new Error('no');}]){
  const candidate=copy(oldRoot),before=copy(candidate);
  eq(core.actSoundCase(candidate,'word',null,{canExport:cb}).ok,false);eq(candidate,before);
@@ -104,10 +117,14 @@ for(const[id,,target]of expected){
  ok(!new RegExp(`\\b${target}\\b`).test(html),'setup omits the target');
  core.actSoundCase(ui,'partner',null,yes);ok(render().includes(`>${target}</p>`),'explicit partner card shows word');
  core.actSoundCase(ui,'hidePartner',null,yes);html=render();ok(!new RegExp(`\\b${target}\\b`).test(html),'partner text removed, not hidden');
+ core.actSoundCase(ui,'keep',null,yes);ok(render().includes('id="wrs-kept-feedback"'),'kept acknowledgment derives from saved material');
  core.actSoundCase(ui,'example',null,yes);ok(!new RegExp(`\\b${target}\\b`).test(render()),'different worked example does not leak a target');
+ ok(render().includes('id="wrs-kept-feedback"'),'kept acknowledgment survives help paging');
  core.actSoundCase(ui,'back',null,yes);core.actSoundCase(ui,'picture',null,yes);
  ok(render().includes(`>${target}</p>`)&&ui.wordRoom.soundMessages.records[id].help.word,'pictured label records its word disclosure');
  ok(wordRoomNotes(ui).includes('Sound-changing prop labels'),'ordinary Notes owns the summary');
  const raw=copy(ui);wordRoomPage(ui,'synthetic-owner');wordRoomNotes(ui);eq(ui,raw,'render and Notes are pure');
+ const badView=copy(ui);badView.wordRoom.soundMessages.records[id].page='contrast';badView.wordRoom.soundMessages.records[id].help.word=false;
+ const beforeBadView=copy(badView);ok(!new RegExp(`\\b${target}\\b`).test(wordRoomPage(badView,'synthetic-owner')),'malformed undisclosed panel does not reveal target');eq(badView,beforeBadView,'render does not rewrite imported flags');
 }
 console.log(`Sound-changing Prop Box: ${n} content/core/render checks passed; native browser checks remain separate.`);
