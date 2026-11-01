@@ -82,7 +82,7 @@ Each line is one frame, numbered0–4. The selected group's indices determine hi
 ## Three comparisons
 
 | Button | Heading | Pair / group indices highlighted | Exact explanation |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | Compare cap and cape | cap and cape | cap/cape; `{cap:1,cape:1}` | In our model, cap and cape each have three sounds. The word cape has one more letter. The vowel changes; first and last sounds stay. |
 | Compare kit and kite | kit and kite | kit/kite; `{kit:1,kite:1}` | In our model, kit and kite each have three sounds. The word kite has one more letter. The vowel changes; first and last sounds stay. |
 | Compare pin and pine | pin and pine | pin/pine; `{pin:1,pine:1}` | In our model, pin and pine each have three sounds. The word pine has one more letter. The vowel changes; first and last sounds stay. |
