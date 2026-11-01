@@ -9,7 +9,7 @@ export const scalePurpose='Our purpose: change the drawing, keep the route.';
 export const scaleDisclosure='Invented distances, not a real journey. These drawings cannot predict real travel. Screen edges are not measured centimeters.';
 export const scaleCaption='Count line intervals along the route, not dots or filled squares.';
 export const scaleComparison='The 4 m key uses fewer map edges. Both drawings still represent 8 m east, then 4 m north: the same 12 m route.';
-export const scaleRefusal='This picture needs room in your notes to mark its supplied number facts. Nothing was changed. Open Grown-up notes to download your work, or return to the map table.';
+export const scaleRefusal='This picture needs room in your notes to mark its given number facts. Nothing was changed. Open Grown-up notes to download your work, or return to the map table.';
 export const initialScale=()=>({key:2,compare:false,undo:null});
 export function changeScale(view,action,value){
  if(action==='undo')return view.undo?{...view.undo,undo:null}:null;

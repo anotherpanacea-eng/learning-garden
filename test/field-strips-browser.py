@@ -195,7 +195,7 @@ def journey(browser,base,f,width,height):
     p.locator('[data-field-start]').focus();p.keyboard.press('Enter')
     ok(owner(p)['drafts']==[] and owner(p)['observations']==[],'Open only freezes source')
     ok({k:v for k,v in book(p).items() if k!='fieldStrips'}==before,'Open leaves all sibling roots unchanged')
-    ok(p.locator('.field-measure').get_by_text('The equal cuts are supplied; the selected counts are yours to change.',exact=True).is_visible(),'supplied-cuts disclosure remains beside actual material')
+    ok(p.locator('.field-measure').get_by_text('The equal cuts are already drawn; the selected counts are yours to change.',exact=True).is_visible(),'supplied-cuts disclosure remains beside actual material')
     bounds(p,width in [820,1024]);art(p,f'entry-{width}')
     first_speech(p)
     for c in owner(p)['source']['cases']:
@@ -235,7 +235,7 @@ def journey(browser,base,f,width,height):
     guide_cases=p.locator('[data-field-guide-case]').evaluate_all('xs=>xs.map(x=>({id:x.dataset.fieldGuideCase,title:x.querySelector("h3").textContent}))')
     ok(guide_cases==[{'id':c['id'],'title':c['title']} for c in first['source']['cases']],'guide attributes supplied context to each frozen title')
     report=download(p,base,'notes-'+str(width));ok(report['fieldStrips']==first and len(report['syntheticOther']['payload'])>=500*1024,'actual UI whole Notes download retains500KiB sibling')
-    text=semantic(p);ok('First comparison' in text and 'Latest retry' in text and 'Supplied starting field' in text,'Notes separates supplied/current/first/latest')
+    text=semantic(p);ok('First comparison' in text and 'Latest retry' in text and 'Starting field' in text,'Notes separates supplied/current/first/latest')
     zero=p.locator('[data-field-notes-case="empty-first"]');ok('already fits the request' not in zero.inner_text(),'original zero start(0,0) is not a fitting supplied plan')
     snap(p,'notes-'+str(width));go(p,base);guard(p,lambda:bring(p,base,report));imported_id=active(p);ok(imported_id not in [first_id,'explorer-2'],'actual import creates fresh explorer')
     go(p,base);no_film(p,'import destination');ok(owner(p)==first,'import reload exact owner');again=download(p,base,'redownload-'+str(width));ok(again['fieldStrips']==first and again['syntheticOther']==report['syntheticOther'],'actual redownload exact owner and sibling')
@@ -319,7 +319,7 @@ def retained(browser,base,f):
             ok('<script>window.fieldAttack=2</script>' in view(p).inner_text(),'frozen hostile prompt visibly literal')
             helper(p,'nested');ok('<img src=x' in view(p).inner_text(),'hostile helper remains literal');click(p,'[data-field-close]')
         current=copy.deepcopy(owner(p));report=download(p,base,key+'-notes');semantic(p);loc=p.locator('[data-field-notes-case]').filter(has=p.get_by_text(current['source']['cases'][1 if key=='supplied' else 0]['title'],exact=True))
-        ok('This supplied starting field already fits the request' in semantic(p),'retained nonzero supplied fitting plan labelled supplied')
+        ok('This starting field already fits the request' in semantic(p),'retained nonzero supplied fitting plan labelled supplied')
         ok(report['fieldStrips']==current and p.evaluate('window.fieldAttack||0')==0,'hostile quoted IDs/text retained in actual download safely')
         if key=='supplied':
             section=p.locator('[data-field-notes-case="keep-it-all"]');ok('Current editable field' in section.inner_text(),'changed retained source keeps a computed current field')

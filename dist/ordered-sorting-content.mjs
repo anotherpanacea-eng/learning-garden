@@ -32,8 +32,8 @@ const commonText={
  mismatch:'These destinations differ. Revise the rule and try another parcel.',
  firstMatch:'The first rule matched. The second row was not tested.',
  overlap:'Both tests can catch this parcel. Which test comes first decides its route.',
- finite:'This rule fits every supplied card in this comparison. It tells us about these cards; try another request to explore a different rule.',
- equivalent:'Different programs can agree on every supplied card in this source.',
+ finite:'This rule fits every parcel card in this comparison. It tells us about these cards; try another request to explore a different rule.',
+ equivalent:'Different programs can agree on every parcel card here.',
  notReply:'NOT reverses the answer to one test. It does not reverse the program or swap baskets.'
 };
 const skip='Skip for now. Your rule and parcel wait here; try another case or return later.';
