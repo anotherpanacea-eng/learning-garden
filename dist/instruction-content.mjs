@@ -21,11 +21,11 @@ export const instructionExample={
  ]
 };
 export const instructionHelp={
- purpose:'Audience means the person receiving these instructions. Purpose means what the note is meant to help them do. This supplied form is a short practical note.',
- planning:'A plan holds the intended actions. A draft is a version of the words. Point, talk, sign, use AAC, draw off-screen, or arrange picture tickets. Copying a plan is supplied assembly.',
+ purpose:'Audience means the person receiving these instructions. Purpose means what the note is meant to help them do. This ready-made form is a short practical note.',
+ planning:'A plan holds the intended actions. A draft is a version of the words. Point, talk, sign, use AAC, draw off-screen, or arrange picture tickets. Copying a plan puts ready-made pieces together.',
  sentence:'Say one complete instruction before writing it, if you want. “Fold the note.” is a complete instruction: the reader is understood as the person doing it.',
  order:'Before tells an order. Because gives a reason. Ask which words specify an action, what must already be true, and whether two steps could exchange places.',
- cause:'Discuss the two supplied explanations beside the source scene. A different explanation can be kept. Neither selecting a reason nor using the word because shows understanding.',
+ cause:'Discuss the two ready-made explanations beside the source scene. A different explanation can be kept. Neither selecting a reason nor using the word because shows understanding.',
  revision:'Revise means change the meaning or organization to help the reader. Edit or proofread means check how the words are written. Discuss sentence starts and end marks with a person; the app does not correct spelling or grammar.',
  computer:'This device is one example of a computer. It follows its programmed action rules; it does not infer what the writer intended or understand original words.',
  example:'This toy and box are a separate worked example. They do not enter either live strip.'

@@ -109,7 +109,7 @@ function reading(v) {
 }
 export function wordRoomPage(book, owner) {
   const local=view(book,owner);
-  if(local.mode==='trails')return soundTrailPage(local.trails);
+  if(local.mode==='trails')return soundTrailPage(local.trailsSet==='vowels'?local.vowels:local.trails,wordRoomPicture);
   if(soundMessagesView(book).active)return soundMessagesPage(book,wordRoomPicture);
   const v=wordRoomView(book),header='<header class="wr-header"><a href="#words">Word Garden</a><div><h1>Word Workshop</h1><span>The Prop Box</span></div><button type="button" data-wrt-action="enter">'+esc(SOUND_TRAIL_ENTRY)+'</button></header>';
   if(v.status==='unsupported')return `<section class="wr-room" data-word-room-root>${header}<h2 id="wr-task" tabindex="-1">The Prop Box</h2><p>This earlier prop box cannot open here. It is kept in Grown-up notes. The rest of Word Garden is open.</p>${button('recover','Start a fresh prop box')}<a href="#notes">Grown-up notes</a><p id="wr-status" role="status" tabindex="-1"></p>${recoveryDialog(local)}</section>`;
@@ -153,13 +153,20 @@ export function bindWordRoom(book, ctx) {
     if(action==='enter'){
       if(local.mode==='trails')return;
       local.trailsReturnMode=local.mode;
-      local.trails??=createSoundTrails();local.mode='trails';return redraw();
+      local.trailsSet??='sounds';
+      if(local.trailsSet==='vowels')local.vowels??=createSoundTrails('vowels');else local.trails??=createSoundTrails();
+      local.mode='trails';return redraw();
     }
     if(local.mode!=='trails')return;
     if(action==='leave'){local.mode=local.trailsReturnMode||'main';return redraw();}
+    if(action==='set'){
+      const set=el.dataset.wrtValue;if(!['sounds','vowels'].includes(set))return;
+      local.trailsSet=set;if(set==='vowels')local.vowels??=createSoundTrails('vowels');else local.trails??=createSoundTrails();return redraw();
+    }
     const value=['counter','step'].includes(action)?Number(el.dataset.wrtValue):el.dataset.wrtValue;
-    const next=changeSoundTrail(local.trails,action,value);if(!next)return;
-    local.trails=next;
+    const key=local.trailsSet==='vowels'?'vowels':'trails';
+    const next=changeSoundTrail(local[key],action,value);if(!next)return;
+    local[key]=next;
     const count=next.work[next.selected].count;
     const focus=action==='counter'?(count===0||count===6?'#wrt-count':'[data-wrt-action="counter"][data-wrt-value="'+value+'"]'):action==='step'?'#wrt-step':'#wr-task';
     redraw(action==='counter'&&focus!=='#wrt-count'?soundTrailCounterLine(count):'',focus);
@@ -212,7 +219,7 @@ export function bindWordRoom(book, ctx) {
     if(a==='cancel'){local.dialog=null;return redraw('','[data-wr-action="recover"]');}
     if(a==='confirm') {
       if(!local.dialog||local.dialog.root!==book.wordRoom)return;
-      return act(el,o=>{const r=recoverWordRoom(book,true,o);if(r.ok)local.trails=null;return r;});
+      return act(el,o=>{const r=recoverWordRoom(book,true,o);if(r.ok){local.trails=null;local.vowels=null;local.trailsSet='sounds';}return r;});
     }
   }));
   const dialog=root.querySelector('dialog');
