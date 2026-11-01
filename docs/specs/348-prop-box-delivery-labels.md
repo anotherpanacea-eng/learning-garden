@@ -1,6 +1,6 @@
 # 348 · Delivery labels: j, k, v and z
 
-Bounded specification for admitted LG-10 / LG-G1, 2026-11-01. Base main `8df8868b23c5bcf94193b978fbe46cabc43e92ee`. Awaiting independent specification and finite linguistic review; runtime has not started. Companion [finite copy](../content/348-prop-box-delivery-labels-text.md) and [source study](../source-audits/348-prop-box-delivery-labels.md).
+Bounded specification for admitted LG-10 / LG-G1, 2026-11-01. Base main `8df8868b23c5bcf94193b978fbe46cabc43e92ee`. Independent specification and entire finite linguistic review cleared final head `4e1bd94f20e233faa2176b622ea78476401db023` in [PR380](https://github.com/anotherpanacea-eng/learning-garden/pull/380#issuecomment-6554272777). Runtime implementation is in progress and needs its own independent clearance and release. Companion [finite copy](../content/348-prop-box-delivery-labels-text.md) and [source study](../source-audits/348-prop-box-delivery-labels.md).
 
 ## Learning action and story
 
