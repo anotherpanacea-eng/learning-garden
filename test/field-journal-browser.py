@@ -151,6 +151,9 @@ def main():
                 renders = {}
                 for name, url, seed in [('main', main_base, 'total'), ('branch', base, 'total'), ('mystery', base, 'mystery')]:
                     _, p = h.setup(browser, width, seeds[seed], f'default-{name}-{width}')
+                    # Compare the same speech environment: this Mac loads voices asynchronously.
+                    # Other journeys retain their normal device-voice behavior.
+                    p.context.add_init_script('window.speechSynthesis.getVoices=()=>[];')
                     go(p, url, '#cafe', '[data-cafe-view]')
                     ok(root_style(p) is None, f'{name}: no root look')
                     cafe = main_html(p)
