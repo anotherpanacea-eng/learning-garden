@@ -30,6 +30,6 @@ There introduces the existence statement; their is possessive and they're expand
 
 ## Finite expected structure
 
-Eight slots: there/ways/road/high/need/which/where/too. Originals: Their/Weighs/rode/hi/knead/witch/wear/to. Keys: There/Ways/road/high/need/which/where/too. Ordered fitting positions B,A,C,B,A,C,A,B (A3/B3/C2), three supplied choices each; explicit original leave choices retain null versus elected original. The local context supplies the other words in their reference forms; the full current copy alone displays every actual trial. No supplied context silently writes a placement.
+Eight slots: there/ways/road/high/need/which/where/too. Originals: Their/Weighs/rode/hi/knead/witch/wear/to. Keys: There/Ways/road/high/need/which/where/too. Ordered fitting positions B,A,C,B,A,C,A,B (A3/B3/C2), three supplied choices each; explicit original leave choices retain null versus elected original. The local context is explicitly labeled as the page's supplied sentence frame and supplies the other words in their reference forms; the full current copy alone displays every actual trial. No supplied context silently writes a placement.
 
 One copying card/four manual example steps and one spoken/paper where/wear errand complete the bounded teaching/contrast/practice/new-use/return encounter. Human explanation, dictionary discussion, paper words and speech are not recorded or judged. No learner data is sent to a model or another reader. No celebration or Keeper contribution follows a fitted/kept copy.
