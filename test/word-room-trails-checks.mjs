@@ -121,3 +121,31 @@ assert.deepEqual(createSoundTrails(),original);assert.deepEqual(createSoundTrail
 assert.deepEqual(sentences.source.note.text.match(/[A-Za-z]+/g).map(x=>x.toLowerCase()),['we','have','five','stars','please','give','them','to','the','puppets','they','live','by','the','cave','tonight','is','a','live','show']);
 const noteHtml=soundTrailPage(sentences);assert.ok(noteHtml.includes('<p>We have five stars. Please give them to the puppets.</p><p>They live by the cave. Tonight is a live show.</p>'));
 console.log('Words in sentences: six context/phoneme maps, thirty rendered frames, three comparisons, same-print live separation, bounds, source copies and shared-note paragraphs passed.');
+
+// Spec355: literal phoneme expectations independent of the production source.
+const longOOracle={not:['n','ɑ','t'],note:['n','oʊ','t'],hop:['h','ɑ','p'],hope:['h','oʊ','p'],rod:['r','ɑ','d'],rode:['r','oʊ','d']};
+const longO=createSoundTrails('long-o'),longOBefore=structuredClone(longO);
+assert.deepEqual(Object.keys(longO.work),Object.keys(longOOracle));assert.equal(longO.selected,'not');assert.equal(longO.source.grownup,original.source.grownup);assert.deepEqual(longO.source.guide,{});
+for(const[id,sounds]of Object.entries(longOOracle)){
+ const w=longO.source.words[id],groups=[[[0],[0]],[id.length===4?[1,3]:[1],[1]],[[2],[2]]];
+ assert.equal(w.label,id);assert.deepEqual(w.letters,[...id]);assert.deepEqual(w.phonemes,sounds);assert.equal(w.reference,'/'+sounds.join('')+'/');assert.deepEqual(w.groups.map(g=>[g.letters,g.sounds]),groups);assert.equal(w.frames.length,5);
+ assert.equal(longO.work[id].tool,['rod','rode'].includes(id)?'try':'model');
+ let state=changeSoundTrail(changeSoundTrail(longO,'word',id),'model');
+ for(let frame=0;frame<5;frame++){
+  const active=frame===4?groups:frame?[groups[frame-1]]:[],r=soundTrailReference(state,id,frame),h=soundTrailPage(state);
+  assert.deepEqual(r.letters,active.flatMap(g=>g[0]));assert.deepEqual(r.sounds,active.flatMap(g=>g[1]));
+  assert.deepEqual(selectedMap(h),{letters:active.flatMap(g=>g[0]).sort((a,b)=>a-b).map(i=>id[i]),sounds:active.flatMap(g=>g[1]).map(i=>i+1)});
+  assert.ok(h.includes('>'+w.context+'</p>'),'context stays with the actual task');
+  if(frame<4)state=changeSoundTrail(state,'step',1);
+ }
+ const compared=changeSoundTrail(state,'compare');assert.deepEqual(changeSoundTrail(compared,'back'),state);
+}
+for(const[a,b]of[['not','note'],['hop','hope'],['rod','rode']]){
+ const p=Object.values(longO.source.pairs).find(p=>p.ids[0]===a);assert.deepEqual(p.ids,[a,b]);assert.deepEqual(p.highlight,{[a]:1,[b]:1});
+ const h=soundTrailPage(changeSoundTrail(changeSoundTrail(longO,'word',a),'compare'));assert.deepEqual(selectedMap(h),{letters:['o','o','e'],sounds:[2,2]});
+}
+let rod=changeSoundTrail(longO,'word','rod');rod=changeSoundTrail(rod,'counter',1);rod=changeSoundTrail(rod,'word','rode');assert.equal(rod.work.rode.count,0);assert.equal(rod.work.rod.count,1);
+assert.deepEqual(longO,longOBefore);const longOCopy=createSoundTrails('long-o');longOCopy.source.words.note.phonemes[1]='changed';assert.deepEqual(longO,longOBefore);
+assert.deepEqual(createSoundTrails(),original);assert.deepEqual(createSoundTrails('vowels'),vowelBefore);assert.deepEqual(createSoundTrails('sentences'),sentenceBefore);
+assert.deepEqual(longO.source.note.text.match(/[A-Za-z]+/g).map(x=>x.toLowerCase()),['do','not','hop','by','the','rod','a','note','says','we','rode','home','we','hope','to','rest']);
+console.log('Long o: six reference maps, thirty rendered frames, vowel comparisons, independent rod/rode work, source copies and shared-note word sequence passed.');
