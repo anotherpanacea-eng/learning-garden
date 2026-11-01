@@ -658,7 +658,7 @@ Same columns as [`docs/content/phonics/audio-requests.csv`](phonics/audio-reques
 | p250-sound-u-short-oo | sound | oo | /ʊ/ | pending-independent-review | the vowel in book |
 | p250-sound-oi | sound | oi, oy | /ɔɪ/ | pending-independent-review | gliding vowel |
 | p250-sound-ai | sound | i-e, ie, y, igh | /aɪ/ | pending-independent-review | gliding vowel; the vowel in bike and my |
-| p250-sound-yu | sound | u-e, ew, ue | /ju/ | pending-independent-review | two phonemes, one demonstration; the vowel part of cube |
+| p250-sound-yu | sound | u-e, ew, ue | /ju/ | pending-independent-review | the /j/–/u/ sequence heard in cube; one proposed demonstration; segmentation/counting convention not commissioned |
 | p250-sound-ow | sound | ow, ou | /aʊ/ | pending-independent-review | gliding vowel; the vowel in cow and out |
 | p250-sound-aw | sound | aw, au | /ɔ/ | pending-independent-review | unmerged model; reviewer decides whether a merged /ɑ/ take is also offered |
 | p250-sound-ar | sound | ar | /ɑr/ | pending-independent-review | rhotic model: vowel plus /r/ as one chunk demonstration |
