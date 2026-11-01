@@ -31,7 +31,7 @@ try{
   const {c,p}=await open(w,h);
   ok(!Object.hasOwn(await book(p),'rodTray'),`${w}: opening writes nothing`);eq(await trayText(p),'The tray is empty.',`${w}: empty tray`);
   ok((await p.locator('.rt-reason').innerText()).startsWith('The baker sells bread'),`${w}: Willowbank reason`);ok((await p.locator('.rt-model').innerText()).startsWith('A made-up model.'),`${w}: model line`);
-  {const t=await p.locator('.rt-legend').ariaSnapshot();ok(t.includes('the minus sign')&&t.includes('the plus sign')&&!t.includes('(−)'),`${w}: legend names its signs`);}ok((await p.locator('.rt-sentence').ariaSnapshot()).includes('4 plus negative 7')&&!(await p.locator('.rt-sentence').ariaSnapshot()).includes('−'),`${w}: accessibility tree reads the sentence with negative`);
+  {const t=await p.locator('.rt-legend').ariaSnapshot();ok(t.includes('Black slanted rod (the minus sign): one below zero')&&t.includes('Red upright rod (the plus sign): one above zero')&&!t.includes('(−)'),`${w}: legend names its signs`);eq(await seen(p.locator('.rt-legend li').nth(1)),'−Black slanted rod (−): one below zero',`${w}: legend reads the same on screen`);}ok((await p.locator('.rt-sentence').ariaSnapshot()).includes('4 plus negative 7')&&!(await p.locator('.rt-sentence').ariaSnapshot()).includes('−'),`${w}: accessibility tree reads the sentence with negative`);
   ok(!(await overflow(p)),`${w}: no horizontal overflow`);eq(await small(p),[],`${w}: 44 px controls`);
   if(w>=820)for(const sel of ['.rt-sentence','.rt-tray','.rt-controls','.rt-stepper','[data-rt-check]'])ok(await bottom(p,sel)<=h,`${w}: ${sel} fits the first viewport`);
   // Guided case 1 by tap: 4 red, 7 black, pair off, count.
@@ -64,7 +64,7 @@ try{
   await p.locator('[data-rt-teach="T3"] > summary').click();eq(await p.locator('[data-rt-teach="T3"]').evaluate(d=>d.open),false,`${w}: closing a teach card closes it`);eq(await p.locator('#rt-teach-T3').count(),0,`${w}: closed card shows no steps`);
   await p.locator('[data-rt-teach="T1"] > summary').click();await p.locator('#rt-teach-T1').waitFor();await p.locator('[data-rt-teach="T2"] > summary').focus();await p.keyboard.press('Enter');await p.locator('#rt-teach-T2').waitFor();
   await p.locator('[data-rt-teach="T2"] > summary').focus();await p.keyboard.press('Enter');eq(await p.locator('[data-rt-teach="T2"]').evaluate(d=>d.open),false,`${w}: keyboard closes a teach card`);
-  ok(await p.locator('[data-rt-teach="T2"] > summary').evaluate(e=>e===document.activeElement),`${w}: focus stays on the closed card`);ok(await p.locator('[data-rt-teach="T1"]').evaluate(d=>d.open)&&await p.locator('#rt-teach-T1').count()===1,`${w}: another open card stays open`);
+  ok(await p.locator('[data-rt-teach="T2"] > summary').evaluate(e=>e===document.activeElement),`${w}: focus stays on the closed card`);ok(!(await p.locator('[data-rt-teach="T2"]').evaluate(d=>d.open))&&await p.locator('#rt-teach-T2').count()===0&&await p.locator('[data-rt-teach="T1"]').evaluate(d=>d.open)&&await p.locator('#rt-teach-T1 li').count()===1,`${w}: T2 closed while T1 stays open with its step`);
   ok(!(await overflow(p)),`${w}: no overflow after play`);eq(await small(p),[],`${w}: 44 px after play`);
   if(out)await p.screenshot({path:`${out}/rod-tray-${w}.png`,fullPage:true});
   await p.addStyleTag({content:'html{font-size:150%}'});ok(!(await overflow(p)),`${w}: 150% root font has no overflow`);

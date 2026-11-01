@@ -56,7 +56,7 @@ function work(v,u){
  return `${head}<div class="rt-work"><div class="rt-left">${trayPicture(t)}${paired}${controls}</div><div class="rt-right">${guided}${answer}${feedback(v,c,view)}</div></div>${ladder}`;
 }
 // The legend names each sign; screen readers hear the sign's name.
-const legendText=t=>esc(t).replace(/\((−|\+)\)/g,(m,g)=>hid(m,`(the ${g==='+'?'plus':'minus'} sign)`));
+const legendText=t=>`<span>${hid(esc(t),esc(t.replace(/\((−|\+)\)/g,(m,g)=>`(the ${g==='+'?'plus':'minus'} sign)`)))}</span>`;
 export function rodTrayPage(state,explorerId=''){
  const v=core.readRodTray(state),u=visit(state,explorerId);
  const top=`<h1 id="rt-heading" tabindex="-1">${esc(K.title)}</h1>${p(K.reason,' class="rt-reason"')}<p id="rt-status" class="rt-status${u.notice?'':' sr-only'}" role="status" tabindex="-1">${esc(u.notice)}</p>`;
