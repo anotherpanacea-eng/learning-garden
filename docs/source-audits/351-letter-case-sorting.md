@@ -1,6 +1,6 @@
 # 351 source study · case recognition and playful printing
 
-Draft2026-11-01 for existing LG-10 / LG-G1. Specification and finite material are in independent review, not shipped. This source study is not learner placement, speech qualification or a claim of complete topic coverage.
+Draft2026-11-01 for existing LG-10 / LG-G1. Specification and finite material cleared independent review in [PR389](https://github.com/anotherpanacea-eng/learning-garden/pull/389#issuecomment-6555511591). Runtime implementation is under validation, not shipped. This source study is not learner placement, speech qualification or a claim of complete topic coverage.
 
 ## Refreshed actual upstream files
 
