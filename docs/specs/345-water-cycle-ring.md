@@ -6,7 +6,7 @@ This narrows [140](140-weather-station.md) bench (b) to a demonstration only. 14
 
 ## Teaching and boundary
 
-Water in the brook and the ground evaporates into invisible water vapor. The vapor rises, cools and condenses into tiny drops, and many drops make a cloud. The drops join and fall as rain or snow, which collects in the brook and soaks into the ground. The ring has no start and no end, and the water is not used up: it changes form and place.
+Water in the brook and the ground evaporates into invisible water vapor. The vapor rises, cools and condenses into tiny drops, and many drops make a cloud. Tiny drops join into raindrops that fall, and in cold clouds ice crystals grow into snow. The rain collects in the brook and soaks into the ground. The ring has no start and no end, and the water is not used up: it changes form and place.
 
 This is supplied teaching, a simplified picture. It is not a weather forecast, a measurement, an experiment or a claim about how long any stage takes. The ring does not say that every drop follows this path. The boundary note says that real water takes many more paths. It does not teach clouds' names, the energy involved, transpiration, groundwater flow or ice sheets.
 
@@ -22,11 +22,11 @@ One new entry in `drawn-howtos-content.mjs`, `{version:1, id:'water-ring', ...}`
 
 - Four stages, placed on the ring in this order: `water` (water in the brook and ground), `vapor` (water vapor), `cloud` (cloud drops) and `rain` (rain or snow).
 - Four links, each one labelled with what happens, in the same words as the film's loop labels: `water-vapor` evaporate, `vapor-cloud` condense, `cloud-rain` fall, and `rain-water` collect.
-- Six steps with the exact captions in the text file. Steps 1 to 4 draw a stage with the arrow into it, step 5 draws the closing arrow, and step 6 is the lap.
+- Six steps with the exact captions in the text file, each 15 words or fewer. Step 1 draws `water` alone. Steps 2 to 4 each draw the incoming link and its stage (`water-vapor` and `vapor`, `vapor-cloud` and `cloud`, `cloud-rain` and `rain`). Step 5 draws the closing link `rain-water`, and step 6 is the lap. Every stage and link is drawn exactly once, as the drawn how-to check requires.
 
-**Vapor is invisible.** The vapor stage is drawn as a faint dotted outline with its label, and never as a white puff, steam or a cloud, so that the picture does not teach that vapor is visible. The cloud stage is the first visible water above the ground. The rain stage shows drops and a few flakes, so snow is in the picture as well as in the words.
+**Vapor is invisible.** The vapor stage is drawn as a faint dotted outline with its label, and never as a white puff, steam or a cloud, so that the picture does not teach that vapor is visible. The cloud stage is the first visible water above the ground and shows tiny drops with a few ice crystals. The rain stage shows raindrops and a few flakes, so snow is in the picture as well as in the words. Snow is drawn growing from ice crystals, never from a liquid drop.
 
-The ring is laid out on the authored ellipse, as `life-ring` is, so it reads as a loop rather than a line with a return arrow. The authoring script renders it from that frozen data with a fixed seed, and its existing check confirms that the output matches the source. The ring needs no new player, layout engine or runtime dependency.
+The entry is hand-placed, like `life-ring`: it has no `at` route, so the page heading never offers it a second time, and the how-to check's list of hand-placed ids gains `water-ring`. Its picture is at most 500 wide and its play-through lasts at most 15 s, the player's existing limits. The ring is laid out on the authored ellipse, as `life-ring` is, so it reads as a loop rather than a line with a return arrow. The authoring script renders it from that frozen data with a fixed seed, and its existing check confirms that the output matches the source. The ring needs no new player, layout engine or runtime dependency.
 
 The player's existing behavior applies unchanged. Steps play once, then Back and Next revisit them, and the finished picture stays with every caption listed beneath it. Watch again restarts it, and Close returns focus to the button. Reduced motion opens on complete strokes. The picture is `role="img"`, its label is the alt text, and captions go to the player's polite live region. Nothing it does is recorded as support, familiarity or viewing.
 
@@ -68,10 +68,10 @@ Against the gate:
 
 - **Criteria 1–3 and 5 look met.** Vapor is shown as invisible, a cloud is said to be liquid drops, there is no start or end, and "no water used up" is said. No story characters appear.
 - **Criterion 4.** The gauge shows no number or scale, and "a depth, in mm" explains what a gauge measures rather than giving a reading. The reviewer still decides whether cue 12 and the filling gauge could read as a measured rainfall or as one of the explorer's weather notes.
-- **Loop arrows.** The film draws three arcs for four labels, with condense and fall sharing the right-hand arc, while the ring draws four arrows. The reviewer decides whether this reads as condensation and falling happening at one point. If it does, a corrected derivative separates them.
+- **Loop arrows.** The film's three red arcs run from the puddle to the cloud (evaporate), from the cloud's right edge to the ground (fall), and from the brook to the puddle (collect). The label condense sits alone above the cloud, at the end of the evaporate arc. The ring draws four arrows. The reviewer checks two points: the collect arc runs from the brook up into the puddle, and the fall and collect arcs do not meet, with only the blue runoff arrows joining them. Neither breaks the loop on its own. Codex's offline render of every cue (2026-11-01, fallback fonts) found all five criteria met.
 - **Snow.** The film shows only rain. The ring's "rain or snow" is the fuller picture, and the film does not contradict it.
 
-**Shown examples, for exposure.** A puddle by the station, the brook, the ground, the tree, the rain gauge, the flood post (three ticks, no numbers), the Stevenson screen and the wind vane. These are the examples a later task counts before calling one unfamiliar.
+**Shown examples, for exposure.** The Sun, a puddle by the station, the brook, the fence, the ground, the tree, the rain gauge, the flood post (three ticks, no numbers), the Stevenson screen and the wind vane. These are the examples a later task counts before calling one unfamiliar.
 
 ### Lifecycle
 

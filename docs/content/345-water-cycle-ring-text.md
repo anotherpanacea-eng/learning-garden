@@ -1,6 +1,6 @@
 # Spec 345 text · The water cycle ring
 
-Exact child-facing text for [spec 345](../specs/345-water-cycle-ring.md). US spelling, no exclamation marks, no em-dashes, every caption 30 words or fewer.
+Exact child-facing text for [spec 345](../specs/345-water-cycle-ring.md). US spelling, no exclamation marks, no em-dashes. Every ring caption is 15 words or fewer, the drawn how-to check's limit.
 
 ## Weather page section
 
@@ -22,14 +22,14 @@ Exact child-facing text for [spec 345](../specs/345-water-cycle-ring.md). US spe
 
 **Steps:**
 
-1. Here is water in the brook and in the ground near Dot's weather station.
-2. The Sun warms the water. Some of it evaporates into water vapor. Vapor is in the air, but you cannot see it.
-3. The air rises and cools. The vapor condenses into tiny drops. Many tiny drops make a cloud.
-4. The drops join and get heavy. They fall as rain, or as snow when it is cold.
-5. The rain collects in the brook and soaks into the ground. Then the water goes round again.
-6. Follow the ring around. The water is not used up. It changes form and place, again and again.
+1. Here is water in the brook and the ground by Dot's weather station.
+2. The Sun warms the water. Some evaporates into water vapor, which you cannot see.
+3. The air rises and cools. Vapor condenses into tiny drops that make a cloud.
+4. Tiny drops join into raindrops and fall. In cold clouds, ice crystals grow into snow.
+5. Rain collects in the brook and soaks into the ground. Then round it goes.
+6. Follow the ring around. No water is used up. It changes form and place.
 
-**Boundary note (under the finished picture):** This is a simple picture. Real water takes many more paths. Some soaks deep underground, some is taken up by plants, and some stays frozen for a long time.
+**Boundary note (under the finished picture):** This is a simple picture. The ring has no start and no end. Real water takes many more paths. Some soaks deep underground, some is taken up by plants, and some stays frozen for a long time.
 
 ## Film invitation
 
