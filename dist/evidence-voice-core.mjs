@@ -35,7 +35,7 @@ function change(state,fn,o={}){
  try{
   if(Object.hasOwn(state,'evidenceVoice')&&!wrapper(state.evidenceVoice))return result(false,'This saved format is retained; this version cannot edit it.');
   const next=copy(state),r=fn(next);if(r?.ok!==true)return r||result(false,'This change is not available.');
-  if(!wrapper(next.evidenceVoice)||!recoveryFitsProgressLimits(next)||typeof o.canExport!=='function'||o.canExport(next)!==true)return result(false,'This change could not be kept while keeping your notebook exportable. Your earlier work is unchanged.');
+  if(!wrapper(next.evidenceVoice)||!recoveryFitsProgressLimits(next)||typeof o.canExport!=='function'||o.canExport(next)!==true)return result(false,'This change could not be kept and still leave your notebook ready to download. Your earlier work is unchanged.');
   state.evidenceVoice=next.evidenceVoice;return r;
  }catch{return result(false,'This change could not be kept safely. Your earlier work is unchanged.');}
 }

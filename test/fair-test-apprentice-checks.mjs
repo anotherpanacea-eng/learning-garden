@@ -21,7 +21,7 @@ const reviewedCards={
  ],careful:[
   ['careful-cautious',false,'Hold back this message until more trials are shown; the present results are too limited to describe any distance difference.','Moss: More trials could extend the investigation, but the present message already limits itself to the shown examples.'],
   ['careful-overclaim',false,'Keep the message and extend it: these results show that every real cart should travel farther from any high ramp.','Moss: The model examples do not establish that universal real-cart claim.'],
-  ['careful-useful',true,'Keep this message: height changed, the surface stayed smooth, and the distance claim refers only to these shown model examples.','Moss: The comparison changes height while controlling surface, and the wording stays within the supplied evidence.'],
+  ['careful-useful',true,'Keep this message: height changed, the surface stayed smooth, and the distance claim refers only to these shown model examples.','Moss: The comparison changes height while controlling surface, and the wording stays within the evidence shown.'],
   ['careful-wrong',false,'Choose a different surface for one ramp before keeping the message; identical surfaces prevent a useful comparison of the two heights.','Moss: Keeping surface the same is useful when investigating height. Changing it would introduce another difference.'],
  ]};
 for(const item of apprenticeCases){
