@@ -1,6 +1,6 @@
 # Spelling for a reader
 
-Status: **draft undergoing independent-review repairs, 2026-11-01 UTC**. Next productive-writing slice of [the literacy plan](../literacy-next-steps.md), serving admitted LG-10 / LG-G1. [Finite copy](../content/345-spelling-for-a-reader-text.md); [source study and prerequisite crosswalk](../source-audits/345-spelling-for-a-reader.md). No runtime or coverage is cleared by this draft.
+Status: **specification cleared at `909ef1bf`; implementation in progress, 2026-11-01 UTC**. Next productive-writing slice of [the literacy plan](../literacy-next-steps.md), serving admitted LG-10 / LG-G1. [Finite copy](../content/345-spelling-for-a-reader-text.md); [source study and prerequisite crosswalk](../source-audits/345-spelling-for-a-reader.md). No runtime or coverage is cleared by this draft.
 
 ## The learning action
 

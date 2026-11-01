@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import {MESSAGE_CASES,messageCase,messageCard,messageClue,messageCardOutcome} from '../dist/message-content.mjs';
 import {ensureMessages,messageState,currentMessage,chooseMessageCase,setMessagePage,setMessageClue,setMessageCard,setMessageText,testMessageCard,setMessageReading,useMessageSupport,setMessagePlayback,carryMessage,recoverMessages} from '../dist/message-core.mjs';
+import {spellingView,createSpellingMessage,selectSpellingMessage,setPostMessageOriginal,noteSpellingHelp,keepSpellingMessage,restoreSpellingMessage,wordShelfSpellingReference,pipsSpellingReference,stageSpellingReference,spellingSession,resetSpellingMessageView} from '../dist/message-spelling-core.mjs';
+import {makeWordListShelfSource} from '../dist/word-list-shelf-content.mjs';
+import {makePipsCopySource} from '../dist/pips-copy-content.mjs';
 let checks=0;
 const check=(condition,message)=>{assert.ok(condition,message);checks++;};
 const equal=(actual,expected,message)=>{assert.deepEqual(actual,expected,message);checks++;};
@@ -67,5 +70,44 @@ for(const c of MESSAGE_CASES){
 }
 {
  const s=fresh(),before=copy(s);check(!chooseMessageCase(s,'elsewhere','basket')&&!chooseMessageCase(s,'post','missing'),'invalid case/place refused');check(!setMessagePage(s,'post','missing')&&!setMessageClue(s,'post','missing')&&!setMessageCard(s,'post','missing')&&!setMessageText(s,'post','unknown','x')&&!setMessageText(s,'post','original',5)&&!setMessageReading(s,'post','independent')&&!useMessageSupport(s,'post','magic')&&!setMessagePlayback(s,'post',2),'invalid action values refused');equal(s,before,'invalid actions unchanged');setMessageCard(s,'post',null);equal(testMessageCard(s,'post'),false,'no supplied sentence means no test');equal(currentMessage(s,'post').work.attempts.length,0,'authored text never automatic attempt');setMessageCard(s,'post','blankets');setMessageClue(s,'post',null);equal(testMessageCard(s,'post').clueRelevant,null,'missing clue stays unobserved');
+}
+{
+ const gate={canExport:()=>true},s={other:{exact:'unrelated work'}},before=copy(s);
+ check(!createSpellingMessage(s,'basket',null).ok,'bridge creation requires actual notebook preflight');equal(s,before,'missing gate cannot initialize a notebook');
+ check(createSpellingMessage(s,'basket',null,gate).ok,'fresh explorer can create first bridge without an earlier message root');
+ let v=spellingView(s,'basket');equal(v.source.reader,'A helper at the Post Office who can see two baskets','actual reader is the basket helper, not requester Rabbit');
+ equal([v.first,v.latest],[null,null],'typing is not itself keeping a version');
+ const original='  <strong>Blankets & seeds</strong>\n🐇  ';
+ check(setPostMessageOriginal(s,original,gate).ok,'shared handler accepts exact original prose');
+ check(keepSpellingMessage(s,'basket',gate).ok,'explicit first Keep');
+ v=spellingView(s,'basket');equal(v.first.text,original,'whitespace, Unicode and markup are literal');equal(v.latest,v.first,'first Keep sets both editions');check(v.first!==v.latest,'editions do not alias');
+ const first=copy(v.first);check(noteSpellingHelp(s,'basket','teaching',gate).ok,'opened help accumulates');
+ check(setPostMessageOriginal(s,'Bring the basket of blankets.',gate).ok,'revision stays in the shared composer');
+ equal(spellingView(s,'basket').latest.text,original,'editing does not implicitly replace a kept version');
+ keepSpellingMessage(s,'basket',gate);v=spellingView(s,'basket');equal(v.first,first,'first elected version stays immutable');equal(v.latest.text,'Bring the basket of blankets.','later Keep replaces latest');check(v.latest.helpBefore.teaching,'Keep records actual accumulated help');
+ const unchanged=copy(s);equal(keepSpellingMessage(s,'basket',gate),{ok:true,changed:false},'identical Keep is a no-op');equal(s,unchanged,'no-op preserves all notebook material');
+ restoreSpellingMessage(s,'basket','first',gate);v=spellingView(s,'basket');equal(v.work.original,original,'explicit restore changes only the current draft');check(v.help.teaching,'restoring an earlier draft does not erase later help');equal(v.first,first,'restore never rewrites retained history');
+ check(setPostMessageOriginal(s,'',gate).ok&&keepSpellingMessage(s,'basket',gate).ok,'an unfinished blank version can be elected');equal(spellingView(s,'basket').latest.text,'','blank is meaningful unfinished work');
+ const atBound='🐇'.repeat(300);check(setPostMessageOriginal(s,atBound,gate).ok,'600 UTF-16-unit bound accepts exact text');const cap=copy(s);check(!setPostMessageOriginal(s,atBound+'x',gate).ok,'oversize is refused without truncation');equal(s,cap,'refused oversize preserves every earlier field');
+ const atomic=copy(s),refused={canExport:()=>false};check(!setPostMessageOriginal(s,'not installed',refused).ok,'whole-notebook gate refusal');check(!noteSpellingHelp(s,'basket','audio',refused).ok,'help mutation also uses the gate');equal(s,atomic,'refused text/help edits are atomic');
+ check(setPostMessageOriginal(s,'Safe proposal',{canExport:c=>{c.messages.cases.basket.post.original='callback mutation';return true;}}).ok,'gate receives a disposable candidate');equal(spellingView(s,'basket').work.original,'Safe proposal','gate side effects cannot alter the proposed installed root');equal(s.other,before.other,'all unrelated work remains exact');
+ const post=copy(currentMessage(s,'post').work);carryMessage(s,'post');check(!Object.hasOwn(currentMessage(s,'loft').work,'spelling'),'ordinary carry omits bridge reference/history in the Loft');equal(currentMessage(s,'post').work,post,'carry leaves source bridge intact');
+ const reverse=fresh('loft','flags');currentMessage(reverse,'loft').work.spelling={future:'kept raw'};carryMessage(reverse,'loft');check(!Object.hasOwn(currentMessage(reverse,'post').work,'spelling'),'reverse carry also omits a raw optional bridge');
+ const waiting=copy(s);check(!createSpellingMessage(s,'basket',null,gate).ok,'existing bridge is not overwritten even with a null reference');equal(s,waiting,'refused replacement keeps source and text');
+ const raw=currentMessage(s,'post').work.spelling;raw.help='unreadable support';check(messageState(s),'malformed optional bridge does not poison legacy messages');v=spellingView(s,'basket');equal(v.status,'unreadable','malformed support makes bridge controls read-only');check(v.source&&v.first,'readable source and history survive an unreadable sibling');const opaque=copy(s);check(!keepSpellingMessage(s,'basket',gate).ok&&!restoreSpellingMessage(s,'basket','first',gate).ok,'unreadable bridge cannot be rewritten');equal(s,opaque,'unreadable raw field stays exact');
+ check(selectSpellingMessage(s,'flags',gate).ok&&createSpellingMessage(s,'flags',null,gate).ok,'another message remains available');
+ const historical=spellingView(s,'flags').record;historical.source.purpose='Earlier authored purpose';equal(spellingView(copy(s),'flags').source.purpose,'Earlier authored purpose','return reads retained copy rather than today’s case wording');
+ const invalid={messages:{version:99,raw:'future notebook'}};const saved=copy(invalid);check(!createSpellingMessage(invalid,'basket',null,gate).ok,'existing unreadable root is not treated as an absent notebook');equal(invalid,saved,'unsupported root is not normalized');
+}
+{
+ const s={wordListShelf:{v:1,source:makeWordListShelfSource(),jobs:{}}};
+ const ref=wordShelfSpellingReference(s,'necessary','double');equal(ref,{origin:'word-list-shelf',itemId:'necessary',label:'Double letters',word:'necessary',clue:"Necessary has one c and two s's."},'carry is one authored reference, not a placement/result');
+ const pip={pipsCopy:{v:1,source:makePipsCopySource(),items:{},postcard:{work:{placements:{high:'hie',advice:'advize'}}}}};
+ equal(pipsSpellingReference(pip,'high'),{origin:'pips-copy',itemId:'high',label:'The river is high.',word:'high',clue:'This sentence describes how far up the river has risen.'},'Pip uses authored key text/context, never learner choice or leave-it button label');
+ equal(pipsSpellingReference(pip,'advice').word,'advice','learner nonword never becomes a spelling reference');
+ const pipBefore=copy(pip);pipsSpellingReference(pip,'advice');equal(pip,pipBefore,'reading a reference does not alter source answers');
+ const slot=pip.pipsCopy.source.postcard.slots.find(x=>x.id==='high');slot.context.before='x'.repeat(4000);equal(pipsSpellingReference(pip,'high'),null,'assembled context length is bounded, not only each fragment');
+ const before=copy(s);check(stageSpellingReference(s,'one',ref),'reference can wait in module memory');equal(s,before,'pending carry introduces no saved bridge/root');equal(spellingSession(s,'one').pending,ref,'pending reference is the confirmed literal source');check(spellingSession(s,'one').pending!==ref,'pending payload is copied');equal(spellingSession(s,'two').pending,null,'another explorer never inherits pending carry');
+ stageSpellingReference(s,'one',ref);resetSpellingMessageView();equal(spellingSession(s,'one').pending,null,'reset/import hook clears pending module state');
 }
 console.log(`Message-reader checks: ${checks} passed.`);
