@@ -1,0 +1,23 @@
+/* Spec 344: the Rod Tray. Rods differ by color, shape and letter; controls are native buttons of at least 44 px. */
+.rt-page{max-width:1040px;margin:auto;color:#183f39}.rt-page h1{font-size:clamp(1.8rem,3.4vw,2.4rem);line-height:1.1;margin:0 0 .2rem}.rt-page h2{font-size:1.45rem;margin:.2rem 0 .3rem}.rt-page h3{font-size:1.1rem;margin:.2rem 0}.rt-page p{line-height:1.45;margin:.3rem 0;max-width:72ch}
+.rt-page button,.rt-page summary,.rt-page a,.rt-entry a{min-height:44px;min-width:44px;font-size:16px}.rt-page button{padding:8px 12px;white-space:normal;max-width:100%}.rt-page :focus-visible,.rt-entry :focus-visible{outline:3px solid #9b651e;outline-offset:3px}
+.rt-reason{color:#52675e}.rt-status:not(.sr-only),.rt-notice{padding:.6rem .9rem;background:#fbf3dd;border-radius:8px}
+.rt-bench,.rt-offscreen,.rt-teach-list{padding:.8rem 1rem;background:#fffdf5;border:1px solid #cbdcd3;border-radius:8px;margin:.6rem 0}
+.rt-sentence{margin:.2rem 0 .4rem!important;font-size:1.5rem;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}.rt-operand{display:inline-flex;flex-wrap:wrap;gap:3px}.rt-operand .rt-rod{width:12px;height:24px;font-size:11px}
+.rt-guided{margin:0 0 .4rem;padding:.4rem .4rem .4rem 2rem;background:#fbf3dd;border-radius:8px}
+.rt-work{display:grid;grid-template-columns:minmax(0,1fr);gap:.8rem}@media(min-width:760px){.rt-work{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
+.rt-work>*{min-width:0}
+.rt-tray{background:#f3eadb;border:2px solid #8a6a3f;border-radius:10px;padding:.4rem .5rem;min-height:72px}.rt-rods{display:grid;gap:6px}.rt-row{display:flex;flex-wrap:wrap;gap:4px;min-height:32px}
+.rt-rod{display:inline-flex;align-items:center;justify-content:center;width:16px;height:32px;border-radius:3px;font-weight:700;font-size:14px;color:#fff;flex:0 0 auto}.rt-red{background:#b93e2c}.rt-black{background:#1f1f1f;transform:skewX(-14deg)}
+.rt-tray-text{font-weight:700;margin:.4rem 0 0}
+.rt-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem;margin-top:.4rem}.rt-controls button{width:100%;padding:4px 6px;min-height:44px;line-height:1.2}@media(min-width:760px){.rt-controls{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.rt-limit{font-size:15px;color:#7a4a12}
+.rt-answer{display:grid;gap:.4rem}.rt-stepper{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}.rt-value{display:inline-block;min-width:7.5rem;text-align:center;font-size:1.5rem;font-weight:700;padding:.3rem .5rem;border:2px solid #397958;border-radius:8px;background:#fff}
+.rt-label{font-size:14px;color:#52675e;margin:0}.rt-said{font-weight:700}.rt-feedback{padding:.5rem .8rem;background:#eaf4ef;border-radius:8px;margin-top:.5rem}.rt-before{font-size:15px;color:#52675e}
+.rt-paired{margin-top:.4rem}.rt-zeros{display:inline-flex;gap:4px}.rt-zero{display:inline-block;font-weight:700;color:#52675e;animation:rt-fade 1.2s ease forwards}@keyframes rt-fade{from{opacity:1}to{opacity:0}}.rt-still{display:none}
+@media(prefers-reduced-motion:reduce){.rt-zeros,.rt-motion{display:none}.rt-still{display:block}}
+.rt-ladder{margin-top:.6rem}.rt-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0}.rt-help{padding:.6rem .9rem;background:#edf1fb;border-radius:8px;margin:.5rem 0}.rt-caption{font-size:15px;color:#52675e}
+.rt-line{display:block;width:100%;max-width:560px;height:auto}.rt-axis,.rt-tick{stroke:#183f39;stroke-width:2}.rt-line text{font-size:13px;fill:#183f39}.rt-start{fill:#d8a53e;stroke:#183f39;stroke-width:2}.rt-arrow{stroke:#2f5d9b;stroke-width:4}.rt-head{fill:#2f5d9b}
+.rt-model{font-size:15px;margin-top:.6rem}.rt-legend{list-style:none;padding:0;margin:.2rem 0;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;font-size:15px}.rt-legend li{display:flex;align-items:center;gap:.4rem}
+.rt-cases{display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-end;margin:.6rem 0}.rt-cases [aria-pressed=true]{background:#183f39;color:#fff;border-color:#183f39}.rt-contrast{border:1px dashed #8da598;border-radius:8px;padding:.3rem .5rem}.rt-pair{display:flex;flex-wrap:wrap;gap:.5rem}
+.rt-teach{margin:.3rem 0}.rt-entry{margin-top:1rem}.rt-frozen{white-space:pre-line}

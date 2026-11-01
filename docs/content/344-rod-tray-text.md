@@ -64,6 +64,8 @@ Worked example: 1. 0 − (−2). 2. The tray is empty. 3. Add 2 zero pairs. 4. T
 > A minus sign can mean "below zero", as in −3. It can mean "take away". Brackets keep them apart.
 Worked example: 1. 5 − (−3): take away negative three. 2. Put out 5 red. 3. Add 3 zero pairs. 4. Take away 3 black. 5. 8 red: 8.
 
+Button under an unfinished worked example: **Next step**.
+
 ## Cases
 
 Read-aloud names: "+" is "plus"; the operation "−" is "take away"; a bracketed "(−n)" is "negative n".
@@ -140,6 +142,14 @@ Caption on every helper tray: **Example tray. Your own tray is waiting.** Button
 3. **Take away 6 red. Four black are left: −4.**
 
 Help ladder labels: **A hint** · **A different example** · **Show on the line**.
+
+## When work can't save or open
+
+A save the notebook refuses: **That didn’t save, so nothing changed.**
+
+Saved work that can't be read: **This saved work can’t be opened here. It is kept as it is, and you can still download it from Grown-up notes.**
+
+Saved work from another version: **This saved work is from a different version. It is kept as it is, and you can still download it from Grown-up notes.**
 
 ## Grown-up notes
 
