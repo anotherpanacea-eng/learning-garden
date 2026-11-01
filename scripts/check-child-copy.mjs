@@ -92,6 +92,41 @@ export const copyScopes = [
   {path:'dist/common-cuts-content.mjs', adultBlocks:[
     {start:"grownUp:'", end:' exampleLabel:', reason:'Shown only in the For grown-ups panel.'},
   ], quotations:[]},
+  // Shell, garden home, help, progress and Number Garden renderers (text review 2026-10-22, shell-garden area).
+  {path:'dist/app.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/garden-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/plantings.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/help-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/help-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/companions.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/explorer-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/learning-connections.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/learning-connections-ui.mjs',adultBlocks:[
+    {start:'export function connectionNotes(',end:'\nexport function bindConnections(',reason:'Only used in Grown-up notes.'},
+  ],quotations:[
+    {quote:'Retries, recorded support or a previously supplied result invite the same relationship',reason:'Inside the Grown-ups: how the connection is chosen panel.'},
+  ]},
+  {path:'dist/learning-journeys.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/index.html',adultBlocks:[],quotations:[]},
+  {path:'dist/storm-intro.html',adultBlocks:[],quotations:[]},
+  {path:'dist/learning-invitations.mjs',adultBlocks:[],quotations:[
+    {quote:'Some English Paris tasks select a sentence supporting a supplied idea; independent composition is unobserved.',reason:'A topic scope note, shown only in Grown-ups learning connections and the parent-facing explore map.'},
+  ]},
+  {path:'dist/orchard-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/living-ui.mjs',adultBlocks:[
+    {start:'export function livingNotes(',end:'\nexport function bindLiving(',reason:'Only used in Grown-up notes.'},
+  ],quotations:[
+    {quote:'Compare supplied picture clues and use them to explain a possible shelter',reason:'Inside the Grown-ups: what this visit explores panel.'},
+  ]},
+  {path:'dist/living-spiral-ui.mjs',adultBlocks:[
+    {start:'function parentInfo(',end:'\nexport function spiralPage(',reason:'The Grown-ups: a spiral of ideas panel.'},
+    {start:'export function spiralNotes(',end:'\nexport function bindSpiral(',reason:'Only used in Grown-up notes.'},
+  ],quotations:[]},
+  {path:'dist/living-adaptive-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/play-media.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/progress-transfer-ui.mjs',adultBlocks:[],quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
