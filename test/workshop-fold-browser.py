@@ -66,7 +66,16 @@ def main():
                 ok(p.eval_on_selector_all('.workshop-shelf h2', 'hs=>hs.map(h=>h.textContent)') == ['Build and test', 'Measure, count and share', 'Maps, sources and stories'], f'{width}: Workshop groups unchanged')
                 ok(p.locator('.workshop-shelves a').count() == 22, f'{width}: 22 tables unchanged')
                 ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth'), f'{width}: no sideways scroll')
+                # A comparison's controls redraw the page; an opened fold stays open (Codex build review).
+                p.locator('.workshop-page button[type="submit"]').first.click()
+                p.wait_for_timeout(500)
                 fold.locator(':scope > summary').click()
+                setting = p.locator('[data-workshop-setting][aria-pressed="false"]').first
+                setting.click()
+                p.wait_for_timeout(400)
+                ok(p.locator('[data-workshop-setting][aria-pressed="true"]').count() == 1, f'{width}: a setting was chosen (redraw ran)')
+                ok(p.locator('main details#workshop-onward').evaluate('d=>d.open'), f'{width}: the opened fold survives a redraw')
+                fold = p.locator('main details#workshop-onward')
                 link = fold.locator('.learning-invitations a').first
                 ok(link.is_visible(), f'{width}: the fold opens and shows its links')
                 href = link.get_attribute('href')

@@ -8,12 +8,13 @@ The owner reports that pages feel busy. The Post Office, Number Garden, Water La
 
 ## Change
 
-`workshopPage` in `dist/workshop-ui.mjs` wraps its `learningInvitations('workshop')` in spec 361's fold: `<details class="place-onward"><summary>Explore somewhere else</summary>…</details>`. The fold applies wherever that render runs: bare `#workshop`, `#workshop/new` and a waiting experiment. This matches the Post Office, which folds in both its front and delivery views. Workshop tables with their own pages (`#workshop/lantern`, `#workshop/maps` and the rest) are unchanged. The invitations' markup inside the fold is unchanged. No new CSS.
+`workshopPage` in `dist/workshop-ui.mjs` wraps its `learningInvitations('workshop')` in spec 361's fold: `<details class="place-onward" id="workshop-onward"><summary>Explore somewhere else</summary>…</details>`. The fold applies wherever that render runs: bare `#workshop`, `#workshop/new` and a waiting experiment. This matches the Post Office, which folds in both its front and delivery views. Workshop tables with their own pages (`#workshop/lantern`, `#workshop/maps` and the rest) are unchanged. The invitations' markup inside the fold is unchanged. No new CSS.
 
 ## Verification
 
 - `test/workshop-fold-browser.py`, at 375 and 820 px:
   - `#workshop` has one closed `details.place-onward` holding the invitations;
+  - after starting a comparison, an opened fold stays open when a setting button redraws the page (the Workshop's redraw keeps only `details[id]` open; Codex build review);
   - opening it shows the links, and one of them opens its place;
   - the three Workshop groups (spec 358) and their 22 tables are unchanged;
   - no sideways scroll.
