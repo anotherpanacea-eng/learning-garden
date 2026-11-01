@@ -1,12 +1,29 @@
-// Specs 319 and 329: Pip's read rule, the Load it and Read it orders, and the exchangeManifest root (saved strings only).
+// Specs 319, 329 and 349: Pip's read rule, the Load it and Read it orders, and the exchangeManifest root (saved strings only).
 export const TILE_IDS=Object.freeze(['colon','semicolon','comma','empty']);
 export const LOAD_CODES=Object.freeze(['semicolon-lead','colon-cut','fits','lead-merged','loads-merged','as-it-stands']);
 const MARK={colon:':',semicolon:';',comma:',',empty:''};
 export const JOIN_TILE_IDS=Object.freeze(['period','semicolon','colon','dash','comma','nothing']);
 export const READ_CODES=Object.freeze(['because-alone','because-usually','because-comma','comma-alone','crash','explain','period','semicolon','colon','dash']);
-const LINE_SLOTS={m1:3,m2:3,m3:3,m4:1},ITEM_IDS=['A1','A2','A3','A4','C1','C2','C3','C4','C5'],GUIDED_IDS=['A1','C1'],NOTE_IDS=['n1','n2','n3','n4','n5'];
+const LINE_SLOTS={m1:3,m2:3,m3:3,m4:1},ITEM_IDS=['A1','A2','A3','A4','C1','C2','C3','C4','C5','D1','D2','D3','D4'],GUIDED_IDS=['A1','C1','D1'],NOTE_IDS=['n1','n2','n3','n4','n5'];
 // Tile items: A3 has three gaps, C5 one.
 const TILE_ITEMS={A3:{tiles:['colon','semicolon','comma'],slots:['s1','s2','s3']},C5:{tiles:['period','semicolon','colon','dash','comma'],slots:['s1']}};
+// Spec 349: the Book Crate. Underline is italics chosen in Hand mode.
+export const CRATE_TILE_IDS=Object.freeze(['italics','quotes','plain']);
+export const CRATE_CODES=Object.freeze(['plain','whole-newspaper-quotes','whole-quotes','short-italics','part-italics','whole-underline','whole-italics','part-quotes']);
+export const GUIDED_ITEM_IDS=Object.freeze([...GUIDED_IDS]);
+const TITLE_IDS=['t1','t2','t3','t4','t5','t6','t7','t8'];
+const CRATE_FIELDS=['shown','mark','hand','text','said','outcome','supported','at'];
+export const titleFits=(title,mark)=>mark===(title.kind==='whole'?'italics':'quotes');
+// The first row of spec 349's feedback order that applies.
+export function crateCode(title,mark,hand){
+ if(mark==='plain')return 'plain';
+ if(mark==='quotes')return title.id==='t7'?'whole-newspaper-quotes':title.kind==='whole'?'whole-quotes':'part-quotes';
+ if(title.kind==='short')return 'short-italics';
+ if(title.kind==='part')return 'part-italics';
+ return hand?'whole-underline':'whole-italics';
+}
+// The marked title: *italics*, _underline_, typographic quotes or plain letters.
+export const markTitle=(title,mark,hand)=>mark==='plain'?title:mark==='quotes'?`“${title}”`:hand?`_${title}_`:`*${title}*`;
 const JOIN_FIELDS=['shown','mark','text','said','outcome','supported','at'];
 const LINE_FIELDS=['variant','shown','slots','load','text','crates','said','supported','at'];
 const ITEM_FIELDS=['shown','answer','prompt','offered','answerText','said','outcome','supported','guided','at'];
@@ -80,6 +97,11 @@ function joinShape(e){
  const ok=Array.isArray(e.shown)&&e.shown.length===6&&new Set(e.shown).size===6&&e.shown.every(t=>JOIN_TILE_IDS.includes(t))&&e.shown.includes(e.mark)&&str(e.text)&&str(e.said)&&['fits','other'].includes(e.outcome)&&typeof e.supported==='boolean'&&typeof e.at==='string';
  return ok?'completed':'unreadable';
 }
+function crateShape(e){
+ if(!plain(e))return 'unreadable';const keys=CRATE_FIELDS.filter(k=>own(e,k));if(keys.length!==CRATE_FIELDS.length)return 'unreadable';
+ const ok=Array.isArray(e.shown)&&e.shown.length===3&&new Set(e.shown).size===3&&e.shown.every(t=>CRATE_TILE_IDS.includes(t))&&e.shown.includes(e.mark)&&typeof e.hand==='boolean'&&str(e.text)&&str(e.said)&&['fits','other'].includes(e.outcome)&&typeof e.supported==='boolean'&&typeof e.at==='string';
+ return ok?'completed':'unreadable';
+}
 function itemShape(id,e){
  if(!plain(e))return 'unreadable';const keys=ITEM_FIELDS.filter(k=>own(e,k));
  if(keys.length===2&&own(e,'supported')&&own(e,'guided'))return e.supported===true&&typeof e.guided==='boolean'?'pending':'unreadable';
@@ -91,16 +113,19 @@ function itemShape(id,e){
  return ok?'completed':'unreadable';
 }
 export function manifestView(state){
- if(!own(state,'exchangeManifest'))return {status:'absent',cardsSeen:false,lists:{},items:{},joins:{}};
+ if(!own(state,'exchangeManifest'))return {status:'absent',cardsSeen:false,lists:{},items:{},joins:{},crate:{},crateStatus:'ready'};
  const r=state.exchangeManifest;
- if(plain(r)&&own(r,'v')&&r.v!==1)return {status:'unknown',root:r,lists:{},items:{},joins:{}};
+ if(plain(r)&&own(r,'v')&&r.v!==1)return {status:'unknown',root:r,lists:{},items:{},joins:{},crate:{},crateStatus:'unavailable'};
  // Items allow 278's whole catalog (25); joins are optional and hold at most 8 notes.
- if(!plain(r)||r.v!==1||typeof r.cardsSeen!=='boolean'||!plain(r.lists)||!plain(r.items)||Object.keys(r.lists).length>4||Object.keys(r.items).length>25||own(r,'joins')&&(!plain(r.joins)||Object.keys(r.joins).length>8))return {status:'malformed',root:r,lists:{},items:{},joins:{}};
- const lists={},items={},joins={};
+ if(!plain(r)||r.v!==1||typeof r.cardsSeen!=='boolean'||!plain(r.lists)||!plain(r.items)||Object.keys(r.lists).length>4||Object.keys(r.items).length>25||own(r,'joins')&&(!plain(r.joins)||Object.keys(r.joins).length>8))return {status:'malformed',root:r,lists:{},items:{},joins:{},crate:{},crateStatus:'unavailable'};
+ const lists={},items={},joins={},crate={};
+ // A bad crate map closes only the crate region (spec 349); the raw value stays on the root untouched.
+ const crateStatus=!own(r,'crate')||plain(r.crate)&&Object.keys(r.crate).length<=8?'ready':'unavailable';
+ if(crateStatus==='ready')for(const [k,e] of Object.entries(r.crate??{}))crate[k]={shape:TITLE_IDS.includes(k)?crateShape(e):'unreadable',entry:e};
  for(const [k,e] of Object.entries(r.lists))lists[k]={shape:own(LINE_SLOTS,k)?lineShape(k,e):'unreadable',entry:e};
  for(const [k,e] of Object.entries(r.items))items[k]={shape:ITEM_IDS.includes(k)?itemShape(k,e):'unreadable',entry:e};
  for(const [k,e] of Object.entries(r.joins??{}))joins[k]={shape:NOTE_IDS.includes(k)?joinShape(e):'unreadable',entry:e};
- return {status:'ready',root:r,cardsSeen:r.cardsSeen,lists,items,joins};
+ return {status:'ready',root:r,cardsSeen:r.cardsSeen,lists,items,joins,crate,crateStatus};
 }
 // Every write: clone, change only exchangeManifest, shape-check what changed, preflight the real export, commit.
 function commit(state,change,options){
@@ -151,4 +176,13 @@ export function readNote(state,snapshot,mark,options){
  const v=manifestView(state),code=readCode(snapshot,mark);
  const entry={shown:[...JOIN_TILE_IDS],mark,text:joinText(snapshot.first,mark,snapshot.second),said:snapshot.said[code],outcome:noteFits(snapshot,mark)?'fits':'other',supported:supportedFor(v,x),at:time(options)};
  return commit(state,root=>{if(!own(root,'joins'))root.joins={};const old=root.joins[snapshot.id];root.joins[snapshot.id]=plain(old)?{...old,...entry}:entry;return {touched:[['joins',snapshot.id]],value:entry};},options);
+}
+// One tile choice on a crate title. snapshot is the title as rendered, with today's feedback lines frozen in.
+export function chooseTitle(state,snapshot,mark,hand,options){
+ if(!CRATE_TILE_IDS.includes(mark)||typeof hand!=='boolean'||!TITLE_IDS.includes(snapshot?.id))return false;
+ const v=manifestView(state);if(v.crateStatus!=='ready')return false;
+ const x=ready(state,'crate',snapshot.id);if(x===false)return false;
+ const drawn=mark==='italics'&&hand,code=crateCode(snapshot,mark,drawn);
+ const entry={shown:[...CRATE_TILE_IDS],mark,hand,text:markTitle(snapshot.title,mark,drawn),said:snapshot.said[code],outcome:titleFits(snapshot,mark)?'fits':'other',supported:supportedFor(v,x),at:time(options)};
+ return commit(state,root=>{if(!own(root,'crate'))root.crate={};const old=root.crate[snapshot.id];root.crate[snapshot.id]=plain(old)?{...old,...entry}:entry;return {touched:[['crate',snapshot.id]],value:entry};},options);
 }

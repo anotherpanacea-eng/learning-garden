@@ -1,4 +1,4 @@
-// Spec 319 browser journeys in Chromium: tap and keyboard tiles, Load it outcomes, set A support, Notes transfer, saving-off, explorers, stale controls.
+// Spec 319, 329 and 349 browser journeys in Chromium: tap and keyboard tiles, Load it outcomes, set A support, Notes transfer, saving-off, explorers, stale controls.
 import assert from 'node:assert/strict';
 import {mkdirSync} from 'node:fs';
 import {freshState} from '../dist/core.mjs';
@@ -19,7 +19,7 @@ try{
   eq(await book(p).then(b=>Object.hasOwn(b,'exchangeManifest')),false,`${w}: opening writes nothing`);
   ok((await p.locator('.mf-every').innerText()).startsWith('Marks tell a reader'),`${w}: every-screen line`);ok(await p.locator('.mf-intro').count()===1,`${w}: first visit shown`);
   ok(!(await overflow(p)),`${w}: no horizontal overflow`);eq(await small(p),[],`${w}: 44 px controls`);
-  if(w===820){await p.locator('.mf-bench:not(.mf-join)').evaluate(e=>e.scrollIntoView({block:'start'}));const bench=await p.locator('.mf-bench:not(.mf-join)').boundingBox(),loads=await p.locator('[data-mf-load]').evaluateAll(xs=>xs.map(x=>{const r=x.getBoundingClientRect();return [r.top,r.bottom];}));ok(bench.height<=h&&bench.y>=-1&&bench.y+bench.height<=h+1,'tablet viewport holds the whole bench once scrolled to');ok(loads.length===4&&loads.every(([t,b])=>t>=-1&&b<=h+1),'every Load it is on that same tablet screen');await p.evaluate(()=>scrollTo(0,0));}
+  if(w===820){await p.locator('.mf-bench:not(.mf-join):not(.mf-crate-bench)').evaluate(e=>e.scrollIntoView({block:'start'}));const bench=await p.locator('.mf-bench:not(.mf-join):not(.mf-crate-bench)').boundingBox(),loads=await p.locator('[data-mf-load]').evaluateAll(xs=>xs.map(x=>{const r=x.getBoundingClientRect();return [r.top,r.bottom];}));ok(bench.height<=h&&bench.y>=-1&&bench.y+bench.height<=h+1,'tablet viewport holds the whole bench once scrolled to');ok(loads.length===4&&loads.every(([t,b])=>t>=-1&&b<=h+1),'every Load it is on that same tablet screen');await p.evaluate(()=>scrollTo(0,0));}
   // Each slot stays beside the word before it.
   for(const sel of await p.$$('.mf-nowrap'))ok(await sel.evaluate(x=>{const r=x.getClientRects();return r.length===1;}),`${w}: a slot never splits from its word`);
   // Tap: slot then tile, and tile then slot.
@@ -140,5 +140,77 @@ try{
   await p.locator('#explorer-switch').click();await p.locator('#explorer-new').click();await p.locator('#explorer-create').click();await p.locator('[data-mf-root]').waitFor();
   const mid=await p.evaluate(()=>JSON.stringify(Object.fromEntries(Object.entries(localStorage))));await stale.evaluate(b=>b.click());const after=await p.evaluate(()=>JSON.stringify(Object.fromEntries(Object.entries(localStorage))));
   eq(after,mid,'detached Read it writes to no explorer');ok(!before.includes('"joins"'),'nothing was saved before the switch');await c.close();}
+ // Spec 349: the Book Crate, card 10 and set D. The full journey runs at 820; 320 and 1024 are representative.
+ const pick=(p,id,t)=>p.locator(`[data-mf-title="${id}:${t}"]`).click();
+ const handOn=p=>p.locator('[data-mf-hand]').getAttribute('aria-pressed').then(x=>x==='true');
+ for(const [w,h] of [[320,600],[820,1000],[1024,768]]){
+  const {c,p}=await fresh(w,h),full=w===820;
+  ok(await p.locator('.mf-crate-bench h2').innerText()==='The Book Crate',`${w}: bench title`);eq(await p.locator('[data-mf-crate]').count(),8,`${w}: eight titles`);eq(await handOn(p),false,`${w}: Hand mode off on a new visit`);
+  // Pair cards: one column at 320, two from 820.
+  const xs=await p.locator('.mf-pair').evaluateAll(xs=>xs.map(x=>Math.round(x.getBoundingClientRect().left)));eq(new Set(xs).size,w<820?1:2,`${w}: pair card columns`);
+  // Tap: italics on t1.
+  await pick(p,'t1','italics');await p.locator('#mf-crate-t1').waitFor();eq(await p.evaluate(()=>document.activeElement?.id),'mf-crate-t1',`${w}: focus moves to the result`);
+  ok((await p.locator('#mf-crate-t1 .mf-said').innerText())==='A whole work leans over in italics.',`${w}: whole italics line`);eq(await p.locator('#mf-crate-t1 em').evaluate(x=>getComputedStyle(x).fontStyle),'italic',`${w}: italics drawn`);
+  eq((await book(p)).exchangeManifest.crate.t1.supported,false,`${w}: first choice unsupported`);
+  // Hand mode: labels change, the committed row does not.
+  await p.locator('[data-mf-hand]').click();eq(await handOn(p),true,`${w}: Hand mode on`);eq(await p.evaluate(()=>document.activeElement?.dataset.mfHand),'',`${w}: focus stays on the toggle`);
+  eq(await p.locator('[data-mf-title="t3:italics"]').innerText(),'underline',`${w}: italics tile reads underline`);ok(await p.locator('#mf-crate-t1 em').count()===1&&await p.locator('#mf-crate-t1 .mf-underline').count()===0,`${w}: toggling never redraws a committed row`);
+  // Keyboard: underline on t3.
+  await p.locator('[data-mf-title="t3:italics"]').focus();await p.keyboard.press('Enter');await p.locator('#mf-crate-t3').waitFor();
+  ok((await p.locator('#mf-crate-t3 .mf-said').innerText())==='By hand, a whole work is underlined.',`${w}: keyboard choice and the underline line`);
+  const u=await p.locator('#mf-crate-t3 .mf-underline').evaluate(x=>{const st=getComputedStyle(x);return {line:st.textDecorationLine,cursor:st.cursor,color:st.color,parent:getComputedStyle(x.parentElement).color,link:!!x.closest('a')};});
+  ok(u.line.includes('underline')&&u.cursor!=='pointer'&&u.color===u.parent&&!u.link,`${w}: underline is not a link style ${JSON.stringify(u)}`);
+  eq(await p.locator('#mf-crate-t3 .sr-only').innerText(),'A Child’s Garden of Verses, underlined',`${w}: underlined accessible name`);
+  let saved=(await book(p)).exchangeManifest.crate.t3;eq([saved.mark,saved.hand,saved.text,saved.outcome],['italics',true,'_A Child’s Garden of Verses_','fits'],`${w}: underline saved as italics by hand`);
+  // Quotes on t2 keeps Hand mode; the three marks are visibly distinct.
+  await pick(p,'t2','quotes');ok((await p.locator('#mf-crate-t2 .mf-marked').innerText())==='“The River Bank”',`${w}: quotes drawn`);eq(await handOn(p),true,`${w}: Hand mode kept across a tile choice`);
+  if(full){
+   for(const [id,t] of [['t4','italics'],['t5','plain'],['t6','quotes'],['t7','quotes'],['t8','italics']])await pick(p,id,t);
+   const lines=await p.locator('[data-mf-crate] .mf-said').allInnerTexts();eq(lines.length,8,'820: every title chosen');ok(lines.includes('This is a whole newspaper. Most school writing uses italics.')&&lines.includes('A part, or a short work, goes in quotation marks.')&&lines.includes('This one lives inside a bigger work. Try quotation marks.')&&lines.includes('Plain letters hide that it’s a title. Pick a mark.'),'820: the order table lines');
+   await p.locator('[data-mf-hand]').click();await pick(p,'t7','italics');ok((await p.locator('#mf-crate-t7 .mf-said').innerText())==='A whole work leans over in italics.','820: Hand mode off draws italics again');await p.locator('[data-mf-hand]').click();
+   eq((await book(p)).exchangeManifest.crate.t7.supported,true,'820: a later choice carries the line already seen');
+   if(out)await p.locator('.mf-crate-bench').screenshot({path:`${out}/manifest-crate-${w}.png`});
+   // Card 10: one step at a time, sets cardsSeen first.
+   await p.locator('[data-mf-worked="card10"] > summary').click();await p.locator('#mf-steps-card10').waitFor();eq((await book(p)).exchangeManifest.cardsSeen,true,'820: card 10 sets cardsSeen before display');ok(await p.locator('#mf-steps-card10 em').count()===1,'820: card 10 step draws italics');
+  }
+  // Set D: D1 pending before its steps; answers and help keep Hand mode.
+  await p.locator('[data-mf-set="D"] > summary').click();await p.locator('#mf-item-D1').waitFor();eq((await book(p)).exchangeManifest.items.D1,{supported:true,guided:true},`${w}: D1 pending before its steps`);
+  ok(await p.locator('[data-mf-item="D1"] .mf-steps li').count()===3,`${w}: D1 guided steps`);
+  await p.locator('[data-mf-choice="D1:b"]').click();await p.locator('#mf-feedback-D1').waitFor();ok((await p.locator('#mf-feedback-D1').innerText()).includes('Most school writing saves those for parts, like poems.'),`${w}: D1 feedback`);eq(await handOn(p),true,`${w}: Hand mode kept across an answer`);
+  await p.locator('[data-mf-stuck="D2"]').click();ok((await p.locator('#mf-ladder-D2').innerText()).includes('Is a poem a whole book, or a part?'),`${w}: D2 ladder step 1`);eq(await handOn(p),true,`${w}: Hand mode kept across a help redraw`);
+  ok(await p.locator('[data-mf-choice="D3:b"] em').count()===1,`${w}: D3 choices draw their italics`);
+  if(full){
+   await p.locator('[data-mf-stuck="D2"]').click();ok((await p.locator('#mf-ladder-D2').innerText()).includes('is it a whole book, or a part inside one?'),'820: title ladder step 2');await p.locator('[data-mf-stuck="D2"]').click();await p.locator('[data-mf-skip="D2"]').click();eq(await p.evaluate(()=>document.activeElement?.id),'mf-item-D3','820: skip moves to D3');
+   await p.locator('[data-mf-choice="D2:c"]').click();await p.locator('[data-mf-choice="D3:b"]').click();await p.locator('#mf-feedback-D3').waitFor();ok(await p.locator('#mf-feedback-D3 .mf-chosen em').count()===1,'820: D3 saved choice keeps its italics');
+   await p.locator('[data-mf-choice="D4:b"]').click();await p.locator('#mf-feedback-D4').waitFor();ok((await p.locator('#mf-feedback-D4').innerText()).includes('Slanted handwriting is hard to spot.'),'820: D4 feedback');
+   eq(Object.keys((await book(p)).exchangeManifest.items).filter(k=>k[0]==='D').sort(),['D1','D2','D3','D4'],'820: D1 to D4 saved');
+   if(out)await p.locator('[data-mf-set="D"]').screenshot({path:`${out}/manifest-set-d-${w}.png`});
+  }
+  ok(!(await overflow(p)),`${w}: no horizontal overflow with the crate and Set D open`);eq(await small(p),[],`${w}: 44 px controls with the crate`);
+  await p.addStyleTag({content:'html{font-size:150%}'});ok(!(await overflow(p)),`${w}: 150% root font has no overflow`);
+  if(out)await p.screenshot({path:`${out}/manifest-crate-page-${w}.png`,fullPage:true});
+  // A new visit: Hand mode is off again and committed rows show their saved text.
+  saved=(await book(p)).exchangeManifest;await p.reload();await p.locator('[data-mf-root]').waitFor();eq(await handOn(p),false,`${w}: Hand mode off after reload`);ok(await p.locator('#mf-crate-t3 .mf-underline').count()===1,`${w}: saved underline shown after reload`);eq((await book(p)).exchangeManifest,saved,`${w}: reload writes nothing`);
+  if(full){
+   // Real Notes download, import as a new explorer and reload.
+   await p.goto(url+'#notes');const sec=p.locator('details:has-text("Market list marks")');await sec.locator('summary').click();ok(await sec.locator('h4:has-text("The book crate")').count()===1,'820: Notes subheading for the crate');ok((await sec.innerText()).includes('By hand: yes'),'820: Notes hand flag');
+   const [dl]=await Promise.all([p.waitForEvent('download'),p.locator('#download').click()]);const text=(await import('node:fs')).readFileSync(await dl.path(),'utf8');eq(JSON.parse(text).exchangeManifest,saved,'820: Notes download keeps crate and D items');
+   await p.locator('#progress-file').setInputFiles({name:'manifest.json',mimeType:'application/json',buffer:Buffer.from(text)});await p.locator('#progress-import-confirm').click();
+   await p.goto(url+'#post/manifest');await p.locator('[data-mf-root]').waitFor();const imported=await p.evaluate(()=>JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId);await p.reload();await p.locator(`[data-select-explorer="${imported}"]`).click();await p.locator('[data-mf-root]').waitFor();
+   eq((await book(p)).exchangeManifest,saved,'820: imported explorer reopens with the crate');ok(await p.locator('#mf-crate-t3 .mf-underline').count()===1,'820: imported underline shows');
+  }
+  ok(p.errors.length===0,`${w}: no page errors (${p.errors.join('; ')})`);await c.close();
+ }
+ // Saving off keeps crate choices in-session; a stale crate tile writes to no explorer.
+ {const {c,p}=await fresh(320,600);await p.goto(url+'#notes');await p.locator('#remember').uncheck();const storage=await p.evaluate(()=>({...localStorage}));
+  await p.goto(url+'#post/manifest');await p.locator('[data-mf-root]').waitFor();await pick(p,'t8','quotes');ok(await p.locator('#mf-crate-t8').count()===1,'saving off: crate choice works');
+  await p.goto(url+'#notes');const [dl]=await Promise.all([p.waitForEvent('download'),p.locator('#download').click()]);const data=JSON.parse((await import('node:fs')).readFileSync(await dl.path(),'utf8'));eq(data.exchangeManifest.crate.t8.outcome,'fits','saving off: crate retained in session');eq(await p.evaluate(()=>({...localStorage})),storage,'saving off: crate writes nothing to storage');await c.close();}
+ {const {c,p}=await fresh(820,1000);const stale=await p.evaluateHandle(()=>document.querySelector('[data-mf-title="t1:italics"]'));const hand=await p.evaluateHandle(()=>document.querySelector('[data-mf-hand]'));
+  await p.locator('#explorer-switch').click();await p.locator('#explorer-new').click();await p.locator('#explorer-create').click();await p.locator('[data-mf-root]').waitFor();
+  const mid=await p.evaluate(()=>JSON.stringify({...localStorage}));await stale.evaluate(b=>b.click());await hand.evaluate(b=>b.click());eq(await p.evaluate(()=>JSON.stringify({...localStorage})),mid,'stale crate tile writes to no explorer');eq(await handOn(p),false,'stale toggle changes nothing; a new explorer starts with Hand mode off');await c.close();}
+ // A malformed crate beside readable work: crate rows read-only, the rest usable, the raw crate kept.
+ {const seed=freshState();seed.exchangeManifest={v:1,cardsSeen:false,lists:{},items:{},crate:['opaque']};const c=await browser.newContext({viewport:{width:820,height:1000}});await c.addInitScript(s=>{if(!localStorage.getItem('learning-garden-explorers'))localStorage.setItem('number-garden-v1',JSON.stringify(s));},seed);const p=await c.newPage();await p.goto(url+'#post/manifest');await p.locator('[data-mf-root="open"]').waitFor();
+  ok(await p.locator('[data-mf-title]').count()===0&&await p.locator('[data-mf-hand]').count()===0,'malformed crate: rows read-only');await place(p,'m4','s1','empty');await p.locator('[data-mf-load="m4"]').click();await p.locator('#mf-result-m4').waitFor();
+  const b=(await book(p)).exchangeManifest;eq(b.crate,['opaque'],'malformed crate kept exactly after a list write');eq(b.lists.m4.load,'fits','lists stay usable');await c.close();}
 }finally{await browser.close();}
 console.log(`Exchange Manifest browser checks: ${n} assertions passed.`);

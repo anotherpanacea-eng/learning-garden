@@ -1,8 +1,8 @@
 // Spec 319 source checks: Pip's read rule, Load it order, set A, saved strings, structural validation and copy.
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {MANIFEST_TEXT as T,MANIFEST_LINES,MANIFEST_ITEMS,JOIN_NOTES,JOIN_ITEMS} from '../dist/manifest-content.mjs';
-import {TILE_IDS,JOIN_TILE_IDS,readLine,loadCode,punctuate,whatFits,itemFeedback,manifestView,markSupport,markCardsSeen,loadLine,answerItem,readNote,readCode,joinText} from '../dist/manifest-core.mjs';
+import {MANIFEST_TEXT as T,MANIFEST_LINES,MANIFEST_ITEMS,JOIN_NOTES,JOIN_ITEMS,CRATE_TEXT as K,CRATE_TITLES,TITLE_ITEMS} from '../dist/manifest-content.mjs';
+import {TILE_IDS,JOIN_TILE_IDS,readLine,loadCode,punctuate,whatFits,itemFeedback,manifestView,markSupport,markCardsSeen,loadLine,answerItem,readNote,readCode,joinText,CRATE_TILE_IDS,crateCode,chooseTitle} from '../dist/manifest-core.mjs';
 import {manifestNotes,manifestPage,resetManifestView} from '../dist/manifest-ui.mjs';
 import {scanCopySource} from '../scripts/check-child-copy.mjs';
 const readText=url=>readFileSync(new URL(url,import.meta.url),'utf8').replace(/\r\n/g,'\n');
@@ -116,8 +116,9 @@ for(const tile of [null,...TILE_IDS]){
  const labels=[...html.matchAll(/data-mf-slot="(m[^"]+)" aria-label="([^"]+)"/g)];eq(labels.length,10,'every generated bench slot label audited');
  for(const [,id,label] of labels){const [owner,slot]=id.split(':'),number=Number(slot.slice(1));const expected=slotException.split(' (n is')[0].replace('{n}',number)+(owner==='m1'&&tile?`, ${T.tiles[tile]}`:'');eq(label,expected,'generated slot label expands spec exception: '+id);}
 }
-// Spec 329's panel replaces 319's and covers both benches.
-const panel=spec329.slice(spec329.indexOf('**Grown-up panel, exact text**'),spec329.indexOf('**Wording outside')).split('\n').filter(x=>x.startsWith('> ')&&x.length>2).map(x=>x.slice(2));
+// Spec 349's panel replaces 329's and covers all three benches.
+const spec349=readText('../docs/specs/349-book-crate.md');
+const panel=spec349.slice(spec349.indexOf('**Grown-up panel, exact text.**'),spec349.indexOf('**Wording outside')).split('\n').filter(x=>x.startsWith('> ')&&x.length>2).map(x=>x.slice(2));
 const companionFlat=flat(companion.replace(/^> /gm,''));
 const fromCompanion=x=>companionFlat.includes(flat(x))||companionFlat.includes(flat(x).replace(/\*/g,''));
 const strings=[];const walk=v=>{if(typeof v==='string')strings.push(v);else if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==='object')Object.values(v).forEach(walk);};
@@ -192,4 +193,75 @@ for(const canExport of [()=>false,()=>{throw Error('preflight');},undefined]){co
 {resetManifestView();const html=manifestPage(fresh(),'join-render');ok(html.includes(T.joinTitle.replace('’','&#39;'))||html.includes(T.joinTitle),'bench title');ok(html.includes('data-mf-set="C"')&&!/data-mf-set="C" open/.test(html),'Set C closed by default');
  eq([...html.matchAll(/data-mf-read="(n\d)"/g)].map(m=>m[1]),['n1','n2','n3','n4','n5']);for(const m of html.matchAll(/data-mf-slot="(n\d:s1)" aria-label="([^"]+)"/g))eq(m[2],'Gap','note gap label');
  for(const c of T.joinCards)ok(html.includes(c.title),'card shown: '+c.title);}
-console.log(`Exchange Manifest market list and joining notes: ${n} checks passed (${total} tile patterns, ${pairs} note marks).`);
+
+// Spec 349: the Book Crate, card 10 and set D.
+const TT=Object.fromEntries(CRATE_TITLES.map(t=>[t.id,t])),D=Object.fromEntries(TITLE_ITEMS.map(i=>[i.id,i]));
+const titleSnap=t=>structuredClone({...t,said:{...K.said}});
+eq(CRATE_TILE_IDS,['italics','quotes','plain'],'crate tile order');
+// Finite checks on the eight titles, notes and kinds (spec 349's table and the companion).
+eq(CRATE_TITLES.map(t=>[t.id,t.title,t.kind]),[['t1','The Wind in the Willows','whole'],['t2','The River Bank','part'],['t3','A Child’s Garden of Verses','whole'],['t4','The Swing','part'],['t5','Just So Stories','whole'],['t6','How the Whale Got His Throat','part'],['t7','The Willowbank Gazette','whole'],['t8','Willow Brook Runs Down','short']]);
+eq(CRATE_TITLES.map(t=>t.note),['a book by Kenneth Grahame, 1908','its first chapter','a book of poems by Robert Louis Stevenson, 1885','a poem in that book','a book by Rudyard Kipling, 1902','a story in that book','the town’s newspaper','a song the town sings at the Market Fair']);
+eq(CRATE_TITLES.filter(t=>t.story).map(t=>t.id),['t7','t8'],'only the Gazette and the song are Willowbank stories');
+for(const t of CRATE_TITLES)ok(companionFlat.includes(flat(`${t.kind==='whole'?`*${t.title}*`:`"${t.title}"`}: ${t.note}`)),'title and note are the companion’s: '+t.id);
+// An independent reading of the order table for all 48 title, tile and mode combinations.
+const lineOf={plain:'Plain letters hide that it’s a title. Pick a mark.',news:'This is a whole newspaper. Most school writing uses italics.',book:'This is a whole book. Most school writing uses italics.',short:'A part, or a short work, goes in quotation marks.',inside:'This one lives inside a bigger work. Try quotation marks.',under:'By hand, a whole work is underlined.',lean:'A whole work leans over in italics.'};
+const crateOracle=(id,m,hand)=>{const whole=['t1','t3','t5','t7'].includes(id);if(m==='plain')return ['plain',lineOf.plain];if(m==='quotes')return id==='t7'?['whole-newspaper-quotes',lineOf.news]:whole?['whole-quotes',lineOf.book]:['part-quotes',lineOf.short];if(id==='t8')return ['short-italics',lineOf.short];if(!whole)return ['part-italics',lineOf.inside];return hand?['whole-underline',lineOf.under]:['whole-italics',lineOf.lean];};
+let combos=0;
+for(const t of CRATE_TITLES)for(const m of CRATE_TILE_IDS)for(const hand of [false,true]){combos++;const s=fresh(),e=chooseTitle(s,titleSnap(t),m,hand,options),[code,line]=crateOracle(t.id,m,hand),whole=t.kind==='whole';
+ eq(crateCode(t,m,m==='italics'&&hand),code,`${t.id} ${m} ${hand} code`);eq(e.said,line,`${t.id} ${m} ${hand} line`);
+ eq(e.text,m==='plain'?t.title:m==='quotes'?`“${t.title}”`:hand?`_${t.title}_`:`*${t.title}*`,`${t.id} ${m} ${hand} text`);
+ eq(e.outcome,(whole?m==='italics':m==='quotes')?'fits':'other',`${t.id} ${m} ${hand} outcome`);eq([e.shown,e.mark,e.hand,e.supported],[['italics','quotes','plain'],m,hand,false]);eq(s.exchangeManifest.crate[t.id],e);}
+eq(combos,48,'all 48 title, mark and mode combinations');
+ok(chooseTitle(fresh(),titleSnap(TT.t1),'underline',false,options)===false,'underline is not a saved tile');ok(chooseTitle(fresh(),titleSnap(TT.t1),'italics','yes',options)===false,'hand must be a boolean');
+// Saves: absent until the first choice, replacement, support, cards seen and frozen strings.
+{const s=fresh();loadLine(s,lineSnap(L.m1),{s1:'colon',s2:'comma',s3:'comma'},options);ok(!Object.hasOwn(s.exchangeManifest,'crate'),'no other write adds crate');
+ eq(chooseTitle(s,titleSnap(TT.t2),'italics',false,options).supported,false,'first choice unsupported');const e=chooseTitle(s,titleSnap(TT.t2),'quotes',false,options);eq([e.supported,e.outcome],[true,'fits'],'a later choice carries the line already seen');eq(Object.keys(s.exchangeManifest.crate),['t2'],'each choice replaces that title’s entry');
+ eq(manifestView(s).crate.t2.shape,'completed');markCardsSeen(s,options);eq(chooseTitle(s,titleSnap(TT.t3),'plain',false,options).supported,true,'card worked example marks later choices');
+ const saved=JSON.parse(JSON.stringify(s));eq(manifestView(saved).crate.t3.entry.supported,true,'support survives export and import');}
+{const s=fresh(),old=titleSnap(TT.t7);chooseTitle(s,old,'quotes',false,options);const today=titleSnap(TT.t7);today.said['whole-newspaper-quotes']='Today’s crate line.';today.title='Today’s title';
+ const notes=manifestNotes(s);ok(notes.includes('This is a whole newspaper.')&&!notes.includes('Today’s crate line.')&&notes.includes(K.notesHeading),'Notes render the saved crate strings under their subheading');ok(notes.includes('“The Willowbank Gazette”'),'Notes show the saved marked title');
+ eq(chooseTitle(s,today,'quotes',false,options).said,'Today’s crate line.','a new choice uses its own snapshot');}
+// Structural validation of crate entries and the crate map.
+{const s=fresh();chooseTitle(s,titleSnap(TT.t1),'italics',false,options);const r=s.exchangeManifest;
+ const bad=[e=>{const x={...e};delete x.hand;return x;},e=>({...e,hand:'no'}),e=>({...e,shown:['italics','italics','plain']}),e=>({...e,shown:['italics','quotes','underline']}),e=>({...e,shown:['italics','quotes']}),e=>({...e,mark:'underline'}),e=>({...e,text:'x'.repeat(401)}),e=>({...e,said:5}),e=>({...e,outcome:'right'}),e=>({...e,supported:'yes'}),e=>({...e,at:1}),()=>['opaque'],()=>({mark:'italics'})];
+ for(const f of bad){const x=structuredClone(r);x.crate.t1=f(x.crate.t1);eq(shape(x,'crate','t1'),'unreadable',JSON.stringify(x.crate.t1).slice(0,60));}
+ const y=structuredClone(r);y.crate.t1.future={kept:true};eq(shape(y,'crate','t1'),'completed','unknown additive crate field ignored');
+ const t={exchangeManifest:y};chooseTitle(t,titleSnap(TT.t1),'quotes',false,options);eq(t.exchangeManifest.crate.t1.future,{kept:true},'additive field kept on replacement');
+ const z=structuredClone(r);z.crate.t9={};eq(shape(z,'crate','t9'),'unreadable','unknown title id');
+ const u={exchangeManifest:structuredClone(r)};u.exchangeManifest.crate.t2={opaque:true};const before=structuredClone(u.exchangeManifest.crate.t2);ok(chooseTitle(u,titleSnap(TT.t2),'quotes',false,options)===false,'unreadable title turns read-only');eq(u.exchangeManifest.crate.t2,before);
+ eq(chooseTitle(u,titleSnap(TT.t3),'italics',false,options).outcome,'fits','other titles stay usable');
+ eq(manifestView({exchangeManifest:structuredClone(base)}).crate,{},'a 329-shaped root reads an empty crate');eq(manifestView({exchangeManifest:structuredClone(base)}).crateStatus,'ready');}
+// A malformed crate map closes only the crate: lists, joins and items stay usable and keep the raw value exactly.
+for(const crate of [[],'x',null,Object.fromEntries(Array.from({length:9},(_,i)=>['t'+i,{}]))]){
+ const s={exchangeManifest:{...complete(),crate}},raw=JSON.stringify(crate);const v=manifestView(s);eq([v.status,v.crateStatus],['ready','unavailable'],'bad crate map: '+raw.slice(0,30));
+ const b=structuredClone(s);ok(chooseTitle(s,titleSnap(TT.t1),'italics',false,options)===false,'no crate write');eq(s,b);
+ ok(loadLine(s,lineSnap(L.m4),{s1:'empty'},options)!==false,'lists stay usable');ok(readNote(s,noteSnap(N.n1),'period',options)!==false,'joins stay usable');ok(answerItem(s,itemSnap(D.D2),'c',options)!==false,'items stay usable');ok(markCardsSeen(s,options)!==false,'cards seen stays usable');
+ eq(JSON.stringify(s.exchangeManifest.crate),raw,'raw crate kept exactly');ok(JSON.stringify(s).includes(`"crate":${raw}`),'export carries the raw crate');
+ resetManifestView();const page=manifestPage(s,'bad-crate');ok(!page.includes('data-mf-title=')&&page.includes('data-mf-root="open"')&&page.includes('data-mf-load="m1"'),'crate rows read-only, page open');ok(manifestNotes(s).includes(K.notesHeading),'Notes name the unavailable crate');}
+// Set D: positions, not-single-longest after the print rule, feedback and frozen shapes.
+eq(TITLE_ITEMS.map(i=>i.id),['D1','D2','D3','D4']);
+for(const [id,at] of [['D1',0],['D2',2],['D3',1],['D4',0]]){const i=D[id],lens=i.choices.map(c=>[...c.text.replace(/\*/g,'')].length),fit=i.choices.findIndex(c=>c.id===i.fits);eq(fit,at,id+' fitting position');ok(!(lens[fit]===Math.max(...lens)&&lens.filter(x=>x===lens[fit]).length===1),id+' fitting choice is never the single longest');
+ for(const c of i.choices)eq(itemFeedback(i,c.id),c.id===i.fits?{outcome:'fits',said:[i.explanation]}:{outcome:'other',said:[c.feedback,i.explanation]});}
+eq(D.D3.choices.map(c=>[...c.text.replace(/\*/g,'')].length),[67,65,65],'D3 lengths as the spec states');
+{const s=fresh();eq(markSupport(s,'items','D1',options,{guided:true}),true);eq(s.exchangeManifest.items.D1,{supported:true,guided:true},'D1 pending before its steps');
+ const d1=answerItem(s,itemSnap(D.D1),'b',options);eq([d1.outcome,d1.supported,d1.guided],['other',true,true]);eq(d1.prompt,'The librarian types the title of a book: The Wind in the Willows.\nIn school writing, how do you show a typed book title?');
+ eq(answerItem(s,itemSnap(D.D4),'a',options).prompt,'You write a book title by hand for school. What do you do?','D4 has no card');
+ const d3=answerItem(s,itemSnap(D.D3),'b',options);eq(d3.answerText,'“The River Bank” is the first chapter of *The Wind in the Willows*.');eq(d3.prompt,'“The River Bank” is the first chapter of The Wind in the Willows.\nIn school writing, which sentence shows the chapter and the book?');
+ for(const id of ['D1','D3','D4'])eq(manifestView(s).items[id].shape,'completed',id+' completed shape');ok(manifestNotes(s).includes('<em>The Wind in the Willows</em>'),'Notes draw D3’s saved italics');
+ for(const canExport of [()=>false,()=>{throw Error('x');}]){const t=fresh(),b=structuredClone(t);ok(markSupport(t,'items','D1',{canExport},{guided:true})===false,'refused Set D pre-display save');eq(t,b);}}
+// Copy: the companion, the spec's seven exceptions and the market limits.
+const exceptions349=rowsOf(spec349.slice(spec349.indexOf('**Wording outside the companion'),spec349.indexOf("319's and 329's exceptions")));
+eq(exceptions349.length,7,'seven exception rows');
+for(const x of [K.setTitle,K.notesHeading,K.said['whole-newspaper-quotes'],K.said['whole-underline'],K.said['part-italics'],K.tiles.underline,K.underlined('{title}')])ok(exceptions349.some(r=>straight(r)===straight(x)),'exception text is the spec’s: '+x);
+const crateStrings=[K.card.title.replace(/^Card \d+\. /,''),K.card.text,K.card.example,...K.card.steps,K.benchTitle,K.header,K.hand,K.historyLabel,...Object.values(K.tiles),...Object.values(K.said),K.setTitle,K.notesHeading,...CRATE_TITLES.flatMap(t=>[t.title,t.note])];
+TITLE_ITEMS.forEach(i=>{for(const k of ['card','prompt','hint','explanation'])if(i[k])crateStrings.push(i[k]);i.steps?.forEach(x=>crateStrings.push(x));i.choices.forEach(c=>{crateStrings.push(c.text);if(c.feedback)crateStrings.push(c.feedback);});});
+for(const x of crateStrings){ok(!/["']/.test(x),'print rule applied: '+x);ok(!/Vadoalto|Nuria|Hollis|high ford|\bthe Ways\b|\bpage\b/i.test(x),'no place or page beyond the market: '+x);ok(!x.includes('—'),'no em-dash: '+x);}
+eq(scanCopySource(crateStrings.join('\n')),[],'child-copy terms in the crate strings');
+eq(T.glossary.slice(-3).map(g=>g[0]),['Italics','Quotation marks','Title'],'glossary adds the three terms in order');
+// The page: card 10, the bench, Hand mode and Set D, closed by default.
+{resetManifestView();const s=fresh(),html=manifestPage(s,'crate-render');ok(html.includes(K.card.title)&&html.includes(K.benchTitle),'card 10 and the bench');ok(html.includes('data-mf-set="D"')&&!/data-mf-set="D" open/.test(html),'Set D closed by default');
+ eq([...html.matchAll(/data-mf-crate="(t\d)"/g)].map(m=>m[1]),['t1','t2','t3','t4','t5','t6','t7','t8']);eq((html.match(/class="mf-pair"/g)||[]).length,4,'four pair cards');ok(/data-mf-hand aria-pressed="false"/.test(html),'Hand mode off on a new visit');
+ ok(html.indexOf('data-mf-set="C"')<html.indexOf(K.card.title)&&html.indexOf(K.benchTitle)<html.indexOf('data-mf-set="D"'),'below Set C, then the bench, then Set D');
+ chooseTitle(s,titleSnap(TT.t3),'italics',true,options);resetManifestView();const page=manifestPage(s,'crate-render');ok(page.includes('<span class="sr-only">A Child&#39;s Garden of Verses, underlined</span>')||page.includes('A Child’s Garden of Verses, underlined'),'underlined title has its accessible name');ok(page.includes('class="mf-underline"'),'underline drawn');}
+ok(/\.mf-underline\{[^}]*text-decoration:underline/.test(readText('../dist/manifest.css'))&&!/\.mf-underline\{[^}]*cursor:pointer/.test(readText('../dist/manifest.css')),'underline is not styled as a link');
+console.log(`Exchange Manifest market list, joining notes and book crate: ${n} checks passed (${total} tile patterns, ${pairs} note marks, ${combos} crate choices).`);
