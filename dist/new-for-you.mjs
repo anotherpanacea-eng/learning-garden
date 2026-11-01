@@ -10,26 +10,33 @@ export function addDays(day,n){const [y,m,d]=day.split('-').map(Number);return l
 const byRoute=new Map(rooms.map(r=>[r.route,r]));
 export const roomFor=route=>byRoute.get(route)||null;
 
+// The record lives beside the notebook, never in it: entering a room must leave every notebook root unchanged.
 // Shape only, never registry membership: a removed or newer room's opened date is kept (spec 358, Restore).
 export function validRooms(v){
- return object(v)&&object(v.opened)&&Object.entries(v.opened).every(([k,d])=>/^#[^\s#]+$/.test(k)&&validDay(d))&&validDay(v.since)&&validDay(v.lastDay)&&v.since<=v.lastDay;
+ return object(v)&&typeof v.explorer==='string'&&object(v.opened)&&Object.entries(v.opened).every(([k,d])=>/^#[^\s#]+$/.test(k)&&validDay(d))&&validDay(v.since)&&validDay(v.lastDay)&&v.since<=v.lastDay;
 }
-const fresh=today=>({opened:{},since:addDays(today,-3),lastDay:today});
-// The record as it would be today, without changing the notebook.
-function view(book,today){const r=validRooms(book?.rooms)?book.rooms:fresh(today);return r.lastDay<today?{...r,since:r.lastDay,lastDay:today}:r;}
+export const roomsKey=id=>`number-garden-v1:${id}:rooms`;
+const fresh=(explorer,today)=>({explorer,opened:{},since:addDays(today,-3),lastDay:today});
+// explorer is the profile's createdAt, so a reused explorer id never inherits an old record.
+export function readRooms(raw,explorer){try{const v=JSON.parse(raw);return validRooms(v)&&v.explorer===explorer?v:null;}catch{return null;}}
 
-// First use, a new day and opening a room. Call only for the chosen explorer. Returns true when the notebook changed.
-export function touchRooms(book,route,today=localDay()){
- if(!object(book))return false;
- const before=JSON.stringify(book.rooms??null),r=view(book,today),room=roomFor(route);
- book.rooms={opened:{...r.opened},since:r.since,lastDay:r.lastDay};
- if(room&&!book.rooms.opened[room.route])book.rooms.opened[room.route]=today;
- return JSON.stringify(book.rooms)!==before;
+// First use, a new day and opening a room, for the chosen explorer only. Returns the next record; never mutates.
+export function touchRooms(record,route,explorer,today=localDay()){
+ let r=validRooms(record)&&record.explorer===explorer?record:fresh(explorer,today);
+ if(r.lastDay<today)r={...r,since:r.lastDay,lastDay:today};
+ const room=roomFor(route);
+ if(room&&!r.opened[room.route])r={...r,opened:{...r.opened,[room.route]:today}};
+ return r;
 }
+
+// The chosen explorer's record, set by the app after each touch; null while the picker shows.
+let active=null;
+export function setActiveRooms(record){active=validRooms(record)?record:null;}
 
 // Newest first; registry order breaks ties.
-export function newRooms(book,today=localDay()){
- const r=view(book,today);
+export function newRooms(record=active,today=localDay()){
+ if(!validRooms(record))return [];
+ const r=record.lastDay<today?{...record,since:record.lastDay}:record;
  return rooms.map((room,i)=>[room,i]).filter(([room])=>room.added>=r.since&&!r.opened[room.route]).sort((a,b)=>b[0].added.localeCompare(a[0].added)||a[1]-b[1]).map(([room])=>room);
 }
 
@@ -37,20 +44,20 @@ export const placeNames=Object.freeze({'#cafe':'the Café','#science':'the Water
 const where=room=>placeNames[room.places[0]]||'';
 const card=room=>`<a class="nfy-card" href="${esc(room.route)}" data-nfy-room><strong>${esc(room.title)}</strong><small>in ${esc(where(room))}</small></a>`;
 
-export function newShelf(book,today=localDay()){
- const list=newRooms(book,today);
+export function newShelf(record=active,today=localDay()){
+ const list=newRooms(record,today);
  if(!list.length)return '';
  return `<section class="nfy-shelf" aria-labelledby="nfy-title"><h2 id="nfy-title"><span class="nfy-dot" aria-hidden="true"></span>New for you</h2><div class="nfy-cards">${list.slice(0,4).map(card).join('')}</div>${list.length>4?`<a class="nfy-all" href="#new">See all new rooms (${list.length})</a>`:''}</section>`;
 }
 
-export function newRoomsPage(book,today=localDay()){
- const list=newRooms(book,today);
+export function newRoomsPage(record=active,today=localDay()){
+ const list=newRooms(record,today);
  return `<div class="nfy-page"><header class="page-heading"><a class="back" href="#home"><span aria-hidden="true">←</span> Back to the garden</a><h1 tabindex="-1">New rooms</h1><p>${list.length?'Rooms added since your last visit that you have not opened yet.':'Nothing new right now. Every room stays open.'}</p></header>${list.length?`<div class="nfy-cards nfy-list">${list.map(card).join('')}</div>`:''}</div>`;
 }
 
 // Marks every link to a new room, and each top-bar place that links one. Idempotent; safe to run after any render.
-export function markNewRooms(doc,book,{active=true,today=localDay()}={}){
- const list=active?newRooms(book,today):[],fresh=new Set(list.map(r=>r.route)),places=new Set(list.flatMap(r=>r.places));
+export function markNewRooms(doc,record=active,today=localDay()){
+ const list=newRooms(record,today),fresh=new Set(list.map(r=>r.route)),places=new Set(list.flatMap(r=>r.places));
  for(const a of doc.querySelectorAll('main a[href^="#"]')){
   const on=fresh.has(a.getAttribute('href'))&&!a.hasAttribute('data-nfy-room'),mark=a.querySelector(':scope > .nfy-mark');
   if(on&&!mark)a.insertAdjacentHTML('beforeend','<span class="nfy-mark"><span aria-hidden="true"><span class="nfy-dot"></span>New</span><span class="sr-only">, new</span></span>');

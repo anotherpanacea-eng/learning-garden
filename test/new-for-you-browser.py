@@ -24,18 +24,19 @@ def ok(value, message):
     checks += 1
 
 def explorer(n):
-    return {'id': f'explorer-{n}', 'avatar': 'sky', 'color': ['blue', 'gold'][n - 1], 'symbol': 'leaf', 'createdAt': '2026-10-20T12:00:00.000Z'}
+    return {'id': f'explorer-{n}', 'avatar': 'sky', 'color': ['blue', 'gold'][n - 1], 'symbol': 'leaf', 'createdAt': CREATED}
 
-def notebook(rooms=None):
-    book = {'version': 1, 'baseline': {'index': 0, 'observations': [], 'complete': False}, 'practice': [], 'puzzles': [], 'sessions': 0}
-    if rooms is not None:
-        book['rooms'] = rooms
-    return book
+CREATED = '2026-10-20T12:00:00.000Z'
 
-def setup(browser, width, height, books, active='explorer-1', when=TODAY):
+def notebook():
+    return {'version': 1, 'baseline': {'index': 0, 'observations': [], 'complete': False}, 'practice': [], 'puzzles': [], 'sessions': 0}
+
+def setup(browser, width, height, books, active='explorer-1', when=TODAY, records=None):
     c = browser.new_context(viewport={'width': width, 'height': height}, has_touch=True, reduced_motion='reduce')
     seed = {'registry': {'version': 1, 'activeId': active, 'explorers': [explorer(i + 1) for i in range(len(books))]},
             'books': {f'explorer-{i + 1}': b for i, b in enumerate(books)}}
+    for k, v in (records or {}).items():
+        seed['books'][f'{k}:rooms'] = v
     c.add_init_script('(s=>{if(localStorage.getItem("nfy-fixture"))return;localStorage.setItem("learning-garden-explorers",JSON.stringify(s.registry));' +
                       'for(const [k,v] of Object.entries(s.books))localStorage.setItem("number-garden-v1:"+k,JSON.stringify(v));' +
                       'localStorage.setItem("nfy-fixture","1");})(' + json.dumps(seed) + ')')
@@ -60,6 +61,9 @@ def hop(p, route):
 
 def book(p, n=1):
     return p.evaluate(f"()=>JSON.parse(localStorage.getItem('number-garden-v1:explorer-{n}'))")
+
+def rooms(p, n=1):
+    return p.evaluate(f"()=>JSON.parse(localStorage.getItem('number-garden-v1:explorer-{n}:rooms'))")
 
 def main():
     server = None
@@ -90,8 +94,9 @@ def main():
                 cards = p.locator('.nfy-shelf .nfy-card')
                 ok(p.locator('.nfy-shelf h2').inner_text().strip().endswith('New for you'), f'{width}: fresh explorer sees the shelf')
                 ok(1 <= cards.count() <= 4, f'{width}: one to four cards')
-                record = book(p)['rooms']
-                ok(record == {'opened': {}, 'since': '2026-10-29', 'lastDay': '2026-11-01'}, f'{width}: first use starts three days back: {record}')
+                record = rooms(p)
+                ok(record == {'explorer': CREATED, 'opened': {}, 'since': '2026-10-29', 'lastDay': '2026-11-01'}, f'{width}: first use starts three days back: {record}')
+                ok('rooms' not in book(p), f'{width}: no rooms root in the notebook')
                 expected = sorted({pl for r in registry if r['added'] >= '2026-10-29' for pl in r['places']})
                 dotted = p.eval_on_selector_all('.header nav a', 'as=>as.filter(a=>a.querySelector(".nfy-place")).map(a=>a.getAttribute("href"))')
                 nav = p.eval_on_selector_all('.header nav a', 'as=>as.map(a=>a.getAttribute("href"))')
@@ -101,7 +106,8 @@ def main():
                 cards.first.click()
                 p.wait_for_timeout(400)
                 ok(p.evaluate('location.hash') == first, f'{width}: shelf card opens its room')
-                ok(book(p)['rooms']['opened'].get(first) == '2026-11-01', f'{width}: opening is recorded')
+                ok(rooms(p)['opened'].get(first) == '2026-11-01', f'{width}: opening is recorded')
+                ok('rooms' not in book(p), f'{width}: still no rooms root after opening')
                 hop(p, '#home')
                 ok(first not in p.eval_on_selector_all('.nfy-card', 'as=>as.map(a=>a.getAttribute("href"))'), f'{width}: an opened room leaves the shelf')
                 place = next(r for r in registry if r['route'] == first)['places'][0]
@@ -130,24 +136,24 @@ def main():
                 c.close()
 
             # Shared device. A last visited Monday; the picker shows on load; B is chosen on Wednesday. A's record must not move.
-            monday = {'opened': {}, 'since': '2026-10-24', 'lastDay': '2026-10-27'}
-            c, p = setup(browser, 820, 1180, [notebook(monday), notebook()], when=datetime.datetime(2026, 10, 29, 9, 0))
+            monday = {'explorer': CREATED, 'opened': {}, 'since': '2026-10-24', 'lastDay': '2026-10-27'}
+            c, p = setup(browser, 820, 1180, [notebook(), notebook()], when=datetime.datetime(2026, 10, 29, 9, 0), records={'explorer-1': monday})
             p.goto(base + '#home', wait_until='domcontentloaded')
             p.locator('[data-select-explorer="explorer-2"]').wait_for()
-            ok(book(p, 1)['rooms'] == monday, 'the picker never moves the previous explorer')
+            ok(rooms(p, 1) == monday, 'the picker never moves the previous explorer')
             p.locator('[data-select-explorer="explorer-2"]').click()
             p.wait_for_timeout(500)
             film = p.locator('dialog.welcome-film[open] [data-film-skip]')
             if film.count():
                 film.click()
-            ok(book(p, 1)['rooms'] == monday, 'choosing B leaves A unchanged')
-            ok(book(p, 2)['rooms']['lastDay'] == '2026-10-29', 'B gets their own record')
+            ok(rooms(p, 1) == monday, 'choosing B leaves A unchanged')
+            ok(rooms(p, 2)['lastDay'] == '2026-10-29', 'B gets their own record')
             c.close()
-            c, p = setup(browser, 820, 1180, [notebook(monday), notebook()], when=datetime.datetime(2026, 10, 29, 18, 0))
+            c, p = setup(browser, 820, 1180, [notebook(), notebook()], when=datetime.datetime(2026, 10, 29, 18, 0), records={'explorer-1': monday})
             p.goto(base + '#home', wait_until='domcontentloaded')
             p.locator('[data-select-explorer="explorer-1"]').click()
             p.wait_for_timeout(500)
-            ok(book(p, 1)['rooms']['since'] == '2026-10-27' and book(p, 1)['rooms']['lastDay'] == '2026-10-29', 'A returning sees rooms since Monday')
+            ok(rooms(p, 1)['since'] == '2026-10-27' and rooms(p, 1)['lastDay'] == '2026-10-29', 'A returning sees rooms since Monday')
             c.close()
             ok(not errors, 'no page errors: ' + json.dumps(errors))
             print(f'New for you browser: {checks} assertions passed')

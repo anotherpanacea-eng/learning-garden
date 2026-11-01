@@ -49,7 +49,7 @@ const workshopShelves=[
  ['Measure, count and share',[['#workshop/repeats','Repeat a Delivery Block'],['#workshop/fractions','Same Amount, New Cuts'],['#workshop/recut','Ribbon Recut Table'],['#workshop/budget','Gathering Budget'],['#workshop/clock','Preparation Clock'],['#workshop/coins','Coin Counter'],['#workshop/same-ground','Same ground, different fence'],['#workshop/ribbon-measures','Ribbon Measures'],['#workshop/copy-frame','Copy Frame']]],
  ['Maps, sources and stories',[['#workshop/sources','Follow the Source Trail'],['#workshop/maps','Cartographer’s Table'],['#workshop/scale','Same route, different scale'],['#workshop/old-map','Reading the old map'],['#workshop/windows','Two Windows story desk']]],
 ];
-const tableShelves=state=>{const fresh=new Set(newRooms(state).map(r=>r.route));return `<nav class="workshop-shelves" aria-label="Workshop tables">${workshopShelves.map(([name,links])=>`<div class="workshop-shelf"><h2>${name}</h2><div class="workshop-table-choices">${[...links.filter(([h])=>fresh.has(h)),...links.filter(([h])=>!fresh.has(h))].map(([h,label])=>`<a href="${h}">${label}</a>`).join('')}</div></div>`).join('')}</nav>`;};
+const tableShelves=state=>{const fresh=new Set(newRooms().map(r=>r.route));return `<nav class="workshop-shelves" aria-label="Workshop tables">${workshopShelves.map(([name,links])=>`<div class="workshop-shelf"><h2>${name}</h2><div class="workshop-table-choices">${[...links.filter(([h])=>fresh.has(h)),...links.filter(([h])=>!fresh.has(h))].map(([h,label])=>`<a href="${h}">${label}</a>`).join('')}</div></div>`).join('')}</nav>`;};
 export function workshopPage(state,slug,explorerId){
  if(slug==='lantern')return circuitPage(state);
  if(slug==='repeats')return repeatDeliveriesPage(state);

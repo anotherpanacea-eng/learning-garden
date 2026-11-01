@@ -1,5 +1,5 @@
 import {pauseMillFilm,stopMillFilm} from './mill-film.mjs';
-import {touchRooms,newRoomsPage,markNewRooms} from './new-for-you.mjs';
+import {touchRooms,newRoomsPage,markNewRooms,setActiveRooms,readRooms,roomsKey} from './new-for-you.mjs';
 import {beatBenchPage,beatBenchEntry,beatBenchNotes,bindBeatBench,resetBeatBenchView} from './beat-bench-ui.mjs';
 import {longWordPage,longWordEntry,longWordNotes,bindLongWord,resetLongWordView} from './long-word-workshop-ui.mjs';
 import {wordListShelfPage,wordListShelfEntry,wordListShelfNotes,bindWordListShelf,resetWordListShelfView} from './word-list-shelf-ui.mjs';
@@ -220,9 +220,18 @@ const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
 // Spec 358: New marks follow every render and in-page re-render of main, and the top bar with them.
-let newMarksQueued=false;
-const queueNewMarks=()=>{if(newMarksQueued)return;newMarksQueued=true;requestAnimationFrame(()=>{newMarksQueued=false;markNewRooms(document,state,{active:!choosingExplorer});});};
-new MutationObserver(queueNewMarks).observe(main,{childList:true,subtree:true});
+// The observer runs as a microtask, so marks are in place before anything reads the new page. Marking twice changes nothing.
+new MutationObserver(()=>markNewRooms(document)).observe(main,{childList:true,subtree:true});
+// The chosen explorer's rooms record sits in its own key beside the notebook (memory only while saving is off),
+// so entering a room never changes a notebook root. Clearing every explorer removes it with the notebooks.
+const roomRecords=new Map();
+function touchActiveRooms(route){
+ const p=explorerStore.active,key=roomsKey(p.id);let before=roomRecords.get(key);
+ if(before===undefined){try{before=readRooms(localStorage.getItem(key),p.createdAt);}catch{before=null;}}
+ const next=touchRooms(before,route,p.createdAt);roomRecords.set(key,next);setActiveRooms(next);
+ // Never recreate data another tab removed or switched off: write only beside a notebook that is still saved.
+ if(explorerStore.persist&&!explorerStore.conflict&&JSON.stringify(next)!==JSON.stringify(before)){try{if(localStorage.getItem(`number-garden-v1:${p.id}`)!==null)localStorage.setItem(key,JSON.stringify(next));}catch{}}
+}
 keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'?'':location.hash);
 let needsExplorerInitialization=(location.hash||'').split('/')[0]==='#journeys'||['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer)||!!actThreeRoute(location.hash);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
@@ -382,7 +391,7 @@ function render(){
   if(!choosingExplorer&&styleOf(state)==='field-journal')document.documentElement.dataset.style='field-journal';else delete document.documentElement.dataset.style;
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
   // Spec 358: first use, a new day and opening a room, only for the chosen explorer.
-  if(!choosingExplorer&&touchRooms(state,hash))save();
+  if(choosingExplorer)setActiveRooms(null);else touchActiveRooms(hash);
   let cafeOfferPairs=null;
   if(hash!=='#words/signs'||choosingExplorer)resetMarketSignsView();
   if(hash!=='#words/letterpress'||choosingExplorer)resetLetterpressView();
@@ -864,7 +873,7 @@ function render(){
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry()+bridgesEntry()+shadowEntry();
-  else if(root==='new')html=newRoomsPage(state);
+  else if(root==='new')html=newRoomsPage();
   else html=home();
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context&&hash!=='#cafe')html+=learningInvitations(context);}
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&hash!=='#cafe'&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}

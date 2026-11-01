@@ -30,30 +30,32 @@ A browser check visits each listed page for a fresh explorer, collects its room 
 
 ## What "new for you" means
 
-Each explorer's notebook gains one additive object:
+Each explorer gets one small record, stored beside the notebook in its own key, `number-garden-v1:<explorer id>:rooms`:
 
 ```js
-rooms:{opened:{'#workshop/design':'2026-11-01', ...}, since:'2026-10-31', lastDay:'2026-11-01'}
+{explorer:'<profile createdAt>', opened:{'#workshop/design':'2026-11-01', ...}, since:'2026-10-31', lastDay:'2026-11-01'}
 ```
+
+The record is not part of the notebook. Existing journeys require that entering a room leaves every notebook root unchanged, and this record changes on nearly every visit. (The first build put it in the notebook; thirteen existing browser suites caught it.) Because the key shares the notebook prefix, clearing every explorer or turning saving off removes it with the notebooks. While saving is off it lives in memory only. The app's other-tab conflict check watches only the registry and notebook keys, so writing this record never reads as another tab's change. `explorer` is the profile's `createdAt`, so an explorer id that is reused after a deletion starts fresh instead of inheriting an old record. Downloads do not carry it.
 
 All dates are local calendar dates, `YYYY-MM-DD`.
 
 - **Only the chosen explorer.** All bookkeeping below (first use, visits and opening) runs only on a render for the chosen explorer, never while the explorer picker is showing. The app loads the previous explorer's notebook before the picker appears, so updating there would move the wrong explorer's dates.
-- **Opening.** When a registry route renders for the chosen explorer, `opened[route]` is set to today if it is absent. The notebook is saved only when this record actually changes.
+- **Opening.** When a registry route renders for the chosen explorer, `opened[route]` is set to today if it is absent. The record is written only when it actually changes.
 - **Visits.** On the first render of a new local day, `since` becomes the previous `lastDay` and `lastDay` becomes today. So `since` is the day of the explorer's previous visit, and it stays fixed for the rest of the day.
-- **First use.** A notebook with no `rooms` object starts with `since` set three days before today and `lastDay` set to today, with nothing opened. Three days is short enough that an explorer who has used the app all week sees a handful of rooms, not all of them.
+- **First use.** An explorer with no record starts with `since` set three days before today and `lastDay` set to today, with nothing opened. Three days is short enough that an explorer who has used the app all week sees a handful of rooms, not all of them.
 - **New for you.** A room is new for this explorer when `added >= since` and the explorer has not opened it.
-- **Restore.** Restore checks the shape only, never registry membership. A `rooms` value that is not this shape (non-object, an `opened` key that is not a `#`-route string, a malformed or impossible date, `since` after `lastDay`) is replaced with a fresh first-use object, and the rest of the notebook is kept unchanged. Routes in `opened` that the current registry does not list (a removed room, or a notebook from a newer release) are kept as written, because they might return. Downloads and restores carry the object like any other notebook key.
+- **Restore.** Restore checks the shape only, never registry membership. A record that is not this shape (unreadable JSON, a non-object, an `opened` key that is not a `#`-route string, a malformed or impossible date, `since` after `lastDay`, or another profile's `explorer`) is replaced with a fresh first-use record. Routes in `opened` that the current registry does not list (a removed room, or a record from a newer release) are kept as written, because they might return.
 
 Grown-up notes show nothing new. The record is about which links to highlight, not about learning.
 
 ## Presentation
 
-**Home shelf.** When at least one room is new for this explorer, the home page shows a "New for you" shelf between the welcome header and the "Ways to explore" switch. It lists the newest new rooms, newest first, at most four, each as a card with the room title and its first place name ("in the Workshop"). With no new rooms there is no shelf and no empty-state text. A room leaves the shelf once it is opened. When more than four rooms are new, the shelf has one more link, "See all new rooms", which opens a plain list of every new room at `#new`.
+**Home shelf.** When at least one room is new for this explorer, the home page shows a "New for you" shelf directly below the "Ways to explore" switch, above the switch's panel. (The first draft put it above the switch. That pushed the three choices off the first phone screen, which the home-entry spec guarantees against.) It lists the newest new rooms, newest first, at most four, each as a card with the room title and its first place name ("in the Workshop"). With no new rooms there is no shelf and no empty-state text. A room leaves the shelf once it is opened. When more than four rooms are new, the shelf has one more link, "See all new rooms", which opens a plain list of every new room at `#new`.
 
-**New marks.** On every page, each link to a room that is new for this explorer gets a small "New" mark inside the link: a filled dot in the accent colour followed by the word "New", plus screen-reader text so the link reads as "The Design Table, new". In the top bar, a place that links at least one new room gets the same dot (without the word) on its icon, and its accessible name gains ", something new inside". Marks are added after each render by one function in the app shell, so no activity module changes. There is no animation, and reduced motion changes nothing.
+**New marks.** On every page, each link to a room that is new for this explorer gets a small "New" mark inside the link: a filled dot in the accent color followed by the word "New", plus screen-reader text so the link reads as "The Design Table, new". In the top bar, a place that links at least one new room gets the same dot (without the word) on its icon, and its accessible name gains ", something new inside". Marks are added after each render by one function in the app shell, so no activity module changes. There is no animation, and reduced motion changes nothing.
 
-**Workshop shelves.** The 22 "Other tables" links become three labelled groups, in this order:
+**Workshop shelves.** The 22 "Other tables" links become three labeled groups, in this order:
 
 - **Build and test:** Lift Yard, Mill Energy Book, Lantern Circuit Bench, Fair Test Bench, Hinge Bench, The Mending Shed, The Design Table, Balance Stall.
 - **Measure, count and share:** Same Amount, New Cuts; Ribbon Recut Table; Ribbon Measures; Same ground, different fence; Copy Frame; Coin Counter; Gathering Budget; Repeat a Delivery Block; Preparation Clock.
