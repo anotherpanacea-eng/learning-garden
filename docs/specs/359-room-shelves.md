@@ -19,7 +19,7 @@ These entries are joined in one place, the render function in `dist/app.mjs`. Th
 A new helper, `roomShelf(title, entries)`, lives in `dist/new-for-you.mjs`:
 
 - `entries` is the existing list of entry HTML strings, in their current order. Each entry is kept byte for byte. No entry function, module, link, text or art changes.
-- Its route is the first `href="#…"` in the entry string. Entries whose route is new for the chosen explorer move to the front, keeping their relative order, and the rest follow in their current order. An entry with no route, or no explorer chosen (the picker is showing), keeps its place.
+- An entry is new when **any** `href="#…"` in its string is a room that is new for the chosen explorer. Some entries link several rooms: `letterEntry('post')` links Messages first and the changing letter round second, and either may be the new one. New entries move to the front, keeping their relative order, and the rest follow in their current order. An entry with no route, or no explorer chosen (the picker is showing), keeps its place.
 - Empty entries (an entry function that returned `''`) are dropped. If nothing is left, the helper returns `''`.
 - It returns `<section class="room-shelf" aria-labelledby="…"><h2 id="…">${title}</h2><div class="room-shelf-grid">${entries}</div></section>`.
 
@@ -55,7 +55,7 @@ Only the joined runs change:
   - entries are kept byte for byte, apart from the new-first order;
   - the order is stable;
   - empty entries are dropped;
-  - routes are taken from the first link;
+  - an entry is promoted when any of its links is new (the real `letterEntry('post')`, with Messages opened and the changing letter round still new);
   - the order is unchanged with no active record;
   - nothing is rendered when there are no entries.
 - `test/room-shelves-browser.py` checks the real pages at 375 and 820 px:
