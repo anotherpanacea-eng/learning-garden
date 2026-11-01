@@ -64,7 +64,7 @@ const fail=error=>({ok:false,changed:false,error});
 const ok=(extra={})=>({ok:true,changed:false,...extra});
 function write(state,change,options={}){
  if(!object(state)||owner(state).status==='unsupported')return fail('This saved format is retained. Other places stay open.');
- if(typeof options?.canExport!=='function')return fail('This change could not be kept while keeping your notebook exportable.');
+ if(typeof options?.canExport!=='function')return fail('This change could not be kept and still leave your notebook ready to download.');
  try{
   const candidate=clone(state),before=JSON.stringify(candidate.mapReading),result=change(candidate);
   if(!result?.ok)return result||fail('This edition cannot be changed.');
@@ -73,13 +73,13 @@ function write(state,change,options={}){
   // Capture BEFORE the disposable whole-report callback: unrelated or owner
   // changes made by a callback never become notebook writes.
   const proposal=clone(candidate.mapReading);
-  if(!recoveryFitsProgressLimits(candidate)||options.canExport(candidate)!==true)return fail('This change could not be kept while keeping your notebook exportable. Your earlier writing is unchanged.');
+  if(!recoveryFitsProgressLimits(candidate)||options.canExport(candidate)!==true)return fail('This change could not be kept and still leave your notebook ready to download. Your earlier writing is unchanged.');
   state.mapReading=proposal;return {...result,changed:true};
  }catch{return fail('This change could not be kept safely. Your earlier writing is unchanged.');}
 }
 function add(c,source,work,revisedFrom){
  const r=owner(c),id=nextId(r.raw);
- if(!id)return fail(r.raw.length>=24?'Twenty-four editions are retained. Earlier editions stay open and exportable.':'A new edition could not be started.');
+ if(!id)return fail(r.raw.length>=24?'Twenty-four editions are retained. Earlier editions stay open and ready to download.':'A new edition could not be started.');
  const p={kind:'map-reading',version:1,id,source:clone(source),...clone(work),kept:null};
  if(revisedFrom!==undefined)p.revisedFrom=revisedFrom;
  if(!data(p).mutable)return fail('This source cannot start an edition.');
