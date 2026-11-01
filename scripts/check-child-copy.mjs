@@ -6,6 +6,10 @@ import {resolve} from 'node:path';
 export const copyScopes = [
   {path:'dist/beat-bench-ui.mjs',adultBlocks:[{start:'function notesCases(',end:'\nexport const beatBenchEntry',reason:'Only used in Grown-up notes; child helpers remain in scope.'}],quotations:[]},
   {path:'dist/beat-bench-content.mjs',adultBlocks:[{start:'  "grownup":',end:'\n});',reason:'Only displayed in Grown-up notes.'}],quotations:[]},
+  {path:'dist/word-room-sounds-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/word-room-sounds-content.mjs',adultBlocks:[],quotations:[
+    {quote:"'adult-supplied'",reason:'Stored passage-token role code, not child-facing copy; the passage displays its word, not this code.'},
+  ]},
   {path:'dist/long-word-workshop-ui.mjs',adultBlocks:[{start:'export function longWordNotes(',end:'\nexport const longWordEntry',reason:'Only used in Grown-up notes.'}],quotations:[]},
   {path:'dist/long-word-workshop-content.mjs',adultBlocks:[{start:'export const LONG_WORD_GROWN_UP',end:'\n]);',reason:'Grown-up interpretation and limits, used only in Notes.'}],quotations:[]},
   {path:'dist/word-list-shelf-ui.mjs',adultBlocks:[{start:'function notesKeeps(',end:'\nexport const wordListShelfEntry',reason:'Only used in Grown-up notes.'}],quotations:[]},
@@ -167,6 +171,65 @@ export const copyScopes = [
   {path:'dist/rain-paths-art.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rain-paths-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/workshop-core.mjs',adultBlocks:[],quotations:[]},
+  // Math-games renderers (text review 2026-10-22, math-games area), including art and core modules that carry copy.
+  {path:'dist/broad-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-help.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/broad-variants.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/equal-groups-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/equal-groups-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/equal-groups-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/facts-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/facts-ui.mjs',adultBlocks:[],quotations:[
+    {quote:'Opening the picture is recorded as support, even if it is closed or counted again.',reason:'Inside the For grown-ups panel.'},
+    {quote:'The shown answer and explanation stay recorded as support.',reason:'Inside the For grown-ups panel.'},
+  ]},
+  {path:'dist/forage-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/forage-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/bramble-film.html',adultBlocks:[],quotations:[]},
+  // Café and kitchen renderers (text review 2026-10-22, cafe-kitchen area), including art and core modules.
+  {path:'dist/cafe-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/cafe-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/cafe-film.html',adultBlocks:[],quotations:[]},
+  {path:'dist/cafe-start-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/cafe-start-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/cafe-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/measuring-recipes-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/measuring-recipes-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/measuring-recipes-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/measuring-recipes-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/parcel-packing-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/parcel-packing-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/parcel-packing-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/parcel-packing-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/restaurant-story.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/sharing-counter-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/sharing-counter-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/sharing-counter-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/sharing-counter-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/whole-batches-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/whole-batches-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/whole-batches-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/whole-batches-ui.mjs',adultBlocks:[],quotations:[]},
+  // Paris archive renderers (text review 2026-10-22, paris-archive area), including the compiled puppet-post pack, film and scene.
+  {path:'dist/french-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/french-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/french-library.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/french-story-data.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-film.html',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-library.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-pack-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-scene.svg',adultBlocks:[],quotations:[]},
+  {path:'dist/paris-visit-source.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/travelers-archive-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/travelers-archive-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/travelers-archive-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/travelers-archive-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/packs/puppet-post.mjs',adultBlocks:[],quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -176,6 +239,12 @@ function uniqueAt(text, fragment, label) {
   const at=text.indexOf(fragment);
   if(at<0||text.indexOf(fragment,at+1)>=0)throw Error(`${label}: marker is missing or ambiguous`);
   return at;
+}
+// A code property access (`w.provenance`, `w?.provenance`) or a bare object key (`{supplied:`, `,provenance:`)
+// is an identifier, not copy. Lexical only: prose candidates with a space before or no colon after stay flagged.
+function codeIdentifier(text, at, length) {
+  if(/\??\.$/.test(text.slice(Math.max(0,at-2),at)))return true;
+  return /[{,]\s*$/.test(text.slice(Math.max(0,at-40),at))&&/^\s*:/.test(text.slice(at+length,at+length+8));
 }
 export function scanCopySource(text, {path='fixture',adultBlocks=[],quotations=[]}={}) {
   let visible=text;
@@ -195,8 +264,11 @@ export function scanCopySource(text, {path='fixture',adultBlocks=[],quotations=[
   const flags=[];
   for(const term of terms) {
     const pattern=new RegExp(`(?<![\\p{L}\\p{N}_])${term.split(' ').map(escape).join('\\s+')}(?![\\p{L}\\p{N}_])`,'giu');
-    for(const match of visible.matchAll(pattern))flags.push({path,line:text.slice(0,match.index).split('\n').length,term,
+    for(const match of visible.matchAll(pattern)) {
+      if(codeIdentifier(visible,match.index,match[0].length))continue;
+      flags.push({path,line:text.slice(0,match.index).split('\n').length,term,
       excerpt:text.slice(Math.max(0,match.index-45),match.index+match[0].length+65).replace(/\s+/g,' ')});
+    }
   }
   return flags.sort((a,b)=>a.line-b.line||a.term.localeCompare(b.term));
 }

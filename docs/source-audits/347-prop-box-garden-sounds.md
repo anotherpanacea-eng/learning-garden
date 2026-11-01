@@ -1,6 +1,6 @@
 # 347 source study · Garden-stage labels
 
-Author study2026-11-01 for [spec347](../specs/347-prop-box-garden-sounds.md) and [finite copy](../content/347-prop-box-garden-sounds-text.md). No runtime, accepted audio or oral evidence is claimed. Independent review remains required.
+Author study2026-11-01 for [spec347](../specs/347-prop-box-garden-sounds.md) and [finite copy](../content/347-prop-box-garden-sounds-text.md). Independent written specification and full finite linguistic review cleared the repaired head59458cbc in [PR376](https://github.com/anotherpanacea-eng/learning-garden/pull/376#issuecomment-6553712090). Runtime is now being implemented under that contract and needs its own independent clearance. No accepted audio or oral evidence is claimed.
 
 ## Actual sources and reuse
 
