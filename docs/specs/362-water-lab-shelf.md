@@ -26,4 +26,5 @@ No new CSS. The shelf uses `room-shelves.css` and the fold uses `number-garden-f
   - the invitations sit in a closed `details.place-onward` on `#science`; opening it shows the links;
   - `#science/window` shows no shelf;
   - at 820 px the page is at least 15% shorter than about 3,740 px.
-- The existing suites that use the Water Lab still pass: measuring-desk, room-shelves, new-for-you and learning-journeys. `node scripts/run-checks.mjs` passes.
+- `test/numbers-front-browser.py` (spec 361) checked `#science` as a place that keeps open invitations; it now checks `#loft` instead (Codex spec review).
+- The existing suites that use the Water Lab still pass: measuring-desk, room-shelves, new-for-you, numbers-front and learning-journeys. `node scripts/run-checks.mjs` passes.

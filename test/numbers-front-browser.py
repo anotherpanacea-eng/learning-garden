@@ -84,7 +84,7 @@ def main():
                 p.evaluate('location.hash="#numbers"')
                 p.wait_for_timeout(500)
                 ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth'), f'{width}: no sideways scroll')
-                p.evaluate('location.hash="#science"')
+                p.evaluate('location.hash="#loft"')
                 p.wait_for_timeout(500)
                 ok(p.locator('main details.place-onward').count() == 0 and p.locator('main .learning-invitations').count() == 1, f'{width}: other places keep open invitations')
                 c.close()
