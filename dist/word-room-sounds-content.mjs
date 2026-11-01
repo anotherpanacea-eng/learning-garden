@@ -1,5 +1,6 @@
 // Original spec342 adult-led material. No phonics playback or oral assessment.
 const alphabet = ['a','b','c','f','h','i','m','n','o','p','s','t'];
+const adultRole='adult-supplied';
 const word = (label, meaning, art, guidance) => ({label,letters:[...label],meaning,alt:meaning,art,guidance});
 const words = {
   mat:word('mat','A small woven mat for the theater floor.','mat','Say mat naturally, then model its three sounds.'),
@@ -29,11 +30,11 @@ const collection = {
     show:makeCase('show','A label for the show','mat','map',2,['Say mat together.','Listen to the last sound.','Say map. What stayed the same?']),
   },
   message:{id:'show-note',title:'Dot’s note for the show',text,
-    tokens:[...text.matchAll(/[A-Za-z]+/g)].map(m=>({text:m[0],start:m.index,end:m.index+m[0].length,role:targets.has(m[0])?'target':'adult-supplied'})),
+    tokens:[...text.matchAll(/[A-Za-z]+/g)].map(m=>({text:m[0],start:m.index,end:m.index+m[0].length,role:targets.has(m[0])?'target':adultRole})),
     prompt:'Where is the pretend map? Tell your partner how you know.',
     art:'show-message342',alt:'A theater prop corner. A cat sits on a mat. A cap rests on a folding bed. A rolled pretend map sticks out of a tin.'},
 };
-export const makeSoundMessageSource = (pack='show') => pack==='show'?structuredClone(collection):pack==='market'?structuredClone(marketCollection):null;
+export const makeSoundMessageSource = (pack='show') => pack==='show'?structuredClone(collection):pack==='market'?structuredClone(marketCollection):pack==='garden'?structuredClone(gardenCollection):null;
 export const soundMessageCopy = {
   title:'Labels for the show',story:'Dot is getting the library show ready. Some prop labels got wet. Can you and your reading partner make new ones?',
   entry:'Try a sound-changing label',chooser:'Choose a label game. You can try any one.',
@@ -86,7 +87,7 @@ const marketCollection={id:'market-labels',revision:1,
   g:lesson('g','bug',2,'Say bug naturally. Point to g and model its last sound. This is hard g here; other words can use g differently.'),
  },
  message:{id:'market-note',title:"Dot's market note",text:marketText,
-  tokens:[...marketText.matchAll(/[A-Za-z]+/g)].map(m=>({text:m[0],start:m.index,end:m.index+m[0].length,role:marketTargets.has(m[0])?'target':'adult-supplied'})),
+  tokens:[...marketText.matchAll(/[A-Za-z]+/g)].map(m=>({text:m[0],start:m.index,end:m.index+m[0].length,role:marketTargets.has(m[0])?'target':adultRole})),
   prompt:'Where did Dot put the pen? Read the note together and show your partner.',art:'market-message343',
   alt:'A toy beetle rests on a closed model flower bud. An ink pen sticks out of an empty handled cup. A bear cub puppet sits on a woven mat.'},
 };
@@ -94,4 +95,229 @@ export const marketSoundCopy={
  title:'Market labels',story:'Dot is setting up the toy market for our show. Help make labels so the puppets can find their props.',
  letters:'Meet letter sounds',letterIntro:'Read this card with your partner. Your partner can say the sounds. You can point, join in, or listen.',
  grownup:'This packet offers e, u, d and g in selected words. We keep the letters you arrange and the help opened here. Earlier teaching, pictures or other games may already have made a word familiar. This does not show how a child read or spelled it. The note is shared reading; your partner supplies the other words.',
+};
+
+// Original347: a third finite packet in the existing room. Left-only words need no new art.
+const gardenAlphabet=["a", "b", "c", "d", "e", "f", "g", "h", "i", "l", "m", "n", "o", "p", "r", "s", "t", "u", "w", "y"];
+const gardenWords={
+  "ram": {
+    "label": "ram",
+    "letters": [
+      "r",
+      "a",
+      "m"
+    ],
+    "meaning": "A ram is a male sheep. This one is a puppet.",
+    "alt": "A woolly ram puppet has two curved horns.",
+    "art": "ram347",
+    "guidance": "Establish the animal meaning, not bumping something. Keep the first sound joined to the vowel. Do not correct how your partner says r here."
+  },
+  "ham": {
+    "label": "ham",
+    "letters": [
+      "h",
+      "a",
+      "m"
+    ],
+    "meaning": "Ham is meat from a pig. This slice is a pretend prop.",
+    "alt": "A pink ham-slice prop lies on a small plate.",
+    "art": "reference-only347",
+    "guidance": "Use the food meaning, not a showy actor."
+  },
+  "lip": {
+    "label": "lip",
+    "letters": [
+      "l",
+      "i",
+      "p"
+    ],
+    "meaning": "A lip is one edge of the mouth.",
+    "alt": "A puppet face has its lower lip marked by a small pointer.",
+    "art": "lip347",
+    "guidance": "Point to one lip. The printed word is singular. Do not evaluate articulation or correct l here."
+  },
+  "sip": {
+    "label": "sip",
+    "letters": [
+      "s",
+      "i",
+      "p"
+    ],
+    "meaning": "To sip is to take a small drink.",
+    "alt": "Two pictures: a puppet lifts a cup, then takes a small drink.",
+    "art": "reference-only347",
+    "guidance": "Model the action or explain it; do not infer the verb from a still cup alone."
+  },
+  "wet": {
+    "label": "wet",
+    "letters": [
+      "w",
+      "e",
+      "t"
+    ],
+    "meaning": "The cloth is wet with water.",
+    "alt": "A small cloth has water drops on it and a puddle underneath.",
+    "art": "wet347",
+    "guidance": "Here wet describes the cloth, not an object called a wet. A final t can have little or no audible release; do not add uh or demand a sharp release."
+  },
+  "pet": {
+    "label": "pet",
+    "letters": [
+      "p",
+      "e",
+      "t"
+    ],
+    "meaning": "A pet is an animal someone cares for at home.",
+    "alt": "A toy cat sits beside its little home basket.",
+    "art": "reference-only347",
+    "guidance": "Use the animal noun, not the action of stroking."
+  },
+  "yam": {
+    "label": "yam",
+    "letters": [
+      "y",
+      "a",
+      "m"
+    ],
+    "meaning": "A yam is a food that grows underground. This one is a prop.",
+    "alt": "A rough brown yam prop has a pale cut end.",
+    "art": "yam347",
+    "guidance": "Name this unfamiliar food before the activity if needed. Here y begins the word; it is not the vowel sound in my."
+  },
+  "red": {
+    "label": "red",
+    "letters": [
+      "r",
+      "e",
+      "d"
+    ],
+    "meaning": "This cloth is red.",
+    "alt": "A red cloth swatch hangs from a short thread.",
+    "art": "reference-only347",
+    "guidance": "Name the color when needed. The task does not assess color vision or how r is spoken."
+  },
+  "rod": {
+    "label": "rod",
+    "letters": [
+      "r",
+      "o",
+      "d"
+    ],
+    "meaning": "A rod is a long, thin stick.",
+    "alt": "A plain wooden rod lies across two small supports.",
+    "art": "rod347",
+    "guidance": "Use the stick sense, not a fishing rod or a measuring unit. Local vowel realizations are not graded; do not correct r here."
+  },
+  "web": {
+    "label": "web",
+    "letters": [
+      "w",
+      "e",
+      "b"
+    ],
+    "meaning": "A spider makes a web from silk. This one is pretend.",
+    "alt": "A thread web stretches between two model twigs.",
+    "art": "reference-only347",
+    "guidance": "Use the spider-web meaning, not the internet. No animal is collected."
+  }
+};
+const gardenCase=(id,title,left,right,position,frames)=>structuredClone({id,title,alphabet:gardenAlphabet,left:gardenWords[left],right:gardenWords[right],position,frames,example});
+const gardenText="Put the yam on the mat. The ram has a red rod. The cup is wet.";
+const gardenTargets=new Set(["yam","mat","ram","red","rod","cup","wet"]);
+const gardenCollection={id:"garden-stage-labels",revision:1,
+ cases:{
+  "first-1":gardenCase("first-1","First sound 1","ham","ram",0,["Say ham, the food, together.", "Say ram, a male sheep. Listen to the first sound.", "The first sound changed. The middle and last stayed the same."]),
+  "first-2":gardenCase("first-2","First sound 2","sip","lip",0,["Say sip: take a small drink.", "Say lip, an edge of the mouth. Listen to the first sound.", "The first sound changed. The middle and last stayed the same."]),
+  "first-3":gardenCase("first-3","First sound 3","pet","wet",0,["Say pet, an animal cared for at home.", "Now say wet: a cloth has water on it. Listen to the first sound.", "The first sound changed. The middle and last stayed the same."]),
+  "first-4":gardenCase("first-4","First sound 4","ham","yam",0,["Say ham, the food, together.", "Say yam, a food grown underground. Listen to the first sound.", "The first sound changed. The middle and last stayed the same."]),
+  "middle":gardenCase("middle","Middle sound","red","rod",1,["Say red, a color.", "Say rod, the long stick. Listen to the middle sound.", "The middle sound changed. The first and last stayed the same."]),
+  "last":gardenCase("last","Last sound","web","wet",2,["Say web, the threads a spider makes.", "Now say wet: a cloth has water on it. Listen to the last sound.", "The last sound changed. The first and middle stayed the same."]),
+ },
+ teaching:{
+  "r": {
+    "id": "r",
+    "glyph": "r",
+    "word": {
+      "label": "ram",
+      "letters": [
+        "r",
+        "a",
+        "m"
+      ],
+      "meaning": "A ram is a male sheep. This one is a puppet.",
+      "alt": "A woolly ram puppet has two curved horns.",
+      "art": "ram347",
+      "guidance": "Establish the animal meaning, not bumping something. Keep the first sound joined to the vowel. Do not correct how your partner says r here."
+    },
+    "position": 0,
+    "guidance": "Say ram naturally. Point to r and model its first sound, not the letter name. Do not add uh. Do not correct how your partner says r here."
+  },
+  "l": {
+    "id": "l",
+    "glyph": "l",
+    "word": {
+      "label": "lip",
+      "letters": [
+        "l",
+        "i",
+        "p"
+      ],
+      "meaning": "A lip is one edge of the mouth.",
+      "alt": "A puppet face has its lower lip marked by a small pointer.",
+      "art": "lip347",
+      "guidance": "Point to one lip. The printed word is singular. Do not evaluate articulation or correct l here."
+    },
+    "position": 0,
+    "guidance": "Say lip naturally. Point to l and model its first sound. Do not add uh or ask for a perfect mouth shape. Do not correct how your partner says l here."
+  },
+  "w": {
+    "id": "w",
+    "glyph": "w",
+    "word": {
+      "label": "wet",
+      "letters": [
+        "w",
+        "e",
+        "t"
+      ],
+      "meaning": "The cloth is wet with water.",
+      "alt": "A small cloth has water drops on it and a puddle underneath.",
+      "art": "wet347",
+      "guidance": "Here wet describes the cloth, not an object called a wet. A final t can have little or no audible release; do not add uh or demand a sharp release."
+    },
+    "position": 0,
+    "guidance": "Say wet naturally. Point to w and model its first sound, not the name double-u. Join it into the word."
+  },
+  "y": {
+    "id": "y",
+    "glyph": "y",
+    "word": {
+      "label": "yam",
+      "letters": [
+        "y",
+        "a",
+        "m"
+      ],
+      "meaning": "A yam is a food that grows underground. This one is a prop.",
+      "alt": "A rough brown yam prop has a pale cut end.",
+      "art": "yam347",
+      "guidance": "Name this unfamiliar food before the activity if needed. Here y begins the word; it is not the vowel sound in my."
+    },
+    "position": 0,
+    "guidance": "Say yam naturally. Point to y and model its first sound, not the name why. This is y at the start of yam."
+  }
+},
+ message:{id:"garden-show-note",title:"Dot's garden-show note",text:gardenText,
+  tokens:[...gardenText.matchAll(/[A-Za-z]+/g)].map(m=>({text:m[0],start:m.index,end:m.index+m[0].length,role:gardenTargets.has(m[0])?"target":adultRole})),
+  prompt:"What does the ram have? Read together, then show or tell your partner.",art:"garden-message347",
+  alt:"A yam prop lies on a mat. A ram puppet holds a red rod. Drops of water cover the outside of a cup."},
+};
+export const gardenSoundCopy={
+  "title": "Garden-stage labels",
+  "story": "Dot is helping the puppets put on a garden show. Make labels and read their little note together.",
+  "noteButton": "Read Dot's garden-show note",
+  "noteHeading": "The garden-show note",
+  "noteIntro": "Underlined words are our prop labels. Your partner can read any words with you.",
+  "noteName": "garden-show note",
+  "grownup": "This packet offers r, l, w and y in selected words. We keep the letters you arrange and the help opened here. Earlier teaching, pictures or other games may already have made a word familiar. A sound comparison can also give a word's meaning. This does not show how a child read, spoke or spelled it. Read the note together; your partner supplies the other words."
 };

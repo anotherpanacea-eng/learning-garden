@@ -1,6 +1,6 @@
 # 347 · Garden-stage labels: r, l, w and y
 
-Proposed bounded specification for admitted LG-10 / LG-G1, 2026-11-01. Independent specification and linguistic/content review precede runtime. Companion [finite copy](../content/347-prop-box-garden-sounds-text.md) and [source study](../source-audits/347-prop-box-garden-sounds.md). Base main `93be46918dc20a514882d32abaafd80bd41c8824`.
+Bounded specification for admitted LG-10 / LG-G1, 2026-11-01. Independent specification and finite linguistic/content review cleared head `59458cbc1de12b88130acd8cb7c803e1cf2aa493` in [PR376](https://github.com/anotherpanacea-eng/learning-garden/pull/376#issuecomment-6553712090). Runtime implementation is in progress; its independent implementation review and release remain separate. Companion [finite copy](../content/347-prop-box-garden-sounds-text.md) and [source study](../source-audits/347-prop-box-garden-sounds.md). Base main `93be46918dc20a514882d32abaafd80bd41c8824`.
 
 ## Learning action and story
 
