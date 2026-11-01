@@ -79,3 +79,45 @@ let newKit=changeSoundTrail(vowels,'word','kit');newKit=changeSoundTrail(newKit,
 assert.deepEqual(vowels,vowelBefore);const separate=createSoundTrails('vowels');separate.source.words.cape.phonemes[1]='changed';assert.deepEqual(vowels.source.words.cape.phonemes,['k','eɪ','p']);
 assert.deepEqual(vowels.source.note.text.match(/[A-Za-z]+/g).map(x=>x.toLowerCase()).sort(),['a','a','a','a','a','a','and','and','by','cap','cape','kit','kite','pin','pine'].sort());
 console.log('Final e: six literal three-phoneme maps, thirty frames, nonadjacent grouping, three vowel contrasts, bounds, visit copies and independent kit work passed.');
+
+// Spec354: independent six-word context/phoneme inventory, not source-derived expectations.
+const sentenceOracle={
+ have:{label:'have',display:'have',sounds:['h','æ','v'],context:'We have a cape.',groups:[[[0],[0]],[[1],[1]],[[2,3],[2]]]},
+ cave:{label:'cave',display:'cave',sounds:['k','eɪ','v'],context:'The puppet waits by a cave.',groups:[[[0],[0]],[[1,3],[1]],[[2],[2]]]},
+ give:{label:'give',display:'give',sounds:['g','ɪ','v'],context:'Please give the puppet a cape.',groups:[[[0],[0]],[[1],[1]],[[2,3],[2]]]},
+ five:{label:'five',display:'five',sounds:['f','aɪ','v'],context:'There are five stars.',groups:[[[0],[0]],[[1,3],[1]],[[2],[2]]]},
+ 'live-here':{label:'live',display:'live here',sounds:['l','ɪ','v'],context:'The puppets live here by the river.',groups:[[[0],[0]],[[1],[1]],[[2,3],[2]]]},
+ 'live-show':{label:'live',display:'live show',sounds:['l','aɪ','v'],context:'We are watching a live show.',groups:[[[0],[0]],[[1,3],[1]],[[2],[2]]]}
+};
+const sentences=createSoundTrails('sentences'),sentenceBefore=structuredClone(sentences);
+assert.deepEqual(Object.keys(sentences.work),Object.keys(sentenceOracle));assert.equal(sentences.selected,'have');
+assert.deepEqual(sentences.source.guide,{});assert.equal(sentences.source.grownup,original.source.grownup);
+for(const[id,e]of Object.entries(sentenceOracle)){
+ const w=sentences.source.words[id];assert.equal(w.id,id);assert.equal(w.label,e.label);assert.equal(w.displayLabel,e.display);assert.equal(w.context,e.context);
+ assert.deepEqual(w.letters,[...e.label]);assert.deepEqual(w.phonemes,e.sounds);assert.equal(w.reference,'/'+e.sounds.join('')+'/');assert.deepEqual(w.groups.map(g=>[g.letters,g.sounds]),e.groups);assert.equal(w.frames.length,5);
+ assert.equal(sentences.work[id].tool,id.startsWith('live-')?'try':'model');
+ let state=changeSoundTrail(sentences,'word',id);state=changeSoundTrail(state,'model');
+ for(let frame=0;frame<5;frame++){
+  const active=frame===4?e.groups:frame?[e.groups[frame-1]]:[],r=soundTrailReference(state,id,frame);
+  assert.deepEqual(r.letters,active.flatMap(g=>g[0]));assert.deepEqual(r.sounds,active.flatMap(g=>g[1]));
+  const h=soundTrailPage(state);
+  assert.deepEqual(selectedMap(h),{letters:active.flatMap(g=>g[0]).sort((a,b)=>a-b).map(i=>e.label[i]),sounds:active.flatMap(g=>g[1]).sort((a,b)=>a-b).map(i=>i+1)});
+  assert.ok(h.includes('>'+e.context+'</p>'));assert.ok(h.includes('>'+w.frames[frame]+'</p>'));assert.ok(h.includes('aria-label="'+e.display+': Our sound model"'));
+  if(frame<4)state=changeSoundTrail(state,'step',1);
+ }
+ assert.equal(changeSoundTrail(state,'step',1),null);state=changeSoundTrail(state,'try');assert.equal(changeSoundTrail(state,'counter',-1),null);
+ for(let n=0;n<6;n++)state=changeSoundTrail(state,'counter',1);assert.equal(changeSoundTrail(state,'counter',1),null);
+ const compared=changeSoundTrail(state,'compare');assert.deepEqual(changeSoundTrail(compared,'back'),state);
+}
+for(const[a,b]of[['have','cave'],['give','five'],['live-here','live-show']]){
+ const pair=Object.values(sentences.source.pairs).find(p=>p.ids[0]===a);assert.deepEqual(pair.ids,[a,b]);assert.deepEqual(pair.highlight,{[a]:1,[b]:1});
+ const h=soundTrailPage(changeSoundTrail(changeSoundTrail(sentences,'word',a),'compare'));
+ assert.deepEqual(selectedMap(h),{letters:[a,b].flatMap(id=>sentenceOracle[id].groups[1][0].map(i=>sentenceOracle[id].label[i])),sounds:[2,2]});
+ for(const id of[a,b]){assert.ok(h.includes('>'+sentenceOracle[id].display+'</h3>'));assert.ok(h.includes('>'+sentenceOracle[id].context+'</p>'));}
+}
+assert.equal(changeSoundTrail(sentences,'word','live'),null);assert.equal(changeSoundTrail(sentences,'word','__proto__'),null);
+const sentenceCopy=createSoundTrails('sentences');sentenceCopy.source.words['live-here'].phonemes[1]='changed';assert.deepEqual(sentences,sentenceBefore);
+assert.deepEqual(createSoundTrails(),original);assert.deepEqual(createSoundTrails('vowels'),vowelBefore);
+assert.deepEqual(sentences.source.note.text.match(/[A-Za-z]+/g).map(x=>x.toLowerCase()),['we','have','five','stars','please','give','them','to','the','puppets','they','live','by','the','cave','tonight','is','a','live','show']);
+const noteHtml=soundTrailPage(sentences);assert.ok(noteHtml.includes('<p>We have five stars. Please give them to the puppets.</p><p>They live by the cave. Tonight is a live show.</p>'));
+console.log('Words in sentences: six context/phoneme maps, thirty rendered frames, three comparisons, same-print live separation, bounds, source copies and shared-note paragraphs passed.');
