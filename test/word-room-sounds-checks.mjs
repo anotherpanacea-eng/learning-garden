@@ -5,6 +5,8 @@ import * as core from '../dist/word-room-sounds-core.mjs';
 import {freshState,recommendations} from '../dist/core.mjs';
 import {readFileSync} from 'node:fs';
 import {prepareProgressImport,MAX_IMPORT_BYTES} from '../dist/progress-transfer.mjs';
+import {wordRoomPage,wordRoomNotes} from '../dist/word-room-ui.mjs';
+import {chooseWordRoomWord} from '../dist/word-room-core.mjs';
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;};
 const s=makeSoundMessageSource();
 eq(Object.keys(s.cases),['start','middle','end','show']);
@@ -93,4 +95,19 @@ const imported=JSON.parse(raw(transfer));eq(imported.wordRoom,transfer.wordRoom,
 const tight=copy(oldRoot);tight.padding='';tight.padding='x'.repeat(MAX_IMPORT_BYTES-Buffer.byteLength(raw(tight)));
 eq(Buffer.byteLength(raw(tight)),MAX_IMPORT_BYTES);ok(actual.canExport(tight));
 const beforeTight=copy(tight);eq(core.actSoundCase(tight,'clear',null,actual).ok,false);eq(tight,beforeTight,'real full-report overflow is atomic');
-console.log(`Sound-changing Prop Box: ${n} content/core checks passed; browser implementation remains separate.`);
+// The child replaces the entire legacy surface, including closed galleries/adult directions.
+for(const[id,,target]of expected){
+ const ui=freshState();chooseWordRoomWord(ui,'cat',yes);ui.wordRoom.gallery=['cat'];
+ core.enterSoundMessages(ui,yes);core.chooseSoundCase(ui,id,'listen',yes);
+ const render=()=>wordRoomPage(ui,'synthetic-owner');
+ let html=render();ok(html.includes('data-wr-sounds-active'));ok(!/\bwr-gallery\b|\bwr-waiting\b/.test(html),'legacy parent material is absent, not covered');
+ ok(!new RegExp(`\\b${target}\\b`).test(html),'setup omits the target');
+ core.actSoundCase(ui,'partner',null,yes);ok(render().includes(`>${target}</p>`),'explicit partner card shows word');
+ core.actSoundCase(ui,'hidePartner',null,yes);html=render();ok(!new RegExp(`\\b${target}\\b`).test(html),'partner text removed, not hidden');
+ core.actSoundCase(ui,'example',null,yes);ok(!new RegExp(`\\b${target}\\b`).test(render()),'different worked example does not leak a target');
+ core.actSoundCase(ui,'back',null,yes);core.actSoundCase(ui,'picture',null,yes);
+ ok(render().includes(`>${target}</p>`)&&ui.wordRoom.soundMessages.records[id].help.word,'pictured label records its word disclosure');
+ ok(wordRoomNotes(ui).includes('Sound-changing prop labels'),'ordinary Notes owns the summary');
+ const raw=copy(ui);wordRoomPage(ui,'synthetic-owner');wordRoomNotes(ui);eq(ui,raw,'render and Notes are pure');
+}
+console.log(`Sound-changing Prop Box: ${n} content/core/render checks passed; native browser checks remain separate.`);

@@ -136,7 +136,7 @@ export function actSoundCase(book,action,value,options){
       else if(action==='clear'){w.slots=[null,null,null];w.place=0;}
       else if(action==='base'){if(w.slots.some(l=>l!==null))return fail('selection');w.slots=clone(s.left.letters);w.help.base=true;}
       else if(action==='word'){w.help.word=true;}
-      else if(action==='picture'){w.help.picture=true;}
+      else if(action==='picture'){w.help.picture=true;w.help.word=true;}
       else if(action==='compare'){
         w.help.word=true;w.comparison={slots:clone(w.slots),target:s.right.label,result:w.slots.includes(null)?'incomplete':w.slots.join('')===s.right.label?'match':'different'};w.page='comparison';
       }else if(action==='contrast'){w.help.word=true;w.help.contrast=true;w.page='contrast';w.frame=0;}
