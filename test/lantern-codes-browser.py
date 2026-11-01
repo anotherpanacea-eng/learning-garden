@@ -247,7 +247,7 @@ def journey(browser, width, base):
         click(p, '[data-speak]')
         ok(len(p.evaluate('window.__codesSpoken')) == count, 'refused audio never reaches playback')
         ok(book(p) == snapshot, 'refused audio preserves whole notebook')
-        ok('exportable' in p.locator('#code-status').inner_text(), 'refusal explains how work was preserved')
+        ok('ready to download' in p.locator('#code-status').inner_text(), 'refusal explains how work was preserved')
         p.evaluate('window.__codesRefuse=false')
         turn(p, 'compare')
         snapshot = book(p);p.evaluate('window.__codesRefuse=true')

@@ -21,7 +21,7 @@ function picture(source,s){
 function pictureDescription(source,s){
  const dotOnes=source.dot%10;
  const grouping=s.stage==='separate'?'separate: Pip has two tens and four ones; Dot has one ten and '+dotOnes+' ones':s.stage==='wrapped'?'joined: three original tens, one new ten from four Pip and six Dot ones, and one loose Dot one':'joined: three original tens and '+(4+dotOnes)+' loose ones';
- return 'Supplied rows: Pip two tens and four ones; Dot one ten and '+dotOnes+' ones. '+grouping+(s.stage==='wrapped'?'. One new ten exists':'. No new ten exists')+'. Written result: tens '+(s.tensPlaced?(source.id==='steady-orders'?'3':'4'):'blank')+', ones '+(s.onesPlaced?(source.id==='steady-orders'?'7':'1'):'blank')+'.';
+ return 'Starting rows: Pip two tens and four ones; Dot one ten and '+dotOnes+' ones. '+grouping+(s.stage==='wrapped'?'. One new ten exists':'. No new ten exists')+'. Written result: tens '+(s.tensPlaced?(source.id==='steady-orders'?'3':'4'):'blank')+', ones '+(s.onesPlaced?(source.id==='steady-orders'?'7':'1'):'blank')+'.';
 }
 function caption(source,s){
  const exchange=source.id==='full-frame-orders',stage=s.tensPlaced?'finished':s.onesPlaced?'ones':s.stage;
@@ -56,7 +56,7 @@ function writingControls(source,s){
 function writing(source,s){
  const exchange=source.id==='full-frame-orders',ones=source.dot%10,one=exchange?1:7,ten=exchange?4:3;
  const result='<tr class="ledger-result"><th scope="row">=</th><td>'+(s.tensPlaced?ten:'<span class="ledger-empty">□</span>')+'</td><td>'+(s.onesPlaced?one:'<span class="ledger-empty">□</span>')+'</td></tr>';
- const line=s.tensPlaced?'Supplied writing: '+source.pip+' + '+source.dot+' = '+source.total+'.':s.onesPlaced?(exchange?'Ones line: 4 + 7 = 11; 10 become 1 ten, leaving 1 one.':'Ones line: 4 + 3 = 7 ones.'):s.stage==='separate'?'The source rows are aligned. Join the ones to begin.':'Ones to consider: 4 + '+ones+' = '+(4+ones)+'. The result places are still blank.';
+ const line=s.tensPlaced?'Written out: '+source.pip+' + '+source.dot+' = '+source.total+'.':s.onesPlaced?(exchange?'Ones line: 4 + 7 = 11; 10 become 1 ten, leaving 1 one.':'Ones line: 4 + 3 = 7 ones.'):s.stage==='separate'?'The source rows are aligned. Join the ones to begin.':'Ones to consider: 4 + '+ones+' = '+(4+ones)+'. The result places are still blank.';
  const pictureText=picture(source,s),spoken=caption(source,s)+' '+line;
  return '<section class="ledger-pane" data-ledger-pane><h2 id="ledger-write-title" tabindex="-1">Put this picture into places</h2><p class="ledger-small">The compact picture shows these same counters, not more counters. Each column names a place, not a separate supply of counters.</p>'
   +'<div class="ledger-writing-layout"><div><div class="ledger-compact" role="img" aria-label="'+esc(pictureDescription(source,s))+'">'+pictureText+'</div><p class="ledger-caption">'+esc(caption(source,s))+'</p></div>'

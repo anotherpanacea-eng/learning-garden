@@ -48,7 +48,7 @@ export function frenchRoomsExploration(s){
   const checked=new Set();for(const c of w.checks){if(checked.has(c.itemId))continue;checked.add(c.itemId);if(!ints(c.order,1,999999999))continue;candidates.push({tag:`${a.caseId}:${c.itemId}`,order:c.order,skipped:c.skippedBefore===true,kind:a.kind,outcome:c.outcome,help:c.helpSeenBefore.some(h=>h!=='lesson:teach')});}
  }
  const observations=[],seen=new Set();for(const c of candidates.sort((a,b)=>a.order-b.order)){if(seen.has(c.tag))continue;seen.add(c.tag);if(!c.skipped)observations.push(c);}
- const recent=observations.slice(-6),affected=recent.filter(x=>x.outcome!=='match'||x.help).at(-1);let kind=adaptiveKinds[0],reason='Try one supplied case to see which comparison is useful next.';
+ const recent=observations.slice(-6),affected=recent.filter(x=>x.outcome!=='match'||x.help).at(-1);let kind=adaptiveKinds[0],reason='Try one ready-made case to see which comparison is useful next.';
  if(affected){kind=affected.kind;reason='A recent first response in this family needed comparison or requested support. Revisit this concept with the optional steps.';}else if(recent.length>=3&&recent.every(x=>x.outcome==='match'&&!x.help)){kind=adaptiveKinds[(adaptiveKinds.indexOf(recent.at(-1).kind)+1)%adaptiveKinds.length];reason=`${recent.length} distinct first item checks fit without optional help; try a nearby concept contrast.`;}
  return {ready,kind,reason,count:recent.length,visits,qualification:'Supplied teaching remains support. This is local practice evidence, not mastery or independent attainment. Repeated catalog cases are revisits.'};
 }
