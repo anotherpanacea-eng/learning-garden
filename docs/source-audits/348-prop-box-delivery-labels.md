@@ -1,6 +1,6 @@
 # 348 source study · Delivery labels
 
-Author study2026-11-01 for [spec348](../specs/348-prop-box-delivery-labels.md) and [finite copy](../content/348-prop-box-delivery-labels-text.md). Awaiting independent specification and whole finite linguistic review. No accepted audio or oral evidence claimed.
+Author study2026-11-01 for [spec348](../specs/348-prop-box-delivery-labels.md) and [finite copy](../content/348-prop-box-delivery-labels-text.md). Independent specification and whole finite linguistic review cleared repaired head4e1bd94f in [PR380](https://github.com/anotherpanacea-eng/learning-garden/pull/380#issuecomment-6554272777). Runtime implementation and publication have separate review gates. No accepted audio or oral evidence claimed.
 
 ## Actual sources and reuse
 

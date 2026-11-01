@@ -158,7 +158,7 @@ for(const[id,,target]of expected){
  act('message');const html=wordRoomPage(g,'synthetic');ok(html.includes("Dot&#39;s garden-show note"),'retained Garden note title renders');
  ok(wordRoomNotes(g).includes('Shared garden-show note: opened'));eq(g.wordRoom.soundMessages,oldShow);eq(g.wordRoom.marketSoundMessages,oldMarket);
  const exported=JSON.parse(raw(g));eq(exported.wordRoom,g.wordRoom);eq(exported.syntheticGardenSibling,g.syntheticGardenSibling);ok(prepareProgressImport(raw(g)).ok,'all three packets and large unrelated payload fit real Notes loader');
- const all=copy(g);for(const pack of core.soundPackets)all.wordRoom[core.soundPacketField(pack)].active=true;const allBefore=copy(all);eq(core.activeSoundPacket(all),'garden');wordRoomPage(all,'synthetic');eq(all,allBefore,'import priority is a read, never normalization');ok(core.leaveSoundMessages(all,actual).ok);eq(core.soundPackets.map(p=>all.wordRoom[core.soundPacketField(p)].active),[false,false,false]);
+ const all=copy(g);for(const pack of ['show','market','garden'])all.wordRoom[core.soundPacketField(pack)].active=true;const allBefore=copy(all);eq(core.activeSoundPacket(all),'garden');wordRoomPage(all,'synthetic');eq(all,allBefore,'import priority is a read, never normalization');ok(core.leaveSoundMessages(all,actual).ok);eq(['show','market','garden'].map(p=>all.wordRoom[core.soundPacketField(p)].active),[false,false,false]);
  for(const pack of['show','market']){const damaged=copy(g);damaged.wordRoom.gardenSoundMessages.v=99;const rawGarden=copy(damaged.wordRoom.gardenSoundMessages);damaged.wordRoom[core.soundPacketField(pack)].active=true;eq(core.activeSoundPacket(damaged),pack);ok(core.enterSoundMessages(damaged,actual,pack).ok);eq(damaged.wordRoom.gardenSoundMessages,rawGarden,'unreadable Garden not deactivated or replaced');}
  const refused=copy(g),beforeRefusal=copy(g);eq(core.enterSoundMessages(refused,{canExport:()=>false},'market').ok,false);eq(refused,beforeRefusal,'refused switch cannot deactivate another packet');
  for(const run of[x=>core.actSoundCase(x,'letters',null,{canExport:()=>false}),x=>core.chooseSoundCase(x,'first-1','read',{canExport:()=>false})]){const x=copy(g),before=copy(x);eq(run(x).ok,false);eq(x,before,'Garden disclosure refused before display');}
@@ -169,3 +169,36 @@ for(const[id,,target]of expected){
  const tight=copy(g);delete tight.wordRoom.gardenSoundMessages.records['first-1'];tight.gardenPadding='';tight.gardenPadding='x'.repeat(MAX_IMPORT_BYTES-Buffer.byteLength(raw(tight)));ok(actual.canExport(tight));const before=copy(tight);eq(core.chooseSoundCase(tight,'first-1','read',actual).ok,false);eq(tight,before,'whole-report capacity refusal preserves all three packets');
 }
 console.log(`Sound-changing Prop Box: ${n} content/core/render checks passed; native browser checks remain separate.`);
+
+//348 adds a fourth retained packet; these are behavioral and literal content oracles.
+{
+ const pairs=[['first-1','pet','jet',0],['first-2','sit','kit',0],['first-3','fan','van',0],['first-4','sip','zip',0],['middle','jet','jot',1],['last','van','vat',2]],source=makeSoundMessageSource('delivery');
+ const bank='a b c d e f g h i j k l m n o p r s t u v w y z'.split(' ');
+ eq([source.id,source.revision],['delivery-labels',1]);eq(Object.keys(source.cases),pairs.map(x=>x[0]));
+ for(const[id,left,right,place]of pairs){const c=source.cases[id];ok(core.soundCaseSource(c,id));eq([c.left.label,c.right.label,c.position],[left,right,place]);eq(c.alphabet,bank);eq([c.example.left.label,c.example.right.label,c.example.position],['tin','pin',0]);}
+ for(const[id,label]of[['j','jet'],['k','kit'],['v','van'],['z','zip']]){ok(core.soundLetterSource(source.teaching[id],id));eq([source.teaching[id].word.label,source.teaching[id].position],[label,0]);}
+ eq(source.message.tokens.filter(t=>t.role==='target').map(t=>t.text),['jot','jet','van','kit','vat','zip','bag']);
+ eq(source.message.tokens.filter(t=>t.role==='adult-supplied').map(t=>t.text),['I','can','a','note','A','is','in','a','A','is','by','a','I','can','a']);
+ const book=freshState(),initial=copy(book);core.soundMessagesView(book,'delivery');wordRoomPage(book,'synthetic');wordRoomNotes(book);eq(book,initial,'preview/Notes allocates no Delivery data');
+ chooseWordRoomWord(book,'mat',actual);
+ for(const[pack,id]of[['show','end'],['market','u-end'],['garden','last']]){ok(core.enterSoundMessages(book,actual,pack).ok);ok(core.chooseSoundCase(book,id,'listen',actual).ok);for(const a of['partner','hidePartner'])ok(core.actSoundCase(book,a,null,actual).ok);ok(core.actSoundCase(book,'letter','b',actual).ok);ok(core.actSoundCase(book,'keep',null,actual).ok);}
+ const old=copy(book.wordRoom);old.gardenSoundMessages.active=false;
+ ok(core.enterSoundMessages(book,actual,'delivery').ok);const view=()=>core.soundMessagesView(book,'delivery'),act=(a,v)=>{const r=core.actSoundCase(book,a,v,actual);ok(r.ok,a);return r;};
+ for(const key of Object.keys(old))eq(book.wordRoom[key],old[key],'Delivery entry preserves all older material');
+ act('letters');for(const id of['j','k','v','z']){act('teachingLetter',id);eq(view().letter.id,id);}act('caseBack');
+ for(const[id,,target]of pairs){
+  ok(core.chooseSoundCase(book,id,'listen',actual).ok);act('partner');act('hidePartner');ok(!new RegExp(`\\b${target}\\b`,'i').test(wordRoomPage(book,'synthetic')),'target absent before case disclosure');
+  act('letter','j');act('keep');const first=copy(view().current.record.firstKept);act('clear');for(const l of target)act('letter',l);act('compare');eq(core.currentComparison(view().current.record).result,'match');act('back');act('keep');eq(view().current.record.firstKept,first);eq(view().current.record.latestKept.slots,[...target]);act('contrast');act('next');eq(core.soundMessagesView(JSON.parse(raw(book))).current.record.frame,1);act('back');act('choose');
+ }
+ act('message');ok(wordRoomPage(book,'synthetic').includes('Pip&#39;s delivery note'));ok(wordRoomNotes(book).includes('Shared delivery note: opened'));
+ ok(prepareProgressImport(raw(book)).ok);eq(JSON.parse(raw(book)).wordRoom,book.wordRoom);
+ const all=copy(book);for(const p of['show','market','garden','delivery'])all.wordRoom[core.soundPacketField(p)].active=true;
+ const before=copy(all);eq(core.activeSoundPacket(all),'delivery');wordRoomPage(all,'synthetic');eq(all,before,'priority does not normalize imported flags');ok(core.leaveSoundMessages(all,actual).ok);eq(['soundMessages','marketSoundMessages','gardenSoundMessages','deliverySoundMessages'].map(k=>all.wordRoom[k].active),[false,false,false,false]);
+ for(const pack of['garden','market','show']){const bad=copy(book);bad.wordRoom.deliverySoundMessages.v=99;for(const p of['show','market','garden'])bad.wordRoom[core.soundPacketField(p)].active=p===pack;const rawDelivery=copy(bad.wordRoom.deliverySoundMessages);eq(core.activeSoundPacket(bad),pack);ok(core.enterSoundMessages(bad,actual,pack).ok);eq(bad.wordRoom.deliverySoundMessages,rawDelivery,'unsupported Delivery remains exact');}
+ const broken=copy(book);broken.wordRoom.deliverySoundMessages.source.teaching.j.guidance=null;ok(core.actSoundCase(broken,'letters',null,actual).ok);const hold=copy(broken);eq(core.actSoundCase(broken,'teachingLetter','j',actual).ok,false);eq(broken,hold);ok(core.chooseSoundCase(broken,'last','read',actual).ok);
+ for(const field of['cases','message']){const x=copy(book);if(field==='cases')x.wordRoom.deliverySoundMessages.records['first-1']={opaque:'retain'};else x.wordRoom.deliverySoundMessages.source.message={opaque:'retain'};ok(core.chooseSoundCase(x,'last','read',actual).ok);ok(core.chooseSoundCase(x,'first-2','read',actual).ok,'local damage leaves siblings open');}
+ for(const run of[x=>core.actSoundCase(x,'letters',null,{canExport:()=>false}),x=>core.enterSoundMessages(x,{canExport:()=>false},'market'),x=>core.chooseSoundCase(x,'first-1','read',{canExport:()=>false})]){const x=copy(book),before=copy(x);eq(run(x).ok,false);eq(x,before,'refusal changes no material/help/active flag');}
+ const x=copy(book),beforeStale=copy(x);eq(core.actSoundCase(x,'letters',null,{...actual,isCurrent:()=>false}).ok,false);eq(x,beforeStale,'stale owner guard applies to Delivery');
+ const frozen=copy(book.wordRoom.deliverySoundMessages.records['first-1'].source);book.wordRoom.deliverySoundMessages.source.cases['first-1'].alphabet.reverse();book.wordRoom.deliverySoundMessages.source.cases['first-1'].right.label='kit';book.wordRoom.deliverySoundMessages.source.cases['first-1'].right.letters=[...'kit'];ok(core.chooseSoundCase(book,'first-1','read',actual).ok);eq(view().current.source,frozen,'opened Delivery keeps its captured source');
+}
+console.log(`Delivery-label extension: ${n} total content/core/render assertions passed.`);

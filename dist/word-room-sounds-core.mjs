@@ -40,8 +40,8 @@ export function validSoundMessages(r){
     map(r.records)&&(r.selectedId===null||code(r.selectedId))&&['choose','case','message','letters'].includes(r.page)&&
     (!own(r,'letterId')||r.letterId===null||code(r.letterId))&&(!own(r.sharedHelp,'letters')||typeof r.sharedHelp.letters==='boolean');
 }
-export const soundPackets=Object.freeze(['show','market','garden']);
-export const soundPacketField=pack=>pack==='show'?'soundMessages':pack==='market'?'marketSoundMessages':pack==='garden'?'gardenSoundMessages':null;
+export const soundPackets=Object.freeze(['show','market','garden','delivery']);
+export const soundPacketField=pack=>pack==='show'?'soundMessages':pack==='market'?'marketSoundMessages':pack==='garden'?'gardenSoundMessages':pack==='delivery'?'deliverySoundMessages':null;
 const packetField=soundPacketField;
 export const activeSoundPacket=book=>[...soundPackets].reverse().find(pack=>{const r=book?.wordRoom?.[packetField(pack)];return validSoundMessages(r)&&r.active;})||'show';
 const fresh=pack=>({v:1,active:true,source:makeSoundMessageSource(pack),sharedHelp:pack!=='show'?{message:false,letters:false}:{message:false},selectedId:null,records:{},page:'choose',...(pack!=='show'?{letterId:null}:{})});
