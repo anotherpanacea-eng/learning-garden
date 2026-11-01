@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {readFileSync,statSync} from 'node:fs';
+import {statSync} from 'node:fs';
 import {fossilObjects,fossilDetail,fossilTeaching,fossilComparison} from '../dist/fossil-close-content.mjs';
 import {initialFossil,changeFossil} from '../dist/fossil-close-core.mjs';
 import {fossilPage,resetFossilSession,fossilSession} from '../dist/fossil-close-ui.mjs';
@@ -15,7 +15,6 @@ for(const o of fossilObjects){
  }
 }
 let s=initialFossil();for(const o of fossilObjects){s=changeFossil(s,'photo',o.id);s=changeFossil(s,'detail',o.details[0].id);s=changeFossil(s,'pin');}eq(s.pins,{body:'ridges',trace:'spread'});s=changeFossil(s,'detail','outside');s=changeFossil(s,'pin');eq(s.pins,{body:'ridges',trace:'outside'},'replace only one pin');eq(changeFossil(s,'detail','ridges'),null,'detail belongs to its own photo');eq(changeFossil(s,'photo','future'),null);eq(changeFossil(initialFossil(),'pin'),null);eq(changeFossil(s,'view','future'),null);
-const empty={garden:{}};const before=JSON.stringify(empty);resetFossilSession();ok(fossilPage('synthetic').includes('Fossil Close-Look'));eq(JSON.stringify(empty),before);eq(fossilSession(),initialFossil());resetFossilSession();eq(fossilSession(),null);
+resetFossilSession();ok(fossilPage('synthetic').includes('Fossil Close-Look'));eq(fossilSession(),initialFossil());resetFossilSession();eq(fossilSession(),null);
 ok(fossilTeaching.includes('other geological deposits'));ok(fossilComparison.includes('does not make every line a fossil'));
-const app=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');eq((app.match(/!comparisonBench&&!fossilBench/g)||[]).length,2,'both generic appenders excluded');ok(app.indexOf('else if(fossilBench)')<app.indexOf("else if(root==='living')"),'specific route bypasses old Living entries');const hostBind=app.match(/function bind\(\)\{[\s\S]*?\n\}/)?.[0];ok(hostBind,'ordinary host bind function extracted');ok(hostBind.indexOf('bindFossil({')>=0&&hostBind.indexOf(' bindSpeech();')>=0&&hostBind.indexOf('bindFossil({')<hostBind.indexOf(' bindSpeech();'),'capture guard binds before speech');
 console.log(`Fossil Close-Look: ${n} finite-model/content/host checks passed.`);

@@ -70,6 +70,20 @@ def journey(b,base,seed,width):
   p.evaluate('window.oldLift=document.querySelector("[data-lift-action=start]")');p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();ready(p,'explorer-2');p.evaluate('oldLift.click()');ok(p.locator('[data-lift-action=start]').count()==1,'detached control cannot start new owner');p.reload(wait_until='networkidle');ready(p,'explorer-2');ok(p.locator('[data-lift-distance]').inner_text()=='0 of 2 m' and json.loads(p.evaluate("localStorage.getItem('number-garden-v1:explorer-2')"))==seed,'reload resets yard only')
  finally:c.close()
 
+def responsive(b,base,seed,width):
+ # Catalogue behavior runs once at 820px. Other widths exercise actual controls
+ # and both representations, including the largest board and completed trip.
+ c,p=setup(b,base,seed,width)
+ try:
+  layout(p);p.screenshot(path=str(OUT/f'lift-start-{width}.png'),full_page=True)
+  click(p,'board',6);geom(p,6,0,12);layout(p)
+  click(p,'view','numbers');layout(p);ok(p.locator('[data-lift-cell=current]').count()==12,'responsive grid retains all work cells')
+  click(p,'view','yard');click(p,'board',2);click(p,'start');click(p,'pull');geom(p,2,1,12);layout(p)
+  click(p,'pull');click(p,'hold');click(p,'view','numbers');layout(p)
+  ok(p.locator('[data-lift-cell=held][data-filled=true]').count()==12,'responsive completed held grid');p.screenshot(path=str(OUT/f'lift-complete-{width}.png'),full_page=True)
+  click(p,'jobs');layout(p);click(p,'job',1);layout(p)
+ finally:c.close()
+
 def motion(b,base,seed):
  c,p=setup(b,base,seed,820,False)
  try:
@@ -109,7 +123,8 @@ def main():
   with sync_playwright() as pw:
    b=pw.chromium.launch(headless=True,executable_path='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args=['--disable-quic'])
    try:
-    for width in [320,820,1024]:journey(b,base,seed,width);print('catalogue width',width,'passed',flush=True)
+    journey(b,base,seed,820);print('full catalogue at 820 passed',flush=True)
+    for width in [320,1024]:responsive(b,base,seed,width);print('responsive width',width,'passed',flush=True)
     motion(b,base,seed);transfer(b,base);reset_flow(b,base,seed);ok(not errors,'no page errors '+str(errors));print(checks,'Lift Yard native assertions passed; no physical-device/learning claim',flush=True)
    finally:b.close()
  finally:server.shutdown();server.server_close()

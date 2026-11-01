@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import {learningJourneys,journeySelection,chooseJourney,chooseJourneyStop,journeyFacts,prepareJourneyDisplay,learningJourneysPage} from '../dist/learning-journeys.mjs';
 import {freshState} from '../dist/core.mjs';
 import {GROUP_CASES} from '../dist/equal-groups-content.mjs';
@@ -22,10 +21,7 @@ eq(prepareJourneyDisplay(s,owner,{exposeFacts:expose,canExport:()=>false}),{ok:f
 eq(prepareJourneyDisplay(s,owner,{exposeFacts:expose,canExport:()=>true}),{ok:true,changed:true},'example records exposure');ok(s.exposures.includes('3x4')&&s.exposures.includes('4x3'),'both orientations supported');eq(s.baseline.observations,[],'shown example never creates success');eq(s.syntheticFuture,{payload:'keep'},'additive root exact');
 eq(prepareJourneyDisplay(s,owner,{exposeFacts:expose,canExport:()=>true}),{ok:true,changed:false},'repeat display idempotent');
 const blocked=learningJourneysPage(s,owner,{ready:false});ok(!blocked.includes('Three plates, four bites'),'refusal does not reveal unsafe example');ok(blocked.includes('href="#notes"'),'recovery available');
-const little=GROUP_CASES.find(x=>x.id==='little-table');ok(little,'existing little-table case');const twelve=groundCases.find(x=>x.id==='twelve');eq(twelve.stock,12,'actual tile stock');eq([2*6,3*4,2*(2+6),2*(3+4)],[12,12,16,14],'independent area/boundary arithmetic');
+const little=GROUP_CASES.find(x=>x.id==='little-table');ok(little,'existing little-table case');const twelve=groundCases.find(x=>x.id==='twelve');eq(twelve.stock,12,'actual tile stock');
 for(const [id,m,b]of [['zero','-2','6'],['halves','1/2','1'],['plans','3/2','3']]){const l=linearLessons.find(x=>x.id===id);eq([l.model.m,l.model.b],[m,b],'actual existing signed/fractional model '+id);}
-eq(3+1.5*4,7+.5*4,'two plans meet at four');
-const app=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.indexOf("if(root==='journeys')")<app.indexOf('if(needsExplorerInitialization){'),'isolated scene before normalizers');const scene=app.slice(app.indexOf("if(root==='journeys')"),app.indexOf("const plantBench="));ok(scene.includes('prepareJourneyDisplay(state,explorerStore.active.id')&&scene.includes('target,true,false'),'actual journey scene qualifies pending exposure without normalizing');
-const home=readFileSync(new URL('../dist/home-entry.mjs',import.meta.url),'utf8');ok(home.includes("['#town/remembers','Town stories'"),'correct actual Town destination');ok(home.includes('href="#journeys"'),'quiet Home invitation');
 for(const c of priceCards)ok(learningJourneys[1].stops.some(s=>s.choose.includes(c.title)), 'hint matches real price-card title '+c.title);
 console.log(`${checks} learning journey source checks passed.`);

@@ -90,8 +90,12 @@ new commits. The author fixes findings on the same branch.
 ## Checks
 
 `node scripts/run-checks.mjs` runs the atlas, the story packs and every
-`test/*checks*.mjs` suite (about three minutes). Run it before marking a PR
-ready. For UI changes also run the touched activity's browser suite:
+`test/*checks*.mjs` suite (about three minutes). While editing, run the suites
+that exercise the changed behavior. Before landing runtime or test changes,
+run the full source runner once on the candidate integrated with current
+`main`. A previously tested identical tree can reuse that result; documentation
+edits alone do not invalidate runtime checks. For UI changes or changes to a
+browser suite, also run the touched activity's browser suite:
 `python test/<activity>-browser.py` (Python Playwright) or
 `node test/<activity>-browser.js` (Node Playwright), both on Chromium. Some
 Node suites need `dist/` served and a URL variable; use the command the README
@@ -100,7 +104,16 @@ one hosted check, a gitleaks credential-pattern scan on every PR and `main`
 push. It finds credential-shaped strings, not account IDs or private
 information, so still inspect the staged diff for those before pushing. The
 commands above are the gate, so say in the PR which ones you ran and at which
-head.
+head. Documentation-only changes need relevant link/content checks and
+`git diff --check`, not the source runner or browser journeys. If a repair
+changes runtime or tests after validation, rerun affected suites; rerun the
+full runner when integration or broader changes leave coverage uncertain.
+
+Prefer behavior assertions with an independent expected result. Keep save
+safety, mathematical boundaries and lifecycle checks. Source spelling,
+documentation-copy synchronization and repeated whole journeys at each screen
+width need a concrete failure they uniquely catch; responsive samples can
+supplement one complete journey. Assertion totals are not a quality target.
 
 Browser suites are Chromium emulation. They don't qualify a physical iPad,
 Safari, audible speech or VoiceOver, and no check here measures learning.
@@ -117,8 +130,9 @@ this way:
    unresolved. Stop and report if any is missing.
 2. **Test the release tree.** Merge the candidate (and anything landing with
    it) onto current `main` locally. On that tree, run
-   `node scripts/run-checks.mjs` and the browser suites for the activities
-   the release touches.
+   the checks required above. Reuse results if this is the already-tested
+   tree, including when only documentation differs; do not run identical
+   full suites twice merely to cross two workflow steps.
 3. **Merge** with a merge commit, never squash. Confirm the merged `main` has
    the same tree as the tested one (`git diff --quiet <tested> origin/main`).
    If `main` moved, go back to step 2.
