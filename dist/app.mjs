@@ -1,4 +1,5 @@
 import {pauseMillFilm,stopMillFilm} from './mill-film.mjs';
+import {touchRooms,newRoomsPage,markNewRooms,setActiveRooms,readRooms,roomsKey,roomsPrefix,mergeRooms,roomShelf} from './new-for-you.mjs';
 import {beatBenchPage,beatBenchEntry,beatBenchNotes,bindBeatBench,resetBeatBenchView} from './beat-bench-ui.mjs';
 import {longWordPage,longWordEntry,longWordNotes,bindLongWord,resetLongWordView} from './long-word-workshop-ui.mjs';
 import {wordListShelfPage,wordListShelfEntry,wordListShelfNotes,bindWordListShelf,resetWordListShelfView} from './word-list-shelf-ui.mjs';
@@ -162,7 +163,7 @@ import {adaptivePage as spiralPage,bindAdaptive} from './living-adaptive-ui.mjs'
 import {adaptivePairsShown as spiralPairsShown,startAdaptiveSpiral} from './living-adaptive-core.mjs';
 import {livingPage,bindLiving} from './living-ui.mjs';
 import {ensurePostOffice,currentPostOffice,postOfficeView} from './post-office-core.mjs';
-import {postOfficePage,bindPostOffice} from './post-office-ui.mjs';
+import {postOfficePage,postFrontRooms,bindPostOffice} from './post-office-ui.mjs';
 import {notePendingBrambleFactExposure} from './post-rival.mjs';
 import {ensureWorkshop} from './workshop-core.mjs';
 import {workshopPage,bindWorkshop} from './workshop-ui.mjs';
@@ -218,6 +219,25 @@ let browserStorage;try{browserStorage=localStorage;}catch{}
 const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
+// Spec 358: New marks follow every render and in-page re-render of main, and the top bar with them.
+// The observer runs as a microtask, so marks are in place before anything reads the new page. Marking twice changes nothing.
+new MutationObserver(()=>markNewRooms(document)).observe(main,{childList:true,subtree:true});
+// The chosen explorer's rooms record sits in its own key, outside the notebook prefix (memory only while saving is off),
+// so entering a room never changes a notebook root. A record whose notebook is gone (saving off, an explorer removed,
+// everything cleared) is removed on the next render.
+const roomRecords=new Map();
+function sweepRooms(){try{for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k?.startsWith(roomsPrefix)&&localStorage.getItem(`number-garden-v1:${k.slice(roomsPrefix.length)}`)===null)localStorage.removeItem(k);}}catch{}}
+function touchActiveRooms(route){
+ sweepRooms();
+ const p=explorerStore.active,key=roomsKey(p.id);
+ // Read storage on every render and merge it with this page's copy, so another tab's opened rooms are kept
+ // and a record held in memory while saving was off is written once saving is back on.
+ let stored=null;if(explorerStore.persist){try{stored=readRooms(localStorage.getItem(key),p.createdAt);}catch{stored=null;}}
+ const held=roomRecords.get(key),mine=held?.explorer===p.createdAt?held:null;
+ const next=touchRooms(mergeRooms(mine,stored),route,p.createdAt);roomRecords.set(key,next);setActiveRooms(next);
+ // Never recreate data another tab removed or switched off: write only beside a notebook that is still saved.
+ if(explorerStore.persist&&!explorerStore.conflict&&JSON.stringify(next)!==JSON.stringify(stored)){try{if(localStorage.getItem(`number-garden-v1:${p.id}`)!==null)localStorage.setItem(key,JSON.stringify(next));}catch{}}
+}
 keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'?'':location.hash);
 let needsExplorerInitialization=(location.hash||'').split('/')[0]==='#journeys'||['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer)||!!actThreeRoute(location.hash);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
@@ -376,6 +396,8 @@ function render(){
   // Spec 322 §4: the explorer's look, set before any route returns early.
   if(!choosingExplorer&&styleOf(state)==='field-journal')document.documentElement.dataset.style='field-journal';else delete document.documentElement.dataset.style;
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
+  // Spec 358: first use, a new day and opening a room, only for the chosen explorer.
+  if(choosingExplorer)setActiveRooms(null);else touchActiveRooms(hash);
   let cafeOfferPairs=null;
   if(hash!=='#words/signs'||choosingExplorer)resetMarketSignsView();
   if(hash!=='#words/letterpress'||choosingExplorer)resetLetterpressView();
@@ -811,14 +833,15 @@ function render(){
     else if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
     else html=orchardPage(state,slug)+(!slug?pileEntry():'');
   }
-  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=(!slug||slug==='food'?feedingBoardEntry():'')+plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:otherLiving;}
-  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+letterEntry('post')+instructionEntry('post')+parcelPackingEntry()+bellStudioEntry()+clockWalkEntry()+bridgesEntry()+twoLettersEntry()+manifestEntry();
+  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=(!slug||slug==='food'?feedingBoardEntry():'')+plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:!slug?roomShelf('More Living Garden rooms',[feedingBoardEntry(),plantStudyEntry(),fieldNotebookEntry(),collectionEntry(),rainNotebookEntry(),fieldKitEntry('walk'),fossilEntry()]):otherLiving;}
+  else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+roomShelf('More rooms at the Post Office',[...postFrontRooms(state,slug),letterEntry('post'),instructionEntry('post'),parcelPackingEntry(),bellStudioEntry(),clockWalkEntry(),bridgesEntry(),twoLettersEntry(),manifestEntry()]);
   else if(root==='workshop'&&slug==='balance'&&detail==='both'){const ready=prepareBothDisplay(state,priceOptions());html=ready.ok?bothPage(state):bothRefusal();if(ready.changed)save();}
   else if(root==='workshop')html=slug==='recut'||slug==='budget'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
   else if(root==='explore')html=learningExplore(graph,slug);
   else if(root==='science'){
-    html=slug==='window'?coldWindowPage():slug==='evidence'?evidenceShelfPage(explorerStore.active.id):slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);if(!['window','evidence'].includes(slug)&&!(slug==='play'&&currentScience(state)))html+=waterEntry();
-    if(!['evidence','window'].includes(slug))html+=rainPathsEntry()+measurementEntry();
+    html=slug==='window'?coldWindowPage():slug==='evidence'?evidenceShelfPage(explorerStore.active.id):slug==='choose'?scienceHome(state,detail):slug==='play'&&currentScience(state)?sciencePage(state):scienceHome(state);
+    // Spec 362: the Water Lab's extra rooms sit on one room shelf; Hundred Cups stays out of an active play view.
+    if(!['evidence','window'].includes(slug))html+=roomShelf('More rooms at the Water Lab',[slug==='play'&&currentScience(state)?'':waterEntry(),rainPathsEntry(),measurementEntry()]);
   }
   else if(root==='cafe'){
     if(state.cafe.current){const o=orderFor(state.cafe);exposeStoryFacts({facts:[[o.guests,o.bites],...(state.cafe.current.stage==='stock'?currentRecipe(state.cafe).map(item=>[o.guests,item.count]):[])]});}
@@ -839,7 +862,7 @@ function render(){
       else {const draft=storyDraft(state);noteStorySeen(state);exposeStoryFacts(isParisReadingVisit(visit)?parisNode(visit,visit.node):storyNodes[visit.node],`${visit.id}:${visit.node}`);save();html=draft.helper?.open?helpPage(state,draft):storyPage(state,draft);}
     }else html=storyHub(state);
   }
-  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+mixingTableEntry()+ratioBarsEntry()+gapLineEntry()+rodTrayEntry()+fieldStripsEntry()+pavingEntry()+bundleExchangeEntry()+returningOrdersEntry()+joiningOrdersEntry()+comparisonEntry()+tenthsEntry()+hundredthsEntry()+seedEntry()+lanternEntry()+willowPathEntry()+'<section class="resume-strip garden-progress-link"><span>Every seed you plant is a small hello to the garden.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
+  else if(root==='numbers')html=broadHome(state,graph,gardenArt,gardenSelection)+roomShelf('More rooms in the Number Garden',[mixingTableEntry(),ratioBarsEntry(),gapLineEntry(),rodTrayEntry(),fieldStripsEntry(),pavingEntry(),bundleExchangeEntry(),returningOrdersEntry(),joiningOrdersEntry(),comparisonEntry(),tenthsEntry(),hundredthsEntry(),seedEntry(),lanternEntry(),willowPathEntry()])+'<section class="resume-strip garden-progress-link"><span>Every seed you plant is a small hello to the garden.</span><a class="secondary" href="#regrow">Visit our growing garden</a></section>'+seedOffer(state);
   else if(screen==='adventure-end')html=adventureEnd();
   else if(root==='checkin'&&areaById(slug)){
     const t=beginTrail(state,slug);save();
@@ -857,8 +880,9 @@ function render(){
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry()+bridgesEntry()+shadowEntry();
+  else if(root==='new')html=newRoomsPage();
   else html=home();
-  if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context&&hash!=='#cafe')html+=learningInvitations(context);}
+  if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context&&hash!=='#cafe'){const fold=hash==='#numbers'||hash==='#science';if(fold)html+='<details class="place-onward"><summary>Explore somewhere else</summary>';html+=learningInvitations(context);if(fold)html+='</details>';}}
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&hash!=='#cafe'&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
 
   if(!choosingExplorer){const townChapter=root==='workshop'&&slug==='coins'?'market':root==='cafe'&&slug==='batches'?'birthday':root==='loft'&&!slug?'show':null;if(townChapter)html+=actTwoReturn(state,townChapter);}
