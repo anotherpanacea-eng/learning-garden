@@ -220,7 +220,7 @@ export const fieldStripsCopy = {
   "invitation": "Shade a first amount. Then take part of that amount. How much of the original field have you taken?",
   "beforeStart": "After the storm, the orchard keeper is planning small patches within the field. Try a field on this work mat. The frame always shows one whole field.",
   "beforeOpen": "These are invented field plans, not measurements or planting advice. Open a plan to begin; you can change it and try the others whenever you like.",
-  "cuts": "The equal cuts are supplied. You choose how many strips and rows to take.",
+  "cuts": "The equal cuts are already drawn. You choose how many strips and rows to take.",
   "Unsupported root": "This saved Field Strips format cannot be used by this version. Your original data is kept in our notes. Other places remain open.",
   "Unreadable source": "This saved field source cannot be read here. Its original data is kept in our notes. Other places remain open.",
   "Unsupported model": "This saved field uses a model this version does not compute. Its original source, plans and recorded results are kept as data in our notes.",

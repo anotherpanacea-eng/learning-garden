@@ -211,7 +211,7 @@ Grown-up note: **Supplied choices show choices for these briefs. They do not sho
 - Outcome labels: fits **Suits this brief**; alternative **A different register**; other **Check this reader, meaning, word form or letter part**. Always follow with the option's specific feedback.
 - **Choice {n} of {total}**; **{n} of {total} choices made**.
 - **Working together**; **Hear these words**.
-- Support labels: **Help opened**; **Read both opened**; **Narration requested**; **Working together reported**. Values **Yes** / **No**. **Support before this choice** labels the answer snapshot. **Guided steps supplied** labels a question with intrinsic worked steps. **Feedback available on revisit** labels revisiting an already answered question; no independent-attempt claim.
+- Support labels: **Help opened**; **Read both opened**; **Narration requested**; **Working together reported**. Values **Yes** / **No**. **Support before this choice** labels the answer snapshot. **Guided steps shown** labels a question with intrinsic worked steps. **Feedback available on revisit** labels revisiting an already answered question; no independent-attempt claim.
 - **Page kept for this session. Its choices are read-only.** Use after successful in-memory Keep; ordinary persistent success may say **Page kept. Its choices are read-only.** only when adapter reports enabled:true,ok:true.
 - **This page is in this session, but it could not be saved on this device. Download your notes.**
 - **Saving is off. This page lasts for this session. Download your notes to keep a copy.**

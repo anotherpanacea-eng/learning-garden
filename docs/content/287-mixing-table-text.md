@@ -64,7 +64,7 @@ Choice navigation: **Choose an invitation** · **Previous invitation** · **Next
 
 ## All eight construction invitations
 
-Each source's initial pot is explicitly labelled **Supplied starting pot** until the learner changes it. It is not a recorded independent construction. Each goal, recipe and any required counts stay visible. Exact counts in goals are constraints to investigate, not locks on either ingredient control.
+Each source's initial pot is explicitly labelled **Starting pot** until the learner changes it. It is not a recorded independent construction. Each goal, recipe and any required counts stay visible. Exact counts in goals are constraints to investigate, not locks on either ingredient control.
 
 | ID / button title | Source recipe and supplied pot | Exact goal text | Clue | Supplied goal example after Paint / human-read reason prompt |
 | --- | --- | --- | --- | --- |
@@ -89,7 +89,7 @@ Do not claim that this guided construction was an unsupported solution, even if 
 
 ## Complete stripe feedback
 
-After every successful Paint, keep the play surface compact: actual ordered stripe counts, **Same proportions** or **Different proportions**, and **Fits this invitation** or **Keep changing the pot**, decoded from the recorded comparison/goal. Put the longer frozen feedback and supplied goal example in a closed **What these amounts show** fold beside the stripe. Opening it does not change the pot or record another Paint; afterFeedback means feedback was available, not that this fold was opened or understood. Separately label the table's explanation **Supplied goal example**, preceded by **Here is one pot that fits this invitation. It is an example, not a description of your pot.** Then show the optional ungraded human reason prompt. The supplied example never replaces or describes the child's actual counts. The four frozen outcome codes use these exact templates:
+After every successful Paint, keep the play surface compact: actual ordered stripe counts, **Same proportions** or **Different proportions**, and **Fits this invitation** or **Keep changing the pot**, decoded from the recorded comparison/goal. Put the longer frozen feedback and supplied goal example in a closed **What these amounts show** fold beside the stripe. Opening it does not change the pot or record another Paint; afterFeedback means feedback was available, not that this fold was opened or understood. Separately label the table's explanation **A goal example**, preceded by **Here is one pot that fits this invitation. It is an example, not a description of your pot.** Then show the optional ungraded human reason prompt. The supplied example never replaces or describes the child's actual counts. The four frozen outcome codes use these exact templates:
 
 | Code | Comparison sentence | Goal sentence |
 | --- | --- | --- |
