@@ -30,6 +30,8 @@ Everything else in that paragraph is unchanged. "I'll keep saying it" fits both 
 
 The second is the Kept line. act-4.md's Sapling job (My Count Collection) has "The chart goes up on the library wall. People stand in front of it and argue more quietly than before." This slice accepts an evidence note, which may be unfinished and need not contain a chart, so the Kept line names the note instead. Its second sentence is kept exactly.
 
+**Two added lines** from [spec 366](../specs/366-guide-changes-their-mind.md): the guide's guess on the hub and the guide's line after an offer in chapter 1. They are new, not adapted, and give the guide the setup for the change of mind at the act's ending.
+
 ## Starting the act
 
 | Where | Text |
@@ -49,6 +51,7 @@ Page 4 shows the "When it comes free" line, then the chosen reading (Short, Long
 | Hub heading | Act IV · The Town Has Two Stories |
 | Carried question label | The question the town is carrying: Did we make the floods worse, and what should we do now? |
 | Under the label | The hook, then the opening at the chosen amount |
+| After the opening, at both amounts ([366](../specs/366-guide-changes-their-mind.md)) | {guide} writes on a card, *Mostly the rain*, and pins it to the library door. / "I'll put my guess up first," says {guide}, "so I can't pretend later." |
 | Chapter button | The old map and Hollis's account |
 | Below the chapter button | More of this act is still to come. Every game is open now. |
 | Reread link | Read the fourth page again |
@@ -64,6 +67,7 @@ The chapter shows its reused title, Short or Longer, and Keeper's note. Then com
 - Candidate label: Evidence note {n}, {first kept / latest kept}, where {n} is the number in the visit's saved id
 - Offer: **Offer this evidence note**
 - Kept (adapted from act-4.md's Sapling Kept line, see above): Your evidence note goes up on the library wall. People stand in front of it and argue more quietly than before.
+- After Kept, and on later visits while a receipt exists ([366](../specs/366-guide-changes-their-mind.md)): {guide} reads the card on the library door again. "Still my guess. I'll keep checking it."
 
 | Situation | Text |
 | --- | --- |
