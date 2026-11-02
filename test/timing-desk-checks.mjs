@@ -35,7 +35,7 @@ const TRAYS={
  'next-bound':{
  support:'Four is the shortest on this copy, but the copy supplies no guaranteed bound for the next rise. Supporting that promise would need evidence beyond these five entries.',
  against:'The copy does not prove that the next rise will take less than four hours either. It leaves that future duration unresolved.',
- open:'The next duration is not settled here. Four is an observed minimum in the selected copy, and no guaranteed future minimum is supplied.'}
+ open:'The next duration is not settled here. Four is an observed minimum in the selected copy, and no guaranteed future minimum is given.'}
 };
 export const work=s=>T.timingView(s).work;
 export const report=s=>({title:'After the Storm: observations',exportedAt:'2026-10-27T12:00:00.000Z',note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:'sky',color:'gold',symbol:'leaf'},recommendation:recommendations(s),...s});

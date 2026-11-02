@@ -11,17 +11,17 @@ const authored={
     "story": "Story model: Willow Brook is made up.",
     "openParts": "All four parts are open. Begin anywhere, ask for help, or leave a question for another visit.",
     "drawerTitle": "Where these numbers come from",
-    "drawerIntroduction": "These are the supplied sheets for this fictional investigation. Keep a sheet beside your question.",
+    "drawerIntroduction": "These are the sheets for this fictional investigation. Keep a sheet beside your question.",
     "numberInstruction": "Enter a number, a fraction such as 3/2 with a positive denominator, or a decimal with up to three places. Units are beside the box. Enter a value, not a calculation.",
     "invalid": "Use a number, a fraction with a positive denominator, or a decimal with up to three places. Leave out units and calculation signs. This has not added a checked response.",
     "clockInstruction": "Use two digits for the hour and two for the minutes: HH:MM. This sheet uses 00:00 to 23:30, with minutes 00 or 30. Also choose Same day or Next day. For example, 07:30 needs its day label.",
     "clockInvalid": "Use HH:MM from 00:00 to 23:30, with minutes 00 or 30, and choose the day. This sheet writes a new day's midnight as 00:00, Next day. This has not added a checked response.",
     "choiceInstruction": "Choose one sentence, then check it against the sheet.",
-    "choiceInvalid": "Choose a supplied sentence before checking. This has not added a checked response.",
+    "choiceInvalid": "Choose a ready-made sentence before checking. This has not added a checked response.",
     "keepConfirmation": "This provisional note is kept in this explorer's notes. The first kept version and the latest kept version stay available.",
     "noKeep": "No provisional note has been kept yet. Your writing drafts can still be here.",
-    "starterConfirmation": "Replace your current writing draft for this part with the selected supplied words? Your selected supplied words will also stay available.",
-    "starterReceipt": "Supplied words were used as a starting draft for this part.",
+    "starterConfirmation": "Replace your current writing draft for this part with the selected ready-made words? Your selected ready-made words will also stay available.",
+    "starterReceipt": "Ready-made words were used as a starting draft for this part.",
     "modeReceipt": "Both versions stay available. The selected mode is the version shown in a kept note.",
     "claimsIntroduction": "Put a claim beside a tray and read the reply. This keeps a discussion choice, not a right-answer score. You may change your mind.",
     "journeyCaption": "Same day means the day the card starts. Next day begins at the following midnight. “Water arrival” below is shorthand for the corresponding rise being noticed at Willowbank, not a parcel of water being tracked.",
@@ -105,7 +105,7 @@ const authored={
         },
         {
           "id": "rate-learn-4",
-          "text": "The two other supplied rates are four and a half kilometers per hour, written 4.5 km/h, and two kilometers per hour. These are separate invented alternatives. This sheet does not tell us what weather would produce them.",
+          "text": "The two other rates on this sheet are four and a half kilometers per hour, written 4.5 km/h, and two kilometers per hour. These are separate invented alternatives. This sheet does not tell us what weather would produce them.",
           "facts": []
         }
       ],
@@ -179,7 +179,7 @@ const authored={
       "id": "note",
       "role": "note",
       "title": "A provisional note",
-      "purpose": "Leave the miller a short note for a human to read. Explain one result, name a limit, and suggest a better record. You may write, use supplied words, mix the routes, or leave a part open.",
+      "purpose": "Leave the miller a short note for a human to read. Explain one result, name a limit, and suggest a better record. You may write, use ready-made words, mix the routes, or leave a part open.",
       "learn": [
         {
           "id": "note-learn-1",
@@ -205,7 +205,7 @@ const authored={
         },
         {
           "id": "note-guide-2",
-          "text": "You can keep that supplied wording, edit a copy as your own draft, or explain a different result. The note is not graded.",
+          "text": "You can keep that ready-made wording, edit a copy as your own draft, or explain a different result. The note is not graded.",
           "facts": []
         }
       ],
@@ -224,7 +224,7 @@ const authored={
     },
     {
       "id": "journeys",
-      "title": "Four supplied journey cards",
+      "title": "Four journey cards",
       "text": "For each card, the messenger leaves as soon as the rise is noticed at Vadoalto. There is no dispatch delay. A day journey takes three hours; a night journey takes four hours. These are fixed journey lengths on these cards. A journey does not change length when midnight passes. The water-duration assumptions are six hours or four hours, as each question says.",
       "limit": "The cards do not tell us how long a real messenger or a real rise would take. They do not promise time for any town job."
     },
@@ -580,7 +580,7 @@ const authored={
       "pageId": "journeys",
       "kind": "numeric",
       "prompt": "When does the message arrive?",
-      "context": "Six-hour day card: messenger sent at 09:00, Same day. The supplied day journey lasts three hours.",
+      "context": "Six-hour day card: messenger sent at 09:00, Same day. The day journey on this card lasts three hours.",
       "contextRefs": [
         "journeys",
         "day-six"
@@ -741,7 +741,7 @@ const authored={
       "id": "which-origin",
       "pageId": "journeys",
       "kind": "choice",
-      "prompt": "Which sentence describes the supplied six-hour duration?",
+      "prompt": "Which sentence describes the six-hour duration on the cards?",
       "context": "The six-hour cards assume six hours from a noticed rise at Vadoalto to the corresponding notice at Willowbank. The message takes part of that interval.",
       "contextRefs": [
         "journeys",
@@ -944,7 +944,7 @@ const authored={
       "pageId": "rates",
       "kind": "numeric",
       "prompt": "Give the model water arrival, message arrival and hours between them.",
-      "context": "Assume the 18 km route at 4.5 km/h takes 4 hours. Rise noticed and message sent at 09:00, Same day; the supplied day message journey takes 3 hours.",
+      "context": "Assume the 18 km route at 4.5 km/h takes 4 hours. Rise noticed and message sent at 09:00, Same day; the day message journey takes 3 hours.",
       "contextRefs": [
         "rate",
         "constant-route",
@@ -1276,7 +1276,7 @@ const authored={
       "id": "what-copy",
       "pageId": "record",
       "kind": "choice",
-      "prompt": "Which description fits the supplied source?",
+      "prompt": "Which description fits this source?",
       "context": "The sheet is an undated English desk copy of five selected entries. The copier and original selection coverage are not given.",
       "contextRefs": [
         "record",
@@ -1357,7 +1357,7 @@ const authored={
       "replies": {
         "support": "Four is the shortest on this copy, but the copy supplies no guaranteed bound for the next rise. Supporting that promise would need evidence beyond these five entries.",
         "against": "The copy does not prove that the next rise will take less than four hours either. It leaves that future duration unresolved.",
-        "open": "The next duration is not settled here. Four is an observed minimum in the selected copy, and no guaranteed future minimum is supplied."
+        "open": "The next duration is not settled here. Four is an observed minimum in the selected copy, and no guaranteed future minimum is given."
       },
       "hintId": "next-bound-hint",
       "exampleId": "next-bound-example",
@@ -1378,7 +1378,7 @@ const authored={
           "id": "day-result",
           "label": "Compare the day arrivals",
           "text": "On the six-hour day card, the message arrives at 12:00 and the model water arrival is 15:00 on the same day. Three hours lie between them.",
-          "reply": "This names the six-hour day card and the two arrivals. It describes the supplied calculation."
+          "reply": "This names the six-hour day card and the two arrivals. It describes the calculation shown."
         },
         {
           "id": "zero-result",
@@ -1461,7 +1461,7 @@ const authored={
     },
     "together-journeys": {
       "title": "We read this together",
-      "text": "Reading together recorded as support for this part.",
+      "text": "Reading together is noted for this part.",
       "facts": []
     },
     "audio-rates": {
@@ -1471,7 +1471,7 @@ const authored={
     },
     "together-rates": {
       "title": "We read this together",
-      "text": "Reading together recorded as support for this part.",
+      "text": "Reading together is noted for this part.",
       "facts": []
     },
     "audio-record": {
@@ -1481,7 +1481,7 @@ const authored={
     },
     "together-record": {
       "title": "We read this together",
-      "text": "Reading together recorded as support for this part.",
+      "text": "Reading together is noted for this part.",
       "facts": []
     },
     "audio-note": {
@@ -1491,7 +1491,7 @@ const authored={
     },
     "together-note": {
       "title": "We read this together",
-      "text": "Reading together recorded as support for this part.",
+      "text": "Reading together is noted for this part.",
       "facts": []
     },
     "source-story": {
@@ -1500,7 +1500,7 @@ const authored={
       "facts": []
     },
     "source-journeys": {
-      "title": "Four supplied journey cards",
+      "title": "Four journey cards",
       "text": "For each card, the messenger leaves as soon as the rise is noticed at Vadoalto. There is no dispatch delay. A day journey takes three hours; a night journey takes four hours. These are fixed journey lengths on these cards. A journey does not change length when midnight passes. The water-duration assumptions are six hours or four hours, as each question says.\n\nThe cards do not tell us how long a real messenger or a real rise would take. They do not promise time for any town job.",
       "facts": []
     },

@@ -3,7 +3,7 @@ export const feedingBoardSource = {
   "id": "feeding-board-usual-foods",
   "version": 1,
   "title": "The Feeding Board",
-  "origin": "Supplied science examples",
+  "origin": "Food facts from science sources",
   "notice": "These pictures show examples of foods these animals eat, not one meal or every food. The groups describe their diets.",
   "baskets": [
     {
@@ -76,7 +76,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Are clover and grass plants or animals?",
-      "sourceNote": "European rabbits mainly eat plants. Clover and grass are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "European rabbits mainly eat plants. Clover and grass are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Old world rabbit",
         "publisher": "Oregon Zoo",
@@ -138,7 +138,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Hay comes from plants. What about grass?",
-      "sourceNote": "Domestic cattle mainly eat plant foods. Grass and hay are examples. Hay is dried plant material. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Domestic cattle mainly eat plant foods. Grass and hay are examples. Hay is dried plant material. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Cow",
         "publisher": "Smithsonian National Zoo",
@@ -210,7 +210,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Set its size aside. What are leaves, grass and bark?",
-      "sourceNote": "Asian elephants mainly eat plants. Leaves, grass and bark are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Asian elephants mainly eat plants. Leaves, grass and bark are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Asian elephant",
         "publisher": "Smithsonian National Zoo",
@@ -282,7 +282,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Is bark part of a plant or an animal?",
-      "sourceNote": "Eurasian beavers mainly eat plants. Bark, twigs and water plants are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Eurasian beavers mainly eat plants. Bark, twigs and water plants are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Beaver",
         "publisher": "Wildlife Trusts",
@@ -344,7 +344,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Mice and voles are small, but are they plants?",
-      "sourceNote": "This British barn owl example mainly eats small animals. Mice and voles are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "This British barn owl example mainly eats small animals. Mice and voles are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Barn Owl hunting and feeding",
         "publisher": "Barn Owl Trust",
@@ -406,7 +406,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Insects and earthworms count as animals.",
-      "sourceNote": "Common shrews mainly eat small animals. Beetles and earthworms are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Common shrews mainly eat small animals. Beetles and earthworms are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Common Shrew",
         "publisher": "Cornwall Mammal Group",
@@ -468,7 +468,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "One clue is an insect. The other comes from a flower.",
-      "sourceNote": "Seven-spot ladybirds hunt aphids and can also eat pollen from plants. This food record includes animal and plant foods. It does not tell us how much pollen a wild ladybird eats. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Seven-spot ladybirds hunt aphids and can also eat pollen from plants. This food record includes animal and plant foods. It does not tell us how much pollen a wild ladybird eats. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Estimating the effect of plant-provided food supplements on pest consumption by omnivorous predators: lessons from two coccinellid beetles",
         "publisher": "Pest Management Science · PubMed",
@@ -530,7 +530,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Fish and frogs look different. Are either of them plants?",
-      "sourceNote": "Grey herons mainly eat animals. Fish and frogs are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Grey herons mainly eat animals. Fish and frogs are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Grey heron",
         "publisher": "Game & Wildlife Conservation Trust",
@@ -582,7 +582,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Where did the bones come from?",
-      "sourceNote": "Adult bearded vultures eat animal remains, mainly bones. A bone is part of an animal. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Adult bearded vultures eat animal remains, mainly bones. A bone is part of an animal. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Bearded Vulture",
         "publisher": "Vulture Conservation Foundation",
@@ -654,7 +654,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Find a plant food and an animal food.",
-      "sourceNote": "Red foxes eat plant and animal foods. Berries, beetles and mice are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Red foxes eat plant and animal foods. Berries, beetles and mice are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Red Fox",
         "publisher": "NPS",
@@ -716,7 +716,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "A fruit grows on a plant. What is an earthworm?",
-      "sourceNote": "European badgers eat plant and animal foods. Earthworms and fruit are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "European badgers eat plant and animal foods. Earthworms and fruit are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "European badger",
         "publisher": "Wildlife Trusts",
@@ -778,7 +778,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Insects are animals, even when they are very small.",
-      "sourceNote": "Domestic hens eat plant and animal foods. Seeds and insects are examples. A hen is an adult female chicken. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Domestic hens eat plant and animal foods. Seeds and insects are examples. A hen is an adult female chicken. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Domestic Chicken",
         "publisher": "Emirates Park Zoo",
@@ -850,7 +850,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Look for the food that is not part of a plant.",
-      "sourceNote": "Wild boar eat plant and animal foods. Acorns, roots and earthworms are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Wild boar eat plant and animal foods. Acorns, roots and earthworms are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Wild boar",
         "publisher": "Parc Animalier Sainte-Croix",
@@ -922,7 +922,7 @@ export const feedingBoardSource = {
         }
       ],
       "hint": "Beetles count as animals. Seeds and fruit come from plants.",
-      "sourceNote": "Eurasian magpies eat plant and animal foods. Seeds, fruit and beetles are examples. These are supplied species facts, not an observation made in this game.",
+      "sourceNote": "Eurasian magpies eat plant and animal foods. Seeds, fruit and beetles are examples. These facts come from science sources, not from something seen in this game.",
       "reference": {
         "title": "Eurasian Magpie Life History",
         "publisher": "Cornell Lab of Ornithology",
@@ -964,7 +964,7 @@ export const feedingBoardSource = {
           "text": "We cannot group either animal until we watch one of its meals.",
           "outcome": "other",
           "code": "large-small-c",
-          "feedback": "We have supplied information about their diets already. We can use that source here; we are not pretending we watched a meal."
+          "feedback": "We already have information about their diets. We can use that source here; we are not pretending we watched a meal."
         }
       ],
       "hint": "Which statement uses leaves, grass, bark, beetles and earthworms?"
@@ -990,7 +990,7 @@ export const feedingBoardSource = {
           "text": "We cannot group the beaver until we inspect all of its teeth.",
           "outcome": "other",
           "code": "teeth-food-b",
-          "feedback": "The supplied diet note already describes plant foods. We can use the foods without a tooth inspection."
+          "feedback": "The diet note already describes plant foods. We can use the foods without a tooth inspection."
         },
         {
           "id": "c",
@@ -1122,7 +1122,7 @@ export const feedingBoardCopy = {
   "title": "The Feeding Board",
   "invitation": "Who eats plants? Who eats animals? Who eats both? Make a board from the food clues.",
   "boundary": "This board is about what animals eat. It never asks what you eat.",
-  "source label": "Supplied science examples",
+  "source label": "Food facts from science sources",
   "persistent qualifier": "These pictures show examples of foods these animals eat, not one meal or every food. The groups describe their diets.",
   "scale label": "Pictures are not to scale.",
   "before start": "Notes keep your first check, your latest retry, and how many checks you made. They do not keep every try. Your first check stays in your notes when you try again.",
@@ -1145,7 +1145,7 @@ export const feedingBoardCopy = {
   "no idea selection": "Choose an idea before checking.",
   "check heading": "Your basket and the food clue",
   "idea feedback heading": "Your idea and the food clues",
-  "recorded choice": "You chose: {literal supplied basket or idea text}",
+  "recorded choice": "You chose: {literal basket or idea text}",
   "retry invitation": "Your animal stays where you put it. You can choose another basket and check again.",
   "idea retry invitation": "You can choose another idea and check again.",
   "visible optional reason operation on every animal": "Point to the foods. Tell a grown-up: “I chose ___ because it eats ___.” You can say it in your own words.",
@@ -1160,16 +1160,16 @@ export const feedingBoardCopy = {
   "c other underclaim": "We cannot call the ladybird an omnivore until its plant and animal foods are equal amounts.** Feedback: **An omnivore does not need equal amounts. This record includes aphids and pollen without claiming how much pollen a wild ladybird eats.",
   "clue": "Both kinds of food can count without being equal amounts.",
   "a other appearance": "The beaver has big teeth, so it belongs with the animal-eating heron.** Feedback: **The beaver's bark, twigs and water plants are plant foods. Big teeth do not put it with an animal-eater.",
-  "b other underclaim": "We cannot group the beaver until we inspect all of its teeth.** Feedback: **The supplied diet note already describes plant foods. We can use the foods without a tooth inspection.",
+  "b other underclaim": "We cannot group the beaver until we inspect all of its teeth.** Feedback: **The diet note already describes plant foods. We can use the foods without a tooth inspection.",
   "c fits": "The beaver eats plant foods; the heron eats animals. Their foods give different groups.** Feedback: **Bark, twigs and water plants support herbivore for the beaver. Fish and frogs support carnivore for the heron.",
   "a other hunting": "Only the owl is a carnivore, because a carnivore must hunt its own food.** Feedback: **A carnivore eats animal foods. It does not have to hunt them. The vulture eats animal remains.",
   "b fits": "Both are carnivores: the owl eats small animals and the vulture eats animal remains.** Feedback: **Mice, voles and bones of dead animals all supply animal material. A hunter and a scavenger can share this group.",
   "controls": "Try the idea** · **Clue** · **Another example** · **Source** · **Word help** · **Hear** · **Working together** · **Skip for now** · **Back to my animal** · **Back to my idea** · **Previous step** · **Next step** · **Close this example** · **Close this source",
   "together explanation": "Choose Working together if a grown-up is helping with this case. This is a report from you, not a test.",
   "teaching title": "Food decides the group",
-  "1 rabbit clover picture basket supplied": "The rabbit eats plant foods, so the rabbit goes in Herbivore.",
-  "2 barn owl mouse picture basket supplied": "The barn owl eats animal foods, so the barn owl goes in Carnivore.",
-  "3 red fox berries and mouse picture basket supplied": "The red fox eats plant and animal foods, so the red fox goes in Omnivore.",
+  "1 rabbit clover picture basket shown": "The rabbit eats plant foods, so the rabbit goes in Herbivore.",
+  "2 barn owl mouse picture basket shown": "The barn owl eats animal foods, so the barn owl goes in Carnivore.",
+  "3 red fox berries and mouse picture basket shown": "The red fox eats plant and animal foods, so the red fox goes in Omnivore.",
   "teaching footer": "These are worked examples. You can return to your own choice at any step.",
   "different worked example heading": "Try a fox example",
   "steps": "1. Berries come from plants.** / **2. Mice are animals.** / **3. This source includes both. Red fox: Omnivore. Now return to the food clues in your waiting case.",

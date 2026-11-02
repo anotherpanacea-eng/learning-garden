@@ -18,21 +18,21 @@ export const motionLessons = [
             "text": "+8 N · right",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-2",
             "text": "−4 N · left",
             "meaning": "",
             "outcome": "match",
-            "feedback": "This fits the supplied case."
+            "feedback": "This matches the numbers in this case."
           },
           {
             "id": "choice-3",
             "text": "0 N",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           }
         ],
         "guided": "Left 2 N, right 6 N: 6 − 2 = +4 N, to the right.",
@@ -62,21 +62,21 @@ export const motionLessons = [
             "text": "−2 m/s · unchanged leftward motion",
             "meaning": "",
             "outcome": "match",
-            "feedback": "This fits the supplied case."
+            "feedback": "This matches the numbers in this case."
           },
           {
             "id": "choice-2",
             "text": "0 m/s · it stops",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-3",
             "text": "+2 m/s · it turns right",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           }
         ],
         "guided": "With 4 N each way and an initial velocity +2 m/s, velocity stays +2 m/s.",
@@ -106,21 +106,21 @@ export const motionLessons = [
             "text": "−1 m/s",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-2",
             "text": "+3 m/s",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-3",
             "text": "+1 m/s",
             "meaning": "",
             "outcome": "match",
-            "feedback": "This fits the supplied case."
+            "feedback": "This matches the numbers in this case."
           }
         ],
         "guided": "+4 N ÷ 2 kg = +2 m/s². Starting at +1 m/s gives +1 + 2 = +3 m/s after one second.",
@@ -135,7 +135,7 @@ export const motionLessons = [
   {
     "id": "collisions",
     "title": "Read collision evidence carefully",
-    "intro": "Supplied invented trials: the same 2 kg cart starts at +2 m/s and stops at 0 m/s. Same target and measurement method. These numbers are not real test results.",
+    "intro": "Invented trials: the same 2 kg cart starts at +2 m/s and stops at 0 m/s. Same target and measurement method. These numbers are not real test results.",
     "teach": "Shape change is observed deformation, not a force measurement. For equal mass and equal velocity change, longer stopping time gives a smaller magnitude of average net stopping force: 2 kg × 2 m/s ÷ time. Peak force, injury, durability and real safety are unmeasured.",
     "meaning": "",
     "teachMeaning": "",
@@ -150,21 +150,21 @@ export const motionLessons = [
             "text": "Observation",
             "meaning": "",
             "outcome": "match",
-            "feedback": "This fits the supplied case."
+            "feedback": "This matches the numbers in this case."
           },
           {
             "id": "choice-2",
             "text": "Unsupported claim",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-3",
             "text": "Model inference",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           }
         ],
         "guided": "B takes four times A’s stopping time. Its average net force magnitude is one quarter of A’s; this says nothing about every instant of force.",
@@ -184,21 +184,21 @@ export const motionLessons = [
             "text": "Unsupported claim",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-2",
             "text": "Observation",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-3",
             "text": "Model inference",
             "meaning": "",
             "outcome": "match",
-            "feedback": "This fits the supplied case."
+            "feedback": "This matches the numbers in this case."
           }
         ],
         "guided": "B takes four times A’s stopping time. Its average net force magnitude is one quarter of A’s; this says nothing about every instant of force.",
@@ -218,21 +218,21 @@ export const motionLessons = [
             "text": "Model inference",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-2",
             "text": "Unsupported claim",
             "meaning": "",
             "outcome": "match",
-            "feedback": "This fits the supplied case."
+            "feedback": "This matches the numbers in this case."
           },
           {
             "id": "choice-3",
             "text": "Observation",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           }
         ],
         "guided": "B takes four times A’s stopping time. Its average net force magnitude is one quarter of A’s; this says nothing about every instant of force.",
@@ -277,7 +277,7 @@ export const motionLessons = [
     "id": "design",
     "title": "Choose, explain, revise",
     "intro": "Choose within an invented design brief, then reconsider when a requirement changes. No real protective device is approved by this toy.",
-    "teach": "First filter the constraints, then compare the average net stopping-force magnitudes among fitting options. These supplied cases cannot establish injury prevention, peak force or real durability.",
+    "teach": "First filter the constraints, then compare the average net stopping-force magnitudes among fitting options. These invented cases cannot establish injury prevention, peak force or real durability.",
     "meaning": "",
     "teachMeaning": "",
     "items": [
@@ -291,21 +291,21 @@ export const motionLessons = [
             "text": "Foam B",
             "meaning": "",
             "outcome": "match",
-            "feedback": "This fits the supplied case."
+            "feedback": "This matches the numbers in this case."
           },
           {
             "id": "choice-2",
             "text": "Rigid pad A",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-3",
             "text": "Spring C",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           }
         ],
         "guided": "All three fit the initial limits. B has 10 N average magnitude, A 40 N, C 20 N.",
@@ -325,21 +325,21 @@ export const motionLessons = [
             "text": "Rigid pad A",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-2",
             "text": "Foam B",
             "meaning": "",
             "outcome": "different",
-            "feedback": "Compare this choice with the supplied evidence and teaching."
+            "feedback": "Compare this choice with the evidence and the Learn section."
           },
           {
             "id": "choice-3",
             "text": "Spring C",
             "meaning": "",
             "outcome": "match",
-            "feedback": "This fits the supplied case."
+            "feedback": "This matches the numbers in this case."
           }
         ],
         "guided": "The new depth limit excludes B. Of A and C, C has the smaller average magnitude.",

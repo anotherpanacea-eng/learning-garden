@@ -310,7 +310,7 @@ def journey(browser,width,base,seeds):
         ok(run(p)['checks'][-1]['outcome']=='different' and run(p)['firstCheck']==first_numeric,'wrong revision retains the original numeric check')
         click(p,'[data-record-full="true"]')
         ok(run(p)['fullSheet'] and run(p)['fullSheetSeen'],'full-sheet support is committed before display')
-        ok('supplied' in p.locator('#record-run-result').inner_text().lower(),'comparison maximum is labelled supplied rather than true peak')
+        ok('highest reading on the sheet' in p.locator('#record-run-result').inner_text().lower(),'comparison maximum is labelled the highest sheet reading rather than true peak')
         qpeak=next(q for q in source['questions'] if q['id']=='peak')
         question(p,qpeak['id'],qpeak['fit'])
         context=copy.deepcopy(work(p)['checks'][-1]['runContext'])

@@ -38,7 +38,7 @@ const authored={
         },
         {
           "id": "records-learn-3",
-          "text": "The later 160 cm storm has its own labeled place beside the plot. It has no supplied Hollis year, so it does not sit on the year line.",
+          "text": "The later 160 cm storm has its own labeled place beside the plot. The records give it no Hollis year, so it does not sit on the year line.",
           "facts": []
         },
         {
@@ -138,7 +138,7 @@ const authored={
       "guided": [
         {
           "id": "rain-guided-1",
-          "text": "Years 1–10 contains year 4 only. The supplied first group therefore has 1 recorded entry and maximum 40 cm.",
+          "text": "Years 1–10 contains year 4 only. So the first group has 1 recorded entry and maximum 40 cm.",
           "facts": []
         }
       ],
@@ -243,8 +243,8 @@ const authored={
       "id": "S",
       "title": "The later storm note",
       "label": "Later added measurement · fictional source",
-      "text": "A town note added after Hollis's keeping records the later storm at 160 cm above the stated ordinary level. No Hollis-year coordinate is supplied for it.\n\nKeep this measurement separate from the seven dated ledger entries. It cannot be placed at year 40 or 41, and it is not one of the five entries used for the after mean of 112 cm. The extract does not establish instrument or baseline consistency between this note and Hollis's earlier measurements.\n\nLater storm: 160 cm · outside Hollis's keeping · year coordinate not supplied.",
-      "limit": "Later storm: 160 cm · outside Hollis's keeping · year coordinate not supplied.",
+      "text": "A town note added after Hollis's keeping records the later storm at 160 cm above the stated ordinary level. No Hollis-year coordinate is given for it.\n\nKeep this measurement separate from the seven dated ledger entries. It cannot be placed at year 40 or 41, and it is not one of the five entries used for the after mean of 112 cm. The extract does not establish instrument or baseline consistency between this note and Hollis's earlier measurements.\n\nLater storm: 160 cm · outside Hollis's keeping · year coordinate not given.",
+      "limit": "Later storm: 160 cm · outside Hollis's keeping · year coordinate not given.",
       "reference": "Fictional case record; original English summary."
     },
     {
@@ -333,14 +333,14 @@ const authored={
     "storm": {
       "id": "later-storm",
       "height": 160,
-      "label": "Later storm: 160 cm · outside Hollis’s keeping · year coordinate not supplied.",
+      "label": "Later storm: 160 cm · outside Hollis’s keeping · year coordinate not given.",
       "limit": "Outside the seven dated entries and their means; instrument and baseline consistency are not established."
     }
   },
   "model": {
     "mode": "levelling",
     "id": "levelling",
-    "title": "A supplied levelling example",
+    "title": "A levelling example",
     "unitValue": 10,
     "unit": "cm",
     "stages": [
@@ -372,7 +372,7 @@ const authored={
         "text": "Move one more block: 5, 5 and 5. Three equal stacks share 15 blocks: 5 blocks, or 50 cm, each."
       }
     ],
-    "limit": "This supplied example models arithmetic of heights. No real floodwater is moved, and a height mean is not a physical prediction."
+    "limit": "This example models arithmetic of heights. No real floodwater is moved, and a height mean is not a physical prediction."
   },
   "tasks": [
     {
@@ -553,8 +553,8 @@ const authored={
       "hintId": "count-periods-hint",
       "exampleId": "count-periods-example",
       "skipId": "count-periods-skip",
-      "match": "The selected sentence fits these supplied records.",
-      "different": "Compare the selected sentence with the supplied records.",
+      "match": "The selected sentence fits these case records.",
+      "different": "Compare the selected sentence with the case records.",
       "errors": [],
       "fit": "count-periods-2",
       "choices": [
@@ -585,8 +585,8 @@ const authored={
       "hintId": "mean-limit-hint",
       "exampleId": "mean-limit-example",
       "skipId": "mean-limit-skip",
-      "match": "The selected sentence fits these supplied records.",
-      "different": "Compare the selected sentence with the supplied records.",
+      "match": "The selected sentence fits these case records.",
+      "different": "Compare the selected sentence with the case records.",
       "errors": [],
       "fit": "mean-limit-3",
       "choices": [
@@ -617,8 +617,8 @@ const authored={
       "hintId": "unwritten-years-hint",
       "exampleId": "unwritten-years-example",
       "skipId": "unwritten-years-skip",
-      "match": "The selected sentence fits these supplied records.",
-      "different": "Compare the selected sentence with the supplied records.",
+      "match": "The selected sentence fits these case records.",
+      "different": "Compare the selected sentence with the case records.",
       "errors": [],
       "fit": "unwritten-years-1",
       "choices": [
@@ -644,7 +644,7 @@ const authored={
       "pageId": "rain",
       "kind": "numeric",
       "prompt": "How many recorded entries and what maximum height are in years 1–10?",
-      "context": "Compare the supplied interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
+      "context": "Compare the given interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
       "facts": [],
       "hintId": "period-one-hint",
       "exampleId": "period-one-example",
@@ -678,13 +678,13 @@ const authored={
       "pageId": "rain",
       "kind": "numeric",
       "prompt": "How many recorded entries and what maximum height are in years 11–20?",
-      "context": "Compare the supplied interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
+      "context": "Compare the given interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
       "facts": [],
       "hintId": "period-two-hint",
       "exampleId": "period-two-example",
       "skipId": "period-two-skip",
       "match": "Year 15 is the only entry in years 11–20. This group has 1 recorded entry and maximum 60 cm.",
-      "different": "Use only years 11–20. Year 15 belongs here; year 4 and year 27 do not. The one supplied height is 60 cm.",
+      "different": "Use only years 11–20. Year 15 belongs here; year 4 and year 27 do not. The one height given is 60 cm.",
       "errors": [],
       "fields": [
         {
@@ -712,7 +712,7 @@ const authored={
       "pageId": "rain",
       "kind": "numeric",
       "prompt": "How many recorded entries and what maximum height are in years 21–30?",
-      "context": "Compare the supplied interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
+      "context": "Compare the given interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
       "facts": [],
       "hintId": "period-three-hint",
       "exampleId": "period-three-example",
@@ -746,13 +746,13 @@ const authored={
       "pageId": "rain",
       "kind": "numeric",
       "prompt": "How many recorded entries and what maximum height are in years 31–40?",
-      "context": "Compare the supplied interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
+      "context": "Compare the given interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
       "facts": [],
       "hintId": "period-four-hint",
       "exampleId": "period-four-example",
       "skipId": "period-four-skip",
       "match": "Years 31, 34, 36, 38 give 4 entries. Their heights 80, 120, 140, 100 cm have maximum 140 cm.",
-      "different": "Count 31, 34, 36, 38 and compare 80, 120, 140, 100 cm. Year 27 belongs to the preceding interval, and the separate storm has no supplied Hollis year.",
+      "different": "Count 31, 34, 36, 38 and compare 80, 120, 140, 100 cm. Year 27 belongs to the preceding interval, and the separate storm has no Hollis year given.",
       "errors": [],
       "fields": [
         {
@@ -780,13 +780,13 @@ const authored={
       "pageId": "rain",
       "kind": "choice",
       "prompt": "Which periods have the same recorded big-rain count?",
-      "context": "Compare the supplied interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
+      "context": "Compare the given interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
       "facts": [],
       "hintId": "equal-tallies-hint",
       "exampleId": "equal-tallies-example",
       "skipId": "equal-tallies-skip",
-      "match": "The selected sentence fits these supplied records.",
-      "different": "Compare the selected sentence with the supplied records.",
+      "match": "The selected sentence fits these case records.",
+      "different": "Compare the selected sentence with the case records.",
       "errors": [],
       "fit": "equal-tallies-2",
       "choices": [
@@ -812,13 +812,13 @@ const authored={
       "pageId": "rain",
       "kind": "choice",
       "prompt": "Which changes does Hollis explicitly record at year 22?",
-      "context": "Compare the supplied interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
+      "context": "Compare the given interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
       "facts": [],
       "hintId": "recorded-changes-hint",
       "exampleId": "recorded-changes-example",
       "skipId": "recorded-changes-skip",
-      "match": "The selected sentence fits these supplied records.",
-      "different": "Compare the selected sentence with the supplied records.",
+      "match": "The selected sentence fits these case records.",
+      "different": "Compare the selected sentence with the case records.",
       "errors": [],
       "fit": "recorded-changes-3",
       "choices": [
@@ -844,13 +844,13 @@ const authored={
       "pageId": "rain",
       "kind": "choice",
       "prompt": "Where does period 21–30 sit beside the change at 22?",
-      "context": "Compare the supplied interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
+      "context": "Compare the given interval with Hollis’s ledger and Nuria’s copied event count. Rain-event counts are not rainfall amounts.",
       "facts": [],
       "hintId": "straddling-period-hint",
       "exampleId": "straddling-period-example",
       "skipId": "straddling-period-skip",
-      "match": "The selected sentence fits these supplied records.",
-      "different": "Compare the selected sentence with the supplied records.",
+      "match": "The selected sentence fits these case records.",
+      "different": "Compare the selected sentence with the case records.",
       "errors": [],
       "fit": "straddling-period-1",
       "choices": [
@@ -969,7 +969,7 @@ const authored={
       "text": "The storm will happen again next year.",
       "replies": {
         "support": "The separate town note records a later storm at 160 cm. One recorded storm is evidence that it happened, not a schedule for another. The note supplies no Hollis-year coordinate or forecast for next year.",
-        "against": "Neither Hollis's seven entries nor the separate 160 cm note says what next year will bring. They do not promise a repeat, but they do not show a repeat is impossible. This prediction remains beyond the supplied records.",
+        "against": "Neither Hollis's seven entries nor the separate 160 cm note says what next year will bring. They do not promise a repeat, but they do not show a repeat is impossible. This prediction goes beyond these records.",
         "unknown": "The later note gives 160 cm for a storm that happened. The ledger gives seven earlier dated entries. Neither source predicts next year, so these records cannot decide whether a storm like it will happen then."
       },
       "hintId": "claim-hint",
@@ -1658,7 +1658,7 @@ const authored={
     },
     "source-S": {
       "title": "The later storm note",
-      "text": "A town note added after Hollis's keeping records the later storm at 160 cm above the stated ordinary level. No Hollis-year coordinate is supplied for it.\n\nKeep this measurement separate from the seven dated ledger entries. It cannot be placed at year 40 or 41, and it is not one of the five entries used for the after mean of 112 cm. The extract does not establish instrument or baseline consistency between this note and Hollis's earlier measurements.\n\nLater storm: 160 cm · outside Hollis's keeping · year coordinate not supplied.",
+      "text": "A town note added after Hollis's keeping records the later storm at 160 cm above the stated ordinary level. No Hollis-year coordinate is given for it.\n\nKeep this measurement separate from the seven dated ledger entries. It cannot be placed at year 40 or 41, and it is not one of the five entries used for the after mean of 112 cm. The extract does not establish instrument or baseline consistency between this note and Hollis's earlier measurements.\n\nLater storm: 160 cm · outside Hollis's keeping · year coordinate not given.",
       "facts": []
     },
     "source-P": {

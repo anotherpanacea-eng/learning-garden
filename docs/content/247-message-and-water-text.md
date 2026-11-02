@@ -22,12 +22,12 @@ Open-parts line: “All four parts are open. Begin anywhere, ask for help, or le
 
 Part buttons: **Two journeys** · **A rate for the journey** · **Five copied times** · **A provisional note**.
 
-Source drawer heading: **Where these numbers come from**. Intro: “These are the supplied sheets for this fictional investigation. Keep a sheet beside your question.” Close: **Close the sheets**.
+Source drawer heading: **Where these numbers come from**. Intro: “These are the sheets for this fictional investigation. Keep a sheet beside your question.” Close: **Close the sheets**.
 
 Source cards, each independently open:
 
 - `story`: **A story estimate**. “A later story idea says that a rise noticed at Vadoalto is noticed at Willowbank about six hours later. ‘About’ is an estimate. This desk sometimes asks you to assume exactly six hours so that you can compare the journeys.” Limit: “An exact calculation using an assumption does not make the assumption an exact prediction.”
-- `journeys`: **Four supplied journey cards**. “For each card, the messenger leaves as soon as the rise is noticed at Vadoalto. There is no dispatch delay. A day journey takes three hours; a night journey takes four hours. These are fixed journey lengths on these cards. A journey does not change length when midnight passes. The water-duration assumptions are six hours or four hours, as each question says.” Limit: “The cards do not tell us how long a real messenger or a real rise would take. They do not promise time for any town job.”
+- `journeys`: **Four journey cards**. “For each card, the messenger leaves as soon as the rise is noticed at Vadoalto. There is no dispatch delay. A day journey takes three hours; a night journey takes four hours. These are fixed journey lengths on these cards. A journey does not change length when midnight passes. The water-duration assumptions are six hours or four hours, as each question says.” Limit: “The cards do not tell us how long a real messenger or a real rise would take. They do not promise time for any town job.”
 - `rate`: **An invented constant-rate route**. “For these examples only, the route is eighteen kilometers long. Try rates of three, four and a half, or two kilometers in each hour. Each rate stays the same for the whole example.” Limit: “This is a constant-rate arithmetic model. It does not explain how a real river moves.”
 - `record`: **An undated English desk copy**. “Five selected entries give times between corresponding notices of rising water at the two posts: A seven hours; B six hours; C five hours; D six hours; E four hours. The dates, copier and original selection coverage are not given. Neither the exact rule for noticing a rise nor the timing precision is given.” Limit: “A to E are labels, not dates. This is not a list of every rise and it is not part of Nuria's first letter. It cannot be placed on the ledger's year-line.”
 - `adult`: **For a grown-up**. “Real flood warnings come from official services. This case is about how to reason with uncertain timing, not about what to do in a flood.” Limit: “No kept note here becomes the town's official rule. Story events remain part of the authored story.”
@@ -61,21 +61,21 @@ Caption: “Each row is a separate selected entry, including both six-hour entri
 
 Question heading **One question at a time**; selector **Choose a question**; **Previous question**, **Next question**. Card selector **Choose a claim**; **Previous claim**, **Next claim**. Note selector **Choose a note part**; **Previous part**, **Next part**. Boundary buttons disable without wrapping. Skipping a question moves to the next on that page and wraps only after the last; saved draft remains.
 
-Teaching controls: **Learn this in small steps** · **Next idea** · **Show the guided example** · **Back to my question** · **Fold the teaching** · **Open the teaching again**. Guided-example button appears only for that page's explicitly eligible task/part. **Next idea** stops at the final line. Fold/reopen reveals only the saved amount. Label for visible guided copy: **Shown example · supported practice**.
+Teaching controls: **Learn this in small steps** · **Next idea** · **Show the guided example** · **Back to my question** · **Fold the teaching** · **Open the teaching again**. Guided-example button appears only for that page's explicitly eligible task/part. **Next idea** stops at the final line. Fold/reopen reveals only the saved amount. Label for visible guided copy: **Shown example · guided practice**.
 
-Question controls: **Check my working** · **A hint** · **A different example** · **Skip for now**. Status: **Supported practice**. Generic skip reply (all17 questions, separately identified by each question's skip code): “Left open for another visit. Your draft stays here; this has not added a checked response.”
+Question controls: **Check my working** · **A hint** · **A different example** · **Skip for now**. Status: **Guided practice**. Generic skip reply (all17 questions, separately identified by each question's skip code): “Left open for another visit. Your draft stays here; this has not added a checked response.”
 
 Numeric instruction: “Enter a number, a fraction such as 3/2 with a positive denominator, or a decimal with up to three places. Units are beside the box. Enter a value, not a calculation.” Syntax reply: “Use a number, a fraction with a positive denominator, or a decimal with up to three places. Leave out units and calculation signs. This has not added a checked response.”
 
 Clock instruction: “Use two digits for the hour and two for the minutes: HH:MM. This sheet uses 00:00 to 23:30, with minutes 00 or 30. Also choose Same day or Next day. For example, 07:30 needs its day label.” Selector label **Which day?**; blank **Choose a day**; options **Same day** · **Next day**. Clock syntax reply: “Use HH:MM from 00:00 to 23:30, with minutes 00 or 30, and choose the day. This sheet writes a new day's midnight as 00:00, Next day. This has not added a checked response.”
 
-Choice instruction: “Choose one sentence, then check it against the sheet.” Empty choice reply: “Choose a supplied sentence before checking. This has not added a checked response.” Multi-field missing/invalid: show the relevant numeric/clock syntax reply by the field; do not append any check until every field is valid. Valid wrong day is not syntax failure.
+Choice instruction: “Choose one sentence, then check it against the sheet.” Empty choice reply: “Choose a ready-made sentence before checking. This has not added a checked response.” Multi-field missing/invalid: show the relevant numeric/clock syntax reply by the field; do not append any check until every field is valid. Valid wrong day is not syntax failure.
 
-Outcome labels: **Matches the supplied working** · **Different from the supplied working**. First/latest labels: **First checked response** · **Latest checked response** · **Original question and reply**. Support labels: **Teaching shown before this response** · **Help requested before this response** · **Earlier support in this visit** · **No recorded help request before this response**. That last line never means independent reasoning. No check yet: “No checked response here yet.”
+Outcome labels: **Matches the worked answer** · **Different from the worked answer**. First/latest labels: **First checked response** · **Latest checked response** · **Original question and reply**. Support labels: **Teaching shown before this response** · **Help requested before this response** · **Earlier support in this visit** · **No recorded help request before this response**. That last line never means independent reasoning. No check yet: “No checked response here yet.”
 
 Historical controls: **Open response history** · **Close response history** · **Choose an earlier question** · **Show first response** · **Show latest response** · **Open a kept note** · **Close the kept note** · **Choose kept version** (options **First kept note**, **Latest kept note**) · **Choose a kept part**. Show one original response or one kept part at a time. The complete history stays in downloaded notes; closed historical bodies are not shown mathematics. Opening history has this introduction: “These are the original questions, words and replies kept at the time. A later wording change has not rechecked them.” Keep note histories separate from the response selector, so opening a note does not expand all responses.
 
-Read support buttons **Read this aloud** · **Stop reading** · **We read this together**. Together marker reply: “Reading together recorded as support for this part.” Audio marker reply: “Read-aloud support recorded for this part.” These markers are not narration content. Narration speaks only the current rendered text.
+Read support buttons **Read this aloud** · **Stop reading** · **We read this together**. Together marker reply: “Reading together is noted for this part.” Audio marker reply: “Read-aloud support recorded for this part.” These markers are not narration content. Narration speaks only the current rendered text.
 
 Visit controls **Start a new timing sheet** · **Return to this sheet** · **Choose a saved sheet** · **Remove this sheet**. Remove confirmation: “Remove this timing sheet from this explorer's notes? Other sheets stay. Download notes first if you want a copy.” Buttons **Keep the sheet** · **Remove this sheet**. No progress adjective or completion badge in visit titles: **Timing sheet {serial}**.
 
@@ -115,7 +115,7 @@ Hint: “Where does three hours from 09:00 land? There are three more hours to a
 
 ### `day-message` · The day message
 
-Context: “Six-hour day card: messenger sent at 09:00, Same day. The supplied day journey lasts three hours.” Prompt: “When does the message arrive?” Field `message`: **Message arrival** (clock/day). Key12:00 same.
+Context: “Six-hour day card: messenger sent at 09:00, Same day. The day journey on this card lasts three hours.” Prompt: “When does the message arrive?” Field `message`: **Message arrival** (clock/day). Key12:00 same.
 
 Match: “09:00 plus three hours is 12:00, Same day: noon.” Different: “Follow the message's three-hour journey from 09:00. It reaches 12:00, Same day.” No special error reply.
 
@@ -147,7 +147,7 @@ Hint: “The day has changed for both arrivals. Count forward from the message.�
 
 ### `which-origin` · Six hours after what? · checked reading choice
 
-Context: “The six-hour cards assume six hours from a noticed rise at Vadoalto to the corresponding notice at Willowbank. The message takes part of that interval.” Prompt: “Which sentence describes the supplied six-hour duration?” Stable options:
+Context: “The six-hour cards assume six hours from a noticed rise at Vadoalto to the corresponding notice at Willowbank. The message takes part of that interval.” Prompt: “Which sentence describes the six-hour duration on the cards?” Stable options:
 
 1. `after-message`: “It begins when the message reaches Willowbank.” Reply: “That would start the interval after the messenger's journey. These cards start the six hours at Vadoalto's noticed rise.”
 2. `after-rise` (fit): “It begins when the rise is noticed at Vadoalto.” Reply: “Yes. The water-duration clock starts at Vadoalto's noticed rise. The message travels during part of those six hours.”
@@ -164,7 +164,7 @@ Learn lines:
 - `rate-learn-1`: “A rate of three kilometers per hour means three kilometers in one hour. In this model the rate stays constant, so each equal hour adds an equal distance.”
 - `rate-learn-2`: “Use the line to count equal groups of distance. At three kilometers each hour, how many hours make eighteen kilometers? Divide the distance by the distance for one hour: 18 ÷ 3.”
 - `rate-learn-3`: “Check a proposed duration by multiplying it by the rate. Six hours at three kilometers per hour gives 6 × 3 = 18 kilometers. For the same distance, a larger constant rate takes less time.”
-- `rate-learn-4`: “The two other supplied rates are four and a half kilometers per hour, written 4.5 km/h, and two kilometers per hour. These are separate invented alternatives. This sheet does not tell us what weather would produce them.”
+- `rate-learn-4`: “The two other rates on this sheet are four and a half kilometers per hour, written 4.5 km/h, and two kilometers per hour. These are separate invented alternatives. This sheet does not tell us what weather would produce them.”
 
 Model title **Eighteen kilometers at three kilometers per hour**. Axis labels **Hours** · **Kilometres**. Initial stage and Next hour append the next aligned point; prior points in this one shown model remain visible. Complete stage copy:
 
@@ -209,7 +209,7 @@ Hint: “How many twos make eighteen?” Different example: “A six-kilometer m
 
 ### `fast-day` · The four-hour day card
 
-Context: “Assume the 18 km route at 4.5 km/h takes 4 hours. Rise noticed and message sent at 09:00, Same day; the supplied day message journey takes 3 hours.” Prompt: “Give the model water arrival, message arrival and hours between them.” Fields `water` (clock/day), `message` (clock/day), `lead` (hours), labeled as above. Keys13:00 same;12:00 same;1.
+Context: “Assume the 18 km route at 4.5 km/h takes 4 hours. Rise noticed and message sent at 09:00, Same day; the day message journey takes 3 hours.” Prompt: “Give the model water arrival, message arrival and hours between them.” Fields `water` (clock/day), `message` (clock/day), `lead` (hours), labeled as above. Keys13:00 same;12:00 same;1.
 
 Match: “Model water arrival: 13:00, Same day. Message arrival: 12:00, Same day. One hour lies between them. The faster model leaves a smaller interval.” Different: “Add four hours to 09:00 for 13:00, and three hours for 12:00. From message arrival at noon to model water arrival at 13:00 is one hour.” No special error reply.
 
@@ -281,7 +281,7 @@ Hint: “Point to every value less than six. Leave the values equal to six out o
 
 ### `what-copy` · What sort of record? · checked reading choice
 
-Context: “The sheet is an undated English desk copy of five selected entries. The copier and original selection coverage are not given.” Prompt: “Which description fits the supplied source?” Stable options:
+Context: “The sheet is an undated English desk copy of five selected entries. The copier and original selection coverage are not given.” Prompt: “Which description fits this source?” Stable options:
 
 1. `every-rise`: “Five dated entries covering every rise in the valley.” Reply: “The copy has no dates and says the entries are selected. It does not establish a complete record of every rise.”
 2. `nothing-known`: “Five entries from which no duration can be read.” Reply: “The copy does supply a duration for each labeled entry. What it lacks includes dates, selection coverage and timing precision.”
@@ -313,7 +313,7 @@ Hint: “One entry different from six would be enough to challenge ‘all five�
 
 - support: “Four is the shortest on this copy, but the copy supplies no guaranteed bound for the next rise. Supporting that promise would need evidence beyond these five entries.”
 - against: “The copy does not prove that the next rise will take less than four hours either. It leaves that future duration unresolved.”
-- open: “The next duration is not settled here. Four is an observed minimum in the selected copy, and no guaranteed future minimum is supplied.”
+- open: “The next duration is not settled here. Four is an observed minimum in the selected copy, and no guaranteed future minimum is given.”
 
 Hint: “Does the claim describe these rows, or make a promise about a new event?” Different example: “Five deliveries took at least two hours. That list alone proves neither that the next takes at least two hours nor that it will take less.”
 
@@ -321,7 +321,7 @@ Hint: “Does the claim describe these rows, or make a promise about a new event
 
 ## Part 4 · A provisional note
 
-Purpose: “Leave the miller a short note for a human to read. Explain one result, name a limit, and suggest a better record. You may write, use supplied words, mix the routes, or leave a part open.”
+Purpose: “Leave the miller a short note for a human to read. Explain one result, name a limit, and suggest a better record. You may write, use ready-made words, mix the routes, or leave a part open.”
 
 Learn lines:
 
@@ -332,9 +332,9 @@ Learn lines:
 Guided target `calculation` only:
 
 - `note-guide-1`: “A possible opening is: ‘On the six-hour day card, the message arrives at noon and the model water arrival is 15:00, leaving three hours between them.’”
-- `note-guide-2`: “You can keep that supplied wording, edit a copy as your own draft, or explain a different result. The note is not graded.”
+- `note-guide-2`: “You can keep that ready-made wording, edit a copy as your own draft, or explain a different result. The note is not graded.”
 
-Modes **My writing draft** · **Supplied words**. Field label **My words for this part**. Supplied selector **Choose supplied words** with blank **No supplied words chosen**. Button **Use as a starting draft**. Starter confirmation: “Replace your current writing draft for this part with the selected supplied words? Your selected supplied words will also stay available.” Buttons **Keep my draft** · **Replace my draft**. Starter receipt: “Supplied words were used as a starting draft for this part.” Toggle/selection receipt: “Both versions stay available. The selected mode is the version shown in a kept note.” Own-mode reflection reply per part below; supplied option replies below appear ungraded on selection, without becoming checks.
+Modes **My writing draft** · **Ready-made words**. Field label **My words for this part**. Ready-made selector **Choose ready-made words** with blank **No ready-made words chosen**. Button **Use as a starting draft**. Starter confirmation: “Replace your current writing draft for this part with the selected ready-made words? Your selected ready-made words will also stay available.” Buttons **Keep my draft** · **Replace my draft**. Starter receipt: “Ready-made words were used as a starting draft for this part.” Toggle/selection receipt: “Both versions stay available. The selected mode is the version shown in a kept note.” Own-mode reflection reply per part below; supplied option replies below appear ungraded on selection, without becoming checks.
 
 ### `calculation` · What the calculations show
 
@@ -342,7 +342,7 @@ Prompt: “Choose a result and tell the miller which assumption produced it. Inc
 
 Options:
 
-- `day-result`, label **Compare the day arrivals**: “On the six-hour day card, the message arrives at 12:00 and the model water arrival is 15:00 on the same day. Three hours lie between them.” Reply: “This names the six-hour day card and the two arrivals. It describes the supplied calculation.”
+- `day-result`, label **Compare the day arrivals**: “On the six-hour day card, the message arrives at 12:00 and the model water arrival is 15:00 on the same day. Three hours lie between them.” Reply: “This names the six-hour day card and the two arrivals. It describes the calculation shown.”
 - `zero-result`, label **Explain the zero interval**: “On the four-hour night card, both arrivals are 00:30 on the next day. There are zero hours between them, so this card gives no advance time.” Reply: “This keeps the next-day label and explains what zero means on that card.”
 - `record-result`, label **Describe the selected copy**: “The copied durations in order are 4, 5, 6, 6 and 7 hours. Their median is 6 hours, their range is 3 hours, and two entries are below 6 hours.” Reply: “This describes the five selected entries. A next event still needs its own evidence.”
 
@@ -368,11 +368,11 @@ Options:
 
 Writing helper controls **Help with this part** · **A different note example** · **Leave this part open**. No additional undisclosed hints. Leaving moves to next part, wraps after last, preserves both drafts and adds a support marker, not a checked response.
 
-Keep buttons **Keep this provisional note** · **Read your kept note**. Before keep: “A note can be unfinished. The version selected for each part will be kept, with any supplied-word support marked.” Confirmation after successful save: “This provisional note is kept in this explorer's notes. The first kept version and the latest kept version stay available.”
+Keep buttons **Keep this provisional note** · **Read your kept note**. Before keep: “A note can be unfinished. The version selected for each part will be kept, with any ready-made words marked.” Confirmation after successful save: “This provisional note is kept in this explorer's notes. The first kept version and the latest kept version stay available.”
 
 Identical miller close for every note, including blank/supplied-only: “The miller reads the page slowly. ‘There is room here for a calculation, a limit, and a question to carry on with,’ she says. ‘I'll leave room in the margin.’ Your note stays with this timing sheet for another conversation.”
 
-First/latest keep headings **First kept note** · **Latest kept note**. Source labels **My writing draft** · **Supplied words** · **Supplied words used as a starting draft**. No keep: “No provisional note has been kept yet. Your writing drafts can still be here.”
+First/latest keep headings **First kept note** · **Latest kept note**. Source labels **My writing draft** · **Ready-made words** · **Ready-made words used as a starting draft**. No keep: “No provisional note has been kept yet. Your writing drafts can still be here.”
 
 Return copy: “The timing question can wait while you explore somewhere else.” Links **Back to the desk** · **Math paths** · **Science paths** · **The ledger and the rain gauge** · **My notes**. Optional Ledger invitation: “Read a different fictional source: heights and copied rain counts. Those years do not date the timing entries here.” No automatic artifact transfer or story contribution.
 
