@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {livingHubRooms} from '../dist/living-spiral-ui.mjs';
 import {freshState,restoreStateResult,STORAGE_KEY} from '../dist/core.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
@@ -16,7 +17,7 @@ const r=startBody(s,'snail');chooseBodyLegs(s,'0');chooseBodyFeature(s,'rings');
 for(const page of ['inspect','key','keep'])for(const view of ['body','detail']){
  setBodyPage(s,page);setBodyView(s,view);const before=structuredClone(s);ok(adaptivePage(s,'bodies').includes('body-page'),'real allowed route reaches new pack');bodyCluesPage(s);bodyCluesNotes(s);adaptiveNotes(s);destinationNotes(s);eq(s,before,'all six page/view pairs and actual notes are pure');
 }
-ok(adaptivePage(s,'').includes('href="#living/bodies"'),'hub has new key invitation');ok(destinationNotes(s).includes('Living Garden body clues'),'actual grown-up notebook includes new records');
+ok(livingHubRooms().join('').includes('href="#living/bodies"'),'Living front page offers the new key (room shelf, spec 363)');ok(destinationNotes(s).includes('Living Garden body clues'),'actual grown-up notebook includes new records');
 const frozen=structuredClone(s.bodyClues),raw=JSON.stringify(s);eq(restoreStateResult(raw).state.bodyClues,frozen,'generic restore preserves exact new branch');const imported=prepareProgressImport(raw);ok(imported.ok);eq(imported.state.bodyClues,frozen,'actual transfer preserves frozen pictures/key/support/results');store.save(s);const first=store.active.id,other=store.add({avatar:'fern',color:'rose',symbol:'shell'},s);startBody(other,'worm');store.save(other);eq(store.select(first,other).bodyClues,frozen,'explorers retain their own picture trails');eq(initializeExplorerState(new ExplorerStore(disk).load()).bodyClues,frozen,'disk reload retains exact source and checks');
 {
  const sample=initializeExplorerState(freshState()),before=structuredClone(sample);bodyCluesPage(sample);bodyCluesNotes(sample);adaptivePage(sample,'bodies');destinationNotes(sample);eq(sample,before,'opening an empty picture desk creates no branch, attempts or trim');

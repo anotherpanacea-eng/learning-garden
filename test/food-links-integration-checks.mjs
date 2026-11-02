@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {livingHubRooms} from '../dist/living-spiral-ui.mjs';
 import {readFileSync} from 'node:fs';
 import {freshState,restoreStateResult,STORAGE_KEY} from '../dist/core.mjs';
 import {ExplorerStore} from '../dist/explorer-storage.mjs';
@@ -38,5 +39,5 @@ for(const payload of [null,'<script>not executable</script>',{version:77,raw:'<i
 {
  const offDisk=new Storage();offDisk.setItem('number-garden-save','off');const off=new ExplorerStore(offDisk),state=initializeExplorerState(off.load());startFood(state,'aphid-eater');chooseFoodNeighbor(state,'ladybird-larva');off.save(state);eq(offDisk.getItem(`${STORAGE_KEY}:${off.active.id}`),null);eq(off.load().foodLinks,state.foodLinks);
 }
-const app=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.includes('spiralPage(state,slug)'),'existing root delegatesactualslug');ok(!app.includes("from './food-links"),'noheldappeditneeded');ok(readFileSync(new URL('../dist/index.html',import.meta.url),'utf8').includes('food-links.css'));ok(adaptivePage(s).includes('href="#living/food"'),'Gardenentrypresent');
+const app=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');ok(app.includes('spiralPage(state,slug)'),'existing root delegatesactualslug');ok(!app.includes("from './food-links"),'noheldappeditneeded');ok(readFileSync(new URL('../dist/index.html',import.meta.url),'utf8').includes('food-links.css'));ok(livingHubRooms().join('').includes('href="#living/food"'),'Gardenentrypresent');
 console.log(`Food links integration: ${n} assertions passed.`);

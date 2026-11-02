@@ -158,7 +158,7 @@ import {wordGardenPage,bindWordGarden} from './word-garden-ui.mjs';
 import {riddlesPage,riddlesEntry,bindRiddles} from './riddles-ui.mjs';
 import {connectionPairsShown} from './learning-connections.mjs';
 import {connectionPanel,bindConnections} from './learning-connections-ui.mjs';
-import {bindSpiral} from './living-spiral-ui.mjs';
+import {bindSpiral,livingHubRooms} from './living-spiral-ui.mjs';
 import {adaptivePage as spiralPage,bindAdaptive} from './living-adaptive-ui.mjs';
 import {adaptivePairsShown as spiralPairsShown,startAdaptiveSpiral} from './living-adaptive-core.mjs';
 import {livingPage,bindLiving} from './living-ui.mjs';
@@ -833,7 +833,7 @@ function render(){
     else if(slug==='gather'){const pairs=foragePairsShown(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=foragePage(state,detail);}
     else html=orchardPage(state,slug)+(!slug?pileEntry():'');
   }
-  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=(!slug||slug==='food'?feedingBoardEntry():'')+plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:!slug?roomShelf('More Living Garden rooms',[feedingBoardEntry(),plantStudyEntry(),fieldNotebookEntry(),collectionEntry(),rainNotebookEntry(),fieldKitEntry('walk'),fossilEntry()]):otherLiving;}
+  else if(root==='living'){if(slug==='first')html=livingPage(state)+'<aside class="living-invitation"><h2>Ready to follow another trail?</h2><p>Meet different animals and compare changing clues. Your first visit stays here.</p><a class="secondary" href="#living">Explore more Living Garden trails</a></aside>';else{const pairs=slug==='visit'?spiralPairsShown(state):[];if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=spiralPage(state,slug);}const otherLiving=(!slug||slug==='food'?feedingBoardEntry():'')+plantStudyEntry()+fieldNotebookEntry()+collectionEntry()+rainNotebookEntry()+(!slug?fieldKitEntry('walk')+fossilEntry():'');html+=slug==='movement'?`<details class="body-movement-other"><summary>Other Living Garden investigations</summary>${otherLiving}</details>`:!slug?roomShelf('More Living Garden rooms',[...livingHubRooms(),feedingBoardEntry(),plantStudyEntry(),fieldNotebookEntry(),collectionEntry(),rainNotebookEntry(),fieldKitEntry('walk'),fossilEntry()]):otherLiving;}
   else if(root==='post')html=equalGroupEntry('bramble')+postOfficePage(state,slug)+roomShelf('More rooms at the Post Office',[...postFrontRooms(state,slug),letterEntry('post'),instructionEntry('post'),parcelPackingEntry(),bellStudioEntry(),clockWalkEntry(),bridgesEntry(),twoLettersEntry(),manifestEntry()]);
   else if(root==='workshop'&&slug==='balance'&&detail==='both'){const ready=prepareBothDisplay(state,priceOptions());html=ready.ok?bothPage(state):bothRefusal();if(ready.changed)save();}
   else if(root==='workshop')html=slug==='recut'||slug==='budget'?workshopPage(state,slug,explorerStore.active.id):workshopPage(state,slug);
