@@ -1,0 +1,18 @@
+/* Spec 358: New for you shelf and New marks. */
+.nfy-dot{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--poppy,#b93e2c);vertical-align:.1em}
+.nfy-mark{display:inline-flex;align-items:center;gap:.3em;margin-left:.5em;padding:.05em .45em;border-radius:1em;background:#fbeee9;color:#8f2f21;font-size:.78em;font-weight:700;letter-spacing:.01em;text-decoration:none;white-space:nowrap;vertical-align:.08em}
+.nfy-mark .nfy-dot{margin-right:.3em}
+.header nav a{position:relative}
+.header nav a>.nfy-place.nfy-dot{position:absolute;top:2px;right:-2px;width:10px;height:10px;border:2px solid #fbfcfa}
+.nfy-shelf{margin:4px 0 26px;padding:18px 20px 20px;border:2px solid #efc9bf;border-radius:16px;background:#fff8f5}
+.nfy-shelf h2{display:flex;align-items:center;gap:.45em;font-size:1.35rem;margin:0 0 12px}
+.nfy-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.nfy-card{text-align:left;align-items:flex-start;display:flex;flex-direction:column;gap:4px;min-height:64px;padding:14px 16px;border:1px solid var(--line,#cbdcd3);border-radius:12px;background:#fff;text-decoration:none}
+.nfy-card strong{font-size:1.02rem;line-height:1.3}
+.nfy-card small{color:var(--quiet,#52675e);font-size:.85rem}
+.nfy-shelf .nfy-card,.nfy-page .nfy-card{align-items:flex-start;justify-content:flex-start;text-align:left}
+.nfy-card:hover{background:var(--mint,#eaf4ef)}
+.nfy-all{display:inline-block;margin-top:12px;font-size:.92rem;min-height:44px;padding:10px 0}
+.nfy-list{margin-top:8px}
+.workshop-shelves{display:grid;gap:14px;margin:6px 0 18px}
+.workshop-shelf h2{font-size:1rem;letter-spacing:0;margin:0 0 8px;color:var(--quiet,#52675e)}

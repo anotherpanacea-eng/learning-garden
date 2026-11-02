@@ -9,7 +9,8 @@ const avatarIds=['fern','reed','sky'];
 const validId=id=>typeof id==='string'&&/^explorer-[1-9]\d{0,8}$/.test(id);
 const stateKey=id=>`${STORAGE_KEY}:${id}`;
 const copyKey=key=>/^number-garden-(?:backup|kept)-/.test(key);
-const managed=key=>key===REGISTRY_KEY||key===STORAGE_KEY||key.startsWith(`${STORAGE_KEY}:`)||copyKey(key);
+// Spec 358's New-for-you records sit outside the notebook prefix but are cleared with the notebooks.
+const managed=key=>key===REGISTRY_KEY||key===STORAGE_KEY||key.startsWith(`${STORAGE_KEY}:`)||key.startsWith('learning-garden-rooms-v1:')||copyKey(key);
 function cleanProfile(p){
  if(!p||!validId(p.id)||!avatarIds.includes(p.avatar)||!EXPLORER_COLORS.includes(p.color)||!EXPLORER_SYMBOLS.includes(p.symbol)||typeof p.createdAt!=='string'||!Number.isFinite(Date.parse(p.createdAt)))return null;
  return {id:p.id,avatar:p.avatar,color:p.color,symbol:p.symbol,createdAt:p.createdAt};

@@ -35,7 +35,8 @@ def root_style(p):
 
 
 def main_html(p):
-    return p.evaluate("document.querySelector('#main').innerHTML")
+    # Spec 358's New for you shelf and marks depend on the day, not the look; compare without them.
+    return p.evaluate("(()=>{const m=document.querySelector('#main').cloneNode(true);m.querySelectorAll('.nfy-shelf,.nfy-mark').forEach(x=>x.remove());return m.innerHTML;})()")
 
 
 def choose(p, base, look, keyboard=False):

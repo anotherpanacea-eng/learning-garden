@@ -1,4 +1,5 @@
 import {pauseMillFilm,stopMillFilm} from './mill-film.mjs';
+import {touchRooms,newRoomsPage,markNewRooms,setActiveRooms,readRooms,roomsKey,roomsPrefix,mergeRooms} from './new-for-you.mjs';
 import {beatBenchPage,beatBenchEntry,beatBenchNotes,bindBeatBench,resetBeatBenchView} from './beat-bench-ui.mjs';
 import {longWordPage,longWordEntry,longWordNotes,bindLongWord,resetLongWordView} from './long-word-workshop-ui.mjs';
 import {wordListShelfPage,wordListShelfEntry,wordListShelfNotes,bindWordListShelf,resetWordListShelfView} from './word-list-shelf-ui.mjs';
@@ -218,6 +219,25 @@ let browserStorage;try{browserStorage=localStorage;}catch{}
 const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
+// Spec 358: New marks follow every render and in-page re-render of main, and the top bar with them.
+// The observer runs as a microtask, so marks are in place before anything reads the new page. Marking twice changes nothing.
+new MutationObserver(()=>markNewRooms(document)).observe(main,{childList:true,subtree:true});
+// The chosen explorer's rooms record sits in its own key, outside the notebook prefix (memory only while saving is off),
+// so entering a room never changes a notebook root. A record whose notebook is gone (saving off, an explorer removed,
+// everything cleared) is removed on the next render.
+const roomRecords=new Map();
+function sweepRooms(){try{for(let i=localStorage.length-1;i>=0;i--){const k=localStorage.key(i);if(k?.startsWith(roomsPrefix)&&localStorage.getItem(`number-garden-v1:${k.slice(roomsPrefix.length)}`)===null)localStorage.removeItem(k);}}catch{}}
+function touchActiveRooms(route){
+ sweepRooms();
+ const p=explorerStore.active,key=roomsKey(p.id);
+ // Read storage on every render and merge it with this page's copy, so another tab's opened rooms are kept
+ // and a record held in memory while saving was off is written once saving is back on.
+ let stored=null;if(explorerStore.persist){try{stored=readRooms(localStorage.getItem(key),p.createdAt);}catch{stored=null;}}
+ const held=roomRecords.get(key),mine=held?.explorer===p.createdAt?held:null;
+ const next=touchRooms(mergeRooms(mine,stored),route,p.createdAt);roomRecords.set(key,next);setActiveRooms(next);
+ // Never recreate data another tab removed or switched off: write only beside a notebook that is still saved.
+ if(explorerStore.persist&&!explorerStore.conflict&&JSON.stringify(next)!==JSON.stringify(stored)){try{if(localStorage.getItem(`number-garden-v1:${p.id}`)!==null)localStorage.setItem(key,JSON.stringify(next));}catch{}}
+}
 keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'?'':location.hash);
 let needsExplorerInitialization=(location.hash||'').split('/')[0]==='#journeys'||['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer)||!!actThreeRoute(location.hash);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
@@ -376,6 +396,8 @@ function render(){
   // Spec 322 §4: the explorer's look, set before any route returns early.
   if(!choosingExplorer&&styleOf(state)==='field-journal')document.documentElement.dataset.style='field-journal';else delete document.documentElement.dataset.style;
   const hash=location.hash||'#home', [root,slug,detail]=hash.slice(1).split('/');
+  // Spec 358: first use, a new day and opening a room, only for the chosen explorer.
+  if(choosingExplorer)setActiveRooms(null);else touchActiveRooms(hash);
   let cafeOfferPairs=null;
   if(hash!=='#words/signs'||choosingExplorer)resetMarketSignsView();
   if(hash!=='#words/letterpress'||choosingExplorer)resetLetterpressView();
@@ -857,6 +879,7 @@ function render(){
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
   else if(root==='loft')html=loftPage(state)+letterEntry('loft')+instructionEntry('loft')+noticeEntry()+bridgesEntry()+shadowEntry();
+  else if(root==='new')html=newRoomsPage();
   else html=home();
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context&&hash!=='#cafe')html+=learningInvitations(context);}
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&hash!=='#cafe'&&['living','cafe','post'].includes(root)){const target=root==='post'?'bramble':root,pairs=connectionPairsShown(state,target);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html+=connectionPanel(state,target);}
