@@ -35,7 +35,7 @@ The CSS lives in a new `dist/number-garden-front.css`, linked from `index.html`.
 - `test/numbers-front-browser.py`, against the real app at 375 and 820 px:
   - seven area cards, each with its picture to the left of its title (the picture's right edge is left of the title's left edge, and their tops overlap);
   - each card keeps its garden-walk button and Adventures link;
-  - the invitations sit in a closed `details.place-onward` on `#numbers` and keep their links; `#science` still shows them open;
+  - the invitations sit in a closed `details.place-onward` on `#numbers` and keep their links; `#loft` still shows them open;
   - no sideways scroll, and nothing spills out of a card;
   - at 820 px the area grid is at least 15% shorter than 1,384 px, and at 375 px at least 15% shorter than its height on `claude/lg57-post-front` (measured at build).
 - The existing suites that visit the Number Garden still pass: map-startup-browser (seven open patches), room-shelves, new-for-you, home-entry and learning-journeys. `node scripts/run-checks.mjs` passes.
