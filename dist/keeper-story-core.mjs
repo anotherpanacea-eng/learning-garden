@@ -37,7 +37,7 @@ export function storyView(state){
  if(!present)return {status:'missing',...base};
  if(!supportedStory(record))return {status:'unavailable',...base};
  const hasAct=own(record.acts,'I'),act=hasAct?record.acts.I:null,known=object(act)&&typeof act.ended==='boolean';
- const pageAmountLocked=object(record.acts.III)&&record.acts.III.ended===true&&record.seenScenes.includes('ways-page-revealed')&&own(record,'pageAmount')&&!keeperPageAmounts.includes(record.pageAmount);
+ const pageAmountLocked=(object(record.acts.III)&&record.acts.III.ended===true&&record.seenScenes.includes('ways-page-revealed')||object(record.acts.IV)&&record.acts.IV.started===true&&record.seenScenes.includes('harvest-page-revealed'))&&own(record,'pageAmount')&&!keeperPageAmounts.includes(record.pageAmount);
  const ended=known&&act.ended===true,parcelFound=record.seenScenes.includes('parcel-found'),oldMapRevealed=record.seenScenes.includes('old-map-revealed')||record.seenScenes.includes('inherited-map-read'),eligible=ended||receipt!==null,pageReady=arrival.inheritedPageOne||parcelFound&&eligible;
  return {status:'ready',...base,opening:record.opening,parcelFound,parcelAvailable:parcelFound||arrival.inheritedPageOne,oldMapRevealed,actIStatus:hasAct?known?'ready':'unreadable':'missing',actI:act,receiptStatus:known&&own(act,'receipt')?readableReceipt(act.receipt)?'ready':'unreadable':'missing',ended,eligible,pageReady,pageVisible:pageReady&&oldMapRevealed,pageAmount:keeperPageAmounts.includes(record.pageAmount)?record.pageAmount:'short',pageAmountLocked};
 }
