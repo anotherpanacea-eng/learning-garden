@@ -1,6 +1,8 @@
 // Spec352 source-owner fixtures and save-boundary checks; story offers are not learning results.
 import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
+import {readFileSync} from 'node:fs';
+import {actFourContent as C} from '../dist/act-four-content.mjs';
 import {actThreeHosts} from './act-three-checks.mjs';
 import {canExport} from './act-two-checks.mjs';
 import * as Three from '../dist/act-three-core.mjs';
@@ -136,6 +138,15 @@ export function runChecks(){
   const b=clone(s),html=actFourPage(s,{part:'chapter'});ok(!html.includes('SYNTHETIC_PRIVATE_PROSE'),'candidate labels never copy note writing');ok(!html.includes('Still my guess'),'guide follow-up requires a receipt');eq(s,b);
   ok(A.offerActFour(s,'account',A.actFourCandidates(s,'account')[0].key,options));const kept=clone(s);ok(actFourPage(s,{part:'chapter'}).includes('Still my guess'));ok(!actFourNotes(s).includes('SYNTHETIC_PRIVATE_PROSE'));eq(s,kept,'offered rendering and Notes are pure');
   delete s.story.acts.IV;ok(actFourInvitation(s).includes('data-a4-start'));delete s.story.acts.III;eq(actFourInvitation(s),'','no invitation before Page3 eligibility');
+ }
+ {
+  // The finite-text contract comes from the reviewed authoring documents, not today's saved answer keys.
+  const files=['../docs/content/352-act-four-opening-text.md','../docs/content/120-story/act-4.md','../docs/content/120-keeper-of-the-ways-text.md','../docs/specs/366-guide-changes-their-mind.md'];
+  const plain=x=>x.replace(/\*/g,'');
+  const sources=plain(files.map(p=>readFileSync(new URL(p,import.meta.url),'utf8')).join('\n')).replaceAll("My hat and my boots both got wet that year too. That doesn't mean my hat did it.","My hat and my boots both got wet that year too, and I'll keep saying it: that doesn't mean my hat did it.");
+  const leafs=x=>Array.isArray(x)?x.flatMap(leafs):x&&typeof x==='object'?Object.values(x).flatMap(leafs):typeof x==='string'?[x]:[];
+  eq(C.notes.line,'Act IV, The Town Has Two Stories: {state}.','Notes template preserves the authored summary label');
+  for(const text of leafs(C))if(!text.startsWith('#')&&text!==C.notes.line)ok(sources.includes(plain(text)),'finite text traces to a reviewed source: '+text);
  }
  console.log(`Act IV opening: ${n} core and saved-work checks passed.`);return n;
 }

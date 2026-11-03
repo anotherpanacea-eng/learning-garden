@@ -50,6 +50,8 @@ def layout(p,label):
  ok(p.locator('[data-act-four-root]').first.evaluate('e=>parseFloat(getComputedStyle(e).fontSize)>=16'),label+' readable base type')
 
 def run(base,browser):
+ # The Keeper's Pages use a different binding path from the third-page continuation.
+ c,p,seed=setup(browser,base);p.goto(base+'#almanac/the-ways',wait_until='networkidle');p.locator('.a4-invitation a[href="#home"]').tap();p.wait_for_function('location.hash==="#home"');p.reload(wait_until='networkidle');p.goto(base+'#almanac/keepers',wait_until='networkidle');p.locator('[data-a4-start]').tap();p.locator('[data-a4-page-leaf]').wait_for();ok(book(p)['story']['acts']['IV']['started'],'pause, reload, continue from Keeper Pages');ok('harvest-page-revealed' in book(p)['story']['seenScenes'],'Keeper Pages continuation reveals Page4');c.close()
  # One complete tablet journey; two smaller responsive samples below.
  c,p,seed=setup(browser,base);eq(book(p),seed,'entry does not initialize or start');layout(p,'tablet arrival')
  p.goto(base+'#almanac/the-ways',wait_until='networkidle');p.locator('[data-a4-start]').wait_for();eq(book(p),seed,'third page invitation is read-only')
@@ -59,12 +61,22 @@ def run(base,browser):
  p.locator('a[href="#almanac/two-stories"]').tap();p.locator('.a4-guess').wait_for();ok('Ari writes on a card' in p.locator('.a4-guess').inner_text(),'current guide pins guess')
  for amount in ['longer','short']:
   p.locator('[data-a4-frame-amount="'+amount+'"]').tap();ok('Mostly the rain' in p.locator('.a4-guess').inner_text(),'guess in '+amount)
- p.locator('a[href="#almanac/two-stories/account"]').tap();p.locator('[data-a4-offer]').wait_for();layout(p,'chapter')
+ p.locator('[data-speak]').tap();ok(p.evaluate('a4Spoken.length')>0,'story narration started');cancelled=p.evaluate('a4Cancelled')
+ p.locator('a[href="#almanac/two-stories/account"]').tap();p.locator('[data-a4-offer]').wait_for();layout(p,'chapter');ok(p.evaluate('a4Cancelled')>cancelled,'narration stops on navigation')
  ok('Still my guess' not in p.locator('[data-act-four-root]').inner_text(),'follow-up absent before offer')
  p.locator('[data-speak]').tap();spoken=p.evaluate('a4Spoken.join(" ")');ok('not yet a proof' not in spoken,'closed Keeper note not narrated')
  p.locator('.a4-note > summary').tap();p.locator('[data-speak]').tap();ok('not yet a proof' in p.evaluate('a4Spoken.join(" ")'),'open note may be narrated')
  before=book(p);p.locator('[data-a4-offer]').tap();p.locator('.a4-kept').wait_for();eq(book(p)['ledgerGauge'],before['ledgerGauge'],'offer leaves source notes unchanged');eq(book(p)['story']['acts']['IV']['contributions']['account']['ref']['edition'],'latest','one keep offered as latest');ok('Still my guess' in p.locator('.a4-guess').inner_text(),'guide follows offered receipt')
  eq(p.evaluate('document.activeElement.id'),'act-four-offer','offer focuses kept work');p.reload();ready(p);ok('Still my guess' in p.locator('.a4-guess').inner_text(),'guide line survives reload')
+ # After reload, all four reached pages remain readable and IV's receipt stays intact.
+ iv=book(p)['story']['acts']['IV'];p.goto(base+'#almanac/keepers',wait_until='networkidle')
+ if not p.locator('.keeper-page-words').count():p.locator('[data-keeper-reveal]').tap()
+ p.locator('.keeper-page-words').wait_for();ok(len(p.locator('.keeper-page-words').inner_text())>0,'Page1 readable after IV reload')
+ p.goto(base+'#almanac/flood-ledger',wait_until='networkidle')
+ if not p.locator('.act-two-ledger').count():p.locator('[data-act-two-reveal-page]').tap()
+ p.locator('.act-two-ledger').wait_for();eq(p.locator('.act-two-ledger tbody tr').count(),7,'Page2 keeps all entries after IV reload')
+ p.goto(base+'#almanac/the-ways',wait_until='networkidle');p.locator('[data-a3-page-leaf]').wait_for();ok(len(p.locator('[data-a3-page-leaf]').inner_text())>0,'Page3 readable after IV reload')
+ go(p,base,'#almanac/fine-harvest');ok(len(p.locator('[data-a4-page-leaf]').inner_text())>0,'Page4 readable after IV reload');eq(book(p)['story']['acts']['IV'],iv,'earlier rereading preserves IV');go(p,base,'#almanac/two-stories/account')
  p.locator('a[href="#learn/science/ledger"]').tap();p.locator('.a4-return').wait_for();prior=book(p)['story']['acts']['IV'];p.locator('.a4-return a').tap();ready(p);eq(book(p)['story']['acts']['IV'],prior,'real host return never offers implicitly')
  # A real Notes download/import is separate from the original explorer; both survive reload/switch.
  original=book(p)['story'];p.goto(base+'#notes');p.locator('[data-act-four-notes]').wait_for(state='attached')
