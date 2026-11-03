@@ -10,6 +10,12 @@
 
 **Longer:** By lunchtime the whole village has read page 4, some of them twice, some of them out loud to people who had already read it. Some say the floods are just weather: storms come, storms go, nobody's fault. Some say the town brought them on itself, the year it drained the Sponge. The orchard keeper goes very quiet and walks down to look at her low corner. Bramble stands on the ribbon gate and tells everybody to stop shouting and look at the numbers. Then she starts shouting about the numbers.
 
+**The guide's guess** (after the opening, at both amounts; [spec 366](../../specs/366-guide-changes-their-mind.md)):
+
+> {guide} writes on a card, *Mostly the rain*, and pins it to the library door.
+>
+> "I'll put my guess up first," says {guide}, "so I can't pretend later."
+
 **Ending opens when:** a plan is kept at the meeting (chapter 4), plus a contribution in any two of chapters 1 to 3.
 
 ---
@@ -136,6 +142,16 @@ Kept: "Your sentence is read out at the meeting. Bramble nods once, which from B
 - After a kept source from the separately reviewed Dutch archive pack (chapter 3, future): the miller: "I thought nobody ever moved a dike back. This record shows a place that did. It doesn't decide what we do here."
 - After the kept ledger/rain-count comparison (chapter 1 or 2): Pip: "I was sure it was all the Sponge. Now I want to know how heavy those rains were. The counts don't tell us."
 - Fallback after the supported meeting: the librarian: "I thought we had to choose between certainty and doing nothing. We can keep a plan and write down what we still need to know."
+
+**Then, always, the guide** ([spec 366](../../specs/366-guide-changes-their-mind.md)). This line refers to the guide's own card from the opening, never to the explorer's work, so the matching rule above does not apply to it:
+
+> {guide} unpins the card from the library door. "I wrote *mostly the rain*. I was sure. I can't show that either."
+>
+> "So I've changed my mind. It could be the rain and the Sponge together. That's a better question than I had."
+>
+> {guide} writes the new idea under the old one, and leaves the old one showing.
+
+Optional tail by guide: Mira draws a small question mark in the corner of her sketchbook, and smiles at it. · Rowan grins. "Changing my mind is the thing I'm best at making." · Ari turns a pebble over in one hand. "I noticed something I hadn't noticed this morning."
 
 **Short:** Nobody agrees about everything. But the map on the meeting board has new pencil on it now.
 

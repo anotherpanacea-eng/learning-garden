@@ -2,6 +2,8 @@
 
 Proposed 2026-11-01. Base inspected: `92dafbc`. This is the first bounded Act IV commission from [spec 120](120-keeper-of-the-ways.md) §§5, 6, 7 and 12, and the roadmap's lane B. **Specification, not implementation or release clearance.** The complete finite text is in [the 352 companion](../content/352-act-four-opening-text.md). It follows [326](326-both-ways-across-willow-bridge.md)'s Act III pattern, and through it [248](248-a-town-of-our-own.md)'s contribution, state and recovery contract, wherever this spec does not say otherwise. It does not restate those rules.
 
+**Amended by [366](366-guide-changes-their-mind.md)** (2026-11-02): the hub shows the guide's guess after the opening, and chapter 1 shows one guide line after an offer. Both are fixed text, write nothing and never read the offered note. Their checks are in 366.
+
 ## Purpose and boundary
 
 Act IV gets its start, its first page and its first chapter:
