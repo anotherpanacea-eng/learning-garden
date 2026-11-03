@@ -28,7 +28,7 @@ The guess is a reasonable one. It matches the miller's headline in chapter 3, an
 
 ## Finite text
 
-All lines are English, at most 25 words, with no em-dashes. `{guide}` resolves as in [248](248-a-town-of-our-own-text.md).
+All lines are English, at most 25 words, with no em-dashes. `{guide}` resolves as in [248](../content/248-a-town-of-our-own-text.md).
 
 ### Opening hub (ships with 352)
 
