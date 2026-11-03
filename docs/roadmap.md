@@ -2,9 +2,9 @@
 
 **Current priorities, decisions and release status, 2026-10-31.** Start with the [consolidation priorities](#consolidation-priorities--current-order); the rest of this page is the release queue and the record of what is built. The [pre-merge snapshot](roadmap-2026-10-22-pre-merge.md), [strand map](strand-map.md), [curriculum spirals](curriculum-spirals.md), [gap proposals](curriculum-gaps.md) and [dated handoffs](handoffs/) preserve design history. Their earlier “next” and publication statements are snapshots. The [six-act programme](specs/49-six-act-curriculum.md) and [26 strand pathways](six-act-strands.md) describe the teaching and story horizon, not a release schedule or completed course.
 
-## Act IV opening · current build
+## Act IV opening and first chapter
 
-The [352 opening and first chapter](specs/352-act-four-opening.md), with [366's guide lines](specs/366-guide-changes-their-mind.md), is in implementation review. It continues after the revealed third page, opens Page4 and accepts one explicit ledger evidence-note offer. The guide pins a guess and keeps checking it; this slice does not ship the guide's ending revision, the meeting board or later chapters. Story receipts remain separate from curriculum evidence. Independent review, merge and deployment are pending.
+The [352 opening and first chapter](specs/352-act-four-opening.md), with [366's guide lines](specs/366-guide-changes-their-mind.md), is implemented in [PR420](https://github.com/anotherpanacea-eng/learning-garden/pull/420), which records its independent review and release status. It continues after the revealed third page, opens Page4 and accepts one explicit ledger evidence-note offer. The guide pins a guess and keeps checking it; this slice does not ship the guide's ending revision, the meeting board or later chapters. Story receipts remain separate from curriculum evidence. Later chapters and the ending remain separate commissions.
 
 ## Reviewed release · October 31
 
