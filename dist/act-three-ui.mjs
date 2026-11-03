@@ -1,3 +1,4 @@
+import {actFourInvitation} from './act-four-ui.mjs';
 import {actThreeContent as C} from './act-three-content.mjs';
 import {actTwoContent} from './act-two-content.mjs';
 import {actThreeChapters,actThreeView,actThreeCandidates,startActThree,offerActThree,sendActThree,revealWaysPage} from './act-three-core.mjs';
@@ -51,7 +52,7 @@ function endingPage(state,v){return !v.ended?`${heading(C.ending.title)}<p>${esc
 function waysPage(state,v){
  if(!v.pageReady)return `${heading(C.page.title)}<p>${esc(C.messages.unreached)}</p>`;
  if(!v.pageVisible)return `${heading(C.page.title)}${button('data-a3-reveal',C.ui.reveal,true)}`;
- return `${heading(C.page.title)}${reading(state,[C.page.reveal])}${amounts(v,'page')}<article class="a3-page-leaf" data-a3-page-leaf><span class="a3-edge">${esc(C.page.edge)}</span>${v.pageAmount==='original'?`<blockquote data-act-three-read>${rich(C.page.original[0])}</blockquote>`:reading(state,C.page[v.pageAmount])}</article>${reading(state,C.page.after)}${hear()}`;
+ return `${heading(C.page.title)}${reading(state,[C.page.reveal])}${amounts(v,'page')}<article class="a3-page-leaf" data-a3-page-leaf><span class="a3-edge">${esc(C.page.edge)}</span>${v.pageAmount==='original'?`<blockquote data-act-three-read>${rich(C.page.original[0])}</blockquote>`:reading(state,C.page[v.pageAmount])}</article>${reading(state,C.page.after)}${hear()}${actFourInvitation(state)}`;
 }
 export function actThreeInvitation(state,{blocked=false}={}){const v=actThreeView(state);return v.canStart||v.started?`<aside class="a3-invitation" data-keeper-story${blocked?' hidden':''}><div class="a3-controls">${link('#almanac/beyond',C.ui.start,true)}${v.ended?link('#almanac/both-ways',C.ui.replay):''}${v.pageReady?link('#almanac/the-ways',C.ui.reveal):''}</div></aside>`:'';}
 export function actThreeReturn(state,chapter){return actThreeView(state).started&&actThreeChapters.includes(chapter)?`<aside class="a3-return">${link('#almanac/beyond/'+chapter,C.ui.return)}</aside>`:'';}
