@@ -1,0 +1,9 @@
+# 367 specification review
+
+Authoring base097b877538e2a5f7c268107c5c582fe8b2c5ee18. Six separate read-only Codex reviewer contexts covered completeness, dependency, scope/overlap, firewall, mechanizability and adversarial review. Independent Claude additionally reviewed the whole proposed contract and finite mathematics/content.
+
+No P1 findings. Seven P2 findings were resolved: frozen worked-example numerical ownership/helper isolation; immutable post-Keep transition and double-tap safety; independent rendered-graph geometry checks; callback trust boundary; historical axis/zero-record fallbacks; other-request result visibility; non-destructive draft slot identity and explicit copying of prior support/results. The capacity notice, noun agreement, initial selectors, schema shorthand and non-colour prediction labels were also clarified.
+
+Independent fractional arithmetic enumerated both sets, all35 candidate lines, each row and both estimate requests; the stated worked-example and source bounds agreed. This is authoring evidence, not runtime or educational qualification. The bundled141node/222edge hard closure and refreshed67node/101edge closure were computed from actual files; no pin or topic-coverage change is commissioned.
+
+**BUILD-READY.** Independent Claude focused repair review cleared exact authoring head `2c0fb430b7c41a2fb6ebe6cb6b7251a5b0c30671`, with no outstanding P1/P2 findings. Its small follow-up suggestions were adjudicated: range-message precedence is explicit, pin-removal copy is singular, kept views omit helper controls, worked rows use their own bounded axes, and the runtime plot rectangle is named for an independent geometry oracle. A kept different-request notice points to Try again. These folds do not change the teaching commission; final exact-head implementation review covers them. Runtime, implementation review and release remain separate gates.

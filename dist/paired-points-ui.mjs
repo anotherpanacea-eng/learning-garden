@@ -15,7 +15,7 @@ function session(state,owner){
  return visit;
 }
 function status(s){return `<p id="pp-status" class="pp-notice${s.notice?'':' sr-only'}" role="status" aria-live="polite" tabindex="-1">${esc(s.notice)}</p>`;}
-function footer(){return '<footer class="pp-actions"><a href="#living/collection">My Count Collection</a><a href="#learn/math">Math explorations</a><a href="#notes">Grown-up notes</a></footer>';}
+function footer(){return '<footer class="pp-actions"><a href="#living/collection">My Count Collection</a><a href="#learn/math">Math explorations</a><a href="#learn/math/estimates">Courier Estimates</a><a href="#notes">Grown-up notes</a></footer>';}
 function sourceContext(source){return `<section class="pp-source-context" aria-label="This chart’s frozen records"><h2>${esc(source.title)}</h2><p><strong>${esc(source.origin)}</strong></p><p>${esc(source.notice)}</p><p>${esc(source.context)}</p><p class="pp-source-key"><strong>X:</strong> ${esc(source.axes.x.label)} · <strong>Y:</strong> ${esc(source.axes.y.label)}</p></section>`;}
 function supportText(s){return `<ul class="pp-support"><li>Worked example opened: ${s.worked?'yes':'no'}</li><li>Example pattern comparison opened: ${s.patterns?'yes':'no'}</li><li>Narration requested: ${s.narration?'yes':'no'}</li><li>Working together reported: ${s.together?'yes':'no'}</li><li>Earlier table feedback seen: ${s.feedback?'yes':'no'}</li></ul>`;}
 function raw(value){try{return JSON.stringify(value,null,2)??String(value);}catch{return 'Earlier value retained in the notebook.';}}
