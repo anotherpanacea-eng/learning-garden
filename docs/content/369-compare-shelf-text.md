@@ -115,7 +115,7 @@ Unsupported owner: “Earlier comparisons stay in your notes. This format cannot
 
 Unreadable item: “Earlier comparison retained · its original stays in your notes.”
 
-Unavailable helper: “Earlier teaching is retained in your notes. These records are still open.”
+Unavailable helper: “An example is not available for these records. You can still compare them.”
 
 Initial disclosure refusal: “These records could not open without changing earlier number notes. Nothing was changed. Open Grown-up notes to download your work, or return to the ledger.”
 
