@@ -22,7 +22,7 @@ const meanings={
  seedlings:[['stem','setups',/On day 6, how long.*stems.*enough light and with too little light/],['stem','time',/stem length.*enough light.*day 0 to day 6/],['leaf','setups',/On day 6, how wide.*leaf spread.*enough light and with too little light/],['leaf','time',/leaf spread.*enough light.*day 0 to day 6/]],
  ramps:[['distance','height',/stopping distance.*low and high ramps.*surface, cart and release procedure stay the same/i],['distance','surface',/stopping distance.*rough and smooth.*height, cart and release procedure stay the same/i],['time','height',/time from release until stopping.*low and high ramps.*surface, cart and release procedure stay the same/i],['time','surface',/time from release until stopping.*rough and smooth.*height, cart and release procedure stay the same/i]],
  frogs:[['food','frog',/foods.*British wildlife guide.*adult common frogs\?/],['food','toad',/foods.*British wildlife guide.*adult common toads\?/],['habitat','frog',/habitats.*British wildlife guide.*adult common frogs\?/],['habitat','toad',/habitats.*British wildlife guide.*adult common toads\?/]],
- flowers:[['counts','sunflower-poppy',/how many.*sunflower, poppy or neither.*favourite\?/],['counts','daisy-iris',/how many.*daisy, iris or neither.*favourite\?/],['reasons','sunflower-poppy',/What reasons.*sunflower, poppy or neither.*favourite\?/],['reasons','daisy-iris',/What reasons.*daisy, iris or neither.*favourite\?/]]
+ flowers:[['counts','sunflower-poppy',/how many.*sunflower, poppy or neither.*favorite\?/],['counts','daisy-iris',/how many.*daisy, iris or neither.*favorite\?/],['reasons','sunflower-poppy',/What reasons.*sunflower, poppy or neither.*favorite\?/],['reasons','daisy-iris',/What reasons.*daisy, iris or neither.*favorite\?/]]
 };
 for(const entry of Q.questionCases){
  const s=Q.questionSource(entry.id);ok(Q.validQuestionSource(s));eq(s.questions.length,4);
@@ -48,7 +48,7 @@ ok(/cannot supply readings/.test(source.ways.find(w=>w.id==='research').limit));
 ok(/not automatically the original measurement/.test(source.ways.find(w=>w.id==='ask').limit));
 ok(/distance examples only.*time question needs time records/.test(Q.questionSource('ramps').ways.find(w=>w.id==='compare').limit));
 ok(/not a controlled experiment/.test(Q.questionSource('frogs').ways.find(w=>w.id==='compare').limit));
-ok(/does not establish.*favourite/.test(Q.questionSource('flowers').ways.find(w=>w.id==='watch').limit));
+ok(/does not establish.*favorite/.test(Q.questionSource('flowers').ways.find(w=>w.id==='watch').limit));
 ok(/need not represent everyone/.test(Q.questionSource('flowers').ways.find(w=>w.id==='ask').limit));
 
 // Fresh factory, incomplete drafts, exact own wording, and disclosure boundaries.

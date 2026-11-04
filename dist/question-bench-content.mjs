@@ -8,7 +8,7 @@ const sources = [
     "wonder": "Which seedling setup is doing better?",
     "origin": "A plan about the Field Notebook's invented seedling records. They are not measured growth results or a forecast. The setups with enough light and with too little light have separate illustrated seedlings.",
     "notice": "“Better” needs a meaning. Stem length and leaf spread describe different features. A bigger number is not automatically “better”. Decide what “doing well” means before reading the rows. Leaf spread here means the width across the two leaves, not leaf area. A comparison of model records is not a new experiment.",
-    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgement of wording you write.",
+    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgment of wording you write.",
     "focusLabel": "What to notice",
     "contextLabel": "Which context",
     "focus": [
@@ -35,7 +35,7 @@ const sources = [
       {
         "focusId": "stem",
         "contextId": "setups",
-        "text": "On day 6, how long are the stems of the model seedlings labelled A in the setups with enough light and with too little light?"
+        "text": "On day 6, how long are the stems of the model seedlings labeled A in the setups with enough light and with too little light?"
       },
       {
         "focusId": "stem",
@@ -45,7 +45,7 @@ const sources = [
       {
         "focusId": "leaf",
         "contextId": "setups",
-        "text": "On day 6, how wide is the leaf spread of the model seedlings labelled A in the setups with enough light and with too little light?"
+        "text": "On day 6, how wide is the leaf spread of the model seedlings labeled A in the setups with enough light and with too little light?"
       },
       {
         "focusId": "leaf",
@@ -111,7 +111,7 @@ const sources = [
     "wonder": "Which ramp works better?",
     "origin": "A planning story about the Fair Test Bench's model ramps. Its supplied trials contain made-up stopping distances, not real measurements; they do not contain measured stopping times.",
     "notice": "A useful question names what changes and what you will notice. “Farther” and “longer time” are different outcomes. Nothing on this card predicts which setup wins.",
-    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgement of wording you write.",
+    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgment of wording you write.",
     "focusLabel": "What to notice",
     "contextLabel": "Which change",
     "focus": [
@@ -214,7 +214,7 @@ const sources = [
     "wonder": "What are frogs and toads like?",
     "origin": "A fictional library question about real species named in British wildlife guides. This card gives no diet or habitat answer.",
     "notice": "A source needs to match the species, life stage and question. “An amphibian” is not enough detail to assume the same answer for every species.",
-    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgement of wording you write.",
+    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgment of wording you write.",
     "focusLabel": "What to find out",
     "contextLabel": "Which animal",
     "focus": [
@@ -313,11 +313,11 @@ const sources = [
     "v": 1,
     "model": "question-bench-v1",
     "id": "flowers",
-    "title": "Flowers: whose favourite?",
+    "title": "Flowers: whose favorite?",
     "wonder": "Which flowers are prettiest?",
     "origin": "An imagined survey in the town. There are no real respondents and no collected answers on this card.",
-    "notice": "People can have different favourites. We can investigate what people report without proving that one flower is objectively prettiest.",
-    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgement of wording you write.",
+    "notice": "People can have different favorites. We can investigate what people report without proving that one flower is objectively prettiest.",
+    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgment of wording you write.",
     "focusLabel": "What to collect",
     "contextLabel": "Which flowers",
     "focus": [
@@ -344,22 +344,22 @@ const sources = [
       {
         "focusId": "counts",
         "contextId": "sunflower-poppy",
-        "text": "In a story survey, how many people choose sunflower, poppy or neither as their favourite?"
+        "text": "In a story survey, how many people choose sunflower, poppy or neither as their favorite?"
       },
       {
         "focusId": "counts",
         "contextId": "daisy-iris",
-        "text": "In a story survey, how many people choose daisy, iris or neither as their favourite?"
+        "text": "In a story survey, how many people choose daisy, iris or neither as their favorite?"
       },
       {
         "focusId": "reasons",
         "contextId": "sunflower-poppy",
-        "text": "What reasons do people in a story survey give for choosing sunflower, poppy or neither as their favourite?"
+        "text": "What reasons do people in a story survey give for choosing sunflower, poppy or neither as their favorite?"
       },
       {
         "focusId": "reasons",
         "contextId": "daisy-iris",
-        "text": "What reasons do people in a story survey give for choosing daisy, iris or neither as their favourite?"
+        "text": "What reasons do people in a story survey give for choosing daisy, iris or neither as their favorite?"
       }
     ],
     "ways": [
@@ -368,7 +368,7 @@ const sources = [
         "label": "Watch and record",
         "icon": "watch",
         "can": "Observe which flowers people look at or approach in a story scene.",
-        "limit": "Looking at a flower does not establish that it is someone's favourite. The question asks about reported preferences."
+        "limit": "Looking at a flower does not establish that it is someone's favorite. The question asks about reported preferences."
       },
       {
         "id": "compare",

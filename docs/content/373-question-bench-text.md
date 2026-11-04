@@ -40,9 +40,9 @@ What to notice: Stem length (`stem`) · Leaf spread (`leaf`). Which context: Eno
 
 | Focus / context | Question |
 | --- | --- |
-| stem / setups | On day 6, how long are the stems of the model seedlings labelled A in the setups with enough light and with too little light? |
+| stem / setups | On day 6, how long are the stems of the model seedlings labeled A in the setups with enough light and with too little light? |
 | stem / time | How does model seedling A's stem length in the setup with enough light change from day 0 to day 6? |
-| leaf / setups | On day 6, how wide is the leaf spread of the model seedlings labelled A in the setups with enough light and with too little light? |
+| leaf / setups | On day 6, how wide is the leaf spread of the model seedlings labeled A in the setups with enough light and with too little light? |
 | leaf / time | How does model seedling A's leaf spread in the setup with enough light change from day 0 to day 6? |
 
 **Watch and record — could:** Follow the named feature at the specified times, using the same meaning and unit each time. Records can describe a pattern or change. **Limit:** A pattern alone does not establish why it happened. Check that the records include this seedling, feature and time.
@@ -124,24 +124,24 @@ Example parts:
 
 Glossary: **Species** — A named kind of organism; this card distinguishes common frog and common toad. **Life stage** — A part of an organism's life, such as the adult stage. **Source** — The guide, record or person from which information is obtained.
 
-## Flowers: whose favourite? (`flowers`)
+## Flowers: whose favorite? (`flowers`)
 
 Wonder: **Which flowers are prettiest?**
 
 Origin: **An imagined survey in the town. There are no real respondents and no collected answers on this card.**
 
-Notice: **People can have different favourites. We can investigate what people report without proving that one flower is objectively prettiest.**
+Notice: **People can have different favorites. We can investigate what people report without proving that one flower is objectively prettiest.**
 
 What to collect: Count choices (`counts`) · Reported reasons (`reasons`). Which flowers: Sunflower and poppy (`sunflower-poppy`) · Daisy and iris (`daisy-iris`).
 
 | Focus / context | Question |
 | --- | --- |
-| counts / sunflower-poppy | In a story survey, how many people choose sunflower, poppy or neither as their favourite? |
-| counts / daisy-iris | In a story survey, how many people choose daisy, iris or neither as their favourite? |
-| reasons / sunflower-poppy | What reasons do people in a story survey give for choosing sunflower, poppy or neither as their favourite? |
-| reasons / daisy-iris | What reasons do people in a story survey give for choosing daisy, iris or neither as their favourite? |
+| counts / sunflower-poppy | In a story survey, how many people choose sunflower, poppy or neither as their favorite? |
+| counts / daisy-iris | In a story survey, how many people choose daisy, iris or neither as their favorite? |
+| reasons / sunflower-poppy | What reasons do people in a story survey give for choosing sunflower, poppy or neither as their favorite? |
+| reasons / daisy-iris | What reasons do people in a story survey give for choosing daisy, iris or neither as their favorite? |
 
-**Watch and record — could:** Observe which flowers people look at or approach in a story scene. **Limit:** Looking at a flower does not establish that it is someone's favourite. The question asks about reported preferences.
+**Watch and record — could:** Observe which flowers people look at or approach in a story scene. **Limit:** Looking at a flower does not establish that it is someone's favorite. The question asks about reported preferences.
 
 **Set up a fair comparison — could:** Present the same choices in the same way and consider how wording or order might influence responses. **Limit:** This can make a survey more consistent, but it does not prove an objectively prettiest flower or represent people who were not asked.
 
@@ -164,7 +164,7 @@ Does this notebook's current question and its pretend seedling rows answer that 
 
 If the Field Notebook is unavailable: **The earlier Field Notebook cannot be opened here, but this question card is still kept. What records or sources would help answer it? Open the Question Bench to revisit the card.**
 
-For grown-ups: Leaf spread is described in the table’s **Leaf clues** fold. Relevance depends on the exact question, feature, source and context. Some supplied seedling rows may help; they cannot answer a ramp-time, frog-source or preference question. A model observation is not field evidence. Own wording is retained as written, with no automated judgement of scientific quality or method fit.
+For grown-ups: Leaf spread is described in the table’s **Leaf clues** fold. Relevance depends on the exact question, feature, source and context. Some supplied seedling rows may help; they cannot answer a ramp-time, frog-source or preference question. A model observation is not field evidence. Own wording is retained as written, with no automated judgment of scientific quality or method fit.
 
 ## Shelf, unsupported data and growth limits
 
@@ -174,4 +174,4 @@ An unsupported version, malformed or duplicate-ID card: **This earlier card cann
 
 No fixed card-count limit is imposed. If Notes cannot safely fit another card: **This card has not been kept. Your earlier cards stay unchanged in the Notes download. This draft is still here for this visit; you can discuss it or return to it before leaving.** ID exhaustion: **No new card number is available here. Earlier cards stay unchanged; this draft can still be explored and discussed.**
 
-Frozen methodNotice in every source: **Method notes describe this supplied story example, not an analysis or judgement of wording you write.** This label travels in Notes downloads as well as the readable card. The readable view is the Question Bench shelf, not a new grown-up Notes section.
+Frozen methodNotice in every source: **Method notes describe this supplied story example, not an analysis or judgment of wording you write.** This label travels in Notes downloads as well as the readable card. The readable view is the Question Bench shelf, not a new grown-up Notes section.
