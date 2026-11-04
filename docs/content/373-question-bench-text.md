@@ -10,21 +10,21 @@ Board: **Choose a wonder**. You can return to each draft while you stay here. **
 
 Turns: **Make the question clearer** · **Choose a way** · **Keep the question**. The question card stays with you across turns. Piece-built question · My own words. Use the pieces, write a question, or talk it over together. An unfinished question is worth keeping too.
 
-Own-wording label: **My question**. This wording stays in this browser and in any Notes file you download. It is not sent away for analysis. Counter: **{length} / 600 characters**. Overlength: **This wording is still here. Shorten it to 600 characters or fewer before keeping the card.** Never silently truncate the field.
+Own-wording label: **My question**. The field starts empty and never fills itself from the pieces. Visible frame, not inserted text: **You might name what to notice or ask, about which thing, and when or where.** This wording stays in this browser and in any Notes file you download. This app does not upload it for analysis or itself correct or judge it. Counter: **{length} / 600 characters**. Overlength: **This wording is still here. Shorten it to 600 characters or fewer before keeping the card.** Never silently truncate the field.
 
 Unfinished pieces: **Choose a detail and a context, or keep these pieces for later.** Empty own wording: **Your question can wait here.** Do not substitute a supplied question as if it were the child's wording.
 
-Method prompt: **What could this way help you find out? What would it leave unanswered?** Watch and record · Set up a fair comparison · Look up sources · Ask people. Select any, or leave the choice open. No approach is marked right or wrong.
+Method prompt: **What could this way help you find out? What would it leave unanswered?** Watch and record · Set up a fair comparison · Look up sources · Ask people. Select any combination, or leave the choices open. Looking up a source and watching can be parts of the same plan. No approach is marked right or wrong.
 
 When own wording is active, show: **Notes for the story example. These notes describe the supplied situation, not an analysis of your wording. With a grown-up, decide what applies to your question.** Otherwise show: **A possible plan to discuss, not a result.** Labels: **What it could help with** · **What it would not establish**.
 
-Example controls: **An example in parts** · **Next example part** · **Example complete**. The example never fills your question for you. Manual reference: **Words and source notes**.
+Example controls: **An example in parts** · **Next example part** · **Example complete**. The fixed example is separate from your draft and may happen to match your choices. It never fills or changes your question for you. Manual reference: **Words and source notes**.
 
 Reflection: **Questions to talk over**. What would count as an answer? What would you need to observe, measure, read or ask? What would still be uncertain? Your discussion is not graded or recorded.
 
 Keep: **Keep this card**. This keeps the exact question, source and choices, not a score. **Work on a copy** leaves the earlier card unchanged. **Return to your copy** reopens the ongoing copy from this visit. Leaving or reloading loses drafts that have not been kept.
 
-Refusal: **This draft has not been kept. Earlier kept cards remain in Grown-up notes. This draft lasts only this visit; shorten the wording if needed, or discuss it together before leaving.**
+Refusal: **This draft has not been kept. Earlier kept cards remain in your Grown-up notes download. This draft lasts only this visit; shorten the wording if needed, or discuss it together before leaving.**
 
 Saving off/quota: **This card is kept in this open page, but {saving is off / device storage did not save}. Download Grown-up notes before closing if you want to bring it back.**
 
@@ -32,22 +32,22 @@ Saving off/quota: **This card is kept in this open page, but {saving is off / de
 
 Wonder: **Which seedling setup is doing better?**
 
-Origin: **A plan about the Field Notebook's invented seedling records. They are not measured growth results or a forecast. The light and dim setups have separate illustrated seedlings.**
+Origin: **A plan about the Field Notebook's invented seedling records. They are not measured growth results or a forecast. The setups with enough light and with too little light have separate illustrated seedlings.**
 
-Notice: **“Better” needs a meaning. Stem length and leaf spread describe different features. Leaf spread here means the width across the two leaves, not leaf area. A comparison of model records is not a new experiment.**
+Notice: **“Better” needs a meaning. Stem length and leaf spread describe different features. A bigger number is not automatically “better”. Decide what “doing well” means before reading the rows. Leaf spread here means the width across the two leaves, not leaf area. A comparison of model records is not a new experiment.**
 
-What to notice: Stem length (`stem`) · Leaf spread (`leaf`). Which context: Light and dim on day 6 (`setups`) · Days 0 and 6 in the light setup (`time`).
+What to notice: Stem length (`stem`) · Leaf spread (`leaf`). Which context: Enough light and too little light on day 6 (`setups`) · Days 0 and 6 with enough light (`time`).
 
 | Focus / context | Question |
 | --- | --- |
-| stem / setups | On day 6, how long are the stems of the model seedlings labelled A in the light and dim setups? |
-| stem / time | How does the model seedling A's stem length in the light setup change from day 0 to day 6? |
-| leaf / setups | On day 6, how wide is the leaf spread of the model seedlings labelled A in the light and dim setups? |
-| leaf / time | How does model seedling A's leaf spread in the light setup change from day 0 to day 6? |
+| stem / setups | On day 6, how long are the stems of the model seedlings labelled A in the setups with enough light and with too little light? |
+| stem / time | How does model seedling A's stem length in the setup with enough light change from day 0 to day 6? |
+| leaf / setups | On day 6, how wide is the leaf spread of the model seedlings labelled A in the setups with enough light and with too little light? |
+| leaf / time | How does model seedling A's leaf spread in the setup with enough light change from day 0 to day 6? |
 
 **Watch and record — could:** Follow the named feature at the specified times, using the same meaning and unit each time. Records can describe a pattern or change. **Limit:** A pattern alone does not establish why it happened. Check that the records include this seedling, feature and time.
 
-**Set up a fair comparison — could:** Plan matched setups, change the chosen condition and keep other relevant conditions alike. Use the same measure and observation times. **Limit:** This would require a suitable design and actual records; choosing the method does not create them. If other relevant conditions differ too, the cause stays uncertain.
+**Set up a fair comparison — could:** Plan matched setups, change the chosen condition and keep other relevant conditions alike. Use the same measure and observation times. **Limit:** Change over time within one setup compares days, not light conditions. A planned test of light conditions would be a different question. It would require a suitable design and actual records; choosing the method does not create them. If other relevant conditions differ too, the cause stays uncertain.
 
 **Look up sources — could:** A source may explain the feature or show how someone recorded it. The Field Notebook already holds supplied model rows you can inspect. **Limit:** A general guide cannot supply readings for a particular setup unless those records are actually included. Check the source and the question, not just a familiar plant word.
 
@@ -55,7 +55,7 @@ What to notice: Stem length (`stem`) · Leaf spread (`leaf`). Which context: Lig
 
 Example parts:
 1. “Doing better” is broad. Choose a feature before deciding what information would help.
-2. For a separate example, choose leaf spread and days 0 and 6 in the light setup. The question now names a feature, a model seedling and two times.
+2. Suppose someone chose leaf spread and days 0 and 6 in the setup with enough light. The question now names a feature, a model seedling and two times.
 3. Look for those rows in the model record. If a row or feature is missing, say what else you would need. Do not turn the made-up values into claims about every real plant.
 
 Glossary: **Feature** — Something specified that you notice or measure. **Record** — An account of what was reported or supplied, with its source and context. **Model** — A deliberately simplified example; these seedling values were invented.
@@ -64,18 +64,18 @@ Glossary: **Feature** — Something specified that you notice or measure. **Reco
 
 Wonder: **Which ramp works better?**
 
-Origin: **A planning story about the Fair Test Bench's model ramps. Its supplied trials contain stopping distances; they do not contain measured stopping times.**
+Origin: **A planning story about the Fair Test Bench's model ramps. Its supplied trials contain made-up stopping distances, not real measurements; they do not contain measured stopping times.**
 
 Notice: **A useful question names what changes and what you will notice. “Farther” and “longer time” are different outcomes. Nothing on this card predicts which setup wins.**
 
-What to notice: Stopping distance (`distance`) · Time until stopping (`time`). Which change: Height, same surface (`height`) · Surface, same height (`surface`).
+What to notice: Stopping distance (`distance`) · Time from release until stopping (`time`). Which change: Height, same surface (`height`) · Surface, same height (`surface`).
 
 | Focus / context | Question |
 | --- | --- |
 | distance / height | How does stopping distance compare between low and high ramps when the surface, cart and release procedure stay the same? |
 | distance / surface | How does stopping distance compare between rough and smooth landing surfaces when the ramp height, cart and release procedure stay the same? |
-| time / height | How does time until stopping compare between low and high ramps when the surface, cart and release procedure stay the same? |
-| time / surface | How does time until stopping compare between rough and smooth landing surfaces when the ramp height, cart and release procedure stay the same? |
+| time / height | How does time from release until stopping compare between low and high ramps when the surface, cart and release procedure stay the same? |
+| time / surface | How does time from release until stopping compare between rough and smooth landing surfaces when the ramp height, cart and release procedure stay the same? |
 
 **Watch and record — could:** Describe what happened to a cart and record the specified outcome. **Limit:** If several relevant things change together, watching the result does not isolate which change mattered.
 
@@ -87,7 +87,7 @@ What to notice: Stopping distance (`distance`) · Time until stopping (`time`). 
 
 Example parts:
 1. “Works better” might mean farther, quicker or easier to use. These are different questions.
-2. In a separate example, choose stopping distance and a surface change. Keep height, cart and release procedure alike.
+2. Suppose someone chose stopping distance and a surface change. Keep height, cart and release procedure alike.
 3. A fair comparison could help, but it still needs records. A supplied distance cannot silently stand in for a stopping time.
 
 Glossary: **Outcome** — The specified thing you record to address a question. **Fair comparison** — A comparison designed to separate the chosen change from other relevant differences. **Procedure** — The stated way the observations or test were carried out.
@@ -96,7 +96,7 @@ Glossary: **Outcome** — The specified thing you record to address a question. 
 
 Wonder: **What are frogs and toads like?**
 
-Origin: **A fictional library question about real species named in guides to Britain. This card gives no diet or habitat answer.**
+Origin: **A fictional library question about real species named in British wildlife guides. This card gives no diet or habitat answer.**
 
 Notice: **A source needs to match the species, life stage and question. “An amphibian” is not enough detail to assume the same answer for every species.**
 
@@ -104,10 +104,10 @@ What to find out: Adult food (`food`) · Usual habitat (`habitat`). Which animal
 
 | Focus / context | Question |
 | --- | --- |
-| food / frog | What foods does a guide to Britain list for adult common frogs? |
-| food / toad | What foods does a guide to Britain list for adult common toads? |
-| habitat / frog | What habitats does a guide to Britain describe for adult common frogs? |
-| habitat / toad | What habitats does a guide to Britain describe for adult common toads? |
+| food / frog | What foods does a British wildlife guide list for adult common frogs? |
+| food / toad | What foods does a British wildlife guide list for adult common toads? |
+| habitat / frog | What habitats does a British wildlife guide describe for adult common frogs? |
+| habitat / toad | What habitats does a British wildlife guide describe for adult common toads? |
 
 **Watch and record — could:** An observation can describe what one observed animal did in a particular setting. **Limit:** One observation cannot tell you everything a species usually eats or every habitat it uses. This card supplies no animal observations.
 
@@ -119,7 +119,7 @@ What to find out: Adult food (`food`) · Usual habitat (`habitat`). Which animal
 
 Example parts:
 1. The broad wonder covers many animals and many features. Pick one species and one subject to research.
-2. For a separate example, ask what habitats a guide to Britain describes for adult common toads.
+2. Suppose someone asked what habitats a British wildlife guide describes for adult common toads.
 3. A relevant source can help. Read what it actually says and keep its label; this question card does not supply the biological answer.
 
 Glossary: **Species** — A named kind of organism; this card distinguishes common frog and common toad. **Life stage** — A part of an organism's life, such as the adult stage. **Source** — The guide, record or person from which information is obtained.
@@ -151,7 +151,7 @@ What to collect: Count choices (`counts`) · Reported reasons (`reasons`). Which
 
 Example parts:
 1. “Prettiest” does not mean the same thing to everyone. A report about preferences is a more specific question.
-2. For a separate example, ask what reasons story respondents give for choosing daisy, iris or neither.
+2. Suppose someone asked what reasons story respondents give for choosing daisy, iris or neither.
 3. Asking could collect those reports. Counting choices is a different record from collecting reasons; neither decides what everyone ought to prefer.
 
 Glossary: **Preference** — What someone reports liking or choosing. **Respondent** — Someone who answers a survey question. **Survey** — A planned collection of responses; none is conducted here.
@@ -162,4 +162,16 @@ Glossary: **Preference** — What someone reports liking or choosing. **Responde
 
 Does this notebook's current question and its pretend seedling rows answer that card? If not, what different observation, source or report would be needed? Do not force every question into a chart. The card does not add a record to this notebook.
 
-For grown-ups: Relevance depends on the exact question, feature, source and context. Some supplied seedling rows may help; they cannot answer a ramp-time, frog-source or preference question. A model observation is not field evidence. Own wording is retained as written, with no automated judgement of scientific quality or method fit.
+If the Field Notebook is unavailable: **The earlier Field Notebook cannot be opened here, but this question card is still kept. What records or sources would help answer it? Open the Question Bench to revisit the card.**
+
+For grown-ups: Leaf spread is described in the table’s **Leaf clues** fold. Relevance depends on the exact question, feature, source and context. Some supplied seedling rows may help; they cannot answer a ramp-time, frog-source or preference question. A model observation is not field evidence. Own wording is retained as written, with no automated judgement of scientific quality or method fit.
+
+## Shelf, unsupported data and growth limits
+
+**Kept cards** — Copies of questions and choices, not scores. Cards {first}–{last} of {total} · **Previous cards** · **Next cards**. No cards yet: **You can keep an unfinished thought too.** No readable cards: **Earlier saved data stays in your Notes download. None of these cards can be opened here, but new drafts remain open.**
+
+An unsupported version, malformed or duplicate-ID card: **This earlier card cannot be opened here. Its original stays unchanged in your Notes download. Other cards remain open.** Unsupported root: **This saved format cannot accept another card here. Its original is retained in your Notes download; you can still explore a draft.**
+
+No fixed card-count limit is imposed. If Notes cannot safely fit another card: **This card has not been kept. Your earlier cards stay unchanged in the Notes download. This draft is still here for this visit; you can discuss it or return to it before leaving.** ID exhaustion: **No new card number is available here. Earlier cards stay unchanged; this draft can still be explored and discussed.**
+
+Frozen methodNotice in every source: **Method notes describe this supplied story example, not an analysis or judgement of wording you write.** This label travels in Notes downloads as well as the readable card. The readable view is the Question Bench shelf, not a new grown-up Notes section.
