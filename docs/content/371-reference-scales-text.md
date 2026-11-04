@@ -28,7 +28,7 @@ Original text and invented model numbers. Numeric sentences below show the commi
 
 “Try adding the same adjustment to each Blue reading. The solid original dots stay where they were.”
 
-**Try an adjustment** · **Adjustment: {signed} g** · **1 g less** · **1 g more** · **Reset adjustment**
+**Try an adjustment** · **Adjustment: {signed} g** · **1 gram less** · **1 gram more** · **Reset adjustment**
 
 **Original readings** · **Adjusted preview · separate row** · **Model reference** · **Mean minus model reference** · **Range**
 

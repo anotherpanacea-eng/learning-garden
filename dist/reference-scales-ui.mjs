@@ -5,6 +5,7 @@ const ratio=x=>typeof x==='number'?{n:x,d:1}:x;
 const format=x=>C.formatCompare(ratio(x));
 export function referenceSignedText(x){const raw=ratio(x),r=C.compareRatio(raw.n,raw.d),value=C.formatCompare(r);return r.n<0?value.replace('-','−'):r.n>0?'+'+value:value;}
 function numberParts(x,signed=false){const raw=ratio(x),r=C.compareRatio(raw.n,raw.d),value=C.formatCompare(r);return {visible:signed?referenceSignedText(r):value.replace('-','−'),say:(r.n<0?'minus ':signed&&r.n>0?'plus ':'')+format({n:Math.abs(r.n),d:r.d}).replace('/',' over '),singular:Math.abs(r.n)===r.d};}
+// Keep number spans text-only: Compare narration swaps and restores textContent.
 function number(x,signed=false){const p=numberParts(x,signed);return `<span data-cr-number data-cr-say="${esc(p.say)}">${esc(p.visible)}</span>`;}
 const grams=(x,signed=false)=>{const p=numberParts(x,signed);return `<span data-cr-number data-cr-say="${esc(p.say+' '+(p.singular?'gram':'grams'))}">${esc(p.visible)} g</span>`;};
 const unit=()=>'<span data-cr-number data-cr-say="grams">g</span>';
@@ -28,7 +29,7 @@ function adjustedTable(c){const w=c.work,stage=stageFor(c),group=stage.source.gr
 function adjustmentControls(c){
  const w=c.work,v=w.referenceView,stage=stageFor(c),bounds=w.source.referenceScales.adjustment,group=stage.source.groups.find(g=>g.id===stage.groupId);if(!referenceVisible(w,c.ui.page))return '';
  if(!v.adjustmentShown)return c.mutable?`<section class="rs-model-controls">${button('data-rs-adjust-start','Try an adjustment')}<p>Add the same number to each ${esc(group.label)} reading in a separate preview.</p></section>`:'';
- return `<section class="rs-model-controls"><h3>Separate preview</h3><p data-rs-adjustment>${esc(group.label)} · adjustment: <strong>${grams(v.adjustment,true)}</strong></p>${c.mutable?`<div class="cr-actions" role="group" aria-label="Adjust every reading of ${esc(group.label)}">${button('data-rs-adjust="-1"','1 g less',{disabled:v.adjustment<=bounds.min})}${button('data-rs-adjust="1"','1 g more',{disabled:v.adjustment>=bounds.max})}${button('data-rs-adjust="reset"','Reset adjustment',{disabled:v.adjustment===0})}</div>`:''}<p class="rs-preview-note">Original solid dots stay fixed.</p></section>`;
+ return `<section class="rs-model-controls"><h3>Separate preview</h3><p data-rs-adjustment>${esc(group.label)} · adjustment: <strong>${grams(v.adjustment,true)}</strong></p>${c.mutable?`<div class="cr-actions" role="group" aria-label="Adjust every reading of ${esc(group.label)}">${button('data-rs-adjust="-1"','1 gram less',{disabled:v.adjustment<=bounds.min})}${button('data-rs-adjust="1"','1 gram more',{disabled:v.adjustment>=bounds.max})}${button('data-rs-adjust="reset"','Reset adjustment',{disabled:v.adjustment===0})}</div>`:''}<p class="rs-preview-note">Original solid dots stay fixed.</p></section>`;
 }
 function adjustmentSummary(c){
  if(!referenceVisible(c.work,c.ui.page)||!c.work.referenceView.adjustmentShown)return '';
