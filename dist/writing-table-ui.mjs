@@ -118,8 +118,8 @@ export function bindWriting(state,ctx={}){
    card=ref.card;lineIds=ref.lineIds;label=scope==='first'?'the first kept version':scope==='latest'?'the latest kept version':'this draft';
   }else card=core.writingResearchCards(record.source).find(c=>c.id===el.dataset.writingCard);
   if(!card)return;
-  const controls=[...root.querySelectorAll('[data-writing-reference],[data-writing-card]')];
-  v.inspector={cardId:card.id,lineIds,label,returnIndex:controls.indexOf(el)};
+  const returnSelector=el.hasAttribute('data-writing-reference')?`[data-writing-reference='${CSS.escape(el.dataset.writingReference)}'][data-writing-reference-scope='${CSS.escape(el.dataset.writingReferenceScope)}'][data-writing-reference-index='${Number(el.dataset.writingReferenceIndex)}']`:`[data-writing-card='${CSS.escape(el.dataset.writingCard)}']`;
+  v.inspector={cardId:card.id,lineIds,label,returnSelector};
   redraw('','#writing-source-title');
  }));
  const act=(el,fn,message='',focus='')=>{if(!live(el))return;const result=fn();if(!result.ok){status(errors[result.error]||errors.unavailable,true);return;}ownedRoot=state.writingDesk;const saved=result.changed===false?'':persistence();redraw([result.changed===false?'Your draft is unchanged.':message,saved].filter(Boolean).join(' '),focus);};
@@ -135,7 +135,7 @@ export function bindWriting(state,ctx={}){
   if(!live(el))return;const action=el.dataset.writingAction;
   if(action==='choose'){v.panels=[...new Set([...v.panels,'shelf'])];const shelf=root.querySelector('[data-writing-panel=shelf]');if(shelf)shelf.open=true;return redraw('Choose another draft. Your earlier work stays in Notes.',"[data-writing-bench='paragraphs']");}
   if(action==='close-source'){
-   const index=v.inspector?.returnIndex;v.inspector=null;redraw();const next=document.querySelector('[data-writing-root]');const target=next?.querySelectorAll('[data-writing-reference],[data-writing-card]')[index]||next?.querySelector('#writing-task-title');target?.focus();target?.scrollIntoView({block:'nearest'});return;
+   const selector=v.inspector?.returnSelector;v.inspector=null;redraw();const next=document.querySelector('[data-writing-root]');const target=(selector&&next?.querySelector(selector))||next?.querySelector('#writing-task-title');target?.focus();target?.scrollIntoView({block:'nearest'});return;
   }
   if(action==='research'||action==='research-return')return act(el,()=>core.openWritingTask(state,'research-organise',options),'Your source-linked notes are here.','#writing-task-title');
   if(action==='clear-taps')return act(el,()=>core.setWritingMaterial(state,{clear:true},options),'Your taps are cleared.',"[data-writing-tap]");
