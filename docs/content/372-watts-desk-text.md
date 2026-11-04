@@ -34,7 +34,7 @@ Finishing comparison: Same target, different finishing times. With constant deli
 
 Keep this sheet. Kept sheets are copies of this model and these settings. They do not say whether you solved a problem by yourself. Leaving without Keep loses this visit's draft. Try this sheet again makes a new draft; the earlier sheet stays unchanged.
 
-Later in the Lift Yard: Bring **Sheet {rawIndex+1} · {frozen title}** from the Watts Desk. Compare the energy in that sheet with the work in this ramp model. What else would you need to work out the ramp's power? This yard has no elapsed-time measurement, so it cannot give a power answer.
+Later in the Lift Yard: Bring **Sheet {rawIndex+1} · {frozen title}** from the Watts Desk. Open the Mill, then Watts Desk → Kept sheets. Compare the energy in that sheet with the work in this ramp model. What else would you need to work out the ramp's power? This yard has no elapsed-time measurement, so it cannot give a power answer.
 
 No-space/unreadable refusal: This draft has not been kept. Your earlier kept sheets remain in Grown-up notes. This draft lasts only while you stay at this table; compare or explain it together before leaving.
 
