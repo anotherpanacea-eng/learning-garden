@@ -378,6 +378,8 @@ console.log(JSON.stringify({base,earlier,refusal,pending,maxImportBytes:MAX_IMPO
             h.ok('could not open' in full.locator('#ce-status').inner_text() and full.locator('#ce-status').evaluate('e=>e===document.activeElement'), 'new fact over the report cap refuses with focused recovery status')
             h.ok(full.locator('[data-ce-start-value]').input_value() == '0' and full.locator('[data-ce-rate]').input_value() == '2' and full.locator('[data-ce-record="r1"]').get_attribute('aria-pressed') == 'true' and 'Line estimate: 6 minutes.' not in full.locator('.ce-gap-card').inner_text() and 'Selected record 3 blocks' not in full.locator('[data-ce-plot]').get_attribute('aria-label'), 'refused next computed value never renders and previous local choices remain')
             h.ok(h.book(full) == full_before and '2x3' not in h.book(full)['broad']['seenFacts'], 'refused display leaves the complete notebook and unshown fact unchanged')
+            turn(full, 0)
+            h.ok(not full.locator('#ce-status').inner_text().strip(), 'successful navigation clears the old refused-view notice')
 
             # Separate disk fault: normal journeys above use genuine persistence.
             _, quota = setup(browser, fixtures['base'], 'device-write-fault')
