@@ -1,6 +1,13 @@
 // Synthetic367 fixtures; no real learner records or observed delivery data.
 import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
+import {readFileSync} from 'node:fs';
+import {noteLegacyExposure} from '../dist/broad-core.mjs';
+import {noteGardenFactExposure} from '../dist/garden-core.mjs';
+import {notePendingBrambleFactExposure,startAdaptiveRival,generateRivalTask,validPostRival} from '../dist/post-rival.mjs';
+import {startPostOffice} from '../dist/post-office-core.mjs';
+import {deliveries} from '../dist/post-office-content.mjs';
+import {checkin} from '../dist/content.mjs';
 import {freshState,recommendations} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
 import {MAX_IMPORT_BYTES,recoveryFitsProgressLimits} from '../dist/progress-limits.mjs';
@@ -82,6 +89,31 @@ export function runCourierEstimateChecks(){
  {const state=estimateNotebook(),other=copy(nonowner(state)),d=estimateDraft();ok(typeof e.keepEstimate(state,d,{canExport(candidate){candidate.courierEstimates=[];candidate.syntheticOther.payload='Synthetic callback change';candidate.extra=true;return true;}})==='string');eq(nonowner(state),other);same(state.courierEstimates.length,1);eq(state.courierEstimates[0].source,d.source,'captured owner wins over callback substitutions');}
  {const state=estimateNotebook(),d=estimateDraft();state.syntheticOther.payload='';const candidate=copy(state);ok(typeof e.keepEstimate(candidate,d,{canExport:()=>true})==='string');const padding=MAX_IMPORT_BYTES-new TextEncoder().encode(JSON.stringify(candidate,null,2)).length-40;state.syntheticOther.payload='x'.repeat(padding);candidate.syntheticOther.payload=state.syntheticOther.payload;ok(recoveryFitsProgressLimits(candidate),'raw candidate fits');ok(!estimateCanExport(candidate),'pretty report metadata crosses true import limit');refusal(state,d,estimateCanExport,'real report-only capacity refusal preserves work');}
  {const state=estimateNotebook(),d=estimateDraft();d.source.unknownSource={retained:['Synthetic source extension']};e.keepEstimate(state,d,options);state.courierEstimates[0].unknownItem={retained:true};const before=copy(state);e.estimatesView(state);eq(state,before,'read preserves all unknown source/item fields');const imported=prepareProgressImport(JSON.stringify(estimateReport(state),null,2));ok(imported.ok);eq(imported.state.courierEstimates,state.courierEstimates);}
+ // Real app exposure seam, evaluated only from trusted repository source in this test.
+ const body=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8').match(/function exposeStoryFacts\([\s\S]*?\n}\n/)[0];
+ const actualExposure=Function('noteLegacyExposure','noteGardenFactExposure','notePendingBrambleFactExposure','checkin',`return (${body});`)(noteLegacyExposure,noteGardenFactExposure,notePendingBrambleFactExposure,checkin);
+ const exposureOptions={canExport:estimateCanExport,exposeFacts:(pairs,target)=>actualExposure({facts:pairs},null,target,true,false)};
+ const displayed=estimateDraft();displayed.line={start:0,rate:2};displayed.recordId='r3';
+ eq(e.courierDisplayPairs(displayed,{page:1}),[[2,3]],'selected model input gives familiarity, not a recall response');
+ displayed.pin={start:1,rate:1};eq(e.courierDisplayPairs(displayed,{page:1}),[[2,3],[1,3]],'pinned displayed model uses its own rate');
+ displayed.pin=null;eq(e.courierDisplayPairs(displayed,{page:1,rise:true}),[[2,3],[2,2]],'visible rise guide supplies its own input');
+ eq(e.courierDisplayPairs(displayed,{page:1,gaps:true}),[[2,3],[1,2],[2,2],[2,4],[2,5],[2,6]],'all-gap comparisons qualify only the displayed source rows');
+ displayed.result={x:10,line:{start:2,rate:1},pin:{start:0,rate:2}};displayed.requestX=10;
+ eq(e.courierDisplayPairs(displayed,{page:2}),[[2,3],[1,10],[2,10]],'stale result text uses its actual captured operands');
+ displayed.requestX=4.5;eq(e.courierDisplayPairs(displayed,{page:2}),[[2,3]],'another-request result stays hidden and contributes no fact');
+ eq(e.courierDisplayPairs(displayed,{page:0,worked:true,step:1}),[[2,3],[2,2]],'different example uses its own row and line');
+ displayed.line={start:0,rate:.5};displayed.result=null;eq(e.courierDisplayPairs(displayed,{page:1}),[],'fractional coefficient is not an invented integer recall fact');
+ {const d=estimateDraft();d.line={start:0,rate:2};d.source.rows[0].y=24;eq(e.courierDisplayPairs(d,{page:0}),[[1,2]],'arbitrary observed values do not fabricate multiplication pairs');}
+ const pending=()=>{const state=estimateNotebook(),v=startPostOffice(state,deliveries[0].id);ok(startAdaptiveRival(state));v.rival.task=generateRivalTask('multiply',2,3,0);ok(validPostRival(v.rival));return state;};
+ {const state=pending();state.broad.raw=[{version:99,untouched:['Synthetic raw history']}];state.broad.drafts.matching={question:{fact:[2,3]},attempts:[],opaque:true};state.broad.drafts.other={question:{fact:[5,7]},attempts:[]};state.garden.visits.push({id:'future-visit',entrance:'future',version:99,drafts:{raw:'retained'}});
+  const before=copy(state),refs={...state},result=e.recordCourierDisplay(state,[[2,3]],exposureOptions);ok(result.ok&&result.changed);ok(state.postOffice.visits[0].rival.priorFactShown);ok(state.broad.seenFacts.includes('2x3'));ok(state.broad.drafts.matching.knownFact);same(state.broad.drafts.other.knownFact,undefined);eq(state.broad.raw,before.broad.raw);eq(state.garden.visits,before.garden.visits);eq(state.syntheticOther,before.syntheticOther);same(state.syntheticOther,refs.syntheticOther);
+  const withoutFlag=copy(state.postOffice);delete withoutFlag.visits[0].rival.priorFactShown;eq(withoutFlag,before.postOffice,'no rival attempt, answer, outcome or other field changes');
+  const once=copy(state),onceRefs={...state};eq(e.recordCourierDisplay(state,[[2,3]],exposureOptions),{ok:true,changed:false},'repeat disclosure is idempotent');eq(state,once);for(const k of Object.keys(onceRefs))same(state[k],onceRefs[k]);
+ }
+ {const state=pending(),before=copy(state),refs={...state};eq(e.recordCourierDisplay(state,[[2,3]],{...exposureOptions,canExport:()=>false}),{ok:false,changed:false});eq(state,before);for(const k of Object.keys(refs))same(state[k],refs[k]);}
+ {const state=pending(),before=copy(state);ok(e.recordCourierDisplay(state,[[2,3]],{...exposureOptions,canExport(candidate){candidate.broad.seenFacts=[];candidate.postOffice=null;candidate.syntheticOther=null;candidate.courierEstimates=['not a model'];return true;}}).ok);ok(state.broad.seenFacts.includes('2x3'));ok(state.postOffice.visits[0].rival.priorFactShown);eq(state.syntheticOther,before.syntheticOther);same(state.courierEstimates,undefined,'report callback cannot substitute an unrelated owner');}
+ for(const damage of [state=>delete state.baseline,state=>state.broad.seenFacts='Synthetic unreadable list']){const state=pending();damage(state);const before=copy(state),refs={...state};eq(e.recordCourierDisplay(state,[[2,3]],exposureOptions),{ok:false,changed:false});eq(state,before);for(const k of Object.keys(refs))same(state[k],refs[k]);}
+ {const state=estimateNotebook(),before=copy(state);eq(e.recordCourierDisplay(state,[],{}),{ok:true,changed:false});for(const opt of [{},{canExport:()=>true},{exposeFacts:()=>{}}])eq(e.recordCourierDisplay(state,[[2,3]],opt),{ok:false,changed:false});for(const pairs of [null,[[0,2]],[[2,13]],[[.5,2]],[[2]]])eq(e.recordCourierDisplay(state,pairs,exposureOptions),{ok:false,changed:false});eq(state,before);}
  console.log(`Courier Estimates: ${n} arithmetic, source, history, ownership and report checks passed.`);return n;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runCourierEstimateChecks();
