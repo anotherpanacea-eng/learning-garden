@@ -18,6 +18,7 @@ export function phaseDots(index){const s=phaseStage(index);return s?ice.map((p,i
 export const phaseTemperature=t=>t===-5?'minus five degrees Celsius':t===0?'zero degrees Celsius':'plus five degrees Celsius';
 let visit=null;
 export function resetWaterPhase(){stopWaterFilm();visit=null;}
+export function leaveWaterPhaseFilm(book,owner){if(!visit||visit.book!==book||visit.owner!==owner)return false;stopWaterFilm();visit.film=false;return true;}
 function current(book,owner){if(!visit||visit.book!==book||visit.owner!==owner)visit={book,owner,index:0,selected:1,status:'',details:{},film:false};return visit;}
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const button=(id,text,disabled=false)=>`<button type="button" data-phase-action="${id}"${disabled?' disabled':''}>${text}</button>`;
