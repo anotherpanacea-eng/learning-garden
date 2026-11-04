@@ -28,7 +28,7 @@ def setup(browser,base,seed,width=820,height=1000):
  c.add_init_script('(d=>{if(!localStorage.getItem("pc-fixture")){localStorage.setItem("learning-garden-explorers",JSON.stringify(d.registry));localStorage.setItem("number-garden-v1:explorer-1",JSON.stringify(d.seed));localStorage.setItem("pc-fixture","1");}window.pcSpoken=[];window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};Object.defineProperty(window,"speechSynthesis",{value:{getVoices:()=>[{name:"Fixture English",voiceURI:"fixture",lang:"en-US",localService:true}],addEventListener(){},removeEventListener(){},cancel(){},speak(u){window.pcSpoken.push(u.text);u.onstart?.();}}});const write=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(window.pcStorageFail&&k.startsWith("number-garden"))throw Error("Synthetic storage refusal");return write.call(this,k,v);};})('+json.dumps({'registry':registry,'seed':seed})+')')
  def app(route):
   response=route.fetch();body=response.text();assert 'let graph=null,' in body
-  body=body.replace('let graph=null,','window.pcBook=()=>structuredClone(state);window.pcReplace=s=>{state=s;render();};let graph=null,',1)
+  body=body.replace('let graph=null,','window.pcBook=()=>structuredClone(state);window.pcReplace=s=>{state=s;render();};window.pcReplaceStory=s=>{state.story=s;render();};let graph=null,',1)
   start=body.index('bindPipsCopy(state,{');end=body.index('});const notice=',start);chunk=body[start:end]
   route.fulfill(response=response,body=body[:start]+chunk.replace('canExport:candidate=>','canExport:candidate=>!window.pcRefuse&&')+body[end:])
  c.route('**/app.mjs',app);p=c.new_page();p.set_default_timeout(15000);p.on('pageerror',lambda e:errors.append(str(e)));p.goto(base+'#library/copy',wait_until='networkidle');p.locator('[data-pips-copy-root]').wait_for();return c,p
@@ -119,6 +119,73 @@ def run(browser,base):
   file=OUT/'save-off.json';download.value.save_as(file);eq(json.loads(file.read_text())['pipsCopy'],held,'save-off real download')
  finally:c.close()
  eq(errors,[],'no page errors')
+def page_seed(code=''):
+ script="import {pipsPageThreeSeed,canExportPips} from './test/pips-copy-checks.mjs';import * as P from './dist/pips-copy-core.mjs';let s=pipsPageThreeSeed();const o={canExport:canExportPips,deck:'page-three'};"+code+';console.log(JSON.stringify(s));'
+ return json.loads(subprocess.check_output(['node','--input-type=module','-e',script],cwd=ROOT,text=True))
+def page_open(p):tap(p,'page-table');p.locator('.pc-page-copy').wait_for()
+def run_page_copy(browser,base):
+ # One full tablet journey, opening the page deck before ever opening the legacy postcard.
+ seed=page_seed();c,p=setup(browser,base,seed)
+ try:
+  before=book(p);ok(p.locator('[data-pc-action=page-table]').count()==1,'revealed page offers one third navigation button');page_open(p);eq(book(p)['story'],before['story'],'opening never writes story');ok('postcard' not in book(p)['pipsCopy'],'page first leaves legacy postcard absent');ok(p.locator('[data-pc-action=table][aria-pressed=true]').count()==0,'old buttons not pressed in page deck');layout(p,'page opening')
+  p.evaluate('document.fonts.ready')
+  ok(p.locator('.pc-page-compare,.pc-page-copy>.pc-clue,.pc-page-copy>.pc-tray,.pc-page-copy>.pc-commit').evaluate_all('els=>els.length===4&&els.every(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;})'),'tablet comparison, clue, choices and primary actions fit together')
+  ok(p.get_by_role('region',name='The page to copy',exact=True).count()==1,'source region has its own accessible name');ok(p.get_by_role('region',name="This word in the page's sentence",exact=True).count()==1,'supplied local frame named accurately');ok('Your whole version keeps your choices.' in p.locator('.pc-page-compare').inner_text(),'local frame disclaimer visible')
+  p.evaluate('window.pcSpoken=[]');p.locator('[data-pc-speak=prompt]').tap();spoken=' '.join(p.evaluate('pcSpoken'));ok('Those need keeping too.' not in spoken,'closed full source never enters prompt narration');p.locator('[data-pc-speak=source]').tap();ok("There are three Ways" in ' '.join(p.evaluate('pcSpoken')),'explicit current source sentence read')
+  p.locator('[data-pc-speak=postcard]').tap();spoken=p.evaluate('pcSpoken.at(-1)');ok('[smudged]' in spoken and 'H.' in spoken,'copy narration passes literal smudge and signature');eq(spoken.count('blank'),9,'eight marked blanks plus read introduction')
+  tap(p,'keep');first=copy.deepcopy(book(p)['pipsCopy']['pageThree']['postcard']['firstKept'])
+  keys={'there':'there','ways':'ways','road':'road','high':'high','need':'need','which':'which','where':'where','too':'too'}
+  for key,word in keys.items():
+   p.locator('[data-pc-picker]').select_option(key);ok(p.locator('.pc-source-sentence').inner_text()==next(g['referenceText'] for g in book(p)['pipsCopy']['pageThree']['source']['postcard']['slots'] if g['id']==key),key+' frozen reference retained');tap(p,'place','[data-pc-choice="'+word+'"]')
+  tap(p,'check');eq(book(p)['pipsCopy']['pageThree']['postcard']['checks'][-1]['outcome'],'fit','all eight fit');tap(p,'keep');eq(book(p)['pipsCopy']['pageThree']['postcard']['firstKept'],first,'first page keep retained')
+  p.locator('[data-pc-panel=page-version] > summary').tap();eq(p.locator('[data-pc-panel=page-version] .pc-message').inner_text(),book(p)['pipsCopy']['pageThree']['source']['reference']['paragraphs'][0],'whole fitting version equals entire frozen canonical page');ok(p.locator('.pc-library-edge[aria-hidden=true]').count()>0,'library paper edge is decorative');p.locator('[data-pc-panel=page-version] > summary').tap()
+  p.locator('[data-pc-picker]').select_option('high');ok(p.locator('[data-pc-action=carry]').count()==0,'no child high carry UI');p.locator('[data-pc-action=place]').first.evaluate('(e)=>{e.dataset.pcAction="carry";e.click();}');eq(p.evaluate('location.hash'),'#library/copy','forged child carry inert');tap(p,'place','[data-pc-choice=hi]');tap(p,'check');eq(book(p)['pipsCopy']['pageThree']['postcard']['checks'][-1]['outcome'],'different','child different revision retained');tap(p,'keep')
+  p.locator('[data-pc-panel=keep-latest] > summary').tap();tap(p,'restore','[data-pc-edition=latest]');p.locator('[data-pc-panel=keep-first] > summary').tap();tap(p,'restore','[data-pc-edition=first]');eq(book(p)['pipsCopy']['pageThree']['postcard']['work'],first['work'],'first version restored')
+  p.locator('[data-pc-picker]').select_option('need');p.locator('[data-pc-panel=teach-copy-source-357] > summary').tap();tap(p,'step','[data-pc-card=copy-source-357]');steps=p.locator('[data-pc-worked-card=copy-source-357] li').count();table(p,'practice');tap(p,'job','[data-pc-job=d1]');tap(p,'answer','[data-pc-choice=kneads]');tap(p,'keep');legacy=copy.deepcopy(book(p)['pipsCopy']);page_open(p);eq(p.locator('[data-pc-picker]').input_value(),'need','child selected word survives practice return');eq(p.locator('[data-pc-worked-card=copy-source-357] li').count(),steps,'child example steps and fold survive return');held=copy.deepcopy(book(p)['pipsCopy']);held.pop('pageThree');eq(held,{k:v for k,v in legacy.items() if k!='pageThree'},'child turn preserves legacy job and pointers')
+  p.screenshot(path=str(OUT/'third-page-tablet.png'),full_page=True)
+  # Actual Notes round trip remains separate and retains the entire parent/child.
+  saved=copy.deepcopy(book(p)['pipsCopy']);p.goto(base+'#notes')
+  with p.expect_download() as d:p.locator('#download').tap()
+  raw=Path(d.value.path()).read_text();eq(json.loads(raw)['pipsCopy'],saved,'actual download preserves both decks');p.locator('#progress-file').set_input_files({'name':'synthetic-page-copy.json','mimeType':'application/json','buffer':raw.encode()});p.locator('#progress-import-confirm').tap();p.wait_for_function('JSON.parse(localStorage.getItem("learning-garden-explorers")).explorers.length===2');p.goto(base+'#library/copy',wait_until='networkidle')
+  if p.locator('[data-select-explorer]').count():p.locator('[data-select-explorer]').last.tap()
+  p.locator('[data-pips-copy-root]').wait_for();eq(book(p)['pipsCopy'],saved,'import keeps both decks exact');ok(not p.locator('.pc-page-copy').count(),'import resets transient deck to postcard');page_open(p);old=p.locator('[data-pc-action=place]').first.element_handle();table(p,'postcard');before=book(p);old.evaluate('(e)=>e.click()');eq(book(p),before,'detached page action cannot write after deck switch')
+  p.goto(base+'#notes');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.wait_for_function('location.hash==="#home"');ok('pipsCopy' not in book(p),"reset clears only this explorer's two decks");film=p.locator('dialog.welcome-film[open] [data-film-skip]');film.wait_for();film.tap();p.locator('dialog.welcome-film').wait_for(state='detached');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-1"]').tap();p.wait_for_timeout(100);p.goto(base+'#library/copy',wait_until='networkidle');p.locator('[data-pips-copy-root]').wait_for();eq(book(p)['pipsCopy'],saved,'other owner retains both decks after reset')
+ finally:c.close()
+ # Reload and lost gate must show the ordinary missing-postcard arrival without allocation or a damage warning.
+ child_only=page_seed("P.openPipsTable(s,'postcard',o);P.keepPipsPostcard(s,o)")
+ c,p=setup(browser,base,child_only)
+ try:
+  eq(book(p),child_only,'reload preserves child-only parent');ok(p.locator('.pc-arrival').count()==1,'missing legacy postcard is ordinary arrival');ok(p.locator('.pc-notice').count()==0,'no false damaged-work notice');page_open(p);saved=copy.deepcopy(book(p)['pipsCopy']);story=copy.deepcopy(book(p)['story']);story['acts']['III']['ended']=False;p.evaluate('x=>window.pcReplaceStory(x)',story);eq(book(p)['pipsCopy'],saved,'lost gate retains entire parent');ok(not p.locator('[data-pc-action=page-table]').count(),'lost gate hides invitation');ok(p.locator('.pc-arrival').count()==1,'lost gate falls back without allocating postcard');ok('Hollis' not in p.locator('[data-pips-copy-root]').inner_text(),'fallback does not expose page material');p.goto(base+'#notes');ok('Earlier page-copy work is retained' in p.locator('[data-pips-copy-notes]').text_content(),'gate-lost summary is generic')
+ finally:c.close()
+ for width,height in [(320,600),(1024,768)]:
+  sample=copy.deepcopy(child_only)
+  if width==320:
+   del sample['pipsCopy']['pageThree']['source']['postcard']['slots'][2]['referenceText'];sample['pipsCopy']['pageThree']['postcard']['work']['placements']['road']={'opaque':'keep'}
+  c,p=setup(browser,base,sample,width,height)
+  try:
+   page_open(p);p.locator('[data-pc-picker]').select_option('high');tap(p,'place','[data-pc-choice=high]');tap(p,'keep');layout(p,str(width)+' page revised/kept')
+   if width==320:eq(p.locator('[data-pc-picker] option').count(),7,'bad reference sentence removes only its own slot');eq(book(p)['pipsCopy']['pageThree']['postcard']['work']['placements']['road'],{'opaque':'keep'},'partial slot raw work survives')
+  finally:c.close()
+ # Historical reference title and sentence come from the retained source, not today's story.
+ historical=copy.deepcopy(child_only);source=historical['pipsCopy']['pageThree']['source'];source['reference']['title']='An earlier heading';source['postcard']['slots'][0]['referenceText']='Their paths are open.';source['postcard']['slots'][0]['context']={'before':'','after':' paths are open.'};source['postcard']['slots'][0]['key']='their'
+ c,p=setup(browser,base,historical)
+ try:
+  page_open(p);eq(p.locator('.pc-source-sentence').inner_text(),'Their paths are open.','frozen reference sentence retained');p.locator('[data-pc-panel=page-reference] > summary').tap();ok('An earlier heading' in p.locator('[data-pc-panel=page-reference]').inner_text(),'frozen title retained');tap(p,'place','[data-pc-choice=their]');tap(p,'check');eq(book(p)['pipsCopy']['pageThree']['postcard']['checks'][-1]['outcome'],'incomplete','own historical key used without current-page regrade')
+ finally:c.close()
+ # Hidden invitation and forged page-open control do not publish the third page or create saved work.
+ c,p=setup(browser,base,fixture())
+ try:
+  ok(not p.locator('[data-pc-action=page-table]').count(),'new child sees no future page invitation');before=book(p);p.locator('[data-pc-action=table]').first.evaluate('(e)=>{e.dataset.pcAction="page-table";e.click();}');eq(book(p),before,'forged early page action inert')
+ finally:c.close()
+ # Refused deck navigation keeps the child selected and cannot allocate the legacy postcard.
+ c,p=setup(browser,base,child_only)
+ try:
+  page_open(p);p.evaluate('window.pcRefuse=true');before=book(p);table(p,'postcard');eq(book(p),before,'refused table change leaves all work');ok(p.locator('.pc-page-copy').count()==1,'refused table change keeps selected child');p.evaluate('window.pcRefuse=false');p.goto(base+'#notes');p.locator('#remember').uncheck();p.goto(base+'#library/copy');p.locator('[data-pips-copy-root]').wait_for();page_open(p);tap(p,'place','[data-pc-choice=there]');ok('only while this page stays open' in p.locator('[data-pc-saving]').inner_text(),'page copy save-off disclosure');held=book(p)['pipsCopy'];p.goto(base+'#notes')
+  with p.expect_download() as d:p.locator('#download').tap()
+  eq(json.loads(Path(d.value.path()).read_text())['pipsCopy'],held,'save-off child stays in actual Notes download')
+ finally:c.close()
+ eq(errors,[],'page deck has no page errors')
+
 if __name__=='__main__':
  class Server(http.server.ThreadingHTTPServer):request_queue_size=128
  class Handler(http.server.SimpleHTTPRequestHandler):
@@ -129,7 +196,9 @@ if __name__=='__main__':
    chrome=os.environ.get('CHROME_PATH');mac='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
    if not chrome and Path(mac).exists():chrome=mac
    browser=pw.chromium.launch(headless=True,**({'executable_path':chrome} if chrome else {}))
-   try:run(browser,f'http://127.0.0.1:{server.server_port}/')
+   try:
+    if not os.environ.get('PIPS_PAGE_ONLY'):run(browser,f'http://127.0.0.1:{server.server_port}/')
+    run_page_copy(browser,f'http://127.0.0.1:{server.server_port}/')
    finally:browser.close()
  finally:server.shutdown()
  print(f'Pip’s Copy browser checks: {checks} passed. Synthetic artifacts: {OUT}')
