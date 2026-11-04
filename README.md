@@ -572,3 +572,7 @@ The Act IV opening, **The Town Has Two Stories** (`#almanac/two-stories`), conti
 ### Courier Estimates
 
 The new workbench at `#learn/math/estimates` connects exact linear rules to scattered invented courier records. Change a candidate line’s start/rate, compare signed gaps and a pinned line, and estimate a route inside or outside the observed range. Explicitly kept models retain their frozen records and operands; unkept changes are session-only. No fitted-line score, real delivery prediction or independent-proficiency claim. See [spec367](docs/specs/367-courier-estimates.md). Run `node test/courier-estimates-checks.mjs` and `python3 test/courier-estimates-browser.py`; publication status is in the [roadmap](docs/roadmap.md).
+
+### A Map That Fits
+
+At `#learn/math/map-sheet`, choose a scale to fit an invented route on a sheet, compare detail at another scale, and read a paper length back into ground distance. Simulated paper centimeters are not a screen ruler. Kept maps preserve their own source and choices; retrying or changing paper width creates a separate draft. See [spec368](docs/specs/368-map-that-fits.md). Run `node test/map-sheet-checks.mjs` and `python3 test/map-sheet-browser.py`.

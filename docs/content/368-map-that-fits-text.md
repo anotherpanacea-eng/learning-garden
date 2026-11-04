@@ -64,7 +64,7 @@ Picture labels: **Mill**, **Bend**, **Usable paper width · {width} centimeters*
 
 “Each window represents {window} centimeters of paper across.” Closer key: “The same ground feature takes more paper at the closer scale.” Equal keys: “These two views use the same scale.” Farther inset key: “This inset uses a farther scale. The same feature takes less paper.” Historical equal/farther button: **Add another inset**.
 
-“At these keys, the inset draws each width {key ÷ insetKey} times as long as the overview.” Render an exact decimal or fraction; the new key20/inset5 case is4. This wording follows the actual ratio, not the selected key alone.
+“Inset drawn length = {key ÷ insetKey} × overview drawn length.” Render an exact decimal or fraction; the new key20/inset5 case is4. This wording follows the actual ratio, not the selected key alone.
 
 “Which drawing gives you more room for a label? Say what you would use each one for.”
 
