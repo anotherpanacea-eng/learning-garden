@@ -478,6 +478,6 @@ PR255 save safety is merged and live:695matching hosted assets and49two-tab nati
 
 ### Given arithmetic keeps its context
 
-A reproduced Courier Estimates support mismatch is repaired: shown integer model arithmetic qualifies matching waiting Bramble/Broad/Garden work through the existing helpers, without adding recall responses or rewriting kept models. Qualification precedes the next view, and refusal preserves the notebook and local drawing. The owning repair PR records independent review and release acceptance.
+A reproduced Courier Estimates support mismatch is repaired: shown integer model arithmetic qualifies matching waiting Bramble/Broad/Garden work through the existing helpers, without adding recall responses or rewriting kept models. Qualification precedes the next view, and refusal preserves the notebook and local drawing. [PR423](https://github.com/anotherpanacea-eng/learning-garden/pull/423) records independent review and release acceptance.
 
 Next ready LG-G1 commission: [A Map That Fits368](https://github.com/anotherpanacea-eng/learning-garden/blob/2d25404657caca3af214ac3dfc8b7b9b670e699c/docs/specs/368-map-that-fits.md), with six-lens and independent mathematics/specification clearance. Its same-route paper-width/inset loop remains unbuilt while the verified support correction lands.
