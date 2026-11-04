@@ -10,7 +10,7 @@ A watt tells how many joules transfer each second. A joule measures an amount of
 
 ## Manual example
 
-1. Reed transfers 20 joules each second. Over 5 seconds it transfers 100 joules:20 watts × 5 seconds = 100 joules.
+1. Reed transfers 20 joules each second. Over 5 seconds it transfers 100 joules: 20 watts × 5 seconds = 100 joules.
 2. Willow transfers 40 joules each second. Over the same 5 seconds it transfers 200 joules. Equal time; different energy amounts.
 3. Let Reed run 10 seconds instead. It now transfers 200 joules too. Equal energy can take different times.
 
