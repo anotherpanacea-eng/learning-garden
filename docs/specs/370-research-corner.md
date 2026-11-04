@@ -1,0 +1,89 @@
+# 370 · Research Corner: source labels travel with the notes
+
+Status: bounded LG-G1 proposal, 2026-11-04. Independent specification, literacy/biology/content review precede code. [Finite material](../content/370-research-corner-text.md). A selected realization of277's Research Corner, not its other benches or270's cross-source synthesis.
+
+## New action and existing work
+
+Source Trail69 already traces a note to underlying evidence, distinguishes declared dependence from unknown independence and prepares a qualified label. Reading the old map296 already labels quotations/guesses, compares retellings and distinguishes what a writer says from established truth. Evidence Voice219/224 already supports claim/detail/reasoning paragraphs, objections and revision. Writing Table317/321 already supplies paragraph grouping, ordering, breaks, linking, reference and ellipsis. Do not describe those as missing.
+
+The new action is organising brief supplied notes while keeping an INSPECTABLE, frozen source-card-and-line label attached to each note. A reference must survive moving to an unexpected heading, Check, first/latest Keep, opening another draft, reload and Notes transfer. Choosing an answerable question or relevant card is supporting practice; the source-linked outline is the central artifact. This is guided note study, not independently found sources, original note composition, formal bibliography proficiency or a finished research course.
+
+Host: existing `#desk/writing`, fourth bench **Research Corner**, no new destination or notebook root. Add a top-level Research Corner button to the Writing Table header/arrival, hidden when its root is unsupported. Explicit click opens `research-organise` through `openWritingTask`, preserving all earlier records; it does not auto-create research work on render. Other five tasks remain open through the existing shelf. The `research` bench joins the local bench whitelist and chooser. No age/gender assignment, new placement or automatic story progress.
+
+The librarian wants a short pond page visitors can trace back to its sources. This fits49/120's Act IV evidence-and-disagreement work and E4-III/IV notes→organised information, with E3 source interpretation as a revisit. It is open before any act. No Hollis/page5 text, Gazette reveal, chapter offer, story write, new film, atlas edit or coverage claim. Spoken/paper paragraphs remain human-read; no new editor or audio recording. The broader real historical inquiry and extended composition remain unbuilt.
+
+## Finite packet and supported tasks
+
+The companion is complete: three cards, six tasks, prompts, teaching, help and feedback. All content is original except paraphrased biological facts. The factual card concerns common frogs in Britain; the story-pond dates are explicitly invented observations in a story year, never real data or a common-frog timetable. Pip's untested claim can be evidence of his stated view, not a measured animal ranking. A source's usefulness depends on the question.
+
+| id | existing kind | operation / fitting key |
+| --- | --- | --- |
+| research-question | choice | Choose a question answered by the displayed cards: `spawn-date`, first of3. |
+| research-sources | tap | Select every source useful for the supplied spawn/lifecycle report: `guide,pond`, all3 source cards remain present. |
+| research-note | choice | Keep the order of leg development in a brief note: `back-first`, second of3. |
+| research-scope | choice | Keep the pond note's local, recorded-date limit: `local`, third of3. |
+| research-opinion | choice | State what Pip's card can support: `stated-view`, second of3. |
+| research-organise | sort | Four provided notes into `spawn` / `change`; retain their source links under either heading and among waiting strips. |
+
+All are freely available. No response gates another task. Next draft uses existing catalogue order; completing the finite set intentionally revisits earlier supplied drafts, not new/unfamiliar text. Keep unfinished and unexpected arrangements. A sort check concerns the stated headings, not the scientific truth of a learner's own claim. All checks remain existing `supported:true,guided:true`; source inspections are not independent source-use evidence and do not require new support flags. No mathematics fact, score, reward, recall response or other owner's evidence is written.
+
+Research-organise note IDs, text, heading and references:
+- `season`: “Britain—spawn often late winter or spring; timing varies.” → spawn, guide/g1.
+- `pond-date`: “Story pond—spawn noted March 3.” → spawn, pond/p1.
+- `legs`: “Tadpoles—back legs, then front legs.” → change, guide/g3.
+- `tail`: “Tail shrinks; froglets later leave the water.” → change, guide/g4.
+
+These are paraphrased PROVIDED notes, not exact quotations or observations made by the child. References show where to inspect a note; they are not an automated guarantee of meaning or source reliability. The short-note task's options include a reversed-order note and an over-short note. All three point to the same guide line as comparison material, not evidence that every option is true. Use the neutral label **Compare with**, never certify a wrong selected note as a supported quote.
+
+The paragraph invitation asks a person to hear/read two short paragraphs, keep the general guide and the one pond record distinct, and ask what needs a further source. It adds no typed prose, composition score or source-finding claim. Full sentences are not inherently bad notes; a quotation is valid if marked and attributed. The task asks for brevity WITHOUT losing the stated order, not “shortest is always best.”
+
+## Frozen optional reference data
+
+Reuse `writingTasks`, `taskSource`, `openWritingTask`, `setWritingMaterial`, `checkWritingTask`, `keepWritingTask`, `writingPreview` and the current `writingDesk` root, kinds and snapshot shapes. Extend the catalogue via `writing-research-content.mjs`; old tasks and work remain byte-equivalent through their own sources. No research state initializer, migration, generic lesson engine, new response type or parallel save transaction.
+
+An optional source field owns the new references:
+```
+research: {
+ v:1,
+ cards:[{id,title,origin,notice,lines:[{id,text}]}],
+ links:{[partOrChoiceId]:[{cardId,lineIds:[id]}]},
+ cardChoices:boolean
+}
+```
+It is frozen as part of EACH task's source when that task is explicitly opened. No rendering/Notes/kept preview/reference lookup may use today's card catalogue. The task still owns its normal parts/choices/key/order/feedback/help. For source-selection tap tasks, part IDs are the source-card IDs; each tappable part's normal text contains the full title/body as a fallback, derived at authoring from the same card. Readable `cardChoices:true` uses large source cards instead of the existing word-fragment/sentence-number presentation. Preserve the existing tap-id work array; non-tappable parts, if any, remain plain text. In this packet all3 are tappable. Existing word-tap tasks are unchanged.
+
+Reference reader in writing-table-core is a derived view, not a validator of scientific truth. Bounds: plain version1 metadata;1…6 cards; ids use the existing80-character ASCII writing-id rule; title≤160 Unicode code points; origin/notice≤1000;1…8 dense lines per readable card, line ids unique within that card and text≤4000. Nonempty display strings. Link object≤44 own note keys; each displayed note's link list dense1…3 references; each reference has a readable unique cardId and1…8 unique own lineIds in that card. Duplicate card ids make those cards ambiguous. Unknown fields remain raw, no normalization. All lookup keys resolve against this task's source, not current ids or card order.
+
+Missing optional metadata gives the old presentation unchanged. Unknown version or unreadable metadata disables only its reference feature, not `validWritingSource`, the whole record, other task records or their own Check/Keep. A bad card/link is isolated: other readable cards and note links remain usable. A displayed note with an unavailable link says its original draft is retained in Notes but the reference cannot open here; never silently invent a link from its wording or current catalogue. Fallback source-selection text remains selectable and readable if its richer card cannot open. The original raw metadata remains in the Notes report. No new consistency check regrades older work or demands that it contain today's card/line/note counts.
+
+`writingPreview` may add note-id lists to blocks for sources with this optional metadata, so UI can render each provided note with its own reference instead of losing the association in a concatenated paragraph. Preserve all existing heading/text fields and nonresearch outputs. Research sort blocks identify the actual part ids under each source-owned heading and the waiting block; these IDs follow the CURRENT/snapshot placements, never the fitting key. Choice previews identify only the selected choice's link; no selected choice means no invented note link. Source-selection previews name the actual selected cards. Unsupported reference data still preserves the ordinary supplied-text preview.
+
+First/latest snapshots continue to use their record's frozen source. No regrade or replacement with today's references. A note moved to a different heading keeps its own source label, including if the arrangement differs from the supplied task key. Render source lists as **Sources beside these supplied notes**, not “sources you read/checked.” Source cards may be modelling materials; their presence never proves the child found, read or verified them. No general bibliography style, DOI lookup or external request.
+
+## Interaction, teaching and accessibility
+
+Keep current materials/preview before the draft shelf. Research cards use paper-like panels and source labels, not tiny word buttons. Each note/selected-note preview has an explicit **Compare with {card title}, line(s) {n}** control. Line numbers are positions in THIS frozen activity card, not paragraph numbers in Froglife or any external publication. Cards are authored learning materials, not facsimiles or verbatim quotations from those institutions. A reference opens an inline source inspector with title, origin, notice, all numbered lines and the referenced lines highlighted using text/style as well as color. Do not extract only a confirming phrase and hide surrounding lines.
+
+Opening/closing the inspector is visit-only: no Check, support inference or notebook save; no work is lost. Preserve selected strip, placements, open panels and the old task. Focus/scroll the inspector heading on open; Close restores the originating control where it still exists, otherwise the task heading. Inspection from first/latest preview uses that same record source and labelled saved work, not its current placements. Keep/Check/task/owner/import/route changes stop speech. Switching task clears an old inspector; stale or detached inspector controls cannot open/narrate a replacement notebook.
+
+Research teaching uses the existing manual example-parts pattern from Holding It Together: one introduction, a different cafe-card example, then at most3 manual parts. No automatic speech/advance or hidden answer narration. Hints/examples/read-together use the existing honest help snapshot fields. Current-visible instructions, selected material, open source lines, shown help and feedback can be read with existing local speech; hidden source inspector content is excluded. A source inspection is not recorded as an ability level. All reference strings are escaped. No raw HTML, remote images, lookup API or publication.
+
+At820px keep the organising surface and compact note/source preview close; at320px stack readable panels.44px controls,16px text including citation labels, visible focus, no horizontal overflow; no precision tapping, hover or drag requirement. Disclose longer cards and history; current action remains clear. Color never alone labels real-fact/invented/untested source status. Inspect actual old Writing Table and Holding It Together layouts after shared preview changes, not only the new cards. Keep the existing supported/unobserved distinction and device-save/off/quota/stale-tab behavior.
+
+Existing clone/preflight/adopt methods remain responsible for writingDesk mutations. The app supplies its actual pretty Notes report gate; do not replace it with a raw-source byte check or adopt unrelated candidate roots. Newly larger source objects must remain exportable before being adopted. Refusal leaves source/currentId/material/help/checks/kept work untouched. Optional source inspections do not need a growing-write capacity check because they write no notebook state. Save-off/quota messages retain their existing in-memory/download semantics.
+
+## Upstream, content sources and prerequisites
+
+Refreshed2026-11-04: Jane `5f4ccb3f9842c9ae8d44ebdd9a16de60afa7ad56`, `LESSONS.md`; Marble `fdcc958385af80a263795246449c41cb76da2ae0`, topics/dependencies/teaching-research. Jane's manual teaching/guided practice and optional glossary inform the encounter; no boss, penalty, mastery, storage or code/prose is adopted. Topic candidates `mt_FW9_8F52bw` Short Research Projects and `mt_dRLP8g0SAg` Research & Note-Taking inform organised notes and retained sources. Neither has a current teaching-research record. Their evidence also asks for generating questions, own-word notes, synthesised paragraphs and a bibliography; these remain unobserved or off-screen, not completed by supplied selection.
+
+Repository pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d` and current graph agree: Short Research Projects HARD-depends on Shared Research Projects `mt_4A4RpX-Go9`; Research & Note-Taking HARD-depends on Short Research Projects. The union hard closure excluding the two target nodes is1other node,2edges including the internal target edge. Shared adult-guided investigation is offered here; no prerequisite pass is inferred. Existing Paragraph Sort/linking/holding provide optional organising returns, not independent writing attainment. The common-frog facts are reading context, not a new science atlas mapping. Existing NOTICE remains; no taxonomy/Jane content or code copied.
+
+Biology was rechecked against [Froglife's Common Frog](https://www.froglife.org/info-advice/amphibians-and-reptiles/common-frog-2/) and [Amphibian and Reptile Conservation's Common frog](https://www.arc-trust.org/common-frog). Use qualified British spawn timing, back legs before front, and tail reduction/froglet development; no fixed number of weeks, universal date or all-species claim. The learning card is an original paraphrase, explicitly credited, not a quotation of those pages. Fictional March3/March20/June12 notes do not become biological evidence about every pond. [CCSS W.4.8](https://www.thecorestandards.org/ELA-Literacy/W/4/8/) is a curriculum reference for relevant notes/categories/source lists, not an efficacy or age-placement claim. No artwork from these sources.
+
+## Acceptance and release
+
+Before code: six independent spec lenses and independent finite literacy/biology/content review. Check the card facts, fiction/fact boundaries, relevance changing with the question, short-note meaning/order/qualification, stable fitting-option positions and supporting references for each provided organiser note. Do not infer semantic correctness merely because a line id resolves.
+
+Focused source checks: all six tasks/keys and meaningful per-choice reasons, source-local reference resolution, note link retained under wrong heading, current/first/latest preview association, old tasks without metadata unchanged, malformed one card/link isolated, coherent historical titles/line orders/counts/choice orders unlike today, unknown raw data preserved. Real Notes report export/import/reload round trip with earlier records/checks/versions and≥500KB unrelated data, report-capacity refusal/source identity unchanged, save-off/quota, unsupported root and all-task record cap. Repair broad fixtures that assumed every tap task belonged to Holding It Together; don't weaken its independent expected answers.
+
+Native: one820 research journey opens organiser directly, moves notes, inspects exact source+highlight+context, Check/Keep unfinished or different, revises, compares first/latest citations, opens other research tasks and returns without loss.320 samples inspect card selection/organiser/reference panel and actual44px/16px/focus/no-overflow; retain sources beside the question/notes. Actual persistent two-owner Notes import/reload/redownload with altered historical sources, bad optional refs and unknown siblings. Stale/detached controls after task/owner/import/route changes and current-only requested narration. Run the existing Writing Table and Holding It Together browser suites because shared controls/previews change, plus the focused new journey; no need whole journeys at every width. Full source runner once on main-integrated runtime candidate, focused reruns for repairs, independent exact-head Claude implementation clearance and ordinary merge/deploy/live asset+Home/touched-route receipt. Browser checks do not qualify physical iPad/Safari/VoiceOver/audible quality or learning.
