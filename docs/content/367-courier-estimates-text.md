@@ -39,9 +39,9 @@ Example table: (1,4), (2,7), (3,7). **Previous step** · **Next step** · **Clos
 
 **Start · minutes at zero blocks** · **Rate · minutes per block**
 
-“The start is this line's value at zero blocks. None of these trips was zero blocks long.”
+“The start is this line's value at zero blocks. None of these trips was zero blocks long.” Historical source with an x0 row instead: “This source includes a zero-block record. The start is the line's value there; compare it with the record.”
 
-**Show rate steps** · **Hide rate steps**. Text: “Across 2 model blocks, this line changes by {2m} minutes. Its rate is {m} minutes per block.” At0: “Across 2 model blocks, the change is 0 minutes. The line is level.”
+**Show rate steps** · **Hide rate steps**. Text: “Across {run} model blocks, this line changes by {run×m} minutes. Its rate is {m} minutes per block.” At0: “Across {run} model blocks, the change is 0 minutes. The line is level.”
 
 **Selected record**
 
@@ -73,11 +73,13 @@ Output: **Estimate for {x} model blocks: {m} × {x} + {b} = {value} minutes.** O
 
 Within range: “This length is between the recorded lengths. It is still an estimate, not a recorded trip.”
 
-Beyond range: “This length is beyond the recorded lengths. The line gives a number, but these records give less support here.”
+Beyond range: “This length is outside the recorded lengths. The line gives a number, but these records give less support here.”
 
-At boundary if historical source supplies one: “This length is at the edge of the recorded lengths. The line's value is still an estimate, not a new recorded trip.” Below range uses the same Beyond line. Graph shading label: **Outside the recorded lengths**.
+At boundary if historical source supplies one: “This length is at the edge of the recorded lengths. The line's value is still an estimate, not a new recorded trip.” Below range uses the same Outside line. If a source request equals a recorded x: “Even at a recorded length, this line estimates a different trip. It does not replace that record.” Graph shading label: **Outside the recorded lengths**.
 
-Stale result: “Your line has changed. Use this line to update the estimate.” If only pin changed: “Your comparison has changed. Use this line to update both estimates.” The stored result still labels its actual rule; do not redraw its diamond at a new output before Use.
+Different-request notice: “Your estimate was for {x} model blocks. Choose that length or use this line for this one.”
+
+Stale result: “Your line has changed. Use this line to update the estimate.” If only pin changed: “Your comparison has changed. Use this line to update both estimates.” The stored result still labels its actual rule. Stale results stay in text; diamonds return after Use. Current and pinned prediction diamonds are labelled C and P, including when both occupy the same point.
 
 **Talk or write on paper**
 
@@ -95,7 +97,11 @@ Stale result: “Your line has changed. Use this line to update the estimate.”
 
 Success: “Model kept. The records and this line stay together.” Temporary saving-off: “Model kept for this session. Saving on this device is off.” Storage failure: “This model is in this session, but it could not be saved on this device. Download your notes.”
 
-Cap: “Your earlier models are safe. Download your notes before starting another saved model.” Preflight failure: “This model could not be kept. Nothing was changed. Your line is still here; open Grown-up notes to download your work.” Unsupported owner: “Earlier estimates are kept in your notes. This format cannot accept another model here.” Bad item: “Earlier model retained · its original stays in your notes.”
+Cap: “Your earlier models are safe. This notebook cannot keep another model here. You can keep exploring in this visit and download your notes.” Preflight failure: “This model could not be kept. Nothing was changed. Your line is still here; open Grown-up notes to download your work.” Unsupported owner: “Earlier estimates are kept in your notes. This format cannot accept another model here.” Bad item: “Earlier model retained · its original stays in your notes.”
+
+Unavailable older helper: “The earlier example stays in your notes. This model is still open.”
+
+Use singular minute/block when the absolute value is1, including −1 and+1; zero gap is “0 minutes” without a sign. Dynamic request labels use the actual frozen value and units. The authored 4.5/10 labels are not imposed on older sources.
 
 No current result: “No estimate used yet.” Kept work read-only: “This kept model stays as it was. Try it again to make another version.”
 
