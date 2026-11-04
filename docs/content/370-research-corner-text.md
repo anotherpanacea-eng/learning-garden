@@ -92,7 +92,7 @@ Hint: “Useful for which question? Read the reader's job.” Example: “An ope
 
 ### research-note · Keep the order · choice
 
-Display the factual guide's line3 with its origin/notice available. Prompt: “Which brief note keeps which legs grow first?”
+Display the factual guide card, with comparison line3 highlighted and origin/notice available. Prompt: “Which brief note keeps which legs grow first?”
 
 - `front-first` **tadpoles—front legs, then back legs**. Changes the source order.
 - `back-first` **tadpoles—back legs, then front legs**. Fitting.
@@ -100,11 +100,11 @@ Display the factual guide's line3 with its origin/notice available. Prompt: “W
 
 All3 compare with guide/g3. Fit: “The short note keeps the order without repeating the whole sentence.” Hint: “Which words carry the order?” Example: “If a card says ‘put on socks before boots’, ‘socks, then boots’ keeps the order. ‘Clothes’ loses it.”
 
-Append to this task’s fit feedback and general non-fit feedback: “A full sentence can also be a useful note. Mark copied words as a quotation and give its source. Here the job asks for a brief note that keeps the order.”
+Append to this task’s fit feedback; use as its entire `feedback.general` (the core then adds the standard closing once): “A full sentence can also be a useful note. Mark copied words as a quotation and give its source. Here the job asks for a brief note that keeps the order.”
 
 ### research-scope · One recorded date · choice
 
-Display pond/p1. Prompt: “Which sentence keeps what this pond note can tell us?”
+Display the pond card, with comparison line1 highlighted. Prompt: “Which sentence keeps what this pond note can tell us?”
 
 - `everywhere` **Every common frog in Britain and Willowbank spawns on March 3.** Adds an unsupported all-places rule.
 - `nothing` **The note cannot tell us any date when spawn was recorded.** Withholds the date the note actually gives.
@@ -114,7 +114,7 @@ All3 compare with pond/p1. Fit: “The record gives a date for a recorded observ
 
 ### research-opinion · Useful for a different question · choice
 
-Display pip/u1/u2. Prompt: “What could Pip's card support?”
+Display Pip’s card and both lines. Prompt: “What could Pip's card support?”
 
 - `measured` **What scientists measured about the world's fastest swimmers last summer.** No measurements or scientists appear here.
 - `stated-view` **What Pip said he thought about frogs as swimmers.** Fitting.
