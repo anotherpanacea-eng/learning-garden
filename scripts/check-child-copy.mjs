@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 export const copyScopes = [
+  {path:'dist/reference-scales-ui.mjs',adultBlocks:[{start:'// Adult reference interpretation only;',end:'// End adult reference interpretation.',reason:'Only rendered in the folded grown-up interpretation and adult Notes.'}],quotations:[]},
+  {path:'dist/reference-scales-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/compare-records-ui.mjs',adultBlocks:[{start:'// Adult comparison notes only; never rendered as a child activity.',end:'// End adult comparison notes.',reason:'Only the adult Notes destination renders this function.'}],quotations:[]},
   {path:'dist/compare-records-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/map-sheet-ui.mjs', adultBlocks:[{start:'// Adult map notes only; never rendered as a child activity.',end:'// End adult map notes.',reason:'Only the adult Notes destination renders this function.'}],quotations:[]},

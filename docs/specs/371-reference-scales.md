@@ -1,6 +1,6 @@
 # 371 · Reference Scales: agreement is not closeness
 
-Status: bounded LG-G1 specification, 2026-11-04. Independent specification and finite science/mathematics/content review precede code. [Original packet](../content/371-reference-scales-text.md).
+Status: bounded LG-G1 build, 2026-11-04. Independent specification and finite science/mathematics/content review cleared before code; [review](../reviews/371-reference-scales-spec.md). Implementation review and release acceptance remain. [Original packet](../content/371-reference-scales-text.md).
 
 ## Job, overlap and boundary
 
@@ -69,7 +69,7 @@ Given arithmetic must pass the existing `recordGivenMath(..., normalize:false)` 
 
 All controls preserve selected source/work while paging. Stop speech on source/page/adjustment/owner/import/route changes; detached or stale nodes cannot act/narrate. Speech reads only the current visible turn, including open source/context and shown arithmetic, with units and signed adjustments spoken clearly. Use one signed formatter for adjustment and mean-reference differences: U+2212 for negatives, explicit + for positives, plain0, and corresponding spoken minus/plus. Do not narrate hidden later examples or old speech-control text. All source strings are escaped, no HTML/eval, remote media or requests. Use original SVG plots, no copied NIST/BIPM diagrams.
 
-At820px keep the common-scale plot and current question/adjustment together; stack at320px with no horizontal overflow. Minimum44px controls and16px instructional text, visible focus, separate non-color legends. Manual step changes and parameter endpoints keep focus on a usable control. No precision tapping, hover, drag-only control or moving real-time target. Existing route screenshots/controls and real Measuring Desk entry still need regression checks.
+At820px keep the common-scale plot and adjustment controls alongside each other; at320px a sticky control strip remains usable while the plot scrolls, with no horizontal overflow. On later turns, fold the repeated full introduction and original summary table; keep the active preview summary visible. These disclosures are visit-only, not evidence flags. Minimum44px controls and16px instructional text, visible focus, separate non-color legends. Manual step changes and parameter endpoints keep focus on a usable control. No precision tapping, hover, drag-only control or moving real-time target. Existing route screenshots/controls and real Measuring Desk entry still need regression checks.
 
 ## Upstream and primary sources
 

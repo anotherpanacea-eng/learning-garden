@@ -1,7 +1,9 @@
+import {referenceScaleSource} from './reference-scales-content.mjs';
 // Original invented observations adapted from proposal203; see spec369.
 export const COMPARE_TEXT={title:'The Compare Shelf',invitation:'Dot has kept trip times for two routes. Wren needs more than one “average” before talking about a route. Put the drawings side by side.',origin:'Invented observations for this workbench.',notice:"These are not real measurements or the town's official route decision."};
 const records=(prefix,values)=>values.map((value,i)=>({id:`${prefix}${i+1}`,value}));
 export function compareSource(id){
+ if(id==='reference-scales')return referenceScaleSource();
  if(!['courier','parcels'].includes(id))return null;
  const courier=id==='courier';
  return {v:1,id,title:courier?'Courier trips':'Market parcels',origin:COMPARE_TEXT.origin,notice:COMPARE_TEXT.notice,
