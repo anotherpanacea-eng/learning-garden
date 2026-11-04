@@ -1,6 +1,6 @@
 # Diffusion Tray375 · individual crossings and the net change
 
-Status: specification and finite science/model copy independently cleared before implementation. LG-G1. Select the bounded diffusion-model slice of [Breath and Heartbeat174](174-breath-and-heartbeat.md), not its lung/heart/respiration/temperature pack. Existing ice/phase model and film remain separate, available and unchanged in meaning. No new destination: an optional Diffusion Tray mode within `#science/ice`.
+Status: specification and finite science/model copy independently cleared before implementation; bounded runtime built. The owning PR records independent exact-head implementation clearance and release acceptance. LG-G1. Select the bounded diffusion-model slice of [Breath and Heartbeat174](174-breath-and-heartbeat.md), not its lung/heart/respiration/temperature pack. Existing ice/phase model and film remain separate, available and unchanged in meaning. No new destination: an optional Diffusion Tray mode within `#science/ice`.
 
 ## Purpose, story and teaching bridge
 
