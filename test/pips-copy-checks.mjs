@@ -124,7 +124,7 @@ export function runChecks(){
  }
  {
   const future=pipsPageThreeSeed();future.pipsCopy={v:2,pageThree:{unknown:'retained'}};const before=clone(future),html=pipsCopyNotes(future);
-  ok(html.includes(pipsCopyCopy.unsupported),'unsupported parent keeps its own recovery message');ok(!html.includes('The postcard and other jobs are still open.'),'unsupported parent never promises editable legacy games');ok(html.includes('unknown'),'full future child remains in the raw report');eq(future,before,'future Notes remains pure');
+  ok(html.includes(pipsCopyCopy.unsupported.replaceAll("'",'&#39;')),'unsupported parent keeps its own recovery message');ok(!html.includes('The postcard and other jobs are still open.'),'unsupported parent never promises editable legacy games');ok(html.includes('unknown'),'full future child remains in the raw report');eq(future,before,'future Notes remains pure');
  }
  console.log(`Pip's Copy core: ${n} checks passed.`);return n;
 }
