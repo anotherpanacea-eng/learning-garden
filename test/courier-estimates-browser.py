@@ -87,6 +87,14 @@ def saved(p, identity):
     return next(x for x in h.book(p)['courierEstimates'] if isinstance(x, dict) and x.get('id') == identity)
 
 
+def without_fact_lists(book):
+    result = copy.deepcopy(book)
+    result.pop('exposures', None)
+    for key in ['seenItems', 'seenVariants', 'seenFacts']:
+        result.get('broad', {}).pop(key, None)
+    return result
+
+
 def download(p, base, label):
     p.evaluate('location.hash="#notes"')
     p.locator('#download').wait_for()
@@ -111,6 +119,11 @@ def main():
 import {waitingNotebook} from './test/story-arrivals-checks.mjs';
 import {estimateSource} from './dist/courier-estimates-core.mjs';
 import {MAX_IMPORT_BYTES} from './dist/progress-limits.mjs';
+import {freshState} from './dist/core.mjs';
+import {initializeExplorerState} from './dist/progress-transfer.mjs';
+import {startPostOffice} from './dist/post-office-core.mjs';
+import {deliveries} from './dist/post-office-content.mjs';
+import {startAdaptiveRival,generateRivalTask,validPostRival} from './dist/post-rival.mjs';
 const base=waitingNotebook();base.syntheticOther.payload='x'.repeat(512000);
 const old=estimateSource('orchard');old.id='earlier-source';old.title='Earlier <route> & rule';
 old.context='A smaller synthetic source keeps its original values.';
@@ -119,7 +132,12 @@ old.rows=[{id:'old-zero',x:0,y:1},{id:'old-one',x:1,y:2}];old.starts=[1];old.rat
 const earlier={kind:'courier-estimate',v:1,id:'estimate-70',source:old,line:{start:1,rate:1},pin:null,recordId:'old-zero',requestX:0.5,result:{x:0.5,line:{start:1,rate:1},pin:null},support:{worked:true,gaps:false,rise:false,narration:false}};
 const refusal=structuredClone(base);refusal.syntheticOther.payload='';
 refusal.syntheticOther.payload='x'.repeat(MAX_IMPORT_BYTES-Buffer.byteLength(JSON.stringify(refusal,null,2))-1024);
-console.log(JSON.stringify({base,earlier,refusal}));
+const pending=initializeExplorerState(freshState());pending.garden.welcomeFilmSeen=true;
+const delivery=startPostOffice(pending,deliveries[0].id);
+if(!startAdaptiveRival(pending))throw Error('Synthetic Bramble could not start');
+delivery.rival.task=generateRivalTask('multiply',2,3,0);
+if(!validPostRival(delivery.rival))throw Error('Synthetic Bramble is not valid');
+console.log(JSON.stringify({base,earlier,refusal,pending,maxImportBytes:MAX_IMPORT_BYTES}));
 """
     fixtures = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', fixture_code], cwd=ROOT, text=True))
     server = None
@@ -145,7 +163,7 @@ console.log(JSON.stringify({base,earlier,refusal}));
             h.ok('courierEstimates' not in before, 'entry does not initialize a saved owner')
             h.ok(not p.locator('dialog.welcome-film[open]').count(), 'direct learn route does not play the storm film')
             start(p)
-            h.ok(h.book(p) == before, 'Start creates a session draft without writing the notebook')
+            h.ok(without_fact_lists(h.book(p)) == without_fact_lists(before), 'Start creates no saved owner or trial changes; only supplied fact lists may grow')
             h.click(p, '[data-ce-worked]')
             h.ok(p.locator('[data-ce-example-plot]').count() == 1, 'different worked example owns a separate diagram')
             for _ in range(3):
@@ -193,6 +211,7 @@ console.log(JSON.stringify({base,earlier,refusal}));
             h.click(p, '[data-ce-request="10"]')
             h.click(p, '[data-ce-use]')
             h.ok('15 minutes' in p.locator('[data-ce-root]').inner_text() and 'less support' in p.locator('[data-ce-root]').inner_text(), 'outside estimate has its support limit')
+            before_keep = h.book(p)
             keep_button = p.locator('[data-ce-keep]').element_handle()
             h.click(p, '[data-ce-keep]')
             keep_button.evaluate('(e)=>e.click()')
@@ -201,7 +220,7 @@ console.log(JSON.stringify({base,earlier,refusal}));
             first = copy.deepcopy(saved(p, 'estimate-1'))
             h.ok(first['line'] == {'start': 5, 'rate': 1} and first['pin'] == {'start': 4, 'rate': 1}, 'kept current and pinned rules remain distinct')
             h.ok(first['support']['worked'] and first['support']['gaps'] and first['support']['rise'], 'opened support retained independently')
-            h.ok({k:v for k,v in h.book(p).items() if k != 'courierEstimates'} == before, 'Keep changes only its owner')
+            h.ok({k:v for k,v in h.book(p).items() if k != 'courierEstimates'} == before_keep, 'Keep changes only its owner after displayed facts were recorded')
             h.click(p, '[data-ce-again="estimate-1"]')
             line(p, 3, 0)
             near(attr(p, '[data-ce-line]', ['y1', 'y2']), [xy(0, 3)[1]]*2, 'zero rate draws a level line')
@@ -305,6 +324,62 @@ console.log(JSON.stringify({base,earlier,refusal}));
             h.click(limited, '[data-ce-keep]')
             h.ok(h.book(limited) == limited_before and limited.locator('[data-ce-start-value]').input_value() == '4', 'real report refusal retains notebook and local draft')
             h.ok('could not be kept' in limited.locator('#ce-status').inner_text(), 'preflight failure gives a useful recovery message')
+
+            # A supplied calculation qualifies the actual waiting puzzle, without
+            # turning this exploration into a response or changing prior work.
+            _, exposed = setup(browser, fixtures['pending'], 'pending-fact')
+            go(exposed, base)
+            pending_before = h.book(exposed)
+            h.ok(not pending_before['postOffice']['visits'][0]['rival'].get('priorFactShown') and '2x3' not in pending_before['broad']['seenFacts'], 'pending 2 by 3 begins without supplied-fact familiarity')
+            start(exposed)
+            line(exposed, 0, 2)
+            h.click(exposed, '[data-ce-record="r3"]')
+            h.ok('estimate = 2 × blocks + 0' in exposed.locator('.ce-rules').inner_text() and '3 model blocks' in exposed.locator('.ce-gap-card').inner_text() and 'Line estimate: 6 minutes.' in exposed.locator('.ce-gap-card').inner_text(), 'selected record visibly supplies the exact 2 by 3 product')
+            pending_after = h.book(exposed)
+            h.ok(pending_after['postOffice']['visits'][0]['rival'].get('priorFactShown') is True and '2x3' in pending_after['broad']['seenFacts'] and '2x3' in pending_after['exposures'], 'matching pending Bramble and shared fact familiarity qualify before leaving the model')
+            expected = copy.deepcopy(pending_before)
+            expected['postOffice']['visits'][0]['rival']['priorFactShown'] = True
+            h.ok(without_fact_lists(pending_after) == without_fact_lists(expected), 'fact display adds no attempts, outcomes, support or unrelated notebook changes')
+            exposed.screenshot(path=str(OUT/'pending-fact.png'), full_page=True)
+            h.go(exposed, base, '#post', '[data-post-page="bramble"]')
+            h.click(exposed, '[data-post-page="bramble"]')
+            h.ok('A matching fact was shown earlier.' in exposed.locator('.post-rival-question').inner_text() and not h.book(exposed)['postOffice']['visits'][0]['rival']['attempts'], 'returning to the actual unanswered puzzle discloses prior supplied arithmetic')
+
+            # Use an actual exported report to fill a separate synthetic notebook
+            # exactly. Seed directly: importing a 5 MiB report also stores a raw
+            # recovery copy and can exceed Chromium's localStorage quota.
+            # Known facts allow the old view; one new product
+            # would exceed the same pretty-report cap used by display preflight.
+            _, full = setup(browser, fixtures['base'], 'display-capacity-source')
+            go(full, base)
+            full_report = download(full, base, 'before-display-capacity')
+            full_raw = full.evaluate('''({report,cap})=>{
+                const facts=[];for(let a=1;a<=12;a++)for(let b=a;b<=12;b++)if(!(a===2&&b===3))facts.push(`${a}x${b}`);
+                report.exposures=[...new Set(facts.flatMap(k=>{const [a,b]=k.split('x');return [k,`${b}x${a}`]}))];
+                report.broad.seenFacts=facts;
+                report.broad.seenItems=facts.map(k=>`legacy-${k}`);
+                report.broad.seenVariants=facts.map(k=>`legacy-${k}:authored`);
+                report.syntheticOther.payload='';
+                const size=new TextEncoder().encode(JSON.stringify(report,null,2)).length;
+                report.syntheticOther.payload='x'.repeat(cap-size);
+                return JSON.stringify(report,null,2);
+            }''', {'report': full_report, 'cap': fixtures['maxImportBytes']})
+            h.ok(len(full_raw.encode()) == fixtures['maxImportBytes'], 'display refusal fixture reaches the actual pretty-report byte cap')
+            full_seed = json.loads(full_raw)
+            for key in ['title', 'exportedAt', 'note', 'explorer', 'recommendation']:
+                full_seed.pop(key, None)
+            _, full = setup(browser, full_seed, 'display-report-capacity')
+            go(full, base)
+            start(full)
+            line(full, 0, 2)
+            full_before = h.book(full)
+            h.ok('1 model block' in full.locator('.ce-gap-card').inner_text() and 'Line estimate: 2 minutes.' in full.locator('.ce-gap-card').inner_text(), 'already recorded products remain open at capacity')
+            h.click(full, '[data-ce-record="r3"]')
+            h.ok('could not open' in full.locator('#ce-status').inner_text() and full.locator('#ce-status').evaluate('e=>e===document.activeElement'), 'new fact over the report cap refuses with focused recovery status')
+            h.ok(full.locator('[data-ce-start-value]').input_value() == '0' and full.locator('[data-ce-rate]').input_value() == '2' and full.locator('[data-ce-record="r1"]').get_attribute('aria-pressed') == 'true' and 'Line estimate: 6 minutes.' not in full.locator('.ce-gap-card').inner_text() and 'Selected record 3 blocks' not in full.locator('[data-ce-plot]').get_attribute('aria-label'), 'refused next computed value never renders and previous local choices remain')
+            h.ok(h.book(full) == full_before and '2x3' not in h.book(full)['broad']['seenFacts'], 'refused display leaves the complete notebook and unshown fact unchanged')
+            turn(full, 0)
+            h.ok(not full.locator('#ce-status').inner_text().strip(), 'successful navigation clears the old refused-view notice')
 
             # Separate disk fault: normal journeys above use genuine persistence.
             _, quota = setup(browser, fixtures['base'], 'device-write-fault')

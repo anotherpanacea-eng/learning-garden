@@ -47,6 +47,41 @@ function validDraft(d){
  return r===null||object(r)&&d.source.requests.includes(r.x)&&validEstimateLine(d.source,r.line)&&(r.pin===null||validEstimateLine(d.source,r.pin));
 }
 export function readableEstimate(item){return object(item)&&item.kind==='courier-estimate'&&item.v===1&&itemId(item.id)&&validDraft(item);}
+
+// Supplied arithmetic is familiarity, never a new recall response. Use the
+// operands actually displayed, not coincidences among the recorded trip values.
+export function courierDisplayPairs(work,view={}){
+ if(!validDraft(work))return [];
+ const pairs=new Map(),add=(rate,x)=>{if(Number.isInteger(rate)&&rate>=1&&rate<=12&&Number.isInteger(x)&&x>=1&&x<=12){const p=[rate,x].sort((a,b)=>a-b);pairs.set(p.join('x'),p);}};
+ const row=work.source.rows.find(r=>r.id===work.recordId);
+ add(work.line.rate,row.x);if(work.pin)add(work.pin.rate,row.x);
+ if(view.rise)add(work.line.rate,Math.min(2,work.source.axes.x.max));
+ if(view.page===1&&view.gaps)for(const r of work.source.rows)add(work.line.rate,r.x);
+ if(view.page===2&&work.result?.x===work.requestX){add(work.result.line.rate,work.result.x);if(work.result.pin)add(work.result.pin.rate,work.result.x);}
+ if(view.page===0&&view.worked){const example=workedEstimate(work.source),step=view.step;if(example&&Number.isInteger(step)&&step>=0&&step<example.steps.length)add(example.line.rate,example.rows[Math.min(step,example.rows.length-1)].x);}
+ return [...pairs.values()];
+}
+
+// The app supplies its existing normalize=false exposure callback. The report
+// gate sees only a disposable candidate; capture changed roots before invoking it.
+export function recordCourierDisplay(state,pairs,options={}){
+ const refused={ok:false,changed:false};
+ if(!object(state)||!dense(pairs,144)||!pairs.every(p=>dense(p,2)&&p.length===2&&p.every(n=>Number.isInteger(n)&&n>=1&&n<=12)))return refused;
+ if(!pairs.length)return {ok:true,changed:false};
+ if(typeof options.exposeFacts!=='function'||typeof options.canExport!=='function')return refused;
+ try{
+  const candidate=clone(state);options.exposeFacts(pairs,candidate);
+  const updates=[];
+  for(const key of ['broad','garden','exposures','baseline','postOffice']){
+   if(own(state,key)&&!own(candidate,key))return refused;
+   if(own(candidate,key)&&(!own(state,key)||JSON.stringify(candidate[key])!==JSON.stringify(state[key])))updates.push([key,clone(candidate[key])]);
+  }
+  if(!updates.length)return {ok:true,changed:false};
+  if(!recoveryFitsProgressLimits(candidate)||options.canExport(candidate)!==true)return refused;
+  for(const [key,value]of updates)state[key]=value;
+  return {ok:true,changed:true};
+ }catch{return refused;}
+}
 function owner(state){
  if(!object(state))return {status:'unsupported',raw:null};
  if(!own(state,'courierEstimates'))return {status:'absent',raw:[]};

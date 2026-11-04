@@ -110,3 +110,9 @@ No current result: “No estimate used yet.” Kept work read-only: “This kept
 ## Adult Notes only
 
 “Courier Estimates is supported model exploration with invented records. Kept models retain their own source, line, optional comparison, used estimate and disclosed help. They are not independent-response checks, a measure of reading or mathematics level, real predictions or a complete statistics course. Spoken and paper explanations are not recorded. Unkept changes are session-only.”
+
+## Given-number context repair
+
+View refusal: “That view could not open. Your previous drawing and choices are still here. Open Grown-up notes to download your work.” Initial refusal: “That view could not open. Your earlier work is unchanged. Choose another activity or open Grown-up notes to download your work.” The chooser stays open.
+
+Adult Notes amendment: “Given integer arithmetic qualifies matching waiting number work as previously shown. It adds no recall answer, attempt or outcome.”
