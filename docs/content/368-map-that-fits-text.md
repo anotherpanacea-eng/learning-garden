@@ -22,7 +22,7 @@ Source origin: “Invented distances for this workbench.” Notice: “These are
 
 **Choose a scale for this sheet.**
 
-“The path stays 600 meters long. Your drawing has {width} centimeters available.”
+“The path stays {ground} meters long. Your drawing has {width} centimeters available.”
 
 **1 centimeter represents {key} meters.**
 
@@ -34,14 +34,14 @@ Exact fit: “The whole route fits, filling the usable width.”
 
 Too long: “The route needs {length} centimeters; only {width} are available. The arrow means the drawing continues beyond the paper.”
 
-Picture labels: **Mill**, **Bend**, **Usable paper width · {width} centimeters**, **Visible part only** when clipped. Caption: “This picture represents paper centimeters. Measuring your screen will not measure this paper.”
+Picture labels: **Mill**, **Bend**, **Usable paper width · {width} centimeters**, **Visible part only · continues to {to}** when clipped. The destination label never marks the clip edge. Caption: “This picture represents paper centimeters. Measuring your screen will not measure this paper.”
 
-“Try a different key. The 600-meter route stays the same.”
+“Try a different key. The {ground}-meter route stays the same.”
 
 **Show a different example**
 
 1. “Different example: a 400-meter path on 25 centimeters of usable paper.”
-2. “Use 1 centimeter for 20 meters.400 ÷20 =20 centimeters of drawing.”
+2. “Use 1 centimeter for 20 meters. 400 ÷ 20 = 20 centimeters of drawing.”
 3. “The 20-centimeter drawing fits, leaving 5 centimeters. Another key could leave a different amount of room.”
 
 **Previous step** · **Next step** · **Close example**
@@ -52,19 +52,19 @@ Picture labels: **Mill**, **Bend**, **Usable paper width · {width} centimeters*
 
 “Both strips keep the same ground widths. Compare their drawings.”
 
-**Overview detail ·1 centimeter for {key} meters**
+**Overview detail · 1 centimeter for {key} meters**
 
-**Narrows ·24 meters across** · **Ford ·15 meters across**
+**{label} · {widthM} meters across** (new labels Narrows24 / Ford15).
 
 “{label}: {widthM} ÷ {key} = {widthCm} centimeters on paper.”
 
 **Add a closer inset** · **Hide inset**
 
-**Inset ·1 centimeter for 5 meters**
+**Inset · 1 centimeter for {insetKey} meters**
 
-“Each window represents 6 centimeters of paper across. The same ground feature takes more paper at the closer scale.”
+“Each window represents {window} centimeters of paper across.” Closer key: “The same ground feature takes more paper at the closer scale.” Equal keys: “These two views use the same scale.” Farther inset key: “This inset uses a farther scale. The same feature takes less paper.” Historical equal/farther button: **Add another inset**.
 
-For 20: “At this key, the inset draws each width four times as long as the overview.” Other keys: “Compare the two keys and the drawn lengths.”
+“At these keys, the inset draws each width {key ÷ insetKey} times as long as the overview.” Render an exact decimal or fraction; the new key20/inset5 case is4. This wording follows the actual ratio, not the selected key alone.
 
 “Which drawing gives you more room for a label? Say what you would use each one for.”
 
@@ -76,7 +76,7 @@ Too-long historical feature: “This strip needs {length} centimeters. Only {win
 
 **A visitor measures a different path.**
 
-“On your chosen key, the Library-to-Mill path measures {length} centimeters on paper.”
+“On a map drawn at your chosen key, the {from}-to-{to} path measures {length} centimeters on paper.”
 
 “How far does that stand for? Say it or write on paper.”
 
@@ -84,9 +84,9 @@ Too-long historical feature: “This strip needs {length} centimeters. Only {win
 
 “Each centimeter represents {key} meters. {length} × {key} = {ground} meters.”
 
-“The drawing got smaller or larger when you changed the key. The ground distance stayed the same.”
+“If you change the key, the drawing gets smaller or larger. The ground distance stays the same.” Unit check: **The answer is in meters on the ground, not centimeters on paper.**
 
-**Try this on the smaller sheet** · **Try the wider sheet**
+**Try this on the smaller sheet** · **Try the wider sheet**. Derived title: **Same route · {width} centimeter sheet**. Purpose: **Fit the {from}-to-{to} path on {width} centimeters of usable paper.** When resized, original provenance is labelled **Earlier source wording**.
 
 “The route is unchanged. Will your chosen key still work with the new paper width?”
 
@@ -107,6 +107,8 @@ Storage failure: “This map is in this session, but it could not be saved on th
 Keep refusal: “This map could not be kept. Nothing was changed. Your choices are still here. Open Grown-up notes to download your work.”
 
 Capacity: “Your earlier maps are safe. This notebook cannot keep another map here. You can keep exploring in this visit and download your notes.”
+
+Unavailable teaching: “Earlier teaching is retained in your notes. This map is still open.”
 
 Unsupported owner: “Earlier maps stay in your notes. This format cannot accept another kept map here.”
 
