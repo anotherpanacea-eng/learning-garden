@@ -114,7 +114,7 @@ Unsupported owner: “Earlier maps stay in your notes. This format cannot accept
 
 Unavailable item: “Earlier map retained · its original stays in your notes.”
 
-Exposure refusal: “This drawing could not open without changing earlier number notes. Nothing was changed. Open Grown-up notes to download your work, or return to the map table.” In-visit: “The inset could not open. Your current drawing and choices are still here. Open Grown-up notes to download your work.”
+Exposure refusal: “This drawing could not open without changing earlier number notes. Nothing was changed. Open Grown-up notes to download your work, or return to the map table.” In-visit: “That view could not open. Your current drawing and choices are still here. Open Grown-up notes to download your work.”
 
 **Fit the route** · **See the detail** · **Read it back** · **Previous** · **Next** · **Hear this turn** · **Source and distances** · **Grown-up notes** · **Same route, different scale** · **Cartographer's Table** · **Math explorations**
 
