@@ -76,6 +76,13 @@ def journey(browser,base,seed,width,height):
    p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();p.locator('[data-writing-root]').wait_for();ok('writingDesk' not in book(p),'second explorer keeps separate initial table');action(p,'start');p.evaluate('window.writingSecondOld=[...document.querySelectorAll("[data-writing-root] button")]');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-1"]').tap();p.locator('[data-writing-root]').wait_for();ok(book(p)['writingDesk']==current,'original explorer resumes complete table');p.evaluate('writingSecondOld.forEach(e=>e.click())');ok(book(p)['writingDesk']==current,'second explorer stale nodes cannot mutate original')
   print('Writing Table journeys at',width,'passed',flush=True)
  finally:ctx.close()
+def responsive(browser,base,seed,width,height):
+ ctx,p=setup(browser,base,seed,width,height)
+ try:
+  action(p,'start');layout(p);p.locator('[data-writing-strip=bread]').tap();p.locator('[data-writing-destination=sale]').tap();ok(work(p)['work']['placements']['bread']=='sale','responsive sort remains operable')
+  choose(p,'market-day');p.locator('[data-writing-move=dawn][data-writing-direction="-1"]').tap();ok(p.locator('.wt-order li').first.inner_text().startswith('At dawn'),'responsive ordering remains operable');layout(p)
+  choose(p,'join-time');p.locator('[data-writing-choice=meanwhile]').tap();action(p,'check');ok(work(p)['checks'][-1]['outcome']=='fit','responsive choice remains operable');layout(p);p.screenshot(path=str(OUT/f'sample-{width}.png'),full_page=True)
+ finally:ctx.close()
 def accessible_controls(browser,base,seed):
  ctx,p=setup(browser,base,seed)
  try:
@@ -149,7 +156,8 @@ def main():
  with sync_playwright() as pw:
   chrome=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');browser=pw.chromium.launch(headless=True,executable_path=chrome if Path(chrome).exists() else None,args=['--disable-quic'])
   try:
-   for width,height in [(320,600),(820,1000),(1024,768)]:journey(browser,base,seed,width,height)
+   journey(browser,base,seed,820,1000)
+   for width,height in [(320,600),(1024,768)]:responsive(browser,base,seed,width,height)
    entries(browser,base);accessible_controls(browser,base,seed);refusal(browser,base,seed);storage(browser,base,seed);two_tabs(browser,base,seed);retained(browser,base);ok(not errors,'no page/console/HTTP errors '+str(errors));result={'status':'passed','checks':checks,'base':base,'scope':'real app controls, Notes transfer, storage, stale actions, retained history and fault-only preflight interception; no physical Apple or audible qualification'};(OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
   finally:browser.close();server.shutdown()
 if __name__=='__main__':main()

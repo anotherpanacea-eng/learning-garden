@@ -381,8 +381,9 @@ export const copyScopes = [
   {path:'dist/which-hat-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/which-hat-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/willow-double-ui.mjs',adultBlocks:[],quotations:[{quote:'These are supplied parcel and rule checks.',reason:'For grown-ups panel on the trace page.'},{quote:'These are supplied rule checks, not a score.',reason:'For grown-ups panel on the rule page.'},{quote:'Willow Double Check: supplied connector practice',reason:'Grown-up notes panel summary naming the kind of practice recorded.'}]},
+  {path:'dist/writing-research-content.mjs',adultBlocks:[{start:' grownup:',end:' returnInvitation:',reason:'Only displayed in the folded grown-up interpretation.'}],quotations:[]},
   {path:'dist/writing-table-content.mjs',adultBlocks:[],quotations:[{quote:'All checks are practice with supplied material',reason:'grownup copy shown in the grown-up notes panel.'}]},
-  {path:'dist/writing-table-ui.mjs',adultBlocks:[],quotations:[{quote:'Writing Table: supplied drafts and kept versions',reason:'Grown-up notes panel summary naming what is kept.'}]},
+  {path:'dist/writing-table-ui.mjs',adultBlocks:[],quotations:[{quote:'Sources beside these supplied notes',reason:'Reviewed370 attribution label distinguishes provided material from sources independently found or read.'},{quote:'Writing Table: supplied drafts and kept versions',reason:'Grown-up notes panel summary naming what is kept.'}]},
   // LG-2b batch 5 (fleet #1405).
   {path:'dist/borrowed-sorter-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/borrowed-sorter-core.mjs',adultBlocks:[],quotations:[{quote:"['own','supplied'].includes(part.mode)",reason:'Stored advice-mode code, never shown to the child.'},{quote:"entry.mode === 'supplied' ? 'supplied' : 'own'",reason:'Stored advice-mode code, never shown to the child.'},{quote:"mode === 'supplied' && option",reason:'Stored advice-mode code, never shown to the child.'}]},

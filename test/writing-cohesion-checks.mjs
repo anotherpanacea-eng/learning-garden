@@ -17,7 +17,7 @@ export function fullCohesionNotebook(){
   if(src.kind==='sort')r.work={placements:copy(src.key)};
   else if(src.kind==='order')r.work={order:copy(src.key)};
   else if(src.kind==='break')r.work={boundary:src.key};
-  else if(src.kind==='tap')r.work={taps:copy(cohesionKeys[t.id])};
+  else if(src.kind==='tap')r.work={taps:copy(cohesionKeys[t.id]??src.key)};
   else r.work={choice:src.key};
   c.checkWritingTask(s,{canExport:()=>true});c.keepWritingTask(s,{canExport:()=>true});
   for(let i=1;i<30;i++)c.checkWritingTask(s,{canExport:()=>true});
@@ -32,7 +32,7 @@ export function cohesionFixtures(){
 }
 export function runCohesionChecks(){
  let n=0;const ok=(v,m)=>{assert.ok(v,m);n++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;};
- eq(writingTasks.length,24,'whole open shelf has twenty-four tasks');eq(writingTasks.filter(x=>x.bench==='holding').map(x=>x.id),cohesionIds,'independent nine-task order');
+ eq(writingTasks.filter(x=>x.bench!=='research').length,24,'original open shelf retains twenty-four tasks');eq(writingTasks.filter(x=>x.bench==='holding').map(x=>x.id),cohesionIds,'independent nine-task order');
  for(const id of cohesionIds){
   const src=taskSource(id);ok(c.validWritingSource(src),id+' source readable');eq(src.key,cohesionKeys[id],'authored key');eq(src.teach.length,5,'card, example title and three manual steps');
   const selectable=src.kind==='tap'?src.parts.filter(x=>x.tap===true):src.choices;
@@ -68,7 +68,7 @@ export function runCohesionChecks(){
  ok(c.validWritingRecord(r),'historical tap source has its own words/key');c.setWritingMaterial(old,{tap:'earlier-it'},options);c.checkWritingTask(old,options);eq(c.writingView(old).record.checks.at(-1).outcome,'fit','historical tap uses own key, not current catalogue');
  r.source.choices=[{id:'unused',text:'An opaque earlier choice'}];r.source.parts[1].tap='opaque';ok(c.validWritingRecord(r),'unused historical choices and untappable metadata do not close tap work');
  const raw=copy(old);writingPage(old,'synthetic');writingNotes(old);eq(old,raw,'readers do not normalize historical source');
- const s=fullCohesionNotebook();eq(Object.keys(s.writingDesk.records).length,24);ok(Object.values(s.writingDesk.records).every(r=>r.checks.length===24&&r.count===30&&r.firstKept&&r.latestKept),'all twenty-four maximum retained histories and versions');
+ const s=fullCohesionNotebook();eq(Object.keys(s.writingDesk.records).length,writingTasks.length);ok(Object.values(s.writingDesk.records).every(r=>r.checks.length===24&&r.count===30&&r.firstKept&&r.latestKept),'all twenty-four maximum retained histories and versions');
  const report=cohesionReport(s),restored=prepareProgressImport(JSON.stringify(report,null,2));ok(restored.ok,'maximum authored notebook fits actual Notes import');eq(restored.state.writingDesk,s.writingDesk,'full sources and checks transfer exact');
  const next=cohesionSeed();for(const task of writingTasks){ok(c.nextWritingTask(next,options).ok);eq(next.writingDesk.currentId,task.id);}c.nextWritingTask(next,options);eq(next.writingDesk.currentId,'bakery','whole twenty-four task order wraps');
  console.log(`Writing cohesion: ${n} checks passed (nine tasks, tap subsets, old-source compatibility, snapshots and actual full-history transfer).`);return n;

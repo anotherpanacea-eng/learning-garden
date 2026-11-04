@@ -21,6 +21,31 @@ export function validWritingSource(s){
  if(s.kind==='order')return ids(s.key)&&s.key.length===p.length&&s.key.every(k=>p.includes(k));
  return typeof s.key==='string'&&(s.kind==='break'?p.slice(1):c).includes(s.key);
 }
+// Optional source-local references are derived without changing the frozen raw source.
+const dense=(xs,min,max)=>Array.isArray(xs)&&xs.length>=min&&xs.length<=max&&Array.from({length:xs.length},(_,i)=>own(xs,i)).every(Boolean);
+const display=(x,max)=>typeof x==='string'&&x.trim().length>0&&Array.from(x).length<=max;
+const researchPacket=s=>object(s)&&own(s,'research')&&object(s.research)&&own(s.research,'v')&&s.research.v===1&&Array.isArray(s.research.cards)&&s.research.cards.length>=1&&s.research.cards.length<=6?s.research:null;
+export function writingResearchCards(s){
+ const r=researchPacket(s);if(!r)return [];
+ return r.cards.filter(c=>object(c)&&['id','title','origin','notice','lines'].every(k=>own(c,k))&&id(c.id)&&r.cards.filter(x=>object(x)&&x.id===c.id).length===1&&display(c.title,160)&&display(c.origin,1000)&&display(c.notice,1000)&&dense(c.lines,1,8)&&c.lines.every(l=>object(l)&&own(l,'id')&&own(l,'text')&&id(l.id)&&display(l.text,4000))&&new Set(c.lines.map(l=>l.id)).size===c.lines.length);
+}
+export function writingReferences(s,noteId){
+ const none={status:'none',refs:[]},unavailable={status:'unavailable',refs:[]};
+ if(!object(s)||!own(s,'research'))return none;
+ const r=researchPacket(s);if(!r)return unavailable;
+ if(!own(r,'links'))return none;
+ if(!object(r.links)||Object.keys(r.links).length>44)return unavailable;
+ if(!own(r.links,noteId))return none;
+ const links=r.links[noteId];if(!dense(links,1,3))return unavailable;
+ const cards=writingResearchCards(s),refs=[];
+ for(const link of links){
+  if(!object(link)||!own(link,'cardId')||!own(link,'lineIds')||!id(link.cardId)||!dense(link.lineIds,1,8)||!link.lineIds.every(id)||new Set(link.lineIds).size!==link.lineIds.length)return unavailable;
+  const card=cards.find(c=>c.id===link.cardId);
+  if(!card||link.lineIds.some(k=>!card.lines.some(l=>l.id===k))||refs.some(x=>x.card.id===card.id))return unavailable;
+  refs.push({card,lineIds:[...link.lineIds],lineNumbers:link.lineIds.map(k=>card.lines.findIndex(l=>l.id===k)+1)});
+ }
+ return {status:'ready',refs};
+}
 export function validWritingWork(s,w){
  if(!validWritingSource(s)||!object(w))return false;
  const p=s.parts.map(x=>x.id);
@@ -106,11 +131,11 @@ export function writingResult(s,w){
  }else if(s.kind==='sort'){
   const pending=s.parts.filter(x=>!placed(w,x.id));
   outcome=pending.length?'incomplete':s.parts.every(x=>placed(w,x.id)===s.key[x.id])?'fit':'different';
-  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&selected!==s.key[part.id])feedback.push(`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
+  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&selected!==s.key[part.id])feedback.push(s.bench==='research'?`${part.text} ${own(s.feedback.different,part.id)?s.feedback.different[part.id]:`Under ${s.choices.find(x=>x.id===selected).text}; compare with ${s.choices.find(x=>x.id===s.key[part.id]).text}.`}`:`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
  }else if(s.kind==='order')outcome=same(w.order,s.key)?'fit':'different';
  else{const picked=s.kind==='break'?w.boundary:w.choice;outcome=picked===null?'incomplete':picked===s.key?'fit':'different';if(outcome==='different'&&own(s.feedback.different,picked))feedback.push(s.feedback.different[picked]);}
  if(outcome==='fit')feedback.unshift(s.feedback.fit);
- else if(outcome==='incomplete')feedback.unshift(s.kind==='tap'?'No words are tapped yet. You can keep this version or tap some words.':'Some parts are still waiting. You can keep this version or keep arranging.');
+ else if(outcome==='incomplete')feedback.unshift(s.kind==='tap'?(s.bench==='research'?'No source cards are selected yet. You can keep this version or select some cards.':'No words are tapped yet. You can keep this version or tap some words.'):'Some parts are still waiting. You can keep this version or keep arranging.');
  else{feedback.push(s.feedback.general);if(s.feedback.general!=='Your draft is still here. You can change it.')feedback.push('Your draft is still here. You can change it.');}
  if(s.bench==='holding'&&feedback.at(-1)!=='Your draft is still here. You can change it.')feedback.push('Your draft is still here. You can change it.');
  return {outcome,feedback};
@@ -136,14 +161,15 @@ export function sameWritingWork(a,b){
 // No grading in previews: this always describes the exact supplied arrangement, including mistakes.
 export function writingPreview(s,w){
  if(!validWritingWork(s,w))return [];
+ if(s.kind==='tap'&&s.bench==='research')return [{heading:'Selected source cards',text:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.text).join('\n\n')||'No source cards are selected yet.',noteIds:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.id)}];
  if(s.kind==='tap')return [{heading:'Text to read',text:s.parts.map(p=>p.text).join('')},{heading:'Tapped words',text:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.text).join(', ')||'No words tapped yet.'}];
- if(s.kind==='choice'&&own(s,'preview'))return [{heading:'Text to read',text:w.choice===null?s.parts.map(p=>p.text).join(' '):s.preview[w.choice]}];
- if(s.kind==='sort')return [...s.choices.map(h=>({heading:h.text,text:s.parts.filter(p=>placed(w,p.id)===h.id).map(p=>p.text).join(' ')})),{heading:'Waiting strips',text:s.parts.filter(p=>!placed(w,p.id)).map(p=>p.text).join(' ')}];
+ if(s.kind==='choice'&&own(s,'preview'))return [{heading:'Text to read',text:w.choice===null?s.parts.map(p=>p.text).join(' '):s.preview[w.choice],...(s.bench==='research'?{noteIds:w.choice===null?[]:[w.choice]}:{})}];
+ if(s.kind==='sort'){const block=(heading,ps)=>({heading,text:ps.map(p=>p.text).join(' '),...(s.bench==='research'?{noteIds:ps.map(p=>p.id)}:{})});return [...s.choices.map(h=>block(h.text,s.parts.filter(p=>placed(w,p.id)===h.id))),block(s.bench==='research'?'Waiting notes':'Waiting strips',s.parts.filter(p=>!placed(w,p.id)))];}
  if(s.kind==='order')return w.order.map(k=>({heading:'',text:s.parts.find(p=>p.id===k).text}));
  if(s.kind==='break'){
   const at=w.boundary===null?-1:s.parts.findIndex(p=>p.id===w.boundary);
   return (at<0?[s.parts]:[s.parts.slice(0,at),s.parts.slice(at)]).map(ps=>({heading:'',text:ps.map(p=>p.text).join(' ')}));
  }
  if(s.after){const opener=s.choices.find(c=>c.id===w.choice)?.text;return [{heading:'First paragraph',text:s.parts.map(p=>p.text).join(' ')},{heading:'Next paragraph',text:opener?`${opener} ${s.after}`:`[Choose an opener] ${s.after}`}];}
- return [{heading:'Text to read',text:s.parts.map(p=>p.text).join(' ')},{heading:'Your choice',text:s.choices.find(c=>c.id===w.choice)?.text||'No choice yet'}];
+ return [{heading:'Text to read',text:s.parts.map(p=>p.text).join(' ')},{heading:'Your choice',text:s.choices.find(c=>c.id===w.choice)?.text||'No choice yet',...(s.bench==='research'?{noteIds:w.choice===null?[]:[w.choice]}:{})}];
 }
