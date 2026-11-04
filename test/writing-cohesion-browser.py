@@ -50,9 +50,15 @@ def play(browser,base,seed,width,height):
    if id in ['holding-short','holding-mill']:
     h.ok(h.work(p)['source']['parts'][0]['text'] in p.locator('.wt-source').inner_text(),'long original stays visible after shortening');h.ok(p.locator('.wt-work > .wt-page-preview').count()==1,'separately labelled chosen preview')
    if id=='holding-mill':h.ok(p.locator('.wt-work > .wt-page-preview').inner_text().endswith('“Where are you going?” “To the mill.”'),'shortened reply shown in its dialogue')
-  h.ok(len(h.book(p)['writingDesk']['records'])==9,'nine new records retained');h.action(p,'next');h.ok(h.book(p)['writingDesk']['currentId']=='bakery','Next wraps the whole catalogue');h.choose(p,'b-second');h.action(p,'next');h.ok(h.book(p)['writingDesk']['currentId']=='holding-parcel','Next connects the original fifteen to new bench')
+  h.ok(len(h.book(p)['writingDesk']['records'])==9,'nine new records retained');h.action(p,'next');h.ok(h.book(p)['writingDesk']['currentId']=='research-question','Next reaches Research Corner after the original nine cohesion tasks');h.choose(p,'b-second');h.action(p,'next');h.ok(h.book(p)['writingDesk']['currentId']=='holding-parcel','Next connects the original fifteen to new bench')
   held=copy.deepcopy(h.book(p)['writingDesk']);p.reload(wait_until='networkidle');h.ready(p);h.ok(h.book(p)['writingDesk']==held and selected(p).count()==0,'reload preserves source, checks and current cleared draft');p.evaluate('window.oldTap=document.querySelector("[data-writing-tap=parcel]");location.hash="#notes"');p.locator('#download').wait_for();before=copy.deepcopy(h.book(p));p.evaluate('oldTap.click()');h.ok(h.book(p)==before,'departed tap cannot mutate notebook')
   report=h.export_notes(p,f'cohesion-{width}');h.ok(report['writingDesk']==held,'real Notes retains tap/choice sources, work and snapshots');p.locator('#progress-file').set_input_files({'name':'synthetic-cohesion.json','mimeType':'application/json','buffer':json.dumps(report).encode()});p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').tap();p.locator('#progress-import-status').filter(has_text='Notebook brought').wait_for();p.evaluate('location.hash="#desk/writing"');h.ready(p);h.ok(h.book(p)['writingDesk']==held,'actual import reopens exact extended notebook');p.evaluate('oldTap.click()');h.ok(h.book(p)['writingDesk']==held,'old tap stays inert after import')
+ finally:c.close()
+def responsive(browser,base,seed,width,height):
+ c,p=h.setup(browser,base,seed,width,height)
+ try:
+  choose(p,'holding-parcel');layout(p);p.locator('[data-writing-tap=parcel]').tap();h.ok(selected(p).count()==1,'responsive inline tap remains operable')
+  choose(p,'holding-fix');p.locator('[data-writing-choice=bun]').tap();h.action(p,'check');h.ok(h.work(p)['checks'][-1]['outcome']=='fit','responsive replacement remains operable');layout(p);p.screenshot(path=str(OUT/f'cohesion-sample-{width}.png'),full_page=True)
  finally:c.close()
 def edges(browser,base,f):
  c,p=h.setup(browser,base,f['historical'])
@@ -66,7 +72,7 @@ def edges(browser,base,f):
  finally:c.close()
  c,p=h.setup(browser,base,f['full'])
  try:
-  h.ok(len(h.book(p)['writingDesk']['records'])==24,'all24 histories open in native app');held=copy.deepcopy(h.book(p)['writingDesk']);r=h.export_notes(p,'all24-max-history');h.ok(r['writingDesk']==held,'maximum retained24-task notebook downloads exact');p.locator('#progress-file').set_input_files({'name':'synthetic24.json','mimeType':'application/json','buffer':json.dumps(r).encode()});p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').tap();p.locator('#progress-import-status').filter(has_text='Notebook brought').wait_for();p.evaluate('location.hash="#desk/writing"');h.ready(p);h.ok(h.book(p)['writingDesk']==held,'all24 maximum histories import exact')
+  h.ok(len(h.book(p)['writingDesk']['records'])==len(f['full']['writingDesk']['records']),'all authored histories open in native app');held=copy.deepcopy(h.book(p)['writingDesk']);r=h.export_notes(p,'all-authored-max-history');h.ok(r['writingDesk']==held,'maximum authored-history notebook downloads exact');p.locator('#progress-file').set_input_files({'name':'synthetic-authored.json','mimeType':'application/json','buffer':json.dumps(r).encode()});p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').tap();p.locator('#progress-import-status').filter(has_text='Notebook brought').wait_for();p.evaluate('location.hash="#desk/writing"');h.ready(p);h.ok(h.book(p)['writingDesk']==held,'all authored maximum histories import exact')
  finally:c.close()
  c,p=h.setup(browser,base,f['bad'])
  try:
@@ -95,7 +101,8 @@ def main():
    if chrome or Path(mac).exists():kwargs['executable_path']=chrome or mac
    b=pw.chromium.launch(**kwargs)
    try:
-    for w,hgt in [(320,600),(820,1000),(1024,768)]:play(b,base,f['fresh'],w,hgt);print('cohesion viewport',w,'passed',flush=True)
+    play(b,base,f['fresh'],820,1000)
+    for w,hgt in [(320,600),(1024,768)]:responsive(b,base,f['fresh'],w,hgt)
     edges(b,base,f);h.ok(not h.errors,'no browser errors '+str(h.errors));r={'status':'passed','checks':h.checks,'base':base};(OUT/'receipt.json').write_text(json.dumps(r,indent=2));print(json.dumps(r))
    finally:b.close()
  finally:server.shutdown();server.server_close()

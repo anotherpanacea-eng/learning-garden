@@ -1,6 +1,6 @@
 # 370 · Research Corner: source labels travel with the notes
 
-Status: bounded LG-G1 proposal, 2026-11-04. Independent specification, literacy/biology/content review precede code. [Finite material](../content/370-research-corner-text.md). A selected realization of277's Research Corner, not its other benches or270's cross-source synthesis.
+Status: bounded LG-G1 build, 2026-11-04. Independent specification and finite literacy/biology/content review cleared before code; [review](../reviews/370-research-corner-spec.md). Implementation review and release acceptance remain. [Finite material](../content/370-research-corner-text.md). A selected realization of277's Research Corner, not its other benches or270's cross-source synthesis.
 
 ## New action and existing work
 
