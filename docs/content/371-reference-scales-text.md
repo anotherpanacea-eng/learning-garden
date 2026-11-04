@@ -12,6 +12,8 @@ Original text and invented model numbers. Numeric sentences below show the commi
 
 **Agreement between repeats**
 
+“In this model, each list repeats the same item on its one scale in the same conditions. Both scales read that shared item.”
+
 “Compare the dots and their ranges. Which list agrees more closely? What else would you need to know?”
 
 **Reveal the model reference**
@@ -28,9 +30,9 @@ Original text and invented model numbers. Numeric sentences below show the commi
 
 **Try an adjustment** · **Adjustment: {signed} g** · **1 g less** · **1 g more** · **Reset adjustment**
 
-**Original reading** · **Adjusted preview** · **Model reference** · **Mean minus model reference** · **Range**
+**Original readings** · **Adjusted preview · separate row** · **Model reference** · **Mean minus model reference** · **Range**
 
-“At −12 g, the preview is 99, 100, 101 g. Its mean is 100 g; its range is still 2 g. Moving the whole list changes its center without tightening it.”
+“At −12 g, the preview is 99, 100, 101 g. Its mean is 100 g; its range is still 2 g. Adding the same number to every reading moves the center by that number and leaves the range unchanged.”
 
 “This changes a numerical preview, not a scale or the original readings. You can keep any adjustment.”
 
@@ -38,9 +40,9 @@ Original text and invented model numbers. Numeric sentences below show the commi
 
 **Open the check example**
 
-“Now use the same adjustment with these separately invented readings. The new model reference is 50 g.”
+“These new lists repeat a different shared item, again in the same model conditions. Now use the same adjustment with these separately invented readings. The new model reference is 50 g.”
 
-“Blue:61, 62, 63 g. Copper:44, 50, 56 g. Blue's mean is 62 g and range 2 g; Copper's mean is 50 g and range 12 g.”
+“Blue: 61, 62, 63 g. Copper: 44, 50, 56 g. Blue's mean is 62 g and range 2 g; Copper's mean is 50 g and range 12 g.”
 
 “At −12 g, Blue's preview becomes 49, 50, 51 g: mean 50 g, range 2 g. Compare both the center and the individual readings.”
 
@@ -56,7 +58,7 @@ Original text and invented model numbers. Numeric sentences below show the commi
 
 1. “Different example: the model reference is 20 g. Readings 25, 26, 27 g have mean 26 g and range 2 g.”
 2. “The mean is (25 + 26 + 27) ÷ 3 = 26 g. It is 6 g above the model reference.”
-3. “Add −6 g to every reading:19, 20, 21 g. The mean becomes 20 g; the range stays 2 g.”
+3. “Add −6 g to every reading: 19, 20, 21 g. The mean becomes 20 g; the range stays 2 g.”
 4. “A different list, 14, 20, 26 g, also has mean 20 g but range 12 g. A matching mean does not make every reading exact.”
 
 These steps reveal one part per explicit action. Their current multiplication exposure lists are empty because the displayed mean formulas have factors above12; historical source-owned teaching retains its own reviewed pairs. The normal Show how panel uses actual source data and qualifies any relevant small integer multiplication facts before display.
@@ -65,7 +67,7 @@ These steps reveal one part per explicit action. Their current multiplication ex
 
 Source title: **Two model scales at the bakery**. Origin: “Original invented scale readings for this learning activity.” Notice: “Not physical measurements or a calibration certificate.” Purpose: “Compare agreement between readings and closeness to a model reference, while keeping original records.” Groups: **Blue scale**, **Copper scale**. IDs: `blue1..blue3`, `copper1..copper3`; check uses `check-blue1..check-blue3`, `check-copper1..check-copper3`.
 
-Metadata copy.intro is the arrival sentence above. copy.limit is “This changes a numerical preview, not a scale or the original readings. Two model examples do not show that an adjustment works for every mass or for a real scale.” copy.reflection is “Tell someone what the original lists and your preview show. What would you still want to check?” Teaching metadata is the four parts above, with factsByStep `[[],[],[],[]]`.
+Metadata copy.intro is the arrival sentence plus the same-item/same-conditions sentence above. The check opening likewise states its new shared item/same conditions before revealing readings. copy.limit is “This changes a numerical preview, not a scale or the original readings. Two model examples do not show that an adjustment works for every mass or for a real scale.” copy.reflection is “Tell someone what the original lists and your preview show. What would you still want to check?” Teaching metadata is the four parts above, with factsByStep `[[],[],[],[]]`.
 
 Store the five term/meaning pairs below in referenceScales.glossary. **Words for this comparison** is a manual reference disclosure using those frozen words in drafts and kept work, with no reading-evidence write.
 
@@ -73,7 +75,7 @@ No multiple-choice answer key or graded claim. Original mean/range/median highli
 
 Measuring Desk invitation: “Can close-together readings still miss a reference? Try invented scale records at the Compare Shelf. Your real-jug notebook stays here.” Link text: **Compare model scale readings**. This opens the normal chooser; Reference Scales is an explicit next choice.
 
-Later Measuring Desk return, only when a readable kept scale comparison exists: “Bring your kept comparison, {saved source title}, back to mind. Reopen it if you like. Explain to your adult what matching entered jug readings show—and what they cannot establish about the real amount.” Link: **Reopen the Compare Shelf**. Show the frozen title of the last readable scale entry in append order; no copied result, tracking flag, physical calibration task or automatic judgment.
+Later Measuring Desk return, only when a readable kept scale comparison exists: “Bring your kept comparison, Comparison {item.index+1} · {saved source title}, back to mind. Reopen it if you like. Explain to your adult what matching entered jug readings show—and what they cannot establish about the real amount.” Link: **Reopen the Compare Shelf**. Show the last readable scale entry’s full chooser label, using its stable raw-array index plus1 and frozen title (including earlier unreadable siblings in the index); no copied result, tracking flag, physical calibration task or automatic judgment.
 
 ## Optional glossary and grown-up interpretation
 
