@@ -242,7 +242,7 @@ function touchActiveRooms(route){
  // Never recreate data another tab removed or switched off: write only beside a notebook that is still saved.
  if(explorerStore.persist&&!explorerStore.conflict&&JSON.stringify(next)!==JSON.stringify(stored)){try{if(localStorage.getItem(`number-garden-v1:${p.id}`)!==null)localStorage.setItem(key,JSON.stringify(next));}catch{}}
 }
-keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'?'':location.hash);
+keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'||main.querySelector('[data-watts-root]')?'':location.hash);
 let needsExplorerInitialization=(location.hash||'').split('/')[0]==='#journeys'||['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer)||!!actThreeRoute(location.hash)||!!actFourRoute(location.hash);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
@@ -553,7 +553,7 @@ function render(){
   if(hash==='#mill/energy'){
     routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):millEnergyPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMillEnergy(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#mill/energy',render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{stopMillEnergyMotion();stopLiftMotion();pauseLiftFilm();pauseWaterFilm();stopTones('mill-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('mill-film');stopSpeech();}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMillEnergy(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#mill/energy',save:()=>{save();return {enabled:persist,ok:storageOK};},canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{stopMillEnergyMotion();stopLiftMotion();pauseLiftFilm();pauseWaterFilm();stopTones('mill-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('mill-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#workshop/lift'){
     routeHeader('#workshop');

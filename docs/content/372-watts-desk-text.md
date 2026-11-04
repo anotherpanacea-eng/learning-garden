@@ -43,3 +43,9 @@ Saving off/quota: This sheet is kept in this open page, but {saving is off / dev
 Adult note: This is a constant delivered-power model, not appliance input power, real motor performance, efficiency or energy created from nothing. Supplied numerical results and manual examples are support, never independent assessment. The earlier Mill's chips have no joule value or time scale. The Lift Yard does not measure time. These surfaces cannot be combined to calculate a real power rating.
 
 A pull limit in newtons is not a power rating in watts. For the same energy job in this ideal model, twice the delivered power means half the time; equal power increases do not mean equal time decreases. Elapsed time and transferred energy determine average power; a steady rate is a separate assumption.
+
+## Compact on-screen opening
+
+Compare model winches for the town’s upper storeroom. Invented winches. Constant delivered power; losses ignored.
+
+Do faster transfers always mean more energy? Try equal times, then different durations. Compare rates and total energy. The full frozen origin and model boundary follow the controls; glossary and the separate example remain optional.
