@@ -1,0 +1,22 @@
+# Keep text stable across Windows, macOS and generated-output checks.
+* text=auto eol=lf
+
+# Media must pass through Git without newline conversion.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.avif binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.m4a binary
+*.flac binary
+*.mp4 binary
+*.webm binary
+*.mov binary
+*.blend binary
+*.woff binary
+*.woff2 binary
