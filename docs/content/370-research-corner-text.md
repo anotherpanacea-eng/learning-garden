@@ -26,6 +26,8 @@ Unavailable reference: “A source reference is not available here. Your origina
 
 Unavailable card: “This source card cannot open here. Your original draft is retained in Notes.”
 
+Later return: **Return to your source-linked notes** · “A reader needs to trace a statement. Reopen your kept notes, inspect an original source label, then use or revise the notes for that reader.” Show the saved record’s own title and reader, not assumed current pond wording.
+
 Organising invitation: “Tell someone, or write on paper, two short paragraphs. Keep the general guide separate from the one story pond's record. Say where each fact came from and what needs a further source.”
 
 ## Three frozen cards
@@ -62,15 +64,15 @@ Notice: “An untested claim, not a measured comparison.”
 
 ## Six open tasks
 
-Each task has the shared reference packet above. Task-specific references below are comparison aids, including for wrong choices; they do not certify that a selected answer is true. Choice order is as printed and freezes with the source. Existing Check/Keep/Next draft/help text remains.
+Each task has the shared reference packet above. Task-specific references below are comparison aids, including for wrong choices; they do not certify that a selected answer is true. Choice order is as printed and freezes with the source. Existing Check/Keep/Next draft/help controls remain. Research-only empty source selection and sort-mismatch feedback use the wording below; other task outputs are unchanged. The six tasks have independent supplied reader jobs; a selected question does not carry into the other tasks.
 
 ### research-question · A question these cards can answer · choice
 
 Reader: “For visitors reading a short pond page.” Prompt: “Which question can the displayed cards answer?”
 
 - `spawn-date` **When was spawn noted in this story pond?** Fitting; compare pond/p1.
-- `count` **How many frogs live in all of Willowbank now?** No card counts that population.
-- `croak` **Why do adult frogs croak at night?** No displayed line explains croaking.
+- `count` **How many frogs live in all of Willowbank now?** No card counts that population. No authored line locator; compare all three cards.
+- `croak` **Why do adult frogs croak at night?** No displayed line explains croaking. No authored line locator; compare all three cards.
 
 Fit: “The pond note records spawn on March 3. That answers when spawn was noted in this story pond, not when every frog spawns.”
 
@@ -79,6 +81,8 @@ Hint: “Look for what each card actually records.” Example: “A cafe card sa
 ### research-sources · Sources for a pond page · tap cards
 
 Reader: “For a page about spawn timing and how tadpoles change.” Prompt: “Tap every card that helps this page.”
+
+Empty selection: “No source cards are selected yet. You can keep this version or select some cards.”
 
 Card order: guide, pond, pip. All are tappable; fitting set guide+pond. The factual guide describes general timing/development; the fictional record supplies that one pond's recorded dates. Pip's preference doesn't answer either report heading.
 
