@@ -86,7 +86,7 @@ Too-long historical feature: “This strip needs {length} centimeters. Only {win
 
 “If you change the key, the drawing gets smaller or larger. The ground distance stays the same.” Unit check: **The answer is in meters on the ground, not centimeters on paper.**
 
-**Try this on the smaller sheet** · **Try the wider sheet**. Derived title: **Same route · {width} centimeter sheet**. Purpose: **Fit the {from}-to-{to} path on {width} centimeters of usable paper.** When resized, original provenance is labelled **Earlier source wording**.
+**Try this on the smaller sheet** · **Try the wider sheet**. Derived title: **Same route · {width} centimeter sheet**. Purpose: **Fit the {from}-to-{to} path on {width} centimeters of usable paper.** When resized, original provenance is labelled **Earlier source wording**, followed by the separately labelled **Current sheet purpose**.
 
 “The route is unchanged. Will your chosen key still work with the new paper width?”
 
