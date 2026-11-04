@@ -1,0 +1,43 @@
+# Watts Desk372 · finite text
+
+## Opening and model
+
+The town's upper storeroom needs a new winch. The miller asks, “Which transfers energy faster? Is that always the one that transfers more altogether?” Try the number model before making a case.
+
+These are invented constant-power winches, not instructions for real machines. Energy comes from an outside source and goes into the raised load's gravitational store. We ignore losses. The source loses exactly the energy the load gains. We are counting energy delivered to the load, not a real motor's electricity use. No load weight or height is being calculated here.
+
+A watt tells how many joules transfer each second. A joule measures an amount of energy. Power is a rate; energy is an amount. Our model seconds move when you press a button. They do not measure how fast you tap.
+
+## Manual example
+
+1. Reed transfers20 joules each second. Over5 seconds it transfers100 joules:20 watts ×5 seconds =100 joules.
+2. Willow transfers40 joules each second. Over the same5 seconds it transfers200 joules. Equal time; different energy amounts.
+3. Let Reed run10 seconds instead. It now transfers200 joules too. Equal energy can take different times.
+
+## Turn questions
+
+Choose durations: Start with equal times. What changes? Then try the slower rate for longer. Can it transfer more energy altogether? Try Reed60 seconds and Oak10 seconds if you want a starting pair.
+
+Same energy job: Every winch must deliver {target} joules in this model. Which reaches that amount sooner? Add model seconds to each winch, or open the finished comparison. Reaching the target is a picture of the model job, not a test result.
+
+Show how: Energy = power × time. {watts} watts × {seconds} seconds = {energy} joules. For a positive duration: {energy} joules ÷ {seconds} seconds = {watts} watts. At zero: No energy has transferred yet. We cannot find a rate by dividing zero energy by zero seconds; this machine's rate was supplied by the model.
+
+Finishing comparison: Same target, different finishing times. With constant delivered power and no losses, higher power finishes this same energy job sooner. It does not need more delivered energy for this job. Different running times can reverse which machine transfers more altogether.
+
+## Glossary
+
+- Energy: An amount that can be stored and transferred. We count it in joules here.
+- Power: How quickly energy is transferred. One watt means one joule each second.
+- Ideal model: A deliberately simplified number model. Here we leave out losses, start-up changes and real machine limits.
+
+## Return and recovery
+
+Keep this sheet. Kept sheets are copies of this model and these settings. They do not say whether you solved a problem by yourself. Leaving without Keep loses this visit's draft. Try this sheet again makes a new draft; the earlier sheet stays unchanged.
+
+Later in the Lift Yard: Bring **Sheet {rawIndex+1} · {frozen title}** from the Watts Desk. Compare the energy in that sheet with the work in this ramp model. What else would you need to work out the ramp's power? This yard has no elapsed-time measurement, so it cannot give a power answer.
+
+No-space/unreadable refusal: This draft has not been kept. Your earlier kept sheets remain in Grown-up notes. This draft lasts only while you stay at this table; compare or explain it together before leaving.
+
+Saving off/quota: This sheet is kept for this open visit, but {saving is off / device storage did not save}. Download Grown-up notes before closing if you want to bring it back.
+
+Adult note: This is a constant delivered-power model, not appliance input power, real motor performance, efficiency or energy created from nothing. Supplied numerical results and manual examples are support, never independent assessment. The earlier Mill's chips have no joule value or time scale. The Lift Yard does not measure time. These surfaces cannot be combined to calculate a real power rating.
