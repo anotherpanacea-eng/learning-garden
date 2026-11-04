@@ -487,6 +487,27 @@ export const copyScopes = [
   {path:'dist/linear-pathway-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/map-reading-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/market-change-content.mjs',adultBlocks:[],quotations:[]},
+  // LG-2b batch 9 (fleet #1515).
+  {path:'dist/act-four-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/lantern-codes-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/manifest-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/parcel-labels-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/preparation-clock-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/returning-ledger-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/returning-orders-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rhythm-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/rhythm-song-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/ribbon-rows-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/riddles-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/river-market-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/seed-exchange-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/seed-pairs-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/seed-pile-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/shutters-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/slope-equation-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/sorting-desk-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/storm-accounts-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/tenths-content.mjs',adultBlocks:[],quotations:[]},
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
