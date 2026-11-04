@@ -16,13 +16,13 @@ A watt tells how many joules transfer each second. A joule measures an amount of
 
 ## Turn questions
 
-Choose durations: Start with equal times. What changes? Then try the slower rate for longer. Can it transfer more energy altogether? Try Reed60 seconds and Oak10 seconds if you want a starting pair.
+Choose durations: Start with equal times. What changes? Then choose different durations. Compare both the rates and the total energy. Does the larger rate always give the larger total?
 
 Same energy job: Every winch must deliver {target} joules in this model. Which reaches that amount sooner? Add model seconds to each winch, or open the finished comparison. Reaching the target is a picture of the model job, not a test result.
 
 Show how: Energy = power × time. {watts} watts × {seconds} seconds = {energy} joules. For a positive duration: {energy} joules ÷ {seconds} seconds = {watts} watts. At zero: No energy has transferred yet. We cannot find a rate by dividing zero energy by zero seconds; this machine's rate was supplied by the model.
 
-Finishing comparison: Same target, different finishing times. With constant delivered power and no losses, higher power finishes this same energy job sooner. It does not need more delivered energy for this job. Different running times can reverse which machine transfers more altogether.
+Finishing comparison: Same target: compare the finishing times. With constant delivered power and no losses, higher power finishes this same energy job sooner. It does not need more delivered energy for this job. When power rates differ, different running times can reverse which machine transfers more altogether.
 
 ## Glossary
 
@@ -38,6 +38,6 @@ Later in the Lift Yard: Bring **Sheet {rawIndex+1} · {frozen title}** from the 
 
 No-space/unreadable refusal: This draft has not been kept. Your earlier kept sheets remain in Grown-up notes. This draft lasts only while you stay at this table; compare or explain it together before leaving.
 
-Saving off/quota: This sheet is kept for this open visit, but {saving is off / device storage did not save}. Download Grown-up notes before closing if you want to bring it back.
+Saving off/quota: This sheet is kept in this open page, but {saving is off / device storage did not save}. Download Grown-up notes before closing if you want to bring it back.
 
 Adult note: This is a constant delivered-power model, not appliance input power, real motor performance, efficiency or energy created from nothing. Supplied numerical results and manual examples are support, never independent assessment. The earlier Mill's chips have no joule value or time scale. The Lift Yard does not measure time. These surfaces cannot be combined to calculate a real power rating.
