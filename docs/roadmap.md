@@ -475,3 +475,9 @@ PR255 save safety is merged and live:695matching hosted assets and49two-tab nati
 ### Courier Estimates367 · modelling scattered records
 
 [367](specs/367-courier-estimates.md) is the next LG-G1 teaching bridge from the exact signed-rate lessons and Paired Points. Its [independently reviewed contract](reviews/367-courier-estimates-spec.md) adds a new action: move a candidate line against unchanged invented observations, inspect discrepancies and use a cautious estimate inside/beyond the observed range. A pinned earlier line and another record set give purposeful returns. The bounded runtime is in [PR422](https://github.com/anotherpanacea-eng/learning-garden/pull/422); the owning PR records independent implementation review and release acceptance. It supplies no chapter credit, causal conclusion, mastery or complete statistics-course coverage.
+
+### Given arithmetic keeps its context
+
+A reproduced Courier Estimates support mismatch is repaired: shown integer model arithmetic qualifies matching waiting Bramble/Broad/Garden work through the existing helpers, without adding recall responses or rewriting kept models. Qualification precedes the next view, and refusal preserves the notebook and local drawing. The owning repair PR records independent review and release acceptance.
+
+Next ready LG-G1 commission: [A Map That Fits368](https://github.com/anotherpanacea-eng/learning-garden/blob/2d25404657caca3af214ac3dfc8b7b9b670e699c/docs/specs/368-map-that-fits.md), with six-lens and independent mathematics/specification clearance. Its same-route paper-width/inset loop remains unbuilt while the verified support correction lands.

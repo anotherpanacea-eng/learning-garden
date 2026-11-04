@@ -1,4 +1,4 @@
-import {estimateSource,workedEstimate,estimateValue,estimateRange,estimatesView,keepEstimate} from './courier-estimates-core.mjs';
+import {estimateSource,workedEstimate,estimateValue,estimateRange,estimatesView,keepEstimate,courierDisplayPairs,recordCourierDisplay} from './courier-estimates-core.mjs';
 import {hearButton} from './play-media.mjs';
 
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -10,7 +10,7 @@ const pages=['Records','Try a line','Use an estimate'];
 const freshUI=()=>({page:0,table:false,worked:false,step:0,gaps:false,rise:false});
 let visit=null,generation=0;
 export function resetEstimateVisit(){visit=null;generation++;}
-function session(state,owner){if(!visit||visit.state!==state||visit.owner!==owner)visit={state,owner,slots:new Map(),keptUI:new Map(),current:null,notice:''};return visit;}
+function session(state,owner){if(!visit||visit.state!==state||visit.owner!==owner)visit={state,owner,slots:new Map(),keptUI:new Map(),current:null,notice:'',qualified:new Set()};return visit;}
 function current(s,state){
  if(!s.current)return null;
  if(s.current.kind==='draft'){const slot=s.slots.get(s.current.key);return slot?{...slot,mutable:true,key:s.current.key}:null;}
@@ -60,8 +60,11 @@ export function estimatePage(state,owner){
 export function bindEstimates(state,ctx){
  const root=document.querySelector('[data-ce-root]');if(!root)return;const owner=ctx.explorerId(),s=session(state,owner),binding=++generation;
  const live=node=>root.isConnected&&node?.isConnected&&generation===binding&&visit===s&&location.hash==='#learn/math/estimates'&&ctx.notebook()===state&&ctx.explorerId()===owner&&ctx.isActive?.()!==false;
- const redraw=(focus='#ce-turn-heading')=>{ctx.stopSpeech?.();ctx.stopSound?.();ctx.render();let target=document.querySelector(focus);if(target?.disabled&&target.dataset.ceChange)target=document.querySelector(target.dataset.ceChange==='start'?'[data-ce-start-value]':'[data-ce-rate]');if(!target||target.disabled)target=document.querySelector('#ce-turn-heading');target?.focus({preventScroll:true});};
- const each=(selector,fn)=>root.querySelectorAll(selector).forEach(node=>node.addEventListener('click',()=>{if(live(node)&&!node.disabled)fn(node);}));
+ let rollback=null;
+ const snapshot=()=>{const slots=new Map(s.slots),keptUI=new Map(s.keptUI);if(s.current?.kind==='draft'&&slots.has(s.current.key))slots.set(s.current.key,clone(slots.get(s.current.key)));if(s.current?.kind==='kept'&&keptUI.has(s.current.id))keptUI.set(s.current.id,clone(keptUI.get(s.current.id)));return {current:s.current,slots,keptUI};};
+ const perform=(node,fn)=>{if(!live(node)||node.disabled)return;rollback=snapshot();try{fn(node);}finally{rollback=null;}};
+ const redraw=(focus='#ce-turn-heading')=>{ctx.stopSpeech?.();ctx.stopSound?.();const c=current(s,state),pairs=c?courierDisplayPairs(c.work,c.ui).filter(p=>!s.qualified.has(p.join('x'))):[],ready=recordCourierDisplay(state,pairs,{canExport:ctx.canExport,exposeFacts:ctx.exposeFacts});if(!ready.ok){if(rollback){s.current=rollback.current;s.slots=rollback.slots;s.keptUI=rollback.keptUI;}s.notice=rollback?.current?'That view could not open. Your previous drawing and choices are still here. Open Grown-up notes to download your work.':'That view could not open. Your earlier work is unchanged. Choose another activity or open Grown-up notes to download your work.';ctx.render();document.querySelector('#ce-status')?.focus();return;}for(const pair of pairs)s.qualified.add(pair.join('x'));if(ready.changed)ctx.save?.();ctx.render();let target=document.querySelector(focus);if(target?.disabled&&target.dataset.ceChange)target=document.querySelector(target.dataset.ceChange==='start'?'[data-ce-start-value]':'[data-ce-rate]');if(!target||target.disabled)target=document.querySelector('#ce-turn-heading');target?.focus({preventScroll:true});};
+ const each=(selector,fn)=>root.querySelectorAll(selector).forEach(node=>node.addEventListener('click',()=>perform(node,fn)));
  const active=()=>current(s,state),editable=fn=>{const c=active();if(c?.mutable){s.notice='';fn(c);}};
  each('[data-ce-start]',b=>{const key=`chooser:${b.dataset.ceStart}`;if(!s.slots.has(key)){const source=estimateSource(b.dataset.ceStart);if(!source)return;s.slots.set(key,{work:newWork(source),ui:freshUI()});}s.current={kind:'draft',key};s.notice='';redraw();});
  each('[data-ce-resume]',b=>{if(s.slots.has(b.dataset.ceResume)){s.current={kind:'draft',key:b.dataset.ceResume};s.notice='';redraw();}});
@@ -70,7 +73,7 @@ export function bindEstimates(state,ctx){
  each('[data-ce-choose]',()=>{s.current=null;s.notice='';redraw('#ce-chooser');});
  each('[data-ce-page]',b=>{const c=active(),page=Number(b.dataset.cePage);if(c&&Number.isInteger(page)&&page>=0&&page<=2){c.ui.page=page;redraw();}});
  function changeLine(key,value,focus){editable(c=>{const choices=key==='start'?c.work.source.starts:c.work.source.rates;if(!choices.includes(value))return;c.work.line[key]=value;redraw(focus);});}
- for(const [selector,key] of [['[data-ce-start-value]','start'],['[data-ce-rate]','rate']])root.querySelector(selector)?.addEventListener('change',e=>{if(live(e.target))changeLine(key,Number(e.target.value),selector);});
+ for(const [selector,key] of [['[data-ce-start-value]','start'],['[data-ce-rate]','rate']])root.querySelector(selector)?.addEventListener('change',e=>perform(e.target,()=>changeLine(key,Number(e.target.value),selector)));
  each('[data-ce-change]',b=>{const c=active();if(!c?.mutable)return;const key=b.dataset.ceChange,choices=[...(key==='start'?c.work.source.starts:c.work.source.rates)].sort((a,b)=>a-b),index=choices.indexOf(c.work.line[key])+Number(b.dataset.ceDelta);if(index>=0&&index<choices.length)changeLine(key,choices[index],`[data-ce-change="${key}"][data-ce-delta="${b.dataset.ceDelta}"]`);});
  each('[data-ce-record]',b=>editable(c=>{if(c.work.source.rows.some(r=>r.id===b.dataset.ceRecord)){c.work.recordId=b.dataset.ceRecord;redraw(`[data-ce-record="${CSS.escape(b.dataset.ceRecord)}"]`);}}));
  each('[data-ce-pin]',()=>editable(c=>{c.work.pin=clone(c.work.line);redraw('[data-ce-pin]');}));
@@ -88,6 +91,6 @@ export function bindEstimates(state,ctx){
 // Adult Notes only: no child route calls this function.
 export function estimateNotes(state){
  if(!Object.hasOwn(state,'courierEstimates'))return '';
- try{const v=estimatesView(state);return `<details class="ce-notes"><summary>Courier Estimates · kept models</summary><p>Supported model exploration with invented records. Kept models retain their own source, line, optional comparison, used estimate and disclosed help. These are not independent-response checks, a level or real predictions. Spoken and paper explanations are not recorded. Unkept changes are session-only.</p>${v.items.filter(i=>i.readable).map(i=>`<p>${esc(i.raw.source.title)} · ${esc(i.id)} · ${esc(equation(i.raw.line))}. Example opened: ${i.raw.support.worked}; all gaps: ${i.raw.support.gaps}; rate guide: ${i.raw.support.rise}; narration requested: ${i.raw.support.narration}.</p>`).join('')}<details><summary>Original estimate notes, including retained unreadable values</summary><pre>${esc(JSON.stringify(state.courierEstimates,null,2))}</pre></details></details>`;}catch{return '<p>Earlier estimate notes retained unchanged in the download.</p>';}
+ try{const v=estimatesView(state);return `<details class="ce-notes"><summary>Courier Estimates · kept models</summary><p>Supported model exploration with invented records. Kept models retain their own source, line, optional comparison, used estimate and disclosed help. These are not independent-response checks, a level or real predictions. Spoken and paper explanations are not recorded. Unkept changes are session-only. Given integer arithmetic qualifies matching waiting number work as previously shown; it adds no recall answer, attempt or outcome.</p>${v.items.filter(i=>i.readable).map(i=>`<p>${esc(i.raw.source.title)} · ${esc(i.id)} · ${esc(equation(i.raw.line))}. Example opened: ${i.raw.support.worked}; all gaps: ${i.raw.support.gaps}; rate guide: ${i.raw.support.rise}; narration requested: ${i.raw.support.narration}.</p>`).join('')}<details><summary>Original estimate notes, including retained unreadable values</summary><pre>${esc(JSON.stringify(state.courierEstimates,null,2))}</pre></details></details>`;}catch{return '<p>Earlier estimate notes retained unchanged in the download.</p>';}
 }
 // End adult estimate notes.
