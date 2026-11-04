@@ -135,7 +135,7 @@ export function bindWriting(state,ctx={}){
   if(!live(el))return;const action=el.dataset.writingAction;
   if(action==='choose'){v.panels=[...new Set([...v.panels,'shelf'])];const shelf=root.querySelector('[data-writing-panel=shelf]');if(shelf)shelf.open=true;return redraw('Choose another draft. Your earlier work stays in Notes.',"[data-writing-bench='paragraphs']");}
   if(action==='close-source'){
-   const selector=v.inspector?.returnSelector;v.inspector=null;redraw();const next=document.querySelector('[data-writing-root]');const target=(selector&&next?.querySelector(selector))||next?.querySelector('#writing-task-title');target?.focus();target?.scrollIntoView({block:'nearest'});return;
+   const selector=v.inspector?.returnSelector;v.inspector=null;redraw();const next=document.querySelector('[data-writing-root]');const origin=selector&&next?.querySelector(selector);const target=origin&&!origin.closest('details:not([open]),[hidden]')?origin:next?.querySelector('#writing-task-title');target?.focus();target?.scrollIntoView({block:'nearest'});return;
   }
   if(action==='research'||action==='research-return')return act(el,()=>core.openWritingTask(state,'research-organise',options),'Your source-linked notes are here.','#writing-task-title');
   if(action==='clear-taps')return act(el,()=>core.setWritingMaterial(state,{clear:true},options),'Your taps are cleared.',"[data-writing-tap]");
