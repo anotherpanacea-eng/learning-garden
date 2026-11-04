@@ -122,4 +122,5 @@ export const rooms=Object.freeze([
  {route:'#workshop/mending',title:'The Mending Shed',places:['#workshop'],added:'2026-10-31'},
  {route:'#desk/rods',title:'The Rod Tray',places:['#numbers','#desk'],added:'2026-11-01'},
  {route:'#words/letterpress',title:'The Letterpress Drawer',places:['#words'],added:'2026-11-01'},
+ {route:'#living/layers',title:'Living Layers',places:['#living'],added:'2026-11-04'},
 ].map(r=>Object.freeze({...r,places:Object.freeze(r.places)})));
