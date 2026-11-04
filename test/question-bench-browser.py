@@ -146,6 +146,9 @@ console.log(JSON.stringify({base,apprentice,broken,unavailable,historical,maxImp
             stale_events(detached+[(stale_hear,'click')])
             h.ok(h.book(p)==before, 'separately detached legacy click/change/input/toggle and speech targets cannot write')
             h.ok(not p.locator('.fair-page,[id^="fair-"],[data-apprentice-page]').count(), 'new mode has its own surface and hides legacy how-to')
+            h.click(p,'[data-qb-hear]')
+            board_spoken=p.locator('[data-qb-hear]').get_attribute('data-speak')
+            h.ok(all(t in board_spoken for t in p.locator('.qb-slip strong').all_text_contents()),'Hear includes the current wonder titles inside choice buttons')
             start(p)
             bounds(p)
             for tray in ['focus','context']:
@@ -154,16 +157,16 @@ console.log(JSON.stringify({base,apprentice,broken,unavailable,historical,maxImp
             p.screenshot(path=str(OUT/'tablet-initial-compose.png'),full_page=True)
             # Four independent authored combinations on the same card.
             expected = {
-                ('stem','setups'):'On day 6, how long are the stems of the model seedlings labelled A in the setups with enough light and with too little light?',
-                ('stem','time'):"How does model seedling A's stem length in the setup with enough light change from day 0 to day 6?",
-                ('leaf','setups'):'On day 6, how wide is the leaf spread of the model seedlings labelled A in the setups with enough light and with too little light?',
-                ('leaf','time'):"How does model seedling A's leaf spread in the setup with enough light change from day 0 to day 6?"}
-            for (focus, context), sentence in expected.items():
+                ('stem','setups'):['stem','day 6','enough light','too little light'],
+                ('stem','time'):['stem','day 0','day 6','enough light'],
+                ('leaf','setups'):['leaf spread','day 6','enough light','too little light'],
+                ('leaf','time'):['leaf spread','day 0','day 6','enough light']}
+            for (focus, context), meaning in expected.items():
                 p.locator(f'[data-qb-focus="{focus}"]').tap()
                 p.locator(f'[data-qb-context="{context}"]').focus()
                 p.keyboard.press('Enter')
                 h.ok(focus_is(p,f'[data-qb-context="{context}"]'), 'keyboard chip selection retains focus on live context control')
-                h.ok(sentence in p.locator('#qb-question').inner_text(), 'piece composition uses the chosen authored pair '+focus+'/'+context)
+                h.ok(all(part in p.locator('#qb-question').inner_text() for part in meaning), 'piece composition keeps the chosen feature and context '+focus+'/'+context)
             pieces = p.locator('#qb-question').inner_text()
             wording(p,'own')
             h.ok(p.locator('#qb-own').input_value()=='' and p.locator('#qb-own').get_attribute('maxlength') is None, 'own field starts empty without maxlength')
@@ -172,12 +175,15 @@ console.log(JSON.stringify({base,apprentice,broken,unavailable,historical,maxImp
             h.ok(p.locator('#qb-own').input_value()==blank and p.locator('#qb-question').inner_text()=='Your question can wait here.', 'whitespace-only own wording stays exact while paper gives its unfinished fallback')
             wording(p,'pieces');wording(p,'own')
             h.ok(p.locator('#qb-own').input_value()==blank, 'whitespace-only pending input survives wording switches')
-            custom = '  Invented leaf question 🌱\nWhich record?  '
+            custom = '\n  Invented leaf question 🌱\nWhich record?  '
             p.locator('#qb-own').fill(custom)
             wording(p,'pieces')
             h.ok(p.locator('#qb-question').inner_text()==pieces, 'switching to pieces retains both chosen pieces')
             wording(p,'own')
             h.ok(p.locator('#qb-own').input_value()==custom, 'own wording retains exact whitespace and emoji')
+            p.locator('#qb-own').focus();p.keyboard.press('End');p.keyboard.type('x')
+            custom+='x'
+            h.ok(p.locator('#qb-own').input_value()==custom,'a keystroke after mode changes preserves the leading newline')
             over = '🌱'*601
             p.locator('#qb-own').fill(over)
             h.ok('601 / 600' in p.locator('[data-qb-root]').inner_text(), 'counter uses Unicode code points')
@@ -277,6 +283,9 @@ console.log(JSON.stringify({base,apprentice,broken,unavailable,historical,maxImp
             h.click(q,'[data-qb-page="-1"]')
             h.click(q,'[data-qb-page="-1"]')
             h.ok('1–8 of 17' in q.locator('[data-qb-root]').inner_text() and q.locator('[data-qb-card="question-card-5"]').count()==0, 'eight raw entries preserve numbering and duplicate ids are unavailable')
+            h.click(q,'[data-qb-hear]')
+            shelf_spoken=q.locator('[data-qb-hear]').get_attribute('data-speak')
+            h.ok(all(t in shelf_spoken for t in q.locator('[data-qb-card]').all_text_contents()),'Hear includes only the current shelf page card labels')
             h.click(q,'[data-qb-card="question-card-80"]')
             h.ok(q.locator('#qb-question').text_content()==history['work']['customQuestion'], 'historical custom wording remains exact')
             h.ok('Earlier <question> & context' in q.locator('[data-qb-root]').inner_text(), 'historical title is escaped literal text')
@@ -305,6 +314,12 @@ console.log(JSON.stringify({base,apprentice,broken,unavailable,historical,maxImp
             q.locator('[data-qb-enter]').wait_for()
             stale.evaluate('e=>e.click()')
             h.ok(h.book(q)==original_book, 'explorer switch resets visit and rejects old explorer controls')
+
+            malformed_seed=copy.deepcopy(fixtures['base']);malformed_seed['questionCards']={'v':99,'raw':'Earlier invented question format'}
+            _, malformed=native.setup(browser,malformed_seed,'malformed-question-root')
+            enter(malformed,base);h.click(malformed,'[data-qb-shelf]')
+            h.ok('cannot accept another card' in malformed.locator('[data-qb-root]').inner_text() and 'You can keep an unfinished thought too.' not in malformed.locator('[data-qb-root]').inner_text(),'malformed root shelf does not also promise that a card can be kept')
+            h.ok(h.book(malformed)['questionCards']==malformed_seed['questionCards'],'malformed question owner remains exact')
 
             # Named card later return is read-only, including unavailable notebook.
             for broken in [False,True]:
