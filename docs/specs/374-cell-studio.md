@@ -1,6 +1,6 @@
 # Cell Studio374 · parts, roles and three selected cells
 
-Status: specification and finite biology content independently cleared before implementation; bounded runtime in progress. LG-G1; S2 organisms/cells, with S1 model/evidence limits. This selects a missing middle rather than another inquiry-method reskin. It adds an optional studio to existing `#living/bodies` Body Clues, not a new destination. Original minibeast key and saved bodyClues remain authoritative and accessible.
+Status: specification and finite biology content independently cleared before implementation; bounded runtime built with focused source/native checks, awaiting independent exact-head implementation clearance. LG-G1; S2 organisms/cells, with S1 model/evidence limits. This selects a missing middle rather than another inquiry-method reskin. It adds an optional studio to existing `#living/bodies` Body Clues, not a new destination. Original minibeast key and saved bodyClues remain authoritative and accessible.
 
 ## Story and teaching encounter
 
