@@ -1,5 +1,6 @@
 // Original project-owned fiction and finite copy commissioned by spec 335.
-// No learner data, upstream prose, audio assets or runtime content imports.
+// No learner data, upstream prose or audio assets. The second deck freezes the project-owned third page.
+import {actThreeContent} from './act-three-content.mjs';
 function clone(value) { return JSON.parse(JSON.stringify(value)); }
 function deepFreeze(value) {
   if (value && typeof value === "object") {
@@ -510,3 +511,349 @@ const source = deepFreeze({
 
 export const pipsCopyCopy = source.copy;
 export function makePipsCopySource() { return clone(source); }
+
+// Spec357 finite choices and contexts. The actual page is frozen only by the explicit gated opening.
+const pageThreeMaterial=deepFreeze({
+  "format": 1,
+  "id": "pips-page-three-357",
+  "story": {
+    "hook": "Pip copied the third page in a hurry. Check his spelling against the page, then read for meaning. You can keep a version and change it later.",
+    "short": [
+      "Nuria read the page while Pip copied it. Some spellings got mixed up. The librarian has the page here so you can check."
+    ],
+    "longer": [
+      "The librarian reads Pip's words: \"Their are three Weighs.\" \"Weighs?\" asks the librarian. \"Like scales,\" says Pip. \"Those are for weighing,\" says Dot. \"Here the page means paths. Read the sentence and check its spelling.\""
+    ]
+  },
+  "postcard": {
+    "id": "page-three-copy",
+    "slots": [
+      {
+        "id": "there",
+        "label": "Paths that exist",
+        "original": "Their",
+        "choices": [
+          {
+            "id": "theyre",
+            "text": "They're",
+            "label": "They're"
+          },
+          {
+            "id": "there",
+            "text": "There",
+            "label": "There"
+          },
+          {
+            "id": "their",
+            "text": "Their",
+            "label": "Their (leave it)"
+          }
+        ],
+        "key": "there",
+        "clue": "This sentence says that three paths exist. It does not say the paths belong to someone.",
+        "different": {
+          "theyre": "They're means they are. This sentence already has are.",
+          "their": "Their points to something belonging to them. Here the sentence says that paths exist."
+        },
+        "referenceText": "There are three Ways between Willowbank and Vadoalto: the river path, the bridge road and the high ford.",
+        "context": {
+          "before": "",
+          "after": " are three Ways between Willowbank and Vadoalto: the river path, the bridge road and the high ford."
+        }
+      },
+      {
+        "id": "ways",
+        "label": "Three paths",
+        "original": "Weighs",
+        "choices": [
+          {
+            "id": "ways",
+            "text": "Ways",
+            "label": "Ways"
+          },
+          {
+            "id": "ways-possessive",
+            "text": "Way's",
+            "label": "Way's"
+          },
+          {
+            "id": "weighs",
+            "text": "Weighs",
+            "label": "Weighs (leave it)"
+          }
+        ],
+        "key": "ways",
+        "clue": "The writer is naming more than one path. Weighs is something a person does with scales.",
+        "different": {
+          "ways-possessive": "The apostrophe does not make the plural this sentence needs. The page names three Ways.",
+          "weighs": "Weighs tells about finding a weight. Here the writer is naming paths."
+        },
+        "referenceText": "There are three Ways between Willowbank and Vadoalto: the river path, the bridge road and the high ford.",
+        "context": {
+          "before": "There are three ",
+          "after": " between Willowbank and Vadoalto: the river path, the bridge road and the high ford."
+        }
+      },
+      {
+        "id": "road",
+        "label": "The bridge path",
+        "original": "rode",
+        "choices": [
+          {
+            "id": "rowed",
+            "text": "rowed",
+            "label": "rowed"
+          },
+          {
+            "id": "rode",
+            "text": "rode",
+            "label": "rode (leave it)"
+          },
+          {
+            "id": "road",
+            "text": "road",
+            "label": "road"
+          }
+        ],
+        "key": "road",
+        "clue": "This names the path by the bridge. It does not tell about riding or rowing.",
+        "different": {
+          "rowed": "Rowed can tell about moving a boat with oars. Here the word names a path.",
+          "rode": "Rode tells about earlier riding. Here the word names a path."
+        },
+        "referenceText": "There are three Ways between Willowbank and Vadoalto: the river path, the bridge road and the high ford.",
+        "context": {
+          "before": "There are three Ways between Willowbank and Vadoalto: the river path, the bridge ",
+          "after": " and the high ford."
+        }
+      },
+      {
+        "id": "high",
+        "label": "The ford",
+        "original": "hi",
+        "choices": [
+          {
+            "id": "hie",
+            "text": "hie",
+            "label": "hie"
+          },
+          {
+            "id": "high",
+            "text": "high",
+            "label": "high"
+          },
+          {
+            "id": "hi",
+            "text": "hi",
+            "label": "hi (leave it)"
+          }
+        ],
+        "key": "high",
+        "clue": "This says the ford is up high. Hi is a greeting; hie means to hurry.",
+        "different": {
+          "hie": "Hie means to hurry. This sentence says the ford is up high.",
+          "hi": "Hi is a greeting. This sentence says the ford is up high."
+        },
+        "referenceText": "There are three Ways between Willowbank and Vadoalto: the river path, the bridge road and the high ford.",
+        "context": {
+          "before": "There are three Ways between Willowbank and Vadoalto: the river path, the bridge road and the ",
+          "after": " ford."
+        }
+      },
+      {
+        "id": "need",
+        "label": "Keeping paths open",
+        "original": "knead",
+        "choices": [
+          {
+            "id": "need",
+            "text": "need",
+            "label": "need"
+          },
+          {
+            "id": "kneed",
+            "text": "kneed",
+            "label": "kneed"
+          },
+          {
+            "id": "knead",
+            "text": "knead",
+            "label": "knead (leave it)"
+          }
+        ],
+        "key": "need",
+        "clue": "Someone may require the paths. Nobody is pressing and folding them like dough.",
+        "different": {
+          "kneed": "Kneed can mean struck with a knee. Here someone may require a path.",
+          "knead": "Knead can mean press and fold dough. Here someone may require a path."
+        },
+        "referenceText": "Keep them open, even in winter, even when nobody seems to need them.",
+        "context": {
+          "before": "Keep them open, even in winter, even when nobody seems to ",
+          "after": " them."
+        }
+      },
+      {
+        "id": "which",
+        "label": "The water's ways",
+        "original": "witch",
+        "choices": [
+          {
+            "id": "wich",
+            "text": "wich",
+            "label": "wich"
+          },
+          {
+            "id": "witch",
+            "text": "witch",
+            "label": "witch (leave it)"
+          },
+          {
+            "id": "which",
+            "text": "which",
+            "label": "which"
+          }
+        ],
+        "key": "which",
+        "clue": "This word connects the water's ways to the explanation that follows. It does not name a witch.",
+        "different": {
+          "wich": "Here the connecting word is spelled which, with wh. Compare it with the page.",
+          "witch": "A witch is a person in our story. This word connects the ways to their explanation."
+        },
+        "referenceText": "There are also the water's ways, which are where it goes when there is too much of it.",
+        "context": {
+          "before": "There are also the water's ways, ",
+          "after": " are where it goes when there is too much of it."
+        }
+      },
+      {
+        "id": "where",
+        "label": "Place for the water",
+        "original": "wear",
+        "choices": [
+          {
+            "id": "where",
+            "text": "where",
+            "label": "where"
+          },
+          {
+            "id": "ware",
+            "text": "ware",
+            "label": "ware"
+          },
+          {
+            "id": "wear",
+            "text": "wear",
+            "label": "wear (leave it)"
+          }
+        ],
+        "key": "where",
+        "clue": "This points to the place the water goes. Wear can mean having clothes on.",
+        "different": {
+          "ware": "Ware can name goods. Here the sentence points to a place.",
+          "wear": "Wear can mean having clothes on. Here the sentence points to a place."
+        },
+        "referenceText": "There are also the water's ways, which are where it goes when there is too much of it.",
+        "context": {
+          "before": "There are also the water's ways, which are ",
+          "after": " it goes when there is too much of it."
+        }
+      },
+      {
+        "id": "too",
+        "label": "The amount of water",
+        "original": "to",
+        "choices": [
+          {
+            "id": "two",
+            "text": "two",
+            "label": "two"
+          },
+          {
+            "id": "too",
+            "text": "too",
+            "label": "too"
+          },
+          {
+            "id": "to",
+            "text": "to",
+            "label": "to (leave it)"
+          }
+        ],
+        "key": "too",
+        "clue": "This says there is more water than is wanted. It is not counting two things.",
+        "different": {
+          "two": "Two is a number. This sentence means more water than is wanted.",
+          "to": "Here too much means more than is wanted. The page spells too with two o's."
+        },
+        "referenceText": "There are also the water's ways, which are where it goes when there is too much of it.",
+        "context": {
+          "before": "There are also the water's ways, which are where it goes when there is ",
+          "after": " much of it."
+        }
+      }
+    ]
+  },
+  "cards": [
+    {
+      "id": "copy-source-357",
+      "title": "Check meaning, check the page",
+      "text": "When you copy a page, keep what you can read. Check a spelling in its sentence. Leave an unreadable place marked [smudged] rather than guessing.",
+      "example": "Paths, not scales",
+      "steps": [
+        "Read Pip's phrase: three Weighs.",
+        "The sentence names paths between towns. Weighs tells about finding a weight.",
+        "The page spells the path word Ways. Choose Ways in this version.",
+        "The end of the page still has [smudged]. Keep that mark; we do not know the missing words."
+      ]
+    }
+  ],
+  "copy": {
+    "title": "Copy the third page",
+    "instruction": "Choose a spelling for this sentence. Tell your partner why it fits.",
+    "referenceTitle": "The page to copy",
+    "originalTitle": "Pip's first copy",
+    "currentTitle": "This version",
+    "fullReferenceTitle": "Read the whole third page",
+    "fullCopyTitle": "Read this whole version",
+    "storyTitle": "Pip checks his copy",
+    "caption": "Hollis's third page: {title}",
+    "partial": "Some of this earlier copy cannot be shown. The readable words are still open; the full earlier material stays in your notes.",
+    "contextUnavailable": "This earlier word has no separate sentence view. Read it in the full copy.",
+    "referenceUnavailable": "This earlier page reference cannot open here. Your copy is kept in your notes. The postcard and other jobs are still open.",
+    "hiddenNote": "Earlier page-copy work is retained in the full notes download.",
+    "childUnavailable": "This earlier page copy cannot open here. The postcard and other jobs are still open. The earlier material stays in your notes.",
+    "incomplete": "Choose a form for each marked word, or keep this copy for later.",
+    "different": "Some choices differ from the page. Read the word notes and compare.",
+    "fit": "These choices fit the supplied sentence clues. Read the copy with your partner. You can keep it, or try another.",
+    "partialFit": "These readable choices fit their supplied sentence clues. Some of the earlier copy is unavailable.",
+    "neutral": "Read for the meaning this sentence needs.",
+    "readCopy": "Read this copy with blanks",
+    "readIntro": "Each marked word will be read as blank.",
+    "readSource": "Read this source sentence",
+    "adultLine": "Supplied reference, spelling choices and meaning clues. This does not show independent spelling, reading, copying or pronunciation.",
+    "adultDetails": "The page and each source sentence are provided. The task never judges a spoken explanation. A kept version is not an edit to Hollis's page. Earlier choices and checks stay as they were.",
+    "contextTitle": "This word in the page's sentence",
+    "contextNote": "The other words here come from the page. Your whole version keeps your choices.",
+    "kept": "This version is kept.",
+    "reopened": "This version is open to revise.",
+    "newUseTitle": "A new errand for Pip",
+    "newUsePrompt": "Tell Pip where to put a boat. Then tell him what to wear on a rainy walk. Your partner can write your words on paper. These words stay between you.",
+    "newUseContrast": "Where points to a place. Wear can mean having clothes on. The words may sound alike; the sentence tells you which meaning you need.",
+    "returnPrompt": "Choose another word, revisit a kept version, or return to the postcard.",
+    "adultNote": "Some speakers distinguish which and witch, or where and wear. Model your natural speech; sound alone is not this task's check. The displayed reference supplies spellings. A child can match print without explaining meaning. Ask, listen and discuss; the app does not judge that explanation. The bracketed smudge marks missing writing, not a spelling to fix."
+  },
+  "jobs": []
+});
+export function makePipsPageThreeSource(){
+ const result=clone(pageThreeMaterial);
+ result.reference={title:actThreeContent.page.title,paragraphs:clone(actThreeContent.page.original)};
+ const original=result.reference.paragraphs.join('\n\n'),segments=[];let at=0;
+ for(const slot of result.postcard.slots){
+  const word=slot.choices.find(c=>c.id===slot.key).text,index=original.indexOf(word,at);
+  if(index<0)throw new Error('The authored page-copy slots no longer match the current page.');
+  segments.push({text:original.slice(at,index)},{slotId:slot.id});at=index+word.length;
+ }
+ segments.push({text:original.slice(at)});result.postcard.segments=segments;
+ return result;
+}

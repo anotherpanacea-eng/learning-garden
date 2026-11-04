@@ -5,7 +5,9 @@ import {MAX_IMPORT_BYTES} from '../dist/progress-limits.mjs';
 import {pipsCopyPage,pipsCopyNotes} from '../dist/pips-copy-ui.mjs';
 import {freshState} from '../dist/core.mjs';
 import {initializeExplorerState,prepareProgressImport} from '../dist/progress-transfer.mjs';
-import {makePipsCopySource,pipsCopyCopy} from '../dist/pips-copy-content.mjs';
+import {makePipsCopySource,makePipsPageThreeSource,pipsCopyCopy} from '../dist/pips-copy-content.mjs';
+import {actFourSeed} from './act-four-checks.mjs';
+import {actThreeContent} from '../dist/act-three-content.mjs';
 import * as P from '../dist/pips-copy-core.mjs';
 import * as E from '../dist/endings-shelf-core.mjs';
 import * as S from '../dist/stained-map-core.mjs';
@@ -13,6 +15,7 @@ const clone=structuredClone;
 const report=s=>({title:'After the Storm: observations',note:'Synthetic postcard work.',exportedAt:'2026-10-31T12:00:00.000Z',explorer:{avatar:'sky',color:'gold',symbol:'leaf'},recommendation:{reason:'Synthetic report'},...s});
 export const canExportPips=s=>prepareProgressImport(JSON.stringify(report(s),null,2)).ok;
 const options={canExport:canExportPips},fresh=()=>initializeExplorerState(freshState());
+export const pipsPageThreeSeed=()=>initializeExplorerState(actFourSeed());
 export function runChecks(){
  let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;},yes=r=>ok(r.ok,JSON.stringify(r));
  const refusal=(s,fn)=>{const before=clone(s);eq(fn().ok,false);eq(s,before,'refusal preserves the entire notebook');};
@@ -64,6 +67,61 @@ export function runChecks(){
  const history=start();for(const [id,key] of Object.entries(keys))yes(P.placePipsWord(history,id,id==='effect'?'efect':key,options));yes(P.checkPipsPostcard(history,options));yes(P.keepPipsPostcard(history,options));const oldFirst=clone(history.pipsCopy.postcard.firstKept);yes(P.placePipsWord(history,'effect','effect',options));yes(P.checkPipsPostcard(history,options));yes(P.keepPipsPostcard(history,options));const oldFit=clone(history.pipsCopy.postcard.latestKept);yes(P.placePipsWord(history,'effect','efect',options));yes(P.checkPipsPostcard(history,options));eq(history.pipsCopy.postcard.checks.map(c=>c.outcome),['different','fit','different']);eq(history.pipsCopy.postcard.firstKept,oldFirst);eq(history.pipsCopy.postcard.latestKept,oldFit);
  const revised=start();for(const [id,key] of Object.entries(keys))yes(P.placePipsWord(revised,id,key,options));yes(P.checkPipsPostcard(revised,options));yes(P.placePipsWord(revised,'high','hi',options));ok(!pipsCopyPage(revised).includes(source.copy.fit),'an earlier fit is not presented as feedback for revised work');ok(!pipsCopyNotes(revised).split('<details><summary>Full retained')[0].includes(source.copy.fit),'Notes summary does not pair current work with a different check');
  const html=pipsCopyPage(start());ok(html.includes('high · Not chosen yet'));ok(html.includes('data-pc-panel="original"'));ok(!html.includes('undefined'));
+ // Spec357: one fixed, gated child preserves the legacy host and its retained history.
+ {
+  const o={...options,deck:'page-three'},expected={there:'there',ways:'ways',road:'road',high:'high',need:'need',which:'which',where:'where',too:'too'};
+  const originals={there:'Their',ways:'Weighs',road:'rode',high:'hi',need:'knead',which:'witch',where:'wear',too:'to'};
+  const alternatives={there:['theyre','there','their'],ways:['ways','ways-possessive','weighs'],road:['rowed','rode','road'],high:['hie','high','hi'],need:['need','kneed','knead'],which:['wich','witch','which'],where:['where','ware','wear'],too:['two','too','to']};
+  const newPage=()=>{const v=pipsPageThreeSeed();yes(P.openPipsTable(v,'postcard',o));return v;};
+  const raw=makePipsPageThreeSource(),normalized=P.pipsPostcardSource(raw,'page-three');ok(normalized);eq(raw.id,'pips-page-three-357');eq(raw.reference,{title:actThreeContent.page.title,paragraphs:actThreeContent.page.original});eq(raw.jobs,[]);
+  eq(Object.fromEntries(normalized.parts.map(g=>[g.id,g.original])),originals);eq(Object.fromEntries(normalized.parts.map(g=>[g.id,g.key])),expected);eq(Object.fromEntries(normalized.parts.map(g=>[g.id,g.choices.map(c=>c.id)])),alternatives);eq(normalized.parts.map(g=>g.choices.findIndex(c=>c.id===g.key)),[1,0,2,1,0,2,0,1]);
+  const corrected=normalized.segments.map(x=>Object.hasOwn(x,'text')?x.text:normalized.parts.find(g=>g.id===x.slotId).choices.find(c=>c.id===expected[x.slotId]).text).join('');
+  eq(corrected,actThreeContent.page.original.join('\n\n'),'the corrected supplied copy reconstructs the full current canonical page');ok(corrected.endsWith('Those need keeping too. A town that closes them [smudged] finds out where the water goes instead. H.'));
+  const all={placements:{...expected}};
+  for(const g of normalized.parts){
+   const absent=clone(all);delete absent.placements[g.id];eq(P.pipsPostcardResult(normalized,absent).outcome,'incomplete',g.id+' absent is not a decision');
+   for(const c of g.choices){const w=clone(all);w.placements[g.id]=c.id;const r=P.pipsPostcardResult(normalized,w);eq(r.outcome,c.id===expected[g.id]?'fit':'different',g.id+' '+c.id+' meaning');if(c.id!==expected[g.id])eq(r.feedback[1],g.label+': '+g.different[c.id]);}
+  }
+  const page=newPage();ok(!Object.hasOwn(page.pipsCopy,'postcard'),'opening child first never opens the postcard');eq(Object.keys(page.pipsCopy.pageThree).sort(),['postcard','source','v']);eq(page.pipsCopy.view,'postcard');eq(P.pipsCopyView(page).postcard.status,'missing');eq(P.pipsCopyView(page,'page-three').root,page.pipsCopy);eq(page.story,pipsPageThreeSeed().story,'opening does not change the story');
+  yes(P.keepPipsPostcard(page,o));const firstChild=clone(page.pipsCopy.pageThree.postcard.firstKept);
+  for(const [id,key] of Object.entries(expected))yes(P.placePipsWord(page,id,key,o));yes(P.checkPipsPostcard(page,o));yes(P.keepPipsPostcard(page,o));eq(page.pipsCopy.pageThree.postcard.checks.at(-1).outcome,'fit');const fitKeep=clone(page.pipsCopy.pageThree.postcard.latestKept);
+  yes(P.placePipsWord(page,'high','hi',o));yes(P.checkPipsPostcard(page,o));eq(page.pipsCopy.pageThree.postcard.checks.at(-1).outcome,'different');eq(page.pipsCopy.pageThree.postcard.latestKept,fitKeep,'checking never rewrites latest keep');
+  page.pipsCopy.pageThree.postcard.work.placements.future={opaque:true};page.pipsCopy.pageThree.postcard.work.future=['raw'];yes(P.restorePipsPostcard(page,'first',o));eq(page.pipsCopy.pageThree.postcard.firstKept,firstChild);eq(page.pipsCopy.pageThree.postcard.work.placements.future,{opaque:true});eq(page.pipsCopy.pageThree.postcard.work.future,['raw']);
+  yes(P.openPipsTable(page,'postcard',options));yes(P.placePipsWord(page,'high','hi',options));yes(P.openPipsJob(page,'d1',options));yes(P.keepPipsJob(page,'d1',options));page.pipsCopy.unknown={retained:true};const siblings=clone(page.pipsCopy);yes(P.openPipsTable(page,'postcard',o));yes(P.placePipsWord(page,'there','there',o));const actual=clone(page.pipsCopy);delete actual.pageThree;delete siblings.pageThree;eq(actual,siblings,'child writes preserve every legacy pointer, job and unknown sibling');
+  const absentKeep=newPage();delete absentKeep.pipsCopy.pageThree.postcard.work.placements.there;const absentBefore=clone(absentKeep.pipsCopy.pageThree.postcard.work);yes(P.keepPipsPostcard(absentKeep,o));eq(absentKeep.pipsCopy.pageThree.postcard.work,absentBefore,'keeping never fills missing placements');yes(P.placePipsWord(absentKeep,'there','there',o));yes(P.restorePipsPostcard(absentKeep,'first',o));ok(!Object.hasOwn(absentKeep.pipsCopy.pageThree.postcard.work.placements,'there'),'restoring child keeps a missing placement absent');
+  const afterChild=clone(page.pipsCopy.pageThree);yes(P.answerPipsJob(page,'d1','kneads',options));eq(page.pipsCopy.pageThree,afterChild,'legacy job write preserves child');
+  const imported=prepareProgressImport(JSON.stringify(report(page),null,2));ok(imported.ok);eq(imported.state.pipsCopy,page.pipsCopy,'real pretty Notes roundtrip preserves parent, child and unknowns');
+  // A historical source is authoritative, even if title, key, context and reference differ from this release.
+  const historical=newPage(),hs=historical.pipsCopy.pageThree.source;hs.id='older-copy';hs.reference.title='An earlier title';hs.reference.paragraphs=['A retained earlier page.'];hs.postcard.slots[0].key='their';hs.postcard.slots[0].referenceText='Their paths are open.';hs.postcard.slots[0].context={before:'',after:' paths are open.'};
+  yes(P.placePipsWord(historical,'there','their',o));yes(P.checkPipsPostcard(historical,o));const history=clone(historical.pipsCopy.pageThree.postcard.checks);P.pipsCopyView(historical,'page-three');eq(historical.pipsCopy.pageThree.postcard.checks,history,'historical checks never regraded');eq(P.pipsCopyView(historical,'page-three').postcard.source.reference.title,'An earlier title');eq(P.pipsCopyView(historical,'page-three').postcard.source.parts[0].referenceText,'Their paths are open.');
+  for(const bad of [undefined,null,[],{},'', '   ',{title:'x',paragraphs:[]},{title:'x',paragraphs:['']},{title:'x',paragraphs:['x'.repeat(4001)]},{title:'x'.repeat(4001),paragraphs:['x']}]){
+   const v=newPage();if(bad===undefined)delete v.pipsCopy.pageThree.source.reference;else v.pipsCopy.pageThree.source.reference=bad;
+   eq(P.pipsCopyView(v,'page-three').postcard.status,'unavailable','bad reference pauses only child');refusal(v,()=>P.checkPipsPostcard(v,o));yes(P.openPipsTable(v,'postcard',options));
+  }
+  for(const slot of Object.keys(expected))for(const bad of [undefined,null,7,'','   ','x'.repeat(4001)]){
+   const v=newPage(),g=v.pipsCopy.pageThree.source.postcard.slots.find(g=>g.id===slot);if(bad===undefined)delete g.referenceText;else g.referenceText=bad;
+   v.pipsCopy.pageThree.postcard.work.placements[slot]={opaque:'raw'};const vs=P.pipsCopyView(v,'page-three').postcard.source;eq(vs.parts.length,7,slot+' bad sentence isolates one slot');ok(vs.partial);ok(!vs.parts.some(g=>g.id===slot));
+   for(const g of vs.parts)yes(P.placePipsWord(v,g.id,expected[g.id],o));yes(P.checkPipsPostcard(v,o));eq(v.pipsCopy.pageThree.postcard.checks.at(-1).outcome,'fit');eq(v.pipsCopy.pageThree.postcard.checks.at(-1).feedback,[raw.copy.partialFit,raw.copy.partial]);yes(P.keepPipsPostcard(v,o));yes(P.restorePipsPostcard(v,'latest',o));eq(v.pipsCopy.pageThree.postcard.work.placements[slot],{opaque:'raw'});
+  }
+  const none=newPage();for(const g of none.pipsCopy.pageThree.source.postcard.slots)delete g.referenceText;eq(P.pipsCopyView(none,'page-three').postcard.status,'unavailable');refusal(none,()=>P.keepPipsPostcard(none,o));
+  const duplicate=newPage();duplicate.pipsCopy.pageThree.source.postcard.slots.push(clone(duplicate.pipsCopy.pageThree.source.postcard.slots[0]));eq(P.pipsCopyView(duplicate,'page-three').postcard.source.parts.length,7);ok(P.pipsCopyView(duplicate,'page-three').postcard.source.partial);
+  for(const mode of ['missing','ended-only','scene-only','bad-act','bad-story']){
+   const v=newPage();if(mode==='missing')delete v.story;else if(mode==='ended-only')v.story.seenScenes=v.story.seenScenes.filter(x=>x!=='ways-page-revealed');else if(mode==='scene-only')v.story.acts.III.ended=false;else if(mode==='bad-act')v.story.acts.III='future';else v.story.version=99;
+   const before=clone(v);eq(P.pipsCopyView(v,'page-three').status,'locked');for(const fn of [()=>P.openPipsTable(v,'postcard',o),()=>P.placePipsWord(v,'high','high',o),()=>P.checkPipsPostcard(v,o),()=>P.keepPipsPostcard(v,o),()=>P.restorePipsPostcard(v,'first',o)])refusal(v,fn);eq(v,before,'lost visibility keeps retained material');
+  }
+  for(const bad of [null,[],{},'future',{v:99,raw:true}]){const v=pipsPageThreeSeed();v.pipsCopy={v:1,source:makePipsCopySource(),items:{},pageThree:bad};refusal(v,()=>P.openPipsTable(v,'postcard',o));yes(P.openPipsTable(v,'postcard',options));eq(v.pipsCopy.pageThree,bad);}
+  for(const parent of [null,[],{},'future',{v:99}]){const v=pipsPageThreeSeed();v.pipsCopy=parent;refusal(v,()=>P.openPipsTable(v,'postcard',o));refusal(v,()=>P.openPipsTable(v,'postcard',options));}
+  for(const deck of [null,'page-four','postcard',0]){const v=pipsPageThreeSeed();refusal(v,()=>P.openPipsTable(v,'postcard',{...options,deck}));eq(P.pipsCopyView(v,deck).status,'unsupported');}
+  for(const fn of [v=>P.openPipsTable(v,'practice',o),v=>P.openPipsJob(v,'d1',o),v=>P.answerPipsJob(v,'d1','kneads',o),v=>P.checkPipsJob(v,'d1',o),v=>P.keepPipsJob(v,'d1',o),v=>P.restorePipsJob(v,'d1','first',o),v=>P.usePipsHelp(v,'d1','hint',o)]){const v=newPage();refusal(v,()=>fn(v));}
+  for(const gate of [undefined,()=>false,()=>1,()=>{throw Error('Synthetic refused preflight');}]){
+   const v=pipsPageThreeSeed();refusal(v,()=>P.openPipsTable(v,'postcard',{deck:'page-three',canExport:gate}));
+   const w=newPage();refusal(w,()=>P.placePipsWord(w,'there','there',{deck:'page-three',canExport:gate}));
+  }
+  const hostile=newPage();yes(P.openPipsTable(hostile,'postcard',options));yes(P.openPipsJob(hostile,'d1',options));hostile.pipsCopy.unknown={safe:true};hostile.syntheticSibling={safe:true};const parent=clone(hostile.pipsCopy),outside=clone(hostile.syntheticSibling),story=clone(hostile.story);
+  yes(P.placePipsWord(hostile,'there','there',{deck:'page-three',canExport:c=>{ok(!!c.pipsCopy.postcard&&!!c.pipsCopy.items.d1&&!!c.syntheticSibling,'preflight sees full parent/notebook');const accepted=canExportPips(c);c.pipsCopy={tampered:true};c.syntheticSibling='tampered';c.story='tampered';return accepted;}}));
+  eq(hostile.syntheticSibling,outside);eq(hostile.story,story);const hp=clone(hostile.pipsCopy);delete hp.pageThree;delete parent.pageThree;eq(hp,parent,'whole proposed parent captured before callback mutation');
+  const cap=newPage();let low=0,high=MAX_IMPORT_BYTES;while(low<high){const mid=Math.floor((low+high+1)/2);cap.syntheticPadding='x'.repeat(mid);if(canExportPips(cap))low=mid;else high=mid-1;}cap.syntheticPadding='x'.repeat(low);ok(canExportPips(cap));refusal(cap,()=>P.checkPipsPostcard(cap,o));
+ }
  console.log(`Pip's Copy core: ${n} checks passed.`);return n;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runChecks();

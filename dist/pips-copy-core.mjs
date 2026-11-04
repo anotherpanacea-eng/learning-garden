@@ -1,5 +1,6 @@
 // Spec335: supplied meaning choices, frozen postcards and recoverable versions.
-import {makePipsCopySource} from './pips-copy-content.mjs';
+import {makePipsCopySource,makePipsPageThreeSource} from './pips-copy-content.mjs';
+import {actThreeView} from './act-three-core.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 import {stainedMapRows,stainedMapCards,validStainedJob,validStainedWork,sameStainedWork,stainedJobResult} from './stained-map-core.mjs';
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),own=(x,k)=>Object.hasOwn(x,k),clone=structuredClone;
@@ -13,14 +14,19 @@ export const pipsViews=Object.freeze(['postcard','practice']);
 export const pipsCards=stainedMapCards;
 export const pipsRows=stainedMapRows;
 export const validPipsJob=s=>validStainedJob(s)&&s.kind==='choice'&&object(s.copy)&&text(s.copy.incomplete)&&text(s.copy.partDifferent);
-export function pipsPostcardSource(s){
+const pageDeck=deck=>deck==='page-three';
+const validDeck=deck=>deck===undefined||pageDeck(deck);
+const nonempty=x=>text(x)&&x.trim().length>0;
+const reference=r=>object(r)&&nonempty(r.title)&&list(r.paragraphs)&&r.paragraphs.length>0&&r.paragraphs.every(nonempty);
+export function pipsPostcardSource(s,deck){
+ if(!validDeck(deck)||pageDeck(deck)&&!reference(s?.reference))return null;
  if(!sourceBase(s)||!object(s.postcard)||!id(s.postcard.id)||!list(s.postcard.segments)||!object(s.copy)||!['incomplete','different','fit','partialFit','partial','neutral'].every(k=>text(s.copy[k])))return null;
  const raw=s.postcard,refs=new Set(raw.segments.filter(x=>object(x)&&own(x,'slotId')&&!own(x,'text')&&id(x.slotId)).map(x=>x.slotId));
  const slots=stainedMapRows(raw.slots,g=>['label','original','clue'].every(k=>text(g[k]))&&id(g.key)&&object(g.different)&&list(g.choices));
- const parts=slots.flatMap(g=>{const choices=stainedMapRows(g.choices,named);return refs.has(g.id)&&choices.some(c=>c.id===g.key)?[{...g,choices,context:object(g.context)&&text(g.context.before)&&text(g.context.after)?g.context:null}]:[];});
+ const parts=slots.flatMap(g=>{const choices=stainedMapRows(g.choices,named);return (!pageDeck(deck)||nonempty(g.referenceText))&&refs.has(g.id)&&choices.some(c=>c.id===g.key)?[{...g,choices,context:object(g.context)&&text(g.context.before)&&text(g.context.after)?g.context:null}]:[];});
  const segments=raw.segments.map(x=>object(x)&&own(x,'text')&&!own(x,'slotId')&&text(x.text)?{text:x.text}:object(x)&&own(x,'slotId')&&!own(x,'text')&&parts.some(g=>g.id===x.slotId)?{slotId:x.slotId}:{unavailable:true});
  const partial=!list(raw.slots)||parts.length!==raw.slots.length||segments.some(x=>x.unavailable)||parts.some(g=>g.choices.length!==slots.find(v=>v.id===g.id).choices.length);
- return parts.length?{id:raw.id,kind:'postcard',parts,segments,copy:s.copy,partial}:null;
+ return parts.length?{id:raw.id,kind:'postcard',parts,segments,copy:s.copy,partial,...(pageDeck(deck)?{reference:s.reference}:{})}:null;
 }
 const pick=(w,k)=>own(w.placements,k)?w.placements[k]:null;
 export const validPipsPostcardWork=(s,w)=>!!s&&object(w)&&object(w.placements)&&s.parts.every(g=>!own(w.placements,g.id)||w.placements[g.id]===null||g.choices.some(c=>c.id===w.placements[g.id]));
@@ -39,7 +45,20 @@ function entry(source,record,present){
  const checks=checksStatus==='ready'?record.checks.filter(c=>validCheck(source,c)):[],last=checks.at(-1)??null;
  return {status,source,record,draftStatus,helpStatus,checksStatus,firstStatus:field(record,'firstKept',k=>k===null||validPipsKeep(source,k)),latestStatus:field(record,'latestKept',k=>k===null||validPipsKeep(source,k)),last,earlier:!!last&&draftStatus==='ready'&&!sameWork(source,last.work,record.work),partial:checksStatus==='unreadable'||checksStatus==='ready'&&checks.length!==record.checks.length};
 }
-export function pipsCopyView(state){
+export function pipsCopyView(state,deck){
+ if(deck!==undefined){
+  const root=object(state)&&own(state,'pipsCopy')?state.pipsCopy:null,gate=actThreeView(state).pageVisible;
+  const base={root,source:null,postcard:null,cards:[],jobs:[],current:null,view:'choose',gate,deck};
+  if(!validDeck(deck))return {...base,status:'unsupported'};
+  if(!gate)return {...base,status:'locked'};
+  if(!object(state)||!own(state,'pipsCopy'))return {...base,status:'new'};
+  if(!object(root)||root.v!==1)return {...base,status:'unsupported'};
+  if(!own(root,'pageThree'))return {...base,status:'new'};
+  const child=root.pageThree;
+  if(!object(child)||child.v!==1)return {...base,status:'unsupported',child};
+  const source=sourceBase(child.source)?child.source:null,cards=pipsCards(source);
+  return {...base,status:'ready',child,source,view:'postcard',postcard:entry(pipsPostcardSource(source,deck),child.postcard,own(child,'postcard')),cards,cardsPartial:!list(source?.cards)||source.cards.length!==cards.length,jobsPartial:false};
+ }
  if(!object(state)||!own(state,'pipsCopy'))return {status:'new',root:null,source:null,view:'choose',postcard:null,cards:[],jobs:[],current:null};
  const r=state.pipsCopy;
  if(!object(r)||r.v!==1)return {status:'unsupported',root:r,source:null,view:'choose',postcard:null,cards:[],jobs:[],current:null};
@@ -51,10 +70,18 @@ export function pipsCopyView(state){
 }
 const failure=error=>({ok:false,error});
 function mutate(state,fn,options={}){
- if(!object(state)||typeof options.canExport!=='function')return failure('capacity');
+ if(!validDeck(options?.deck))return failure('selection');
+ if(pageDeck(options?.deck)&&!actThreeView(state).pageVisible)return failure('unavailable');
+ if(!object(state)||typeof options?.canExport!=='function')return failure('capacity');
  try{const candidate=clone(state);if(!own(candidate,'pipsCopy'))candidate.pipsCopy={v:1,source:makePipsCopySource(),view:'postcard',currentId:null,items:{}};
-  const r=candidate.pipsCopy;if(!object(r)||r.v!==1)return failure('unavailable');const result=fn(r,candidate);if(!result.ok||result.changed===false)return result;
-  if(!recoveryFitsProgressLimits(candidate))return failure('capacity');const proposal=clone(r);if(options.canExport(candidate)!==true)return failure('capacity');state.pipsCopy=proposal;return result;
+  const parent=candidate.pipsCopy;if(!object(parent)||parent.v!==1)return failure('unavailable');
+  let r=parent;
+  if(pageDeck(options.deck)){
+   if(!own(parent,'pageThree'))parent.pageThree={v:1,source:makePipsPageThreeSource()};
+   r=parent.pageThree;if(!object(r)||r.v!==1)return failure('unavailable');
+  }
+  const result=fn(r,candidate);if(!result.ok||result.changed===false)return result;
+  if(!recoveryFitsProgressLimits(candidate))return failure('capacity');const proposal=clone(candidate.pipsCopy);if(options.canExport(candidate)!==true)return failure('capacity');state.pipsCopy=proposal;return result;
  }catch{return failure('capacity');}
 }
 function draft(source,r){
@@ -64,17 +91,17 @@ function draft(source,r){
  if(source.kind!=='postcard'){if(!own(r,'help'))r.help={hint:false,example:false};if(!help(r.help))return false;}return true;
 }
 export function openPipsTable(state,view,options){return mutate(state,(r,candidate)=>{
- if(!pipsViews.includes(view))return failure('selection');const v=pipsCopyView(candidate);
+ if(!pipsViews.includes(view)||pageDeck(options?.deck)&&view!=='postcard')return failure('selection');const v=pipsCopyView(candidate,options?.deck);
  if(view==='postcard'){const s=v.postcard.source;if(!s)return failure('unavailable');if(!own(r,'postcard'))r.postcard={work:{placements:Object.fromEntries(s.parts.map(g=>[g.id,null]))},checks:[],firstKept:null,latestKept:null};if(!draft(s,r.postcard))return failure('unavailable');}
- if(view==='practice'&&!v.jobs.length)return failure('unavailable');r.view=view;return {ok:true};
+ if(view==='practice'&&!v.jobs.length)return failure('unavailable');if(!pageDeck(options?.deck))r.view=view;return {ok:true};
  },options);}
-export function openPipsJob(state,key,options){return mutate(state,r=>{
+export function openPipsJob(state,key,options){if(options?.deck!==undefined)return failure('selection');return mutate(state,r=>{
  if(!id(key))return failure('selection');if(!own(r,'items'))r.items={};if(!object(r.items))return failure('unavailable');
  if(!own(r.items,key)){const source=sourceBase(r.source)?stainedMapRows(r.source.jobs,validPipsJob).find(j=>j.id===key):null;if(!source)return failure('unavailable');r.items[key]={source:clone(source),work:{choice:null},help:{hint:false,example:false},checks:[],firstKept:null,latestKept:null};}
  const item=r.items[key];if(!object(item)||!validPipsJob(item.source)||item.source.id!==key||!draft(item.source,item))return failure('unavailable');r.view='practice';r.currentId=key;return {ok:true};
  },options);}
-function edit(state,kind,key,fn,options){return mutate(state,(r,candidate)=>{
- const v=pipsCopyView(candidate),e=kind==='postcard'?v.postcard:v.jobs.find(j=>j.id===key);
+function edit(state,kind,key,fn,options){if(kind!=='postcard'&&options?.deck!==undefined)return failure('selection');return mutate(state,(r,candidate)=>{
+ const v=pipsCopyView(candidate,options?.deck),e=kind==='postcard'?v.postcard:v.jobs.find(j=>j.id===key);
  if(!e||e.status!=='ready'||e.draftStatus!=='ready'||kind!=='postcard'&&e.helpStatus!=='ready')return failure('unavailable');return fn(e.record,e.source,r);
  },options);}
 export function placePipsWord(state,key,ending,options){return edit(state,'postcard',null,(r,s)=>{
@@ -101,7 +128,7 @@ function keep(state,kind,key,options){return edit(state,kind,key,(r,s)=>{
  },options);}
 function restore(state,kind,key,edition,options){return edit(state,kind,key,(r,s)=>{
  if(!['first','latest'].includes(edition))return failure('selection');const keep=r[edition+'Kept'];if(!validPipsKeep(s,keep))return failure('unavailable');
- if(kind==='postcard')for(const g of s.parts)r.work.placements[g.id]=clone(pick(keep.work,g.id)??null);
+ if(kind==='postcard')for(const g of s.parts){if(pageDeck(options?.deck)&&!own(keep.work.placements,g.id))delete r.work.placements[g.id];else r.work.placements[g.id]=clone(pick(keep.work,g.id)??null);}
  else{r.work.choice=clone(keep.work.choice);for(const flag of ['hint','example'])r.help[flag] ||= keep.help[flag];}return {ok:true};
  },options);}
 export function usePipsHelp(state,key,flag,options){return edit(state,'job',key,r=>{
