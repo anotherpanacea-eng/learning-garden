@@ -19,7 +19,7 @@ export function runWattsChecks(){
   const w=copy(fresh);w.durations.forEach((r,i)=>r.seconds=[a,b,d][i]);assert(c.validWattsWork(source,w));
   const results=c.wattsResults(source,w);assert.deepEqual(results.map(r=>r.joules),[20*a,40*b,60*d]);
   for(const [i,r] of results.entries()){
-   assert.equal(r.seconds,[a,b,d][i]);assert(r.joules<=3600);assert.equal(r.joules+(-r.joules),0,'source loss balances load gain');
+   assert.equal(r.seconds,[a,b,d][i]);assert(r.joules<=3600);
    for(const delta of [-5,5]){const next=c.changeWattsWork(source,w,'time',{id:r.id,delta});const expect=r.seconds+delta>=0&&r.seconds+delta<=60;assert.equal(next!==null,expect);if(next){assert.equal(next.durations[i].seconds,r.seconds+delta);assert.notEqual(next.durations,w.durations);}}
    assert(!(r.watts>=1&&r.watts<=12&&r.seconds>=1&&r.seconds<=12));
   }durationStates++;
@@ -63,8 +63,8 @@ export function runWattsChecks(){
  // The real pretty Notes wrapper can exceed the limit while the notebook alone fits.
  {const s=notebook(),candidate=copy(s);assert(c.keepPowerSheet(candidate,source,fresh,{canExport:()=>true}));const bytes=v=>new TextEncoder().encode(JSON.stringify(v,null,2)).length;candidate.syntheticOther='';s.syntheticOther='x'.repeat(MAX_IMPORT_BYTES-bytes(candidate)-20);candidate.syntheticOther=s.syntheticOther;assert(recoveryFitsProgressLimits(candidate));assert.equal(canExport(candidate),false);refuse(s);}
  {const s=notebook();s.syntheticOther='x'.repeat(600000);assert(c.keepPowerSheet(s,source,fresh,{canExport}));assert.equal(s.syntheticOther.length,600000);s.syntheticOther='x'.repeat(MAX_IMPORT_BYTES);refuse(s);}
- // Support disclosure and keeping never alter attempts, exposure, other roots, or save policy.
- for(const policy of ['off','quota']){const s=notebook();s.syntheticPolicy=policy;const prior=copy(s);let draft=c.changeWattsWork(source,fresh,'worked');draft=c.changeWattsWork(source,draft,'example');draft=c.changeWattsWork(source,draft,'finished');assert(c.keepPowerSheet(s,source,draft,{canExport}));delete s.powerNotes;assert.deepEqual(s,prior);}
+ // Support disclosure and keeping do not alter attempts, exposures or unrelated roots. Saving policy is exercised by the native browser suite.
+ {const s=notebook();const prior=copy(s);let draft=c.changeWattsWork(source,fresh,'worked');draft=c.changeWattsWork(source,draft,'example');draft=c.changeWattsWork(source,draft,'finished');assert(c.keepPowerSheet(s,source,draft,{canExport}));delete s.powerNotes;assert.deepEqual(s,prior);}
  assert.deepEqual(before,refs);console.log('Watts Desk: finite arithmetic, transitions, frozen history, ownership and real Notes transport passed.');
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runWattsChecks();
