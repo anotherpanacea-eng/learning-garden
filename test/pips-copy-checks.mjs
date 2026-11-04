@@ -122,6 +122,10 @@ export function runChecks(){
   eq(hostile.syntheticSibling,outside);eq(hostile.story,story);const hp=clone(hostile.pipsCopy);delete hp.pageThree;delete parent.pageThree;eq(hp,parent,'whole proposed parent captured before callback mutation');
   const cap=newPage();let low=0,high=MAX_IMPORT_BYTES;while(low<high){const mid=Math.floor((low+high+1)/2);cap.syntheticPadding='x'.repeat(mid);if(canExportPips(cap))low=mid;else high=mid-1;}cap.syntheticPadding='x'.repeat(low);ok(canExportPips(cap));refusal(cap,()=>P.checkPipsPostcard(cap,o));
  }
+ {
+  const future=pipsPageThreeSeed();future.pipsCopy={v:2,pageThree:{unknown:'retained'}};const before=clone(future),html=pipsCopyNotes(future);
+  ok(html.includes(pipsCopyCopy.unsupported),'unsupported parent keeps its own recovery message');ok(!html.includes('The postcard and other jobs are still open.'),'unsupported parent never promises editable legacy games');ok(html.includes('unknown'),'full future child remains in the raw report');eq(future,before,'future Notes remains pure');
+ }
  console.log(`Pip's Copy core: ${n} checks passed.`);return n;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runChecks();
