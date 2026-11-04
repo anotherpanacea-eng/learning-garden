@@ -53,7 +53,7 @@ Below: “This record is below the line: the trip took less time than this line 
 
 Equal: “This record agrees with the line at this length. That doesn't make every other record agree.”
 
-**Show all gaps** · **Hide all gaps**. Wide comparison-table caption: **All gaps · recorded times, estimates and gaps are in minutes**. Headers: **Record · blocks** · **Recorded** · **Estimated** · **Gap**. Gap means recorded minus estimated. Record-picker buttons show Record {n}, with route/time in their accessible labels and the selected-record readout.
+**Show all gaps** · **Hide all gaps**. Wide comparison-table caption: **All gaps · times in minutes; gap = recorded minus estimated**. Headers: **Record · blocks** · **Recorded** · **Estimated** · **Gap**. Gap means recorded minus estimated. Record-picker buttons show Record {n}, with route/time in their accessible labels and the selected-record readout.
 
 “Look at all the gaps. A line through one record can still miss the rest. The same count above and below does not tell us how large the gaps are.”
 

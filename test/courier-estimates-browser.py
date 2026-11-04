@@ -159,6 +159,9 @@ console.log(JSON.stringify({base,earlier,refusal}));
             p.keyboard.press('Enter')
             h.ok(p.locator('[data-ce-rate]').input_value() == '2' and p.locator('[data-ce-rate]').evaluate('e=>e===document.activeElement'), 'keyboard increment reaching the upper bound keeps focus on the rate select')
             line(p, 4, 1)
+            turn(p, 0)
+            h.ok(p.locator('.ce-example table caption').inner_text() == 'Different example' and 'Example line: estimate = 2 × blocks + 2' in p.locator('[data-ce-example-plot]').get_attribute('aria-label') and 'estimate = 1 × blocks + 4' in p.locator('.ce-rules').inner_text(), 'worked table and diagram identify their own example while the current rule stays distinct')
+            turn(p, 1)
             h.click(p, '[data-ce-record="r3"]')
             observation = attr(p, '[data-ce-observation="r3"]', ['cx', 'cy'])
             near(observation, xy(3, 6), 'record3 is independently mapped onto axis units')
@@ -234,7 +237,14 @@ console.log(JSON.stringify({base,earlier,refusal}));
 
             # Actual import creates another explorer; unknown history remains raw.
             mixed = copy.deepcopy(exported)
-            mixed['courierEstimates'] += [fixtures['earlier'], {'kind':'future', 'v':99, 'id':'estimate-90', 'raw':'Synthetic unreadable model'}]
+            unsorted = copy.deepcopy(fixtures['earlier'])
+            unsorted['id'] = 'estimate-71'
+            unsorted['source']['id'] = 'earlier-unsorted-controls'
+            unsorted['source']['axes']['y']['max'] = 10
+            unsorted['source']['starts'], unsorted['source']['rates'] = [3, 1, 2], [2, 0, 1]
+            unsorted['line'] = {'start': 2, 'rate': 1}
+            unsorted['result'] = None
+            mixed['courierEstimates'] += [fixtures['earlier'], unsorted, {'kind':'future', 'v':99, 'id':'estimate-90', 'raw':'Synthetic unreadable model'}]
             _, q = setup(browser, fixtures['base'], 'transfer')
             go(q, base)
             original_id, original_book = h.active(q), h.book(q)
@@ -249,13 +259,24 @@ console.log(JSON.stringify({base,earlier,refusal}));
             h.click(q, '[data-ce-open="estimate-70"]')
             h.ok('Earlier <route> & rule' in q.locator('[data-ce-root]').inner_text(), 'historical source title is literal escaped text')
             h.click(q, '[data-ce-again="estimate-70"]')
+            turn(q, 0)
+            h.ok(not q.locator('[data-ce-worked]').count() and 'earlier example stays in your notes' in q.locator('[data-ce-root]').inner_text(), 'missing historical helper is independently unavailable on its actual Records page')
             turn(q, 1)
-            h.ok(not q.locator('[data-ce-worked]').count(), 'missing historical helper does not become current example data')
             h.ok(q.locator('[data-ce-start-value] option').count() == 1 and q.locator('[data-ce-rate] option').count() == 1, 'historical finite controls stay source-owned')
             h.click(q, '[data-ce-rise]')
             h.ok('Across 1 model block' in q.locator('[data-ce-root]').inner_text() and 'zero-block record' in q.locator('[data-ce-root]').inner_text(), 'historical narrow guide and zero-record caveat are honest')
             near(attr(q, '[data-ce-observation="old-zero"]', ['cx', 'cy']), xy(0, 1, 1, 3), 'historical point uses its own axes')
             bounds(q)
+            h.click(q, '[data-ce-choose]')
+            h.click(q, '[data-ce-open="estimate-71"]')
+            h.click(q, '[data-ce-again="estimate-71"]')
+            turn(q, 1)
+            pstart = q.locator('[data-ce-change="start"][data-ce-delta="-1"]')
+            pstart.focus()
+            q.keyboard.press('Enter')
+            q.locator('[data-ce-change="rate"][data-ce-delta="1"]').focus()
+            q.keyboard.press('Enter')
+            h.ok(q.locator('[data-ce-start-value]').input_value() == '1' and q.locator('[data-ce-rate]').input_value() == '2' and q.locator('[data-ce-change="start"][data-ce-delta="-1"]').is_disabled() and q.locator('[data-ce-change="rate"][data-ce-delta="1"]').is_disabled() and saved(q, 'estimate-71')['source']['starts'] == [3, 1, 2] and saved(q, 'estimate-71')['source']['rates'] == [2, 0, 1], 'unsorted historical controls move in numeric directions without rewriting their frozen arrays')
             redownload = download(q, base, 'imported-redownload')
             h.ok(redownload['courierEstimates'] == mixed['courierEstimates'] and redownload['syntheticOther'] == mixed['syntheticOther'], 'import/reload/redownload preserves historical and unreadable siblings')
             go(q, base)
