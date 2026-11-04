@@ -831,8 +831,10 @@ const pageThreeMaterial=deepFreeze({
     "readCopy": "Read this copy with blanks",
     "readIntro": "Each marked word will be read as blank.",
     "readSource": "Read this source sentence",
-    "adultLine": "Supplied reference, spelling choices and meaning clues. This does not show independent spelling, reading, copying or pronunciation.",
+    // Page-three grown-up interpretation.
+    adultLine: "Supplied reference, spelling choices and meaning clues. This does not show independent spelling, reading, copying or pronunciation.",
     "adultDetails": "The page and each source sentence are provided. The task never judges a spoken explanation. A kept version is not an edit to Hollis's page. Earlier choices and checks stay as they were.",
+    // End page-three grown-up interpretation.
     "contextTitle": "This word in the page's sentence",
     "contextNote": "The other words here come from the page. Your whole version keeps your choices.",
     "kept": "This version is kept.",
@@ -841,7 +843,9 @@ const pageThreeMaterial=deepFreeze({
     "newUsePrompt": "Tell Pip where to put a boat. Then tell him what to wear on a rainy walk. Your partner can write your words on paper. These words stay between you.",
     "newUseContrast": "Where points to a place. Wear can mean having clothes on. The words may sound alike; the sentence tells you which meaning you need.",
     "returnPrompt": "Choose another word, revisit a kept version, or return to the postcard.",
+    // Page-three pronunciation note for grown-ups.
     "adultNote": "Some speakers distinguish which and witch, or where and wear. Model your natural speech; sound alone is not this task's check. The displayed reference supplies spellings. A child can match print without explaining meaning. Ask, listen and discuss; the app does not judge that explanation. The bracketed smudge marks missing writing, not a spelling to fix."
+    // End page-three pronunciation note.
   },
   "jobs": []
 });
