@@ -61,6 +61,10 @@ export const copyScopes = [
     {start:'function linearGrownUpNote(', end:'\nexport function linearPage(', reason:'Labelled Grown-up practice notes.'},
     {start:'export function linearNotes(', end:'\nexport function bindLinear(', reason:'Only used in the adult Notes destination.'},
   ], quotations:[]},
+  {path:'dist/courier-estimates-ui.mjs', adultBlocks:[
+    {start:'// Adult Notes only: no child route calls this function.', end:'// End adult estimate notes.', reason:'Only the adult Notes destination renders this function.'},
+  ], quotations:[]},
+  {path:'dist/courier-estimates-content.mjs', adultBlocks:[], quotations:[]},
   {path:'dist/paired-points-ui.mjs', adultBlocks:[
     {start:'export function pairedNotes(', end:'\n }catch{return `<section class="pp-notes">', reason:'Only used in the adult Notes destination.'},
   ], quotations:[]},

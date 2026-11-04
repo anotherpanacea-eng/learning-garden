@@ -53,7 +53,7 @@ Below: “This record is below the line: the trip took less time than this line 
 
 Equal: “This record agrees with the line at this length. That doesn't make every other record agree.”
 
-**Show all gaps** · **Hide all gaps**. Table headers: **Record** · **Blocks** · **Recorded minutes** · **Estimated minutes** · **Recorded minus estimated · minutes**.
+**Show all gaps** · **Hide all gaps**. Wide comparison-table caption: **All gaps · recorded times, estimates and gaps are in minutes**. Headers: **Record · blocks** · **Recorded** · **Estimated** · **Gap**. Gap means recorded minus estimated. Record-picker buttons show Record {n}, with route/time in their accessible labels and the selected-record readout.
 
 “Look at all the gaps. A line through one record can still miss the rest. The same count above and below does not tell us how large the gaps are.”
 
@@ -77,9 +77,9 @@ Beyond range: “This length is outside the recorded lengths. The line gives a n
 
 At boundary if historical source supplies one: “This length is at the edge of the recorded lengths. The line's value is still an estimate, not a new recorded trip.” Below range uses the same Outside line. If a source request equals a recorded x: “Even at a recorded length, this line estimates a different trip. It does not replace that record.” Graph shading label: **Outside the recorded lengths**.
 
-Different-request notice: “Your estimate was for {x} model blocks. Choose that length or use this line for this one.”
+Different-request notice: “Your estimate was for {x} model blocks. Choose that length or use this line for this one.” Read-only kept variant: “Your estimate was for {x} model blocks. Try this model again to choose another length.”
 
-Stale result: “Your line has changed. Use this line to update the estimate.” If only pin changed: “Your comparison has changed. Use this line to update both estimates.” The stored result still labels its actual rule. Stale results stay in text; diamonds return after Use. Current and pinned prediction diamonds are labelled C and P, including when both occupy the same point.
+Stale result: “Your line has changed. Use this line to update the estimate.” If only pin changed: “Your comparison has changed. Use this line to update the estimate.” The stored result still labels its actual rule. Stale results stay in text; diamonds return after Use. Current and pinned prediction diamonds are labelled C and P, including when both occupy the same point.
 
 **Talk or write on paper**
 
