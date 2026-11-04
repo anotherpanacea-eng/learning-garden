@@ -576,3 +576,7 @@ The new workbench at `#learn/math/estimates` connects exact linear rules to scat
 ### A Map That Fits
 
 At `#learn/math/map-sheet`, choose a scale to fit an invented route on a sheet, compare detail at another scale, and read a paper length back into ground distance. Simulated paper centimeters are not a screen ruler. Kept maps preserve their own source and choices; retrying or changing paper width creates a separate draft. See [spec368](docs/specs/368-map-that-fits.md). Run `node test/map-sheet-checks.mjs` and `python3 test/map-sheet-browser.py`.
+
+### The Compare Shelf
+
+At `#learn/math/compare-records`, compare invented journey records using mean, median and range, inspect a separately labelled comparison that sets one record aside, and choose a purpose for a spoken or paper recommendation. Shared-scale plots preserve every original observation. Kept comparisons freeze their own source and disclosure bounds; no route prediction or scored recommendation. See [spec369](docs/specs/369-compare-shelf.md). Run `node test/compare-records-checks.mjs` and `python3 test/compare-records-browser.py`.

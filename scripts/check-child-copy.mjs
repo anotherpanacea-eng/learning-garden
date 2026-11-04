@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 export const copyScopes = [
+  {path:'dist/compare-records-ui.mjs',adultBlocks:[{start:'// Adult comparison notes only; never rendered as a child activity.',end:'// End adult comparison notes.',reason:'Only the adult Notes destination renders this function.'}],quotations:[]},
+  {path:'dist/compare-records-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/map-sheet-ui.mjs', adultBlocks:[{start:'// Adult map notes only; never rendered as a child activity.',end:'// End adult map notes.',reason:'Only the adult Notes destination renders this function.'}],quotations:[]},
   {path:'dist/map-sheet-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/letterpress-content.mjs',adultBlocks:[{start:'export const LETTERPRESS_GROWNUP=',end:'// End of the letterpress grown-up interpretation.',reason:'Only displayed in the folded grown-up interpretation; all child copy remains in scope.'}],quotations:[]},
