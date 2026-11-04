@@ -31,7 +31,7 @@ export function compareFixtures(){
  return {base,history,historicalId,brokenHelper,fractional};
 }
 // Exercise the trusted app's actual normalize=false helper without importing its DOM runtime.
-function exposureOptions(){
+export function exposureOptions(){
  const body=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8').match(/function exposeStoryFacts\([\s\S]*?\n}\n/)[0];
  const actual=Function('noteLegacyExposure','noteGardenFactExposure','notePendingBrambleFactExposure','checkin',`return (${body});`)(noteLegacyExposure,noteGardenFactExposure,notePendingBrambleFactExposure,checkin);
  return {canExport:compareCanExport,exposeFacts:(pairs,target)=>actual({facts:pairs},null,target,true,false)};
