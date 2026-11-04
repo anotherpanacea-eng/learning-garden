@@ -155,7 +155,9 @@ console.log(JSON.stringify({base,historical,maxImportBytes:MAX_IMPORT_BYTES}));
             h.ok(p.locator('[data-cs-model]').count()==1 and not p.locator('[data-cs-source]').count(), 'Build leads with the child drawing without an unrequested comparison')
             h.ok(p.locator('[data-cs-case="root"]').evaluate('e=>{const d=e.closest("details");return !!d&&!d.open}'), 'case chooser is a closed native fold')
             bounds(p)
+            h.ok(p.locator('[data-cs-model] .cs-guide').count()==1 and 'guide' in p.locator('[data-cs-model]').inner_text().lower(), 'empty illustration has an explicitly nonbiological layout guide')
             p.locator('[data-cs-part="membrane"]').tap()
+            h.ok(p.locator('[data-cs-model] [data-cs-symbol="membrane"]').count()==1 and not p.locator('[data-cs-model] [data-cs-symbol="wall"],[data-cs-model] .cs-guide').count(), 'membrane without wall has no extra outer boundary or guide')
             p.locator('[data-cs-part="nucleus"]').focus();p.keyboard.press('Enter')
             h.ok(set(selected(p))=={'membrane','nucleus'} and focus_is(p,'[data-cs-part="nucleus"]'), 'touch and keyboard add parts and preserve focus')
             h.click(p,'[data-cs-part="membrane"]')
@@ -195,6 +197,7 @@ console.log(JSON.stringify({base,historical,maxImportBytes:MAX_IMPORT_BYTES}));
             for _ in range(3):h.click(p,'[data-cs-example]')
             turn(p,1)
             compare_parts(p,'cheek',{'chloroplasts'})
+            h.ok(p.locator('[data-cs-source]').count()==2 and not p.locator('[data-cs-source] .cs-guide,[data-cs-source] [data-cs-symbol="wall"]').count(), 'cheek source references in Compare and teaching show no outer guide or wall')
             h.ok(selected(p)==['chloroplasts'], 'cheek permits an arbitrary drawing without correctness gate')
             h.click(p,'[data-cs-keep]')
             h.ok(sheets(p)[1]['work']['selectedIds']==['chloroplasts'], 'arbitrary animal drawing remains keepable')
@@ -257,6 +260,12 @@ console.log(JSON.stringify({base,historical,maxImportBytes:MAX_IMPORT_BYTES}));
             h.ok(not q.locator('[data-cs-comparison],[data-cs-source]').count(), 'read-only sheet cannot reveal its unopened comparison')
             h.click(q,'[data-cs-copy]');turn(q,0)
             h.ok(q.locator('[data-cs-part]').count()==3 and selected(q)==['old"part]'], 'historical copy uses its own shorter/reordered parts and punctuation id')
+            child_symbols=q.locator('[data-cs-model] [data-cs-symbol]').evaluate_all('xs=>xs.map(x=>x.dataset.csSymbol)')
+            h.ok(child_symbols==['cytoplasm'], 'historical selected punctuation id draws its frozen symbol rather than resolving a current catalogue id')
+            turn(q,1)
+            reference_symbols=q.locator('.cs-workspace [data-cs-source] [data-cs-symbol]').evaluate_all('xs=>xs.map(x=>x.dataset.csSymbol)')
+            h.ok(set(reference_symbols)=={'wall','membrane','cytoplasm'} and q.locator('[data-cs-comparison] tbody tr').count()==3, 'historical reference and comparison use their shorter frozen symbol set')
+            turn(q,0)
             # Use the known role of the tray, independent of label decoration.
             old_part=q.locator('[data-cs-part]').first
             old_part.focus();q.keyboard.press('Enter')
@@ -285,6 +294,10 @@ console.log(JSON.stringify({base,historical,maxImportBytes:MAX_IMPORT_BYTES}));
                 h.ok(h.book(bad)==old and selected(bad)==['wall'], name+' saved root stays exact while local exploration remains open')
                 h.click(bad,'[data-cs-shelf]');h.click(bad,'[data-cs-legacy]')
                 h.ok(bad.locator('.body-page').count()==1, name+' retains navigation to old key')
+                h.go(bad,base,'#living/plants','[data-cs-return]')
+                invitation=bad.locator('[data-cs-return]').locator('xpath=ancestor::section[1]')
+                h.ok('keep an unfinished' not in invitation.inner_text().lower() and 'you can keep' not in invitation.inner_text().lower(), name+' Plant fallback does not promise a save it cannot accept')
+                h.ok(h.book(bad)['cellModels']==root, name+' Plant fallback retains the unsupported owner exactly')
 
             # Plant invitation reads only: both normal and unsupported notebook.
             for broken in [False,True]:
@@ -327,6 +340,32 @@ console.log(JSON.stringify({base,historical,maxImportBytes:MAX_IMPORT_BYTES}));
                 h.ok('open page' in text and 'Download' in text, fault+' truthfully identifies memory-only Keep')
                 recovered=native.download(fault_page,base,fault+'-memory-export')
                 h.ok(len(recovered['cellModels'])==1, fault+' actual Notes download recovers in-memory sheet')
+
+            # Isolated real-UI module harness for a record becoming unreadable
+            # while its card is open. Ordinary app controls cannot manufacture
+            # this transition. No app module or network response is intercepted.
+            _, harness=native.setup(browser,fixtures['base'],'unavailable-card-module-harness')
+            h.go(harness,base,ROUTE,'[data-cs-enter]')
+            harness.evaluate("""async seed=>{
+              const ui=await import('./cell-studio-ui.mjs');
+              const book=structuredClone(seed),owner='invented-unavailable-harness';
+              const mount=document.querySelector('main');
+              window.cellHarness={book,render:null};
+              const render=()=>{mount.innerHTML=ui.cellStudioPage(book,owner);ui.bindCellStudio(book,{explorerId:()=>owner,notebook:()=>book,isActive:()=>true,save:()=>({enabled:true,ok:true}),canExport:()=>true,render,focus:s=>document.querySelector(s)?.focus()});};
+              window.cellHarness.render=render;render();
+            }""",dict(fixtures['base'],cellModels=[first]))
+            h.click(harness,'[data-cs-enter]');h.click(harness,'[data-cs-shelf]')
+            h.click(harness,'[data-cs-card="cell-model-1"]')
+            harness.evaluate("()=>{window.cellHarness.book.cellModels[0].work={v:99};window.cellHarness.render();}")
+            h.ok(not harness.locator('[data-cs-copy]').count() and 'unavailable' in harness.locator('#cs-title').inner_text().lower(), 'isolated actual UI renders unavailable card without editable-copy action')
+            h.click(harness,'[data-cs-hear]')
+            h.ok('unavailable' in (harness.locator('[data-cs-hear]').get_attribute('data-speak') or '').lower(), 'unavailable card Hear can describe its visible explanation')
+            h.click(harness,'[data-cs-shelf]')
+            h.ok(not harness.locator('[data-cs-card]').count(), 'unavailable card can navigate back to its raw shelf')
+            h.click(harness,'[data-cs-draft]')
+            h.ok(harness.locator('[data-cs-part]').count()==8, 'unavailable card retains navigation to a fresh local illustration')
+            h.click(harness,'[data-cs-legacy]')
+            h.ok(harness.locator('.body-page').count()==1, 'unavailable-card recovery navigation includes the original key')
 
             h.ok(not h.errors,'no page errors: '+json.dumps(h.errors))
             h.ok(not h.console_errors,'no console errors: '+json.dumps(h.console_errors))
