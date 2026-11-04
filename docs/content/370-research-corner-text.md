@@ -26,7 +26,7 @@ Unavailable reference: “A source reference is not available here. Your origina
 
 Unavailable card: “This source card cannot open here. Your original draft is retained in Notes.”
 
-Later return: **Return to your source-linked notes** · “A reader needs to trace a statement. Reopen your kept notes, inspect an original source label, then use or revise the notes for that reader.” Show the saved record’s own title and reader, not assumed current pond wording.
+Later return: **Return to your source-linked notes** · “A reader needs to trace a statement. Reopen your kept notes, inspect an original source label, then use or revise the notes for that reader.” Show only with a readable kept version having at least one openable note reference. Show the saved record’s own title and reader, not assumed current pond wording.
 
 Organising invitation: “Tell someone, or write on paper, two short paragraphs. Keep the general guide separate from the one story pond's record. Say where each fact came from and what needs a further source.”
 
@@ -64,15 +64,15 @@ Notice: “An untested claim, not a measured comparison.”
 
 ## Six open tasks
 
-Each task has the shared reference packet above. Task-specific references below are comparison aids, including for wrong choices; they do not certify that a selected answer is true. Choice order is as printed and freezes with the source. Existing Check/Keep/Next draft/help controls remain. Research-only empty source selection and sort-mismatch feedback use the wording below; other task outputs are unchanged. The six tasks have independent supplied reader jobs; a selected question does not carry into the other tasks.
+Each task has the shared reference packet above. Choice `parts` fallbacks include each displayed card’s title, origin, notice and all numbered lines: all three cards for the question task; guide for the note task; pond for scope; Pip for opinion. Rich readable cards replace their matching fallback part, never the status labels. Task-specific references below are comparison aids, including for wrong choices; they do not certify that a selected answer is true. Choice order is as printed and freezes with the source. Existing Check/Keep/Next draft/help controls remain. Research-only empty source selection and sort-mismatch feedback use the wording below; other task outputs are unchanged. The six tasks have independent supplied reader jobs; a selected question does not carry into the other tasks.
 
 ### research-question · A question these cards can answer · choice
 
 Reader: “For visitors reading a short pond page.” Prompt: “Which question can the displayed cards answer?”
 
 - `spawn-date` **When was spawn noted in this story pond?** Fitting; compare pond/p1.
-- `count` **How many frogs live in all of Willowbank now?** No card counts that population. No authored line locator; compare all three cards.
-- `croak` **Why do adult frogs croak at night?** No displayed line explains croaking. No authored line locator; compare all three cards.
+- `count` **How many frogs live in all of Willowbank now?** No card counts that population. Authoring only: no line locator; all three cards stay available.
+- `croak` **Why do adult frogs croak at night?** No displayed line explains croaking. Authoring only: no line locator; all three cards stay available.
 
 Fit: “The pond note records spawn on March 3. That answers when spawn was noted in this story pond, not when every frog spawns.”
 
@@ -80,13 +80,13 @@ Hint: “Look for what each card actually records.” Example: “A cafe card sa
 
 ### research-sources · Sources for a pond page · tap cards
 
-Reader: “For a page about spawn timing and how tadpoles change.” Prompt: “Tap every card that helps this page.”
+Reader: “For a page about spawn timing and how tadpoles change.” Prompt: “Tap every card that helps this page.” Research tap previews use “Selected source cards” and “No source cards are selected yet.”, with each selected fallback separated. They omit the joined full-card block. This applies to current, kept and Notes previews even if optional metadata cannot open.
 
 Empty selection: “No source cards are selected yet. You can keep this version or select some cards.”
 
 Card order: guide, pond, pip. All are tappable; fitting set guide+pond. The factual guide describes general timing/development; the fictional record supplies that one pond's recorded dates. Pip's preference doesn't answer either report heading.
 
-Fit: “The guide gives general information; the pond note gives one story pond's recorded observations. Keep those kinds of statement distinct.” Missing: “Check whether the guide or pond record could help either heading.” Different Pip feedback: “Pip's claim tells us what he says he thinks. It is not about this report's timing or development question.”
+Fit: “The guide gives general information; the pond note gives one story pond's recorded observations. Keep those kinds of statement distinct.” Missing: “Check whether the guide or pond record could help with timing or development.” Different Pip feedback: “Pip's claim tells us what he says he thinks. It is not about this report's timing or development question.”
 
 Hint: “Useful for which question? Read the reader's job.” Example: “An opening-times card helps a visitor know when to arrive. A favorite-bun opinion answers a different question.”
 
@@ -100,7 +100,7 @@ Display the factual guide's line3 with its origin/notice available. Prompt: “W
 
 All3 compare with guide/g3. Fit: “The short note keeps the order without repeating the whole sentence.” Hint: “Which words carry the order?” Example: “If a card says ‘put on socks before boots’, ‘socks, then boots’ keeps the order. ‘Clothes’ loses it.”
 
-“A full sentence can also be a useful note. Mark copied words as a quotation and give its source. Here the job asks for a brief note that keeps the order.”
+Append to this task’s fit feedback and general non-fit feedback: “A full sentence can also be a useful note. Mark copied words as a quotation and give its source. Here the job asks for a brief note that keeps the order.”
 
 ### research-scope · One recorded date · choice
 
@@ -118,7 +118,7 @@ Display pip/u1/u2. Prompt: “What could Pip's card support?”
 
 - `measured` **What scientists measured about the world's fastest swimmers last summer.** No measurements or scientists appear here.
 - `stated-view` **What Pip said he thought about frogs as swimmers.** Fitting.
-- `no-view` **Nothing about what Pip said could show his stated opinion.** The card gives his stated opinion.
+- `no-view` **Pip’s card contains no statement of his view of frogs.** The card gives his stated opinion.
 
 All3 compare with pip/u1/u2. Fit: “Pip's words can show his stated view. They do not establish a measured ranking of animals.” Hint: “Separate a speaker's words from proof of the speaker's claim.” Example: “Saying ‘I like cherry buns best’ can show my preference, not everyone's favorite.”
 
@@ -134,7 +134,7 @@ Supplied notes (initial order season,legs,pond-date,tail):
 - `pond-date` **Story pond—spawn noted March 3.** Fitting heading spawn; compare pond/p1.
 - `tail` **Tail shrinks; froglets later leave the water.** Fitting heading change; compare guide/g4.
 
-Fit: “Each note has a heading that matches this reader's job. Its source label still lets someone inspect the card.” Per-note different: “Is this note about spawn timing or a change in the tadpole? Its source stays the same whichever heading you try.” Incomplete: use the existing waiting-strip message; keeping is always allowed.
+Fit: “Each note has a heading that matches this reader's job. Its source label still lets someone inspect the card.” Per-note different, prefixed by that note’s own text: “Is this note about spawn timing or a change in the tadpole? Its source stays the same whichever heading you try.” Incomplete: use the existing waiting-strip message; keeping is always allowed.
 
 Hint: “Read the two headings. Time of spawn, or a developing tadpole?” Example: “For a bakery page, ‘opens at dawn’ goes under When to visit; ‘seed rolls’ goes under What's for sale. Both keep the card they came from.”
 
