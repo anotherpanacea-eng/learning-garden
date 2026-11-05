@@ -4,7 +4,7 @@
 
 ## The Red Pencil381
 
-[The Red Pencil381](specs/381-red-pencil.md) is the next LG-G1 writing bridge inside the existing Writing Table. The same bakery sentences become different notices for a visitor and a flour courier, followed by supported revision/editing and preference contrasts. Its [independent specification and finite content review](reviews/381-red-pencil-spec.md) is cleared. The planned artifact preserves kept, set-aside and waiting material under its own frozen reader; original writing remains with a person or the existing elected Post Office composer. Implementation review and release acceptance remain pending. This is not independent writing assessment or a completed composition course.
+[The Red Pencil381](specs/381-red-pencil.md) is the next LG-G1 writing bridge inside the existing Writing Table. The same bakery sentences become different notices for a visitor and a flour courier, followed by supported revision/editing and preference contrasts. Its [independent specification and finite content review](reviews/381-red-pencil-spec.md) is cleared. The planned artifact preserves kept, set-aside and waiting material under its own frozen reader; original writing remains with a person or the existing elected Post Office composer. [PR451’s review and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/451#issuecomment-6650029153) owns implementation clearance and live acceptance. This is not independent writing assessment or a completed composition course.
 
 ## Which values fit380
 
