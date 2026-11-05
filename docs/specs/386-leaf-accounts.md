@@ -1,6 +1,6 @@
 # A Leaf's Two Accounts386
 
-Status: independently reviewed specification, build-ready within the bounded scope; not built. Existing LG-1, LG-G1, S2-IV with S3-IV matter/energy and M1 multiplication bridges. Optional inside Cell Studio at **#living/bodies**. ActIV's collection needs a clear explanation for a future keeper: where does a plant's material come from, and what supplies the energy? This fills a conceptual bridge, not an act ending or completed science course. No story credit, grade, mastery, prerequisite lock or new town destination.
+Status: independently reviewed specification; bounded implementation built, awaiting independent implementation review and release acceptance. Existing LG-1, LG-G1, S2-IV with S3-IV matter/energy and M1 multiplication bridges. Optional inside Cell Studio at **#living/bodies**. ActIV's collection needs a clear explanation for a future keeper: where does a plant's material come from, and what supplies the energy? This fills a conceptual bridge, not an act ending or completed science course. No story credit, grade, mastery, prerequisite lock or new town destination.
 
 ## The new operation and boundary
 

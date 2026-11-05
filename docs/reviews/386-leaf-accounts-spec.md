@@ -27,4 +27,4 @@ Root separately recomputed every finite arithmetic example using independent int
 
 ## Remaining work
 
-No implementation exists for386. Before release: build the specified visual construction and own-source records; independent exact-head implementation review; real-app native journey and source checks on current main; inspect screenshots; ordinary merge/deployment verification. No current atlas or coverage claim. Broader plant biomass evidence, food-web cycles, chemistry mechanisms and practical investigations remain separate.
+The bounded implementation is built in PR463; its canonical PR review/release comment owns implementation acceptance. Before release: independent exact-head implementation review; real-app native journey and source checks on current main; inspect screenshots; ordinary merge/deployment verification. No current atlas or coverage claim. Broader plant biomass evidence, food-web cycles, chemistry mechanisms and practical investigations remain separate.
