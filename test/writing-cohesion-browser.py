@@ -87,7 +87,7 @@ def edges(browser,base,f):
   try:
    choose(p,'holding-parcel')
    if failing:p.evaluate('window.writingFailStorage=true')
-   else:p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#desk/writing"');h.ready(p)
+   else:p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#desk/writing"');h.ready(p)
    p.locator('[data-writing-tap=parcel]').tap();h.ok(selected(p).count()==1,'in-memory tap usable with saving off/failure');h.ok('session' in p.locator('#writing-status').inner_text(),'save status is truthful');r=h.export_notes(p,'memory-'+str(failing));h.ok(r['writingDesk']['records']['holding-parcel']['work']['taps']==['parcel'],'real download retains in-memory tap')
   finally:c.close()
 class Quiet(http.server.SimpleHTTPRequestHandler):

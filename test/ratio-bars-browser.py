@@ -426,7 +426,7 @@ def main():
             ok('could not be saved' in p.locator('#rb-status').inner_text(),'storage failure disclosed')
             report=download(p,base,'storage-failure-notes');ok(next(x for x in report['ratioBars']['observations'] if x['caseId']=='yellow-twelve')['first']['amountStatus']=='fits','storage-failed current memory downloadable')
             p.evaluate('()=>{Storage.prototype.setItem=window.originalRatioSet;}')
-            p=setup(browser,820,1180,fixtures['partial'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').uncheck();p.goto(base+'#studio/mixing/bars',wait_until='domcontentloaded');p.locator(VIEW).wait_for();select_case(p,'yellow-twelve')
+            p=setup(browser,820,1180,fixtures['partial'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.goto(base+'#studio/mixing/bars',wait_until='domcontentloaded');p.locator(VIEW).wait_for();select_case(p,'yellow-twelve')
             # Saved disk does not reflect memory while saving is off: derive the
             # supplied counts before switching saving off, then use native controls.
             for ingredient,target in [('yellow',3),('blue',2)]:

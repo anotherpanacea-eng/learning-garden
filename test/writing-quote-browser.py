@@ -218,7 +218,7 @@ def saving_off(browser,base,seed):
  print('Point and Quote: actual saving-off recovery',flush=True)
  c,p=setup(browser,base,seed)
  try:
-  p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#desk/writing"');h.ready(p)
+  p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#desk/writing"');h.ready(p)
   before=p.evaluate('JSON.stringify(Object.entries(localStorage).sort())');action(p,'quote');move(p,'quote',-1);action(p,'keep')
   h.ok('session' in p.locator('#writing-status').inner_text().lower(),'saving-off status truthfully identifies session-only work')
   h.ok(p.evaluate('JSON.stringify(Object.entries(localStorage).sort())')==before,'saving-off actions do not write device progress')

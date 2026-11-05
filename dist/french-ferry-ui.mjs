@@ -16,6 +16,16 @@ export function frenchVoiceAvailable(voices,preferred=speechPreferences().voice)
  try{return !!chooseLocalVoice(voices,preferred,'fr')&&localVoices(voices,'fr').length>0;}catch{return false;}
 }
 const deviceVoices=()=>{try{return window.speechSynthesis?.getVoices?.()||[];}catch{return [];}};
+// Keep each crossing's frozen French source; do not infer hearing from a fitting choice.
+function displayedFeedback(c,id,voice,x={}){
+ if(id==='fit5')return 'That fits.';
+ const line=core.feedbackLine(c.source,id);
+ if(!voice&&(id==='sounds'||id==='a-for-dou'||id==='de-for-ou'||id?.startsWith('kind-'))){
+  const explanation=line.replace(/ (?:Listen again|Hear her again)[^.]*\.$/,'');
+  if(explanation!==line)return explanation+' Look at her words again.'+(x.meaning?'':' You can ask for their English meaning.');
+ }
+ return line;
+}
 const hear=(text,label,voice,extra='')=>voice?hearButton(text,label,'fr').replace('<button ',`<button ${extra} `):'';
 function teachingCard(voice){
  const rows=T.teaching.map(r=>`<tr><th scope='row'>${fr(r.fr)}${hear(r.say,T.controls.hear,voice)}</th><td>${esc(r.en)}</td><td>${rich(r.note)}</td></tr>`).join('');
@@ -46,7 +56,7 @@ function stepView(c,voice){
  if(at.phase==='end')return `<div class='bac-step' data-bac-step='end'><p class='bac-line' tabindex='-1' data-bac-focus>Madame Roux: ${fr(quoted(s.ending.fr))}</p><p class='bac-gloss'>${esc(s.ending.en)}</p></div>`;
  const i=at.index,x=c.steps[i],step=s.steps[i],last=x.picks.at(-1),fid=last?core.feedbackFor(s,i,last):null;
  const meaning=x.meaning?'':button('meaning',esc(T.controls.meaning));
- const feedback=fid&&!x.fitted?`<p class='bac-feedback'>${esc(core.feedbackLine(s,fid))}</p>`:'';
+ const feedback=fid&&!x.fitted?`<p class='bac-feedback'>${esc(displayedFeedback(c,fid,voice,x))}</p>`:'';
  if(i<4&&at.phase==='answer'){
   const cards=s.cards.map(card=>`<button type='button' class='bac-answer' data-bac-card='${card.id}' aria-pressed='${last===card.id}' lang='fr'>${esc(card.fr)}${x.meaning?`<span class='bac-gloss' lang='en'>${esc(card.en)}</span>`:''}</button>`).join('');
   return `<div class='bac-step' data-bac-step='${i}' tabindex='-1' data-bac-focus>${herLine(step,x,i,voice,T.controls.listen)}${meaning}<div class='bac-answers'>${cards}</div>${feedback}</div>`;
@@ -67,7 +77,7 @@ function crossingView(key,entry,v,voice){
  const c=entry.crossing,s=c.source;
  return `<section class='bac-crossing' aria-labelledby='bac-crossing-title'><h2 id='bac-crossing-title' tabindex='-1'>${fr(s.title.fr)} · ${esc(s.title.en)}</h2>
  <aside class='bac-dot'><p><b>Dot:</b> ${esc(s.note)}</p></aside>${stepView(c,voice)}
- ${v.again===key?`<p>${esc(T.exceptions.afterAgain)}</p>`:''}${button('again',esc(T.exceptions.startAgain))}</section>`;
+ ${v.again===key?`<p>${esc(T.exceptions.afterAgain)}</p>`:''}<p id='bac-again-help'>Starting again moves this crossing to your notes. You can read it there, but cannot continue it.</p>${button('again',esc(T.exceptions.startAgain)," aria-describedby='bac-again-help'")}</section>`;
 }
 export function frenchFerryPage(state,owner='',voices=deviceVoices()){
  const view=core.frenchFerryView(state),v=local(state,owner),voice=frenchVoiceAvailable(voices);
@@ -132,7 +142,7 @@ export function bindFrenchFerry(state,ctx={}){
   const el=ev.target.closest?.('[data-bac-action],[data-bac-card]');if(!el||!live(el))return;
   const key=v.open;
   if(el.dataset.bacCard){stop();const r=write(()=>core.pickAnswer(state,key,el.dataset.bacCard,options));if(!r)return;
-   const c=core.frenchFerryView(state).crossings[key].crossing,line=core.feedbackLine(c.source,r.feedback);
+   const c=core.frenchFerryView(state).crossings[key].crossing,line=displayedFeedback(c,r.feedback,voiceNow(),c.steps[r.step]);
    return redraw(r.fitted?'[data-bac-focus]':`[data-bac-card='${el.dataset.bacCard}']`,line);}
   const a=el.dataset.bacAction;
   if(a==='card-teaching'||a==='card-sounds'){stop();const card=a.slice(5);v.card=v.card===card?null:card;return redraw(v.card?`#bac-${card==='teaching'?'teach':'sounds'}-title`:`[data-bac-action='${a}']`);}

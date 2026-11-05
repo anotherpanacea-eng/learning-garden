@@ -117,7 +117,7 @@ with sync_playwright() as pw:
   # Session-only work remains usable with saving off or disk failures.
   for failed in [False,True]:
    c,p=setup(browser,320,failed=failed);go(p,'#notes')
-   if not failed:p.locator('#remember').uncheck()
+   if not failed:p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
    go(p,'#desk/linear');card(p,'bag');page(p,1);fill(p,'m','2');fill(p,'b','3');check(p,'rule');ok(work(p)['checks'][-1]['outcome']=='match','memory lesson with saving off or failed');ok(('Progress could not be saved' in p.locator('body').inner_text()) if failed else p.evaluate("Object.keys(localStorage).filter(k=>k.startsWith('number-garden-v1:')).length===0"),'disk failure warning or save-off persistence removal');c.close()
   ok(not errors,'no browser runtime errors: '+str(errors));print(f'Courier Price Chrome: {checks} assertions passed at320/820.')
  finally:

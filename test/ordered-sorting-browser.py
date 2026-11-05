@@ -617,7 +617,7 @@ def retained_and_refusals(browser, fx, raw):
         c, p = setup(browser, 320, fx['fresh'], failed=failed)
         go(p, '#notes')
         if not failed:
-            p.locator('#remember').uncheck()
+            p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
         go(p)
         case(p, 'large-first')
         program(p)

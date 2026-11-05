@@ -29,7 +29,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
  async function snapshot(p,name){if(artifacts){await p.evaluate(()=>{document.activeElement?.blur();scrollTo(0,0);});await p.screenshot({path:path.join(artifacts,name+'.png'),fullPage:true});}}
  async function download(p){await go(p,'#notes');const [d]=await Promise.all([p.waitForEvent('download'),tap(p,'#download')]);const raw=await fs.readFile(await d.path(),'utf8');ok(prepareProgressImport(raw).ok,'actual downloaded pretty report imports');return raw;}
  async function importFile(p,seed){
-  await go(p,'#notes');await p.locator('#remember').uncheck();
+  await go(p,'#notes');await p.locator('#remember').click();await p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();
   const raw=JSON.stringify(report(seed),null,2);ok(prepareProgressImport(raw).ok,'synthetic near-cap source file imports');
   await p.locator('#progress-file').setInputFiles({name:'synthetic-ledger-boundary.json',mimeType:'application/json',buffer:Buffer.from(raw)});
   await p.locator('#progress-import-confirm').waitFor();await tap(p,'#progress-import-confirm');
@@ -140,7 +140,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
    await p.close();
   }
   {
-   const p=await setup();await go(p,'#notes');await p.locator('#remember').uncheck();await go(p,'#numbers/join/ledger');
+   const p=await setup();await go(p,'#notes');await p.locator('#remember').click();await p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();await go(p,'#numbers/join/ledger');
    await tap(p,'[data-ledger-start="full-frame-orders"]');await act(p,'join');await act(p,'wrap');await tap(p,'[data-ledger-turn="write"]');await act(p,'place-ones');await act(p,'place-tens');
    const restored=prepareProgressImport(await download(p)).state;
    ok(restored.joiningOrders.shownBundleExamples.includes('bundle:0:4:1'),'save-off retains successful exposure in actual in-memory notes');

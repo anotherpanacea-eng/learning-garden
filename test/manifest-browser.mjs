@@ -60,7 +60,7 @@ try{
   ok(p.errors.length===0,`${w}: no page errors ${p.errors}`);await c.close();
  }
  // Saving off uses the host's normal switch and keeps both kinds of work in-session.
- {const {c,p}=await fresh(320,600);await p.goto(url+'#notes');await p.locator('#remember').uncheck();
+ {const {c,p}=await fresh(320,600);await p.goto(url+'#notes');await p.locator('#remember').click();await p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();
   const storage=await p.evaluate(()=>({...localStorage}));
   await p.goto(url+'#post/manifest');await p.locator('[data-mf-root]').waitFor();await place(p,'m4','s1','empty');await p.locator('[data-mf-load="m4"]').click();
   ok(await p.locator('#mf-result-m4').count()===1,'saving off: Load it works');
@@ -202,7 +202,7 @@ try{
   ok(p.errors.length===0,`${w}: no page errors (${p.errors.join('; ')})`);await c.close();
  }
  // Saving off keeps crate choices in-session; a stale crate tile writes to no explorer.
- {const {c,p}=await fresh(320,600);await p.goto(url+'#notes');await p.locator('#remember').uncheck();const storage=await p.evaluate(()=>({...localStorage}));
+ {const {c,p}=await fresh(320,600);await p.goto(url+'#notes');await p.locator('#remember').click();await p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();const storage=await p.evaluate(()=>({...localStorage}));
   await p.goto(url+'#post/manifest');await p.locator('[data-mf-root]').waitFor();await pick(p,'t8','quotes');ok(await p.locator('#mf-crate-t8').count()===1,'saving off: crate choice works');
   await p.goto(url+'#notes');const [dl]=await Promise.all([p.waitForEvent('download'),p.locator('#download').click()]);const data=JSON.parse((await import('node:fs')).readFileSync(await dl.path(),'utf8'));eq(data.exchangeManifest.crate.t8.outcome,'fits','saving off: crate retained in session');eq(await p.evaluate(()=>({...localStorage})),storage,'saving off: crate writes nothing to storage');await c.close();}
  {const {c,p}=await fresh(820,1000);const stale=await p.evaluateHandle(()=>document.querySelector('[data-mf-title="t1:italics"]'));const hand=await p.evaluateHandle(()=>document.querySelector('[data-mf-hand]'));

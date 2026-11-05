@@ -372,7 +372,7 @@ def saving_off(browser, base, seed):
     print('Which values fit: actual saving-off recovery', flush=True)
     _, p = native.setup(browser, seed, 'saving-off')
     h.go(p, base, '#notes', '#remember')
-    p.locator('#remember').uncheck()
+    p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
     p.evaluate('location.hash="#learn/math/equality"')
     p.locator('[data-equality-inequality]').wait_for()
     enter(p)

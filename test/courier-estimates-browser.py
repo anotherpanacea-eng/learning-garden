@@ -396,7 +396,7 @@ console.log(JSON.stringify({base,earlier,refusal,pending,maxImportBytes:MAX_IMPO
             _, temporary = setup(browser, fixtures['base'], 'saving-off')
             go(temporary, base)
             h.go(temporary, base, '#notes', '#remember')
-            temporary.locator('#remember').uncheck()
+            temporary.locator('#remember').click();temporary.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             temporary.evaluate('location.hash="'+ROUTE+'"')
             temporary.locator('[data-ce-root]').wait_for()
             start(temporary)

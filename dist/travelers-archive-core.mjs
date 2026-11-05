@@ -7,39 +7,47 @@ const keys=(x,required,optional=[])=>object(x)&&required.every(k=>Object.hasOwn(
 const unique=(x,list,max=list.length)=>Array.isArray(x)&&x.length<=max&&new Set(x).size===x.length&&x.every(v=>list.includes(v));
 const equal=(a,b)=>a===b||(Array.isArray(a)&&Array.isArray(b)&&a.length===b.length&&a.every((v,i)=>equal(v,b[i])))||(object(a)&&object(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(k=>Object.hasOwn(b,k)&&equal(a[k],b[k])));
 const supportValid=x=>object(x)&&Object.entries(x).every(([k,v])=>SUPPORT.includes(k)&&v===true);
-const supportsValid=x=>object(x)&&Object.entries(x).every(([id,s])=>TASK_IDS.includes(id)&&supportValid(s));
+// Saved ids describe that visit, including retired content. New actions still use the current lists.
+const savedId=x=>typeof x==='string'&&/^[a-z][a-z0-9-]{0,95}$/.test(x);
+const savedIds=(x,max=64)=>Array.isArray(x)&&x.length<=max&&new Set(x).size===x.length&&x.every(savedId);
+const supportsValid=x=>object(x)&&Object.keys(x).length<=64&&Object.entries(x).every(([id,s])=>savedId(id)&&supportValid(s));
 const sourceIds=ARCHIVE_SOURCES.map(s=>s.id),eventIds=ARCHIVE_EVENTS.map(e=>e.id);
 const textValid=x=>typeof x==='string'&&Array.from(x).length<=ARCHIVE_TEXT_LIMIT;
 const choiceValid=(field,value)=>value===null||archiveReplyFieldById(field)?.choices.some(c=>c.id===value)===true;
-const replyValid=r=>keys(r,['claim','evidence','limit','text'])&&ARCHIVE_REPLY_FIELDS.every(f=>choiceValid(f.id,r[f.id]))&&textValid(r.text);
+const replyValid=r=>keys(r,['claim','evidence','limit','text'])&&['claim','evidence','limit'].every(id=>r[id]===null||savedId(r[id]))&&textValid(r.text);
+const currentReplyValid=r=>replyValid(r)&&ARCHIVE_REPLY_FIELDS.every(f=>choiceValid(f.id,r[f.id]));
 const siteValid=x=>x===null||ARCHIVE_SITES.some(s=>s.id===x);
-const mapValid=x=>keys(x,['photo','gauge'])&&siteValid(x.photo)&&siteValid(x.gauge);
-const answersValid=x=>object(x)&&Object.entries(x).every(([id,a])=>archiveQuestionById(id)?.choices.some(c=>c.id===a));
+const mapValid=x=>keys(x,['photo','gauge'])&&[x.photo,x.gauge].every(v=>v===null||savedId(v));
+const answersValid=x=>object(x)&&Object.keys(x).length<=64&&Object.entries(x).every(([id,a])=>savedId(id)&&savedId(a));
 const sourceSnapshots=ids=>ids.map(id=>clone(archiveSourceById(id)));
 // Frozen snapshots keep the wording shown at the time; validate their ids and outcomes, not today's wording.
 const snapshotIds=(x,ids)=>Array.isArray(x)&&equal(x.map(v=>object(v)?v.id:null),ids);
-const outcome=x=>JSON.parse(JSON.stringify(x,(k,v)=>['feedback','originalText'].includes(k)&&typeof v==='string'?undefined:v));
+const snapshotsValid=x=>Array.isArray(x)&&x.length<=16&&savedIds(x.map(v=>object(v)?v.id:null),16);
+function feedbackValid(task,f){
+ if(task==='reply')return keys(f,['claim','evidence','limit','originalText'])&&typeof f.originalText==='string'&&['claim','evidence','limit'].every(id=>keys(f[id],['status','feedback'])&&['unobserved','supported','uncertain','limited'].includes(f[id].status)&&typeof f[id].feedback==='string');
+ return keys(f,task==='order'?['complete','correct','feedback']:['correct','feedback'])&&typeof f.correct==='boolean'&&typeof f.feedback==='string'&&(task!=='order'||typeof f.complete==='boolean'&&(!f.correct||f.complete));
+}
 function questionResult(id,choice){const q=archiveQuestionById(id);if(!q||!q.choices.some(c=>c.id===choice))return null;return {correct:choice===q.answer,feedback:`${choice==='unsure'?'We can look together. ':''}${q.feedback}`};}
 function mapResult(cardId,siteId){const c=archiveMapCardById(cardId);if(!c||!siteValid(siteId))return null;return {correct:siteId===c.answer,feedback:siteId===null?'No place chosen yet. Read the place name on the label. Then find it on the map.':`${siteId===c.answer?'The labels match. ':siteId==='unsure'?'We can check the label. ':'This label names another place. '}${cardId==='photo'?'The photo’s label says Quai des Grands-Augustins.':'The date cards say the river was measured at Pont d’Austerlitz.'}`};}
 function orderResult(order){if(!unique(order,eventIds))return null;const complete=order.length===3,correct=complete&&order.every((id,i)=>id===eventIds[i]);return {complete,correct,feedback:!complete?'You can keep an unfinished order. Look at the months on the cards when you want to add another one.':correct?'Yes! January 28, then February 9, then March 15. Only the order matters here.':'Look at the months. January comes before February, and February comes before March. You can move any card. Your cards stay where you put them.'};}
 export function archiveReplyFeedback(reply){
- if(!replyValid(reply))return null;
+ if(!currentReplyValid(reply))return null;
  const claim=reply.claim===null?{status:'unobserved',feedback:'No answer picked yet. You can leave it unfinished.'}:reply.claim==='return-later'?{status:'supported',feedback:'Yes. The date cards show the river went back into its bed after its highest mark. They don’t say when every street dried.'}:reply.claim==='unsure'?{status:'uncertain',feedback:'Not sure is fine. Look at the date cards for the highest mark and the return.'}:{status:'limited',feedback:'The date cards show the river went back into its bed later, in March. They don’t say when every street dried.'};
  const evidence=reply.evidence===null?{status:'unobserved',feedback:'No clue picked yet. Two of the date cards can help with this question.'}:['chronology','both'].includes(reply.evidence)?{status:'supported',feedback:reply.evidence==='both'?'Yes. The date cards give the dates, and the photo adds one street.':'Yes. The date cards for the highest mark and the return show the order.'}:{status:'limited',feedback:reply.evidence==='photo'?'The photo shows one street. The dates of the highest mark and the return are on the date cards.':'Black-and-white colors can’t tell us a date. Look at the date cards.'};
  const limit=reply.limit===null?{status:'unobserved',feedback:'You can leave this blank, or name something these clues can’t tell us.'}:{status:'supported',feedback:reply.limit==='depth'?'Yes. This photo has no measuring stick for the water.':reply.limit==='feelings'?'Yes. Neither one tells us how everybody felt.':'Yes. These clues can’t tell us the exact depth or how everybody felt.'};
- return {claim,evidence,limit,originalText:'Your own words are kept for a human reader. The game keeps them just as you wrote them.'};
+ return {claim,evidence,limit,originalText:'The game keeps your words just as you wrote them. You can read them with someone.'};
 }
 function responseValid(task,r){
- if(task==='order')return keys(r,['order'])&&unique(r.order,eventIds);
+ if(task==='order')return keys(r,['order'])&&savedIds(r.order);
  if(task==='reply')return replyValid(r);
- if(task.startsWith('map-'))return keys(r,['cardId','siteId'])&&r.cardId===task.slice(4)&&archiveMapCardById(r.cardId)!==null&&siteValid(r.siteId);
- return keys(r,['questionId','choice'])&&r.questionId===task&&questionResult(r.questionId,r.choice)!==null;
+ if(task.startsWith('map-'))return keys(r,['cardId','siteId'])&&r.cardId===task.slice(4)&&savedId(r.cardId)&&(r.siteId===null||savedId(r.siteId));
+ return keys(r,['questionId','choice'])&&r.questionId===task&&savedId(r.choice);
 }
 function taskSources(task){if(task==='reply')return sourceIds;if(task==='order')return ['chronology'];if(task.startsWith('map-'))return archiveMapCardById(task.slice(4))?.sourceIds??[];return archiveQuestionById(task)?.sourceIds??[];}
 function resultFor(task,response){if(task==='order')return orderResult(response.order);if(task==='reply')return archiveReplyFeedback(response);if(task.startsWith('map-'))return mapResult(response.cardId,response.siteId);return questionResult(response.questionId,response.choice);}
-function checkValid(c){return keys(c,['task','response','sourceIds','packId','sources','support','reading','practice','familiar','feedback'])&&TASK_IDS.includes(c.task)&&c.task!=='global'&&responseValid(c.task,c.response)&&equal(c.sourceIds,taskSources(c.task))&&c.packId===ARCHIVE_PACK.id&&snapshotIds(c.sources,c.sourceIds)&&supportValid(c.support)&&READING.includes(c.reading)&&c.practice===true&&typeof c.familiar==='boolean'&&equal(outcome(c.feedback),outcome(resultFor(c.task,c.response)));}
-function keptValid(k){return k===null||keys(k,['packId','reply','sources','support','reading','familiar','checks','notice'])&&k.packId===ARCHIVE_PACK.id&&replyValid(k.reply)&&snapshotIds(k.sources,sourceIds)&&supportsValid(k.support)&&READING.includes(k.reading)&&typeof k.familiar==='boolean'&&Array.isArray(k.checks)&&k.checks.length<=24&&k.checks.every(checkValid)&&typeof k.notice==='string';}
-function valid(r){return keys(r,['version','packId','page','task','source','detail','map','order','answers','reply','support','reading','sourcesExposed','revealedTasks','familiar','exposureUnknown','checks','kept'],['recovered','question'])&&(!Object.hasOwn(r,'question')||archiveQuestionById(r.question)!==null)&&(!['claims','source-choice','limits'].includes(r.task)||!Object.hasOwn(r,'question')||archiveQuestionById(r.question)?.task===r.task)&&r.version===1&&r.packId===ARCHIVE_PACK.id&&ARCHIVE_PAGES.includes(r.page)&&ARCHIVE_TASKS.includes(r.task)&&sourceIds.includes(r.source)&&ARCHIVE_DETAILS.includes(r.detail)&&mapValid(r.map)&&unique(r.order,eventIds)&&answersValid(r.answers)&&replyValid(r.reply)&&supportsValid(r.support)&&READING.includes(r.reading)&&unique(r.sourcesExposed,sourceIds)&&unique(r.revealedTasks,TASK_IDS.filter(t=>t!=='global'))&&typeof r.familiar==='boolean'&&typeof r.exposureUnknown==='boolean'&&Array.isArray(r.checks)&&r.checks.length<=24&&r.checks.every(checkValid)&&keptValid(r.kept);}
+function checkValid(c){return keys(c,['task','response','sourceIds','packId','sources','support','reading','practice','familiar','feedback'])&&savedId(c.task)&&c.task!=='global'&&responseValid(c.task,c.response)&&savedIds(c.sourceIds,16)&&c.packId===ARCHIVE_PACK.id&&snapshotIds(c.sources,c.sourceIds)&&supportValid(c.support)&&READING.includes(c.reading)&&c.practice===true&&typeof c.familiar==='boolean'&&feedbackValid(c.task,c.feedback);}
+function keptValid(k){return k===null||keys(k,['packId','reply','sources','support','reading','familiar','checks','notice'])&&k.packId===ARCHIVE_PACK.id&&replyValid(k.reply)&&snapshotsValid(k.sources)&&supportsValid(k.support)&&READING.includes(k.reading)&&typeof k.familiar==='boolean'&&Array.isArray(k.checks)&&k.checks.length<=24&&k.checks.every(checkValid)&&typeof k.notice==='string';}
+function valid(r){return keys(r,['version','packId','page','task','source','detail','map','order','answers','reply','support','reading','sourcesExposed','revealedTasks','familiar','exposureUnknown','checks','kept'],['recovered','question'])&&(!Object.hasOwn(r,'question')||savedId(r.question))&&r.version===1&&r.packId===ARCHIVE_PACK.id&&ARCHIVE_PAGES.includes(r.page)&&ARCHIVE_TASKS.includes(r.task)&&savedId(r.source)&&ARCHIVE_DETAILS.includes(r.detail)&&mapValid(r.map)&&savedIds(r.order)&&answersValid(r.answers)&&replyValid(r.reply)&&supportsValid(r.support)&&READING.includes(r.reading)&&savedIds(r.sourcesExposed,16)&&savedIds(r.revealedTasks)&&!r.revealedTasks.includes('global')&&typeof r.familiar==='boolean'&&typeof r.exposureUnknown==='boolean'&&Array.isArray(r.checks)&&r.checks.length<=24&&r.checks.every(checkValid)&&keptValid(r.kept);}
 const fresh=()=>({version:1,packId:ARCHIVE_PACK.id,page:'parcel',task:'map',source:'photo',detail:'whole',map:{photo:null,gauge:null},order:[],answers:{},reply:{claim:null,evidence:null,limit:null,text:''},support:{},reading:'unobserved',sourcesExposed:[],revealedTasks:[],familiar:false,exposureUnknown:false,checks:[],kept:null});
 // Selectors never create a response, expose a source or rewrite unavailable work.
 export function travelersArchive(state){return state.travelersArchive===undefined?fresh():valid(state.travelersArchive)?state.travelersArchive:null;}

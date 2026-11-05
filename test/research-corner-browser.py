@@ -72,7 +72,7 @@ def safety(browser,base,seed):
   c,p=h.setup(browser,base,seed)
   try:
    h.action(p,'research')
-   if mode=='off':p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#desk/writing"');h.ready(p)
+   if mode=='off':p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#desk/writing"');h.ready(p)
    else:p.evaluate('window.writingFailStorage=true')
    p.locator('[data-writing-strip=legs]').tap();p.locator('[data-writing-destination=change]').tap();h.action(p,'keep');h.ok('session' in p.locator('#writing-status').inner_text(),'saving status truthful '+mode);report=h.export_notes(p,'memory-'+mode);h.ok(report['writingDesk']['records']['research-organise']['work']['placements']['legs']=='change','in-memory research downloadable '+mode)
   finally:c.close()

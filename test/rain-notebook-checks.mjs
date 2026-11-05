@@ -73,4 +73,20 @@ class Storage{constructor(){this.m=new Map();}get length(){return this.m.size;}k
 {
  const s={};importCurrent(s,'cover-12');setRainNotebookPage(s,'chart');eq(rainNotebookDisplayExposure(s).results,false,'empty Build with closed source displays no outcome counts');eq(rainNotebookDisplayExposure(s,'source').results,true,'opened actual frozen-source table reveals outcomes');toggleRainNotebookRow(s,'A:runoffNew');eq(rainNotebookDisplayExposure(s).results,true,'selected actual source row reveals its count');toggleRainNotebookRow(s,'A:runoffNew');setRainNotebookPage(s,'read');setRainNotebookReadPrompt(s,'model');eq(rainNotebookDisplayExposure(s).results,true,'requested original source pair reveals outcomes');eq(rainNotebookDisplayExposure(s,'notes').results,true,'raw saved source counts are visible when notes open');
 }
+
+// Historical grades stay readable without being run through today's rubric.
+{
+ const s={};importCurrent(s,'cover-12');select(s,['A:runoffNew','B:runoffNew']);setRainNotebookQuantity(s,'runoffNew');setRainNotebookValue(s,'A:runoffNew',0);setRainNotebookValue(s,'B:runoffNew',12);checkRainNotebookData(s);checkRainNotebookChart(s);answerRainNotebookDraft(s,'second');answerRainNotebookSource(s,'yes');setRainNotebookModelInput(s,'choice','B');setRainNotebookModelInput(s,'difference','12');answerRainNotebookModel(s);keepRainNotebookDraft(s);
+ const historical=copy(s),work=historical.fieldNotebook.rain.cases['cover-12'];
+ for(const checks of [work.checks,Object.values(work.kept.checks)])for(const c of checks){
+  if(c.task==='data'||c.task==='chart'){const result=c.task==='data'?c.result:c.result.data;result.matches=false;result.issues=['earlier-rubric-note'];result.status='earlier-rubric-note';result.feedback='Earlier rubric wording.';}
+  if(c.task==='source'){c.result.faithful=false;c.result.relevant=false;c.result.answer='differs';c.result.correct=c.response==='differs';}
+  if(c.task==='model'){c.result.answer='A';c.result.difference=4;c.result.comparisonCorrect=c.response.choice==='A';c.result.differenceCorrect=c.response.difference===null?null:c.response.difference===4;}
+ }
+ const raw=copy(historical);ok(rainNotebook(historical),'self-consistent historical rubric outcomes accepted');eq(historical,raw,'reading never regrades or rewrites results');const initialized={...freshState(),...copy(historical)};initializeExplorerState(initialized);eq(initialized.fieldNotebook.rain,historical.fieldNotebook.rain,'historical outcomes survive ordinary initialization');
+ const contradiction=copy(historical);contradiction.fieldNotebook.rain.cases['cover-12'].checks.find(c=>c.task==='source').result.correct=true;ok(!rainNotebook(contradiction),'contradictory saved response/outcome rejected');
+ const badBar=copy(s);badBar.fieldNotebook.rain.cases['cover-12'].checks.find(c=>c.task==='chart').result.bars[0].expected=9;ok(!rainNotebook(badBar),'saved bar must still match its frozen source count');
+ const incomplete=copy(s);delete incomplete.fieldNotebook.rain.cases['cover-12'].checks.find(c=>c.task==='model').result.difference;ok(!rainNotebook(incomplete),'incomplete saved grade rejected');
+}
+
 console.log(`Rain Notebook checks passed: ${n}`);

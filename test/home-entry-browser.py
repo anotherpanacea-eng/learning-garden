@@ -20,7 +20,10 @@ def setup(b,base,seeds,width,height,denied=False):
  c=b.new_context(viewport={'width':width,'height':height},has_touch=True,reduced_motion='reduce',accept_downloads=True)
  c.add_init_script("""(x=>{if(!localStorage.getItem('synthetic-home')){localStorage.setItem('learning-garden-explorers',JSON.stringify({version:1,activeId:'explorer-1',explorers:[{id:'explorer-1',avatar:'sky',color:'gold',symbol:'leaf',createdAt:'2026-10-30T12:00:00Z'},{id:'explorer-2',avatar:'fern',color:'blue',symbol:'shell',createdAt:'2026-10-30T12:00:00Z'}]}));localStorage.setItem('number-garden-v1:explorer-1',JSON.stringify(x.a));localStorage.setItem('number-garden-v1:explorer-2',JSON.stringify(x.b));localStorage.setItem('synthetic-home','1');}window.homeWrites=0;const set=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==='learning-garden-explorers'||String(k).startsWith('number-garden')){homeWrites++;if(x.denied)throw Error('Synthetic storage denial');}return set.call(this,k,v);};})("""+json.dumps({**seeds,'denied':denied})+')')
  p=c.new_page();p.set_default_timeout(15000);p.on('pageerror',lambda e:errors.append(str(e)));p.on('response',lambda r:bad_requests.append(r.url) if r.status>=400 else None)
- p.goto(base+'#home',wait_until='networkidle');p.locator('[data-select-explorer="explorer-1"]').tap();ready(p);return c,p
+ try:
+  p.goto(base+'#home',wait_until='networkidle');p.locator('#explorer-header').wait_for(timeout=30000);p.locator('[data-select-explorer="explorer-1"]').tap();ready(p);return c,p
+ except Exception:
+  (OUT/f'startup-failure-{width}.json').write_text(json.dumps({'url':p.url,'errors':errors,'badResponses':bad_requests,'main':p.locator('main').inner_text()},indent=2));p.screenshot(path=str(OUT/f'startup-failure-{width}.png'));raise
 
 def ready(p):
  p.locator('[data-home-entry]').wait_for();p.wait_for_function("[...document.styleSheets].some(s=>s.href?.endsWith('/home-entry.css')&&s.cssRules.length)");p.evaluate('async()=>{await document.fonts.ready}')
@@ -79,7 +82,7 @@ def journey(b,base,seeds,width,height):
   with p.expect_download() as dl:p.locator('#download').tap()
   file=OUT/f'notes-{width}.json';dl.value.save_as(str(file));export=json.loads(file.read_text());ok(export['loft']['draft']['frames'][0]['dialogue']==expected['loft']['draft']['frames'][0]['dialogue'],'actual export retains puppet dialogue');ok(export['linearPathway']==expected['linearPathway'],'actual export retains math draft and support')
   p.locator('#progress-file').set_input_files(str(file));p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').tap();p.wait_for_function("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId==='explorer-3'");home(p);ok(p.locator('[data-home-choice=continue]').get_attribute('aria-pressed')=='true','imported explorer selects its own retained work')
-  p.locator('.home-options summary').tap();p.locator('.home-options a[href="#notes"]').tap();p.locator('#remember').uncheck();home(p);ok('Saving is off.' in p.locator('.home-save-note').text_content(),'save-off copy honest');panel(p,'questions');panel(p,'town');ok(not p.evaluate("Object.keys(localStorage).some(k=>k.startsWith('number-garden-v1:'))"),'panel changes never recreate saves while saving off')
+  p.locator('.home-options summary').tap();p.locator('.home-options a[href="#notes"]').tap();p.locator('#remember').click();p.locator('dialog[open] [data-confirm-do]').click();home(p);ok('Saving is off.' in p.locator('.home-save-note').text_content(),'save-off copy honest');panel(p,'questions');panel(p,'town');ok(not p.evaluate("Object.keys(localStorage).some(k=>k.startsWith('number-garden-v1:'))"),'panel changes never recreate saves while saving off')
   print('Home',width,height,'passed',flush=True)
  finally:c.close()
 
@@ -97,6 +100,7 @@ def first_visit(b,base,seeds):
 def main():
  seeds=fixture()
  class Quiet(http.server.SimpleHTTPRequestHandler):
+  protocol_version='HTTP/1.1'
   def log_message(self,*a):pass
  class Server(http.server.ThreadingHTTPServer):request_queue_size=128;daemon_threads=True
  server=Server(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT/'dist')));threading.Thread(target=server.serve_forever,daemon=True).start();base=os.environ.get('HOME_TEST_URL',f'http://127.0.0.1:{server.server_port}/').rstrip('/')+'/'

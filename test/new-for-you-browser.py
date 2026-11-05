@@ -171,7 +171,7 @@ def main():
             ok('#library/beat' in rooms(p)['opened'], 'the first tab keeps the second tab’s room')
             # Saving off, then on again: a room opened meanwhile is written once saving returns.
             hop(p, '#notes')
-            p.locator('#remember').uncheck()
+            p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             p.wait_for_timeout(300)
             ok(rooms(p) is None, 'saving off removes the record')
             hop(p, '#desk/rods')

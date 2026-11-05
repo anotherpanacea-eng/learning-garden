@@ -331,7 +331,7 @@ console.log(JSON.stringify({base,historical,maxImportBytes:MAX_IMPORT_BYTES}));
             for fault in ['quota','saving-off']:
                 _, fault_page=native.setup(browser,fixtures['base'],fault+'-fault')
                 if fault=='saving-off':
-                    h.go(fault_page,base,'#notes','#remember');fault_page.locator('#remember').uncheck()
+                    h.go(fault_page,base,'#notes','#remember');fault_page.locator('#remember').click();fault_page.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
                     fault_page.evaluate('location.hash="#living/bodies"');fault_page.locator('[data-cs-enter]').wait_for();h.click(fault_page,'[data-cs-enter]')
                 else:enter(fault_page,base)
                 if fault=='quota':fault_page.evaluate('''()=>{const native=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(String(k).startsWith('number-garden-v1:'))throw new DOMException('Invented quota fault','QuotaExceededError');return native.call(this,k,v);};}''')

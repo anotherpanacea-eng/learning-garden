@@ -417,7 +417,7 @@ def saving(browser,base,f):
     compare(p);ok('could not be saved' in p.locator('#gap-status').inner_text(),'storage fault disclosed')
     report=download(p,base,'storage-fault');ok(next(x for x in report['gapLine']['observations'] if x['caseId']=='positive')['first']['endResult']=='meets','storage-failed current memory downloadable')
     p.evaluate('()=>{Storage.prototype.setItem=window.originalGapSet;}')
-    p=setup(browser,820,1180,f['partial'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').uncheck();p.goto(base+'#desk/gaps',wait_until='domcontentloaded');p.locator(VIEW).wait_for();select_case(p,'positive')
+    p=setup(browser,820,1180,f['partial'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.goto(base+'#desk/gaps',wait_until='domcontentloaded');p.locator(VIEW).wait_for();select_case(p,'positive')
     for _ in range(5):click(p,'[data-gap-move="1"]')
     compare(p);ok('Saving is off' in view(p).inner_text(),'save-off disclosed');report=download(p,base,'save-off');ok(next(x for x in report['gapLine']['observations'] if x['caseId']=='positive')['first']['endResult']=='meets','save-off memory downloadable')
 

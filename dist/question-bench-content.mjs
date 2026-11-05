@@ -8,7 +8,7 @@ const sources = [
     "wonder": "Which seedling setup is doing better?",
     "origin": "A plan about the Field Notebook's invented seedling records. They are not measured growth results or a forecast. The setups with enough light and with too little light have separate illustrated seedlings.",
     "notice": "“Better” needs a meaning. Stem length and leaf spread describe different features. A bigger number is not automatically “better”. Decide what “doing well” means before reading the rows. Leaf spread here means the width across the two leaves, not leaf area. A comparison of model records is not a new experiment.",
-    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgment of wording you write.",
+    "methodNotice": "Method notes describe this story example, not an analysis or judgment of wording you write.",
     "focusLabel": "What to notice",
     "contextLabel": "Which context",
     "focus": [
@@ -72,7 +72,7 @@ const sources = [
         "id": "research",
         "label": "Look up sources",
         "icon": "research",
-        "can": "A source may explain the feature or show how someone recorded it. The Field Notebook already holds supplied model rows you can inspect.",
+        "can": "A source may explain the feature or show how someone recorded it. The Field Notebook already holds example model rows you can inspect.",
         "limit": "A general guide cannot supply readings for a particular setup unless those records are actually included. Check the source and the question, not just a familiar plant word."
       },
       {
@@ -95,7 +95,7 @@ const sources = [
       },
       {
         "term": "Record",
-        "meaning": "An account of what was reported or supplied, with its source and context."
+        "meaning": "An account of what was reported or given, with its source and context."
       },
       {
         "term": "Model",
@@ -109,9 +109,9 @@ const sources = [
     "id": "ramps",
     "title": "Ramps: what does better mean?",
     "wonder": "Which ramp works better?",
-    "origin": "A planning story about the Fair Test Bench's model ramps. Its supplied trials contain made-up stopping distances, not real measurements; they do not contain measured stopping times.",
+    "origin": "A planning story about the Fair Test Bench's model ramps. Its example trials contain made-up stopping distances, not real measurements; they do not contain measured stopping times.",
     "notice": "A useful question names what changes and what you will notice. “Farther” and “longer time” are different outcomes. Nothing on this card predicts which setup wins.",
-    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgment of wording you write.",
+    "methodNotice": "Method notes describe this story example, not an analysis or judgment of wording you write.",
     "focusLabel": "What to notice",
     "contextLabel": "Which change",
     "focus": [
@@ -189,7 +189,7 @@ const sources = [
     "teaching": [
       "“Works better” might mean farther, quicker or easier to use. These are different questions.",
       "Suppose someone chose stopping distance and a surface change. Keep height, cart and release procedure alike.",
-      "A fair comparison could help, but it still needs records. A supplied distance cannot silently stand in for a stopping time."
+      "A fair comparison could help, but it still needs records. A given distance cannot silently stand in for a stopping time."
     ],
     "glossary": [
       {
@@ -214,7 +214,7 @@ const sources = [
     "wonder": "What are frogs and toads like?",
     "origin": "A fictional library question about real species named in British wildlife guides. This card gives no diet or habitat answer.",
     "notice": "A source needs to match the species, life stage and question. “An amphibian” is not enough detail to assume the same answer for every species.",
-    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgment of wording you write.",
+    "methodNotice": "Method notes describe this story example, not an analysis or judgment of wording you write.",
     "focusLabel": "What to find out",
     "contextLabel": "Which animal",
     "focus": [
@@ -317,7 +317,7 @@ const sources = [
     "wonder": "Which flowers are prettiest?",
     "origin": "An imagined survey in the town. There are no real respondents and no collected answers on this card.",
     "notice": "People can have different favorites. We can investigate what people report without proving that one flower is objectively prettiest.",
-    "methodNotice": "Method notes describe this supplied story example, not an analysis or judgment of wording you write.",
+    "methodNotice": "Method notes describe this story example, not an analysis or judgment of wording you write.",
     "focusLabel": "What to collect",
     "contextLabel": "Which flowers",
     "focus": [

@@ -1,3 +1,4 @@
+import {plantStudyPage} from '../dist/plant-study-ui.mjs';
 import assert from 'node:assert/strict';
 import {PLANT_DAYS,PLANT_CONDITIONS,PLANT_SPECIMENS,PLANT_MODEL,PLANT_OBSERVATIONS,plantObservation,plantObservationById,plantQuestions,waterComparisonQuestion} from '../dist/plant-study-content.mjs';
 import {plantStudy,ensurePlantStudy,recoverPlantStudy,currentPlantObservation,setPlantPage,setPlantDay,setPlantSpecimen,recordPlantObservation,setPlantPrediction,usePlantSupport,answerPlantQuestion,choosePlantLocation,carryPlantPlan,notePlantExposure,notePlantExposureUnknown} from '../dist/plant-study-core.mjs';
@@ -92,4 +93,40 @@ for(const raw of [null,[],{version:99,work:'keep'},{version:1,day:6},'<future pa
  const old={};ensurePlantStudy(old);setPlantPrediction(old,'dim');check(!Object.hasOwn(old.plantStudy,'exposureUnknown')&&!Object.hasOwn(old.plantStudy.prediction.first,'exposureUnknown'),'old valid format stays compatible without a migration');check(plantStudy(JSON.parse(JSON.stringify(old))),'old and extended snapshots validate');
 }
 {const q=plantQuestions(0)[0];check(q.feedback.cause.includes('still match')&&!q.feedback.cause.includes('illustrates a source-informed pattern'),'day-0 cause feedback does not imply stretching the pictures do not show');}
+
+// New notebooks vary authored positions; previously saved notebooks never reorder.
+{
+ const s={};ensurePlantStudy(s);setPlantPage(s,'compare');const positions=new Set();
+ for(const day of PLANT_DAYS){setPlantDay(s,day);for(const q of plantQuestions(day)){
+  const choices=s.plantStudy.choiceSets[q.id];positions.add(choices.findIndex(c=>c.id===q.answer));
+  equal(new Set(choices.map(c=>c.id)),new Set(q.choices.map(c=>c.id)),'all original choices retained');
+  const reloaded=copy(s),before=copy(reloaded);check(plantStudy(reloaded),'new choices reload');
+  const html=plantStudyPage(reloaded),indices=choices.map(c=>html.indexOf(`data-ps-answer="${q.id}:${c.id}"`));
+  check(indices.every((n,i)=>n>=0&&(i===0||n>indices[i-1])),'saved authored order is rendered');equal(reloaded,before,'render does not rewrite saved choices');
+ }}equal([...positions].sort(),[0,1,2],'fitting answer spans all three positions');
+ const q=plantQuestions(6)[0];s.plantStudy.choiceSets[q.id].reverse();s.plantStudy.choiceSets[q.id][0].label='An earlier saved choice <kept>';
+ check(plantStudy(copy(s)),'earlier displayed choices remain readable');check(plantStudyPage(s).includes('An earlier saved choice &lt;kept&gt;'),'saved display text is retained and escaped');
+ const old=copy(s);delete old.plantStudy.choiceSets;const raw=copy(old),html=plantStudyPage(old);
+ for(const q of plantQuestions(6)){const indices=q.choices.map(c=>html.indexOf(`data-ps-answer="${q.id}:${c.id}"`));check(indices.every((n,i)=>n>=0&&(i===0||n>indices[i-1])),'legacy unanswered questions retain original order');}
+ check(plantStudy(old),'legacy notebook accepted');equal(old,raw,'loading and rendering do not add choices to a legacy notebook');
+ const malformed=copy(s);malformed.plantStudy.choiceSets[q.id].push(malformed.plantStudy.choiceSets[q.id][0]);check(plantStudy(malformed),'duplicate optional choice ids do not close the notebook');
+ const changed=copy(s);changed.plantStudy.choiceSets[q.id].push({id:'earlier-option',label:'Earlier option'});check(plantStudy(changed),'historical choice counts and ids remain readable');changed.plantStudy.questions[q.id]={attempts:[{choice:'earlier-option',support:{},practice:true,familiar:true}],support:{}};check(plantStudy(changed),'a retired response cannot strand the notebook');check(!plantStudyPage(changed).includes(`data-ps-answer="${q.id}:earlier-option"`),'retired option falls back for this question only');delete changed.plantStudy.questions[q.id];changed.plantStudy.choiceSets[q.id]=[{id:'cause',label:'Earlier option'}];check(plantStudy(changed),'unusable question does not invalidate notebook');check(plantStudyPage(changed).includes(`data-ps-answer="${q.id}:visible"`),'only the unusable question falls back');
+}
+
+// Broken optional labels isolate one question; existing observations and answers remain usable.
+for(const broken of [null,42,'old labels',[],[null],[{id:'visible',label:42}],[{id:'visible',label:'A'},{id:'visible',label:'B'}],{unexpected:'raw'}]){
+ const s={};ensurePlantStudy(s);setPlantDay(s,6);recordPlantObservation(s);setPlantPage(s,'compare');const [q,other]=plantQuestions(6);
+ answerPlantQuestion(s,q.id,q.answer);s.plantStudy.questions[q.id].attempts[0].choice='retired-response';
+ s.plantStudy.choiceSets[q.id]=broken;s.plantStudy.choiceSets[other.id].reverse();const reloaded=copy(s),before=copy(reloaded);
+ check(plantStudy(reloaded),'optional malformed labels do not strand the notebook after JSON reload');
+ const html=plantStudyPage(reloaded),ids=q.choices.map(c=>html.indexOf(`data-ps-answer="${q.id}:${c.id}"`));
+ check(ids.every((at,i)=>at>=0&&(i===0||at>ids[i-1])),'only damaged question uses the original authored choices');
+ const unaffected=before.plantStudy.choiceSets[other.id].map(c=>html.indexOf(`data-ps-answer="${other.id}:${c.id}"`));check(unaffected.every((at,i)=>at>=0&&(i===0||at>unaffected[i-1])),'other question retains its saved choice order');
+ equal(reloaded,before,'loading/rendering retain raw optional data and retired response');check(setPlantDay(reloaded,PLANT_DAYS.find(day=>day!==6)),'unrelated model day remains usable');
+ equal(reloaded.plantStudy.choiceSets,before.plantStudy.choiceSets,'model action preserves damaged labels exactly');equal(reloaded.plantStudy.questions,before.plantStudy.questions,'model action preserves past responses');equal(reloaded.plantStudy.observations,before.plantStudy.observations,'kept observations remain exact');
+}
+for(const brokenRoot of [null,42,'old labels',[]]){
+ const s={};ensurePlantStudy(s);setPlantDay(s,6);setPlantPage(s,'compare');s.plantStudy.choiceSets=brokenRoot;const raw=copy(s);
+ check(plantStudy(s)&&plantStudyPage(s).includes('data-ps-answer='),'a malformed optional container does not close Plant Study');equal(s,raw,'container is not silently repaired');check(recordPlantObservation(s),'observations can still be kept');equal(s.plantStudy.choiceSets,brokenRoot,'actions preserve raw container');
+}
 console.log(`Plant study checks passed: ${checks}`);

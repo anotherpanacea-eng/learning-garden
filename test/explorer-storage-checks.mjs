@@ -161,3 +161,37 @@ console.log(`${checks} explorer storage checks including denied-write chooser pa
  check(a.setPersistence(true,s),'explicit retry can enable and persist intact work');equal(store(disk).load().syntheticWork,{from:'keep temporary work'},'explicit retry saves recoverable work');
 }
 console.log(`${checks} explorer storage checks including preference-write failure passed.`);
+{
+ const disk=new Storage(),m=store(disk);m.load();
+ const first=`number-garden-kept-${m.active.id}-2026-11-04T12-30-00-000Z`,second='number-garden-backup-explorer-9-2026-11-04T12-30-00-000Z-1';
+ disk.data.set(first,'fictional original one');disk.data.set(second,'fictional original nine');disk.data.set(STORAGE_KEY,'fictional shared original');
+ const before=[...disk.data],writes=disk.log.length,kept=m.keptCopies();
+ const a=kept.find(c=>c.key===first),b=kept.find(c=>c.key===second),shared=kept.find(c=>c.key===STORAGE_KEY);
+ equal(a.explorerId,m.active.id,'copy owner comes from its existing key');equal(a.stamp,'2026-11-04T12-30-00-000Z','copy date comes from existing key');
+ equal(b.explorerId,'explorer-9','copy owner remains identifiable after the explorer leaves the list');equal(b.stamp,'2026-11-04T12-30-00-000Z-1','same-instant copies retain their disambiguating suffix');
+ equal(shared.explorerId,null,'shared original is not assigned to the active explorer');equal(shared.stamp,null,'unknown shared date is not invented');
+ equal(a.raw,'fictional original one','download bytes remain exact');equal(b.raw,'fictional original nine','other explorer download bytes remain exact');
+ equal([...disk.data],before,'describing copies changes no stored bytes');equal(disk.log.length,writes,'describing copies performs no storage writes');
+}
+console.log(`${checks} explorer storage checks including recovery-copy identity passed.`);
+{
+ const disk=new Storage(),original=store(disk),first=original.load(),a=original.active.id;
+ const second=original.add({avatar:'fern',color:'blue',symbol:'shell'},first),b=original.active.id;
+ original.select(a,second);disk.data.set(key(b),'fictional unreadable notebook');
+ const reopened=store(disk),current=reopened.load();check(reopened.setPersistence(false,current),'saving-off succeeds after encountering an unreadable inactive notebook');
+ check(!disk.data.has(key(b))&&reopened.keptCopies().length===0,'successful saving-off removes the warned stored notebook and any generated kept copy');
+ equal(reopened.warning,'','no location banner points at a copy deleted by saving-off');
+ check(reopened.memory.has(a)&&reopened.memory.has(b),'both active and unreadable fallback notebooks remain available in memory');
+ equal(current,first,'active notebook remains exact when another notebook was unreadable');
+}
+console.log(`${checks} explorer storage checks including saving-off recovery notices passed.`);
+for(const action of ['active','all','copy','other-copy','another-tab']){
+ const disk=new Storage(),original=store(disk);original.load();const id=original.active.id;disk.data.set(key(id),'fictional broken progress');
+ const m=store(disk);m.load();const kept=m.keptCopies().find(c=>c.raw==='fictional broken progress'),other='number-garden-kept-explorer-9-2026-11-04T12-30-00-000Z';
+ disk.data.set(other,'fictional other original');check(!!m.warning&&!!kept,action+' recovery notice has its original before the action');
+ if(action==='other-copy'){check(m.removeCopy(other),'remove unrelated original');check(!!m.warning&&disk.data.get(kept.key)==='fictional broken progress','unrelated removal retains the applicable recovery notice');}
+ if(action==='active')m.clearActive();else if(action==='all')m.clearAll();else if(action==='another-tab')disk.data.delete(kept.key);else check(m.removeCopy(kept.key),'remove the notice original');
+ equal(m.warning,'',action+' no banner points to the removed original');check(!disk.data.has(kept.key),action+' the notice original is actually absent');
+ if(!['all','other-copy'].includes(action))equal(disk.data.get(other),'fictional other original',action+' another explorer copy remains without keeping the stale banner');
+}
+console.log(`${checks} explorer storage checks including precise recovery-notice lifecycle passed.`);
