@@ -30,7 +30,7 @@ function suggestion(state){
  }).slice(-8);
  if(!recent.length)return {variant:1,reason:'Start with short French sentences. You can choose any length.'};
  const latest=recent.at(-1),base=latest.frenchVariant,lastSupport=recent.findLastIndex(o=>supported(o)||retry(o));
- if(lastSupport>=0&&recent[lastSupport].frenchVariant===base&&recent.slice(lastSupport).every(o=>o.visitId===latest.visitId))return {variant:Math.max(1,base-1),reason:base===1?'Try more short sentences with any help you like. You can choose any story or length.':'You used help or tried again on the last story. Try fewer sentences next, or choose any length.'};
+ if(lastSupport>=0&&recent[lastSupport].frenchVariant===base&&recent.slice(lastSupport).every(o=>o.visitId===latest.visitId))return {variant:Math.max(1,base-1),reason:base===1?'Try more short sentences with any help you like. You can choose any story or length.':recent[lastSupport].readingTools?.supportUncertain?'Some earlier reading details are missing. Try fewer sentences next, or choose any length.':'You used help or tried again on the last story. Try fewer sentences next, or choose any length.'};
  const distinct=new Set();
  for(const o of recent.slice(lastSupport+1)){
   const v=visits.find(v=>v.id===o.visitId),n=parisNode(v,o.nodeId);
