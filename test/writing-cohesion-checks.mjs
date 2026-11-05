@@ -32,7 +32,7 @@ export function cohesionFixtures(){
 }
 export function runCohesionChecks(){
  let n=0;const ok=(v,m)=>{assert.ok(v,m);n++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;};
- eq(writingTasks.filter(x=>x.bench!=='research').length,24,'original open shelf retains twenty-four tasks');eq(writingTasks.filter(x=>x.bench==='holding').map(x=>x.id),cohesionIds,'independent nine-task order');
+ eq(writingTasks.filter(x=>['paragraphs','linking','holding'].includes(x.bench)).length,24,'original open shelf retains twenty-four tasks');eq(writingTasks.filter(x=>x.bench==='holding').map(x=>x.id),cohesionIds,'independent nine-task order');
  for(const id of cohesionIds){
   const src=taskSource(id);ok(c.validWritingSource(src),id+' source readable');eq(src.key,cohesionKeys[id],'authored key');eq(src.teach.length,5,'card, example title and three manual steps');
   const selectable=src.kind==='tap'?src.parts.filter(x=>x.tap===true):src.choices;

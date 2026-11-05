@@ -6,7 +6,7 @@ All notices are original Willowbank fiction. Selected ideas adapt project277's R
 
 Header: Read the reader's request. What change would help?
 
-Teaching introduction: Revising changes writing for its reader. Editing checks spelling, punctuation and similar conventions. They can overlap; sort these examples by their main job.
+Teaching introduction: Revising changes writing for its reader. Editing checks spelling, punctuation and similar conventions. They can overlap. Use the reader’s purpose to decide what change helps.
 
 Different worked example title: A note for a gardener.
 

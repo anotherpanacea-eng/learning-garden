@@ -21,6 +21,38 @@ export function validWritingSource(s){
  if(s.kind==='order')return ids(s.key)&&s.key.length===p.length&&s.key.every(k=>p.includes(k));
  return typeof s.key==='string'&&(s.kind==='break'?p.slice(1):c).includes(s.key);
 }
+// Optional Red Pencil display hints never change ordinary source/work readability.
+const plain=x=>object(x)&&(Object.getPrototypeOf(x)===Object.prototype||Object.getPrototypeOf(x)===null);
+const revisionPacket=s=>object(s)&&own(s,'bench')&&s.bench==='revision'&&own(s,'redPencil')&&plain(s.redPencil)&&own(s.redPencil,'v')&&s.redPencil.v===1?s.redPencil:null;
+export function writingNoticePreview(s,w){
+ try{
+  const packet=revisionPacket(s);
+  if(!packet||s.kind!=='sort'||!validWritingWork(s,w)||!own(packet,'keepId')||!own(packet,'asideId')||!id(packet.keepId)||!id(packet.asideId)||packet.keepId===packet.asideId)return null;
+  const keep=s.choices.find(h=>h.id===packet.keepId),aside=s.choices.find(h=>h.id===packet.asideId);if(!keep||!aside)return null;
+  const group=h=>({id:h.id,text:h.text,parts:s.parts.filter(p=>placed(w,p.id)===h.id)});
+  return {keep:group(keep),aside:group(aside),waiting:s.parts.filter(p=>!placed(w,p.id)),other:s.choices.filter(h=>h.id!==keep.id&&h.id!==aside.id).map(group)};
+ }catch{return null;}
+}
+export function writingOtherReader(state,s){
+ const absent={status:'absent'};
+ try{
+  const packet=revisionPacket(s),link=packet&&own(packet,'otherReader')&&packet.otherReader;
+  if(!plain(link)||!own(link,'taskId')||!own(link,'label')||!id(link.taskId)||typeof link.label!=='string'||!link.label.trim()||Array.from(link.label).length>160)return absent;
+  const target={taskId:link.taskId,label:link.label},view=writingView(state);
+  if(view.status==='unsupported')return {status:'unavailable',...target};
+  const records=state?.writingDesk?.records;
+  if(object(records)&&own(records,link.taskId))return {status:validWritingRecord(records[link.taskId])?'ready':'unavailable',...target};
+  return writingTasks.some(t=>t.id===link.taskId)?{status:'ready',...target}:absent;
+ }catch{return absent;}
+}
+export function writingRevisionDestinationLabel(s,headingId){
+ try{
+  const heading=s?.choices?.find(h=>h.id===headingId);if(!heading)return null;
+  const packet=revisionPacket(s),labels=packet&&own(packet,'destinationLabels')&&packet.destinationLabels,label=plain(labels)&&own(labels,headingId)?labels[headingId]:null;
+  return typeof label==='string'&&label.trim()&&Array.from(label).length<=160?label:`Choose: ${heading.text}`;
+ }catch{return null;}
+}
+
 // Optional source-local references are derived without changing the frozen raw source.
 const dense=(xs,min,max)=>Array.isArray(xs)&&xs.length>=min&&xs.length<=max&&Array.from({length:xs.length},(_,i)=>own(xs,i)).every(Boolean);
 const display=(x,max)=>typeof x==='string'&&x.trim().length>0&&Array.from(x).length<=max;
@@ -131,7 +163,7 @@ export function writingResult(s,w){
  }else if(s.kind==='sort'){
   const pending=s.parts.filter(x=>!placed(w,x.id));
   outcome=pending.length?'incomplete':s.parts.every(x=>placed(w,x.id)===s.key[x.id])?'fit':'different';
-  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&selected!==s.key[part.id])feedback.push(s.bench==='research'?`${part.text} ${own(s.feedback.different,part.id)?s.feedback.different[part.id]:`Under ${s.choices.find(x=>x.id===selected).text}; compare with ${s.choices.find(x=>x.id===s.key[part.id]).text}.`}`:`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
+  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&selected!==s.key[part.id])feedback.push(['research','revision'].includes(s.bench)?`${part.text} ${own(s.feedback.different,part.id)?s.feedback.different[part.id]:`Under ${s.choices.find(x=>x.id===selected).text}; compare with ${s.choices.find(x=>x.id===s.key[part.id]).text}.`}`:`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
  }else if(s.kind==='order')outcome=same(w.order,s.key)?'fit':'different';
  else{const picked=s.kind==='break'?w.boundary:w.choice;outcome=picked===null?'incomplete':picked===s.key?'fit':'different';if(outcome==='different'&&own(s.feedback.different,picked))feedback.push(s.feedback.different[picked]);}
  if(outcome==='fit')feedback.unshift(s.feedback.fit);
