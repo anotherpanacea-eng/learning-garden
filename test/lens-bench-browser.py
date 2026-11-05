@@ -86,7 +86,7 @@ def geometry(p,historical=False):
     point=field.evaluate('e=>{const p=new DOMPoint(250,200).matrixTransform(e.getScreenCTM());return {x:p.x,y:p.y}}')
     p.mouse.click(point['x'],point['y'])
     near(p.locator('[data-lens-target]').first.evaluate('e=>[+e.getAttribute("cx"),+e.getAttribute("cy")]'),[140,90],'actual rendered CTM maps tap to world center150,200',1.2)
-    h.ok(focus_is(p,'#lens-title'),'pointer recenter focuses field heading')
+    h.ok(focus_is(p,'#lens-field-title'),'pointer recenter focuses field heading')
     click(p,'pan','right')
     near(p.locator('[data-lens-target]').first.evaluate('e=>[+e.getAttribute("cx"),+e.getAttribute("cy")]'),[40,90],'right arrow moves center by current diameter quarter',1.2)
     click(p,'pan','left')
@@ -138,6 +138,13 @@ def journey(browser,base,f):
     bounds(p)
     p.screenshot(path=str(OUT/'tablet-viewfinder.png'),full_page=True)
     # Touch and keyboard controls preserve their own focus, with no draft writes.
+    p.locator('[data-lens-focus="-1"]').focus();p.keyboard.press('Enter')
+    h.ok(focus_is(p,'[data-lens-focus="1"]'),'left endpoint moves keyboard focus to enabled sibling')
+    for _ in range(4):p.keyboard.press('Enter')
+    h.ok(focus_is(p,'[data-lens-focus="-1"]'),'right endpoint moves keyboard focus to enabled sibling')
+    for _ in range(3):p.keyboard.press('Enter')
+    click(p,'hear');spoken=p.locator('[data-lens-hear]').get_attribute('data-speak') or ''
+    h.ok('Focus: Soft' in spoken and 'Use the arrows' not in spoken and 'Choose an objective' not in spoken,'Hear includes settings and excludes practice control instructions')
     p.locator('[data-lens-pan="left"]').tap()
     p.locator('[data-lens-objective="o10"]').focus();p.keyboard.press('Enter')
     h.ok(focus_is(p,'[data-lens-objective="o10"]'),'objective keyboard action preserves control focus')
@@ -158,6 +165,8 @@ def journey(browser,base,f):
     p.screenshot(path=str(OUT/'tablet-photo.png'),full_page=True)
     h.ok(h.book(p)==before,'settings, pin, help and photograph exploration do not write notebook')
     click(p,'hear');h.ok(p.locator('.speech-controls').is_visible(),'real Hear opens native speech controls')
+    spoken=p.locator('[data-lens-hear]').get_attribute('data-speak') or ''
+    h.ok('Digital enlargement' in spoken and 'Enlarge the recorded pixels' not in spoken,'photo Hear reads caption and excludes photo control instructions')
     stale=p.locator('[data-lens-keep]').element_handle();click(p,'keep');dispatch(stale)
     first=copy.deepcopy(records(p)[0]);work=first['work']
     h.ok(len(records(p))==1 and work['photoShown'] and work['exampleSeen']>0 and work['pin'] is not None,'Keep freezes disclosures and own pin once')
@@ -176,6 +185,10 @@ def journey(browser,base,f):
     cells(browser,base,f,first)
     for width in [320,1024]:
         _,sample=native.setup(browser,f['base'],f'width-{width}',width=width);enter(sample,base);bounds(sample)
+        if width==320:
+            for label in ['0','2']:
+                rows=sample.locator('[data-lens-turn="'+label+'"]').evaluate('e=>{const r=document.createRange();r.selectNodeContents(e);return [...new Set([...r.getClientRects()].map(x=>Math.round(x.y)))].length}')
+                h.ok(rows==1,'single-word phone turn label remains on one line')
         click(sample,'pin');turn(sample,1);bounds(sample);turn(sample,2);click(sample,'photo');bounds(sample)
         sample.screenshot(path=str(OUT/f'width-{width}.png'),full_page=True)
     unseen=copy.deepcopy(f['base']);unseen['garden']['welcomeFilmSeen']=False
@@ -249,7 +262,7 @@ def boundaries(browser,base,f,exported):
         _,p=native.setup(browser,seed,name);enter(p,base);click(p,'pan','left');old=h.book(p)
         if p.locator('[data-lens-keep]').is_enabled():click(p,'keep')
         h.ok(h.book(p)==old,name+' owner remains exact')
-        click(p,'shelf');click(p,'hear');click(p,'draft');h.ok(p.locator('[data-lens-turn]').count()==3,name+' retains Hear/shelf/fresh navigation')
+        click(p,'shelf');h.ok('Keep a practice view to leave it here' not in p.locator('[data-lens-root]').inner_text(),name+' shelf makes no blocked Keep promise');click(p,'hear');click(p,'draft');h.ok(p.locator('[data-lens-turn]').count()==3,name+' retains Hear/shelf/fresh navigation')
     wrapper={k:v for k,v in exported.items() if k in ['title','exportedAt','note','explorer','recommendation']}
     probe=copy.deepcopy(exported)
     seed={k:v for k,v in probe.items() if k not in wrapper}
