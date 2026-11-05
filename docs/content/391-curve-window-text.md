@@ -8,7 +8,7 @@ All text/models below are original. Source factory freezes complete cases and te
 | two | Near the line | 0,−4 | How many different inputs might give zero? Mark your ideas, then explore the rule. |
 | touch | A second window | 1,0 | What might this picture look like near zero? Show your ideas before comparing. |
 | above | Another height | 0,2 | Which inputs, if any, could give zero? What could the rule tell us beyond a table? |
-| shift | Move the fold? | 1,−4 | Where would you fold this picture? Is the y-axis always the fold line? |
+| shift | Move the fold? | 1,−4 | Where would you put a fold? Use points on each side to explore. |
 | between | A further window | −1,−2 | Which inputs, if any, give zero? Could intervals help you describe what you find? |
 
 Story: The traveling library needs a window into square rules. Make a picture another visitor can explore. These curves describe number rules, not the strength or shape of a real building.
@@ -69,3 +69,5 @@ Two-interval explanation (k<0 and non-square distance): Output zero needs the sq
 Reference provenance note: The curve and its values are supplied by the written rule. Your points, fold, idea and intervals stay unchanged; they are not a score. New-construction safe fallback: Your new marks are still here. The model view could not be reopened safely, so this page shows your picture alone (on Zeroes after a Zeroes edit, otherwise on Plot). Download Notes or retry the model view.
 
 Display signs consistently use Unicode minus (−); wrap formatNumber output for display rather than changing the shared arithmetic utility. Formula/narration templates remain exact. UI string tests should use the authored labels; apostrophe typography is not a new learner-data or validation requirement.
+
+Written rule template (also used for each teaching example): for h=0, “Multiply x by itself”; otherwise “Subtract {h in signed words} from x, then multiply the result by itself”. Append “, then add {k}” for positive k, “, then subtract {abs(k)}” for negative k, or finish with a period for zero k. Negative h is spoken as negative {abs(h)}, not a doubled minus.
