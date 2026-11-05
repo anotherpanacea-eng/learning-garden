@@ -5,7 +5,7 @@ screenshots/downloads. No physical Safari, speech audibility or learning claim.
 """
 import sys
 sys.dont_write_bytecode=True
-import copy,functools,http.server,importlib.util,json,os,subprocess,tempfile,threading,traceback
+import copy,functools,http.server,importlib.util,json,os,re,subprocess,tempfile,threading,traceback
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1]
@@ -16,8 +16,8 @@ JAR='[data-cafe-bite][data-cafe-delta="1"]'
 def action(a):return f'[data-cafe-action="{a}"]'
 def click(p,a):h.click(p,action(a))
 def current(p):return h.book(p)['cafe']['current']
-def setup(browser,seed,width,label,height=1000):
- c=browser.new_context(viewport={'width':width,'height':height},has_touch=True,reduced_motion='reduce',accept_downloads=True);h.contexts.append(c)
+def setup(browser,seed,width,label,height=1000,*,touch=True):
+ c=browser.new_context(viewport={'width':width,'height':height},has_touch=touch,reduced_motion='reduce',accept_downloads=True);h.contexts.append(c)
  c.add_init_script('(s=>{if(!localStorage.getItem("cafe-touch-fixture")){const e={id:"explorer-1",avatar:"sky",color:"gold",symbol:"leaf",createdAt:"2026-10-28T12:00:00.000Z"};localStorage.setItem("learning-garden-explorers",JSON.stringify({version:1,activeId:e.id,explorers:[e]}));localStorage.setItem("number-garden-v1:"+e.id,JSON.stringify(s));localStorage.setItem("cafe-touch-fixture","1");}})('+json.dumps(seed)+')')
  p=c.new_page();h.pages.append((p,label));p.set_default_timeout(12000)
  p.on('pageerror',lambda e:h.errors.append({'case':label,'error':str(e)}));p.on('console',lambda e:h.console_errors.append({'case':label,'text':e.text}) if e.type=='error' else None)
@@ -196,6 +196,35 @@ def offer_exposure(browser,base,f):
    switch(q,owner);h.ok(not h.book(q)['baseline']['draft']['exposed'] and '4x3' not in h.book(q)['exposures'],'stale switch callback leaves old owner pending unexposed')
   else:h.ok(not h.book(q)['baseline']['draft']['exposed'],'stale import callback leaves imported pending unexposed')
 
+def legacy_repair_controls(browser,base,f):
+ # The app always requests the compact renderer. Exercise the supported legacy
+ # public render/bind API in its own document, with real unchanged modules.
+ p=setup(browser,f['overfull'],1280,'legacy-repair',height=900,touch=False)
+ links=''.join(re.findall(r'<link[^>]+rel="stylesheet"[^>]*>',(ROOT/'dist/index.html').read_text(encoding='utf-8')))
+ document='''<!doctype html><html lang="en"><head><meta charset="utf-8"><base href="__BASE__">__LINKS__</head><body><main id="legacy-cafe-fixture"></main><script type="module">
+ import {renderCafe,bindCafe} from './cafe-ui.mjs';
+ const key='number-garden-v1:explorer-1',state=JSON.parse(localStorage.getItem(key));
+ const root=document.querySelector('#legacy-cafe-fixture');
+ const context={save:()=>localStorage.setItem(key,JSON.stringify(state)),render:()=>{root.innerHTML=renderCafe(state);bindCafe(state,context);},exposeFacts:()=>{},focus:selector=>document.querySelector(selector)?.focus()};
+ context.render();
+ </script></body></html>'''.replace('__BASE__',base).replace('__LINKS__',links)
+ p.route('**/synthetic-legacy-cafe.html',lambda route:route.fulfill(status=200,content_type='text/html',body=document))
+ p.goto(base+'synthetic-legacy-cafe.html#cafe',wait_until='domcontentloaded');p.locator('[data-cafe-view]:not([data-cafe-touch])').wait_for()
+ click(p,'check');before=current(p)
+ h.ok(before['repair']['open'],'legacy count check opens the repair question')
+ control=p.locator(action('view-plate'));control.focus();p.keyboard.press('Enter')
+ p.locator('#cafe-plate-editor-title').wait_for()
+ after=current(p)
+ h.ok(not (after.get('repair') or {}).get('open'),'cupboard plate control leaves the legacy repair')
+ h.ok(after['recipe']==before['recipe'] and after['plateAttempts']==before['plateAttempts'],'returning to the plate changes no ingredients or earlier checks')
+ p.wait_for_function('document.activeElement?.id === "cafe-plate-editor-title"')
+ p.reload(wait_until='domcontentloaded');p.locator('#cafe-plate-editor-title').wait_for();retained=current(p)
+ h.ok(retained['recipe']==before['recipe'] and retained['plateAttempts']==before['plateAttempts'] and not (retained.get('repair') or {}).get('open'),'legacy repair return persists across reload')
+ skip=p.locator(action('skip-guest'));description=skip.get_attribute('aria-describedby')
+ h.ok(bool(description) and p.locator('#'+description).is_visible(),'legacy skip control has its visible consequence attached')
+ h.ok(p.evaluate('document.documentElement.scrollWidth<=document.documentElement.clientWidth'),'legacy layout fits the viewport');snap(p,'legacy-repair-return')
+
+
 def main():
  f=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import {cafeTouchFixtures,cafeOfferFixture} from './test/cafe-touch-checks.mjs';console.log(JSON.stringify({...cafeTouchFixtures(),offer:await cafeOfferFixture()}));"],cwd=ROOT,text=True));server=None;base=os.environ.get('CAFE_TOUCH_TEST_URL')
  if not base:
@@ -208,7 +237,7 @@ def main():
   browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
   try:
    for w,height in [(320,1000),(820,1000),(1024,768)]:ordinary(browser,base,f,w,height)
-   additional(browser,base,f);shortage_and_service(browser,base,f);offer_exposure(browser,base,f);boundaries_and_transfers(browser,base,f);zero_and_rotation(browser,base,f);supper_and_routes(browser,base,f);h.ok(not h.errors,'no page errors '+str(h.errors));h.ok(not h.console_errors,'no console errors '+str(h.console_errors));h.ok(not h.request_failures,'no failed requests '+str(h.request_failures));h.ok(not h.http_failures,'no HTTP failures '+str(h.http_failures))
+   additional(browser,base,f);legacy_repair_controls(browser,base,f);shortage_and_service(browser,base,f);offer_exposure(browser,base,f);boundaries_and_transfers(browser,base,f);zero_and_rotation(browser,base,f);supper_and_routes(browser,base,f);h.ok(not h.errors,'no page errors '+str(h.errors));h.ok(not h.console_errors,'no console errors '+str(h.console_errors));h.ok(not h.request_failures,'no failed requests '+str(h.request_failures));h.ok(not h.http_failures,'no HTTP failures '+str(h.http_failures))
    (OUT/'receipt.json').write_text(json.dumps({'status':'passed','checks':h.checks,'base':base,'scope':'native Chrome320/820/1024, real notebook downloads/import, two explorers, computed accessibility, paging, overflow, explicit repairs, total revision and stale controls','limits':['Physical Safari untested','Speech audibility untested','Learning gain untested']},indent=2));print(f'Café touch browser: {h.checks} assertions passed; artifacts {OUT}')
   except Exception:
    (OUT/'failure.txt').write_text(traceback.format_exc())
