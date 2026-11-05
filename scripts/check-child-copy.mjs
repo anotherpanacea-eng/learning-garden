@@ -660,13 +660,6 @@ export const copyScopes = [
   {path:"dist/packs/flood-almanac.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/packs/index.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/paired-points-core.mjs",adultBlocks:[],quotations:[]},
-  {path:"dist/pips-copy-core.mjs",adultBlocks:[],quotations:[]},
-  {path:"dist/plant-study-core.mjs",adultBlocks:[],quotations:[]},
-  {path:"dist/progress-limits.mjs",adultBlocks:[],quotations:[]},
-  {path:"dist/puppet-notice-core.mjs",adultBlocks:[],quotations:[]},
-  {path:"dist/puzzle-art.mjs",adultBlocks:[],quotations:[]},
-  {path:"dist/question-bench-core.mjs",adultBlocks:[],quotations:[]},
-  {path:"dist/random.mjs",adultBlocks:[],quotations:[]},
 
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
