@@ -1,4 +1,4 @@
-# 382 · Parcel questions · complete finite companion · revision 3
+# 382 · Parcel questions · complete finite companion · revision 4
 
 This is the complete finite French and English teaching copy. Interface actions and safety messages below are English. No generated language, external runtime model, recording, or microphone. Standard beginner French; local browser French speech is optional, with no English fallback.
 
@@ -19,10 +19,10 @@ The case is one row of this table, with the corresponding parcel at that row's c
 
 | Case | French note | Meaning | Colour reply | Room reply | Destination reply |
 | --- | --- | --- | --- | --- | --- |
-| café | **Apporte le colis pour le café.** | Bring the parcel for the café. | **Le colis est bleu.** / The parcel is blue. | **Le colis est dans la cuisine.** / The parcel is in the kitchen. | **Le colis va au café.** / The parcel is going to the café. |
-| jardin | **Apporte le colis pour le jardin.** | Bring the parcel for the garden. | **Le colis est rouge.** / The parcel is red. | **Le colis est dans le salon.** / The parcel is in the living room. | **Le colis va au jardin.** / The parcel is going to the garden. |
-| bibliothèque | **Apporte le colis pour la bibliothèque.** | Bring the parcel for the library. | **Le colis est bleu.** / The parcel is blue. | **Le colis est dans le salon.** / The parcel is in the living room. | **Le colis va à la bibliothèque.** / The parcel is going to the library. |
-| atelier | **Apporte le colis pour l’atelier.** | Bring the parcel for the workshop. | **Le colis est rouge.** / The parcel is red. | **Le colis est dans la cuisine.** / The parcel is in the kitchen. | **Le colis va à l’atelier.** / The parcel is going to the workshop. |
+| café | **Apporte le colis au café.** | Bring the parcel to the café. | **Le colis est bleu.** / The parcel is blue. | **Le colis est dans la cuisine.** / The parcel is in the kitchen. | **Le colis va au café.** / The parcel is going to the café. |
+| jardin | **Apporte le colis au jardin.** | Bring the parcel to the garden. | **Le colis est rouge.** / The parcel is red. | **Le colis est dans le salon.** / The parcel is in the living room. | **Le colis va au jardin.** / The parcel is going to the garden. |
+| bibliothèque | **Apporte le colis à la bibliothèque.** | Bring the parcel to the library. | **Le colis est bleu.** / The parcel is blue. | **Le colis est dans le salon.** / The parcel is in the living room. | **Le colis va à la bibliothèque.** / The parcel is going to the library. |
+| atelier | **Apporte le colis à l’atelier.** | Bring the parcel to the workshop. | **Le colis est rouge.** / The parcel is red. | **Le colis est dans la cuisine.** / The parcel is in the kitchen. | **Le colis va à l’atelier.** / The parcel is going to the workshop. |
 
 ## Questions · all produce replies, none is graded
 
