@@ -122,7 +122,7 @@ def storage(browser,base,seed):
   try:
    if fault=='saving-off':p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#living/bodies"');p.locator('[data-cs-leaf]').wait_for()
    enter(p);amount(p,'water-in');before=p.evaluate('JSON.stringify(localStorage)')
-   if fault=='quota-device-api':p.evaluate('Storage.prototype.setItem=function(){throw new DOMException("Synthetic quota refusal","QuotaExceededError")}')
+   if fault=='quota-device-api':p.evaluate('()=>{Storage.prototype.setItem=function(){throw new DOMException("Synthetic quota refusal","QuotaExceededError")};}')
    click(p,'keep');h.ok(p.evaluate('JSON.stringify(localStorage)')==before,fault+' Keep does not pretend to persist a failed or disabled save')
    out=h.export_notes(p,'leaf-'+fault);h.ok(out['leafAccounts'][-1]['work']['counts']==[{'slotId':'water-in','count':1}],fault+' actual Notes download recovers the kept in-memory construction')
   finally:c.close()
