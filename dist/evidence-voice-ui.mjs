@@ -98,7 +98,7 @@ function bindThreadsParent(book,ctx,root,{owner,route,dirty,unsaved}){
   for(const type of ['click','change','input','toggle','keydown','focusin'])n.addEventListener(type,e=>{if(!live()){e.preventDefault();e.stopImmediatePropagation();}},{capture:true});
   if(n.matches('[data-ev-threads]'))n.addEventListener('click',()=>{if(!live())return;if(dirty.size){unsaved();return;}stop();threadMode={book,owner,parentRoute:route};history.replaceState(null,'','#learn/english');ctx.render?.();ctx.focus?.('#tt-heading');});
   if(n.matches('[data-tt-return]'))n.addEventListener('toggle',()=>{if(live()){stop();returning.open=n.open;}});
-  if(n.matches('[data-tt-return-hear]'))n.addEventListener('click',()=>{if(!live())return;const panel=n.closest('[data-tt-return]');if(!panel?.open)return;stop();const read=p=>{if(p.nodeType===3)return p.textContent+' ';if(p.nodeType!==1||p.matches('button,a,svg,[hidden],[aria-hidden="true"]'))return '';if(p.tagName==='DETAILS'&&!p.open)return '';return [...p.childNodes].map(read).join(' ');};n.dataset.speak=read(panel).replace(/\s+/g,' ').trim();},{capture:true});
+  if(n.matches('[data-tt-return-hear]')){const payload=n.dataset.speak||'';n.addEventListener('click',()=>{if(!live())return;const panel=n.closest('[data-tt-return]');if(!panel?.open)return;stop();n.dataset.speak=payload;},{capture:true});}
   if(n.matches('a,summary'))n.addEventListener('click',()=>{if(live())stop();});
  }
 }
