@@ -31,7 +31,7 @@ Title: Curve Window. Entry: Make points, folds and zero intervals for a square r
 Plot instruction: Choose an input and your proposed output, then add the point. You can keep unexpected points.
 Compare instruction: Your marks stay here. The solid curve and table come from the written rule.
 Zeroes instruction: Mark your idea, or choose to show the rule’s curve. Your marks stay yours either way.
-Explain button: See the model's zeroes.
+Explain button: See the model’s zeroes.
 Model note: A known number rule, not measured data. A few dots alone do not prove a smooth continuation.
 Learner labels: Your proposed points (hollow diamonds); your fold (long dashed); your zero bands (outlined).
 Reference labels: Rule's curve (solid); rule's fold (short dashed); selected-input table.
@@ -57,7 +57,7 @@ Curve key: Solid blue curve — the written rule. Point key: Hollow amber diamon
 
 Band keys: Outlined amber bands — your proposed intervals. Filled blue ribbons — the model’s quarter-mark intervals. A blue circle on the x-axis means an exact model zero; a touching zero uses an outlined circle with the word Touch. Reference interval label: A zero lies between {lo} and {hi}; these endpoints are not the exact zero. Exact label: Output zero at input {x}. All model zero markers appear only after See the model’s zeroes; the rule’s curve itself remains available separately.
 
-Probe calculation: At input {x}, first subtract {h}. The changed input is {t}. Square it: {t} × {t} = {square}. Then {add/subtract/leave unchanged for k}. The output is {y}. When h is negative say “subtract negative {abs(h)}”; k negative says “subtract {abs(k)}”, k positive “add {k}”, k zero “add zero, so the output is unchanged”. Integer signed factors use parentheses. For reduced fraction t=n/d show its exact squared product (n×n)/(d×d) as well. Positive magnitude context: For integer t, say Magnitude {abs(n)} × {abs(n)} = {n*n}. For fractional t, say Numerator magnitude {abs(n)} × {abs(n)} = {n*n}; denominator {d} × {d} = {d*d} (only when d>1). Output and shifted input signs remain explicit; magnitude does not change the signed expression. Narration says fractions as signed numerator over positive denominator and labels input/output, not units of length.
+Probe calculation: At input {x}, first subtract {h} (when h=0: subtract zero, so the input is unchanged). The changed input is {t}. Square it: {t} × {t} = {square}. Then {add/subtract/leave unchanged for k}. The output is {y}. When h is negative say “subtract negative {abs(h)}”; k negative says “subtract {abs(k)}”, k positive “add {k}”, k zero “add zero, so the output is unchanged”. Integer signed factors use parentheses. For reduced fraction t=n/d show its exact squared product with each signed numerator parenthesized, for example ((−5)×(−5))/(4×4), as well. Positive magnitude context: For integer t, say Magnitude {abs(n)} × {abs(n)} = {n*n}. For fractional t, say Numerator magnitude {abs(n)} × {abs(n)} = {n*n}; denominator {d} × {d} = {d*d} (only when d>1). Output and shifted input signs remain explicit; magnitude does not change the signed expression. Narration says fractions as signed numerator over positive denominator and labels input/output, not units of length.
 
 Fold reference: The rule’s fold is input {h}. Its vertex is ({h},{k}). Equal distances left and right of this input give the same output for this rule. Your proposed fold stays at {fold} / You have not marked a fold.
 
