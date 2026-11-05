@@ -158,7 +158,7 @@ def review_journey(browser,base,seed):
   p.evaluate(SPEECH_FIXTURE);enter(p);click(p,'keep');first=copy.deepcopy(sheets(p)[0]);choose(p,'leaf-light');amount(p,'water-in',3);open_sheet(p,first['id']);click(p,'copy');click(p,'keep');click(p,'draft')
   h.ok(p.locator(sel('coefficient','water-in')).inner_text()=='3','Your summary preserves a waiting leaf-light draft after a different copy is kept')
   count(p);click(p,'reference');d=p.locator('[data-la-fold="help"]');d.locator(':scope>summary').click();click(p,'example');d=p.locator('[data-la-fold="help"]');d.locator(':scope>summary').click();source=sheets(p)[0]['source'];turn(p,'make');payload=hear(p)
-  h.ok(source['energyReference']['note'] not in payload and 'Made minus used' not in payload and source['teaching'][0] not in payload and source['about'] not in payload,'Make narration omits hidden Read reference/totals and closed help/About')
+  h.ok(source['energyReference']['note'] not in payload and 'six fewer hydrogen atoms on the made side.' not in payload and source['teaching'][0] not in payload and source['about'] not in payload,'Make narration omits hidden Read reference/totals and closed help/About')
   turn(p,'read');payload=hear(p);h.ok(source['energyReference']['note'] in payload and 'fewer' in payload and p.evaluate('(s)=>laSpoken.at(-1).includes(s)',source['energyReference']['note']),'Read narration includes elected reference and shown atom differences')
   d=p.locator('[data-la-fold="help"]');d.locator(':scope>summary').click();payload=hear(p);h.ok(source['teaching'][0] in payload,'open Help narration includes the elected teaching frame');d.locator(':scope>summary').click();payload=hear(p);h.ok(source['teaching'][0] not in payload,'closing Help removes its frame from narration')
   d=p.locator('[data-la-fold="about"]');d.locator(':scope>summary').click();payload=hear(p);h.ok(source['about'] in payload,'open About narration includes the own-source caveat');d.locator(':scope>summary').click();payload=hear(p);h.ok(source['about'] not in payload,'closed About stays out of narration')
@@ -191,7 +191,7 @@ def review_faults(browser,base,seed):
   for action in ['energy','fold','amount','turn','case','card']:
    install()
    if action=='energy':e=p.locator(sel('energy','toId')).element_handle();e.evaluate('e=>e.value="light"');event='change'
-   elif action=='fold':e=p.locator('[data-la-fold="about"]').element_handle();e.evaluate('e=>e.open=true');event='toggle'
+   elif action=='fold':e=p.locator('[data-la-fold="about"]').element_handle();e.evaluate('e=>{laHarness.owner="another-owner";e.open=true;}');event='toggle'
    elif action=='amount':e=p.locator(sel('amount','water-in:1')).element_handle();event='click'
    elif action=='turn':e=p.locator(sel('turn','read')).element_handle();event='click'
    elif action=='case':p.locator('[data-la-chooser]>summary').click();e=p.locator(sel('case','root-respiration')).element_handle();event='click'
@@ -202,7 +202,7 @@ def review_faults(browser,base,seed):
    if action=='fold':h.ok(p.locator('[data-la-fold="about"]').get_attribute('open') is None,'stale toggle never entered the waiting fold state')
   install();old=p.locator(sel('root')).element_handle();button=p.locator(sel('amount','water-in:1')).element_handle();choose(p,'root-respiration');old.evaluate('e=>document.querySelector("main").append(e)');p.wait_for_timeout(30);before=baseline();dispatch(button);h.ok(baseline()==before,'an actual case change invalidates reattached controls from the earlier case')
   install(False);button=p.locator('[data-cs-leaf]').element_handle();p.evaluate('laHarness.owner="another-owner"');before=baseline();dispatch(button);h.ok(baseline()==before and not p.locator(sel('root')).count(),'stale parent entry cannot open a child')
-  install();click(p,'keep');click(p,'back');ret=p.locator('[data-la-return]').element_handle();ret.evaluate('e=>e.open=true');p.evaluate('laHarness.owner="another-owner"');before=baseline();dispatch(ret,'toggle');h.ok(baseline()==before,'stale parent return toggle cannot update its session state');p.evaluate('laHarness.owner="synthetic-owner";laHarness.render()');h.ok(p.locator('[data-la-return]').get_attribute('open') is None,'parent return disclosure remains closed after a rejected external toggle')
+  install();click(p,'keep');click(p,'back');ret=p.locator('[data-la-return]').element_handle();ret.evaluate('e=>{laHarness.owner="another-owner";e.open=true;}');before=baseline();dispatch(ret,'toggle');h.ok(baseline()==before,'stale parent return toggle cannot update its session state');p.evaluate('laHarness.owner="synthetic-owner";laHarness.render()');h.ok(p.locator('[data-la-return]').get_attribute('open') is None,'parent return disclosure remains closed after a rejected external toggle')
  finally:c.close()
 
 
