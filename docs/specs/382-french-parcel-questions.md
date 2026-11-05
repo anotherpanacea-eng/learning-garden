@@ -4,6 +4,8 @@ Specification and finite language cleared for implementation, 2026-11-05. Serves
 
 Runtime follows the site's US spelling in English-only copy and glosses (`color` rather than `colour`); this editorial orthography fold changes no French or translation meaning. The panel's complete revision4 input and reports stay unchanged. Stored `colour` question IDs and field names remain exact; a bounded source-scanner repair distinguishes those metadata literals from adjacent display labels. Final independent implementation review includes this fold; it is not a new language-panel vote.
 
+The English-only interface headings “How the questions help”, “Notes and download” and “For grown-ups” organize the reviewed material; they add no French or translation content.
+
 ## Missing operation and bounded experience
 
 226 already chooses a supplied clarification question then reveals a fixed reply; 327 supplies a question to say and checks an answer. This increment makes questioning an exploratory instrument: every supplied question elicits a truthful reply, including a redundant destination question. Learners decide what information to gather and use the answers to identify one parcel. There is no question score. Selection is supported recognition, not original language production or listening evidence.
