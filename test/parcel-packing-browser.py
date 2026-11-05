@@ -165,12 +165,29 @@ with sync_playwright() as p:
   ok(page.locator('.learning-connections,.film-dialog').count()==0,'no film/connection after navigation/reload')
   if width==390:
    page.evaluate('''()=>{const key="number-garden-v1:explorer-1",s=JSON.parse(localStorage.getItem(key));s.parcelPacking.cases["meadow-seeds"].bags[0]=-1;localStorage.setItem(key,JSON.stringify(s));}''')
+   damaged=saved(page)['parcelPacking']
+   readable={key:value for key,value in damaged['cases'].items() if key!='meadow-seeds'}
    page.reload();page.locator('[data-pp-recover]').wait_for()
    ok('Keep readable requests and continue' in page.locator('[data-pp-recover]').inner_text(),'recovery offers to keep readable requests')
    click(page,'[data-pp-recover]')
-   ok('Your plan is waiting' in page.locator('[data-pp-case="lantern-seeds"]').inner_text(),'valid request remains available')
-   ok('Try either purpose' in page.locator('[data-pp-case="meadow-seeds"]').inner_text(),'bad request is removed from active cases')
-   ok(saved(page)['parcelPacking']['recovered']['cases']['meadow-seeds']['bags'][0]==-1,'whole unreadable original remains in notes')
+   recovered=saved(page)['parcelPacking']
+   ok(recovered['cases']==readable,'recovery keeps every readable request exactly and excludes only the damaged request')
+   ok(recovered['recovered']==damaged,'recovery retains the entire original record exactly')
+   click(page,'[data-pp-case="lantern-seeds"]')
+   ok(work(page)==readable['lantern-seeds'],'readable request opens with its earlier packing and checks')
+   click(page,'[data-pp-page="choose"]');click(page,'[data-pp-case="meadow-seeds"]')
+   fresh=work(page)
+   ok(fresh['bags']==[0]*8 and fresh['checks']==[] and fresh['kept'] is None and fresh['sealed'] is None,'damaged request can restart with empty bags and no inherited checks or kept plans')
+   restarted=saved(page)['parcelPacking']
+   ok(all(restarted['cases'][key]==value for key,value in readable.items()),'fresh request leaves other readable requests exact')
+   ok(restarted['recovered']==damaged,'fresh request leaves the original recovery record exact')
+   page.reload();page.locator('[data-pp-root]').wait_for()
+   ok(saved(page)['parcelPacking']==restarted,'recovered and fresh work both survive reload')
+   page.goto(base+'/#notes');page.locator('#download').wait_for()
+   with page.expect_download() as download:
+    click(page,'#download')
+   report=json.loads(Path(download.value.path()).read_text())
+   ok(report['parcelPacking']==restarted,'actual Notes download preserves readable, restarted and original damaged records')
   ok(not errors,'no page errors: '+str(errors));ok(not failed,'no HTTP errors: '+str(failed))
   print(f'{width}px journeys passed, cumulative {checks} assertions',flush=True)
   c.close()
