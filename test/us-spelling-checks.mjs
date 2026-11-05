@@ -25,6 +25,9 @@ export function britishSpellings(text,path='fixture'){
       (q==='('&&p!=="'"&&p!=='"')||
       (q===':'&&/[{,]\s*$/.test(before)))continue;
     if((p==='{'&&text[a-2]==='$')||((q==='}'||q==='|')&&p!==' '))continue;
+    // A complete quoted id or validator field name is control metadata, not a label.
+    // Require both literal boundaries and the metadata context; adjacent display prose stays checked.
+    if((p==="'"||p==='"')&&q===p&&/(?:\bid\s*:\s*|\bfields\([^,\n]*,\s*\[[^\]\n]*)['"]$/.test(before))continue;
     // Existing answer parser accepts both spellings; it is not a display string.
     if(m[0]==='metres'&&after.startsWith('?|meters?|m)'))continue;
     flags.push(`${path}:${text.slice(0,a).split('\n').length}: ${m[0]}`);
@@ -40,6 +43,8 @@ assert.deepEqual(britishSpellings("s.distanceUnit!=='model metres'"),[],'saved u
 assert.deepEqual(britishSpellings("distanceUnit:'model metres',title:'A colour guide'"),['fixture:1: colour'],'unit code does not exempt neighboring copy');
 assert.deepEqual(britishSpellings("'<p>Pick colour?</p>'"),['fixture:1: colour'],'question punctuation is prose');
 assert.deepEqual(britishSpellings("'<p>Colour-coded cards. Theatre:move a card.</p>'"),['fixture:1: Colour','fixture:1: Theatre'],'hyphens and unspaced colons do not hide prose');
+assert.deepEqual(britishSpellings("{id:'colour',label:'Colour'}"),['fixture:1: Colour'],'an exact stored id does not exempt its adjacent display label');
+assert.deepEqual(britishSpellings("fields(x,['id','colour','room']); label('Colour');"),['fixture:1: Colour'],'validator field names stay stable while neighboring display copy stays checked');
 assert.deepEqual(britishSpellings('const colour = 1;'),[],'bare binding is not copy');
 assert.deepEqual(britishSpellings('item.colour; colour(value); ${colour}'),[],'members, calls and interpolation remain identifiers');
 assert.deepEqual(britishSpellings('<g data-lift-metre="0">'),[],'markup attribute name stays stable');
