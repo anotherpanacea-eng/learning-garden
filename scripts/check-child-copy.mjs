@@ -668,6 +668,31 @@ export const copyScopes = [
   {path:"dist/question-bench-core.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/random.mjs",adultBlocks:[],quotations:[]},
 
+  // LG-2b batch20: remaining existing source modules.
+  {path:"dist/ratio-bars-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/repeat-deliveries-art.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/returning-ledger-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/returning-orders-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/rhythm-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/ribbon-rows-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/riddles-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/river-market-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/rod-tray-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/science-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/seed-pile-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/shutters-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/sky-notes-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/sorting-desk-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/stained-map-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/style-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/town-day.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/two-letters-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/two-windows-art.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/upstream-exchange-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/willow-double-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/word-list-shelf-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/word-room-sounds-core.mjs",adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
