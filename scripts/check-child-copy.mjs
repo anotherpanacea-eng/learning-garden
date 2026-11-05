@@ -564,6 +564,32 @@ export const copyScopes = [
   {path:"dist/drawn-howtos/numbers-paving.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/drawn-howtos/numbers-return-ledger.mjs",adultBlocks:[],quotations:[]},
 
+  // LG-2b batch16: remaining existing source modules.
+  {path:"dist/drawn-howtos/numbers-return.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-seeds.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-tenths.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/orchard-gather.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/orchard-look.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/paris-story.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-clock-walk.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-codes.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-delivery.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-double.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-ferry.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-groups.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-letters.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-messages.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-packing.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-register.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/post-sorting.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/regrow.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/riddles.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/rows-play.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/seed-pile.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/shutters-play.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/story-paths.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/studio-field-strips.mjs",adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
