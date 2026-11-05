@@ -65,7 +65,7 @@ def bounds(p):
     h.ok(not bad,'visible controls have44px targets and16px text: '+str(bad))
 
 def near(a,b,label):h.ok(len(a)==len(b) and all(abs(x-y)<.025 for x,y in zip(a,b)),label+': '+str(a))
-def arrow_geometry(p,s,only=None):
+def arrow_geometry(p,s):
     svg=p.locator('.gas-diagram').first
     r=s['world']['width']*.045
     head_length=min(s['world']['width']*.018,.45*r)
@@ -102,7 +102,7 @@ def geometry(p,s,arrows=True):
     h.ok(math.hypot(bx-node['x'],by-node['y'])-max(badge[2],badge[3])/2>=.65*r-.1,'badge clears central number patch')
 
 def make_geometry(p,identity,source):
-    arrow_geometry(p,source,identity)
+    arrow_geometry(p,source)
     selected=p.locator('[data-gas-selected-link="true"]')
     h.ok(selected.count()==1 and selected.get_attribute('data-gas-arrow')==identity,'Make highlights exactly its active own link')
     width=float(selected.locator('line').get_attribute('stroke-width'))
