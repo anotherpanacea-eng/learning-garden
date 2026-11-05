@@ -14,9 +14,9 @@ For independent mathematical/content review with388. No learner information or u
 
 1. “Start with numbers. An11 cm by12 cm rectangle can be split at10 cm on each side. Its four parts have areas100,10,20 and2 square centimeters. Together they make132.”
 2. “The cuts reach all the way across. No paper is missing, and no part is counted twice. This is why adding the four areas gives the whole area.”
-3. “Now use x in place of10. The square is x×x, written x². The right strip is1×x, the bottom strip is2×x, and the corner is1×2.”
+3. “Now use x in place of10. The square is x×x, written x². The right strip is1×x, the bottom strip is2×x, and the corner is1×2. The whole side lengths, x+1 and x+2, are factors: lengths we multiply. Brackets keep each added length together.”
 4. “x² is the area of a square with side length x.2x means two lots of x. At x=2 both happen to be4. At x=3 they are9 and6. One matching number does not make the labels the same.”
-5. “Gather the same kinds: x²+x+2x+2 becomes x²+3x+2. You can combine the x strips. You cannot combine an x square and an x strip into two x squares.”
+5. “Gather the same kinds: x²+x+2x+2 becomes x²+3x+2. Here the plus signs separate terms of a sum. You can combine terms with the same kind of tile, such as the x strips. You cannot combine an x square and an x strip into two x squares.”
 6. “A size check tells us about that size. The four pieces explain why a matching expression describes every picture size in this plan. We are using positive lengths here.”
 
 Show the teaching as six short manual pages using ONLY each page’s frozen figure data. Pages1–2 have rectangle(a=1,b=2,x=10,numbers); page3 has rectangle(1,2,10,letters); page4 has square-and-strip(xs=[2,3],strip=2); page5 has rectangle(1,2,3,letters); page6 has no figure. All source pages store words and figure together; historical words/figures are never rebuilt from this table. Back/Next never erases work. Teaching does not copy answers into the learner's labels or tray. The separate worked-example disclosure reuses this11×12 plan, shows all four given products, and states that it is a different plan from the initial job.
@@ -40,7 +40,7 @@ These references are not automatically inserted into work. Compare discloses the
 
 Pages: **Build four labels** · **Gather like tiles** · **Compare**.
 
-“Choose a part. Choose a tile kind, then how many.” Kinds: **x square** (x²), **x strip** (x), **unit square** (1). Named parts: **A · Picture square**, **B · Right strip**, **C · Bottom strip**, **D · Corner**. Always show the selected part's two side lengths. Clear label is reversible by building again; it does not erase the other parts or tray.
+“Build labels for any picture size x. Choose a part, a tile kind, then how many.” Whole area is shown as (x+a)(x+b) next to the rectangle. Kinds: **x square** (x²), **x strip** (x), **unit square** (1). Named parts: **A · Picture square**, **B · Right strip**, **C · Bottom strip**, **D · Corner**. Always show the selected part's two side lengths. Clear label is reversible by building again; it does not erase the other parts or tray.
 
 “The tray starts at zero. Gather your square tiles, x strips and unit squares.” Your four labels stay visible on this page. The count controls change only this tray; they do not fix the labels.
 

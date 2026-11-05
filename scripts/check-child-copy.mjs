@@ -820,6 +820,11 @@ export const copyScopes = [
   {"path":"dist/writing-quote-content.mjs","adultBlocks":[],"quotations":[]},
   {"path":"dist/writing-revision-content.mjs","adultBlocks":[],"quotations":[]},
 
+  // Four Parts388: keep new modules in the existing source-review scope.
+  {path:'dist/four-parts-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/four-parts-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/four-parts-ui.mjs',adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
