@@ -4,7 +4,7 @@
 
 ## Which values fit380
 
-[Which values fit380](specs/380-which-values-fit.md) is the next LG-G1 algebra bridge inside the existing Equality Desk: build a continuous solution ray, distinguish strict/inclusive endpoints, test individual values and explain why negative division reverses order. Its [independent specification and finite mathematics review](reviews/380-which-values-fit-spec.md) is cleared. Frozen sheets preserve unexpected learner rays separately from the worked reference. Implementation review and release acceptance remain pending; this is not a general inequalities course, independent proficiency claim or story gate.
+[Which values fit380](specs/380-which-values-fit.md) is the next LG-G1 algebra bridge inside the existing Equality Desk: build a continuous solution ray, distinguish strict/inclusive endpoints, test individual values and explain why negative division reverses order. Its [independent specification and finite mathematics review](reviews/380-which-values-fit-spec.md) is cleared. Frozen sheets preserve unexpected learner rays separately from the worked reference. The bounded implementation is in [PR450’s review and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/450#issuecomment-6649182321), which owns implementation clearance and live acceptance. This is not a general inequalities course, independent proficiency claim or story gate.
 
 ## Air and Blood379
 
