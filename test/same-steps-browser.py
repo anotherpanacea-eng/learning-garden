@@ -50,6 +50,8 @@ def chooser(p):
  if d.count() and d.get_attribute('open') is None:d.locator(':scope>summary').click()
 def case(p,id):chooser(p);p.locator(sel('case')).select_option(id)
 def bounds(p):
+ bad_names=p.locator('[data-ss-adjust]').evaluate_all('xs=>xs.filter(x=>!(x.getAttribute("aria-label")||x.textContent).toLowerCase().includes(x.textContent.trim().toLowerCase())).map(x=>({visible:x.textContent,name:x.getAttribute("aria-label")}))')
+ h.ok(not bad_names,'unit controls retain their visible labels in accessible names: '+str(bad_names))
  h.ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal page overflow')
  bad=p.locator('[data-ss-root] button,[data-ss-root] a,[data-ss-root] summary,[data-ss-root] select').evaluate_all('xs=>xs.filter(x=>x.checkVisibility()&&(x.getBoundingClientRect().width<43.9||x.getBoundingClientRect().height<43.9||parseFloat(getComputedStyle(x).fontSize)<16)).map(x=>x.textContent)')
  h.ok(not bad,'visible construction controls have44px targets and16px text: '+str(bad))
