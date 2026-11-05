@@ -146,7 +146,8 @@ def transfer(browser,base,seed,report):
   endpoint=p.locator(sel('leg','1:x')).evaluate('e=>{const p=e.getPointAtLength(e.getTotalLength());return[p.x,p.y]}')
   xunit=(points[0][0]-points[1][0])/2;expected=points[1][0]+200*xunit
   clip=p.locator(sel('leg','1:x')).evaluate('e=>{const url=e.getAttribute("clip-path")||e.closest("[clip-path]")?.getAttribute("clip-path"),id=url?.match(/#([^)]*)/)?.[1],r=id&&document.getElementById(id)?.querySelector("rect");return r?["x","y","width","height"].map(k=>+r.getAttribute(k)):null}')
-  h.ok(abs(endpoint[0]-expected)<.04 and abs(endpoint[1]-points[1][1])<.04 and clip==[64,28,464,332],'outside construction retains its real SVG endpoint while an effective plot-window clip bounds the rendered horizontal leg')
+  paper=p.locator('[data-ss-plot] .ss-paper').evaluate('e=>["x","y","width","height"].map(k=>+e.getAttribute(k))')
+  h.ok(abs(endpoint[0]-expected)<.04 and abs(endpoint[1]-points[1][1])<.04 and clip==paper and paper[2]>0 and paper[3]>0,'outside construction retains its real SVG endpoint while an effective visible-paper-window clip bounds the rendered horizontal leg')
   click(p,'keep');last=copy.deepcopy(sheets(p)[-1]);old=altered['rateStepSheets'][1]
   h.ok(last['id']=='rate-step-901' and last['source']==old['source'] and last['work']['steps']['1']['x']==200 and last['work']['steps']['1']['y']==-200,'append allocation reserves unreadable ids and preserves the own historical source and both bounded components')
   h.ok(last['work']['futureWork']==old['work']['futureWork'] and last['work']['steps']['1']['futureVector']==old['work']['steps']['1']['futureVector'],'copy/adjust/Keep preserve additive work and vector fields')
@@ -166,6 +167,11 @@ def phone(browser,base,seed):
   h.ok(number(p,'y',0)=='1' and p.locator(sel('adjust','0:y:1')).evaluate('e=>e===document.activeElement'),'keyboard unit construction retains its actual enabled control')
   h.ok(p.locator(sel('adjust','0:y:1')).evaluate('e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight}'),'focused construction remains within the phone viewport')
   p.screenshot(path=str(OUT/'phone.png'),full_page=True)
+  click(p,'example')
+  labels=p.locator('[data-ss-example-y-tick]').evaluate_all('xs=>xs.filter(e=>e.checkVisibility()).map(e=>{const r=e.getBoundingClientRect();return{label:e.dataset.ssExampleYTick,x:r.x,y:r.y,right:r.right,bottom:r.bottom}})')
+  clear=len(labels)==3 and all(min(a['right'],b['right'])-max(a['x'],b['x'])<=.5 or min(a['bottom'],b['bottom'])-max(a['y'],b['y'])<=.5 for i,a in enumerate(labels) for b in labels[i+1:])
+  h.ok(clear,'the three numerical example y-axis labels have nonoverlapping actual phone glyph rectangles: '+str(labels))
+  p.screenshot(path=str(OUT/'phone-example.png'),full_page=True)
  finally:c.close()
 
 
