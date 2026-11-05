@@ -687,6 +687,32 @@ export const copyScopes = [
   {path:"dist/drawn-howtos/story-paths.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/drawn-howtos/studio-field-strips.mjs",adultBlocks:[],quotations:[]},
 
+  // LG-2b batch17: remaining existing source modules.
+  {path:"dist/drawn-howtos/studio-mixing-bars.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/studio-mixing.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/studio-rhythm.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/water-evidence.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/water-lab.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/water-measure.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/water-rain.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/water-window.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/wonder.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/word-garden.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/words-signs.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-balance.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-budget.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-change.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-clock.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-coins.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-fair.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-fractions.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-hinge.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-lantern.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-maps.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-ramp.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-recut.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-repeats.mjs",adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
