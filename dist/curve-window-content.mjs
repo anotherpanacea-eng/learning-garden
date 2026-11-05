@@ -29,7 +29,7 @@ export const curveCopy=Object.freeze({
  compare:'Your marks stay here. The solid curve and table come from the written rule.',
  zeroes:'Mark your idea, or choose to show the rule’s curve. Your marks stay yours either way.',
  model:'A known number rule, not measured data. A few dots alone do not prove a smooth continuation.',
- provenance:'The curve and its values are supplied by the written rule. Your points, fold, idea and intervals stay unchanged; they are not a score.',
+ referenceNote:'The curve and its values come from the written rule. Your points, fold, idea and intervals stay unchanged; they are not a score.',
  fallback:'Your new marks are still here. The model view could not be reopened safely, so this page shows your picture alone. Download Notes or retry the model view.',
  refused:'This model view could not be opened safely. Your picture and earlier work are unchanged. Download Notes or try again.',
  keepRefused:'This picture could not be kept safely. Your marks and earlier versions are unchanged.',
