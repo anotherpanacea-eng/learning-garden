@@ -201,7 +201,8 @@ export function recordTrail(state, o) {
 }
 
 export function broadDescribe(o) {
-  if (!o || o.status === 'skipped') return 'Not explored yet';
+  if (!o) return 'Not explored yet';
+  if (o.status === 'skipped') return 'Skipped for now';
   if (!o.correct) return 'Worth another look together';
   if (o.supported) return 'Found an answer with support';
   if (!o.firstCorrect) return 'Found an answer after another try';
