@@ -4,7 +4,7 @@
 
 ## Current build · Photo studies378
 
-[Photo studies378](specs/378-photo-studies.md) deepens Lens Bench with drawing beside a frozen photograph, learner-selected observation/idea/question labels and a caption for another reader. The specification is independently cleared; the build is undergoing browser verification and independent implementation review. Compact local strokes preserve the shared notebook budget; the study returns read-only to Cell Studio. This is photographic recording and discussion, not graded biological drawing, calibrated measurement or direct microscope qualification.
+[Photo studies378](specs/378-photo-studies.md) deepens Lens Bench with drawing beside a frozen photograph, learner-selected observation/idea/question labels and a caption for another reader. The specification is independently cleared; [PR439](https://github.com/anotherpanacea-eng/learning-garden/pull/439) records browser verification, independent implementation review and release status. Compact local strokes preserve the shared notebook budget; the study returns read-only to Cell Studio. This is photographic recording and discussion, not graded biological drawing, calibrated measurement or direct microscope qualification.
 
 ## Act IV opening and first chapter
 
