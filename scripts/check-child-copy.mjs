@@ -642,6 +642,32 @@ export const copyScopes = [
   {path:"dist/joining-ledger-core.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/keeper-story-core.mjs",adultBlocks:[],quotations:[]},
 
+  // LG-2b batch19: remaining existing source modules.
+  {path:"dist/lantern-circuit-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/learning-connection-data.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/letterpress-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/living-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/living-spiral-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/long-word-workshop-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/lost-found-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/manifest-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/measuring-desk-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/mending-shed-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/mixing-table-art.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/mixing-table-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/ordered-sorting-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/packs/egypt-writing-book.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/packs/flood-almanac.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/packs/index.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/paired-points-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/pips-copy-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/plant-study-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/progress-limits.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/puppet-notice-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/puzzle-art.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/question-bench-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/random.mjs",adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
