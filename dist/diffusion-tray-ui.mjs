@@ -1,3 +1,4 @@
+import {gasDiffusionInvitation} from './gas-routes-ui.mjs';
 import {waterPhasePage,bindWaterPhase,leaveWaterPhaseFilm} from './water-phase.mjs';
 import {diffusionCases,diffusionSource} from './diffusion-tray-content.mjs';
 import {newDiffusionWork,advanceDiffusionWork,revealDiffusionExample,validDiffusionWork,diffusionCounts,diffusionRunsView,lastDiffusionRun,keepDiffusionRun} from './diffusion-tray-core.mjs';
@@ -8,7 +9,7 @@ const seed=()=>crypto.getRandomValues(new Uint32Array(1))[0]||1;
 let visit=null;
 export function resetDiffusionTray(){visit=null;}
 function state(book,owner){
- if(!visit||visit.book!==book||visit.owner!==owner)visit={book,owner,mode:'legacy',screen:'draft',active:null,slots:new Map(),first:new Map(),readonly:new Map(),next:1,card:null,shelfPage:null,draftPage:0,chooser:false};
+ if(!visit||visit.book!==book||visit.owner!==owner)visit={book,owner,mode:'legacy',screen:'draft',active:null,slots:new Map(),first:new Map(),readonly:new Map(),next:1,card:null,shelfPage:null,draftPage:0,chooser:false,gasReturnOpen:false};
  return visit;
 }
 function makeSlot(source,work){return {source:structuredClone(source),work:structuredClone(work||newDiffusionWork(source)),marker:source.particles[0].id,turn:0,status:'',limits:false,animate:false};}
@@ -36,7 +37,7 @@ function shelf(v){
 function drafts(v){const entries=[...v.slots],total=entries.length;v.draftPage=Math.max(0,Math.min(v.draftPage,Math.max(0,Math.ceil(total/8)-1)));const start=v.draftPage*8;return `<h2 id="dt-title" tabindex="-1">Draft runs</h2><p>These local trials wait only during this visit.</p><p>Drafts ${total?start+1:0}–${Math.min(start+8,total)} of ${total}</p><ol start="${start+1}" class="dt-shelf">${entries.slice(start,start+8).map(([key,s],i)=>`<li>${button(`data-dt-draft="${key}"`,`Draft ${start+i+1} · ${s.source.title} · step ${s.work.steps}`)}</li>`).join('')}</ol><div class="dt-actions">${button(`data-dt-draft-page="-1"${!start?' disabled':''}`,'Previous drafts')}${button(`data-dt-draft-page="1"${start+8>=total?' disabled':''}`,'Next drafts')}</div>`;}
 export function diffusionTrayPage(book,owner){
  const v=state(book,owner);
- if(v.mode==='legacy')return `<div data-dt-host>${button('data-dt-enter','Diffusion Tray')}${waterPhasePage(book,owner)}</div>`;
+ if(v.mode==='legacy')return `<div data-dt-host>${button('data-dt-enter','Diffusion Tray')}${waterPhasePage(book,owner)}${gasDiffusionInvitation(book,{open:v.gasReturnOpen})}</div>`;
  let body;
  if(v.screen==='shelf')body=shelf(v);
  else if(v.screen==='drafts')body=drafts(v);
@@ -45,7 +46,7 @@ export function diffusionTrayPage(book,owner){
   if(item){if(!v.readonly.has(item.id)||v.readonly.get(item.id).raw!==item.raw||v.readonly.get(item.id).rawSource!==item.raw.source||v.readonly.get(item.id).rawWork!==item.raw.work){const s=makeSlot(item.raw.source,item.raw.work);s.raw=item.raw;s.rawSource=item.raw.source;s.rawWork=item.raw.work;v.readonly.set(item.id,s);}body=`<p class="dt-run-label">Run ${item.index+1}</p>`+activePage(slot(v),true);}
   else body='<h2 id="dt-title" tabindex="-1">This run is unavailable here</h2><p>Its original stays unchanged in Notes. Other kept runs and local drafts remain open.</p>';
  }else{if(!slot(v))choose(v,'left');body=activePage(slot(v));}
- return `<div data-dt-root class="dt-page"><header><div class="dt-actions">${button('data-dt-legacy','Back to ice and warmth')}${button('data-dt-drafts','Draft runs')}${button('data-dt-shelf','Kept runs')}${button('data-dt-hear data-speak=""','Hear this page')}</div><h1>Diffusion Tray</h1><p>The town collection needs a clear picture of particles spreading.</p></header>${body}<details data-dt-chooser${v.chooser?' open':''}><summary>Choose another starting setup</summary><p>Each setup’s first draft waits here during this visit.</p><div class="dt-actions">${diffusionCases.map(c=>button(`data-dt-case="${esc(c.id)}"`,c.title)).join('')}</div></details><p class="dt-leaving">Unkept draft runs wait during this visit. Leaving or reloading loses drafts that have not been kept.</p></div>`;
+ return `<div data-dt-root class="dt-page"><header><div class="dt-actions">${button('data-dt-legacy','Back to ice and warmth')}${button('data-dt-drafts','Draft runs')}${button('data-dt-shelf','Kept runs')}${button('data-dt-hear data-speak=""','Hear this page')}</div><h1>Diffusion Tray</h1><p>The town collection needs a clear picture of particles spreading.</p></header>${body}${gasDiffusionInvitation(book,{open:v.gasReturnOpen})}<details data-dt-chooser${v.chooser?' open':''}><summary>Choose another starting setup</summary><p>Each setup’s first draft waits here during this visit.</p><div class="dt-actions">${diffusionCases.map(c=>button(`data-dt-case="${esc(c.id)}"`,c.title)).join('')}</div></details><p class="dt-leaving">Unkept draft runs wait during this visit. Leaving or reloading loses drafts that have not been kept.</p></div>`;
 }
 function visibleSpeech(root){
  function read(n){if(n.nodeType===3)return n.textContent+' ';if(n.nodeType!==1||n.matches('svg,select,[hidden],[aria-hidden="true"],.speech-controls,nav,.dt-leaving'))return '';if(n.matches('button'))return n.matches('[data-dt-card],[data-dt-draft],[data-dt-case]')?n.textContent+' ':'';if(n.tagName==='DETAILS'&&!n.open)return '';return [...n.childNodes].map(read).join(' ');}
@@ -58,10 +59,11 @@ export function bindDiffusionTray(book,ctx){
  const content='[data-dt-step],[data-dt-follow],[data-dt-marker],[data-dt-turn],[data-dt-example],[data-dt-new-trial],[data-dt-keep],[data-dt-source]';
  const live=n=>visit===v&&owner()===v.owner&&(typeof ctx.notebook==='function'?ctx.notebook():ctx.notebook)===book&&ctx.isActive()&&window.location.hash==='#science/ice'&&root.isConnected&&n.isConnected&&root.contains(n)&&v.mode===mode&&v.screen===screen&&v.active===active&&v.card===card&&(!(n.matches(content)||(n.matches('[data-dt-hear]')&&held&&(screen!=='card'||raw)))||slot(v)===held&&held?.source===source&&(screen!=='card'||diffusionRunsView(book).items.some(x=>x.id===card&&x.readable&&x.raw===raw&&x.raw.source===rawSource&&x.raw.work===rawWork)));
  // Install before the legacy binder, also directly on controls that may later detach.
- const guard=n=>['click','change','input','toggle'].forEach(type=>n.addEventListener(type,e=>{if(!live(n)){e.preventDefault();e.stopImmediatePropagation();}},{capture:true}));
+ const guard=n=>{const parent=n.parentNode;['click','change','input','toggle'].forEach(type=>n.addEventListener(type,e=>{if(!live(n)||n.parentNode!==parent){e.preventDefault();e.stopImmediatePropagation();}},{capture:true}));};
  guard(root);root.querySelectorAll('button,select,input,textarea,details,[data-speak],a').forEach(guard);
  const stop=()=>{ctx.stopSpeech?.();ctx.stopSound?.();},redraw=(target='#dt-title')=>{ctx.render();ctx.focus(target);};
  const on=(sel,fn)=>root.querySelectorAll(sel).forEach(n=>n.addEventListener('click',()=>{if(!live(n)||n.disabled)return;stop();fn(n);}));
+ const gasReturn=root.querySelector('[data-gas-diffusion-return]');gasReturn?.addEventListener('toggle',()=>{if(live(gasReturn)){stop();v.gasReturnOpen=gasReturn.open;}});
  if(mode==='legacy'){
   on('[data-dt-enter]',()=>{leaveWaterPhaseFilm(book,v.owner);v.mode='tray';if(!v.active)choose(v,'left');redraw();});
   bindWaterPhase(book,{...ctx,isActive:()=>live(root)&&v.mode==='legacy'});return;
