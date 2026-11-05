@@ -53,7 +53,7 @@ At the desk, Rowan heard two taps, a pause, and two more. The sound came from be
 “I thought you had gone,” Rowan said when the door opened. “I thought you hadn't heard,” Leena answered. He had heard part of her knocking; she had seen part of his work. They set the photograph beside the recording sheet. Before the first visitors arrived, they wrote a clear sign for the courtyard door.
 
 Writer's order: a1,b1,a2,b2,a3,b3,together.
-Starting arrangement, clearly labeled **A supplied arrangement to change**: a1,a2,a3,b1,b2,b3,together.
+Starting arrangement, clearly labeled **A starting arrangement to change**: a1,a2,a3,b1,b2,b3,together.
 
 Writer's note: **I left Leena waiting while the reader met Rowan and the headphones. The reader could then know something Leena did not. Later I returned to each person before they met. Another order might delay that information or make the misunderstanding feel different.**
 
