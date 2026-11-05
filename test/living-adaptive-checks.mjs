@@ -1,3 +1,4 @@
+import {authoredScienceChoices} from '../dist/living-adaptive-content.mjs';
 import assert from 'node:assert/strict';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {ensureCafe,nextGuest} from '../dist/cafe-core.mjs';
@@ -113,4 +114,15 @@ for(const damage of [s=>s.livingExploration.adaptive.version=99,s=>s.livingExplo
  const map=new Map(),storage={get length(){return map.size;},key:i=>[...map.keys()][i]??null,getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,String(v)),removeItem:k=>map.delete(k)};
  const store=new ExplorerStore(storage),s=store.load();ensureCafe(s);startAdaptiveSpiral(s);openMath(s,true);chooseAdaptive(s,'math','input','17');store.save(s);const id=store.active.id,raw=JSON.stringify(s);const other=store.add({},s);check(other,'add explorer');check(!store.load().livingExploration,'separate explorer');const back=store.select(id,store.load());equal(JSON.stringify(back),raw,'switch returns exact pending work');const restored=new ExplorerStore(storage);equal(JSON.stringify(restored.load()),raw,'device reload exact');check(restored.setPersistence(false,restored.load()),'save off');check(![...map.keys()].some(k=>k.startsWith('number-garden-v1')),'saved records removed');check(restored.load().livingExploration,'memory remains with saving off');restored.clearActive();check(!restored.load().livingExploration,'clear current explorer');
 }
+
+// New visits save authored choice order; legacy visits retain the old order and help.
+{
+ const positions=new Set();
+ for(const c of spiralCases){const s=fresh();setAdaptiveChoice(s,'science',3);startAdaptiveSpiral(s);const r=currentSpiral(s);r.task.caseId=c.id;r.task.teaching.keys.science=`${c.id}:3`;r.task.teaching.scienceChoices=authoredScienceChoices(r.task);const q=scienceQuestion(r.task);positions.add(q.options.findIndex(o=>o.id===q.answer));check(validSpiralRound(r),'authored choices preserve valid task');equal(scienceQuestion(structuredClone(r.task)).options,q.options,'reload retains displayed order');}
+ equal([...positions].sort(),[0,1,2],'new change questions span all three answer positions');
+ const s=fresh();setAdaptiveChoice(s,'science',3);startAdaptiveSpiral(s);const r=currentSpiral(s),choices=structuredClone(r.task.teaching.scienceChoices);check(choices.length===3,'new visit actually saves choices');r.task.teaching.scienceChoices.reverse();r.task.teaching.scienceChoices[0].text='An earlier saved clue <kept>';const raw=structuredClone(s);check(spiralState(s),'saved display wording and order remain readable');equal(scienceQuestion(r.task).options,r.task.teaching.scienceChoices,'source uses frozen choice text');equal(s,raw,'reading saved visit does not rewrite it');
+ delete r.task.teaching.scienceChoices;const legacy=structuredClone(s);check(validSpiralRound(r),'old visit without choices remains valid');equal(scienceQuestion(r.task).options.map(o=>o.id),['recheck','unchanged','no-need'],'legacy unanswered change question retains order');equal(s,legacy,'legacy reading does not add fields');
+ const bad=structuredClone(r);bad.task.teaching.scienceChoices=[{id:'unchanged',text:'Missing fitting choice'}];check(!validSpiralRound(bad),'missing fitting choice rejected');
+}
+
 console.log(`${checks} adaptive Living Garden content, evidence, compatibility and supply checks passed.`);

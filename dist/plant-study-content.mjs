@@ -43,4 +43,7 @@ export function plantQuestions(day){
 export const waterComparisonQuestion=freeze({id:'water',day:null,prompt:'Want to test water next? Which plan is fair? (We have no water results yet.)',
  choices:[{id:'controlled',label:'Keep the light the same. Give two pots different amounts of water.'},{id:'confounded',label:'Change the light and the water at the same time.'}],answer:'controlled',
  feedback:{controlled:'This plan changes only the water and keeps everything else the same. It could help us learn about water. Choosing a plan is the first step. So far we have no water results.',confounded:'If light and water both change, we cannot tell which one made the difference: either change could matter. Try a plan that changes only the water.'}});
+// New notebooks freeze these authored positions and labels. Older notebooks
+// retain the original arrays above, including questions not yet answered.
+export function authoredPlantChoices(q){const shift=q.day===null?1:(PLANT_DAYS.indexOf(q.day)+(q.id.startsWith('length-')?1:0))%q.choices.length;return [...q.choices.slice(shift),...q.choices.slice(0,shift)].map(c=>({...c}));}
 export function plantQuestionById(id){return id==='water'?waterComparisonQuestion:PLANT_DAYS.flatMap(plantQuestions).find(q=>q.id===id)??null;}
