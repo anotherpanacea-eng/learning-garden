@@ -795,6 +795,31 @@ export const copyScopes = [
   {path:"dist/photo-study-core.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/photo-study-ui.mjs",adultBlocks:[],quotations:[]},
 
+  // LG-2b batch 22: modules added after the previous pinned cohort.
+  {"path":"dist/french-questions-content.mjs","adultBlocks":[],"quotations":[{"quote":"Selecting supplied questions is not composing French or demonstrating spoken comprehension.","reason":"Only displayed in the folded For grown-ups qualification, not the child task or speech."}]},
+  {"path":"dist/french-questions-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/french-questions-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/gas-routes-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/gas-routes-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/gas-routes-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/inequality-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/inequality-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/inequality-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/leaf-accounts-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/leaf-accounts-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/leaf-accounts-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/same-steps-content.mjs","adultBlocks":[],"quotations":[{"quote":"These are supplied number models and optional construction/reference records.","reason":"Only displayed in the folded For grown-ups interpretation."}]},
+  {"path":"dist/same-steps-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/same-steps-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/shared-point-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/shared-point-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/shared-point-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/two-threads-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/two-threads-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/two-threads-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/writing-quote-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/writing-revision-content.mjs","adultBlocks":[],"quotations":[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
