@@ -179,7 +179,7 @@ def transfer(browser, base, seed, first, exported):
     old = copy.deepcopy(first)
     old.update(id='shared-point-80', futureOuter={'raw':'retain me'})
     old['source'].update(id='old"source', title='Earlier <rule> & "marks"', futureSource={'raw':True},
-                         teaching=['A synthetic scale can read 0.3 or 0.125. These values are not half-step coordinate choices. An undefined ratio 0/0 is not a number.'],
+                         teaching=['A synthetic scale can read 0.3 or 0.125. Other marks are .5 and -.25. These values are not half-step coordinate choices. An undefined ratio 0/0 is not a number.'],
                          lines=[{'id':'old-second','label':'Earlier <B>','m':0,'b':1},
                                 {'id':'old-first','label':'Earlier "A"','m':3,'b':0}])
     old['work'].update(x=2,y=-5,claim='none',referenceShown=False,futureWork={'raw':True})
@@ -208,6 +208,7 @@ def transfer(browser, base, seed, first, exported):
     h.click(p, '[data-sp-fold="teaching"] summary'); click(p,'hear')
     speech=p.locator(sel('hear')).get_attribute('data-speak') or ''
     h.ok('0 point 3' in speech and '0 point 1 2 5' in speech, 'historical prose decimals are narrated with their actual digits rather than rounded to coordinate half steps')
+    h.ok('0 point 5' in speech and 'negative 0 point 2 5' in speech, 'historical decimal text can omit its leading zero without losing its point or sign')
     h.ok('0 over 0' in speech and 'Reference opened' not in speech, 'historical prose fractions are spoken lexically without evaluating undefined zero-over-zero or revealing unopened reference')
     stop_voice(p)
     click(p,'copy'); click(p,'turn','explain'); click(p,'reference')
