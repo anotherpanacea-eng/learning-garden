@@ -327,7 +327,7 @@ def main():
                     _, p = h.setup(browser, width, fixtures['base'], f'saving-{mode}-{width}')
                     go(p, base, '#arrive')
                     if mode == 'off':
-                        go(p, base, '#notes');p.locator('#remember').uncheck()
+                        go(p, base, '#notes');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
                     go(p, base, '#arrive')
                     if mode == 'failed':p.evaluate('window.__actTwoDiskFail=true')
                     join(p, 'letter');saved = story(p)

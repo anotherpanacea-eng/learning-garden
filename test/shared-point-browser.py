@@ -265,7 +265,7 @@ def phone(browser,base,seed):
 def saving_off(browser,base,seed):
     print('Shared Point: actual saving-off download recovery',flush=True)
     _,p=native.setup(browser,seed,'saving-off')
-    h.go(p,base,'#notes','#remember'); p.locator('#remember').uncheck()
+    h.go(p,base,'#notes','#remember'); p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
     p.evaluate('location.hash="#learn/math/equality"'); p.locator('[data-equality-shared-point]').wait_for(); enter(p)
     old=p.evaluate('JSON.stringify(Object.entries(localStorage).sort())')
     click(p,'keep')

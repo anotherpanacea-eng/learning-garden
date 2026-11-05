@@ -100,7 +100,7 @@ const {pathToFileURL}=require('node:url');
   await click(frozenPage,`[data-story-choice="${frozenNode.answer}"]`);await click(frozenPage,'#story-answer-form button[type="submit"]');
   ok((await frozenPage.locator('#story-feedback').innerText()).includes('That fits'),'saved visit checks its own answer after catalog edit');
   eq((await stored(frozenPage)).garden.visits.at(-1).parisSource,frozenVisit.parisSource,'catalog edit leaves captured source unchanged');
-  const off=await makePage(390,844);await off.goto(new URL('#notes',origin).href);await off.locator('#remember').uncheck();
+  const off=await makePage(390,844);await off.goto(new URL('#notes',origin).href);await off.locator('#remember').click();await off.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();
   await off.goto(new URL('#paris',origin).href);await off.selectOption(`#paris-pack-length-${stories[1].id}`,'3');
   await click(off,`[data-paris-pack-story="${stories[1].id}"]`);
   eq(await off.evaluate(()=>Object.keys(localStorage).filter(k=>k.startsWith('number-garden-v1:'))),[],'save-off visit writes no explorer notebook');

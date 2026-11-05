@@ -287,7 +287,7 @@ console.log(JSON.stringify({base,source,pending,work,maxImportBytes:MAX_IMPORT_B
             start(quota); h.click(quota,'[data-cr-keep]')
             h.ok(h.book(quota)==disk and 'in this session' in quota.locator('#cr-status').inner_text(),'explicit quota fault preserves disk and reports memory-only work')
             h.ok(len(native.download(quota,base,'quota-memory')['compareRecords'])==1,'real Notes download recovers memory-only scale comparison')
-            _,temporary=native.setup(browser,fixtures['base'],'saving-off'); h.go(temporary,base,'#notes','#remember'); temporary.locator('#remember').uncheck()
+            _,temporary=native.setup(browser,fixtures['base'],'saving-off'); h.go(temporary,base,'#notes','#remember'); temporary.locator('#remember').click();temporary.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             temporary.evaluate('location.hash="#learn/math/compare-records"')
             temporary.locator('[data-cr-root]').wait_for(); start(temporary); h.click(temporary,'[data-cr-keep]')
             h.ok('Saving on this device is off' in temporary.locator('#cr-status').inner_text(),'saving-off message remains distinct from quota')

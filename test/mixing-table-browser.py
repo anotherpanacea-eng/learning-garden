@@ -336,7 +336,7 @@ def main():
             ok('could not be saved' in p.locator('#mt-status').inner_text(),'storage failure disclosed')
             report=download(p,base,'storage-fault-notes');ok(next(x for x in report['mixingTable']['observations'] if x['caseId']=='equal-green')['first']['goal']=='fits','storage-failed memory downloadable')
             p.evaluate('()=>{Storage.prototype.setItem=window.originalMixingSet;}')
-            p=setup(browser,820,1180,fixtures['partial'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').uncheck()
+            p=setup(browser,820,1180,fixtures['partial'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             p.goto(base+'#studio/mixing',wait_until='domcontentloaded');p.locator(VIEW).wait_for();select_case(p,'equal-green');set_pot(p,2,2);button(p,'Paint a stripe')
             ok('Saving is off' in p.locator(VIEW).inner_text(),'save-off session disclosed')
             report=download(p,base,'save-off-notes');ok(next(x for x in report['mixingTable']['observations'] if x['caseId']=='equal-green')['first']['goal']=='fits','save-off memory downloadable')

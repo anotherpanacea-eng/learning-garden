@@ -120,7 +120,7 @@ def storage(browser,base,seed):
  for fault in ['saving-off','quota-device-api']:
   c,p=setup(browser,base,seed)
   try:
-   if fault=='saving-off':p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#living/bodies"');p.locator('[data-cs-leaf]').wait_for()
+   if fault=='saving-off':p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#living/bodies"');p.locator('[data-cs-leaf]').wait_for()
    enter(p);amount(p,'water-in');before=p.evaluate('JSON.stringify(localStorage)')
    if fault=='quota-device-api':p.evaluate('()=>{Storage.prototype.setItem=function(){throw new DOMException("Synthetic quota refusal","QuotaExceededError")};}')
    click(p,'keep');h.ok(p.evaluate('JSON.stringify(localStorage)')==before,fault+' Keep does not pretend to persist a failed or disabled save')

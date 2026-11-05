@@ -76,6 +76,6 @@ try{
   }finally{await c.close();}
  }
  {const seed=fixture();seed.words={v:999,future:'keep'};seed.wordRoom={v:999,future:['keep']};const{c,p}=await setup(seed);try{const before=await read(p);await tap(p,'try');await tap(p,'choose','a');eq(await read(p),before,'unsupported sibling roots stay exact');await p.goto(base+'#words');ok(await p.locator('.lp-entry a').isVisible(),'entry beside unsupported Word Garden');}finally{await c.close();}}
- {const{c,p}=await setup();try{await p.goto(base+'#notes');await p.locator('#remember').uncheck();await p.goto(base+'#words/letterpress');const saved=await disk(p);await tap(p,'print');await tap(p,'place',0);await tap(p,'pin');eq(await disk(p),saved,'saving off leaves play open without writes');}finally{await c.close();}}
+ {const{c,p}=await setup();try{await p.goto(base+'#notes');await p.locator('#remember').click();await p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();await p.goto(base+'#words/letterpress');const saved=await disk(p);await tap(p,'print');await tap(p,'place',0);await tap(p,'pin');eq(await disk(p),saved,'saving off leaves play open without writes');}finally{await c.close();}}
  eq(errors,[],'no browser errors');console.log('Letterpress native: '+n+' assertions passed. Artifacts: '+out);
 }finally{await browser.close();await new Promise(r=>server.close(r));}

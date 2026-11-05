@@ -68,7 +68,7 @@ def journey(b,base,seeds,width,height):
   with p.expect_download() as dl:p.locator('#download').tap()
   exported=json.loads(Path(dl.value.path()).read_text());ok(not any('journey' in k.lower() for k in exported),'no journey progress schema in actual download')
   file=OUT/f'notes-{width}.json';dl.value.save_as(str(file));p.locator('#progress-file').set_input_files(str(file));p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').tap();p.wait_for_function("JSON.parse(localStorage.getItem('learning-garden-explorers')).activeId==='explorer-3'");goto(p,'#journeys');ready(p);ok(p.locator('[data-journey-stop="0"]').get_attribute('aria-pressed')=='true','imported notebook gets fresh local journey')
-  goto(p,'#notes');p.locator('#remember').uncheck();goto(p,'#journeys/unknown');ready(p)
+  goto(p,'#notes');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();goto(p,'#journeys/unknown');ready(p)
   p.locator('[data-journey=change]').tap();p.locator('[data-journey-stop="1"]').tap();ok(not p.evaluate("Object.keys(localStorage).some(k=>k.startsWith('number-garden-v1:'))"),'save-off teaching does not recreate browser notebooks')
   print('journeys',width,height,'passed',flush=True)
  finally:c.close()

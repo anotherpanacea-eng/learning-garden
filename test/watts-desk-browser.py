@@ -240,7 +240,7 @@ def main():
             h.ok(len(native.download(quota,base,'quota-memory')['powerNotes'])==1,'actual Notes download recovers memory-only sheet')
             # Saving-off uses the actual Notes preference, separately from quota.
             _,temporary=setup(browser,seed,'saving-off');open_desk(temporary,base)
-            h.go(temporary,base,'#notes','#remember');temporary.locator('#remember').uncheck()
+            h.go(temporary,base,'#notes','#remember');temporary.locator('#remember').click();temporary.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             temporary.evaluate('location.hash="#mill/energy"');temporary.locator('[data-energy-root]').wait_for()
             temporary.get_by_role('button',name='Watts Desk',exact=True).tap();act(temporary,'keep')
             h.ok('saving is off' in text(temporary), 'saving-off status explains open-page retention')

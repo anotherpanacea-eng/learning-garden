@@ -115,7 +115,7 @@ def storage(browser,base,seed):
  for fault in ['saving-off','quota-device-api']:
   c,p=setup(browser,base,seed)
   try:
-   if fault=='saving-off':p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#learn/english"');p.locator('[data-ev-threads]').wait_for()
+   if fault=='saving-off':p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#learn/english"');p.locator('[data-ev-threads]').wait_for()
    enter(p);scene(p,'b1');move(p,-1);before=p.evaluate('JSON.stringify(localStorage)')
    if fault=='quota-device-api':p.evaluate('()=>{Storage.prototype.setItem=function(){throw new DOMException("Synthetic quota refusal","QuotaExceededError")};}')
    click(p,'keep');h.ok(p.evaluate('JSON.stringify(localStorage)')==before,fault+' Keep does not pretend to persist failed/disabled device storage');out=h.export_notes(p,'two-threads-'+fault);h.ok(out['threadReadings'][-1]['work']['order']==['a1','a2','b1','a3','b2','b3','together'],fault+' actual Notes download recovers the kept open-page order')

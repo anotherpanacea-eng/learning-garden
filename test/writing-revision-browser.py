@@ -232,7 +232,7 @@ def saving_off(browser,base,seed):
  print('Red Pencil: actual saving-off recovery',flush=True)
  c,p=h.setup(browser,base,seed)
  try:
-  p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#desk/writing"');h.ready(p);action(p,'revision');move(p,'flour','use');h.ok('session' in p.locator('#writing-status').inner_text(),'saving-off status identifies session-only work');report=h.export_notes(p,'saving-off-recovery');h.ok(report['writingDesk']['records']['pencil-notice']['work']['placements']['flour']=='use','actual Notes recovers saving-off in-memory work')
+  p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#desk/writing"');h.ready(p);action(p,'revision');move(p,'flour','use');h.ok('session' in p.locator('#writing-status').inner_text(),'saving-off status identifies session-only work');report=h.export_notes(p,'saving-off-recovery');h.ok(report['writingDesk']['records']['pencil-notice']['work']['placements']['flour']=='use','actual Notes recovers saving-off in-memory work')
  finally:c.close()
 
 

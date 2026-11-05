@@ -63,7 +63,7 @@ def play(browser,base,width,height):
   p.locator('#progress-file').set_input_files(str(file));p.locator('#progress-import-confirm').wait_for();held=copy.deepcopy(book(p));p.locator('#progress-import-cancel').tap();ok(book(p)==held,'cancelled actual import preserves notebook');p.locator('#progress-file').set_input_files({'name':'synthetic-invalid.json','mimeType':'application/json','buffer':b'{invalid'});p.wait_for_function('document.querySelector("#progress-import-status").textContent.includes("not readable JSON")');ok(book(p)==held,'invalid actual import preserves notebook');p.locator('#progress-file').set_input_files(str(file));p.locator('#progress-import-confirm').wait_for();p.locator('#progress-import-confirm').tap();p.wait_for_timeout(100);p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for();ok(room(p)==old,'actual Notes import restores retained material')
   p.reload(wait_until='networkidle');p.locator('[data-select-explorer=explorer-2]').tap();p.locator('[data-word-room-root]').wait_for();ok(room(p)==old,'reload preserves work');
   p.locator('#explorer-switch').tap();p.locator('[data-select-explorer=explorer-1]').tap();p.locator('[data-word-room-root]').wait_for();tap(p,'back');tap(p,'build');label(p,'cat');p.locator('#explorer-switch').tap();p.locator('[data-select-explorer=explorer-2]').tap();p.locator('[data-word-room-root]').wait_for();ok(room(p)==old,'separate explorer edit leaves imported work unchanged');
-  p.goto(base+'#notes');p.locator('#remember').uncheck();p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for();tap(p,'back');tap(p,'build');writes=p.evaluate('wrWrites');label(p,'cat');ok(p.evaluate('wrWrites')==writes,'saving-off recreates no saved notebook');
+  p.goto(base+'#notes');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for();tap(p,'back');tap(p,'build');writes=p.evaluate('wrWrites');label(p,'cat');ok(p.evaluate('wrWrites')==writes,'saving-off recreates no saved notebook');
   ok(p.evaluate('wrSpeech===0&&wrMedia===0'),'no TTS or media requested')
  finally:c.close()
 
@@ -131,7 +131,7 @@ def edges(browser,base):
   seed=fixture("chooseWordRoomWord(s,'mat',o);s.wordRoom.source.words.mat.textId=null");c,p=setup(browser,base,seed)
   try:
    if failure:p.evaluate('window.__wrStorageFail=true')
-   else:p.goto(base+'#notes');p.locator('#remember').uncheck();p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for()
+   else:p.goto(base+'#notes');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.goto(base+'#words/props');p.locator('[data-word-room-root]').wait_for()
    tap(p,'read');status=p.locator('#wr-status').inner_text();ok('earlier scene cannot open' in status,'unavailable linked scene explains return to chooser');ok(('browser saving failed' if failure else 'browser saving is off') in status,'unavailable scene notice retains persistence warning')
   finally:c.close()
  seed=fixture("chooseWordRoomWord(s,'mat',o);s.wordRoom.gallery=Object.keys(s.wordRoom.source.words);s.wordRoom.page='build'")

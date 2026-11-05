@@ -181,7 +181,7 @@ def saving_off(browser,base,seed):
  print('Same Steps: actual saving-off recovery',flush=True)
  c,p=setup(browser,base,seed)
  try:
-  p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#learn/math/equality"');p.locator('[data-equality-same-steps]').wait_for()
+  p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#learn/math/equality"');p.locator('[data-equality-same-steps]').wait_for()
   before=p.evaluate('JSON.stringify(Object.entries(localStorage).sort())');enter(p);adjust(p,0,'x',1);click(p,'keep')
   h.ok('download notes' in p.locator('#ss-status').inner_text().lower(),'Keep provides the conditional Notes recovery reminder')
   h.ok(p.evaluate('JSON.stringify(Object.entries(localStorage).sort())')==before,'saving-off construction writes no device progress')

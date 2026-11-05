@@ -120,7 +120,7 @@ def edges(browser,base):
   try:
    bench(p,'prefix')
    if fail:p.evaluate('window.marketFailStorage=true')
-   else:p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#words/signs"');ready(p)
+   else:p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#words/signs"');ready(p)
    p.locator('[data-ms-prefix]').select_option('mis');p.locator('[data-ms-part]').select_option('spell');h.ok(p.locator('.ms-painted').inner_text()=='misspell','in-memory sign usable with saving off/failure');h.ok('session' in p.locator('#ms-status').inner_text(),'saving status truthful');r=h.export_notes(p,'memory-market-'+str(fail));h.ok(r['signs']['prefix']['prefixId']=='mis' and r['signs']['prefix']['partId']=='spell','real RAM export retains unsaved sign')
   finally:c.close()
  c,p=setup(browser,base,fixture())
@@ -192,7 +192,7 @@ def endings_edges(browser,base):
   try:
    bench(p,'endings')
    if fail:p.evaluate('window.marketFailStorage=true')
-   else:p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#words/signs"');ready(p)
+   else:p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#words/signs"');ready(p)
    ending_pair(p,'happy','ly','y-to-i');action(p,'keep-ending');h.ok('session' in p.locator('#ms-status').inner_text(),'ending save-off/failure status truthful');report=h.export_notes(p,'ending-memory-'+str(fail));h.ok(report['signs']['endings']['draft']['rootId']=='happy' and len(report['signs']['endings']['kept'])==1,'RAM Notes includes unsaved ending draft and keep')
   finally:c.close()
  c,p=setup(browser,base,fixture(),fault=True)
@@ -310,7 +310,7 @@ def patterns_edges(browser,base):
   try:
    bench(p,'patterns');pattern_case(p,'warm')
    if fail:p.evaluate('window.marketFailStorage=true')
-   else:p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#words/signs"');ready(p)
+   else:p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#words/signs"');ready(p)
    pattern_button(p,'family','after-w');pattern_button(p,'letters','ey');action(p,'pattern-keep');h.ok('session' in p.locator('#ms-status').inner_text(),'pattern save-off/failure truthful status');report=h.export_notes(p,'pattern-memory-'+str(fail));h.ok(report['signs']['patterns']['drafts']['warm']=={'familyId':'after-w','lettersId':'ey'} and len(report['signs']['patterns']['kept'])==1,'actual RAM export holds unsaved pattern discovery')
   finally:c.close()
  c,p=setup(browser,base,fixture(),fault=True)
@@ -451,7 +451,7 @@ def crates_edges(browser,base):
   c,p=setup(browser,base,crate_fixture())
   try:
    if fail:p.evaluate('window.marketFailStorage=true')
-   else:p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#words/signs"');ready(p)
+   else:p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#words/signs"');ready(p)
    crate_mark(p,0);crate_place(p,'eigh');action(p,'crate-keep');h.ok('session' in p.locator('#ms-status').inner_text(),'crate saving off/failure status truthful');report=h.export_notes(p,'crate-memory-'+str(fail));h.ok(report['signs']['crates']['shelf']['marks']['eight']==[0] and report['signs']['crates']['shelf']['placements']['eight']=='eigh','actual RAM Notes retains unsaved crate work')
   finally:c.close()
  c,p=setup(browser,base,fixture(),fault=True)

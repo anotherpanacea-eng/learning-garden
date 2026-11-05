@@ -131,7 +131,7 @@ def persistence(browser,base,seed):
   c,p=setup(browser,base,seed,820,1000)
   try:
    if mode=='off':
-    p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#desk/exchange"');p.locator('[data-seed-root]').wait_for();create(p,'apples',2,read=False)
+    p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#desk/exchange"');p.locator('[data-seed-root]').wait_for();create(p,'apples',2,read=False)
    else:
     create(p,'apples',2);p.evaluate('()=>{const old=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k.startsWith("number-garden")||k==="learning-garden-explorers")throw new DOMException("Synthetic storage failure","QuotaExceededError");return old.call(this,k,v);};}')
    before=p.evaluate('()=>[localStorage.getItem("learning-garden-explorers"),localStorage.getItem("number-garden-v1:explorer-1")]');drawer(p,'note');words='Session words after '+mode;p.locator('[data-seed-note]').fill(words);status=p.locator('#seed-status').inner_text();ok(('saving is off' if mode=='off' else 'browser saving failed') in status,'actual persistence result stated for '+mode);ok(p.evaluate('()=>[localStorage.getItem("learning-garden-explorers"),localStorage.getItem("number-garden-v1:explorer-1")]')==before,'device storage unchanged for '+mode)

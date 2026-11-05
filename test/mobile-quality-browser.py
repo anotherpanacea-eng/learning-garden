@@ -234,7 +234,7 @@ try:
             route('home')
             route('notes')
             check(page.locator('[data-save-warning]').is_visible() and page.locator('[data-saving-status]').inner_text() == 'Progress is saved on this device.', 'a load notice that is not a save failure leaves Notes reporting saved progress')
-            page.locator('#remember').uncheck()
+            page.locator('#remember').click();page.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             check(page.evaluate("Object.keys(localStorage).filter(k=>k==='learning-garden-explorers'||k.startsWith('number-garden-v1')||/^number-garden-(kept|backup)-/.test(k)).length") == 0, 'saving off removes all managed copies')
             context.set_offline(True)
             for name in ['numbers', 'words', 'loft', 'notes']:

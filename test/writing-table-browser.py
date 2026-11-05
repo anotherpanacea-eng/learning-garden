@@ -115,7 +115,7 @@ def storage(browser,base,seed):
  for mode in ['off','failure']:
   ctx,p=setup(browser,base,seed)
   try:
-   if mode=='off':p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#desk/writing"');ready(p)
+   if mode=='off':p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#desk/writing"');ready(p)
    else:p.evaluate('window.writingFailStorage=true')
    action(p,'start');p.locator('[data-writing-strip=bread]').tap();p.locator('[data-writing-destination=sale]').tap();action(p,'keep');report=export_notes(p,'storage-'+mode);r=report['writingDesk']['records']['bakery'];ok(r['work']['placements']['bread']=='sale' and r['firstKept']['work']==r['work'],'real Notes preserves in-memory work with storage '+mode)
   finally:ctx.close()

@@ -235,6 +235,6 @@ try{
    if(event!=='reload'){await p.evaluate(()=>window.__trailEventLate.click());eq(await p.locator('.wrt-counter').count(),0,event+' invalidates previous controls');}
   }finally{await c.close();}
  }
- {const{c,p}=await setup();try{await p.goto(base+'#notes');await p.locator('#remember').uncheck();await p.goto(base+'#words/props');const saved=await disk(p);await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await tap(p,'set','long-u');await counters(p,1);eq(await disk(p),saved,'saving off does not block counters or write storage');}finally{await c.close();}}
+ {const{c,p}=await setup();try{await p.goto(base+'#notes');await p.locator('#remember').click();await p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();await p.goto(base+'#words/props');const saved=await disk(p);await tap(p,'enter');await counters(p,2);await tap(p,'set','vowels');await counters(p,3);await tap(p,'set','sentences');await counters(p,4);await tap(p,'set','long-o');await counters(p,5);await tap(p,'set','long-u');await counters(p,1);eq(await disk(p),saved,'saving off does not block counters or write storage');}finally{await c.close();}}
  eq(errors,[],'no browser errors');console.log('Sound trails native: '+assertions+' assertions passed. Artifacts: '+out);
 }finally{await browser.close();await new Promise(r=>server.close(r));}
