@@ -27,4 +27,4 @@ Root separately recomputed main-story appearance positions and return gaps using
 
 ## Remaining work
 
-Build the reviewed visual reader/order workbench, parent annotation repairs and Notes artifact; independent exact-head implementation review; relevant source and actual-app browser checks on current main; inspect screenshots; ordinary merge/deploy/live acceptance. Do not treat this document as implementation clearance. Whole-novel reading, repeated imagery, paragraph rhythm and other structures remain future increments.
+The bounded implementation is built in PR466, whose canonical comment owns acceptance. Remaining: independent exact-head implementation review; relevant source and actual-app browser checks on current main; inspect screenshots; ordinary merge/deploy/live acceptance. Do not treat this document as implementation clearance. Whole-novel reading, repeated imagery, paragraph rhythm and other structures remain future increments.
