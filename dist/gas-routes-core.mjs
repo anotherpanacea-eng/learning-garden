@@ -48,7 +48,7 @@ export function gasLegGeometry(s,legId){
  if(!validGasSource(s))return null;const index=s.legs.findIndex(l=>l.id===legId);if(index<0)return null;
  const a=s.nodes[index],b=s.nodes[index+1],d=distance(a,b),ux=(b.x-a.x)/d,uy=(b.y-a.y)/d,radius=s.world.width*.045;
  const start={x:a.x+ux*radius,y:a.y+uy*radius},end={x:b.x-ux*radius,y:b.y-uy*radius},headLength=Math.min(s.world.width*.018,.45*radius),headWidth=Math.min(s.world.width*.012,.30*radius),base={x:end.x-ux*headLength,y:end.y-uy*headLength};
- return {start,end,head:[{...end},{x:base.x-uy*headWidth/2,y:base.y+ux*headWidth/2},{x:base.x+uy*headWidth/2,y:base.y-ux*headWidth/2}],strokeWidth:s.world.width/250,radius,fontSize:s.world.width/16,headLength,headWidth};
+ return {start,end,base,head:[{...end},{x:base.x-uy*headWidth/2,y:base.y+ux*headWidth/2},{x:base.x+uy*headWidth/2,y:base.y-ux*headWidth/2}],strokeWidth:s.world.width/250,radius,fontSize:s.world.width/16,headLength,headWidth};
 }
 const guideNumber=r=>object(r)&&own(r,'id')&&typeof r.id==='string'&&/^gas-guide-[1-9][0-9]{0,5}$/.test(r.id)?Number(r.id.slice(10)):null;
 export function gasGuidesView(book){

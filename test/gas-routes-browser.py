@@ -65,20 +65,31 @@ def bounds(p):
     h.ok(not bad,'visible controls have44px targets and16px text: '+str(bad))
 
 def near(a,b,label):h.ok(len(a)==len(b) and all(abs(x-y)<.025 for x,y in zip(a,b)),label+': '+str(a))
-def geometry(p,s):
+def arrow_geometry(p,s,only=None):
+    svg=p.locator('.gas-diagram').first
+    r=s['world']['width']*.045
+    head_length=min(s['world']['width']*.018,.45*r)
+    head_width=min(s['world']['width']*.012,.30*r)
+    for i,leg in enumerate(s['legs']):
+        a=next(n for n in s['nodes'] if n['id']==leg['from']);b=next(n for n in s['nodes'] if n['id']==leg['to'])
+        dx,dy=b['x']-a['x'],b['y']-a['y'];d=math.hypot(dx,dy);ux,uy=dx/d,dy/d
+        tip=[b['x']-r*ux,b['y']-r*uy];base=[tip[0]-head_length*ux,tip[1]-head_length*uy]
+        group=svg.locator('[data-gas-arrow]').nth(i);line=group.locator('line')
+        xy=line.evaluate('e=>["x1","y1","x2","y2"].map(k=>+e.getAttribute(k))')
+        near(xy,[a['x']+r*ux,a['y']+r*uy]+base,'rendered stem stops at arrowhead base toward own next node '+leg['id'])
+        pts=[float(n) for n in group.locator('polygon').get_attribute('points').replace(',',' ').split()]
+        near(pts[:2],tip,'triangle tip reaches independent radius-trimmed endpoint')
+        near(pts[2:],[base[0]-uy*head_width/2,base[1]+ux*head_width/2,base[0]+uy*head_width/2,base[1]-ux*head_width/2],'triangle wings retain independent head width and direction')
+        near(xy[2:],[(pts[2]+pts[4])/2,(pts[3]+pts[5])/2],'actual stem endpoint meets mean wing base rather than covering the tip')
+        width=float(line.get_attribute('stroke-width'))
+        h.ok(width<=math.hypot(pts[2]-pts[4],pts[3]-pts[5])/2+.001,'stem is at most half actual triangle width, leaving a visible directional head')
+        h.ok(all((pts[0]-pts[j])*ux+(pts[1]-pts[j+1])*uy>0 for j in [2,4]),'arrowhead wings point backwards even for diagonal or reversed route')
+
+def geometry(p,s,arrows=True):
     svg=p.locator('.gas-diagram').first
     h.ok(svg.get_attribute('viewBox')==f"0 0 {s['world']['width']} {s['world']['height']}",'diagram uses own source world')
     r=s['world']['width']*.045
-    for leg in s['legs']:
-        a=next(n for n in s['nodes'] if n['id']==leg['from']);b=next(n for n in s['nodes'] if n['id']==leg['to'])
-        dx,dy=b['x']-a['x'],b['y']-a['y'];d=math.hypot(dx,dy);ux,uy=dx/d,dy/d
-        line=svg.locator('[data-gas-arrow] line').nth(s['legs'].index(leg))
-        xy=line.evaluate('e=>["x1","y1","x2","y2"].map(k=>+e.getAttribute(k))')
-        near(xy,[a['x']+r*ux,a['y']+r*uy,b['x']-r*ux,b['y']-r*uy],'rendered arrow trimmed toward own next node '+leg['id'])
-        head=svg.locator('[data-gas-arrow] polygon').nth(s['legs'].index(leg)).get_attribute('points')
-        pts=[float(n) for n in head.replace(',',' ').split()]
-        tip=pts[:2];near(tip,xy[2:],'arrowhead tip reaches directed endpoint')
-        h.ok(all((tip[0]-pts[i])*ux+(tip[1]-pts[i+1])*uy>0 for i in range(2,len(pts),2)),'arrowhead wings point backwards even for diagonal or reversed route')
+    if arrows:arrow_geometry(p,s)
     nums=svg.locator('[data-gas-icon] text').evaluate_all('''es=>es.map(e=>{const m=e.getScreenCTM(),b=e.getBBox();return {text:e.textContent,size:parseFloat(getComputedStyle(e).fontSize)*Math.hypot(m.a,m.b),box:[b.x,b.y,b.width,b.height]}})''')
     h.ok([n['text'] for n in nums]==[str(i+1) for i in range(len(s['nodes']))],'numbers follow source itinerary')
     h.ok(all(n['size']>=15.9 for n in nums),'effective SVG numbers stay at least16px')
@@ -90,7 +101,8 @@ def geometry(p,s):
     bx,by=badge[0]+badge[2]/2,badge[1]+badge[3]/2
     h.ok(math.hypot(bx-node['x'],by-node['y'])-max(badge[2],badge[3])/2>=.65*r-.1,'badge clears central number patch')
 
-def make_geometry(p,identity):
+def make_geometry(p,identity,source):
+    arrow_geometry(p,source,identity)
     selected=p.locator('[data-gas-selected-link="true"]')
     h.ok(selected.count()==1 and selected.get_attribute('data-gas-arrow')==identity,'Make highlights exactly its active own link')
     width=float(selected.locator('line').get_attribute('stroke-width'))
@@ -107,7 +119,7 @@ def journey(browser,base,f):
     # A direct jump records only that stop and the original; previous is native keyboard.
     p.locator(sel('node','cell')).tap();p.locator(sel('previous')).focus();p.keyboard.press('Enter')
     h.ok(p.locator(sel('node','body')).get_attribute('aria-pressed')=='true','keyboard previous follows source itinerary')
-    click(p,'turn','make');p.locator(sel('leg')).select_option('leg-2');make_geometry(p,'leg-2');click(p,'method','blood')
+    click(p,'turn','make');p.locator(sel('leg')).select_option('leg-2');make_geometry(p,'leg-2',f['sources'][0]);click(p,'method','blood')
     h.ok(p.locator(sel('method','blood')).evaluate('e=>e===document.activeElement'),'label selection retains enabled focus')
     click(p,'remove');h.ok(p.locator(sel('leg')).evaluate('e=>e===document.activeElement'),'remove at empty boundary focuses active leg select')
     click(p,'method','air') # Deliberately unexpected; the game must preserve it ungraded.
@@ -124,7 +136,8 @@ def journey(browser,base,f):
     h.ok(p.locator(sel('node','outside')).get_attribute('aria-pressed')=='true' and p.locator(sel('node','sac')).is_disabled(),'frozen previous skips unseen stops and unseen controls stay disabled')
     click(p,'next');h.ok(records(p)[0]==first,'frozen navigation never rewrites saved seen/current')
     click(p,'copy');click(p,'turn','make');p.locator(sel('leg')).select_option('leg-1');click(p,'method','blood')
-    click(p,'case','carbon');geometry(p,f['sources'][1]);click(p,'node','lung');click(p,'turn','make');click(p,'method','air')
+    click(p,'case','carbon');geometry(p,f['sources'][1]);click(p,'node','lung');click(p,'turn','make');make_geometry(p,'leg-1',f['sources'][1]);click(p,'method','air')
+    p.screenshot(path=str(OUT/'tablet-carbon-working.png'),full_page=True)
     click(p,'shelf');click(p,'card',first['id']);click(p,'copy');h.ok(p.locator(sel('method','blood')).get_attribute('aria-pressed')=='true','repeated Work on a copy resumes its continuing draft')
     second=keep(p);h.ok(records(p)[0]==first and len(second['work']['guide'])==2,'copy keeps new work while first stays exact')
     click(p,'case','carbon');carbon=keep(p);h.ok(carbon['work']['seen']==['cell','lung'],'independent carbon draft survives another Keep')
@@ -135,8 +148,13 @@ def journey(browser,base,f):
     boundaries(browser,base,f,first,exported)
     returns(browser,base,f,first)
     for width in [320,1024]:
-        _,q=native.setup(browser,f['base'],'width-'+str(width),width=width);enter(q,base);bounds(q);geometry(q,f['sources'][0]);click(q,'case','carbon');geometry(q,f['sources'][1]);click(q,'turn','make');bounds(q)
-        q.screenshot(path=str(OUT/f'width-{width}.png'),full_page=True)
+        _,q=native.setup(browser,f['base'],'width-'+str(width),width=width);enter(q,base);bounds(q);geometry(q,f['sources'][0],arrows=False)
+        # Main820 journey covers both directions; phone adds the small reversed
+        # active arrow. Do not repeat all arrow oracles at every sample width.
+        if width==320:click(q,'case','carbon')
+        click(q,'turn','make')
+        if width==320:make_geometry(q,'leg-1',f['sources'][1])
+        bounds(q);q.screenshot(path=str(OUT/f'width-{width}.png'),full_page=True)
 
 
 def lifecycle(browser,base,f,first):
@@ -182,7 +200,7 @@ def transfer(browser,base,f,exported,first):
     click(p,'page','-1');h.ok('Guide 2' in p.locator(sel('root')).inner_text(),'raw numbering includes unknown siblings')
     click(p,'card',old['id']);geometry(p,old['source'])
     h.ok(old['source']['title'] in p.locator(sel('root')).inner_text(),'historical source text is escaped and literal')
-    click(p,'copy');click(p,'turn','make');p.locator(sel('leg')).select_option(old['source']['legs'][0]['id'])
+    click(p,'copy');click(p,'turn','make');p.locator(sel('leg')).select_option(old['source']['legs'][0]['id']);make_geometry(p,old['source']['legs'][0]['id'],old['source'])
     h.ok(p.locator(sel('method')).count()==2 and p.locator(sel('leg')+' option').count()==2,'historical own method/leg counts are used')
     p.locator(sel('method')).first.focus();p.keyboard.press('Enter')
     h.ok(p.locator(sel('method')).first.evaluate('e=>e===document.activeElement'),'punctuation IDs retain canonical selector focus')
