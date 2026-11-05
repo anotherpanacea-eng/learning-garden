@@ -17,10 +17,14 @@ export function frenchVoiceAvailable(voices,preferred=speechPreferences().voice)
 }
 const deviceVoices=()=>{try{return window.speechSynthesis?.getVoices?.()||[];}catch{return [];}};
 // Keep each crossing's frozen French source; do not infer hearing from a fitting choice.
-function displayedFeedback(c,id,voice){
+function displayedFeedback(c,id,voice,x={}){
  if(id==='fit5')return 'That fits.';
- if(!voice&&(id==='sounds'||id==='a-for-dou'||id==='de-for-ou'||id?.startsWith('kind-')))return 'Look at her words again. You can ask for their English meaning.';
- return core.feedbackLine(c.source,id);
+ const line=core.feedbackLine(c.source,id);
+ if(!voice&&(id==='sounds'||id==='a-for-dou'||id==='de-for-ou'||id?.startsWith('kind-'))){
+  const explanation=line.replace(/ (?:Listen again|Hear her again)[^.]*\.$/,'');
+  if(explanation!==line)return explanation+' Look at her words again.'+(x.meaning?'':' You can ask for their English meaning.');
+ }
+ return line;
 }
 const hear=(text,label,voice,extra='')=>voice?hearButton(text,label,'fr').replace('<button ',`<button ${extra} `):'';
 function teachingCard(voice){
@@ -52,7 +56,7 @@ function stepView(c,voice){
  if(at.phase==='end')return `<div class='bac-step' data-bac-step='end'><p class='bac-line' tabindex='-1' data-bac-focus>Madame Roux: ${fr(quoted(s.ending.fr))}</p><p class='bac-gloss'>${esc(s.ending.en)}</p></div>`;
  const i=at.index,x=c.steps[i],step=s.steps[i],last=x.picks.at(-1),fid=last?core.feedbackFor(s,i,last):null;
  const meaning=x.meaning?'':button('meaning',esc(T.controls.meaning));
- const feedback=fid&&!x.fitted?`<p class='bac-feedback'>${esc(displayedFeedback(c,fid,voice))}</p>`:'';
+ const feedback=fid&&!x.fitted?`<p class='bac-feedback'>${esc(displayedFeedback(c,fid,voice,x))}</p>`:'';
  if(i<4&&at.phase==='answer'){
   const cards=s.cards.map(card=>`<button type='button' class='bac-answer' data-bac-card='${card.id}' aria-pressed='${last===card.id}' lang='fr'>${esc(card.fr)}${x.meaning?`<span class='bac-gloss' lang='en'>${esc(card.en)}</span>`:''}</button>`).join('');
   return `<div class='bac-step' data-bac-step='${i}' tabindex='-1' data-bac-focus>${herLine(step,x,i,voice,T.controls.listen)}${meaning}<div class='bac-answers'>${cards}</div>${feedback}</div>`;
@@ -138,7 +142,7 @@ export function bindFrenchFerry(state,ctx={}){
   const el=ev.target.closest?.('[data-bac-action],[data-bac-card]');if(!el||!live(el))return;
   const key=v.open;
   if(el.dataset.bacCard){stop();const r=write(()=>core.pickAnswer(state,key,el.dataset.bacCard,options));if(!r)return;
-   const c=core.frenchFerryView(state).crossings[key].crossing,line=displayedFeedback(c,r.feedback,voiceNow());
+   const c=core.frenchFerryView(state).crossings[key].crossing,line=displayedFeedback(c,r.feedback,voiceNow(),c.steps[r.step]);
    return redraw(r.fitted?'[data-bac-focus]':`[data-bac-card='${el.dataset.bacCard}']`,line);}
   const a=el.dataset.bacAction;
   if(a==='card-teaching'||a==='card-sounds'){stop();const card=a.slice(5);v.card=v.card===card?null:card;return redraw(v.card?`#bac-${card==='teaching'?'teach':'sounds'}-title`:`[data-bac-action='${a}']`);}

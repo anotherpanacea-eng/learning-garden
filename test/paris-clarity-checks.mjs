@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 import * as core from '../dist/travelers-archive-core.mjs';
 import {travelersArchivePage} from '../dist/travelers-archive-ui.mjs';
 import {ARCHIVE_REPLY_FIELDS} from '../dist/travelers-archive-content.mjs';
-import {openCrossing,pickAnswer,sayAnswer} from '../dist/french-ferry-core.mjs';
+import {openCrossing,pickAnswer,sayAnswer,useFerrySupport} from '../dist/french-ferry-core.mjs';
 import {frenchFerryPage} from '../dist/french-ferry-ui.mjs';
 import {startFrenchRooms,revealFrenchRoomsData} from '../dist/french-rooms-core.mjs';
 import {frenchRoomsPage} from '../dist/french-rooms-ui.mjs';
@@ -22,6 +22,9 @@ const moduleUrl=source=>'data:text/javascript;base64,'+Buffer.from(source).toStr
 const laterContent=content.replace("answer:'not-alone'","answer:'exact'").replace("id:'photo-date'","id:'replacement-question'").replaceAll("'photo'","'new-photo'");
 assert.notEqual(laterContent,content);
 const coreText=readFileSync(new URL('../dist/travelers-archive-core.mjs',import.meta.url),'utf8');
+const newKey=await import(moduleUrl(coreText.replace("'./travelers-archive-content.mjs'",JSON.stringify(moduleUrl(content.replace("answer:'not-alone'","answer:'exact'"))))));
+ok(newKey.travelersArchive(saved),'changing only the answer key does not invalidate an earlier outcome');
+eq(saved.travelersArchive.checks[0].feedback.correct,true,'answer-key edit does not rewrite stored feedback');
 const later=await import(moduleUrl(coreText.replace("'./travelers-archive-content.mjs'",JSON.stringify(moduleUrl(laterContent)))));
 ok(later.travelersArchive(saved),'later edition opens existing checks and kept source snapshots');
 eq(JSON.stringify(saved),bytes,'loading does not change any saved bytes');
@@ -36,6 +39,7 @@ eq(JSON.stringify(retired),before,'rendering preserves retired responses/support
 r.page='place-dates';r.task='order';r.order=['retired-event','river-peak'];
 ok(travelersArchivePage(retired).includes('retired-event'),'retired date card is readable without crashing');
 ok(!travelersArchivePage(retired).includes('data-ta-order-check'),'retired date order cannot be graded against current cards');
+const oldChecks=structuredClone(r.checks),oldKept=structuredClone(r.kept);ok(core.setArchiveOrder(retired,[]),'explicit new order reopens a retired draft');eq(retired.travelersArchive.checks,oldChecks,'new order preserves earlier checks');eq(retired.travelersArchive.kept,oldKept,'new order preserves kept reply');
 const reply=structuredClone(s);core.setArchivePage(reply,'reply');const replyHtml=travelersArchivePage(reply);
 ok(replyHtml.includes('Saving again replaces your saved reply'),'replacement is disclosed beside Keep');
 ok(replyHtml.includes('aria-describedby="ta-kept-status"'),'Keep is linked to its replacement disclosure');
@@ -48,6 +52,17 @@ const ferryHtml=frenchFerryPage(ferry,'',[]);
 ok(!ferryHtml.includes('Hear her again and compare'),'no-voice feedback does not instruct an unavailable control');
 ok(ferryHtml.includes('cannot continue it')&&ferryHtml.includes("aria-describedby='bac-again-help'"),'restart consequence is available before the action');
 eq(crossing.source.feedback.fit5,'You heard her right.','frozen feedback source is unchanged');
+const contrast={};openCrossing(contrast,'morning',{voice:false},yes);const source=contrast.frenchFerry.crossings.morning.source;
+for(let i=0;i<4;i++){
+ const step=source.steps[i];if(step.kind==='to'||step.kind==='from'){
+  const wrong=source.cards.find(c=>c.kind===(step.kind==='to'?'from':'to'));pickAnswer(contrast,'morning',wrong.id,yes);
+  const feedback=frenchFerryPage(contrast,'',[]).match(/<p class='bac-feedback'>(.*?)<\/p>/)?.[1]||'';
+  ok(feedback.includes(step.kind==='to'?'That card tells where you are coming from.':'That card tells where you are going.'),'reading fallback retains the chosen card\u2019s question-word contrast');
+  useFerrySupport(contrast,'morning','meaning',yes);
+  ok(!frenchFerryPage(contrast,'',[]).match(/<p class='bac-feedback'>(.*?)<\/p>/)?.[1].includes('You can ask for'),'already-shown meaning is not offered through an absent control');
+ }
+ pickAnswer(contrast,'morning',step.fit,yes);sayAnswer(contrast,'morning','not-now',yes);
+}
 const rooms={};startFrenchRooms(rooms,'return',yes);revealFrenchRoomsData(rooms,yes);const roomHtml=frenchRoomsPage(rooms,'return');
 eq((roomHtml.match(/your first kept version stays/g)||[]).length,2,'both Keep controls disclose latest replacement and first retention');
 eq((roomHtml.match(/Both writing fields are kept together/g)||[]).length,2,'both Keep controls explain their actual snapshot scope');
