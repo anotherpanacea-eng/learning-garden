@@ -189,6 +189,31 @@ def saving_off(browser,base,seed):
  finally:c.close()
 
 
+def actual_refusal(browser,base,seed):
+ print('Same Steps: real-app preparation refusal and bypass',flush=True)
+ bounded=copy.deepcopy(seed)
+ w=bounded['equalityDesk']['visits'][bounded['equalityDesk']['current']]
+ w['page']=0
+ def nodes(x):
+  return 1+sum(nodes(v) for v in (x.values() if isinstance(x,dict) else x if isinstance(x,list) else []))
+ # Existing shared limit is200000 nodes. Retain an ordinary small-byte synthetic
+ # notebook with room for itself, but not the source-fact exposure preparation.
+ bounded['syntheticNodeBoundary']=[]
+ bounded['syntheticNodeBoundary']=[None]*(200000-nodes(bounded)-1)
+ c,p=setup(browser,base,bounded)
+ try:
+  h.ok('could not be opened safely' in p.locator('[data-equality-root]').inner_text().lower(),'real preparation refusal appears without module interception')
+  before=h.book(p)
+  h.ok(before==bounded,'refused parent preparation leaves every notebook root exact')
+  enter(p)
+  adjust(p,0,'y',1)
+  h.ok(number(p,'y',0)=='1','real app renders and binds child controls after refusal')
+  click(p,'compare')
+  h.ok(p.locator('#ss-reference-title').count()==1,'real child comparison is usable after parent preparation refusal')
+  h.ok(h.book(p)==before and 'rateStepSheets' not in before,'child entry, adjustment and comparison do not change a refused notebook or initialize a sheet')
+ finally:c.close()
+
+
 def isolated(browser,base,seed):
  print('Same Steps: labelled actual-UI context/refusal harness',flush=True)
  c,p=setup(browser,base,seed)
@@ -236,7 +261,7 @@ def main():
   with sync_playwright() as pw:
    browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
    try:
-    report=journey(browser,base,seed);transfer(browser,base,seed,report);phone(browser,base,seed);saving_off(browser,base,seed);isolated(browser,base,seed)
+    report=journey(browser,base,seed);transfer(browser,base,seed,report);phone(browser,base,seed);saving_off(browser,base,seed);actual_refusal(browser,base,seed);isolated(browser,base,seed)
     h.ok(not h.errors,'no page/console/HTTP/request errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'base':base,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
    except Exception:
     (OUT/'failure.txt').write_text(traceback.format_exc())
