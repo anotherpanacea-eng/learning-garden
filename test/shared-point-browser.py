@@ -136,12 +136,16 @@ def journey(browser, base, seed):
     h.ok(p.locator(sel('x')).is_disabled() and p.locator(sel('y')).is_disabled(), 'kept point coordinates are read-only')
     click(p, 'turn', 'explain')
     h.ok(p.locator(sel('claim')).is_disabled(), 'kept unexpected claim remains read-only')
+    h.click(p, '[data-sp-fold="teaching"] summary')
     h.ok(records(p) == [first], 'read-only turn navigation cannot rewrite a retained record')
     click(p, 'copy')
     click(p, 'turn', 'try'); point(p, 1, 2); fit(p, 'both')
     click(p, 'turn', 'explain'); p.locator(sel('claim')).select_option('one')
     click(p, 'keep')
     h.ok(len(records(p)) == 2 and records(p)[0] == first, 'changing and keeping a copy appends without revising the earlier original')
+    click(p, 'shelf'); click(p, 'card', first['id'])
+    h.ok(p.locator(sel('claim')).count()==1 and p.locator(sel('claim')).input_value()=='none', 'reopening an unchanged old sheet after another Keep retains its deliberately chosen Explain screen')
+    h.ok(p.locator('[data-sp-fold="teaching"]').get_attribute('open') is not None and records(p)[0]==first, 'byte-identical root cloning retains the old sheet teaching disclosure without altering its saved work')
     click(p, 'working'); click(p, 'turn', 'try')
     waiting = p.locator(sel('draft')).input_value()
     point(p, -1, -1)
@@ -152,12 +156,18 @@ def journey(browser, base, seed):
     h.ok(p.locator(sel('x')).input_value() == '-1' and p.locator(sel('y')).input_value() == '-1', 'Working drafts can return to the exact older unfinished point')
     p.locator(sel('draft')).select_option(fresh)
     h.ok(p.locator(sel('x')).input_value() == '2' and p.locator(sel('y')).input_value() == '-5', 'returning to a fresh draft retains its independent default')
+    p.locator(sel('case')).select_option('together')
+    click(p, 'hear')
+    speech=p.locator(sel('hear')).get_attribute('data-speak') or ''
+    h.ok('Both rules draw the same line.' in speech and 'Reference opened' not in speech, 'Hear includes the visible coincident-line explanation without inventing opened reference support')
+    stop_voice(p)
+    continued=p.locator(sel('draft')).input_value()
     click(p, 'back')
     p.locator('[data-equality-field="note"]').wait_for()
     h.ok(p.locator('[data-equality-field="note"]').input_value() == 'A waiting synthetic note survives the graph tool.', 'Back restores the committed parent note')
     h.ok(h.book(p)['equalityDesk'] == before['equalityDesk'], 'parent Equality visit remains exact after child return')
     enter(p)
-    h.ok(p.locator(sel('draft')).input_value() == fresh, 'same-session child reopening resumes its working draft')
+    h.ok(p.locator(sel('draft')).input_value() == continued, 'same-session child reopening resumes its working draft')
     p.screenshot(path=str(OUT/'tablet.png'), full_page=True)
     exported = native.download(p, base, 'shared-point-kept-sheets')
     h.ok(exported['sharedPointSheets'] == records(p), 'actual Notes download includes exact retained graph sheets')
@@ -169,15 +179,16 @@ def transfer(browser, base, seed, first, exported):
     old = copy.deepcopy(first)
     old.update(id='shared-point-80', futureOuter={'raw':'retain me'})
     old['source'].update(id='old"source', title='Earlier <rule> & "marks"', futureSource={'raw':True},
+                         teaching=['A synthetic scale can read 0.3 or 0.125. These values are not half-step coordinate choices. An undefined ratio 0/0 is not a number.'],
                          lines=[{'id':'old-second','label':'Earlier <B>','m':0,'b':1},
                                 {'id':'old-first','label':'Earlier "A"','m':3,'b':0}])
     old['work'].update(x=2,y=-5,claim='none',referenceShown=False,futureWork={'raw':True})
-    off = copy.deepcopy(old); off['id']='shared-point-81'; off['source']['title']='A crossing outside the window'
+    off = copy.deepcopy(old); off['id']='shared-point-81'; off['source']['title']='A distant crossing'
     off['source']['lines']=[{'id':'a','label':'A','m':4,'b':12},{'id':'b','label':'B','m':3,'b':-12}]
     off['work']['referenceShown']=True
     corner=copy.deepcopy(old); corner['id']='shared-point-82'; corner['source']['title']='A corner-only touch'
     corner['source']['lines']=[{'id':'a','label':'A','m':1,'b':10},{'id':'b','label':'B','m':0,'b':2}]
-    corner['work']['referenceShown']=True
+    corner['work']['referenceShown']=False
     mixed=copy.deepcopy(exported)
     mixed['sharedPointSheets']=[{'id':'shared-point-900','v':99,'raw':'Unavailable synthetic row'},old,off,corner,first]
     _,p=native.setup(browser,seed,'transfer')
@@ -194,6 +205,11 @@ def transfer(browser, base, seed, first, exported):
     h.ok(old['source']['title'] in text and 'Earlier <B>' in text, 'historical own labels and reordered rules render literally as escaped text')
     h.ok(not p.locator('[data-sp-root] rule,[data-sp-root] B').count(), 'historical angle-bracket text creates no injected element')
     h.ok(not p.locator(sel('point','reference')).count(),'frozen history does not invent unopened reasoning')
+    h.click(p, '[data-sp-fold="teaching"] summary'); click(p,'hear')
+    speech=p.locator(sel('hear')).get_attribute('data-speak') or ''
+    h.ok('0 point 3' in speech and '0 point 1 2 5' in speech, 'historical prose decimals are narrated with their actual digits rather than rounded to coordinate half steps')
+    h.ok('0 over 0' in speech and 'Reference opened' not in speech, 'historical prose fractions are spoken lexically without evaluating undefined zero-over-zero or revealing unopened reference')
+    stop_voice(p)
     click(p,'copy'); click(p,'turn','explain'); click(p,'reference')
     text=p.locator(sel('root')).inner_text()
     h.ok('1/3' in text, 'historical crossing is computed exactly as one third from its own rules')
@@ -207,9 +223,15 @@ def transfer(browser, base, seed, first, exported):
     text=p.locator(sel('root')).inner_text().lower()
     h.ok('outside' in text and '-24' in text and '-84' in text,'off-window source retains its real crossing in text')
     h.ok(not p.locator(sel('point','reference')).count(),'off-window crossing is not clamped to a false visible marker')
+    click(p,'hear'); speech=p.locator(sel('hear')).get_attribute('data-speak') or ''
+    h.ok('outside this viewing window' in speech and 'negative 24' in speech and 'negative 84' in speech, 'Hear includes the visible off-window explanation and its exact reference coordinates')
+    stop_voice(p)
     click(p,'shelf'); click(p,'card',corner['id']); click(p,'turn','try')
     h.ok(p.locator(sel('line','0')).count()==0,'corner-only touch does not invent a positive-length line path')
     h.ok('no visible line segment' in p.locator(sel('root')).inner_text().lower(),'corner-only absence has an honest textual explanation')
+    click(p,'hear'); speech=p.locator(sel('hear')).get_attribute('data-speak') or ''
+    h.ok('no visible line segment in this window' in speech and 'Reference opened' not in speech and 'outside this viewing window' not in speech, 'Hear explains the visible missing segment while leaving the unopened crossing reference unrevealed')
+    stop_voice(p)
     redownload=native.download(p,base,'shared-point-historical-roundtrip')
     h.ok(redownload['sharedPointSheets'][:-1]==mixed['sharedPointSheets'],'actual Notes roundtrip preserves every unavailable/historical/original sibling exactly')
     h.click(p,'#explorer-switch'); h.click(p,'[data-select-explorer="'+identity+'"]')
