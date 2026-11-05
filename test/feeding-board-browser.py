@@ -368,6 +368,7 @@ def main():
                 go(p, base, '#notes', '#reset')
                 click(p, '#reset')
                 click(p, '#confirm-reset')
+                click(p, '[data-film-skip]')
                 go(p, base)
                 ok('feedingBoard' not in book(p), 'existing confirmed reset clears only current explorer owner')
                 click(p, '#explorer-switch')
