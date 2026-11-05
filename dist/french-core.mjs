@@ -28,24 +28,24 @@ function suggestion(state){
   if(seen.has(key)||!validFrenchObservation(o,v)||o.status!=='answered'||!v.route.slice(0,2).includes(o.nodeId)||!['independent','together','listened'].includes(o.reading))return false;
   seen.add(key);return true;
  }).slice(-8);
- if(!recent.length)return {variant:1,reason:'Start with short sentences. Choose any amount of French whenever you like.'};
+ if(!recent.length)return {variant:1,reason:'Start with short French sentences. You can choose any length.'};
  const latest=recent.at(-1),base=latest.frenchVariant,lastSupport=recent.findLastIndex(o=>supported(o)||retry(o));
- if(lastSupport>=0&&recent[lastSupport].frenchVariant===base&&recent.slice(lastSupport).every(o=>o.visitId===latest.visitId))return {variant:Math.max(1,base-1),reason:base===1?'Keep short sentences and any help you like. Every story and text choice stays open.':'The last story used help or another try. Try fewer sentences for the next errand, or choose any amount yourself.'};
+ if(lastSupport>=0&&recent[lastSupport].frenchVariant===base&&recent.slice(lastSupport).every(o=>o.visitId===latest.visitId))return {variant:Math.max(1,base-1),reason:base===1?'Try more short sentences with any help you like. You can choose any story or length.':'You used help or tried again on the last story. Try fewer sentences next, or choose any length.'};
  const distinct=new Set();
  for(const o of recent.slice(lastSupport+1)){
   const v=visits.find(v=>v.id===o.visitId),n=parisNode(v,o.nodeId);
   if(o.frenchVariant!==base||o.nodeId!==v.route[0]||o.correct!==true||o.firstCorrect!==true||o.reading!=='independent'||o.priorStorySeen!==false||v.french.priorStorySeen!==false||o.priorPassageSeen!==false||o.familiar||supported(o)||retry(o)||o.answer!==n.answer||o.attempts?.length!==1||o.attempts[0]!==n.answer)continue;
   distinct.add(o.frenchStory);
  }
- if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Keep exploring short paragraphs, or choose another amount whenever you like.':'Two different new stories were answered on the first try. They were reported as read independently, with no help recorded. A little more connected French is ready to try. Every choice stays open.'};
- return {variant:base,reason:'Keep exploring with this amount of French. There is no need to move on until you want to.'};
+ if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Try another short paragraph, or choose a different length.':'Want to try a longer French story next? You can choose any length.'};
+ return {variant:base,reason:'Try another French story this long, or choose a different length.'};
 }
 export function frenchPlan(state,destination,variant='auto',storyId=null){
  if(!frenchPlaces.some(d=>d.id===destination)||variant!=='auto'&&![1,2,3].includes(variant)||storyId!==null&&!frenchStories.some(s=>s.id===storyId&&s.destination===destination))return null;
  const visits=state?.garden?.visits||[],seen=state?.garden?.seen||[],count=s=>Math.max(visits.filter(v=>v?.french?.storyId===s.id&&(v.french.displayed===true||Array.isArray(v.recorded)&&v.recorded.length>0)).length,seen.some(id=>Object.values(s.variants).flat().includes(id))?1:0);
  const stories=frenchStories.filter(s=>s.destination===destination),story=storyId?stories.find(s=>s.id===storyId):stories.map((s,i)=>({s,i,n:count(s)})).sort((a,b)=>a.n-b.n||a.i-b.i)[0]?.s;
  if(!story)return null;const auto=suggestion(state),chosen=variant==='auto'?auto.variant:variant;
- return Object.freeze({destination,storyId:story.id,variant:chosen,reason:variant==='auto'?auto.reason:'You chose this amount of French. Every choice stays available.',route:Object.freeze([...story.variants[chosen],'french-postcard'])});
+ return Object.freeze({destination,storyId:story.id,variant:chosen,reason:variant==='auto'?auto.reason:'You chose this French story length. You can change it next time.',route:Object.freeze([...story.variants[chosen],'french-postcard'])});
 }
 export function priorFrenchStorySeen(state,storyId){
  const story=frenchStories.find(s=>s.id===storyId),ids=story?Object.values(story.variants).flat():[];
