@@ -7,3 +7,5 @@ body:has([data-pd-root]) .garden-header nav,body:has([data-pd-root]) #companion-
 @media(prefers-reduced-motion:reduce){.pd-page *{scroll-behavior:auto!important}}
 
 .pd-plan-actions{position:sticky;bottom:8px;z-index:2}.pd-time-controls{margin:14px 0}.pd-time-controls button{flex:1 1 120px;padding:10px 12px}
+
+.pd-page #pd-task,.pd-page #pd-heading{scroll-margin-top:90px}
