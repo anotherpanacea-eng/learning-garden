@@ -49,7 +49,7 @@ def ready(p,route,selector):
 def go(p,base,route,selector):
  p.goto(base+route,wait_until='domcontentloaded');ready(p,route,selector)
 def setup(browser,base,route,selector,width=1280):
- c=browser.new_context(viewport={'width':width,'height':900},reduced_motion='reduce')
+ c=browser.new_context(viewport={'width':width,'height':600 if width==320 else 900},reduced_motion='reduce',color_scheme='dark' if width==320 else 'light')
  profiles=[dict(id='explorer-'+str(i),avatar=a,color='gold',symbol='leaf',createdAt='2026-11-04T12:00:00.000Z') for i,a in [(1,'sky'),(2,'fern'),(3,'sky')]]
  books={}
  for i in range(1,4):
@@ -119,6 +119,9 @@ def identities(browser,base):
  p.locator('#explorer-switch').click();one=ax(p,'[data-select-explorer="explorer-1"]')['name']['value'];two=ax(p,'[data-select-explorer="explorer-2"]')['name']['value'];three=ax(p,'[data-select-explorer="explorer-3"]')['name']['value']
  ok('Sky' in one and 'Fern' in two and 'notebook 1' in one and 'notebook 3' in three and one!=three,'both avatar differences and preexisting identical profiles have distinct computed names')
  p.locator('[data-select-explorer="explorer-2"]').click();p.locator('#explorer-header').wait_for();a=book(p);b=book(p,'explorer-2');p.evaluate('window.detachedReplacement.click()');ok(book(p)==a and book(p,'explorer-2')==b,'detached replacement cannot alter either explorer')
+ go(p,base,'#companions','[data-avatar="reed"]');p.locator('[data-avatar="reed"]').click();registry=json.loads(raw(p,'learning-garden-explorers'))
+ ok(book(p,'explorer-2')['garden']['avatar']=='reed' and next(x for x in registry['explorers'] if x['id']=='explorer-2')['avatar']=='reed','an available character updates its own notebook picture')
+ ok(book(p)==a,'changing another explorer picture preserves the first notebook')
  go(p,base,'#notes','#explorer-switch');p.locator('#explorer-switch').click();ok('Keep exploring as before' in p.locator('#explorer-cancel').inner_text(),'picker cancel describes returning to the current activity')
  p.locator('#explorer-cancel').click();p.locator('.explorer-notes').wait_for();ok(p.url.endswith('#notes'),'picker cancel returns to notes as described')
  c.close()
