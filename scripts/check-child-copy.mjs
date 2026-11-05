@@ -609,6 +609,32 @@ export const copyScopes = [
   {"path":"dist/coin-counter-core.mjs","adultBlocks":[],"quotations":[]},
   {"path":"dist/compare-records-core.mjs","adultBlocks":[],"quotations":[]},
 
+  // LG-2b batch14: remaining existing source modules.
+  {path:"dist/comparing-orders-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/courier-clock-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/courier-estimates-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/design-table-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/archive-labels.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/archive.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/bell-studio.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/cafe-batches.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/cafe-fractions.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/cafe-groups.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/cafe-order.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/cafe-portions.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/cafe-recipes.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/cafe-sharing.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/cafe-units.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/desk-exchange.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/facts-garden.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/field-kit.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/french-story.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/garden-question.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/instructions.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/learn-math-paired.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/life-ring.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-bodies.mjs",adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
