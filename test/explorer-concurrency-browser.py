@@ -12,6 +12,7 @@ def ok(value,label):
  assert value,label
  checks+=1
 class Quiet(http.server.SimpleHTTPRequestHandler):
+ protocol_version='HTTP/1.1'
  def log_message(self,*args):pass
 class Server(http.server.ThreadingHTTPServer):
  request_queue_size=128

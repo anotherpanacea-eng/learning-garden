@@ -174,3 +174,14 @@ console.log(`${checks} explorer storage checks including preference-write failur
  equal([...disk.data],before,'describing copies changes no stored bytes');equal(disk.log.length,writes,'describing copies performs no storage writes');
 }
 console.log(`${checks} explorer storage checks including recovery-copy identity passed.`);
+{
+ const disk=new Storage(),original=store(disk),first=original.load(),a=original.active.id;
+ const second=original.add({avatar:'fern',color:'blue',symbol:'shell'},first),b=original.active.id;
+ original.select(a,second);disk.data.set(key(b),'fictional unreadable notebook');
+ const reopened=store(disk),current=reopened.load();check(reopened.setPersistence(false,current),'saving-off succeeds after encountering an unreadable inactive notebook');
+ check(!disk.data.has(key(b))&&reopened.keptCopies().length===0,'successful saving-off removes the warned stored notebook and any generated kept copy');
+ equal(reopened.warning,'','no location banner points at a copy deleted by saving-off');
+ check(reopened.memory.has(a)&&reopened.memory.has(b),'both active and unreadable fallback notebooks remain available in memory');
+ equal(current,first,'active notebook remains exact when another notebook was unreadable');
+}
+console.log(`${checks} explorer storage checks including saving-off recovery notices passed.`);

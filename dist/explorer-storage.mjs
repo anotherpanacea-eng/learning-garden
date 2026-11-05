@@ -5,6 +5,7 @@ export const REGISTRY_KEY='learning-garden-explorers';
 export const SAVE_KEY='number-garden-save';
 export const EXPLORER_COLORS=['gold','rose','blue','green','lavender','coral'];
 export const EXPLORER_SYMBOLS=['leaf','acorn','shell','feather','pebble','flower'];
+const unreadableNotice='This notebook is starting fresh because some saved progress could not be opened. The earlier version is kept in Grown-up notes under Saved copies on this device. Download that kept copy before clearing progress or turning saving off.';
 const avatarIds=['fern','reed','sky'];
 const validId=id=>typeof id==='string'&&/^explorer-[1-9]\d{0,8}$/.test(id);
 const stateKey=id=>`${STORAGE_KEY}:${id}`;
@@ -78,7 +79,7 @@ export class ExplorerStore{
  _avatar(state,profile){if(!state.garden||typeof state.garden!=='object'||Array.isArray(state.garden))state.garden={};if(!avatarIds.includes(state.garden.avatar))state.garden.avatar=profile.avatar;return state;}
  _readState(profile){
   if(this.memory.has(profile.id))return this.memory.get(profile.id);
-  let state;try{const raw=this._get(stateKey(profile.id));this._observed.set(stateKey(profile.id),raw);if(raw===null){state=this._fresh(profile);this._warn('A saved explorer had no readable progress copy. This session starts with a fresh notebook.');}else{const result=restoreStateResult(raw);state=result.state;if(result.reason){const kept=this._copy(raw,'kept',profile.id);this._warn(kept?'This notebook is starting fresh because some saved progress could not be opened. The earlier version is kept in Grown-up notes under Saved copies on this device. Download that kept copy before clearing progress or turning saving off.':'Some saved progress could not be read or copied safely. The original is unchanged; this session is temporary.');}}}catch{this._writeBlocked=true;this._warn();state=this._fresh(profile);}
+  let state;try{const raw=this._get(stateKey(profile.id));this._observed.set(stateKey(profile.id),raw);if(raw===null){state=this._fresh(profile);this._warn('A saved explorer had no readable progress copy. This session starts with a fresh notebook.');}else{const result=restoreStateResult(raw);state=result.state;if(result.reason){const kept=this._copy(raw,'kept',profile.id);this._warn(kept?unreadableNotice:'Some saved progress could not be read or copied safely. The original is unchanged; this session is temporary.');}}}catch{this._writeBlocked=true;this._warn();state=this._fresh(profile);}
   this._avatar(state,profile);this.memory.set(profile.id,state);return state;
  }
  load(){
@@ -89,7 +90,7 @@ export class ExplorerStore{
    const legacy=this._get(STORAGE_KEY),restored=legacy===null?null:restoreStateResult(legacy),p=this._newProfile({avatar:restored?.state.garden?.avatar});this.registry={version:1,activeId:p.id,explorers:[p]};const s=this._avatar(restored?.state||this._fresh(p),p);this.memory.set(p.id,s);
    if(this._writeBlocked)return s;
    if(!this.checkForUpdates())return s;
-   if(legacy!==null){if(!this._copy(legacy,'backup',p.id)||!this._write(stateKey(p.id),legacy)){this._writeBlocked=true;return s;}if(restored.reason){if(!this._copy(legacy,'kept',p.id))this._writeBlocked=true;this._warn(this._writeBlocked?'Some saved progress could not be copied safely. The original is unchanged; this session is temporary.':'This notebook is starting fresh because some saved progress could not be opened. The earlier version is kept in Grown-up notes under Saved copies on this device. Download that kept copy before clearing progress or turning saving off.');}}
+   if(legacy!==null){if(!this._copy(legacy,'backup',p.id)||!this._write(stateKey(p.id),legacy)){this._writeBlocked=true;return s;}if(restored.reason){if(!this._copy(legacy,'kept',p.id))this._writeBlocked=true;this._warn(this._writeBlocked?'Some saved progress could not be copied safely. The original is unchanged; this session is temporary.':unreadableNotice);}}
    else if(!this._write(stateKey(p.id),JSON.stringify(s))){this._writeBlocked=true;return s;}
    if(!this._writeBlocked&&!this._commitRegistry())this._writeBlocked=true;
    return s;
@@ -142,7 +143,7 @@ export class ExplorerStore{
  setPersistence(enabled,currentState){
   if(this.importUncertain||this._conflict)return false;
   if(!this.registry)this.load();if(!this.checkForUpdates(true))return false;if(currentState)this.memory.set(this.active.id,currentState);
-  if(!enabled){for(const p of this.explorers)this._readState(p);this._persist=false;let ok=this._write(SAVE_KEY,'off');try{for(const k of this._keys().filter(managed)){try{this.storage.removeItem(k);if(this._get(k)!==null)ok=false;}catch{ok=false;}}}catch{ok=false;}try{for(const k of this._observed.keys())if(k!==SAVE_KEY)this._observed.set(k,this._get(k));}catch{ok=false;}if(!ok)this._warn('Some saved copies could not be removed. Saving is off for this session; check browser storage before sharing this device.');return ok;}
+  if(!enabled){for(const p of this.explorers)this._readState(p);this._persist=false;let ok=this._write(SAVE_KEY,'off');try{for(const k of this._keys().filter(managed)){try{this.storage.removeItem(k);if(this._get(k)!==null)ok=false;}catch{ok=false;}}}catch{ok=false;}try{for(const k of this._observed.keys())if(k!==SAVE_KEY)this._observed.set(k,this._get(k));}catch{ok=false;}if(!ok)this._warn('Some saved copies could not be removed. Saving is off for this session; check browser storage before sharing this device.');else if(this._warning===unreadableNotice)this._warning='';return ok;}
   this._persist=true;this._writeBlocked=false;if(!this._write(SAVE_KEY,'on')){this._writeBlocked=true;return false;}for(const [key,raw] of this.importCopies)if(!this._write(key,raw)){this._writeBlocked=true;return false;}for(const p of this.explorers){const s=this.memory.get(p.id)||this._readState(p);if(!this._writeState(p,s)){this._writeBlocked=true;return false;}}return this._commitRegistry();
  }
  clearActive(){

@@ -100,6 +100,7 @@ def first_visit(b,base,seeds):
 def main():
  seeds=fixture()
  class Quiet(http.server.SimpleHTTPRequestHandler):
+  protocol_version='HTTP/1.1'
   def log_message(self,*a):pass
  class Server(http.server.ThreadingHTTPServer):request_queue_size=128;daemon_threads=True
  server=Server(('127.0.0.1',0),functools.partial(Quiet,directory=str(ROOT/'dist')));threading.Thread(target=server.serve_forever,daemon=True).start();base=os.environ.get('HOME_TEST_URL',f'http://127.0.0.1:{server.server_port}/').rstrip('/')+'/'
