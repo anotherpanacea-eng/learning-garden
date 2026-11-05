@@ -109,8 +109,24 @@ for(const raw of [null,[],{version:99,work:'keep'},{version:1,day:6},'<future pa
  const old=copy(s);delete old.plantStudy.choiceSets;const raw=copy(old),html=plantStudyPage(old);
  for(const q of plantQuestions(6)){const indices=q.choices.map(c=>html.indexOf(`data-ps-answer="${q.id}:${c.id}"`));check(indices.every((n,i)=>n>=0&&(i===0||n>indices[i-1])),'legacy unanswered questions retain original order');}
  check(plantStudy(old),'legacy notebook accepted');equal(old,raw,'loading and rendering do not add choices to a legacy notebook');
- const malformed=copy(s);malformed.plantStudy.choiceSets[q.id].push(malformed.plantStudy.choiceSets[q.id][0]);check(!plantStudy(malformed),'duplicate saved choice ids rejected');
+ const malformed=copy(s);malformed.plantStudy.choiceSets[q.id].push(malformed.plantStudy.choiceSets[q.id][0]);check(plantStudy(malformed),'duplicate optional choice ids do not close the notebook');
  const changed=copy(s);changed.plantStudy.choiceSets[q.id].push({id:'earlier-option',label:'Earlier option'});check(plantStudy(changed),'historical choice counts and ids remain readable');changed.plantStudy.questions[q.id]={attempts:[{choice:'earlier-option',support:{},practice:true,familiar:true}],support:{}};check(plantStudy(changed),'a retired response cannot strand the notebook');check(!plantStudyPage(changed).includes(`data-ps-answer="${q.id}:earlier-option"`),'retired option falls back for this question only');delete changed.plantStudy.questions[q.id];changed.plantStudy.choiceSets[q.id]=[{id:'cause',label:'Earlier option'}];check(plantStudy(changed),'unusable question does not invalidate notebook');check(plantStudyPage(changed).includes(`data-ps-answer="${q.id}:visible"`),'only the unusable question falls back');
 }
 
+// Broken optional labels isolate one question; existing observations and answers remain usable.
+for(const broken of [null,42,'old labels',[],[null],[{id:'visible',label:42}],[{id:'visible',label:'A'},{id:'visible',label:'B'}],{unexpected:'raw'}]){
+ const s={};ensurePlantStudy(s);setPlantDay(s,6);recordPlantObservation(s);setPlantPage(s,'compare');const [q,other]=plantQuestions(6);
+ answerPlantQuestion(s,q.id,q.answer);s.plantStudy.questions[q.id].attempts[0].choice='retired-response';
+ s.plantStudy.choiceSets[q.id]=broken;s.plantStudy.choiceSets[other.id].reverse();const reloaded=copy(s),before=copy(reloaded);
+ check(plantStudy(reloaded),'optional malformed labels do not strand the notebook after JSON reload');
+ const html=plantStudyPage(reloaded),ids=q.choices.map(c=>html.indexOf(`data-ps-answer="${q.id}:${c.id}"`));
+ check(ids.every((at,i)=>at>=0&&(i===0||at>ids[i-1])),'only damaged question uses the original authored choices');
+ const unaffected=before.plantStudy.choiceSets[other.id].map(c=>html.indexOf(`data-ps-answer="${other.id}:${c.id}"`));check(unaffected.every((at,i)=>at>=0&&(i===0||at>unaffected[i-1])),'other question retains its saved choice order');
+ equal(reloaded,before,'loading/rendering retain raw optional data and retired response');check(setPlantDay(reloaded,PLANT_DAYS.find(day=>day!==6)),'unrelated model day remains usable');
+ equal(reloaded.plantStudy.choiceSets,before.plantStudy.choiceSets,'model action preserves damaged labels exactly');equal(reloaded.plantStudy.questions,before.plantStudy.questions,'model action preserves past responses');equal(reloaded.plantStudy.observations,before.plantStudy.observations,'kept observations remain exact');
+}
+for(const brokenRoot of [null,42,'old labels',[]]){
+ const s={};ensurePlantStudy(s);setPlantDay(s,6);setPlantPage(s,'compare');s.plantStudy.choiceSets=brokenRoot;const raw=copy(s);
+ check(plantStudy(s)&&plantStudyPage(s).includes('data-ps-answer='),'a malformed optional container does not close Plant Study');equal(s,raw,'container is not silently repaired');check(recordPlantObservation(s),'observations can still be kept');equal(s.plantStudy.choiceSets,brokenRoot,'actions preserve raw container');
+}
 console.log(`Plant study checks passed: ${checks}`);

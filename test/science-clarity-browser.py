@@ -81,7 +81,56 @@ def fits(page):
     ok(page.evaluate('document.documentElement.scrollWidth<=innerWidth'), 'no sideways overflow at ' + page.url)
 
 
+def damaged_choice_journey(browser, base, width):
+    for kind in ['duplicate', 'malformed']:
+        seed = copy.deepcopy(fixture['seed'])
+        q, other = fixture['legacyPlant'][:2]
+        sets = seed['plantStudy']['choiceSets']
+        sets[q['id']] = [copy.deepcopy(sets[q['id']][0])] * 2 if kind == 'duplicate' else {'unreadable': 'retained'}
+        sets[other['id']].reverse()
+        seed['plantStudy']['questions'][q['id']] = {'attempts': [{'choice': 'retired-response', 'support': {}, 'practice': True, 'familiar': True}], 'support': {}}
+        visit = seed['livingExploration']['current']
+        choices = visit['task']['teaching']['scienceChoices']
+        visit['task']['teaching']['scienceChoices'] = [copy.deepcopy(choices[0])] * 2 if kind == 'duplicate' else [None]
+        visit['science']['detail'] = 'retired-response'
+        page = helpers.setup(browser, seed, width, f'broken-choices-{kind}-{width}')
+        go(page, base, '#living/plants', '[data-ps-answer]')
+        before = copy.deepcopy(helpers.h.book(page)['plantStudy'])
+        ok(before == seed['plantStudy'], 'JSON reload opens damaged labels without rewriting notebook')
+        current = page.locator(f'[data-ps-answer^="{q["id"]}:"]').evaluate_all('(es)=>es.map(e=>e.dataset.psAnswer.split(":")[1])')
+        ok(current == q['choices'], 'damaged Plant question alone uses original choices')
+        current = page.locator(f'[data-ps-answer^="{other["id"]}:"]').evaluate_all('(es)=>es.map(e=>e.dataset.psAnswer.split(":")[1])')
+        ok(current == [c['id'] for c in sets[other['id']]], 'other Plant question retains saved order')
+        page.locator('[data-ps-day="2"]').click()
+        page.locator('.ps-steps [data-ps-page="observe"]').click()
+        page.locator('[data-ps-keep]').click()
+        after = helpers.h.book(page)['plantStudy']
+        ok(len(after['observations']) == len(before['observations']) + 1, 'new observation can be kept despite damaged optional labels')
+        ok(after['choiceSets'] == before['choiceSets'] and after['questions'] == before['questions'] and after['plan'] == before['plan'], 'observation action preserves raw labels, old responses and carried plan')
+        page.reload(wait_until='domcontentloaded')
+        page.locator('[data-ps-keep]').wait_for()
+        ok(helpers.h.book(page)['plantStudy'] == after, 'notebook action survives reload without normalizing labels')
+        go(page, base, '#living/visit', '[data-adapt-science-detail]')
+        before_visit = copy.deepcopy(helpers.h.book(page)['livingExploration']['current'])
+        ok(before_visit == visit, 'damaged Living labels and retired selection load exactly')
+        ok(page.locator('[data-adapt-science-detail]').evaluate_all('(es)=>es.map(e=>e.dataset.adaptScienceDetail)') == ['recheck', 'unchanged', 'no-need'], 'Living question falls back locally')
+        page.locator('[data-adapt-page="notice"]').first.click()
+        page.locator('[data-adapt-habitat="1"]').click()
+        page.locator('[data-adapt-inspect="1"]').click()
+        after_visit = helpers.h.book(page)['livingExploration']['current']
+        ok(after_visit['view']['habitat'] == 1 and after_visit['task'] == before_visit['task'], 'habitat exploration remains usable without repairing saved metadata')
+        ok(all(after_visit[k] == before_visit[k] for k in ['science', 'reading', 'math']), 'all strand responses remain exact')
+        fits(page)
+        go(page, base, '#notes', '#download')
+        with page.expect_download() as event:
+            page.locator('#download').click()
+        report = json.loads(Path(event.value.path()).read_text(encoding='utf8'))
+        ok(report['plantStudy'] == after and report['livingExploration']['current'] == after_visit, 'actual Notes download retains damaged raw labels and unaffected work')
+        page.context.close()
+
+
 class Quiet(http.server.SimpleHTTPRequestHandler):
+    protocol_version = 'HTTP/1.1'
     def log_message(self, *_args):
         pass
 
@@ -213,6 +262,8 @@ def main():
                 ok(page.locator('[data-adapt-science-detail]').evaluate_all('(es)=>es.map(e=>e.dataset.adaptScienceDetail)') == ['recheck', 'unchanged', 'no-need'], 'legacy visit keeps original order')
                 ok('scienceChoices' not in helpers.h.book(page)['livingExploration']['current']['task']['teaching'], 'legacy visit is not migrated on load')
                 page.context.close()
+            for width in [1280, 320]:
+                damaged_choice_journey(browser, base, width)
             ok(not helpers.h.errors and not helpers.h.console_errors, 'no browser errors')
             receipt = dict(passed=True, checks=checks, browser=browser.version, widths=[1280, 320],
                            scope='Actual app, fictional fixtures, computed descriptions, keyboard replacements, new and legacy choice order, reload',

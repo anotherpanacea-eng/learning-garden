@@ -127,4 +127,13 @@ for(const damage of [s=>s.livingExploration.adaptive.version=99,s=>s.livingExplo
  r.task.teaching.scienceChoices=choices;r.task.teaching.scienceChoices.find(o=>o.id==='recheck').text='Earlier clue <img src=x onerror=alert(1)>';openNote(s,true);setAdaptivePage(s,'compare');const html=adaptivePage(s,'visit');check(html.includes('Earlier clue &lt;img src=x onerror=alert(1)&gt;')&&!html.includes('<img src=x'),'saved clue text is escaped in choices and help');
 }
 
+// Optional science display metadata cannot invalidate a whole multi-strand visit.
+for(const broken of [null,42,'old labels',[],[null],[{id:'recheck',text:42}],[{id:'recheck',text:'A'},{id:'recheck',text:'B'}],{unexpected:'raw'}]){
+ const s=fresh();setAdaptiveChoice(s,'science',3);startAdaptiveSpiral(s);answer(s,'science',true);setAdaptivePage(s,'compare');const r=currentSpiral(s);
+ r.science.detail='retired-response';r.science.first.value.detail='retired-response';r.science.attempts[0].value.detail='retired-response';r.task.teaching.scienceChoices=broken;
+ const reloaded=JSON.parse(JSON.stringify(s)),before=structuredClone(reloaded);check(spiralState(reloaded),'malformed labels do not strand the visit after JSON reload');
+ const question=scienceQuestion(currentSpiral(reloaded).task);equal(question.options.map(o=>o.id),['recheck','unchanged','no-need'],'damaged science question alone falls back');
+ check(adaptivePage(reloaded,'visit').includes('data-adapt-science-detail='),'visit renders without trusting malformed labels');equal(reloaded,before,'reads preserve all raw metadata and prior responses');
+ check(inspectAdaptive(reloaded,0),'unrelated habitat inspection remains usable');equal(currentSpiral(reloaded).task.teaching.scienceChoices,broken,'inspection preserves malformed display metadata');equal(currentSpiral(reloaded).science,before.livingExploration.current.science,'science response history is unchanged');equal(currentSpiral(reloaded).reading,before.livingExploration.current.reading,'reading strand remains intact');equal(currentSpiral(reloaded).math,before.livingExploration.current.math,'math strand remains intact');
+}
 console.log(`${checks} adaptive Living Garden content, evidence, compatibility and supply checks passed.`);
