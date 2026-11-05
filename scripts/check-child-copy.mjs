@@ -616,6 +616,32 @@ export const copyScopes = [
   {path:"dist/drawn-howtos/workshop-recut.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/drawn-howtos/workshop-repeats.mjs",adultBlocks:[],quotations:[]},
 
+  // LG-2b batch18: remaining existing source modules.
+  {path:"dist/drawn-howtos/workshop-ribbon-measures.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-same-ground.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-scale.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-sources.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/workshop-windows.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/endings-shelf-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/exhibit-label-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/fair-test-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/feeding-board-art.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/feeding-board-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/ferry-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/field-kit-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/field-strips-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/food-fork-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/fossil-close-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/fraction-trail-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/french-ferry-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/gap-line-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/garden-paving-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/gathering-budget-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/given-math.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/hinge-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/joining-ledger-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/keeper-story-core.mjs",adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
