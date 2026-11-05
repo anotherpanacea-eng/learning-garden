@@ -12,11 +12,19 @@ export const taskKey=(task,strand)=>strand==='science'?`${task.caseId}:${task.te
 const catalogs={science:new Set(spiralCases.flatMap(c=>[1,2,3].map(d=>`${c.id}:${d}`))),reading:new Set([1,2,3].flatMap(d=>[0,1,2].map(v=>`${d}:${v}`))),math:new Set([1,2,3].flatMap(d=>Array.from({length:144},(_,i)=>`${d}:${1+Math.floor(i/12)}x${1+i%12}`)))};
 export function freshAdaptive(){return {version:1,levels:{science:1,reading:1,math:1},epochs:{science:0,reading:0,math:0},choices:{science:'auto',reading:'auto',math:'auto'},offered:{science:[],reading:[],math:[]}};}
 export function validAdaptiveProfile(a,nextRound){return object(a)&&a.version===1&&['levels','epochs','choices','offered'].every(k=>object(a[k]))&&strands.every(k=>integer(a.levels[k],1,3)&&integer(a.epochs[k],0,nextRound)&&['auto',1,2,3].includes(a.choices[k])&&Array.isArray(a.offered[k])&&a.offered[k].length<=catalogs[k].size&&new Set(a.offered[k]).size===a.offered[k].length&&a.offered[k].every(x=>catalogs[k].has(x)));}
+// Old display choices remain frozen when usable. A retired option falls back for
+// this question only; the original saved list and the rest of the visit stay intact.
+// Saved response codes do not depend on optional display metadata or today's options.
+const scienceResponseId=id=>typeof id==='string';
+function usableScienceChoices(task,options){const saved=task.teaching.scienceChoices,depth=task.teaching.depths.science,answer=depth===1?spiralAnimal(spiralCase(task.caseId).animal).reason:depth===2?String(spiralTarget(task)):'recheck';return Array.isArray(saved)&&saved.length>0&&saved.length<=20&&new Set(saved.map(o=>o?.id)).size===saved.length&&saved.every(o=>object(o)&&typeof o.id==='string'&&typeof o.text==='string'&&options.some(c=>c.id===o.id))&&saved.some(o=>o.id===answer);}
 export function scienceQuestion(task){
  const depth=task.teaching.depths.science,ps=spiralPlaces(task),target=spiralTarget(task),a=spiralAnimal(spiralCase(task.caseId).animal),nectar=a.reason==='nectar';
  const changed=nectar?{...ps[target],kind:'buds',nectar:false,observation:'After: these flowers are now tightly closed. No open nectar-bearing flowers are pictured here.'}:{...ps[target],damp:false,observation:'After: the leaf litter under this cover is now dry. Cover remains, but the moisture shown before is gone.'};
- return {depth,target,answer:depth===1?a.reason:depth===2?String(target):'recheck',prompt:depth===1?'Which need does this place meet?':depth===2?'Which pictured observation supports your place?':'What would you check after this change?',options:depth===1?spiralReasons.map(x=>({id:x.id,text:x.label})):depth===2?ps.map((p,i)=>({id:String(i),text:p.observation})):[{id:'recheck',text:nectar?'Look for open flowers with nectar again.':'Look for damp cover on land again.'},{id:'unchanged',text:'The old place must still meet every need.'},{id:'no-need',text:nectar?'The adult no longer needs food.':'This animal no longer needs damp shelter.'}],changed};
+ const options=depth===1?spiralReasons.map(x=>({id:x.id,text:x.label})):depth===2?ps.map((p,i)=>({id:String(i),text:p.observation})):[{id:'recheck',text:nectar?'Look for open flowers with nectar again.':'Look for damp cover on land again.'},{id:'unchanged',text:'The old place must still meet every need.'},{id:'no-need',text:nectar?'The adult no longer needs food.':'This animal no longer needs damp shelter.'}];
+ return {depth,target,answer:depth===1?a.reason:depth===2?String(target):'recheck',prompt:depth===1?'Which need does this place meet?':depth===2?'Which pictured observation supports your place?':'What would you check after this change?',options:usableScienceChoices(task,options)?task.teaching.scienceChoices:options,changed};
 }
+// A new visit saves the displayed choices; old visits keep their original order.
+export function authoredScienceChoices(task){const options=scienceQuestion({...task,teaching:{...task.teaching,scienceChoices:null}}).options,shift=task.teaching.depths.science!==2?spiralCases.findIndex(c=>c.id===task.caseId)%options.length:0;return [...options.slice(shift),...options.slice(0,shift)].map(o=>({...o}));}
 export function noteQuestion(task){
  const d=task.teaching.depths.reading,v=task.teaching.noteVariant,target=tags[v],other=tags[(v+1)%3],last=tags[(v+2)%3];
  const food=starterIngredients.find(x=>x.id===task.ingredientId).name;
@@ -35,8 +43,8 @@ const correct=(r,k,v)=>k==='science'?v.place===spiralTarget(r.task)&&v.detail===
 export const correctResponse=correct;
 function validResponse(r,k,a){
  if(!object(a)||typeof a.correct!=='boolean'||!['afterHelp','afterAudio','afterVocabulary','afterTogether'].every(x=>typeof a[x]==='boolean'))return false;
- const v=a.value,q=k==='science'?scienceQuestion(r.task):k==='reading'?noteQuestion(r.task):mathQuestion(r.task);
- if(k==='science'?!object(v)||!integer(v.place,0,2)||!q.options.some(x=>x.id===v.detail):k==='reading'?!object(v)||!tags.includes(v.tag)||!(q.depth===3?integer(v.evidence,0,2):v.evidence===null):!integer(v,0,999))return false;
+ const v=a.value,q=k==='reading'?noteQuestion(r.task):null;
+ if(k==='science'?!object(v)||!integer(v.place,0,2)||!scienceResponseId(v.detail):k==='reading'?!object(v)||!tags.includes(v.tag)||!(q.depth===3?integer(v.evidence,0,2):v.evidence===null):!integer(v,0,999))return false;
  return a.correct===correct(r,k,v)&&(!a.afterTogether||k==='math')&&(!a.afterHelp||r[k].help)&&(!a.afterAudio||r[k].audio)&&(!a.afterVocabulary||k==='science'&&r.science.vocabulary);
 }
 export function validAdaptiveRound(r){
@@ -51,8 +59,8 @@ export function validAdaptiveRound(r){
   if(s.attempts.slice(0,-1).some(a=>a.correct))return false;
  }
  if(Object.hasOwn(t,'connection')&&(!validConnection(t.connection,t.packs,t.bites)||h.depths.math!==1||!h.priorFactSeen||!h.familiar.math))return false;
- const s=r.science,n=r.reading,m=r.math,sq=scienceQuestion(t),nq=noteQuestion(t);
- if(!(s.place===null||integer(s.place,0,2))||!(s.detail===null||sq.options.some(x=>x.id===s.detail))||typeof s.vocabulary!=='boolean'||typeof s.changedShown!=='boolean'||s.count&&t.teaching.depths.science===3&&!s.changedShown||!(n.tag===null||tags.includes(n.tag))||!(n.evidence===null||nq.depth===3&&integer(n.evidence,0,2))||typeof m.input!=='string'||m.input.length>20||!methods.includes(m.method))return false;
+ const s=r.science,n=r.reading,m=r.math,nq=noteQuestion(t);
+ if(!(s.place===null||integer(s.place,0,2))||!(s.detail===null||scienceResponseId(s.detail))||typeof s.vocabulary!=='boolean'||typeof s.changedShown!=='boolean'||s.count&&t.teaching.depths.science===3&&!s.changedShown||!(n.tag===null||tags.includes(n.tag))||!(n.evidence===null||nq.depth===3&&integer(n.evidence,0,2))||typeof m.input!=='string'||m.input.length>20||!methods.includes(m.method))return false;
  if(!scienceReady(r)&&(n.count||n.help||n.audio||r.found)||r.found&&!readingReady(r)||!r.found&&(m.count||m.help||m.audio)||r.carried&&(!r.found||!(m.matched||m.help)||r.left))return false;
  return true;
 }
