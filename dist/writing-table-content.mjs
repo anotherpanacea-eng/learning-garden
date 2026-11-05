@@ -1,5 +1,6 @@
 import {revisionTasks} from './writing-revision-content.mjs';
 import {researchTasks} from './writing-research-content.mjs';
+import {quotationTasks} from './writing-quote-content.mjs';
 // Original supplied drafts selected from277;317 supplies the first two benches and321 adds Holding It Together.
 // taskSource returns the complete words/key/order to freeze when a task is opened.
 const paragraphTeaching=[
@@ -148,7 +149,7 @@ const holding=[
   feedback:{fit:'Both fit, so the reader can’t tell. Name the thing: “Then the bun slid off the table.”',different:{bun:'Maybe. The plate fits too.',plate:'Maybe. The bun fits too.'},general:'Your draft is still here. You can change it.'}})
 ];
 
-const catalog=[bakery,day,...breaks,...joins,...questions,...holding,...researchTasks,...revisionTasks];
+const catalog=[bakery,day,...breaks,...joins,...questions,...holding,...researchTasks,...revisionTasks,...quotationTasks];
 export const writingTasks=Object.freeze(catalog.map(({id,title,bench})=>Object.freeze({id,title,bench})));
 export function taskSource(id){const source=catalog.find(s=>s.id===id);return source?structuredClone(source):null;}
 export const writingCopy=Object.freeze({
