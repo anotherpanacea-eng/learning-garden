@@ -758,6 +758,25 @@ export const copyScopes = [
   {path:"dist/packs/index.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/paired-points-core.mjs",adultBlocks:[],quotations:[]},
 
+  // LG-2b batch20: remaining existing source modules.
+  {path:"dist/pips-copy-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/plant-study-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/progress-limits.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/puppet-notice-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/puzzle-art.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/question-bench-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/random.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/ratio-bars-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/repeat-deliveries-art.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/returning-ledger-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/returning-orders-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/rhythm-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/ribbon-rows-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/riddles-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/river-market-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/rod-tray-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/science-core.mjs",adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
