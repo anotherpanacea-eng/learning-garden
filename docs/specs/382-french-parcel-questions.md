@@ -1,6 +1,6 @@
 # 382 · French parcel questions
 
-Draft for independent review, 2026-11-05. Serves admitted LG-1, owner goal LG-G1; current base d1ca6c52. Build only after six-lens spec review, other-vendor clearance and the three-provider language panel required by [117](117-spanish-river-market.md#language-review-method--owner-decision-2026-10-30). Complete finite copy: [revision 4](../content/382-french-parcel-questions-text.md).
+Specification and finite language cleared for implementation, 2026-11-05. Serves admitted LG-1, owner goal LG-G1; integrated base 5ddb9365. Six-lens spec review, other-vendor specification clearance and the three-provider language panel are complete in the [review record](../reviews/382-french-questions/spec-review.md), under the method required by [117](117-spanish-river-market.md#language-review-method--owner-decision-2026-10-30). Complete finite copy: [revision 4](../content/382-french-parcel-questions-text.md).
 
 ## Missing operation and bounded experience
 
