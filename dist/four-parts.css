@@ -10,3 +10,5 @@ body:has([data-fp-root]) .header nav,body:has([data-fp-root])>footer{display:non
 @media(max-width:650px){.fp-heading .fp-topbar{flex-wrap:nowrap}.fp-heading .fp-topbar>button{flex:0 1 auto}.fp-tools>summary{white-space:nowrap}.fp-job-name,.fp-part-name{display:none}.fp-size strong{width:auto}.fp-picture .fp-diagram{max-height:140px}.fp-parts{grid-template-columns:repeat(4,minmax(0,1fr))}.fp-parts button{text-align:center}.fp-size-readout{margin:3px 0!important}.fp-heading>p{font-weight:600}}
 
 [data-fp-pick]{cursor:pointer}
+
+.fp-page [hidden]{display:none!important}

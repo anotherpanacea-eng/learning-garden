@@ -33,7 +33,7 @@ export function makeProductSource(id='picture'){
 export const productCopy=Object.freeze({
  label:'Four Parts',entry:'Build a print layout, then gather like tiles.',back:'Equality Desk',working:'Working drafts',shelf:'Kept layouts',
  build:'Build four labels',collect:'Gather like tiles',compare:'Compare',
- instruction:'Build labels for any picture size x. Choose a part, a tile kind, then how many.',collection:'The tray starts at zero. Gather your square tiles, x strips and unit squares.',
+ instruction:'Build labels for any picture size x. Choose a part, a tile kind, then how many.',collection:'The tray starts at zero. Gather your x squares, x strips and unit squares.',
  squareKind:'x square',stripKind:'x strip',unitKind:'unit square',clear:'Clear this label',
  size:'Change x',sizeNote:'x is a side length in centimeters. Changing it keeps your labels and tray.',
  teaching:'See how the four parts work',example:'A separate worked example',

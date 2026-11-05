@@ -42,7 +42,7 @@ Pages: **Build four labels** · **Gather like tiles** · **Compare**.
 
 “Build labels for any picture size x. Choose a part, a tile kind, then how many.” Whole area is shown as (x+a)(x+b) next to the rectangle. Kinds: **x square** (x²), **x strip** (x), **unit square** (1). Named parts: **A · Picture square**, **B · Right strip**, **C · Bottom strip**, **D · Corner**. Always show the selected part's two side lengths. Clear label is reversible by building again; it does not erase the other parts or tray.
 
-“The tray starts at zero. Gather your square tiles, x strips and unit squares.” Your four labels stay visible on this page. The count controls change only this tray; they do not fix the labels.
+“The tray starts at zero. Gather your x squares, x strips and unit squares.” Your four labels stay visible on this page. The count controls change only this tray; they do not fix the labels.
 
 Compare headings and literal meanings:
 
@@ -53,7 +53,7 @@ Compare headings and literal meanings:
 
 When the tray describes the whole but any part label does not match its dimensions: “Your tray describes the whole area. Some labels do not describe their own pieces. Check each piece’s side lengths.” Only when a≠b and the right/bottom labels are exactly bx/ax, append: “The right and bottom labels are on each other’s strips.” Do not infer a swap from any other mismatch, and do not confuse the tray with the sum of labels. No forced correction or failure penalty. Zero counts, unexpected labels and incomplete versions may be kept.
 
-**Keep this layout**, **Work on a copy**, **New blank draft** · **Another copy**, **Working drafts**, **Kept layouts**, **Back to the Equality Desk**, **Hear this page**. Session notice: “Unkept drafts last for this visit in this open page. Keep a version to include it in Notes.” Persistence messages must describe actual save results, not assume a completed Keep reached device storage. Refusal: “This version could not be kept safely. Your work and earlier layouts are unchanged. Download Notes or keep building.”
+**Keep this layout**, **Work on a copy**, **New blank draft** · **Another copy**, **Working drafts**, **Kept layouts**, **Equality Desk**, **Hear this page**. Session notice: “Unkept drafts last in this open page. Keep a version to include it in Notes.” Persistence messages must describe actual save results, not assume a completed Keep reached device storage. Refusal: “This version could not be kept safely. Your work and earlier layouts are unchanged. Download Notes or keep building.”
 
 Folded grown-up interpretation: “These are given mathematical layouts and optional reference/example views. Labels and a tray are retained as constructed, including zero or unexpected choices. Initial zeros and the count1 kind-selection default are starting controls, not inferred answers. Flags name teaching/reference/example views opened in that working version; they do not measure attention or all prior exposure. A false separate-example flag does not exclude a worked example in teaching. This does not assess independent expansion, a completed topic or ability outside this length model. Kept versions and earlier wording stay unchanged.”
 
