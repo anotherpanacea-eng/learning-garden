@@ -635,6 +635,32 @@ export const copyScopes = [
   {path:"dist/drawn-howtos/life-ring.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/drawn-howtos/living-bodies.mjs",adultBlocks:[],quotations:[]},
 
+  // LG-2b batch15: remaining existing source modules.
+  {path:"dist/drawn-howtos/living-collection.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-first.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-food.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-fork.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-fossils.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-movement.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-notebook.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-plants.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-rain-charts.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/living-trail.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/loft-bridges.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/loft-printer.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/loft-shadows.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/loft-show.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/mill-energy.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-compare.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-exchange.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-hundredths.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-join-ledger.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-join.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-lanterns.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-path.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-paving.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/drawn-howtos/numbers-return-ledger.mjs",adultBlocks:[],quotations:[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
