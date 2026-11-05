@@ -1,3 +1,4 @@
+import {rehearsalActive,rehearsalEntry,bindRehearsalEntry,rehearsalPage,bindRehearsal} from './rehearsal-ui.mjs';
 import {pauseMillFilm,stopMillFilm} from './mill-film.mjs';
 import {touchRooms,newRoomsPage,markNewRooms,setActiveRooms,readRooms,roomsKey,roomsPrefix,mergeRooms,roomShelf} from './new-for-you.mjs';
 import {beatBenchPage,beatBenchEntry,beatBenchNotes,bindBeatBench,resetBeatBenchView} from './beat-bench-ui.mjs';
@@ -247,7 +248,7 @@ function touchActiveRooms(route){
  // Never recreate data another tab removed or switched off: write only beside a notebook that is still saved.
  if(explorerStore.persist&&!explorerStore.conflict&&JSON.stringify(next)!==JSON.stringify(stored)){try{if(localStorage.getItem(`number-garden-v1:${p.id}`)!==null)localStorage.setItem(key,JSON.stringify(next));}catch{}}
 }
-keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'||main.querySelector('[data-watts-root],[data-qb-root],[data-cs-root],[data-dt-root],[data-ll-root],[data-lens-root]')?'':location.hash);
+keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'||main.querySelector('[data-watts-root],[data-qb-root],[data-cs-root],[data-dt-root],[data-ll-root],[data-lens-root],[data-rc-root]')?'':location.hash);
 let needsExplorerInitialization=(location.hash||'').split('/')[0]==='#journeys'||['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/fair','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#science/lens','#living/layers','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer)||!!actThreeRoute(location.hash)||!!actFourRoute(location.hash);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
@@ -821,6 +822,10 @@ function render(){
     }
     return;
   }
+  if(!choosingExplorer&&hash==='#loft'&&rehearsalActive(state,explorerStore.active.id)){
+    main.innerHTML=rehearsalPage(state,explorerStore.active.id);updateStorageNotice();
+    bindExplorers();bindRehearsal(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,save:()=>{save();return {enabled:persist,ok:storageOK};},render});bindSpeech();return;
+  }
   if(hash==='#cafe/units'){
     if(choosingExplorer)resetUnits();
     routeHeader('#cafe');
@@ -958,7 +963,7 @@ function render(){
   else if(root==='puzzles')html=puzzlePage();
   else if(root==='summary')html=summary();
   else if(root==='notes')html=notes();
-  else if(root==='loft')html=loftPage(state)+roomShelf('More rooms in the Story Loft',[letterEntry('loft'),instructionEntry('loft'),noticeEntry(),bridgesEntry(),shadowEntry()]);
+  else if(root==='loft')html=loftPage(state)+roomShelf('More rooms in the Story Loft',[letterEntry('loft'),instructionEntry('loft'),noticeEntry(),bridgesEntry(),shadowEntry(),rehearsalEntry(state)]);
   else if(root==='new')html=newRoomsPage();
   else html=home();
   if(!choosingExplorer&&!pileBench&&!shuttersBench&&!rowsBench&&!bridgesBench&&!groupBench&&!messageBench&&!letterBench&&!instructionBench&&!plantBench&&!fieldBench&&!collectionBench&&!rainNotebookBench&&!sharingBench&&!rainBench&&!measureBench&&!recipeBench&&!packingBench&&!sortingBench&&!doubleBench&&!pavingBench&&!clockWalkBench&&!batchBench&&!fractionBench&&!bundleBench&&!returnBench&&!remainsBench&&!joiningBench&&!joiningLedgerBench&&!comparisonBench&&!fossilBench&&!portionsBench&&!tenthsBench&&!hundredthsBench&&!seedBench&&!lanternBench&&!noticeBench&&!archiveBench&&!bellBench&&!(root==='science'&&['evidence','window'].includes(slug))){const context={loft:'loft',numbers:'numbers',science:'water',cafe:'cafe',orchard:'orchard',paris:'paris'}[root]||(root==='activities'&&['measurement','fractions'].includes(slug)?slug:null);if(context&&hash!=='#cafe'){const fold=['#numbers','#science','#loft','#orchard'].includes(hash);if(fold)html+='<details class="place-onward"><summary>Explore somewhere else</summary>';html+=learningInvitations(context);if(fold)html+='</details>';}}
@@ -1146,6 +1151,7 @@ function bind(){
  bindWordGarden(state,{save,render,focus:focusElement});
  bindRiddles(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindLoft(state,{save,render,focus:focusElement});
+ bindRehearsalEntry(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,render});
  bindWorkshop(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindPortions({render,focus:focusElement,explorerId:()=>explorerStore.active.id});
  bindFossil({render,focus:focusElement,explorerId:()=>explorerStore.active.id});

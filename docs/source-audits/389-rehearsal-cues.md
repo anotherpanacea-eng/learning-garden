@@ -1,0 +1,19 @@
+#389 · overlap, source and prerequisite audit
+
+Checked2026-11-05 against main c036d378. Candidate links are teaching opportunities, not completed topics.
+
+Actual built surfaces inspected: loft-content/core/ui/art, puppet-notice-content/core/ui, writing-table-content/ui, two-threads-content/ui. Loft supplies original dialogue and pictured scenes, not role-tagged script layout. Puppet Notice works within a printed sentence. Writing Table and Two Threads already own paragraph/whole-scene rearrangement;389 changes speech/direction/speaker within a supplied script and makes that distinction visible on a manual stage. No duplicate original composer, lexical prose grader, mystery system or new destination.
+
+Refreshed Jane at `c681f6bf2f2adf2aa032f765983a4691774cfba5`, actual [LESSONS.md](https://github.com/kentlangley/Jane/blob/c681f6bf2f2adf2aa032f765983a4691774cfba5/LESSONS.md): separate teaching and manually revealed worked steps inform the original miniature rehearsal. Its graded/boss/mastery/placement, learner-data and scheduling engine are not adopted. Design reference only; no code or prose copied.
+
+Refreshed Marble at `04962c78ccb8bd52b236512d3362405bace98d2a`, actual [topics](https://github.com/withmarbleapp/os-taxonomy/blob/04962c78ccb8bd52b236512d3362405bace98d2a/data/topics.json) and [dependencies](https://github.com/withmarbleapp/os-taxonomy/blob/04962c78ccb8bd52b236512d3362405bace98d2a/data/dependencies.json) read through Git blob endpoints. Existing taxonomy pin/licenses stay unchanged; no teaching-research prose is incorporated.
+
+- `mt_4IxR66uGLc` Poems, Drama & Prose: selected cast, speaker and bracketed direction conventions, not verse/meter/poem comparison.
+- `mt_tIi6L1n7kF` Understanding drama and performance: compare a written cue with its model presentation and another chosen speaker/order; not full production analysis.
+- `mt_ylFTYS80d1` Performing Scripts & Poetry: optional invitation to human rehearsal; no observed speaking, assessed delivery or claimed completion.
+
+49§8 actual local hard-edge crosswalk: Poems, Drama & Prose depends on Forms of Poetry and Performance (`mt_gR5_n99Ntt`) and Structural terminology (`mt_ujwtRoYJ34`). This selected drama bridge explicitly introduces cast, script, speaker and direction in the inline teaching; it does not need or claim prior poem/verse knowledge. Full poetry-form knowledge stays outside this selection and open elsewhere. Understanding drama and performance depends on Plot Structure and Character Development (`mt_Hqz5y_tWz2`): each complete finite micro-scene shows events, speakers and a reply relation, with original author reasons. Existing English stories/Two Threads remain open for deeper plot study; no visit is required or assumed. Performing Scripts & Poetry has no local hard predecessors. No graph edge or prerequisite-attainment label is changed.
+
+E4-III form convention, E5-II rehearsing and E5-V performance interpretation; E3-IV/V interpretation stretch and later E4-V dialogue/pacing. This is a selected bridge, not full strand coverage or readiness for an entire act. ActV travelling-show inspiration under120 gives a future use, without story credit or early page/character revelations.
+
+Primary design checks: [CCSS RL.4.5/4.7](https://www.thecorestandards.org/ELA-Literacy/RL/4/) explicitly distinguish drama structures and connecting text to presentation; [RL.6.7](https://www.thecorestandards.org/ELA-Literacy/RL/6/) distinguishes reading and viewing. Refreshed directly November5. These support the selected distinction, not this game's effectiveness. New text and model are original; existing original Loft art alone is reused. No external plays/poems/media/rights panel needed. Characterised stage directions are a convention, and a deliberate spoken direction remains a valid experiment; the model labels its literal effect rather than judging quality.

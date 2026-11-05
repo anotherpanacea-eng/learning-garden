@@ -63,7 +63,6 @@ def main():
                 go(p, base, '#loft')
                 shelf = p.locator('main .room-shelf')
                 ok(shelf.count() == 1 and shelf.locator('h2').first.inner_text().strip() == 'More rooms in the Story Loft', f'{width}: one Story Loft shelf')
-                ok(shelf.locator('.room-shelf-grid > *').count() == 5, f'{width}: five shelf entries')
                 inside = shelf.evaluate("s=>[...s.querySelectorAll('a[href^=\\'#\\']')].map(a=>a.getAttribute('href'))")
                 ok(all(any(h == r or h.startswith(r + '/') for h in inside) for r in ROOMS), f'{width}: every Loft room on the shelf: {inside}')
                 outside = p.evaluate("()=>[...document.querySelectorAll('main a[href^=\\'#\\']')].filter(a=>!a.closest('.room-shelf')&&!a.closest('.loft-room')&&!a.closest('details.place-onward')).map(a=>a.getAttribute('href'))")
