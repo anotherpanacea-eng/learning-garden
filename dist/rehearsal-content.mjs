@@ -50,7 +50,7 @@ export function makeRehearsalSource(id='curtain'){
 }
 export const rehearsalCopy=Object.freeze({title:'Rehearsal Cues',entry:'Turn a script into a little show.',instruction:'Choose a cue. Decide whether it is spoken or followed, then choose who speaks.',
  convention:"The writer's plan is one way to stage these words. Your version can tell a different story. Try both with a person. Some shows have a narrator read directions aloud; here a puppet can try those words too.",
- stageLimit:'This picture shows only the current cue. A highlighted actor and a prop stand for an action; people decide how to perform it.',
+ stageLimit:'This picture shows only the current cue. A highlighted actor and a prop stand for an action; people decide how to perform it. Saying a direction does not make the puppet carry out its action.',
  draft:'Unkept scripts wait in this open page. Keep a version to include it in Notes.',
  pending:'Some puppet words have not been kept. Return to them before opening rehearsal; your typing is still here.',
  refused:'This version could not be kept safely. Your work and earlier scripts are unchanged. Download Notes or keep rehearsing.',
