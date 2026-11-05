@@ -2,6 +2,10 @@
 
 **Current priorities, decisions and release status, 2026-10-31.** Start with the [consolidation priorities](#consolidation-priorities--current-order); the rest of this page is the release queue and the record of what is built. The [pre-merge snapshot](roadmap-2026-10-22-pre-merge.md), [strand map](strand-map.md), [curriculum spirals](curriculum-spirals.md), [gap proposals](curriculum-gaps.md) and [dated handoffs](handoffs/) preserve design history. Their earlier “next” and publication statements are snapshots. The [six-act programme](specs/49-six-act-curriculum.md) and [26 strand pathways](six-act-strands.md) describe the teaching and story horizon, not a release schedule or completed course.
 
+## Which values fit380
+
+[Which values fit380](specs/380-which-values-fit.md) is the next LG-G1 algebra bridge inside the existing Equality Desk: build a continuous solution ray, distinguish strict/inclusive endpoints, test individual values and explain why negative division reverses order. Its [independent specification and finite mathematics review](reviews/380-which-values-fit-spec.md) is cleared. Frozen sheets preserve unexpected learner rays separately from the worked reference. Implementation review and release acceptance remain pending; this is not a general inequalities course, independent proficiency claim or story gate.
+
 ## Air and Blood379
 
 [Air and Blood379](specs/379-air-and-blood.md) connects the recent cell and diffusion work to selected oxygen/carbon-dioxide pathways. The independently reviewed scope follows each gas, distinguishes breathing/diffusion/circulation and lets learners keep revisable supplied-label guides. It lives within Cell Studio, with a read-only return in Diffusion Tray. [PR449’s review and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/449#issuecomment-6648548069) owns implementation clearance and live acceptance. This is a qualitative pathway bridge; full breathing mechanics, circulation, respiration chemistry and practical investigations remain unfinished.

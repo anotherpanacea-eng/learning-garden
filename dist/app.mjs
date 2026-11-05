@@ -41,7 +41,7 @@ import {prepareRiverDisplay} from './river-room-core.mjs';
 import {sorterPage,sorterEntry,bindSorter,guardSorterNavigation} from './borrowed-sorter-ui.mjs';
 import {recordPage,recordRefusal,recordEntry,bindRecord,guardRecordNavigation} from './town-record-ui.mjs';
 import {prepareRecordDisplay} from './town-record-core.mjs';
-import {equalityPage,equalityRefusal,equalityEntry,bindEquality,guardEqualityNavigation} from './equality-desk-ui.mjs';
+import {equalityPage,equalityRefusal,equalityEntry,bindEquality,guardEqualityNavigation,inequalityActive} from './equality-desk-ui.mjs';
 import {prepareEqualityDisplay} from './equality-desk-core.mjs';
 import {waterPage,bindWater,waterEntry,guardWaterNavigation} from './water-shares-ui.mjs';
 import {hatsPage,bindHats,hatsEntry} from './which-hat-ui.mjs';
@@ -797,14 +797,14 @@ function render(){
   // Subject entry and unit visits do not normalize or advance other activities.
   if(root==='pathways'||root==='learn'){
     routeHeader();
-    const options={save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,entryLesson:detail};
+    const options={save,render,focus:focusElement,canExport:priceOptions().canExport,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,notebook:()=>state,entryLesson:detail};
     let content;
     if(choosingExplorer)content=explorerPicker(explorerStore,explorerDraft,creatingExplorer);
     else if(root==='learn'&&slug==='math'&&detail==='timing-desk'){const ready=prepareTimingDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?timingPage(state):timingRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='science'&&detail==='ledger'){const ready=prepareLedgerDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?ledgerPage(state):ledgerRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='history'&&detail==='river-room'){const ready=prepareRiverDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?riverPage(state)+ledgerEntry():riverRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='computing'&&detail==='sorting')content=sorterPage(state);
-    else if(root==='learn'&&slug==='math'&&detail==='equality'){const ready=prepareEqualityDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?equalityPage(state):equalityRefusal();if(ready.changed)save();}
+    else if(root==='learn'&&slug==='math'&&detail==='equality'){const owner=explorerStore.active.id;if(inequalityActive(state,owner))content=equalityPage(state,owner);else{const ready=prepareEqualityDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?equalityPage(state,owner):equalityRefusal(state,owner);if(ready.changed)save();}}
     else if(root==='learn'&&slug==='math'){const ready=prepareLinearDisplay(state,{...priceOptions(),entryLesson:detail,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?linearPage(state,detail):linearRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='english')content=evidenceVoicePage(state,detail);
     else if(root==='learn'&&slug==='science'&&detail==='records'){const ready=prepareRecordDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?recordPage(state)+ledgerEntry()+riverEntry():recordRefusal();if(ready.changed)save();}
@@ -816,7 +816,7 @@ function render(){
     main.innerHTML=content;updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{
       $('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());
-      bindTiming(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindLedger(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindRiver(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindSorter(state,options);bindRecord(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindEquality(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindPathways(state,options);bindLinear(state,options);bindEvidenceVoice(state,options);bindMotion(state,options);bindFrenchRooms(state,options);bindSpeech();
+      bindTiming(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindLedger(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindRiver(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindSorter(state,options);bindRecord(state,{...options,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindEquality(state,{...options,save:()=>{save();return {enabled:persist,ok:storageOK};},exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});bindPathways(state,options);bindLinear(state,options);bindEvidenceVoice(state,options);bindMotion(state,options);bindFrenchRooms(state,options);bindSpeech();
     }
     return;
   }
