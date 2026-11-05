@@ -100,6 +100,34 @@ console.log(JSON.stringify({base,maxImportBytes:MAX_IMPORT_BYTES}));
 '''],cwd=ROOT,text=True))
 
 
+def whole_photo(p, image='[data-lens-photo-image]', hear=None):
+    alt=p.locator(image).first.get_attribute('alt') or ''
+    h.ok('whole photograph' in alt.lower() or 'whole image' in alt.lower(),'photo alt identifies the whole image rather than recognizing the crop')
+    if hear:
+        h.click(p,hear);spoken=p.locator(hear).get_attribute('data-speak') or ''
+        h.ok(alt in spoken,'Hear retains the whole-photo description')
+        h.click(p,'[data-stop-speech]')
+
+
+def text_regressions(browser,base,f):
+    _,p=native.setup(browser,f['base'],'caption-newlines');start(p,base)
+    for value in ['\nSynthetic leading line','\n']:
+        prior=p.locator(selector('caption')).input_value()
+        p.locator(selector('caption')).fill(value);click(p,'tool','label')
+        h.ok(p.locator(selector('caption')).input_value()==value,'redraw preserves leading newline caption '+repr(value))
+        click(p,'undo');h.ok(p.locator(selector('caption')).input_value()==prior,'one Undo reaches actual prior caption after redraw')
+        click(p,'redo');saved=keep(p)
+        h.ok(saved['work']['caption']==value,'Redo and Keep preserve exact newline caption '+repr(value))
+        click(p,'copy')
+
+
+def phone_order(p, editable=True):
+    image=p.locator('[data-lens-photo-figure] .lens-photo-window').first.bounding_box()
+    paper=p.locator(selector('paper') if editable else '.study-workspace .study-paper').first.bounding_box()
+    credit=p.locator('[data-lens-photo-figure] figcaption').first.bounding_box()
+    h.ok(image['y']+image['height']<=paper['y']+1 and paper['y']<credit['y'],'phone puts drawing immediately after photograph before long credit text')
+
+
 def journey(browser,base,f):
     print('Photo Studies: native tablet journey',flush=True)
     _,p=native.setup(browser,f['base'],'tablet');enter(p,base)
@@ -111,6 +139,7 @@ def journey(browser,base,f):
     bounds(p)
     img=p.locator('[data-lens-photo-image]');img.evaluate('e=>e.decode()')
     h.ok(img.evaluate('e=>[e.naturalWidth,e.naturalHeight]')==[3264,1840],'reference is actual bundled onion JPEG')
+    whole_photo(p,hear=selector('hear'))
     p.locator(selector('paper')).evaluate('e=>{e.style.width="360px";e.style.height="200px";e.style.maxWidth="100%"}')
     # Actual inverse SVG CTM, including letterboxing, must place independent points.
     p.locator(selector('paper')).scroll_into_view_if_needed()
@@ -143,6 +172,7 @@ def journey(browser,base,f):
     p.screenshot(path=str(OUT/'tablet-working.png'),full_page=True)
     stale=p.locator(selector('keep')).element_handle();first=keep(p);dispatch(stale)
     w=first['work'];strokes=w['strokes']
+    whole_photo(p,hear=selector('hear'))
     h.ok(len(records(p))==1,'detached repeated Keep cannot save twice')
     h.ok([s['points'] for s in strokes[:5]]==['100,100 200,150','250,250','300,300 330,300','450,450 470,470','500,500 520,500'],'CTM, dot, outside termination, cancellation and pointer arbitration preserve exact accepted points: '+repr(strokes))
     h.ok(len(strokes)==6 and strokes[-1]['points']=='520,500 530,500','keyboard line owns its points and ignores competing touch')
@@ -167,6 +197,7 @@ def journey(browser,base,f):
     exported=native.download(p,base,'tablet-export')
     h.ok(exported['photoStudies']==records(p) and exported['syntheticOther']==before['syntheticOther'],'real Notes export includes exact study records and unknown sibling')
     print('Photo Studies: transfer, lifecycle and boundaries',flush=True)
+    text_regressions(browser,base,f)
     lifecycle(browser,base,f)
     external_lifecycle(browser,base,f,first)
     transfer(browser,base,f,exported,first)
@@ -176,6 +207,8 @@ def journey(browser,base,f):
         _,q=native.setup(browser,f['base'],'width-'+str(width),width=width);start(q,base);bounds(q)
         image=q.locator('[data-lens-photo-image]').bounding_box();paper=q.locator(selector('paper')).bounding_box()
         h.ok((image['y']+image['height']<=paper['y']+1) if width==320 else abs(image['y']-paper['y'])<200,'reference stacks at320 and sits beside paper at1024')
+        if width==320:
+            phone_order(q);keep(q);phone_order(q,False)
         q.screenshot(path=str(OUT/f'width-{width}.png'),full_page=True)
 
 
@@ -248,7 +281,7 @@ def transfer(browser,base,f,exported,first):
     historical=copy.deepcopy(first);historical['id']='photo-study-80';s=historical['source'];w=historical['work']
     s.update(id='earlier-paper',title='Earlier <paper> & borders',paper={'width':800,'height':600,'futurePaper':True},teaching=['Earlier single teaching frame'],futureSource={'kept':True})
     s['example']['paper']={'width':1200,'height':900};s['example']['strokes']=[{'id':'s1','points':'1100,800'}];s['example']['labels']=[]
-    w.update(strokes=[{'id':'s1','points':'0,0 800,600'}],labels=[],exampleSeen=1,futureWork={'kept':True})
+    w.update(strokes=[{'id':'s1','points':'0,0 800,600'}],labels=[{'id':r'old"label\pointer','kind':'notice','text':'One\r\nTwo\rThree\nFour','at':None}],caption='\r\nEarlier caption\rwith mixed\nline endings',exampleSeen=1,futureWork={'kept':True})
     historical['futureOuter']={'originalOnly':True}
     unknown={'id':'photo-study-900','v':99,'raw':'Invented unknown record'}
     mixed=copy.deepcopy(exported);mixed['photoStudies']=[first,historical,unknown]
@@ -259,12 +292,16 @@ def transfer(browser,base,f,exported,first):
     h.click(p,'[data-lens-studies]');click(p,'card','photo-study-80')
     h.ok('Earlier <paper> & borders' in p.locator(selector('root')).inner_text(),'historical title renders escaped own text')
     h.ok(p.locator('.study-paper').first.get_attribute('viewBox')=='0 0 800 600','historical drawing uses own paper dimensions')
-    click(p,'copy');p.locator('[data-study-help] summary').click()
+    click(p,'copy');click(p,'select');p.locator(selector('label-kind')).select_option('notice')
+    h.ok(focus_is(p,selector('label-kind')) and p.locator(selector('label-kind')).get_attribute('data-study-kind')==w['labels'][0]['id'],'historical quote/backslash label id keeps selection and kind-control focus safely')
+    p.locator('[data-study-help] summary').click()
     h.ok(p.locator(selector('example-paper')).get_attribute('viewBox')=='0 0 1200 900','short historical help exposes own separate example dimensions')
     latest=keep(p)
     h.ok(latest['id']=='photo-study-901' and latest['source']==s and latest['work']==w and 'futureOuter' not in latest,'copy preserves nested unknowns, reserves unknown raw id, excludes outer extras')
+    click(p,'copy');p.locator(selector('caption')).fill('Deliberate\nnew caption');p.locator(selector('label-text')).fill('Deliberate edited label');edited=keep(p)
+    h.ok(edited['work']['caption']=='Deliberate\nnew caption' and edited['work']['labels'][0]['text']=='Deliberate edited label' and records(p)[-2]==latest,'deliberate edits replace historical form text while original CRLF record remains exact')
     redownload=native.download(p,base,'historical-redownload')
-    h.ok(redownload['photoStudies'][:-1]==mixed['photoStudies'],'real import/redownload preserves historical and unreadable records raw')
+    h.ok(redownload['photoStudies'][:-2]==mixed['photoStudies'],'real import/redownload preserves historical and unreadable records raw')
     enter(p,base);h.click(p,'#explorer-switch');h.click(p,f'[data-select-explorer="{identity}"]');p.locator('[data-lens-root]').wait_for()
     h.ok(book(p)==original,'study transfer never changes original explorer')
 
@@ -307,6 +344,7 @@ def cells(browser,base,f,first):
         before=book(p);fold=p.locator('[data-photo-study-cell-return]')
         if fold.get_attribute('open') is None:fold.locator('summary').click()
         h.ok(first['source']['title'] in fold.inner_text() and first['work']['caption'].strip() in fold.inner_text(),'Cell return displays frozen study in mode '+str(full))
+        whole_photo(p,image='[data-photo-study-cell-return] [data-lens-photo-image]',hear='[data-cs-hear]' if full else None)
         h.ok(book(p)==before and 'cellModels' not in before,'Cell return fold does not write either root')
         link=fold.locator('a[href="'+ROUTE+'"]').element_handle();link.evaluate('e=>document.body.append(e)');dispatch(link)
         h.ok(p.evaluate('location.hash')=='#living/bodies' and book(p)==before,'reparented Cell return anchor rejected')
