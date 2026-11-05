@@ -31,6 +31,8 @@ import * as N from './dist/rain-notebook-core.mjs';
 import * as P from './dist/plant-study-core.mjs';
 import {plantQuestions} from './dist/plant-study-content.mjs';
 import * as A from './dist/living-adaptive-core.mjs';
+import * as B from './dist/bell-studio-core.mjs';
+import {BELL_CARDS} from './dist/bell-studio-content.mjs';
 const s=cafeTouchFixtures().base;
 F.chooseFieldCase(s,'light-day-6-A');
 for(const id of ['day-6-light-A','day-6-dim-A'])F.toggleFieldRow(s,id);
@@ -43,6 +45,7 @@ R.chooseRainPlan(s,'A','straight');R.keepRainPlan(s,'A');R.setRainPlanRoute(s,'A
 P.ensurePlantStudy(s);P.recordPlantObservation(s);P.choosePlantLocation(s,'light');P.carryPlantPlan(s,P.currentPlantObservation(s).id);
 P.setPlantDay(s,6);P.setPlantSpecimen(s,'dim','A');P.recordPlantObservation(s);P.choosePlantLocation(s,'dim');P.setPlantPage(s,'compare');
 A.setAdaptiveChoice(s,'science',3);A.startAdaptiveSpiral(s);A.inspectAdaptive(s,0);A.inspectAdaptive(s,1);A.inspectAdaptive(s,2);A.setAdaptivePage(s,'compare');A.revealAdaptiveChange(s);A.supportAdaptive(s,'science','help');
+B.chooseBellCard(s,BELL_CARDS[0].id);B.appendBellSlot(s,'low');B.appendBellSlot(s,'high');B.saveBellBefore(s);B.keepBellCall(s);B.appendBellSlot(s,'rest');B.setBellPage(s,'keep');
 console.log(JSON.stringify({seed:s,legacyPlant:plantQuestions(6).map(q=>({id:q.id,choices:q.choices.map(c=>c.id)}))}));
 """
 fixture = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', program], cwd=ROOT, text=True))
@@ -124,8 +127,22 @@ def main():
                     if current == 'cover-12' and section == 'fieldNotebook':
                         resumed = resumed['rain']
                     ok(resumed['cases'][current][snapshot] == new, 'replacement survives reload exactly')
+                    if section == 'rainPaths' and width == 320:
+                        for selector in ['.rp-planning-board .rp-table-scroll', '.rp-kept .rp-table-scroll']:
+                            if selector.startswith('.rp-kept'):
+                                page.locator('.rp-kept summary').click()
+                            drawing = page.locator(selector)
+                            drawing.focus()
+                            page.keyboard.press('ArrowRight')
+                            page.wait_for_function('(s)=>document.querySelector(s).scrollLeft>0', arg=selector)
+                            ok(drawing.evaluate('e=>e.scrollLeft>0'), 'planning diagram scrolls with the keyboard')
                     fits(page)
                     page.screenshot(path=str(OUT / f'{section}-{current}-{width}.png'), full_page=True)
+                    if section == 'fieldNotebook' and current == 'light-day-6-A':
+                        page.locator('.fn-steps [data-fn-page="chart"]').click()
+                        ok(helpers.ax(page, '.fn-controls[aria-label^="Adjust"]')['role']['value'] == 'group', 'bar controls expose their named group')
+                        page.locator('.fn-steps [data-fn-page="read"]').click()
+                        ok(helpers.ax(page, '.fn-read-tabs')['role']['value'] == 'group', 'reading tabs expose their named group')
 
                 go(page, base, '#living/plants', '[data-ps-answer]')
                 choices = helpers.h.book(page)['plantStudy']['choiceSets']
@@ -153,6 +170,33 @@ def main():
                 ok(page.locator('[data-adapt-science-detail]').evaluate_all('(es)=>es.map(e=>e.dataset.adaptScienceDetail)') == [o['id'] for o in saved], 'adaptive visit displays saved order')
                 ok(next(o['text'] for o in saved if o['id'] == 'recheck') in page.locator('#adapt-science-help').inner_text(), 'help finds fitting clue by id')
                 fits(page)
+
+                go(page, base, '#studio/bells', '[data-bs-keep]')
+                described(page, '[data-bs-keep]')
+                book = helpers.h.book(page)['bellStudio']
+                card = book['currentCard']
+                before = copy.deepcopy(book['cards'][card])
+                page.locator('[data-bs-keep]').focus()
+                page.keyboard.press('Enter')
+                after = helpers.h.book(page)['bellStudio']['cards'][card]
+                ok(after['kept'] != before['kept'] and after['before'] == before['before'] and after['sequence'] == before['sequence'], 'keeping replaces Bell draft and preserves before-version and current call')
+                page.locator('.bs-pages [data-bs-page="make"]').click()
+                described(page, '[data-bs-before]')
+                described(page, '[data-bs-clear]')
+                before = copy.deepcopy(helpers.h.book(page)['bellStudio']['cards'][card])
+                page.locator('[data-bs-before]').click()
+                after = helpers.h.book(page)['bellStudio']['cards'][card]
+                ok(after['before'] != before['before'] and after['kept'] == before['kept'] and after['sequence'] == before['sequence'], 'replacing Bell before-version preserves draft and current call')
+                before = copy.deepcopy(after)
+                page.locator('[data-bs-clear]').click()
+                after = helpers.h.book(page)['bellStudio']['cards'][card]
+                ok(after['sequence'] == [] and all(after[k] == before[k] for k in ['before', 'kept', 'checks']), 'clearing Bell call preserves before-version, kept draft and earlier checks')
+                page.reload(wait_until='domcontentloaded')
+                page.locator('[data-bs-clear]').wait_for()
+                ok(helpers.h.book(page)['bellStudio']['cards'][card] == after, 'Bell clearing survives reload exactly')
+                ok(helpers.ax(page, '.bs-previews').get('name', {}).get('value') == 'Try one tone', 'single-tone previews have their spoken region name')
+                fits(page)
+                page.screenshot(path=str(OUT / f'bell-{width}.png'), full_page=True)
                 page.context.close()
 
                 legacy = copy.deepcopy(fixture['seed'])

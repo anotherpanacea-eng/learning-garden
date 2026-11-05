@@ -110,6 +110,7 @@ for(const raw of [null,[],{version:99,work:'keep'},{version:1,day:6},'<future pa
  for(const q of plantQuestions(6)){const indices=q.choices.map(c=>html.indexOf(`data-ps-answer="${q.id}:${c.id}"`));check(indices.every((n,i)=>n>=0&&(i===0||n>indices[i-1])),'legacy unanswered questions retain original order');}
  check(plantStudy(old),'legacy notebook accepted');equal(old,raw,'loading and rendering do not add choices to a legacy notebook');
  const malformed=copy(s);malformed.plantStudy.choiceSets[q.id].push(malformed.plantStudy.choiceSets[q.id][0]);check(!plantStudy(malformed),'duplicate saved choice ids rejected');
+ const changed=copy(s);changed.plantStudy.choiceSets[q.id].push({id:'earlier-option',label:'Earlier option'});check(plantStudy(changed),'historical choice counts and ids remain readable');changed.plantStudy.questions[q.id]={attempts:[{choice:'earlier-option',support:{},practice:true,familiar:true}],support:{}};check(plantStudy(changed),'a retired response cannot strand the notebook');check(!plantStudyPage(changed).includes(`data-ps-answer="${q.id}:earlier-option"`),'retired option falls back for this question only');delete changed.plantStudy.questions[q.id];changed.plantStudy.choiceSets[q.id]=[{id:'cause',label:'Earlier option'}];check(plantStudy(changed),'unusable question does not invalidate notebook');check(plantStudyPage(changed).includes(`data-ps-answer="${q.id}:visible"`),'only the unusable question falls back');
 }
 
 console.log(`Plant study checks passed: ${checks}`);
