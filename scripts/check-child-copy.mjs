@@ -825,6 +825,9 @@ export const copyScopes = [
   {path:'dist/four-parts-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/four-parts-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rehearsal-content.mjs',adultBlocks:[{start:"grownup:'These are supplied scenes",end:"Your original puppet dialogue stays in Story Loft.'",reason:'Only rendered in the folded grown-up interpretation.'}],quotations:[]},
+  {path:'dist/push-drift-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/push-drift-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/push-drift-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rehearsal-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rehearsal-ui.mjs',adultBlocks:[],quotations:[]},
 
