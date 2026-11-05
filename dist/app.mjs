@@ -809,7 +809,7 @@ function render(){
     else if(root==='learn'&&slug==='english')content=evidenceVoicePage(state,detail);
     else if(root==='learn'&&slug==='science'&&detail==='records'){const ready=prepareRecordDisplay(state,{...priceOptions(),exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false)});content=ready.ok?recordPage(state)+ledgerEntry()+riverEntry():recordRefusal();if(ready.changed)save();}
     else if(root==='learn'&&slug==='science')content=motionPage(state,detail);
-    else if(root==='learn'&&slug==='french')content=frenchRoomsPage(state,detail)+(detail?'':frenchFerryEntry());
+    else if(root==='learn'&&slug==='french')content=frenchRoomsPage(state,detail,explorerStore.active.id)+(detail?'':frenchFerryEntry());
     else content=pathwayPage(state,slug||'math')+(slug==='science'?timingEntry()+ledgerEntry()+riverEntry()+sorterEntry()+recordEntry()+codesEntry()+waterEntry():slug==='english'?riverEntry()+hatsEntry():(!slug||slug==='math')?timingEntry()+ledgerEntry()+equalityEntry():'');
     if(!choosingExplorer&&root==='learn'&&slug==='science'&&detail==='records')content+=actTwoReturn(state,'garden');
     if(!choosingExplorer&&root==='learn'&&slug==='science'&&detail==='ledger')content+=actFourReturn(state);
