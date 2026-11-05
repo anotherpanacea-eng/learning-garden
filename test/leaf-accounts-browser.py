@@ -131,7 +131,7 @@ def isolated(browser,base,seed):
  print('Leaf accounts: explicitly isolated actual-UI context faults',flush=True)
  c,p=setup(browser,base,seed)
  try:
-  js='''async seed=>{const parent=await import('./cell-studio-ui.mjs'),media=await import('./play-media.mjs');parent.resetCellStudio();history.replaceState(null,'','#living/bodies');const main=document.querySelector('main');main.hidden=false;main.removeAttribute('aria-hidden');const v={book:structuredClone(seed),owner:'synthetic-owner',active:true,allow:true,saves:0};v.book.leafAccounts=[];v.original=v.book;v.render=()=>{main.innerHTML=parent.cellStudioPage(v.book,v.owner);parent.bindCellStudio(v.book,{notebook:()=>v.book,explorerId:()=>v.owner,isActive:()=>v.active,canExport:()=>v.allow,save:()=>{v.saves++;return{enabled:true,ok:true}},render:v.render,focus:s=>document.querySelector(s)?.focus()});media.bindSpeech()};window.laHarness=v;v.render()}'''
+  js='''async seed=>{const parent=await import('./cell-studio-ui.mjs'),media=await import('./play-media.mjs');parent.resetCellStudio();history.replaceState(null,'','#living/bodies');const main=document.querySelector('main');main.hidden=false;main.removeAttribute('aria-hidden');const v={book:structuredClone(seed),owner:'synthetic-owner',active:true,allow:true,saves:0,renders:0};v.book.leafAccounts=[];v.original=v.book;v.render=()=>{v.renders++;main.innerHTML=parent.cellStudioPage(v.book,v.owner);parent.bindCellStudio(v.book,{notebook:()=>v.book,explorerId:()=>v.owner,isActive:()=>v.active,canExport:()=>v.allow,save:()=>{v.saves++;return{enabled:true,ok:true}},render:v.render,focus:s=>document.querySelector(s)?.focus()});media.bindSpeech()};window.laHarness=v;v.render()}'''
   def install():p.evaluate(js,seed);p.locator('[data-cs-leaf]').click();p.locator(sel('root')).wait_for();p.evaluate('laHarness.saves=0')
   def dispatch(e):e.evaluate('e=>e.dispatchEvent(new MouseEvent("click",{bubbles:true,cancelable:true}))')
   install();amount(p,'water-in');p.evaluate('laHarness.allow=false');before=p.evaluate('JSON.stringify(laHarness.book)');click(p,'keep');h.ok(p.evaluate('JSON.stringify(laHarness.book)')==before and p.evaluate('laHarness.saves')==0 and p.locator(sel('coefficient','water-in')).inner_text()=='1','preflight refusal preserves working words/counts and every notebook byte');p.evaluate('laHarness.allow=true');click(p,'keep');h.ok(p.evaluate('laHarness.book.leafAccounts.length')==1,'same refused construction remains keepable afterward')
@@ -146,6 +146,66 @@ def isolated(browser,base,seed):
   install();root=p.locator(sel('root')).element_handle();button=p.locator(sel('keep')).element_handle();click(p,'back');root.evaluate('e=>document.querySelector("main").append(e)');before=p.evaluate('JSON.stringify(laHarness.book)');dispatch(button);h.ok(p.evaluate('JSON.stringify(laHarness.book)')==before and p.evaluate('laHarness.saves')==0,'reattached child controls remain inert after parent return')
  finally:c.close()
 
+# This device API fixture captures requested speech text. It does not establish sound.
+SPEECH_FIXTURE="""()=>{window.laSpoken=[];window.laStops=0;Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{getVoices:()=>[{name:'Synthetic local English',voiceURI:'synthetic-en',lang:'en-US',localService:true,default:true}],cancel:()=>window.laStops++,speak:u=>window.laSpoken.push(u.text),addEventListener(){},removeEventListener(){}}});Object.defineProperty(window,'SpeechSynthesisUtterance',{configurable:true,value:class{constructor(text){this.text=text;}}});}"""
+def hear(p,selector='[data-la-hear]'):
+ before=p.evaluate('laSpoken.length');p.locator(selector).click();payload=p.locator(selector).get_attribute('data-speak');h.ok(p.evaluate('laSpoken.length')>before,'Hear reaches the labelled synthetic device speech API');return payload
+
+def review_journey(browser,base,seed):
+ print('Leaf accounts: review regressions for waiting drafts and visible narration',flush=True)
+ c,p=setup(browser,base,seed)
+ try:
+  p.evaluate(SPEECH_FIXTURE);enter(p);click(p,'keep');first=copy.deepcopy(sheets(p)[0]);choose(p,'leaf-light');amount(p,'water-in',3);open_sheet(p,first['id']);click(p,'copy');click(p,'keep');click(p,'draft')
+  h.ok(p.locator(sel('coefficient','water-in')).inner_text()=='3','Your summary preserves a waiting leaf-light draft after a different copy is kept')
+  count(p);click(p,'reference');d=p.locator('[data-la-fold="help"]');d.locator(':scope>summary').click();click(p,'example');d=p.locator('[data-la-fold="help"]');d.locator(':scope>summary').click();source=sheets(p)[0]['source'];turn(p,'make');payload=hear(p)
+  h.ok(source['energyReference']['note'] not in payload and 'Made minus used' not in payload and source['teaching'][0] not in payload and source['about'] not in payload,'Make narration omits hidden Read reference/totals and closed help/About')
+  turn(p,'read');payload=hear(p);h.ok(source['energyReference']['note'] in payload and 'fewer' in payload and p.evaluate('(s)=>laSpoken.at(-1).includes(s)',source['energyReference']['note']),'Read narration includes elected reference and shown atom differences')
+  d=p.locator('[data-la-fold="help"]');d.locator(':scope>summary').click();payload=hear(p);h.ok(source['teaching'][0] in payload,'open Help narration includes the elected teaching frame');d.locator(':scope>summary').click();payload=hear(p);h.ok(source['teaching'][0] not in payload,'closing Help removes its frame from narration')
+  d=p.locator('[data-la-fold="about"]');d.locator(':scope>summary').click();payload=hear(p);h.ok(source['about'] in payload,'open About narration includes the own-source caveat');d.locator(':scope>summary').click();payload=hear(p);h.ok(source['about'] not in payload,'closed About stays out of narration')
+  click(p,'keep');record=copy.deepcopy(sheets(p)[-1]);payload=hear(p);h.ok(source['returnQuestion'] in payload and source['energyReference']['note'] in payload and sheets(p)[-1]==record,'kept narration retains elected support and return question without changing the record')
+  click(p,'back');p.locator('[data-cs-enter]').click();p.locator('[data-cs-root]').wait_for();ret=p.locator('[data-la-return]')
+  if ret.get_attribute('open') is not None:ret.locator(':scope>summary').click()
+  payload=hear(p,'[data-cs-hear]');h.ok(source['returnQuestion'] not in payload,'parent Hear omits the closed return section');ret.locator(':scope>summary').click();payload=hear(p,'[data-cs-hear]');h.ok(source['returnQuestion'] in payload,'parent Hear includes the opened kept return section');ret.locator('a').click();p.wait_for_function('location.hash==="#living/plants"');h.ok(True,'the visible open Seedlings link navigates to its real destination')
+ finally:c.close()
+
+def review_faults(browser,base,seed):
+ print('Leaf accounts: review regressions for non-Keep stale controls',flush=True)
+ c,p=setup(browser,base,seed)
+ try:
+  p.evaluate(SPEECH_FIXTURE)
+  js="""async seed=>{const parent=await import('./cell-studio-ui.mjs'),media=await import('./play-media.mjs');parent.resetCellStudio();history.replaceState(null,'','#living/bodies');const main=document.querySelector('main');main.hidden=false;main.removeAttribute('aria-hidden');const v={book:structuredClone(seed),owner:'synthetic-owner',active:true,allow:true,saves:0,renders:0};v.book.leafAccounts=[];v.original=v.book;v.render=()=>{v.renders++;main.innerHTML=parent.cellStudioPage(v.book,v.owner);parent.bindCellStudio(v.book,{notebook:()=>v.book,explorerId:()=>v.owner,isActive:()=>v.active,canExport:()=>v.allow,save:()=>{v.saves++;return{enabled:true,ok:true}},render:v.render,focus:s=>document.querySelector(s)?.focus()});media.bindSpeech()};window.laHarness=v;v.render()}"""
+  def install(child=True):
+   p.evaluate(js,seed)
+   if child:enter(p)
+  def baseline():return p.evaluate('JSON.stringify([laHarness.original,laHarness.book,laHarness.saves,laHarness.renders,laSpoken,laStops])')
+  def dispatch(e,event='click'):e.evaluate('(e,t)=>e.dispatchEvent(t==="click"?new MouseEvent(t,{bubbles:true,cancelable:true}):new Event(t,{bubbles:true,cancelable:true}))',event)
+  # Speech is checked against every concrete external context fault; other action
+  # families sample distinct guard seams rather than duplicating the entire matrix.
+  for fault in ['owner','book','inactive','root-identity','root-bytes','control-ancestor','root-ancestor','outer-hidden','outer-aria-hidden','route','disabled']:
+   install();e=p.locator(sel('hear')).element_handle();original=e.get_attribute('data-speak')
+   scripts={'owner':'laHarness.owner="other-owner"','book':'laHarness.book=structuredClone(laHarness.book)','inactive':'laHarness.active=false','root-identity':'laHarness.book.leafAccounts=[]','root-bytes':'laHarness.book.leafAccounts.push({raw:"outside"})','outer-hidden':'document.querySelector("main").hidden=true','outer-aria-hidden':'document.querySelector("main").setAttribute("aria-hidden","true")','route':'history.replaceState(null,"","#living/bodies/stale")','disabled':'document.querySelector("[data-la-hear]").disabled=true'}
+   if fault=='control-ancestor':e.evaluate('e=>{const x=document.createElement("section");e.parentNode.append(x);x.append(e)}')
+   elif fault=='root-ancestor':p.locator(sel('root')).evaluate('e=>{const x=document.createElement("section");e.parentNode.append(x);x.append(e)}')
+   else:p.evaluate(scripts[fault])
+   before=baseline();dispatch(e);h.ok(baseline()==before and e.get_attribute('data-speak')==original,'stale '+fault+' Hear changes neither speech payload nor requested device speech')
+  for action in ['energy','fold','amount','turn','case','card']:
+   install()
+   if action=='energy':e=p.locator(sel('energy','toId')).element_handle();e.evaluate('e=>e.value="light"');event='change'
+   elif action=='fold':e=p.locator('[data-la-fold="about"]').element_handle();e.evaluate('e=>e.open=true');event='toggle'
+   elif action=='amount':e=p.locator(sel('amount','water-in:1')).element_handle();event='click'
+   elif action=='turn':e=p.locator(sel('turn','read')).element_handle();event='click'
+   elif action=='case':p.locator('[data-la-chooser]>summary').click();e=p.locator(sel('case','root-respiration')).element_handle();event='click'
+   else:click(p,'keep');click(p,'shelf');e=p.locator('[data-la-card]').first.element_handle();event='click'
+   p.evaluate('laHarness.owner="another-owner"');before=baseline();dispatch(e,event);h.ok(baseline()==before,'stale owner '+action+' cannot edit, navigate, disclose or request speech')
+   p.evaluate('laHarness.owner="synthetic-owner";laHarness.render()')
+   if action=='energy':h.ok(p.locator(sel('energy','toId')).input_value()=='','stale energy change never entered the waiting work')
+   if action=='fold':h.ok(p.locator('[data-la-fold="about"]').get_attribute('open') is None,'stale toggle never entered the waiting fold state')
+  install();old=p.locator(sel('root')).element_handle();button=p.locator(sel('amount','water-in:1')).element_handle();choose(p,'root-respiration');old.evaluate('e=>document.querySelector("main").append(e)');p.wait_for_timeout(30);before=baseline();dispatch(button);h.ok(baseline()==before,'an actual case change invalidates reattached controls from the earlier case')
+  install(False);button=p.locator('[data-cs-leaf]').element_handle();p.evaluate('laHarness.owner="another-owner"');before=baseline();dispatch(button);h.ok(baseline()==before and not p.locator(sel('root')).count(),'stale parent entry cannot open a child')
+  install();click(p,'keep');click(p,'back');ret=p.locator('[data-la-return]').element_handle();ret.evaluate('e=>e.open=true');p.evaluate('laHarness.owner="another-owner"');before=baseline();dispatch(ret,'toggle');h.ok(baseline()==before,'stale parent return toggle cannot update its session state');p.evaluate('laHarness.owner="synthetic-owner";laHarness.render()');h.ok(p.locator('[data-la-return]').get_attribute('open') is None,'parent return disclosure remains closed after a rejected external toggle')
+ finally:c.close()
+
+
 def main():
  seed=fixture()
  class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -157,7 +217,7 @@ def main():
   with sync_playwright() as pw:
    browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
    try:
-    report=journey(browser,base,seed);transfer(browser,base,seed,report);samples(browser,base,seed);storage(browser,base,seed);isolated(browser,base,seed);h.ok(not h.errors,'no page/console/HTTP errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
+    report=journey(browser,base,seed);transfer(browser,base,seed,report);samples(browser,base,seed);storage(browser,base,seed);isolated(browser,base,seed);review_journey(browser,base,seed);review_faults(browser,base,seed);h.ok(not h.errors,'no page/console/HTTP errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
    except Exception:
     (OUT/'failure.txt').write_text(traceback.format_exc());raise
    finally:browser.close()
