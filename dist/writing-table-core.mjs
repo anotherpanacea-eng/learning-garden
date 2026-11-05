@@ -78,6 +78,24 @@ export function writingReferences(s,noteId){
  }
  return {status:'ready',refs};
 }
+// Roles only label supplied strips. Missing/future metadata cannot close an ordinary draft.
+export function writingQuoteRole(s,partId){
+ try{
+  if(!object(s)||!own(s,'bench')||s.bench!=='point-quote'||s.kind!=='order'||!Array.isArray(s.parts))return null;
+  const part=s.parts.find(p=>object(p)&&p.id===partId);
+  return part&&own(part,'role')&&['point','quote','explanation'].includes(part.role)?part.role:null;
+ }catch{return null;}
+}
+export function writingQuoteReturn(state){
+ try{
+  const view=writingView(state);
+  if(!view.record||state.writingDesk.currentId==='quote-build'||!own(state.writingDesk.records,'quote-build'))return null;
+  const r=state.writingDesk.records['quote-build'];
+  if(!validWritingRecord(r)||!own(r.source,'bench')||r.source.bench!=='point-quote'||r.source.kind!=='order')return null;
+  const linked=['firstKept','latestKept'].some(k=>own(r,k)&&validWritingSnapshot(r.source,r[k])&&r[k].work.order.some(partId=>writingReferences(r.source,partId).status==='ready'));
+  return linked?{id:'quote-build',title:r.source.title,reader:r.source.reader}:null;
+ }catch{return null;}
+}
 export function validWritingWork(s,w){
  if(!validWritingSource(s)||!object(w))return false;
  const p=s.parts.map(x=>x.id);
@@ -193,15 +211,17 @@ export function sameWritingWork(a,b){
 // No grading in previews: this always describes the exact supplied arrangement, including mistakes.
 export function writingPreview(s,w){
  if(!validWritingWork(s,w))return [];
+ if(s.bench==='point-quote'&&s.kind==='order')return [{heading:'Your paragraph',text:w.order.map(k=>s.parts.find(p=>p.id===k).text).join(' '),noteIds:[...w.order]}];
+ if(s.bench==='point-quote'&&s.kind==='choice'&&!own(s,'preview')&&!s.after)return [{heading:'Your choice',text:s.choices.find(c=>c.id===w.choice)?.text||'No choice yet',noteIds:w.choice===null?[]:[w.choice]}];
  if(s.kind==='tap'&&s.bench==='research')return [{heading:'Selected source cards',text:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.text).join('\n\n')||'No source cards are selected yet.',noteIds:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.id)}];
  if(s.kind==='tap')return [{heading:'Text to read',text:s.parts.map(p=>p.text).join('')},{heading:'Tapped words',text:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.text).join(', ')||'No words tapped yet.'}];
- if(s.kind==='choice'&&own(s,'preview'))return [{heading:'Text to read',text:w.choice===null?s.parts.map(p=>p.text).join(' '):s.preview[w.choice],...(s.bench==='research'?{noteIds:w.choice===null?[]:[w.choice]}:{})}];
+ if(s.kind==='choice'&&own(s,'preview'))return [{heading:'Text to read',text:w.choice===null?s.parts.map(p=>p.text).join(' '):s.preview[w.choice],...(['research','point-quote'].includes(s.bench)?{noteIds:w.choice===null?[]:[w.choice]}:{})}];
  if(s.kind==='sort'){const block=(heading,ps)=>({heading,text:ps.map(p=>p.text).join(' '),...(s.bench==='research'?{noteIds:ps.map(p=>p.id)}:{})});return [...s.choices.map(h=>block(h.text,s.parts.filter(p=>placed(w,p.id)===h.id))),block(s.bench==='research'?'Waiting notes':'Waiting strips',s.parts.filter(p=>!placed(w,p.id)))];}
  if(s.kind==='order')return w.order.map(k=>({heading:'',text:s.parts.find(p=>p.id===k).text}));
  if(s.kind==='break'){
   const at=w.boundary===null?-1:s.parts.findIndex(p=>p.id===w.boundary);
   return (at<0?[s.parts]:[s.parts.slice(0,at),s.parts.slice(at)]).map(ps=>({heading:'',text:ps.map(p=>p.text).join(' ')}));
  }
- if(s.after){const opener=s.choices.find(c=>c.id===w.choice)?.text;return [{heading:'First paragraph',text:s.parts.map(p=>p.text).join(' ')},{heading:'Next paragraph',text:opener?`${opener} ${s.after}`:`[Choose an opener] ${s.after}`}];}
+ if(s.after){const opener=s.choices.find(c=>c.id===w.choice)?.text;return [{heading:'First paragraph',text:s.parts.map(p=>p.text).join(' '),...(s.bench==='point-quote'?{noteIds:s.parts.map(p=>p.id)}:{})},{heading:'Next paragraph',text:opener?`${opener} ${s.after}`:`[Choose an opener] ${s.after}`,...(s.bench==='point-quote'?{noteIds:w.choice===null?[]:[w.choice]}:{})}];}
  return [{heading:'Text to read',text:s.parts.map(p=>p.text).join(' ')},{heading:'Your choice',text:s.choices.find(c=>c.id===w.choice)?.text||'No choice yet',...(s.bench==='research'?{noteIds:w.choice===null?[]:[w.choice]}:{})}];
 }
