@@ -226,7 +226,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){stopBell('
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let browserStorage;try{browserStorage=localStorage;}catch{}
 const explorerStore=new ExplorerStore(browserStorage);
-let state=explorerStore.load(),storageOK=!explorerStore.warning,persist=explorerStore.persist;
+let state=explorerStore.load(),storageOK=!explorerStore.warning||explorerStore.recoveryNoticeOnly,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
 // Spec 358: New marks follow every render and in-page re-render of main, and the top bar with them.
 // The observer runs as a microtask, so marks are in place before anything reads the new page. Marking twice changes nothing.

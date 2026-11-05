@@ -27,6 +27,7 @@ export class ExplorerStore{
  get explorers(){return this.registry?.explorers||[];}
  get persist(){return this._persist;}
  get warning(){this._clearMissingUnreadableNotice();return this._warning;}
+ get recoveryNoticeOnly(){return this._warning===unreadableNotice&&!this._writeBlocked&&!this._conflict&&!this._importUncertain;}
  get needsChooser(){return this._needsChooser;}
  get conflict(){return this._conflict;}
  get importUncertain(){return this._importUncertain===true;}

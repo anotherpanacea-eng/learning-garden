@@ -194,6 +194,21 @@ def bench_guide(browser,base):
  c,p=setup(browser,base,'#companions','[data-guide="rowan"]',320);p.locator('[data-guide="rowan"]').click();ok(ax(p,'#companion-link')['name']['value']=='With Rowan; change guide','guide name updates with the actual selected guide')
  go(p,base,'#science/lens','#companion-link');ok(ax(p,'#companion-link')['name']['value']=='With Rowan; change guide','bench header uses the selected guide and keeps a name on phones');c.close()
 
+def single_recovery_notice(browser,base):
+ global last_page
+ c=browser.new_context(viewport={'width':820,'height':900},reduced_motion='reduce')
+ registry=dict(version=1,activeId='explorer-1',explorers=[dict(id='explorer-1',avatar='sky',color='gold',symbol='leaf',createdAt='2026-11-04T12:00:00.000Z')])
+ c.add_init_script('(r=>{if(localStorage.getItem("single-recovery-fixture"))return;localStorage.setItem("learning-garden-explorers",JSON.stringify(r));localStorage.setItem("number-garden-v1:explorer-1","fictional unreadable original");localStorage.setItem("single-recovery-fixture","1");window.notebookWrites=0;const set=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==="number-garden-v1:explorer-1")notebookWrites++;return set.call(this,k,v)}})('+json.dumps(registry)+')')
+ p=c.new_page();last_page=p;p.set_default_timeout(12000);p.on('pageerror',lambda e:errors.append(str(e)));go(p,base,'#arrive','#companion-link');p.locator('header .notes-link').click();p.locator('.explorer-notes').wait_for()
+ ok(raw(p,PREFIX+'explorer-1')=='fictional unreadable original' and p.evaluate('notebookWrites')==0,'single unreadable notebook opens without an implicit save or chooser')
+ p.locator('.explorer-notes details summary').click();copykey=p.locator('[data-remove-copy]').get_attribute('data-remove-copy');ok(raw(p,copykey)=='fictional unreadable original','single recovery notice has an actual preserved original')
+ p.locator('[data-remove-copy]').click();p.locator('[data-confirm-do]').click();p.locator('[data-copy-result]').wait_for()
+ ok(raw(p,copykey) is None,'removing the original removes that exact recovery copy')
+ ok(p.locator('[data-save-warning]:visible').count()==0,'removing the recovery notice does not reveal a false cannot-save warning')
+ ok(p.locator('[data-saving-status]').inner_text()=='Progress is saved on this device.','notes reports working saving after original removal')
+ ok(raw(p,PREFIX+'explorer-1')=='fictional unreadable original' and p.evaluate('notebookWrites')==0,'correct status does not require a hidden save that overwrites the original notebook')
+ c.close()
+
 class Quiet(http.server.SimpleHTTPRequestHandler):
  protocol_version='HTTP/1.1'
  def log_message(self,*_args):pass
@@ -204,7 +219,7 @@ def main():
   with sync_playwright() as pw:
    b=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH'),args=['--disable-quic'])
    try:
-    invitation(b,base);copies_and_reset(b,base);saving(b,base);identities(b,base);remove_copy(b,base);practice_and_film(b,base);blocked_connections(b,base);copies_and_reset(b,base,320);bench_guide(b,base)
+    single_recovery_notice(b,base);invitation(b,base);copies_and_reset(b,base);saving(b,base);identities(b,base);remove_copy(b,base);practice_and_film(b,base);blocked_connections(b,base);copies_and_reset(b,base,320);bench_guide(b,base)
     ok(not errors and not request_failures and not console_errors,'no browser/request errors '+str(errors+request_failures+console_errors));receipt=dict(passed=True,checks=checks,browser=b.version,fixtureRoot=str(os.environ.get('SHELL_FIXTURE_ROOT',ROOT)),scope='Real controls, fictional notebooks; warning-before-replacement, pause/reload, finish outcomes, recovery bytes, canceled/confirmed resets and saving-off, distinct explorers and stale handles')
     (OUT/'RESULT.json').write_text(json.dumps(receipt,indent=2),encoding='utf8');print(json.dumps(receipt))
    except Exception:
