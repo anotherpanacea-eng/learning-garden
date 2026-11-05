@@ -848,7 +848,7 @@ function render(){
   ensureGarden(state);ensureCafe(state);ensureScience(state);ensureFacts(state);ensureForage(state);ensureWorkshop(state);ensurePostOffice(state);ensurePlantings(state);
   explorerHeader();
   const navRoot=['paris','french','archive'].includes(root)?'storm':['checkin','activities','map','multiplication','practice','puzzles','summary','numbers','facts'].includes(root)?'numbers':root;
-  $('#companion-link').innerHTML=companionLink(state);
+  fillGuideLink(state);
   document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',a.getAttribute('href')===`#${navRoot}`?'page':'false'));
   ensureEqualGroups(state);ensureMessages(state);ensureLetters(state);
   let html,joiningExamples=null;
@@ -989,7 +989,11 @@ function bindCafeOfferExposure(pairs){
 function focusActivity(){const title=$('.activity h2');if(title){title.tabIndex=-1;title.focus();}}
 function explorerHeader(){let chip=document.querySelector('#explorer-header');if(!chip){chip=document.createElement('div');chip.id='explorer-header';document.querySelector('.header').append(chip);}chip.innerHTML=explorerChip(explorerStore);}
 // Every early-return route shares this header: explorer chip, guide link and nav highlight (spec 279 step 1).
-function routeHeader(nav){explorerHeader();const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];$('#companion-link').innerHTML=companionLink({garden:{guide:guide.id}});document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',nav&&a.getAttribute('href')===nav?'page':'false'));}
+function fillGuideLink(book){
+ const link=$('#companion-link');link.innerHTML=companionLink(book);
+ const guide=guides.find(g=>g.id===book.garden?.guide)||guides[0];link.setAttribute('aria-label',`With ${guide.name}; change guide`);
+}
+function routeHeader(nav){explorerHeader();const guide=guides.find(g=>g.id===state.garden?.guide)||guides[0];fillGuideLink({garden:{guide:guide.id}});document.querySelectorAll('.header nav a').forEach(a=>a.setAttribute('aria-current',nav&&a.getAttribute('href')===nav?'page':'false'));}
 function focusElement(selector){const element=$(selector);if(element){if(!element.matches('a[href],button,input,select,textarea,summary,[tabindex]'))element.tabIndex=-1;element.focus();}}
 function focusExploreStart(){if(!choosingExplorer&&location.hash==='#library/beat'){focusElement(document.querySelector('#bb-task')?'#bb-task':'[data-beat-bench-root] h1');return true;}if(!choosingExplorer&&location.hash==='#library/long-words'){focusElement('#lww-task');return true;}if(!choosingExplorer&&location.hash==='#library/word-list'){focusElement(document.querySelector('#wls-task')?'#wls-task':'[data-word-list-shelf-root] h1');return true;}if(!choosingExplorer&&location.hash==='#library/copy'){focusElement('#pc-task');return true;}if(!choosingExplorer&&location.hash==='#library/endings'){focusElement('#es-task');return true;}if(!choosingExplorer&&location.hash==='#library/spellings'){focusElement('#sm-task');return true;}if(!choosingExplorer&&actFourRoute(location.hash)){focusElement('#act-four-heading');return true;}if(!choosingExplorer&&actThreeRoute(location.hash)){focusElement('#act-three-heading');return true;}if(!choosingExplorer&&location.hash==='#desk/writing'){focusElement('#writing-task-title');return true;}if(!choosingExplorer&&location.hash==='#desk/exchange'){focusElement(document.querySelector('#seed-task')?'#seed-task':'#seed-title');return true;}if(!choosingExplorer&&location.hash==='#arrive'){focusElement('#arrival-title');return true;}if(!choosingExplorer&&location.hash==='#begin'){focusElement('#starting-title');return true;}if(!choosingExplorer&&location.hash==='#cafe/units'){focusElement(document.querySelector('[data-units-root]')?'#units-title':'#units-status');return true;}if(!choosingExplorer&&location.hash==='#loft/shadows'){focusElement('#shadow-title');return true;}if(!choosingExplorer&&(location.hash||'').slice(1).split('/')[0]==='explore'){focusElement('#explore-title');return true;}return false;}
 function rerenderActivity(){const input=$('#answer');if(input)active.input=input.value;syncDraft();render();}

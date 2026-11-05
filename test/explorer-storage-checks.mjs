@@ -185,3 +185,13 @@ console.log(`${checks} explorer storage checks including recovery-copy identity 
  equal(current,first,'active notebook remains exact when another notebook was unreadable');
 }
 console.log(`${checks} explorer storage checks including saving-off recovery notices passed.`);
+for(const action of ['active','all','copy','other-copy','another-tab']){
+ const disk=new Storage(),original=store(disk);original.load();const id=original.active.id;disk.data.set(key(id),'fictional broken progress');
+ const m=store(disk);m.load();const kept=m.keptCopies().find(c=>c.raw==='fictional broken progress'),other='number-garden-kept-explorer-9-2026-11-04T12-30-00-000Z';
+ disk.data.set(other,'fictional other original');check(!!m.warning&&!!kept,action+' recovery notice has its original before the action');
+ if(action==='other-copy'){check(m.removeCopy(other),'remove unrelated original');check(!!m.warning&&disk.data.get(kept.key)==='fictional broken progress','unrelated removal retains the applicable recovery notice');}
+ if(action==='active')m.clearActive();else if(action==='all')m.clearAll();else if(action==='another-tab')disk.data.delete(kept.key);else check(m.removeCopy(kept.key),'remove the notice original');
+ equal(m.warning,'',action+' no banner points to the removed original');check(!disk.data.has(kept.key),action+' the notice original is actually absent');
+ if(!['all','other-copy'].includes(action))equal(disk.data.get(other),'fictional other original',action+' another explorer copy remains without keeping the stale banner');
+}
+console.log(`${checks} explorer storage checks including precise recovery-notice lifecycle passed.`);

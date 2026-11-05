@@ -97,6 +97,7 @@ def invitation(browser,base):
 
 def copies_and_reset(browser,base,width=1280):
  c,p=setup(browser,base,'#notes','.explorer-notes',width)
+ visible_guide=p.locator('#companion-link span').text_content();ok(ax(p,'#companion-link')['name']['value']==visible_guide+'; change guide','guide link keeps a useful label-compatible name at width '+str(width))
  details=p.locator('.explorer-notes details');details.locator('summary').click();rows=p.locator('.kept-copy')
  labels=rows.locator('span').all_text_contents();ok(any('Sky, gold leaf, notebook 1' in x for x in labels) and any('Fern, gold leaf, notebook 2' in x for x in labels),'device-wide copies distinguish owners')
  ok(any('2026-11-04 12:30:00.000 UTC' in x for x in labels),'copy creation time is readable')
@@ -189,6 +190,10 @@ def blocked_connections(browser,base):
  ok(new['task']==old['task'] and new['attempts']==old['attempts'],'opening the waiting puzzle preserves its frozen task and responses');c.close()
  c,p=setup(browser,base,'#post','[data-connection-return="delivery"]',seed=CONNECTIONS['delivery']);p.locator('[data-connection-return="delivery"]').first.click();p.locator('[data-post-start]').first.wait_for();ok(p.url.endswith('#post/choose'),'missing delivery directs to actual delivery choices');c.close()
 
+def bench_guide(browser,base):
+ c,p=setup(browser,base,'#companions','[data-guide="rowan"]',320);p.locator('[data-guide="rowan"]').click();ok(ax(p,'#companion-link')['name']['value']=='With Rowan; change guide','guide name updates with the actual selected guide')
+ go(p,base,'#science/lens','#companion-link');ok(ax(p,'#companion-link')['name']['value']=='With Rowan; change guide','bench header uses the selected guide and keeps a name on phones');c.close()
+
 class Quiet(http.server.SimpleHTTPRequestHandler):
  protocol_version='HTTP/1.1'
  def log_message(self,*_args):pass
@@ -199,7 +204,7 @@ def main():
   with sync_playwright() as pw:
    b=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH'),args=['--disable-quic'])
    try:
-    invitation(b,base);copies_and_reset(b,base);saving(b,base);identities(b,base);remove_copy(b,base);practice_and_film(b,base);blocked_connections(b,base);copies_and_reset(b,base,320)
+    invitation(b,base);copies_and_reset(b,base);saving(b,base);identities(b,base);remove_copy(b,base);practice_and_film(b,base);blocked_connections(b,base);copies_and_reset(b,base,320);bench_guide(b,base)
     ok(not errors and not request_failures and not console_errors,'no browser/request errors '+str(errors+request_failures+console_errors));receipt=dict(passed=True,checks=checks,browser=b.version,fixtureRoot=str(os.environ.get('SHELL_FIXTURE_ROOT',ROOT)),scope='Real controls, fictional notebooks; warning-before-replacement, pause/reload, finish outcomes, recovery bytes, canceled/confirmed resets and saving-off, distinct explorers and stale handles')
     (OUT/'RESULT.json').write_text(json.dumps(receipt,indent=2),encoding='utf8');print(json.dumps(receipt))
    except Exception:
