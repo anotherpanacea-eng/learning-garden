@@ -56,6 +56,7 @@ def family(p, identity):
         fold.locator('summary').click()
     p.locator(sel('family')).select_option(identity)
     h.ok(p.locator('[data-ineq-families]').get_attribute('open') is not None, 'family chooser stays open after its explicit selection')
+    h.ok(p.locator(sel('family')).evaluate('e=>e===document.activeElement'), 'changing family retains keyboard focus on the family select')
 
 
 def fixture():
@@ -75,6 +76,9 @@ def bounds(p):
     h.ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), 'no horizontal page overflow')
     bad = p.locator('[data-ineq-root] button,[data-ineq-root] a,[data-ineq-root] summary,[data-ineq-root] select').evaluate_all('''xs=>xs.filter(e=>e.checkVisibility()&&(e.getBoundingClientRect().width<44||e.getBoundingClientRect().height<44||parseFloat(getComputedStyle(e).fontSize)<16)).map(e=>({text:e.textContent,w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height}))''')
     h.ok(not bad, 'visible controls have44px targets and16px text: ' + str(bad))
+    small = p.locator('[data-ineq-root] p,[data-ineq-root] li,[data-ineq-root] th,[data-ineq-root] td,[data-ineq-root] label,[data-ineq-root] caption').evaluate_all('''xs=>xs.filter(e=>e.checkVisibility()&&parseFloat(getComputedStyle(e).fontSize)<16).map(e=>({text:e.textContent,size:getComputedStyle(e).fontSize}))''')
+    h.ok(not small, 'visible body and footer text stays at least16px: '+str(small))
+    h.ok(p.locator('[data-ineq-root] footer p').evaluate('e=>parseFloat(getComputedStyle(e).fontSize)>=16'), 'the save-before-leaving warning has readable body size')
 
 
 def near(actual, expected, label):
@@ -92,11 +96,16 @@ def ray(p, which, boundary, direction, inclusive):
     h.ok((fill not in ['white', '#fff', '#ffffff', 'none', 'transparent']) == inclusive, 'filled versus hollow endpoint follows inclusion')
     polygon = svg.locator('[data-ineq-arrow]').get_attribute('points')
     pts = [float(n) for n in polygon.replace(',', ' ').split()]
-    tip = 60 if direction == 'lower' else 640
+    # ±6 are plotted at60/640. The continuation arrow must extend beyond those
+    # labelled limits rather than suggest a finite endpoint at either tick.
+    tip = 30 if direction == 'lower' else 670
     near(pts[:2], [tip, 65], 'ray points toward the intended unbounded side')
     h.ok(all((q > tip if direction == 'lower' else q < tip) for q in [pts[2], pts[4]]), 'ray arrow wings lie behind its tip')
     segment = svg.locator('[data-ineq-segment]').evaluate('e=>[+e.getAttribute("x1"),+e.getAttribute("x2")]')
-    near(segment, [78, x] if direction == 'lower' else [x, 622], 'continuous ray reaches the boundary and ends its stem at the arrow base')
+    h.ok(tip < 60 if direction == 'lower' else tip > 640, 'continuation arrow lies beyond the labelled plotting window')
+    near(segment, [48, x] if direction == 'lower' else [x, 652], 'continuous ray reaches the boundary and ends its stem at the continuation arrow base')
+    axis = svg.locator('.ineq-axis').evaluate('e=>[+e.getAttribute("x1"),+e.getAttribute("x2")]')
+    near(axis, [30, 670], 'number-line axis extends through the continuation margins')
     sizes = svg.locator('text').evaluate_all('''xs=>xs.map(e=>{const m=e.getScreenCTM();return parseFloat(getComputedStyle(e).fontSize)*Math.hypot(m.a,m.b)})''')
     h.ok(sizes and min(sizes) >= 15.9, 'effective SVG number labels are at least16px')
     labels = svg.locator('text').all_text_contents()
@@ -126,7 +135,7 @@ def journey(browser, base, seed):
     ray(p, 'learner', 0, 'lower', False)
     h.ok(p.locator('[data-ineq-fit]').inner_text() == 'Fits' and p.locator('[data-ineq-in-ray]').inner_text() == 'Excludes 2', 'the same test value fits the actual negative rule but is excluded by the unexpected learner ray')
     cells = p.locator(sel('probe-result')+' td').all_text_contents()
-    h.ok(cells[0] == '2' and any('-1 < 7' in cell for cell in cells), 'rendered probe arithmetic independently gives negative two times two plus three equals negative one')
+    h.ok(cells[0] == '2' and any('-1 is less than 7' in cell for cell in cells), 'rendered probe arithmetic independently gives negative two times two plus three equals negative one and uses comparison words')
     p.locator(sel('probe')).select_option('-2')
     h.ok(p.locator('[data-ineq-fit]').inner_text() == 'Does not fit', 'strict rule excludes the exact source boundary')
     p.locator(sel('probe')).select_option('-1.5')
@@ -140,6 +149,7 @@ def journey(browser, base, seed):
     click(p, 'hear')
     speech = p.locator(sel('hear')).get_attribute('data-speak') or ''
     h.ok('greater than' in speech.lower() or 'less than' in speech.lower(), 'Hear uses comparison words')
+    h.ok('negative 2 times x is less than 4' in speech and 'x is greater than negative 2' in speech, 'Hear includes the intermediate and solved equations, not just general instructions')
     stop_voice(p)
     click(p, 'keep')
     first = copy.deepcopy(records(p)[0])
@@ -164,13 +174,23 @@ def journey(browser, base, seed):
     click(p, 'draft')
     family(p, 'positive-more')
     click(p, 'another')
+    click(p, 'turn', 'draw')
+    p.locator(sel('probe')).select_option('3.5')
+    p.locator(sel('boundary')).select_option('1.5')
+    click(p, 'direction', 'higher')
+    click(p, 'inclusive', 'true')
+    family(p, 'negative-more')
+    family(p, 'positive-more')
+    h.ok(p.locator(sel('probe')).input_value() == '3.5' and p.locator(sel('boundary')).input_value() == '1.5', 'cycling families resumes the actual waiting probe and boundary')
+    ray(p, 'learner', 1.5, 'higher', True)
     h.ok(records(p)[0] == first, 'changing family and source never regrades earlier sheets')
     click(p, 'back')
     p.locator('[data-equality-field="note"]').wait_for()
     h.ok(p.locator('[data-equality-field="note"]').input_value() == 'A waiting synthetic note remains available.', 'return is a working mode button and restores the waiting equality note')
     h.ok(h.book(p)['equalityDesk'] == before['equalityDesk'], 'equality notebook stays exact through child mode return')
     enter(p)
-    h.ok(p.locator(sel('family')).input_value() == 'positive-more', 'reopening resumes the waiting child draft during this page session')
+    h.ok(p.locator(sel('family')).input_value() == 'positive-more' and p.locator(sel('probe')).input_value() == '3.5' and p.locator(sel('boundary')).input_value() == '1.5', 'reopening resumes the actual waiting child draft during this page session')
+    ray(p, 'learner', 1.5, 'higher', True)
     p.screenshot(path=str(OUT/'tablet.png'), full_page=True)
     exported = native.download(p, base, 'kept-inequality-sheets')
     h.ok(exported['inequalitySheets'] == records(p), 'actual Notes download contains exact kept sheets')
@@ -184,7 +204,7 @@ def transfer(browser, base, seed, first, exported):
     old['source'].update(id='earlier"source\\id', title='Earlier <rule> & "marks"', a=-3, b=4, c=1, relation='le', futureSource={'unchanged': True})
     old['work'].update(probe=1, boundary=.5, direction='lower', inclusive=False, referenceShown=False, futureWork={'unchanged': True})
     mixed = copy.deepcopy(exported)
-    mixed['inequalitySheets'] = [{'id':'inequality-sheet-900','v':99,'raw':'Invented unavailable sheet'}, old] + [{'id':'inequality-sheet-'+str(i),'v':99} for i in range(81, 88)] + [first]
+    mixed['inequalitySheets'] = [{'id':'inequality-sheet-900','v':99,'raw':'Invented unavailable sheet'}, old] + [{'id':'inequality-sheet-'+str(i),'v':99} for i in range(81, 95)] + [first]
     _, p = native.setup(browser, seed, 'transfer')
     h.go(p, base, '#notes', '#progress-file')
     identity = h.active(p); original = h.book(p)
@@ -195,7 +215,11 @@ def transfer(browser, base, seed, first, exported):
     enter(p, base)
     h.ok(h.active(p) != identity, 'actual import creates a separate explorer')
     click(p, 'shelf')
-    click(p, 'page', '-1')
+    # Three raw pages: preserve the selected paging button until it becomes
+    # disabled, then focus its enabled counterpart at the boundary.
+    for direction, expected in [('-1','-1'),('-1','1'),('1','1'),('1','-1'),('-1','-1'),('-1','1')]:
+        p.locator(sel('page', direction)).focus(); p.keyboard.press('Enter')
+        h.ok(p.locator(sel('page', expected)).evaluate('e=>e===document.activeElement&&!e.disabled'), 'shelf paging keeps usable keyboard focus after direction '+direction)
     click(p, 'card', old['id'])
     h.ok(old['source']['title'] in p.locator(sel('root')).inner_text(), 'historical source title renders literally and is escaped')
     h.ok(p.locator(sel('ray', 'reference')).count() == 0, 'frozen historical source does not invent unshown reasoning')
@@ -224,11 +248,30 @@ def phone(browser, base, seed):
     p.locator(sel('inclusive', 'true')).focus(); p.keyboard.press('Enter')
     ray(p, 'learner', 0, 'lower', True)
     h.ok(p.locator(sel('inclusive', 'true')).evaluate('e=>e===document.activeElement'), 'keyboard choice retains useful control focus')
-    p.locator(sel('probe')).select_option('6')
-    h.ok(p.locator(sel('step', '1')).is_disabled(), 'last halfstep has a disabled higher probe control')
+    p.locator(sel('probe')).select_option('5')
+    p.locator(sel('step', '1')).focus(); p.keyboard.press('Enter')
+    h.ok(p.locator(sel('probe')).input_value() == '5.5' and p.locator(sel('step', '1')).evaluate('e=>e===document.activeElement'), 'keyboard halfstep retains the same button while it remains enabled')
+    p.keyboard.press('Enter')
+    h.ok(p.locator(sel('step', '1')).is_disabled() and p.locator(sel('step', '-1')).evaluate('e=>e===document.activeElement'), 'at the final halfstep focus moves to the enabled counterpart')
     p.locator(sel('step', '-1')).tap()
-    h.ok(p.locator(sel('probe')).input_value() == '5.5', 'native phone tap moves by the intended half unit')
+    h.ok(p.locator(sel('probe')).input_value() == '5.5' and p.locator(sel('step', '-1')).evaluate('e=>e===document.activeElement'), 'native phone tap moves by the intended half unit and retains its button focus')
+    p.locator(sel('probe')).select_option('-5.5')
+    p.locator(sel('step', '-1')).focus(); p.keyboard.press('Enter')
+    h.ok(p.locator(sel('probe')).input_value() == '-6' and p.locator(sel('step', '1')).evaluate('e=>e===document.activeElement'), 'the lower endpoint also transfers focus to its enabled counterpart')
     p.screenshot(path=str(OUT/'phone.png'), full_page=True)
+
+
+def trailing_slash(browser, base, seed):
+    print('Which values fit: actual trailing-slash route', flush=True)
+    _, p = native.setup(browser, seed, 'trailing-slash')
+    h.go(p, base, ROUTE+'/', '[data-equality-inequality]')
+    original = h.book(p)['equalityDesk']
+    enter(p)
+    p.locator(sel('step', '1')).tap()
+    h.ok(p.locator(sel('probe')).input_value() == '0.5', 'the app-recognized trailing-slash route has live child controls')
+    click(p, 'back')
+    p.locator('[data-equality-field="note"]').wait_for()
+    h.ok(p.evaluate('location.hash') == ROUTE+'/' and h.book(p)['equalityDesk'] == original, 'Back works on the trailing-slash route and preserves the parent notebook')
 
 
 def lifecycle(browser, base, seed):
@@ -237,14 +280,17 @@ def lifecycle(browser, base, seed):
     enter(p, base)
     setup = '''async seed=>{
       const parent=await import('./equality-desk-ui.mjs'),ui=await import('./inequality-ui.mjs');
-      const media=await import('./play-media.mjs'),transfer=await import('./progress-transfer.mjs');
+      const media=await import('./play-media.mjs'),transfer=await import('./progress-transfer.mjs'),core=await import('./core.mjs');
       const mount=document.querySelector('main');mount.replaceChildren();
       const h={book:structuredClone(seed),owner:'synthetic-owner',active:true,allow:true,saves:0};
       h.book.inequalitySheets=[];h.original=h.book;
+      const report=c=>({title:'After the Storm: observations',exportedAt:'2026-11-04T12:00:00.000Z',
+        note:'A small informal sample, not a grade or mastery assessment.',
+        explorer:{avatar:'sky',color:'gold',symbol:'leaf'},recommendation:core.recommendations(c),...c});
       h.render=()=>{mount.innerHTML=parent.equalityPage(h.book,h.owner);parent.bindEquality(h.book,{
         notebook:()=>h.book,explorerId:()=>h.owner,isActive:()=>h.active,
         save:()=>{h.saves++;return {enabled:true,ok:true}},render:h.render,
-        canExport:c=>h.allow&&transfer.prepareProgressImport(JSON.stringify(c)).ok,
+        canExport:c=>h.allow&&transfer.prepareProgressImport(JSON.stringify(report(c),null,2)).ok,
         focus:s=>document.querySelector(s)?.focus()
       });media.bindSpeech()};
       ui.openInequality(h.book,h.owner);window.ineqHarness=h;h.render();
@@ -308,6 +354,19 @@ def lifecycle(browser, base, seed):
     dispatch(hear)
     h.ok(not p.evaluate('ineqStaleHearReached'), 'reparented Hear is stopped before ordinary speech handlers')
 
+    for field in ['probe', 'boundary']:
+        install(); click(p, 'turn', 'draw')
+        control = p.locator(sel(field)).element_handle()
+        control.evaluate('e=>{e.originalParent=e.parentNode;const box=document.createElement("section");e.closest("[data-ineq-root]").append(box);box.append(e);e.value="1";e.dispatchEvent(new Event("change",{bubbles:true,cancelable:true}));e.originalParent.append(e)}')
+        p.evaluate('ineqHarness.render()')
+        h.ok(p.locator(sel(field)).input_value() == '0' and p.evaluate('ineqHarness.saves') == 0, 'reparented '+field+' selection cannot mutate the waiting local work')
+
+    install(); click(p, 'turn', 'draw'); click(p, 'keep')
+    copy_button = p.locator(sel('copy')).element_handle()
+    copy_button.evaluate('e=>{const box=document.createElement("section");e.closest("[data-ineq-root]").append(box);box.append(e)}')
+    dispatch(copy_button)
+    h.ok(p.locator(sel('boundary')).is_disabled() and p.evaluate('ineqHarness.saves') == 1, 'reparented Work on a copy cannot leave the frozen view or write')
+
 
 def saving_off(browser, base, seed):
     print('Which values fit: actual saving-off recovery', flush=True)
@@ -347,6 +406,7 @@ def main():
             first, exported = journey(browser, base, seed)
             transfer(browser, base, seed, first, exported)
             phone(browser, base, seed)
+            trailing_slash(browser, base, seed)
             lifecycle(browser, base, seed)
             saving_off(browser, base, seed)
             h.ok(not h.errors, 'no page errors: '+json.dumps(h.errors))
