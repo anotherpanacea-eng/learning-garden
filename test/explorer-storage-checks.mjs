@@ -161,3 +161,16 @@ console.log(`${checks} explorer storage checks including denied-write chooser pa
  check(a.setPersistence(true,s),'explicit retry can enable and persist intact work');equal(store(disk).load().syntheticWork,{from:'keep temporary work'},'explicit retry saves recoverable work');
 }
 console.log(`${checks} explorer storage checks including preference-write failure passed.`);
+{
+ const disk=new Storage(),m=store(disk);m.load();
+ const first=`number-garden-kept-${m.active.id}-2026-11-04T12-30-00-000Z`,second='number-garden-backup-explorer-9-2026-11-04T12-30-00-000Z-1';
+ disk.data.set(first,'fictional original one');disk.data.set(second,'fictional original nine');disk.data.set(STORAGE_KEY,'fictional shared original');
+ const before=[...disk.data],writes=disk.log.length,kept=m.keptCopies();
+ const a=kept.find(c=>c.key===first),b=kept.find(c=>c.key===second),shared=kept.find(c=>c.key===STORAGE_KEY);
+ equal(a.explorerId,m.active.id,'copy owner comes from its existing key');equal(a.stamp,'2026-11-04T12-30-00-000Z','copy date comes from existing key');
+ equal(b.explorerId,'explorer-9','copy owner remains identifiable after the explorer leaves the list');equal(b.stamp,'2026-11-04T12-30-00-000Z-1','same-instant copies retain their disambiguating suffix');
+ equal(shared.explorerId,null,'shared original is not assigned to the active explorer');equal(shared.stamp,null,'unknown shared date is not invented');
+ equal(a.raw,'fictional original one','download bytes remain exact');equal(b.raw,'fictional original nine','other explorer download bytes remain exact');
+ equal([...disk.data],before,'describing copies changes no stored bytes');equal(disk.log.length,writes,'describing copies performs no storage writes');
+}
+console.log(`${checks} explorer storage checks including recovery-copy identity passed.`);
