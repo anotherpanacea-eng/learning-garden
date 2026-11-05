@@ -1,4 +1,4 @@
-# 382 · Parcel questions · complete finite companion · revision 2
+# 382 · Parcel questions · complete finite companion · revision 3
 
 This is the complete finite French and English teaching copy. Interface actions and safety messages below are English. No generated language, external runtime model, recording, or microphone. Standard beginner French; local browser French speech is optional, with no English fallback.
 
@@ -7,7 +7,7 @@ This is the complete finite French and English teaching copy. Interface actions 
 - Title: **Which parcel?**
 - Story: A visitor is collecting supplies. Four parcels are waiting in two rooms. Find the visitor's parcel by asking questions.
 - Instruction: **Ask a question. Read the reply. Choose a parcel when you want to.**
-- Teaching: The visitor's note tells you who the parcel is for. A colour question and a room question can help you tell the parcels apart. A question about the destination repeats something you already know. You can ask any question, in any order, as often as you like.
+- Teaching: The visitor's note names the parcel’s destination. A colour question and a room question can help you tell the parcels apart. A question about the destination repeats something you already know. You can ask any question, in any order, as often as you like.
 - Worked example, separate from every case: You want a green parcel in the bedroom. Knowing only “green” would not distinguish two green parcels. Knowing the room as well can help.
 - Example French: **Le colis est vert. Il est dans la chambre.**
 - Example meaning: **The parcel is green. It is in the bedroom.**
@@ -48,7 +48,7 @@ The current room and the destination are different facts: a parcel can be in a k
 - **Compare with the replies**: explicit, optional, and repeatable. Before a parcel is chosen: **Choose a parcel first, or keep exploring.** Once chosen, show the full source colour and room, the chosen label and **The chosen parcel matches both details.** or **The chosen parcel has a different colour or room. You can choose again or keep this version.** This may reveal information not asked for; record `compared:true` permanently in that working version and label **Source comparison opened**. Picking or changing a parcel alone never claims it is correct.
 - Display **Your chosen parcel** even if unexpected. Never force a fitting pick before Keep, moving on, or reopening.
 - **Conversation** lists every selected question and its truthful reply in order. The destination question is a useful contrast, not an error message. No automatic “most useful question” indicator.
-- **Try saying a question in your own words to someone with you.** Optional parent invitation only. No “said” record, microphone, grader, proficiency estimate, or generated reply.
+- **Try asking one of these questions aloud to someone with you.** Optional parent invitation only. No “said” record, microphone, grader, proficiency estimate, or generated reply.
 
 ## Interface and kept sheets
 
