@@ -487,6 +487,31 @@ export const copyScopes = [
   {path:'dist/linear-pathway-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/map-reading-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/market-change-content.mjs',adultBlocks:[],quotations:[]},
+  // LG-2b batch13: example wording, stored role codes and newer activity sources.
+  {"path":"dist/question-bench-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/question-bench-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/watts-desk-ui.mjs","adultBlocks":[{"start":"<details data-watts-fold=\"grownups\"","end":"</details></footer>","reason":"Only the labelled For grown-ups disclosure; all child instructions, model limits and help remain checked."}],"quotations":[]},
+  {"path":"dist/word-room-content.mjs","adultBlocks":[],"quotations":[{"quote":"const ADULT_SUPPLIED_ROLE = 'adult-supplied';","reason":"Stored passage-token role code; reading() renders token.text, never the role string."}]},
+  {"path":"dist/word-room-core.mjs","adultBlocks":[],"quotations":[{"quote":"'adult-supplied'","reason":"Existing stored-token enum validation, not displayed copy; preserves earlier passage roles."}]},
+  {"path":"dist/diffusion-tray-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/diffusion-tray-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/diffusion-tray-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/lens-bench-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/lens-bench-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/lens-bench-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/living-layers-content.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/living-layers-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/living-layers-ui.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/act-three-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/act-two-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/beat-bench-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/bundle-broad-exposure.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/bundle-exchange-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/cartographer-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/cell-studio-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/coin-counter-core.mjs","adultBlocks":[],"quotations":[]},
+  {"path":"dist/compare-records-core.mjs","adultBlocks":[],"quotations":[]},
+
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
 const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');

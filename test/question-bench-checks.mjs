@@ -39,7 +39,7 @@ for(const entry of Q.questionCases){
   if(ids.length){const id=ids[0];selected=Q.changeQuestionWork(s,selected,'way',id);eq(selected.wayIds,ids.slice(1));selected=Q.changeQuestionWork(s,selected,'way',id);eq(selected.wayIds,[...ids.slice(1),id]);}
  }
  ok(s.ways.every(method=>method.can.length>0&&method.limit.length>0));
- ok(/supplied story example.*not an analysis/.test(s.methodNotice),'frozen Notes warning frames custom wording honestly');
+ ok(/story example.*not an analysis/.test(s.methodNotice),'frozen Notes warning frames custom wording honestly');
 }
 // Method limits preserve the distinct evidential boundaries of each story.
 ok(/pattern alone does not establish why/.test(source.ways.find(w=>w.id==='watch').limit));
