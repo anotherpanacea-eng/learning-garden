@@ -152,13 +152,14 @@ export function bindWriting(state,ctx={}){
  const rootChain=chain(root),unchanged=links=>links.every(([node,parent])=>node.parentNode===parent);
  const visible=el=>{try{for(let node=el;node;node=node.parentElement){if(node.hidden||node.getAttribute?.('aria-hidden')==='true'||getComputedStyle(node).display==='none'||getComputedStyle(node).visibility==='hidden')return false;if(node.tagName==='DETAILS'&&!node.open&&node!==el){const summary=[...node.children].find(child=>child.tagName==='SUMMARY');if(!summary?.contains(el))return false;}}return true;}catch{return false;}};
  const owned=()=>{try{return readableBytes&&typeof owner==='string'&&owner.trim().length>0&&typeof notebook==='function'&&typeof explorerId==='function'&&typeof isActive==='function'&&typeof canExport==='function'&&ctx.notebook===notebook&&ctx.explorerId===explorerId&&ctx.isActive===isActive&&ctx.canExport===canExport&&notebook()===state&&explorerId()===owner&&isActive()===true&&root.isConnected&&document.querySelector('[data-writing-root]')===root&&unchanged(rootChain)&&route==='#desk/writing'&&location.hash===route&&own(state,'writingDesk')===rootPresent&&state.writingDesk===ownedRoot&&state.writingDesk?.currentId===current&&JSON.stringify(state.writingDesk)===rootBytes&&core.writingView(state).record===ownedRecord&&ownedRecord?.source===ownedSource&&ownedRecord?.work===ownedWork;}catch{return false;}};
- const live=el=>owned()&&el?.isConnected&&root.contains(el)&&parents.has(el)&&unchanged(parents.get(el))&&visible(el);
+ const attached=el=>owned()&&el?.isConnected&&root.contains(el)&&parents.has(el)&&unchanged(parents.get(el));
+ const live=el=>attached(el)&&visible(el);
  const guard=el=>{parents.set(el,chain(el));for(const type of ['click','input','change','toggle','keydown','focusin'])el.addEventListener(type,event=>{if(!live(el)){event.preventDefault();event.stopImmediatePropagation();}},{capture:true});};
  guard(root);root.querySelectorAll('button,a,details,summary,select,[data-speak]').forEach(guard);
  const stop=()=>{ctx.stopSpeech?.();ctx.stopSound?.();};
  const status=(message,focus=false)=>{const el=root.querySelector('#writing-status');if(el){el.textContent=message;if(focus)el.focus();}};
  const persistence=()=>{const saved=ctx.save?.();return saved?.enabled===false?'This draft is in this session. Download Notes before leaving.':saved?.ok===false?'This draft is in this session but could not be saved on this device. Download Notes.':'';};
- const panels=()=>{v.panels=[...root.querySelectorAll('details[data-writing-panel][open]')].filter(live).map(d=>d.dataset.writingPanel);};
+ const panels=()=>{v.panels=[...root.querySelectorAll('details[data-writing-panel][open]')].filter(attached).map(d=>d.dataset.writingPanel);};
  const redraw=(message='',focus='')=>{panels();stop();ctx.render?.();const next=document.querySelector('[data-writing-root]');if(next){const el=next.querySelector('#writing-status');if(el)el.textContent=message;const target=focus&&(Array.isArray(focus)?focus:[focus]).map(x=>next.querySelector(x)).find(el=>el&&!el.disabled&&visible(el));if(target){target.focus();if(target.getBoundingClientRect().top<0||target.getBoundingClientRect().bottom>innerHeight)target.scrollIntoView({block:'center'});}}};
  const options={canExport:ctx.canExport};
  root.querySelectorAll('[data-writing-reference],[data-writing-card]').forEach(el=>el.addEventListener('click',()=>{
@@ -176,7 +177,7 @@ export function bindWriting(state,ctx={}){
   v.inspector={cardId:card.id,lineIds,label,returnSelector};
   redraw('','#writing-source-title');
  }));
- const act=(el,fn,message='',focus='')=>{if(!live(el))return;const result=fn();if(!result.ok){status(errors[result.error]||errors.unavailable,true);return;}adopt();const saved=result.changed===false?'':persistence();redraw([result.changed===false?'Your draft is unchanged.':message,saved].filter(Boolean).join(' '),focus);};
+ const act=(el,fn,message='',focus='')=>{if(!live(el))return false;const result=fn();if(!result.ok){status(errors[result.error]||errors.unavailable,true);return false;}adopt();const saved=result.changed===false?'':persistence();redraw([result.changed===false?'Your draft is unchanged.':message,saved].filter(Boolean).join(' '),focus);return true;};
  root.querySelectorAll('[data-writing-open]').forEach(el=>el.addEventListener('click',()=>{if(!live(el))return;act(el,()=>core.openWritingTask(state,el.dataset.writingOpen,options),'Your draft is waiting.','#writing-task-title');}));
  root.querySelectorAll('[data-writing-other-reader]').forEach(el=>el.addEventListener('click',()=>{if(!live(el)||el.disabled)return;const target=core.writingOtherReader(state,core.writingView(state).record?.source);if(target.status!=='ready')return;act(el,()=>core.openWritingTask(state,target.taskId,options),'The other reader’s draft is here.','#writing-task-title');}));
  root.querySelectorAll('[data-writing-bench]').forEach(el=>el.addEventListener('click',()=>{if(!live(el))return;v.bench=el.dataset.writingBench;redraw('',`[data-writing-bench='${v.bench}']`);}));
@@ -193,7 +194,13 @@ export function bindWriting(state,ctx={}){
    const selector=v.inspector?.returnSelector;v.inspector=null;redraw();const next=document.querySelector('[data-writing-root]');const origin=selector&&next?.querySelector(selector);const target=origin&&!origin.disabled&&visible(origin)?origin:next?.querySelector('#writing-task-title');target?.focus();target?.scrollIntoView({block:'nearest'});return;
   }
   if(action==='quote')return act(el,()=>core.openWritingTask(state,'quote-build',options),"Dot's sentences are ready to move.",'#writing-task-title');
-  if(action==='quote-return'){const target=core.writingQuoteReturn(state);if(!target)return;return act(el,()=>core.openWritingTask(state,target.id,options),'Your kept paragraph is here.','#writing-task-title');}
+  if(action==='quote-return'){
+   const target=core.writingQuoteReturn(state);if(!target||!act(el,()=>core.openWritingTask(state,target.id,options),'Your kept paragraph is here.'))return;
+   if(notebook()!==state||explorerId()!==owner||isActive()!==true||location.hash!==route||state.writingDesk!==ownedRoot||state.writingDesk?.currentId!==target.id)return;
+   const next=document.querySelector('[data-writing-root]'),versions=next?.querySelector('[data-writing-panel=versions]');if(!versions)return;
+   const view=local(state,owner);view.panels=[...new Set([...view.panels,'versions'])];versions.open=true;
+   const summary=versions.querySelector(':scope > summary');summary?.focus();summary?.scrollIntoView({block:'nearest'});return;
+  }
   if(action==='quote-source'){
    const record=core.writingView(state).record;if(record?.source.bench!=='point-quote')return;const cards=core.writingResearchCards(record.source);
    if(cards.length===1){v.inspector={cardId:cards[0].id,lineIds:[],label:'this draft',returnSelector:"[data-writing-action='quote-source']"};return redraw('','#writing-source-title');}

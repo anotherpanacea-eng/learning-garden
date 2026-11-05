@@ -112,7 +112,11 @@ def journey(browser,base,seed):
   action(p,'check');h.ok(h.work(p)['checks'][-1]['outcome']=='fit','a legitimate narration write leaves the next ordinary action live')
   drawer(p,'shelf');p.locator('[data-writing-bench="paragraphs"]').click();p.locator('[data-writing-open="market-day"]').click()
   h.ok(p.locator('[data-writing-action="quote-return"]').is_visible(),'another task offers an elected return to a readable kept paragraph')
+  retained=copy.deepcopy(h.book(p)['writingDesk']['records'])
   action(p,'quote-return');h.ok(h.work(p)['source']['id']=='quote-build' and h.work(p)['firstKept']==first,'return reopens the actual own-source record without replacing its first version')
+  versions=p.locator('[data-writing-panel="versions"]')
+  h.ok(versions.get_attribute('open') is not None and versions.locator(':scope>summary').evaluate('e=>e===document.activeElement&&e.checkVisibility()'),'kept-paragraph return visibly opens the kept versions and focuses their summary')
+  h.ok(h.book(p)['writingDesk']['records']==retained,'elected kept-paragraph return changes no current work, first/latest snapshot or other record')
   choose(p,'quote-two');p.locator('[data-writing-choice="one-jump"]').click()
   h.ok('his pride began to whisper' in p.locator('[data-writing-quote-preview="current"]').inner_text(),'wrong paired quotation stays literal before Check')
   h.ok(refs(p,'one-jump').count()==2,'both source links remain available for a partial/wrong pair')
@@ -223,6 +227,23 @@ def saving_off(browser,base,seed):
  finally:c.close()
 
 
+def nested_panel(browser,base,seed):
+ print('Point and Quote: shared nested kept-panel continuity',flush=True)
+ c,p=setup(browser,base,seed)
+ try:
+  action(p,'revision')
+  p.locator('[data-writing-strip="flour"]').click();p.locator('[data-writing-destination="aside"]').click();action(p,'keep')
+  original=copy.deepcopy(h.work(p)['firstKept']);drawer(p,'versions')
+  inner=p.locator('[data-writing-notice="first"] [data-writing-notice-aside]')
+  inner.locator(':scope>summary').click()
+  h.ok(inner.get_attribute('open') is not None,'a nested first-kept set-aside disclosure is deliberately opened')
+  drawer(p,'versions',False);count=len(h.work(p)['checks']);action(p,'check');drawer(p,'versions')
+  inner=p.locator('[data-writing-notice="first"] [data-writing-notice-aside]')
+  h.ok(inner.get_attribute('open') is not None and inner.locator('[data-writing-notice-part="flour"]').is_visible(),'closing the outer versions and redrawing retains the nested elected-open set-aside panel and its visible line')
+  h.ok(h.work(p)['firstKept']==original and len(h.work(p)['checks'])==count+1,'the intentional Check appends only its ordinary check while nested kept content remains exact')
+ finally:c.close()
+
+
 def isolated(browser,base,seed):
  print('Point and Quote: labelled actual-UI guard/refusal harness',flush=True)
  c,p=setup(browser,base,seed)
@@ -278,7 +299,7 @@ def main():
   with sync_playwright() as pw:
    browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
    try:
-    report=journey(browser,base,seed);transfer(browser,base,seed,report);phone(browser,base,seed);saving_off(browser,base,seed);isolated(browser,base,seed)
+    report=journey(browser,base,seed);transfer(browser,base,seed,report);phone(browser,base,seed);nested_panel(browser,base,seed);saving_off(browser,base,seed);isolated(browser,base,seed)
     h.ok(not h.errors,'no page/console/HTTP/request errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'base':base,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
    except Exception:
     (OUT/'failure.txt').write_text(traceback.format_exc())
