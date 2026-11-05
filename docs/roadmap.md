@@ -2,6 +2,10 @@
 
 **Current priorities, decisions and release status, 2026-10-31.** Start with the [consolidation priorities](#consolidation-priorities--current-order); the rest of this page is the release queue and the record of what is built. The [pre-merge snapshot](roadmap-2026-10-22-pre-merge.md), [strand map](strand-map.md), [curriculum spirals](curriculum-spirals.md), [gap proposals](curriculum-gaps.md) and [dated handoffs](handoffs/) preserve design history. Their earlier “next” and publication statements are snapshots. The [six-act programme](specs/49-six-act-curriculum.md) and [26 strand pathways](six-act-strands.md) describe the teaching and story horizon, not a release schedule or completed course.
 
+## Air and Blood379
+
+[Air and Blood379](specs/379-air-and-blood.md) connects the recent cell and diffusion work to selected oxygen/carbon-dioxide pathways. The independently reviewed scope follows each gas, distinguishes breathing/diffusion/circulation and lets learners keep revisable supplied-label guides. It lives within Cell Studio, with a read-only return in Diffusion Tray. [PR449’s review and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/449#issuecomment-6648548069) owns implementation clearance and live acceptance. This is a qualitative pathway bridge; full breathing mechanics, circulation, respiration chemistry and practical investigations remain unfinished.
+
 ## Photo studies378
 
 [Photo studies378](specs/378-photo-studies.md) deepens Lens Bench with drawing beside a frozen photograph, learner-selected observation/idea/question labels and a caption for another reader. The specification is independently cleared; [PR439’s review and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/439#issuecomment-6647738758) records browser verification, independent implementation review and release status. Compact local strokes preserve the shared notebook budget; the study returns read-only to Cell Studio. This is photographic recording and discussion, not graded biological drawing, calibrated measurement or direct microscope qualification.
