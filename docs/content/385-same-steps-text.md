@@ -8,12 +8,12 @@ All cases use axes x 0..4 by 1 and y −4..16 by 2. These are axis units, not a 
 
 | ID / title | Literal rule | Own rows, in order | Adjacent (dx,dy); exact rates | Source explanation after Compare |
 | --- | --- | --- | --- | --- |
-| rise / Steady rise | y = 2 + 3x | (0,2),(1,5),(2,8),(3,11),(4,14) | (1,3) four times;3 | Each1 across changes y by 3. The supplied rule is linear, even though its first output is 2. |
+| rise / Steady rise | y = 2 + 3x | (0,2),(1,5),(2,8),(3,11),(4,14) | (1,3) four times;3 | Each1 across changes y by 3. The written rule is linear, even though its first output is 2. |
 | fall / Steady fall | y = 6 − 2x | (0,6),(1,4),(2,2),(3,0),(4,−2) | (1,−2) four times;−2 | Each1 across changes y by −2. A falling line can have a constant rate. Negative change is not changing rate. |
 | flat / Staying level | y = 5 | (0,5),(1,5),(2,5),(3,5),(4,5) | (1,0) four times;0 | Each1 across changes y by 0. Zero is a constant rate; a horizontal line is still straight. |
 | square / Square the input | y = x × x | (0,0),(1,1),(2,4),(3,9),(4,16) | (1,1),(1,3),(1,5),(1,7);1,3,5,7 | Equal input steps give different output changes. These dots do not all lie on one straight line. Squaring is not a linear rule. This is a few selected rows, not the whole graph. |
 | double / Double again | Start at 1; double for each next whole input | (0,1),(1,2),(2,4),(3,8),(4,16) | (1,1),(1,2),(1,4),(1,8);1,2,4,8 | Doubling repeats a multiplier, not an added amount. Equal input steps have different output changes. These selected dots do not all lie on one straight line. |
-| skip / A row is missing | y = 2x + 1 | (0,1),(1,3),(3,7),(4,9) | (1,2),(2,4),(1,2);2,2,2 | The output changes 2,4,2 look different, but the input changes 1,2,1 also differ. Divide each output change by its input change: the rate is 2 in every listed interval. The supplied rule is linear. |
+| skip / A row is missing | y = 2x + 1 | (0,1),(1,3),(3,7),(4,9) | (1,2),(2,4),(1,2);2,2,2 | The output changes 2,4,2 look different, but the input changes 1,2,1 also differ. Divide each output change by its input change: the rate is 2 in every listed interval. The written rule is linear. |
 
 Every source story: **Dot is comparing made-up number rules for the library's graph display. What changes between the rows?**
 
