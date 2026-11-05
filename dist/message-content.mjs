@@ -1,7 +1,7 @@
 import {CHANGING_LETTERS} from './letter-content.mjs';
 // Original finite message rehearsals. These cases do not interpret authored writing.
 const cases = [
- {id:'basket',title:'Which basket?',focus:'Name the object',actor:'rabbit',scenePlace:'cafe',
+ {id:'basket',title:'Which basket?',focus:'Name the object',actor:'pip',sender:'rabbit',senderName:'Rabbit',scenePlace:'cafe',
   scene:'Two labeled baskets wait at the Post Office. One holds folded blankets; the other holds seed packets. Rabbit is at the café, beside a table with no blankets.',
   sceneParts:[{id:'blankets',label:'Basket of blankets',prop:'blanket',place:'Post Office'},{id:'seeds',label:'Basket of seed packets',prop:'basket',place:'Post Office'},{id:'cafe',label:'Café table',prop:'teacup',place:'Café'}],
   request:'Rabbit asks for the basket of blankets to be brought to the café for the welcome-back supper.',
@@ -10,7 +10,7 @@ const cases = [
   cards:[{id:'original',text:'Bring the basket to the café.',fits:false,outcome:'The reader pauses beside the two baskets.',reply:'Which basket should I bring: the blankets or the seed packets?',visual:'ask'},{id:'blankets',text:'Bring the basket of blankets to the café.',fits:true,outcome:'The reader carries the basket of blankets to the café.',reply:'Now I know which basket you mean. We can cover the supper tables.',visual:'blankets'},{id:'folded',text:'Bring the basket holding folded blankets to the café.',fits:true,outcome:'The reader carries the basket holding folded blankets to the café.',reply:'That description helps me find the blankets for supper.',visual:'blankets'},{id:'seeds',text:'Bring the basket of seed packets to the café.',fits:false,outcome:'The reader carries the seed packets to the café.',reply:'I could follow that note, but Rabbit asked for blankets for supper. Would you like to revise it?',visual:'seeds'}],
   reason:'I want the café tables to feel welcoming after the storm.',reply:'I can bring the blankets for the supper tables.',
   help:'Compare the labels on the two baskets with Rabbit’s request. Which label names what Rabbit needs?',example:'A different note: two coats are hanging by a door. “Bring my coat” leaves a question. “Bring my raincoat with the star patch” identifies one coat.'},
- {id:'seed-packet',title:'Where do the seeds go?',focus:'Name the destination',actor:'pip',scenePlace:'garden',
+ {id:'seed-packet',title:'Where do the seeds go?',focus:'Name the destination',actor:'pip',senderName:'The gardener',scenePlace:'garden',
   scene:'Pip holds one seed packet at the Post Office. The garden bed has empty rows waiting. The footbridge path is swept clean after the storm.',
   sceneParts:[{id:'packet',label:'Seed packet',prop:'letter',place:'Post Office'},{id:'garden',label:'Garden bed',prop:'basket',place:'Garden'},{id:'bridge',label:'Footbridge',prop:'letter',place:'Footbridge'}],
   request:'The gardener asks Pip to carry the seed packet to the garden bed, ready for planting after the storm.',
@@ -19,7 +19,7 @@ const cases = [
   cards:[{id:'original',text:'Take the seed packet there.',fits:false,outcome:'The reader pauses with the packet.',reply:'Where should I take the seed packet: the garden bed or the footbridge?',visual:'ask'},{id:'garden',text:'Take the seed packet to the garden bed.',fits:true,outcome:'The reader carries the seed packet to the garden bed.',reply:'Now I know where to go. The seeds will be ready for planting.',visual:'garden'},{id:'plant',text:'Carry the seed packet to the garden bed for planting.',fits:true,outcome:'The reader carries the seed packet to the garden bed for planting.',reply:'To the garden bed, for planting. Off I go!',visual:'garden'},{id:'bridge',text:'Take the seed packet to the footbridge.',fits:false,outcome:'The reader carries the seed packet to the footbridge.',reply:'I could follow that note, but the gardener needs the packet at the garden bed. Would you like to revise it?',visual:'bridge'}],
   reason:'I want the new plants to have somewhere to start.',reply:'I will take the packet to the garden bed.',
   help:'Look at the destination named in the gardener’s request. A clear note can name that place instead of “there.”',example:'A different note: a parcel could go to a library or a bakery. “Put it there” leaves a question. “Put the parcel on the library desk” names the destination.'},
- {id:'flags',title:'What should happen to the flags?',focus:'Name the action',actor:'dot',scenePlace:'bridge',
+ {id:'flags',title:'What should happen to the flags?',focus:'Name the action',actor:'dot',senderName:'The bridge keeper',scenePlace:'bridge',
   scene:'Dot stands at the footbridge with a pile of flags and a folded flag on a bench. A line across the footbridge is empty, ready for welcome-back flags.',
   sceneParts:[{id:'flags',label:'Pile of flags',prop:'flags',place:'Footbridge'},{id:'line',label:'Empty flag line',prop:'flags',place:'Across the footbridge'},{id:'bench',label:'Folded flag on the bench',prop:'flags',place:'Footbridge'}],
   request:'The bridge keeper asks Dot to hang the flags across the footbridge to welcome neighbors home after the storm.',
