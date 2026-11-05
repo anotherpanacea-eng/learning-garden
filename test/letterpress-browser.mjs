@@ -69,7 +69,7 @@ try{
    else if(event==='reload')await p.reload();
    else{
     const before=await read(p);await p.goto(base+'#notes');const [download]=await Promise.all([p.waitForEvent('download'),p.locator('#download').tap()]);const bytes=await readFile(await download.path()),data=JSON.parse(bytes.toString());eq(data.wordRoom,before.wordRoom,'Notes carries old packets exactly');eq(Object.hasOwn(data,'letterpress'),false,'no new progress root');
-    await p.locator('#progress-file').setInputFiles({name:'synthetic-letters.json',mimeType:'application/json',buffer:bytes});await p.locator('#progress-import-confirm').tap();await p.locator('#reset').tap();await p.locator('#confirm-reset').tap();await p.goto(base+'#words/letterpress');
+    await p.locator('#progress-file').setInputFiles({name:'synthetic-letters.json',mimeType:'application/json',buffer:bytes});await p.locator('#progress-import-confirm').tap();await p.locator('#reset').tap();await p.locator('#confirm-reset').tap();await p.locator('[data-film-skip]').click();await p.goto(base+'#words/letterpress');
    }
    await ready(p);await tap(p,'print');eq(await p.locator('[data-lp-action=wallSelect]').count(),0,event+' has fresh visit');
    if(event!=='reload'){await p.evaluate(()=>window.__lpOwnerLate.click());eq(await p.locator('#lp-place-0').innerText(),'c',event+' old control inert');}
