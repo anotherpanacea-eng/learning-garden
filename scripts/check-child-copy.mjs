@@ -776,6 +776,24 @@ export const copyScopes = [
   {path:"dist/river-market-core.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/rod-tray-core.mjs",adultBlocks:[],quotations:[]},
   {path:"dist/science-core.mjs",adultBlocks:[],quotations:[]},
+  // LG-2b batch21: remaining existing source modules.
+  {path:"dist/seed-pile-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/shutters-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/sky-notes-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/sorting-desk-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/stained-map-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/style-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/town-day.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/two-letters-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/two-windows-art.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/upstream-exchange-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/willow-double-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/word-list-shelf-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/word-room-sounds-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/lens-photo.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/photo-study-content.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/photo-study-core.mjs",adultBlocks:[],quotations:[]},
+  {path:"dist/photo-study-ui.mjs",adultBlocks:[],quotations:[]},
 
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
