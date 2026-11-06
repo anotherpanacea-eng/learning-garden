@@ -1,6 +1,6 @@
-"""Two Threads387: actual-app reading order, English lifecycle and Notes recovery.
+"""Two Threads387 / Follow an Echo398: actual-app reading and Notes recovery.
 
-One full tablet journey and narrow phone/wide samples use ordinary app modules.
+Full order and echo journeys plus focused phone/wide samples use ordinary app modules.
 Explicitly isolated actual-UI harnesses cover refused parent edits and external
 context faults. Synthetic notebooks/device speech only; no physical Apple,
 audible-output, independent-reading or learning qualification.
@@ -89,6 +89,76 @@ def journey(browser,base,seed):
   p.screenshot(path=str(OUT/'tablet.png'),full_page=True);after=copy.deepcopy(h.book(p));saved=after.pop('threadReadings');h.ok(after==before,'reading orders preserve the parent, facts and every large unrelated notebook root');report=h.export_notes(p,'two-threads-kept');h.ok(report['threadReadings']==saved,'actual Notes export preserves exact sources and orders');return report
  finally:c.close()
 
+def echo_choose(p,side,id):
+ click(p,'echo-side',side)
+ for _ in range(4):
+  prev=p.locator(sel('echo-quote-page',-1))
+  if not prev.count() or prev.is_disabled():break
+  prev.click()
+ for _ in range(4):
+  node=p.locator(sel('echo-card',id))
+  if node.count():node.click();return
+  click(p,'echo-quote-page',1)
+ raise AssertionError('Missing exact passage '+id)
+def echo_pair(p):return p.locator('[data-tt-echo-pair]').inner_text()
+def echo_journey(browser,base,seed):
+ print('Follow an Echo398: actual-app connections, frozen sources and Notes',flush=True)
+ c,p=setup(browser,base,seed)
+ try:
+  p.evaluate(SPEECH_FIXTURE);before=copy.deepcopy(h.book(p));enter(p);scene(p,'b1');move(p,-1,2);waiting=order(p)
+  click(p,'turn','echo');bounds(p);h.ok(p.locator('#tt-echo-title').evaluate('e=>e===document.activeElement'),'Echo tab focuses the activity heading');h.ok(p.locator(sel('echo-connect')).is_disabled(),'no preselected lens or supplied pair is recorded as a child connection')
+  echo_choose(p,'left','shut');echo_choose(p,'right','opened');h.ok(p.locator(sel('echo-connect')).is_disabled(),'choosing two passages still requires an explicit lens')
+  click(p,'echo-lens','words');click(p,'echo-connect');h.ok(p.locator('[data-tt-echo-link]').count()==1,'explicit pair and lens make one ungraded connection')
+  focused=echo_pair(p);click(p,'echo-context','left');h.ok('Leena carried the photograph flat between two boards.' in p.locator('[data-tt-echo-surface="context"]').inner_text(),'quote context contains the complete scene, not only the excerpt')
+  click(p,'echo-context-step',1);h.ok('An unfamiliar voice described the footbridge' in p.locator('[data-tt-echo-surface="context"]').inner_text(),'context advances in the child’s current reading order')
+  click(p,'echo-back');h.ok(echo_pair(p)==focused,'full context navigation preserves the focused pair')
+  click(p,'turn','arrange');h.ok(order(p)==waiting and p.locator('[data-tt-scene-panel]').get_attribute('data-tt-selected')=='b1','Echo context preserves reading order and the earlier selected scene')
+  click(p,'turn','echo');click(p,'echo-reference');h.ok('A pattern heard two ways' in p.locator('[data-tt-echo-surface="reference"]').inner_text(),'reference is an elected reader connection')
+  payload=hear(p);h.ok('A question about partial knowledge' not in payload,'reference Hear excludes unselected reference pages')
+  click(p,'echo-reference-page',1);click(p,'echo-back');h.ok(echo_pair(p)==focused,'browsing reader interpretations does not replace the own pair')
+  click(p,'echo-teach');payload=hear(p);h.ok('empty appears twice' in payload and 'The story does not say who left the seed.' not in payload,'worked-example Hear includes only the elected frame')
+  click(p,'echo-demo-step',1);click(p,'echo-demo-frame',0);click(p,'echo-back')
+  echo_choose(p,'left','pattern');echo_choose(p,'right','taps');click(p,'echo-lens','image');click(p,'echo-connect')
+  click(p,'echo-link',0);echo_choose(p,'left','guess');h.ok(p.locator(sel('echo-remove')).is_disabled(),'editing a focused link clears its removal target')
+  click(p,'echo-connect');h.ok(p.locator('[data-tt-echo-link]').count()==3,'a changed pair makes its own connection rather than overwriting an earlier one')
+  click(p,'echo-remove');h.ok(p.locator('[data-tt-echo-link]').count()==2,'Remove affects only the currently displayed selected connection')
+  echo_choose(p,'left','opened');echo_choose(p,'right','shut');click(p,'echo-lens','words');click(p,'echo-connect')
+  h.ok(p.locator('[data-tt-echo-link]').count()==2 and 'already' in p.locator('#tt-status').inner_text(),'reversed duplicate focuses the earlier pair without another stored link')
+  echo_choose(p,'left','shut');echo_choose(p,'right','part');click(p,'echo-lens','words');click(p,'echo-connect')
+  labels=p.locator('[data-tt-echo-link]').evaluate_all('xs=>xs.map(x=>x.textContent.replace(/\\s+/g," ").trim())')
+  h.ok(labels[0]!=labels[2] and 'part of her knocking' in labels[2],'different connections from the same scenes show distinct passage words')
+  h.ok(all(p.get_by_role('button',name=name,exact=True).count()==1 for name in labels),'saved connections have unique actual accessible names in the same-scene case')
+  click(p,'echo-remove')
+  click(p,'keep');first=copy.deepcopy(sheets(p)[0]);ew=first['work']['echoes'];h.ok(len(ew['links'])==2 and ew['referenceShown'] and ew['teachingSeen']==2,'Keep freezes connections and their distinct elected help')
+  h.ok(first['work']['referenceShown']==False and first['work']['teachingSeen']==0,'Echo help does not claim the unrelated writer-order support')
+  click(p,'echo-link',1);h.ok(sheets(p)[0]==first and 'two taps' in echo_pair(p),'a kept link is browsed without changing its saved fields')
+  h.ok(p.locator(sel('echo-side','left')).is_disabled(),'kept side choices cannot edit frozen work')
+  click(p,'copy');h.ok('two taps' in echo_pair(p),'a new copy adopts the visited link focus')
+  echo_choose(p,'left','guess');click(p,'echo-connect');changed=echo_pair(p)
+  click(p,'back');p.locator('[data-ev-root]').wait_for();h.ok(h.book(p)['evidenceVoice']==before['evidenceVoice'],'Back preserves the original English paragraph and annotation')
+  enter(p);h.ok(echo_pair(p)==changed,'English Back and reentry preserve the waiting echo copy')
+  open_sheet(p,'thread-reading-1');click(p,'turn','echo');click(p,'echo-link',0);click(p,'copy');h.ok(echo_pair(p)==changed,'returning to an existing copy never refocuses away from waiting edits')
+  click(p,'keep');h.ok(sheets(p)[0]==first and len(sheets(p)[1]['work']['echoes']['links'])==3,'copy keeps new material without rewriting its original')
+  click(p,'draft');click(p,'turn','echo');echo_choose(p,'left','frame');click(p,'keep');h.ok(sheets(p)[2]['work']['echoes']['left']=='frame' and sheets(p)[2]['work']['echoes']['right'] is None and sheets(p)[2]['work']['echoes']['lens'] is None,'unfinished one-side/null-lens material is keepable')
+  p.reload(wait_until='networkidle')
+  p.locator('[data-select-explorer],[data-ev-threads]').first.wait_for()
+  active=p.evaluate('JSON.parse(localStorage.getItem("learning-garden-explorers")).activeId')
+  if p.locator('[data-select-explorer="'+active+'"]').count():p.locator('[data-select-explorer="'+active+'"]').click()
+  p.locator('[data-ev-threads]').wait_for();enter(p);open_sheet(p,'thread-reading-1');click(p,'turn','echo');click(p,'echo-link',1);h.ok('two taps' in echo_pair(p),'reload retains source-owned connections for browsing')
+  after=copy.deepcopy(h.book(p));after.pop('threadReadings');h.ok(after==before,'Echo changes no parent or unrelated notebook root')
+  report=h.export_notes(p,'echo-kept');h.ok(report['threadReadings'][0]==first,'actual Notes exports the exact study and annotation work')
+  old=copy.deepcopy(first);old['id']='thread-reading-40';old['source'].pop('echoStudy');old['source']['title']='Earlier echo-free edition';old['work'].pop('echoes')
+  bad=copy.deepcopy(first);bad['id']='thread-reading-41';bad['work']['echoes']['links'].append({'left':'missing-card','right':'shut','lens':'words','future':['untouched']})
+  report['threadReadings'] += [old,bad]
+  p.locator('#progress-file').set_input_files({'name':'synthetic-echo-history.json','mimeType':'application/json','buffer':json.dumps(report).encode()});p.locator('#progress-import-confirm').click();p.locator('#progress-import-status').filter(has_text='Notebook brought').wait_for()
+  p.evaluate('location.hash="#learn/english"');p.locator('[data-ev-threads]').wait_for();enter(p);open_sheet(p,'thread-reading-40');click(p,'turn','echo')
+  h.ok('no echo cards' in p.locator('[data-tt-root]').inner_text() and not p.locator('[data-tt-echo-choice]').count(),'historical echo-free source is not backfilled from the current catalogue')
+  click(p,'copy');click(p,'keep');h.ok('echoStudy' not in sheets(p)[-1]['source'] and 'echoes' not in sheets(p)[-1]['work'],'copying and keeping an echo-free source preserves its absence')
+  open_sheet(p,'thread-reading-41');click(p,'turn','echo');h.ok('cannot be shown' in p.locator('[data-tt-root]').inner_text(),'malformed optional annotations are reported without closing the reading')
+  click(p,'echo-link',1);h.ok('two taps' in echo_pair(p),'readable links remain available beside an unreadable link')
+  click(p,'turn','read');h.ok(p.locator('[data-tt-scene-panel]').count()==1 and sheets(p)[-2]==bad,'the full scene reader and malformed raw annotations remain intact')
+ finally:c.close()
+
 def historical(report):
  r=copy.deepcopy(report);old=copy.deepcopy(r['threadReadings'][0]);old.update(id='thread-reading-80',futureOuter={'keep':True});s=old['source'];s.update(id='earlier-source',title='Earlier <threads> & full text',threads=[{'id':'north','label':'Earlier northern thread','symbol':'dots'},{'id':'south','label':'Earlier southern thread','symbol':'stripe'}],scenes=[{'id':'q','title':'Earlier first','threadIds':['north'],'paragraphs':['Earlier first paragraph.','Earlier second paragraph.']},{'id':'r','title':'Earlier second','threadIds':['south'],'paragraphs':['Earlier other thread.']},{'id':'s','title':'Earlier shared','threadIds':['north','south'],'paragraphs':['Earlier shared ending.']}],startOrder=['q','r','s'],authorOrder=['q','s','r'],writerNote='Earlier unique writer commentary.',demo={'title':'Earlier distinct demo','threads':[{'id':'u','label':'Earlier demo U','symbol':'stripe'},{'id':'v','label':'Earlier demo V','symbol':'dots'}],'scenes':[{'id':'u1','title':'Earlier U','threadIds':['u'],'paragraphs':['An earlier U scene.']},{'id':'v1','title':'Earlier V','threadIds':['v'],'paragraphs':['An earlier V scene.']},{'id':'uv','title':'Earlier meeting','threadIds':['u','v'],'paragraphs':['An earlier shared demo scene.']}]},teaching=[{'text':'Earlier teaching one.','order':['u1','v1','uv']},{'text':'Earlier teaching two.','order':['uv','v1','u1']}],futureSource={'keep':True})
  old['work']={'v':1,'order':['s','r','q'],'referenceShown':True,'teachingSeen':2,'futureWork':{'keep':True}};r['threadReadings']=[{'id':'thread-reading-900','v':99,'raw':['kept']},old]+r['threadReadings'];return r
@@ -109,6 +179,7 @@ def samples(browser,base,seed):
   c,p=setup(browser,base,seed,width)
   try:
    enter(p);scene(p,'b1');move(p,-1);bounds(p);click(p,'turn','read');bounds(p);p.screenshot(path=str(OUT/('phone.png' if width==320 else 'wide.png')),full_page=True)
+   click(p,'turn','echo');echo_choose(p,'left','wrong-entrance');echo_choose(p,'right','headphones');click(p,'echo-lens','image');bounds(p);p.screenshot(path=str(OUT/f'echo-{width}.png'),full_page=True);click(p,'echo-context','left');bounds(p)
   finally:c.close()
 
 def storage(browser,base,seed):
@@ -116,9 +187,9 @@ def storage(browser,base,seed):
   c,p=setup(browser,base,seed)
   try:
    if fault=='saving-off':p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#learn/english"');p.locator('[data-ev-threads]').wait_for()
-   enter(p);scene(p,'b1');move(p,-1);before=p.evaluate('JSON.stringify(localStorage)')
+   enter(p);scene(p,'b1');move(p,-1);click(p,'turn','echo');echo_choose(p,'left','pattern');before=p.evaluate('JSON.stringify(localStorage)')
    if fault=='quota-device-api':p.evaluate('()=>{Storage.prototype.setItem=function(){throw new DOMException("Synthetic quota refusal","QuotaExceededError")};}')
-   click(p,'keep');h.ok(p.evaluate('JSON.stringify(localStorage)')==before,fault+' Keep does not pretend to persist failed/disabled device storage');out=h.export_notes(p,'two-threads-'+fault);h.ok(out['threadReadings'][-1]['work']['order']==['a1','a2','b1','a3','b2','b3','together'],fault+' actual Notes download recovers the kept open-page order')
+   click(p,'keep');h.ok(p.evaluate('JSON.stringify(localStorage)')==before,fault+' Keep does not pretend to persist failed/disabled device storage');out=h.export_notes(p,'two-threads-'+fault);h.ok(out['threadReadings'][-1]['work']['order']==['a1','a2','b1','a3','b2','b3','together'],fault+' actual Notes download recovers the kept open-page order');h.ok(out['threadReadings'][-1]['work']['echoes']['left']=='pattern',fault+' actual Notes recovers the unfinished echo material')
   finally:c.close()
 
 # Explicit actual-UI harness: only the preflight/context can be refused externally.
@@ -146,7 +217,7 @@ def stale(browser,base,seed):
   def start():install(p,seed);enter(p)
   def baseline():return p.evaluate('JSON.stringify([ttHarness.original,ttHarness.book,ttHarness.saves,ttHarness.renders,ttSpoken,ttStops])')
   def dispatch(e,event='click'):e.evaluate('(e,t)=>e.dispatchEvent(t==="click"?new MouseEvent(t,{bubbles:true,cancelable:true}):new Event(t,{bubbles:true,cancelable:true}))',event)
-  start();scene(p,'b1');move(p,-1);waiting=order(p);p.evaluate('ttHarness.allow=false');before=p.evaluate('JSON.stringify(ttHarness.book)');click(p,'keep');h.ok(p.evaluate('JSON.stringify(ttHarness.book)')==before and order(p)==waiting and p.locator('#tt-status').inner_text(),'refused real Notes preflight preserves order, words and notebook');p.evaluate('ttHarness.allow=true');click(p,'keep');h.ok(p.evaluate('ttHarness.book.threadReadings[0].work.order')==waiting,'same refused order remains keepable')
+  start();scene(p,'b1');move(p,-1);waiting=order(p);p.evaluate('ttHarness.allow=false');before=p.evaluate('JSON.stringify(ttHarness.book)');click(p,'keep');h.ok(p.evaluate('JSON.stringify(ttHarness.book)')==before and order(p)==waiting and p.locator('#tt-status').inner_text(),'injected preflight refusal preserves order, words and notebook');p.evaluate('ttHarness.allow=true');click(p,'keep');h.ok(p.evaluate('ttHarness.book.threadReadings[0].work.order')==waiting,'same refused order remains keepable')
   for fault in ['owner','book','inactive','root-identity','root-bytes','control-ancestor','root-ancestor','outer-hidden','outer-aria-hidden','route','disabled']:
    start();e=p.locator(sel('hear')).element_handle();payload=e.get_attribute('data-speak');scripts={'owner':'ttHarness.owner="other-owner"','book':'ttHarness.book=structuredClone(ttHarness.book)','inactive':'ttHarness.active=false','root-identity':'ttHarness.book.threadReadings=[]','root-bytes':'ttHarness.book.threadReadings={raw:"outside"}','outer-hidden':'document.querySelector("main").hidden=true','outer-aria-hidden':'document.querySelector("main").setAttribute("aria-hidden","true")','route':'history.replaceState(null,"","#learn/english/stale")','disabled':'document.querySelector("[data-tt-hear]").disabled=true'}
    if fault=='control-ancestor':e.evaluate('e=>{const x=document.createElement("section");e.parentNode.append(x);x.append(e)}')
@@ -162,6 +233,8 @@ def stale(browser,base,seed):
    elif action=='card':click(p,'keep');click(p,'shelf');e=p.locator('[data-tt-card]').first.element_handle();event='click'
    else:e=p.locator(sel('keep')).element_handle();event='click'
    p.evaluate('ttHarness.owner="other-owner"');before=baseline();dispatch(e,event);h.ok(baseline()==before,'stale '+action+' cannot edit, navigate, disclose or keep')
+  start();before=order(p);p.locator(sel('move',1)).evaluate('e=>{const parent=e.parentNode;e.remove();parent.append(e);e.click()}');h.ok(order(p)==before,'same-parent removed/reinserted order control is inert')
+  start();click(p,'turn','echo');click(p,'echo-side','left');p.locator(sel('echo-card','shut')).evaluate('e=>{const parent=e.parentNode;e.remove();parent.append(e);e.click()}');h.ok(p.locator('[data-tt-echo-surface=cards]').count()==1,'same-parent removed/reinserted new quote control is inert')
   start();click(p,'keep');copybutton=p.locator(sel('copy')).element_handle();p.evaluate('ttHarness.book.threadReadings[0].source.title="External source edit"');before=baseline();dispatch(copybutton);h.ok(baseline()==before,'in-place retained source edits invalidate captured Copy')
   start();root=p.locator(sel('root')).element_handle();old=p.locator(sel('keep')).element_handle();click(p,'back');root.evaluate('e=>document.querySelector("main").append(e)');before=baseline();dispatch(old);h.ok(baseline()==before,'detached child controls stay inert after a controlled Back')
   install(p,seed);button=p.locator('[data-ev-threads]').element_handle();p.evaluate('ttHarness.owner="other-owner"');before=baseline();dispatch(button);h.ok(baseline()==before and not p.locator(sel('root')).count(),'stale parent entry stays inert')
@@ -178,7 +251,7 @@ def main():
   with sync_playwright() as pw:
    browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
    try:
-    report=journey(browser,base,seed);transfer(browser,base,seed,report);samples(browser,base,seed);storage(browser,base,seed);dirty_parent(browser,base,seed);stale(browser,base,seed);h.ok(not h.errors,'no page/console/HTTP errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
+    report=journey(browser,base,seed);echo_journey(browser,base,seed);transfer(browser,base,seed,report);samples(browser,base,seed);storage(browser,base,seed);dirty_parent(browser,base,seed);stale(browser,base,seed);h.ok(not h.errors,'no page/console/HTTP errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
    except Exception:
     (OUT/'failure.txt').write_text(traceback.format_exc())
     for ci,context in enumerate(browser.contexts):
