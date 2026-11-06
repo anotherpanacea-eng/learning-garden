@@ -298,7 +298,7 @@ const source={
   "Follow a question from an early chapter into a later one. What has been answered, and what remains open?",
   "Compare a return to a person or place. What feels familiar, and what changes?",
   "Choose two moments involving the same character. Which details would you want a new reader to compare?",
-  "A chapter can reveal an event that happened earlier. In chapter11, what do we learn happened while Toad was in prison? Compare when it happened with when a reader hears about it."
+  "A chapter can reveal an event that happened earlier. In chapter 11, what do we learn happened while Toad was in prison? Compare when it happened with when a reader hears about it."
  ],
  "examples": [
   {
@@ -311,7 +311,7 @@ const source={
     "home-call",
     "loyalty"
    ],
-   "text": "One reader can connect Mole’s rush away from home with the pull of home in chapter5. A new friendship and an old place can both matter. The excerpts offer details to discuss; read the complete chapters to hear how the narration makes each moment feel."
+   "text": "One reader can connect Mole’s rush away from home with the pull of home in chapter 5. A new friendship and an old place can both matter. The excerpts offer details to discuss; read the complete chapters to hear how the narration makes each moment feel."
   },
   {
    "title": "The familiar face",
@@ -322,7 +322,7 @@ const source={
     "face-first",
     "face-return"
    ],
-   "text": "The description of Rat’s face returns with words rearranged and some details left out. Mole meets Rat in chapter1; Toad recognizes him in chapter10. A reader could explore how recognition changes the second appearance. Chapter11 shows Rat’s response, so read on before deciding that the reunion is only comforting."
+   "text": "The description of Rat’s face returns with words rearranged and some details left out. Mole meets Rat in chapter 1; Toad recognizes him in chapter 10. A reader could explore how recognition changes the second appearance. Chapter 11 shows Rat’s response, so read on before deciding that the reunion is only comforting."
   },
   {
    "title": "Enthusiasm and consequences",
@@ -332,7 +332,7 @@ const source={
    "quoteIds": [
     "motorcar"
    ],
-   "text": "Toad’s excitement about cars in chapter2 can raise a question about what he will do next. Chapter6 supplies particular choices and consequences. Toad’s excited speech alone does not explain those later events; open both complete chapters and compare them."
+   "text": "Toad’s excitement about cars in chapter 2 can raise a question about what he will do next. Chapter 6 supplies particular choices and consequences. Toad’s excited speech alone does not explain those later events; open both complete chapters and compare them."
   }
  ],
  "demo": {
