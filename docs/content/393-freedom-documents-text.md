@@ -173,7 +173,7 @@ The order below is literal and stable in a frozen source; no runtime outcome-bas
 
 **shared-language / later:** What comparison can these excerpts support?
 1. Both use rights language for different political purposes. **fits** — Compare d-claim with p-rights, then their different announcements or requests.
-2. No comparison is possible until we know every later outcome. **different** — Outcomes remain unanswered, but the supplied wording and purposes can still be compared.
+2. No comparison is possible until we know every later outcome. **different** — Outcomes remain unanswered, but the wording and purposes here can still be compared.
 3. Similar wording proves every signer copied the Declaration directly. **different** — Wording alone does not establish who read or copied which text.
 
 **limits / later:** What further question requires evidence beyond these excerpts?
