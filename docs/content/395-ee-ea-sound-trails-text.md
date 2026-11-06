@@ -106,7 +106,7 @@ bead/head — title bead and head; controls Compare bead and head. Text: Say bea
 
 ## Shared note
 
-Title: A note for the puppet picnic.
+Title: A note for the puppet picnic
 Text: Meet us at the prop table. Put the meat by the seed. We feed the puppet. Put a bead on the puppet's head.
 Guide: Read together. Your partner can supply any word. Find ee and ea. Compare the vowel in bead and head.
 Each of the six target words appears once; all other tokens are partner-supplied. This is shared reading, not a controlled decodable passage.

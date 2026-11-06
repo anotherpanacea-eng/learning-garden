@@ -176,6 +176,7 @@ async function teamsJourney(p,width){
  await p.evaluate(()=>{window.__trailRefuse=false;window.__trailStorageMutations=0;});
  const before=await read(p),stored=await disk(p);await tap(p,'set','teams');
  eq(await p.locator('[data-wrt-action=set][data-wrt-value=teams]').getAttribute('aria-pressed'),'true','sixth set is selected');
+ if(width===820){const widths=await p.locator('.wrt-sets button').evaluateAll(xs=>xs.map(x=>x.getBoundingClientRect().width));ok(Math.max(...widths)-Math.min(...widths)<1.1,'all six set buttons remain visual peers rather than a selected title banner');}
  eq(await p.locator('#wr-task').innerText(),'seed','sixth set starts on its own seed');eq(await p.locator('[data-wrt-note]').evaluate(n=>n.open),false,'earlier note does not open teams note');
  for(const id of width===820?['seed','feed','meet','meat','bead','head']:['head']){
   await tap(p,'word',id);

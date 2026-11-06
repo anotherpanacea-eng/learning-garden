@@ -390,7 +390,7 @@ export const vowelTeamsMaterial = {
     "head": "The reference is /h ɛ d/. The earlier bed card can help recall this vowel. Bead and head differ in both first phoneme and vowel, while their final /d/ is shared. Head is a selected alternative for ea, not a rule that every ea has /ɛ/. The partner may supply the comparison word bed; no independent reading of bed is assumed."
   },
   "note": {
-    "title": "A note for the puppet picnic.",
+    "title": "A note for the puppet picnic",
     "text": "Meet us at the prop table. Put the meat by the seed. We feed the puppet. Put a bead on the puppet's head.",
     "guide": "Read together. Your partner can supply any word. Find ee and ea. Compare the vowel in bead and head."
   },
