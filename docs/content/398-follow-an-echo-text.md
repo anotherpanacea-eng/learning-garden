@@ -1,6 +1,6 @@
 #398 · Complete original echo study and interface text
 
-The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under The Second Knock. All8extracts below are exact substrings of their own paragraph0; the chapter order stays387’s. These are newly authored commentary and a complete original miniature, not external quotations or a public-domain novel substitute. References are interpretations with explicit limits, not keys.
+The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under The Second Knock. All11extracts below are exact substrings of their own paragraph0; the chapter order stays387’s. These are newly authored commentary and a complete original miniature, not external quotations or a public-domain novel substitute. References are interpretations with explicit limits, not keys.
 
 ## Frozen study for new source copies
 
@@ -12,15 +12,15 @@ The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under
   "invitations": [
     {
       "id": "sound",
-      "prompt": "Follow a sound that returns. What has changed when someone hears it again?"
+      "prompt": "Who makes or hears a sound in these scenes? Choose two moments and describe what each person can hear."
     },
     {
       "id": "knowledge",
-      "prompt": "Find words about knowing only part of something. Do they connect different situations?"
+      "prompt": "Choose two passages where someone has only part of the picture. What might the other scene add, or leave unknown?"
     },
     {
       "id": "door",
-      "prompt": "Follow a doorway through the story. Does it keep the same job for the people who meet it?"
+      "prompt": "Where does a door or entrance appear? What is it doing for the person there?"
     }
   ],
   "cards": [
@@ -40,7 +40,7 @@ The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under
       "id": "wrong-entrance",
       "sceneId": "b2",
       "paragraphIndex": 0,
-      "text": "He went to the front entrance and looked down the empty steps. The courtyard was on the other side of the building."
+      "text": "Rowan lifted one ear of the headphones. Was that a knock? He went to the front entrance and looked down the empty steps. The courtyard was on the other side of the building."
     },
     {
       "id": "pattern",
@@ -70,7 +70,25 @@ The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under
       "id": "opened",
       "sceneId": "together",
       "paragraphIndex": 0,
-      "text": "“I thought you had gone,” Rowan said when the door opened."
+      "text": "“I thought you had gone,” Rowan said when the door opened. “I thought you hadn't heard,” Leena answered."
+    },
+    {
+      "id": "headphones",
+      "sceneId": "b3",
+      "paragraphIndex": 0,
+      "text": "He took off the headphones completely and walked around it."
+    },
+    {
+      "id": "guess",
+      "sceneId": "a2",
+      "paragraphIndex": 0,
+      "text": "Perhaps they had forgotten her."
+    },
+    {
+      "id": "frame",
+      "sceneId": "a3",
+      "paragraphIndex": 0,
+      "text": "Through the glass she could see a strip of bright wall and the edge of an empty frame. Someone had made room for the photograph."
     }
   ],
   "references": [
@@ -79,39 +97,39 @@ The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under
       "left": "pattern",
       "right": "taps",
       "lens": "image",
-      "text": "Leena makes a pattern of two knocks, a wait, and two more. Rowan hears two taps, a pause, and two more. Different words let a reader recognize the pattern from both sides. Rowan then moves toward the courtyard. This does not prove he deliberately ignored the earlier knock."
+      "text": "These passages describe a two-knock pattern from Leena’s and Rowan’s sides. “Knocked twice” and “two taps” can point to the same sound without repeating the same word. Earlier, Rowan wondered whether he heard a knock and checked the front entrance; now he goes toward the courtyard glass. The pattern connects the accounts. Read those scenes to compare his responses."
     },
     {
       "title": "Whole and part",
       "left": "whole",
       "right": "part",
       "lens": "idea",
-      "text": "Rowan wants visitors to hear a fuller recorded account, yet neither person fully understands the other outside the display. The words whole and part connect different situations. One reading is that the story asks us to notice what we have not heard or seen. It does not establish that the recording is complete or that every missing detail changes a conclusion."
+      "text": "At the display, Rowan wants the “whole account”, “not just the part that sounded certain”. Near the ending, each person has heard or seen only part of the other’s actions. A reader could connect these words to the misunderstanding and to the value of looking again. The recording’s contents are not given here, so this link cannot tell us whether its account is complete."
     },
     {
-      "title": "A door changes its job",
+      "title": "The courtyard door",
       "left": "shut",
       "right": "opened",
       "lens": "words",
-      "text": "The courtyard door is shut when Leena arrives and opens when Rowan reaches her. One reader might see the same door changing from a barrier into a meeting place. Another might concentrate on the practical mistake about entrances. Neither connection proves what the people will always do."
+      "text": "At the start, the shut courtyard door separates Leena from the people inside. At the ending, it opens and two mistaken beliefs are spoken aloud. One possible reading is that the doorway moves from a barrier into a place to compare what each knows. A reader could focus instead on the mix-up between entrances. The closing sign may matter to that reading, but the story does not show how later visitors use it."
     },
     {
-      "title": "A tempting guess",
+      "title": "A question about partial knowledge",
       "left": "laughter",
       "right": "whole",
       "lens": "idea",
-      "text": "A reader could wonder whether the laughter came from the recording. The story says Leena hears laughter and Rowan tests a recording, but it never identifies the source of that laughter. Connecting these passages can raise a question; it cannot establish that cause."
+      "text": "Laughter without an answer leaves Leena guessing, while Rowan wants to give visitors a whole account. A reader might connect these passages through the problem of hearing too little. A different question is whether the laughter came from the recording. Its source is never identified, and Rowan’s headphones matter when weighing that guess. This pair can raise that question, but it does not settle where the laughter came from."
     }
   ],
   "demo": {
-    "title": "The Empty Places",
-    "text": "At dawn, Neri placed an empty bowl on the doorstep. She hoped her neighbor would visit. At noon, the bowl held a gift of seed, but the path was empty. Neri set another chair beside her own and waited.",
+    "title": "The Doorstep",
+    "text": "At dawn, Neri placed an empty bowl on the doorstep. At noon, the bowl held a gift of seed, but the path was empty. Neri set another chair beside her own and waited.",
     "first": "an empty bowl",
     "second": "the path was empty",
     "steps": [
-      "The word empty appears twice, but it describes different things: first the bowl, then the path. A repeated word need not name the same object.",
-      "The seed fills the bowl. The path is still empty, and Neri puts out another chair. One reading is that she is hoping for company as well as a gift. The chair is a detail that supports that reading.",
-      "This is one interpretation, not a measured feeling. You could discuss whether the waiting feels hopeful or lonely and point to words for your reading. The repeated word alone does not prove that Neri is ungrateful."
+      "The word empty appears twice in this story, but it describes different things: first the bowl, then the path. A repeated word need not name the same object.",
+      "At noon, the bowl holds a gift of seed, but the path is empty. Neri puts out another chair and waits. One reading is that she hopes someone will join her. The extra chair and the contrast between a full bowl and an empty path support that reading; the story does not state her thoughts.",
+      "We know what Neri does: she sets another chair and waits. We can discuss whether that waiting feels hopeful, lonely, or both, and point to words for a reading. The repeated word alone does not tell us who left the seed."
     ]
   }
 }
@@ -123,17 +141,18 @@ The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under
 {
   "intro": "The town collection needs readers who notice how a story works. Pair two passages, read their scenes, and tell someone what returns or changes.",
   "definition": "An echo in a story is a returning word, image, sound, or idea. It may change meaning in a new context. Repetition by itself does not prove a theme or the writer’s intention.",
-  "topic": "A topic names a subject, such as partial knowledge. An interpretation says something about how the story develops that subject. Use its words and explain your connection.",
+  "topic": "A topic names a subject, such as partial knowledge. An interpretation says something about how the story develops that subject. Use the story’s words and explain your connection.",
   "task": "Choose what you want to follow. Tell someone what connects these words—and what changes.",
   "same": "Choose two different cards to make a connection. Different lines from the same scene are welcome.",
-  "connected": "This connection is in your draft. Tell someone why you chose it; the app does not judge your explanation.",
+  "connected": "This connection is in your draft. Tell someone why you chose it.",
   "duplicate": "That pair and lens are already in your draft. Here is the earlier connection.",
   "removed": "This connection was removed from your draft. The other connections and reading order are unchanged.",
   "absent": "This earlier story has no echo cards. Its scenes and reading order are still open.",
   "unavailable": "These echo notes cannot be shown here. Their originals stay unchanged in Notes. The scenes and reading order are still open.",
   "referenceHeading": "One reader’s connections",
   "referenceNote": "These are possible readings, not an answer key. You can keep a different connection and explain it.",
-  "kept": "Work on a copy to change connections or see new help. You can revisit help already shown on this sheet."
+  "kept": "Work on a copy to change connections or see new help. You can revisit help already shown on this sheet.",
+  "lensNeeded": "Choose a lens before connecting these passages. It tells us what you want to follow, not whether your interpretation is right."
 }
 ```
 
