@@ -8,10 +8,10 @@ let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,
 const drawnArt={};for(const h of drawnHowtos)drawnArt[h.id]=await loadArt(h.id);
 ok(drawnHowtos.length>=80,'a how-to for every activity');eq(new Set(drawnHowtos.map(h=>h.id)).size,drawnHowtos.length,'how-to ids are unique');
 eq((await readdir(new URL('../dist/drawn-howtos/',import.meta.url))).sort(),drawnHowtos.map(h=>`${h.id}.mjs`).sort(),'every how-to has generated art and no orphan art remains');
-// Each page offers at most one how-to, and the three hand-placed ones are not offered again by the page heading.
+// Each page offers at most one how-to, and the hand-placed ones are not offered again by the page heading.
 const pages=drawnHowtos.flatMap(h=>h.at||[]);eq(new Set(pages).size,pages.length,'no page is claimed twice');
 for(const page of pages.map(p=>p.replace('/*','/example')))eq(howtoForPage('#'+page)?.at.includes(page)||howtoForPage('#'+page)?.at.some(a=>a.endsWith('/*')&&page.startsWith(a.slice(0,-1))),true,`#${page} finds its own how-to`);
-eq(['life-ring','shutters-play','rows-play'].map(id=>drawnHowto(id).at),[undefined,undefined,undefined],'hand-placed how-tos are not offered by page');
+eq(['life-ring','water-ring','shutters-play','rows-play'].map(id=>drawnHowto(id).at),[undefined,undefined,undefined,undefined],'hand-placed how-tos are not offered by page');
 eq([howtoForPage('#orchard/games/rows'),howtoForPage('#home'),howtoForPage('#cafe/nowhere')],[null,null,null],'pages without a how-to get none');
 eq(howtoForPage('#orchard/gather/dew-drop').id,'orchard-gather','a page family shares one how-to');
 for(const h of drawnHowtos){const a=drawnArt[h.id];

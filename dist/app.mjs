@@ -27,6 +27,7 @@ import {cellStudioPage,bindCellStudio,resetCellStudio} from './cell-studio-ui.mj
 import {pauseLiftFilm,stopLiftFilm} from './lift-film.mjs';
 import {liftYardPage,bindLiftYard,resetLiftYard,stopLiftMotion} from './lift-yard.mjs';
 import {pauseWaterFilm,stopWaterFilm} from './water-phase-film.mjs';
+import {pauseWaterRingFilm,stopWaterRingFilm} from './water-ring-film.mjs';
 import {soundWindowPage,bindSoundWindow,resetSoundWindow,pauseSoundFilm,stopSoundFilm,stopSoundTone} from './sound-window.mjs';
 import {switchTablePage,bindSwitchTable,resetSwitchTable,pauseSwitchFilm,stopSwitchFilm} from './switch-table.mjs';
 import {resetWaterPhase} from './water-phase.mjs';
@@ -221,9 +222,9 @@ import {designTablePage,designTableNotes,bindDesignTable,resetDesignTableView} f
 const $=s=>document.querySelector(s), main=$('#main');
 let bellPlayer=null,rhythmPlayer=null;
 const stopTones=(reason='page-change')=>{bellPlayer?.stop(reason);rhythmPlayer?.stop(reason);};
-const stopBell=(reason='page-change')=>{stopLiftMotion();stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopTones(reason);stopSoundTone(reason);pauseSoundFilm();pauseRhythmSong();pauseSwitchFilm();};
-const bellPlayback={play:(sequence,callbacks)=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopSoundTone('other-studio');pauseSoundFilm();pauseSwitchFilm();pauseRhythmSong();rhythmPlayer?.stop('other-studio');return (bellPlayer??=createBellPlayer()).play(sequence,callbacks);},stop:stopBell};
-const rhythmPlayback={play:(sequence,callbacks)=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopSoundTone('other-studio');pauseSoundFilm();pauseSwitchFilm();pauseRhythmSong();bellPlayer?.stop('other-studio');return (rhythmPlayer??=createRhythmPlayer()).play(sequence,callbacks);},stop:stopBell};
+const stopBell=(reason='page-change')=>{stopLiftMotion();stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();pauseWaterRingFilm();stopTones(reason);stopSoundTone(reason);pauseSoundFilm();pauseRhythmSong();pauseSwitchFilm();};
+const bellPlayback={play:(sequence,callbacks)=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();pauseWaterRingFilm();stopSoundTone('other-studio');pauseSoundFilm();pauseSwitchFilm();pauseRhythmSong();rhythmPlayer?.stop('other-studio');return (bellPlayer??=createBellPlayer()).play(sequence,callbacks);},stop:stopBell};
+const rhythmPlayback={play:(sequence,callbacks)=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();pauseWaterRingFilm();stopSoundTone('other-studio');pauseSoundFilm();pauseSwitchFilm();pauseRhythmSong();bellPlayer?.stop('other-studio');return (rhythmPlayer??=createRhythmPlayer()).play(sequence,callbacks);},stop:stopBell};
 document.addEventListener('click',e=>{if(e.target.closest('[data-speak],[data-preview-voice],a[href^="#"]'))stopBell('speech-or-navigation');},true);
 document.addEventListener('garden-speak-request',()=>stopBell('narration-request'),true);
 window.addEventListener('pagehide',()=>{stopBell('pagehide');stopSpeech();});
@@ -403,6 +404,7 @@ function render(){
   stopMillFilm();
   stopLiftFilm();
   stopWaterFilm();
+  stopWaterRingFilm();
   stopSoundFilm();
   stopSwitchFilm();
   stopRhythmSong();
@@ -608,22 +610,22 @@ function render(){
   if(hash==='#mill/energy'){
     routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):millEnergyPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMillEnergy(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#mill/energy',save:()=>{save();return {enabled:persist,ok:storageOK};},canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{stopMillEnergyMotion();stopLiftMotion();pauseLiftFilm();pauseWaterFilm();stopTones('mill-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('mill-film');stopSpeech();}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindMillEnergy(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#mill/energy',save:()=>{save();return {enabled:persist,ok:storageOK};},canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{stopMillEnergyMotion();stopLiftMotion();pauseLiftFilm();pauseWaterFilm();pauseWaterRingFilm();stopTones('mill-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('mill-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#workshop/lift'){
     routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):liftYardPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindLiftYard(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/lift',render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{pauseMillFilm();stopMillEnergyMotion();stopLiftMotion();pauseWaterFilm();stopTones('lift-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('lift-film');stopSpeech();}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindLiftYard(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/lift',render,stopSpeech,stopSound:stopBell,beforeMovie:()=>{pauseMillFilm();stopMillEnergyMotion();stopLiftMotion();pauseWaterFilm();pauseWaterRingFilm();stopTones('lift-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('lift-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#studio/sound-window'){
     routeHeader('#home');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):soundWindowPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSoundWindow(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#studio/sound-window',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforeTone:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopTones('sound-window');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSpeech();},beforeMovie:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopTones('sound-film');pauseRhythmSong();pauseSwitchFilm();stopSoundTone('sound-film');stopSpeech();}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSoundWindow(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#studio/sound-window',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforeTone:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();pauseWaterRingFilm();stopTones('sound-window');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSpeech();},beforeMovie:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();pauseWaterRingFilm();stopTones('sound-film');pauseRhythmSong();pauseSwitchFilm();stopSoundTone('sound-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#workshop/switch-table'){
     routeHeader('#workshop');
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):switchTablePage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSwitchTable(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/switch-table',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforePlay:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopSoundTone('switch-film');pauseSoundFilm();stopTones('switch-film');pauseRhythmSong();stopSpeech();}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindSwitchTable(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/switch-table',render,focus:focusElement,stopSpeech,stopSound:stopBell,beforePlay:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();pauseWaterRingFilm();stopSoundTone('switch-film');pauseSoundFilm();stopTones('switch-film');pauseRhythmSong();stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#science/ice'){
     routeHeader('#science');
@@ -761,12 +763,12 @@ function render(){
   if(['#almanac/weather','#almanac/tallies'].includes(hash)){
     routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):(hash==='#almanac/weather'?weatherPage(state,explorerStore.active.id):talliesPage(state,explorerStore.active.id));updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWeatherTally(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindWeatherTally(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,stopSpeech,stopSound:stopBell,beforeMovie:()=>{pauseMillFilm();stopMillEnergyMotion();stopLiftMotion();pauseLiftFilm();pauseWaterFilm();stopTones('water-ring-film');pauseRhythmSong();pauseSwitchFilm();pauseSoundFilm();stopSoundTone('water-ring-film');stopSpeech();}});bindSpeech();}return;
   }
   if(hash==='#studio/rhythm'){
     routeHeader();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):rhythmPage(state,explorerStore.active.id);updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRhythm(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,player:rhythmPlayback,stopSpeech,stopTones:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();stopSoundTone('rhythm-song');pauseSoundFilm();pauseSwitchFilm();stopTones('rhythm-song');}});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindRhythm(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,player:rhythmPlayback,stopSpeech,stopTones:()=>{stopMillEnergyMotion();pauseMillFilm();pauseLiftFilm();pauseWaterFilm();pauseWaterRingFilm();stopSoundTone('rhythm-song');pauseSoundFilm();pauseSwitchFilm();stopTones('rhythm-song');}});bindSpeech();}return;
   }
   if(hash==='#science/water-shares'){
     routeHeader('#science');

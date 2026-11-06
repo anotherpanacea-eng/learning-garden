@@ -22,4 +22,4 @@ The first focused closure found a new P1: the inherited -π/2 start placed cloud
 
 ## Verdict
 
-Focused independent Claude closure of the repaired spec and exact finite scientific text is pending. Do not begin runtime implementation before it resolves P1/P2. Film derivative acceptance remains an implementation gate even after the spec clears.
+BUILD-READY. Final independent Claude closure confirms all P1/P2 resolved: correct physical orientation, bounds-chosen inside labels, closed downhill film collection/evaporation junction, and specific rather than universal liquid-cloud wording. Its exact-copy check also clears the simplified finite scientific text. Film derivative visual/native qualification remains an implementation gate; this is not runtime clearance.
