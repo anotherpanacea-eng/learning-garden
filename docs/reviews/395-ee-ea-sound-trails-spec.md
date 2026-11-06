@@ -1,0 +1,12 @@
+#395 ee and ea · independent specification review
+
+2026-11-06. **BUILD-READY** after six independent lenses and complete finite linguistic/content review. Runtime and hosted acceptance remain unverified.
+
+- Completeness: the reviewer found six cards/30 frames, mappings, source fields, defaults, pair highlights, guidance, note and scene briefs fully specified. No findings.
+- Dependency/integration: the reviewer verified the actual closed factory, per-word reducer/reference, six explicit host insertion points, source-specific note class and notebook/owner/root/AbortController lifecycle. Adjacent two-letter/one-dot rendering was exercised in memory. No invented API or findings.
+- Scope/overlap: the reviewer found ee/ea vowel grouping distinct from x/qu, final-e, contextual exceptions and the u spelling-only model. The selected three-phoneme boundary is appropriate. No new framework or coverage claim.
+- Firewall: supplied words/pictures/partner speech and counters are not independent-reading evidence. The risk is accidentally passing trail actions into parent save/check handlers. Existing early returns and exact notebook/storage tests remain required;55audio hold is intact. No specification findings.
+- Mechanizability: finite expected maps, frames, pair differences, bounds, note partition and actual AX/lifecycle tests are feasible. Two P3 evidence qualifications were folded: unchanged bytes do not prove zero writes without a bounded mutation counter; actual Notes-capacity refusal is distinct from the synthetic hook. No new validation system.
+- Adversarial and finite linguistic/content: Claude checked all pinned CMU citations, bed anchor,30 frame/group alignments, three pair meanings, note partition, source seams, UFLI/IES references and Marble hard/soft edges. It found no phoneme/count error. Three P2s were resolved: say vowel letters, show seed-to-sprout panels, and show approaching then meeting. Targeted P3 context/scene, all-six compare keys and ve-renderer precedent fixes were folded. Focused closure returned BUILD-READY. Its last suggested one-line alt correction was adopted verbatim; the art direction about recognizable drumstick versus ham is separate from alt text.
+
+Actual scenes/accessibility, unchanged notebook/storage, lifecycle preservation and independent implementation clearance remain required. No audio, real oral performance, physical-device or learning qualification is claimed.

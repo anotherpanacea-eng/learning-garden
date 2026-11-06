@@ -13,6 +13,7 @@ export const copyScopes = [
   {path:'dist/letterpress-content.mjs',adultBlocks:[{start:'export const LETTERPRESS_GROWNUP=',end:'// End of the letterpress grown-up interpretation.',reason:'Only displayed in the folded grown-up interpretation; all child copy remains in scope.'}],quotations:[]},
   {path:'dist/letterpress-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/word-room-trails-content.mjs',adultBlocks:[{start:'export const TRAIL_GROWNUP=',end:'// End of the grown-up interpretation.',reason:'Shown only inside the folded grown-up interpretation; all child material remains in scope.'}],quotations:[]},
+  {path:'dist/word-room-vowel-teams-content.mjs',adultBlocks:[{start:'  "guide": {',end:'  "note": {',reason:'These per-word instructions are displayed only in the existing grown-up disclosure; shared note text remains in scope.'},{start:'  "extraGrownup":',end:'oral assessment."',reason:'Only displayed inside the existing grown-up interpretation.'}],quotations:[]},
   {path:'dist/word-room-trails-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/beat-bench-ui.mjs',adultBlocks:[{start:'function notesCases(',end:'\nexport const beatBenchEntry',reason:'Only used in Grown-up notes; child helpers remain in scope.'}],quotations:[]},
   {path:'dist/beat-bench-content.mjs',adultBlocks:[{start:'  "grownup":',end:'\n});',reason:'Only displayed in Grown-up notes.'}],quotations:[]},

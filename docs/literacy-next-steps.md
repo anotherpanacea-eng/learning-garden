@@ -57,6 +57,8 @@ For E1-I/II, study `mt_F978c32kDr` Single Letter Sounds, `mt__KHQttMde3` Blendin
 
 Both versions require authored support for constituent letter sounds, phoneme awareness and vocabulary. Neither graph licenses declaring these taught from a completed sorting bench. E1-III/IV word history and checking work remains useful alongside the foundation; an older arrival may choose it directly. E1-V/VI original application needs writing for an actual reader. Presentation and access remain independent of age, gender and task familiarity.
 
+[ee and ea395](specs/395-ee-ea-sound-trails.md) now commissions the selected adjacent-vowel bridge in the existing counter mat. Its finite linguistic/content and specification review are cleared, and its bounded implementation is in verification; the current roadmap owns release status. These six words contrast changed onset, homophones and an alternate ea vowel, without turning counters into reading evidence. Other adjacent teams and the larger foundation remain unfinished.
+
 ## Recommended tracks and build priorities
 
 The foundation and productive-writing tracks serve different starting needs and may progress in parallel; neither is a required child pathway through the other. The numbered recommendations below describe the original audit sequence:342–356 and345 have since delivered bounded parts of it, as recorded above. The357 archival source-copy revisit now has a bounded implementation; the roadmap links its independent review and release record. The original-message bridge remains available separately. Broader foundation, checking strategies and independently authored transfer remain unfinished.
