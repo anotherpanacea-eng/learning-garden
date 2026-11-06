@@ -20,3 +20,7 @@ Completeness/dependency/scope-overlap found no load-bearing gap. Existing Copy F
 ## Verdict
 
 Focused independent closure of the repaired specification and exact finite text is pending. No runtime code yet. The mathematical model itself is independently sound; the closure checks whether its teaching/display/exposure contracts now express that soundly.
+
+## Focused closure
+
+Claude’s first closure verified all repaired P2s except the explicit contrast arc at A: the earlier replacement had missed the lowercase source phrase. The exact angle-A sentence and negative-dot-product test requirement are now present, with the corner also named in child copy. Optional folds/union/intermediate-reference P3 wording is clarified. Final bounded exact-head confirmation pending; do not treat the review file’s repair list as evidence in place of the actual spec.

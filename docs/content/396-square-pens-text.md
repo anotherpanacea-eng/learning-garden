@@ -45,7 +45,7 @@ The two-square/result templates below appear after move3, in Compare, or in the 
 
 
 - **The two short-side squares have areas {a} × {a} = {a²} and {b} × {b} = {b²} square units.**
-- **Frame minus triangles: {L²} − {2ab} = {N} square units. This is the middle square’s area, c².** (Only completed endpoints or original-triangle length disclosure, never intermediate empty regions.)
+- **Frame minus triangles: {L²} − {2ab} = {N} square units. This is the middle square’s area in the starting plan, c².** (Only completed endpoints or original-triangle length disclosure, never intermediate empty regions.)
 - **The same four triangles fill the same frame in both plans. What remains has the same area: {a²} + {b²} = {N} square units.**
 - Formula: **a² + b² = c². The little 2 means “multiply the number by itself.” This rule is for a right triangle.**
 - Exact side: **{k} × {k} = {N}, so the long side is {k} units. We choose the positive length.**
@@ -55,7 +55,7 @@ The two-square/result templates below appear after move3, in Compare, or in the 
 
 ## Different-corner contrast
 
-**This triangle has sides 3, 4 and 6 units. Its marked corner is wider than a square corner.** Mark that corner with an arc, never the right-angle square.
+**This triangle has sides 3, 4 and 6 units. Its marked corner, between the 3 and 4 sides, is wider than a square corner.** Mark that corner with an arc, never the right-angle square.
 **9 + 16 = 25, but 6 × 6 = 36. The square-area rule does not fit this triangle. It needs a right angle.**
 **Back to my pieces** restores the current own material, not3 and4.
 
