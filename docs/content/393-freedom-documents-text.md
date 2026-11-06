@@ -12,7 +12,7 @@ These real documents discuss people being held in slavery and arguing for freedo
 
 **Selected excerpts, not complete documents.** The primary words below come from named transcriptions. Our context and help are written today. The original documents use older wording. The petition asks for freedom; it does not record that the request was granted.
 
-Preview: **Open the document drawer.** The librarian wants a careful explanation for a reader who has not seen these sources. Who wrote, who was being addressed, and what does each document ask us to believe or do? **Open Freedom Documents.**
+Preview: **Open the document drawer.** The librarian wants a careful explanation for a reader who has not seen these sources. Who made each document, who was being addressed, and what does each document ask us to believe or do? **Open Freedom Documents.**
 
 Whole disclosure: **All saved source excerpts**. Historical header must not say complete story, fictional records or accounts of the same event. Notes adult summary addition: Selected historical excerpts can be kept alongside original stories and fictional storm records. Sources and writing stay separate; the app does not grade original historical arguments or establish course completion.
 
@@ -28,11 +28,11 @@ Whole disclosure: **All saved source excerpts**. Historical header must not say 
 
 > That these United Colonies are, and of Right ought to be Free and Independent States; that they are Absolved from all Allegiance to the British Crown, and that all political connection between them and the State of Great Britain, is and ought to be totally dissolved;
 
-**d-source / Source, not part of the excerpt:** Declaration of Independence, adopted July 4, 1776. Wording from the U.S. National Archives transcription of the Stone engraving of the parchment Declaration. Paragraph 2 and the concluding declaration paragraph. https://www.archives.gov/founding-docs/declaration-transcript
+**d-source / Source, not part of the excerpt:** Declaration of Independence, adopted July 4, 1776. Wording from the U.S. National Archives transcription of the Stone engraving of the parchment Declaration. Paragraph 2 and the concluding declaration paragraph.
 
 ## Chapter petition · A petition for freedom · 1777
 
-**p-context / Our context, written today:** Black petitioners, including Prince Hall, addressed the Massachusetts Council and House of Representatives on January 13, 1777. They argued for freedom for people held in slavery. A petition is a formal request to people with authority. These fragments show their rights claim, comparison and requested action; they do not tell us what the legislature did afterward. We do not assume that every signer had the same life story.
+**p-context / Our context, written today:** Black petitioners, including Prince Hall, addressed the Massachusetts Council and House of Representatives in a petition dated January 13, 1777. They argued for freedom for people held in slavery. A petition is a formal request to people with authority. These fragments show their rights claim, comparison and requested action; they do not tell us what, if anything, the legislature did afterward. We do not assume that every signer had the same life story.
 
 **p-rights / Primary excerpt · the petitioners' claim:**
 
@@ -46,10 +46,18 @@ Whole disclosure: **All saved source excerpts**. Historical header must not say 
 
 > They therefore humbly beseech your Honors, to give this Petition its due weight & consideration, & cause an Act of the Legislature to be passed, whereby they may be restored to the enjoyment of that freedom which is the natural right of all Men — & their Children (who were born in this Land of Liberty) may not be held as Slaves after they arrive at the age of twenty one years
 
-**p-source / Source, not part of the excerpt:** Petition to the Massachusetts Council and House of Representatives, January 13, 1777, signed by Black petitioners including Prince Hall. Massachusetts Archives Collections, volume 212, page 132. Wording follows Document 11 in Grant Stanton's 2024 Freedom Petition Transcripts, PDF page 16; line wrapping is removed, not wording. https://bpb-us-w2.wpmucdn.com/web.sas.upenn.edu/dist/6/824/files/2023/12/Freedom-Petition-Transcripts_04252024-5921cca8e2c94c80.pdf
+**p-source / Source, not part of the excerpt:** Petition to the Massachusetts Council and House of Representatives, January 13, 1777, signed by Black petitioners including Prince Hall. Massachusetts Archives Collections, volume 212, page 132, cited as “Petition of Lancaster Hill.” Wording follows Document 11 in Grant Stanton's 2024 Freedom Petition Transcripts, PDF page 16; line wrapping is removed, not wording.
 
 ## Original glossary (inside Learn help, not disguised as primary text)
 
+- **Self-evident:** claimed to be clear without needing further proof.
+- **Endowed:** given or provided with.
+- **Creator:** the Declaration’s term for a divine creator.
+- **Absolved:** released from an obligation or duty; here, the declared allegiance.
+- **Great Parent of the Universe:** the petition’s religious term for a divine creator.
+- **Hath bestowed:** has given.
+- **Compact:** an agreement.
+- **Your Honors:** a respectful address to the lawmakers receiving the petition.
 - **Primary source:** something made in the time being studied; its maker's purpose still matters.
 - **Petition:** a formal request to someone with authority.
 - **Legislature:** a group with power to make laws.
@@ -61,7 +69,7 @@ Whole disclosure: **All saved source excerpts**. Historical header must not say 
 - **Allegiance:** loyalty owed to a ruler or government.
 - **Enslavement:** holding people as property and forcing them to live and work without freedom.
 
-For implementation, append the first lesson’s Learn with the definitions of primary source, natural right, unalienable and allegiance. Append the second lesson’s Learn with petition, legislature, apprehend, beseech, forfeited and enslavement. Keep the wording above; no new source data field or glossary tool is required.
+The first and second Learn strings consist of the base paragraph below followed by the corresponding glossary definitions WORD FOR WORD, each prefixed by its term. There is only one definition per term. Before Learn uses primary source, self-evident, endowed, Creator, natural right, unalienable, allegiance and Absolved. Compare Learn uses petition, legislature, apprehend, beseech, forfeited, enslavement, Great Parent of the Universe, hath bestowed, compact and Your Honors. No new source field or glossary tool is required. Full source URLs stay in the public source audit, not in the in-app citation paragraphs or Hear.
 
 ## Five lessons · all open
 
@@ -71,7 +79,7 @@ Each lesson has the existing Learn / Guided walkthrough / Hint / Different examp
 
 Prompt: Read the two Declaration excerpts. What does the document claim, and what political action does it announce? Keep a note on the exact words you use.
 
-Learn: A source has a creator, a date and a purpose. Here Congress announces separation from Great Britain and states a claim about equality and rights. A declaration's claim does not prove that life matched it. Vocabulary: natural right means a right said to belong to people by nature; unalienable means it cannot properly be taken away or given up; allegiance means loyalty to a ruler or government.
+Learn: A source has a creator, a date and a purpose. Here Congress announces separation from Great Britain and states a claim about equality and rights. A declaration's claim does not prove that life matched it.
 
 Guided: Start with d-context, which is our explanation. Then read d-claim and d-separation, which are primary excerpts. The first states equality and rights; the second announces separation. Put quotation marks around exact words you quote and name the source.
 
@@ -83,11 +91,11 @@ Field interpretation: What claim and purpose can you identify? Which exact words
 
 ### compare · Read the petition
 
-Prompt: Read the petitioners' argument and the action they request. Who is being asked to act? What qualification appears in the request about children?
+Prompt: Read the petitioners' argument and the action they request. Who is being asked to act? What qualifications appear in the request about children?
 
-Learn: A petition asks people with authority to do something. Its existence is evidence that a request was made, not that it succeeded. The petitioners make an argument in their own voice. Vocabulary: apprehend here means understand or believe; beseech means ask earnestly; legislature means a law-making group; forfeited means lost or given up through an action or agreement.
+Learn: A petition asks people with authority to do something. Its existence is evidence that a request was made, not that it succeeded. The petition presents the petitioners’ own argument and request.
 
-Guided: Read p-rights for the claimed right. Read p-comparison for the connection the petitioners make to America's conflict with Great Britain. Read p-request for the requested law and the words about children after age twenty one. Do not replace that qualification with today's preferred wording.
+Guided: Read p-rights for the claimed right. Read p-comparison for the connection the petitioners make to America's conflict with Great Britain. Read p-request for the requested law and the words about their children born in this land and the age of twenty one. This wording does not ask that the children be free before twenty one. Describe the qualification accurately without endorsing it.
 
 Hint: “Cause an Act ... to be passed” requests a law; it does not report a law being passed.
 
@@ -115,7 +123,7 @@ Prompt: Explain how the petitioners use a rights claim, and how it relates to th
 
 Learn: A useful paragraph makes a specific point, gives relevant evidence and explains the connection. Quoting both texts is not enough by itself. Name which document each quotation comes from and distinguish their arguments from historical outcomes. Your interpretation receives no automatic quality grade.
 
-Guided: Plan one comparison. Choose words from d-claim and p-rights or p-comparison. Explain how the petitioners use rights language for their own demand. Finish with one evidence limit, such as not knowing from these excerpts what the legislature did afterward.
+Guided: Plan one comparison. Choose words from d-claim and p-rights or p-comparison. Explain how the petitioners use rights language for their own demand. Finish with one evidence limit, such as not knowing from these excerpts what, if anything, the legislature did afterward.
 
 Hint: Try “The Declaration argues ... The petitioners argue ... The excerpts support ... They do not show ...” Change those starters if your explanation needs another structure.
 
@@ -125,11 +133,11 @@ Fields: claim — Your comparison; detail — Short quotations and source names;
 
 ### revise · Answer a careful reader
 
-Prompt: A library reader asks, “Have you shown what the sources argue, or claimed that their requests were achieved? Is each quotation identified? Did you keep the petition's qualification about children?” Revise or deliberately keep your wording, and explain your decision.
+Prompt: A library reader asks, “Have you shown what the sources argue, or claimed that their requests were achieved? Is each quotation identified? If you wrote about the children, did you keep the petition's birthplace and age qualifications?” Revise or deliberately keep your wording, and explain your decision.
 
 Learn: Revision can make a claim more precise, add a missing source, explain a quotation or acknowledge an unanswered question. It need not make every claim weaker. If the text clearly asks for a law, say so. Keep your original version so another reader can see what changed.
 
-Guided: Read your first kept draft, if you kept one. Compare each claim with its named excerpt. Check whether you confused a request with a result or changed the age qualification. Keep a revision even if you choose the same wording; explain the reason in your own words.
+Guided: Read your first kept draft, if you kept one. Compare each claim with its named excerpt. Check whether you confused a request with a result or changed either the birthplace or age qualification. Keep a revision even if you choose the same wording; explain the reason in your own words.
 
 Hint: You may revise directly without a first draft. The reader's questions are prompts, not a score or proof that your paragraph has an error.
 
@@ -155,13 +163,13 @@ The order below is literal and stable in a frozen source; no runtime outcome-bas
 
 **petition-purpose / compare:** What does p-request ask its addressees to do?
 1. Approve a report that the petition had already succeeded. **different** — Asking for an act to be passed is not reporting that it passed.
-2. Declare the colonies independent from the British Crown. **different** — The request is addressed to Massachusetts lawmakers about freedom from enslavement.
-3. Cause a legislative act restoring freedom to be passed. **fits** — The petition directly asks for an Act of the Legislature, not merely praise for its argument.
+2. Declare the colonies independent from the British Crown. **different** — Our context identifies Massachusetts lawmakers as the addressees; p-request asks for an act about freedom from enslavement.
+3. Cause a legislative act restoring freedom to be passed. **fits** — The petition directly asks for an Act of the Legislature, not only “due weight & consideration.”
 
 **children / compare:** Which detail belongs in a careful account of the request?
-1. It asks for every child to be free immediately at birth. **different** — That removes the actual qualification in these selected words.
-2. It asks that their children not be held as slaves after age twenty one. **fits** — That age appears explicitly. Reporting it accurately does not require endorsing the qualification.
-3. It does not mention children, so their treatment cannot be discussed. **different** — The excerpt explicitly mentions their children and the age condition.
+1. It asks that all their children, wherever born, be released immediately rather than at a later age. **different** — That removes the actual qualification in these selected words.
+2. It asks that their children born in this land not be held as slaves after the age of twenty one. **fits** — The birthplace and age qualifications appear explicitly. Reporting them accurately does not require endorsing them.
+3. It leaves their children out of the request, so we cannot discuss their treatment from this passage. **different** — The excerpt explicitly mentions their children and the age condition.
 
 **shared-language / later:** What comparison can these excerpts support?
 1. Both use rights language for different political purposes. **fits** — Compare d-claim with p-rights, then their different announcements or requests.
@@ -169,6 +177,6 @@ The order below is literal and stable in a frozen source; no runtime outcome-bas
 3. Similar wording proves every signer copied the Declaration directly. **different** — Wording alone does not establish who read or copied which text.
 
 **limits / later:** What further question requires evidence beyond these excerpts?
-1. Does the petition address lawmakers with a requested action? **different** — The source context and the request already answer this.
+1. Does the petition address lawmakers with a requested action? **different** — Our context names the addressees, and p-request states the requested action.
 2. Does the Declaration make a claim about equality and rights? **different** — That claim appears directly in d-claim.
-3. What did the legislature do afterward, and whom did it affect? **fits** — A request is not its outcome. Later records would be needed to investigate that question.
+3. What did the legislature do afterward, if anything? **fits** — A request is not its outcome. Later records would be needed to investigate that question.
