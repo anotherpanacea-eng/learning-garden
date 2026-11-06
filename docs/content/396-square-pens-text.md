@@ -16,7 +16,7 @@ Length actions: **Show the side length · Hide the side length**.
 Transient state: **Moving the pieces. Compare the empty areas after the last move.**
 New invitation announcement: **New pen: short sides {a} and {b} units.**
 Corner inset labels: **α · β · square corner: 90° · straight edge: 180° · middle corner: 90°**.
-Optional square-rule link: **Open Equality Desk** (`#learn/math/equality`). **Choose Curve Window there to explore square rules. Leaving this board starts a fresh paper plan when you return.** No new transfer/deep link.
+Optional square-rule link: **Open Equality Desk** (`#learn/math/equality`). **Choose Curve Window there to explore square rules. Going to Equality Desk starts a fresh paper plan when you return. Back to Copy Frame keeps this plan during this visit.** No new transfer/deep link.
 Finished state: **Same frame. Same four triangles. The middle square has the same total area as the two corner squares together.**
 Piece key: **Triangle 1 · Triangle 2 · Triangle 3 · Triangle 4**; ids/patterns remain fixed. **The patterns identify pieces; they are not square units.**
 Small-triangle sides: **side a · side b · side c**. Optional prompt: **Which side is across from the square corner?**
@@ -41,7 +41,7 @@ Build’s permanent calculation panel:
 - **Two triangles make one rectangle: {a} × {b} = {ab} square units.**
 - **Four triangles make two of those rectangles: 2 × {ab} = {2ab} square units.**
 
-The two-square/result templates below appear after move3, in Compare, or in the elected side-length disclosure. They never label intermediate empty regions. Why inserts only its current step; steps1–4 show no numeric area labels or unit grids. Reference pages say **Example sides: 3 and 4 units** or **Example sides: 3, 4 and 6 units**, apart from the readonly **Your pieces wait: a={a}, b={b} units** strip.
+The two-square/result templates below appear after move3, in Compare, or in the elected side-length disclosure. They never label intermediate empty regions. Why inserts only its current step; steps1–4 show no numeric area labels or unit grids. Reference pages say **Example sides: 3 and 4 units** or **Example sides: 3, 4 and 6 units**, apart from the readonly **Your pieces wait: a={a} {unit/units}, b={b} {unit/units}** strip.
 
 
 - **The two short-side squares have areas {a} × {a} = {a²} and {b} × {b} = {b²} square units.**
@@ -65,3 +65,5 @@ The two-square/result templates below appear after move3, in Compare, or in the 
 Actions: **Retry view · Grown-up notes · Back to Copy Frame**.
 Session-only arithmetic notice: **The pictures can still work during this visit. These help notes are not saved on this device. Ask a grown-up to download your notes if you want to keep them.**
 No message promises saved construction, mastery or a verified real-world design.
+
+Interface quantities use **unit** for1 and **units** otherwise; an individual area of1 uses **square unit**. This changes grammar, not the mathematical surfaces or the pair table.

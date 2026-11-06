@@ -90,7 +90,7 @@ def main():
    action(p,'length');ok('√13 units' in p.locator('[data-sp-length]').inner_text(),'nonwhole side is exact root with length units')
    action(p,'compare');ok(p.locator('.sp-compare [data-sp-piece]').count()==8,'finished endpoints show same four pieces twice')
    action(p,'compare-close');action(p,'move-back');ok(not p.locator('[data-sp-empty-label]').count(),'elected length does not label intermediate gaps as squares')
-   action(p,'page-why');ok(not p.locator('.sp-dimensions').count() and 'a=2, b=3' in p.locator('.sp-waiting').inner_text(),'reference pages retain readonly own material')
+   action(p,'page-why');ok(not p.locator('.sp-dimensions').count() and 'a=2 units' in p.locator('.sp-waiting').inner_text() and 'b=3 units' in p.locator('.sp-waiting').inner_text(),'reference pages retain readonly own material')
    ok('5 × 5 = 25' not in p.locator('.sp-page').inner_text(),'unselected teaching answers are not hidden in the DOM')
    for step in range(6):action(p,'why-'+str(step))
    ok('5 × 5 = 25' in p.locator('.sp-page').inner_text(),'selected final reference explains area versus length')
@@ -120,6 +120,10 @@ def main():
      boxes=q.locator('.sp-side-label').evaluate_all('xs=>xs.map(x=>{const b=x.getBBox();return{x:b.x,y:b.y,r:b.x+b.width,b:b.y+b.height}})')
      ok(all(not (min(x['r'],y['r'])>max(x['x'],y['x']) and min(x['b'],y['b'])>max(x['y'],y['y'])) for i,x in enumerate(boxes) for y in boxes[i+1:]),'thin-triangle labels stay separated after turns')
     layout(q);q.screenshot(path=str(OUT/f'square-pens-{width}.png'),full_page=True)
+    if width==320:
+     for page in ['why','corner']:
+      action(q,'page-'+page);layout(q);q.screenshot(path=str(OUT/f'square-pens-{width}-{page}.png'),full_page=True)
+     action(q,'page-build')
     node=q.locator('[data-sp-action=a-less]');node.evaluate('e=>{const p=e.parentNode;e.remove();p.append(e);e.click()}');ok(dimensions(q)==[12,1],'removed/reinserted control is inert')
    # Saving-off remains usable and reports arithmetic help as session-only.
    cc,q=setup();q.goto(base+'#notes');q.locator('#remember').click();q.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();q.goto(base+'#workshop/copy-frame');q.locator('[data-square-pens-entry]').wait_for();enter(q)
