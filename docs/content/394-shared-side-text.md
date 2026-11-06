@@ -44,7 +44,8 @@ Numerical difference: The numerical areas differ at this x.
 After elected reference only — valid smaller factor: This product matches. Its outside factor is a common factor; a greater positive integer common factor also exists.
 Greatest reference: The greatest positive integer common factor is {g}. Dividing both coefficients gives {A/g}x + {B/g}. Check both: {g} times {A/g} is {A}; {g} times {B/g} is {B}. Expanding returns {A}x + {B}.
 Coprime reference: Only 1 is a positive integer common factor of these two coefficients. Factoring out 1 leaves the expression unchanged. Check both: 1 times {A} is {A}; 1 times {B} is {B}.
-Zero region: This region has zero area. It has no width in the drawing.
+Zero x-region: The x-region has zero area. It has no width in the drawing.
+Zero number region: The number region has zero area. It has no width in the drawing.
 Empty rectangle: Both inside terms are zero, so this proposal has zero area. No positive-width rectangle is drawn.
 Saved: Sheet saved. You can reopen it or copy it to try another proposal.
 Session-only: Sheet kept for this session. Saving is off; download Notes to bring it back later.
@@ -74,4 +75,4 @@ Missing and empty-region drawings use their existing explicit notices instead of
 
 Narrow table headings: Sides (cm); Area (cm²). Accessible header names retain Dimensions in centimeters and Area in square centimeters.
 
-Persistent summary: Your proposal’s x: {x}. Named zero-region notices: The x-region has zero area. It has no width in the drawing. / The number region has zero area. It has no width in the drawing.
+Persistent summary: Your proposal’s x: {x}.
