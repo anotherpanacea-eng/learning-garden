@@ -29,7 +29,7 @@ export function squarePensModel(d){
 }
 export function squarePensReference(whyStep=0){if(!integer(whyStep,0,5))return null;return squarePensModel({...defaultSquarePensDraft(),whyStep,move:whyStep>=3?3:0});}
 export function squarePensContrast(){return {points:[[0,0],[3,0],[-11/6,Math.sqrt(455)/6]],labels:['A','B','C'],sides:{a:3,b:4,c:6},corner:0,areas:[9,16,36]};}
-// Match only the selected page's actual numerical surfaces, including pictured labelled squares.
+// Match only the selected page's actual numerical surfaces, including pictured labeled squares.
 export function squarePensPairs(d){
  const m=squarePensModel(d);if(!m)return [];
  const pairs=[],add=(a,b)=>pairs.push([a,b]);
