@@ -821,6 +821,9 @@ export const copyScopes = [
   {"path":"dist/writing-revision-content.mjs","adultBlocks":[],"quotations":[]},
 
   // Four Parts388: keep new modules in the existing source-review scope.
+  {path:'dist/shared-side-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/shared-side-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/shared-side-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/four-parts-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/four-parts-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/four-parts-ui.mjs',adultBlocks:[],quotations:[]},
