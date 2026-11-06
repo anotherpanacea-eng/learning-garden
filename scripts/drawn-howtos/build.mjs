@@ -73,16 +73,28 @@ function fromPele(h){const {svg}=render(h.mermaid.replace(/[‘’]/g,"'"),{font
 const unescape=s=>s.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");
 function dashes(line){const pts=pencil(line,()=>.5,0,0),out=[];let run=[pts[0]],on=true,acc=0;for(let i=1;i<pts.length;i++){acc+=dist(pts[i],pts[i-1]);if(on)run.push(pts[i]);if(acc>=(on?7:6)){if(on)out.push(run);on=!on;acc=0;run=[pts[i]];}}if(on&&run.length>1)out.push(run);return out;}
 
-// The life ring: stages on an upright ellipse, arrows following it, each arrow's label inside the ring in its quarter.
-function ring(h){const rand=rng(hash(h.id)),parts={},{stages,links}=h.ring,rx=104,ry=168,pad=12,small=SIZE*.8;
- const boxes=stages.map(([id,label],i)=>{const a=-Math.PI/2+i*Math.PI*2/stages.length;return {id,label,a,w:measurer.width(label,SIZE)+30,h:SIZE*1.8,cx:Math.cos(a)*rx,cy:Math.sin(a)*ry};});
+// Original scene symbols, not particles or measured amounts. Vapor has no visible-water mark.
+function markedStage(mark,box,label,rand){const [x,y,w,h]=box,cx=x+w/2,pts=stadiumPts(...box),parts=mark==='vapor'?[stroke('l',dashes(pts))]:[wash('e',pts),stroke('l',[pencil(pts,rand,.7,3)])];
+ const lines=[],line=points=>lines.push(pencil(points.map(([dx,dy])=>[cx+dx,y+dy]),rand,.25,.3));
+ const drop=(dx,dy,size)=>line([[dx,dy-size],[dx-size*.65,dy+size*.25],[dx-size*.5,dy+size],[dx,dy+size*1.2],[dx+size*.5,dy+size],[dx+size*.65,dy+size*.25],[dx,dy-size]]);
+ const ice=(dx,dy,r)=>{line([[dx,dy-r],[dx,dy+r]]);line([[dx-r*.87,dy-r*.5],[dx+r*.87,dy+r*.5]]);line([[dx-r*.87,dy+r*.5],[dx+r*.87,dy-r*.5]]);};
+ if(mark==='water'){line([[-34,21],[-22,21],[-16,25],[16,25],[22,21],[34,21]]);line([[-13,29],[-3,29]]);line([[3,32],[13,32]]);}
+ if(mark==='cloud'){line([[-35,30],[-39,26],[-38,20],[-32,17],[-26,17],[-24,12],[-17,10],[-10,13],[-6,17],[5,17],[12,11],[20,11],[27,16],[32,16],[38,21],[38,26],[34,30],[-35,30]]);drop(-20,22,2.8);drop(-8,24,2.8);drop(4,22,2.8);ice(18,22,4);ice(29,24,3);}
+ if(mark==='rain'){drop(-28,20,5);drop(-13,27,4);ice(10,18,4);ice(29,24,8);}
+ if(lines.length)parts.push(stroke('l',lines));
+ parts.push(stroke('t',letters(label,cx,y+64,SIZE,rand)));return parts;}
+
+// Stages on an upright ellipse, arrows following it, labels inside each quarter.
+// Optional scene marks use their own upper band; labels stay in the lower band.
+function ring(h){const rand=rng(hash(h.id)),parts={},{stages,links,marks={},labelAnchors={}}=h.ring,rx=h.ring.rx??104,ry=h.ring.ry??168,pad=12,small=SIZE*.8;
+ const boxes=stages.map(([id,label],i)=>{const a=(h.ring.startAngle??-Math.PI/2)+i*Math.PI*2/stages.length;return {id,label,a,w:measurer.width(label,SIZE)+30,h:marks[id]?88:SIZE*1.8,cx:Math.cos(a)*rx,cy:Math.sin(a)*ry};});
  const minX=Math.min(...boxes.map(b=>b.cx-b.w/2))-pad,minY=Math.min(...boxes.map(b=>b.cy-b.h/2))-pad,ox=-minX,oy=-minY;
  const at=(a,k=1)=>[ox+Math.cos(a)*rx*k,oy+Math.sin(a)*ry*k],inside=(b,p)=>Math.abs(p[0]-ox-b.cx)<=b.w/2+7&&Math.abs(p[1]-oy-b.cy)<=b.h/2+7;
- for(const b of boxes)parts[b.id]=nodeParts(b.id,'stadium',[ox+b.cx-b.w/2,oy+b.cy-b.h/2,b.w,b.h],[b.label],rand,'e');
+ for(const b of boxes){const box=[ox+b.cx-b.w/2,oy+b.cy-b.h/2,b.w,b.h];parts[b.id]=marks[b.id]?markedStage(marks[b.id],box,b.label,rand):nodeParts(b.id,'stadium',box,[b.label],rand,'e');}
  const lap=[];
  for(const [id,from,to,label] of links){const A=boxes.find(b=>b.id===from),B=boxes.find(b=>b.id===to);let a0=A.a,a1=B.a<=A.a?B.a+Math.PI*2:B.a;
   while(inside(A,at(a0)))a0+=.005;while(inside(B,at(a1)))a1-=.005;const arc=[],inner=[];for(let k=0;k<=40;k++){arc.push(at(a0+(a1-a0)*k/40));inner.push(at(a0+(a1-a0)*k/40,.9));}
-  const mid=(a0+a1)/2,lp=[ox+Math.sign(Math.cos(mid))*rx*.4,oy+Math.sign(Math.sin(mid))*ry*.45];
+  const mid=(a0+a1)/2,anchor=labelAnchors[id],lp=anchor?[ox+anchor[0],oy+anchor[1]]:[ox+Math.sign(Math.cos(mid))*rx*.4,oy+Math.sign(Math.sin(mid))*ry*.45];
   parts[id]=[stroke('l',[pencil(arc,rand),...head(arc.at(-1),arc.at(-4),rand)]),stroke('t',labelLines(measurer.width(label,small)>rx*.75?label.split(' '):[label],lp[0],lp[1],small,rand))];
   lap.push(pencil(inner,rand,.8,0),...head(inner.at(-1),inner.at(-4),rand,9));}
  parts.lap=[stroke('a',lap)];
