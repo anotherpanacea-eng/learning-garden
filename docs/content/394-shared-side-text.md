@@ -73,3 +73,5 @@ Drawing accessible description: Proposed rectangle: outside side {k} centimeters
 Missing and empty-region drawings use their existing explicit notices instead of inventing these values. Generic interface templates are current chrome derived only from the retained numerical source and proposal; mathematical context, teaching and reference introduction remain source-owned.
 
 Narrow table headings: Sides (cm); Area (cm²). Accessible header names retain Dimensions in centimeters and Area in square centimeters.
+
+Persistent summary: Your proposal’s x: {x}. Named zero-region notices: The x-region has zero area. It has no width in the drawing. / The number region has zero area. It has no width in the drawing.

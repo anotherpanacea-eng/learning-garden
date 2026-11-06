@@ -38,7 +38,7 @@ def journey(browser,base,seed):
   fill(p,3,2,3);tap(p,'view','compare');h.ok('Both coefficients match.' in p.locator('.sf-comparison').inner_text(),'3(2x+3) expands to6x+9');h.ok(not p.locator('.sf-reference').count(),'comparison does not silently reveal greatest-factor reference')
   tap(p,'keep');first=copy.deepcopy(h.book(p)['sharedSides'][0]);h.ok(first['work']['k']==3 and not first['work']['referenceShown'],'kept original proposal has honest support flags')
   tap(p,'view','shelf');tap(p,'sheet',first['id']);tap(p,'view','learn');tap(p,'step');tap(p,'step');tap(p,'step');tap(p,'contrasts');tap(p,'reference');h.ok(h.book(p)['sharedSides'][0]==first,'help on a kept sheet preserves its original source/work')
-  tap(p,'copy');tap(p,'view','build');field(p,'b',4);tap(p,'keep');last=h.book(p)['sharedSides'][-1];h.ok(last['source']==first['source'] and last['work']['b']==4 and last['work']['teachingShown'] and last['work']['referenceShown'],'copy keeps own source and elected support in a new sheet')
+  p.locator('[data-sf-draft]').select_option('draft-1');tap(p,'keep');tap(p,'view','shelf');tap(p,'sheet',first['id']);h.ok(h.book(p)['sharedSides'][0]==first,'an unrelated Keep does not rewrite the original');tap(p,'copy');tap(p,'view','build');field(p,'b',4);tap(p,'keep');last=h.book(p)['sharedSides'][-1];h.ok(last['source']==first['source'] and last['work']['b']==4 and last['work']['teachingShown'] and last['work']['referenceShown'],'copy keeps own source and elected support in a new sheet')
   h.ok(h.book(p)['sharedSides'][0]==first,'new copy cannot overwrite original')
   p.locator('[data-sf-case]').select_option('small');fill(p,3,1,2);tap(p,'x-one');tap(p,'view','compare');text=p.locator('.sf-comparison').inner_text();h.ok('These coefficient pairs differ.' in text and 'The numerical areas match' in text,'single-value coincidence is not an identity')
   tap(p,'view','build');p.locator('[data-sf-x]').select_option('2');tap(p,'view','compare');h.ok('The numerical areas differ' in p.locator('.sf-comparison').inner_text(),'same expressions separate at a new x')
@@ -66,10 +66,10 @@ def responsive(browser,base,seed):
  print('Shared Side phone geometry and native keyboard controls',flush=True)
  c,p=setup(browser,base,seed,320,820)
  try:
-  enter(p);p.locator('[data-sf-case]').select_option('coprime');fill(p,1,7,4);layout(p);h.ok(p.locator('[data-sf-thin]').is_visible(),'1by32 thin model has outside warning');p.locator('[data-sf-x]').select_option('12');h.ok(p.locator('[data-sf-thin]').is_visible(),'1by88 thin model remains honest');field(p,'a',24);field(p,'b',24);h.ok('312 cm' in p.locator('.sf-picture figcaption').inner_text(),'extreme thin rectangle retains true dimensions');h.ok(p.locator('[data-sf-rectangle] rect[fill="none"]').evaluate('n=>{const r=n.getBoundingClientRect();return Math.abs(r.width/r.height-312)<.01;}'),'rendered model preserves equal axis scales and actual312to1 ratio');layout(p)
+  enter(p);p.locator('[data-sf-case]').select_option('coprime');fill(p,1,7,4);layout(p);h.ok(p.locator('[data-sf-thin]').is_visible(),'1by32 thin model has outside warning');p.locator('[data-sf-x]').select_option('12');h.ok(p.locator('[data-sf-thin]').is_visible(),'1by88 thin model remains honest');field(p,'a',24);field(p,'b',24);h.ok('312 cm' in p.locator('.sf-picture figcaption').inner_text(),'extreme thin rectangle retains true dimensions');h.ok(p.locator('[data-sf-whole]').evaluate('n=>{const r=n.getBoundingClientRect();return Math.abs(r.width/r.height-312)<.01;}'),'rendered model preserves equal axis scales and actual312to1 ratio');layout(p)
   n=p.locator('[data-sf-adjust="k"][data-sf-delta="1"]');n.focus();p.keyboard.press('Enter');p.keyboard.press('Enter');h.ok(p.locator('[data-sf-value="k"]').inner_text()=='3','repeated keyboard steps retain focus and direction')
   old=n.element_handle();field(p,'b',23);before=copy.deepcopy(h.book(p));old.evaluate('n=>n.dispatchEvent(new MouseEvent("click",{bubbles:true}))');h.ok(h.book(p)==before and p.locator('[data-sf-value="k"]').inner_text()=='3','detached old control cannot change work')
-  hidden=p.locator('[data-sf-adjust="k"][data-sf-delta="1"]');hidden.evaluate('n=>{n.style.display="none";n.dispatchEvent(new MouseEvent("click",{bubbles:true}));}');h.ok(p.locator('[data-sf-value="k"]').inner_text()=='3','hidden control cannot edit');p.screenshot(path=str(OUT/'shared-side-phone.png'),full_page=True)
+  hidden=p.locator('[data-sf-adjust="k"][data-sf-delta="1"]');hidden.evaluate('n=>{n.style.display="none";n.dispatchEvent(new MouseEvent("click",{bubbles:true}));}');h.ok(p.locator('[data-sf-value="k"]').inner_text()=='3','hidden control cannot edit');p.locator('[data-sf-x]').select_option('6');p.locator('[data-sf-x]').focus();p.keyboard.press('ArrowUp');h.ok(p.locator('[data-sf-x]').evaluate('n=>n===document.activeElement'),'x selector retains focus after a keyboard change');tap(p,'x-one');h.ok(p.locator('[data-sf-x-one]').evaluate('n=>n===document.activeElement'),'x shortcut retains focus');tap(p,'view','learn');h.ok('1' in p.locator('[data-sf-summary-x]').inner_text(),'proposal x remains in the Learn summary');p.locator('[data-sf-step]').focus();p.keyboard.press('Enter');h.ok(p.locator('[data-sf-step]').evaluate('n=>n===document.activeElement'),'next-step control retains keyboard position');tap(p,'contrasts');h.ok(p.locator('[data-sf-contrasts]').evaluate('n=>n===document.activeElement'),'contrast control retains focus');tap(p,'reference');h.ok(p.locator('[data-sf-reference]').evaluate('n=>n===document.activeElement'),'reference control retains focus');tap(p,'back');h.ok(p.locator('[data-equality-shared-side]').evaluate('n=>n===document.activeElement'),'Back restores focus to parent entry');enter(p);tap(p,'view','build');p.screenshot(path=str(OUT/'shared-side-phone.png'),full_page=True)
  finally:c.close()
 def landscape(browser,base,seed):
  c,p=setup(browser,base,seed,1024,768)
@@ -85,13 +85,34 @@ def parent_dirty(browser,base,seed):
  finally:c.close()
 def refusal(browser,base,seed):
  print('Shared Side real whole-book boundary and Notes rescue',flush=True)
- bounded=copy.deepcopy(seed)
+ bounded=copy.deepcopy(seed);bounded['equalityDesk']['visits'][bounded['equalityDesk']['current']]['page']=0
  def nodes(x):return 1+sum(nodes(v) for v in (x.values() if isinstance(x,dict) else x if isinstance(x,list) else []))
  bounded['syntheticNodeBoundary']=[];bounded['syntheticNodeBoundary']=[None]*(200000-nodes(bounded)-1)
  c,p=setup(browser,base,bounded)
  try:
-  before=copy.deepcopy(h.book(p));enter(p);tap(p,'choose','k');tap(p,'keep');h.ok(h.book(p)==before and 'could not be kept' in p.locator('#sf-status').inner_text(),'real cap refuses incomplete Keep atomically');h.ok(p.locator('[data-sf-value="k"]').inner_text()=='1','refused proposal remains available');tap(p,'download')
+  h.ok('could not be opened safely' in p.locator('[data-equality-root]').inner_text().lower(),'real limit refuses parent preparation');before=copy.deepcopy(h.book(p));enter(p);tap(p,'choose','k');tap(p,'keep');h.ok(h.book(p)==before and 'could not be kept' in p.locator('#sf-status').inner_text(),'real cap refuses incomplete Keep atomically');h.ok(p.locator('[data-sf-value="k"]').inner_text()=='1','refused proposal remains available');tap(p,'download')
  finally:c.close()
+def resize_and_unavailable(browser,base,seed):
+ print('Shared Side live resize and unavailable parent entry',flush=True)
+ c,p=setup(browser,base,seed,1280,900)
+ try:
+  enter(p);p.locator('[data-sf-case]').select_option('coprime');fill(p,1,7,4);h.ok(not p.locator('[data-sf-thin]').is_visible(),'wide1by32 drawing clears thin warning');p.set_viewport_size({'width':820,'height':1000});p.wait_for_function("!document.querySelector('[data-sf-thin]').hidden");h.ok(p.locator('[data-sf-thin]').is_visible(),'resize updates warning without rerender');p.set_viewport_size({'width':1280,'height':900});p.wait_for_function("document.querySelector('[data-sf-thin]').hidden");h.ok(not p.locator('[data-sf-thin]').is_visible(),'resize back clears warning')
+  fill(p,3,0,3);h.ok('The x-region has zero area' in p.locator('.sf-model').inner_text(),'zero x-region is named');field(p,'a',2);field(p,'b',0);h.ok('The number region has zero area' in p.locator('.sf-model').inner_text(),'zero number region is named')
+ finally:c.close()
+ future=copy.deepcopy(seed);future['equalityDesk']={'futureFormat':True,'exact':'retained'};c,p=setup(browser,base,future)
+ try:
+  before=copy.deepcopy(h.book(p));h.ok('Earlier work is retained' in p.locator('[data-equality-root]').inner_text(),'unknown parent view is shown');enter(p);tap(p,'choose','k');h.ok(h.book(p)==before and p.locator('[data-sf-value="k"]').inner_text()=='1','child opens from unavailable parent without changing it')
+ finally:c.close()
+
+def stale_owner_reset(browser,base,seed):
+ print('Shared Side stale controls after actual explorer switch and reset',flush=True)
+ c,p=setup(browser,base,seed)
+ try:
+  enter(p);tap(p,'choose','k');old_root=p.locator('[data-sf-root]').element_handle();old_keep=p.locator('[data-sf-keep]').element_handle();original=p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')")
+  p.locator('#explorer-switch').tap();p.locator('[data-select-explorer="explorer-2"]').tap();p.evaluate('location.hash="#learn/math/equality"');p.locator('[data-equality-shared-side]').wait_for();enter(p);before=copy.deepcopy(h.book(p));old_root.evaluate('n=>document.querySelector("main").append(n)');old_keep.evaluate('n=>n.dispatchEvent(new MouseEvent("click",{bubbles:true}))');h.ok(h.book(p)==before and p.evaluate("localStorage.getItem('number-garden-v1:explorer-1')")==original,'reattached previous-owner control cannot write either explorer');old_root.evaluate('n=>n.remove()')
+  old_keep=p.locator('[data-sf-keep]').element_handle();old_root=p.locator('[data-sf-root]').element_handle();p.evaluate('location.hash="#notes"');p.locator('#reset').tap();p.locator('#confirm-reset').tap();p.evaluate('location.hash="#learn/math/equality"');p.locator('[data-equality-shared-side]').wait_for();enter(p);before=copy.deepcopy(h.book(p));old_root.evaluate('n=>document.querySelector("main").append(n)');old_keep.evaluate('n=>n.dispatchEvent(new MouseEvent("click",{bubbles:true}))');h.ok(h.book(p)==before and not h.book(p).get('sharedSides'),'reset notebook rejects the reattached old Keep control')
+ finally:c.close()
+
 def saving_off(browser,base,seed):
  print('Shared Side actual session-only save and file recovery',flush=True)
  c,p=setup(browser,base,seed)
@@ -139,7 +160,7 @@ def main():
   with sync_playwright() as pw:
    browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
    try:
-    report=journey(browser,base,seed);transfer(browser,base,seed,report);responsive(browser,base,seed);landscape(browser,base,seed);parent_dirty(browser,base,seed);refusal(browser,base,seed);exposure(browser,base,seed);saving_off(browser,base,seed);h.ok(not h.errors,'no browser errors: '+str(h.errors))
+    report=journey(browser,base,seed);transfer(browser,base,seed,report);responsive(browser,base,seed);landscape(browser,base,seed);parent_dirty(browser,base,seed);refusal(browser,base,seed);exposure(browser,base,seed);saving_off(browser,base,seed);resize_and_unavailable(browser,base,seed);stale_owner_reset(browser,base,seed);h.ok(not h.errors,'no browser errors: '+str(h.errors))
    finally:browser.close()
  finally:server.shutdown()
  print(json.dumps({'status':'passed','checks':h.checks}),flush=True)
