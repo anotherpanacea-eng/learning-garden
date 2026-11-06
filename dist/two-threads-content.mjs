@@ -363,7 +363,7 @@ source.echoStudy={
   "second": "the path was empty",
   "steps": [
    "The word empty appears twice in this story, but it describes different things: first the bowl, then the path. A repeated word need not name the same object.",
-   "At noon, the bowl holds a gift of seed, but the path is empty. Neri puts out another chair and waits. One reading is that she hopes someone will join her. The extra chair and the contrast between a full bowl and an empty path support that reading; the story does not state her thoughts.",
+   "At noon, the bowl holds a gift of seed, but the path is empty. Neri puts out another chair and waits. One reading is that she hopes someone will join her. The extra chair and the contrast between a bowl holding seed and an empty path support that reading; the story does not state her thoughts.",
    "We know what Neri does: she sets another chair and waits. We can discuss whether that waiting feels hopeful, lonely, or both, and point to words for a reading. The story does not say who left the seed."
   ]
  }
