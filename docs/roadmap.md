@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## The missing square397 · a different unknown
 
-[The missing square397](specs/397-missing-square.md) extends Square Pens with the inverse question: given the hypotenuse and one short side of a right triangle, compare square areas, subtract the known area, then find the positive length. The independently reviewed finite contract keeps the L-shaped remainder distinct from a separate equal-area square. Its bounded implementation is in build; no release or complete geometry-course claim is made. Existing Build material, reference pages and parent return retain their owners; the board adds no saved construction or independent assessment.
+[The missing square397](specs/397-missing-square.md) extends Square Pens with the inverse question: given the hypotenuse and one short side of a right triangle, compare square areas, subtract the known area, then find the positive length. The independently reviewed finite contract keeps the L-shaped remainder distinct from a separate equal-area square. Its bounded implementation is built; the [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/479#issuecomment-6695401601) owns review and publication status. It does not complete the geometry course. Existing Build material, reference pages and parent return retain their owners; the board adds no saved construction or independent assessment.
 
 ## Square Pens396 · same pieces, different squares
 
