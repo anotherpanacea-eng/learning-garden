@@ -46,7 +46,7 @@ Current source: Kenneth Grahame’s The Wind in the Willows, verified against th
       "title": "The Wild Wood",
       "mapLabel": "The wood",
       "fragment": "chap03",
-      "summary": "Mole enters the Wild Wood alone in winter and becomes frightened. Rat searches for him and finds him. Snow makes their journey difficult, but Rat works out where Badger’s door must be, and they find it.",
+      "summary": "Mole enters the Wild Wood alone in winter and becomes frightened. Rat searches for him and finds him. Snow makes their journey difficult, but Rat works out that a door must be hidden there, and they find Badger’s.",
       "noticeQuestion": "What sounds frighten Mole, and how are they described?",
       "furtherQuestion": "How does the narration make the wood feel different from the riverbank?"
     },
@@ -137,7 +137,7 @@ Current source: Kenneth Grahame’s The Wind in the Willows, verified against th
       "mapLabel": "Ulysses",
       "fragment": "chap12",
       "summary": "The four friends retake Toad Hall. Rat insists that Toad give no speeches or songs at the banquet. Toad sings a boastful song alone first, then gives his guests polite replies while enjoying their attention.",
-      "noticeQuestion": "How does Toad’s private speech compare with what he says to his guests?",
+      "noticeQuestion": "What does Toad arrange in his locked room before he performs?",
       "furtherQuestion": "Which words support different readings of whether Toad has changed?"
     }
   ],
