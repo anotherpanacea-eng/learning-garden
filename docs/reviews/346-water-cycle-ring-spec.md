@@ -16,6 +16,10 @@
 
 The scoped science explanation is original. Primary sources and upstream crosswalk are in the source audit. Mechanical checks can prove caption limits, structural stroke rules, generated equality, state/lifecycle behavior and media metadata; human visual/scientific review must qualify what the diagrams actually teach. Chrome is not physical iPad or learning qualification.
 
+## Focused closure findings
+
+The first focused closure found a new P1: the inherited -π/2 start placed cloud below brook. The spec now explicitly starts at+π/2, water below/cloud above. It also removes the proposed0.7 label anchor (which would meet arcs), requires actual rendered clearances, joins the repaired collect/evaporate feet, and qualifies the film’s liquid-cloud sentence. These are specified corrections, not yet built or visually qualified.
+
 ## Verdict
 
 Focused independent Claude closure of the repaired spec and exact finite scientific text is pending. Do not begin runtime implementation before it resolves P1/P2. Film derivative acceptance remains an implementation gate even after the spec clears.

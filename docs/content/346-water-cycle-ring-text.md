@@ -47,7 +47,7 @@ Exact child-facing text for [spec 346](../specs/346-water-cycle-ring.md). US spe
 
 **Transcript heading:** The film's words
 
-**Transcript:** Take 2's captions, word for word from its SRT, with its cue windows. Cue13 uses the corrected derivative’s words below, also burned into its picture. The VTT must match these exactly. If the picture gate requires a corrected derivative with different words, update this list and the VTT together.
+**Transcript:** Take 2's captions, word for word from its SRT, with its cue windows. Cues9 and13 use the corrected derivative’s words below, also burned into its picture. The VTT must match these exactly. If the picture gate requires a corrected derivative with different words, update this list and the VTT together.
 
 1. 0.2–2.2 s: The weather station, by the brook.
 2. 2.2–4.4 s: The Sun warms a puddle. Look closer.
@@ -57,7 +57,7 @@ Exact child-facing text for [spec 346](../specs/346-water-cycle-ring.md). US spe
 6. 12.3–15.0 s: Higher up, the air is cooler.
 7. 15.2–18.0 s: In the cooler air, the vapor condenses into tiny drops.
 8. 18.0–20.6 s: Lots of tiny drops together are what we see as a cloud.
-9. 20.6–23.0 s: A cloud is liquid drops, not vapor.
+9. 20.6–23.0 s: This cloud is liquid drops, not vapor.
 10. 23.2–25.6 s: Tiny drops bump together and join into bigger drops.
 11. 25.6–28.0 s: Big drops fall as rain.
 12. 28.0–31.0 s: The rain gauge measures the rain as a depth, in millimeters.
