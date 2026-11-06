@@ -1,6 +1,6 @@
 #399 · The Chapter Map: a first long-book reading companion
 
-Status: independent six-lens specification and complete finite literary/source review cleared at c48cb113 after repairs; implementation in progress. LG-G1, E3-III/V with E4 return. Selects272’s chapter-map bridge in **English**, alongside387/398, not a new library hub.272’s wider route/character trays, second novel, theme/strongest-evidence courses, festivals and ActV guide remain separate. The town library needs guides for future readers in ActIV; no chapter/act credit or reading completion inferred.
+Status: independent six-lens specification and complete finite literary/source review cleared at c48cb113 after repairs; bounded implementation built; independent implementation review and publication pending. LG-G1, E3-III/V with E4 return. Selects272’s chapter-map bridge in **English**, alongside387/398, not a new library hub.272’s wider route/character trays, second novel, theme/strongest-evidence courses, festivals and ActV guide remain separate. The town library needs guides for future readers in ActIV; no chapter/act credit or reading completion inferred.
 
 ## Purpose, real reading and overlap
 
