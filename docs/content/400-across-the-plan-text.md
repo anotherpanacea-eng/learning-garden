@@ -61,9 +61,7 @@ Nonwhole root: “k × k = K and u × u = U. N lies between K and U. The straigh
 
 “Edge route: L units. Straight distance: d units.” d is the whole integer or exact radical, never a rounded guess.
 
-“The edge route is longer. Squaring its length adds 2 × h × v to the two square areas, so its square is larger than N.”
-
-**Exposure refinement:** that last sentence would supply extra multiplication beyond the intended visible pair contract. Use instead: “Both direction changes are positive. Going around the corner is longer than the straight segment.” The proof is for the adult note below; the runtime must not show the discarded `2 × h × v` sentence.
+“Both direction changes are positive. Going around the corner is longer than the straight segment.” The algebraic explanation is in the folded adult note.
 
 ## One-direction steps
 
@@ -89,4 +87,4 @@ No right-angle marker, squares or invented positive distance.
 
 “This open paper model connects coordinate differences with the right-triangle square-area relationship. The complete plan is invented; it cannot tell anyone which real route is usable or safe. Coordinates are positions, while h and v are lengths between coordinates. For h,v>0, the edge route has length h+v and its square exceeds h²+v² by2hv, so it is longer than the positive straight distance. When one difference is zero the distances are equal; when both are zero both are0. The supplied counts, diagrams and roots are support, not an independent answer or course result. This first grid stays in nonnegative whole-number coordinates; it does not teach every quadrant, scale, radical simplification or surveying method. No new construction or reading response is saved.”
 
-The discarded proof sentence above is an authoring correction, not runtime copy. Prefer moving only the final chosen strings into the existing content module; no parallel generated-copy system is required.
+Move the final chosen strings into the existing content module; no parallel generated-copy system is required.
