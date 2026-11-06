@@ -1,6 +1,6 @@
 # 400 · Across the plan: complete finite material
 
-Original geometry and wording. This is an extension of Square Pens, not a real route plan. Values below are templates; runtime substitutes numbers, uses `unit`/`square unit` at1 and otherwise plurals. All steps are open. Invitations change material, not a hidden difficulty or a grade.
+Original geometry and wording. This is an extension of Square Pens, not a real route plan. Values below are templates; runtime substitutes numbers, uses `unit`/`square unit`/`interval` at1 and otherwise plurals. All steps are open. Invitations change material, not a hidden difficulty or a grade.
 
 ## Invitations and independent expected results
 
@@ -28,14 +28,16 @@ Current cursor starts0; Try another plan advances before applying. Other corner 
 - Trace controls: **Trace next interval / Trace back / Show the whole edge route**.
 - Trace status: “t of L edge intervals highlighted.” Zero: “There are no edge intervals between these positions.”
 - Other-plans strip: “Your other triangle plans are kept.”
-- Purposeful return: “Keep the endpoints and try the other corner. Then move both points the same amount. What stays the same, and why?”
+- Purposeful return (all cases): “When there is room, move both points the same amount. What stays the same, and why?”
+- Additional return sentence only when h,v>0: “Keep the endpoints and try the other corner. What changes in the route, and what stays the same?”
+- Model note: “This is a made-up paper plan, not a real path to walk.”
 - New invitation status: “New paper plan: A (ax, ay), B (bx, by).” No computed distances in that action status.
 
 ## Nondegenerate steps (h and v both positive)
 
 **Count intervals**
 
-“The edge route changes one direction at a time. Count the intervals, not the endpoint dots. Which segment looks shorter?”
+“The edge route changes one direction at a time. Count the intervals, not the endpoint dots. Which connection looks shorter?”
 
 “Horizontal change: larger x − smaller x = h units. Vertical change: larger y − smaller y = v units. Edge route: h + v = L units.”
 
@@ -63,9 +65,11 @@ Nonwhole root: “k × k = K and u × u = U. N lies between K and U. The straigh
 
 “Both direction changes are positive. Going around the corner is longer than the straight segment.” The algebraic explanation is in the folded adult note.
 
+For a whole root, explain “k is less than L, so the straight segment is shorter.” For a nonwhole root with u=L, explain “The distance is less than u units; the edge route is L units.” Otherwise explain “The distance is less than u units, and u is less than L, so the straight segment is shorter.” These templates substitute the actual integer bounds. Step2 retains all step1 square pictures and expressions, including when chosen directly.
+
 ## One-direction steps
 
-Count: “These points share one grid line. Count the L intervals between them. There is no turn.”
+Count: “These points share one grid line. Count the L intervals between them. There is no turn.” Use singular interval when L=1. Show both coordinate-difference equations and the edge sum on every ready branch; zero changes are0 units. The straight and edge lines overlap here, which the caption explicitly states.
 
 Squares: “Only one direction changes. There is no two-leg right triangle here, so no square calculation is needed.”
 
@@ -83,7 +87,11 @@ Distance: “The straight distance is 0 units. The edge route is also 0 units. C
 
 No right-angle marker, squares or invented positive distance.
 
-## Adult explanation (folded)
+## Additional finite exposure case (not in the invitation cycle)
+
+A=(1,1), B=(9,10) gives h=8,v=9,L=17,N=145 and distance√145 strictly between12 and13. At step1 qualify8×8 and9×9; step2 first adds12×12, while13×13 is outside the helper. Use this case for the newly waiting root-bracket multiplication probe.
+
+## Adult explanation (folded; fixed symbolic prose, no numeric substitution)
 
 “This open paper model connects coordinate differences with the right-triangle square-area relationship. The complete plan is invented; it cannot tell anyone which real route is usable or safe. Coordinates are positions, while h and v are lengths between coordinates. For h,v>0, the edge route has length h+v and its square exceeds h²+v² by2hv, so it is longer than the positive straight distance. When one difference is zero the distances are equal; when both are zero both are0. The supplied counts, diagrams and roots are support, not an independent answer or course result. This first grid stays in nonnegative whole-number coordinates; it does not teach every quadrant, scale, radical simplification or surveying method. No new construction or reading response is saved.”
 
