@@ -8,7 +8,7 @@ The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under
 {
   "v": 1,
   "title": "Follow an Echo",
-  "notice": "These passages and questions are given. Your connections are choices to discuss, not a reading score or proof of a theme. A person hears your explanation.",
+  "notice": "These passages and questions are given. Your connections are choices to discuss, not a reading score or proof of a theme. Share your spoken or written explanation with a person.",
   "invitations": [
     {
       "id": "sound",
@@ -97,21 +97,21 @@ The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under
       "left": "pattern",
       "right": "taps",
       "lens": "image",
-      "text": "These passages describe a two-knock pattern from Leena’s and Rowan’s sides. “Knocked twice” and “two taps” can point to the same sound without repeating the same word. Earlier, Rowan wondered whether he heard a knock and checked the front entrance; now he goes toward the courtyard glass. The pattern connects the accounts. Read those scenes to compare his responses."
+      "text": "These passages describe a two-knock pattern from Leena’s and Rowan’s sides. “knocked twice” and “two taps” can point to the same sound without repeating the same word. In the first-knock scene, Rowan wondered whether he heard a knock and checked the front entrance; with the two-tap pattern he goes toward the courtyard glass. The pattern connects the accounts. Read those scenes to compare his responses."
     },
     {
       "title": "Whole and part",
       "left": "whole",
       "right": "part",
       "lens": "idea",
-      "text": "At the display, Rowan wants the “whole account”, “not just the part that sounded certain”. Near the ending, each person has heard or seen only part of the other’s actions. A reader could connect these words to the misunderstanding and to the value of looking again. The recording’s contents are not given here, so this link cannot tell us whether its account is complete."
+      "text": "While testing the recording, Rowan wants visitors to hear the “whole account”, “not just the part that sounded certain”. When Leena and Rowan meet, each person has heard or seen only part of the other’s actions. A reader could connect these words to the misunderstanding and to the value of looking again. The voice stopped halfway through a sentence, but the story does not say what the rest of the recording contains or whether visitors will hear all of it."
     },
     {
       "title": "The courtyard door",
       "left": "shut",
       "right": "opened",
       "lens": "words",
-      "text": "At the start, the shut courtyard door separates Leena from the people inside. At the ending, it opens and two mistaken beliefs are spoken aloud. One possible reading is that the doorway moves from a barrier into a place to compare what each knows. A reader could focus instead on the mix-up between entrances. The closing sign may matter to that reading, but the story does not show how later visitors use it."
+      "text": "When Leena arrives, the shut courtyard door separates Leena from the people inside. When Rowan reaches Leena, the door opens and two mistaken beliefs are spoken aloud. One possible reading is that the doorway moves from a barrier into a place to compare what each knows. A reader could focus instead on the mix-up between entrances. The closing sign may matter to that reading, but the story does not show how later visitors use it."
     },
     {
       "title": "A question about partial knowledge",
@@ -129,7 +129,7 @@ The seven complete scenes stay unchanged in `dist/two-threads-content.mjs` under
     "steps": [
       "The word empty appears twice in this story, but it describes different things: first the bowl, then the path. A repeated word need not name the same object.",
       "At noon, the bowl holds a gift of seed, but the path is empty. Neri puts out another chair and waits. One reading is that she hopes someone will join her. The extra chair and the contrast between a full bowl and an empty path support that reading; the story does not state her thoughts.",
-      "We know what Neri does: she sets another chair and waits. We can discuss whether that waiting feels hopeful, lonely, or both, and point to words for a reading. The repeated word alone does not tell us who left the seed."
+      "We know what Neri does: she sets another chair and waits. We can discuss whether that waiting feels hopeful, lonely, or both, and point to words for a reading. The story does not say who left the seed."
     ]
   }
 }
