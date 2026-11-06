@@ -1,6 +1,7 @@
 // Independent integer geometry checks for original, synthetic paper plans.
 import assert from 'node:assert/strict';
-import {defaultSquarePensDraft,validSquarePensDraft,changeSquarePensDraft,nextSquarePensInvitation,squarePensModel,squarePensReference,squarePensContrast,squarePensPairs} from '../dist/square-pens-core.mjs';
+import {defaultSquarePensDraft,validSquarePensDraft,changeSquarePensDraft,nextSquarePensInvitation,squarePensModel,squarePensReference,squarePensContrast,squarePensPairs,missingSquareModel,nextMissingSquareInvitation} from '../dist/square-pens-core.mjs';
+import {renderSquarePensMissing} from '../dist/square-pens-ui.mjs';
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;};
 const sub=(a,b)=>[a[0]-b[0],a[1]-b[1]],dot=(a,b)=>a[0]*b[0]+a[1]*b[1],sq=(a,b)=>dot(sub(a,b),sub(a,b));
 function twiceArea(ps){let sum=0;for(let i=0;i<ps.length;i++){const p=ps[i],q=ps[(i+1)%ps.length];sum+=p[0]*q[1]-q[0]*p[1];}return Math.abs(sum);}
@@ -17,7 +18,7 @@ function endpoint(polygons,L,label){
  for(let i=0;i<polygons.length;i++)for(let j=i+1;j<polygons.length;j++)ok(disjointInteriors(polygons[i],polygons[j]),label+' has no overlapping interiors');
  eq(polygons.reduce((total,p)=>total+twiceArea(p),0),2*L*L,label+' exactly fills the frame');
 }
-const initial=defaultSquarePensDraft();eq(initial,{a:3,b:4,turn:0,move:0,page:'build',markedSide:null,lengthOpen:false,invitationIndex:0,whyStep:0,compare:false},'initial paper plan');
+const initial=defaultSquarePensDraft();eq(initial,{a:3,b:4,turn:0,move:0,page:'build',markedSide:null,lengthOpen:false,invitationIndex:0,whyStep:0,compare:false,missingC:5,missingA:3,missingStep:0,missingTurn:0,missingIndex:0},'initial paper plan');
 const whole=[];
 for(let a=1;a<=12;a++)for(let b=1;b<=12;b++)for(let turn=0;turn<4;turn++){
  const d={...initial,a,b,turn},m=squarePensModel(d),L=a+b,expectedN=a*a+b*b,label=`${a},${b},turn${turn}`;
@@ -80,4 +81,69 @@ for(let whyStep=0;whyStep<6;whyStep++){const ref=squarePensReference(whyStep);eq
 const contrast=squarePensContrast(),[A,B,C]=contrast.points;
 ok(Math.abs(sq(A,B)-9)<1e-12&&Math.abs(sq(A,C)-16)<1e-12&&Math.abs(sq(B,C)-36)<1e-12,'contrast coordinates have sides3,4,6');
 eq(dot(sub(B,A),sub(C,A)),-11/2,'contrast angle A is obtuse');ok(dot(sub(A,B),sub(C,B))>0&&dot(sub(A,C),sub(B,C))>0,'other contrast angles are acute');
-console.log(`Square Pens: ${n} checks passed (all 144 ordered leg pairs, four rotations, exact endpoint geometry).`);
+
+
+// The inverse-side model is a different local material; it never borrows Build answers.
+let missingCount=0;const missingWhole=[];
+for(let c=2;c<=17;c++)for(let a=1;a<=12&&a<c;a++){
+ missingCount++;const N=c*c-a*a;
+ for(let turn=0;turn<4;turn++)for(let step=0;step<3;step++){
+  const d={...initial,page:'missing',missingC:c,missingA:a,missingStep:step,missingTurn:turn},m=missingSquareModel(d),label=`missing c${c},a${a},turn${turn},step${step}`;
+  eq([m.C,m.A,m.N],[c*c,a*a,N],label+' exact area subtraction');ok(N>0&&a*a+N===c*c,label+' positive remaining square area');
+  ok(m.k*m.k<=N&&m.u*m.u>N&&m.u===m.k+1,label+' integer root bracket');eq(m.exact,m.k*m.k===N,label+' exact side classification');
+  ok(N<c*c,label+' missing leg shorter than hypotenuse by integer comparison');
+  const [O,P,Q]=m.triangle.points;
+  const r=Math.sqrt(N),expectedP=[[a,0],[0,a],[-a,0],[0,-a]][turn],expectedQ=[[0,r],[-r,0],[0,-r],[r,0]][turn];
+  eq(O,[0,0],label+' rotation fixes the square corner');eq(P,expectedP,label+' known leg follows independent quarter-turn table');ok(Q.every((v,i)=>Math.abs(v-expectedQ[i])<1e-9),label+' unknown leg follows independent quarter-turn table');
+  ok(Math.abs(sq(O,P)-a*a)<1e-9&&Math.abs(sq(O,Q)-N)<1e-9&&Math.abs(sq(P,Q)-c*c)<1e-9,label+' drawing lengths within floating tolerance');
+  ok(Math.abs(dot(sub(P,O),sub(Q,O)))<1e-9,label+' drawing right corner within floating tolerance');
+  eq(twiceArea(m.nested.outer),2*c*c,label+' outer square exact area');eq(twiceArea(m.nested.known),2*a*a,label+' known square exact area');eq(twiceArea(m.nested.remaining),2*N,label+' L-shaped remainder exact area');
+  ok(Math.abs(twiceArea(m.remainingSquare)-2*N)<1e-9,label+' separate drawing square has the remaining area');
+  const expected=[[c,c],[a,a]];
+  if(step===2){expected.push([m.k,m.k]);if(!m.exact)expected.push([m.u,m.u]);}
+  const expectedPairs=[...new Set(expected.filter(([p,q])=>p>=1&&p<=12&&q>=1&&q<=12).map(pair=>pair.join(',')))].sort();
+  eq(squarePensPairs(d).map(pair=>pair.join(',')).sort(),expectedPairs,label+' only visible eligible products');
+  if(turn===0&&step===0&&m.exact)missingWhole.push([c,a]);
+ }
+}
+eq(missingCount,126,'every legal c/known-leg pair exercised');
+eq(missingWhole,[[5,3],[5,4],[10,6],[10,8],[13,5],[13,12],[15,9],[15,12],[17,8]],'nine whole missing-side pairs');
+eq(missingSquareModel({...initial,missingTurn:1}).triangle.points,[[0,0],[0,3],[-4,0]],'inverse triangle points rotate around origin');
+for(const patch of [{missingC:1},{missingC:18},{missingC:3},{missingC:'5'},{missingA:0},{missingA:13},{missingA:5},{missingA:2.5},{missingStep:-1},{missingStep:3},{missingTurn:4},{missingIndex:6}]){
+ eq(changeSquarePensDraft(initial,patch),null,'invalid inverse-side patch refused atomically');eq(missingSquareModel({...initial,...patch}),null,'unsupported inverse model refused');
+}
+const finished={...initial,a:5,b:12,move:3,turn:2,markedSide:'c',lengthOpen:true,compare:true,invitationIndex:4,whyStep:5,page:'missing',missingStep:2,missingTurn:3,missingIndex:2};
+const changedMissing=changeSquarePensDraft(finished,{missingC:13});
+eq(changedMissing,{...finished,missingC:13,missingStep:0},'missing dimension resets its step only, retaining every Build choice');
+eq(changeSquarePensDraft(finished,{missingA:4}),{...finished,missingA:4,missingStep:0},'known-side edit preserves both materials except its own reveal step');
+eq(changeSquarePensDraft(finished,{missingTurn:0}),{...finished,missingTurn:0},'inverse turn does not reset either material or reveal');
+eq(changeSquarePensDraft(finished,{a:6}),{...finished,a:6,move:0,markedSide:null},'Build edit does not reset inverse material or reveal');
+let missingNext={...finished,missingC:8,missingA:2,missingIndex:0};const missingInvitations=[];
+for(let i=0;i<6;i++){const before=missingNext;missingNext=nextMissingSquareInvitation(missingNext);missingInvitations.push([missingNext.missingC,missingNext.missingA]);eq(missingNext,{...before,missingC:missingNext.missingC,missingA:missingNext.missingA,missingStep:0,missingIndex:(before.missingIndex+1)%6},'inverse invitation changes only its material, step and cursor');}
+eq(missingInvitations,[[13,5],[10,8],[5,4],[4,2],[2,1],[5,3]],'inverse invitations advance and wrap after free edits');
+eq(pairs({page:'missing',missingC:13,missingA:5,missingStep:0}),['5,5'],'large hypotenuse filters out-of-range c product');
+eq(pairs({page:'missing',missingC:13,missingA:5,missingStep:2}),['12,12','5,5'],'reveal qualifies the newly shown12-square');
+eq(pairs({page:'missing',missingC:17,missingA:1,missingStep:2}),['1,1'],'large nonwhole root brackets stay outside helper without refusing display');
+eq(pairs({page:'missing',missingC:2,missingA:1,missingStep:2}),['1,1','2,2'],'duplicate bracket and input squares deduplicate');
+eq(pairs({page:'missing',missingC:5,missingA:4,missingStep:2}),['3,3','4,4','5,5'],'swapped known leg reveals the other side');
+eq(pairs({...finished,page:'build'}),pairs({a:5,b:12,move:3,lengthOpen:true}),'inverse material cannot contaminate Build exposure');
+// Inspect the actual production section, not a mirrored renderer or facts registry.
+for(let c=2;c<=17;c++)for(let a=1;a<=12&&a<c;a++)for(let step=0;step<3;step++)for(let turn=0;turn<4;turn++){
+ const d={...initial,page:'missing',missingC:c,missingA:a,missingStep:step,missingTurn:turn},html=renderSquarePensMissing(d),N=c*c-a*a,label=`render c${c},a${a},step${step},turn${turn}`;
+ const shown=[];
+ for(const match of html.matchAll(/(\d+) × (\d+) = (\d+)/g)){
+  const [x,y,z]=match.slice(1).map(Number);eq(x*y,z,label+' visible product is mathematically correct');shown.push([x,y]);
+ }
+ for(const match of html.matchAll(/data-sp-square-side="(\d+)" data-sp-square-area="(\d+)"/g)){
+  const [side,area]=match.slice(1).map(Number);eq(side*side,area,label+' pictured whole-side square has its stated area');shown.push([side,side]);
+ }
+ const eligible=[...new Set(shown.filter(p=>p.every(n=>n>=1&&n<=12)).map(p=>p.join(',')))].sort();
+ eq(eligible,squarePensPairs(d).map(p=>p.join(',')).sort(),label+' actual shown eligible multiplication equals pre-DOM qualification');
+ ok(html.includes('Your Build pieces are kept.')&&!html.includes('Your pieces wait: a='),label+' own Build dimensions never leak into this page');
+ eq(html.includes('data-sp-missing-difference'),step>=1,label+' remaining area appears only after elected subtraction');
+ eq(html.includes('data-sp-missing-answer'),step===2,label+' side-answer section appears only at elected length step');
+ if(step<2){ok(html.includes('other short side b is unknown')&&html.includes('<dd>?</dd>'),label+' visible and aria triangle sides both stay unknown');ok(!html.includes('√')&&!html.includes('square root of')&&!html.includes('lies between'),label+' early section contains no root/bracket disclosure');}
+ if(step===0)ok(!html.includes('data-sp-missing-area-label')&&!html.includes('Other square’s area:'),label+' comparison does not insert subtraction result');
+ else ok(html.includes(`${c*c} − ${a*a} = ${N} square units`),label+' elected subtraction uses the exact known areas');
+}
+console.log(`Square Pens: ${n} checks passed (144 Build pairs and 126 inverse-side pairs, four rotations, exact areas and bounded drawing geometry).`);

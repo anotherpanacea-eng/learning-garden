@@ -1,17 +1,30 @@
-import {squarePensInvitations} from './square-pens-content.mjs';
+import {squarePensInvitations,missingSquareInvitations} from './square-pens-content.mjs';
 const integer=(n,lo,hi)=>Number.isInteger(n)&&n>=lo&&n<=hi;
-const keys=['a','b','turn','move','page','markedSide','lengthOpen','invitationIndex','whyStep','compare'];
+const keys=['a','b','turn','move','page','markedSide','lengthOpen','invitationIndex','whyStep','compare','missingC','missingA','missingStep','missingTurn','missingIndex'];
 const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-export function defaultSquarePensDraft(){return {a:3,b:4,turn:0,move:0,page:'build',markedSide:null,lengthOpen:false,invitationIndex:0,whyStep:0,compare:false};}
-export function validSquarePensDraft(d){return !!d&&typeof d==='object'&&!Array.isArray(d)&&Object.keys(d).length===keys.length&&keys.every(k=>own(d,k))&&integer(d.a,1,12)&&integer(d.b,1,12)&&integer(d.turn,0,3)&&integer(d.move,0,3)&&['build','why','corner'].includes(d.page)&&[null,'a','b','c'].includes(d.markedSide)&&typeof d.lengthOpen==='boolean'&&integer(d.invitationIndex,0,5)&&integer(d.whyStep,0,5)&&typeof d.compare==='boolean';}
+export function defaultSquarePensDraft(){return {a:3,b:4,turn:0,move:0,page:'build',markedSide:null,lengthOpen:false,invitationIndex:0,whyStep:0,compare:false,missingC:5,missingA:3,missingStep:0,missingTurn:0,missingIndex:0};}
+export function validSquarePensDraft(d){return !!d&&typeof d==='object'&&!Array.isArray(d)&&Object.keys(d).length===keys.length&&keys.every(k=>own(d,k))&&integer(d.a,1,12)&&integer(d.b,1,12)&&integer(d.turn,0,3)&&integer(d.move,0,3)&&['build','why','corner','missing'].includes(d.page)&&[null,'a','b','c'].includes(d.markedSide)&&typeof d.lengthOpen==='boolean'&&integer(d.invitationIndex,0,5)&&integer(d.whyStep,0,5)&&typeof d.compare==='boolean'&&integer(d.missingC,2,17)&&integer(d.missingA,1,12)&&d.missingA<d.missingC&&integer(d.missingStep,0,2)&&integer(d.missingTurn,0,3)&&integer(d.missingIndex,0,5);}
 // Proposals are detached. Reject unknown/out-of-domain keys before changing any material.
 export function changeSquarePensDraft(d,patch){
  if(!validSquarePensDraft(d)||!patch||typeof patch!=='object'||Array.isArray(patch)||Object.keys(patch).some(k=>!keys.includes(k)))return null;
  const next={...d,...patch};if(!validSquarePensDraft(next))return null;
  if(next.a!==d.a||next.b!==d.b){next.move=0;next.markedSide=null;}
+ if(next.missingC!==d.missingC||next.missingA!==d.missingA)next.missingStep=0;
  return next;
 }
 export function nextSquarePensInvitation(d){if(!validSquarePensDraft(d))return null;const invitationIndex=(d.invitationIndex+1)%squarePensInvitations.length,[a,b]=squarePensInvitations[invitationIndex];return {...d,a,b,move:0,markedSide:null,invitationIndex};}
+export function nextMissingSquareInvitation(d){if(!validSquarePensDraft(d))return null;const missingIndex=(d.missingIndex+1)%missingSquareInvitations.length,[missingC,missingA]=missingSquareInvitations[missingIndex];return {...d,missingC,missingA,missingStep:0,missingIndex};}
+// Area/root decisions are exact integers. The square root below positions drawing points only.
+export function missingSquareModel(d){
+ if(!validSquarePensDraft(d))return null;
+ const c=d.missingC,a=d.missingA,C=c*c,A=a*a,N=C-A,turn=d.missingTurn,step=d.missingStep;
+ let k=0;while((k+1)*(k+1)<=N)k++;const u=k+1,exact=k*k===N,drawingLength=Math.sqrt(N);
+ const rotate=point=>{let [x,y]=point;for(let i=0;i<turn;i++)[x,y]=[-y,x];return [x===0?0:x,y===0?0:y];},O=rotate([0,0]),P=rotate([a,0]),Q=rotate([0,drawingLength]);
+ return {c,a,C,A,N,k,u,K:k*k,U:u*u,exact,b:exact?k:`√${N}`,drawingLength,turn,step,
+  triangle:{points:[O,P,Q],rightCorner:O,sides:{a:[O,P],b:[O,Q],c:[P,Q]}},
+  nested:{outer:[[0,0],[c,0],[c,c],[0,c]],known:[[0,c-a],[a,c-a],[a,c],[0,c]],remaining:[[0,0],[c,0],[c,c],[a,c],[a,c-a],[0,c-a]]},
+  remainingSquare:[[0,0],[drawingLength,0],[drawingLength,drawingLength],[0,drawingLength]]};
+}
 const shift=(points,dx,dy)=>points.map(([x,y])=>[x+dx,y+dy]);
 function rotatePoint(point,L,turn){let [x,y]=point;for(let i=0;i<turn;i++)[x,y]=[L-y,x];return [x,y];}
 export function squarePensModel(d){
@@ -31,9 +44,10 @@ export function squarePensReference(whyStep=0){if(!integer(whyStep,0,5))return n
 export function squarePensContrast(){return {points:[[0,0],[3,0],[-11/6,Math.sqrt(455)/6]],labels:['A','B','C'],sides:{a:3,b:4,c:6},corner:0,areas:[9,16,36]};}
 // Match only the selected page's actual numerical surfaces, including pictured labeled squares.
 export function squarePensPairs(d){
- const m=squarePensModel(d);if(!m)return [];
- const pairs=[],add=(a,b)=>pairs.push([a,b]);
- if(d.page==='corner'){add(3,3);add(4,4);add(6,6);}
+ if(!validSquarePensDraft(d))return [];
+ const m=d.page==='missing'?null:squarePensModel(d),pairs=[],add=(a,b)=>pairs.push([a,b]);
+ if(d.page==='missing'){const missing=missingSquareModel(d);add(missing.c,missing.c);add(missing.a,missing.a);if(d.missingStep===2){add(missing.k,missing.k);if(!missing.exact)add(missing.u,missing.u);}}
+ else if(d.page==='corner'){add(3,3);add(4,4);add(6,6);}
  else if(d.page==='why'){
   if(d.whyStep>=4){add(3,3);add(4,4);}
   if(d.whyStep===5){add(5,5);add(7,7);add(3,4);add(2,12);}

@@ -1,6 +1,6 @@
 #397 · The missing square
 
-Status: proposed; independent specification and finite mathematics/content review required before runtime. Extends396 inside Square Pens at #workshop/copy-frame, not206's full course. LG-G1, M5-V with M4-IV return; fictional library garden purpose, no chapter contribution. Pip has the long side and one short side of a right-triangle paper plan. What can the other side be?
+Status: independent six-lens specification and finite mathematics/content review cleared before runtime; P2 repairs independently closed at61809ac1. Implementation and release retain their separate gates. Extends396 inside Square Pens at #workshop/copy-frame, not206's full course. LG-G1, M5-V with M4-IV return; fictional library garden purpose, no chapter contribution. Pip has the long side and one short side of a right-triangle paper plan. What can the other side be?
 
 ## Upstream and prerequisite study
 
