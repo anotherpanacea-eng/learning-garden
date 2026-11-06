@@ -1,6 +1,6 @@
 #398 · Follow an Echo
 
-Status: proposed, no runtime commissioned until independent six-lens and complete literary/content review. LG-G1/E3-V, with E3-III/IV returns. Extends Two Threads387 inside #learn/english. This is the town collection’s work for future readers in ActIV, not an earned chapter/act contribution or a whole-novel course. No new destination or learner model.
+Status: independent six-lens specification and complete literary/content review cleared before runtime; final focused closure atc6a1b6e1643c87d2e0e1437eb8b5869861fade25. Implementation/release retain separate gates. LG-G1/E3-V, with E3-III/IV returns. Extends Two Threads387 inside #learn/english. This is the town collection’s work for future readers in ActIV, not an earned chapter/act contribution or a whole-novel course. No new destination or learner model.
 
 ## Missing action and sources
 

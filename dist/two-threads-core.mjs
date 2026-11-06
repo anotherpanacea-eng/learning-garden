@@ -47,6 +47,57 @@ export function threadMap(s,order){
   });
  }catch{return null;}
 }
+// Echoes are optional annotations. Their readers never decide whether an older reading order is valid.
+const echoLens=x=>['words','image','idea'].includes(x);
+const echoDefault=()=>({v:1,left:null,right:null,lens:null,links:[],referenceShown:false,teachingSeen:0});
+export function readThreadEchoStudy(s){
+ try{
+  if(!validThreadSource(s))return {status:'unavailable',study:null};
+  if(!own(s,'echoStudy'))return {status:'absent',study:null};
+  const e=s.echoStudy,cardId=x=>e.cards.some(c=>c.id===x);
+  const anchored=c=>{if(!fields(c,['id','sceneId','paragraphIndex','text'])||!id(c.id)||!id(c.sceneId)||!Number.isInteger(c.paragraphIndex)||c.paragraphIndex<0||!text(c.text))return false;const scene=s.scenes.find(p=>p.id===c.sceneId);return !!scene&&c.paragraphIndex<scene.paragraphs.length&&scene.paragraphs[c.paragraphIndex].includes(c.text);};
+  if(!fields(e,['v','title','notice','invitations','cards','references','demo'])||e.v!==1||!text(e.title,160)||!text(e.notice)||!dense(e.invitations,1,6,p=>fields(p,['id','prompt'])&&id(p.id)&&text(p.prompt))||!unique(e.invitations.map(p=>p.id))||!dense(e.cards,4,12,anchored)||!unique(e.cards.map(c=>c.id))||!dense(e.references,1,6,r=>fields(r,['title','left','right','lens','text'])&&text(r.title,160)&&id(r.left)&&id(r.right)&&r.left!==r.right&&cardId(r.left)&&cardId(r.right)&&echoLens(r.lens)&&text(r.text))||!fields(e.demo,['title','text','first','second','steps'])||!text(e.demo.title,160)||!text(e.demo.text)||!text(e.demo.first)||!text(e.demo.second)||e.demo.first===e.demo.second||!e.demo.text.includes(e.demo.first)||!e.demo.text.includes(e.demo.second)||!dense(e.demo.steps,1,4,p=>text(p)))return {status:'unavailable',study:null};
+  return {status:'ready',study:e};
+ }catch{return {status:'unavailable',study:null};}
+}
+const echoIdentity=(row,left,right,lens)=>fields(row,['left','right','lens'])&&row.lens===lens&&((row.left===left&&row.right===right)||(row.left===right&&row.right===left));
+export function findThreadEchoLink(echoes,left,right,lens){
+ try{if(!object(echoes)||!own(echoes,'links')||!Array.isArray(echoes.links)||!id(left)||!id(right)||left===right||!echoLens(lens))return -1;return echoes.links.findIndex(row=>echoIdentity(row,left,right,lens));}catch{return -1;}
+}
+export function readThreadEchoWork(s,w){
+ const unavailable=(stored=false,echoes=null,rows=[],preview=null)=>({status:'unavailable',echoes,stored,rows,preview});
+ try{
+  if(!validThreadWork(s,w))return unavailable();
+  const source=readThreadEchoStudy(s),stored=own(w,'echoes');
+  if(source.status==='absent')return stored?unavailable(true,w.echoes):{status:'absent',echoes:null,stored:false,rows:[],preview:null};
+  if(source.status!=='ready')return unavailable(stored,stored?w.echoes:null);
+  const e=stored?w.echoes:echoDefault(),study=source.study,cardId=x=>study.cards.some(c=>c.id===x),side=x=>x===null||cardId(x),link=row=>fields(row,['left','right','lens'])&&id(row.left)&&id(row.right)&&row.left!==row.right&&cardId(row.left)&&cardId(row.right)&&echoLens(row.lens);
+  const rows=object(e)&&own(e,'links')&&Array.isArray(e.links)?Array.from(e.links,(raw,index)=>({index,raw,readable:link(raw)})):[];
+  const preview=object(e)?{left:own(e,'left')&&side(e.left)?e.left:null,right:own(e,'right')&&side(e.right)?e.right:null,lens:own(e,'lens')&&echoLens(e.lens)?e.lens:null}:null;
+  const max=3*study.cards.length*(study.cards.length-1)/2;
+  const valid=fields(e,['v','left','right','lens','links','referenceShown','teachingSeen'])&&e.v===1&&side(e.left)&&side(e.right)&&(e.lens===null||echoLens(e.lens))&&dense(e.links,0,max,link)&&unique(e.links.map(r=>JSON.stringify([[r.left,r.right].sort(),r.lens])))&&typeof e.referenceShown==='boolean'&&Number.isSafeInteger(e.teachingSeen)&&e.teachingSeen>=0&&e.teachingSeen<=study.demo.steps.length;
+  return valid?{status:'ready',echoes:e,stored,rows,preview}:unavailable(stored,e,rows,preview);
+ }catch{return unavailable(!!w&&object(w)&&own(w,'echoes'));}
+}
+export function changeThreadEcho(s,w,action,value){
+ try{
+  const view=readThreadEchoWork(s,w),source=readThreadEchoStudy(s);if(view.status!=='ready'||source.status!=='ready')return null;
+  const next=structuredClone(w),e=structuredClone(view.echoes),study=source.study,cardId=x=>study.cards.some(c=>c.id===x);
+  if(action==='setleft'||action==='setright'){if(value!==null&&!cardId(value))return null;e[action==='setleft'?'left':'right']=value;}
+  else if(action==='lens'){if(value!==null&&!echoLens(value))return null;e.lens=value;}
+  else if(action==='connect'){
+   if(e.left===null||e.right===null||e.left===e.right||!echoLens(e.lens)||findThreadEchoLink(e,e.left,e.right,e.lens)>=0)return null;
+   e.links.push({left:e.left,right:e.right,lens:e.lens});
+  }else if(action==='focus'||action==='remove'){
+   if(!fields(value,['left','right','lens']))return null;const at=findThreadEchoLink(e,value.left,value.right,value.lens);if(at<0)return null;
+   if(action==='focus'){const row=e.links[at];e.left=row.left;e.right=row.right;e.lens=row.lens;}else e.links.splice(at,1);
+  }else if(action==='reference')e.referenceShown=true;
+  else if(action==='teaching')e.teachingSeen=Math.min(study.demo.steps.length,e.teachingSeen+1);
+  else return null;
+  next.echoes=e;return next;
+ }catch{return null;}
+}
+
 const sheetNumber=r=>object(r)&&own(r,'id')&&typeof r.id==='string'&&/^thread-reading-[1-9][0-9]{0,5}$/.test(r.id)?Number(r.id.slice(15)):null;
 export function threadSheetsView(book){
  if(!object(book))return {status:'unavailable',items:[],canKeep:false};
