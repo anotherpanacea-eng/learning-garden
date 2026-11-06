@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Follow an Echo398 · recurring details in context
 
-[Follow an Echo398](specs/398-follow-an-echo.md) extends the existing Two Threads story with paired passages, complete-scene context and revisitable connections through words, images/sounds and ideas. The complete original [study and miniature](content/398-follow-an-echo-text.md) have independent literary and specification clearance after repairs to literal-versus-inferred meaning and fair reference interpretations. Its bounded implementation is in build. Kept connections are ungraded annotations under their own frozen story; historical reading orders stay usable without new echo fields. Whole-novel study and broader theme/research courses remain separate.
+[Follow an Echo398](specs/398-follow-an-echo.md) extends the existing Two Threads story with paired passages, complete-scene context and revisitable connections through words, images/sounds and ideas. The complete original [study and miniature](content/398-follow-an-echo-text.md) have independent literary and specification clearance after repairs to literal-versus-inferred meaning and fair reference interpretations. Its bounded implementation is built; the [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/480#issuecomment-6696551077) owns independent implementation review and publication status. Kept connections are ungraded annotations under their own frozen story; historical reading orders stay usable without new echo fields. Whole-novel study and broader theme/research courses remain separate.
 
 ## The missing square397 · a different unknown
 
