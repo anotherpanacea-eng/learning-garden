@@ -1,6 +1,6 @@
 # 396 · Square Pens: same pieces, different squares
 
-**Status: proposed bounded implementation, independent specification and finite mathematics review required before code.** Narrows [206](206-surveyors-triangle.md) Square Pens, rather than commissioning its whole Survey Shed or copying its mark-first gate. Exact finite copy: [396 text](../content/396-square-pens-text.md). [Source audit](../source-audits/396-square-pens.md).
+**Status: specification and finite mathematics independently cleared; implementation in qualification.** Narrows [206](206-surveyors-triangle.md) Square Pens, rather than commissioning its whole Survey Shed or copying its mark-first gate. Exact finite copy: [396 text](../content/396-square-pens-text.md). [Source audit](../source-audits/396-square-pens.md).
 
 ## Problem and purpose
 

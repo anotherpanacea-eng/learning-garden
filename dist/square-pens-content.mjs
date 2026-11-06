@@ -1,0 +1,37 @@
+// Original, finite paper-model teaching. No learner or notebook data.
+export const squarePensInvitations=Object.freeze([[3,4],[5,12],[6,8],[1,1],[2,3],[4,3]].map(Object.freeze));
+export const squarePensWhy=Object.freeze([
+ 'This right triangle has short sides 3 and 4 units. The square marks its right angle.',
+ 'Four copies fit inside a square frame, 7 units on each side. Each triangle is half a 3-by-4 rectangle.',
+ 'Each middle side is a copy of the triangle’s long side. A triangle’s angles total 180°. Take away its square corner: its other two angles, α and β, total 90°. At each middle corner, one of each meets on a straight edge. The middle corner is 180° minus 90°: another 90°.',
+ 'Move the same pieces. The frame and the four triangles keep the same areas.',
+ 'The empty squares are 9 and 16 square units. Together they make 25 square units, just like the middle square.',
+ 'Area is not side length. The middle square has area 25 square units. Because 5 × 5 = 25, its side is 5 units.',
+]);
+export const squarePensCopy=Object.freeze({
+ entry:'Square Pens',entryDetail:'Right triangles and square areas.',title:'Same pieces, different squares',
+ story:'Pip needs a paper plan for square pens by the library garden. Can the same pieces explain the long side?',
+ model:'This is a made-up paper model, not a building plan.',back:'Back to Copy Frame',
+ pages:Object.freeze({build:'Build',why:'Why it works',corner:'A different corner'}),
+ a:'Short side a',b:'Short side b',less:'Less',more:'More',turn:'Turn the plan',another:'Try another pen',
+ move:'Move one piece',moveBack:'Move back',reset:'Reset pieces',compare:'Compare finished plans',pieces:'Back to my pieces',
+ length:'Show the side length',hideLength:'Hide the side length',
+ moving:'Moving the pieces. Compare the empty areas after the last move.',
+ finished:'Same frame. Same four triangles. The middle square has the same total area as the two corner squares together.',
+ pieceLabels:Object.freeze(['Triangle 1','Triangle 2','Triangle 3','Triangle 4']),
+ sidePrompt:'Which side is across from the square corner?',
+ leg:'This side touches the square corner. Look across from that corner.',
+ hypotenuse:'This is the hypotenuse: the side across from the square corner.',
+ formula:'a² + b² = c². The little 2 means “multiply the number by itself.” This rule is for a right triangle.',
+ longer:'The long side is longer than either short side.',
+ discuss:'Tell someone why moving these pieces keeps the empty area the same. Then try another pair of short sides.',
+ whyLengths:'Example sides: 3 and 4 units',cornerLengths:'Example sides: 3, 4 and 6 units',
+ corner:'This triangle has sides 3, 4 and 6 units. Its marked corner, between the 3 and 4 sides, is wider than a square corner.',
+ cornerRule:'9 + 16 = 25, but 6 × 6 = 36. The square-area rule does not fit this triangle. It needs a right angle.',
+ reference:'Frame: 7 × 7 = 49 square units. One paired rectangle: 3 × 4 = 12 square units. Four triangles: 2 × 12 = 24 square units. Empty area: 49 − 24 = 25 square units.',
+ equality:'Open Equality Desk',
+ equalityDetail:'Choose Curve Window there to explore square rules. Leaving this board starts a fresh paper plan when you return.',
+ refusal:'That view could not be prepared safely. Your pieces and earlier notes are unchanged. Try again, download your notes, or go back.',
+ retry:'Retry view',notes:'Grown-up notes',
+ sessionOnly:'The pictures can still work during this visit. These help notes are not saved on this device. Ask a grown-up to download your notes if you want to keep them.',
+});

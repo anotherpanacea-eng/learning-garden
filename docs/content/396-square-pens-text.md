@@ -18,7 +18,7 @@ New invitation announcement: **New pen: short sides {a} and {b} units.**
 Corner inset labels: **α · β · square corner: 90° · straight edge: 180° · middle corner: 90°**.
 Optional square-rule link: **Open Equality Desk** (`#learn/math/equality`). **Choose Curve Window there to explore square rules. Leaving this board starts a fresh paper plan when you return.** No new transfer/deep link.
 Finished state: **Same frame. Same four triangles. The middle square has the same total area as the two corner squares together.**
-Piece key: **Triangle 1 · Triangle 2 · Triangle 3 · Triangle 4**; ids/patterns remain fixed.
+Piece key: **Triangle 1 · Triangle 2 · Triangle 3 · Triangle 4**; ids/patterns remain fixed. **The patterns identify pieces; they are not square units.**
 Small-triangle sides: **side a · side b · side c**. Optional prompt: **Which side is across from the square corner?**
 Leg response: **This side touches the square corner. Look across from that corner.**
 Hypotenuse response: **This is the hypotenuse: the side across from the square corner.**

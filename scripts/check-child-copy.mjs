@@ -461,6 +461,8 @@ export const copyScopes = [
   {path:'dist/town-remembers-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/water-evidence-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/water-ring-film.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/square-pens-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/square-pens-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/weather-tally-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/willow-path-ui.mjs',adultBlocks:[],quotations:[]},
   // LG-2b batch 8 (fleet #1414).
