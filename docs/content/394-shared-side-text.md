@@ -71,3 +71,5 @@ Proposed area: At x = {x}, {a} times {x} is {a*x}; plus {b} gives width {a*x+b} 
 Area table headings: Part; Dimensions in centimeters; Area in square centimeters. Rows: x-region; Number region; Whole proposed rectangle. Whole row: {k} by {a*x+b}; {k*(a*x+b)} square centimeters. Drawn numbers and table agree.
 Drawing accessible description: Proposed rectangle: outside side {k} centimeters, inside side {a*x+b} centimeters. It splits into widths {a*x} and {b}. Areas are {k*a*x} and {k*b} square centimeters. Total area is {k*(a*x+b)} square centimeters. Exact dimensions and areas are repeated in the table.
 Missing and empty-region drawings use their existing explicit notices instead of inventing these values. Generic interface templates are current chrome derived only from the retained numerical source and proposal; mathematical context, teaching and reference introduction remain source-owned.
+
+Narrow table headings: Sides (cm); Area (cm²). Accessible header names retain Dimensions in centimeters and Area in square centimeters.
