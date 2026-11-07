@@ -60,8 +60,8 @@ export function riddlesNotes(state){
 }
 export function bindRiddles(state,ctx){
  const {save,render,focus,canExport,explorerId}=ctx;
- const boundVisit=visit,token=generation,owner=()=>explorerId?.()??boundVisit.owner;
- const contextLive=()=>visit===boundVisit&&token===generation&&visit.state===state&&owner()===visit.owner&&(!ctx.notebook||ctx.notebook()===state)&&(!ctx.isActive||ctx.isActive())&&location.hash==='#riddles';
+ const boundVisit=visit,token=generation,route=location.hash,owner=()=>explorerId?.()??boundVisit.owner;
+ const contextLive=()=>visit===boundVisit&&token===generation&&visit.state===state&&owner()===visit.owner&&(!ctx.notebook||ctx.notebook()===state)&&(!ctx.isActive||ctx.isActive())&&location.hash===route;
  const redraw=target=>{ctx.stopSpeech?.();ctx.stopSound?.();render();focus?.(target);};
  if(visit.active){
   const scope=document.querySelector('[data-magpie-root]');if(!scope)return;
@@ -81,14 +81,14 @@ export function bindRiddles(state,ctx){
  let rootRef=state.riddles,usedRecover=!recovery?.open,confirmRoot=recovery?.open?state.riddles:null;
  visit.restoreFold=null;
  const status=message=>{const p=scope.querySelector('#riddle-status');if(p){p.textContent=message;p.focus();}};
- const act=(n,fn,target)=>{if(!live(n)||state.riddles!==rootRef)return false;const result=commitRiddles(state,fn,canExport);if(result===false){status('This change cannot be saved as a readable notes download. Earlier work is unchanged. Download notes or use a separate explorer.');return false;}rootRef=state.riddles;save();redraw(typeof target==='function'?target(result):target);return true;};
- scope.querySelector('[data-magpie-entry]')?.addEventListener('click',e=>{const n=e.currentTarget;if(!live(n))return;visit.work??=createMagpiePictures();visit.frame=parentFrame();visit.fold=!!recovery?.open;visit.active=true;redraw('#magpie-title');});
+ const act=(n,fn,target)=>{if(location.hash!=='#riddles'||!live(n)||state.riddles!==rootRef)return false;const result=commitRiddles(state,fn,canExport);if(result===false){status('This change cannot be saved as a readable notes download. Earlier work is unchanged. Download notes or use a separate explorer.');return false;}rootRef=state.riddles;save();redraw(typeof target==='function'?target(result):target);return true;};
+ scope.querySelector('[data-magpie-entry]')?.addEventListener('click',e=>{const n=e.currentTarget;if(location.hash!=='#riddles'||!live(n))return;visit.work??=createMagpiePictures();visit.frame=parentFrame();visit.fold=!!recovery?.open;visit.active=true;redraw('#magpie-title');});
  scope.querySelectorAll('[data-riddle-size]').forEach(n=>n.onclick=()=>act(n,c=>chooseSize(c,n.dataset.riddleSize),`[data-riddle-size="${n.dataset.riddleSize}"]`));
  scope.querySelectorAll('[data-riddle-next],[data-riddle-put-back]').forEach(n=>n.onclick=()=>act(n,c=>nextRiddle(c),'#riddle-prompt'));
  scope.querySelectorAll('[data-riddle-choice]').forEach(n=>n.onclick=()=>act(n,c=>pickChoice(c,n.dataset.riddleChoice),result=>result.fits?'#riddle-result-title':'#riddle-nudge'));
  scope.querySelector('[data-riddle-clue]')?.addEventListener('click',e=>act(e.currentTarget,askClue,'.riddle-clue'));
  scope.querySelector('[data-riddle-show]')?.addEventListener('click',e=>act(e.currentTarget,showAnswer,'#riddle-result-title'));
- recovery?.addEventListener('toggle',()=>{if(!live(recovery))return;if(!recovery.open){usedRecover=true;confirmRoot=null;}else{usedRecover=false;confirmRoot=state.riddles;}});
- scope.querySelector('[data-riddle-cancel-recover]')?.addEventListener('click',e=>{if(!live(e.currentTarget))return;usedRecover=true;confirmRoot=null;recovery.open=false;focus?.('.riddle-card h2');});
- scope.querySelector('[data-riddle-confirm-recover]')?.addEventListener('click',e=>{if(!live(e.currentTarget)||usedRecover||!recovery.open||confirmRoot!==state.riddles)return;usedRecover=true;act(e.currentTarget,replaceRawRiddle,'#riddle-prompt');});
+ recovery?.addEventListener('toggle',()=>{if(location.hash!=='#riddles'||!live(recovery))return;if(!recovery.open){usedRecover=true;confirmRoot=null;}else{usedRecover=false;confirmRoot=state.riddles;}});
+ scope.querySelector('[data-riddle-cancel-recover]')?.addEventListener('click',e=>{if(location.hash!=='#riddles'||!live(e.currentTarget))return;usedRecover=true;confirmRoot=null;recovery.open=false;focus?.('.riddle-card h2');});
+ scope.querySelector('[data-riddle-confirm-recover]')?.addEventListener('click',e=>{if(location.hash!=='#riddles'||!live(e.currentTarget)||usedRecover||!recovery.open||confirmRoot!==state.riddles)return;usedRecover=true;act(e.currentTarget,replaceRawRiddle,'#riddle-prompt');});
 }
