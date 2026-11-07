@@ -1,6 +1,6 @@
 # 417 · Triangle Corners
 
-Status: proposed finite implementation contract; independent specification review required before code. Continues admitted LG-1 / LG-G1, operational branch custody1620.
+Status: independently BUILD-READY at7736883dc4bfb14c0540e7660cb4a7d10b2a94d6 after six specification lenses, complete mathematics/copy/visual-plan review and focused repair closure. Implementation and qualification are in progress; not yet published. Continues admitted LG-1 / LG-G1, operational branch custody1620.
 
 ## The next explanation
 
