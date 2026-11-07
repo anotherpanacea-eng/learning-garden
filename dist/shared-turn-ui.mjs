@@ -1,0 +1,58 @@
+import {sharedTurnJobs,sharedTurnLessons,sharedTurnCopy as copy} from './shared-turn-content.mjs';
+import {changeSharedTurn,sharedTurnModel,sharedTurnNarration,sharedTurnDraftNumber} from './shared-turn-core.mjs';
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const n=value=>Number(value.toFixed(6)),xy=point=>point.map(n).join(' '),points=list=>list.map(point=>point.map(n).join(',')).join(' ');
+const button=(action,label,value='',extra='')=>`<button type="button" data-shared-turn-action="${action}" data-shared-turn-value="${esc(value)}" ${extra}>${esc(label)}</button>`;
+const paragraph=(text,klass='')=>`<p${klass?` class="shared-turn-${klass}"`:''}>${esc(text)}</p>`;
+const measure=value=>value===0?'No turn · 0°':value===360?'One full turn · 360°':`${value}°`;
+function ray(r){return `<g class="shared-turn-ray shared-turn-ray-${r.role}" data-shared-turn-ray="${r.role}"><line x1="160" y1="160" x2="${n(r.solid[0])}" y2="${n(r.solid[1])}" stroke-width="${r.width}"/><line class="shared-turn-ray-continuation" x1="${n(r.solid[0])}" y1="${n(r.solid[1])}" x2="${n(r.continuation[0])}" y2="${n(r.continuation[1])}"/><polygon points="${points(r.head)}"/></g>`;}
+function arc(a){if(!a.segments.length)return '';return `<g class="shared-turn-arc shared-turn-arc-${a.role}" data-shared-turn-arc="${a.role}"><path d="M ${xy(a.segments[0].from)} ${a.segments.map(s=>`A ${s.radius} ${s.radius} 0 ${s.large} ${s.sweep} ${xy(s.to)}`).join(' ')}"/>${a.head?.length?`<polygon points="${points(a.head)}"/>`:''}</g>`;}
+function diagram(m){
+ const learn=m.page==='learn',cover=m.page==='cover',job=m.job,lesson=m.lesson;
+ const whole=learn?lesson.whole:cover?job.whole:m.build.whole,first=learn?lesson.first:cover?job.given:m.build.first;
+ const gap=learn&&lesson.gap,second=gap?60:whole-first,covered=cover&&!m.reading;
+ const description=gap?'A drawing of a 180-degree half counterclockwise turn at one pin. Four rays bound two 60-degree parts with a 60-degree gap between them. Ray lengths do not set the angle measures.':`A drawing of a ${whole}-degree ${whole===180?'half':'full'} counterclockwise turn at one pin. Starting ray, dividing ray and ending ray show first part ${first} degrees and second part ${covered?'covered':`${second} degrees`}. Ray lengths do not set the angle measures.`;
+ const equation=gap?'60° + 60° + gap 60° = 180°':`${first}° + ${covered?'?':second}° = ${whole}°`;
+ return `<figure class="shared-turn-figure"><svg class="shared-turn-diagram" viewBox="0 0 320 320" role="img" aria-label="${esc(description)}">${m.geometry.arcs.map(arc).join('')}${m.geometry.rays.map(ray).join('')}<circle class="shared-turn-pin" cx="160" cy="160" r="5"/></svg><figcaption><div class="shared-turn-labels">${paragraph(`Whole: ${measure(whole)}`,'whole-label')}${paragraph(`First part: ${measure(first)}`,'first-label')}${paragraph(covered?'?° · covered label':`Second part: ${measure(second)}`,'second-label')}${gap?paragraph('Gap 60°','gap-label'):''}</div>${paragraph(equation,'equation')}${paragraph(gap?'Gold wide solid: starting ray. Blue dashed: ending ray. The two fine inner rays bound the dotted gap. Follow the marked counterclockwise sweeps.':'Gold wide solid: starting ray. Dark fine solid: dividing ray. Blue dashed: ending ray. Follow the marked counterclockwise sweeps.','ray-key')}${m.geometry.notes.map(text=>paragraph(text,'geometry-note')).join('')}</figcaption></figure>`;
+}
+function build(m){const b=m.build;return `<div class="shared-turn-workbench">${diagram(m)}<section class="shared-turn-controls" aria-label="Build controls"><h3>Choose the whole</h3><div class="shared-turn-button-row">${button('whole','Half turn · 180°',180,`aria-pressed="${b.whole===180}"${b.canHalf?'':' disabled aria-describedby="shared-turn-whole-reason"'}`)}${button('whole','Full turn · 360°',360,`aria-pressed="${b.whole===360}"`)}</div>${!b.canHalf?`<p id="shared-turn-whole-reason">${esc(copy.wholeReason)}</p>`:''}<label for="shared-turn-first">First part in degrees</label><select id="shared-turn-first" data-shared-turn-action="first">${Array.from({length:b.whole/15+1},(_,i)=>i*15).map(value=>`<option value="${value}"${value===b.first?' selected':''}>${value}°</option>`).join('')}</select><div class="shared-turn-button-row">${button('first','First part −15°',b.first-15,`data-shared-turn-step="less"${b.canLess?'':' disabled'}`)}${button('first','First part +15°',b.first+15,`data-shared-turn-step="more"${b.canMore?'':' disabled'}`)}</div>${paragraph(copy.buildTeaching,'teaching')}</section></div>${paragraph(copy.curveNote,'curve-note')}`;}
+function navigation(kind,index,count){return `<div class="shared-turn-button-row">${button(kind,'Previous',index-1,`data-shared-turn-direction="previous"${index===0?' disabled':''}`)}${button(kind,'Next',index+1,`data-shared-turn-direction="next"${index===count-1?' disabled':''}`)}</div>`;}
+function cover(work,m){return `<div class="shared-turn-workbench">${diagram(m)}<section class="shared-turn-controls" aria-label="Covered label controls"><label for="shared-turn-job">Choose a job</label><select id="shared-turn-job" data-shared-turn-action="job">${sharedTurnJobs.map((_,i)=>`<option value="${i}"${i===work.job?' selected':''}>Job ${i+1} of 8</option>`).join('')}</select>${navigation('job',work.job,8)}<h3 id="shared-turn-job-title" tabindex="-1">Job ${work.job+1} of 8</h3>${paragraph(`The two marked parts fill one ${m.job.whole===180?'half':'full'} turn. The first part is ${m.job.given}°. What is the other part?`,'context')}<div class="shared-turn-proposal"><label for="shared-turn-idea">Your draft in degrees</label><input id="shared-turn-idea" data-shared-turn-action="draft" type="text" inputmode="numeric" maxlength="32" value="${esc(m.draft)}" aria-describedby="shared-turn-draft-note"><p id="shared-turn-draft-note">${esc(copy.draftNote)}</p><div class="shared-turn-button-row">${button('keep','Keep my idea')}${button('clear-idea','Clear my idea')}</div>${paragraph(m.idea===null?copy.emptyIdea:`Your idea: ${m.idea}°.`,'own-idea')}</div>${button('reading',m.reading?'Hide missing measure':'Show missing measure','',`aria-expanded="${Boolean(m.reading)}"`)}${m.reading?`<section class="shared-turn-reference" data-shared-turn-reference aria-label="Separate reference">${paragraph(m.reading.text)}</section>`:''}</section></div>${paragraph(copy.curveNote,'curve-note')}`;}
+function learn(work,m){return `<div class="shared-turn-workbench">${diagram(m)}<section class="shared-turn-controls" aria-label="Teaching cards"><label for="shared-turn-lesson-select">Choose a teaching card</label><select id="shared-turn-lesson-select" data-shared-turn-action="lesson">${sharedTurnLessons.map((lesson,i)=>`<option value="${i}"${i===work.lesson?' selected':''}>${esc(lesson.title)}</option>`).join('')}</select>${navigation('lesson',work.lesson,4)}${paragraph('Worked example · not your parts','example-label')}<h3 id="shared-turn-lesson-title" tabindex="-1">${esc(m.lesson.title)}</h3>${paragraph(m.lesson.text,'lesson-text')}</section></div>`;}
+export function sharedTurnPage(work){const m=sharedTurnModel(work),title={build:'Build two parts',cover:'Cover a label',learn:'See why'}[m.page];return `<section class="shared-turn-root" data-shared-turn-root><header class="shared-turn-header"><div><p class="shared-turn-eyebrow">The miller’s turning sign</p><h1 id="shared-turn-title" tabindex="-1">${esc(copy.title)}</h1>${paragraph(copy.intro)}</div>${button('back','Back to Hinge Bench')}</header><nav class="shared-turn-pages" aria-label="Shared turn pages">${[['build','Build two parts'],['cover','Cover a label'],['learn','See why']].map(([value,label])=>button('page',label,value,`aria-pressed="${m.page===value}"`)).join('')}</nav><div class="shared-turn-page-header"><h2 id="shared-turn-page-title" tabindex="-1">${title}</h2><div class="shared-turn-button-row">${button('turn','Turn the whole picture')}<button type="button" class="shared-turn-hear" data-shared-turn-hear data-speak="${esc(sharedTurnNarration(work))}" data-speak-lang="en">Hear this page</button></div></div>${m.page==='build'?build(m):m.page==='cover'?cover(work,m):learn(work,m)}<p id="shared-turn-status" class="shared-turn-status" role="status" aria-live="polite" aria-atomic="true"></p>${paragraph(copy.lifetime,'lifetime')}</section>`;}
+export function bindSharedTurn(work,ctx){
+ const root=document.querySelector('[data-shared-turn-root]');if(!root)return;let latest=work;
+ const live=node=>root.isConnected&&root.contains(node)&&document.querySelector('[data-shared-turn-root]')===root&&ctx.live(node);
+ const stop=()=>{ctx.stopSpeech?.();ctx.stopSound?.();};
+ const focus=selector=>{const node=document.querySelector(selector);if(node&&!node.disabled){if(ctx.focus)ctx.focus(selector);else node.focus({preventScroll:true});}};
+ const redraw=(next,selector)=>{if(next!==latest){latest=next;ctx.change(next);}stop();ctx.render();focus(selector);};
+ const status=text=>{const node=root.querySelector('#shared-turn-status');if(node&&live(node))node.textContent=text;};
+ for(const node of root.querySelectorAll('button,input,select')){
+  const guard=event=>{if(node.disabled||!live(node)){event.preventDefault();event.stopImmediatePropagation();}};
+  for(const type of ['click','input','change'])node.addEventListener(type,guard,{capture:true});
+ }
+ const hear=root.querySelector('[data-shared-turn-hear]');hear.addEventListener('click',()=>{if(live(hear))hear.dataset.speak=sharedTurnNarration(latest);},{capture:true});
+ for(const node of root.querySelectorAll('[data-shared-turn-action]')){
+  const action=node.dataset.sharedTurnAction;
+  if(action==='draft'){node.addEventListener('input',()=>{if(!live(node))return;const next=changeSharedTurn(latest,'draft',node.value);if(next!==latest){latest=next;ctx.change(next);}});continue;}
+  node.addEventListener(node.tagName==='SELECT'?'change':'click',()=>{
+   if(!live(node)||node.disabled)return;
+   if(action==='back'){stop();ctx.back();return;}
+   if(action==='keep'){
+    const field=root.querySelector('#shared-turn-idea');if(!field||!live(field)||field!==node.closest('.shared-turn-proposal')?.querySelector('#shared-turn-idea'))return;
+    const value=sharedTurnDraftNumber(field.value);if(value===null){status(copy.invalidIdea);focus('#shared-turn-idea');return;}
+    let next=changeSharedTurn(latest,'draft',field.value);next=changeSharedTurn(next,'idea',value);redraw(next,'[data-shared-turn-action="keep"]');return;
+   }
+   const raw=node.tagName==='SELECT'?node.value:node.dataset.sharedTurnValue;
+   const value=['whole','first','job','lesson'].includes(action)?Number(raw):raw;
+   const next=changeSharedTurn(latest,action,value);if(next===latest)return;
+   let selector=action==='page'?'#shared-turn-page-title':action==='job'?'#shared-turn-job':action==='lesson'?'#shared-turn-lesson-select':`[data-shared-turn-action="${action}"]`;
+   if(action==='first'){
+    const step=node.dataset.sharedTurnStep;if(step){const model=sharedTurnModel(next);selector=`[data-shared-turn-step="${step==='less'&&!model.build.canLess?'more':step==='more'&&!model.build.canMore?'less':step}"]`;}else selector='#shared-turn-first';
+   }
+   if(action==='whole')selector=`[data-shared-turn-action="whole"][data-shared-turn-value="${value}"]`;
+   if(node.dataset.sharedTurnDirection){const edge=action==='job'?7:3;selector=next[action]===0||next[action]===edge?(action==='job'?'#shared-turn-job':'#shared-turn-lesson-select'):`[data-shared-turn-action="${action}"][data-shared-turn-direction="${node.dataset.sharedTurnDirection}"]`;}
+   redraw(next,selector);
+  });
+ }
+}
