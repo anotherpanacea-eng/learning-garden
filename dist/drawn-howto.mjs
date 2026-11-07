@@ -26,7 +26,7 @@ export function howtoNext(s,action,count){
 export const loadArt=id=>import(`./drawn-howtos/${id}.mjs`).then(m=>m.default);
 export const drawnHowtoTag=id=>drawnHowto(id)?`<drawn-howto data-how="${id}"></drawn-howto>`:'';
 // Pages without their own tag get their how-to just after the page heading.
-export function offerHowto(main,hash){const h=howtoForPage(hash),title=main.querySelector('h1');if(!h||!title||main.querySelector('drawn-howto'))return;
+export function offerHowto(main,hash){if(hash==='#loft/bridges'&&main.querySelector('.bridges-page[data-bridges-mode="details"]'))return;const h=howtoForPage(hash),title=main.querySelector('h1');if(!h||!title||main.querySelector('drawn-howto'))return;
  const box=title.parentElement,isHeading=box!==main&&(box.tagName==='HEADER'||/heading/.test(box.className));
  const after=isHeading?box:title.nextElementSibling?.tagName==='P'?title.nextElementSibling:title;after.insertAdjacentHTML('afterend',drawnHowtoTag(h.id));}
 // Some benches redraw their own part of the page; offer the how-to again if a redraw removed it.
