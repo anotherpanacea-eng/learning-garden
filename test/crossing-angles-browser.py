@@ -117,6 +117,25 @@ def back(p, before=None):
     h.focus(p, E, 'Back restores entry focus')
 
 
+
+def resize_crossings(p, before):
+    # Keep the same bound controls while the actual diagram changes size.
+    # Fresh contexts at each width cannot detect a disconnected resize observer.
+    for angle in [15,165]:
+        act(p,'angle',angle,before)
+        original=p.locator(sel('rotation')).element_handle()
+        orientation=int(original.get_attribute('data-crossing-angles-value'))
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000})
+            p.evaluate('()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))')
+            bounds(p)
+            h.unchanged(p,before,'actual viewport resize '+str(angle)+'/'+str(width))
+            h.ok(original.evaluate('e=>e.isConnected&&e===document.querySelector("[data-crossing-angles-action=rotation]")'),'resize keeps original child control bound')
+        original.click()
+        h.ok(p.locator(sel('rotation')).get_attribute('data-crossing-angles-value')==str((orientation+30)%360),'original control remains live after resizing down and back')
+        h.unchanged(p,before,'original control after viewport resize')
+
+
 def journey(browser, base):
     print('Crossing Angles: actual tablet journey and copied waiting panel', flush=True)
     p = setup(browser, base)
@@ -136,6 +155,7 @@ def journey(browser, base):
     h.ok(p.locator(R).count()==1, 'old parent controls cannot revive behind child')
     h.unchanged(p, before, 'old parent actions')
     shape(p);bounds(p);hear(p, before, includes=['Crossing Angles'])
+    resize_crossings(p,before)
     for angle in [15,60,90,135,165]:
         act(p,'angle',angle,before)
         body=p.locator(R).inner_text()

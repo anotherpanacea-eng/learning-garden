@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {createCrossingAngles,changeCrossingAngles,crossingAnglesModel,captureCrossingPanel,crossingAnglesNarration} from '../dist/crossing-angles-core.mjs';
 import {crossingCards,crossingPrompts,crossingCopy} from '../dist/crossing-angles-content.mjs';
 import {copyFrameModel} from '../dist/copy-frame-core.mjs';
+import {renderCrossingAngles} from '../dist/crossing-angles-ui.mjs';
 const close=(a,b,message)=>assert.ok(Math.abs(a-b)<1e-9,`${message}: ${a} vs ${b}`);
 const sub=(a,b)=>[a[0]-b[0],a[1]-b[1]],dot=(a,b)=>a[0]*b[0]+a[1]*b[1],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
 const initial=createCrossingAngles();
@@ -103,4 +105,32 @@ assert.ok(missing.includes(crossingCopy.nullContext));assert.ok(!missing.include
 for(const work of [initial,panelWork,reason])assert.ok(!crossingAnglesNarration(work,capture).includes(crossingCopy.adultNote),'Hear excludes grown-up note');
 assert.ok(!crossingAnglesNarration(initial,capture).includes(capture.caseTitle),'Build does not read hidden copied panel');
 const heard=crossingAnglesNarration(panelWork,capture);assert.equal(heard.split(capture.caseTitle).length-1,1,'context title once');
+// Inspect the actual host capability object, without running its callbacks or
+// constructing a notebook. These seven callbacks are the child's whole authority.
+const host=readFileSync(new URL('../dist/copy-frame-ui.mjs',import.meta.url),'utf8');
+const childObject=host.match(/bindCrossingAngles\(work,context,(\{[\s\S]*?\n  \})\);return;/)?.[1];
+assert.ok(childObject,'host passes an explicit Crossing Angles capability object');
+assert.ok(!childObject.includes('...'),'host does not spread application access into child');
+const capabilities=Function('live',`return (${childObject});`)(()=>false);
+assert.deepEqual(Object.keys(capabilities).sort(),['live','change','render','focus','back','stopSpeech','stopSound'].sort());
+assert.ok(Object.values(capabilities).every(value=>typeof value==='function'),'every child capability is a callback');
+// The allowlist is the dependency boundary: no app, storage, given-math writer,
+// indirect service dependency or dynamic import belongs in these local modules.
+for(const [module,allowed] of [
+ ['content',[]],['core',['./crossing-angles-content.mjs']],
+ ['ui',['./crossing-angles-content.mjs','./crossing-angles-core.mjs']]
+]){
+ const source=readFileSync(new URL(`../dist/crossing-angles-${module}.mjs`,import.meta.url),'utf8');
+ const imports=[...source.matchAll(/\b(?:import|export)\s+(?:[^'";]*?\s+from\s*)?['"]([^'"]+)['"]/g)].map(match=>match[1]);
+ assert.deepEqual(imports.sort(),allowed.sort(),`${module} imports only local crossing modules`);
+ assert.ok(!/\bimport\s*\(/.test(source),`${module} has no dynamic service import`);
+}
+const emptyPanelHTML=renderCrossingAngles(panelWork,null);
+assert.ok(emptyPanelHTML.includes(`<h3>${crossingCards[3].title}</h3>`));
+assert.ok(emptyPanelHTML.includes(crossingCopy.nullContext));
+for(const omitted of [crossingCards[3].text,crossingCopy.panelWaitingNote,crossingCopy.panelNote,crossingCopy.subscriptNote,'data-crossing-angles-panel=','data-crossing-angles-inset='])assert.ok(!emptyPanelHTML.includes(omitted),'null panel renderer omits copied-panel material');
+for(const [[originalWidth,originalHeight,width,height]] of cases){
+ const statement=crossingAnglesModel(panelWork,{caseTitle:'Synthetic',originalWidth,originalHeight,width,height}).context.statement;
+ assert.ok(!emptyPanelHTML.includes(statement),'null panel renderer omits square-case conclusions');
+}
 console.log('Crossing Angles: finite crossing geometry, teaching/reducer boundaries, all rectangle shapes and copied-context safety passed.');
