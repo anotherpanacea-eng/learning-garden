@@ -8,7 +8,7 @@ export const parisEntrance = {
     title:'A postcard beside the parcel',
     body:'Lucie has a story parcel for the Learning Garden and a blank postcard beside it. Pip and Dot pause to imagine the journey home. There is room on a postcard for a small idea.',
     projectTitle:'A postcard in your own way',
-    project:'If you like, tell a postcard message aloud, draw one on paper, or dictate your words to a helper. You might tell the Learning Garden about one moment from your Paris errand. Or keep the idea for another day.'
+    project:'Make a postcard about your Paris trip. You can say it, draw it, or tell a grown-up what to write. Or save the idea for another day.'
   }
 };
 
@@ -134,7 +134,7 @@ export const parisNodes = {
     title:'A little message home',body:'A blank postcard is waiting for an idea.',
     guide:'{guide} says, “Your message can be told aloud, drawn, or written down by a helper.”',
     prompt:'Make a postcard about your Paris trip. You can say it, draw it, or tell a grown-up what to write. Or save the idea for another day.',
-    projectOptions:['Tell a postcard message aloud','Draw a postcard','Dictate a postcard to a helper'],
+    projectOptions:['Tell a postcard message aloud','Draw a postcard','Tell a helper what to write'],
     talk:'Which moment would you choose for your message, and what would you like the listener or reader to know?',
     next:null
   }

@@ -27,19 +27,19 @@ function signals(state,destination){
  }).slice(-6);
 }
 function suggestion(state,destination){
- const recent=signals(state,destination);if(!recent.length)return {variant:2,reason:'Start with a medium-length passage. You can choose any passage length.'};
+ const recent=signals(state,destination);if(!recent.length)return {variant:2,reason:'Start with a medium story. You can choose any length.'};
  const base=recent.at(-1).parisVariant,lastSupport=recent.findLastIndex(o=>explicitSupport(o)||retry(o));
  // A later answer on the same passage cannot erase its earlier request for support.
  const latest=recent.at(-1),latestVisit=latest.visitId;
- if(lastSupport>=0&&recent[lastSupport].parisVariant===base&&recent.slice(lastSupport).every(o=>o.visitId===latestVisit))return {variant:Math.max(1,base-1),reason:parisSupportUncertain(recent[lastSupport])?'Earlier reading support details are incomplete. You can try a little text together; every length stays available.':base===1?'Keep a little text and explore together with any help you like. Every length is available.':'The last story used help or another try. A little less text may leave more room to explore together; every length is available.'};
+ if(lastSupport>=0&&recent[lastSupport].parisVariant===base&&recent.slice(lastSupport).every(o=>o.visitId===latestVisit))return {variant:Math.max(1,base-1),reason:parisSupportUncertain(recent[lastSupport])?'Some earlier reading details are incomplete. Try a short story together, or choose any length.':base===1?'Try another short story with any help you like. You can choose any length.':'You used help or tried again on the last story. Try a shorter story next, or choose any length.'};
  const distinct=new Set();
  for(const o of recent.slice(lastSupport+1).filter(o=>o.parisVariant===base)){
   const v=state.garden.visits.find(v=>v.id===o.visitId);
   if(o.nodeId!==parisRoute(v)[0]||o.correct!==true||o.firstCorrect!==true||o.reading!=='independent'||o.method==='together'||o.priorStorySeen!==false||o.priorPassageSeen!==false||o.familiar||explicitSupport(o)||retry(o)||o.attempts?.length!==1||o.attempts[0]!==o.answer)continue;
   distinct.add(o.parisStory);
  }
- if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Keep the longer passages for now, or choose another length whenever you like.':'Two different new stories were answered on the first try, with no help recorded. A longer passage is ready to try. You can choose any length.'};
- return {variant:base,reason:'Keep exploring with this amount of text. Choose a different length whenever you like.'};
+ if(distinct.size>=2)return {variant:Math.min(3,base+1),reason:base===3?'Try another long story, or choose a different length.':'Want to try a longer story next? You can choose any length.'};
+ return {variant:base,reason:'Try another story this long, or choose a different length.'};
 }
 export function parisPlan(state,destination,variant='auto',storyId=null){
  if(!parisDestinations.some(d=>d.id===destination)||variant!=='auto'&&![1,2,3].includes(variant)||storyId!==null&&(typeof storyId!=='string'||!parisStories.some(s=>s.id===storyId&&s.destination===destination)))return null;
@@ -51,7 +51,7 @@ export function parisPlan(state,destination,variant='auto',storyId=null){
  };
  const story=storyId===null?stories.map((s,i)=>({s,i,n:count(s)})).sort((a,b)=>a.n-b.n||a.i-b.i)[0]?.s:stories.find(s=>s.id===storyId);if(!story)return null;
  const automatic=suggestion(state,destination),chosen=variant==='auto'?automatic.variant:variant;
- const reason=variant==='auto'?automatic.reason:'You chose this passage length. Every length stays available.';
+ const reason=variant==='auto'?automatic.reason:'You chose this story length. You can change it next time.';
  return Object.freeze({destination,storyId:story.id,variant:chosen,reason,route:Object.freeze([...story.variants[chosen],'paris-postcard'])});
 }
 export function priorParisStorySeen(state,storyId){
