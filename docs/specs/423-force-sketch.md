@@ -1,6 +1,6 @@
 # 423 · Force Sketch
 
-Status: independently BUILD-READY at5535520c after six lenses, complete Claude finite physics/content/copy/visual-plan review and focused repair closure. Implementation underway; its PR will own implementation clearance and publication. Continues admitted LG-1 / LG-G1. Operational custody1628, branch `build/force-sketch`. Publication and exact-head clearance belong to its eventual PR.
+Status: independently BUILD-READY at5535520c after six lenses, complete Claude finite physics/content/copy/visual-plan review and focused repair closure. The bounded implementation is built in [PR506](https://github.com/anotherpanacea-eng/learning-garden/pull/506), which owns implementation clearance and publication. Continues admitted LG-1 / LG-G1. Operational custody1628, branch `build/force-sketch`. Publication and exact-head clearance belong to its eventual PR.
 
 ## 1. Purpose, story and bounded operation
 
