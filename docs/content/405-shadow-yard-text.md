@@ -7,7 +7,7 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
   "copy": {
     "title": "Shadow Yard",
     "entry": "Compare heights and shadows.",
-    "opening": "The café wants a new flagpost. Can shadows help us propose a height?",
+    "opening": "The café wonders how tall its flagpost is. Can shadows help us propose a height?",
     "model": "An invented model: level ground, upright posts and, where stated, the same sunny moment. Sunlight is treated as parallel.",
     "task": "Propose a height",
     "choose": "Choose a height",
@@ -22,7 +22,7 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
     "hear": "Hear this page",
     "visit": "Your proposals wait during this visit. Leaving Copy Frame or changing explorer clears them.",
     "incomplete": "Choose a proposed height first. The target picture will use your proposal, not a hidden answer.",
-    "match": "These height-to-shadow ratios agree. Under this model’s conditions, your proposed height fits both measurements.",
+    "match": "These height-to-shadow ratios agree. Under this model’s conditions, your proposed height fits the given measurements.",
     "different": "These height-to-shadow ratios differ. Under this model’s conditions, try another height and compare again.",
     "unestablished": "These shadows came from different moments. The same sunlight angle has not been established, so this pair alone cannot determine the post’s height.",
     "zero": "Both shadows have length zero in this overhead-ray model. Height divided by zero is undefined. Any positive post height could fit, so this pair cannot determine one height.",
@@ -33,7 +33,10 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
     "diagram": "Both pictures use the same length scale. The sloping outlines compare shapes; a proposed slope is not a measured sunlight direction.",
     "grownup": "This is an ideal geometry model, not a measured yard or construction advice. A fitting proposal is not evidence of independent mastery. Ratio checks can add existing help notes for shown multiplication, but the proposals themselves are not saved.",
     "refusal": "That view could not be prepared safely. Your earlier proposal is unchanged. Retry, download your notes, or go back.",
-    "sessionOnly": "The pictures can still work during this visit. These help notes are not saved on this device. Ask a grown-up to download your notes if you want to keep them."
+    "sessionOnly": "The pictures can still work during this visit. These help notes are not saved on this device. Ask a grown-up to download your notes if you want to keep them.",
+    "diagramEmpty": "Both pictures use the same length scale. Your post appears after you choose a height.",
+    "diagramZero": "Both pictures use the same length scale. With zero shadows there is no triangle; each chosen post is drawn as an upright line.",
+    "crossNote": "These products multiply two lengths. They are not areas marked in the yard."
   },
   "cases": [
     {
@@ -120,7 +123,7 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
     },
     {
       "title": "Find a proposed height",
-      "text": "3 × 6 = 18. Then 18 ÷ 4 = 4.5. The proposed height is 4.5 m."
+      "text": "3 × 3/2 = 9/2 = 4.5. Another way: 3 × 6 = 18, then 18 ÷ 4 = 4.5. The proposed height is 4.5 m."
     },
     {
       "title": "Check in the same order",
