@@ -91,6 +91,7 @@ def enter(p, before=None):
     p.locator('[data-cl-entry]').click();p.locator('[data-cl-root]').wait_for()
     ok(p.locator('#cl-title').evaluate('e=>e===document.activeElement'),'entry focuses child heading')
     ok(not p.locator('[data-seed-root],a[href="#numbers/seeds/pairs"]').count(),'child replaces parent and sibling entry')
+    ok(not p.locator('main drawn-howto').count(),'child omits parent six-draw Show me how')
     if before is not None:unchanged(p,before,'entry')
 
 
@@ -139,6 +140,13 @@ def pin(p, value, before=None):
     if before is not None:unchanged(p,before,'own pin')
 
 
+def capture(p, name):
+    target=p.locator('#cl-point-select')
+    if target.count():target.focus()
+    else:p.locator('#cl-page-title').focus()
+    p.screenshot(path=str(OUT/name),full_page=True)
+
+
 def separate_pins(p):
     rows=p.locator('[data-cl-pin-row]').evaluate_all('''xs=>xs.map(e=>({kind:e.dataset.clPinRow,y:e.querySelector('.cl-pin').getBoundingClientRect().y,label:e.querySelector('p').getBoundingClientRect().toJSON(),pin:e.querySelector('.cl-pin').getBoundingClientRect().toJSON()}))''')
     ok(len(rows)==2 and abs(rows[0]['y']-rows[1]['y'])>=10,'coincident references retain separate pin rows')
@@ -149,6 +157,8 @@ def separate_pins(p):
 def journey(browser, base):
     print('Chance Line: complete tablet journey, parent preservation and Notes',flush=True)
     p=setup(browser,base)
+    p.locator('main drawn-howto').wait_for(state='attached')
+    ok(p.locator('main drawn-howto').count()==1,'ordinary Seed Stall retains its own Show me how')
     for fold in ['history','talk']:
         p.locator('[data-seed-fold="'+fold+'"]').evaluate('e=>e.open=true')
     p.wait_for_timeout(30)
@@ -168,7 +178,7 @@ def journey(browser, base):
     ok('1/4' in p.locator('[data-cl-pin-row="reference"]').inner_text(),'reference independently shows quarter')
     hear(p,before,includes=['11/12','1/4','unlikely'])
     p.locator('[data-stop-speech]').click();click(p,'reference');click(p,'reference')
-    p.screenshot(path=str(OUT/'tablet-reference.png'),full_page=True)
+    capture(p,'tablet-reference.png')
     choose(p,2,before);pin(p,6,before);click(p,'reference',before=before);separate_pins(p)
     choose(p,0,before);pin(p,0,before);click(p,'reference',before=before);separate_pins(p)
     ok('0/4 = 0' in p.locator('[data-cl-pin-row="reference"]').inner_text(),'zero fraction uses endpoint0')
@@ -181,7 +191,7 @@ def journey(browser, base):
     click(p,'clear',before=before)
     ok(p.locator('#cl-point-select').input_value()=='' and p.locator('[data-cl-no-pin]').count()==1,'explicit Clear removes only current pin')
     choose(p,2,before);ok(p.locator('#cl-point-select').input_value()=='6','Clear retains other bag pin')
-    p.screenshot(path=str(OUT/'tablet-build.png'),full_page=True)
+    capture(p,'tablet-build.png')
     click(p,'page','learn',before)
     ok(p.locator('#cl-page-title').evaluate('e=>e===document.activeElement'),'page change focuses current heading')
     titles=['Count the whole','Compare shares','Same chance, different bags','More likely is not promised']
@@ -196,7 +206,7 @@ def journey(browser, base):
         if i==2:separate_pins(p)
     ok(p.get_by_role('button',name='Next picture',exact=True).is_disabled(),'last picture bounded')
     click(p,'lesson',2,before);click(p,'lesson',3,before)
-    bounds(p);p.screenshot(path=str(OUT/'tablet-lesson.png'),full_page=True)
+    bounds(p);capture(p,'tablet-lesson.png')
     click(p,'page','questions',before)
     reasons=['One Sun is one of all four equal-chance positions.','Three of four is three quarters, greater than half.','All four positions are available again, including three Suns.','Both remain possible.']
     for i,key in enumerate([0,1,2,1]):
@@ -320,15 +330,15 @@ def responsive(browser,base):
     print('Chance Line: focused320px layout and keyboard samples',flush=True)
     p=setup(browser,base,width=320);enter(p);bounds(p)
     choose(p,0);pin(p,0);click(p,'reference');separate_pins(p)
-    bounds(p);p.screenshot(path=str(OUT/'phone-zero.png'),full_page=True)
+    bounds(p);capture(p,'phone-zero.png')
     choose(p,4);pin(p,12);click(p,'reference');separate_pins(p);bounds(p)
-    p.screenshot(path=str(OUT/'phone-one.png'),full_page=True)
+    capture(p,'phone-one.png')
     p.locator(selector('page','learn')).first.focus();p.keyboard.press('Enter')
     ok(p.locator('#cl-page-title').evaluate('e=>e===document.activeElement'),'keyboard page action focuses heading')
     click(p,'lesson',1);click(p,'lesson',2);separate_pins(p);bounds(p)
-    p.screenshot(path=str(OUT/'phone-lesson.png'),full_page=True)
+    capture(p,'phone-lesson.png')
     click(p,'page','questions');click(p,'question',1);click(p,'question',2);click(p,'question',3);click(p,'answer',1);click(p,'explanation');bounds(p)
-    p.screenshot(path=str(OUT/'phone-question.png'),full_page=True)
+    capture(p,'phone-question.png')
 
 
 def main():
