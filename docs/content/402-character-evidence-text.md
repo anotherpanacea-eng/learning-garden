@@ -13,7 +13,7 @@ Shared surface copy:
 - Mark caption: For this claim: {role label} / No mark on this passage yet.
 - Actions: Clear this mark / Keep this map / Work on a copy.
 - Role notice: A passage can matter differently for a different claim. The labels alone do not prove the claim.
-- Empty marks: No passage marks kept in this draft yet.
+- Empty marks: No passage marks in this draft yet.
 - Placed list: Your passage marks; four rows per page, Previous marks / Next marks. These count marks, not reading or success.
 - Reference: One reader’s case; An example, not a key. You can explain a different reading. Reference note {i} of {N}; Previous note / Next note.
 - Separate example: Room for another star; Story part {i} of {N}; Previous story part / Next story part; Example step {i} of {N}; Previous example step / Next example step.
