@@ -1060,9 +1060,25 @@ def chase_target(p,name):
 def chase_feedback(p):return p.locator('.ca-chase-feedback').inner_text()
 
 
+def chase_label_clearance(p):
+    issues=p.locator('[data-crossing-angles-chase-stage]').evaluate("""plot=>{
+      const svg=plot.querySelector('svg'),matrix=svg.getScreenCTM(),bad=[];
+      const arcs=[...svg.querySelectorAll('[data-chase-sector]')].map(arc=>({name:arc.dataset.chaseSector,points:Array.from({length:65},(_,i)=>{const q=arc.getPointAtLength(arc.getTotalLength()*i/64);return new DOMPoint(q.x,q.y).matrixTransform(matrix)})}));
+      for(const label of plot.querySelectorAll('.ca-point-label')){
+        const b=label.getBoundingClientRect(),contains=p=>p.x>=b.left-.3&&p.x<=b.right+.3&&p.y>=b.top-.3&&p.y<=b.bottom+.3;
+        const leader=svg.querySelector('[data-ca-leader="'+label.dataset.caLabel+'"]'),vertex=new DOMPoint(Number(leader.getAttribute('x1')),Number(leader.getAttribute('y1'))).matrixTransform(matrix);
+        if(contains(vertex))bad.push(label.textContent+' covers own vertex');
+        for(const arc of arcs)if(arc.points.some(contains))bad.push(label.textContent+' covers arc '+arc.name);
+      }
+      return bad;
+    }""")
+    h.ok(not issues,'measured point-name boxes clear actual vertices and sampled angle arcs: '+str(issues))
+
+
 def chase_scene(p,family):
     bounds(p);svg_access(p)
     h.ok(p.locator('#crossing-angles-title').inner_text()=='Angle Chase','Chase has its own heading')
+    chase_label_clearance(p)
     issue=p.locator('[data-chase-diagram]').evaluate('''(wrap,family)=>{
       const plot=wrap.querySelector('[data-crossing-angles-chase-stage]'),svg=plot.querySelector('svg'),band=wrap.querySelector('.ca-chase-target-band'),overlay=wrap.querySelector('[data-chase-connectors]'),pb=plot.getBoundingClientRect(),bb=band.getBoundingClientRect(),bad=[];
       if(Math.abs(bb.height-76)>.2||bb.top<pb.bottom-.5)bad.push('band not below plot');
@@ -1087,6 +1103,8 @@ def chase_scene(p,family):
 def chase_example(p,case,before):
     value=p.locator(CI).input_value();reason=p.locator(sel('chase-reason')+'[aria-pressed=true]').get_attribute('data-crossing-angles-value') if p.locator(sel('chase-reason')+'[aria-pressed=true]').count() else None
     act(p,'chase-example',before=before)
+    endpoint='previous' if p.locator('[data-chase-example-nav=next]').is_disabled() else 'next'
+    h.focus(p,'[data-chase-example-nav='+endpoint+']','opening an unfinished or completed example keeps enabled focus')
     h.ok(p.locator('.ca-chase-example').count()==1 and p.locator(CI).count()==0 and p.locator(sel('chase-check')).count()==0,'example is a separate view without answer controls')
     # Example progress belongs to this sketch; walk back before revealing it.
     while not p.locator('[data-chase-example-nav=previous]').is_disabled():p.locator('[data-chase-example-nav=previous]').click();h.unchanged(p,before,'example previous')
@@ -1187,6 +1205,12 @@ def chase_focused(browser,base):
             if rotation in [0,180,330]:capture(p,'chase-phone-'+family+'-'+str(rotation))
             act(p,'chase-rotation',before=before)
         p.set_viewport_size({'width':820,'height':1000})
+    for case in range(15):
+        act(p,'chase-case',case,before)
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000})
+            for _ in range(12):
+                chase_scene(p,['crossing','hub','triangle','parallel','rectangle'][case//3]);act(p,'chase-rotation',before=before)
     act(p,'chase-case',3,before);act(p,'chase-example',before=before)
     for step in [1,2,3]:act(p,'chase-example-step',step,before)
     for width in [320,820]:p.set_viewport_size({'width':width,'height':1000});chase_scene(p,'hub');capture(p,'chase-example-hub-'+str(width))

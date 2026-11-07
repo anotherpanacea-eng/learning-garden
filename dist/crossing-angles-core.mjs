@@ -529,13 +529,20 @@ function chaseGeometry(spec,rotation,visible,activeName=null){
  };
  const plan=plans[spec.family],rot=rotation*rad;
  const project=([x,y])=>{x=(x-plan.center[0])*plan.scale;y=(y-plan.center[1])*plan.scale;return [320+x*Math.cos(rot)-y*Math.sin(rot),280-x*Math.sin(rot)-y*Math.cos(rot)];};
- const points=Object.entries(plan.points).map(([name,p])=>{const point=project(p),dx=point[0]-320,dy=point[1]-280,length=Math.hypot(dx,dy)||1;return {name,point,position:[point[0]+dx/length*18,point[1]+dy/length*18],label:[point[0]+dx/length*18,point[1]+dy/length*18]};});
+ // Point names must sit beyond the small angle arcs, including on phones.
+ // Crossing/hub centres and parallel intersections use unmarked directions.
+ const labelAngles={crossing:{O:207.5},hub:{O:180},parallel:{P:148,Q:238}};
+ const points=Object.entries(plan.points).map(([name,p])=>{
+  const point=project(p),fixed=labelAngles[spec.family]?.[name],dx=point[0]-320,dy=point[1]-280,length=Math.hypot(dx,dy)||1;
+  const offset=fixed===undefined?[64*dx/length,64*dy/length]:[80*Math.cos((fixed+rotation)*rad),-80*Math.sin((fixed+rotation)*rad)];
+  const position=point.map((v,i)=>v+offset[i]);return {name,point,position,label:position};
+ });
  const segments=plan.lines.map(([a,b])=>({start:project(plan.points[a]),end:project(plan.points[b])}));
  const selected={crossing:{x:['a','x'],y:['a','x','y']},hub:{x:['p','q','x'],y:['x','y'],z:['p','y','z','q']},triangle:{x:['a','c','x'],y:['a','c','x','y']},parallel:{x:['a','x'],y:['a','x','y'],z:['a','y','z']},rectangle:{x:['a','x'],y:['a','x','y'],z:['x','y','z']}};
  const sectors=plan.sectors.map(([name,o,a,b,radius=28])=>{
   const c=plan.points[o],u=plan.points[a].map((v,i)=>v-c[i]),v=plan.points[b].map((v,i)=>v-c[i]);
   const start=normalize(Math.atan2(u[1],u[0])/rad+rotation),sweep=normalize(Math.atan2(v[1],v[0])/rad-Math.atan2(u[1],u[0])/rad),center=project(c);
-  if(spec.family==='triangle')radius=Math.min(radius,Math.hypot(...u)*plan.scale/5,Math.hypot(...v)*plan.scale/5);
+  if(spec.family==='triangle'&&name!=='y')radius=Math.min(radius,Math.hypot(...u)*plan.scale/5,Math.hypot(...v)*plan.scale/5);
   const at=(angle,r)=>[center[0]+r*Math.cos(angle*rad),center[1]-r*Math.sin(angle*rad)];
   const arcStart=at(start,radius),arcEnd=at(start+sweep,radius),leader=at(start+sweep/2,name==='p'?96:40);
   const path=`M ${arcStart.join(' ')} A ${radius} ${radius} 0 ${sweep>180?1:0} 0 ${arcEnd.join(' ')}`;

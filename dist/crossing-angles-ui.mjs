@@ -190,7 +190,7 @@ function bindChaseControls(root,work,context,ctx,live,stop){
   else if(node.hasAttribute('data-chase-target-nav'))selector=`[data-chase-target-nav="${value===0?'next':value===model.targets.length-1?'previous':node.dataset.chaseTargetNav}"]`;
   else if(node.hasAttribute('data-chase-example-nav'))selector=`[data-chase-example-nav="${value===0?'next':value===model.targets.length?'previous':node.dataset.chaseExampleNav}"]`;
   else if(action==='chase-return')selector='#crossing-angles-chase-answer';
-  else if(action==='chase-example')selector='[data-chase-example-nav="next"]';
+  else if(action==='chase-example')selector=`[data-chase-example-nav="${model.exampleStep===model.targets.length?'previous':'next'}"]`;
   else if(action==='chase-digit'||action==='chase-reason')selector+=`[data-crossing-angles-value="${esc(value)}"]`;
   ctx.focus(selector);
  };

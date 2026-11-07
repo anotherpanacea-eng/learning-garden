@@ -1043,7 +1043,7 @@ const chaseSvgPoint=(attrs,keys)=>keys.map(k=>+chaseAttr(attrs,k));
 const chaseNear=(a,b,msg)=>a.forEach((v,i)=>assert.ok(Math.abs(v-b[i])<.002,`${msg}: ${a} vs ${b}`));
 function chaseExpectedArc(s,region,rotation,name){
  const [o,a,b]=region,center=chaseProject(s.points[o],s,rotation),u=sub(s.points[a],s.points[o]),v=sub(s.points[b],s.points[o]);
- const start=Math.atan2(u[1],u[0])+rotation*Math.PI/180,sweep=(Math.atan2(v[1],v[0])-Math.atan2(u[1],u[0])+2*Math.PI)%(2*Math.PI),radius=name==='p'?96:Math.min(28,...(s===chaseSchematics[2]?[Math.hypot(...u)*s.scale/5,Math.hypot(...v)*s.scale/5]:[]));
+ const start=Math.atan2(u[1],u[0])+rotation*Math.PI/180,sweep=(Math.atan2(v[1],v[0])-Math.atan2(u[1],u[0])+2*Math.PI)%(2*Math.PI),radius=name==='p'?96:Math.min(28,...(s===chaseSchematics[2]&&name!=='y'?[Math.hypot(...u)*s.scale/5,Math.hypot(...v)*s.scale/5]:[]));
  const at=(angle,r)=>[center[0]+r*Math.cos(angle),center[1]-r*Math.sin(angle)];
  return {center,start,sweep,radius,first:at(start,radius),last:at(start+sweep,radius),leader:at(start+sweep/2,name==='p'?96:40)};
 }
@@ -1054,7 +1054,7 @@ for(const [f,s] of chaseSchematics.entries())for(let rotation=0;rotation<360;rot
   const expected=chaseProject(raw,s,rotation),point=g.points.find(p=>p.name===name);chaseNear(point.point,expected,'single common projection of actual raw point');
   assert.ok(point.point.every((v,i)=>v>=0&&v<=[640,560][i]),'rotated endpoint in plot');
   const label=[...html.matchAll(/<span\b([^>]*data-crossing-angles-label="[^"]+"[^>]*)>([^<]*)<\/span>/g)].find(x=>chaseAttr(x[1],'data-crossing-angles-label')===name);assert.ok(label,'actual HTML point label');assert.equal(label[2],name);
-  const radial=sub(expected,[320,280]),distance=Math.hypot(...radial)||1,expectedLabel=expected.map((v,i)=>v+18*radial[i]/distance);chaseNear(chaseSvgPoint(label[1],['data-ca-x','data-ca-y']),expectedLabel,'actual HTML label position follows raw endpoint');
+  const labelPosition=chaseSvgPoint(label[1],['data-ca-x','data-ca-y']);assert.ok(Math.hypot(...sub(labelPosition,expected))>=44,'point name is displaced from its own vertex');assert.ok(labelPosition.every((v,i)=>Number.isFinite(v)&&v>=0&&v<=[640,560][i]),'point name anchor remains in plot'); // Actual text-box/arc clearance is checked in the browser, not by copying a layout formula.
  }
  assert.equal(g.segments.length,s.lines.length);
  s.lines.forEach(([a,b],i)=>{
