@@ -53,7 +53,7 @@ export const frenchStoryData = [
       2: 'Nora brings a book to the garden. But the first garden gate is closed. She looks at her map to find another path. She takes the path near the river. This path leads to another gate, which is open.',
       3: 'Nora brings a book to the garden for the reading club. The first gate is closed, so she cannot go in that way. She looks at her map and searches for another entrance. She chooses the path near the river. This path leads to another gate, which is open. Thanks to this detour, Nora can bring the book to the club.'
     },
-    words: 'apporte = brings; une porte = a gate; fermée = closed; ouverte = open; un chemin = a path; près de = near; une entrée = an entrance; un détour = a detour.',
+    words: 'apporte = brings; une porte = a door (a gate here); fermée = closed; ouverte = open; un chemin = a path; près de = near; une entrée = an entrance; un détour = a detour.',
     questions: [
       { type: 'mc', title: 'Why change the route?', skill: 'Find a simple reason in a French passage', prompt: 'Pourquoi Nora prend-elle un autre chemin ?', choices: ['Le livre est trop lourd.', 'La première porte est fermée.', 'Elle cherche son bateau.'], answer: 1, hint: 'Read what stops Nora at the first gate.', explanation: '« La première porte … est fermée » means the first gate is closed. This gives Nora a reason to use another path.', helper: 'inference' },
       { type: 'mc', title: 'An open way in', skill: 'Understand a French word through a contrast', prompt: 'Grâce à la porte « ouverte », Nora peut…', choices: ['Entrer dans le jardin.', 'Fermer le livre.', 'Dessiner la rivière.'], answer: 0, hint: 'Compare « fermée » with « ouverte ». Which gate lets her through?', explanation: '« Ouverte » means open. Unlike the closed gate, the open gate lets Nora enter: « entrer ».', helper: 'context' }
@@ -65,15 +65,15 @@ export const frenchStoryData = [
     invitation: 'Someone leaves a scarf beside the river. Whose scarf is it? Look for a name.',
     passages: {
       1: ['Mila trouve une écharpe verte sur un banc.', 'Une étiquette porte le nom « Léa ».', 'Léa est près du pont.', 'Mila lui rend l’écharpe.'],
-      2: ['Mila trouve une écharpe verte sur un banc près de la rivière.', 'Elle regarde l’étiquette dans l’écharpe.', 'L’étiquette porte le nom « Léa ».', 'Mila voit Léa près du pont.', 'Elle lui rend l’écharpe verte.'],
-      3: ['Mila trouve une écharpe verte sur un banc près de la rivière.', 'Elle ne sait pas à qui appartient l’écharpe.', 'Elle regarde donc l’étiquette dans l’écharpe et lit le nom « Léa ».', 'Mila voit Léa près du pont et lui montre le nom.', 'Léa voit son nom et reconnaît son écharpe.', 'Mila la lui rend, et Léa la remercie.']
+      2: ['Mila trouve une écharpe verte sur un banc près de la rivière.', 'Elle regarde l’étiquette de l’écharpe.', 'L’étiquette porte le nom « Léa ».', 'Mila voit Léa près du pont.', 'Elle lui rend l’écharpe verte.'],
+      3: ['Mila trouve une écharpe verte sur un banc près de la rivière.', 'Elle ne sait pas à qui appartient l’écharpe.', 'Elle regarde donc l’étiquette de l’écharpe et lit le nom « Léa ».', 'Mila voit Léa près du pont et lui montre le nom.', 'Léa voit son nom et reconnaît son écharpe.', 'Mila lui rend l’écharpe, et Léa la remercie.']
     },
     meanings: {
       1: 'Mila finds a green scarf on a bench. A label has the name “Léa” on it. Léa is near the bridge. Mila gives her the scarf back.',
-      2: 'Mila finds a green scarf on a bench near the river. She looks at the label inside the scarf. The label has the name “Léa” on it. Mila sees Léa near the bridge. She gives her the green scarf back.',
-      3: 'Mila finds a green scarf on a bench near the river. She does not know who the scarf belongs to. So she looks at the label inside the scarf and reads the name “Léa.” Mila sees Léa near the bridge and shows her the name. Léa sees her name and recognizes her scarf. Mila gives it back to her, and Léa thanks her.'
+      2: 'Mila finds a green scarf on a bench near the river. She looks at the label on the scarf. The label has the name “Léa” on it. Mila sees Léa near the bridge. She gives her the green scarf back.',
+      3: 'Mila finds a green scarf on a bench near the river. She does not know who the scarf belongs to. So she looks at the label on the scarf and reads the name “Léa.” Mila sees Léa near the bridge and shows her the name. Léa sees her name and recognizes her scarf. Mila gives it back to her, and Léa thanks her.'
     },
-    words: 'une écharpe = a scarf; une étiquette = a label; un banc = a bench; un pont = a bridge; rend = gives back; appartient à = belongs to.',
+    words: 'une écharpe = a scarf; une étiquette = a label; un banc = a bench; un pont = a bridge; rend = gives back; à qui appartient… = who … belongs to.',
     questions: [
       { type: 'mc', title: 'A written clue', skill: 'Identify evidence in a French passage', prompt: 'Quel nom est sur l’étiquette ?', choices: ['Mila.', 'Nora.', 'Léa.'], answer: 2, hint: 'Look beside « étiquette » or « nom » for the name in quotation marks.', explanation: 'The label says « Léa ». The written name helps Mila find the owner.', helper: 'detail' },
       { type: 'mc', title: 'What does she give back?', skill: 'Understand a French action in context', prompt: 'Mila lui « rend » l’écharpe : que fait-elle ?', choices: ['Elle donne l’écharpe à Léa.', 'Elle cache l’écharpe sous le banc.', 'Elle achète une autre écharpe.'], answer: 0, hint: 'Follow the scarf from the bench to the person whose name is on it.', explanation: '« Rend » means gives back here. Mila returns the scarf to Léa: « Elle donne l’écharpe à Léa. »', helper: 'context' }
@@ -86,12 +86,12 @@ export const frenchStoryData = [
     passages: {
       1: ['Amir prépare un panier pour les musiciens.', 'D’abord, il met du pain dans le panier.', 'Ensuite, il ajoute des pommes.', 'Enfin, il apporte le panier au kiosque.'],
       2: ['Les musiciens jouent près de la rivière.', 'Amir prépare un panier pour eux.', 'D’abord, il met du pain dans le panier.', 'Ensuite, il ajoute des pommes pour le goûter.', 'Enfin, il apporte le panier au kiosque.'],
-      3: ['Les musiciens jouent près de la rivière et préparent un concert.', 'Amir prépare le goûter des musiciens.', 'D’abord, il met du pain dans le panier.', 'Ensuite, il ajoute des pommes, qui voyagent bien dans le panier.', 'Enfin, il apporte le panier au kiosque, où les musiciens l’attendent.', 'Le goûter arrive juste avant leur pause.']
+      3: ['Les musiciens jouent près de la rivière avant le concert.', 'Amir prépare leur goûter.', 'D’abord, il met du pain dans le panier.', 'Ensuite, il ajoute des pommes, qui se transportent bien.', 'Enfin, il apporte le panier au kiosque, où les musiciens l’attendent.', 'Le goûter arrive juste avant leur pause.']
     },
     meanings: {
       1: 'Amir prepares a basket for the musicians. First, he puts bread in the basket. Next, he adds apples. Finally, he brings the basket to the bandstand.',
       2: 'The musicians play near the river. Amir prepares a basket for them. First, he puts bread in the basket. Next, he adds apples for the snack. Finally, he brings the basket to the bandstand.',
-      3: 'The musicians play near the river and prepare a concert. Amir gets the musicians’ snack ready. First, he puts bread in the basket. Next, he adds apples, which travel well in the basket. Finally, he brings the basket to the bandstand, where the musicians are waiting for him. The snack arrives just before their break.'
+      3: 'The musicians play near the river before the concert. Amir prepares their snack. First, he puts bread in the basket. Next, he adds apples, which are easy to carry. Finally, he brings the basket to the bandstand, where the musicians are waiting for him. The snack arrives just before their break.'
     },
     words: 'un panier = a basket; du pain = bread; ajoute = adds; une pomme = an apple; un goûter = a snack; un kiosque = a bandstand here; une pause = a break.',
     questions: [
@@ -144,19 +144,19 @@ export const frenchStoryData = [
     id: 'fr-rooftops-photo', destination: 'rooftops', title: 'La photo de la ville',
     invitation: 'Frame a city photograph from the rooftop. Follow a photographer’s plan.',
     passages: {
-      1: ['Lina veut une photo de la ville.', 'D’abord, elle pose son appareil photo sur la table.', 'Ensuite, elle choisit la vue sur la rivière.', 'Enfin, elle prend la photo.'],
-      2: ['Lina prépare une photo de la ville depuis la terrasse.', 'D’abord, elle pose son appareil photo sur la table.', 'Il est stable à cet endroit.', 'Ensuite, elle choisit la vue sur la rivière.', 'Enfin, elle prend la photo.'],
-      3: ['Lina prépare une photo de la ville depuis la terrasse.', 'Elle veut une image nette, sans mouvement.', 'D’abord, elle pose son appareil photo sur la table, car la table est stable.', 'Ensuite, elle choisit la vue sur la rivière plutôt que la vue sur le mur.', 'Enfin, elle prend la photo et regarde le résultat.', 'La rivière traverse son image comme un long ruban.']
+      1: ['Lina veut prendre une photo de la ville.', 'D’abord, elle pose son appareil photo sur la table.', 'Ensuite, elle choisit la vue sur la rivière.', 'Enfin, elle prend la photo.'],
+      2: ['Lina veut prendre une photo de la ville depuis la terrasse.', 'D’abord, elle pose son appareil photo sur la table.', 'Il est stable à cet endroit.', 'Ensuite, elle choisit la vue sur la rivière.', 'Enfin, elle prend la photo.'],
+      3: ['Lina veut prendre une photo de la ville depuis la terrasse.', 'Elle veut une image nette, sans flou.', 'D’abord, elle pose son appareil photo sur la table, car la table est stable.', 'Ensuite, elle choisit la vue sur la rivière plutôt que la vue sur le mur.', 'Enfin, elle prend la photo et regarde le résultat.', 'La rivière traverse son image comme un long ruban.']
     },
     meanings: {
-      1: 'Lina wants a photo of the city. First, she puts her camera on the table. Next, she chooses the view of the river. Finally, she takes the photo.',
-      2: 'Lina prepares a photo of the city from the terrace. First, she puts her camera on the table. It is steady in this spot. Next, she chooses the view of the river. Finally, she takes the photo.',
-      3: 'Lina prepares a photo of the city from the terrace. She wants a clear image, without movement. First, she puts her camera on the table, because the table is steady. Next, she chooses the view of the river rather than the view of the wall. Finally, she takes the photo and looks at the result. The river crosses her image like a long ribbon.'
+      1: 'Lina wants to take a photo of the city. First, she puts her camera on the table. Next, she chooses the view of the river. Finally, she takes the photo.',
+      2: 'Lina wants to take a photo of the city from the terrace. First, she puts her camera on the table. It is steady in this spot. Next, she chooses the view of the river. Finally, she takes the photo.',
+      3: 'Lina wants to take a photo of the city from the terrace. She wants a clear image, without blur. First, she puts her camera on the table, because the table is steady. Next, she chooses the view of the river rather than the view of the wall. Finally, she takes the photo and looks at the result. The river crosses her image like a long ribbon.'
     },
-    words: 'un appareil photo = a camera; une vue = a view; une rivière = a river; prend une photo = takes a photo; stable = steady; nette = clear; un ruban = a ribbon.',
+    words: 'un appareil photo = a camera; une vue = a view; une rivière = a river; pose = puts down; prend la photo = takes the photo; stable = steady; nette = clear; sans flou = without blur; plutôt que = rather than; un ruban = a ribbon.',
     questions: [
       { type: 'mc', title: 'Choose the view', skill: 'Find a chosen detail in French', prompt: 'Quelle vue Lina choisit-elle ?', choices: ['La vue sur la rivière.', 'La vue sur le mur.', 'La vue sur le livre.'], answer: 0, hint: 'Find the sentence with « choisit »: chooses.', explanation: '« La vue sur la rivière » is the view of the river. That is the view Lina chooses.', helper: 'detail' },
-      { type: 'order', title: 'Prepare the photograph', skill: 'Follow explicitly ordered French actions', prompt: 'Dans quel ordre Lina prépare-t-elle sa photo ?', items: ['Elle pose son appareil photo sur la table.', 'Elle choisit la vue sur la rivière.', 'Elle prend la photo.'], hint: 'Trace the actions after « D’abord », « Ensuite », and « Enfin ».', explanation: 'Lina first sets down the camera (« pose »), then chooses the view (« choisit »), then takes the photo (« prend »).', helper: 'sequence' }
+      { type: 'order', title: 'Prepare the photograph', skill: 'Follow explicitly ordered French actions', prompt: 'Dans quel ordre Lina fait-elle sa photo ?', items: ['Elle pose son appareil photo sur la table.', 'Elle choisit la vue sur la rivière.', 'Elle prend la photo.'], hint: 'Trace the actions after « D’abord », « Ensuite », and « Enfin ».', explanation: 'Lina first sets down the camera (« pose »), then chooses the view (« choisit »), then takes the photo (« prend »).', helper: 'sequence' }
     ],
     postcard: 'Frame an imaginary city view with a drawing or « Sur ma photo, il y a… »'
   },
