@@ -1,6 +1,6 @@
 # 416 · Two Crossings
 
-Status: independently BUILD-READY at82d4d3f85cf4a9c21bba5c49841e66aeb319df68 after six specification lenses, complete mathematics/copy/visual-plan review and focused repair closure. Implementation qualification/publication is recorded with the release PR. Continues admitted LG-1 / LG-G1; operational branch custody1618. No code until review findings are resolved.
+Status: independently BUILD-READY at82d4d3f85cf4a9c21bba5c49841e66aeb319df68 after six specification lenses, complete mathematics/copy/visual-plan review and focused repair closure. Implementation qualification/publication is recorded with [PR499](https://github.com/anotherpanacea-eng/learning-garden/pull/499). Continues admitted LG-1 / LG-G1; operational branch custody1618. No code until review findings are resolved.
 
 ## Need and placement
 
