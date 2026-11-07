@@ -205,7 +205,10 @@ def main():
      for page in ['why','corner','missing']:
       action(q,'page-'+page);layout(q);q.screenshot(path=str(OUT/f'square-pens-{width}-{page}.png'),full_page=True)
      action(q,'page-build')
-    action(q,'page-grid');set_grid_points(q,[0,0],[12,12]);action(q,'grid-step-2');layout(q)
+    action(q,'page-grid');action(q,'grid-trace-next')
+    ok(q.locator('[data-sp-grid-figure] svg').evaluate('e=>{const r=e.getBoundingClientRect();return r.top>=-1&&r.bottom<=innerHeight+1}') and q.locator('[data-sp-action=grid-trace-next]').evaluate('e=>{const r=e.getBoundingClientRect();return r.top>=-1&&r.bottom<=innerHeight+1}'),'tracing keeps the map and its control visible together at this viewport')
+    q.screenshot(path=str(OUT/f'square-pens-{width}-trace-viewport.png'))
+    set_grid_points(q,[0,0],[12,12]);action(q,'grid-step-2');layout(q)
     grid_literal(q,[0,0],[12,12])
     text_sizes=q.locator('[data-sp-grid-figure] svg text').evaluate_all('xs=>xs.map(x=>parseFloat(getComputedStyle(x).fontSize)*x.getScreenCTM().a)')
     ok(all(n>=15.9 for n in text_sizes),'grid SVG labels render at least16px')
