@@ -850,6 +850,8 @@ export const copyScopes = [
   {path:'dist/push-drift-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/curve-window-content.mjs',adultBlocks:[{start:"grownup:'Supplied-reference views",end:"No new answer or attempt is recorded.'",reason:'Only used in the labelled grown-up disclosure.'}],quotations:[]},
   {path:'dist/freedom-documents-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/walton-letters-text.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/walton-letters-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rule-mixer-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rule-mixer-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rule-mixer-ui.mjs',adultBlocks:[],quotations:[]},
