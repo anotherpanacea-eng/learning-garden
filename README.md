@@ -655,3 +655,9 @@ Checks: `node test/join-pieces-checks.mjs` and `python3 test/join-pieces-browser
 At `#workshop/join-pieces`, choose **Find the other length** to work backwards from a total and one known part. Recut A to match the total’s pieces, set the known length aside, then check the remainder by joining. Both ribbon modes keep separate temporary work while the table stays open. A fresh missing-part card uses supplied quantities, not a record of earlier seams.
 
 Checks: `node test/missing-ribbon-checks.mjs` and `python3 test/missing-ribbon-browser.py`; also run the parent joining-table browser suite when changing the shared host. The [specification](docs/specs/426-find-the-other-length.md) preserves the broader197 gaps.
+
+### Turn the Light427
+
+Open `#loft/mirrors`, or use **Mirror Bench: turn a light path** from Shadow Theater or Story Loft. Propose an outgoing ray, compare it with a flat-mirror reference, and revise. Six cards, a separate five-picture example and whole-picture quarter turns connect geometry with reflection; touch aiming has exact native button alternatives. Work is temporary and does not add Notes or assessment records.
+
+Checks: `node test/mirror-paths-checks.mjs` and `python3 test/mirror-paths-browser.py`, plus existing Shadow Theater and new-room discovery checks for the links/registry. The [specification](docs/specs/427-turn-the-light.md) records physics sources and the broader162/236 gaps.

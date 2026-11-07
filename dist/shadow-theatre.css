@@ -2,3 +2,5 @@
 @media(max-width:680px){.shadow-pictures{grid-template-columns:1fr}.shadow-pictures figure{padding:.8rem}.shadow-page h1{font-size:1.8rem}}
 
 .shadow-page footer,.shadow-page footer a,.shadow-page figcaption,.shadow-page summary{font-size:1rem}
+
+.shadow-page a.mirror-entry,.mirror-entry>a{display:inline-flex;align-items:center;min-height:44px;padding:8px 2px;font-size:16px}
