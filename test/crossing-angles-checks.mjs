@@ -1104,6 +1104,7 @@ for(const {f,s,work} of chaseGeometryFixtures)for(let rotation=0;rotation<360;ro
   assert.ok(point.point.every((v,i)=>v>=0&&v<=[640,560][i]),'rotated endpoint in plot');
   const label=[...html.matchAll(/<span\b([^>]*data-crossing-angles-label="[^"]+"[^>]*)>([^<]*)<\/span>/g)].find(x=>chaseAttr(x[1],'data-crossing-angles-label')===name);assert.ok(label,'actual HTML point label');assert.equal(label[2],name);
   const labelPosition=chaseSvgPoint(label[1],['data-ca-x','data-ca-y']);assert.ok(Math.hypot(...sub(labelPosition,expected))>=44,'point name is displaced from its own vertex');assert.ok(labelPosition.every((v,i)=>Number.isFinite(v)&&v>=0&&v<=[640,560][i]),'point name anchor remains in plot'); // Actual text-box/arc clearance is checked in the browser, not by copying a layout formula.
+  if(f===6){const own=Math.hypot(...sub(labelPosition,expected));for(const other of visibleNames.filter(n=>n!==name))assert.ok(Math.hypot(...sub(labelPosition,chaseProject(s.points[other],s,rotation)))>own+.01,'quadrilateral point name is nearest its own vertex');}
  }
  assert.equal(g.segments.length,s.lines.length);
  s.lines.forEach(([a,b],i)=>{

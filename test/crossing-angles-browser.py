@@ -1061,25 +1061,26 @@ def chase_target(p,name):
 def chase_feedback(p):return p.locator('.ca-chase-feedback').inner_text()
 
 
-def chase_label_clearance(p):
-    issues=p.locator('[data-crossing-angles-chase-stage]').evaluate("""plot=>{
+def chase_label_clearance(p,family):
+    issues=p.locator('[data-crossing-angles-chase-stage]').evaluate("""(plot,family)=>{
       const svg=plot.querySelector('svg'),matrix=svg.getScreenCTM(),bad=[];
       const arcs=[...svg.querySelectorAll('[data-chase-sector]')].map(arc=>({name:arc.dataset.chaseSector,points:Array.from({length:65},(_,i)=>{const q=arc.getPointAtLength(arc.getTotalLength()*i/64);return new DOMPoint(q.x,q.y).matrixTransform(matrix)})}));
       for(const label of plot.querySelectorAll('.ca-point-label')){
         const b=label.getBoundingClientRect(),contains=p=>p.x>=b.left-.3&&p.x<=b.right+.3&&p.y>=b.top-.3&&p.y<=b.bottom+.3;
         const leader=svg.querySelector('[data-ca-leader="'+label.dataset.caLabel+'"]'),vertex=new DOMPoint(Number(leader.getAttribute('x1')),Number(leader.getAttribute('y1'))).matrixTransform(matrix);
         if(contains(vertex))bad.push(label.textContent+' covers own vertex');
+        if(family==='quadrilateral'){const center={x:(b.left+b.right)/2,y:(b.top+b.bottom)/2},own=Math.hypot(center.x-vertex.x,center.y-vertex.y);for(const other of plot.querySelectorAll('.ca-point-label')){if(other===label)continue;const ray=svg.querySelector('[data-ca-leader="'+other.dataset.caLabel+'"]'),point=new DOMPoint(Number(ray.getAttribute('x1')),Number(ray.getAttribute('y1'))).matrixTransform(matrix);if(Math.hypot(center.x-point.x,center.y-point.y)<=own+.1)bad.push(label.textContent+' nearer '+other.textContent+' than own vertex');}}
         for(const arc of arcs)if(arc.points.some(contains))bad.push(label.textContent+' covers arc '+arc.name);
       }
       return bad;
-    }""")
+    }""",family)
     h.ok(not issues,'measured point-name boxes clear actual vertices and sampled angle arcs: '+str(issues))
 
 
 def chase_scene(p,family):
     bounds(p);svg_access(p)
     h.ok(p.locator('#crossing-angles-title').inner_text()=='Angle Chase','Chase has its own heading')
-    chase_label_clearance(p)
+    chase_label_clearance(p,family)
     issue=p.locator('[data-chase-diagram]').evaluate('''(wrap,family)=>{
       const plot=wrap.querySelector('[data-crossing-angles-chase-stage]'),svg=plot.querySelector('svg'),band=wrap.querySelector('.ca-chase-target-band'),overlay=wrap.querySelector('[data-chase-connectors]'),pb=plot.getBoundingClientRect(),bb=band.getBoundingClientRect(),bad=[];
       if(Math.abs(bb.height-76)>.2||bb.top<pb.bottom-.5)bad.push('band not below plot');
@@ -1248,6 +1249,7 @@ def chase_focused(browser,base):
     act(p,'chase-case',3,before);act(p,'chase-example',before=before)
     for step in [1,2,3]:act(p,'chase-example-step',step,before)
     for width in [320,820]:p.set_viewport_size({'width':width,'height':1000});chase_scene(p,'hub');capture(p,'chase-example-hub-'+str(width))
+    act(p,'chase-return',before=before)
     for case in [15,18]:
         act(p,'chase-case',case,before);act(p,'chase-example',before=before)
         for width in [320,820]:
