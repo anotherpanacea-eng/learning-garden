@@ -14,7 +14,10 @@ os.environ['WRITING_TABLE_ARTIFACTS'] = str(OUT)
 spec = importlib.util.spec_from_file_location('writing_table_browser', ROOT / 'test/writing-table-browser.py')
 table = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(table)
-book, work, action, drawer, ready, ok = table.book, table.work, table.action, table.drawer, table.ready, table.ok
+book, work, action, ready, ok = table.book, table.work, table.action, table.ready, table.ok
+def drawer(p,name,opened=True):
+ d=p.locator('[data-writing-panel="'+name+'"]')
+ if (d.get_attribute('open') is not None)!=opened:d.locator(':scope > summary').tap()
 # Reviewed content401 expectations, independent of the live checker's key/accepted packet.
 PLACEMENTS = {
  'summary-knock': {'review':'opinion','delay':'keep','purpose':'extra','worry':'extra','motive':'unknown','signal':'keep','rain':'extra','outcome':'keep','refusal':'unknown'},
@@ -59,7 +62,7 @@ def hear(p):
 def journey(browser, base, seed):
  ctx,p=table.setup(browser,base,seed)
  try:
-  original=raw(p);ok(p.locator('.wt-heading [data-writing-action=summary]').inner_text()=='Summary Press','visible named header entry')
+  ok(p.locator('.wt-heading [data-writing-action=summary]').inner_text()=='Summary Press','visible named header entry')
   action(p,'summary');ok(work(p)['source']['id']=='summary-knock','header opens first brief explicitly')
   source=work(p)['source'];lines=source['research']['cards'][0]['lines'];saved=raw(p)
   ok(p.locator('[data-writing-summary-story]').count()==1,'one elected whole scene')
@@ -75,10 +78,16 @@ def journey(browser, base, seed):
   ok(lines[-2]['text'] in spoken and lines[0]['text'] not in spoken and 'Mina carried a blue chair' not in spoken,'Hear contains only elected story scene')
   turn(p,'choose');ok(active(p)=='review','first sentence is active')
   ok(p.locator('[data-writing-summary-part]:visible').count()==1,'chooser has one active sentence')
-  table.layout(p);action(p,'check');ok(work(p)['checks'][-1]['outcome']=='incomplete','waiting sentences check incomplete')
+  table.layout(p)
+  boxes=p.locator('.wt-summary-layout > *').evaluate_all('xs=>xs.map(x=>({x:x.getBoundingClientRect().x,y:x.getBoundingClientRect().y}))')
+  ok(len(boxes)==2 and boxes[0]['x']<boxes[1]['x'] and abs(boxes[0]['y']-boxes[1]['y'])<2,'tablet chooser and paper sit side by side')
+  action(p,'check');ok(work(p)['checks'][-1]['outcome']=='incomplete','waiting sentences check incomplete')
   action(p,'keep');first=work(p)['firstKept'];ok(all(v is None for v in first['work']['placements'].values()),'unfinished version kept')
-  place(p,'delay','extra');action(p,'check');drawer(p,'help');action(p,'example')
+  sentence(p,'delay');p.locator('[data-writing-destination=extra]:visible').focus();p.keyboard.press('Enter')
+  ok(p.evaluate('document.activeElement.matches("[data-writing-destination=extra]")'),'keyboard placement retains live destination focus')
+  action(p,'check');drawer(p,'help');action(p,'example')
   ok(work(p)['help']['example'],'example election records support before disclosure')
+  spoken=hear(p);ok('Mina carried a blue chair' in spoken and 'Blue describes the chair' not in spoken and 'Mina is wonderful' not in spoken,'Hear excludes later example and comparison frames')
   ok(p.locator('#writing-example').count()==1,'guarded example appears')
   for _ in range(3):nav(p,'example-next')
   for _ in range(3):nav(p,'comparison-next')
@@ -121,7 +130,11 @@ def journey(browser, base, seed):
 def responsive(browser,base,seed,width,height):
  ctx,p=table.setup(browser,base,seed,width,height)
  try:
-  action(p,'summary');nav(p,'story-next');turn(p,'choose');place(p,'delay','keep');turn(p,'summary')
+  action(p,'summary')
+  if width==1024:p.screenshot(path=str(OUT/'summary-1024-story-viewport.png'),full_page=False)
+  nav(p,'story-next');turn(p,'choose');place(p,'delay','keep')
+  if width==1024:p.screenshot(path=str(OUT/'summary-1024-choose-viewport.png'),full_page=False)
+  turn(p,'summary')
   ok('Leena waited with a photograph' in p.locator('.wt-work').inner_text(),'responsive selected summary remains visible')
   p.locator('[data-writing-summary-sentence=delay]:visible').first.tap();ok(active(p)=='delay','responsive preview returns to sentence')
   table.layout(p);p.screenshot(path=str(OUT/('summary-'+str(width)+'.png')),full_page=True)
@@ -162,6 +175,12 @@ def lifecycle(browser,base,seed):
    if d.get_attribute('open') is None:d.locator('summary').first.tap()
   p.evaluate('window.oldReference=document.querySelector("[data-writing-reference=review][data-writing-reference-scope=current]");const parent=oldReference.parentElement;oldReference.remove();parent.append(oldReference);oldReference.click()')
   ok(p.locator('.wt-source-inspector').count()==0,'removed and reinserted reference cannot elect source')
+  p.evaluate('window.oldAnchor=document.querySelector(".wt-heading a");const parent=oldAnchor.parentElement;oldAnchor.remove();parent.append(oldAnchor);oldAnchor.click()')
+  ok(p.evaluate('location.hash')=='#desk/writing','removed and reinserted default anchor is retired')
+  p.evaluate('window.otherOwnerOld=[...document.querySelectorAll("[data-writing-root] button")]')
+  p.locator('#explorer-switch').tap();p.locator('[data-select-explorer=explorer-2]').tap();ready(p);before=book(p)
+  p.evaluate('otherOwnerOld.forEach(e=>e.click())');ok(book(p)==before,'earlier owner controls cannot alter another explorer')
+  p.locator('#explorer-switch').tap();p.locator('[data-select-explorer=explorer-1]').tap();ready(p)
   p.evaluate('window.ownerOld=[...document.querySelectorAll("[data-writing-root] button")];location.hash="#notes"');p.locator('#reset').tap();p.locator('#confirm-reset').tap()
   p.wait_for_function('location.hash==="#home"');p.locator('[data-film-skip]').tap();p.locator('dialog.welcome-film').wait_for(state='detached')
   p.evaluate('location.hash="#desk/writing"');ready(p);p.evaluate('ownerOld.forEach(e=>e.click())')
@@ -172,7 +191,7 @@ def saving_off(browser,base,seed):
  try:
   p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
   p.evaluate('location.hash="#desk/writing"');ready(p);action(p,'summary');place(p,'delay','keep');action(p,'keep')
-  ok('off' in p.locator('#writing-status').inner_text().lower(),'saving-off status remains accurate')
+  ok('in this session. Download Notes before leaving.' in p.locator('#writing-status').inner_text(),'saving-off status remains accurate')
   report=table.export_notes(p,'summary-saving-off');r=report['writingDesk']['records']['summary-knock']
   ok(r['work']['placements']['delay']=='keep' and all(v is None for k,v in r['work']['placements'].items() if k!='delay') and r['firstKept']['work']==r['work'],'saving-off actual export retains in-memory draft')
  finally:ctx.close()
