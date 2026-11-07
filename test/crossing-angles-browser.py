@@ -497,6 +497,18 @@ def tri_shape(p,view,step=0):
     for name in 'abc':
         h.ok(p.locator('[data-crossing-angles-triangle-stage] [data-crossing-angles-label="'+name+'"]').count()==1,'one current outer angle tag '+name)
     h.ok(svg.locator('[data-triangle-kind=outside]').count()==int(view=='outside'),'adjacent outside sector only in outside view')
+    if view=='outside':
+        clear=p.locator('[data-crossing-angles-triangle-stage]').evaluate('''stage=>{
+          const line=stage.querySelector('[data-triangle-line=extension]'),box=stage.querySelector('[data-crossing-angles-label="C"]').getBoundingClientRect(),m=line.getScreenCTM();
+          const a=new DOMPoint(Number(line.getAttribute('x1')),Number(line.getAttribute('y1'))).matrixTransform(m),b=new DOMPoint(Number(line.getAttribute('x2')),Number(line.getAttribute('y2'))).matrixTransform(m);
+          let lo=0,hi=1;
+          for(const [key,min,max] of [['x',box.left,box.right],['y',box.top,box.bottom]]){
+            const delta=b[key]-a[key];if(Math.abs(delta)<1e-9){if(a[key]<min||a[key]>max)return true;continue;}
+            const t1=(min-a[key])/delta,t2=(max-a[key])/delta;lo=Math.max(lo,Math.min(t1,t2));hi=Math.min(hi,Math.max(t1,t2));if(lo>hi)return true;
+          }
+          return false;
+        }''')
+        h.ok(clear,'C label leaves the actual on-screen BC extension visible')
     h.ok(svg.locator('[data-triangle-line=parallel-0]').count()==int(view=='reason' and step>0),'parallel only in active reason step')
     text=p.locator(R).inner_text()
     h.ok('A closed shape with three straight sides' in text,'triangle definition visible')
