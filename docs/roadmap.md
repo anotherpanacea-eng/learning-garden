@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Shadow Yard405 · a ratio needs conditions
 
-The next LG-G1 math/science bridge is [Shadow Yard405](specs/405-shadow-yard.md), a child bench inside Copy Frame. Propose a post height, compare dimensioned triangles, and contrast same-moment measurements with different moments and zero shadows. The [complete finite packet](content/405-shadow-yard-text.md) and [source boundary](source-audits/405-shadow-yard.md) await independent specification and mathematics/science review before implementation. M5-IV/M3-V are partial candidates; this is an invented local model, not field measurement, independent assessment or the full206 programme.
+The next LG-G1 math/science bridge is [Shadow Yard405](specs/405-shadow-yard.md), a child bench inside Copy Frame. Propose a post height, compare dimensioned triangles, and contrast same-moment measurements with different moments and zero shadows. The [complete finite packet](content/405-shadow-yard-text.md) and [source boundary](source-audits/405-shadow-yard.md) are independently BUILD-READY at863e93f7 after six-lens and finite mathematics/science repair closure. The bounded implementation is built; its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/488#issuecomment-6702418831) owns independent implementation clearance and publication status. M5-IV/M3-V are partial candidates; this is an invented local model, not field measurement, independent assessment or the full206 programme.
 
 ## Across the plan400 · positions become a distance
 

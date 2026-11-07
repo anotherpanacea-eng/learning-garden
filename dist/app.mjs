@@ -127,6 +127,7 @@ import {skyNotesPage,bindSkyNotes,resetSkyNotesView} from './sky-notes-ui.mjs';
 import {weatherPage,talliesPage,bindWeatherTally,resetWeatherTallyVisit,weatherEntry} from './weather-tally-ui.mjs';
 import {copyFramePage,bindCopyFrame,resetCopyFrame} from './copy-frame-ui.mjs';
 import {squarePensActive,prepareSquarePensDisplay} from './square-pens-ui.mjs';
+import {shadowYardActive,prepareShadowYardDisplay} from './shadow-yard-ui.mjs';
 import {ribbonMeasurePage,bindRibbonMeasures,resetRibbonMeasures} from './ribbon-measure-ui.mjs';
 import {sameGroundPage,bindSameGround,resetSameGround} from './same-ground-ui.mjs';
 import {commonCutsPage,bindCommonCuts,resetCommonCuts} from './common-cuts-ui.mjs';
@@ -645,7 +646,8 @@ function render(){
   }
   if(hash==='#workshop/copy-frame'){
     routeHeader('#workshop');
-    if(!choosingExplorer&&squarePensActive(state,explorerStore.active.id))prepareSquarePensDisplay(state,explorerStore.active.id,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/copy-frame',canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false),save:()=>{save();return {enabled:persist,ok:storageOK};}});
+    if(!choosingExplorer&&shadowYardActive(state,explorerStore.active.id))prepareShadowYardDisplay(state,explorerStore.active.id,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/copy-frame',canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false),save:()=>{save();return {enabled:persist,ok:storageOK};}});
+    else if(!choosingExplorer&&squarePensActive(state,explorerStore.active.id))prepareSquarePensDisplay(state,explorerStore.active.id,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/copy-frame',canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false),save:()=>{save();return {enabled:persist,ok:storageOK};}});
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):copyFramePage(state,explorerStore.active.id);updateStorageNotice();
     if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindCopyFrame(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash==='#workshop/copy-frame',render,focus:focusElement,stopSpeech,stopSound:stopBell,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true,false),save:()=>{save();return {enabled:persist,ok:storageOK};}});bindSpeech();}return;
   }

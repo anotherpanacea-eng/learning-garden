@@ -6,4 +6,4 @@ Primary teaching reference: [OpenStax Elementary Algebra2e §8.7](https://openst
 
 We infer the local ideal geometry explicitly: upright posts, level ground, shared solar direction and positive shadows give two right triangles with equal acute angles. Overhead rays give zero horizontal shadows; that degenerate case cannot determine height by division. Different moments leave the equal-angle condition unestablished; they do not prove unequal angles. Sun angular extent, soft edges, ground slope and measurement uncertainty are beyond this first ideal model, not denied. No historical person/source, geographic claim, actual Sun observation or field-measurement qualification is used.
 
-Complete finite math/science review of405's companion is pending. Mechanical arithmetic/diagram tests alone cannot validate teaching or establish learning.
+Complete finite math/science review of405's companion and six-lens specification review cleared at863e93f7 after repair closure. Mechanical arithmetic/diagram tests alone cannot validate teaching or establish learning.

@@ -1,6 +1,6 @@
 #405 · Complete finite Shadow Yard material
 
-Original fictional cases; all measurements in metres. This JSON is the finite review packet, not a learner import format. Expected same-moment heights:3,6,7.5,2. Other cases do not determine a unique height. Runtime dynamic numeric substitutions are specified in405; controls and labels add no unseen solutions.
+Original fictional cases; all measurements in meters. This JSON is the finite review packet, not a learner import format. Expected same-moment heights:3,6,7.5,2. Other cases do not determine a unique height. Runtime dynamic numeric substitutions are specified in405; controls and labels add no unseen solutions.
 
 ```json
 {
@@ -132,7 +132,7 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
     },
     {
       "title": "Check in the same order",
-      "text": "Height/shadow: 3/4 and 4.5/6 are equal. Cross-products: 3 × 6 = 18 and 4.5 × 4 = 18 square metres. This height fits the example model."
+      "text": "Height/shadow: 3/4 and 4.5/6 are equal. Cross-products: 3 × 6 = 18 and 4.5 × 4 = 18 square meters. This height fits the example model."
     }
   ],
   "templates": {
