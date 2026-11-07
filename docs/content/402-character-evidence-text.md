@@ -155,7 +155,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
       "joins": [
         "paragraph"
       ],
-      "context": "Earlier that evening Rat set out to follow a seafaring traveler south. Mole held him back by force and locked his satchel away. These later paragraphs show another response to Rat; read the whole chapter around them.",
+      "context": "Earlier that day Rat set out to follow a seafaring traveler south. Mole held him back by force and locked his satchel away. These later paragraphs show another response to Rat; read the whole chapter around them.",
       "glossary": [
         {
           "word": "tactful",
@@ -175,7 +175,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         "The Rat pushed the paper away from him wearily, but the discreet Mole took occasion to leave the room, and when he peeped in again some time later, the Rat was absorbed and deaf to the world; alternately scribbling and sucking the top of his pencil. It is true that he sucked a good deal more than he scribbled; but it was joy to the Mole to know that the cure had at least begun."
       ],
       "joins": [],
-      "context": "This paragraph follows Mole’s suggestion about poetry. Compare it with his earlier grab at the sculls.",
+      "context": "This paragraph follows Mole’s suggestion about poetry. Compare it with earlier moments in chapters 1 and 9.",
       "glossary": [
         {
           "word": "discreet",
@@ -229,7 +229,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
     {
       "id": "toad-replies",
       "chapterId": "c12",
-      "title": "Replies and private pleasure",
+      "title": "Modest replies and what Toad feels",
       "blocks": [
         "[...] but Toad, in a mild way, was rather snubby to him, remarking gently, as he disengaged himself, “Badger’s was the mastermind; the Mole and the Water Rat bore the brunt of the fighting; I merely served in the ranks and did little or nothing.” The animals were evidently puzzled and taken aback by this unexpected attitude of his; and Toad felt, as he moved from one guest to the other, making his modest responses, that he was an object of absorbing interest to every one."
       ],
@@ -249,12 +249,12 @@ The exact finite teaching/content fields below are human-reviewed source data, n
     {
       "id": "toad-stares",
       "chapterId": "c12",
-      "title": "His friends’ astonishment",
+      "title": "Staring friends",
       "blocks": [
         "[...] At intervals he stole a glance at the Badger and the Rat, and always when he looked they were staring at each other with their mouths open; and this gave him the greatest satisfaction. [...]"
       ],
       "joins": [],
-      "context": "This happens during the banquet, after the drawing-room replies. The surrounding paragraph describes both Toad’s conduct and his pleasure at his friends’ response.",
+      "context": "This happens during the banquet, after the drawing-room replies. The surrounding paragraph describes Toad’s conduct and his satisfaction as his friends look at one another.",
       "glossary": []
     },
     {
@@ -268,7 +268,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
       "joins": [
         "paragraph"
       ],
-      "context": "Guests at the banquet have called for a speech and song. Rat earlier forbade both. Earlier in this paragraph Toad looks down his nose; his friends’ astonished looks give him great satisfaction. The narrator’s next short paragraph follows directly.",
+      "context": "Guests at the banquet have called for a speech and song. Rat earlier forbade both. Earlier in this paragraph Toad looks down his nose; seeing his friends stare at one another gives him great satisfaction. The narrator’s next short paragraph follows directly.",
       "glossary": [
         {
           "word": "conventional",
@@ -319,12 +319,12 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         {
           "quoteId": "mole-space",
           "role": "supports",
-          "comment": "Here Mole steps out rather than hovering. This is a gentler response later the same evening; earlier he held Rat back by force."
+          "comment": "Here Mole steps out rather than hovering. This is a gentler response later that day; earlier he held Rat back by force."
         },
         {
           "quoteId": "mole-rescue",
           "role": "context",
-          "comment": "The earlier rescue helps us see a shift in who offers help; receiving help is not itself a fault."
+          "comment": "This places Rat’s help after the accident. It does not itself show Mole becoming more considerate."
         }
       ],
       "limit": "This reading compares selected moments, not the beginning of all kindness. Mole apologizes in chapter 1 and shows care for Rat in chapter 2. In chapter 9 he also uses force before this gentler help. Those moments can complicate a simple story of steady improvement."
