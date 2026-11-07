@@ -95,7 +95,7 @@ import {clockWalkPage,clockWalkEntry,bindClockWalk} from './courier-clock-ui.mjs
 import {lanternPage,lanternEntry,bindLantern} from './lantern-line-ui.mjs';
 import {collectionPage,collectionEntry,bindCollection} from './count-collection-ui.mjs';
 import {hundredthsPage,hundredthsEntry,bindHundredths} from './hundredths-ui.mjs';
-import {seedPage,seedEntry,bindSeed,resetSeedTurn} from './seed-stall-ui.mjs';
+import {seedPage,seedEntry,bindSeed,resetSeedTurn,resetChanceVisit} from './seed-stall-ui.mjs';
 import {tenthsPage,tenthsEntry,bindTenths} from './tenths-ui.mjs';
 import {sortingPage,bindSorting} from './sorting-desk-ui.mjs';
 import {doublePage,bindDoubleCheck} from './willow-double-ui.mjs';
@@ -467,6 +467,7 @@ function render(){
   if(root!=='numbers'||slug!=='join'||detail!=='ledger'||choosingExplorer)resetJoiningLedger();
   if(root!=='science'||slug!=='evidence'||choosingExplorer)resetEvidenceShelf();
   if(root!=='numbers'||slug!=='seeds'||choosingExplorer)resetSeedTurn();
+  if(hash!=='#numbers/seeds'||choosingExplorer)resetChanceVisit();
   if(root!=='field'||choosingExplorer)resetFieldKitTurn();
   if(root!=='numbers'||slug!=='path')resetWillowVoice();
   if(root!=='archive'||slug!=='labels'||choosingExplorer)resetLabelTurn();
@@ -891,7 +892,7 @@ function render(){
   else if(doubleBench)html=orderedEntry()+doublePage(state,detail);
   else if(hundredthsBench)html=hundredthsPage(state)+unitsEntry();
   else if(hash==='#numbers/seeds/pairs'){const ready=preparePairDisplay(state,priceOptions());html=ready.ok?pairsPage(state):pairsRefusal();if(ready.changed)save();}
-  else if(seedBench)html=pairsEntry()+seedPage(state);
+  else if(seedBench)html=seedPage(state,{owner:explorerStore.active.id,entry:pairsEntry(),allowChance:hash==='#numbers/seeds'});
   else if(lanternBench)html=lanternPage(state);
   else if(noticeBench)html=noticePage(state);
   else if(joiningLedgerBench){const v=joiningView(state),examples=v.source?ledgerSourceExamples(v.source):[];const outcome=recordLedgerDisplay(state,examples,candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok);html=outcome.ok?joiningLedgerPage(state,explorerStore.active.id):ledgerRefusalPage();if(outcome.changed)save();if(!outcome.ok)queueMicrotask(()=>{if(location.hash==='#numbers/join/ledger')focusElement('#ledger-notice');});}
@@ -1106,7 +1107,7 @@ function bind(){
  bindNotice(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindLabel(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindClockWalk(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
- bindSeed(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,downloadNotes:()=>downloadText(JSON.stringify(notesReport(state),null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`)});
+ bindSeed(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer&&location.hash.startsWith('#numbers/seeds')&&location.hash!=='#numbers/seeds/pairs',stopSpeech,stopSound:stopBell,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,downloadNotes:()=>downloadText(JSON.stringify(notesReport(state),null,2),`number-garden-notes-${explorerStore.active.symbol}-${new Date().toISOString().slice(0,10)}.json`)});
  bindLantern(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindCollection(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});
  bindHundredths(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target=state)=>exposeStoryFacts({facts:pairs},null,target,true)});
