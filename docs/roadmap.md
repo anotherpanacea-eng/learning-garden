@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Leaf Kitchen408 · materials, energy and food
 
-The next proposed S2-IV bridge is [Leaf Kitchen408](specs/408-leaf-kitchen.md), an optional visual model inside Living Layers. Arrange material/energy/product cards, compare a separate reference, turn teaching pictures and revisit the difference between a process explanation and a seedling measurement. The [finite packet](content/408-leaf-kitchen-text.md) and [source/model boundary](source-audits/408-leaf-kitchen.md) await independent specification and full science/model review. It selects the qualitative149(g) slice, creates no learner record and does not complete photosynthesis, respiration or a real growing investigation.
+The next proposed S2-IV bridge is [Leaf Kitchen408](specs/408-leaf-kitchen.md), an optional visual model inside Living Layers. Arrange material/energy/product cards, compare a separate reference, turn teaching pictures and revisit the difference between a process explanation and a seedling measurement. The [finite packet](content/408-leaf-kitchen-text.md) and [source/model boundary](source-audits/408-leaf-kitchen.md) await independent specification and full science/model review. It selects the qualitative149(g) entry bridge before the already-built386 molecule/atom accounts, creates no learner record and does not complete photosynthesis, respiration or a real growing investigation.
 
 ## Walton’s Letters407 · a narrator presents himself
 

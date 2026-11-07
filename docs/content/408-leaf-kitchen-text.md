@@ -52,7 +52,11 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     "leafLabel": "A green leaf",
     "rootsLabel": "Roots",
     "airLabel": "Air",
-    "diagramCaption": "A diagram of roles, not a view inside a leaf. Solid paths show named materials; the separate dashed ray shows light energy. Line widths and card sizes do not show quantities."
+    "diagramCaption": "A diagram of roles, not a view inside a leaf. Solid paths show named materials; the separate dashed ray shows light energy. Line widths and card sizes do not show quantities.",
+    "newArrangement": "Start a new empty arrangement",
+    "nextTitle": "Go on to molecule counts",
+    "nextText": "A Leaf’s Two Accounts lets you build molecule summaries and check atom counts. It offers a more detailed representation of these ideas. In Body Clues, choose A leaf’s two accounts.",
+    "nextLink": "Open Body Clues for A Leaf’s Two Accounts"
   },
   "cards": [
     {
