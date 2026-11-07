@@ -83,6 +83,7 @@ def marks(p, body, a, b):
 
 
 def status(p):
+    p.wait_for_function("()=>!!document.querySelector('[data-pollen-path-status]')?.textContent.trim()")
     return p.locator('[data-pollen-path-status]').inner_text().strip()
 
 
@@ -230,7 +231,7 @@ def journey(browser, base, seed):
         enter(p, before)
         marks(p, 'A', 'none', 'none')
         act(p, 'back', before=before)
-        h.ok(k.parent_frame(p) == frame, 'shelf/readable own-source/unavailable parent returns exactly')
+        h.ok(k.parent_frame(p) == frame, 'shelf/readable own-source parent returns exactly')
         if control:
             k.click(p, '[data-ll-shelf]')
     final_notes = normalized_report(h.export_notes(p, 'notes-after-room'))
@@ -371,6 +372,48 @@ def phone(browser, base, seed):
         p.screenshot(path=str(OUT/('phone-card-'+str(i+1)+'.png')), full_page=True)
 
 
+def announcements(browser, base, seed):
+    p = setup(browser, base, seed, 'announcements')
+    enter(p)
+    before = k.snapshot(p)
+    # Observe the next real rendering opportunity, before the activity's
+    # second-frame fill. A microtask fill would make this assertion fail.
+    p.evaluate("""()=>{window.pollenWatch=false;window.pollenFrames=[];
+      window.addEventListener('click',()=>{if(!window.pollenWatch)return;
+        window.pollenWatch=false;requestAnimationFrame(()=>{
+          const s=document.querySelector('[data-pollen-path-status]');
+          window.pollenFrames.push({live:s?.getAttribute('aria-live'),text:s?.textContent});
+        });
+      },{capture:true});}""")
+    for action, value, expected in [
+        ('contact', 'a-anthers', "The visitor touches flower A's anthers. Its body now shows pollen from A."),
+        ('clean', None, 'A clean paper visitor is ready. Any marks on the stigmas stay where they are.'),
+        ('fresh-confirm', None, 'Choose a flower part to begin.')]:
+        if action == 'fresh-confirm':
+            act(p, 'fresh-request', before=before)
+        p.evaluate('pollenFrames=[];pollenWatch=true')
+        act(p, action, value, before)
+        h.ok(status(p) == expected, action+' eventually fills exact current announcement')
+        h.ok(p.evaluate('pollenFrames') == [{'live':'polite','text':''}], action+' exposes an empty polite region through the next real frame')
+    retained = status(p)
+    act(p, 'invitation', 1, before)
+    h.ok(p.locator('#pollen-path-status').get_attribute('aria-live') is None and status(p) == retained, 'trail changes retain text without re-announcing')
+    act(p, 'page', 'learn', before)
+    h.ok(not p.locator('[data-pollen-path-status]').count(), 'teaching page carries no old contact region')
+    act(p, 'page', 'garden', before)
+    h.ok(p.locator('#pollen-path-status').get_attribute('aria-live') is None and status(p) == retained, 'page return displays retained status without re-announcing')
+    act(p, 'back', before=before)
+    enter(p, before)
+    h.ok(p.locator('#pollen-path-status').get_attribute('aria-live') is None and status(p) == retained, 'Back and re-entry do not re-announce')
+    # Deliberately retire a just-created status before either frame callback.
+    p.evaluate("""()=>{document.querySelector('[data-pollen-path-action=contact]').click();
+      window.pollenPendingStatus=document.querySelector('#pollen-path-status');
+      document.querySelector('[data-pollen-path-action=page][data-pollen-path-value=learn]').click();}""")
+    p.evaluate('()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(resolve))))')
+    h.ok(p.evaluate('!pollenPendingStatus.isConnected && pollenPendingStatus.textContent === ""'), 'retired pending status is never filled by a later callback')
+    k.unchanged(p, before, 'pending announcement after leaving its page')
+
+
 def main():
     server = None
     base = os.environ.get('POLLEN_PATH_TEST_URL')
@@ -390,13 +433,14 @@ def main():
             try:
                 seed = fixture()
                 journey(browser, base, seed)
+                announcements(browser, base, seed)
                 for mode in ['removed-reinserted', 'reparented', 'hidden-unhidden', 'control-hidden-unhidden', 'root-removed-reinserted']:
                     guard_probe(browser, base, seed, mode)
                 changed_parent(browser, base, seed)
                 lifecycle(browser, base, seed)
                 phone(browser, base, seed)
                 h.ok(not h.errors, 'no page/console/HTTP errors: '+str(h.errors))
-                receipt = {'status':'passed', 'checks':h.checks, 'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(), 'tree':subprocess.check_output(['git','rev-parse','HEAD^{tree}'],cwd=ROOT,text=True).strip(), 'workingDiff':subprocess.check_output(['git','diff','--stat'],cwd=ROOT,text=True), 'errors':h.errors, 'scope':'Actual app; pure getter observes memory, persisted notebook and all same-day storage; actual Notes bracket whole room visit. Separately labelled synthetic raw source/work replacement. Stub records actual shared utterance requests; no audible/physical-device/learning claim. Existing Leaf Kitchen regression covers midnight bookkeeping.'}
+                receipt = {'status':'passed', 'checks':h.checks, 'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(), 'tree':subprocess.check_output(['git','rev-parse','HEAD^{tree}'],cwd=ROOT,text=True).strip(), 'workingStatus':subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True), 'errors':h.errors, 'scope':'Actual app; pure getter observes memory, persisted notebook and all same-day storage; actual Notes bracket whole room visit. Separately labelled synthetic raw source/work replacement. Stub records actual shared utterance requests; no audible/physical-device/learning claim. Existing Leaf Kitchen regression covers midnight bookkeeping.'}
                 (OUT/'receipt.json').write_text(json.dumps(receipt, indent=2))
                 print('Pollen Path browser:', h.checks, 'checks passed; artifacts', OUT)
             except Exception:
