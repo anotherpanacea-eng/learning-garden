@@ -6,4 +6,4 @@ Primary references: [NASA Moon Phases](https://science.nasa.gov/moon/moon-phases
 
 The original flattened diagram omits height out of its plane. It samples8places and assumes non-eclipse parallel sunlight. It is not an eclipse predictor or a physically scaled solar system. A given circle's Sun-facing half is drawn consistently to the right; Earth-facing silhouettes reuse this app's own schematic323 art (crescent/gibbous ellipse radii14 vs20). These are qualitative shapes, not exact illuminated percentages; new uses a dark disk, distinct from a not-seen observation marker. Simplified north/south orientation is not exact apparent tilt or location. No animation implies equal time steps. No local record can be inferred from this model, and it never grades/corrects real notes.
 
-Independent full finite astronomy/diagram review and six-lens specification review are pending. No personal/family material is in this packet.
+Independent full finite astronomy/diagram review and six-lens specification review cleared at d6f137d5 after repair closure. No personal/family material is in this packet.

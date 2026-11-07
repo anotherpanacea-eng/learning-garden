@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Moonlight Bench406 · sunlight and viewpoint
 
-The next proposed S8-II/S1 bridge is [Moonlight Bench406](specs/406-moonlight-bench.md), inside existing Sky Notes. Choose a possible Moon position, imagine/reveal the view from Earth and compare flipped drawings of the same phase. The [finite packet](content/406-moonlight-bench-text.md) and [source/model boundary](source-audits/406-moonlight-bench.md) await independent specification and astronomy review. It explains a non-eclipse model;323's actual observations stay separate, and116's calculated date table/prediction and141's broader sky/eclipses remain unbuilt. No observation, learning record or date prediction is added.
+The next proposed S8-II/S1 bridge is [Moonlight Bench406](specs/406-moonlight-bench.md), inside existing Sky Notes. Choose a possible Moon position, imagine/reveal the view from Earth and compare flipped drawings of the same phase. The [finite packet](content/406-moonlight-bench-text.md) and [source/model boundary](source-audits/406-moonlight-bench.md) are independently BUILD-READY at d6f137d5 after six-lens and finite astronomy repair closure. The bounded implementation is built; its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/489#issuecomment-6702792888) owns independent implementation clearance and publication status. It explains a non-eclipse model;323's actual observations stay separate, and116's calculated date table/prediction and141's broader sky/eclipses remain unbuilt. No observation, learning record or date prediction is added.
 
 ## Shadow Yard405 · a ratio needs conditions
 

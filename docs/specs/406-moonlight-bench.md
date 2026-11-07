@@ -1,6 +1,6 @@
 #406 · Moonlight Bench: the lit half and the part we see
 
-Status: proposed; independent six-lens specification and complete finite astronomy/model review precede code. Existing admitted LG-1 / LG-G1. Bounded explanatory phase bench under141/116, beside323's real observations.
+Status: BUILD-READY at d6f137d5 after independent six-lens specification and complete finite astronomy/model review, including repair closure. The bounded implementation is built; exact-head implementation clearance and hosted acceptance remain pending. Existing admitted LG-1 / LG-G1. Bounded explanatory phase bench under141/116, beside323's real observations.
 
 ## Purpose and story
 
