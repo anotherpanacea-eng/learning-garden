@@ -8,7 +8,7 @@ Source words are complete LetterI/II blocks from the public-domain1831 text, not
     "id": "walton-letters-1831",
     "title": "Walton’s Letters · Frankenstein (1831)",
     "kind": "literary-letters",
-    "notice": "Two complete opening letters from Mary Shelley’s 1831 revision, not the complete novel. Walton and Margaret are fictional. The source includes outdated stereotypes and class/gender judgments, which we examine as narrator language, not facts about groups. Our context and teaching are labelled separately. Other editions may differ.",
+    "notice": "Two complete opening letters from Mary Shelley’s 1831 revision, not the complete novel. Walton and Margaret are fictional. The source includes outdated stereotypes and class/gender judgments, which we examine as narrator language, not facts about groups. Our context and teaching are labeled separately. Other editions may differ.",
     "chapters": [
       {
         "id": "letter-one",
