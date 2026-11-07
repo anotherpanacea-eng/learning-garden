@@ -10,7 +10,7 @@ In Act III, Willowbank is preparing ribbons for a gathering beyond the bridge. T
 
 ## Upstream and prerequisite crosswalk
 
-Refreshed upstream heads on 2026-11-07: Jane `c681f6bf2f2adf2aa032f765983a4691774cfba5`, Marble `04962c78ccb8bd52b236512d3362405bace98d2a`. Studied Jane `docs/LESSONS.md` (blob `4d6add1b23c32ed6167c2358d763db05474e23d9`): separate introduction, guided encounter and practice, with an easier worked example available. Adapt that sequence into optional manually stepped material; do not incorporate its prose/code, generated quest scheduling, grades, bosses, medals, KV or gates. Marble topics blob `a1d3bf978d95f9240b7b43f1dd09a7f61541630a` and dependencies blob `c65f65131ac90d7f1cb0791aa35e1ed97e3e7c1f` were inspected. Descriptions below are paraphrased design references, with the repository's existing upstream attribution/licenses; no upstream research prose is copied.
+Refreshed upstream heads on 2026-11-07: Jane `c681f6bf2f2adf2aa032f765983a4691774cfba5`, Marble `04962c78ccb8bd52b236512d3362405bace98d2a`. Studied Jane `LESSONS.md` (blob `4d6add1b23c32ed6167c2358d763db05474e23d9`): separate introduction, guided encounter and practice, with an easier worked example available. Adapt that sequence into optional manually stepped material; do not incorporate its prose/code, generated quest scheduling, grades, bosses, medals, KV or gates. Marble topics blob `a1d3bf978d95f9240b7b43f1dd09a7f61541630a` and dependencies blob `c65f65131ac90d7f1cb0791aa35e1ed97e3e7c1f` were inspected. Descriptions below are paraphrased design references, with the repository's existing upstream attribution/licenses; no upstream research prose is copied.
 
 Candidate topics, not coverage declarations:
 
@@ -46,7 +46,7 @@ Use `commonCases`, `createCommonPair`, `commonPairModel`, `splitCommonPair` and 
 
 These are two separate pieces of ribbon, even when their lengths are equal. Preserve existing IDs; supply joining-specific job titles/descriptions rather than comparison instructions. Sixth and twelfth common units both remain valid where reachable, without favoring the least denominator. Every original amount is a proper fraction; joined output can exceed one. Preserve an exact fraction name at the chosen denominator, without automatic simplification or mandatory lowest terms.
 
-Original A and B reference ribbons are always shown against an identical 0–1 whole. Their pattern/letter and fixed shaded endpoint remain. Clearly label them **Original lengths**: these are references, not a second pile of usable pieces. Separate labeled source trays show pieces still available. Unmoved slots are filled/patterned; moved slots are outlined and described in text. The output **Joined so far** shows transferred unit pieces in move order, with A/B letters or patterns and a source/count equivalent in HTML. Colour alone never distinguishes sources.
+Reference strips reuse Common Cuts art with current cut marks and fixed shaded ends; they never show moved/outlined slots. Source trays use the identical 0–1 width, left edge and unit marks. A move empties the highest remaining filled slot, leaving the available pieces as a prefix from0; Undo refills that exact slot. Each joined piece has width exactly1/current-denominator of that same whole, including on the second whole strip. Original A and B reference ribbons are always shown against an identical 0–1 whole. Their pattern/letter and fixed shaded endpoint remain. Clearly label them **Original lengths**: these are references, not a second pile of usable pieces. Separate labeled source trays show pieces still available. Unmoved slots are filled/patterned; moved slots are outlined and described in text. The output **Joined so far** shows transferred unit pieces in move order, with A/B letters or patterns and a source/count equivalent in HTML. Colour alone never distinguishes sources.
 
 Native **Split A pieces in 2**, **Split A pieces in 3**, **Undo A cut** (and B equivalents) reuse the Common Cuts operations and denominator≤12 limit. While any piece is transferred, cuts/undo-cut disable, with the visible explanation **Return the joined pieces before changing the cuts.** Native **Undo last move** returns exactly the last source's piece. **Return all pieces** restores both trays without undoing cuts. Thus no action silently discards work. Unavailable/invalid actions refuse, never clamp or partially apply.
 
@@ -54,15 +54,37 @@ Native **Move one A piece** / **Move one B piece** transfer one current 1/d piec
 
 The joined length uses up to two aligned 0–1 strips, each at exactly the reference scale. Show the second whole only when needed; never squeeze 17/12 into one whole or resize A relative to B. At an exact whole the second strip is absent; a later move adds it. Reference originals keep their ends while source availability and output change. HTML states A remaining/moved, B remaining/moved, total transferred count, denominator and same-whole unit. On every successful move, A remaining + A moved = A current numerator, likewise B; output count = total moves; total supplied length is unchanged. The sequence can interleave A and B; no prescribed order. Reversing every move recovers the exact recut starting material.
 
-**See the whole sum** is optional and always available on a chosen job. At unmatched units it supplies the original-addend expression and explains matching units, but does not construct a common cut or move pieces. At matched units it displays both renamed addends and the full sum, labelled **Reference — the whole sum**, independently of the partial work. **Joined so far** remains the actual partial amount and is never replaced by that reference. Further cuts/moves/Undo/return hide the reference until requested again. This is supplied reasoning, never a child's answer or proof of recall. Keep a completed sum visible in the work readout even without opening the reference.
+**See the whole sum** is optional and always available on a chosen job. At unmatched units it supplies the original-addend expression and explains matching units, but does not construct a common cut or move pieces. At matched units it displays both renamed addends and the full sum, labelled **Reference — the whole sum**, independently of the partial work. **Joined so far** remains the actual partial amount and is never replaced by that reference. Further cuts/moves/Undo/return hide the reference until requested again. This is supplied reasoning, never a child's answer or proof of recall. Keep a completed addition equation (both renamed addends and total at the current denominator) visible in the work readout even without opening the reference.
 
 No multiplication/division question is asked or standalone numeric multiplication/division fact displayed: cut labels describe splitting, fraction names describe amounts, and supplied equations use addition. This is representational addition/equivalence support, not multiplication recall. Existing explicit provided-fact exposure rules remain intact; if implementation adds a numeric product/quotient, it must first use the existing exposure seam rather than bypass it. Do not add those equations merely as incidental decoration.
+
+### Joining-specific jobs and exact dynamic readouts
+
+| Case | Joining title | Request |
+| --- | --- | --- |
+| `half-and-third` | Welcome ribbons | Join the half-length and third-length ribbons for a welcome banner. How long are they together? |
+| `equal-banners` | Two equal lengths | Both ribbons have the same length, with different piece names. Join both lengths for one banner. |
+| `quarter-third` | A longer banner | Join the two ribbon lengths for the gathering. The joined length can pass one whole. |
+| `sixth-quarter` | Doorway streamers | Lay the two lengths end to end. Find their combined length using one piece size. |
+| `quarter-and-third` | Small place labels | Join the quarter-length and third-length ribbons into one usable length. |
+
+Finite templates below are supplied readouts, with A/B and validated current integer counts substituted. No other arithmetic fact is implicit in the template contract.
+
+- Unmatched move reason: **A’s pieces are 1/{aDenominator} of the whole and B’s are 1/{bDenominator}. Different-sized pieces can be laid end to end, but cannot be counted together as pieces of one size. Cut until both trays use the same piece size.**
+- Source tray: **{A/B}: {remaining} pieces still here; {moved} pieces moved. Each piece is 1/{denominator} of the same whole.**
+- Empty source reason (only when units match): **All {A/B} pieces have moved. Undo a move or return all the pieces to refill the trays.**
+- Unmatched empty output: **No pieces moved. Match the piece sizes to count the joined length with one fraction name.**
+- Matched output: **Joined so far: {count}/{denominator} of the whole length. {count} pieces, each 1/{denominator} of the same whole.**
+- Output at or above one whole adds: **{denominator} pieces fill one whole; {count−denominator} more pieces.** This finite catalogue never reaches two wholes. Exactly one whole explicitly gives zero more pieces.
+- Unmatched optional reference: **Reference — the whole sum. {originalA} + {originalB}. To name this total with one fraction, first make equal-sized pieces. The original amounts stay the same.** No total or automatically renamed pair is supplied here.
+- Matched optional reference: **Reference — the whole sum. {currentA} + {currentB} = {fullCount}/{denominator}. These are pieces of one size, each 1/{denominator} of the same whole.** This is the full source sum even when no/all/some pieces have moved; the partial output stays separately labelled.
+- Completion: **Both lengths are joined. {currentA} + {currentB} = {fullCount}/{denominator}.**
 
 ## Teaching encounter and finite copy boundary
 
 The main instructions are short and action-specific:
 
-- Chooser: **Join the Pieces**; **Lay two ribbon lengths end to end. First make their pieces the same size. Then move the pieces into one joined length.**
+- Chooser: **Join the Pieces**; **Lay two ribbon lengths end to end. To name the joined length with one fraction, first make their pieces the same size. Then move the pieces into one joined length.**
 - Whole note: **Each full strip stands for the same whole length. A join in this model loses no ribbon.**
 - Cutting stage: **Try cuts on A and B until their pieces are the same size. The original lengths stay the same.**
 - Matching stage: **The pieces match. Move one piece at a time from either tray. Keep counting pieces of this size.**
@@ -75,15 +97,15 @@ UI copy may be edited for brevity without changing these meanings; core action l
 
 An optional separate **Show me with quarters** uses 1/2 + 1/4, not a live job. Five manually stepped frames, with Previous/Next and Back to my ribbons:
 
-1. A original half and B original quarter, same-size whole. **A half and a quarter use different-sized pieces. We cannot call them two equal pieces.** No transferred pieces.
+1. A original half and B original quarter, same-size whole. **A half and a quarter use different-sized pieces. We can lay them end to end, but cannot count them as two pieces of one size.** No transferred pieces.
 2. Split A into quarters; fixed endpoints unchanged, A 2/4 and B 1/4. **Two quarters name the same length as one half. Now each small piece is one quarter of the same whole.**
 3. Transfer A's two quarters into the output. Source A empty; B still one quarter. **Two quarters have moved. One quarter is still in B's tray. The joined length so far is 2/4.**
 4. Transfer B's quarter. **Two quarters and one quarter make three quarters: 2/4 + 1/4 = 3/4. The pieces are still quarters.** Display source empty and 3/4 output.
-5. Keep that correct construction, alongside a separately labelled **Different claim: 2/6** short strip at the identical whole scale. **Adding both counts would say 2/6. But sixths are smaller than quarters, and 2/6 is shorter than the length we joined. Joining changes the count of pieces, not their size.** The false claim is not a live piece, answer choice or transferable source. No equation asserts 1/2 + 1/4 = 2/6.
+5. Keep that correct construction, alongside a separately labelled **Different claim: 2/6** short strip at the identical whole scale. **Adding the tops and the bottoms of the original 1/2 and 1/4 would say 2/6. But sixths are smaller than quarters, and 2/6 is shorter even than A’s half alone. Joining changes the count of pieces, not their size.** Draw the false strip with six equal spaces (five internal cuts), two shaded, at the same whole scale; keep the original 1/2 and 1/4 labels visible. The false claim is not a live piece, answer choice or transferable source. No equation asserts 1/2 + 1/4 = 2/6.
 
 Closing/reopening the example resets only its frame and preserves live cuts/moves. Example speech includes only its current frame, not the live result or later frames. No auto animation/advance.
 
-49 §5 sequence: teaching = separate example; contrast = frame5 plus unmatched-unit instructions; supported practice = optional help and freely selected related case `equal-banners`; new use = `quarter-and-third` and the gathering-length purpose; return = choose `quarter-third` / `sixth-quarter`, cross one whole, then undo/rejoin in another order or unit. This finite visit can be replayed but is not an adaptive curriculum, spaced schedule or coverage-completion claim. Learners may choose any sequence.
+49 §5 sequence: teaching = separate example; contrast = frame5 plus unmatched-unit instructions; supported practice = optional help and freely selected related case `equal-banners`; additional case practice = `quarter-and-third`, then `quarter-third` / `sixth-quarter`, crossing one whole and undoing/rejoining in another order or unit. These same-table variations do not supply49’s new application with a changed representation/unknown/setting or its purposeful later use in another act/game. Those application/return steps remain unobserved and open under197; a nearby link is not evidence of transfer. This finite visit can be replayed but is not an adaptive curriculum, spaced schedule or coverage-completion claim. Learners may choose any sequence.
 
 ## State, integration and native controls
 
@@ -103,7 +125,7 @@ Material-first design: workshop slate/green paper, A striped dark green, B dotte
 
 Before build: six independent spec lenses grounded in actual parent modules, plus independent Claude mathematical/content review. Resolve genuine P1/P2 ambiguities before implementation.
 
-Source checks use independent rational/count oracles, not the rendered result helper: all five source sums, every reachable recut pair, all legal transfer counts and representative interleavings/undo paths, both sixth/twelfth units where possible, crossing/exactly-one-whole, invalid/mismatched/excess moves, immutable input, empty/refilled trays, cut refusal during transfer, complete reversal, example isolation and false-claim magnitude. No prose snapshots or assertion-count targets. Parent Common Cuts checks remain intact.
+Source checks use independent rational/count oracles, not the rendered result helper: all five source sums, every reachable recut pair, all legal transfer counts and representative interleavings/undo paths, both sixth/twelfth units where possible, crossing/exactly-one-whole, invalid/mismatched/excess moves, immutable input, empty/refilled trays, cut refusal during transfer, complete reversal, example isolation and false-claim magnitude. No prose snapshots or assertion-count targets. Parent Common Cuts source and actual-app browser checks must pass without weakening their existing assertions.
 
 Actual-app browser journey: direct entry, native cuts/moves/undo/return/reference, partial-work vs full-reference distinction, each case available, case/example preservation, both matching units, all teaching frames, meaningful material geometry/conservation and same whole scale, crossing one; native keyboard/focus; 320/820/1024 representative layout samples. Probe actual in-memory notebook, both browser storages and real Notes exports before/after play (ignore only export timestamp), rather than a fake writer callback. Use a synthetic read-only actual-app notebook getter solely in the test harness. Test route/chooser/switch/import/reset/reload and obsolete enabled controls, hidden/restored roots, native disclosure reopening and global voice-control independence. Verify speech once against current visible material, not an audible-quality assertion.
 
