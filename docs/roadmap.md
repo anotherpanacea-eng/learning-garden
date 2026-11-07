@@ -6,6 +6,10 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 **Current priorities, decisions and release status, 2026-10-31.** Start with the [consolidation priorities](#consolidation-priorities--current-order); the rest of this page is the release queue and the record of what is built. The [pre-merge snapshot](roadmap-2026-10-22-pre-merge.md), [strand map](strand-map.md), [curriculum spirals](curriculum-spirals.md), [gap proposals](curriculum-gaps.md) and [dated handoffs](handoffs/) preserve design history. Their earlier “next” and publication statements are snapshots. The [six-act programme](specs/49-six-act-curriculum.md) and [26 strand pathways](six-act-strands.md) describe the teaching and story horizon, not a release schedule or completed course.
 
+## Spinner Table410 · equal stops, unequal shares
+
+[Spinner Table410](specs/410-spinner-table.md) selects the next M6-III/IV bridge from202: edit a twelve-slice wheel, preserve its frozen design beside each short virtual run, and distinguish model chances from recorded counts. It will sit beside Chance Line inside Seed Stall, preserving parent work and both children's local visits. The complete finite specification is authored for independent review; implementation has not begun. No weather forecast, persistent learner record or whole-course claim is proposed.
+
 ## Chance Line409 · count the whole, compare the share
 
 [Chance Line409](specs/409-chance-line.md) is the next proposed M6/M3 bridge inside Seed Stall: place an ungraded chance pin, compare a separate reference, and contrast different bags on the same0–1 line. It connects87's short runs with119's existing two-draw work. The complete finite specification is independently BUILD-READY at2240b6db after six-lens and mathematics/model repair closure. The bounded implementation is built; its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/492#issuecomment-6703972947) owns independent implementation acceptance and publication status. No saved learner root, access gate or claim of a complete probability course is added.
