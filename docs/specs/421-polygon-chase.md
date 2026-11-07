@@ -6,7 +6,7 @@ Status: proposed addendum to [420](420-angle-chase.md), awaiting independent spe
 
 Extend the existing **Angle Chase / Find angles** page with two families of three sketches. Reuse420's teaching, explicit number-and-reason checks, open targets, examples, optional hints/solutions, visit retention, scoped keyboard, touch controls, narration, structural guards and source isolation. No new destination, page, module, callback, persistent schema, learner writer or coverage claim. Original15 cases retain their IDs and behavior; append cases15–20, for21 visit-local boards. Replace only Chase catalogue bounds with catalogue length; never alter historical saved-source validation. Another sketch cycles through the current catalogue; restarting affects just the chosen board. There is no upgrade/migration for this ephemeral work.
 
-The workshop's paper sketches now include polygon shade frames. This is an Act III ch3 paper-plan investigation and an Act IV ch1 checking-notes return under [49](49-six-act-curriculum.md) and [120](120-keeper-of-the-ways.md), not real construction advice, a newly broken town, act completion or an ending-film trigger. M5-III/IV, M7-III/IV and arithmetic M1 are partial authoring candidates. Equations, independent proofs, measurement, fractional-angle polygons, nonconvex/crossed polygons, converse proofs and broad fluency remain missing.
+The workshop's paper sketches now include polygon shade frames. This is an Act III ch3 paper-plan investigation and an Act IV ch1 checking-notes return under [49](49-six-act-curriculum.md) and [120](120-keeper-of-the-ways.md), not real construction advice, a newly broken town, act completion or an ending-film trigger. M5-III/IV, M7-III/IV and supporting M1-II are partial authoring candidates. Equations, independent proofs, measurement, fractional-angle polygons, nonconvex/crossed polygons, converse proofs and broad fluency remain missing.
 
 Only this spec, roadmap, README, the existing crossing-angles content/core/UI/CSS and existing source/browser suites may change. No asset production or new framework is needed. All facts, names and observations are fictional; no household material.
 
@@ -14,12 +14,12 @@ Only this spec, roadmap, README, the existing crossing-angles content/core/UI/CS
 
 49 §5: teach the whole and the equal-sharing condition in the regular example; contrast regular sharing with unequal quadrilateral corners and inside with adjacent outside; offer optional hints, a different stepped example and a shown solution; apply the reasoning to a new side count/known-angle triple and orientation; return to the already built polygon fan.
 
-Additional invitation on the two new families only: **For the triangle fan, choose Triangle corners → Polygon frames → Free frame. Your sketch stays kept during this visit.** The three controls already exist. This is guidance to open existing pages, never automatic navigation or a replacement of their waiting settings. Existing420 return invitation remains on old families. Examples retain their example-only projection and notice; invitation is included in Solve/Hear, not a hidden example answer channel.
+Additional invitation on the two new families only: **For the triangle fan, choose Triangle corners → Polygon frames → Free frame → Split the frame. Your sketch stays here during this visit.** The four controls already exist. This is guidance to open existing pages, never automatic navigation or a replacement of their waiting settings. Existing420 return invitation remains on old families. Examples retain their example-only projection and notice; invitation is included in Solve/Hear, not a hidden example answer channel.
 
 Teach explicitly:
 
 - A polygon's inside total is `(n − 2) × 180°`; the fan in418 explains the triangles.
-- Regular means all sides and all inside angles equal. Only then can that total be shared equally to find one corner.
+- Regular means all sides and all inside angles equal. Equal inside angles let us share the total equally to find one corner; regularity guarantees equal angles but is not necessary.
 - An irregular quadrilateral still has360° inside, but its unequal known corners cannot be replaced by four equal shares.
 - One inside angle and its adjacent positive outside turn total180°. One positive outside turn at every corner of a convex polygon totals360°. Those corners are different points; this is not the angles-around-one-point rule.
 - `n` counts sides; it is not an angle and must never appear as `n = 5°`. Individual unknowns remain whole-number degrees0–360. Totals greater than360 may appear in worked arithmetic, never as an input to a new sum question.
@@ -36,7 +36,7 @@ Use source family IDs `regular` and `quadrilateral`. Keep authored case order st
 
 Regular givens contain `{n}`; x=`(n−2)×180/n`, y=`360/n`. Visible family/variant label includes **Regular polygon · {n} sides**; facts define regular and name x/y. n goes in count/facts text, not the angle `geometry.givens` array. Display no degree symbol on a side count. It is present in Solve and example step0, accessible description and Hear. A regular polygon is convex here.
 
-Quadrilateral givens contain `{a,b,c}` in degrees; x=`360−a−b−c`, y=`180−x=a+b+c−180`. Every inside angle is strictly between0° and180°; each given triple permits a real convex quadrilateral. Do not infer opposite-angle equality from the third case's accidental a=x. No regular, rectangle, right-angle or parallel premise.
+Quadrilateral givens contain `{a,b,c}` in degrees; x=`360−a−b−c`, y=`180−x=a+b+c−180`. Every inside angle is strictly between0° and180°; each given triple permits a real convex quadrilateral. The third case's a=x is a numerical coincidence between adjacent corners A and D; do not infer any equal-angle property. No regular, rectangle, right-angle or parallel premise.
 
 Independent examples use the same family geometry and target order but their own facts/keys: regular n10→x144,y36; quadrilateral(a85,b115,c65)→x95,y85. Each example's target values are disjoint from all practice target values in that family. Example step0 shows only its givens; step1 reveals x; step2 reveals y. Reopening and native Previous/Next retain420 behavior.
 
@@ -65,7 +65,7 @@ Specific wrong-reason explanations:
 - regular x/point: **x and y fill a half turn at A. The polygon's corners are different points, not parts of one turn around A.**
 - regular y/opposite: **x and y are beside each other at A, not across a crossing.**
 - quadrilateral x/regular: **The marked inside corners are unequal. Share equally only when the corners are equal; here subtract the known corners.**
-- quadrilateral y/equalOutside: **The known inside corners are unequal, so the outside turns are unequal too. A whole outside turn still totals360°, but four equal shares do not find y.**
+- quadrilateral y/equalOutside: **The known inside corners are not all equal, so the outside turns are not all equal either. The four positive outside turns still total 360°, but four equal shares do not find y.**
 
 Hints, no numeric key: regular x **Count n − 2 triangles for the inside total. Why may these corners share it equally?**; regular y **Use the straight line at A, or share one full turn among the equal outside turns.**; quadrilateral x **The four inside corners total360°. Which three are already known?**; quadrilateral y **Use the straight line at D, or first find the outside turn beside each known inside corner.**
 
@@ -77,6 +77,34 @@ Show this solution provides only the chosen target's value using givens, never t
 - quadrilateral y: `y =360° −(180°−a°) −(180°−b°) −(180°−c°) = y°`, substituting givens/key; explain the four positive outside turns.
 
 Retain420's shown-help wrapper and flags. No new cross-target provided-set mapping is needed because these routes do not print another target's value. Numerals may coincide with a given or another target by coincidence; inspect roles rather than raw digit bans. Example x uses its direct inside route; example y uses `y=180°−x°` after x is revealed. This teaches both routes without exposing unrevealed example keys. No current key appears in unopened hint/solution, DOM metadata or Hear.
+
+## Final child-copy templates for new families
+
+Existing420 wrapper, feedback branches and help notes are reused verbatim. Substitute only immutable source values for braces; ordinary spacing in prose and expressions is required. These strings complete the reviewable material, rather than asking the builder to invent teaching copy.
+
+Family labels: **Equal corners** (`regular`) and **Unequal corners** (`quadrilateral`). Regular variant labels: **Regular polygon · {n} sides**. Quadrilateral variant labels: **Unequal corners · sketch {1|2|3}**. The separate example has the family label and existing **A different worked sketch** heading, with no practice variant label. Its facts use its own source.
+
+Regular facts: **This convex regular polygon has {n} sides. Regular means all sides and all inside corners are equal. n counts sides, not degrees. C–A–D is straight, with A between C and D. x is the inside angle BAC; y is the adjacent outside turn DAB. Equal angles let us share the inside total equally; equal sides alone would not.** Quadrilateral facts: **ABCD is a convex quadrilateral with unequal known inside corners: a is BAD, b is CBA and c is DCB. C–D–E is straight, with D between C and E. x is the inside angle ADC; y is the adjacent outside turn EDA. No equal sides, equal corners, right corners or parallel sides are given.**
+
+Relationship text and formula (symbolic; wrong-number feedback uses the formula without hidden numeric keys):
+
+| Route | Relation text | Formula |
+| --- | --- | --- |
+|regular x/regular |The inside total is (n − 2) × 180°. The equal inside corners share it: x = (n − 2) × 180° ÷ n. |x = (n − 2) × 180° ÷ n |
+|regular x/line and y/line |C–A–D is straight: x + y = 180°. |x + y = 180° |
+|regular y/equalOutside |One positive outside turn at each corner totals 360°. These n turns are equal: y = 360° ÷ n. |y = 360° ÷ n |
+|quadrilateral x/quad |The four inside corners of ABCD total 360°: a + b + c + x = 360°. |a + b + c + x = 360° |
+|quadrilateral x/line and y/line |C–D–E is straight: x + y = 180°. |x + y = 180° |
+|quadrilateral y/quadOutside |One positive outside turn at each corner totals 360°: (180° − a) + (180° − b) + (180° − c) + y = 360°. |(180° − a) + (180° − b) + (180° − c) + y = 360° |
+
+Direct shown-solution and example-x working bodies, enclosed by420's existing shown-help wrapper only in Solve:
+
+- regular x: **x = ({n} − 2) × 180° ÷ {n} = {T}° ÷ {n} = {x}°. A fan has n − 2 triangles, each with 180°. The inside corners are equal, so share the total equally.**
+- regular y: **y = 360° ÷ {n} = {y}°. One positive outside turn at each corner totals 360°. The turns are equal because the inside corners are equal. These corners are different points, not parts of one turn around A.**
+- quadrilateral x: **x = 360° − {a}° − {b}° − {c}° = {x}°. Subtract the three known inside corners from the four-corner total.**
+- quadrilateral y: **y = 360° − (180° − {a}°) − (180° − {b}°) − (180° − {c}°) = {y}°. Each known inside corner has an adjacent outside turn. The four positive outside turns total 360°. These corners are different points, not parts of one turn around D.**
+
+Example-y working: regular **y = 180° − {x}° = {y}°. C–A–D is straight.**; quadrilateral **y = 180° − {x}° = {y}°. C–D–E is straight.** The revealed example x is the only predecessor here. The quadrilateral example's a=y=85° is a numerical coincidence, not a shape property. The total/triangle explanation lives in the direct regular-x working and fan return, the count/regularity explanation in regular facts, and the outside-total versus one-point contrast in wrong-reason feedback/direct outside working. The “Teach explicitly” list prescribes these concrete surfaces, not another hidden lecture page.
 
 ## Exact schematic geometry and visual interaction
 
@@ -94,7 +122,7 @@ Visible point labels A/B/C/D use420's outward64 drawing-unit offsets initially. 
 
 Raw A(0,0), B(4,0), C(3,3), D(−1,2), counterclockwise. E=D+0.75 unit(D−C), beyond D. Center(1.5,1.25). Closed edges AB,BC,CD,DA plus extension D–E. C–D–E is straight with D between C/E. a=∠BAD (AB→AD), b=∠CBA (BC→BA), c=∠DCB (CD→CB), x=∠ADC (DA→DC), y=∠EDA (DE→DA), all counterclockwise smaller sectors. Schematic incidence is exact although its numerical angles are not the given variant's measurements.
 
-No equality/right/parallel marks. Point D's label starts at a fixed raw100° direction,80 drawing units from D, rotating with the whole drawing into the unmarked half-plane. Other labels start64 units outward as420. Given tags a/b/c at(100,65),(320,65),(540,65), ordinary16px text. Show only those three known-angle tags, never unknown values before checking/reveal.
+Selected sector sets: x highlights a,b,c,x; y highlights a,b,c,x,y, supporting either offered route. No equality/right/parallel marks. Point D's label starts at a fixed raw100° direction,80 drawing units from D, rotating with the whole drawing into the unmarked half-plane. Other labels start64 units outward as420. Given tags a/b/c at(100,65),(320,65),(540,65), ordinary16px text. Show only those three known-angle tags, never unknown values before checking/reveal.
 
 For both families, adjust noninteractive label offsets if actual native measurements show an overlap; preserve mathematical incidence and scale. Final labels must avoid their vertices and all actual angle arcs, remain inside the plot, and stay readable on320px and820px screens at every pose. They may have leaders. No reduced text or moving native buttons/ancestors after host registration. Browser verification samples actual SVG arc paths and HTML boxes as420. The existing initial+resized native controls must perform actions. All no-write, detached/reparented/hide-unhide/key/Hear and stale-context guards remain binding.
 
