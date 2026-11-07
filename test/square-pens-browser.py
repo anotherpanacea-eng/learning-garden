@@ -57,6 +57,13 @@ def retired_anchor(p,anchor):
  ok(result=={'prevented':True,'hash':'#workshop/copy-frame'},'retired actual anchor cancels default navigation after Return and a later bind')
  anchor.evaluate('e=>e.remove()')
 
+def grid_labels_clear(p):
+ return p.locator('[data-sp-grid-figure] svg').evaluate("""svg=>{
+  const points=[...svg.querySelectorAll('[data-sp-grid-point-label]')],axes=[...svg.querySelectorAll('.sp-grid-axis-labels text')];
+  const overlaps=(a,b)=>{a=a.getBoundingClientRect();b=b.getBoundingClientRect();return Math.min(a.right,b.right)>Math.max(a.left,b.left)&&Math.min(a.bottom,b.bottom)>Math.max(a.top,b.top)};
+  return points.every((a,i)=>axes.every(b=>!overlaps(a,b))&&points.slice(i+1).every(b=>!overlaps(a,b)));
+ }""")
+
 def main():
  seed=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import{freshState}from './dist/core.mjs';import{initializeExplorerState}from './dist/progress-transfer.mjs';const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;s.syntheticOther={body:'z'.repeat(524288),opaque:'invented'};console.log(JSON.stringify(s));"],cwd=ROOT,text=True))
  class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -150,7 +157,7 @@ def main():
    ok(p.locator('[data-sp-grid]').evaluate("r=>{const n=r.cloneNode(true);n.querySelectorAll('details').forEach(x=>x.remove());return !/[×√]|square units/.test(n.textContent+' '+[...n.querySelectorAll('[aria-label]')].map(x=>x.getAttribute('aria-label')).join(' '))}"),'count text and aria withhold numerical products, square areas and roots')
    action(p,'grid-trace-next');ok(p.locator('[data-sp-grid-highlighted=true]').count()==1,'one manual interval is highlighted');ok('1 of 7' in p.locator('[data-sp-grid-trace-count]').inner_text(),'manual trace advances one interval')
    action(p,'grid-trace-back');ok('0 of 7' in p.locator('[data-sp-grid-trace-count]').inner_text(),'manual trace can move back')
-   action(p,'grid-trace-all');ok('7 of 7' in p.locator('[data-sp-grid-trace-count]').inner_text(),'whole trace highlights the complete edge route')
+   action(p,'grid-trace-all');ok(p.locator('[data-sp-action=grid-trace-back]').evaluate('e=>e===document.activeElement'),'whole-route reveal keeps keyboard focus on enabled Trace back');ok('7 of 7' in p.locator('[data-sp-grid-trace-count]').inner_text(),'whole trace highlights the complete edge route')
    p.screenshot(path=str(OUT/'square-pens-820-grid.png'),full_page=True)
    action(p,'grid-step-1')
    ok(p.locator('[data-sp-grid-highlighted=true]').count()==7,'highlighted prefix persists on later steps')
@@ -212,6 +219,10 @@ def main():
     grid_literal(q,[0,0],[12,12])
     text_sizes=q.locator('[data-sp-grid-figure] svg text').evaluate_all('xs=>xs.map(x=>parseFloat(getComputedStyle(x).fontSize)*x.getScreenCTM().a)')
     ok(all(n>=15.9 for n in text_sizes),'grid SVG labels render at least16px')
+    for A,B in [([0,5],[12,12]),([0,11],[12,12]),([0,11],[1,12]),([0,12],[0,12])]:
+     set_grid_points(q,A,B);ok(grid_labels_clear(q),'point letters clear axis labels and each other for '+str((A,B)))
+    q.screenshot(path=str(OUT/f'square-pens-{width}-edge-labels.png'),full_page=True)
+    set_grid_points(q,[0,0],[12,12]);action(q,'grid-step-2')
     q.screenshot(path=str(OUT/f'square-pens-{width}-grid.png'),full_page=True)
     action(q,'page-build')
     node=q.locator('[data-sp-action=a-less]');node.evaluate('e=>{const p=e.parentNode;e.remove();p.append(e);e.click()}');ok(dimensions(q)==[12,1],'removed/reinserted control is inert')
