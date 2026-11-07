@@ -7,7 +7,7 @@ import {renderCrossingAngles} from '../dist/crossing-angles-ui.mjs';
 const close=(a,b,message)=>assert.ok(Math.abs(a-b)<1e-9,`${message}: ${a} vs ${b}`);
 const sub=(a,b)=>[a[0]-b[0],a[1]-b[1]],dot=(a,b)=>a[0]*b[0]+a[1]*b[1],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
 const initial=createCrossingAngles();
-assert.deepEqual(initial,{page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0,polySides:5,polyKind:'regular',polySize:'large',polyView:'split',polyCorner:0,polyDraw:0,polyWalk:0,polyPrompt:0,polyPanelCorner:0,polyPanelDraw:0,polyPanelWalk:0});
+assert.deepEqual(initial,{page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0,polySides:5,polyKind:'regular',polySize:'large',polyView:'split',polyCorner:0,polyDraw:0,polyWalk:0,polyPrompt:0,polyPanelCorner:0,polyPanelDraw:0,polyPanelWalk:0,matching:{mode:'parts',view:'build',fit:'explore',case:'sss',prompt:0,parts:{variant:0,step:0,rotation:120,flip:true,move:0,pair:0},panel:{step:0,rotation:120,flip:true,move:0,pair:0}}});
 for(let a=15;a<180;a+=15)for(let r=0;r<360;r+=30)for(const pair of ['opposite','adjacent']){
  const work={...initial,angle:a,rotation:r,pair},g=crossingAnglesModel(work).geometry;
  assert.deepEqual(g.sectors.map(s=>s.measure),[a,180-a,a,180-a]);
@@ -580,3 +580,248 @@ for(const [base,context] of directionCases){
 }
 for(const work of [initial,{...initial,page:'learn'},{...initial,page:'parallel'},...['gather','reason','outside'].map(triView=>({...poly,triView})),...['split','corner'].map(polyView=>({...poly,polyView})),{...poly,triMode:'panel',polyView:'walk'}])assert.ok(!renderCrossingAngles(work).includes('data-polygon-direction-inset'),'enlarged heading absent outside readable Walk');
 console.log('Polygon Frames enlarged heading: actual SVG coordinates follow independent outgoing edges at start, turn and completed lap; absent outside readable Walk.');
+
+// Matching Triangles expectations start with the authored mathematical parts,
+// independently of the model's guides, lengths, sectors or projected vertices.
+const matching={...initial,page:'matching'};
+const matchCases=['sss','sas','asa','aas','rhs','ssa','aaa'];
+const radians=d=>d*Math.PI/180;
+const matchU=5*Math.sin(radians(60))*Math.cos(radians(50))/Math.sin(radians(70));
+const matchV=5*Math.sin(radians(60))*Math.sin(radians(50))/Math.sin(radians(70));
+function rawMatching(kind,variant=0){
+ let reference=kind==='sss'?[[0,0],[5,0],[16/5,12/5]]:kind==='sas'?[[0,0],[8,0],[2.5,2.5*Math.sqrt(3)]]:kind==='rhs'?[[0,0],[4,3],[4,0]]:kind==='ssa'?[[0,0],[3*Math.sqrt(3)+Math.sqrt(7),0],[3*Math.sqrt(3),3]]:[[0,0],[5,0],[matchU,matchV]];
+ let candidate=reference.map(p=>[...p]);
+ if(kind==='ssa'&&variant%2)candidate[1][0]=3*Math.sqrt(3)-Math.sqrt(7);
+ if(kind==='aaa'&&variant%2)candidate=candidate.map(p=>p.map(v=>v*8/5));
+ if(variant>=(['ssa','aaa'].includes(kind)?2:1))candidate=candidate.map(([x,y])=>[x,-y]);
+ return {reference,candidate};
+}
+const matchCentroid=ps=>[0,1].map(d=>ps.reduce((n,p)=>n+p[d],0)/3);
+const matchLengths=ps=>[Math.hypot(...sub(ps[1],ps[0])),Math.hypot(...sub(ps[2],ps[0])),Math.hypot(...sub(ps[2],ps[1]))];
+const matchAngle=(ps,i)=>{const a=sub(ps[(i+1)%3],ps[i]),b=sub(ps[(i+2)%3],ps[i]);return Math.acos(Math.max(-1,Math.min(1,dot(a,b)/(Math.hypot(...a)*Math.hypot(...b)))))*180/Math.PI;};
+function matchPose(raw,scale,rotation=0,flip=false,center=[320,280]){
+ const c=matchCentroid(raw),t=radians(rotation);
+ return raw.map(p=>{const x=p[0]-c[0],y=(p[1]-c[1])*(flip?-1:1);return [center[0]+scale*(x*Math.cos(t)-y*Math.sin(t)),center[1]-scale*(x*Math.sin(t)+y*Math.cos(t))];});
+}
+const matchWork=(delta={},channel={})=>({...matching,matching:{...matching.matching,...delta,parts:{...matching.matching.parts,...channel},panel:{...matching.matching.panel,...delta.panel}}});
+const matchModel=(w,c=null)=>crossingAnglesModel(w,c).matching;
+const matchBuildPoint=([x,y])=>[200+28*x,340-28*y];
+const matchSame=(kind,v)=>!(['ssa','aaa'].includes(kind)&&v%2===1);
+
+// Validate every nested field before any page can model or reduce the visit.
+for(const invalid of [null,[],{},'parts',true]){
+ const w={...matching,matching:invalid};assert.equal(crossingAnglesModel(w),null);assert.equal(changeCrossingAngles(w,'page','build'),w);assert.equal(crossingAnglesNarration(w),'');
+}
+for(const [key,invalids] of [['mode',['free',0,null]],['view',['compare',0,null]],['fit',['auto',true,null]],['case',['SSS','constructor',null]],['prompt',[-1,6,1.5,'1',NaN,Infinity,true]]])for(const value of invalids){
+ const w=matchWork({[key]:value});assert.equal(crossingAnglesModel(w),null);assert.equal(changeCrossingAngles(w,'match-mode','panel'),w);
+}
+for(const channel of ['parts','panel']){
+ for(const bad of [null,[],{},false]){const w=matchWork();w.matching[channel]=bad;assert.equal(crossingAnglesModel(w),null);assert.equal(changeCrossingAngles(w,'page','build'),w);}
+ for(const [key,invalids] of [['step',[-1,3,1.5,'1',false,NaN]],['rotation',[-30,360,15,'30',true,Infinity]],['flip',[0,1,'true',null]],['move',[-1,5,1.5,'1',true]],['pair',[-1,3,1.5,'1',false]]])for(const bad of invalids){
+  const w=matchWork();w.matching[channel]={...w.matching[channel],[key]:bad};assert.equal(crossingAnglesModel(w),null);assert.equal(changeCrossingAngles(w,'match-prompt',1),w);
+ }
+}
+for(const kind of matchCases)for(const variant of [-1,['ssa','aaa'].includes(kind)?4:2,0.5,'1',true,NaN])assert.equal(crossingAnglesModel(matchWork({case:kind},{variant})),null);
+for(const page of ['build','learn','parallel','triangle']){
+ const w={...matching,page};assert.equal(crossingAnglesModel(w).matching,null);
+ for(const [action,value] of [['match-mode','panel'],['match-view','fit'],['match-prompt',2],['match-case','sas'],['match-variant',1],['match-step',1],['match-pair',1],['match-fit','given'],['match-rotation',30],['match-move',1],['match-flip',undefined],['match-home',undefined]])assert.equal(changeCrossingAngles(w,action,value),w);
+}
+for(const [action,value] of [['angle',90],['rotation',30],['turn',undefined],['pair','adjacent'],['prompt',1],['card',3],['step',1],['two-mode','panel'],['two-move',1],['tri-mode','panel'],['tri-view','outside'],['tri-a',45],['poly-view','walk'],['poly-prompt',1]])assert.equal(changeCrossingAngles(matching,action,value),matching,'older controls do not own matching');
+for(const mode of ['parts','panel'])for(const view of ['build','fit','letters'])for(const fit of ['explore','given']){
+ const w=matchWork({mode,view,fit});
+ for(const [action,value,allowed,key] of [['match-step',2,view==='build','step'],['match-pair',2,view==='letters','pair'],['match-rotation',330,view==='fit'&&fit==='explore','rotation'],['match-move',4,view==='fit'&&fit==='explore','move']]){
+  const next=changeCrossingAngles(w,action,value);if(!allowed)assert.equal(next,w);else {assert.deepEqual(next,{...w,matching:{...w.matching,[mode]:{...w.matching[mode],[key]:value}}});assert.equal(changeCrossingAngles(next,action,value),next);assert.equal(next.matching[mode==='parts'?'panel':'parts'],w.matching[mode==='parts'?'panel':'parts']);}
+ }
+ for(const action of ['match-flip','match-home']){const next=changeCrossingAngles(w,action);if(view!=='fit'||fit!=='explore'||action==='match-home')assert.equal(next,w);else assert.equal(next.matching[mode].flip,false);assert.equal(changeCrossingAngles(w,action,1),w);}
+ for(const [action,value] of [['match-step','1'],['match-pair',3],['match-rotation',15],['match-move',5],['match-fit','bad'],['match-mode',false],['match-view','compare'],['match-case','bad'],['match-prompt',6],['match-variant',4]])assert.equal(changeCrossingAngles(w,action,value),w);
+ assert.equal(changeCrossingAngles(w,'match-case','sas')===w,mode==='panel');
+ assert.equal(changeCrossingAngles(w,'match-variant',1)===w,mode==='panel');
+ assert.equal(changeCrossingAngles(w,'match-fit','given')===w,view!=='fit'||fit==='given');
+}
+const matchHeld=matchWork({mode:'parts',view:'letters',fit:'given',prompt:5,panel:{step:2,rotation:30,flip:false,move:4,pair:2}},{variant:1,step:2,rotation:330,flip:false,move:4,pair:2});
+assert.equal(changeCrossingAngles(matchHeld,'match-case','sss'),matchHeld,'same card never resets held work');
+assert.deepEqual(changeCrossingAngles(matchHeld,'match-case','ssa'),{...matchHeld,matching:{...matchHeld.matching,case:'ssa',parts:{...initial.matching.parts}}});
+assert.deepEqual(changeCrossingAngles(matchHeld,'match-variant',0),{...matchHeld,matching:{...matchHeld.matching,parts:{...matchHeld.matching.parts,variant:0}}});
+const matchManual=matchWork({view:'fit'},{step:2,rotation:330,flip:false,move:4,pair:2});
+assert.deepEqual(changeCrossingAngles(matchManual,'match-home'),{...matchManual,matching:{...matchManual.matching,parts:{...matchManual.matching.parts,rotation:120,flip:true,move:0}}});
+
+// One input at a time: complete output must depend only on the active source
+// and view. This catches a hidden channel leaking into speech or help as well
+// as geometry, without multiplying every unrelated setting together.
+const matchOldDeltas=[{angle:105},{rotation:330},{pair:'adjacent'},{prompt:5},{card:3,step:2},{twoMode:'panel'},{twoSpacing:'far'},{twoLean:10},{twoPair:'co-interior'},{twoMove:4},{twoPrompt:5},{triMode:'panel'},{triView:'outside'},{triA:45},{triB:75},{triSize:'small'},{triGather:2},{triProof:2},{triPrompt:5},{polySides:12,polyCorner:11,polyDraw:9,polyWalk:12},{polyKind:'stretched'},{polySize:'small'},{polyView:'walk'},{polyPrompt:5},{polyPanelCorner:3},{polyPanelDraw:1},{polyPanelWalk:4}];
+const matchContexts=[null,captureCrossingPanel({originalWidth:9,originalHeight:7,width:1,height:12},'Tall waiting source'),captureCrossingPanel({originalWidth:2,originalHeight:11,width:12,height:1},'Wide waiting source')];
+function assertMatchInvariant(base,context,changes){
+ const expected=matchModel(base,context),html=renderCrossingAngles(base,context),hear=crossingAnglesNarration(base,context);
+ for(const [w,c] of changes){assert.deepEqual(matchModel(w,c),expected);assert.equal(renderCrossingAngles(w,c),html);assert.equal(crossingAnglesNarration(w,c),hear);}
+ for(const forbidden of [crossingCopy.straightTurn,crossingCopy.panelWaitingNote,crossingCopy.panelNote,crossingCards[3].text])if(forbidden)assert.ok(!html.includes(forbidden)&&!hear.includes(forbidden),'matching excludes original-frame and old teaching material');
+ assert.match(html,/<h1 id="crossing-angles-title"[^>]*>Matching triangles<\/h1>/);
+}
+for(const mode of ['parts','panel'])for(const view of ['build','fit','letters'])for(const fit of ['explore','given']){
+ const w=matchWork({mode,view,fit},{step:1,pair:1}),c=matchContexts[1],changes=matchOldDeltas.map(delta=>[{...w,...delta},c]);
+ const inactive=mode==='parts'?'panel':'parts';
+ for(const delta of [{step:2},{rotation:330},{flip:false},{move:4},{pair:2},...(inactive==='parts'?[{variant:1}]:[])])changes.push([{...w,matching:{...w.matching,[inactive]:{...w.matching[inactive],...delta}}},c]);
+ if(mode==='panel')for(const delta of [{case:'aaa'},{case:'ssa'}])changes.push([{...w,matching:{...w.matching,...delta}},c]);
+ else for(const context of matchContexts)changes.push([w,context]);
+ if(mode==='panel')for(const delta of [{originalWidth:1},{originalHeight:12}])changes.push([w,{...c,...delta}]);
+ const ignored=view==='build'?['rotation','flip','move','pair']:view==='letters'||fit==='given'?['step','rotation','flip','move',...(view==='fit'?['pair']:[])]:['step','pair'];
+ for(const key of ignored)changes.push([{...w,matching:{...w.matching,[mode]:{...w.matching[mode],[key]:{step:2,rotation:330,flip:false,move:4,pair:2}[key]}}},c]);
+ if(view!=='fit')changes.push([{...w,matching:{...w.matching,fit:fit==='given'?'explore':'given'}},c]);
+ assertMatchInvariant(w,c,changes);
+}
+// Old pages ignore even valid matching changes, including source-independent
+// changes to its case, view, prompt and each held channel.
+for(const old of [initial,panelWork,parallel,triangle,poly]){
+ const html=renderCrossingAngles(old,capture),hear=crossingAnglesNarration(old,capture);
+ for(const matching of [matchWork({case:'aaa',view:'letters',prompt:5},{variant:3,step:2,rotation:330,flip:false,move:4,pair:2}).matching,matchWork({mode:'panel',view:'fit',fit:'given',panel:{step:2,rotation:30,flip:false,move:3,pair:2}}).matching]){
+  const w={...old,matching};assert.equal(renderCrossingAngles(w,capture),html);assert.equal(crossingAnglesNarration(w,capture),hear);
+ }
+}
+const matchMissing='Your waiting panel could not be copied. Choose Parts cards, or go back to Copy Frame.';
+for(const view of ['build','fit','letters'])for(const fit of ['explore','given'])for(const delta of [{},{case:'aaa',prompt:5,panel:{step:2,rotation:330,flip:false,move:4,pair:2}}]){
+ const w=matchWork({mode:'panel',view,fit,...delta},{variant:1,step:2,rotation:300,flip:false,move:4,pair:2});
+ for(const c of [null,{},[],{...capture,width:0},{...capture,height:'6'},{...capture,originalWidth:13}]){
+  assert.deepEqual(matchModel(w,c),{mode:'panel',missing:true});
+  assert.equal(crossingAnglesNarration(w,c),`Matching triangles. ${matchMissing} ${crossingCopy.lifetime} Back to Copy Frame.`);
+  const html=renderCrossingAngles(w,c),region=html.match(/<div data-crossing-angles-matching-region>([\s\S]*?)<\/div>/)?.[1];assert.equal(region,`<p>${matchMissing}</p>`);
+  assert.ok(!html.includes('<svg'),'missing context never invents a triangle');
+ }
+}
+
+function verifyMatchDrawing(g,html){
+ const tags=[...html.matchAll(/<(circle|line|polygon|polyline)\b([^>]+)>/g)];
+ const attr=(s,k)=>s.match(new RegExp(`(?:^|\\s)${k}="([^"]*)"`))?.[1];
+ const one=(key,value)=>{const found=tags.filter(t=>value===undefined?new RegExp(`(?:^|\\s)${key}(?:\\s|$)`).test(t[2]):attr(t[2],key)===value);assert.equal(found.length,1,`${key} ${value} drawn exactly once`);return found[0][2];};
+ const points=(s,expected,label)=>{const actual=nums(attr(s,'points'));assert.equal(actual.length,expected.flat().length);actual.forEach((v,i)=>almost(v,expected.flat()[i],label));};
+ for(const role of ['reference','candidate'])if(g[role])points(one('data-matching-outline',role),g[role].points,'actual SVG outline');
+ g.circles.forEach((c,i)=>{const t=one('data-matching-guide',`circle-${i}`);pointClose(['cx','cy'].map(k=>+attr(t,k)),c.center,'actual guide center');almost(+attr(t,'r'),c.radius,'actual guide radius');});
+ for(const kind of ['rays','segments'])g[kind].forEach((r,i)=>{const t=one('data-matching-guide',`${kind==='rays'?'ray':'segment'}-${i}`);pointClose(['x1','y1'].map(k=>+attr(t,k)),r.start,'actual line start');pointClose(['x2','y2'].map(k=>+attr(t,k)),r.end,'actual line end');});
+ g.meetings.forEach((m,i)=>{const t=one('data-matching-meeting',String(i));pointClose(['cx','cy'].map(k=>+attr(t,k)),m.point,'actual meeting');assert.equal(attr(t,'class').includes('ca-matching-selected'),m.selected);});
+ for(const r of g.rightMarks)points(one('data-matching-right',r.role),r.points,'actual right square');
+ if(g.rectangle)points(one('data-matching-rectangle'),g.rectangle,'actual panel corners');
+ if(g.diagonal){const t=one('data-matching-diagonal');pointClose(['x1','y1'].map(k=>+attr(t,k)),g.diagonal.start,'actual diagonal start');pointClose(['x2','y2'].map(k=>+attr(t,k)),g.diagonal.end,'actual diagonal end');}
+ assert.equal(tags.filter(t=>attr(t[2],'data-matching-guide')?.startsWith('circle-')).length,g.circles.length);
+ assert.equal(tags.filter(t=>attr(t[2],'data-matching-guide')?.startsWith('ray-')).length,g.rays.length);
+ assert.equal(tags.filter(t=>attr(t[2],'data-matching-meeting')!==undefined).length,g.meetings.length);
+ assert.equal(tags.filter(t=>attr(t[2],'data-matching-right')!==undefined).length,g.rightMarks.length);
+}
+function expectedMatchRight(ps,index){
+ const corner=ps[index],unit=i=>{const d=sub(ps[i],corner),n=Math.hypot(...d);return d.map(v=>12*v/n);},u=unit((index+1)%3),v=unit((index+2)%3);
+ return [[corner[0]+u[0],corner[1]+u[1]],[corner[0]+u[0]+v[0],corner[1]+u[1]+v[1]],[corner[0]+v[0],corner[1]+v[1]]];
+}
+function verifyMatchRight(g,index){
+ assert.equal(g.rightMarks.length,index===null?0:Number(!!g.reference)+Number(!!g.candidate));
+ for(const r of g.rightMarks){const expected=expectedMatchRight(g[r.role].points,index);r.points.forEach((p,i)=>pointClose(p,expected[i],'right square follows both incident sides, including clockwise RHS'));}
+}
+function expectedBuild(kind,variant,step){
+ const {candidate:p}=rawMatching(kind,variant),lower=variant>=(['ssa','aaa'].includes(kind)?2:1),sign=lower?-1:1;
+ const circles=[],rays=[],meetings=[],segments=step===2?[]:[[p[0],p[['rhs','ssa'].includes(kind)?2:1]]];
+ const ray=(origin,angle,length)=>rays.push([origin,[origin[0]+length*Math.cos(radians(angle)),origin[1]+length*Math.sin(radians(angle))]]);
+ if(kind==='ssa')ray([0,0],0,9);
+ if(step>=1){
+  if(kind==='sss'){circles.push([[0,0],4],[[5,0],3]);meetings.push(p[2],[16/5,-sign*12/5]);}
+  if(kind==='sas'){ray([0,0],sign*60,6);circles.push([[0,0],5]);meetings.push(p[2]);}
+  if(['asa','aas','aaa'].includes(kind)){ray([0,0],sign*50,8);if(kind!=='aas'||step===2){ray(p[1],sign*120,8);meetings.push(p[2]);}}
+  if(kind==='rhs'){circles.push([[0,0],5]);rays.push([[4,-4],[4,4]]);meetings.push(p[1],[4,-sign*3]);}
+  if(kind==='ssa'){circles.push([p[2],4]);meetings.push(p[1],[3*Math.sqrt(3)+(variant%2?1:-1)*Math.sqrt(7),0]);}
+ }
+ return {p,circles,rays,meetings,segments};
+}
+for(const kind of matchCases)for(let variant=0;variant<(['ssa','aaa'].includes(kind)?4:2);variant++){
+ const raw=rawMatching(kind,variant),lengths=matchLengths(raw.candidate),referenceLengths=matchLengths(raw.reference),same=lengths.every((v,i)=>Math.abs(v-referenceLengths[i])<1e-9);
+ assert.equal(same,matchSame(kind,variant));
+ if(kind==='sss')lengths.forEach((v,i)=>close(v,[5,4,3][i],'SSS exact lengths'));
+ if(kind==='sas'){close(lengths[0],8,'SAS baseline');close(lengths[1],5,'SAS given leg');close(matchAngle(raw.candidate,0),60,'included SAS angle');close(lengths[2],7,'internal derived SAS third side');}
+ if(['asa','aas','aaa'].includes(kind)){[50,60,70].forEach((v,i)=>close(matchAngle(raw.candidate,i),v,'exact chosen angles'));close(lengths[0],kind==='aaa'&&variant%2?8:5,'chosen baseline');}
+ if(kind==='rhs'){close(lengths[0],5,'RHS hypotenuse');close(lengths[1],4,'RHS known leg');close(matchAngle(raw.candidate,2),90,'RHS right F');}
+ if(kind==='ssa'){
+  const near=3*Math.sqrt(3)-Math.sqrt(7),far=3*Math.sqrt(3)+Math.sqrt(7);assert.ok(near>0&&far>near);close(lengths[1],6,'SSA fixed DF');close(lengths[2],4,'SSA circle EF');close(matchAngle(raw.candidate,0),30,'SSA nonincluded angle');close(raw.candidate[1][0],variant%2?near:far,'analytic circle/ray root');
+ }
+ for(let step=0;step<=2;step++){
+  const w=matchWork({case:kind},{variant,step}),m=matchModel(w),g=m.geometry,e=expectedBuild(kind,variant,step);
+  assert.equal(g.reference,null);assert.equal(!!g.candidate,step===2);if(g.candidate)g.candidate.points.forEach((p,i)=>pointClose(p,matchBuildPoint(e.p[i]),'Build selected raw vertices'));
+  assert.equal(g.circles.length,e.circles.length);g.circles.forEach((c,i)=>{pointClose(c.center,matchBuildPoint(e.circles[i][0]),'determining circle true center');close(c.radius,28*e.circles[i][1],'determining circle distance');});
+  assert.equal(g.rays.length,e.rays.length);g.rays.forEach((r,i)=>{pointClose(r.start,matchBuildPoint(e.rays[i][0]),'determining ray origin');pointClose(r.end,matchBuildPoint(e.rays[i][1]),'determining ray analytic direction/length');});
+  assert.equal(g.segments.length,e.segments.length);g.segments.forEach((r,i)=>{pointClose(r.start,matchBuildPoint(e.segments[i][0]),'first fixed side start');pointClose(r.end,matchBuildPoint(e.segments[i][1]),'first fixed side end');});
+  assert.equal(g.meetings.length,e.meetings.length);g.meetings.forEach((p,i)=>pointClose(p.point,matchBuildPoint(e.meetings[i]),'independent true meeting'));
+  const names=step===0?(['rhs','ssa'].includes(kind)?['D','F']:['D','E']):kind==='aas'&&step===1?['D','E']:['D','E','F'];assert.deepEqual(g.labels.map(l=>l.name).sort(),names.sort(),'unplaced point has no label');
+  assert.equal(g.rightMarks.length,kind==='rhs'&&step>0?1:0,'only given right angles receive marks');
+  if(g.rightMarks.length)g.rightMarks[0].points.forEach((p,i)=>pointClose(p,expectedMatchRight(e.p.map(matchBuildPoint),2)[i],'Build RHS square actual F'));
+  for(const p of [...g.rays.flatMap(r=>[r.start,r.end]),...g.meetings.map(m=>m.point),...g.labels.map(l=>l.anchor),...g.segments.flatMap(s=>[s.start,s.end])])assert.ok(p[0]>=0&&p[0]<=640&&p[1]>=0&&p[1]<=560,'complete finite Build bounds');
+  for(const c of g.circles)assert.ok(c.center[0]-c.radius>=0&&c.center[0]+c.radius<=640&&c.center[1]-c.radius>=0&&c.center[1]+c.radius<=560,'entire guide circle visible');
+  verifyMatchDrawing(g,renderCrossingAngles(w));
+ }
+ for(const view of ['fit','letters']){
+  const w=matchWork({case:kind,view,fit:'given'},{variant,step:0,pair:2}),m=matchModel(w),g=m.geometry,rp=matchPose(raw.reference,40),upper=raw.candidate.map(([x,y])=>[x,Math.abs(y)]),cp=upper.map(p=>[rp[0][0]+40*p[0],rp[0][1]-40*p[1]]);
+  g.reference.points.forEach((p,i)=>pointClose(p,rp[i],'one fixed reference scale'));g.candidate.points.forEach((p,i)=>pointClose(p,cp[i],'provided pose aligns D=A without resize'));
+  assert.equal(m.relationship,same?'same':'different');assert.ok(same?/(?:same shape and size|matches the reference)/.test(m.currentPair):/different (?:base lengths|sizes)/.test(m.currentPair),'current-pair prose agrees with independently corresponding lengths');assert.ok(m.reasonLabel.length>0);assert.ok(crossingAnglesNarration(w).includes(m.currentPair));assert.ok(crossingAnglesNarration(w).includes(m.completedNotice));
+  assert.equal(g.labels.filter(l=>l.selected).length,view==='letters'?2:0);if(view==='letters')assert.deepEqual(g.labels.filter(l=>l.selected).map(l=>l.name),['C','F']);
+  if(kind==='ssa')pointClose(g.candidate.points[2],g.reference.points[2],'both SSA closures line up fixed DF');
+  for(const p of [...g.reference.points,...g.candidate.points])assert.ok(p[0]>=0&&p[0]<=640&&p[1]>=0&&p[1]<=560,'provided comparison bounds, including AAA eight');
+  verifyMatchRight(g,kind==='rhs'?2:null);verifyMatchDrawing(g,renderCrossingAngles(w));
+ }
+ for(let rotation=0;rotation<360;rotation+=30)for(const flip of [false,true])for(let move=0;move<=4;move++){
+  const w=matchWork({case:kind,view:'fit'},{variant,rotation,flip,move}),g=matchModel(w).geometry,expected=matchPose(raw.candidate,40,rotation,flip,[400-20*move,280]);
+  g.candidate.points.forEach((p,i)=>pointClose(p,expected[i],'manual pose is an isometry using common scale'));
+  matchLengths(g.candidate.points).forEach((v,i)=>close(v,40*lengths[i],'every manual pose preserves length'));
+  for(const p of [...g.reference.points,...g.candidate.points])assert.ok(p[0]>=0&&p[0]<=640&&p[1]>=0&&p[1]<=560,'every manual pose remains in stage');
+  verifyMatchRight(g,kind==='rhs'?2:null);
+  if(rotation===330&&flip&&move===0)verifyMatchDrawing(g,renderCrossingAngles(w));
+ }
+}
+for(let width=1;width<=12;width++)for(let height=1;height<=12;height++){
+ const c=captureCrossingPanel({originalWidth:13-width,originalHeight:13-height,width,height},'Waiting geometry source'),raw={reference:[[0,0],[width,0],[width,height]],candidate:[[width,height],[0,height],[0,0]]};
+ const radius=Math.max(...[raw.reference,raw.candidate].flatMap(ps=>{const center=matchCentroid(ps);return ps.map(p=>Math.hypot(...sub(p,center)));})),scale=180/radius;
+ for(let step=0;step<=2;step++){
+  const w=matchWork({mode:'panel',panel:{step}}),g=matchModel(w,c).geometry,expected=[[0,0],[width,0],[width,height],[0,height]].map(([x,y])=>[320+24*(x-width/2),280-24*(y-height/2)]);
+  g.rectangle.forEach((p,i)=>pointClose(p,expected[i],'panel build true aspect/constant scale'));assert.equal(!!g.diagonal,step>0);if(g.diagonal){pointClose(g.diagonal.start,expected[0],'PR start');pointClose(g.diagonal.end,expected[2],'PR end');}
+  assert.equal(!!g.candidate,step===2);assert.deepEqual(g.labels.map(l=>l.name),['P','Q','R','S']);
+  const rightPoints=[expectedMatchRight([expected[0],expected[1],expected[2]],1),expectedMatchRight([expected[2],expected[3],expected[0]],1)];g.rightMarks.forEach((r,i)=>r.points.forEach((p,j)=>pointClose(p,rightPoints[i][j],'panel known right Q/S = B/E')));
+  if(width===1||height===1||width===height)verifyMatchDrawing(g,renderCrossingAngles(w,c));
+ }
+ for(const view of ['fit','letters']){
+  const w=matchWork({mode:'panel',view,fit:'given'}),m=matchModel(w,c),g=m.geometry,rp=matchPose(raw.reference,scale);
+  g.reference.points.forEach((p,i)=>pointClose(p,rp[i],'panel comparison common radius scale'));g.candidate.points.forEach((p,i)=>pointClose(p,rp[i],'180 degree provided half alignment'));
+  assert.equal(m.relationship,'same');verifyMatchRight(g,1);
+  if(width===1||height===1||width===height)verifyMatchDrawing(g,renderCrossingAngles(w,c));
+ }
+ for(let rotation=0;rotation<360;rotation+=30)for(const flip of [false,true])for(let move=0;move<=4;move++){
+  const w=matchWork({mode:'panel',view:'fit',panel:{rotation,flip,move}}),g=matchModel(w,c).geometry,expected=matchPose(raw.candidate,scale,rotation,flip,[400-20*move,280]);
+  g.candidate.points.forEach((p,i)=>pointClose(p,expected[i],'every panel isometry preserves one shared source scale'));
+  for(const p of [...g.candidate.points,...g.reference.points])assert.ok(p[0]>=0&&p[0]<=640&&p[1]>=0&&p[1]<=560,'panel manual bound');
+  if(rotation===330&&flip&&move===0&&(width===1||height===1||width===height)){verifyMatchRight(g,1);verifyMatchDrawing(g,renderCrossingAngles(w,c));}
+ }
+}
+// Visible numbers are exact givens, chosen baselines, derivations or finite
+// control counters. Keep SVG descriptions, aria and speech in the scan; remove
+// actual geometry/style fields and form values, not whole SVG elements.
+for(const kind of matchCases)for(let variant=0;variant<(['ssa','aaa'].includes(kind)?4:2);variant++)for(const view of ['build','fit','letters'])for(const step of [0,1,2]){
+ const w=matchWork({case:kind,view},{variant,step}),m=matchModel(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);
+ const meaningful=html.replace(/\s(?:d|points|x|y|x1|y1|x2|y2|cx|cy|r|width|height|viewBox|data-ca-x|data-ca-y|style|value|data-crossing-angles-value|data-matching-meeting|data-ca-label|data-ca-leader)="[^"]*"/g,'');
+ assert.ok(!/\d+\.\d+/.test(meaningful+' '+hear),'no floating measurements in any text channel');
+ for(const token of [...(meaningful+' '+hear).matchAll(/(\d+)\s*°/g)])assert.ok([0,30,50,60,70,90,120,180].includes(+token[1]),`only exact given/derived/orientation angle: ${token[0]}`);
+ if(kind==='sss')assert.ok(!/∠[^<;]*90|90°/.test(m.givens.join(';')),'incidental right angle is not a given');
+ if(kind==='sas')assert.ok(!m.givens.some(s=>/7/.test(s)),'computed third SAS side is not a given');
+ if(kind==='rhs')assert.ok(!m.givens.some(s=>/3/.test(s)),'computed third RHS side is not a given');
+ if(kind==='aaa'){assert.ok(!m.givens.some(s=>/[58](?!0)/.test(s)),'chosen AAA base is separate from angle givens');assert.ok(m.chosen.includes(`base of ${variant%2?8:5} units`));}
+ if(view==='build'){assert.equal(m.currentPair,'');assert.ok(!hear.includes('About the possible builds:'));}else {assert.ok(hear.includes(m.currentPair));assert.ok(hear.includes('About the possible builds:'));}
+ assert.ok(!hear.includes('For grown-ups'));assert.ok(!hear.includes('One angle is a'));assert.ok(!hear.includes('Picture orientation'));
+}
+console.log('Matching Triangles: independent exact constructions and SVG guides, shared scales and all isometries, authored pair facts, all rectangle dimensions, strict local work and active-output invariance passed.');
+
+// The completed AAA construction labels its authored third angle at F.
+{const w=createCrossingAngles();w.page="matching";w.matching.case="aaa";w.matching.parts.step=2;const model=crossingAnglesModel(w).matching;assert.equal(model.geometry.labels.find(l=>l.name==="F").givenAngle,70);assert.match(renderCrossingAngles(w),/F · 70°/);w.matching.parts.step=1;assert.ok(!crossingAnglesModel(w).matching.geometry.labels.some(l=>l.givenAngle!==undefined));}
+
+// Enum validation must not accept arrays or boxed strings through property-key coercion.
+for(const invalidCase of [['sss'],Object('sss'),{toString:()=> 'sss'}]){
+ const w={...createCrossingAngles(),page:'matching'};
+ assert.equal(changeCrossingAngles(w,'match-case',invalidCase),w);
+ const invalid={...w,matching:{...w.matching,case:invalidCase}};
+ assert.equal(crossingAnglesModel(invalid),null);assert.equal(changeCrossingAngles(invalid,'page','build'),invalid);
+}
+// Figure descriptions label a family's reason separately from the displayed pair.
+for(const key of ['ssa','aaa'])for(const view of ['fit','letters']){
+ const w={...createCrossingAngles(),page:'matching'};w.matching.case=key;w.matching.view=view;
+ const g=crossingAnglesModel(w).matching,html=renderCrossingAngles(w);
+ const desc=html.match(/<desc id="crossing-angles-matching-diagram-description">([\s\S]*?)<\/desc>/)[1];
+ assert.ok(desc.includes('About the possible builds: '+g.text));assert.ok(desc.indexOf(g.currentPair)<desc.indexOf('About the possible builds:'));
+}

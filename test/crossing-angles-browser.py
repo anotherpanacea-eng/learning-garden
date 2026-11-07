@@ -1,4 +1,4 @@
-"""Crossing Angles415/416/417/418 in the actual application, with invented notebooks only.
+"""Crossing Angles415/416/417/418/419 in the actual application, with invented notebooks only.
 
 One complete tablet visit and focused phone/label/lifetime probes. The sole app
 instrumentation exposes a read-only getter at its real initialization marker.
@@ -43,7 +43,7 @@ def sel(action, value=None):
 
 def act(p, action, value=None, before=None):
     spoken=p.evaluate('__sharedSpoken.length')
-    selects = ['angle','prompt','card','two-spacing','two-lean','two-prompt','tri-a','tri-b','tri-size','tri-prompt','poly-sides','poly-kind','poly-size','poly-prompt']
+    selects = ['angle','prompt','card','two-spacing','two-lean','two-prompt','tri-a','tri-b','tri-size','tri-prompt','poly-sides','poly-kind','poly-size','poly-prompt','match-case','match-prompt']
     target = p.locator(('select' if action in selects else '')+sel(action, None if action in selects or action=='rotation' else value))
     if action in selects:
         target.select_option(str(value))
@@ -246,7 +246,18 @@ def reset_state(p):
     h.ok('A is corner 1 of 4.' in p.locator(R).inner_text() and '0 of 1 diagonal' in p.locator(R).inner_text(),'fresh visit resets independent panel work')
     act(p,'poly-view','walk',before);h.ok('0 of 4 turns' in p.locator(R).inner_text(),'fresh visit resets panel walk')
     act(p,'tri-mode','free',before);act(p,'tri-view','gather',before)
-    act(p,'page','build',before)
+    act(p,'page','matching',before)
+    h.ok(p.locator('select'+sel('match-case')).input_value()=='sss' and p.locator('select'+sel('match-prompt')).input_value()=='0','fresh visit resets matching case/prompt')
+    h.ok(p.locator(sel('match-mode','parts')).get_attribute('aria-pressed')=='true' and p.locator(sel('match-view','build')).get_attribute('aria-pressed')=='true','fresh visit resets matching mode/view')
+    h.ok(p.locator('[data-crossing-angles-match-step=previous]').is_disabled(),'fresh visit resets matching parts step')
+    act(p,'match-mode','panel',before);h.ok(p.locator('[data-crossing-angles-match-step=previous]').is_disabled(),'fresh visit resets matching panel step')
+    for mode in ['parts','panel']:
+        act(p,'match-mode',mode,before);act(p,'match-view','fit',before)
+        h.ok(p.locator(sel('match-fit','explore')).get_attribute('aria-pressed')=='true' and 'Copy turn: 120°' in p.locator(R).inner_text() and 'Copy reflection: reflected' in p.locator(R).inner_text(),'fresh visit resets '+mode+' manual pose and fit')
+        h.ok(p.locator('[data-crossing-angles-match-slide=previous]').is_disabled(),'fresh visit resets '+mode+' slide')
+        act(p,'match-view','letters',before)
+        h.ok('Point pair 1 of 3' in p.locator(R).inner_text(),'fresh visit resets '+mode+' correspondence')
+    act(p,'match-mode','parts',before);act(p,'match-view','build',before);act(p,'page','build',before)
 
 
 def lifetime_setting(p):
@@ -260,6 +271,7 @@ def lifetime_setting(p):
     act(p,'tri-view','polygons',before);act(p,'tri-mode','free',before);act(p,'poly-sides',11,before);act(p,'poly-kind','stretched',before);act(p,'poly-size','small',before);act(p,'poly-prompt',5,before)
     act(p,'tri-mode','free',before);act(p,'poly-corner',1,before);act(p,'poly-corner',2,before);poly_step(p,'split',3,11,before);poly_step(p,'walk',4,11,before)
     act(p,'tri-mode','panel',before);act(p,'poly-corner',1,before);poly_step(p,'split',1,4,before);poly_step(p,'walk',2,4,before)
+    act(p,'page','matching',before);act(p,'match-case','ssa',before);act(p,'match-prompt',5,before);match_stage(p,2,before);act(p,'match-variant',before=before);act(p,'match-view','fit',before);act(p,'match-rotation',before=before);act(p,'match-flip',before=before);act(p,'match-move',1,before);act(p,'match-view','letters',before);act(p,'match-pair',before=before);act(p,'match-mode','panel',before);match_stage(p,1,before);act(p,'match-view','fit',before);act(p,'match-rotation',before=before);act(p,'match-flip',before=before);act(p,'match-move',1,before);act(p,'match-view','letters',before);act(p,'match-pair',before=before);act(p,'match-view','fit',before);act(p,'match-fit','given',before)
     act(p,'page','build',before)
 
 
@@ -894,6 +906,142 @@ def polygon_guards(browser,base):
     h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'new walk and Hear guard exact route before render/speech');h.unchanged(p,before,'polygon changed route');p.context.close()
 
 
+def match_stage(p, target, before):
+    act(p,'match-view','build',before)
+    for _ in range(3):
+        previous=p.locator('[data-crossing-angles-match-step=previous]')
+        if previous.is_disabled():current=0
+        elif p.locator('[data-crossing-angles-match-step=next]').is_disabled():current=2
+        else:current=1
+        if current==target:break
+        value=current+(1 if target>current else -1)
+        act(p,'match-step',value,before)
+        if value in [0,2]:h.focus(p,'[data-crossing-angles-match-step='+('next' if value==0 else 'previous')+']','stage endpoint focus remains enabled')
+    h.ok(p.locator(sel('match-step',-1 if target==0 else 3)).is_disabled() if target in [0,2] else True,'construction bounds disabled')
+
+
+def match_scene(p):
+    bounds(p);svg_access(p)
+    h.ok(p.locator('[data-crossing-angles-matching-stage]').count()==1,'one actual matching stage')
+    h.ok(p.locator('#crossing-angles-title').inner_text()=='Matching triangles','matching-specific heading')
+    h.ok('AOB + BOC' not in p.locator(R).inner_text(),'no old crossing arithmetic on matching page')
+
+
+def matching_journey(browser,base):
+    print('Matching Triangles: complete actual-app visit, source retention and Notes exports',flush=True)
+    p=setup(browser,base);exported=h.notes(p,'matching-notes-before')
+    p.evaluate('location.hash='+json.dumps(ROUTE));ready(p);parent(p,'width-more');source=frame(p)
+    before=h.snapshot(p);enter(p,before);act(p,'page','learn',before);act(p,'card',3,before)
+    act(p,'page','matching',before);h.focus(p,sel('page','matching'),'matching navigation focus before Hear')
+    for case in ['sss','sas','asa','aas','rhs','ssa','aaa']:
+        act(p,'match-view','build',before);act(p,'match-case',case,before)
+        for step in [0,1,2]:
+            match_stage(p,step,before);match_scene(p)
+            if step==1 and case=='aas':
+                h.ok('180' in p.locator(R).inner_text() and '60' in p.locator(R).inner_text(),'AAS derives missing angle before final ray')
+            if step==1 and case=='ssa':h.ok(p.locator('[data-matching-meeting]').count()==2,'both SSA closures visible at once')
+            capture(p,'matching-'+case+'-build-'+str(step))
+        act(p,'match-view','fit',before);act(p,'match-fit','explore',before);match_scene(p)
+        act(p,'match-home',before=before)
+        act(p,'match-rotation',before=before);act(p,'match-flip',before=before)
+        for move in [1,2,3,4]:act(p,'match-move',move,before)
+        h.focus(p,'[data-crossing-angles-match-slide=previous]','slide endpoint focuses enabled opposite')
+        manual=p.locator('[data-matching-outline=candidate]').get_attribute('points')
+        act(p,'match-fit','given',before);h.ok(p.locator(sel('match-rotation')).count()==0,'provided pose hides manual controls')
+        match_scene(p);capture(p,'matching-'+case+'-given')
+        act(p,'match-fit','explore',before)
+        h.ok(p.locator('[data-matching-outline=candidate]').get_attribute('points')==manual,'provided comparison retains manual pose')
+        act(p,'match-fit','given',before)
+        for variant in range(1,4 if case in ['ssa','aaa'] else 2):
+            act(p,'match-variant',before=before);match_scene(p)
+            capture(p,'matching-'+case+'-given-variant'+str(variant))
+        act(p,'match-view','letters',before)
+        for pair in [1,2,0]:act(p,'match-pair',before=before);match_scene(p)
+        hear(p,before,includes=['Matching triangles'],excludes=['Original panel','AOB'])
+        capture(p,'matching-'+case+'-letters')
+    # Stop the previously requested voice through a normal view change before
+    # measuring no-render identity; stopping playback legitimately updates its UI.
+    act(p,'match-view','build',before)
+    # A refused nested select must restore the shown value without rendering.
+    control=p.locator('select'+sel('match-case'));value=control.input_value();original=control.element_handle();html=p.locator(R).inner_html()
+    control.select_option(value)
+    h.ok(original.evaluate('e=>e.isConnected'),'same matching case preserves bound controls')
+    control.evaluate('e=>{const o=document.createElement("option");o.value="invalid";e.append(o);e.value="invalid";e.dispatchEvent(new Event("change",{bubbles:true}));o.remove()}')
+    h.ok(control.input_value()==value and p.locator(R).inner_html()==html,'invalid nested select restores value without render')
+    for prompt in range(6):act(p,'match-prompt',prompt,before)
+    act(p,'match-mode','panel',before)
+    h.ok(p.locator(sel('match-case')).count()==0 and p.locator(sel('match-variant')).count()==0,'rectangle omits free case and variant')
+    for step in [0,1,2]:match_stage(p,step,before);match_scene(p);capture(p,'matching-panel-build-'+str(step))
+    act(p,'match-view','fit',before);act(p,'match-fit','given',before);match_scene(p)
+    panel=p.locator('[data-matching-outline=reference]').get_attribute('points')
+    act(p,'match-view','letters',before);act(p,'match-pair',before=before);hear(p,before,includes=['Matching triangles'])
+    back(p,before);h.ok(frame(p)==source,'matching Back preserves actual waiting design')
+    parent(p,'height-more');changed=frame(p);enter(p,before)
+    act(p,'match-view','fit',before)
+    h.ok(p.locator('[data-matching-outline=reference]').get_attribute('points')!=panel,'explicit re-entry recaptures changed copy dimensions')
+    act(p,'match-mode','parts',before)
+    h.ok(p.locator('select'+sel('match-case')).input_value()=='aaa' and p.locator('select'+sel('match-prompt')).input_value()=='5','panel visit retains free case and shared prompt')
+    back(p,before);h.ok(frame(p)==changed,'changed parent retained on final Back');h.unchanged(p,before,'complete matching visit')
+    after=h.notes(p,'matching-notes-after')
+    h.ok({k:v for k,v in after.items() if k!='exportedAt'}=={k:v for k,v in exported.items() if k!='exportedAt'},'actual Notes exports unchanged across matching visit')
+    p.context.close()
+
+
+def matching_focused(browser,base):
+    print('Matching Triangles: phone/tablet lower guides, overlap, thin panels and retained resized controls',flush=True)
+    p=setup(browser,base);before=h.snapshot(p);enter(p,before);act(p,'page','matching',before)
+    for case,variants in [('sas',2),('asa',2),('aas',2),('ssa',4),('aaa',4)]:
+        act(p,'match-view','build',before);act(p,'match-case',case,before)
+        for _ in range(variants-1):act(p,'match-variant',before=before)
+        for step in [1,2]:
+            match_stage(p,step,before)
+            for width in [320,820]:
+                p.set_viewport_size({'width':width,'height':1000});match_scene(p);capture(p,'matching-risk-'+case+'-'+str(step)+'-'+str(width))
+        act(p,'match-view','fit',before);act(p,'match-fit','given',before)
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000});match_scene(p);capture(p,'matching-risk-'+case+'-given-'+str(width))
+    act(p,'match-fit','explore',before);original=p.locator(sel('match-rotation')).element_handle()
+    for width in [320,820]:
+        p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');bounds(p)
+        h.ok(original.evaluate('e=>e.isConnected'),'resize preserves original matching control')
+    html=p.locator(R).inner_html();original.click();h.ok(p.locator(R).inner_html()!=html,'original matching control works after resizing');h.unchanged(p,before,'matching live resize')
+    back(p,before)
+    for w,t in [(1,12),(12,1),(1,1)]:
+        for side,target in [('width',w),('height',t)]:
+            while not p.locator('[data-cframe-action="'+side+'-less"]').is_disabled():parent(p,side+'-less')
+            for _ in range(target-1):parent(p,side+'-more')
+        enter(p,before);act(p,'match-mode','panel',before)
+        for view in ['build','fit','letters']:
+            act(p,'match-view',view,before)
+            if view=='build':match_stage(p,2,before)
+            elif view=='fit':act(p,'match-fit','given',before)
+            for width in [320,820]:
+                p.set_viewport_size({'width':width,'height':1000});match_scene(p);capture(p,'matching-panel-'+str(w)+'-'+str(t)+'-'+view+'-'+str(width))
+        back(p,before)
+    p.context.close()
+
+
+def matching_guards(browser,base):
+    print('Matching Triangles: retired actions and Hear inert before effects',flush=True)
+    for mode in ['detached','hidden','ancestor','reparented']:
+        p=setup(browser,base);enter(p);old=[p.locator(sel('rotation')).element_handle(),p.locator(R+' [data-speak]').element_handle()]
+        act(p,'page','matching')
+        handles=[p.locator('select'+sel(a)).element_handle() for a in ['match-case','match-prompt']]
+        handles[0].evaluate('e=>e.value="ssa"');handles[1].evaluate('e=>e.value="5"')
+        handles += [p.locator(sel(a,v)).element_handle() for a,v in [('match-mode','panel'),('match-view','fit'),('match-variant',None),('match-step',1)]]
+        handles += [p.locator(R+' [data-speak]').element_handle()]
+        for e in handles:retire(e,mode)
+        before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
+        for e in old+handles:h.dispatch(e,'change' if e.evaluate('e=>e.tagName')=='SELECT' else 'click')
+        h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'retired matching '+mode+' cannot render or speak');h.unchanged(p,before,'retired matching '+mode);p.context.close()
+    p=setup(browser,base);enter(p);act(p,'page','matching');act(p,'match-view','fit')
+    controls=[p.locator(sel('match-rotation')).element_handle(),p.locator(R+' [data-speak]').element_handle()]
+    before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
+    p.evaluate('history.replaceState(null,"","#workshop/copy-frame/")')
+    for e in controls:h.dispatch(e)
+    h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'matching current route guard rejects effects before hashchange');h.unchanged(p,before,'matching changed route');p.context.close()
+
+
 def main():
     class Quiet(http.server.SimpleHTTPRequestHandler):
         def log_message(self,*args):pass
@@ -904,7 +1052,7 @@ def main():
         with sync_playwright() as pw:
             browser=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
             try:
-                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base);triangle_journey(browser,base);triangle_focused(browser,base);triangle_guards(browser,base);polygon_journey(browser,base);polygon_focused(browser,base);polygon_guards(browser,base)
+                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base);triangle_journey(browser,base);triangle_focused(browser,base);triangle_guards(browser,base);polygon_journey(browser,base);polygon_focused(browser,base);polygon_guards(browser,base);matching_journey(browser,base);matching_focused(browser,base);matching_guards(browser,base)
                 h.ok(not h.errors,'no browser/HTTP errors: '+str(h.errors))
                 result={'status':'passed','checks':h.checks,'artifacts':str(OUT)}
                 (OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result),flush=True)
